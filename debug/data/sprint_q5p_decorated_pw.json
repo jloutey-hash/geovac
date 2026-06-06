@@ -1,0 +1,213 @@
+{
+  "sprint": "Q5p_Decorated_PW",
+  "date": "2026-06-06",
+  "panel_cutoffs_2j": [
+    1,
+    2
+  ],
+  "panel_j_max_descriptions": [
+    "1/2",
+    "1"
+  ],
+  "n_k": 3,
+  "discipline": "bit-exact sympy.Rational; free decorated matrix-coefficient algebra; SU(2)^{(x)3}-quotient documented for antipode",
+  "panel": {
+    "preserving": {
+      "1": {
+        "j_max_2": 1,
+        "dim": 15,
+        "mode": "preserving",
+        "non_primitive_count": 14,
+        "by_shell": {
+          "0.0": {
+            "shell_dim": 3,
+            "non_primitive_count": 2
+          },
+          "0.5": {
+            "shell_dim": 12,
+            "non_primitive_count": 12
+          }
+        },
+        "coassoc_pass": 15,
+        "coassoc_fail": 0,
+        "counit_left_pass": 15,
+        "counit_right_pass": 15,
+        "counit_left_pass_aug": 5,
+        "counit_right_pass_aug": 5,
+        "antipode_pass_free": 0,
+        "antipode_pass_quotient": 15,
+        "antipode_pass_quotient_aug": 0,
+        "k_grading_preservation_pass": 15,
+        "cross_factor": {
+          "delta_k0_in_slot0": true,
+          "delta_k1_in_slot1": true,
+          "delta_k2_in_slot2": true,
+          "sl2_cubed_factorization": true
+        }
+      },
+      "2": {
+        "j_max_2": 2,
+        "dim": 42,
+        "mode": "preserving",
+        "non_primitive_count": 41,
+        "by_shell": {
+          "0.0": {
+            "shell_dim": 3,
+            "non_primitive_count": 2
+          },
+          "0.5": {
+            "shell_dim": 12,
+            "non_primitive_count": 12
+          },
+          "1.0": {
+            "shell_dim": 27,
+            "non_primitive_count": 27
+          }
+        },
+        "coassoc_pass": 42,
+        "coassoc_fail": 0,
+        "counit_left_pass": 42,
+        "counit_right_pass": 42,
+        "counit_left_pass_aug": 14,
+        "counit_right_pass_aug": 14,
+        "antipode_pass_free": 0,
+        "antipode_pass_quotient": 42,
+        "antipode_pass_quotient_aug": 0,
+        "k_grading_preservation_pass": 42,
+        "cross_factor": {
+          "delta_k0_in_slot0": true,
+          "delta_k1_in_slot1": true,
+          "delta_k2_in_slot2": true,
+          "sl2_cubed_factorization": true
+        }
+      },
+      "prosystem_2_to_1": {
+        "delta_compat_pass": 42,
+        "delta_compat_fail": 0,
+        "eps_compat_pass": 42,
+        "eps_compat_fail": 0,
+        "antipode_compat_pass": 42,
+        "antipode_compat_fail": 0
+      }
+    },
+    "summing": {
+      "1": {
+        "j_max_2": 1,
+        "dim": 15,
+        "mode": "summing",
+        "non_primitive_count": 15,
+        "by_shell": {
+          "0.0": {
+            "shell_dim": 3,
+            "non_primitive_count": 3
+          },
+          "0.5": {
+            "shell_dim": 12,
+            "non_primitive_count": 12
+          }
+        },
+        "coassoc_pass": 15,
+        "coassoc_fail": 0,
+        "counit_left_pass": 0,
+        "counit_right_pass": 0,
+        "counit_left_pass_aug": 15,
+        "counit_right_pass_aug": 15,
+        "antipode_pass_free": 0,
+        "antipode_pass_quotient": 0,
+        "antipode_pass_quotient_aug": 0,
+        "k_grading_preservation_pass": "n/a (k-summing couples slots)",
+        "cross_factor": {
+          "delta_k0_slot_pairs": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "sl2_cubed_factorization": false
+        }
+      },
+      "2": {
+        "j_max_2": 2,
+        "dim": 42,
+        "mode": "summing",
+        "non_primitive_count": 42,
+        "by_shell": {
+          "0.0": {
+            "shell_dim": 3,
+            "non_primitive_count": 3
+          },
+          "0.5": {
+            "shell_dim": 12,
+            "non_primitive_count": 12
+          },
+          "1.0": {
+            "shell_dim": 27,
+            "non_primitive_count": 27
+          }
+        },
+        "coassoc_pass": 42,
+        "coassoc_fail": 0,
+        "counit_left_pass": 0,
+        "counit_right_pass": 0,
+        "counit_left_pass_aug": 42,
+        "counit_right_pass_aug": 42,
+        "antipode_pass_free": 0,
+        "antipode_pass_quotient": 0,
+        "antipode_pass_quotient_aug": 0,
+        "k_grading_preservation_pass": "n/a (k-summing couples slots)",
+        "cross_factor": {
+          "delta_k0_slot_pairs": [
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "sl2_cubed_factorization": false
+        }
+      },
+      "prosystem_2_to_1": {
+        "delta_compat_pass": 42,
+        "delta_compat_fail": 0,
+        "eps_compat_pass": 42,
+        "eps_compat_fail": 0,
+        "antipode_compat_pass": 42,
+        "antipode_compat_fail": 0
+      }
+    }
+  },
+  "l1_vs_l2_dimensional": [
+    {
+      "n_max": 2,
+      "N_nmax": 5,
+      "L1_dim_G_a_3N_x_SL_2": 18,
+      "L2_dim_SL_2_cubed": 9,
+      "delta": 9
+    },
+    {
+      "n_max": 3,
+      "N_nmax": 9,
+      "L1_dim_G_a_3N_x_SL_2": 30,
+      "L2_dim_SL_2_cubed": 9,
+      "delta": 21
+    }
+  ],
+  "total_zero_residuals_preserving": 411,
+  "total_zero_residuals_summing": 183,
+  "wall_time_s": 0.5815595001913607
+}

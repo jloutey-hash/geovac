@@ -1,0 +1,35 @@
+{
+  "model": "4-state CH truncation: |1,0,+1/2>, |1,0,-1/2>, |1,1,+1/2>, |1,1,-1/2>",
+  "T_{(1,1)->(1,0)}_entries": {
+    "(0,2)": "-1/16",
+    "(0,3)": "-1/16",
+    "(1,2)": "-1/16",
+    "(1,3)": "-1/16"
+  },
+  "U_theta_diagonal": [
+    "exp(I*theta/2)",
+    "exp(-I*theta/2)",
+    "exp(I*theta/2)",
+    "exp(-I*theta/2)"
+  ],
+  "T_conj_entries": {
+    "(0,2)": "-1/16",
+    "(0,3)": "-exp(I*theta)/16",
+    "(1,2)": "-exp(-I*theta)/16",
+    "(1,3)": "-1/16"
+  },
+  "phase_ratios": {
+    "(0,2)": "1",
+    "(0,3)": "exp(I*theta)",
+    "(1,2)": "exp(-I*theta)",
+    "(1,3)": "1"
+  },
+  "distinct_phase_factors": [
+    "1",
+    "exp(-I*theta)",
+    "exp(I*theta)"
+  ],
+  "is_scalar_multiple_of_T": false,
+  "structural_verdict": "T_conj has m_J-DEPENDENT phase factors {1, e^{i theta}, e^{-i theta}, 1}. Not a scalar multiple of T. The conjugate is in the span of m_J-resolved sub-transitions, NOT in span{T}. The SU(2) z-rotation requires refining the sector basis to m_J-resolved sub-projectors before it acts. Therefore SU(2) does NOT preserve the basic 5-sector OffDiag substrate.",
+  "categorical_conclusion": "L5 reduces to L1 at the substrate level. The combined substrate is the tensor product A^{J*}_{j_max} (x) A^{OD}_{n_max}; SL_2 acts trivially on the OffDiag sector idempotents and so trivially on A^{OD} in the basic basis. The Levi-decomposition U* = SL_2 x G_a^{N_OD} is the multi-year target."
+}

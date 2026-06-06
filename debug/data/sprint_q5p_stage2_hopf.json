@@ -1,0 +1,1554 @@
+{
+  "sprint": "Q5'-Stage2-Hopf",
+  "date": "2026-06-05",
+  "stage": "Stage 2 first scoping step",
+  "verdict": "POSITIVE: all Hopf axioms bit-exact at n_max in {2, 3}; pro-system truncation is a Hopf homomorphism.",
+  "section_1_underlying_space": {
+    "n_max_2": {
+      "N_sectors": 5,
+      "n_k_slots": 3,
+      "dim_V": 15,
+      "dim_V_check_formula": 15,
+      "generators": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          2
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "grade_of_generator": {
+        "[1, 0, 0]": 1,
+        "[1, 0, 1]": 1,
+        "[1, 0, 2]": 1,
+        "[1, 1, 0]": 1,
+        "[1, 1, 1]": 1,
+        "[1, 1, 2]": 1,
+        "[2, 0, 0]": 2,
+        "[2, 0, 1]": 2,
+        "[2, 0, 2]": 2,
+        "[2, 1, 0]": 2,
+        "[2, 1, 1]": 2,
+        "[2, 1, 2]": 2,
+        "[2, 2, 0]": 2,
+        "[2, 2, 1]": 2,
+        "[2, 2, 2]": 2
+      },
+      "grading_homogeneous_levels": [
+        1,
+        2
+      ]
+    },
+    "n_max_3": {
+      "N_sectors": 9,
+      "n_k_slots": 3,
+      "dim_V": 27,
+      "dim_V_check_formula": 27,
+      "generators": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          2
+        ],
+        [
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          2
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          1,
+          1
+        ],
+        [
+          2,
+          1,
+          2
+        ],
+        [
+          2,
+          2,
+          0
+        ],
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          2
+        ],
+        [
+          3,
+          1,
+          0
+        ],
+        [
+          3,
+          1,
+          1
+        ],
+        [
+          3,
+          1,
+          2
+        ],
+        [
+          3,
+          2,
+          0
+        ],
+        [
+          3,
+          2,
+          1
+        ],
+        [
+          3,
+          2,
+          2
+        ],
+        [
+          3,
+          3,
+          0
+        ],
+        [
+          3,
+          3,
+          1
+        ],
+        [
+          3,
+          3,
+          2
+        ]
+      ],
+      "grade_of_generator": {
+        "[1, 0, 0]": 1,
+        "[1, 0, 1]": 1,
+        "[1, 0, 2]": 1,
+        "[1, 1, 0]": 1,
+        "[1, 1, 1]": 1,
+        "[1, 1, 2]": 1,
+        "[2, 0, 0]": 2,
+        "[2, 0, 1]": 2,
+        "[2, 0, 2]": 2,
+        "[2, 1, 0]": 2,
+        "[2, 1, 1]": 2,
+        "[2, 1, 2]": 2,
+        "[2, 2, 0]": 2,
+        "[2, 2, 1]": 2,
+        "[2, 2, 2]": 2,
+        "[3, 0, 0]": 3,
+        "[3, 0, 1]": 3,
+        "[3, 0, 2]": 3,
+        "[3, 1, 0]": 3,
+        "[3, 1, 1]": 3,
+        "[3, 1, 2]": 3,
+        "[3, 2, 0]": 3,
+        "[3, 2, 1]": 3,
+        "[3, 2, 2]": 3,
+        "[3, 3, 0]": 3,
+        "[3, 3, 1]": 3,
+        "[3, 3, 2]": 3
+      },
+      "grading_homogeneous_levels": [
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "section_2_coproduct_on_generators": {
+    "n_max_2": [
+      {
+        "generator": [
+          1,
+          0,
+          0
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          0,
+          1
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                0,
+                1,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                0,
+                1,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          0,
+          2
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                0,
+                2,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                0,
+                2,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          1,
+          0
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                1,
+                0,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                1,
+                0,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          1,
+          1
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      }
+    ],
+    "n_max_3": [
+      {
+        "generator": [
+          1,
+          0,
+          0
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                0,
+                0,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          0,
+          1
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                0,
+                1,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                0,
+                1,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          0,
+          2
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                0,
+                2,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                0,
+                2,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          1,
+          0
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                1,
+                0,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                1,
+                0,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      },
+      {
+        "generator": [
+          1,
+          1,
+          1
+        ],
+        "delta_terms": [
+          {
+            "lhs_mono": "1",
+            "rhs_mono": [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "coef": "1"
+          },
+          {
+            "lhs_mono": [
+              [
+                1,
+                1,
+                1,
+                1
+              ]
+            ],
+            "rhs_mono": "1",
+            "coef": "1"
+          }
+        ]
+      }
+    ]
+  },
+  "section_3_counit_on_generators": {
+    "rule": "eps(x_g) = 0 for any generator; eps(1) = 1",
+    "verified_n_max_3_count": 27,
+    "n_max_2": {
+      "epsilon_zero_on_generators": true,
+      "epsilon_one_on_unit": true
+    },
+    "n_max_3": {
+      "epsilon_zero_on_generators": true,
+      "epsilon_one_on_unit": true
+    }
+  },
+  "section_4_antipode_on_generators": {
+    "rule": "S(x_g) = -x_g on generators; S(1) = 1; extended as algebra homomorphism",
+    "n_max_2": [
+      {
+        "generator": [
+          1,
+          0,
+          0
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          0,
+          1
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          0,
+          2
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          1,
+          0
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          1,
+          1
+        ],
+        "S_x_g_equals_neg_x_g": true
+      }
+    ],
+    "n_max_3": [
+      {
+        "generator": [
+          1,
+          0,
+          0
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          0,
+          1
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          0,
+          2
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          1,
+          0
+        ],
+        "S_x_g_equals_neg_x_g": true
+      },
+      {
+        "generator": [
+          1,
+          1,
+          1
+        ],
+        "S_x_g_equals_neg_x_g": true
+      }
+    ]
+  },
+  "section_5_axiom_verification": {
+    "n_max_2": {
+      "coassoc": {
+        "all_ok": true,
+        "n_checks": 20,
+        "sample_results": [
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  0
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "counit_compat": {
+        "all_left_ok": true,
+        "all_right_ok": true,
+        "n_checks": 20,
+        "sample_results": [
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          }
+        ]
+      },
+      "antipode": {
+        "all_left_ok": true,
+        "all_right_ok": true,
+        "n_checks": 20,
+        "sample_results": [
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          }
+        ]
+      },
+      "bialgebra_compat": {
+        "all_ok": true,
+        "results": [
+          {
+            "g1": [
+              1,
+              0,
+              0
+            ],
+            "g2": [
+              1,
+              1,
+              0
+            ],
+            "ok": true
+          },
+          {
+            "g1": [
+              1,
+              0,
+              0
+            ],
+            "g2": [
+              2,
+              0,
+              1
+            ],
+            "ok": true
+          },
+          {
+            "g1": [
+              2,
+              1,
+              2
+            ],
+            "g2": [
+              2,
+              2,
+              2
+            ],
+            "ok": true
+          },
+          {
+            "g1": [
+              1,
+              0,
+              0
+            ],
+            "g2": [
+              1,
+              0,
+              1
+            ],
+            "ok": true
+          },
+          {
+            "g1": [
+              1,
+              0,
+              0
+            ],
+            "g2": [
+              2,
+              2,
+              2
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "k_grading_preservation": {
+        "all_ok": true,
+        "n_checks": 15
+      }
+    },
+    "n_max_3": {
+      "coassoc": {
+        "all_ok": true,
+        "n_checks": 32,
+        "sample_results": [
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  0
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          },
+          {
+            "monomial_size": 1,
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                1
+              ]
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "counit_compat": {
+        "all_left_ok": true,
+        "all_right_ok": true,
+        "n_checks": 32,
+        "sample_results": [
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          }
+        ]
+      },
+      "antipode": {
+        "all_left_ok": true,
+        "all_right_ok": true,
+        "n_checks": 32,
+        "sample_results": [
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  0,
+                  2
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  0
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          },
+          {
+            "monomial": [
+              [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                1
+              ]
+            ],
+            "left_ok": true,
+            "right_ok": true
+          }
+        ]
+      },
+      "bialgebra_compat": {
+        "all_ok": true,
+        "results": [
+          {
+            "g1": [
+              1,
+              0,
+              0
+            ],
+            "g2": [
+              3,
+              3,
+              0
+            ],
+            "ok": true
+          },
+          {
+            "g1": [
+              2,
+              1,
+              1
+            ],
+            "g2": [
+              3,
+              0,
+              2
+            ],
+            "ok": true
+          },
+          {
+            "g1": [
+              3,
+              2,
+              2
+            ],
+            "g2": [
+              3,
+              3,
+              2
+            ],
+            "ok": true
+          },
+          {
+            "g1": [
+              1,
+              0,
+              0
+            ],
+            "g2": [
+              1,
+              0,
+              1
+            ],
+            "ok": true
+          }
+        ]
+      },
+      "k_grading_preservation": {
+        "all_ok": true,
+        "n_checks": 27
+      }
+    }
+  },
+  "section_6_truncation_hopf_homomorphism": {
+    "P_2_to_1": {
+      "n_hi": 2,
+      "n_lo": 1,
+      "n_generators_at_n_hi": 15,
+      "all_coproduct_compat": true,
+      "all_counit_compat": true,
+      "all_antipode_compat": true,
+      "sample_results": [
+        {
+          "generator": [
+            1,
+            0,
+            0
+          ],
+          "n_target": 1,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            0,
+            1
+          ],
+          "n_target": 1,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            0,
+            2
+          ],
+          "n_target": 1,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            1,
+            0
+          ],
+          "n_target": 1,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            1,
+            1
+          ],
+          "n_target": 1,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        }
+      ]
+    },
+    "P_3_to_2": {
+      "n_hi": 3,
+      "n_lo": 2,
+      "n_generators_at_n_hi": 27,
+      "all_coproduct_compat": true,
+      "all_counit_compat": true,
+      "all_antipode_compat": true,
+      "sample_results": [
+        {
+          "generator": [
+            1,
+            0,
+            0
+          ],
+          "n_target": 2,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            0,
+            1
+          ],
+          "n_target": 2,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            0,
+            2
+          ],
+          "n_target": 2,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            1,
+            0
+          ],
+          "n_target": 2,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        },
+        {
+          "generator": [
+            1,
+            1,
+            1
+          ],
+          "n_target": 2,
+          "coproduct_compat": true,
+          "counit_compat": true,
+          "antipode_compat": true,
+          "all_ok": true
+        }
+      ]
+    }
+  },
+  "section_7_U_star_GeoVac": {
+    "n_max_2": {
+      "dim_V": 15,
+      "U_star_n_max_dim": 15,
+      "U_star_n_max_structure": "G_a^{dim V} (additive affine group)",
+      "explanation": "H_GV^{(n_max)} = Sym(V) is the polynomial algebra on dim V = 15 primitive generators. Characters chi: H_GV -> Q (algebra maps with chi(1) = 1) are determined by their values on the dim V generators, giving Hom_alg(H_GV, Q) = V^* ~= Q^{dim V}. The group structure via convolution (chi*chi')(x_g) = chi(x_g) + chi'(x_g) on primitives makes this the additive group G_a^{dim V}."
+    },
+    "n_max_3": {
+      "dim_V": 27,
+      "U_star_n_max_dim": 27,
+      "U_star_n_max_structure": "G_a^{dim V} (additive affine group)",
+      "explanation": "H_GV^{(n_max)} = Sym(V) is the polynomial algebra on dim V = 27 primitive generators. Characters chi: H_GV -> Q (algebra maps with chi(1) = 1) are determined by their values on the dim V generators, giving Hom_alg(H_GV, Q) = V^* ~= Q^{dim V}. The group structure via convolution (chi*chi')(x_g) = chi(x_g) + chi'(x_g) on primitives makes this the additive group G_a^{dim V}."
+    }
+  },
+  "section_8_connes_marcolli_dictionary": {
+    "header": "Dictionary GeoVac <-> Connes-Marcolli (cosmic Galois on Connes-Kreimer)",
+    "table": [
+      {
+        "geovac_object": "Sector idempotent e_{(n,l)} at cutoff n_max",
+        "ck_analog": "Primitive 1PI Feynman graph in graded connected Hopf algebra H_CK"
+      },
+      {
+        "geovac_object": "Mellin slot k in {0, 1, 2} (M1 / M3 / M2)",
+        "ck_analog": "Feynman-rule decoration on graph (e.g. external-leg state)"
+      },
+      {
+        "geovac_object": "Generator x_{(n,l), k} of H_GV",
+        "ck_analog": "Generator [Gamma, decoration] of H_CK"
+      },
+      {
+        "geovac_object": "Grading by shell number n",
+        "ck_analog": "Grading by loop number L(Gamma) in H_CK"
+      },
+      {
+        "geovac_object": "Primitive coproduct Delta(x) = x (x) 1 + 1 (x) x",
+        "ck_analog": "Sub-graph coproduct Delta(Gamma) = sum_{gamma subset Gamma} gamma (x) Gamma/gamma; primitive iff Gamma has no proper sub-divergent subgraph (= primitive UV divergences)"
+      },
+      {
+        "geovac_object": "Counit eps(x_g) = 0",
+        "ck_analog": "Counit eps(Gamma) = 0 on non-empty graphs"
+      },
+      {
+        "geovac_object": "Antipode S(x_g) = -x_g",
+        "ck_analog": "Antipode S(Gamma) defined recursively by Bogoliubov R'-bar; GeoVac case reduces to S(x) = -x because all generators are primitive"
+      },
+      {
+        "geovac_object": "U^*_{GeoVac}^{(n_max)} = G_a^{3 N(n_max)} (additive)",
+        "ck_analog": "U^*_{CK} = pro-affine group scheme of characters of H_CK; U^*_{GeoVac} is the abelian additive sub-quotient acting on the primitive-summand Hopf algebra"
+      },
+      {
+        "geovac_object": "Pro-system truncation P_{n+1 -> n} is Hopf-hom",
+        "ck_analog": "Inductive system of finite-loop truncations H_CK^{<=L} is Hopf-hom"
+      },
+      {
+        "geovac_object": "M1/M2/M3 partition preserved by Delta (k-grading)",
+        "ck_analog": "External-leg structure preserved by sub-graph extraction (Feynman-rule decoration is graph-internal)"
+      }
+    ],
+    "structural_observation": "The GeoVac candidate H_GV is the ABELIAN PRIMITIVE-COSPAN of the Connes-Kreimer construction. CK's non-trivial content comes from the sub-graph coproduct (a graph can contain itself as a proper subgraph in many ways); GeoVac's sectors at this stage do NOT carry that sub-sector structure because the CH Fock decomposition is sector-DISJOINT (idempotents are orthogonal). This abelianness is the structural reason the Stage-2 motivic Galois group is the additive group G_a^{dim V} rather than a pro-unipotent group scheme. Adding sub-sector structure (e.g. nested Hopf-tower J*(S^3) factors) would give a non-trivial unipotent factor; this is the natural next step for Stage 2's full Tannakian construction."
+  },
+  "section_9_headline": {
+    "n_max_2": {
+      "coassoc_all_ok": true,
+      "counit_left_all_ok": true,
+      "counit_right_all_ok": true,
+      "antipode_left_all_ok": true,
+      "antipode_right_all_ok": true,
+      "bialgebra_all_ok": true,
+      "k_grading_all_ok": true,
+      "truncation_coproduct_ok": true,
+      "truncation_counit_ok": true,
+      "truncation_antipode_ok": true
+    },
+    "n_max_3": {
+      "coassoc_all_ok": true,
+      "counit_left_all_ok": true,
+      "counit_right_all_ok": true,
+      "antipode_left_all_ok": true,
+      "antipode_right_all_ok": true,
+      "bialgebra_all_ok": true,
+      "k_grading_all_ok": true,
+      "truncation_coproduct_ok": true,
+      "truncation_counit_ok": true,
+      "truncation_antipode_ok": true
+    }
+  },
+  "wall_time_seconds": 0.022263288497924805
+}

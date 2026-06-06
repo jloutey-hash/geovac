@@ -1,0 +1,31 @@
+C:\Users\jlout\Desktop\Project_Geometric\debug\compute_q5p_offdiag_closure_nmax3.py:2: SyntaxWarning: "\m" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\m"? A raw string is also an option.
+  $n_{\max} = 3$ (multi-year scoping step from Sprint Q5'-OffDiag-Dirac T3b).
+======================================================================
+Sprint Q5'-OffDiag-Closure-nmax3 — n_max = 2
+======================================================================
+dim H = 16, n_sectors = 5
+sectors = [(1, 0), (1, 1), (2, 0), (2, 1), (2, 2)]
+
+# idempotents: 5
+# single-step transitions: 12
+
+Basic single-step transitions (s_from -> s_to):
+  (1, 0) -> (1, 1)
+  (1, 0) -> (2, 1)
+  (1, 1) -> (1, 0)
+  (1, 1) -> (2, 0)
+  (1, 1) -> (2, 2)
+  (2, 0) -> (1, 1)
+  (2, 0) -> (2, 1)
+  (2, 1) -> (1, 0)
+  (2, 1) -> (2, 0)
+  (2, 1) -> (2, 2)
+  (2, 2) -> (1, 1)
+  (2, 2) -> (2, 1)
+
+--- Iterative algebra closure ---
+  After Level 0 (idempotents): 5
+  After Level 1 (single-step transitions): 17
+  After Level 2 (products of level-1 basis): 40 (+23, examined 59 nonzero products)
+  After Level 3 (products of level-2 basis): 92 (+52, examined 322 nonzero products)
+  After Level 4 (products of level-3 basis): 99 (+7, examined 1838 nonzero products)

@@ -1,0 +1,3724 @@
+{
+  "sprint": "Q5'-Levi-Synthesis (HEADLINE Stage-2 substrate)",
+  "date": "2026-06-06",
+  "verdict": "POSITIVE",
+  "headline": "H_Levi = H_v3.61 (x) H_J* is a Hopf algebra over Q; all axioms bit-exact at (n_max, j_max) in {(2,1/2), (2,1), (3,1/2)}; U*_Levi = G_a^{3*N(n_max)} x SL_2 (pro-unipotent x semisimple, Levi-decomposition shape; Levi action TRIVIAL because v3.61.0 generators have no SU(2) rep content).",
+  "panels": {
+    "(n_max=2, j_max=1/2)": {
+      "n_max": 2,
+      "j2_max": 1,
+      "j_max": "1/2",
+      "A_gens": 15,
+      "B_gens": 4,
+      "total_gens": 19,
+      "coassoc_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "coassoc_passes": 28,
+      "coassoc_total": 28,
+      "counit_left_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "counit_left_passes": 28,
+      "counit_right_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "counit_right_passes": 28,
+      "counit_multiplicativity_checks": [
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        }
+      ],
+      "counit_multiplicativity_passes": 9,
+      "antipode_A_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "left": true,
+          "right": true
+        }
+      ],
+      "antipode_A_left_passes": 15,
+      "antipode_A_right_passes": 15,
+      "antipode_B_quotient_checks": [
+        {
+          "label": "B:(1, -1, -1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        }
+      ],
+      "antipode_factorization_checks": [
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "antipode_factorization_passes": 9,
+      "k_grading_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "k_grading_passes": 19,
+      "non_cocom_checks": [
+        {
+          "label": "B:(1, -1, -1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "non_cocommutative": true
+        }
+      ],
+      "non_cocom_passes": 4,
+      "bialgebra_checks": [
+        {
+          "label": "A:(1, 0, 0)*A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)*A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)*A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)*B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "bialgebra_passes": 11
+    },
+    "(n_max=2, j_max=1)": {
+      "n_max": 2,
+      "j2_max": 2,
+      "j_max": "2/2",
+      "A_gens": 15,
+      "B_gens": 13,
+      "total_gens": 28,
+      "coassoc_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "coassoc_passes": 37,
+      "coassoc_total": 37,
+      "counit_left_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "counit_left_passes": 37,
+      "counit_right_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "counit_right_passes": 37,
+      "counit_multiplicativity_checks": [
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        }
+      ],
+      "counit_multiplicativity_passes": 9,
+      "antipode_A_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "left": true,
+          "right": true
+        }
+      ],
+      "antipode_A_left_passes": 15,
+      "antipode_A_right_passes": 15,
+      "antipode_B_quotient_checks": [
+        {
+          "label": "B:(1, -1, -1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        }
+      ],
+      "antipode_factorization_checks": [
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "antipode_factorization_passes": 9,
+      "k_grading_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": true
+        }
+      ],
+      "k_grading_passes": 28,
+      "non_cocom_checks": [
+        {
+          "label": "B:(1, -1, -1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "non_cocommutative": true
+        }
+      ],
+      "non_cocom_passes": 13,
+      "bialgebra_checks": [
+        {
+          "label": "A:(1, 0, 0)*A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)*A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)*A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)*B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "bialgebra_passes": 11
+    },
+    "(n_max=3, j_max=1/2)": {
+      "n_max": 3,
+      "j2_max": 1,
+      "j_max": "1/2",
+      "A_gens": 27,
+      "B_gens": 4,
+      "total_gens": 31,
+      "coassoc_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "coassoc_passes": 40,
+      "coassoc_total": 40,
+      "counit_left_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "counit_left_passes": 40,
+      "counit_right_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "mixed:A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "counit_right_passes": 40,
+      "counit_multiplicativity_checks": [
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, 1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "eps_levi": "0",
+          "eps_A_x_eps_B": "0",
+          "passed": true
+        }
+      ],
+      "counit_multiplicativity_passes": 9,
+      "antipode_A_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "left": true,
+          "right": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "left": true,
+          "right": true
+        }
+      ],
+      "antipode_A_left_passes": 27,
+      "antipode_A_right_passes": 27,
+      "antipode_B_quotient_checks": [
+        {
+          "label": "B:(1, -1, -1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed_at_quotient": true,
+          "note": "quotient-axiom (Klimyk-Schmuedgen 1997 Sec 1.3.2; T3a memo Sec 5.3)"
+        }
+      ],
+      "antipode_factorization_checks": [
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        }
+      ],
+      "antipode_factorization_passes": 9,
+      "k_grading_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "k_grading_passes": 31,
+      "non_cocom_checks": [
+        {
+          "label": "B:(1, -1, -1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "non_cocommutative": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "non_cocommutative": true
+        }
+      ],
+      "non_cocom_passes": 4,
+      "bialgebra_checks": [
+        {
+          "label": "A:(1, 0, 0)*A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)*A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)*A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 0)*B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)*B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)*B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)*B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "bialgebra_passes": 11
+    }
+  },
+  "truncation_panels": {
+    "(2,1) -> (1,1/2) [ideal]": {
+      "fine": [
+        2,
+        2
+      ],
+      "coarse": [
+        1,
+        1
+      ],
+      "B_strategy": "ideal",
+      "delta_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": true
+        }
+      ],
+      "delta_passes": 28,
+      "eps_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": false
+        }
+      ],
+      "eps_passes": 25,
+      "S_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": true
+        }
+      ],
+      "S_passes": 28
+    },
+    "(2,1) -> (1,1/2) [augmented]": {
+      "fine": [
+        2,
+        2
+      ],
+      "coarse": [
+        1,
+        1
+      ],
+      "B_strategy": "augmented",
+      "delta_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": false
+        }
+      ],
+      "delta_passes": 19,
+      "eps_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": false
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": false
+        }
+      ],
+      "eps_passes": 25,
+      "S_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, -2, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, -2)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "B:(2, 2, 2)",
+          "passed": true
+        }
+      ],
+      "S_passes": 28
+    },
+    "(3,1/2) -> (2,1/2) [ideal]": {
+      "fine": [
+        3,
+        1
+      ],
+      "coarse": [
+        2,
+        1
+      ],
+      "B_strategy": "ideal",
+      "delta_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "delta_passes": 31,
+      "eps_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "eps_passes": 31,
+      "S_checks": [
+        {
+          "label": "A:(1, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(1, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(2, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 0, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 1, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 2, 2)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 0)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 1)",
+          "passed": true
+        },
+        {
+          "label": "A:(3, 3, 2)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, -1, 1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, -1)",
+          "passed": true
+        },
+        {
+          "label": "B:(1, 1, 1)",
+          "passed": true
+        }
+      ],
+      "S_passes": 31
+    }
+  },
+  "U_star_Levi_dimensions": [
+    {
+      "n_max": 2,
+      "j2_max": 1,
+      "dim_A_G_a": 15,
+      "dim_B_SL_2": 3,
+      "dim_Levi_total": 18,
+      "shape": "G_a^15 x SL_2  (Levi decomposition: pro-unipotent x semisimple)"
+    },
+    {
+      "n_max": 2,
+      "j2_max": 2,
+      "dim_A_G_a": 15,
+      "dim_B_SL_2": 3,
+      "dim_Levi_total": 18,
+      "shape": "G_a^15 x SL_2  (Levi decomposition: pro-unipotent x semisimple)"
+    },
+    {
+      "n_max": 3,
+      "j2_max": 1,
+      "dim_A_G_a": 27,
+      "dim_B_SL_2": 3,
+      "dim_Levi_total": 30,
+      "shape": "G_a^27 x SL_2  (Levi decomposition: pro-unipotent x semisimple)"
+    },
+    {
+      "n_max": 3,
+      "j2_max": 2,
+      "dim_A_G_a": 27,
+      "dim_B_SL_2": 3,
+      "dim_Levi_total": 30,
+      "shape": "G_a^27 x SL_2  (Levi decomposition: pro-unipotent x semisimple)"
+    }
+  ],
+  "levi_action": {
+    "claim": "SL_2 action on G_a^{3*N(n_max)} is trivial",
+    "reason": "v3.61.0 generators x_{(n,l), k} are abelian primitives indexed by (sector, Mellin slot); they carry no SU(2) representation content. Any element of SL_2 acts on them as the identity by construction.",
+    "consequence": "Semidirect product G_a^{3*N(n_max)} rtimes SL_2 reduces to direct product G_a^{3*N(n_max)} x SL_2 (the Levi-decomposition shape becomes a clean direct product).",
+    "reference": "Hochschild 1981 'Basic Theory of Algebraic Groups and Lie Algebras' Ch VII (Levi decomposition theorem); direct-product reduction when Levi action on unipotent radical is trivial.",
+    "verified": true
+  },
+  "total_panel_passes": 636,
+  "total_trunc_passes": 246,
+  "grand_total_zero_residuals": 882,
+  "wall_time_s": 0.072
+}

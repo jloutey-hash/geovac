@@ -1,0 +1,379 @@
+{
+  "sprint": "Q5p-M3-Continuum",
+  "date": "2026-06-05",
+  "wall_seconds": 11.811534643173218,
+  "hurwitz_check": [
+    {
+      "s": "7/2",
+      "formA": -4.333352604127667,
+      "formB": -4.333352604127667,
+      "diff_abs": 0.0
+    },
+    {
+      "s": "9/2",
+      "formA": 3.742673563388719,
+      "formB": 3.742673563388719,
+      "diff_abs": 0.0
+    },
+    {
+      "s": "5",
+      "formA": 1.7521801482558221,
+      "formB": 1.7521801482558221,
+      "diff_abs": 0.0
+    },
+    {
+      "s": "6",
+      "formA": 0.7564164395120861,
+      "formB": 0.7564164395120861,
+      "diff_abs": 0.0
+    },
+    {
+      "s": "7",
+      "formA": 0.42339055882399784,
+      "formB": 0.42339055882399784,
+      "diff_abs": 0.0
+    }
+  ],
+  "poles": {
+    "s=4": {
+      "source": "2 * zeta(s-3, 3/2)",
+      "eta_D_residue": "2",
+      "Gamma_at_pole": "6",
+      "Mellin_residue": "12",
+      "comment": "Leading short-time heat-kernel pole (d=3 Dirac)"
+    },
+    "s=2": {
+      "source": "-(1/2) * zeta(s-1, 3/2)",
+      "eta_D_residue": "-1/2",
+      "Gamma_at_pole": "1",
+      "Mellin_residue": "-1/2",
+      "comment": "Subleading pole (heat-kernel a_1-style)"
+    }
+  },
+  "pole_residue_s_eq_4": {
+    "way1_eta_D_residue_at_s=4": "2",
+    "way2_Mellin_residue_at_s=4_with_Gamma": "12",
+    "match": "True"
+  },
+  "pole_residue_s_eq_2": {
+    "way1_eta_D_residue_at_s=2": "-1/2",
+    "way2_Mellin_residue_at_s=2_with_Gamma": "-1/2",
+    "match": "True"
+  },
+  "integer_s_panel": {
+    "s=3": {
+      "value": "-pi**2/4",
+      "classification": "M2 pure-Tate (pi^even * Q)"
+    },
+    "s=5": {
+      "value": "-pi**4/12 + pi**2",
+      "classification": "M2 pure-Tate (pi^even * Q)"
+    },
+    "s=6": {
+      "value": "-31*zeta(5)/2 + 14*zeta(3)",
+      "classification": "M3-adjacent odd-zeta (MT(Z) depth 1, NOT cyclotomic level 4)"
+    },
+    "s=7": {
+      "value": "-pi**6/30 + pi**4/3",
+      "classification": "M2 pure-Tate (pi^even * Q)"
+    },
+    "s=8": {
+      "value": "-127*zeta(7)/2 + 62*zeta(5)",
+      "classification": "M3-adjacent odd-zeta (MT(Z) depth 1, NOT cyclotomic level 4)"
+    }
+  },
+  "m3_chirality_panel": {
+    "s=2": {
+      "expression": "pi/4",
+      "mellin_residue_with_Gamma": "pi/4",
+      "M-classification": "M1 collapse (Euler)",
+      "shifted_arg": 1
+    },
+    "s=3": {
+      "expression": "-1 + 2*Catalan",
+      "mellin_residue_with_Gamma": "-2 + 4*Catalan",
+      "M-classification": "M3 (cyclotomic)",
+      "shifted_arg": 2
+    },
+    "s=4": {
+      "expression": "-pi + pi**3/8",
+      "mellin_residue_with_Gamma": "-6*pi + 3*pi**3/4",
+      "M-classification": "M1 collapse (Euler)",
+      "shifted_arg": 3
+    },
+    "s=5": {
+      "expression": "8*beta4 - 8*Catalan",
+      "mellin_residue_with_Gamma": "192*beta4 - 192*Catalan",
+      "M-classification": "M3 (cyclotomic)",
+      "shifted_arg": 4
+    },
+    "s=6": {
+      "expression": "-pi**3/2 + 5*pi**5/96",
+      "mellin_residue_with_Gamma": "-60*pi**3 + 25*pi**5/4",
+      "M-classification": "M1 collapse (Euler)",
+      "shifted_arg": 5
+    },
+    "s=7": {
+      "expression": "-32*beta4 + 32*beta6",
+      "mellin_residue_with_Gamma": "-23040*beta4 + 23040*beta6",
+      "M-classification": "M3 (cyclotomic)",
+      "shifted_arg": 6
+    }
+  },
+  "thm3_numerical_check": {
+    "s=4": {
+      "lhs": "0.58383166051109056843055294636794968433...",
+      "rhs": "0.58383166051109056843055294636794968433...",
+      "residual": "2.857468478205687455539458870763352398629774987056996653037814608069081589766845489188620054650430074e-101",
+      "bit_exact_99dps": true
+    },
+    "s=5": {
+      "lhs": "0.43538690908349893636295236454490690306...",
+      "rhs": "0.43538690908349893636295236454490690306...",
+      "residual": "2.000227934743981218877621209534346679040842490939897657126470225648357112836791842432034038255301052e-100",
+      "bit_exact_99dps": true
+    },
+    "s=6": {
+      "lhs": "0.31170145527464957866170094821851930760...",
+      "rhs": "0.31170145527464957866170094821851930760...",
+      "residual": "7.500854755289929570791079535753800046403159341024616214224263346181339173137969409120127643457378945e-101",
+      "bit_exact_99dps": true
+    }
+  },
+  "three_sibling_analysis": {
+    "M1_siblings": {
+      "Paper_18_III_2": "pi",
+      "Paper_38_L2": "4/pi",
+      "Q5p_Stage1_2b_cont": "sqrt(pi)/2",
+      "ratio_18_to_38": "pi**2/4",
+      "ratio_18_to_Q5p": "2*sqrt(pi)"
+    },
+    "M3_normalization_analysis": {
+      "leading_M3_generator_at_s=2": "Catalan",
+      "closed_form_via_Hurwitz": "4^{-2} (zeta(2, 1/4) - zeta(2, 3/4))",
+      "closed_form_via_L_function": "L(2, chi_-4) = beta(2)",
+      "closed_form_via_vertex_parity": "D_even(3) - D_odd(3) shifted",
+      "pi_power_sibling_exists": false,
+      "structural_reason": "M3 generator beta(2) = Catalan G is not in Q[pi]; its irrationality is conjectural but no known closed form in pi exists (Ap\u00e9ry-like, but Catalan G has eluded such reductions). Therefore M3 admits NO three-sibling Hopf-base-style normalization; it sits in MT(Z[i, 1/2], 4) at depth 1, not in M1's depth-0 Q[pi, 1/pi] ring.",
+      "M1_M3_asymmetry": "M1 has three sibling normalizations of pi (a single generator). M3 has a depth-graded ring with {G, beta(4), beta(6), ...} at successive depths and no pi reduction. Asymmetry crystallizes the Paper 18 \u00a7III.7 statement that M1 (k=0) and M3 (k=1) live in structurally distinct period rings."
+    }
+  },
+  "finite_cutoff_tr_gamma_D": {
+    "n_max=1": {
+      "sum_eta_sectors": "6",
+      "M3_closed_form": "6",
+      "match": "True"
+    },
+    "n_max=2": {
+      "sum_eta_sectors": "36",
+      "M3_closed_form": "36",
+      "match": "True"
+    },
+    "n_max=3": {
+      "sum_eta_sectors": "120",
+      "M3_closed_form": "120",
+      "match": "True"
+    },
+    "n_max=4": {
+      "sum_eta_sectors": "300",
+      "M3_closed_form": "300",
+      "match": "True"
+    }
+  },
+  "finite_cutoff_vs_continuum": {
+    "s=3": {
+      "continuum_closed": "-pi**2/4",
+      "continuum_float": -2.4674011002723395,
+      "n_max=2": {
+        "value": 3.6977777777777776,
+        "ratio_to_cont": -1.4986528851631116
+      },
+      "n_max=3": {
+        "value": 5.656961451247166,
+        "ratio_to_cont": -2.2926801202377587
+      },
+      "n_max=4": {
+        "value": 7.632270093222474,
+        "ratio_to_cont": -3.0932425588932673
+      },
+      "n_max=6": {
+        "value": 11.603906848076011,
+        "ratio_to_cont": -4.702886306889962
+      },
+      "n_max=10": {
+        "value": 19.578022230364933,
+        "ratio_to_cont": -7.934673543026308
+      }
+    },
+    "s=5": {
+      "continuum_closed": "-pi**4/12 + pi**2",
+      "continuum_float": 1.7521801482558221,
+      "n_max=2": {
+        "value": 1.0973234567901236,
+        "ratio_to_cont": 0.6262617790085314
+      },
+      "n_max=3": {
+        "value": 1.2572568178896653,
+        "ratio_to_cont": 0.7175385585444397
+      },
+      "n_max=4": {
+        "value": 1.3548029236662238,
+        "ratio_to_cont": 0.7732098351957927
+      },
+      "n_max=6": {
+        "value": 1.4674293912504628,
+        "ratio_to_cont": 0.8374877393236023
+      },
+      "n_max=10": {
+        "value": 1.5706115311027522,
+        "ratio_to_cont": 0.8963755996586257
+      }
+    },
+    "s=6": {
+      "continuum_closed": "-31*zeta(5)/2 + 14*zeta(3)",
+      "continuum_float": 0.7564164395120861,
+      "n_max=2": {
+        "value": 0.6496289711934157,
+        "ratio_to_cont": 0.8588245009752142
+      },
+      "n_max=3": {
+        "value": 0.6953242172218562,
+        "ratio_to_cont": 0.9192346714071465
+      },
+      "n_max=4": {
+        "value": 0.717001129616647,
+        "ratio_to_cont": 0.947892050150492
+      },
+      "n_max=6": {
+        "value": 0.73616238453772,
+        "ratio_to_cont": 0.9732236716226967
+      },
+      "n_max=10": {
+        "value": 0.7481774499164143,
+        "ratio_to_cont": 0.9891078655019896
+      }
+    },
+    "s=7": {
+      "continuum_closed": "pi**4*(10 - pi**2)/30",
+      "continuum_float": 0.42339055882399784,
+      "n_max=2": {
+        "value": 0.40031798079561043,
+        "ratio_to_cont": 0.9455052136909396
+      },
+      "n_max=3": {
+        "value": 0.41337376537516485,
+        "ratio_to_cont": 0.9763414813106474
+      },
+      "n_max=4": {
+        "value": 0.4181908570184517,
+        "ratio_to_cont": 0.9877188999679427
+      },
+      "n_max=6": {
+        "value": 0.4214722162203716,
+        "ratio_to_cont": 0.9954690945188892
+      },
+      "n_max=10": {
+        "value": 0.4228923518316893,
+        "ratio_to_cont": 0.9988232921544298
+      }
+    }
+  },
+  "discrete_pole_signature": [
+    {
+      "n_max": 2,
+      "S(n_max; s=4)": 1.9531851851851851,
+      "log_n_max": 0.6931471805599453,
+      "ratio_S_over_log_n": 2.8178505806044583
+    },
+    {
+      "n_max": 3,
+      "S(n_max; s=4)": 2.5129519490335817,
+      "log_n_max": 1.0986122886681098,
+      "ratio_S_over_log_n": 2.287387438638731
+    },
+    {
+      "n_max": 4,
+      "S(n_max; s=4)": 2.9519094250280946,
+      "log_n_max": 1.3862943611198906,
+      "ratio_S_over_log_n": 2.129352544320712
+    },
+    {
+      "n_max": 6,
+      "S(n_max; s=4)": 3.6184121726106016,
+      "log_n_max": 1.791759469228055,
+      "ratio_S_over_log_n": 2.0194742847763627
+    },
+    {
+      "n_max": 10,
+      "S(n_max; s=4)": 4.518361017318493,
+      "log_n_max": 2.302585092994046,
+      "ratio_S_over_log_n": 1.9622992570681845
+    },
+    {
+      "n_max": 20,
+      "S(n_max; s=4)": 5.809621228489226,
+      "log_n_max": 2.995732273553991,
+      "ratio_S_over_log_n": 1.9392992090034047
+    },
+    {
+      "n_max": 50,
+      "S(n_max; s=4)": 7.583600300878831,
+      "log_n_max": 3.912023005428146,
+      "ratio_S_over_log_n": 1.938536734154214
+    },
+    {
+      "n_max": 100,
+      "S(n_max; s=4)": 8.950094600461052,
+      "log_n_max": 4.605170185988092,
+      "ratio_S_over_log_n": 1.9434883487461618
+    },
+    {
+      "n_max": 200,
+      "S(n_max; s=4)": 10.326438957676054,
+      "log_n_max": 5.298317366548036,
+      "ratio_S_over_log_n": 1.9490034747397442
+    },
+    {
+      "n_max": 500,
+      "S(n_max; s=4)": 12.15303442116873,
+      "log_n_max": 6.214608098422191,
+      "ratio_S_over_log_n": 1.9555592611309196
+    }
+  ],
+  "off_pole_convergence": {
+    "s_val": "5.1",
+    "continuum_at_eps": 1.5713837227355798,
+    "table": [
+      {
+        "n_max": 10,
+        "finite_value": 1.4415332820311189,
+        "continuum": 1.5713837227355798,
+        "ratio": 0.9173655429760925
+      },
+      {
+        "n_max": 50,
+        "finite_value": 1.5473246304566857,
+        "continuum": 1.5713837227355798,
+        "ratio": 0.9846892315792796
+      },
+      {
+        "n_max": 100,
+        "finite_value": 1.560036856759773,
+        "continuum": 1.5713837227355798,
+        "ratio": 0.9927790610201477
+      },
+      {
+        "n_max": 500,
+        "finite_value": 1.569434706342215,
+        "continuum": 1.5713837227355798,
+        "ratio": 0.9987596814417984
+      },
+      {
+        "n_max": 1000,
+        "finite_value": 1.5704734747109774,
+        "continuum": 1.5713837227355798,
+        "ratio": 0.9994207347247954
+      }
+    ]
+  }
+}

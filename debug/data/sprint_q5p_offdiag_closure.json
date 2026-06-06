@@ -1,0 +1,1202 @@
+{
+  "sprint": "Q5p-OffDiag-Closure-nmax3",
+  "date": "2026-06-06",
+  "discipline": "bit-exact sympy.Rational; per-block A^k powers",
+  "n_max_2": {
+    "n_max": 2,
+    "dim_H": 16,
+    "n_sectors": 5,
+    "sectors": [
+      "(1, 0)",
+      "(1, 1)",
+      "(2, 0)",
+      "(2, 1)",
+      "(2, 2)"
+    ],
+    "n_idempotents": 5,
+    "n_single_step_transitions": 12,
+    "transitions": [
+      "(1, 0) -> (1, 1)",
+      "(1, 0) -> (2, 1)",
+      "(1, 1) -> (1, 0)",
+      "(1, 1) -> (2, 0)",
+      "(1, 1) -> (2, 2)",
+      "(2, 0) -> (1, 1)",
+      "(2, 0) -> (2, 1)",
+      "(2, 1) -> (1, 0)",
+      "(2, 1) -> (2, 0)",
+      "(2, 1) -> (2, 2)",
+      "(2, 2) -> (1, 1)",
+      "(2, 2) -> (2, 1)"
+    ],
+    "chain_classification": {
+      "n_pairs_total": 144,
+      "count_nonchain": 114,
+      "count_chain_zero": 0,
+      "count_chain_idempotent": 12,
+      "count_chain_single_step": 14,
+      "count_chain_two_step": 4
+    },
+    "closure_dim": 84,
+    "n_blocks_realized": 25,
+    "per_block": {
+      "(1, 0)->(1, 0)": {
+        "from": "(1, 0)",
+        "to": "(1, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 8,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(1, 0)": {
+        "from": "(1, 1)",
+        "to": "(1, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 8,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(1, 0)": {
+        "from": "(2, 0)",
+        "to": "(1, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 7,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(1, 0)": {
+        "from": "(2, 1)",
+        "to": "(1, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(2, 2)->(1, 0)": {
+        "from": "(2, 2)",
+        "to": "(1, 0)",
+        "d_from": 4,
+        "d_to": 2,
+        "max_dim": 8,
+        "n_powers_with_content": 7,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(1, 1)": {
+        "from": "(1, 0)",
+        "to": "(1, 1)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 8,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(1, 1)": {
+        "from": "(1, 1)",
+        "to": "(1, 1)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 8,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(1, 1)": {
+        "from": "(2, 0)",
+        "to": "(1, 1)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 8,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(1, 1)": {
+        "from": "(2, 1)",
+        "to": "(1, 1)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 7,
+        "realized_rank": 4,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(2, 2)->(1, 1)": {
+        "from": "(2, 2)",
+        "to": "(1, 1)",
+        "d_from": 4,
+        "d_to": 2,
+        "max_dim": 8,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(2, 0)": {
+        "from": "(1, 0)",
+        "to": "(2, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 7,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(2, 0)": {
+        "from": "(1, 1)",
+        "to": "(2, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 8,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(2, 0)": {
+        "from": "(2, 0)",
+        "to": "(2, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 8,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(2, 0)": {
+        "from": "(2, 1)",
+        "to": "(2, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(2, 2)->(2, 0)": {
+        "from": "(2, 2)",
+        "to": "(2, 0)",
+        "d_from": 4,
+        "d_to": 2,
+        "max_dim": 8,
+        "n_powers_with_content": 7,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(2, 1)": {
+        "from": "(1, 0)",
+        "to": "(2, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(1, 1)->(2, 1)": {
+        "from": "(1, 1)",
+        "to": "(2, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 7,
+        "realized_rank": 4,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(2, 0)->(2, 1)": {
+        "from": "(2, 0)",
+        "to": "(2, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(2, 1)->(2, 1)": {
+        "from": "(2, 1)",
+        "to": "(2, 1)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 8,
+        "realized_rank": 5,
+        "fill_fraction": 0.1388888888888889
+      },
+      "(2, 2)->(2, 1)": {
+        "from": "(2, 2)",
+        "to": "(2, 1)",
+        "d_from": 4,
+        "d_to": 6,
+        "max_dim": 24,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.16666666666666666
+      },
+      "(1, 0)->(2, 2)": {
+        "from": "(1, 0)",
+        "to": "(2, 2)",
+        "d_from": 2,
+        "d_to": 4,
+        "max_dim": 8,
+        "n_powers_with_content": 7,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(2, 2)": {
+        "from": "(1, 1)",
+        "to": "(2, 2)",
+        "d_from": 2,
+        "d_to": 4,
+        "max_dim": 8,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(2, 2)": {
+        "from": "(2, 0)",
+        "to": "(2, 2)",
+        "d_from": 2,
+        "d_to": 4,
+        "max_dim": 8,
+        "n_powers_with_content": 7,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(2, 2)": {
+        "from": "(2, 1)",
+        "to": "(2, 2)",
+        "d_from": 6,
+        "d_to": 4,
+        "max_dim": 24,
+        "n_powers_with_content": 8,
+        "realized_rank": 4,
+        "fill_fraction": 0.16666666666666666
+      },
+      "(2, 2)->(2, 2)": {
+        "from": "(2, 2)",
+        "to": "(2, 2)",
+        "d_from": 4,
+        "d_to": 4,
+        "max_dim": 16,
+        "n_powers_with_content": 8,
+        "realized_rank": 5,
+        "fill_fraction": 0.3125
+      }
+    },
+    "path_algebra_upper_bound_full": 256,
+    "dim_H_squared": 256,
+    "fill_fraction_str": "21/64",
+    "lie_subalgebra": {
+      "n_transitions": 12,
+      "rank_of_transition_span": 12,
+      "n_commutator_pairs": 66,
+      "n_commutator_zero": 42,
+      "n_commutator_in_span": 0,
+      "n_commutator_outside_span": 24,
+      "lie_closes_in_transition_span": false
+    },
+    "enrichment_multiplier_str": "84/5",
+    "wall_time_s": 0.8901309967041016
+  },
+  "n_max_3": {
+    "n_max": 3,
+    "dim_H": 40,
+    "n_sectors": 9,
+    "sectors": [
+      "(1, 0)",
+      "(1, 1)",
+      "(2, 0)",
+      "(2, 1)",
+      "(2, 2)",
+      "(3, 0)",
+      "(3, 1)",
+      "(3, 2)",
+      "(3, 3)"
+    ],
+    "n_idempotents": 9,
+    "n_single_step_transitions": 28,
+    "transitions": [
+      "(1, 0) -> (1, 1)",
+      "(1, 0) -> (2, 1)",
+      "(1, 1) -> (1, 0)",
+      "(1, 1) -> (2, 0)",
+      "(1, 1) -> (2, 2)",
+      "(2, 0) -> (1, 1)",
+      "(2, 0) -> (2, 1)",
+      "(2, 0) -> (3, 1)",
+      "(2, 1) -> (1, 0)",
+      "(2, 1) -> (2, 0)",
+      "(2, 1) -> (2, 2)",
+      "(2, 1) -> (3, 0)",
+      "(2, 1) -> (3, 2)",
+      "(2, 2) -> (1, 1)",
+      "(2, 2) -> (2, 1)",
+      "(2, 2) -> (3, 1)",
+      "(2, 2) -> (3, 3)",
+      "(3, 0) -> (2, 1)",
+      "(3, 0) -> (3, 1)",
+      "(3, 1) -> (2, 0)",
+      "(3, 1) -> (2, 2)",
+      "(3, 1) -> (3, 0)",
+      "(3, 1) -> (3, 2)",
+      "(3, 2) -> (2, 1)",
+      "(3, 2) -> (3, 1)",
+      "(3, 2) -> (3, 3)",
+      "(3, 3) -> (2, 2)",
+      "(3, 3) -> (3, 2)"
+    ],
+    "chain_classification": {
+      "n_pairs_total": 784,
+      "count_nonchain": 688,
+      "count_chain_zero": 0,
+      "count_chain_idempotent": 28,
+      "count_chain_single_step": 44,
+      "count_chain_two_step": 24
+    },
+    "closure_dim": 592,
+    "n_blocks_realized": 81,
+    "per_block": {
+      "(1, 0)->(1, 0)": {
+        "from": "(1, 0)",
+        "to": "(1, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(1, 0)": {
+        "from": "(1, 1)",
+        "to": "(1, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(1, 0)": {
+        "from": "(2, 0)",
+        "to": "(1, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(1, 0)": {
+        "from": "(2, 1)",
+        "to": "(1, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 2)->(1, 0)": {
+        "from": "(2, 2)",
+        "to": "(1, 0)",
+        "d_from": 4,
+        "d_to": 2,
+        "max_dim": 8,
+        "n_powers_with_content": 19,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(3, 0)->(1, 0)": {
+        "from": "(3, 0)",
+        "to": "(1, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(1, 0)": {
+        "from": "(3, 1)",
+        "to": "(1, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(3, 2)->(1, 0)": {
+        "from": "(3, 2)",
+        "to": "(1, 0)",
+        "d_from": 10,
+        "d_to": 2,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(3, 3)->(1, 0)": {
+        "from": "(3, 3)",
+        "to": "(1, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(1, 1)": {
+        "from": "(1, 0)",
+        "to": "(1, 1)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(1, 1)": {
+        "from": "(1, 1)",
+        "to": "(1, 1)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(1, 1)": {
+        "from": "(2, 0)",
+        "to": "(1, 1)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(1, 1)": {
+        "from": "(2, 1)",
+        "to": "(1, 1)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 2)->(1, 1)": {
+        "from": "(2, 2)",
+        "to": "(1, 1)",
+        "d_from": 4,
+        "d_to": 2,
+        "max_dim": 8,
+        "n_powers_with_content": 20,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(3, 0)->(1, 1)": {
+        "from": "(3, 0)",
+        "to": "(1, 1)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(1, 1)": {
+        "from": "(3, 1)",
+        "to": "(1, 1)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(3, 2)->(1, 1)": {
+        "from": "(3, 2)",
+        "to": "(1, 1)",
+        "d_from": 10,
+        "d_to": 2,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(3, 3)->(1, 1)": {
+        "from": "(3, 3)",
+        "to": "(1, 1)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(2, 0)": {
+        "from": "(1, 0)",
+        "to": "(2, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(2, 0)": {
+        "from": "(1, 1)",
+        "to": "(2, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(2, 0)": {
+        "from": "(2, 0)",
+        "to": "(2, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(2, 0)": {
+        "from": "(2, 1)",
+        "to": "(2, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 2)->(2, 0)": {
+        "from": "(2, 2)",
+        "to": "(2, 0)",
+        "d_from": 4,
+        "d_to": 2,
+        "max_dim": 8,
+        "n_powers_with_content": 19,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(3, 0)->(2, 0)": {
+        "from": "(3, 0)",
+        "to": "(2, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(2, 0)": {
+        "from": "(3, 1)",
+        "to": "(2, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(3, 2)->(2, 0)": {
+        "from": "(3, 2)",
+        "to": "(2, 0)",
+        "d_from": 10,
+        "d_to": 2,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(3, 3)->(2, 0)": {
+        "from": "(3, 3)",
+        "to": "(2, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(2, 1)": {
+        "from": "(1, 0)",
+        "to": "(2, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(2, 1)": {
+        "from": "(1, 1)",
+        "to": "(2, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(2, 1)": {
+        "from": "(2, 0)",
+        "to": "(2, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(2, 1)": {
+        "from": "(2, 1)",
+        "to": "(2, 1)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 20,
+        "realized_rank": 12,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(2, 2)->(2, 1)": {
+        "from": "(2, 2)",
+        "to": "(2, 1)",
+        "d_from": 4,
+        "d_to": 6,
+        "max_dim": 24,
+        "n_powers_with_content": 20,
+        "realized_rank": 10,
+        "fill_fraction": 0.4166666666666667
+      },
+      "(3, 0)->(2, 1)": {
+        "from": "(3, 0)",
+        "to": "(2, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(2, 1)": {
+        "from": "(3, 1)",
+        "to": "(2, 1)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.3888888888888889
+      },
+      "(3, 2)->(2, 1)": {
+        "from": "(3, 2)",
+        "to": "(2, 1)",
+        "d_from": 10,
+        "d_to": 6,
+        "max_dim": 60,
+        "n_powers_with_content": 20,
+        "realized_rank": 14,
+        "fill_fraction": 0.23333333333333334
+      },
+      "(3, 3)->(2, 1)": {
+        "from": "(3, 3)",
+        "to": "(2, 1)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.3888888888888889
+      },
+      "(1, 0)->(2, 2)": {
+        "from": "(1, 0)",
+        "to": "(2, 2)",
+        "d_from": 2,
+        "d_to": 4,
+        "max_dim": 8,
+        "n_powers_with_content": 19,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(2, 2)": {
+        "from": "(1, 1)",
+        "to": "(2, 2)",
+        "d_from": 2,
+        "d_to": 4,
+        "max_dim": 8,
+        "n_powers_with_content": 20,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(2, 2)": {
+        "from": "(2, 0)",
+        "to": "(2, 2)",
+        "d_from": 2,
+        "d_to": 4,
+        "max_dim": 8,
+        "n_powers_with_content": 19,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(2, 2)": {
+        "from": "(2, 1)",
+        "to": "(2, 2)",
+        "d_from": 6,
+        "d_to": 4,
+        "max_dim": 24,
+        "n_powers_with_content": 20,
+        "realized_rank": 10,
+        "fill_fraction": 0.4166666666666667
+      },
+      "(2, 2)->(2, 2)": {
+        "from": "(2, 2)",
+        "to": "(2, 2)",
+        "d_from": 4,
+        "d_to": 4,
+        "max_dim": 16,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.375
+      },
+      "(3, 0)->(2, 2)": {
+        "from": "(3, 0)",
+        "to": "(2, 2)",
+        "d_from": 2,
+        "d_to": 4,
+        "max_dim": 8,
+        "n_powers_with_content": 19,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(2, 2)": {
+        "from": "(3, 1)",
+        "to": "(2, 2)",
+        "d_from": 6,
+        "d_to": 4,
+        "max_dim": 24,
+        "n_powers_with_content": 20,
+        "realized_rank": 12,
+        "fill_fraction": 0.5
+      },
+      "(3, 2)->(2, 2)": {
+        "from": "(3, 2)",
+        "to": "(2, 2)",
+        "d_from": 10,
+        "d_to": 4,
+        "max_dim": 40,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.35
+      },
+      "(3, 3)->(2, 2)": {
+        "from": "(3, 3)",
+        "to": "(2, 2)",
+        "d_from": 6,
+        "d_to": 4,
+        "max_dim": 24,
+        "n_powers_with_content": 20,
+        "realized_rank": 12,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(3, 0)": {
+        "from": "(1, 0)",
+        "to": "(3, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(3, 0)": {
+        "from": "(1, 1)",
+        "to": "(3, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(3, 0)": {
+        "from": "(2, 0)",
+        "to": "(3, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 19,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(3, 0)": {
+        "from": "(2, 1)",
+        "to": "(3, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 2)->(3, 0)": {
+        "from": "(2, 2)",
+        "to": "(3, 0)",
+        "d_from": 4,
+        "d_to": 2,
+        "max_dim": 8,
+        "n_powers_with_content": 19,
+        "realized_rank": 4,
+        "fill_fraction": 0.5
+      },
+      "(3, 0)->(3, 0)": {
+        "from": "(3, 0)",
+        "to": "(3, 0)",
+        "d_from": 2,
+        "d_to": 2,
+        "max_dim": 4,
+        "n_powers_with_content": 20,
+        "realized_rank": 2,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(3, 0)": {
+        "from": "(3, 1)",
+        "to": "(3, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(3, 2)->(3, 0)": {
+        "from": "(3, 2)",
+        "to": "(3, 0)",
+        "d_from": 10,
+        "d_to": 2,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(3, 3)->(3, 0)": {
+        "from": "(3, 3)",
+        "to": "(3, 0)",
+        "d_from": 6,
+        "d_to": 2,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(1, 0)->(3, 1)": {
+        "from": "(1, 0)",
+        "to": "(3, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(3, 1)": {
+        "from": "(1, 1)",
+        "to": "(3, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(3, 1)": {
+        "from": "(2, 0)",
+        "to": "(3, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(3, 1)": {
+        "from": "(2, 1)",
+        "to": "(3, 1)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.3888888888888889
+      },
+      "(2, 2)->(3, 1)": {
+        "from": "(2, 2)",
+        "to": "(3, 1)",
+        "d_from": 4,
+        "d_to": 6,
+        "max_dim": 24,
+        "n_powers_with_content": 20,
+        "realized_rank": 12,
+        "fill_fraction": 0.5
+      },
+      "(3, 0)->(3, 1)": {
+        "from": "(3, 0)",
+        "to": "(3, 1)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 20,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(3, 1)": {
+        "from": "(3, 1)",
+        "to": "(3, 1)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 20,
+        "realized_rank": 12,
+        "fill_fraction": 0.3333333333333333
+      },
+      "(3, 2)->(3, 1)": {
+        "from": "(3, 2)",
+        "to": "(3, 1)",
+        "d_from": 10,
+        "d_to": 6,
+        "max_dim": 60,
+        "n_powers_with_content": 20,
+        "realized_rank": 14,
+        "fill_fraction": 0.23333333333333334
+      },
+      "(3, 3)->(3, 1)": {
+        "from": "(3, 3)",
+        "to": "(3, 1)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.3888888888888889
+      },
+      "(1, 0)->(3, 2)": {
+        "from": "(1, 0)",
+        "to": "(3, 2)",
+        "d_from": 2,
+        "d_to": 10,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(1, 1)->(3, 2)": {
+        "from": "(1, 1)",
+        "to": "(3, 2)",
+        "d_from": 2,
+        "d_to": 10,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(2, 0)->(3, 2)": {
+        "from": "(2, 0)",
+        "to": "(3, 2)",
+        "d_from": 2,
+        "d_to": 10,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(2, 1)->(3, 2)": {
+        "from": "(2, 1)",
+        "to": "(3, 2)",
+        "d_from": 6,
+        "d_to": 10,
+        "max_dim": 60,
+        "n_powers_with_content": 20,
+        "realized_rank": 14,
+        "fill_fraction": 0.23333333333333334
+      },
+      "(2, 2)->(3, 2)": {
+        "from": "(2, 2)",
+        "to": "(3, 2)",
+        "d_from": 4,
+        "d_to": 10,
+        "max_dim": 40,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.35
+      },
+      "(3, 0)->(3, 2)": {
+        "from": "(3, 0)",
+        "to": "(3, 2)",
+        "d_from": 2,
+        "d_to": 10,
+        "max_dim": 20,
+        "n_powers_with_content": 19,
+        "realized_rank": 8,
+        "fill_fraction": 0.4
+      },
+      "(3, 1)->(3, 2)": {
+        "from": "(3, 1)",
+        "to": "(3, 2)",
+        "d_from": 6,
+        "d_to": 10,
+        "max_dim": 60,
+        "n_powers_with_content": 20,
+        "realized_rank": 14,
+        "fill_fraction": 0.23333333333333334
+      },
+      "(3, 2)->(3, 2)": {
+        "from": "(3, 2)",
+        "to": "(3, 2)",
+        "d_from": 10,
+        "d_to": 10,
+        "max_dim": 100,
+        "n_powers_with_content": 20,
+        "realized_rank": 15,
+        "fill_fraction": 0.15
+      },
+      "(3, 3)->(3, 2)": {
+        "from": "(3, 3)",
+        "to": "(3, 2)",
+        "d_from": 6,
+        "d_to": 10,
+        "max_dim": 60,
+        "n_powers_with_content": 20,
+        "realized_rank": 14,
+        "fill_fraction": 0.23333333333333334
+      },
+      "(1, 0)->(3, 3)": {
+        "from": "(1, 0)",
+        "to": "(3, 3)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(1, 1)->(3, 3)": {
+        "from": "(1, 1)",
+        "to": "(3, 3)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 0)->(3, 3)": {
+        "from": "(2, 0)",
+        "to": "(3, 3)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(2, 1)->(3, 3)": {
+        "from": "(2, 1)",
+        "to": "(3, 3)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.3888888888888889
+      },
+      "(2, 2)->(3, 3)": {
+        "from": "(2, 2)",
+        "to": "(3, 3)",
+        "d_from": 4,
+        "d_to": 6,
+        "max_dim": 24,
+        "n_powers_with_content": 20,
+        "realized_rank": 12,
+        "fill_fraction": 0.5
+      },
+      "(3, 0)->(3, 3)": {
+        "from": "(3, 0)",
+        "to": "(3, 3)",
+        "d_from": 2,
+        "d_to": 6,
+        "max_dim": 12,
+        "n_powers_with_content": 19,
+        "realized_rank": 6,
+        "fill_fraction": 0.5
+      },
+      "(3, 1)->(3, 3)": {
+        "from": "(3, 1)",
+        "to": "(3, 3)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 19,
+        "realized_rank": 14,
+        "fill_fraction": 0.3888888888888889
+      },
+      "(3, 2)->(3, 3)": {
+        "from": "(3, 2)",
+        "to": "(3, 3)",
+        "d_from": 10,
+        "d_to": 6,
+        "max_dim": 60,
+        "n_powers_with_content": 20,
+        "realized_rank": 14,
+        "fill_fraction": 0.23333333333333334
+      },
+      "(3, 3)->(3, 3)": {
+        "from": "(3, 3)",
+        "to": "(3, 3)",
+        "d_from": 6,
+        "d_to": 6,
+        "max_dim": 36,
+        "n_powers_with_content": 20,
+        "realized_rank": 11,
+        "fill_fraction": 0.3055555555555556
+      }
+    },
+    "path_algebra_upper_bound_full": 1600,
+    "dim_H_squared": 1600,
+    "fill_fraction_str": "37/100",
+    "lie_subalgebra": {
+      "n_transitions": 28,
+      "rank_of_transition_span": 28,
+      "n_commutator_pairs": 378,
+      "n_commutator_zero": 296,
+      "n_commutator_in_span": 0,
+      "n_commutator_outside_span": 82,
+      "lie_closes_in_transition_span": false
+    },
+    "enrichment_multiplier_str": "592/9",
+    "wall_time_s": 74.11009860038757
+  },
+  "growth_analysis": {
+    "closure_dim_2": 84,
+    "closure_dim_3": 592,
+    "closure_dim_ratio_3_to_2_str": "148/21",
+    "dim_H_2_squared": 256,
+    "dim_H_3_squared": 1600,
+    "N_sectors_2": 5,
+    "N_sectors_3": 9
+  }
+}

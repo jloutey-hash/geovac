@@ -1,0 +1,228 @@
+{
+  "test_tensor_product_commutator": {
+    "commutator_zero_in_tensor_product": true,
+    "reason": "categorical tensor product axiom (a (x) 1)(1 (x) b) = a (x) b = (1 (x) b)(a (x) 1)"
+  },
+  "test_su2_action_on_offdiag": {
+    "preserves_sector_idempotents": false,
+    "reason": "U_theta T_{s' -> s} U^{-1} has m_l-dependent phase factors; the result is in a finer sub-sector decomposition (m_l-resolved) than the basic OffDiag basis",
+    "structural_finding": "SU(2) action would require refining the OffDiag basis to m_l-resolved sub-idempotents; the basic 5-sector basis is NOT SU(2)-invariant"
+  },
+  "e1_clebsch_gordan_structure": {
+    "(l=0 -> l'=1)": {
+      "<0,0; 1,-1 | 1,-1>": "1",
+      "<0,0; 1,0 | 1,0>": "1",
+      "<0,0; 1,1 | 1,1>": "1"
+    },
+    "(l=1 -> l'=0)": {
+      "<1,-1; 1,1 | 0,0>": "sqrt(3)/3",
+      "<1,0; 1,0 | 0,0>": "-sqrt(3)/3",
+      "<1,1; 1,-1 | 0,0>": "sqrt(3)/3"
+    },
+    "(l=1 -> l'=2)": {
+      "<1,-1; 1,-1 | 2,-2>": "1",
+      "<1,-1; 1,0 | 2,-1>": "sqrt(2)/2",
+      "<1,-1; 1,1 | 2,0>": "sqrt(6)/6",
+      "<1,0; 1,-1 | 2,-1>": "sqrt(2)/2",
+      "<1,0; 1,0 | 2,0>": "sqrt(6)/3",
+      "<1,0; 1,1 | 2,1>": "sqrt(2)/2",
+      "<1,1; 1,-1 | 2,0>": "sqrt(6)/6",
+      "<1,1; 1,0 | 2,1>": "sqrt(2)/2",
+      "<1,1; 1,1 | 2,2>": "1"
+    },
+    "(l=2 -> l'=1)": {
+      "<2,-2; 1,1 | 1,-1>": "sqrt(15)/5",
+      "<2,-1; 1,0 | 1,-1>": "-sqrt(30)/10",
+      "<2,-1; 1,1 | 1,0>": "sqrt(30)/10",
+      "<2,0; 1,-1 | 1,-1>": "sqrt(10)/10",
+      "<2,0; 1,0 | 1,0>": "-sqrt(10)/5",
+      "<2,0; 1,1 | 1,1>": "sqrt(10)/10",
+      "<2,1; 1,-1 | 1,0>": "sqrt(30)/10",
+      "<2,1; 1,0 | 1,1>": "-sqrt(30)/10",
+      "<2,2; 1,-1 | 1,1>": "sqrt(15)/5"
+    }
+  },
+  "motivic_galois_group": {
+    "verdict": "POSITIVE-REDUCES-TO-L1",
+    "structural_reason": "Peter-Weyl matrix coefficients are functions on SL_2; OffDiag transitions are operators on H with scalar cocycle data; tensor product is the only categorical combination",
+    "candidate_U_star_at_quotient": "SL_2 x G_a^{N_OD}",
+    "levi_decomposition_shape": "semisimple SL_2 (T3a) times pro-unipotent G_a^{N_OD} (v3.61.0 + T3b Lie content)",
+    "comparison_to_L1": "L1's Levi-decomposition is exactly U* = SL_2 x G_a^{3N(n_max)} or G_a^{3N(n_max)} x SL_2 depending on factor order; L5 reduces to this categorically"
+  },
+  "eta_values_panel": [
+    {
+      "from": "(1, 0)",
+      "to": "(1, 1)",
+      "eta": "1/64",
+      "kappa2_units": "4"
+    },
+    {
+      "from": "(1, 0)",
+      "to": "(2, 1)",
+      "eta": "5/128",
+      "kappa2_units": "10"
+    },
+    {
+      "from": "(1, 1)",
+      "to": "(1, 0)",
+      "eta": "-1/64",
+      "kappa2_units": "-4"
+    },
+    {
+      "from": "(1, 1)",
+      "to": "(2, 0)",
+      "eta": "-1/64",
+      "kappa2_units": "-4"
+    },
+    {
+      "from": "(1, 1)",
+      "to": "(2, 2)",
+      "eta": "-3/128",
+      "kappa2_units": "-6"
+    },
+    {
+      "from": "(2, 0)",
+      "to": "(1, 1)",
+      "eta": "1/64",
+      "kappa2_units": "4"
+    },
+    {
+      "from": "(2, 0)",
+      "to": "(2, 1)",
+      "eta": "5/128",
+      "kappa2_units": "10"
+    },
+    {
+      "from": "(2, 1)",
+      "to": "(1, 0)",
+      "eta": "1/128",
+      "kappa2_units": "2"
+    },
+    {
+      "from": "(2, 1)",
+      "to": "(2, 0)",
+      "eta": "1/128",
+      "kappa2_units": "2"
+    },
+    {
+      "from": "(2, 1)",
+      "to": "(2, 2)",
+      "eta": "1/64",
+      "kappa2_units": "4"
+    },
+    {
+      "from": "(2, 2)",
+      "to": "(1, 1)",
+      "eta": "-3/128",
+      "kappa2_units": "-6"
+    },
+    {
+      "from": "(2, 2)",
+      "to": "(2, 1)",
+      "eta": "-1/16",
+      "kappa2_units": "-16"
+    }
+  ],
+  "eta_grouped_by_l_pair": {
+    "l=0 -> l'=1": [
+      {
+        "from": "(1, 0)",
+        "to": "(1, 1)",
+        "eta_over_kappa2": "4"
+      },
+      {
+        "from": "(1, 0)",
+        "to": "(2, 1)",
+        "eta_over_kappa2": "10"
+      },
+      {
+        "from": "(2, 0)",
+        "to": "(1, 1)",
+        "eta_over_kappa2": "4"
+      },
+      {
+        "from": "(2, 0)",
+        "to": "(2, 1)",
+        "eta_over_kappa2": "10"
+      }
+    ],
+    "l=1 -> l'=0": [
+      {
+        "from": "(1, 1)",
+        "to": "(1, 0)",
+        "eta_over_kappa2": "-4"
+      },
+      {
+        "from": "(1, 1)",
+        "to": "(2, 0)",
+        "eta_over_kappa2": "-4"
+      },
+      {
+        "from": "(2, 1)",
+        "to": "(1, 0)",
+        "eta_over_kappa2": "2"
+      },
+      {
+        "from": "(2, 1)",
+        "to": "(2, 0)",
+        "eta_over_kappa2": "2"
+      }
+    ],
+    "l=1 -> l'=2": [
+      {
+        "from": "(1, 1)",
+        "to": "(2, 2)",
+        "eta_over_kappa2": "-6"
+      },
+      {
+        "from": "(2, 1)",
+        "to": "(2, 2)",
+        "eta_over_kappa2": "4"
+      }
+    ],
+    "l=2 -> l'=1": [
+      {
+        "from": "(2, 2)",
+        "to": "(1, 1)",
+        "eta_over_kappa2": "-6"
+      },
+      {
+        "from": "(2, 2)",
+        "to": "(2, 1)",
+        "eta_over_kappa2": "-16"
+      }
+    ]
+  },
+  "dimension_counts": {
+    "T3a_substrate_dim_at_jmax_1over2": 5,
+    "T3b_substrate_gen_count_at_nmax_2": 17,
+    "T3b_substrate_closure_dim_at_nmax_2": 35,
+    "L1_combined_basic_dim": 85,
+    "L1_combined_closure_dim": 175,
+    "comment": "tensor-product dimensionality; no interaction between layers"
+  },
+  "coproduct_analysis": {
+    "T3a_coproduct": "matrix-coefficient: Delta pi^j_{m,n} = sum_p pi^j_{m,p} (x) pi^j_{p,n}",
+    "T3b_idempotent_coproduct": "primitive: Delta e_s = e_s (x) 1 + 1 (x) e_s (forced by sector-locality)",
+    "T3b_transition_coproduct": "non-primitive (v3.61.0 Track B); exact form open at multi-year continuation",
+    "L1_tensor_coproduct": "standard tensor product of Hopf coproducts, layers independent",
+    "M_slot_grading_preserved": true,
+    "non_abelian_content_preserved": true,
+    "interaction_term": "ZERO at finite cutoff (proved via SU(2) action analysis Section 5)"
+  },
+  "verdict_against_decision_gate": {
+    "POSITIVE-NEW-STRUCTURE": "not selected",
+    "POSITIVE-REDUCES-TO-L1": "SELECTED",
+    "BORDERLINE": "not selected",
+    "STOP": "not selected",
+    "reason_for_selection": [
+      "Peter-Weyl matrix coefficients pi^j_{m,n} are FUNCTIONS on SU(2)/SL_2; eta(T_{s' -> s}) are SCALAR cocycle values on End(H). The two are categorically different objects.",
+      "No SL_2 group element evaluates pi^{1/2}_{m,n} to the OffDiag eta-class rationals at all 12 transitions simultaneously.",
+      "SU(2) z-rotation action by U_theta does NOT preserve the OffDiag sector-idempotent basis: it acts with m_l-dependent phase factors and requires refinement to an m_l-resolved sub-sector decomposition. The basic 5-sector OffDiag basis is NOT SU(2)-invariant.",
+      "The natural combined substrate is therefore the TENSOR PRODUCT A^{J*} (x) A^{OD} = L1.",
+      "Resulting U* = SL_2 x G_a^{N_OD} \u2014 Levi-decomposition shape \u2014 exactly the multi-year target predicted by T3a's headline finding.",
+      "L5 reduces to L1 at the substrate level; the genuinely-new content of L5 over L1 (the smash-product interaction) is BLOCKED at finite cutoff by the SU(2) basis-non-invariance."
+    ]
+  },
+  "wall_time_seconds": 0.008
+}

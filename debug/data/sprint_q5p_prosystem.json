@@ -1,0 +1,1708 @@
+{
+  "sprint": "Q5'-Stage1-Prosystem",
+  "cutoffs": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "wall_time_seconds": 0.05287766456604004,
+  "sector_count_closed_form": "N(n_max) = n_max(n_max+3)/2",
+  "sector_counts": {
+    "1": {
+      "N_actual": 2,
+      "N_closed_form": 2
+    },
+    "2": {
+      "N_actual": 5,
+      "N_closed_form": 5
+    },
+    "3": {
+      "N_actual": 9,
+      "N_closed_form": 9
+    },
+    "4": {
+      "N_actual": 14,
+      "N_closed_form": 14
+    }
+  },
+  "sectors_by_nmax": {
+    "1": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "2": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "3": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        3,
+        3
+      ]
+    ],
+    "4": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        4
+      ]
+    ]
+  },
+  "dim_H_by_nmax": {
+    "1": 4,
+    "2": 16,
+    "3": 40,
+    "4": 80
+  },
+  "jlo_classes_by_nmax": {
+    "1": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "chi_s": -2
+      }
+    ],
+    "2": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "chi_s": -2
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "chi_s": -4
+      }
+    ],
+    "3": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "chi_s": -2
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "chi_s": -4
+      },
+      {
+        "sector": [
+          3,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          3,
+          1
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          3,
+          2
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          3,
+          3
+        ],
+        "chi_s": -6
+      }
+    ],
+    "4": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "chi_s": -2
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "chi_s": -4
+      },
+      {
+        "sector": [
+          3,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          3,
+          1
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          3,
+          2
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          3,
+          3
+        ],
+        "chi_s": -6
+      },
+      {
+        "sector": [
+          4,
+          0
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          4,
+          1
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          4,
+          2
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          4,
+          3
+        ],
+        "chi_s": 2
+      },
+      {
+        "sector": [
+          4,
+          4
+        ],
+        "chi_s": -8
+      }
+    ]
+  },
+  "cm_eta_classes_by_nmax": {
+    "1": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "eta_s": 3
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "eta_s": 3
+      }
+    ],
+    "2": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "eta_s": 3
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "eta_s": 3
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "eta_s": 5
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "eta_s": 15
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "eta_s": 10
+      }
+    ],
+    "3": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "eta_s": 3
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "eta_s": 3
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "eta_s": 5
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "eta_s": 15
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "eta_s": 10
+      },
+      {
+        "sector": [
+          3,
+          0
+        ],
+        "eta_s": 7
+      },
+      {
+        "sector": [
+          3,
+          1
+        ],
+        "eta_s": 21
+      },
+      {
+        "sector": [
+          3,
+          2
+        ],
+        "eta_s": 35
+      },
+      {
+        "sector": [
+          3,
+          3
+        ],
+        "eta_s": 21
+      }
+    ],
+    "4": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "eta_s": 3
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "eta_s": 3
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "eta_s": 5
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "eta_s": 15
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "eta_s": 10
+      },
+      {
+        "sector": [
+          3,
+          0
+        ],
+        "eta_s": 7
+      },
+      {
+        "sector": [
+          3,
+          1
+        ],
+        "eta_s": 21
+      },
+      {
+        "sector": [
+          3,
+          2
+        ],
+        "eta_s": 35
+      },
+      {
+        "sector": [
+          3,
+          3
+        ],
+        "eta_s": 21
+      },
+      {
+        "sector": [
+          4,
+          0
+        ],
+        "eta_s": 9
+      },
+      {
+        "sector": [
+          4,
+          1
+        ],
+        "eta_s": 27
+      },
+      {
+        "sector": [
+          4,
+          2
+        ],
+        "eta_s": 45
+      },
+      {
+        "sector": [
+          4,
+          3
+        ],
+        "eta_s": 63
+      },
+      {
+        "sector": [
+          4,
+          4
+        ],
+        "eta_s": 36
+      }
+    ]
+  },
+  "sector_dims_by_nmax": {
+    "1": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "dim_s": 2
+      }
+    ],
+    "2": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "dim_s": 6
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "dim_s": 4
+      }
+    ],
+    "3": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "dim_s": 6
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "dim_s": 4
+      },
+      {
+        "sector": [
+          3,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          3,
+          1
+        ],
+        "dim_s": 6
+      },
+      {
+        "sector": [
+          3,
+          2
+        ],
+        "dim_s": 10
+      },
+      {
+        "sector": [
+          3,
+          3
+        ],
+        "dim_s": 6
+      }
+    ],
+    "4": [
+      {
+        "sector": [
+          1,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          1,
+          1
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          2,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          2,
+          1
+        ],
+        "dim_s": 6
+      },
+      {
+        "sector": [
+          2,
+          2
+        ],
+        "dim_s": 4
+      },
+      {
+        "sector": [
+          3,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          3,
+          1
+        ],
+        "dim_s": 6
+      },
+      {
+        "sector": [
+          3,
+          2
+        ],
+        "dim_s": 10
+      },
+      {
+        "sector": [
+          3,
+          3
+        ],
+        "dim_s": 6
+      },
+      {
+        "sector": [
+          4,
+          0
+        ],
+        "dim_s": 2
+      },
+      {
+        "sector": [
+          4,
+          1
+        ],
+        "dim_s": 6
+      },
+      {
+        "sector": [
+          4,
+          2
+        ],
+        "dim_s": 10
+      },
+      {
+        "sector": [
+          4,
+          3
+        ],
+        "dim_s": 14
+      },
+      {
+        "sector": [
+          4,
+          4
+        ],
+        "dim_s": 8
+      }
+    ]
+  },
+  "closed_form_checks_per_sector": {
+    "1": {
+      "jlo_all_match": true,
+      "cm_eta_all_match": true,
+      "jlo_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": -2,
+          "predicted": -2,
+          "match": true
+        }
+      ],
+      "cm_eta_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        }
+      ]
+    },
+    "2": {
+      "jlo_all_match": true,
+      "cm_eta_all_match": true,
+      "jlo_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": -2,
+          "predicted": -2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            1
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            2
+          ],
+          "computed": -4,
+          "predicted": -4,
+          "match": true
+        }
+      ],
+      "cm_eta_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            0
+          ],
+          "computed": 5,
+          "predicted": 5,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            1
+          ],
+          "computed": 15,
+          "predicted": 15,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            2
+          ],
+          "computed": 10,
+          "predicted": 10,
+          "match": true
+        }
+      ]
+    },
+    "3": {
+      "jlo_all_match": true,
+      "cm_eta_all_match": true,
+      "jlo_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": -2,
+          "predicted": -2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            1
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            2
+          ],
+          "computed": -4,
+          "predicted": -4,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            1
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            2
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            3
+          ],
+          "computed": -6,
+          "predicted": -6,
+          "match": true
+        }
+      ],
+      "cm_eta_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            0
+          ],
+          "computed": 5,
+          "predicted": 5,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            1
+          ],
+          "computed": 15,
+          "predicted": 15,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            2
+          ],
+          "computed": 10,
+          "predicted": 10,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            0
+          ],
+          "computed": 7,
+          "predicted": 7,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            1
+          ],
+          "computed": 21,
+          "predicted": 21,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            2
+          ],
+          "computed": 35,
+          "predicted": 35,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            3
+          ],
+          "computed": 21,
+          "predicted": 21,
+          "match": true
+        }
+      ]
+    },
+    "4": {
+      "jlo_all_match": true,
+      "cm_eta_all_match": true,
+      "jlo_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": -2,
+          "predicted": -2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            1
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            2
+          ],
+          "computed": -4,
+          "predicted": -4,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            1
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            2
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            3
+          ],
+          "computed": -6,
+          "predicted": -6,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            0
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            1
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            2
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            3
+          ],
+          "computed": 2,
+          "predicted": 2,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            4
+          ],
+          "computed": -8,
+          "predicted": -8,
+          "match": true
+        }
+      ],
+      "cm_eta_per_sector": [
+        {
+          "sector": [
+            1,
+            0
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        },
+        {
+          "sector": [
+            1,
+            1
+          ],
+          "computed": 3,
+          "predicted": 3,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            0
+          ],
+          "computed": 5,
+          "predicted": 5,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            1
+          ],
+          "computed": 15,
+          "predicted": 15,
+          "match": true
+        },
+        {
+          "sector": [
+            2,
+            2
+          ],
+          "computed": 10,
+          "predicted": 10,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            0
+          ],
+          "computed": 7,
+          "predicted": 7,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            1
+          ],
+          "computed": 21,
+          "predicted": 21,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            2
+          ],
+          "computed": 35,
+          "predicted": 35,
+          "match": true
+        },
+        {
+          "sector": [
+            3,
+            3
+          ],
+          "computed": 21,
+          "predicted": 21,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            0
+          ],
+          "computed": 9,
+          "predicted": 9,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            1
+          ],
+          "computed": 27,
+          "predicted": 27,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            2
+          ],
+          "computed": 45,
+          "predicted": 45,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            3
+          ],
+          "computed": 63,
+          "predicted": 63,
+          "match": true
+        },
+        {
+          "sector": [
+            4,
+            4
+          ],
+          "computed": 36,
+          "predicted": 36,
+          "match": true
+        }
+      ]
+    }
+  },
+  "jlo_pullback": {
+    "P_2_to_1": {
+      "n_lo": 1,
+      "n_hi": 2,
+      "inclusion_ok": true,
+      "pullback_bit_exact": true,
+      "mismatches": [],
+      "new_sectors_at_n_hi": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "new_sector_values": {
+        "[2, 0]": 2,
+        "[2, 1]": 2,
+        "[2, 2]": -4
+      }
+    },
+    "P_3_to_2": {
+      "n_lo": 2,
+      "n_hi": 3,
+      "inclusion_ok": true,
+      "pullback_bit_exact": true,
+      "mismatches": [],
+      "new_sectors_at_n_hi": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "new_sector_values": {
+        "[3, 0]": 2,
+        "[3, 1]": 2,
+        "[3, 2]": 2,
+        "[3, 3]": -6
+      }
+    },
+    "P_4_to_3": {
+      "n_lo": 3,
+      "n_hi": 4,
+      "inclusion_ok": true,
+      "pullback_bit_exact": true,
+      "mismatches": [],
+      "new_sectors_at_n_hi": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "new_sector_values": {
+        "[4, 0]": 2,
+        "[4, 1]": 2,
+        "[4, 2]": 2,
+        "[4, 3]": 2,
+        "[4, 4]": -8
+      }
+    }
+  },
+  "cm_eta_pullback": {
+    "P_2_to_1": {
+      "n_lo": 1,
+      "n_hi": 2,
+      "inclusion_ok": true,
+      "pullback_bit_exact": true,
+      "mismatches": [],
+      "new_sectors_at_n_hi": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "new_sector_values": {
+        "[2, 0]": 5,
+        "[2, 1]": 15,
+        "[2, 2]": 10
+      }
+    },
+    "P_3_to_2": {
+      "n_lo": 2,
+      "n_hi": 3,
+      "inclusion_ok": true,
+      "pullback_bit_exact": true,
+      "mismatches": [],
+      "new_sectors_at_n_hi": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ]
+      ],
+      "new_sector_values": {
+        "[3, 0]": 7,
+        "[3, 1]": 21,
+        "[3, 2]": 35,
+        "[3, 3]": 21
+      }
+    },
+    "P_4_to_3": {
+      "n_lo": 3,
+      "n_hi": 4,
+      "inclusion_ok": true,
+      "pullback_bit_exact": true,
+      "mismatches": [],
+      "new_sectors_at_n_hi": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "new_sector_values": {
+        "[4, 0]": 9,
+        "[4, 1]": 27,
+        "[4, 2]": 45,
+        "[4, 3]": 63,
+        "[4, 4]": 36
+      }
+    }
+  },
+  "jlo_berezin": {
+    "B_1_to_2": {
+      "n_lo": 1,
+      "n_hi": 2,
+      "compatibility_bit_exact": true,
+      "mismatches": []
+    },
+    "B_2_to_3": {
+      "n_lo": 2,
+      "n_hi": 3,
+      "compatibility_bit_exact": true,
+      "mismatches": []
+    },
+    "B_3_to_4": {
+      "n_lo": 3,
+      "n_hi": 4,
+      "compatibility_bit_exact": true,
+      "mismatches": []
+    }
+  },
+  "cm_eta_berezin": {
+    "B_1_to_2": {
+      "n_lo": 1,
+      "n_hi": 2,
+      "compatibility_bit_exact": true,
+      "mismatches": []
+    },
+    "B_2_to_3": {
+      "n_lo": 2,
+      "n_hi": 3,
+      "compatibility_bit_exact": true,
+      "mismatches": []
+    },
+    "B_3_to_4": {
+      "n_lo": 3,
+      "n_hi": 4,
+      "compatibility_bit_exact": true,
+      "mismatches": []
+    }
+  },
+  "total_sums": {
+    "jlo_class_sums": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0
+    },
+    "cm_eta_class_sums": {
+      "1": 6,
+      "2": 36,
+      "3": 120,
+      "4": 300
+    },
+    "predictions": {
+      "1": {
+        "M_1_predicted": 4,
+        "M_3_predicted": 6,
+        "jlo_class_sum_predicted": 0,
+        "cm_eta_class_sum_predicted": 6
+      },
+      "2": {
+        "M_1_predicted": 16,
+        "M_3_predicted": 36,
+        "jlo_class_sum_predicted": 0,
+        "cm_eta_class_sum_predicted": 36
+      },
+      "3": {
+        "M_1_predicted": 40,
+        "M_3_predicted": 120,
+        "jlo_class_sum_predicted": 0,
+        "cm_eta_class_sum_predicted": 120
+      },
+      "4": {
+        "M_1_predicted": 80,
+        "M_3_predicted": 300,
+        "jlo_class_sum_predicted": 0,
+        "cm_eta_class_sum_predicted": 300
+      }
+    }
+  },
+  "growth_rate_check": {
+    "M_3_computed": [
+      6,
+      36,
+      120,
+      300
+    ],
+    "M_3_predicted": [
+      6,
+      36,
+      120,
+      300
+    ],
+    "match": true,
+    "consecutive_ratios": [
+      {
+        "from_n": 1,
+        "to_n": 2,
+        "ratio": "6"
+      },
+      {
+        "from_n": 2,
+        "to_n": 3,
+        "ratio": "10/3"
+      },
+      {
+        "from_n": 3,
+        "to_n": 4,
+        "ratio": "5/2"
+      }
+    ],
+    "asymptotic_leading_order": "n_max^4 / 2 (M_3); n_max^3 * 2/3 (M_1); cubic growth in N(n_max) ~ n_max^2 / 2"
+  },
+  "per_sector_closed_forms": {
+    "JLO": "chi_{(n,l)} = 2 for l < n; chi_{(n,n)} = -2n; n_max-INDEPENDENT",
+    "CM_eta": "eta_{(n,l)} = (2l+1)(2n+1) for l < n; eta_{(n,n)} = n(2n+1); n_max-INDEPENDENT"
+  },
+  "verdict": "POSITIVE",
+  "pro_system_statement": "Both JLO HP^even and CM-eta classes are sector-LOCAL: per-sector value depends ONLY on sector label (n, l), NOT on cutoff n_max. Truncation pull-back P^*_{n+1 -> n} is exact sector projection. Berezin B_{n -> n+1} is exact sector inclusion. The cocycle classes form a strictly compatible inverse system in {Q^{N(n)}} with sector addition along (n+1, l), 0 <= l <= n+1, and the cohomological growth is the polynomial M_3(n) = n(n+1)^2(n+2)/2 from sub-sprint 2a."
+}

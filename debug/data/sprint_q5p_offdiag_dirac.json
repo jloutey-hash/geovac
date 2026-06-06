@@ -1,0 +1,408 @@
+{
+  "n_max_2": {
+    "sprint": "Q5'-OffDiag-Dirac",
+    "date": "2026-06-05",
+    "n_max": 2,
+    "dim_H": 16,
+    "n_sectors": 5,
+    "sectors": [
+      "(1, 0)",
+      "(1, 1)",
+      "(2, 0)",
+      "(2, 1)",
+      "(2, 2)"
+    ],
+    "kappa": "-1/16",
+    "n_idempotents": 5,
+    "n_transitions": 12,
+    "transitions": [
+      {
+        "from": "(1, 0)",
+        "to": "(1, 1)",
+        "nnz": 4,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(1, 0)",
+        "to": "(2, 1)",
+        "nnz": 10,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(1, 1)",
+        "to": "(1, 0)",
+        "nnz": 4,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(1, 1)",
+        "to": "(2, 0)",
+        "nnz": 4,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(1, 1)",
+        "to": "(2, 2)",
+        "nnz": 6,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(2, 0)",
+        "to": "(1, 1)",
+        "nnz": 4,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(2, 0)",
+        "to": "(2, 1)",
+        "nnz": 10,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(2, 1)",
+        "to": "(1, 0)",
+        "nnz": 10,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(2, 1)",
+        "to": "(2, 0)",
+        "nnz": 10,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(2, 1)",
+        "to": "(2, 2)",
+        "nnz": 16,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(2, 2)",
+        "to": "(1, 1)",
+        "nnz": 6,
+        "first_entry": "-1/16"
+      },
+      {
+        "from": "(2, 2)",
+        "to": "(2, 1)",
+        "nnz": 16,
+        "first_entry": "-1/16"
+      }
+    ],
+    "cocycle_classes": {
+      "e_(1, 0)": {
+        "chi": "2",
+        "eta": "3",
+        "eta_kappa_only": "0"
+      },
+      "e_(1, 1)": {
+        "chi": "-2",
+        "eta": "3",
+        "eta_kappa_only": "0"
+      },
+      "e_(2, 0)": {
+        "chi": "2",
+        "eta": "5",
+        "eta_kappa_only": "0"
+      },
+      "e_(2, 1)": {
+        "chi": "2",
+        "eta": "15",
+        "eta_kappa_only": "0"
+      },
+      "e_(2, 2)": {
+        "chi": "-4",
+        "eta": "10",
+        "eta_kappa_only": "0"
+      },
+      "T_(1, 0)->(1, 1)": {
+        "chi": "0",
+        "eta": "1/64"
+      },
+      "T_(1, 0)->(2, 1)": {
+        "chi": "0",
+        "eta": "5/128"
+      },
+      "T_(1, 1)->(1, 0)": {
+        "chi": "0",
+        "eta": "-1/64"
+      },
+      "T_(1, 1)->(2, 0)": {
+        "chi": "0",
+        "eta": "-1/64"
+      },
+      "T_(1, 1)->(2, 2)": {
+        "chi": "0",
+        "eta": "-3/128"
+      },
+      "T_(2, 0)->(1, 1)": {
+        "chi": "0",
+        "eta": "1/64"
+      },
+      "T_(2, 0)->(2, 1)": {
+        "chi": "0",
+        "eta": "5/128"
+      },
+      "T_(2, 1)->(1, 0)": {
+        "chi": "0",
+        "eta": "1/128"
+      },
+      "T_(2, 1)->(2, 0)": {
+        "chi": "0",
+        "eta": "1/128"
+      },
+      "T_(2, 1)->(2, 2)": {
+        "chi": "0",
+        "eta": "1/64"
+      },
+      "T_(2, 2)->(1, 1)": {
+        "chi": "0",
+        "eta": "-3/128"
+      },
+      "T_(2, 2)->(2, 1)": {
+        "chi": "0",
+        "eta": "-1/16"
+      }
+    },
+    "n_nonzero_chi_transition": 0,
+    "n_nonzero_eta_transition": 12,
+    "primitivity_test": {
+      "n_diagonal_relations_problems": 0,
+      "n_chain_composition_relations": 12,
+      "chain_relations_sample": [
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(1, 0)->(1, 1)",
+            "T_(1, 1)->(1, 0)"
+          ],
+          "intermediate_sector": "(1, 1)",
+          "lands_in": [
+            "e_(1, 0)"
+          ],
+          "decomp": {
+            "e_(1, 0)": "1/128"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(1, 0)->(2, 1)",
+            "T_(2, 1)->(1, 0)"
+          ],
+          "intermediate_sector": "(2, 1)",
+          "lands_in": [
+            "e_(1, 0)"
+          ],
+          "decomp": {
+            "e_(1, 0)": "5/256"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(1, 1)->(1, 0)",
+            "T_(1, 0)->(1, 1)"
+          ],
+          "intermediate_sector": "(1, 0)",
+          "lands_in": [
+            "e_(1, 1)"
+          ],
+          "decomp": {
+            "e_(1, 1)": "1/128"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(1, 1)->(2, 0)",
+            "T_(2, 0)->(1, 1)"
+          ],
+          "intermediate_sector": "(2, 0)",
+          "lands_in": [
+            "e_(1, 1)"
+          ],
+          "decomp": {
+            "e_(1, 1)": "1/128"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(1, 1)->(2, 2)",
+            "T_(2, 2)->(1, 1)"
+          ],
+          "intermediate_sector": "(2, 2)",
+          "lands_in": [
+            "e_(1, 1)"
+          ],
+          "decomp": {
+            "e_(1, 1)": "3/256"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(2, 0)->(1, 1)",
+            "T_(1, 1)->(2, 0)"
+          ],
+          "intermediate_sector": "(1, 1)",
+          "lands_in": [
+            "e_(2, 0)"
+          ],
+          "decomp": {
+            "e_(2, 0)": "1/128"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(2, 0)->(2, 1)",
+            "T_(2, 1)->(2, 0)"
+          ],
+          "intermediate_sector": "(2, 1)",
+          "lands_in": [
+            "e_(2, 0)"
+          ],
+          "decomp": {
+            "e_(2, 0)": "5/256"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(2, 1)->(1, 0)",
+            "T_(1, 0)->(2, 1)"
+          ],
+          "intermediate_sector": "(1, 0)",
+          "lands_in": [
+            "e_(2, 1)"
+          ],
+          "decomp": {
+            "e_(2, 1)": "1/256"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(2, 1)->(2, 0)",
+            "T_(2, 0)->(2, 1)"
+          ],
+          "intermediate_sector": "(2, 0)",
+          "lands_in": [
+            "e_(2, 1)"
+          ],
+          "decomp": {
+            "e_(2, 1)": "1/256"
+          }
+        },
+        {
+          "type": "transition_composition_chain",
+          "factors": [
+            "T_(2, 1)->(2, 2)",
+            "T_(2, 2)->(2, 1)"
+          ],
+          "intermediate_sector": "(2, 2)",
+          "lands_in": [
+            "e_(2, 1)"
+          ],
+          "decomp": {
+            "e_(2, 1)": "1/128"
+          }
+        }
+      ]
+    },
+    "off_diagonal_A_part": {
+      "total_nonzero_entries": 100,
+      "sample_entries": [
+        {
+          "i": 0,
+          "j": 2,
+          "value": "-1/16",
+          "from_sector": "(1, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 0,
+          "j": 3,
+          "value": "-1/16",
+          "from_sector": "(1, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 0,
+          "j": 6,
+          "value": "-1/16",
+          "from_sector": "(2, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 0,
+          "j": 7,
+          "value": "-1/16",
+          "from_sector": "(2, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 0,
+          "j": 8,
+          "value": "-1/16",
+          "from_sector": "(2, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 0,
+          "j": 10,
+          "value": "-1/16",
+          "from_sector": "(2, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 0,
+          "j": 11,
+          "value": "-1/16",
+          "from_sector": "(2, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 1,
+          "j": 2,
+          "value": "-1/16",
+          "from_sector": "(1, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 1,
+          "j": 3,
+          "value": "-1/16",
+          "from_sector": "(1, 1)",
+          "to_sector": "(1, 0)"
+        },
+        {
+          "i": 1,
+          "j": 7,
+          "value": "-1/16",
+          "from_sector": "(2, 1)",
+          "to_sector": "(1, 0)"
+        }
+      ]
+    },
+    "sample_commutator": {
+      "pair": [
+        "T_(1, 0)->(1, 1)",
+        "T_(1, 0)->(2, 1)"
+      ],
+      "nonzero": false
+    },
+    "wall_time_s": 0.15033364295959473
+  },
+  "n_max_3_sanity": {
+    "n_max": 3,
+    "dim_H": 40,
+    "n_sectors": 9,
+    "n_idempotents": 9,
+    "n_transitions": 28,
+    "n_nonzero_chi_transition": 0,
+    "n_nonzero_eta_transition": 28
+  }
+}

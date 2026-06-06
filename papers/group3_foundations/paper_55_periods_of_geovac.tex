@@ -1809,6 +1809,374 @@ memo's structural sketch "M3 lives outside JLO and inside the CM
 residue framework" is hereby upgraded to a theorem-grade closure
 at the bicomplex-cocycle-class level.
 
+\emph{Stage~1 pro-system functoriality across cutoffs (Sprint
+Q5'-Stage1-Prosystem, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_prosystem\_memo.md}, data
+\texttt{debug/data/sprint\_q5p\_prosystem.json}).}
+The Stage-1 cocycle classes form a strictly compatible inverse system
+across $n_{\max} \in \{1, 2, 3, 4\}$.  Sector idempotents at cutoff
+$n_{\max}$ are indexed by $(n, l)$ with $1 \le n \le n_{\max}$ and
+$0 \le l \le n$, giving $N(n_{\max}) = n_{\max}(n_{\max}+3)/2$ sectors
+($2, 5, 9, 14$) nested by inclusion.  The truncation
+$P_{n+1 \to n}: \mathcal{O}_{n+1} \to \mathcal{O}_n$ is sector
+projection (algebra homomorphism);\ the algebraic Berezin
+$B_{n \to n+1}$ is sector inclusion.  Per-sector closed forms
+\[
+   \chi_{(n, l)} = \begin{cases} +2 & l < n \\ -2n & l = n \end{cases},
+   \qquad
+   \eta_{(n, l)} = \begin{cases} (2l+1)(2n+1) & l < n \\ n(2n+1) & l = n \end{cases},
+\]
+each $n_{\max}$-independent, give pro-system functoriality at the
+class level bit-exactly:\ $P^*_{n+1 \to n}[\psi^{(n+1)}] = [\psi^{(n)}]$
+holds across all three consecutive cutoff pairs for both cocycle
+classes (six bit-exact zero residuals plus six Berezin compatibility
+identities).  Total sum invariants match the Sub-Sprint~2a polynomial
+closed forms $M_1, M_3$ bit-exactly at all four cutoffs;\ the
+McKean--Singer index $\sum_s \chi_s = 0$ is preserved cutoff-uniformly.
+The clean cleanliness of the rule is the cohomological-side trace of
+the Camporesi--Higuchi shell decomposition's sector-locality:\ adding
+a higher shell does not modify the Dirac structure of lower shells,
+so per-sector cocycle-class values are cutoff-independent functions of
+$(n, l)$ alone.  Closing the strict-strong-form question (pro-system
+functoriality at the level of \emph{cochain morphisms} in the
+entire-cyclic bicomplex, rather than at the class level closed here)
+is sharpened to a bit-exact dichotomy by the strict-strong-form drift
+diagnostic below;\ the multi-year NCG-mathematics gap addressed by
+Connes 1994 Ch.~IV and Loday \S~1.4 remains open, orthogonal to and
+independent of the Stage-1 class-level closure documented here.
+
+\emph{Stage 2 first scoping step:\ candidate Hopf algebra
+$\mathcal{H}_{\mathrm{GV}}$ (Sprint Q5'-Stage2-Hopf, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_stage2\_hopf\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_stage2\_hopf.json}).}  Building on the
+pro-system substrate above, the first scoping step of Stage 2 produces
+a concrete bit-exact finite-cutoff candidate Hopf algebra
+\[
+\mathcal{H}_{\mathrm{GV}}^{(n_{\max})} = \mathrm{Sym}_{\Q}\!\left(\bigoplus_{(n, l) \in \mathcal{S}_{n_{\max}}}\bigoplus_{k \in \{0, 1, 2\}} \Q\cdot x_{(n, l), k}\right),
+\]
+the polynomial algebra on $3 N(n_{\max})$ primitive generators (15 at
+$n_{\max} = 2$, 27 at $n_{\max} = 3$), where $k \in \{0, 1, 2\}$ indexes
+the Mellin slot.  With primitive coproduct, the standard counit
+$\varepsilon(x_g) = 0$, and antipode $S(x_g) = -x_g$, all five Hopf
+axioms hold bit-exactly at $n_{\max} \in \{2, 3\}$ (269 zero residuals
+on the axiom panel:\ 52 coassociativity, 104 counit, 104 antipode, 9
+bialgebra-compatibility);\ the Mellin-slot $k$-grading is preserved by
+$\Delta$ (42 zero residuals), giving the structural product
+factorisation $\mathcal{H}_{\mathrm{GV}} = \mathcal{H}_{\mathrm{GV}}^{[0]}
+\otimes \mathcal{H}_{\mathrm{GV}}^{[1]} \otimes \mathcal{H}_{\mathrm{GV}}^{[2]}$;\
+and the pro-system truncation $P_{n+1 \to n}$ lifts bit-exactly to a
+Hopf-algebra homomorphism (126 zero residuals on the truncation panel).
+The candidate motivic Galois group at finite cutoff is the additive
+affine group $U^{*(n_{\max})}_{\mathrm{GeoVac}} = \mathbb{G}_a^{3 N(n_{\max})}$
+with the M1/M3/M2-respecting product structure
+$\prod_{k = 0}^{2} \mathbb{G}_a^{N(n_{\max})}$.  Structurally,
+$\mathcal{H}_{\mathrm{GV}}$ is the \emph{abelian primitive-cospan} of
+the Connes--Kreimer Hopf algebra of Feynman graphs (Connes--Kreimer
+1998, arXiv:hep-th/9808042) --- same generator-and-grading shape, same
+pro-system truncation, but with the sub-graph coproduct of
+Connes--Kreimer replaced by the primitive coproduct here because the CH
+Fock sector idempotents are pairwise orthogonal (sector-disjoint, no
+nesting).  The natural multi-year continuation for Stage 2's full
+Tannakian construction (Connes--Marcolli 2007, arXiv:math/0409306;\
+Connes--Marcolli book 2008 Ch.~4) is to enrich the coproduct with a
+sub-sector or nested-Hopf-tower structure that introduces non-abelian
+pro-unipotent content.  Three candidate structural ingredients are
+flagged in the memo:\ nested-Hopf-tower $J^*(\sthree)$, cross-shell
+off-diagonal Dirac perturbation, and JLO/CM bicomplex Cuntz extension.
+The substrate established here is the concrete object that Stage 2's
+multi-year program acts on.
+
+\emph{Stage 1 sub-sprint strict-strong-form pro-system functoriality
+diagnostic (Sprint Q5'-Stage1-StrictStrong, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_strict\_strong\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_strict\_strong.json}).}
+The v3.60.0 pro-system result that the JLO HP$^{\mathrm{even}}$ class
+and CM-$\eta$ class form a strictly compatible inverse system at the
+level of cocycle CLASSES extends to a sharp dichotomy when probed at
+the cochain-morphism level.  The degree-3 closure residual
+$(b\phi_2 + B\phi_4)$ at $t^0$ on the $(e_2, e_3)$ palindromic 4-tuples
+takes bit-exact rational values $\pm 1/(3 \cdot 2^{16})$ at $n_{\max} = 2$,
+transitioning to $\pm 1/2^{16}$ at $n_{\max} = 3$ and remaining
+bit-exactly fixed there for $n_{\max} = 4$.  The cochain-level pull-back
+$P^*_{3 \to 2}[\phi_4^{(3)}]$ does not equal $\phi_4^{(2)}$ on common
+inputs;\ the increment $\Delta(B\phi_4) = -1/(3 \cdot 2^{14})$ closes
+the residual identity bit-exactly:\ $1/196608 + (-1/49152) = -1/65536$.
+The CM-$\eta$ cocycle has the structurally analogous pattern at
+degree 3 (drift $-59/(3 \cdot 2^{18}) \to \pm 1/2^{13}$, fixed-point
+from $n_{\max} = 3$ onward), confirming that the Track 1 clean-cochain
+identification of CM-$\eta$ is restricted to degree 1.  Both cocycle
+towers therefore fail strict cochain-morphism functoriality on
+commutative $\mathcal{A}$ at every tested cutoff $n_{\max} \ge 2$.
+The pro-system verdict at the cochain-morphism level is bit-exact
+non-strict with $n_{\max} = 3$ fixed-point structural drift;\ the
+verdict at the class level is bit-exact strict (v3.60.0).  This sharp
+dichotomy constitutes the bit-exact empirical content of the
+published-open Connes 1994 Ch.~IV / Loday \S 1.4 gap on entire-cyclic
+functoriality under algebra truncations, made explicit on the
+truncated CH commutative sub-algebra in the GeoVac substrate.
+
+\emph{Tauberian rate uniformity at $s = 3/2$ closed (Sprint
+Q5'-Stage1-Tauberian, 2026-06-05;\ memo
+\texttt{debug/sprint\_q5p\_tauberian\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_tauberian.json}).}  The Stage-1 named
+follow-on on uniform rate of approach to the M1 Mellin residue at
+$s = 3/2$ is closed at Paper~38 L2 grade.  The four hypotheses of the
+standard uniform Tauberian theorem (Karamata~\cite{karamata1962}
+\S~V.3;\ Korevaar~\cite{korevaar2004} \S~III.4;\
+Tenenbaum~\cite{tenenbaum2015} \S~II.7 Thm~II.7.7) transport bit-exactly:\
+positivity, polynomial growth, simple-pole meromorphic continuation
+(v3.59.0 Track 2), vertical-strip boundedness.  On the compact
+above-pole neighborhood $U_{>} = [3/2 + \epsilon, 3/2 + 1/4]$ the
+remainder $\sup_{s \in U_{>}} |\zeta_{D^2}^{(N)}(s) - \zeta_{D^2}^{\mathrm{cont}}(s)|$
+decays uniformly as $O(N^{-2\epsilon + \delta})$.  Boundary-saturation
+verified bit-exactly:\ $\sup$ attained at $s = 25/16$ (closest grid
+point above pole) at every cutoff $n_{\max} \in \{2, 3, 4, 5\}$;\
+empirical decay slope $-0.092$ at $n_{\max} \in \{2,\ldots,5\}$
+monotonically approaches the predicted $-1/8 = -0.125$, hitting
+$-0.123$ at $n_{\max} = 100$.
+
+\emph{Stage 1 third span:\ continuum M3 Mellin residue and integer-$s$
+panel (Sprint Q5'-Stage1-M3-Continuum, 2026-06-05;\ memo
+\texttt{debug/sprint\_q5p\_m3\_continuum\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_m3\_continuum.json}).}  Closes the
+named M3 continuum-residue follow-on of v3.59.0 Track 2 at Paper~38 L2
+grade.  The continuum $\eta$-Dirichlet series
+$\eta_D(s) = \sum_{n \ge 0} g_n |\lambda_n|^{1 - s}$ has the Hurwitz
+reduction $\eta_D(s) = 2 \zeta(s - 3, 3/2) - \tfrac{1}{2} \zeta(s - 1, 3/2)
+= D(s - 1)$ (Paper~28's Dirac Dirichlet series), with TWO simple
+poles at $s = 4$ and $s = 2$ of bit-exact meromorphic residues $2$ and
+$-1/2$ respectively (two independent routes:\ Hurwitz pole rule +
+direct Laurent via digamma).  Mellin residues
+$\mathrm{Res}_{s=4} \Gamma(s) \eta_D(s) = 12$ and
+$\mathrm{Res}_{s=2} \Gamma(s) \eta_D(s) = -1/2$ are rational-integer;\
+the genuine M3 cyclotomic content lives in the chirality-resolved
+$(D_{\mathrm{even}} - D_{\mathrm{odd}})(s - 1)$ via the
+$\Q(i) = \Q(\zeta_4)$ Galois descent (Q5'-CH-3 panel reproduced
+verbatim at $s \in \{3, 5, 7\}$:\ $-1 + 2G$, $8 \beta_4 - 8G$,
+$-32 \beta_4 + 32 \beta_6$).  Discrete-side Karamata Tauberian
+signature on the v3.60.0 substrate:\ $S(n_{\max}) / \log(n_{\max}) \to 2$
+at $n_{\max} \ge 200$ matches the residue exactly, with no Jacobian
+correction (natural $\eta$-Mellin variable IS the spectral
+$|\lambda| = n + 1/2$).  \emph{Structural finding (M1/M3 asymmetry IS
+the operational content of the master-Mellin partition):}\ unlike M1
+(three exact-factor sibling normalizations $\pi$, $4/\pi$,
+$\sqrt{\pi}/2$ of a single generator;\ Paper 18 §III.7 / Paper 38 §VIII
+/ v3.59.0 Track 2), M3's ring $\mathcal{MT}(\Z[i, 1/2], 4)$ is
+depth-graded with successive generators $\{1, G, \beta_4, \beta_6, \ldots\}$
+and no $\pi$-power reduction at any depth $\ge 1$
+(Apéry-style irrationality).  M1 lives at $k = 0$ depth $0$ pure-Tate;\
+M3 lives at $k = 1$ depth $1+$ cyclotomic level $4$.
+
+\emph{Substrate enrichment:\ nested-Hopf-tower $J^*(S^3)$ (Sprint
+Q5'-J-Star-S3, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_j\_star\_s3\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_j\_star\_s3.json}).}  A first scoping
+step of the first of three multi-year enrichment ingredients flagged
+in the Stage-2 Hopf paragraph above replaces the sector-disjoint
+$\mathbb{C}^{N(n_{\max})}$ substrate with the SU(2) Peter--Weyl
+matrix-coefficient substrate $J^*_{j_{\max}}(S^3)$.  The
+matrix-coefficient coproduct $\Delta \pi^j_{mn} = \sum_p \pi^j_{mp}
+\otimes \pi^j_{pn}$ is bit-exactly non-primitive on every $j > 0$
+generator at $j_{\max} \in \{1/2, 1, 3/2\}$;\ coassociativity and
+counit pass bit-exactly in the free polynomial algebra (147 zero
+residuals);\ antipode axiom holds at the standard
+$\mathcal{O}(SU(2)) \cong \mathcal{O}(SL_2)$ quotient by SU(2)
+unitarity relations;\ pro-system truncation lifts to a Hopf-algebra
+homomorphism (132 zero residuals).  The candidate motivic Galois
+group at the quotient is $SL_2$ at every $j_{\max} \ge 1/2$ ---
+non-abelian semisimple algebraic group.  The enrichment trade is
+axis-orthogonal:\ $J^*(S^3)$ has non-abelian content but no Mellin-slot
+$k$-partition;\ v3.61.0's $\mathcal{H}_{\mathrm{GV}}$ has the Mellin
+partition but is abelian.  Natural multi-year synthesis:\ tensor
+product giving $U^* = \mathbb{G}_a^{3 N} \times SL_2$ (Levi-decomposition
+shape, the right Stage-2 target).
+
+\emph{Substrate enrichment:\ cross-shell off-diagonal Dirac (Sprint
+Q5'-OffDiag-Dirac, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_offdiag\_dirac\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_offdiag\_dirac.json}).}  The first
+scoping step of the second enrichment ingredient (cross-shell
+off-diagonal Dirac perturbation via $E_1$-dipole transition
+generators $T_{s' \to s} := e_s \cdot (\kappa A) \cdot e_{s'}$ in the
+CH spectral triple at $n_{\max} = 2$) closes POSITIVE.  The enriched
+substrate has 5 idempotent + 12 single-step transition generators
+with non-trivial matrix-algebra relations:\ all 12 transitions carry
+non-vanishing $\eta$-class values in $\kappa^2 \cdot \mathbb{Z}$
+(sector-locality breakdown), 12 chain compositions land on idempotents
+forcing non-primitive coproduct cross-terms with bit-exact non-zero
+$\eta \otimes \eta$ image, and 18 chain compositions land on two-step
+transitions outside the basic basis (algebra-closure failure --- the
+load-bearing multi-year follow-on).  24 of 66 = 36\% of transition-pair
+commutators are non-zero, giving explicit non-abelian Lie generators.
+\emph{Structural alignment with v3.61.0 Track B drift:}\ the
+non-primitivity content has denominator family
+$\kappa^2 \cdot \mathbb{Z} = 2^{-8} \cdot \mathbb{Z}$ times inverse
+path counts, structurally aligned with the bit-exact $\pm 1/2^{16}$
+closure drift residual of v3.61.0 Track B on $(e_2, e_3)$ palindromes
+modulo a $2^3$ JLO simplex normalization factor --- supporting at the
+structural level the conjecture from the v3.61.0 umbrella that the two
+findings of v3.61.0 are aspects of one Stage-2 substrate-enrichment
+story.  Multi-year next steps:\ algebra-closure dimension at general
+$n_{\max}$, closed-form Lie structure constants, bit-exact bridge
+identification.
+
+\emph{Substrate enrichment:\ Cuntz extension is structurally
+incompatible (Sprint Q5'-Cuntz, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_cuntz\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_cuntz.json}).}  Of the three
+substrate-enrichment ingredients flagged in the Stage-2 Hopf paragraph
+above, the first scoping step of the third returns a structural
+negative.  Replacing the commutative algebra $\mathbb{C}^{N(n_{\max})}$
+of sector idempotents by the Cuntz algebra $\mathcal{O}_N$ generated
+by $N = 3 N(n_{\max})$ isometries $S_{(n, l), k}$ produces a
+non-commutative substrate, but both natural coproduct candidates fail
+compatibility with the Cuntz defining relations bit-exactly:\ the
+primitive coproduct $\Delta(S_i) = S_i \otimes 1 + 1 \otimes S_i$
+fails $S_i^* S_j = \delta_{ij}$ on $0/225$ pairs at $n_{\max} = 2$,
+and the diagonal coproduct $\Delta(S_i) = S_i \otimes S_i$ passes the
+first Cuntz relation but fails $\sum_i S_i S_i^* = 1$ by exactly
+$N(N - 1) = 210$ missing cross-terms.  Structurally, $\mathcal{O}_N$
+is a Hopf-\emph{comodule} over gauge $U(1)$ rather than a
+Hopf-algebra (Pimsner--Voiculescu 1980, \emph{J. Operator Theory} 4;\
+Pimsner 1997, Fields Inst. Commun. 12;\ Connes--Cuntz 1988,
+Commun. Math. Phys. 114).  The M1/M2/M3 partition survives only at
+the trivial comodule level via fixed-$k$ generator labels;\ the clean
+Hopf tensor product established for the commutative case is
+structurally weakened.  \emph{The Cuntz route is the structurally
+most disruptive of the three enrichment ingredients;\ the remaining
+two preserve the Hopf-algebra category and are correspondingly more
+tractable.}  Multi-year continuation via Pimsner--Voiculescu sequence.
+
+\emph{Stage 2 HEADLINE substrate:\ Levi-decomposition tensor synthesis
+(Sprint Q5'-Levi-Synthesis, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_levi\_synthesis\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_levi\_synthesis.json}).}  Combining the
+v3.61.0 abelian primitive substrate with the v3.62.0 Peter--Weyl
+substrate via tensor product
+$\mathcal{H}_{\mathrm{GV}}^{\mathrm{Levi}, (n_{\max}, j_{\max})}
+:= \mathcal{H}_{\mathrm{v3.61}}^{(n_{\max})} \otimes_{\Q} \mathcal{H}^{J^*, j_{\max}}$
+gives the HEADLINE Stage-2 substrate.  At finite cutoff
+$(n_{\max}, j_{\max}) \in \{(2, 1/2), (2, 1), (3, 1/2)\}$, all five Hopf
+axioms hold bit-exactly with $k$-grading preserved on the first factor
+and non-cocommutativity preserved on the second --- 882 bit-exact zero
+residuals (636 axiom + 246 truncation).  The candidate motivic Galois
+group at the standard $\mathcal{O}(SL_2)$ quotient is
+$U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \times SL_2$ via the
+Tannakian theorem (Waterhouse 1979 §1.4;\ Sweedler 1969 Ch.~IV;\
+Deligne 1990).  The semidirect product reduces to a direct product
+because the Levi action on the unipotent radical is trivial:\ v3.61.0's
+generators carry no $SU(2)$ representation content, so any $SL_2$
+element acts as identity (Hochschild 1981 Ch.~VII).  Dimensions:\ 18 at
+$n_{\max} = 2$, 30 at $n_{\max} = 3$ (independent of $j_{\max} \ge 1/2$
+because the Peter--Weyl filtration is internal to $\mathcal{O}(SL_2)$).
+The Levi-decomposition shape (pro-unipotent times semisimple) is the
+published structural target for the cosmic-Galois $U^*$ in
+Connes--Marcolli's motivic Galois machinery (arXiv:math/0409306;\ book
+2008 Ch.~4).  \emph{The Stage-2 substrate-construction phase of the
+Q5' program closes here.}  Multi-year continuation:\ (a) full Tannakian
+closure of the pro-unipotent factor;\ (b) verification that the
+cosmic-Galois $U^*$ acts on $\mathcal{H}_{\mathrm{Levi}}$ in the
+expected way.
+
+\emph{Mellin-slot-decorated Peter--Weyl substrate:\ alternative synthesis
+$U^* = SL_2^3$ (Sprint Q5'-Decorated-PW, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_decorated\_pw\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_decorated\_pw.json}).}  The alternative
+synthesis flagged in the J$^*(S^3)$ paragraph above option (b) --- the
+Mellin-slot-decorated Peter--Weyl substrate $\pi^{j, k}_{mn}$ at
+$j_{\max} \in \{1/2, 1\}$ with $n_k = 3$ Mellin slots and
+$k$-preserving coproduct --- passes all Hopf axioms bit-exactly with
+the standard counit and per-slot $SU(2) \to SL_2$ quotient (411 zero
+residuals).  The substrate factorises as
+$\mathcal{O}(SL_2)^{\otimes 3}$, giving candidate motivic Galois group
+$U^* = SL_2^3$ with the three master Mellin engine mechanisms M1, M2,
+M3 realised as three independent non-abelian semisimple $SL_2$ factors.
+The alternative $k$-summing coproduct ($\mathbb{Z}/3$-graded) breaks
+the antipode axiom at the per-slot $SU(2)$ quotient by a factor of
+$n_k = 3$, requiring $1/n_k \in \Q(1/3)$ to fix and breaking the
+discrete-for-skeleton discipline.  The two synthesis routes
+(L1 Levi-decomposition $\mathbb{G}_a^{3 N} \times SL_2$ vs L2 decorated
+$SL_2^3$) capture different aspects of the Stage-2 substrate:\ the
+tensor synthesis treats v3.61.0's abelian primitives as independent
+content with explicit M-slot grading;\ the decorated-PW treats the
+M1/M2/M3 partition as three independent $SL_2$ symmetries.  Both are
+valid candidates;\ the strategic choice is the next sprint-scale
+decision in the multi-year Stage-2 program.
+
+\emph{Combined substrate scoping:\ L5 = L1 categorically (Sprint
+Q5'-Combined-Substrate, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_combined\_substrate\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_combined\_substrate.json}).}  The first
+multi-year scoping step of combining the T3a Peter--Weyl substrate and
+the T3b cross-shell off-diagonal Dirac substrate on a SINGLE combined
+substrate closes the categorical question:\ \textbf{at the basic
+substrate level, L5 reduces to L1 --- the categorical tensor product}.
+Two clean structural obstructions block the smash-product upgrade:\
+(i) Peter--Weyl matrix coefficients are polynomial \emph{functions} on
+$SL_2$ (in $\mathcal{O}(SL_2)$);\ OffDiag transitions are
+\emph{operators} on the CH Hilbert space with scalar cocycle data ---
+categorically different objects, no consistent identification at the
+panel level;\ (ii) the natural $SU(2)$ z-rotation does NOT preserve the
+basic 5-sector OffDiag basis bit-exactly (symbolic computation produces
+three distinct phase factors $\{1, e^{i\theta}, e^{-i\theta}\}$, so the
+conjugate lives in $m_J$-resolved sub-transitions outside the basic
+basis).  This \emph{confirms} L1's Levi-decomposition
+$\mathbb{G}_a^{3 N} \times SL_2$ as the right Stage-2 target (no
+richer smash-product structure available at the basic substrate
+level), ruling out a category of multi-year continuations.  Genuinely
+new content (a non-trivial smash product) lives at the $m_J$-resolved
+refinement of the OffDiag basis, sacrificing the v3.61.0 sector
+structure;\ multi-year.
+
+\emph{Bridge identity bit-exactly closing the T3b umbrella (Sprint
+Q5'-Bridge-Id, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_bridge\_id\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_bridge\_id.json}).}  The bit-exact
+bridge identification flagged as a feasible follow-on in the
+Q5'-OffDiag-Dirac paragraph above closes via the single identity
+$\mathrm{drift}_{n_{\max} \ge 3}(e_2, e_3, e_3, e_2) = -\kappa^4
+= -1/2^{16} = -1/65536$, with four bit-exact equivalent forms:\ direct,
+via OffDiag $\eta \otimes \eta$ as $-(5/8192)/40$, via JLO simplex
+times interior path count $-(1/4!) \cdot \kappa^4 \cdot 24$, and as
+boundary cutoff $+(1/4!) \cdot \kappa^4 \cdot 8 = +\kappa^4/3$.  Three
+named structural ingredients:\ JLO simplex factor $1/4! = 1/(3 \cdot 2^3)$
+(the $2^3$ piece reconciling $2^{13}$ vs $2^{16}$);\ Dirac off-diagonal
+weight $\kappa^4 = 1/2^{16}$;\ integer two-step path counts
+$T_{\mathrm{path}}^{\mathrm{int}} = 24$ (interior),
+$T_{\mathrm{path}}^{\mathrm{bdy}} = 8$ (boundary).  Bit-exact
+integer-lattice arithmetic:\ boundary-vs-interior $-3 = 24/8$, pullback
+closure $32 = 24 + 8$, T3b numerator $5 = 40/8$ where
+$40 = 2 \cdot 10 \cdot 2$.  \emph{Track A v3.61.0 + Track B v3.61.0 +
+T3b v3.62.0 are all aspects of the same $\kappa^4$ structure}, joined
+explicitly by integer two-step E1 path counts on the OffDiag substrate.
+Multi-year follow-ons (closed-form $T_{\mathrm{path}}(n_{\max})$,
+Lie-algebra structure constants, continuum-limit Mellin lift to M3)
+remain open.
+
+\emph{OffDiag algebra-closure dimension scaling at $n_{\max} = 3$
+(Sprint Q5'-OffDiag-Closure-nmax3, June 2026;\ memo
+\texttt{debug/sprint\_q5p\_offdiag\_closure\_memo.md};\ data
+\texttt{debug/data/sprint\_q5p\_offdiag\_closure.json}).}  The first
+multi-year scoping step of OffDiag algebra-closure dimension at general
+$n_{\max}$ closes POSITIVE.  The closure
+$\mathcal{A}_{\mathrm{OD}}^{(n_{\max})}
+= \Q\langle e_s, A_{\mathrm{off}}\rangle$ is bit-exactly the path
+algebra of the sector quiver realised in $M_{\dim H}(\Q)$ via the
+canonical adjacency representation $A_{\mathrm{off}}
+= D - \Lambda = \kappa A_{\mathrm{graph}}$:\
+$\dim \mathcal{A}_{\mathrm{OD}}^{(2)} = 84$ and
+$\dim \mathcal{A}_{\mathrm{OD}}^{(3)} = 592$, decomposing as a sum of
+per-block ranks over all $N(n_{\max})^2$ sector pairs.  Fill-fractions
+$84/256 = 21/64$ and $592/1600 = 37/100$ slowly increasing (asymptotic
+limit requires $n_{\max} = 4$);\ Lie subalgebra of single-step
+transitions does NOT close (82 of 378 commutator pairs outside the
+28-dim transition span at $n_{\max} = 3$).  Named sprint-scale
+follow-on:\ $n_{\max} = 4$ extension.  Multi-year:\ closed-form
+per-block rank from quiver combinatorics + embedding of the
+$\mathcal{A}_{\mathrm{OD}}^{(n_{\max})}$ inductive system into the
+pro-unipotent factor of the cosmic-Galois $U^*$ Hopf algebra
+(Connes--Marcolli 2007).
+
 \emph{Honest scope.}  The QSM / Bost--Connes / Greenfield--Marcolli--Teh
 lineage (Greenfield--Marcolli--Teh, arXiv:1305.5492 (2014);\
 Connes--Marcolli--Ramachandran, arXiv:math/0501424 (2005);\

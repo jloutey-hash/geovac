@@ -1,0 +1,192 @@
+{
+  "sprint": "Q5p_J_star_S3",
+  "date": "2026-06-05",
+  "panel_cutoffs_2j": [
+    1,
+    2,
+    3
+  ],
+  "panel_j_max_descriptions": [
+    "1/2",
+    "1",
+    "3/2"
+  ],
+  "discipline": "bit-exact sympy.Rational; free matrix-coefficient algebra (no SU(2) defining relations imposed)",
+  "dimensional_match": [
+    {
+      "j_max_2": 1,
+      "dim_J_star": 5,
+      "ch_n_max_exact_match": 2,
+      "ch_n_max_nearest": 2
+    },
+    {
+      "j_max_2": 2,
+      "dim_J_star": 14,
+      "ch_n_max_exact_match": 4,
+      "ch_n_max_nearest": 4
+    },
+    {
+      "j_max_2": 3,
+      "dim_J_star": 30,
+      "ch_n_max_exact_match": null,
+      "ch_n_max_nearest": 6
+    },
+    {
+      "j_max_2": 4,
+      "dim_J_star": 55,
+      "ch_n_max_exact_match": null,
+      "ch_n_max_nearest": 9
+    }
+  ],
+  "substrate_dims": {
+    "1/2": 5,
+    "1": 14,
+    "3/2": 30
+  },
+  "non_primitive": {
+    "1/2": {
+      "total_non_primitive": 4,
+      "by_shell": {
+        "0.0": {
+          "shell_dim": 1,
+          "non_primitive_count": 0
+        },
+        "0.5": {
+          "shell_dim": 4,
+          "non_primitive_count": 4
+        }
+      }
+    },
+    "1": {
+      "total_non_primitive": 13,
+      "by_shell": {
+        "0.0": {
+          "shell_dim": 1,
+          "non_primitive_count": 0
+        },
+        "0.5": {
+          "shell_dim": 4,
+          "non_primitive_count": 4
+        },
+        "1.0": {
+          "shell_dim": 9,
+          "non_primitive_count": 9
+        }
+      }
+    },
+    "3/2": {
+      "total_non_primitive": 29,
+      "by_shell": {
+        "0.0": {
+          "shell_dim": 1,
+          "non_primitive_count": 0
+        },
+        "0.5": {
+          "shell_dim": 4,
+          "non_primitive_count": 4
+        },
+        "1.0": {
+          "shell_dim": 9,
+          "non_primitive_count": 9
+        },
+        "1.5": {
+          "shell_dim": 16,
+          "non_primitive_count": 16
+        }
+      }
+    }
+  },
+  "worked_example_delta_j_half_plus_half_minus_half": {
+    "n_summands": 2,
+    "is_primitive": false,
+    "summands_count_eq_2j_plus_1": true
+  },
+  "coassociativity": {
+    "1/2": {
+      "passed": 5,
+      "total": 5
+    },
+    "1": {
+      "passed": 14,
+      "total": 14
+    },
+    "3/2": {
+      "passed": 30,
+      "total": 30
+    }
+  },
+  "counit": {
+    "1/2": {
+      "left_passed": 5,
+      "right_passed": 5,
+      "total": 5
+    },
+    "1": {
+      "left_passed": 14,
+      "right_passed": 14,
+      "total": 14
+    },
+    "3/2": {
+      "left_passed": 30,
+      "right_passed": 30,
+      "total": 30
+    }
+  },
+  "antipode": {
+    "1/2": {
+      "left_passed_FREE": 0,
+      "right_passed_FREE": 0,
+      "total": 5,
+      "comment": "FREE polynomial algebra: antipode holds for j=0 (trivial), fails for j > 0 by the unitarity polynomial U^T U - I. The axiom holds at the QUOTIENT H_GV^{J*} / (SU(2) orthogonality relations) by construction.",
+      "sample_unitarity_residual": []
+    },
+    "1": {
+      "left_passed_FREE": 0,
+      "right_passed_FREE": 0,
+      "total": 14,
+      "comment": "FREE polynomial algebra: antipode holds for j=0 (trivial), fails for j > 0 by the unitarity polynomial U^T U - I. The axiom holds at the QUOTIENT H_GV^{J*} / (SU(2) orthogonality relations) by construction.",
+      "sample_unitarity_residual": []
+    },
+    "3/2": {
+      "left_passed_FREE": 0,
+      "right_passed_FREE": 0,
+      "total": 30,
+      "comment": "FREE polynomial algebra: antipode holds for j=0 (trivial), fails for j > 0 by the unitarity polynomial U^T U - I. The axiom holds at the QUOTIENT H_GV^{J*} / (SU(2) orthogonality relations) by construction.",
+      "sample_unitarity_residual": []
+    }
+  },
+  "truncation": {
+    "1_to_1/2": {
+      "delta_compat_pass": 14,
+      "delta_compat_fail": 0,
+      "eps_compat_pass": 14,
+      "eps_compat_fail": 0,
+      "antipode_compat_pass": 14,
+      "antipode_compat_fail": 0
+    },
+    "3/2_to_1": {
+      "delta_compat_pass": 30,
+      "delta_compat_fail": 0,
+      "eps_compat_pass": 30,
+      "eps_compat_fail": 0,
+      "antipode_compat_pass": 30,
+      "antipode_compat_fail": 0
+    }
+  },
+  "motivic_galois_group": {
+    "1/2": {
+      "dim_substrate_free": 5,
+      "structure_description": "spin-0 piece is unit; spin-1/2 piece has 4 free generators with O(M_2) coalgebra structure. Quotient by det=1 gives O(SL_2). Spec(H_GV^{J*}^{(1/2)}/(det-1)) = SL_2 algebraic group. NON-ABELIAN (SL_2 is the simplest non-abelian simple algebraic group)."
+    },
+    "1": {
+      "dim_substrate_free": 14,
+      "structure_description": "extends to spin-1 (3-dim irrep, 9 generators) with O(M_3) shape, restricted to symmetric square of fundamental. Quotient by SU(2) defining relations gives O(SU(2)) acting on rep V_0 + V_{1/2} + V_1. Spec = SL_2 still (since spin-1 matrix coeffs are polynomials in spin-1/2 ones \u2014 the Peter-Weyl filtration is INTERNAL to O(SL_2))."
+    },
+    "3/2": {
+      "dim_substrate_free": 30,
+      "structure_description": "extends to spin-3/2 (16 generators). Same conclusion: O(SU(2)) at the quotient; algebraic group SL_2."
+    }
+  },
+  "total_bit_exact_zero_residuals": 279,
+  "wall_time_s": 0.05296340002678335
+}

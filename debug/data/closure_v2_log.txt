@@ -1,0 +1,179 @@
+======================================================================
+Sprint Q5'-OffDiag-Closure-nmax3 -- n_max = 2
+======================================================================
+dim H = 16, n_sectors = 5
+sectors = [(1, 0), (1, 1), (2, 0), (2, 1), (2, 2)]
+
+# idempotents: 5
+# single-step transitions: 12
+
+Basic single-step transitions (s_from -> s_to):
+  (1, 0) -> (1, 1)
+  (1, 0) -> (2, 1)
+  (1, 1) -> (1, 0)
+  (1, 1) -> (2, 0)
+  (1, 1) -> (2, 2)
+  (2, 0) -> (1, 1)
+  (2, 0) -> (2, 1)
+  (2, 1) -> (1, 0)
+  (2, 1) -> (2, 0)
+  (2, 1) -> (2, 2)
+  (2, 2) -> (1, 1)
+  (2, 2) -> (2, 1)
+
+--- Chain composition classification (Step 2 of prompt) ---
+  Time: 0.01s
+  Total pairs (T1, T2): 144
+  Non-chain (s1 != s2): 114
+  Chain, T2*T1 = 0: 0
+  Chain, T2*T1 lands on idempotent (s0 = s3): 12
+  Chain, T2*T1 lands on single-step (|n_s3 - n_s0| = 1): 14
+  Chain, T2*T1 lands on two-step (|n_s3 - n_s0| in {0, 2}, s0 != s3): 4
+
+--- Per-block closure dimension ---
+  Computing powers A^k for k = 0, ..., 15...
+    Computed 16 powers in 0.02s
+  Computing per-block dims for 25 sector pairs (incl. diagonals)...
+    Per-block computation done in 0.07s
+  Closure computation time: 0.09s
+
+  TOTAL CLOSURE DIM at n_max = 2: 84
+  Number of nonzero blocks: 25 of 25 possible
+
+  Top 15 blocks (by max_dim = d_to * d_from):
+          from         to  d_to d_from  max rank  fill
+        (2, 1)     (2, 1)     6      6   36    5 0.14
+        (2, 2)     (2, 1)     6      4   24    4 0.17
+        (2, 1)     (2, 2)     4      6   24    4 0.17
+        (2, 2)     (2, 2)     4      4   16    5 0.31
+        (2, 1)     (1, 0)     2      6   12    4 0.33
+        (2, 1)     (1, 1)     2      6   12    4 0.33
+        (2, 1)     (2, 0)     2      6   12    4 0.33
+        (1, 0)     (2, 1)     6      2   12    4 0.33
+        (1, 1)     (2, 1)     6      2   12    4 0.33
+        (2, 0)     (2, 1)     6      2   12    4 0.33
+        (2, 2)     (1, 0)     2      4    8    4 0.50
+        (2, 2)     (1, 1)     2      4    8    4 0.50
+        (2, 2)     (2, 0)     2      4    8    4 0.50
+        (1, 0)     (2, 2)     4      2    8    4 0.50
+        (1, 1)     (2, 2)     4      2    8    4 0.50
+
+  Path-algebra upper bound (sum dim_s*dim_t over all sector pairs): 256
+  dim(H)^2: 256
+  Closure fills: 84 / 256 = 21/64
+
+--- Lie sub-algebra test ---
+  Time: 0.79s
+  Lin-indep transitions: 12 of 12
+  Commutator pairs (i<j): 66
+    Zero: 42
+    In span: 0
+    Outside span: 24
+  Lie closes in transition span: False
+
+Enrichment multiplier dim(A_OD) / N(n_max) = 84 / 5 = 84/5
+
+Wall time: 0.9s
+======================================================================
+Sprint Q5'-OffDiag-Closure-nmax3 -- n_max = 3
+======================================================================
+dim H = 40, n_sectors = 9
+sectors = [(1, 0), (1, 1), (2, 0), (2, 1), (2, 2), (3, 0), (3, 1), (3, 2), (3, 3)]
+
+# idempotents: 9
+# single-step transitions: 28
+
+Basic single-step transitions (s_from -> s_to):
+  (1, 0) -> (1, 1)
+  (1, 0) -> (2, 1)
+  (1, 1) -> (1, 0)
+  (1, 1) -> (2, 0)
+  (1, 1) -> (2, 2)
+  (2, 0) -> (1, 1)
+  (2, 0) -> (2, 1)
+  (2, 0) -> (3, 1)
+  (2, 1) -> (1, 0)
+  (2, 1) -> (2, 0)
+  (2, 1) -> (2, 2)
+  (2, 1) -> (3, 0)
+  (2, 1) -> (3, 2)
+  (2, 2) -> (1, 1)
+  (2, 2) -> (2, 1)
+  (2, 2) -> (3, 1)
+  (2, 2) -> (3, 3)
+  (3, 0) -> (2, 1)
+  (3, 0) -> (3, 1)
+  (3, 1) -> (2, 0)
+  (3, 1) -> (2, 2)
+  (3, 1) -> (3, 0)
+  (3, 1) -> (3, 2)
+  (3, 2) -> (2, 1)
+  (3, 2) -> (3, 1)
+  (3, 2) -> (3, 3)
+  (3, 3) -> (2, 2)
+  (3, 3) -> (3, 2)
+
+--- Chain composition classification (Step 2 of prompt) ---
+  Time: 0.07s
+  Total pairs (T1, T2): 784
+  Non-chain (s1 != s2): 688
+  Chain, T2*T1 = 0: 0
+  Chain, T2*T1 lands on idempotent (s0 = s3): 28
+  Chain, T2*T1 lands on single-step (|n_s3 - n_s0| = 1): 44
+  Chain, T2*T1 lands on two-step (|n_s3 - n_s0| in {0, 2}, s0 != s3): 24
+
+--- Per-block closure dimension ---
+  Computing powers A^k for k = 0, ..., 39...
+    Computed 40 powers in 0.51s
+  Computing per-block dims for 81 sector pairs (incl. diagonals)...
+    Per-block computation done in 38.09s
+  Closure computation time: 38.60s
+
+  TOTAL CLOSURE DIM at n_max = 3: 592
+  Number of nonzero blocks: 81 of 81 possible
+
+  Top 15 blocks (by max_dim = d_to * d_from):
+          from         to  d_to d_from  max rank  fill
+        (3, 2)     (3, 2)    10     10  100   15 0.15
+        (3, 2)     (2, 1)     6     10   60   14 0.23
+        (3, 2)     (3, 1)     6     10   60   14 0.23
+        (2, 1)     (3, 2)    10      6   60   14 0.23
+        (3, 1)     (3, 2)    10      6   60   14 0.23
+        (3, 3)     (3, 2)    10      6   60   14 0.23
+        (3, 2)     (3, 3)     6     10   60   14 0.23
+        (3, 2)     (2, 2)     4     10   40   14 0.35
+        (2, 2)     (3, 2)    10      4   40   14 0.35
+        (2, 1)     (2, 1)     6      6   36   12 0.33
+        (3, 1)     (2, 1)     6      6   36   14 0.39
+        (3, 3)     (2, 1)     6      6   36   14 0.39
+        (2, 1)     (3, 1)     6      6   36   14 0.39
+        (3, 1)     (3, 1)     6      6   36   12 0.33
+        (3, 3)     (3, 1)     6      6   36   14 0.39
+
+  Path-algebra upper bound (sum dim_s*dim_t over all sector pairs): 1600
+  dim(H)^2: 1600
+  Closure fills: 592 / 1600 = 37/100
+
+--- Lie sub-algebra test ---
+  Time: 35.43s
+  Lin-indep transitions: 28 of 28
+  Commutator pairs (i<j): 378
+    Zero: 296
+    In span: 0
+    Outside span: 82
+  Lie closes in transition span: False
+
+Enrichment multiplier dim(A_OD) / N(n_max) = 592 / 9 = 592/9
+
+Wall time: 74.1s
+
+======================================================================
+Growth analysis
+======================================================================
+n_max=2: closure_dim = 84, N(2) = 5, dim(H)^2 = 256
+n_max=3: closure_dim = 592, N(3) = 9, dim(H)^2 = 1600
+  closure ratio (3/2): 592 / 84 = 148/21
+  dim(H)^2 ratio (3/2): 1600 / 256 = 25/4
+  N ratio (3/2): 9 / 5 = 9/5
+
+Wrote C:\Users\jlout\Desktop\Project_Geometric\debug\data\sprint_q5p_offdiag_closure.json

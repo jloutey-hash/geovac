@@ -1,0 +1,360 @@
+{
+  "n_max": 2,
+  "nonprimitive_panel": [
+    {
+      "T1": "T_(1, 0)->(1, 1)",
+      "T2": "T_(1, 1)->(1, 0)",
+      "lands_in": "e_(1, 0)",
+      "coeff": "1/128",
+      "eta_T1": "1/64",
+      "eta_T2": "-1/64",
+      "nonprimitive_eta_bivalue": "-1/2048"
+    },
+    {
+      "T1": "T_(1, 0)->(1, 1)",
+      "T2": "T_(1, 1)->(2, 0)",
+      "lands_in": "two-step T_(1, 0)->(2, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "1/64",
+      "eta_T2": "-1/64",
+      "nonprimitive_eta_bivalue": "-1/2048"
+    },
+    {
+      "T1": "T_(1, 0)->(1, 1)",
+      "T2": "T_(1, 1)->(2, 2)",
+      "lands_in": "two-step T_(1, 0)->(2, 2) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "1/64",
+      "eta_T2": "-3/128",
+      "nonprimitive_eta_bivalue": "-3/4096"
+    },
+    {
+      "T1": "T_(1, 0)->(2, 1)",
+      "T2": "T_(2, 1)->(1, 0)",
+      "lands_in": "e_(1, 0)",
+      "coeff": "5/256",
+      "eta_T1": "5/128",
+      "eta_T2": "1/128",
+      "nonprimitive_eta_bivalue": "5/8192"
+    },
+    {
+      "T1": "T_(1, 0)->(2, 1)",
+      "T2": "T_(2, 1)->(2, 0)",
+      "lands_in": "two-step T_(1, 0)->(2, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "5/128",
+      "eta_T2": "1/128",
+      "nonprimitive_eta_bivalue": "5/8192"
+    },
+    {
+      "T1": "T_(1, 0)->(2, 1)",
+      "T2": "T_(2, 1)->(2, 2)",
+      "lands_in": "two-step T_(1, 0)->(2, 2) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "5/128",
+      "eta_T2": "1/64",
+      "nonprimitive_eta_bivalue": "5/4096"
+    },
+    {
+      "T1": "T_(1, 1)->(1, 0)",
+      "T2": "T_(1, 0)->(1, 1)",
+      "lands_in": "e_(1, 1)",
+      "coeff": "1/128",
+      "eta_T1": "-1/64",
+      "eta_T2": "1/64",
+      "nonprimitive_eta_bivalue": "-1/2048"
+    },
+    {
+      "T1": "T_(1, 1)->(1, 0)",
+      "T2": "T_(1, 0)->(2, 1)",
+      "lands_in": "two-step T_(1, 1)->(2, 1) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "-1/64",
+      "eta_T2": "5/128",
+      "nonprimitive_eta_bivalue": "-5/4096"
+    },
+    {
+      "T1": "T_(1, 1)->(2, 0)",
+      "T2": "T_(2, 0)->(1, 1)",
+      "lands_in": "e_(1, 1)",
+      "coeff": "1/128",
+      "eta_T1": "-1/64",
+      "eta_T2": "1/64",
+      "nonprimitive_eta_bivalue": "-1/2048"
+    },
+    {
+      "T1": "T_(1, 1)->(2, 0)",
+      "T2": "T_(2, 0)->(2, 1)",
+      "lands_in": "two-step T_(1, 1)->(2, 1) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "-1/64",
+      "eta_T2": "5/128",
+      "nonprimitive_eta_bivalue": "-5/4096"
+    },
+    {
+      "T1": "T_(1, 1)->(2, 2)",
+      "T2": "T_(2, 2)->(1, 1)",
+      "lands_in": "e_(1, 1)",
+      "coeff": "3/256",
+      "eta_T1": "-3/128",
+      "eta_T2": "-3/128",
+      "nonprimitive_eta_bivalue": "9/8192"
+    },
+    {
+      "T1": "T_(1, 1)->(2, 2)",
+      "T2": "T_(2, 2)->(2, 1)",
+      "lands_in": "two-step T_(1, 1)->(2, 1) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "-3/128",
+      "eta_T2": "-1/16",
+      "nonprimitive_eta_bivalue": "3/1024"
+    },
+    {
+      "T1": "T_(2, 0)->(1, 1)",
+      "T2": "T_(1, 1)->(1, 0)",
+      "lands_in": "two-step T_(2, 0)->(1, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "1/64",
+      "eta_T2": "-1/64",
+      "nonprimitive_eta_bivalue": "-1/2048"
+    },
+    {
+      "T1": "T_(2, 0)->(1, 1)",
+      "T2": "T_(1, 1)->(2, 0)",
+      "lands_in": "e_(2, 0)",
+      "coeff": "1/128",
+      "eta_T1": "1/64",
+      "eta_T2": "-1/64",
+      "nonprimitive_eta_bivalue": "-1/2048"
+    },
+    {
+      "T1": "T_(2, 0)->(1, 1)",
+      "T2": "T_(1, 1)->(2, 2)",
+      "lands_in": "two-step T_(2, 0)->(2, 2) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "1/64",
+      "eta_T2": "-3/128",
+      "nonprimitive_eta_bivalue": "-3/4096"
+    },
+    {
+      "T1": "T_(2, 0)->(2, 1)",
+      "T2": "T_(2, 1)->(1, 0)",
+      "lands_in": "two-step T_(2, 0)->(1, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "5/128",
+      "eta_T2": "1/128",
+      "nonprimitive_eta_bivalue": "5/8192"
+    },
+    {
+      "T1": "T_(2, 0)->(2, 1)",
+      "T2": "T_(2, 1)->(2, 0)",
+      "lands_in": "e_(2, 0)",
+      "coeff": "5/256",
+      "eta_T1": "5/128",
+      "eta_T2": "1/128",
+      "nonprimitive_eta_bivalue": "5/8192"
+    },
+    {
+      "T1": "T_(2, 0)->(2, 1)",
+      "T2": "T_(2, 1)->(2, 2)",
+      "lands_in": "two-step T_(2, 0)->(2, 2) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "5/128",
+      "eta_T2": "1/64",
+      "nonprimitive_eta_bivalue": "5/4096"
+    },
+    {
+      "T1": "T_(2, 1)->(1, 0)",
+      "T2": "T_(1, 0)->(1, 1)",
+      "lands_in": "two-step T_(2, 1)->(1, 1) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "1/128",
+      "eta_T2": "1/64",
+      "nonprimitive_eta_bivalue": "1/4096"
+    },
+    {
+      "T1": "T_(2, 1)->(1, 0)",
+      "T2": "T_(1, 0)->(2, 1)",
+      "lands_in": "e_(2, 1)",
+      "coeff": "1/256",
+      "eta_T1": "1/128",
+      "eta_T2": "5/128",
+      "nonprimitive_eta_bivalue": "5/8192"
+    },
+    {
+      "T1": "T_(2, 1)->(2, 0)",
+      "T2": "T_(2, 0)->(1, 1)",
+      "lands_in": "two-step T_(2, 1)->(1, 1) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "1/128",
+      "eta_T2": "1/64",
+      "nonprimitive_eta_bivalue": "1/4096"
+    },
+    {
+      "T1": "T_(2, 1)->(2, 0)",
+      "T2": "T_(2, 0)->(2, 1)",
+      "lands_in": "e_(2, 1)",
+      "coeff": "1/256",
+      "eta_T1": "1/128",
+      "eta_T2": "5/128",
+      "nonprimitive_eta_bivalue": "5/8192"
+    },
+    {
+      "T1": "T_(2, 1)->(2, 2)",
+      "T2": "T_(2, 2)->(1, 1)",
+      "lands_in": "two-step T_(2, 1)->(1, 1) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "1/64",
+      "eta_T2": "-3/128",
+      "nonprimitive_eta_bivalue": "-3/4096"
+    },
+    {
+      "T1": "T_(2, 1)->(2, 2)",
+      "T2": "T_(2, 2)->(2, 1)",
+      "lands_in": "e_(2, 1)",
+      "coeff": "1/128",
+      "eta_T1": "1/64",
+      "eta_T2": "-1/16",
+      "nonprimitive_eta_bivalue": "-1/512"
+    },
+    {
+      "T1": "T_(2, 2)->(1, 1)",
+      "T2": "T_(1, 1)->(1, 0)",
+      "lands_in": "two-step T_(2, 2)->(1, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "-3/128",
+      "eta_T2": "-1/64",
+      "nonprimitive_eta_bivalue": "3/4096"
+    },
+    {
+      "T1": "T_(2, 2)->(1, 1)",
+      "T2": "T_(1, 1)->(2, 0)",
+      "lands_in": "two-step T_(2, 2)->(2, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "-3/128",
+      "eta_T2": "-1/64",
+      "nonprimitive_eta_bivalue": "3/4096"
+    },
+    {
+      "T1": "T_(2, 2)->(1, 1)",
+      "T2": "T_(1, 1)->(2, 2)",
+      "lands_in": "e_(2, 2)",
+      "coeff": "1/256",
+      "eta_T1": "-3/128",
+      "eta_T2": "-3/128",
+      "nonprimitive_eta_bivalue": "9/8192"
+    },
+    {
+      "T1": "T_(2, 2)->(2, 1)",
+      "T2": "T_(2, 1)->(1, 0)",
+      "lands_in": "two-step T_(2, 2)->(1, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "-1/16",
+      "eta_T2": "1/128",
+      "nonprimitive_eta_bivalue": "-1/1024"
+    },
+    {
+      "T1": "T_(2, 2)->(2, 1)",
+      "T2": "T_(2, 1)->(2, 0)",
+      "lands_in": "two-step T_(2, 2)->(2, 0) (NEW GENERATOR)",
+      "coeff": "NEW_GENERATOR",
+      "eta_T1": "-1/16",
+      "eta_T2": "1/128",
+      "nonprimitive_eta_bivalue": "-1/1024"
+    },
+    {
+      "T1": "T_(2, 2)->(2, 1)",
+      "T2": "T_(2, 1)->(2, 2)",
+      "lands_in": "e_(2, 2)",
+      "coeff": "3/256",
+      "eta_T1": "-1/16",
+      "eta_T2": "1/64",
+      "nonprimitive_eta_bivalue": "-1/512"
+    }
+  ],
+  "n_chain_compositions": 30,
+  "two_step_path_count": 18,
+  "n_nonzero_commutators": 24,
+  "nonzero_commutators_sample": [
+    [
+      "T_(1, 0)->(1, 1)",
+      "T_(1, 1)->(1, 0)"
+    ],
+    [
+      "T_(1, 0)->(1, 1)",
+      "T_(1, 1)->(2, 0)"
+    ],
+    [
+      "T_(1, 0)->(1, 1)",
+      "T_(1, 1)->(2, 2)"
+    ],
+    [
+      "T_(1, 0)->(1, 1)",
+      "T_(2, 1)->(1, 0)"
+    ],
+    [
+      "T_(1, 0)->(2, 1)",
+      "T_(1, 1)->(1, 0)"
+    ],
+    [
+      "T_(1, 0)->(2, 1)",
+      "T_(2, 1)->(1, 0)"
+    ],
+    [
+      "T_(1, 0)->(2, 1)",
+      "T_(2, 1)->(2, 0)"
+    ],
+    [
+      "T_(1, 0)->(2, 1)",
+      "T_(2, 1)->(2, 2)"
+    ],
+    [
+      "T_(1, 1)->(1, 0)",
+      "T_(2, 0)->(1, 1)"
+    ],
+    [
+      "T_(1, 1)->(1, 0)",
+      "T_(2, 2)->(1, 1)"
+    ],
+    [
+      "T_(1, 1)->(2, 0)",
+      "T_(2, 0)->(1, 1)"
+    ],
+    [
+      "T_(1, 1)->(2, 0)",
+      "T_(2, 0)->(2, 1)"
+    ],
+    [
+      "T_(1, 1)->(2, 0)",
+      "T_(2, 2)->(1, 1)"
+    ],
+    [
+      "T_(1, 1)->(2, 2)",
+      "T_(2, 0)->(1, 1)"
+    ],
+    [
+      "T_(1, 1)->(2, 2)",
+      "T_(2, 2)->(1, 1)"
+    ],
+    [
+      "T_(1, 1)->(2, 2)",
+      "T_(2, 2)->(2, 1)"
+    ],
+    [
+      "T_(2, 0)->(1, 1)",
+      "T_(2, 1)->(2, 0)"
+    ],
+    [
+      "T_(2, 0)->(2, 1)",
+      "T_(2, 1)->(1, 0)"
+    ],
+    [
+      "T_(2, 0)->(2, 1)",
+      "T_(2, 1)->(2, 0)"
+    ],
+    [
+      "T_(2, 0)->(2, 1)",
+      "T_(2, 1)->(2, 2)"
+    ]
+  ]
+}
