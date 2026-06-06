@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.57.0] - 2026-06-05
+
+### Summary
+
+**Q5'-CH-arc — three-stone first-span of the cosmic-Galois $U^*$ bridge.**  Same-day three-sprint follow-on to v3.49.0's nine-sprint Q5'-scoping arc that identified cosmic-Galois $U^*$ on the Mellin-moment Hopf algebra as the multi-year viable target.  Goal:\ land the first concrete computational stones — bit-exact symbol-level targets of the candidate enriched fiber functor $\omega^{\mathrm{tri}}: \mathrm{dg}(\mathcal{T}) \to \mathrm{Vec}_\mathbb{Q} \otimes \mathrm{IndexCat}(\{0, 1, 2\})$ on each of M1, M2, M3 — without committing to Stage 2 (Tannakian recovery of the motivic Galois action), which stays multi-year.  All three sprints CLEAN POSITIVE.  No production code touched;\ all activity in `debug/` plus Paper 55 §subsec:open_m2_m3 (the existing Q5' open-question section).
+
+### Closed
+
+- **Q5'-CH-1 — chirality-parity factorisation at finite cutoff (bit-exact rational).**  At every $n_{\max} \in \{2, 3, 4\}$ on the truncated Camporesi--Higuchi spectral triple, the master Mellin source $\mathrm{Tr}(D^k\,e^{-tD^2})$ exhibits a bit-exact $\mathbb{Z}/2$ chirality-parity selection rule:\ plain trace is nonzero for $k \in \{0, 2\}$ and identically zero for $k = 1$; supertrace is identically zero for $k \in \{0, 2\}$ and nonzero for $k = 1$.  Every "identically zero" is exact rational $0$.  Verified on both the diagonal CH $\Lambda$ and the full $D = \Lambda + \kappa A$ at $\kappa = -1/16$ (Paper 0 topological constant), $j$-moments $j \in \{0, \ldots, 10\}$ for $\Lambda$ and $j \in \{0, \ldots, 6\}$ for full $D$ at $n_{\max} = 4$ (dim $80$).  Structural reason:\ spectral symmetry $\{\pm(n + 1/2)\}$ plus chirality balance $\#\{\chi = +1\} = \#\{\chi = -1\}$.  Both survive the $\kappa A$ perturbation because $A$ is parity-respecting.  **Sharpening:** the $\mathbb{Z}/3$ k-slot factors as $\mathbb{Z}/2$ chirality $\times$ heat-kernel order; chirality is exactly what HP$_*$ sees (M3 vs M1+M2), heat-kernel order distinguishes M1 from M2 within HP$_0$ and is what HP$_*$ misses.  Q5' sharpens from "is the $\mathbb{Z}/3$ k-slot Tannakian-relevant?" to "is the heat-kernel-order grading within a single HP$_*$ chirality sector recoverable via $\omega^{\mathrm{tri}}$?"  Driver:\ `debug/compute_ch_k_nmax_truncated.py`; memo:\ `debug/sprint_q5p_ch1_memo.md`; data:\ `debug/data/sprint_q5p_ch1_data.json`.
+
+- **Q5'-CH-2 — continuum M2 verification at integer $s$ (bit-exact closed form).**  Five-for-five:\ $\zeta_{D^2}(s)$ for $s \in \{1, 2, 3, 4, 5\}$ sits bit-exactly in $\bigoplus_k \pi^{2k}\mathbb{Q}$ as exactly two non-zero $\pi^{2k}$ terms per $s$:\ $-\pi^2/4$, $\pi^2 - \pi^4/12$, $\pi^4/3 - \pi^6/30$, $\tfrac{2}{15}\pi^6 - \tfrac{17}{1260}\pi^8$, $\tfrac{17}{315}\pi^8 - \tfrac{31}{5670}\pi^{10}$.  Derived via Hurwitz reduction $\zeta_{D^2}(s) = 2\,\zeta(2s-2, 3/2) - (1/2)\,\zeta(2s, 3/2)$ + standard identity $\zeta(s, 1/2) = (2^s - 1)\,\zeta(s)$.  Two-term shape is the continuum content of Paper 51 Cor 2.1 Dirac SD two-term exactness.  Truncated values at $n_{\max} \in \{2, 3, 4\}$ converge to continuum at rate $\sim n_{\max}^{3-2s}$ for $s \ge 2$; $s = 1$ uses analytic continuation (truncated sum diverges).  Driver:\ `debug/compute_ch_spectral_zeta_continuum.py`; memo:\ `debug/sprint_q5p_ch2_memo.md`; data:\ `debug/data/sprint_q5p_ch2_data.json`.
+
+- **Q5'-CH-3 — continuum M3 verification at integer $s$ with parity stratification.**  Paper 28 Theorem 3 closed form $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$ verified bit-exact at $s \in \{4, 5, 6\}$ to residual $< 10^{-80}$ at 80 dps via Hurwitz $\beta(s) = 4^{-s}(\zeta(s, 1/4) - \zeta(s, 3/4))$ against existing `geovac/qed_vertex.py::_dirac_D_even/_odd`.  Closed forms at $s \in \{2, 3, 4, 5, 6\}$:\ $-1 + 2G$, $-\pi + \pi^3/8$, $8\beta_4 - 8G$, $-\pi^3/2 + 5\pi^5/96$, $-32\beta_4 + 32\beta_6$.  **Structural finding:** the M3 cyclotomic content shows up bit-exactly only at EVEN $s$ (3/3); at ODD $s$ (2/2) the Euler-style closed form $\beta(2k+1) \in \pi^{2k+1}\mathbb{Q}$ collapses the antisymmetric combination back to M1.  Sharpens the M2/M3 contrast:\ M2 is depth-0 uniformly across integer $s$, M3 is depth-1 stratified by parity of $s$.  Driver:\ `debug/compute_ch_m3_cyclotomic.py`; memo:\ `debug/sprint_q5p_ch3_memo.md`; data:\ `debug/data/sprint_q5p_ch3_data.json`.
+
+### Added
+
+- **Paper 55 §subsec:open_m2_m3** extended with three new paragraphs documenting CH-1, CH-2, CH-3 findings:\ chirality-parity factorisation, continuum M2 verification, continuum M3 parity stratification.  New bibitem `marcolli_tabuada2014a` (arXiv:1110.2438, Amer. J. Math. 136, 2014) for the load-bearing HP$_*$ $\mathbb{Z}/2$-grading citation.  Paper 55:\ 20 pp → **22 pp**, three-pass clean compile.
+- **Three new debug drivers** (no production code touched):\ `debug/compute_ch_k_nmax_truncated.py`, `debug/compute_ch_spectral_zeta_continuum.py`, `debug/compute_ch_m3_cyclotomic.py`.
+- **Three new memos** in `debug/`:\ `sprint_q5p_ch1_memo.md`, `sprint_q5p_ch2_memo.md`, `sprint_q5p_ch3_memo.md`.
+
+### Changed
+
+- **CLAUDE.md §1 version cursor:** v3.56.0 → v3.57.0.
+- **CLAUDE.md §2:** new one-liner for Q5'-CH-arc at the head of the Current Development Frontier index.
+
+### Notes
+
+- **No production code touched** (`geovac/` clean).  All activity in `debug/` scripts + Paper 55 prose.  `/regression` therefore N/A in the consumer-test-selection sense; topological-integrity baseline (18 S³ symbolic proofs) unaffected.
+- **No new equations needing tests** (§13.4a):\ the M2 closed forms come from established Hurwitz identities + sympy symbolic verification at floating precision; the M3 closed forms come from Paper 28 Theorem 3 (published) + bit-exact numeric cross-check.  Both internal to existing test infrastructure for `geovac/qed_vertex.py`.
+- **No hard-prohibition list touches** (§13.5 audit clean):\ natural-geometry hierarchy unchanged, no fitted parameters introduced, no negative results suppressed, Paper 2 combination-rule label unchanged.
+- **Sprint cost:** ~1.5 hours active wall (three drivers, three memos, one paper edit, one bibitem, two PDF builds).
+- **Stage 1 status:** symbol-level target of $\omega^{\mathrm{tri}}$ on M1/M2/M3 is now bit-exactly explicit.  Stage 1 forward is "lift this symbol-level data to a $\mathbb{Z}/2 \times \mathbb{Z}$-graded fiber functor on the dg-category" (sprint-scale, ~2–4 weeks).
+- **Stage 2 status:** Tannakian recovery of the motivic Galois action on the operator-order grading within HP$_0$ remains multi-year — no published precedent for the Connes-Marcolli $U^*$ construction on spectral triples (vs QFT renormalization).
+- **Open follow-ons:** (i) Stage 1 dg-category construction of $\omega^{\mathrm{tri}}$; (ii) M1 continuum verification (Hopf-base measure $\pi = \mathrm{Vol}(S^2)/4$ via spectral action coefficients);\ (iii) Bargmann-Segal robustness check — does the chirality-parity rule break on Hardy(S$^5$) where the spectrum is not symmetric? (clean falsification candidate per Q5'-CH-1 memo §5 caveat 5).
+
 ## [3.56.0] - 2026-06-05
 
 ### Summary

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.56.0 (June 5, 2026)
+**Version:** v3.57.0 (June 5, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint Q5'-CH-arc (2026-06-05, v3.57.0):** Three-stone first span of the cosmic-Galois $U^*$ bridge — CH-1 chirality-parity factorisation at finite $n_{\max}$, CH-2 bit-exact M2 at integer $s$ (5/5), CH-3 bit-exact M3 with parity stratification (3/3 at <10⁻⁸⁰); $\omega^{\mathrm{tri}}$ symbol-level target now explicit on M1/M2/M3; Paper 55 §subsec:open_m2_m3 +3 paragraphs, 20→22pp. See `debug/sprint_q5p_ch{1,2,3}_memo.md`.
 - **Sprint chemistry-test-rot reconciliation H+G+F.1+F.2 (2026-06-05, v3.56.0):** Closes v3.55.0 handoff §2.1/§2.2/§2.3 — G+H dissolved on diagnosis, F.1 V_NN(R) fix + F.2 PK pseudopotential restored; LiH ab initio R_eq 2.82%, balanced 6.93%; ~85 tests unblocked, 943/943 pass. See `debug/sprint_lih_binding_fix_memo.md`.
 - **Sprint test-cleanup + regression-skill + Pattern-E (2026-06-05, v3.55.0):** ~40 chemistry tests fixed in-place, 11 archived, 10 prod shims; new `/regression` skill + CLAUDE.md §9 broadened; LiH binding regression confirmed in all 3 paths; `docs/molecular_refactor_handoff.md` drafted. See `debug/sprint_test_cleanup_memo.md`.
 - **Sprint S2-v2 closed-form (2026-06-05, v3.54.0):** Theorem 3.2.A.unified structural closure — (A) χ^h1=2·rank(h_cross)+1_LL+1_RR bit-exact 29/29; (B)+(C) subadditivity bounds verified; (D) F3 inheritance; (E) boundary saturation; universal {4,16,16,9,9,9,6,3,3,2} interior profile reproduced. Extended negative control:\ 12/12 balanced-coupled boundaries lift to 7 or 14 = N_cross × DF rank. Paper 14 §sec:mpo_bond_rank + QPT stacking paragraph + bibitem. See `debug/sprint_s2_v2_memo.md` + `debug/sprint_s2_v2_balanced_library_memo.md`.

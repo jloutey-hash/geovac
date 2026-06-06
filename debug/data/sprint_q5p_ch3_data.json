@@ -1,0 +1,90 @@
+{
+  "sprint": "Q5'-CH-3",
+  "panel": {
+    "2": {
+      "closed_form": "-1 + 2*Catalan",
+      "classification": {
+        "expr_simplified": "-1 + 2*Catalan",
+        "in_M1_only": false,
+        "in_M3_genuine": true,
+        "contains_Catalan": true,
+        "contains_higher_beta_even": false
+      },
+      "numeric_check": {
+        "error": "Need s >= 4 for convergence (got s=2)"
+      }
+    },
+    "3": {
+      "closed_form": "-pi + pi**3/8",
+      "classification": {
+        "expr_simplified": "-pi + pi**3/8",
+        "in_M1_only": true,
+        "in_M3_genuine": false,
+        "contains_Catalan": false,
+        "contains_higher_beta_even": false
+      },
+      "numeric_check": {
+        "error": "Need s >= 4 for convergence (got s=3)"
+      }
+    },
+    "4": {
+      "closed_form": "8*beta_4 - 8*Catalan",
+      "classification": {
+        "expr_simplified": "8*beta_4 - 8*Catalan",
+        "in_M1_only": false,
+        "in_M3_genuine": true,
+        "contains_Catalan": true,
+        "contains_higher_beta_even": true
+      },
+      "numeric_check": {
+        "D_even_numeric": "1.1680059043834563754475081110926707744183796850494",
+        "D_odd_numeric": "0.58417424387236580701695516472472109008468758280092",
+        "D_diff_numeric": "0.58383166051109056843055294636794968433369210224849",
+        "closed_form_prediction_2^{s-1}(beta(s) - beta(s-2))": "0.58383166051109056843055294636794968433369210224849",
+        "residual_abs": 1.792173650349189e-80,
+        "residual_below_1e-30": true
+      }
+    },
+    "5": {
+      "closed_form": "pi**3*(-48 + 5*pi**2)/96",
+      "classification": {
+        "expr_simplified": "pi**3*(-48 + 5*pi**2)/96",
+        "in_M1_only": true,
+        "in_M3_genuine": false,
+        "contains_Catalan": false,
+        "contains_higher_beta_even": false
+      },
+      "numeric_check": {
+        "D_even_numeric": "0.59590167429779253691156079281058858444736901387851",
+        "D_odd_numeric": "0.16051476521429360054860842826568168137768482660883",
+        "D_diff_numeric": "0.43538690908349893636295236454490690306968418726969",
+        "closed_form_prediction_2^{s-1}(beta(s) - beta(s-2))": "0.43538690908349893636295236454490690306968418726969",
+        "residual_abs": 2.9518154241045465e-80,
+        "residual_below_1e-30": true
+      }
+    },
+    "6": {
+      "closed_form": "-32*beta_4 + 32*beta_6",
+      "classification": {
+        "expr_simplified": "-32*beta_4 + 32*beta_6",
+        "in_M1_only": false,
+        "in_M3_genuine": true,
+        "contains_Catalan": false,
+        "contains_higher_beta_even": true
+      },
+      "numeric_check": {
+        "D_even_numeric": "0.36754600704932371156724852801977988096769735578395",
+        "D_odd_numeric": "0.055844551774674132905547579801260573367580265742972",
+        "D_diff_numeric": "0.31170145527464957866170094821851930760011709004098",
+        "closed_form_prediction_2^{s-1}(beta(s) - beta(s-2))": "0.31170145527464957866170094821851930760011709004098",
+        "residual_abs": 2.1084395886461046e-81,
+        "residual_below_1e-30": true
+      }
+    }
+  },
+  "summary": {
+    "odd_s_M1_collapse": 2,
+    "even_s_genuine_M3": 3,
+    "structural_finding": "At odd s, beta(odd) reduces to pi^odd . Q via Euler-style closed form, so the M3 antisymmetric combination collapses to M1. At even s, beta(even) has no closed form in pi, so the M3 content is genuinely cyclotomic mixed-Tate at level 4."
+  }
+}
