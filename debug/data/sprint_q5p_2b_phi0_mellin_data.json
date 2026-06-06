@@ -1,0 +1,241 @@
+{
+  "sprint": "Q5'-Stage1-Sub-Sprint-2b",
+  "title": "Formal Mellin transform of phi_0^odd at n_max in {2, 3}",
+  "discipline": "bit-exact sympy.Rational; symbolic Gamma(s)",
+  "results": {
+    "nmax2_Lambda": {
+      "dim_H": 16,
+      "spectrum": [
+        [
+          "9/4",
+          4
+        ],
+        [
+          "25/4",
+          12
+        ]
+      ],
+      "small_t_taylor": [
+        "16",
+        "-84",
+        "489/2",
+        "-3967/8",
+        "98203/128"
+      ],
+      "cross_check_sub_sprint_1": [
+        {
+          "m": 0,
+          "computed": "16",
+          "sub1": "16",
+          "match": true
+        },
+        {
+          "m": 1,
+          "computed": "-84",
+          "sub1": "-84",
+          "match": true
+        },
+        {
+          "m": 2,
+          "computed": "489/2",
+          "sub1": "489/2",
+          "match": true
+        },
+        {
+          "m": 3,
+          "computed": "-3967/8",
+          "sub1": "-3967/8",
+          "match": true
+        },
+        {
+          "m": 4,
+          "computed": "98203/128",
+          "sub1": "98203/128",
+          "match": true
+        }
+      ],
+      "mellin_at_integer_s": {
+        "1": {
+          "Gamma_s": "1",
+          "zeta_D2_truncated": "832/225",
+          "zeta_D2_truncated_numeric": 3.6977777777777776,
+          "M_phi0_truncated": "832/225",
+          "M_phi0_truncated_numeric": 3.6977777777777776,
+          "continuum_zeta_D2": "-pi**2/4",
+          "continuum_zeta_D2_numeric": -2.4674011002723395
+        },
+        "2": {
+          "Gamma_s": "1",
+          "zeta_D2_truncated": "55552/50625",
+          "zeta_D2_truncated_numeric": 1.0973234567901236,
+          "M_phi0_truncated": "55552/50625",
+          "M_phi0_truncated_numeric": 1.0973234567901236,
+          "continuum_zeta_D2": "-pi**4/12 + pi**2",
+          "continuum_zeta_D2_numeric": 1.7521801482558221
+        },
+        "3": {
+          "Gamma_s": "2",
+          "zeta_D2_truncated": "4559872/11390625",
+          "zeta_D2_truncated_numeric": 0.40031798079561043,
+          "M_phi0_truncated": "9119744/11390625",
+          "M_phi0_truncated_numeric": 0.8006359615912209,
+          "continuum_zeta_D2": "pi**4*(10 - pi**2)/30",
+          "continuum_zeta_D2_numeric": 0.42339055882399784
+        },
+        "4": {
+          "Gamma_s": "6",
+          "zeta_D2_truncated": "420155392/2562890625",
+          "zeta_D2_truncated_numeric": 0.16393808924249353,
+          "M_phi0_truncated": "840310784/854296875",
+          "M_phi0_truncated_numeric": 0.9836285354549611,
+          "continuum_zeta_D2": "pi**6*(168 - 17*pi**2)/1260",
+          "continuum_zeta_D2_numeric": 0.16536289480268834
+        },
+        "5": {
+          "Gamma_s": "24",
+          "zeta_D2_truncated": "40725594112/576650390625",
+          "zeta_D2_truncated_numeric": 0.07062441086333046,
+          "M_phi0_truncated": "325804752896/192216796875",
+          "M_phi0_truncated_numeric": 1.6949858607199308,
+          "continuum_zeta_D2": "pi**8*(306 - 31*pi**2)/5670",
+          "continuum_zeta_D2_numeric": 0.07072648307266244
+        }
+      },
+      "laurent_at_zero": {
+        "dim_H": 16,
+        "residue": "16",
+        "next_order": "-log(391066074371337890625/4294967296) - 16*EulerGamma",
+        "log_det_D_squared": "-12*log(25/4) - 4*log(9/4)",
+        "log_det_D_squared_numeric": -25.234698429845036,
+        "zeta_prime_at_zero": "-12*log(25/4) - 4*log(9/4)",
+        "laurent_coefficients_around_zero": [
+          "16",
+          "-log(391066074371337890625/4294967296) - 16*EulerGamma",
+          "2*log(9/4)**2 + 8*EulerGamma**2 + 4*pi**2/3 + log((391066074371337890625/4294967296)**EulerGamma) + 6*log(25/4)**2",
+          "-log((391066074371337890625/4294967296)**(EulerGamma**2/2 + pi**2/12)) - 2*EulerGamma*(log(9/4)**2 + 3*log(25/4)**2) - 2*log(25/4)**3 - 4*EulerGamma*pi**2/3 - 16*zeta(3)/3 - 8*EulerGamma**3/3 - 2*log(9/4)**3/3",
+          "log(9/4)**4/6 + log(25/4)**4/2 + 2*EulerGamma*(log(9/4)**3 + 3*log(25/4)**3)/3 + (6*EulerGamma**2 + pi**2)*(log(9/4)**2 + 3*log(25/4)**2)/6 + log((391066074371337890625/4294967296)**(EulerGamma**3/6 + zeta(3)/3 + EulerGamma*pi**2/12))",
+          "-(log(9/4)**2 + 3*log(25/4)**2)*(2*EulerGamma**3 + 4*zeta(3) + EulerGamma*pi**2)/6 - (6*EulerGamma**2 + pi**2)*(log(9/4)**3 + 3*log(25/4)**3)/18 - EulerGamma*(log(9/4)**4 + 3*log(25/4)**4)/6 - log(25/4)**5/10 - log(9/4)**5/30"
+        ]
+      }
+    },
+    "nmax2_full_D": {
+      "dim_H": 16,
+      "mellin_at_integer_s": {
+        "1": {
+          "Gamma_s": "1",
+          "zeta_D2_truncated": "1978465196515232/532976619280625",
+          "zeta_D2_truncated_numeric": 3.7121050435301037,
+          "M_phi0_truncated": "1978465196515232/532976619280625",
+          "M_phi0_truncated_numeric": 3.7121050435301037,
+          "matrix_power_seconds": 0.008342266082763672
+        },
+        "2": {
+          "Gamma_s": "1",
+          "zeta_D2_truncated": "316198062792242180125437283456/284064076699804288492500390625",
+          "zeta_D2_truncated_numeric": 1.1131223154499634,
+          "M_phi0_truncated": "316198062792242180125437283456/284064076699804288492500390625",
+          "M_phi0_truncated_numeric": 1.1131223154499634,
+          "matrix_power_seconds": 0.015281915664672852
+        },
+        "3": {
+          "Gamma_s": "2",
+          "zeta_D2_truncated": "62222126235359634502217877340729901078440448/151399511258533849166316043509699718994140625",
+          "zeta_D2_truncated_numeric": 0.4109797034226053,
+          "M_phi0_truncated": "124444252470719269004435754681459802156880896/151399511258533849166316043509699718994140625",
+          "M_phi0_truncated_numeric": 0.8219594068452106,
+          "matrix_power_seconds": 0.024892091751098633
+        }
+      },
+      "log_det_D_squared": "log(110962529960861050192382965087890625/1208925819614629174706176)",
+      "log_det_D_squared_numeric": 25.24272620041117,
+      "log_det_compute_seconds": 0.028434276580810547,
+      "laurent_at_zero": {
+        "residue": "16",
+        "next_order_coeff": "-log(110962529960861050192382965087890625/1208925819614629174706176) - 16*EulerGamma",
+        "next_order_numeric": -34.478176838835694,
+        "note": "(1/s) . Gamma(s+1) . zeta_D2(s); pole = N = dim_H; next = -log det - N gamma_E"
+      }
+    },
+    "nmax3_Lambda": {
+      "dim_H": 40,
+      "spectrum": [
+        [
+          "9/4",
+          4
+        ],
+        [
+          "25/4",
+          12
+        ],
+        [
+          "49/4",
+          24
+        ]
+      ],
+      "small_t_taylor": [
+        "40",
+        "-378",
+        "8181/4",
+        "-125583/16",
+        "5961207/256"
+      ],
+      "mellin_at_integer_s": {
+        "1": {
+          "Gamma_s": "1",
+          "zeta_D2_truncated": "62368/11025",
+          "M_phi0_truncated": "62368/11025",
+          "continuum_zeta": "-pi**2/4",
+          "ratio_trunc_to_cont": -2.2926801202377587
+        },
+        "2": {
+          "Gamma_s": "1",
+          "zeta_D2_truncated": "152820352/121550625",
+          "M_phi0_truncated": "152820352/121550625",
+          "continuum_zeta": "-pi**4/12 + pi**2",
+          "ratio_trunc_to_cont": 0.7175385585444397
+        },
+        "3": {
+          "Gamma_s": "2",
+          "zeta_D2_truncated": "553960380928/1340095640625",
+          "M_phi0_truncated": "1107920761856/1340095640625",
+          "continuum_zeta": "pi**4*(10 - pi**2)/30",
+          "ratio_trunc_to_cont": 0.9763414813106475
+        },
+        "4": {
+          "Gamma_s": "6",
+          "zeta_D2_truncated": "2437858623956992/14774554437890625",
+          "M_phi0_truncated": "4875717247913984/4924851479296875",
+          "continuum_zeta": "pi**6*(168 - 17*pi**2)/1260",
+          "ratio_trunc_to_cont": 0.9978288525512429
+        },
+        "5": {
+          "Gamma_s": "24",
+          "zeta_D2_truncated": "11518144097460133888/162889462677744140625",
+          "M_phi0_truncated": "92145152779681071104/54296487559248046875",
+          "continuum_zeta": "pi**8*(306 - 31*pi**2)/5670",
+          "ratio_trunc_to_cont": 0.9997869271059823
+        }
+      },
+      "laurent_at_zero": {
+        "dim_H": 40,
+        "residue": "40",
+        "next_order": "log(1208925819614629174706176/14353442124942943872208083545039465695543489515781402587890625) - 40*EulerGamma",
+        "log_det_numeric": -85.3673209176227
+      }
+    }
+  },
+  "m1_identification": {
+    "Vol_S3": "2*pi**2",
+    "Vol_S2": "4*pi",
+    "M1_Hopf_base_measure": "pi",
+    "spinor_multiplicity": "2",
+    "weyl_leading_coeff_continuum": "sqrt(pi)/2",
+    "weyl_leading_simplified": "sqrt(pi)/2",
+    "interpretation": "At finite cutoff, M[phi_0](s) at s in {1,2,3} is bit-exact rational * Gamma(integer); no pi appears. The s -> 0 residue is N = dim H (rational integer). M1 Hopf-base measure pi enters only at the continuum limit, through the Weyl-law leading coefficient Vol(S^3) = 2 pi^2 which sets the heat-kernel small-t leading as t^{-3/2} * pi^{-1/2}. The M1 mechanism is therefore the continuum-limit M[Tr(e^{-t D^2})] short-time asymptotic, NOT the finite-cutoff Laurent expansion at s = 0."
+  },
+  "continuum_results": {
+    "regularised_zeta_at_s_zero": "0",
+    "comment": "Continuum regularised zeta_{D^2}(0) = 0 exactly (computed via Hurwitz Bernoulli polynomial reduction). The finite-cutoff value is dim H. The Weyl-law divergence dim H -> infinity matches the continuum t^{-3/2} short-time leading of Tr(e^{-t D^2})."
+  },
+  "wall_seconds": 1.192735195159912
+}

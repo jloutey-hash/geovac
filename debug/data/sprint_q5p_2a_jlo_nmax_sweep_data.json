@@ -1,0 +1,237 @@
+{
+  "sprint": "Q5'-Stage1-2a-JLO-nmax-sweep",
+  "n_max_panel": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "symbol_triples": {
+    "n_max=1": {
+      "n_max": 1,
+      "dim_H": 4,
+      "n_sectors": 2,
+      "chi_plus": 2,
+      "chi_minus": 2,
+      "M1_dim_H": 4,
+      "M2_Tr_Lambda_squared": 9,
+      "M3_Tr_gamma_Lambda": 6,
+      "phi_0_odd_Lambda_coeffs": [
+        "4",
+        "-9",
+        "81/8"
+      ],
+      "M1_full_D": 4,
+      "M2_full_D_Tr_D_squared": "289/32",
+      "M3_full_D_Tr_gamma_D": 6,
+      "wall_seconds": 0.0015246868133544922
+    },
+    "n_max=2": {
+      "n_max": 2,
+      "dim_H": 16,
+      "n_sectors": 5,
+      "chi_plus": 8,
+      "chi_minus": 8,
+      "M1_dim_H": 16,
+      "M2_Tr_Lambda_squared": 84,
+      "M3_Tr_gamma_Lambda": 36,
+      "phi_0_odd_Lambda_coeffs": [
+        "16",
+        "-84",
+        "489/2"
+      ],
+      "M1_full_D": 16,
+      "M2_full_D_Tr_D_squared": "5401/64",
+      "M3_full_D_Tr_gamma_D": 36,
+      "wall_seconds": 0.009340286254882812
+    },
+    "n_max=3": {
+      "n_max": 3,
+      "dim_H": 40,
+      "n_sectors": 9,
+      "chi_plus": 20,
+      "chi_minus": 20,
+      "M1_dim_H": 40,
+      "M2_Tr_Lambda_squared": 378,
+      "M3_Tr_gamma_Lambda": 120,
+      "phi_0_odd_Lambda_coeffs": [
+        "40",
+        "-378",
+        "8181/4"
+      ],
+      "M1_full_D": 40,
+      "M2_full_D_Tr_D_squared": "759/2",
+      "M3_full_D_Tr_gamma_D": 120,
+      "wall_seconds": 0.0971686840057373
+    },
+    "n_max=4": {
+      "n_max": 4,
+      "dim_H": 80,
+      "n_sectors": 14,
+      "chi_plus": 40,
+      "chi_minus": 40,
+      "M1_dim_H": 80,
+      "M2_Tr_Lambda_squared": 1188,
+      "M3_Tr_gamma_Lambda": 300,
+      "phi_0_odd_Lambda_coeffs": [
+        "80",
+        "-1188",
+        "20493/2"
+      ],
+      "M1_full_D": 80,
+      "M2_full_D_Tr_D_squared": "38137/32",
+      "M3_full_D_Tr_gamma_D": 300,
+      "wall_seconds": 0.4248628616333008
+    }
+  },
+  "ch1_cross_check": {
+    "n_max=2": {
+      "dim_H_match": true,
+      "M2_match": true,
+      "M3_match": true,
+      "all_match": true
+    },
+    "n_max=3": {
+      "dim_H_match": true,
+      "M2_match": true,
+      "M3_match": true,
+      "all_match": true
+    },
+    "n_max=4": {
+      "dim_H_match": true,
+      "M2_match": true,
+      "M3_match": true,
+      "all_match": true
+    }
+  },
+  "closed_forms": {
+    "M1_dim_H": {
+      "factored": "2*n_max*(n_max + 1)*(n_max + 2)/3",
+      "expanded": "2*n_max**3/3 + 2*n_max**2 + 4*n_max/3",
+      "derivation": "sum_{n=1}^{n_max} 2 n(n+1) = (2/3) n_max (n_max+1) (n_max+2)"
+    },
+    "M2_Tr_Lambda_squared": {
+      "factored": "n_max*(n_max + 1)*(n_max + 2)*(2*n_max + 1)*(2*n_max + 3)/10",
+      "expanded": "2*n_max**5/5 + 2*n_max**4 + 7*n_max**3/2 + 5*n_max**2/2 + 3*n_max/5",
+      "derivation": "sum_{n=1}^{n_max} 2 n(n+1)(n+1/2)^2 via Faulhaber"
+    },
+    "M3_Tr_gamma_Lambda": {
+      "factored": "n_max*(n_max + 1)**2*(n_max + 2)/2",
+      "expanded": "n_max**4/2 + 2*n_max**3 + 5*n_max**2/2 + n_max",
+      "derivation": "sum_{n=1}^{n_max} n(n+1)(2n+1) = n_max(n_max+1)^2(n_max+2)/2"
+    }
+  },
+  "closed_form_vs_computed": {
+    "n_max=1": {
+      "M1_closed": 4,
+      "M1_computed": 4,
+      "M1_match": true,
+      "M2_closed": "9",
+      "M2_closed_as_int": 9,
+      "M2_computed": 9,
+      "M2_match": true,
+      "M3_closed": 6,
+      "M3_computed": 6,
+      "M3_match": true
+    },
+    "n_max=2": {
+      "M1_closed": 16,
+      "M1_computed": 16,
+      "M1_match": true,
+      "M2_closed": "84",
+      "M2_closed_as_int": 84,
+      "M2_computed": 84,
+      "M2_match": true,
+      "M3_closed": 36,
+      "M3_computed": 36,
+      "M3_match": true
+    },
+    "n_max=3": {
+      "M1_closed": 40,
+      "M1_computed": 40,
+      "M1_match": true,
+      "M2_closed": "378",
+      "M2_closed_as_int": 378,
+      "M2_computed": 378,
+      "M2_match": true,
+      "M3_closed": 120,
+      "M3_computed": 120,
+      "M3_match": true
+    },
+    "n_max=4": {
+      "M1_closed": 80,
+      "M1_computed": 80,
+      "M1_match": true,
+      "M2_closed": "1188",
+      "M2_closed_as_int": 1188,
+      "M2_computed": 1188,
+      "M2_match": true,
+      "M3_closed": 300,
+      "M3_computed": 300,
+      "M3_match": true
+    }
+  },
+  "rationality": {
+    "n_max=1": {
+      "M1_is_int": true,
+      "M2_is_int": true,
+      "M3_is_int": true
+    },
+    "n_max=2": {
+      "M1_is_int": true,
+      "M2_is_int": true,
+      "M3_is_int": true
+    },
+    "n_max=3": {
+      "M1_is_int": true,
+      "M2_is_int": true,
+      "M3_is_int": true
+    },
+    "n_max=4": {
+      "M1_is_int": true,
+      "M2_is_int": true,
+      "M3_is_int": true
+    }
+  },
+  "all_integer": true,
+  "subleading_coefficients": {
+    "n_max=1": {
+      "phi_0_odd_Lambda_coeffs": [
+        "4",
+        "-9",
+        "81/8"
+      ],
+      "M2_full_D_Tr_D_squared": "289/32"
+    },
+    "n_max=2": {
+      "phi_0_odd_Lambda_coeffs": [
+        "16",
+        "-84",
+        "489/2"
+      ],
+      "M2_full_D_Tr_D_squared": "5401/64"
+    },
+    "n_max=3": {
+      "phi_0_odd_Lambda_coeffs": [
+        "40",
+        "-378",
+        "8181/4"
+      ],
+      "M2_full_D_Tr_D_squared": "759/2"
+    },
+    "n_max=4": {
+      "phi_0_odd_Lambda_coeffs": [
+        "80",
+        "-1188",
+        "20493/2"
+      ],
+      "M2_full_D_Tr_D_squared": "38137/32"
+    }
+  },
+  "asymptotic_leading": {
+    "M1": "(2/3) n_max (n_max+1) (n_max+2) ~ (2/3) n_max^3",
+    "M2": "polynomial of degree 5 ~ (2/5) n_max^5",
+    "M3": "n_max (n_max+1)^2 (n_max+2) / 2 ~ n_max^4 / 2"
+  },
+  "wall_seconds": 0.6053144931793213
+}
