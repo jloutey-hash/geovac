@@ -1,0 +1,22 @@
+{
+  "sprint": "Q5-prime-Tannakian-Closure-TC-2a",
+  "n_max": 2,
+  "predicted_dim": 15,
+  "verdict": "POSITIVE \u2014 equality at finite cutoff",
+  "n_constraints_kept": 736,
+  "A_shape": [
+    736,
+    61
+  ],
+  "rank_A": 46,
+  "rank_aug": 46,
+  "consistent": true,
+  "n_vars": 61,
+  "nullity": 15,
+  "dim_solution_variety": 15,
+  "n_total_morphisms_in_panel": 271,
+  "n_free_vars": 15,
+  "eta_T_solved": "1",
+  "phi_recovery_all_match": true,
+  "wall_time_seconds": 1.8525841236114502
+}

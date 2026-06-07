@@ -1,0 +1,40 @@
+{
+  "sprint": "Q5-prime-Tannakian-Closure-TC-2b",
+  "n_max": 2,
+  "part_A_sl2_panel": {
+    "top_left_eq_sym2_eta": true,
+    "bottom_right_eq_det_eta": true,
+    "off_diagonal_blocks_zero": true,
+    "det_constraint": "a*d - b*c - 1",
+    "jacobian_rank_at_identity": 1,
+    "jacobian_rank_at_generic": 1,
+    "ambient_dim": 4,
+    "codim": 1,
+    "variety_dim": 3,
+    "predicted_dim": 3,
+    "match": true
+  },
+  "part_B_combined": {
+    "g0": [
+      1,
+      0,
+      0
+    ],
+    "q_g": "2/3",
+    "eta_combined_shape": [
+      4,
+      4
+    ],
+    "invertibility_holds": true,
+    "h_gv_naturality_bit_exact": true,
+    "sl2_action_eta_residual_norm_squared": "22/3",
+    "n_max_axis_dim_from_tc2a": 15,
+    "sl2_axis_dim": 3,
+    "combined_dim_predicted": 18,
+    "exterior_tensor_product_basis": "Deligne-Milne 1982 Thm 2.3:\\ neutral Tannakian C1 \\otimes C2 has Aut^otimes = G1 \\times G2."
+  },
+  "part_A_verdict": "POSITIVE",
+  "part_B_verdict": "POSITIVE",
+  "overall_verdict": "POSITIVE",
+  "wall_time_seconds": 0.03496098518371582
+}

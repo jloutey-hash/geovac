@@ -2737,7 +2737,106 @@ literal Deligne--Glanois Galois descent from level $4$ to level $2$
 on the framework's natural Dirichlet series.
 
 % =====================================================================
+\appendix
+\section{The Bost--Connes / scaling-site substrate as arithmetic-side analog}
+\label{app:bc_rh}
+% =====================================================================
+
+The cosmic-Galois $U^*$ thread of \S\ref{sec:open_m2_m3} sits on the
+\emph{geometric} side of the Connes--Marcolli motivic Galois
+machinery:\ its substrate is the Fock-projected $\sthree$ graph, its
+periods are cyclotomic mixed-Tate at level $\le 4$, and its
+transcendentals are classified by the master Mellin engine
+$\mathcal{M}[\mathrm{Tr}(D^k e^{-tD^2})]$ at $k \in \{0, 1, 2\}$.  A
+distinct but adjacent strand of the broader NCG program treats the
+\emph{arithmetic} side of $\zeta$ directly:\ the Bost--Connes
+system~\cite{bost_connes1995}, the Connes--Consani scaling
+site~\cite{connes_consani2014_scaling}, and the recent
+Connes--Consani--Moscovici zeta spectral
+triples~\cite{connes_consani_moscovici2025_zeta}.  This appendix
+records, for completeness, the structural relationship between that
+strand and the GeoVac substrate, and notes its honest scope.
+
+\paragraph{BC system as arithmetic substrate.}
+Bost and Connes~\cite{bost_connes1995} constructed a quantum
+statistical mechanical (QSM) system whose partition function is
+$\zeta(\beta)$ and whose symmetry group recovers
+$\mathrm{Gal}(\mathbb{Q}^{\mathrm{ab}}/\mathbb{Q})$.  Its substrate is
+adelic (the finite ad\`eles $\mathbb{A}_f$, the integral lattices
+$\widehat{\mathbb{Z}}$, the Hecke algebra of commensurability classes)
+and its natural objects are KMS states at varying inverse temperature
+$\beta$.  This substrate is structurally orthogonal to GeoVac's
+combinatorial Fock-projected $\sthree$ graph:\ where GeoVac's $U^*$
+acts on Mellin-moment-labelled data over a finite vertex set, the BC
+system acts on adelic commensurability classes via the Hecke
+convolution algebra.  The categorical orthogonality is recorded as
+one of the four structural grounds on which the QSM /
+Greenfield--Marcolli--Teh~\cite{greenfield_marcolli_teh2014} lineage
+is ruled out as a $U^*$ transport target for GeoVac
+(\S\ref{sec:open_m2_m3} honest-scope paragraph;\ type III vs.\ type
+II/I, $\sigma$-twisted vs.\ standard Connes axioms, arithmetic adelic
+input vs.\ combinatorial graph input, infinite vs.\ finite cutoff).
+
+\paragraph{Scaling site as topos-level generalisation.}
+Connes and Consani~\cite{connes_consani2014_scaling,connes_consani2016_geometry}
+subsequently lifted the BC construction to a topos-theoretic
+substrate, the \emph{scaling site}, whose points carry the
+multiplicative action of $\mathbb{R}_+^\times$ and whose structure
+sheaf encodes the explicit formulas of Riemann--Weil.  Connes,
+Consani, and Moscovici~\cite{connes_consani_moscovici2025_zeta}
+consolidate this into ``zeta spectral triples'' that package the
+explicit formulas at the level of a single spectral triple.  This is
+the current state of the art on the arithmetic side and is the
+natural reference framework for the BC--RH program.
+
+\paragraph{Honest scope and relationship to GeoVac.}
+The arithmetic content of $\zeta$ accessible to the BC / scaling-site
+/ zeta-spectral-triple substrate is \emph{not native to GeoVac}.
+GeoVac's RH-adjacent object is the Dirac spectral zeta $D(s)$ on the
+Fock-projected $\sthree$ graph (CLAUDE.md \S 1.7 WH6), whose zero
+statistics are empirically GUE-like but which is structurally
+separated from classical Riemann $\zeta$ by three independent walls
+(Sprint 4 RH-N/O, Paper~29 \S 6):\ zeros not on a single critical
+line, no spectral-triple-natural functional equation, wrong Weyl law
+class.  Engaging the BC--RH program in earnest would require
+rebuilding GeoVac's substrate on adelic / scaling-site arithmetic
+input, not on the combinatorial $\sthree$ graph this paper has
+classified.  That is a parallel multi-year research arc in its own
+right;\ it is not a sub-sprint of the present cosmic-Galois $U^*$
+program.  We record it here so that the relationship is on the
+record:\ GeoVac and the BC--RH program target adjacent corners of
+the NCG landscape, but the substrates do not transport, and the
+present paper's classification of GeoVac periods is structurally
+orthogonal to whatever the zeta-spectral-triple substrate classifies.
+
+% =====================================================================
 \begin{thebibliography}{99}
+
+\bibitem{bost_connes1995}
+J.-B.~Bost and A.~Connes, ``Hecke algebras, type III factors and
+phase transitions with spontaneous symmetry breaking in number
+theory,'' \textit{Selecta Math.~(N.S.)}~\textbf{1}, 411--457 (1995).
+
+\bibitem{connes_consani2014_scaling}
+A.~Connes and C.~Consani, ``The scaling site,''
+\textit{C.\ R.\ Acad.\ Sci.\ Paris, Ser.~I}~\textbf{354}, 1--6
+(2016);\ preprint arXiv:1603.03191 (2016).
+
+\bibitem{connes_consani2016_geometry}
+A.~Connes and C.~Consani, ``Geometry of the scaling site,''
+\textit{Selecta Math.~(N.S.)}~\textbf{23}, 1803--1850 (2017).
+
+\bibitem{connes_consani_moscovici2025_zeta}
+A.~Connes, C.~Consani, and H.~Moscovici, ``Zeta spectral triples
+and the explicit formulas,'' preprint arXiv:2511.22755 (2025) ---
+\emph{PI verification flag:\ arXiv ID is post-training-cutoff and
+should be re-verified before final submission.}
+
+\bibitem{greenfield_marcolli_teh2014}
+M.~Greenfield, M.~Marcolli, and K.~Teh, ``Twisted spectral triples
+and quantum statistical mechanical systems,'' \textit{p-Adic
+Numbers, Ultrametric Analysis, and Applications}~\textbf{6},
+81--104 (2014);\ preprint arXiv:1305.5492 (2013).
 
 \bibitem{loutey_paper2}
 J.~Loutey, ``Paper 2: $\alpha = K^{-1}$ as a spectral coincidence on

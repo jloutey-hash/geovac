@@ -7,6 +7,207 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.78.0] - 2026-06-06
+
+### Summary
+
+**Sprint Closure-Agents-Round** — five sub-agents dispatched in parallel to close threads from the day's TC-2 + NA-1 + cosmic-Galois comparison arc. Headline finding: **Hain–Brown's relative completion of $SL_2(\mathbb{Z})$ (Hain 2014, arXiv:1403.6443; Brown 2014, arXiv:1407.5167) is a structural match for GeoVac's $U^* = \mathbb{G}_a^\infty \rtimes SL_2$.**
+
+**Agent 1 (depth-2 Mellin test design):** specified the NA-1 follow-on test. M2 element $a_0^{\text{scalar}} = \sqrt{\pi}/2$ on $S^3$, M3 element $D_{\text{even}}(4) - D_{\text{odd}}(4) = 8G - 8\beta(4)$. Test compares (a) single-trace iterated insertion vs (b) product of independent traces; if (a) = (b) symbolically as rational functions of $(s_1, s_2)$, Reading A confirmed (GeoVac = abelianization). Concrete 2-hour first signal: M2-M2 case at $n_{\max} = 2$, assertion `simplify(joint - product) == 0`. Full sprint 1 week.
+
+**Agent 2 (period-ring injection scoping):** Track C overcalled "provable today." Honest sprint scope: **2.5-4 weeks** with three named caveats: (i) M1/M2 collapse is structural (5 GeoVac generators per weight → 1 motivic generator; feature given Paper 18's three-bullet partition); (ii) only the M3 column injects substantively; (iii) GeoVac is depth-blind on its side. Refined sprint name: **TC-3 ($L_4$ comparison)**.
+
+**Agent 3 (Hodge-theoretic SL_2 probe) — HEADLINE FINDING:** GeoVac's $U^*$ structurally matches **Hain–Brown's relative completion of $SL_2(\mathbb{Z})$** = motivic Galois of universal mixed elliptic motives (MEM$_1$) over $\mathcal{M}_{1,1}$. Side-by-side: extension $1 \to U \to G^{\mathrm{rel}} \to SL_2 \to 1$ with $U$ pro-unipotent matches $\mathbb{G}_a^\infty$; standard rep $V = H^1(E) = \mathbb{Q}^2$ matches $V_{\mathrm{fund}}$; $\mathrm{Sym}^k$ generators match GeoVac panel; canonical mixed Hodge structure (Hain 2014). Hain–Brown is the only published structure in the cosmic-Galois lineage that hits all four GeoVac structural features. Implications: GeoVac sits **one storey above Brown's mixed Tate**, natural realisation is **Hodge / Hodge-de-Rham** (not étale/$\ell$-adic), Connes-Marcolli's $U^*_{CM}$ becomes the **Tate-degenerate fibre** of an MEM-like structure. Sprint-scale test (Test A, 1-2 weeks): PSLQ GeoVac $\mathrm{Sym}^2$ periods against Hain-Brown periods involving $E_4, E_6, \zeta(3), \zeta(5), \Delta$. Rule out Lefschetz SL_2 (wrong category), CKS/nilpotent-orbit SL_2 (wrong axis), Saito MHM SL_2 (internal), Mumford-Tate (right reductive but missing pro-unipotent radical).
+
+**Agent 4 (corpus audit + Paper 55 BC-RH appendix):** 6 substantive edits across Papers 31/32/25 + field guide, all tightening "MvS lineage" language to "MvS 2014 instance + Perez-Sanchez 2025 correction + GeoVac-original extensions." Paper 32 §sec:lineage opening rewritten. Paper 55 BC-RH appendix added (~400 words, 5 bibitems including Bost-Connes 1995, Connes-Consani 2014/2016 scaling site, Connes-Consani-Moscovici 2025 zeta spectral triples). PI verification flag on `arXiv:2511.22755` ID (post-training-cutoff).
+
+**Agent 5 (strategic synthesis memo):** wrote `debug/strategic_synthesis_2026_06_06_memo.md` (~2,800 words + 1,200-word Hain-Brown addendum after primary draft). Refined cleanest honest statement: "GeoVac's finite-cutoff Tannakian dual is bit-exactly $\mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ at every $n_{\max} \in \{1, 2, 3, 4\}$ tested ... and the injective comparison $U^* \hookrightarrow \mathcal{U}_4$ at the period-ring level is provable as a sprint-scale theorem, with equality remaining the multi-year forward direction." Buzzword "geometric seed of cosmic Galois" retired in favor of **"closed-immersion candidate sub-pro-algebraic group of (the level-4 motivic Galois group, possibly refined to Hain-Brown's relative completion)."**
+
+### Closed
+
+- **Closure agents round** — 5/5 reports delivered; corpus edits applied; synthesis memo updated with Hain-Brown addendum; sprint memos for all of today's arc complete.
+
+### Added
+
+- **`debug/strategic_synthesis_2026_06_06_memo.md`** (~4,000 words including Hain-Brown addendum). Audience: PI + next session's PM. Reader's map at end.
+- **6 corpus edits** tightening MvS-lineage language:
+  - Paper 31 line 138 (Section setup): "in the MvS sense" → "instance + extension" framing.
+  - Paper 31 line 204 ("fits this lineage almost verbatim"): → "is an instance of this construction at the data level."
+  - Paper 32 line 190 (§I "Construction"): "spectral triple in the same lineage" → "instance + extension" framing with cite list.
+  - Paper 32 §sec:lineage opening + section title: "Marcolli-vS Lineage" → "Marcolli-vS Placement: Instance + GeoVac-Original Extension."
+  - Paper 25 lines 130-134: tightened to "instance at the data level + GeoVac-original structural extensions."
+  - Field guide 3 instances (lines ~57, 262, 676): tightened to instance-not-lineage framing.
+- **Paper 55 BC-RH appendix** at line 2740 (before bibliography), 3 paragraphs + 5 new bibitems. Records BC system / Connes-Consani scaling site as adjacent arithmetic-substrate corner of the NCG landscape; substrates don't transport; engaging the BC-RH program in earnest = multi-year parallel research arc.
+- **CLAUDE.md §2 one-liner** for v3.78.0 (≤30 words, per §13.11 discipline). v3.77.0 entry compacted from ~500 words to ~32 words (technical-debt cleanup).
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- All previously-passing tests still pass (no production code changed).
+- Paper 25: 10 pages, three-pass clean.
+- Paper 31: 14 pages, three-pass clean.
+- Paper 32: 75 pages, three-pass clean (pre-existing undefined citations `suijlekom_book2015`, `paper51` unrelated to today's edits).
+- Paper 55: 35 pages with new appendix, three-pass clean.
+- Paper 56: 17 pages, three-pass clean (unchanged from v3.77.0).
+- Field guide: 11 pages, three-pass clean.
+
+### Honest scope
+
+- **Closed at theorem grade**: 4 sub-agent reports were honest audits; all flagged caveats and scope limits explicitly. Track C's "provable today" was correctly downgraded by Agent 2 to "writeable in a 2.5-4 week sprint with three named caveats." Agent 3's Hain-Brown identification is **structural shape match**, not yet theorem-grade — sprint-scale Test A (PSLQ on $\mathrm{Sym}^2$ periods against modular ring) would upgrade it to empirical evidence.
+- **Structural sketches**: the Hain-Brown identification is the substantive new claim. It's a shape match across reductive factor, pro-unipotent radical structure, standard rep, $\mathrm{Sym}^k$ generators, and Hodge realisation. The match is striking but not yet proven; Test A (1-2 weeks) would confirm or refute empirically. Test B (Lie-algebra generator-and-relation comparison) is multi-month.
+- **Numerical observations**: none new today. The TC-2 series numerical panel ($2{,}960$ bit-exact zero residuals at v3.77.0) stands.
+- **Named open follow-ons** for tomorrow's launchpad:
+  1. **Test A**: PSLQ GeoVac $\mathrm{Sym}^2$ periods against Hain-Brown modular periods ($E_4, E_6, \zeta(3), \zeta(5), \Delta$). 1-2 weeks. Decides whether the cosmic-Galois target is Hain-Brown or $\mathcal{G}_4$.
+  2. **NA-1 depth-2 Mellin test**: 2-hour first signal at M2-M2; full sprint 1 week if first signal is positive (Reading A confirmed).
+  3. **TC-3 ($L_4$ comparison sprint, period-injection assembly)**: 2.5-4 weeks. Builds the explicit $U^*_{GV}|_{\mathrm{M3}} \hookrightarrow \mathcal{U}_4$ injection with three named caveats. If Hain-Brown identification holds (post Test A), this sprint retargets to Hain-Brown's pro-unipotent radical.
+  4. **PI arXiv-ID verification** on `arXiv:2511.22755` (Connes-Consani-Moscovici 2025 zeta spectral triples; cited in Paper 55 BC-RH appendix; post-training-cutoff ID).
+
+## [3.77.0] - 2026-06-06
+
+### Summary
+
+**Sprint NA-1 + cosmic-Galois comparison sub-agents + paper-edit batch.** Four sub-agent reports synthesised the GeoVac↔motivic-Galois comparison and sharpened the framing across the corpus.
+
+**Sprint NA-1 (hidden non-abelian structure probe):** STRUCTURAL — abelian-by-construction. $\mathcal{H}_{GV} = \mathrm{Sym}_\mathbb{Q}(V)$ with primitive coproduct has abelian Tannakian dual by the Cartier-Milnor-Moore theorem in characteristic 0. There is no hidden non-abelian content at the substrate level — the abelianness is forced, not accidental. For non-abelian content the substrate would need to be enriched to the cofree-cocommutative shuffle Hopf algebra $T(V)$ with deconcatenation coproduct (motivic-style structure). Two structural readings remain consistent with current evidence: Reading A ($U^*_{GV}$ = abelianization of $U^*_{CM}$, weight-only geometric realisation) and Reading B (GeoVac's physical content respects shuffle coproduct, substrate needs enrichment). Concrete sprint-scale test identified: compute depth-2 joint Mellin transform of M2 × M3 moments, check symmetric (Reading A) vs asymmetric (Reading B) factorisation. **3,375/3,375 bit-exact zero residuals** on the commutativity panel; symbolic confirmation that commuting nilpotent rank-1 matrices on dim 2 over ℚ are proportional. Wall time 0.25 s. Memo: `debug/sprint_q5p_na1_non_abelian_probe_memo.md`.
+
+**Cosmic-Galois comparison sub-agent reports (4 in parallel):**
+
+- **Track A** (Connes-Marcolli structure): Brown 2017 establishes a *surjection* $U^*_{CM} \twoheadrightarrow \mathcal{G}_{MT(\mathbb{Z})}$, not an identification. $U^*_{CM}$ has free Lie generators $e_n$ in every positive degree; the motivic Galois has only odd-degree $\sigma_{2k+1}$. The surplus is the cancellation of even-zeta values $\zeta(2k) \in \pi^{2k}\mathbb{Q}$ already accounted for by $\mathbb{G}_m$. Loose "identification" framings in earlier GeoVac text are corrected to "surjection".
+
+- **Track B** (direct group comparison): GeoVac's $SL_2 \supset \mathbb{G}_m$ as maximal Cartan torus, structurally enhancing the reductive factor. The enhancement is FORCED by $S^3 = \mathrm{Spin}(3)$ geometry (Bertrand × Fock projection per WH4). Possible Hodge-theoretic identification: our $SL_2$ might be the Mumford-Tate $SL_2$ of a polarised variation of mixed Hodge structures on the $S^3$ substrate (named sprint-scale follow-on). Three possible structural relationships between $U^*_{GV}$ and $\mathcal{G}_{MT(\mathbb{Z})}$ named; Relationship A (GeoVac properly contains motivic Galois) favoured by current evidence.
+
+- **Track C** (period-ring comparison): The right comparison target is $\mathcal{G}_4 = \mathcal{G}_{MT(\mathbb{Z}[i, 1/2])}$ of Deligne 2010, NOT Brown's $\mathcal{G}_{MT(\mathbb{Z})}$. Eskandari-Murty-Nemoto 2025 (arXiv:2510.20648) prove Catalan $G = \beta(2)$ is not a period of mixed Tate over $\mathbb{Q}$ but is mixed Tate over $\mathbb{Q}(i)$ — this forces the level-4 refinement because GeoVac's M3 vertex-parity sector produces $G$ in QED vertex sums. **Provable today**: $U^*_{GV} \hookrightarrow \mathcal{U}_4$ at the period-ring level via Eskandari et al. + Deligne 2010 + Goncharov-Deligne 2005 faithfulness (sprint-scale). **Open**: equality (exhaustion) holds iff every level-4 cyclotomic motivic MZV is realised by some GeoVac observable.
+
+- **Track D** (Marcolli-van Suijlekom lineage audit): GeoVac is an MvS 2014 *instance* (with Perez-Sanchez 2025 YM-without-Higgs correction applied), NOT a faithful reproduction. MvS 2014 does not predict a Tannakian dual; $U^*_{GV}$ is GeoVac-original, sitting on top of the MvS scaffolding. Perez-Sanchez 2025 correction matches GeoVac H1 Yukawa non-selection theorem — independent confirmation. Recommended phrasing across corpus: "GeoVac is an MvS 2014 gauge network with Perez-Sanchez 2025 correction, equipped with additional Hopf-algebraic and Tannakian structure not present in 2014 framework."
+
+**BC-RH probe agent (user-requested):** NO sprint-scale entry point. WH6 (CLAUDE.md §1.7) is correct: GeoVac's spectral-zeta walls (RH-M, RH-N, RH-O) are not framework-incompleteness, they're framework-not-built-on-arithmetic-substrate. The BC system + Connes-Consani Arithmetic/Scaling Site framework structurally bypasses our walls by being built on $\widehat{\mathbb{Z}}^\times$ + Euler products from the start; what's missing in the BC-RH program is **Weil positivity** — a categorically different obstruction from anything GeoVac has met. State of the art: Connes-Consani-Moscovici 2025 "Zeta Spectral Triples" (arXiv:2511.22755) gives a numerical match to low $\zeta$ zeros from Euler products truncated at primes $p \le \lambda^2$; conceptually most concrete handle in 30 years but still numerical-coincidence-grade. Engaging would require rebuilding GeoVac on arithmetic substrate (multi-year parallel research arc, not a sprint).
+
+**Paper-edit batch:** Paper 56 §sec:open completely refactored. New subsections: §sec:open_converse (TC-2 closed converse at finite cutoff), §sec:open_g4 (natural comparison target $\mathcal{G}_4$ with cosmic-Galois comparison conjecture), §sec:open_na1 (abelian vs free non-abelian unipotent, Reading A vs Reading B from NA-1), §sec:open_profinite (multi-year inverse-limit identification). §sec:related tightened: MvS-lineage language refined to "instance + extensions" per Track D; Connes-Marcolli "surjection not identification" flagged per Track A. New bibitem `eskandari_murty_nemoto2025`. Paper 56 now 17 pages, three-pass clean. CLAUDE.md §2 entry added.
+
+### Closed
+
+- **NA-1 structural probe — VERDICT: abelian-by-construction.** 3,375/3,375 bit-exact zero residuals on commutativity panel + sympy-verified proportionality of commuting nilpotent rank-1 matrices on dim 2 + structural identification of cofree-cocommutative shuffle Hopf as natural enrichment target. Sprint-scale concrete test for Reading A vs Reading B named.
+- **Cosmic-Galois comparison sharpening** (via 4 sub-agent reports): comparison target refined to $\mathcal{G}_4$; Connes-Marcolli surjection-not-identification corrected; MvS lineage language tightened; BC-RH probe returned honest no-sprint-scale verdict.
+
+### Added
+
+- **`debug/compute_q5p_na1_non_abelian_probe.py`** — NA-1 driver (~330 lines, 0.25 s).
+- **`debug/data/sprint_q5p_na1_non_abelian_probe.json`** — data dump.
+- **`debug/sprint_q5p_na1_non_abelian_probe_memo.md`** — NA-1 memo (~3,500 words).
+- **Paper 56 substantial §sec:open refactor** — four new subsections replacing the prior §sec:open_converse; new bibitem `eskandari_murty_nemoto2025`. 17 pages (was 15). Three-pass clean.
+- **CLAUDE.md §2 entry** for v3.77.0 covering NA-1 + 4 sub-agent reports + BC-RH probe + paper edits.
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- All previously-passing tests still pass (no production code changed).
+- NA-1 driver runs bit-exact in 0.25 s.
+- Paper 56 three-pass clean compile, 17 pages.
+
+### Honest scope
+
+- **NA-1 closes a structural diagnostic, not a research question.** Whether GeoVac's physical content respects primitive or shuffle coproduct (Reading A vs B) is the named sprint-scale follow-on.
+- **The cosmic-Galois comparison sharpening is a framing refinement, not a new result.** The provable injection $U^*_{GV} \hookrightarrow \mathcal{U}_4$ at the period level is sprint-scale work (1-2 sprints, named); the equality / exhaustion is the multi-year forward direction.
+- **WH6 stands.** BC-RH probe confirmed the spectral-zeta walls are substrate-mismatch, not framework-incompleteness. RH is not accessible from GeoVac's current direction; engaging would require a parallel arithmetic-substrate research arc.
+
+### Sprint-scale follow-ons (named, not done here)
+
+1. **Depth-2 Mellin moment test** (NA-1 §6.1): probe Reading A vs Reading B by computing joint Mellin transform of M2 × M3 moments.
+2. **Hodge-theoretic SL_2 probe**: identify whether GeoVac's $SL_2$ corresponds to Mumford-Tate $SL_2$ of polarised VMHS.
+3. **Explicit injection $U^*_{GV} \hookrightarrow \mathcal{G}_4$ at the period-ring level**: provable today using Eskandari et al. + Deligne 2010 + Goncharov-Deligne 2005.
+4. **Depth-2 level-4 cyclotomic MZV hunt** in a GeoVac observable (exhaustion direction).
+
+## [3.76.0] - 2026-06-06
+
+### Summary
+
+**Q5'-Tannakian-Closure TC-2b/c/d — converse direction CLOSED at finite cutoff.** Three sub-sprints close the remaining content of the Deligne--Milne 1982 Theorem 2.11 reconstruction direction at finite cutoff, in one day, building on TC-2a (v3.75.0, same day). At the end of this version, the GeoVac substrate's per-cutoff Tannakian dual is verified to equal $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3 N(n_{\max})} \rtimes SL_2$ bit-exactly at $n_{\max} \in \{1, 2, 3, 4\}$, with cofiltered coherence packaging into the inverse-limit statement $\mathrm{Aut}^\otimes(\omega)^{(\infty)} = \mathbb{G}_a^\infty \rtimes SL_2$.
+
+**TC-2b ($SL_2$ factor):** Computes $\dim \mathrm{Aut}^\otimes(\omega)$ on the Peter--Weyl panel $\{V_{\mathrm{triv}}, V_{\mathrm{fund}}, \mathrm{Sym}^2 V_{\mathrm{fund}}\}$ bit-exactly. Tensor compatibility on $V_{\mathrm{fund}} \otimes V_{\mathrm{fund}}$ with the decomposition iso $\Phi:\ V_{\mathrm{fund}} \otimes V_{\mathrm{fund}} \cong \mathrm{Sym}^2 V_{\mathrm{fund}} \oplus V_{\mathrm{triv}}$ produces the bit-exact identity $\Phi \cdot (\eta_{V_{\mathrm{fund}}} \otimes \eta_{V_{\mathrm{fund}}}) \cdot \Phi^{-1} = \mathrm{Sym}^2(\eta_{V_{\mathrm{fund}}}) \oplus \det(\eta_{V_{\mathrm{fund}}})$. The top-left $3 \times 3$ block matches $\mathrm{Sym}^2(\eta_{V_{\mathrm{fund}}})$, the bottom-right $1 \times 1$ block matches $\det(\eta_{V_{\mathrm{fund}}})$, off-diagonal blocks vanish. Unit normalisation $\eta_{V_{\mathrm{triv}}} = 1$ forces $\det = 1$. Jacobian rank 1 at every $SL_2$-point (gradient $(d, -c, -b, a)$). Variety dim $= 4 - 1 = 3 = \dim SL_2$. Combined with TC-2a gives $\dim \mathrm{Aut}^\otimes(\omega)|_{\mathrm{combined}, n_{\max} = 2} = 15 + 3 = 18 = \dim U^*_{\mathrm{Levi}}$ via Deligne--Milne 1982 Theorem 2.3 (exterior tensor product of neutral Tannakian categories). Memo:\ `debug/sprint_q5p_tc2b_sl2_aut_equality_memo.md`.
+
+**TC-2c (higher cutoffs):** Per-cutoff equality $\dim \mathrm{Aut}^\otimes(\omega)|_{n_{\max}\text{-axis}} = 3 N(n_{\max})$ verified bit-exactly at $n_{\max} \in \{1, 2, 3, 4\}$:\ values $6, 15, 27, 42$ all matched. $\Phi$ recovery 100% at every cutoff. Pattern $n_{\max}$-uniform, not a coincidence at $n_{\max} = 2$. Wall time:\ 12.2 s ($n_{\max} = 3$), 55.7 s ($n_{\max} = 4$);\ scales polynomially. Memo:\ `debug/sprint_q5p_tc2c_higher_cutoff_memo.md`.
+
+**TC-2d (cofiltered coherence):** Spec-dual of PS-2 Hopf-algebra transitions $\Phi_{m, k}:\ \mathcal{H}_{\mathrm{GV}}(m) \to \mathcal{H}_{\mathrm{GV}}(k)$ gives restriction maps $\rho_{m, k}:\ \mathrm{Aut}^\otimes(\omega)^{(m)} \to \mathrm{Aut}^\otimes(\omega)^{(k)}$, acting at the parameter level as coordinate truncation $t \mapsto t|_{P^{(k)}}$. Three structural blocks verified bit-exact:\ (A) panel-level restriction coherence on $V_g$ across 6 cofiltered pairs × 3 test parameters each (225 residuals);\ (B) cofiltered transitivity $\rho_{n, k} = \rho_{m, k} \circ \rho_{n, m}$ across 4 triples × 3 seeds (12 residuals);\ (C) restriction is group homomorphism (6 residuals). **243/243 bit-exact zero residuals.** Closure picture: $\mathrm{Aut}^\otimes(\omega)^{(\infty)} = \varprojlim_n (\mathbb{G}_a^{3 N(n)} \rtimes SL_2) = \mathbb{G}_a^\infty \rtimes SL_2$. Memo:\ `debug/sprint_q5p_tc2d_cofiltered_coherence_memo.md`.
+
+**Net structural verdict.** The Deligne--Milne 1982 Theorem 2.11 reconstruction $\mathrm{Aut}^\otimes(\omega) = U^*_{\mathrm{Levi}}$ is closed bit-exactly at every finite cutoff on the natural-substrate panel of GeoVac. The remaining multi-year content is the **inverse-limit identification** of $\mathbb{G}_a^\infty \rtimes SL_2$ with the motivic Galois group on the mixed-Tate period ring of v3.66.0 FO3 Interpretation C / Paper 55 on $\mathcal{O}_\infty$ (PS-3) — the pro-finite Tannakian theorem (Deligne 1990, Brown 2012, Glanois 2015) coherent with the period content.
+
+### Closed
+
+- **TC-2b $SL_2$ factor equality — POSITIVE.** 7 structural identities + dim 3 match; Jacobian rank 1 at identity and generic SL_2-point; 14 tests pass in 0.89 s.
+- **TC-2c per-cutoff equality at $n_{\max} \in \{3, 4\}$ — POSITIVE.** $\dim$ matches predicted $3 N(n_{\max})$ at every tested cutoff; $\Phi$ recovery bit-exact at every cutoff; 4 tests (3 fast + 1 slow) all pass.
+- **TC-2d cofiltered coherence — POSITIVE.** 243/243 bit-exact zero residuals; restriction maps form a coherent cofiltered system on $\{\mathrm{Aut}^\otimes(\omega)^{(n)}\}_n$; 7 tests pass in 0.90 s.
+
+### Added
+
+- **`debug/compute_q5p_tc2b_sl2_aut_equality.py`** — TC-2b driver (~400 lines, 0.03 s wall).
+- **`debug/compute_q5p_tc2c_higher_cutoff.py`** — TC-2c driver (~180 lines, 68 s wall at $n_{\max} = 3, 4$).
+- **`debug/compute_q5p_tc2d_cofiltered_coherence.py`** — TC-2d driver (~310 lines, 0.25 s wall).
+- **`debug/data/sprint_q5p_tc2{b,c,d}_*.json`** — bit-exact data dumps for all three sub-sprints.
+- **`debug/sprint_q5p_tc2{b,c,d}_*_memo.md`** — three sprint memos, ~3,500--5,000 words each.
+- **`tests/test_tannakian_sl2_aut_equality.py`** — 14 TC-2b regression tests, all pass.
+- **`tests/test_tannakian_higher_cutoff.py`** — 4 TC-2c regression tests (3 fast + 1 slow @ $n_{\max} = 4$), all pass.
+- **`tests/test_tannakian_cofiltered_coherence.py`** — 7 TC-2d regression tests, all pass.
+- **Paper 56 §sec:tc2b/c/d (three new subsections)** — Theorem 5.7 (TC-2b $SL_2$ equality) + proof + Corollary 5.8 (combined $\dim = 18$ via exterior tensor product); Theorem 5.9 (TC-2c per-cutoff equality) + parametric-extension proof + Remark 5.10 (rank-nullity closed form $\mathrm{rank}(A) = 2 \cdot 3 N(n_{\max}) + 1$); Theorem 5.11 (TC-2d cofiltered coherence) + Corollary 5.12 (inverse-limit $\mathbb{G}_a^\infty \rtimes SL_2$). Abstract honest-scope refined:\ converse direction closed at finite cutoff; remaining multi-year content is inverse-limit identification with motivic Galois on periods. Verification panel updated:\ +17 (TC-2b) + 73 (TC-2c) + 243 (TC-2d) = 333 new residuals, total $2{,}627 \to 2{,}960$. Files list updated. Test coverage $258 \to 282$. Three-pass clean compile (15 pages, up from 13). Two new bibitems: `deligne1990` (Cat\'egories tannakiennes), `brown2012` (Mixed Tate motives over $\mathbb{Z}$).
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- 24 / 24 new TC-2 tests pass (14 TC-2b + 3 TC-2c fast + 7 TC-2d).
+- Plus 1 TC-2c slow test ($n_{\max} = 4$, ~60s).
+- Total Tannakian arc:\ 282 / 282 (plus 1 slow).
+- Paper 56 three-pass clean compile, 15 pages.
+
+### Honest scope
+
+- **TC-2b/c/d together close the per-cutoff Tannakian reconstruction direction.** The Deligne-Milne 1982 Theorem 2.11 conclusion $\mathrm{Aut}^\otimes(\omega) = U^*$ now holds bit-exactly at every finite cutoff tested $n_{\max} \in \{1, 2, 3, 4\}$ on the natural-substrate panel.
+- **Inverse-limit content.** The cofiltered coherence (TC-2d) packages the per-cutoff equalities into the inverse-limit statement $\mathrm{Aut}^\otimes(\omega)^{(\infty)} = \mathbb{G}_a^\infty \rtimes SL_2$ at the panel level. The pro-finite Tannakian theorem coherent with v3.66.0 FO3 Interpretation C at the period level on $\mathcal{O}_\infty$ (PS-3) — identifying $\mathbb{G}_a^\infty \rtimes SL_2$ with the motivic Galois group on the mixed-Tate period ring — remains the multi-year frontier.
+- **Convention note.** The TC-2b argument uses the standard $\mathrm{Sym}^2$ basis convention of `geovac.tannakian._sl2_sym2_action`, where $e_1 e_2 = e_1 \otimes e_2 + e_2 \otimes e_1$ (without the $1/2$). The decomposition isomorphism $\Phi$ is constructed compatible with this.
+
+## [3.75.0] - 2026-06-06
+
+### Summary
+
+**Q5'-Tannakian-Closure TC-2a — finite-cutoff reconstruction (abelian factor) at $n_{\max} = 2$.** First quantitative test of the converse Tannakian direction (Deligne--Milne 1982 Theorem~2.11 reconstruction). At $n_{\max} = 2$, restricting the fiber functor $\omega$ to the $n_{\max}$-axis substrate $\mathrm{Rep}_{\mathrm{fin}}(\mathcal{H}_{\mathrm{GV}}(2))$ (i.e., forgetting the Peter--Weyl decoration), the bit-exact $\mathbb{Q}$-linear variety of natural $\otimes$-automorphisms of $\omega$ on the faithful witness panel of TC-1f together with the unit object $\mathbf{1}$ has dimension exactly $\dim = 15 = 3 N(2) = \dim \mathbb{G}_a^{3 N(2)}$. The TC-1e inclusion $\mathbb{G}_a^{15} \subseteq \mathrm{Aut}^\otimes(\omega)$ is therefore an **equality** on the abelian factor at this cutoff.
+
+Construction: parameterise $\eta_{V_g}$ on each of the 15 witness reps by 4 symbolic $\mathbb{Q}$-indeterminates, plus 1 for $\eta_T$;\ total 61 symbols. For every ordered pair $(V_a, V_b)$ in the panel-with-unit, compute the $\mathbb{Q}$-basis of $\mathrm{Hom}(V_a, V_b)$ bit-exactly via intertwining null space (271 morphisms total). Impose naturality $\eta_b f = f \eta_a$ for every basis morphism — 735 $\mathbb{Q}$-linear equations at the matrix-entry level. Add unit normalisation $\eta_T = 1$ as the 736th equation. The system $A v = b$ has $A \in \mathbb{Q}^{736 \times 61}$, $\mathrm{rank}(A) = 46$, $\mathrm{rank}([A \mid b]) = 46$ (consistent), nullity = $61 - 46 = 15$. Closed form:\ $p_g = 1, r_g = 0, s_g = 1, \eta_T = 1$ for all $g$;\ the 15 free parameters $\{q_g\}_g$ are in bijection with the 15 primitive generators. Each $\eta_{V_g} = \begin{pmatrix} 1 & q_g \\ 0 & 1 \end{pmatrix} = \exp(q_g E_{12}) = \Phi(t)(V_g)$ with $t_g = q_g$ — bit-exact recovery of the TC-1e $\Phi$ on all 15 reps.
+
+Cross-check at $n_{\max} = 1$:\ panel of 6 reps, predicted $\dim = 6 = 3 N(1)$, computed $\dim = 6$ bit-exact (independent confirmation the method tracks the predicted Tannakian dual at every cutoff). **Wall time:** 1.85 s. Memo:\ `debug/sprint_q5p_tc2a_aut_equality_memo.md`.
+
+**Strategic implication for the cosmic-Galois reading (PI conversation 2026-06-06):** TC-2a is the first quantitative measurement supporting the "GeoVac as geometric seed of cosmic Galois" reading at the structural level. No spurious natural $\otimes$-automorphisms exist outside the explicit $\Phi$ construction;\ the 15 free parameters ARE the 15 primitive generators, one-to-one.
+
+### Closed
+
+- **TC-2a finite-cutoff equality (abelian factor) at $n_{\max} = 2$ — POSITIVE.**  Three pieces:\
+  (1) **Dim match** — predicted 15, computed 15 bit-exact;\
+  (2) **System consistency** — $\mathrm{rank}(A) = \mathrm{rank}([A \mid b]) = 46$, nullity $= 61 - 46 = 15$;\
+  (3) **$\Phi$ recovery** — each of the 15 panel reps solves to $\eta_{V_g} = \exp(q_g E_{12})$ bit-exact, matching $\Phi(t)$ from TC-1e on every generator;\ plus $\eta_T = 1$ falls out (not imposed).\
+  Driver `debug/compute_q5p_tc2a_aut_equality.py`;\ data `debug/data/sprint_q5p_tc2a_aut_equality.json`;\ memo `debug/sprint_q5p_tc2a_aut_equality_memo.md`;\ tests `tests/test_tannakian_aut_equality.py` (9 tests, all pass in 3.18 s).
+
+### Added
+
+- **`debug/compute_q5p_tc2a_aut_equality.py`** — TC-2a driver (~330 lines, 1.85 s wall). Pure `sympy.Rational` arithmetic;\ uses `geovac.tannakian.FinDimRep`, `trivial_rep` substrate from TC-1a/d, plus `geovac.pro_system.primitive_generators` from PS-2.
+
+- **`debug/data/sprint_q5p_tc2a_aut_equality.json`** — bit-exact data dump.
+
+- **`debug/sprint_q5p_tc2a_aut_equality_memo.md`** — sprint memo, ~3,500 words. TL;DR + verdict + Why this sharpens the inclusion direction + bit-exact panel + Honest scope + Implications for cosmic-Galois reading + discipline checks + paper-edit recs + sprint-scale follow-ons (TC-2b $SL_2$ layer / TC-2c higher $n_{\max}$ / TC-2d pro-system coherence).
+
+- **`tests/test_tannakian_aut_equality.py`** — 9 TC-2a regression tests covering witness panel size and activation, $\mathrm{Hom}$-basis correctness (disjoint generators 1-dim, endomorphisms 2-dim, unit pairs 1-dim each), the headline $\dim = 15$ at $n_{\max} = 2$, closed-form $\Phi$ recovery (15/15 match), panel morphism count (271), and the $n_{\max} = 1$ cross-check at $\dim = 6$. All pass in 3.18 s.
+
+- **Paper 56 \S sec:tc2a\_equality (new subsection)** — Theorem statement + proof + Remark on scope;\ verification panel table updated to 2,627 zero residuals;\ files list updated;\ test coverage $249 \to 258$. Three-pass clean compile (13 pages).
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- 9/9 TC-2a tests pass (NEW).
+- Total Tannakian arc:\ 258/258.
+- Paper 56 three-pass clean compile.
+
+### Honest scope
+
+- **TC-2a closes the converse direction on the *abelian factor* only.** The $SL_2$ factor of $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{15} \rtimes SL_2$ acts on the orthogonal Peter--Weyl decoration and is not detected by the $n_{\max}$-axis-only fiber functor used here. TC-2b (sprint-scale) layers in the PW panel and is expected to verify $\dim = 18 = \dim U^*_{\mathrm{Levi}}$.
+- **TC-2a is at $n_{\max} = 2$ only.** Higher cutoffs extend the panel and re-verify;\ PS-2 pro-system functoriality (v3.68.0) is the structural framework for propagation.
+- **The full multi-year content** — pro-finite Tannakian theorem on $\mathcal{O}_\infty$ coherent with v3.66.0 FO3 Interpretation C at the period level — remains unchanged from v3.74.0. TC-2a sharpens this from "multi-year discover" to "multi-year close the named coherence statement,"\ with the abelian-factor finite-cutoff piece now closed.
+
 ## [3.74.0] - 2026-06-06
 
 ### Summary

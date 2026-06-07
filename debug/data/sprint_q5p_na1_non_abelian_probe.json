@@ -1,0 +1,58 @@
+{
+  "sprint": "Q5-prime-Tannakian-Closure-NA-1",
+  "verdict": "STRUCTURAL-ABELIAN-BY-CONSTRUCTION",
+  "part_a": {
+    "n_max": 2,
+    "n_generators": 15,
+    "n_pairs_checked_on_panel": 3375,
+    "n_commutator_zero": 3375,
+    "all_commute_on_panel": true
+  },
+  "part_b": {
+    "X1_canonical": "E_{12}",
+    "n_solutions": 1,
+    "first_solution": {
+      "ap": "0",
+      "cp": "0",
+      "dp": "0"
+    },
+    "free_parameter": "bp (so X2 = bp * E_{12} = bp * X1)",
+    "structural_conclusion": "Commuting nilpotent rank-1 matrices on dim 2 over Q are linearly dependent;\\ no non-abelian arrangement possible.",
+    "proportional_form": true
+  },
+  "part_c": {
+    "primitive_coproduct": {
+      "form": "Delta_prim(x_1 * x_2) = sum of 4 terms (symmetric in x_1, x_2)",
+      "terms": [
+        "x_1 * x_2  (x)  1",
+        "x_1  (x)  x_2",
+        "x_2  (x)  x_1",
+        "1  (x)  x_1 * x_2"
+      ],
+      "dual_structure": "abelian G_a^N"
+    },
+    "deconcatenation_coproduct": {
+      "form": "Delta_dec(x_1 (x) x_2) = sum of 3 terms (asymmetric)",
+      "terms": [
+        "(x_1 (x) x_2)  (x)  1",
+        "x_1  (x)  x_2  (representing partition into [x_1] and [x_2])",
+        "1  (x)  (x_1 (x) x_2)"
+      ],
+      "dual_structure": "free non-abelian unipotent"
+    },
+    "structural_difference": "Primitive coproduct produces symmetric x_2 (x) x_1 and x_1 (x) x_2 terms (commutative shuffle), forcing abelian dual. Deconcatenation coproduct produces only the x_1 (x) x_2 term (asymmetric, non-commutative ordering), yielding free non-abelian dual.",
+    "match_at_depth_1": "At depth 1 (single generator x_g), both coproducts agree:\\ Delta(x_g) = x_g (x) 1 + 1 (x) x_g (primitive). The non-abelian content of motivic Hopf algebras appears only at depth >= 2 via the deconcatenation asymmetry."
+  },
+  "part_d": {
+    "question": "Does GeoVac's natural physical content respect the primitive coproduct (current substrate, abelian dual) or the cofree-cocommutative shuffle coproduct (motivic-style enrichment, free non-abelian dual)?",
+    "structural_implication_if_primitive": "GeoVac's U^*_GV is the ABELIANIZATION of the motivic free-non-abelian dual:\\ a specific structural projection that drops the depth grading / Lie bracket content of motivic Galois. GeoVac is a 'weight-only' geometric realization.",
+    "structural_implication_if_shuffle": "GeoVac's substrate needs ENRICHMENT to the shuffle Hopf algebra T(V) with deconcatenation coproduct, at which point its Tannakian dual upgrades to the free non-abelian unipotent. GeoVac IS a candidate geometric realization of the full motivic Galois (or sub-quotient).",
+    "concrete_test_sprint_scale": "Take two specific Mellin moments at depth 1 (M2 Seeley-DeWitt and M3 vertex-parity Hurwitz). Compute their joint Mellin transform at depth 2. Check whether the result factorises as M2_a * M3_b (primitive product, symmetric) or as a deconcatenation pair (ordered, asymmetric). This is a 1-2 sprint follow-on, not done here.",
+    "literature_anchors": [
+      "Cartier 2007 'A primer of Hopf algebras' -- classical structure",
+      "Brown 2012 'Mixed Tate motives over Z' Ann. Math. 175 -- motivic shuffle Hopf algebra",
+      "Connes-Marcolli 2008 NCGQFM book chap 17 -- cosmic Galois U^* cofree cocommutative structure"
+    ]
+  },
+  "wall_time_seconds": 0.24705910682678223
+}

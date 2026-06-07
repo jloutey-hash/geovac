@@ -1,0 +1,47 @@
+{
+  "sprint": "Q5-prime-Tannakian-Closure-TC-2c",
+  "results_by_cutoff": {
+    "3": {
+      "n_max": 3,
+      "n_gens": 27,
+      "predicted_dim_abelian": 27,
+      "predicted_dim_combined": 30,
+      "computed_dim": 27,
+      "n_total_morphisms": 811,
+      "n_constraints": 2296,
+      "rank_A": 82,
+      "rank_aug": 82,
+      "consistent": true,
+      "n_free_vars": 27,
+      "eta_T_solved": "1",
+      "phi_recovery_all_match": true,
+      "abelian_match": true,
+      "wall_time_seconds": 12.228434085845947
+    },
+    "4": {
+      "n_max": 4,
+      "n_gens": 42,
+      "predicted_dim_abelian": 42,
+      "predicted_dim_combined": 45,
+      "computed_dim": 42,
+      "n_total_morphisms": 1891,
+      "n_constraints": 5461,
+      "rank_A": 127,
+      "rank_aug": 127,
+      "consistent": true,
+      "n_free_vars": 42,
+      "eta_T_solved": "1",
+      "phi_recovery_all_match": true,
+      "abelian_match": true,
+      "wall_time_seconds": 55.7395544052124
+    }
+  },
+  "overall_verdict": "POSITIVE",
+  "summary": {
+    "n_max_tested": [
+      3,
+      4
+    ],
+    "abelian_match_all": true
+  }
+}

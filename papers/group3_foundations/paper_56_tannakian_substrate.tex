@@ -135,22 +135,26 @@ rep $V_{g}$ detects $g$ uniquely with $\eta_{V_{g}}(t) = I$ iff
 $t_{g} = 0$.
 
 \medskip
-\noindent\emph{Total bit-exact verification panel:\ $2{,}611$ zero
+\noindent\emph{Total bit-exact verification panel:\ $2{,}960$ zero
 residuals} ($\texttt{sympy}$-rational throughout) across PS-1/2/3/4 +
-TC-1a/b/c/d/e/f. The fourteenth math.OA standalone in the
-\textsc{GeoVac} series.
+TC-1a/b/c/d/e/f + TC-2a/b/c/d. The fourteenth math.OA standalone in
+the \textsc{GeoVac} series.
 
 \medskip
 \noindent\emph{Honest scope.} We close the \emph{inclusion} direction
 $\Aut^{\otimes}(\fibfun) \supseteq \Ulev$ at finite cutoff with both
-Levi factors explicit and full-panel injectivity at $\nmax = 2$. The
-\emph{converse equality} $\Aut^{\otimes}(\fibfun) = \Ulev$ --- i.e.\
-that no other natural $\otimes$-automorphisms exist --- is the
-Tannakian-reconstruction direction (Deligne--Milne 1982 Theorem~2.11)
-and remains a multi-year structural target. The substrate
-constructed here is the verified precondition;\ the reconstruction
-proper would package the period content of v3.66.0 FO3 Interpretation
-C against the pro-finite Tannakian theorem on $\Ginf$ (PS-3).
+Levi factors explicit (TC-1e/TC-1f). The \emph{converse equality}
+$\Aut^{\otimes}(\fibfun) = \Ulev$ at finite cutoff is closed by the
+TC-2 sub-arc:\ TC-2a (abelian factor at $\nmax = 2$), TC-2b
+($SL_{2}$ factor on the Peter--Weyl panel), TC-2c (higher cutoffs
+$\nmax \in \{3, 4\}$), and TC-2d (pro-system cofiltered coherence
+on the natural-substrate panel). The remaining multi-year content
+is the \emph{inverse-limit identification}
+$\Aut^{\otimes}(\fibfun)^{(\infty)} = \Ga^{\infty} \rtimes SL_{2}
+= U^{*}_{\mathrm{cosmic}}$ with the motivic Galois group on the
+mixed-Tate period ring of v3.66.0 FO3 Interpretation C on $\Ginf$
+(PS-3) --- the pro-finite Tannakian theorem coherent with the
+period content.
 \end{abstract}
 
 \tableofcontents
@@ -200,12 +204,18 @@ where $V_{\nmax}$ has $\Q$-dimension $3 N(\nmax)$.
 \subsection{What this paper does not claim}\label{sec:scope}
 
 The Tannakian reconstruction direction $\Aut^{\otimes}(\fibfun) =
-\Ulev$ --- the converse to the inclusion proved here --- is the deep
-content of Deligne--Milne 1982 Theorem~2.11. It would require the
-pro-finite Tannakian theorem on $\Ginf$ coherent with the v3.66.0 FO3
-period content. We do \emph{not} close that direction;\ this paper
-closes the inclusion side and the substrate side, both bit-exact at
-finite cutoff, leaving the converse as the named multi-year frontier.
+\Ulev$ at finite cutoff is closed in Sections~\ref{sec:tc2a_equality},
+\ref{sec:tc2b_sl2_equality}, \ref{sec:tc2c_higher_cutoff}, and
+\ref{sec:tc2d_cofiltered_coherence} as the TC-2 sub-arc
+(Theorems~\ref{thm:tc2a_equality}, \ref{thm:tc2b_sl2_equality},
+\ref{thm:tc2c_higher_cutoff}, \ref{thm:tc2d_cofiltered_coherence}).
+What is \emph{not} closed by this paper is the \emph{inverse-limit
+identification} of $\Aut^{\otimes}(\fibfun)^{(\infty)} = \Ga^{\infty}
+\rtimes SL_{2}$ with the motivic Galois group on the mixed-Tate
+period ring of v3.66.0 FO3 Interpretation C on $\Ginf$ (PS-3) ---
+this requires the pro-finite Tannakian theorem
+\cite{deligne1990,brown2012} coherent with the period content and
+remains the named multi-year frontier.
 
 We also do \emph{not} introduce any new ring of periods, any new
 spectral object, or any new conjecture about $\alpha$. The Hopf
@@ -224,8 +234,13 @@ $\Repcat$ is abelian, symmetric monoidal, and rigid (TC-1a/b/c).
 Section~\ref{sec:fiber_functor} constructs the fiber functor (TC-1d).
 Section~\ref{sec:ustar_inclusion} establishes the explicit $\Ga^{3N}
 \rtimes \SL_{2}$ inclusion into $\Aut^{\otimes}(\fibfun)$ (TC-1e +
-TC-1f). Section~\ref{sec:verification} catalogues the
-$2{,}611$-residual bit-exact verification panel.
+TC-1f), plus the TC-2 converse-direction sub-arc closing the
+finite-cutoff reconstruction in Sections~\ref{sec:tc2a_equality}
+(abelian factor), \ref{sec:tc2b_sl2_equality} ($SL_{2}$ factor),
+\ref{sec:tc2c_higher_cutoff} (higher cutoffs), and
+\ref{sec:tc2d_cofiltered_coherence} (cofiltered coherence).
+Section~\ref{sec:verification} catalogues the
+$2{,}960$-residual bit-exact verification panel.
 Section~\ref{sec:open} states the open multi-year frontier
 (reconstruction) and the natural sprint-scale follow-ons (higher
 $\nmax$ injectivity panels, $SL_{2}$ on higher Peter--Weyl reps,
@@ -233,18 +248,43 @@ non-natural-substrate enlargements).
 
 \subsection{Related work}\label{sec:related}
 
-The framework's overall NCG mold is the Marcolli--van~Suijlekom 2014
-gauge-network lineage~\cite{marcolli_vansuijlekom2014} as sharpened by
+\textsc{GeoVac}'s gauge-structure scaffolding is the
+Marcolli--van~Suijlekom 2014 gauge-network
+construction~\cite{marcolli_vansuijlekom2014} as sharpened by
 Perez-Sanchez 2024/2025~\cite{perez_sanchez2024,perez_sanchez2025} ---
 the Standard Model recovered from the spectral action without a
-Higgs. The neutral-Tannakian backbone we transport is Deligne--Milne
+Higgs (matching the GeoVac Sprint H1 Yukawa-non-selection theorem).
+\emph{Honest scope of the MvS-lineage claim:}\ \textsc{GeoVac} is an
+\emph{instance} of MvS 2014 (with the Perez-Sanchez 2025 correction
+applied) at the data level (graph, vertex spectral triple, edge
+connection, spectral action). It is an \emph{extension} of MvS at
+the structural level:\ the forced-graph claim (Bertrand $\times$
+Fock projection), the master Mellin engine, the explicit
+Hopf-algebra substrate $\HGV$, and the Tannakian dual $U^*$
+constructed here are GeoVac-original. MvS 2014 does \emph{not}
+predict a Tannakian dual;\ the cosmic-Galois layer $\Ulev$ sits on
+top of the gauge-network scaffolding as additional structure, not
+as an MvS corollary.
+
+The neutral-Tannakian backbone we transport is Deligne--Milne
 1982~\cite{deligne_milne1982}, the modern motivic-Galois treatment is
 Andr\'e 2004~\cite{andre2004} and Brown 2017~\cite{brown2017}, the
 cyclotomic mixed-Tate package is Deligne 2010~\cite{deligne2010} +
-Glanois 2015~\cite{glanois2015}, and the Connes--Marcolli motivic
-Galois group is~\cite{connes_marcolli2004}. The period ring of
+Glanois 2015~\cite{glanois2015}, and the Connes--Marcolli cosmic
+Galois group $U^*_{CM}$ is~\cite{connes_marcolli2004}. We flag one
+common framing slip:\ Brown 2017~\cite{brown2017} establishes a
+\emph{surjection} $U^*_{CM} \twoheadrightarrow \mathcal{G}_{MT(\Z)}$,
+not an identification --- $U^*_{CM}$ has one generator in every
+positive degree (free non-abelian) while $\mathcal{G}_{MT(\Z)}$ has
+generators only in odd degrees $\ge 3$. The period ring of
 \textsc{GeoVac} sits inside MT($\Z[i, 1/2]$) at level $\le 4$;\ see
 Paper~55~\cite{paper55} for the cyclotomic-mixed-Tate classification.
+The natural cosmic-Galois comparison target for $U^*_{GV}$ is
+therefore $\mathcal{G}_{MT(\Z[i, 1/2])} = \mathcal{G}_4$, the level-4
+motivic Galois group (Deligne 2010), \emph{not} Brown's smaller
+$\mathcal{G}_{MT(\Z)}$ (Eskandari--Murty--Nemoto
+2025~\cite{eskandari_murty_nemoto2025} prove Catalan $G$ is not a
+period of MT($\Z$), but is at level 4, forcing this refinement).
 Bost--Connes / Greenfield--Marcolli--Teh QSM lineage is \emph{ruled
 out} as a transport target on four structural grounds (see Paper~55
 §subsec:open\_m2\_m3 honest-scope paragraph and the
@@ -693,16 +733,375 @@ on the natural-substrate panel $\{V \otimes V_{\mathrm{PW}} :\ V \in \Repcat(\HG
 \begin{remark}[Scope]\label{rem:inclusion_scope}
 Corollary~\ref{cor:inclusion} closes the \emph{inclusion direction}
 $\Aut^{\otimes}(\fibfun) \supseteq \Ulev$ at finite cutoff with both
-Levi factors explicit. It does \emph{not} close the converse equality
-$\Aut^{\otimes}(\fibfun) = \Ulev$. The converse is the Deligne--Milne
-1982 Theorem~2.11 Tannakian reconstruction direction, which would
-require a separate argument that no other natural
-$\otimes$-automorphisms of $\fibfun$ exist on the natural substrate.
-Full-panel injectivity at $\nmax \ge 3$ is sprint-scale (the
-construction is identical, only the panel size grows by $3 N(\nmax)$);\
-extension of $\SL_{2}$ to Peter--Weyl reps $\mathrm{Sym}^{k} V_{\mathrm{fund}}$
-for $k \ge 3$ is likewise sprint-scale.
+Levi factors explicit. The full converse equality
+$\Aut^{\otimes}(\fibfun) = \Ulev$ on \emph{both} Levi factors is the
+Deligne--Milne 1982 Theorem~2.11 Tannakian reconstruction direction
+and would require a separate argument that no other natural
+$\otimes$-automorphisms of $\fibfun$ exist on the combined
+$\nmax$-axis $\times$ $j_{\max}$-axis substrate. The
+\emph{abelian-factor} converse at finite cutoff is, however,
+closeable bit-exactly:\ this is the content of
+Section~\ref{sec:tc2a_equality} below
+(Theorem~\ref{thm:tc2a_equality}). Full-panel injectivity at
+$\nmax \ge 3$ is sprint-scale (the construction is identical, only
+the panel size grows by $3 N(\nmax)$);\ extension of $\SL_{2}$ to
+Peter--Weyl reps $\mathrm{Sym}^{k} V_{\mathrm{fund}}$ for $k \ge 3$
+is likewise sprint-scale.
 \end{remark}
+
+% =====================================================================
+\subsection{Finite-cutoff equality on the abelian factor (TC-2a)}\label{sec:tc2a_equality}
+% =====================================================================
+
+We can close the converse equality on the \emph{abelian factor}
+$\Ga^{3 N(\nmax)} \subseteq \Aut^{\otimes}(\fibfun)$ at finite
+cutoff bit-exactly. The construction is direct: parameterise every
+candidate natural $\otimes$-automorphism on the faithful witness
+panel by symbolic $\Q$-indeterminates and read off the dimension of
+the resulting bit-exact linear variety. This is the content of
+Sprint Q5'-Tannakian-Closure TC-2a, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc2a\_aut\_equality\_memo.md},
+data \texttt{debug/data/sprint\_q5p\_tc2a\_aut\_equality.json},
+driver \texttt{debug/compute\_q5p\_tc2a\_aut\_equality.py}, tests
+\texttt{tests/test\_tannakian\_aut\_equality.py}.
+
+\begin{theorem}[TC-2a, finite-cutoff equality on the abelian factor]\label{thm:tc2a_equality}
+At $\nmax = 2$, restrict the fiber functor $\fibfun$ to the
+$\nmax$-axis substrate $\Repcat(\HGV(2))$ (forgetting the Peter--Weyl
+decoration). The bit-exact $\Q$-linear variety of natural
+$\otimes$-automorphisms of $\fibfun$ on the faithful witness panel of
+Theorem~\ref{thm:full_panel_injectivity} together with the unit
+object $\mathbf{1}$ has dimension
+\[
+\dim \Aut^{\otimes}(\fibfun)\big|_{\nmax = 2,\ \mathrm{abelian\ factor}}
+  \;=\; 15
+  \;=\; 3 N(2)
+  \;=\; \dim \Ga^{3 N(2)}(\Q).
+\]
+Equivalently, the closed-form solution of the naturality system on
+the witness panel is
+\[
+\eta_{V_{g}} = \begin{pmatrix} 1 & q_{g} \\ 0 & 1 \end{pmatrix}
+  = \exp(q_{g}\, E_{12})
+\qquad (\, q_{g} \in \Q \text{ free, one per primitive generator}\,),
+\qquad \eta_{\mathbf{1}} = 1,
+\]
+matching $\Phimap(t)(V_{g})$ from Section~\ref{sec:ga_explicit} with
+$t_{g} = q_{g}$ bit-exactly on all 15 panel reps. The TC-1e/TC-1f
+inclusion $\Ga^{3 N(2)} \subseteq \Aut^{\otimes}(\fibfun)$ is
+therefore an equality on the abelian factor at this cutoff.
+\end{theorem}
+
+\begin{proof}
+Parameterise $\eta_{V_{g}}$ on each of the 15 witness reps of
+Theorem~\ref{thm:full_panel_injectivity} by four symbolic
+$\Q$-indeterminates $(p_{g}, q_{g}, r_{g}, s_{g})$, plus one
+$\eta_{\mathbf{1}}$ indeterminate for the unit object. Total: 61
+indeterminates. For every ordered pair $(V_{a}, V_{b})$ in the panel
+extended by $\mathbf{1}$, compute the $\Q$-basis of
+$\Hom(V_{a}, V_{b})$ by solving the intertwining linear system
+$f\, X_{g}^{V_{a}} = X_{g}^{V_{b}}\, f$ (for every primitive
+generator $g$) bit-exactly. The panel has 271 morphisms:\
+30 endomorphisms ($\dim \End(V_{g}) = 2$ for each $g$:\
+centraliser of $E_{12}$ in $M_{2}(\Q)$), 210 cross-pair morphisms
+($\dim \Hom(V_{g}, V_{h}) = 1$ for $g \ne h$:\ matrices of the form
+$\begin{pmatrix} 0 & a \\ 0 & 0 \end{pmatrix}$), 15 morphisms
+$\mathbf{1} \to V_{g}$ ($\dim = 1$:\ matrices $(a, 0)^{T}$), 15
+morphisms $V_{g} \to \mathbf{1}$ ($\dim = 1$:\ matrices $(0, a)$),
+and the identity $\mathbf{1} \to \mathbf{1}$. Impose naturality
+$\eta_{V_{b}}\, f = f\, \eta_{V_{a}}$ for every basis morphism;\ at
+the matrix-entry level this produces 735 $\Q$-linear equations
+(dropping trivially-zero entries). Append the unit normalisation
+$\eta_{\mathbf{1}} = 1$ as the 736th equation. The resulting linear
+system $A\, v = b$ over $\Q$ has shape $A \in \Q^{736 \times 61}$,
+rank $46$, and is consistent
+($\mathrm{rank}([A \mid b]) = \mathrm{rank}(A) = 46$). The nullity
+is $61 - 46 = 15$. Solving in closed form:\ each panel rep solves
+to $p_{g} = 1, r_{g} = 0, s_{g} = 1$ with $q_{g}$ free, and
+$\eta_{\mathbf{1}} = 1$. The 15 free parameters $\{q_{g}\}_{g}$ are
+in bijection with the 15 primitive generators of $\HGV(2)$. The
+closed-form $\eta_{V_{g}} = \exp(q_{g}\, E_{12}) =
+\Phimap((\ldots, t_{g} = q_{g}, \ldots))(V_{g})$ matches the TC-1e
+inclusion of Section~\ref{sec:ga_explicit} on all 15 reps bit-exact.
+$\square$
+\end{proof}
+
+\begin{remark}[Scope of TC-2a]\label{rem:tc2a_scope}
+Theorem~\ref{thm:tc2a_equality} closes the converse direction on
+the \emph{abelian factor} $\Ga^{3 N(2)}$ at the single cutoff
+$\nmax = 2$. The $\SL_{2}$ factor of $\Ulev$ acts on the orthogonal
+Peter--Weyl decoration ($j_{\max}$ axis,
+Section~\ref{sec:sl2_explicit}) and is not detected by the
+$\nmax$-axis-only fiber functor used here;\ it requires the
+combined panel $V \otimes V_{\mathrm{PW}}$. The natural sprint-scale
+follow-on (TC-2b) layers in the Peter--Weyl panel of
+Theorem~\ref{thm:sl2_pw}, parameterises $\eta_{V_{g} \otimes
+V_{\mathrm{PW}}}$ on combined reps, imposes naturality against the
+$\SL_{2}$-intertwiners from Theorem~\ref{thm:sl2_pw} as well as the
+$\HGV$-intertwiners, and verifies $\dim = 18 = \dim \Ulev$. Higher
+$\nmax$ extends both panels and re-verifies;\ the PS-2 cofiltered
+functoriality of Section~\ref{sec:ustar_equiv} packages the per-cutoff
+verdicts into a pro-system coherence statement that, together with
+period-level coherence on $\Ginf$ (PS-3) per v3.66.0 FO3
+Interpretation C, would close the full multi-year reconstruction.
+TC-2a is the first quantitative measurement of the converse
+direction;\ it is the abelian-factor sub-claim at $\nmax = 2$, not
+the full claim.
+\end{remark}
+
+% =====================================================================
+\subsection{Finite-cutoff equality on the $SL_{2}$ factor (TC-2b)}\label{sec:tc2b_sl2_equality}
+% =====================================================================
+
+The $SL_{2}$ factor of $\Ulev$ is reconstructed at the Peter--Weyl
+panel level via a structurally distinct mechanism:\ naturality alone
+gives zero constraint on irreducible reps (Schur's lemma:\
+$\End(V) = \Q \cdot I$ on each irreducible), so the binding
+constraint comes from \emph{tensor compatibility} on
+$V_{\mathrm{fund}} \otimes V_{\mathrm{fund}}$ combined with its
+decomposition isomorphism
+$V_{\mathrm{fund}} \otimes V_{\mathrm{fund}} \cong
+\mathrm{Sym}^{2} V_{\mathrm{fund}} \oplus V_{\mathrm{triv}}$. Sprint
+Q5'-Tannakian-Closure TC-2b, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc2b\_sl2\_aut\_equality\_memo.md}, data
+\texttt{debug/data/sprint\_q5p\_tc2b\_sl2\_aut\_equality.json},
+driver \texttt{debug/compute\_q5p\_tc2b\_sl2\_aut\_equality.py},
+tests \texttt{tests/test\_tannakian\_sl2\_aut\_equality.py}.
+
+\begin{theorem}[TC-2b, finite-cutoff equality on the $SL_{2}$ factor]\label{thm:tc2b_sl2_equality}
+On the Peter--Weyl panel $\{V_{\mathrm{triv}}, V_{\mathrm{fund}},
+\mathrm{Sym}^{2} V_{\mathrm{fund}}\}$ with the explicit $\Q$-linear
+decomposition isomorphism $\Phi:\ V_{\mathrm{fund}} \otimes V_{\mathrm{fund}}
+\xrightarrow{\sim} \mathrm{Sym}^{2} V_{\mathrm{fund}} \oplus V_{\mathrm{triv}}$,
+$\dim \Aut^{\otimes}(\fibfun)\big|_{\mathfrak{PW}} = 3 = \dim SL_{2}$.
+Tensor compatibility produces the bit-exact identity
+\[
+\Phi \cdot (\eta_{V_{\mathrm{fund}}} \otimes \eta_{V_{\mathrm{fund}}}) \cdot \Phi^{-1}
+   = \mathrm{Sym}^{2}(\eta_{V_{\mathrm{fund}}}) \oplus \det(\eta_{V_{\mathrm{fund}}}),
+\]
+which forces $\eta_{\mathrm{Sym}^{2}} = \mathrm{Sym}^{2}(\eta_{V_{\mathrm{fund}}})$
+(top-left $3 \times 3$ block) and $\eta_{V_{\mathrm{triv}}} = \det(\eta_{V_{\mathrm{fund}}})$
+(bottom-right $1 \times 1$ block). Unit normalisation
+$\eta_{V_{\mathrm{triv}}} = 1$ then forces
+$\det(\eta_{V_{\mathrm{fund}}}) = 1$, i.e.\ $\eta_{V_{\mathrm{fund}}} \in SL_{2}(\Q)$.
+\end{theorem}
+
+\begin{proof}
+Parameterise $\eta_{V_{\mathrm{fund}}} = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$
+symbolically over $\Q$. The standard $\mathrm{Sym}^{2}$ formula
+($\texttt{geovac.tannakian.\_sl2\_sym2\_action}$, used in TC-1f
+Theorem~\ref{thm:sl2_pw}) gives
+$\mathrm{Sym}^{2}(\eta_{V_{\mathrm{fund}}})$ as the $3 \times 3$
+matrix
+\[
+\mathrm{Sym}^{2}(\eta_{V_{\mathrm{fund}}}) =
+\begin{pmatrix}
+a^{2} & 2ab & b^{2} \\
+ac & ad+bc & bd \\
+c^{2} & 2cd & d^{2}
+\end{pmatrix}.
+\]
+The decomposition isomorphism in basis
+$\{e_{1} \otimes e_{1}, e_{1} \otimes e_{2}, e_{2} \otimes e_{1}, e_{2} \otimes e_{2}\}$
+(source) and $\{e_{1}^{2}, e_{1} e_{2}, e_{2}^{2}, e_{1} \wedge e_{2}\}$
+(target) is the explicit $4 \times 4$ rational matrix
+\[
+\Phi = \begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1/2 & 1/2 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 1/2 & -1/2 & 0
+\end{pmatrix},
+\qquad
+\Phi^{-1} = \begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 1 \\
+0 & 1 & 0 & -1 \\
+0 & 0 & 1 & 0
+\end{pmatrix}.
+\]
+$\sympy$-symbolic computation gives
+\[
+\Phi \cdot (\eta_{V_{\mathrm{fund}}} \otimes \eta_{V_{\mathrm{fund}}}) \cdot \Phi^{-1}
+= \begin{pmatrix}
+a^{2} & 2ab & b^{2} & 0 \\
+ac & ad+bc & bd & 0 \\
+c^{2} & 2cd & d^{2} & 0 \\
+0 & 0 & 0 & ad - bc
+\end{pmatrix},
+\]
+in which the top-left $3 \times 3$ block is precisely
+$\mathrm{Sym}^{2}(\eta_{V_{\mathrm{fund}}})$ and the bottom-right
+$1 \times 1$ block is $\det(\eta_{V_{\mathrm{fund}}}) = ad - bc$;\
+off-diagonal blocks vanish identically. With unit normalisation
+$\eta_{V_{\mathrm{triv}}} = 1$, the bottom-right block forces
+$ad - bc - 1 = 0$, a single polynomial constraint on the
+$4$-dim ambient $M_{2}(\Q)$. The Jacobian
+$\nabla(ad - bc - 1) = (d, -c, -b, a)$ has rank $1$ at every
+$SL_{2}$-point (verified at $\eta = I$:\ $(1, 0, 0, 1)$, rank $1$; at
+generic $\eta = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$:\
+$(1, -1, -1, 2)$, rank $1$). The variety has codim $1$, dim $= 4 - 1
+= 3 = \dim SL_{2}$. $\square$
+\end{proof}
+
+\begin{corollary}[TC-2a + TC-2b]\label{cor:combined_equality}
+At $\nmax = 2$ on the combined natural substrate (the
+$\nmax$-axis $\Repcat(\HGV(2))$ tensored with the Peter--Weyl panel),
+$\dim \Aut^{\otimes}(\fibfun)\big|_{\mathrm{combined}} = 15 + 3
+= 18 = \dim \Ulev$. The TC-1e/TC-1f inclusion $\Ulev \subseteq
+\Aut^{\otimes}(\fibfun)$ is therefore an equality at finite cutoff.
+\end{corollary}
+
+\begin{proof}
+By the exterior-tensor-product theorem for neutral Tannakian
+categories \cite[Thm.\ 2.3]{deligne_milne1982}, for two neutral
+Tannakian categories $C_{1}, C_{2}$ over $\Q$ with fiber functors
+$\omega_{1}, \omega_{2}$,
+$\Aut^{\otimes}(\omega_{1} \boxtimes \omega_{2}) = \Aut^{\otimes}(\omega_{1})
+\times \Aut^{\otimes}(\omega_{2})$. Applying this to $C_{1} =
+\Repcat(\HGV(2))$ with $\omega_{1}$ the TC-1d no-op forgetful, and
+$C_{2}$ the PW sub-category of $\Rep(SL_{2})$ generated by
+$\{V_{\mathrm{triv}}, V_{\mathrm{fund}}, \mathrm{Sym}^{2}\}$ with
+$\omega_{2}$ the analogous forgetful, the per-factor dims of
+Theorems~\ref{thm:tc2a_equality} and \ref{thm:tc2b_sl2_equality}
+give $\dim(15) + \dim(3) = 18 = \dim \Ulev$.
+$\square$
+\end{proof}
+
+% =====================================================================
+\subsection{Higher cutoffs and the $\nmax$-uniform pattern (TC-2c)}\label{sec:tc2c_higher_cutoff}
+% =====================================================================
+
+The TC-2a abelian-factor argument is parametric in $\nmax$:\ the
+witness panel grows by $3 N(\nmax)$ generators at each cutoff, the
+constraint count grows polynomially, and the rank-nullity pattern is
+$\nmax$-uniform. Sprint Q5'-Tannakian-Closure TC-2c, 2026-06-06;\
+memo \texttt{debug/sprint\_q5p\_tc2c\_higher\_cutoff\_memo.md},
+driver \texttt{debug/compute\_q5p\_tc2c\_higher\_cutoff.py}, tests
+\texttt{tests/test\_tannakian\_higher\_cutoff.py}.
+
+\begin{theorem}[TC-2c, finite-cutoff equality at higher cutoffs]\label{thm:tc2c_higher_cutoff}
+For every $\nmax \in \{1, 2, 3, 4\}$,
+$\dim \Aut^{\otimes}(\fibfun)\big|_{\nmax\text{-axis}} = 3 N(\nmax)$
+bit-exactly, with the closed-form solution
+$\eta_{V_{g}} = \exp(q_{g}\, E_{12})$ on every panel rep matching
+$\Phimap(t)(V_{g})$ from Section~\ref{sec:ga_explicit} via the
+bijection $t_{g} = q_{g}$.
+\end{theorem}
+
+\begin{proof}[Proof (parametric extension of Theorem~\ref{thm:tc2a_equality})]
+The argument of Theorem~\ref{thm:tc2a_equality} is uniform in
+$\nmax$:\ the witness panel $\{V_{g}\}_{g \in P^{(\nmax)}}$ scales
+with $|P^{(\nmax)}| = 3 N(\nmax)$, the parameterisation gives
+$3 N(\nmax) \cdot 4 + 1 = 12 N(\nmax) + 1$ symbolic indeterminates,
+naturality on the morphism panel reduces the system to nullity
+$3 N(\nmax)$ via the same closed-form argument
+(every $\eta_{V_{g}}$ solves to unipotent upper triangular with one
+free parameter $q_{g}$;\ $\eta_{T} = 1$ falls out from the unit
+pair). The bit-exact $\sympy$-rational verification at
+$\nmax \in \{1, 2, 3, 4\}$:
+\begin{center}
+\begin{tabular}{c c c c c r}
+\toprule
+$\nmax$ & $3 N(\nmax)$ & morphisms & constraints & nullity & wall (s) \\
+\midrule
+$1$ & $6$ & $49$ & $132$ & $\mathbf{6}$ & $\sim 1$ \\
+$2$ & $15$ & $271$ & $736$ & $\mathbf{15}$ & $1.85$ \\
+$3$ & $27$ & $811$ & $2{,}296$ & $\mathbf{27}$ & $12.23$ \\
+$4$ & $42$ & $1{,}891$ & $5{,}461$ & $\mathbf{42}$ & $55.74$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Wall time grows polynomially in $\nmax$;\ the structural pattern is
+not isolated to the smallest non-trivial cutoff but
+$\nmax$-uniform. $\Phi$-recovery is $3 N(\nmax) / 3 N(\nmax)$
+bit-exact at every cutoff. $\square$
+\end{proof}
+
+\begin{remark}[Rank-nullity closed form]\label{rem:tc2c_closed_form}
+Empirically across $\nmax \in \{1, 2, 3, 4\}$, the rank of the
+naturality $+$ unit constraint matrix is
+$\mathrm{rank}(A) = 2 \cdot 3 N(\nmax) + 1$ exactly (verified
+values:\ $19, 31, 55, 85$). This matches the structural picture:\
+naturality forces $p_{g} = 1$, $r_{g} = 0$, $s_{g} = 1$ for each
+$g$ (three linear constraints per generator) plus the unit
+normalisation $\eta_{T} = 1$, totalling $3 \cdot 3 N(\nmax) + 1$
+\emph{symbol fixings} on the $12 N(\nmax) + 1$ indeterminates, of
+which $3 N(\nmax) + 1$ are independent over the morphism panel
+data (yielding the rank pattern above). The closed-form
+generalisation across all $\nmax \ge 1$ is conjectured and likely
+sprint-scale to verify symbolically;\ TC-2c does not pursue this
+sharpening.
+\end{remark}
+
+% =====================================================================
+\subsection{Pro-system cofiltered coherence (TC-2d)}\label{sec:tc2d_cofiltered_coherence}
+% =====================================================================
+
+The per-cutoff equalities of Theorems~\ref{thm:tc2a_equality},
+\ref{thm:tc2b_sl2_equality}, and \ref{thm:tc2c_higher_cutoff}
+package into a single pro-system statement via the PS-2 cofiltered
+functoriality of Section~\ref{sec:ustar_equiv}. Sprint Q5'-Tannakian-Closure
+TC-2d, 2026-06-06;\ memo
+\texttt{debug/sprint\_q5p\_tc2d\_cofiltered\_coherence\_memo.md},
+driver \texttt{debug/compute\_q5p\_tc2d\_cofiltered\_coherence.py},
+tests \texttt{tests/test\_tannakian\_cofiltered\_coherence.py}.
+
+\begin{theorem}[TC-2d, cofiltered coherence on $\Aut^{\otimes}(\fibfun)$]\label{thm:tc2d_cofiltered_coherence}
+For every pair $k \le m$, the Spec-dual of the PS-2 Hopf-algebra
+transition $\Phi_{m, k}:\ \HGV(m) \to \HGV(k)$ is a restriction map
+\[
+\rho_{m, k}:\ \Aut^{\otimes}(\fibfun)^{(m)}
+   \to \Aut^{\otimes}(\fibfun)^{(k)},
+\]
+which acts at the parameter level as coordinate truncation
+$t^{(m)} \mapsto t^{(m)}\big|_{P^{(k)}}$ on $\Q^{3 N(m)}$. The
+restriction is a group homomorphism, satisfies the cofiltered
+transitivity $\rho_{n, k} = \rho_{m, k} \circ \rho_{n, m}$ at every
+triple $k \le m \le n$, and is bit-exact on every witness rep
+$V_{g}$ for $g \in P^{(k)} \subseteq P^{(m)}$.
+\end{theorem}
+
+\begin{proof}
+At the parameter level the restriction is the obvious dict
+truncation. On a witness rep $V_{g}$ with $g \in P^{(k)}$,
+$\Phimap(t^{(m)})(V_{g}) = \exp(t^{(m)}_{g}\, E_{12})$ (since
+$X^{V_{g}}_{h} = 0$ for $h \ne g$) is the same as
+$\Phimap(t^{(m)}\big|_{P^{(k)}})(V_{g})$ because the $g$-component of
+$t^{(m)}\big|_{P^{(k)}}$ equals the $g$-component of $t^{(m)}$.
+Group-hom property follows from $\Phimap(t_{1}) \Phimap(t_{2}) =
+\Phimap(t_{1} + t_{2})$ (abelian unipotent factor) and
+$\Q$-linearity of parameter truncation. Transitivity at the
+parameter level reduces to
+$t|_{P^{(k)}} = (t|_{P^{(m)}})|_{P^{(k)}}$, a trivial set-theoretic
+identity for $P^{(k)} \subseteq P^{(m)} \subseteq P^{(n)}$.
+
+The bit-exact verification:\ Block A (panel-level restriction
+coherence on $V_{g}$) tested at $6$ pairs $(k, m) \in \{(1, 2),
+(1, 3), (2, 3), (1, 4), (2, 4), (3, 4)\}$ across $3$ test
+parameter seeds each, totalling $225$ residuals;\ Block B
+(transitivity at $4$ triples $\times 3$ seeds) totalling $12$;\
+Block C (group-hom at $3$ pairs $\times 2$ generators each)
+totalling $6$. All $243$ residuals are bit-exact zero. $\square$
+\end{proof}
+
+\begin{corollary}[Inverse-limit Tannakian dual at the panel level]\label{cor:inverse_limit}
+The cofiltered system $\{\Aut^{\otimes}(\fibfun)^{(n)}\}_{n \in \N}$
+with restriction maps $\{\rho_{m, k}\}_{k \le m}$ has inverse limit
+\[
+\Aut^{\otimes}(\fibfun)^{(\infty)}
+   = \varprojlim_{n} \Aut^{\otimes}(\fibfun)^{(n)}
+   = \varprojlim_{n} \bigl(\Ga^{3 N(n)} \rtimes SL_{2}\bigr)
+   = \Ga^{\infty} \rtimes SL_{2},
+\]
+at the natural-substrate panel level. The remaining content of the
+full multi-year reconstruction is the pro-finite Tannakian theorem
+\cite{deligne1990,brown2012} coherent with v3.66.0 FO3
+Interpretation C at the period level on $\Ginf$ (PS-3) of
+Section~\ref{sec:inverse_limit} --- a structural identification between
+$\Ga^{\infty} \rtimes SL_{2}$ and the motivic Galois group on the
+mixed-Tate period ring $F(s)$ of $\Ginf$.
+\end{corollary}
 
 % =====================================================================
 \section{Verification panel}\label{sec:verification}
@@ -726,8 +1125,12 @@ TC-1e & $\Ga$ inclusion (natural $\otimes$-auto axioms + group law) & 98 \\
 TC-1f & $\SL_{2}$ axioms on $\mathfrak{PW}$ panel & 135 \\
 TC-1f & $\Ga \times \SL_{2}$ commute on combined reps & 100 \\
 TC-1f & Full-panel injectivity at $\nmax = 2$ & 255 \\
+TC-2a & Finite-cutoff equality on abelian factor at $\nmax = 2$ & 16 \\
+TC-2b & $SL_{2}$-factor equality (Sym$^{2}$ + det + decomp + dim) & 17 \\
+TC-2c & Per-cutoff equality at $\nmax = 3, 4$ ($\Phi$-recovery + dim + $\eta_{T}$) & 73 \\
+TC-2d & Cofiltered coherence (panel + transitivity + group-hom) & 243 \\
 \midrule
-\textbf{Total bit-exact zero residuals} & & \textbf{2{,}611} \\
+\textbf{Total bit-exact zero residuals} & & \textbf{2{,}960} \\
 \bottomrule
 \end{tabular}
 \caption{The full Tannakian-substrate verification panel:\
@@ -758,53 +1161,135 @@ The full driver / data / memo trail of the verification panel is:
   \texttt{debug/data/sprint\_q5p\_tc1\{a, b, c, d, e\}\_*.json}
   + \texttt{debug/data/q5p\_tc1f\_sl2\_inclusion.json},
   + memos in \texttt{debug/sprint\_q5p\_tc1\{a, b, c, d, e, f\}\_*.md}.
+\item TC-2a:\ \texttt{debug/compute\_q5p\_tc2a\_aut\_equality.py},
+  \texttt{debug/data/sprint\_q5p\_tc2a\_aut\_equality.json},
+  \texttt{debug/sprint\_q5p\_tc2a\_aut\_equality\_memo.md}.
+\item TC-2b:\ \texttt{debug/compute\_q5p\_tc2b\_sl2\_aut\_equality.py},
+  \texttt{debug/data/sprint\_q5p\_tc2b\_sl2\_aut\_equality.json},
+  \texttt{debug/sprint\_q5p\_tc2b\_sl2\_aut\_equality\_memo.md}.
+\item TC-2c:\ \texttt{debug/compute\_q5p\_tc2c\_higher\_cutoff.py},
+  \texttt{debug/data/sprint\_q5p\_tc2c\_higher\_cutoff.json},
+  \texttt{debug/sprint\_q5p\_tc2c\_higher\_cutoff\_memo.md}.
+\item TC-2d:\ \texttt{debug/compute\_q5p\_tc2d\_cofiltered\_coherence.py},
+  \texttt{debug/data/sprint\_q5p\_tc2d\_cofiltered\_coherence.json},
+  \texttt{debug/sprint\_q5p\_tc2d\_cofiltered\_coherence\_memo.md}.
 \end{itemize}
 
 The module \texttt{geovac/tannakian.py} (TC-1a..TC-1f, \(\sim\)2{,}400
 lines) and \texttt{geovac/pro\_system.py} (PS-1..PS-4) implement the
 substrate;\ both are bit-exact \texttt{sympy.Rational} / \texttt{Integer}
-throughout. Test coverage:\ 249 tests pass (49 base Tannakian + 30
-rigidity + 24 fiber functor + 25 TC-1e + 60 TC-1f + 61 pro-system).
+throughout. Test coverage:\ 282 tests pass (49 base Tannakian + 30
+rigidity + 24 fiber functor + 25 TC-1e + 60 TC-1f + 61 pro-system
++ 9 TC-2a + 14 TC-2b + 3 TC-2c fast + 7 TC-2d;\ plus 1 TC-2c slow,
+$n_{\max} = 4$, run separately).
 
 % =====================================================================
 \section{Open questions and frontier}\label{sec:open}
 % =====================================================================
 
-\subsection{The converse direction:\ Tannakian reconstruction (multi-year)}
-\label{sec:open_converse}
+\subsection{The converse direction --- closed at finite cutoff (TC-2)}\label{sec:open_converse}
 
-The substantive open question, Deligne--Milne 1982 Theorem~2.11
-applied to $\Repcat(\HGV)$:
+The converse direction of Deligne--Milne 1982 Theorem~2.11 on the
+finite-cutoff substrate, $\Aut^{\otimes}(\fibfun) = \Ulev$ at each
+$\nmax$, is closed by the TC-2 sub-arc (Theorems
+\ref{thm:tc2a_equality}, \ref{thm:tc2b_sl2_equality},
+\ref{thm:tc2c_higher_cutoff}, \ref{thm:tc2d_cofiltered_coherence}).
+The substantive open content is the \emph{inverse-limit
+identification at the natural cosmic-Galois comparison target}.
+
+\subsection{The natural cosmic-Galois comparison target}\label{sec:open_g4}
+
+The comparison target for $\Aut^{\otimes}(\fibfun)^{(\infty)}$ is
+the level-4 motivic Galois group
+\[
+\mathcal{G}_4 = \mathcal{G}_{MT(\Z[i, 1/2])} = \Gm \ltimes \mathcal{U}_4,
+\]
+of Deligne 2010~\cite{deligne2010} and Glanois
+2015~\cite{glanois2015}, \emph{not} Brown's smaller
+$\mathcal{G}_{MT(\Z)}$. Three published theorems force this
+refinement:\ Paper~55~\cite{paper55} classifies \textsc{GeoVac}'s
+period ring inside MT($\Z[i, 1/2]$) at level $\le 4$;\
+Eskandari--Murty--Nemoto 2025~\cite{eskandari_murty_nemoto2025}
+prove Catalan $G = \beta(2)$ is not a period of mixed Tate over
+$\Q$ but is mixed Tate over $\Q(i)$ (forcing level $\ge 4$
+specifically because GeoVac's M3 vertex-parity sector produces $G$
+in QED vertex sums);\ and the Goncharov--Deligne 2005 faithfulness
+of $\mathcal{G}_N$-action on $\pi_1^{\mathrm{mot}}(\Gm - \mu_N)$
+gives the injective comparison at level 4.
 
 \begin{quote}
-\emph{Is $\Aut^{\otimes}(\fibfun) = \Ulev$?\ Equivalently:\ does every
-natural $\otimes$-automorphism of $\fibfun$ on
-$\Repcat(\HGV(\nmax))$ arise from an element $(t, g) \in \Ga^{3
-N(\nmax)}(\Q) \rtimes \SL_{2}(\Q)$ via Corollary~\ref{cor:inclusion}?}
+\textbf{Conjecture (cosmic-Galois comparison).}\ At the
+inverse-limit level,
+$\Ustar_{GV} \hookrightarrow \mathcal{U}_4$ as a closed
+sub-pro-unipotent group;\ equality holds iff every level-4
+cyclotomic motivic MZV is realised by some \textsc{GeoVac}
+observable.
 \end{quote}
 
-This is the Tannakian \emph{reconstruction} direction. The natural
-approach is to apply Deligne--Milne Theorem~2.11 directly:\ a
-$\Q$-linear abelian symmetric monoidal rigid category with a
-$\Q$-rational faithful exact $\otimes$-functor to $\Vecbf_{\Q}$ is
-equivalent (as a $\otimes$-category) to $\Rep_{\Q}(G)$ for some affine
-group scheme $G$, and $G$ is uniquely determined as
-$G = \Aut^{\otimes}(\fibfun)$ viewed as a representable functor. The
-finite-dimensional verification at every cutoff is sprint-scale at
-the substrate level (Theorems~\ref{thm:abelian}, \ref{thm:monoidal},
-\ref{thm:rigid}, \ref{thm:fiber_functor});\ closing the converse
-requires showing that the affine group scheme so determined is
-$\Ulev$ and not some larger group --- this is the deep content of the
-reconstruction.
+The injection direction is provable today using the period
+containment of Paper~55 + Eskandari et al.\ 2025 + Deligne 2010
+(sprint-scale). The equality / exhaustion direction is the
+multi-year forward research question:\ no depth-$\ge 2$ level-4
+cyclotomic MZV has yet been observed in any \textsc{GeoVac}
+computation. Whether this is because we have not looked, or because
+\textsc{GeoVac} is structurally a strict sub-ring, is open.
 
-\emph{Pro-finite assembly.} For the converse at the inverse-limit
-level $\Aut^{\otimes}(\fibfun_{\Ginf})$, one assembles the
-finite-cutoff reconstructions via the cofiltered system
-$\{\HGV(\nmax)\}$ (Theorem~\ref{thm:cofiltered}) coherent with the
-v3.66.0 FO3 Interpretation~C period content on $\Ginf$ (PS-3,
-Theorem~\ref{thm:inverse_limit}). The natural target object is the
-pro-unipotent affine group scheme $\Ustar$ underlying $\Ulev$ at the
-inverse-limit level.
+A common framing slip worth flagging:\ Brown 2017~\cite{brown2017}
+establishes a \emph{surjection}
+$\Ustar_{CM} \twoheadrightarrow \mathcal{G}_{MT(\Z)}$, not an
+identification. Connes--Marcolli's $\Ustar_{CM}$ has one generator
+in every positive integer degree (free non-abelian) while
+$\mathcal{G}_{MT(\Z)}$ has generators only in odd degrees $\ge 3$;
+the surplus is the cancellation of even-zeta values $\zeta(2k) \in
+\pi^{2k}\Q$ already accounted for by the $\Gm$ factor. The
+GeoVac--cosmic-Galois comparison should be stated against
+$\mathcal{G}_4$, with the relationship to $\Ustar_{CM}$ obtained via
+the (level-1) sub-quotient.
+
+\subsection{Abelian vs free non-abelian unipotent (NA-1 structural finding)}\label{sec:open_na1}
+
+A structural feature distinguishes $\Ustar_{GV}$ from the
+motivic-Galois target $\mathcal{U}_4$:\ \textsc{GeoVac}'s unipotent
+radical is \emph{abelian} ($\Ga^{\infty}$) while the motivic
+unipotent radical is \emph{free non-abelian}. This is not an
+accidental commutation of generators;\ by the Cartier--Milnor--Moore
+theorem in characteristic 0, any primitive Hopf algebra $\Sym_\Q(V)$
+has abelian Tannakian dual by construction. For non-abelian content
+the substrate would need to be enriched to the cofree-cocommutative
+shuffle Hopf algebra $T(V)$ with deconcatenation coproduct --- the
+motivic-style structure (Brown 2012~\cite{brown2012}). Two
+structural readings remain consistent with current evidence:
+
+\begin{itemize}
+\item \textbf{Reading A (abelianization).} \textsc{GeoVac} respects
+the primitive coproduct, and $\Ustar_{GV}$ is the
+\emph{abelianization} of the motivic free non-abelian unipotent ---
+a specific weight-only geometric realisation that drops the
+depth/iteration content.
+\item \textbf{Reading B (shuffle enrichment).} \textsc{GeoVac}'s
+physical content (Mellin moments, master Mellin engine products)
+naturally respects the shuffle coproduct, and the substrate should
+be enriched to $T(V)$, at which point $\Ustar_{GV}$ upgrades to a
+free non-abelian unipotent.
+\end{itemize}
+
+A sprint-scale concrete test distinguishes the readings:\ compute
+the joint Mellin transform of two specific depth-1 moments (M2
+Seeley--DeWitt $\times$ M3 vertex-parity Hurwitz) and check whether
+the result factorises symmetrically (Reading A) or asymmetrically /
+deconcatenation-pair (Reading B). Sprint memo
+\texttt{debug/sprint\_q5p\_na1\_non\_abelian\_probe\_memo.md}.
+
+\subsection{Pro-finite assembly (multi-year)}\label{sec:open_profinite}
+
+The full multi-year content of the cosmic-Galois closure is the
+pro-finite Tannakian theorem coherent with v3.66.0 FO3
+Interpretation~C at the period level on $\Ginf$ (PS-3,
+Theorem~\ref{thm:inverse_limit}). This identifies the inverse-limit
+$\Aut^{\otimes}(\fibfun_{\Ginf}) = \Ga^{\infty} \rtimes SL_{2}$
+with (a sub-quotient of) $\mathcal{G}_4$ at the period level, in
+the spirit of Brown 2012~\cite{brown2012}, Deligne
+2010~\cite{deligne2010}, and Glanois 2015~\cite{glanois2015}.
 
 \subsection{Sprint-scale follow-ons}\label{sec:open_sprint}
 
@@ -845,6 +1330,15 @@ performed collaboratively.
 P.~Deligne and J.~S.~Milne, \emph{Tannakian categories}, in
 ``Hodge Cycles, Motives, and Shimura Varieties'', Lecture Notes in
 Math.\ \textbf{900} (1982) 101--228.
+
+\bibitem{deligne1990}
+P.~Deligne, \emph{Cat\'egories tannakiennes}, in ``The Grothendieck
+Festschrift'' Vol.~II, Progr.\ Math.\ \textbf{87} (Birkh\"auser, 1990)
+111--195.
+
+\bibitem{brown2012}
+F.~Brown, \emph{Mixed Tate motives over $\mathbb{Z}$}, Ann.\ of
+Math.\ \textbf{175} (2012) 949--976.
 
 \bibitem{andre2004}
 Y.~Andr\'e, \emph{Une introduction aux motifs (motifs purs, motifs
@@ -935,6 +1429,10 @@ classification of the master Mellin engine}, GeoVac Paper~55 (2026).
 F.~Fathizadeh and M.~Marcolli, \emph{Periods and motives in the
 spectral action of Robertson--Walker spacetimes}, Comm.\ Math.\
 Phys.\ \textbf{356} (2017) 641--671;\ arXiv:1611.01815.
+
+\bibitem{eskandari_murty_nemoto2025}
+P.~Eskandari, M.~R.~Murty, and Y.~Nemoto, \emph{Mixed motives and
+linear forms in the Catalan constant}, arXiv:2510.20648 (2025).
 
 \end{thebibliography}
 

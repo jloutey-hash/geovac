@@ -1,0 +1,61 @@
+{
+  "sprint": "Q5-prime-Tannakian-Closure-TC-2d",
+  "cofiltered_pairs": [
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ]
+  ],
+  "transitivity_triples": [
+    [
+      1,
+      2,
+      3
+    ],
+    [
+      1,
+      2,
+      4
+    ],
+    [
+      1,
+      3,
+      4
+    ],
+    [
+      2,
+      3,
+      4
+    ]
+  ],
+  "block_A_restriction_coherence_count": 225,
+  "block_A_pass": 225,
+  "block_B_transitivity_count": 12,
+  "block_B_pass": 12,
+  "block_C_homomorphism_count": 6,
+  "block_C_pass": 6,
+  "total_residuals": 243,
+  "total_pass": 243,
+  "overall_verdict": "POSITIVE",
+  "wall_time_seconds": 0.25222063064575195
+}
