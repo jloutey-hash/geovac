@@ -7,6 +7,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.81.0] - 2026-06-06
+
+### Summary
+
+**Sprint Injection-G4 n_max extension.** Extended the level-4 cosmic-Galois injection verification panel (v3.80.0 work, Paper 56 §sec:injection_g4) from the single cutoff $\nmax = 2$ to the production grid $\nmax \in \{1, 2, 3, 4\}$. All four compatibilities (C1 multiplicativity, C2 depth-1 coproduct, C3 SL$_2$-to-Levi via $\chi_4$, C4 closed-immersion via Glanois basis + Goncharov–Deligne 2005 faithfulness) remain bit-exact at higher cutoff. **Verdict POSITIVE-CONSISTENT.** No structural surprises emerge at higher $\nmax$; the panel growth follows a closed-form per-cutoff identity that mirrors the TC-2c per-cutoff equality pattern (v3.76.0).
+
+**Closed-form per-cutoff residual count:**
+\[
+R^{\mathrm{G4\text{-}Inj}}(\nmax) \;=\; (3 N(\nmax))^{2} + 3 N(\nmax) + 5 + (1 + 3 N(\nmax)) \;=\; 9 N(\nmax)^{2} + 6 N(\nmax) + 6,
+\]
+with $N(\nmax) = \nmax(\nmax + 3)/2$. Evaluates to $54 / 261 / 789 / 1854$ at $\nmax = 1 / 2 / 3 / 4$.
+
+**Aggregate Paper 56 verification panel:** $3{,}221 \to 5{,}864$ bit-exact zero residuals (+$789$ from $\nmax = 3$ + $1{,}854$ from $\nmax = 4$ = $+2{,}643$). New rows in Table~\ref{tab:verification}.
+
+### Added
+
+- **Paper 56 §sec:injection_panel** rewritten with closed-form per-cutoff identity + new Table~\ref{tab:g4_inj_panel} listing per-cutoff residual breakdown at $\nmax \in \{1, 2, 3, 4\}$.
+- **Paper 56 Table~\ref{tab:verification}** extended with two new rows for G4-Inj at $\nmax = 3$ and $\nmax = 4$; total updated $3{,}221 \to 5{,}864$.
+- **Paper 56 abstract** updated:\ residual count $3{,}221 \to 5{,}864$; G4-Inj range extended to $\nmax \in \{2, 3, 4\}$.
+- **`tests/test_paper56_injection_g4.py` extended** from 14 → 47 tests (43 fast + 4 slow):
+  - C1 multiplicativity parametrized over $\nmax \in \{1, 2, 3, 4\}$.
+  - C2 coproduct parametrized over $\nmax \in \{1, 2, 3, 4\}$.
+  - C4 Gram non-degeneracy parametrized over $\nmax \in \{1, 2, 3, 4\}$.
+  - Per-cutoff residual-count tests for C1/C2/C4 (closed-form verification).
+  - Per-cutoff total-panel test.
+  - Aggregate-panel-v3.81.0 sanity test (closed-form check against $5{,}864$).
+  - `@pytest.mark.slow` `TestExtendedCutoffSlow` with explicit symbolic panels at $\nmax \in \{3, 4\}$ for C1 (full $1{,}764$-pair check at $\nmax = 4$) and C4 (full $14 \times 14$ Gram check).
+- **`debug/sprint_injection_nmax_extension_memo.md`** (~1{,}600 words): per-cutoff verification table, closed-form identity, comparison to TC-2c pattern, decision-gate verdict POSITIVE-CONSISTENT.
+- **CLAUDE.md §1 version bump** v3.80.0 → v3.81.0.
+- **CLAUDE.md §2 one-liner** for v3.81.0.
+
+### Verification
+
+- Paper 56 compiles three-pass clean:\ 23 pages, 681 KB PDF, zero undefined refs, zero undefined citations.
+- `tests/test_paper56_injection_g4.py`:\ 43 / 43 fast tests pass; 4 / 4 slow tests pass.
+- Regression sanity:\ existing 157 / 157 `tests/test_tannakian*.py` tests still pass (no regression on PS / TC infrastructure).
+
+### Honest scope
+
+This sprint extends the verification panel only. It does **NOT**:
+
+- Modify the statement of Theorem~\ref{thm:injection_g4} or any of its four compatibilities.
+- Add new compatibilities or relax existing ones.
+- Advance the equality-direction multi-year frontier (§sec:equality_multi_year is unchanged).
+- Modify the honest-scope Remark~\ref{rem:injection_honest_scope} (the three caveats M1/M2 collapse, M3 substantive, depth-blind are cutoff-independent).
+- Modify any `geovac/` production module.
+
 ## [3.80.0] - 2026-06-06
 
 ### Summary

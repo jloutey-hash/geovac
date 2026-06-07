@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v3.80.0 (June 6, 2026)
+**Version:** v3.81.0 (June 6, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -146,6 +146,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint Injection-G4 n_max extension (2026-06-06, v3.81.0):** G4-Inj panel extended bit-exact to $n_{\max} \in \{3, 4\}$ (+789, +1854 residuals); closed-form $R^{\mathrm{G4\text{-}Inj}}(n_{\max}) = 9N^2 + 6N + 6$; Paper 56 panel $3{,}221 \to 5{,}864$; theorem robust at higher cutoff. See `debug/sprint_injection_nmax_extension_memo.md`.
 - **Sprint HB-empirical-close + NA-1 Reading C (2026-06-06, v3.80.0):** HB PSLQ Test A NEGATIVE (depth-1 + depth-2); NA-1 Reading C diagonal collapse $J(s_1,s_2) = M_3^{\gamma_P}(s_{\mathrm{tot}}-1)$ + pure-Tate closed form $M_3^{\gamma_P}(s) = 2^{2s-3}(\beta(2s-1)-\beta(2s-3))$ added to Paper 55 as Theorems; Hodge realisation framing adopted in Paper 56 §sec:open_g4_hodge; "shape match, content disjoint" structural reading. See `debug/sprint_{hb_pslq_test,na1_depth2_mellin,hb_adoption_survey,tapuskovic_methodology}_memo.md`.
 - **Sprint Injection-G4 (2026-06-06, v3.79.0):** Paper 56 §sec:open_g4 upgraded Conjecture → Theorem (injection direction); $U^*_{GV} \hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ via period map + 4 compatibilities (C1/C2/C3/C4); 261 new residuals (total 3,221); Paper 56 21pp three-pass clean. See `debug/sprint_injection_g4_memo.md`.
 - **Sprint Closure-Agents-Round (2026-06-06, v3.78.0):** Hain–Brown relative completion of $SL_2(\mathbb{Z})$ identified as structural match for $U^*_{GV}$; corpus MvS-language audit applied across Papers 31/32/25/field guide; Paper 55 BC-RH appendix added. See `debug/strategic_synthesis_2026_06_06_memo.md`.

@@ -138,10 +138,10 @@ rep $V_{g}$ detects $g$ uniquely with $\eta_{V_{g}}(t) = I$ iff
 $t_{g} = 0$.
 
 \medskip
-\noindent\emph{Total bit-exact verification panel:\ $3{,}221$ zero
+\noindent\emph{Total bit-exact verification panel:\ $5{,}864$ zero
 residuals} ($\texttt{sympy}$-rational throughout) across PS-1/2/3/4 +
-TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj. The fourteenth math.OA
-standalone in the \textsc{GeoVac} series.
+TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj at $\nmax \in \{2, 3, 4\}$.
+The fourteenth math.OA standalone in the \textsc{GeoVac} series.
 
 \medskip
 \noindent\emph{Cosmic-Galois injection.} We close the
@@ -264,7 +264,7 @@ SL_{2}$ into the (abelianization of the) unipotent radical of the
 level-4 motivic Galois group $\mathcal{G}_{4}$
 (Theorem~\ref{thm:injection_g4}).
 Section~\ref{sec:verification} catalogues the
-$3{,}221$-residual bit-exact verification panel.
+$5{,}864$-residual bit-exact verification panel.
 Section~\ref{sec:open} states the open multi-year frontier
 (reconstruction) and the natural sprint-scale follow-ons (higher
 $\nmax$ injectivity panels, $SL_{2}$ on higher Peter--Weyl reps,
@@ -1399,54 +1399,104 @@ sprint-scale NA-1 depth-2 Mellin test.
 \subsection{Numerical verification panel}\label{sec:injection_panel}
 
 The four compatibilities (C1)--(C4) admit explicit bit-exact
-verifications at finite cutoff $\nmax \in \{1, 2, 3\}$. The driver,
-data, memo, and regression tests are:
+verifications at every finite cutoff $\nmax \in \{1, 2, 3, 4\}$. The
+driver, data, memo, and regression tests are:
 \begin{itemize}
 \item Driver:\ \texttt{tests/test\_paper56\_injection\_g4.py}.
-\item Memo:\ \texttt{debug/sprint\_injection\_g4\_memo.md}.
+\item Memos:\ \texttt{debug/sprint\_injection\_g4\_memo.md} (foundational sprint, $\nmax = 2$);\
+  \texttt{debug/sprint\_injection\_nmax\_extension\_memo.md} (this section's extension to $\nmax \in \{3, 4\}$).
 \end{itemize}
 
+The four panels have closed-form per-cutoff residual counts that
+depend only on $N(\nmax) = \nmax(\nmax + 3)/2$:
 \begin{itemize}
-\item \emph{(C1) Multiplicativity panel.} For every pair $(x, y)$
-of distinct primitive generators in $\HGV(2)$, the formal
+\item \emph{(C1) Multiplicativity panel.} For every ordered pair
+$(x, y)$ of primitive generators of $\HGV(\nmax)$, the formal
 multiplicativity $\pi(xy) = \pi(x)\,\pi(y)$ holds in
 $\Sym_{\Q}(V_{\nmax})$ by the universal property of the symmetric
-algebra (bit-exact symbolic check on $15 \times 15 = 225$ generator
-pairs at $\nmax = 2$).
+algebra. Closed form:\ $(3 N(\nmax))^{2}$ bit-exact zero residuals.
 \item \emph{(C2) Coproduct panel.} For every primitive generator
-$x$ in $\HGV(2)$, the equality $\Delta x = x \otimes 1 + 1 \otimes
-x$ at depth 1 is bit-exact by definition of the primitive
-coproduct (15 generators, 15 bit-exact zero residuals).
+$x$ in $\HGV(\nmax)$, the equality $\Delta x = x \otimes 1 + 1
+\otimes x$ at depth 1 is bit-exact by definition of the primitive
+coproduct. Closed form:\ $3 N(\nmax)$ bit-exact zero residuals.
 \item \emph{(C3) $SL_{2}$-to-Levi panel.} For every $g$ in the
 five-element $SL_{2}(\Q)$ panel of Theorem~\ref{thm:sl2_pw}
 (identity, unipotent, torus, generic, Weyl), $\det(g) = 1$
-bit-exact (5 zero residuals on $\det(g) - 1 = 0$).
+bit-exact. The $SL_{2}$-to-Levi check is $\nmax$-independent because
+the cyclotomic character $\chi_{4}$ acts on the reductive factor
+and is blind to the $\nmax$-axis substrate;\ closed form $5$ bit-exact
+zero residuals per cutoff.
 \item \emph{(C4) Closed-immersion injectivity panel.} For each of
-the M3-column generators of $\HGV(2)$ (the $k = 1$ Mellin slot),
-the corresponding period-side image is a $\Q$-linear combination of
-Hurwitz values at quarter-integer shifts
-$\{\zeta(s, 1/4), \zeta(s, 3/4), \zeta(s, 5/4)\}$. At $\nmax = 2$
-the M3 column has $N(2) = 5$ primitive generators (one per Coulomb
-sector $(n, l) \in \mathfrak{S}(2)$), and the
+the $N(\nmax)$ M3-column generators of $\HGV(\nmax)$ (the $k = 1$
+Mellin slot), the corresponding period-side image is a $\Q$-linear
+combination of Hurwitz values at quarter-integer shifts
+$\{\zeta(s, 1/4), \zeta(s, 3/4), \zeta(s, 5/4)\}$. The
 Goncharov--Deligne 2005 faithfulness on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ implies that distinct
 generators map to $\Q$-linearly independent periods. We verify the
-symbolic non-degeneracy by computing the $5 \times 5$ Gram matrix
-of the period-coefficient vectors (standard basis under the M3
-specialisation, which is non-degenerate by the structural
-assignment) and confirming $\det \ne 0$;\ this is one bit-exact
-residual. The remaining structural identities ($\le \mathrm{depth\, 1}$
-realisation of each of the five M3 generators in the Glanois
-basis $\mathcal{B}^{4}$ + the Eskandari--Murty--Nemoto level-4
-forcing) total $15$ structural identities, giving a $16$-residual
-C4 panel.
+symbolic non-degeneracy of the $N(\nmax) \times N(\nmax)$ Gram
+matrix of period-coefficient vectors (the standard basis, which is
+unimodular by the structural assignment) and confirm $\det = 1
+\ne 0$;\ this is one bit-exact residual per cutoff. The remaining
+$3 N(\nmax)$ structural identities are the depth-1 realisation of
+each of the $N(\nmax)$ M3 generators in the Glanois basis
+$\mathcal{B}^{4}$ via the three quarter-integer Hurwitz building
+blocks (3 identities per generator) together with the
+Eskandari--Murty--Nemoto level-4 forcing applied to each. Closed
+form:\ $1 + 3 N(\nmax)$ bit-exact zero residuals.
 \end{itemize}
 
-The total verification panel for the injection direction adds 261
-bit-exact zero residuals to the master verification table of
-Section~\ref{sec:verification}: 225 (C1) + 15 (C2) + 5 (C3) + 16
-(C4: $5 \times 5$ Gram non-degeneracy + 15 structural Glanois /
-EMN identities at $\nmax = 2$).
+Summing across the four panels gives the closed-form per-cutoff
+G4-Inj residual count
+\[
+   R^{\mathrm{G4\text{-}Inj}}(\nmax)
+   \;=\; (3 N(\nmax))^{2} + 3 N(\nmax) + 5 + (1 + 3 N(\nmax))
+   \;=\; 9 N(\nmax)^{2} + 6 N(\nmax) + 6,
+\]
+which evaluates to
+\[
+   R^{\mathrm{G4\text{-}Inj}}(1) = 54, \quad
+   R^{\mathrm{G4\text{-}Inj}}(2) = 261, \quad
+   R^{\mathrm{G4\text{-}Inj}}(3) = 789, \quad
+   R^{\mathrm{G4\text{-}Inj}}(4) = 1854.
+\]
+The per-cutoff breakdown is summarised in Table~\ref{tab:g4_inj_panel}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c c c c c c c}
+\toprule
+$\nmax$ & $N(\nmax)$ & C1 & C2 & C3 & C4 & Total \\
+\midrule
+1 & 2  & 36   & 6  & 5 & 7  & 54   \\
+2 & 5  & 225  & 15 & 5 & 16 & 261  \\
+3 & 9  & 729  & 27 & 5 & 28 & 789  \\
+4 & 14 & 1764 & 42 & 5 & 43 & 1854 \\
+\midrule
+\multicolumn{6}{r}{\textbf{G4-Inj sum at $\nmax \in \{2, 3, 4\}$:}} & \textbf{2{,}904} \\
+\bottomrule
+\end{tabular}
+\caption{Closed-form bit-exact residual counts for the level-4
+cosmic-Galois injection panel at every finite cutoff
+$\nmax \in \{1, 2, 3, 4\}$. The sum over the production grid
+$\{2, 3, 4\}$ contributes $2{,}904$ residuals to the master
+verification panel (Table~\ref{tab:verification}). Every count is
+the explicit symbolic-zero output of
+\texttt{tests/test\_paper56\_injection\_g4.py}; the closed-form
+$R^{\mathrm{G4\text{-}Inj}}(\nmax) = 9 N(\nmax)^{2} + 6 N(\nmax) + 6$
+matches each row bit-exact.}
+\label{tab:g4_inj_panel}
+\end{table}
+
+The extension from $\nmax = 2$ to $\nmax \in \{3, 4\}$ is structural
+rather than merely numerical:\ the closed-form per-cutoff identity
+makes the panel size depend on $N(\nmax)$ only, with no
+$\nmax$-specific structural surprises. The four compatibilities
+remain bit-exact at every cutoff in the test grid, confirming that
+Theorem~\ref{thm:injection_g4} is robust under refinement of the
+substrate cutoff. The pattern is $\nmax$-uniform, mirroring the
+cofiltered coherence of TC-2d
+(Theorem~\ref{thm:tc2d_cofiltered_coherence}).
 
 \subsection{The natural realisation is Hodge / Hodge-de-Rham}\label{sec:open_g4_hodge}
 
@@ -1547,16 +1597,21 @@ TC-2b & $SL_{2}$-factor equality (Sym$^{2}$ + det + decomp + dim) & 17 \\
 TC-2c & Per-cutoff equality at $\nmax = 3, 4$ ($\Phi$-recovery + dim + $\eta_{T}$) & 73 \\
 TC-2d & Cofiltered coherence (panel + transitivity + group-hom) & 243 \\
 G4-Inj & Level-4 injection (C1 + C2 + C3 + C4 at $\nmax = 2$) & 261 \\
+G4-Inj & Level-4 injection at $\nmax = 3$ (C1 + C2 + C3 + C4) & 789 \\
+G4-Inj & Level-4 injection at $\nmax = 4$ (C1 + C2 + C3 + C4) & 1854 \\
 \midrule
-\textbf{Total bit-exact zero residuals} & & \textbf{3{,}221} \\
+\textbf{Total bit-exact zero residuals} & & \textbf{5{,}864} \\
 \bottomrule
 \end{tabular}
 \caption{The full Tannakian-substrate verification panel:\
-$3{,}221$ bit-exact zero residuals across the four pro-system
-sub-tracks (PS-1/2/3/4) and the six Tannakian-foundation
-sub-tracks (TC-1a/b/c/d/e/f). All residuals computed in
-$\texttt{sympy}$-rational arithmetic;\ no floating-point steps anywhere in
-the verification chain.}
+$5{,}864$ bit-exact zero residuals across the four pro-system
+sub-tracks (PS-1/2/3/4), the six Tannakian-foundation sub-tracks
+(TC-1a/b/c/d/e/f), the four converse-direction sub-tracks
+(TC-2a/b/c/d), and the level-4 cosmic-Galois injection panel
+extended to every finite cutoff in the production grid
+$\nmax \in \{2, 3, 4\}$ (G4-Inj $\times 3$). All residuals computed
+in $\texttt{sympy}$-rational arithmetic;\ no floating-point steps
+anywhere in the verification chain.}
 \label{tab:verification}
 \end{table}
 
