@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.82.0] - 2026-06-06
+
+### Summary
+
+**Three parallel follow-on sprint closures bundled:** Paper 18 master Mellin engine descriptive refinement (POSITIVE), Eichler kernel sharpening (VERDICT-STABLE-NEGATIVE, closes §5.2 caveat), Kleinschmidt 2026 coaction module finalisation (COMPLETE-WITH-NAMED-GAPS, depth-1 ready for downstream).
+
+**(Paper 18 audit, sprint #5)** Refined Paper 18 §III.7 with one new paragraph capturing today's NA-1 operator-vs-slot distinction: the $k \in \{0, 1, 2\}$ index classifies the sub-mechanism (M1/M2/M3); the Mellin slot exponent at which the moment is evaluated selects which periods in the sub-mechanism's period ring are accessed; pure-Tate vs level-4 cyclotomic content within M3 is determined by the slot exponent, with the operator $\gamma_P$ unchanged. Cross-references Paper 55 §subsec:m3_diagonal_collapse + §subsec:m3_galois_descent (from v3.80.0). Added `loutey_paper55` bibitem. Paper 18: $26 \to 27$ pages, three-pass clean. Side finding (small, flagged as future follow-on): potential M2 analog of the operator-vs-slot reading.
+
+**(Eichler kernel sharpening, sprint #4)** Yesterday's depth-1 HB PSLQ NEGATIVE used an imaginary-axis kernel expedient (the literal Hain-Brown $(z - \tau)^w$ kernel is identically zero on the imaginary axis by symmetry). This sprint repeated the test with the literal kernel along the canonical real-axis-shifted contour $z = 1/3 + i t$, expanding the Eichler basis from 3 to 22 generators. **Verdict: VERDICT-STABLE-NEGATIVE.** Zero modular-ring identifications survive cross-precision agreement (50/100/200 dps). 50 spurious 50-dps positive hits collapse to 0 at higher precision — textbook noise-PSLQ signature. Yesterday's §5.2 magnitude prediction is now verified, not just argued. Combined with NA-1 depth-2 NEGATIVE (v3.80.0), Hain-Brown identification at the period level is ruled out at depth $\le 2$ across kernel choice and substrate choice. **§5.2 caveat closed.**
+
+**(Kleinschmidt module finalisation, sprint #3)** Reviewed the PARTIAL module from yesterday's interrupted sprint (`debug/kleinschmidt_coaction.py` + tests). Verdict: **COMPLETE-WITH-NAMED-GAPS.** Depth-1 implementation is functional, 67/67 tests pass in 2 seconds, literature anchor verified: $m[1/4] = \pi^4/54$ matches Lambert identity to $1.11 \times 10^{-7}$. Depth-2 access gap explicitly named: Kleinschmidt 2026 Appendices A/B/C are referenced but absent from ar5iv HTML (only JHEP PDF has them); depth-2 functions are informative `NotImplementedError` stubs. Memo §9.1 proposes three sprint-scale alternative computational paths that don't require the appendix content.
+
+### Added
+
+- **Paper 18 §III.7** new paragraph (~30 lines): operator-vs-slot distinction descriptive refinement, cross-references to Paper 55 §subsec:m3_diagonal_collapse + §subsec:m3_galois_descent.
+- **Paper 18 bibliography**: `loutey_paper55` bibitem.
+- **`debug/sprint_paper18_master_mellin_audit_memo.md`**: audit memo (~2,500 words, POSITIVE verdict).
+- **`debug/sprint_hb_eichler_kernel_memo.md`** finalised (2,432 words): kernel definition, contour choice, 240-cell PSLQ panel, side-by-side comparison to yesterday's imaginary-axis result, VERDICT-STABLE-NEGATIVE.
+- **`debug/sprint_kleinschmidt_adoption_memo.md`** finalised (3,167 words): final verdict against four-gate scheme, depth-2 access gap analysis, three alternative computational paths in §9.1.
+- **CLAUDE.md §1 version bump** v3.81.0 → v3.82.0.
+- **CLAUDE.md §2 one-liner** for v3.82.0.
+
+### Closed
+
+- **§5.2 Eichler kernel scope caveat** (from v3.80.0 sprint HB-PSLQ memo): closed at VERDICT-STABLE-NEGATIVE — literal kernel reproduces depth-1 HB rule-out with richer 22-generator basis.
+- **Paper 18 §III.7 operator-vs-slot consistency** with Paper 55 §subsec:m3_diagonal_collapse: closed at descriptive refinement grade — no structural inconsistency in the master Mellin engine framework.
+- **Kleinschmidt 2026 coaction module at depth 1**: closed at COMPLETE-WITH-NAMED-GAPS — depth-1 ready for downstream sprint use; depth-2 named as access gap.
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- Paper 18: 27 pages, three-pass clean, zero undefined references / citations.
+- 67/67 Kleinschmidt module tests pass in 2.01 s (driver self-check clean).
+- Eichler PSLQ panel: 240 cells (20 periods × 4 bases × 3 precisions), zero cross-precision-stable modular-ring identifications.
+
+### Honest scope
+
+- **Closed at descriptive refinement grade**: Paper 18 §III.7 master Mellin engine description; no new Theorem content.
+- **Closed at empirical verification grade**: Eichler kernel scope caveat; depth-1 HB period-level identification ruled out under canonical kernel choice with 22-generator expanded basis.
+- **Closed at COMPLETE-WITH-NAMED-GAPS grade**: Kleinschmidt module; depth-1 ready for downstream use, depth-2 access gap explicitly named with three alternative paths.
+- **Named open follow-ons**:
+  1. **Reading A/B on a non-diagonal substrate** (sprint #1, still running in background) — required to break the diagonal-substrate insensitivity demonstrated by Theorem~\ref{thm:na1_diagonal_collapse}.
+  2. **M2 analog of operator-vs-slot reading** (small follow-on, flagged in Paper 18 audit memo).
+  3. **Kleinschmidt depth-2 closure** via one of the three alternative paths in `debug/sprint_kleinschmidt_adoption_memo.md` §9.1.
+
 ## [3.81.0] - 2026-06-06
 
 ### Summary

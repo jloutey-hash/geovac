@@ -1107,6 +1107,94 @@ sub-mechanism's accessibility.  Source memos:
 \texttt{debug/l2\_d\_connes\_axiom\_audit\_31\_memo.md},
 data \texttt{debug/data/l2\_d\_connes\_axiom\_audit\_31.json}.
 
+\paragraph{Operator-vs.-slot refinement of the M3 sub-mechanism
+(Sprint NA-1, June 2026).}
+The Mellin-slot index $k \in \{0, 1, 2\}$ in
+$\mathcal{M}[\mathrm{Tr}(D^k\, e^{-tD^2})]$ classifies the
+\emph{sub-mechanism} (M1 / M3 / M2); it does \emph{not} by itself fix
+the period ring of the output.  The Mellin slot exponent~$s$ --- the
+argument at which the moment is evaluated --- selects \emph{which
+periods inside the sub-mechanism's natural period ring} are accessed.
+Sprint NA-1 (\texttt{debug/sprint\_na1\_depth2\_mellin\_memo.md},
+2026-06-06) makes this distinction explicit on the natural
+Camporesi--Higuchi diagonal substrate for the $k = 1$ slot (M3).
+Let
+\begin{equation}
+\label{eq:m3_gammaP_slot}
+M_3^{\gamma_P}(r)
+   \;:=\; \sum_{n \ge 0} (-1)^n\, g_n\, |\lambda_n|^{-r}
+\end{equation}
+be the parity-graded Mellin function of the Camporesi--Higuchi Dirac
+spectrum, with $\gamma_P|n\rangle = (-1)^n |n\rangle$ the vertex-parity
+grading on the eigenshells.  The \emph{same operator} $\gamma_P$
+produces two structurally distinct period-ring outputs depending on
+the Mellin slot exponent at which it is probed:
+\begin{itemize}
+  \item \textbf{Pure-Tate slot} ($r = 2s - 1 \in 2\mathbb{Z} + 1$, odd
+    integer; Paper~55~\cite{loutey_paper55}
+    \S\,M3-diagonal-collapse Theorem on
+    $M_3^{\gamma_P}$ closed form):
+    closed form
+    $M_3^{\gamma_P}(s) = 2^{2s - 3}\,(\beta(2s - 1) - \beta(2s - 3))$,
+    landing in $\bigoplus_k \pi^{2k+1}\cdot\mathbb{Q}$ via the
+    Euler-number closed form
+    $\beta(2k + 1) \in \pi^{2k + 1}\cdot\mathbb{Q}$.  This is
+    \emph{pure-Tate at level $1$}.
+  \item \textbf{Level-$4$ cyclotomic slot} (integer $s$ on the
+    un-shifted Dirac Dirichlet difference; Paper~28
+    Theorem~3~\cite{loutey_paper28}):
+    $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)
+       = 2^{s-1}(\beta(s) - \beta(s-2))$,
+    accessing $\beta(\mathrm{even})$ values
+    (Catalan $G = \beta(2)$, $\beta(4)$) inside
+    $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $4$
+    (Paper~55~\cite{loutey_paper55} \S\,M3-Galois-descent
+    Proposition on vertex parity as
+    Deligne--Glanois descent).
+\end{itemize}
+Both probes act on the same diagonal parity grading $\gamma_P$
+sitting in the $k = 1$ slot of the master Mellin engine; the
+period content (pure-Tate vs.\ level-$4$ cyclotomic) is selected
+by the Mellin slot exponent~$r$, not by a different operator.  The
+Glanois~\cite{glanois2015} basis~$\mathcal{B}^4$ accommodates both
+columns:\ the pure-Tate column is the $N = 1$ sub-basis, the
+level-$4$ column is the genuinely $N = 4$ content.
+
+This refinement does not change the case-exhaustion statement
+(Paper~32~\S~VIII), the M3 sectional convention refinement
+above, or the period-ring stratification
+$M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$.
+It sharpens the description of the M3 row of the master Mellin
+engine:\ the sub-mechanism index $k = 1$ commits to the
+$\eta$-invariant Mellin family
+$\mathcal{M}[\mathrm{Tr}(D \cdot e^{-tD^2})]$, but the period-ring
+location within $M_3$ at each evaluation is determined by the slot
+exponent.  Cross-reference Paper~55~\cite{loutey_paper55}
+\S\,M3-diagonal-collapse and \S\,M3-Galois-descent for the
+explicit pure-Tate vs.\ level-$4$ demonstration, including the
+NA-1 diagonal-collapse identity
+$J(s_1, s_2) = M_3^{\gamma_P}(s_1 + s_2 - 1)$ on the
+Camporesi--Higuchi diagonal substrate.
+
+An identical operator-vs.-slot reading is available for M2 (the
+Seeley--DeWitt slot, $k = 2$):\ the squared-Dirac heat-kernel
+operator $D^2$ is fixed, but the Mellin slot exponent~$s$ selects
+which Seeley--DeWitt coefficient $a_k(D^2)$ is read off via
+$\mathrm{Res}_{s = (d - 2k)/2}\,\zeta_{D^2}(s)$.  The pure-Tate
+M2 closure
+$M_2 \subset \bigoplus_k \pi^{2k}\cdot\mathbb{Q}$
+(Sprint Mixed-Tate Test, paragraph above) describes the period
+ring;\ which $\pi^{2k}\cdot\mathbb{Q}$ slot is accessed by a given
+observable is fixed by the Mellin slot exponent at which the
+heat-kernel trace is evaluated.  The M1 slot $k = 0$ is degenerate
+in this sense:\ the trivial heat kernel collapses to the
+Hopf-base measure $\mathrm{Vol}(S^d)$, and the period ring
+$\mathbb{Q}[\pi, \pi^{-1}]$ has no internal Mellin-slot stratification
+to select.  The operator-vs.-slot distinction is therefore
+non-trivial for M2 and M3 (whose period rings have internal weight
+gradings) and degenerate for M1 (whose period ring has only one
+graded piece, $\mathbb{Q}[\pi, \pi^{-1}]$ at depth~$0$).
+
 \paragraph{Compact / non-compact partition of the $4/\pi$ rate
 (Sprint M-Z, May 2026).}
 The master Mellin engine's $M_1$ Hopf-base measure mechanism produces
@@ -3224,6 +3312,12 @@ J.~Loutey,
 ``The Universal/Coulomb Partition of the GeoVac Spectral Triple:
 $A$/$D$ Decomposition and the Three-Layer Asymmetry,''
 GeoVac Paper~31 (2026).
+
+\bibitem{loutey_paper55}
+J.~Loutey,
+``Periods of GeoVac: Cyclotomic Mixed-Tate Classification of the
+Master Mellin Engine,''
+GeoVac Paper~55 (2026).
 
 \bibitem{krajewski1998}
 T.~Krajewski,
