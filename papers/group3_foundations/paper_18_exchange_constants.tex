@@ -1195,6 +1195,31 @@ non-trivial for M2 and M3 (whose period rings have internal weight
 gradings) and degenerate for M1 (whose period ring has only one
 graded piece, $\mathbb{Q}[\pi, \pi^{-1}]$ at depth~$0$).
 
+\paragraph{Why slot, not operator (Sprint NA-1-offdiag, June~2026).}
+The structural reason the operator-vs.-slot distinction works as
+stated above:\ the trace functional
+$\mathrm{Tr}(\cdots\, e^{-t_i D^2}\, \gamma\, e^{-t_j D^2}\cdots)$
+commits to the \emph{diagonal} of any inserted operator $\gamma$ in
+the $D$-eigenbasis and loses the off-diagonal information.  For any
+self-adjoint $\gamma$ on a finite-dimensional Hilbert space ---
+commuting or non-commuting with $D$ ---
+\[
+\mathrm{Tr}\big(D^2\, e^{-t_1 D^2}\, \gamma\, D\, e^{-t_2 D^2}\big)
+\;=\; \sum_i \widetilde{\gamma}_{ii}\,
+\lambda_i^3\, e^{-(t_1 + t_2)\lambda_i^2},
+\]
+depending only on $t_1 + t_2$ (Paper~55~\cite{loutey_paper55}
+\S\,M3-diagonal-collapse, Theorem on the off-diagonal CH substrate).
+The substrate change from a diagonal $\gamma$-grading to a
+non-diagonal one (e.g.\ chirality-flipping $E_1$ entries on the full
+spinor bundle) does not change the trace output, because off-diagonal
+entries of $\widetilde\gamma$ are invisible to the trace.  This is
+the deeper structural reason the operator-vs.-slot reading commits
+to the slot exponent:\ the operator side of the master Mellin engine
+is projected onto its diagonal in the spectral basis before any
+period content is read off, and only the slot exponent~$s$ then
+selects which period ring element is accessed.
+
 \paragraph{Compact / non-compact partition of the $4/\pi$ rate
 (Sprint M-Z, May 2026).}
 The master Mellin engine's $M_1$ Hopf-base measure mechanism produces

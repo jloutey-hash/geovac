@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.83.0] - 2026-06-06
+
+### Summary
+
+**Sprint NA-1-offdiag — Reading C-strong.** Re-ran the NA-1 depth-2 Mellin test on a non-diagonal Camporesi-Higuchi substrate (chirality-flipping $E_1$ entries on the full spinor bundle from WH1 R3.5) to disambiguate Reading A (primitive product / abelianisation) vs Reading B (shuffle / free non-abelian). **Verdict: Reading C-strong** — neither A nor B, but a strengthened version of yesterday's Reading C diagonal-collapse theorem.
+
+**Headline theorem (new Paper 55 §subsec:m3_diagonal_collapse).** For any self-adjoint Dirac operator $D$ on a finite-dimensional Hilbert space and **any** self-adjoint $\gamma$ — commuting or non-commuting with $D$ —
+$$J(s_1, s_2) := \mathcal{M}_{s_1, s_2}\big[\mathrm{Tr}\big(D^2 e^{-t_1 D^2}\, \gamma\, D\, e^{-t_2 D^2}\big)\big] \;=\; \sum_i \widetilde\gamma_{ii}\,\lambda_i^{3 - 2 s_{\mathrm{tot}}}.$$
+Only the **diagonal** entries of $\widetilde\gamma = U^*\gamma U$ in the $D$-eigenbasis enter; the off-diagonal entries are invisible to the trace. Proof: a trivial property of $\mathrm{Tr}(\mathrm{diagonal}\cdot M\cdot\mathrm{diagonal})$, but it strengthens yesterday's diagonal-substrate Theorem~\ref{thm:na1_diagonal_collapse} from "simultaneous diagonalisation on CH-diagonal" to "trace-functional level on ANY substrate."
+
+**Strategic implication.** The Reading A/B distinction cannot be tested by trace-of-single-$\gamma$-insertion at any substrate. Both candidate non-diagonal substrates from yesterday's NA-1 follow-on (off-diagonal CH and Paper 28 QED vertex graph) fall to the same trace collapse. The substrate-correction route is closed at the trace-functional level. The genuine A/B probe lives at the **Jaffe–Lesniewski–Osterwalder entire cyclic cocycle** level (`geovac/jlo_chi.py`; depth-2 specialisation $\chi_D(a_0, a_1, a_2)$ with two non-$D$-functions between heat-kernels). Named as a 2-3 week sprint-scale follow-on.
+
+**Substantive numerical sub-finding.** At $n_{\max} = 2$ on the chirality-symmetric off-diagonal CH, $J(s_{\mathrm{tot}}) \equiv 0$ identically for all integer $s_{\mathrm{tot}} \ge 2$ — a sharper $\mathbb{Z}_2$-chirality vanishing theorem than appeared on the CH-diagonal substrate. The off-diagonal CH spectrum lives in $\mathbb{Q} \cup \mathbb{Q}(\sqrt 5)$ at $n_{\max} = 2$ (eigenvalues $\pm 7/2, \pm 5/2, \pm 1/2 \pm \sqrt 5$, with multiplicities $1, 5, 5, 1, 1, 1, 1$); at $n_{\max} = 3$ additional quadratics give $\sqrt{10}, \sqrt{14}$. Substituting $\gamma_5$ (chirality grading) for $\gamma_P$ (vertex parity) gives non-zero rational $J$, still bit-exactly depth-1 in $s_{\mathrm{tot}}$ across all $(s_1, s_2)$ splits (verified to 25 digits at $n_{\max} = 3$).
+
+**Self-correction discipline note.** The driver originally used a buggy formula $\sum_{i, j} \lambda_i^a \widetilde\gamma_{ij}\,\lambda_j^b$ (not the trace). The bug was caught at the sympy verification step when the buggy formula produced a $\mathbb{Q}(\sqrt 5)$ value where the substrate's manifest $\mathbb{Z}_2$ symmetry forced zero. The memo §4 documents both the bug and its diagnosis as institutional memory.
+
+### Added
+
+- **Paper 55 §subsec:m3_diagonal_collapse**: new Theorem `thm:na1_trace_functional_collapse` (Reading C-strong, trace-functional collapse on any substrate, any Hermitian $\gamma$) + proof + identification of Theorem `thm:na1_diagonal_collapse` as a specialisation; new Remark `rem:reading_AB_jlo_cocycle` (right next probe is JLO cocycle, not substrate enrichment); updated Remark `rem:reading_AB_diagonal_invisible` (initial "non-diagonal substrate needed" reading deflated to "substrate enrichment cannot recover the A-vs-B distinction at the trace-of-single-$\gamma$-insertion level").
+- **Paper 18 §III.7** new paragraph "Why slot, not operator (Sprint NA-1-offdiag, June 2026)": the structural reason the operator-vs-slot distinction works — the trace functional projects any inserted $\gamma$ onto its diagonal in the $D$-eigenbasis before any period content is read off, so substrate-induced off-diagonal entries of $\widetilde\gamma$ are invisible.
+- **`debug/sprint_na1_offdiag_substrate_compute.py`** (525 lines, ~70 s wall): driver running off-diagonal CH at $n_{\max} \in \{2, 3\}$, exact sympy + mpmath cross-check, dual verification of the load-bearing identity.
+- **`debug/data/na1_offdiag_substrate_results.json`** (268 KB): full panel, exact closed-form values, sub-finding details.
+- **`debug/sprint_na1_offdiag_substrate_memo.md`** (~4,500 words): TL;DR / setup / corrected formula / diagnostic of original bug as institutional memory / honest scope / named follow-on (JLO cocycle).
+- **CLAUDE.md §1 version bump** v3.82.0 → v3.83.0.
+- **CLAUDE.md §2 one-liner** for v3.83.0.
+
+### Closed
+
+- **Substrate-correction route for Reading A/B**: closed at the trace-functional level. Off-diagonal CH and Paper 28 QED vertex graph substrates both fall to the same trace collapse; substrate enrichment cannot expose the A-vs-B distinction.
+- **Reading C generalisation**: closed at theorem grade — extends from CH-diagonal to any substrate, any Hermitian $\gamma$.
+- **Paper 55 Remark `rem:reading_AB_diagonal_invisible`** deflated: initial reading suggesting non-diagonal substrate would expose A-vs-B is now superseded by the trace-functional argument.
+
+### Verification
+
+- Bit-exact symbolic verification at $n_{\max} = 2$ via `sympy.Rational` — eigenvalues $\pm 7/2, \pm 5/2, \pm 1/2 \pm \sqrt 5$ derived from characteristic polynomial factorization $4\lambda^2 \pm 4\lambda - 19$.
+- Cross-precision check at $n_{\max} = 3$ via `mpmath.eigsy` to 25 digits — independent verification of trace identity.
+- Direct verification via `scipy.linalg.expm` at multiple $(t_1, t_2)$ pairs — $T(t_1, t_2)$ bit-identical under permutations with the same $t_1 + t_2$ (the load-bearing $s_{\mathrm{tot}}$-only dependence).
+- Operator-level commutator audit at $n_{\max} = 3$: $\|[D_{\mathrm{off}}, \gamma_P]\| = 21.9$, $\|[D_{\mathrm{off}}^2, \gamma_P D_{\mathrm{off}}]\| = 86.3$ — the substrate is genuinely non-commuting at the operator level, but the trace doesn't feel it.
+- 18/18 topological-integrity tests pass.
+- Paper 55: 37 pages, two-pass clean (one pre-existing undefined ref `sec:open_m2_m3` is not introduced by today's edits); Paper 18: 27 pages, two-pass clean.
+
+### Honest scope
+
+- **Closed at theorem grade**: Reading C-strong (trace-functional collapse on any substrate, any Hermitian $\gamma$, single-$\gamma$-insertion case).
+- **Closed at descriptive refinement grade**: Paper 18 §III.7 trace-functional paragraph; no new structural result added beyond what Paper 55 captures.
+- **Reading A/B remains genuinely open** but is now **structurally relocated** from substrate level to JLO cocycle level. WH1 PROVEN, WH6, all other corpus structural results unaffected (the prior Theorem `thm:na1_diagonal_collapse` is strengthened, not falsified).
+- **Named open follow-ons**:
+  1. **JLO cocycle depth-2 probe** (`geovac/jlo_chi.py`, depth-2 specialisation $\chi_D(a_0, a_1, a_2)$) — 2-3 weeks. The right next probe for Reading A/B; uses GeoVac's existing JLO infrastructure (v3.58.0 Q5'-Stage1-Arc).
+  2. **Reading A/B if JLO returns POSITIVE-asymmetric**: free non-abelian Tannakian closure on shuffle-enriched substrate, 2-4 months (multi-month).
+  3. **Reading A/B if JLO returns POSITIVE-symmetric or collapse**: Reading C-strong extends to depth-$n$ for all $n$; primitive Hopf substrate is the right substrate.
+
 ## [3.82.0] - 2026-06-06
 
 ### Summary

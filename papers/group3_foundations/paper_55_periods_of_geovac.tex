@@ -1153,21 +1153,99 @@ content.
 
 \begin{remark}[Reading A vs Reading B on a diagonal substrate]
 \label{rem:reading_AB_diagonal_invisible}
-Theorem~\ref{thm:na1_diagonal_collapse} implies the
+Theorem~\ref{thm:na1_diagonal_collapse} initially suggested that the
 A-vs-B disambiguation question (whether the GeoVac substrate
 respects primitive product or shuffle deconcatenation at depth $2$)
 is \emph{structurally invisible} on the natural diagonal
-Camporesi--Higuchi substrate.  Distinguishing the two readings
-requires a non-diagonal substrate in which $\gamma_P$ does not
-commute with the operator under the Mellin slot.  Two natural
-candidates are flagged for follow-on:\ the off-diagonal CH
-operator system from WH1~R3.5 (where chirality-flipping $E_1$
-entries break simultaneous diagonalisation) and the
-Paper~28~\S~QED-vertex graph (where $\gamma_P$ is realised by
-combinatorial vertex parity on a discrete vertex set rather than
-by the diagonal $(-1)^n$ on shells).  See
-\texttt{debug/sprint\_na1\_depth2\_mellin\_memo.md}~\S5 for the
-sprint outline.
+Camporesi--Higuchi substrate but might be exposed by a non-diagonal
+substrate in which $\gamma_P$ does not commute with the operator
+under the Mellin slot.  Theorem~\ref{thm:na1_trace_functional_collapse}
+below \emph{deflates} this hope:\ the depth-$2$ trace collapse holds
+on \emph{any} substrate, commuting or non-commuting, because the
+trace functional is blind to off-diagonal entries of $\gamma$ in the
+$D$-eigenbasis.  Substrate enrichment cannot recover the A-vs-B
+distinction at the trace-of-single-$\gamma$-insertion level.
+\end{remark}
+
+\begin{theorem}[NA-1-offdiag trace-functional collapse, Reading
+C-strong]
+\label{thm:na1_trace_functional_collapse}
+Let $D$ be a self-adjoint operator on a finite-dimensional Hilbert
+space $\Hcal$ and $\gamma$ \emph{any} self-adjoint operator on
+$\Hcal$ --- not necessarily commuting with $D$.  Let
+$\{\lambda_i\}_{i \in I}$ be the eigenvalues of $D$ and
+$\widetilde{\gamma} := U^* \gamma U$ the matrix of $\gamma$ in the
+eigenbasis of $D$.  Then for every $s_1, s_2 \in \C$ with
+$\Re(s_1) + \Re(s_2) > 0$ and $s_1 + s_2 - 1$ outside the
+$D$-spectral support,
+\begin{equation}
+\label{eq:na1_J_general}
+J(s_1, s_2)
+\;:=\; \frac{1}{\Gamma(s_1)\Gamma(s_2)}
+\int_0^\infty\!\!\!\int_0^\infty t_1^{s_1 - 1} t_2^{s_2 - 1}\,
+\Tr\!\big(D^2\, e^{-t_1 D^2}\, \gamma\, D\, e^{-t_2 D^2}\big)\,
+dt_1\, dt_2
+\end{equation}
+depends only on $s_{\mathrm{tot}} := s_1 + s_2$, with closed form
+\begin{equation}
+\label{eq:na1_J_general_closed}
+J(s_1, s_2)
+\;=\; \sum_{i \in I} \widetilde{\gamma}_{ii}\,
+\lambda_i^{\,3 - 2 s_{\mathrm{tot}}}.
+\end{equation}
+Only the \emph{diagonal} entries of $\widetilde\gamma$ in the
+$D$-eigenbasis enter;\ the off-diagonal entries
+$\widetilde\gamma_{ij}$ for $i \ne j$ are invisible to the trace.
+\end{theorem}
+
+\begin{proof}
+In the eigenbasis of $D$, the operators $D^k e^{-t D^2}$ are
+diagonal with $i$-th entry $\lambda_i^k e^{-t \lambda_i^2}$.  For
+diagonal operators $A, B$ with entries $A_{ii}, B_{ii}$ and an
+arbitrary operator $\gamma$,
+$\Tr(A \gamma B) = \sum_i A_{ii}\, \widetilde\gamma_{ii}\, B_{ii}$
+because cross-terms $A_{ii}\, \widetilde\gamma_{ij}\, B_{jj}$ for
+$i \ne j$ are off-diagonal in $A \gamma B$ and don't contribute to
+the trace.  Substituting $A = D^2 e^{-t_1 D^2}$,
+$B = D e^{-t_2 D^2}$ gives
+$\Tr(D^2 e^{-t_1 D^2}\gamma D e^{-t_2 D^2})
+   = \sum_i \widetilde\gamma_{ii}\, \lambda_i^3\, e^{-(t_1 + t_2)\lambda_i^2}$,
+which depends only on $t_1 + t_2$.  Mellin-transforming yields
+$J(s_1, s_2) = \sum_i \widetilde\gamma_{ii}\, \lambda_i^{3 - 2 s_{\mathrm{tot}}}$
+as claimed.
+\end{proof}
+
+Theorem~\ref{thm:na1_diagonal_collapse} is the specialisation to
+$D = D^{\mathrm{CH}}_{\sthree}$ and $\gamma = \gamma_P$ vertex
+parity, where $\widetilde\gamma_P$ is itself diagonal with entries
+$(-1)^n$ and the sum reduces to $M_3^{\gamma_P}(s_{\mathrm{tot}} - 1)$
+with the Euler-number closed form
+$M_3^{\gamma_P}(s) = 2^{2s - 3}(\beta(2s - 1) - \beta(2s - 3))$
+of Theorem~\ref{thm:m3_gammaP_closed_form}.
+
+\begin{remark}[Reading A vs Reading B requires a non-trace probe]
+\label{rem:reading_AB_jlo_cocycle}
+Theorem~\ref{thm:na1_trace_functional_collapse} sharpens the
+honest statement of the open Reading A/B question.  The
+disambiguation cannot be tested by any chain
+$\Tr(\cdots e^{-t_i D^2}\, \gamma_i\, e^{-t_j D^2}\cdots)$ with
+single-operator insertions between heat-kernel factors, on any
+substrate:\ the trace functional commits to the diagonal of the
+inserted operator in the $D$-eigenbasis and loses the
+off-diagonal information that would carry primitive-vs-shuffle
+content.  The genuine A/B probe lives at the
+\emph{Jaffe--Lesniewski--Osterwalder} entire cyclic cocycle level
+(\texttt{geovac/jlo\_chi.py}; depth-$2$ specialisation
+$\chi_D(a_0, a_1, a_2)$ with two non-$D$-functions between
+heat-kernels), where the cocycle structure carries the operator
+ordering algebraically rather than projecting onto the trace
+diagonal.  See
+\texttt{debug/sprint\_na1\_offdiag\_substrate\_memo.md}~(2026-06-06)
+for the substrate audit at $n_{\max} \in \{2, 3\}$ on the
+off-diagonal CH with chirality-flipping $E_1$ entries, which
+verifies the trace-functional collapse bit-exactly even in the
+genuinely non-commuting case.  The JLO probe is named as a
+$2$--$3$ week sprint-scale follow-on.
 \end{remark}
 
 % =====================================================================
