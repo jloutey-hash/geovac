@@ -1045,6 +1045,131 @@ the Paper~28~\S$S_{\min}$ basis is the natural verification target
 The natural prediction is $S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$
 at depth $2$ as a new period not in the tested basis.
 
+\subsection{Diagonal-substrate collapse of the depth-2 joint Mellin}
+\label{subsec:m3_diagonal_collapse}
+
+The Sprint NA-1 depth-2 Mellin test
+(\texttt{debug/sprint\_na1\_depth2\_mellin\_memo.md}, 2026-06-06)
+returned a structural identity that refines the M3 picture on the
+natural Camporesi--Higuchi diagonal substrate.
+
+\begin{theorem}[NA-1 diagonal-collapse identity]
+\label{thm:na1_diagonal_collapse}
+Let $D$ be the Camporesi--Higuchi Dirac on $\sthree$ and
+$\gamma_P |n, \chi, m_l\rangle := (-1)^n |n, \chi, m_l\rangle$ the
+vertex-parity grading on the eigenshells. For every integer
+$s_1 + s_2 \ge 3$,
+\begin{equation}
+\label{eq:na1_J}
+J(s_1, s_2) \;:=\; \frac{1}{\Gamma(s_1)\Gamma(s_2)}
+\int_0^\infty\!\!\!\int_0^\infty t_1^{s_1 - 1} t_2^{s_2 - 1}\,
+\Tr\!\big(D^2\, e^{-t_1 D^2}\cdot \gamma_P\, D\, e^{-t_2 D^2}\big)\,
+dt_1\, dt_2
+\end{equation}
+depends only on $s_{\mathrm{tot}} := s_1 + s_2$ and collapses
+bit-exactly to a depth-$1$ parity-graded Mellin moment at shifted
+argument:
+\begin{equation}
+\label{eq:na1_collapse}
+J(s_1, s_2) \;=\; M_3^{\gamma_P}(s_{\mathrm{tot}} - 1),
+\qquad
+M_3^{\gamma_P}(s) \;:=\; \sum_{n \ge 0} (-1)^n\,(n + 1)(n + 2)\,
+\big((2n + 3)/2\big)^{1 - 2s}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+On the diagonal Camporesi--Higuchi eigenbasis,
+$D|n\rangle = \lambda_n |n\rangle$,
+$\gamma_P |n\rangle = (-1)^n |n\rangle$, and
+$e^{-t D^2}|n\rangle = e^{-t \lambda_n^2}|n\rangle$ are
+simultaneously diagonal;\ the joint operator trace algebraically
+degenerates to a single sum
+$\sum_n (-1)^n g_n\, \lambda_n^3\, e^{-(t_1 + t_2)\lambda_n^2}$.
+Mellin-double-transforming with respect to $t_1, t_2$ collects
+the two exponents into $s_{\mathrm{tot}} = s_1 + s_2$, yielding
+$J(s_1, s_2) = \sum_n (-1)^n g_n\, \lambda_n^{3 - 2 s_{\mathrm{tot}}}$.
+Setting $|\lambda_n| = (2n + 3)/2$ and $g_n = (n + 1)(n + 2)$ and
+identifying with $M_3^{\gamma_P}(s_{\mathrm{tot}} - 1)$ gives the
+claimed termwise algebraic identity. Bit-exact numerical
+verification at $s_{\mathrm{tot}} \in \{3, 4, 5, 6, 7\}$, $200$ dps,
+recorded in \texttt{debug/data/na1\_depth2\_mellin\_results.json}.
+\end{proof}
+
+The depth-$2$ joint Mellin transform of an M2 $\times$ M3 pair, on
+the natural diagonal substrate, is thus a depth-$1$ object in
+disguise. The factorisation diagnostic
+$J(s_1, s_2) \overset?= M_2(s_1) M_3(s_2)$ (primitive product) vs.\
+$J(s_1, s_2) \overset?= M_2(s_1) M_3(s_2) + M_3(s_1) M_2(s_2)$
+(deconcatenation pair) is \emph{structurally invisible} on this
+substrate because operator ordering is trivial.
+
+\begin{theorem}[Closed form for $M_3^{\gamma_P}$]
+\label{thm:m3_gammaP_closed_form}
+For every integer $s \ge 2$,
+\begin{equation}
+\label{eq:m3_gammaP_closed}
+M_3^{\gamma_P}(s) \;=\; 2^{2s - 3}\big(\beta(2s - 1) - \beta(2s - 3)\big),
+\end{equation}
+where $\beta(s) = L(s, \chi_{-4})$ is the Dirichlet beta function.
+In particular, $M_3^{\gamma_P}(s) \in \pi^{\,\mathrm{odd}}\cdot\Q$ for
+every integer $s$:\ the natural diagonal-substrate parity-graded
+Mellin moment is \emph{pure-Tate} (level $1$), via the Euler-number
+closed form $\beta(2k + 1) \in \pi^{2k + 1}\cdot\Q$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Substituting $u = n + 3/2$ identifies the sum with
+$\sum_{u \in \Z + 1/2,\, u \ge 3/2} (-1)^{u - 3/2}
+(u^{3 - 2s} - \tfrac14\, u^{1 - 2s})$.  Applying the alternating-shift
+identity $\sum_{n \ge 0}(-1)^n (n + 3/2)^{-k} = 2^k (1 - \beta(k))$
+to both terms and simplifying gives~\eqref{eq:m3_gammaP_closed}.
+Verified bit-exact at $s \in \{2, 3, 4, 5, 6\}$ via PSLQ at $50$,
+$100$, $200$ dps in
+\texttt{debug/sprint\_na1\_depth2\_mellin\_compute.py}.
+\end{proof}
+
+\begin{remark}[Relation to the level-$4$ cyclotomic content of
+Section~\ref{subsec:m3_galois_descent}]
+\label{rem:gammaP_vs_vertex_restricted}
+Theorem~\ref{thm:m3_gammaP_closed_form} samples the
+parity-graded Mellin function
+$\sum_n (-1)^n g_n |\lambda_n|^{-r}$ at $r = 2s - 1 \in 2\Z + 1$
+(odd integer), which lands inside $\pi^{\mathrm{odd}}\cdot\Q$ via
+$\beta(\mathrm{odd}) \in \pi^{\mathrm{odd}}\cdot\Q$. The
+vertex-parity decomposition of
+Proposition~\ref{prop:vertex_parity_descent}, in contrast, probes
+$D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)$ at integer $s$ via the
+unshifted Dirac Dirichlet series, which accesses
+$\beta(\mathrm{even})$ values (Catalan $G = \beta(2)$, $\beta(4)$)
+realising level-$4$ cyclotomic content.  Both probes act on the
+same diagonal parity grading $\gamma_P$;\ the period content (pure-Tate
+vs level-$4$ cyclotomic) is selected by the Mellin slot exponent,
+not by a different operator.  The Glanois~\cite{glanois2015} basis
+$\Bcal^4$ accommodates both columns:\ the pure-Tate column is the
+$N = 1$ sub-basis, the level-$4$ column is the genuinely $N = 4$
+content.
+\end{remark}
+
+\begin{remark}[Reading A vs Reading B on a diagonal substrate]
+\label{rem:reading_AB_diagonal_invisible}
+Theorem~\ref{thm:na1_diagonal_collapse} implies the
+A-vs-B disambiguation question (whether the GeoVac substrate
+respects primitive product or shuffle deconcatenation at depth $2$)
+is \emph{structurally invisible} on the natural diagonal
+Camporesi--Higuchi substrate.  Distinguishing the two readings
+requires a non-diagonal substrate in which $\gamma_P$ does not
+commute with the operator under the Mellin slot.  Two natural
+candidates are flagged for follow-on:\ the off-diagonal CH
+operator system from WH1~R3.5 (where chirality-flipping $E_1$
+entries break simultaneous diagonalisation) and the
+Paper~28~\S~QED-vertex graph (where $\gamma_P$ is realised by
+combinatorial vertex parity on a discrete vertex set rather than
+by the diagonal $(-1)^n$ on shells).  See
+\texttt{debug/sprint\_na1\_depth2\_mellin\_memo.md}~\S5 for the
+sprint outline.
+\end{remark}
+
 % =====================================================================
 \section{Joint engagement and physical observables}
 \label{sec:joint}

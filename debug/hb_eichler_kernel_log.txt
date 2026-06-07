@@ -1,0 +1,146 @@
+==============================================================================
+Hain-Brown PSLQ Test A: LITERAL Eichler kernel along shifted contour
+  base point tau = 0.3333333333333333 + 2.0 i
+  kernel weights k = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+==============================================================================
+
+>>> Precision: 50 dps
+  Modular (literal kernel) computed in 65.6s
+    E4(tau)_re ~ 0.999581505783
+    E4(tau)_im ~ 0.000724807747732
+    Delta(tau)_re ~ -1.74352522874e-6
+    Delta(tau)_im ~ 3.02037984538e-6
+    Lit P0_re ~ -4.80688267354e-7
+    Lit P0_im ~ -2.77502273124e-7
+    Lit P5_re ~ 3.40068226814e-9
+    Lit P5_im ~ -5.89016987462e-9
+    Lit P10_re ~ 1.8189037361e-8
+    Lit P10_im ~ 1.05014447584e-8
+
+  Config: modular_only (basis size = 28)
+    [POS] P_M2_a2scalar_trace              via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd2_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd3_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd4_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_a0Dirac_hw                  via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd2_hw                      via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_beta2_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_diff4_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_beta2_hw                    via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_beta4_hw                    via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_diff2_hw                    via [E4(tau)_re,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M2M3_zd2_G                     via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_zeta3_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+
+  Config: modular_plus_zeta (basis size = 30)
+    [POS] P_M1_trace                       via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_a2scalar_trace              via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd2_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd3_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd4_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,Delta(tau)_re...]
+    [POS] P_M2_a0Dirac_hw                  via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd2_hw                      via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_beta2_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_beta4_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_diff2_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M3_diff4_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_beta2_hw                    via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_beta4_hw                    via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_diff2_hw                    via [E4(tau)_re,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M2M3_zd2_G                     via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [NEG] P_M3_zeta3_trace                 via [zeta(3)]
+
+  Config: modular_plus_zeta_beta (basis size = 32)
+    [POS] P_M2_a2scalar_trace              via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd3_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd4_trace                   via [E4(tau)_re,E4(tau)_im,E6(tau)_re,Delta(tau)_re...]
+    [POS] P_M2_a0Dirac_hw                  via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M2_zd2_hw                      via [E4(tau)_re,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M3_beta2_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M3_beta4_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_diff2_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_diff4_trace                 via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [NEG] P_M3_beta2_hw                    via [beta(2)=G]
+    [POS] P_M3_beta4_hw                    via [Delta(tau)_re,Delta(tau)_im,EichlerLit_P0_re,EichlerLit_P0_im...]
+    [POS] P_M3_diff2_hw                    via [E4(tau)_im,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M2M3_zd2_G                     via [E4(tau)_re,E4(tau)_im,E6(tau)_re,E6(tau)_im...]
+    [POS] P_M3_zeta3_trace                 via [E4(tau)_im,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+
+  Config: full (basis size = 39)
+    [POS] P_M2_a1Dirac_trace               via [E4(tau)_im,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M2_a0scalar_trace              via [E4(tau)_im,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [NEG] P_M2_a2scalar_trace              via [pi^2]
+    [POS] P_M2_zd2_trace                   via [E6(tau)_re,E6(tau)_im,Delta(tau)_re,Delta(tau)_im...]
+    [POS] P_M2_zd3_trace                   via [Delta(tau)_im,EichlerLit_P0_re,EichlerLit_P0_im,EichlerLit_P1_re...]
+    [POS] P_M2_zd4_trace                   via [E6(tau)_im,Delta(tau)_re,Delta(tau)_im,EichlerLit_P0_re...]
+    [NEG] P_M2_a0Dirac_hw                  via [pi^2]
+    [POS] P_M2_zd2_hw                      via [Delta(tau)_im,EichlerLit_P0_re,EichlerLit_P0_im,EichlerLit_P1_re...]
+    [NEG] P_M3_beta2_trace                 via [beta(2)=G]
+    [POS] P_M3_diff4_trace                 via [E4(tau)_im,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [NEG] P_M3_beta2_hw                    via [beta(2)=G]
+    [POS] P_M3_diff2_hw                    via [E4(tau)_im,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [POS] P_M2M3_zd2_G                     via [E4(tau)_im,E6(tau)_re,E6(tau)_im,Delta(tau)_re...]
+    [NEG] P_M3_zeta3_trace                 via [zeta(3)]
+
+>>> Precision: 100 dps
+  Modular (literal kernel) computed in 171.0s
+    E4(tau)_re ~ 0.999581505783
+    E4(tau)_im ~ 0.000724807747732
+    Delta(tau)_re ~ -1.74352522874e-6
+    Delta(tau)_im ~ 3.02037984538e-6
+    Lit P0_re ~ -4.80688267354e-7
+    Lit P0_im ~ -2.77502273124e-7
+    Lit P5_re ~ 3.40068226814e-9
+    Lit P5_im ~ -5.89016987462e-9
+    Lit P10_re ~ 1.8189037361e-8
+    Lit P10_im ~ 1.05014447584e-8
+
+  Config: modular_only (basis size = 28)
+
+  Config: modular_plus_zeta (basis size = 30)
+    [NEG] P_M3_zeta3_trace                 via [zeta(3)]
+
+  Config: modular_plus_zeta_beta (basis size = 32)
+    [NEG] P_M3_beta2_trace                 via [beta(2)=G]
+    [NEG] P_M3_beta2_hw                    via [beta(2)=G]
+    [NEG] P_M3_zeta3_trace                 via [zeta(3)]
+
+  Config: full (basis size = 39)
+    [NEG] P_M3_beta2_trace                 via [beta(2)=G]
+    [NEG] P_M3_beta2_hw                    via [beta(2)=G]
+    [NEG] P_M3_zeta3_trace                 via [zeta(3)]
+
+>>> Precision: 200 dps
+  Modular (literal kernel) computed in 727.9s
+    E4(tau)_re ~ 0.999581505783
+    E4(tau)_im ~ 0.000724807747732
+    Delta(tau)_re ~ -1.74352522874e-6
+    Delta(tau)_im ~ 3.02037984538e-6
+    Lit P0_re ~ -4.80688267354e-7
+    Lit P0_im ~ -2.77502273124e-7
+    Lit P5_re ~ 3.40068226814e-9
+    Lit P5_im ~ -5.89016987462e-9
+    Lit P10_re ~ 1.8189037361e-8
+    Lit P10_im ~ 1.05014447584e-8
+
+  Config: modular_only (basis size = 28)
+
+  Config: modular_plus_zeta (basis size = 30)
+    [NEG] P_M3_zeta3_trace                 via [zeta(3)]
+
+  Config: modular_plus_zeta_beta (basis size = 32)
+    [NEG] P_M3_beta2_trace                 via [beta(2)=G]
+    [NEG] P_M3_beta4_trace                 via [beta(4)]
+    [NEG] P_M3_beta2_hw                    via [beta(2)=G]
+    [NEG] P_M3_beta4_hw                    via [beta(4)]
+    [NEG] P_M3_zeta3_trace                 via [zeta(3)]
+
+  Config: full (basis size = 39)
+    [NEG] P_M3_beta2_trace                 via [beta(2)=G]
+    [NEG] P_M3_beta4_trace                 via [beta(4)]
+    [NEG] P_M3_beta2_hw                    via [beta(2)=G]
+    [NEG] P_M3_beta4_hw                    via [beta(4)]
+
+Wrote C:\Users\jlout\Desktop\Project_Geometric\debug\data\hb_eichler_kernel_results.json
+TOP-LEVEL VERDICT: VERDICT-STABLE-NEGATIVE
+Positive modular hits (cross-precision agreement): 0

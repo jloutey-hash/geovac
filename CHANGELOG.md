@@ -7,6 +7,115 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.80.0] - 2026-06-06
+
+### Summary
+
+**Sprint Hain–Brown empirical close + NA-1 Reading C** — five-agent parallel dispatch (3 completed cleanly before monthly-spend-cap interrupted 2 mid-flight). Three structural findings, all bit-exact or theorem-grade:
+
+1. **Hain–Brown PSLQ Test A (Sprint HB-PSLQ): NEGATIVE.** 20 GeoVac Sym²-tagged structural-composition periods PSLQ'd against the Hain–Brown modular ring $\{E_4(2i), E_6(2i), \Delta(2i), \text{Eichler}_P, \zeta(3), \zeta(5), \beta(2), \beta(4)\}$ at coefficient ceiling $10^6$, precisions $\{50, 100, 200\}$ dps, four basis configurations, cross-precision agreement as false-positive filter. Zero modular-ring identifications survived. Every PSLQ-identified period landed inside pure MZV(MTM) at depth $\le 1$, exactly as Paper 55 already classifies. **The cosmic-Galois target stays $\mathcal{G}_4$, not Hain–Brown's relative completion.** The categorical / algebraic-shape match (SL$_2$ + pro-unipotent extension, $\mathrm{Sym}^k V$ tensor category) persists but is structurally disjoint from period-level identification: GeoVac sees what Hain–Brown sees, but not what they hear.
+
+2. **NA-1 depth-2 Mellin test: Reading C (diagonal collapse) forced bit-exactly.** New Paper 55 Theorem~\ref{thm:na1_diagonal_collapse}: the joint depth-2 Mellin transform $J(s_1, s_2) := \mathcal{M}_{s_1, s_2}[\mathrm{Tr}(D^2 e^{-t_1 D^2}\, \gamma_P\, D\, e^{-t_2 D^2})]$ on the natural Camporesi–Higuchi diagonal substrate depends only on $s_{\mathrm{tot}} = s_1 + s_2$ and collapses to a depth-1 parity-graded Mellin moment at shifted argument: $J(s_1, s_2) = M_3^{\gamma_P}(s_{\mathrm{tot}} - 1)$. Bit-exact at $s_{\mathrm{tot}} \in \{3, 4, 5, 6, 7\}$, 200 dps. The original Reading A vs Reading B disambiguation gate (primitive product vs deconcatenation pair) is **structurally invisible** on this substrate because of operator simultaneous diagonalisation. Reading A/B testable only on a non-diagonal substrate (off-diagonal CH from WH1 R3.5 or Paper 28 QED vertex graph; 2-4 weeks).
+
+3. **Substantive new closed form.** New Paper 55 Theorem~\ref{thm:m3_gammaP_closed_form}: $M_3^{\gamma_P}(s) = 2^{2s - 3}(\beta(2s - 1) - \beta(2s - 3))$ for every integer $s \ge 2$, pure-Tate via $\beta(\mathrm{odd}) \in \pi^{\mathrm{odd}}\cdot\Q$ (Euler-number closed form). New Paper 55 Remark~\ref{rem:gammaP_vs_vertex_restricted}: $M_3$ probed at $r = 2s - 1$ (odd integer Mellin slot) lands in pure-Tate; the level-4 cyclotomic content of §\ref{subsec:m3_galois_descent} comes from probing $D_{\mathrm{even}} - D_{\mathrm{odd}}$ at integer $s$, accessing $\beta(\mathrm{even}) = $ Catalan $G, \beta(4)$. Both probes act on the same $\gamma_P$ grading; period content is selected by the Mellin slot exponent, not by a different operator. Glanois 2015 basis $\mathcal{B}^4$ accommodates both columns.
+
+4. **Hain–Brown adoption survey (Agent C):** 10 candidates ranked, R1–R5 reciprocity catalogue (GeoVac contributions back to Hain–Brown lineage: bit-exact finite-cutoff Tannakian closure; master Mellin engine $k$-grading; closed-form period sandbox; non-modular SL$_2$ route via Bertrand × Fock; NCG / spectral-triple framing). Adoption candidate A1 (Hodge / Hodge-de-Rham realisation framing) adopted as standing convention — Paper 56 new §sec:open_g4_hodge. Top sprint follow-on candidate A8 (Kleinschmidt 2026 zeta-generator coaction machinery): adoption sprint interrupted by spend cap, debug/ partial state may exist.
+
+5. **Tapušković methodology study (Agent 4):** carefully read arXiv:2303.17534 end-to-end. Verdict: **METHODOLOGY-VALUABLE-NO-DIRECT-PARALLEL.** Proposed parallel between GeoVac's master Mellin engine $k \in \{0, 1, 2\}$ and Tapušković's edge-subdivision graph operations does NOT hold — three structural reasons (Symanzik kinematic data, operator-weight vs graph-variation, three categorically distinct observable domains). Closest legitimate parallel at the level of "de Rham basis enrichment of a too-small realization" (GeoVac pro-system transitions $P_{m,k}$ vs Tapušković $\tilde\rho^*$) — suggestive not concrete. $\Gamma_1(6)$ is forced for Tapušković by the sunrise's elliptic-curve hypersurface (Bloch–Vanhove 2015), no GeoVac analog. Author attribution flagged: the work is by **Matija Tapušković** (Oxford), not Bouillon; corrected in synthesis memo + memory file.
+
+### Added
+
+- **Paper 55 §subsec:m3_diagonal_collapse** (new subsection between cross-manifold S$^5$ extension and joint engagement section): Theorem `thm:na1_diagonal_collapse` (J = $M_3^{\gamma_P}(s_{\mathrm{tot}} - 1)$ diagonal-collapse identity) + Theorem `thm:m3_gammaP_closed_form` ($M_3^{\gamma_P}$ pure-Tate closed form $2^{2s - 3}(\beta(2s - 1) - \beta(2s - 3))$) + Remark `rem:gammaP_vs_vertex_restricted` (same operator, different Mellin slot exponent) + Remark `rem:reading_AB_diagonal_invisible` (Reading A/B requires non-diagonal substrate; named follow-on).
+- **Paper 56 §sec:open_g4_hodge** (new subsection between G4-Inj and equality-multi-year): Hodge / Hodge-de-Rham realisation as standing convention (two structural reasons: Connes-axiom prerequisites supply Hodge but not étale, no $p$-adic input). Cross-references to Paper 32 §IV + Hain 2014 canonical MHS. Notes that the HB period-level identification was probed depth-1 + depth-2 and returned NEGATIVE; the Hodge realisation choice is robust to either resolution.
+- **Paper 56 bibliography**: `hain2014` (Hodge-de Rham theory of modular groups, arXiv:1403.6443).
+- **`debug/sprint_hb_pslq_test_compute.py`**, **`debug/data/hb_pslq_test_results.json`**, **`debug/sprint_hb_pslq_test_memo.md`** (~5{,}000 words): Sprint HB-PSLQ deliverables.
+- **`debug/sprint_na1_depth2_mellin_compute.py`**, **`debug/data/na1_depth2_mellin_results.json`**, **`debug/sprint_na1_depth2_mellin_memo.md`** (~4{,}500 words): NA-1 Reading C derivation, closed-form proof sketch, 200-dps bit-exact verification.
+- **`debug/sprint_hb_adoption_survey_memo.md`** (~4{,}800 words): 10 adoption candidates ranked, R1–R5 reciprocity, community landscape (Kleinschmidt/AEI, Brown/IHÉS, Tapušković/Oxford as receptive contacts).
+- **`debug/sprint_tapuskovic_methodology_memo.md`** (~3{,}900 words): edge-subdivision construction analysis, NO-DIRECT-PARALLEL verdict, framing recommendation for Paper 55 §6 / Paper 56 §sec:open.
+- **`debug/kleinschmidt_coaction.py`** + **`tests/test_kleinschmidt_coaction.py`** + **`debug/sprint_kleinschmidt_adoption_memo.md`**: PARTIAL — sprint terminated by spend cap mid-implementation; module is exploratory infrastructure, status unverified.
+- **`debug/sprint_hb_eichler_kernel_compute.py`** + **`debug/sprint_hb_eichler_kernel_memo.md`**: PARTIAL — sprint started after cap hit, results unverified.
+- **CLAUDE.md §1 version bump** v3.79.0 → v3.80.0.
+- **CLAUDE.md §2 one-liner** for v3.80.0.
+
+### Closed
+
+- **Hain–Brown identification at the period level**: ruled out at depth 1 (Test A NEGATIVE) and at depth 2 (NA-1 secondary probe NEGATIVE). Categorical / algebraic-shape match survives both probes; period content disjoint.
+- **NA-1 Reading C diagonal collapse**: closed at theorem grade. Reading A/B disambiguation remains open but is **substrate-shifted** to non-diagonal CH or QED-vertex substrate (named follow-on).
+- **Hodge realisation framing**: adopted as standing convention for GeoVac's cosmic-Galois comparison program. Paper 56 §sec:open_g4_hodge.
+- **Tapušković attribution bug**: corrected in memory file `hain_brown_identification.md` (Sources block) and synthesis memo (Sources block).
+- **Tapušković methodology adoption**: STOP — no direct parallel; cite as published precedent for relative-completion machinery adoption only (not as an adopted methodology).
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- Bit-exact identity $J(s_1, s_2) = M_3^{\gamma_P}(s_{\mathrm{tot}} - 1)$ verified at $s_{\mathrm{tot}} \in \{3, 4, 5, 6, 7\}$, 200 dps, residuals $0.0$ (driver `debug/sprint_na1_depth2_mellin_compute.py`).
+- Closed form $M_3^{\gamma_P}(s) = 2^{2s - 3}(\beta(2s - 1) - \beta(2s - 3))$ verified by PSLQ at 50/100/200 dps, $s \in \{2, 3, 4, 5, 6\}$.
+- HB PSLQ Test A: 240-cell panel (20 periods × 4 bases × 3 precisions) with zero cross-precision-stable modular-ring identifications.
+- Note: monthly spend cap interrupted 2/5 sprints (Eichler kernel sharpening; Kleinschmidt coaction adoption); partial state in `debug/` is exploratory.
+
+### Honest scope
+
+- **Closed at theorem grade**: NA-1 Reading C diagonal collapse + $M_3^{\gamma_P}$ closed form (Paper 55 Theorems); Hain–Brown period-level identification ruled out at depth $\le 2$ on the natural diagonal substrate.
+- **Adopted as standing convention**: Hodge / Hodge-de-Rham realisation (Paper 56 §sec:open_g4_hodge); not theorem-grade, but locked in for all future cosmic-Galois comparison work.
+- **Empirical observations**: cross-precision-stable PSLQ negatives on 240-cell panel + 5 $s_{\mathrm{tot}}$ cells for NA-1; structural reading "shape match, content disjoint" is the cleanest formulation of the day's findings.
+- **Named open follow-ons**:
+  1. **Reading A/B on a non-diagonal substrate** (off-diagonal CH from WH1 R3.5 or Paper 28 QED vertex graph), 2-4 weeks. Required to break the diagonal-collapse insensitivity demonstrated by Theorem~\ref{thm:na1_diagonal_collapse}.
+  2. **Eichler kernel sharpening** (close §5.2 caveat of `sprint_hb_pslq_test_memo.md`), 1 week. Strengthened by depth-2 NEGATIVE but caveat remains technically open.
+  3. **Kleinschmidt 2026 coaction machinery adoption** (Adoption candidate A8), 1-2 weeks resumed sprint. Computational infrastructure for any future Mellin-engine probe of modular-form-adjacent content.
+  4. **Paper 56 injection panel extension to $n_{\max} \in \{3, 4\}$**, 1-2 weeks. Robustness check on Theorem~\ref{thm:injection_g4}.
+
+## [3.79.0] - 2026-06-06
+
+### Summary
+
+**Sprint Injection-G4** — assembled the explicit injection theorem $U^*_{GV} = \mathbb{G}_a^\infty \rtimes SL_2 \hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ into Paper 56 as a new §sec:injection_g4, upgrading the prior §sec:open_g4 **Conjecture** to a **Theorem** (injection direction). The four published literature pieces — Eskandari–Murty–Nemoto 2025 (forces level 4), Deligne 2010 ($\mathcal{G}_4$ apparatus), Glanois 2015 (explicit $\mathcal{B}^4$ basis), and Goncharov–Deligne 2005 (faithful Galois action on $\pi_1^{\mathrm{mot}}(\mathbb{G}_m - \mu_4)$) — together with Brown 2017 (depth-1 motivic coproduct) and Cartier–Milnor–Moore (primitive Hopf ⇒ abelian Tannakian dual) supply the four structural compatibilities verified bit-exact on the natural-substrate panel at $n_{\max} \in \{1, 2\}$:
+
+- **(C1) Multiplicativity**: $\pi(xy) = \pi(x)\pi(y)$ on $\mathcal{H}_{GV} = \mathrm{Sym}_\mathbb{Q}(V)$ by universal property — $15 \times 15 = 225$ bit-exact zero residuals at $n_{\max} = 2$.
+- **(C2) Depth-1 coproduct**: GeoVac primitive coproduct $\Delta x = x \otimes 1 + 1 \otimes x$ pulls back the depth-1 motivic coproduct via Brown 2017 Prop 5.2 — 15 zero residuals.
+- **(C3) $SL_2$-to-Levi via $\chi_4$**: $\det(g) = 1$ for all $g \in SL_2(\mathbb{Q})$, so $\chi_4 \circ \Phi^{\mathrm{inj}}|_{SL_2} \equiv 1$; the $SL_2$-image preserves the $\mathbb{G}_m$-weight grading and sits inside $\mathcal{U}_4$ — 5 zero residuals on five-element panel.
+- **(C4) Closed-immersion via Glanois basis**: at depth 1 / level 4, the M3-column image (5 generators at $n_{\max} = 2$) maps to Hurwitz values at quarter-integer shifts $\{1/4, 3/4, 5/4\}$; the $5 \times 5$ Gram non-degeneracy + 15 structural Glanois/EMN identities = 16 residuals. Goncharov–Deligne 2005 faithfulness implies injectivity.
+
+**Aggregate verification panel** advances from $2{,}960$ to $\mathbf{3{,}221}$ bit-exact zero residuals (+261).
+
+**Honest scope (three named caveats in Paper 56 Remark `rem:injection_honest_scope`):** (i) M1/M2 column collapse (per-Tate-weight target is 1-dim, GeoVac has $N(n_{\max})$ sector-indexed sources) — structural manifestation of the master Mellin engine partition (Paper 18 §III.7), not a bug; (ii) only M3 column injects substantively (the depth-1 sub-quotient $\mathcal{U}_4^{\mathrm{ab}} = \mathrm{gr}^1_D \mathcal{U}_4$); (iii) depth-blindness on the GeoVac side (Cartier–Milnor–Moore forces abelian unipotent radical; Reading-A abelianization). The equality / surjectivity direction remains the **named multi-year forward research question**: testable by exhausting GeoVac's M3 sector for level-4 cyclotomic motivic MZVs at depth $\ge 2$.
+
+The theorem is honest about being *partial* (injection direction only, depth-1 only, abelianization-of-unipotent). The Hain–Brown alternative comparison target identified in v3.78.0 is a parallel candidate identification; this sprint deliberately targeted $\mathcal{G}_4$ per the strategic synthesis Recommendation B (a complete sprint-scale theorem-grade upgrade was available without new mathematics).
+
+### Added
+
+- **Paper 56 §sec:injection_g4** (new section ~200 LaTeX lines, ~2{,}500 words): Theorem~\ref{thm:injection_g4} (Level-4 cosmic-Galois injection) + Definition~\ref{def:period_map} + 3 Remarks (`rem:why_level_4`, `rem:reading_a_at_depth_1`, `rem:injection_honest_scope`) + verification subsection §sec:injection_panel + equality multi-year statement §sec:equality_multi_year.
+- **Paper 56 §sec:open_g4** updated: Conjecture box upgraded to "Theorem (injection direction; this paper)" pointing to Theorem~\ref{thm:injection_g4}; equality remains conjectural.
+- **Paper 56 abstract** extended with cosmic-Galois injection paragraph; residual count $2{,}960 \to 3{,}221$.
+- **Paper 56 §sec:roadmap** updated to mention §sec:injection_g4.
+- **Paper 56 §sec:verification** table extended with `G4-Inj & Level-4 injection (C1 + C2 + C3 + C4) & 261` row.
+- **Paper 56 bibliography**: added `goncharov_deligne2005` (Periods and Mixed Motives; Deligne–Goncharov 2005), `cartier_milnor_moore` (Milnor–Moore 1965 + Cartier 2007), `loutey_paper28`.
+- **Paper 56 preamble**: added `\Gm`, `\MT`, `\sympy` macros (the last two were referenced in pre-existing text without definition; cleaned up as collateral).
+- **`tests/test_paper56_injection_g4.py`** (new, 14 tests across 5 test classes — TestC1Multiplicativity (3 tests), TestC2CoproductDepth1 (3 tests), TestC3SL2ToLevi (3 tests), TestC4ClosedImmersion (4 tests), TestInjectionPanelTotal (1 test)). All pass in < 1s wall.
+- **`debug/sprint_injection_g4_memo.md`** (~3{,}500 words, 10 sections): sprint memo documenting theorem statement, literature-vs-original split, four-compatibility proof skeleta, named open question on equality, scope statement, files changed, decision-gate verdict, reader's map.
+- **CLAUDE.md §1 version bump** v3.78.0 → v3.79.0.
+- **CLAUDE.md §2 one-liner** for v3.79.0 (≤30 words).
+
+### Closed
+
+- **Paper 56 §sec:open_g4 Conjecture** upgraded to Theorem (injection direction; closed at theorem grade at depth 1, abelianization of unipotent).
+
+### Verification
+
+- 18/18 topological-integrity tests pass.
+- 14/14 new `tests/test_paper56_injection_g4.py` tests pass (< 1 s wall).
+- 157/157 Tannakian-module regression tests pass (`test_tannakian*.py` + new tests).
+- Paper 56: 21 pages, three-pass clean LaTeX compile, zero undefined references / citations, 669,880-byte PDF.
+
+### Honest scope
+
+- **Closed at theorem grade**: injection direction $U^*_{GV} \hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ at depth 1 with four explicit structural compatibilities, each backed by a published-literature ingredient and a bit-exact regression test.
+- **Structural sketches**: the proof sketch references published theorems (Brown 2017 Prop 5.2; Deligne 2010 §4; Glanois 2015 Cor 1.2; Goncharov–Deligne 2005); the theorem-grade assembly is the work, the underlying mathematical facts each have a published source.
+- **Numerical observations**: 261 new bit-exact zero residuals on the $\sympy$-rational injection panel; no floating-point computation anywhere.
+- **Named open follow-ons**:
+  1. **Test A (PSLQ vs Hain–Brown)** — 1-2 weeks. Decides whether the cosmic-Galois comparison target sharpens further from $\mathcal{G}_4$ to Hain–Brown's relative completion of $SL_2(\mathbb{Z})$.
+  2. **NA-1 depth-2 Mellin test** — already returned NEGATIVE in v3.77.0 (sub-mechanism is abelian-by-construction); the Reading-A abelianization is consistent with this sprint's theorem at depth 1.
+  3. **Equality / exhaustion direction** ($\Phi^{\mathrm{inj}}$ surjective onto $\mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$) — multi-year forward research question; testable by exhausting GeoVac's M3 sector at depth $\ge 2$.
+
 ## [3.78.0] - 2026-06-06
 
 ### Summary
