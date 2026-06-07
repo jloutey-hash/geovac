@@ -1,0 +1,1786 @@
+{
+  "sprint": "Q5'-JLO-Depth2",
+  "date": "2026-06-06",
+  "purpose": "Reading A vs Reading B disambiguation via JLO entire cyclic cocycle at depth 2",
+  "context": {
+    "v3.83.0_reading_C_strong": true,
+    "trace_functional_collapse_already_established": true,
+    "JLO_cocycle_carries_operator_ordering_algebraically": true
+  },
+  "substrate": {
+    "n_max": 2,
+    "dim_H": 16,
+    "n_sectors": 5,
+    "sectors": [
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "kappa": "-1/16",
+    "Tr_D_squared": "5401/64",
+    "Tr_Lambda_squared": "84",
+    "norm_D_minus_Lambda": "5/8"
+  },
+  "panel_A_depth2_a0_unit": {
+    "(1, e_0, e_0)": {
+      "s": 0,
+      "t": 0,
+      "even": [
+        "-3/128",
+        "5949/65536"
+      ],
+      "odd": [
+        "-7/128",
+        "13549/65536"
+      ]
+    },
+    "(1, e_0, e_1)": {
+      "s": 0,
+      "t": 1,
+      "even": [
+        "0",
+        "0"
+      ],
+      "odd": [
+        "1/64",
+        "-1237/32768"
+      ]
+    },
+    "(1, e_0, e_2)": {
+      "s": 0,
+      "t": 2,
+      "even": [
+        "0",
+        "151/196608"
+      ],
+      "odd": [
+        "0",
+        "85/65536"
+      ]
+    },
+    "(1, e_0, e_3)": {
+      "s": 0,
+      "t": 3,
+      "even": [
+        "3/128",
+        "-749/8192"
+      ],
+      "odd": [
+        "5/128",
+        "-5635/32768"
+      ]
+    },
+    "(1, e_0, e_4)": {
+      "s": 0,
+      "t": 4,
+      "even": [
+        "0",
+        "-11/98304"
+      ],
+      "odd": [
+        "0",
+        "55/32768"
+      ]
+    },
+    "(1, e_1, e_0)": {
+      "s": 1,
+      "t": 0,
+      "even": [
+        "0",
+        "0"
+      ],
+      "odd": [
+        "1/64",
+        "-1237/32768"
+      ]
+    },
+    "(1, e_1, e_1)": {
+      "s": 1,
+      "t": 1,
+      "even": [
+        "3/128",
+        "-5949/65536"
+      ],
+      "odd": [
+        "-7/128",
+        "13549/65536"
+      ]
+    },
+    "(1, e_1, e_2)": {
+      "s": 1,
+      "t": 2,
+      "even": [
+        "0",
+        "-1/96"
+      ],
+      "odd": [
+        "1/64",
+        "-2261/32768"
+      ]
+    },
+    "(1, e_1, e_3)": {
+      "s": 1,
+      "t": 3,
+      "even": [
+        "0",
+        "-43/65536"
+      ],
+      "odd": [
+        "0",
+        "195/65536"
+      ]
+    },
+    "(1, e_1, e_4)": {
+      "s": 1,
+      "t": 4,
+      "even": [
+        "-3/128",
+        "2503/24576"
+      ],
+      "odd": [
+        "3/128",
+        "-1687/16384"
+      ]
+    },
+    "(1, e_2, e_0)": {
+      "s": 2,
+      "t": 0,
+      "even": [
+        "0",
+        "151/196608"
+      ],
+      "odd": [
+        "0",
+        "85/65536"
+      ]
+    },
+    "(1, e_2, e_1)": {
+      "s": 2,
+      "t": 1,
+      "even": [
+        "0",
+        "-1/96"
+      ],
+      "odd": [
+        "1/64",
+        "-2261/32768"
+      ]
+    },
+    "(1, e_2, e_2)": {
+      "s": 2,
+      "t": 2,
+      "even": [
+        "-3/128",
+        "31159/196608"
+      ],
+      "odd": [
+        "-7/128",
+        "20717/65536"
+      ]
+    },
+    "(1, e_2, e_3)": {
+      "s": 2,
+      "t": 3,
+      "even": [
+        "3/128",
+        "-3655/24576"
+      ],
+      "odd": [
+        "5/128",
+        "-8195/32768"
+      ]
+    },
+    "(1, e_2, e_4)": {
+      "s": 2,
+      "t": 4,
+      "even": [
+        "0",
+        "-11/98304"
+      ],
+      "odd": [
+        "0",
+        "55/32768"
+      ]
+    },
+    "(1, e_3, e_0)": {
+      "s": 3,
+      "t": 0,
+      "even": [
+        "3/128",
+        "-749/8192"
+      ],
+      "odd": [
+        "5/128",
+        "-5635/32768"
+      ]
+    },
+    "(1, e_3, e_1)": {
+      "s": 3,
+      "t": 1,
+      "even": [
+        "0",
+        "-43/65536"
+      ],
+      "odd": [
+        "0",
+        "195/65536"
+      ]
+    },
+    "(1, e_3, e_2)": {
+      "s": 3,
+      "t": 2,
+      "even": [
+        "3/128",
+        "-3655/24576"
+      ],
+      "odd": [
+        "5/128",
+        "-8195/32768"
+      ]
+    },
+    "(1, e_3, e_3)": {
+      "s": 3,
+      "t": 3,
+      "even": [
+        "-3/128",
+        "6035/65536"
+      ],
+      "odd": [
+        "-9/64",
+        "53587/65536"
+      ]
+    },
+    "(1, e_3, e_4)": {
+      "s": 3,
+      "t": 4,
+      "even": [
+        "-3/128",
+        "3655/24576"
+      ],
+      "odd": [
+        "1/16",
+        "-13061/32768"
+      ]
+    },
+    "(1, e_4, e_0)": {
+      "s": 4,
+      "t": 0,
+      "even": [
+        "0",
+        "-11/98304"
+      ],
+      "odd": [
+        "0",
+        "55/32768"
+      ]
+    },
+    "(1, e_4, e_1)": {
+      "s": 4,
+      "t": 1,
+      "even": [
+        "-3/128",
+        "2503/24576"
+      ],
+      "odd": [
+        "3/128",
+        "-1687/16384"
+      ]
+    },
+    "(1, e_4, e_2)": {
+      "s": 4,
+      "t": 2,
+      "even": [
+        "0",
+        "-11/98304"
+      ],
+      "odd": [
+        "0",
+        "55/32768"
+      ]
+    },
+    "(1, e_4, e_3)": {
+      "s": 4,
+      "t": 3,
+      "even": [
+        "-3/128",
+        "3655/24576"
+      ],
+      "odd": [
+        "1/16",
+        "-13061/32768"
+      ]
+    },
+    "(1, e_4, e_4)": {
+      "s": 4,
+      "t": 4,
+      "even": [
+        "3/64",
+        "-12305/49152"
+      ],
+      "odd": [
+        "-11/128",
+        "16325/32768"
+      ]
+    }
+  },
+  "panel_B_depth2_targeted": {
+    "(e_0, e_1, e_2)": {
+      "s": 0,
+      "t": 1,
+      "u": 2,
+      "even": [
+        "0",
+        "-13/98304"
+      ],
+      "odd": [
+        "0",
+        "-13/98304"
+      ]
+    },
+    "(e_0, e_2, e_1)": {
+      "s": 0,
+      "t": 2,
+      "u": 1,
+      "even": [
+        "0",
+        "-13/98304"
+      ],
+      "odd": [
+        "0",
+        "-13/98304"
+      ]
+    },
+    "(e_1, e_0, e_2)": {
+      "s": 1,
+      "t": 0,
+      "u": 2,
+      "even": [
+        "0",
+        "-13/98304"
+      ],
+      "odd": [
+        "0",
+        "13/98304"
+      ]
+    },
+    "(e_1, e_2, e_0)": {
+      "s": 1,
+      "t": 2,
+      "u": 0,
+      "even": [
+        "0",
+        "-13/98304"
+      ],
+      "odd": [
+        "0",
+        "13/98304"
+      ]
+    },
+    "(e_2, e_0, e_1)": {
+      "s": 2,
+      "t": 0,
+      "u": 1,
+      "even": [
+        "0",
+        "-13/98304"
+      ],
+      "odd": [
+        "0",
+        "-13/98304"
+      ]
+    },
+    "(e_2, e_1, e_0)": {
+      "s": 2,
+      "t": 1,
+      "u": 0,
+      "even": [
+        "0",
+        "-13/98304"
+      ],
+      "odd": [
+        "0",
+        "-13/98304"
+      ]
+    },
+    "(e_0, e_3, e_4)": {
+      "s": 0,
+      "t": 3,
+      "u": 4,
+      "even": [
+        "0",
+        "-77/196608"
+      ],
+      "odd": [
+        "0",
+        "-77/196608"
+      ]
+    },
+    "(e_0, e_4, e_3)": {
+      "s": 0,
+      "t": 4,
+      "u": 3,
+      "even": [
+        "0",
+        "-77/196608"
+      ],
+      "odd": [
+        "0",
+        "-77/196608"
+      ]
+    },
+    "(e_1, e_1, e_1)": {
+      "s": 1,
+      "t": 1,
+      "u": 1,
+      "even": [
+        "7/256",
+        "-8833/98304"
+      ],
+      "odd": [
+        "-7/256",
+        "8833/98304"
+      ]
+    },
+    "(e_2, e_2, e_2)": {
+      "s": 2,
+      "t": 2,
+      "u": 2,
+      "even": [
+        "-7/256",
+        "16001/98304"
+      ],
+      "odd": [
+        "-7/256",
+        "16001/98304"
+      ]
+    }
+  },
+  "depth1_panel": {
+    "(1, e_0)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(e_0, 1)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(1, e_1)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(e_1, 1)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(1, e_2)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(e_2, 1)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(1, e_3)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(e_3, 1)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(1, e_4)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "(e_4, 1)": {
+      "even": [
+        "0",
+        "0",
+        "0"
+      ],
+      "odd": [
+        "0",
+        "0",
+        "0"
+      ]
+    }
+  },
+  "swap_symmetry_diagnostic": {
+    "t^0": {
+      "n_pairs_total": 10,
+      "n_asym_zero_even": 10,
+      "n_asym_zero_odd": 10,
+      "frac_symmetric_even": 1.0,
+      "frac_symmetric_odd": 1.0,
+      "max_abs_asym_even": "0",
+      "max_abs_asym_odd": "0",
+      "pair_detail": {
+        "(0, 1)": {
+          "v(s,t)_even": "0",
+          "v(t,s)_even": "0",
+          "asym_even": "0",
+          "sym_even": "0",
+          "v(s,t)_odd": "1/64",
+          "v(t,s)_odd": "1/64",
+          "asym_odd": "0",
+          "sym_odd": "1/32",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(0, 2)": {
+          "v(s,t)_even": "0",
+          "v(t,s)_even": "0",
+          "asym_even": "0",
+          "sym_even": "0",
+          "v(s,t)_odd": "0",
+          "v(t,s)_odd": "0",
+          "asym_odd": "0",
+          "sym_odd": "0",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(0, 3)": {
+          "v(s,t)_even": "3/128",
+          "v(t,s)_even": "3/128",
+          "asym_even": "0",
+          "sym_even": "3/64",
+          "v(s,t)_odd": "5/128",
+          "v(t,s)_odd": "5/128",
+          "asym_odd": "0",
+          "sym_odd": "5/64",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(0, 4)": {
+          "v(s,t)_even": "0",
+          "v(t,s)_even": "0",
+          "asym_even": "0",
+          "sym_even": "0",
+          "v(s,t)_odd": "0",
+          "v(t,s)_odd": "0",
+          "asym_odd": "0",
+          "sym_odd": "0",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(1, 2)": {
+          "v(s,t)_even": "0",
+          "v(t,s)_even": "0",
+          "asym_even": "0",
+          "sym_even": "0",
+          "v(s,t)_odd": "1/64",
+          "v(t,s)_odd": "1/64",
+          "asym_odd": "0",
+          "sym_odd": "1/32",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(1, 3)": {
+          "v(s,t)_even": "0",
+          "v(t,s)_even": "0",
+          "asym_even": "0",
+          "sym_even": "0",
+          "v(s,t)_odd": "0",
+          "v(t,s)_odd": "0",
+          "asym_odd": "0",
+          "sym_odd": "0",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(1, 4)": {
+          "v(s,t)_even": "-3/128",
+          "v(t,s)_even": "-3/128",
+          "asym_even": "0",
+          "sym_even": "-3/64",
+          "v(s,t)_odd": "3/128",
+          "v(t,s)_odd": "3/128",
+          "asym_odd": "0",
+          "sym_odd": "3/64",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(2, 3)": {
+          "v(s,t)_even": "3/128",
+          "v(t,s)_even": "3/128",
+          "asym_even": "0",
+          "sym_even": "3/64",
+          "v(s,t)_odd": "5/128",
+          "v(t,s)_odd": "5/128",
+          "asym_odd": "0",
+          "sym_odd": "5/64",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(2, 4)": {
+          "v(s,t)_even": "0",
+          "v(t,s)_even": "0",
+          "asym_even": "0",
+          "sym_even": "0",
+          "v(s,t)_odd": "0",
+          "v(t,s)_odd": "0",
+          "asym_odd": "0",
+          "sym_odd": "0",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(3, 4)": {
+          "v(s,t)_even": "-3/128",
+          "v(t,s)_even": "-3/128",
+          "asym_even": "0",
+          "sym_even": "-3/64",
+          "v(s,t)_odd": "1/16",
+          "v(t,s)_odd": "1/16",
+          "asym_odd": "0",
+          "sym_odd": "1/8",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        }
+      }
+    },
+    "t^1": {
+      "n_pairs_total": 10,
+      "n_asym_zero_even": 10,
+      "n_asym_zero_odd": 10,
+      "frac_symmetric_even": 1.0,
+      "frac_symmetric_odd": 1.0,
+      "max_abs_asym_even": "0",
+      "max_abs_asym_odd": "0",
+      "pair_detail": {
+        "(0, 1)": {
+          "v(s,t)_even": "0",
+          "v(t,s)_even": "0",
+          "asym_even": "0",
+          "sym_even": "0",
+          "v(s,t)_odd": "-1237/32768",
+          "v(t,s)_odd": "-1237/32768",
+          "asym_odd": "0",
+          "sym_odd": "-1237/16384",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(0, 2)": {
+          "v(s,t)_even": "151/196608",
+          "v(t,s)_even": "151/196608",
+          "asym_even": "0",
+          "sym_even": "151/98304",
+          "v(s,t)_odd": "85/65536",
+          "v(t,s)_odd": "85/65536",
+          "asym_odd": "0",
+          "sym_odd": "85/32768",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(0, 3)": {
+          "v(s,t)_even": "-749/8192",
+          "v(t,s)_even": "-749/8192",
+          "asym_even": "0",
+          "sym_even": "-749/4096",
+          "v(s,t)_odd": "-5635/32768",
+          "v(t,s)_odd": "-5635/32768",
+          "asym_odd": "0",
+          "sym_odd": "-5635/16384",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(0, 4)": {
+          "v(s,t)_even": "-11/98304",
+          "v(t,s)_even": "-11/98304",
+          "asym_even": "0",
+          "sym_even": "-11/49152",
+          "v(s,t)_odd": "55/32768",
+          "v(t,s)_odd": "55/32768",
+          "asym_odd": "0",
+          "sym_odd": "55/16384",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(1, 2)": {
+          "v(s,t)_even": "-1/96",
+          "v(t,s)_even": "-1/96",
+          "asym_even": "0",
+          "sym_even": "-1/48",
+          "v(s,t)_odd": "-2261/32768",
+          "v(t,s)_odd": "-2261/32768",
+          "asym_odd": "0",
+          "sym_odd": "-2261/16384",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(1, 3)": {
+          "v(s,t)_even": "-43/65536",
+          "v(t,s)_even": "-43/65536",
+          "asym_even": "0",
+          "sym_even": "-43/32768",
+          "v(s,t)_odd": "195/65536",
+          "v(t,s)_odd": "195/65536",
+          "asym_odd": "0",
+          "sym_odd": "195/32768",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(1, 4)": {
+          "v(s,t)_even": "2503/24576",
+          "v(t,s)_even": "2503/24576",
+          "asym_even": "0",
+          "sym_even": "2503/12288",
+          "v(s,t)_odd": "-1687/16384",
+          "v(t,s)_odd": "-1687/16384",
+          "asym_odd": "0",
+          "sym_odd": "-1687/8192",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(2, 3)": {
+          "v(s,t)_even": "-3655/24576",
+          "v(t,s)_even": "-3655/24576",
+          "asym_even": "0",
+          "sym_even": "-3655/12288",
+          "v(s,t)_odd": "-8195/32768",
+          "v(t,s)_odd": "-8195/32768",
+          "asym_odd": "0",
+          "sym_odd": "-8195/16384",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(2, 4)": {
+          "v(s,t)_even": "-11/98304",
+          "v(t,s)_even": "-11/98304",
+          "asym_even": "0",
+          "sym_even": "-11/49152",
+          "v(s,t)_odd": "55/32768",
+          "v(t,s)_odd": "55/32768",
+          "asym_odd": "0",
+          "sym_odd": "55/16384",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        },
+        "(3, 4)": {
+          "v(s,t)_even": "3655/24576",
+          "v(t,s)_even": "3655/24576",
+          "asym_even": "0",
+          "sym_even": "3655/12288",
+          "v(s,t)_odd": "-13061/32768",
+          "v(t,s)_odd": "-13061/32768",
+          "asym_odd": "0",
+          "sym_odd": "-13061/16384",
+          "asym_even_is_zero": true,
+          "asym_odd_is_zero": true
+        }
+      }
+    }
+  },
+  "cyclic_invariance_audit": {
+    "triple_0": {
+      "v_abc": [
+        "0",
+        "0"
+      ],
+      "v_cab": [
+        "0",
+        "0"
+      ],
+      "v_bca": [
+        "0",
+        "0"
+      ],
+      "diff_abc_cab": [
+        "0",
+        "0"
+      ],
+      "diff_abc_bca": [
+        "0",
+        "0"
+      ],
+      "cyclic_holds_abc_cab": true,
+      "cyclic_holds_abc_bca": true
+    },
+    "triple_1": {
+      "v_abc": [
+        "0",
+        "151/196608"
+      ],
+      "v_cab": [
+        "0",
+        "0"
+      ],
+      "v_bca": [
+        "0",
+        "0"
+      ],
+      "diff_abc_cab": [
+        "0",
+        "151/196608"
+      ],
+      "diff_abc_bca": [
+        "0",
+        "151/196608"
+      ],
+      "cyclic_holds_abc_cab": false,
+      "cyclic_holds_abc_bca": false
+    },
+    "triple_2": {
+      "v_abc": [
+        "0",
+        "-1/96"
+      ],
+      "v_cab": [
+        "0",
+        "0"
+      ],
+      "v_bca": [
+        "0",
+        "0"
+      ],
+      "diff_abc_cab": [
+        "0",
+        "-1/96"
+      ],
+      "diff_abc_bca": [
+        "0",
+        "-1/96"
+      ],
+      "cyclic_holds_abc_cab": false,
+      "cyclic_holds_abc_bca": false
+    },
+    "triple_3": {
+      "v_abc": [
+        "0",
+        "-13/98304"
+      ],
+      "v_cab": [
+        "0",
+        "-13/98304"
+      ],
+      "v_bca": [
+        "0",
+        "-13/98304"
+      ],
+      "diff_abc_cab": [
+        "0",
+        "0"
+      ],
+      "diff_abc_bca": [
+        "0",
+        "0"
+      ],
+      "cyclic_holds_abc_cab": true,
+      "cyclic_holds_abc_bca": true
+    },
+    "triple_4": {
+      "v_abc": [
+        "0",
+        "-13/98304"
+      ],
+      "v_cab": [
+        "0",
+        "-13/98304"
+      ],
+      "v_bca": [
+        "0",
+        "-13/98304"
+      ],
+      "diff_abc_cab": [
+        "0",
+        "0"
+      ],
+      "diff_abc_bca": [
+        "0",
+        "0"
+      ],
+      "cyclic_holds_abc_cab": true,
+      "cyclic_holds_abc_bca": true
+    }
+  },
+  "diagonal_subblock_extraction": {
+    "n_panel_pairs": 25,
+    "n_t0_even_zero": 12,
+    "n_t0_odd_zero": 8,
+    "frac_t0_even_zero": 0.48,
+    "frac_t0_odd_zero": 0.32,
+    "panel_details": {
+      "(1, e_0, e_0)": {
+        "s": 0,
+        "t": 0,
+        "same_sector": true,
+        "t0_even": "-3/128",
+        "t0_odd": "-7/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_0, e_1)": {
+        "s": 0,
+        "t": 1,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "1/64",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": false
+      },
+      "(1, e_0, e_2)": {
+        "s": 0,
+        "t": 2,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_0, e_3)": {
+        "s": 0,
+        "t": 3,
+        "same_sector": false,
+        "t0_even": "3/128",
+        "t0_odd": "5/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_0, e_4)": {
+        "s": 0,
+        "t": 4,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_1, e_0)": {
+        "s": 1,
+        "t": 0,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "1/64",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": false
+      },
+      "(1, e_1, e_1)": {
+        "s": 1,
+        "t": 1,
+        "same_sector": true,
+        "t0_even": "3/128",
+        "t0_odd": "-7/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_1, e_2)": {
+        "s": 1,
+        "t": 2,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "1/64",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": false
+      },
+      "(1, e_1, e_3)": {
+        "s": 1,
+        "t": 3,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_1, e_4)": {
+        "s": 1,
+        "t": 4,
+        "same_sector": false,
+        "t0_even": "-3/128",
+        "t0_odd": "3/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_2, e_0)": {
+        "s": 2,
+        "t": 0,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_2, e_1)": {
+        "s": 2,
+        "t": 1,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "1/64",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": false
+      },
+      "(1, e_2, e_2)": {
+        "s": 2,
+        "t": 2,
+        "same_sector": true,
+        "t0_even": "-3/128",
+        "t0_odd": "-7/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_2, e_3)": {
+        "s": 2,
+        "t": 3,
+        "same_sector": false,
+        "t0_even": "3/128",
+        "t0_odd": "5/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_2, e_4)": {
+        "s": 2,
+        "t": 4,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_3, e_0)": {
+        "s": 3,
+        "t": 0,
+        "same_sector": false,
+        "t0_even": "3/128",
+        "t0_odd": "5/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_3, e_1)": {
+        "s": 3,
+        "t": 1,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_3, e_2)": {
+        "s": 3,
+        "t": 2,
+        "same_sector": false,
+        "t0_even": "3/128",
+        "t0_odd": "5/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_3, e_3)": {
+        "s": 3,
+        "t": 3,
+        "same_sector": true,
+        "t0_even": "-3/128",
+        "t0_odd": "-9/64",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_3, e_4)": {
+        "s": 3,
+        "t": 4,
+        "same_sector": false,
+        "t0_even": "-3/128",
+        "t0_odd": "1/16",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_4, e_0)": {
+        "s": 4,
+        "t": 0,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_4, e_1)": {
+        "s": 4,
+        "t": 1,
+        "same_sector": false,
+        "t0_even": "-3/128",
+        "t0_odd": "3/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_4, e_2)": {
+        "s": 4,
+        "t": 2,
+        "same_sector": false,
+        "t0_even": "0",
+        "t0_odd": "0",
+        "t0_even_iszero": true,
+        "t0_odd_iszero": true
+      },
+      "(1, e_4, e_3)": {
+        "s": 4,
+        "t": 3,
+        "same_sector": false,
+        "t0_even": "-3/128",
+        "t0_odd": "1/16",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      },
+      "(1, e_4, e_4)": {
+        "s": 4,
+        "t": 4,
+        "same_sector": true,
+        "t0_even": "3/64",
+        "t0_odd": "-11/128",
+        "t0_even_iszero": false,
+        "t0_odd_iszero": false
+      }
+    }
+  },
+  "primitive_product_test": {
+    "factor_table": {
+      "(1, e_0, e_0)": {
+        "d2_t0_even": "-3/128",
+        "d2_t0_odd": "-7/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_0, e_1)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "1/64",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_0, e_2)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_0, e_3)": {
+        "d2_t0_even": "3/128",
+        "d2_t0_odd": "5/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_0, e_4)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_1, e_0)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "1/64",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_1, e_1)": {
+        "d2_t0_even": "3/128",
+        "d2_t0_odd": "-7/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_1, e_2)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "1/64",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_1, e_3)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_1, e_4)": {
+        "d2_t0_even": "-3/128",
+        "d2_t0_odd": "3/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_2, e_0)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_2, e_1)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "1/64",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_2, e_2)": {
+        "d2_t0_even": "-3/128",
+        "d2_t0_odd": "-7/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_2, e_3)": {
+        "d2_t0_even": "3/128",
+        "d2_t0_odd": "5/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_2, e_4)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_3, e_0)": {
+        "d2_t0_even": "3/128",
+        "d2_t0_odd": "5/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_3, e_1)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_3, e_2)": {
+        "d2_t0_even": "3/128",
+        "d2_t0_odd": "5/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_3, e_3)": {
+        "d2_t0_even": "-3/128",
+        "d2_t0_odd": "-9/64",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_3, e_4)": {
+        "d2_t0_even": "-3/128",
+        "d2_t0_odd": "1/16",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_4, e_0)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_4, e_1)": {
+        "d2_t0_even": "-3/128",
+        "d2_t0_odd": "3/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_4, e_2)": {
+        "d2_t0_even": "0",
+        "d2_t0_odd": "0",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_4, e_3)": {
+        "d2_t0_even": "-3/128",
+        "d2_t0_odd": "1/16",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      },
+      "(1, e_4, e_4)": {
+        "d2_t0_even": "3/64",
+        "d2_t0_odd": "-11/128",
+        "d1_t0_even_s": "0",
+        "d1_t0_even_t": "0",
+        "d1_t1_even_s": "0",
+        "d1_t1_even_t": "0",
+        "ratio_d2t0_over_d1t1_s_times_d1t1_t": "nan",
+        "ratio_d2t0_over_d1t1_s_plus_d1t1_t": "nan"
+      }
+    },
+    "primitive_reduction_test": {
+      "rank_M": 1,
+      "rank_M_aug": 2,
+      "system_solvable": false,
+      "solution_or_diag": [
+        "INCONSISTENT \u2014 no Q-linear reduction of depth-2 t^0 to depth-1 panel"
+      ],
+      "n_rows": 25,
+      "candidate_basis": [
+        "d1_t1_s * d1_t1_t (primitive product candidate)",
+        "d1_t1_s + d1_t1_t (sum candidate)",
+        "d1_t0_s * d1_t0_t",
+        "d1_t0_s + d1_t0_t",
+        "constant 1"
+      ],
+      "key_list": [
+        "(1, e_0, e_0)",
+        "(1, e_0, e_1)",
+        "(1, e_0, e_2)",
+        "(1, e_0, e_3)",
+        "(1, e_0, e_4)",
+        "(1, e_1, e_0)",
+        "(1, e_1, e_1)",
+        "(1, e_1, e_2)",
+        "(1, e_1, e_3)",
+        "(1, e_1, e_4)",
+        "(1, e_2, e_0)",
+        "(1, e_2, e_1)",
+        "(1, e_2, e_2)",
+        "(1, e_2, e_3)",
+        "(1, e_2, e_4)",
+        "(1, e_3, e_0)",
+        "(1, e_3, e_1)",
+        "(1, e_3, e_2)",
+        "(1, e_3, e_3)",
+        "(1, e_3, e_4)",
+        "(1, e_4, e_0)",
+        "(1, e_4, e_1)",
+        "(1, e_4, e_2)",
+        "(1, e_4, e_3)",
+        "(1, e_4, e_4)"
+      ]
+    }
+  },
+  "pslq_test": {
+    "basis_labels": [
+      "d1_t0_(1,e_0)",
+      "d1_t0_(e_0,1)",
+      "d1_t1_(1,e_0)",
+      "d1_t1_(e_0,1)",
+      "d1_t2_(1,e_0)",
+      "d1_t2_(e_0,1)",
+      "d1_t0_(1,e_1)",
+      "d1_t0_(e_1,1)",
+      "d1_t1_(1,e_1)",
+      "d1_t1_(e_1,1)",
+      "d1_t2_(1,e_1)",
+      "d1_t2_(e_1,1)",
+      "d1_t0_(1,e_2)",
+      "d1_t0_(e_2,1)",
+      "d1_t1_(1,e_2)",
+      "d1_t1_(e_2,1)",
+      "d1_t2_(1,e_2)",
+      "d1_t2_(e_2,1)",
+      "d1_t0_(1,e_3)",
+      "d1_t0_(e_3,1)",
+      "d1_t1_(1,e_3)",
+      "d1_t1_(e_3,1)",
+      "d1_t2_(1,e_3)",
+      "d1_t2_(e_3,1)",
+      "d1_t0_(1,e_4)",
+      "d1_t0_(e_4,1)",
+      "d1_t1_(1,e_4)",
+      "d1_t1_(e_4,1)",
+      "d1_t2_(1,e_4)",
+      "d1_t2_(e_4,1)",
+      "constant_1"
+    ],
+    "basis_values_q": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "1"
+    ],
+    "pslq_table": {
+      "(1, e_0, e_0)": {
+        "target_t0_even_q": "-3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_0, e_1)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_0, e_2)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_0, e_3)": {
+        "target_t0_even_q": "3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_0, e_4)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_1, e_0)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_1, e_1)": {
+        "target_t0_even_q": "3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_1, e_2)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_1, e_3)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_1, e_4)": {
+        "target_t0_even_q": "-3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_2, e_0)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_2, e_1)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_2, e_2)": {
+        "target_t0_even_q": "-3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_2, e_3)": {
+        "target_t0_even_q": "3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_2, e_4)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_3, e_0)": {
+        "target_t0_even_q": "3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_3, e_1)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_3, e_2)": {
+        "target_t0_even_q": "3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_3, e_3)": {
+        "target_t0_even_q": "-3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_3, e_4)": {
+        "target_t0_even_q": "-3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_4, e_0)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_4, e_1)": {
+        "target_t0_even_q": "-3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_4, e_2)": {
+        "target_t0_even_q": "0",
+        "trivial_zero_target": true
+      },
+      "(1, e_4, e_3)": {
+        "target_t0_even_q": "-3/128",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      },
+      "(1, e_4, e_4)": {
+        "target_t0_even_q": "3/64",
+        "pslq_per_dps": {
+          "dps_50": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          },
+          "dps_100": {
+            "error": "PSLQ requires a vector of nonzero numbers"
+          }
+        }
+      }
+    }
+  },
+  "verdict": "READING A leaning (all swap-symmetric at t^1)",
+  "verdict_summary": {
+    "swap_frac_even_t1": 1.0,
+    "max_abs_asym_even_t1": "0",
+    "n_cyclic_identities_hold": 3,
+    "n_cyclic_triples_tested": 5,
+    "primitive_product_system_solvable": false,
+    "pslq_hits": 0,
+    "pslq_targets": 13
+  },
+  "wall_seconds": 0.5837552547454834
+}
