@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.97.0] - 2026-06-08
+
+### Summary
+
+**Sprint forced/free seam catalogue + Paper 57.** Path-#1 ("finish mining the math before reach-outs") first deliverable: consolidate the structural-skeleton vs. calibration-data boundary into a single catalogue and an observations-genre paper. Closes a year-long pattern of scattered observations (CLAUDE.md §1.7 working hypotheses; §3 dead-end rows; sprint memos for H1, Yukawa-PSLQ, Read 2, W1e period-class, Door 4 series, multi-focal wall pattern; memory files `multi_focal_wall_pattern.md`, `external_input_three_class_partition.md`, `geovac_structural_skeleton_scope_pattern.md`, `inner_factor_mellin_engine.md`) into one inventory + one paper.
+
+**Catalogue.** 62 entries across 9 sub-domains: foundations (5F), gauge (7F + 1A + 1C), spectral/periods (9F), gravity (4F + 3C with relations forced but cutoff-moments free), QED + α (5F + 3C), SM inner factor (7C — the load-bearing free row including Yukawa values F1 and N_gen F2), multi-focal-composition walls (6C cross-domain unity row), chemistry/QC scaling (5F + 2C), foundational calibration (3C including Born rule via Gleason). Three discriminator columns per entry: multi-focal depth (MF), period class in master Mellin engine (P), dimensional character (Dim).
+
+**Paper 57 sections.** §1 introduction + scope (positive/negative promises); §2 forced inventory by sub-domain (skeleton / gauge / periods / gravity / QED / chemistry / OA); §3 free inventory (SM inner factor / multi-focal walls / gravity calibration / chemistry inner data / foundational calibration / two-family observation); §4 cross-domain unity (the six independent multi-focal-composition wall instances with one unifying observation); §5 candidate principles probe (P1 multi-focal depth, P2 period classifiability, P3 dimensional character, P4 compactness inheritance — all four discriminate the multi-focal composition family from forced content, none discriminates the inner-factor input data family); §6 open questions (the second-packing-axiom status, Higgs-direction / Hopf-base identification, NCG-SM cross-community engagement). 13 pages, three-pass clean compile, 22 bibitems.
+
+**Structural finding crystallized in §5 + Observation 3.2 (two-family).** The calibration side is not one homogeneous class. **Multi-focal composition family** (G1–G6, E7, E8, F1, F4, F7, D5, D6): MF > 1, period outside, mostly dimensionful; "framework can build it but cannot autonomously pick a number." **Inner-factor input data family** (F2, F3, B8, H6, H7, I2, I3): MF = 1, period none / N/A, dimensionless; "categorical to the framework's outer-factor mechanism by construction." All four candidate discriminators in §5 catch family 1 cleanly; none catches family 2. The honest §6 reading: either family 2 has an undiscovered axis (chemistry-side η-trivialization analog flagged) or it sits outside the discriminator-axis machinery by construction (and the absence of a discriminator IS the structural fact).
+
+**Sequence intent.** Per the conversation that initiated this sprint, the natural follow-on is the principle hunt at greater depth (C2 of the path-#1 plan), and after that the structural-non-selection theorem arc (C3). Brown-Kleinschmidt outreach (path #2) is deferred pending more mining.
+
+### Added
+
+- **`docs/forced_free_seam.md`** — new catalogue (62 entries × 8 columns), supersedes `docs/forcing_catalogue.md` for the forced-vs-free question (the prior catalogue's forward-run / probe structure remains the canonical record for "what does the same rigidity force that we haven't looked at").
+- **`papers/group3_foundations/paper_57_forced_free_seam.tex`** — new observations-genre paper, 13 pages, three-pass clean, 22 bibitems (16 internal + 6 external/sprint-memo). Genre matches Paper 25, Paper 33, Paper 2 (observations papers in the GeoVac corpus). Audience: spectral-triple / NCG community + readers tracking the structural-skeleton boundary across QED, gauge, chemistry, gravity.
+- **CLAUDE.md §1 version bump** v3.96.0 → v3.97.0.
+- **CLAUDE.md §2 one-liner** for the sprint.
+
+### Changed
+
+- Nothing modified in existing papers; this sprint is purely additive at the corpus level.
+
+### Verification
+
+- Paper 57 compiles three-pass clean. 13 pages. Hyperref unicode warnings on section titles with `$S^3$` are cosmetic (standard for sphere-typeset section names); h→ht float position adjustment is standard.
+- No new equations introduced (per §13.4a). The three equation environments (`eq:af`, `eq:forced_count`, `eq:gravity_closed`) all cite existing theorems from Papers 32, 51; verification exists in those papers' test suites.
+- No production code modified — purely synthesis / paper-drafting sprint. 18/18 topological-integrity proofs unaffected.
+
+### Honest scope
+
+**Observations-grade (this paper):** The paper consolidates and frames; it does not prove that a single principle separates forced from free, and does not identify the discriminating axis for the inner-factor input data family. The two-family structure (Observation 3.2) is empirical, supported by the discriminator-column patterns; whether it admits an underlying single-principle description is the open question of §6.1.
+
+**Catalogue completeness:** 62 entries is the load-bearing inventory at the time of writing. The catalogue's structure permits straightforward addition as new sprints surface entries. The cross-domain unity of §4 is supported by six independent instances surfaced over a year of internal work — past coincidence, not a closed enumeration.
+
+**Theorem-grade content used, not produced:** Forced-Count Theorem (Paper 32 §VIII `thm:forced_count`); case-exhaustion theorem (Paper 32 §VIII); master Mellin engine classification (Paper 18 §III.7); η-trivialization theorem (Paper 18 §IV.6); Paper 22 angular-sparsity theorem; Paper 38 GH-convergence theorem; Wald two-term-exactness ⇒ pure Einstein; Door 4 series theorems. All cited, none reproved.
+
+**Empirical-only content used:** 162-cell Yukawa-PSLQ clean negative at M ≤ 10³ (high-coefficient identities not ruled out structurally); W1e period-class 11-term sweep; multi-focal-composition wall pattern at six observed instances (not a theorem).
+
+**Named open follow-ons (deferred):** chemistry-side η-trivialization analog (multi-month NCG-research target); sibling-axiom direction toward N_gen and inner KO-dim (multi-year, no current handle); Higgs-direction / Hopf-base identification (sprint-scale, NCG-reading-heavy, flagged); forward-references in Papers 32 §VIII, 18 §IV.6, 35 to Paper 57 (mechanical, one-session follow-on).
+
+### Closed
+
+- **Path #1 first deliverable (Vein C of the conversation that initiated this sprint).** Catalogue + paper consolidate what was scattered across CLAUDE.md §1.7, §3, sprint memos, memory files. Next moves named: C2 (principle hunt at greater depth) and C3 (structural-non-selection theorem arc).
+
+---
+
 ## [3.96.0] - 2026-06-08
 
 ### Summary

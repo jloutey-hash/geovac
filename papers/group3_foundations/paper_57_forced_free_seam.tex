@@ -1,0 +1,482 @@
+% paper_57_forced_free_seam.tex
+%
+% Paper 57:  The forced/free seam in GeoVac --- a catalogue of what the
+% framework autonomously generates and what it consumes as external
+% input, with a preliminary probe of four candidate discriminator
+% principles.
+%
+% Genre:  observations paper (sibling: Papers 25, 33; Paper 2 in
+% papers/archive/).
+%
+% Audience:  spectral-triple / NCG community + readers tracking the
+% structural-skeleton boundary across QED, gauge, chemistry, and
+% gravity.
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm, mathrsfs, mathtools}
+
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black, urlcolor=blue!50!black}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\nmax}{n_{\max}}
+\newcommand{\lmax}{l_{\max}}
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\AF}{\mathcal{A}_F}
+\newcommand{\DF}{D_F}
+\newcommand{\Hopf}{\mathrm{Hopf}}
+\newcommand{\Ngen}{N_{\mathrm{gen}}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\KO}{\mathrm{KO}}
+\newcommand{\sphere}[1]{S^{#1}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\GV}{\mathrm{GV}}
+\newcommand{\reff}{Z_{\mathrm{eff}}}
+
+\title{Forced and Free Content in the GeoVac Framework:\\ An Observations Paper}
+\author{J.~Loutey}
+\date{June 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The GeoVac framework autonomously generates a wide class of structural facts (graph spectrum, $\sphere{3}$ outer manifold, gauge group $U(1) \times SU(2) \times SU(3)$, master Mellin engine, inner-algebra factor count, the moduli-space dimension $\dim \Mcal(\DF) = 128$ per generation, two-term-exact gravity, and many more) and consumes specific numerical content as external input (Yukawa values, generation count, calibration cutoff moments, atomic-physics screening exponents, multi-loop QED counterterms, etc.). We catalogue both sides of this \emph{forced/free seam} across the corpus --- 38 forced entries, 1 admitted-not-forced entry, 23 calibration entries, spanning foundations, gauge structure, periods, gravity, QED, the Standard Model inner factor, multi-focal-composition walls, chemistry / quantum computing scaling, and foundational calibration. We identify a cross-domain unity pattern (the same wall appears in six independent settings, all carrying the same multi-focal-composition signature) and test four candidate principles for what discriminates the two sides: multi-focal depth, period-content classifiability, dimensional character, and compactness inheritance. We do not claim to have identified \emph{the} discriminating principle. Preliminary finding:  the calibration side decomposes into two structurally distinct families (multi-focal composition vs.\ inner-factor input data) with different discriminator-column signatures, consistent with the three-class external-input partition named in prior internal work. This paper consolidates what was previously scattered across CLAUDE.md \S 1.7 working hypotheses, dead-end records, and individual sprint memos.
+\end{abstract}
+
+%====================================================================
+\section{Introduction: the seam and why naming it matters}
+\label{sec:intro}
+
+GeoVac is a discretization framework built on the Paper~0 packing axiom~\cite{paper0} and its consequence (proved in Paper~7) that the resulting graph Laplacian on the unit three-sphere $\sphere{3}$ is conformally equivalent to the continuous Schr\"odinger problem with $-Z/r$ potential~\cite{paper7}. From this minimal foundation the framework has been shown to autonomously generate a large class of structural facts:  the universal kinetic scale $\kappa = -1/16$, the angular sparsity theorem of Paper~22~\cite{paper22}, the chemistry $O(Q^{2.5})$ Pauli count scaling of Paper~14~\cite{paper14}, the spectral triple structure of Paper~32~\cite{paper32} with proven Gromov--Hausdorff convergence to the continuous $\sphere{3}$ spectral triple at rate $4/\pi$ (Paper~38~\cite{paper38}), the gauge group $U(1) \times SU(2) \times SU(3)$ as a structural consequence of Bertrand $\times$ Hopf-tower truncation (Paper~32 \S VIII.B), the master Mellin engine classification of every transcendental appearing in a GeoVac observable (Paper~18 \S III.7, Paper~32 \S VIII case-exhaustion theorem~\cite{paper18,paper32}), and the Forced-Count Theorem $\dim \Mcal(\DF) = 128$ per generation (Paper~32 \S VIII, \texttt{thm:forced\_count}).
+
+The framework also consumes specific numerical content that it does not autonomously generate. The Yukawa values cannot be selected by the inner-factor structure (Sprint H1 non-selection theorem, empirically confirmed at 162 PSLQ cells against the inner-factor period ring $M_1 \cup M_2$~\cite{paper32,debug_yukawa_pslq}). The generation count $\Ngen = 3$ is packing-unreachable in the current axiom system (Direction~2 NO-GO, Read~2 NO-GO~\cite{debug_read2}). The chemistry-side inner-region correlation wall (\emph{W1e}) consumes external atomic-physics screening data (Clementi--Raimondi exponents) and cannot be closed by any framework-internal rational/algebraic modification, as verified by six independent sprint attempts (CLAUDE.md \S 3 entries F1--F6 plus Schmidt, core correlation, and basis enlargement). The multi-loop QED renormalization counterterms ($Z_2$, $\delta m$) are likewise consumed rather than generated (LS-8a wall~\cite{paper36}).
+
+The line between what the framework forces and what it consumes is itself a structural property of the framework. It has been repeatedly named --- the \emph{structural-skeleton scope} reading of CLAUDE.md \S 1.7 WH3, the \emph{multi-focal-composition wall pattern} crystallized at six instances, the \emph{external-input three-class partition} (Calibration / Multi-focal composition / Multi-determinant correlation) --- but never consolidated. Each naming has produced a clearer statement than the previous one, but the underlying inventory of which physical inputs sit on each side, and which discriminator (if any) governs the partition, has been distributed across many sprint memos, dead-end rows, and working-hypothesis bullets.
+
+This paper consolidates the inventory and tests, at preliminary level, four candidate discriminator principles against it. The goal is not to close the seam --- we do not yet claim to have identified \emph{the} principle that decides which side a given physical input falls on --- but to name the question sharply enough that it admits a determinate answer.
+
+\paragraph{Why an observations paper, not a theorem paper.}
+The format follows Paper~2, Paper~25, and Paper~33 (the existing observation-genre papers in the GeoVac corpus). We describe a structural pattern that the framework exhibits across multiple independent domains, we cite the underlying theorems and dead-end records that establish each entry, and we probe candidate discriminators without commitment. Where a finding has theorem-grade status it is named as such; where it is a numerical / empirical observation only, the honest scope is recorded explicitly. The companion catalogue \texttt{docs/forced\_free\_seam.md} carries the full table; this paper is the publication-grade framing.
+
+\paragraph{What we promise to deliver in this paper.}
+\begin{itemize}
+  \item \S\ref{sec:forced} --- forced-side inventory across eight domains (foundations, gauge, periods, gravity, QED, Standard Model inner factor, chemistry/QC scaling, foundational calibration; the load-bearing sub-domains).
+  \item \S\ref{sec:free} --- free-side inventory with non-selection theorems and documented negative searches.
+  \item \S\ref{sec:unity} --- the cross-domain unity:  the multi-focal-composition wall pattern at six independent instances.
+  \item \S\ref{sec:principles} --- preliminary probe of four candidate discriminators.
+  \item \S\ref{sec:open} --- open questions; the ``second packing axiom'' status.
+\end{itemize}
+
+\paragraph{What we do NOT promise.}
+\begin{itemize}
+  \item A theorem stating ``GeoVac forces $X$ iff $X$ has property $P$.''  No such theorem is proved or even decisively favoured in this paper.
+  \item A derivation of any presently-free quantity from a single GeoVac principle.
+  \item A demonstration that the present seam is the only possible seam (a ``second packing axiom'' could shift the line and remains the named multi-year frontier).
+\end{itemize}
+
+%====================================================================
+\section{The forced side}
+\label{sec:forced}
+
+We organize the forced inventory by sub-domain. Each entry carries a mechanism (what does the forcing), a witness (theorem cite or bit-exact verification), and three discriminator columns:  multi-focal depth (MF), period class in the master Mellin engine (P; values $M_1$, $M_2$, $M_3$, ``outside,'' ``none,'' ``meta'' for the engine itself, ``N/A'' for non-period observables), and dimensional character (Dim; dimensionless ratio vs.\ dimensionful scale). Sub-domains are referenced by the letter codes A--I used in the companion catalogue \texttt{docs/forced\_free\_seam.md}.
+
+\subsection{Foundations / skeleton (A)}
+\label{sec:forced_foundations}
+
+The packing axiom of Paper~0 outputs a $\Z$-graded combinatorial structure whose first concrete physical content is the graph Laplacian spectrum $\lambda_n = n^2 - 1$~\cite{paper0,paper7}. Paper~7's eighteen symbolic proofs of $\sphere{3}$ conformal equivalence~\cite{paper7} pin the outer manifold; Bertrand's classical theorem~\cite{bertrand1873} combined with SO(4) closure forces it to be $\sphere{3}$ rather than a different homogeneous space. The universal kinetic scale $\kappa = -1/16$ is the chordal-distance projection coefficient, exact rational. The shell degeneracy $g_n = n^2$ is representation-theoretic. The deeper organizing observation, established across Papers~18, 22, 24, 27, 32, and consolidated in the structural-skeleton scope pattern, is that the framework's discrete content is exactly the closed/compact/Peter--Weyl regime; the continuum is what remains when compactness is released. (\emph{Discreteness} $\leftrightarrow$ \emph{compactness}, A5.)
+
+\subsection{Gauge structure (B)}
+\label{sec:forced_gauge}
+
+The Standard Model gauge group emerges from two independent structural inputs:  Bertrand's classical theorem (only $-Z/r$ and $kr^2$ central potentials produce closed orbits) and the Hopf-tower of spheres $\sphere{1} \to \sphere{3} \to \sphere{5} \to \cdots$ truncated at $n \le 3$ by the Hurwitz classification of associative real normed division algebras (Door~4d, summarized in \cite{paper32}, \S VIII.B). This produces
+\begin{equation}
+  \AF \;=\; \C \,\oplus\, \HH \,\oplus\, M_3(\C),
+  \label{eq:af}
+\end{equation}
+with $\C$ at $n=1$ from the unique division algebra of $\sphere{1}$, $M_3(\C)$ at $n=3$ from the Hurwitz fallback at $\sphere{5}$, and $\HH$ at $n=2$ \emph{admitted} but not autonomously forced over $M_2(\C)$ in the J-sign-table audit (Door~4c). The admitted-not-forced status of $\HH$ is the lone admitted entry in our catalogue and is recorded as B5.
+
+The Forced-Count Theorem~\cite{paper32} (Paper~32 \S VIII, \texttt{thm:forced\_count}) chains the standard real-spectral-triple axioms (Hermiticity, KO-dim-6 chirality, $J$-reality, order-one) into the bit-exact moduli-space dimension
+\begin{equation}
+  \dim_{\R} \Mcal(\DF) \;=\; 128 \quad \text{per generation},
+  \label{eq:forced_count}
+\end{equation}
+via the chain $1024 \to 512 \to 128 \to 128$. The eight free parameters per generation in the diagonal slice are exactly the Yukawa values (charged-lepton + quark sector). The theorem forces the \emph{count}; it does not force the \emph{values}.
+
+The Higgs admission --- the structural fact that the Mexican-hat field-theory structure is allowed within the inner factor's spectral action --- is the conclusion of Sprint H1 (POSITIVE-THIN verdict, Paper~32 \S VIII.C). It is a forcing of \emph{structure}, paired with a non-forcing of \emph{value} via Sprint H1's Yukawa non-selection theorem.
+
+\subsection{Spectral / period content (C)}
+\label{sec:forced_periods}
+
+The master Mellin engine of Paper~18 \S III.7~\cite{paper18}, sharpened in Paper~32 \S VIII via the case-exhaustion theorem~\cite{paper32}, classifies every transcendental appearing in a GeoVac observable as a member of one of three sub-rings:
+\begin{align}
+  M_1 &= \Q[\pi, \pi^{-1}] \quad \text{(Hopf-base measure, } k=0\text{)},\\
+  M_2 &\subset \bigoplus_k \pi^{2k} \Q \quad \text{(Seeley--DeWitt heat kernel, } k=2\text{)},\\
+  M_3 &\subset \mathcal{MT}(\Z[i, 1/2]) \text{ at level } \le 4 \quad \text{(vertex-parity Hurwitz, } k=1\text{)}.
+\end{align}
+The classification is theorem-grade. The signature prefactor $M_1 = \Vol(\sphere{2})/4 = \pi$ recurs across the corpus, including as the universal Gromov--Hausdorff propinquity convergence rate $4/\pi$ that is rank-invariant across all compact Lie groups (Paper~38, Paper~40~\cite{paper38,paper40}).
+
+\subsection{Gravity (D)}
+\label{sec:forced_gravity}
+
+The spectral action on $\sphere{3}$ is two-term-exact by the Bernoulli identity $\zeta_{\mathrm{unit}}(-k) = 0$ for all $k \ge 0$~\cite{paper51}; the framework outputs the exact closed forms
+\begin{equation}
+  S_{\mathrm{BH}} \;=\; \frac{A \Lambda^2}{12 \pi}, \qquad G_N \;=\; \frac{3\pi}{\Lambda^2}, \qquad s_{\min} \;=\; -\Lambda / (12 \sqrt{6}),
+  \label{eq:gravity_closed}
+\end{equation}
+together with the Sommerfeld--Cheeger cone coefficient $-1/12$ and the replica derivative $d \Delta_K / d \alpha\big|_{\alpha = 1} = +1/6$ at bit-exact precision (Paper~51 \S G4-4c, G4-4f). The relations among $G_N$, $\Lambda_{cc}$, and $S_{\mathrm{BH}}$ are forced by Wald's theorem (two-term-exactness $\Rightarrow$ pure Einstein action $\Rightarrow$ action-$G \equiv$ entropy-$G$). The relations are forced; the cutoff function $f$ itself (its $\varphi(0), \varphi(1), \varphi(2)$ moments) is not --- see \S\ref{sec:free}.
+
+\subsection{QED and the $\alpha$ coincidence (E)}
+\label{sec:forced_qed}
+
+Paper~28 establishes five theorems on $\sphere{3}$ QED~\cite{paper28}:  the self-energy structural zero $\Sigma(n_{\mathrm{ext}}=0) = 0$, the squared-Dirac period ring $\zeta_{D^2}(s) \in \sqrt\pi \cdot \Q \oplus \pi^2 \cdot \Q$ (T9), the $\chi_{-4}$ identity $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) = 2^{s-1}(\beta(s) - \beta(s-2))$, the $\zeta(3)$ complementarity, and the product survival rule. The Paper~33 vertex-promotion analysis recovers the full 1+6+1 partition of QED selection rules at the structural level~\cite{paper33}.
+
+The fine-structure-constant coincidence is decomposed into three independent spectral homes:  $B = 42$ (Casimir trace), $F = \pi^2/6$ (Fock-degeneracy Dirichlet at the packing exponent), $\Delta = 1/40 = c^2(3,2)$ (Dirac mode degeneracy $g_3^{\mathrm{Dirac}}$). Each is forced. Twelve mechanisms have been eliminated for the combination rule $K = \pi(B + F - \Delta)$ as a single-principle derivation; the combination rule itself remains conjectural and is recorded as a calibration entry in \S\ref{sec:free}.
+
+\subsection{Chemistry / quantum computing scaling (H)}
+\label{sec:forced_chem}
+
+Paper~22's potential-independent angular-sparsity theorem~\cite{paper22} forces 1.44\% ERI density at $\lmax = 3$ regardless of the potential. Paper~14's universal $N_{\mathrm{Pauli}} = 11.10 \times Q$ holds across 38 molecules with the isostructural-invariance corollary (CO $=$ N$_2$ $=$ F$_2$ $= 1111$)~\cite{paper14}. The Pauli ratio balanced/composed grows as $O(B^2)$ at the structural-architectural level. Paper~23's Fock projection rigidity theorem~\cite{paper23} establishes that the $\sphere{3}$ conformal projection is unique to $-Z/r$ and does not transfer to the harmonic oscillator or Woods--Saxon, with downstream consequence that the nuclear shell-closure magic numbers $\{2, 8, 20, 40, 70, 112\}$ are forced by graph counting on the Hopf base.
+
+\subsection{Foundations of the operator-algebraic structure (within C)}
+\label{sec:forced_oa}
+
+The math.OA arc closes WH1 PROVEN (Paper~38) with the GH-convergence rate $4/\pi$ via the five-lemma proof (L1' / L2 / L3 / L4 / L5)~\cite{paper38}. Paper~40 extends the rate to all compact Lie groups (rank-invariant universality)~\cite{paper40}. Paper~43 records the Pythagorean orthogonality $\langle H_{\mathrm{local}}, D_W^L \rangle_{\mathrm{HS}} = 0$ at bit-exact precision~\cite{paper43}, carrying the $1/\pi^2$ master-Mellin-engine $M_1$ signature into the Lorentzian extension.
+
+\subsection{Catalogue}
+\label{sec:forced_catalogue}
+
+A consolidated table of the 38 forced entries with mechanism, witness, and the three discriminator columns is given in the companion catalogue \texttt{docs/forced\_free\_seam.md}. The structural pattern across the forced inventory is:  every entry sits at multi-focal depth MF $= 1$, the period-class assignment is either ``none'' (skeleton / gauge / counting facts), ``meta'' (the engine itself), or $M_1 / M_2 / M_3$ (specific period-content forced facts), and dimensional character is overwhelmingly dimensionless --- the gravity sub-domain D2 ($S_{\mathrm{BH}}$, $G_N$) being the prominent exception, which is itself only dimensionful by virtue of carrying the external cutoff scale $\Lambda$.
+
+%====================================================================
+\section{The free side}
+\label{sec:free}
+
+We organize the free inventory along the same sub-domain axes. The decisive distinction in this section is between two structurally different families of calibration content, an observation that emerges from the catalogue itself rather than being imposed on it.
+
+\subsection{Standard Model inner factor (F)}
+\label{sec:free_inner}
+
+The most load-bearing free row is the Standard Model inner factor. Sprint H1's Yukawa non-selection theorem~\cite{paper32} establishes structurally that no inner fluctuation of $\DF$ on $\AF = \C \oplus \HH \oplus M_3(\C)$ autonomously selects the Yukawa values $\{y_e, y_\mu, y_\tau, y_u, y_d, y_s, y_c, y_b, y_t\}$. The corresponding empirical confirmation is the 162-cell PSLQ sweep of Sprint Yukawa-PSLQ~\cite{debug_yukawa_pslq}:  at coefficient ceiling $M \le 1000$, at both the $M_Z$ and the $\mu = 2 \times 10^{16}$ GeV unification scales, in three transforms ($y_f$, $y_f^2$, $\log y_f$), with the basis sharpened to $M_1 \cup M_2$ (pure-Tate, the only periods allowed on Connes--Chamseddine-compatible inner factors per Paper~18 \S IV.6 \texttt{thm:eta\_trivialization}), \emph{zero hits} were returned. The clean negative across 162 cells is the strongest available calibration verdict at sprint scale.
+
+The generation count $\Ngen = 3$ is similarly free. The Direction~2 NO-GO and Read~2 NO-GO~\cite{debug_seam_packing,debug_read2} jointly establish that (a) the current Paper~0 packing axiom does not reach the multiplicity-three structure as a consequence (Direction~2), and (b) the candidate Hopf-tower-to-representation shortcut fails on three independent grounds in the standard Chamseddine--Connes representation (Read~2):  the 32 fermion DOF per generation are distributed across all three algebra factors, the CKM/PMNS cross-generation Yukawa coupling is structurally required, and the DOF count is wrong by a factor of 8 in the alternative reading. No published proposal in the spectral-triple literature (Krajewski 1998, Connes 2006, CCM 2007, Devastato--Lizzi 2013--2015, Boyle--Farnsworth 2018, Ma 2018, Bochniak--Sitarz 2025, Hessam--Khalkhali) derives $\Ngen = 3$ from a Hopf-tower argument; Ma~2018 derives it via an independent algebra-extension axiom, not from the existing Paper~0 input.
+
+The inner-factor KO-dimensional signature is packing-unreachable on the same Direction~2 NO-GO. The CKM and PMNS mixing-angle entries inherit F1 + F4 structurally (Boyle--Farnsworth gives the shape but not the values). The Higgs VEV $v$ and the neutrino mass values are dimensionful scales consumed externally.
+
+\subsection{Multi-focal-composition walls (G; cf.\ \S\ref{sec:unity})}
+\label{sec:free_multifocal}
+
+Six independent observables converge on the same structural reason for being free. We catalogue them here and discuss their unity in \S\ref{sec:unity}:
+\begin{enumerate}
+  \item \textbf{HF-3 recoil cross-register} $V_{eN}(\hat r_e, \hat R_n)$:  electron--nucleus potential as a two-body spatial coupling. The framework couples discrete labels (electron spin, nuclear spin) cleanly via Wigner symbols, but the spatial composition of two Fock-style projections (electron register, nucleus register) is structurally outside the framework's native composition apparatus.
+  \item \textbf{HF-4 Zemach magnetization density}:  proton magnetization $\times$ electron $1s$ wavefunction is a spatial $\times$ spatial composition. The W1b extension is operator-level partial; the magnetization-density profile itself is external.
+  \item \textbf{HF-5 multi-loop QED} on hyperfine:  bare two-loop vertex topologies diverge $\sim N^{3.79}$ with no autonomous renormalization, structurally the same wall as LS-8a.
+  \item \textbf{LS-8a two-loop SE} renormalization:  iterated Chamseddine--Connes spectral action reproduces the two-loop UV-divergent integrand faithfully (right prefactor, sign, divergence) but cannot autonomously generate the $Z_2$ and $\delta m$ counterterms.
+  \item \textbf{W1e chemistry} inner-region overattraction:  the chemistry-side analog of the Yukawa non-selection theorem~\cite{debug_w1e}. Six framework-internal modification attempts (F1--F6 of CLAUDE.md \S 3, plus Schmidt, core correlation, basis enlargement, explicit-core HF, DMRG) have failed; the W1e period-class diagnostic returns zero genuine outer-factor (M1/M2/M3) identifications across 11 correction terms.
+  \item \textbf{H1 Yukawa non-selection} (= F1):  the SM-side instance.
+\end{enumerate}
+
+All six entries sit at multi-focal depth MF $> 1$, period class ``outside'' the master Mellin engine, and dimensional character mostly dimensionful (the exception being the Yukawa values themselves, which are dimensionless but lie outside the inner-factor period ring).
+
+\subsection{Gravity calibration (D5--D6)}
+\label{sec:free_gravity}
+
+The Mellin moments $\varphi(0)$, $\varphi(1)$, $\varphi(2)$ of the cutoff function $f$ are externally supplied. The sector-wise moment map (tip $\leftrightarrow \varphi(0)$, Einstein--Hilbert $\leftrightarrow \varphi(1)$, $\Lambda_{cc} \leftrightarrow \varphi(2)$) is proven and the relations among the gravitational observables are forced (D7), but the moment \emph{values} are not. The cosmological-constant problem in GeoVac is structurally precise:  obtaining the observed dimensionless ratio $\Lambda_{cc} \cdot G_{\mathrm{eff}} \approx 36 \pi \cdot \varphi(2)/\varphi(1)^2 \sim 10^{-124}$ requires a cutoff function with $\varphi(2)/\varphi(1)^2 \approx 10^{-124}$ while $\varphi(0), \varphi(1) = O(1)$, which no natural cutoff produces. This is a calibration selection problem on the cutoff function, structurally similar to the Higgs--Yukawa selection problem but on a different object.
+
+\subsection{Chemistry-side inner-factor input data (H6--H7)}
+\label{sec:free_chem_inner}
+
+The Clementi--Raimondi 1963 atomic-Hartree--Fock fits supply the screening exponents $\zeta_{1s}, \zeta_{2s}, \zeta_{2p}$ used in the FrozenCore $\reff(r)$ profile for second-row and heavier chemistry. The multi-zeta valence basis coefficients are similarly external. The W1e period-class diagnostic~\cite{debug_w1e} classifies these as the chemistry-side analog of the SM inner-factor input data (Paper~18 \S IV.6 sixth-tier reading):  the framework provides the multi-electron Hamiltonian assembly machinery (composed\_qubit, balanced\_coupled) on top of these inputs but does not autonomously select the inputs. The chemistry analog of $\eta$-trivialization (Paper~18 \S IV.6, \texttt{thm:eta\_trivialization}) is the open structural question on this side.
+
+\subsection{Foundational calibration (Class 1; I)}
+\label{sec:free_foundational}
+
+Three entries sit at the foundational level. The fine-structure constant $\alpha$ inherits E6 (the combination rule is conjectural; the value is external). The Born rule probability assignment $p = |\langle a | \psi \rangle|^2$ is structurally external:  the framework uses Gleason's theorem via Hilbert-space inheritance and does not improve on Gleason. The Higgs direction $\hat n \in \sphere{2}$ in the Boyle--Farnsworth parameterization~\cite{boyle_farnsworth2018} is similarly external, with an open structural question of whether $\hat n$ should be identified with the GeoVac Hopf-base $\sphere{2}$ (carrying the $M_1$ signature $\Vol(\sphere{2})/4 = \pi$) --- a flagged-but-not-pursued follow-on.
+
+\subsection{Two structurally distinct families on the free side}
+\label{sec:free_two_families}
+
+The catalogue reveals an observation that was anticipated but never sharply tested in the prior literature.
+
+\begin{observation}[Two-family structure of calibration content]
+\label{obs:two_families}
+The free-side entries decompose into two structurally distinct families with different discriminator-column signatures:
+\begin{enumerate}
+  \item \textbf{Multi-focal composition family} (G1--G6, E7, E8, F1, F4, F7, D5, D6):  ``the framework can build it but cannot autonomously pick a number.'' Signature:  $\mathrm{MF} > 1$, period class outside, mostly dimensionful.
+  \item \textbf{Inner-factor input data family} (F2, F3, B8, H6, H7, I2, I3):  ``categorical to the framework's outer-factor mechanism; lives elsewhere by structure.'' Signature:  $\mathrm{MF} = 1$, period class ``none'' or N/A, dimensionless.
+\end{enumerate}
+\end{observation}
+
+This is the operative refinement of the structural-skeleton scope pattern. The earlier one-bucket framing (``structural skeleton vs.\ calibration data'') was correct but coarse. The two-family observation aligns with the previously-named external-input three-class partition, with the third class (multi-determinant correlation) appearing only in the chemistry sub-domain as W1e and currently best read as a sub-case of family 1 with chemistry-specific composition machinery.
+
+%====================================================================
+\section{Cross-domain unity: the multi-focal-composition wall}
+\label{sec:unity}
+
+The most structurally striking pattern in the catalogue is that six observables across four sub-domains converge on a single structural reason for being free.
+
+\subsection{The six instances}
+\label{sec:unity_six}
+
+Listed in order of historical surfacing:
+\begin{enumerate}
+  \item \textbf{H1 (Sprint H1, 2026-05-31; SM-side)}.  $\AF$ admits the Higgs structurally but does not autonomously select Yukawa values.
+  \item \textbf{LS-8a (2026-05; QED two-loop SE)}.  Iterated Chamseddine--Connes spectral action reproduces the two-loop integrand structure but cannot generate $Z_2, \delta m$ counterterms.
+  \item \textbf{HF-3 (Sprint HF, 2026-05-07)}.  Track NI cross-register couples discrete spin labels but does not couple spatial coordinates between electron and nucleus registers.
+  \item \textbf{HF-4 (Sprint HF, 2026-05-07)}.  hyperfine\_coupling\_pauli is point-like in proton position; no magnetization-density distribution carried.
+  \item \textbf{HF-5 (Sprint HF, 2026-05-07)}.  Bare two-loop vertex topologies diverge $\sim N^{3.79}$ with no autonomous renormalization (cf.\ LS-8a).
+  \item \textbf{W1e (Sprint W1c arc, 2026-05-23)}.  NaH inner-region overattraction; six framework-internal modification attempts fail at sprint scale.
+\end{enumerate}
+
+\subsection{The unifying statement}
+\label{sec:unity_statement}
+
+\begin{observation}[Multi-focal-composition wall]
+\label{obs:multi_focal_wall}
+The framework couples discrete labels (quantum numbers $n, l, m, m_s, \kappa, m_j$, isospin, color, gauge representations) cleanly via Wigner symbols and selection rules. Single-focal-length QED on $\sphere{3}$ is handled including curvature corrections at structural level (Parker--Toms verified at 0.5\% in HF-2). Spatial coordinates exist only after a Fock-style projection fixes a focal length; multi-focal observables that require composing two or more such projections at once (electron--nucleus $V_{ne}$ with quantum-mechanical nucleus position, proton magnetization $\times$ electron wavefunction, electron--electron $r_{12}$ where each electron carries its own scale, multi-loop QED renormalization between bare integrand and counterterm structure) lie outside the framework's native composition apparatus.
+\end{observation}
+
+The G4b cross-manifold question $\Tcal_{\sphere{3}} \otimes \Tcal_{\sphere{5}}$ is the spectral-triple-level instance of the same wall. Paper~24 \S V records this as the fourth Coulomb / HO asymmetry layer~\cite{paper24}.
+
+\subsection{Operational consequence}
+\label{sec:unity_operational}
+
+When dispatching new investigations, the catalogue affords a forward-classification:
+\begin{itemize}
+  \item \textbf{Discrete-label couplings} $\to$ framework handles natively. Single sprint, expect positive.
+  \item \textbf{Single-focal-length QED on $\sphere{3}$} $\to$ framework handles natively; curvature corrections expected (Parker--Toms 0.5\%).
+  \item \textbf{Multi-focal spatial composition} $\to$ framework hits Observation~\ref{obs:multi_focal_wall}. Sprint should be diagnostic, naming which composition is missing, not implementation. Expect negative-with-clear-naming.
+  \item \textbf{Renormalization counterterms} $\to$ framework hits the LS-8a wall (= Observation~\ref{obs:multi_focal_wall} sub-case).
+\end{itemize}
+
+This classification is what permits the catalogue to function as a research-direction tool rather than a static record:  candidate investigations can be pre-classified as Class A (handle), Class B (handle, light corrections), Class C (diagnostic only), Class D (out of scope at present axiom level) before resources are committed.
+
+%====================================================================
+\section{Candidate discriminator principles: a preliminary probe}
+\label{sec:principles}
+
+This section probes four candidate principles for what distinguishes forced from free content. None of them is established as \emph{the} principle. They are tested against the catalogue and reported on; the analysis is preliminary by design.
+
+\subsection{Candidate P1:  multi-focal depth}
+\label{sec:p1}
+
+\textbf{Principle.}  Forced iff $\mathrm{MF} = 1$; free iff $\mathrm{MF} > 1$.
+
+\textbf{Coverage.}  Every multi-focal-composition wall entry (G1--G6, plus E7, E8, F1, F4, F7, D5, D6) sits at $\mathrm{MF} > 1$, correctly placed as free. Every forced entry except D2 sits at $\mathrm{MF} = 1$.
+
+\textbf{Misclassifications.}  Five entries break P1 in the forced direction: F2 ($\Ngen$), F3 (KO-dim), B8 (gauge lower bound), H6--H7 (chemistry calibration), I2 (Born rule), I3 (Higgs direction) --- all $\mathrm{MF} = 1$ but free. These are precisely the entries of the \emph{inner-factor input data} family (Observation~\ref{obs:two_families}, item 2). P1 catches the multi-focal composition family cleanly but is blind to the inner-factor input data family.
+
+\textbf{Verdict.}  P1 is a one-family discriminator (it discriminates the multi-focal composition family) but does not generalize. The empirical evidence is consistent with the two-family structure of Observation~\ref{obs:two_families}: multi-focal depth is the right axis \emph{for} the multi-focal composition family, full stop.
+
+\subsection{Candidate P2:  period-content classifiability}
+\label{sec:p2}
+
+\textbf{Principle.}  Forced iff the entry is classifiable in the master Mellin engine $M_1 / M_2 / M_3$ ring; free iff it sits outside.
+
+\textbf{Coverage.}  The multi-focal walls all sit at ``outside,'' correctly placed as free. The forced spectral / period entries (C1--C9) sit at $M_1/M_2/M_3$ or ``meta,'' correctly placed as forced.
+
+\textbf{Misclassifications.}  P2 is structurally wrong for the gauge / counting forced entries (A1--A5, B1--B7), most of which sit at period class ``none.'' They are forced not because they live in the period ring but because they are non-period combinatorial / representation-theoretic facts. P2 also misclassifies F2, F3 in the same way: ``period class none'' applies to both forced counting facts and to free inner-factor input data.
+
+\textbf{Verdict.}  P2 catches the multi-focal composition family but is the wrong axis for the rest of the forced inventory and for the inner-factor input data family.
+
+\subsection{Candidate P3:  dimensional character}
+\label{sec:p3}
+
+\textbf{Principle.}  Forced iff dimensionless; free iff dimensionful.
+
+\textbf{Coverage.}  Most forced entries (skeleton, gauge, periods, chemistry/QC scaling) are dimensionless ratios. Most multi-focal-wall free entries are dimensionful scales (cutoff $f$, $\Lambda_{cc}$, $v$, etc.).
+
+\textbf{Misclassifications.}  D2 ($S_{\mathrm{BH}}$, $G_N$) is forced and dimensionful. F1 (Yukawa values), F2 ($\Ngen$), F3 (KO-dim), F5 (CKM), F6 (PMNS), B8 (gauge lower bound) are all free and dimensionless. Six counterexamples on each side.
+
+\textbf{Verdict.}  P3 catches a correlation but not a principle. The correlation reflects that dimensionful objects often require a scale-supplying calibration step, but it does not capture the structural source of the free / forced split.
+
+\subsection{Candidate P4:  compactness inheritance}
+\label{sec:p4}
+
+\textbf{Principle.}  Forced iff derivable from the compact / Peter--Weyl regime of the Paper~0 packing axiom; free iff requires continuum (un-compact) data.
+
+\textbf{Coverage.}  The skeleton / spectral / Mellin-engine forced entries (A, C) derive from Peter--Weyl on compact $\sphere{3}$, correctly placed as forced. The cutoff function $f$, the Higgs VEV $v$, the multi-loop counterterms are continuum-side data, correctly placed as free.
+
+\textbf{Misclassifications.}  Same blind spot as P1 / P2 in a slightly different language:  the inner-factor input data family (F2, F3, H6, H7, I2) is not obviously continuum data, yet it is free. P4 also has to be made precise --- the boundary between ``derivable from Peter--Weyl on compact $\sphere{3}$'' and ``derivable from compact data, broadly'' is not currently sharp enough to test cell-by-cell.
+
+\textbf{Verdict.}  P4 captures the structural-skeleton scope reading of CLAUDE.md \S 1.7 WH3 cleanly for the multi-focal composition family (continuum data = un-compact = free), but fails on the inner-factor input data family and needs sharpening to become a formal cell-by-cell predicate.
+
+\subsection{Synthesis}
+\label{sec:p_synthesis}
+
+\begin{table}[h]
+\centering
+\caption{Candidate principles vs.\ the two free-side families.}
+\label{tab:p_synthesis}
+\begin{tabular}{lcc}
+\toprule
+Principle & Multi-focal composition family & Inner-factor input data family \\
+\midrule
+P1 (multi-focal depth) & \checkmark & misses entirely \\
+P2 (period classifiability) & \checkmark & misses entirely \\
+P3 (dimensional character) & partial correlation & several counterexamples \\
+P4 (compactness inheritance) & \checkmark (continuum side) & misses entirely \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The pattern is consistent and informative. Three of the four candidates (P1, P2, P4) discriminate the \emph{multi-focal composition family} from the forced inventory cleanly; none discriminates the \emph{inner-factor input data family}, which sits structurally at the same multi-focal depth, period class, and continuum / compact character as forced gauge / counting content but is categorically external by an axis that none of the four candidates encodes.
+
+The honest conclusion is that there is not a single principle separating free from forced; there is a pair of structurally distinct families on the free side, and each family is governed by a different separating axis (multi-focal-composition / period-outside for family 1; categorically-external-by-construction for family 2, with no compact discriminator currently identified). Whether the categorical externality of family 2 admits an axis-level characterization at all is the open structural question of \S\ref{sec:open}.
+
+%====================================================================
+\section{Open questions}
+\label{sec:open}
+
+\subsection{Is there a principle for family 2?}
+\label{sec:open_family2}
+
+The four candidate discriminators of \S\ref{sec:principles} all fail for the inner-factor input data family (F2, F3, B8, H6, H7, I2, I3). One reading is that family 2 sits outside the discriminator-axis machinery by construction:  Yukawa values, $\Ngen$, inner KO-dim, atomic-physics screening data, the Born rule probability assignment are categorical inputs --- the framework's outer-factor mechanism is silent on them at the structural level, and the absence of a discriminator axis is a structural fact, not a gap.
+
+A different reading would say that an undiscovered axis remains. The chemistry-side analog of the $\eta$-trivialization theorem~\cite{paper18}, named as a multi-month NCG-research target in the W1e period-class memo~\cite{debug_w1e}, is one concrete candidate:  a structural property of the FrozenCore $\reff(r)$ pipeline that mirrors the chirality-grading axiom $\{\gamma_F, D_F\} = 0$ on the SM side could provide the axis. The candidate is well-defined but not currently exhibited.
+
+\subsection{The ``second packing axiom'' status}
+\label{sec:open_second_packing}
+
+The Direction~2 NO-GO~\cite{debug_seam_packing} and Read~2 NO-GO~\cite{debug_read2} establish that the current Paper~0 packing construction does not autonomously reach $\Ngen$ or the inner KO-dim. The named logical escape is a \emph{sibling axiom} to Paper~0:  a new primitive emitting fiber multiplicities, motivated by structural content the existing axiom system does not carry. For a sibling axiom to satisfy the standards of the present catalogue it would need to:
+\begin{enumerate}
+  \item Be motivated by structural content the existing axiom system does not carry (not just postulate $\Ngen = 3$ directly).
+  \item Have testable consequences beyond the multiplicity (e.g.\ predict CKM structure, generation mass hierarchy, or Yukawa--Higgs coupling pattern).
+  \item Be self-consistent with the Door~4 forced/free seam (i.e.\ not accidentally also force Yukawa values, which would contradict the seam theorem).
+\end{enumerate}
+These requirements are well-defined but no current construction satisfies all three. The sibling-axiom direction remains the named multi-year structural research target.
+
+\subsection{Higgs direction and the Hopf base}
+\label{sec:open_higgs_hopf}
+
+The Boyle--Farnsworth DGA parameterization~\cite{boyle_farnsworth2018} represents the Higgs by a unit vector $\hat n \in \sphere{2}$ specifying the direction of the $\C$ embedding in $\HH$. The GeoVac Hopf base $\sphere{2}$ carries the master Mellin engine $M_1$ signature $\Vol(\sphere{2})/4 = \pi$. If $\hat n$ is identified with the Hopf-base $\sphere{2}$, this would provide a structural correlation between the Higgs orientation and the gauge-bundle base. The follow-on is flagged but not pursued at sprint scale; it sits at the boundary between Observation \ref{obs:two_families} family 2 (where the Higgs direction is currently catalogued) and the multi-focal-composition family.
+
+\subsection{Relationship to Connes--Marcolli calibration data in NCG-SM}
+\label{sec:open_ncg_sm}
+
+The free / forced seam catalogued here is consistent with --- and arguably a specific instance of --- the more general phenomenon visible in the Connes--Marcolli noncommutative-geometric formulation of the Standard Model:  the framework determines the gauge group, the algebra structure, and the spectral action machinery, but the Yukawa values and the generation count enter as external inputs. The GeoVac contribution to this conversation is twofold:  the case-exhaustion-theorem-driven classification of which periods can and cannot appear on the inner factor (the $M_1 \cup M_2$ restriction via $\eta$-trivialization), and the empirical confirmation at 162 PSLQ cells that the SM Yukawas do not in fact land in this restricted period ring at low coefficient ceiling.
+
+The natural follow-on at the cross-community level is engagement with the Brown / Marcolli / Glanois periods program. The two new structural theorems of Paper~18 \S IV.6 ($\eta$-trivialization and tensor factorization) are paper-level handles for that engagement.
+
+%====================================================================
+\section*{Honest scope}
+\addcontentsline{toc}{section}{Honest scope}
+
+\begin{itemize}
+  \item \textbf{Observations-grade content.}  This paper consolidates and frames; it does not prove that a single principle separates forced from free content, and it does not claim to identify the discriminating axis for the inner-factor input data family. The two-family structure of Observation~\ref{obs:two_families} is empirical, supported by the discriminator-column patterns in the catalogue \texttt{docs/forced\_free\_seam.md}; whether it admits an underlying single-principle description is the open question of \S\ref{sec:open_family2}.
+  \item \textbf{Catalogue completeness.}  The 62 entries (38 + 1 + 23) are the load-bearing inventory at the time of writing. We may have missed entries; the catalogue's structure permits straightforward addition of new rows as further sprints surface them. The cross-domain unity of \S\ref{sec:unity} is supported by six independent instances surfaced over a year of internal work, which is past the point of coincidence but is not a closed enumeration.
+  \item \textbf{Theorem-grade content used here, not produced.}  The Forced-Count Theorem (Paper~32, \texttt{thm:forced\_count}), the case-exhaustion theorem (Paper~32 \S VIII), the master Mellin engine classification (Paper~18 \S III.7), the $\eta$-trivialization theorem (Paper~18 \S IV.6), Paper~22's angular-sparsity theorem, Paper~38's GH-convergence theorem, the Wald two-term-exactness $\Rightarrow$ pure Einstein argument, and the Door~4 series theorems are all cited; none is reproved here.
+  \item \textbf{Empirical-only content used here.}  The 162-cell Yukawa-PSLQ clean negative is empirical / numerical at coefficient ceiling $M \le 10^3$; high-coefficient identities are not ruled out structurally. The W1e period-class diagnostic's 11-term sweep is similarly empirical. The cross-domain unity is six observed instances, not a theorem.
+  \item \textbf{Named open follow-ons (deferred).}  The chemistry-side $\eta$-trivialization analog (multi-month NCG-research target); the sibling-axiom direction toward $\Ngen$ and inner KO-dim (multi-year, no current handle); the Higgs-direction / Hopf-base identification (sprint-scale, NCG-reading-heavy, flagged).
+\end{itemize}
+
+\section*{Cross-references}
+\addcontentsline{toc}{section}{Cross-references}
+
+Companion catalogue:  \texttt{docs/forced\_free\_seam.md} (this writeup's companion data file, full 62-entry table).
+
+Strengthens / consolidates:  Paper~32 \S VIII (Forced-Count Theorem, Sprint H1 verdict)~\cite{paper32}; Paper~18 \S III.7 + \S IV.6 (master Mellin engine + inner-factor input-data tier)~\cite{paper18}; Paper~35 (rest-mass vs.\ temporal-window projections)~\cite{paper35}; Paper~50 (F-theorem ladder, Door~1 forward-run)~\cite{paper50}; the prior catalogue \texttt{docs/forcing\_catalogue.md} (2026-06-01).
+
+Does not change:  WH1 PROVEN status~\cite{paper38}; WH5 ($\alpha$ as projection constant); the Marcolli--van Suijlekom gauge-network lineage reading of Papers~25, 30, 32.
+
+%====================================================================
+\begin{thebibliography}{99}
+
+\bibitem{paper0}
+J. Loutey, \emph{Paper~0:  Geometric Packing}, GeoVac papers/group3\_foundations.
+
+\bibitem{paper7}
+J. Loutey, \emph{Paper~7:  The Dimensionless Vacuum}, GeoVac papers/group3\_foundations.
+
+\bibitem{paper14}
+J. Loutey, \emph{Paper~14:  Qubit Encoding for the Composed Architecture}, GeoVac papers/group4\_quantum\_computing.
+
+\bibitem{paper18}
+J. Loutey, \emph{Paper~18:  Spectral-Geometric Exchange Constants}, GeoVac papers/group3\_foundations.
+
+\bibitem{paper22}
+J. Loutey, \emph{Paper~22:  Potential-Independent Angular Sparsity}, GeoVac papers/group3\_foundations.
+
+\bibitem{paper23}
+J. Loutey, \emph{Paper~23:  Nuclear Shell Model Qubit Hamiltonians and Fock Projection Rigidity}, GeoVac papers/group4\_quantum\_computing.
+
+\bibitem{paper24}
+J. Loutey, \emph{Paper~24:  The Bargmann--Segal Lattice for the 3D Harmonic Oscillator}, GeoVac papers/group3\_foundations.
+
+\bibitem{paper28}
+J. Loutey, \emph{Paper~28:  QED on $\sphere{3}$}, GeoVac papers/group5\_qed\_gauge.
+
+\bibitem{paper32}
+J. Loutey, \emph{Paper~32:  The GeoVac Spectral Triple}, GeoVac papers/group1\_operator\_algebras.
+
+\bibitem{paper33}
+J. Loutey, \emph{Paper~33:  The 1+6+1 Partition of QED Selection Rules on $\sphere{3}$}, GeoVac papers/group5\_qed\_gauge.
+
+\bibitem{paper35}
+J. Loutey, \emph{Paper~35:  Time as Projection}, GeoVac papers/group6\_precision\_observations.
+
+\bibitem{paper36}
+J. Loutey, \emph{Paper~36:  Bound-State QED on Dirac-$\sphere{3}$}, GeoVac papers/group5\_qed\_gauge.
+
+\bibitem{paper38}
+J. Loutey, \emph{Paper~38:  SU(2) Propinquity Convergence on the Camporesi--Higuchi Spectral Triple}, GeoVac papers/group1\_operator\_algebras.
+
+\bibitem{paper40}
+J. Loutey, \emph{Paper~40:  Unified GH-Convergence on Compact Lie Groups}, GeoVac papers/group1\_operator\_algebras.
+
+\bibitem{paper43}
+J. Loutey, \emph{Paper~43:  Lorentzian Extension at Finite Cutoff}, GeoVac papers/group1\_operator\_algebras.
+
+\bibitem{paper50}
+J. Loutey, \emph{Paper~50:  Boundary CFT$_3$ Observables on the Truncated GeoVac Spectral Triple}, GeoVac papers/group1\_operator\_algebras.
+
+\bibitem{paper51}
+J. Loutey, \emph{Paper~51:  Gravity from the GeoVac Spectral Action}, GeoVac papers/group5\_qed\_gauge.
+
+\bibitem{bertrand1873}
+J. Bertrand, \emph{Th\'eor\`eme relatif au mouvement d'un point attir\'e vers un centre fixe}, C. R. Acad. Sci. Paris \textbf{77} (1873) 849--853.
+
+\bibitem{boyle_farnsworth2018}
+L. Boyle and S. Farnsworth, \emph{The standard model, the Pati--Salam model, and ``Jordan geometry''}, arXiv:1604.00847.
+
+\bibitem{debug_yukawa_pslq}
+GeoVac sprint memo:  \texttt{debug/sprint\_yukawa\_pslq\_memo.md} (2026-06-03):  Sprint Yukawa-PSLQ clean negative across 162 PSLQ cells.
+
+\bibitem{debug_seam_packing}
+GeoVac sprint memo:  \texttt{debug/seam\_packing\_scoping\_memo.md} (2026-06-03):  Direction~2 NO-GO.
+
+\bibitem{debug_read2}
+GeoVac sprint memo:  \texttt{debug/sprint\_read2\_n\_gen\_scoping\_memo.md} (2026-06-03):  Read~2 NO-GO on Hopf-tower-to-representation shortcut.
+
+\bibitem{debug_w1e}
+GeoVac sprint memo:  \texttt{debug/sprint\_w1e\_period\_class\_memo.md} (2026-06-04):  W1e period-class diagnostic, zero genuine outer-factor identifications.
+
+\end{thebibliography}
+
+\end{document}
