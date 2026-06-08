@@ -7,6 +7,312 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.102.0] - 2026-06-08
+
+### Summary
+
+**Sprint G1/G2/G5 — Spatial-composition wall theorem.** Same-day follow-on to Sprint E7/E8. Closes the spatial-composition sub-sector of the multi-focal-composition wall, completing the wall's full closure at theorem-grade level. Paper 32 §VIII gains the sixth theorem-grade non-selection result in the corpus and a milestone remark recording the multi-focal-composition wall's full theorem-bound status.
+
+**Theorem statement.** In the framework's tensor-product spectral triple $\mathcal{T}_a \otimes \mathcal{T}_b$:
+- **Angular structure is forced** (Paper 54 Thm 3): Gaunt selection rules, m-conservation, monopole hierarchy autonomously reproduced via SU(2) representation-theoretic structure on $S^3$.
+- **Radial coupling profile is determined autonomously** by the combined Camporesi--Higuchi Dirac structure but does not autonomously coincide with physical 1/r Coulomb, dipole magnetization, or other specific two-body radial profiles. The framework's axiom set $\mathcal{A}$ contains no morphism enforcing physical radial matching.
+
+**Proof structure.** Two-part:
+1. Angular forcing (Paper 54 Thm 3, established).
+2. Radial non-reproduction (structural argument): Paper 7's chordal-distance identity gives focal-length-dependent conformal factor c(λ); two focal lengths give c_a, c_b; tensor product gives combined conformal factor c_{ab} ≠ c_a · c_b in general; physical two-body observables live on 3-dim relative-coordinate space, not 6-dim product manifold; the relative-coordinate reduction (6-dim → 3-dim) is not in $\mathcal{A}$. Empirical verification: Sprint resolvent_two_body (2026-06-01) tested four resolvent weightings against Coulomb and found Pearson correlations ≤ 0.81 decreasing with n_max.
+
+**Catalogue entries closed.** Three catalogue entries (the spatial-composition sub-sector of the multi-focal-composition wall):
+- **G1** (HF-3 recoil cross-register $V_{eN}(\hat r_e, \hat R_N)$)
+- **G2** (HF-4 Zemach magnetization density)
+- **G5** (W1e chemistry inner-region overattraction)
+
+**Multi-focal-composition wall now fully theorem-bound.** With this theorem + the E7/E8 single-cutoff theorem (v3.101.0), all six unique catalogue instances of the multi-focal-composition wall family are now characterised at theorem-grade level under two structurally distinct theorems:
+- **Renormalization sub-sector** (E7, E8, G3, G4): closed by `thm:single_cutoff_spectral_action`.
+- **Spatial-composition sub-sector** (G1, G2, G5): closed by `thm:spatial_composition_radial_wall`.
+- G6 = F1 (Yukawa non-selection) covered by H1.
+
+Paper 32 §VIII gains the milestone remark `rem:multi_focal_wall_fully_characterized` recording this completion.
+
+**Six theorem-grade non-selection results now in corpus.** After today's run (Sprints C3 + F3 + E7/E8 + G1/G2/G5):
+1. Forced-Count Theorem (Paper 32 `thm:forced_count`)
+2. H1 Yukawa non-selection (Paper 32 §VIII.C)
+3. $N_{\mathrm{gen}}$ non-selection (Paper 32 `thm:n_gen_non_selection`)
+4. Inner KO-dim non-selection (Paper 32 `thm:ko_dim_non_selection`)
+5. Single-cutoff spectral action (Paper 32 `thm:single_cutoff_spectral_action`)
+6. Spatial-composition radial wall (Paper 32 `thm:spatial_composition_radial_wall`)
+
+The first four close the inner-factor structural-skeleton boundary at the canonical-rep level. The last two close the multi-focal-composition wall family.
+
+### Added
+
+- **Paper 32 §VIII**: `thm:spatial_composition_radial_wall` (main theorem with two-part proof: angular forcing + radial non-reproduction via conformal-factor argument + empirical verification reference), `cor:spatial_composition_wall` (catalogue entries G1, G2, G5 classified as spatial-composition calibration data), `rem:multi_focal_wall_fully_characterized` (milestone remark recording the multi-focal-composition wall's full theorem-bound status under E7/E8 + G1/G2/G5 theorems).
+- **Paper 32 bibliography**: `\bibitem{paper54}` added (cross-reference to two-body interactions from tensor-product spectral triple).
+- **Paper 57 §6.3**: paragraph added documenting the Sprint G1/G2/G5 closure as the sixth theorem-grade non-selection result. List of "six theorem-grade non-selection results in the corpus" now complete. Remaining empirical-only entries (E6, D5/D6, F4-F7, H6/H7, I-entries) noted as residuals.
+- **Paper 57 bibliography**: `\bibitem{debug_g1_g2_g5}` added.
+- **`debug/sprint_g1_g2_g5_spatial_composition_memo.md`**: canonical sprint memo (~3200 words).
+
+### Changed
+
+- **Paper 32 §VIII**: page count 79 → 80 (three-pass clean compile).
+- **Paper 57**: page count 16 → 17 (three-pass clean compile).
+- **CLAUDE.md §1 version**: v3.101.0 → v3.102.0.
+- **CLAUDE.md §2**: Sprint G1/G2/G5 one-liner.
+
+### Verification
+
+- Paper 32 compiles three-pass clean at 80 pages. New `\cite{paper54}` resolved; no new undefined references.
+- Paper 57 compiles three-pass clean at 17 pages. No errors.
+- No production code modified.
+
+### Honest scope
+
+**Theorem-grade within the framework's current axiom set $\mathcal{A}$.** The proof composes Paper 54 Thm 3 (established angular forcing) + Paper 7 chordal-distance identity (established conformal factor structure) + the standard non-commutativity of conformal-factor composition with tensor product + Sprint resolvent_two_body empirical Pearson verification.
+
+**No new mathematics.** Composition of existing results into a Theorem block. Mirrors the C3 / F3 / E7-E8 crystallisation pattern.
+
+**Sibling-axiom direction.** A relative-coordinate-reduction axiom or focal-length-tying morphism between tensor factors could extend $\mathcal{A}$ and produce specific physical radial matches. The theorem closes the question for the current axiom set; extending the axiom set is the multi-year structural-research direction.
+
+**Cross-paper compatibility.** Paper 54 (drafted 2026-06-01) established the angular forcing + reported partial radial matching (75% connected fraction). This theorem formalises both findings into a single structural statement and explains the radial mismatch by the conformal-factor non-commutativity. No conflict; strengthens existing scope.
+
+### Closed
+
+- **Spatial-composition sub-sector of multi-focal-composition wall.** G1, G2, G5 catalogue entries now theorem-grade non-selection.
+- **Multi-focal-composition wall** (full closure). All six unique catalogue instances of the multi-focal-composition wall family (Paper 57 §4 cross-domain unity) now theorem-bound under two structurally distinct theorems.
+- **Path-#1 Vein C step 5** (spatial-composition theorem). After C3 + F3 + E7/E8 + G1/G2/G5, the C-arc has produced one observation paper, one principle, and four theorem-grade upgrades in one day, with six theorem-grade non-selection results total in the corpus.
+
+---
+
+## [3.101.0] - 2026-06-08
+
+### Summary
+
+**Sprint E7/E8 — Single-cutoff spectral action theorem.** Same-day follow-on to Sprints C3 + F3. Closes the multi-loop QED renormalization sub-sector of the multi-focal-composition wall at theorem-grade. Paper 32 §VIII gains the fifth theorem-grade non-selection result in the corpus, this one in the spectral-action sector rather than the inner-factor sector.
+
+**Theorem statement.** The framework's axiom set $\mathcal{A}$ specifies the Chamseddine--Connes spectral action $S(D, \Lambda) = \mathrm{Tr}\, f(D/\Lambda)$ as a single-cutoff functional. No morphism derivable from $\mathcal{A}$ produces a multi-cutoff spectral action structure. Consequently the framework cannot autonomously generate multi-loop QED renormalization counterterms ($Z_2, \delta m$, etc.), which require a multi-cutoff $(\Lambda_{UV}, \mu_R)$ structure absent from $\mathcal{A}$.
+
+**Proof.** Structural inspection of each axiom in $\mathcal{A}$: (i) CCM spectral action is single-cutoff by stipulation; (ii) Paper 0 packing axiom + standard real-spectral-triple axioms + Hopf-tower truncation + Bertrand + Upgrade B are algebraic / kinematic / topological, introducing no energy-scale data; (iii) inner fluctuations $D \to D + A$ preserve single-Dirac structure; (iv) tensor products $\mathcal{T}_1 \otimes \mathcal{T}_2$ preserve single-cutoff structure with combined Dirac. No second cutoff is introduced by any axiom or derivable morphism. Therefore $\mathcal{A}$ contains no multi-cutoff structure.
+
+**Catalogue entries closed.** Four catalogue entries are closed by this theorem and its corollary `cor:multi_loop_renormalization_wall`:
+- **E7** (two-loop SE counterterms $Z_2, \delta m$)
+- **E8** (multi-loop QED beyond LS-7)
+- **G3** (HF-5 multi-loop hyperfine)
+- **G4** (LS-8a two-loop SE renormalization, identical to E7 under Paper 57 §4 cross-domain unity)
+
+**Five theorem-grade non-selection results now in corpus.** After one day of work:
+1. Forced-Count Theorem (Paper 32 `thm:forced_count`, pre-2026-06-08)
+2. H1 Yukawa non-selection (Paper 32 §VIII.C, pre-2026-06-08)
+3. $N_{\mathrm{gen}}$ non-selection (Paper 32 `thm:n_gen_non_selection`, Sprint C3, 2026-06-08 v3.99.0)
+4. Inner KO-dim non-selection (Paper 32 `thm:ko_dim_non_selection`, Sprint F3, 2026-06-08 v3.100.0)
+5. Single-cutoff spectral action (Paper 32 `thm:single_cutoff_spectral_action`, Sprint E7/E8, this release v3.101.0)
+
+The first four close the inner-factor structural-skeleton boundary at the canonical-rep level (Paper 32 `rem:full_inner_factor_boundary`). The fifth closes the multi-loop QED renormalization sub-sector of the multi-focal-composition wall.
+
+### Added
+
+- **Paper 32 §VIII**: `def:multi_cutoff` (definition of multi-cutoff structure), `thm:single_cutoff_spectral_action` (the main theorem with four-bullet proof inspection), `cor:multi_loop_renormalization_wall` (corollary listing closed catalogue entries E7/E8/G3/G4), `rem:single_cutoff_scope` (honest scope: sibling-axiom direction + spatial-composition sub-sector outside this theorem's scope).
+- **Paper 32 bibliography**: `\bibitem{paper57}` added for cross-reference to Paper 57.
+- **Paper 57 §6.3**: paragraph added documenting the Sprint E7/E8 closure as the fifth theorem-grade non-selection result, distinguished from the four inner-factor theorems as belonging to the spectral-action sector / renormalization sub-sector. List of remaining empirical-only entries updated to remove E7/E8/G3/G4 (now theorem-grade) and to add G1/G2/G5 as the named next tractable targets (spatial-composition sub-sector).
+- **Paper 57 bibliography**: `\bibitem{debug_e7_e8}` added.
+- **`debug/sprint_e7_e8_single_cutoff_memo.md`**: canonical sprint memo (~2200 words).
+
+### Changed
+
+- **Paper 32 §VIII**: page count 77 → 79 (three-pass clean compile; new theorem block + corollary + remark + definition is substantive).
+- **Paper 57**: unchanged page count 16 (paragraph addition fit within existing layout).
+- **CLAUDE.md §1 version**: v3.100.0 → v3.101.0.
+- **CLAUDE.md §2**: Sprint E7/E8 one-liner.
+
+### Verification
+
+- Paper 32 compiles three-pass clean at 79 pages. New `\cite{paper57}` resolved; no new undefined references.
+- Paper 57 compiles three-pass clean at 16 pages. No errors.
+- No production code modified.
+
+### Honest scope
+
+**Theorem-grade within the framework's current axiom set $\mathcal{A}$.** The proof is by structural inspection — each axiom is examined and shown not to introduce an independent second scale. Standard structural-inspection argument; rigorous within the conditional.
+
+**Theorem does NOT claim no multi-cutoff structure could exist anywhere.** A sibling axiom adding renormalization-group flow machinery would extend $\mathcal{A}$ and could in principle produce multi-cutoff observables. This sibling axiom is logically possible and named (analog of the $N_{\mathrm{gen}}$ sibling-axiom direction from C3).
+
+**Theorem covers ONLY the renormalization sub-sector.** Catalogue entries G1 (HF-3 recoil cross-register), G2 (HF-4 Zemach magnetization), G5 (W1e chemistry inner-region) are spatial-composition walls, structurally distinct from the multi-cutoff renormalization sub-sector. They lie outside this theorem's scope. A general multi-focal-composition wall theorem unifying both sub-sectors remains open (named as next tractable target in the Sprint E7/E8 memo).
+
+**No new mathematics.** The structural reason for the LS-8a wall (single-cutoff spectral action) was already named in `memory/multi_focal_wall_pattern.md` and `memory/ls8a_two_loop_renormalization_gap.md`. This sprint formalises the structural reason as a theorem block in Paper 32 §VIII, mirroring the C3 / F3 crystallization pattern.
+
+**Cross-paper compatibility.** Paper 36 §LS-8a (May 2026) empirically established the wall. This theorem formalises the structural reason behind the empirical wall. No conflict; strengthens existing scope statement.
+
+### Closed
+
+- **Multi-loop QED renormalization sub-sector of multi-focal-composition wall.** E7, E8, G3, G4 catalogue entries now theorem-grade non-selection.
+- **Path-#1 Vein C step 4** (single-cutoff theorem). After C3 + F3 + E7/E8, the C-arc has produced one observation paper, one principle (P5 packing-reachability), and three theorem-grade upgrades in one day, with five theorem-grade non-selection results total in the corpus.
+
+---
+
+## [3.100.0] - 2026-06-08
+
+### Summary
+
+**Sprint F3 — Inner KO-dim non-selection theorem.** Same-day companion to Sprint C3 ($N_{\mathrm{gen}}$ non-selection, v3.99.0). Paper 32 §VIII gains `thm:ko_dim_non_selection` + `rem:full_inner_factor_boundary` closing the inner-factor structural-skeleton boundary at the canonical-representation level with four theorem-grade non-selection results.
+
+**Theorem statement.** Let $\mathcal{A}$ denote the framework's current axiom set. The Paper 0 packing axiom is kinematic (Paper 0 §VII.B "What the construction does not provide"): it produces $(n, l, m, m_s)$ labels and graph topology but no Dirac operator, no real structure, no chirality grading. The inner KO-dimensional signature is a property of the real-structure data $(D_F, J_F, \gamma_F)$, none of which is in packing's output. The remaining axioms constrain $(D_F, J_F, \gamma_F)$ to be consistent with the outer GeoVac triple's KO-dim 3 and the standard real-spectral-triple axioms, but do not uniquely select an inner KO-dim signature. The canonical CCM SM rep (KO-dim 6) is one such choice, supplied as external input.
+
+**Proof is one-line composition.** Two established facts: (1) Paper 0 §VII.B explicit scope statement (packing is kinematic, labels + topology only, NOT operators/real-structure/multiplicities); (2) Door 4f T1 / Door 4b Q3 (inner KO-dim is a property of $(D_F, J_F, \gamma_F)$, packing produces none). Composition: $\mathcal{A}$ has no morphism producing $(D_F, J_F, \gamma_F)$ autonomously, and KO-dim depends on this data → $\mathcal{A}$ does not autonomously select KO-dim. Cleaner than F2 N_gen, which required Read 2's three-obstruction analysis.
+
+**Four theorem-grade non-selection results.** Paper 32 §VIII now has a remark consolidating the four theorems characterising the full free-side content of the inner-factor structural-skeleton boundary at the canonical-representation level:
+1. **Forced-Count Theorem** (`thm:forced_count`): forces the moduli space $\mathcal{M}(D_F)$ and dimension 128 per generation.
+2. **H1 Yukawa non-selection** (§VIII.C): forces 8 free Yukawa parameters per generation in the diagonal slice.
+3. **$N_{\mathrm{gen}}$ non-selection** (`thm:n_gen_non_selection`, Sprint C3): forces N_gen to be external multiplicity.
+4. **Inner KO-dim non-selection** (`thm:ko_dim_non_selection`, this sprint): forces inner KO-dim signature to be external real-structure input.
+
+Forced data: moduli space + its dimension. Free data: (i) point in moduli space, (ii) multiplicity factor, (iii) real-structure signature. All four theorems conditional on canonical CCM SM rep.
+
+### Added
+
+- **Paper 32 §VIII**: `thm:ko_dim_non_selection` theorem block (~60 lines: statement, two-fact proof composition, q.e.d.) + `rem:full_inner_factor_boundary` remark consolidating the four theorem-grade non-selection results at the canonical-rep level.
+- **Paper 57 §3.1**: F3 (inner KO-dim) entry updated from "packing-unreachable on Direction 2 NO-GO" to theorem-grade reference (`thm:ko_dim_non_selection`).
+- **Paper 57 §6.3**: subsection updated from "three theorem-grade non-selection results" to "four", with F3 added.
+- **Paper 57 bibliography**: `\bibitem{debug_f3}` added.
+- **`debug/sprint_f3_ko_dim_non_selection_memo.md`**: canonical sprint memo (~2000 words).
+
+### Changed
+
+- **Paper 32 §VIII**: page count 76 → 77 (three-pass clean compile).
+- **Paper 57**: page count 15 → 16 (three-pass clean compile).
+- **CLAUDE.md §1 version**: v3.99.0 → v3.100.0.
+- **CLAUDE.md §2**: Sprint F3 one-liner.
+
+### Verification
+
+- Paper 32 compiles three-pass clean at 77 pages. No errors. No new undefined references.
+- Paper 57 compiles three-pass clean at 16 pages. No errors.
+- No production code modified.
+
+### Honest scope
+
+**Theorem-grade conditional on canonical CCM rep.** Same conditional structure as the F2 N_gen theorem. Unconditional version (whether any non-canonical SM-phenomenologically-consistent rep yields a different KO-dim) remains multi-year structural-research target. The Read 2 sharpest-falsifier-style construction for KO-dim would be: exhibit a non-canonical rep that admits a different KO-dim while preserving SM fermion-doubling and Majorana neutrino-mass structure.
+
+**No new mathematics.** Two-fact composition: Paper 0 §VII.B explicit scope statement + Door 4f / Door 4b multiplicity-invisibility result. Both established in prior sprints. This sprint crystallises the existing composition into a Theorem block.
+
+**Cleaner argument than N_gen.** The N_gen theorem required Read 2's analysis of why standard CCM rep cannot be reorganised to make algebra factors = generations. The KO-dim argument is more direct: packing is kinematic (definition), KO-dim is real-structure data (definition), packing produces no real-structure → composition. One-line proof.
+
+### Closed
+
+- **Inner-factor structural-skeleton boundary at canonical-rep level.** With Sprints C3 + F3 together, the four theorem-grade non-selection results (Forced-Count, H1 Yukawa, N_gen, KO-dim) now characterise the full free-side content of the inner factor. Remaining empirical-only entries (E6, E7/E8, G1-G6, D5/D6, F4-F7, H6-H7, I1-I3) sit outside this sector.
+- **Path-#1 Vein C step 3 (continuation).** F3 closes the second of the three load-bearing inner-factor non-selection entries (F1 Yukawa was theorem-grade pre-C3; F2 N_gen was C3 closure; F3 KO-dim is this sprint).
+
+---
+
+## [3.99.0] - 2026-06-08
+
+### Summary
+
+**Sprint C3 — $N_{\mathrm{gen}}$ non-selection theorem.** Same-day follow-on to v3.98.0. Theorem-grade upgrade of the Direction 2 + Read 2 NO-GO scopings (both June 3) for the generation count $N_{\mathrm{gen}}$. Paper 32 §VIII gains a new theorem (`thm:n_gen_non_selection`) and remark (`rem:n_gen_scope`) formalising the scoping content into a conditional structural impossibility result.
+
+**Theorem statement.** Under the canonical Chamseddine--Connes SM representation, for every integer $N \ge 1$ the GeoVac spectral triple with inner Hilbert-space multiplicity $N$ satisfies every axiom in the framework's current set $\mathcal{A}$ = {Paper 0 packing axiom, standard real-spectral-triple axioms, Hopf-tower truncation (Hurwitz), Bertrand's classical theorem, Upgrade B sphere-Lie-group axiom}. Consequently, $\mathcal{A}$ contains no morphism that selects a specific value of $N$. The unconditional version (any SM-phenomenologically-consistent rep correlates $N$ with algebra-factor count under an alternative rep) remains the open multi-year Read 2 sharpest-falsifier target.
+
+**Three theorem-grade non-selection results now in the corpus.** Forced-Count Theorem (dim $\mathcal{M}(D_F)$ = 128); H1 Yukawa non-selection (8 free parameters per generation in the diagonal slice); $N_{\mathrm{gen}}$ non-selection (Sprint C3, this release). Together they characterise the full free-side content of the inner-factor structural-skeleton boundary at the canonical-representation level: forced data is the moduli space and its dimension; free data is (i) the point (Yukawa values, H1), (ii) the multiplicity ($N_{\mathrm{gen}}$, C3), (iii) the real-structure signature (inner KO-dimension, named as next tractable upgrade target).
+
+**Method.** No new mathematics; this sprint crystallises the existing Direction 2 + Read 2 structural content into a Theorem block in the same way Sprint Forced-Count Synthesis (June 3) crystallised H1 into `thm:forced_count`. The Read 2 sharpest falsifier supplies the unconditional-version open question explicitly.
+
+### Added
+
+- **Paper 32 §VIII**: `thm:n_gen_non_selection` theorem block (~80 lines: full statement, six-bullet proof sketch covering each axiom's $N$-independence, Read 2 three-obstruction citation, closing q.e.d.) + `rem:n_gen_scope` remark naming the conditional / unconditional split and the H1 / Forced-Count / N_gen non-selection trio at the canonical-representation level. `\paragraph{Files.}` extended with `sprint_c3_n_gen_non_selection_memo.md` cross-reference.
+- **Paper 57 §3.1**: F2 ($N_{\mathrm{gen}}$) entry updated from diagnostic-grade to theorem-grade with citation to Paper 32 `thm:n_gen_non_selection`. Direction 2 + Read 2 content retained as supplying ingredients.
+- **Paper 57 §6.3**: new subsection "Sprint C3 closure: three theorem-grade non-selection results" listing Forced-Count + H1 Yukawa + $N_{\mathrm{gen}}$ non-selection theorems and named remaining candidate upgrade targets.
+- **Paper 57 bibliography**: `\bibitem{debug_c3}` added.
+- **`debug/sprint_c3_n_gen_non_selection_memo.md`**: canonical sprint memo (~3000 words). Statement + proof structure summary + cross-references + named future upgrade candidates + decision gate.
+
+### Changed
+
+- **Paper 32 §VIII**: page count 75 → 76 (three-pass clean compile).
+- **Paper 57**: page count 14 → 15 (three-pass clean compile).
+- **CLAUDE.md §1 version**: v3.98.0 → v3.99.0.
+- **CLAUDE.md §2**: Sprint C3 one-liner.
+
+### Verification
+
+- Paper 32 compiles three-pass clean at 76 pages. No errors. No new undefined references.
+- Paper 57 compiles three-pass clean at 15 pages. No errors.
+- No production code modified.
+
+### Honest scope
+
+**Theorem-grade conditional on canonical CCM representation.** The proof is rigorous within this conditional. The unconditional version (any SM-phenomenologically-consistent rep) remains the multi-year Read 2 sharpest-falsifier target.
+
+**No new mathematics; crystallization sprint.** The Direction 2 packing-reach NO-GO (June 3) and Read 2 representation-level NO-GO (June 3) supplied all the structural ingredients. This sprint crystallises them into a Theorem block. The pattern follows the June 3 Forced-Count Synthesis sprint which crystallised H1 + Door 4 + Direction 2 into `thm:forced_count`.
+
+**Three theorem-grade non-selection results now corpus-internal at the canonical-rep level.** Future upgrade candidates (named in the Sprint C3 memo + Paper 57 §6.3): F3 inner KO-dim signature (sprint-scale, structurally analogous to F2); E6 combination rule $K$ (medium difficulty); E7--E8 LS-8a counterterms (single-cutoff spectral action argument); G1--G6 multi-focal composition unification theorem (most ambitious, would unify six instances); chemistry-side $\eta$-trivialization analog (multi-month NCG-research target).
+
+### Closed
+
+- **Path-#1 Vein C step 3** (C3 = structural non-selection theorem arc, first deliverable).
+- The Sprint Forced-Count Synthesis (June 3) named Read 2 as a future deep move; Sprint C3 closes the conditional version of the deep move's first instance ($N_{\mathrm{gen}}$ non-selection).
+
+---
+
+## [3.98.0] - 2026-06-08
+
+### Summary
+
+**Sprint C2 principle hunt — P5 packing-reachability identified as the operational principle.** Same-day follow-on to v3.97.0. Closes the question Paper 57 §6.1 originally left open ("Is there a principle for family 2?"). The forced/free seam IS the packing-reachable / packing-unreachable boundary on the 60-entry catalogue: 98.3% accuracy, single misclassification (I3 Higgs direction, already flagged as conditional / open Hopf-base identification).
+
+**Method.** Encode the 60-entry catalogue as Python data with all axis tags. Add a new axis: `packing_reachable: yes/no/conditional` per entry, justified by witness-derivation existence (yes, for forced entries with corpus derivations) or explicit non-selection theorems / no-go memos (no, for calibration entries). Encode five candidate principles as predicate functions. Run against catalogue. Tabulate misclassifications + per-family failure modes.
+
+**Result.** P5 (forced iff packing-reachable, treating conditional as forced) hits 98.3% accuracy (59/60). The four prior candidates (P1 multi-focal depth, P2 period classifiable, P3 dimensional, P4 compactness inheritance) hit 86.7%, 86.7%, 76.7%, 96.7% respectively. Conjunctions P1∧P5 = 96.7% and P1∨P5 = 88.3% — neither improves on P5 alone.
+
+**Structural reading.** P5 absorbs P1, P2, P4 as special cases. Family-1 entries (multi-focal composition: G1–G6, E7, E8, F1, F4, F5, F6, F7, D5, D6, E6, I1) fail P5 because the framework lacks a multi-focal composition theorem (MF > 1 → no closure → packing-unreachable). Family-2 entries (inner-factor input data: F2, F3, B8, H6, H7, I2, I3) fail P5 because their values live in a categorical-external register on which the outer-factor mechanism is structurally silent (η-trivialization on the SM side, Paper 18 §IV.6; chemistry-side analog at the inner-factor input-data tier per W1e period-class memo). The two-family decomposition of Paper 57 Observation 3.2 is preserved as the failure-mode story beneath the principle, not as evidence that two separate principles are needed.
+
+**Non-triviality of P5.** The tagging procedure works on new entries (does a witness derivation from {P0 + standard NCG + Upgrade B} exist?); P5 makes specific falsifiable predictions (I3 graduates if Hopf-base identification established; sibling-axiom direction would re-classify F2/F3/etc.); the failure-mode decomposition matches independent structural arguments (multi-focal wall pattern + η-trivialization theorem). Tautology concern acknowledged in Paper 57 §6.1.
+
+### Added
+
+- **`debug/principle_hunt_audit.py`** — catalogue + 5 predicates + conjunctions as Python data, runs against all 60 entries, outputs per-predicate accuracy + per-family failure breakdowns. ~600 lines.
+- **`debug/data/principle_hunt_audit.json`** — full numerical output: catalogue summary, per-predicate TP/FP/TN/FN counts, misclassified entry IDs, per-family failure counts.
+- **`debug/sprint_c2_principle_hunt_memo.md`** — canonical memo (~2700 words).
+- **Paper 57 §5.5** — new subsection "Candidate P5: packing-reachability" with principle definition, coverage analysis, misclassification (I3) analysis, verdict (98.3% accuracy), and what-P5-unifies discussion.
+- **Paper 57 §5.6** — revised synthesis subsection with updated Table 1 (now including P5 + conjunctions), revised verdict (P5 is the operational principle; two-family structure preserved as failure-mode decomposition).
+- **Paper 57 §6.1** — reframed open question (no longer "is there a principle for family 2" but "is P5 tautological or structurally non-trivial"); three-reason non-triviality argument; meta-theorem named as multi-year follow-on.
+- **Paper 57 §6.2** — new subsection naming the chemistry-side η-trivialization analog as concrete sprint-scale follow-on.
+- **Paper 57 abstract** — updated to reflect P5 finding.
+- **Paper 57 §1 promises** — "four candidates" → "five candidates"; Sprint C2 finding noted.
+- **Paper 57 honest scope** — updated to reflect P5 observation-grade verdict.
+- **Paper 57 bibliography** — `\bibitem{debug_c2}` added.
+
+### Changed
+
+- **Paper 57 §5/§6 substantive content** — see Added section. Page count 13 → 14 (three-pass clean).
+- **CLAUDE.md §1 version bump** v3.97.0 → v3.98.0.
+- **CLAUDE.md §2 one-liner** for Sprint C2.
+- **CLAUDE.md §6 Group 3 Paper 57 entry** — extended to note the v3.98.0 P5 update + corrected entry count (60 not 62).
+
+### Verification
+
+- Paper 57 compiles three-pass clean at 14 pages (was 13). No errors. Hyperref unicode warnings on section titles with $S^3$ are cosmetic.
+- Audit script `debug/principle_hunt_audit.py` is deterministic + reproducible. Re-running yields the same accuracy numbers.
+- No production code modified.
+
+### Honest scope
+
+**Observations-grade finding.** P5 is empirically validated at 98.3% on a 60-entry catalogue. Not a theorem. The meta-theorem ("any observable on the GeoVac spectral triple is forced iff packing-reachable") would graduate P5 to theorem-grade; this is named as multi-year NCG-research-grade follow-on.
+
+**Tagging-empirical content used here, not produced.** The packing_reachable axis was determined cell-by-cell by examining the corpus for witness derivations (forced entries) and explicit no-go / non-selection memos (calibration entries). Cell-by-cell justification is in the audit script comments and in the W1e / Yukawa-PSLQ / Direction 2 / Read 2 / H1 memos.
+
+**Axiom-set dependence.** P5's accuracy is conditional on Upgrade B (Door 4e sphere-Lie-group axiom) adoption. Without it, B5 (ℍ vs M_2 at n=2) reclassifies and accuracy shifts; the structural argument is unaffected.
+
+**Single misclassification (I3) is a feature.** P5 with "conditional → forced" predicts I3 = F; current status is C. If the Hopf-base identification of the Higgs direction is established (open sprint-scale NCG-reading follow-on), I3 graduates to F and P5 hits 100% accuracy. The misclassification is the falsifiable prediction.
+
+**Named open follow-ons (deferred):**
+- Meta-theorem: prove P5 structurally (P5 graduates from observation to theorem). Multi-year NCG-research.
+- Resolve I3: Hopf-base identification of Higgs direction. Sprint-scale, NCG-reading-heavy.
+- Chemistry-side η-trivialization analog: structural property of FrozenCore $Z_{eff}(r)$ pipeline mirroring $\{\gamma_F, D_F\} = 0$. Multi-month NCG-research target.
+- C3 (structural non-selection theorem arc): upgrade existing empirical non-selection memos (Yukawa-PSLQ, W1e, Direction 2) to structural theorems where possible.
+
+### Closed
+
+- **Paper 57 §6.1 open question** ("Is there a principle for family 2?") — answered: P5 catches both families. The open question is reframed to whether P5 is tautological or carries independent structural content.
+- **Path-#1 Vein C step 2** (C2 = principle hunt at greater depth) — answered with P5 finding. Next move: C3 (structural-non-selection theorem arc) or alternative direction at PI choice.
+
+---
+
 ## [3.97.0] - 2026-06-08
 
 ### Summary

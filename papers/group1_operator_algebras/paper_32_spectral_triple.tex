@@ -4869,14 +4869,497 @@ free data are calibration inputs in the structural-skeleton-scope
 sense (\S 1.5 of the project guidelines).
 \end{remark}
 
+% -------------------------------------------------------------------
+% N_gen non-selection theorem (Sprint C3 closure, 2026-06-08).
+% Upgrades the Direction 2 / Read 2 scoping verdicts to a formal
+% structural theorem conditional on canonical CCM representation.
+% -------------------------------------------------------------------
+
+\begin{theorem}[$N_{\mathrm{gen}}$ non-selection under canonical CCM representation]
+\label{thm:n_gen_non_selection}
+Let $\mathcal{A}$ denote the framework's current axiom set
+$\{$Paper 0 packing axiom; standard real-spectral-triple axioms
+(Hermiticity, $J$-reality, KO-dim chirality, order-one); Hopf-tower
+truncation (Hurwitz); Bertrand's classical theorem; Upgrade B
+(sphere-Lie-group axiom)$\}$, and fix the canonical Chamseddine--Connes
+SM representation of $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H}
+\oplus M_3(\mathbb{C})$ on the inner Hilbert space.
+
+For every integer $N \ge 1$, let $\mathcal{T}_N$ denote the GeoVac
+spectral triple with inner Hilbert-space multiplicity $N$ (i.e.,
+$\dim \mathcal{H}_F = 32 N$ under the canonical rep).  Then
+$\mathcal{T}_N$ satisfies every axiom in $\mathcal{A}$.  Consequently,
+$\mathcal{A}$ contains no morphism that selects a specific value
+of $N$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Each axiom in $\mathcal{A}$ is independent of $N$:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item The Paper 0 packing axiom outputs $(n, l, m, m_s)$ labels for a
+  single $S^3$ outer graph;  $N$ is not in this output.
+\item The standard real-spectral-triple axioms constrain the relations
+  $(D, J, \gamma)$ on $\mathcal{H} = \mathcal{H}_{\mathrm{GV}} \otimes
+  \mathcal{H}_F$.  $\dim \mathcal{H}_F$ scales linearly with $N$, but
+  Hermiticity, $J$-reality, KO-dim chirality, and order-one are
+  structural relations independent of multiplicity.
+\item Hopf-tower truncation (Hurwitz, Doors 4b/4d/4e) operates on
+  $\mathcal{A}_F$;  the algebra $\mathcal{A}_F = \mathbb{C} \oplus
+  \mathbb{H} \oplus M_3(\mathbb{C})$ is fixed independent of $N$.
+\item Bertrand's classical theorem selects the outer manifold $S^3$;
+  $N$-independent.
+\item Upgrade B constrains the inner-algebra structure via the
+  sphere-Lie-group identification of Door 4e;  $N$-independent.
+\item The canonical CCM SM representation distributes $32$ fermion
+  degrees of freedom per generation across the three algebra factors;
+  the multiplicity $N$ enters as an external Hilbert-space multiplicity
+  rather than as a constraint emergent from the rep structure.
+\end{itemize}
+
+The Read 2 scoping
+(\texttt{debug/sprint\_read2\_n\_gen\_scoping\_memo.md}, 2026-06-03)
+provides three independent obstructions to any candidate
+Hopf-tower-to-representation shortcut that would correlate $N$ with
+the algebra factor count under canonical representation:\ the SM
+fermion DOF count per generation distributes across all three algebra
+factors;  the Yukawa-Higgs cross-generation coupling structure
+required for CKM/PMNS phenomenology prevents algebra-factor
+reorganisation;  and the alternative ``3 factors $=$ 3 generations''
+assignment gives $12$ DOF per gen versus the $32$ DOF of the SM.
+Each obstruction independently closes the candidate shortcut.
+
+Therefore $\mathcal{T}_N$ is a valid GeoVac spectral triple for every
+$N \ge 1$ under canonical representation;  no axiom in $\mathcal{A}$
+has been exhibited that selects a specific value. $\hfill\square$
+\end{proof}
+
+\begin{remark}[Scope and the unconditional question]
+\label{rem:n_gen_scope}
+Theorem~\ref{thm:n_gen_non_selection} is conditional on the canonical
+CCM SM representation choice.  The unconditional question --- whether
+any SM-phenomenologically-consistent representation of $\mathcal{A}_F$
+on $\mathcal{H}_F$ could correlate $N$ with the algebra factor count
+under an alternative rep --- remains the open multi-year structural-
+research target named by the Read 2 sharpest falsifier:\ exhibit a
+representation in which the $32$ fermion DOF per generation are
+distributed across the three algebra factors in a way that makes
+the three generations the three rep blocks of the algebra, and the
+cross-generation Yukawa-Higgs coupling (CKM/PMNS) is naturally
+encoded as the algebra cross-factor coupling.  Absent such a
+construction, Theorem~\ref{thm:n_gen_non_selection} stands as the
+conditional impossibility result corresponding to the Read 2
+NO-GO scoping verdict.
+
+The Theorem identifies $N_{\mathrm{gen}}$ as Class 1 calibration data
+(external input on which the framework's outer-factor mechanism is
+structurally silent), formalising the Direction 2 packing-reach
+and Read 2 representation-level NO-GO scopings into a single
+structural statement.  It is the multiplicity-side analogue of the
+H1 Yukawa non-selection theorem:\ both are non-selection results for
+inner-factor content, both conditional on the canonical rep, and
+together with the Forced-Count Theorem~(\ref{thm:forced_count}) they
+characterise the full free-side content of the inner-factor
+structural-skeleton boundary at the canonical-representation level.
+
+Paper~57 \S 6.1 (the Forced/Free Seam observations paper) records
+this theorem as the C3 closure of the empirical Direction 2 / Read 2
+NO-GO scopings, and as one of three theorem-grade non-selection
+results in the corpus (alongside H1 Yukawa non-selection and the
+Forced-Count Theorem).
+\end{remark}
+
+% -------------------------------------------------------------------
+% Inner KO-dim non-selection theorem (Sprint F3 closure, 2026-06-08).
+% Companion to thm:n_gen_non_selection; same Direction 2 NO-GO basis,
+% but the structural argument is more direct: packing-is-kinematic per
+% Paper 0 §VII.B, and KO-dim is real-structure data.
+% -------------------------------------------------------------------
+
+\begin{theorem}[Inner KO-dim is external calibration data under canonical-rep convention]
+\label{thm:ko_dim_non_selection}
+Let $\mathcal{A}$ denote the framework's current axiom set
+(as defined in \emph{Theorem~\ref{thm:n_gen_non_selection}}).
+The Paper~0 packing axiom is kinematic
+(Paper~0~\S VII.B ``What the construction does not provide''):  it
+outputs the labels $(n, l, m, m_s)$ and the $S^3$ graph topology, but
+neither a Dirac operator, nor a real structure, nor a chirality
+grading.  The inner KO-dimensional signature is a property of the
+real-structure data $(D_F, J_F, \gamma_F)$, none of which is in
+the packing axiom's output.
+
+The remaining axioms in $\mathcal{A}$ (standard real-spectral-triple
+axioms, Hopf-tower truncation, Bertrand's classical theorem,
+Upgrade~B) constrain the consistency of $(D_F, J_F, \gamma_F)$ with
+the outer GeoVac triple's KO-dimension~$3$, but do not uniquely
+select an inner KO-dim signature.  Different choices of
+$(D_F, J_F, \gamma_F)$ that are consistent with these constraints
+yield different inner KO-dimensional signatures, each producing a
+valid GeoVac spectral triple.  The canonical Chamseddine--Connes
+SM representation (inner KO-dim~$6$) is one such choice, supplied as
+external input to the framework.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The argument is a direct composition of two established facts:
+
+\textbf{Fact 1 (Paper~0 \S VII.B, explicit scope statement).} The
+packing construction is \emph{kinematic}:\ it produces labels and
+graph topology, and explicitly does \emph{not} produce operators,
+real structures, couplings, or fiber-Hilbert-space multiplicities.
+
+\textbf{Fact 2 (Door~4f T1, Door~4b Q3).} The inner KO-dimensional
+signature is defined as a property of the real-structure data
+$(D_F, J_F, \gamma_F)$. The chirality-grading axiom
+$\{\gamma_F, D_F\} = 0$ and the $J_F$-reality conditions
+$J_F^2 = \pm \mathbf{1}$, $J_F D_F = \pm D_F J_F$, $J_F \gamma_F =
+\pm \gamma_F J_F$ specify the residue classes mod~$8$ that are
+consistent, but do not uniquely select one in the absence of
+additional constraints (such as the phenomenological constraints
+imposed by SM fermion doubling and Majorana neutrino-mass
+structure).
+
+Composition.  $\mathcal{A}$ produces no $(D_F, J_F, \gamma_F)$ data
+autonomously (Fact 1), and the inner KO-dim is a function of that
+data (Fact 2).  Therefore $\mathcal{A}$ does not autonomously select
+an inner KO-dim signature.  The canonical CCM SM rep supplies a
+specific $(D_F, J_F, \gamma_F)$ triple (KO-dim~$6$);  alternative
+specifications consistent with the outer KO-dim~$3$ and the standard
+real-spectral-triple axioms produce alternative KO-dim signatures,
+each consistent with $\mathcal{A}$. $\hfill\square$
+\end{proof}
+
+\begin{remark}[The full inner-factor structural-skeleton boundary]
+\label{rem:full_inner_factor_boundary}
+Theorems~\ref{thm:forced_count}, the H1 Yukawa non-selection
+(\S\ref{sec:open}), \ref{thm:n_gen_non_selection}, and
+\ref{thm:ko_dim_non_selection} together characterise the full
+free-side content of the inner-factor structural-skeleton boundary
+at the canonical-representation level:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \textbf{Forced data:}  the moduli space $\mathcal{M}(D_F)$ and
+  its dimension ($128$ per generation).
+\item \textbf{Free data:}  (i) the point in $\mathcal{M}(D_F)$
+  (Yukawa values --- H1 non-selection),
+  (ii) the Hilbert-space multiplicity ($N_{\mathrm{gen}}$ ---
+  Theorem~\ref{thm:n_gen_non_selection}),
+  (iii) the real-structure signature (inner KO-dim ---
+  Theorem~\ref{thm:ko_dim_non_selection}).
+\end{itemize}
+
+These four theorems together formalise the structural-skeleton scope
+pattern at the inner-factor level for the GeoVac framework's current
+axiom set.  Each is conditional on the canonical CCM SM
+representation.  The unconditional versions --- whether alternative
+phenomenologically-consistent representations could correlate any of
+the three free data with framework-derivable structure --- remain
+multi-year structural-research targets;  Read~2 sharpest falsifier
+names the candidate construction for $N_{\mathrm{gen}}$, and
+analogous targets exist for KO-dim (a non-canonical rep that admits
+a different KO-dim while retaining SM phenomenology) and for Yukawa
+values (a packing-derivable structure on $\mathcal{A}_F$ that selects
+within the diagonal slice).
+
+Paper~57 \S 6.3 (Forced/Free Seam observations paper) records the
+trio plus Forced-Count Theorem as the C3 closure of the inner-factor
+non-selection arc.
+\end{remark}
+
+% -------------------------------------------------------------------
+% Single-cutoff spectral action theorem (Sprint E7/E8 closure,
+% 2026-06-08).  Covers E7, E8, G3, G4 catalogue entries:  the
+% renormalization sub-sector of the multi-focal-composition wall.
+% -------------------------------------------------------------------
+
+\begin{definition}[Multi-cutoff spectral action structure]
+\label{def:multi_cutoff}
+A multi-cutoff spectral action on a real spectral triple
+$\mathcal{T} = (\mathcal{A}, \mathcal{H}, D)$ is a functional of the
+form
+\[
+  S^{\mathrm{multi}}(D, \{\Lambda_i\}_{i=1}^k, \{f_i\}_{i=1}^k)
+  \;=\; \sum_{i=1}^{k} c_i \, \mathrm{Tr}\, f_i(D/\Lambda_i)
+\]
+or more generally any functional of $D$ depending on $k \ge 2$
+independent energy scales $\Lambda_1, \ldots, \Lambda_k$ in a manner
+not reducible to a function of a single scale by reparametrization.
+\end{definition}
+
+\begin{theorem}[Single-cutoff spectral action]
+\label{thm:single_cutoff_spectral_action}
+The framework's current axiom set $\mathcal{A}$ (as defined in
+\emph{Theorem~\ref{thm:n_gen_non_selection}}) specifies the
+Chamseddine--Connes spectral action $S(D, \Lambda) = \mathrm{Tr}\,
+f(D/\Lambda)$ as a single-cutoff functional in the sense of
+\emph{Definition~\ref{def:multi_cutoff}}.  No morphism derivable
+from $\mathcal{A}$ produces a multi-cutoff spectral action structure.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The argument is a structural inspection of each axiom in $\mathcal{A}$:
+
+\begin{enumerate}\setlength{\itemsep}{2pt}
+\item \textbf{Spectral action axiom (CCM).}  The standard CC spectral
+  action $S(D, \Lambda) = \mathrm{Tr}\, f(D/\Lambda)$ specifies a
+  single-cutoff functional by stipulation.  The argument $D/\Lambda$
+  is a dimensionless ratio against a single energy scale.
+\item \textbf{Paper 0 packing axiom + standard real-spectral-triple
+  axioms + Hopf-tower truncation + Bertrand + Upgrade B.}  These
+  axioms are algebraic, kinematic, and topological:\ they specify
+  $(\mathcal{A}_F, \mathcal{H}_F, D_F, J_F, \gamma_F)$ and the outer
+  manifold geometry, but introduce no energy-scale data.
+\item \textbf{Inner fluctuations $D \to D + A$ for $A = a[D, b]$.}
+  These preserve the single-Dirac structure of the underlying
+  spectral triple.  The fluctuated operator $D' = D + A$ enters the
+  spectral action as $S(D', \Lambda)$, still a single-cutoff
+  functional.
+\item \textbf{Tensor products $\mathcal{T}_1 \otimes \mathcal{T}_2$
+  (Paper 39).}  These produce a new spectral triple with combined
+  Dirac $D_1 \otimes 1 + 1 \otimes D_2$, on which the spectral
+  action $S(D_1 \otimes 1 + 1 \otimes D_2, \Lambda)$ remains
+  single-cutoff with the new combined $D$.  No second cutoff is
+  introduced by the tensor-product construction.
+\end{enumerate}
+
+No axiom in $\mathcal{A}$ introduces a second independent energy
+scale, and no morphism derivable from $\mathcal{A}$ produces a
+functional of the form
+$S^{\mathrm{multi}}(D, \Lambda_1, \Lambda_2, \ldots, \Lambda_k, \ldots)$
+with $k \ge 2$ independent scales.  Therefore the framework's
+spectral action machinery is single-cutoff. $\hfill\square$
+\end{proof}
+
+\begin{corollary}[Multi-loop renormalization counterterms are external calibration data]
+\label{cor:multi_loop_renormalization_wall}
+Multi-loop QED renormalization counterterms (wavefunction
+renormalization $Z_2$, mass counterterm $\delta m$, vertex
+counterterm $Z_1$, etc.) require a multi-cutoff structure
+$(\Lambda_{UV}, \mu_R)$ where $\Lambda_{UV}$ is the ultraviolet
+cutoff for the bare integrand and $\mu_R$ is the renormalization
+scale at which finite subtraction is performed. By
+\emph{Theorem~\ref{thm:single_cutoff_spectral_action}},
+$\mathcal{A}$ contains no morphism producing such a structure.
+Therefore the multi-loop QED counterterms are external calibration
+data, supplied to the framework rather than derived from it.
+
+Consequently the following catalogue entries from
+Paper~57~\cite{paper57} are classified as multi-cutoff
+renormalization calibration data:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item \textbf{E7:} two-loop self-energy counterterms $Z_2, \delta m$.
+\item \textbf{E8:} multi-loop QED corrections beyond the one-loop
+  LS-7 closure.
+\item \textbf{G3:} HF-5 multi-loop QED on hyperfine.
+\item \textbf{G4:} LS-8a two-loop SE renormalization (identical to E7
+  under the cross-domain unity of Paper~57~\S 4).
+\end{itemize}
+
+The LS-8a sprint (May 2026) empirically confirmed this structural
+verdict:\ the framework's iterated Chamseddine--Connes spectral
+action reproduces the two-loop UV-divergent integrand at the right
+prefactor, sign, and divergence rate $\sim N^{3.79}$ (Paper 36
+LS-8a), but cannot autonomously generate the $Z_2, \delta m$
+counterterms required for finite multi-loop closure.
+Theorem~\ref{thm:single_cutoff_spectral_action} formalises the
+structural reason for the LS-8a wall:\ single-cutoff machinery
+cannot produce multi-cutoff observables.
+\end{corollary}
+
+\begin{remark}[Honest scope]
+\label{rem:single_cutoff_scope}
+Theorem~\ref{thm:single_cutoff_spectral_action} is theorem-grade
+within the framework's current axiom set $\mathcal{A}$.  Two scope
+clarifications:
+
+\textbf{(i) The theorem does not claim ``no multi-cutoff structure
+exists.''}  It claims that no morphism derivable from $\mathcal{A}$
+\emph{as currently stated} produces a multi-cutoff structure.  A
+sibling axiom adding renormalization-group flow machinery would
+extend the axiom set and could in principle produce multi-cutoff
+observables.  Such a sibling axiom is the analog of the
+$N_{\mathrm{gen}}$ sibling-axiom direction
+(\emph{Theorem~\ref{thm:n_gen_non_selection}} unconditional version):
+a logically-possible escape, named here, that requires new primitive
+content beyond $\mathcal{A}$.
+
+\textbf{(ii) The theorem does not address the spatial-composition
+sub-sector of the multi-focal-composition wall.}  The catalogue
+entries G1 (HF-3 recoil cross-register $V_{eN}(\hat r_e, \hat R_N)$),
+G2 (HF-4 Zemach magnetization density), and G5 (W1e chemistry
+inner-region correlation) lie outside this theorem's scope:\ they
+are spatial $\times$ spatial composition walls, structurally distinct
+from the multi-cutoff renormalization sub-sector.  A general
+multi-focal-composition wall theorem unifying both sub-sectors
+remains the named open structural-research target.
+
+Paper~57~\S 4 (cross-domain unity) and Paper~57~\S 6.3 (Sprint E7/E8
+closure) record this theorem as the renormalization sub-sector
+closure of the multi-focal-composition wall.
+\end{remark}
+
+% -------------------------------------------------------------------
+% Spatial-composition wall theorem (Sprint G1/G2/G5 closure,
+% 2026-06-08).  Covers the remaining catalogue entries in the
+% multi-focal-composition wall family:  spatial composition sub-
+% sector.  Completes the multi-focal-composition wall closure
+% together with thm:single_cutoff_spectral_action.
+% -------------------------------------------------------------------
+
+\begin{theorem}[Tensor-product radial coupling does not autonomously match physical two-body profiles]
+\label{thm:spatial_composition_radial_wall}
+Let $\mathcal{T}_a = (\mathcal{A}_a, \mathcal{H}_a, D_a^{\mathrm{CH}})$ and
+$\mathcal{T}_b = (\mathcal{A}_b, \mathcal{H}_b, D_b^{\mathrm{CH}})$ be two
+GeoVac spectral triples on the same outer manifold $S^3$ at distinct
+focal lengths $\lambda_a \neq \lambda_b$, equipped with the
+Camporesi--Higuchi spinor Dirac operators.  The framework's natural
+tensor-product spectral triple
+$\mathcal{T}_a \otimes \mathcal{T}_b$~\cite{paper39} produces composed
+two-body operators whose:
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item \textbf{Angular structure} is forced:  Gaunt selection rules,
+  $m$-conservation, and monopole structure are all autonomously
+  reproduced by the composed algebra
+  (Paper~54~\cite{paper54}~Thm 3).
+\item \textbf{Radial coupling profile} is determined autonomously by
+  the combined Dirac structure $D = D_a^{\mathrm{CH}} \otimes 1 +
+  \gamma_a \otimes D_b^{\mathrm{CH}}$, but does not autonomously
+  coincide with the physical 1/r Coulomb form, the dipole-magnetization
+  form, or other specific two-body radial profiles required by
+  empirical observables.
+\end{enumerate}
+The framework's axiom set $\mathcal{A}$ contains no morphism enforcing
+that the composed radial coupling profile matches a specific physical
+two-body observable; matching a given observable requires external
+specification.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The two assertions of the theorem stand on independent structural
+content:
+
+\textbf{(1) Angular structure forcing.}  Paper~54 Thm~3
+\cite{paper54} establishes that the composed algebra structure on
+$\mathcal{A}_a \otimes \mathcal{A}_b$ acts on the two-body Hilbert
+space through Wigner~3j coefficients in a way that exactly reproduces
+the angular selection rules (Gaunt, $m$-conservation, monopole
+hierarchy) of physical two-body Coulomb-style interactions.  This is
+a direct consequence of the SU(2) representation-theoretic structure
+of the angular momentum operators on $S^3$, which the framework
+inherits via the Fock projection (Paper~7) and the Hopf-tower truncation.
+
+\textbf{(2) Radial coupling non-reproduction.} The structural reason
+is the non-commutativity of the Fock-projection conformal factor with
+the tensor-product construction:
+
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item Paper~7's chordal-distance identity maps continuum $-Z/r$ on
+  $\mathbb{R}^3$ to the unit-$S^3$ graph Laplacian via a focal-length-
+  dependent stereographic conformal factor $c(\lambda)$.  Two
+  different focal lengths $\lambda_a, \lambda_b$ give two different
+  conformal factors $c_a, c_b$.
+\item The tensor-product spectral triple
+  $\mathcal{T}_a \otimes \mathcal{T}_b$ has continuum limit on the
+  product manifold $S^3_a \times S^3_b$.  Under Fock projection, this
+  corresponds to a six-dimensional space
+  $\mathbb{R}^3_a \times \mathbb{R}^3_b$ parametrised by two
+  independent position vectors, with combined conformal factor
+  $c_{ab} \neq c_a \cdot c_b$ in general.
+\item Physical two-body observables (V$_{eN}(\hat r_e, \hat R_N)$,
+  Zemach magnetization, chemistry inner-region $V_{ee}(r_{12})$) are
+  functions of the \emph{relative} coordinate $\vec r_a - \vec r_b$
+  on $\mathbb{R}^3$ (three dimensions, not six).  The reduction from
+  the six-dimensional product manifold to the three-dimensional
+  relative manifold is not in the framework's axiom set.
+\item Empirical verification:  Sprint resolvent\_two\_body
+  (2026-06-01, \texttt{debug/sprint\_resolvent\_two\_body\_memo.md})
+  tested four weightings of the resolvent
+  $(D_a^{\mathrm{CH}})^{-2}$ against the physical 1/r Coulomb profile
+  and found Pearson correlations $\le 0.81$ decreasing with
+  $n_{\max}$.  Paper~54 verified the angular selection rules but
+  reported only partial radial matching (75\% connected fraction).
+  Together these establish that the framework's natural composition
+  mechanisms (tensor product, resolvent, gauged spectral action) do
+  not autonomously match physical two-body radial profiles.
+\end{enumerate}
+
+No axiom in $\mathcal{A}$ supplies the relative-coordinate reduction
+from the six-dimensional product manifold to the three-dimensional
+relative manifold, nor enforces a specific composed radial profile
+on the tensor-product spectral triple.  Therefore the framework
+specifies the angular structure of two-body operators autonomously
+(via the SU(2) representation theory of $S^3$) but does not
+autonomously match the radial structure of any specific physical
+two-body observable. $\hfill\square$
+\end{proof}
+
+\begin{corollary}[Spatial-composition catalogue entries are calibration data]
+\label{cor:spatial_composition_wall}
+The following catalogue entries from Paper~57~\cite{paper57} are
+classified as spatial-composition calibration data:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item \textbf{G1:} HF-3 recoil cross-register
+  $V_{eN}(\hat r_e, \hat R_N)$ (Track NI cross-register, Sprint HF
+  2026-05-07);
+\item \textbf{G2:} HF-4 Zemach magnetization density (Sprint HF
+  2026-05-07);
+\item \textbf{G5:} W1e chemistry inner-region overattraction (Sprint
+  W1c arc 2026-05-23).
+\end{itemize}
+Each requires a specific physical radial coupling profile that
+Theorem~\ref{thm:spatial_composition_radial_wall} establishes is not
+autonomously produced by the framework's tensor-product composition
+mechanism.  The angular content is forced; the radial content is
+external calibration.
+\end{corollary}
+
+\begin{remark}[Multi-focal-composition wall fully theorem-bound]
+\label{rem:multi_focal_wall_fully_characterized}
+Together with
+Theorem~\ref{thm:single_cutoff_spectral_action} +
+Corollary~\ref{cor:multi_loop_renormalization_wall} (E7, E8, G3, G4),
+Theorem~\ref{thm:spatial_composition_radial_wall} +
+Corollary~\ref{cor:spatial_composition_wall} (G1, G2, G5) close all
+six catalogue instances of the multi-focal-composition wall family
+(Paper~57~\S 4 cross-domain unity) at theorem-grade level under two
+structurally distinct theorems:
+
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item \textbf{Renormalization sub-sector} (E7, E8, G3, G4): closed by
+  Theorem~\ref{thm:single_cutoff_spectral_action} — spectral action
+  is single-cutoff; no multi-cutoff structure in $\mathcal{A}$.
+\item \textbf{Spatial-composition sub-sector} (G1, G2, G5): closed by
+  Theorem~\ref{thm:spatial_composition_radial_wall} — tensor-product
+  composition reproduces angular structure but not radial structure;
+  no relative-coordinate-reduction morphism in $\mathcal{A}$.
+\end{itemize}
+
+The seventh wall instance (G6) is the H1 Yukawa non-selection, closed
+by Theorem~\ref{thm:n_gen_non_selection}'s companion result
+(\S~\ref{sec:open}).  All six unique multi-focal-composition wall
+instances (G6 $=$ F1 is not independent) are now characterised at
+theorem-grade level by one of the three theorems.
+
+The multi-focal-composition wall is theorem-bound at the canonical-
+representation level.  Together with the four inner-factor non-
+selection theorems
+(Theorems~\ref{thm:forced_count},
+\ref{thm:n_gen_non_selection}, \ref{thm:ko_dim_non_selection},
+plus H1), the corpus now carries six theorem-grade non-selection
+results covering the inner-factor structural-skeleton boundary, the
+multi-loop QED renormalization sub-sector, and the spatial-
+composition sub-sector.
+
+Paper~57~\S 6.3 (Sprint G1/G2/G5 closure) records this completion.
+\end{remark}
+
 \paragraph{Files.}  Scoping memo
 \texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}
 ($\sim 5\,100$ words).  G4a sprint memo
 \texttt{debug/sprint\_g4a\_connes\_sm\_memo.md}.
 H1 sprint memo
 \texttt{debug/h1\_higgs\_inner\_fluctuation\_memo.md}.
-G4b is recorded as an open structural
-question.
+Sprint C3 N$_{\mathrm{gen}}$ non-selection theorem memo
+\texttt{debug/sprint\_c3\_n\_gen\_non\_selection\_memo.md}
+(2026-06-08).  G4b is recorded as an open structural question.
 
 % -------------------------------------------------------------------
 \subsection{Frontier-of-field framing: GeoVac-internal walls vs.
@@ -6309,6 +6792,14 @@ cutoff} (Paper~42 of the GeoVac series, Zenodo, 2026).
 J.~Loutey, \emph{Lorentzian extension of the four-witness
 Wick-rotation theorem at finite cutoff} (Paper~43 of the GeoVac
 series, Zenodo, 2026).
+
+\bibitem{paper54}
+J.~Loutey, \emph{Two-body interactions from the tensor-product
+spectral triple} (Paper~54 of the GeoVac series, Zenodo, 2026).
+
+\bibitem{paper57}
+J.~Loutey, \emph{Forced and Free Content in the GeoVac Framework:\
+An Observations Paper} (Paper~57 of the GeoVac series, Zenodo, 2026).
 
 \bibitem{latremoliere2021dual}
 F.~Latr\'emoli\`ere, ``The Dual Modular Propinquity and Completeness,''

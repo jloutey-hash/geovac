@@ -1,0 +1,1207 @@
+{
+  "catalogue_summary": {
+    "total": 60,
+    "by_status": {
+      "F": 35,
+      "A": 1,
+      "C": 24
+    },
+    "by_family": {
+      "none": 35,
+      "admitted_only": 1,
+      "inner_factor_input_data": 7,
+      "multi_focal_composition": 17
+    },
+    "by_packing_reachable": {
+      "yes": 35,
+      "conditional": 2,
+      "no": 23
+    }
+  },
+  "predicate_results": {
+    "P1_multifocal_depth": {
+      "predicate": "P1_multifocal_depth",
+      "n": 60,
+      "tp": 35,
+      "fp": 7,
+      "tn": 17,
+      "fn": 1,
+      "accuracy": 0.8666666666666667,
+      "misclassification_count": 8,
+      "misclassified_entries": [
+        {
+          "id": "B8",
+          "name": "Gauge lower-bound forcing (saturated)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Bertrand x Hopf gives upper bound only"
+        },
+        {
+          "id": "C9",
+          "name": "S_min irreducible 200+ dps",
+          "predicted": "C",
+          "actual": "F",
+          "family": "none",
+          "reason": "NOT in {1,pi^2,pi^4,G,beta(4),zeta(3),zeta(5)}; derivable from Paper 0 but lives outside Mellin engine"
+        },
+        {
+          "id": "F2",
+          "name": "Generation count N_gen = 3",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 + Read 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "F3",
+          "name": "Inner KO-dim signature",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "H6",
+          "name": "Clementi-Raimondi Z_eff exponents",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "external atomic-physics fits; W1e period-class memo"
+        },
+        {
+          "id": "H7",
+          "name": "Multi-zeta coefficients in second-row valence basis",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "inherits H6"
+        },
+        {
+          "id": "I2",
+          "name": "Born rule p = |<a|psi>|^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Gleason via Hilbert inheritance; framework does not improve on Gleason"
+        },
+        {
+          "id": "I3",
+          "name": "Higgs direction n_hat in S^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+        }
+      ],
+      "per_family_failures": {
+        "none": 1,
+        "multi_focal_composition": 0,
+        "inner_factor_input_data": 7,
+        "admitted_only": 0
+      }
+    },
+    "P2_period_classifiable": {
+      "predicate": "P2_period_classifiable",
+      "n": 60,
+      "tp": 35,
+      "fp": 7,
+      "tn": 17,
+      "fn": 1,
+      "accuracy": 0.8666666666666667,
+      "misclassification_count": 8,
+      "misclassified_entries": [
+        {
+          "id": "B8",
+          "name": "Gauge lower-bound forcing (saturated)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Bertrand x Hopf gives upper bound only"
+        },
+        {
+          "id": "C9",
+          "name": "S_min irreducible 200+ dps",
+          "predicted": "C",
+          "actual": "F",
+          "family": "none",
+          "reason": "NOT in {1,pi^2,pi^4,G,beta(4),zeta(3),zeta(5)}; derivable from Paper 0 but lives outside Mellin engine"
+        },
+        {
+          "id": "E6",
+          "name": "Combination rule K = pi(B + F - Delta) for alpha^-1",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; conjectural per 13.5"
+        },
+        {
+          "id": "F2",
+          "name": "Generation count N_gen = 3",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 + Read 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "F3",
+          "name": "Inner KO-dim signature",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "I1",
+          "name": "Fine-structure constant alpha (value)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "inherits E6 (combination rule conjectural)"
+        },
+        {
+          "id": "I2",
+          "name": "Born rule p = |<a|psi>|^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Gleason via Hilbert inheritance; framework does not improve on Gleason"
+        },
+        {
+          "id": "I3",
+          "name": "Higgs direction n_hat in S^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+        }
+      ],
+      "per_family_failures": {
+        "none": 1,
+        "multi_focal_composition": 2,
+        "inner_factor_input_data": 5,
+        "admitted_only": 0
+      }
+    },
+    "P3_dimensional": {
+      "predicate": "P3_dimensional",
+      "n": 60,
+      "tp": 34,
+      "fp": 12,
+      "tn": 12,
+      "fn": 2,
+      "accuracy": 0.7666666666666667,
+      "misclassification_count": 14,
+      "misclassified_entries": [
+        {
+          "id": "A5",
+          "name": "Discreteness <-> compactness",
+          "predicted": "C",
+          "actual": "F",
+          "family": "none",
+          "reason": "Peter-Weyl organizing observation"
+        },
+        {
+          "id": "B8",
+          "name": "Gauge lower-bound forcing (saturated)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Bertrand x Hopf gives upper bound only"
+        },
+        {
+          "id": "D2",
+          "name": "S_BH = A Lambda^2/(12 pi); G_N = 3 pi/Lambda^2",
+          "predicted": "C",
+          "actual": "F",
+          "family": "none",
+          "reason": "Paper 51 G4 closed form (dimensionful via external Lambda)"
+        },
+        {
+          "id": "E6",
+          "name": "Combination rule K = pi(B + F - Delta) for alpha^-1",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; conjectural per 13.5"
+        },
+        {
+          "id": "F1",
+          "name": "Yukawa values (9 charged-lepton + quark)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "Sprint H1 non-selection + 162-cell Yukawa-PSLQ clean negative"
+        },
+        {
+          "id": "F2",
+          "name": "Generation count N_gen = 3",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 + Read 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "F3",
+          "name": "Inner KO-dim signature",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "F5",
+          "name": "CKM mixing angles",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "Boyle-Farnsworth gives shape not values"
+        },
+        {
+          "id": "F6",
+          "name": "PMNS mixing angles",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "same as F5"
+        },
+        {
+          "id": "G6",
+          "name": "H1 Yukawa non-selection (= F1)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "multi-focal wall instance 6"
+        },
+        {
+          "id": "H6",
+          "name": "Clementi-Raimondi Z_eff exponents",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "external atomic-physics fits; W1e period-class memo"
+        },
+        {
+          "id": "H7",
+          "name": "Multi-zeta coefficients in second-row valence basis",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "inherits H6"
+        },
+        {
+          "id": "I1",
+          "name": "Fine-structure constant alpha (value)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "multi_focal_composition",
+          "reason": "inherits E6 (combination rule conjectural)"
+        },
+        {
+          "id": "I3",
+          "name": "Higgs direction n_hat in S^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+        }
+      ],
+      "per_family_failures": {
+        "none": 2,
+        "multi_focal_composition": 6,
+        "inner_factor_input_data": 6,
+        "admitted_only": 0
+      }
+    },
+    "P4_compactness": {
+      "predicate": "P4_compactness",
+      "n": 60,
+      "tp": 35,
+      "fp": 1,
+      "tn": 23,
+      "fn": 1,
+      "accuracy": 0.9666666666666667,
+      "misclassification_count": 2,
+      "misclassified_entries": [
+        {
+          "id": "C9",
+          "name": "S_min irreducible 200+ dps",
+          "predicted": "C",
+          "actual": "F",
+          "family": "none",
+          "reason": "NOT in {1,pi^2,pi^4,G,beta(4),zeta(3),zeta(5)}; derivable from Paper 0 but lives outside Mellin engine"
+        },
+        {
+          "id": "I3",
+          "name": "Higgs direction n_hat in S^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+        }
+      ],
+      "per_family_failures": {
+        "none": 1,
+        "multi_focal_composition": 0,
+        "inner_factor_input_data": 1,
+        "admitted_only": 0
+      }
+    },
+    "P5_packing_reachable": {
+      "predicate": "P5_packing_reachable",
+      "n": 60,
+      "tp": 36,
+      "fp": 1,
+      "tn": 23,
+      "fn": 0,
+      "accuracy": 0.9833333333333333,
+      "misclassification_count": 1,
+      "misclassified_entries": [
+        {
+          "id": "I3",
+          "name": "Higgs direction n_hat in S^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+        }
+      ],
+      "per_family_failures": {
+        "none": 0,
+        "multi_focal_composition": 0,
+        "inner_factor_input_data": 1,
+        "admitted_only": 0
+      }
+    },
+    "P1_and_P5": {
+      "predicate": "P1_and_P5",
+      "n": 60,
+      "tp": 35,
+      "fp": 1,
+      "tn": 23,
+      "fn": 1,
+      "accuracy": 0.9666666666666667,
+      "misclassification_count": 2,
+      "misclassified_entries": [
+        {
+          "id": "C9",
+          "name": "S_min irreducible 200+ dps",
+          "predicted": "C",
+          "actual": "F",
+          "family": "none",
+          "reason": "NOT in {1,pi^2,pi^4,G,beta(4),zeta(3),zeta(5)}; derivable from Paper 0 but lives outside Mellin engine"
+        },
+        {
+          "id": "I3",
+          "name": "Higgs direction n_hat in S^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+        }
+      ],
+      "per_family_failures": {
+        "none": 1,
+        "multi_focal_composition": 0,
+        "inner_factor_input_data": 1,
+        "admitted_only": 0
+      }
+    },
+    "P1_or_P5": {
+      "predicate": "P1_or_P5",
+      "n": 60,
+      "tp": 36,
+      "fp": 7,
+      "tn": 17,
+      "fn": 0,
+      "accuracy": 0.8833333333333333,
+      "misclassification_count": 7,
+      "misclassified_entries": [
+        {
+          "id": "B8",
+          "name": "Gauge lower-bound forcing (saturated)",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Bertrand x Hopf gives upper bound only"
+        },
+        {
+          "id": "F2",
+          "name": "Generation count N_gen = 3",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 + Read 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "F3",
+          "name": "Inner KO-dim signature",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Direction 2 NO-GO (packing-unreachable)"
+        },
+        {
+          "id": "H6",
+          "name": "Clementi-Raimondi Z_eff exponents",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "external atomic-physics fits; W1e period-class memo"
+        },
+        {
+          "id": "H7",
+          "name": "Multi-zeta coefficients in second-row valence basis",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "inherits H6"
+        },
+        {
+          "id": "I2",
+          "name": "Born rule p = |<a|psi>|^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Gleason via Hilbert inheritance; framework does not improve on Gleason"
+        },
+        {
+          "id": "I3",
+          "name": "Higgs direction n_hat in S^2",
+          "predicted": "F",
+          "actual": "C",
+          "family": "inner_factor_input_data",
+          "reason": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+        }
+      ],
+      "per_family_failures": {
+        "none": 0,
+        "multi_focal_composition": 0,
+        "inner_factor_input_data": 7,
+        "admitted_only": 0
+      }
+    }
+  },
+  "entries": [
+    {
+      "id": "A1",
+      "name": "Graph Laplacian spectrum n^2-1",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "skeleton",
+      "note": "direct from packing axiom"
+    },
+    {
+      "id": "A2",
+      "name": "S^3 as forced outer manifold",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "skeleton",
+      "note": "Bertrand + SO(4) closure"
+    },
+    {
+      "id": "A3",
+      "name": "kappa = -1/16 universal kinetic scale",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "skeleton",
+      "note": "Fock projection exact rational"
+    },
+    {
+      "id": "A4",
+      "name": "Shell degeneracy g_n = n^2",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "skeleton",
+      "note": "representation theory"
+    },
+    {
+      "id": "A5",
+      "name": "Discreteness <-> compactness",
+      "status": "F",
+      "mf": 1,
+      "p": "N/A",
+      "dim": "N/A",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "skeleton",
+      "note": "Peter-Weyl organizing observation"
+    },
+    {
+      "id": "B1",
+      "name": "Gauge group U(1)xSU(2)xSU(3)",
+      "status": "F",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "gauge",
+      "note": "Bertrand x Hopf-tower n<=3 (Paper 32 VIII.B)"
+    },
+    {
+      "id": "B2",
+      "name": "Inner algebra factor count = 3",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "inner",
+      "note": "Hurwitz + Hopf-tower (Door 4b/4d)"
+    },
+    {
+      "id": "B3",
+      "name": "C factor at n=1",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "inner",
+      "note": "unique div algebra of S^1"
+    },
+    {
+      "id": "B4",
+      "name": "M_3(C) factor at n=3",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "inner",
+      "note": "Hurwitz fallback at S^5"
+    },
+    {
+      "id": "B5",
+      "name": "H vs M_2(C) at n=2",
+      "status": "A",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "conditional",
+      "family": "admitted_only",
+      "domain": "inner",
+      "note": "Door 4c NEGATIVE on J-sign-table; closed by Upgrade B (Door 4e)"
+    },
+    {
+      "id": "B6",
+      "name": "dim M(D_F) = 128 per generation",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "inner",
+      "note": "Forced-Count Theorem (Paper 32 VIII)"
+    },
+    {
+      "id": "B7",
+      "name": "Higgs admission (Mexican-hat allowed)",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "inner",
+      "note": "Sprint H1 POSITIVE-THIN"
+    },
+    {
+      "id": "B8",
+      "name": "Gauge lower-bound forcing (saturated)",
+      "status": "C",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "inner_factor_input_data",
+      "domain": "gauge",
+      "note": "Bertrand x Hopf gives upper bound only"
+    },
+    {
+      "id": "C1",
+      "name": "Master Mellin engine M[Tr(D^k e^{-tD^2})] k in {0,1,2}",
+      "status": "F",
+      "mf": 1,
+      "p": "meta",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "periods",
+      "note": "case-exhaustion theorem"
+    },
+    {
+      "id": "C2",
+      "name": "M1 prefactor Vol(S^2)/4 = pi",
+      "status": "F",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "periods",
+      "note": "Hopf-base measure signature"
+    },
+    {
+      "id": "C3",
+      "name": "Seeley-DeWitt a_0 = a_1 = sqrt(pi) on S^3",
+      "status": "F",
+      "mf": 1,
+      "p": "M2",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "periods",
+      "note": "Paper 28 T9 closed form"
+    },
+    {
+      "id": "C4",
+      "name": "zeta_{D^2}(s) = 2^{2s-1}[lambda(2s-2)-lambda(2s)]",
+      "status": "F",
+      "mf": 1,
+      "p": "M2",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "periods",
+      "note": "Paper 28 T9"
+    },
+    {
+      "id": "C5",
+      "name": "chi_{-4} identity D_even - D_odd = 2^{s-1}(beta(s)-beta(s-2))",
+      "status": "F",
+      "mf": 1,
+      "p": "M3",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "periods",
+      "note": "Paper 28 IV vertex-parity Hurwitz"
+    },
+    {
+      "id": "C6",
+      "name": "M3 subset MT(Z[i,1/2]) level <= 4",
+      "status": "F",
+      "mf": 1,
+      "p": "M3",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "periods",
+      "note": "Sprint Mixed-Tate; Paper 55"
+    },
+    {
+      "id": "C7",
+      "name": "Universal propinquity rate 4/pi",
+      "status": "F",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "oa",
+      "note": "WH1 PROVEN; Paper 38 + Paper 40 rank-invariant"
+    },
+    {
+      "id": "C8",
+      "name": "Pythagorean <H_local, D_W^L>_HS = 0",
+      "status": "F",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "oa",
+      "note": "Paper 43 10.2 bit-exact"
+    },
+    {
+      "id": "C9",
+      "name": "S_min irreducible 200+ dps",
+      "status": "F",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "periods",
+      "note": "NOT in {1,pi^2,pi^4,G,beta(4),zeta(3),zeta(5)}; derivable from Paper 0 but lives outside Mellin engine"
+    },
+    {
+      "id": "D1",
+      "name": "Spectral action two-term-exact on S^3",
+      "status": "F",
+      "mf": 1,
+      "p": "M2",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "gravity",
+      "note": "Bernoulli identity zeta_unit(-k)=0"
+    },
+    {
+      "id": "D2",
+      "name": "S_BH = A Lambda^2/(12 pi); G_N = 3 pi/Lambda^2",
+      "status": "F",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionful",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "gravity",
+      "note": "Paper 51 G4 closed form (dimensionful via external Lambda)"
+    },
+    {
+      "id": "D3",
+      "name": "Cone coefficient -1/12 (Sommerfeld-Cheeger)",
+      "status": "F",
+      "mf": 1,
+      "p": "M2",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "gravity",
+      "note": "Paper 51 G4-4c bit-exact"
+    },
+    {
+      "id": "D4",
+      "name": "Replica derivative d Delta_K/d alpha |_{alpha=1} = +1/6",
+      "status": "F",
+      "mf": 1,
+      "p": "M2",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "gravity",
+      "note": "Paper 51 G4-4f closed form"
+    },
+    {
+      "id": "D5",
+      "name": "Cutoff function f moments phi(0), phi(1), phi(2)",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "gravity",
+      "note": "no autonomous selection; CC fine-tuning phi(2)/phi(1)^2 ~ 10^-124 required"
+    },
+    {
+      "id": "D6",
+      "name": "Cosmological constant value Lambda_cc",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "gravity",
+      "note": "inherits D5"
+    },
+    {
+      "id": "D7",
+      "name": "Relations among G_N, Lambda_cc, S_BH (Wald)",
+      "status": "F",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "gravity",
+      "note": "two-term-exactness => pure Einstein => action-G = entropy-G"
+    },
+    {
+      "id": "E1",
+      "name": "Self-energy structural zero Sigma(n_ext=0) = 0",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "qed",
+      "note": "Paper 28 theorem"
+    },
+    {
+      "id": "E2",
+      "name": "Selection rules 8/8 (1+6+1 partition)",
+      "status": "F",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "qed",
+      "note": "Paper 33 vector-photon promotion"
+    },
+    {
+      "id": "E3",
+      "name": "F_2 = 5 sqrt(2)/3 graph-native (pi-free)",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "qed",
+      "note": "Paper 33 GN arc"
+    },
+    {
+      "id": "E4",
+      "name": "F_2/(alpha/2 pi) = 1.084 Parker-Toms (R/12)",
+      "status": "F",
+      "mf": 1,
+      "p": "M2",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "qed",
+      "note": "Paper 33 bit-exact 0.5% match"
+    },
+    {
+      "id": "E5",
+      "name": "B = 42, F = pi^2/6, Delta = 1/40 spectral homes",
+      "status": "F",
+      "mf": 1,
+      "p": "M1/M2/M2",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "alpha",
+      "note": "three independent spectral homes proven"
+    },
+    {
+      "id": "E6",
+      "name": "Combination rule K = pi(B + F - Delta) for alpha^-1",
+      "status": "C",
+      "mf": 2,
+      "p": "M1+M2",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "alpha",
+      "note": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; conjectural per 13.5"
+    },
+    {
+      "id": "E7",
+      "name": "Two-loop SE counterterms Z_2, delta m",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "qed",
+      "note": "LS-8a wall"
+    },
+    {
+      "id": "E8",
+      "name": "Multi-loop QED corrections beyond LS-7",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "qed",
+      "note": "HF-5 wall"
+    },
+    {
+      "id": "F1",
+      "name": "Yukawa values (9 charged-lepton + quark)",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "inner",
+      "note": "Sprint H1 non-selection + 162-cell Yukawa-PSLQ clean negative"
+    },
+    {
+      "id": "F2",
+      "name": "Generation count N_gen = 3",
+      "status": "C",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "inner_factor_input_data",
+      "domain": "inner",
+      "note": "Direction 2 + Read 2 NO-GO (packing-unreachable)"
+    },
+    {
+      "id": "F3",
+      "name": "Inner KO-dim signature",
+      "status": "C",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "inner_factor_input_data",
+      "domain": "inner",
+      "note": "Direction 2 NO-GO (packing-unreachable)"
+    },
+    {
+      "id": "F4",
+      "name": "Higgs VEV v",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "inner",
+      "note": "mass scale calibration input"
+    },
+    {
+      "id": "F5",
+      "name": "CKM mixing angles",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "inner",
+      "note": "Boyle-Farnsworth gives shape not values"
+    },
+    {
+      "id": "F6",
+      "name": "PMNS mixing angles",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "inner",
+      "note": "same as F5"
+    },
+    {
+      "id": "F7",
+      "name": "Neutrino mass values",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "inner",
+      "note": "inherits F1 + F4"
+    },
+    {
+      "id": "G1",
+      "name": "HF-3 recoil cross-register V_eN(r_e, R_n)",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "qed",
+      "note": "multi-focal wall pattern instance 1"
+    },
+    {
+      "id": "G2",
+      "name": "HF-4 Zemach magnetization density",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "qed",
+      "note": "multi-focal wall instance 2 (W1b extended)"
+    },
+    {
+      "id": "G3",
+      "name": "HF-5 multi-loop QED on hyperfine",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "qed",
+      "note": "multi-focal wall instance 3"
+    },
+    {
+      "id": "G4",
+      "name": "LS-8a two-loop SE renormalization (= E7)",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "qed",
+      "note": "multi-focal wall instance 4"
+    },
+    {
+      "id": "G5",
+      "name": "W1e chemistry inner-region overattraction",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionful",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "chemistry",
+      "note": "multi-focal wall instance 5; chemistry-side analog of H1"
+    },
+    {
+      "id": "G6",
+      "name": "H1 Yukawa non-selection (= F1)",
+      "status": "C",
+      "mf": 2,
+      "p": "outside",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "inner",
+      "note": "multi-focal wall instance 6"
+    },
+    {
+      "id": "H1",
+      "name": "Angular sparsity 1.44% depends only on l_max",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "chemistry",
+      "note": "Paper 22 potential-independent theorem"
+    },
+    {
+      "id": "H2",
+      "name": "N_Pauli = 11.10 x Q across 38 molecules",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "qc",
+      "note": "Paper 14 isostructural invariance"
+    },
+    {
+      "id": "H3",
+      "name": "Pauli ratio balanced/composed ~ O(B^2)",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "qc",
+      "note": "proven structural"
+    },
+    {
+      "id": "H4",
+      "name": "Nuclear magic numbers 2, 8, 20, 40, 70, 112",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "nuclear",
+      "note": "HO shell closures from graph counting; Paper 23"
+    },
+    {
+      "id": "H5",
+      "name": "Fock projection rigidity (S^3 unique to -Z/r)",
+      "status": "F",
+      "mf": 1,
+      "p": "none",
+      "dim": "dimensionless",
+      "packing_reachable": "yes",
+      "family": "none",
+      "domain": "nuclear",
+      "note": "Paper 23 NJ theorem"
+    },
+    {
+      "id": "H6",
+      "name": "Clementi-Raimondi Z_eff exponents",
+      "status": "C",
+      "mf": 1,
+      "p": "outside",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "inner_factor_input_data",
+      "domain": "chemistry",
+      "note": "external atomic-physics fits; W1e period-class memo"
+    },
+    {
+      "id": "H7",
+      "name": "Multi-zeta coefficients in second-row valence basis",
+      "status": "C",
+      "mf": 1,
+      "p": "outside",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "inner_factor_input_data",
+      "domain": "chemistry",
+      "note": "inherits H6"
+    },
+    {
+      "id": "I1",
+      "name": "Fine-structure constant alpha (value)",
+      "status": "C",
+      "mf": 2,
+      "p": "M1+M2",
+      "dim": "dimensionless",
+      "packing_reachable": "no",
+      "family": "multi_focal_composition",
+      "domain": "alpha",
+      "note": "inherits E6 (combination rule conjectural)"
+    },
+    {
+      "id": "I2",
+      "name": "Born rule p = |<a|psi>|^2",
+      "status": "C",
+      "mf": 1,
+      "p": "N/A",
+      "dim": "N/A",
+      "packing_reachable": "no",
+      "family": "inner_factor_input_data",
+      "domain": "foundational",
+      "note": "Gleason via Hilbert inheritance; framework does not improve on Gleason"
+    },
+    {
+      "id": "I3",
+      "name": "Higgs direction n_hat in S^2",
+      "status": "C",
+      "mf": 1,
+      "p": "M1",
+      "dim": "dimensionless",
+      "packing_reachable": "conditional",
+      "family": "inner_factor_input_data",
+      "domain": "inner",
+      "note": "Boyle-Farnsworth input; possible Hopf-base identification (flagged)"
+    }
+  ]
+}

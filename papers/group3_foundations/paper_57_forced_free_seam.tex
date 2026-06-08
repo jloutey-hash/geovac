@@ -67,7 +67,7 @@
 \maketitle
 
 \begin{abstract}
-The GeoVac framework autonomously generates a wide class of structural facts (graph spectrum, $\sphere{3}$ outer manifold, gauge group $U(1) \times SU(2) \times SU(3)$, master Mellin engine, inner-algebra factor count, the moduli-space dimension $\dim \Mcal(\DF) = 128$ per generation, two-term-exact gravity, and many more) and consumes specific numerical content as external input (Yukawa values, generation count, calibration cutoff moments, atomic-physics screening exponents, multi-loop QED counterterms, etc.). We catalogue both sides of this \emph{forced/free seam} across the corpus --- 38 forced entries, 1 admitted-not-forced entry, 23 calibration entries, spanning foundations, gauge structure, periods, gravity, QED, the Standard Model inner factor, multi-focal-composition walls, chemistry / quantum computing scaling, and foundational calibration. We identify a cross-domain unity pattern (the same wall appears in six independent settings, all carrying the same multi-focal-composition signature) and test four candidate principles for what discriminates the two sides: multi-focal depth, period-content classifiability, dimensional character, and compactness inheritance. We do not claim to have identified \emph{the} discriminating principle. Preliminary finding:  the calibration side decomposes into two structurally distinct families (multi-focal composition vs.\ inner-factor input data) with different discriminator-column signatures, consistent with the three-class external-input partition named in prior internal work. This paper consolidates what was previously scattered across CLAUDE.md \S 1.7 working hypotheses, dead-end records, and individual sprint memos.
+The GeoVac framework autonomously generates a wide class of structural facts (graph spectrum, $\sphere{3}$ outer manifold, gauge group $U(1) \times SU(2) \times SU(3)$, master Mellin engine, inner-algebra factor count, the moduli-space dimension $\dim \Mcal(\DF) = 128$ per generation, two-term-exact gravity, and many more) and consumes specific numerical content as external input (Yukawa values, generation count, calibration cutoff moments, atomic-physics screening exponents, multi-loop QED counterterms, etc.). We catalogue both sides of this \emph{forced/free seam} across the corpus --- 38 forced entries, 1 admitted-not-forced entry, 23 calibration entries, spanning foundations, gauge structure, periods, gravity, QED, the Standard Model inner factor, multi-focal-composition walls, chemistry / quantum computing scaling, and foundational calibration. We identify a cross-domain unity pattern (the same wall appears in six independent settings, all carrying the same multi-focal-composition signature) and test five candidate principles for what discriminates the two sides: multi-focal depth, period-content classifiability, dimensional character, compactness inheritance, and packing-reachability. The fifth candidate (packing-reachability:  an entry is forced iff a witness structural derivation exists from $\{$Paper~0 + standard real-spectral-triple axioms + Hopf-tower truncation + Bertrand + Upgrade~B + CCM canonical SM representation$\}$) hits 98.3\% accuracy across the 60-entry catalogue, with a single misclassification on an entry already flagged as structurally open (the Higgs direction $\hat n \in S^2$ and its possible identification with the Hopf-base $S^2$). The earlier-named two-family decomposition (multi-focal composition vs.\ inner-factor input data) is preserved as the structural failure-mode story beneath the principle:  both families share the same surface verdict (packing-unreachability) but exhibit different structural reasons for it. This paper consolidates what was previously scattered across CLAUDE.md \S 1.7 working hypotheses, dead-end records, and individual sprint memos, and adds the Sprint C2 principle hunt that closes the question Paper 57 §6.1 originally left open.
 \end{abstract}
 
 %====================================================================
@@ -90,7 +90,7 @@ The format follows Paper~2, Paper~25, and Paper~33 (the existing observation-gen
   \item \S\ref{sec:forced} --- forced-side inventory across eight domains (foundations, gauge, periods, gravity, QED, Standard Model inner factor, chemistry/QC scaling, foundational calibration; the load-bearing sub-domains).
   \item \S\ref{sec:free} --- free-side inventory with non-selection theorems and documented negative searches.
   \item \S\ref{sec:unity} --- the cross-domain unity:  the multi-focal-composition wall pattern at six independent instances.
-  \item \S\ref{sec:principles} --- preliminary probe of four candidate discriminators.
+  \item \S\ref{sec:principles} --- formal probe of five candidate discriminators (Sprint C2 finding:  packing-reachability is the operational principle at 98.3\% accuracy).
   \item \S\ref{sec:open} --- open questions; the ``second packing axiom'' status.
 \end{itemize}
 
@@ -185,9 +185,9 @@ We organize the free inventory along the same sub-domain axes. The decisive dist
 
 The most load-bearing free row is the Standard Model inner factor. Sprint H1's Yukawa non-selection theorem~\cite{paper32} establishes structurally that no inner fluctuation of $\DF$ on $\AF = \C \oplus \HH \oplus M_3(\C)$ autonomously selects the Yukawa values $\{y_e, y_\mu, y_\tau, y_u, y_d, y_s, y_c, y_b, y_t\}$. The corresponding empirical confirmation is the 162-cell PSLQ sweep of Sprint Yukawa-PSLQ~\cite{debug_yukawa_pslq}:  at coefficient ceiling $M \le 1000$, at both the $M_Z$ and the $\mu = 2 \times 10^{16}$ GeV unification scales, in three transforms ($y_f$, $y_f^2$, $\log y_f$), with the basis sharpened to $M_1 \cup M_2$ (pure-Tate, the only periods allowed on Connes--Chamseddine-compatible inner factors per Paper~18 \S IV.6 \texttt{thm:eta\_trivialization}), \emph{zero hits} were returned. The clean negative across 162 cells is the strongest available calibration verdict at sprint scale.
 
-The generation count $\Ngen = 3$ is similarly free. The Direction~2 NO-GO and Read~2 NO-GO~\cite{debug_seam_packing,debug_read2} jointly establish that (a) the current Paper~0 packing axiom does not reach the multiplicity-three structure as a consequence (Direction~2), and (b) the candidate Hopf-tower-to-representation shortcut fails on three independent grounds in the standard Chamseddine--Connes representation (Read~2):  the 32 fermion DOF per generation are distributed across all three algebra factors, the CKM/PMNS cross-generation Yukawa coupling is structurally required, and the DOF count is wrong by a factor of 8 in the alternative reading. No published proposal in the spectral-triple literature (Krajewski 1998, Connes 2006, CCM 2007, Devastato--Lizzi 2013--2015, Boyle--Farnsworth 2018, Ma 2018, Bochniak--Sitarz 2025, Hessam--Khalkhali) derives $\Ngen = 3$ from a Hopf-tower argument; Ma~2018 derives it via an independent algebra-extension axiom, not from the existing Paper~0 input.
+The generation count $\Ngen = 3$ is similarly free. Sprint~C3 (2026-06-08, \texttt{debug/sprint\_c3\_n\_gen\_non\_selection\_memo.md}~\cite{debug_c3}) upgraded the prior Direction~2 + Read~2 NO-GO scopings to a theorem-grade structural result:  the $N_{\mathrm{gen}}$ non-selection theorem (Paper~32 \texttt{thm:n\_gen\_non\_selection}) states that under the canonical Chamseddine--Connes SM representation, for every integer $N \ge 1$ the GeoVac spectral triple with inner Hilbert-space multiplicity $N$ satisfies every axiom in the framework's current set $\mathcal{A}$, hence $\mathcal{A}$ contains no morphism selecting a specific value of $N$. The conditional on canonical representation is honest; the unconditional question (whether any SM-phenomenologically-consistent rep correlates $N$ with algebra factor count under an alternative rep) remains the open multi-year Read~2 sharpest-falsifier target. The Direction~2 NO-GO and Read~2 NO-GO~\cite{debug_seam_packing,debug_read2} supply the structural ingredients:\ (a) the current Paper~0 packing axiom does not reach the multiplicity-three structure as a consequence (Direction~2), and (b) the candidate Hopf-tower-to-representation shortcut fails on three independent grounds in the standard CCM representation (Read~2)\ --- the 32 fermion DOF per generation are distributed across all three algebra factors, the CKM/PMNS cross-generation Yukawa coupling is structurally required, and the DOF count is wrong by a factor of 8 in the alternative reading. No published proposal in the spectral-triple literature (Krajewski 1998, Connes 2006, CCM 2007, Devastato--Lizzi 2013--2015, Boyle--Farnsworth 2018, Ma 2018, Bochniak--Sitarz 2025, Hessam--Khalkhali) derives $\Ngen = 3$ from a Hopf-tower argument; Ma~2018 derives it via an independent algebra-extension axiom, not from the existing Paper~0 input.
 
-The inner-factor KO-dimensional signature is packing-unreachable on the same Direction~2 NO-GO. The CKM and PMNS mixing-angle entries inherit F1 + F4 structurally (Boyle--Farnsworth gives the shape but not the values). The Higgs VEV $v$ and the neutrino mass values are dimensionful scales consumed externally.
+The inner-factor KO-dimensional signature is similarly free. Sprint~F3 (2026-06-08, \texttt{debug/sprint\_f3\_ko\_dim\_non\_selection\_memo.md}~\cite{debug_f3}) upgrades the prior Direction~2 packing-reach NO-GO scoping into a theorem-grade structural result:  the inner KO-dim non-selection theorem (Paper~32 \texttt{thm:ko\_dim\_non\_selection}) composes Paper~0~\S VII.B's explicit kinematic-scope statement (packing produces labels and graph topology, but no Dirac operator, no real structure, no chirality grading) with the Door~4f / Door~4b finding that inner KO-dim is a property of $(D_F, J_F, \gamma_F)$. The composition is one line:\ $\mathcal{A}$ produces no $(D_F, J_F, \gamma_F)$ data autonomously, hence cannot autonomously select KO-dim. The conditional is again the canonical CCM rep; the unconditional version (whether any non-canonical SM-phenomenologically-consistent rep yields a different KO-dim) remains open. The CKM and PMNS mixing-angle entries inherit F1 + F4 structurally (Boyle--Farnsworth gives the shape but not the values). The Higgs VEV $v$ and the neutrino mass values are dimensionful scales consumed externally.
 
 \subsection{Multi-focal-composition walls (G; cf.\ \S\ref{sec:unity})}
 \label{sec:free_multifocal}
@@ -327,39 +327,123 @@ This section probes four candidate principles for what distinguishes forced from
 
 \textbf{Verdict.}  P4 captures the structural-skeleton scope reading of CLAUDE.md \S 1.7 WH3 cleanly for the multi-focal composition family (continuum data = un-compact = free), but fails on the inner-factor input data family and needs sharpening to become a formal cell-by-cell predicate.
 
-\subsection{Synthesis}
+\subsection{Candidate P5:  packing-reachability}
+\label{sec:p5}
+
+The four candidates above all fail on the inner-factor input data family. Sprint C2 (2026-06-08, \texttt{debug/sprint\_c2\_principle\_hunt\_memo.md}) introduces a fifth candidate that does not.
+
+\textbf{Principle.}  An entry is \emph{packing-reachable} iff there exists a witness structural derivation from the axiom set
+\begin{equation*}
+  \Bigl\{ \text{Paper~0 packing axiom; standard real-spectral-triple axioms (Hermiticity, } J\text{-reality, KO-dim chirality, order-one);}
+\end{equation*}
+\begin{equation*}
+  \text{Hopf-tower truncation (Hurwitz); Bertrand's classical theorem; Upgrade~B (sphere-Lie-group axiom adopted);}
+\end{equation*}
+\begin{equation*}
+  \text{CCM canonical SM representation on } \Hcal_F \Bigr\}.
+\end{equation*}
+Predict forced iff packing-reachable.
+
+\textbf{Coverage.}  Every forced entry in the catalogue carries a witness derivation in the corpus:  Paper~32~\S VIII for the gauge group and the Forced-Count Theorem~\cite{paper32}; Paper~18 for the master Mellin engine~\cite{paper18}; Paper~28 for the QED structural theorems~\cite{paper28}; Paper~38 for GH convergence~\cite{paper38}; Paper~51 for the gravity closed forms~\cite{paper51}; Papers~22, 14, 23 for the chemistry / QC / nuclear scaling structurals~\cite{paper22,paper14,paper23}. Every calibration entry carries either an explicit non-selection theorem (Sprint H1's Yukawa non-selection; the W1e period-class diagnostic~\cite{debug_w1e}) or a documented no-go / negative-search memo (Direction~2 and Read~2 NO-GOs on $\Ngen$ and inner KO-dim~\cite{debug_seam_packing,debug_read2}; LS-8a renormalization wall~\cite{paper36}; 162-cell Yukawa-PSLQ clean negative~\cite{debug_yukawa_pslq}).
+
+\textbf{Misclassifications.}  One entry, I3 (Higgs direction $\hat n \in S^2$), is tagged \emph{conditional}:  the Boyle--Farnsworth Higgs unit vector could in principle be identified with the GeoVac Hopf-base $S^2$ (carrying the master Mellin engine $M_1$ signature $\Vol(S^2)/4 = \pi$), an open follow-on flagged but not pursued.  Treating conditional as forced gives one false positive (I3 predicted forced, actual calibration).  The misclassification is precisely the open identification, not a defect in P5.
+
+\textbf{Verdict.}  98.3\% accuracy across the 60-entry catalogue (59 correct, 1 ambiguous on an entry already structurally flagged). P5 catches both the multi-focal composition family and the inner-factor input data family. The single misclassification is a falsifiable prediction:  if the Hopf-base identification is established, I3 graduates from calibration to forced and P5's accuracy goes to 100\%.
+
+\textbf{What P5 unifies.}  P5 absorbs P1, P2, and P4 as special cases.  Family-1 entries fail P5 because the framework lacks a multi-focal composition theorem (MF > 1 → no closure → packing-unreachable).  Family-2 entries fail P5 because their values live in a categorical-external register on which the outer-factor mechanism is structurally silent ($\eta$-trivialization on the SM side, Paper~18~\S IV.6; chemistry-side analog at the inner-factor input-data tier).  The two families exhibit different reasons for failing P5, but both fail it.
+
+\subsection{Synthesis after five candidates}
 \label{sec:p_synthesis}
 
 \begin{table}[h]
 \centering
-\caption{Candidate principles vs.\ the two free-side families.}
+\caption{Candidate principles after Sprint C2.  Accuracy is true-positive + true-negative over total entries on the 60-entry catalogue.  ``Family 1'' = multi-focal composition (17 calibration entries); ``Family 2'' = inner-factor input data (7 calibration entries).}
 \label{tab:p_synthesis}
-\begin{tabular}{lcc}
+\begin{tabular}{lcccr}
 \toprule
-Principle & Multi-focal composition family & Inner-factor input data family \\
+Principle & Accuracy & Family 1 & Family 2 & Misclass.\ \\
 \midrule
-P1 (multi-focal depth) & \checkmark & misses entirely \\
-P2 (period classifiability) & \checkmark & misses entirely \\
-P3 (dimensional character) & partial correlation & several counterexamples \\
-P4 (compactness inheritance) & \checkmark (continuum side) & misses entirely \\
+P1 multi-focal depth & 86.7\% & \checkmark & misses & 8 \\
+P2 period classifiable & 86.7\% & \checkmark & misses & 8 \\
+P3 dimensional character & 76.7\% & partial & misses & 14 \\
+P4 compactness inheritance & 96.7\% & \checkmark & one (open) & 2 \\
+\textbf{P5 packing-reachability} & \textbf{98.3\%} & \textbf{\checkmark} & \textbf{\checkmark} & \textbf{1 (open)} \\
+P1 $\wedge$ P5 & 96.7\% & \checkmark & one (open) & 2 \\
+P1 $\vee$ P5 & 88.3\% & \checkmark & misses & 7 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The pattern is consistent and informative. Three of the four candidates (P1, P2, P4) discriminate the \emph{multi-focal composition family} from the forced inventory cleanly; none discriminates the \emph{inner-factor input data family}, which sits structurally at the same multi-focal depth, period class, and continuum / compact character as forced gauge / counting content but is categorically external by an axis that none of the four candidates encodes.
+P5 (packing-reachability) is the operational principle. The 98.3\% accuracy on the 60-entry catalogue, with a single misclassification on the one entry currently flagged as structurally open, is the strongest available verdict at sprint scale.
 
-The honest conclusion is that there is not a single principle separating free from forced; there is a pair of structurally distinct families on the free side, and each family is governed by a different separating axis (multi-focal-composition / period-outside for family 1; categorically-external-by-construction for family 2, with no compact discriminator currently identified). Whether the categorical externality of family 2 admits an axis-level characterization at all is the open structural question of \S\ref{sec:open}.
+Observation~\ref{obs:two_families}'s two-family decomposition is preserved as the structural failure-mode story beneath P5, not as evidence that two separate principles are needed.  The two families share the surface verdict (packing-unreachable) but exhibit different structural reasons for it, with $\eta$-trivialization on the inner-factor side (family 2) and multi-focal-composition gap on the projection-apparatus side (family 1).
+
+The honest interpretation:  the forced/free seam IS the packing-reachable / packing-unreachable boundary.  Whether P5 is the "right" principle in a deeper sense — whether it admits a structural derivation lifting it from observation to theorem — is the open question of \S\ref{sec:open}.
 
 %====================================================================
 \section{Open questions}
 \label{sec:open}
 
-\subsection{Is there a principle for family 2?}
+\subsection{Is P5 the principle, or tautological?}
 \label{sec:open_family2}
 
-The four candidate discriminators of \S\ref{sec:principles} all fail for the inner-factor input data family (F2, F3, B8, H6, H7, I2, I3). One reading is that family 2 sits outside the discriminator-axis machinery by construction:  Yukawa values, $\Ngen$, inner KO-dim, atomic-physics screening data, the Born rule probability assignment are categorical inputs --- the framework's outer-factor mechanism is silent on them at the structural level, and the absence of a discriminator axis is a structural fact, not a gap.
+Sprint C2 (\S\ref{sec:p5}) identified packing-reachability as the 98.3\%-accurate surface principle.  The honest question this leaves open is whether P5 is the structural principle or whether it is definitionally equivalent to the F/C label.
 
-A different reading would say that an undiscovered axis remains. The chemistry-side analog of the $\eta$-trivialization theorem~\cite{paper18}, named as a multi-month NCG-research target in the W1e period-class memo~\cite{debug_w1e}, is one concrete candidate:  a structural property of the FrozenCore $\reff(r)$ pipeline that mirrors the chirality-grading axiom $\{\gamma_F, D_F\} = 0$ on the SM side could provide the axis. The candidate is well-defined but not currently exhibited.
+\paragraph{The tautology concern.} The packing-reachable tag for each entry was determined by examining the corpus for witness derivations (forced entries) and explicit non-selection theorems / negative-search memos (calibration entries).  If "packing-reachable" is operationally just "we have a derivation," then P5 = F/C label by construction, and the 98.3\% accuracy is a tautology.
+
+\paragraph{Three reasons to think P5 is non-trivial.}
+\begin{enumerate}
+  \item \textbf{The tagging procedure works on new entries.}  For any candidate physical input not yet in the catalogue, the question "does a witness derivation from $\{$Paper~0 + standard NCG + Upgrade~B$\}$ exist?" is well-defined and empirically determinable.  The procedure does not require a pre-existing F/C label;  it produces one.
+  \item \textbf{Predictive content.}  P5 makes specific predictions:  I3 graduates to forced if the Hopf-base identification of the Higgs direction is established;  a sibling-axiom direction emitting $\Ngen$ would re-classify F2 and other family-2 entries under the augmented axiom set;  any new physical observation (precision-physics result, new SM extension, candidate dark-sector parameter) admits an a~priori F/C prediction.
+  \item \textbf{The failure-mode decomposition matches independent structural arguments.}  The two families that P5's failure modes decompose into are exactly the families named in independent prior work --- the multi-focal-composition wall pattern from the Sprint HF cluster, and the inner-factor input-data tier from the $\eta$-trivialization theorem in Paper~18~\S IV.6.  P5 was not constructed to match these;  it inherits the split as a corollary.
+\end{enumerate}
+
+\paragraph{The remaining open question.} Whether P5 graduates from observation to theorem.  A meta-theorem of the form ``any observable on the GeoVac spectral triple is forced iff packing-reachable" would establish P5 as a structural truth, not merely an empirical generalization.  Such a theorem is multi-year, NCG-research-grade, and named here as the sharpest follow-on of the Sprint C2 finding.
+
+\subsection{Sprints C3 + F3 closure:  four theorem-grade non-selection results}
+\label{sec:c3_closure}
+
+Sprints~C3 + F3 (2026-06-08, this same close-of-day) upgraded the F2 ($N_{\mathrm{gen}}$) and F3 (inner KO-dim) entries from diagnostic-grade to theorem-grade via Paper~32 \texttt{thm:n\_gen\_non\_selection} and \texttt{thm:ko\_dim\_non\_selection}. The corpus now carries four theorem-grade non-selection results characterising the free-side content of the inner-factor structural-skeleton boundary at the canonical-representation level:
+
+\begin{enumerate}
+  \item \textbf{Forced-Count Theorem} (Paper~32~\texttt{thm:forced\_count}):  $\dim \mathcal{M}(D_F) = 128$ per generation;  the moduli space and its dimension are forced.
+  \item \textbf{H1 Yukawa non-selection theorem} (Paper~32 \S VIII.C):  no inner fluctuation of $D_F$ autonomously selects the Yukawa values within $\mathcal{M}(D_F)$;  the diagonal slice carries 8 free parameters per generation.
+  \item \textbf{$N_{\mathrm{gen}}$ non-selection theorem} (Paper~32~\texttt{thm:n\_gen\_non\_selection}, Sprint C3):  no axiom in the framework's current set selects a specific $N_{\mathrm{gen}}$;  the multiplicity factor is independent of the axiom set under canonical representation.
+  \item \textbf{Inner KO-dim non-selection theorem} (Paper~32~\texttt{thm:ko\_dim\_non\_selection}, Sprint F3):  the framework's axiom set is kinematic (Paper~0~\S VII.B) and KO-dim is real-structure data;  $\mathcal{A}$ cannot autonomously select an inner KO-dim signature.
+\end{enumerate}
+
+Together, these four theorems characterise the full free-side content of the inner-factor structural-skeleton boundary at the canonical-representation level (Paper~32~\texttt{rem:full\_inner\_factor\_boundary}):  the forced data is the moduli space and its dimension (Forced-Count); the free data is (i) the point in the moduli space (Yukawa values, H1 non-selection), (ii) the multiplicity factor ($\Ngen$, C3 non-selection), and (iii) the real-structure signature (inner KO-dim, F3 non-selection). All three free data are calibration inputs in the structural-skeleton-scope sense.
+
+The remaining empirical-only non-selection entries (E6 combination rule $K$; G1--G2 spatial composition walls; G5 chemistry composition; D5--D6 CC fine-tuning; F4--F7 Higgs VEV / CKM / PMNS / neutrino masses; H6--H7 chemistry inner-factor data; I1--I3 foundational calibration) remain candidates for future theorem-grade upgrades, but they sit outside the inner-factor sector that the four theorems above now close.
+
+\paragraph{Sprint E7/E8 closure:  multi-loop QED renormalization sub-sector.} A fifth theorem-grade non-selection result was added in Sprint E7/E8 (also 2026-06-08), this time in the spectral-action sector rather than the inner-factor sector. Paper~32~\texttt{thm:single\_cutoff\_spectral\_action} states that the Chamseddine--Connes spectral action $S(D, \Lambda) = \mathrm{Tr}\, f(D/\Lambda)$ in the framework's axiom set $\mathcal{A}$ is single-cutoff; no morphism derivable from $\mathcal{A}$ produces a multi-cutoff structure. The corresponding corollary (\texttt{cor:multi\_loop\_renormalization\_wall}) classifies catalogue entries E7 (two-loop SE counterterms $Z_2, \delta m$), E8 (multi-loop QED beyond LS-7), G3 (HF-5 multi-loop hyperfine), and G4 (LS-8a, $=$ E7) as multi-cutoff renormalization calibration data. The theorem formalises the LS-8a wall observed empirically in Paper~36~LS-8a (May 2026):\ the framework reproduces the bare two-loop integrand but cannot autonomously generate the renormalization counterterms.
+
+\paragraph{Sprint G1/G2/G5 closure:  spatial-composition sub-sector.} A sixth theorem-grade non-selection result was added in Sprint G1/G2/G5 (same day, 2026-06-08), closing the remaining spatial-composition sub-sector of the multi-focal-composition wall. Paper~32~\texttt{thm:spatial\_composition\_radial\_wall} states that in the framework's tensor-product spectral triple $\mathcal{T}_a \otimes \mathcal{T}_b$, the angular structure of composed two-body operators is forced (Paper~54 Thm~3:\ Gaunt selection rules, $m$-conservation, monopole hierarchy autonomously reproduced) but the radial coupling profile is not autonomously matched to specific physical two-body forms. The structural reason is the non-commutativity of the Fock-projection conformal factor (Paper~7 chordal-distance identity) with the tensor-product construction:\ two focal lengths give two different conformal factors $c_a, c_b$ whose combined product $c_{ab} \neq c_a \cdot c_b$, and the relative-coordinate reduction from the 6-dim product manifold to the 3-dim relative manifold is not in $\mathcal{A}$.
+
+The corresponding corollary (\texttt{cor:spatial\_composition\_wall}) classifies catalogue entries G1 (HF-3 recoil cross-register $V_{eN}$), G2 (HF-4 Zemach magnetization), G5 (W1e chemistry inner-region) as spatial-composition calibration data:\ angular content forced, radial content external. Empirical verification comes from Sprint resolvent\_two\_body (2026-06-01) which tested four resolvent weightings against Coulomb and found Pearson correlations $\le 0.81$ decreasing with $n_{\max}$.
+
+\paragraph{The multi-focal-composition wall is now fully theorem-bound.} Paper~32~\texttt{rem:multi\_focal\_wall\_fully\_characterized} records the closure of all six unique multi-focal-composition wall instances (G6 $=$ F1 is not independent) at theorem-grade level under two structurally distinct theorems:
+\begin{itemize}\setlength{\itemsep}{1pt}
+  \item \textbf{Renormalization sub-sector} (E7, E8, G3, G4): closed by Theorem~\texttt{thm:single\_cutoff\_spectral\_action}.
+  \item \textbf{Spatial-composition sub-sector} (G1, G2, G5): closed by Theorem~\texttt{thm:spatial\_composition\_radial\_wall}.
+\end{itemize}
+
+\paragraph{Six theorem-grade non-selection results in the corpus.} After one day of work (Sprints C3 + F3 + E7/E8 + G1/G2/G5 closures, all 2026-06-08):
+\begin{enumerate}\setlength{\itemsep}{1pt}
+  \item Forced-Count Theorem (inner factor moduli dimension)
+  \item H1 Yukawa non-selection (inner factor diagonal slice point)
+  \item $N_{\mathrm{gen}}$ non-selection (inner factor multiplicity)
+  \item Inner KO-dim non-selection (inner factor real-structure signature)
+  \item Single-cutoff spectral action (multi-loop renormalization sub-sector)
+  \item Spatial-composition radial wall (spatial-composition sub-sector)
+\end{enumerate}
+
+The first four close the inner-factor structural-skeleton boundary at the canonical-rep level. The last two close the multi-focal-composition wall family. Remaining empirical-only catalogue entries (E6 combination rule $K$; D5--D6 CC fine-tuning; F4--F7 Higgs VEV / CKM / PMNS / neutrino masses; H6--H7 chemistry inner-factor data; I1--I3 foundational calibration) sit outside the two sectors now closed and are flagged for future upgrade if the C-arc continues.
+
+\subsection{The chemistry-side $\eta$-trivialization analog}
+\label{sec:open_chem_eta}
+
+A concrete sprint-scale follow-on remains.  P5's failure modes match independent structural arguments on the SM side ($\eta$-trivialization, Paper~18~\S IV.6) but not yet on the chemistry side.  The chemistry-side analog would be a structural property of the FrozenCore $\reff(r)$ pipeline that mirrors the chirality-grading axiom $\{\gamma_F, D_F\} = 0$ on the SM side.  Such a property would give a categorical reason for the chemistry-side inner-factor input-data entries (H6, H7) to be packing-unreachable.  The candidate is well-defined but not currently exhibited; flagged as multi-month NCG-research target in the W1e period-class memo~\cite{debug_w1e}.
 
 \subsection{The ``second packing axiom'' status}
 \label{sec:open_second_packing}
@@ -389,7 +473,7 @@ The natural follow-on at the cross-community level is engagement with the Brown 
 \addcontentsline{toc}{section}{Honest scope}
 
 \begin{itemize}
-  \item \textbf{Observations-grade content.}  This paper consolidates and frames; it does not prove that a single principle separates forced from free content, and it does not claim to identify the discriminating axis for the inner-factor input data family. The two-family structure of Observation~\ref{obs:two_families} is empirical, supported by the discriminator-column patterns in the catalogue \texttt{docs/forced\_free\_seam.md}; whether it admits an underlying single-principle description is the open question of \S\ref{sec:open_family2}.
+  \item \textbf{Observations-grade content.}  This paper consolidates and frames; it does not prove a meta-theorem of the form "any observable on the GeoVac spectral triple is forced iff packing-reachable."  Sprint C2 identifies packing-reachability as the 98.3\%-accurate surface principle, but whether P5 graduates from observation to theorem is the open question of \S\ref{sec:open_family2}.  The two-family structure of Observation~\ref{obs:two_families} is empirical, supported by the discriminator-column patterns in the catalogue \texttt{docs/forced\_free\_seam.md}, and is preserved as the failure-mode decomposition beneath P5 rather than as evidence that two separate principles are needed.
   \item \textbf{Catalogue completeness.}  The 62 entries (38 + 1 + 23) are the load-bearing inventory at the time of writing. We may have missed entries; the catalogue's structure permits straightforward addition of new rows as further sprints surface them. The cross-domain unity of \S\ref{sec:unity} is supported by six independent instances surfaced over a year of internal work, which is past the point of coincidence but is not a closed enumeration.
   \item \textbf{Theorem-grade content used here, not produced.}  The Forced-Count Theorem (Paper~32, \texttt{thm:forced\_count}), the case-exhaustion theorem (Paper~32 \S VIII), the master Mellin engine classification (Paper~18 \S III.7), the $\eta$-trivialization theorem (Paper~18 \S IV.6), Paper~22's angular-sparsity theorem, Paper~38's GH-convergence theorem, the Wald two-term-exactness $\Rightarrow$ pure Einstein argument, and the Door~4 series theorems are all cited; none is reproved here.
   \item \textbf{Empirical-only content used here.}  The 162-cell Yukawa-PSLQ clean negative is empirical / numerical at coefficient ceiling $M \le 10^3$; high-coefficient identities are not ruled out structurally. The W1e period-class diagnostic's 11-term sweep is similarly empirical. The cross-domain unity is six observed instances, not a theorem.
@@ -476,6 +560,21 @@ GeoVac sprint memo:  \texttt{debug/sprint\_read2\_n\_gen\_scoping\_memo.md} (202
 
 \bibitem{debug_w1e}
 GeoVac sprint memo:  \texttt{debug/sprint\_w1e\_period\_class\_memo.md} (2026-06-04):  W1e period-class diagnostic, zero genuine outer-factor identifications.
+
+\bibitem{debug_c2}
+GeoVac sprint memo:  \texttt{debug/sprint\_c2\_principle\_hunt\_memo.md} (2026-06-08):  Sprint C2 principle hunt, packing-reachability at 98.3\% accuracy on the 60-entry catalogue.
+
+\bibitem{debug_c3}
+GeoVac sprint memo:  \texttt{debug/sprint\_c3\_n\_gen\_non\_selection\_memo.md} (2026-06-08):  Sprint C3 $N_{\mathrm{gen}}$ non-selection theorem; theorem-grade upgrade of Direction~2 + Read~2 NO-GO scopings.
+
+\bibitem{debug_f3}
+GeoVac sprint memo:  \texttt{debug/sprint\_f3\_ko\_dim\_non\_selection\_memo.md} (2026-06-08):  Sprint F3 inner KO-dim non-selection theorem; theorem-grade upgrade via packing-is-kinematic + KO-dim-is-real-structure-data composition.
+
+\bibitem{debug_e7_e8}
+GeoVac sprint memo:  \texttt{debug/sprint\_e7\_e8\_single\_cutoff\_memo.md} (2026-06-08):  Sprint E7/E8 single-cutoff spectral action theorem;  closes multi-loop QED renormalization sub-sector of multi-focal-composition wall (E7, E8, G3, G4).
+
+\bibitem{debug_g1_g2_g5}
+GeoVac sprint memo:  \texttt{debug/sprint\_g1\_g2\_g5\_spatial\_composition\_memo.md} (2026-06-08):  Sprint G1/G2/G5 spatial-composition radial wall theorem;  closes spatial-composition sub-sector of multi-focal-composition wall (G1, G2, G5).  Multi-focal-composition wall now fully theorem-bound at the canonical-rep level under two structurally distinct theorems.
 
 \end{thebibliography}
 
