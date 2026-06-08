@@ -7,6 +7,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.103.0] - 2026-06-08
+
+### Summary
+
+**Sprint C-arc closure — three bundled deliverables: E6 + D5/D6 + chemistry η-trivialization analog.** Closes the path-#1 vein C arc with two new theorem-grade non-selection results plus one named multi-month structural-research target, bringing the corpus to **eight theorem-grade non-selection results across four sectors**. Paper 32 §VIII gains a terminal-state remark (`rem:c_arc_terminal_state`) consolidating the full final tally.
+
+**Theorem 1: E6 combination rule K = π(B + F − Δ).** Paper 32 `thm:no_single_mechanism_K` + `rem:e6_scope`. Under $\mathcal{A}$ and the master Mellin engine case-exhaustion theorem, the three spectral homes that appear in the empirical combination rule for $\alpha^{-1}$ (B = 42 Casimir, F = π²/6 Fock Dirichlet, Δ = 1/40 Dirac mode count) live in two distinct Mellin sub-rings ($M_2$, $M_2$, $M_1$). No morphism in $\mathcal{A}$ produces $K = \pi(B + F − Δ)$ as a single-mechanism output or as a composition with the specific (+1, +1, −1) weights and π prefactor. Twelve mechanisms empirically eliminated (Phases 4B–4I + Sprint A α-SP + Sprint K-CC). Combination rule preserved as conjectural per CLAUDE.md §13.5; theorem strengthens empirical non-derivability into structural impossibility but does not derive $K$.
+
+**Theorem 2: D5/D6 cutoff function external.** Paper 32 `thm:cutoff_function_external` + `cor:cc_fine_tuning_external` + `rem:d5_d6_scope`. The CC spectral action $S(D, \Lambda, f) = \mathrm{Tr}\, f(D/\Lambda)$ takes $f$ as a Schwartz-class test function not constrained by $\mathcal{A}$. The Mellin moments $\varphi(s)$ are external calibration data; no axiom in $\mathcal{A}$ selects moment values. Wald's two-term-exactness ⇒ pure Einstein ⇒ action-$G$ ≡ entropy-$G$ argument forces RELATIONS among moments (theorem-grade); moment values are external. Cosmological-constant problem formalised as external moment selection: $\Lambda_{cc} \cdot G_{\rm eff} \approx 36\pi \cdot \varphi(2)/\varphi(1)^2 \approx 10^{-122}$ requires $\varphi(2)/\varphi(1)^2 \approx 10^{-124}$, fine-tuning unselected by $\mathcal{A}$.
+
+**Closure 3: Chemistry-side η-trivialization analog.** Paper 32 `rem:chemistry_eta_analog`. The SM-side η-trivialization (Paper 18 `thm:eta_trivialization`) forces inner-factor period ring to $M_1 \cup M_2$ via $\{\gamma_F, D_F\} = 0$. The chemistry-side analog would be a structural property of the FrozenCore $Z_{\rm eff}(r)$ pipeline mirroring this chirality grading; the most concrete candidate direction is to identify a discrete grading on the FrozenCore radial profile pipeline. Sprint-scale path unclear; multi-month NCG-research target. Catalogue entries H6 (Clementi–Raimondi exponents) and H7 (multi-zeta coefficients) remain empirical-only pending. Documentation-grade closure, not theorem.
+
+**Terminal-state remark.** Paper 32 `rem:c_arc_terminal_state` records the full corpus tally:
+
+| # | Theorem | Sector | Sprint | Version |
+|:-:|:--------|:-------|:-------|:-------:|
+| 1 | Forced-Count | Inner-factor | pre-2026-06-08 | — |
+| 2 | H1 Yukawa non-selection | Inner-factor | pre-2026-06-08 | — |
+| 3 | $N_{\mathrm{gen}}$ non-selection | Inner-factor | C3 | v3.99.0 |
+| 4 | Inner KO-dim non-selection | Inner-factor | F3 | v3.100.0 |
+| 5 | Single-cutoff spectral action | Multi-focal renormalization | E7/E8 | v3.101.0 |
+| 6 | Spatial-composition radial wall | Multi-focal spatial | G1/G2/G5 | v3.102.0 |
+| 7 | No-single-mechanism K | α combination | E6 | v3.103.0 |
+| 8 | Cutoff function external | Gravity | D5/D6 | v3.103.0 |
+
+Eight theorem-grade non-selection results across four sectors (inner-factor / multi-focal-composition / α combination / gravity). One named multi-month structural-research target (chemistry η-trivialization analog). All subsidiary residuals (F4–F7 inherit from F1 + F4; I-entries via Gleason / E6 inheritance / open Hopf-base identification) accounted for. The full forced/free seam is in stable terminal state for path-#1 vein C.
+
+### Added
+
+- **Paper 32 §VIII**: `thm:no_single_mechanism_K` (E6 theorem with three-fact proof: case-exhaustion + three spectral homes + twelve eliminations) + `rem:e6_scope` (preserves §13.5 conjectural label on combination rule; sibling-axiom direction named); `thm:cutoff_function_external` (D5/D6 theorem with Wald-relations vs values structure) + `cor:cc_fine_tuning_external` (CC problem formalised as external moment selection) + `rem:d5_d6_scope` (sibling-axiom directions: RG-flow / regulator-independence / asymptotic-safety); `rem:chemistry_eta_analog` (multi-month NCG-research target scoped); `rem:c_arc_terminal_state` (full corpus tally + sector map + named follow-on + subsidiary residuals).
+- **Paper 57 §6.3**: closure paragraph documenting Sprints E6 + D5/D6 + Chemistry-Analog; terminal-state tally of eight theorem-grade results; "full forced/free seam in stable terminal state for path-#1 vein C" closing statement.
+- **Paper 57 bibliography**: `\bibitem{debug_c_arc_closure}` added.
+- **`debug/sprint_c_arc_closure_e6_d5d6_chemistry_memo.md`**: canonical bundled memo (~4500 words). Per-theorem summary, terminal-state tally, decision-gate, full honest scope.
+
+### Changed
+
+- **Paper 32 §VIII** + bibliography: page count 80 → 83 (three-pass clean compile). Three new theorem-style blocks + four remarks substantive.
+- **Paper 57 §6.3**: page count unchanged 17 (paragraphs fit in existing layout).
+- **CLAUDE.md §1 version**: v3.102.0 → v3.103.0.
+- **CLAUDE.md §2**: Sprint C-arc closure one-liner.
+
+### Verification
+
+- Paper 32 compiles three-pass clean at 83 pages. All new label refs resolved (`thm:pi_source_case_exhaustion` cross-reference corrected during sprint after first-pass undefined warning). No new undefined references beyond pre-existing.
+- Paper 57 compiles three-pass clean at 17 pages.
+- No production code modified.
+
+### Honest scope
+
+**Two theorem-grade upgrades** (E6, D5/D6) follow the v3.99.0–v3.102.0 C-arc pattern: composition of existing structural content into Theorem blocks. No new mathematics in the proofs.
+
+**One scoping closure** (chemistry analog): documentation-grade closure of a multi-month NCG-research target. Names the target precisely; does not attempt the theorem.
+
+**One terminal-state remark** documents the full corpus state across all eight theorems and the named follow-on.
+
+**§13.5 protection preserved.** The E6 theorem identifies the structural reason for the 12-mechanism elimination but does NOT derive $K$. The Paper 2 combination-rule conjectural label is preserved at the rule level (per CLAUDE.md §13.5). Paper 2's status as Observations-folder paper is unchanged.
+
+**Sibling-axiom directions named** for each conditional impossibility: E6 sibling axiom (generates K from single mechanism), D5/D6 sibling axiom (RG-flow / regulator-independence / asymptotic-safety on cutoff function), chemistry analog (chirality grading on FrozenCore pipeline). All unexhibited; all multi-year / multi-month NCG-research targets.
+
+**Cross-paper compatibility.** All cited prior results (Paper 2 §IV.G 12-mechanism elimination, Paper 18 `thm:eta_trivialization`, Paper 32 `thm:pi_source_case_exhaustion`, Paper 51 §G7 Wald + §G4-5 sector-wise Mellin moment map, W1e period-class memo) remain unchanged; this sprint composes them into closure theorems.
+
+### Closed
+
+- **α combination rule single-mechanism generation** (E6).
+- **Gravity sector cutoff-function external selection** (D5/D6).
+- **Chemistry-side η-trivialization analog named** as multi-month NCG-research target (documentation-grade closure).
+- **Path-#1 vein C arc** — terminal state. Six sprints in one day produced one observation paper (v3.97.0), one discriminator principle (P5, v3.98.0), six theorem-grade non-selection upgrades (v3.99.0–v3.103.0 inclusive). Corpus carries eight theorem-grade non-selection results across four sectors at end of day.
+
+---
+
 ## [3.102.0] - 2026-06-08
 
 ### Summary

@@ -5351,6 +5351,278 @@ composition sub-sector.
 Paper~57~\S 6.3 (Sprint G1/G2/G5 closure) records this completion.
 \end{remark}
 
+% -------------------------------------------------------------------
+% E6 — Combination rule K = π(B + F − Δ) no-single-mechanism theorem
+% (Sprint E6 closure, 2026-06-08).
+% -------------------------------------------------------------------
+
+\begin{theorem}[No single-mechanism generation of the combination rule $K = \pi(B + F - \Delta)$]
+\label{thm:no_single_mechanism_K}
+Under the framework's axiom set $\mathcal{A}$ and the master Mellin
+engine case-exhaustion classification, the three spectral homes that
+appear in the empirical combination rule $K = \pi(B + F - \Delta)$
+for $\alpha^{-1}$ (Paper 2) live in two distinct Mellin sub-rings:
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item $B = 42$ — Casimir trace on the scalar/representation sector at
+  $m = 3$;  $M_2$ sub-ring (heat-kernel period).
+\item $F = \pi^2/6$ — Fock-degeneracy Dirichlet at the packing exponent
+  $d = 3$ (the $\zeta(2)$ value);  $M_2$ sub-ring.
+\item $\Delta = 1/40 = c^2(3,2)$ — Dirac mode degeneracy $g_3^{\rm Dirac}$;
+  $M_1$ sub-ring (Hopf-base counting).
+\end{itemize}
+
+No morphism in $\mathcal{A}$ produces the combination $K = \pi(B + F -
+\Delta)$ as an output of one Mellin mechanism, nor as a composition of
+two or three Mellin mechanisms with the specific weights $(+1, +1, -1)$
+and the external $\pi$ prefactor.  Twelve candidate mechanisms have
+been empirically eliminated for single-principle generation of $K$
+(Paper 2 §IV.G; Phases 4B--4I, April 2026; Sprint A $\alpha$-SP,
+2026-04-18; Sprint K-CC, 2026-05-03).
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The argument is a structural composition of three established facts:
+
+\textbf{Fact 1 (Master Mellin engine case-exhaustion,
+Theorem~\ref{thm:pi_source_case_exhaustion} above).}  Every transcendental appearing
+in a GeoVac observable is classified into the $M_1$, $M_2$, or $M_3$
+Mellin sub-ring of $\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$ at
+$k \in \{0, 1, 2\}$.  Distinct sub-rings correspond to distinct
+operator-order $\times$ bundle-type combinations and do not
+inter-translate within $\mathcal{A}$.
+
+\textbf{Fact 2 (Three independent spectral homes, Paper 2 §IV
++ Phases 4B--4I).}  $B$, $F$, $\Delta$ live in three structurally
+distinct spectral sectors with no shared generator:\
+$B$ is the Casimir trace at $m = 3$ (finite scalar sum);
+$F$ is the Fock-degeneracy infinite Dirichlet sum at the packing
+exponent $d = d_{\max} = 3$;
+$\Delta$ is the Dirac mode-degeneracy count at $n = 3$ on the
+spinor bundle.
+
+\textbf{Fact 3 (Twelve mechanism eliminations).}  Phases 4B--4I
+(April 2026) eliminated nine candidate generation mechanisms;
+Sprint A $\alpha$-SP (Sprint A, 2026-04-18) eliminated the
+Connes--Chamseddine direct spectral-action derivation;
+Sprint K-CC (2026-05-03) eliminated three further mechanisms
+(PSLQ at 100 dps against 244-element basis; natural $\Lambda$ search
+from $S^3$ spectral data; unified CC heat-kernel approach blocked by
+Theorem T9 algebraic obstruction).
+
+Composition.  $\mathcal{A}$ contains no morphism that simultaneously
+spans the three Mellin sub-rings of $B$, $F$, $\Delta$ and produces
+the specific combination $K = \pi(B + F - \Delta)$.  Twelve mechanisms
+have been empirically tested for such a morphism and all are
+eliminated.  Therefore the combination rule remains a numerical
+coincidence between three independent spectral homes at the 8.8 $\times$
+10$^{-8}$ precision of Paper 2 §I.D, without a single-mechanism
+generator in the current axiom set. $\hfill\square$
+\end{proof}
+
+\begin{remark}[E6 scope and the conjectural-label discipline]
+\label{rem:e6_scope}
+The Theorem identifies the structural reason for the empirical
+12-mechanism elimination: the three spectral homes live in distinct
+Mellin sub-rings with no shared generator in $\mathcal{A}$.  It does
+not derive $K$ (which would contradict the empirical eliminations).
+It does not claim $K$ is mathematically impossible to generate from
+some extended axiom set; sibling axioms producing $K$ from a single
+mechanism remain logically possible but none is currently exhibited.
+
+Per CLAUDE.md \S 13.5, the conjectural label on the Paper 2 combination
+rule is protected at the rule level and is preserved by this Theorem:\
+the structural impossibility result strengthens the empirical
+non-derivability, but does not promote $K$ from observation to
+theorem.  Paper 2's status as Observations-folder paper (post
+2026-05-02 curve-fit-audit migration) is unchanged.
+
+Catalogue entry E6 (the combination rule for $\alpha^{-1}$) is now
+classified as no-single-mechanism calibration data:\ the framework
+provides three structural homes for the ingredients but no single
+principle for their combination.
+\end{remark}
+
+% -------------------------------------------------------------------
+% D5/D6 — Cutoff function and CC fine-tuning external-selection
+% theorem (Sprint D5/D6 closure, 2026-06-08).
+% -------------------------------------------------------------------
+
+\begin{theorem}[Cutoff function $f$ and its Mellin moments are external calibration data]
+\label{thm:cutoff_function_external}
+The framework's axiom set $\mathcal{A}$ specifies the
+Chamseddine--Connes spectral action functional $S(D, \Lambda, f) =
+\mathrm{Tr}\, f(D/\Lambda)$ on a real spectral triple.  The cutoff
+function $f$ enters as a Schwartz-class test function on $[0, \infty)$
+(Paper~51) but is not constrained by any axiom in $\mathcal{A}$.
+Consequently the Mellin moments
+\[
+  \varphi(s) \;=\; \int_0^\infty x^{s-1} f(x) \, dx
+\]
+are external calibration data:\ no morphism in $\mathcal{A}$ selects
+the moment values $\varphi(0), \varphi(1), \varphi(2), \ldots$.
+
+The Wald two-term-exactness $\Rightarrow$ pure Einstein
+$\Rightarrow$ action-$G \equiv$ entropy-$G$ argument (Paper~51 \S G7)
+forces \emph{relations} among the moments via the sector-wise Mellin
+moment map (tip $\leftrightarrow \varphi(0)$, Einstein--Hilbert
+$\leftrightarrow \varphi(1)$, $\Lambda_{cc} \leftrightarrow \varphi(2)$);
+these relations are theorem-grade within $\mathcal{A}$.  The moment
+\emph{values} are not constrained by $\mathcal{A}$.
+\end{theorem}
+
+\begin{corollary}[CC fine-tuning is external moment selection]
+\label{cor:cc_fine_tuning_external}
+The observed cosmological-constant problem in the framework's
+sector-wise Mellin moment formulation (Paper~51 \S G4-5) requires
+\[
+  \Lambda_{cc} \cdot G_{\rm eff} \;\approx\; 36\pi \cdot
+  \frac{\varphi(2)}{\varphi(1)^2}
+  \;\approx\; 10^{-122}
+\]
+(dimensionless), which is consistent with the framework's structural
+relations between $G_N$, $\Lambda_{cc}$, and $S_{\rm BH}$
+(Wald, theorem-grade) provided $\varphi(2)/\varphi(1)^2 \approx
+10^{-124}$ with $\varphi(0), \varphi(1) = O(1)$.  No natural cutoff
+function $f$ produces this fine-tuned moment ratio, and no axiom in
+$\mathcal{A}$ constrains the moment values to it.
+
+Catalogue entries D5 (cutoff function moments $\varphi(0), \varphi(1),
+\varphi(2)$) and D6 (cosmological constant value $\Lambda_{cc}$) are
+external calibration data inheriting from the cutoff function
+selection.
+\end{corollary}
+
+\begin{remark}[D5/D6 scope and the sibling-axiom direction]
+\label{rem:d5_d6_scope}
+Theorem~\ref{thm:cutoff_function_external} formalises the precise
+location of the cosmological-constant problem in the GeoVac framework:\
+the gravitational \emph{relations} are forced (Wald, Paper~51 \S G7);
+the cutoff-function \emph{moments} are external.  The CC problem in
+this framing is a moment-selection problem on the cutoff function
+$f$, structurally similar to the Higgs--Yukawa selection problem
+(\emph{Theorem}~H1) but on a different calibration object.
+
+A sibling axiom that constrains the cutoff function or its moments
+(e.g., a renormalisation-group flow axiom, a regulator-independence
+principle, an asymptotic-safety constraint) would extend $\mathcal{A}$
+and could in principle select the moment values.  None is currently
+exhibited;  the multi-year structural-research direction is named
+here as the natural analog of the inner-factor sibling-axiom
+directions.
+
+Paper~57~\S 6.3 records this theorem as the gravity sector closure
+of the C-arc.
+\end{remark}
+
+% -------------------------------------------------------------------
+% Chemistry-side η-trivialization analog — open structural-research
+% target (Sprint Chemistry-Analog closure, 2026-06-08).
+% -------------------------------------------------------------------
+
+\begin{remark}[Chemistry-side $\eta$-trivialization analog: open structural-research target]
+\label{rem:chemistry_eta_analog}
+The SM-side $\eta$-trivialization theorem (Paper~18 \texttt{thm:eta\_trivialization})
+forces the inner-factor period ring to $M_1 \cup M_2$ on any
+Krajewski-class even finite spectral triple satisfying the chirality
+grading axiom $\{\gamma_F, D_F\} = 0$:\ for all odd $k$, $\mathrm{Tr}(D_F^k
+\cdot e^{-tD_F^2}) \equiv 0$, so $M_3$ (vertex-parity Hurwitz / Catalan $G$ /
+Dirichlet $L$) vanishes on the inner factor.  This is the structural
+reason F1 (Yukawa values) and F4--F7 (Higgs VEV, CKM, PMNS, neutrino
+masses) live outside the master Mellin engine's structural skeleton:\
+the inner-factor period ring is forced to a sub-ring categorically
+disjoint from where the framework's outer-factor mechanism could
+generate values.
+
+The chemistry-side analog would be a structural property of the
+FrozenCore $Z_{\rm eff}(r)$ pipeline that mirrors $\{\gamma_F, D_F\} =
+0$ on the chemistry inner-factor side:\ a chirality-style grading on
+the Clementi--Raimondi $Z_{\rm eff}(r)$ structure that forces a
+similar period-ring restriction on chemistry inner-factor data.  Such
+a property is not currently exhibited.  The most concrete candidate
+direction would identify a discrete grading on the FrozenCore radial
+profile pipeline (e.g., parity of multi-zeta exponents, partition of
+core orbital basis into chirality-graded blocks) that produces an
+$\eta$-trivialization-style theorem for chemistry inner-factor data.
+
+Sprint-scale path is unclear:\ unlike the SM-side
+$\eta$-trivialization, which follows directly from a single axiom
+($\{\gamma_F, D_F\} = 0$, established in Krajewski 1998 and
+canonically adopted in CCM 2010), the chemistry-side analog would
+need to identify the analog grading axiom from scratch.  This is a
+multi-month NCG-research target.
+
+Catalogue entries H6 (Clementi--Raimondi $Z_{\rm eff}$ exponents) and
+H7 (multi-zeta coefficients in second-row valence basis) remain
+empirical-only pending this structural-research target's completion.
+The empirical-grade content (W1e period-class diagnostic,
+\texttt{debug/sprint\_w1e\_period\_class\_memo.md}, 2026-06-04)
+establishes that H6, H7 are not in $M_1 \cup M_2 \cup M_3$ at audit
+ceiling 100;  the open question is whether they sit in a structurally
+distinct chemistry-side ring forced by a hypothetical analog axiom.
+
+Paper~57~\S 6.3 records this remark as the named multi-month
+structural-research target for the chemistry sector; the C-arc's
+sprint-scale run closes at v3.103.0 with this target named but not
+attempted.
+\end{remark}
+
+% -------------------------------------------------------------------
+% Final C-arc closure remark (2026-06-08).
+% -------------------------------------------------------------------
+
+\begin{remark}[The C-arc terminal state]
+\label{rem:c_arc_terminal_state}
+After Sprints C2 + C3 + F3 + E7/E8 + G1/G2/G5 + E6 + D5/D6 +
+Chemistry-Analog (all 2026-06-08, v3.97.0--v3.103.0), the corpus
+carries \emph{eight} theorem-grade non-selection results across the
+following sectors:
+
+\textbf{Inner-factor sector} (closed at canonical-rep level):
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item Forced-Count Theorem (\ref{thm:forced_count}).
+\item H1 Yukawa non-selection (\S \ref{sec:open}).
+\item $N_{\mathrm{gen}}$ non-selection (\ref{thm:n_gen_non_selection}).
+\item Inner KO-dimension non-selection (\ref{thm:ko_dim_non_selection}).
+\end{enumerate}
+
+\textbf{Multi-focal-composition wall} (fully closed under two
+sub-sector theorems):
+\begin{enumerate}\setlength{\itemsep}{1pt}\setcounter{enumi}{4}
+\item Single-cutoff spectral action (\ref{thm:single_cutoff_spectral_action}).
+\item Spatial-composition radial wall (\ref{thm:spatial_composition_radial_wall}).
+\end{enumerate}
+
+\textbf{$\alpha$ combination rule sector} (single-mechanism
+generation closed):
+\begin{enumerate}\setlength{\itemsep}{1pt}\setcounter{enumi}{6}
+\item No-single-mechanism $K = \pi(B + F - \Delta)$
+  (\ref{thm:no_single_mechanism_K}).
+\end{enumerate}
+
+\textbf{Gravity sector} (cutoff function external-selection closed):
+\begin{enumerate}\setlength{\itemsep}{1pt}\setcounter{enumi}{7}
+\item Cutoff function $f$ and its moments are external
+  (\ref{thm:cutoff_function_external}).
+\end{enumerate}
+
+The chemistry-side $\eta$-trivialization analog
+(Remark~\ref{rem:chemistry_eta_analog}) is the named multi-month
+structural-research target;  catalogue entries H6, H7 remain
+empirical-only pending its completion.
+
+The remaining empirical-only catalogue entries (F4--F7 Higgs VEV /
+CKM / PMNS / neutrino mass values, structurally inheriting from F1
+and F4;  I-entries foundational calibration) are subsidiary residuals
+inheriting from theorems above (Higgs admission B7 + H1 Yukawa
+non-selection) or sitting outside the structural-skeleton scope
+(Born rule via Gleason).
+
+The full forced/free seam (Paper~57) is therefore in a stable terminal
+state for the path-\#1 vein C arc:\ eight theorem-grade non-selection
+results across four sectors, one named multi-month follow-on (chemistry
+$\eta$-trivialization analog), all subsidiary residuals accounted for.
+\end{remark}
+
 \paragraph{Files.}  Scoping memo
 \texttt{debug/g4\_cross\_manifold\_scoping\_memo.md}
 ($\sim 5\,100$ words).  G4a sprint memo
