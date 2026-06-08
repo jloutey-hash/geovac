@@ -1,0 +1,170 @@
+{
+  "panel": [
+    {
+      "name": "LiH",
+      "Q_naive": 30,
+      "Q_hopf": 25,
+      "Q_extended": 22,
+      "N_pauli_naive": 333,
+      "N_pauli_hopf": 291,
+      "N_pauli_extended": 282,
+      "delta_Q_hopf": 5,
+      "delta_Q_extended": 8,
+      "delta_Q_extended_vs_hopf": 3,
+      "kinds_kept": [
+        "alpha",
+        "beta",
+        "hopf:(0, 'Li_core', 'center')",
+        "hopf:(1, 'LiH_bond', 'center')",
+        "hopf:(1, 'LiH_bond', 'partner')",
+        "ell_parity:(0, 'Li_core', 'center')",
+        "ell_parity:(1, 'LiH_bond', 'center')",
+        "ell_parity:(1, 'LiH_bond', 'partner')"
+      ],
+      "dropped": []
+    },
+    {
+      "name": "BeH2",
+      "Q_naive": 50,
+      "Q_hopf": 43,
+      "Q_extended": 41,
+      "N_pauli_naive": 555,
+      "N_pauli_hopf": 485,
+      "N_pauli_extended": 1694,
+      "delta_Q_hopf": 7,
+      "delta_Q_extended": 9,
+      "delta_Q_extended_vs_hopf": 2,
+      "kinds_kept": [
+        "alpha",
+        "beta",
+        "hopf:(0, 'Be_core', 'center')",
+        "hopf:('SWAP_JOINT', (1, 'BeH2_bond_1', 'center'), (2, 'BeH2_bond_2', 'center'))",
+        "hopf:('SWAP_JOINT', (1, 'BeH2_bond_1', 'partner'), (2, 'BeH2_bond_2', 'partner'))",
+        "ell_parity:(0, 'Be_core', 'center')",
+        "ell_parity:('SWAP_JOINT', (1, 'BeH2_bond_1', 'center'), (2, 'BeH2_bond_2', 'center'))",
+        "ell_parity:('SWAP_JOINT', (1, 'BeH2_bond_1', 'partner'), (2, 'BeH2_bond_2', 'partner'))",
+        "atom_swap"
+      ],
+      "dropped": [
+        [
+          "inversion:0",
+          9,
+          -1.0
+        ]
+      ]
+    },
+    {
+      "name": "H2O",
+      "Q_naive": 70,
+      "Q_hopf": 61,
+      "Q_extended": 59,
+      "N_pauli_naive": 777,
+      "N_pauli_hopf": 679,
+      "N_pauli_extended": 2494,
+      "delta_Q_hopf": 9,
+      "delta_Q_extended": 11,
+      "delta_Q_extended_vs_hopf": 2,
+      "kinds_kept": [
+        "alpha",
+        "beta",
+        "hopf:(0, 'O_core', 'center')",
+        "hopf:('SWAP_JOINT', (1, 'H2O_bond_1', 'center'), (2, 'H2O_bond_2', 'center'))",
+        "hopf:('SWAP_JOINT', (1, 'H2O_bond_1', 'partner'), (2, 'H2O_bond_2', 'partner'))",
+        "hopf:('SWAP_JOINT', (3, 'O_lp_1', 'center'), (4, 'O_lp_2', 'center'))",
+        "ell_parity:(0, 'O_core', 'center')",
+        "ell_parity:('SWAP_JOINT', (1, 'H2O_bond_1', 'center'), (2, 'H2O_bond_2', 'center'))",
+        "ell_parity:('SWAP_JOINT', (1, 'H2O_bond_1', 'partner'), (2, 'H2O_bond_2', 'partner'))",
+        "ell_parity:('SWAP_JOINT', (3, 'O_lp_1', 'center'), (4, 'O_lp_2', 'center'))",
+        "atom_swap"
+      ],
+      "dropped": []
+    },
+    {
+      "name": "NH3",
+      "Q_naive": 80,
+      "Q_hopf": 70,
+      "Q_extended": 65,
+      "N_pauli_naive": 888,
+      "N_pauli_hopf": 776,
+      "N_pauli_extended": 1976,
+      "delta_Q_hopf": 10,
+      "delta_Q_extended": 15,
+      "delta_Q_extended_vs_hopf": 5,
+      "kinds_kept": [
+        "alpha",
+        "beta",
+        "hopf:(0, 'N_core', 'center')",
+        "hopf:('SWAP_JOINT', (1, 'NH3_bond_1', 'center'), (2, 'NH3_bond_2', 'center'))",
+        "hopf:('SWAP_JOINT', (1, 'NH3_bond_1', 'partner'), (2, 'NH3_bond_2', 'partner'))",
+        "hopf:(3, 'NH3_bond_3', 'center')",
+        "hopf:(3, 'NH3_bond_3', 'partner')",
+        "hopf:(4, 'N_lp', 'center')",
+        "ell_parity:(0, 'N_core', 'center')",
+        "ell_parity:('SWAP_JOINT', (1, 'NH3_bond_1', 'center'), (2, 'NH3_bond_2', 'center'))",
+        "ell_parity:('SWAP_JOINT', (1, 'NH3_bond_1', 'partner'), (2, 'NH3_bond_2', 'partner'))",
+        "ell_parity:(3, 'NH3_bond_3', 'center')",
+        "ell_parity:(3, 'NH3_bond_3', 'partner')",
+        "ell_parity:(4, 'N_lp', 'center')",
+        "atom_swap"
+      ],
+      "dropped": []
+    },
+    {
+      "name": "CH4",
+      "Q_naive": 90,
+      "Q_hopf": 79,
+      "Q_extended": 77,
+      "N_pauli_naive": 999,
+      "N_pauli_hopf": 873,
+      "N_pauli_extended": 3294,
+      "delta_Q_hopf": 11,
+      "delta_Q_extended": 13,
+      "delta_Q_extended_vs_hopf": 2,
+      "kinds_kept": [
+        "alpha",
+        "beta",
+        "hopf:(0, 'C_core', 'center')",
+        "hopf:('SWAP_JOINT', (1, 'CH4_bond_1', 'center'), (2, 'CH4_bond_2', 'center'))",
+        "hopf:('SWAP_JOINT', (1, 'CH4_bond_1', 'partner'), (2, 'CH4_bond_2', 'partner'))",
+        "hopf:('SWAP_JOINT', (3, 'CH4_bond_3', 'center'), (4, 'CH4_bond_4', 'center'))",
+        "hopf:('SWAP_JOINT', (3, 'CH4_bond_3', 'partner'), (4, 'CH4_bond_4', 'partner'))",
+        "ell_parity:(0, 'C_core', 'center')",
+        "ell_parity:('SWAP_JOINT', (1, 'CH4_bond_1', 'center'), (2, 'CH4_bond_2', 'center'))",
+        "ell_parity:('SWAP_JOINT', (1, 'CH4_bond_1', 'partner'), (2, 'CH4_bond_2', 'partner'))",
+        "ell_parity:('SWAP_JOINT', (3, 'CH4_bond_3', 'center'), (4, 'CH4_bond_4', 'center'))",
+        "ell_parity:('SWAP_JOINT', (3, 'CH4_bond_3', 'partner'), (4, 'CH4_bond_4', 'partner'))",
+        "atom_swap"
+      ],
+      "dropped": []
+    },
+    {
+      "name": "HF",
+      "Q_naive": 60,
+      "Q_hopf": 52,
+      "Q_extended": 46,
+      "N_pauli_naive": 666,
+      "N_pauli_hopf": 582,
+      "N_pauli_extended": 564,
+      "delta_Q_hopf": 8,
+      "delta_Q_extended": 14,
+      "delta_Q_extended_vs_hopf": 6,
+      "kinds_kept": [
+        "alpha",
+        "beta",
+        "hopf:(0, 'F_core', 'center')",
+        "hopf:(1, 'HF_bond', 'center')",
+        "hopf:(1, 'HF_bond', 'partner')",
+        "hopf:(2, 'F_lp_1', 'center')",
+        "hopf:(3, 'F_lp_2', 'center')",
+        "hopf:(4, 'F_lp_3', 'center')",
+        "ell_parity:(0, 'F_core', 'center')",
+        "ell_parity:(1, 'HF_bond', 'center')",
+        "ell_parity:(1, 'HF_bond', 'partner')",
+        "ell_parity:(2, 'F_lp_1', 'center')",
+        "ell_parity:(3, 'F_lp_2', 'center')",
+        "ell_parity:(4, 'F_lp_3', 'center')"
+      ],
+      "dropped": []
+    }
+  ]
+}

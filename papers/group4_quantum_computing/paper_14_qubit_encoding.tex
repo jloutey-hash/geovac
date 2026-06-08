@@ -2344,13 +2344,169 @@ extends to the spinor-coupled Tier 2 builder
 (Sec.~\ref{sec:spinor_composed}) with $J^2$ replacing $S^2$:\ on LiH
 relativistic at CODATA $\alpha$, $\|H_{\rm rel}(\alpha) - H_{\rm
 rel}(0)\|_1 / \alpha^2 = 3.5417$ bit-identical at $\alpha/2, \alpha,
-2\alpha$ (ratio max/min $= 1.0000$), and the spinor $m_j \to -m_j$
-parity commutes with $H_{\rm rel}$ exactly.  Across the $18$-molecule
+2\alpha$ (ratio max/min $= 1.0000$).  The natural spinor-side analog
+of the non-relativistic $m_\ell \to -m_\ell$ Hopf reflection ---
+the $m_j \to -m_j$ Z$_2$ stabiliser on the relativistic Dirac
+basis --- does NOT commute with $H_{\rm rel}$ (residuals $1.7
+\times 10^{-2}$ to $6.8 \times 10^{-2}$ on LiH/BeH/CaH$_{\rm rel}$
+in both the original Dirac basis and after the (sym, antisym)
+rotation; densification check bit-exact at $0$, ruling out
+implementation bug). The structural reason is the load-bearing
+finding of this section's tapering story:\ the non-relativistic
+$m_\ell$ Z$_2$ is \emph{protected} by the integer-$\ell$ Gaunt
+parity selection rule, whereas the half-integer-$j$ jj-coupled
+chemistry has no analog (see Sec.~\ref{sec:gaunt_parity_protection}).
+The relativistic-tapering frontier is therefore closed for Z$_2$
+candidates at sprint scale; non-Z$_2$ machinery ($j^2$ sector
+restriction analog of $S^2$; Kramers projection) remains a separate
+research direction.  Across the $18$-molecule
 hydride library at $n_{\max}=2$, the per-molecule QPT cost
 ($\sim M^3$ Toffoli, range $1{,}000$--$91{,}125$, total $561{,}000$)
 is $4$--$6$ orders of magnitude below typical fault-tolerant QPE
 budgets~\cite{lee2021,reiher2017} ($10^9$--$10^{11}$),
 making spin-adaptation effectively free at GeoVac scale.
+
+\subsubsection{$\ell$-parity Z$_2$:\ direct Gaunt-parity consequence
+(strict improvement over Hopf-only)}
+\label{sec:ell_parity_tapering}
+
+The Gaunt selection rule for the chemistry ERI requires
+$(\ell_a + \ell_c + k)$ even AND $(\ell_b + \ell_d + k)$ even on
+every nonzero $(ab|cd)$, which forces
+$\ell_a + \ell_b + \ell_c + \ell_d$ to be even on every nonzero
+ERI element.  Equivalently, the operator
+$P_\ell^{(i)} = (-1)^{N_{\ell\text{-odd}}^{(i)}}$, counting electrons
+in $\ell$-odd orbitals of sub-block $i$, commutes with the
+two-body Coulomb sector exactly.  Within-block $h_1$ in the
+composed builder is $\ell$-diagonal so $[P_\ell^{(i)}, h_1] = 0$
+trivially.
+
+This is an additional $\mathbb{Z}_2$ stabiliser per sub-block,
+GF($2$)-independent of the Hopf $m_\ell$ stabiliser of
+Sec.~\ref{sec:hopf_tapering} (an $\ell=1$, $m_\ell=0$ orbital
+carries Hopf parity $+1$ but $\ell$-parity $-1$).  No basis
+rotation required:\ orbitals already carry definite $\ell$, so
+$P_\ell^{(i)}$ is a JW $Z$-string directly.  Production module
+\texttt{geovac/extended\_tapering.py} ships this as
+\texttt{use\_ell\_parity=True} (default).
+
+\paragraph*{Verification panel} (composed builder, $n_{\max} = 2$):
+\begin{center}
+\begin{tabular}{lrrrrr}
+System & $Q_{\rm naive}$ & $Q_{\rm Hopf}$ & $Q_{\rm Hopf}+\ell$ &
+$\Delta Q_\ell$ & Pauli ratio \\
+\hline
+LiH    & 30 & 25 & \textbf{22} & $+3$ & $0.97$ \\
+HF     & 60 & 52 & \textbf{46} & $+6$ & $0.97$ \\
+BeH$_2$  & 50 & 43 & \textbf{38} & $+5$ & $0.97$ \\
+H$_2$O   & 70 & 61 & \textbf{54} & $+7$ & $0.97$ \\
+NH$_3$   & 80 & 70 & \textbf{62} & $+8$ & $0.97$ \\
+CH$_4$   & 90 & 79 & \textbf{70} & $+9$ & $0.97$ \\
+\end{tabular}
+\end{center}
+$\Delta Q_\ell = n_{\rm sb}$ (one stabiliser per sub-block with
+$\ell$-odd content) is matched bit-exactly across the panel.  The
+Pauli-count ratio is uniformly $\sim 0.97$ (a $\sim 3\%$ reduction
+beyond Hopf-only), making this a \emph{strict improvement} over
+Hopf-only on both axes.  Verified bit-exact spectrum preservation
+on small systems (test \texttt{tests/test\_extended\_tapering.py}).
+
+\subsubsection{Hidden per-sub-block particle-conservation Z$_2$:\
+meta-investigation via symmetry-adapted basis}
+\label{sec:hidden_particle_z2}
+
+The combined $\mathbb{Z}_2^3$ irrep decomposition under
+$(p_{\rm Hopf}, p_\ell, p_{\rm swap})$ exposes additional hidden
+$\mathbb{Z}_2$ symmetries that the piecewise stabiliser search of
+Secs.~\ref{sec:hopf_tapering}--\ref{sec:ell_parity_tapering} would
+not surface.  Concretely, in the composed builder the ERI is
+block-diagonal across sub-blocks (no cross-block ERI by default,
+\texttt{composed\_qubit.py:727--745}), so the per-sub-block electron
+count $N_b$ is conserved \emph{individually}, and
+\begin{equation}
+  P_N^{(b)} = (-1)^{N_b}
+\label{eq:per_block_particle_z2}
+\end{equation}
+is a $\mathbb{Z}_2$ stabiliser commuting with $H$, independent in
+GF($2$) of the Hopf $m_\ell$ stabiliser (which only $Z$-strings the
+$\ell$-odd antisymmetric orbitals) and of the $\ell$-parity
+stabiliser (which only $Z$-strings the $\ell$-odd orbitals).
+$P_N^{(b)}$ $Z$-strings \emph{all} orbitals in block $b$, a
+strictly larger support.  Production module
+\texttt{geovac/symmetry\_adapted\_basis.py} ships this with the
+\texttt{extended\_plus\_hidden\_tapered\_from\_spec} entry point;
+wired into the production API at
+\texttt{ecosystem\_export.hamiltonian(tapered='full')}.
+
+Across the same panel (extending Sec.~\ref{sec:ell_parity_tapering}):
+\begin{center}
+\begin{tabular}{lrrr}
+System & $Q$ Hopf$+\ell$ & $Q$ full & hidden $\Delta Q$ \\
+\hline
+LiH    & 22 & \textbf{20} & $+2$ \\
+HF     & 46 & \textbf{41} & $+5$ \\
+BeH$_2$  & 38 & \textbf{37} & $+1$ \\
+H$_2$O   & 54 & \textbf{53} & $+1$ \\
+NH$_3$   & 62 & \textbf{55} & $+7$ \\
+CH$_4$   & 70 & \textbf{62} & $+8$ \\
+\hline
+Total  & 292 & \textbf{268} & $+24$ \\
+\end{tabular}
+\end{center}
+The audit gate verifies GF($2$)-independence of each candidate
+stabiliser; $24$ of $132$ panel candidates pass and contribute.
+Spectrum preservation verified bit-exactly to $<2 \times 10^{-15}$
+Ha on LiH max\_n=$1$ via full diagonalisation (test
+\texttt{tests/test\_symmetry\_adapted\_basis.py}).  Combined with
+Hopf $+ \ell$-parity, the production
+\texttt{tapered='full'} pipeline saves $30 \to 20$ on LiH (33\%
+reduction) and $90 \to 62$ on CH$_4$ (31\%) over naive JW --- a
+multiplicative win across the chemistry-encoding-relevant
+$\sim Q=30$--$100$ qubit regime.
+
+\subsubsection{Structural reason:\ Gaunt parity protects integer-$\ell$
+parity Z$_2$'s but not their half-integer-$j$ analogs}
+\label{sec:gaunt_parity_protection}
+
+The Hopf $m_\ell$ Z$_2$ (Sec.~\ref{sec:hopf_tapering}) and the
+$\ell$-parity Z$_2$ (Sec.~\ref{sec:ell_parity_tapering}) both
+commute with $H$ for the \emph{same} underlying structural reason:\
+under all-orbital sign-flip of the parity quantum number in a
+4-orbital ERI element, the angular factor accumulates a sign
+$(-1)^{\sum_i p_i}$ from the four $3j$-symbol parity factors.  For
+integer $\ell$ with sign flip $m_\ell \to -m_\ell$ (Hopf) the
+multipole Gaunt rule $(\ell_a + \ell_c + k)$ even AND
+$(\ell_b + \ell_d + k)$ even forces $\ell_a + \ell_b + \ell_c + \ell_d$
+even.  For integer $\ell$ with the $\ell$-parity sign flip directly,
+the same rule forces the analog sum even.  Both Z$_2$'s are
+\emph{protected} by the Gaunt parity selection rule on the
+multipole-expanded ERI:\ the four-orbital sign factor is
+\emph{forced} to be $+1$, ensuring the ERI tensor is invariant
+under the reflection.
+
+The half-integer-$j$ jj-coupled analog has no such protection.
+Under all-orbital $m_j \to -m_j$ flip the four 3j-symbol sign
+factors give $(-1)^{j_a + j_b + j_c + j_d}$, and the jj-coupled
+selection rules do not force this sum to be even:\ a quadruple
+$(j_a, j_b, j_c, j_d) = (3/2, 1/2, 1/2, 1/2)$ has sum $3$ (odd),
+factor $-1$, and such ERI elements are present at non-zero
+amplitude in $H_{\rm rel}$.  This is the load-bearing structural
+reason the relativistic $m_j$ Z$_2$ candidates fail (both
+direct-basis and rotated-basis; see the $1.7$--$6.8 \times 10^{-2}$
+residuals reported above).
+
+The general principle is:\ for any parity-style $\mathbb{Z}_2$
+tapering candidate in a chemistry construction, the candidate
+commutes with the two-body Coulomb sector if and only if the four
+angular-momentum-parity factors are \emph{forced} to be $+1$ by the
+ERI's angular selection rules.  Integer-$\ell$ Gaunt parity
+provides this protection cleanly (yielding the Hopf + $\ell$-parity
+Z$_2$'s); half-integer-$j$ jj-coupling does not.  This is the
+underlying reason GeoVac's chemistry-side computational story
+(O($Q^{2.5}$) Pauli scaling, $\sim 30\%$ qubit reduction at
+production via four-axis tapering, Pauli-count reduction) is the
+non-relativistic composed builder rather than its relativistic
+Tier 2 sibling.
 
 \subsubsection{MPO bond rank: structural inheritance from the
 multipole expansion}

@@ -1,0 +1,106 @@
+[
+  {
+    "spec_name": "LiH_rel",
+    "max_n": 2,
+    "include_pk": true,
+    "include_breit": false,
+    "Q": 30,
+    "N_pauli": 1413,
+    "n_kappa_neg": 24,
+    "n_kappa_pos": 6,
+    "n_sub_blocks": 3,
+    "residual_global": 0.0506579338000262,
+    "per_block_residuals": [
+      0.0506579338000262,
+      0.021466271542337195,
+      0.016885977933342056
+    ],
+    "n_per_block": 3,
+    "verdict": "STOP",
+    "delta_Q": 0,
+    "wall_build_s": 0.4138269000686705
+  },
+  {
+    "spec_name": "LiH_rel",
+    "max_n": 2,
+    "include_pk": false,
+    "include_breit": false,
+    "Q": 30,
+    "N_pauli": 1413,
+    "n_kappa_neg": 24,
+    "n_kappa_pos": 6,
+    "n_sub_blocks": 3,
+    "residual_global": 0.0506579338000262,
+    "per_block_residuals": [
+      0.0506579338000262,
+      0.016885977933342056,
+      0.016885977933342056
+    ],
+    "n_per_block": 3,
+    "verdict": "STOP",
+    "delta_Q": 0,
+    "wall_build_s": 0.35326460003852844
+  },
+  {
+    "spec_name": "LiH_rel",
+    "max_n": 2,
+    "include_pk": true,
+    "include_breit": true,
+    "Q": 30,
+    "N_pauli": 1413,
+    "n_kappa_neg": 24,
+    "n_kappa_pos": 6,
+    "n_sub_blocks": 3,
+    "residual_global": 0.05066084441573756,
+    "per_block_residuals": [
+      0.05066084441573756,
+      0.021466379342919097,
+      0.016886085733923962
+    ],
+    "n_per_block": 3,
+    "verdict": "STOP",
+    "delta_Q": 0,
+    "wall_build_s": 2.998346999986097
+  },
+  {
+    "spec_name": "BeH_rel",
+    "max_n": 2,
+    "include_pk": true,
+    "include_breit": false,
+    "Q": 30,
+    "N_pauli": 1413,
+    "n_kappa_neg": 24,
+    "n_kappa_pos": 6,
+    "n_sub_blocks": 3,
+    "residual_global": 0.1285984746938698,
+    "per_block_residuals": [
+      0.06754391173336823,
+      0.1285984746938698,
+      0.016885977933342056
+    ],
+    "n_per_block": 3,
+    "verdict": "STOP",
+    "delta_Q": 0,
+    "wall_build_s": 0.3519696998409927
+  },
+  {
+    "spec_name": "CaH_rel",
+    "max_n": 2,
+    "include_pk": true,
+    "include_breit": false,
+    "Q": 20,
+    "N_pauli": 942,
+    "n_kappa_neg": 16,
+    "n_kappa_pos": 4,
+    "n_sub_blocks": 2,
+    "residual_global": 0.03377195586668411,
+    "per_block_residuals": [
+      0.03377195586668411,
+      0.016885977933342056
+    ],
+    "n_per_block": 2,
+    "verdict": "STOP",
+    "delta_Q": 0,
+    "wall_build_s": 0.2603609999641776
+  }
+]

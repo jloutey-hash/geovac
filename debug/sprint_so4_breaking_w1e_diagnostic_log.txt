@@ -1,0 +1,420 @@
+==============================================================================
+Sprint SO(4)-Breaking — W1e Chemistry-Binding Diagnostic
+Date: 2026-06-07 (session continuation)
+==============================================================================
+
+Building LiH at composed and balanced builders...
+  LiH balanced at R=2.5: 13.0s
+  LiH balanced at R=3.015: 13.4s
+  LiH balanced at R=3.5: 13.5s
+  LiH balanced at R=4.0: 13.5s
+  LiH balanced at R=5.0: 13.4s
+  LiH balanced at R=8.0: 13.5s
+
+Building NaH at balanced builder...
+  NaH balanced at R=3.0: 0.2s
+  NaH balanced at R=3.566: 0.2s
+  NaH balanced at R=4.0: 0.2s
+  NaH balanced at R=5.0: 0.2s
+  NaH balanced at R=8.0: 0.2s
+
+==============================================================================
+System: LiH
+==============================================================================
+
+--- R = 2.5 bohr, builder = balanced ---
+  E_FCI = -15.379138 Ha  (V_NN+E_core = -6.2849)
+  Sub-block: Li_core_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-4.90000]
+      2s   : [-1.50876]
+      2p   : [-1.48339, -1.58282, -1.48339]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-4.90047]  NIST: -2.49100
+      2p   : [-1.68921, -1.48339, -1.48339]  NIST: -0.13000
+      2s   : [-1.40190]  NIST: -0.19800
+    SO(4) block gap: 3.4986 Ha
+    s/p analog gap:  -0.2873 Ha
+  Sub-block: LiH_bond_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-0.89057]
+      2s   : [-0.31517]
+      2p   : [-0.33751, -0.39875, -0.33751]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-0.90017]  NIST: -2.49100
+      2p   : [-0.41859, -0.33751, -0.33751]  NIST: -0.13000
+      2s   : [-0.28573]  NIST: -0.19800
+    SO(4) block gap: 0.6144 Ha
+    s/p analog gap:  -0.1329 Ha
+  Sub-block: LiH_bond_partner (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-1.67170]
+      2s   : [-0.69551]
+      2p   : [-0.76253, -0.94624, -0.76253]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-1.72548]  NIST: -2.49100
+      2p   : [-0.99022, -0.76253, -0.76253]  NIST: -0.13000
+      2s   : [-0.59775]  NIST: -0.19800
+    SO(4) block gap: 1.1277 Ha
+    s/p analog gap:  -0.3925 Ha
+
+--- R = 3.015 bohr, builder = balanced ---
+  E_FCI = -15.209580 Ha  (V_NN+E_core = -6.2849)
+  Sub-block: Li_core_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-4.83167]
+      2s   : [-1.45195]
+      2p   : [-1.43255, -1.49800, -1.43255]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-4.83190]  NIST: -2.49100
+      2p   : [-1.58148, -1.43255, -1.43255]  NIST: -0.13000
+      2s   : [-1.36825]  NIST: -0.19800
+    SO(4) block gap: 3.4637 Ha
+    s/p analog gap:  -0.2132 Ha
+  Sub-block: LiH_bond_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-0.82847]
+      2s   : [-0.31093]
+      2p   : [-0.32566, -0.39292, -0.32566]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-0.83601]  NIST: -2.49100
+      2p   : [-0.42127, -0.32566, -0.32566]  NIST: -0.13000
+      2s   : [-0.27504]  NIST: -0.19800
+    SO(4) block gap: 0.5610 Ha
+    s/p analog gap:  -0.1462 Ha
+  Sub-block: LiH_bond_partner (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-1.48541]
+      2s   : [-0.68278]
+      2p   : [-0.72698, -0.92875, -0.72698]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-1.53502]  NIST: -2.49100
+      2p   : [-0.99371, -0.72698, -0.72698]  NIST: -0.13000
+      2s   : [-0.56821]  NIST: -0.19800
+    SO(4) block gap: 0.9668 Ha
+    s/p analog gap:  -0.4255 Ha
+
+--- R = 3.5 bohr, builder = balanced ---
+  E_FCI = -15.069600 Ha  (V_NN+E_core = -6.2849)
+  Sub-block: Li_core_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-4.78571]
+      2s   : [-1.40929]
+      2p   : [-1.39521, -1.43973, -1.39521]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-4.78584]  NIST: -2.49100
+      2p   : [-1.50578, -1.39521, -1.39521]  NIST: -0.13000
+      2s   : [-1.34311]  NIST: -0.19800
+    SO(4) block gap: 3.4427 Ha
+    s/p analog gap:  -0.1627 Ha
+  Sub-block: LiH_bond_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-0.78454]
+      2s   : [-0.30678]
+      2p   : [-0.31459, -0.38362, -0.31459]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-0.79036]  NIST: -2.49100
+      2p   : [-0.41863, -0.31459, -0.31459]  NIST: -0.13000
+      2s   : [-0.26595]  NIST: -0.19800
+    SO(4) block gap: 0.5244 Ha
+    s/p analog gap:  -0.1527 Ha
+  Sub-block: LiH_bond_partner (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-1.35363]
+      2s   : [-0.67033]
+      2p   : [-0.69378, -0.90086, -0.69378]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-1.39870]  NIST: -2.49100
+      2p   : [-0.98344, -0.69378, -0.69378]  NIST: -0.13000
+      2s   : [-0.54267]  NIST: -0.19800
+    SO(4) block gap: 0.8560 Ha
+    s/p analog gap:  -0.4408 Ha
+
+--- R = 4.0 bohr, builder = balanced ---
+  E_FCI = -14.930300 Ha  (V_NN+E_core = -6.2849)
+  Sub-block: Li_core_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-4.75000]
+      2s   : [-1.37460]
+      2p   : [-1.36459, -1.39527, -1.36459]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-4.75007]  NIST: -2.49100
+      2p   : [-1.44777, -1.36459, -1.36459]  NIST: -0.13000
+      2s   : [-1.32203]  NIST: -0.19800
+    SO(4) block gap: 3.4280 Ha
+    s/p analog gap:  -0.1257 Ha
+  Sub-block: LiH_bond_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-0.74958]
+      2s   : [-0.30174]
+      2p   : [-0.30357, -0.37133, -0.30357]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-0.75391]  NIST: -2.49100
+      2p   : [-0.41124, -0.30357, -0.30357]  NIST: -0.13000
+      2s   : [-0.25750]  NIST: -0.19800
+    SO(4) block gap: 0.4964 Ha
+    s/p analog gap:  -0.1537 Ha
+  Sub-block: LiH_bond_partner (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-1.24874]
+      2s   : [-0.65521]
+      2p   : [-0.66072, -0.86399, -0.66072]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-1.28817]  NIST: -2.49100
+      2p   : [-0.96115, -0.66072, -0.66072]  NIST: -0.13000
+      2s   : [-0.51862]  NIST: -0.19800
+    SO(4) block gap: 0.7695 Ha
+    s/p analog gap:  -0.4425 Ha
+
+--- R = 5.0 bohr, builder = balanced ---
+  E_FCI = -14.656714 Ha  (V_NN+E_core = -6.2849)
+  Sub-block: Li_core_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-4.70000]
+      2s   : [-1.32497]
+      2p   : [-1.31967, -1.33563, -1.31967]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-4.70003]  NIST: -2.49100
+      2p   : [-1.37060, -1.31967, -1.31967]  NIST: -0.13000
+      2s   : [-1.28997]  NIST: -0.19800
+    SO(4) block gap: 3.4101 Ha
+    s/p analog gap:  -0.0806 Ha
+  Sub-block: LiH_bond_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-0.69995]
+      2s   : [-0.28912]
+      2p   : [-0.28332, -0.34283, -0.28332]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-0.70222]  NIST: -2.49100
+      2p   : [-0.38663, -0.28332, -0.28332]  NIST: -0.13000
+      2s   : [-0.24305]  NIST: -0.19800
+    SO(4) block gap: 0.4592 Ha
+    s/p analog gap:  -0.1436 Ha
+  Sub-block: LiH_bond_partner (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-1.09984]
+      2s   : [-0.61736]
+      2p   : [-0.59996, -0.77850, -0.59996]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-1.12608]  NIST: -2.49100
+      2p   : [-0.89273, -0.59996, -0.59996]  NIST: -0.13000
+      2s   : [-0.47689]  NIST: -0.19800
+    SO(4) block gap: 0.6492 Ha
+    s/p analog gap:  -0.4158 Ha
+
+--- R = 8.0 bohr, builder = balanced ---
+  E_FCI = -13.994297 Ha  (V_NN+E_core = -6.2849)
+  Sub-block: Li_core_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-4.62500]
+      2s   : [-1.25000]
+      2p   : [-1.24870, -1.25260, -1.24870]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-4.62500]  NIST: -2.49100
+      2p   : [-1.26698, -1.24870, -1.24870]  NIST: -0.13000
+      2s   : [-1.23562]  NIST: -0.19800
+    SO(4) block gap: 3.3894 Ha
+    s/p analog gap:  -0.0314 Ha
+  Sub-block: LiH_bond_center (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-0.62500]
+      2s   : [-0.24635]
+      2p   : [-0.23848, -0.26745, -0.23848]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-0.62538]  NIST: -2.49100
+      2p   : [-0.30015, -0.23848, -0.23848]  NIST: -0.13000
+      2s   : [-0.21327]  NIST: -0.19800
+    SO(4) block gap: 0.4121 Ha
+    s/p analog gap:  -0.0869 Ha
+  Sub-block: LiH_bond_partner (n_val_offset = 0)
+    diagonal h1 per (n,l):
+      1s   : [-0.87500]
+      2s   : [-0.48906]
+      2p   : [-0.46545, -0.55236, -0.46545]
+    eigenvalues (grouped by max-overlap (n,l)):
+      1s   : [-0.87925]  NIST: -2.49100
+      2p   : [-0.64793, -0.46545, -0.46545]  NIST: -0.13000
+      2s   : [-0.38924]  NIST: -0.19800
+    SO(4) block gap: 0.4900 Ha
+    s/p analog gap:  -0.2587 Ha
+
+==============================================================================
+System: NaH
+==============================================================================
+
+--- R = 3.0 bohr, builder = balanced ---
+  E_FCI = -170.026308 Ha  (V_NN+E_core = -161.5786)
+  Sub-block: NaH_bond_center (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-0.83003]
+      4s   : [-0.31105]
+      4p   : [-0.32600, -0.39315, -0.32600]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-0.83762]  NIST: -0.18900
+      4p   : [-0.42127, -0.32600, -0.32600]
+      4s   : [-0.27533]
+    SO(4) block gap: 0.5623 Ha
+    s/p analog gap:  -0.1459 Ha
+  Sub-block: NaH_bond_partner (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-4.13031]
+      4s   : [-2.17151]
+      4p   : [-2.33605, -3.07467, -2.33605]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-4.44286]  NIST: -0.18900
+      4p   : [-3.20459, -2.33605, -2.33605]
+      4s   : [-1.72905]
+    SO(4) block gap: 2.7138 Ha
+    s/p analog gap:  -1.4755 Ha
+
+--- R = 3.566 bohr, builder = balanced ---
+  E_FCI = -169.114635 Ha  (V_NN+E_core = -161.5786)
+  Sub-block: NaH_bond_center (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-0.77940]
+      4s   : [-0.30616]
+      4p   : [-0.31311, -0.38213, -0.31311]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-0.78501]  NIST: -0.18900
+      4p   : [-0.41791, -0.31311, -0.31311]
+      4s   : [-0.26478]
+    SO(4) block gap: 0.5202 Ha
+    s/p analog gap:  -0.1531 Ha
+  Sub-block: NaH_bond_partner (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-3.57343]
+      4s   : [-2.11778]
+      4p   : [-2.19423, -2.95342, -2.19423]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-3.93628]  NIST: -0.18900
+      4p   : [-3.08365, -2.19423, -2.19423]
+      4s   : [-1.62470]
+    SO(4) block gap: 2.3116 Ha
+    s/p analog gap:  -1.4590 Ha
+
+--- R = 4.0 bohr, builder = balanced ---
+  E_FCI = -168.601021 Ha  (V_NN+E_core = -161.5786)
+  Sub-block: NaH_bond_center (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-0.74958]
+      4s   : [-0.30174]
+      4p   : [-0.30357, -0.37133, -0.30357]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-0.75391]  NIST: -0.18900
+      4p   : [-0.41124, -0.30357, -0.30357]
+      4s   : [-0.25750]
+    SO(4) block gap: 0.4964 Ha
+    s/p analog gap:  -0.1537 Ha
+  Sub-block: NaH_bond_partner (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-3.24539]
+      4s   : [-2.06911]
+      4p   : [-2.08929, -2.83464, -2.08929]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-3.65284, -2.94480]  NIST: -0.18900
+      4p   : [-2.08929, -2.08929]
+      4s   : [-1.55149]
+    SO(4) block gap: 2.1014 Ha
+    s/p analog gap:  -0.5378 Ha
+
+--- R = 5.0 bohr, builder = balanced ---
+  E_FCI = -167.671412 Ha  (V_NN+E_core = -161.5786)
+  Sub-block: NaH_bond_center (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-0.69995]
+      4s   : [-0.28912]
+      4p   : [-0.28332, -0.34283, -0.28332]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-0.70222]  NIST: -0.18900
+      4p   : [-0.38663, -0.28332, -0.28332]
+      4s   : [-0.24305]
+    SO(4) block gap: 0.4592 Ha
+    s/p analog gap:  -0.1436 Ha
+  Sub-block: NaH_bond_partner (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-2.69940]
+      4s   : [-1.93032]
+      4p   : [-1.86652, -2.52116, -1.86652]
+    eigenvalues (grouped by max-overlap (n,l)):
+      4p   : [-3.16382, -1.86652, -1.86652]
+      3s   : [-2.58360]  NIST: -0.18900
+      4s   : [-1.40347]
+    SO(4) block gap: 1.7604 Ha
+    s/p analog gap:  -1.7604 Ha
+
+--- R = 8.0 bohr, builder = balanced ---
+  E_FCI = -165.558463 Ha  (V_NN+E_core = -161.5786)
+  Sub-block: NaH_bond_center (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-0.62500]
+      4s   : [-0.24635]
+      4p   : [-0.23848, -0.26745, -0.23848]
+    eigenvalues (grouped by max-overlap (n,l)):
+      3s   : [-0.62538]  NIST: -0.18900
+      4p   : [-0.30015, -0.23848, -0.23848]
+      4s   : [-0.21327]
+    SO(4) block gap: 0.4121 Ha
+    s/p analog gap:  -0.0869 Ha
+  Sub-block: NaH_bond_partner (n_val_offset = 2)
+    diagonal h1 per (n,l):
+      3s   : [-1.87500]
+      4s   : [-1.45987]
+      4p   : [-1.37333, -1.69200, -1.37333]
+    eigenvalues (grouped by max-overlap (n,l)):
+      4p   : [-2.10061, -1.37333, -1.37333]
+      3s   : [-1.83687]  NIST: -0.18900
+      4s   : [-1.08938]
+    SO(4) block gap: 1.0112 Ha
+    s/p analog gap:  -1.0112 Ha
+
+==============================================================================
+SO(4)-BREAKING vs R (LiH balanced)
+==============================================================================
+  R (bohr)         E_FCI  Li_core_center_SO4gap  LiH_bond_center_SO4gap  LiH_bond_partner_SO4gap
+     2.500    -15.379138               3.49857               0.61444               1.12774
+     3.015    -15.209580               3.46365               0.56097               0.96681
+     3.500    -15.069600               3.44272               0.52442               0.85603
+     4.000    -14.930300               3.42805               0.49641               0.76954
+     5.000    -14.656714               3.41006               0.45918               0.64918
+     8.000    -13.994297               3.38938               0.41211               0.49000
+
+==============================================================================
+SO(4)-BREAKING vs R (NaH balanced)
+==============================================================================
+  R (bohr)         E_FCI  NaH_bond_center_SO4gap  NaH_bond_partner_SO4gap
+     3.000   -170.026308               0.56229               2.71381
+     3.566   -169.114635               0.52023               2.31158
+     4.000   -168.601021               0.49641               2.10135
+     5.000   -167.671412               0.45918               1.76036
+     8.000   -165.558463               0.41211               1.01123
+Traceback (most recent call last):
+  File "C:\Users\jlout\Desktop\Project_Geometric\debug\sprint_so4_breaking_w1e_diagnostic_driver.py", line 335, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\jlout\Desktop\Project_Geometric\debug\sprint_so4_breaking_w1e_diagnostic_driver.py", line 330, in main
+    json.dump(_jsonable(out_data), f, indent=2)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\json\__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "C:\Python314\Lib\json\encoder.py", line 442, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Python314\Lib\json\encoder.py", line 411, in _iterencode_dict
+    yield from chunks
+  File "C:\Python314\Lib\json\encoder.py", line 324, in _iterencode_list
+    yield from chunks
+  File "C:\Python314\Lib\json\encoder.py", line 411, in _iterencode_dict
+    yield from chunks
+  File "C:\Python314\Lib\json\encoder.py", line 324, in _iterencode_list
+    yield from chunks
+  File "C:\Python314\Lib\json\encoder.py", line 411, in _iterencode_dict
+    yield from chunks
+  File "C:\Python314\Lib\json\encoder.py", line 379, in _iterencode_dict
+    raise TypeError(f'keys must be str, int, float, bool or None, '
+                    f'not {key.__class__.__name__}')
+TypeError: keys must be str, int, float, bool or None, not tuple
+when serializing dict item 'diag_breakdown_per_orbital'
+when serializing list item 0
+when serializing dict item 'sub_blocks'
+when serializing list item 0
+when serializing dict item 'lih_balanced'

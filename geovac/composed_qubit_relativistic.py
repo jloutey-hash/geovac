@@ -604,15 +604,18 @@ def build_composed_hamiltonian_relativistic(
 
     return {
         'Q': Q,
+        'M': Q,  # alias for downstream consumers expecting an M key
         'N_pauli': N_pauli,
         'lambda_total': float(lam_total),
         'lambda_ni': float(lam_ni),
         'qwc_groups': len(qwc),
         'qubit_op': qubit_op,
         'fermion_op': fermion_op,
+        'h1': h1,  # dense Q×Q one-body matrix (v3.95.0 — exposed for rotated-basis tapering)
         'h1_diag': np.diag(h1).copy(),
         'h1_so_diag': h1_so,
         'eri_sparse': eri_sparse,
+        'sub_blocks': sub_blocks,  # v3.95.0 — exposed for rotated-basis tapering
         'cross_block_eri_count': cross_block_count,
         'nuclear_repulsion': float(spec.nuclear_repulsion_constant),
         'wall_time_s': wall,

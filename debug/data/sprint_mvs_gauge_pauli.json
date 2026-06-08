@@ -1,0 +1,86 @@
+{
+  "lih": {
+    "system": "LiH_default",
+    "R": 3.015,
+    "max_n": 2,
+    "n_electrons": 4,
+    "M": 15,
+    "Q_naive": 30,
+    "E_FCI_baseline": -16.719748323068735,
+    "candidates": [
+      {
+        "label": "A: identity",
+        "M": 15,
+        "Q_pre_taper": 30,
+        "N_pauli_pre_taper": 909,
+        "E_FCI": -16.71974832306872,
+        "FCI_residual_vs_baseline": 1.4210854715202004e-14,
+        "z2_taper_applies": true,
+        "Q_post_taper": 25,
+        "N_pauli_post_taper": 813,
+        "Z2_stabilizers_dropped": []
+      },
+      {
+        "label": "C: per-sub-block h1 diag",
+        "M": 15,
+        "Q_pre_taper": 30,
+        "N_pauli_pre_taper": 2069,
+        "E_FCI": -16.714597748356027,
+        "FCI_residual_vs_baseline": 0.005150574712708078,
+        "z2_taper_applies": true,
+        "Q_post_taper": 28,
+        "N_pauli_post_taper": 3925,
+        "Z2_stabilizers_dropped": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "label": "D: per-vertex h1 diag",
+        "M": 15,
+        "Q_pre_taper": 30,
+        "N_pauli_pre_taper": 2069,
+        "E_FCI": -16.714597748356102,
+        "FCI_residual_vs_baseline": 0.005150574712633471,
+        "z2_taper_applies": true,
+        "Q_post_taper": 28,
+        "N_pauli_post_taper": 3925,
+        "Z2_stabilizers_dropped": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "label": "E: per-vertex NO from FCI 1-RDM",
+        "M": 15,
+        "Q_pre_taper": 30,
+        "N_pauli_pre_taper": 17173,
+        "E_FCI": -16.713643369942922,
+        "FCI_residual_vs_baseline": 0.006104953125813495,
+        "z2_taper_applies": false,
+        "z2_taper_skip_reason": "Z\u2082 Hopf rotation assumes definite (n, l, m) per orbital; this gauge mixes orbitals within a vertex, so the Z\u2082 sub-symmetry no longer factorizes per sub-block."
+      },
+      {
+        "label": "F: random block-unitary",
+        "M": 15,
+        "Q_pre_taper": 30,
+        "N_pauli_pre_taper": 25317,
+        "E_FCI": -16.673723334518105,
+        "FCI_residual_vs_baseline": 0.04602498855063075,
+        "z2_taper_applies": false,
+        "z2_taper_skip_reason": "Z\u2082 Hopf rotation assumes definite (n, l, m) per orbital; this gauge mixes orbitals within a vertex, so the Z\u2082 sub-symmetry no longer factorizes per sub-block."
+      }
+    ]
+  },
+  "h2": {
+    "system": "H2",
+    "M": 10,
+    "N_pauli_identity": 514,
+    "N_pauli_per_subblock_diag": 1158,
+    "E_FCI_baseline": -2.79693527158886,
+    "E_FCI_per_subblock_diag": -2.796935271588857,
+    "FCI_residual": 2.6645352591003757e-15
+  }
+}

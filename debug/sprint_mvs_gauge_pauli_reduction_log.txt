@@ -1,0 +1,66 @@
+========================================================================
+Sprint M-vS Gauge — Pauli reduction beyond Z₂ Hopf-U(1)?
+System: default lih_spec(), n_max=2, R = R_eq = 3.015 bohr
+Date: 2026-06-07 (session continuation)
+========================================================================
+
+[1] Build LiH balanced Hamiltonian at R = 3.015, max_n = 2
+    M = 15 spatial, Q_naive = 30 qubits  (1.3s)
+
+[2] Identity baseline (no gauge transform, no tapering)
+    N_pauli (untapered) = 909
+    E_FCI = -16.7197483231 Ha  (baseline)
+
+[3] M-vS vertex grouping:
+    Vertex Li indices (10): [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    Vertex H indices (5): [10, 11, 12, 13, 14]
+
+[A] Identity gauge
+    N_pauli (pre-tape) = 909, E_FCI residual = 1.42e-14
+    Z₂ tapered: Q = 25, N_pauli = 813
+
+[C] Per-sub-block h1 diagonalization (abelian sub-gauge)
+    N_pauli (pre-tape) = 2069, E_FCI residual = 5.15e-03
+    Z₂ tapered: Q = 28, N_pauli = 3925
+
+[D] Per-vertex h1 diagonalization (M-vS gauge, full vertex)
+    U_D orthogonality residual = 5.55e-16
+    N_pauli (pre-tape) = 2069, E_FCI residual = 5.15e-03
+    Z₂ tapered: Q = 28, N_pauli = 3925
+
+[E] Per-vertex natural orbitals (FCI 1-RDM eigenbasis)
+    NO construction wall time: 36.7s
+    U_E orthogonality residual = 7.77e-16
+    N_pauli (pre-tape) = 17173, E_FCI residual = 6.10e-03
+    Z₂ not applied: NO mixes Li_core ↔ LiH_bond_center.
+
+[F] Random M-vS block-unitary (control test)
+    N_pauli (pre-tape) = 25317, E_FCI residual = 4.60e-02
+    Z₂ not applied: random mixes Li_core ↔ LiH_bond_center.
+
+========================================================================
+COMPARISON TABLE
+========================================================================
+Candidate                                  N_pauli pre   Q post Z₂   N_pauli post       FCI Δ
+---------------------------------------------------------------------------------------------
+A: identity                                        909          25            813    1.42e-14
+C: per-sub-block h1 diag                          2069          28           3925    5.15e-03
+D: per-vertex h1 diag                             2069          28           3925    5.15e-03
+E: per-vertex NO from FCI 1-RDM                  17173           —              —    6.10e-03
+F: random block-unitary                          25317           —              —    4.60e-02
+
+========================================================================
+VERDICT
+========================================================================
+  Best Z₂-eligible post-taper N_pauli: 813 (A: identity)
+  Best M-vS-gauge pre-taper N_pauli:   909 (in pre-taper representation)
+  ⇒ No M-vS gauge BEATS the Z₂-tapered representation at Pauli count.
+     The pre-taper count of M-vS-rotated h1/eri is larger than the Z₂-tapered count even after gauge transformation.  Z₂ remains the winning strategy.
+
+========================================================================
+CROSS-CHECK: H₂ two-center spec (M=10, 2 electrons)
+========================================================================
+  Identity: N_pauli = 514, E_FCI = -2.7969352716
+  Per-sub-block h1 diag: N_pauli = 1158, E_FCI = -2.7969352716, residual = 2.66e-15
+
+Data written to C:\Users\jlout\Desktop\Project_Geometric\debug\data\sprint_mvs_gauge_pauli.json

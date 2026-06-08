@@ -323,3 +323,52 @@ class TestEcosystemExportTapered:
         from geovac.ecosystem_export import hamiltonian
         with pytest.raises(ValueError, match="tapered must be"):
             hamiltonian('H2', max_n=2, tapered='banana')
+
+    def test_extended_mode_strict_improvement_over_per_block(self):
+        """v3.90.0 wiring: tapered='extended' should give strictly fewer
+        qubits than tapered='per_block' on any molecule with l-odd
+        orbitals at default n_max=2, and at least as few Pauli terms."""
+        from geovac.ecosystem_export import hamiltonian
+        for sys_name in ('LiH', 'BeH2', 'H2O', 'HF'):
+            ham_pb = hamiltonian(sys_name, max_n=2, tapered='per_block')
+            ham_ext = hamiltonian(sys_name, max_n=2, tapered='extended')
+            assert ham_ext._metadata['tapered_mode'] == 'extended'
+            assert ham_ext._metadata['Q_tapered'] < ham_pb._metadata['Q_tapered'], (
+                f"{sys_name}: extended should save more qubits than per_block; "
+                f"got Q_pb={ham_pb._metadata['Q_tapered']}, "
+                f"Q_ext={ham_ext._metadata['Q_tapered']}"
+            )
+            assert ham_ext.n_terms <= ham_pb.n_terms, (
+                f"{sys_name}: extended should have ≤ Pauli terms than per_block; "
+                f"got n_pb={ham_pb.n_terms}, n_ext={ham_ext.n_terms}"
+            )
+
+    def test_extended_lih_saves_three_extra_qubits(self):
+        """LiH has 3 sub-blocks all with p orbitals → extended saves
+        +3 qubits over per_block."""
+        from geovac.ecosystem_export import hamiltonian
+        ham_pb = hamiltonian('LiH', max_n=2, tapered='per_block')
+        ham_ext = hamiltonian('LiH', max_n=2, tapered='extended')
+        assert ham_pb._metadata['Q_tapered'] - ham_ext._metadata['Q_tapered'] == 3
+
+    def test_full_mode_strict_improvement_over_extended(self):
+        """v3.93.0 wiring: tapered='full' adds hidden particle-conservation
+        Z₂s from the symmetry-adapted basis (v3.92.0). Should give strictly
+        ≤ Q than 'extended' on every system."""
+        from geovac.ecosystem_export import hamiltonian
+        for sys_name in ('LiH', 'HF', 'BeH2'):
+            ham_ext = hamiltonian(sys_name, max_n=2, tapered='extended')
+            ham_full = hamiltonian(sys_name, max_n=2, tapered='full')
+            assert ham_full._metadata['tapered_mode'] == 'full'
+            assert ham_full._metadata['Q_tapered'] <= ham_ext._metadata['Q_tapered'], (
+                f"{sys_name}: full should save ≥ qubits than extended; got "
+                f"Q_ext={ham_ext._metadata['Q_tapered']}, "
+                f"Q_full={ham_full._metadata['Q_tapered']}"
+            )
+
+    def test_full_lih_saves_two_extra_qubits_over_extended(self):
+        """LiH: v3.92.0 panel showed Q 22 → 20 (+2) via hidden Z₂s."""
+        from geovac.ecosystem_export import hamiltonian
+        ham_ext = hamiltonian('LiH', max_n=2, tapered='extended')
+        ham_full = hamiltonian('LiH', max_n=2, tapered='full')
+        assert ham_ext._metadata['Q_tapered'] - ham_full._metadata['Q_tapered'] == 2

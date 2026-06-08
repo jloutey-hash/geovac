@@ -458,6 +458,31 @@ built from spherical harmonic bases.  The angular selection rule
 structure is a computational resource that belongs to the geometry
 of angular momentum, not to the Coulomb potential.
 
+\subsection{Z$_2$ tapering from Gaunt parity}
+\label{sec:ell_parity_consequence}
+
+The Gaunt parity selection rule
+$(\ell_a + \ell_c + k)$ even AND $(\ell_b + \ell_d + k)$ even
+in Theorem~2 forces $\ell_a + \ell_b + \ell_c + \ell_d$ to be even
+on every nonzero ERI element.  Therefore the operator
+$P_\ell^{(i)} = (-1)^{N_{\ell\text{-odd}}^{(i)}}$, counting electrons
+in $\ell$-odd orbitals of sub-block $i$, commutes with the two-body
+Coulomb sector exactly, providing a $\mathbb{Z}_2$ qubit-tapering
+stabiliser independent of the Hopf $m_\ell \to -m_\ell$ reflection.
+Per-sub-block, this saves $\Delta Q = n_{\rm sb}$ qubits beyond the
+v3.52.0 Hopf-only tapering and reduces the Pauli term count by
+$\sim 3\%$ across the production hydride library, verified bit-exact
+across LiH ($+3$), HF ($+6$), BeH$_2$ ($+5$), H$_2$O ($+7$), NH$_3$
+($+8$), CH$_4$ ($+9$).  The relativistic jj-coupled analog has no
+such parity protection (the half-integer-$j$ sum is not forced
+even by jj-coupled selection rules), structurally explaining why
+the relativistic Tier 2 chemistry construction admits no direct
+$m_j$-parity $\mathbb{Z}_2$ tapering analog.  Production:\
+\texttt{geovac/extended\_tapering.py} (v3.89.0,
+\texttt{tapered='extended'}); detailed analysis and panel data in
+Paper~14~\S\ref{sec:ell_parity_tapering} and
+\S\ref{sec:gaunt_parity_protection}.
+
 \subsection{Non-central interactions}
 
 Theorems~1--3 apply to central (rotationally invariant) two-body

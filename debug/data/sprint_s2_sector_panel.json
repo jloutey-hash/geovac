@@ -1,0 +1,86 @@
+[
+  {
+    "system": "H2",
+    "n_electrons": 2,
+    "Q": 10,
+    "M": 5,
+    "dim_Sz0": 25,
+    "dim_singlet": 15,
+    "speedup_factor": 1.667,
+    "commutator_residual": 0.0,
+    "commutes": true,
+    "status": "ok"
+  },
+  {
+    "system": "LiH",
+    "n_electrons": 4,
+    "Q": 30,
+    "M": 15,
+    "dim_Sz0": 11025,
+    "dim_singlet": 4200,
+    "speedup_factor": 2.625,
+    "commutator_residual": 0.0,
+    "commutes": true,
+    "status": "ok"
+  },
+  {
+    "system": "BeH2",
+    "n_electrons": 6,
+    "Q": 50,
+    "M": 25,
+    "dim_Sz0": 5290000,
+    "dim_singlet": 1495000,
+    "speedup_factor": 3.538,
+    "commutator_residual": 0.0,
+    "commutes": true,
+    "status": "ok"
+  },
+  {
+    "system": "H2O",
+    "n_electrons": 10,
+    "Q": 70,
+    "M": 35,
+    "dim_Sz0": 105385935424,
+    "dim_singlet": 20397277824,
+    "speedup_factor": 5.167,
+    "commutator_residual": 0.0,
+    "commutes": true,
+    "status": "ok"
+  },
+  {
+    "system": "NH3",
+    "n_electrons": 10,
+    "Q": 80,
+    "M": 40,
+    "dim_Sz0": 432974528064,
+    "dim_singlet": 82184979864,
+    "speedup_factor": 5.268,
+    "commutator_residual": 0.0,
+    "commutes": true,
+    "status": "ok"
+  },
+  {
+    "system": "CH4",
+    "n_electrons": 10,
+    "Q": 90,
+    "M": 45,
+    "dim_Sz0": 1492695054081,
+    "dim_singlet": 279121839381,
+    "speedup_factor": 5.348,
+    "commutator_residual": 0.0,
+    "commutes": true,
+    "status": "ok"
+  },
+  {
+    "system": "HF",
+    "n_electrons": 10,
+    "Q": 60,
+    "M": 30,
+    "dim_Sz0": 20307960036,
+    "dim_singlet": 4035556161,
+    "speedup_factor": 5.032,
+    "commutator_residual": 0.0,
+    "commutes": true,
+    "status": "ok"
+  }
+]

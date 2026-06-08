@@ -870,17 +870,33 @@ def hamiltonian(
         Maximum principal quantum number (default 2).
     verbose : bool
         Print build progress.
-    tapered : {None, 'global', 'per_block'}, optional
-        If set, apply Hopf-U(1) ``m -> -m`` Z2 tapering on top of the
-        standard alpha/beta parity tapering (Paper 14 §sec:hopf_tapering,
-        Paper 29 §5.3).  ``'global'`` removes 3 qubits per molecule;
-        ``'per_block'`` removes ``2 + n_sub_blocks`` qubits (recommended,
-        ranges from 3 for He/H2 to 12 for CO/N2/F2).  Default ``None``
-        preserves the historical Pauli/qubit counts of Paper 14 Tables
-        I/II.  The tapering is a similarity transform onto the
-        fully-symmetric (all stabilisers ``+1``) sector, which is the
-        physical ground-state sector for closed-shell molecules in the
-        standard composed builder.
+    tapered : {None, 'global', 'per_block', 'extended', 'full'}, optional
+        If set, apply Z2 tapering on top of the standard alpha/beta
+        parity Z-strings (Paper 14 §sec:hopf_tapering, Paper 29 §5.3,
+        plus v3.89.0 / v3.92.0 symmetry extensions):
+
+        - ``'global'``: Hopf-U(1) global ``m -> -m`` reflection; ΔQ=3.
+        - ``'per_block'``: Hopf per-sub-block; ΔQ=``2 + n_sub_blocks``
+          (recommended baseline; range 3 to 12).
+        - ``'extended'``: Hopf per-block + Gaunt-parity ℓ-Z2 per-block
+          (v3.89.0; strict improvement over ``'per_block'`` on the
+          composed builder: ΔQ = ``2 + 2·n_sub_blocks_with_lodd`` plus
+          3% Pauli reduction).  Atom-swap and inversion stabilizers
+          are NOT applied (opt-in only via
+          ``geovac.extended_tapering.extended_tapered_from_spec``
+          due to their Pauli-inflation tradeoff).
+        - ``'full'``: ``'extended'`` plus per-sub-block
+          particle-conservation Z₂s ``(-1)^N_b`` found by the
+          symmetry-adapted basis meta-investigation (v3.92.0).
+          Saves an additional 1–8 qubits per molecule on top of
+          ``'extended'`` (LiH +2, HF +5, BeH₂ +1, H₂O +1, NH₃ +7,
+          CH₄ +8 in the verification panel).  Strict improvement
+          over ``'extended'`` in qubit count.  Backed by
+          ``geovac.symmetry_adapted_basis.extended_plus_hidden_tapered_from_spec``.
+
+        Default ``None`` preserves the historical Pauli/qubit counts
+        of Paper 14 Tables I/II.  The tapering is a similarity
+        transform onto the fully-symmetric sector.
 
     Returns
     -------
@@ -933,37 +949,94 @@ def _apply_hopf_tapering_to_geovac_hamiltonian(
     core_method: str,
     verbose: bool,
 ) -> GeoVacHamiltonian:
-    """Rebuild the molecule via ``geovac.z2_tapering.hopf_tapered_from_spec``
-    and wrap the tapered operator in a ``GeoVacHamiltonian``.
+    """Rebuild the molecule and apply the requested tapering, wrapping
+    the result in a ``GeoVacHamiltonian``.
+
+    Supported modes:
+      - ``'global'``, ``'per_block'``: via
+        ``geovac.z2_tapering.hopf_tapered_from_spec``
+      - ``'extended'``: via
+        ``geovac.extended_tapering.extended_tapered_from_spec``
+        (Hopf + ℓ-parity per-block; atom-swap/inversion off here)
 
     Re-runs the spec build (cheap relative to the JW + rotation cost)
     rather than trying to taper an already-JW-encoded operator that was
     not built in the P-eigenbasis.
     """
-    from geovac.z2_tapering import hopf_tapered_from_spec
-
-    if mode not in ('global', 'per_block'):
+    if mode not in ('global', 'per_block', 'extended', 'full'):
         raise ValueError(
-            f"tapered must be None, 'global', or 'per_block'; got {mode!r}"
+            f"tapered must be None, 'global', 'per_block', "
+            f"'extended', or 'full'; got {mode!r}"
         )
 
     spec = _rebuild_spec(canonical, R=R, max_n=max_n, core_method=core_method)
     pk_in_ham = (core_method == 'downfolded')
-    result = hopf_tapered_from_spec(
-        spec, mode=mode, pk_in_hamiltonian=pk_in_ham, verbose=verbose,
-    )
+
+    if mode in ('global', 'per_block'):
+        from geovac.z2_tapering import hopf_tapered_from_spec
+        result = hopf_tapered_from_spec(
+            spec, mode=mode, pk_in_hamiltonian=pk_in_ham, verbose=verbose,
+        )
+        meta_update = {
+            'tapered_mode': mode,
+            'Q_tapered': result['Q_tapered'],
+            'delta_Q': result['delta_Q'],
+            'n_sub_blocks': result['n_sub_blocks'],
+            'n_sub_blocks_with_antisym': result['n_sub_blocks_with_antisym'],
+            'dropped_P_indices': result['dropped_P_indices'],
+        }
+        qop_tapered = result['qubit_op_tapered']
+    elif mode == 'extended':
+        from geovac.extended_tapering import extended_tapered_from_spec
+        result = extended_tapered_from_spec(
+            spec,
+            use_hopf=True,
+            use_ell_parity=True,
+            use_atom_swap=False,
+            use_inversion=False,
+            pk_in_hamiltonian=pk_in_ham,
+            builder='composed',
+            verbose=verbose,
+        )
+        meta_update = {
+            'tapered_mode': mode,
+            'Q_tapered': result['Q_tapered'],
+            'delta_Q': result['delta_Q'],
+            'n_stabs_kept': result['n_stabs_kept'],
+            'kinds_kept': result['kinds_kept'],
+            'dropped': result['dropped'],
+        }
+        qop_tapered = result['qubit_op_tapered']
+    else:  # 'full' — extended + hidden particle-conservation Z2s (v3.92.0)
+        from geovac.symmetry_adapted_basis import (
+            extended_plus_hidden_tapered_from_spec,
+        )
+        result = extended_plus_hidden_tapered_from_spec(
+            spec,
+            use_hopf=True,
+            use_ell_parity=True,
+            use_atom_swap=False,
+            use_inversion=False,
+            pk_in_hamiltonian=pk_in_ham,
+            builder='composed',
+            verbose=verbose,
+        )
+        meta_update = {
+            'tapered_mode': mode,
+            'Q_tapered': result['Q_tapered_hidden'],
+            'Q_tapered_extended_only': result['Q_tapered'],
+            'delta_Q': result['Q_naive'] - result['Q_tapered_hidden'],
+            'delta_Q_hidden': result['delta_Q_hidden'],
+            'n_hidden_z2_kept': len(result.get('hidden_z2_kept', [])),
+            'n_stabs_kept': result['n_stabs_kept'],
+            'kinds_kept': result['kinds_kept'],
+        }
+        qop_tapered = result['qubit_op_tapered_plus_hidden']
 
     meta = dict(ham._metadata)
-    meta.update({
-        'tapered_mode': mode,
-        'Q_tapered': result['Q_tapered'],
-        'delta_Q': result['delta_Q'],
-        'n_sub_blocks': result['n_sub_blocks'],
-        'n_sub_blocks_with_antisym': result['n_sub_blocks_with_antisym'],
-        'dropped_P_indices': result['dropped_P_indices'],
-    })
+    meta.update(meta_update)
     return GeoVacHamiltonian(
-        result['qubit_op_tapered'], metadata=meta,
+        qop_tapered, metadata=meta,
         h1_pk=ham._h1_pk,
         # The pre-JW integrals are pre-tapering; they remain valid for
         # classical chemistry consumers regardless of qubit tapering.

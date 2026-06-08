@@ -1,0 +1,199 @@
+==============================================================================
+Spectral-Action-Expansion-Chemistry diagnostic
+Sprint date: 2026-06-07
+==============================================================================
+
+Question: at fixed R = R_eq, does S(D, Lambda) expansion factorize
+into chemistry-meaningful coefficients (cf. Chamseddine-Connes SM)?
+Decision gate:
+  POSITIVE if fit coefficients beyond trivial Tr(D^{2k}) Taylor
+           series show chemistry-specific structure.
+  NEGATIVE if S(Lambda) is exactly the matrix-Taylor expansion.
+  PARTIAL  if leading coefficient meaningful, sub-leading not.
+
+Lambda grid: 50 points, log-spaced in [0.100, 100.00]
+
+[1/3] LiH default lih_spec() at R = 3.015 bohr
+
+  Building LiH at R = 3.015 bohr, max_n = 2...
+    M = 15, build time 1.4s
+    computing trace powers up to D^12...
+    sweeping Lambda grid (50 points)...
+    Lambda sweep 0.0s
+
+--- LiH (M = 15, R = 3.015 bohr) ---
+  h1 trace             = -17.381245
+  |lambda|_max         = 4.9180
+  |lambda|_min (nz)    = 3.2566e-01
+  Tr(h1)               =   -17.381245
+  Tr(h1^2)             =    41.512418
+  Tr(h_diag^2)         =    37.543362  (= sum h_pp^2)
+  Tr(h_off^2)          =     3.969056  (= sum_{p!=q} h_pq^2)
+  Tr(h_diag * h_off)   =   0.0000e+00  (should be ~0 by orthogonality of diag/off)
+  identity check       = 0.0000e+00
+  Tr(h1^4)             =   637.917577
+  Tr(h1^6)             = 14388.359799
+  Tr(h1^8)             = 343515.692371
+  Tr(h1^10)            = 8285160.897069
+  Tr(h1^12)            = 200261932.866315
+  Taylor expansion check at Lambda >= 5:
+    max |S_actual - S_taylor|     = 8.6257e-05
+    max rel |S_actual - S_taylor| = 6.2528e-06
+    smallest Lambda where Taylor agrees to 1e-6: 7.906
+    (|lambda|_max = 4.918, so Taylor must
+    converge for Lambda >> sqrt(spectral_radius(D^2)))
+
+[2/3] H2 two-center pilot at R = 1.4 bohr
+
+  Building H2 at R = 1.4 bohr, max_n = 2...
+    M = 10, build time 0.7s
+    computing trace powers up to D^12...
+    sweeping Lambda grid (50 points)...
+    Lambda sweep 0.0s
+
+--- H2 (M = 10, R = 1.4 bohr) ---
+  h1 trace             = -5.113522
+  |lambda|_max         = 2.0730
+  |lambda|_min (nz)    = 2.3330e-03
+  Tr(h1)               =    -5.113522
+  Tr(h1^2)             =     5.564803
+  Tr(h_diag^2)         =     3.514771  (= sum h_pp^2)
+  Tr(h_off^2)          =     2.050033  (= sum_{p!=q} h_pq^2)
+  Tr(h_diag * h_off)   =   0.0000e+00  (should be ~0 by orthogonality of diag/off)
+  identity check       = 8.8818e-16
+  Tr(h1^4)             =    18.743727
+  Tr(h1^6)             =    79.434063
+  Tr(h1^8)             =   341.035885
+  Tr(h1^10)            =  1465.413835
+  Tr(h1^12)            =  6297.222855
+  Taylor expansion check at Lambda >= 5:
+    max |S_actual - S_taylor|     = 5.2636e-10
+    max rel |S_actual - S_taylor| = 5.3683e-11
+    smallest Lambda where Taylor agrees to 1e-6: 3.393
+    (|lambda|_max = 2.073, so Taylor must
+    converge for Lambda >> sqrt(spectral_radius(D^2)))
+
+[3/3] NaH default nah_spec() at R = 3.566 bohr
+
+  Building NaH at R = 3.566 bohr, max_n = 2...
+    M = 10, build time 0.2s
+    computing trace powers up to D^12...
+    sweeping Lambda grid (50 points)...
+    Lambda sweep 0.0s
+
+--- NaH (M = 10, R = 3.566 bohr) ---
+  h1 trace             = -15.127014
+  |lambda|_max         = 4.9626
+  |lambda|_min (nz)    = 3.1311e-01
+  Tr(h1)               =   -15.127014
+  Tr(h1^2)             =    53.141543
+  Tr(h_diag^2)         =    36.649720  (= sum h_pp^2)
+  Tr(h_off^2)          =    16.491824  (= sum_{p!=q} h_pq^2)
+  Tr(h_diag * h_off)   =   0.0000e+00  (should be ~0 by orthogonality of diag/off)
+  identity check       = 7.1054e-15
+  Tr(h1^4)             =   795.772849
+  Tr(h1^6)             = 16379.051038
+  Tr(h1^8)             = 379763.011721
+  Tr(h1^10)            = 9163231.172646
+  Tr(h1^12)            = 224052692.355050
+  Taylor expansion check at Lambda >= 5:
+    max |S_actual - S_taylor|     = 9.7847e-05
+    max rel |S_actual - S_taylor| = 1.1571e-05
+    smallest Lambda where Taylor agrees to 1e-6: 7.906
+    (|lambda|_max = 4.963, so Taylor must
+    converge for Lambda >> sqrt(spectral_radius(D^2)))
+
+==============================================================================
+Cross-system comparison of trace invariants
+==============================================================================
+               invariant |          LiH |           H2 |          NaH
+  -------------------------------------------------------------------
+                 M (dim) |           15 |           10 |           10
+                  Tr(h1) |       -17.38 |       -5.114 |       -15.13
+                Tr(h1^2) |        41.51 |        5.565 |        53.14
+            Tr(h_diag^2) |        37.54 |        3.515 |        36.65
+             Tr(h_off^2) |        3.969 |         2.05 |        16.49
+     Tr(h_off^2)/Tr(h^2) |      0.09561 |       0.3684 |       0.3103
+                Tr(h1^4) |        637.9 |        18.74 |        795.8
+                Tr(h1^6) |    1.439e+04 |        79.43 |    1.638e+04
+
+  LiH S(Lambda) actual vs k_max=6 Taylor (only Lambda >= 5):
+        Lambda |       S_actual |       S_taylor |       |diff|
+         5.179 |    13.79489598 |    13.79498224 |   8.6257e-05
+         7.906 |    14.40854890 |    14.40854914 |   2.4583e-07
+        12.068 |    14.72924838 |    14.72924838 |   6.7746e-10
+        18.421 |    14.88037064 |    14.88037064 |   1.8421e-12
+        28.118 |    14.94799827 |    14.94799827 |   5.3291e-15
+        42.919 |    14.97755787 |    14.97755787 |   3.5527e-15
+        65.513 |    14.99034509 |    14.99034509 |   3.5527e-15
+       100.000 |    14.99585195 |    14.99585195 |   1.7764e-15
+
+  H2 S(Lambda) actual vs k_max=6 Taylor (only Lambda >= 5):
+        Lambda |       S_actual |       S_taylor |       |diff|
+         5.179 |     9.80492978 |     9.80492978 |   5.2636e-10
+         7.906 |     9.91331649 |     9.91331649 |   1.4264e-12
+        12.068 |     9.96222696 |     9.96222696 |   5.3291e-15
+        18.421 |     9.98368130 |     9.98368130 |   1.7764e-15
+        28.118 |     9.99297630 |     9.99297630 |   1.7764e-15
+        42.919 |     9.99698181 |     9.99698181 |   0.0000e+00
+        65.513 |     9.99870394 |     9.99870394 |   1.7764e-15
+       100.000 |     9.99944361 |     9.99944361 |   0.0000e+00
+
+  NaH S(Lambda) actual vs k_max=6 Taylor (only Lambda >= 5):
+        Lambda |       S_actual |       S_taylor |       |diff|
+         5.179 |     8.45636083 |     8.45645868 |   9.7847e-05
+         7.906 |     9.24143439 |     9.24143467 |   2.7913e-07
+        12.068 |     9.65301429 |     9.65301429 |   7.6958e-10
+        18.421 |     9.84677612 |     9.84677612 |   2.0890e-12
+        28.118 |     9.93341472 |     9.93341472 |   7.1054e-15
+        42.919 |     9.97126800 |     9.97126800 |   0.0000e+00
+        65.513 |     9.98763984 |     9.98763984 |   1.7764e-15
+       100.000 |     9.99468982 |     9.99468982 |   3.5527e-15
+
+==============================================================================
+Substitution panel: S(Lambda) under D = h1, diag(h1), off(h1)
+==============================================================================
+
+  LiH (M = 15):
+      Lambda |      S(full) |      S(diag) |       S(off) |  S(d)+S(o)-M
+       0.471 |     3.012001 |     2.762878 |    12.322316 |     0.085194
+       0.954 |     6.668941 |     6.581960 |    13.062355 |     4.644314
+       1.931 |    10.698137 |    10.945246 |    14.155667 |    10.100913
+       3.907 |    13.173261 |    13.337486 |    14.754820 |    13.092306
+      10.481 |    14.646829 |    14.680328 |    14.964167 |    14.644494
+
+  H2 (M = 10):
+      Lambda |      S(full) |      S(diag) |       S(off) |  S(d)+S(o)-M
+       0.471 |     5.244945 |     4.451076 |     7.390372 |     1.841448
+       0.954 |     7.767820 |     7.443141 |     8.533206 |     5.976347
+       1.931 |     8.985430 |     9.160232 |     9.509069 |     8.669302
+       3.907 |     9.672182 |     9.776381 |     9.869440 |     9.645821
+      10.481 |     9.950110 |     9.968136 |     9.981412 |     9.949548
+
+  NaH (M = 10):
+      Lambda |      S(full) |      S(diag) |       S(off) |  S(d)+S(o)-M
+       0.471 |     2.221450 |     2.526229 |     7.362166 |    -0.111605
+       0.954 |     3.586079 |     4.080227 |     7.820325 |     1.900552
+       1.931 |     5.244864 |     5.713192 |     8.178807 |     3.891999
+       3.907 |     7.677918 |     8.134811 |     9.160705 |     7.295517
+      10.481 |     9.547269 |     9.678683 |     9.855263 |     9.533945
+
+==============================================================================
+VERDICT SYNTHESIS
+==============================================================================
+
+Test 1: large-Lambda Taylor expansion captures S(Lambda)?
+  Max rel residual at Lambda >= 5 across 3 systems: 1.1571e-05
+
+Test 2: Tr(D^2) splits into diag + off?
+   LiH: Tr(h_diag^2)/Tr(h^2) =  0.904, Tr(h_off^2)/Tr(h^2) =  0.096, residual 0.0000e+00
+    H2: Tr(h_diag^2)/Tr(h^2) =  0.632, Tr(h_off^2)/Tr(h^2) =  0.368, residual 8.8818e-16
+   NaH: Tr(h_diag^2)/Tr(h^2) =  0.690, Tr(h_off^2)/Tr(h^2) =  0.310, residual 7.1054e-15
+
+Test 3: is the diag/off split chemistry-meaningful?
+     LiH: bond-coupling fraction Tr(h_off^2)/Tr(h^2) =  0.096
+      H2: bond-coupling fraction Tr(h_off^2)/Tr(h^2) =  0.368
+     NaH: bond-coupling fraction Tr(h_off^2)/Tr(h^2) =  0.310
+
+Data written to C:\Users\jlout\Desktop\Project_Geometric\.claude\worktrees\agent-a7902abb5a25ab1cb\debug\data\spectral_action_expansion_chemistry.json
+==============================================================================

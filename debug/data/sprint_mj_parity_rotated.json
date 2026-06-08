@@ -1,0 +1,98 @@
+{
+  "panel": [
+    {
+      "name": "LiH_rel",
+      "Q": 30,
+      "N_pauli_orig": 1413,
+      "N_pauli_rotated": 1453,
+      "densification_check_residual": 0.0,
+      "parity_plus": 15,
+      "parity_minus": 15,
+      "audit": {
+        "per_block": [
+          {
+            "block": 0,
+            "residual": 0.05065793380002619,
+            "passes": "False"
+          },
+          {
+            "block": 1,
+            "residual": 0.016885977933342053,
+            "passes": "False"
+          },
+          {
+            "block": 2,
+            "residual": 0.016885977933342053,
+            "passes": "False"
+          }
+        ],
+        "global": {
+          "residual": 0.05065793380002619,
+          "passes": "False"
+        }
+      },
+      "verdict": "NEGATIVE"
+    },
+    {
+      "name": "BeH_rel",
+      "Q": 30,
+      "N_pauli_orig": 1413,
+      "N_pauli_rotated": 1453,
+      "densification_check_residual": 0.0,
+      "parity_plus": 15,
+      "parity_minus": 15,
+      "audit": {
+        "per_block": [
+          {
+            "block": 0,
+            "residual": 0.06754391173336821,
+            "passes": "False"
+          },
+          {
+            "block": 1,
+            "residual": 0.033771955866684106,
+            "passes": "False"
+          },
+          {
+            "block": 2,
+            "residual": 0.016885977933342053,
+            "passes": "False"
+          }
+        ],
+        "global": {
+          "residual": 0.06754391173336821,
+          "passes": "False"
+        }
+      },
+      "verdict": "NEGATIVE"
+    },
+    {
+      "name": "CaH_rel",
+      "Q": 20,
+      "N_pauli_orig": 942,
+      "N_pauli_rotated": 966,
+      "densification_check_residual": 0.0,
+      "parity_plus": 10,
+      "parity_minus": 10,
+      "audit": {
+        "per_block": [
+          {
+            "block": 0,
+            "residual": 0.033771955866684106,
+            "passes": "False"
+          },
+          {
+            "block": 1,
+            "residual": 0.016885977933342053,
+            "passes": "False"
+          }
+        ],
+        "global": {
+          "residual": 0.033771955866684106,
+          "passes": "False"
+        }
+      },
+      "verdict": "NEGATIVE"
+    }
+  ]
+}

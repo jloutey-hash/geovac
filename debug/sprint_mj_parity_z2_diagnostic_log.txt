@@ -1,0 +1,37 @@
+========================================================================
+Sprint m_j-parity Z₂ — relativistic chemistry direct-basis audit
+========================================================================
+
+========================================================================
+System: LiH_rel
+========================================================================
+  Q = 30, N_pauli = 1413  (build wall time 0.4s)
+  orbital_table: 30 orbitals, 15 with two_m_j < 0
+  global  P_{m_j}: residual = 1.7941e-02  (FAIL)  [0.0s]
+  block[0] P_{m_j}: residual = 1.7941e-02  (FAIL)  [0.0s]
+  block[1] P_{m_j}: residual = 5.9802e-03  (FAIL)  [0.0s]
+  block[2] P_{m_j}: residual = 5.9802e-03  (FAIL)  [0.0s]
+  VERDICT: NEGATIVE
+
+========================================================================
+System: BeH_rel
+========================================================================
+  Q = 30, N_pauli = 1413  (build wall time 0.3s)
+  orbital_table: 30 orbitals, 15 with two_m_j < 0
+  global  P_{m_j}: residual = 2.3921e-02  (FAIL)  [0.0s]
+  block[0] P_{m_j}: residual = 2.3921e-02  (FAIL)  [0.0s]
+  block[1] P_{m_j}: residual = 1.1960e-02  (FAIL)  [0.0s]
+  block[2] P_{m_j}: residual = 5.9802e-03  (FAIL)  [0.0s]
+  VERDICT: NEGATIVE
+
+========================================================================
+System: CaH_rel
+========================================================================
+  Q = 20, N_pauli = 942  (build wall time 0.2s)
+  orbital_table: 20 orbitals, 10 with two_m_j < 0
+  global  P_{m_j}: residual = 1.1960e-02  (FAIL)  [0.0s]
+  block[0] P_{m_j}: residual = 1.1960e-02  (FAIL)  [0.0s]
+  block[1] P_{m_j}: residual = 5.9802e-03  (FAIL)  [0.0s]
+  VERDICT: NEGATIVE
+
+Data written to C:\Users\jlout\Desktop\Project_Geometric\debug\data\sprint_mj_parity_z2.json

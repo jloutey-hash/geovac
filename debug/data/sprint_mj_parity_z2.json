@@ -1,0 +1,89 @@
+{
+  "panel": [
+    {
+      "name": "LiH_rel",
+      "Q": 30,
+      "N_pauli": 1413,
+      "n_negative_mj_orbitals": 15,
+      "audit": {
+        "global": {
+          "residual": 0.01794059870202523,
+          "passes": false
+        },
+        "per_block": [
+          {
+            "block": 0,
+            "residual": 0.01794059870202523,
+            "passes": false
+          },
+          {
+            "block": 1,
+            "residual": 0.005980199567341743,
+            "passes": false
+          },
+          {
+            "block": 2,
+            "residual": 0.005980199567341743,
+            "passes": false
+          }
+        ]
+      },
+      "verdict": "NEGATIVE"
+    },
+    {
+      "name": "BeH_rel",
+      "Q": 30,
+      "N_pauli": 1413,
+      "n_negative_mj_orbitals": 15,
+      "audit": {
+        "global": {
+          "residual": 0.023920798269366973,
+          "passes": false
+        },
+        "per_block": [
+          {
+            "block": 0,
+            "residual": 0.023920798269366973,
+            "passes": false
+          },
+          {
+            "block": 1,
+            "residual": 0.011960399134683487,
+            "passes": false
+          },
+          {
+            "block": 2,
+            "residual": 0.005980199567341743,
+            "passes": false
+          }
+        ]
+      },
+      "verdict": "NEGATIVE"
+    },
+    {
+      "name": "CaH_rel",
+      "Q": 20,
+      "N_pauli": 942,
+      "n_negative_mj_orbitals": 10,
+      "audit": {
+        "global": {
+          "residual": 0.011960399134683487,
+          "passes": false
+        },
+        "per_block": [
+          {
+            "block": 0,
+            "residual": 0.011960399134683487,
+            "passes": false
+          },
+          {
+            "block": 1,
+            "residual": 0.005980199567341743,
+            "passes": false
+          }
+        ]
+      },
+      "verdict": "NEGATIVE"
+    }
+  ]
+}

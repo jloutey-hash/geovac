@@ -1,0 +1,72 @@
+========================================================================
+Sprint M-vS Symmetries — Extended Tapering Verification Panel
+Date: 2026-06-07 (session continuation)
+========================================================================
+
+========================================================================
+System: LiH
+========================================================================
+  Hopf-only: Q 30 → 25 (ΔQ = 5), N_pauli 333 → 291 [0.3s]
+  Extended:  Q 30 → 22 (ΔQ = 8), N_pauli 333 → 282 [0.4s]
+    Stabilizers kept: hopf=3, ell_parity=3, atom_swap=0, inversion=0
+    Extended saves 3 additional qubits vs Hopf-only baseline.
+    Spectrum check skipped (Q_ext=22 or Q_naive=30 too large for sparse eigsh)
+
+========================================================================
+System: BeH2
+========================================================================
+  Hopf-only: Q 50 → 43 (ΔQ = 7), N_pauli 555 → 485 [1.0s]
+  Extended:  Q 50 → 41 (ΔQ = 9), N_pauli 555 → 1694 [2.4s]
+    Stabilizers kept: hopf=3, ell_parity=3, atom_swap=1, inversion=0
+    Stabilizers dropped (commutator audit): [('inversion:0', -1.0)]
+    Extended saves 2 additional qubits vs Hopf-only baseline.
+    Spectrum check skipped (Q_ext=41 or Q_naive=50 too large for sparse eigsh)
+
+========================================================================
+System: H2O
+========================================================================
+  Hopf-only: Q 70 → 61 (ΔQ = 9), N_pauli 777 → 679 [2.3s]
+  Extended:  Q 70 → 59 (ΔQ = 11), N_pauli 777 → 2494 [4.5s]
+    Stabilizers kept: hopf=4, ell_parity=4, atom_swap=1, inversion=0
+    Extended saves 2 additional qubits vs Hopf-only baseline.
+    Spectrum check skipped (Q_ext=59 or Q_naive=70 too large for sparse eigsh)
+
+========================================================================
+System: NH3
+========================================================================
+  Hopf-only: Q 80 → 70 (ΔQ = 10), N_pauli 888 → 776 [3.4s]
+  Extended:  Q 80 → 65 (ΔQ = 15), N_pauli 888 → 1976 [4.7s]
+    Stabilizers kept: hopf=6, ell_parity=6, atom_swap=1, inversion=0
+    Extended saves 5 additional qubits vs Hopf-only baseline.
+    Spectrum check skipped (Q_ext=65 or Q_naive=80 too large for sparse eigsh)
+
+========================================================================
+System: CH4
+========================================================================
+  Hopf-only: Q 90 → 79 (ΔQ = 11), N_pauli 999 → 873 [4.7s]
+  Extended:  Q 90 → 77 (ΔQ = 13), N_pauli 999 → 3294 [8.2s]
+    Stabilizers kept: hopf=5, ell_parity=5, atom_swap=1, inversion=0
+    Extended saves 2 additional qubits vs Hopf-only baseline.
+    Spectrum check skipped (Q_ext=77 or Q_naive=90 too large for sparse eigsh)
+
+========================================================================
+System: HF
+========================================================================
+  Hopf-only: Q 60 → 52 (ΔQ = 8), N_pauli 666 → 582 [1.6s]
+  Extended:  Q 60 → 46 (ΔQ = 14), N_pauli 666 → 564 [1.7s]
+    Stabilizers kept: hopf=6, ell_parity=6, atom_swap=0, inversion=0
+    Extended saves 6 additional qubits vs Hopf-only baseline.
+    Spectrum check skipped (Q_ext=46 or Q_naive=60 too large for sparse eigsh)
+
+========================================================================
+SUMMARY
+========================================================================
+System   Q_naive    Q_hopf     Q_ext   ΔQ_hopf    ΔQ_ext   extra   N_pauli_naive    N_pauli_hopf    N_pauli_ext
+LiH           30        25        22         5         8       3             333             291            282
+BeH2          50        43        41         7         9       2             555             485           1694
+H2O           70        61        59         9        11       2             777             679           2494
+NH3           80        70        65        10        15       5             888             776           1976
+CH4           90        79        77        11        13       2             999             873           3294
+HF            60        52        46         8        14       6             666             582            564
+
+Data written to C:\Users\jlout\Desktop\Project_Geometric\debug\data\sprint_extended_tapering_panel.json

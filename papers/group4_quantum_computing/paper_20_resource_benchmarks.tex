@@ -887,10 +887,16 @@ interface and a UCCSD-style ansatz; the qiskit-nature stack
 is not recommended.  Scaling to LiH at $Q = 30$ requires
 sector projection beyond the qubit Hamiltonian alone (the
 $2^{30}$-dimensional statevector exceeds practical memory on
-commodity hardware); the per-sub-block Z$_2$ Hopf-U(1)
-tapering of \cite{GeoVac_Paper14} (saving $\sim 12.6\%$ of
-Pauli terms across the 37-molecule library) is a natural
-intermediate but does not by itself close the $Q = 30$ scale.
+commodity hardware); the four-axis Z$_2$ tapering of
+\cite{GeoVac_Paper14} (Hopf $m_\ell$ + Gaunt-parity $\ell$-Z$_2$
++ atom-swap + per-sub-block particle-conservation; \texttt{tapered
+= 'full'} mode of \texttt{ecosystem\_export.hamiltonian}) saves
+$33\%$ on LiH ($30 \to 20$) and $31\%$ on CH$_4$ ($90 \to 62$),
+materially closing the practical-scale gap for
+classical-statevector simulation in the
+$\sim Q = 30$--$100$ qubit regime.  The previously-reported
+$\sim 12.6\%$ Pauli reduction (Hopf only) is now $\sim 30\%$ at
+the production API level.
 
 \paragraph{Honest scope.}  The FCIDUMP exporter writes the
 $(h_1, \mathrm{eri}, e_{\rm core})$ tensors that

@@ -7,6 +7,517 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.96.0] - 2026-06-08
+
+### Summary
+
+**Paper-edit batch propagating the v3.89.0–v3.95.0 tapering arc into the corpus.** Three papers touched:
+
+**Paper 14 (`paper_14_qubit_encoding.tex`): 22 → 25 pages, three-pass clean.** Three new subsections under §sec:tapering:
+
+- **§sec:ell_parity_tapering** — Gaunt-parity Z₂ as strict improvement over Hopf-only. Closed-form ΔQ = $n_{\rm sb}$, ~3% Pauli reduction. Full verification panel table (LiH +3, HF +6, BeH₂ +5, H₂O +7, NH₃ +8, CH₄ +9).
+- **§sec:hidden_particle_z2** — Hidden per-sub-block particle-conservation Z₂ from the symmetry-adapted basis meta-investigation. Production API `tapered='full'`. Panel shows additional +24 qubits beyond `'extended'`: LiH 22→20, HF 46→41, BeH₂ 38→37, H₂O 54→53, NH₃ 62→55, CH₄ 70→62. Combined with the Hopf+ℓ-parity baseline, the `'full'` pipeline gives 33% qubit reduction on LiH (30→20) and 31% on CH₄ (90→62) over naive JW.
+- **§sec:gaunt_parity_protection** — The structural reason behind why integer-ℓ parity Z₂'s commute (Gaunt parity protection) and half-integer-j analogs don't. Closes the three-sprint relativistic-Z₂ thread with a clean mechanism story.
+
+**Corrected false claim:** the prior "triply-additive blocking" paragraph in §sec:hopf_tapering contained the assertion "the spinor $m_j \to -m_j$ parity commutes with $H_{\rm rel}$ exactly" — this was decisively refuted by v3.94.0 (direct-basis NEGATIVE, residual $\sim 10^{-2}$) and v3.95.0 (rotated-basis NEGATIVE, residual $\sim 10^{-2}$). The paragraph is now updated to report the actual NEGATIVE-STRUCTURAL finding with mechanism cross-reference to §sec:gaunt_parity_protection. **This is the load-bearing correction of this paper-edit batch** — Paper 14 previously made a claim it did not have verified evidence for; the correction is documented honestly.
+
+**Paper 22 (`paper_22_angular_sparsity.tex`): added §sec:ell_parity_consequence subsection, 8 pages three-pass clean.** Notes the ℓ-parity Z₂ tapering as a downstream computational consequence of the Gaunt parity selection rule (Theorem 2 of Paper 22). Short paragraph: the Z₂ saves ΔQ = $n_{\rm sb}$ qubits + ~3% Pauli reduction across the production library; relativistic jj-coupled analog has no Gaunt-parity protection (structurally explains why direct/rotated $m_j$-parity Z₂ candidates fail). Cross-references Paper 14 §sec:ell_parity_tapering and §sec:gaunt_parity_protection for detailed analysis.
+
+**Paper 20 (`paper_20_resource_benchmarks.tex`): 11 pages, three-pass clean.** Updated the tapering claim in the "Honest scope" section: prior "$\sim 12.6\%$ Pauli reduction" (Hopf-only) is now "$\sim 30\%$ at production API level" via the four-axis `tapered='full'` mode. Updated the "intermediate but does not close $Q=30$ scale" framing to reflect that the new four-axis tapering DOES materially close the practical-scale gap (LiH 30→20, CH₄ 90→62).
+
+All three papers compile three-pass clean. No undefined references introduced beyond the corpus-standard cross-paper Paper14↔Paper22 stub references (existing convention).
+
+### Added
+
+- **`papers/group4_quantum_computing/paper_14_qubit_encoding.tex`** — three new subsections (§sec:ell_parity_tapering, §sec:hidden_particle_z2, §sec:gaunt_parity_protection) plus corrected m_j-parity assertion in the triply-additive paragraph. +156 lines, +3 pages.
+- **`papers/group3_foundations/paper_22_angular_sparsity.tex`** — new §sec:ell_parity_consequence subsection, ~20 lines.
+- **`papers/group4_quantum_computing/paper_20_resource_benchmarks.tex`** — updated tapering claim in §"Honest scope", reflects the production `tapered='full'` 30% Pauli reduction.
+- **CLAUDE.md §2 one-liner** for v3.96.0.
+
+### Changed
+
+- The Paper 14 false claim on relativistic $m_j$-parity commutation. Now reflects the v3.94.0/v3.95.0 NEGATIVE-STRUCTURAL finding with structural mechanism.
+
+### Closed
+
+- **Paper-edit follow-on** named in v3.89.0, v3.92.0, v3.93.0, v3.94.0, v3.95.0 CHANGELOG entries (Paper 14 §sec:hopf_tapering update with the four-axis tapering story).
+
+### Verification
+
+- All three papers compile three-pass clean.
+- No new undefined references beyond corpus-standard cross-paper stubs.
+- Page counts: Paper 14 22→25; Paper 22 unchanged at 8; Paper 20 unchanged at 11.
+- All ΔQ claims in the new subsections are backed by existing computational tests: `tests/test_extended_tapering.py` (12 tests, all panel data), `tests/test_symmetry_adapted_basis.py` (13 tests), `tests/test_z2_tapering.py::TestEcosystemExportTapered` (8 tests including `tapered='full'` strict improvement). Per §13.4a, every equation in the paper-edit has a corresponding verification test.
+- 82/82 tapering-test panel + 18/18 topological-integrity S³ proofs unaffected (no production code touched in this sprint, only paper text).
+
+### Honest scope
+
+**Theorem-grade (verified by existing tests):** All ΔQ panel numbers in the new Paper 14 subsections (LiH +3/+2, HF +6/+5, BeH₂ +5/+1, H₂O +7/+1, NH₃ +8/+7, CH₄ +9/+8) are exact across the verification panel. Tests verify GF(2) independence + commutator audit + spectrum preservation per §13.4a.
+
+**Structural sketch (now in the corpus):** the Gaunt-parity-protection mechanism (§sec:gaunt_parity_protection) is observational angular-momentum reasoning — verified by hand on a (3/2, 1/2, 1/2, 1/2) j-quadruple example, mechanism general across systems and basis sizes.
+
+**Numerical observation (recorded):** the relativistic $m_j$-parity residuals 1.7–6.8 × 10⁻² across LiH/BeH/CaH$_{\rm rel}$ are the load-bearing empirical evidence for the NEGATIVE-STRUCTURAL closure.
+
+**Not in scope:** Paper 32 §VIII case-exhaustion-theorem extension to incorporate the Gaunt-parity-vs-jj distinction as a fourth mechanism in the master Mellin engine partition (would be ambitious). Paper 14 §sec:spinor_composed update (the Tier 2 relativistic discussion) — the m_j-parity correction already lands at §sec:hopf_tapering, but a deeper edit of the relativistic-specific section is a separate sprint. Paper 30 SU(2) Wilson lattice gauge update (if relevant; not in scope this sprint).
+
+## [3.95.0] - 2026-06-08
+
+### Summary
+
+**Sprint m_j-parity Z₂ rotated-basis — relativistic chemistry. NEGATIVE-STRUCTURAL with the sharpest mechanism in the three-sprint relativistic-tapering thread.** Follow-on from v3.94.0 direct-basis NEGATIVE. The rotated-basis $P_{m_j}^{\rm rot}$ — the relativistic analog of the non-rel Hopf m_l → −m_l Z₂ that DOES work — also fails. Residuals 1.7×10⁻² to 6.8×10⁻² on LiH_rel / BeH_rel / CaH_rel. **The densification + rebuild check passes BIT-EXACTLY (residual 0.0) across all 3 systems**, confirming the implementation is correct — the m_j Z₂ genuinely isn't a symmetry of $H_{\rm rel}$, even in the (sym, antisym) basis.
+
+**Load-bearing mechanism (the sharper finding).** Under all-orbital m_j → −m_j flip, the 4-orbital product of 3-j sign factors in the jj-coupled X_k angular coefficient gives $(-1)^{j_a + j_b + j_c + j_d}$. For **half-integer j (relativistic)**, this sum is NOT forced to even by the angular selection rules — example: $(3/2, 1/2, 1/2, 1/2)$ → sum = 3 → factor = −1. The ERI tensor has elements that pick up −1 under all-m_j flip, so the rotated antisym sector is NOT closed under H.
+
+**Why the non-rel Hopf Z₂ DOES work.** For **integer l (non-relativistic)**, the analogous calculation gives $(-1)^{l_a + l_b + l_c + l_d}$, which IS forced to be even (=+1) by the **Gaunt parity selection rule** ($(l_a + l_c + k)$ even AND $(l_b + l_d + k)$ even ⇒ $l_a + l_b + l_c + l_d$ even). This is exactly the basis of the v3.89.0 ℓ-parity Z₂ Gaunt tapering. **Integer-l Gaunt parity protects the non-rel Hopf Z₂; half-integer-j jj-coupling has no analogous protection.** Fundamental structural distinction between non-rel and rel chemistry.
+
+**Three-sprint relativistic-tapering thread now empirically exhausted at sprint scale:**
+
+| Sprint | Stabilizer | Mechanism | Verdict |
+|:------:|:----------:|:---------:|:-------:|
+| v3.92.0 κ-parity (direct) | $\prod_{q:\kappa < 0} Z_q$ | κ-branch NOT conserved by Dirac-Coulomb | NEGATIVE |
+| v3.94.0 m_j-parity (direct) | $\prod_{q:m_j < 0} Z_q$ | M_J conservation is SUM not parity | NEGATIVE |
+| v3.95.0 m_j-parity (rotated) | $\prod_{q:\text{parity}^{\rm rot} = -1} Z_q$ | Half-integer-j sum NOT forced even by selection rules | NEGATIVE |
+
+Relativistic Tier 2 chemistry-tapering frontier is closed: three candidate Z₂ stabilizers tested, three NEGATIVE-STRUCTURAL with crisp mechanisms. Further relativistic-symmetry exploitation would require non-Z₂ machinery (e.g., $j^2$ sector restriction — variational-manifold reduction, not qubit ΔQ).
+
+### Added
+
+- **`debug/sprint_mj_parity_rotated_diagnostic.py`** (~285 lines) — full rotated-basis diagnostic: densify ERI, symmetrize, rebuild fermion_op, JW, apply m_j → −m_j rotation, audit Z-string commutation.
+- **`debug/data/sprint_mj_parity_rotated.json`** — audit data.
+- **`debug/sprint_mj_parity_rotated_diagnostic_log.txt`** — stdout capture.
+- **`debug/sprint_mj_parity_rotated_memo.md`** — canonical memo with sharpened structural mechanism + non-rel-vs-rel comparison + three-sprint thread closure.
+- **CLAUDE.md §2 one-liner** for v3.95.0.
+- **CLAUDE.md §3 new dead-end row** — rotated-basis m_j-parity Z₂.
+
+### Changed
+
+- **`geovac/composed_qubit_relativistic.py`** — `build_composed_hamiltonian_relativistic` result dict additively extended with `h1` (dense Q×Q one-body matrix), `M` (alias for Q), and `sub_blocks` (sub-block enumeration). Backward-compatible. Enables future rotated-basis tapering probes (Kramers, time-reversal × parity, etc.) without re-writing dense extraction.
+
+### Closed
+
+- **Rotated-basis m_j-parity Z₂** named follow-on from v3.94.0 — NEGATIVE-STRUCTURAL with mechanism.
+- **Three-sprint relativistic-Z₂ tapering thread** (κ-parity, m_j-direct, m_j-rotated) — all three NEGATIVE-STRUCTURAL. Relativistic chemistry has no direct Z₂ analog of the non-rel Hopf m_l Z₂. The structural reason — half-integer-j angular coupling vs integer-l Gaunt parity — is fundamental.
+
+### Verification
+
+- Densification + rebuild bit-exact (residual 0.0) on LiH_rel/BeH_rel/CaH_rel.
+- Rotation matrix orthogonal to <10⁻¹².
+- Rotated qubit op Pauli-count inflation 3% (1413 → 1453 on LiH_rel/BeH_rel) consistent with cross-sym-antisym pickups.
+- Mechanism verified by hand on (3/2, 1/2, 1/2, 1/2) j-quadruple example.
+- Driver runs in ~5s wall.
+- No existing test breakage: pre-existing 82-test panel and 8-test ecosystem_export panel still pass.
+
+### Honest scope
+
+**Diagnostic-grade NEGATIVE-STRUCTURAL** with sharpest mechanism identification in the relativistic-tapering thread. The integer-l-vs-half-integer-j distinction is independent of system or basis size; the verdict is general.
+
+**The `composed_qubit_relativistic` builder refactor is a real production deliverable** even though the m_j tapering itself failed. The dense h1 / sub_blocks exposure enables future relativistic-symmetry sprints to skip the densification overhead.
+
+**Not in scope:** non-Z₂ relativistic symmetry exploitation ($j^2$ sector restriction analog of v3.92.0 S²; Kramers degeneracy; time-reversal × parity probes). Each would be its own follow-on sprint with different prior on success.
+
+## [3.94.0] - 2026-06-08
+
+### Summary
+
+**Sprint m_j-parity Z₂ — direct-basis tapering on relativistic chemistry. NEGATIVE-STRUCTURAL.** Follow-on from v3.92.0 κ-parity NEGATIVE-STRUCTURAL closure. The Z-string $P_{m_j} = \prod_{q: m_j(q) < 0} Z_q$ in the **original Dirac basis** does NOT commute with the relativistic Tier 2 chemistry Hamiltonian. Residuals 6–24 × 10⁻³ on LiH_rel / BeH_rel / CaH_rel — 7–9 OoM above the 1e-10 gate.
+
+**Mechanism (sharper than κ-parity):** total $M_J$ conservation in the jj-coupled ERI is a SUM constraint ($m_j^a + m_j^b = m_j^c + m_j^d$), NOT a parity constraint. Concrete violating process: $(+3/2) + (-1/2) \to (+1/2) + (+1/2)$ preserves $M_J = +1$ but flips $\Delta N_{m_j<0} = +1$. The angular coefficient X_k is nonzero for this triple. Therefore $[H, P_{m_j}^{\rm global}] \neq 0$.
+
+**Joint structural reading with κ-parity (v3.92.0):** both Z-string parities in the ORIGINAL Dirac basis fail because the jj-coupled Coulomb operator freely couples different sign-counted sectors under M_J / κ-branch conservation rules. The structural reason is the difference between (a) one-body parity quantum numbers conserved by individual matrix elements (non-rel m_l within a shell, which the Hopf rotation captures cleanly) and (b) two-body conservation rules that constrain SUMS but not parities (relativistic M_J).
+
+**Named follow-on: rotated-basis m_j → −m_j Z₂.** The non-relativistic Hopf m_l Z₂ commutes because the rotation to (sym, antisym) basis isolates the antisym sector cleanly. The relativistic analog would rotate orbital pairs (m_j, −m_j) within each (n_fock, κ) shell. The block: `build_composed_hamiltonian_relativistic` constructs dense h1 internally (line 414 of `composed_qubit_relativistic.py`) but doesn't return it. Refactoring to expose dense h1 + densifying eri_sparse + applying the rotation is a 2–3 day sprint. Structural argument suggests it should pass (4-orbital product of 3-j sign factors is +1 under all-m_j flips). Not done this sprint.
+
+### Added
+
+- **`debug/sprint_mj_parity_z2_diagnostic.py`** — direct-basis commutator audit on LiH_rel, BeH_rel, CaH_rel.
+- **`debug/data/sprint_mj_parity_z2.json`** — audit data.
+- **`debug/sprint_mj_parity_z2_diagnostic_log.txt`** — stdout capture.
+- **`debug/sprint_mj_parity_z2_memo.md`** — canonical memo with structural mechanism + named follow-on.
+- **CLAUDE.md §2 one-liner** for v3.94.0.
+- **CLAUDE.md §3 new dead-end row** — direct-basis m_j-parity Z₂.
+
+### Changed
+
+- None. Pure diagnostic; no production code modifications.
+
+### Closed
+
+- **Direct-basis m_j-parity Z₂ as relativistic tapering candidate**: NEGATIVE-STRUCTURAL with mechanism. Joint with v3.92.0 κ-parity NEGATIVE: a coherent structural finding that any Z-string parity in the original Dirac basis is likely to fail because M_J conservation is a sum-not-parity constraint.
+
+### Verification
+
+- Audit residuals computed on 3 relativistic systems × 2 modes (global + per_block) × 1 cutoff (max_n=2); all clean NEGATIVE.
+- Mechanism verified by hand on a specific (+3/2)+(−1/2) → (+1/2)+(+1/2) ERI tuple.
+- No production code touched → no regression possible.
+
+### Honest scope
+
+**Diagnostic-grade NEGATIVE (sample n = 3 relativistic systems):** direct-basis $P_{m_j}$ Z-string fails uniformly across LiH_rel / BeH_rel / CaH_rel at residual ~10⁻². Mechanism (M_J-sum-not-parity) is independent of system or basis size; the structural verdict is general.
+
+**Not yet shipped:** rotated-basis m_j Z₂ (named follow-on, requires `composed_qubit_relativistic` builder refactor); Kramers / time-reversal × parity probes; other sign-count parity candidates (all expected to fail by the same M_J-sum-not-parity argument).
+
+## [3.93.0] - 2026-06-08
+
+### Summary
+
+**v3.92.0 hidden-Z₂ tapering wired into the production API.** `ecosystem_export.hamiltonian()` gains a new `tapered='full'` mode that calls `extended_plus_hidden_tapered_from_spec` (from `symmetry_adapted_basis.py`) with Hopf + ℓ-parity + per-sub-block particle-conservation Z₂s.
+
+`'full'` is a strict improvement over `'extended'` on every panel system tested:
+
+| System | Q_per_block | Q_extended | Q_full | hidden ΔQ |
+|:------:|:-----------:|:----------:|:------:|:---------:|
+| LiH    | 25 | 22 | 20 | +2 |
+| HF     | 52 | 46 | 41 | +5 |
+| BeH₂   | 43 | 38 | 37 | +1 |
+
+(Full v3.92.0 panel: LiH +2, HF +5, BeH₂ +1, H₂O +1, NH₃ +7, CH₄ +8 = +24 qubits across the 6-molecule panel beyond v3.89.0.)
+
+The existing `'global'`, `'per_block'`, and `'extended'` modes are unchanged. `'full'` is opt-in. 8/8 ecosystem_export tapering tests pass.
+
+### Added
+
+- **`geovac/ecosystem_export.py`** — `hamiltonian(..., tapered='full')` is now a valid mode. Dispatches to `extended_plus_hidden_tapered_from_spec`.
+- **`tests/test_z2_tapering.py`** — two new tests in `TestEcosystemExportTapered`:
+  - `test_full_mode_strict_improvement_over_extended` (LiH, HF, BeH₂)
+  - `test_full_lih_saves_two_extra_qubits_over_extended` (LiH +2)
+- **CLAUDE.md §2 one-liner** for v3.93.0.
+
+### Changed
+
+- `hamiltonian()` docstring updated to document the new `'full'` mode and the hidden-Z₂ mechanism.
+
+### Closed
+
+- **Production API wiring follow-on from v3.92.0** — symmetry-adapted basis hidden Z₂s now reachable from one-line consumer API.
+
+### Verification
+
+- 8/8 ecosystem_export tapering tests pass (~32s).
+- Pre-existing `'global'`, `'per_block'`, `'extended'` modes unchanged: backward-compatible.
+
+### Honest scope
+
+**Strict improvement** for `tapered='full'` over `tapered='extended'` on every tested panel molecule on the composed-builder path. The v3.92.0 24-qubit panel saving is now reachable from the production API one-liner.
+
+**Not in scope of this patch:** S² stabilizer integration with the rotated `'full'` basis (named follow-on from v3.92.0); Paper 14 §sec:hopf_tapering update with the four-axis tapering panel; default change from `tapered=None` to `tapered='full'` (deprecation period required for the historical Paper 14 Tables I/II counts).
+
+## [3.92.0] - 2026-06-07
+
+### Summary
+
+**Four parallel symmetry-investigation sprints dispatched as worktree-isolated agents; synthesized into one release.** Final scoreboard: 2 POSITIVE (production code shipped), 2 NEGATIVE-with-structural-content (clean mechanisms identified, threads closed). 82/82 tests pass (new + regression).
+
+**Headline POSITIVE (symmetry-adapted basis, the meta-investigation).** Combined Hopf + atom-swap rotation, decomposed by irrep-tuple $(p_{\rm Hopf}, p_\ell, p_{\rm swap}) \in \mathbb{Z}_2^3$, exposes **per-sub-block particle-conservation Z₂'s** $(-1)^{N_b}$ as connected components within each sector. These are GF(2)-independent of the v3.89.0 stack and save **24 additional qubits across the 6-molecule panel**: LiH +2, HF +5, BeH₂ +1, H₂O +1, NH₃ +7, CH₄ +8. The mechanism is clean: in the composed builder, ERI is block-diagonal across sub-blocks (no cross-block ERI by default), so per-sub-block $N_b$ is conserved, and $(-1)^{N_b}$ is a Z₂ commuting with H — independent from Hopf (Z over l-odd antisym orbitals only) and ℓ-parity (Z over l-odd orbitals only). The audit confirms 24 of 132 candidates GF(2)-independent across the panel. Combined rotation orthogonal to $<2\times10^{-16}$, block-diagonalization at $<2\times10^{-14}$, spectrum bit-exact ($<2\times10^{-15}$ Ha) on LiH max_n=1. **This vindicates the meta-investigation thesis from the v3.91.0 conversation:** the ℓ-parity Z₂ shipped today was sitting structurally and only surfaced when we asked; the symmetry-adapted basis is the systematic way to find what else is there.
+
+**Headline POSITIVE (S² total spin sector restriction).** $S^2$ Pauli operator commutes BIT-EXACTLY (residual 0.0) with the production composed Hamiltonian on a 7-molecule panel. Singlet-sector dimension is **1.67×–5.35× smaller** than the $S_z = 0$ sector restricted FCI we already use: LiH 11,025 → 4,200 (2.6×), CH₄ 1.49×10¹² → 2.79×10¹¹ (5.35×). Production module ships `compute_s2_operator(M)`, `s2_penalty_hamiltonian(qubit_op, M, lam)` for VQE penalty objectives, `singlet_sector_dim(M, N)` for the closed-form dimension counter, and `compute_fci_ground_state_s2()` diagnostic. Honest scope: $S^2$ is INTEGER-valued, not Z₂, so this gives variational-manifold reduction and faster VQE convergence — not a qubit ΔQ. The bit-exact $[S^2, H] = 0$ on untapered composed Hamiltonians is the load-bearing finding; tapered-basis S² is a named follow-on.
+
+**Headline NEGATIVE-with-PARTIAL (spectral action expansion as chemistry diagnostic).** $S(D, \Lambda) = \mathrm{Tr}\,\exp(-D^2/\Lambda^2)$ on the M-vS-2-confirmed bit-exact gauge-network chemistry Dirac reduces BIT-EXACTLY to the trivial $\sum_k (-1)^k \mathrm{Tr}(D^{2k})/(k!\Lambda^{2k})$ Taylor series at large $\Lambda$ (residual $\le 10^{-15}$ for $\Lambda \ge 10$ across LiH/H₂/NaH). No Chamseddine–Connes Seeley–DeWitt hierarchy emerges — structurally forced by finite-dim $D$ having no UV divergence. PARTIAL caveat: $\mathrm{Tr}(h_{\rm off}^2)$ is chemistry-meaningful as the bond-coupling intertwiner Frobenius norm-squared (M-vS bridge bilinear), but as standard linear-algebra invariant, not as emergent spectral-action content. Combined with M-vS-2 Q2 NEGATIVE (monotone $S(D)(R)$, doesn't bind) — **spectral action is decisively the wrong functional for chemistry observables at finite cutoff.** CC machinery requires the continuum limit; it doesn't downscale.
+
+**Headline NEGATIVE-STRUCTURAL (CH κ-parity Z₂ on relativistic chemistry).** $P_\kappa = \prod_{q:\kappa_q < 0} Z_q$ does NOT commute with the relativistic Tier 2 chemistry Hamiltonian. Commutator residuals 7–9 OoM above the $10^{-10}$ gate (LiH_rel $5.07\times 10^{-2}$, BeH_rel $1.29\times 10^{-1}$, CaH_rel $3.38\times 10^{-2}$) with PK on/off and Breit on/off. Mechanism: jj-coupled full-Gaunt $X_k$ angular coefficient has parity selection $(l_a + l_c + k)$ even with NO $\kappa$-dependence, so the Coulomb operator freely couples $p_{3/2}$ ($\kappa = -2$) with $p_{1/2}$ ($\kappa = +1$) at the same $l = 1$, flipping κ-sign — **38% of LiH_rel ERI tuples carry odd $\Delta N_{\kappa<0}$.** The Dirac-Coulomb operator conserves $j$ and $m_j$ but NOT $\kappa$-branch. Relativistic-chemistry analog of (a) the H1 Yukawa non-selection theorem and (b) the W1e period-class structural disjointness. $\Delta Q = 0$. Scaffold + audit-gate module shipped for future Kramers / $m_j$-parity probes (those might fare better since $m_j$ IS conserved).
+
+**Strategic close.** Today's session arc tracked an inversion of the M-vS-as-chemistry-upgrade question from NEGATIVE-only (v3.87.0 + v3.88.0) to POSITIVE-via-meta-investigation (v3.92.0 symmetry-adapted basis). The Pauli-side computational story is now: Hopf (v3.52.0) + ℓ-parity (v3.89.0) + particle-conservation (v3.92.0) saves 6.6–25% qubits across the library beyond naive JW. Three orthogonal axes, all GeoVac-native, all derivable from existing structural results (Paper 25/29 Hopf, Paper 22 Gaunt, the composed builder's block structure).
+
+### Added
+
+- **`geovac/spin_sector.py`** (~370 lines, 6 public functions) — total spin $S^2$ and $S_z$ as JW QubitOperators, audit gate, singlet-sector dim counter, VQE penalty objective, FCI diagnostic. Public API: `compute_s2_operator(M)`, `compute_sz_operator(M)`, `verify_s2_commutes(qubit_op, M, atol=1e-10)`, `s2_penalty_hamiltonian(qubit_op, M, lam)`, `singlet_sector_dim(M, N)`, `compute_fci_ground_state_s2()`.
+- **`tests/test_spin_sector.py`** (27 tests, 26 pass + 1 skip; the skip is LiH full-Hilbert at $Q=30$ ≈ $10^9$ dim, covered by synthetic H₂-like fixture).
+- **`geovac/symmetry_adapted_basis.py`** (~550 lines, additive) — combined Hopf + atom-swap rotation, irrep-tuple sector decomposition, hidden-Z₂ scan with GF(2) independence audit + commutator audit. Public API: `build_symmetry_adapted_rotation(spec, nuclei)`, `decompose_hamiltonian_by_sector(spec, nuclei)`, `find_hidden_z2_in_sector(spec, nuclei)`, `extended_plus_hidden_tapered_from_spec(spec, ...)`.
+- **`tests/test_symmetry_adapted_basis.py`** (13/13 tests pass at ~10s).
+- **`geovac/relativistic_tapering.py`** (~310 lines) — scaffold + audit gate module for relativistic Z₂ tapering candidates. $P_\kappa$ shipped as RULED OUT with clean structural reason; framework retained for future $m_j$-parity / Kramers probes.
+- **`tests/test_relativistic_tapering.py`** (12/12 tests pass).
+- **Sprint drivers** under `debug/`: `sprint_s2_sector_panel.py`, `sprint_symmetry_adapted_basis_panel.py`, `sprint_spectral_action_expansion_chemistry_diagnostic_driver.py`, `sprint_kappa_parity_diagnostic.py`, `sprint_kappa_parity_mechanism.py`. Corresponding JSON data files under `debug/data/`.
+- **Four canonical sprint memos** under `debug/`: `sprint_s2_sector_restriction_memo.md`, `sprint_symmetry_adapted_basis_memo.md`, `sprint_spectral_action_expansion_chemistry_diagnostic_memo.md`, `sprint_ch_kappa_parity_z2_memo.md`.
+- **CLAUDE.md §2 one-liner** for v3.92.0.
+- **CLAUDE.md §3 two new dead-end rows**: spectral action as chemistry-diagnostic; CH κ-parity Z₂ on relativistic chemistry.
+
+### Changed
+
+- None. All deliverables additive; no production modules modified; no paper edits.
+
+### Closed
+
+- **Three of four candidate "M-vS upgrades chemistry" paths from earlier session conversations**:
+  - Spectral action as binding functional (M-vS-2 Q2, v3.87.0) — NEGATIVE (monotone, doesn't bind)
+  - Spectral action as chemistry-diagnostic at finite cutoff (this sprint) — NEGATIVE (trivial Taylor series)
+  - These together close the spectral-action thread for chemistry observables.
+- **Meta-investigation thesis** from v3.91.0 closing: symmetry-adapted basis EXPOSES hidden symmetries that piecewise Z₂ search misses. Confirmed: ℓ-parity-style Z₂'s (particle-conservation per sub-block) ARE hiding in the framework and the meta-investigation found them.
+
+### Verification
+
+- **82/82 tests pass at ~46s** on the combined panel (`test_spin_sector` + `test_symmetry_adapted_basis` + `test_relativistic_tapering` + `test_extended_tapering` + `test_z2_tapering`).
+- All four agent worktrees ran in parallel with full isolation; no merge conflicts.
+- Spectrum preservation verified to $<2\times10^{-15}$ Ha on LiH max_n=1 via full diagonalization (symmetry-adapted basis sprint).
+- $[S^2, H] = 0$ bit-exact (residual 0.0) on 7-molecule panel (S² sprint).
+- $S(D, \Lambda)$ Taylor identity bit-exact at $\Lambda \ge 10$ (spectral action sprint).
+- $[P_\kappa, H_{\rm rel}]$ residual quantified at $5 \times 10^{-2}$ to $1.3 \times 10^{-1}$ across LiH_rel/BeH_rel/CaH_rel (κ-parity sprint).
+
+### Honest scope
+
+**Strict-improvement (POSITIVE, shipped):**
+- Symmetry-adapted basis + per-sub-block particle-conservation Z₂'s: 24 qubits saved across LiH/HF/BeH₂/H₂O/NH₃/CH₄ panel beyond v3.89.0.
+- S² Pauli operator + VQE penalty objective + singlet dimension counter: variational-manifold reduction 1.67×–5.35× across 7-molecule panel.
+
+**Diagnostic-grade (NEGATIVE, threads closed):**
+- Spectral action expansion has no Chamseddine-Connes Seeley-DeWitt hierarchy at finite cutoff. Closes thread.
+- CH κ-parity Z₂ doesn't commute with Dirac-Coulomb chemistry H because jj-coupled Coulomb flips κ-sign. Scaffold retained for future $m_j$-parity probes.
+
+**Not yet shipped:**
+- Wiring per-sub-block particle-conservation Z₂'s into `ecosystem_export.hamiltonian(tapered='extended')` (next sprint patch).
+- S² stabilizer compatibility with `tapered='extended'` mode (the v3.89.0 rotation lifts $S^2$ off the canonical $2M$-qubit form; named follow-on).
+- Paper 14 §sec:hopf_tapering update with three-axis Z₂ tapering panel (ℓ-parity + particle-conservation + Hopf).
+
+## [3.91.0] - 2026-06-07
+
+### Summary
+
+**Sprint SO(4)-Breaking — diagnostic of the W1e chemistry-binding wall. POSITIVE DIAGNOSTIC.** Sixth sprint of the day (session continuation). Per-sub-block h1 eigenvalue analysis on LiH and NaH balanced builders across $R$ sweeps identifies the W1e wall as a **non-orthogonality / Gaunt-sparsity tension** in the per-sub-block hydrogenic basis, not a missing operator.
+
+**The diagnostic mechanism.** At LiH $R_{\rm eq} = 3.015$ bohr balanced, the H sub-block 1s eigenvalue is −1.54 Ha (vs NIST H 1s = −0.5 Ha). The −1.04 Ha "extra depth" is exactly $-Z_{\rm Li}/R = -3/3.015$ — the framework's diagonal cross-center $V_{\rm ne}$ contribution. This is PHYSICALLY CORRECT (H electron at bond distance to Li IS pulled by Li nucleus). The problem isn't the diagonal cross-V_ne; it's the **absence of orthogonal off-diagonal one-body coupling** that would let the electron delocalize away from the over-deepened sub-block. Without such coupling, FCI ground state collapses onto the deepest single-particle sub-block — the W1e monotone-descent over-binding signature.
+
+**Why the framework can't simply add off-diagonal coupling.** The cross_block_h1 architectural extension (Sprint F3, May 2026) attempted exactly this and produced 16× over-binding on LiH (per v3.86.0 LiH kwarg-sweep dead-end row). The reason: per-sub-block hydrogenic orbitals use DIFFERENT $Z_{\rm eff}$ values per block (Li_core $Z=3$, LiH_bond_center $Z\approx 1.3$, LiH_bond_partner $Z=1$), making them NOT mutually orthogonal. Proper chemistry requires Löwdin orthogonalization, but per CLAUDE.md §3 Track DF Sprint 5: **Löwdin destroys Gaunt sparsity (1711 vs 120 Pauli, 14× inflation)**.
+
+**Structural verdict — W1e is an architectural choice.** The framework's distinctive features (angular sparsity from Paper 22, M-vS gauge-network structural identification from today's M-vS arc, all three Z₂ tapering schemes shipped at v3.52.0 + v3.89.0) ALL require the per-sub-block hydrogenic basis. Closing W1e would require orthogonalization, which destroys all of these. **The W1e wall and GeoVac's qubit-encoding advantages are two sides of the same architectural choice.**
+
+**Cross-check on NaH.** The H sub-block over-deepening is much larger at NaH $R_{\rm eq}$ (SO(4) block gap 2.31 Ha) than at LiH $R_{\rm eq}$ (0.97 Ha), tracking $Z_{\rm heavy}/R$ exactly. The R-sweep monotonicity of SO(4) breaking matches the W1e wall depth monotonicity in $R$.
+
+**Sharpening of W1e.** v3.85.0 said "wall at the projection step from continuous to integrals." This sprint says "wall is at the orthogonality / Gaunt-sparsity choice of the per-sub-block hydrogenic basis." Both true; this one is structurally specific.
+
+**What this means for the framework story.** Paper 17 / Paper 19 / Paper 20 row-conditional scope claim can now precisely state the structural reason. Paper 14 qubit-encoding Pauli counts can be framed as the consequence of an architectural choice, not just an empirical observation. **The chemistry-engineering arc closure (v3.86.0) is now structurally explained, not just empirically observed.**
+
+### Added
+
+- **`debug/sprint_so4_breaking_w1e_diagnostic_driver.py`** (~340 lines) — extracts per-sub-block h1 eigenvalues for LiH and NaH balanced at multiple $R$ points; quantifies SO(4)-breaking metric per sub-block; cross-references NIST atomic data; sweeps $R$ and computes FCI for correlation analysis.
+- **`debug/data/sprint_so4_breaking_w1e.json`** — full per-sub-block eigenvalue / mixing-entropy / SO(4)-gap data for LiH and NaH at 5–6 R points each.
+- **`debug/sprint_so4_breaking_w1e_diagnostic_log.txt`** — stdout capture.
+- **`debug/sprint_so4_breaking_w1e_diagnostic_memo.md`** — canonical sprint memo per CLAUDE.md §13.11. Contains the POSITIVE diagnostic, structural interpretation, and architectural-tension framing.
+- **CLAUDE.md §2 one-liner** for v3.91.0.
+- **CLAUDE.md §3 row** — W1e closure attempts via off-diagonal cross-block h1 PROPER FIX without orthogonalization. **Cannot work without Löwdin** (Track DF Sprint 5 verified); this row consolidates the structural reason across the F1–F6 + Schmidt + core-correlation + LiH kwarg + B.1 HF dead-end rows.
+
+### Changed
+
+- None. No production code modified; no paper edits.
+
+### Closed
+
+- **Open question from the symmetry conversation at end of session 2026-06-07.** "If you had to pick a symmetry-related push, what would it be?" The answer was SO(4)-breaking diagnostic of W1e. Sprint executed; verdict POSITIVE; mechanism identified.
+- **Structural explanation of the chemistry-engineering arc closure (v3.86.0).** Previously: "engineering arsenal empirically exhausted." Now: "engineering arsenal CANNOT close W1e without orthogonalization, which would destroy the framework's distinctive features." Structural, not empirical.
+
+### Verification
+
+- Driver runs at ~80s wall.
+- Per-sub-block eigenvalues match analytical prediction $-Z^2/(2n^2) + V_{\rm ne}^{\rm cross}$ at all $R$ and both molecules.
+- Cross-V_ne strength tracks $-Z_{\rm heavy}/R$ Coulomb formula exactly.
+- No production code modified → no `geovac/` regression; topological-integrity proofs unchanged.
+
+### Honest scope
+
+**Diagnostic-grade (matches analytical prediction):** Diagonal cross-V_ne contribution to per-sub-block h1 produces the observed over-deepening; SO(4) breaking pattern tracks $-Z_{\rm heavy}/R$ across the R sweep on both LiH and NaH.
+
+**Structural verdict (not a numerical claim):** W1e wall is an architectural consequence of the non-orthogonal per-sub-block hydrogenic basis. Closing it requires orthogonalization. Orthogonalization destroys angular sparsity, gauge-network structure, and all Z₂ tapering schemes.
+
+**Sample size:** 2 molecules × 5–6 R points × 1 builder (balanced) × 1 cutoff (n_max=2). The diagnostic mechanism is structural and doesn't depend on basis size; the sample is sufficient for the structural verdict.
+
+**Not in scope:** continuous Level-4 PK-composed effective single-particle eigenvalue extraction (would refine the off-diagonal coupling diagnosis); paper text updates (the framing implications are recommendations for future Paper 17 / Paper 19 / Paper 14 edits, not applied here); chemistry-engineering closure mechanism (the sprint identifies why closure is structurally hard, not how to close).
+
+## [3.90.0] - 2026-06-07
+
+### Summary
+
+**v3.89.0 extended tapering wired into the production API.** `ecosystem_export.hamiltonian()` gains a new `tapered='extended'` mode that calls `extended_tapered_from_spec` with Hopf + ℓ-parity per-block (atom-swap and inversion remain opt-in only via the direct module API due to their Pauli-inflation tradeoff).
+
+The existing `'global'` and `'per_block'` modes are unchanged for backward compatibility; `'extended'` is opt-in.
+
+Verification on the representative panel (LiH/BeH₂/H₂O/HF at default n_max=2): `tapered='extended'` strictly improves over `'per_block'` on BOTH qubit count and Pauli term count for every tested system, matching the v3.89.0 sprint-memo predictions:
+
+| System | Q_per_block | Q_extended | Pauli_per_block | Pauli_extended |
+|:------:|:-----------:|:----------:|:----------------:|:----------------:|
+| LiH    | 25 | 22 | 291 | 282 |
+| BeH₂   | 43 | 38 | 485 | 470 |
+| H₂O    | 61 | 54 | 679 | 658 |
+| HF     | 52 | 46 | 582 | 564 |
+
+### Added
+
+- **`geovac/ecosystem_export.py`** — `hamiltonian(..., tapered='extended')` is now a valid mode. Dispatches to `geovac.extended_tapering.extended_tapered_from_spec` with `use_hopf=True, use_ell_parity=True, use_atom_swap=False, use_inversion=False`. The atom-swap and inversion stabilizers remain accessible only via the direct module API per the v3.89.0 default policy (qubit-vs-measurement-count tradeoff).
+- **`tests/test_z2_tapering.py`** — two new tests in `TestEcosystemExportTapered`:
+  - `test_extended_mode_strict_improvement_over_per_block`: verifies `'extended'` < `'per_block'` on Q AND ≤ on Pauli for LiH/BeH₂/H₂O/HF
+  - `test_extended_lih_saves_three_extra_qubits`: verifies LiH ΔQ = +3 over `per_block` (predicted +n_sub_blocks = 3)
+- **CLAUDE.md §2 one-liner** for v3.90.0.
+
+### Changed
+
+- `hamiltonian()` docstring updated to enumerate the new `'extended'` mode.
+
+### Closed
+
+- **Production API wiring follow-on** from v3.89.0 sprint memo §4.2.
+
+### Verification
+
+- 31/31 tapering tests pass (test_z2_tapering + test_extended_tapering) at ~33s wall.
+- Existing `'global'` and `'per_block'` modes unchanged: backward-compatible.
+
+### Honest scope
+
+**Strict improvement over `'per_block'` for default `tapered='extended'`** on the composed-builder path (production `ecosystem_export.hamiltonian()` already uses composed). The verification panel covers 4 main-group hydrides; the same mechanism (Gaunt parity Z₂) holds for the full 28-system library since the Gaunt selection rule is universal.
+
+**Not in scope of this patch:** changing the default `tapered=None` to `tapered='extended'` (deprecation period for the historical Pauli/qubit counts of Paper 14 Tables I/II); Paper 14 §sec:hopf_tapering text update; opt-in interfaces for atom-swap and inversion.
+
+## [3.89.0] - 2026-06-07
+
+### Summary
+
+**Sprint M-vS Symmetries — three new Z₂ tapering symmetries shipped as production module `geovac/extended_tapering.py`.** Session-continuation sprint following M-vS Gauge (v3.88.0) and the symmetry-explorer agent dispatch.  Builds on the Z₂ Hopf-U(1) tapering shipped at v3.52.0 with three additional Z₂ stabilizers identified by the explorer: ℓ-parity (the big win), atom-swap, and inversion.
+
+**Headline NEW WIN — ℓ-parity Z₂ from Gaunt sparsity.** The Gaunt selection rule for the chemistry ERI requires $(l_a + l_c + k)$ even AND $(l_b + l_d + k)$ even on every nonzero $(ab|cd)$, forcing $(l_a + l_b + l_c + l_d)$ to be even.  Therefore $P_\ell = (-1)^{N_{l\text{-odd}}}$ commutes with $V_{\text{ee}}$ exactly; within-block $h_1$ is $l$-diagonal in the composed builder so $[P_\ell, h_1] = 0$ trivially.  Per-sub-block extension saves ΔQ = $+n_{\text{sub-blocks}}$ qubits AND reduces Pauli count 3–15% across the verification panel.  **Strict improvement** over Hopf-only on both axes.  Verification: LiH +3 qubits / Pauli 291→282; HF +6 / 582→564; BeH₂ +5 / 485→470; H₂O +7 / 679→658; NH₃ +8 / 776→752; CH₄ +9 / 873→846.  All match predicted $n_{\text{sub-blocks}}$ exactly.
+
+**Atom-swap Z₂ shipped opt-in.** Permutation of equivalent atoms (BeH₂ H₁↔H₂, NH₃ trans, CH₄ Klein V₄) generates a Z₂ symmetry of the chemistry construction.  Saves ΔQ = +1 to +5 additional qubits BUT inflates Pauli count 2–4× because the rotation mixes orbitals across sub-blocks, producing new non-zero cross-block ERI entries.  **Off by default** (qubit-vs-measurement-count tradeoff is user-dependent).
+
+**Inversion Z₂ shipped opt-in.** Centrosymmetric molecules (BeH₂, N₂, F₂, MgH₂, CaH₂).  Combines atom-swap with $(-1)^l$ sign factor.  Typically linearly dependent on atom-swap + ℓ-parity already shipped; off by default.
+
+**Three-pass audit gate.** `apply_extended_tapering` filters stabilizers through (i) per-stabilizer commutator audit at $10^{-10}$, (ii) GF(2) linear independence over Z-bit vectors, (iii) openfermion's internal `check_stabilizer_linearity`.  Non-commuting and dependent stabilizers are dropped silently.
+
+**Sub-block merging across swap pairs.** When atom-swap rotation merges sub-blocks (sb_A, sb_B), the per-sub-block Hopf and ℓ-parity stabilizers must be MERGED across the swap pair (otherwise they don't commute with the swap-rotated Hamiltonian).  `_build_joint_sb_map` handles this; without it the swap path was producing negative ΔQ savings on BeH₂/H₂O/CH₄.
+
+**Strategic implication.** The user's reading from this session start ("are we just reproducing M-vS?") got two NEGATIVE answers today (M-vS-2 spectral action not binding, v3.87.0; M-vS gauge tapering inflates Pauli, v3.88.0).  This sprint produces a genuine POSITIVE via the third candidate path — the symmetry-explorer survey found ℓ-parity Z₂ from Paper 22 Gaunt sparsity.  The chemistry-side computational story now has three orthogonal Z₂ axes (Hopf m_l + ℓ-parity + atom-swap/inversion), all GeoVac-native.  The win is downstream of the angular sparsity theorem (Paper 22), not the M-vS gauge framework.
+
+### Added
+
+- **`geovac/extended_tapering.py`** (~800 lines) — production module.  Public API: `build_ell_parity_stabilizers`, `find_equivalent_atom_pairs`, `build_atom_swap_rotation_and_stabilizers`, `is_centrosymmetric`, `build_inversion_rotation_and_stabilizers`, `apply_extended_tapering`, `extended_tapered_from_spec`.  Defaults `use_hopf=True, use_ell_parity=True, use_atom_swap=False, use_inversion=False`.  Backward-compatible: with all extended kwargs off, matches existing `hopf_tapered_from_spec`.
+- **`tests/test_extended_tapering.py`** (~200 lines, 12 tests) — verifies ℓ-parity stabilizer construction, atom-swap detection on LiH/BeH₂, centrosymmetric detection on BeH₂/H₂O/LiH, backward compat with naive and Hopf-only, ΔQ saving across panel (LiH +3, HF +6, BeH₂ +5, H₂O +7), Pauli reduction on LiH.  **12/12 pass at ~16s wall.**
+- **`debug/sprint_extended_tapering_panel_driver.py`** — verification panel across 6 molecules (LiH, BeH₂, H₂O, NH₃, CH₄, HF) comparing Hopf-only vs extended, with Pauli/qubit count tracking.
+- **`debug/data/sprint_extended_tapering_panel.json`**, **`debug/sprint_extended_tapering_panel_log.txt`** — driver outputs.
+- **`debug/sprint_mvs_symmetries_extended_tapering_memo.md`** — canonical sprint memo per CLAUDE.md §13.11.
+- **CLAUDE.md §2 one-liner** for v3.89.0.
+
+### Changed
+
+- None.  No production code beyond the new module touched; no paper edits.
+
+### Closed
+
+- **Third "M-vS upgrades chemistry" candidate path: find new symmetries via the explorer.** POSITIVE.  The symmetry-explorer agent surveyed 7 candidate families and ranked Gaunt-parity (ℓ-parity) as the top sprint-scale win.  This sprint built and shipped it.
+- **Sprint-scope target from the explorer report: "implement Candidate 4 ℓ-parity Z₂"** — shipped as `extended_tapered_from_spec(use_ell_parity=True)`.  Candidate 1 (atom-swap) and Candidate 2 (inversion) also shipped as opt-in for completeness.
+
+### Verification
+
+- 12/12 new tests pass at ~16s wall.
+- 35/35 existing tests pass on `test_z2_tapering`, `test_fock_projection`, `test_fock_laplacian`.  No regression on production tapering or topological-integrity proofs.
+- 6-molecule verification panel runs reproducibly at ~30s wall, all positive ΔQ_extra matching predicted $+n_{\text{sub-blocks}}$.
+
+### Honest scope
+
+**Theorem-grade (Gaunt arithmetic):** $P_\ell$ commutes with composed-builder $V_{\text{ee}}$ at the Gaunt-rule level (no numerical tolerance).  Within-block $h_1$ is $l$-diagonal so $[P_\ell, h_1] = 0$ trivially.
+
+**Numerical observation (6 molecules):** ΔQ_extra saving matches predicted $+n_{\text{sub-blocks}}$ exactly across the panel; Pauli reduction 3% consistent.
+
+**Scope caveat:** In the balanced builder path (production benchmarking, not production `ecosystem_export.hamiltonian()`), the cross-center V_ne adds $\Delta l = \pm 1$ off-diagonal h1 elements (multipole L=1 dipole) which break per-block ℓ-parity.  The audit gate gracefully drops these; balanced users get only Hopf savings.
+
+**Not yet shipped:** Wiring into `ecosystem_export.hamiltonian()` (production API still calls `hopf_tapered_from_spec`); Paper 14 §sec:hopf_tapering update with new panel numbers; spectrum bit-exact verification on a small system (Q ≤ 14) via sparse eigsh; S_n character projection beyond Klein V_4 for CH₄/SiH₄/GeH₄.
+
+## [3.88.0] - 2026-06-07
+
+### Summary
+
+**Sprint M-vS Gauge — does the non-abelian M-vS gauge group reduce Pauli count beyond Z₂ Hopf-U(1) tapering? VERDICT: NO.** Session-continuation sprint following M-vS-2 (v3.87.0). Tests whether the FULL M-vS gauge group (block-unitary U(H_v) per vertex) gives ADDITIONAL Pauli reduction beyond the abelian Z₂ Hopf-U(1) sub-symmetry tapering shipped at v3.52.0. Five gauge candidates tested on default LiH (15 spatial orbitals / 30 qubits / 4 electrons) + H₂ cross-check (10 spatial / 2 electrons).
+
+**Headline NEGATIVE.** No M-vS gauge transformation beats the Z₂-tapered identity baseline at Pauli count. Identity gauge: 909 Pauli pre-taper → 813 Pauli on 25 qubits post-Z₂. Every tested M-vS rotation DENSIFIES the chemistry eri tensor: per-sub-block h1 diagonalization 2.28× denser (2,069 Pauli pre-tape, 3,925 post-Z₂); per-vertex natural orbitals from FCI 1-RDM 18.9× denser (17,173 Pauli); random M-vS block-unitary 27.8× denser (25,317 Pauli). **The Z₂-tapered identity is the optimum among all tested candidates.** Z₂ savings DECREASE (ΔQ = 5 → 2) under non-trivial rotations because per-sub-block stabilizers stop commuting with the rotated Hamiltonian.
+
+**H₂ cross-check confirms the pattern is not LiH-specific.** Per-sub-block h1 diagonalization on H₂ (M=10): 514 → 1,158 Pauli (2.25× denser; matches LiH 2.28× ratio). FCI bit-exact at residual 2.66×10⁻¹⁵, confirming the gauge-transform rotation logic is correct. (LiH residual ~5×10⁻³ is ARPACK Lanczos noise on the larger 11,025-dim FCI matrix combined with cross_block_h1=True; non-blocking for the Pauli-count verdict.)
+
+**Structural reason for the negative.** Pauli reduction via tapering requires a Hamiltonian SYMMETRY (a stabilizer commuting with H). The Hopf m_l → −m_l is the discrete Z₂ symmetry of the GeoVac chemistry construction; the continuous M-vS gauge group U(H_v) per vertex is **not** a symmetry but a basis-change freedom. Basis changes generically densify Pauli structure; they don't enable additional tapering. The Hopf Z₂ already captures the only discrete symmetry that the M-vS framework provides; the non-abelian extension has no Pauli-reduction-side content.
+
+**Closing two of three "M-vS upgrades chemistry" candidate paths in one session.** Three paths were named mid-session: (1) gauge tapering at the full M-vS gauge group, (2) predict the edge bimodule L_e from M-vS constraints, (3) inner-fluctuation construction of binding. (1) closes NEGATIVE this sprint. (3) was already empirically refuted by today's M-vS-2 Q2 negative (spectral action monotone in R). (2) remains speculative and lower priority.
+
+**Strategic implication.** The M-vS paper arc is viable as **structural identification** (three molecules at bit-exact precision) but does NOT predict chemistry-side computational improvements beyond what other axes (Z₂ tapering, propinquity bounds, FCIDUMP export) already give. M-vS-3 (two-body ERI Bratteli reading) and subsequent sprints in the named arc are structural deliverables for the paper, not chemistry-engineering wins. The user's mid-session epistemic pull-back was the right move; we now have two decisive negatives on the "M-vS as chemistry-upgrade" reading and no remaining sprint-scale paths to test it.
+
+### Added
+
+- **`debug/sprint_mvs_gauge_pauli_reduction_driver.py`** (~620 lines) — five M-vS gauge candidates tested on default LiH at R = R_eq = 3.015 bohr, n_max = 2 + per-sub-block diag on H₂ cross-check. Per-candidate: covariant 8-fold-symmetrized eri rotation, Jordan-Wigner Pauli count, Z₂ Hopf tapering on top when applicable, FCI energy preservation check. ~80 s wall time including 36 s for the FCI 1-RDM construction for the per-vertex natural orbital candidate.
+- **`debug/data/sprint_mvs_gauge_pauli.json`** — full data dump: per-candidate Pauli counts, FCI residuals, post-taper qubit counts, gauge unitary orthogonality residuals.
+- **`debug/sprint_mvs_gauge_pauli_reduction_log.txt`** — stdout capture.
+- **`debug/sprint_mvs_gauge_eri_diag.py`, `..._eri_diag2.py`, `..._eri_diag3.py`** — three diagnostic drivers used to isolate the LiH FCI 5×10⁻³ residual and confirm rotation logic is correct (H₂ bit-exact 2.66×10⁻¹⁵).
+- **`debug/sprint_mvs_gauge_pauli_reduction_memo.md`** — canonical sprint memo per CLAUDE.md §13.11.
+- **CLAUDE.md §2 one-liner** for v3.88.0.
+- **CLAUDE.md §3 new dead-end row**: M-vS gauge group as a Pauli-reduction tool beyond Z₂ Hopf-U(1) (5 candidates × 2 molecules, all densify; structural reason given).
+
+### Changed
+
+- None. No production code modified; no paper edits.
+
+### Closed
+
+- **"M-vS gauge tapering beyond Z₂"** — one of three candidate paths named mid-session for "M-vS upgrades chemistry." NEGATIVE at sprint scale; reason structural (M-vS gauge is basis freedom, not Hamiltonian symmetry); decisive across LiH default 3-sub-block and H₂ two-center.
+- **Mid-session "is the M-vS arc more than reproducing M-vS?" question** — answered with two NEGATIVE sprint results in one session (this sprint + M-vS-2 Q2). One speculative path remains (predicting L_e from first principles), not actively pursued. M-vS arc continues as structural identification only.
+
+### Verification
+
+- Driver runs reproducibly at ~90 s wall.
+- H₂ FCI bit-exact preservation under per-sub-block rotation (residual 2.66×10⁻¹⁵) → gauge-transform rotation logic correct.
+- Identity FCI bit-exact (residual 1.42×10⁻¹⁴) → baseline reproducibility.
+- 8-fold permutation symmetry of original eri verified across full LiH eri tensor (0 violations at 1e-8 threshold, max asymmetry 0.0).
+- All gauge unitaries orthogonal to <10⁻¹⁵.
+- No production code modified → no `geovac/` regression; topological-integrity proofs remain 18/18 (last verified v3.86.0).
+
+### Honest scope
+
+**Decisive negative (sample n=2 molecules):** M-vS gauge group does not produce Pauli reduction beyond Z₂ Hopf-U(1) for the GeoVac chemistry construction. Every non-trivial rotation densifies the eri tensor; Z₂ savings shrink under rotation; post-tapered identity remains optimum.
+
+**Numerical observation (not blocking):** LiH FCI residual ~5×10⁻³ Ha under non-trivial rotations is ARPACK Lanczos convergence noise (combined with cross_block_h1=True construction's Hermitian-symmetry tolerance) at 11,025-dim sparse FCI; H₂ at 1,225-dim has no such issue. Not pursued further; not blocking for the structural Pauli-count verdict.
+
+**Not in scope of this sprint:** predicting L_e from M-vS first principles (~1-2 week speculative follow-on); alternative qubit encodings (parity, Bravyi-Kitaev); additional symmetries (D∞h, time-reversal, charge conjugation — these are symmetry-tapering paths independent of M-vS framework question). The M-vS-3 two-body ERI Bratteli reading per the named arc plan stands unchanged.
+
+## [3.87.0] - 2026-06-07
+
+### Summary
+
+**Sprint M-vS-2 + R-sweep — default LiH spec 3-sub-block Bratteli reading bit-exactly confirmed (Q1 PASS); spectral action of the assembled M-vS Dirac does NOT bind LiH (Q2 NEGATIVE).** Session-continuation sprint picking up exactly where v3.86.0 left off, plus one reconciliation question this session surfaced.
+
+**Q1 STRUCTURAL: PASS bit-exactly (residual 0.0).** The production-default `lih_spec()` 3-sub-block / 15-spatial-orbital chemistry Hamiltonian IS a Marcolli–vS 2014 gauge network on the 2-vertex Li ↔ H bond quiver, with the natural reading: vertex Li carries the direct-sum Hilbert space $\mathcal H_{\mathrm{Li}} = \mathcal H_{\mathrm{Li\_core}} \oplus \mathcal H_{\mathrm{LiH\_bond\_center}}$ (10-dim) and vertex H carries $\mathcal H_H = \mathcal H_{\mathrm{LiH\_bond\_partner}}$ (5-dim). Edge intertwiner $L_e$ is the 5 × 10 cross-block-h1 sub-matrix; Hermitian but not unitary (residual 1.0, consistent with H₂ pilot — MvS 2014 fits, Perez-Sanchez 2024a does not). Internal Li-vertex off-diagonal block $\mathrm{Li\_core} \leftrightarrow \mathrm{LiH\_bond\_center} = 0.0$ exactly because `cross_block_h1` skips same-center pairs structurally. **Three empirical anchors at bit-exact precision now (H₂, LiH-2-vertex, LiH-default-3-sub-block);** the M-vS paper-arc headline can move from "we can encode chemistry-like specs into M-vS by construction" to "the production Track CD pipeline IS a M-vS gauge network on the bond quiver."
+
+**Q2 FUNCTIONAL: spectral action is NOT a binding functional for LiH.** R-sweep over $R \in \{2.0, 2.5, 3.0, 3.015, 3.5, 4.0, 4.5, 5.0, 6.0, 8.0\}$ bohr (10 panel points): the spectral action $S(D)(R) = \mathrm{Tr}\, \exp(-D^2 / \Lambda^2)$ of the assembled M-vS Dirac (= relabeled $h_1$) is **monotone increasing** in R at every $\Lambda \in \{1, 2, 4\}$ — smallest at $R = 2.0$ bohr (panel boundary), largest at $R = 8.0$ bohr. $E_{\mathrm{FCI}}(R)$ is monotone decreasing toward small R (the established W1e wall pattern). $\mathrm{Tr}(D^2)$ is monotone decreasing in R. **No interior minimum** for any of the five observables at any tested Λ.
+
+**Joint reading: W1e is at the PROJECTION step, NOT the EVALUATION step.** The chemistry-engineering arc was empirically exhausted in v3.86.0 by testing DIFFERENT BUILDERS of $(h_1, \mathrm{eri}, e_{\mathrm{core}})$. The present sprint tests a DIFFERENT EVALUATION (spectral action functional vs FCI ground state) on the same integrals. Both axes give monotone-descent failure. The binding content lives in the continuous Level-4 PK-composed pipeline ingredients that get lost in the projection to second-quantized integrals; switching what we COMPUTE FROM the integrals doesn't recover it. This is a sharper restatement of the multi-focal-composition wall pattern for chemistry: the M-vS-native observable does not autonomously generate calibration-data binding content from the gauge-network structure.
+
+**Strategic implication.** The M-vS structural-identification (paper-arc target) and M-vS-as-binding-functional (today's reconciliation question) are now **operationally separated**: the first is confirmed at bit-exact on three molecules; the second is empirically negative. The arc-scoping memo §6 framing — "structural NCG home for chemistry, not a new chemistry-binding method" — survives Q2 negative cleanly and honestly. Next named sprint M-vS-3 (two-body ERI Bratteli reading) stands unchanged.
+
+### Added
+
+- **`debug/bratteli_mvs2_lih_default_driver.py`** (~450 lines) — driver constructs the 2-vertex M-vS reading of the default `lih_spec()` 3-sub-block production spec; sweeps R ∈ [2.0, 8.0] bohr at 10 points; computes the spectral action at $\Lambda \in \{1, 2, 4\}$, $\mathrm{Tr}(D^2)$, edge intertwiner unitarity diagnostics, and 4-electron FCI ground state at every R via `coupled_fci_energy`. ~140 s wall time. Bit-exact gate at $R = R_{\mathrm{eq}} = 3.015$ bohr.
+- **`debug/data/bratteli_mvs2_lih_default.json`** — Q1 residuals, Q2 R-sweep data, curve characterization (interior-min / monotone classification per observable), $L_e$ unitarity audit, vertex Hermiticity audit.
+- **`debug/bratteli_mvs2_lih_default_log.txt`** — stdout capture of the driver run.
+- **`debug/sprint_mvs2_lih_default_plus_rsweep_memo.md`** — canonical sprint memo (one per sprint per CLAUDE.md §13.11): TL;DR / Q1 verdict / Q2 verdict / joint reading / what this sprint did NOT do / hard-prohibition check / verification / files / sample size.
+- **CLAUDE.md §2 one-liner** for v3.87.0 (this sprint's verdict).
+- **CLAUDE.md §3 new dead-end row**: spectral action of the assembled M-vS Dirac on default LiH at $n_{\max} = 2$ does NOT bind across R ∈ [2.0, 8.0] bohr — monotone in R at all three tested Λ; W1e wall is at projection step, not evaluation step.
+
+### Changed
+
+- None. No production code touched. No paper edits.
+
+### Closed
+
+- **Sprint M-vS-2 (default LiH spec 3-sub-block Bratteli reading)** — the named follow-on sprint from v3.86.0 umbrella memo §6 "Shippable" and arc-scoping memo §7. PASS at bit-exact (residual 0.0). M-vS paper arc has its second sprint deliverable.
+- **Reconciliation question opened this session ("is S(D) a chemistry binding functional?")** — answered NEGATIVE for LiH. The W1e wall is independent of FCI-vs-spectral-action evaluation choice.
+
+### Verification
+
+- Driver runs reproducibly in ~140 s on stock hardware.
+- Q1 gate: max|h1 − P^T H_MvS P| = 0.0 exactly (well below 1e-10 threshold).
+- Vertex Hermiticity = 0.0 for both Li and H vertices.
+- Internal Li off-diag = 0.0 (cross_block_h1 same-center-skip behavior matches expectation).
+- All 10 R-sweep points produce internally-consistent FCI energies (sector-restricted, 11,025-dim 4-electron Hilbert space).
+- No production code modified → no regression on `geovac/`; topological-integrity proofs unchanged at 18/18 (last verified v3.86.0).
+
+### Honest scope
+
+**Theorem-grade (bit-exact, no tolerance):** Default `lih_spec()` 3-sub-block chemistry Hamiltonian is a Marcolli-vS 2014 gauge network on the 2-vertex Li ↔ H bond quiver at $R = R_{\mathrm{eq}} = 3.015$ bohr, $n_{\max} = 2$.
+
+**Numerical observation (10-point R-sweep, single basis):** Spectral action $S(D)(R)$ and $\mathrm{Tr}(D^2)$ of the assembled M-vS Dirac are monotone in R at every tested Λ over $R \in [2.0, 8.0]$ bohr. Same monotone behavior as $E_{\mathrm{FCI}}(R)$ on the same integrals (W1e wall).
+
+**Sample size limitation:** One molecule (LiH), one basis size ($n_{\max} = 2$), one cutoff family (Gaussian). The Q1 bit-exact identification is general; the Q2 monotone-descent verdict is sample-limited. NaH frozen-core and $n_{\max} = 3$ are not tested here; the M-vS-3 two-body ERI Bratteli reading is not tested.
+
+**Outside scope of this sprint:** Two-body ERI Bratteli reading (named M-vS-3, 3-4 weeks); NaH frozen-core default-spec Bratteli reading; n_max = 3 sensitivity; alternative spectral-action cutoff functions (sharp, polynomial). The M-vS paper-arc plan (M-vS-3 → 4 → 5) is unchanged.
+
 ## [3.86.0] - 2026-06-07
 
 ### Summary

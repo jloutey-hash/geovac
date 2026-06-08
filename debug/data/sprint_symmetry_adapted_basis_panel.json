@@ -1,0 +1,570 @@
+[
+  {
+    "molecule": "LiH",
+    "use_atom_swap": false,
+    "M": 15,
+    "Q_naive": 30,
+    "Q_extended": 22,
+    "Q_extended_plus_hidden": 20,
+    "delta_Q_extended": 8,
+    "delta_Q_hidden": 2,
+    "n_sectors": 3,
+    "n_hidden_candidates": 9,
+    "n_hidden_valid": 9,
+    "n_hidden_kept_after_dedup_audit": 9,
+    "max_offsector_h1": 5.054205972638197e-17,
+    "max_offsector_eri": 2.379991293732378e-17,
+    "commute_hopf_swap": 0.0,
+    "pauli_extended": 282,
+    "pauli_ext_plus_hidden": 255,
+    "pauli_reduction_pct": 9.574468085106384,
+    "sectors": [
+      {
+        "sector": [
+          1,
+          1,
+          1
+        ],
+        "dim": 6,
+        "orbitals": [
+          0,
+          1,
+          5,
+          6,
+          10,
+          11
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          1
+        ],
+        "dim": 3,
+        "orbitals": [
+          2,
+          7,
+          12
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          1
+        ],
+        "dim": 6,
+        "orbitals": [
+          3,
+          4,
+          8,
+          9,
+          13,
+          14
+        ]
+      }
+    ],
+    "wall_time_s": 1.770190954208374
+  },
+  {
+    "molecule": "HF",
+    "use_atom_swap": false,
+    "M": 30,
+    "Q_naive": 60,
+    "Q_extended": 46,
+    "Q_extended_plus_hidden": 41,
+    "delta_Q_extended": 14,
+    "delta_Q_hidden": 5,
+    "n_sectors": 3,
+    "n_hidden_candidates": 18,
+    "n_hidden_valid": 18,
+    "n_hidden_kept_after_dedup_audit": 18,
+    "max_offsector_h1": 3.4916796903500823e-16,
+    "max_offsector_eri": 8.555016029308308e-17,
+    "commute_hopf_swap": 0.0,
+    "pauli_extended": 564,
+    "pauli_ext_plus_hidden": 510,
+    "pauli_reduction_pct": 9.574468085106384,
+    "sectors": [
+      {
+        "sector": [
+          1,
+          1,
+          1
+        ],
+        "dim": 12,
+        "orbitals": [
+          0,
+          1,
+          5,
+          6,
+          10,
+          11,
+          15,
+          16,
+          20,
+          21,
+          25,
+          26
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          1
+        ],
+        "dim": 6,
+        "orbitals": [
+          2,
+          7,
+          12,
+          17,
+          22,
+          27
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          1
+        ],
+        "dim": 12,
+        "orbitals": [
+          3,
+          4,
+          8,
+          9,
+          13,
+          14,
+          18,
+          19,
+          23,
+          24,
+          28,
+          29
+        ]
+      }
+    ],
+    "wall_time_s": 7.347645282745361
+  },
+  {
+    "molecule": "BeH2",
+    "use_atom_swap": true,
+    "M": 25,
+    "Q_naive": 50,
+    "Q_extended": 41,
+    "Q_extended_plus_hidden": 40,
+    "delta_Q_extended": 9,
+    "delta_Q_hidden": 1,
+    "n_sectors": 6,
+    "n_hidden_candidates": 15,
+    "n_hidden_valid": 3,
+    "n_hidden_kept_after_dedup_audit": 3,
+    "max_offsector_h1": 4.860460137319558e-16,
+    "max_offsector_eri": 1.9312094532543145e-17,
+    "commute_hopf_swap": 0.0,
+    "pauli_extended": 1694,
+    "pauli_ext_plus_hidden": 1685,
+    "pauli_reduction_pct": 0.5312868949232585,
+    "sectors": [
+      {
+        "sector": [
+          1,
+          1,
+          1
+        ],
+        "dim": 6,
+        "orbitals": [
+          0,
+          1,
+          5,
+          6,
+          10,
+          11
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          1
+        ],
+        "dim": 3,
+        "orbitals": [
+          2,
+          7,
+          12
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          1
+        ],
+        "dim": 6,
+        "orbitals": [
+          3,
+          4,
+          8,
+          9,
+          13,
+          14
+        ]
+      },
+      {
+        "sector": [
+          1,
+          1,
+          -1
+        ],
+        "dim": 4,
+        "orbitals": [
+          15,
+          16,
+          20,
+          21
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          -1
+        ],
+        "dim": 2,
+        "orbitals": [
+          17,
+          22
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          -1
+        ],
+        "dim": 4,
+        "orbitals": [
+          18,
+          19,
+          23,
+          24
+        ]
+      }
+    ],
+    "wall_time_s": 11.098580121994019
+  },
+  {
+    "molecule": "H2O",
+    "use_atom_swap": true,
+    "M": 35,
+    "Q_naive": 70,
+    "Q_extended": 59,
+    "Q_extended_plus_hidden": 58,
+    "delta_Q_extended": 11,
+    "delta_Q_hidden": 1,
+    "n_sectors": 6,
+    "n_hidden_candidates": 21,
+    "n_hidden_valid": 3,
+    "n_hidden_kept_after_dedup_audit": 3,
+    "max_offsector_h1": 2.3736891870986973e-14,
+    "max_offsector_eri": 3.862418906508629e-17,
+    "commute_hopf_swap": 0.0,
+    "pauli_extended": 2494,
+    "pauli_ext_plus_hidden": 2485,
+    "pauli_reduction_pct": 0.3608660785886127,
+    "sectors": [
+      {
+        "sector": [
+          1,
+          1,
+          1
+        ],
+        "dim": 8,
+        "orbitals": [
+          0,
+          1,
+          5,
+          6,
+          10,
+          11,
+          25,
+          26
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          1
+        ],
+        "dim": 4,
+        "orbitals": [
+          2,
+          7,
+          12,
+          27
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          1
+        ],
+        "dim": 8,
+        "orbitals": [
+          3,
+          4,
+          8,
+          9,
+          13,
+          14,
+          28,
+          29
+        ]
+      },
+      {
+        "sector": [
+          1,
+          1,
+          -1
+        ],
+        "dim": 6,
+        "orbitals": [
+          15,
+          16,
+          20,
+          21,
+          30,
+          31
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          -1
+        ],
+        "dim": 3,
+        "orbitals": [
+          17,
+          22,
+          32
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          -1
+        ],
+        "dim": 6,
+        "orbitals": [
+          18,
+          19,
+          23,
+          24,
+          33,
+          34
+        ]
+      }
+    ],
+    "wall_time_s": 22.345415830612183
+  },
+  {
+    "molecule": "NH3",
+    "use_atom_swap": false,
+    "M": 40,
+    "Q_naive": 80,
+    "Q_extended": 62,
+    "Q_extended_plus_hidden": 55,
+    "delta_Q_extended": 18,
+    "delta_Q_hidden": 7,
+    "n_sectors": 3,
+    "n_hidden_candidates": 24,
+    "n_hidden_valid": 24,
+    "n_hidden_kept_after_dedup_audit": 24,
+    "max_offsector_h1": 2.1665607521323992e-16,
+    "max_offsector_eri": 4.355501117682928e-17,
+    "commute_hopf_swap": 0.0,
+    "pauli_extended": 752,
+    "pauli_ext_plus_hidden": 680,
+    "pauli_reduction_pct": 9.574468085106384,
+    "sectors": [
+      {
+        "sector": [
+          1,
+          1,
+          1
+        ],
+        "dim": 16,
+        "orbitals": [
+          0,
+          1,
+          5,
+          6,
+          10,
+          11,
+          15,
+          16,
+          20,
+          21,
+          25,
+          26,
+          30,
+          31,
+          35,
+          36
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          1
+        ],
+        "dim": 8,
+        "orbitals": [
+          2,
+          7,
+          12,
+          17,
+          22,
+          27,
+          32,
+          37
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          1
+        ],
+        "dim": 16,
+        "orbitals": [
+          3,
+          4,
+          8,
+          9,
+          13,
+          14,
+          18,
+          19,
+          23,
+          24,
+          28,
+          29,
+          33,
+          34,
+          38,
+          39
+        ]
+      }
+    ],
+    "wall_time_s": 15.413514137268066
+  },
+  {
+    "molecule": "CH4",
+    "use_atom_swap": false,
+    "M": 45,
+    "Q_naive": 90,
+    "Q_extended": 70,
+    "Q_extended_plus_hidden": 62,
+    "delta_Q_extended": 20,
+    "delta_Q_hidden": 8,
+    "n_sectors": 3,
+    "n_hidden_candidates": 27,
+    "n_hidden_valid": 27,
+    "n_hidden_kept_after_dedup_audit": 27,
+    "max_offsector_h1": 2.0216823890552788e-16,
+    "max_offsector_eri": 4.759982587464756e-17,
+    "commute_hopf_swap": 0.0,
+    "pauli_extended": 846,
+    "pauli_ext_plus_hidden": 765,
+    "pauli_reduction_pct": 9.574468085106384,
+    "sectors": [
+      {
+        "sector": [
+          1,
+          1,
+          1
+        ],
+        "dim": 18,
+        "orbitals": [
+          0,
+          1,
+          5,
+          6,
+          10,
+          11,
+          15,
+          16,
+          20,
+          21,
+          25,
+          26,
+          30,
+          31,
+          35,
+          36,
+          40,
+          41
+        ]
+      },
+      {
+        "sector": [
+          -1,
+          -1,
+          1
+        ],
+        "dim": 9,
+        "orbitals": [
+          2,
+          7,
+          12,
+          17,
+          22,
+          27,
+          32,
+          37,
+          42
+        ]
+      },
+      {
+        "sector": [
+          1,
+          -1,
+          1
+        ],
+        "dim": 18,
+        "orbitals": [
+          3,
+          4,
+          8,
+          9,
+          13,
+          14,
+          18,
+          19,
+          23,
+          24,
+          28,
+          29,
+          33,
+          34,
+          38,
+          39,
+          43,
+          44
+        ]
+      }
+    ],
+    "wall_time_s": 21.248194932937622
+  }
+]

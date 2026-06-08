@@ -1,0 +1,65 @@
+========================================================================
+Sprint m_j-parity Z₂ ROTATED-BASIS — relativistic chemistry audit
+Date: 2026-06-08
+========================================================================
+
+========================================================================
+System: LiH_rel
+========================================================================
+  Q = 30, original N_pauli = 1413  (builder 0.4s)
+  densifying ERI (2676 sparse → 810000 dense)...
+  (0.0s)
+  rebuilding fermion_op from dense h1+eri_sym + JW...
+  (0.5s)
+  ||qop_orig - qop_rebuilt||_max = 0.0000e+00  (PASS)
+  building m_j → −m_j rotation U_mj...
+  parity counts: +1=15, −1=15
+  rotation wall time 0.0s
+  N_pauli_rotated = 1453  (0.8s)
+  stabilizers: global=1, per_block=3
+  global  P_{m_j}^rot: residual = 5.0658e-02  (FAIL)
+  block[0] P_{m_j}^rot: residual = 5.0658e-02  (FAIL)
+  block[1] P_{m_j}^rot: residual = 1.6886e-02  (FAIL)
+  block[2] P_{m_j}^rot: residual = 1.6886e-02  (FAIL)
+  VERDICT: NEGATIVE
+
+========================================================================
+System: BeH_rel
+========================================================================
+  Q = 30, original N_pauli = 1413  (builder 0.4s)
+  densifying ERI (2676 sparse → 810000 dense)...
+  (0.0s)
+  rebuilding fermion_op from dense h1+eri_sym + JW...
+  (0.5s)
+  ||qop_orig - qop_rebuilt||_max = 0.0000e+00  (PASS)
+  building m_j → −m_j rotation U_mj...
+  parity counts: +1=15, −1=15
+  rotation wall time 0.0s
+  N_pauli_rotated = 1453  (0.8s)
+  stabilizers: global=1, per_block=3
+  global  P_{m_j}^rot: residual = 6.7544e-02  (FAIL)
+  block[0] P_{m_j}^rot: residual = 6.7544e-02  (FAIL)
+  block[1] P_{m_j}^rot: residual = 3.3772e-02  (FAIL)
+  block[2] P_{m_j}^rot: residual = 1.6886e-02  (FAIL)
+  VERDICT: NEGATIVE
+
+========================================================================
+System: CaH_rel
+========================================================================
+  Q = 20, original N_pauli = 942  (builder 0.2s)
+  densifying ERI (1784 sparse → 160000 dense)...
+  (0.0s)
+  rebuilding fermion_op from dense h1+eri_sym + JW...
+  (0.2s)
+  ||qop_orig - qop_rebuilt||_max = 0.0000e+00  (PASS)
+  building m_j → −m_j rotation U_mj...
+  parity counts: +1=10, −1=10
+  rotation wall time 0.0s
+  N_pauli_rotated = 966  (0.4s)
+  stabilizers: global=1, per_block=2
+  global  P_{m_j}^rot: residual = 3.3772e-02  (FAIL)
+  block[0] P_{m_j}^rot: residual = 3.3772e-02  (FAIL)
+  block[1] P_{m_j}^rot: residual = 1.6886e-02  (FAIL)
+  VERDICT: NEGATIVE
+
+Data written to C:\Users\jlout\Desktop\Project_Geometric\debug\data\sprint_mj_parity_rotated.json
