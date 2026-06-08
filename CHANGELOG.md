@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.104.0] - 2026-06-08
+
+### Summary
+
+**Sprint pre-outreach corpus hygiene.** Coordinated multi-paper cleanup pass before Brown/Kleinschmidt outreach (Leader Strategic Brief, 2026-06-08, recommended outreach as the highest-leverage next move with Papers 55/56 as lead artifacts). Five parallel adversarial audits dispatched in sub-agents: Paper 55 deep audit, Paper 56 deep audit, Paper 32 §VIII C-arc theorem audit, LiH binding regression diagnostic, and corpus-wide citation sweep across 15 supporting papers. Headline finding: **nothing structural is broken**; all issues are mechanical (wrong arXiv IDs, fabricated titles, one theorem-block presentation defect, one stale memory note). The cleanup pass executed all sixteen identified tasks (fourteen active, two explicitly deferred).
+
+### Added
+
+- **`debug/cleanup_paper_55_audit_memo.md`** (~2,400 words): Paper 55 deep audit, YELLOW verdict, four wrong arXiv IDs identified + three missing bibitems + one undefined ref + scope-honesty GREEN throughout.
+- **`debug/cleanup_paper_56_audit_memo.md`** (~3,000 words): Paper 56 deep audit, YELLOW verdict, two fabricated Perez-Sanchez titles + duplicate Paper 55 bibitem + bibkey inconsistency; **5,864 bit-exact residual count verified at sub-count level**; scope-honesty GREEN (inclusion-vs-equality framing exemplary).
+- **`debug/cleanup_paper_32_section_viii_audit_memo.md`** (~3,400 words): Paper 32 §VIII C-arc theorem audit, YELLOW verdict, H1 Yukawa presentation defect identified (paragraph instead of `\begin{theorem}`) + `thm:no_single_mechanism_K` proof structural/empirical conflation.
+- **`debug/cleanup_lih_regression_diagnostic_memo.md`** (~1,800 words): LiH regression diagnostic, verdict FEW-HOUR PATCH ALREADY DONE in v3.56.0, confirming Paper 17's 5.3% R_eq currently reproduces at 2.82% (beaten) and the v3.55.0-era Pattern E note was stale.
+- **`debug/cleanup_corpus_citation_sweep_memo.md`** (~3,800 words): Corpus-wide citation sweep across 15 supporting papers (P18, P29, P38, P39, P40, P42–P50, P53), per-paper bibitem table + cross-paper lineage consistency matrix + top-5 highest-risk corrections.
+- **Field guide (`papers/synthesis/geovac_field_guide.tex`)**: new C-arc closure paragraph in §sec:forced_free (eight theorem-grade non-selection results across four sectors); Papers 45/46/56 added to the mathematician (NCG/periods) entries in §sec:readers_map; Deligne–Milne pro-finite reconstruction and non-commutative Mondino–Sämann added as named multi-year frontiers in §sec:open.
+- **README.md**: new "Math.OA / NCG / Periods Arc" section pointing to Papers 38, 45/46, 48/49, 50, 55, 56 and the field guide; Paper Series table expanded by 17 entries (now covers Papers 25, 28, 29, 30, 32, 33, 34, 35, 36, 38–50, 51–57).
+
+### Changed
+
+- **Paper 32 `thm:no_single_mechanism_K` proof rewritten** to separate the structural argument (Fact 1 master-Mellin case-exhaustion + Fact 2 B/F/Δ sub-ring partition → no morphism in $\mathcal{A}$ generates $K$) from empirical corroboration (twelve mechanism eliminations, now explicitly not load-bearing). Theorem statement and scope unchanged.
+- **Paper 32 §VIII H1 Yukawa non-selection promoted from `\paragraph` to `\begin{theorem}[H1 Yukawa non-selection]\label{thm:h1_yukawa_non_selection}`** with explicit proof sketch citing G3 structural finding + Mexican-hat potential verification. §VIII theorem tally now reads consistently: eight `\begin{theorem}` blocks matching the `rem:c_arc_terminal_state` count.
+- **Paper 55 bibitem fixes**: `deligne2010` arXiv:math/0302267 reference removed (was Deligne-Goncharov 2003, not Deligne 2010 IHES which has no arXiv preprint); `marcolli_tabuada2014a` arXiv:1110.2438 → arXiv:1105.2950; `connes_consani2014_scaling` arXiv:1603.03191 → arXiv:1507.05818 (1603.03191 is the longer Selecta Math. 2017 paper); `connes_consani_moscovici2025_zeta` fabricated "and the explicit formulas" subtitle removed.
+- **Paper 55 bibitems added**: `karamata1962`, `korevaar2004`, `tenenbaum2015` (Tauberian-rate paragraph at line 2217); `\S\ref{sec:open_m2_m3}` undefined ref → `\S\ref{subsec:open_m2_m3}`.
+- **Paper 56 bibitem fixes**: `perez_sanchez2024` author initial G.A. → C.I. and title → "Bratteli networks and the Spectral Action on quivers" (canonical from Paper 32); `perez_sanchez2025` author initial G.A. → C.I. and title → "Comment on `Gauge networks in noncommutative geometry'"; duplicate Paper 55 bibitem (`loutey_paper55` vs `paper55`) resolved by unifying on `paper55`.
+- **Paper 38 bibitem fixes**: `perez_sanchez2024` title → "Bratteli networks and the Spectral Action on quivers"; `perez_sanchez2025` title → "Comment on `Gauge networks in noncommutative geometry'".
+- **Papers 44/45/46/47 Mondino-Sämann title corrected**: dropped fabricated "Synthetic" prefix from arXiv:2504.10380; canonical title is "Lorentzian Gromov-Hausdorff convergence and pre-compactness" (the May-24 Paper 45 update is now propagated to the rest of the Lorentzian arc).
+- **Papers 42/43/44 Nieuviarts titles corrected**: `nieuviarts2024` → "Signature change by a morphism of spectral triples" (arXiv:2402.05839); `nieuviarts2025a` → "Emergence of Lorentz symmetry from an almost-commutative twisted spectral triple" (arXiv:2502.18105); `nieuviarts2025b_proceedings` → "Emergence of time from a twisted spectral triple in almost-commutative geometry" (arXiv:2512.15450).
+- **Cosmetic bibkey unification**: `marcolli_vansuijlekom2014` → `marcolli_vs2014` across Papers 56, 51, 34 (corpus-standard form already in P25/P30/P32/P38/P41/P43/P48/P49).
+- **Paper 18 lineage citations added**: Marcolli–vS gauge-network framework + Perez-Sanchez correction + Brown 2012 mixed Tate motives — with corresponding bibitems — in the master Mellin engine paragraph (§III.7).
+- **Paper 29 lineage citation added**: Marcolli–vS gauge-network framework + Perez-Sanchez correction in the Hopf graph definition section (§2).
+- **README.md version badges and citation block** updated to v3.104.0.
+- **Memory: `memory/lih_binding_regression_v3.md` rewritten** as RESOLVED v3.56.0 (with diagnostic numbers); MEMORY.md index entry updated.
+
+### Verified
+
+- All 13 edited papers (with the exception of Paper 38 which has a pre-existing local MiKTeX/microtype font expansion issue unrelated to my bibitem-only edit) compile three-pass clean.
+- Field guide compiles clean at 12 pages.
+- 18/18 topological proofs pass (`tests/test_fock_projection.py` + `tests/test_fock_laplacian.py`).
+- LiH `LiH_ab_initio` reproduces at 2.82% R_eq error (beats Paper 17's published 5.3%); balanced coupled reproduces at 6.93% (matches Track CD historical 7.0%).
+- Paper 56's 5,864 bit-exact zero residual count verified at sub-count level against all sprint memos (PS-1: 130 + PS-2: 485 + PS-3: 284 + PS-4: 872 + TC-1a: 106 + TC-1b: 56 + TC-1c: 50 + TC-1d: 40 + TC-1e: 98 + TC-1f: 490 + TC-2a-d: 349 + G4-Inj n_max∈{2,3,4}: 2,904 = 5,864).
+
+### Deferred (not blocking outreach)
+
+- Paper 55 §7.6 Q5' narrative trim (R1, ~2h optional; chronicle currently runs ~1,225 lines and could compress to 2 pages).
+- §13.4a verification test additions (Paper 55: 3 driver scripts to promote to `tests/`; Paper 32 §VIII: 3 theorems lacking backing tests). Selective closure can be done if outreach surfaces specific demand.
+- Full field guide verification appendix (audit-recommended; substantial editorial work; the other three field-guide additions — currency, lineage, open frontiers — are in).
+- Broader MEMORY.md compaction beyond the LiH entry (still 32K, over 24.4K soft limit; not outreach-blocking but warnings will persist until compacted).
+
+### Outreach readiness
+
+Lead artifacts (Papers 55, 56) cite-clean and scope-honest. Paper 32 §VIII C-arc theorems present as eight clean `\begin{theorem}` blocks. Field guide currency reflects June 8 v3.103.0 state. Supporting corpus (Papers 18, 29, 38, 42–49) citation-hygiene-clean. Brown/Kleinschmidt/Marcolli/van~Suijlekom/Tapuškovic lineage citations consistent across the corpus.
+
 ## [3.103.0] - 2026-06-08
 
 ### Summary

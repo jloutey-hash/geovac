@@ -4498,18 +4498,42 @@ The spectral-action Mexican-hat potential is confirmed:
 $\Tr(D_F^2) > 0$ and $\Tr(D_F^4) > 0$ give the standard CCM
 sign structure $V(\Phi) = -\mu^2 |\Phi|^2 + \lambda |\Phi|^4$.
 
-\textbf{Yukawa non-selection theorem.} The space of admissible
-$D_F$ satisfying all Connes axioms has $128$ real parameters
-after Hermiticity ($1024 \to 512$), chirality grading
-($512 \to 128$), and $J$-reality ($128 \to 128$; the order-one
-condition does not further constrain). For one generation,
-$Y = \mathrm{diag}(y_\nu, y_e, y_u, y_d)$ carries $8$ free
-real parameters. The gauge sector is \textbf{forced};
-the Yukawa is \textbf{free}. This is grounded in the G3
-structural finding: $\gamma_{\text{GV}}$ and $\gamma_F$ are
-independent commuting $\mathbb{Z}_2$'s, so no GeoVac-side data
-couples to the $\gamma_F$ flip that carries the Yukawa.
-Source: \texttt{debug/h1\_higgs\_inner\_fluctuation\_memo.md}.
+\begin{theorem}[H1 Yukawa non-selection]
+\label{thm:h1_yukawa_non_selection}
+Within the almost-commutative spectral triple
+$(\mathcal{A}_{\mathrm{GV}} \otimes \mathcal{A}_F, \mathcal{H}_{\mathrm{total}}, D)$
+with $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H} \oplus M_3(\mathbb{C})$,
+the space of admissible finite Dirac operators $D_F$ satisfying all
+Connes axioms (Hermiticity, chirality grading, $J$-reality, order-one
+condition) carries, after the reductions $1024 \to 512$ (Hermiticity)
+$\to 128$ (chirality grading) $\to 128$ ($J$-reality; order-one
+imposes no further constraint), exactly $128$ real parameters. For
+one generation, $Y = \mathrm{diag}(y_\nu, y_e, y_u, y_d)$ accounts
+for $8$ of these. The gauge sector
+$\mathrm{U}(1) \times \mathrm{SU}(2) \times \mathrm{SU}(3)$ is
+\textbf{forced}; the Yukawa values are \textbf{not selected} by any
+morphism in $\mathcal{A}_{\mathrm{GV}}$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The parameter count follows from direct enumeration on the
+chirality-graded $J$-real subspace of Hermitian operators on
+$\mathcal{H}_F$. The non-selection of the Yukawa is the G3
+structural finding (Sprint G3, \S\ref{sec:g3}):
+$\gamma_{\text{GV}}$ and $\gamma_F$ are independent commuting
+$\mathbb{Z}_2$'s on $\mathcal{H}_{\mathrm{GV}} \otimes \mathcal{H}_F$,
+so no GeoVac-side data couples to the $\gamma_F$ flip that carries
+the Yukawa. The full fluctuated Dirac $D_A = D + A + JAJ^{-1}$ was
+constructed at $n_{\max} \in \{2, 3\}$
+($\dim \mathcal{H}_{\text{total}} = 512, 1280$) and the inner
+fluctuations decompose cleanly into the forced gauge piece (matching
+G4a) plus the Higgs piece (complex $\mathrm{SU}(2)$ doublet $\Phi$ in
+the L--R off-diagonal block, non-trivial iff $Y \ne 0$). The
+spectral-action Mexican-hat potential is confirmed:
+$\Tr(D_F^2) > 0$ and $\Tr(D_F^4) > 0$ give the standard CCM sign
+structure $V(\Phi) = -\mu^2 |\Phi|^2 + \lambda |\Phi|^4$. See
+\texttt{debug/h1\_higgs\_inner\_fluctuation\_memo.md}.
+\end{proof}
 
 \paragraph{The forced/free seam (forcing-catalogue Door~4, 2026-06-01).}
 The Yukawa non-selection theorem admits a sharper structural reading.
@@ -5381,42 +5405,51 @@ been empirically eliminated for single-principle generation of $K$
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-The argument is a structural composition of three established facts:
+The non-selection statement follows from a \emph{structural} argument
+(Facts~1+2); Fact~3 is independent empirical corroboration that does
+not enter the proof but is recorded as a robustness witness.
+
+\textbf{Structural argument.}
 
 \textbf{Fact 1 (Master Mellin engine case-exhaustion,
-Theorem~\ref{thm:pi_source_case_exhaustion} above).}  Every transcendental appearing
-in a GeoVac observable is classified into the $M_1$, $M_2$, or $M_3$
-Mellin sub-ring of $\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$ at
-$k \in \{0, 1, 2\}$.  Distinct sub-rings correspond to distinct
-operator-order $\times$ bundle-type combinations and do not
-inter-translate within $\mathcal{A}$.
+Theorem~\ref{thm:pi_source_case_exhaustion}).}  Every transcendental
+appearing in a GeoVac observable is classified into the $M_1$, $M_2$,
+or $M_3$ Mellin sub-ring of
+$\mathcal{M}[\mathrm{Tr}(D^k \cdot e^{-tD^2})]$ at $k \in \{0, 1, 2\}$.
+The three sub-rings correspond to distinct operator-order $\times$
+bundle-type combinations.  Under $\mathcal{A}$, the master Mellin
+engine is the unique mechanism producing transcendental output, and a
+morphism producing output simultaneously in two distinct sub-rings
+would require simultaneously evaluating $\mathcal{M}[\mathrm{Tr}(D^k
+\cdot e^{-tD^2})]$ at two distinct values of $k$, which is excluded.
 
-\textbf{Fact 2 (Three independent spectral homes, Paper 2 §IV
-+ Phases 4B--4I).}  $B$, $F$, $\Delta$ live in three structurally
-distinct spectral sectors with no shared generator:\
-$B$ is the Casimir trace at $m = 3$ (finite scalar sum);
-$F$ is the Fock-degeneracy infinite Dirichlet sum at the packing
-exponent $d = d_{\max} = 3$;
-$\Delta$ is the Dirac mode-degeneracy count at $n = 3$ on the
-spinor bundle.
+\textbf{Fact 2 (Sub-ring partition of $B$, $F$, $\Delta$, Paper 2 §IV
++ Phases 4B--4I).}  $B = 42$ is a finite Casimir trace in the
+representation sector ($M_2$); $F = \pi^2/6$ is a Fock-degeneracy
+Dirichlet sum at the packing exponent $d = 3$ ($M_2$); $\Delta = 1/40$
+is the Dirac mode-degeneracy count $g_3^{\rm Dirac}$ ($M_1$).  The
+combination $B + F - \Delta$ therefore mixes outputs of $M_2$ ($k=2$)
+and $M_1$ ($k=0$).
 
-\textbf{Fact 3 (Twelve mechanism eliminations).}  Phases 4B--4I
-(April 2026) eliminated nine candidate generation mechanisms;
-Sprint A $\alpha$-SP (Sprint A, 2026-04-18) eliminated the
-Connes--Chamseddine direct spectral-action derivation;
-Sprint K-CC (2026-05-03) eliminated three further mechanisms
-(PSLQ at 100 dps against 244-element basis; natural $\Lambda$ search
-from $S^3$ spectral data; unified CC heat-kernel approach blocked by
-Theorem T9 algebraic obstruction).
+\textbf{Composition.}  Under $\mathcal{A}$, by Fact~1 no single
+morphism produces output in both $M_1$ and $M_2$ simultaneously.  By
+Fact~2 the combination $K = \pi(B + F - \Delta)$ mixes $M_1$ and $M_2$
+output.  Therefore no morphism in $\mathcal{A}$ generates $K$ as a
+single-mechanism output.  The non-selection conclusion follows
+structurally; the specific weights $(+1, +1, -1)$ and the external
+$\pi$ prefactor enter the empirical observation but not the
+non-selection argument.
 
-Composition.  $\mathcal{A}$ contains no morphism that simultaneously
-spans the three Mellin sub-rings of $B$, $F$, $\Delta$ and produces
-the specific combination $K = \pi(B + F - \Delta)$.  Twelve mechanisms
-have been empirically tested for such a morphism and all are
-eliminated.  Therefore the combination rule remains a numerical
-coincidence between three independent spectral homes at the 8.8 $\times$
-10$^{-8}$ precision of Paper 2 §I.D, without a single-mechanism
-generator in the current axiom set. $\hfill\square$
+\textbf{Empirical corroboration (Fact 3, not load-bearing).}  Twelve
+candidate single-principle generators of $K$ have been independently
+tested and eliminated:\ Phases 4B--4I (April 2026, nine mechanisms);
+Sprint~A $\alpha$-SP (2026-04-18, Connes--Chamseddine direct
+spectral-action derivation); Sprint K-CC (2026-05-03, three further
+mechanisms via PSLQ at 100~dps against a 244-element basis, a natural
+$\Lambda$ search from $S^3$ spectral data, and a unified CC
+heat-kernel route blocked by the algebraic obstruction
+Theorem~T9 of Paper 28).  These eliminations confirm the structural
+result empirically but are not used to establish it. $\hfill\square$
 \end{proof}
 
 \begin{remark}[E6 scope and the conjectural-label discipline]

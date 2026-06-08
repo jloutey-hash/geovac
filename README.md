@@ -1,6 +1,6 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-2.32.1-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-3.103.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians with **O(Q^2.5) Pauli term scaling** — a **51x to 1,712x advantage** over published Gaussian baselines across LiH, BeH₂, and H₂O (Paper 14).
 
@@ -38,6 +38,21 @@ The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE
 **Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 1.44% regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 592 Pauli, He-4 16 qubits / 712 Pauli); the conformal machinery does not.
 
 **The HO has its own discretization (Paper 24):** The 3D harmonic oscillator has a discrete graph encoding on the holomorphic sector of S⁵ via the Bargmann-Segal transform, parallel to Fock's discretization of the Coulomb problem on S³. The Bargmann graph is **bit-exactly π-free** in exact rational arithmetic at every finite N_max. Calibration π is Coulomb-specific, not a generic feature of quantum discretization.
+
+---
+
+## The Math.OA / NCG / Periods Arc
+
+Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc consists of fourteen standalone papers in `papers/group1_operator_algebras/`:
+
+- **Paper 38** SU(2)-propinquity convergence (WH1 PROVEN, May 2026) — GeoVac IS an almost-commutative spectral triple
+- **Papers 45/46** First Lorentzian propinquity convergence theorem in math.OA literature (K⁺-weak-form + strong-form)
+- **Papers 48/49** Krein–Mondino–Sämann bridge — twin paradox as quantum-information statement
+- **Paper 50** Bit-exact F-theorem match on S³ + S⁵ (Klebanov–Pufu–Safdi)
+- **Paper 56** Cosmic-Galois U* = 𝔾_a^(3N) ⋊ SL_2 identification (2,611 → 5,864 bit-exact zero residuals)
+- **Paper 55** Periods of GeoVac sit in cyclotomic mixed-Tate at level 4
+
+The "C-arc closure" sprints of June 2026 placed eight theorem-grade non-selection results (Paper 32 §VIII) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
 
 ---
 
@@ -176,6 +191,21 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | 21 | Synthesis | S³ proof chain, exchange constants, research program |
 | **2** | **Fine Structure Constant** | **α from Hopf bundle, 8.8×10⁻⁸; three-sector spectral coincidence K = π(B + F − Δ); Marcolli-vS gauge-network lineage; combination rule remains conjectural** |
 | 8-9 | Bond Sphere + Sturmian | Structural theorem (guardrail), SO(4) selection rules |
+| 25, 28, 30 | Hopf gauge / QED on S³ / SU(2) Wilson | Discrete lattice-gauge structure on the Hopf graph |
+| 29 | Ramanujan Hopf | Graph-RH for GeoVac Hopf graphs; Ihara zeta closed forms |
+| **32** | **Spectral Triple** | **Explicit construction; eight theorem-grade non-selection results in §VIII** |
+| 33, 36 | QED selection rules / Bound-state QED | 1+6+1 partition; Lamb shift at −0.534% one-loop |
+| 34, 35 | Projection taxonomy / Time as projection | Two-layer framework; 28 projections × three-axis tagging |
+| **38** | **SU(2) Propinquity Convergence** | **WH1 PROVEN (May 2026); five-lemma proof; 4/π universal rate** |
+| 39, 40 | Tensor / Unified propinquity | Master theorem covering all compact Lie groups |
+| 42, 43 | Modular Hamiltonian / Lorentzian extension | Four-witness Wick-rotation; Krein-(3,1) extension |
+| **45, 46** | **Lorentzian Propinquity** | **First in math.OA literature; K⁺-weak-form + strong-form** |
+| 47, 48, 49 | Hybrid + Mondino-Sämann bridge | Norm-resolvent / synthetic-Lorentzian bridge with twin paradox |
+| 50 | CFT₃ partition function | Bit-exact F-theorem match (Klebanov–Pufu–Safdi) |
+| 51, 53 | Gravity arc / disk-propinquity | S³ spectral action two-term-exact; disk-with-cone backbone |
+| **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4; master Mellin engine classification** |
+| **56** | **Tannakian Substrate** | **Cosmic-Galois U* = 𝔾_a^(3N) ⋊ SL_2 identification; 5,864 bit-exact residuals** |
+| 57 | Forced/free seam | 60-entry catalogue; P5 packing-reachability at 98.3% |
 
 ---
 
@@ -209,7 +239,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
   author = {J. Loutey},
   title = {GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory},
   year = {2026},
-  version = {2.8.2},
+  version = {3.103.0},
   url = {https://github.com/jloutey-hash/geovac}
 }
 ```
