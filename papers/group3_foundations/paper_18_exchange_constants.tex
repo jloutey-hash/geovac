@@ -2299,6 +2299,44 @@ polarisabilities) are not predicted by GeoVac alone; they are
 consistency checks that constrain candidate atomic-physics calibration
 sets, not framework-derived predictions.
 
+\paragraph{Operational localization (Sprint R3-B falsifier,
+2026-06-07).}  The W1e classification at the period-class level
+(0/11 hits in M1/M2/M3) is now sharpened by an operational
+test.  Sprint R3-B exported the NaH balanced Hamiltonian
+to FCIDUMP at $n_{\max} \in \{2, 3\}$ via the
+\texttt{GeoVacHamiltonian.to\_fcidump} interface and ran
+DMRG (sector-restricted FCI at $\mathrm{FCI\,dim} \le 784$,
+which IS DMRG-at-infinite-$\chi$) at every $R$ in
+$[2.5, 6.0]$ bohr.  The resulting PES is \emph{bit-identical to
+the P4 direct-FCI baseline} ($\max\text{diff} \sim 6 \times
+10^{-13}$~Ha at every grid point), with no interior minimum
+and $21$--$24\times$ over-binding at the experimental
+$R_e = 3.566$ bohr.  Increasing $n_{\max}$ from 2 to 3
+\emph{deepens} the unphysical well rather than closing it.
+The wall is therefore not at the determinant-expansion level
+(DMRG cannot move it) and not at basis-truncation level
+($n_{\max}$ sweep deepens it); it lives at the projection
+step from continuous Level 4 adiabatic+PK to second-quantized
+$(h_1, \mathrm{eri}, e_{\rm core})$ integrals.  A parallel
+diagnostic on LiH composed and balanced (Sprint R3-A,
+same date) found the same monotone-descending qubit-FCI PES
+behaviour: the LiH 2.82\% $R_{\rm eq}$ established at
+CHANGELOG v3.56.0 came from
+\texttt{ComposedDiatomicSolver.LiH\_ab\_initio} (continuous
+Level 4 multichannel adiabatic with PK), \emph{not} from FCI
+on the qubit/FCIDUMP-exported integrals.  The
+chemistry-side inner-factor input-data tier therefore has a
+specific structural home in the GeoVac construction: the
+projection step where continuous Level 4 multichannel
+information is reduced to the second-quantized integrals that
+seed qubit/composed solvers.  This is the chemistry-side
+\emph{operational} analog of the Sprint H1 Yukawa
+non-selection theorem at the projection level: the framework
+admits a chemistry Hamiltonian structurally but does not
+autonomously generate the calibration content of its
+$(h_1, \mathrm{eri}, e_{\rm core})$ tensors at this
+projection step.
+
 
 %% ========================================================================
 %% V. THE FINE STRUCTURE CONSTANT CONNECTION

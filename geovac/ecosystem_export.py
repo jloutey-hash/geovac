@@ -14,9 +14,29 @@ Convenience entry point::
     from geovac.ecosystem_export import hamiltonian
     H = hamiltonian('LiH', R=3.015, l_max=2)
     print(H.n_terms, H.one_norm)
+    print(H.propinquity_bound)  # Paper 38 basis-truncation error estimate
     qiskit_op  = H.to_qiskit()
     pl_op      = H.to_pennylane()
     of_op      = H.to_openfermion()
+
+Propinquity-bound metadata
+--------------------------
+Every ``GeoVacHamiltonian`` carries a basis-truncation error estimate
+``propinquity_bound`` derived from Paper 38's main theorem (Thm.~\\ref{thm:main},
+arXiv:2505.xxxxx, Zenodo 2026-05-07).  For the truncated Camporesi--Higuchi
+spectral triple at cutoff ``max_n``,
+
+    Lambda(T_{max_n}, T_{S^3}) <= C_3 * gamma_{max_n}
+
+with ``C_3 = 1`` (Lemma L3, sharp at all cutoffs) and ``gamma_{max_n}`` the
+central spectral Fejer mass-concentration moment on SU(2) (Lemma L2).  The
+asymptotic rate ``gamma_{max_n} ~ (4/pi) log(max_n) / max_n`` carries the
+M1 Hopf-base measure signature ``4/pi = Vol(S^2)/pi^2`` (master Mellin engine,
+Paper 18 §III.7).  See ``geovac.central_fejer_su2.gamma_n_via_sum_rule`` for
+the closed-form sum-rule evaluator.
+
+This is metadata only: the Pauli coefficients of the qubit Hamiltonian are
+bit-identical to the un-instrumented build.  Wired 2026-06-07 (v3.85.0).
 
 Author: GeoVac Development Team
 Date: April 2026
@@ -24,6 +44,7 @@ Date: April 2026
 
 from __future__ import annotations
 
+import math
 from typing import Any, Dict, Optional, Tuple
 
 import numpy as np
@@ -80,6 +101,22 @@ class GeoVacHamiltonian:
         ``one_norm_full`` properties.
     qubit_op_full : QubitOperator or None, optional
         The full qubit operator including PK (for one_norm_full).
+    h1 : ndarray or None, optional
+        One-electron integral matrix (M x M, spatial orbitals, Hartree).
+        When provided alongside ``eri`` and ``ecore``, enables the
+        ``to_fcidump()`` exporter (Sprint P1, v3.86.0).
+    eri : ndarray or None, optional
+        Two-electron integral tensor (M, M, M, M) in **chemist notation**
+        ``(pq|rs) = eri[p, q, r, s]`` (Hartree).  Matches
+        ``build_fermion_op_from_integrals`` and the FCIDUMP standard.
+    ecore : float or None, optional
+        Frozen-core + nuclear-repulsion constant (Hartree). For composed
+        systems this is ``spec.nuclear_repulsion_constant`` which already
+        absorbs frozen-core energy and cross-center attraction.
+    n_electrons : int or None, optional
+        Number of active electrons in the (h1, eri) Hamiltonian
+        (frozen-core electrons excluded). Required for the ``NELEC``
+        FCIDUMP header field.
     """
 
     def __init__(
@@ -88,6 +125,10 @@ class GeoVacHamiltonian:
         metadata: Optional[Dict[str, Any]] = None,
         h1_pk: Optional[np.ndarray] = None,
         qubit_op_full: Optional[Any] = None,
+        h1: Optional[np.ndarray] = None,
+        eri: Optional[np.ndarray] = None,
+        ecore: Optional[float] = None,
+        n_electrons: Optional[int] = None,
     ) -> None:
         if not _HAS_OPENFERMION:
             raise ImportError(
@@ -98,9 +139,14 @@ class GeoVacHamiltonian:
         self._metadata = metadata or {}
         self._h1_pk = h1_pk
         self._qubit_op_full = qubit_op_full
+        self._h1 = h1
+        self._eri = eri
+        self._ecore = ecore
+        self._n_electrons = n_electrons
         # Cached derived quantities (computed lazily)
         self._cached_n_qubits: Optional[int] = None
         self._cached_one_norm: Optional[float] = None
+        self._cached_propinquity_bound: Optional[float] = None
 
     # ------------------------------------------------------------------
     # Properties (cached after first access)
@@ -149,8 +195,87 @@ class GeoVacHamiltonian:
 
     @property
     def metadata(self) -> Dict[str, Any]:
-        """Metadata dict (system, R, l_max, etc.)."""
-        return dict(self._metadata)
+        """Metadata dict (system, R, l_max, propinquity bound, etc.).
+
+        Includes ``propinquity_bound`` (Paper 38 Thm.~\\ref{thm:main}
+        basis-truncation error estimate) if ``max_n`` is recorded in
+        the underlying metadata.
+        """
+        meta = dict(self._metadata)
+        if 'max_n' in meta and 'propinquity_bound' not in meta:
+            try:
+                meta['propinquity_bound'] = self.propinquity_bound
+                meta['propinquity_bound_C3'] = 1.0
+                meta['propinquity_bound_asymptotic'] = 4.0 / math.pi
+                meta['propinquity_bound_source'] = 'Paper 38 Thm 1; gamma_n via L2 closed-form sum rule'
+            except (ValueError, ImportError):
+                pass
+        return meta
+
+    @property
+    def propinquity_bound(self) -> float:
+        """Paper 38 basis-truncation error estimate (qualitative-rate).
+
+        Returns the Latrémolière quantum Gromov--Hausdorff propinquity
+        upper bound
+
+            Lambda(T_{max_n}, T_{S^3}) <= C_3 * gamma_{max_n}
+
+        with ``C_3 = 1`` (sharp at every cutoff; Lemma L3) and
+        ``gamma_{max_n}`` the central spectral Fejer mass-concentration
+        moment on SU(2) (Lemma L2), evaluated in closed form via
+        ``geovac.central_fejer_su2.gamma_n_via_sum_rule``.
+
+        Requires ``max_n`` to be recorded in the underlying metadata.
+        For atomic / molecular ``max_n in {2, 3, 4}`` (production), the
+        bound is finite, positive, and strictly monotone-decreasing.
+
+        The bound is *qualitative-rate* — it converges to zero with
+        explicit asymptotic constant ``4/pi`` (Paper 38 Thm.~1(ii)) but
+        is loose in absolute terms at the production cutoff
+        ``max_n = 2`` (gamma_2 ~ 2.07 is the structural-truncation
+        bound from the L2 sum rule, not the practically-observed
+        accuracy). Use it for cutoff-to-cutoff *improvement claims* and
+        for asymptotic statements; do NOT identify it with the
+        absolute relative energy error.
+
+        Caches the computed value after first access. The first call
+        runs the closed-form sum rule (Theorem 1(i) of the L2
+        quantitative-rate memo); O(max_n^2) operations.
+
+        Returns
+        -------
+        float
+            Numerical value of ``gamma_{max_n}``.  ``C_3 = 1`` so this
+            *is* the propinquity bound.
+
+        Raises
+        ------
+        ValueError
+            If ``max_n`` is not recorded in metadata, or if ``max_n``
+            is below the threshold for the asymptotic statement.
+        """
+        if self._cached_propinquity_bound is not None:
+            return self._cached_propinquity_bound
+        max_n = self._metadata.get('max_n')
+        if max_n is None:
+            raise ValueError(
+                "max_n is not recorded in metadata; propinquity_bound "
+                "is undefined. Rebuild via geovac.ecosystem_export.hamiltonian "
+                "or supply max_n explicitly in metadata."
+            )
+        if not isinstance(max_n, (int,)) or max_n < 1:
+            raise ValueError(
+                f"max_n must be a positive integer, got {max_n!r}"
+            )
+        # Closed-form sum rule from central_fejer_su2 (Paper 38 L2,
+        # quantitative-rate memo Thm 1).
+        from geovac.central_fejer_su2 import gamma_n_via_sum_rule
+        gamma = float(gamma_n_via_sum_rule(max_n, prec=50))
+        # C_3 = 1 (Paper 38 Lemma L3, sharp at all cutoffs).
+        bound = 1.0 * gamma
+        self._cached_propinquity_bound = bound
+        return bound
 
     # ------------------------------------------------------------------
     # PK classical correction
@@ -186,6 +311,211 @@ class GeoVacHamiltonian:
             )
         from geovac.pk_partitioning import pk_classical_energy
         return pk_classical_energy(self._h1_pk, one_rdm)
+
+    # ------------------------------------------------------------------
+    # Pre-JW integrals (h1, eri, ecore) for classical chemistry consumers
+    # ------------------------------------------------------------------
+
+    @property
+    def h1(self) -> Optional[np.ndarray]:
+        """One-electron integral matrix (M, M) in chemist notation, or None."""
+        return self._h1
+
+    @property
+    def eri(self) -> Optional[np.ndarray]:
+        """Two-electron integral tensor (M, M, M, M) in chemist notation (pq|rs), or None."""
+        return self._eri
+
+    @property
+    def ecore(self) -> Optional[float]:
+        """Frozen-core + nuclear-repulsion constant (Hartree), or None."""
+        return self._ecore
+
+    @property
+    def n_electrons(self) -> Optional[int]:
+        """Number of active electrons (frozen-core excluded), or None."""
+        return self._n_electrons
+
+    @property
+    def n_orbitals(self) -> Optional[int]:
+        """Number of spatial orbitals M, derived from ``h1`` shape, or None."""
+        if self._h1 is None:
+            return None
+        return int(self._h1.shape[0])
+
+    # ------------------------------------------------------------------
+    # Export: FCIDUMP (classical chemistry interface, Sprint P1)
+    # ------------------------------------------------------------------
+
+    def to_fcidump(
+        self,
+        filename: str,
+        *,
+        tol: float = 1e-14,
+        ms2: int = 0,
+        isym: int = 1,
+        orbsym: Optional[list] = None,
+    ) -> Dict[str, Any]:
+        """
+        Export the pre-Jordan-Wigner integrals as a Knowles--Handy FCIDUMP file.
+
+        This is the canonical text format for classical quantum-chemistry
+        consumers: pyscf, Block2 (DMRG), ipie (AFQMC), Molpro, and others
+        all read it directly. The integrals exported here are bit-identical
+        to those that ``build_composed_hamiltonian`` / ``build_balanced_hamiltonian``
+        feed into ``build_fermion_op_from_integrals`` before Jordan-Wigner
+        transformation, so a downstream FCI / CASCI on the FCIDUMP matches
+        the GeoVac qubit-Hamiltonian spectrum modulo the qubit-encoding map.
+
+        Conventions
+        -----------
+        * Chemist notation ``(pq|rs) = eri[p, q, r, s]``.
+        * Hartree atomic units throughout.
+        * 1-based orbital indices (FCIDUMP standard; converted from
+          GeoVac's internal 0-based indexing on write).
+        * Eight-fold permutation symmetry assumed for the two-electron
+          integrals (real orbitals): only ``(pq|rs)`` with ``p>=q``,
+          ``r>=s``, and ``(p,q)>=(r,s)`` lexicographically is written.
+        * ``ecore`` (frozen-core + nuclear-repulsion) is written as the
+          final all-zeros index line.
+
+        Parameters
+        ----------
+        filename : str
+            Output file path. Standard extension is ``.fcidump``.
+        tol : float, optional
+            Drop integrals with absolute value below ``tol`` (default
+            ``1e-14``). Setting ``tol=0`` writes every integral including
+            structural zeros.
+        ms2 : int, optional
+            ``2 * S_z`` for the reference (default 0, i.e. closed-shell
+            singlet).
+        isym : int, optional
+            ``ISYM`` header field (default 1, totally-symmetric A1).
+        orbsym : list of int, optional
+            Per-orbital point-group irrep labels. Defaults to all 1s
+            (no symmetry, FCIDUMP convention).
+
+        Returns
+        -------
+        dict
+            Metadata about what was written:
+
+            * ``n_orbitals``: M
+            * ``n_electrons``: NELEC field
+            * ``n_one_body_terms``: number of nonzero h1 entries written
+            * ``n_two_body_terms``: number of symmetry-unique eri terms
+            * ``ecore``: the constant written
+            * ``filename``: path written
+
+        Raises
+        ------
+        ValueError
+            If ``h1``, ``eri``, ``ecore``, or ``n_electrons`` is missing.
+
+        Notes
+        -----
+        Sprint P1 (v3.86.0, 2026-06-07) unblocks DMRG (Block2), CCSD(T)
+        (pyscf), and AFQMC (ipie) consumers at once.  See the hybrid
+        pipeline scoping memo for the multi-month roadmap and §1.3 of
+        that memo for the convention-pinning checklist.
+        """
+        if self._h1 is None or self._eri is None:
+            raise ValueError(
+                "to_fcidump requires the pre-JW (h1, eri) tensors. "
+                "Atomic-builder paths (e.g. He via LatticeIndex) currently "
+                "do not surface them. Use a composed builder "
+                "(hamiltonian('LiH'), hamiltonian('NaH'), etc.) or wire "
+                "h1/eri through manually."
+            )
+        if self._ecore is None:
+            raise ValueError(
+                "to_fcidump requires ecore (nuclear repulsion + frozen-core "
+                "energy). Pass it via the constructor or check builder wiring."
+            )
+        if self._n_electrons is None:
+            raise ValueError(
+                "to_fcidump requires n_electrons. Pass it via the "
+                "constructor or check builder wiring."
+            )
+
+        h1 = np.asarray(self._h1)
+        eri = np.asarray(self._eri)
+        M = int(h1.shape[0])
+        if h1.shape != (M, M):
+            raise ValueError(f"h1 must be (M, M); got {h1.shape}")
+        if eri.shape != (M, M, M, M):
+            raise ValueError(f"eri must be (M, M, M, M); got {eri.shape}")
+
+        if orbsym is None:
+            orbsym = [1] * M
+        else:
+            if len(orbsym) != M:
+                raise ValueError(
+                    f"orbsym must have length M={M}; got {len(orbsym)}"
+                )
+
+        n_one_body = 0
+        n_two_body = 0
+
+        with open(filename, 'w', encoding='ascii') as fh:
+            # Header: Knowles-Handy &FCI namelist
+            fh.write(
+                f" &FCI NORB={M:4d},NELEC={self._n_electrons:4d},"
+                f"MS2={ms2:4d},\n"
+            )
+            orbsym_str = ','.join(str(s) for s in orbsym)
+            fh.write(f"  ORBSYM={orbsym_str},\n")
+            fh.write(f"  ISYM={isym:d},\n")
+            fh.write(" &END\n")
+
+            # Two-electron block: 8-fold permutation symmetry for real
+            # orbitals. Canonical loop p>=q, r>=s, (p,q)>=(r,s).
+            for p in range(M):
+                for q in range(p + 1):
+                    pq = p * (p + 1) // 2 + q
+                    for r in range(M):
+                        for s in range(r + 1):
+                            rs = r * (r + 1) // 2 + s
+                            if rs > pq:
+                                continue
+                            val = float(eri[p, q, r, s])
+                            if abs(val) < tol:
+                                continue
+                            # FCIDUMP indices are 1-based
+                            fh.write(
+                                f"{val: .16E}"
+                                f"{p+1:5d}{q+1:5d}{r+1:5d}{s+1:5d}\n"
+                            )
+                            n_two_body += 1
+
+            # One-electron block: Hermitian symmetry h1[p,q] = h1[q,p];
+            # write only p>=q.
+            for p in range(M):
+                for q in range(p + 1):
+                    val = float(h1[p, q])
+                    if abs(val) < tol:
+                        continue
+                    fh.write(
+                        f"{val: .16E}"
+                        f"{p+1:5d}{q+1:5d}{0:5d}{0:5d}\n"
+                    )
+                    n_one_body += 1
+
+            # Core energy line: p=q=r=s=0
+            fh.write(
+                f"{float(self._ecore): .16E}"
+                f"{0:5d}{0:5d}{0:5d}{0:5d}\n"
+            )
+
+        return {
+            'n_orbitals': M,
+            'n_electrons': int(self._n_electrons),
+            'n_one_body_terms': n_one_body,
+            'n_two_body_terms': n_two_body,
+            'ecore': float(self._ecore),
+            'filename': filename,
+        }
 
     # ------------------------------------------------------------------
     # Export: OpenFermion
@@ -267,10 +597,16 @@ class GeoVacHamiltonian:
 
     def __repr__(self) -> str:
         sys_name = self._metadata.get('system', 'unknown')
+        bound_str = ''
+        if 'max_n' in self._metadata:
+            try:
+                bound_str = f", prop_bound={self.propinquity_bound:.4f}"
+            except (ValueError, ImportError):
+                pass
         return (
             f"GeoVacHamiltonian(system={sys_name!r}, "
             f"n_qubits={self.n_qubits}, n_terms={self.n_terms}, "
-            f"one_norm={self.one_norm:.4f})"
+            f"one_norm={self.one_norm:.4f}{bound_str})"
         )
 
 
@@ -328,6 +664,131 @@ def _openfermion_to_pennylane(qubit_op: Any) -> Any:
                 ops.append(qml.prod(*pauli_ops))
 
     return qml.Hamiltonian(coeffs, ops)
+
+
+# ---------------------------------------------------------------------------
+# FCIDUMP reader (pure-Python, for round-trip validation without pyscf)
+# ---------------------------------------------------------------------------
+
+def read_fcidump(filename: str) -> Dict[str, Any]:
+    """
+    Parse a Knowles--Handy FCIDUMP file into ``(h1, eri, ecore)`` tensors.
+
+    Used primarily for round-trip validation of ``GeoVacHamiltonian.to_fcidump``
+    without requiring pyscf as a hard dependency. Implements only the
+    subset of the FCIDUMP grammar that ``to_fcidump`` writes:
+
+    * ``&FCI`` namelist header with ``NORB``, ``NELEC``, ``MS2``,
+      ``ORBSYM``, ``ISYM``.
+    * Free-form integral records ``val p q r s`` with 1-based indices.
+    * Eight-fold permutation symmetry on ``eri`` (real-orbital convention).
+    * One-electron entries flagged by ``r = s = 0``.
+    * Core energy flagged by ``p = q = r = s = 0``.
+
+    Parameters
+    ----------
+    filename : str
+        Input FCIDUMP file.
+
+    Returns
+    -------
+    dict
+        Keys: ``n_orbitals``, ``n_electrons``, ``ms2``, ``isym``,
+        ``orbsym``, ``h1`` (M, M), ``eri`` (M, M, M, M, chemist
+        notation, eight-fold symmetrised), ``ecore``.
+    """
+    import re
+
+    with open(filename, 'r', encoding='ascii') as fh:
+        text = fh.read()
+
+    # Header: everything up to &END (case-insensitive)
+    header_match = re.search(r'&FCI(.*?)&END', text, re.IGNORECASE | re.DOTALL)
+    if header_match is None:
+        raise ValueError(f"{filename}: missing &FCI ... &END header")
+    header = header_match.group(1)
+    body = text[header_match.end():]
+
+    def _grab_scalar(field: str) -> Optional[str]:
+        # Scalar fields (NORB, NELEC, MS2, ISYM) end at comma or newline.
+        m = re.search(
+            rf'{field}\s*=\s*([^,\n]+)', header, re.IGNORECASE,
+        )
+        return m.group(1).strip() if m else None
+
+    def _grab_list(field: str) -> Optional[str]:
+        # List fields (ORBSYM) are comma-separated integers; consume up
+        # to the next keyword (NORB/NELEC/MS2/ISYM) or &END.
+        m = re.search(
+            rf'{field}\s*=\s*([0-9,\s]+?)(?=[A-Za-z]|&|$)',
+            header, re.IGNORECASE | re.DOTALL,
+        )
+        return m.group(1).strip().rstrip(',') if m else None
+
+    norb_str = _grab_scalar('NORB')
+    nelec_str = _grab_scalar('NELEC')
+    if norb_str is None or nelec_str is None:
+        raise ValueError(f"{filename}: NORB / NELEC missing from header")
+    M = int(norb_str)
+    n_electrons = int(nelec_str)
+    ms2 = int(_grab_scalar('MS2') or '0')
+    isym = int(_grab_scalar('ISYM') or '1')
+    orbsym_str = _grab_list('ORBSYM')
+    if orbsym_str:
+        orbsym = [int(s) for s in orbsym_str.split(',') if s.strip()]
+    else:
+        orbsym = [1] * M
+
+    h1 = np.zeros((M, M))
+    eri = np.zeros((M, M, M, M))
+    ecore = 0.0
+
+    for line in body.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        toks = line.split()
+        if len(toks) < 5:
+            continue
+        val = float(toks[0])
+        i = int(toks[1])
+        j = int(toks[2])
+        k = int(toks[3])
+        l = int(toks[4])
+        if i == 0 and j == 0 and k == 0 and l == 0:
+            ecore = val
+            continue
+        if k == 0 and l == 0:
+            # One-electron: 1-based -> 0-based; expand Hermitian symmetry
+            p = i - 1
+            q = j - 1
+            h1[p, q] = val
+            h1[q, p] = val
+            continue
+        # Two-electron: 1-based -> 0-based; expand 8-fold symmetry on
+        # the chemist-notation (pq|rs) tensor.
+        p = i - 1
+        q = j - 1
+        r = k - 1
+        s = l - 1
+        for (a, b, c, d) in (
+            (p, q, r, s), (q, p, r, s),
+            (p, q, s, r), (q, p, s, r),
+            (r, s, p, q), (s, r, p, q),
+            (r, s, q, p), (s, r, q, p),
+        ):
+            eri[a, b, c, d] = val
+
+    return {
+        'n_orbitals': M,
+        'n_electrons': n_electrons,
+        'ms2': ms2,
+        'isym': isym,
+        'orbsym': orbsym,
+        'h1': h1,
+        'eri': eri,
+        'ecore': ecore,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -504,6 +965,12 @@ def _apply_hopf_tapering_to_geovac_hamiltonian(
     return GeoVacHamiltonian(
         result['qubit_op_tapered'], metadata=meta,
         h1_pk=ham._h1_pk,
+        # The pre-JW integrals are pre-tapering; they remain valid for
+        # classical chemistry consumers regardless of qubit tapering.
+        h1=ham._h1,
+        eri=ham._eri,
+        ecore=ham._ecore,
+        n_electrons=ham._n_electrons,
     )
 
 
@@ -593,6 +1060,10 @@ def _build_hydride(
     return GeoVacHamiltonian(
         result['qubit_op'], metadata=meta,
         h1_pk=h1_pk,
+        h1=result.get('h1'),
+        eri=result.get('eri'),
+        ecore=result.get('nuclear_repulsion'),
+        n_electrons=sum(b.n_electrons for b in spec.blocks),
     )
 
 
@@ -627,7 +1098,13 @@ def _build_multi_center(
         'Q': result['Q'],
         'N_pauli': result['N_pauli'],
     }
-    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+    return GeoVacHamiltonian(
+        result['qubit_op'], metadata=meta,
+        h1=result.get('h1'),
+        eri=result.get('eri'),
+        ecore=result.get('nuclear_repulsion'),
+        n_electrons=sum(b.n_electrons for b in spec.blocks),
+    )
 
 
 def _build_tm_hydride(
@@ -643,14 +1120,24 @@ def _build_tm_hydride(
     result = build_composed_hamiltonian(
         spec, pk_in_hamiltonian=False, verbose=verbose,
     )
+    # transition_metal_hydride_spec uses the standard composed cutoff;
+    # max_n=2 is the spec-factory default. Record it so the propinquity
+    # bound is well-defined.
     meta = {
         'system': spec.name,
         'R_bohr': R,
+        'max_n': 2,
         'M': result['M'],
         'Q': result['Q'],
         'N_pauli': result['N_pauli'],
     }
-    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+    return GeoVacHamiltonian(
+        result['qubit_op'], metadata=meta,
+        h1=result.get('h1'),
+        eri=result.get('eri'),
+        ecore=result.get('nuclear_repulsion'),
+        n_electrons=sum(b.n_electrons for b in spec.blocks),
+    )
 
 
 def _build_alkaline_earth_monohydride(
@@ -686,7 +1173,13 @@ def _build_alkaline_earth_monohydride(
         'Q': result['Q'],
         'N_pauli': result['N_pauli'],
     }
-    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+    return GeoVacHamiltonian(
+        result['qubit_op'], metadata=meta,
+        h1=result.get('h1'),
+        eri=result.get('eri'),
+        ecore=result.get('nuclear_repulsion'),
+        n_electrons=sum(b.n_electrons for b in spec.blocks),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -759,4 +1252,10 @@ def _build_h2(
         'Q': result['Q'],
         'N_pauli': result['N_pauli'],
     }
-    return GeoVacHamiltonian(result['qubit_op'], metadata=meta)
+    return GeoVacHamiltonian(
+        result['qubit_op'], metadata=meta,
+        h1=result.get('h1'),
+        eri=result.get('eri'),
+        ecore=result.get('nuclear_repulsion'),
+        n_electrons=sum(b.n_electrons for b in spec.blocks),
+    )

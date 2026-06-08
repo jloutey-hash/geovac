@@ -1,0 +1,109 @@
+========================================================================
+Continuous Level 4 multichannel + PK solver
+========================================================================
+Computing adiabatic curves (single-channel, 1 ch) on 197 R points...
+  Z=3, l_max=2, n_alpha=200
+  Angular solve: 18.15s
+  V_eff(R=30.0) = -4.1165 Ha (should approach -4.5)
+Solving hyperradial equation (N_R=2000)...
+  Radial solve: 0.00s
+
+  Ground state energy: -7.323542 Ha
+  Exact He:            -2.903724 Ha
+  Error:               152.21%
+  Total time:          18.15s
+Algebraic density raw integral: 2.004354 (target: 2.0)
+
+  [LiH] Core: E_core = -7.323542 Ha  (ref: -7.2799, err: 0.60%)
+  Z_A_eff = 1.000 (screened)
+  PK: A=6.9273, B=6.7958 (ab_initio)
+  r_core = 0.2712 bohr
+  Time: 33.2s
+  Li core: E_core = -7.323542 Ha (33.2s)
+
+  [LiH] PES scan: 5 R-points, n_Re=300
+       R      E_elec    V_NN_b   V_cross        E_comp    time
+  ------  ----------  --------  --------  ------------  ------
+   2.500     -1.2390    1.2000   -0.8000     -8.162555    10.0s
+   3.015     -1.1912    0.9950   -0.6633     -8.183082    10.0s
+   3.500     -1.1444    0.8571   -0.5714     -8.182273    10.0s
+   4.000     -1.0927    0.7500   -0.5000     -8.166241    10.0s
+   5.000     -0.9924    0.6000   -0.4000     -8.115951    10.0s
+
+  R_eq = 3.015 bohr  (ref: 3.015)
+  E_min = -8.183082 Ha
+  E_dissoc = -8.115951 Ha
+  D_e = 0.067131 Ha  (ref: 0.092)
+  PES time: 50.0s  (avg 10.0s/pt)
+
+========================================================================
+Composed qubit Hamiltonian + FCI
+========================================================================
+  R= 2.500  ecore= -6.079900  E_total=-13.938025  Q=30  t=13.2s
+  R= 3.015  ecore= -6.284875  E_total=-14.143000  Q=30  t=13.1s
+  R= 3.500  ecore= -6.422757  E_total=-14.280882  Q=30  t=13.1s
+  R= 4.000  ecore= -6.529900  E_total=-14.388025  Q=30  t=13.1s
+  R= 5.000  ecore= -6.679900  E_total=-14.538025  Q=30  t=13.1s
+
+========================================================================
+Balanced qubit Hamiltonian + FCI  (Path A convention)
+========================================================================
+  R= 2.500  ecore= -6.079900  E_total=-15.174163  Q=30  N_e=4  t=14.6s
+  R= 3.015  ecore= -6.284875  E_total=-15.209580  Q=30  N_e=4  t=14.6s
+  R= 3.500  ecore= -6.422757  E_total=-15.207482  Q=30  N_e=4  t=14.6s
+  R= 4.000  ecore= -6.529900  E_total=-15.175325  Q=30  N_e=4  t=14.5s
+  R= 5.000  ecore= -6.679900  E_total=-15.051738  Q=30  N_e=4  t=14.7s
+
+========================================================================
+ANALYSIS — per-R energy decomposition
+========================================================================
+
+     R      E_cont   E_qubit_c   E_qubit_b    V_cross       dE_c       dE_b
+------------------------------------------------------------------------------
+ 2.500     -8.1626    -13.9380    -15.1742    -0.8000    -5.7755    -7.0116
+ 3.015     -8.1831    -14.1430    -15.2096    -0.6633    -5.9599    -7.0265
+ 3.500     -8.1823    -14.2809    -15.2075    -0.5714    -6.0986    -7.0252
+ 4.000     -8.1662    -14.3880    -15.1753    -0.5000    -6.2218    -7.0091
+ 5.000     -8.1160    -14.5380    -15.0517    -0.4000    -6.4221    -6.9358
+
+------------------------------------------------------------------------
+Diagnostic 1 -- does composed dE match the missing V_cross_nuc?
+------------------------------------------------------------------------
+     R       dE_c    V_cross    dE_c-V_cross
+ 2.500    -5.7755    -0.8000         -4.9755
+ 3.015    -5.9599    -0.6633         -5.2966
+ 3.500    -6.0986    -0.5714         -5.5272
+ 4.000    -6.2218    -0.5000         -5.7218
+ 5.000    -6.4221    -0.4000         -6.0221
+
+dE_composed slope vs R: -0.2549 Ha/bohr
+dE_balanced slope vs R: +0.0318 Ha/bohr
+
+------------------------------------------------------------------------
+Diagnostic 2 — relative energies (zeroed at R=5.0)
+------------------------------------------------------------------------
+     R       cont     compos   balanced
+ 2.500    -0.0466    +0.6000    -0.1224
+ 3.015    -0.0671    +0.3950    -0.1578
+ 3.500    -0.0663    +0.2571    -0.1557
+ 4.000    -0.0503    +0.1500    -0.1236
+ 5.000    +0.0000    +0.0000    +0.0000
+(neg = more bound than dissoc R=5.0; bowl shape = binding well)
+
+------------------------------------------------------------------------
+Diagnostic 3 — slope contributions (finite difference R=2.5 to R=5.0)
+------------------------------------------------------------------------
+  E_continuous_total       : +0.0186 Ha/bohr
+  V_NN_bare                : -0.2400 Ha/bohr
+  V_cross_nuc              : +0.1600 Ha/bohr
+  E_elec_cont              : +0.0986 Ha/bohr
+  E_qubit_composed         : -0.2400 Ha/bohr
+  E_qubit_balanced         : +0.0490 Ha/bohr
+(For binding: need positive slope toward dissoc, i.e., going UP as R increases past R_eq.)
+
+Continuous E_composed minimum at R = 3.015 bohr, E = -8.1831 Ha
+  diff vs R=5.0 dissoc: -0.0671 Ha (binding well depth)
+Composed qubit E_total minimum at R = 5.000 bohr (monotone descent if at panel edge)
+Balanced qubit E_total minimum at R = 3.015 bohr (monotone descent if at panel edge)
+
+Wrote C:\Users\jlout\Desktop\Project_Geometric\debug\data\w1e_projection_audit.json

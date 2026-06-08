@@ -1,0 +1,49 @@
+======================================================================
+Sprint M-vS-1: LiH Bratteli Pilot Driver
+Date: 2026-06-07
+======================================================================
+
+Configuration: R = 3.015 bohr, max_n = 2
+Quiver: V = {Li (Z=3), H (Z=1)}, E = {Li-H bond}
+
+Bratteli network built in 0.63s
+  H_a_dim (Li) = 5
+  H_b_dim (H)  = 5
+  rho_e (bond length) = 3.015
+
+--- Test 1: Edge bimodule L_e unitarity ---
+  ||L_e^dagger L_e - I||_inf = 1.000000e+00
+  ||L_e L_e^dagger - I||_inf = 1.000000e+00
+  ||L_e||_op   = 0.915658
+  ||L_e||_F    = 0.919277
+  max|L_e_ij|  = 0.677591
+  L_e is unitary: False
+
+--- Test 2: Marcolli-vS full H vs GeoVac h1 ---
+  max |H_full - h1_GeoVac|     = 2.471039e-17
+  Frobenius |H_full - h1_GeoVac| = 5.611727e-17
+  Block-wise residuals:
+    aa: 0.000000e+00
+    bb: 2.471039e-17
+    ab: 0.000000e+00
+    ba: 0.000000e+00
+
+  max |eig(H_full) - eig(h1_GeoVac)| = 1.554312e-15
+  10 eigenvalues (Ha): [-4.912390852487211, -2.155504428154593, -1.498479324761125, -1.4325458713249914, -1.4325458713249888, -0.9929089846115869, -0.9741461465918927, -0.7269767571258146, -0.7269767571258146, -0.34513764073897224]
+
+--- Test 3: Spectral action ---
+  Lambda = 1.0: S_full = 3.1993283918, S_GeoVac = 3.1993283918, |diff| = 0.000000e+00
+  Lambda = 2.0: S_full = 6.3766523462, S_GeoVac = 6.3766523462, |diff| = 0.000000e+00
+  Lambda = 4.0: S_full = 8.4078428653, S_GeoVac = 8.4078428653, |diff| = 0.000000e+00
+
+======================================================================
+DECISION GATE
+======================================================================
+  Marcolli-vS H matches GeoVac h1 to <= 1e-10: True (max residual 2.471e-17)
+  Eigenvalues match to <= 1e-10: True (max residual 1.554e-15)
+  Spectral action matches to <= 1e-10: True
+  L_e is unitary (Perez-Sanchez strict): False
+
+  VERDICT: PASS-Marcolli-vS  (heteronuclear 2-vertex extension works)
+
+Wrote C:\Users\jlout\Desktop\Project_Geometric\debug\data\bratteli_lih_pilot.json

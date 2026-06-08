@@ -668,8 +668,19 @@ def build_balanced_hamiltonian(
 
     if nuclei is None and not getattr(spec, 'nuclei', None):
         # Spec uses a default-R lookup; correct V_NN to the requested R.
+        # Sprint W1e-Projection-Audit 2026-06-07: prefer spec.R (the actual
+        # R the spec was built at, set by hydride_spec since this sprint)
+        # over _HYDRIDE_REQ[name] (the molecule's experimental default).
+        # The earlier code unconditionally used _HYDRIDE_REQ, which silently
+        # over-counted V_NN(R) - V_NN(_HYDRIDE_REQ[name]) when the caller
+        # built the spec at R != default AND passed the same R to the
+        # builder.  Falling back to _HYDRIDE_REQ preserves backward
+        # compatibility for specs that don't record their R (e.g.
+        # MolecularSpec instances built outside hydride_spec).
         from geovac.molecular_spec import _HYDRIDE_REQ as _HR
-        spec_R = _HR.get(spec.name)
+        spec_R = getattr(spec, 'R', None)
+        if spec_R is None:
+            spec_R = _HR.get(spec.name)
         if spec_R is not None and abs(spec_R - R) > 1e-12:
             v_nn_new = _compute_v_nn(nuclei_list)
             name = spec.name.lower().replace(' ', '').replace('-', '')

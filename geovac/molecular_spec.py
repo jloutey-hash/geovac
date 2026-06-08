@@ -103,6 +103,13 @@ class MolecularSpec:
     # (n, kappa, m_j) label — and wires in T1 matrix elements + T2 spin-orbit
     # as a diagonal h1 update.  Default False preserves legacy scalar path.
     relativistic: bool = False
+    # Actual R the spec was built at (or None if not recorded).  Consumed by
+    # the balanced_coupled R-dependence corrector to disambiguate Path A
+    # (spec at default R) from Path B (spec at requested R); without this,
+    # the corrector falls back to _HYDRIDE_REQ[name] and over-corrects by
+    # V_NN(R) - V_NN(spec_default) when both spec and builder use the same
+    # non-default R.  Sprint W1e-Projection-Audit 2026-06-07.
+    R: Optional[float] = None
 
 
 # ---------------------------------------------------------------------------
@@ -350,6 +357,24 @@ _FIRST_ROW_CORE_ENERGY = {
     9: -75.47,     # F⁷⁺
 }
 
+# Second-row neutral atom ground-state energies (NIST, used when the [Ne] core
+# is un-frozen and the spec is built with `force_explicit_core=True`).
+# These cover the full atomic ground state (not the bare He-like core energy as
+# in _FIRST_ROW_CORE_ENERGY), because for the explicit-core spec the entire
+# multi-electron Hamiltonian is encoded; only V_NN is kept as the constant
+# offset, and E_core_atomic is included for backward-compatibility with the
+# nuclear_repulsion = V_NN + E_core_constant convention.
+# Sprint B.1, 2026-06-07.
+_SECOND_ROW_ATOMIC_ENERGY = {
+    11: -162.255,  # Na, NIST experimental
+    12: -200.05,   # Mg
+    13: -242.35,   # Al
+    14: -289.36,   # Si
+    15: -341.26,   # P
+    16: -398.11,   # S
+    17: -460.15,   # Cl
+}
+
 # Ab initio PK parameters from atomic classifier (Paper 17, Track BI)
 _PK_PARAMS = {
     3:  (6.93,  7.00),    # Li, Paper 17 Table 1
@@ -406,6 +431,7 @@ def hydride_spec(
     max_n: int = 2,
     include_pk: bool = True,
     core_method: str = 'pk',
+    force_explicit_core: bool = False,
 ) -> MolecularSpec:
     """Create a MolecularSpec for a main-group hydride XHn.
 
@@ -430,6 +456,16 @@ def hydride_spec(
     include_pk : bool
         If True (default), include PK pseudopotential on first-row
         valence blocks. Frozen-core molecules never have PK.
+    force_explicit_core : bool
+        Sprint B.1 (2026-06-07): override the default core treatment so a
+        normally-frozen-core element is treated with an explicit core block.
+        For Z=11 (Na), this builds a 10-electron [Ne] core block at
+        Z_center=Z (bare), max_n=2 (yielding 1s, 2s, 2p sub-shells) plus a
+        valence bond block at n_val_offset=2 (so block_n=1 maps to physical
+        3s).  Automatically enforces ``max_n=3`` on the bond block so the
+        physical 3s orbital actually exists in the basis.  Intended for
+        Sprint B.1 HF-on-explicit-core diagnostic; not production-quality
+        accuracy.
 
     Returns
     -------
@@ -443,6 +479,22 @@ def hydride_spec(
     from geovac.atomic_classifier import classify_atom
 
     symbol, period, n_core_e, core_type = _ELEMENT_DATA[Z]
+
+    # Sprint B.1 (2026-06-07): force_explicit_core override.
+    if force_explicit_core:
+        if core_type == 'explicit':
+            # No-op for elements that are already explicit-core.
+            pass
+        elif Z in _SECOND_ROW_ATOMIC_ENERGY:
+            # [Ne]-core elements: 10 electrons, 5 spatial orbitals (1s, 2s,
+            # 2p_-1, 2p_0, 2p_+1) at max_n=2.
+            core_type = 'explicit_extended'  # marker for the explicit-extended path below
+        else:
+            raise NotImplementedError(
+                f"force_explicit_core for Z={Z} (period {period}) is not yet "
+                f"supported. Currently only [Ne]-core (Z=11-17) is wired."
+            )
+
     cls = classify_atom(Z)
     n_valence = cls.n_valence_electrons
     Z_eff = cls.Z_eff_valence
@@ -451,7 +503,13 @@ def hydride_spec(
     n_lone_pairs = (n_valence - n_bonds) // 2
     # For frozen-core atoms, block n=1 maps to physical n = period.
     # n_val_offset = period - 1 so physical_n = block_n + n_val_offset.
-    n_val_off = period - 1 if core_type != 'explicit' else 0
+    # Explicit-extended uses the same offset as frozen so block_n=1 ↔ valence n.
+    if core_type == 'explicit':
+        n_val_off = 0
+    elif core_type == 'explicit_extended':
+        n_val_off = period - 1
+    else:
+        n_val_off = period - 1
 
     formula = _hydride_formula(symbol, n_H)
 
@@ -474,6 +532,16 @@ def hydride_spec(
         E_core = _FIRST_ROW_CORE_ENERGY.get(Z, -(Z - 5.0 / 16) ** 2)
         V_NN = float(Z) * Z_H * n_H / R
         nuclear_repulsion = V_NN + E_core
+    elif core_type == 'explicit_extended':
+        # Sprint B.1: explicit [Ne] core un-frozen. E_core is the *bare* core
+        # energy (no e-e in core block), which the encoded core block plus
+        # eri tensor reproduces.  We use ZERO here (the HF SCF on the core
+        # block recovers the physical core energy from scratch).
+        # V_NN is the standard nuclear-nuclear constant; no V_cross because
+        # core is no longer frozen-density screening.
+        E_core = 0.0
+        V_NN = float(Z) * Z_H * n_H / R
+        nuclear_repulsion = V_NN + E_core
     else:
         # Frozen core: FrozenCore energy + core-H electrostatic
         from geovac.neon_core import FrozenCore
@@ -489,7 +557,7 @@ def hydride_spec(
     # --- Build blocks ---
     blocks: List[OrbitalBlock] = []
 
-    # Core block (first-row only)
+    # Core block (explicit-treated cases)
     if core_type == 'explicit':
         blocks.append(OrbitalBlock(
             label=f'{symbol}_core',
@@ -499,14 +567,33 @@ def hydride_spec(
             max_n=max_n,
             Z_nuc_center=float(Z),
         ))
+    elif core_type == 'explicit_extended':
+        # Sprint B.1: [Ne] core block - 10 electrons in 5 spatial orbitals
+        # (1s, 2s, 2p_-1, 2p_0, 2p_+1) at max_n=2.
+        n_core_electrons = _ELEMENT_DATA[Z][2]  # 10 for [Ne]-core elements
+        blocks.append(OrbitalBlock(
+            label=f'{symbol}_core',
+            block_type='core',
+            Z_center=float(Z),
+            n_electrons=n_core_electrons,
+            max_n=2,  # 1s, 2s, 2p sufficient for [Ne] occupancy at n_max=2
+            Z_nuc_center=float(Z),
+            n_val_offset=0,
+        ))
 
     # Bond blocks
     for i in range(n_bonds):
         suffix = f'_{i+1}' if n_bonds > 1 else ''
+        # Sprint B.1: for explicit-extended, the bond block uses Z_center=Z
+        # (bare nucleus) instead of Z_eff (screened), because core electrons
+        # are now explicit and screen via the eri tensor.
+        bond_Z_center = (
+            float(Z) if core_type == 'explicit_extended' else float(Z_eff)
+        )
         blocks.append(OrbitalBlock(
             label=f'{formula}_bond{suffix}',
             block_type='bond',
-            Z_center=float(Z_eff),
+            Z_center=bond_Z_center,
             n_electrons=2,
             max_n=max_n,
             has_h_partner=True,
@@ -548,6 +635,7 @@ def hydride_spec(
         nuclear_repulsion_constant=nuclear_repulsion,
         description=desc,
         core_method=core_method,
+        R=R,
     )
 
 

@@ -1,0 +1,97 @@
+Sprint P4 — NaH W1e baseline diagnostic
+======================================================================
+Reference: R_eq = 3.566 bohr, D_e = 0.0713 Ha (1.94 eV)
+[Ne] frozen core energy E_core(Na+) = -161.8590 Ha
+
+=== Panel A: COMPOSED, max_n=2 (Q=20) ===
+  [composed max_n=2] R=2.000 (1/9)
+    E=-162.359000 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=2.500 (2/9)
+    E=-162.459000 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=3.000 (3/9)
+    E=-162.525667 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=3.566 (4/9)
+    E=-162.578574 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=4.000 (5/9)
+    E=-162.609000 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=4.500 (6/9)
+    E=-162.636778 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=5.000 (7/9)
+    E=-162.659000 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=6.000 (8/9)
+    E=-162.692333 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+  [composed max_n=2] R=8.000 (9/9)
+    E=-162.734000 Ha (M=10, Q=20, t_build=0.1s, t_fci=0.0s)
+
+=== Panel B: BALANCED, max_n=2 (Q=20) ===
+  [balanced max_n=2] R=2.000 (1/9)
+    E=-170.306225 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=2.500 (2/9)
+    E=-169.781376 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=3.000 (3/9)
+    E=-169.391423 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=3.566 (4/9)
+    E=-169.114635 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=4.000 (5/9)
+    E=-168.966136 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=4.500 (6/9)
+    E=-168.808556 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=5.000 (7/9)
+    E=-168.636527 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=6.000 (8/9)
+    E=-168.235596 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+  [balanced max_n=2] R=8.000 (9/9)
+    E=-167.423578 Ha (M=10, Q=20, t_build=0.2s, t_fci=0.0s)
+
+=== Panel C: BALANCED, max_n=3 (Q=56) ===
+  Timing test: balanced max_n=3 at R=3.566...
+  Single point: t=13.0s, E=-169.568414 Ha (M=28, Q=56)
+  Selected n_max=3 grid: [2.0, 2.5, 3.0, 3.566, 4.0, 4.5, 5.0, 6.0, 8.0] (9 pts)
+  [balanced max_n=3] R=2.000 (1/9)
+    E=-170.513448 Ha (M=28, Q=56, t_build=11.2s, t_fci=1.0s)
+  [balanced max_n=3] R=2.500 (2/9)
+    E=-170.052963 Ha (M=28, Q=56, t_build=12.0s, t_fci=1.0s)
+  [balanced max_n=3] R=3.000 (3/9)
+    E=-169.754125 Ha (M=28, Q=56, t_build=12.1s, t_fci=1.0s)
+  [balanced max_n=3] R=3.566 (4/9)
+    E=-169.568414 Ha (M=28, Q=56, t_build=11.9s, t_fci=1.0s)
+  [balanced max_n=3] R=4.000 (5/9)
+    E=-169.460487 Ha (M=28, Q=56, t_build=11.9s, t_fci=1.0s)
+  [balanced max_n=3] R=4.500 (6/9)
+    E=-169.319704 Ha (M=28, Q=56, t_build=12.0s, t_fci=1.0s)
+  [balanced max_n=3] R=5.000 (7/9)
+    E=-169.147213 Ha (M=28, Q=56, t_build=12.0s, t_fci=1.0s)
+  [balanced max_n=3] R=6.000 (8/9)
+    E=-168.747304 Ha (M=28, Q=56, t_build=11.8s, t_fci=1.0s)
+  [balanced max_n=3] R=8.000 (9/9)
+    E=-168.066716 Ha (M=28, Q=56, t_build=11.8s, t_fci=1.0s)
+
+======================================================================
+SYNTHESIS
+======================================================================
+
+[composed_nmax2]
+  has interior minimum: False
+  PES is monotone descending — no interior equilibrium
+  D_e framework at R_e^exp: +0.2196 Ha (exp: 0.0713)
+  signed gap at R_e^exp: +0.1483 Ha
+  E at R_e^exp: -162.5786 Ha
+  E at largest R (anchor): -162.3590 Ha
+
+[balanced_nmax2]
+  has interior minimum: False
+  PES is monotone descending — no interior equilibrium
+  D_e framework at R_e^exp: +1.6911 Ha (exp: 0.0713)
+  signed gap at R_e^exp: +1.6198 Ha
+  E at R_e^exp: -169.1146 Ha
+  E at largest R (anchor): -167.4236 Ha
+
+[balanced_nmax3]
+  has interior minimum: False
+  PES is monotone descending — no interior equilibrium
+  D_e framework at R_e^exp: +1.5017 Ha (exp: 0.0713)
+  signed gap at R_e^exp: +1.4304 Ha
+  E at R_e^exp: -169.5684 Ha
+  E at largest R (anchor): -168.0667 Ha
+
+[saved] debug\data\p4_nah_w1e_baseline.json

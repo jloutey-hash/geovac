@@ -1,0 +1,92 @@
+{
+  "explicit_core_panel": [
+    {
+      "R": 2.5,
+      "E_HF": -222.06721541321076,
+      "n_iter": 24,
+      "converged": true,
+      "final_dE": 5.684341886080802e-14,
+      "final_dP": 5.851643053783241e-08,
+      "wall_s": 1.3546764850616455
+    },
+    {
+      "R": 3.0,
+      "E_HF": -221.504720903099,
+      "n_iter": 22,
+      "converged": true,
+      "final_dE": 5.684341886080802e-14,
+      "final_dP": 3.297720938412711e-08,
+      "wall_s": 1.3182997703552246
+    },
+    {
+      "R": 3.566,
+      "E_HF": -220.87796095986295,
+      "n_iter": 22,
+      "converged": true,
+      "final_dE": 0.0,
+      "final_dP": 2.9526447065106075e-08,
+      "wall_s": 1.3228929042816162
+    },
+    {
+      "R": 4.0,
+      "E_HF": -209.3902925089843,
+      "n_iter": 157,
+      "converged": true,
+      "final_dE": 5.684341886080802e-14,
+      "final_dP": 2.6356705141071743e-15,
+      "wall_s": 1.3131308555603027
+    },
+    {
+      "R": 4.5,
+      "E_HF": -219.54409605504048,
+      "n_iter": 400,
+      "converged": false,
+      "final_dE": 0.1541380973842763,
+      "final_dP": 0.020809099885342384,
+      "wall_s": 1.3485147953033447
+    },
+    {
+      "R": 5.0,
+      "E_HF": -208.0231648602649,
+      "n_iter": 400,
+      "converged": false,
+      "final_dE": 19.02172728228001,
+      "final_dP": 4.90025991657221,
+      "wall_s": 1.423975944519043
+    },
+    {
+      "R": 6.0,
+      "E_HF": -218.02588876016412,
+      "n_iter": 36,
+      "converged": true,
+      "final_dE": 0.0,
+      "final_dP": 4.986438077478142e-08,
+      "wall_s": 1.3015148639678955
+    }
+  ],
+  "explicit_core_summary": {
+    "label": "Explicit-core HF",
+    "R_min": 2.5,
+    "E_min": -222.06721541321076,
+    "E_dissoc": -218.02588876016412,
+    "D_e": 4.041326653046639,
+    "has_interior_min": false,
+    "in_chemistry_window": false,
+    "all_converged": false
+  },
+  "verdict": "STOP -- HF on explicit-core still does not bind NaH",
+  "config": {
+    "R_panel": [
+      2.5,
+      3.0,
+      3.566,
+      4.0,
+      4.5,
+      5.0,
+      6.0
+    ],
+    "n_electrons": 12,
+    "n_doubly_occ": 6,
+    "max_iter": 400
+  }
+}

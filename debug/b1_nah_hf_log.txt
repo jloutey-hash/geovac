@@ -1,0 +1,53 @@
+========================================================================
+Sprint B.1 -- HF on explicit-core NaH
+========================================================================
+R panel: (2.5, 3.0, 3.566, 4.0, 4.5, 5.0, 6.0)
+Encoded electrons: 12 (6 doubly occupied)
+Convention: closed-shell RHF, chemist eri, orthonormal basis
+
+========================================================================
+PES sweep: LiH (HF, 4e) -- methodology cross-check
+========================================================================
+    R=2.500  E_HF=  -15.165120  iters= 41  conv=True  t=  1.3s
+    R=3.015  E_HF=  -15.200722  iters= 40  conv=True  t=  1.3s
+    R=3.500  E_HF=  -15.198685  iters= 40  conv=True  t=  1.3s
+    R=4.000  E_HF=  -15.166514  iters= 40  conv=True  t=  1.3s
+    R=5.000  E_HF=  -15.042686  iters= 42  conv=True  t=  1.3s
+
+LiH HF cross-check PES summary:
+  R_min     = 3.015 bohr
+  E_min     = -15.2007 Ha
+  E_dissoc  = -15.0427 Ha
+  D_e       = +0.1580 Ha
+  Interior min: True
+  In chemistry window R in [3.0, 4.5]: True
+  Reference (Na-H exp): R_eq = 3.566 bohr, D_e = 0.075 Ha
+
+========================================================================
+PES sweep: Explicit-core NaH (HF, 12e)
+========================================================================
+    R=2.500  E_HF= -222.067215  iters= 24  conv=True  t=  1.4s
+    R=3.000  E_HF= -221.504721  iters= 22  conv=True  t=  1.3s
+    R=3.566  E_HF= -220.877961  iters= 22  conv=True  t=  1.3s
+    R=4.000  E_HF= -209.390293  iters=157  conv=True  t=  1.3s
+  * R=4.500  E_HF= -219.544096  iters=400  conv=False  t=  1.3s
+  * R=5.000  E_HF= -208.023165  iters=400  conv=False  t=  1.4s
+    R=6.000  E_HF= -218.025889  iters= 36  conv=True  t=  1.3s
+
+!! Explicit-core HF: SCF DID NOT CONVERGE on 2 / 7 R points
+
+Explicit-core HF PES summary:
+  R_min     = 2.500 bohr
+  E_min     = -222.0672 Ha
+  E_dissoc  = -218.0259 Ha
+  D_e       = +4.0413 Ha
+  Interior min: False
+  In chemistry window R in [3.0, 4.5]: False
+  Reference (Na-H exp): R_eq = 3.566 bohr, D_e = 0.075 Ha
+
+========================================================================
+DECISION GATE
+========================================================================
+Verdict: STOP -- HF on explicit-core still does not bind NaH
+
+Wrote C:\Users\jlout\Desktop\Project_Geometric\debug\data\b1_nah_hf.json

@@ -328,5 +328,14 @@
 | Speed regression | < 10% | Performance control |
 | Paper 2 cubic root 1/α | 137.036011 (above CODATA, 8.8e-8) | Table II/abstract value correction (mpmath) |
 | Paper 2 §VIII.D identity (k=0) | B_formal/N=d, root m=2 | Summation-index correction (sympy) |
+| Propinquity bound γ_{n_max=2,3,4} | 2.0746 / 1.6101 / 1.3223 (system-independent) | Paper 38 main theorem evaluation on `GeoVacHamiltonian.propinquity_bound` metadata; first quantitative basis-truncation error estimate at chemistry-consumer API (Target A, v3.85.0) |
+| FCIDUMP LiH composed n_max=2 round-trip | max\|h_1 diff\| = 0.0, max\|eri diff\| = 0.0 | `to_fcidump()` / `read_fcidump()` bit-exactness (P1, v3.85.0) |
+| FCIDUMP 7-system sample (LiH/BeH₂/H₂O/NaH/KH/MgH₂/CaH₂) | < 1e-10 relative | Multi-system round-trip integrity (P1, v3.85.0) |
+| LiH composed n_max=2 R=3.015 bohr qubit FCI | −14.143 Ha at Q=30, 333 Pauli | Publication-grade headline from FCIDUMP→DMRG path (R3-A, v3.85.0) |
+| LiH composed/balanced qubit FCI PES | monotone-descending across R ∈ [2.5, 5.0] bohr | Operational confirmation of W1e wall at projection step (R3-A, v3.85.0) |
+| NaH balanced n_max=3 W1e over-binding at R_e^exp | +1.50 Ha vs experimental D_e = 0.0713 Ha (21× over) | W1e baseline (P4, v3.85.0) |
+| NaH balanced DMRG vs P4 direct-FCI baseline | bit-identical at every R (max diff ~6e-13 Ha) | DMRG-falsifier STOP verdict (R3-B, v3.85.0) |
+| H₂ Q=10 composed n_max=2 R=1.4 openfermion UCCSD | error 8.6e-13 mHa (165 evals, 0.92 s) | Openfermion-native UCCSD vs L-BFGS-B from HF init (R3-C, v3.85.0); 5 OoM tighter than published STO-3G UCCSD literature |
+| Openfermion vs qiskit-nature UCCSD at H₂ Q=10 | ~3000× speedup per energy evaluation | Empirical validation that openfermion is the correct VQE stack for GeoVac (R3-C, v3.85.0) |
 
 ---

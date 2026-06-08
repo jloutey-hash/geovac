@@ -1,0 +1,67 @@
+{
+  "sprint": "R3-C VQE UCCSD",
+  "date": "2026-06-07",
+  "decision_gate": {
+    "h2_target_mha": 1.0,
+    "lih_target_mha": 10.0
+  },
+  "runs": [
+    {
+      "system": "H2",
+      "n_qubits": 10,
+      "n_electrons": 2,
+      "n_pauli": 112,
+      "n_params_uccsd": 14,
+      "e_exact": 0.20209535590669492,
+      "e_hf": 0.33928571428571347,
+      "e_vqe": 0.20209535590669578,
+      "err_mha_vs_exact": 8.604228440844963e-13,
+      "err_mha_vs_hf": 137.19035837901768,
+      "n_iter": 8,
+      "n_eval": 165,
+      "optimizer": "L-BFGS-B",
+      "wall_time_s": 0.92,
+      "converged": true,
+      "notes": ""
+    },
+    {
+      "system": "H2",
+      "n_qubits": 10,
+      "n_electrons": 2,
+      "n_pauli": 112,
+      "n_params_uccsd": 14,
+      "e_exact": 0.20209535590669525,
+      "e_hf": 0.33928571428571347,
+      "e_vqe": 0.20209537505283906,
+      "err_mha_vs_exact": 1.9146143809267713e-05,
+      "err_mha_vs_hf": 137.1903392328744,
+      "n_iter": 390,
+      "n_eval": 390,
+      "optimizer": "COBYLA",
+      "wall_time_s": 2.04,
+      "converged": true,
+      "notes": ""
+    },
+    {
+      "system": "LiH",
+      "n_qubits": 30,
+      "n_electrons": 4,
+      "n_pauli": 334,
+      "n_params_uccsd": -1,
+      "e_exact": null,
+      "e_hf": null,
+      "e_vqe": null,
+      "err_mha_vs_exact": "inf",
+      "err_mha_vs_hf": "inf",
+      "n_iter": 0,
+      "n_eval": 0,
+      "optimizer": "N/A",
+      "wall_time_s": 0.0,
+      "converged": false,
+      "notes": "SKIPPED: Q=30 statevector ~16 GB; tapering required (Paper 14)."
+    }
+  ],
+  "verdict": "BORDERLINE",
+  "h2_best_mha": 8.604228440844963e-13,
+  "lih_best_mha": "inf"
+}

@@ -1,0 +1,540 @@
+{
+  "meta": {
+    "sprint": "DMRG-diagnostic",
+    "date_utc": "2026-06-07T15:45:13Z",
+    "molecule": "LiH composed",
+    "R_bohr": 3.014,
+    "max_n": 2,
+    "Q": 30,
+    "M": 15,
+    "N_pauli": 333,
+    "E_nuclear_repulsion": -6.28454499004645,
+    "block_ranges_orbital": [
+      [
+        0,
+        5
+      ],
+      [
+        5,
+        10
+      ],
+      [
+        10,
+        15
+      ]
+    ],
+    "block_ranges_qubit": [
+      [
+        0,
+        10
+      ],
+      [
+        10,
+        20
+      ],
+      [
+        20,
+        30
+      ]
+    ],
+    "block_labels": [
+      "Li_core_center",
+      "LiH_bond_center",
+      "LiH_bond_partner"
+    ],
+    "wall_time_s": 1.9251079559326172
+  },
+  "verification_gate": {
+    "cross_block_eri_nnz": 0,
+    "cross_block_h1_nnz": 0,
+    "block_decoupled_exactly": true
+  },
+  "step1_operator_chi_full_H": {
+    "cuts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "chi": [
+      4,
+      16,
+      16,
+      9,
+      9,
+      9,
+      6,
+      3,
+      3,
+      2,
+      5,
+      16,
+      16,
+      9,
+      9,
+      9,
+      6,
+      3,
+      3,
+      2,
+      5,
+      16,
+      16,
+      9,
+      9,
+      9,
+      6,
+      3,
+      2
+    ],
+    "block_0_interior_profile_cuts_1_to_9": [
+      4,
+      16,
+      16,
+      9,
+      9,
+      9,
+      6,
+      3,
+      3
+    ],
+    "expected_universal_profile": [
+      4,
+      16,
+      16,
+      9,
+      9,
+      9,
+      6,
+      3,
+      3,
+      2
+    ],
+    "boundary_cut_10_chi": 2,
+    "boundary_cut_20_chi": 2,
+    "theorem_3_2_A_E_expected": 2
+  },
+  "step2_per_block_fci": [
+    {
+      "label": "Li_core_center",
+      "n_orbitals": 5,
+      "n_qubits": 10,
+      "E_per_sector": {
+        "0": {
+          "E_min": 0.0,
+          "sector_dim": 1
+        },
+        "1": {
+          "E_min": -4.5,
+          "sector_dim": 10
+        },
+        "2": {
+          "E_min": -7.189882389103112,
+          "sector_dim": 45
+        },
+        "3": {
+          "E_min": -7.101547038176523,
+          "sector_dim": 120
+        },
+        "4": {
+          "E_min": -6.551109132739051,
+          "sector_dim": 210
+        },
+        "5": {
+          "E_min": -5.371652806355741,
+          "sector_dim": 252
+        },
+        "6": {
+          "E_min": -3.6191993884316407,
+          "sector_dim": 210
+        },
+        "7": {
+          "E_min": -1.267096764974851,
+          "sector_dim": 120
+        },
+        "8": {
+          "E_min": 1.6404746084819393,
+          "sector_dim": 45
+        },
+        "9": {
+          "E_min": 5.103514731938732,
+          "sector_dim": 10
+        },
+        "10": {
+          "E_min": 9.122023605395507,
+          "sector_dim": 1
+        }
+      }
+    },
+    {
+      "label": "LiH_bond_center",
+      "n_orbitals": 5,
+      "n_qubits": 10,
+      "E_per_sector": {
+        "0": {
+          "E_min": 0.0,
+          "sector_dim": 1
+        },
+        "1": {
+          "E_min": -0.16824292308228406,
+          "sector_dim": 10
+        },
+        "2": {
+          "E_min": -0.190143444903324,
+          "sector_dim": 45
+        },
+        "3": {
+          "E_min": -0.005358773997039619,
+          "sector_dim": 120
+        },
+        "4": {
+          "E_min": 0.3659294059519902,
+          "sector_dim": 210
+        },
+        "5": {
+          "E_min": 0.9266749357734553,
+          "sector_dim": 252
+        },
+        "6": {
+          "E_min": 1.6723527021700493,
+          "sector_dim": 210
+        },
+        "7": {
+          "E_min": 2.602970031160525,
+          "sector_dim": 120
+        },
+        "8": {
+          "E_min": 3.7185339548121235,
+          "sector_dim": 45
+        },
+        "9": {
+          "E_min": 11.595543989179975,
+          "sector_dim": 10
+        },
+        "10": {
+          "E_min": 20.12093602506361,
+          "sector_dim": 1
+        }
+      }
+    },
+    {
+      "label": "LiH_bond_partner",
+      "n_orbitals": 5,
+      "n_qubits": 10,
+      "E_per_sector": {
+        "0": {
+          "E_min": 0.0,
+          "sector_dim": 1
+        },
+        "1": {
+          "E_min": -0.5,
+          "sector_dim": 10
+        },
+        "2": {
+          "E_min": -0.5121903583790182,
+          "sector_dim": 45
+        },
+        "3": {
+          "E_min": -0.2679588900890822,
+          "sector_dim": 120
+        },
+        "4": {
+          "E_min": 0.14444886666258655,
+          "sector_dim": 210
+        },
+        "5": {
+          "E_min": 0.7516902506115386,
+          "sector_dim": 252
+        },
+        "6": {
+          "E_min": 1.5469413589358727,
+          "sector_dim": 210
+        },
+        "7": {
+          "E_min": 2.525884616803329,
+          "sector_dim": 120
+        },
+        "8": {
+          "E_min": 3.6890728240303314,
+          "sector_dim": 45
+        },
+        "9": {
+          "E_min": 5.0368176836642204,
+          "sector_dim": 10
+        },
+        "10": {
+          "E_min": 7.040674535131846,
+          "sector_dim": 1
+        }
+      }
+    }
+  ],
+  "step2_total_fci": {
+    "distributions_tested": [
+      [
+        2,
+        1,
+        1
+      ],
+      [
+        2,
+        0,
+        2
+      ],
+      [
+        3,
+        0,
+        1
+      ],
+      [
+        2,
+        2,
+        0
+      ],
+      [
+        3,
+        1,
+        0
+      ],
+      [
+        4,
+        0,
+        0
+      ],
+      [
+        1,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        0,
+        3
+      ],
+      [
+        1,
+        3,
+        0
+      ],
+      [
+        0,
+        2,
+        2
+      ],
+      [
+        0,
+        0,
+        4
+      ],
+      [
+        0,
+        4,
+        0
+      ]
+    ],
+    "distribution_energies_Ha": [
+      -14.142670302231846,
+      -13.98661773752858,
+      -13.886092028222972,
+      -13.664570824052886,
+      -13.554334951305258,
+      -12.8356541227855,
+      -11.474688434949773,
+      -11.464978271507752,
+      -11.052503880135532,
+      -10.78990376404349,
+      -6.986878793328792,
+      -6.140096123383863,
+      -5.918615584094459
+    ],
+    "lowest_energy_Ha": -14.142670302231846,
+    "lowest_distribution": [
+      2,
+      1,
+      1
+    ],
+    "paper_14_reference_n2": -7.882,
+    "paper_19_20_reference_n3": -8.055
+  },
+  "step3_state_chi_per_block": [
+    [
+      2,
+      4,
+      3,
+      2,
+      2,
+      2,
+      2,
+      1,
+      1
+    ],
+    [
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  ],
+  "step4_truncation_sweep": [
+    {
+      "block_idx": 0,
+      "block_label": "Li_core_center",
+      "n_elec": 2,
+      "E_FCI": -7.189882389103112,
+      "per_chi": {
+        "1": {
+          "E_variational": -7.125,
+          "projected_norm_sq": 0.9723919644799914,
+          "energy_gap_vs_FCI_Ha": 0.06488238910311228
+        },
+        "2": {
+          "E_variational": -7.158164500571435,
+          "projected_norm_sq": 0.9860819742125723,
+          "energy_gap_vs_FCI_Ha": 0.03171788853167712
+        },
+        "4": {
+          "E_variational": -7.189882389103111,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 8.881784197001252e-16
+        },
+        "8": {
+          "E_variational": -7.189882389103111,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 8.881784197001252e-16
+        },
+        "16": {
+          "E_variational": -7.189882389103111,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 8.881784197001252e-16
+        },
+        "32": {
+          "E_variational": -7.189882389103111,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 8.881784197001252e-16
+        }
+      }
+    },
+    {
+      "block_idx": 1,
+      "block_label": "LiH_bond_center",
+      "n_elec": 1,
+      "E_FCI": -0.16824292308228406,
+      "per_chi": {
+        "1": {
+          "E_variational": 0.5908108359293287,
+          "projected_norm_sq": 0.878315344155088,
+          "energy_gap_vs_FCI_Ha": 0.7590537590116128
+        },
+        "2": {
+          "E_variational": -0.16824292308228403,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 2.7755575615628914e-17
+        },
+        "4": {
+          "E_variational": -0.16824292308228403,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 2.7755575615628914e-17
+        },
+        "8": {
+          "E_variational": -0.16824292308228403,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 2.7755575615628914e-17
+        },
+        "16": {
+          "E_variational": -0.16824292308228403,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 2.7755575615628914e-17
+        },
+        "32": {
+          "E_variational": -0.16824292308228403,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 2.7755575615628914e-17
+        }
+      }
+    },
+    {
+      "block_idx": 2,
+      "block_label": "LiH_bond_partner",
+      "n_elec": 1,
+      "E_FCI": -0.5,
+      "per_chi": {
+        "1": {
+          "E_variational": -0.5,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 0.0
+        },
+        "2": {
+          "E_variational": -0.5,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 0.0
+        },
+        "4": {
+          "E_variational": -0.5,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 0.0
+        },
+        "8": {
+          "E_variational": -0.5,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 0.0
+        },
+        "16": {
+          "E_variational": -0.5,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 0.0
+        },
+        "32": {
+          "E_variational": -0.5,
+          "projected_norm_sq": 1.0,
+          "energy_gap_vs_FCI_Ha": 0.0
+        }
+      }
+    }
+  ]
+}

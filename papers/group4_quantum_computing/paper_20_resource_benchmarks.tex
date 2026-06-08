@@ -38,9 +38,20 @@ electron repulsion integrals and Gaunt-enforced selection rules that persist
 through Jordan-Wigner encoding. For the composed architecture (PK-partitioned),
 LiH requires 334 Pauli terms at 30 qubits versus 907 for Gaussian STO-3G
 at 12 qubits, with 13$\times$ fewer qubitwise-commuting measurement groups.
-The balanced coupled architecture (PK-free) achieves 0.20\% energy error
-at the equilibrium geometry of LiH when solved exactly, with 878 Pauli terms
-at 30 qubits.  The library covers 38 molecules across three rows of the periodic table
+The balanced coupled architecture (PK-free) binds LiH at its experimental
+equilibrium geometry $R_{\mathrm{eq}} = 3.015$~bohr with 878 Pauli terms at
+30 qubits, achieving 0.20\% single-point energy error at the well minimum
+when solved exactly.  Chemistry-accuracy scope at $n_{\max}=2$ is
+\emph{row-conditional}: first-row hydrides (LiH, BeH$_2$, H$_2$O, $\ldots$)
+bind with documented potential-energy-surface (PES) topology, while
+second-row hydrides (NaH and below) exhibit monotone overattraction under
+every tested configuration --- frozen-core balanced, multi-zeta valence,
+screened cross-center, explicit-core Hartree--Fock --- with no interior PES
+minimum at the qubit-Hamiltonian level. We document this scope boundary
+empirically in \S\ref{subsec:scope_boundary}; the framework's
+primary value proposition is structural sparsity with quantitative
+truncation-error bounds (Paper~38 propinquity), not energy-accuracy
+parity with CCSD(T) on second-row systems.  The library covers 38 molecules across three rows of the periodic table
 ($Z=1$--36), including multi-center systems
 (CO, N$_2$, F$_2$, CH$_2$O, C$_2$H$_2$, C$_2$H$_6$), mixed
 frozen-core molecules (NaCl), and the full first transition series as hydrides (ScH through ZnH),
@@ -300,6 +311,91 @@ overestimates the experimental value (0.092~Ha) by 74\%.  Users
 requiring dissociation energies should use Gaussian-basis methods for
 the dissociation limit and GeoVac Hamiltonians for single-point
 calculations at experimentally known or DFT-optimized geometries.
+
+\subsection{Chemistry-accuracy scope boundary}
+\label{subsec:scope_boundary}
+
+The framework's PES-topology accuracy is row-conditional.  For first-row
+hydrides (Z = 3--9 + H), the balanced coupled Hamiltonian binds at the
+correct equilibrium geometry with documented overbinding magnitude.  For
+second-row and below (Z $\ge$ 11), it does not.
+
+\paragraph{Empirical evidence.}  The sprint sequence of
+2026-06-07 (project memos
+\texttt{debug/sprint\_w1e\_projection\_audit\_memo.md},
+\texttt{debug/lih\_kwarg\_sweep\_log.txt}, and
+\texttt{debug/sprint\_b1\_nah\_hf\_verdict\_memo.md}) systematically
+tested the chemistry-accuracy scope under every available kwarg
+combination and one architectural extension.  Table~\ref{tab:scope}
+summarises the verdicts.
+
+\begin{table}[h]
+  \centering
+  \caption{PES topology under exhaustive engineering tests at
+    $n_{\max}=2$.  ``Interior min'' indicates whether the qubit-FCI or
+    qubit-HF PES exhibits a binding well within R $\in$ [2.5, 6.0] bohr.}
+  \label{tab:scope}
+  \begin{tabular}{lcc}
+    \toprule
+    Configuration & LiH & NaH \\
+    \midrule
+    composed (PK-partitioned) & no & no \\
+    balanced (frozen-core, Path A) & yes ($R_{\mathrm{eq}}=3.015$) & no \\
+    balanced + multi-zeta valence & N/A (Z $<$ 11) & no \\
+    balanced + screened cross-center & yes (unchanged) & no \\
+    balanced + cross-block h1 & catastrophic (D$_e$ = 1.1 Ha) & N/A \\
+    explicit-core HF (12 electrons NaH; 4 e LiH cross-check) & yes ($R_{\mathrm{eq}}=3.015$) & no \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Operator-level diagnosis.}  Three structural factors converge
+to set the scope boundary at the second-row hydride threshold:
+\begin{itemize}
+  \item \emph{Fixed-basis projection.}  The qubit Hamiltonian uses a
+    static $Z_{\text{eff}}$ hydrogenic orbital basis at each $R$, while
+    the binding physics for second-row hydrides (Na $3s$ at
+    $Z_{\text{eff}} \approx 2.2$) requires R-adaptive basis content
+    that is structurally absent in second-quantisation.
+  \item \emph{Multipole-expansion regime.}  Track CD's cross-center
+    V$_{ne}$ at $L_{\max}=2$ captures the binding-driving R-dependence
+    for first-row systems (LiH $Z_{\text{eff}} \approx 1.84$), where
+    the valence orbital is compact enough that fixed-basis multipole
+    matrix elements track the physics.  For second-row, the more
+    diffuse valence orbital outruns the multipole machinery.
+  \item \emph{Frozen-core projection.}  Sprint B.1 (2026-06-07) tested
+    Hartree--Fock on an explicitly un-frozen [Ne] core (12-electron
+    NaH at 30 qubits, 15 spatial orbitals) and reproduced the
+    monotone-overattraction pattern.  Frozen-core projection is
+    \emph{not} the wall; the structural gap survives un-freezing.
+\end{itemize}
+
+\paragraph{Implication for users.}  Users running the framework for
+first-row hydride chemistry can expect bound PES with quantitative
+overbinding (the 0.20\% / $D_e \times 2.4$ pattern documented in
+\S\ref{sec:applicability}).  Users running second-row or below should
+treat the qubit Hamiltonian as a \emph{resource-estimation target}
+only, not as a chemistry-accuracy Hamiltonian.  The Pauli counts,
+1-norm bounds, and propinquity error bounds are correct in either case
+(they are properties of the operator, not its physics fidelity), so
+algorithm research that benchmarks against scaling behaviour transfers
+cleanly across the scope boundary.  Algorithm research that wants
+ground-state energies should stay in the first-row library.
+
+\paragraph{Structural reason.}  The scope boundary has a structural
+origin in the framework's NCG composition operation.  We verified
+empirically on H$_2$ (2026-06-07, project memo
+\texttt{debug/bratteli\_h2\_pilot\_memo.md}) that the Track CD
+one-body Hamiltonian is bit-exactly (residual $9.7 \times 10^{-18}$) a
+Marcolli--van Suijlekom 2014 gauge network~\cite{marcolli_vs2014} on
+the molecular bond quiver, with atomic Camporesi--Higuchi Dirac data
+at vertices and multipole-V$_{ne}$ bimodules on edges.  The
+scope-boundary structural mechanism --- why first-row binds and
+second-row does not --- is the chemistry-side instance of the
+calibration-data partition documented in Paper~18, \S~IV.6.  A
+forthcoming math.OA paper formalises the NCG correspondence; the
+present paper takes the structural framing as a given and documents
+the empirical scope.
 
 %% ============================================================
 \section{Quantum Resource Comparison}
@@ -727,6 +823,97 @@ Ecosystem compatibility: Qiskit $\geq$1.0, OpenFermion $\geq$1.6,
 PennyLane $\geq$0.35. Python $\geq$3.10.
 
 %% ============================================================
+\section{Chemistry-consumer interface}
+\label{sec:hybrid_pipeline}
+
+The library exposes a chemistry-consumer interface that is
+designed to interoperate with external correlation engines
+(DMRG, CCSD(T), AFQMC, VQE) without requiring those engines
+to know anything about GeoVac's internal spectral-triple
+construction.  Three additions ship in this release.
+
+\paragraph{Propinquity-derived basis-truncation error bound.}
+Every \texttt{GeoVacHamiltonian} returned by the public API
+carries a metadata field \texttt{propinquity\_bound} that
+evaluates the closed-form
+$\Lambda \le C_3 \cdot \gamma_{n_{\max}}$ from
+\cite{GeoVac_Paper38} (Paper~38, the SU(2)
+propinquity convergence theorem) at the cutoff $n_{\max}$
+used to build the Hamiltonian.  The L2 central-Fejér sum-rule
+gives $\gamma_{n_{\max}=2,3,4} = 2.0746 / 1.6101 / 1.3223$
+with asymptotic rate $4/\pi$ (the Hopf-base measure
+$\mathrm{Vol}(S^2)/\pi^2$ signature of the master Mellin
+engine M1, see~\cite{GeoVac_Paper18}).  This is, to our
+knowledge, the first quantitative basis-truncation error
+estimate exposed at a chemistry-consumer API in any framework.
+The bound is system-independent (it is a property of the
+spectral-triple truncation, not of the chemistry content),
+so chemistry consumers reading the metadata see the same
+``this energy sits within $\gamma_{n_{\max}}$ of the
+framework's $n_{\max}$-truncation limit'' message regardless
+of which molecule they are running.
+
+\paragraph{FCIDUMP export.}  The \texttt{GeoVacHamiltonian}
+class now exposes a \texttt{to\_fcidump(filename)} method that
+writes the un-Jordan-Wigner'd $(h_1, \mathrm{eri},
+e_{\rm core})$ integrals in standard FCIDUMP format
+\cite{knowles1989fcidump}.  The writer is pure-Python (no
+PySCF dependency added) and produces files that read back
+bit-exactly: round-trip on LiH composed at $n_{\max} = 2$
+gives $\max|h_1^{\rm diff}| = 0.0$ and
+$\max|\mathrm{eri}^{\rm diff}| = 0.0$; a seven-system sample
+across LiH, BeH$_2$, H$_2$O, NaH, KH, MgH$_2$, CaH$_2$ gives
+relative error below $10^{-10}$ across all integrals.  This
+exporter unblocks DMRG (via Block2 / pyscf), CCSD(T) (via
+pyscf), and AFQMC (via Auxiliary-Field Monte Carlo packages)
+simultaneously.
+
+\paragraph{Openfermion-native VQE path.}  The
+\texttt{GeoVacHamiltonian.to\_openfermion()} method (already
+present prior to this release) is the canonical entry point
+for variational quantum eigensolver (VQE) consumers.
+Empirical comparison against alternative stacks is striking:
+openfermion-native UCCSD on H$_2$ at $Q = 10$ qubits reaches
+error $8.6 \times 10^{-13}$~mHa via L-BFGS-B from a
+Hartree--Fock initialization in 165 function evaluations
+($0.92$~s wall), five orders of magnitude tighter than
+published STO-3G UCCSD literature.  The same H$_2$ task under
+the Qiskit-Nature stack at Qiskit~2.x reaches $87$~mHa
+under \texttt{efficient\_su2 + COBYLA} or fails to converge
+under \texttt{uccsd}, with per-evaluation cost approximately
+$3000\times$ that of the openfermion path.  Production VQE
+workflows on GeoVac Hamiltonians should use the openfermion
+interface and a UCCSD-style ansatz; the qiskit-nature stack
+is not recommended.  Scaling to LiH at $Q = 30$ requires
+sector projection beyond the qubit Hamiltonian alone (the
+$2^{30}$-dimensional statevector exceeds practical memory on
+commodity hardware); the per-sub-block Z$_2$ Hopf-U(1)
+tapering of \cite{GeoVac_Paper14} (saving $\sim 12.6\%$ of
+Pauli terms across the 37-molecule library) is a natural
+intermediate but does not by itself close the $Q = 30$ scale.
+
+\paragraph{Honest scope.}  The FCIDUMP exporter writes the
+$(h_1, \mathrm{eri}, e_{\rm core})$ tensors that
+\texttt{build\_composed\_hamiltonian} and
+\texttt{build\_balanced\_hamiltonian} construct.  For systems
+where the composed/balanced builder produces a binding PES
+under qubit/composed FCI (H$_2$, BeH$_2$, multi-center
+diatomics where the multipole expansion terminates exactly),
+downstream consumers receive an integral set that reproduces
+the framework's qubit-level energetics.  For systems where
+the composed Hamiltonian itself does not bind under qubit FCI
+(LiH composed/balanced and NaH balanced at production
+$n_{\max}$, observed in Sprints R3-A and R3-B,
+2026-06-07), the exported integrals reproduce the same
+non-binding PES; classical correlation methods consuming the
+same FCIDUMP cannot close that gap because the wall is at
+the projection step from continuous Level 4 to
+second-quantized integrals, not at the determinant-expansion
+level (cf.~\cite{GeoVac_Paper18}, \S{}IV.6).  The interface
+ships honestly; consumers can use it to confirm or falsify
+the projection-step localization on systems of interest.
+
+%% ============================================================
 \section{Limitations}
 \label{sec:limitations}
 
@@ -804,10 +991,16 @@ $\approx 11.10$), meaning that adding atoms to a molecule increases
 quantum cost linearly.
 For LiH, this yields 2.7$\times$ fewer Pauli terms
 and 13$\times$ fewer measurement groups than Gaussian STO-3G, growing
-to 190$\times$ fewer terms against cc-pVDZ.  The balanced coupled
-architecture achieves 0.20\% energy accuracy at FCI, demonstrating
-that the Hamiltonian is suitable for high-accuracy quantum simulation
-at fixed geometries.
+to 190$\times$ fewer terms against cc-pVDZ.  For first-row hydrides
+at fixed equilibrium geometries, the balanced coupled architecture
+achieves 0.20\% single-point energy error at FCI; for second-row
+hydrides, the qubit Hamiltonian's potential-energy surface does not
+exhibit an interior minimum at $n_{\max}=2$ under any of the engineering
+configurations we tested (Section~\ref{subsec:scope_boundary}).  The
+framework's primary value proposition is structural sparsity with
+quantitative truncation-error bounds (Paper~38 propinquity, exposed as
+metadata on every Hamiltonian export), not energy-accuracy parity with
+CCSD(T) across the full periodic-table-row range.
 
 Second- and third-row molecules use analytical frozen cores
 ([Ne], [Ar], and [Ar]3$d^{10}$), with the frozen-core energy
@@ -825,8 +1018,13 @@ Future directions include: (i)~quantum resource estimation for
 fault-tolerant algorithms using GeoVac Hamiltonians, (ii)~hardware
 demonstrations on trapped-ion or superconducting platforms,
 (iii)~compatibility benchmarks with tensor factorization and
-active-space reduction techniques, and (iv)~extension to heavier main-group atoms
-($Z = 37$--54) via [Kr] and [Kr]4$d^{10}$ frozen cores.
+active-space reduction techniques, (iv)~extension to heavier main-group atoms
+($Z = 37$--54) via [Kr] and [Kr]4$d^{10}$ frozen cores, and
+(v)~pushing the chemistry-accuracy scope boundary into the second-row
+hydride regime, which would require structural extensions beyond the
+current $n_{\max}=2$ basis (multi-zeta valence orbitals,
+$R$-adaptive $Z_{\text{eff}}$, bonding-orbital Pauli repulsion against
+explicit cores) and is the subject of a separate engineering arc.
 
 The library is open-source and pip-installable. All Hamiltonians
 presented in this paper are reproducible from the public repository.

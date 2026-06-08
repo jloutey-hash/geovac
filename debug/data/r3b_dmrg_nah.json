@@ -1,0 +1,498 @@
+{
+  "sprint": "R3-B NaH DMRG-on-FCIDUMP falsifier",
+  "date": "2026-06-07",
+  "R_grid_bohr": [
+    2.5,
+    3.0,
+    3.566,
+    4.0,
+    4.5,
+    5.0,
+    6.0
+  ],
+  "R_exp_bohr": 3.566,
+  "DE_exp_Ha": 0.0713,
+  "falsifier_gate": {
+    "GO_window": {
+      "R_eq_bohr": [
+        3.0,
+        4.5
+      ],
+      "De_Ha": [
+        0.04,
+        0.15
+      ]
+    }
+  },
+  "n_max_2": {
+    "max_n": 2,
+    "R_grid": [
+      2.5,
+      3.0,
+      3.566,
+      4.0,
+      4.5,
+      5.0,
+      6.0
+    ],
+    "points": [
+      {
+        "R_bohr": 2.5,
+        "max_n": 2,
+        "n_electrons": 2,
+        "M": 10,
+        "Q": 20,
+        "fci_dim": null,
+        "E_direct_Ha": -169.78137617651277,
+        "E_from_FCIDUMP_Ha": -169.7813761765122,
+        "two_paths_max_diff_Ha": 5.684341886080801e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 0.0,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax2_R2p500.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 0.22748950007371604,
+          "t_fci_direct": 0.01875860011205077,
+          "t_fci_from_FCIDUMP": 0.019361300161108375
+        },
+        "V_NN_plus_E_core_Ha": -160.14368872683653,
+        "E_electronic_Ha": -9.637687449676235
+      },
+      {
+        "R_bohr": 3.0,
+        "max_n": 2,
+        "n_electrons": 2,
+        "M": 10,
+        "Q": 20,
+        "fci_dim": null,
+        "E_direct_Ha": -169.39142325693882,
+        "E_from_FCIDUMP_Ha": -169.39142325693905,
+        "two_paths_max_diff_Ha": 2.2737367544323206e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 0.0,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax2_R3p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 0.23248829995281994,
+          "t_fci_direct": 0.019196300068870187,
+          "t_fci_from_FCIDUMP": 0.01845899992622435
+        },
+        "V_NN_plus_E_core_Ha": -160.9436887268648,
+        "E_electronic_Ha": -8.44773453007403
+      },
+      {
+        "R_bohr": 3.566,
+        "max_n": 2,
+        "n_electrons": 2,
+        "M": 10,
+        "Q": 20,
+        "fci_dim": null,
+        "E_direct_Ha": -169.1146351927792,
+        "E_from_FCIDUMP_Ha": -169.11463519277868,
+        "two_paths_max_diff_Ha": 5.115907697472721e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 0.0,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax2_R3p566.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 0.22238339995965362,
+          "t_fci_direct": 0.01877960003912449,
+          "t_fci_from_FCIDUMP": 0.017899499973282218
+        },
+        "V_NN_plus_E_core_Ha": -161.5785737521032,
+        "E_electronic_Ha": -7.536061440675979
+      },
+      {
+        "R_bohr": 4.0,
+        "max_n": 2,
+        "n_electrons": 2,
+        "M": 10,
+        "Q": 20,
+        "fci_dim": null,
+        "E_direct_Ha": -168.96613610722534,
+        "E_from_FCIDUMP_Ha": -168.96613610722585,
+        "two_paths_max_diff_Ha": 5.115907697472721e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 0.0,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax2_R4p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 0.20248640002682805,
+          "t_fci_direct": 0.017789300065487623,
+          "t_fci_from_FCIDUMP": 0.017951600020751357
+        },
+        "V_NN_plus_E_core_Ha": -161.94368872686485,
+        "E_electronic_Ha": -7.022447380360489
+      },
+      {
+        "R_bohr": 4.5,
+        "max_n": 2,
+        "n_electrons": 2,
+        "M": 10,
+        "Q": 20,
+        "fci_dim": null,
+        "E_direct_Ha": -168.80855610745087,
+        "E_from_FCIDUMP_Ha": -168.80855610745087,
+        "two_paths_max_diff_Ha": 0.0,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 0.0,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax2_R4p500.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 0.20925650000572205,
+          "t_fci_direct": 0.018160599982365966,
+          "t_fci_from_FCIDUMP": 0.020303100114688277
+        },
+        "V_NN_plus_E_core_Ha": -162.27702206019816,
+        "E_electronic_Ha": -6.5315340472527055
+      },
+      {
+        "R_bohr": 5.0,
+        "max_n": 2,
+        "n_electrons": 2,
+        "M": 10,
+        "Q": 20,
+        "fci_dim": null,
+        "E_direct_Ha": -168.63652675713695,
+        "E_from_FCIDUMP_Ha": -168.63652675713678,
+        "two_paths_max_diff_Ha": 1.7053025658242404e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 0.0,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax2_R5p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 0.20725199999287724,
+          "t_fci_direct": 0.018947300035506487,
+          "t_fci_from_FCIDUMP": 0.018430500058457255
+        },
+        "V_NN_plus_E_core_Ha": -162.54368872686487,
+        "E_electronic_Ha": -6.092838030272077
+      },
+      {
+        "R_bohr": 6.0,
+        "max_n": 2,
+        "n_electrons": 2,
+        "M": 10,
+        "Q": 20,
+        "fci_dim": null,
+        "E_direct_Ha": -168.23559603684294,
+        "E_from_FCIDUMP_Ha": -168.23559603684322,
+        "two_paths_max_diff_Ha": 2.8421709430404007e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 0.0,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax2_R6p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 0.2027839000802487,
+          "t_fci_direct": 0.019002800108864903,
+          "t_fci_from_FCIDUMP": 0.01828849990852177
+        },
+        "V_NN_plus_E_core_Ha": -162.94368872686485,
+        "E_electronic_Ha": -5.291907309978086
+      }
+    ],
+    "comparison_to_P4": [
+      {
+        "R_bohr": 2.5,
+        "E_R3B_Ha": -169.78137617651277,
+        "E_P4_Ha": -169.7814,
+        "diff_R3B_minus_P4_Ha": 2.3823487225627105e-05
+      },
+      {
+        "R_bohr": 3.0,
+        "E_R3B_Ha": -169.39142325693882,
+        "E_P4_Ha": -169.3914,
+        "diff_R3B_minus_P4_Ha": -2.3256938817439732e-05
+      },
+      {
+        "R_bohr": 3.566,
+        "E_R3B_Ha": -169.1146351927792,
+        "E_P4_Ha": -169.1146,
+        "diff_R3B_minus_P4_Ha": -3.519277919394881e-05
+      },
+      {
+        "R_bohr": 4.0,
+        "E_R3B_Ha": -168.96613610722534,
+        "E_P4_Ha": -168.9661,
+        "diff_R3B_minus_P4_Ha": -3.6107225326986736e-05
+      },
+      {
+        "R_bohr": 4.5,
+        "E_R3B_Ha": -168.80855610745087,
+        "E_P4_Ha": -168.8086,
+        "diff_R3B_minus_P4_Ha": 4.3892549143720316e-05
+      },
+      {
+        "R_bohr": 5.0,
+        "E_R3B_Ha": -168.63652675713695,
+        "E_P4_Ha": -168.6365,
+        "diff_R3B_minus_P4_Ha": -2.675713693633952e-05
+      },
+      {
+        "R_bohr": 6.0,
+        "E_R3B_Ha": -168.23559603684294,
+        "E_P4_Ha": -168.2356,
+        "diff_R3B_minus_P4_Ha": 3.963157070074885e-06
+      }
+    ],
+    "interior_min": null,
+    "monotone_kind": "ascending (toward large R)",
+    "wall_at_R_exp_Ha": -1.6910351927791964,
+    "wall_vs_exp_De_ratio": 23.717183629441745,
+    "well_depth_R3B_Ha": null,
+    "P4_anchor_R8_Ha": -167.4236,
+    "DE_exp_Ha": 0.0713,
+    "verdict": "STOP",
+    "note": "No interior minimum; PES is monotone ascending (toward large R). Gap at R_exp vs P4 R=8 anchor: -1.691 Ha (23.7x exp D_e)."
+  },
+  "n_max_3": {
+    "max_n": 3,
+    "R_grid": [
+      2.5,
+      3.0,
+      3.566,
+      4.0,
+      4.5,
+      5.0,
+      6.0
+    ],
+    "points": [
+      {
+        "R_bohr": 2.5,
+        "max_n": 3,
+        "n_electrons": 2,
+        "M": 28,
+        "Q": 56,
+        "fci_dim": null,
+        "E_direct_Ha": -170.05296282421313,
+        "E_from_FCIDUMP_Ha": -170.05296282421332,
+        "two_paths_max_diff_Ha": 1.9895196601282805e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 1.691355389077387e-16,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax3_R2p500.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 11.994889100082219,
+          "t_fci_direct": 0.9568711000028998,
+          "t_fci_from_FCIDUMP": 0.9227583999745548
+        },
+        "V_NN_plus_E_core_Ha": -160.14368872683653,
+        "E_electronic_Ha": -9.909274097376596
+      },
+      {
+        "R_bohr": 3.0,
+        "max_n": 3,
+        "n_electrons": 2,
+        "M": 28,
+        "Q": 56,
+        "fci_dim": null,
+        "E_direct_Ha": -169.7541253374859,
+        "E_from_FCIDUMP_Ha": -169.7541253374854,
+        "two_paths_max_diff_Ha": 5.115907697472721e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 1.691355389077387e-16,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax3_R3p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 10.615490699885413,
+          "t_fci_direct": 0.9042517999187112,
+          "t_fci_from_FCIDUMP": 0.8519639999140054
+        },
+        "V_NN_plus_E_core_Ha": -160.9436887268648,
+        "E_electronic_Ha": -8.81043661062111
+      },
+      {
+        "R_bohr": 3.566,
+        "max_n": 3,
+        "n_electrons": 2,
+        "M": 28,
+        "Q": 56,
+        "fci_dim": null,
+        "E_direct_Ha": -169.56841362989076,
+        "E_from_FCIDUMP_Ha": -169.56841362989138,
+        "two_paths_max_diff_Ha": 6.252776074688882e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 1.691355389077387e-16,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax3_R3p566.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 11.137732100207359,
+          "t_fci_direct": 0.8948850999586284,
+          "t_fci_from_FCIDUMP": 0.8839026999194175
+        },
+        "V_NN_plus_E_core_Ha": -161.5785737521032,
+        "E_electronic_Ha": -7.989839877787546
+      },
+      {
+        "R_bohr": 4.0,
+        "max_n": 3,
+        "n_electrons": 2,
+        "M": 28,
+        "Q": 56,
+        "fci_dim": null,
+        "E_direct_Ha": -169.4604867079874,
+        "E_from_FCIDUMP_Ha": -169.46048670798774,
+        "two_paths_max_diff_Ha": 3.410605131648481e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 1.691355389077387e-16,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax3_R4p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 11.313859000103548,
+          "t_fci_direct": 0.8848419999703765,
+          "t_fci_from_FCIDUMP": 0.8971740000415593
+        },
+        "V_NN_plus_E_core_Ha": -161.94368872686485,
+        "E_electronic_Ha": -7.516797981122551
+      },
+      {
+        "R_bohr": 4.5,
+        "max_n": 3,
+        "n_electrons": 2,
+        "M": 28,
+        "Q": 56,
+        "fci_dim": null,
+        "E_direct_Ha": -169.31970436800967,
+        "E_from_FCIDUMP_Ha": -169.31970436800972,
+        "two_paths_max_diff_Ha": 5.684341886080802e-14,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 1.691355389077387e-16,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax3_R4p500.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 11.709806599887088,
+          "t_fci_direct": 0.9006658999715,
+          "t_fci_from_FCIDUMP": 0.8871752000413835
+        },
+        "V_NN_plus_E_core_Ha": -162.27702206019816,
+        "E_electronic_Ha": -7.0426823078115035
+      },
+      {
+        "R_bohr": 5.0,
+        "max_n": 3,
+        "n_electrons": 2,
+        "M": 28,
+        "Q": 56,
+        "fci_dim": null,
+        "E_direct_Ha": -169.14721257084534,
+        "E_from_FCIDUMP_Ha": -169.14721257084597,
+        "two_paths_max_diff_Ha": 6.252776074688882e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 1.691355389077387e-16,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax3_R5p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 11.716910400195047,
+          "t_fci_direct": 0.9574566998053342,
+          "t_fci_from_FCIDUMP": 0.9872476998716593
+        },
+        "V_NN_plus_E_core_Ha": -162.54368872686487,
+        "E_electronic_Ha": -6.603523843980469
+      },
+      {
+        "R_bohr": 6.0,
+        "max_n": 3,
+        "n_electrons": 2,
+        "M": 28,
+        "Q": 56,
+        "fci_dim": null,
+        "E_direct_Ha": -168.74730402469163,
+        "E_from_FCIDUMP_Ha": -168.7473040246915,
+        "two_paths_max_diff_Ha": 1.4210854715202004e-13,
+        "fcidump_round_trip": {
+          "max_abs_h1_diff": 0.0,
+          "max_abs_eri_diff": 1.691355389077387e-16,
+          "abs_ecore_diff": 0.0,
+          "file": "debug\\data\\r3b_nah_balanced_nmax3_R6p000.fcidump"
+        },
+        "timings_s": {
+          "t_build_balanced": 12.046931100077927,
+          "t_fci_direct": 1.0116244999226183,
+          "t_fci_from_FCIDUMP": 0.9972085000481457
+        },
+        "V_NN_plus_E_core_Ha": -162.94368872686485,
+        "E_electronic_Ha": -5.803615297826781
+      }
+    ],
+    "comparison_to_P4": [
+      {
+        "R_bohr": 2.5,
+        "E_R3B_Ha": -170.05296282421313,
+        "E_P4_Ha": -170.053,
+        "diff_R3B_minus_P4_Ha": 3.7175786872012395e-05
+      },
+      {
+        "R_bohr": 3.0,
+        "E_R3B_Ha": -169.7541253374859,
+        "E_P4_Ha": -169.7541,
+        "diff_R3B_minus_P4_Ha": -2.5337485908494273e-05
+      },
+      {
+        "R_bohr": 3.566,
+        "E_R3B_Ha": -169.56841362989076,
+        "E_P4_Ha": -169.5684,
+        "diff_R3B_minus_P4_Ha": -1.3629890759148111e-05
+      },
+      {
+        "R_bohr": 4.0,
+        "E_R3B_Ha": -169.4604867079874,
+        "E_P4_Ha": -169.4605,
+        "diff_R3B_minus_P4_Ha": 1.3292012596366476e-05
+      },
+      {
+        "R_bohr": 4.5,
+        "E_R3B_Ha": -169.31970436800967,
+        "E_P4_Ha": -169.3197,
+        "diff_R3B_minus_P4_Ha": -4.368009655308924e-06
+      },
+      {
+        "R_bohr": 5.0,
+        "E_R3B_Ha": -169.14721257084534,
+        "E_P4_Ha": -169.1472,
+        "diff_R3B_minus_P4_Ha": -1.257084534245223e-05
+      },
+      {
+        "R_bohr": 6.0,
+        "E_R3B_Ha": -168.74730402469163,
+        "E_P4_Ha": -168.7473,
+        "diff_R3B_minus_P4_Ha": -4.024691634185729e-06
+      }
+    ],
+    "interior_min": null,
+    "monotone_kind": "ascending (toward large R)",
+    "wall_at_R_exp_Ha": -1.5017136298907587,
+    "wall_vs_exp_De_ratio": 21.061902242507134,
+    "well_depth_R3B_Ha": null,
+    "P4_anchor_R8_Ha": -168.0667,
+    "DE_exp_Ha": 0.0713,
+    "verdict": "STOP",
+    "note": "No interior minimum; PES is monotone ascending (toward large R). Gap at R_exp vs P4 R=8 anchor: -1.502 Ha (21.1x exp D_e)."
+  },
+  "net_verdict": "STOP"
+}

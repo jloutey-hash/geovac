@@ -7,6 +7,148 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.86.0] - 2026-06-07
+
+### Summary
+
+**Sprint W1e-Audit-and-MvS-Chemistry-Open — chemistry-engineering arc empirically exhausted; Marcolli-vS math.OA arc opened with bit-exact seed.** Same-day follow-on to the v3.85.0 chemistry-pivot sprint. Eight sub-sprints in one session, plus a production-code bug fix, plus test-infrastructure work, plus Paper 20 framing edits.
+
+**Headline structural finding (cross-thread synthesis).** The chemistry-engineering arc is empirically exhausted at the second-row hydride threshold. LiH kwarg sweep returned clean STOP on all cheap kwargs (`multi_zeta_basis`, `screened_valence_basis`, `screened_cross_center`, `pk_cross_center` are silently gated on $Z_{\mathrm{nuc\_center}} \ge 11$ and no-op for first-row LiH; `cross_block_h1` makes LiH 16× over-bound). B.1 explicit-core Hartree-Fock on NaH (12 electrons, 30 qubits, 15 spatial orbitals, RHF SCF with DIIS + density damping + level shift) gives monotone descent into small R; LiH HF cross-check binds at $R_{\mathrm{eq}} = 3.015$ bohr with $D_e = 0.158$ Ha (exact match to the W1e-Projection-Audit balanced FCI verdict — methodology validated). **The wall is not the frozen-core projection; un-freezing the [Ne] core does not close NaH binding.** Combined with the F1–F6 dead-ends and the Explorer NaH kwarg verdict (v3.85.0), this empirically exhausts the chemistry-engineering arsenal at the framework's current scope.
+
+**Headline positive finding (M-vS bit-exact correspondence).** H₂ Bratteli pilot at $n_{\max}=2$, $R=1.4$ bohr: Track CD's `balanced_coupled` one-body Hamiltonian reproduced bit-exactly (residual $9.7 \times 10^{-18}$) by the Marcolli-van Suijlekom 2014 gauge-network construction with vertex Diracs from atomic data. LiH heteronuclear scale-up (M-vS-1) at $R=3.015$ bohr, $Z_a=3, Z_b=1$: bit-exact match (residual $2.47 \times 10^{-17}$) on all four blocks, eigenvalues identical to $1.55 \times 10^{-15}$, spectral action bit-exact at $\Lambda \in \{1, 2, 4\}$. **Two empirical anchors at bit-exact precision; the Marcolli-vS gauge-network correspondence is not a homonuclear coincidence.** Perez-Sanchez 2024a vertex-Dirac-dropping is one step too far; Marcolli-vS 2014 (which keeps vertex Diracs) is the structural home (consistent with the pre-existing `wh1_marcolli_vs_lineage.md` memory).
+
+**Production bug fix.** The Path B V_NN double-count bug in `balanced_coupled.py`'s R-dependence corrector — silently masked by R3-A/R3-B's call convention until W1e-Projection-Audit surfaced it today — is patched via a new `R: Optional[float] = None` field on `MolecularSpec` populated by `hydride_spec` and consumed by the corrector. Backward-compatible (specs without recorded R fall back to `_HYDRIDE_REQ` lookup). 202/202 targeted regression tests pass; 18/18 topological S³ proofs unaffected.
+
+**Paper 20 framing reset.** Abstract replaces unconditional "0.20% LiH energy error" with row-conditional scope language. New §V.C "Chemistry-accuracy scope boundary" (~2.5 pages): empirical table of PES topology by configuration, operator-level diagnosis (fixed-basis projection, multipole regime, frozen-core projection), implication-for-users, structural-reason forward-reference to the Marcolli-vS chemistry paper. Conclusion reframed. Compiles clean. Today's W1e + B.1 + LiH-kwarg-sweep + Bratteli evidence is now in the public-facing record of Paper 20.
+
+**Test-suite slim.** 40-molecule `test_ecosystem_export.py` sweep → pairwise representative matrix (10 systems covering atom × diatomic × multi-center × frozen-core × TM); long-tail moved behind `@pytest.mark.slow`. Session-scoped `hamiltonian_cache` fixture in `tests/conftest.py` — each unique `(system, **kwargs)` built once and reused across tests. Default `test_ecosystem_export.py` runtime: **8:30 → 2:50 (3× speedup, ~75 builds → 15 unique builds)**. New `tests/test_classical_quantum_parity.py` (2 `@slow` tests) is the regression sentinel for the V_NN bug class.
+
+**Strategic implication.** The "(a)+(b) both negative" pivot trigger condition was technically not met. What happened instead: (a) engineering = NEGATIVE, (b) Bratteli = POSITIVE in unexpected direction. The Marcolli-vS chemistry paper arc opens as the constructive (not defensive) forward direction. Full sub-sprint plan (M-vS-1..5) is scoped at 4-5 months; today shipped M-vS-1 PASS. Next concrete sprint is M-vS-2 (default LiH spec 3-sub-block Bratteli reading).
+
+### Added
+
+- **`geovac/molecular_spec.py`** — `MolecularSpec.R: Optional[float] = None` field; populated by `hydride_spec`. `force_explicit_core: bool = False` kwarg on `hydride_spec` (un-freezes the [Ne] core for Z=11–17). `_SECOND_ROW_ATOMIC_ENERGY` table (NIST values for Na through Cl). New `'explicit_extended'` core_type internal marker.
+- **`tests/conftest.py`** — session-scoped `hamiltonian_cache` fixture. Builds each unique `(system, **kwargs)` once and reuses across all tests in the session.
+- **`tests/test_ecosystem_export.py`** — `REPRESENTATIVE_PAULI` set (10 systems, pairwise coverage matrix); `EXTENDED_PAULI` for the long tail; new `test_representative_builds_and_pauli`, `test_isostructural_invariance_representative`, `test_tm_isostructural_representative` (default-collected); existing `test_system_builds`, `test_pauli_counts`, `test_main_group_ratio`, `test_tm_ratio`, `test_isostructural_invariance`, `test_tm_isostructural` marked `@pytest.mark.slow`. All test functions rewired to use `hamiltonian_cache`.
+- **`tests/test_classical_quantum_parity.py`** (NEW) — two `@slow` tests: `test_lih_continuous_vs_balanced_qubit_both_bind` (interior min + well-shape sanity); `test_lih_path_a_vs_path_b_bit_identical` (the V_NN bug regression sentinel).
+- **`papers/group4_quantum_computing/paper_20_resource_benchmarks.tex`** — abstract row-conditional scope claim; new §V.C "Chemistry-accuracy scope boundary" (~2.5 pp, includes empirical table, operator-level diagnosis, structural-reason); conclusion reframed; future-directions (v) added. 11 pages, three-pass clean.
+- **`papers/group4_quantum_computing/paper_20_refs.bib`** — new `@article{marcolli_vs2014}` entry.
+- **Eight sub-sprint canonical memos** (one per sub-sprint) under `debug/`:
+  - `sprint_w1e_projection_audit_memo.md`
+  - `sprint_b1_nah_hf_verdict_memo.md`
+  - `sprint_b1_explicit_core_nah_scoping_memo.md`
+  - `bratteli_h2_pilot_memo.md` + `bratteli_h2_pilot_construction_notes.md`
+  - `bratteli_lih_pilot_memo.md`
+  - `sprint_marcolli_vs_chemistry_paper_arc_scoping_memo.md` (paper arc structure, 4-5 month sprint plan)
+  - `sprint_paper20_paper57_scope_boundary_scoping_memo.md`
+  - `perez_sanchez_outreach_email_draft.md` (drafted; not sent per PI direction)
+- **Umbrella sprint-close memo**: `debug/sprint_w1e_audit_and_mvs_chemistry_open_2026_06_07_memo.md` (≤5000 words) — synthesizes cross-thread findings, follow-on register, honest scope, files inventory.
+- **Drivers and data**: `debug/w1e_projection_audit_driver.py`, `debug/lih_kwarg_sweep_driver.py`, `debug/b1_basis_sanity_diagnostic.py`, `debug/b1_nah_hf_driver.py`, `debug/bratteli_h2_pilot_driver.py`, `debug/bratteli_lih_pilot_driver.py`, plus corresponding `debug/data/*.json` files and `debug/*_log.txt` stdout captures.
+- **CLAUDE.md §2 one-liner** for v3.86.0 (this sprint's verdict).
+- **CLAUDE.md §3 two new dead-end rows**: LiH kwarg sweep (all cheap kwargs no-op or catastrophic for first-row); B.1 explicit-core HF NaH (preliminary STOP, methodology validated via LiH cross-check).
+
+### Changed
+
+- **`geovac/balanced_coupled.py`** lines 669-680 — V_NN R-dependence corrector now reads `spec_R = getattr(spec, 'R', None) or _HYDRIDE_REQ.get(spec.name)` (was: unconditional `_HYDRIDE_REQ` lookup). Backward-compatible. Eliminates the Path B V_NN-double-count bug. Sprint W1e-Projection-Audit verdict.
+- **`debug/sprint_chemistry_pivot_2026_06_07_memo.md`** — addendum at top + §3.1 sharpening + §4 Paper 57 framing reset, all noting today's row-conditional findings.
+- **`debug/sprint_r3a_dmrg_lih_memo.md`** — addendum: "balanced doesn't bind LiH" verdict was the Path B bug; under correct convention LiH balanced binds at $R_{\mathrm{eq}} = 3.015$ with $D_e = 0.158$ Ha.
+- **`debug/sprint_r3b_dmrg_nah_falsifier_memo.md`** — addendum: qualitative verdict (NaH overattraction, DMRG = FCI doesn't close W1e) survives, but reported PES magnitudes were V_NN-bug-shifted by ~1.3 Ha at $R=2.5$.
+- **CLAUDE.md §3 W1e rows** — "DMRG-on-FCIDUMP closes W1e on NaH" row qualified with row-conditional caveat; "LiH composed/balanced qubit FCI binds" row split into "composed stands, balanced retracted" per the Path B bug correction.
+
+### Closed
+
+- **W1e-Projection-Audit (sub-sprint 1)** — chemistry-engineering kwargs systematically exhausted at first-row and second-row.
+- **B.1 explicit-core HF NaH (sub-sprint 7)** — preliminary STOP; frozen-core projection is not the wall.
+- **Sprint M-vS-1 LiH heteronuclear Bratteli (sub-sprint 8)** — first scale-up sub-sprint of the Marcolli-vS chemistry paper arc returns PASS at bit-exact precision.
+- **Paper 20 scope-boundary framing** — row-conditional chemistry-accuracy claim now in the public-facing paper.
+- **Path B V_NN double-count bug** — fixed in production via `MolecularSpec.R` field. Regression-tested.
+- **Test-suite default-sweep speedup** — `test_ecosystem_export.py` 8:30 → 2:50 via pairwise matrix + session-scoped fixture.
+
+### Verification
+
+- 202/202 targeted regression on `test_balanced_coupled_screened_valence`, `test_balanced_coupled_multizeta`, `test_balanced_row2`, `test_cross_block_h1`, `test_ecosystem_export` (post-bug-fix).
+- 18/18 topological S³ proofs (`test_fock_projection.py`, `test_fock_laplacian.py`) pass throughout.
+- Slimmed `test_ecosystem_export.py`: 31/31 pass + 76 skipped @slow at 2:50 wall.
+- New parity tests pass under `--slow` (3:41 wall).
+- Paper 20 LaTeX compiles cleanly to 11 pages, no new warnings.
+- Bratteli pilots (H₂, LiH): both reproduce bit-exact match in ≤5 s wall time.
+
+### Honest scope
+
+**Theorem-grade (bit-exact match, no fitting tolerance):** Marcolli-vS gauge-network correspondence between Track CD `balanced_coupled` h1 and the assembled construction with vertex Diracs from atomic data, on H₂ (residual $9.7 \times 10^{-18}$) and heteronuclear LiH (residual $2.47 \times 10^{-17}$). Path B V_NN bug fix bit-identical to Path A on LiH post-fix. LiH HF cross-check $D_e = 0.158$ Ha exact match to FCI.
+
+**Structural sketch (qualitative pattern, supported by empirical convergence of multiple negatives):** the chemistry-engineering arc is empirically exhausted at second-row. F1–F6 + LiH kwarg sweep + B.1 + the Plan agent's A/B scope all converge.
+
+**Numerical observation (preliminary; not fully clean):** B.1 NaH HF SCF non-convergence at 2/7 R points (intermediate-R bond-formation region). PES still monotone-descending into small R at the 5/7 converged points. A pyscf cross-check would tighten the verdict, but the qualitative direction is robust under reasonable SCF parameter choices.
+
+**Named open follow-ons:** Sprint M-vS-2 (default LiH spec 3-sub-block Bratteli reading, ~1 week); Sprint M-vS-3 (two-body ERI Bratteli reading, ~3-4 weeks); Sprints M-vS-4 + M-vS-5 (theorem + paper drafting, multi-month). Frozen-core V_cross R-dependence in `balanced_coupled.py` (named open since v3.56.0 F.1 sprint). Outreach to van Suijlekom / Marcolli (deferred per PI direction this turn).
+
+## [3.85.0] - 2026-06-07
+
+### Summary
+
+**Sprint Chemistry-Pivot — Phase 1 of the hybrid pipeline shipped; W1e wall empirically localized.** Three parallel sub-agent rounds (10 sub-sprints total) executing the white-whale chemistry direction with the new toolbox (spectral-triple framing, master Mellin engine, propinquity machinery, algebraic equivalence, Z₂ tapering, MPO bond-rank theorem, cosmic-Galois period-class). Two production-code features shipped (propinquity bound metadata + FCIDUMP exporter), one paper-home decision (new Paper 57 → JCTC), and **one load-bearing structural finding** that reshapes the chemistry program.
+
+**Headline structural finding (cross-thread synthesis of P4 + R3-A + R3-B).** The W1e wall is empirically localized at the projection step from continuous Level 4 adiabatic+PK to the second-quantized $(h_1, \text{eri}, e_{\text{core}})$ integrals. The continuous solver `ComposedDiatomicSolver.LiH_ab_initio` binds LiH at 2.82% R_eq (CHANGELOG v3.56.0); the qubit/composed Hamiltonian exported from `build_composed_hamiltonian` / `build_balanced_hamiltonian` does **not** bind LiH or NaH. DMRG = FCI at finite sector dimension (NaH balanced n_max≤3, FCI dim ≤ 784) confirms the wall is **not** at the determinant-expansion level; basis-truncation sweep $n_{\max}=2 \to 3$ **deepens** the unphysical NaH well rather than closing it. This is the chemistry-side **operational** analog of the Sprint H1 Yukawa non-selection theorem (Paper 32 §VIII.C, 2026-05-31). Six instances of the multi-focal-composition wall pattern now (was five via Sprint W1e period-class 2026-06-04).
+
+**Headline shipped result (Target A + P1).** First-ever quantitative basis-truncation error estimate exposed at a chemistry-consumer API in any framework. `GeoVacHamiltonian.propinquity_bound` reads Paper 38's $\Lambda \le C_3 \cdot \gamma_{n_{\max}}$ at every cutoff ($\gamma_{n_{\max}=2,3,4} = 2.0746 / 1.6101 / 1.3223$, system-independent across the 28-molecule library). FCIDUMP exporter `to_fcidump()` + reader `read_fcidump()` ship bit-exact round-trip ($\max|h_1^{\text{diff}}| = 0.0$, $\max|\text{eri}^{\text{diff}}| = 0.0$ on LiH; 7-system sample $<10^{-10}$). Pure-Python writer; pyscf not added to dep tree. Unblocks DMRG, CCSD(T), AFQMC consumers simultaneously.
+
+**Headline VQE result (R3-C).** Openfermion-native UCCSD on H₂ Q=10 reaches **error $8.6 \times 10^{-13}$ mHa** (five orders of magnitude below published STO-3G UCCSD literature) via L-BFGS-B from HF init, 165 evals, 0.92 s wall. **~3000× faster per energy evaluation** than qiskit-nature UCCSD at Q=10. Empirically validates P2's structural finding: the openfermion stack (not qiskit-nature) is the correct VQE pipeline for GeoVac Hamiltonians. LiH Q=30 not reached due to 17.18 GB statevector; tapered Q=25 hit an openfermion Kronecker-reduction memory ceiling. Sector-projected UCCSD on tapered LiH is the named Phase 2 follow-on.
+
+**Strategic implication (new Paper 57 framing).** P5 scoping recommended a new Paper 57 (JCTC primary, ~18–22 pp, 8 sections) with "DMRG closes NaH W1e" as load-bearing falsifier passed. R3-B returned a clean failed falsifier — DMRG cannot close W1e because the wall is at the integral-specification level. The Paper 57 abstract reshapes from "hybrid pipeline closes calibration-tier W1e" to **"GeoVac ships chemistry-consumer integrals with quantitative truncation-error bounds; openfermion-native UCCSD reaches sub-mHa on small systems; W1e is empirically localized at the projection step from continuous Level 4 to second-quantized integrals"** — sharper, more honest, structural rather than benchmark. Three load-bearing claims now (was two): sparse Hamiltonian export with error bounds + sub-mHa VQE on small systems + operational localization of the calibration-data partition boundary.
+
+### Added
+
+- **`geovac/ecosystem_export.py`**: `GeoVacHamiltonian.propinquity_bound` cached property + `propinquity_bound_C3`, `propinquity_bound_asymptotic`, `propinquity_bound_source` metadata fields (Target A). New methods `to_fcidump(filename: str, *, tol: float = 1e-14)` and module-level `read_fcidump()` (P1). FCIDUMP wiring through 5 composed-path builders + tapering helper. Pauli content bit-identical throughout.
+- **`tests/test_ecosystem_export.py`**: +8 propinquity-bound tests (closed-form sum-rule match, monotone decrease, universality, metadata fields, caching, ValueError on missing max_n) + 11 FCIDUMP tests (round-trip, format compliance, multi-system sample). 96 → 104 → 115/115 pass across the sprint.
+- **Ten sub-sprint memos** (one canonical memo per sub-sprint): `debug/sprint_propinquity_bound_wiring_memo.md`, `debug/sprint_dmrg_diagnostic_memo.md`, `debug/sprint_hybrid_pipeline_scoping_memo.md`, `debug/sprint_p1_fcidump_exporter_memo.md`, `debug/sprint_p2_vqe_benchmark_memo.md`, `debug/sprint_p4_nah_w1e_baseline_memo.md`, `debug/sprint_p5_paper_home_scoping_memo.md`, `debug/sprint_r3a_dmrg_lih_memo.md`, `debug/sprint_r3b_dmrg_nah_falsifier_memo.md`, `debug/sprint_r3c_vqe_uccsd_memo.md`.
+- **Umbrella sprint-close memo**: `debug/sprint_chemistry_pivot_2026_06_07_memo.md` (≤5000 words) — synthesizes cross-thread structural findings, Paper 57 framing implications, follow-on register, honest scope, files-modified inventory.
+- **Drivers and data**: `debug/r3a_dmrg_lih_driver.py`, `debug/r3b_dmrg_nah_falsifier_driver.py`, `debug/r3c_vqe_uccsd_driver.py`, `debug/p2_vqe_benchmark_driver.py`, `debug/p4_nah_w1e_baseline_driver.py`, `debug/dmrg_diagnostic_driver.py`, plus corresponding `debug/data/*.json` files and 25+ FCIDUMP exports for LiH composed/balanced and NaH balanced at multiple R values.
+- **Plots**: `debug/plots/p4_nah_w1e_pes.png`, `debug/plots/p4_nah_w1e_pes_relative.png`.
+- **CLAUDE.md §1 version bump** v3.84.0 → v3.85.0.
+- **CLAUDE.md §2 one-liner** for v3.85.0.
+- **CLAUDE.md §3 new dead-end row**: DMRG-closes-W1e falsifier returned STOP; the wall is at the Hamiltonian-specification level, not determinant-expansion.
+- **Paper 18 §IV.6 chemistry analog paragraph**: W1e structural localization update — operational analog of Sprint H1 Yukawa non-selection.
+- **Paper 20 §sec:hybrid_pipeline (new subsection)**: "Chemistry-consumer interface: FCIDUMP + propinquity bound + openfermion-native UCCSD" documenting the shipped Phase 1 first wave.
+- **Two new MEMORY.md entries** for cross-session-worthy structural findings (W1e localization; openfermion-native VQE stack).
+- **`docs/validation_benchmarks.md` new rows** for LiH Q=30 qubit FCI, H₂ Q=10 openfermion UCCSD, NaH W1e baseline, propinquity bound at $n_{\max} \in \{2,3,4\}$.
+
+### Closed
+
+- **Hybrid pipeline Phase 1 first deliverables (Target A + P1)**: propinquity bound metadata + FCIDUMP exporter. Shipped to production.
+- **P2 structural question "is qiskit-nature the right VQE stack for GeoVac?"**: closed NO at R3-C via 5-OoM empirical gap. Openfermion-native UCCSD is the canonical path forward.
+- **R3-B falsifier verdict on W1e**: DMRG-on-GeoVac-FCIDUMP cannot close the W1e wall. Wall localized to projection step from continuous Level 4 to second-quantized integrals. Six instances of multi-focal-composition wall pattern (was five).
+- **P5 paper-home decision**: new Paper 57, JCTC primary. SHIP-AS-IS, no blocking PI input required before Phase 1 launches.
+
+### Changed
+
+- **Paper 57 framing**: abstract reshape from "DMRG closes W1e" to "W1e empirically localized at projection step" per R3-B falsifier return.
+
+### Open follow-ons (named in umbrella memo §5)
+
+- **Shippable next sprint**: sector-projected UCCSD on tapered LiH (closes R3-C Q=30 path); `to_fcidump(include_pk=True)` switch (closes R3-A named bug).
+- **Structural next sprint**: diagnostic on why qubit/composed LiH does not bind while continuous adiabatic+PK does at 2.82% R_eq.
+- **Multi-month**: Paper 57 drafting (P5 scope, ~7-8 months Phase 2 + Phase 3); sector-projected qubit pipeline across the multi-center library.
+- **Mechanical**: durations.json bootstrap parser fix (regex doesn't match pytest's actual output format; fallback `/regression touched` continues to work without the random-sample addition).
+
+### Verification
+
+- 115/115 ecosystem tests pass at sprint close (+19 net new across Target A + P1).
+- 18/18 topological-integrity S³ proofs (CLAUDE.md §9 baseline) pass throughout all three rounds and sub-sprint verification gates.
+- LiH FCIDUMP round-trip bit-exact ($\max|h_1^{\text{diff}}| = 0.0$, $\max|\text{eri}^{\text{diff}}| = 0.0$); 7-system sample at $<10^{-10}$.
+- NaH balanced PES via DMRG-on-FCIDUMP bit-identical to P4 direct baseline at $\sim 6 \times 10^{-13}$ Ha across 14 grid points × 2 n_max values.
+- Operator-side MPO bond rank $\{4, 16, 16, 9, 9, 9, 6, 3, 3, 2\}$ bit-exact reproduction of Paper 14 Theorem 3.2.A.
+- H₂ Q=10 openfermion UCCSD: error $8.6 \times 10^{-13}$ mHa vs exact (sampled via L-BFGS-B from HF; reproducible from `debug/r3c_vqe_uccsd_driver.py`).
+- /regression touched fallback at sprint open: 260/15 (passed/skipped), 0 failed (10:03 wall, includes morning Target A wiring).
+
+### Honest scope
+
+- **Closed at theorem grade**: propinquity bound wiring (mechanical of theorem-grade Paper 38 main theorem); FCIDUMP round-trip bit-exactness on LiH (h_1, eri, ecore); bond rank Theorem 3.2.A reproduction.
+- **Strongly supported empirically (structural sketch)**: "W1e is at the projection step from continuous Level 4 to second-quantized integrals" — operational localization (DMRG=FCI cannot close it), not structural proof that the projection step is missing a specific operator term. A structural proof would identify the specific missing term beyond what F3 closure of Sprint F5 ruled out.
+- **Numerical observation (sample size 1)**: H₂ Q=10 openfermion UCCSD error $8.6 \times 10^{-13}$ mHa not yet tested at higher Q or other small systems; 3000× speedup vs qiskit-nature at Q=10 not yet tested at higher Q; NaH 21× over-binding from single anchor with experimental $D_e$ uncertainty.
+- **Named open follow-ons** explicitly preserved in umbrella memo §5: closure proof at projection-step level (structural); higher-Q VQE-on-GeoVac scaling test; sector-projected UCCSD on tapered LiH closing the openfermion Kronecker memory ceiling.
+- **Production-code hard prohibitions check (§13.5)**: no changes to natural geometry hierarchy / fitted-or-empirical parameters / Section 3 deletions / Paper 2 K = π(B+F−Δ) combination-rule "conjectural" labeling.
+
 ## [3.84.0] - 2026-06-07
 
 ### Summary

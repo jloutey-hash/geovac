@@ -1,0 +1,127 @@
+========================================================================
+LiH kwarg sweep -- can existing kwargs reduce 2.4x over-binding?
+========================================================================
+Continuous reference:  D_e = +0.0671 Ha at R_eq = 3.015 bohr
+Gate window:  D_e in (-0.1000, -0.0500) Ha (+/- 50% of continuous reference)
+R panel: (2.5, 3.015, 3.5, 4.0, 5.0)
+# configs: 11
+
+=== baseline ===
+    kwargs: {}
+    R=2.500  E=-15.174163  t=13.1s
+    R=3.015  E=-15.209580  t=12.9s
+    R=3.500  E=-15.207482  t=13.0s
+    R=4.000  E=-15.175325  t=13.2s
+    R=5.000  E=-15.051738  t=13.1s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=65.3s
+
+=== multi_zeta ===
+    kwargs: {'multi_zeta_basis': True}
+    R=2.500  E=-15.174163  t=12.9s
+    R=3.015  E=-15.209580  t=12.9s
+    R=3.500  E=-15.207482  t=13.0s
+    R=4.000  E=-15.175325  t=13.0s
+    R=5.000  E=-15.051738  t=13.1s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=65.1s
+
+=== screened_valence ===
+    kwargs: {'screened_valence_basis': True}
+    R=2.500  E=-15.174163  t=13.1s
+    R=3.015  E=-15.209580  t=13.1s
+    R=3.500  E=-15.207482  t=13.1s
+    R=4.000  E=-15.175325  t=13.1s
+    R=5.000  E=-15.051738  t=13.1s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=65.5s
+
+=== screened_cross_center ===
+    kwargs: {'screened_cross_center': True}
+    R=2.500  E=-15.174163  t=13.1s
+    R=3.015  E=-15.209580  t=13.3s
+    R=3.500  E=-15.207482  t=13.1s
+    R=4.000  E=-15.175325  t=13.1s
+    R=5.000  E=-15.051738  t=13.0s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=65.5s
+
+=== pk_cross_center ===
+    kwargs: {'pk_cross_center': True}
+    R=2.500  E=-15.174163  t=13.0s
+    R=3.015  E=-15.209580  t=13.0s
+    R=3.500  E=-15.207482  t=13.0s
+    R=4.000  E=-15.175325  t=13.0s
+    R=5.000  E=-15.051738  t=12.9s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=64.9s
+
+=== cross_block_h1 ===
+    kwargs: {'cross_block_h1': True}
+    R=2.500  E=-17.154207  t=13.1s
+    R=3.015  E=-16.719748  t=13.3s
+    R=3.500  E=-16.506058  t=13.3s
+    R=4.000  E=-16.339700  t=13.2s
+    R=5.000  E=-16.048597  t=13.3s
+    -> R_min=2.500  E_min=-17.1542  D_e=-1.1056  verdict=STOP_NO_BOWL  wall=66.2s
+
+=== mz_plus_sv ===
+    kwargs: {'multi_zeta_basis': True, 'screened_valence_basis': True}
+    R=2.500  E=-15.174163  t=13.0s
+    R=3.015  E=-15.209580  t=13.1s
+    R=3.500  E=-15.207482  t=13.3s
+    R=4.000  E=-15.175325  t=13.2s
+    R=5.000  E=-15.051738  t=13.1s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=65.6s
+
+=== mz_plus_screen_cc ===
+    kwargs: {'multi_zeta_basis': True, 'screened_cross_center': True}
+    R=2.500  E=-15.174163  t=12.9s
+    R=3.015  E=-15.209580  t=12.9s
+    R=3.500  E=-15.207482  t=13.0s
+    R=4.000  E=-15.175325  t=13.0s
+    R=5.000  E=-15.051738  t=12.9s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=64.7s
+
+=== sv_plus_screen_cc ===
+    kwargs: {'screened_valence_basis': True, 'screened_cross_center': True}
+    R=2.500  E=-15.174163  t=13.0s
+    R=3.015  E=-15.209580  t=12.8s
+    R=3.500  E=-15.207482  t=13.0s
+    R=4.000  E=-15.175325  t=13.0s
+    R=5.000  E=-15.051738  t=12.9s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=64.7s
+
+=== cb_h1_plus_screen_cc ===
+    kwargs: {'cross_block_h1': True, 'screened_cross_center': True}
+    R=2.500  E=-17.154207  t=13.1s
+    R=3.015  E=-16.719748  t=13.1s
+    R=3.500  E=-16.506058  t=13.1s
+    R=4.000  E=-16.339700  t=13.1s
+    R=5.000  E=-16.048597  t=13.0s
+    -> R_min=2.500  E_min=-17.1542  D_e=-1.1056  verdict=STOP_NO_BOWL  wall=65.5s
+
+=== all_four ===
+    kwargs: {'multi_zeta_basis': True, 'screened_valence_basis': True, 'screened_cross_center': True, 'pk_cross_center': True}
+    R=2.500  E=-15.174163  t=13.0s
+    R=3.015  E=-15.209580  t=12.9s
+    R=3.500  E=-15.207482  t=13.0s
+    R=4.000  E=-15.175325  t=13.0s
+    R=5.000  E=-15.051738  t=13.1s
+    -> R_min=3.015  E_min=-15.2096  D_e=-0.1578  verdict=BORDERLINE_OVERBOUND  wall=65.0s
+
+========================================================================
+SUMMARY
+========================================================================
+label                       R_min       D_e  verdict
+------------------------------------------------------------------------
+baseline                    3.015   -0.1578  BORDERLINE_OVERBOUND
+multi_zeta                  3.015   -0.1578  BORDERLINE_OVERBOUND
+screened_valence            3.015   -0.1578  BORDERLINE_OVERBOUND
+screened_cross_center       3.015   -0.1578  BORDERLINE_OVERBOUND
+pk_cross_center             3.015   -0.1578  BORDERLINE_OVERBOUND
+cross_block_h1              2.500   -1.1056  STOP_NO_BOWL
+mz_plus_sv                  3.015   -0.1578  BORDERLINE_OVERBOUND
+mz_plus_screen_cc           3.015   -0.1578  BORDERLINE_OVERBOUND
+sv_plus_screen_cc           3.015   -0.1578  BORDERLINE_OVERBOUND
+cb_h1_plus_screen_cc        2.500   -1.1056  STOP_NO_BOWL
+all_four                    3.015   -0.1578  BORDERLINE_OVERBOUND
+
+Total wall time: 12.0 min
+
+Wrote C:\Users\jlout\Desktop\Project_Geometric\debug\data\lih_kwarg_sweep.json
