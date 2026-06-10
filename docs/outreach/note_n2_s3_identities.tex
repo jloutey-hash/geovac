@@ -1,0 +1,151 @@
+% Front-door note N2 (periods/motives audience) — Phase 2a of the
+% corpus accessibility plan. NOT SENT; sends are Phase 4, PI-gated.
+% Every identity below is symbolically proved and numerically
+% verified to >= 40 digits; provenance flagged inline.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{identity}{Identity}
+\newtheorem{question}{Question}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\title{Three exact identities from Dirac spectral zetas on the round
+$S^3$,\\ and a question about their motivic homes}
+\author{J.~Loutey\thanks{Independent researcher,
+\texttt{jloutey@gmail.com}. Developed in an AI-assisted workflow
+(implementation and drafting with Anthropic's Claude);\ each identity
+below is proved by elementary manipulations reproduced here in full
+and verified numerically to at least $40$ digits;\ errors are the
+author's. Full write-ups and verification scripts:\
+\texttt{https://github.com/jloutey-hash/geovac}.}}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\noindent Each identity is checkable in roughly ten minutes from the
+definitions given;\ the question at the end is the reason for
+writing.
+
+\paragraph{Setup.} The Dirac operator on the round unit $S^3$ has
+spectrum $\pm(n + \tfrac32)$, $n \ge 0$, with multiplicity
+$(n+1)(n+2)$ per sign. Write $m = n + \tfrac32$ and define the
+(absolute) spectral Dirichlet series and its parity sectors
+\begin{equation*}
+  D(s) = \sum_{n \ge 0} 2(n+1)(n+2)\, m^{-s}, \qquad
+  D_{\mathrm{even}}(s) = \!\!\sum_{n \ \mathrm{even}}\!\!(\cdots),
+  \qquad
+  D_{\mathrm{odd}}(s) = \!\!\sum_{n \ \mathrm{odd}}\!\!(\cdots).
+\end{equation*}
+Let $\zeta(s, a)$ be Hurwitz zeta, $\beta(s) = L(s, \chi_{-4}) =
+4^{-s}\bigl(\zeta(s, \tfrac14) - \zeta(s, \tfrac34)\bigr)$ Dirichlet
+beta, $G = \beta(2)$ Catalan's constant.
+
+\begin{identity}[parity sectors and a $\chi_{-4}$ bridge]
+Since $2(n+1)(n+2) = 2(m^2 - \tfrac14)$, the even-$n$ eigenvalues are
+$m = 2(2k + \tfrac34)$ and the odd-$n$ ones $m = 2(2k + \tfrac54)$,
+giving
+\begin{equation*}
+  D_{\mathrm{even}}(s) = 2^{-(s-3)}\zeta(s{-}2, \tfrac34)
+                       - 2^{-(s+1)}\zeta(s, \tfrac34), \qquad
+  D_{\mathrm{odd}}(s) = 2^{-(s-3)}\zeta(s{-}2, \tfrac54)
+                       - 2^{-(s+1)}\zeta(s, \tfrac54),
+\end{equation*}
+and, from $\zeta(s, \tfrac34) - \zeta(s, \tfrac54)
+= 4^s(1 - \beta(s))$ (shift recurrence plus the $\beta$ definition),
+\begin{equation*}
+  D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)
+  \;=\; 2^{s-1}\bigl(\beta(s) - \beta(s{-}2)\bigr)
+  \qquad (s > 3;\ \text{all } s \text{ by continuation}).
+\end{equation*}
+At $s = 4$:
+\begin{equation*}
+  D_{\mathrm{even}}(4) = \tfrac{\pi^2}{2} - \tfrac{\pi^4}{24}
+  - 4G + 4\beta(4), \qquad
+  D_{\mathrm{odd}}(4) = \tfrac{\pi^2}{2} - \tfrac{\pi^4}{24}
+  + 4G - 4\beta(4),
+\end{equation*}
+so the $\beta$-values cancel in the sum,
+$D(4) = \pi^2 - \pi^4/12$, and survive only in the parity
+difference, $D_{\mathrm{even}}(4) - D_{\mathrm{odd}}(4)
+= 8(\beta(4) - G)$.
+\end{identity}
+
+\begin{identity}[vanishing of the spectral zeta at non-positive
+integers]
+With full degeneracy, $\zeta_{D^2}(s) := \sum_{n} 2(n+1)(n+2)\,
+m^{-2s} = 2\zeta(2s{-}2, \tfrac32) - \tfrac12 \zeta(2s, \tfrac32)$
+satisfies
+\begin{equation*}
+  \zeta_{D^2}(-k) \;=\; 0 \qquad \text{for every integer } k \ge 0.
+\end{equation*}
+The mechanism is the Bernoulli identity $B_{2k+1}(\tfrac32) =
+(2k{+}1)/4^k$ (from $B_{2k+1}(\tfrac12) = 0$ and the shift formula),
+which forces exact pairwise cancellation between the two Hurwitz
+pieces at every non-positive integer. Consequence:\ the
+Chamseddine--Connes spectral action of $D$ on $S^3_R$ is
+\emph{exactly two-term} --- $\Lambda^3$- and $\Lambda^1$-terms only,
+all higher Seeley--DeWitt contributions vanish identically, the
+remainder is $O(e^{-\Lambda^2 R^2})$.
+\end{identity}
+
+\begin{identity}[all-orders closed form for the scalar heat trace]
+For the conformally shifted scalar Laplacian on unit $S^3$
+(eigenvalues $n^2$ on the shifted spectrum, integer Jacobi-$\vartheta_3$
+sum), the heat trace is
+\begin{equation*}
+  K_\Delta(t) \;=\; \frac{\sqrt{\pi}}{4}\,\frac{e^{t}}{t^{3/2}}
+  \;+\; O\!\bigl(e^{-\pi^2/t}\bigr),
+\end{equation*}
+i.e.\ \emph{every} Seeley--DeWitt coefficient is
+$a_k = 2\pi^2/k!$ in the standard normalization --- the full
+asymptotic series is $\pi^2 \cdot \Q[t]$, exactly summable.
+\end{identity}
+
+\paragraph{The pattern, and the question.} Across a sizable family
+of spectral invariants computed on this geometry, the transcendental
+content sorts into exactly two rings:
+\begin{itemize}
+\item \emph{untwisted} spectral sums (heat traces, spectral actions,
+full zeta values:\ Identities 2--3, and e.g.\
+$D(4) = \pi^2 - \pi^4/12$) land in the pure-Tate ring
+$\bigoplus_k \pi^{2k}\,\Q$ --- consistent with the
+Fathizadeh--Marcolli classification of Seeley--DeWitt coefficients
+as mixed-Tate periods, but in a strictly smaller sub-ring (no
+$\zeta(3)$, no MZVs);
+\item the \emph{parity-twisted} sector (Identity 1) lands in
+mixed-Tate periods of level $4$ ($\beta$-values, Catalan), i.e.\
+cyclotomic over $\Z[i, \tfrac12]$ in the sense of Deligne's
+classification at $N = 4$ and Glanois' bases --- and the
+even/odd \emph{difference} collapses onto the pure $\beta$-line,
+which reads like a Galois descent from level $4$ to level~$2$.
+\end{itemize}
+
+\begin{question}
+Is there a motivic-Galois statement that \emph{predicts} this
+sector-to-ring assignment --- untwisted sums to
+$\bigoplus_k \pi^{2k}\Q$, parity-twisted sums to level-$4$
+cyclotomic mixed Tate, with the parity difference realizing the
+descent --- rather than confirming it case by case? Concretely:\ is
+the ``parity acts as $\chi_{-4}$, difference $=$ descent''
+observation in Identity~1 an instance of a known functoriality in
+the cyclotomic mixed-Tate category, and if so, what else does that
+functoriality predict for spectral invariants on
+$S^3 = \mathrm{SU}(2)$?
+\end{question}
+
+\noindent\emph{Provenance:} Identity 1 is proved above (the three
+displayed reductions);\ Identity 2's Bernoulli mechanism and
+Identity 3's $\vartheta_3$ computation are short and reproduced in
+the full write-ups, with all three verified symbolically
+(\texttt{sympy}) and numerically to $\ge 40$ digits against direct
+spectral sums.
+
+\end{document}

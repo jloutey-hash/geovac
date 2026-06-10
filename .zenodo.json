@@ -1,8 +1,8 @@
 {
-  "title": "The Geometric Vacuum: Quantum Mechanics from Discrete Information Geometry (Papers 7, 11, 12, 13)",
+  "title": "GeoVac (The Geometric Vacuum): Structurally Sparse Qubit Hamiltonians and the Discrete Spectral Triple",
   "upload_type": "publication",
   "publication_type": "workingpaper",
-  "description": "Four papers establishing the natural geometry hierarchy for quantum mechanics from discrete graph topology. Paper 7 proves that the discrete graph Laplacian on S^3 is mathematically equivalent to the Schrodinger equation (18/18 symbolic proofs). Paper 11 extends the framework to diatomic molecules via prolate spheroidal coordinates (H2+ at 0.70% error). Paper 12 introduces algebraic two-electron integrals via the Neumann expansion (H2 at 92.4% D_e). Paper 13 implements the hyperspherical adiabatic method for two-electron atoms (He at 0.05% error) and demonstrates ab initio molecular spectroscopy from electron lattice to rovibrational lines.",
+  "description": "GeoVac is a spectral-graph-theory framework for computational quantum chemistry and mathematical physics. The discrete graph Laplacian on the three-sphere S^3 is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection (Paper 7, 18/18 symbolic proofs), and this equivalence is exploited to build structurally sparse qubit Hamiltonians whose angular-momentum (Gaunt) selection rules enforce block-diagonal electron-repulsion integrals. The result is O(Q^2.5) Pauli-term scaling, a 51x-1712x reduction versus Gaussian baselines across LiH, BeH2, and H2O (Paper 14), with a 38-molecule library exported to OpenFermion, Qiskit, and PennyLane (Paper 20). Classical validation benchmarks include He at 0.019% and H2 at 96.0% of the dissociation energy. Beyond quantum-computing applications, the framework's structure has been developed as a discrete almost-commutative spectral triple in the Marcolli-van Suijlekom gauge-network lineage: state-space Gromov-Hausdorff convergence of the Camporesi-Higuchi truncations is established unconditionally at explicit rate (4/pi) log(n)/n via a translation-seminorm metrization (Paper 38), a degeneracy theorem closes the natural route to a Lorentzian quantum metric on truncated Krein spectral triples (Paper 45; an earlier convergence claim is retracted, see docs/claims_register.md), and the framework's transcendental periods are classified as cyclotomic mixed-Tate at level 4 via a master Mellin engine (Papers 55-56). Developed with an AI-augmented agentic research workflow; all results validated against analytical solutions, NIST reference data, and a symbolic proof suite.",
   "creators": [
     {
       "name": "Loutey, Josh",
@@ -10,18 +10,31 @@
     }
   ],
   "keywords": [
-    "quantum mechanics",
+    "GeoVac",
+    "Geometric Vacuum",
     "spectral graph theory",
-    "hydrogen atom",
-    "helium atom",
-    "information geometry",
-    "discrete lattice",
-    "molecular physics",
-    "hyperspherical coordinates",
-    "prolate spheroidal coordinates",
+    "graph Laplacian",
+    "quantum chemistry",
+    "electronic structure",
+    "qubit Hamiltonian",
+    "quantum computing",
+    "quantum simulation",
+    "VQE",
+    "Pauli operator",
     "Fock projection",
-    "natural geometry",
-    "fiber bundle"
+    "hyperspherical harmonics",
+    "noncommutative geometry",
+    "spectral triple",
+    "almost-commutative geometry",
+    "Gromov-Hausdorff propinquity",
+    "Camporesi-Higuchi",
+    "Lorentzian spectral triple",
+    "Krein space",
+    "periods",
+    "mixed Tate motives",
+    "cosmic Galois",
+    "Marcolli-van Suijlekom",
+    "fine structure constant"
   ],
   "license": {
     "id": "CC-BY-4.0"
@@ -33,7 +46,7 @@
       "scheme": "url"
     }
   ],
-  "version": "1.1.0",
+  "version": "3.109.0",
   "language": "eng",
   "access_right": "open"
 }

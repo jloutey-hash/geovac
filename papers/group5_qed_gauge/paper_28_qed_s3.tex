@@ -437,18 +437,27 @@ where $\beta(s) = L(s, \chi_{-4})$ is the Dirichlet beta function.
 
 \begin{proof}
 Express $D_{\mathrm{even}}(s)$ and $D_{\mathrm{odd}}(s)$ via Hurwitz
-zeta at quarter-integer shifts:
-$D_{\mathrm{even}}(s) = 2^{-(s-2)} \zeta(s{-}2, 3/4)
-                       - 2^{-(s+2)} \zeta(s, 3/4)$
+zeta at quarter-integer shifts.  With $m = n + 3/2$ and full
+degeneracy $g_n = 2(n+1)(n+2) = 2(m^2 - 1/4)$, the even-$n$
+eigenvalues are $m = 2(2k + 3/4)$ and the odd-$n$ ones
+$m = 2(2k + 5/4)$, $k \ge 0$, so
+$D_{\mathrm{even}}(s) = 2^{-(s-3)} \zeta(s{-}2, 3/4)
+                       - 2^{-(s+1)} \zeta(s, 3/4)$
 and
-$D_{\mathrm{odd}}(s) = 2^{-(s-2)} \zeta(s{-}2, 5/4)
-                       - 2^{-(s+2)} \zeta(s, 5/4)$.
+$D_{\mathrm{odd}}(s) = 2^{-(s-3)} \zeta(s{-}2, 5/4)
+                       - 2^{-(s+1)} \zeta(s, 5/4)$.
 Two elementary Hurwitz identities:
 $\zeta(s, 5/4) = \zeta(s, 1/4) - 4^s$ (shift recurrence) and
 $\zeta(s, 3/4) - \zeta(s, 1/4) = -4^s \beta(s)$ (the Dirichlet
-beta definition).  Substituting both, the $\zeta(s, 1/4)$ pieces
-cancel in the difference $D_{\mathrm{even}} - D_{\mathrm{odd}}$ and the
-$4^s$ prefactors combine to yield~\eqref{eq:D_diff_closed}.
+beta definition).  Together,
+$\zeta(s, 3/4) - \zeta(s, 5/4) = 4^s(1 - \beta(s))$;\ substituting
+into the difference,
+$D_{\mathrm{even}} - D_{\mathrm{odd}}
+ = 2^{s-1}(1 - \beta(s{-}2)) - 2^{s-1}(1 - \beta(s))
+ = 2^{s-1}(\beta(s) - \beta(s{-}2))$,
+which is~\eqref{eq:D_diff_closed}.  The Hurwitz decompositions and
+the closed form are verified bit-exactly against direct spectral sums
+at $s \in \{4, 5, 6, 7\}$ to $40$ digits.
 \end{proof}
 
 \noindent\textbf{Verification:}
@@ -3198,7 +3207,7 @@ number $\mathrm{prop}(\mathcal{O}_{n_{\max}}) = 2$ at $n_{\max} \in
 \{2, 3, 4\}$, matching the value Connes \& van~Suijlekom prove for
 the Toeplitz operator system $C(S^1)^{(n)}$ on the circle (their
 Proposition~4.2: $\mathrm{prop} = 2$ independently of $n$); see
-Paper~32~\cite{paper32}, Proposition~\ref{prop:propagation_number}.
+Paper~32~\cite{paper32} (propagation-number proposition).
 The witness pair underlying the propagation-number computation is
 the same boundary mechanism as the pendant-edge theorem here: a
 ``raise-then-lower at the top shell escapes the truncation''
@@ -4331,6 +4340,13 @@ GeoVac Project.  Spectral $\chi_{-4}$ identification in
 $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s)$: closed-form derivation
 and verification (Sprint~3 Track~RH-J),
 \texttt{debug/spectral\_chi\_neg4\_memo.md}, April 2026.
+
+\bibitem{connes_vs2021}
+A.~Connes and W.~D.~van~Suijlekom,
+\newblock \emph{Spectral truncations in noncommutative geometry and
+operator systems},
+\newblock Comm.~Math.~Phys. \textbf{383} (2021), 2021--2067;
+arXiv:2004.14115.
 
 \bibitem{chamseddine_connes1997}
 A.~H.~Chamseddine and A.~Connes, ``The spectral action principle,''

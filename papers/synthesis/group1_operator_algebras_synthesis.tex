@@ -108,17 +108,18 @@ with $C_3 = 1$ and asymptotic constant $4/\pi$ (Paper~38).
 Third, the rate constant $4/\pi$ is universal across the class of
 simple compact Lie groups with bi-invariant metric, via a
 Plancherel-weight $\times$ Vandermonde-Jacobian cancellation in the
-dual-Coxeter normalisation (Paper~40).  Fourth, a $K^{+}$-restricted
-weak-form Lorentzian propinquity convergence theorem holds on
-truncated $\SU(2)\times\Uone_{t}$ Krein spectral triples (Paper~45) --
-to the author's knowledge the first such convergence result in the
-math.OA literature, closing a question deferred by Connes and van
-Suijlekom \cite{connes_vs2021}.  The convergence has since been
-strengthened in two directions:\ Paper~46 closes the strong-form
-Lorentzian propinquity convergence (without $K^{+}$ restriction) on
-the natural and enlarged operator-system substrates, and Paper~47
-closes the de-compactification limit $T \to \infty$ at the
-norm-resolvent / spectral level via a two-rate hybrid composite.  A
+dual-Coxeter normalisation (Paper~40).  Fourth, the natural route to a Lorentzian convergence theorem on
+truncated $\SU(2)\times\Uone_{t}$ Krein spectral triples ---
+compressing to the Krein-positive subspace --- is closed by a
+degeneracy theorem (Paper~45):\ the compression annihilates the
+spatial Dirac and the restricted Lipschitz seminorm vanishes
+identically.  An earlier convergence claim through this device,
+together with the strong-form and bridge extensions built on it
+(Papers~46, 48, 49), was retracted in June 2026;\ the question
+deferred by Connes and van Suijlekom \cite{connes_vs2021} remains
+open, now with a sharpened specification.  Paper~47's
+de-compactification limit $T \to \infty$ survives at the
+norm-resolvent / spectral level.  A
 master theorem (\S\ref{sec:closures_post_45}) subsumes Papers~38,~39,
 and~40 as special cases:\ for arbitrary $k \ge 1$ and arbitrary
 compact connected Lie groups $G_{1}, \ldots, G_{k}$, the k-fold
@@ -154,6 +155,21 @@ synthesis gathers the statements, sketches the load-bearing proofs,
 and exhibits the structural relationships between the papers; no
 new theorems are introduced.
 \end{abstract}
+
+\bigskip\noindent\textbf{Status note (June 2026).}  An adversarial
+verification pass retracted the Lorentzian convergence claims of this
+arc:\ the K$^{+}$-compression device underlying Papers~45--46 and the
+bridge constructions of Papers~48--49 is degenerate (the compressed
+Lipschitz seminorm vanishes identically;\ Paper~45's annihilation
+theorem).  Paper~38's Riemannian convergence theorem was briefly
+reduced to a conditional form with two named gaps;\ both gaps were
+closed (2026-06-10) by a translation-seminorm reframing, and the
+theorem now stands unconditionally in van~Suijlekom's state-space
+framework.  This synthesis is corrected at
+the highest-visibility points;\ where narrative detail below still
+reflects the pre-retraction state, the Status notes in Papers~38 and
+42--49 and the claims register
+(\texttt{docs/claims\_register.md}) are authoritative.
 
 % =====================================================================
 \section{Introduction}
@@ -233,12 +249,13 @@ with $\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
 $\Lprop(\cdot,\cdot) := \Lambda(\cdot|_{\Kplus},\cdot|_{\Kplus})$ is
 the propinquity of the standard metric spectral triple obtained from
 the Krein-positive subspace $\Kplus = \{|\psi\rangle : \JL|\psi\rangle
-= +|\psi\rangle\}$.  This is, to the author's knowledge, the first
-Lorentzian propinquity convergence theorem in the math.OA literature
-(Paper~45~\cite{paper45}, Theorem~5.1).  Connes and van~Suijlekom
-\cite{connes_vs2021} deferred this question three times to
-``elsewhere''; the present arc closes it at the K$^{+}$-weak-form
-level on truncated Krein spectral triples.
+= +|\psi\rangle\}$.  The corresponding convergence claim (formerly Theorem~5.1 of
+Paper~45) was retracted in June 2026:\ the quantity $\Lprop$ is
+degenerate --- the K$^{+}$ compression annihilates the spatial Dirac
+and the restricted Lipschitz seminorm vanishes identically
+(Paper~45's annihilation theorem~\cite{paper45}).  The question
+Connes and van~Suijlekom \cite{connes_vs2021} deferred to
+``elsewhere'' remains open, now with a sharpened specification.
 
 \paragraph{Position against the literature.}
 The arc sits in the lineage of Connes--van~Suijlekom 2021
@@ -256,9 +273,13 @@ farsi_latremoliere2024,farsi_latremoliere2025,
 leimbach_vs2024}.  All these earlier convergence results
 are strictly Riemannian (and almost all are on flat structures
 $S^{1}$, $\T^{d}$, $S^{2}$ Berezin--Toeplitz).  The Paper~38
-$\SU(2)$ result and the Paper~40 generalisation are the first
-non-abelian non-flat instances at quantitative rate; the Paper~45
-result is the first Lorentzian instance.  Mondino and S\"amann's
+$\SU(2)$ result and the Paper~40 generalisation are non-abelian
+non-flat instances at quantitative rate (unconditional as of
+June~2026, via the translation-seminorm metrization;\ scalar-sector
+convergence for compact groups is due to Gaudillot-Estrada and
+van~Suijlekom, arXiv:2310.14733);\ on the Lorentzian side the
+Paper~45 contribution is a degeneracy theorem, not a convergence
+instance.  Mondino and S\"amann's
 synthetic Lorentzian Gromov--Hausdorff program
 \cite{minguzzi_suhr2024,mondino_samann2025} is categorically
 distinct in object class (pre-length spaces with causal diamonds,
@@ -1011,38 +1032,43 @@ the Krein-positive subspace, on which the indefinite Krein product
 reduces to a positive-definite Hilbert inner product.
 \end{definition}
 
-\begin{theorem}[Paper~45, Theorem~5.1]
+\begin{theorem}[Paper~45, annihilation theorem]
 \label{thm:p45_main}
-For the truncated $\SU(2) \times \Uone_{T}$ Krein spectral triples
-$\Tcal^{L}_{\nmax,\Nt,T}$, with $\DL$ as in
-\eqref{eq:lorentzian_dirac} and $\Krein_{\nmax,\Nt} =
-\HGV^{\nmax} \otimes \C^{\Nt}$,
+The device of Definition~\ref{def:k_plus_prop} is degenerate.  For
+$\DL$ as in \eqref{eq:lorentzian_dirac}, Krein-self-adjointness of
+the anti-Hermitian spatial block forces
+$\{\JL, \DGV \otimes I\} = 0$, hence
+$P^{+}(\DGV \otimes I)P^{+} = 0$:\ the compression annihilates the
+spatial Dirac.  The surviving temporal block is momentum-diagonal and
+commutes with every momentum-diagonal temporal multiplier, so the
+restricted Lipschitz seminorm vanishes identically on the operator
+system and $\Lprop$ of \eqref{eq:k_plus_prop_def} is not a quantum
+Gromov--Hausdorff-type distance.  (Bit-exact:\ restricted-seminorm
+kernel $42/42$ and $275/275$ multipliers at
+$(\nmax, \Nt) = (2,3), (3,5)$;\ frozen falsifier in the repository
+test suite.)
+\end{theorem}
+
+An earlier revision of the arc claimed a convergence theorem through
+this device (formerly Theorem~5.1 of Paper~45);\ the claim was
+retracted in June 2026.  The rate expression
 \begin{equation}
-\Lprop(\Tcal^{L}_{\nmax,\Nt,T}, \Tcal^{L}_{\Manifold})
-\;\le\;
-C_{3}^{\mathrm{joint}} \cdot
-\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
-\;\longrightarrow\; 0
-\quad \text{as } (\nmax, \Nt) \to (\infty, \infty),
-\label{eq:p45_main}
-\end{equation}
-with $C_{3}^{\mathrm{joint}} \le 1$ asymptotically tight (inherited
-from Paper~38 L3 via the joint Lichnerowicz structural identity) and
-\begin{equation}
-\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
+C_{3}^{\mathrm{joint}} \cdot \gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
 \;=\;
-O\!\bigl(\log \nmax / \nmax \;+\; T / \Nt\bigr).
+O\!\bigl(\log \nmax / \nmax \;+\; T / \Nt\bigr)
 \label{eq:p45_rate}
 \end{equation}
-\end{theorem}
+survives as a well-defined closed form whose meaning is an
+unconditional \emph{spatial} statement (Paper~38), the
+temporal factor being a metrically invisible spectator.
 
 \subsection{Three structural simplifications}
 
-The proof of Theorem~\ref{thm:p45_main} transfers the Paper~38
-five-lemma chain to the joint $\SU(2) \times \Uone$ setting.  Three
-structural simplifications arise that are not visible in the
-Riemannian setting, and are recorded as substantive new content of
-the Paper~45 proof:
+The original transfer of the Paper~38 five-lemma chain to the
+joint $\SU(2) \times \Uone$ setting recorded three structural
+``simplifications.''  Under the degeneracy analysis each is
+reinterpreted:\ they are \emph{symptoms} of the temporal factor's
+metric invisibility, not conveniences:
 
 \paragraph{PURE\_TENSOR Berezin map.}  The joint Berezin map
 $B^{\mathrm{joint}} = B^{\SU(2)} \otimes B^{\Uone}$ factorises as a
@@ -1063,45 +1089,44 @@ because $\{\gamma^{0}, \DGV\} = 0$ on the chirality-doubled basis.
 because $\DGV$ is chirality-diagonal in the Peskin--Schroeder chiral
 basis.)  The temporal direction contributes nothing to the joint
 commutator, and $C_{3}^{\mathrm{joint}} = C_{3}^{\SU(2)}$ verbatim.
+Read correctly, \eqref{eq:vanishing_cross_term} is the
+\emph{diagnosis}:\ the momentum-diagonal temporal algebra is
+invisible to the Dirac commutator.
 
-\paragraph{$\Nt$-independent joint cb-norm.}
-By the Bo\.zejko--Fendler central-multiplier equality
-\cite{bozejko_fendler1991} on the amenable group product
-$\SU(2) \times \Uone$, the joint cb-norm of the central spectral
-Fej\'er multiplier is
-\begin{equation}
-\cbnorm{S_{K^{\mathrm{joint}}}}
-\;=\;
-\frac{2}{\nmax + 1},
-\label{eq:joint_cb_norm}
-\end{equation}
-\emph{independent} of $\Nt$.  This reflects the trivial
-central-multiplier structure of the compact abelian factor $\Uone$,
-and means that the $\Nt$-dependence in
+\paragraph{Corrected cb-norm convention.}  The smoothing map of
+the joint central spectral Fej\'er kernel is unital completely
+positive, with cb-norm exactly $1$;\ the quantity $2/(\nmax+1)$
+formerly quoted as the ``joint cb-norm'' is the maximum of the SU(2)
+Plancherel \emph{mass distribution}, a different invariant (the
+Bo\.zejko--Fendler appeal is withdrawn;\ the correct statement is
+elementary).  The $\Nt$-dependence of the rate
 \eqref{eq:p45_rate} lives entirely in the joint mass-concentration
-moment (the $T/\Nt$ Fej\'er-on-the-circle rate), not in the
-cb-norm height bound.
+moment (the $T/\Nt$ Fej\'er-on-the-circle rate).
 
 \paragraph{Riemannian-limit recovery at $\Nt = 1$ bit-exact.}
 At $\Nt = 1$, the joint Berezin reduces bit-identically to
 $B^{\SU(2)} \otimes B^{\Uone}_{1,T} = B^{\SU(2)}$, since the
 $\Nt = 1$ temporal Berezin map is the identity on the single Fourier
 mode.  Hence $\Lprop(\Tcal^{L}_{\nmax,1,T}, \Tcal^{L}_{\Manifold})$
-agrees with the Riemannian Paper~38 bound bit-exactly, providing the
-load-bearing falsifier check for the joint construction.
+agrees with the Riemannian Paper~38 bound bit-exactly.  Under the
+degeneracy analysis this recovery is an automatic formula identity
+(the panel quantity only ever contained the spatial rate formula),
+not an operator-level falsifier;\ the falsifier with teeth is the
+restricted-seminorm check of Theorem~\ref{thm:p45_main}.
 
 \subsection{Honest scope}
 
-Theorem~\ref{thm:p45_main} is, to the author's knowledge, the first
-published Lorentzian propinquity convergence theorem in the math.OA
-literature.  Several aspects of its scope require explicit comment.
+Theorem~\ref{thm:p45_main} closes the natural device;\ the
+Lorentzian convergence question itself remains open.  Several aspects
+of scope require explicit comment.
 
 \begin{itemize}\setlength\itemsep{0pt}
 \item[(Q1)] \textbf{Strong-form Lorentzian propinquity (Paper~45
 \S 1.4 G1).}
 The K$^{+}$-restriction reduces the indefinite Krein product to a
-Hilbert inner product on $\Kplus$ and lets the standard Latr\'emoli\`ere
-machinery apply verbatim.  Strong-form Lorentzian propinquity
+Hilbert inner product on $\Kplus$ --- but annihilates the spatial
+Dirac (Theorem~\ref{thm:p45_main}), so no quantum-metric machinery
+applies on the compression.  Strong-form Lorentzian propinquity
 (Latr\'emoli\`ere-style metric on Krein spectral triples in their own
 right, without K$^{+}$-restriction) requires an indefinite-inner-product
 analog of the operator-norm Lipschitz seminorm with appropriate
@@ -1444,6 +1469,11 @@ to fourteen.
 (Paper 48)}
 \label{sec:closures_paper48}
 
+\emph{Status (June 2026):\ the metric-level content of this
+subsection is descoped with the Paper~45 retraction;\ the bridge
+design survives as a conditional proposal.  See the Status notes in
+Papers~48--49 and \texttt{docs/claims\_register.md}.}
+
 Paper~48~\cite{paper48} constructs Krein-pointed proper quantum metric
 spaces $\mathbf{KreinMetaMet}_{\mathrm{pp}}$ as the natural Krein-lift
 of Latr\'emoli\`ere's recent pointed proper quantum metric space
@@ -1484,6 +1514,12 @@ Papers~38, 42, 43, 44, 45, 46, 47, 29, 32, 40.
 \subsection{OSLPLS and the strong-form bridge:\ twin paradox as
 quantum information (Paper 49)}
 \label{sec:closures_paper49}
+
+\emph{Status (June 2026):\ the $\Lambda$-inheritance and
+K$^{+}$-framed claims of this subsection are descoped with the
+Paper~45 retraction;\ the cocycle-deficit algebra and the OSLPLS
+category design survive.  See Paper~49's Status note and
+\texttt{docs/claims\_register.md}.}
 
 Paper~49~\cite{paper49} closes Paper~48~\S 8.1's open question Q1$'$
 by constructing an \emph{OSLPLS} (Operator-System Lorentzian

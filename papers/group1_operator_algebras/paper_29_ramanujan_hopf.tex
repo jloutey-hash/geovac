@@ -54,7 +54,12 @@ the $\mathbb{Z}_2$ $m_\ell\to-m_\ell$ block decomposition of the
 node-level Ihara--Bass matrix --- the only sub-action of the
 Paper~25~\cite{paper25} Hopf $U(1)$ that commutes with a real integer
 adjacency.  The analogous $22+24$ decomposition holds for the
-Dirac-$S^3$ Rule B $n_{\max}=3$ graph under $m_j\to-m_j$.
+Dirac-$S^3$ Rule B $n_{\max}=3$ graph under $m_j\to-m_j$; this magnetic
+reflection is a fixed-point-free (Kramers) graph automorphism, whereas
+its chirality companion $\chi\to-\chi$ is not a graph symmetry at all
+--- the two spinor-bundle chiralities differing in size by the discrete
+Dirac index $n_{\max}(n_{\max}+1)$, which explains the failure of
+relativistic $\mathbb{Z}_2$ tapering.
 (4)~\emph{Scope boundary}: Fock's Wick rotation $S^3\to H^3$ is
 mathematically clean~\cite{bander1966} but produces no natural discrete
 quotient $H^3/\Gamma$ from framework invariants; the Selberg-zeta
@@ -404,6 +409,48 @@ $M(s)$ to each reflection block in exact sympy rational arithmetic
 (Sprint~2 Track RH-E, \texttt{debug/hopf\_u1\_block\_test\_memo.md}).
 The product $\det(M_{\text{sym}})\cdot\det(M_{\text{antisym}})$ equals
 the full $\det(M)$ symbolically.
+
+\begin{observation}[Magnetic reflection is Kramers; chirality reflection is Dirac-index--obstructed]
+\label{obs:chirality_obstruction}
+The $m_j\to-m_j$ reflection of Observation~\ref{obs:12_22} is a
+\emph{fixed-point-free graph automorphism} of the Dirac-$S^3$ graph:
+its adjacency depends only on $|\Delta m_j|$, and half-integer $m_j$
+never vanishes, so every node is paired with a distinct partner --- the
+combinatorial signature of Kramers degeneracy.  Consequently the flat
+$\mathbb{Z}_2$ connections (spin structures, $H^1(G;\mathbb{F}_2)$)
+left invariant by this reflection form a large subspace of the cycle
+space (dimension $40$ of $79$ at $n_{\max}=3$).
+
+The companion \emph{chirality} reflection $\chi\to-\chi$ --- equivalently
+$\kappa\mapsto$ its opposite-sign partner at fixed $\ell$ --- is by
+contrast not a graph automorphism at all, indeed not even a node
+bijection.  At each orbital block $(n,\ell)$ the positive-chirality
+multiplet $\bigl(\kappa=-(\ell+1),\ j=\ell+\tfrac12\bigr)$ carries
+$2\ell+2$ states while the negative-chirality multiplet
+$\bigl(\kappa=+\ell,\ j=\ell-\tfrac12\bigr)$ carries $2\ell$ --- a
+mismatch of $+2$ in \emph{every} block, never cancelling.  The total
+chirality imbalance is
+\[
+  \#\{\chi=+1\}-\#\{\chi=-1\}
+  \;=\;\sum_{(n,\ell)} 2 \;=\; n_{\max}(n_{\max}+1),
+\]
+the discrete spectral asymmetry (Dirac index) of the
+Camporesi--Higuchi spinor bundle.  No permutation can swap sectors of
+unequal size, so the genuine-spin $\mathbb{Z}_2$ does not exist on the
+substrate, while the magnetic $m_j$ reflection thrives.
+\end{observation}
+
+Observation~\ref{obs:chirality_obstruction} was verified in exact
+$\mathbb{F}_2$ arithmetic
+(\texttt{tests/test\_spin\_structure\_obstruction.py},
+\texttt{debug/spin\_structure\_moduli\_memo.md}): the $m_j$ permutation
+is a fixed-point-free automorphism at $n_{\max}=2,3$, and the
+$(2\ell+2)$-vs-$2\ell$ block mismatch holds at $n_{\max}=2,3,4$ with
+total $n_{\max}(n_{\max}+1)$.  It supplies the substrate-level reason
+behind the negative relativistic-$\mathbb{Z}_2$ tapering results
+(\texttt{debug/sprint\_mj\_parity\_rotated\_memo.md}): a chirality
+sign-count cannot stabilize a Hamiltonian when the underlying
+reflection is not a graph symmetry to begin with.
 
 \subsection{Algebraicity of zeros}
 

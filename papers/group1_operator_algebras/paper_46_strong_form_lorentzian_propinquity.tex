@@ -149,7 +149,9 @@ We close the strong-form leg of the Lorentzian-extension arc for
 truncated Krein spectral triples by proving a Latr\'emoli\`ere
 quantum Gromov--Hausdorff propinquity convergence theorem on the
 \emph{full} Krein space, removing the $\Kplus$-restriction
-imposed in our companion paper~\cite{paper45}. We work on the same
+imposed in our companion paper~\cite{paper45} (descoped; see the Status note: the natural-substrate Lipschitz seminorm is
+degenerate and the bound is an evaluation of a closed-form rate
+formula, not a distance between quantum compact metric spaces). We work on the same
 compact-temporal Wick-rotated manifold $\Manifold$, with chirality-doubled
 Camporesi--Higuchi spinor space $\HGV^{\nmax}$ tensored with the
 $\Nt$-mode Fourier truncation of $L^{2}(\SoneT)$, BBB
@@ -191,7 +193,7 @@ which sharpens Paper~45 Lemma~4.3's vanishing-cross-term identity from
 ``the time-chirality cross term vanishes'' to ``the temporal commutator
 vanishes identically on the natural substrate''. As a byproduct we
 identify a finite-cutoff envelope refinement of Paper~45
-eq.~(C3\_joint\_bound) (Appendix~\ref{app:erratum}): the correct
+eq.~(C3\_joint\_bound) (Appendix~\ref{app:correction}): the correct
 supremum range for the per-harmonic Lichnerowicz constant is
 $N \le 2\nmax - 1$, the Avery--Wen--Avery achievable envelope on $\nmax$
 shells, rather than the stated $N \le \nmax$. The asymptotic statement
@@ -217,6 +219,42 @@ propinquity, Bizi--Brouder--Besnard indefinite signature,
 Camporesi--Higuchi Dirac, spectral truncation, operator-norm Lipschitz
 seminorm, temporal-Lipschitz-invisibility, Avery--Wen--Avery
 envelope.
+
+\subsection*{Status and scope (June 2026)}
+Three issues are established upstream of this paper: (i) the
+$\Kplus$-restricted compressed-Dirac Lipschitz seminorm underlying
+$\Lpropweak$ vanishes identically on the truncated operator system
+--- Krein-self-adjointness of the anti-Hermitian spatial part
+$i\,\DGV \otimes I$ forces $\{\JL, \DGV \otimes I\} = 0$, so the
+$\Kplus$ compression annihilates the spatial Dirac, and the
+momentum-diagonal temporal multipliers commute with $\partial_t$
+(verified bit-exact at $(\nmax, \Nt) \in \{(2,3), (3,5)\}$); (ii)
+the ``Latr\'emoli\`ere Thm~5.5 / Def.~3.4 / Def.~3.5'' references
+cited for the tunneling-pair bound do not exist in the cited source
+--- the device actually used is van~Suijlekom's state-space
+Gromov--Hausdorff framework; (iii) the constant $2/(\nmax + 1)$ is
+the maximum of the Plancherel mass distribution, not a cb-norm of
+any map used in the proofs (the smoothing map is unital completely
+positive, with cb-norm $1$).
+
+Consequently the main strong-form theorems of this paper
+(Theorem~\ref{thm:main} and its transports) are \emph{descoped
+pending repair}. The bit-exact equality
+$\Lprop = \Lambda^{\mathrm{P45}}$ presented as the ``free upgrade''
+(Remark~\ref{rem:free_upgrade}) reflects that both quantities are
+evaluations of the same closed-form rate formula $\Cthreeop \cdot
+\gammajoint$, and the natural-substrate seminorm $\Lop$ has kernel
+far exceeding the scalars (every multiplier $\mathbf{1} \otimes
+M^{\temp}$ is $\Lop$-invisible), so neither side is a quantum-metric
+distance between quantum compact metric spaces. The algebraic
+identities are unaffected:\ Lemma~\ref{lem:temporal_invisibility}
+(temporal-Lipschitz-invisibility) holds bit-exactly as algebra, now
+read as the \emph{diagnosis} of the degeneracy; and the
+enlarged-substrate construction of Appendix~\ref{app:enlarged} stands
+as algebra --- the chirality-flipping generators with $\{J, M\} = 0$
+are precisely where the commutators are non-zero, making the enlarged
+substrate the natural starting point for the repair. The Lorentzian
+quantum-metric convergence question is an open named research target.
 
 % =====================================================================
 \section{Introduction}\label{sec:intro}
@@ -306,7 +344,7 @@ $N \le 2\nmax - 1$ (the Avery--Wen--Avery achievable envelope on $\nmax$
 shells), not $N \le \nmax$ as stated in Paper~45 eq.~(C3\_joint\_bound);
 the corresponding closed-form constant is $\sqrt{1 - 1/\nmax}$. Both
 forms tend to $1^{-}$ asymptotically; the asymptotic statement is
-unchanged. See Appendix~\ref{app:erratum}.
+unchanged. See Appendix~\ref{app:correction}.
 \item[(F3)] \textbf{Free-upgrade reading} (Theorem~\ref{thm:main} and
 Remark~\ref{rem:free_upgrade}): the assembled multiplier
 $\Cfivejoint = \max(1, 1, \Cthreeop, 0) = 1$ (since $\Cthreeop \le 1$),
@@ -410,7 +448,7 @@ $\Cthreeop$), L4 (\S~\ref{sec:L4}, joint Berezin under $\Lop$), L5
 \S~\ref{sec:main} states and proves the main theorem.
 \S~\ref{sec:numerical} records the numerical panel and the bit-exact
 Riemannian-limit recovery. \S~\ref{sec:discussion} discusses the
-free-upgrade reading and the open questions. Appendix~\ref{app:erratum}
+free-upgrade reading and the open questions. Appendix~\ref{app:correction}
 records the envelope refinement of Paper~45 eq.~(C3\_joint\_bound).
 
 % =====================================================================
@@ -895,7 +933,7 @@ finite-cutoff under-statement on the natural substrate of the
 Lorentzian construction:\ Paper~45's $C_{3}^{(\nmax)}$ does not bound
 the per-harmonic ratio at $N \in (\nmax, 2\nmax - 1]$. Both forms
 agree asymptotically ($\to 1^{-}$); the corrected form is the present
-$\Cthreeop$. See Appendix~\ref{app:erratum} for the proposed refinement.
+$\Cthreeop$. See Appendix~\ref{app:correction} for the proposed refinement.
 \end{remark}
 
 \subsection{Lemma L4: joint Berezin reconstruction under $\Lop$}
@@ -1010,7 +1048,7 @@ seminorm-independence is the structural reason for the ``free upgrade''
 of \S~\ref{sec:discussion}.
 \end{remark}
 
-\begin{remark}[Envelope erratum scope on L4]\label{rem:L4_no_envelope}
+\begin{remark}[Envelope correction scope on L4]\label{rem:L4_no_envelope}
 Properties (a), (b), (c), (e) are \emph{support-bounded}, not
 envelope-bounded:\ they depend only on the SUPPORT of $\Bjoint(f)$ in
 operator space, which is the kept range $N \le \nmax$ by Plancherel
@@ -1426,7 +1464,7 @@ decisions are the author's responsibility.
 \appendix
 % =====================================================================
 \section{Envelope refinement of Paper~45 eq.~(C3\_joint\_bound)}
-\label{app:erratum}
+\label{app:correction}
 % =====================================================================
 
 We record the finite-cutoff envelope refinement of Paper~45 eq.~(C3\_joint\_bound)
@@ -1435,7 +1473,7 @@ of Paper~45 is unchanged; the refinement applies only to the explicit
 finite-$\nmax$ form of the per-harmonic Lichnerowicz constant on the
 natural Lorentzian substrate.
 
-\subsection{The Paper~45 statement and the refinement}\label{app:erratum_statement}
+\subsection{The Paper~45 statement and the refinement}\label{app:correction_statement}
 
 Paper~45 eq.~(C3\_joint\_bound) (in our notation):
 \begin{equation*}
@@ -1456,7 +1494,7 @@ Both forms tend to $1^{-}$ asymptotically; the refinement is a finite-cutoff
 correction.
 
 \subsection{Why Paper~45's range $N \le \nmax$ is non-binding on the
-natural substrate}\label{app:erratum_explanation}
+natural substrate}\label{app:correction_explanation}
 
 The Avery--Wen--Avery $\Delta n = \pm 1$ ladder on $\nmax$ shells
 produces shell-difference labels $N$ up to $2\nmax - 1$ (Paper~44
@@ -1492,12 +1530,12 @@ $\nmax$, Paper~45's stated $\sup_{N \le \nmax}$ under-states the bound
 required by the natural-substrate generators in the range
 $N \in (\nmax, 2\nmax - 1]$. The refined constant
 $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ is the
-correct supremum value at the envelope.}\label{tab:erratum}
+correct supremum value at the envelope.}\label{tab:correction}
 \end{table}
 
-\subsection{Proposed Paper~45 erratum text}\label{app:erratum_text}
+\subsection{Envelope refinement of Paper~45 eq.~(C3\_joint\_bound)}\label{app:correction_text}
 
-We record the following minor refinement (applied to Paper~45 v2 via
+We record the following minor refinement (applied to Paper~45 via
 Remark~\texttt{rem:envelope\_v2}). Paper~45 eq.~(C3\_joint\_bound)
 reads, after the refinement:
 \begin{equation*}
@@ -1519,7 +1557,7 @@ unchanged (they quote $\gammaSU$ directly, not
 $C_{3} \cdot \gammaSU$).
 
 \subsection{Why Paper~38 does NOT need the analogous refinement}
-\label{app:erratum_paper38}
+\label{app:correction_paper38}
 
 Paper~38~\cite{paper38} \S~L3 Remark states
 $C_{3}(\nmax) \le \sup_{N \le \nmax} \sqrt{(N - 1)/(N + 1)}

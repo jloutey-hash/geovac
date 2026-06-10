@@ -172,7 +172,7 @@ explicit, finite, and reproducible from existing GeoVac modules
 \texttt{geovac/fock\_graph\_hodge.py}); the lineage citations are to
 published mathematical work; the audit of the Connes axioms uses
 standard textbook definitions~\cite{connes1995,connes_marcolli2008,%
-suijlekom_book2015}.
+vansuijlekom_book2015}.
 
 \paragraph{What it is not.}  A derivation of $\alpha$.  Paper~2 stays
 where it is: a structural observation with three independent spectral
@@ -1780,11 +1780,11 @@ selected by (i) un-restricted vs vertex-restricted summation, and
 (ii) loop order $=$ motivic depth.  Specifically:
 \begin{itemize}
 \item Un-restricted Dirac Dirichlet $D(s)$ at integer $s \ge 2$
-      (Paper~28~\cite{loutey_paper28} Thm~2) lies in
+      (Paper~28~\cite{paper28} Thm~2) lies in
       $\mathcal{MT}(\mathbb{Z})$ at depth $1$;
 \item Vertex-restricted $D_{\mathrm{even}} - D_{\mathrm{odd}} =
       2^{s-1}(\beta(s) - \beta(s-2))$ at integer $s \ge 2$
-      (Paper~28~\cite{loutey_paper28} Thm~3) lies in
+      (Paper~28~\cite{paper28} Thm~3) lies in
       $\mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $4$, depth $1$, via
       Hurwitz at quarter-integer shifts;\ Catalan $G = \beta(2)$ and
       $\beta(4)$ are level-$4$ Dirichlet $L$-value periods in this
@@ -2158,7 +2158,7 @@ on the pro-system substrate of Remark~\ref{rem:q5p_prosystem_functoriality},
 where $V_{n_{\max}}$ is the $\mathbb{Q}$-vector space of primitive generators
 $x_{(n, l), k}$ indexed by $(n, l) \in \mathcal{S}_{n_{\max}}$ and Mellin slot
 $k \in \{0, 1, 2\}$ (with $k = 0, 1, 2$ corresponding to M1, M3, M2 of
-\S\ref{sec:case_exhaustion}, respectively). With primitive coproduct
+\S\ref{sec:pi_source_theorem}, respectively). With primitive coproduct
 $\Delta(x_g) = x_g \otimes 1 + 1 \otimes x_g$, counit $\varepsilon(x_g) = 0$,
 and antipode $S(x_g) = -x_g$ on generators (extended as algebra homomorphisms),
 $\mathcal{H}_{\mathrm{GV}}$ satisfies all five Hopf axioms bit-exactly at
@@ -3177,10 +3177,51 @@ $\Lambda(n_{\max}=4) / \Lambda(n_{\max}=2) = 0.637$.  Module
 tests passing, integrating with the L1${}'$--L4 modules verbatim.
 \end{proof}
 
+\begin{remark}[Status and named gaps (2026-06-09)]
+\label{rem:gh_status_caveat}
+Three gaps in the five-lemma proof chain behind
+Theorem~\ref{thm:gh_convergence} are named here.
+(i)~The L2 cb-norm statement conflated the kernel's Plancherel
+\emph{mass distribution} with its convolution-\emph{multiplier symbol}:
+the smoothing map is unital completely positive with cb-norm exactly
+$1$, and the quantity $2/(n_{\max}+1)$ is the mass-distribution maximum,
+not a cb-norm; the rate content (the mass-concentration moment
+$\gamma_{n_{\max}}$, its closed forms, and the $4/\pi$ asymptote) is
+unaffected.  (ii)~The $\mathrm{reach}_P$ dual estimate in L5 is a
+\emph{named gap}: a forward cb-norm controls no partial inverse; the
+correct mechanism is an antiderivative-transference lemma in the style
+of Leimbach--van~Suijlekom (Adv.~Math.\ \textbf{439} (2024) 109496);
+for scalar sectors on compact metric groups the conclusion is covered by
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_estrada_vs2025}.
+(iii)~The distance proved is van~Suijlekom's state-space
+Gromov--Hausdorff distance (arXiv:2005.08544 lineage); the
+Latr{\'e}moli{\`e}re propinquity label is an open named gap --- the
+cited Latr{\'e}moli{\`e}re framework builds tunnels from quantum
+isometries, not UCP pairs.
+(iv)~The kernel condition $L(a) = 0 \iff a \in \mathbb{C}\mathbf{1}$
+holds for the engineered offdiag Camporesi--Higuchi Dirac (kernel
+dimension $1/14$ at $n_{\max} = 2$, $1/55$ at $n_{\max} = 3$, verified)
+but \emph{fails} for the truthful chirality-diagonal CH Dirac
+($10/14$, $26/55$).  Items (ii)--(iv) are resolved (2026-06-10) by
+the translation-seminorm reframing of the companion $S^3$ paper:\ the
+truncated state space is metrized by the left-translation Lipschitz
+seminorm (equal to the Lipschitz constant on the continuum), whose
+kernel is exactly the scalars on the \emph{truthful} substrate
+(Schur multiplicity-one plus per-band injectivity of band-limited
+compression);\ the dual direction is supplied by an exact-fit spinor
+lifted state (the Fej\'er vector $h \otimes \chi$, lying in the
+window by the $V_j \otimes V_{j \pm 1/2}$ block decomposition of the
+Camporesi--Higuchi eigenspaces), and both almost-inverse defects are
+Fej\'er smoothings at the common moment $\gamma_{n_{\max}}$ --- no
+partial inverse or transference estimate remains.  The convergence
+theorem is unconditional in van~Suijlekom's state-space framework at
+rate $(4/\pi + o(1))\log n_{\max}/n_{\max}$.
+\end{remark}
+
 \begin{remark}[Limit identification]
 \label{rem:gh_limit_id}
-A companion proposition (Latr{\'e}moli{\`e}re-propinquity-completion +
-Kantorovich--Rubinstein duality) identifies the propinquity limit
+A companion proposition (Kantorovich--Rubinstein duality on the
+van~Suijlekom state-space distance) identifies the limit
 of $(\mathcal{T}_{n_{\max}}, d_{D_{n_{\max}}})$ with the
 Wasserstein--Kantorovich state space $(P(S^3), d_{\mathrm{Wass}})$
 against round-$S^3$ geodesic distance.  The argument is bookkeeping
@@ -3204,7 +3245,10 @@ $(N-1)/\sqrt{N^2-1} \nearrow 1$ giving the L3 constant $C_3 = 1$. The
 remaining open questions (Higgs-gap analysis on the four-way $S^3$
 coincidence; full real structure $J$ audit at finite $n_{\max}$, scoping
 memo \texttt{debug/real\_structure\_finite\_nmax\_memo.md}) are
-downstream of this theorem.
+downstream of this theorem.  The proof chain was corrected in June 2026
+(Remark~\ref{rem:gh_status_caveat}):\ the theorem stands
+unconditionally in van~Suijlekom's state-space framework under the
+translation-seminorm metrization.
 \end{remark}
 
 \begin{remark}[Pythagorean M1 closure of the L2-E residual]
@@ -3858,10 +3902,10 @@ At one-loop, the thermal mass squared takes the form
 \]
 where the outer Stefan--Boltzmann backbone $T^2 / 12$ comes from
 Sprint TD Track~1's $M_1 \times M_2$ factorisation
-(Paper~35~\S\ref{sec:tensor_product_verification}), and the inner
+(Paper~35, tensor-product verification section), and the inner
 $\mathrm{Tr}_{\mathrm{inner}}(Y_{\mathrm{diag}}^2)$ is a $k=2$
 Dirichlet sum in the Yukawa eigenvalues
-(Paper~18~\S~IV.6 and Theorem~\ref{thm:eta_trivialization}-style
+(Paper~18~\S~IV.6; $\eta$-trivialization-theorem-style
 filtering applies).  Any candidate $T_F$ whose squared Yukawa
 diagonal reproduces the empirical SM spectrum reproduces the
 SM-data-fit value $m_T^2(v, T_C) \approx (160~\mathrm{GeV})^2$;
@@ -3883,7 +3927,8 @@ Track~3 catalogue) are individual probes of distinct inner-factor
 structures (Yukawas, color algebra, generation count, charge
 assignment, Higgs sector), and the inner factor is required to
 deliver a specific value at each.  Three further candidates are
-\emph{forbidden} by Theorem~\ref{thm:eta_trivialization} on any
+\emph{forbidden} by the $\eta$-trivialization theorem
+(Paper~18~\S~IV.6) on any
 Krajewski-class even spectral triple --- a positive structural
 prediction:\ axial chemical potential thermodynamics, parity-odd
 transport, and finite-$T$ EDMs vanish identically on the inner
@@ -4097,7 +4142,7 @@ STOP-at-Step-1, mean-field Hartree insufficient);
 PARTIAL\_IMPROVEMENT, basis enlargement to max\_n=4);
 \texttt{debug/sprint\_beta\_update\_f4f6\_memo.md} ($\beta$-update
 F4-F6-APPENDED-TO-F3-BASELINE synthesis). Cross-references
-Paper~19 \S\ref{sec:w1e_refinement_f4_f6} (refined
+Paper~19 \S\texttt{sec:w1e\_refinement\_f4\_f6} (refined
 six-sub-layer hierarchy with three W1e sub-sub-mechanisms),
 Paper~17 \S6.10 (composed-architecture cross-reference, updated
 to $\beta$-update F4--F6 maturity), Paper~34
@@ -4138,8 +4183,8 @@ from physics-only to physics+chemistry.} \emph{Sources:}
 Day-1 STOP),
 \texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md}
 (core correlation DEFER). Cross-references Paper~19
-\S\ref{sec:w1e_schmidt_core_correlation} and Paper~34
-\S\ref{sec:conv_w1e_cross_domain_wall}.
+\S\texttt{sec:w1e\_schmidt\_core\_correlation} and Paper~34
+\S\texttt{sec:conv\_w1e\_cross\_domain\_wall}.
 
 % -------------------------------------------------------------------
 \subsection{Sprint G3:\ Electroweak chirality co-location on $S^3$}
@@ -6917,6 +6962,12 @@ W.~D.~van~Suijlekom,
 ``A generalization of $K$-theory to operator systems,''
 arXiv:2409.02773 (2024).
 
+\bibitem{gaudillot_estrada_vs2025}
+Y.~Gaudillot-Estrada and W.~D.~van~Suijlekom,
+``Convergence of spectral truncations for compact metric groups,''
+\textit{Int.~Math.~Res.~Not.\ (IMRN)}\ \textbf{2025} (2025), rnaf197;
+arXiv:2310.14733.
+
 \bibitem{latremoliere2026}
 F.~Latr\'emoli\`ere,
 ``Spectral continuity of almost commutative manifolds for the
@@ -7097,6 +7148,11 @@ cutoff} (Paper~42 of the GeoVac series, Zenodo, 2026).
 J.~Loutey, \emph{Lorentzian extension of the four-witness
 Wick-rotation theorem at finite cutoff} (Paper~43 of the GeoVac
 series, Zenodo, 2026).
+
+\bibitem{paper51}
+J.~Loutey, \emph{Gravity from the GeoVac spectral action:\ two-term
+exactness on $S^3$, black-hole entropy, and the cutoff-sector Mellin
+map} (Paper~51 of the GeoVac series, Zenodo, 2026).
 
 \bibitem{paper54}
 J.~Loutey, \emph{Two-body interactions from the tensor-product

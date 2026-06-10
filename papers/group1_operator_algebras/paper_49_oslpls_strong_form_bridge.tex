@@ -196,7 +196,11 @@ extends the Paper~48~\cite{paper48} K$^{+}$-weak-form bridge $\Wfun$ to
 the full $M\ne 0$ Paper~46~\cite{paper46} Appendix~B enlarged Krein
 substrate. The \emph{Bridge Theorem 6.4$^{\prime}$-Q1$^{\prime}$}
 (Theorem~\ref{thm:bridge_strong}) holds at strict-strong-form rigor on
-four properties:\ (B1$^{\prime}$) structural correspondence inherited
+four properties (descoped; see the Status note: the properties
+quantifying over the upstream Paper~45/46 metric quantity are open
+pending repair; the thermal-time-stack content is state-level and
+survives):\ (B1$^{\prime}$) structural
+correspondence inherited
 from the OSLPLS axiom transport (Theorem~\ref{thm:axiom_transport});\
 (B2$^{\prime}$) reverse triangle inequality with \emph{strict}
 super-additivity on three-orbit triples, established via the
@@ -234,7 +238,7 @@ $\Delta_{\max}S^{1\to 3}\le\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$,
 strictly when the three KMS states are pairwise distinct
 (Theorem~\ref{thm:strict_super_additivity}). The Umegaki relative
 entropy itself does not satisfy this chain inequality in general
-(see \S\ref{sec:honest_scope}); the max-divergence is the
+(see \S\ref{sec:honest_scope_intro}); the max-divergence is the
 chain-stable surrogate.
 
 \medskip
@@ -294,6 +298,45 @@ bridge of Paper~48 sits in $\Wflip$ as a structurally degenerate
 sub-case (Decomposition~O Case~(iii) empty); the strict-strong-form
 content of Paper~49 activates Case~(iii) non-trivially.
 \end{abstract}
+
+\subsection*{Status and scope (June 2026)}
+Three issues are established upstream of this paper: (i) the
+$\Kplus$-restricted compressed-Dirac Lipschitz seminorm underlying
+$\Lprop$ vanishes identically on the truncated operator system ---
+Krein-self-adjointness of the anti-Hermitian spatial part
+$i\,\DGV \otimes I$ forces $\{\JL, \DGV \otimes I\} = 0$, so the
+$\Kplus$ compression annihilates the spatial Dirac, and the
+momentum-diagonal temporal multipliers commute with $\partial_t$
+(verified bit-exact at $(\nmax, \Nt) \in \{(2,3), (3,5)\}$); (ii)
+the ``Latr\'emoli\`ere Thm~5.5 / Def.~3.4 / Def.~3.5'' references
+cited for the tunneling-pair bound do not exist in the cited source
+--- the device actually used is van~Suijlekom's state-space
+Gromov--Hausdorff framework; (iii) the constant $2/(\nmax + 1)$ is
+the maximum of the Plancherel mass distribution, not a cb-norm of
+any map used in the proofs (the smoothing map is unital completely
+positive, with cb-norm $1$).
+
+Consequently the bit-exact $\Lprop$ panel inheritance
+(\S~\ref{sec:lambda_panel}) and the K$^{+}$ framing inherited from
+Papers~45 and~48 carry the upstream descope: the transported values
+are evaluations of the same closed-form rate formula, not
+measurements of a quantum-metric distance. The bridge-theorem
+properties of Theorem~\ref{thm:bridge_strong} that quantify over
+that degenerate metric quantity --- in particular the convergence
+transport (B4$^{\prime}$) and the metric-ball reading of the
+pre-compactness property (B3$^{\prime}$) --- are \emph{descoped
+pending the upstream repair}. What survives unaffected: the cocycle
+entropy-production (max-divergence) deficit computations of
+\S~\ref{sec:uhlmann_panel} as state-level numerics (modular theory
+and the Datta chain inequality, not the Lipschitz seminorm); the
+TICI cocycle algebra (Theorem~\ref{thm:tici}) and the strict
+super-additivity theorem (Theorem~\ref{thm:strict_super_additivity})
+as statements about KMS states; and the OSLPLS categorical design.
+The enlarged substrate of chirality-flipping generators with $\{J,
+M\} = 0$ (Paper~46 Appendix~B) is where the Lipschitz seminorms are
+genuinely non-zero, making it the natural starting substrate for the
+repair. The Lorentzian quantum-metric convergence question is an
+open named research target.
 
 \tableofcontents
 
@@ -2060,6 +2103,10 @@ inputs from each module and computes the panel.
 \subsection{Lambda joint propinquity rate (B4$^{\prime}$ verification)}
 \label{sec:lambda_panel}
 
+\emph{[Descoped (see the Status note): the bit-exact agreement below is consistency
+of the same closed-form rate formula evaluated on both sides, not a
+measurement of a quantum-metric distance.]}
+
 \begin{table}[h]
 \centering
 \begin{tabular}{lcccc}
@@ -2464,7 +2511,7 @@ synthetic-extension sense:\ OSLPLS contains MS as a faithful
 sub-category rather than extending the MS \emph{concept} of pre-length
 space. The genuine non-commutative MS extension built from scratch
 (Option~$\delta$) remains the multi-month NCG-research frontier;
-abstract and \S\ref{sec:strict_strong_form_bridge} are aligned on
+abstract and \S\ref{sec:bridge_theorem} are aligned on
 this honest scope.
 
 The original Q2$^{\prime}$ formulation asked for a ``genuine

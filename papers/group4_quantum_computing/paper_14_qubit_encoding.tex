@@ -48,7 +48,12 @@ independent of molecular topology (exponent spread~$0.02$ across three
 molecules).  At equal qubit counts, this represents two or more
 orders of magnitude fewer Pauli terms than published Gaussian
 baselines~\cite{trenev2025}---an advantage that grows with system size
-due to the $\sim 1.5$ exponent gap.  Across all 30~molecules in the
+due to the $\sim 1.5$ exponent gap.  These comparisons are at matched
+qubit counts, not matched accuracy; the composed basis carries
+classical equilibrium-geometry errors of 5--26\% (LiH/BeH$_2$/H$_2$O;
+Sec.~\ref{sec:accuracy}), making the framework optimal for fixed-geometry
+quantum simulation rather than geometry optimisation.
+Across all 30~molecules in the
 library (He through C$_2$H$_6$, spanning $Z = 1$--36, including
 transition metal hydrides ScH and TiH), the composed
 Pauli count is exactly linear in the qubit count:

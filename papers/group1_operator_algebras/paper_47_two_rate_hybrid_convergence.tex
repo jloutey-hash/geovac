@@ -132,11 +132,14 @@ hybrid convergence
 \]
 along any admissible scaling $T(\Nt)\to\infty$ with $T(\Nt)/\Nt\to 0$.
 The inner arrow is propinquity convergence (Paper~45 main theorem
-verbatim, at coupled cells); the outer arrow is norm-resolvent
+verbatim, at coupled cells; descoped — the inner arrow and the
+\S~\ref{sec:g2_metric} G2-metric closure are open pending repair of
+the upstream Paper~45 seminorm; see the Status note); the outer arrow is norm-resolvent
 convergence of the Lorentzian Dirac on the compactified spacetime
 $\sthree\times\SoneT$ to the Lorentzian Dirac on the genuine spacetime
 $\sthree\times\R_{t}$, with an explicit exponential tail bound
-$O(e^{-|\mathrm{Im}\,z|\,T/2})$ on compact-temporal-support subspaces.
+$O(e^{-|\mathrm{Im}\,z|\,T/2})$ on compact-temporal-support subspaces,
+and is unaffected by the descope.
 The construction preserves the BBB~\cite{bizi_brouder_besnard2018}
 Krein fundamental symmetry, the Krein-positive cone $\Kplus$, and the
 Krein-self-adjointness of the Lorentzian Dirac across the entire
@@ -173,6 +176,37 @@ Reed--Simon~\cite{reed_simon_iv}\,\S~XIII.16 / Hekkelman--McDonald~2024
 \cite{hekkelman_mcdonald2024} compact-to-non-compact-domain machinery
 on the outer arrow.
 \end{abstract}
+
+\subsection*{Status and scope (June 2026)}
+Three issues are established upstream of this paper: (i) the
+$\Kplus$-restricted compressed-Dirac Lipschitz seminorm underlying
+$\Lprop$ vanishes identically on the truncated operator system ---
+Krein-self-adjointness of the anti-Hermitian spatial part
+$i\,\DGV \otimes I$ forces $\{\JL, \DGV \otimes I\} = 0$, so the
+$\Kplus$ compression annihilates the spatial Dirac, and the
+momentum-diagonal temporal multipliers commute with $\partial_t$
+(verified bit-exact at $(\nmax, \Nt) \in \{(2,3), (3,5)\}$); (ii)
+the ``Latr\'emoli\`ere Thm~5.5 / Def.~3.4 / Def.~3.5'' references
+cited for the tunneling-pair bound do not exist in the cited source
+--- the device actually used is van~Suijlekom's state-space
+Gromov--Hausdorff framework; (iii) the constant $2/(\nmax + 1)$ is
+the maximum of the Plancherel mass distribution, not a cb-norm of
+any map used in the proofs (the smoothing map is unital completely
+positive, with cb-norm $1$).
+
+Consequently the \emph{inner arrow} (Theorem~\ref{thm:inner},
+propinquity at coupled cells), which consumes Paper~45's $\Lprop$
+quantity, is descoped, and the G2-metric closure claims of
+\S~\ref{sec:g2_metric} and \S~\ref{sec:open}
+(Theorem~\ref{thm:g2_metric}, Q1, Q2) rest on the same degenerate
+metric quantity and are descoped. The \emph{outer arrow} ---
+norm-resolvent convergence of the Lorentzian Dirac with the
+exponential tail bound $O(e^{-|\mathrm{Im}\,z|\,T/2})$
+(Theorem~\ref{thm:outer}) --- is operator-level, makes no use of the
+Lipschitz seminorm, and is unaffected; in particular the
+three-carrier identification at the norm-resolvent level
+(Theorem~\ref{thm:three_carriers}) is unaffected. The Lorentzian
+quantum-metric convergence question is an open named research target.
 
 \tableofcontents
 
@@ -1208,6 +1242,14 @@ Lorentzian-NCG setting.
 \section{Propinquity-level closure via temporal-Lipschitz-invisibility}\label{sec:g2_metric}
 % =====================================================================
 
+\emph{[Descoped (see the Status note): the construction below
+quantifies over the degenerate natural-substrate seminorm (whose
+kernel far exceeds the scalars; the temporal-Lipschitz-invisibility
+identity of Lemma~\ref{lem:extent_zero} is the diagnosis of that
+degeneracy, not a feature). The section is retained as a record of
+the algebraic construction; its metric-level claims are open pending
+the upstream repair.]}
+
 The norm-resolvent outer arrow of Theorem~\ref{thm:main} can be
 upgraded to propinquity-level convergence on the non-compact carrier
 $\sthree \times \R_{t}$ by combining three ingredients: the
@@ -1372,19 +1414,19 @@ remains open (Q2 below).
 % =====================================================================
 
 The construction of \S\S~\ref{sec:inner}--\ref{sec:outer} closes G2
-at the norm-resolvent level; Theorem~\ref{thm:g2_metric} upgrades
-this to propinquity-level (hypertopology) convergence on the natural
-substrate. The following open questions remain:
+at the norm-resolvent level; the propinquity-level (hypertopology)
+upgrade of Theorem~\ref{thm:g2_metric} is descoped (see the Status
+note), and the following open questions remain:
 
 \begin{enumerate}
-\item[(Q1)] \emph{G2-metric: CLOSED on the natural substrate}
+\item[(Q1)] \emph{G2-metric: open (descoped 2026-06-09; see Status note).}
 (Theorem~\ref{thm:g2_metric}). The propinquity-level closure uses
 temporal-Lipschitz-invisibility (Paper~46 Lemma~3.2) to construct a
 zero-cost extent element, reducing the non-compact carrier to the
 compact one. The Paper~46 panel values are inherited bit-exactly.
 
-\item[(Q2)] \emph{Enlarged-substrate non-compact extension: CLOSED
-(flip-suppression).}
+\item[(Q2)] \emph{Enlarged-substrate non-compact extension: open
+(descoped 2026-06-09; see Status note).}
 The $\JL$-graded gradient norm of Paper~46 Appendix~B gives
 $G^{\mathrm{enlarged}}(f) = \norm{\nabla f^{\mathrm{block}}}_{\infty}
 + 2\opnorm{\partial_{t}} \cdot \norm{f^{\mathrm{flip}}}_{\infty}$.
@@ -1404,7 +1446,7 @@ obstruction.
 
 \item[(Q3)] \emph{Cross-manifold extension (G3): CLOSED as structural
 impossibility.} Paper~32~\cite{paper32}
-Theorem~\ref{thm:g3_closure}\footnote{Theorem~7.4 of Paper~32
+Theorem~7.4\footnote{Theorem \texttt{thm:g3\_closure} of Paper~32
 (\texttt{paper\_32\_spectral\_triple.tex}).}
 proves that the cross-manifold tensor product
 $\Tcal_{\sthree} \otimes \Tcal^{\mathrm{BL}}_{S^5}$ cannot preserve
@@ -1528,6 +1570,12 @@ A.~Strohmaier, ``On noncommutative and pseudo-Riemannian geometry,''
 \emph{J. Geom. Phys.} \textbf{56} (2006), 175--195.
 
 % --- Internal GeoVac preprints ---
+
+\bibitem[Loutey, internal Paper~23]{paper23}
+J.~Loutey, ``Nuclear shell model qubit Hamiltonians and the Fock
+projection rigidity theorem,'' GeoVac internal preprint Paper~23
+(2026), at
+\texttt{papers/group4\_quantum\_computing/paper\_23\_nuclear\_shell.tex}.
 
 \bibitem[Loutey, internal Paper~24]{paper24}
 J.~Loutey, ``The Bargmann--Segal lattice for the 3D harmonic oscillator

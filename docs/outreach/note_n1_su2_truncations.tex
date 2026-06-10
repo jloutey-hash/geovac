@@ -1,0 +1,221 @@
+% Front-door note N1 (math.OA audience) — Phase 2a of the corpus
+% accessibility plan. NOT SENT; sends are Phase 4, PI-gated.
+% Self-contained: no project-internal vocabulary.
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{question}{Question}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Op}{\mathcal{O}}
+\newcommand{\opnorm}[1]{\Vert #1 \Vert}
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+\newcommand{\DCH}{D}
+
+\title{Spectral truncations of the Dirac triple on $S^3$:\\
+a convergence theorem at explicit rate, a degeneracy obstruction\\
+for the obvious Lorentzian extension, and three questions}
+\author{J.~Loutey\thanks{Independent researcher,
+\texttt{jloutey@gmail.com}. This note summarizes two write-ups
+developed in an AI-assisted workflow (implementation and drafting
+with Anthropic's Claude;\ all claims and their verification status
+are stated below exactly as established, and all errors are the
+author's). Full papers, code, and bit-exact verification scripts:\
+\texttt{https://github.com/jloutey-hash/geovac}.}}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\noindent This is a three-page summary of two results on
+Connes--van~Suijlekom spectral truncations
+\cite{CvS2021}, written to ask three concrete questions of
+specialists. Verification status is flagged sentence by
+sentence;\ proofs are self-contained in the full write-ups, and
+anything verified only numerically is flagged as such.
+
+\section{Setting}
+
+Let $\mathcal{T}_{S^3} = (C^\infty(S^3), L^2(S^3, \Sigma), \DCH)$ be
+the spectral triple of the Dirac operator on the round unit
+$S^3 = \mathrm{SU}(2)$, with spectrum $\pm(n + \tfrac32)$,
+$n \ge 0$, and multiplicity $(n+1)(n+2)$ per sign. For a cutoff
+$\Lambda$, let $P_\Lambda$ be the spectral projection and
+$\Op_\Lambda = P_\Lambda C^\infty(S^3) P_\Lambda$ the truncated
+operator system \cite{CvS2021}. Van~Suijlekom \cite{vS2021} proved
+Gromov--Hausdorff convergence of the truncated state spaces
+$S(\Op_\Lambda) \to S(C(S^1))$ for the circle, and
+Gaudillot-Estrada--van~Suijlekom \cite{GEvS2023} extended state-space
+GH convergence to scalar truncations of all compact metric groups ---
+including $\mathrm{SU}(2)$. What the present work adds on the
+Riemannian side is therefore \emph{not} existence of convergence but:\
+the spinor-bundle (Dirac) substrate, an explicit closed-form rate
+moment, and the asymptotic rate constant. On the Lorentzian side it
+adds a negative structural theorem.
+
+\section{Construction and rate data}
+
+On $\mathrm{SU}(2)$, define the central spectral Fej\'er kernel
+\begin{equation}
+  K_n(g) \;=\; \frac{1}{Z_n}\Bigl|\sum_{j \le (n-1)/2}
+  \sqrt{2j+1}\,\chi_j(g)\Bigr|^2, \qquad Z_n = \tfrac{n(n+1)}{2},
+\end{equation}
+a positive, central, unit-mass kernel ($\chi_j$ = trace characters).
+Its smoothing map $f \mapsto K_n * f$ is unital completely positive
+(cb-norm $1$);\ its multiplier symbol is given by a Clebsch--Gordan
+sum with $\sigma(0) = 1$, $0 \le \sigma \le 1$, support
+$j' \le n - 1$. Its mass-concentration moment
+\begin{equation}
+  \gamma_n \;=\; \int_{\mathrm{SU}(2)} K_n(g)\,
+  d_{\mathrm{round}}(e, g)\,dg
+  \;=\; \pi - \frac{4 T_n}{\pi Z_n}, \qquad
+  T_n = \!\!\sum_{\substack{1 \le k_1, k_2 \le n \\ k_1 + k_2\
+  \mathrm{odd}}}\!\! \sqrt{k_1 k_2}\Bigl[\frac{1}{(k_1 - k_2)^2}
+  - \frac{1}{(k_1 + k_2)^2}\Bigr],
+\end{equation}
+satisfies $\gamma_n \sim \frac{4}{\pi}\,\frac{\log n}{n}$ --- the
+same constant $4/\pi$ as the classical Fej\'er--Stein--Weiss circle
+estimate, here arising as
+$\mathrm{Vol}(S^2)/\pi^2$ on the Hopf quotient
+$\mathrm{SU}(2)/U(1)$. A Lipschitz comparison
+$\opnorm{[\DCH, M_f]} \le C_3 \norm{\nabla f}_\infty$ holds with
+$C_3 = 1$ (per-harmonic constant $(N-1)/\sqrt{N^2-1}$), and the
+convolution-form Berezin map
+$B_n(f) = P_n M_{K_n * f} P_n$ is UCP, an approximate identity at
+rate $\gamma_n$, and Lipschitz-compatible.
+
+\section{Result A:\ unconditional convergence}
+
+\begin{theorem}
+The truncations of the chirality-doubled Dirac triple above converge
+to $\mathcal{T}_{S^3}$ in van~Suijlekom's state-space
+Gromov--Hausdorff distance, with the truncated state spaces metrized
+by the left-translation Lipschitz seminorm
+$L_n(T) = \sup_{g \ne e} \norm{U_g T U_g^* - T} / d(e, g)$ (equal to
+the metric Lipschitz constant on the continuum):
+$d_{\mathrm{GH}} \le \gamma_n = \tfrac{4 \log n}{\pi n} + O(1/n)$.
+\end{theorem}
+
+\noindent\emph{Proof shape} (self-contained in the full write-up).
+The kernel condition $L_n(T) = 0 \Leftrightarrow T \in \C 1$ holds on
+the truthful substrate:\ left translation preserves harmonic bands,
+band-limited compression is injective band-by-band (Schur
+multiplicity-one;\ the nonvanishing matrix element is the stretched
+$3$-$Y$ coefficient), and transitivity does the rest. The dual map
+evaluates conjugated operators against the Fej\'er vector state
+$\xi = (h \otimes \chi)/\sqrt{Z}$, which lies \emph{exactly} in the
+Dirac window:\ under $\mathrm{SU}(2)_L \times \mathrm{SU}(2)_R$ the
+spinor space is $\bigoplus_j V_j \otimes (V_{j+1/2} \oplus
+V_{j-1/2})$ and these summands are precisely the Dirac eigenspaces.
+Both almost-inverse defects collapse to Fej\'er smoothing — one on
+functions, one as the operator conjugation-average — at the common
+moment $\gamma_n$, so no partial-inverse or transference estimate
+appears anywhere. The truthful Dirac-\emph{commutator} seminorm, by
+contrast, degenerates at finite cutoff (kernel $10/14$ at $n = 2$,
+$26/55$ at $n = 3$, bit-exact) — it is the wrong finite-cutoff
+metrization, and this degeneracy is quantified in the write-up. The
+scalar $C(G)$ pattern is \cite{GEvS2023};\ the contribution here is
+the spinor-window transport, the per-band injectivity, the
+closed-form rate moment, and the $4/\pi$ constant.
+
+\section{Result B:\ a degeneracy theorem for the obvious Lorentzian
+extension}
+
+Take the compact-temporal product $S^3 \times S^1_T$ with Krein space
+$\mathcal{K} = \mathcal{H} \otimes \C^{N_t}$, fundamental symmetry
+$J = J_s \otimes I$, Lorentzian Dirac
+$D_L = i(\gamma^0 \otimes \partial_t + \DCH \otimes I)$
+(Krein-self-adjoint, van~den~Dungen's convention \cite{vdD2016}),
+and the natural operator system of spatial multipliers tensored with
+momentum-diagonal temporal multipliers. The obvious route to a
+``Lorentzian quantum metric'' is to compress to the Krein-positive
+eigenspace $\mathcal{K}^+$ of $J$ (where the Krein product is a
+Hilbert inner product) and run Riemannian machinery on
+$(P_+ \Op P_+,\, \mathcal{K}^+,\, P_+ D_L P_+)$.
+
+\begin{theorem}[unconditional]
+This route is structurally closed. Krein-self-adjointness of the
+anti-Hermitian spatial block forces
+$\{J, \DCH \otimes I\} = 0$, hence
+$P_+ (\DCH \otimes I) P_+ = 0$ exactly:\ the compression annihilates
+the spatial Dirac. The surviving temporal block is momentum-diagonal
+and commutes with every momentum-diagonal multiplier. Consequently
+the compressed-Dirac Lipschitz seminorm vanishes \emph{identically}
+on the operator system, and no quantum Gromov--Hausdorff-type
+distance is defined.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+$(iD_s)^\dagger = -iD_s$ with $D_s := \DCH \otimes I$, so
+$J D_L^\dagger J = D_L$ forces $J D_s J = -D_s$;\ then
+$P_+ D_s P_+ = \tfrac14(D_s + D_s J + J D_s + J D_s J) =
+\tfrac14(D_s + 0 - D_s) = 0$. The temporal commutators vanish since
+both factors are Fourier-diagonal. Verified bit-exactly at two panel
+cells (seminorm $= 0.0$ in \texttt{float64} on $42/42$ and $275/275$
+basis multipliers;\ a frozen regression test guards the statement).
+\end{proof}
+
+The failure analysis sharpens the open problem:\ any viable
+Lorentzian/Krein convergence construction needs (i) a temporal
+multiplier algebra the Dirac can see --- Toeplitz compressions of
+$e^{iqt}$ in the Connes--van~Suijlekom circle pattern, not
+momentum-diagonal functions, whose commutators with $\partial_t$
+vanish identically;\ (ii) a Krein-compatible Lipschitz seminorm that
+does not compress $D_L$ (candidates:\ seminorms built from $JD_L$ or
+$|D_L|$, or a genuinely indefinite Lipschitz analog);\ and (iii) a
+substrate on which $L(a) = 0 \Leftrightarrow a \in \C 1$ actually
+holds.
+
+\section{Three questions}
+
+\begin{question}
+Is the degeneracy theorem (Result B) known --- in any form --- in the
+Krein-spectral-triple or Lorentzian NCG literature? It is elementary
+once stated, which makes prior art likely;\ we could not locate it.
+\end{question}
+
+\begin{question}
+For Result A:\ is the finite-cutoff degeneracy of the
+Dirac-commutator seminorm — and its repair by the translation
+seminorm — known or recorded? And is the exact-fit spinor-window
+embedding of the Fej\'er vector state (via
+$V_j \otimes V_{j \pm 1/2}$) the construction you would have used,
+or is there a slicker route to the dual map on bundle-valued
+truncations?
+\end{question}
+
+\begin{question}
+Is the Lorentzian convergence problem, as specified by (i)--(iii)
+above, of interest to the quantum-metric community --- and is anyone
+already working on a temporal-Toeplitz version?
+\end{question}
+
+\begin{thebibliography}{9}
+\bibitem{CvS2021} A.~Connes, W.~D.~van~Suijlekom,
+\emph{Spectral truncations in noncommutative geometry and operator
+systems}, Comm. Math. Phys. \textbf{383} (2021) 2021--2067.
+\bibitem{vS2021} W.~D.~van~Suijlekom,
+\emph{Gromov--Hausdorff convergence of state spaces for spectral
+truncations}, J. Geom. Phys. \textbf{162} (2021) 104075.
+\bibitem{GEvS2023} Y.~Gaudillot-Estrada, W.~D.~van~Suijlekom,
+\emph{Convergence of spectral truncations for compact metric groups},
+arXiv:2310.14733.
+\bibitem{LvS2024} M.~Leimbach, W.~D.~van~Suijlekom,
+\emph{Gromov--Hausdorff convergence of spectral truncations of the
+torus}, Adv. Math. \textbf{439} (2024) 109496.
+\bibitem{vdD2016} K.~van~den~Dungen,
+\emph{Krein spectral triples and the fermionic action},
+Math. Phys. Anal. Geom. \textbf{19} (2016), Art.~4.
+\end{thebibliography}
+
+\end{document}

@@ -585,10 +585,16 @@ unit-mass under the normalised bi-invariant Haar measure $dg$ on $G$.
 
 The Plancherel weight $\sqrt{\dim V_\pi}$ in~\eqref{eq:K_def_general}
 generalises the SU(2) factor $\sqrt{2j+1}$ used in Paper~38. The
-choice is determined by the requirement that the central spectral
-Fej\'er kernel act as a positive Schur multiplier with cb-norm
-$\le 2/(\Lammax + 1)$ in the analog of the SU(2) bound; see
-Lemma~\ref{lem:L2}(c) below.
+choice equidistributes the kernel amplitude's $L^2$ (Plancherel) mass
+across the retained window in proportion to $\dim V_\pi$, matching
+Paper~38's SU(2) kernel; see Lemma~\ref{lem:L2}(b)--(c) below and
+Remark~\ref{rem:correction_L2}. Any normalised non-negative central
+kernel yields a unital completely positive smoothing map with
+cb-norm $1$; the Plancherel weight is chosen for mass-equidistribution,
+not for any cb-norm property. The
+weight does not affect the two properties the convergence proof
+consumes:\ positivity with unit mass (a), and the mass-concentration
+moment $\gamma_\Lammax(G)$ (d).
 
 \begin{lemma}[L2: kernel construction and universal rate]\label{lem:L2}
 The central spectral Fej\'er kernel $\KS_\Lammax$ of
@@ -596,15 +602,26 @@ Definition~\ref{def:central_fejer_general} satisfies:
 \begin{enumerate}\setlength{\itemsep}{2pt}
 \item[(a)] $\KS_\Lammax(g) \ge 0$ for all $g \in G$, and
 $\int_G \KS_\Lammax(g)\, dg = 1$.
-\item[(b)] (Plancherel symbol.) For each $\pi$ with
-$\Cas(\pi) \le \Lammax^2$, the Schur multiplier $T_{\KS_\Lammax}$ acts
-on the isotypic component of $\pi$ by
-$\Khat_\Lammax(\pi) = \dim V_\pi / Z_\Lammax$, and
-$\Khat_\Lammax(\pi) = 0$ for $\Cas(\pi) > \Lammax^2$.
-\item[(c)] (Cb-norm bound.)
-$\cbnorm{T_{\KS_\Lammax}} =
-\Vert \Khat_\Lammax \Vert_{\ell^\infty} \le 2 / (\Lammax + 1)
-\to 0$ as $\Lammax \to \infty$, in the dual-Coxeter normalisation.
+\item[(b)] (Plancherel mass distribution.) The fraction of the $L^2$
+(Plancherel) mass of the kernel amplitude
+$h_\Lammax := Z_\Lammax^{-1/2} \sum_{\Cas(\pi) \le \Lammax^2}
+\sqrt{\dim V_\pi}\, \chi_\pi$ carried by the shell $\pi$ is
+$\Khat_\Lammax(\pi) = \dim V_\pi / Z_\Lammax$ for
+$\Cas(\pi) \le \Lammax^2$, and $0$ otherwise. This is \emph{not} the
+convolution-multiplier symbol of $\KS_\Lammax$:\ the multiplier
+symbol $m_{\KS_\Lammax}(\pi) = (\dim V_\pi)^{-1} \int_G
+\KS_\Lammax\, \overline{\chi_\pi}\, dg$ equals $1$ at the trivial
+representation (forced by~(a)), is decreasing, and is supported on
+the doubled window reached by Clebsch--Gordan products of retained
+representations.
+\item[(c)] (Smoothing map is UCP.) The smoothing map
+$S_{\KS_\Lammax}: f \mapsto \KS_\Lammax * f$, and its compressed
+Berezin form (Definition~\ref{def:berezin_general}), are unital
+completely positive; hence $\cbnorm{S_{\KS_\Lammax}} = 1$ for every
+$\Lammax$. The quantity
+$\sup_\pi \Khat_\Lammax(\pi) \le 2/(\Lammax + 1) \to 0$ (dual-Coxeter
+normalisation) is the maximum of the Plancherel mass distribution of
+part~(b); it is not the cb-norm of any map used in the proofs.
 \item[(d)] (Mass-concentration moment.) Define
 \begin{equation}\label{eq:gamma_def_general}
    \gamma_\Lammax(G)
@@ -636,26 +653,34 @@ of distinct $\chi_\pi$ in the Peter--Weyl decomposition:\ explicitly,
    \;=\; 1.
 \end{equation*}
 
-\textbf{(b)} The Plancherel symbol identity follows from the
-Peter--Weyl convolution-multiplication isomorphism. For any
-class function $h \in C(G)$, the Schur multiplier $T_h$ acts on the
-isotypic component of $\pi$ by the scalar
-$\widehat h(\pi) = \int_G h(g) \chi_\pi(g)\, dg / \dim V_\pi$. For
-$h = \KS_\Lammax$, the squared-modulus expansion gives exactly
-$\Khat_\Lammax(\pi) = \dim V_\pi / Z_\Lammax$.
+\textbf{(b)} The mass-distribution identity is Parseval for the
+amplitude $h_\Lammax$:\ the shell-$\pi$ share of
+$\norm{h_\Lammax}_{L^2}^2 = 1$ is $\dim V_\pi / Z_\Lammax$ by
+character orthogonality. The multiplier symbol is a different
+object:\ for a class function $h$, convolution $f \mapsto h * f$ acts
+on the isotypic component of $\pi$ by the scalar
+$m_h(\pi) = (\dim V_\pi)^{-1} \int_G h\, \overline{\chi_\pi}\, dg$.
+Expanding the squared modulus in~\eqref{eq:K_def_general} through the
+Clebsch--Gordan series produces cross-terms, so
+$m_{\KS_\Lammax} \ne \Khat_\Lammax$:\ at the trivial representation
+$m_{\KS_\Lammax}(\mathbf 1) = \int_G \KS_\Lammax\, dg = 1$ by
+part~(a), and on SU(2) at $n_{\max} = 2$ the symbol is
+$(1, \sqrt2/3, 2/9)$ — decreasing, supported on $N \le 2n_{\max}-1$.
 
-\textbf{(c)} The cb-norm bound follows from the Bo{\.z}ejko--Fendler
-equality~\cite{bozejko_fendler1991} for cb-norms of central Schur
-multipliers on amenable compact groups:
-$\cbnorm{T_h} = \norm{\widehat h}_{\ell^\infty}$. From
-part~(b), $\norm{\Khat_\Lammax}_{\ell^\infty}$ is the maximum value
-of $\dim V_\pi / Z_\Lammax$ over retained $\pi$. By the Weyl
-dimension formula and the Casimir growth $\Cas(\pi) \sim
-|\lambda_\pi + \rho|^2$, this maximum is bounded by
-$2 / (\Lammax + 1)$ in the dual-Coxeter normalisation; the bound is
-achieved asymptotically by the trivial representation and the
-highest-Casimir retained representation, and is consistent with the
-SU(2) value $2 / (n_{\max} + 1)$ from~\cite[L2(c)]{paper38}.
+\textbf{(c)} $\KS_\Lammax \ge 0$ with $\int_G \KS_\Lammax\, dg = 1$
+makes $S_{\KS_\Lammax}$ a unital positive convolution map; complete
+positivity follows because convolution against a non-negative central
+probability density is a point-norm limit of convex combinations of
+(completely isometric) translations, and a unital completely positive
+map satisfies $\cbnorm{\varphi} = \norm{\varphi(1)} = 1$. No
+multiplier theorem is needed for this elementary fact; the
+Bo{\.z}ejko--Fendler multiplier theory~\cite{bozejko_fendler1991}
+cited in earlier statements concerns uniformly bounded representations of
+\emph{discrete} groups and does not apply here. The mass-distribution
+maximum $\sup_\pi \dim V_\pi / Z_\Lammax \le 2/(\Lammax + 1)$ follows
+from the Weyl dimension formula and the Casimir growth
+$\Cas(\pi) \sim |\lambda_\pi + \rho|^2$, consistent with the SU(2)
+value $2/(n_{\max} + 1)$; it plays no role in the tunnel bounds.
 
 \textbf{(d)} \emph{(Universal rate.)} The mass-concentration moment
 $\gamma_\Lammax(G)$ admits a closed-form sum-rule via the Weyl
@@ -682,6 +707,43 @@ applied to the Cartan-integration form of the sum-rule, yielding
 $\gamma_\Lammax(G) = (4/\pi) \cdot (\log \Lammax)/\Lammax +
 O(1/\Lammax)$ uniformly across $G$.
 \end{proof}
+
+\begin{remark}[Correction note (2026-06-09)]\label{rem:correction_L2}
+The Plancherel mass distribution $\dim V_\pi / Z_\Lammax$ is distinct
+from the convolution-multiplier symbol of $\KS_\Lammax$; the smoothing
+map is unital completely positive with cb-norm exactly $1$, and the
+mass-distribution maximum $2/(\Lammax+1)$ enters none of the tunnel
+bounds. The quantities the convergence proof actually consumes ---
+positivity and unit mass (a), the mass-concentration moment
+$\gamma_\Lammax(G)$ (d), its closed-form sum-rule, and the universal
+$4/\pi$ asymptote (Theorem~\ref{thm:universal_constant_analytical}) ---
+are kernel moments, independent of the symbol distinction, and are
+\emph{unaffected}. Two consequences are flagged in place:\ (i) the
+dual-reach estimate $\mathrm{reach}_P$ in Lemma~\ref{lem:L5} is
+reduced to a named gap --- a forward cb-norm controls no partial
+inverse; a corrected proof requires an antiderivative-transference
+lemma in the style of Leimbach--van~Suijlekom~\cite{leimbach_vs2024},
+while for the scalar sector the conclusion is corroborated at the
+state-space Gromov--Hausdorff level for all compact metric groups by
+Gaudillot-Estrada and van~Suijlekom~\cite{gaudillot_estrada_vs2025};
+(ii) the tunneling-pair vocabulary of \S\ref{sec:L5} follows
+Paper~38~\cite{paper38}; the device actually used is
+van~Suijlekom's state-space Gromov--Hausdorff framework.
+
+\emph{Update (2026-06-10).} For $G = \SU(2)$ the gap is closed:\
+Paper~38~\cite{paper38} now proves its theorem unconditionally by
+metrizing the truncations with the left-translation Lipschitz
+seminorm and supplying the dual direction through an exact-fit spinor
+lifted state (the Camporesi--Higuchi shells coincide with the
+$V_j \otimes V_{j \pm 1/2}$ window blocks), with both almost-inverse
+defects reducing to Fej\'er smoothings at the moment
+$\gamma_{\Lammax}$ --- no inverse estimate is used. The same
+translation-seminorm route is the natural repair path for general
+$G$ (the lifted-state construction requires the spin-module window
+decomposition of the relevant Dirac shell structure per group);\ the
+general-$G$ statement remains a named gap until that decomposition
+is checked case-by-case or uniformly.
+\end{remark}
 
 \begin{theorem}[Analytical universality via Plancherel $\times$ Vandermonde
 cancellation]\label{thm:universal_constant_analytical}
@@ -1475,13 +1537,13 @@ For $\Lammax > 0$ and $f \in C^\infty(G)$, define
 where $\KS_\Lammax$ is the central spectral Fej\'er kernel of
 Definition~\ref{def:central_fejer_general} and the convolution is taken
 with respect to the normalised bi-invariant Haar measure on $G$.
-Equivalently, in the Peter--Weyl basis,
-\begin{equation}\label{eq:B_def_peter_weyl}
-   B_\Lammax(f) \;=\; \sum_{\pi:\, \Cas(\pi) \le \Lammax^2}
-   \Khat_\Lammax(\pi)\, \widehat f(\pi)\, M_{V_\pi},
-\end{equation}
-with Plancherel weight $\Khat_\Lammax(\pi) = \dim V_\pi / Z_\Lammax$
-from Lemma~\ref{lem:L2}(b).
+The convolution form is the definition; its Peter--Weyl expansion
+carries the multiplier-symbol weights $m_{\KS_\Lammax}(\pi)$ of
+Lemma~\ref{lem:L2}(b), supported on the doubled Clebsch--Gordan
+window — \emph{not} the mass-distribution weights
+$\dim V_\pi / Z_\Lammax$ (Remark~\ref{rem:correction_L2}; the two
+forms disagree already at $f = 1$). All four properties of
+Lemma~\ref{lem:L4} below are proved from the convolution form.
 \end{definition}
 
 \begin{lemma}[L4: properties of the Berezin reconstruction]\label{lem:L4}
@@ -1601,9 +1663,14 @@ $\mathrm{reach}_B \le \gamma_\Lammax(G) \cdot \norm{\nabla f}_{L^\infty}
 \le \gamma_\Lammax(G)$ on the unit Lipschitz ball $\{\Lipnorm{f} \le 1\}$,
 where we have used Lemma~\ref{lem:L3} to convert
 $\norm{\nabla f}_{L^\infty} \le \Lipnorm{f}$ with constant $C_3(G) \le 1$.
-The dual reach satisfies the symmetric estimate
-$\mathrm{reach}_P \le \gamma_\Lammax(G)$ via the cb-norm bound of
-Lemma~\ref{lem:L2}(c) on the central subalgebra.
+The dual-reach estimate $\mathrm{reach}_P \le \gamma_\Lammax(G)$ is a
+\emph{named gap} (Remark~\ref{rem:correction_L2}):\ the smoothing map
+has cb-norm $1$, and a forward cb-norm controls no partial
+inverse. A corrected proof requires an antiderivative-transference
+lemma in the style of Leimbach--van~Suijlekom~\cite{leimbach_vs2024};
+for the scalar sector the conclusion is corroborated at the
+state-space Gromov--Hausdorff level for all compact metric groups
+by~\cite{gaudillot_estrada_vs2025}.
 
 \emph{Height.} The relevant height for the spectral-triple propinquity
 \cite{latremoliere_metric_st_2017} measures the Lipschitz-distortion of
@@ -1629,7 +1696,9 @@ Combining into~\eqref{eq:propinquity_def_general}:
    \;=\; \gamma_\Lammax(G)
    \;\le\; C_3(G)\cdot \gamma_\Lammax(G),
 \end{equation*}
-which is~\eqref{eq:L5_bound_general}, using $C_3(G) \le 1$.
+which is~\eqref{eq:L5_bound_general}, using $C_3(G) \le 1$. The
+combination is stated modulo the $\mathrm{reach}_P$ named gap of
+Remark~\ref{rem:correction_L2}; all other constituents are proved above.
 \end{proof}
 
 % =====================================================================

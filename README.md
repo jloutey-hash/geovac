@@ -1,8 +1,8 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Production-brightgreen) ![Version](https://img.shields.io/badge/Version-3.103.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-3.109.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20482394-blue)](https://doi.org/10.5281/zenodo.20482394)
 
-GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians with **O(Q^2.5) Pauli term scaling** — a **51x to 1,712x advantage** over published Gaussian baselines across LiH, BeH₂, and H₂O (Paper 14).
+GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians with **O(Q^2.5) Pauli term scaling** — a **51x to 1,712x advantage** over published Gaussian baselines across LiH, BeH₂, and H₂O (Paper 14). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
 ```python
 from geovac.ecosystem_export import hamiltonian
@@ -33,7 +33,7 @@ Install the standalone Hamiltonian package: `pip install geovac-hamiltonians`
 
 ## Why This Matters for Quantum Computing
 
-The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count. The sparsity is compatible with all downstream optimizations (tapering, grouping, tensor factorization). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
+The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE/NISQ) and fault-tolerant (QPE) quantum simulation respectively. GeoVac's basis-intrinsic sparsity — from Gaunt selection rules, not post-hoc optimization — produces qubit Hamiltonians that are structurally cheaper to simulate than Gaussian-basis alternatives at the same qubit count (cheaper per qubit, not more accurate per qubit — see *Scope and Limitations*). The sparsity is compatible with all downstream optimizations (tapering, grouping, tensor factorization). See Paper 14 for the encoding theory and Paper 20 for resource benchmarks.
 
 **Universal vs Coulomb-specific (Paper 22):** The angular sparsity guarantees are universal across spherical fermion systems — they hold for Coulomb, harmonic oscillator, Woods-Saxon, and any other radial potential, depending only on l_max. ERI density at l_max=3 is verified at 1.44% regardless of V(r). The S³ conformal projection and Hopf bundle structure are Coulomb-specific (by the Fock rigidity theorem, Paper 23). The sparsity extends to nuclear shell model Hamiltonians (Paper 23: deuteron 16 qubits / 592 Pauli, He-4 16 qubits / 712 Pauli); the conformal machinery does not.
 
@@ -45,14 +45,20 @@ The Pauli term count and 1-norm are the dominant cost factors for near-term (VQE
 
 Beyond the quantum-computing applications above, the framework's mathematical structure has been worked out as a discrete almost-commutative spectral triple in the Marcolli–van Suijlekom gauge-network lineage (with the Perez-Sanchez 2024/2025 correction). The math.OA-facing arc consists of fourteen standalone papers in `papers/group1_operator_algebras/`:
 
-- **Paper 38** SU(2)-propinquity convergence (WH1 PROVEN, May 2026) — GeoVac IS an almost-commutative spectral triple
-- **Papers 45/46** First Lorentzian propinquity convergence theorem in math.OA literature (K⁺-weak-form + strong-form)
-- **Papers 48/49** Krein–Mondino–Sämann bridge — twin paradox as quantum-information statement
+- **Paper 38** State-space Gromov–Hausdorff convergence of truncated Dirac triples on SU(2), explicit 4/π rate — **unconditional** (2026-06-10: translation-seminorm metrization; kernel condition proved on the truthful substrate; dual direction via an exact-fit spinor lifted state)
+- **Paper 45** Degeneracy theorem: the natural K⁺-compression route to a "Lorentzian propinquity" annihilates the spatial Dirac — the seminorm vanishes identically (bit-exact falsifier frozen in `tests/`). An earlier convergence claim through this device is **retracted** (2026-06-09; see the paper's History remark)
+- **Papers 46–49** Lorentzian metric-level claims built on the retracted quantity carry Status notes; the norm-resolvent arrow (Paper 47) and the cocycle-deficit algebra (Paper 49) survive as stated
 - **Paper 50** Bit-exact F-theorem match on S³ + S⁵ (Klebanov–Pufu–Safdi)
-- **Paper 56** Cosmic-Galois U* = 𝔾_a^(3N) ⋊ SL_2 identification (2,611 → 5,864 bit-exact zero residuals)
-- **Paper 55** Periods of GeoVac sit in cyclotomic mixed-Tate at level 4
+- **Paper 56** Tannakian reconstruction closed at finite cutoff (5,864 bit-exact zero residuals); infinite-cutoff motivic-Galois identification open
+- **Paper 55** Periods of the framework's Mellin sectors sit in pure-Tate / level-4 cyclotomic mixed-Tate rings
 
 The "C-arc closure" sprints of June 2026 placed eight theorem-grade non-selection results (Paper 32 §VIII) — formal characterizations of where the structural skeleton ends and calibration data begins. Reader's on-ramp: `papers/synthesis/geovac_field_guide.tex`.
+
+### Claims and verification status
+
+**No result in this repository is externally peer-reviewed.** Every headline claim, its verification tier (symbolic proof / measured / panel-verified / internal theorem / conditional / observation / retracted), and its falsifier is catalogued in **[`docs/claims_register.md`](docs/claims_register.md)** — start there before citing anything. Project-internal vocabulary is mapped to standard terminology in [`docs/vocabulary_translation.md`](docs/vocabulary_translation.md). Two self-contained front-door notes for external readers: [`docs/outreach/`](docs/outreach/) (a 3-page math.OA summary and a 2-page periods note with ten-minute-checkable identities).
+
+**Reading paths.** Quantum computing / chemistry: Papers 14 → 22 → 20, then `Quick Start` below. Operator algebras / NCG: `docs/outreach/note_n1_su2_truncations.pdf` → Papers 38 → 45 → 32. Periods / number theory: `docs/outreach/note_n2_s3_identities.pdf` → Papers 28 → 55. Project identity and honest scope: the field guide, then `docs/claims_register.md`.
 
 ---
 
@@ -196,11 +202,11 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **32** | **Spectral Triple** | **Explicit construction; eight theorem-grade non-selection results in §VIII** |
 | 33, 36 | QED selection rules / Bound-state QED | 1+6+1 partition; Lamb shift at −0.534% one-loop |
 | 34, 35 | Projection taxonomy / Time as projection | Two-layer framework; 28 projections × three-axis tagging |
-| **38** | **SU(2) Propinquity Convergence** | **WH1 PROVEN (May 2026); five-lemma proof; 4/π universal rate** |
-| 39, 40 | Tensor / Unified propinquity | Master theorem covering all compact Lie groups |
+| **38** | **SU(2) state-space GH convergence** | **Unconditional; 4/π rate; compression/lifted-state proof, translation seminorm (see claims register)** |
+| 39, 40 | Tensor / Unified convergence | Rate-constant universality across compact Lie groups |
 | 42, 43 | Modular Hamiltonian / Lorentzian extension | Four-witness Wick-rotation; Krein-(3,1) extension |
-| **45, 46** | **Lorentzian Propinquity** | **First in math.OA literature; K⁺-weak-form + strong-form** |
-| 47, 48, 49 | Hybrid + Mondino-Sämann bridge | Norm-resolvent / synthetic-Lorentzian bridge with twin paradox |
+| **45** | **Lorentzian degeneracy theorem** | **K⁺ compression annihilates the spatial Dirac; earlier convergence claim retracted 2026-06-09** |
+| 46–49 | Lorentzian metric arc (descoped) | Status notes; norm-resolvent arrow + cocycle-deficit algebra survive |
 | 50 | CFT₃ partition function | Bit-exact F-theorem match (Klebanov–Pufu–Safdi) |
 | 51, 53 | Gravity arc / disk-propinquity | S³ spectral action two-term-exact; disk-with-cone backbone |
 | **55** | **Periods of GeoVac** | **Cyclotomic mixed-Tate at level 4; master Mellin engine classification** |
@@ -236,11 +242,12 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 
 ```
 @software{geovac2026,
-  author = {J. Loutey},
-  title = {GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory},
-  year = {2026},
-  version = {3.103.0},
-  url = {https://github.com/jloutey-hash/geovac}
+  author    = {J. Loutey},
+  title     = {GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory},
+  year      = {2026},
+  version   = {3.105.0},
+  doi       = {10.5281/zenodo.20482394},
+  url       = {https://github.com/jloutey-hash/geovac}
 }
 ```
 

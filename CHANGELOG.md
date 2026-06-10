@@ -7,6 +7,156 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [3.109.0] - 2026-06-10
+
+### Summary
+
+**Sprint P38-G1/G2 closure — Paper 38's convergence theorem is now UNCONDITIONAL.** The two named gaps from the v3.106.0 erratum (G1 reach_P dual estimate; G2 kernel condition on the truthful Dirac) are both dissolved by one reframing: metrize the truncated state space by the **left-translation (action) Lipschitz seminorm** $L_n(T) = \sup_g \|U_g T U_g^* - T\|_{\mathrm{op}} / d(e,g)$, which equals the Lipschitz constant on the continuum.
+
+- **G2 dissolved (kernel condition).** $L_n(T) = 0 \iff T \in \mathbb{C}\mathbf{1}$ holds on the **truthful** chirality-doubled CH substrate via SO(4)/Schur multiplicity-one irreducibility + per-band injectivity of band-limited compression (band $N$ has $N^2$ multipliers at full vec-rank; verified $n_{\max} = 2..5$, `debug/p38_g1g2_band_diagnostics.py`). The engineered offdiag Dirac is no longer needed anywhere in the proof chain.
+- **G1 dissolved (dual reach).** Exact-fit spinor lifted state $\xi = (h \otimes \chi)/\sqrt{Z}$: the spinor window inclusion $L^2(SU(2)) \otimes \mathbb{C}^2 = \bigoplus_j V_j \otimes (V_{j+1/2} \oplus V_{j-1/2})$ **is** the Camporesi–Higuchi shell decomposition exactly, so the Fejér vector lies in the window and both almost-inverse defects collapse to Fejér smoothings at the common moment $\gamma_{n_{\max}}$ — no partial-inverse or Leimbach–vS transference estimate remains.
+- **Main theorem (Paper 38, rewritten in place):** the truncations converge in van Suijlekom's state-space Gromov–Hausdorff distance at rate $(4/\pi + o(1)) \log n_{\max} / n_{\max}$, **unconditional**. New structure: `thm:main_unconditional`, `prop:kernel_condition`, `lem:band_injectivity`, `lem:continuum_lip`, `lem:lifted_state`, `rem:no_inverse`, `rem:dirac_degeneracy`, `rem:history38`. 20pp GATE: PASS.
+- **Scalar prototype** (`debug/p38_g1g2_scalar_prototype.py`): T1 structural identity $\upsilon(P M_f P)(g) = \sigma_J f(g)$ at residual $\le 3{\times}10^{-16}$; T2 almost-inverse rate; T3 contractivity — all PASS. **Frozen falsifier** `tests/test_p38_action_seminorm.py` (6 tests: per-band injectivity $n_{\max} \in \{2,3\}$ + lifted-state smoothing identity on the scalar window with published symbols $(1, \sqrt{2}/3, 2/9)$).
+- **Two self-caught corrections during verification** (the claims-register discipline working): (a) Paper 28 Theorem 3 proof had factor-2 Hurwitz exponents — corrected to $-(s-3)/-(s+1)$, verified to 40 digits; (b) the CG-sum conditions displayed in Papers 38/45 omitted the unit-step integrality constraint $j_1 + j_2 + J \in \mathbb{Z}$ (values were correct; condition underspecified — caught when the loose triangle reading gave $\sigma(1/2) > 1$, impossible for a UCP map).
+- **Cascade applied** (`debug/p38_unconditional_cascade.py`): Paper 45 (spatial statement conditional → unconditional; abstract + outline + Prop + history remark), Paper 32 (caveat remark items ii–iv resolved; WH1 closure remark unconditional; limit-id remark moved to vS language), claims register row 8 (→ INTERNAL THEOREM, unconditional), README, field guide, outreach note N1. All three-pass GATE: PASS (P45 22pp, P32 85pp, N1 3pp).
+- **WH1 status: PROVEN-conditional → PROVEN (unconditional, vS state-space framework).**
+
+See `debug/sprint_p38_g1g2_phaseA_memo.md`. This completes the Paper 38 repair named as the outreach blocker in v3.106.0; the accessibility-plan release gate is now clear.
+
+### Added
+- `tests/test_p38_action_seminorm.py`; `debug/p38_g1g2_scalar_prototype.py`; `debug/p38_g1g2_band_diagnostics.py` + `debug/data/p38_g1g2_band_diagnostics.json`; `debug/p38_unconditional_rewrite.py`; `debug/p38_unconditional_cascade.py`; `debug/p38_p45_parity_fix.py`; `debug/sprint_p38_g1g2_phaseA_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex` (unconditional rewrite); `paper_45_lorentzian_propinquity.tex` (spatial statement unconditional + CG parity); `paper_32_spectral_triple.tex` (caveat resolution + WH1 remark); `papers/group5_qed_gauge/paper_28_qed_s3.tex` (Thm 3 proof exponents + missing bibitem); `docs/claims_register.md`; `docs/outreach/note_n1_su2_truncations.tex`; README.md; `papers/synthesis/geovac_field_guide.tex`; CLAUDE.md (§1 version, §1.7 WH1 status, §2 one-liner)
+
+## [3.108.0] - 2026-06-10
+
+### Summary
+
+**Sprint repositioning (Phase 3 of `docs/corpus_accessibility_plan.md`) — COMPLETE.** Three items.
+
+1. **Viability-case language (PI-directed, §1 access control).** CLAUDE.md §1: "producing a usable, benchmarked computational tool" → "corpus of verified structural results — discretization- and encoding-structure theorems, honest negative results, and the benchmarked computational artifact that demonstrates them. The tool is a research instrument, not a production-chemistry replacement." README top: status badge "Production" → "Research"; matched-qubit/not-matched-accuracy caveats added at both headline sites (intro paragraph + "Why This Matters").
+2. **Papers 14/20 sparsity-headline/accuracy-caveat co-location pass.** Paper 20: all 6 headline sites already compliant. Paper 14: one bare site (abstract) — caveat sentence inserted ("comparisons at matched qubit counts, not matched accuracy; composed-basis equilibrium-geometry errors 5–26%, optimal for fixed-geometry simulation"); GATE: PASS.
+3. **Corpus-wide α-mention audit: CLEAN.** Every K = π(B+F−Δ) mention outside Paper 2 (~15 papers + field guide + synthesis) verified COMPLIANT — observation/conjectural framing, no motivational weight on other arcs, zero fixes needed. The §13.5 hard-prohibition discipline has held corpus-wide.
+
+Agent cost: one sonnet dispatch, 141.7k tokens, 57 tool calls (both tasks batched).
+
+Also in this entry: **Phase 4 prepared (sends pending)** — `docs/outreach/phase4_send_kit.md` staged with recipient ladders, four email drafts (vS / Latrémolière / early-career / Brown-Kleinschmidt), pre-registered outcomes table, and the send checklist; one PI decision flagged (Option S1: send post-release with gaps stated as questions, vs Option S2: close G1/G2 first). Phase 5 freeze remains active. **All preparable phases of the accessibility plan are now complete pre-release.**
+
+### Added
+- `docs/outreach/phase4_send_kit.md`
+
+### Changed
+- CLAUDE.md §1 (PI-directed rewording, dated inline); README.md (badge + 2 caveats); `papers/group4_quantum_computing/paper_14_qubit_encoding.tex` (abstract caveat); `docs/corpus_accessibility_plan.md` (Phases 3 COMPLETE, 4 PREPARED).
+
+## [3.107.0] - 2026-06-10
+
+### Summary
+
+**Sprint accessibility layer (Phase 2 of `docs/corpus_accessibility_plan.md`) — COMPLETE.** Five deliverables plus one substantive bonus catch.
+
+- **2a Front-door notes** (`docs/outreach/`, both three-pass clean, zero project vocabulary, NOT sent — Phase 4 is PI-gated with `[repository URL]` placeholders):
+  - **N1** (math.OA, 3pp): the SU(2) construction and rate data; the conditional convergence theorem with gaps G1/G2 stated as gaps; the K⁺ annihilation theorem with inline proof; three concrete questions for specialists (including "is the degeneracy known? — it is elementary once stated, which makes prior art likely").
+  - **N2** (periods, 2pp): three ten-minute-checkable identities — the χ₋₄ bridge D_even − D_odd = 2^{s−1}(β(s) − β(s−2)) with full proof, ζ_{D²}(−k) = 0 via the Bernoulli mechanism, and the all-orders heat trace a_k = 2π²/k! — plus the one question: is the sector-to-ring assignment (untwisted → ⊕π^{2k}ℚ; parity-twisted → level-4 cyclotomic mixed Tate; difference = descent) an instance of a known functoriality?
+- **2b Vocabulary translation** (`docs/vocabulary_translation.md`, 33 rows; sonnet agent, 151.8k tokens incl. the 2d audit).
+- **2c Claims register** (`docs/claims_register.md`, 20 rows): every headline claim × verification tier (SYMBOLIC PROOF → RETRACTED) × falsifier; "no claim is externally peer-reviewed" stated up front; rows 11–12 keep the retracted Lorentzian claims permanently resolvable.
+- **2d Standalone audit** of Papers 38/45 (`debug/p38_p45_standalone_audit.md`) + all ~12 rewords applied: sprint labels glossed (R3.5 → "engineered off-diagonal modification with E1-selection-pattern couplings"), "GeoVac" glossed at first use, repo paths normalized to "project repository (path)", P38's stale Lorentzian-extension discussion subsection rewritten (diary-style Updates removed; degeneracy theorem + repaired target now stated; paper32/42/45 bibitems added), P45 intro "closes the convergence-theorem leg" → "concerns ... and proves that the leg's most natural device fails structurally".
+- **2e Public-face restructure:**
+  - **README**: stale "First Lorentzian propinquity / WH1 PROVEN" claims fixed in both the math.OA-arc section and the paper table; new "Claims and verification status" section (front-links the claims register, translation table, outreach notes) + per-audience reading paths.
+  - **Field guide**: WH1-PROVEN passage → conditional with named gaps; wrong rate display fixed (it asserted γ → 4/π; correct: γ ~ (4/π)log n/n → 0); Lorentzian passage rewritten around the degeneracy theorem ("the most instructive outcome of that axis is negative"); Group-1 summary + NCG reader's map updated; Paper-45 bibitem title corrected. 12pp clean.
+  - **Group-1 synthesis**: status note after the abstract; 13 corrections including the Theorem-5.1 block → annihilation theorem (label preserved; rate expression kept as eq:p45_rate for downstream refs), "three structural simplifications" reframed as symptoms of temporal metric invisibility, cb-norm paragraph corrected, P48/P49 subsection status flags. 23pp clean.
+  - **`.zenodo.json`**: release-metadata description corrected (conditional P38; degeneracy-theorem P45; retraction pointer); JSON validated.
+- **Bonus (claims-register culture working):** while making N2 self-contained, Paper 28 Theorem 3's printed Hurwitz decompositions were found **off by a factor 2** from the theorem they prove (per-chirality vs full-degeneracy convention). Corrected exponents −(s−3)/−(s+1) re-derived and verified to 40 digits against direct spectral sums (`mpmath`, smooth per-parity summands); proof rewritten with the derivation made explicit; two pre-existing P28 defects fixed in passing (missing `connes_vs2021` bibitem; dangling cross-document `\ref`). Theorem statement and s=4 values were always correct.
+
+### Added
+- `docs/outreach/note_n1_su2_truncations.tex/.pdf`, `docs/outreach/note_n2_s3_identities.tex/.pdf`
+- `docs/claims_register.md`, `docs/vocabulary_translation.md`
+- `debug/p38_p45_standalone_audit.md`, `debug/p38_p45_audit_rewords.py`, `debug/field_guide_phase2e.py`, `debug/group1_synthesis_descope.py`
+
+### Changed
+- Papers 28, 38, 45; `README.md`; `papers/synthesis/geovac_field_guide.tex`; `papers/synthesis/group1_operator_algebras_synthesis.tex`; `.zenodo.json`; `docs/corpus_accessibility_plan.md` (status block: Phases 1–2 COMPLETE, 4 BLOCKED by design, 5 ACTIVE); CLAUDE.md (version, §2 one-liner).
+
+## [3.106.1] - 2026-06-10
+
+### Summary
+
+**Sprint de-versioning + subagent token-budget policy.** Two PI directives executed.
+
+**(1) Single source of truth.** The v3.106.0 corrections were applied in journal-style "v2 erratum" form (erratum sections, "Version 1 asserted / withdrawn" narrative, retitled "(v2.0 erratum of ...)" papers). PI directive: papers are a single source of truth maintained in place — git history and Zenodo DOI-stamped releases are the version record; no v1/v2 archaeology in the documents. All 8 papers converted to clean present-tense documents with the corrections fully retained: Paper 45 (title → "...: a degeneracy theorem"; erratum section deleted; main content = annihilation theorem + "Anatomy of the failed assembly" + conditional spatial proposition; one compact History-and-retraction remark for holders of old DOI'd PDFs); Paper 38 (clean title/date; erratum section converted to §1 "Named gaps and history" with G1 reach-transference + G2 kernel-condition/Dirac-substrate gaps + History remark; all "(corrected 2026-06-09)" / "v1" tags stripped; orphaned Bożejko–Fendler bibitem removed); Papers 40/46/47/48/49/32 (erratum blocks → "Status and scope (June 2026)" present-tense notes; abstract qualifiers cleaned; zero leftover version vocabulary by grep). All 8 GATE: PASS (three-pass, 0 errors, 0 undefined). CLAUDE.md §2/§3/§6/§1.7 and MEMORY index vocabulary synced ("corrected/descoped in place", no "v2").
+
+**(2) Subagent token tightening.** Yesterday burned ~1.42M subagent tokens (4 agents at 312k/384k/359k/366k; 42/35/65/113 tool calls). New standing rule `memory/feedback_subagent_token_budget.md`: don't dispatch what main session can do; model tiering (opus-tier = adversarial review only; sonnet = mechanical edits; haiku = bulk existence checks); batch tasks per dispatch to amortize the CLAUDE.md fixed tax; paste-don't-point for small targets; hard tool-call and output caps in every prompt; scripted single-call gates (`debug/compile_3pass.sh` added); SendMessage continuation over fresh dispatch; Explore for read-only verification. Demonstrated same-session: the 6-paper de-versioning pass ran on sonnet with hard caps at **141,747 tokens vs 366k for yesterday's same-scope sibling pass** (~2.6× fewer tokens on a ~5× cheaper model). Flagged: CLAUDE.md size (§1.7/§2 regrowth) is the largest single lever since every dispatch pays it — compaction recommended, PI-gated.
+
+### Added
+
+- **`memory/feedback_subagent_token_budget.md`** — standing rule (10 mechanisms, priority-ordered) + MEMORY.md index line.
+- **`debug/compile_3pass.sh`** — one-call three-pass compile + error/undef/multidef gate for agents and main session.
+- **`debug/p45_deversion_part2.py`, `debug/p38_deversion.py`** — batch de-versioning drivers (uniqueness-asserted replacements).
+
+### Changed
+
+- **Papers 32, 38, 40, 45, 46, 47, 48, 49** — de-versioned in place as above; math and descopes unchanged from v3.106.0.
+- **CLAUDE.md** — version → 3.106.1; §2 one-liner added; v2-vocabulary scrubbed from §2/§3/§6/§1.7 status notes (20 replacements).
+- **MEMORY.md** — subagent-budget rule line added; two long entries shortened; paper-status lines reworded.
+
+## [3.106.0] - 2026-06-09
+
+### Summary
+
+**Sprint P45-hardening + corpus descope (Phase 1 of the corpus accessibility plan, `docs/corpus_accessibility_plan.md`).** The adversarial refutation pass on Paper 45's two highest-risk lemmas (PI-approved plan, Option C repair) **falsified the paper's main theorem** — and the failure was independently re-derived and confirmed bit-exactly in main session before any action was taken. Three compounding failures:
+
+1. **Degeneracy (the headline).** The K⁺-restricted compressed-Dirac Lipschitz seminorm is **identically zero on the entire operator system**. Mechanism (now Paper 45 v2 Theorem `thm:kplus_annihilation`): Krein-self-adjointness of the anti-Hermitian spatial block `i·D_GV⊗I` forces `{J, D_GV⊗I} = 0`, so `P₊(D_GV⊗I)P₊ = 0` exactly; the momentum-diagonal temporal multipliers commute with the surviving Fourier-diagonal temporal block. Bit-exact at (n_max, N_t) ∈ {(2,3), (3,5)}: restricted kernel 42/42 and 275/275 multipliers; even the *unrestricted* seminorm kernel is 30/42 / 130/275 (and 10/14, 26/55 at N_t=1 with the truthful CH Dirac) — the kernel condition fails before restriction. The celebrated "L3 structural identity," the bit-exact N_t=1 recovery, Λ^strong = Λ^P45, and the panel matching Paper 38's rate are all symptoms of one fact: the panel quantities are closed-form rate formulas (`gamma_rate_su2 + gamma_rate_circle`) that never touch the operators.
+2. **Fabricated citation.** "Latrémolière Thm 5.5 / Def 3.4 / Def 3.5" do not exist in arXiv:1811.10843 (§5 ends at Remark 5.3); the framework actually used is van Suijlekom's state-space GH distance (arXiv:2005.08544; Leimbach–vS 2024). The fabricated numbers entered via the 2026-05-24 "Phase 1B-A closure" sprint — closure-by-citation-transcription is now a *measured* logic-level workflow failure mode.
+3. **L2 object conflation.** "cb-norm = 2/(n_max+1)" is the Plancherel *mass-distribution* maximum, not a cb-norm; the smoothing map is UCP with cb-norm exactly 1 (true SU(2) multiplier symbol at n_max=2: (1, √2/3, 2/9), refuting the claimed (1/3, 2/3, 0); the v1 appendix identity ∫K χ_{j'} = (2j'+1)/Z is false at j'=1/2). Bożejko–Fendler (discrete groups) inapplicable; the correct statement is elementary. Same error in Papers 38 and 40. Downstream: reach_P's partial-inverse argument invalid (forward cb-norm cannot bound an inverse; named gap → Leimbach–vS antiderivative transference; scalar sectors covered by Gaudillot-Estrada–vS arXiv:2310.14733, verified). Sweep also found 2 nonexistent citations in P45's bibliography (farsi_latremoliere2024 "truncated spheres" — no such paper; hekkelman_mcdonald2024 — arXiv:2403.18619 resolves to an unrelated OpenMP paper), 10 misstated, 2 orphan cites.
+
+**What survives:** Paper 38's spatial analytical content (γ closed form, 4/π asymptote, C₃=1, convolution-form Berezin properties, J-equivariance) — now stated *conditionally* in vS framework with two named gaps (reach_P transference; kernel condition holds only for the engineered offdiag Dirac, 1/14 and 1/55 verified, fails for truthful CH 10/14, 26/55). GE–vS 2310.14733 already proves scalar compact-group state-space GH convergence, so P38's novelty repositioned to: spinor substrate + closed-form rate + 4/π constant.
+
+### Added
+
+- **`docs/corpus_accessibility_plan.md`** — the PI-approved 5-phase plan (adversarial hardening → accessibility layer → repositioning → external validation experiment → arc freeze).
+- **`debug/sprint_p45_hardening_phase1_memo.md`** — canonical sprint memo (verdict table, independent verifications, repair options).
+- **`debug/p45_adversarial_L2_memo.md`, `debug/p45_adversarial_L5_memo.md`, `debug/p45_hypothesis_checklist_memo.md`** — the three refutation-agent memos (36-import citation/hypothesis sweep: 22 verified / 10 misstated / 2 not-found / 1 hypothesis-unchecked / 1 web-unverified).
+- **`debug/p45_kplus_seminorm_check.py`** — bit-exact annihilation falsifier (driver).
+- **`tests/test_p45_kplus_degeneracy.py`** — frozen regression falsifier (3 tests: anticommutation+annihilation; restricted-seminorm-vanishes; truthful-vs-offdiag kernel counts). All pass.
+- **`debug/p45_descope_siblings_log.md`** — per-paper edit log for the sibling erratum pass.
+
+### Changed
+
+- **Paper 45 → v2.0 (descoped erratum):** retitled ("a degeneracy theorem and descoped convergence statement"); new abstract; `\section*{Erratum and descope}`; main theorem replaced by Theorem `thm:kplus_annihilation` (+ numerics corollary) + withdrawn-v1-assembly record (height_B counterexample; reach_P named gap) + conditional spatial Proposition; L2 corrected (UCP, cb-norm 1; mass/symbol split); Berezin redefined in convolution form with the sum-form inequivalence remark (Toeplitz vs momentum-diagonal temporal images); U(1) symbol normalization fixed; appendix Plancherel lemma rewritten (correct CG symbol, worked n_max=2 values); §1.2 G1 reopened / G2 metric-level claim withdrawn (norm-resolvent arrow survives); panel reinterpreted as rate-formula evaluations; "load-bearing falsifier" downgraded (formula identity, detected nothing); bibliography: 2 fabricated entries removed/replaced, titles/authors fixed, vs2021_jgp + gaudillot_vs2023 added (both web-verified). Three-pass clean, 0 errors.
+- **Paper 38 → v2.0 (conditional restatement):** retitled to state-space GH; erratum section (5 items); L2(b),(c) corrected + proof rewritten (elementary, BF withdrawn); `eq:B_def` fixed to convolution form with corrected σ(N) weights on the full envelope N ≤ 2n_max−1; L5 reframed in vS framework with reach_P as named gap; main theorem + limit identification stated conditionally; "first non-abelian case" claim repositioned per GE–vS; CvS "'elsewhere' on three occasions" footnote removed (not reproducible); fabricated hekkelman_mcdonald2024 cites removed; microtype disabled (same environmental fix as P45); 4 pre-existing double-subscript idioms fixed. Three-pass clean, 0 errors, 18pp.
+- **Papers 40, 46, 47, 48, 49 + Paper 32** (sub-agent pass, all three-pass clean): P40 L2-erratum remark (γ + 4/π untouched; GE–vS positioning already present); P46 full erratum block (Λ^strong = Λ^P45 explained; Lemma 3.2 reinterpreted as diagnosis; Appendix B enlarged substrate = repair starting point); P47 erratum (inner arrow descoped; norm-resolvent outer arrow + three-carrier identification explicitly unaffected; §7/§8 G2-metric "CLOSED" → "DESCOPED, reopened"); P48 erratum (T3 transports formula values; T6 descoped; bridge design = conditional proposal); P49 erratum (Λ panel inheritance descoped; max-divergence deficits + TICI algebra survive as state-level content); P32 `rem:gh_status_caveat` after `thm:gh_convergence` + WH1-closure pointer + GE–vS bibitem. Several pre-existing compile defects repaired in P32/47/49 (dangling refs, missing bibitems).
+- **CLAUDE.md** — version → 3.106.0; §2 one-liner; §3 two new dead-end rows (K⁺ compression device; momentum-diagonal temporal multipliers); §1.7 WH1 status caveat (PROVEN → PROVEN-conditional); §6 inventory flags on affected papers.
+- **Memory** — `wh1_proven`, `paper_45_drafted`, `paper_46_drafted`, `paper_38_drafted`, `g2_metric_closed` updated; descope pointer added.
+
+### Process note
+
+The PI's challenge that citation-ID hallucination is a weak proxy for logic-level error was answered empirically within one day: the fabricated *theorem* (not just its ID) survived a celebrated internal "closure" sprint, 316 passing tests, and three months of downstream construction — and was caught by the first adversarial line-level hypothesis check, exactly the protocol the accessibility plan front-loads before outreach. Outreach (N1 note) remains blocked pending Paper 38 gap closure; the Lorentzian/Krein quantum-metric theorem is reopened as the named option-B research target with a sharpened specification (Toeplitz temporal algebra; non-compressed Krein seminorm; kernel condition).
+
+## [3.105.0] - 2026-06-08
+
+### Summary
+
+**Sprint spin-structure moduli + Dirac-index obstruction (+ pre-outreach metadata hardening).** Exploratory probe of symmetry (de)composition on the Layer-1 substrate: which node arrangements preserve coupling, and how graph symmetries act on them. Formalised as flat-$\mathbb{Z}_2$ connections = spin structures $H^1(G;\mathbb{F}_2)$ (the cycle space, $\dim = \beta_1$); a graph symmetry's fixed subspace counts the symmetry-respecting spin structures, all in exact $\mathbb{F}_2$ arithmetic.
+
+- **Scalar Fock graph** (`FockGraphHodge`, L±/T± ladders): each $\ell$-sector is an $(n,m)$ grid, so the cycles are grid plaquettes; $\beta_1 = \sum_\ell (n_{\max}-\ell-1)(2\ell)$ (= 0, 2, 8 at $n_{\max}=2,3,4$). The Hopf $m\to-m$ reflection swaps mirror plaquettes, leaving **2** symmetric spin structures at $n_{\max}=3$ (no-flux and both-flux); single-plaquette flux — the "spin on one hemisphere" choice — is the symmetry-breaking sector. The hidden radial inversion is blind to the spin structure at $n_{\max}=3$.
+- **Dirac-$S^3$ graph** (`DiracLattice`, E1 Rule B): the magnetic $m_j\to-m_j$ reflection is a **fixed-point-free (Kramers) graph automorphism** (half-integer $m_j$ never 0), supporting a large symmetric moduli (dim 40 of $\beta_1=79$ at $n_{\max}=3$). The genuine-spin **chirality reflection $\chi\to-\chi$ is not even a node bijection**: the spinor-bundle chirality sectors differ by $2\ell+2$ vs $2\ell$ in *every* orbital block, total imbalance $n_{\max}(n_{\max}+1)$ — the discrete spectral asymmetry (Dirac index) of the Camporesi–Higuchi bundle.
+
+This is the one-body, substrate-level **root of the three NEGATIVE relativistic-$\mathbb{Z}_2$ tapering sprints** (κ-parity v3.92.0, m_j-parity direct v3.94.0, rotated v3.95.0): a chirality sign-count cannot stabilise a Hamiltonian because the underlying reflection is not a graph symmetry to begin with. Bit-exact, π-free, Layer-1.
+
+Also: discoverability hardening ahead of the impending GitHub Release (the first since v3.35.0, which re-fires the Zenodo webhook): `.zenodo.json` + `CITATION.cff` rewritten with the full current keyword vocabulary (incl. "GeoVac", spectral-triple, propinquity, periods), corrected description/numbers; README DOI badge + version alignment.
+
+### Added
+
+- **`tests/test_spin_structure_obstruction.py`** — 11 bit-exact tests (scalar $\beta_1$ closed form; Dirac $m_j$ Kramers fixed-point-free automorphism; $2\ell+2$-vs-$2\ell$ per-block chirality imbalance with total $n_{\max}(n_{\max}+1)$). All pass.
+- **`debug/spin_structure_moduli_memo.md`** — canonical memo.
+- **`debug/spin_config_symmetry_decomposition.py`**, **`debug/spin_config_dirac_substrate.py`** — exact $\mathbb{F}_2$ drivers (scalar + Dirac).
+- **Paper 29 `obs:chirality_obstruction`** (companion to `obs:12_22`): magnetic reflection is Kramers; chirality reflection is Dirac-index-obstructed. Abstract result (3) extended with the one-clause hook. Compiles clean.
+
+### Changed
+
+- **`.zenodo.json`, `CITATION.cff`** — full current keyword set + corrected description/numbers + version → 3.105.0.
+- **`README.md`** — DOI badge added; version aligned to 3.105.0.
+- **Memory `gaunt-parity-protects-hopf-z2-not-relativistic`** — substrate-level root paragraph added (no new MEMORY.md index line; index already over budget).
+
 ## [3.104.0] - 2026-06-08
 
 ### Summary

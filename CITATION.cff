@@ -1,19 +1,43 @@
 cff-version: 1.2.0
 title: >-
-  The Geometric Vacuum: Quantum Mechanics from Discrete
-  Information Geometry
+  GeoVac (The Geometric Vacuum): Structurally Sparse Qubit
+  Hamiltonians and the Discrete Spectral Triple
 message: >-
   If you use this work, please cite the relevant paper(s)
-  from the GeoVac series.
+  from the GeoVac series, or the Zenodo deposit via its DOI.
 type: software
 authors:
   - given-names: Josh
     family-names: Loutey
     affiliation: Independent Researcher, Kent, Washington
 repository-code: https://github.com/jloutey-hash/geovac
+url: https://github.com/jloutey-hash/geovac
 license: MIT
-version: 1.1.0
-date-released: 2026-03-15
+version: 3.109.0
+date-released: 2026-06-10
+doi: 10.5281/zenodo.20482394
+keywords:
+  - GeoVac
+  - Geometric Vacuum
+  - spectral graph theory
+  - graph Laplacian
+  - quantum chemistry
+  - qubit Hamiltonian
+  - quantum computing
+  - quantum simulation
+  - Fock projection
+  - hyperspherical harmonics
+  - noncommutative geometry
+  - spectral triple
+  - almost-commutative geometry
+  - Gromov-Hausdorff propinquity
+  - Camporesi-Higuchi
+  - Lorentzian spectral triple
+  - periods
+  - mixed Tate motives
+  - cosmic Galois
+  - Marcolli-van Suijlekom
+  - fine structure constant
 references:
   - type: article
     title: >-
@@ -26,28 +50,27 @@ references:
     notes: GeoVac Paper 7
   - type: article
     title: >-
-      The Molecular Fock Projection: Diatomic Molecules as
-      Prolate Spheroidal Lattices
+      Structurally Sparse Qubit Hamiltonians from the
+      Hyperspherical Harmonic Basis
     authors:
       - given-names: Josh
         family-names: Loutey
     year: 2026
-    notes: GeoVac Paper 11
+    notes: GeoVac Paper 14
   - type: article
     title: >-
-      Algebraic Two-Electron Integrals on the Prolate
-      Spheroidal Lattice
+      The GeoVac Spectral Triple
     authors:
       - given-names: Josh
         family-names: Loutey
     year: 2026
-    notes: GeoVac Paper 12
+    notes: GeoVac Paper 32
   - type: article
     title: >-
-      The Hyperspherical Lattice: Two-Electron Atoms as
-      Coupled Channel Graphs
+      SU(2) Propinquity Convergence on the Camporesi-Higuchi
+      Spectral Triple
     authors:
       - given-names: Josh
         family-names: Loutey
     year: 2026
-    notes: GeoVac Paper 13
+    notes: GeoVac Paper 38

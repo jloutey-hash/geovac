@@ -146,7 +146,10 @@ and editorial decisions are the author's responsibility.}}
 We construct a categorical bridge between Latr\'emoli\`ere's pinned
 proper quantum metric space (PPQMS) framework~\cite{latremoliere2025_hypertopology}
 and Mondino--S\"amann's covered Lorentzian pre-length space (LPLS)
-framework~\cite{mondino_samann2025_pointed}. The bridge is a contravariant
+framework~\cite{mondino_samann2025_pointed} (descoped; see the Status note: the bridge's domain category is
+instantiated on the Paper~45 substrate, whose Lipschitz seminorm is
+degenerate, so the metric-level theorems are open pending repair
+and the bridge survives as categorical design). The bridge is a contravariant
 functor
 \[
 \Wfun: \KreinMM \longrightarrow \LorPLG
@@ -222,6 +225,38 @@ Mondino--S\"amann synthetic-Lorentzian Gromov--Hausdorff framework on
 the synthetic side, mediated by the Connes--Rovelli thermal-time
 identification.
 \end{abstract}
+
+\subsection*{Status and scope (June 2026)}
+Three issues are established upstream of this paper: (i) the
+$\Kplus$-restricted compressed-Dirac Lipschitz seminorm underlying
+$\Lprop$ vanishes identically on the truncated operator system ---
+Krein-self-adjointness of the anti-Hermitian spatial part
+$i\,\DGV \otimes I$ forces $\{\JL, \DGV \otimes I\} = 0$, so the
+$\Kplus$ compression annihilates the spatial Dirac, and the
+momentum-diagonal temporal multipliers commute with $\partial_t$
+(verified bit-exact at $(\nmax, \Nt) \in \{(2,3), (3,5)\}$); (ii)
+the ``Latr\'emoli\`ere Thm~5.5 / Def.~3.4 / Def.~3.5'' references
+cited for the tunneling-pair bound do not exist in the cited source
+--- the device actually used is van~Suijlekom's state-space
+Gromov--Hausdorff framework; (iii) the constant $2/(\nmax + 1)$ is
+the maximum of the Plancherel mass distribution, not a cb-norm of
+any map used in the proofs (the smoothing map is unital completely
+positive, with cb-norm $1$).
+
+Consequently the bridge functor's domain category $\KreinMM$, as
+instantiated on the Paper~45 substrate, is \emph{degenerate as a
+metric object}: the Lipschitz seminorms feeding the Krein metametric
+have kernels far exceeding the scalars, so the instantiated objects
+are not quantum (proper) metric spaces in the cited frameworks.
+T3 (Theorem~\ref{thm:bit_exact_panel}) transports formula values,
+not metric data; T6 (Theorem~\ref{thm:g2_wedge_closure}, the G2
+metric-level closure for the GeoVac wedge) rests on the same
+degenerate quantity and is \emph{descoped}. What survives is the
+categorical design --- the Wick-rotation functor $\Wfun$ and the
+Connes--Rovelli thermal-time reading resolving the F2
+forward-vs-reverse triangle mismatch --- as a proposal conditional
+on repair of the underlying substrate. The Lorentzian quantum-metric
+convergence question is an open named research target.
 
 \tableofcontents
 
@@ -1823,6 +1858,10 @@ the pLGH-convergent subsequence.
 \subsubsection{T3:\ Synthetic bit-exact panel
 inheritance}\label{sec:t3_bit_exact_panel}
 
+\emph{[Descoped (see the Status note): the inherited values are
+evaluations of the closed-form rate formula, not measurements of a
+metric; the panel transports formula values, not metric data.]}
+
 \begin{theorem}[T3:\ Synthetic pLGH-convergence rate panel for the
 GeoVac wedge]\label{thm:bit_exact_panel}
 The Mondino--S\"amann pLGH-convergence rate of the GeoVac wedge
@@ -1948,6 +1987,12 @@ IS the synthetic-side wedge's slab-period inverse-squared measure
 
 \subsubsection{T6:\ G2 metric-level closure for the GeoVac
 wedge}\label{sec:t6_g2_wedge_closure}
+
+\emph{[Descoped (see the Status note): the ``metric-equivalent
+level'' claimed below quantifies over the degenerate Paper~45
+seminorm; the metric-level closure is open pending the upstream
+repair. The norm-resolvent ingredients from Paper~47 are
+unaffected.]}
 
 \begin{theorem}[T6:\ G2 metric-level closure for the GeoVac
 hemispheric wedge]\label{thm:g2_wedge_closure}
