@@ -13,7 +13,7 @@ The S1-vs-S2 decision is **moot**: the G1/G2 gap-closure sprint landed same-day 
 |---|---|---|---|
 | 1 | Walter D. van Suijlekom (Radboud) | The framework is his; CvS 2021 defers the convergence question; GE–vS is his student's extension | 3 weeks |
 | 2 | Frédéric Latrémolière (Denver) | Propinquity originator; Q2/Q3 are framework-fit questions for him | 3 weeks |
-| 3 | Malte Leimbach; Eva-Maria Hekkelman; Yvann Gaudillot-Estrada | Early-career, higher reply rates; the theorem is the spinor extension of GE–vS's scalar compact-group result | — |
+| 3 | Malte Leimbach (Radboud; thesis published as Radboud Univ. Press book — confirm current position day-of); Eva-Maria Hekkelman (**moved**: postdoc, MPI Mathematics Bonn, Lesch group, since Sept 2025; homepage emhekkelman.nl); Yvann Gaudillot-Estrada (vS's student, Radboud presumed — confirm day-of) | Early-career, higher reply rates; the theorem is the spinor extension of GE–vS's scalar compact-group result (now published: IMRN 2025 no. 13, rnaf197) | — |
 
 ### N2 (periods note)
 | Rung | Recipient | Rationale |
@@ -78,9 +78,9 @@ Subject: Three 10-minute identities on S³ spectral zetas, and one motivic quest
 
 ## Send checklist (each item checked by the PI at send time)
 
-1. [ ] Release done; the public repo contains the corrected corpus (v3.106+ — degeneracy framing, claims register, corrected `.zenodo.json`).
+1. [x] Release done (2026-06-10): commit `84ffbe2`, tag `v3.109.0` pushed; public repo contains the corrected corpus. *Zenodo DOI version pending: create the GitHub Release on tag v3.109.0 (previous deposits were triggered by Releases, not bare tags).*
 2. [x] `https://github.com/jloutey-hash/geovac` filled in both notes (footnotes) and all four drafts.
-3. [ ] Recipient affiliations/emails re-verified (web, day-of).
+3. [~] Affiliations web-verified 2026-06-10: van Suijlekom (Radboud, full prof. NCG ✓), Latrémolière (Univ. of Denver, faculty directory ✓), Brown (All Souls, Oxford ✓), Kleinschmidt (AEI Potsdam, group leader ✓), Hekkelman (**MPI Bonn**, moved from UNSW ✓). Remaining day-of: email addresses for all; Leimbach current position; Gaudillot-Estrada affiliation.
 4. [x] ~~PI decision on Option S1 vs S2~~ — moot (gaps closed 2026-06-10, v3.109.0; see Send-gate status above).
 5. [ ] PI has read N1/N2 end-to-end as final sign-off.
 6. [ ] One send per rung; outcomes logged in this file + CHANGELOG.
