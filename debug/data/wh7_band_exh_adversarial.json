@@ -1,0 +1,910 @@
+{
+  "meta": {
+    "tag": "adversarial",
+    "date": "2026-06-10",
+    "theta0": 0.3,
+    "t_total": 1.0,
+    "beta0": 1.0,
+    "eps_big": 0.2,
+    "eps0": 0.0001,
+    "tol_recompute": 1e-10,
+    "ladder": [
+      "1",
+      "3/2",
+      "2",
+      "5/2",
+      "3"
+    ],
+    "targets": [
+      "C:\\Users\\jlout\\Desktop\\Project_Geometric\\debug\\data\\wh7_band_exh_legs.json",
+      "C:\\Users\\jlout\\Desktop\\Project_Geometric\\debug\\data\\wh7_band_exh_penalties.json"
+    ],
+    "elapsed_s": 0.9
+  },
+  "a_recompute": {
+    "cells": [
+      {
+        "cell": "LEGS null jmax=2 beta=1",
+        "fields": [
+          {
+            "field": "c12",
+            "probe": 1.0150560081474997,
+            "recomputed": 1.0150560081474997,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "c23",
+            "probe": 1.0150560081475022,
+            "recomputed": 1.0150560081475022,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "c13",
+            "probe": 1.7331957886885723,
+            "recomputed": 1.7331957886885723,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "deficit",
+            "probe": 0.29691622760642944,
+            "recomputed": 0.29691622760642944,
+            "abs_diff": 0.0,
+            "pass": true
+          }
+        ],
+        "pass_1e-10": true
+      },
+      {
+        "cell": "LEGS mixed jmax=5/2 beta=1",
+        "fields": [
+          {
+            "field": "c12",
+            "probe": 0.32473856831634623,
+            "recomputed": 0.32473856831634623,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "c23",
+            "probe": 0.32473856831634557,
+            "recomputed": 0.32473856831634557,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "c13",
+            "probe": 0.6284826626093458,
+            "recomputed": 0.6284826626093458,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "deficit",
+            "probe": 0.020994474023345977,
+            "recomputed": 0.020994474023345977,
+            "abs_diff": 0.0,
+            "pass": true
+          }
+        ],
+        "pass_1e-10": true
+      },
+      {
+        "cell": "LEGS beta-probe null jmax=3 beta=2",
+        "fields": [
+          {
+            "field": "c12",
+            "probe": 3.3715816368578175,
+            "recomputed": 3.3715816368578175,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "c23",
+            "probe": 3.3715816368614115,
+            "recomputed": 3.3715816368614115,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "c13",
+            "probe": 5.390458312766492,
+            "recomputed": 5.390458312766492,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "deficit",
+            "probe": 1.352704960952738,
+            "recomputed": 1.352704960952738,
+            "abs_diff": 0.0,
+            "pass": true
+          }
+        ],
+        "pass_1e-10": true
+      },
+      {
+        "cell": "PEN (1.5,1.5) timelike jmax=3/2",
+        "fields": [
+          {
+            "field": "G_norm2",
+            "probe": 1.3139476033163806,
+            "recomputed": 1.3139476033163806,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "E_0p2",
+            "probe": 0.8281695572021743,
+            "recomputed": 0.8281695572021743,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "baseline",
+            "probe": 0.23299481183810844,
+            "recomputed": 0.23299481183810844,
+            "abs_diff": 0.0,
+            "pass": true
+          }
+        ],
+        "pass_1e-10": true
+      },
+      {
+        "cell": "PEN (2.0,0.0) spacelike jmax=3",
+        "fields": [
+          {
+            "field": "G_norm2",
+            "probe": 3.2724535977493554,
+            "recomputed": 3.2724535977493554,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "E_0p2",
+            "probe": 0.010013220105382636,
+            "recomputed": 0.010013220105382636,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "comm_norm",
+            "probe": 0.0,
+            "recomputed": 0.0,
+            "abs_diff": 0.0,
+            "pass": true
+          }
+        ],
+        "pass_1e-10": true
+      },
+      {
+        "cell": "PEN (2.0,2.0) timelike jmax=2",
+        "fields": [
+          {
+            "field": "G_norm2",
+            "probe": 1.6781914463529615,
+            "recomputed": 1.6781914463529615,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "E_0p2",
+            "probe": 2.0198980525250843,
+            "recomputed": 2.0198980525250843,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "D_plus",
+            "probe": 1.7820474918917029,
+            "recomputed": 1.7820474918917029,
+            "abs_diff": 0.0,
+            "pass": true
+          },
+          {
+            "field": "D_minus",
+            "probe": -1.777571296472935,
+            "recomputed": -1.777571296472935,
+            "abs_diff": 0.0,
+            "pass": true
+          }
+        ],
+        "pass_1e-10": true
+      }
+    ],
+    "cells_pass": 6,
+    "cells_total": 6
+  },
+  "b_thermal": {
+    "beta=1.0_deficit": {
+      "values": [
+        0.01476305098197156,
+        0.01772823907587373,
+        0.019660562558055705,
+        0.020994474023345977,
+        0.02196631265827742
+      ],
+      "diffs": [
+        0.0029651880939021713,
+        0.0019323234821819746,
+        0.0013339114652902717,
+        0.0009718386349314434
+      ],
+      "diff_ratios": [
+        0.6516697831600449,
+        0.6903147830010441,
+        0.7285630720026551
+      ],
+      "rel_last_diff": 0.04424222900083469,
+      "verdict_probe_rule": "UNDECIDED",
+      "diffs_strictly_shrinking": true
+    },
+    "beta=1.0_c13": {
+      "values": [
+        0.43292983839744265,
+        0.5239702381872857,
+        0.5854747469699537,
+        0.6284826626093458,
+        0.660467657931228
+      ],
+      "diffs": [
+        0.09104039978984307,
+        0.061504508782668,
+        0.0430079156393921,
+        0.03198499532188215
+      ],
+      "diff_ratios": [
+        0.675573799375272,
+        0.6992644359028155,
+        0.7437001967281166
+      ],
+      "rel_last_diff": 0.04842779951113462,
+      "verdict_probe_rule": "UNDECIDED",
+      "diffs_strictly_shrinking": true
+    },
+    "beta=0.5_deficit": {
+      "values": [
+        0.006849109557065525,
+        0.008291605782078715,
+        0.009255276782549449,
+        0.009931716278872182,
+        0.010428712790273853
+      ],
+      "diffs": [
+        0.00144249622501319,
+        0.0009636710004707338,
+        0.0006764394963227338,
+        0.0004969965114016706
+      ],
+      "diff_ratios": [
+        0.6680579011303285,
+        0.7019402845912213,
+        0.7347242644810766
+      ],
+      "rel_last_diff": 0.047656553727818185,
+      "verdict_probe_rule": "UNDECIDED",
+      "diffs_strictly_shrinking": true
+    },
+    "beta=0.5_c13": {
+      "values": [
+        0.21029601738259174,
+        0.2543870592012557,
+        0.28414359279889706,
+        0.3049275192947222,
+        0.32038534733599916
+      ],
+      "diffs": [
+        0.04409104181866397,
+        0.029756533597641355,
+        0.020783926495825167,
+        0.015457828041276933
+      ],
+      "diff_ratios": [
+        0.6748884210997541,
+        0.6984659831974717,
+        0.7437395452866868
+      ],
+      "rel_last_diff": 0.04824761235121585,
+      "verdict_probe_rule": "UNDECIDED",
+      "diffs_strictly_shrinking": true
+    },
+    "assessment": {
+      "beta1_shrinking": true,
+      "beta05_shrinking": true,
+      "beta1_rel_last_diff": 0.04424222900083469,
+      "beta05_rel_last_diff": 0.047656553727818185,
+      "rel_last_diff_ratio_05_over_1": 1.0771734337101118
+    }
+  },
+  "c_theta": {
+    "legs": {
+      "theta=0.15_null": {
+        "max_id_err": 4.440892098500626e-15,
+        "c12": {
+          "values": [
+            0.40206197038797303,
+            0.4020619703879718,
+            0.5397674814895663,
+            0.5397674814895668,
+            0.6096883387949691
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c23": {
+          "values": [
+            0.4020619703879727,
+            0.40206197038797375,
+            0.5397674814895679,
+            0.5397674814895685,
+            0.6096883387949646
+          ],
+          "verdict_probe_rule": "DIVERGENT"
+        },
+        "c13": {
+          "values": [
+            0.6962964444695369,
+            0.696296444469538,
+            0.9380286497519518,
+            0.9380286497519522,
+            1.0616563304054796
+          ],
+          "verdict_probe_rule": "DIVERGENT"
+        },
+        "deficit": {
+          "values": [
+            0.10782749630640887,
+            0.10782749630640753,
+            0.14150631322718243,
+            0.1415063132271831,
+            0.15772034718445416
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "staircase_null_check": {
+          "step01_abs": 1.3322676295501878e-15,
+          "step23_abs": 6.661338147750939e-16,
+          "rise12": 0.0336788169207749,
+          "rise34": 0.016214033957271057,
+          "is_staircase": true
+        },
+        "monotone_growth": false
+      },
+      "theta=0.15_mixed": {
+        "max_id_err": 2.831068712794149e-15,
+        "c12": {
+          "values": [
+            0.11654599054713075,
+            0.1405505818525825,
+            0.1562583554577871,
+            0.16712011466177068,
+            0.1750437782111482
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c23": {
+          "values": [
+            0.11654599054713312,
+            0.14055058185258462,
+            0.15625835545778785,
+            0.1671201146617735,
+            0.17504377821114894
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c13": {
+          "values": [
+            0.22571378699310723,
+            0.2722112566856375,
+            0.3026495496141465,
+            0.32369924618519674,
+            0.3390594227081108
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "deficit": {
+          "values": [
+            0.007378194101156643,
+            0.00888990701952963,
+            0.009867161301428506,
+            0.010540983138347448,
+            0.011028133714186372
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "staircase_null_check": {
+          "step01_abs": 0.0015117129183729872,
+          "step23_abs": 0.0006738218369189419,
+          "rise12": 0.000977254281898876,
+          "rise34": 0.00048715057583892385,
+          "is_staircase": false
+        },
+        "monotone_growth": true
+      },
+      "theta=0.3_null": {
+        "max_id_err": 3.1086244689504383e-15,
+        "c12": {
+          "values": [
+            0.7386139239813363,
+            0.7386139239813354,
+            1.0150560081474997,
+            1.0150560081475044,
+            1.1627495926730484
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c23": {
+          "values": [
+            0.7386139239813363,
+            0.7386139239813361,
+            1.0150560081475022,
+            1.015056008147505,
+            1.1627495926730453
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c13": {
+          "values": [
+            1.2442330361245633,
+            1.244233036124563,
+            1.7331957886885723,
+            1.7331957886885756,
+            1.9997420017252576
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "deficit": {
+          "values": [
+            0.23299481183810933,
+            0.23299481183810844,
+            0.29691622760642944,
+            0.2969162276064341,
+            0.32575718362083617
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "staircase_null_check": {
+          "step01_abs": 8.881784197001252e-16,
+          "step23_abs": 4.6629367034256575e-15,
+          "rise12": 0.063921415768321,
+          "rise34": 0.028840956014402064,
+          "is_staircase": true
+        },
+        "monotone_growth": false
+      },
+      "theta=0.3_mixed": {
+        "max_id_err": 1.887379141862766e-15,
+        "c12": {
+          "values": [
+            0.22384644468970658,
+            0.27084923863157967,
+            0.30256765476400427,
+            0.32473856831634623,
+            0.34121698529475364
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c23": {
+          "values": [
+            0.22384644468970763,
+            0.27084923863157984,
+            0.3025676547640052,
+            0.32473856831634557,
+            0.34121698529475175
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c13": {
+          "values": [
+            0.43292983839744265,
+            0.5239702381872857,
+            0.5854747469699537,
+            0.6284826626093458,
+            0.660467657931228
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "deficit": {
+          "values": [
+            0.01476305098197156,
+            0.01772823907587373,
+            0.019660562558055705,
+            0.020994474023345977,
+            0.02196631265827742
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "staircase_null_check": {
+          "step01_abs": 0.0029651880939021713,
+          "step23_abs": 0.0013339114652902717,
+          "rise12": 0.0019323234821819746,
+          "rise34": 0.0009718386349314434,
+          "is_staircase": false
+        },
+        "monotone_growth": true
+      },
+      "theta=0.6_null": {
+        "max_id_err": 6.217248937900877e-15,
+        "c12": {
+          "values": [
+            1.0693979373307576,
+            1.0693979373307552,
+            1.6778082541046926,
+            1.6778082541046984,
+            2.0680062033251305
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c23": {
+          "values": [
+            1.069397937330758,
+            1.0693979373307558,
+            1.6778082541046926,
+            1.6778082541046924,
+            2.0680062033251243
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c13": {
+          "values": [
+            1.7398121637614499,
+            1.7398121637614474,
+            2.7974589521366457,
+            2.7974589521366444,
+            3.47010858091336
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "deficit": {
+          "values": [
+            0.3989837109000658,
+            0.3989837109000638,
+            0.5581575560727394,
+            0.5581575560727461,
+            0.665903825736895
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "staircase_null_check": {
+          "step01_abs": 1.9984014443252818e-15,
+          "step23_abs": 6.661338147750939e-15,
+          "rise12": 0.15917384517267563,
+          "rise34": 0.10774626966414891,
+          "is_staircase": true
+        },
+        "monotone_growth": false
+      },
+      "theta=0.6_mixed": {
+        "max_id_err": 5.329070518200751e-15,
+        "c12": {
+          "values": [
+            0.38570185271843505,
+            0.4878582274695349,
+            0.5627271378221975,
+            0.616260850298239,
+            0.6559920651278662
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c23": {
+          "values": [
+            0.3857018527184346,
+            0.48785822746953816,
+            0.5627271378222028,
+            0.6162608502982356,
+            0.6559920651278647
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "c13": {
+          "values": [
+            0.7440613723815687,
+            0.9403460230370545,
+            1.084518399860722,
+            1.1877536280446814,
+            1.2646893323991442
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "deficit": {
+          "values": [
+            0.027342333055300982,
+            0.035370431902018606,
+            0.04093587578367841,
+            0.04476807255179316,
+            0.047294797856586746
+          ],
+          "verdict_probe_rule": "UNDECIDED"
+        },
+        "staircase_null_check": {
+          "step01_abs": 0.008028098846717624,
+          "step23_abs": 0.0038321967681147484,
+          "rise12": 0.005565443881659804,
+          "rise34": 0.0025267253047935867,
+          "is_staircase": false
+        },
+        "monotone_growth": true
+      },
+      "verdict_flips_vs_probe": [
+        {
+          "theta": 0.15,
+          "ref": "null",
+          "obs": "c23",
+          "probe": "UNDECIDED",
+          "new": "DIVERGENT"
+        },
+        {
+          "theta": 0.15,
+          "ref": "null",
+          "obs": "c13",
+          "probe": "UNDECIDED",
+          "new": "DIVERGENT"
+        }
+      ]
+    },
+    "penalties": {
+      "theta=0.15": {
+        "(0.5,0.5) spacelike": {
+          "E_seq": [
+            0.11530077394413762,
+            0.3178239262576017,
+            0.22737799269261472,
+            0.3653050553225845,
+            0.3306113818158354
+          ],
+          "class_probe_rule": "NON-MONOTONE / MIXED",
+          "class_zero_aware": "NON-MONOTONE / MIXED"
+        },
+        "(1.0,0.0) spacelike": {
+          "E_seq": [
+            -2.220446049250313e-16,
+            3.552713678800501e-15,
+            3.774758283725532e-15,
+            -8.881784197001252e-16,
+            -3.552713678800501e-15
+          ],
+          "class_probe_rule": "NON-MONOTONE / MIXED",
+          "class_zero_aware": "ZERO (machine epsilon at every window)"
+        },
+        "(2.0,0.0) spacelike": {
+          "E_seq": [
+            -0.008058661912454412,
+            -0.008058661912452636,
+            -0.0004744777127234645,
+            -0.00047447771271880157,
+            0.004285966943766928
+          ],
+          "class_probe_rule": "MONOTONE INCREASING (non-convergent)",
+          "class_zero_aware": "MONOTONE INCREASING (non-convergent)"
+        },
+        "(2.0,1.0) spacelike": {
+          "E_seq": [
+            null,
+            4.440892098500626e-16,
+            0.5237058172035298,
+            0.523705817203532,
+            0.6725314839304983
+          ],
+          "class_probe_rule": "MONOTONE INCREASING (non-convergent)",
+          "class_zero_aware": "MONOTONE INCREASING (non-convergent)"
+        },
+        "(1.0,1.0) null": {
+          "E_seq": [
+            0.6031414041927468,
+            0.6031414041927461,
+            0.8323576868832516,
+            0.8323576868832478,
+            0.955119348699274
+          ],
+          "class_probe_rule": "NON-MONOTONE / MIXED",
+          "class_zero_aware": "NON-MONOTONE / MIXED"
+        },
+        "(1.5,1.5) timelike": {
+          "E_seq": [
+            0.013698108620915361,
+            1.3595503224360157,
+            1.1961458194863925,
+            1.3770930246734552,
+            1.7999353082812204
+          ],
+          "class_probe_rule": "NON-MONOTONE / MIXED",
+          "class_zero_aware": "NON-MONOTONE / MIXED"
+        },
+        "(2.0,2.0) timelike": {
+          "E_seq": [
+            -0.0013464484509755348,
+            0.23463305495093345,
+            2.9704751058409444,
+            2.9704751058409578,
+            2.8306333912301547
+          ],
+          "class_probe_rule": "NON-MONOTONE / MIXED",
+          "class_zero_aware": "NON-MONOTONE / MIXED"
+        }
+      },
+      "theta=0.6": {
+        "(0.5,0.5) spacelike": {
+          "E_seq": [
+            0.021864580040839687,
+            0.2531942798525373,
+            0.06575463549939986,
+            0.23014012088224867,
+            0.08702644469857468
+          ],
+          "class_probe_rule": "CONVERGENT (diffs strictly shrinking)",
+          "class_zero_aware": "CONVERGENT (diffs strictly shrinking)"
+        },
+        "(1.0,0.0) spacelike": {
+          "E_seq": [
+            -3.552713678800501e-15,
+            2.6645352591003757e-15,
+            9.769962616701378e-15,
+            -8.881784197001252e-16,
+            -3.9968028886505635e-14
+          ],
+          "class_probe_rule": "DIVERGENT (diffs strictly growing)",
+          "class_zero_aware": "ZERO (machine epsilon at every window)"
+        },
+        "(2.0,0.0) spacelike": {
+          "E_seq": [
+            -0.03148469824802369,
+            -0.03148469824801792,
+            -0.01599456601868976,
+            -0.01599456601870397,
+            0.006599350167440399
+          ],
+          "class_probe_rule": "NON-MONOTONE / MIXED",
+          "class_zero_aware": "NON-MONOTONE / MIXED"
+        },
+        "(2.0,1.0) spacelike": {
+          "E_seq": [
+            null,
+            3.1086244689504383e-15,
+            -5.773159728050814e-15,
+            -7.105427357601002e-15,
+            -2.4868995751603507e-14
+          ],
+          "class_probe_rule": "MONOTONE DECREASING (non-convergent)",
+          "class_zero_aware": "ZERO (machine epsilon at every window)"
+        },
+        "(1.0,1.0) null": {
+          "E_seq": [
+            0.0657136636507829,
+            0.2027797518010801,
+            0.2508080029701456,
+            0.34840758294774066,
+            0.3770796218129764
+          ],
+          "class_probe_rule": "MONOTONE INCREASING (non-convergent)",
+          "class_zero_aware": "MONOTONE INCREASING (non-convergent)"
+        },
+        "(1.5,1.5) timelike": {
+          "E_seq": [
+            0.0018358897707848598,
+            0.36840368520080435,
+            0.051862944047678994,
+            0.6696796958658418,
+            0.3924020082382613
+          ],
+          "class_probe_rule": "NON-MONOTONE / MIXED",
+          "class_zero_aware": "NON-MONOTONE / MIXED"
+        },
+        "(2.0,2.0) timelike": {
+          "E_seq": [
+            -0.005277955922781352,
+            0.00010295917014602196,
+            0.7058874811996176,
+            0.7058874811996185,
+            1.0851818965268096
+          ],
+          "class_probe_rule": "MONOTONE INCREASING (non-convergent)",
+          "class_zero_aware": "MONOTONE INCREASING (non-convergent)"
+        }
+      },
+      "class_flips_vs_probe": [
+        {
+          "theta": 0.15,
+          "class": "(2.0,0.0) spacelike",
+          "probe": "NON-MONOTONE / MIXED",
+          "new": "MONOTONE INCREASING (non-convergent)"
+        },
+        {
+          "theta": 0.15,
+          "class": "(2.0,1.0) spacelike",
+          "probe": "NON-MONOTONE / MIXED",
+          "new": "MONOTONE INCREASING (non-convergent)"
+        },
+        {
+          "theta": 0.6,
+          "class": "(0.5,0.5) spacelike",
+          "probe": "NON-MONOTONE / MIXED",
+          "new": "CONVERGENT (diffs strictly shrinking)"
+        },
+        {
+          "theta": 0.6,
+          "class": "(1.0,0.0) spacelike",
+          "probe": "NON-MONOTONE / MIXED",
+          "new": "DIVERGENT (diffs strictly growing)"
+        },
+        {
+          "theta": 0.6,
+          "class": "(2.0,1.0) spacelike",
+          "probe": "NON-MONOTONE / MIXED",
+          "new": "MONOTONE DECREASING (non-convergent)"
+        },
+        {
+          "theta": 0.6,
+          "class": "(1.0,1.0) null",
+          "probe": "NON-MONOTONE / MIXED",
+          "new": "MONOTONE INCREASING (non-convergent)"
+        },
+        {
+          "theta": 0.6,
+          "class": "(2.0,2.0) timelike",
+          "probe": "NON-MONOTONE / MIXED",
+          "new": "MONOTONE INCREASING (non-convergent)"
+        }
+      ],
+      "zero_aware_at_theta0.3": {
+        "(0.5,0.5) spacelike": "NON-MONOTONE / MIXED",
+        "(1.0,0.0) spacelike": "ZERO (machine epsilon at every window)",
+        "(2.0,0.0) spacelike": "NON-MONOTONE / MIXED",
+        "(2.0,1.0) spacelike": "NON-MONOTONE / MIXED",
+        "(1.0,1.0) null": "NON-MONOTONE / MIXED",
+        "(1.5,1.5) timelike": "NON-MONOTONE / MIXED",
+        "(2.0,2.0) timelike": "NON-MONOTONE / MIXED"
+      }
+    }
+  },
+  "d_hygiene": {
+    "clamp_hits_legs": 0,
+    "clamp_hits_penalties": 0,
+    "penalties_negative_E_count": 8,
+    "penalties_negative_D_count": 30,
+    "signs_preserved": true,
+    "raw_generator_check": {
+      "recomputed_norm_null_jmax3": 1.8371173070873845,
+      "penalties_G_norm2": 1.8371173070873845,
+      "legs_H_norm": 1.8371173070873845,
+      "match_1e-12": true,
+      "is_raw_not_normalized": true
+    },
+    "min_kms_eigenvalue_jmax3": {
+      "beta=0.5": 0.0014864960160152227,
+      "beta=1.0": 0.00010675064852343482,
+      "beta=2.0": 3.427181651045178e-07
+    },
+    "d_max_floor_inert": true
+  },
+  "claims": {
+    "LEGS_staircase_null": {
+      "verdict": "CONFIRMED",
+      "detail": "half-integer windows add nothing; integer windows step -- holds at theta 0.15/0.3/0.6"
+    },
+    "LEGS_mixed_monotone": {
+      "verdict": "CONFIRMED",
+      "detail": "monotone growth with shrinking diffs persists at theta 0.15/0.6 and at beta=0.5"
+    },
+    "LEGS_flow_identity": {
+      "verdict": "CONFIRMED",
+      "detail": "max |c12-c23| = 6.22e-15 across theta scan at beta=1"
+    },
+    "PEN_admissibility_stabilizes": {
+      "verdict": "CONFIRMED",
+      "detail": "[K_W,G] is state-free (no beta/theta dependence possible); recomputed comm norms match probe at 1e-10"
+    },
+    "PEN_E_nonmonotone_all": {
+      "verdict": "QUALIFIED",
+      "detail": "classes ['(1.0,0.0) spacelike'] are machine-zero sequences (mislabelled NON-MONOTONE) | 7 theta-flips: theta=0.15 (2.0,0.0) spacelike -> MONOTONE INCREASING (non-convergent); theta=0.15 (2.0,1.0) spacelike -> MONOTONE INCREASING (non-convergent); theta=0.6 (0.5,0.5) spacelike -> CONVERGENT (diffs strictly shrinking); theta=0.6 (1.0,0.0) spacelike -> DIVERGENT (diffs strictly growing); theta=0.6 (2.0,1.0) spacelike -> MONOTONE DECREASING (non-convergent); theta=0.6 (1.0,1.0) null -> MONOTONE INCREASING (non-convergent); theta=0.6 (2.0,2.0) timelike -> MONOTONE INCREASING (non-convergent)"
+    },
+    "NUMBERS_REPRODUCIBLE": {
+      "verdict": "CONFIRMED",
+      "detail": "6/6 recompute cells at 1e-10"
+    },
+    "HYGIENE": {
+      "verdict": "CONFIRMED",
+      "detail": "no clamps in JSONs, signed values present, RAW generators confirmed, d_max 1e-300 floor never engaged (min KMS eig >= 3.43e-07)"
+    }
+  }
+}

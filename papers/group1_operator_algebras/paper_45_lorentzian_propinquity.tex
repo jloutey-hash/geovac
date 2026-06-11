@@ -1789,9 +1789,142 @@ for $|m'| \ge 1$;\ not a reparametrization artifact — tangent
 projection shifts the exponents by $< 0.1$). Honest caveat:\ the
 \emph{excess} over the on-orbit baseline is reference-state
 dependent (sign included);\ only the absolute chain inequality is
-universal. Ensemble statistics, the cost-functional choice
-(max-divergence vs.\ fidelity-based), and the interval construction
-itself are the Phase-3 continuation.
+universal. A second state-level panel
+(\texttt{debug/wh7\_b3\_phase3\_sprint2.py};\ falsifier
+\texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}) resolves both the
+scaling and the caveat by a single symmetry:\ when the kick generator
+commutes with the boost ($[G, K] = 0$, zero weight transfer — exactly
+the $m' = 0$ classes;\ the commutator norm equals the weight transfer
+$2|m'|$ identically), conjugation by $e^{i\epsilon G}$ commutes with
+the modular flow and unitary invariance of the cost gives the exact
+leg identity $c_{12}(\epsilon) = c_{23}(-\epsilon)$, so the kick
+excess is an \emph{even} function of $\epsilon$ — quadratic leading
+order for \emph{every} unitarily invariant cost functional (verified
+at $10^{-14}$;\ the per-leg first-order terms do \emph{not} vanish,
+they cancel between legs). For weight-transferring kicks the identity
+breaks at $O(\epsilon)$ and a signed linear term appears whose
+generic sign \emph{is} the reference-state caveat;\ the apparent
+$\epsilon^{1.2}$ exponents were window fits of
+signed-linear-plus-quadratic mixtures. A five-functional comparison
+(max-divergence, Umegaki, Bures angle, trace distance, Jeffreys) over
+a $504$-cell reference-state ensemble shows \emph{no} cost functional
+attains state-independent positive excess (Bures closest, $0.93$
+overall and $1.00$ on the three low-transfer classes on that panel —
+refuted as a general positivity by the third panel below), while the
+Umegaki and Jeffreys \emph{chain}
+inequalities fail generically on modular-orbit triples ($90/96$ and
+$88/96$ with negative baseline deficit;\ the Sprint-1 $0/96$ was
+reference-state luck, re-confirming the Datta max-divergence
+replacement of Paper~49). On the proper substrate — the hemispheric
+wedge with unfolded $K_{W}$ (odd positive integer spectrum, genuine
+Boltzmann KMS state) — the anchors hold at $10^{-15}$, the orbit
+period is $\pi$ rather than $2\pi$ ($U_{\pi} = -\mathbb{1}$;\
+attribution corrected by the third panel:\ this holds already on the
+\emph{full} Dirac space at every cutoff, since the all-odd $2m_{j}$
+spectrum makes weight differences even — the period-$\pi$ is the
+spinor spin–statistics grading $\sigma_{\pi}(F) = (-1)^{2b}F$
+restricted to a half-integer sector, \emph{not} a folding effect), the
+commuting/non-commuting dichotomy transfers bit-level
+($\Delta w = 0$ even at $10^{-13}$ with $p \approx 2$;\
+$\Delta w \ge 2$ signed linear), and the interval functional
+$\ell = $ flow parameter is \emph{operational}:\ recovered from state
+pairs alone by trace-distance matching, well-defined mod $\pi$ and
+additive on ordered triples at $10^{-3}$ (grid-limited). The
+architecture this fixes:\ the interval is the flow parameter, costs
+enter as an even (quadratic) penalty layer for admissible
+(weight-conserving) deformations and a signed first-order layer
+otherwise. A third state-level panel
+(\texttt{debug/wh7\_b3\_phase3\_sprint3.py};\ falsifier
+\texttt{tests/test\_wh7\_b3\_phase3\_sprint3.py}) settles the
+admissibility and convergence questions at sprint grade.
+\emph{Admissibility:}\ the wedge folding \emph{reorganizes} the
+Phase-2 causal classes, and a fourth, exact-arithmetic panel
+(\texttt{debug/wh7\_b3\_phase3\_sprint3b\_fold\_rule.py};\ falsifier
+\texttt{tests/test\_wh7\_b3\_fold\_rule.py}) gives the closed form.
+Blockwise, plain-swap reflection conjugation acts as
+$[R\,C^{b}_{\mu'\mu}\,R]_{(j_{1},j_{2})} =
+(-1)^{b+j_{2}-j_{1}}\,[C^{b}_{-\mu',\mu}]_{(j_{1},j_{2})}$ (a
+Clebsch--Gordan symmetry, verified exactly on all class generators),
+so each $(j_{1},j_{2})$ block of a $\mu = 0$-column Hermitized
+generator is an $R$-parity eigenblock with $\varepsilon =
+(-1)^{b+j_{2}-j_{1}+\mu'}$, and the folding annihilates a block iff
+$\varepsilon = -1$ (exact rational Frobenius$^{2}$ fold ratios:\
+$6/19$, $5/6$, $0$, $11/19$, $1/2$ on the $\mu = 0$ column;\ $3/8$,
+$1/4$ on the mixed classes). On the $j \le 1$ window the $b = 2$
+system has only the $(1,1)$ block — which is \emph{why} the $(2,1)$
+class is annihilated ($\varepsilon = -1$) and the folded $(2,2)$
+timelike class is purely mirror, hence flow-commuting (even penalty
+at $10^{-15}$, median $|D^{+}|$ dropping from $0.26$ upstairs to
+$3{\times}10^{-4}$). Both headline effects are \emph{window-edge}
+facts:\ at $j_{\max} = 3/2$ the $(2,1)$ class revives through the
+half-integer $\varepsilon = +1$ blocks (exact fold ratio $8/41$,
+blocks $(1/2,3/2)$ and $(3/2,1/2)$) and the folded $(2,2)$ class
+acquires non-mirror transitions and no longer commutes with $K_{W}$
+(mirror Frobenius fraction exactly $9/25$). The invariant content:\
+admissibility is the \textbf{flow-commutation grading}, not the
+causal grading;\ $\mu' = 0$ generators fold to weight-diagonal
+(admissible) operators at \emph{every} tested window;\ and the
+mirror component (transitions $m'_{1} = -m'_{2}$) is always
+admissible. Penalty magnitudes order by weight transfer (Spearman
+$r = 0.97$) at least as well as by the causal ratio ($r = 0.90$). \emph{Convergence:}\ with band-limited reference
+perturbation and kicks ($n_{\mathrm{fock}} \le 2$ labels, identical
+at every cutoff), every penalty and derivative datum is bit-exactly
+\textbf{cutoff-independent} across $n_{\max} = 2..5$ (deviations
+$10^{-15}$–$10^{-11}$):\ the Gibbs normalization cancels in the
+$D_{\max}$ ratio operator and band-limited conjugations leave the
+bulk untouched. Meanwhile the naive trace-norm orbit scale decays
+exactly as $0.1805/Z$ — the finite-cutoff shadow of the type-III
+continuum wedge:\ only band-relative ($D_{\max}$-based) objects
+survive the limit, and the $D_{\max}$-matching interval recovery is
+cutoff-stable at $2{\times}10^{-4}$. The convergence statement for
+fixed band-limited data is therefore \emph{exact}, not asymptotic;\
+the genuinely open limit is band exhaustion (increasing bands). A
+fifth panel (multi-agent;\ shared substrate
+\texttt{debug/wh7\_band\_exhaustion\_lib.py}, probes
+\texttt{debug/wh7\_band\_exh\_*.py};\ falsifier
+\texttt{tests/test\_wh7\_band\_exhaustion.py}) closes that question at
+the numerical level on the folded Peter--Weyl wedge at
+$j_{\max} \in \{1, \ldots, 3\}$ (wedge dimensions $9$--$78$) with
+fixed multiplier data. \emph{The interval layer needs no limit:}\
+operational recovery and additivity are bit-exact at every window
+($\le 4{\times}10^{-16}$, no growth trend), and the flow-translation
+identity $c_{12} = c_{23}$ holds at $10^{-15}$ throughout.
+\emph{The cost layer converges at its own rate:}\ generic-reference
+leg costs and deficits converge with strictly shrinking successive
+differences whose ratios ($0.67$--$0.74$, increasing) \textbf{exclude
+both} the metric-layer $\gamma$-rate (predicted ratios
+$0.93$--$0.95$) \textbf{and} the thermal rate (predicted constant
+$e^{-1}$;\ independently excluded by the $\beta$-discriminator, which
+goes the wrong way by $\sim 10^{3}$, and by an adversarial
+$\beta = 0.5$ re-run that leaves the ratios essentially unchanged) —
+a power-law class with local exponent $p_{\mathrm{eff}} \approx 1.5$,
+window-degenerate with rational $p \to 2$ forms (an internal
+counterexample with known $p = 2$ fits $p_{\mathrm{eff}} = 1.48$ on
+this ladder), implying a state-level error rate $\sim
+(2j)^{-1/2}$ — \emph{slower} than the metric layer:\ the two layers
+have genuinely different convergence modes. \emph{The
+spin–statistics grading appears in the exhaustion dynamics:}\
+integer-$b$ data freezes bit-exactly across half-integer shell
+additions (the $b$-parity staircase, the $(-1)^{2b}$ grading of the
+boost-seminorm panel), and the null-class compression norm obeys the
+exact closed form $\|P_{W} M_{C^{1}} P_{W}\|_{2} = \sqrt{6}\,
+(2j_{\max})/(2j_{\max}+2)$ (deviation $\le 10^{-15}$ at every window;\
+limit $\sqrt{6} = \sqrt{b(b+1)(2b+1)}$ at $b = 1$ — algebraic,
+$\pi$-free). Honest qualifications:\ non-commuting kick penalties do
+\emph{not} stabilize monotonically across the ladder (and their
+monotonicity labels are reference-amplitude-dependent);\ the
+trace-scale$\times Z$ law of the fourth panel does NOT transport to
+this substrate;\ and the exponent identification ($p = 3/2$ vs
+rational $p \to 2$) is open pending more windows or the analytic
+form. A Mondino--S\"amann-grade limit theorem remains future
+analytic work;\ these panels fix what it must prove. \emph{Sign-definiteness:}\ the
+Bures even-sector positivity observed on the second panel is
+\textbf{refuted} by an adversarial panel of $2400$ random
+flow-commuting kicks ($574$ negative cells, worst $-2.3{\times}
+10^{-2}$;\ the second panel's own class generators go negative once
+the perturbation strength and flow time widen) — no tested functional
+has a sign-definite even-sector penalty;\ the chain inequality
+remains the only universal direction.
 
 \item[(Q2)] \textbf{De-compactification limit $T \to \infty$.} The
 norm-resolvent (operator-level) arrow to $\sthree \times \R_{t}$

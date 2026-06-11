@@ -7,6 +7,75 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.4.0] - 2026-06-10
+
+### Summary
+
+**Sprint B3 Phase 3, Sprint 4 — band exhaustion (multi-agent): PHASE-3 CHARTER CLOSED at sprint grade.** PI-directed 5-agent workflow (3 parallel probes + rate-ID + adversarial, ~19 min, ~600k subagent tokens) on a main-session-validated shared substrate (folded PW wedge, j_max = 1..3, wedge dims 9–78, fixed multiplier data):
+
+- **Interval layer needs no limit:** operational recovery + additivity bit-exact (≤ 4×10⁻¹⁶) at every window; flow-translation identity c12 = c23 at 10⁻¹⁵ throughout; null-class reference preserves weight parity (even-weight sector, period π; generic reference 2π).
+- **Cost layer converges at its OWN rate:** successive-diff ratios 0.67–0.74 (increasing) EXCLUDE both the metric-layer γ rate (predicted 0.93–0.95) and the thermal rate (e⁻¹ constant; β-discriminator wrong way by ~10³; adversarial β=0.5 re-run leaves ratios unchanged — structural, not KMS suppression). Power-law class, p_eff ≈ 1.5, window-degenerate with rational p→2 forms (internal counterexample: known p=2 fits 1.48 on this ladder). Implied state-level error rate ~ (2j)^{−1/2} — SLOWER than the metric layer; the two layers have genuinely different convergence modes.
+- **Spin-statistics grading in the exhaustion dynamics:** integer-b data freezes bit-exactly across half-integer shell additions (b-parity staircase, the (−1)^{2b} grading); exact π-free closed form ‖P_W M_{C¹} P_W‖₂ = √6·(2j_max)/(2j_max+2) (≤ 10⁻¹⁵ all windows; limit √6 = √(b(b+1)(2b+1)); diff ratios exact rationals 2/3, 5/7, 3/4). Headline numbers re-verified bit-level in main session.
+- **Honest negatives (adversarial-qualified):** non-commuting penalties do NOT stabilize monotonically (labels reference-amplitude-dependent; commuting (1,0) excess machine-zero everywhere); trace-scale×Z law does NOT transport from the geovac wedge; exponent identification (p=3/2 vs rational p→2) open — named follow-on: mixed-ref β-probe + more windows. Adversarial: 6/6 cells bit-reproduced, hygiene clean.
+- **Phase-3 charter status: CLOSED at sprint grade.** All four layers verified: flow = time order (exact at every cutoff, exactly stable under exhaustion); translation seminorm = metric (γ); gradings = cone (causal type) + flow-commutation (penalty parity, closed-form fold rule); costs = D_max penalty layer (chain universal, evenness proven, band-exhaustion power-law). A Mondino–Sämann-grade limit THEOREM remains future analytic work; the numerics fix what it must prove.
+
+### Added
+- `debug/wh7_band_exhaustion_lib.py` (shared substrate, validated vs Sprint-3b exact arithmetic); agent drivers `debug/wh7_band_exh_{legs,penalties,intervals,rates,adversarial}.py` + JSONs in `debug/data/`; `tests/test_wh7_band_exhaustion.py` (8 tests, library-independent recompute); `debug/sprint_wh7_band_exhaustion_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (Q1 fifth-panel paragraph: band-exhaustion close; 26 pp GATE: PASS); CLAUDE.md (§1 version, §2 one-liner)
+
+## [4.3.0] - 2026-06-10
+
+### Summary
+
+**Sprint B3 Phase 3, Sprint 3b — the fold-transfer rule in closed form (exact CG arithmetic).** The Sprint-3 fold observations promoted to a lemma + parity rule, and both headline facts exactly characterized as window-edge effects:
+
+- **Block reflection identity (lemma, exact):** [R C^b_{μ′μ} R]_(j1,j2) = (−1)^{b+j2−j1} [C^b_{−μ′,μ}]_(j1,j2) — a Clebsch–Gordan symmetry, verified exactly (sympy, 50 entries, all seven class generators; conventions validated vs the numeric substrate at 2×10⁻¹⁵).
+- **Parity rule (μ=0 column):** each (j1,j2) block of a Hermitized generator is an R-parity eigenblock with ε = (−1)^{b+j2−j1+μ′}; the folding annihilates a block iff ε = −1. Exact rational Frobenius² fold ratios: 6/19, 5/6, 0, 11/19, 1/2 (μ=0 column); 3/8, 1/4 (mixed classes). All π-free Layer-1 rationals.
+- **Window-edge theorem (corrects the Sprint-3 reading):** at j_max = 3/2 the (2,1) class REVIVES through half-integer ε=+1 blocks (exact ratio 8/41) and the folded (2,2) class STOPS commuting (8 non-mirror entries; mirror fraction exactly 9/25). The v4.2.0 headline statements ((2,1) annihilated, (2,2) timelike → admissible) are j_max=1 edge facts. Invariants: μ′=0 classes fold to weight-diagonal admissible operators at every window; the mirror component is always admissible; the per-block parity rule is window-independent.
+- Paper 45 admissibility passage reworked in place with the closed form + qualification.
+
+### Added
+- `debug/wh7_b3_phase3_sprint3b_fold_rule.py` + `debug/data/wh7_b3_phase3_sprint3b_fold_rule.json`; `tests/test_wh7_b3_fold_rule.py` (9 tests, exact-arithmetic, 4 s); `debug/sprint_wh7_b3_fold_rule_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (admissibility passage: closed form + window-edge qualification; 25 pp GATE: PASS); CLAUDE.md (§1 version, §2 one-liner)
+
+## [4.2.0] - 2026-06-10
+
+### Summary
+
+**Sprint B3 Phase 3, Sprint 3 — admissibility settled, band-stability exact, Bures refuted.** All three named Sprint-3 items closed; one attribution correction to Sprint 2:
+
+- **Admissibility ≠ cone grading (the folding reorganizes the classes):** the wedge projection ANNIHILATES the (2,1) spacelike class (fold norm < 10⁻¹²) and renders the (2,2) timelike top class flow-commuting (m′→−m′ identification turns maximal weight transfer ‖[K,G]‖=4 into zero absolute-weight transfer; even penalty at 10⁻¹⁵; median |D⁺| 0.26 upstairs → 3×10⁻⁴ on wedge). Admissibility = ker ad_{K_W} (flow-commutation), NOT the causal class. Penalty magnitudes order by weight transfer (Spearman 0.97) at least as well as q_F (0.90).
+- **Band-stability is EXACT:** with band-limited reference + kicks (n_fock ≤ 2, identical labels at every cutoff), every penalty/derivative datum is bit-exactly cutoff-INDEPENDENT across n_max = 2..5 (10⁻¹⁵–10⁻¹¹): Gibbs 1/Z cancels in the D_max ratio; band-limited conjugations leave the bulk untouched. Naive trace-norm orbit scale decays as exactly 0.1805/Z (type-III shadow — only band-relative objects survive); D_max-matching interval recovery cutoff-stable at 1.7×10⁻⁴. Convergence for fixed bands is exact, not asymptotic; the open Phase-3 prize reduces to the BAND-EXHAUSTION limit (Sprint 4).
+- **Bures positivity REFUTED:** 574/2400 adversarial flow-commuting-kick cells negative (worst −2.3×10⁻²); the Sprint-2 class generators themselves go negative (134/600) once θ/t_total widen. The v4.1.0 observation was a narrow-panel artifact (downgraded in Paper 45 in place). No tested functional has a sign-definite even-sector penalty; penalty PARITY is a theorem, penalty SIGN is not; the chain inequality stays the only universal direction.
+- **Correction (v4.1.0 attribution):** period-π is NOT a folding effect — U_π = −1 already on the full Dirac space at every cutoff (all-odd 2m_j spectrum); it is the spinor spin-statistics grading σ_π(F) = (−1)^{2b}F restricted to a half-integer sector. Paper 45 + Sprint-2 falsifier comment corrected in place (assertions unchanged).
+
+### Added
+- `debug/wh7_b3_phase3_sprint3.py` + `debug/data/wh7_b3_phase3_sprint3.json`; `tests/test_wh7_b3_phase3_sprint3.py` (14 tests; Sprint-1/2 falsifiers 21/21 regression clean); `debug/sprint_wh7_b3_phase3_sprint3_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (Q1 third-panel paragraph + two in-place corrections: period-π attribution, Bures refutation; 25 pp GATE: PASS); `tests/test_wh7_b3_phase3_sprint2.py` (comment-only attribution fix); CLAUDE.md (§1 version, §2 one-liner)
+
+## [4.1.0] - 2026-06-10
+
+### Summary
+
+**Sprint B3 Phase 3, Sprint 2 — evenness mechanism, cost-functional verdict, wedge substrate: MECHANISM-CLOSED.** One symmetry explains both Sprint-1 conditionals (bimodal scaling AND the sign caveat):
+
+- **Evenness mechanism (theorem-grade, cost-universal):** if the kick generator commutes with the boost ($[G,K]=0$, zero K-weight transfer — exactly the m′=0 classes; ‖[K,G]‖ = 2|m′| identically), conjugation commutes with the flow and unitary invariance of the cost gives the exact leg identity $c_{12}(\epsilon) = c_{23}(-\epsilon)$ — the kick excess is EVEN in ε (quadratic leading order) for every unitarily invariant cost functional. Verified at 10⁻¹⁴; the per-leg first-order terms do NOT vanish (ρ-slot slope −0.38), they cancel between legs. For m′≠0 the identity breaks at O(ε): a signed linear term whose generic sign IS the Sprint-1 caveat; the ε^1.2 exponents were window fits of signed-linear+quadratic mixtures. Sprint-1's "top-eigenspace selection rule" suspicion retired.
+- **Cost-functional verdict:** Umegaki/Jeffreys chain inequalities fail GENERICALLY on modular-orbit triples (90/96, 88/96 with negative baseline deficit — Sprint-1's 0/96 was reference-state luck; Datta-replacement lesson re-confirmed). D_max/Bures/trace: 0/96 (theorems). 504-cell ensemble: NO functional attains state-independent positive excess (structural after the mechanism); Bures closest (0.93; 1.00 on the three low-transfer classes — observed, not proven); D_max least sign-stable (0.69) despite being the chain anchor.
+- **Wedge substrate (the proper Phase-3 home):** `for_bisognano_wichmann(3)` → dim 40→20; unfolded K_W odd positive integers → genuine Boltzmann KMS state; anchors at 10⁻¹⁵; **orbit period = π not 2π** (U_π = −1 exactly: positive-weight folding halves the thermal-time period). Dichotomy transfers bit-level (Δw=0 even at 10⁻¹⁴ with p≈2; Δw≥2 signed linear). **Operational interval functional:** ℓ = flow parameter recovered from state pairs alone by trace-distance matching, well-defined mod π (3.7×10⁻⁴) and additive on ordered triples (1.1×10⁻³).
+- **Architecture fixed:** interval = flow parameter; costs = penalty layer (even/quadratic for weight-conserving deformations universally, signed first-order otherwise). Sprint 3: cone-graded admissibility on the wedge; the convergence statement; Bures Hessian positivity proof-or-refute.
+
+### Added
+- `debug/wh7_b3_phase3_sprint2.py` + `debug/data/wh7_b3_phase3_sprint2.json`; `tests/test_wh7_b3_phase3_sprint2.py` (14 tests; Sprint-1 falsifier 7/7 regression clean); `debug/sprint_wh7_b3_phase3_sprint2_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (Q1 Sprint-2 paragraph: evenness mechanism, five-functional comparison, wedge substrate, fixed architecture; 25 pp GATE: PASS); CLAUDE.md (§1 version, §2 one-liner)
+
 ## [4.0.0] - 2026-06-10
 
 ### Summary

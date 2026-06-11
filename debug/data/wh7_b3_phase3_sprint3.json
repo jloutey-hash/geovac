@@ -1,0 +1,228 @@
+{
+ "T1_cone_admissibility": {
+  "R_involution_residual": 0.0,
+  "dim_wedge": 9,
+  "weights": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   1.0,
+   1.0,
+   2.0,
+   2.0,
+   2.0
+  ],
+  "fold_info": {
+   "(0.5,0.5) spacelike": {
+    "fold_norm": 0.7637626158259732,
+    "K_commutator_wedge": 1.0
+   },
+   "(1.0,0.0) spacelike": {
+    "fold_norm": 1.0,
+    "K_commutator_wedge": 3.45017045399441e-16
+   },
+   "(2.0,0.0) spacelike": {
+    "fold_norm": 0.9999999999999996,
+    "K_commutator_wedge": 3.4134371344445624e-16
+   },
+   "(2.0,1.0) spacelike": {
+    "fold_norm": 8.000085491159452e-16,
+    "folds_to_zero": true
+   },
+   "(1.0,1.0) null": {
+    "fold_norm": 0.8660254037844387,
+    "K_commutator_wedge": 1.9999999999999991
+   },
+   "(1.5,1.5) timelike": {
+    "fold_norm": 0.7905694150420945,
+    "K_commutator_wedge": 1.0
+   },
+   "(2.0,2.0) timelike": {
+    "fold_norm": 1.0000000000000007,
+    "K_commutator_wedge": 6.265999756569739e-16
+   }
+  },
+  "ensemble_wedge": {
+   "(0.5,0.5) spacelike": {
+    "median_abs_Dp": 0.03878543668400791,
+    "median_even": 3.883633514001339e-06,
+    "frac_E02_positive": 1.0,
+    "K_commutator": 1.0
+   },
+   "(1.0,0.0) spacelike": {
+    "median_abs_Dp": 0.00010591076904375996,
+    "median_even": 2.6645352591003757e-15,
+    "frac_E02_positive": 1.0,
+    "K_commutator": 3.45017045399441e-16
+   },
+   "(2.0,0.0) spacelike": {
+    "median_abs_Dp": 0.000129414505223302,
+    "median_even": 2.3314683517128287e-15,
+    "frac_E02_positive": 1.0,
+    "K_commutator": 3.4134371344445624e-16
+   },
+   "(1.0,1.0) null": {
+    "median_abs_Dp": 0.0892864633522672,
+    "median_even": 8.915764173444973e-06,
+    "frac_E02_positive": 0.9166666666666666,
+    "K_commutator": 1.9999999999999991
+   },
+   "(1.5,1.5) timelike": {
+    "median_abs_Dp": 0.02916018494503181,
+    "median_even": 2.9211886152791244e-06,
+    "frac_E02_positive": 1.0,
+    "K_commutator": 1.0
+   },
+   "(2.0,2.0) timelike": {
+    "median_abs_Dp": 0.0002944930377335453,
+    "median_even": 2.4980018054066022e-15,
+    "frac_E02_positive": 1.0,
+    "K_commutator": 6.265999756569739e-16
+   }
+  },
+  "ensemble_full": {
+   "(0.5,0.5) spacelike": {
+    "median_abs_Dp": 0.0501307092148906,
+    "median_even": 5.020432656710483e-06,
+    "frac_E02_positive": 0.6666666666666666,
+    "K_commutator": 0.9999999999999998
+   },
+   "(1.0,0.0) spacelike": {
+    "median_abs_Dp": 7.606821839090117e-05,
+    "median_even": 5.10702591327572e-15,
+    "frac_E02_positive": 1.0,
+    "K_commutator": 4.162028730839012e-16
+   },
+   "(2.0,0.0) spacelike": {
+    "median_abs_Dp": 1.4628267486216373e-05,
+    "median_even": 7.327471962526033e-15,
+    "frac_E02_positive": 0.8333333333333334,
+    "K_commutator": 1.956077140135249e-15
+   },
+   "(2.0,1.0) spacelike": {
+    "median_abs_Dp": 0.06293643426413809,
+    "median_even": 6.2926106783045554e-06,
+    "frac_E02_positive": 0.5833333333333334,
+    "K_commutator": 1.9999999999999998
+   },
+   "(1.0,1.0) null": {
+    "median_abs_Dp": 0.10752132827196448,
+    "median_even": 1.0745524766653247e-05,
+    "frac_E02_positive": 0.6666666666666666,
+    "K_commutator": 2.0
+   },
+   "(1.5,1.5) timelike": {
+    "median_abs_Dp": 0.22153932500268425,
+    "median_even": 2.2155028156056744e-05,
+    "frac_E02_positive": 0.75,
+    "K_commutator": 2.9999999999999996
+   },
+   "(2.0,2.0) timelike": {
+    "median_abs_Dp": 0.2574245068753811,
+    "median_even": 2.5746842876817055e-05,
+    "frac_E02_positive": 0.5,
+    "K_commutator": 3.999999999999996
+   }
+  },
+  "organization_full": {
+   "transfer": {
+    "spearman_r": 0.9746794344808963,
+    "p_value": 0.004818230468198566
+   },
+   "qF": {
+    "spearman_r": 0.8999999999999998,
+    "p_value": 0.03738607346849874
+   },
+   "b": {
+    "spearman_r": 0.5642880936468347,
+    "p_value": 0.32172333582430024
+   }
+  }
+ },
+ "T2_cutoff_stability": {
+  "per_n": {
+   "2": {
+    "dim_full": 16,
+    "dim_W": 8,
+    "n_band": 8,
+    "Z": 2.306850783764382,
+    "U_pi_plus_identity_full": 3.6739403974420594e-16,
+    "baseline_deficit": 0.09657246531781083,
+    "E02_dw0": 0.009163921532998387,
+    "E02_dw2": 0.30893766539214185,
+    "Dp_dw2": 0.07348442766341723,
+    "evenness_dw0": 8.881784197001252e-16,
+    "orbit_scale_trace": 0.07825471729694819,
+    "interval_recovery_err_dmax": 0.00017100036278805408,
+    "delta_E02_dw0_vs_ref": 0.0,
+    "delta_E02_dw2_vs_ref": 6.661338147750939e-16,
+    "delta_Dp_dw2_vs_ref": 1.2212453270876722e-11
+   },
+   "3": {
+    "dim_full": 40,
+    "dim_W": 20,
+    "n_band": 8,
+    "Z": 4.726751598262663,
+    "U_pi_plus_identity_full": 6.123233995736766e-16,
+    "baseline_deficit": 0.0965724653178095,
+    "E02_dw0": 0.009163921532998498,
+    "E02_dw2": 0.30893766539214373,
+    "Dp_dw2": 0.07348442767451946,
+    "evenness_dw0": 1.8318679906315083e-15,
+    "orbit_scale_trace": 0.03819154702271148,
+    "interval_recovery_err_dmax": 0.00017100036278827613,
+    "delta_E02_dw0_vs_ref": 1.1102230246251565e-16,
+    "delta_E02_dw2_vs_ref": 1.2212453270876722e-15,
+    "delta_Dp_dw2_vs_ref": 2.3314683517128287e-11
+   },
+   "4": {
+    "dim_full": 80,
+    "dim_W": 40,
+    "n_band": 8,
+    "Z": 7.997285089768836,
+    "U_pi_plus_identity_full": 8.572527594031472e-16,
+    "baseline_deficit": 0.09657246531780939,
+    "E02_dw0": 0.009163921532999497,
+    "E02_dw2": 0.3089376653921483,
+    "Dp_dw2": 0.07348442769006258,
+    "evenness_dw0": 1.2212453270876722e-15,
+    "orbit_scale_trace": 0.022572904917529155,
+    "interval_recovery_err_dmax": 0.00017100036278794306,
+    "delta_E02_dw0_vs_ref": 1.1102230246251565e-15,
+    "delta_E02_dw2_vs_ref": 5.773159728050814e-15,
+    "delta_Dp_dw2_vs_ref": 3.885780586188048e-11
+   },
+   "5": {
+    "dim_full": 140,
+    "dim_W": 70,
+    "n_band": 8,
+    "Z": 12.118698077891075,
+    "U_pi_plus_identity_full": 1.102182119232618e-15,
+    "baseline_deficit": 0.09657246531781016,
+    "E02_dw0": 0.009163921532998387,
+    "E02_dw2": 0.3089376653921425,
+    "Dp_dw2": 0.07348442765120478,
+    "evenness_dw0": 9.43689570931383e-16,
+    "orbit_scale_trace": 0.014896150953629526,
+    "interval_recovery_err_dmax": 0.00017100036278827613
+   }
+  }
+ },
+ "T3_bures_adversarial": {
+  "n_cells": 2400,
+  "bures_negative": 574,
+  "dmax_negative": 499,
+  "worst_bures_excess": -0.023175427889917444,
+  "worst_dmax_excess": -0.12822562047016017,
+  "worst_params": [
+   10,
+   0.1,
+   2.5,
+   0.5
+  ],
+  "max_K_commutator": 0.0,
+  "class_gen_cells": 600,
+  "class_gen_negative": 134
+ }
+}

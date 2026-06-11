@@ -1,0 +1,1279 @@
+{
+  "meta": {
+    "tag": "rates",
+    "date": "2026-06-10",
+    "inputs": [
+      "wh7_band_exh_legs.json",
+      "wh7_band_exh_penalties.json"
+    ],
+    "jmax_ladder": [
+      "1",
+      "3/2",
+      "2",
+      "5/2",
+      "3"
+    ],
+    "two_j": [
+      2.0,
+      3.0,
+      4.0,
+      5.0,
+      6.0
+    ],
+    "beta_main": 1.0,
+    "zero_tol": 1e-12,
+    "rms_consistent": 0.05,
+    "rms_excluded": 0.2,
+    "x_convention": "diffs evaluated at UPPER window 2j (sensitivity at lower/mid reported)",
+    "free_parameter_count": {
+      "gamma": 1,
+      "thermal_beta_fixed": 1,
+      "power": 2,
+      "invZ_upper": 1,
+      "invZ_lower": 1,
+      "geometric_free_rate": 2,
+      "rational_a1": 1
+    }
+  },
+  "gate_audit": {
+    "formally_CONVERGENT_observables": [],
+    "note": "Legs probe verdicts: all UNDECIDED (null = staircase; mixed = monotone but last diff/value 4-5% > 1% gate). Penalty probe: all 7 classes NON-MONOTONE / MIXED. Rate classification below is therefore performed on the CONVERGING-BUT-UNGATED set (mixed-reference c12/c23/c13/deficit/H_norm: strictly positive monotone-decreasing diffs) and, separately, on the null integer-step subsequence (2 diffs only). This selection is post hoc -- see caveats."
+  },
+  "h_norm_null_exact": {
+    "values": [
+      1.2247448713915892,
+      1.4696938456699067,
+      1.632993161855452,
+      1.749635530559414,
+      1.8371173070873845
+    ],
+    "diffs": [
+      0.24494897427831752,
+      0.16329931618554538,
+      0.11664236870396194,
+      0.08748177652797051
+    ],
+    "diff_ratios": [
+      0.6666666666666682,
+      0.7142857142857201,
+      0.7499999999999919
+    ],
+    "diff_ratios_as_fractions": [
+      "2/3",
+      "5/7",
+      "3/4"
+    ],
+    "closed_form": "H_norm(jmax) = sqrt(6) * (2j)/(2j+2);  d_k = 2*sqrt(6)/((2j+1)(2j+2))",
+    "d_times_(2j+1)(2j+2)": [
+      4.89897948556635,
+      4.898979485566361,
+      4.898979485566402,
+      4.898979485566349
+    ],
+    "max_dev_from_2sqrt6": 4.618527782440651e-14,
+    "max_dev_values_vs_closed_form": 1.1102230246251565e-15,
+    "continuum_norm_limit": 2.449489742783178,
+    "limit_identification": "sqrt(6) = sqrt(b(b+1)(2b+1)) at b=1 (algebraic, pi-free)",
+    "fitted_p_over_window": 1.4837056230784287,
+    "asymptotic_p_of_closed_form": 2.0,
+    "lesson": "A bit-exact 1/((2j+1)(2j+2)) sequence (asymptotic p=2) FITS as p_eff~1.5 over the available window 2j in [3,6].  Any p~1.5 claim below is therefore a LOCAL effective exponent, window-degenerate with p=2 rational forms."
+  },
+  "h_norm_mixed_check": {
+    "values": [
+      1.5275252316519463,
+      1.8414624173229397,
+      2.044972417973321,
+      2.1854644004836343,
+      2.2872045845863704
+    ],
+    "values_sq_low_denominator_fractions": [
+      "7/3",
+      null,
+      null,
+      null,
+      null
+    ],
+    "diffs": [
+      0.3139371856709934,
+      0.20351000065038116,
+      0.14049198251031347,
+      0.10174018410273611
+    ],
+    "diff_ratios": [
+      0.6482507009018674,
+      0.6903443666715469,
+      0.7241707482864184
+    ],
+    "amplitude_under_1/((2j+1/2)(2j+3/2))": [
+      4.9445106743181455,
+      5.036872516096934,
+      5.022588374743707,
+      4.959833975008385
+    ],
+    "amplitude_scatter_pct": 0.7910315869613339,
+    "note": "Amplitude under the half-shifted rational form is ~constant (~1% scatter) but NOT machine-exact (contrast null: 1e-15).  Suggestive only; continuum norm of the mixed multiplier not identified."
+  },
+  "mixed_classification": {
+    "c12": {
+      "diffs": [
+        0.047002793941873094,
+        0.0317184161324246,
+        0.022170913552341964,
+        0.016478416978407406
+      ],
+      "ratios_observed": [
+        0.674819802662152,
+        0.6989918241748974,
+        0.7432448347022107
+      ],
+      "ratio_trend": "increasing",
+      "span_decades": 0.455208185778717,
+      "models": {
+        "gamma": {
+          "k_free": 1,
+          "A": 0.081742087577667,
+          "rms_value": 0.316261769514362,
+          "ratios_pred": [
+            0.946394630357186,
+            0.9287712379549449,
+            0.9277356271328153
+          ],
+          "rms_ratio": 0.28538392550131436,
+          "shape_pred": "decreasing",
+          "verdict": "EXCLUDED"
+        },
+        "thermal_beta1": {
+          "k_free": 1,
+          "A": 2.4454496724618364,
+          "rms_value": 0.7268403563917325,
+          "ratios_pred": [
+            0.3678794411714423,
+            0.36787944117144233,
+            0.36787944117144233
+          ],
+          "rms_ratio": 0.6518376723633257,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "power": {
+          "k_free": 2,
+          "A": 0.25234049415007065,
+          "p_upper": 1.5146147813520467,
+          "p_lower": 1.141935169450655,
+          "p_mid": 1.329861364394602,
+          "rms_value": 0.01729534388882597,
+          "ratios_pred": [
+            0.6467939408148601,
+            0.7132120330758743,
+            0.7587014504528393
+          ],
+          "rms_ratio": 0.02960035314433594,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        },
+        "invZ_upper": {
+          "k_free": 1,
+          "A": 0.35784076600086145,
+          "rms_value": 0.09070933382940706,
+          "ratios_pred": [
+            0.5414991762362064,
+            0.8316647143870666,
+            0.6514685269084178
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.17890333760826896,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "invZ_lower": {
+          "k_free": 1,
+          "A": 0.24547214549069932,
+          "rms_value": 0.09092166489620793,
+          "ratios_pred": [
+            0.754762126102936,
+            0.5414991762362064,
+            0.8316647143870666
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.17353750563904685,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "geometric_free_rate": {
+          "k_free": 2,
+          "A": 0.1313869310536408,
+          "c": 0.3502582981624923,
+          "rms_value": 0.02432189952047877,
+          "ratios_pred": [
+            0.7045060935856542,
+            0.7045060935856542,
+            0.7045060935856539
+          ],
+          "rms_ratio": 0.03991851670137074,
+          "shape_pred": "non-monotone",
+          "verdict": "MARGINAL"
+        },
+        "rational_a1": {
+          "k_free": 1,
+          "A": 0.9363338040642749,
+          "rms_value": 0.01138442075640279,
+          "ratios_pred": [
+            0.6666666666666666,
+            0.7142857142857143,
+            0.75
+          ],
+          "rms_ratio": 0.01525429075573258,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        }
+      },
+      "best_by_ratio_test": "rational_a1",
+      "best_by_value_fit": "rational_a1",
+      "ratio_value_consistent": true
+    },
+    "c23": {
+      "diffs": [
+        0.047002793941872206,
+        0.031718416132425375,
+        0.022170913552340354,
+        0.016478416978406185
+      ],
+      "ratios_observed": [
+        0.6748198026621813,
+        0.6989918241748295,
+        0.7432448347022096
+      ],
+      "ratio_trend": "increasing",
+      "span_decades": 0.455208185778741,
+      "models": {
+        "gamma": {
+          "k_free": 1,
+          "A": 0.08174208757766413,
+          "rms_value": 0.3162617695143901,
+          "ratios_pred": [
+            0.946394630357186,
+            0.9287712379549449,
+            0.9277356271328153
+          ],
+          "rms_ratio": 0.2853839255013298,
+          "shape_pred": "decreasing",
+          "verdict": "EXCLUDED"
+        },
+        "thermal_beta1": {
+          "k_free": 1,
+          "A": 2.4454496724617503,
+          "rms_value": 0.7268403563917029,
+          "ratios_pred": [
+            0.3678794411714423,
+            0.36787944117144233,
+            0.36787944117144233
+          ],
+          "rms_ratio": 0.6518376723633068,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "power": {
+          "k_free": 2,
+          "A": 0.25234049415010074,
+          "p_upper": 1.514614781352152,
+          "p_lower": 1.141935169450733,
+          "p_mid": 1.329861364394694,
+          "rms_value": 0.017295343888849596,
+          "ratios_pred": [
+            0.6467939408148405,
+            0.7132120330758576,
+            0.7587014504528247
+          ],
+          "rms_ratio": 0.029600353144383636,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        },
+        "invZ_upper": {
+          "k_free": 1,
+          "A": 0.3578407660008489,
+          "rms_value": 0.09070933382941948,
+          "ratios_pred": [
+            0.5414991762362064,
+            0.8316647143870666,
+            0.6514685269084178
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.17890333760831775,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "invZ_lower": {
+          "k_free": 1,
+          "A": 0.24547214549069069,
+          "rms_value": 0.09092166489617161,
+          "ratios_pred": [
+            0.754762126102936,
+            0.5414991762362064,
+            0.8316647143870666
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.17353750563899026,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "geometric_free_rate": {
+          "k_free": 2,
+          "A": 0.1313869310536514,
+          "c": 0.3502582981625183,
+          "rms_value": 0.024321899520470577,
+          "ratios_pred": [
+            0.7045060935856358,
+            0.7045060935856357,
+            0.7045060935856361
+          ],
+          "rms_ratio": 0.03991851670136101,
+          "shape_pred": "non-monotone",
+          "verdict": "MARGINAL"
+        },
+        "rational_a1": {
+          "k_free": 1,
+          "A": 0.9363338040642419,
+          "rms_value": 0.01138442075644242,
+          "ratios_pred": [
+            0.6666666666666666,
+            0.7142857142857143,
+            0.75
+          ],
+          "rms_ratio": 0.015254290755790337,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        }
+      },
+      "best_by_ratio_test": "rational_a1",
+      "best_by_value_fit": "rational_a1",
+      "ratio_value_consistent": true
+    },
+    "c13": {
+      "diffs": [
+        0.09104039978984307,
+        0.061504508782668,
+        0.0430079156393921,
+        0.03198499532188215
+      ],
+      "ratios_observed": [
+        0.675573799375272,
+        0.6992644359028155,
+        0.7437001967281166
+      ],
+      "ratio_trend": "increasing",
+      "span_decades": 0.45428786465849164,
+      "models": {
+        "gamma": {
+          "k_free": 1,
+          "A": 0.15851527307879912,
+          "rms_value": 0.31549934386790507,
+          "ratios_pred": [
+            0.946394630357186,
+            0.9287712379549449,
+            0.9277356271328153
+          ],
+          "rms_ratio": 0.284654821790916,
+          "shape_pred": "decreasing",
+          "verdict": "EXCLUDED"
+        },
+        "thermal_beta1": {
+          "k_free": 1,
+          "A": 4.742246425532402,
+          "rms_value": 0.727590566353745,
+          "ratios_pred": [
+            0.3678794411714423,
+            0.36787944117144233,
+            0.36787944117144233
+          ],
+          "rms_ratio": 0.6525324708925381,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "power": {
+          "k_free": 2,
+          "A": 0.4872197411702162,
+          "p_upper": 1.5116613579884708,
+          "p_lower": 1.139698815586209,
+          "p_mid": 1.3272634540837123,
+          "rms_value": 0.017379490435134367,
+          "ratios_pred": [
+            0.6473437208429679,
+            0.7136822213828434,
+            0.7591101005194812
+          ],
+          "rms_ratio": 0.029772140628153965,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        },
+        "invZ_upper": {
+          "k_free": 1,
+          "A": 0.6939292648656398,
+          "rms_value": 0.09116887049936688,
+          "ratios_pred": [
+            0.5414991762362064,
+            0.8316647143870666,
+            0.6514685269084178
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.17938643879402608,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "invZ_lower": {
+          "k_free": 1,
+          "A": 0.4760226381388371,
+          "rms_value": 0.09115179798208546,
+          "ratios_pred": [
+            0.754762126102936,
+            0.5414991762362064,
+            0.8316647143870666
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.17335794594285384,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "geometric_free_rate": {
+          "k_free": 2,
+          "A": 0.25401473972638516,
+          "c": 0.3495835697547612,
+          "rms_value": 0.024209839544356116,
+          "ratios_pred": [
+            0.704981604262657,
+            0.7049816042626571,
+            0.7049816042626569
+          ],
+          "rms_ratio": 0.039751312331138065,
+          "shape_pred": "non-monotone",
+          "verdict": "MARGINAL"
+        },
+        "rational_a1": {
+          "k_free": 1,
+          "A": 1.8157501605661275,
+          "rms_value": 0.010936529283099244,
+          "ratios_pred": [
+            0.6666666666666666,
+            0.7142857142857143,
+            0.75
+          ],
+          "rms_ratio": 0.015264777434189596,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        }
+      },
+      "best_by_ratio_test": "rational_a1",
+      "best_by_value_fit": "rational_a1",
+      "ratio_value_consistent": true
+    },
+    "deficit": {
+      "diffs": [
+        0.0029651880939021713,
+        0.0019323234821819746,
+        0.0013339114652902717,
+        0.0009718386349314434
+      ],
+      "ratios_observed": [
+        0.6516697831600449,
+        0.6903147830010441,
+        0.7285630720026551
+      ],
+      "ratio_trend": "increasing",
+      "span_decades": 0.4844580874159425,
+      "models": {
+        "gamma": {
+          "k_free": 1,
+          "A": 0.004967358162261077,
+          "rms_value": 0.34050106712128114,
+          "ratios_pred": [
+            0.946394630357186,
+            0.9287712379549449,
+            0.9277356271328153
+          ],
+          "rms_ratio": 0.3085801258553425,
+          "shape_pred": "decreasing",
+          "verdict": "EXCLUDED"
+        },
+        "thermal_beta1": {
+          "k_free": 1,
+          "A": 0.14860673064362506,
+          "rms_value": 0.7030000652983989,
+          "ratios_pred": [
+            0.3678794411714423,
+            0.36787944117144233,
+            0.36787944117144233
+          ],
+          "rms_ratio": 0.6298134669502305,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "power": {
+          "k_free": 2,
+          "A": 0.01760408816507809,
+          "p_upper": 1.6084171938345928,
+          "p_lower": 1.2129379622826035,
+          "p_mid": 1.4123599312714952,
+          "rms_value": 0.015062703090741347,
+          "ratios_pred": [
+            0.6295734252641894,
+            0.6984386573908632,
+            0.7458363097715214
+          ],
+          "rms_ratio": 0.025005841618000197,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        },
+        "invZ_upper": {
+          "k_free": 1,
+          "A": 0.021745508372235125,
+          "rms_value": 0.07878674969229663,
+          "ratios_pred": [
+            0.5414991762362064,
+            0.8316647143870666,
+            0.6514685269084178
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.16483113043693534,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "invZ_lower": {
+          "k_free": 1,
+          "A": 0.014917016455597655,
+          "rms_value": 0.08688070013110244,
+          "ratios_pred": [
+            0.754762126102936,
+            0.5414991762362064,
+            0.8316647143870666
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.18077790404691818,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "geometric_free_rate": {
+          "k_free": 2,
+          "A": 0.008793474347616697,
+          "c": 0.37171254889668975,
+          "rms_value": 0.02788709902776563,
+          "ratios_pred": [
+            0.6895524266445651,
+            0.689552426644565,
+            0.689552426644565
+          ],
+          "rms_ratio": 0.04554291739031394,
+          "shape_pred": "non-monotone",
+          "verdict": "MARGINAL"
+        },
+        "rational_a1": {
+          "k_free": 1,
+          "A": 0.05689976243633859,
+          "rms_value": 0.032713209890492666,
+          "ratios_pred": [
+            0.6666666666666666,
+            0.7142857142857143,
+            0.75
+          ],
+          "rms_ratio": 0.0290047510915266,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        }
+      },
+      "best_by_ratio_test": "power",
+      "best_by_value_fit": "power",
+      "ratio_value_consistent": true
+    },
+    "H_norm": {
+      "diffs": [
+        0.3139371856709934,
+        0.20351000065038116,
+        0.14049198251031347,
+        0.10174018410273611
+      ],
+      "ratios_observed": [
+        0.6482507009018674,
+        0.6903443666715469,
+        0.7241707482864184
+      ],
+      "ratio_trend": "increasing",
+      "span_decades": 0.48935024149887857,
+      "models": {
+        "gamma": {
+          "k_free": 1,
+          "A": 0.5230645749737479,
+          "rms_value": 0.34424950385472086,
+          "ratios_pred": [
+            0.946394630357186,
+            0.9287712379549449,
+            0.9277356271328153
+          ],
+          "rms_ratio": 0.3122777936888759,
+          "shape_pred": "decreasing",
+          "verdict": "EXCLUDED"
+        },
+        "thermal_beta1": {
+          "k_free": 1,
+          "A": 15.648341404672122,
+          "rms_value": 0.6992236773152477,
+          "ratios_pred": [
+            0.3678794411714423,
+            0.36787944117144233,
+            0.36787944117144233
+          ],
+          "rms_ratio": 0.6260546998769156,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "power": {
+          "k_free": 2,
+          "A": 1.8936321894515815,
+          "p_upper": 1.6228947599648635,
+          "p_lower": 1.2238409913657937,
+          "p_mid": 1.4250644124409269,
+          "rms_value": 0.015365831782108838,
+          "ratios_pred": [
+            0.6269567450325687,
+            0.6961859393087644,
+            0.7438702168006212
+          ],
+          "rms_ratio": 0.025211837593752354,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        },
+        "invZ_upper": {
+          "k_free": 1,
+          "A": 2.289809738449343,
+          "rms_value": 0.07691912459796908,
+          "ratios_pred": [
+            0.5414991762362064,
+            0.8316647143870666,
+            0.6514685269084178
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.16150860508434312,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "invZ_lower": {
+          "k_free": 1,
+          "A": 1.570767119533005,
+          "rms_value": 0.0875664180237673,
+          "ratios_pred": [
+            0.754762126102936,
+            0.5414991762362064,
+            0.8316647143870666
+          ],
+          "ratio_trend_pred": "non-monotone",
+          "rms_ratio": 0.18373246541004487,
+          "shape_pred": "non-monotone",
+          "verdict": "EXCLUDED"
+        },
+        "geometric_free_rate": {
+          "k_free": 2,
+          "A": 0.940126656179944,
+          "c": 0.3750876437743283,
+          "rms_value": 0.02773868623162627,
+          "ratios_pred": [
+            0.6872290448041292,
+            0.6872290448041292,
+            0.6872290448041289
+          ],
+          "rms_ratio": 0.04535558973104781,
+          "shape_pred": "non-monotone",
+          "verdict": "MARGINAL"
+        },
+        "rational_a1": {
+          "k_free": 1,
+          "A": 5.991565150462857,
+          "rms_value": 0.03644409818951072,
+          "ratios_pred": [
+            0.6666666666666666,
+            0.7142857142857143,
+            0.75
+          ],
+          "rms_ratio": 0.03253321038155957,
+          "shape_pred": "increasing",
+          "verdict": "CONSISTENT"
+        }
+      },
+      "best_by_ratio_test": "power",
+      "best_by_value_fit": "power",
+      "ratio_value_consistent": true
+    }
+  },
+  "mixed_limit_extrapolation": {
+    "c12": {
+      "value_at_jmax3": 0.34121698529475364,
+      "power_fit": {
+        "p": 1.5146147813520467,
+        "tail": 0.1869973743271117,
+        "limit": 0.5282143596218654
+      },
+      "rational_a1": {
+        "A": 0.9363338040642749,
+        "tail": 0.11704172550803436,
+        "limit": 0.458258710802788
+      },
+      "caveat": "tail is 35-55% of current value; limit uncertain at the +/-15% level"
+    },
+    "c13": {
+      "value_at_jmax3": 0.660467657931228,
+      "power_fit": {
+        "p": 1.5116613579884708,
+        "tail": 0.3651543648211465,
+        "limit": 1.0256220227523745
+      },
+      "rational_a1": {
+        "A": 1.8157501605661275,
+        "tail": 0.22696877007076594,
+        "limit": 0.887436428001994
+      },
+      "caveat": "tail is 35-55% of current value; limit uncertain at the +/-15% level"
+    },
+    "deficit": {
+      "value_at_jmax3": 0.02196631265827742,
+      "power_fit": {
+        "p": 1.6084171938345928,
+        "tail": 0.009255607855142062,
+        "limit": 0.03122192051341948
+      },
+      "rational_a1": {
+        "A": 0.05689976243633859,
+        "tail": 0.007112470304542324,
+        "limit": 0.029078782962819745
+      },
+      "caveat": "tail is 35-55% of current value; limit uncertain at the +/-15% level"
+    }
+  },
+  "null_staircase": {
+    "c12": {
+      "diffs_signed": [
+        -8.881784197001252e-16,
+        0.27644208416616434,
+        4.6629367034256575e-15,
+        0.14769358452554404
+      ],
+      "frozen_steps_indices": [
+        0,
+        2
+      ],
+      "frozen_steps_note": "reported signed, machine-epsilon; treated as exact freezes, NOT clamped",
+      "n_positive_diffs": 2,
+      "jump_values": [
+        0.27644208416616434,
+        0.14769358452554404
+      ],
+      "jump_2j": [
+        4.0,
+        6.0
+      ],
+      "observed_ratio": 0.5342659203682175,
+      "implied_power_p_star": 1.5460308993766378,
+      "model_predicted_ratios": {
+        "gamma": 0.861654166907052,
+        "thermal_beta1": 0.1353352832366127,
+        "invZ": 0.5418033863634524,
+        "rational_a1": 0.5357142857142857,
+        "power_p1.5": 0.5443310539518174
+      },
+      "model_log_misfit": {
+        "gamma": 0.47796029845052496,
+        "thermal_beta1": 1.3731384142456888,
+        "invZ": 0.014009486613035384,
+        "rational_a1": 0.002707276681317258,
+        "power_p1.5": 0.018663923592064566
+      },
+      "verdict": "UNDECIDED -- 2 diffs / 1 ratio: zero dof.  gamma and thermal excluded by margin; power(p~1.5), 1/Z and rational_a1 are numerically DEGENERATE on this single step."
+    },
+    "c23": {
+      "diffs_signed": [
+        -2.220446049250313e-16,
+        0.2764420841661661,
+        2.886579864025407e-15,
+        0.14769358452554027
+      ],
+      "frozen_steps_indices": [
+        0,
+        2
+      ],
+      "frozen_steps_note": "reported signed, machine-epsilon; treated as exact freezes, NOT clamped",
+      "n_positive_diffs": 2,
+      "jump_values": [
+        0.2764420841661661,
+        0.14769358452554027
+      ],
+      "jump_2j": [
+        4.0,
+        6.0
+      ],
+      "observed_ratio": 0.5342659203682004,
+      "implied_power_p_star": 1.5460308993767167,
+      "model_predicted_ratios": {
+        "gamma": 0.861654166907052,
+        "thermal_beta1": 0.1353352832366127,
+        "invZ": 0.5418033863634524,
+        "rational_a1": 0.5357142857142857,
+        "power_p1.5": 0.5443310539518174
+      },
+      "model_log_misfit": {
+        "gamma": 0.47796029845055704,
+        "thermal_beta1": 1.3731384142456569,
+        "invZ": 0.01400948661306736,
+        "rational_a1": 0.0027072766813492077,
+        "power_p1.5": 0.018663923592096576
+      },
+      "verdict": "UNDECIDED -- 2 diffs / 1 ratio: zero dof.  gamma and thermal excluded by margin; power(p~1.5), 1/Z and rational_a1 are numerically DEGENERATE on this single step."
+    },
+    "c13": {
+      "diffs_signed": [
+        -2.220446049250313e-16,
+        0.48896275256400923,
+        3.3306690738754696e-15,
+        0.266546213036682
+      ],
+      "frozen_steps_indices": [
+        0,
+        2
+      ],
+      "frozen_steps_note": "reported signed, machine-epsilon; treated as exact freezes, NOT clamped",
+      "n_positive_diffs": 2,
+      "jump_values": [
+        0.48896275256400923,
+        0.266546213036682
+      ],
+      "jump_2j": [
+        4.0,
+        6.0
+      ],
+      "observed_ratio": 0.5451258028121251,
+      "implied_power_p_star": 1.4964017075088016,
+      "model_predicted_ratios": {
+        "gamma": 0.861654166907052,
+        "thermal_beta1": 0.1353352832366127,
+        "invZ": 0.5418033863634524,
+        "rational_a1": 0.5357142857142857,
+        "power_p1.5": 0.5443310539518174
+      },
+      "model_log_misfit": {
+        "gamma": 0.457837392804512,
+        "thermal_beta1": 1.3932613198917019,
+        "invZ": 0.006113419032977744,
+        "rational_a1": 0.017415628964695815,
+        "power_p1.5": 0.0014589820539483904
+      },
+      "verdict": "UNDECIDED -- 2 diffs / 1 ratio: zero dof.  gamma and thermal excluded by margin; power(p~1.5), 1/Z and rational_a1 are numerically DEGENERATE on this single step."
+    },
+    "deficit": {
+      "diffs_signed": [
+        -8.881784197001252e-16,
+        0.063921415768321,
+        4.6629367034256575e-15,
+        0.028840956014402064
+      ],
+      "frozen_steps_indices": [
+        0,
+        2
+      ],
+      "frozen_steps_note": "reported signed, machine-epsilon; treated as exact freezes, NOT clamped",
+      "n_positive_diffs": 2,
+      "jump_values": [
+        0.063921415768321,
+        0.028840956014402064
+      ],
+      "jump_2j": [
+        4.0,
+        6.0
+      ],
+      "observed_ratio": 0.45119394912863364,
+      "implied_power_p_star": 1.9628273150819822,
+      "model_predicted_ratios": {
+        "gamma": 0.861654166907052,
+        "thermal_beta1": 0.1353352832366127,
+        "invZ": 0.5418033863634524,
+        "rational_a1": 0.5357142857142857,
+        "power_p1.5": 0.5443310539518174
+      },
+      "model_log_misfit": {
+        "gamma": 0.6469567022035879,
+        "thermal_beta1": 1.204142010492626,
+        "invZ": 0.1830058903660983,
+        "rational_a1": 0.17170368043438022,
+        "power_p1.5": 0.1876603273451275
+      },
+      "verdict": "UNDECIDED -- 2 diffs / 1 ratio: zero dof.  gamma and thermal excluded by margin; power(p~1.5), 1/Z and rational_a1 are numerically DEGENERATE on this single step."
+    },
+    "degeneracy_note": {
+      "Z(2j=6)/Z(2j=4)": 1.8456879841817386,
+      "(6/4)^1.5": 1.8371173070873836,
+      "rational_a1 30/56": 0.5357142857142857,
+      "comment": "Z itself grows ~ (2j)^{3/2} (smoothed) at beta=1, so candidates (iii) p~1.5 and (iv) 1/Z are partially the SAME hypothesis on the null subsequence; for the mixed ref they separate because Z zig-zags within integer/half-integer pairs while the mixed diffs are smooth -- there 1/Z is excluded by shape."
+    }
+  },
+  "null_H_norm_classification": {
+    "diffs": [
+      0.24494897427831752,
+      0.16329931618554538,
+      0.11664236870396194,
+      0.08748177652797051
+    ],
+    "ratios_observed": [
+      0.6666666666666682,
+      0.7142857142857201,
+      0.7499999999999919
+    ],
+    "ratio_trend": "increasing",
+    "span_decades": 0.4471580313422194,
+    "models": {
+      "gamma": {
+        "k_free": 1,
+        "A": 0.4276816755009208,
+        "rms_value": 0.30823702804733344,
+        "ratios_pred": [
+          0.946394630357186,
+          0.9287712379549449,
+          0.9277356271328153
+        ],
+        "rms_ratio": 0.2810318943238023,
+        "shape_pred": "decreasing",
+        "verdict": "EXCLUDED"
+      },
+      "thermal_beta1": {
+        "k_free": 1,
+        "A": 12.794804295619704,
+        "rms_value": 0.7356634043219255,
+        "ratios_pred": [
+          0.3678794411714423,
+          0.36787944117144233,
+          0.36787944117144233
+        ],
+        "rms_ratio": 0.6585685639723678,
+        "shape_pred": "non-monotone",
+        "verdict": "EXCLUDED"
+      },
+      "power": {
+        "k_free": 2,
+        "A": 1.2615619378756122,
+        "p_upper": 1.4837056230784287,
+        "p_lower": 1.1192739568759815,
+        "p_mid": 1.3030407541681612,
+        "rms_value": 0.009831131928231557,
+        "ratios_pred": [
+          0.652570885727528,
+          0.7181481875825155,
+          0.7629891110560204
+        ],
+        "rms_ratio": 0.016130770124712715,
+        "shape_pred": "increasing",
+        "verdict": "CONSISTENT"
+      },
+      "invZ_upper": {
+        "k_free": 1,
+        "A": 1.8722538523422099,
+        "rms_value": 0.08949149808639517,
+        "ratios_pred": [
+          0.5414991762362064,
+          0.8316647143870666,
+          0.6514685269084178
+        ],
+        "ratio_trend_pred": "non-monotone",
+        "rms_ratio": 0.1695368226054277,
+        "shape_pred": "non-monotone",
+        "verdict": "EXCLUDED"
+      },
+      "invZ_lower": {
+        "k_free": 1,
+        "A": 1.2843315063677314,
+        "rms_value": 0.09959892661260812,
+        "ratios_pred": [
+          0.754762126102936,
+          0.5414991762362064,
+          0.8316647143870666
+        ],
+        "ratio_trend_pred": "non-monotone",
+        "rms_ratio": 0.18509726590138686,
+        "shape_pred": "non-monotone",
+        "verdict": "EXCLUDED"
+      },
+      "geometric_free_rate": {
+        "k_free": 2,
+        "A": 0.6639409220962761,
+        "c": 0.3425330488164682,
+        "rms_value": 0.029532263464114084,
+        "ratios_pred": [
+          0.7099696553409865,
+          0.7099696553409865,
+          0.7099696553409864
+        ],
+        "rms_ratio": 0.04832462153436155,
+        "shape_pred": "non-monotone",
+        "verdict": "EXCLUDED"
+      },
+      "rational_a1": {
+        "k_free": 1,
+        "A": 4.8989794855663655,
+        "rms_value": 4.113822019402337e-15,
+        "ratios_pred": [
+          0.6666666666666666,
+          0.7142857142857143,
+          0.75
+        ],
+        "rms_ratio": 7.870586020912916e-15,
+        "shape_pred": "increasing",
+        "verdict": "CONSISTENT"
+      }
+    },
+    "best_by_ratio_test": "rational_a1",
+    "best_by_value_fit": "rational_a1",
+    "ratio_value_consistent": true
+  },
+  "beta_discriminator": {
+    "c12": {
+      "diff_5/2_to_3_by_beta": {
+        "0.5": 0.06440914780163887,
+        "1.0": 0.14769358452554404,
+        "2.0": 0.5118671501328658
+      },
+      "observed_ratio_beta0.5_over_beta1": 0.43609983472571967,
+      "observed_ratio_beta2_over_beta1": 3.465737200279927,
+      "thermal_pred_ratio_beta0.5": 20.085536923187668,
+      "thermal_pred_ratio_beta2": 0.0024787521766663585,
+      "exclusion_factor_beta0.5": 46.057199117766814,
+      "exclusion_factor_beta2": 1398.1781772718207,
+      "verdict": "THERMAL EXCLUDED: diffs GROW with beta (super-linear), opposite in direction and orders of magnitude away from exp(-2*beta*j) suppression."
+    },
+    "deficit": {
+      "diff_5/2_to_3_by_beta": {
+        "0.5": 0.015204025042513392,
+        "1.0": 0.028840956014402064,
+        "2.0": 0.06658346049526731
+      },
+      "observed_ratio_beta0.5_over_beta1": 0.5271678593081688,
+      "observed_ratio_beta2_over_beta1": 2.308642628282436,
+      "thermal_pred_ratio_beta0.5": 20.085536923187668,
+      "thermal_pred_ratio_beta2": 0.0024787521766663585,
+      "exclusion_factor_beta0.5": 38.1008374629421,
+      "exclusion_factor_beta2": 931.3729101338802,
+      "verdict": "THERMAL EXCLUDED: diffs GROW with beta (super-linear), opposite in direction and orders of magnitude away from exp(-2*beta*j) suppression."
+    },
+    "scope_caveat": "beta probe exists only for the NULL reference and only at jmax in {5/2, 3} (one diff per beta) -- this excludes a thermal MECHANISM for the staircase steps directly; for the mixed ref thermal is excluded independently by the ratio test (pred 0.368 vs obs 0.67-0.74)."
+  },
+  "penalty_rate_audit": {
+    "per_class": {
+      "(0.5,0.5) spacelike": {
+        "b": 0.5,
+        "E_sequence": [
+          0.04614676017292707,
+          0.2315639479565077,
+          0.103883826659398,
+          0.26307136964878275,
+          0.17234823948093592
+        ],
+        "diffs_signed": [
+          0.18541718778358063,
+          -0.1276801212971097,
+          0.15918754298938476,
+          -0.09072313016784683
+        ],
+        "frozen_steps": [],
+        "n_pos": 2,
+        "n_neg": 2,
+        "monotone": "non-monotone",
+        "pair_freeze_staircase": false,
+        "rate_classification": "NOT APPLICABLE (non-monotone / mixed-sign diffs)"
+      },
+      "(1.0,0.0) spacelike": {
+        "b": 1.0,
+        "E_sequence": [
+          -2.220446049250313e-16,
+          2.886579864025407e-15,
+          7.993605777301127e-15,
+          -3.9968028886505635e-15,
+          -1.0658141036401503e-14
+        ],
+        "diffs_signed": [
+          3.1086244689504383e-15,
+          5.10702591327572e-15,
+          -1.199040866595169e-14,
+          -6.661338147750939e-15
+        ],
+        "frozen_steps": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "n_pos": 0,
+        "n_neg": 0,
+        "monotone": "non-monotone",
+        "pair_freeze_staircase": false,
+        "rate_classification": "EXACT ZERO at every window (commuting class, frozen)"
+      },
+      "(2.0,0.0) spacelike": {
+        "b": 2.0,
+        "E_sequence": [
+          -0.017947983771902987,
+          -0.0179479837719001,
+          -8.562753601282225e-06,
+          -8.562753612384455e-06,
+          0.010013220105382636
+        ],
+        "diffs_signed": [
+          2.886579864025407e-15,
+          0.017939421018298818,
+          -1.1102230246251565e-14,
+          0.01002178285899502
+        ],
+        "frozen_steps": [
+          0,
+          2
+        ],
+        "n_pos": 2,
+        "n_neg": 0,
+        "monotone": "non-monotone",
+        "pair_freeze_staircase": true,
+        "rate_classification": "staircase: integer-step subsequence, 1 ratio, UNDECIDED (consistent with the legs-probe power/1/Z degenerate class)",
+        "integer_step_jumps": [
+          0.017939421018298818,
+          0.01002178285899502
+        ],
+        "integer_step_ratio": 0.5586458363830394,
+        "implied_power_p_star": 1.435979474856751
+      },
+      "(2.0,1.0) spacelike": {
+        "b": 2.0,
+        "E_sequence": [
+          null,
+          1.5543122344752192e-15,
+          0.05532357637000995,
+          0.0553235763700064,
+          0.33580133898061026
+        ],
+        "diffs_signed": [
+          0.0553235763700084,
+          -3.552713678800501e-15,
+          0.28047776261060386
+        ],
+        "frozen_steps": [
+          1
+        ],
+        "n_pos": 2,
+        "n_neg": 0,
+        "monotone": "non-monotone",
+        "pair_freeze_staircase": false,
+        "rate_classification": "NOT APPLICABLE (non-monotone / mixed-sign diffs)",
+        "post_zero_window_diffs": [
+          0.0553235763700084,
+          -3.552713678800501e-15,
+          0.28047776261060386
+        ],
+        "note": "first window folded to zero; over windows 2..5 the class pair-freezes at (2,5/2) and its integer-step jumps GROW (0.0553 -> 0.2805, ratio 5.07): divergent staircase, opposite of the null-ref legs staircase"
+      },
+      "(1.0,1.0) null": {
+        "b": 1.0,
+        "E_sequence": [
+          0.335770997079035,
+          0.3357709970790361,
+          0.5134305520155484,
+          0.5134305520155484,
+          0.6221222209471571
+        ],
+        "diffs_signed": [
+          1.1102230246251565e-15,
+          0.1776595549365123,
+          0.0,
+          0.10869166893160864
+        ],
+        "frozen_steps": [
+          0,
+          2
+        ],
+        "n_pos": 2,
+        "n_neg": 0,
+        "monotone": "non-monotone",
+        "pair_freeze_staircase": true,
+        "rate_classification": "staircase: integer-step subsequence, 1 ratio, UNDECIDED (consistent with the legs-probe power/1/Z degenerate class)",
+        "integer_step_jumps": [
+          0.1776595549365123,
+          0.10869166893160864
+        ],
+        "integer_step_ratio": 0.6117974851983067,
+        "implied_power_p_star": 1.211827967300946
+      },
+      "(1.5,1.5) timelike": {
+        "b": 1.5,
+        "E_sequence": [
+          0.005113631045344125,
+          0.8281695572021743,
+          0.39905884530221414,
+          0.9236923791052352,
+          0.9746907332483099
+        ],
+        "diffs_signed": [
+          0.8230559261568302,
+          -0.4291107118999602,
+          0.524633533803021,
+          0.05099835414307474
+        ],
+        "frozen_steps": [],
+        "n_pos": 3,
+        "n_neg": 1,
+        "monotone": "non-monotone",
+        "pair_freeze_staircase": false,
+        "rate_classification": "NOT APPLICABLE (non-monotone / mixed-sign diffs)"
+      },
+      "(2.0,2.0) timelike": {
+        "b": 2.0,
+        "E_sequence": [
+          -0.0030048203912187432,
+          0.0081892824348333,
+          2.0198980525250843,
+          2.019898052525078,
+          1.842293578375977
+        ],
+        "diffs_signed": [
+          0.011194102826052044,
+          2.0117087700902507,
+          -6.217248937900877e-15,
+          -0.17760447414910097
+        ],
+        "frozen_steps": [
+          2
+        ],
+        "n_pos": 2,
+        "n_neg": 1,
+        "monotone": "non-monotone",
+        "pair_freeze_staircase": false,
+        "rate_classification": "NOT APPLICABLE (non-monotone / mixed-sign diffs)"
+      }
+    },
+    "b_parity_dichotomy": {
+      "integer_b_pair_freeze": [
+        "(2.0,0.0) spacelike",
+        "(1.0,1.0) null"
+      ],
+      "half_integer_b_every_step": [
+        "(0.5,0.5) spacelike",
+        "(1.5,1.5) timelike"
+      ],
+      "other": [
+        "(1.0,0.0) spacelike (exact zero)",
+        "(2.0,1.0) spacelike",
+        "(2.0,2.0) timelike"
+      ]
+    },
+    "structural_note": "Pair-freeze staircases (movement ONLY at half-integer->integer window steps) occur exactly for integer-b classes; half-integer-b classes ((0.5,0.5), (1.5,1.5)) move at every step.  Same dichotomy as the legs probe (null ref b=1 staircases, mixed ref b=1/2 smooth).  Matches the (-1)^{2b} spin-statistics grading of B3 Phase-1: a (-1)^{2b}-even multiplier cannot couple the newly added half-integer shell to the integer shells.  OBSERVATION, not proven here."
+  },
+  "headline": {
+    "question": "does the state-level layer converge at the metric-layer gamma rate, the thermal rate, or something else?",
+    "answer": "SOMETHING ELSE.  The state-level (D_max) diffs follow a power-law class with local effective exponent p_eff ~ 1.5 (c12 1.51, c13 1.51, deficit 1.61).  Gamma-type log(2j)/(2j) is EXCLUDED (predicted per-step diff ratios 0.93-0.95 vs observed 0.67-0.74).  Thermal exp(-2*beta*j) is EXCLUDED twice over (fixed-beta ratio e^{-1}=0.368 vs observed 0.67-0.74; beta probe shows diffs GROW with beta, ~3 OoM away and wrong direction).  1/Z is EXCLUDED for the mixed ref by shape (zig-zag vs smooth) but DEGENERATE with power p~1.5 on the null integer-step subsequence (Z ~ (2j)^{3/2} smoothed at beta=1).  Constant identification is NOT claimed: the H_norm(null) exact closed form proves that an asymptotic-p=2 rational sequence fits as p_eff~1.49 over this window.  If the diffs are increments of a convergent sequence, the implied state-level ERROR rate is (2j)^{-(p_eff-1)} ~ (2j)^{-0.5}: SLOWER than the metric layer's gamma rate log(2j)/(2j)."
+  },
+  "caveats": [
+    "GATE: no observable was formally CONVERGENT; classification performed on the converging-but-ungated mixed-reference set (post-hoc selection on apparent monotone convergence) -- selection-bias flagged per audit rule.",
+    "Only 4 diffs per observable spanning <0.5 decades: this is a CLASS classification, not a constant identification.  p_eff ~ 1.5 is a local exponent; the bit-exact H_norm(null) counterexample (asymptotic p=2, fitted p_eff 1.49 on this window) shows the window cannot distinguish p=1.5 from rational p->2 forms.",
+    "Free parameters: power and geometric carry 2 each vs 1 for gamma/thermal/1/Z; part of power's residual advantage is structural.  Its win rests on the ratio-TREND signature (observed ratios strictly increasing 0.67->0.74), which no 1-parameter candidate and no constant-ratio model reproduces.",
+    "power vs geometric(free-rate): residual discrimination is weak (rms_ratio ~0.03 vs ~0.04); the increasing-ratio trend favors power qualitatively.  A beta probe on the MIXED reference would discriminate further (geometric-thermal mechanisms must shift with beta).",
+    "rational_a1 model was tried AFTER the H_norm(null) exact form was discovered (one effective look-elsewhere); it is amplitude-only (1 param) and fits the mixed ratios at rms ~0.015, better than the 2-param power fit -- reported as an observation, not promoted.",
+    "Limit extrapolations carry 35-55% tails; quoted limits uncertain at +/-15%.",
+    "beta discriminator data exist only for the null reference (one diff per beta); thermal exclusion for the mixed ref rests on the ratio test alone.",
+    "Penalty layer: all 7 classes fail the monotonicity precondition; no rate class is assigned there.  The b-parity staircase dichotomy is an observation consistent with the (-1)^{2b} grading, not a theorem."
+  ]
+}

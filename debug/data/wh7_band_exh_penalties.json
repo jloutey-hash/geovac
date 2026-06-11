@@ -1,0 +1,670 @@
+{
+  "meta": {
+    "tag": "penalties",
+    "date": "2026-06-10",
+    "theta": 0.3,
+    "t_total": 1.0,
+    "beta": 1.0,
+    "eps_big": 0.2,
+    "eps0": 0.0001,
+    "comm_threshold": 1e-10,
+    "zero_threshold": 1e-12,
+    "jmax_ladder": [
+      "1",
+      "3/2",
+      "2",
+      "5/2",
+      "3"
+    ],
+    "classes": [
+      "(0.5,0.5) spacelike",
+      "(1.0,0.0) spacelike",
+      "(2.0,0.0) spacelike",
+      "(2.0,1.0) spacelike",
+      "(1.0,1.0) null",
+      "(1.5,1.5) timelike",
+      "(2.0,2.0) timelike"
+    ],
+    "elapsed_s": 1.0
+  },
+  "selftest": {
+    "fold_ratio_max_dev_vs_3b_exact": 4.440892098500626e-16,
+    "mu0_commute_1": 0.0,
+    "mu0_commute_32": 0.0,
+    "c22_commute_1": 0.0,
+    "c22_commute_32": 1.2649110640673515,
+    "c21_norm_1": 4.226065689952829e-17,
+    "c21_norm_32": 0.894427190999916,
+    "dims": {
+      "1": [
+        14,
+        9
+      ],
+      "3/2": [
+        30,
+        17
+      ],
+      "2": [
+        55,
+        32
+      ],
+      "5/2": [
+        91,
+        50
+      ],
+      "3": [
+        140,
+        78
+      ]
+    }
+  },
+  "per_class": {
+    "(0.5,0.5) spacelike": {
+      "windows": [
+        {
+          "jmax": "1",
+          "wedge_dim": 9,
+          "G_norm2": 1.5275252316519463,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810933,
+          "E_0p2_signed": 0.04614676017292707,
+          "D_plus": 0.00011154414059078022,
+          "D_minus": 0.00011154413837033417,
+          "evenness_residual": 3.866503228699969e-09,
+          "comm_norm": 1.5275252316519465,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3/2",
+          "wedge_dim": 17,
+          "G_norm2": 1.8414624173229397,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810844,
+          "E_0p2_signed": 0.2315639479565077,
+          "D_plus": 0.0008492343428478932,
+          "D_minus": 0.0008492343384070011,
+          "evenness_residual": 1.0264393446313136e-08,
+          "comm_norm": 1.8414624173229392,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "2",
+          "wedge_dim": 32,
+          "G_norm2": 2.044972417973321,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.29691622760642944,
+          "E_0p2_signed": 0.103883826659398,
+          "D_plus": 0.00023519614700262537,
+          "D_minus": 0.00023519614256173327,
+          "evenness_residual": 6.363210403037556e-09,
+          "comm_norm": 2.044972417973321,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "5/2",
+          "wedge_dim": 50,
+          "G_norm2": 2.1854644004836343,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.2969162276064341,
+          "E_0p2_signed": 0.26307136964878275,
+          "D_plus": 0.000947034193288232,
+          "D_minus": 0.0009470341888473399,
+          "evenness_residual": 1.5886528093034258e-08,
+          "comm_norm": 2.1854644004836343,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3",
+          "wedge_dim": 78,
+          "G_norm2": 2.2872045845863704,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.32575718362083617,
+          "E_0p2_signed": 0.17234823948093592,
+          "D_plus": 0.0003460220643347611,
+          "D_minus": 0.0003460220687756532,
+          "evenness_residual": 8.993430666848212e-09,
+          "comm_norm": 2.287204584586371,
+          "admissible": "non-commuting"
+        }
+      ],
+      "E_0p2_sequence": [
+        0.04614676017292707,
+        0.2315639479565077,
+        0.103883826659398,
+        0.26307136964878275,
+        0.17234823948093592
+      ],
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "sprint3b_detail": ""
+    },
+    "(1.0,0.0) spacelike": {
+      "windows": [
+        {
+          "jmax": "1",
+          "wedge_dim": 9,
+          "G_norm2": 2.0,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810933,
+          "E_0p2_signed": -2.220446049250313e-16,
+          "D_plus": 0.0,
+          "D_minus": 0.0,
+          "evenness_residual": 9.992007221626409e-16,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "3/2",
+          "wedge_dim": 17,
+          "G_norm2": 2.0,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810844,
+          "E_0p2_signed": 2.886579864025407e-15,
+          "D_plus": 3.3306690738754696e-11,
+          "D_minus": 2.6645352591003757e-11,
+          "evenness_residual": 1.7763568394002505e-15,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "2",
+          "wedge_dim": 32,
+          "G_norm2": 2.6832815729997477,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.29691622760642944,
+          "E_0p2_signed": 7.993605777301127e-15,
+          "D_plus": 5.3290705182007514e-11,
+          "D_minus": -8.881784197001252e-12,
+          "evenness_residual": 4.440892098500626e-15,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "5/2",
+          "wedge_dim": 50,
+          "G_norm2": 2.6832815729997486,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.2969162276064341,
+          "E_0p2_signed": -3.9968028886505635e-15,
+          "D_plus": -3.108624468950438e-11,
+          "D_minus": -4.440892098500626e-11,
+          "evenness_residual": 6.217248937900877e-15,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "3",
+          "wedge_dim": 78,
+          "G_norm2": 2.9830636878467263,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.32575718362083617,
+          "E_0p2_signed": -1.0658141036401503e-14,
+          "D_plus": -2.042810365310288e-10,
+          "D_minus": -1.199040866595169e-10,
+          "evenness_residual": 1.5987211554602254e-14,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        }
+      ],
+      "E_0p2_sequence": [
+        -2.220446049250313e-16,
+        2.886579864025407e-15,
+        7.993605777301127e-15,
+        -3.9968028886505635e-15,
+        -1.0658141036401503e-14
+      ],
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: commutes",
+      "sprint3b_check": "PASS",
+      "sprint3b_detail": ""
+    },
+    "(2.0,0.0) spacelike": {
+      "windows": [
+        {
+          "jmax": "1",
+          "wedge_dim": 9,
+          "G_norm2": 1.788854381999832,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810933,
+          "E_0p2_signed": -0.017947983771902987,
+          "D_plus": -4.511296003428811e-05,
+          "D_minus": -4.5112966695626255e-05,
+          "evenness_residual": 6.661338147750939e-16,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "3/2",
+          "wedge_dim": 17,
+          "G_norm2": 1.788854381999832,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810844,
+          "E_0p2_signed": -0.0179479837719001,
+          "D_plus": -4.511295115250391e-05,
+          "D_minus": -4.511293338893552e-05,
+          "evenness_residual": 1.1102230246251565e-15,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "2",
+          "wedge_dim": 32,
+          "G_norm2": 2.7384392016712353,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.29691622760642944,
+          "E_0p2_signed": -8.562753601282225e-06,
+          "D_plus": -2.405284860174106e-06,
+          "D_minus": -2.405258214821515e-06,
+          "evenness_residual": 7.771561172376096e-15,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "5/2",
+          "wedge_dim": 50,
+          "G_norm2": 2.738439201671236,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.2969162276064341,
+          "E_0p2_signed": -8.562753612384455e-06,
+          "D_plus": -2.405311505526697e-06,
+          "D_minus": -2.405311505526697e-06,
+          "evenness_residual": 8.215650382226158e-15,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "3",
+          "wedge_dim": 78,
+          "G_norm2": 3.2724535977493554,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.32575718362083617,
+          "E_0p2_signed": 0.010013220105382636,
+          "D_plus": 2.521927999765694e-05,
+          "D_minus": 2.5219231147843857e-05,
+          "evenness_residual": 3.774758283725532e-15,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        }
+      ],
+      "E_0p2_sequence": [
+        -0.017947983771902987,
+        -0.0179479837719001,
+        -8.562753601282225e-06,
+        -8.562753612384455e-06,
+        0.010013220105382636
+      ],
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: commutes",
+      "sprint3b_check": "PASS",
+      "sprint3b_detail": ""
+    },
+    "(2.0,1.0) spacelike": {
+      "windows": [
+        {
+          "jmax": "1",
+          "wedge_dim": 9,
+          "G_norm2": 4.226065689952829e-17,
+          "folded_to_zero": true,
+          "comm_norm": 0.0,
+          "admissible": "commutes (zero generator)"
+        },
+        {
+          "jmax": "3/2",
+          "wedge_dim": 17,
+          "G_norm2": 0.894427190999916,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810844,
+          "E_0p2_signed": 1.5543122344752192e-15,
+          "D_plus": 1.1102230246251565e-11,
+          "D_minus": 4.6629367034256575e-11,
+          "evenness_residual": 3.1086244689504383e-15,
+          "comm_norm": 0.8944271909999157,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "2",
+          "wedge_dim": 32,
+          "G_norm2": 1.4142135623730951,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.29691622760642944,
+          "E_0p2_signed": 0.05532357637000995,
+          "D_plus": -1.7763568394002505e-11,
+          "D_minus": 0.0,
+          "evenness_residual": 4.440892098500626e-15,
+          "comm_norm": 2.8284271247461903,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "5/2",
+          "wedge_dim": 50,
+          "G_norm2": 1.4142135623730956,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.2969162276064341,
+          "E_0p2_signed": 0.0553235763700064,
+          "D_plus": -7.993605777301127e-11,
+          "D_minus": -3.552713678800501e-11,
+          "evenness_residual": 8.881784197001252e-15,
+          "comm_norm": 2.8284271247461903,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3",
+          "wedge_dim": 78,
+          "G_norm2": 1.4638501094228,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.32575718362083617,
+          "E_0p2_signed": 0.33580133898061026,
+          "D_plus": -7.993605777301127e-11,
+          "D_minus": -1.7763568394002505e-11,
+          "evenness_residual": 3.774758283725532e-15,
+          "comm_norm": 2.9277002188455996,
+          "admissible": "non-commuting"
+        }
+      ],
+      "E_0p2_sequence": [
+        null,
+        1.5543122344752192e-15,
+        0.05532357637000995,
+        0.0553235763700064,
+        0.33580133898061026
+      ],
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "sprint3b_detail": ""
+    },
+    "(1.0,1.0) null": {
+      "windows": [
+        {
+          "jmax": "1",
+          "wedge_dim": 9,
+          "G_norm2": 1.2247448713915892,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810933,
+          "E_0p2_signed": 0.335770997079035,
+          "D_plus": 1.0353293140319408,
+          "D_minus": -1.0348323973552453,
+          "evenness_residual": 0.00010355003754647374,
+          "comm_norm": 2.4494897427831783,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3/2",
+          "wedge_dim": 17,
+          "G_norm2": 1.4696938456699067,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810844,
+          "E_0p2_signed": 0.3357709970790361,
+          "D_plus": 1.035329314047484,
+          "D_minus": -1.0348323972997342,
+          "evenness_residual": 0.00010355003754647374,
+          "comm_norm": 2.4494897427831783,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "2",
+          "wedge_dim": 32,
+          "G_norm2": 1.632993161855452,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.29691622760642944,
+          "E_0p2_signed": 0.5134305520155484,
+          "D_plus": 1.5002272699993213,
+          "D_minus": -1.4993675477459334,
+          "evenness_residual": 0.00015003530530766085,
+          "comm_norm": 3.265986323710905,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "5/2",
+          "wedge_dim": 50,
+          "G_norm2": 1.749635530559414,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.2969162276064341,
+          "E_0p2_signed": 0.5134305520155484,
+          "D_plus": 1.500227269932708,
+          "D_minus": -1.4993675477814605,
+          "evenness_residual": 0.00015003530530255382,
+          "comm_norm": 3.2659863237109055,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3",
+          "wedge_dim": 78,
+          "G_norm2": 1.8371173070873845,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.32575718362083617,
+          "E_0p2_signed": 0.6221222209471571,
+          "D_plus": 1.7916164169040627,
+          "D_minus": -1.7905467110423956,
+          "evenness_residual": 0.00017916910265380892,
+          "comm_norm": 3.6742346141747695,
+          "admissible": "non-commuting"
+        }
+      ],
+      "E_0p2_sequence": [
+        0.335770997079035,
+        0.3357709970790361,
+        0.5134305520155484,
+        0.5134305520155484,
+        0.6221222209471571
+      ],
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "sprint3b_detail": ""
+    },
+    "(1.5,1.5) timelike": {
+      "windows": [
+        {
+          "jmax": "1",
+          "wedge_dim": 9,
+          "G_norm2": 0.7905694150420948,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810933,
+          "E_0p2_signed": 0.005113631045344125,
+          "D_plus": 1.239363278671135e-05,
+          "D_minus": 1.2393630566265301e-05,
+          "evenness_residual": 2.1094237467877974e-15,
+          "comm_norm": 0.7905694150420948,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3/2",
+          "wedge_dim": 17,
+          "G_norm2": 1.3139476033163806,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810844,
+          "E_0p2_signed": 0.8281695572021743,
+          "D_plus": 0.002402288654668183,
+          "D_minus": 0.0024022886591090753,
+          "evenness_residual": 1.102726954194111e-08,
+          "comm_norm": 3.9418428099491423,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "2",
+          "wedge_dim": 32,
+          "G_norm2": 1.3948952215430839,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.29691622760642944,
+          "E_0p2_signed": 0.39905884530221414,
+          "D_plus": 0.000439090346304738,
+          "D_minus": 0.000439090346304738,
+          "evenness_residual": 2.573825375051797e-09,
+          "comm_norm": 4.184685664629254,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "5/2",
+          "wedge_dim": 50,
+          "G_norm2": 1.5262294054447747,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.2969162276064341,
+          "E_0p2_signed": 0.9236923791052352,
+          "D_plus": 0.005382647292329068,
+          "D_minus": 0.00538264729676996,
+          "evenness_residual": 3.818328653260039e-08,
+          "comm_norm": 4.445714395023588,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3",
+          "wedge_dim": 78,
+          "G_norm2": 1.819422789234675,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.32575718362083617,
+          "E_0p2_signed": 0.9746907332483099,
+          "D_plus": 0.0015651066620492315,
+          "D_minus": 0.0015651066753719078,
+          "evenness_residual": 1.737076549268579e-08,
+          "comm_norm": 5.458268367704025,
+          "admissible": "non-commuting"
+        }
+      ],
+      "E_0p2_sequence": [
+        0.005113631045344125,
+        0.8281695572021743,
+        0.39905884530221414,
+        0.9236923791052352,
+        0.9746907332483099
+      ],
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "sprint3b_detail": ""
+    },
+    "(2.0,2.0) timelike": {
+      "windows": [
+        {
+          "jmax": "1",
+          "wedge_dim": 9,
+          "G_norm2": 1.0954451150103321,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810933,
+          "E_0p2_signed": -0.0030048203912187432,
+          "D_plus": -7.518825562158327e-06,
+          "D_minus": -7.518812239482031e-06,
+          "evenness_residual": 8.881784197001252e-16,
+          "comm_norm": 0.0,
+          "admissible": "commutes"
+        },
+        {
+          "jmax": "3/2",
+          "wedge_dim": 17,
+          "G_norm2": 1.0954451150103321,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.23299481183810844,
+          "E_0p2_signed": 0.0081892824348333,
+          "D_plus": -7.51881445992808e-06,
+          "D_minus": -7.518794475913637e-06,
+          "evenness_residual": 2.1094237467877974e-15,
+          "comm_norm": 1.2649110640673515,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "2",
+          "wedge_dim": 32,
+          "G_norm2": 1.6781914463529615,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.29691622760642944,
+          "E_0p2_signed": 2.0198980525250843,
+          "D_plus": 1.7820474918917029,
+          "D_minus": -1.777571296472935,
+          "evenness_residual": 0.00017800390004341082,
+          "comm_norm": 6.712765785411846,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "5/2",
+          "wedge_dim": 50,
+          "G_norm2": 1.6781914463529624,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.2969162276064341,
+          "E_0p2_signed": 2.019898052525078,
+          "D_plus": 1.782047491882821,
+          "D_minus": -1.7775712964995805,
+          "evenness_residual": 0.0001780039000447431,
+          "comm_norm": 6.712765785411849,
+          "admissible": "non-commuting"
+        },
+        {
+          "jmax": "3",
+          "wedge_dim": 78,
+          "G_norm2": 2.005315909851265,
+          "folded_to_zero": false,
+          "baseline_deficit": 0.32575718362083617,
+          "E_0p2_signed": 1.842293578375977,
+          "D_plus": 3.406609797340643,
+          "D_minus": -3.394059167147745,
+          "evenness_residual": 0.0003402145384483468,
+          "comm_norm": 6.712765785411847,
+          "admissible": "non-commuting"
+        }
+      ],
+      "E_0p2_sequence": [
+        -0.0030048203912187432,
+        0.0081892824348333,
+        2.0198980525250843,
+        2.019898052525078,
+        1.842293578375977
+      ],
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 1 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "sprint3b_detail": ""
+    }
+  },
+  "summary": {
+    "(0.5,0.5) spacelike": {
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "E_0p2_at_jmax3": 0.17234823948093592
+    },
+    "(1.0,0.0) spacelike": {
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: commutes",
+      "sprint3b_check": "PASS",
+      "E_0p2_at_jmax3": -1.0658141036401503e-14
+    },
+    "(2.0,0.0) spacelike": {
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: commutes",
+      "sprint3b_check": "PASS",
+      "E_0p2_at_jmax3": 0.010013220105382636
+    },
+    "(2.0,1.0) spacelike": {
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "E_0p2_at_jmax3": 0.33580133898061026
+    },
+    "(1.0,1.0) null": {
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "E_0p2_at_jmax3": 0.6221222209471571
+    },
+    "(1.5,1.5) timelike": {
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 0 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "E_0p2_at_jmax3": 0.9746907332483099
+    },
+    "(2.0,2.0) timelike": {
+      "convergence": "NON-MONOTONE / MIXED",
+      "admissibility": "STABLE from window 1 onward: non-commuting",
+      "sprint3b_check": "PASS",
+      "E_0p2_at_jmax3": 1.842293578375977
+    }
+  },
+  "caveats": [
+    "(1.0,1.0) null coincides with the reference direction (reference_H uses class_gen_folded('(1.0,1.0) null', jmax)). The kick G == H_ref at every window, so kicked(cfg, G, eps) rotates the KMS orbit in the SAME direction as the reference perturbation. E(0.2) measures deficit of a second rotation on top of the first; it is structurally different from a transverse kick. D_plus and D_minus are directional derivatives along the reference orbit itself and thus measure orbit curvature, not cross-direction penalty.",
+    "Baseline deficit is computed as deficit(cfg, cfg['mid']). For a true geodesic midpoint this should be zero; small nonzero values (|baseline| < 1e-6) are numerical. Large baseline would indicate make_config does not produce a geodesic triple. Values reported in per-window rows.",
+    "E(0.2) signed: positive = kick INCREASES the sum of d_max legs (penalty); negative = kick DECREASES it (improvement / shortcut). Negative E is a first-class physical result indicating the kicked state is a better triangle midpoint than the mid-orbit reference.",
+    "D_plus, D_minus are one-sided finite-difference derivatives at eps0=1e-4 relative to baseline. They approximate the directional derivative of the deficit functional in the +G and -G directions respectively.",
+    "Admissibility threshold: [K_W, G] < 1e-10 -> commutes. This is a strict criterion; values in the 1e-13 to 1e-15 range are machine-epsilon zeros.",
+    "Band exhaustion convention: RAW (unnormalized) generators. Growing jmax with FIXED (b, mu', mu) is an honest window-compression of a fixed SU(2) object. Norms grow; penalties scale accordingly. Normalized comparisons would require dividing by G_norm2 at each window."
+  ]
+}

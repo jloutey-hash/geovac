@@ -1,0 +1,134 @@
+{
+ "T0_numeric_crosscheck_max_dev": 2.13149683783359e-15,
+ "T1_block_reflection_identity": {
+  "holds": true,
+  "entries_checked": 50
+ },
+ "T2_parity_rule_mu0": {
+  "(1.0,0.0) spacelike": {
+   "blocks": {
+    "(0, 1)": {
+     "eps": 1,
+     "eigen_ok": true
+    },
+    "(1, 0)": {
+     "eps": 1,
+     "eigen_ok": true
+    },
+    "(1, 1)": {
+     "eps": -1,
+     "eigen_ok": true
+    },
+    "(1/2, 1/2)": {
+     "eps": -1,
+     "eigen_ok": true
+    }
+   },
+   "parity_rule_holds": true,
+   "fold_frob2_ratio": "6/19",
+   "fold_frob2_ratio_float": 0.3157894736842105,
+   "block_annihilation_iff_eps_odd": true,
+   "annihilated": false,
+   "KW_commutes": true
+  },
+  "(2.0,0.0) spacelike": {
+   "blocks": {
+    "(1, 1)": {
+     "eps": 1,
+     "eigen_ok": true
+    }
+   },
+   "parity_rule_holds": true,
+   "fold_frob2_ratio": "5/6",
+   "fold_frob2_ratio_float": 0.8333333333333334,
+   "block_annihilation_iff_eps_odd": true,
+   "annihilated": false,
+   "KW_commutes": true
+  },
+  "(2.0,1.0) spacelike": {
+   "blocks": {
+    "(1, 1)": {
+     "eps": -1,
+     "eigen_ok": true
+    }
+   },
+   "parity_rule_holds": true,
+   "fold_frob2_ratio": "0",
+   "fold_frob2_ratio_float": 0.0,
+   "block_annihilation_iff_eps_odd": true,
+   "annihilated": true,
+   "KW_commutes": true
+  },
+  "(1.0,1.0) null": {
+   "blocks": {
+    "(0, 1)": {
+     "eps": -1,
+     "eigen_ok": true
+    },
+    "(1, 0)": {
+     "eps": -1,
+     "eigen_ok": true
+    },
+    "(1, 1)": {
+     "eps": 1,
+     "eigen_ok": true
+    },
+    "(1/2, 1/2)": {
+     "eps": 1,
+     "eigen_ok": true
+    }
+   },
+   "parity_rule_holds": true,
+   "fold_frob2_ratio": "11/19",
+   "fold_frob2_ratio_float": 0.5789473684210527,
+   "block_annihilation_iff_eps_odd": true,
+   "annihilated": false,
+   "KW_commutes": false
+  },
+  "(2.0,2.0) timelike": {
+   "blocks": {
+    "(1, 1)": {
+     "eps": 1,
+     "eigen_ok": true
+    }
+   },
+   "parity_rule_holds": true,
+   "fold_frob2_ratio": "1/2",
+   "fold_frob2_ratio_float": 0.5,
+   "block_annihilation_iff_eps_odd": true,
+   "annihilated": false,
+   "KW_commutes": true
+  }
+ },
+ "T3_partial_folds": {
+  "(0.5,0.5) spacelike": {
+   "fold_frob2_ratio": "3/8",
+   "fold_frob2_ratio_float": 0.375,
+   "strictly_partial": true
+  },
+  "(1.5,1.5) timelike": {
+   "fold_frob2_ratio": "1/4",
+   "fold_frob2_ratio_float": 0.25,
+   "strictly_partial": true
+  }
+ },
+ "T4_window_edge": {
+  "(2,1)_revived_at_3/2": {
+   "GW_nonzero": true,
+   "fold_frob2_ratio": "8/41",
+   "surviving_blocks": [
+    "(1/2,3/2)",
+    "(3/2,1/2)"
+   ]
+  },
+  "(2,2)_at_3/2": {
+   "KW_commutes": false,
+   "n_nonmirror_entries": 8,
+   "mirror_part_nonzero": true,
+   "mirror_frob2_fraction_exact": "9/25",
+   "mirror_frob2_fraction": 0.36
+  },
+  "(2,2)_at_1_purely_mirror": true,
+  "mu0_classes_commute_both_windows": true
+ }
+}
