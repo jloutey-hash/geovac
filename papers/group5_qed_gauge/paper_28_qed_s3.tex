@@ -13,6 +13,10 @@
 \newtheorem{observation}{Observation}
 \newtheorem{remark}{Remark}
 
+% Shorthand macros for number rings and motivic categories
+\newcommand{\MT}{\mathcal{MT}}
+\newcommand{\Z}{\mathbb{Z}}
+
 \title{QED on $S^3$: Spectral Geometry of Perturbative Transcendentals}
 \author{GeoVac Project}
 \date{April 2026}
@@ -49,11 +53,14 @@ curvature correction within 0.4\%.  The next-order coefficient
 $c_3 = -5.946(3) \times 10^{-7}$ is nonzero at $200.9\,\sigma$, so the
 curvature expansion does not terminate at second order
 (Sec.~\ref{sec:curvature_coefficients}).
-(6)~\textbf{Depth-$k$ tower:} at each loop order, a new irreducible
-transcendental constant appears.  The two-loop $S_{\min}$ is computed
-to 200 digits and confirmed irreducible against a 100-element PSLQ
-basis; the three-loop constant $S^{(3)}$ is independent of $S_{\min}$
-(Proposition~\ref{prop:depth_k}).
+(6)~\textbf{Depth-$k$ tower:} loop order bounds the motivic depth of
+the level-2 (alternating-MZV) content; it does not automatically mint
+new irreducibles.  The two-loop $S_{\min}$ decomposes exactly into
+Hoffman double $t$-values (classical periods of $\MT(\Z[1/2])$; the
+prior ``PSLQ-irreducible'' claim was a basis-coverage artifact);
+the three-loop $S^{(3)}$ is a depth-$\le 3$ element of the same ring
+(Proposition~\ref{prop:depth_k},
+Sec.~\ref{subsec:smin_identified}).
 (7)~\textbf{$\zeta(3)$ complementarity:} the degeneracy-weighted
 fine-structure shell sum $\mathcal{S}(n) = n(5n-4)/2$ and the Dirac
 mode degeneracy $g_n^{\mathrm{Dirac}} = 2n(n+1)$ satisfy
@@ -2224,9 +2231,21 @@ Sprint G4-3a driver: \texttt{debug/g4\_3\_warped\_substrate.py};
 memo: \texttt{debug/g4\_3\_warped\_substrate\_memo.md}.
 
 % ===================================================================
-\section{Two-Loop Irreducible Constant: $S_{\min}$}
+\section{Two-Loop Identified Constant: $S_{\min}$}
 \label{sec:smin}
 % ===================================================================
+
+\noindent\textbf{Correction note (round-2 dossier, 2026-06-10).}
+The earlier subsection heading ``Extended PSLQ irreducibility'' and the
+claim that $S_{\min}$ is ``confirmed irreducible'' were a basis-coverage
+artifact: all 15 PSLQ attempts (47-element and 100-element bases at
+150--200~dps) never contained the level-2 weight-5--8 monomials
+($\pi^4\ln 2$, $\pi^6\ln 2$, $\mathrm{Li}_5(1/2)$,
+$\mathrm{Li}_4(1/2)\ln 2$, $\zeta(3)\ln^2 2$, \ldots) that the correct
+room requires.  The present text replaces those claims with the
+identified decomposition; see driver
+\texttt{debug/smin\_dossier\_round1.py} and the round-1 dossier
+\texttt{debug/smin\_dossier\_round1\_memo.md} for the complete reduction chain.
 
 The CG-weighted two-loop sunset sum is:
 \begin{equation}
@@ -2250,46 +2269,138 @@ The first 80 digits agree with the Sprint~5 three-method verification
   \label{eq:S_min_value}
 \end{equation}
 
-\subsection{Extended PSLQ irreducibility}
+\subsection{Motivic identification: Hoffman double $t$-values}
+\label{subsec:smin_identified}
 
-A 100-element PSLQ basis was constructed at 200 dps, including:
-\begin{itemize}
-\item Standard: $\{1, \pi^2, \pi^4, \pi^6, \pi^8, \zeta(3), \zeta(5),
-      \zeta(7), \zeta(9)\}$
-\item Products: $\{\pi^2 \zeta(3), \pi^2 \zeta(5), \pi^4 \zeta(3),
-      \zeta(3)^2, \zeta(3)\zeta(5)\}$
-\item Catalan/Dirichlet: $\{G, \beta(3), \beta(4), G^2,
-      G\pi^2, \beta(4)\pi^2, G \cdot \beta(4)\}$ and all
-      cross-products with odd zeta
-\item Euler sums: $\{s_{2,3}, s_{3,2}\}$
-\item Tornheim--Witten: $\{T(2,2,2), T(2,2,4)\}$
-\item Double Hurwitz at quarter-integer shifts:
-      $\{\zeta(4,1/4), \zeta(4,3/4),$ products$\}$
-\item Hurwitz at $3/2$: $\{\zeta(s, 3/2)\}$ for $s = 2, \ldots, 6$
-      and products
-\item $D_{\mathrm{even}}(4)$, $D_{\mathrm{odd}}(4)$, and their
-      products with standard constants
-\item Polygamma: $\{\psi^{(1)}(3/2), \psi^{(3)}(3/2)\}$ and products
-\item Polylogarithm: $\{\mathrm{Li}_4(1/2)\}$ and cross-products
-\item Clausen function: $\mathrm{Cl}_2(\pi/3)$
-\item Euler--Mascheroni: $\gamma$
-\end{itemize}
+$S_{\min}$ decomposes \emph{exactly} into Hoffman double $t$-values
+--- classical level-2 alternating MZVs, periods of $\MT(\Z[1/2])$.
+Notation: $\lambda(s) = (1-2^{-s})\zeta(s) = \sum_{o\ge1,\,\mathrm{odd}} o^{-s}$;
+$t(b,c) = \sum_{o_2 > o_1 \ge 1,\,\mathrm{odd}} o_2^{-b} o_1^{-c}$
+(Hoffman~\cite{hoffman2019odd} descending convention: first index $b$
+on the larger summation variable).
 
-All PSLQ attempts return no integer relation.  $S_{\min}$ is confirmed
-irreducible against the most comprehensive basis tested in the
-project, extending the prior 47-element basis at 150~dps.  Module:
-\texttt{debug/smin\_extended\_pslq.py}; 8 fast + 2 slow tests in
-\texttt{tests/test\_smin\_extended.py}.
+\textbf{8-$t$-value decomposition} (verified to residual $1.8\times10^{-129}$ at
+130~dps, re-verified at 260~dps):
+\begin{align}
+  S_{\min} &= 64\bigl[t(2,1) - t(4,1) - 3\,t(2,2) + 3\,t(4,2)
+              - t(2,3) + t(4,3) + 3\,t(2,4) - 3\,t(4,4)\bigr]
+              \nonumber\\
+           &\quad + 32 \sum_{s=3}^{8} d_s\,\bigl(\lambda(s) - 1 - 3^{-s}\bigr),
+  \label{eq:Smin_8tvalue}
+\end{align}
+where the diagonal coefficients are
+$d_3=1,\,d_4=-3,\,d_5=-2,\,d_6=6,\,d_7=1,\,d_8=-3$.
 
-\subsection{Inner photon sum structure}
+\textbf{Stuffle reductions} (exact algebraic identities from the ordering
+decomposition $\lambda(b)\lambda(c) = t(b,c)+t(c,b)+\lambda(b+c)$):
+\begin{align}
+  t(2,2) &= \tfrac{1}{2}\bigl(\lambda(2)^2 - \lambda(4)\bigr), \label{eq:stuffle22}\\
+  t(4,4) &= \tfrac{1}{2}\bigl(\lambda(4)^2 - \lambda(8)\bigr), \label{eq:stuffle44}\\
+  t(2,4)+t(4,2) &= \lambda(2)\lambda(4) - \lambda(6). \label{eq:stuffle2442}
+\end{align}
+(The antisymmetric combination $t(2,4)-t(4,2)$ enters $S_{\min}$ with
+coefficient zero, so only the reducible symmetric combination appears.)
+
+\textbf{Odd-weight depth-1 reductions} (verified at $\ge 1\times10^{-130}$;
+formulas match Hoffman~\cite{hoffman2019odd} Table~2 at weights~3 and~5):
+\begin{align}
+  t(2,1) &= -\tfrac{7}{16}\,\zeta(3) + \tfrac{1}{8}\,\pi^2\ln 2,
+  \label{eq:t21}\\
+  t(2,3) &= -\tfrac{31}{64}\,\zeta(5) + \tfrac{1}{16}\,\pi^2\,\zeta(3).
+  \label{eq:t23}
+\end{align}
+
+\textbf{Remaining odd-weight components --- identified.}  PSLQ at 220~dps
+against the full conjectural level-2 bases (dim~8 at weight~5; 19~product
+monomials at weight~7) identifies both remaining components (residuals
+$2.8\times10^{-221}$ and $3.6\times10^{-222}$;
+\texttt{debug/data/s3\_pslq\_stageA.json}):
+\begin{align}
+  t(4,1) &= \tfrac{1}{96}\,\pi^4\ln 2 - \tfrac{1}{64}\,\pi^2\zeta(3)
+            - \tfrac{31}{64}\,\zeta(5),
+  \label{eq:t41}\\
+  t(4,3) &= \tfrac{1}{128}\,\pi^4\zeta(3) - \tfrac{5}{128}\,\pi^2\zeta(5)
+            - \tfrac{127}{256}\,\zeta(7).
+  \label{eq:t43}
+\end{align}
+Assembling the full decomposition yields the explicit closed form
+\begin{equation}
+  S_{\min} = 8\pi^2\ln 2 - \tfrac{2}{3}\pi^4\ln 2 - 3\pi^2\zeta(3)
+    + \tfrac{1}{2}\pi^4\zeta(3) - \tfrac{5}{2}\pi^2\zeta(5)
+    + \tfrac{\pi^6}{4} - \tfrac{3}{2}\pi^4 - \tfrac{\pi^8}{96},
+  \label{eq:smin_closed}
+\end{equation}
+verified against the Hurwitz-tail anchor at 130~dps (residual
+$1.7\times10^{-129}$; \texttt{debug/smin\_final\_assembly.py}).  Two
+structural features are exact:\ $\zeta(7)$ cancels against the
+$\lambda(7)$ diagonal term, and all rational constants cancel to zero.
+Hence $S_{\min}$ lies in $\mathbb{Q}[\pi^2, \ln 2, \zeta(3), \zeta(5)]$:\
+the two-loop constant carries \emph{no irreducible depth-2 content at
+all} --- every double $t$-value in its decomposition reduces to
+depth~$\le 1$.
+
+\textbf{Basis-coverage audit of the prior ``irreducible'' claim.}
+The 47-element basis (all 15 PSLQ failures at 150~dps) and the 100-element
+basis (200~dps) both contained zero level-2 monomials in the weight-5--8
+rooms.  Specifically, none of
+$\pi^4\ln 2$, $\pi^6\ln 2$, $\mathrm{Li}_4(1/2)\ln 2$,
+$\mathrm{Li}_5(1/2)$, $\mathrm{Li}_6(1/2)$, $\mathrm{Li}_7(1/2)$,
+$\zeta(3)\ln^2 2$, $\ldots$ were included.  Of the conjectural weight-5
+level-2 basis (dimension~8), those tests contained only 2~out of~8
+elements ($\zeta(5)$ and $\pi^2\zeta(3)$); at weight~7, approximately
+4~out of~21.  The ``PSLQ-irreducible'' label was a coverage artifact,
+not a statement about motivic depth.
+
+\subsection{Inner photon sum: closed-form channel count}
+\label{subsec:smin_channel}
 
 The inner photon sum $I(n_1, n_2) = \sum_{q\,\mathrm{allowed}}
 W(n_1, n_2, q) \cdot d_q^T / \mu_q^p$ (at $p=1$: $d_q^T/\mu_q = 1$)
-counts the total CG-weighted vertex channels.  Three structural
-properties: (i) $I(0, n_2) = 0$ for all $n_2$ (the structural zero:
-vertex parity at $n_{\mathrm{ext}}=0$ forces $2n_2$ odd, impossible);
-(ii) $I(n_1, n_2) = I(n_2, n_1)$ (symmetric); (iii) $I(n, n) = 0$
-for $n = 0, 1$ (self-coupling vanishes at the lowest levels).
+counts the total SO(4) CG-weighted vertex channels.  Four structural
+properties:
+\begin{enumerate}
+\item[(i)] $I(0, n_2) = 0$ for all $n_2$ (structural zero: vertex parity
+  at $n_{\mathrm{ext}}=0$ forces $2n_2$ odd, impossible).
+\item[(ii)] $I(n_1, n_2) = I(n_2, n_1)$ (symmetric).
+\item[(iii)] $I(n, n) = 2n-2 = 2(n-1)$ for $n \ge 1$.
+\item[(iv)] \textbf{Closed form} (proved in dossier round-1c; verified
+  against \texttt{geovac/qed\_vertex.py} for all $n_1, n_2 \le 12$;
+  frozen in \texttt{tests/test\_smin\_decomposition.py}):
+  \begin{equation}
+    I(n_1, n_2) = 2\min(n_1, n_2) - 1 - [n_1 = n_2], \qquad
+    n_1, n_2 \ge 1.
+    \label{eq:channel_closed_form}
+  \end{equation}
+\end{enumerate}
+
+\subsection{Exact sunset relation}
+\label{subsec:smin_sunset}
+
+The closed form~\eqref{eq:channel_closed_form} gives, by direct substitution
+$I = 2\min - 1 - \delta$ into the double sum:
+\begin{equation}
+  S_{\mathrm{sunset}} = 2\,S_{\min} - P^2 - Q,
+  \label{eq:sunset_relation}
+\end{equation}
+where $S_{\mathrm{sunset}} = \sum_{n_1,n_2 \ge 1} I(n_1,n_2)\,\phi(n_1)\,\phi(n_2)$
+is the CG-exact two-loop sunset,
+\begin{equation}
+  P = D(4) - \tfrac{64}{81}, \quad
+  D(4) = \pi^2 - \tfrac{\pi^4}{12},
+  \label{eq:P_def}
+\end{equation}
+\begin{equation}
+  Q = 4\,\zeta\!\left(4,\tfrac{5}{2}\right)
+    - 2\,\zeta\!\left(6,\tfrac{5}{2}\right)
+    + \tfrac{1}{4}\,\zeta\!\left(8,\tfrac{5}{2}\right),
+  \label{eq:Q_def}
+\end{equation}
+and the numerical value $S_{\mathrm{sunset}} = 3.89451620519784104455\ldots$ is
+verified at 60~dps in \texttt{tests/test\_smin\_decomposition.py}.
+The correction terms $P^2$ and $Q$ are depth-1 elements of $\MT(\Z)$
+(pure-Tate, $\pi$-even); $S_{\min}$ itself reduces to depth~$\le 1$
+(Eq.~\eqref{eq:smin_closed}), so the two-loop sunset carries no
+irreducible depth-2 content.
 
 % ===================================================================
 \section{Three-Loop Results}
@@ -2363,29 +2474,39 @@ $\pi^{\mathrm{even}}$.
 \label{sec:depth_k}
 % ===================================================================
 
-\begin{proposition}[Depth-$k$ tower]
+\begin{proposition}[Depth-$k$ tower, corrected]
 \label{prop:depth_k}
 At $k$ loops on $S^3$ with vertex restrictions and CG weights:
 \begin{itemize}
 \item $k = 1$: $\pi^{\mathrm{even}}$ only
       (Theorem~\ref{thm:T9}, proven).
-\item $k = 2$: irreducible $S_{\min}$
-      ($100$-element PSLQ at 200~dps fails;
-      Sec.~\ref{sec:smin}).
-\item $k = 3$: new constant $S^{(3)}$ independent of $S_{\min}$
-      (PSLQ with $S_{\min}$ in basis fails at
-      fast-converging exponents).
+\item $k = 2$: $S_{\min}$ is an identified element of $\MT(\Z[1/2])$
+      at level~2.  The depth is \emph{bounded} by 2 (the nesting depth
+      of the min-weight double sum) but the content decomposes into
+      Hoffman double $t$-values, which are classical period-ring
+      elements (Sec.~\ref{subsec:smin_identified}).  The prior label
+      ``irreducible'' was a basis-coverage artifact.
+\item $k = 3$: $S^{(3)}$ is a genuine depth-$\le 3$ element of
+      $\MT(\Z[1/2])$ (triple $t$-value content via the channel-count
+      closed form; Sec.~\ref{sec:three_loop}).  Independence from
+      $S_{\min}$ at fast-converging exponents does not establish
+      motivic irreducibility --- only precision identification at the
+      physical exponents can.
 \end{itemize}
-Each loop order produces a genuinely new transcendental constant through
-nested vertex-parity filtration.
+Loop order bounds the depth of the classical level-2 multiple-$t$-value
+content; it does not mint new irreducible transcendentals automatically.
 \end{proposition}
 
 The mechanism: each vertex coupling creates one level of Hurwitz nesting.
-One vertex produces depth-2 (the min-weight sum in $S_{\min}$).
-Two vertices produce depth-3 (nested min-weights in $S^{(3)}$).
-The prediction extends: $k$ vertices should produce depth-$(k+1)$
-multiple Hurwitz zeta values.  This is the $S^3$ analog of the
-increasing motivic complexity observed in flat-space multi-loop Feynman
+One vertex produces a depth-2 double $t$-value sum ($S_{\min}$).
+Two vertices produce a depth-$\le 3$ triple $t$-value sum ($S^{(3)}$).
+The prediction extends: $k$ vertices produce a depth-$\le (k+1)$
+multiple $t$-value in $\MT(\Z[1/2])$.  Whether the surviving
+irreducible depth-$k$ component is new (not reducible by parity/stuffle
+within the level-2 algebra) is a question for each $k$ separately --- the
+structural nesting is genuine, but the motivic content is classical at
+$k = 2$.  This is the $S^3$ analog of the increasing motivic depth
+observed in flat-space multi-loop Feynman
 integrals~\cite{laporta2002,bailey2001}.
 
 % ===================================================================
@@ -4128,19 +4249,23 @@ enabling $n_{\max} = 100{+}$ in minutes.  However, the CG-weighted
 sum at physical exponents converges too slowly ($\alpha \approx -1.31$)
 for PSLQ identification at any practical $n_{\max}$ --- an honest
 computational finding documented by the convergence analysis.
-The three-loop constant $S^{(3)}$ at fast-converging exponents is
-confirmed independent of $S_{\min}$ and all lower-loop constants.
+The three-loop constant $S^{(3)}$ at fast-converging exponents was
+tested independent of $S_{\min}$ and lower-loop constants only at
+$\sim$20 digits --- weak evidence; the triple-$t$-value decomposition
+program supersedes this route.
 
 \subsection{Open questions}
 
 \begin{enumerate}
-\item Can $S_{\min}$ be identified with a known multiple Hurwitz zeta
-      value in the Borwein--Bailey--Broadhurst
-      compendium~\cite{bailey2001}?  The 100-element PSLQ at 200~dps
-      suggests not, but the Hurwitz shift $a = 3/2$ places it in a
-      sector not systematically explored in the compendium.
+\item \textbf{Resolved (2026-06-11):} $S_{\min}$ is identified in
+      closed form, Eq.~\eqref{eq:smin_closed}.  The 100-element PSLQ
+      null was a basis-coverage artifact, not irreducibility.
 \item Does the depth-$k$ tower stabilize (i.e., do all constants
       beyond some $k_0$ reduce to products of lower-depth constants)?
+      \textbf{Partial (2026-06-11):} at $k=2$ everything reduces to
+      depth~$\le 1$; at $k=3$ genuine depth-2 catalogue generators
+      ($t(5,3)$, $t(5,1)$) appear in the reductions (three-loop
+      decomposition program, in progress).
 \item Is there a Picard--Fuchs interpretation of $S_{\min}$, analogous
       to Ap\'ery's recurrence for $\zeta(3)$~\cite{apery1979}?
 \item Can the self-energy structural zero at $n_{\mathrm{ext}} = 0$
@@ -4319,6 +4444,11 @@ Birkh\"auser, 497--512 (1994).
 D.~H.~Bailey and D.~J.~Broadhurst, ``Parallel integer relation
 detection: techniques and applications,''
 \textit{Math.~Comp.}\ \textbf{70}, 1719--1736 (2001).
+
+\bibitem{hoffman2019odd}
+M.~E.~Hoffman, ``An odd variant of multiple zeta values,''
+\textit{Commun.~Number Theory Phys.}\ \textbf{13}, 529--567 (2019);
+arXiv:1612.05232.
 
 \bibitem{flajolet1998}
 P.~Flajolet and B.~Salvy, ``Euler sums and contour integral

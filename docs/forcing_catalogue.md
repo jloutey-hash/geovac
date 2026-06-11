@@ -457,7 +457,7 @@ rows are the priority re-read (see meta-finding 2).
 - ζ_{D²}(s)=2^{2s−1}[λ(2s−2)−λ(2s)] (π^even only, T9) — proven — check
 - D_even(4)−D_odd(4)=8(β(4)−G) (χ₋₄) — proven — check
 - F₂/(α/2π)=1.084 on S³; Parker–Toms 0.4% — bit-exact — prediction
-- S_min irreducible 200+ dps (∉ {1,π²,π⁴,G,β(4),ζ(3),ζ(5)}) — irreducible — negative-with-structure
+- S_min = 8π²ln2 − (2/3)π⁴ln2 − 3π²ζ(3) + (1/2)π⁴ζ(3) − (5/2)π²ζ(5) + π⁶/4 − (3/2)π⁴ − π⁸/96 (identified 2026-06-11; prior irreducibility = basis-coverage artifact) — closed-form — check
 - pendant-edge Σ_scalar(GS)=2(n−1)/n — exact-rational — negative-with-structure
 - SU(2) maximal-torus → U(1) exact; L₁ kinetic 1/(4N_c) universal — proven — check
 - K π-prefactor = Vol(S²)/4 = Vol(S³)/Vol(S¹) (M1) — closed-form — check

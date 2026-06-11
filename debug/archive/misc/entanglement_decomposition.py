@@ -31,7 +31,7 @@ from geovac.casimir_ci import (
 )
 
 # Import 1-RDM and entanglement code from previous sprint
-from debug.entanglement_geometry import (
+from debug.archive.misc.entanglement_geometry import (
     build_1rdm_from_singlet_ci,
     compute_entanglement_measures,
     assign_quantum_numbers_to_natural_orbitals,

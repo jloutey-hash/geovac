@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT))
 
 import mpmath
 
-from debug.compute_spectral_zero_stats import (
+from debug.archive.rh_arc.compute_spectral_zero_stats import (
     D_full,
     D_even,
     D_odd,

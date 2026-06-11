@@ -25,10 +25,10 @@ from scipy.optimize import curve_fit
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from debug.energy_entanglement_decoupling import (
+from debug.archive.misc.energy_entanglement_decoupling import (
     build_decomposed_hamiltonians, solve_and_entangle,
 )
-from debug.entanglement_geometry import (
+from debug.archive.misc.entanglement_geometry import (
     build_1rdm_from_singlet_ci, compute_entanglement_measures,
 )
 from geovac.balanced_coupled import build_balanced_hamiltonian

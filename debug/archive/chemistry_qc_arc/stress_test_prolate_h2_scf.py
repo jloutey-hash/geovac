@@ -36,8 +36,8 @@ from geovac.prolate_spheroidal_lattice import (
     ProlateSpheroidalLattice,
     fit_spectroscopic_constants,
 )
-from debug.stress_test_prolate_heh_plus import get_orbital_on_grid_general
-from debug.stress_test_prolate_h2 import compute_vee_integral
+from debug.archive.chemistry_qc_arc.stress_test_prolate_heh_plus import get_orbital_on_grid_general
+from debug.archive.chemistry_qc_arc.stress_test_prolate_h2 import compute_vee_integral
 
 
 # ============================================================

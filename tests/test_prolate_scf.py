@@ -10,12 +10,12 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from debug.stress_test_prolate_h2_scf import (
+from debug.archive.chemistry_qc_arc.stress_test_prolate_h2_scf import (
     compute_vnuc_expectation,
     compute_scf_energy,
     optimize_zeff,
 )
-from debug.stress_test_prolate_heh_plus import get_orbital_on_grid_general
+from debug.archive.chemistry_qc_arc.stress_test_prolate_heh_plus import get_orbital_on_grid_general
 
 N_SOLVE = 3000
 N_GRID = 30

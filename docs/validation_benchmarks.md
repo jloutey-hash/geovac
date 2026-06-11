@@ -247,7 +247,7 @@
 | Factorized n_max=50 speed | < 60 seconds | O(N³) performance benchmark |
 | Factorized convergence monotonic | vals increasing with n_max | Three-loop sum convergence |
 | S_min 200 digits verified | 3 independent methods agree | mpmath.nsum, Euler-Maclaurin, direct sum |
-| S_min PSLQ irreducibility | 15 failures across 100+ basis | Extended basis including Tornheim-Witten, colored MZV |
+| S_min closed form (Hoffman t-values) | residual 1.7e-129 at 130 dps | tests/test_smin_decomposition.py; the 15 prior PSLQ failures reinterpreted as basis-coverage artifact |
 | c₂ cross-invariant 8-digit match | |c₂_cross - c₂_apparent| < 2e-8 | Paper 2↔28 bridge verification |
 | c₂ symbolic identity | 19/100 - 41π²/25200 (exact sympy) | Rational+π² decomposition |
 | c₃ from n_int=0..50 | -5.946(3)×10⁻⁷ at 200.9 sigma | Nonzero; expansion does not terminate at c₂ |

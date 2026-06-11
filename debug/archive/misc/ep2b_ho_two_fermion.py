@@ -33,7 +33,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from debug.entanglement_geometry import (
+from debug.archive.misc.entanglement_geometry import (
     build_1rdm_from_singlet_ci,
     compute_entanglement_measures,
 )

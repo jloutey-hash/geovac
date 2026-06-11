@@ -32,7 +32,7 @@ import numpy as np
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from geovac.casimir_ci import _build_graph_h1, two_electron_integral  # noqa: E402
-from debug.entanglement_geometry import compute_entanglement_measures  # noqa: E402
+from debug.archive.misc.entanglement_geometry import compute_entanglement_measures  # noqa: E402
 
 
 # ---------------------------------------------------------------------------

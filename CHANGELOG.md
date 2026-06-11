@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.5.0] - 2026-06-11
+
+### Summary
+
+**Sprint S_min identification + S^(3) decomposition (the depth-two investigation): S_min CLOSED in explicit classical form; the "genuinely new transcendental" claim corrected.** Two-round, PI-directed investigation (round 1: internal dossier agent + external arsenal agent; round 2: verification/propagation agent + S^(3) frontier agent; main-session completion after a spend-limit cutoff):
+
+- **S_min identified:** S_min = 8π²ln2 − (2/3)π⁴ln2 − 3π²ζ(3) + (1/2)π⁴ζ(3) − (5/2)π²ζ(5) + π⁶/4 − (3/2)π⁴ − π⁸/96, verified against the Hurwitz-tail anchor at 130 dps (residual 1.7e-129). Chain: exact Fubini min-weight interchange → odd-integer partial fractions → 8 Hoffman double t-values → stuffle + parity reductions, with t(4,1)/t(4,3) PSLQ-pinned at 220 dps against complete weight-homogeneous level-2 bases (residuals ≤ 2.8e-221). ζ(7) cancels exactly against the λ(7) diagonal; all rational constants cancel; S_min ∈ Q[π², ln2, ζ(3), ζ(5)] — depth ≤ 1 and level 2, a level AND depth drop vs the Paper 55 bounds.
+- **The prior "PSLQ-irreducible at 200 dps" claim was a basis-coverage artifact:** the failed bases contained 2/8 of the weight-5 and ~4/21 of the weight-7 level-2 monomials, and S_min is weight-inhomogeneous (graded support w ∈ {3..8}), structurally defeating every single-weight basis design. Negative preserved with corrected interpretation (Paper 28 §S_min; new CLAUDE.md §3 row).
+- **Channel-count closed form + exact sunset relation:** Σ_q W(n1,n2,q) = 2·min(n1,n2) − 1 − [n1=n2] (exact, zero exceptions n ≤ 40); S_sunset = 2·S_min − P² − Q.
+- **S^(3) decomposition program (~80%, the new frontier):** chain-sum channel-count collapse bit-exact at N ≤ 12; decomposition into 12 triple + 26 double t-values; the built-in stuffle gate caught a trailing-argument-1 evaluator inaccuracy (~1e-12) that invalidates four PSLQ verdicts (named fix: Abel-summation evaluator); eleven odd-weight double t-values reduce to depth 1 (computational parity-theorem confirmation, w5–w11); **first genuine depth-2 generators appear at k = 3** — t(5,3) inside the w8 reductions (residual 1e-343), t(5,1) confirmed irreducible against products; w10 room capped (basis dim 89). Global decomposition-vs-anchor check OPEN (one anchor method diverged; raw sum converges ~N^−1.31). No framework-new transcendental anywhere.
+- **Cosmic-Galois reading:** GeoVac's loop sums stay inside the classical level-2 ring with realized depth growing strictly slower than loop order (≤ k−1 so far) — consistent with the frozen-carrier prediction (Papers 55/56 framing). Papers stay under §1.5.
+
+### Added
+- Canonical memos `debug/smin_dossier_round1_memo.md` + `debug/sprint_s3_decomposition_memo.md`; frozen falsifier `tests/test_smin_decomposition.py` (6 groups, 18 tests, incl. pins for Paper 28 eq:t41/eq:t43/eq:smin_closed); drivers `debug/smin_dossier_round1{,b,c,d}.py`, `debug/smin_final_assembly.py`, `debug/s3_decomp_{setup,engine,numerics,pslq}.py` + JSONs in `debug/data/`
+- Paper 28: §S_min rewritten as "Two-Loop Identified Constant" — eq:t41/eq:t43/eq:smin_closed, exact sunset relation, channel-count closed form, basis-coverage audit, prop:depth_k reframed as a depth BOUND, open question 1 resolved (56 pp, 3-pass clean)
+
+### Changed
+- Paper 55: abstract + §M3 sub-sector 3 + open questions corrected to the identified-classical statement; S^(4) struck (named but never defined anywhere in the corpus); level-drop note (38 pp, 3-pass clean). Paper 56: Paper-28 bibitem title corrected (24 pp, clean). Field guide group-5 headline (12 pp, clean)
+- docs/ live tables (forced_free_seam C9 row, forcing_catalogue, validation_benchmarks, topic_to_paper_lookup): irreducibility rows → closed-form rows
+- memory/: stale irreducibility claims corrected in `sprint2_qed_s3_complete.md` + `project_rh_sprint_april2026.md`
+
+### Fixed
+- v3.110.0 hygiene debt: 25 stale debug-archive imports repaired (6 test files + 19 archived modules); `tests/test_smin_extended.py` archived to `tests/_archive/superseded/` (value-pinning superseded by the new falsifier); collection now 7,794 tests / 0 errors (was 6 errors)
+
+### Closed
+- Paper 55 open question (specific motivic identification of the depth-k tower) at k = 2: RESOLVED
+- Named follow-ons gating any paper-grade S^(3) claim: trailing-1 evaluator fix + the four pending PSLQs; global anchor closure; optional w10 room (dim-89 basis at ≥ 500 dps)
+
 ## [4.4.0] - 2026-06-10
 
 ### Summary

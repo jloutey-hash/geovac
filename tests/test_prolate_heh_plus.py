@@ -10,7 +10,7 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from debug.stress_test_prolate_heh_plus import (
+from debug.archive.chemistry_qc_arc.stress_test_prolate_heh_plus import (
     get_orbital_on_grid_general,
     heh_plus_ci,
 )

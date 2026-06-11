@@ -21,7 +21,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from debug.energy_entanglement_decoupling import (
+from debug.archive.misc.energy_entanglement_decoupling import (
     build_decomposed_hamiltonians,
     solve_and_entangle,
 )

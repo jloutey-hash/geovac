@@ -16,8 +16,8 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from debug.stress_test_prolate_h2 import get_orbital_on_grid, compute_vee_integral
-from debug.stress_test_prolate_h2_4sigma import (
+from debug.archive.chemistry_qc_arc.stress_test_prolate_h2 import get_orbital_on_grid, compute_vee_integral
+from debug.archive.chemistry_qc_arc.stress_test_prolate_h2_4sigma import (
     IntegralCache,
     build_ci_matrix_6x6,
     h2_4sigma_ci,

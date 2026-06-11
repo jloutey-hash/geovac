@@ -39,7 +39,7 @@ from geovac.prolate_spheroidal_lattice import (
 )
 
 # Reuse the orbital/integral infrastructure from Phase 2
-from debug.stress_test_prolate_h2 import (
+from debug.archive.chemistry_qc_arc.stress_test_prolate_h2 import (
     get_orbital_on_grid,
     compute_vee_integral,
 )

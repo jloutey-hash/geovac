@@ -63,7 +63,7 @@ For each entry we record three properties to be tested in the paper §5 candidat
 | C6 | $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level $\le 4$ | **F** | Sprint Mixed-Tate; Paper 55 | Periods | 1 | M3 | dimensionless |
 | C7 | Universal propinquity rate $4/\pi$ | **F** | WH1 PROVEN; Paper 38 + Paper 40 (rank-invariant across compact Lie groups) | OA | 1 | M1 | dimensionless |
 | C8 | Pythagorean orthogonality $\langle H_{\rm local}, D_W^L\rangle_{\rm HS} = 0$ | **F** | Bit-exact; Paper 43 §10.2 | OA | 1 | M1 | dimensionless |
-| C9 | $S_{\min}$ irreducible (200+ dps PSLQ) | **F** | Paper 28; $\notin \{1, \pi^2, \pi^4, G, \beta(4), \zeta(3), \zeta(5)\}$ | Periods | >1 | outside | dimensionless |
+| C9 | $S_{\min} = 8\pi^2\ln 2 - \tfrac{2}{3}\pi^4\ln 2 - 3\pi^2\zeta(3) + \tfrac{1}{2}\pi^4\zeta(3) - \tfrac{5}{2}\pi^2\zeta(5) + \tfrac{\pi^6}{4} - \tfrac{3}{2}\pi^4 - \tfrac{\pi^8}{96}$ | **F** | Paper 28 (identified 2026-06-11; prior "irreducible" = basis-coverage artifact) | Periods | >1 | M3 | dimensionless |
 
 ## D. Gravity
 

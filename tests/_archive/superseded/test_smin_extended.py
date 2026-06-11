@@ -21,12 +21,16 @@ from pathlib import Path
 import mpmath
 import pytest
 
-# Ensure repo root on sys.path
-ROOT = Path(__file__).resolve().parents[1]
+# Ensure repo root on sys.path (file lives in tests/_archive/superseded/)
+ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from debug.smin_extended_pslq import (
+# ARCHIVED 2026-06-11: the PSLQ-irreducibility framing these tests pin was
+# corrected (basis-coverage artifact; S_min identified in closed form).
+# Value-pinning superseded by tests/test_smin_decomposition.py.
+# Source module was archived to debug/archive/rh_arc/ in v3.110.0.
+from debug.archive.rh_arc.smin_extended_pslq import (
     SMIN_KNOWN_STR,
     smin_high_precision,
     smin_extended_pslq,

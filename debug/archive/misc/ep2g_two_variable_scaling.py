@@ -34,7 +34,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from debug.energy_entanglement_decoupling import (
+from debug.archive.misc.energy_entanglement_decoupling import (
     build_decomposed_hamiltonians,
     solve_and_entangle,
 )
@@ -137,7 +137,7 @@ def _bond_block_row(R):
     eigs_kin, _ = np.linalg.eigh(H_kin)
 
     # 1-RDM and entropy
-    from debug.entanglement_geometry import (
+    from debug.archive.misc.entanglement_geometry import (
         build_1rdm_from_singlet_ci, compute_entanglement_measures,
     )
     rho = build_1rdm_from_singlet_ci(vecs_full[:, 0], configs, len(bond_orb))

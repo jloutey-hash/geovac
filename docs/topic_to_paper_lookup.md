@@ -263,8 +263,8 @@
 | Vertex correction / anomalous magnetic moment | 28 | §6 | Observation |
 | Curvature expansion c₂ = (2-BΔ-FΔ-F/B)/5 (Paper 2 bridge) | 28 | §6.6 | Observation |
 | Three-loop O(N³) factorization | 28 | §9 | Observation |
-| S_min extended PSLQ (200 digits, 100-element basis) | 28 | §8 | Observation |
-| Depth-k tower proposition | 28 | §10 | Observation |
+| S_min closed-form identification (Hoffman t-values) | 28 | §S_min | Result |
+| Depth-k tower (reframed as depth bound, 2026-06-11) | 28 | §10 | Observation |
 | Graph-native QED construction (finite graph formulation) | 28 | §graph_native_qed | Observation |
 | Graph-native vacuum polarization (Π as finite matrix trace) | 28 | §graph_native_qed.2 | Observation |
 | Graph-native self-energy and vertex correction | 28 | §graph_native_qed.3 | Observation |

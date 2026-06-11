@@ -61,7 +61,7 @@ def main():
     print("\n" + "=" * 60)
     print("  TEST 2: Method comparison at R=1.4")
     print("=" * 60)
-    from debug.stress_test_prolate_h2 import h2_minimal_ci
+    from debug.archive.chemistry_qc_arc.stress_test_prolate_h2 import h2_minimal_ci
     frozen = h2_minimal_ci(R=1.4, N_xi_solve=5000, N_grid=50, verbose=False)
 
     print(f"\n  {'Method':<25s} {'E_total':>10s} {'D_e':>10s} {'%exact':>8s}")

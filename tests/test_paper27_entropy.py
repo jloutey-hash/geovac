@@ -36,7 +36,7 @@ import pytest
 # Ensure project root on path (mirrors conftest).
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from debug.energy_entanglement_decoupling import (  # noqa: E402
+from debug.archive.misc.energy_entanglement_decoupling import (  # noqa: E402
     build_decomposed_hamiltonians,
     solve_and_entangle,
 )
@@ -252,7 +252,7 @@ def test_paper27_ep2b_ho_kinetic_interaction_commute():
 def test_paper27_ep2b_ho_gs_is_single_determinant():
     """S_HO = 0 and the GS is pure (0s)^2 at N_max ∈ {2, 3}."""
     from geovac.nuclear.ho_two_fermion import build_decomposed_ho_hamiltonians
-    from debug.entanglement_geometry import (
+    from debug.archive.misc.entanglement_geometry import (
         build_1rdm_from_singlet_ci,
         compute_entanglement_measures,
     )
@@ -592,7 +592,7 @@ def test_paper27_ep2l_nmax5_below_two():
 def test_paper27_ep2n_be_analytical_degenerate_pt():
     """Be 3x3 analytical degenerate-PT matches: GS dominantly 2s^2,
     occupations (2.0, 1.92, 0.02, 0.04, 0.02), S_full = 0.79 nats."""
-    from debug.ep2N_be_analytical import (
+    from debug.archive.misc.ep2N_be_analytical import (
         diag_E_for_pair, two_e_int_singlet_pair,
     )
     Z = 4
@@ -672,7 +672,7 @@ def test_paper27_proposition_nondegeneracy_qualifier():
 
     Reproduces debug/data/ep2j_li_be_extension.json.
     """
-    from debug.ep2j_li_be_extension import run_atom
+    from debug.archive.misc.ep2j_li_be_extension import run_atom
 
     li = run_atom(Z=3, n_e=3, ms_target=+0.5, ml_target=0,
                   label='Li (test)', n_max=3)

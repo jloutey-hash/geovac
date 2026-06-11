@@ -32,7 +32,7 @@ from geovac.casimir_ci import (
     _build_orbital_basis, two_electron_integral,
 )
 
-from debug.entanglement_geometry import (
+from debug.archive.misc.entanglement_geometry import (
     build_1rdm_from_singlet_ci,
     compute_entanglement_measures,
 )
