@@ -13,6 +13,7 @@ Run the release protocol. Stop and ask if any precondition is unmet.
 5. If papers were edited:\ they compile three-pass clean. Confirm.
 6. If production code was edited:\ relevant tests pass (`pytest tests/<paths>`). Confirm.
 7. Hard-prohibition check (§13.5):\ nothing in the staged diff violates the prohibitions.
+8. Repo health gate:\ run `python debug/repo_health_check.py`. On WARN (CLAUDE.md > 150 KB, debug/ top-level > 600 files, MEMORY.md > 24 KB), report the warning to the PI alongside the release — it doesn't block, but it must be surfaced so bloat never silently regrows.
 
 **Version-bump policy.**
 - Patch (x.y.Z) for documentation / paper edits / dead-end recordings.
@@ -24,7 +25,7 @@ A diagnostic arc that tests 10 hypotheses and finds 9 negative results is **one*
 **Release steps.**
 
 1. Stage the right files. **Prefer explicit `git add` of named files.** Avoid `git add -A` or `git add .` — they pick up secrets, large debug data, untracked stray files.
-2. `git commit` with a HEREDOC message following the project commit convention (multi-line, leading title in `vX.Y.Z: short description` form, body with Added / Changed / Closed sections, trailing `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`).
+2. `git commit` with a HEREDOC message following the project commit convention (multi-line, leading title in `vX.Y.Z: short description` form, body with Added / Changed / Closed sections, trailing `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>` (updated v4.0.0; keep in sync with the active model)).
 3. `git tag -a vX.Y.Z -m "vX.Y.Z: short description"`.
 4. `git push origin main` then `git push origin vX.Y.Z`.
 5. Quote the commit SHA and tag back to the PI as confirmation.

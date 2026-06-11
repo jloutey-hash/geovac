@@ -7,6 +7,141 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.0.0] - 2026-06-10
+
+### Summary
+
+**Major-version release consolidating the six staged units below (v3.110.0–v3.115.0) into one tagged release.** Versioning note (PI convention, recorded here): major versions track AI-collaborator changes — this release's CLAUDE.md restructure (compaction round 2, 320 KB → 136 KB, §13.11 rule 9, repo health gate) was performed under Claude Fable 5 and counts as the architectural trigger. No physics content distinguishes v4.0.0 from the staged entries; see them for full detail:
+
+- **v3.110.0** — repo hygiene (debug/ 1,824 → 458 top-level via `debug/archive/<arc>/` + manifest; `papers/INDEX.md` status map; README start-here; 147 LaTeX artifacts purged) + **WH7 registered** (time-discreteness is observer-compactification).
+- **v3.110.1** — CLAUDE.md compaction round 2 (five docs/ extractions, zero information loss; anti-regrowth rule 9 + `/release` health gate).
+- **v3.111.0** — WH7 Step-1 Toeplitz probe: time was never metrically invisible — the momentum-diagonal algebra was; translation seminorm = Lipschitz exactly on temporal modes.
+- **v3.112.0** — B1: product-carrier convergence on S³×S¹_T at additive rate (Paper 45 `prop:product_action_seminorm`; claims-register row 21; signature-agnostic).
+- **v3.113.0** — B3 Phase 1: boost-seminorm probe (kernel = 9 boost-invariant multipliers; bit-exact spin–statistics grading σ_π(F) = (−1)^{2b}F; causal classifier with the b=1 top weight on the cone).
+- **v3.114.0** — B3 Phase 2: HS cone exactly the symbol cone (all-rational, compression-invisible); cone is a grading not a signature; rate-level reverse triangle fails by inertia → Phase 3 redirected to state level.
+- **v3.115.0** — B3 Phase 3 Sprint 1: wedge KMS + orbit anchors bit-level; D_max chain ("a detour never costs less") 96/96 universal; bimodal kick-cost scaling; excess-sign caveat frozen.
+
+Frozen falsifiers added this release: `tests/test_wh7_toeplitz_temporal.py`, `tests/test_wh7_b1_joint.py`, `tests/test_wh7_b3_boost.py`, `tests/test_wh7_b3_phase2.py`, `tests/test_wh7_b3_phase3.py` (34 tests total, all green at release).
+
+## [3.115.0] - 2026-06-10
+
+### Summary
+
+**Sprint B3 Phase 3, Sprint 1 — state-level cost structure on modular orbits: FOUNDATION-LAID.** First sprint of the state-level Lorentzian construction fixed by the Phase-2 negative (intervals from the flow, costs from entropy production). Wedge KMS state + orbit machinery anchored at bit level (KMS 1.7×10⁻¹⁵, flow invariance 5×10⁻¹⁷, 2π period, orbit injectivity); cost functional = Datta max-divergence per the standing Paper 49 lesson.
+
+- **Universal:** the D_max chain inequality ("a detour never costs less") verified **96/96** on kicked orbit triples — the twin-paradox direction holds unconditionally on the substrate.
+- **Reproducible conditional structure:** kick-attributable excess cost scales bimodally with the kick generator's boost weight (ε² for |m′| ≤ ½, ε^1.2 for |m′| ≥ 1; null-class kick has the largest coefficient). Tangent-projection control rules out the reparametrization confound (exponent shifts < 0.1).
+- **Honest caveat (frozen):** the excess-over-baseline SIGN is reference-state dependent (T5 robustness panel); only the absolute chain inequality is universal. Design implication: D_max is the cost/penalty layer, not the interval — the interval is the flow parameter (Paper 48 bridge design), with cone-graded admissibility. Ensemble statistics, cost-functional comparison, mechanism of the bimodal exponent, and the wedge-restricted interval construction are Sprint 2.
+
+### Added
+- `debug/wh7_b3_phase3_state_intervals.py` + `debug/data/wh7_b3_phase3_state_intervals.json`; `tests/test_wh7_b3_phase3.py` (7 tests); `debug/sprint_wh7_b3_phase3_sprint1_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (Q1 Phase-3 foundation paragraph; 24 pp GATE: PASS); CLAUDE.md (§1 version, §2 one-liner)
+
+## [3.114.0] - 2026-06-10
+
+### Summary
+
+**Sprint B3 Phase 2 — exact cone structure + signature verdict.** Two results, one exact-positive and one clean negative-with-structure:
+
+- **The HS cone is exactly the symbol cone:** $q_F(C^b_{m'm}) = (2m'^2 - b(b+1))/(b(b+1))$ as an exact rational for every element of the rank-55 system (sympy Clebsch–Gordan arithmetic; float cross-check $2.2{\times}10^{-16}$). The window compression is invisible to the Hilbert–Schmidt causal structure; the null locus $2m'^2 = b(b+1)$ is exact. Op-norm: the null ray is the single element $C^1_{\pm 1,0}$ (residual $10^{-16}$); remaining op-norm cone values are simple rationals at float precision (3/11, 5/13, 3/5 — flagged, closed-form proof open).
+- **The cone is a grading, not a metric signature:** the causal form is class-diagonal with definite type per weight sector — timelike classes positive-definite (8,0,0)/(10,0,0), the b=1 top class identically null on its 6-dim span, spacelike classes negative-definite; global inertia (18,7,30). **Consequence (frozen negative):** τ = √Q is subadditive on the timelike sector, so the operator-rate-level reverse triangle FAILS (by inertia; 120/120 sampling). No tangent-level twin paradox in the boost-leg comparison.
+- **Phase-3 design fixed by the negative:** Lorentzian intervals must be thermal-time differences along modular orbits with super-additivity from relative-entropy monotonicity (Paper 49 TICI machinery, surviving), on the B1 metric substrate, with the cone grading selecting admissible directions. Three-layer architecture: flow = time-order, translation seminorm = metric, grading = causal type.
+
+### Added
+- `debug/wh7_b3_phase2_cone_structure.py` + `debug/data/wh7_b3_phase2_cone.json`; `tests/test_wh7_b3_phase2.py` (7 tests); `debug/sprint_wh7_b3_phase2_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (Q1 Phase-2 results + Phase-3 target; 24 pp GATE: PASS); CLAUDE.md (§1 version, §2 one-liner)
+
+## [3.113.0] - 2026-06-10
+
+### Summary
+
+**Sprint B3 Phase 1 — boost/modular-flow seminorm probe: POSITIVE-STRUCTURED.** First test of the Lorentzian candidate named in the sharpened Paper 45 Q1: the wedge boost (Paper 42's modular generator, doubled `two_m_j` convention) as temporal leg of a quantum-metric structure. On the rank-55 multiplier system (j ≤ 1 window, bands b ≤ 2), four exact results:
+
+- **σ_{2π} closure at 10⁻¹⁵ for all 55 elements + bit-exact half-period grading σ_π(F) = (−1)^{2b}F** — a finite-cutoff spin–statistics shadow: the modular flow grades the operator system by band parity at β/2.
+- **Boost-alone kernel = the structured middle:** dim ker(ad_K) = 9 = Σ_{b∈{0,1,2}}(2b+1) exactly (the boost-invariant multipliers) — neither the P45 annihilation (55) nor the metric condition (1). A single boost cannot metrize transversal directions, by exactly the geometric count.
+- **Frame completion restores the metric condition** (joint {J_x,J_y,J_z} kernel = ℂ1).
+- **Causal classifier:** Q(F) = ‖[J_z,F]‖² − ‖[J_x,F]‖² − ‖[J_y,F]‖² matches the symbol classifier sign(2m′² − b(b+1)) in 9/9 classes; m′ = 0 purely spacelike (ratio −1 exact); top weights timelike from b = 3/2; **the b = 1 top weight sits ON the cone (q_min = 0 to 10⁻⁶)** — a null ray in the operator algebra at the exact integer locus the symbol algebra predicts. First genuinely Lorentzian-flavored structure in the corpus.
+
+Phase 2 named: closed-form Q-ratios; reverse-triangle on boost orbits (Paper 49 TICI algebra + non-degenerate metric leg); wedge restriction; Mondino–Sämann-shaped convergence statement.
+
+### Added
+- `debug/wh7_b3_boost_seminorm_probe.py` + `debug/data/wh7_b3_boost_probe.json`; `tests/test_wh7_b3_boost.py` (6 tests); `debug/sprint_wh7_b3_boost_probe_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (Q1 probe paragraph; 24 pp GATE: PASS); CLAUDE.md (§1 version, §2 one-liner)
+
+## [3.112.0] - 2026-06-10
+
+### Summary
+
+**Sprint B1 — joint S³×S¹_T product-carrier convergence CLOSED.** Paper 45 gains Proposition `prop:product_action_seminorm`: the truncated joint system, metrized by the translation Lipschitz seminorm over SU(2)×U(1), converges to C(S³×S¹_T) in vS state-space GH distance at the additive rate $\gamma_n^{SU(2)} + \gamma_K^{U(1)}$, spatial 4/π leading constant unchanged. Built as tensor products of unconditional factor ingredients (Paper 38 spatial machinery × WH7 Step-1 Toeplitz temporal algebra). Six-check verification panel all PASS on the j≤1 × K=2 window: PW orthonormality 10⁻¹⁵; pure-factor exactness 0 / 10⁻¹⁶; Leibniz envelope; joint kernel condition; additive smoothing bound (γ_s = 1.770, γ_t = 0.722); **N_t = 1 Riemannian-limit reduction bit-exact** (the load-bearing P45 falsifier preserved in the rebuilt architecture).
+
+**Honest scope:** signature-agnostic (Wick-rotated/thermal carrier) — explicitly NOT a Lorentzian claim; claims-register row 11 stays RETRACTED, new row 21 records the Proposition. Paper 45 Q1 sharpened to signature-only: the named Lorentzian candidate is a translation-type seminorm generated by the wedge boost / modular flow (Paper 42 four-witness machinery) — follow-on **B3**. Q1 clauses (i)+(iii) closed; (ii) bypassed (the action seminorm never routes the metric through the Dirac).
+
+### Added
+- `debug/wh7_b1_joint_product_gh.py` + `debug/data/wh7_b1_joint_product.json` (Wigner-D Peter–Weyl quadrature + joint seminorm panel); `tests/test_wh7_b1_joint.py` (6 tests); `debug/sprint_wh7_b1_joint_memo.md`
+
+### Changed
+- `papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex` (new §`sec:product_action_seminorm` Proposition + `rem:not_yet_lorentzian`; Q1 update; 23 pp three-pass GATE: PASS); `docs/claims_register.md` (row 21); `papers/INDEX.md` (P45 row); CLAUDE.md (§1 version, §2 one-liner, §1.7 WH7 status, §6 P45 flag)
+
+## [3.111.0] - 2026-06-10
+
+### Summary
+
+**Sprint WH7 Toeplitz probe, Step 1 — POSITIVE-REBUILD.** First falsifier probe for the newly registered WH7 (time-discreteness is observer-compactification). The temporal algebra is rebuilt from genuine time-dependent multipliers — Toeplitz-compressed $e^{i\omega t}$ on the Fourier window (Connes–vS S¹ pattern) — instead of Paper 45's momentum-diagonal $g(D_t)$, and the translation seminorm is measured against it. Five checks, all PASS:
+
+- **A (headline):** $L(S_q) = 2\pi q/T = \mathrm{Lip}(e_q)$ at max error $1.4{\times}10^{-14}$ — the translation seminorm IS the continuum Lipschitz constant on temporal modes, exactly, at every finite cutoff.
+- **B (control):** random non-constant $g(D_t)$ gives $L = 2.8{\times}10^{-14}$ — Paper 45's "Lipschitz invisibility of time" reproduced as a property of the momentum-diagonal algebra, not of time.
+- **C:** kernel condition $L = 0 \iff f$ constant on the band-limited algebra ($q_{\max} \le K$).
+- **D:** $L(F) \le \mathrm{Lip}(f)$ always; window ratio $0.752 \to 0.995$ monotone over $K = 3 \to 32$ (Fejér-style convergence, same shape as Paper 38's spatial story).
+- **E:** at fixed physical frequency $\omega = 2\pi$, $L = \omega$ to $10^{-15}$ across $T \in \{1..16\}$ — metric visibility does NOT degrade under de-compactification at fixed bandwidth.
+
+**Consequences:** the compact-time wing of the Lorentzian program is rebuilt at the operator level (the P45 annihilation was an architecture artifact — $[D_t, g(D_t)] = 0$ identically, while $[D_t, S_q] = \omega_q S_q$); WH7's input (ii) downgraded, load-bearing content shifts to leg (i) (only compactification makes time discrete and injects π — Paper 35); primary falsifier leans "weakens-to-convention" on the visibility leg pending Step 2. Named follow-ons: **B1** joint S³×S¹ translation-seminorm GH statement (sprint-scale; rebuilds the descoped Paper 45 ambition on sound footing); **B2** non-compact Step 2 (Paley–Wiener on ℝ_t, pointed-proper framework; decides the falsifier branch).
+
+### Added
+- `debug/wh7_toeplitz_temporal_probe.py` + `debug/data/wh7_toeplitz_probe.json`; `tests/test_wh7_toeplitz_temporal.py` (8 tests, frozen falsifier); `debug/sprint_wh7_toeplitz_probe_memo.md`
+
+### Changed
+- CLAUDE.md (§1 version; §2 one-liner; §1.7 WH7 status replaced per §13.11 rule 9)
+
+## [3.110.1] - 2026-06-10
+
+### Summary
+
+**CLAUDE.md compaction round 2 (PI-authorized).** 320 KB / 1,400 lines → **133 KB / 950 lines (−59%)** — the file is loaded into every PM session and sub-agent dispatch, so this is a direct per-dispatch token cut (~80k → ~33k tokens). Zero information loss: every removed byte moved verbatim to a docs/ home.
+
+- **Extractions (verbatim, frozen at v3.110.0 state):** §1.7 WH chronicles → `docs/wh_register_history.md` (44 KB); §2 legacy bullets + RH-sprint prose + §1.5 chronicle paragraphs → `docs/development_frontier_archive.md` (72 KB); §6 per-paper notes → `docs/paper_notes_archive.md` (76 KB). **Extractions (live documents):** §7 full entry-point catalogue → `docs/code_architecture.md` (12 KB); §12 full algebraic registry → `docs/algebraic_registry.md` (13 KB).
+- **Compact forms kept in CLAUDE.md:** §1.7 = claim + falsifier + current status per WH (WH1–WH7); §2 = June bullets (v3.97+) + best-results table + key-results + arc one-liners; §6 = loading tiers + folder map + live status flags + pointers to `papers/INDEX.md`; §7/§12 = top-10 entry points / status-vocabulary stubs; §1.5 = positioning kept, track-chronicle moved.
+- **Anti-regrowth mechanics:** §13.11 rule 9 — *status updates replace, never append* (chronicling-by-appending is what regrew the file after the 2026-05-31 compaction); `debug/repo_health_check.py` added as `/release` precondition 8 (warns at CLAUDE.md > 150 KB, debug/ > 600 files, MEMORY.md > 24 KB).
+- All 18 section headings verified intact post-splice; §1.5/§1.7/§13 edits PI-authorized in-session (2026-06-10).
+
+### Added
+- `docs/wh_register_history.md`; `docs/development_frontier_archive.md`; `docs/paper_notes_archive.md`; `docs/code_architecture.md`; `docs/algebraic_registry.md`; `debug/repo_health_check.py`; `debug/claudemd_compaction_2026_06_10.py`
+
+### Changed
+- CLAUDE.md (§1.5 two paragraphs compacted, §1.7 rewritten compact, §2 compacted, §6 rewritten compact, §7/§12 stubs, §13.11 rule 9, §1 version); `.claude/commands/release.md` (precondition 8)
+
+## [3.110.0] - 2026-06-10
+
+### Summary
+
+**Repo-hygiene sprint + WH7 registration.** PI-directed pass addressing the "graveyard buries the model" concern: the dead ends stay (institutional memory, §13.5) but the file tree now layers them below the front door.
+
+- **debug/ archive sweep:** 1,824 → 458 top-level files. 1,367 closed-arc memos/drivers moved into `debug/archive/<arc>/` (12 arc folders: gravity, lorentzian, rh, q5p_tannakian, spectral_triple, qed, precision, chemistry_qc, nuclear, alpha, audits, tracks/misc). Keep rules: June-2026 frontier files (407), files referenced by tests (48 — frozen-falsifier provenance), pinned files (3). Exact old→new mapping in `debug/archive/sweep_manifest_2026_06_10.json`; pre-sweep `debug/<name>` pointers in earlier CHANGELOG/CLAUDE.md entries resolve via the manifest. New `debug/README.md` + `debug/archive/README.md` explain the layout. Sweep script (`debug/archive_sweep_2026_06_10.py`) is re-runnable with a later cutoff as arcs close.
+- **`papers/INDEX.md`:** newcomer-facing status map of all ~60 papers (KEYSTONE / ACTIVE / OBSERVATION / GUARDRAIL / PARTIAL / DESCOPED / DRAFT / HISTORICAL) with a five-document reading path. README gains a matching "New here?" block.
+- **Build-artifact purge:** 147 untracked LaTeX intermediates deleted from papers folders + repo root (already gitignored; local clutter only).
+- **WH7 registered (CLAUDE.md §1.7, PI direction):** *time-discreteness is observer-compactification* — the temporal restriction of the "discreteness is compactness" organizing observation, promoted to a falsifiable register entry. Inputs: Paper 35 (π enters exactly at temporal compactification), P45 annihilation theorem (non-compact ℝ-time is Lipschitz-invisible), Paper 47 three-carrier identification (temporal carriers spectrally indistinguishable). Primary falsifier: the Toeplitz temporal-compression program — metric visibility of time on a non-compact carrier without compactification would weaken WH7 to convention; a proven annihilation-type obstruction would force it. Papers remain under §1.5 dual-description rhetoric.
+
+### Added
+- `papers/INDEX.md`; `debug/README.md`; `debug/archive/README.md`; `debug/archive/sweep_manifest_2026_06_10.json`; `debug/archive_sweep_2026_06_10.py`; `debug/sprint_repo_hygiene_memo.md`; `memory/wh7_time_observer_compactification.md`
+
+### Changed
+- `debug/` layout (1,367 files → `debug/archive/<arc>/`, git renames); README.md (version badge + start-here block); CLAUDE.md (§1 version, §2 one-liner, §1.7 WH7 entry)
+
 ## [3.109.0] - 2026-06-10
 
 ### Summary
