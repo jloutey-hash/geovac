@@ -762,16 +762,20 @@ $D_{\mathrm{odd}}$, and their difference all lie in
 $\MT(\Z[i, 1/2])$ at depth $1$ (sub-sector 2).  The depth-$k$ tower
 inherits its motivic content by iterated convolution:\ at loop order
 $k$, the iterated sunset on $\sthree$ produces a $k$-fold convolution
-of Hurwitz building blocks, raising the motivic depth by exactly the
-loop order.  This is the GeoVac-side realisation of the Glanois
-depth-filtration $\mathrm{gr}_p^D \Hcal^N$ at $N \le 4$ (sub-sector 3).
+of Hurwitz building blocks, \emph{bounding} the motivic depth by the
+loop order.  Stuffle and parity reductions within the ring can lower
+the realized depth --- at $k = 2$, fully to depth $\le 1$ (round-2
+dossier, 2026-06-11).  This is the GeoVac-side realisation of the
+Glanois depth-filtration $\mathrm{gr}_p^D \Hcal^N$ at $N \le 4$
+(sub-sector 3).
 \end{proof}
 
 \subsection{Arithmetic stratification}
 
 The three sub-sectors of Theorem~\ref{thm:m3_cyclotomic_mixed_tate}
 sit in three nested period rings selected jointly by (i) presence
-or absence of vertex restriction and (ii) loop order = motivic depth:
+or absence of vertex restriction and (ii) loop order, which bounds
+the motivic depth:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.15}
@@ -784,7 +788,7 @@ Un-restricted $D(s)$, $s$ odd & $D(2k+1) \in \zeta(2k+1)\cdot\Q$ & $1$ & $\MT(\Z
 $\chi_{-4}$ vertex parity & $\beta(s) - \beta(s-2)$ via Hurwitz $1/4, 3/4$ & $1$ & $\MT(\Z[i, 1/2])$ & $4$ \\
 Catalan $G = \beta(2)$, $\beta(4)$ individually & level-$4$ Dirichlet $L$ & $1$ & $\MT(\Z[i, 1/2])$ & $4$ \\
 Sommerfeld $D_p$, $p \ge 2$ & weight-$(2p-1)$ MZV products & $\le 2$ & $\MT(\Z)$ Euler--Zagier & $1$ \\
-$S_{\min}$ depth-$2$ & identified: Hoffman $t$-values & $2$ & $\MT(\Z[1/2])$ & $2$ \\
+$S_{\min}$ (nesting depth $2$) & identified: closed form in $\Q[\pi^2, \ln 2, \zeta(3), \zeta(5)]$ & $\le 1$ & $\MT(\Z[1/2])$ & $2$ \\
 Depth-$k$ tower, $k \ge 3$ & depth-$\le k$ element & $\le k$ & $\MT(\Z[1/2])$ at level $2$ & $2$ \\
 \bottomrule
 \end{tabular}
@@ -885,8 +889,21 @@ t(2,1) = -\tfrac{7}{16}\,\zeta(3) + \tfrac{1}{8}\,\pi^2\ln 2, \quad
 t(2,3) = -\tfrac{31}{64}\,\zeta(5) + \tfrac{1}{16}\,\pi^2\zeta(3).
 \]
 (Formulas match Hoffman~\cite{hoffman2019odd} Table~2.)
-The weight-5 value $t(4,1)$ and weight-7 value $t(4,3)$ are being
-identified at 260~dps in the round-2 computation.
+The remaining odd-weight values $t(4,1)$ (weight 5) and $t(4,3)$
+(weight 7) were identified at 220~dps against the full conjectural
+level-2 bases (residuals $\le 3.6\times10^{-222}$; explicit formulas
+in Paper~28~\cite{loutey_paper28}).  Assembling the full decomposition
+yields the closed form
+\[
+S_{\min} = 8\pi^2\ln 2 - \tfrac{2}{3}\pi^4\ln 2 - 3\pi^2\zeta(3)
+  + \tfrac{1}{2}\pi^4\zeta(3) - \tfrac{5}{2}\pi^2\zeta(5)
+  + \tfrac{\pi^6}{4} - \tfrac{3}{2}\pi^4 - \tfrac{\pi^8}{96},
+\]
+verified against the Hurwitz-tail anchor at 130~dps (residual
+$1.7\times10^{-129}$).  $\zeta(7)$ cancels exactly, all rational
+constants cancel to zero, and every surviving term carries at least
+$\pi^2$.  No depth-2 generator survives:\ $S_{\min} \in
+\Q[\pi^2, \ln 2, \zeta(3), \zeta(5)]$, realized depth $\le 1$.
 
 \textbf{Level drop.}  $S_{\min} \in \MT(\Z[1/2])$ at level~$2$ ---
 a level drop relative to the $\le 4$ bound from sub-sector~2 of
@@ -907,8 +924,8 @@ distinct: level-2 content does not require the $\chi_{-4}$ descent.
 Loop order $k$ & Witness & Depth & Status \\
 \midrule
 $1$ & $\pi^{\mathrm{even}}$ only & $1$ in $\MT(\Z)$ & T9 proven \\
-$2$ & $S_{\min}$: Hoffman $t$-values & $\le 2$ in $\MT(\Z[1/2])$ & identified (round-2 dossier) \\
-$3$ & $S^{(3)}$: triple $t$-values & $\le 3$ in $\MT(\Z[1/2])$ & structural prediction \\
+$2$ & $S_{\min}$: closed form & realized $\le 1$ in $\MT(\Z[1/2])$ & identified (round-2 dossier) \\
+$3$ & $S^{(3)} = 31.5726\ldots$: triple $t$-values & realized $\le 2$ in $\MT(\Z[1/2])$ & identified exc.\ w10 (closure sprint) \\
 $k$ general & depth-$\le k$ element & $\le k$ in $\MT(\Z[1/2])$ & level-2 ring prediction \\
 \bottomrule
 \end{tabular}
@@ -920,8 +937,11 @@ $\mathrm{gr}_p^D \Hcal^N$ at $N = 2$.  Loop order bounds the depth of
 the classical level-2 multiple-$t$-value content; stuffle and parity
 reductions within $\MT(\Z[1/2])$ can lower the effective depth
 (as demonstrated for $S_{\min}$ at $k=2$: the structural nesting is
-depth~2 but two of the four even-weight $t$-values reduce to depth~1
-via Eq.~\eqref{eq:stuffle22}--\eqref{eq:stuffle2442} in
+depth~2 but \emph{every} component reduces --- stuffle identities kill
+the even-weight $t$-values and the $t$-value parity theorem the
+odd-weight ones --- leaving the closed form in
+$\Q[\pi^2, \ln 2, \zeta(3), \zeta(5)]$ of
+\S\ref{subsec:m3_smin_witness}, realized depth $\le 1$;
 Paper~28~\cite{loutey_paper28}).
 
 \subsection{The Deligne--Glanois Galois descent identification}
@@ -1055,8 +1075,8 @@ the $N^{-s}/s$ truncation rate at $N = 2 \times 10^5$).
 
 \begin{corollary}[Cyclotomic mixed-Tate classification on $\sfive$]
 \label{cor:m3_s5_cyclotomic}
-$M_3^{(\sfive)} \subset \MT(\Z[i, 1/2])$ at level $\le 4$, depth equal
-to loop order.  The Glanois 2015~\cite{glanois2015} basis $\Bcal^4$
+$M_3^{(\sfive)} \subset \MT(\Z[i, 1/2])$ at level $\le 4$, depth
+bounded by loop order.  The Glanois 2015~\cite{glanois2015} basis $\Bcal^4$
 controls the period-theoretic placement;\ no extension to level $8$ is
 required, because the $\sfive$ shifts $5/4, 7/4$ reduce to the
 level-$4$ shifts $1/4, 3/4$ via the Hurwitz shift identity
@@ -1078,11 +1098,17 @@ T_5(k) := \tfrac{1}{3}\zeta(2, k + \tfrac{5}{2})
         + \tfrac{3}{16}\zeta(6, k + \tfrac{5}{2}),
 \]
 truncates to $S_{\min}^{(\sfive)} \approx 0.0399612091165\ldots$ at
-$K_{\max} = 500$, $50$ dps.  Full 200-dps PSLQ irreducibility against
-the Paper~28~\S$S_{\min}$ basis is the natural verification target
-(estimated effort:\ $2$--$3$ weeks, mirroring the $\sthree$ sprint).
-The natural prediction is $S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$
-at depth $2$ as a new period not in the tested basis.
+$K_{\max} = 500$, $50$ dps.  The natural verification target is the
+decomposition-first pipeline that identified the $\sthree$ case
+(round-2 dossier, 2026-06-11):\ weight-grade the object, expand into
+Hoffman $t$-values at half-integer shift, apply stuffle and parity
+reductions, and only then run weight-homogeneous level-2 PSLQ on any
+surviving components.  (Grab-bag single-weight PSLQ against the
+original Paper~28 basis is exactly the design that produced the false
+$\sthree$ ``irreducibility'' verdict.)  The natural prediction is
+$S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$ as an identifiable classical
+element, with nesting depth $2$ and parity reductions plausibly
+collapsing the realized depth, as at $\sthree$.
 
 \subsection{Diagonal-substrate collapse of the depth-2 joint Mellin}
 \label{subsec:m3_diagonal_collapse}
@@ -1593,25 +1619,48 @@ recover the contribution of each Mellin slot independently.
 
 \subsection{Specific motivic identification of the depth-$k$ tower}
 
-The depth-$k$ loop tower (Paper~28 Proposition depth\_k,
-\cite{loutey_paper28}) predicts a new irreducible transcendental at
-each loop order:
+The depth-$k$ loop tower (Paper~28 Proposition depth\_k, corrected,
+\cite{loutey_paper28}):\ loop order \emph{bounds} the depth of the
+classical level-2 multiple-$t$-value content; it does not mint new
+irreducible transcendentals automatically.  Status by rung:
 \begin{itemize}
   \item $k = 1$:\ $\pi^{\mathrm{even}}$ only (Paper~28 Theorem~T9,
     proven; depth $1$ in $\MT(\Z)$).
-  \item $k = 2$:\ $S_{\min} = 2.479936938\ldots$ PSLQ-irreducible at
-    200 dps against a 100-element basis (Paper~28 \S$S_{\min}$);\
-    classification predicts $S_{\min} \in \MT(\Z[1/2])$ at depth $2$.
-  \item $k = 3$:\ $S^{(3)}$ independent of $S_{\min}$ (PSLQ with
-    $S_{\min}$ in basis fails at fast-converging exponents).
-  \item $k$ general:\ new irreducible at depth $k$.
+  \item $k = 2$:\ \textbf{Resolved (2026-06-11).}  $S_{\min}$ is
+    identified in closed form in $\Q[\pi^2, \ln 2, \zeta(3), \zeta(5)]$
+    (\S\ref{subsec:m3_smin_witness}); realized depth $\le 1$.  The
+    prior ``PSLQ-irreducible at 200 dps'' verdict was a basis-coverage
+    artifact:\ the tested bases contained none of the level-2
+    weight-5--8 monomials the correct room requires.
+  \item $k = 3$:\ \textbf{Closed (2026-06-11, closure sprint).}
+    Both named open items resolved:\ the trailing-argument-1
+    evaluator was repaired (Abel summation; the stage-1 Levin values
+    were mis-converged with precision-dependent error, poisoning the
+    earlier figure $S^{(3)} \approx 30.615$), and the global anchor
+    closed by rigorous bracket, $S^{(3)} \in [31.57063, 31.57300]$,
+    with canonical value $S^{(3)} = 31.5726\ldots$ inside.  All four
+    pending components identified (residuals
+    $\le 2.6\times10^{-216}$):\ every identified component of
+    $S^{(3)}$ --- all but the weight-10 graded piece --- has realized
+    depth $\le 2$, with the catalogued generators $t(5,1)$, $t(5,3)$,
+    $t(7,1)$ at coefficients $\pm\tfrac12$ (Paper~28
+    \S{}Decomposition closure; falsifier
+    \texttt{tests/test\_s3\_decomposition.py}).  The earlier
+    ``$S^{(3)}$ independent of $S_{\min}$'' statement (20-digit PSLQ
+    at non-physical exponents) is superseded.
+  \item $k$ general (open):\ does the realized depth keep growing
+    strictly more slowly than loop order, and does a genuinely
+    irreducible (but catalogued) level-2 depth-$k$ $t$-value survive
+    at some $k$?  Realized depth $\le k - 1$ at $k = 2, 3$.  Named
+    remaining items:\ the $S^{(3)}$ weight-10 graded room (level-2
+    basis dimension 89; parity heuristic predicts depth $\le 2$) and
+    the full symbolic assembly of $S^{(3)}$ modulo that piece.
 \end{itemize}
-The classification places each constant in a specific period ring
-(by inheritance of the motivic content of the Hurwitz / Dirichlet $L$
-building blocks) but does not identify the constant as a specific
-element of the Deligne--Glanois basis $\Bcal^N$ at depth $k$.  Higher
-PSLQ precision (300 dps) against an enriched depth-$k$ basis is the
-natural mini-sprint at each $k$.
+Method discipline (round-2 dossier lesson):\ weight-grade the object
+first, then identify each graded component against a complete
+weight-homogeneous level-2 basis.  Grab-bag single-weight PSLQ
+produces false irreducibility verdicts on weight-inhomogeneous
+objects.
 
 \subsection{Inhomogeneous extension:\ three sub-cases}
 \label{subsec:open_inhomo}
@@ -1769,12 +1818,14 @@ cyclotomic-mixed-Tate-at-level-$\le 4$ classification?'' is closed
 POSITIVE by \S\ref{subsec:m3_s5} above (Sprint A6, 2026-06-03;\ memo
 \texttt{debug/sprint\_a6\_m3\_s5\_memo.md}).  Corollary
 \ref{cor:m3_s5_cyclotomic} states that $M_3^{(\sfive)} \subset
-\MT(\Z[i, 1/2])$ at level $\le 4$, depth equal to loop order.  The
+\MT(\Z[i, 1/2])$ at level $\le 4$, depth bounded by loop order.  The
 remaining empirical target is specific motivic identification of
-$S_{\min}^{(\sfive)}$ via 200-dps PSLQ against the Paper~28~\S$S_{\min}$
-basis, estimated 2--3 weeks (parallel to the $\sthree$ sprint of the
-same effort), with the natural prediction
-$S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$ at depth $2$.
+$S_{\min}^{(\sfive)}$ via the decomposition-first pipeline of the
+$\sthree$ round-2 dossier (weight-grading, $t$-value expansion,
+stuffle/parity reduction, then weight-homogeneous level-2 PSLQ on
+survivors), with the natural prediction
+$S_{\min}^{(\sfive)} \in \MT(\Z[1/2])$ as an identifiable classical
+element.
 
 \subsection{Inner-factor Yukawa content:\ closed by factorisation +
 Yukawa-PSLQ}

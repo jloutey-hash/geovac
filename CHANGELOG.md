@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.6.0] - 2026-06-11
+
+### Summary
+
+**Sprint S^(3) closure: both named open items closed, the published S^(3) numerics corrected, and the k=3 tower verdict made paper-grade — realized depth ≤ 2 on every identified component, nothing new minted.** Main-session sprint closing the two follow-ons of `debug/sprint_s3_decomposition_memo.md` §5, plus the v4.5.0 paper-edit propagation (S_min corrections echoed through Papers 28 + 55).
+
+- **Root cause unified:** mpmath `nsum(method='levin')` silently mis-converges on summands with logarithmic factors, with *precision-dependent* error. Three victims in the stage-1 S^(3) work: (i) the trailing-argument-1 t3 evaluator (t3(2,1,1) off by −4.7e-4 at 130 dps / −2.9e-4 at 220 dps — the two b2=1 entries had no stuffle witness); (ii) the factorized global anchor (L(m) ~ 4·ln m), whose Levin value 30.2197 and the poisoned decomposition figure 30.6154 were BOTH wrong; (iii) the published convergence law "270·N^−1.31" — actually (ln N)²/N² increments whose local log-slope 2 − 2/ln N masquerades as a power law over the fit window; raw partial sums carried ZERO reliable digits (n_max=50 partial: 15.23 vs limit 31.57).
+- **Global anchor CLOSED by rigorous bracket** (no acceleration anywhere): monotone partial sums (positive terms, strict lower bound) + explicit integral tail bound, gated by exact-Fraction agreement (2e-59) and closed-form A(m) checks (4e-58). **S^(3) ∈ [31.57063, 31.57300]** at N = 4×10⁶.
+- **Trailing-1 evaluator FIXED** (Abel summation over the odd-harmonic weight; Hurwitz forward recurrence; per-working-precision term caches honoring nsum's precision contract — the frozen-precision cache variant was itself caught by the rigorous G1 brackets). Stuffle witnesses healed: R2 residual 6.4e-12 → 5.4e-216; R6 9.8e-20 → 7.5e-217; the stage-1 residuals decompose exactly into the individual evaluator errors.
+- **All four pending PSLQs ACCEPT** (220/340 dps, complete level-2 weight-homogeneous bases; residuals 2.6e-216 .. 7.3e-339): t3(2,1,1) [w4, depth ≤ 1], t3(4,1,1) + t3(3,2,1) [w6, each carrying −½·t(5,1)], t3(3,4,1) [w8, carrying +½·t(5,3) − ½·t(7,1)]. Every identified S^(3) component is a catalogued level-2 object; only the w10 graded piece (basis dim 89) remains unidentified (parity heuristic: depth ≤ 2).
+- **Canonical value:** S^(3) = 31.57256120751202275476... (200 dps assembly from the corrected cache; S_min via its closed form, cross-checked 2.2e-199). Inside the bracket; shift from the stale figure +0.9572 accounted for term-by-term to 1.7e-15 (dominated by t3(2,1,1) × coefficient 2048).
+- **Tower verdict (paper-grade):** realized motivic depth ≤ k−1 at k = 2, 3; the cosmic-Galois frozen-carrier reading strengthened — GeoVac's loop sums climb the depth filtration of the classical level-2 ring strictly slower than loop order.
+
+### Added
+- Canonical memo `debug/sprint_s3_closure_memo.md`; drivers `debug/s3_closure_{trailing1,anchor,recompute}.py` + JSONs in `debug/data/`; frozen falsifier `tests/test_s3_decomposition.py` (13 tests: chain-collapse Fraction identity + CG cross-check, trailing-1 brackets + stale-value exclusion regression guard, the four identifications, R2/R6 witnesses, anchor bracket)
+- Paper 28: new §Decomposition closure (eq:t3_211/411/321/341, eq:s3_bracket, eq:s3_value); convergence analysis corrected (log-masquerade diagnosis); prop:depth_k k=3 bullet updated to realized-depth result; abstract item (6) and conclusions updated; convergence table annotated with the true limit (57 pp, 3-pass clean)
+
+### Changed
+- Paper 55: tower table k=3 row → identified exc. w10; open-questions k=3 bullet → Closed; k-general bullet gains the named remaining items (39 pp, 3-pass clean)
+- v4.5.0 paper-edit propagation (earlier this session): Paper 28 intro de-overclaimed; Paper 55 "being identified" → completed identifications + S_min closed form in the witness subsection, three "depth equal to loop order" → "bounded by", stratification row → realized depth ≤ 1, S⁵ target paragraphs → decomposition-first method, open-questions depth-k section rewritten
+- CLAUDE.md §2 one-liner + §3 row (Levin-on-log-modulated-summands failure mode); version → v4.6.0
+
+### Closed
+- `sprint_s3_decomposition_memo.md` §5 follow-ons 1 + 2 (the gate for paper-grade S^(3) claims). Remaining named: w10 room, full symbolic assembly modulo w10, S^(4) (still undefined corpus-wide)
+
 ## [4.5.0] - 2026-06-11
 
 ### Summary

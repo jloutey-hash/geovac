@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.5.0 (June 11, 2026)
+**Version:** v4.6.0 (June 11, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint S^(3) closure (2026-06-11, v4.6.0):** BOTH OPEN ITEMS CLOSED — S^(3) = 31.5726 in rigorous bracket [31.57063, 31.57300]; stage-1 figures 30.615/30.220 both Levin-on-log artifacts; four PSLQs ACCEPT; realized depth ≤ 2 at k=3 (≤ k−1 pattern). Falsifier `tests/test_s3_decomposition.py`. See `debug/sprint_s3_closure_memo.md`.
 - **Sprint S_min identification + S^(3) decomposition (2026-06-11, v4.5.0):** S_min CLOSED — explicit Q[π²,ln2,ζ(3),ζ(5)] element; prior irreducibility = basis-coverage artifact; k=3 reaches depth-2 generators. Falsifier `tests/test_smin_decomposition.py`. See `debug/smin_dossier_round1_memo.md`.
 - **Sprint B3 Phase-3 Sprint-4 band exhaustion (2026-06-10, v4.4.0):** PHASE-3 CHARTER CLOSED — 5-agent workflow: interval layer bit-exact at every window; cost layer converges in OWN power-law class (γ and thermal excluded); b-parity staircase = (−1)^{2b} grading in exhaustion dynamics; exact form ‖P_W M_{C¹}P_W‖ = √6(2j)/(2j+2). Falsifier `tests/test_wh7_band_exhaustion.py`. See `debug/sprint_wh7_band_exhaustion_memo.md`.
 - **Sprint B3 Phase-3 Sprint-3b (2026-06-10, v4.3.0):** FOLD RULE CLOSED-FORM — CG lemma [RCR]=(−1)^{b+j2−j1}[C^b_{−μ′,μ}] blockwise + parity rule ε=(−1)^{b+j2−j1+μ′} (annihilation iff ε=−1, exact rational fold ratios); Sprint-3 headline facts proven j_max=1 WINDOW-EDGE ((2,1) revives 8/41 at 3/2; (2,2) stops commuting, mirror 9/25). Falsifier `tests/test_wh7_b3_fold_rule.py`. See `debug/sprint_wh7_b3_fold_rule_memo.md`.
@@ -371,6 +372,7 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | K⁺ compression of the Krein Dirac as a Lorentzian quantum-metric device (P45 descope, 2026-06-09) | 1 | Krein-self-adjointness of $i\,D_{GV}\otimes I$ forces $\{J, D_{GV}\otimes I\}=0$, so $P_+ D_{GV} P_+ = 0$ exactly and the restricted Lipschitz seminorm ≡ 0 on the entire operator system (bit-exact at (2,3),(3,5); kernel 42/42, 275/275). "First Lorentzian propinquity theorem" claim withdrawn; falsifier frozen in `tests/test_p45_kplus_degeneracy.py`. See `debug/sprint_p45_hardening_phase1_memo.md`. |
 | Momentum-diagonal temporal multipliers as a metric temporal algebra (P45, 2026-06-09) | 1 | $g_p(\omega_k)$ are functions of momentum, not time — they commute with the Fourier-diagonal $D_t$ exactly, so time is Lipschitz-invisible by construction (the celebrated "L3 structural identity" is the diagnosis, not a feature). Repair requires Toeplitz compressions of $e^{iqt}$ (Connes-vS S¹ pattern). Same memo. |
 | Grab-bag / single-weight PSLQ bases for weight-inhomogeneous graph-QED constants (2026-06-11) | 1 | S_min's 15 "irreducibility" failures were a basis-coverage artifact (the bases held 2/8 of the weight-5 level-2 monomials); weight-grade the object first, then PSLQ against complete weight-homogeneous bases. See `debug/smin_dossier_round1_memo.md`. |
+| Levin/EM series acceleration on log-modulated summands (2026-06-11) | 3 | mpmath nsum-levin silently mis-converges when the summand carries a log factor (harmonic/digamma growth), with precision-DEPENDENT error — two runs at different dps disagreeing is the tripwire. Poisoned the S^(3) trailing-1 t3 evaluator, the factorized anchor (both stage-1 figures wrong), and the published N^−1.31 "power law" ((ln N)²/N² masquerade). Fix: remove the log by Abel summation, or rigorous brackets with no acceleration; cached term arrays must honor nsum's precision contract. See `debug/sprint_s3_closure_memo.md`. |
 
 
 ---

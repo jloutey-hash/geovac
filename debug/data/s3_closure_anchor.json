@@ -1,0 +1,53 @@
+{
+  "GA": {
+    "m=1": "2.334e-61",
+    "m=2": "6.223e-61",
+    "m=5": "9.335e-61",
+    "m=100": "8.712e-60",
+    "m=1000": "4.07e-58"
+  },
+  "GA_pass": true,
+  "GB_cube_N": 300,
+  "GB_frac_vs_mpf": "1.991e-59",
+  "GB_cube_value": "25.2734485393503975914755402141",
+  "GB_pass": true,
+  "GC": {
+    "m=10": true,
+    "m=100": true,
+    "m=10000": true,
+    "m=1000000": true
+  },
+  "GC_pass": true,
+  "bracket": {
+    "10000": {
+      "lower": "31.27965825753588596296",
+      "upper": "31.68500779755367508012",
+      "width": "0.4053",
+      "contains_decomposition_30.615": false,
+      "excludes_levin_30.2197": true
+    },
+    "100000": {
+      "lower": "31.52754770526768274496",
+      "upper": "31.58629943474667182143",
+      "width": "0.05875",
+      "contains_decomposition_30.615": false,
+      "excludes_levin_30.2197": true
+    },
+    "1000000": {
+      "lower": "31.56614854032345772973",
+      "upper": "31.57418471229814827133",
+      "width": "0.008036",
+      "contains_decomposition_30.615": false,
+      "excludes_levin_30.2197": true
+    },
+    "4000000": {
+      "lower": "31.57062945556643783032",
+      "upper": "31.57300467230623165566",
+      "width": "0.002375",
+      "contains_decomposition_30.615": false,
+      "excludes_levin_30.2197": true
+    }
+  },
+  "anchor_closed": false,
+  "elapsed_sec": 85.72332715988159
+}

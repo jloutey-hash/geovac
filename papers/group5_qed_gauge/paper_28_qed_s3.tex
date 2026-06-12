@@ -58,9 +58,11 @@ the level-2 (alternating-MZV) content; it does not automatically mint
 new irreducibles.  The two-loop $S_{\min}$ decomposes exactly into
 Hoffman double $t$-values (classical periods of $\MT(\Z[1/2])$; the
 prior ``PSLQ-irreducible'' claim was a basis-coverage artifact);
-the three-loop $S^{(3)}$ is a depth-$\le 3$ element of the same ring
-(Proposition~\ref{prop:depth_k},
-Sec.~\ref{subsec:smin_identified}).
+the three-loop $S^{(3)} = 31.5726\ldots$ (rigorous bracket
+$[31.57063, 31.57300]$) has realized depth $\le 2$ on every identified
+component: the catalogued depth-2 generators $t(5,1)$, $t(5,3)$,
+$t(7,1)$ enter at coefficients $\pm\tfrac12$, and nothing new is minted
+(Proposition~\ref{prop:depth_k}, Sec.~\ref{subsec:s3_closure}).
 (7)~\textbf{$\zeta(3)$ complementarity:} the degeneracy-weighted
 fine-structure shell sum $\mathcal{S}(n) = n(5n-4)/2$ and the Dirac
 mode degeneracy $g_n^{\mathrm{Dirac}} = 2n(n+1)$ satisfy
@@ -174,8 +176,10 @@ The central finding is that the $S^3$ spectral geometry produces the
 \emph{same} transcendental constants that appear in flat-space
 perturbative QED---$\zeta(3)$, $\zeta(5)$, Catalan's~$G$, Dirichlet
 $\beta(4)$---through a purely geometric mechanism (operator order plus
-vertex topology), together with \emph{new} irreducible constants at each
-loop order that have no known closed form.
+vertex topology), together with multi-loop constants that climb the
+depth filtration of the classical level-2 (alternating) MZV ring:\ the
+two-loop $S_{\min}$ is identified in closed form in
+$\mathbb{Q}[\pi^2, \ln 2, \zeta(3), \zeta(5)]$ (Sec.~\ref{sec:smin}).
 
 % ===================================================================
 \section{Spectral Data on $S^3$}
@@ -2442,32 +2446,126 @@ factorized algorithm at $n_{\max} = 50$ completes in $< 60$ seconds.
 Tests: 10 in \texttt{TestFactorizedMatchesDirect} and
 \texttt{TestFactorizedConvergence} (all passing).
 
-\subsection{Convergence analysis}
+\subsection{Convergence analysis (corrected 2026-06-11)}
 
-At default exponents ($a = 4$, $p = 1$) with CG weights, the
-three-loop CG-weighted sum converges as a power law:
+At default exponents ($a = 4$, $p = 1$) with CG weights, the raw
+partial sums converge far too slowly for direct evaluation.  An
+empirical power-law fit over $N \in [20, 120]$ gave
 \begin{equation}
   \Delta S^{(3)}(N) \approx 270 \cdot N^{-1.31},
   \label{eq:convergence_rate}
 \end{equation}
-fitted over $N \in [20, 120]$.  The exponent $\alpha \approx -1.31$
-confirms convergence ($|\alpha| > 1$) but is too slow for practical
-PSLQ identification: at $n_{\max} = 100$, only $\sim$1--2 reliable
-digits are available.  The sum has not converged sufficiently for PSLQ
-at the physical exponents.  For higher exponents (e.g., $a = 8$,
-$p = 2$), the sum converges faster and PSLQ was attempted---see below.
+but the closure-sprint analysis showed the fitted exponent is an
+artifact: by the channel-count closed
+form~\eqref{eq:channel_closed_form} the inner partial sums grow as
+$L(n_2) = 4\ln n_2 + O(1)$, so the increments follow
+$(\ln N)^2/N^2$ --- a log-modulated law whose local log-slope
+$2 - 2/\ln N$ runs through $1.3$--$1.6$ over the fit window and
+masquerades as a power law.  The true remaining tail at $N = 120$ is
+$\approx 7$ units, i.e.\ \emph{zero} reliable digits from raw partial
+sums (cf.\ Table~\ref{tab:three_loop_convergence}: the $n_{\max} = 50$
+partial sum is $15.23$ against a limit of $31.57$).
 
-\subsection{PSLQ identification attempts}
+The reliable direct evaluation is a rigorous bracket with no series
+acceleration anywhere: the factorized sum has positive terms, so
+partial sums with the closed-form full-range inner sum give a strict
+lower bound, and the explicit inequalities $L(m) \le 4(\ln m + 1)$,
+$\phi(m) \le 2/(m+1)^2$ give an integral tail bound.  At
+$N = 4\times10^{6}$,
+\begin{equation}
+  S^{(3)} \in [31.57063,\ 31.57300]
+  \label{eq:s3_bracket}
+\end{equation}
+(driver \texttt{debug/s3\_closure\_anchor.py}).  The corrected
+decomposition assembly (Sec.~\ref{subsec:s3_closure}) gives the
+canonical value, inside the bracket:
+\begin{equation}
+  S^{(3)} = 31.57256\,12075\,12022\,75476\,19295\,45069\ldots
+  \label{eq:s3_value}
+\end{equation}
+
+\subsection{PSLQ identification attempts (historical)}
 
 At the fast-converging exponents $a = 8$, $p = 2$, approximately 20
 reliable digits are available at $n_{\max} = 50$.  PSLQ with an
 18-element depth-3 MZV basis (including $S_{\min}$, $\zeta(3)^2$,
 $\pi^2 S_{\min}$, $G \cdot S_{\min}$, and all cross-products with
-$\pi^2$, $\zeta(3)$, $G$, $\beta(4)$) returns no relation.
+$\pi^2$, $\zeta(3)$, $G$, $\beta(4)$) returns no relation.  This route
+is superseded by the decomposition closure below.
 
 The unrestricted three-loop sum factorizes exactly as $D(a)^3$: at
 $a = 4$, $D(4)^3 = (\pi^2 - \pi^4/12)^3 \approx 5.379$, purely
 $\pi^{\mathrm{even}}$.
+
+\subsection{Decomposition closure: the four trailing-$1$
+identifications}
+\label{subsec:s3_closure}
+
+Notation: $t_3(b_1,b_2,b_3) = \sum_{o_1>o_2>o_3\ge1\,\mathrm{odd}}
+o_1^{-b_1} o_2^{-b_2} o_3^{-b_3}$, the Hoffman triple $t$-value in the
+same descending convention as $t(b,c)$.  The channel-count closed
+form~\eqref{eq:channel_closed_form} expands the CG-weighted chain sum
+into 12 triple $t$-values, 26 double $t$-values, and
+$\lambda$/boundary terms (exact in Fraction arithmetic at every
+truncation; \texttt{tests/test\_s3\_decomposition.py}).
+
+Two errors in the stage-1 numerics were diagnosed and closed on
+2026-06-11 (memo \texttt{debug/sprint\_s3\_closure\_memo.md}), both
+with one root cause: Levin series acceleration silently mis-converges
+on summands with logarithmic factors, with \emph{precision-dependent}
+error.  (i)~The evaluator for trailing argument $b_3 = 1$ fed the
+odd-harmonic factor $\widetilde{H}(j) \sim \tfrac12\ln j$ into the
+accelerator; $t_3(2,1,1)$ was off by $-4.7\times10^{-4}$ at 130~dps
+and $-2.9\times10^{-4}$ at 220~dps, poisoning the earlier evaluation
+$S^{(3)} \approx 30.615$ through its table coefficient $+2048$ --- the
+corrected shift $+0.9572$ is accounted for term-by-term to
+$1.7\times10^{-15}$.  (ii)~The same disease invalidated the
+factorized-anchor evaluation $30.2197$ ($L(m) \sim 4\ln m$); the
+bracket~\eqref{eq:s3_bracket} replaces it.  The repaired evaluator
+uses Abel summation over the harmonic weight,
+$t_3(b_1,b_2,1) = \sum_{k\ge1} (2k-1)^{-1} A(k)$ with
+$A(k) = \sum_{j \ge k} a_j$ --- both sums log-free.  With corrected
+values the stuffle witnesses pass at $5\times10^{-216}$ (R2; stage-1
+residual $6.4\times10^{-12}$) and $8\times10^{-217}$ (R6; was
+$9.8\times10^{-20}$); the stage-1 residuals decompose exactly into the
+individual evaluator errors.
+
+PSLQ at 220/340~dps against the complete conjectural level-2
+weight-homogeneous bases identifies all four previously pending
+components (residuals $2.6\times10^{-216}$ to $7.3\times10^{-339}$):
+\begin{align}
+  t_3(2,1,1) &= \tfrac{1}{2}\mathrm{Li}_4(\tfrac12)
+   + \tfrac{1}{48}\ln^4 2 + \tfrac{1}{24}\pi^2\ln^2 2
+   - \tfrac{19}{5760}\pi^4,
+  \label{eq:t3_211}\\
+  t_3(4,1,1) &= \tfrac{1}{192}\pi^4\ln^2 2
+   - \tfrac{1}{64}\pi^2\ln 2\,\zeta(3)
+   - \tfrac{11}{322560}\pi^6 - \tfrac{1}{2}\,t(5,1)
+   - \tfrac{7}{128}\zeta(3)^2,
+  \label{eq:t3_411}\\
+  t_3(3,2,1) &= \tfrac{3}{64}\pi^2\ln 2\,\zeta(3)
+   - \tfrac{1}{9216}\pi^6
+   - \tfrac{1}{2}\,t(5,1) - \tfrac{49}{256}\zeta(3)^2,
+  \label{eq:t3_321}\\
+  t_3(3,4,1) &= \tfrac{1}{768}\pi^4\ln 2\,\zeta(3)
+   + \tfrac{5}{128}\pi^2\ln 2\,\zeta(5)
+   + \tfrac{61}{2903040}\pi^8 - \tfrac{1}{256}\pi^2\zeta(3)^2
+   \nonumber\\
+   &\quad + \tfrac{1}{2}\,t(5,3) - \tfrac{1}{2}\,t(7,1)
+   - \tfrac{217}{512}\zeta(3)\zeta(5).
+  \label{eq:t3_341}
+\end{align}
+Every component of the $S^{(3)}$ decomposition except the weight-10
+graded piece ($-2048\,t_3(4,3,3) - 1024\,t_3(4,4,2)$; level-2 basis
+dimension 89, not executed; parity heuristic predicts depth $\le 2$)
+is now an identified element of the level-2 ring, with the genuine
+depth-2 generators $t(5,1)$ (weight 6) and $t(5,3)$, $t(7,1)$
+(weight 8) entering at coefficients $\pm\tfrac12$.
+\textbf{Realized motivic depth at three loops: $\le 2$ on every
+identified component} --- one rung above $S_{\min}$'s depth $\le 1$,
+all catalogued, nothing new minted.  Falsifier:
+\texttt{tests/test\_s3\_decomposition.py} (13 tests, including the
+rigorous-bracket regression guard for the Levin/log failure mode).
 
 % ===================================================================
 \section{Depth-$k$ Tower}
@@ -2486,15 +2584,19 @@ At $k$ loops on $S^3$ with vertex restrictions and CG weights:
       Hoffman double $t$-values, which are classical period-ring
       elements (Sec.~\ref{subsec:smin_identified}).  The prior label
       ``irreducible'' was a basis-coverage artifact.
-\item $k = 3$: $S^{(3)}$ is a genuine depth-$\le 3$ element of
-      $\MT(\Z[1/2])$ (triple $t$-value content via the channel-count
-      closed form; Sec.~\ref{sec:three_loop}).  Independence from
-      $S_{\min}$ at fast-converging exponents does not establish
-      motivic irreducibility --- only precision identification at the
-      physical exponents can.
+\item $k = 3$: $S^{(3)}$ is a depth-$\le 3$ element of
+      $\MT(\Z[1/2])$ whose identified components --- all but the
+      weight-10 graded piece --- have \emph{realized} depth $\le 2$:
+      the catalogued generators $t(5,1)$, $t(5,3)$, $t(7,1)$ enter at
+      coefficients $\pm\tfrac12$
+      (Sec.~\ref{subsec:s3_closure}).  The earlier ``independence from
+      $S_{\min}$'' statement (a 20-digit PSLQ at non-physical
+      exponents) is superseded by the identification.
 \end{itemize}
 Loop order bounds the depth of the classical level-2 multiple-$t$-value
 content; it does not mint new irreducible transcendentals automatically.
+Realized depth so far grows strictly more slowly than loop order
+($\le k-1$ at $k = 2, 3$).
 \end{proposition}
 
 The mechanism: each vertex coupling creates one level of Hurwitz nesting.
@@ -2505,7 +2607,8 @@ multiple $t$-value in $\MT(\Z[1/2])$.  Whether the surviving
 irreducible depth-$k$ component is new (not reducible by parity/stuffle
 within the level-2 algebra) is a question for each $k$ separately --- the
 structural nesting is genuine, but the motivic content is classical at
-$k = 2$.  This is the $S^3$ analog of the increasing motivic depth
+$k = 2$ and, on all identified components, at $k = 3$ (realized depth
+$\le 2$).  This is the $S^3$ analog of the increasing motivic depth
 observed in flat-space multi-loop Feynman
 integrals~\cite{laporta2002,bailey2001}.
 
@@ -2946,7 +3049,12 @@ $s$ & $2^{s-1}$ & Residual $|$LHS $-$ RHS$|$ \\
 
 \begin{table}[h]
 \centering
-\caption{Three-loop factorized convergence at $a = 4$, $p = 1$, CG-weighted.}
+\caption{Three-loop factorized convergence at $a = 4$, $p = 1$,
+CG-weighted.  The limit is $S^{(3)} = 31.5726\ldots$
+(Eq.~\eqref{eq:s3_value}): raw partial sums carry zero reliable digits
+at these truncations --- the $(\ln N)^2/N^2$ increment law, not the
+naively fitted power law, governs the tail
+(Sec.~\ref{sec:three_loop}).}
 \label{tab:three_loop_convergence}
 \begin{tabular}{@{}cccc@{}}
 \toprule
@@ -2957,6 +3065,7 @@ $n_{\max}$ & $S^{(3)}(n_{\max})$ & $\Delta$ from previous & Time (s) \\
 15 & 5.836 & 2.095 & 0.2 \\
 20 & 7.729 & 1.893 & 0.5 \\
 50 & 15.23 & --- & $< 60$ \\
+$\infty$ & $31.5726\ldots$ & --- & (decomposition route) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -4244,15 +4353,16 @@ energy coefficients --- is the structural separation between $K$ and
 the $D_p$.
 
 The three-loop factorized algorithm (Sec.~\ref{sec:three_loop})
-reduces the computational complexity from $O(N^5)$ to $O(N^3)$,
-enabling $n_{\max} = 100{+}$ in minutes.  However, the CG-weighted
-sum at physical exponents converges too slowly ($\alpha \approx -1.31$)
-for PSLQ identification at any practical $n_{\max}$ --- an honest
-computational finding documented by the convergence analysis.
-The three-loop constant $S^{(3)}$ at fast-converging exponents was
-tested independent of $S_{\min}$ and lower-loop constants only at
-$\sim$20 digits --- weak evidence; the triple-$t$-value decomposition
-program supersedes this route.
+reduces the computational complexity from $O(N^5)$ to $O(N^3)$, but
+raw partial sums at physical exponents carry zero reliable digits at
+any practical $n_{\max}$ (the $(\ln N)^2/N^2$ increment law; the
+fitted $N^{-1.31}$ was its local masquerade).  The decomposition route
+supersedes direct summation entirely: the closure sprint (2026-06-11)
+gives $S^{(3)} = 31.5726\ldots$ inside the rigorous bracket
+$[31.57063, 31.57300]$, with every identified component reduced into
+the level-2 ring at realized depth $\le 2$
+(Sec.~\ref{subsec:s3_closure}).  The earlier ``$S^{(3)}$ independent
+of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
 
 \subsection{Open questions}
 
@@ -4262,10 +4372,13 @@ program supersedes this route.
       null was a basis-coverage artifact, not irreducibility.
 \item Does the depth-$k$ tower stabilize (i.e., do all constants
       beyond some $k_0$ reduce to products of lower-depth constants)?
-      \textbf{Partial (2026-06-11):} at $k=2$ everything reduces to
-      depth~$\le 1$; at $k=3$ genuine depth-2 catalogue generators
-      ($t(5,3)$, $t(5,1)$) appear in the reductions (three-loop
-      decomposition program, in progress).
+      \textbf{Updated (2026-06-11, closure sprint):} at $k=2$
+      everything reduces to depth~$\le 1$; at $k=3$ every identified
+      component (all but the weight-10 graded piece) has realized
+      depth $\le 2$, with catalogued generators $t(5,1)$, $t(5,3)$,
+      $t(7,1)$ at coefficients $\pm\tfrac12$
+      (Sec.~\ref{subsec:s3_closure}).  Realized depth $\le k-1$ so
+      far; whether the pattern persists at $k \ge 4$ is open.
 \item Is there a Picard--Fuchs interpretation of $S_{\min}$, analogous
       to Ap\'ery's recurrence for $\zeta(3)$~\cite{apery1979}?
 \item Can the self-energy structural zero at $n_{\mathrm{ext}} = 0$
