@@ -925,7 +925,7 @@ Loop order $k$ & Witness & Depth & Status \\
 \midrule
 $1$ & $\pi^{\mathrm{even}}$ only & $1$ in $\MT(\Z)$ & T9 proven \\
 $2$ & $S_{\min}$: closed form & realized $\le 1$ in $\MT(\Z[1/2])$ & identified (round-2 dossier) \\
-$3$ & $S^{(3)} = 31.5726\ldots$: triple $t$-values & realized $\le 2$ in $\MT(\Z[1/2])$ & identified exc.\ w10 (closure sprint) \\
+$3$ & $S^{(3)} = 31.5726\ldots$: triple $t$-values & realized $\le 2$; sole depth-2 constant $\zeta(5,3) \in \MT(\Z)$ & fully identified (W10 sprint) \\
 $k$ general & depth-$\le k$ element & $\le k$ in $\MT(\Z[1/2])$ & level-2 ring prediction \\
 \bottomrule
 \end{tabular}
@@ -1655,17 +1655,31 @@ irreducible transcendentals automatically.  Status by rung:
     cancellation), and the weight-10 block reduces by exact stuffle
     closure to five surviving generators (three antisymmetric doubles
     + two parity-reducible triples; Paper~28
-    eq.~``$W_{10}$ reduction'').  All weight-$\le 7$ closed forms are
+    eq.~``$W_{10}$ reduction'').  \textbf{W10 closed (2026-06-12):}
+    the Charlton--Hoffman symmetry theorem (explicit-product form,
+    Thm.~2.21 of arXiv:2204.14183) plus four clean stuffles identify
+    all four weight-10 triples individually; in the full assembly the
+    three antisymmetric doubles cancel identically, and
+    $S^{(3)} \in \Q[\pi^2, \ln 2, \zeta(\mathrm{odd}), \zeta(5,3)]$
+    explicitly --- the sole depth-2 constant is the \emph{level-1}
+    generator $\zeta(5,3)$, at coefficient $6\pi^2$ (assembly gate
+    $1.2\times10^{-198}$; falsifier
+    \texttt{tests/test\_s3\_w10\_identification.py}).  New depth
+    arrives from level 1; the level-2 sector stays at realized depth
+    $\le 1$.  All weight-$\le 7$ closed forms are
     verbatim rows of Hoffman's published Appendix~A --- the PSLQ
     identifications independently rediscovered the table, and the
     $t_3(3,4,1)$ explicit form appears to be new.
   \item $k$ general (open):\ does the realized depth keep growing
     strictly more slowly than loop order, and does a genuinely
     irreducible (but catalogued) level-2 depth-$k$ $t$-value survive
-    at some $k$?  Realized depth $\le k - 1$ at $k = 2, 3$.  Named
-    remaining items:\ the $S^{(3)}$ weight-10 graded room (level-2
-    basis dimension 89; parity heuristic predicts depth $\le 2$) and
-    the full symbolic assembly of $S^{(3)}$ modulo that piece.
+    at some $k$?  Realized depth $\le k - 1$ at $k = 2, 3$; at $k = 3$
+    no level-2 generator survives at all (the depth-2 content is the
+    level-1 $\zeta(5,3)$), so the sharper open question is whether
+    \emph{any} level-2-specific constant beyond the depth-$\le 1$
+    ring ever survives a full chain assembly.  Both previously named
+    remaining items (the weight-10 graded room and the full symbolic
+    assembly) are closed (W10 sprint, 2026-06-12).
 \end{itemize}
 Method discipline (round-2 dossier lesson):\ weight-grade the object
 first, then identify each graded component against a complete

@@ -2597,17 +2597,101 @@ $7\times10^{-59}$), to
 where $a(b,c) := t(b,c) - t(c,b)$ and $\lambda(s) = (1-2^{-s})\zeta(s)$;
 the lower-weight $a(4,2)$, $a(4,3)$ are identified objects, leaving
 \emph{five} surviving generators: the antisymmetric doubles $a(8,2)$,
-$a(7,3)$, $a(6,4)$ and the triples $t_3(2,4,4)$, $t_3(3,3,4)$.  The
-depth-3 survivors are parity-reducible in principle (weight $+$ depth
-$= 13$ odd; level-2 parity theorems~\cite{panzer2017,wangxu2025});
-executing that reduction, and identifying the survivors via the
-$t$-value-to-alternating-MZV conversion (Hoffman
-Cor.~4.1~\cite{hoffman2019odd}) composed with the proven
-weight-$\le 12$ tables of the MZV data mine~\cite{bbv2010}, are named
-follow-ons.  A structural obstruction closes the alternative route:
-the depth-$\le 3$ relation content of the quasi-shuffle closure
-saturates already at the $\lambda\cdot t$ product stage, so no
-stuffle-product engineering at any depth can reduce the block further.
+$a(7,3)$, $a(6,4)$ and the triples $t_3(2,4,4)$, $t_3(3,3,4)$.  A
+structural obstruction protects this block from stuffle methods: the
+depth-$\le 3$ relation content of the quasi-shuffle closure saturates
+already at the $\lambda\cdot t$ product stage, so no stuffle-product
+engineering at any depth can reduce it further.
+
+\paragraph{The weight-10 block closed (2026-06-12).}
+The missing input is the Charlton--Hoffman symmetry
+theorem~\cite{charltonhoffman2022} --- level-2
+regularized-double-shuffle content invisible to the stuffle-only
+system.  Its generating-series form (their Thm.~2.21) at depth $m=3$,
+$\underline{\phi}=\underline{0}$, extracted at the coefficient of
+$y_1^{a-1}y_2^{b-1}y_3^{c-1}$ by exact-Fraction series algebra, gives
+the reversal-pair sums with every product term explicit (each instance
+used was verified numerically at $10^{-78}$ or better; driver
+\texttt{debug/s3\_w10\_ident.py}, 24/24 gates):
+\begin{align}
+  t_3(4,4,2) + t_3(2,4,4) &= \tfrac{5}{6144}\pi^4\zeta(3)^2
+   - \tfrac{5}{256}\pi^2\zeta(3)\zeta(5)
+   - \tfrac{1}{256}\pi^2\zeta(5,3)
+   + \tfrac{137}{99532800}\pi^{10},
+  \label{eq:ch_pair1}\\
+  t_3(4,3,3) + t_3(3,3,4) &= \tfrac{37}{12288}\pi^4\zeta(3)^2
+   - \tfrac{25}{1024}\pi^2\zeta(3)\zeta(5)
+   - \tfrac{889}{2048}\zeta(3)\zeta(7)
+   - \tfrac{1}{256}\pi^2\zeta(5,3)
+   + \tfrac{251}{58060800}\pi^{10},
+  \label{eq:ch_pair2}
+\end{align}
+where $\zeta(5,3) = \sum_{m>n\ge 1} m^{-5}n^{-3}$ is the classical
+weight-8 depth-2 MZV generator (conjecturally irreducible over
+products of single zetas), entering through the weight-8 layer of the
+theorem's $\zeta$-side product terms.  The pair \emph{differences}
+follow from four ordinary stuffles $t(x)\,t_2(y,z)$,
+$(x,y,z) \in \{(2,4,4),(4,2,4),(3,3,4),(3,4,3)\}$, whose pairwise
+combinations eliminate the auxiliary triples $t_3(4,2,4)$,
+$t_3(3,4,3)$.  Solving the two $2\times2$ systems identifies all four
+weight-10 triples individually:
+\begin{align}
+  t_3(2,4,4) &= \tfrac{1}{4}a(8,2) - \tfrac{1}{4}a(6,4)
+   - \tfrac{1}{6144}\pi^4\zeta(3)^2
+   - \tfrac{5}{512}\pi^2\zeta(3)\zeta(5)
+   - \tfrac{1}{512}\pi^2\zeta(5,3)
+   + \tfrac{373}{174182400}\pi^{10},
+  \label{eq:t3_244_closed}\\
+  t_3(3,3,4) &= \tfrac{1}{4}a(7,3) - \tfrac{1}{4}a(6,4)
+   + \tfrac{1}{12288}\pi^4\zeta(3)^2
+   + \tfrac{5}{1024}\pi^2\zeta(3)\zeta(5)
+   - \tfrac{889}{4096}\zeta(3)\zeta(7)
+   - \tfrac{1}{512}\pi^2\zeta(5,3)
+   + \tfrac{251}{116121600}\pi^{10},
+  \label{eq:t3_334_closed}
+\end{align}
+each gated against its independently computed 200-digit value at
+residual $\le 6\times10^{-197}$ (likewise $t_3(4,4,2)$,
+$t_3(4,3,3)$).
+
+\paragraph{Collapse theorem and the full closed form.}
+Substituting Eqs.~\eqref{eq:t3_244_closed}--\eqref{eq:t3_334_closed}
+into the full $S^{(3)}$ assembly, the three antisymmetric doubles
+$a(8,2)$, $a(7,3)$, $a(6,4)$ \emph{cancel identically}: the explicit
+$a$-content of the weight-10 corollary is exactly absorbed by the
+$a$-content of the two triples (symbolic verification in the frozen
+falsifier).  The weight-10 block therefore contributes
+\begin{equation}
+  S^{(3)} - \mathrm{Ident} \;=\;
+  -7\pi^4\zeta(3)^2 + 70\pi^2\zeta(3)\zeta(5)
+  + 6\pi^2\,\zeta(5,3) + \tfrac{179}{170100}\pi^{10},
+  \label{eq:s3_w10_contribution}
+\end{equation}
+where $\mathrm{Ident}$ is the identified part of the symbolic
+assembly, and the complete closed form
+\begin{equation}
+  S^{(3)} \;\in\;
+  \mathbb{Q}\!\left[\pi^2,\ \ln 2,\ \zeta(3),\ \zeta(5),\ \zeta(7),\
+  \zeta(9),\ \zeta(5,3)\right]
+  \label{eq:s3_ring}
+\end{equation}
+is explicit, with $\zeta(5,3)$ the \emph{only} constant beyond the
+depth-$\le 1$ ring, at coefficient $6\pi^2$.  The closed form
+reproduces the canonical value~\eqref{eq:s3_value} at residual
+$1.2\times10^{-198}$ (200 dps).  Two structural readings: (i) the
+transient-generator cancellation pattern of the symbolic assembly
+($t(5,1)$, $t(5,3)$, $t(7,1)$, $\mathrm{Li}_4(\tfrac12)$ all cancel)
+extends through weight 10 --- the level-2 antisymmetric doubles
+$a(8,2)$, $a(7,3)$, $a(6,4)$ also carry total coefficient zero, and
+the \emph{value} of $S^{(3)}$ is independent of these still-unreduced
+generators; (ii) the genuinely new depth-2 content at three loops
+enters on the \emph{level-1} side ($\zeta(5,3) \in \MT(\Z)$), while
+the level-2-specific content (the $\ln 2$ sector) stays at realized
+depth $\le 1$ --- new depth arrives from level 1, new level stays at
+depth $\le 1$.  Falsifier:
+\texttt{tests/test\_s3\_w10\_identification.py} (symmetry-pair sums,
+individual triples, symbolic $a$-collapse, full closed form at 50 and
+200 dps with $\zeta(5,3)$ computed live).
 
 \paragraph{Literature grounding (verified against the sources).}
 All weight-$\le 7$ closed forms in this section and
@@ -2642,14 +2726,16 @@ At $k$ loops on $S^3$ with vertex restrictions and CG weights:
       Hoffman double $t$-values, which are classical period-ring
       elements (Sec.~\ref{subsec:smin_identified}).  The prior label
       ``irreducible'' was a basis-coverage artifact.
-\item $k = 3$: $S^{(3)}$ is a depth-$\le 3$ element of
-      $\MT(\Z[1/2])$ whose identified components --- all but the
-      weight-10 graded piece --- have \emph{realized} depth $\le 2$:
-      the catalogued generators $t(5,1)$, $t(5,3)$, $t(7,1)$ enter at
-      coefficients $\pm\tfrac12$
-      (Sec.~\ref{subsec:s3_closure}).  The earlier ``independence from
-      $S_{\min}$'' statement (a 20-digit PSLQ at non-physical
-      exponents) is superseded by the identification.
+\item $k = 3$: $S^{(3)}$ is a fully identified element of
+      $\mathbb{Q}[\pi^2, \ln 2, \zeta(\mathrm{odd}), \zeta(5,3)]$ with
+      \emph{realized} depth $\le 2$ unconditionally
+      (Eq.~\eqref{eq:s3_ring}): the sole depth-2 constant is the
+      level-1 generator $\zeta(5,3)$, at coefficient $6\pi^2$; every
+      level-2 depth-2 generator ($t(5,1)$, $t(5,3)$, $t(7,1)$,
+      $a(8,2)$, $a(7,3)$, $a(6,4)$) appears transiently and cancels in
+      the total (Sec.~\ref{subsec:s3_closure}).  The earlier
+      ``independence from $S_{\min}$'' statement (a 20-digit PSLQ at
+      non-physical exponents) is superseded by the identification.
 \end{itemize}
 Loop order bounds the depth of the classical level-2 multiple-$t$-value
 content; it does not mint new irreducible transcendentals automatically.
@@ -4417,9 +4503,11 @@ any practical $n_{\max}$ (the $(\ln N)^2/N^2$ increment law; the
 fitted $N^{-1.31}$ was its local masquerade).  The decomposition route
 supersedes direct summation entirely: the closure sprint (2026-06-11)
 gives $S^{(3)} = 31.5726\ldots$ inside the rigorous bracket
-$[31.57063, 31.57300]$, with every identified component reduced into
-the level-2 ring at realized depth $\le 2$
-(Sec.~\ref{subsec:s3_closure}).  The earlier ``$S^{(3)}$ independent
+$[31.57063, 31.57300]$, and the W10-identification sprint (2026-06-12)
+closes the full form: $S^{(3)} \in \mathbb{Q}[\pi^2, \ln 2,
+\zeta(\mathrm{odd}), \zeta(5,3)]$, realized depth $\le 2$, with
+$\zeta(5,3)$ the only depth-2 constant
+(Eq.~\eqref{eq:s3_ring}).  The earlier ``$S^{(3)}$ independent
 of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
 
 \subsection{Open questions}
@@ -4430,13 +4518,15 @@ of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
       null was a basis-coverage artifact, not irreducibility.
 \item Does the depth-$k$ tower stabilize (i.e., do all constants
       beyond some $k_0$ reduce to products of lower-depth constants)?
-      \textbf{Updated (2026-06-11, closure sprint):} at $k=2$
-      everything reduces to depth~$\le 1$; at $k=3$ every identified
-      component (all but the weight-10 graded piece) has realized
-      depth $\le 2$, with catalogued generators $t(5,1)$, $t(5,3)$,
-      $t(7,1)$ at coefficients $\pm\tfrac12$
-      (Sec.~\ref{subsec:s3_closure}).  Realized depth $\le k-1$ so
-      far; whether the pattern persists at $k \ge 4$ is open.
+      \textbf{Updated (2026-06-12, W10-identification sprint):} at
+      $k=2$ everything reduces to depth~$\le 1$; at $k=3$ the full
+      closed form is explicit with realized depth $\le 2$, the sole
+      depth-2 constant being the level-1 generator $\zeta(5,3)$
+      (Eq.~\eqref{eq:s3_ring}); all level-2 depth-2 generators cancel
+      in the total.  Realized depth $\le k-1$ at $k = 2, 3$, and the
+      new-depth content enters from level 1 while the level-2 sector
+      stays at depth $\le 1$; whether both patterns persist at
+      $k \ge 4$ is open.
 \item Is there a Picard--Fuchs interpretation of $S_{\min}$, analogous
       to Ap\'ery's recurrence for $\zeta(3)$~\cite{apery1979}?
 \item Can the self-energy structural zero at $n_{\mathrm{ext}} = 0$

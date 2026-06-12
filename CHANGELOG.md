@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.8.0] - 2026-06-12
+
+### Summary
+
+**Sprint S^(3) W10 identification: the five-generator block is closed and collapses — S^(3) ∈ Q[π², ln2, ζ(odd), ζ(5,3)] in full explicit closed form, gated at 1.15e-198 against the canonical 200-dps value.** Main-session sprint executing the v4.7.0 named follow-ons, by a cheaper and stronger route than predicted (no parity transcription, no BBV table import, no PSLQ anywhere).
+
+- **Route:** Charlton–Hoffman Symmetry Theorem 2.21 (arXiv:2204.14183, generating-series form WITH explicit product terms — the level-2 regularized-double-shuffle content the v4.7.0 stuffle-saturation theorem proved inaccessible to stuffles) at depth m=3, φ=0, extracted by exact-Fraction trivariate series algebra → the two reversal-pair SUMS as explicit products; four ordinary stuffles (eliminating auxiliary triples t3(4,2,4), t3(3,4,3)) → the pair DIFFERENCES; 2×2 solves → all four weight-10 triples individually identified. ζ-side weight-≤8 doubles reduced by a level-1 word-shuffle engine (convention numerically calibrated) + classical Euler trailing-1 rows, basis ζ(5,3) at w8.
+- **Collapse theorem:** in the full S^(3) assembly the three antisymmetric doubles a(8,2), a(7,3), a(6,4) cancel IDENTICALLY (symbolic, frozen in the falsifier) — the v4.7.0 transient-generator cancellation pattern extends through weight 10. S^(3)'s value is independent of the three still-unreduced level-2 generators.
+- **Result:** S^(3) − Ident = −7π⁴ζ(3)² + 70π²ζ(3)ζ(5) + 6π²ζ(5,3) + (179/170100)π¹⁰; the sole depth-2 constant in all of S^(3) is the LEVEL-1 generator ζ(5,3) (weight-8 MZV, the oldest catalogued depth-2 constant in the subject — nothing new minted). Sharpened k-tower reading: new depth arrives from level 1; the level-2 sector stays at realized depth ≤ 1. The closed-form pair-sum evaluations (eq:ch_pair1/2) appear to be new to the literature.
+- **Verification:** 24/24 gates in `verify` (word-engine calibration, Euler rows, 11 level-1 reductions, 4 stuffles, Thm 2.21 instances at m=2 (4,4),(2,6) and m=3 (6,2,2),(2,4,4),(3,3,4); residuals 1e-78–1e-103 grade); individual triples vs independent 200/220-dps caches ≤5.6e-197; final closed form 1.15e-198. Levin used only on log-free power-decay summands; trailing-1 ζ_GV(s,1) via partial sums + ∂s-Hurwitz tails (per the §3 Levin/log dead-end row).
+- **Stale job logged:** the 27-hour pre-closure round-1b S_min PSLQ background job completed mid-sprint; its "obstruction stands" output is the documented basis-coverage artifact (superseded by v4.5.0); useful byproduct: 260-dps confirmation of the S_min decomposition residual (4.06e-261). `debug/data/smin_dossier_round1b.json`.
+
+### Added
+- Paper 28: "The weight-10 block closed" + "Collapse theorem and the full closed form" paragraphs (eq:ch_pair1, eq:ch_pair2, eq:t3_244_closed, eq:t3_334_closed, eq:s3_w10_contribution, eq:s3_ring); Prop depth_k k=3 bullet, conclusions, Open Questions item 2 updated to unconditional (59 pp, GATE: PASS)
+- `tests/test_s3_w10_identification.py`: frozen falsifier — symbolic a-collapse, exact stuffle structure, pair sums, individual triples, generator-set assertion (6π²ζ(5,3)), full closed form at 60 + 200 dps with ζ(5,3) live (6 fast + 2 slow, all PASS)
+- `debug/s3_w10_ident.py` (extract | verify | assemble) + `debug/data/s3_w10_ident_{extraction,result}.json`; memo `debug/sprint_s3_w10_identification_memo.md`
+
+### Changed
+- Paper 55: k-tower witness table row k=3 → fully identified; k=3 bullet gains the W10-closure paragraph; k-general bullet's named remaining items closed, question sharpened to "does any level-2-specific constant ever survive a full chain assembly?" (39 pp, GATE: PASS)
+
+### Closed / named follow-ons
+- v4.7.0 follow-ons (i) parity reduction and (ii) table-import identification: both subsumed by the symmetry-theorem route — CLOSED. Optional (not load-bearing): standalone reduction of a(8,2), a(7,3), a(6,4) (one expected Q-relation mod products from the depth-graded count); S^(4) remains undefined corpus-wide.
+
 ## [4.7.0] - 2026-06-11
 
 ### Summary
