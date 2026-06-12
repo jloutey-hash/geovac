@@ -2306,7 +2306,7 @@ decomposition $\lambda(b)\lambda(c) = t(b,c)+t(c,b)+\lambda(b+c)$):
 coefficient zero, so only the reducible symmetric combination appears.)
 
 \textbf{Odd-weight depth-1 reductions} (verified at $\ge 1\times10^{-130}$;
-formulas match Hoffman~\cite{hoffman2019odd} Table~2 at weights~3 and~5):
+both are verbatim rows of Hoffman~\cite{hoffman2019odd} Appendix~A):
 \begin{align}
   t(2,1) &= -\tfrac{7}{16}\,\zeta(3) + \tfrac{1}{8}\,\pi^2\ln 2,
   \label{eq:t21}\\
@@ -2327,7 +2327,12 @@ $2.8\times10^{-221}$ and $3.6\times10^{-222}$;
             - \tfrac{127}{256}\,\zeta(7).
   \label{eq:t43}
 \end{align}
-Assembling the full decomposition yields the explicit closed form
+Both identified forms are likewise verbatim rows of
+Hoffman~\cite{hoffman2019odd} Appendix~A ($t(4,1)$ directly; $t(4,3)$
+after converting his $t$-basis) --- the PSLQ runs independently
+rediscovered the published table (grounding verified against the
+source PDF, 2026-06-11).  Assembling the full decomposition yields the
+explicit closed form
 \begin{equation}
   S_{\min} = 8\pi^2\ln 2 - \tfrac{2}{3}\pi^4\ln 2 - 3\pi^2\zeta(3)
     + \tfrac{1}{2}\pi^4\zeta(3) - \tfrac{5}{2}\pi^2\zeta(5)
@@ -2564,8 +2569,61 @@ depth-2 generators $t(5,1)$ (weight 6) and $t(5,3)$, $t(7,1)$
 \textbf{Realized motivic depth at three loops: $\le 2$ on every
 identified component} --- one rung above $S_{\min}$'s depth $\le 1$,
 all catalogued, nothing new minted.  Falsifier:
-\texttt{tests/test\_s3\_decomposition.py} (13 tests, including the
+\texttt{tests/test\_s3\_decomposition.py} (including the
 rigorous-bracket regression guard for the Levin/log failure mode).
+
+\paragraph{Full assembly and the weight-10 block.}
+Assembling the complete decomposition with all identified components
+(symbolic assembly verified against the canonical
+value~\eqref{eq:s3_value} at residual $4.1\times10^{-197}$) yields a
+stronger statement than the entry-level reductions: \emph{every
+depth-2 generator cancels in the total}.  $t(5,1)$, $t(5,3)$,
+$t(7,1)$, and $\mathrm{Li}_4(\tfrac12)$ all carry total coefficient
+zero, as does standalone $\zeta(11)$ --- the $S^{(3)}$ echo of
+$S_{\min}$'s exact $\zeta(7)$ cancellation.  The identified part of
+$S^{(3)}$ is a polynomial in $\pi^2$, $\ln 2$, and odd zeta values
+alone.  The remaining weight-10 block reduces, by exact Fraction
+Gaussian elimination on the complete weight-10 quasi-shuffle closure
+(rank 157 on 255 words; identity verified numerically at
+$7\times10^{-59}$), to
+\begin{align}
+  W_{10}/256 &= 4\lambda(10) - \lambda(2)\lambda(8)
+   - 3\lambda(4)\lambda(6) - 4\lambda(3)\,a(4,3)
+   - 2\lambda(4)\,a(4,2) \nonumber\\
+  &\quad + a(8,2) + 4\,a(7,3) - 3\,a(6,4)
+   - 4\,t_3(2,4,4) - 8\,t_3(3,3,4),
+  \label{eq:w10_reduction}
+\end{align}
+where $a(b,c) := t(b,c) - t(c,b)$ and $\lambda(s) = (1-2^{-s})\zeta(s)$;
+the lower-weight $a(4,2)$, $a(4,3)$ are identified objects, leaving
+\emph{five} surviving generators: the antisymmetric doubles $a(8,2)$,
+$a(7,3)$, $a(6,4)$ and the triples $t_3(2,4,4)$, $t_3(3,3,4)$.  The
+depth-3 survivors are parity-reducible in principle (weight $+$ depth
+$= 13$ odd; level-2 parity theorems~\cite{panzer2017,wangxu2025});
+executing that reduction, and identifying the survivors via the
+$t$-value-to-alternating-MZV conversion (Hoffman
+Cor.~4.1~\cite{hoffman2019odd}) composed with the proven
+weight-$\le 12$ tables of the MZV data mine~\cite{bbv2010}, are named
+follow-ons.  A structural obstruction closes the alternative route:
+the depth-$\le 3$ relation content of the quasi-shuffle closure
+saturates already at the $\lambda\cdot t$ product stage, so no
+stuffle-product engineering at any depth can reduce the block further.
+
+\paragraph{Literature grounding (verified against the sources).}
+All weight-$\le 7$ closed forms in this section and
+Sec.~\ref{subsec:smin_identified} are verbatim rows of Hoffman's
+Appendix~A~\cite{hoffman2019odd} --- including the triples
+$t_3(2,1,1)$, $t_3(4,1,1)$, $t_3(3,2,1)$, after eliminating
+$\zeta(\bar 5,1)$ via his own $t(5,1)$ row.  The PSLQ identifications
+above therefore independently rediscovered the published table --- a
+two-route verification.  The weight-$\ge 8$ reductions rest on the
+theorem-grade chain: Hoffman Cor.~4.1 (exact conversion to alternating
+MZVs) $+$ parity/reduction theorems for alternating
+sums~\cite{borwein1995,panzer2017} $+$ the data mine's proven
+weight-$\le 12$ reductions~\cite{bbv2010}.  The explicit form
+Eq.~\eqref{eq:t3_341} appears to be new (checked against the explicit
+families of~\cite{charltonhoffman2022}, whose $t$-value convention
+reverses the argument order).
 
 % ===================================================================
 \section{Depth-$k$ Tower}
@@ -4562,6 +4620,31 @@ detection: techniques and applications,''
 M.~E.~Hoffman, ``An odd variant of multiple zeta values,''
 \textit{Commun.~Number Theory Phys.}\ \textbf{13}, 529--567 (2019);
 arXiv:1612.05232.
+
+\bibitem{borwein1995}
+D.~Borwein, J.~M.~Borwein, and R.~Girgensohn, ``Explicit evaluation
+of Euler sums,''
+\textit{Proc.~Edinburgh Math.~Soc.}\ \textbf{38}, 277--294 (1995).
+
+\bibitem{panzer2017}
+E.~Panzer, ``The parity theorem for multiple polylogarithms,''
+\textit{J.~Number Theory}\ \textbf{172}, 93--113 (2017);
+arXiv:1512.04482.
+
+\bibitem{bbv2010}
+J.~Bl\"umlein, D.~J.~Broadhurst, and J.~A.~M.~Vermaseren,
+``The multiple zeta value data mine,''
+\textit{Comput.~Phys.~Commun.}\ \textbf{181}, 582--625 (2010);
+arXiv:0907.2557.
+
+\bibitem{charltonhoffman2022}
+S.~Charlton and M.~E.~Hoffman, ``Symmetry results for multiple
+$t$-values,'' arXiv:2204.14183 (2022).
+
+\bibitem{wangxu2025}
+Z.~Wang and C.~Xu, ``Contour integrations and parity results of
+cyclotomic Euler $T$-sums and multiple $t$-values,''
+arXiv:2509.06706 (2025).
 
 \bibitem{flajolet1998}
 P.~Flajolet and B.~Salvy, ``Euler sums and contour integral

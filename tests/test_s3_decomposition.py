@@ -432,3 +432,46 @@ class TestAnchorBracket:
         assert lo <= v <= hi, (
             "canonical S^(3) %s outside bracket [%s, %s]"
             % (S3_CANONICAL_50[:18], mpmath.nstr(lo, 15), mpmath.nstr(hi, 15)))
+
+
+# ===========================================================================
+# Group (vi): w10 stuffle-closure reduction (Paper 28 eq:w10_reduction)
+# ===========================================================================
+
+class TestW10Reduction:
+    """The weight-10 block reduction derived by exact Fraction Gaussian
+    elimination on the complete w10 quasi-shuffle closure
+    (debug/sprint_s3_w10_symbolic_memo.md; PM-verified independently at
+    7.2e-59).  Pins the boxed identity:
+
+      -2048 t3(4,3,3) - 1024 t3(4,4,2) - 512 t2(8,2) - 1536 t2(4,6)
+        = 1024 lam(10) - 512 lam(2)lam(8) - 1024 lam(3)lam(7)
+          + 512 lam(4)lam(6)
+          - 1024 lam(2) t2(4,4) + 1024 lam(3) t2(3,4)
+          - 1024 lam(3) t2(4,3) + 1024 lam(4) t2(2,4)
+          - 1024 t3(2,4,4) - 2048 t3(3,3,4)
+          - 1536 t2(6,4) - 512 t2(2,8) + 2048 t2(7,3)
+    """
+
+    DPS = 50
+    TOL = mpmath.mpf(10) ** -40
+
+    def test_w10_reduction_identity(self) -> None:
+        mpmath.mp.dps = self.DPS
+        t3v = {k: t3val_b3ge2(*k)
+               for k in [(4, 3, 3), (4, 4, 2), (2, 4, 4), (3, 3, 4)]}
+        t2v = {k: t2val(*k)
+               for k in [(8, 2), (4, 6), (7, 3), (6, 4), (2, 8),
+                         (3, 4), (4, 3), (2, 4), (4, 4)]}
+        lhs = (-2048 * t3v[(4, 3, 3)] - 1024 * t3v[(4, 4, 2)]
+               - 512 * t2v[(8, 2)] - 1536 * t2v[(4, 6)])
+        rhs = (1024 * lam(10) - 512 * lam(2) * lam(8)
+               - 1024 * lam(3) * lam(7) + 512 * lam(4) * lam(6)
+               - 1024 * lam(2) * t2v[(4, 4)] + 1024 * lam(3) * t2v[(3, 4)]
+               - 1024 * lam(3) * t2v[(4, 3)] + 1024 * lam(4) * t2v[(2, 4)]
+               - 1024 * t3v[(2, 4, 4)] - 2048 * t3v[(3, 3, 4)]
+               - 1536 * t2v[(6, 4)] - 512 * t2v[(2, 8)]
+               + 2048 * t2v[(7, 3)])
+        assert abs(lhs - rhs) < self.TOL, (
+            "w10 reduction identity residual %s"
+            % mpmath.nstr(abs(lhs - rhs), 5))

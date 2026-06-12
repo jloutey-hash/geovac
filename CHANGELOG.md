@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.7.0] - 2026-06-11
+
+### Summary
+
+**Sprint S^(3) follow-on triple (three parallel PI-authorized sub-agent tracks, all PSLQ-free): the k=3 verdict sharpened twice, the literature grounding verified against primary sources, and the w10 layer reduced to a 5-generator block.**
+
+- **T1 (symbolic assembly, sonnet):** the full S^(3) assembly — gate vs the canonical value at 4.1e-197 — collapses further than the entry-level reductions: **every depth-2 generator cancels exactly** (t(5,1), t(5,3), t(7,1), Li₄(½) all at total coefficient zero), and standalone ζ(11) cancels (the S^(3) echo of S_min's ζ(7) cancellation). The identified part of S^(3) is a polynomial in π², ln2, and odd zetas alone.
+- **T2 (literature grounding, sonnet) + PM adversarial verification:** PI requested hallucination-checking; the PM independently fetched and read Hoffman arXiv:1612.05232 (full PDF incl. Appendix A) before the agent reported. **All GeoVac w≤7 t-value identifications — doubles AND triples — are verbatim rows of Hoffman's published Appendix A** (machine-verified ≤1.3e-36): the PSLQ runs independently rediscovered the published table. Five agent errors caught and corrected in place: one hallucinated Li₄(½) "closed form" (false by 0.039), two citation chimeras (real arXiv IDs glued to wrong titles/venues: Kaneko–Tsumura, Panzer), one invalid theorem transfer (KT Thm 3.4 is for their alternating-parity T-values, NOT Hoffman t-values; corrected chain = Hoffman Cor 4.1 + BBG 1995 / Panzer JNT 172 (2017) + BBV), one systematic under-claim (the three Appendix-A triples graded "not in literature"). t3(3,4,1) remains the one likely-new explicit form (checked directly against Charlton–Hoffman arXiv:2204.14183, whose convention is reversed). New standing rule: `memory/feedback_no_sonnet_for_literature.md` (PI directive — citation/grounding agents get opus or main-loop model, never sonnet).
+- **T3 (w10 symbolic-only reduction, main-loop model):** gate verdict OBSTRUCTED-with-maximal-reduction — the complete weight-10 quasi-shuffle closure (rank 157/255, exact Fraction elimination, NO PSLQ) reduces W10 to **five surviving generators** (antisymmetric doubles a(8,2), a(7,3), a(6,4) + triples t3(2,4,4), t3(3,3,4)); identity PM-verified independently at 7.2e-59. **Saturation theorem:** depth-≤3 relation content of the stuffle closure saturates at the λ·t stage — no product engineering can do better; parity (w+d=13 odd; Panzer/Wang–Xu) + BBV table import are the named exact paths to full identification. Both novel citations PM-verified real (Xu–Yan–Zhao arXiv:2208.09593; Wang–Xu arXiv:2509.06706).
+
+### Added
+- Paper 28: full-assembly + weight-10-block paragraphs in §Decomposition closure (eq:w10_reduction); literature-grounding paragraph; Hoffman Appendix-A citations on all matched forms; 6 new bibitems (BBG 1995, Panzer 2017, BBV 2010, Charlton–Hoffman 2022, Wang–Xu 2025) (58 pp, GATE: PASS)
+- `tests/test_s3_decomposition.py`: TestW10Reduction pinning eq:w10_reduction (14 tests total)
+- Memos: `debug/sprint_s3_symbolic_assembly_memo.md`, `debug/sprint_tvalue_literature_grounding_memo.md` (PM-corrected in place, corrections logged in its header), `debug/sprint_s3_w10_symbolic_memo.md` (PM provenance note added); drivers + JSONs; PM ground truth `debug/data/hoffman_appendix_a_ground_truth.md` + source PDFs
+
+### Changed
+- Paper 55: k=3 open-questions bullet sharpened (full-assembly cancellation + w10 5-generator block + Hoffman-rediscovery note) (39 pp, GATE: PASS)
+- `memory/`: new standing rule feedback_no_sonnet_for_literature + MEMORY.md index line
+
+### Closed / named follow-ons
+- S^(3) full closed form now complete modulo the declared 5-generator block. Named: (i) parity-reduction sprint for the two depth-3 survivors; (ii) Hoffman-Cor-4.1 + BBV w=10 table-import sprint to identify all five generators (derivable grade, no PSLQ); (iii) S^(4) (still undefined corpus-wide). Process lesson recorded: literature-table lookup BEFORE PSLQ identification (the w≤7 PSLQ runs rediscovered a published table).
+
 ## [4.6.0] - 2026-06-11
 
 ### Summary

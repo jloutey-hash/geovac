@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.6.0 (June 11, 2026)
+**Version:** v4.7.0 (June 11, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint S^(3) follow-on triple (2026-06-11, v4.7.0):** Full assembly: ALL depth-2 generators cancel (identified part ∈ depth-1 ring; ζ(11) cancels); w10 → 5-generator block via stuffle closure (saturation theorem); all w≤7 forms = verbatim Hoffman App-A rows (5 sub-agent citation errors caught by PM source verification). Falsifier extended (eq:w10_reduction). See `debug/sprint_s3_w10_symbolic_memo.md`.
 - **Sprint S^(3) closure (2026-06-11, v4.6.0):** BOTH OPEN ITEMS CLOSED — S^(3) = 31.5726 in rigorous bracket [31.57063, 31.57300]; stage-1 figures 30.615/30.220 both Levin-on-log artifacts; four PSLQs ACCEPT; realized depth ≤ 2 at k=3 (≤ k−1 pattern). Falsifier `tests/test_s3_decomposition.py`. See `debug/sprint_s3_closure_memo.md`.
 - **Sprint S_min identification + S^(3) decomposition (2026-06-11, v4.5.0):** S_min CLOSED — explicit Q[π²,ln2,ζ(3),ζ(5)] element; prior irreducibility = basis-coverage artifact; k=3 reaches depth-2 generators. Falsifier `tests/test_smin_decomposition.py`. See `debug/smin_dossier_round1_memo.md`.
 - **Sprint B3 Phase-3 Sprint-4 band exhaustion (2026-06-10, v4.4.0):** PHASE-3 CHARTER CLOSED — 5-agent workflow: interval layer bit-exact at every window; cost layer converges in OWN power-law class (γ and thermal excluded); b-parity staircase = (−1)^{2b} grading in exhaustion dynamics; exact form ‖P_W M_{C¹}P_W‖ = √6(2j)/(2j+2). Falsifier `tests/test_wh7_band_exhaustion.py`. See `debug/sprint_wh7_band_exhaustion_memo.md`.
