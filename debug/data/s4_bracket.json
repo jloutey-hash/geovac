@@ -1,0 +1,100 @@
+{
+  "GA": {
+    "m=1": "0.0",
+    "m=2": "0.0",
+    "m=5": "0.0",
+    "m=100": "0.0",
+    "m=1000": "0.0"
+  },
+  "GA_pass": true,
+  "GC": {
+    "m=10": true,
+    "m=100": true,
+    "m=10000": true,
+    "m=1000000": true
+  },
+  "GC_margins": {
+    "m=10": {
+      "F_margin": "0.6297",
+      "L_ok": true,
+      "phi_ok": true
+    },
+    "m=100": {
+      "F_margin": "0.4116",
+      "L_ok": true,
+      "phi_ok": true
+    },
+    "m=10000": {
+      "F_margin": "0.2404",
+      "L_ok": true,
+      "phi_ok": true
+    },
+    "m=1000000": {
+      "F_margin": "0.1704",
+      "L_ok": true,
+      "phi_ok": true
+    }
+  },
+  "GC_pass": true,
+  "GC2": {
+    "m=10": true,
+    "m=100": true,
+    "m=10000": true,
+    "m=1000000": true
+  },
+  "GC2_pass": true,
+  "ineq_check": {
+    "N=10": {
+      "tail_partial": "1.8006",
+      "bound": "5.0421",
+      "ok": true
+    },
+    "N=100": {
+      "tail_partial": "0.37907",
+      "bound": "0.68841",
+      "ok": true
+    },
+    "N=10000": {
+      "tail_partial": "0.0058312",
+      "bound": "0.010568",
+      "ok": true
+    }
+  },
+  "bracket": {
+    "10000": {
+      "lower": "302.1931403258617886749",
+      "upper": "337.404352135118301524",
+      "width": "35.211",
+      "err_cross": "24.872",
+      "err_far": "10.339",
+      "contains_diag_316.60": true
+    },
+    "100000": {
+      "lower": "313.8200614972079622654",
+      "upper": "319.3587379655605170819",
+      "width": "5.5387",
+      "err_cross": "4.1426",
+      "err_far": "1.3961",
+      "contains_diag_316.60": true
+    },
+    "1000000": {
+      "lower": "316.1250146945665947853",
+      "upper": "316.9465188677389377002",
+      "width": "0.8215",
+      "err_cross": "0.64024",
+      "err_far": "0.18126",
+      "contains_diag_316.60": true
+    },
+    "4000000": {
+      "lower": "316.4433925905529975383",
+      "upper": "316.6979754879129848826",
+      "width": "0.25458",
+      "err_cross": "0.20234",
+      "err_far": "0.052238",
+      "contains_diag_316.60": true
+    }
+  },
+  "sanity_gate_pass": true,
+  "anchor_closed": true,
+  "elapsed_sec": 322.9
+}

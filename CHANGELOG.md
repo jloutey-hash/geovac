@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.9.0] - 2026-06-13
+
+### Summary
+
+**Sprint S^(4) stage-1 (k=4 rung of the S-tower): the fourth-order constant is DEFINED, rigorously BRACKETED at S^(4) ∈ [316.443, 316.698], and its exact decomposition fully MAPPED — but high-precision evaluation of the b1=2 high-log trailing constants is a genuinely hard computational-number-theory sub-problem, deferred to stage-2 symbolic identification.** A diagnostic-before-engineering pass returned GO; the engineering hit exactly the BORDERLINE the diagnostic pre-committed (triple-trailing-1, scoping-memo R1). Canonical memo: `debug/sprint_s4_scoping_memo.md`.
+
+- **Object (forced, verified):** the k=4 iterated-sunset chain S^(4) = Σ I(n1,n2)I(n2,n3)I(n3,n4) φ(n1..n4), I(a,b)=2min−1−[a=b], φ(n)=2/(n+3/2)²−½/(n+3/2)⁴ — the exact extension of the Paper 28 k=3 object. Chain collapse against production `so4_channel_count` verified BIT-EXACT in Fraction arithmetic.
+- **Rigorous bracket:** S^(4) ∈ [316.443, 316.698] at N=4×10⁶ (positive-term partial sum + analytic tail bound, NO acceleration; every inequality margin-checked). Contains the diagnostic float64 estimate 316.60. This is the validated headline value, independent of every evaluator issue below.
+- **Exact algebra (all bit-exact):** the 15-term n-space identity (S^(4) = 8M4 − 8M3·P − 8M3e − 4M3m + 8M2·P + 6S_min·P² + 4S_min·Q − 4S_min² + 4T31 + 2T22 − 2R3·P − 3P²Q − P⁴ − Q² − R4); the o-space relation (integer coefficients) reducing every term to multiple-t cores; a generic region-algebra decomposition engine (75 weak orderings at r=4; zero-exponent elimination; ψ(3)-pin inclusion-exclusion) producing 9 bit-exact core tables (494 entries; reproduces the k=3 C,G tables value-exactly as regression).
+- **Census:** 40 distinct t4 / 110 t3 / 69 t2; t4 weights realized = {5,7,9,11,13} — exactly the predicted odd-weight tower with ceiling 13 (a parity flip from k=3's even 4–10); trailing-1 inventory: 8 single, 2 double, 2 triple.
+- **Evaluator rebuilt:** the depth-3 nested-cascade evaluator is intractable at depth 4 (see §3 dead-ends); rebuilt on the proven k=3 single-nsum architecture (largest variable = closed Hurwitz tail, smallest = closed partial, precision-aware prefixes/constants). **BIT-EXACT vs the k=3 cache for non-trailing constants at ALL precisions (incl. 220 dps).** Trailing constants: the FORMULA is correct (agrees with the cache to ≥12 digits at moderate precision; t4 triple-b1=4 cross-checked to 15 digits vs a rigorous e3 partial sum, which vindicated the Abel formula and exposed the sumem error) but the independent evaluation DEGRADES at very high precision for b1=2 trailing (Levin under-converges on the log modulation — the falsifier's slow gate caught this; t3(2,3,1) lands at ~8e-14 at 220 dps, not bit-exact). High-precision trailing values therefore come from the k=3 cache (11 available at 220 dps) or stage-2 symbolic identification, not from the independent evaluator.
+- **Deferred to stage 2:** high-precision values of the b1=2 high-log trailing constants (t4(2,1,1,1) (ln)³, t4(2,3,1,1) (ln)², t3(b1,1,1) for b1=3,5,6,7,8). Four high-precision methods tried (Abel/Levin, mpmath.sumem, manual Euler-Maclaurin, an Opus analytic-tail agent) — all under-converge, are silently wrong, or are impractically slow. **Reframe:** these are LOW-WEIGHT (t4(2,1,1,1) is weight 5) and therefore classically REDUCIBLE to single zetas — i.e. trivial to get to 200 digits once IDENTIFIED symbolically. Their natural home is stage-2 symbolic reduction (the W10-sprint Charlton–Hoffman pattern), not stage-1 brute numerics. 11 trailing constants are already at 220 dps in the k=3 cache.
+- **Falsifier:** `tests/test_s4_stage1.py` (6 fast + 1 slow): chain collapse, 15-term identity, o-space relation, census weights, bracket containment, evaluator bit-exactness vs k=3 (fast 30-dps + slow 220-dps).
+
+### Added
+- `debug/s4_scoping_diag.py` (collapse + inventory + convergence diagnostic) + `debug/data/s4_scoping_diag.json`
+- `debug/s4_decomp_engine.py` (generic region-algebra decomposition) + `debug/data/s4_decomp_tables.json`; `debug/s4_ospace_identities.py` + `debug/data/s4_ospace_identities.json`
+- `debug/s4_bracket.py` (rigorous bracket) + `debug/data/s4_bracket.json`
+- `debug/s4_mt_eval.py` (corrected single-nsum + Abel evaluator); `debug/s4_suite_eval2.py` (production suite scaffold + 5-gate stack, for when trailing values are available)
+- `tests/test_s4_stage1.py` (frozen falsifier); memo `debug/sprint_s4_scoping_memo.md`
+
+### Closed / named follow-ons
+- Stage 1 CLOSED at scope: S^(4) defined + rigorously bracketed + exact structure mapped + bulk evaluator validated.
+- **Stage 2 (named, next):** symbolic identification of S^(4) — supplies the deferred trailing constants in closed form AND delivers the science (the realized-depth-≤3 test, the parity-flipped weight tower, whether the first depth-3 generator e.g. ζ(5,3,3) appears). Will subsume the canonical 200-dps value assembly via `s4_suite_eval2.py` once trailing closed forms land.
+
+### Retired (unvalidated/superseded artifacts — ignore)
+- `debug/s4_suite_eval.py` (depth-4 nested cascade, intractable); `debug/s4_t4_evaluator_poc.py`; `debug/s4_em_eval.py` (manual E-M, too slow); `debug/s4_trailing_analytic.py` (agent stub, did not pass gates); `s4_mt_eval._t3_trailing11` (double-Abel, fails b1=2).
+
 ## [4.8.0] - 2026-06-12
 
 ### Summary
