@@ -1,0 +1,69 @@
+{
+  "fundamental_J": {
+    "n_max": 2,
+    "chosen_kappa": -1,
+    "idx_plus_minus": [
+      1,
+      0
+    ],
+    "J_block": [
+      [
+        "0",
+        "-1"
+      ],
+      [
+        "1",
+        "0"
+      ]
+    ],
+    "J_invariant_block": true,
+    "J_block_squared_is_minus_I": true
+  },
+  "mumford_tate": {
+    "J2_rational": true,
+    "cm_field": "Q(i)",
+    "minpoly_J": "t**2 + 1",
+    "torus_det_form": "a**2 + b**2",
+    "torus_dim": 1,
+    "sl2_dim": 3,
+    "MT_is_full_SL2": false,
+    "MT_is_CM_torus": true,
+    "verdict": "BORDERLINE (MT = CM torus)"
+  },
+  "polarization": {
+    "Q": [
+      [
+        0,
+        1
+      ],
+      [
+        -1,
+        0
+      ]
+    ],
+    "J_symplectic": true,
+    "riemann_form_QJ": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "riemann_positive_definite": true,
+    "sign": 1
+  },
+  "torus_in_sl2_sanity": {
+    "pyth_rotation_in_SL2": true,
+    "acts_via_standard_rep": true,
+    "is_norm1_Qi_element": true
+  },
+  "triangulation_note": {
+    "hodge_cm_field": "Q(i)",
+    "level4_field": "Q(i) = Q(mu_4), the field of G_4 = MT(Z[i,1/2])",
+    "period_content_field": "Q(i): Catalan G mixed-Tate over Q(i) (EMN 2025)",
+    "claim": "three roads (Hodge CM field, motivic-Galois level, period content) single out Q(i); whether this is forced or coincidental is itself an audit target, NOT asserted here as a proven identity."
+  }
+}

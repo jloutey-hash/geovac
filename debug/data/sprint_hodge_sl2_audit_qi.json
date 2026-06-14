@@ -1,0 +1,32 @@
+{
+  "check_A_hodge_spin_gating": {
+    "spinor_eps_all_minus1": true,
+    "n_states_checked": 16,
+    "scalar_eps_all_plus1": true,
+    "kramers_J2_epsilon": -1,
+    "complex_structure_exists_spinor": true,
+    "complex_structure_exists_scalar": false,
+    "verdict": true
+  },
+  "check_B_two_fours": {
+    "disc_Q_i": -4,
+    "abs_disc": 4,
+    "conductor_chi_m4": 4,
+    "chi_m4_primitive_mod4": true,
+    "fields_agree_Q_i_eq_Q_mu4": true,
+    "verdict": true
+  },
+  "check_C_period_spin_gating": {
+    "beta2_value": "0.91596559417721901505",
+    "catalan_value": "0.91596559417721901505",
+    "beta2_eq_catalan": true,
+    "beta_conductor": 4,
+    "scalar_zeta2_value": "1.6449340668482264365",
+    "scalar_zeta2_eq_pi2_6": true,
+    "scalar_conductor": 1,
+    "period_Q_i_is_dirac_specific": true,
+    "verdict": true
+  },
+  "common_cause_verdict": true,
+  "scope_note": "Computable: spin-gating of the complex structure (A), the disc/conductor = 4 identity (B), beta(2)=Catalan vs scalar zeta(2) (C). Literature-cited: level-4 = Q(mu_4) = G_4 target (Deligne 2010); Catalan mixed-Tate over Q(i) (EMN 2025); beta from Dirac vertex parity (Paper 28). The audit confirms a common spin cause and the same field; it does NOT independently re-derive the motivic level-4 identification."
+}

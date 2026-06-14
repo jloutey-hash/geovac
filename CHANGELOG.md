@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.11.0] - 2026-06-14
+
+### Summary
+
+**Sprint Hodge-SL₂: GeoVac's SL₂ is NOT the Mumford–Tate group — it realizes the complex-multiplication point, with CM field Q(i).** Executes the named-but-never-run Hodge-theoretic SL₂ identification (deferred 2026-06-06 as "Recommendation C"). Verdict BORDERLINE (CM) in the decision-gate sense, POSITIVE-grade as a result: more explanatory than the "SL₂ = MT" outcome originally chased. Canonical memo: `debug/sprint_hodge_sl2_memo.md`.
+
+- **Step 1 (complex structure; KO-dim-3 partial):** the Kramers J (J²=−I, the SU(2)=S³ quaternionic structure) exists bit-exact at n_max=2,3. CG-weighted adjacency makes the off-diagonal part of D anticommute with J exactly ({J,A_CG}=0 — closes a codebase "future work" item), but the m_j-independent diagonal Camporesi–Higuchi part commutes with J, so D=Λ+κA satisfies neither JD=+DJ nor JD=−DJ (residual exactly 2ΛJ). The complex structure exists; the clean odd KO-dim-3 real spectral triple does NOT hold bit-exact at finite cutoff. **Paper-correction to §sec:open_g4_hodge.**
+- **Steps 2–3 (Mumford–Tate):** restricting J to the j=1/2 doublet gives J=[[0,−1],[1,0]] (rational, J²=−I); with the SL₂-invariant symplectic Q the Riemann form QJ=I is positive-definite → a genuine polarized weight-1 Hodge structure. minpoly(J)=t²+1 → CM field Q(i); the Hodge circle generates the 1-dim norm-1 torus of Q(i). **MT = CM torus by Q(i), NOT SL₂** (dim 1 vs 3). Robust across modeling choice (any rational J with J²=−I gives Q(i); SL₂ would need a transcendental complex structure the algebraic substrate cannot produce).
+- **Audit (Q(i) triangulation — COMMON-CAUSE, structurally forced):** the Hodge CM field, the level-4 field Q(μ₄) of 𝒢₄=MT(Z[i,1/2]), and the period field (Catalan over Q(i)) all = Q(i), and this is not a coincidence. ε=(−1)^{2j}=−1 (spinor) gates the complex structure; conductor 4=|disc Q(i)| via the Dirac vertex-parity character χ₋₄ gates the level-4 period content; the scalar null ((−1)^{2l}=+1, ζ(2)=π²/6 pure-Tate over Q) removes Q(i) from BOTH sides at once. Level-4 = Q(μ₄) is literature (Deligne 2010, EMN 2025); the audit verifies the common spin cause + same-field identity, not the motivic result.
+- **Why it's the rich outcome:** structurally explains the Hain–Brown period-negative (GeoVac sits at the CM point where modular forms degenerate → CM-pure periods, not modular — exactly the Sym² depth-1/2 negative); sharpens Reading A (GeoVac sits at the special arithmetic point; symmetry collapses SL₂→CM torus).
+
+### Added
+- `debug/sprint_hodge_sl2_step1_complex_structure.py`, `debug/sprint_hodge_sl2_step23_mumford_tate.py`, `debug/sprint_hodge_sl2_audit_qi_triangulation.py` + `debug/data/sprint_hodge_sl2_{step1,step23,audit_qi}.json`
+- `tests/test_paper56_hodge_sl2.py` (10 tests, all pass) — CM identification + KO-dim-3 caveat + spin-gating audit
+- `debug/sprint_hodge_sl2_memo.md` (canonical) + `debug/sprint_hodge_sl2_scoping_memo.md` (plan)
+
+### Changed
+- **Paper 56 §sec:open_g4_hodge:** (1) correction — the "J²=−1, JD=+DJ verified" KO-dim-3 claim replaced with the honest finite-cutoff caveat (CG fixes the off-diagonal, the m_j-blind diagonal commutes, clean JD relation fails); (2) convention → identification — new `prop:hodge_cm_point` (MT = CM torus by Q(i)) + `rem:cm_explains_hb` (Hain–Brown negative explained) + `rem:qi_triangulation` (spin-forced). Three-pass clean (700 KB PDF, no undefined refs/citations).
+
+### Closed / named follow-ons
+- **CLOSED:** the Hodge-theoretic SL₂ identification (sprint-scale follow-on named 2026-06-06). Verdict: CM torus by Q(i), not SL₂.
+- **Named follow-ons (open):** the equality direction of the injection theorem stays multi-year (untouched); promoting the spin-forced Q(i) triangulation from a common-cause audit to a forced-identity theorem is a future follow-on.
+
 ## [4.10.0] - 2026-06-13
 
 ### Summary
