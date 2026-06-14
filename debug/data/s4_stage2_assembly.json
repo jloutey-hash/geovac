@@ -1,0 +1,53 @@
+{
+ "5": {
+  "weight": 5,
+  "n_depth4_words": 1,
+  "C4_depth4_nonzero_coeffs": 1,
+  "stuffle_rank_on_D4": 0,
+  "D4_space_surviving_dim_stuffle_only": 1,
+  "C4_depth4_reduces_by_stuffle": false,
+  "verdict": "stuffle-inconclusive -> CH/shuffle needed",
+  "two_prime_agree": true
+ },
+ "7": {
+  "weight": 7,
+  "n_depth4_words": 10,
+  "C4_depth4_nonzero_coeffs": 7,
+  "stuffle_rank_on_D4": 7,
+  "D4_space_surviving_dim_stuffle_only": 3,
+  "C4_depth4_reduces_by_stuffle": false,
+  "verdict": "stuffle-inconclusive -> CH/shuffle needed",
+  "two_prime_agree": true
+ },
+ "9": {
+  "weight": 9,
+  "n_depth4_words": 35,
+  "C4_depth4_nonzero_coeffs": 15,
+  "stuffle_rank_on_D4": 35,
+  "D4_space_surviving_dim_stuffle_only": 0,
+  "C4_depth4_reduces_by_stuffle": true,
+  "verdict": "DEPTH<=3 at this weight (conclusive)",
+  "two_prime_agree": true
+ },
+ "11": {
+  "weight": 11,
+  "n_depth4_words": 84,
+  "C4_depth4_nonzero_coeffs": 13,
+  "stuffle_rank_on_D4": 84,
+  "D4_space_surviving_dim_stuffle_only": 0,
+  "C4_depth4_reduces_by_stuffle": true,
+  "verdict": "DEPTH<=3 at this weight (conclusive)",
+  "two_prime_agree": true
+ },
+ "13": {
+  "weight": 13,
+  "n_depth4_words": 165,
+  "C4_depth4_nonzero_coeffs": 4,
+  "stuffle_rank_on_D4": 165,
+  "D4_space_surviving_dim_stuffle_only": 0,
+  "C4_depth4_reduces_by_stuffle": true,
+  "verdict": "DEPTH<=3 at this weight (conclusive)",
+  "two_prime_agree": true
+ },
+ "w>=9_depth<=3_proven_two_prime": true
+}

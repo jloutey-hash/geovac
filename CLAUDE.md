@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.9.0 (June 13, 2026)
+**Version:** v4.10.0 (June 13, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Sprint S^(4) stage-2 depth verdict (2026-06-13, v4.10.0):** realized depth ≤ 3 for S^(4) SETTLED — proven numerics-free at w=9/11/13 (stuffle spans full depth-4 space, two-prime exact rank), w=5/7 by low-weight filtration; confirms prop:depth_k at k=4. Falsifier `tests/test_s4_stage2_depth.py`. See `debug/sprint_s4_stage2_memo.md`.
 - **Sprint S^(4) stage-1 (2026-06-13, v4.9.0):** k=4 rung DEFINED + rigorously bracketed S^(4) ∈ [316.443, 316.698]; exact structure mapped (15-term + o-space relations, census odd-weights 5–13); high-precision b1=2 trailing constants deferred to stage-2 symbolic (evaluator bit-exact for non-trailing only). Falsifier `tests/test_s4_stage1.py`. See `debug/sprint_s4_scoping_memo.md`.
 - **Sprint S^(3) W10 identification (2026-06-12, v4.8.0):** W10 CLOSED — Charlton–Hoffman symmetry theorem (explicit products) + 4 stuffles identify all four w10 triples; the three a-doubles cancel identically in the assembly; S^(3) ∈ Q[π², ln2, ζ(odd), ζ(5,3)] explicit, sole depth-2 constant ζ(5,3) at 6π², gate 1.15e-198. Falsifier `tests/test_s3_w10_identification.py`. See `debug/sprint_s3_w10_identification_memo.md`.
 - **Sprint S^(3) follow-on triple (2026-06-11, v4.7.0):** Full assembly: ALL depth-2 generators cancel (identified part ∈ depth-1 ring; ζ(11) cancels); w10 → 5-generator block via stuffle closure (saturation theorem); all w≤7 forms = verbatim Hoffman App-A rows (5 sub-agent citation errors caught by PM source verification). Falsifier extended (eq:w10_reduction). See `debug/sprint_s3_w10_symbolic_memo.md`.
@@ -380,6 +381,7 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | `mpmath.sumem` (auto Euler-Maclaurin) for log-modulated trailing-t tails (S^(4) stage-1, 2026-06-13) | 1 | Returned a TWO-PRECISION-STABLE but WRONG value (2.4e-8 off at b1=4; ~1e+175 garbage with a shifted start) — boundary mishandling at the e_k leading zeros. **sumem two-precision-stable ≠ correct** (companion to the Levin/log row). Validate against a rigorous partial-sum ground truth, not self-consistency. See `debug/sprint_s4_scoping_memo.md` §S1.6d. |
 | float64-contaminated terms inside a high-precision Levin sum (S^(4) stage-1, 2026-06-13) | 1 | `int ** (-int)` in a prefix array silently yields float64; Levin amplifies the 1e-16 jitter by its condition number (worst on the slowest series), giving a weight-graded, precision-dependent error. Every power inside an accelerated sum must be `mpf`. See `debug/sprint_s4_scoping_memo.md` §S1.6. |
 | Brute high-precision summation of b1=2 high-log trailing multiple-t-values (S^(4) stage-1, 2026-06-13) | 1 | Four methods (Abel/Levin, sumem, manual E-M, analytic-tail agent) all under-converge / are wrong / are impractically slow — this is the known-hard MZV-computation problem. Reframe: these are LOW-WEIGHT hence classically reducible, so identify them SYMBOLICALLY (stage 2) rather than sum them numerically. See `debug/sprint_s4_scoping_memo.md` §S1.6f. |
+| sympy exact-Q rank for MZV-scale relation matrices (S^(4) stage-2, 2026-06-13) | 1 | sympy `Matrix.rank()` over Q is intractable at weight 11-13 (hundreds-to-thousands of admissible words; >17 min, no result). Use mod-p (large prime) streaming Gaussian elimination, cross-checked at a second prime; project to the target subspace during row construction. Standard for MZV rank computations. See `debug/sprint_s4_stage2_memo.md`. |
 
 
 ---

@@ -2736,11 +2736,27 @@ At $k$ loops on $S^3$ with vertex restrictions and CG weights:
       the total (Sec.~\ref{subsec:s3_closure}).  The earlier
       ``independence from $S_{\min}$'' statement (a 20-digit PSLQ at
       non-physical exponents) is superseded by the identification.
+\item $k = 4$: the \emph{realized} depth of $S^{(4)}$ is $\le 3$.
+      Depth-4 content enters $S^{(4)}$ only through the four-chain core
+      $C_4$ (the o-space relation gives $C_4$ coefficient $+1$; the other
+      cores are $\le$ depth-3), so the verdict reduces to whether $C_4$'s
+      depth-4 part reduces to depth $\le 3$. At weights $9, 11, 13$ the
+      quasi-shuffle (stuffle) relation system spans the \emph{entire}
+      depth-4 word space (rank $=$ number of depth-4 words: $35, 84, 165$;
+      exact rank over two independent primes), collapsing $C_4$'s depth-4
+      content to depth $\le 3$ unconditionally. At weights $5, 7$ the
+      stuffle system is rank-deficient, but these weights lie below the
+      threshold for any depth-$\ge 3$ irreducible: weight-5 values reduce
+      to single polylog constants (depth $\le 1$) and weight-7 to depth
+      $\le 2$ (the $w \le 7$ GeoVac multiple-$t$ values match Hoffman's
+      Appendix-A reductions, verified previously). The explicit closed
+      form of $S^{(4)}$ remains open; the depth verdict does not depend on
+      it.
 \end{itemize}
 Loop order bounds the depth of the classical level-2 multiple-$t$-value
 content; it does not mint new irreducible transcendentals automatically.
 Realized depth so far grows strictly more slowly than loop order
-($\le k-1$ at $k = 2, 3$).
+($\le k-1$ at $k = 2, 3, 4$).
 \end{proposition}
 
 The mechanism: each vertex coupling creates one level of Hurwitz nesting.
@@ -4523,10 +4539,15 @@ of $S_{\min}$'' 20-digit test at non-physical exponents is superseded.
       closed form is explicit with realized depth $\le 2$, the sole
       depth-2 constant being the level-1 generator $\zeta(5,3)$
       (Eq.~\eqref{eq:s3_ring}); all level-2 depth-2 generators cancel
-      in the total.  Realized depth $\le k-1$ at $k = 2, 3$, and the
-      new-depth content enters from level 1 while the level-2 sector
-      stays at depth $\le 1$; whether both patterns persist at
-      $k \ge 4$ is open.
+      in the total.  Realized depth $\le k-1$ at $k = 2, 3$.
+      \textbf{Updated (2026-06-13, $S^{(4)}$ stage-2):} the depth bound
+      extends to $k = 4$ --- realized depth $\le 3$ for $S^{(4)}$
+      (Prop.~\ref{prop:depth_k}, $k=4$ bullet), proven numerics-free at
+      weights $9, 11, 13$ (stuffle spans the full depth-4 space, two-prime
+      exact rank) and settled at weights $5, 7$ by the low-weight depth
+      filtration. So realized depth $\le k-1$ holds at $k = 2, 3, 4$. The
+      explicit closed form of $S^{(4)}$ (the depth-$\le 3$ survivors) and
+      the $k \ge 5$ continuation remain open.
 \item Is there a Picard--Fuchs interpretation of $S_{\min}$, analogous
       to Ap\'ery's recurrence for $\zeta(3)$~\cite{apery1979}?
 \item Can the self-energy structural zero at $n_{\mathrm{ext}} = 0$

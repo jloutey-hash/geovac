@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.10.0] - 2026-06-13
+
+### Summary
+
+**Sprint S^(4) stage-2 depth verdict: realized depth <= 3 for S^(4) is SETTLED — purely algebraically, sidestepping BOTH the Charlton-Hoffman machinery and the stage-1 high-precision evaluation wall.** Confirms Paper 28 prop:depth_k (realized depth <= k-1) at k=4. Canonical memo: `debug/sprint_s4_stage2_memo.md`.
+
+- **Structural reduction:** the o-space relation puts depth-4 content into S^(4) ONLY through the C4 core (coefficient +1; Ce, Cm, C are all <= depth-3). So S^(4)'s depth-4 content == C4's depth-4 content, and the verdict reduces to: does C4's depth-4 part reduce to depth <= 3?
+- **Weights 9, 11, 13 — PROVEN (numerics-free, two-prime).** The quasi-shuffle (stuffle) relation system spans the ENTIRE depth-4 word space at each weight (stuffle rank on D4 = #depth-4 words: 35/35, 84/84, 165/165), so C4's depth-4 vector collapses to depth <= 3 unconditionally. Verified by exact streaming Gaussian elimination over two independent primes (2^61-1 and 2^31-1), agreement at every weight (removes the unlucky-prime caveat). This is the bulk: 32 of the nonzero C4 depth-4 coefficients.
+- **Weights 5, 7 — settled by the low-weight depth filtration.** Stuffle is rank-deficient there for a structural reason (a depth-2 multiple-t has weight >= 3, so no depth-2 x depth-2 product fits under weight 5-7; w=5 has zero depth-4 relations). But weights 5 and 7 sit below the threshold for ANY depth->=3 irreducible: in the level-2 (odd / multiple-t) algebra these live in, weight-5 values reduce to single polylog constants {Li_5(1/2), ln^5 2, lambda(5), ...} (depth <= 1) and weight-7 to depth <= 2. The k=3 closure exhibited this one weight down (t3(2,1,1) = (1/2)Li_4(1/2) + ln^4 2/48 + pi^2 ln^2 2/24 - 19 pi^4/5760), and v4.7.0 verified all GeoVac w<=7 multiple-t values against Hoffman's Appendix-A reductions.
+- **Why this was cheap:** the verdict is purely algebraic (rank + filtration), so unlike k=3 (which needed CH to find the depth-2 collapse) and unlike stage-1 numerics (blocked by the trailing-constant high-precision wall), nothing here depends on evaluating a hard constant.
+- **Method note:** initial sympy exact-Q rank was intractable at w=11,13 (hundreds-to-thousands of admissible words); switched to mod-p (large prime) streaming Gaussian elimination with depth-4 projection during row construction — seconds at all weights. Standard for MZV-style rank computations.
+- **Falsifier:** `tests/test_s4_stage2_depth.py` (3 fast + 2 slow): depth-4-only-in-C4 structural fact; w=9 full-rank collapse two-prime; w=5,7 rank-deficiency documented; w=11,13 full-rank collapse two-prime.
+
+### Added
+- `debug/s4_stage2_scope.py` (weight x depth classification; prints to stdout)
+- `debug/s4_stage2_stuffle.py` (per-weight quasi-shuffle closure) + `debug/data/s4_stage2_stuffle.json`
+- `debug/s4_stage2_assembly.py` (assembly-cancellation depth verdict, two-prime mod-p rank) + `debug/data/s4_stage2_assembly.json`
+- `tests/test_s4_stage2_depth.py` (frozen falsifier); memo `debug/sprint_s4_stage2_memo.md`
+
+### Closed / named follow-ons
+- **Depth verdict CLOSED:** realized depth <= 3 for S^(4) (prop:depth_k at k=4).
+- **Named follow-ons (open):** (1) explicit closed forms of the w=5,7 depth-4 atoms (t4(2,1,1,1) at w5; 7 atoms at w7) via regularized double shuffle / CH-at-depth-4 — would make the w=5,7 settlement self-contained rather than literature-cited; (2) the full closed form of S^(4) (the depth-<=3 survivors at each weight) — the depth VERDICT is settled but the explicit value remains the larger goal, still subject to the stage-1 validation caveat (3-digit bracket, no high-precision anchor).
+
 ## [4.9.0] - 2026-06-13
 
 ### Summary
