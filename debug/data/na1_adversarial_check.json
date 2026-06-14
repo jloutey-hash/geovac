@@ -1,0 +1,42 @@
+{
+  "dps": 120,
+  "attacks": {
+    "A2_irreducibility_wt8_full_basis": {
+      "basis": "{zeta(5,3), pi^8, pi^2*z3^2, z3*z5}",
+      "pslq": null,
+      "verdict": "IRREDUCIBLE (Reading A cannot make it)"
+    },
+    "A1_readingA_best_shot_on_W10": {
+      "target": "GeoVac W10 = -7pi^4 z3^2 + 70pi^2 z3 z5 + 6pi^2 z(5,3) + (179/170100)pi^10",
+      "abelian_basis": "{pi^10, pi^4 z3^2, pi^2 z3 z5, z3 z7, z5^2}  (NO zeta(5,3))",
+      "pslq": null,
+      "verdict": "Reading A FALSIFIED: W10 is NOT in the abelian product ring; zeta(5,3) is genuinely REQUIRED"
+    },
+    "A1b_depth2_term_alone": {
+      "target": "6 pi^2 zeta(5,3)",
+      "pslq": null,
+      "verdict": "IRREDUCIBLE (not a product of single zetas)"
+    },
+    "A1c_completeness_with_z53": {
+      "basis": "{pi^10, pi^4 z3^2, pi^2 z3 z5, pi^2 zeta(5,3)}",
+      "pslq": null,
+      "note": "expect exact relation -> basis complete, sole irreducible is zeta(5,3)"
+    },
+    "A3_fresh_atom_loophole": {
+      "loophole": "Reading A' : zeta(5,3) is a fresh PRIMITIVE weight-8 generator (still abelian), not a bracket [f3,f5].",
+      "why_closed": [
+        "GeoVac's primitive generators ARE the master Mellin slots k in {0,1,2} (M1,M2,M3). There is NO weight-8 / depth-2 Mellin slot.",
+        "zeta(5,3) appears only at LOOP ORDER k=3, as a k-fold convolution of the basic Hurwitz building blocks (Paper 55 M3 sub-sector 3: 'iterated sunset produces a k-fold convolution ... bounding motivic depth by loop order').",
+        "A k-fold ORDERED convolution (n2-rank ordering cases, m>n) is the deconcatenation coproduct, NOT a primitive generator.",
+        "In the motivic Lie algebra zeta(5,3) IS the bracket [f3,f5]; brackets are ZERO in ANY abelianization regardless of generator choice. A non-zero irreducible zeta(5,3) cannot be a fresh abelian atom -- it is structurally a bracket."
+      ],
+      "verdict": "Loophole CLOSED: zeta(5,3) is compositional (bracket), not a fresh atom."
+    }
+  },
+  "summary": {
+    "reading_A_falsified": true,
+    "what_is_proven": "GeoVac carries genuine irreducible depth-2 (bracket) content -> it is NOT the abelianization -> NOT Reading A.",
+    "what_is_NOT_yet_proven": "That the full substrate is the FREE non-abelian group (strong Reading B). 'Not abelianization' is decisive; 'free non-abelian' is the multi-month shuffle-Hopf enrichment construction.",
+    "honest_reading": "NOT-A (decisive). B in the weak sense (carries brackets). Strong-B (free) = named multi-month follow-on."
+  }
+}

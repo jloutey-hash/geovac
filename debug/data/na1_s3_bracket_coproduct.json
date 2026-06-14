@@ -1,0 +1,33 @@
+{
+  "dps": 60,
+  "gates": {
+    "stuffle  z5*z3 = z53+z35+z8": "0.0",
+    "zeta(8) = pi^8/9450": "3.1115e-61",
+    "antisym zeta(5,3)-zeta(3,5) (NONZERO => ordered)": "-0.16695346398022989132"
+  },
+  "pslq": {
+    "symmetric sum vs {z3z5, pi^8}": [
+      9450,
+      -9450,
+      1
+    ],
+    "zeta(5,3) vs {z3z5, pi^8}": null,
+    "antisym (bracket) vs {z3z5, pi^8}": null
+  },
+  "verdict": {
+    "symmetric_sum_reducible_to_products": true,
+    "zeta(5,3)_irreducible (genuine depth-2 generator)": true,
+    "antisymmetric_bracket_irreducible": true,
+    "GeoVac_S3_keeps_zeta(5,3)_alone": true,
+    "READING": "B (shuffle / free non-abelian)",
+    "one_line": "On the non-diagonal k=3 self-energy substrate, GeoVac's depth-2 content carries the irreducible generator zeta(5,3) = [f3,f5]-bracket period, which the abelianization (Reading A) cannot produce. => Reading B on this substrate."
+  },
+  "values": {
+    "zeta(3)": "1.202056903159594285399738161511449990765",
+    "zeta(5)": "1.036927755143369926331365486457034168057",
+    "zeta(8)": "1.004077356197944339378685238508652465259",
+    "zeta(5,3)": "0.0377076729848475440113047822936599148226",
+    "zeta(3,5)": "0.2046611369650774353324901179538811789095",
+    "zeta(8)=pi^8/9450": "1.004077356197944339378685238508652465259"
+  }
+}

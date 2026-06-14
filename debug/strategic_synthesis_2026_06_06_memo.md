@@ -1,5 +1,11 @@
 # Strategic Synthesis Memo — End of Day 2026-06-06
 
+> **⚠ DATED SNAPSHOT (2026-06-06) — DO NOT treat as current state.** Verify against the owning paper section + CHANGELOG before using any "open" / "next-step" item below (standing rule: `memory/feedback_verify_current_state.md`). Key items RESOLVED since this memo, as of 2026-06-14:
+> - **Injection $U^*_{GV}\hookrightarrow\mathcal{U}_4$** (Recs B/§5, framed here as a future 2–3 wk sprint): **DONE** — proven theorem `thm:injection_g4`, Paper 56 §sec:injection_g4, tested `tests/test_paper56_injection_g4.py`.
+> - **Reading A vs B / NA-1 depth-2** (Rec A/§5–6, framed here as open): **SETTLED = Reading A** (Sprint JLO-Depth2, 2026-06-07, Paper 56 §sec:open_na1). Shuffle-Hopf enrichment NOT demanded. Period-value irreducibility is NOT a valid A/B discriminator — see `debug/sprint_na1_period_irreducibility_nondiscriminator_memo.md`.
+> - **Hodge-theoretic $SL_2$** (Rec C/§5, deferred here): **DONE** — CM point, field $\mathbb{Q}(i)$ (Sprint Hodge-SL₂, 2026-06-14, Paper 56 §sec:open_g4_hodge).
+> - Current frontier lives in CHANGELOG.md + CLAUDE.md §2, not here.
+
 **Audience:** PI + next session's PM.
 **Purpose:** Distil where GeoVac stands after a substantial Tannakian-closure day; sharpen the cosmic-Galois positioning; name what is honestly open and at what cost.
 **Version cursor moved:** v3.74.0 (start) → v3.77.0 (end). Three minor releases, all dated 2026-06-06.

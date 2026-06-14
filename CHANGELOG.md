@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.12.0] - 2026-06-14
+
+### Summary
+
+**NA-1 reconciliation + process hardening.** A fresh attempt to decide the cosmic-Galois Reading A (abelianization) vs Reading B (free non-abelian) question via the *period-value* content of the k=3 self-energy substrate (S^(3), which produces the irreducible depth-2 MZV ζ(5,3)) rested on an **invalid inference** and is retired; the existing verdict — **Reading A** (Sprint JLO-Depth2, 2026-06-07, Paper 56 §sec:open_na1) — stands unchanged. No corpus edits. Canonical memo: `debug/sprint_na1_period_irreducibility_nondiscriminator_memo.md`.
+
+### Changed (clarifying negative)
+
+- **Period-value irreducibility is NOT a valid Reading-A/B discriminator.** PSLQ (dps 120, maxcoeff 10⁹) confirms ζ(5,3) is irreducible to products of single zetas and is genuinely required by the S^(3) closed form (frozen falsifier `tests/test_s3_w10_identification.py` passes). But "irreducible" separates *generator* from *product*, NOT *primitive atom* (Reading A) from *bracket* (Reading B) — by Cartier–Milnor–Moore a cocommutative Hopf algebra has new irreducible primitives at every degree. The discriminator is the **coproduct**, which JLO-Depth2 measured directly (bit-exact S₃-cocommutativity) → Reading A. GeoVac's observables land on bracket-*valued* periods while its substrate stays abelian — no contradiction (it is the injection theorem's content). Drivers `debug/sprint_na1_s3_bracket_coproduct.py`, `debug/sprint_na1_adversarial_check.py`.
+
+### Added (operational policy — process hardening)
+
+- **§9 "Current-State Check" + standing rule `feedback_verify_current_state`.** Before forming a verdict — especially when resuming a thread from a `debug/` memo — verify the current state (owning paper section + post-memo CHANGELOG), not the dated snapshot. Closes the root cause of two stale-snapshot misreads this session (an already-proven injection theorem reported as a future sprint; the already-settled Reading A re-answered "Reading B"), both live in Paper 56 the whole time. The §1 authoritative-source rule and §13.4 consistency gate exist but fired only at edit time.
+- **Standing rule `feedback_no_externalize_suggestions`** (PI direction): don't suggest taking results to external people for review; the PI initiates externalization on his own timing.
+- **`debug/strategic_synthesis_2026_06_06_memo.md`** marked with a DATED-SNAPSHOT header listing the three items resolved since (injection theorem, Reading A, Hodge-SL₂) — disarms the specific memo that caused the misreads.
+
 ## [4.11.0] - 2026-06-14
 
 ### Summary
