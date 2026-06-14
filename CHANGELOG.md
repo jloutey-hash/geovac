@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.12.2] - 2026-06-14
+
+### Summary
+
+**Foundations-branch synthesis updated to current state.** `papers/synthesis/group3_foundations_synthesis.tex` brought current via two parallel opus agents (update-proposal + adversarial review), PM-reconciled with primary-text verification of the one conflict (Coulomb/HO layer count = **six**, not the update agent's stale "four"). Three-pass compile GATE: PASS. The synthesis was "one branch short" — it predated the periods/Tannakian/forced-free reconvergence; that branch is now in the narrative.
+
+### Changed (foundations synthesis)
+
+- **New `\section{The Reconvergence...}`** integrating Papers 54 (two-body selection rules from the tensor-product triple), 55 (period classification — cyclotomic mixed-Tate level ≤4), 56 (Tannakian substrate + cosmic-Galois injection U*_GV ↪ 𝒰₄^ab ⋊ SL₂), 57 (forced/free seam) — correctly hedged (GeoVac realizes the *abelianization*, Reading A; infinite-cutoff equality NOT claimed).
+- **Abstract + §1 intro:** "nine papers" → eleven, with the taproot → fan-out → reconvergence dependency framing; Papers 6/21 demoted to archived-lineage.
+- **§3 convergence:** empirical → theorem (Paper 38 Dirac vS state-space GH at rate 4/π; scalar Laplace–Beltrami = Gaudillot-Estrada–van Suijlekom prior art — kept distinct, per root-review FIX-F).
+- **§6 Coulomb/HO asymmetry:** internal 4-vs-5 contradiction → **six layers** (added the spectral-action-gravity and master-Mellin-chirality layers from Paper 24's body; fixed the "Paper 25 (synthesis group)" mis-attribution → QED/gauge group). `\date` → June 14, 2026.
+
+### Notes
+
+- Adversarial foundations-branch findings on the *source* papers (D_pd vs physical-D convention, layer-drift in Papers 24/31, undefined refs in 22/31, Paper 18 case-exhaustion caveat, Paper 55 phrasing, register rows 17/18) are logged in `debug/honest_review_2026_06_14_ledger.md` as the next hygiene batch.
+- Branch papers' content verdict: SOUND (no zombie cites; α conjectural honored; cosmic-Galois scope correct). Patch grade (synthesis / documentation).
+
 ## [4.12.1] - 2026-06-14
 
 ### Summary

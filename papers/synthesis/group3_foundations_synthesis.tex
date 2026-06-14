@@ -23,7 +23,7 @@ A Synthesis of the Spectral Graph Theory Arc}
 \author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
 
-\date{May 22, 2026}
+\date{June 14, 2026}
 
 %% ========================================================================
 %% ABSTRACT
@@ -35,11 +35,19 @@ non-relativistic quantum mechanics on natural geometries: the discrete
 graph Laplacian on a packed lattice of quantum-number labels replaces
 the continuous Laplace--Beltrami operator on the corresponding compact
 manifold.  This synthesis paper assembles the framework's foundational
-arc---nine papers covering the packing construction, the discrete
+arc---the packing construction, the discrete
 graph and its dynamics, the conformal equivalence with the unit $S^3$,
 the exchange constant taxonomy, the angular sparsity theorem, the
-Bargmann--Segal lattice, and the universal/Coulomb partition---into a
-single coherent narrative.  Four headline structural results frame the
+Bargmann--Segal lattice, and the universal/Coulomb partition, together
+with the \emph{reconvergence} node where these threads cohere (two-body
+selection rules from the tensor-product triple, the period
+classification, the Tannakian substrate and cosmic-Galois injection, and
+the forced/free seam)---into a single coherent narrative.  The arc has a
+dependency structure worth naming:\ a single taproot (the packing
+construction, made physical by the Fock $S^3$ projection) fans out into
+the framework's machinery, then reconverges at the periods, Tannakian,
+and forced/free nodes, where the scattered structural findings cohere
+into one statement about what the framework forces and what it consumes.  Four headline structural results frame the
 program: (a) the discrete Fock graph is conformally equivalent to the
 unit $S^3$ Laplace--Beltrami operator, verified by 18 independent
 symbolic proofs; (b) the angular sparsity of two-body matrix elements
@@ -131,25 +139,32 @@ GeoVac is not a new foundation for quantum mechanics, and the
 synthesis presented in this paper does not assert ontological priority
 of either the discrete or the continuum description.
 
-The Group~3 (foundations) arc comprises nine papers.  Paper~0
-\cite{loutey_paper0} states the packing axiom and derives the
-angular quantum numbers as packing indices.  Paper~1
-\cite{loutey_paper1} sets up the spectral graph theory machinery and
-demonstrates exact reproduction of the Rydberg spectrum.  Paper~6
-\cite{loutey_paper6} extends the framework to time evolution at
-$O(V)$ cost.  Paper~7~\cite{loutey_paper7} proves the conformal
-equivalence with the unit $S^3$ via 18 independent symbolic
-verifications and extends to the multi-electron $S^{3N-1}$ setting.
-Paper~18~\cite{loutey_paper18} classifies transcendental content in
-GeoVac observables via a six-tier exchange-constant taxonomy and
-identifies a master Mellin engine on the spectral side.  Paper~21
-\cite{loutey_paper21} synthesizes the proof chain and frames the
-atomic spectra research program.  Paper~22~\cite{loutey_paper22}
-states the potential-independent angular sparsity theorem.
-Paper~24~\cite{loutey_paper24} constructs the Bargmann--Segal lattice
-for the harmonic oscillator and establishes the five-layer
-Coulomb/HO asymmetry.  Paper~31~\cite{loutey_paper31} states the
-A/D universal/Coulomb partition in spectral-triple language.
+The Group~3 (foundations) arc comprises eleven papers, organized by a
+single dependency structure.  \emph{The taproot:} Paper~0
+\cite{loutey_paper0} states the packing axiom and derives the angular
+quantum numbers as packing indices; Paper~7~\cite{loutey_paper7} makes
+it physical, proving the conformal equivalence with the unit $S^3$ via
+18 independent symbolic verifications and extending to the
+multi-electron $S^{3N-1}$ setting.  \emph{The fan-out} (the framework's
+working machinery):\ Paper~1~\cite{loutey_paper1} sets up the spectral
+graph theory and reproduces the Rydberg spectrum;
+Paper~18~\cite{loutey_paper18} classifies transcendental content via a
+six-tier exchange-constant taxonomy and the master Mellin engine;
+Paper~22~\cite{loutey_paper22} states the potential-independent angular
+sparsity theorem; Paper~24~\cite{loutey_paper24} constructs the
+Bargmann--Segal lattice and the six-layer Coulomb/HO asymmetry;
+Paper~31~\cite{loutey_paper31} states the $\mathcal{A}/D$
+universal/Coulomb partition in spectral-triple language.  \emph{The
+reconvergence} (where the branches loop back to a unified foundational
+statement, \S\ref{sec:reconvergence}):\ Paper~54 derives two-body
+selection rules from the tensor-product triple, Paper~55 classifies
+every GeoVac period as cyclotomic mixed-Tate at level $\le 4$,
+Paper~56 closes the cosmic-Galois injection $U^*_{\mathrm{GV}}
+\hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$, and Paper~57
+catalogues the forced/free seam.  An $O(V)$ time-evolution engine
+(Paper~6~\cite{loutey_paper6}, now an archived standalone tool)
+supplies the dynamical demonstration; this synthesis supersedes the
+earlier single-document synthesis (Paper~21~\cite{loutey_paper21}).
 
 Four headline structural results organize the rest of this synthesis.
 \textbf{(H1)} The discrete Fock graph is conformally equivalent to the
@@ -317,7 +332,16 @@ guarantee that the discrete-to-continuum bridge has no hidden steps.
 
 The graph Laplacian on the GeoVac lattice converges, in the continuum
 limit $n_{\max} \to \infty$ with appropriate rescaling, to the round
-$S^3$ Laplace--Beltrami operator.  Imposing the energy-shell
+$S^3$ Laplace--Beltrami operator.  This convergence, stated empirically
+in Paper~7 (verified to $n_{\max} = 30$, without a rate), is now a
+theorem:\ for the spinor (Dirac) triple it is an unconditional
+van~Suijlekom state-space Gromov--Hausdorff convergence at rate
+$(4/\pi)\log n_{\max}/n_{\max}$ under the translation-seminorm
+metrization (Paper~38, operator-algebra arc), with the $4/\pi$ constant
+universal across compact Lie groups (Paper~40); the scalar
+Laplace--Beltrami convergence that Paper~7's 18 proofs target is the
+prior-art state-space GH result of
+Gaudillot-Estrada--van~Suijlekom (arXiv:2310.14733).  Imposing the energy-shell
 constraint $p_0 = Z/n$ then maps the unit-sphere eigenvalues
 $\lambda_n = -(n^2 - 1)$ to the hydrogenic Rydberg series
 $E_n = -Z^2 / (2 n^2)$.  The dimensionless graph carries no scale; the
@@ -623,12 +647,14 @@ choice of natural manifold: $-Z/r$ to the second-order Riemannian
 Laplacian on $S^3$, $\tfrac{1}{2} m \omega^2 r^2$ to the first-order
 Euler operator on $H^2(S^5)$.
 
-\subsection*{The five-layer Coulomb/HO asymmetry}
+\subsection*{The Coulomb/HO asymmetry: a six-layer stratification}
 
-A central structural finding of Paper~24, sharpened by subsequent
-analysis in Paper~25 (synthesis group) and a recent sprint on the
-wedge KMS state of the framework's Lorentzian extension, is that the
-Coulomb and HO discretizations differ along four independent layers.
+A central structural finding of Paper~24, sharpened progressively by
+the $S^5$ gauge-structure analysis (Paper~25, QED/gauge group), a
+sprint on the wedge KMS state of the framework's Lorentzian extension,
+the spectral-action gravity arc (Paper~51), and the master Mellin
+engine, is that the Coulomb and HO discretizations differ along
+\emph{six} independent layers, identified in stages across 2025--2026.
 The asymmetry as currently catalogued reads:
 
 \begin{enumerate}
@@ -663,18 +689,38 @@ closed-form Hilbert--Schmidt orthogonality between the modular
 Hamiltonian and the wedge-restricted Dirac operator, with prefactor
 $1/\pi^2$ identifying as the Hopf-base measure signature; the HO
 Bargmann side does not admit the construction at all.  This is the
-operator-algebra-side reading of the five-layer asymmetry; for full
+operator-algebra-side reading of the asymmetry; for full
 details see the operator-algebra arc (Group~1).
+
+\item \textbf{Spectral-action gravity termination.}  The
+Camporesi--Higuchi Dirac spectral action on $S^{2m+1}$ terminates at
+exactly $(m{+}1)$ power-law terms (Paper~51):\ only $S^3$ ($m = 1$)
+gives \emph{pure Einstein gravity} (cosmological $+$ Einstein--Hilbert,
+no $R^2$ or higher-curvature corrections), while $S^5$ ($m = 2$)
+terminates at three terms including an $R^2$ Gauss--Bonnet
+contribution.  The mechanism is the Bernoulli identity for odd
+polynomials at half-integer shifts.
+
+\item \textbf{Master Mellin engine chirality-parity.}  On the
+Camporesi--Higuchi $S^3$ triple at every finite $n_{\max}$, the Mellin
+source $\mathrm{Tr}(D^k e^{-t D^2})$ exhibits a bit-exact
+$\mathbb{Z}/2$ chirality-parity factorization (the plain trace
+vanishes at odd $k$, the supertrace at even $k$).  On the
+Bargmann--Segal Hardy sector this fails on both structural conditions:\
+the spectrum is strictly positive (no $\pm$-partner) and no
+half-integer-weight chirality grading exists on the $(N, 0)$
+tower---propagating the asymmetry to the master-Mellin level.
 \end{enumerate}
 
 The first three layers were established in Paper~24 and Paper~25
-(synthesis group, S$^5$ gauge structure paper); the fourth layer was
-identified in a 2026 sprint on the wedge KMS state and folded into
-Paper~24's \S{}V as an addendum.  All five layers stratify along the
-same operator-order divide: the Coulomb side uses a second-order
-Riemannian Laplacian with a nonlinear stereographic projection, and
-the HO side uses a first-order complex-analytic Euler operator with a
-linear-affine Bargmann projection.
+(QED/gauge group, $S^5$ gauge-structure paper); the fourth (wedge KMS)
+was identified in a 2026 sprint and folded into Paper~24's \S{}V; the
+fifth (spectral-action gravity) comes from Paper~51; and the sixth
+(master Mellin chirality-parity) from a June~2026 sprint.  All six
+layers stratify along the same operator-order divide:\ the Coulomb side
+uses a second-order Riemannian Laplacian with a nonlinear stereographic
+projection, and the HO side uses a first-order complex-analytic Euler
+operator with a linear-affine Bargmann projection.
 
 \subsection*{What the asymmetry says about transcendentals}
 
@@ -907,6 +953,135 @@ algebra-only / Dirac-dependent divide.  The framing uses the language
 of NCG and spectral triples because that language has the structural
 vocabulary to articulate the divide; the underlying physics content
 is unchanged.
+
+%% ========================================================================
+\section{The Reconvergence: Two-Body Structure, Periods, and the
+Tannakian Substrate}
+\label{sec:reconvergence}
+%% ========================================================================
+
+The foundations arc described so far \emph{fans out} from a single
+taproot.  The packing construction (Paper~0), made physical by the Fock
+$S^3$ projection (Paper~7), is the root; from it the framework branches
+into spectral graph methods (Paper~1), the exchange-constant taxonomy
+(Paper~18), angular sparsity (Paper~22), the Bargmann--Segal lattice
+(Paper~24), and the $\mathcal{A}/D$ partition (Paper~31).  Four more
+recent papers do the opposite---they \emph{reconverge}, looping the
+scattered structural findings back into a single foundational statement
+about what the framework autonomously generates and what it consumes.
+
+\subsection{Two-body structure (Paper~54)}
+The $\mathcal{A}/D$ partition of Paper~31 is, in the single-particle
+setting, a sorting of results into algebra-only and Dirac-dependent.
+Paper~54 tests it at the two-body level by constructing the
+tensor-product spectral triple $\mathcal{T}_{S^3} \otimes
+\mathcal{T}_{S^3}$ and asking whether the gauged spectral action
+generates the inter-particle Coulomb interaction from the framework's
+own structure.  The free tensor-product Dirac $D_{\mathrm{total}} = D_1
+\otimes I + \gamma_1 \otimes D_2$ satisfies $\{D, \gamma\} = 0$ exactly,
+so the free spectral action factorizes and contains no
+interaction---the correct statement that free particles do not interact.
+Gauging via the inner fluctuation of the truncated operator-system
+algebra produces a genuine, non-factorizable two-body interaction
+(connected fraction $77\%$ at $n_{\max} = 2$).  Its angular structure is
+exactly what the universal sector predicts:\ $100\%$ $m$-conserving,
+$100\%$ Gaunt-compatible, pure $k = 0$ monopole at both tested cutoffs.
+Its radial weights, however, are \emph{not} proportional to the Coulomb
+$1/r_{12}$ kernel (Pearson $r = 0.41$--$0.58$, \emph{decreasing} with
+$n_{\max}$---structural, not finite-size).  This delineates the
+partition at the two-body level:\ the algebra $\mathcal{A}$ determines
+\emph{which} channels couple (angular selection rules, universal across
+central potentials by Paper~22), and the Dirac operator / metric
+determines \emph{how strongly} (radial coupling strengths,
+potential-specific).  The recurring ``multi-focal composition wall''
+sits exactly on this $\mathcal{A}/D$ boundary, and the reason is
+mathematical:\ the spectral action computes Seeley--DeWitt heat-kernel
+coefficients (metric curvature), while $1/r_{12}$ is a Green's-function
+kernel; the Coulomb potential enters through the Fock projection's
+chordal-distance identity (Paper~7), not through the spectral action.
+
+\subsection{Periods (Paper~55)}
+The master Mellin engine of Paper~18 indexes the framework's
+$\pi$-content by operator order $k \in \{0, 1, 2\}$ in
+$\mathcal{M}[\mathrm{Tr}(D^k e^{-t D^2})]$.  Paper~55 completes this
+engine into a period-theoretic statement:\ every transcendental that
+has appeared in a GeoVac spectral observable---integer powers of $\pi$,
+odd zeta values $\zeta(2k{+}1)$, Catalan $G = \beta(2)$ and
+Dirichlet-$\beta$ values, and a depth-$k$ loop tower---sits in
+cyclotomic mixed-Tate periods at level $\le 4$ over $\mathbb{Z}[i, 1/2]$,
+stratified by Mellin slot:\ $M_1 \subset \mathbb{Q}[\pi, \pi^{-1}]$
+(pure-Tate, depth~0), $M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$
+(pure-Tate even-weight, depth~0, a strict refinement of the
+Fathizadeh--Marcolli classification specialized to the static $S^3$
+sub-case), and $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
+$\le 4$ (cyclotomic mixed-Tate, via Hurwitz zeta at quarter-integer
+shifts and the Deligne--Glanois descent; the vertex-parity-as-$\chi_{-4}$
+correspondence of Paper~28).  This is the period-theoretic completion of
+the $\mathcal{A}/D$ partition:\ the universal sector's transcendentals
+are pinned to named cyclotomic mixed-Tate rings rather than chased
+indefinitely.  (Discipline check folded in here:\ the constant
+$S_{\min}$, long carried as ``PSLQ-irreducible,'' is now resolved as
+$S_{\min} \in \mathbb{Q}[\pi^2, \ln 2, \zeta(3), \zeta(5)]$ in closed
+form---the prior label was a basis-coverage artifact.)
+
+\subsection{The Tannakian substrate and the cosmic-Galois injection
+(Paper~56)}
+If the framework's periods all live in a single named period ring, the
+natural categorical home is a motivic Galois group.  Paper~56 assembles,
+bit-exact on rational panels (thousands of zero residuals across
+$n_{\max} \in \{2, 3, 4\}$), the Tannakian substrate of the GeoVac
+spectral triple at finite cutoff:\ a cofiltered pro-system of
+finite-cutoff Hopf-algebra truncations, an abelian symmetric-monoidal
+rigid representation category, a faithful exact $\otimes$-fiber functor,
+and an explicit inclusion of the candidate cosmic-Galois group
+$U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3N} \rtimes SL_2$ into
+$\mathrm{Aut}^{\otimes}(\omega)$.  The load-bearing result is the
+\emph{cosmic-Galois injection}:\ a proven, theorem-grade closed
+immersion $U^*_{\mathrm{GV}} \hookrightarrow \mathcal{U}_4^{\mathrm{ab}}
+\rtimes SL_2$ of the framework's finite-cutoff Galois group into the
+abelianization of the unipotent radical of the level-4 motivic Galois
+group $\mathcal{G}_4 = \mathcal{G}_{\mathrm{MT}(\mathbb{Z}[i, 1/2])}$
+(Deligne 2010, Glanois 2015).  The comparison target is the
+\emph{level-4} group, not Brown's $\mathcal{G}_{\mathrm{MT}(\mathbb{Z})}$:\
+Eskandari--Murty--Nemoto 2025 prove Catalan $G$ is not a period of
+$\mathrm{MT}(\mathbb{Z})$ but is at level~4, forcing the refinement.
+Two scope qualifiers are essential and stated honestly:\ (i) GeoVac
+\emph{realizes the abelianization} of the level-4 cosmic Galois group
+(Reading~A)---its primitive Hopf substrate is cocommutative, confirmed
+bit-exact at the JLO entire-cyclic-cocycle level at depth~2, so the
+image lands in $\mathcal{U}_4^{\mathrm{ab}} \cong \mathbb{G}_a^\infty$
+rather than the full free non-abelian unipotent; (ii) \emph{infinite-cutoff
+equality is not claimed}---the injection direction is closed at theorem
+grade at finite cutoff, while the converse equality on depth-$\ge 2$
+content is the named multi-year forward question.
+
+\subsection{The forced/free seam (Paper~57)}
+The reconvergence closes with an observations paper that consolidates,
+across the corpus, the boundary between what the framework forces and
+what it consumes.  Paper~57 catalogues the forced entries (graph
+spectrum, the $S^3$ outer manifold, the gauge group $U(1) \times SU(2)
+\times SU(3)$ from Bertrand $\times$ Hopf-tower truncation, the master
+Mellin engine, two-term-exact gravity), the single admitted-not-forced
+entry (the quaternionic factor $\mathbb{H}$), and the calibration
+entries (Yukawa values, generation count, cutoff moments, atomic
+screening exponents, multi-loop QED counterterms).  It identifies the
+cross-domain unity pattern---the same multi-focal composition wall
+recurs in six independent settings---and tests a packing-reachability
+discriminator (an entry is forced iff a witness derivation exists from
+the packing axiom plus the real-spectral-triple axioms plus Hopf-tower
+truncation plus Bertrand), which reaches $98.3\%$ accuracy across the
+$60$-entry catalogue.  The free side splits into two structurally
+distinct families:\ a multi-focal composition family (the framework can
+build it but cannot autonomously pick a number) and an inner-factor
+input-data family (categorical to the outer-factor mechanism; lives
+elsewhere by structure).  This is the foundational reconvergence:\ the
+$\mathcal{A}/D$ partition (Paper~31), the period classification
+(Paper~55), and the Tannakian injection (Paper~56) together turn the
+empirical forced/free observation into a theorem-bound boundary.  The
+framework's identity is precisely this seam---it maps the structural
+skeleton of quantum mechanics (the compact, Peter--Weyl, discrete
+regime) and consumes, rather than generates, the continuum calibration
+data the skeleton does not reach.
 
 %% ========================================================================
 \section{Open Questions and Outlook}

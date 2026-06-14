@@ -91,4 +91,42 @@ PM verifies every load-bearing finding + citation before it is treated as action
 - **Papers 7 / 34 / 35 — pre-existing undefined refs (NOT from this session's edits):** Paper 7 `\cite{loutey_paper2}` (L721, untouched by me — Paper 7's bib lacks the bibitem); Paper 34 ~5 undefined `\ref`s (`sec:matches`, `sec:curvature_coefficients`, `sec:layer2_d`, `tab:catalog_off`, `sec:proj_pk`, pp.53–66); Paper 35 one. A year change in a bibitem + text additions cannot create undefined refs.
 - **LATENT FINDING (new):** the corpus carries pre-existing undefined `\cite`/`\ref` in at least Papers 7, 34, 35. Candidate for a dedicated bib/cross-ref hygiene sweep (out of scope for this review's substantive root pass). Not introduced here; pre-existing.
 
+---
+
+## Foundations BRANCH review (2026-06-14) — synthesis update + adversarial pass
+
+Two parallel opus agents (update-proposal + adversarial). Both verdicts: synthesis + branch papers content **SOUND**; defect = same metadata-drift as the roots. The synthesis is **"one branch short"** — it predates the 54–57 reconvergence.
+
+### VERIFIED CONFLICT — Coulomb/HO layer count = SIX (not four)
+
+Agents disagreed (update agent: four, per Paper 57; adversarial: six, per Paper 24 body). **PM-verified Paper 24 L612–649:** body enumerates **Layers 1–6** (L6 = master Mellin chirality-parity, marked "(new)", June 2026); but Paper 24's own intro prose says "fourth layer" (L612) and a footnote says "five" — Paper 24 is internally drifted (4→5→6 as the count grew). **Canonical current count = 6.** The update agent's "four" was stale; do NOT propagate it.
+
+### Synthesis update plan (Agent 1 draft, PM-reconciled)
+
+- **NEW `\section{...}\label{sec:reconvergence}`** (between §8 `sec:partition` and §9 `sec:open`): integrates Papers 54 (two-body), 55 (periods), 56 (Tannakian/cosmic-Galois injection), 57 (forced/free) as the arc's *reconvergence*. Full draft prose returned by Agent 1 (ready to place).
+- **Abstract + §1 intro:** "nine papers" → eleven (0,1,7,18,22,24,31,54,55,56,57); Papers 6/21 = archive lineage; add the taproot→fan-out→reconvergence framing.
+- **§3 convergence:** empirical → theorem (Paper 38 Dirac vS state-space GH, rate 4/π; scalar = GE-vS prior art — keep DISTINCT per ledger FIX-F) + Paper 40 universality.
+- **§6 (`sec:bs`):** layer count 4↔5 internal contradiction → **SIX** (verified Paper 24 body).
+- **§7:** add the Paper 55 period-ring home (M1⊂ℚ[π,π⁻¹]; M2⊂⊕π^{2k}ℚ; M3⊂MT(ℤ[i,1/2]) level≤4); case-exhaustion = "15 of 28" (register row 17).
+- **§9 open:** reframe W3 under Paper 57's forced/free seam; add cosmic-Galois equality (multi-year, **NOT claimed**) + M2/M3 unification.
+- **Bib + date:** add bibitems for 54–57 + Paper 38/40; bump `\date` to 2026-06-14.
+
+### Adversarial branch findings (Agent 2) — source-paper fixes (follow-on hygiene pass)
+
+- **F1 (INCONSISTENCY, VERIFY canonical convention):** D_pd vs physical-D — Paper 31/synthesis/register row 3 quote the pair-diagonal D_pd (1.44% @ l_max=3) as "the" angular density; Paper 22's physical Coulomb D = 6.06%. Decide canonical convention across Paper 22/31/synthesis/register.
+- **F2 (INCONSISTENCY):** layer-count drift across Paper 24 (intro "fourth"/footnote "five"/body "six"), Paper 31 (5 claimed, 3 described), synthesis (4-vs-5). Propagate **SIX**.
+- **F3/F4 (FIX, cross-ref hygiene):** undefined `\ref` in Paper 31 (`sec:universal_sector`, `sec:potential_specific_sector` → `sec:universal`/`sec:specific`) + Paper 22 (`sec:theorem`, `sec:universal_partition` + cross-paper Paper-14 refs). Adds Papers 22/31 to the bib-hygiene sweep (with 7/34/35).
+- **F5 (FIX, register):** Paper 18 states case-exhaustion unrestricted; add "15 of 28" caveat (register row 17).
+- **F6 (OVERCLAIM, borderline):** Paper 55 L1372 "GeoVac IS the abelianisation" too bald → soften to "realizes the abelianised image (depth-2 cocycle cocommutative; equality multi-year)".
+- **F7 (INCONSISTENCY, register):** row 18 residual count stale 2,960 → Paper 56 abstract 5,864. Update register.
+- **F8 (FIX):** "Latrémolière propinquity" in Paper 54 L67 + Paper 31 B1 → vS state-space GH (same as B/C; the §signature_partition Lorentzian-propinquity uses are legitimately different — do NOT touch those).
+- **F9/F10 (minor):** Paper 56 N double-def (`Nsec`=n(n+1)/2 vs `N`=n(n+3)/2); abstract 𝒰₄ vs body 𝒰₄^ab → add `^ab`.
+- **Clean:** zero zombie citations; α combination rule conjectural honored everywhere; cosmic-Galois scope correct (injection into 𝒰₄^ab, equality NOT claimed).
+
+### Synthesis update APPLIED 2026-06-14 (v4.12.2) — three-pass GATE: PASS
+
+- NEW `\section{...}\label{sec:reconvergence}` (Papers 54–57); abstract reframed (taproot→fan-out→reconvergence); §1 intro → eleven papers + dependency framing; §3 convergence → theorem (Paper 38 Dirac / GE-vS scalar, kept distinct); §6 layer count → **SIX** (added gravity L5 + master-Mellin L6; fixed "Paper 25 synthesis group" → QED/gauge group); `\date` → 2026-06-14.
+- **OPTIONAL-REMAINING (synthesis):** §9 open-questions reframe (W3 under Paper 57; the cosmic-Galois equality frontier is already stated in the reconvergence section — redundant) and §7 period-ring forward pointer (now covered by the reconvergence Periods subsection). Low value; deferred.
+- **NEXT BATCH — branch-paper hygiene (Agent 2 F1–F10, source papers):** D_pd convention (22/31/register row 3); layer-drift inside Paper 24 (intro "fourth"/footnote "five" vs body "six") + Paper 31; undefined `\ref` in 22/31; Paper 18 "15 of 28" caveat; Paper 55 L1372 "IS the abelianisation" softening; register row 18 residual 2,960→5,864; Paper 56 N double-def + abstract 𝒰₄→𝒰₄^ab.
+
 **Compile note:** all edits are text/table only (F uses text refs, no new macros/`\cite`) — low risk; run three-pass compile before any release of these.
