@@ -108,7 +108,7 @@ where $A_{ij}$ is the weighted adjacency matrix constructed from the transition 
 H = \kappa\, L = \kappa(D - A),
 \label{eq:hamiltonian}
 \end{equation}
-where $\kappa = -1/16$ is the kinetic scale factor---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum.  As shown in Section~\ref{sec:discussion}, this value is derivable from the conformal geometry of the Fock projection: the $s$-wave Fock coupling is $c^2(n,0) = 1/16$ \emph{universally for all $n$} (the squared Chebyshev/Gegenbauer three-term recurrence amplitude $(1/4)^2$, independent of $p_0$), equivalently the inverse Fock Jacobian $1/\Omega^4(0)$ with $\Omega(0) = 2$ at the projection center.
+where $\kappa = -1/16$ is the kinetic scale factor---the constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum (the scale matching the binary graph's $\lambda_{\max} \to 8$ to the ground-state energy $-\tfrac12$).  This matching value \emph{coincides} with two independent conformal-geometry quantities at $1/16$ (Section~\ref{sec:discussion}): the universal $s$-wave Fock coupling $c^2(n,0) = (1/4)^2$ and the inverse Fock Jacobian $1/\Omega^4(0)$ with $\Omega(0) = 2$.  We record this as an \emph{observation}: the matching $\kappa$ and the geometric $1/16$ agree numerically, but are computed from disjoint inputs and no mechanism is known that derives one from the other.
 
 \subsection{Intrinsic Dimensionlessness}
 
@@ -689,8 +689,8 @@ The results of this paper provide a formal justification for the GeoVac framewor
 
 \textit{Kinetic scale factor:} The constant $\kappa = -1/16$ is the
 kinetic scale factor that bridges the dimensionless graph and
-dimensionful physics.  It is derivable from the Fock projection
-itself.  The Gegenbauer eigenfunctions $C^1_{n-1}(\cos\chi)$ of
+dimensionful physics.  Its value $1/16$ coincides with a
+conformal-geometry quantity, as follows.  The Gegenbauer eigenfunctions $C^1_{n-1}(\cos\chi)$ of
 Eq.~\eqref{eq:eigenvalues} are also the Chebyshev polynomials of the
 second kind $U_{n-1}(\cos\chi)$, whose three-term recurrence gives
 transition amplitudes of $1/4$ between adjacent shells.  The squared
@@ -711,10 +711,18 @@ This value admits three equivalent readings:
   \item The $l = 0$ base rate of the Casimir decomposition in
         Eq.~\eqref{eq:fock_coupling}.
 \end{enumerate}
-Thus $\kappa$ is not a fitted constant: it is determined by the
-conformal geometry of the $S^3$ projection.  Its universality across
-all nuclear charges $Z$ (via $Z^2$ scaling) confirms that the graph
-topology correctly encodes the \textit{relative} spectral structure.
+We record this as an \emph{observation}, not a derivation:\ the
+energy-matching $\kappa = -1/16$ (the scale mapping the graph's
+$\lambda_{\max} \to 8$ onto $-\tfrac12$) coincides numerically with the
+geometric $1/16$ above, but the two are computed from disjoint
+inputs---the energy target and graph coordination on the matching
+side, the conformal factor on the geometric side---and no mechanism is
+known that carries one onto the other (a counterfactual energy target
+moves the matching $\kappa$ while the geometric $1/16$ is rigid;
+falsifier \texttt{tests/test\_trunk\_qa\_kappa.py}).  The universality
+of $\kappa$ across nuclear charges $Z$ (via $Z^2$ scaling) confirms
+that the graph topology correctly encodes the \textit{relative}
+spectral structure.
 
 A notable special value: $c^2(4,3) = 1/40 = \Delta$, the boundary
 term in Paper~2's fine-structure-constant formula

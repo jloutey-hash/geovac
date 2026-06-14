@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.13.0] - 2026-06-14
+
+### Summary
+
+**Trunk QA pass — code/test review of the foundational papers, plus the QA infrastructure to repeat it.** Five per-paper `code-reviewer` agents audited whether each trunk paper's claims are backed by *sound* tests (not just passing ones); two coding agents then attempted genuine tests for the missing-backing claims. The PM verified the two headline constants (κ, 4/π) against primary text. Outcome: 5 claims downgraded, 1 upgraded, 5 new test artifacts accepted. The framework's machinery is genuinely backed; the soft spot was its *headline derived/exact constants*.
+
+### Added (QA infrastructure — operational policy)
+
+- **CLAUDE.md §9 "Branch QA Review Protocol"** — the per-branch QA cycle (synthesis → adversarial review → cycle → per-paper code review → fix-small / escalate-large) + the **claim→artifact rule**.
+- **`.claude/agents/code-reviewer.md`** + **`.claude/agents/citation-reviewer.md`** — adversarial code-review and citation-grounding agent types.
+- **`docs/authoring_conventions.md`** — project-wide + per-audience (per-group) standards checklist.
+- **`docs/claim_test_matrix.md`** — the granular claim→test→code source-of-truth (companion to the headline claims register); trunk section fully populated.
+- 8 new `tests/test_trunk_qa_*.py` artifacts (5 BACKED, 2 downgrade-falsifiers; all green).
+
+### Changed (trunk claim dispositions)
+
+- **κ = −1/16 "derived from the Fock projection" → OBSERVATION** (was SYMBOLIC PROOF). The energy-matching κ *coincides* with the geometric 1/16 (Fock coupling c²(n,0), inverse Jacobian 1/Ω⁴(0)), but the two are computed from disjoint inputs with no bridging mechanism — `test_trunk_qa_kappa.py` shows a counterfactual energy target moves the matching κ while the geometric 1/16 is rigid. Reframed Paper 7 (L111 + §VII.D), Paper 0 §VI, register row 2. (The v2.26.1 "no longer fitted" promotion was prose without an artifact.)
+- **4/π asymptotic constant — UPGRADED to genuinely backed.** The original `test_asymptotic_constant_value` was circular (hardcoded `Rational(4)/π`); `test_trunk_qa_fejer_4_over_pi.py` derives 4/π from the γ_n closed-form sum rule (Euler–Maclaurin) and rejects the 2/π circle-Fejér decoy.
+- **Paper 1 §III quantitative content downgraded** — the degree table (0.854/3.416), the "16% at n_max=10" splitting waypoint, and the 1.77 gearing ratio are not reproduced by production code (the CG-magnitude adjacency they assume was never implemented; the gearing has no convergent value). QA-correction note added; the qualitative claims (differential connectivity, oscillatory decay to 0) stand and are now tested.
+- **Paper 32 Forced-Count moduli chain corrected** — genuine parameter-count is 2048→1024→512→272→260; the "128" holds only as a 16-dim matter-sector count; the "verified bit-exactly (45 tests)" citation (axiom consistency of one triple, not the moduli count) is re-scoped.
+- **claims_register row 2** split into the (sound) continuum-eigenvalue SYMBOLIC PROOF and the (downgraded) κ-derivation OBSERVATION.
+
+### Notes
+
+- **Key structural finding:** the discrete graph Laplacian L=D−A is positive-semidefinite — the −(n²−1) spectrum is a *continuum* (S³) property, not the graph's. The "discrete graph produces the spectrum" framing is the most code-exposed claim; `docs/authoring_conventions.md` rule 2 codifies the discrete-vs-continuum precision.
+- **Compile:** Papers 0, 32 three-pass GATE PASS; Papers 1, 7 fail only on pre-existing undefined citations (`Note1`, `loutey_paper2`) unrelated to these edits.
+
 ## [4.12.2] - 2026-06-14
 
 ### Summary

@@ -130,3 +130,22 @@ Agents disagreed (update agent: four, per Paper 57; adversarial: six, per Paper 
 - **NEXT BATCH — branch-paper hygiene (Agent 2 F1–F10, source papers):** D_pd convention (22/31/register row 3); layer-drift inside Paper 24 (intro "fourth"/footnote "five" vs body "six") + Paper 31; undefined `\ref` in 22/31; Paper 18 "15 of 28" caveat; Paper 55 L1372 "IS the abelianisation" softening; register row 18 residual 2,960→5,864; Paper 56 N double-def + abstract 𝒰₄→𝒰₄^ab.
 
 **Compile note:** all edits are text/table only (F uses text refs, no new macros/`\cite`) — low risk; run three-pass compile before any release of these.
+
+---
+
+## Trunk code review + QA execution (2026-06-14, v4.13.0)
+
+5-agent per-paper code review (Papers 0,1,7,32,38) + 2-agent test-writing pass. Full claim→test→code matrix: `docs/claim_test_matrix.md`. PM-verified κ and 4/π against primary text.
+
+**QA infrastructure created:** CLAUDE.md §9 Branch QA Review Protocol; `.claude/agents/code-reviewer.md` + `citation-reviewer.md`; `docs/authoring_conventions.md`; `docs/claim_test_matrix.md`.
+
+**Dispositions APPLIED:**
+- **κ "derived" → OBSERVATION** [PI-approved]: matching κ=−1/16 *coincides* with geometric 1/16 (c²(n,0), 1/Ω⁴(0)); counterfactual (`test_trunk_qa_kappa.py`) shows no bridge. Reframed Paper 7 (L111+§VII.D), Paper 0 §VI, register row 2 (SYMBOLIC PROOF→OBSERVATION).
+- **4/π UPGRADED** (Paper 38): circular `test_asymptotic_constant_value` superseded by `test_trunk_qa_fejer_4_over_pi.py` (derives from γ_n sum rule, rejects 2/π decoy).
+- **Paper 1 §III downgraded:** degree table / 16% waypoint / 1.77 gearing not reproduced (CG construction absent); QA-correction note; qualitative stands.
+- **Paper 32 Forced-Count downgraded:** full-axiom moduli = 260 not 128 (128=matter-sector); "45 tests verify" re-scoped; correction note.
+- **5 BACKED artifacts accepted:** annular→2ℓ+1, c²(4,3)=1/40=Δ, [T₊,L₊]=0, splitting-convergence, 4/π.
+
+**Key structural finding:** L=D−A is positive-semidefinite — −(n²−1) is a *continuum* (S³) property, not the graph's. Machinery (axiom audit + negative controls, O(V), continuum proofs, sum rules, K-conjectural) genuinely backed; soft spot = headline derived/exact constants.
+
+**Compile:** Papers 0, 32 GATE PASS; Papers 1, 7 fail only on PRE-EXISTING undefs (`Note1` L76; `loutey_paper2`). All 8 `test_trunk_qa_*` green.

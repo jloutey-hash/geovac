@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.12.2 (June 14, 2026)
+**Version:** v4.13.0 (June 14, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Trunk QA pass + QA infrastructure (2026-06-14, v4.13.0):** 5-agent code review + 2-agent test-writing on the trunk (Papers 0,1,7,32,38). κ "derived"→OBSERVATION (matching coincidence; counterfactual shows no bridge); **4/π upgraded** (circular hardcode → genuine derivation, rejects 2/π decoy); Paper 1 §III numbers + Forced-Count chain downgraded; 8 new `test_trunk_qa_*` artifacts. New QA process: §9 Branch QA Review Protocol, code-reviewer + citation-reviewer agent types, `docs/{authoring_conventions,claim_test_matrix}.md`. Key finding: L=D−A is positive-semidefinite — −(n²−1) is continuum, not graph. See `debug/honest_review_2026_06_14_ledger.md`.
 - **Foundations synthesis updated (2026-06-14, v4.12.2):** group3 synthesis brought current — new §reconvergence (Papers 54–57: two-body / periods / Tannakian-injection / forced-free), abstract+§1 dependency-tree framing, convergence→theorem, Coulomb/HO layer count→six. Two parallel opus agents (update + adversarial), PM-reconciled (layer-count conflict adjudicated vs primary text); three-pass GATE PASS. Ledger `debug/honest_review_2026_06_14_ledger.md`.
 - **Honest-review: 4 roots verified (2026-06-14, v4.12.1):** Roots (7,0,32,38) content SOUND (WH1 "unconditional" verified by direct band-injectivity read; no overclaim/zombie-cites). Defects were status-drift/precision only — 11 fixes (Paper 32 WH1 label + GH-metric→vS state-space; register rows 2/17; Paper 7 κ/convergence; Paper 0 dates). Ledger `debug/honest_review_2026_06_14_ledger.md`.
 - **NA-1 reconciliation + process fix (2026-06-14, v4.12.0):** Period-value irreducibility is NOT a valid Reading-A/B discriminator (irreducible≠bracket, Cartier–Milnor–Moore); JLO-Depth2 **Reading A** stands, no corpus edit. Added §9 Current-State Check + 2 standing rules. See `debug/sprint_na1_period_irreducibility_nondiscriminator_memo.md`.
@@ -575,6 +576,18 @@ Before implementing new physics:
 ### Current-State Check
 
 Before forming or reporting a verdict on any question — *especially* when resuming a thread from a `debug/` memo — verify the CURRENT state, not the snapshot. The papers (the section that *owns* the question) + CHANGELOG since the memo's date are canonical; `debug/` memos are dated snapshots the corpus moves past, and a memo's "open question / next step" may already be closed. First move when picking up a thread = read the owning paper section + post-memo CHANGELOG, THEN conclude. (Added 2026-06-14: twice in one session a verdict was formed from an 8-day-stale synthesis memo — an already-proven theorem was reported as a future sprint, and an already-settled A-vs-B question was re-answered wrong; both answers were live in Paper 56. Standing rule: `memory/feedback_verify_current_state.md`.)
+
+### Branch QA Review Protocol
+
+The corpus is QA'd branch by branch (the dependency tree of §6 / the field guide). Each branch runs the same cycle, in order:
+
+1. **Synthesis update** — an agent re-reads the branch's papers and proposes an update to the branch's group synthesis (bring current; add missing reconvergence; fix stale claims). PM applies.
+2. **Adversarial paper review** — a parallel agent audits the branch's papers + synthesis for overclaim, §1.5 rhetoric, zombie citations (withdrawn/descoped results), claims-register consistency, status drift, cross-ref hygiene. PM reconciles and **verifies any agent conflict against primary text before acting** (see the Hodge-SL₂/layer-count precedents — agents disagree, primary text decides).
+3. **Cycle if needed** — re-run 1–2 if the adversarial pass forces material synthesis changes.
+4. **Adversarial code review, per paper** — one `code-reviewer` agent (`.claude/agents/code-reviewer.md`) per paper: map each load-bearing claim to its backing test + code, RUN the tests, and audit whether the test actually *proves* the claim (not tautological / false-positive / weaker than the prose); flag claims with NO test. Results populate `docs/claim_test_matrix.md`.
+5. **Disposition** — PM **fixes small issues directly** (status drift, cross-ref hygiene, precision, missing caveats) and **raises large issues to the PI** (a load-bearing claim with no/weak/false-positive backing; a test that proves less than the prose; a suspected bug in a keystone result; anything touching a hard prohibition or a keystone's status). Checkpoint (`/release`, patch grade) when the branch is current.
+
+**Claim → artifact rule.** Every load-bearing paper claim maps to a backing test, recorded in `docs/claim_test_matrix.md` (the granular companion to the reader-facing `docs/claims_register.md`). A claim with no backing test is a **coverage gap** — logged in the matrix, and raised to the PI if load-bearing — never a silent omission. New equations follow the §13.4a naming convention (`test_paper{N}_*`). Run the review in dependency order: the **trunk roots (Papers 0, 1, 7, 32, 38) before the branches**, so a finding at a root re-prices everything above it.
 
 ### Benchmarking Rule
 

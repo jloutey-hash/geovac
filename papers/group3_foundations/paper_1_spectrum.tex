@@ -115,6 +115,22 @@ convergence analysis reveals it is a \textbf{discretization artifact}
 of finite lattice truncation---the graph-theoretic analog of spectral
 aliasing in finite-element methods.
 
+\paragraph{QA correction (2026-06-14).}  The specific quantitative
+values in this section---the degrees $D_{2s} = 0.854$, $D_{2p} = 3.416$,
+the eigenvalues $\lambda_{2s} = 0.0202$, $\lambda_{2p} = 0.0238$, and the
+$16\%$ splitting quoted at $n_{\max} = 10$---are \emph{not} reproduced by
+the current production lattice (the $A = |T_+| + |T_-| + |L_+| + |L_-|$
+CG-magnitude construction they assume is not implemented in
+\texttt{geovac/}; a faithful rebuild gives $D_{2s} \approx 1.9$,
+$D_{2p} \approx 3.8$ and a $\sim 1.7\%$ splitting at $n_{\max} = 10$, with
+$\sim 16\%$ landing near $n_{\max} = 8$).  What \emph{is} verified
+(\texttt{tests/test\_trunk\_qa\_splitting.py},
+\texttt{test\_trunk\_qa\_degree\_table.py}) is the \emph{qualitative}
+content:\ higher-$l$ states have higher connectivity ($D_{2p} > D_{2s}$),
+and the $s/p$ splitting decays (oscillatorily) to zero as
+$n_{\max} \to \infty$.  The specific figures are retained as illustrative
+pending a reconstruction of the CG-weighted construction.
+
 \subsection{Convergence Analysis}
 
 The key diagnostic is the behavior of $\Delta E_{\mathrm{rel}}$ as
@@ -279,7 +295,7 @@ This is not a failure---it is a fundamental feature of the duality. The Laplacia
 
 A comprehensive computational search for the fine structure constant $\alpha \approx 1/137$ within the lattice geometry yields a null result. We examined:
 \begin{enumerate}
-\item \textbf{Operator ratios:} The gearing ratio $\|L_+\|/\|T_+\|$ converges to $\approx 1.77$, not $137$ or $1/\alpha$.
+\item \textbf{Operator ratios:} The gearing ratio $\|L_+\|/\|T_+\|$ does \emph{not} converge to a fixed value (the spectral-norm ratio is exactly $2.0$; the Frobenius-norm ratio drifts through $\approx 1.77$ without converging---\texttt{tests/test\_trunk\_qa\_gearing.py}), so it encodes no physical constant such as $137$ or $1/\alpha$.  The commutator $[T_+, L_+] = 0$, however, \emph{is} bit-exact.
 \item \textbf{Commutator defects:} The operators commute exactly, $[T_+, L_+] = 0$, indicating perfect integrability rather than non-commutative geometry.
 \item \textbf{Holonomy defects:} The Berry phase is identically zero for real operators (Section~\ref{sec:relativity}); the log-holonomy decays as $n^{-1}$, reflecting the asymptotic flatness of the weight function.
 \end{enumerate}
