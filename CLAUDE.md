@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.12.0 (June 14, 2026)
+**Version:** v4.12.1 (June 14, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Honest-review: 4 roots verified (2026-06-14, v4.12.1):** Roots (7,0,32,38) content SOUND (WH1 "unconditional" verified by direct band-injectivity read; no overclaim/zombie-cites). Defects were status-drift/precision only — 11 fixes (Paper 32 WH1 label + GH-metric→vS state-space; register rows 2/17; Paper 7 κ/convergence; Paper 0 dates). Ledger `debug/honest_review_2026_06_14_ledger.md`.
 - **NA-1 reconciliation + process fix (2026-06-14, v4.12.0):** Period-value irreducibility is NOT a valid Reading-A/B discriminator (irreducible≠bracket, Cartier–Milnor–Moore); JLO-Depth2 **Reading A** stands, no corpus edit. Added §9 Current-State Check + 2 standing rules. See `debug/sprint_na1_period_irreducibility_nondiscriminator_memo.md`.
 - **Sprint Hodge-SL₂ (2026-06-14, v4.11.0):** GeoVac's SL₂ is NOT the Mumford–Tate group — it realizes the CM point (CM field Q(i), MT = 1-dim CM torus ⊊ SL₂); structurally explains the Hain–Brown negative; Q(i)-triangulation (Hodge=level-4=period field) spin-forced per audit. Paper 56 §sec:open_g4_hodge convention→CM-identification + KO-dim-3 correction. Tests `tests/test_paper56_hodge_sl2.py`. See `debug/sprint_hodge_sl2_memo.md`.
 - **Sprint S^(4) stage-2 depth verdict (2026-06-13, v4.10.0):** realized depth ≤ 3 for S^(4) SETTLED — proven numerics-free at w=9/11/13 (stuffle spans full depth-4 space, two-prime exact rank), w=5/7 by low-weight filtration; confirms prop:depth_k at k=4. Falsifier `tests/test_s4_stage2_depth.py`. See `debug/sprint_s4_stage2_memo.md`.

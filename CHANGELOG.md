@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.12.1] - 2026-06-14
+
+### Summary
+
+**Honest-review pass — four root papers verified, status-drift corrected.** Adversarial review (dependency-order, roots first) of Papers 7, 0, 32, 38 (taproot + axiom + NCG-root + WH1 convergence keystone). Verdict: **content SOUND** — no physics overclaim, no zombie citations to withdrawn results, rhetoric compliant, K=π(B+F−Δ) conjectural honored, §VIII theorems conditionalized. The most load-bearing unreviewed proof (Paper 38 "unconditional" GH convergence) was verified by a direct read of the `band_injectivity` lemma: the non-vanishing is general (Schur dichotomy + stretched AWA 3-Y element, a positive product of factorials), not numerics-only — WH1 "unconditional" stands. Every defect found was metadata drift, not soundness. Ledger: `debug/honest_review_2026_06_14_ledger.md`.
+
+### Changed (status-drift + precision corrections, 11 edits)
+
+- **Paper 32:** WH1 label `MODERATE--STRONG` → `PROVEN` (L201, L6769 — resolves an internal self-contradiction with four "PROVEN" sites); `thm:gh_convergence` statement + Paper 39 tensor citation: "Latrémolière propinquity" → "van Suijlekom state-space GH distance" + pointer to the paper's own `rem:gh_status_caveat` (which already conceded the propinquity label is an open gap); displayed bound Λ → d_GH.
+- **claims_register:** row 2 attribution → "Paper 7 (κ + spectrum); Paper 0 (kinematic labels only)" (Paper 0 explicitly disclaims deriving the spectrum/κ — §VII.B); row 17 narrowed to "first 15 of 28 Paper 34 projections".
+- **Paper 7:** κ derivation now leads with the p₀-independent universal s-wave coupling c²(n,0)=1/16; §5.7 convergence limitation now cross-refs its rigorization correctly (scalar = Gaudillot-Estrada–van Suijlekom prior art; Dirac/spinor analog = Paper 38).
+- **Papers 34, 35:** Paper 0 bibitem year (2025) → (2026) to match its authoritative `\date` (Feb 22 2026).
+
+### Notes
+
+- **Compile:** Paper 32 three-pass GATE: PASS. Papers 7/34/35 carry **pre-existing** undefined `\cite`/`\ref` (Paper 7 `loutey_paper2`; Paper 34 ~5 undefined section/table refs; Paper 35 one) — unrelated to this session's edits; logged in the ledger as a latent corpus-hygiene item for a future bib/cross-ref sweep.
+- All edits are documentation / paper-precision grade (patch). No production code, no physics result, no new paper.
+
 ## [4.12.0] - 2026-06-14
 
 ### Summary

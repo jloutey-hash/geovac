@@ -108,7 +108,7 @@ where $A_{ij}$ is the weighted adjacency matrix constructed from the transition 
 H = \kappa\, L = \kappa(D - A),
 \label{eq:hamiltonian}
 \end{equation}
-where $\kappa = -1/16$ is the kinetic scale factor---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum.  As shown in Section~\ref{sec:discussion}, this value is derivable from the conformal geometry of the Fock projection: $|\kappa| = 1/\Omega^4(0)$ where $\Omega(0) = 2$ is the stereographic conformal factor at the projection center.
+where $\kappa = -1/16$ is the kinetic scale factor---the unique constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum.  As shown in Section~\ref{sec:discussion}, this value is derivable from the conformal geometry of the Fock projection: the $s$-wave Fock coupling is $c^2(n,0) = 1/16$ \emph{universally for all $n$} (the squared Chebyshev/Gegenbauer three-term recurrence amplitude $(1/4)^2$, independent of $p_0$), equivalently the inverse Fock Jacobian $1/\Omega^4(0)$ with $\Omega(0) = 2$ at the projection center.
 
 \subsection{Intrinsic Dimensionlessness}
 
@@ -724,7 +724,7 @@ degeneracy $g_3^{\mathrm{Dirac}} = 40$ identified in Phase~4H.
 
 \subsection{Limitations}
 
-Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence---only demonstrated it empirically through $n_{\max} = 30$.
+Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence here---only demonstrated it empirically through $n_{\max} = 30$.  The rigorous state-space Gromov--Hausdorff convergence of the scalar truncations for compact groups (including $\mathrm{SU}(2) = S^3$) is established by Gaudillot-Estrada and van Suijlekom (arXiv:2310.14733); the Dirac/spinor analog, with explicit rate $(4/\pi)\log n/n$, is proved in Paper~38 of this series.
 
 \subsection{Concluding Remarks}
 
