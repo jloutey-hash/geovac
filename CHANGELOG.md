@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.16.4] - 2026-06-15
+
+### Summary
+
+**Trunk inline test-reference pass.** The claim→test→code mapping was recorded in `docs/claim_test_matrix.md` (the §9 protocol's canonical artifact) but only partially mirrored in the papers themselves — Paper 32 cited its tests inline (20 refs), but Paper 0 cited none and Papers 1/7/38 only a few. This pass brings the trunk papers up to Paper 32's level so each load-bearing claim names its backing test in the prose.
+
+### Changed
+
+- **Paper 0** — added inline refs `tests/test_trunk_qa_annular.py` (annular-area → 2k−1 → 2ℓ+1 angular capacity) and `tests/test_dirac_lattice.py` (|V| = Σ2n² spin-doubled vertex count).
+- **Paper 1** — added `tests/test_ov_scaling_rigorous.py` (O(V) sparse-eigenvalue scaling, multi-point log–log fit).
+- **Paper 7** — named `tests/test_fock_projection.py` and `tests/test_fock_laplacian.py` at the two appendix modules of the 18 symbolic proofs; added `tests/test_trunk_qa_c2_delta.py` (c²(4,3)=1/40, two independent routes).
+- **Paper 38** — added `tests/test_central_fejer_su2.py` (γ_n closed-form rate moment) and `tests/test_trunk_qa_fejer_4_over_pi.py` (4/π asymptotic constant, rejects the 2/π decoy).
+- **`docs/claim_test_matrix.md`** — records the inline-reference pass.
+
+Each reference is phrased to its matrix verdict (no overclaim beyond what the test proves). Claims with no clean prose anchor were left to the matrix (e.g. Paper 1's −(n²−1) spectrum is continuum, cited in Paper 7). All 4 edited papers compile ERRORS=0.
+
 ## [4.16.3] - 2026-06-15
 
 ### Summary

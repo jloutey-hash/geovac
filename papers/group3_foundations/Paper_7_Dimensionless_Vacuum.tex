@@ -731,7 +731,9 @@ A notable special value: $c^2(4,3) = 1/40 = \Delta$, the boundary
 term in Paper~2's fine-structure-constant formula
 $K = \pi(B + F - \Delta)$~\cite{loutey_paper2}.  This connects the
 highest-$l$ Fock coupling at the Paper~2 cutoff to the Dirac
-degeneracy $g_3^{\mathrm{Dirac}} = 40$ identified in Phase~4H.
+degeneracy $g_3^{\mathrm{Dirac}} = 40$ identified in Phase~4H
+(verified by \texttt{tests/test\_trunk\_qa\_c2\_delta.py}, which reaches
+$1/40$ by two independent routes).
 
 \subsection{Limitations}
 
@@ -829,7 +831,7 @@ GeoVac Paper 13 (2026).
 
 The following 18 tests were implemented in \texttt{sympy} (Python symbolic algebra) and executed with all assertions passing. Each test verifies a specific algebraic identity in the conformal transformation chain. The tests are organized into two modules.
 
-\subsection{Module I: Stereographic Projection Geometry}
+\subsection{Module I: Stereographic Projection Geometry (\texttt{tests/test\_fock\_projection.py})}
 
 \begin{enumerate}
 \item \textbf{Unit sphere constraint.} $\sum_i n_i^2 = 1$ for all $\mathbf{p} \in \mathbb{R}^3$.
@@ -844,7 +846,7 @@ The following 18 tests were implemented in \texttt{sympy} (Python symbolic algeb
 \item \textbf{Inverse projection.} $p_i = p_0\, n_i/(1 - n_4)$ round-trips to the identity.
 \end{enumerate}
 
-\subsection{Module II: Conformal Laplacian and Eigenvalues}
+\subsection{Module II: Conformal Laplacian and Eigenvalues (\texttt{tests/test\_fock\_laplacian.py})}
 
 \begin{enumerate}\setcounter{enumi}{10}
 \item \textbf{Connection term.} $\mathrm{d}(\ln\Omega)/\mathrm{d}p = -2p/(p^2 + p_0^2)$.

@@ -280,7 +280,9 @@ Sec.~\ref{sec:correspondences}---and an angular capacity per shell:
   N_k^{\mathrm{angular}} = 2k - 1
   \label{eq:angular-capacity}
 \end{equation}
-distinct angular slots.
+distinct angular slots.  The annular-area derivation of this $2k-1$
+angular capacity (equivalently $2\ell+1$ with $\ell = k-1$) is verified
+by \texttt{tests/test\_trunk\_qa\_annular.py}.
 
 \subsection{Isomorphism with spherical harmonics}
 
@@ -599,6 +601,8 @@ $|V| = \sum_{n=1}^{n_{\max}} 2n^2
 for a lattice truncated at $n_{\max}$: each shell $n$ contributes its
 $2n^2$ spin-doubled capacity, summed over $1 \le n \le n_{\max}$. (The
 top shell alone holds $2n_{\max}^2$; the cumulative count is the sum.)
+This spin-doubled vertex count is verified by
+\texttt{tests/test\_dirac\_lattice.py}.
 
 \subsection{Edge set}
 

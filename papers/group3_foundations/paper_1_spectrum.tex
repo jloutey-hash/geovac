@@ -463,7 +463,7 @@ A = |T_+| + |T_-| + |L_+| + |L_-|.
 \end{equation}
 The graph Laplacian $L = D - A$ was stored in compressed sparse row (CSR) format. The weighted degree matrix $D$ had diagonal elements ranging from 0.854 to 20.624, with mean degree 12.42.
 
-Eigenvalue computation used the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}) with $\sigma = -1.0$, computing the lowest 20 eigenvalues. Diagonalization required 0.15 seconds on a standard workstation.
+Eigenvalue computation used the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}) with $\sigma = -1.0$, computing the lowest 20 eigenvalues. Diagonalization required 0.15 seconds on a standard workstation; the $O(V)$ sparse-eigenvalue scaling is verified by \texttt{tests/test\_ov\_scaling\_rigorous.py} (multi-point log--log fit).
 
 State identification was performed by computing overlap probabilities $|\langle n,l,m | \psi_k \rangle|^2$ for each eigenvector $|\psi_k\rangle$, selecting the eigenvector with maximal overlap for each target state.
 

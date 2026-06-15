@@ -22,6 +22,8 @@
 
 5-agent per-paper code review + 2-agent test-writing pass; PM-verified the two headline constants (κ, 4/π) against primary text. 5 new artifacts accepted, 5 claims downgraded; all `test_trunk_qa_*` green (48 passed, 2 slow-skip, 2 xfail).
 
+**Inline-reference pass (2026-06-15):** the trunk papers now cite their backing tests *inline* (previously the mapping lived only in this matrix). Added: Paper 0 → `test_trunk_qa_annular.py` (angular capacity), `test_dirac_lattice.py` (|V|); Paper 1 → `test_ov_scaling_rigorous.py` (O(V)); Paper 7 → `test_fock_projection.py` / `test_fock_laplacian.py` (the 18-proof appendix modules), `test_trunk_qa_c2_delta.py` (c²(4,3)=1/40); Paper 38 → `test_central_fejer_su2.py` (γ_n rate) / `test_trunk_qa_fejer_4_over_pi.py` (4/π). Paper 32 already cited its tests inline (20 refs). All four edited papers compile ERRORS=0.
+
 | Paper | Claim | Backing test | Code module | Status | Verdict |
 |---|---|---|---|---|---|
 | 0 | Annular area → 2ℓ+1 angular capacity | `test_trunk_qa_annular.py` | `lattice.py` | BACKED-SOUND | ✅ accepted (new) |

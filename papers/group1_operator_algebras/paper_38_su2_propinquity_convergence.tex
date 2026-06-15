@@ -795,7 +795,10 @@ $d\mu(\chi) = (2/\pi) \sin^2(\chi/2)\, d\chi$.
 
 \begin{lemma}[L2: kernel construction and quantitative rate]\label{lem:L2}
 The central spectral Fej\'er kernel $\KS_{\nmax}$ has the following
-properties:
+properties (the closed-form $\gamma_{\nmax}$ rate moment is verified by
+\texttt{tests/test\_central\_fejer\_su2.py}, and the $4/\pi$ asymptotic
+constant by \texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}, which
+also rejects the $2/\pi$ decoy):
 \begin{enumerate}\setlength{\itemsep}{2pt}
 \item[(a)] $\KS_{\nmax}(g) \ge 0$ for all $g$, and $\int_{\SU(2)}
 \KS_{\nmax}(g) \, dg = 1$.
