@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.14.0] - 2026-06-14
+
+### Summary
+
+**Trunk QA re-check + K-observation downgrade.** A fresh five-agent per-paper re-check of the trunk (Papers 0, 1, 7, 32, 38) — new agents that never saw the first pass's reasoning (§9 QA principle 2) — confirmed *every* first-pass downgrade by **independent reproduction**, earned two upgrades, and surfaced new issues including one place the first pass was itself wrong. The three principles distilled from the re-check are memorialized in §9 + both reviewer agent types + authoring conventions. Separately, per PI direction, the K = π(B+F−Δ) combination rule was downgraded **conjecture → observation** corpus-wide ("conjecture" carried unearned confidence that a derivation exists); the §13.5/§13.8 hard prohibition was reframed around *"never presented as anything stronger than an Observation."* Two NO-TEST trunk claims gained genuine backing tests.
+
+### Added
+
+- **Two new backing tests** (NO-TEST → BACKED):
+  - `tests/test_paper7_vee_s3.py` — Paper 7 §V closed-form S³ density-overlap Slater integrals (5π/32, 17π/324, 77π/2048 → 5Z/8, 17Z/81, 77Z/512), verified symbolically in pure sympy. The direct test was archived in v2.7.0 when the underlying code was removed, leaving the §V claim with no live coverage; the math is correct and now tested without the removed code.
+  - `tests/test_paper1_rydberg.py` — Paper 1 §II dynamical-algebra claim: the SU(1,1) number operator N = −2[T₊,T₋] assembled purely from the ladder generators has integer spectrum {n}, the SU(2) Casimir L² gives l(l+1) (both bit-exact), so E_n = −1/2n² follows from the algebra. Non-tautological (n emerges from the commutator, not by hand); the distinction from the positive-semidefinite graph Laplacian is stated inline.
+- **Three QA principles** (CLAUDE.md §9 + `code-reviewer` / `citation-reviewer` agent types + `docs/authoring_conventions.md` rule 9): (1) **provenance visibility** — every load-bearing claim wears its register tier inline; prose ≤ tier; (2) **fresh adversary** — the reviewer never saw the discovery rationalization, prose confidence ≠ evidence; (3) **two-way verdict** — upgrade under-stated claims, not only downgrade (guards against demolition bias).
+
+### Changed
+
+- **K = π(B+F−Δ): conjecture → OBSERVATION** corpus-wide (PI direction). Paper 2 (8 sites, including the "prediction of α" framing in the intro that was the real confidence leak), Paper 32 (6 sites), `claims_register` row 16, `claim_test_matrix` row 32, CLAUDE.md (WH5 status, §2, §6, §13.5, §13.8). The §13.5/§13.8 hard prohibition is reframed around *"never presented as anything stronger than an Observation"* (floor = observation; never conjecture / derived / prediction / theorem). The three **derived** spectral homes for B, F, Δ are unaffected — only the *combination*'s label changed.
+- **Paper 0 §VI |V| formula BUG fixed** — `2n_max²` (top-shell-only count) → `Σ2n² = n_max(n_max+1)(2n_max+1)/3`, matching the code (`DiracLattice`) and Paper 41, both already correct. The first pass had mis-attributed this to a "spinless" code bug; the re-check found the code was right and the *paper* formula was the lone error.
+- **Two upgrades** (two-way verdict): per-band injectivity (Paper 38) BACKED-WEAK → BACKED-SOUND — the proof's general leg is Schur irreducibility + Avery–Wen–Avery non-vanishing (all-N, not finite-cutoff). c²(4,3) = 1/40 (Paper 7) → INTERNAL THEOREM (two structurally-disjoint routes). The 4/π tier is refined to **derived (numerics-pinned)** — the doubling estimator pins the subcoefficients numerically, not by executed symbolic Euler–Maclaurin, so it is not full SYMBOLIC PROOF (corrects an over-statement carried in the v4.13.0 narrative).
+- **Hygiene:** Paper 7 "18 independent proofs" → "18 symbolic checks" (~5–7 are limiting-case / definitional); the 16% splitting waypoint corrected paper-wide (peaks near n_max=8, ~1.7% by n_max=10) in Papers 1 & 7; the unverified "<0.01% at n_max=30" → "below 1%". Paper 1 §III QA-note scope widened to the abstract / Table I / captions, and its §III.D self-contradiction (line claiming 16% at n_max=10) fixed. Paper 32: stale Open Question Q2 (asked whether J²=+1; the audit proves J²=−1 bit-exact) rewritten as resolved; two zombie "Latrémolière propinquity" titles → "state-space GH convergence"; the vacuous `test_J_preserves_O` tests now actually assert (were print-only — passed even if J broke O). Paper 38's circular `test_asymptotic_constant_value` annotated as a constant lock (the genuine non-circular derivation is `test_trunk_qa_fejer_4_over_pi`).
+
+### Notes
+
+- **Re-check method:** 5 fresh `general-purpose`/opus agents (the project `code-reviewer` agent type is not registered in this harness), one per trunk paper, each running the tests and reproducing the load-bearing numbers independently. The PM reconciled every disputed/load-bearing finding against primary text before acting — which caught the first pass's `dirac_lattice` "spinless" error (the code was correctly spin-doubled) and the 4/π over-statement.
+- **Compile:** Papers 0, 2, 32 three-pass GATE PASS; Papers 1, 7 ERRORS=0 with the same pre-existing undefined citations (`Note1`, `loutey_paper2`) unrelated to these edits.
+
 ## [4.13.0] - 2026-06-14
 
 ### Summary

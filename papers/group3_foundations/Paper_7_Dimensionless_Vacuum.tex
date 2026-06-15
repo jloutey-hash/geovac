@@ -12,7 +12,7 @@
 \date{March 10, 2026}
 
 \begin{abstract}
-Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. We demonstrate that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, establishing a precise mathematical bridge between the discrete graph formulation and the known continuous structure. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through 18 independent symbolic proofs confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
+Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. We demonstrate that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, establishing a precise mathematical bridge between the discrete graph formulation and the known continuous structure. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through a suite of 18 symbolic checks (an algebraic audit of the transformation chain, several of them limiting-case or definitional) confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
 \end{abstract}
 
 \maketitle
@@ -43,7 +43,7 @@ The central result of this paper is a rigorous demonstration that:
 \item The dimensionful Rydberg spectrum $E_n = -1/(2n^2)$ is introduced exclusively through the energy-shell constraint $p_0^2 = -2E$, which serves as a projection parameter mapping $S^3$ coordinates to flat $\mathbb{R}^3$ coordinates.
 \end{enumerate}
 
-These claims are supported by a suite of 18 independent symbolic proofs, implemented in \texttt{sympy} and verified computationally, that confirm every algebraic step of the conformal transformation chain.
+These claims are supported by a suite of 18 symbolic checks, implemented in \texttt{sympy} and verified computationally, that confirm every algebraic step of the conformal transformation chain (several are limiting-case or definitional substitutions rather than logically independent theorems).
 
 The structure of this paper is as follows. Section~\ref{sec:graph} describes the dimensionless graph topology and its relationship to $S^3$. Section~\ref{sec:conformal} details the stereographic projection and the role of the conformal factor. Section~\ref{sec:operator} demonstrates the operator equivalence between the curved Laplacian and the flat Schr\"odinger equation. Section~\ref{sec:vee_s3} derives the two-electron repulsion integral as a density-overlap integral on $S^3$. Section~\ref{sec:discussion} discusses the physical and philosophical implications.
 
@@ -120,11 +120,11 @@ This dimensionlessness is not accidental. It is a direct consequence of the grap
 
 The graph $\mathcal{G}$ is a finite lattice truncation of a manifold. As $n_{\max} \to \infty$, the discrete graph Laplacian $L$ converges to the continuous Laplace-Beltrami operator $\Delta_{S^3}$ on a three-dimensional manifold. We identify this manifold by examining the spectral convergence.
 
-At finite $n_{\max}$, the graph Laplacian exhibits discretization artifacts: the $2s$/$2p$ degeneracy is broken by approximately 16\% at $n_{\max} = 10$, due to differential connectivity between pole ($l = 0$) and equatorial ($l > 0$) nodes \cite{loutey_paper1}. However, this splitting oscillates and decays systematically:
+At finite $n_{\max}$, the graph Laplacian exhibits discretization artifacts: the $2s$/$2p$ degeneracy is broken by up to $\sim$16\% at intermediate $n_{\max}$ (the splitting is non-monotone, peaking near $n_{\max} = 8$ and falling to $\sim$1.7\% by $n_{\max} = 10$), due to differential connectivity between pole ($l = 0$) and equatorial ($l > 0$) nodes \cite{loutey_paper1}. However, this splitting oscillates and decays systematically:
 \begin{equation}
 \Delta E_{2s\text{-}2p}(n_{\max}) \to 0 \quad \text{as} \quad n_{\max} \to \infty,
 \end{equation}
-recovering the exact Coulomb degeneracy at a rate consistent with spectral aliasing on a compact manifold. At $n_{\max} = 30$, the splitting has decayed to less than 0.01\%.
+recovering the exact Coulomb degeneracy at a rate consistent with spectral aliasing on a compact manifold. At $n_{\max} = 30$, the splitting has decayed to well under 1\%, continuing toward the exact Coulomb degeneracy.
 
 The recovered degeneracy is the hallmark of $SO(4)$ symmetry---the isometry group of $S^3$. The graph, in its continuum limit, therefore converges to a manifold with $SO(4)$ isometry, which uniquely identifies it as $S^3$ (up to discrete quotients).
 
@@ -445,7 +445,10 @@ wavefunction. The integral evaluates to
 \end{align}
 
 All three Slater integrals are reproduced exactly by the $S^3$
-density-overlap formula~\eqref{eq:f0_s3}.
+density-overlap formula~\eqref{eq:f0_s3} (verified symbolically in
+\texttt{tests/test\_paper7\_vee\_s3.py}: the three integrals evaluate to
+$5\pi/32$, $17\pi/324$, $77\pi/2048$ in exact arithmetic, reproducing
+\eqref{eq:slater_exact}).
 
 \subsection{Structural Result: Node Property vs.\ Edge Property}
 \label{sec:node_vs_edge}

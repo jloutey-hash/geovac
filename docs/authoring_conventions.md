@@ -12,6 +12,7 @@ The standards every paper is checked against in the **§9 Branch QA Review Proto
 6. **Claim → artifact.** Every load-bearing claim maps to a backing test in `docs/claim_test_matrix.md`. **"derived" / "SYMBOLIC PROOF" requires a test that proves the derivation** — a matching-condition or convergence test backs "matched/converges," not "derived."
 7. **Citations.** Every `\cite` resolves to a real publication that says what we claim; verified by the citation-grounding pass (`.claude/agents/citation-reviewer.md`).
 8. **Status vocabulary.** Use the claims-register tiers accurately (SYMBOLIC PROOF / MEASURED / PANEL-VERIFIED / INTERNAL THEOREM / CONDITIONAL / OBSERVATION / CONJECTURE / RETRACTED). "SYMBOLIC PROOF" is reserved for exact symbolic/machine-verified derivations.
+9. **Provenance visibility (§9 QA principle 1).** Every load-bearing claim wears its rule-8 tier *inline* — next to the claim in the paper, not only in `docs/claims_register.md` — so a reader (or future-self) cannot mistake an observation for a theorem. The prose may assert no more than the tier: "derived" / "SYMBOLIC PROOF" requires a *derivation* test (rule 6), never a matching / convergence test. The κ episode is the cautionary case — a prose promotion ("no longer fitted") with no tier and no artifact survived ~50 versions. The code-reviewer flags any load-bearing claim whose prose exceeds its backing, in either direction (an *under*-stated claim is upgraded — §9 QA principle 3).
 
 ## Per-group (audience-specific)
 

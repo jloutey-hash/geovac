@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.13.0 (June 14, 2026)
+**Version:** v4.14.0 (June 14, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -74,7 +74,7 @@ This section is a **bold-claim register**, distinct from the rhetoric of the pap
 
 **WH5 — α is a projection constant, not a derivable number.** K = π(B + F − Δ) composes three structurally independent spectral objects (finite Casimir trace; Fock Dirichlet ζ(2); Dirac boundary count 1/40); the right open question is why the sum equals α⁻¹, not how to derive each piece.
 *Falsifier:* a spectral-triple construction deriving K as a single coefficient of a well-defined functional.
-*Status:* TWELVE mechanisms eliminated (Phases 4B–4I + Sprint A + Sprint K-CC, including the T9 algebraic obstruction: no single CC heat-kernel expansion contains B, F, Δ as terms). Standing reading: three-regime projection coincidence. Paper 2 stays in Observations; combination rule conjectural (§13.5 hard prohibition).
+*Status:* TWELVE mechanisms eliminated (Phases 4B–4I + Sprint A + Sprint K-CC, including the T9 algebraic obstruction: no single CC heat-kernel expansion contains B, F, Δ as terms). Standing reading: three-regime projection coincidence. Paper 2 stays in Observations; combination rule labeled an Observation — not a conjecture or derivation (§13.5 hard prohibition; conjecture→observation downgrade 2026-06-14, PI direction — "conjecture" judged to carry unearned confidence that a derivation exists).
 
 **WH6 — GeoVac's RH-adjacent object is the Dirac spectral zeta D(s), not classical ζ.** Internal GUE-like zero statistics (CV ≈ 0.35–0.40); the classical-RH bridge is closed by three independent walls (zeros not on one line; no spectral-triple-natural functional equation, 48 OoM; wrong Weyl class).
 *Falsifier:* D(s) zeros on a single critical line at larger samples; or a natural functional equation closing the RH-O gap.
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Trunk QA re-check + K→observation (2026-06-14, v4.14.0):** Fresh 5-agent re-check (never saw pass-1) confirmed every downgrade by *independent reproduction*, earned 2 upgrades (per-band injectivity all-N via Schur+AWA; c²(4,3)=1/40 two-route), fixed Paper 0 |V|=2n_max² → Σ2n² formula bug (code was right, first pass was wrong), added 2 backing tests (`test_paper1_rydberg` algebra→{n},l(l+1); `test_paper7_vee_s3` §V exact integrals: NO-TEST→BACKED). **K = π(B+F−Δ) downgraded conjecture→observation corpus-wide** (PI direction; §13.5/§13.8 reframed to "never stronger than an Observation"). 3 QA principles memorialized (provenance-visible / fresh-adversary / two-way-verdict). See `debug/honest_review_2026_06_14_ledger.md`.
 - **Trunk QA pass + QA infrastructure (2026-06-14, v4.13.0):** 5-agent code review + 2-agent test-writing on the trunk (Papers 0,1,7,32,38). κ "derived"→OBSERVATION (matching coincidence; counterfactual shows no bridge); **4/π upgraded** (circular hardcode → genuine derivation, rejects 2/π decoy); Paper 1 §III numbers + Forced-Count chain downgraded; 8 new `test_trunk_qa_*` artifacts. New QA process: §9 Branch QA Review Protocol, code-reviewer + citation-reviewer agent types, `docs/{authoring_conventions,claim_test_matrix}.md`. Key finding: L=D−A is positive-semidefinite — −(n²−1) is continuum, not graph. See `debug/honest_review_2026_06_14_ledger.md`.
 - **Foundations synthesis updated (2026-06-14, v4.12.2):** group3 synthesis brought current — new §reconvergence (Papers 54–57: two-body / periods / Tannakian-injection / forced-free), abstract+§1 dependency-tree framing, convergence→theorem, Coulomb/HO layer count→six. Two parallel opus agents (update + adversarial), PM-reconciled (layer-count conflict adjudicated vs primary text); three-pass GATE PASS. Ledger `debug/honest_review_2026_06_14_ledger.md`.
 - **Honest-review: 4 roots verified (2026-06-14, v4.12.1):** Roots (7,0,32,38) content SOUND (WH1 "unconditional" verified by direct band-injectivity read; no overclaim/zombie-cites). Defects were status-drift/precision only — 11 fixes (Paper 32 WH1 label + GH-metric→vS state-space; register rows 2/17; Paper 7 κ/convergence; Paper 0 dates). Ledger `debug/honest_review_2026_06_14_ledger.md`.
@@ -189,7 +190,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 | Atomic Pauli | O(Q^3.15) | 1.3x-8.1x vs cc-pVDZ/cc-pVTZ | 14 |
 **Key structural results (details in papers and CHANGELOG.md):**
 - **κ = −1/16 derivation (v2.26.1):** Derivable from Fock projection, not fitted. Paper 18 reclassified κ to "conformal." See `debug/probe_kappa_sprint_memo.md`.
-- **α structural decomposition (Phases 4B-4I, April 2026):** B=42 (Casimir), F=π²/6 (Fock Dirichlet at d_max), Δ=1/40 (Dirac degeneracy g_3). Three independent spectral homes; combination rule K=π(B+F−Δ) remains conjectural. 12 mechanisms eliminated. See Paper 2, CHANGELOG.
+- **α structural decomposition (Phases 4B-4I, April 2026):** B=42 (Casimir), F=π²/6 (Fock Dirichlet at d_max), Δ=1/40 (Dirac degeneracy g_3). Three independent spectral homes; combination rule K=π(B+F−Δ) is a numerical observation, not derived (conjecture→observation downgrade 2026-06-14). 12 mechanisms eliminated. See Paper 2, CHANGELOG.
 - **Spectral-action supertrace (v2.26.1):** SD cancellation theorem, Δ⁻¹=40 from Euler-Maclaurin, (−) sign = (-1)^F grading. Two-term exactness on S³ Dirac. See `debug/st_supertrace_sprint_memo.md`.
 - **Nuclear systems (Paper 23):** Deuteron 16q/592 Pauli; He-4 16q/712 Pauli; composed nuclear-electronic deuterium 26q/614 Pauli. Fock rigidity theorem (S³ unique to −Z/r).
 - **Angular sparsity theorem (Paper 22):** ERI density depends only on l_max, not V(r). Universal across potentials.
@@ -505,7 +506,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 - **Paper 38 UNCONDITIONAL** (2026-06-10, translation-seminorm metrization; falsifier `tests/test_p38_action_seminorm.py`). The WH1 keystone.
 - **Paper 45 DESCOPED + partially rebuilt** (2026-06-09 K⁺ theorem withdrawn, falsifier `tests/test_p45_kplus_degeneracy.py`; 2026-06-10 product-carrier convergence restored in the action-seminorm framework, `prop:product_action_seminorm`, falsifier `tests/test_wh7_b1_joint.py` — signature-agnostic, NOT a Lorentzian claim). Do NOT cite pre-descope claims. **Paper 46 DESCOPED; Papers 47/48/49 PARTIAL** (in-paper Status notes; the norm-resolvent arrow and the TICI/cocycle algebra survive).
-- **Paper 2 is an Observation**; the combination rule K = π(B + F − Δ) stays labeled conjectural (§13.5 hard prohibition).
+- **Paper 2 is an Observation**; the combination rule K = π(B + F − Δ) is labeled an Observation — never conjecture or derived (§13.5 hard prohibition; conjecture→observation downgrade 2026-06-14).
 - **Paper 34** is the living projection catalogue (28 projections); **Paper 18 §III.7** is the master Mellin engine; tag every transcendental against both (memory rule).
 - Papers are corrected **in place** (de-versioning directive 2026-06-10); git/Zenodo are the version record. No splinter files.
 
@@ -588,6 +589,12 @@ The corpus is QA'd branch by branch (the dependency tree of §6 / the field guid
 5. **Disposition** — PM **fixes small issues directly** (status drift, cross-ref hygiene, precision, missing caveats) and **raises large issues to the PI** (a load-bearing claim with no/weak/false-positive backing; a test that proves less than the prose; a suspected bug in a keystone result; anything touching a hard prohibition or a keystone's status). Checkpoint (`/release`, patch grade) when the branch is current.
 
 **Claim → artifact rule.** Every load-bearing paper claim maps to a backing test, recorded in `docs/claim_test_matrix.md` (the granular companion to the reader-facing `docs/claims_register.md`). A claim with no backing test is a **coverage gap** — logged in the matrix, and raised to the PI if load-bearing — never a silent omission. New equations follow the §13.4a naming convention (`test_paper{N}_*`). Run the review in dependency order: the **trunk roots (Papers 0, 1, 7, 32, 38) before the branches**, so a finding at a root re-prices everything above it.
+
+**Three QA principles** (apply to every branch; memorialized in the `code-reviewer` / `citation-reviewer` agent types and `docs/authoring_conventions.md`):
+
+1. **Provenance visibility.** Every load-bearing claim wears its register tier *inline in the paper* (SYMBOLIC PROOF / INTERNAL THEOREM / MEASURED / PANEL-VERIFIED / CONDITIONAL / OBSERVATION / CONJECTURE), not only in `docs/claims_register.md`, and the prose may assert no more than the tier. κ is the canonical failure — "derived" survived ~50 versions because no tier was pinned to the prose; a matching / convergence test backs "matched / converges," never "derived."
+2. **Fresh adversary.** The reviewer is a fresh agent that never saw the discovery-mode rationalization — prose confidence is not evidence; the claim is decided by the artifact + primary text. This is why the per-paper review is a dispatched sub-agent, not main-session self-review.
+3. **Two-way verdict.** Verdicts move both directions: a claim *under*-stated by its backing is UPGRADED (4/π earned a genuine derivation, not only downgraded) — the PM reconciles against primary text, which guards against demolition bias. A pass that only ever cuts is miscalibrated.
 
 ### Benchmarking Rule
 
@@ -755,7 +762,7 @@ The following changes must NEVER be made by sub-agents or the PM agent:
 - Any change to the natural geometry hierarchy (new levels, changed coordinate systems)
 - Introduction of any fitted or empirical parameter
 - Deletion or suppression of negative results from Section 3 or CHANGELOG.md
-- Removal of the "conjectural" label from the **combination rule K = π(B + F − Δ) in Paper 2**. (Paper 2 was moved Conjectures → Core on 2026-04-18 after Sprint A, then moved Core → Observations on 2026-05-02 per the curve-fit audit memo `docs/curve_fit_audit_memo.md`. The paper's surrounding structural decompositions — three independent spectral homes for B, F, Δ — are derived; the combination rule itself is a numerical observation without first-principles derivation, and the "conjectural" framing applies to the combination rule whether or not the paper's folder location changes.)
+- Presenting the **combination rule K = π(B + F − Δ) (Paper 2)** as anything stronger than an **Observation**. The standing label is Observation — never "conjecture", "derived", "prediction", "theorem", or any stronger tier. The three ingredients B, F, Δ have independent derived spectral homes; their *combination* is a numerical coincidence (matches 1/α to 8.8×10⁻⁸) with no first-principles derivation (12 single-mechanism derivations eliminated). (History: Conjectures → Core 2026-04-18 Sprint A; Core → Observations 2026-05-02 per the curve-fit audit memo `docs/curve_fit_audit_memo.md`; conjecture → observation label downgrade 2026-06-14 per PI direction — "conjecture" was judged to carry unearned confidence that a derivation exists. Applies at the combination-rule level regardless of Paper 2's folder.)
 
 **CLAUDE.md access control:** The PM may edit CLAUDE.md for mechanical updates that keep documentation in sync with code and paper changes. The PM may NOT edit sections that define strategy, framing, or the PM's own operating rules.
 
@@ -811,7 +818,7 @@ PMs may edit papers in any of the six group folders (`papers/group1_operator_alg
 - Introduce fitted or empirical parameters without PI direction
 - Change the natural geometry hierarchy (new levels, changed coordinates)
 - Delete or suppress negative results from Section 3
-- Remove the "conjectural" label from the **combination rule K = π(B + F − Δ) in Paper 2**. The prohibition is at the combination-rule level, not the paper-tier level: it applies regardless of whether Paper 2 sits in Conjectures, Core, or Observations. (History: Conjectures → Core 2026-04-18 (Sprint A), Core → Observations 2026-05-02 (curve-fit audit memo).)
+- Present the **combination rule K = π(B + F − Δ) in Paper 2** as anything stronger than an **Observation** (the standing label since the 2026-06-14 conjecture→observation downgrade; never "conjecture", "derived", or "theorem"). The prohibition is at the combination-rule level, not the paper-tier level: it applies regardless of whether Paper 2 sits in Conjectures, Core, or Observations. See §13.5.
 
 **Splinter file prohibition:** PMs must edit papers in-place. Do NOT create separate .tex diff files, proposal files, or draft directories. Proposed changes go directly into the paper. If the change is wrong, `git revert` is cheaper than context-loading splinter files in plan-mode review.
 

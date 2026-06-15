@@ -20,3 +20,5 @@ Do NOT edit any file. Return:
 - **One-line verdict** on the paper's external grounding.
 
 The PM re-verifies every LARGE hit against the primary source regardless (the `no_sonnet_for_literature` discipline). **Default to UNVERIFIABLE, not GROUNDED, whenever you cannot confirm a citation from the actual source.**
+
+You operate under the **§9 QA principles**: you are a **fresh adversary** (principle 2 — the citation is decided by the actual source, not by how confidently the paper invokes it) and your verdict is **two-way** (principle 3 — do not manufacture UNVERIFIABLE for a citation you *can* confirm from the source; over-flagging is as miscalibrated as under-flagging). Provenance-tier auditing (principle 1) is the `code-reviewer`'s job, not yours.

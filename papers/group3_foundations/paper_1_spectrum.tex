@@ -12,7 +12,7 @@
 \date{February 22, 2026}
 
 \begin{abstract}
-We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum $E_n = -1/(2n^2)$ from operator eigenvalues. \textbf{(ii) Geometric artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff ($\Delta E_{2p-2s} = 0.0035$ at $n_{\max}=10$, 16\% relative splitting) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays to $<$0.01\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
+We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum $E_n = -1/(2n^2)$ from operator eigenvalues. \textbf{(ii) Geometric artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff (peaking near $n_{\max}=8$ at $\sim$16\% and falling to $\sim$1.7\% by $n_{\max}=10$; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
 \end{abstract}
 
 \maketitle
@@ -58,7 +58,7 @@ E_n = -\frac{1}{2n^2} \quad (\text{Hartree atomic units}),
 \end{equation}
 in exact agreement with the hydrogen spectrum. No fitting parameters are required; the algebra determines the spectrum uniquely.
 
-This result validates the lattice as a faithful discrete representation of the hydrogen Hilbert space. The nodes are not a coarse-graining---they \textit{are} the quantum states. The edges encode physically allowed transitions. The spectrum emerges from operator eigenvalues, not from solving differential equations.
+This result validates the lattice as a faithful discrete representation of the hydrogen Hilbert space. The nodes are not a coarse-graining---they \textit{are} the quantum states. The edges encode physically allowed transitions. The spectrum emerges from operator eigenvalues, not from solving differential equations. (Verified in \texttt{tests/test\_paper1\_rydberg.py}: the $SU(1,1)$ number operator $N = -2[T_+, T_-]$, assembled purely from the ladder generators, has integer spectrum $\{n\}$ and the $SU(2)$ Casimir $L^2$ gives $l(l+1)$, both bit-exact, so $E_n = -1/(2n^2)$ follows from the algebra. This is the dynamical-symmetry construction; the discrete graph Laplacian $L = D - A$ is separately positive-semidefinite and reproduces the spectrum only in the continuum limit, Paper~7.)
 
 
 \section{The Geometric Flesh: Topological Artifacts of Finite Truncation}
@@ -129,7 +129,9 @@ $\sim 16\%$ landing near $n_{\max} = 8$).  What \emph{is} verified
 content:\ higher-$l$ states have higher connectivity ($D_{2p} > D_{2s}$),
 and the $s/p$ splitting decays (oscillatorily) to zero as
 $n_{\max} \to \infty$.  The specific figures are retained as illustrative
-pending a reconstruction of the CG-weighted construction.
+pending a reconstruction of the CG-weighted construction. \emph{This
+caveat applies wherever these figures recur---the abstract, Table~I, the
+convergence list below, and the figure captions.}
 
 \subsection{Convergence Analysis}
 
@@ -140,8 +142,9 @@ the 2s/2p splitting at each resolution:
 
 \begin{itemize}
   \item At $n_{\max} = 5$: $\Delta E_{\mathrm{rel}} \approx 13\%$
-  \item At $n_{\max} = 10$: $\Delta E_{\mathrm{rel}} \approx 16\%$
-    (oscillatory peak)
+  \item At $n_{\max} = 8$: $\Delta E_{\mathrm{rel}} \approx 16\%$
+    (oscillatory peak); by $n_{\max} = 10$ it has fallen to
+    $\approx 1.7\%$ (faithful rebuild --- see the QA correction above)
   \item At $n_{\max} = 20$: $\Delta E_{\mathrm{rel}} \approx 0.3\%$
   \item At $n_{\max} = 30$: $\Delta E_{\mathrm{rel}} \approx 0.005\%$
 \end{itemize}
@@ -341,7 +344,7 @@ If quantum states are discrete nodes, what is the wavefunction $\psi(r)$? One po
 We have demonstrated that quantum mechanics, when formulated on a discrete paraboloid lattice, exhibits a dual structure:
 \begin{itemize}
 \item \textbf{Algebraic exactness:} Transition operators reproduce the hydrogen spectrum without corrections.
-\item \textbf{Understood discretization artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite $n_{\max}$ (up to $\sim$16\% at $n_{\max}=10$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates and decays to $<$0.01\% by $n_{\max}=30$, recovering the exact Coulomb degeneracy.
+\item \textbf{Understood discretization artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite $n_{\max}$ (up to $\sim$16\% at intermediate $n_{\max}$, near $n_{\max}=8$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates and decays below 1\% by $n_{\max}=30$, recovering the exact Coulomb degeneracy.
 \item \textbf{Geometric phase structure:} The Berry phase vanishes identically for the real-valued $SU(2)/SU(1,1)$ operators; the edge-weight log-holonomy decays as $\Theta \propto n^{-1}$, measuring the curvature of the weight function. Whether a $U(1)$ gauge extension can produce a genuine geometric phase with relativistic scaling remains an open question.
 \item \textbf{Kinematic completeness:} The lattice encodes all $\alpha$-independent physics---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
 \end{itemize}

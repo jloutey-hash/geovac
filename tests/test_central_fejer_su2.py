@@ -565,7 +565,14 @@ class TestQuantitativeRate:
     """Verify Theorem 1 of debug/r25_l2_quantitative_rate_memo.md."""
 
     def test_asymptotic_constant_value(self):
-        """Asymptotic constant equals 4/pi as exact sympy expression."""
+        """Transcription lock: asymptotic_rate_constant() returns 4/pi exactly.
+
+        NOTE (2026-06-14 QA): this is a CONSTANT LOCK, not a derivation of
+        4/pi -- it asserts a hardcoded module constant against itself. The
+        genuine, non-circular derivation (Euler-Maclaurin on the gamma_n sum
+        rule, which rejects the 2/pi circle-Fejer decoy) lives in
+        tests/test_trunk_qa_fejer_4_over_pi.py. Kept here only as a value lock.
+        """
         c = asymptotic_rate_constant()
         # As sympy, equals Rational(4) / pi.
         assert c == Rational(4) / pi

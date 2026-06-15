@@ -149,3 +149,21 @@ Agents disagreed (update agent: four, per Paper 57; adversarial: six, per Paper 
 **Key structural finding:** L=D−A is positive-semidefinite — −(n²−1) is a *continuum* (S³) property, not the graph's. Machinery (axiom audit + negative controls, O(V), continuum proofs, sum rules, K-conjectural) genuinely backed; soft spot = headline derived/exact constants.
 
 **Compile:** Papers 0, 32 GATE PASS; Papers 1, 7 fail only on PRE-EXISTING undefs (`Note1` L76; `loutey_paper2`). All 8 `test_trunk_qa_*` green.
+
+---
+
+## Trunk QA RE-CHECK + K→observation (2026-06-14, v4.14.0)
+
+Full chronicle: CHANGELOG [4.14.0]. Summary only here.
+
+**Fresh re-check (§9 principle 2):** 5 fresh opus agents (one per trunk paper) re-derived pass-1 verdicts independently. *Every* downgrade held under independent reproduction (Paper 1 agent recomputed 1.9/3.8, 1.7%@n10, ratio 2.0 from scratch). Both Paper 32 hard-prohibition flags CLEAR (K-conjectural intact pre-downgrade; WH1 vS-GH not over-stated).
+
+**Upgrades (two-way verdict, principle 3):** per-band injectivity (P38) BACKED-WEAK→BACKED-SOUND (Schur+AWA all-N); c²(4,3)=1/40 (P7)→INTERNAL THEOREM (two routes). 4/π refined to derived-**numerics-pinned** (doubling estimator, not symbolic E–M) — corrects my v4.13.0 "PROVEN" over-statement.
+
+**New finds → fixed:** Paper 0 |V|=2n_max² BUG → Σ2n² (code was right; pass-1's "spinless" dispute was wrong — reconciled vs primary text + Paper 41). 2 NO-TEST→BACKED tests written (`test_paper1_rydberg`: N=−2[T₊,T₋]→{n}, L²→l(l+1); `test_paper7_vee_s3`: §V exact integrals). Paper 1 §III QA-note under-scoping + L143 contradiction fixed. Paper 32 stale Q2 (J²=+1 → resolved J²=−1), 2 zombie propinquity titles, vacuous `test_J_preserves_O` (print→assert). Paper 38 circular test annotated.
+
+**K = π(B+F−Δ) conjecture→observation** [PI direction]: 14 corpus sites (Paper 2 ×8, Paper 32 ×6) + register + matrix + CLAUDE.md (WH5/§2/§6/§13.5/§13.8). §13.5/§13.8 prohibition reframed: "never stronger than an Observation" (floor=observation). Three derived spectral homes unaffected.
+
+**3 QA principles** memorialized: §9 + code-reviewer/citation-reviewer agents + authoring_conventions rule 9.
+
+**Verification:** Papers 0,2,32 GATE PASS; 1,7 ERRORS=0 (same pre-existing undefs). 214 passed / 4 skipped (new + edited tests + 18 topological proofs).

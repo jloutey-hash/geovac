@@ -593,8 +593,12 @@ The packing defines a graph $G = (V, E)$ with vertex set
       s \in \{\uparrow, \downarrow\}\bigr\} \,,
   \label{eq:vertex-set}
 \end{equation}
-with cardinality $|V| = 2n_{\max}^2$ for a lattice truncated at
-$n_{\max}$.
+with cardinality
+$|V| = \sum_{n=1}^{n_{\max}} 2n^2
+     = \tfrac{1}{3}\,n_{\max}(n_{\max}+1)(2n_{\max}+1)$
+for a lattice truncated at $n_{\max}$: each shell $n$ contributes its
+$2n^2$ spin-doubled capacity, summed over $1 \le n \le n_{\max}$. (The
+top shell alone holds $2n_{\max}^2$; the cumulative count is the sum.)
 
 \subsection{Edge set}
 

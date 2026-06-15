@@ -366,8 +366,7 @@ def test_J_preserves_O_weyl(n_max):
         for i, res in failures[:3]:
             msg += f"  generator {i} (label={op_sys.multiplier_labels[i]}) "
             msg += f"residual {res:.3e}\n"
-        # Don't fail -- report
-        print(f"\n[n_max={n_max}, weyl] " + msg)
+        raise AssertionError(f"[n_max={n_max}, weyl] " + msg)
 
 
 @pytest.mark.parametrize("n_max", [1, 2])
@@ -384,7 +383,7 @@ def test_J_preserves_O_full_dirac(n_max):
         for i, res in failures[:3]:
             msg += f"  generator {i} (label={op_sys.multiplier_labels[i]}) "
             msg += f"residual {res:.3e}\n"
-        print(f"\n[n_max={n_max}, full_dirac] " + msg)
+        raise AssertionError(f"[n_max={n_max}, full_dirac] " + msg)
 
 
 # ---------------------------------------------------------------------------
