@@ -29,6 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Code dimension: sensitivity 2/2 (S2 tautological test, S3 false-positive test), specificity 3/3 → PASS (real corpus tests sound).
 - Synthesis dimension: sensitivity 2/2 (S8 zombie, S9 status-overstatement), specificity 4/4 → calibrated; 2 verified material defects → FAIL (now remediated).
 
+### Run #4 — first full all-dimensions certification (on the fixed trunk)
+
+- 8 seeds (≥1 per gating dimension), 7-agent panel + deterministic layer. **Sensitivity 8/8, specificity 0 false positives.** The synthesis dimension **re-certified** the κ/K fixes (confirmed clean; only the planted S8/S9 flagged).
+- **The gate caught its own blind spot again:** the first `claims-reviewer(P32)` MISSED planted S5 ("K is now derived as a theorem") — it *sampled* K-appearances and was fooled by a self-contradicting hedge → run went **INCONCLUSIVE** (not a false PASS). Remediated per step 7 (fix prompt + re-run): a sharpened reviewer that enumerates-and-quotes *every* K-sentence caught S5 exactly. Trunk → **PASS** across all five dimensions.
+- **Durable hardening:** `.claude/agents/claims-reviewer.md` step 5 now requires exhaustive enumerate-and-quote of every K-sentence + "a self-contradicting hedge doesn't cure a tripwire" (the run-#4 analog of the run-#1 → C11 title lesson). A deterministic K-candidate flagger is offered as the stronger future option.
+- Memo: `debug/sprint_qa_all_dimensions_memo.md`.
+
 ## [4.16.1] - 2026-06-14
 
 ### Summary

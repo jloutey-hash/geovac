@@ -1,20 +1,30 @@
 {
   "target": "trunk",
-  "run": "1 (inaugural)",
+  "run": 4,
+  "date": "2026-06-15",
   "worktree": "C:/Users/jlout/Desktop/geovac-qa-seed-trunk",
-  "seeds": [
-    {"id": "S1", "class": "fabricated-external-citation", "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex", "loc": "~1687", "change": "Gaudillot-Estrada/vS arXiv 2310.14733 -> 2401.09988 (wrong ID, real paper is 2310.14733)", "expected_catcher": "citation-reviewer"},
-    {"id": "S4", "class": "kappa-style-overclaim", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~695", "change": "kappa 1/16 'coincides with' -> 'is rigorously derived from' a conformal-geometry quantity", "expected_catcher": "claims-reviewer"},
-    {"id": "S5", "class": "hard-prohibition-K (S13.5)", "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex", "loc": "~5527", "change": "K=pi(B+F-Delta) 'Observation (not a conjecture or derivation)' -> 'now derived as a theorem'", "expected_catcher": "claims-reviewer"},
-    {"id": "S6", "class": "discrete-vs-continuum", "file": "papers/group3_foundations/paper_1_spectrum.tex", "loc": "~346", "change": "inserted 'the discrete graph Laplacian directly produces the exact -(n^2-1) spectrum'", "expected_catcher": "claims-reviewer"},
-    {"id": "S7", "class": "stale-internal-title", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~793", "change": "Paper 0 cited by stale title 'The Geometric Atom: Quantum State Space as a Packing Problem' (real: 'Angular Momentum as Information Geometry...')", "expected_catcher": "claims-reviewer"}
+  "worktree_branch": "qa-seed-trunk-4",
+  "base_commit": "cea711f",
+  "purpose": "First FULL all-dimensions /qa run under the hardened skill (v4.16.2): code + paper-claims + external-citations + synthesis + deterministic, all in one invocation. Re-certifies the trunk after the run-#3 synthesis fixes (kappa->Observation, K->Observation).",
+  "note": "BLIND ANSWER KEY. Reviewers must NOT see this. Seeds live only in the worktree, removed at run end. 8 planted defects (>=1 per gating dimension) + controls. The genuine kappa/K synthesis content is now FIXED at cea711f and must come back CLEAN (only S8/S9 should be flagged in the synthesis).",
+  "planted_defects": [
+    {"id": "S1", "dimension": "citation", "class": "wrong external arXiv ID", "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex", "loc": "~1687", "expected_catcher": "citation-reviewer(P38)", "criterion": "C4"},
+    {"id": "S2", "dimension": "code", "class": "tautological test", "file": "tests/test_paper7_vee_s3.py", "loc": "test_f0_1s1s_exact (I hardcoded to 5pi/32, _integral never called)", "expected_catcher": "code-reviewer(P7)", "criterion": "C2"},
+    {"id": "S3", "dimension": "code", "class": "false-positive test", "file": "tests/test_paper1_rydberg.py", "loc": "test_su11_number_operator (N built by hand on diagonal, commutator never formed)", "expected_catcher": "code-reviewer(P1)", "criterion": "C2"},
+    {"id": "S4", "dimension": "claims-prose", "class": "kappa overclaim", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~695 (coincides -> rigorously derived)", "expected_catcher": "claims-reviewer(P7)", "criterion": "C8"},
+    {"id": "S5", "dimension": "claims-prose", "class": "K hard-prohibition", "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex", "loc": "~5532 (Observation -> derived as a theorem)", "expected_catcher": "claims-reviewer(P32)", "criterion": "C5"},
+    {"id": "S7", "dimension": "deterministic", "class": "stale internal title", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~793 (Paper 0 cited by stale title)", "expected_catcher": "check_internal_titles.py", "criterion": "C11"},
+    {"id": "S8", "dimension": "synthesis", "class": "zombie/descoped (withdrawn Paper 45 K+ theorem)", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~693 wedge-KMS", "expected_catcher": "claims-reviewer(synthesis)", "criterion": "C9"},
+    {"id": "S9", "dimension": "synthesis", "class": "status overstatement (cosmic-Galois conditional -> unconditional)", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~1053", "expected_catcher": "claims-reviewer(synthesis)", "criterion": "C9/C3"}
   ],
   "known_good_controls": [
-    {"id": "KG1", "paper": "Paper 7", "claim": "c^2(4,3)=1/40=Delta via two independent routes (genuine bridge, distinct from kappa)", "must_not_flag_material": true},
-    {"id": "KG2", "paper": "Paper 1", "claim": "[T+,L+]=0 bit-exact", "must_not_flag_material": true},
-    {"id": "KG3", "paper": "Paper 32", "claim": "Connes axiom audit with passing negative controls", "must_not_flag_material": true},
-    {"id": "KG4", "paper": "Paper 38", "claim": "Camporesi-Higuchi 1996 + van Suijlekom 2005.08544 citations (correct, unseeded)", "must_not_flag_material": true}
+    {"id": "KG1", "dimension": "code", "claim": "P7 1s2s/2s2s genuine integrals + 18 Fock proofs; P1 test_rydberg_levels_from_algebra genuine commutator -- must NOT flag", "must_not_flag_material": true},
+    {"id": "KG2", "dimension": "claims-prose", "claim": "P7 Delta=1/40 two-route genuine bridge; P32 WH1 PROVEN scoped to vS state-space GH; P0 prose clean -- must NOT flag", "must_not_flag_material": true},
+    {"id": "KG3", "dimension": "citation", "claim": "P38 Camporesi-Higuchi 1996 + vS + Wen-Avery cites correct -- must NOT flag", "must_not_flag_material": true},
+    {"id": "KG4", "dimension": "synthesis", "claim": "angular sparsity potential-independent; Bargmann-Segal pi-free; dual-description; AND the now-FIXED kappa=Observation + K=Observation -- must NOT flag", "must_not_flag_material": true}
   ],
-  "panel": ["citation-reviewer(Paper38)", "claims-reviewer(Paper1)", "claims-reviewer(Paper7)", "claims-reviewer(Paper32)"],
-  "scope_note": "Run #1 representative panel: prose + external-citation dimensions. code-reviewer / C1-C2 (test-backing) NOT exercised this run -> reported in honest ceiling."
+  "panel": ["code-reviewer(P7)", "code-reviewer(P1)", "claims-reviewer(P7)", "claims-reviewer(P32)", "claims-reviewer(P0)", "citation-reviewer(P38)", "claims-reviewer(group3_synthesis)"],
+  "deterministic_layer": "check_internal_titles.py (C11, caught S7) + synthesis compile (C10).",
+  "code_coverage_note": "P32/P38 code-backing (forced-count 260/128, action-seminorm) verified clean in run #3 today on identical test files (unchanged at cea711f); not re-dispatched to bound budget.",
+  "scope_note": "Expect PASS: all dimensions calibrated + genuine content clean (kappa/K fixed, titles fixed, H1 Yukawa fixed, tests sound, citations grounded)."
 }
