@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.16.3] - 2026-06-15
+
+### Summary
+
+**Deterministic K-label screen — the C5 hard-prohibition backstop (the C11 analog for the K-tripwire).** After run #4 showed an LLM `claims-reviewer` can sample-and-miss a K-violation, this adds a script-backed screen so the §13.5 K = π(B+F−Δ) prohibition no longer depends on a reviewer's exhaustiveness. Building it surfaced a real finding: the **2026-06-14 conjecture→Observation downgrade reached CLAUDE.md §13.5 and the trunk but was never swept into the non-trunk papers** — 24 stale "conjectural" K-labels remain across 8 papers. Root cause is stale *papers* lagging a correctly-updated *rule* (CLAUDE.md verified clean), not a stale rule; `paper_57:446` ("preserved as conjectural per §13.5") is the self-undermining smoking gun.
+
+### Added
+
+- **`debug/qa/check_k_label.py`** — deterministic K-label screen. Finds every prohibited tier word ("derived/a theorem/conjectural/conjecture/proven/prediction") that shares a CLAUSE with a K = π(B+F−Δ) reference and clears the compliant patterns (negation / hypothetical / future-goal / non-selection), reporting anything left as SUSPECT. Same-clause binding + cross-ref/font stripping kill the proximity false positives. Scope: `--gate <branch-folder>` gates a branch (default = trunk); `--gate-corpus` gates everything. A backstop, not a replacement — it can't anchor a bare "K" without the rule name in-clause, so the `claims-reviewer` still enumerates.
+- **`tests/test_k_label_check.py`** — regression: trunk-gate exits 0 + the classifier discriminates (run-#4 seed → SUSPECT; negation/hypothetical/future-goal/non-selection → cleared).
+
+### Changed
+
+- **`docs/qa/trunk.done.md`** — new criterion **C12 (K-label cleanliness, deterministic)**; each branch's `.done.md` inherits it scoped to the branch (`check_k_label.py --gate <branch-folder>`). Review-dimensions deterministic row now C10/C11/C12.
+- **`.claude/commands/qa.md`** — step 1 runs the K-label screen alongside the title check (trunk gate; non-trunk SUSPECT is advisory audit for the branch sweep).
+
+### Finding (advisory, for the branch sweep)
+
+- 24 stale "conjectural / conjecture" K-labels across **papers 18, 24, 25, 30, 31, 34, 35, 57** — cleared per branch as each is QA'd; C12 blocks a branch's "done" until clean. NOT swept in this release (deferred to the active branch-by-branch sweep).
+
 ## [4.16.2] - 2026-06-15
 
 ### Summary

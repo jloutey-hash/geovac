@@ -18,7 +18,9 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
 
 ## Protocol
 
-1. **Load & freeze the criteria.** Read `docs/qa/<target>.done.md`, quote it back, and confirm with the PI that nothing has been added or relaxed for this run. The goalposts are fixed before any review begins. **Run any DETERMINISTIC checks the criteria name** (e.g. internal-title consistency via `debug/qa/check_internal_titles.py`) — string-comparison criteria are certified by a script, more reliably than an LLM reviewer (the run-#1 lesson); the dispatched reviewers cover only the *judgment* criteria.
+1. **Load & freeze the criteria.** Read `docs/qa/<target>.done.md`, quote it back, and confirm with the PI that nothing has been added or relaxed for this run. The goalposts are fixed before any review begins. **Run the DETERMINISTIC checks the criteria name** — they certify their classes more reliably than an LLM reviewer (the run-#1 / run-#4 lessons), leaving the dispatched reviewers to *judgment* calls:
+   - **C11 internal-title consistency** — `debug/qa/check_internal_titles.py` (exact string match → clean PASS/FAIL).
+   - **C5 K-label backstop** — `debug/qa/check_k_label.py` (FAILs on any SUSPECT K-tier assertion in the gated **trunk** scope; the **AUDIT** list it prints is advisory non-trunk drift, surfaced for a PI sweep decision, and does **not** fail the gate). This is a *backstop*, not a replacement: the K-prohibition is semantic, so the `claims-reviewer` still enumerates K-sentences (the screen can't anchor a bare "K" without the rule name in-clause).
 
 2. **Build an isolated seeded copy.** `git worktree add ../geovac-qa-seed-<target> -b qa-seed-<target>` (or reuse a temp branch). **Seeds NEVER touch the real corpus** — all planting happens in the worktree, which is deleted at the end.
 
