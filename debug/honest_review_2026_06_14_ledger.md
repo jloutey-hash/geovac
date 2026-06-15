@@ -204,3 +204,19 @@ Full chronicle: CHANGELOG [4.14.2]. Closes the Paper-2-title flag above + retitl
 **Compile:** P1/P2/P7 GATE PASS / 0 undefs. Non-trunk cascade papers got error-neutral bibitem text edits; PDFs + pre-existing debt deferred to branch QA.
 
 **Hygiene flagged:** P7 bibitem cites P0 by a stale title — corpus-wide internal cross-ref-title audit = natural follow-up.
+
+---
+
+## Corpus-wide internal-title audit (2026-06-14, v4.15.0)
+
+Closes the flag above. Full chronicle: CHANGELOG [4.15.0].
+
+**Method:** authoritative title map from every `\title{}` → 6 per-branch editor agents (opus; group2, group3, group5, group1, group4+6, synthesis), each verbatim-matching internal GeoVac citations to the map → PM verification. **~264 citation-title fixes across 51 source files.**
+
+**Drift found (systematic):** Paper 0 cited 3 stale ways ("Quantum State Space as a Packing Problem", "Geometric Packing and the Universal Constant", "The Geometric Packing Construction"); Paper 1/2/7 each had variants; Paper 38 cited "SU(2)/Latrémolière propinquity convergence" in ~10 places → "State-space GH convergence…". paper_23 Zenodo-style cites + paper_geovac_fci_refs.bib `title=` fixed; P2 "[Conjectural.]"→"[Observation.]".
+
+**Verification:** spot-check — the 5 highest-signal stale strings now only in house-style files + archive. 1-pass error check on all 47 edited papers: **0 errors introduced**, trunk all clean; 7 papers show PRE-EXISTING errors (body arrays, revtex \title quirk, missing figures, an unescaped `S^5` in paper_25 body prose, undefined `\Z`), none in any bibliography.
+
+**Held for PI (not touched):** (1) propinquity cluster 39/40/45–49 — own `\title`s say "propinquity", citations left pending a descope retitle decision (also: P32 cites P39 as "state-space GH…S³×S³" from the citation pass, mismatching P39's current propinquity title); (2) house-style capsule files (field_guide, paper_55, paper_57, group1_synthesis); (3) live cites of archived papers 5/6/10/21; (4) ~15 "Paper N:" descriptor-format stragglers (P14/23/25), entangled with (2).
+
+**PDFs deferred** (source-only commit); refresh at branch QA.

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.15.0] - 2026-06-14
+
+### Summary
+
+**Corpus-wide internal-title audit.** Built an authoritative title map from every paper's actual `\title{}`, then ran one editor agent per branch (6 opus agents) to make every internal GeoVac citation name the cited paper by its **current real title, verbatim**. The drift was systematic — the foundational papers were each cited by several *different* stale titles (Paper 0 alone appeared as "The Geometric Atom: Quantum State Space as a Packing Problem," "Geometric Packing and the Universal Constant," and "The Geometric Packing Construction"; Paper 1, 2, 7 each had their own variants), and Paper 38 was cited as "SU(2)/Latrémolière propinquity convergence" in ~10 places. **~264 citation-title corrections across 51 source files.**
+
+### Changed
+
+- **~264 internal-citation titles normalized to verbatim `\title`** across all six groups + the group3 synthesis. Highlights: every stale Paper 0 / 1 / 2 / 7 citation corrected corpus-wide; Paper 38 "SU(2)/Latrémolière propinquity convergence on the Camporesi–Higuchi spectral triple" → "State-space Gromov–Hausdorff convergence of truncated Camporesi–Higuchi spectral triples on $S^3$" (~10 cites); `paper_23_nuclear_shell`'s abbreviated "technical report, Zenodo" cites normalized; `paper_geovac_fci_refs.bib` `title=` fields fixed; the stale "[Conjectural.]" tag on Paper 2 → "[Observation.]" in `paper_23`.
+
+### Notes
+
+- **Method:** authoritative title map (from each `\title{}`) → 6 per-branch editor agents (verbatim-match, citation-format-preserving) → PM verification. Spot-check: the 5 highest-signal stale strings ("Quantum State Space…", "SU(2) Propinquity… Camporesi", "Geometric Packing and the Universal Constant", "Spectral Graph Theory Foundations…", "…from the Hopf Bundle…") now appear only in deliberate house-style files + the archive. 1-pass LaTeX error check on all 47 edited papers: **zero errors introduced by the audit** — all trunk papers clean; the 7 papers showing errors have **pre-existing** issues (body `tabular`/array specs, a revtex `\title` quirk, missing figure files, an unescaped `$S^5$` in body prose, an undefined `\Z`), none in the bibliography.
+- **Held for PI decision (not touched):** (1) the **propinquity cluster** (Papers 39/40/45–49) — their own `\title`s still say "propinquity"; citations of them left untouched pending a descope retitle decision; (2) **house-style files** (`geovac_field_guide`, `paper_55`, `paper_57`, `group1_operator_algebras_synthesis`) use deliberate short-capsule citations, left as-is; (3) **live cites of archived papers** (5/6/10/21); (4) **~15 stragglers** in non-standard "Paper N:" descriptor formats (Papers 14/23/25 in a few spots; partly entangled with the house-style decision).
+- **PDFs deferred:** source-only commit (`.tex`/`.bib`). The 51 papers' PDFs refresh at their branch QA; many non-trunk papers carry pre-existing compile debt (surfaced by the error check) unrelated to this audit.
+
 ## [4.14.2] - 2026-06-14
 
 ### Summary
