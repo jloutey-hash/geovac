@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.16.2] - 2026-06-15
+
+### Summary
+
+**`/qa` all-dimensions enforcement + the run-#3 that motivated it.** Run #2 reported a trunk PASS while exercising only 2 of the gate's review dimensions (claims + citations); the code (C1–C2) and synthesis (C9) dimensions were unexercised and footnoted in the "honest ceiling." PI flagged this. Running the missing dimensions (run #3) found the code dimension **clean** but the **synthesis dimension FAIL** — 2 real stale-label defects the paper-only runs structurally could not see. The skill is now hardened so a single `/qa` run exercises every dimension and an unexercised gating dimension forces **INCONCLUSIVE, never PASS**.
+
+### Changed — the gate (`.claude/commands/qa.md`, `docs/qa/`)
+
+- **`qa.md`** — step 4 now names the review dimensions (code/test-backing, paper-claims, external-citations, synthesis-faithfulness, deterministic), their reviewer types, and the criteria each gates, with a hard requirement that **all run in one invocation** (no early termination on a clean dimension). Step 7 emits a **per-dimension scorecard** with an **AND roll-up**. New Hard rule: "All dimensions every run" + unexercised gating dimension ⇒ INCONCLUSIVE. Step 3 + `seed_defects.md` now require **per-dimension seed coverage** so no gating dimension is left uncalibrated.
+- **`docs/qa/trunk.done.md`** — added a **Review-dimensions table** (criterion → dimension → reviewer) and the all-dimensions-mandatory rule; change log records the run-#3 finding.
+
+### Changed — group3 foundations synthesis (the run-#3 material defects, fixed)
+
+- **κ = −1/16** recast from "derivable from the Fock conformal projection rather than fitted" → an **Observation** (the value *coincides* with the geometric 1/16; the geometric quantity is a real computation, but no bridge derives κ's calibration role from it — aligns with Paper 7 §III). Failing criterion C8.
+- **K = π(B + F − Δ)** relabeled from **"conjectural"** → **"an Observation"** at all 4 sites (intro, open-questions ×2, conclusion). "conjectural" became a prohibited K label at the 2026-06-14 conjecture→Observation downgrade (§13.5). Failing criterion C5 (hard prohibition).
+- Two nits: six-vs-five Coulomb/HO layer count → **six** (matches the synthesis's own §6 enumeration + CLAUDE.md); `λ_n = −(n²−1)` reattributed from "graph eigenvalues" → "**S³** eigenvalues" (C6 precision). Synthesis recompiles ERRORS=0.
+
+### Calibration (run #3)
+
+- Code dimension: sensitivity 2/2 (S2 tautological test, S3 false-positive test), specificity 3/3 → PASS (real corpus tests sound).
+- Synthesis dimension: sensitivity 2/2 (S8 zombie, S9 status-overstatement), specificity 4/4 → calibrated; 2 verified material defects → FAIL (now remediated).
+
 ## [4.16.1] - 2026-06-14
 
 ### Summary

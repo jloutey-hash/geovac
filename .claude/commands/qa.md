@@ -22,13 +22,15 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
 
 2. **Build an isolated seeded copy.** `git worktree add ../geovac-qa-seed-<target> -b qa-seed-<target>` (or reuse a temp branch). **Seeds NEVER touch the real corpus** — all planting happens in the worktree, which is deleted at the end.
 
-3. **Plant calibration controls (blind).** From `docs/qa/seed_defects.md`, plant K (≈4–6) *realistic* defects from our actual §3 error history (fabricated arXiv ID, circular/tautological test, κ-style overclaim, stale-title drift, hard-prohibition touch, …) into the worktree copy of the target. Also designate M (≈4–6) **known-good** claims that are verified correct and must NOT be flagged material. Record the answer key — {file, location, defect-class, expected-catcher} — in `debug/qa/<target>_seed_key.json`. The reviewers must be blind to which items are seeded.
+3. **Plant calibration controls (blind).** From `docs/qa/seed_defects.md`, plant K (≈4–6) *realistic* defects from our actual §3 error history (fabricated arXiv ID, circular/tautological test, κ-style overclaim, stale-title drift, hard-prohibition touch, …) into the worktree copy of the target. **Cover every gating dimension:** plant at least one seed catchable by *each* dimension's reviewer type (a code-defect for `code-reviewer`, a prose-defect for `claims-reviewer`, a citation-defect for `citation-reviewer`, a synthesis-defect for the synthesis `claims-reviewer`), so no dimension that gates the verdict goes uncalibrated this run. Also designate M (≈4–6) **known-good** claims that are verified correct and must NOT be flagged material. Record the answer key — {file, location, defect-class, expected-catcher} — in `debug/qa/<target>_seed_key.json`. The reviewers must be blind to which items are seeded.
 
-4. **Dispatch N independent reviewers (fresh, blind), pointed at the worktree.** One of each relevant type per paper/module:
-   - **`code-reviewer`** — claim ↔ test ↔ code; does each test genuinely *prove* its claim (not tautological / false-positive / weaker than prose)?
-   - **`claims-reviewer`** — papers + synthesis prose: does any claim assert more than its backing? does a synthesis faithfully reflect its papers?
-   - **`citation-reviewer`** — external citations resolve and say what we attribute.
-   Each reviews **against the pre-registered criteria**, classifies findings MATERIAL vs NIT, and attaches a counterfactual to each MATERIAL finding ("if fixed, would a *target result* change?"). They are fresh agents that never saw each other or the discovery-mode rationale (§9 QA principle 2).
+4. **Dispatch the reviewers across EVERY dimension — fresh, blind, pointed at the worktree.** The target's criteria partition into independent **review dimensions**, and a single `/qa` run MUST exercise *all* of them in one invocation. **Passing one dimension never excuses skipping another, and the run does not terminate early when a dimension comes back clean** — the dimensions are independent axes, not sequential gates, so you want the full defect picture from all of them every run. For the trunk the dimensions, their reviewer types, and the criteria they gate are:
+   - **Code / test-backing** (C1–C2) — **`code-reviewer`**, one per paper that has backing tests: claim ↔ test ↔ code; *RUN the tests*; does each genuinely *prove* its claim (not tautological / false-positive / weaker than prose)?
+   - **Paper claims / prose** (C3, C5, C6, C8) — **`claims-reviewer`**, one per paper: does any claim assert more than its backing? is the tier inline? are the hard prohibitions intact?
+   - **External citations** (C4) — **`citation-reviewer`**, one per paper: do external cites resolve and say what we attribute?
+   - **Synthesis faithfulness** (C9) — **`claims-reviewer`**, one on the branch synthesis: zombie/descoped claims? status overstatement? faithful to the papers it summarizes? (This is a *separate* dispatch from the per-paper claims review — the synthesis is its own document.)
+   - **Deterministic** (C10 compiles, C11 internal titles) — the scripts in step 1, not an LLM reviewer.
+   Each LLM reviewer reviews **against the pre-registered criteria**, classifies findings MATERIAL vs NIT, and attaches a counterfactual to each MATERIAL finding ("if fixed, would a *target result* change?"). They are fresh agents that never saw each other or the discovery-mode rationale (§9 QA principle 2). **If a gating dimension cannot be exercised this run, the target verdict is INCONCLUSIVE — never PASS (step 7).**
 
 5. **Score calibration — certify the reviewers (against the answer key).**
    - **Sensitivity:** fraction of planted defects the panel collectively caught. A planted class no reviewer caught ⇒ the panel is *blind to that class*.
@@ -37,10 +39,12 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
 
 6. **Materiality + convergence on the genuine findings.** Set aside findings at seed/control locations. For the rest, the PM **verifies every MATERIAL finding against primary text/code before accepting it** (§9 reconcile rule). Converge: take the union of *verified* material findings across the independent reviewers.
 
-7. **Emit the verdict.**
-   - **PASS** — panel calibrated (caught the plants, zero false positives on controls) **and** zero verified material defects on the genuine content **and** independent reviewers converged. *Trustworthy clean.*
-   - **FAIL** — panel calibrated **and** ≥1 verified material defect. *Target not done* — list them with the failing criterion.
-   - **INCONCLUSIVE** — panel **not** calibrated (missed planted defects, or flagged known-good as material). *The verdict is untrustworthy this run.* Report which calibration check failed, fix the reviewer prompt/agent, and re-run. Do **not** report PASS or FAIL.
+7. **Emit the verdict — per dimension, then rolled up (AND across dimensions).** Score *each* dimension separately (was it exercised? calibrated? clean?), then combine. The target's verdict is the AND over all gating dimensions:
+   - **PASS** — *every* gating dimension was **exercised**, **calibrated** (caught its plants, zero false positives on its controls), and **clean** (zero verified material defects), and independent reviewers converged. *Trustworthy clean across all dimensions.*
+   - **FAIL** — every gating dimension calibrated **and** ≥1 verified material defect in *any* dimension. *Target not done* — list each defect with its **dimension** and failing criterion.
+   - **INCONCLUSIVE** — any gating dimension was **not exercised**, *or* was exercised but **not calibrated** (missed its plants, or flagged a known-good control). *The verdict is untrustworthy this run.* Name the dimension and what failed. **An unexercised gating dimension is INCONCLUSIVE — never silently downgraded to a "PASS on the exercised dimensions" with a ceiling note.** Fix and re-run.
+
+   Report the verdict as a **per-dimension scorecard** (dimension → exercised / calibrated / clean) plus the roll-up, so the PI sees which axes actually carried the verdict and which (if any) forced INCONCLUSIVE.
 
 8. **Clean up.** `git worktree remove` the seeded copy. Confirm no seed reached the real corpus.
 
@@ -57,3 +61,4 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
 - Pre-registered criteria are **frozen before** the review — no goalpost-moving in either direction.
 - Seeds live only in the worktree; never commit/leak them; always remove the worktree.
 - A reviewer's verdict is trusted only **after** it passes calibration (caught the plants, passed the controls). An uncalibrated panel ⇒ INCONCLUSIVE, never PASS.
+- **All dimensions every run.** One `/qa` run exercises *every* review dimension the criteria reference — code/test-backing, paper-claims, citations, **and** synthesis — in a single invocation. Dimensions are independent: a clean one never short-circuits another, the run never stops early on a pass, and an **unexercised gating dimension forces INCONCLUSIVE, not PASS** (the run-#2 lesson: a "PASS on the exercised dimensions" hid real defects in the two dimensions that were skipped). The verdict is the AND across all dimensions.

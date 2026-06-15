@@ -24,9 +24,24 @@ A finding is **MATERIAL** iff fixing it would change a result's truth value, a c
 - **C10 — Compiles.** Each trunk paper compiles with ERRORS=0 (pre-existing non-blocking undefined-citation warnings may be noted but are not MATERIAL unless they break a load-bearing reference).
 - **C11 — Internal-citation titles (deterministic).** Every internal GeoVac citation names the cited paper by its current `\title` — certified by the deterministic check `debug/qa/check_internal_titles.py` (exit 0; also `tests/test_internal_title_consistency.py`), **not** by an LLM reviewer. This is the `/qa` run-#1 lesson: title drift is a string-comparison problem, so a script catches it more reliably than a prose reviewer. The descope-pending propinquity cluster (Papers 39/40/45–49) is *flagged*, not failed.
 
+## Review dimensions (all mandatory in a single run)
+
+The criteria above partition into independent **review dimensions**. A `/qa trunk` run must exercise *every* one in one invocation — passing one dimension does **not** excuse skipping another, and an unexercised gating dimension forces **INCONCLUSIVE**, never PASS (the run-#2 lesson: a "PASS on the exercised dimensions" hid the real κ/K defects that live only in the synthesis dimension).
+
+| Dimension | Criteria gated | Reviewer | Notes |
+|---|---|---|---|
+| Code / test-backing | C1, C2 | `code-reviewer` (one per paper with tests) | RUN the tests; does each *prove* its claim? |
+| Paper claims / prose | C3, C5, C6, C8 | `claims-reviewer` (one per paper) | prose ≤ tier; hard prohibitions intact |
+| External citations | C4 | `citation-reviewer` (one per paper) | cites resolve and say what we attribute |
+| Synthesis faithfulness | C9 | `claims-reviewer` (one on the group3 synthesis) | **separate dispatch** from the per-paper claims review |
+| Deterministic | C10, C11 | scripts (`check_internal_titles.py`, compile) | not an LLM reviewer |
+
+The target verdict is the **AND across these dimensions**: PASS only if all are exercised, calibrated, and clean; FAIL if any calibrated dimension has a verified material defect; INCONCLUSIVE if any gating dimension is unexercised or uncalibrated.
+
 ## Coverage honesty
 
-"PASS" means the trunk **survived the calibrated detectors for the defect classes in `docs/qa/seed_defects.md` and the criteria above** — not that it is provably perfect. A `/qa` run names any criterion or defect-class it could not exercise. When a new defect class is discovered (the way §3 dead-ends grow), it is added here and to the seed catalog, and the bar quietly rises.
+"PASS" means the trunk **survived the calibrated detectors for the defect classes in `docs/qa/seed_defects.md` and the criteria above, across all review dimensions** — not that it is provably perfect. A `/qa` run names any criterion or defect-class it could not exercise; an unexercised gating dimension is INCONCLUSIVE, not a footnoted PASS. When a new defect class is discovered (the way §3 dead-ends grow), it is added here and to the seed catalog, and the bar quietly rises.
 
 ## Change log
 - 2026-06-14 — created (co-authored PM + PI) as the first pre-registered `/qa` target.
+- 2026-06-14 — added the **Review dimensions** map + all-dimensions-mandatory rule after `/qa` run #3 found that runs #1–#2 had exercised only the claims + citation dimensions; the code (C1–C2) and synthesis (C9) dimensions, run for the first time in #3, surfaced 2 real synthesis defects (κ "derivable", K "conjectural"). The gate must attempt every dimension every run.

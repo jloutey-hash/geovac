@@ -2,7 +2,7 @@
 
 The defect classes `/qa` plants — blind, on a throwaway worktree, never on the real corpus — to **measure whether this run's reviewer panel can actually detect dirt** before its verdict is trusted. Each class is drawn from GeoVac's *real* §3 error history, so catching it is genuinely informative about catching the real thing. Every class is **MATERIAL** by construction (these are exactly the things that must be caught).
 
-**Per run:** plant a *random subset* of K≈4–6 classes (vary which, so reviewers can't pattern-learn the set), at realistic locations, blind. Also designate M≈4–6 **known-good controls** — verified-correct claims that must NOT be flagged material. Record the answer key in `debug/qa/<target>_seed_key.json`.
+**Per run:** plant a *random subset* of K≈4–6 classes (vary which, so reviewers can't pattern-learn the set), at realistic locations, blind. **Cover every gating dimension:** the subset must include at least one class catchable by each reviewer type in play this run — `code-reviewer` (S2/S3), `claims-reviewer` paper-prose (S4/S5/S6/S9), `claims-reviewer` synthesis (S8/S9), `citation-reviewer` (S1), deterministic (S7) — so no dimension that gates the verdict is left uncalibrated (the run-#3 lesson: the code and synthesis dimensions had never been seeded until they were run together). Also designate M≈4–6 **known-good controls** — verified-correct claims that must NOT be flagged material. Record the answer key in `debug/qa/<target>_seed_key.json`.
 
 **Scoring:** sensitivity = planted classes caught / planted (a class no reviewer caught ⇒ panel blind to it ⇒ INCONCLUSIVE). specificity = 1 − (known-good controls flagged material / controls).
 
