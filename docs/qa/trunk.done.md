@@ -22,6 +22,7 @@ A finding is **MATERIAL** iff fixing it would change a result's truth value, a c
 - **C8 — Headline constants honest.** κ = −1/16 is an **Observation** (coincidence, no bridge), not a derivation; 4/π is **derived (numerics-pinned)**, not asserted as full symbolic proof; the Forced-Count moduli chain is stated at its true full-axiom count, not the matter-sector subcount.
 - **C9 — Synthesis faithful.** The group3 foundations synthesis traces every claim to a paper that supports it, carries no descoped/withdrawn (zombie) result, and does not overstate convergence between papers or misstate a paper's status.
 - **C10 — Compiles.** Each trunk paper compiles with ERRORS=0 (pre-existing non-blocking undefined-citation warnings may be noted but are not MATERIAL unless they break a load-bearing reference).
+- **C11 — Internal-citation titles (deterministic).** Every internal GeoVac citation names the cited paper by its current `\title` — certified by the deterministic check `debug/qa/check_internal_titles.py` (exit 0; also `tests/test_internal_title_consistency.py`), **not** by an LLM reviewer. This is the `/qa` run-#1 lesson: title drift is a string-comparison problem, so a script catches it more reliably than a prose reviewer. The descope-pending propinquity cluster (Papers 39/40/45–49) is *flagged*, not failed.
 
 ## Coverage honesty
 

@@ -18,7 +18,7 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
 
 ## Protocol
 
-1. **Load & freeze the criteria.** Read `docs/qa/<target>.done.md`, quote it back, and confirm with the PI that nothing has been added or relaxed for this run. The goalposts are fixed before any review begins.
+1. **Load & freeze the criteria.** Read `docs/qa/<target>.done.md`, quote it back, and confirm with the PI that nothing has been added or relaxed for this run. The goalposts are fixed before any review begins. **Run any DETERMINISTIC checks the criteria name** (e.g. internal-title consistency via `debug/qa/check_internal_titles.py`) — string-comparison criteria are certified by a script, more reliably than an LLM reviewer (the run-#1 lesson); the dispatched reviewers cover only the *judgment* criteria.
 
 2. **Build an isolated seeded copy.** `git worktree add ../geovac-qa-seed-<target> -b qa-seed-<target>` (or reuse a temp branch). **Seeds NEVER touch the real corpus** — all planting happens in the worktree, which is deleted at the end.
 

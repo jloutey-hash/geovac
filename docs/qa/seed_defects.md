@@ -16,7 +16,7 @@ The defect classes `/qa` plants — blind, on a throwaway worktree, never on the
 | S4 | **κ-style overclaim — "derived" where it only coincides** | change a paper line so a *matched* value reads "derived from …" / "SYMBOLIC PROOF" | `claims-reviewer` |
 | S5 | **Hard-prohibition touch (§13.5)** | relabel K = π(B+F−Δ) as "conjecture"/"derived", or drop its Observation tag | `claims-reviewer` (tripwire) |
 | S6 | **Discrete-vs-continuum imprecision** | insert "the discrete graph *produces* the −(n²−1) spectrum" | `claims-reviewer` |
-| S7 | **Stale internal-title drift** | cite a GeoVac paper by an out-of-date title (e.g. Paper 0 as "Quantum State Space as a Packing Problem") | `claims-reviewer` / `code-reviewer` |
+| S7 | **Stale internal-title drift** | cite a GeoVac paper by an out-of-date title (e.g. Paper 0 as "Quantum State Space as a Packing Problem") | **deterministic** — `debug/qa/check_internal_titles.py` (NOT an LLM reviewer; the run-#1 lesson) |
 | S8 | **Zombie / descoped claim in a synthesis** | have the synthesis assert a withdrawn result (e.g. Paper 45's retracted K⁺ propinquity theorem) as standing | `claims-reviewer` |
 | S9 | **Status overstatement of a keystone** | upgrade a CONDITIONAL/PANEL-VERIFIED result to "PROVEN/unconditional" in the prose | `claims-reviewer` |
 

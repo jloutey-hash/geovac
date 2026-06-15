@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.16.1] - 2026-06-14
+
+### Summary
+
+**`/qa` run-#1 punch-list closed.** The two items the inaugural `/qa trunk` surfaced — the internal-title blind spot and the real Paper 32 H1 Yukawa defect — are fixed, and the title class is moved to a deterministic check (the run-#1 design lesson: title drift is a string-comparison problem, so a script catches it more reliably than a prose reviewer).
+
+### Added
+
+- **`debug/qa/check_internal_titles.py`** — deterministic internal-title consistency check: builds a title map from every `\title{}`, verifies every internal GeoVac citation matches the cited paper's current title (handles LaTeX geometry macros, `{\large}` subtitles, `\\` linebreaks, the "Papers 8–9" plural; excludes house-style capsule files + archived papers; flags the descope-pending propinquity cluster). **Validating it against the v4.15.0-audited corpus caught 2 real stale cites the LLM audit had missed** (paper_14 citing Papers 25 & 29 by old titles).
+- **`tests/test_internal_title_consistency.py`** — regression wrapper, so title drift is caught on every test run, not just at `/qa` time.
+
+### Changed
+
+- **Paper 14** — Papers 25 & 29 citations corrected to their real titles (the run-#1 / reduced-map stragglers).
+- **Paper 32** — the H1 Yukawa theorem's "128" relabeled the **matter-sector** parameter count, cross-referencing the Forced-Count twin (full-axiom moduli dimension = 260); the Yukawa non-selection conclusion is noted independent of the count. This is the real material defect `/qa` run #1 surfaced.
+- **`docs/qa/trunk.done.md`** — new criterion **C11** (internal-title consistency = deterministic). **`docs/qa/seed_defects.md`** — seed S7 reassigned from the LLM panel to the script. **`.claude/commands/qa.md`** — the gate now runs deterministic checks for string-comparison criteria, leaving the LLM reviewers to judgment calls.
+
+### Notes
+- The "criteria file must be in the worktree" lesson from run #1 is auto-resolved by committing the `/qa` tooling (a worktree is a checkout of HEAD).
+
 ## [4.16.0] - 2026-06-14
 
 ### Summary
