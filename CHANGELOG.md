@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.16.0] - 2026-06-14
+
+### Summary
+
+**The `/qa` certification gate — built + inaugural run.** A reviewer tasked with "find problems" always finds problems, so a "clean" can never be *earned* and a "dirty" can never be *trusted* — a fault-hunt is an activity, not a test. The `/qa` gate converts it into a test with discriminating power (pre-registered criteria + materiality grading + per-run **blind calibration controls** + convergence) and returns a **three-way PASS / FAIL / INCONCLUSIVE** verdict that distinguishes *"target not done"* from *"reviewer not trustworthy."* It is **PI-invoked only** — a genuine-trigger command with no memory rule, so the PI controls timing.
+
+### Added
+
+- **`.claude/commands/qa.md`** — the `/qa <target>` gate protocol: load pre-registered criteria → build an isolated git worktree → plant blind calibration defects → dispatch independent reviewers → score their detection power → emit PASS / FAIL / INCONCLUSIVE → remove the worktree. Hard rule: PM never self-triggers.
+- **`.claude/agents/claims-reviewer.md`** — adversarial prose/synthesis overclaim reviewer (the prose-level companion to `code-reviewer` / `citation-reviewer`).
+- **`docs/qa/trunk.done.md`** — the trunk's pre-registered 10-criterion definition-of-done (C1–C10).
+- **`docs/qa/seed_defects.md`** — 9 seed-defect classes drawn from §3 history (the calibration controls).
+- **CLAUDE.md §13.9b** — `/qa` registered as a genuine PI-trigger (no memory rule), joining `/ahha`, `/sprint-close`, `/release`.
+
+### Notes — inaugural run (`/qa trunk`, run #1) → **INCONCLUSIVE**
+
+- Representative panel (prose + external-citation dimensions): `claims-reviewer` ×3 (Papers 1/7/32) + `citation-reviewer` ×1 (Paper 38); 5 blind seeds + 4 known-good controls in a worktree (discarded after).
+- **Sensitivity 4/5** — caught the fabricated-arXiv-ID, κ-"derived"-overclaim, K-"derived-as-theorem" hard-prohibition, and discrete-graph-"produces"-spectrum seeds; **missed** the stale-internal-title seed. **Specificity 4/4** — zero false positives.
+- **Verdict INCONCLUSIVE** — the missed class means the panel is not fully calibrated, so the gate returned INCONCLUSIVE rather than a false PASS. **The gate caught its own blind spot** — the intended discrimination, surfaced by the per-run seeding (meta-validation alone never would have).
+- **Real trustworthy trunk finding** (panel had 4/4 specificity): Paper 32's H1 Yukawa theorem states "128" as the full forced count with no matter-sector relabel — the parallel Forced-Count theorem got the v4.13.0 correction (full-axiom = 260); the twin did not. Candidate FAIL.
+- **Methodology lessons:** (1) the pre-registered criteria file must be committed/copied into the worktree (it was uncommitted; reviewers fell back to paraphrased criteria); (2) some criteria — internal-title consistency — are better certified by a **deterministic check** (grep) than an LLM reviewer; (3) `code-reviewer` / C1–C2 (test-backing) not exercised this run.
+
+### Pending (before re-run)
+Commit the `/qa` tooling; move internal-title checking to a deterministic check (or add to `code-reviewer`); fix the Paper 32 H1 Yukawa "128" gap + the small Paper 38 citation items; re-run `/qa trunk`.
+
 ## [4.15.0] - 2026-06-14
 
 ### Summary

@@ -1,0 +1,20 @@
+{
+  "target": "trunk",
+  "run": "1 (inaugural)",
+  "worktree": "C:/Users/jlout/Desktop/geovac-qa-seed-trunk",
+  "seeds": [
+    {"id": "S1", "class": "fabricated-external-citation", "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex", "loc": "~1687", "change": "Gaudillot-Estrada/vS arXiv 2310.14733 -> 2401.09988 (wrong ID, real paper is 2310.14733)", "expected_catcher": "citation-reviewer"},
+    {"id": "S4", "class": "kappa-style-overclaim", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~695", "change": "kappa 1/16 'coincides with' -> 'is rigorously derived from' a conformal-geometry quantity", "expected_catcher": "claims-reviewer"},
+    {"id": "S5", "class": "hard-prohibition-K (S13.5)", "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex", "loc": "~5527", "change": "K=pi(B+F-Delta) 'Observation (not a conjecture or derivation)' -> 'now derived as a theorem'", "expected_catcher": "claims-reviewer"},
+    {"id": "S6", "class": "discrete-vs-continuum", "file": "papers/group3_foundations/paper_1_spectrum.tex", "loc": "~346", "change": "inserted 'the discrete graph Laplacian directly produces the exact -(n^2-1) spectrum'", "expected_catcher": "claims-reviewer"},
+    {"id": "S7", "class": "stale-internal-title", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~793", "change": "Paper 0 cited by stale title 'The Geometric Atom: Quantum State Space as a Packing Problem' (real: 'Angular Momentum as Information Geometry...')", "expected_catcher": "claims-reviewer"}
+  ],
+  "known_good_controls": [
+    {"id": "KG1", "paper": "Paper 7", "claim": "c^2(4,3)=1/40=Delta via two independent routes (genuine bridge, distinct from kappa)", "must_not_flag_material": true},
+    {"id": "KG2", "paper": "Paper 1", "claim": "[T+,L+]=0 bit-exact", "must_not_flag_material": true},
+    {"id": "KG3", "paper": "Paper 32", "claim": "Connes axiom audit with passing negative controls", "must_not_flag_material": true},
+    {"id": "KG4", "paper": "Paper 38", "claim": "Camporesi-Higuchi 1996 + van Suijlekom 2005.08544 citations (correct, unseeded)", "must_not_flag_material": true}
+  ],
+  "panel": ["citation-reviewer(Paper38)", "claims-reviewer(Paper1)", "claims-reviewer(Paper7)", "claims-reviewer(Paper32)"],
+  "scope_note": "Run #1 representative panel: prose + external-citation dimensions. code-reviewer / C1-C2 (test-backing) NOT exercised this run -> reported in honest ceiling."
+}
