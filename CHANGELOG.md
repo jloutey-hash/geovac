@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.16.5] - 2026-06-15
+
+### Summary
+
+**C13 — deterministic paper↔test reference integrity.** Closes the loop on the v4.16.4 inline-reference pass: the inline test references the papers now carry must stay honest against the suite and `docs/claim_test_matrix.md`. The real failure mode is a paper citing a renamed/typo'd/archived test, so *existence* is the gate; matrix↔paper coverage and non-trunk stale refs are advisory (the curated matrix tracks fewer tests than papers cite — Paper 32 alone cites ~20 — so a full-membership gate would over-fail).
+
+### Added
+
+- **`debug/qa/check_paper_test_refs.py`** — verifies every test cited inline in a gated paper resolves to a real, live `tests/test_*.py`. Handles LaTeX-escaped `\_`, bare vs `tests/`-prefixed refs, and glob families (`test_qed_*.py` = a family of real tests, not a stale ref). Gate FAILs on MISSING; reports ARCHIVED refs + matrix-coverage gaps + out-of-scope stale refs as advisory. `--gate <branch>` per sweep (default = trunk).
+- **`tests/test_paper_test_refs.py`** — regression: trunk-gate exits 0 + existence classifier discriminates (LIVE / glob / MISSING).
+
+### Changed
+
+- **`docs/qa/trunk.done.md`** — new criterion **C13**; deterministic row now C10/C11/C12/C13. **`.claude/commands/qa.md`** — step 1 runs `check_paper_test_refs.py`.
+
+### Finding (advisory, for the branch sweep)
+
+- `Paper_8_Bond_Sphere_Sturmian.tex:1176` cites `tests/test_harmonic_phase_lock.py`, which does not exist — a stale reference, advisory now, gated when group2 is QA'd (`--gate group2_quantum_chemistry` → FAIL, verified). Trunk is clean (0 missing).
+
 ## [4.16.4] - 2026-06-15
 
 ### Summary

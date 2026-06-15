@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.16.4 (June 15, 2026)
+**Version:** v4.16.5 (June 15, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`/qa` C13 paper↔test reference integrity (2026-06-15, v4.16.5):** Deterministic check `debug/qa/check_paper_test_refs.py` — every test cited inline in a paper must resolve to a live `tests/test_*.py` (handles bare/prefixed/glob refs); trunk PASS. Surfaced a genuine stale ref (Paper 8 → `test_harmonic_phase_lock.py`, gates group2 when swept). `--gate <branch>` per sweep; `tests/test_paper_test_refs.py`.
 - **Trunk inline test-reference pass (2026-06-15, v4.16.4):** Trunk papers now cite their backing tests *inline* (8 refs across P0/P1/P7/P38; P32 already had 20) — the claim→test mapping previously lived only in `docs/claim_test_matrix.md`. Each phrased to its matrix verdict (no overclaim); all 4 edited papers compile ERRORS=0.
 - **`/qa` C5 K-label screen + C12 DoD (2026-06-15, v4.16.3):** Deterministic K-label backstop `debug/qa/check_k_label.py` (C12 definition-of-done; `--gate <branch>` per sweep) — trunk clean; surfaced **24 stale "conjectural" K-labels in 8 non-trunk papers** (papers lag the updated §13.5 conjecture→Observation downgrade — the rule is current, the prose stale). Cleared per branch by the active branch QA sweep. `tests/test_k_label_check.py`.
 - **`/qa` all-dimensions enforcement + trunk re-cert (2026-06-15, v4.16.2):** Gate now runs all 5 review dimensions (code/claims/citation/synthesis/deterministic) every invocation — unexercised gating dim → INCONCLUSIVE, never PASS (closes the run-#2 short-circuit). Run-#3 found + fixed 2 real group3-synthesis defects (κ "derivable"→Observation, K "conjectural"→Observation ×4); run-#4 = **trunk PASS** (8/8 seeds), after hardening `claims-reviewer` to enumerate every K-sentence (1st P32 reviewer sampled-and-missed planted S5). See `qa.md`, `debug/sprint_qa_all_dimensions_memo.md`.
