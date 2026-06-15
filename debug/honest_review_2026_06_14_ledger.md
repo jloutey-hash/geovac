@@ -188,3 +188,19 @@ Full chronicle: CHANGELOG [4.14.1]. 5 opus web agents (one/paper); PM re-verifie
 **Bonus:** the two long-standing trunk undefs cleared — P7 `loutey_paper2` (bibitem) + P1 `Note1` (bibtex cycle). All 4 edited papers now compile GATE PASS / 0 undefs.
 
 **Residual (low-risk):** P32 `connes_vs2021` theorem-numbers (Def 2.39/Prop 4.2/4.3) consistent w/ abstract, not byte-verified vs PDF. **Flagged for PI (separate):** Paper 2 title "…from Spectral Geometry…" reads derivation-y post K→observation — a retitle question, not a cite fix.
+
+---
+
+## Trunk title-honesty pass (2026-06-14, v4.14.2)
+
+Full chronicle: CHANGELOG [4.14.2]. Closes the Paper-2-title flag above + retitles Paper 1; both PI-approved.
+
+**Paper 2:** "…from Spectral Geometry…" (derivation implication post K→observation) → "…as a Spectral Coincidence on the Hopf Fibration". 5 live files (title + bibitems P7/18/24/31). Caught 2 stale status tags the K-downgrade missed (P24 `[Conjectural.]`, P31 `[…combination rule conjectural.]` → `[Observation.]`).
+
+**Paper 1** (bundled): "Quantum Mechanics as a Packing Problem" (scope: atom not all QM; identity: graph is PSD, converges-not-equals) → "Atomic Structure as a Packing Problem". 9 live files via sed (title + bibitems P7/8/11/12/18, fci_atoms, fci_molecules, group3 synthesis); grep-verified 0 old / 9 new.
+
+**Other trunk titles assessed:** P7 "Recovering…from graph topology" honestly signals a limit (OK); P32/P38 name proved objects precisely (clean); P0 "as Information Geometry" = loose jargon (info geometry is a distinct field) — flagged, not changed.
+
+**Compile:** P1/P2/P7 GATE PASS / 0 undefs. Non-trunk cascade papers got error-neutral bibitem text edits; PDFs + pre-existing debt deferred to branch QA.
+
+**Hygiene flagged:** P7 bibitem cites P0 by a stale title — corpus-wide internal cross-ref-title audit = natural follow-up.

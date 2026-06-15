@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.14.2] - 2026-06-14
+
+### Summary
+
+**Trunk title-honesty pass.** Two trunk paper titles carried claims the QA had just undercut, and were retitled with a full cascade across every citing paper. Paper 2's "…**from** Spectral Geometry…" implied a *derivation* of α after the v4.14.0 K → observation downgrade. Paper 1's "Quantum Mechanics as a Packing Problem" over-claimed on **scope** (the paper is atomic structure, not all of quantum mechanics) and on **identity** (the discrete graph is positive-semidefinite and *converges to* QM, it does not equal it). Papers 7/32/38 titles were assessed and left as-is (honest); Paper 0's "as Information Geometry" flagged for a later pass.
+
+### Changed
+
+- **Paper 2 retitle:** "The Fine Structure Constant **from** Spectral Geometry of the Hopf Fibration" → "The Fine Structure Constant **as a Spectral Coincidence on** the Hopf Fibration" (matches the §13.5 "numerical coincidence" language and the field-guide framing). Cascaded across 5 live files (title + bibitems in Papers 7/18/24/31). Also fixed two stale status tags the K-downgrade had missed: Paper 24 "[Conjectural.]" and Paper 31 "[…combination rule conjectural.]" → "[Observation.]".
+- **Paper 1 retitle:** "The Geometric Atom: **Quantum Mechanics** as a Packing Problem" → "The Geometric Atom: **Atomic Structure** as a Packing Problem". Cascaded across 9 live files (title + bibitems in Papers 7/8/11/12/18, fci_atoms, fci_molecules, and the group3 synthesis).
+- Trunk titles **7/32/38 assessed clean**: Paper 7 "Recovering the Schrödinger Equation…" honestly signals a limit; 32 ("…Synthesis Paper Locking…into the Marcolli–van Suijlekom…lineage") and 38 ("State-space Gromov–Hausdorff convergence…") name their proved objects precisely. Paper 0's "Angular Momentum **as Information Geometry**…" flagged as loose jargon (information geometry is a distinct field) for a future pass.
+
+### Notes
+
+- Method: `sed` cascade for the 9-file Paper 1 change (identical string), verified by grep (0 old / 9 new in live source); `Edit` for Paper 2's 5 files.
+- Compile: Papers 1, 2, 7 (trunk + the retitled papers) recompiled GATE PASS / 0 undefs. The non-trunk cascade papers (18, 24, 31, 8, 11, 12, fci_atoms, fci_molecules, synthesis) received text-only bibitem edits (error-neutral); their PDFs and pre-existing compile debt (undefined macros / `\ref`s / `Note1` endnotes) are deferred to their branch QA.
+- **Internal-title hygiene flagged:** Paper 7's bibitem cites Paper 0 by a stale title ("The Geometric Atom: Quantum State Space as a Packing Problem") that Paper 0's actual title ("Angular Momentum as Information Geometry…") does not match — a corpus-wide internal cross-reference-title audit is a natural follow-up.
+
 ## [4.14.1] - 2026-06-14
 
 ### Summary
