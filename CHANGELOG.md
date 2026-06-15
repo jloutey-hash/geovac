@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.14.1] - 2026-06-14
+
+### Summary
+
+**Trunk citation-grounding pass.** Five opus agents with web access (one per trunk paper) verified every external citation against primary sources; the PM re-verified every hit independently (AIP / ScienceDirect / EMS Press / arXiv) before applying any fix (`no_sonnet_for_literature` discipline). **No fabricated arXiv IDs or nonexistent theorem numbers anywhere on the trunk** — the corpus's worst historical failure mode (the Fursaev–Solodukhin fabricated-ID class) is absent. Every hit was a metadata slip on a *real* work (wrong volume / year / journal, author count, abbreviated title) plus one missing internal bibitem. Eight fixes across Papers 1, 7, 32, 38; Paper 0 clean (5/5 grounded).
+
+### Changed (citation corrections, each verified against the primary source)
+
+- **Paper 38 `avery_wen_avery1986` (load-bearing).** Corrected to the real reference — **Z.-Y. Wen & J. Avery, "Some properties of hyperspherical harmonics," J. Math. Phys. 26, 396–403 (1985)** (AIP, verified). The bibitem had wrong authors (3 → 2), wrong title, volume (27 → 26), year (1986 → 1985), and end page (402 → 403); in-text "Avery–Wen–Avery" → "Wen–Avery" (correct author order). The band-injectivity proof verifies the 3-Y non-vanishing computationally (n_max ≤ 5), so it does not depend on the citation — only the bibliographic coordinates were wrong.
+- **Paper 38 `latremoliere2016`** — "The dual Gromov–Hausdorff propinquity": Banach J. Math. Anal. 10 (2016) → **J. Math. Pures Appl. 103, 303–351 (2015)** (bibitem + in-text; verified ScienceDirect/arXiv:1311.0104).
+- **Paper 32 `glanois2015`** — published-version metadata: J. Number Theory 182, 36–90 (2018) → **160, 334–384 (2016)** (arXiv:1411.4947 unchanged; verified ScienceDirect).
+- **Paper 32 `latremoliere2021dual`** — title "The Dual Modular Propinquity…" → "The Dual Modular **Gromov–Hausdorff** Propinquity and Completeness" (verified EMS Press / arXiv:1811.04534).
+- **Paper 7 `loutey_paper2`** — added the missing `\bibitem` (clears the undefined-citation compile error), citing Paper 2 by its real title.
+- **Paper 1** — narrowed the SU(1,1) Clebsch–Gordan attribution off Biedenharn–Louck (an SU(2) reference) onto the already-cited Barut–Kleinert; grounded two orphan-but-correct references by citing them (`berry1984` at the Berry-phase discussion, `chung1997` at L=D−A).
+
+### Notes
+
+- Paper 1's `Note1` "undefined citation" is a REVTeX endnote / BibTeX build-order artifact (the footnote content is correct and present in the auto-generated Notes.bib), addressed by the bibtex cycle in the compile — not a grounding defect.
+- **Residual (low-risk):** Paper 32's `connes_vs2021` internal theorem numbers (Def 2.39, Prop 4.2, Prop 4.3) were confirmed consistent with the paper's abstract but not byte-verified against the PDF body.
+- **Flagged separately (not a citation fix):** Paper 2's title "The Fine Structure Constant *from* Spectral Geometry of the Hopf Fibration" reads as a derivation in light of the v4.14.0 K → observation downgrade; a retitle is a Paper 2 question for the PI, distinct from this pass.
+
 ## [4.14.0] - 2026-06-14
 
 ### Summary

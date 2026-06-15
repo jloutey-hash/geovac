@@ -167,3 +167,24 @@ Full chronicle: CHANGELOG [4.14.0]. Summary only here.
 **3 QA principles** memorialized: §9 + code-reviewer/citation-reviewer agents + authoring_conventions rule 9.
 
 **Verification:** Papers 0,2,32 GATE PASS; 1,7 ERRORS=0 (same pre-existing undefs). 214 passed / 4 skipped (new + edited tests + 18 topological proofs).
+
+---
+
+## Trunk citation-grounding pass (2026-06-14, v4.14.1)
+
+Full chronicle: CHANGELOG [4.14.1]. 5 opus web agents (one/paper); PM re-verified every external WRONG-ID vs primary source (AIP/ScienceDirect/EMS/arXiv) before editing.
+
+**Headline: NO fabricated arXiv IDs / nonexistent theorem numbers on the trunk.** The worst historical failure mode (Fursaev–Solodukhin class) is absent. Every hit = metadata slip on a *real* work + one missing internal bibitem.
+
+**Fixes (8):**
+- P38 `avery_wen_avery1986` (LOAD-BEARING): 3 authors→2, title, vol 27→26, year 1986→1985, 402→403 → Z.-Y. Wen & J. Avery, JMP 26, 396–403 (1985). In-text "Avery–Wen–Avery"→"Wen–Avery". Proof verifies 3-Y non-vanishing computationally (n≤5) so cite-correction is proof-neutral.
+- P38 `latremoliere2016`: Banach JMA 10 (2016) → JMPA 103, 303–351 (2015).
+- P32 `glanois2015`: JNT 182, 36–90 (2018) → 160, 334–384 (2016).
+- P32 `latremoliere2021dual`: title +"Gromov–Hausdorff".
+- P7 `loutey_paper2`: missing bibitem added (clears undef).
+- P1: SU(1,1) attribution narrowed off Biedenharn–Louck (SU(2)) → Barut; 2 orphans (`berry1984`,`chung1997`) grounded by citing.
+- P0: CLEAN (5/5 grounded).
+
+**Bonus:** the two long-standing trunk undefs cleared — P7 `loutey_paper2` (bibitem) + P1 `Note1` (bibtex cycle). All 4 edited papers now compile GATE PASS / 0 undefs.
+
+**Residual (low-risk):** P32 `connes_vs2021` theorem-numbers (Def 2.39/Prop 4.2/4.3) consistent w/ abstract, not byte-verified vs PDF. **Flagged for PI (separate):** Paper 2 title "…from Spectral Geometry…" reads derivation-y post K→observation — a retitle question, not a cite fix.
