@@ -1,0 +1,24 @@
+{
+  "target": "group3",
+  "run": "re-cert run #2",
+  "run_date": "2026-06-16",
+  "scope": "first-pass subset: Papers 22, 24, 31 + group3 synthesis (coverage of 22/24/31), AFTER disposition of run #1",
+  "worktree": "../geovac-qa-seed-group3-r2 (branch qa-seed-group3-r2); 9 fixed files synced in",
+  "note": "Seeds VARIED from run #1 (different specifics, to defeat pattern-learning). Seeds live ONLY in the worktree; reviewers blind + pointed at the worktree. Key in MAIN repo.",
+  "seeds": [
+    {"id": "S1", "class": "wrong external citation", "file": "paper_24_bargmann_segal.tex", "location": "bibitem{hall1994} (~l.1262)", "planted": "J. Funct. Anal. vol 135, p217 (1997)", "truth": "vol 122, p103 (1994)", "expected_catcher": "citation-reviewer (P24)"},
+    {"id": "S2", "class": "tautological/false-positive test", "file": "tests/test_bargmann_graph.py", "location": "test_pi_free_larger (~l.161)", "planted": "assert isinstance(cert, dict) -- proves nothing about pi-freeness", "truth": "should assert cert['pi_free'] and irrationals==[]", "expected_catcher": "code-reviewer (P24)"},
+    {"id": "S4", "class": "kappa-style overclaim (derived vs Observation)", "file": "paper_31_universal_coulomb_partition.tex", "location": "~l.97", "planted": "kappa=-1/16 'is derived from first principles via the Fock projection Jacobian'", "truth": "kappa is an Observation (coincidence, no bridge), 'set by' the Jacobian -- never 'derived'", "expected_catcher": "claims-reviewer (P31, C8)"},
+    {"id": "S6", "class": "discrete-vs-continuum imprecision", "file": "paper_31_universal_coulomb_partition.tex", "location": "~l.683 (Layer 1)", "planted": "discrete L_0=D-A 'directly computes the physical energy spectrum: eigenvalues are -(n^2-1)'", "truth": "L=D-A is PSD; -(n^2-1) is the continuum S^3 property the graph converges to / is conformally identified with", "expected_catcher": "claims-reviewer (P31, C6)"},
+    {"id": "S7", "class": "stale internal-title drift", "file": "paper_31_universal_coulomb_partition.tex", "location": "bibitem{paper24} (~l.1590)", "planted": "'The Bargmann-Segal Graph: A pi-Free Encoding of the Harmonic Oscillator on the Five-Sphere'", "truth": "real title 'The Bargmann-Segal Lattice: pi-Free Discretization of the Harmonic Oscillator on S^5'", "expected_catcher": "deterministic check_internal_titles.py"},
+    {"id": "S8", "class": "status overstatement in synthesis", "file": "group3_foundations_synthesis.tex", "location": "~l.641 (HO rigidity)", "planted": "'...constitutes six independently proven theorems of the Coulomb/HO asymmetry'", "truth": "Paper 24 self-demotes Layer 2/Theorem 2 to 'structural description, not a stand-alone theorem' and Layer 4 to 'empirically demonstrated, formal proof a named follow-on'", "expected_catcher": "synthesis claims-reviewer (C9)"}
+  ],
+  "controls": [
+    {"id": "C-A", "claim": "K = pi(B+F-Delta) labeled Observation throughout P31/P24 (run-#1 fix)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-B", "claim": "Wigner-3j squared = 2/15 in test_bargmann_graph (run-#1 fix)", "status": "CORRECT - code-reviewer must NOT flag"},
+    {"id": "C-C", "claim": "P22 citations Dunlap (PCCP 2,2113,2000), Dyall, Grant now correct/present (run-#1 fix)", "status": "CORRECT - citation-reviewer must NOT flag"},
+    {"id": "C-D", "claim": "D = 6.06% global / D_pd = 1.44% pair-diagonal relabel (run-#1 fix) in P31/synthesis", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-E", "claim": "Paper 24 Bargmann-Segal pi-free bit-exact at finite N_max", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-F", "claim": "layer count = six per Paper 24 in P31/synthesis (run-#1 fix)", "status": "CORRECT - must NOT be flagged"}
+  ]
+}

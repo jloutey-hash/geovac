@@ -1,0 +1,24 @@
+{
+  "target": "group3",
+  "run": "re-cert run #3",
+  "run_date": "2026-06-16",
+  "scope": "first-pass subset: Papers 22, 24, 31 + synthesis coverage, AFTER run-#2 disposition",
+  "worktree": "../geovac-qa-seed-group3-r3 (branch qa-seed-group3-r3); 9 fixed files synced",
+  "note": "Seeds VARIED again from runs #1 and #2 (different papers/specifics). The code seed (S3) is in test_nuclear_sparsity, the ONLY default-running backing for P22 potential-independence (no redundant sibling) -- addressing the run-#2 redundant-backing blind spot.",
+  "seeds": [
+    {"id": "S1", "class": "wrong external citation", "file": "paper_31_universal_coulomb_partition.tex", "location": "bibitem{chamseddine_connes1997} (~l.1446)", "planted": "Commun. Math. Phys. vol 198, p517 (1999)", "truth": "vol 186, p731 (1997)", "expected_catcher": "citation-reviewer (P31)"},
+    {"id": "S3", "class": "tautological/false-positive test", "file": "tests/test_nuclear_sparsity.py", "location": "test_angular_sparsity_invariance (~l.210)", "planted": "assert ang_zeros_ref == ang_zeros_ref (compares reference to itself -- always true; error msg still references stats, so it LOOKS like a real check)", "truth": "should be assert stats['angular_zero'] == ang_zeros_ref (the per-potential comparison that actually proves potential-independence)", "expected_catcher": "code-reviewer (P22) -- NOTE: sole default-running backing (slow sibling is @pytest.mark.slow, skipped)"},
+    {"id": "S6", "class": "discrete-vs-continuum imprecision", "file": "paper_24_bargmann_segal.tex", "location": "~l.418", "planted": "graph Laplacian D-A 'directly has eigenvalue -(n^2-1)'", "truth": "L=D-A is PSD; -(n^2-1) is the continuum S^3 property the graph converges to / is conformally identified with", "expected_catcher": "claims-reviewer (P24, C6)"},
+    {"id": "S5", "class": "hard-prohibition: K relabeled 'theorem' + 'derived'", "file": "paper_31_universal_coulomb_partition.tex", "location": "~l.1275 (S V)", "planted": "'The fine-structure constant THEOREM K=pi(B+F-Delta)=alpha^-1, now DERIVED from the partition'", "truth": "K is an Observation (never theorem/derived); next sentence still says 'numerical observation without first-principles derivation'", "expected_catcher": "claims-reviewer (P31, C5) tripwire"},
+    {"id": "S7", "class": "stale internal-title drift", "file": "paper_24_bargmann_segal.tex", "location": "bibitem{paper7} (~l.1325)", "planted": "'The Dimensionless Vacuum: From Graph Topology to the Hydrogen Spectrum'", "truth": "real title 'The Dimensionless Vacuum: Recovering the Schroedinger Equation from Scale-Invariant Graph Topology'", "expected_catcher": "deterministic check_internal_titles.py"},
+    {"id": "S8", "class": "zombie/unsupported claim in synthesis", "file": "group3_foundations_synthesis.tex", "location": "~l.55 (headline result (b))", "planted": "angular sparsity '...extends without modification to non-central and tensor interactions'", "truth": "Paper 22 (non-central) = lower bound / may be denser / beyond scope; Paper 31 = non-central may shrink the universal sector / open", "expected_catcher": "synthesis claims-reviewer (C9)"}
+  ],
+  "controls": [
+    {"id": "C-A", "claim": "K = Observation everywhere EXCEPT the S5 seed spot (run-#1/#2 fixes)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-B", "claim": "Wigner-3j squared = 2/15 (run-#1 fix)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-C", "claim": "D=6.06% global / D_pd=1.44% relabel (run-#1 fix)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-D", "claim": "layer count consistent to six per Paper 24 (run-#2 fix)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-E", "claim": "P24 Bargmann-Segal pi-free at finite N_max", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-F", "claim": "P24 hall1994 = J.Funct.Anal 122,103,1994 (run-#2 fix); P22 Dyall/Grant/Dunlap correct", "status": "CORRECT - citation-reviewer must NOT flag"}
+  ]
+}

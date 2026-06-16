@@ -7,12 +7,13 @@ The standards every paper is checked against in the **§9 Branch QA Review Proto
 1. **Rhetoric (§1.5).** Dual-description framing; no ontological-priority claims (neither the graph nor the continuum is asserted "more fundamental"). Lead with concrete computational advantages, not interpretation.
 2. **Discrete vs continuum precision.** State clearly whether a claim is about the **discrete graph** or its **continuum limit**. The −(n²−1) spectrum is a *continuum* (S³ Laplace–Beltrami) property; the discrete graph Laplacian is positive-semidefinite and *converges* to it (degeneracy recovery), it does not *have* that spectrum. Do **not** write "the graph produces the spectrum" or "the graph IS the Schrödinger equation" when the code shows convergence/matching. *(Added 2026-06-14 from the trunk code review — the framework's most code-exposed framing.)*
 3. **Benchmarking.** Compare to the strongest available baseline (cc-pVTZ+ for atoms, explicitly correlated for molecules), not just STO-3G; if the comparison is unfavorable, say so and state what the framework offers instead.
-4. **Conjectural labels (§13.5).** K = π(B+F−Δ) stays CONJECTURAL. Any numerically-matched-but-underived identity is an **Observation**, not a derivation.
+4. **Combination-rule label (§13.5 hard prohibition).** K = π(B+F−Δ) is an **Observation** — never "conjecture", "conjectural", "derived", "predicted", or "theorem" (conjecture→Observation downgrade 2026-06-14). Any numerically-matched-but-underived identity is an Observation, not a derivation or a conjecture.
 5. **Transcendental tagging.** Every π / ζ / Catalan G / log is tagged to its Paper 18 tier + Paper 34 projection + master-Mellin M1/M2/M3 slot.
 6. **Claim → artifact.** Every load-bearing claim maps to a backing test in `docs/claim_test_matrix.md`. **"derived" / "SYMBOLIC PROOF" requires a test that proves the derivation** — a matching-condition or convergence test backs "matched/converges," not "derived."
 7. **Citations.** Every `\cite` resolves to a real publication that says what we claim; verified by the citation-grounding pass (`.claude/agents/citation-reviewer.md`).
 8. **Status vocabulary.** Use the claims-register tiers accurately (SYMBOLIC PROOF / MEASURED / PANEL-VERIFIED / INTERNAL THEOREM / CONDITIONAL / OBSERVATION / CONJECTURE / RETRACTED). "SYMBOLIC PROOF" is reserved for exact symbolic/machine-verified derivations.
 9. **Provenance visibility (§9 QA principle 1).** Every load-bearing claim wears its rule-8 tier *inline* — next to the claim in the paper, not only in `docs/claims_register.md` — so a reader (or future-self) cannot mistake an observation for a theorem. The prose may assert no more than the tier: "derived" / "SYMBOLIC PROOF" requires a *derivation* test (rule 6), never a matching / convergence test. The κ episode is the cautionary case — a prose promotion ("no longer fitted") with no tier and no artifact survived ~50 versions. The code-reviewer flags any load-bearing claim whose prose exceeds its backing, in either direction (an *under*-stated claim is upgraded — §9 QA principle 3).
+10. **Test citations vs provenance pointers (C13).** A `\texttt{test_*.py}` citation is a *verification-backing* claim: it must name a **live test in `tests/`** (the rule-6 claim→artifact rule) and is gated by C13 (`debug/qa/check_paper_test_refs.py`). Do **not** cite a `debug/` script as the backing for a verification claim — `debug/` is provenance only (data dumps, one-off drivers, archived diagnostics), and such scripts may be archived at any time, silently stranding the claim. *(Added 2026-06-16 from the Paper 8 case: a true σ-bond identity (Thm 1) was cited to `debug/test_harmonic_phase_lock.py` — a speculative "do D-matrix critical points predict LiH R_eq?" probe that produced NO hits and was archived as a dead-end; the claim was sound but its backing was a failed diagnostic. Fix: promote the verification to `tests/test_paper8_sigma_bond_selection.py` and cite that.)*
 
 ## Per-group (audience-specific)
 
@@ -34,7 +35,7 @@ The standards every paper is checked against in the **§9 Branch QA Review Proto
 - NISQ/VQE positioning, not fault-tolerant QPE.
 
 ### group5 — QED / gauge / SM (read as a HEP referee)
-- α combination rule conjectural; gauge structure dual-description.
+- α combination rule is an **Observation** (never conjecture/derived — rule 4, §13.5); gauge structure dual-description.
 
 ### group6 — Precision / observations (read as an AMO precision physicist)
 - Reference precision and its source stated; focal-length decomposition for multi-component observables (Lamb shift, hyperfine, fine structure).

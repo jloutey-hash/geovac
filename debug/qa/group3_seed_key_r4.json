@@ -1,0 +1,24 @@
+{
+  "target": "group3",
+  "run": "re-cert run #4",
+  "run_date": "2026-06-16",
+  "scope": "first-pass subset Papers 22/24/31 + synthesis, AFTER run-#3 disposition (3 new backing tests + 2 tiny residuals cleared)",
+  "worktree": "../geovac-qa-seed-group3-r4 (branch qa-seed-group3-r4); 13 files synced incl. 3 new test files + populated matrix",
+  "note": "Seeds varied again from runs #1-3. Code seed (S3) planted in a NEW test (test_paper24_ho_entropy) as its sole entropy assertion.",
+  "seeds": [
+    {"id": "S1", "class": "wrong external citation", "file": "paper_22_angular_sparsity.tex", "location": "bibitem{Messiah1962} (~l.883)", "planted": "Wiley, New York, 1958", "truth": "North-Holland, Amsterdam, 1962", "expected_catcher": "citation-reviewer (P22)"},
+    {"id": "S3", "class": "false-positive test (trivially-satisfied assertion)", "file": "tests/test_paper24_ho_entropy.py", "location": "~l.164", "planted": "assert S < 1e10 (any von Neumann entropy satisfies this; proves nothing about S=0)", "truth": "assert S < 1e-10 (the real zero-entropy check)", "expected_catcher": "code-reviewer (P24)"},
+    {"id": "S4", "class": "kappa-style overclaim (derived vs Observation)", "file": "paper_22_angular_sparsity.tex", "location": "~l.550", "planted": "'The universal constant K=-1/16, derived from first principles via the Fock projection'", "truth": "kappa is an Observation (coincidence, no bridge); 'maps' is the honest verb, never 'derived from first principles'", "expected_catcher": "claims-reviewer (P22, C5/C8)"},
+    {"id": "S5", "class": "hard-prohibition: K relabeled 'conjecture'", "file": "paper_24_bargmann_segal.tex", "location": "~l.1115", "planted": "'rule K=pi(B+F-Delta) is a conjecture'", "truth": "K is an Observation, never conjecture/derived/theorem", "expected_catcher": "claims-reviewer (P24, C5) tripwire"},
+    {"id": "S7", "class": "stale internal-title drift", "file": "paper_31_universal_coulomb_partition.tex", "location": "bibitem{paper24} (~l.1594)", "planted": "'The Bargmann-Segal Construction: A pi-Free Harmonic-Oscillator Lattice on the 5-Sphere'", "truth": "real title 'The Bargmann-Segal Lattice: pi-Free Discretization of the Harmonic Oscillator on S^5'", "expected_catcher": "deterministic check_internal_titles.py"},
+    {"id": "S8", "class": "overstatement/zombie in synthesis", "file": "group3_foundations_synthesis.tex", "location": "~l.678", "planted": "HO Bargmann projection '...remains pi-free in the continuum limit N_max->infinity'", "truth": "Paper 24: pi-free ONLY at finite cutoff; the continuum Bargmann measure carries the Gaussian normalization pi^-3 (the single pi in the construction)", "expected_catcher": "synthesis claims-reviewer (C9)"}
+  ],
+  "controls": [
+    {"id": "C-A", "claim": "K = Observation everywhere except the S5 seed (runs #1-3 fixes)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-B", "claim": "the 3 new backing tests' REAL assertions (test_paper22_density exact counts; test_paper24 occ/commutator; test_paper31 Pearson) except the S3 seed", "status": "CORRECT - code-reviewer must NOT flag"},
+    {"id": "C-C", "claim": "D=6.06% global / D_pd=1.44% relabel; layer count six; P22 footnote now cites test_paper22_density with correct attribution (run-#4 fix)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-D", "claim": "Wigner-3j = 2/15; pi-free at finite cutoff (NOT continuum)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-E", "claim": "P22 citations except S5... (Slater/Condon-Shortley/Peruzzo/Lee/Dyall/Grant correct)", "status": "CORRECT - citation-reviewer must NOT flag"},
+    {"id": "C-F", "claim": "P31 'r<0.05' now carries the n_max=3 cutoff qualifier (run-#4 fix)", "status": "CORRECT - must NOT be flagged"}
+  ]
+}

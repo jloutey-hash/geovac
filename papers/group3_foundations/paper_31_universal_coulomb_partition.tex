@@ -32,9 +32,11 @@ results into two disjoint sectors:
 \begin{itemize}
 \item A \emph{universal sector}, depending only on $\mathcal{A}$ and
   the angular structure of the basis.  The angular sparsity theorem
-  of Paper~22~\cite{paper22} --- ERI density $1.44\%$ at $l_{\max}=3$,
-  bit-identical across Coulomb, harmonic oscillator, Woods--Saxon,
-  square well, and Yukawa potentials --- is the canonical example.
+  of Paper~22~\cite{paper22} --- the angular ERI density is
+  potential-independent (global-$M_L$ Coulomb $D=6.06\%$ at $l_{\max}=3$;
+  pair-diagonal realized $D_{\mathrm{pd}}=1.44\%$), bit-identical across
+  Coulomb, harmonic oscillator, Woods--Saxon, square well, and Yukawa
+  potentials --- is the canonical example.
 \item A \emph{potential-specific sector}, depending on the choice
   of $D$.  The Fock projection rigidity theorem of
   Paper~23~\cite{paper23} ($S^3$ projection unique to $-Z/r$ by
@@ -93,7 +95,7 @@ The same machinery, however, does \emph{not} produce identical
 transcendental content.  The Coulomb framework on $S^3$ is honestly
 $\pi$-laden at every level above the bare graph: the kinetic
 calibration $\kappa = -1/16$ ratio is set by the Fock projection
-Jacobian, the $\alpha$-conjecture combination $K = \pi(B + F -
+Jacobian, the $\alpha$-combination $K = \pi(B + F -
 \Delta)$~\cite{paper2_alpha} carries an explicit factor of $\pi$ as
 the Hopf-bundle measure $\mathrm{Vol}(S^2)/4 = \pi$, and the spectral
 zeta values appear at even integer arguments via the Jacobi-theta
@@ -149,8 +151,9 @@ Section~\ref{sec:transcendental} traces the calibration-$\pi$
 asymmetry to the operator-order distinction and the projection type
 (nonlinear vs.\ linear-affine).
 Section~\ref{sec:five-layers} reports the Sprint~5 result that the
-Coulomb/HO asymmetry has five layers, not two, and gives the
-predictive checklist that follows.
+Coulomb/HO asymmetry has three independent discriminators, not two
+(within the six-layer catalogue of Paper~24~\cite{paper24}), and gives
+the predictive checklist that follows.
 Section~\ref{sec:implications} states what features of GeoVac
 transfer to non-Coulomb systems for free and what does not.
 Section~\ref{sec:open} closes with open questions about the
@@ -309,10 +312,12 @@ Gaunt selection rules alone:
 \item magnetic conservation $m_1 + m_2 = m_3 + m_4$.
 \end{itemize}
 None of these conditions reference $V$, $R^k$, or any radial quantum
-number.  Theorem~2 of Paper~22 then states that the ERI density
-$D(l_{\max})$ is a function only of the angular momentum cutoff:
+number.  Theorem~2 of Paper~22 then states that the ERI density is a function
+only of the angular momentum cutoff.  The composed pipeline realizes the
+\emph{pair-diagonal} density $D_{\mathrm{pd}}$ (per-pair $m_a=m_c$,
+$m_b=m_d$):
 \begin{equation}
-  D(l_{\max}) =
+  D_{\mathrm{pd}}(l_{\max}) =
   \begin{cases}
     7.81\% & l_{\max} = 1 \\
     2.76\% & l_{\max} = 2 \\
@@ -322,10 +327,14 @@ $D(l_{\max})$ is a function only of the angular momentum cutoff:
   \end{cases}
   \label{eq:eri_density}
 \end{equation}
-Paper~22 verified this numerically across five potentials (Coulomb,
-harmonic oscillator, Woods--Saxon, square well, Yukawa) at
-$l_{\max} = 2$, finding bit-identical zero patterns and
-$D = 2.76\%$ in every case.
+The physically-correct global-$M_L$ Coulomb density $D(l_{\max})$
+(selection rule $m_a+m_b=m_c+m_d$) is $\sim\!4\times$ larger
+($14.84/8.52/6.06/4.83/3.99\%$ at $l_{\max}=1\ldots5$; Paper~22 Table);
+$D_{\mathrm{pd}}$ is the figure the composed qubit pipeline realizes.
+Paper~22 verified the potential-independence numerically across five
+potentials (Coulomb, harmonic oscillator, Woods--Saxon, square well,
+Yukawa) at $l_{\max} = 2$, finding bit-identical zero patterns
+($D_{\mathrm{pd}} = 2.76\%$) in every case.
 
 \subsection{Spectral-triple reading}
 
@@ -517,7 +526,7 @@ differ in $D$.
 This is the formal sense in which rigidity belongs to the
 potential-specific sector.  Any framework result that depends on
 the explicit form of $D$ --- the integer spectrum, the calibration
-$\kappa = -1/16$, the $\alpha$-conjecture combination
+$\kappa = -1/16$, the $\alpha$-combination Observation
 $K = \pi(B + F - \Delta)$~\cite{paper2_alpha} --- is bound to one
 specific central potential and does not transfer.
 
@@ -550,10 +559,10 @@ and the inverse relation $n \mapsto E_n$ involves an inverse square
 root.  The calibration step from graph eigenvalue to physical energy
 introduces a factor that traces to the Riemannian volume of $S^3$
 (via the Lichnerowicz constant on $S^3$ and the Hopf-bundle measure
-$\mathrm{Vol}(S^2)/4 = \pi$); this is the source of the $\pi$ that
-appears in $\kappa = -1/16$ as $1/(16\pi^0)$ (specifically, the
-ratio $\sqrt{\pi}/\sqrt{\pi}$ cancels but the factor of $4$ is set
-by the projection Jacobian)~\cite{paper7,paper24}.
+$\mathrm{Vol}(S^2)/4 = \pi$); this calibration $\pi$ enters the
+energy mapping, not the kinetic constant: $\kappa = -1/16$ is itself
+$\pi$-free, coinciding with the geometric $1/16$ as an
+Observation~\cite{paper7,paper24}.
 
 The harmonic oscillator construction uses the first-order Euler
 operator $\hat{N}$ on the Hardy space $H^2(S^5)$, with eigenvalues
@@ -631,7 +640,7 @@ Wigner $3j$ algebra & no \\
 $\kappa = -1/16$~\cite{paper7} & yes \\
 Spectral zeta $\zeta_{D^2}(s)$~\cite{paper28} & yes ($\pi^{2k}$) \\
 Hopf-bundle measure $\mathrm{Vol}(S^2)/4$~\cite{paper2_alpha} & yes \\
-$\alpha$-conjecture combination $K$~\cite{paper2_alpha} & yes \\
+$\alpha$-combination Observation $K$~\cite{paper2_alpha} & yes \\
 \hline
 \multicolumn{2}{l}{\emph{HO-specific (1st-order, linear proj.):}} \\
 Bargmann--Segal graph adjacency~\cite{paper24} & no \\
@@ -656,25 +665,27 @@ Moshinsky--Talmi brackets, and HO matrix elements; no transcendental
 coefficient appears.
 
 %=================================================================
-\section{The Five-Layer Sharpening (Sprint~5)}
+\section{The Layer Sharpening (Sprint~5)}
 \label{sec:five-layers}
 %=================================================================
 
 The Sprint~5 investigation~\cite{paper25} of $S^5$ gauge structure
 sharpened the Coulomb/HO asymmetry from two layers
-(spectrum-computing and calibration $\pi$) to five layers, with the
-third being the Wilson physical content of the gauge sector.  We
-summarize the five-layer partition here as the predictive
-checklist for extending the framework to any new central potential.
+(spectrum-computing and calibration $\pi$) to three independent
+discriminators, the third being the Wilson physical content of the
+gauge sector.  We summarize the potential-specific layers here as the
+predictive checklist for extending the framework to any new central
+potential (the full asymmetry is catalogued as six layers in
+Paper~24~\cite{paper24}).
 
-\subsection{The five layers}
+\subsection{The structural layers}
 
 \begin{description}
 \item[Layer 1: Spectrum-computing role of the node Laplacian $L_0$.]
   In the Coulomb $S^3$ construction, the node Laplacian $L_0 = D - A$
-  on the Fock graph computes the physical energy spectrum directly:
-  the eigenvalues of $L_0$ are $\lambda_n = -(n^2 - 1)$, which map
-  to $E_n = -1/(2n^2)$ via the Fock projection.  The graph
+  on the Fock graph is conformally identified with the continuum $S^3$
+  Laplace--Beltrami operator, whose spectrum $\lambda_n = -(n^2 - 1)$
+  (energy normalization) maps to $E_n = -1/(2n^2)$ via the Fock projection.  The graph
   Laplacian \emph{is} the kinetic operator (under the $\kappa$
   calibration).  In the HO $S^5$ Bargmann--Segal construction, $L_0$
   encodes \emph{dipole transition amplitudes}, not the spectrum: the
@@ -699,12 +710,16 @@ checklist for extending the framework to any new central potential.
   matter-propagator role for the node Laplacian.
 \end{description}
 
-\subsection{The five-layer table}
+\subsection{The layer table}
 
 \begin{table}[h]
-\caption{Five-layer Coulomb/HO partition (Sprint~5
-sharpening~\cite{paper25}).  $\checkmark$~means the feature is
-present; ``--'' means it is absent or not natural.}
+\caption{Coulomb/HO partition by structural layer.  Rows~1--3 are the
+three independent discriminators established here (Sprint~5
+sharpening~\cite{paper25}); rows~4--5 are further potential-specific
+layers from Papers~24 and~51~\cite{paper24,paper51}, part of the
+six-layer asymmetry catalogued in Paper~24~\cite{paper24}.
+$\checkmark$~means the feature is present; ``--'' means it is absent or
+not natural.}
 \label{tab:five_layers}
 \begin{ruledtabular}
 \begin{tabular}{lcc}
@@ -714,7 +729,7 @@ $L_0$ computes spectrum & $\checkmark$ & -- \\
 Calibration $\pi$ & $\checkmark$ & -- \\
 Non-abelian Wilson gauge & $\checkmark$ (SU(2)) & -- \\
 Modular-Hamiltonian Pythagorean (Paper~24~\S V) & $\checkmark$ & -- \\
-Gravity termination (Paper~51 G4-5a) & $\checkmark$ (pure Einstein) & -- \\
+Gravity termination (Paper~51~\cite{paper51} G4-5a) & $\checkmark$ (pure Einstein) & -- \\
 \hline
 Abelian U(1) Wilson--Hodge & $\checkmark$ & $\checkmark$ \\
 Angular sparsity & $\checkmark$ & $\checkmark$ \\
@@ -723,11 +738,13 @@ Block-diagonal ERI & $\checkmark$ & $\checkmark$ \\
 \end{ruledtabular}
 \end{table}
 
-The features above the divide in Table~\ref{tab:five_layers} are
-the three potential-specific layers; the features below are the
+The features above the divide in Table~\ref{tab:five_layers} are the
+potential-specific layers --- the three independent discriminators
+established here (rows~1--3) together with two further layers
+catalogued in Papers~24 and~51; the features below are the
 universal-sector features that hold on either sphere.
 
-\subsection{Why five and not two}
+\subsection{Why three independent discriminators}
 
 The third layer is structurally distinct from the first two.  Layer~1
 (spectrum-computing) is a question about \emph{what $L_0$ does}; it
@@ -743,7 +760,7 @@ Three independent structural questions, three independent
 discriminators.  None reduces to either of the others.
 
 \medskip\noindent\textbf{Predictive consequence.}  For any candidate
-new central potential, the five-layer table provides a checklist
+new central potential, the layer table provides a checklist
 for what features of the GeoVac framework can be expected to
 transfer.  A new potential matching the Coulomb pattern (e.g., a
 hidden $\mathrm{SO}(4)$-like symmetry, a stereographic-style
@@ -805,7 +822,7 @@ re-derived for the new system:
   function lives in the $\pi$-polynomial ring (Paper~28 T9
   theorem); other systems may live in different rings (e.g., the HO
   Bargmann--Segal lattice lives in $\mathbb{Q}$).
-\item The fine-structure-constant conjecture
+\item The fine-structure-constant Observation
   $K = \pi(B + F - \Delta)$~\cite{paper2_alpha}.  This is a
   Coulomb-specific observation tied to the Hopf-bundle measure
   factor $\pi$ on $S^3$ and has no analog on $S^5$ or other
@@ -874,13 +891,13 @@ therefore three-tier rather than two-tier:
   potentials, but parametric in a scalar.
 \item \textbf{Potential-specific sector} (substantive $D$):
   rigidity theorems, calibration $\pi$, transcendental content,
-  the $\alpha$-conjecture.  Per-system rederivation required.
+  the $\alpha$-combination Observation.  Per-system rederivation required.
 \end{enumerate}
 
 This refinement is descriptive, not predictive: it sorts existing
 results into three bins and does not change any of the theorems of
-Sections~\ref{sec:universal_sector} or
-\ref{sec:potential_specific_sector}.  Its value is clarifying:
+Sections~\ref{sec:universal} or
+\ref{sec:specific}.  Its value is clarifying:
 it explains why rest-mass and Drake--Swainson behave as
 universal-sector projections at the Paper~34 V/D/T level despite
 formally touching $D$.
@@ -1255,7 +1272,7 @@ case, is not yet established.
 
 \subsection{Does the partition predict $\alpha$?}
 
-The fine-structure constant conjecture
+The fine-structure constant Observation
 $K = \pi(B + F - \Delta) = \alpha^{-1}$~\cite{paper2_alpha} sits in
 the potential-specific Coulomb sector by the partition framework.
 The headline observation matches CODATA at
@@ -1321,8 +1338,9 @@ The Dirac resolvent gives the highest Pearson correlation ($0.81$ at
 $n_{\max} = 2$, $0.75$ at $n_{\max} = 3$), outperforming the
 spectral action.  But the correlation \emph{decreases} with
 $n_{\max}$ across all four weightings.  The Laplacian resolvent is
-essentially uncorrelated ($r < 0.05$) because the $N = 1$ zero mode
-of $\Delta_{S^3}$ excludes the dominant $(1s,1s)$ contribution.
+essentially uncorrelated ($|r| < 0.05$ at $n_{\max}=3$, and well below
+the Dirac resolvent's correlation at every cutoff) because the $N = 1$
+zero mode of $\Delta_{S^3}$ excludes the dominant $(1s,1s)$ contribution.
 The Dirac operator naturally regularizes this zero mode.
 
 \subsection{Structural diagnosis}
@@ -1375,7 +1393,7 @@ depends only on the algebra $\mathcal{A}$ and the angular structure
 of its basis.  These results transfer to any spherical-fermion system
 without re-derivation.  The potential-specific sector --- containing
 the spectrum, the calibration $\kappa$, the transcendental content,
-the rigidity theorems, and the $\alpha$-conjecture --- depends on
+the rigidity theorems, and the $\alpha$-combination Observation --- depends on
 the explicit form of $D$.  These results must be re-derived for each
 new system.
 
@@ -1385,10 +1403,11 @@ operator-order divide.  Coulomb is a second-order Riemannian
 construction with a nonlinear projection that introduces calibration
 $\pi$; HO is a first-order complex construction with a linear-affine
 projection that is bit-exactly $\pi$-free.  The Sprint~5 sharpening
-shows the asymmetry has five layers, not two: spectrum-computing
+isolates three independent discriminators, not two: spectrum-computing
 role of $L_0$, calibration $\pi$, and Wilson physical content of the
-non-abelian gauge sector.  All five layers stratify along the same
-operator-order divide.
+non-abelian gauge sector, all stratifying along the same
+operator-order divide; Paper~24~\cite{paper24} catalogues the full
+asymmetry as six structural layers.
 
 The framing offered by this paper has no new theoretical content; it
 is a structural reorganization of existing results in
@@ -1404,7 +1423,7 @@ theorem cited in this paper is established in
 Papers~22~\cite{paper22}, 23~\cite{paper23}, 24~\cite{paper24},
 or 25~\cite{paper25}.  The contribution here is the explicit
 $\mathcal{A}$/$D$ partition framing and the predictive checklist
-following from the five-layer table
+following from the layer table
 (Table~\ref{tab:five_layers}).  Numerical verifications of the
 universal sector are in Paper~22~\cite{paper22} (five potentials at
 $l_{\max} = 2$); numerical verifications of the $\pi$-free
@@ -1582,6 +1601,12 @@ J.~Loutey,
 Observation,''
 GeoVac Paper~25 (2026).
 
+\bibitem{paper51}
+J.~Loutey,
+``Gravity from the GeoVac Spectral Action: Continuum Results and the
+Discrete-Substrate Program,''
+GeoVac Paper~51 (2026).
+
 \bibitem{paper28}
 J.~Loutey,
 ``QED on $S^3$: Spectral Geometry of Perturbative Transcendentals,''
@@ -1631,8 +1656,8 @@ arXiv:2502.18105 (2025).
 
 \bibitem{nieuviarts2025b}
 G.~Nieuviarts,
-``Proceedings synthesis on twisted spectral triples and signature
-change,''
+``Emergence of Time from a Twisted Spectral Triple in
+Almost-Commutative Geometry,''
 arXiv:2512.15450 (2026).
 
 \bibitem{hartle_hawking1976}

@@ -52,6 +52,28 @@
 
 **Pattern:** the trunk's machinery (axiom audit, O(V), continuum symbolic proofs, sum rules, K-conjectural) is genuinely backed; the soft spot was specifically the *headline derived/exact constants* — κ (coincidence, downgraded) and 4/π (genuinely derivable, upgraded from a hardcoded circular test). Plus Paper 1 §III quantitative content (from a CG construction never in production).
 
-## Foundations branch (Papers 18, 22, 24, 31, 54–57) — PENDING
+## Foundations branch (Papers 18, 22, 24, 31, 54–57) — IN PROGRESS (group3 first bite: 22/24/31, 2026-06-16)
+
+group3 `/qa` first-pass test-backing (3 coder agents, 2026-06-16) closed the three NO-TEST C1 gaps run #3 surfaced. New tests all green (28 passed, 7 slow-skip).
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 22 | Thm 3 headline global-M_L Coulomb density D = 14.84/8.52/6.06/4.83/3.99% (l_max 1–5) | `test_paper22_density.py` (global_D exact-sympy + production _gaunt_ck) | `casimir_ci.py::_gaunt_ck` | BACKED-SOUND | exact integer counts (sympy 3j) + production _gaunt_ck; all 5 l_max bit-match |
+| 22 | Thm 3 pair-diagonal density D_pd = 7.81/2.76/1.44/0.90/0.62% | `test_paper22_density.py` (pair_diagonal exact + production) | `potential_sparsity.py::angular_zero_count` | BACKED-SOUND | exact integer counts; all 5 l_max bit-match |
+| 22 | Thm 2 potential-independence (zero pattern bit-identical across 5 potentials) | `test_paper22_density.py::test_potential_independence_lmax2` (slow) | `potential_sparsity.py::compute_eri_tensor` | BACKED-SOUND | ERI mask bit-identical + uniform density on common-orbital set |
+| 22 | Table II spinor (jj-coupled) density: d_sp^FG = 25.00/8.59/6.46/5.17/4.30/3.68%, pair-diag d_sp = 25.00/4.30/2.11/1.23/0.81/0.57% (l_max 0–5) | `test_paper22_spinor_density.py` (exact jj 3j counts; l_max 3–5 slow) | self-contained jj selection rule (Dyall §9.3, Grant §7.5) | BACKED-SOUND | exact integer counts; both conventions bit-match Table II; +Q=2(l+1)², subset & d_sp≤d_sc checks. Closes run-#4 NO-TEST gap |
+| 22 | §III footnote "angular_zero_count computes the global-M_L D" | `test_paper22_density.py::test_angular_zero_count_computes_pair_diagonal_not_global` | `potential_sparsity.py::angular_zero_count` | MISLABEL (CF-1) | routine computes D_pd, not global D; footnote inaccurate; regression-pinned, NOT fixed — see `docs/qa/group4.carryforward.md` CF-1 |
+| 24 | Two-fermion HO entanglement rigidity: S_full=0 (single Slater det) and ‖[H_HO,V]‖_F/‖H_HO‖_F < 1e-15 (Moshinsky–Talmi N_tot conservation) | `test_paper24_ho_entropy.py` (N_max∈{2,3}) | `nuclear/ho_two_fermion.py` | BACKED-SOUND | S=0.0, rel-commutator ~2.4e-16/2.7e-16; self-contained (no archived-debug import) |
+| 31 | §two_body gauged spectral action: connected fraction 77%/32% (n_max 2/3) | `test_paper31_two_body.py` (spectral_action) | `operator_system.py`, `casimir_ci.py` | BACKED-SOUND | bit-reproduces 76.7%/32.4% (double-sum inner fluctuation) |
+| 31 | §two_body angular part: 100% m-conserving, pure k=0 monopole | `test_paper31_two_body.py` | `operator_system.py` | BACKED-SOUND | exact Coulomb selection-rule match (A/D positive leg) |
+| 31 | §two_body radial Pearson 0.41–0.58, decreasing with n_max (honest-negative) | `test_paper31_two_body.py::...nmax3_decreasing` (slow) | `operator_system.py`, `casimir_ci.py` | BACKED-SOUND | pins 0.58→0.41 + decreasing trend (CLAUDE.md §3 dead-end) |
+| 31 | §two_body Dirac resolvent Pearson 0.81/0.75 (n_max 2/3) | `test_paper31_two_body.py::test_resolvent_two_body_dirac_pearson` | `operator_system.py`, `casimir_ci.py` | BACKED-SOUND | 0.807/0.751; vs production Coulomb 0.825/0.75 (§3 dead-end) |
+| 31 | §two_body Laplacian resolvent uncorrelated (N=1 zero-mode kills (1s,1s)); Dirac regularizes | `test_paper31_two_body.py::test_resolvent_laplacian_zero_mode_decorrelation` | `operator_system.py`, `casimir_ci.py` | BACKED-SOUND | \|r_lap\|≪r_dir; paper's "r<0.05" is cutoff-specific (exact at n_max=3) |
 
 ## Other branches (chemistry / QC / QED-gauge / NCG-OA / precision) — PENDING
+
+_Pre-populated during the group3 sweep where a finding spilled into a future branch._
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 8 | Thm 1 σ-bond selection rules: D²_(1,0),(1,0)(γ)≡1 (transparent mode), D²_(0,0),(1,0)(γ)≡0 (no s–p mixing) | `test_paper8_sigma_bond_selection.py` (10k-pt grid <1e-14 + closed forms) | `wigner_so4.py::wigner_D_so4` | BACKED-SOUND | machine-precision on the paper's grid + matches in-paper cos²+sin² / antisym closed forms. Replaces stale `debug/test_harmonic_phase_lock.py` cite (archived dead-end probe) |

@@ -91,7 +91,7 @@ Riemannian operators with nonlinear projections, while linear
 projections from first-order complex-analytic operators introduce no
 calibration constants of any kind.  The result has direct
 implications for the framing of the fine-structure constant
-conjecture~\cite{paper2_alpha} and for the precision of nuclear
+Observation~\cite{paper2_alpha} and for the precision of nuclear
 shell-model qubit Hamiltonians built on harmonic oscillator
 single-particle bases~\cite{paper23}.
 
@@ -105,7 +105,7 @@ asymmetry as the conceptual centerpiece (Theorem~\ref{thm:asymmetry}).
 Section~\ref{sec:rigidity} states the harmonic oscillator rigidity
 theorem (Theorem~\ref{thm:rigidity}), the dual of the Fock projection
 rigidity theorem of Paper~23~\cite{paper23}.  Section~\ref{sec:imp}
-discusses implications for the $\alpha$ conjecture, for nuclear
+discusses implications for the $\alpha$ Observation, for nuclear
 quantum simulation, and for the framework's universal /
 Coulomb-specific partition.
 
@@ -229,19 +229,24 @@ fibration
 \end{equation}
 is the structural analog of the Hopf fibration $S^1 \to S^3 \to
 S^2$ that played a central role in Paper~7~\cite{paper7} and the
-$\alpha$-conjecture of Paper~2~\cite{paper2_alpha}.
+$\alpha$ Observation of Paper~2~\cite{paper2_alpha}.
 
 The CR Laplacian (Kohn Laplacian) $\Box_b$ on the holomorphic
 sector of $S^5$, the Dolbeault Laplacian on $\mathcal{O}(N) \to
 \mathbb{CP}^2$, and the Euler operator on the Bargmann monomials
 all act on the same SU(3) irreducibles $(N, 0)$ and produce
 spectra that are linear in the shell index $N$ up to additive and
-multiplicative normalizations~\cite{follandstein1974}.  The
-$\mathrm{SO}(d)$-invariant harmonic-oscillator construction on
-$d$-spheres has been developed independently in recent
-mathematical work~\cite{higgs_pickrell2025}; their open question
-for $d \ge 3$ is exactly the $d = 5$ case used here as the
-$\mathrm{SO}(6)$-invariant Hardy-sector substrate.  For the
+multiplicative normalizations~\cite{follandstein1974}.  A
+genuinely spherical harmonic-oscillator analogue --- one whose
+configuration space is the sphere itself and which, unlike the
+flat-space oscillator, does not factor into one-dimensional modes
+--- has been studied independently in recent mathematical
+work~\cite{higgs_pickrell2025}, which identifies the
+two-dimensional case as critical.  That construction is distinct
+from the flat-space isotropic oscillator discretized here via the
+$S^5$ Hardy sector; we note it only as an independent recent
+appearance of harmonic-oscillator dynamics with sphere symmetry.
+For the
 discretization in Section~\ref{sec:graph} we use the Bargmann
 description, which is the most elementary: the Euler operator is
 diagonal on the monomial basis, requires no differential geometry,
@@ -415,9 +420,10 @@ rules for transition processes.
 
 This is qualitatively different from the Coulomb / $S^3$ case of
 Paper~0~\cite{paper0} and Paper~7~\cite{paper7}, where the graph
-Laplacian $D - A$ on the $(n, l, m)$ lattice has eigenvalue $n^2 -
-1$ on the $n$-th shell and the universal kinetic constant $\kappa
-= -1/16$ converts these to Rydberg energies.  There the
+Laplacian $D - A$ on the $(n, l, m)$ lattice converges to the continuum
+$S^3$ Laplace--Beltrami operator, whose eigenvalue $n^2 - 1$ on the
+$n$-th shell the universal kinetic constant $\kappa = -1/16$ converts to
+Rydberg energies.  There the
 off-diagonal structure of $A$ is essential to the spectrum.  In the
 Bargmann graph, by contrast, the off-diagonal structure is
 spectroscopically informative but spectrally inert.  This is the
@@ -435,14 +441,13 @@ discretizations of central-potential quantum mechanics, but they
 differ in every structural feature except the use of angular
 momentum as a labeling system.  Table~\ref{tab:asymmetry}
 summarizes the comparison.\footnote{The Coulomb/HO asymmetry has been
-refined to five layers across Sprint~5 Track~S5 (gauge-content),
+refined to six layers (enumerated in \S\ref{sec:asymmetry_layer4}) across Sprint~5 Track~S5 (gauge-content),
 Paper~30 (SU(2) Wilson on $S^3$), Sprint~ST-SU3 (SU(3) Wilson on
-$S^5$), and Paper~51 (gravity termination):
-(i)~spectrum-computing role of $L_0$
-(\textbf{Coulomb-specific}); (ii)~calibration~$\pi$
-(\textbf{Coulomb-specific}); (iii)~Wilson gauge with natural matter
-coupling (\textbf{Coulomb-specific}); (iv)~universal Wilson--Hodge
-combinatorial vocabulary (\textbf{universal}).  Sprint~ST-SU3 split
+$S^5$), and Paper~51 (gravity termination).  The first three Coulomb-specific
+layers are: (i)~spectrum-computing role of $L_0$;
+(ii)~calibration~$\pi$; (iii)~Wilson gauge with natural matter
+coupling --- with the universal Wilson--Hodge combinatorial vocabulary
+as the shared (\textbf{universal}) residue, not itself one of the six.  Sprint~ST-SU3 split
 the Wilson layer into ``gauge alone'' (universal) versus ``gauge
 with natural matter coupling'' (Coulomb-specific): on $S^3$,
 $S^3 = \mathrm{SU}(2)$ means the matter spinor lives in the same
@@ -474,7 +479,7 @@ Eigenvalue $\lambda_N$ & $n^2 - 1$ (quadratic in $n$) & $N$ (linear in $N$) \\
 Shell degeneracy & $n^2$ & $(N+1)(N+2)/2$ \\
 Projection $E(\lambda)$ & $E_n = -Z^2 / [2(\lambda + 1)]$ (nonlinear) & $E_N = \hbar\omega(\lambda + 3/2)$ (linear-affine) \\
 Projection constant & $p_0 = Z / n$ (state-dependent) & $\hbar\omega$ (universal) \\
-Graph Laplacian role & computes spectrum via $D - A$ & encodes transitions only \\
+Graph Laplacian role & carries spectrum via conformal $D - A$ identification & encodes transitions only \\
 Transcendentals in projection & $\pi$ (calibration exchange constant) & none \\
 $\pi$-free graph & yes & yes \\
 $\pi$ in full pipeline & enters at projection & never enters \\
@@ -606,7 +611,7 @@ orthogonality}
 %================================================================
 
 The footnote at the head of Section~\ref{sec:asymmetry} records
-three layers of the Coulomb/HO asymmetry: the spectrum-computing
+the original three layers of the Coulomb/HO asymmetry: the spectrum-computing
 role of $L_0$ (Coulomb-specific), the calibration~$\pi$
 (Coulomb-specific), and Wilson gauge with natural matter coupling
 (Coulomb-specific).  Sprints L2-E + L2-F.1 (May~2026) identified a
@@ -761,25 +766,27 @@ symmetric irreducible representations $(N, 0)$ of $\mathrm{SU}(3)$.
 \begin{proof}[Proof.]
 The argument has three independent classical inputs.
 
-\emph{Step 1 (Jauch--Hill, 1940).}  Jauch and
-Hill~\cite{jauchhill1940} proved that the three-dimensional
-isotropic harmonic oscillator is the unique central-field
-potential whose dynamical symmetry group includes
-$\mathrm{SU}(3)$.  The proof constructs the explicit
-$\mathfrak{su}(3)$ generators as bilinears in the position and
-momentum operators (the angular momentum $\mathbf{L}$ and the
-quadrupole tensor $Q_{ij} = \frac{1}{2}(p_i p_j / m\omega +
-m\omega x_i x_j)$); the requirement that these close into
-$\mathfrak{su}(3)$ under commutation forces $V(r) \propto r^2$.
-Both directions of the equivalence
+\emph{Step 1 (Jauch--Hill, 1940; uniqueness sharpening
+Wybourne / Iachello).}  Jauch and Hill~\cite{jauchhill1940}
+proved the forward direction: the three-dimensional isotropic
+harmonic oscillator possesses an $\mathrm{SU}(3)$ dynamical
+symmetry, constructing the explicit $\mathfrak{su}(3)$ generators
+as bilinears in the position and momentum operators (the angular
+momentum $\mathbf{L}$ and the quadrupole tensor
+$Q_{ij} = \frac{1}{2}(p_i p_j / m\omega + m\omega x_i x_j)$) and
+showing that they close into $\mathfrak{su}(3)$ under commutation.
+The converse --- that $V(r) \propto r^2$ is the \emph{only}
+central-field potential whose generators close into
+$\mathfrak{su}(3)$, so that the closure \emph{forces}
+$V(r) \propto r^2$ --- is the uniqueness sharpening established in
+the later dynamical-symmetry literature; we take the biconditional
 \[
   V(r) = \tfrac{1}{2} m\omega^2 r^2
   \;\;\Longleftrightarrow\;\;
   \mathrm{SU}(3)\text{ dynamical symmetry}
 \]
-are established by this construction; see also
-Wybourne~\cite{wybourne1974}, Chapter~16, and
-Iachello~\cite{iachello2006}, Chapter~4, for modern treatments.
+in the form given by Wybourne~\cite{wybourne1974}, Chapter~16, and
+Iachello~\cite{iachello2006}, Chapter~4.
 
 \emph{Step 2 (Borel--Weil).}  The Borel--Weil
 theorem~\cite{borelweil} identifies the symmetric irreducible
@@ -826,13 +833,15 @@ the converse.  $\hfill\square$
 
 \paragraph{Remark on the converse step.}
 The crucial input to the converse direction is the biconditional
-form of the Jauch--Hill theorem (Step~1): the algebraic closure
-of the angular momentum and quadrupole generators into
-$\mathfrak{su}(3)$ \emph{forces} $V \propto r^2$.  This is the
-HO analog of the corresponding biconditional Fock--Bargmann
-result for the Coulomb problem (the Runge--Lenz closure forces
-$V \propto -1/r$).  Both biconditional results are standard
-classical group theory~\cite{wybourne1974, iachello2006}.
+sharpening of Step~1~\cite{wybourne1974, iachello2006}: the
+algebraic closure of the angular momentum and quadrupole
+generators into $\mathfrak{su}(3)$ \emph{forces} $V \propto r^2$
+(the forward implication is the original Jauch--Hill
+result~\cite{jauchhill1940}).  This is the HO analog of the
+corresponding biconditional Fock--Bargmann result for the Coulomb
+problem (the Runge--Lenz closure forces $V \propto -1/r$).  Both
+biconditional results are standard classical group
+theory~\cite{wybourne1974, iachello2006}.
 
 The harmonic oscillator and the Coulomb problem are therefore
 both rigid: the natural compact manifold and the natural
@@ -975,8 +984,9 @@ At this level of abstraction, the Bargmann graph is a lattice
 gauge structure in exactly the Paper~25 sense.
 
 \paragraph{Reduced content (no spectrum-computing role for $L_0$).}
-On $S^3$, the node Laplacian $L_0 = D - A$ is precisely the operator
-whose eigenvalues $n^2 - 1$ are mapped to the Coulomb spectrum by
+On $S^3$, the node Laplacian $L_0 = D - A$ is conformally identified
+with the continuum $S^3$ Laplace--Beltrami operator, whose eigenvalues
+$n^2 - 1$ are mapped to the Coulomb spectrum by
 the kinetic constant $\kappa = -1/16$.  The Wilson dictionary in
 Paper~25 identifies $L_0$ with the matter propagator's inverse
 (covariant Laplacian $-\nabla^2 + m^2$), and this identification has
@@ -1049,8 +1059,9 @@ the combinatorial level (incidence matrix, node/edge Laplacians,
 discrete Hodge decomposition, $\beta_1$ Wilson-loop classes), but
 the physical content of the structure is strictly reduced:
 \begin{enumerate}
-\item The node Laplacian $L_0 = D - A$ is spectrum-computing on
-  $S^3$ (via $\kappa = -1/16$) but spectrally inert on $S^5$ (the
+\item The node Laplacian $L_0 = D - A$ carries the Coulomb spectrum on
+  $S^3$ through its conformal identification with the continuum
+  Laplace--Beltrami operator ($\kappa = -1/16$) but is spectrally inert on $S^5$ (the
   HO spectrum is in the diagonal).
 \item The natural gauge group of the graph is $U(1)$; no Wilson
   $\mathrm{SU}(3)$ lattice structure emerges from the $(N, 0)$
@@ -1065,15 +1076,17 @@ The corollary extends the Coulomb/HO asymmetry of
 Theorem~\ref{thm:asymmetry} from a two-layer statement
 (spectrum: yes $S^3$, no $S^5$; calibration~$\pi$: yes $S^3$,
 no $S^5$) to a three-layer statement adding gauge-structure
-content (Wilson interpretability: full on $S^3$, reduced on $S^5$).
+content (Wilson interpretability: full on $S^3$, reduced on $S^5$); this
+is the third of the six layers catalogued in \S\ref{sec:asymmetry_layer4}.
 The universal content --- that the Wilson--Hodge vocabulary applies
 combinatorially to any simplicial 1-complex --- is preserved, but
 the Coulomb-specific content --- that the graph Laplacian
-simultaneously computes the physical spectrum and supports a
+simultaneously carries the physical spectrum (through its conformal
+identification with the continuum Laplacian) and supports a
 nontrivial matter-gauge double --- is not.
 
 A practical consequence for the Paper~2 fine-structure-constant
-conjecture~\cite{paper2_alpha}: the $S^5$ analog of the Paper~2
+Observation~\cite{paper2_alpha}: the $S^5$ analog of the Paper~2
 combination rule $K = \pi(B + F - \Delta)$ does not exist in
 natural form.  A candidate $F$-analog (the Dirichlet series
 $\sum_{N\geq 1} g_N^{\mathrm{HO}} / N^{d_{\max}}$ with
@@ -1098,18 +1111,17 @@ Section~\ref{sec:spinor-lichnerowicz}.  Cross-reference: Paper~25
 \label{sec:imp}
 %================================================================
 
-\subsection{For the fine-structure constant conjecture}
+\subsection{For the fine-structure constant Observation}
 \label{sec:alpha}
 
-Paper~2~\cite{paper2_alpha} conjectures the fine-structure
-constant from the cubic equation $\alpha^3 - K \alpha + 1 = 0$
+Paper~2~\cite{paper2_alpha} observes that the fine-structure
+constant satisfies the cubic equation $\alpha^3 - K \alpha + 1 = 0$
 with $K = \pi (B + F - \Delta)$, where $B = 42$, $F = \zeta(2) =
 \pi^2/6$, $\Delta = 1/40$ are spectral invariants of the Hopf
 fibration $S^1 \to S^3 \to S^2$.  The numerical value $K =
 137.036064$ matches $1/\alpha$ to $8.8 \times 10^{-8}$, with a
 combinatorial $p$-value of $5.2 \times 10^{-9}$.  The combination
-rule $K = \pi(B + F - \Delta)$ is empirical and the conjecture
-remains conjectural.
+rule $K = \pi(B + F - \Delta)$ is an empirical Observation.
 
 The Coulomb / HO asymmetry developed in Section~\ref{sec:asymmetry}
 provides structural support for one element of the formula: the
@@ -1126,7 +1138,7 @@ central potential.
 This does not derive Paper~2's combination rule.  It explains why
 $\pi$ appears in $K$, but does not explain the additive
 combination $B + F - \Delta$ or the values of $B$, $F$, $\Delta$
-themselves.  Paper~2 remains conjectural and its conjectural
+themselves.  Paper~2's combination rule remains an Observation; its
 status is unchanged by this paper.  The contribution here is to
 sharpen the framing: any future derivation of the combination
 rule must rely on the $\mathrm{SO}(4)$ / Riemannian features of
@@ -1172,7 +1184,7 @@ Pauli scaling.  These are the Paper~22 results.
 \paragraph{Coulomb-specific.}
 The $S^3$ Fock conformal projection; the calibration exchange
 constant $\pi$; the Hopf bundle structure underlying the
-$\alpha$ conjecture; the kinetic constant $\kappa = -1/16$ from
+$\alpha$ Observation; the kinetic constant $\kappa = -1/16$ from
 the $S^3$ Laplacian.  These are the Paper~23 / Track NH results
 and the present paper.
 
@@ -1206,8 +1218,9 @@ of this fact in terms of the difference between Riemannian and
 complex natural geometries (Theorem~\ref{thm:asymmetry}).  We
 stated and proved the harmonic oscillator analog of the Fock
 projection rigidity theorem (Theorem~\ref{thm:rigidity}), based on
-the Jauch--Hill biconditional uniqueness of $\mathrm{SU}(3)$
-dynamical symmetry, the Borel--Weil identification of $(N, 0)$
+the biconditional uniqueness of $\mathrm{SU}(3)$ dynamical
+symmetry (forward direction due to Jauch--Hill, converse to
+Wybourne and Iachello), the Borel--Weil identification of $(N, 0)$
 irreducibles with the holomorphic Hardy-space sectors, and the
 Bargmann--Segal--Hall unitary intertwiner.
 
@@ -1216,7 +1229,7 @@ a quadratic Riemannian eigenvalue to an inverse-square physical
 energy, and it has no analog for the harmonic oscillator's linear
 complex-analytic projection.  This refines Paper~18's exchange
 constant taxonomy and sharpens Paper~2's framing of the
-fine-structure constant conjecture: any geometric derivation of
+fine-structure constant Observation: any geometric derivation of
 $\alpha$ must rely on the $\mathrm{SO}(4)$ / Riemannian features
 of the Coulomb problem, not on the angular momentum structure
 shared with other central potentials.

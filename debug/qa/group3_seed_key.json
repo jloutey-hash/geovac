@@ -1,0 +1,70 @@
+{
+  "target": "group3",
+  "run_date": "2026-06-15",
+  "scope": "first-pass subset: Papers 22, 24, 31 + group3 synthesis (coverage of 22/24/31)",
+  "worktree": "../geovac-qa-seed-group3 (branch qa-seed-group3)",
+  "note": "Seeds live ONLY in the worktree. Reviewers are blind and pointed at the worktree. This key lives in the MAIN repo so reviewers cannot see it.",
+  "seeds": [
+    {
+      "id": "S1",
+      "class": "fabricated/wrong external citation",
+      "file": "papers/group3_foundations/paper_24_bargmann_segal.tex",
+      "location": "bibitem{bargmann1961} (~line 1247)",
+      "planted": "Comm. Pure Appl. Math. vol 19, p211 (1967)",
+      "truth": "Comm. Pure Appl. Math. vol 14, p187 (1961)",
+      "expected_catcher": "citation-reviewer (paper 24)",
+      "material": true
+    },
+    {
+      "id": "S3",
+      "class": "false-positive / tautological test",
+      "file": "tests/test_bargmann_graph.py",
+      "location": "test_ho_spectrum_matches_exact (~line 169)",
+      "planted": "expected_arr built from sorted(spectrum) itself -> assert spectrum==sorted(spectrum); always passes, does NOT verify the N+3/2 HO spectrum it claims to",
+      "truth": "original built expected independently from Fraction(2N+3,2) with degeneracies",
+      "expected_catcher": "code-reviewer (paper 24)",
+      "material": true
+    },
+    {
+      "id": "S9",
+      "class": "scope/status overstatement",
+      "file": "papers/group3_foundations/paper_22_angular_sparsity.tex",
+      "location": "abstract (~line 34)",
+      "planted": "'verification across every central potential and all l_max<=64 ... exact identity at arbitrary scale'",
+      "truth": "verified across 5 named potentials, l_max 1-5; it is a bound, not an exact identity at arbitrary scale",
+      "expected_catcher": "claims-reviewer (paper 22)",
+      "material": true
+    },
+    {
+      "id": "S5",
+      "class": "hard-prohibition touch (S13.5): K relabeled 'derived'",
+      "file": "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+      "location": "~line 1258 (S V 'Does the partition predict alpha?')",
+      "planted": "'The fine-structure constant is derived in Paper 2 as K = pi(B+F-Delta)=alpha^-1'",
+      "truth": "K is an Observation (never derived); the very next sentence still calls it a numerical observation without first-principles derivation",
+      "expected_catcher": "claims-reviewer (paper 31) tripwire",
+      "material": true
+    },
+    {
+      "id": "S8",
+      "class": "zombie / unsupported claim in synthesis",
+      "file": "papers/synthesis/group3_foundations_synthesis.tex",
+      "location": "~line 549 (Spinor extension / Operational consequence)",
+      "planted": "'The same universal/Coulomb partition has now been established for non-central, multi-center (molecular) interactions as well ... extends without caveat to arbitrary molecular geometry'",
+      "truth": "Paper 31 explicitly states the non-central partition is NOT yet established",
+      "expected_catcher": "claims-reviewer on the synthesis",
+      "material": true
+    }
+  ],
+  "deterministic_dimension": {
+    "seeded": false,
+    "calibration_basis": "check_k_label caught 12 real K-label defects this run (real dirt -> fixed); check_internal_titles + check_paper_test_refs ran clean (no dirt present) and carry their own regression tests (test_internal_title_consistency.py, test_paper_test_refs.py) plus caught real drift in the v4.15.0 audit. Deterministic discrimination is thus demonstrated this run without a planted S7."
+  },
+  "controls": [
+    {"id": "C-A", "file": "paper_22", "claim": "6.06% (Coulomb rule) / 1.44% (pair-diagonal) ERI density at l_max=3", "status": "CORRECT (MEASURED) - must NOT be flagged material"},
+    {"id": "C-B", "file": "paper_24", "claim": "Bargmann-Segal graph pi-free bit-exact in exact rational arithmetic at N_max=5", "status": "CORRECT (backed by test_pi_free_larger) - must NOT be flagged"},
+    {"id": "C-C", "file": "paper_31", "claim": "A/D partition: universal (algebra-only) vs potential-specific (Dirac) sectors", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-D", "file": "paper_24", "claim": "fock1935 / segal1963 citations", "status": "CORRECT attribution - citation-reviewer must NOT flag"},
+    {"id": "C-E", "file": "paper_31", "claim": "K = pi(B+F-Delta) 'remains a numerical observation without first-principles derivation' (~line 1262)", "status": "CORRECT (Observation tier) - claims-reviewer must NOT flag the correct label"}
+  ]
+}

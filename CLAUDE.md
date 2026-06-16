@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.16.5 (June 15, 2026)
+**Version:** v4.17.0 (June 16, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`/qa` group3 first bite + Paper 8 closure (2026-06-16, v4.17.0):** Papers 22/24/31 + synthesis driven through 4 `/qa group3` re-cert runs (FAIL converged prose→labels→tests→peripheral; all cleared); Paper 8 phase-lock dead-end closed, C13 group2 PASS. See debug/sprint_group3_qa_firstbite_memo.md.
 - **`/qa` C13 paper↔test reference integrity (2026-06-15, v4.16.5):** Deterministic check `debug/qa/check_paper_test_refs.py` — every test cited inline in a paper must resolve to a live `tests/test_*.py` (handles bare/prefixed/glob refs); trunk PASS. Surfaced a genuine stale ref (Paper 8 → `test_harmonic_phase_lock.py`, gates group2 when swept). `--gate <branch>` per sweep; `tests/test_paper_test_refs.py`.
 - **Trunk inline test-reference pass (2026-06-15, v4.16.4):** Trunk papers now cite their backing tests *inline* (8 refs across P0/P1/P7/P38; P32 already had 20) — the claim→test mapping previously lived only in `docs/claim_test_matrix.md`. Each phrased to its matrix verdict (no overclaim); all 4 edited papers compile ERRORS=0.
 - **`/qa` C5 K-label screen + C12 DoD (2026-06-15, v4.16.3):** Deterministic K-label backstop `debug/qa/check_k_label.py` (C12 definition-of-done; `--gate <branch>` per sweep) — trunk clean; surfaced **24 stale "conjectural" K-labels in 8 non-trunk papers** (papers lag the updated §13.5 conjecture→Observation downgrade — the rule is current, the prose stale). Cleared per branch by the active branch QA sweep. `tests/test_k_label_check.py`.
@@ -397,6 +398,7 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | float64-contaminated terms inside a high-precision Levin sum (S^(4) stage-1, 2026-06-13) | 1 | `int ** (-int)` in a prefix array silently yields float64; Levin amplifies the 1e-16 jitter by its condition number (worst on the slowest series), giving a weight-graded, precision-dependent error. Every power inside an accelerated sum must be `mpf`. See `debug/sprint_s4_scoping_memo.md` §S1.6. |
 | Brute high-precision summation of b1=2 high-log trailing multiple-t-values (S^(4) stage-1, 2026-06-13) | 1 | Four methods (Abel/Levin, sumem, manual E-M, analytic-tail agent) all under-converge / are wrong / are impractically slow — this is the known-hard MZV-computation problem. Reframe: these are LOW-WEIGHT hence classically reducible, so identify them SYMBOLICALLY (stage 2) rather than sum them numerically. See `debug/sprint_s4_scoping_memo.md` §S1.6f. |
 | sympy exact-Q rank for MZV-scale relation matrices (S^(4) stage-2, 2026-06-13) | 1 | sympy `Matrix.rank()` over Q is intractable at weight 11-13 (hundreds-to-thousands of admissible words; >17 min, no result). Use mod-p (large prime) streaming Gaussian elimination, cross-checked at a second prime; project to the target subspace during row construction. Standard for MZV rank computations. See `debug/sprint_s4_stage2_memo.md`. |
+| SO(4) Wigner-D critical points predict LiH R_eq (harmonic phase-lock probe, 2026-03-11; surfaced 2026-06-16) | 1 | Hypothesis: critical points of D^n_{(l'm'),(lm)}(γ) map via inverse-stereographic γ→R to LiH R_eq≈3.015 bohr (a closed-form R_eq from SO(4) rep theory). Result: NONE — 0 strong/near hits across 5 elements × 5 p₀. The incidental byproduct (Paper 8 Thm 1 σ-bond identities D²_(1,0),(1,0)≡1, D²_(0,0),(1,0)≡0) is real and now backed by `tests/test_paper8_sigma_bond_selection.py`. Archived probe `debug/archive/test_harmonic_phase_lock.py`. |
 
 
 ---

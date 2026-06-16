@@ -271,12 +271,13 @@ $D_{\mathrm{pd}}$ is the stricter pair-diagonal restriction
 ($m_a = m_c$, $m_b = m_d$ per pair) that holds only for
 axially-symmetric or $m$-decoupled bases.  These values are obtained
 by exact enumeration of the $N_{\mathrm{orb}}^4$ four-index
-combinations, applying the conditions of the definition above.  The
-enumeration is implemented in
-\texttt{geovac/nuclear/potential\_sparsity.py} as
-\texttt{angular\_zero\_count}; $D_{\mathrm{pd}}$ matches
-\texttt{debug/verify\_paper22\_lmax3.py} and both conventions are
-reproduced by \texttt{debug/paper22\_m\_selection\_diagnostic.py}.}
+combinations, applying the conditions of the definition above.  Both
+conventions are verified by exact enumeration in
+\texttt{tests/test\_paper22\_density.py}: the global-$M_L$ $D$ via the
+production Gaunt routine \texttt{casimir\_ci.\_gaunt\_ck}, and the
+pair-diagonal $D_{\mathrm{pd}}$ realized by
+\texttt{angular\_zero\_count} in
+\texttt{geovac/nuclear/potential\_sparsity.py}.}
 
 The density decreases monotonically with $l_{\max}$: the number of
 orbitals grows as $(l_{\max}+1)^2$ and the number of four-index
@@ -343,7 +344,9 @@ factorization applies.)
 \caption{ERI sparsity decomposition at $n_{\max}=2$, $l_{\max}=2$
 ($N_{\mathrm{spatial}} = 18$).  Angular zeros are determined by
 Gaunt selection rules; radial zeros count additional vanishings from
-radial integral structure.}
+radial integral structure.  The ERI-density column is the pair-diagonal
+$D_{\mathrm{pd}}$ (the density the composed pipeline realizes); the
+global-$M_L$ Coulomb density $D$ is $\sim\!4\times$ larger (Theorem~3).}
 \label{tab:sparsity}
 \begin{ruledtabular}
 \begin{tabular}{lccc}
@@ -371,7 +374,8 @@ precision:
   No Slater integral $R^k$ accidentally vanishes for any of the five
   potentials tested.
 \item The ERI density is $2.76\%$ for all potentials, matching the
-  angular-only prediction of Theorem~3 at $l_{\max}=2$.
+  pair-diagonal $D_{\mathrm{pd}}$ column of Theorem~3 at $l_{\max}=2$
+  (the global-$M_L$ density there is $D = 8.52\%$).
 \end{itemize}
 
 \noindent The bit-identical angular patterns are not a numerical
@@ -434,10 +438,12 @@ whose per-block single-particle bases are spherical harmonic
 products $R_{nl}(r) Y_l^m$ and whose inter-block couplings respect
 the block decomposition, the Pauli scaling $O(Q^{2.5})$ observed for
 the Coulomb interaction in
-Ref.~\cite{GeoVac_Paper14} holds for any central two-body interaction
-whatsoever, with exactly the same scaling exponent.  The radial
-potential affects only the magnitudes of the surviving ERIs, not
-which ERIs survive.}
+Ref.~\cite{GeoVac_Paper14} reflects the set of surviving ERIs, which
+is potential-independent (Theorem~2): the radial potential affects
+only the magnitudes of the surviving ERIs, not which ERIs survive.
+The $2.5$ exponent itself is the measured value for the Coulomb hydride
+library and is expected, but not here proven, to carry over to other
+central interactions.}
 
 \textit{Proof sketch.}  The composed Pauli scaling decomposes into a
 block-diagonal factor (same for all potentials, depending only on
@@ -749,18 +755,25 @@ preserving the Tier-1 finding that the Fock map itself does not lift.
 
 \subsection{Implementation and verification}
 
-The exact-rational sympy computation of $d_{\mathrm{spinor}}(l_{\max})$
-lives in \texttt{debug/tier2\_t0\_spinor\_density.py} (Dirac-on-$S^3$
-Tier 2 Track T0) and runs all six $l_{\max}$ values in under 10
-seconds on a laptop. All selection-rule decisions are sympy symbolic
-(\texttt{wigner\_3j(...) == 0} is a symbolic boolean); no floating
-point enters the zero/nonzero decision. The data dump including
-integer numerators and denominators for every density is available
-in \texttt{debug/data/tier2\_t0\_spinor\_density.json}.
+Both spinor columns of Table~\ref{tab:d_spinor} are pinned to exact
+nonzero counts and 4-decimal percentages by the regression test
+\texttt{tests/test\_paper22\_spinor\_density.py}, which re-enumerates
+the $jj$-coupled selection rule in exact \texttt{sympy} arithmetic over
+the full single shell ($l_{\max}=0,\dots,5$; the four heaviest tuples
+are \texttt{@slow}-marked). All selection-rule decisions are sympy
+symbolic (\texttt{wigner\_3j(...) == 0} is a symbolic boolean); no
+floating point enters the zero/nonzero decision. The discovery-mode
+driver (Dirac-on-$S^3$ Tier 2 Track T0) is archived at
+\texttt{debug/archive/spectral\_triple\_arc/tier2\_t0\_spinor\_density.py},
+and its data dump --- integer numerators and denominators for every
+density --- remains at
+\texttt{debug/data/tier2\_t0\_spinor\_density.json}.
 
-The scalar column of Table~\ref{tab:d_spinor} reproduces Paper~22
-\S\ref{sec:theorem}'s published scalar values bit-exactly, which
-validates the selection-rule implementation against the existing
+The full-Gaunt scalar column $d_{\mathrm{sc}}^{\mathrm{FG}}$ of
+Table~\ref{tab:d_spinor} reproduces the headline density $D(l_{\max})$
+pinned by \texttt{tests/test\_paper22\_density.py} bit-exactly, so the
+scalar/spinor boundary is mutually consistent across the two tests and
+the selection-rule implementation is validated against the existing
 reference.
 
 %=================================================================
@@ -796,7 +809,7 @@ $l_{\max}$ & $Q$ & $d_{\mathrm{Coulomb}}$ & $d_{SS}$ & $d_{SOO}$ & $d_{\mathrm{B
 \end{tabular}
 \end{center}
 
-\textbf{Verdict: the angular sparsity theorem extends to rank-2.}
+\textbf{Numerical result: the angular sparsity bound extends to rank-2 (verified at $Z=4$, $l_{\max} \le 5$; formal proof deferred).}
 The Breit density is $6$--$8\times$ denser than Coulomb (consistent with
 rank-2 being less restrictive than rank-0 in the triangle-inequality
 sense: $|\Delta l| \leq 2, |\Delta j| \leq 2, |\Delta m_j| \leq 2$ vs
@@ -805,7 +818,8 @@ $l_{\max}$ and is bounded away from 1 as $l_{\max} \to \infty$. The
 saturation at $\sim 8\times$ reflects the asymptotic selection-rule
 density of rank-2 vs rank-0 Gaunt structure on the spinor manifold.
 
-The generalized theorem statement: \emph{ERI density in the $S^3$
+The proposed generalized statement (numerically supported across the
+cases below; formal proof deferred): \emph{ERI density in the $S^3$
 spinor basis depends only on $l_{\max}$ and the tensor rank $k$ of the
 interaction operator, not on the radial kernel $V(r)$}. The rank-0
 Coulomb (\S\ref{sec:theorem}), rank-0 spinor (\S\ref{sec:paper22_spinor}),
@@ -851,9 +865,9 @@ J.~L.~Whitten,
 J.\ Chem.\ Phys.\ \textbf{58}, 4496 (1973).
 
 \bibitem{Dunlap2000}
-B.~I.~Dunlap, N.~R\"osch, and S.~B.~Trickey,
+B.~I.~Dunlap,
 ``Robust and variational fitting,''
-Mol.\ Phys.\ \textbf{98}, 1639 (2000).
+Phys.\ Chem.\ Chem.\ Phys.\ \textbf{2}, 2113 (2000).
 
 \bibitem{Suhonen2007}
 J.~Suhonen,
@@ -907,6 +921,16 @@ GeoVac Technical Report (2026).
 S.~M.~Reimann and M.~Manninen,
 ``Electronic structure of quantum dots,''
 Rev.\ Mod.\ Phys.\ \textbf{74}, 1283 (2002).
+
+\bibitem{Dyall}
+K.~G.~Dyall and K.~Faegri~Jr.,
+\textit{Introduction to Relativistic Quantum Chemistry}
+(Oxford University Press, 2007).
+
+\bibitem{Grant}
+I.~P.~Grant,
+\textit{Relativistic Quantum Theory of Atoms and Molecules}
+(Springer, 2007).
 
 \end{thebibliography}
 

@@ -212,10 +212,11 @@ def test_wigner3j_rank1_specific_value():
 
     We use our own closed-form expressions; just check consistency for
     a specific case: (l=1, l'=2, m=0, m'=0), which should give
-    (l+1-m)(l+1+m)/[(2l+1)(2l+2)(2l+3)] = 2·2/(3·4·5) = 4/60 = 1/15.
+    (l+1-m)(l+1+m)/[(2l+1)(l+1)(2l+3)] = 4/(3*2*5) = 4/30 = 2/15.
     """
     v = wigner3j_rank1_squared(l=1, l_prime=2, m=0, m_prime=0)
-    assert v == Fraction(1, 15)
+    # true |(1 1 2; 0 0 0)|^2 = 2/15, cross-checked vs sympy.physics.wigner.wigner_3j
+    assert v == Fraction(2, 15)
 
 
 def test_radial_r_squared_values():

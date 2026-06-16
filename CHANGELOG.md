@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.17.0] - 2026-06-16
+
+### Summary
+
+**`/qa group3` first bite certified-to-FAIL-then-cleared; Paper 8 cross-branch dead-end closed.** The branch QA sweep's first move beyond the trunk: the three non-trunk group3 keystones (Paper 22 angular sparsity, Paper 24 Bargmann–Segal, Paper 31 universal/Coulomb partition) + the group3 synthesis, driven through four `/qa group3` re-cert cycles against the frozen DoD `docs/qa/group3.done.md`. The FAIL character converged one layer per run — prose overclaims (run #1) → residual labels + layer-count reconciliation (run #2) → NO-TEST coverage (run #3) → peripheral citation/coverage (run #4) — and every layer was dispositioned. A single-run `/qa` exercising all dimensions cannot certify "done" while real defects remain; the value is in the convergence, and the panel proved calibrated (run #4: 6/6 sensitivity, one *reconciled* cross-paper-test false positive). Net: the first-bite subset is clean, and the lone out-of-scope item (a Paper 8 stale test ref) that kept surfacing under the group3 gate is now genuinely resolved rather than deferred. Memo: `debug/sprint_group3_qa_firstbite_memo.md`.
+
+### Added
+
+- **`tests/test_paper22_spinor_density.py`** — backs Paper 22 Table II (the relativistic jj-coupled spinor density). Exact `sympy` enumeration of the jj selection rule pins both columns — full-Gaunt `d_sp^FG` (25.00/8.59/6.46/5.17/4.30/3.68%) and pair-diagonal `d_sp` (25.00/4.30/2.11/1.23/0.81/0.57%) for l_max 0–5 — plus the three structural observations (Q_spinor = 2(l+1)², pair-diagonal ⊆ full-Gaunt, d_spinor ≤ d_scalar). l_max 3–5 `@slow`. Closes the run-#4 NO-TEST gap; the archived discovery driver `debug/archive/spectral_triple_arc/tier2_t0_spinor_density.py` is decoupled.
+- **`tests/test_paper8_sigma_bond_selection.py`** — backs Paper 8 Theorem 1 (σ-bond selection rules). Verifies the two SO(4) Wigner-D identities D²_(1,0),(1,0)(γ)≡1 (transparent mode) and D²_(0,0),(1,0)(γ)≡0 (no s–p mixing) on the paper's own 10,000-pt γ grid at <1e-14, *and* against the in-paper closed forms (cos²+sin²=1; antisymmetric s–p cancellation), with a distinctness guard. Replaces the stale `debug/test_harmonic_phase_lock.py` citation.
+
+### Changed — group3 papers (run-#4 residuals cleared)
+
+- **Paper 22** — §"Implementation and verification" rewritten: both spinor Table II columns now cited to the live `tests/test_paper22_spinor_density.py`; the archived Tier-2 Track-T0 driver repointed to its real `debug/archive/...` home; the full-Gaunt scalar column noted as bit-exactly reproducing the headline D pinned by `tests/test_paper22_density.py`. Compiles ERRORS=0.
+- **Paper 24** — two citation fixes (verified against primary sources). `higgs_pickrell2025` ("Spherical Harmonic Oscillators," arXiv:2503.23549) rewritten from a fabricated "open question for d≥3 is exactly our d=5 case" to an accurate distinct-construction pointer (the source treats a *genuinely spherical* oscillator with the **2-sphere critical**, motivated by 2d chiral QFT — never d=5/SO(6)). `jauchhill1940` narrowed at all 3 mentions to the **forward** direction (Jauch–Hill proved the oscillator *has* su(N) symmetry); the converse/biconditional uniqueness reattributed to Wybourne/Iachello (already cited). Compiles ERRORS=0.
+- **`docs/claim_test_matrix.md`** — Paper 22 spinor-density row added (foundations branch); Paper 8 Thm 1 row added (chemistry branch, pre-populated from the group3 spillover).
+
+### Changed — Paper 8 cross-branch closure (C13 group2 advisory)
+
+- **Investigation:** the C13-flagged ref `Paper_8…:1176 → test_harmonic_phase_lock.py` traced to a script that was **never in git at the cited path** — it has only ever existed at `debug/archive/test_harmonic_phase_lock.py`, committed at v0.9.37 (2026-03-11). The script is a **failed speculative probe** (does an SO(4) Wigner-D critical point map via inverse-stereographic γ→R to LiH R_eq≈3.015 bohr? — its own output records **0 strong/near hits**), correctly archived. The two identities Paper 8 cited it for are an *incidental byproduct* and genuinely true.
+- **Fix:** Paper 8's citation repointed to the new purpose-built test; Paper 8 compiles fully clean (ERRORS=0, UNDEF=0). C13 `--gate group2_quantum_chemistry` now PASS.
+- **`docs/authoring_conventions.md`** — new project-wide rule 10: a `\texttt{test_*.py}` citation is a verification-backing claim (must be a live `tests/` test, gated by C13); `debug/` is provenance-only and may be archived. Paper 8 recorded as the worked example. Also corrected two stale hard-prohibition labels in the same file (rule 4 "K… stays CONJECTURAL"; group5 "α combination rule conjectural") to **Observation** per §13.5 — guidance that instructed a violation of the current rule.
+
+### Closed (dead end)
+
+- **SO(4) Wigner-D critical points predict LiH R_eq** (harmonic phase-lock probe, 2026-03-11; surfaced 2026-06-16). 0 strong/near hits across 5 D-matrix elements × 5 p₀. The incidental σ-bond identities are real (now backed by `tests/test_paper8_sigma_bond_selection.py`); archived probe `debug/archive/test_harmonic_phase_lock.py`. New §3 row.
+
+### Carry-forward / open
+
+- **CF-1** (`docs/qa/group4.carryforward.md`) unchanged: `potential_sparsity.angular_zero_count` realizes D_pd while its docstring/Paper-22 footnote describe global-M_L D; the composed Pauli advantage rests partly on the pair-diagonal ERI approximation (LiH 333→837 Pauli = 2.5×; "2.7× fewer than STO-3G" → ~parity; energy ~1 mHa). Disposition deferred to the group4 QA.
+- group3 first bite covered Papers 22/24/31 only; Papers 18/54/55/56/57 remain for the full group3 certification.
+
+### Verification
+
+- Topological-integrity baseline (18 symbolic S³ proofs) + all new/affected tests: 85 passed, 13 slow-skipped. No production `geovac/` code changed this session (test additions + paper prose only).
+
 ## [4.16.5] - 2026-06-15
 
 ### Summary

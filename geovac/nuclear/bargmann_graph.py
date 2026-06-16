@@ -182,35 +182,35 @@ def wigner3j_rank1_squared(l: int, l_prime: int, m: int, m_prime: int) -> Fracti
     # Case l' = l + 1
     if l_prime == l + 1:
         if q == 0:
-            # (l 1 l+1; m 0 -m)² = (l+1-m)(l+1+m) / [(2l+1)(2l+2)(2l+3)]
+            # (l 1 l+1; m 0 -m)² = (l+1-m)(l+1+m) / [(2l+1)(l+1)(2l+3)]
             num = (l + 1 - m) * (l + 1 + m)
         elif q == 1:
-            # (l 1 l+1; m 1 -(m+1))² = (l+m+1)(l+m+2) / [2(2l+1)(2l+2)(2l+3)]
+            # (l 1 l+1; m 1 -(m+1))² = (l+m+1)(l+m+2) / [2(2l+1)(l+1)(2l+3)]
             num_full = Fraction((l + m + 1) * (l + m + 2),
-                                2 * (2 * l + 1) * (2 * l + 2) * (2 * l + 3))
+                                2 * (2 * l + 1) * (l + 1) * (2 * l + 3))
             return num_full
         else:  # q == -1
-            # (l 1 l+1; m -1 -(m-1))² = (l-m+1)(l-m+2) / [2(2l+1)(2l+2)(2l+3)]
+            # (l 1 l+1; m -1 -(m-1))² = (l-m+1)(l-m+2) / [2(2l+1)(l+1)(2l+3)]
             num_full = Fraction((l - m + 1) * (l - m + 2),
-                                2 * (2 * l + 1) * (2 * l + 2) * (2 * l + 3))
+                                2 * (2 * l + 1) * (l + 1) * (2 * l + 3))
             return num_full
-        den = (2 * l + 1) * (2 * l + 2) * (2 * l + 3)
+        den = (2 * l + 1) * (l + 1) * (2 * l + 3)
         return Fraction(num, den)
 
     # Case l' = l - 1
     if l_prime == l - 1:
         if q == 0:
-            # (l 1 l-1; m 0 -m)² = (l-m)(l+m) / [(2l-1)(2l)(2l+1)]
+            # (l 1 l-1; m 0 -m)² = (l-m)(l+m) / [(2l-1)(l)(2l+1)]
             num = (l - m) * (l + m)
-            den = (2 * l - 1) * (2 * l) * (2 * l + 1)
+            den = (2 * l - 1) * l * (2 * l + 1)
             return Fraction(num, den)
         if q == 1:
-            # (l 1 l-1; m 1 -(m+1))² = (l-m)(l-m-1) / [2(2l-1)(2l)(2l+1)]
+            # (l 1 l-1; m 1 -(m+1))² = (l-m)(l-m-1) / [2(2l-1)(l)(2l+1)]
             return Fraction((l - m) * (l - m - 1),
-                            2 * (2 * l - 1) * (2 * l) * (2 * l + 1))
+                            2 * (2 * l - 1) * l * (2 * l + 1))
         # q == -1
         return Fraction((l + m) * (l + m - 1),
-                        2 * (2 * l - 1) * (2 * l) * (2 * l + 1))
+                        2 * (2 * l - 1) * l * (2 * l + 1))
 
     return Fraction(0)
 
