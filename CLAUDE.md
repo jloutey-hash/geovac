@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.18.0 (June 16, 2026)
+**Version:** v4.18.1 (June 16, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **CLAUDE.md compaction round 3 (2026-06-16, v4.18.1):** §2 historical arc chronicles + the v3.x one-liner index moved verbatim to `docs/development_frontier_archive.md`; 160→140 KB, back under the 150 KB repo-health budget.
 - **`/qa` group3 first bite CERTIFIED (2026-06-16, v4.18.0):** Run #7 PASS (Papers 22/24/31 + synthesis); C11 title-gate hardened (KEYED + subtitle + `--gate`); 6 cross-branch stale titles fixed corpus-wide. See debug/sprint_group3_qa_firstbite_memo.md.
 - **`/qa` group3 first bite + Paper 8 closure (2026-06-16, v4.17.0):** Papers 22/24/31 + synthesis driven through 4 `/qa group3` re-cert runs (FAIL converged prose→labels→tests→peripheral; all cleared); Paper 8 phase-lock dead-end closed, C13 group2 PASS. See debug/sprint_group3_qa_firstbite_memo.md.
 - **`/qa` C13 paper↔test reference integrity (2026-06-15, v4.16.5):** Deterministic check `debug/qa/check_paper_test_refs.py` — every test cited inline in a paper must resolve to a live `tests/test_*.py` (handles bare/prefixed/glob refs); trunk PASS. Surfaced a genuine stale ref (Paper 8 → `test_harmonic_phase_lock.py`, gates group2 when swept). `--gate <branch>` per sweep; `tests/test_paper_test_refs.py`.
@@ -160,28 +161,8 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 - **Sprint B3 Phase-3 Sprint-3 (2026-06-10, v4.2.0):** ADMISSIBILITY SETTLED — folding reorganizes cone classes ((2,1) annihilated; (2,2) timelike → flow-commuting); band-limited penalties bit-exactly cutoff-INDEPENDENT n_max=2..5 (prize reduces to band exhaustion); Bures positivity REFUTED (574/2400); period-π attribution corrected (spinor grading, not folding). Falsifier `tests/test_wh7_b3_phase3_sprint3.py`. See `debug/sprint_wh7_b3_phase3_sprint3_memo.md`.
 - **Sprint B3 Phase-3 Sprint-2 (2026-06-10, v4.1.0):** MECHANISM-CLOSED — evenness symmetry ([G,K]=0 ⇒ c12(ε)=c23(−ε), cost-universal) explains Sprint-1 bimodal p AND sign caveat; Umegaki chain fails generically (90/96); wedge substrate transfers bit-level, period π, operational interval ℓ. Falsifier `tests/test_wh7_b3_phase3_sprint2.py`. See `debug/sprint_wh7_b3_phase3_sprint2_memo.md`.
 - **Release v4.0.0 (2026-06-10):** Major-version consolidation of the six staged units v3.110.0–v3.115.0 (repo hygiene + papers/INDEX, CLAUDE.md compaction round 2, WH7 registration + Step-1 probe, B1 product-carrier convergence, B3 Phases 1–3 Sprint 1). PI versioning convention: major versions track AI-collaborator changes — the Fable refactor of CLAUDE.md qualifies. See CHANGELOG [4.0.0].
-- **Sprint B3 Phase-3 Sprint-1 state intervals (2026-06-10, v3.115.0):** FOUNDATION-LAID — wedge KMS + orbits anchored bit-level; D_max chain ("detour never costs less") 96/96 universal; bimodal kick-cost scaling by boost weight (ε² vs ε^1.2, tangent confound ruled out); caveat frozen: excess sign is reference-state dependent — D_max is the penalty layer, flow parameter is the interval. Falsifier `tests/test_wh7_b3_phase3.py`. See `debug/sprint_wh7_b3_phase3_sprint1_memo.md`.
-- **Sprint B3 Phase-2 cone structure (2026-06-10, v3.114.0):** HS causal ratio = symbol classifier EXACTLY, q_F = (2m′²−b(b+1))/(b(b+1)) all-rational (CG-exact, float dev 2×10⁻¹⁶); causal form class-diagonal definite — cone is a GRADING not a signature; rate-level reverse triangle FAILS by inertia (frozen negative) → Phase 3 = state-level thermal-time intervals (Paper 49 TICI + B1 substrate). Falsifier `tests/test_wh7_b3_phase2.py`. See `debug/sprint_wh7_b3_phase2_memo.md`.
-- **Sprint B3 Phase-1 boost-seminorm probe (2026-06-10, v3.113.0):** POSITIVE-STRUCTURED — boost-alone kernel = 9 (boost-invariant multipliers, the structured middle between P45 annihilation and metric condition); frame restores ℂ1; bit-exact spin-statistics grading σ_π(F)=(−1)^{2b}F; causal classifier matches symbol signs 9/9 with b=1 top weight ON the cone. Falsifier `tests/test_wh7_b3_boost.py`; Paper 45 Q1 paragraph. See `debug/sprint_wh7_b3_boost_probe_memo.md`.
-- **Sprint B1 joint product-carrier convergence (2026-06-10, v3.112.0):** Paper 45 gains `prop:product_action_seminorm` — truncated S³×S¹_T system converges in vS state-space GH at additive rate γ_n+γ_K under the joint translation seminorm; 6-check panel all PASS (pure-factor exactness 0/10⁻¹⁶, Leibniz envelope, kernel condition, additive smoothing, N_t=1 reduction bit-exact); Q1 sharpened to signature-only (boost/modular-flow seminorm = named candidate); claims register row 21; P45 23pp GATE: PASS. See `debug/sprint_wh7_b1_joint_memo.md`.
-- **Sprint WH7 Toeplitz probe Step 1 (2026-06-10, v3.111.0):** POSITIVE-REBUILD — translation seminorm = Lipschitz exactly on Toeplitz temporal modes (10⁻¹⁴); P45 invisibility reproduced as momentum-diagonal-algebra artifact; visibility survives de-compactification at fixed bandwidth. Compact-time Lorentzian wing rebuilt at operator level; falsifier `tests/test_wh7_toeplitz_temporal.py`. See `debug/sprint_wh7_toeplitz_probe_memo.md`.
-- **Sprint CLAUDE.md compaction round 2 (2026-06-10, v3.110.1):** 320 KB → 133 KB (−59%); §1.7/§2/§6/§7/§12 + §1.5 chronicle moved verbatim to 5 docs/ files; §13.11 rule 9 (replace-don't-append, PI-authorized); repo health gate added to /release precondition 8. See CHANGELOG v3.110.1.
-- **Sprint repo-hygiene + WH7 registration (2026-06-10, v3.110.0):** debug/ swept 1,824→458 top-level files into `debug/archive/<arc>/` (manifest + READMEs; test-referenced files pinned); `papers/INDEX.md` status map + README start-here block; 147 untracked LaTeX artifacts purged. WH7 (time-discreteness is observer-compactification) registered in §1.7 per PI direction. See `debug/sprint_repo_hygiene_memo.md`.
-- **Sprint P38-G1/G2 closure — theorem UNCONDITIONAL (2026-06-10, v3.109.0):** Translation-seminorm reframing dissolves both named gaps: G2 kernel condition holds on the TRUTHFUL CH substrate (Schur + per-band injectivity, verified n_max=2..5); G1 dual reach closed by exact-fit spinor lifted state (CH shells ARE the V_j⊗V_{j±1/2} window blocks; defects = Fejér smoothing at γ_n). Paper 38 unconditional at rate (4/π+o(1))log n/n in vS state-space framework; cascade to P45/P32/register/README/field-guide/N1; falsifier `tests/test_p38_action_seminorm.py`; WH1 restored to PROVEN. Outreach blocker cleared. See `debug/sprint_p38_g1g2_phaseA_memo.md`.
-- **Sprint repositioning — Phase 3 COMPLETE (2026-06-10, v3.108.0):** PI-directed §1 viability rewording (research instrument, not production tool); README badge + matched-qubit caveats; Paper 14 abstract caveat (P20 already compliant); corpus-wide α-mention audit CLEAN (all ~15 papers compliant, zero fixes). See CHANGELOG v3.108.0.
-- **Sprint accessibility layer — Phase 2 COMPLETE (2026-06-10, v3.107.0):** N1+N2 front-door notes (docs/outreach/, send-gated), claims register (docs/claims_register.md, 20 rows), vocabulary translation (33 rows), standalone audit + rewords applied (P38/P45), README/field-guide/synthesis/.zenodo.json stale-claim fixes. Bonus: Paper 28 Thm 3 proof factor-2 error caught drafting N2, fixed, 40-digit verified. See CHANGELOG v3.107.0 + docs/corpus_accessibility_plan.md status block.
-- **Sprint de-versioning + subagent budget policy (2026-06-10, v3.106.1):** PI directive: papers are a single source of truth corrected in place (git/Zenodo = version record) — all 8 papers stripped of v1/v2/erratum scaffolding, content unchanged, one History remark each in P38/P45; all GATE: PASS. New standing rule `memory/feedback_subagent_token_budget.md` (model tiering, batching, paste-don't-point, hard caps, scripted gates) + `debug/compile_3pass.sh`; sibling pass ran on sonnet at 141.7k tokens vs 366k same-scope yesterday.
-- **Sprint P45-hardening + corpus descope (2026-06-09, v3.106.0):** Adversarial Phase-1 pass (accessibility plan) FALSIFIED Paper 45's main theorem — K⁺ seminorm ≡ 0 bit-exact, "Latrémolière Thm 5.5" nonexistent, L2 mass/symbol conflation. Option C executed: P45 corrected in place to the annihilation theorem, P38 to a conditional vS restatement (2 named gaps), Status notes in P40/46/47/48/49 + P32; falsifier frozen `tests/test_p45_kplus_degeneracy.py`; outreach blocked pending P38 repair. See `debug/sprint_p45_hardening_phase1_memo.md` + `docs/corpus_accessibility_plan.md`.
-- **Sprint pre-outreach corpus hygiene (2026-06-08, v3.104.0):** Coordinated multi-paper cleanup pass before Brown/Kleinschmidt outreach. Five parallel audits (Papers 55, 56, 32 §VIII, LiH regression, corpus citation sweep) followed by sixteen-task execution: H1 Yukawa promoted to `\begin{theorem}` block (Paper 32 §VIII tally now 8/8); `thm:no_single_mechanism_K` proof rewritten to separate structural argument from empirical confirmation; 18 bibitem corrections across 13 papers (4 wrong arXiv IDs in P55; Perez-Sanchez titles in P38 + P56; Mondino-Sämann title in P44/45/46/47; Nieuviarts titles in P42/43/44; duplicate Paper 55 bibitem in P56; missing karamata/korevaar/tenenbaum bibitems in P55); lineage citations added to P18 + P29; field guide refreshed with C-arc closure paragraph + Papers 45/46/56 in readers' map + Deligne-Milne converse / non-commutative MS in open frontiers; README updated to v3.104.0 + new Math.OA / NCG / Periods Arc section + 17 new Paper Series entries; LiH regression memory note retired (confirmed RESOLVED v3.56.0, Paper 17 5.3% reproduces at 2.82%). 18/18 topological proofs pass; all edited papers compile three-pass clean. See `debug/cleanup_*_memo.md` (5 audit memos).
-- **Sprint spin-structure moduli + Dirac-index obstruction (2026-06-08, v3.105.0):** Layer-1 flat-$\mathbb{Z}_2$ spin structures $= H^1(G;\mathbb{F}_2)$. Scalar Hopf $m\to-m$ gives 2 symmetric configs at $n_{\max}=3$; Dirac $m_j\to-m_j$ is a fixed-point-free Kramers automorphism, but chirality $\chi\to-\chi$ is not even a node bijection ($2\ell+2$ vs $2\ell$ per block, Dirac index $n_{\max}(n_{\max}+1)$) — substrate root of the relativistic-$\mathbb{Z}_2$ negatives. Paper 29 `obs:chirality_obstruction`; 11 tests. See `debug/spin_structure_moduli_memo.md`.
-- **Sprint C-arc closure — E6 + D5/D6 + chemistry analog (2026-06-08, v3.103.0):** Two new theorems + one named multi-month target in Paper 32 §VIII. **E6** `thm:no_single_mechanism_K`: 3 spectral homes in 2 Mellin sub-rings; no morphism generates $K = \pi(B+F-\Delta)$; 12 mechanisms eliminated; combination rule preserved as conjectural per §13.5. **D5/D6** `thm:cutoff_function_external` + corollary: cutoff function and its φ-moments are external test-function data; Wald forces relations not values; CC fine-tuning $\varphi(2)/\varphi(1)^2 \approx 10^{-124}$ formalised as external moment selection. **Chemistry-analog** `rem:chemistry_eta_analog`: named multi-month NCG-research target (FrozenCore chirality-grading analog). **Terminal state remark** `rem:c_arc_terminal_state`: **eight theorem-grade non-selection results across four sectors**, C-arc closed. See `debug/sprint_c_arc_closure_e6_d5d6_chemistry_memo.md`.
-- **Sprint G1/G2/G5 — Spatial-composition wall theorem (2026-06-08, v3.102.0):** Paper 32 §VIII gains `thm:spatial_composition_radial_wall` + `cor:spatial_composition_wall` + `rem:multi_focal_wall_fully_characterized`. Tensor-product spectral triple produces forced angular structure (Paper 54 Thm 3) but unforced radial coupling (Fock-projection conformal-factor non-commutativity). Closes **three** catalogue entries (G1, G2, G5) — the spatial-composition sub-sector of multi-focal-composition wall. **Multi-focal-composition wall now fully theorem-bound** under two structurally distinct theorems (renormalization + spatial-composition). **Six theorem-grade non-selection results now in corpus**. See `debug/sprint_g1_g2_g5_spatial_composition_memo.md`.
-- **Sprint E7/E8 — Single-cutoff spectral action theorem (2026-06-08, v3.101.0):** Paper 32 §VIII gains `def:multi_cutoff` + `thm:single_cutoff_spectral_action` + `cor:multi_loop_renormalization_wall` + `rem:single_cutoff_scope`. Theorem: CC spectral action axiom is single-cutoff; no morphism in $\mathcal{A}$ produces multi-cutoff structure. Closes **four** catalogue entries (E7, E8, G3, G4) — the multi-loop QED renormalization sub-sector of the multi-focal-composition wall. **Five theorem-grade non-selection results now in corpus**: Forced-Count, H1 Yukawa, $N_{\mathrm{gen}}$, KO-dim, single-cutoff spectral action. See `debug/sprint_e7_e8_single_cutoff_memo.md`.
-- **Sprint F3 — Inner KO-dim non-selection theorem (2026-06-08, v3.100.0):** Companion to C3. Paper 32 §VIII gains `thm:ko_dim_non_selection` + `rem:full_inner_factor_boundary`. Argument is one-line composition: packing is kinematic (Paper 0 §VII.B), KO-dim is real-structure data, packing produces no real-structure → $\mathcal{A}$ cannot autonomously select KO-dim. **Four theorem-grade non-selection results now characterise the full inner-factor structural-skeleton boundary at the canonical-rep level**: Forced-Count, H1 Yukawa, $N_{\mathrm{gen}}$, KO-dim. Paper 57 §3.1 + §6.3 closure updated to four. See `debug/sprint_f3_ko_dim_non_selection_memo.md`.
-- **Sprint C3 — $N_{\mathrm{gen}}$ non-selection theorem (2026-06-08, v3.99.0):** Theorem-grade upgrade of Direction 2 + Read 2 NO-GO scopings. Paper 32 §VIII gains `thm:n_gen_non_selection` + `rem:n_gen_scope` (conditional on canonical CCM rep). Three theorem-grade non-selection results now in corpus: Forced-Count, H1 Yukawa, $N_{\mathrm{gen}}$. Paper 57 §3.1 + new §6.3 closure updated. See `debug/sprint_c3_n_gen_non_selection_memo.md`.
-- **Sprint C2 principle hunt — P5 packing-reachability (2026-06-08, v3.98.0):** Formal test of five candidate discriminators against the v3.97.0 catalogue. P5 (packing-reachability) hits **98.3% accuracy** with a single ambiguous misclassification (I3 Higgs direction, already flagged as conditional). Two-family structure preserved as failure-mode decomposition beneath P5. Paper 57 §5.5+§5.6+§6.1+§6.2 updated. See `debug/sprint_c2_principle_hunt_memo.md`.
 
-> Older sprint index (v2.x–v3.96.0), the long-form arc chronicles, and the RH sprint records moved verbatim to `docs/development_frontier_archive.md` (2026-06-10 compaction). CHANGELOG.md remains the canonical chronicle going forward.
+> Older sprint index (v2.x–v3.115.0), the long-form arc chronicles, and the RH sprint records moved verbatim to `docs/development_frontier_archive.md` (2026-06-10 and 2026-06-16 compactions). CHANGELOG.md remains the canonical chronicle going forward.
 
 **Best results by system type:**
 
@@ -210,96 +191,15 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 **Classical solver status: INVESTIGATION COMPLETE (v2.0.24).** 30+ tracks exhausted all solver × PK × basis combinations. Structural ceilings characterized. Composed at l_max=2 is the production operating point. See CHANGELOG.md for full track history.
 
-- **Entropy/entanglement arc (Papers 26-27, v2.9.2):** Universal S_B(w̃_B/δ_B)^γ scaling with γ_∞≈1.96; HO zero-entropy rigidity exact; bond blocks break single-center curve. See Paper 27, CHANGELOG EP-2 series.
-- **Cusp re-diagnosis (v2.9.2):** He 0.20% CI floor is graph-validity-boundary artifact (Z_c≈1.84), NOT cusp. TC dead at every n_max. See `debug/cusp{1,2,3}_*.py`.
-- **Graph validity boundary (v2.9.0):** Variational bound violated below Z_c≈1.84; mechanism is Z-independent κ vs Z²-scaled diagonal.
-- **111 Pauli count derivation (v2.9.0):** 111 = 55 direct + 56 exchange per s/p block. Universal coefficient 11.11×Q across 28 molecules.
-
 **Quantum computing status: ACTIVE FRONTIER (Paper 14).** O(Q^2.5) composed Pauli scaling, 51x-1712x vs Gaussian, 28 molecules, ecosystem export (OpenFermion/Qiskit/PennyLane). PK classical partitioning gives 78x 1-norm reduction for H₂O. Market test: LiH 0.97× 1-norm vs STO-3G with 2.7× fewer Pauli. 40 molecules total in library. See Paper 14, Paper 20, CHANGELOG Tracks AW-CA.
 
-**Balanced coupled (Track CD, v2.0.39+):** Cross-center V_ne via multipole; LiH 878 Pauli, 1.8% energy, 7.0% R_eq; only bound 4e config. n_max=3: 0.20% energy. BeH₂ 2,652 Pauli; H₂O 5,798 Pauli. See Paper 19, CHANGELOG.
-
-**Precision atomic spectra (Track DI, v2.6.0):** 2D variational breaks adiabatic floor (0.022% raw, 0.004% cusp-corrected at l_max=4). Graph-native CI 0.20% at n_max=9 with exact algebraic integrals. FCI basis-invariant. See Paper 13, CHANGELOG.
-
-**RH sprint (v2.20.0-v2.23.0, April 2026):** GeoVac Hopf graphs strictly Ramanujan (Paper 29). Six sprint-scale follow-ups: Alon-Boppana crossing at V~30-60 (finite-size statement), Hopf-U(1) block hypothesis validated, spectral χ₋₄ closed form D_even−D_odd = 2^(s−1)(β(s)−β(s−2)), GUE-like spectral-zero stats (CV≈0.35-0.40), no functional equation (48 OoM gap), SU(2) Wilson on S³ (Paper 30). Direct spectral-to-classical-RH bridge CLOSED by three independent walls (WH6). See Papers 28-30, CHANGELOG.
-
-
-
-
-**Sprint 5 S_min erratum patch (v2.23.1, April 17, 2026):** the Sprint 4 RH-P side flag was independently verified by three methods (direct sum + 5-term explicit tail; mpmath.nsum Levin u-transform; Euler-Maclaurin 26-term asymptotic) all agreeing at ≥ 80 digits on the true value **S_min = 2.47993693803422255441357950082938214468792578661728845837879872655955...** Double-diagnosis: (a) Paper 28's published 2.47953699802733387 was wrong at the 4th decimal due to an erroneous tail formula in `debug/smin_identification.py` lines 45-48 which assumed T(k)~2/a² (the correct asymptotic is T(k)~2/a); (b) RH-P's 2.47993693803422255447852790477 was wrong at the 20th digit due to incorrect c_6..c_11 coefficients in `debug/compute_smin_chi_neg4.py` T_SQUARED_COEFFS. **Fixes applied**: Paper 28 §IV text updated with the corrected value at 25 digits; `debug/smin_identification.py` compute_S_min_with_tail now delegates to mpmath.nsum Levin (2-line fix, ~2 s runtime, verified to 15+ digit match); `debug/compute_smin_chi_neg4.py` T_SQUARED_COEFFS retained with documented 20-th-digit limitation (does not affect the RH-P PSLQ negative result, which was Q-linear-independence against a finite basis insensitive to 6.5e-20 numerical shifts). Irreducibility of S_min against the 47-element extended basis **unchanged** — 15 PSLQ failures stand. Key files: `debug/compute_smin_verification.py`, `debug/smin_verification_memo.md`, `debug/data/smin_verification.json`.
-
-**QED arc (Papers 28, 33, 36, April-May 2026):**
-- QED on S³: 5 theorems (T9, χ₋₄, self-energy zero, ζ(3) complementarity, product survival), S_min irreducible at 200 dps, D₅/D₆ Sommerfeld via PSLQ. See Paper 28.
-- Graph-native QED (GN-1..GN-7): F₂=5√2/3 π-free; pendant-edge theorem Σ(GS)=2(n-1)/n; 1/8→4/8→7/8→8/8 selection rule recovery. See Paper 33.
-- Vector-photon QED: 7/8 scalar, 8/8 Dirac via spinor phase constraint. Calibration 1/(4π) per loop. See Paper 33, CHANGELOG.
-- Bound-state QED / Paper 36: Lamb shift −0.534% at one loop; LS-8a two-loop wall (counterterms not autonomous). See Paper 36.
-- Sprint HF (2026-05-07): H 21cm at +18 ppm; multi-focal-composition wall crystallized (5 observables, same structural reason).
-- Sprint MH (2026-05-08): μH Lamb −0.10% (full Uehling kernel); BF HFS +2 ppm; rest-mass projection verified.
-- Precision catalogue (2026-05-08/09): 9 systems sub-percent across mass-hierarchy × nuclear-spin × multi-focal axes. Paper 34 §V. See CHANGELOG.
-
-**Spectral triple / WH1 arc (Papers 32, 38-50, April-May 2026):**
-- WH1 PROVEN (2026-05-06): GH-convergence theorem, five-lemma proof, Λ ≤ C₃·γ_{n_max} → 0, rate 4/π. Paper 38.
-- Paper 39: Tensor-product propinquity. Paper 40: Unified GH on all compact Lie groups, 4/π universal. Master theorem subsumes 38/39/40.
-- Sprint H1: AC extension POSITIVE-THIN (Higgs admitted, Yukawa not selected). Sprint G3: NEGATIVE (γ_GV ≠ γ_F).
-- Sprint TS (2026-05-04): Case-exhaustion theorem (Paper 32 §VIII); master Mellin engine M1/M2/M3. See `debug/track_ts_*_memo.md`.
-- TX-A/TX-B (May 2026): Paper 34 three-axis axiomatization; Paper 35 Prediction 1 graduated (208/208). See `debug/tx_{a,b}_*_memo.md`.
-- ST-SU3: SU(3) Wilson on S⁵ Bargmann — gauge YES, matter NO; universal 1/(4N_c). See Paper 30 §7.7.
-- WH1 R1-R3.5 (2026-05-03/04): Connes-vS operator-system alignment, prop=2, Avery-Wen-Avery, full Dirac L1'. See Paper 32 §III.
-
-**Lorentzian arc (Papers 42-49, May 2026):**
-- Sprint L0 (2026-05-16): 28-projection transfer audit (17/4/5/2 = free/Wick/Euclidean/mixed). Paper 31 §8, Paper 34 §V.E.
-- Sprint L1 (2026-05-16): σ_{2π}(O)=O bit-exact at n_max=2..5; four-witness theorem at operator-system level. Paper 42.
-- Sprint L2 (2026-05-16/17): Krein (3,1) + Lorentzian Dirac + axiom audit + modular Hamiltonian. Paper 43. H_local ≠ D_W signature-independent.
-- Pythagorean HS-orthogonality (2026-05-17/23): ⟨H_local,D_W^L⟩=0 bit-exact, closed form, 1/π² M1 signature. Paper 43 §10.2.
-- Sprint L3a-1 + Paper 44 (2026-05-17): Lorentzian operator system, prop=2/∞ envelope-dependent. Paper 44.
-- Sprint L3b-2 + Paper 45 (2026-05-18): K⁺-weak Lorentzian propinquity — first in literature. Paper 45.
-- Sprint L3b-2a-d + Paper 46 (2026-05-22): Strong-form closed; Λ^strong=Λ^P45 bit-exact. Paper 46.
-- Sprint L3c + Paper 47 (2026-05-23): G2 norm-resolvent; three-carrier identification. Paper 47.
-- Phase A + Paper 48 (2026-05-24): Krein-MS bridge; 7 newly accessible theorems. Paper 48.
-- Q1' + Paper 49 (2026-05-24/25): OSLPLS strong-form bridge; twin paradox. Paper 49.
-- **Sprint math.OA-arc-closure (2026-05-31):** G2-metric, G3, Q2, Q2' all CLOSED. See `debug/sprint_mathoa_arc_closure_memo.md`.
-
-**Gauge arc (Papers 25, 30, 41, April-May 2026):**
-- Paper 30 (v2.25.0): SU(2) Wilson on S³; maximal-torus → Paper 25 U(1); L₁ = kinetic term. See Paper 30.
-- Paper 41 / XCWG arc (2026-05-16): Rule B Wilson U(1), seven-witness compatibility with 3D compact U(1). See Paper 41.
-- Paper 18 consolidation (v2.24.0): Light-touch v1.0→v1.1; meta-pattern cross-reference.
-
-**Dirac-on-S³ arc (v2.12.0-v2.19.4, April 2026):**
-- Tier 2 (T0-T6): Spin-ful composed qubits (LiH/BeH/CaH relativistic). Spinor certificate R_sp = ℚ(α²)[γ]. Papers 14, 22 updated.
-- Tier 3 (T7-T9): Darwin+MV α⁴ ladder; T9 squared Dirac ζ_{D²}(s) = π^{even} only theorem. Paper 18 4th cell filled.
-- Breit SS/SOO (v2.18.0): Retarded radial, Drake combining at operator level. Sprint CP: Li +9%, Be +3%.
-- One-loop QED VP (v2.18.2): a₀=a₁=√π, β(α)=2α²/(3π) from S³ spectral data.
-- Compactness thesis (v2.18.1): Paper 18 Peter-Weyl rewrite. Kramers-Pasternak direct integration.
-
-**Chemistry arc (v2.0.30-v2.3.0, Tracks BG-CX):**
-- General composed builder (v2.0.30): `build_composed_hamiltonian(spec)` + atomic classifier Z=1-10.
-- Second-row (v2.1.0): [Ne] frozen core, Z=11-18, Q^2.50 scaling. Third-row (v2.2.0): [Ar]/[Ar]3d¹⁰, Z=19-36.
-- Multi-center (v2.3.0): 8 new molecules (LiF, CO, N₂, F₂, NaCl, CH₂O, C₂H₂, C₂H₆). N_Pauli = 11.11×Q universal.
-- TM hydrides (v2.8.0): Z=21-30, d-orbital blocks, Pauli/Q=9.23. Heavy-atom (v2.12.0): SrH/BaH [Kr]/[Xe] cores.
-- W1c arc (2026-05-23): F1→F2→F3 closed W1d (cross-block h1); W1e opened (inner-region overattraction). F4-F6 negatives.
-- Balanced second-row FCI (v2.19.4): NaH/MgH₂ overattract — frozen-core limitation. See CHANGELOG.
-
-**Precision catalogue / multi-focal arc (2026-05-07 through 2026-05-18):**
-- Multi-focal Phase C closures: W1a cross-register V_eN, W1b Zemach operator, W1c screened V_ne, W2b tensor propinquity. See CHANGELOG.
-- Roothaan autopsies (2026-05-09): 8-track sprint; 6 §V.C + 4 §V.D entries in Paper 34. See `debug/*_autopsy_*_memo.md`.
-- Hylleraas r₁₂ (2026-05-09): He 1¹S at 0.0006%; Track 5 closure He 2¹P→1¹S f-value −2.02%. See Paper 34.
-- Z>20 cliff diagnostic: CR67 single-zeta non-faithful; BBB93 GO with eyes open. See `debug/z_cliff_*_memo.md`.
-- AdS/CFT adjacent (2026-05-25/26): Paper 50 — bit-exact F-theorem match on S³/S⁵; M2/M3 orthogonal decomposition.
-
-**Gravity arc (Papers 51, 53, v3.4.0-v3.28.0, May 2026):**
-- G1-G8: spectral action on S³ (two-term exact), thermal product, BH entropy, Newton constant, graviton diagnostic. Paper 51.
-- G6-FP Fierz-Pauli: J-blindness theorem closes the graviton at spectral-action level; FP requires metric identification (propinquity). Paper 51 §FP.
-- G4-3..G4-6: discrete warped substrate program (multi-month). Spinor tip −1/12 bit-exact. L6 replica-weight-harmless CLOSED.
-- Paper 53: disk-with-cone propinquity (first manifold-with-boundary carrier). Bochner-Riesz plane reconstruction.
-- Möbius α>1: RETIRED as finite-a substrate artifact (B4, v3.24.0). Continuum = plain Sommerfeld-Cheeger.
-- Confinement reframing (v3.26.0-v3.28.0): ARCHIVED as organizing reading (2026-05-31). See §1.7.
+**Historical arc chronicles** (entropy/EP-2; cusp; balanced coupled; precision-atomic; RH sprint + S_min erratum; and the QED / spectral-triple-WH1 / Lorentzian / gauge / Dirac-on-S³ / chemistry / precision-multi-focal / gravity arcs) moved verbatim to `docs/development_frontier_archive.md` (2026-06-16 compaction). The §6 loading tiers + `papers/INDEX.md` are the current map; CHANGELOG.md is the canonical chronicle; the §2 one-liner index above + the best-results / key-structural tables are the live current-state quick reference.
 
 **Scope:** See `SCOPE_BOUNDARY.md` for supported atoms/molecules (40 molecules total, Z=1-56 via frozen cores).
 
 **Architecture locked:** The LCAO/graph-concatenation approach (v0.9.x series) is superseded. All molecular work uses natural geometry (Papers 11, 13, 15, 17).
 
 ---
-
 
 ## 3. Approaches That Failed
 
@@ -400,7 +300,6 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | Brute high-precision summation of b1=2 high-log trailing multiple-t-values (S^(4) stage-1, 2026-06-13) | 1 | Four methods (Abel/Levin, sumem, manual E-M, analytic-tail agent) all under-converge / are wrong / are impractically slow — this is the known-hard MZV-computation problem. Reframe: these are LOW-WEIGHT hence classically reducible, so identify them SYMBOLICALLY (stage 2) rather than sum them numerically. See `debug/sprint_s4_scoping_memo.md` §S1.6f. |
 | sympy exact-Q rank for MZV-scale relation matrices (S^(4) stage-2, 2026-06-13) | 1 | sympy `Matrix.rank()` over Q is intractable at weight 11-13 (hundreds-to-thousands of admissible words; >17 min, no result). Use mod-p (large prime) streaming Gaussian elimination, cross-checked at a second prime; project to the target subspace during row construction. Standard for MZV rank computations. See `debug/sprint_s4_stage2_memo.md`. |
 | SO(4) Wigner-D critical points predict LiH R_eq (harmonic phase-lock probe, 2026-03-11; surfaced 2026-06-16) | 1 | Hypothesis: critical points of D^n_{(l'm'),(lm)}(γ) map via inverse-stereographic γ→R to LiH R_eq≈3.015 bohr (a closed-form R_eq from SO(4) rep theory). Result: NONE — 0 strong/near hits across 5 elements × 5 p₀. The incidental byproduct (Paper 8 Thm 1 σ-bond identities D²_(1,0),(1,0)≡1, D²_(0,0),(1,0)≡0) is real and now backed by `tests/test_paper8_sigma_bond_selection.py`. Archived probe `debug/archive/test_harmonic_phase_lock.py`. |
-
 
 ---
 
@@ -955,7 +854,6 @@ CLAUDE.md is loaded into every PM session and every sub-agent dispatch. Its size
 9. **Status updates replace, never append (added 2026-06-10, PI-authorized).** When a WH status, a §6 status flag, or a paper-state description changes, REPLACE the existing text and move the superseded version to its history home (`docs/wh_register_history.md`, `docs/paper_notes_archive.md`, CHANGELOG.md). Chronicling-by-appending inside CLAUDE.md is the failure mode that regrew the file from 1,263 lines (2026-05-31 compaction) to 1,400 lines / 320 KB by 2026-06-10.
 
 **Enforcement.** When the PM is tempted to write a long CLAUDE.md §2 bullet, a synthesis memo, or a verbose agent prompt — stop, move the content to its proper home, and write the short version in CLAUDE.md. Apply this to existing entries when touched, not as a one-time pass.
-
 
 ---
 

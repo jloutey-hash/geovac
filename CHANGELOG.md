@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.18.1] - 2026-06-16
+
+### Changed
+
+- **CLAUDE.md compaction (round 3): 159.6 KB → 139.6 KB**, back under the 150 KB repo-health budget (the v4.18.0 §2 one-liner had tipped it over). Documentation-only; all content moved **verbatim** to `docs/development_frontier_archive.md` (the established archive home), with pointers left in §2:
+  - §2 historical **arc chronicles** — the entropy/EP-2, cusp, balanced-coupled, precision-atomic, RH-sprint + S_min-erratum status paragraphs and the eight long-form arc blocks (QED, spectral-triple/WH1, Lorentzian, gauge, Dirac-on-S³, chemistry, precision/multi-focal, gravity).
+  - §2 **one-liner index v3.115.0→v3.98.0** (completed arcs whose detail lives in CHANGELOG); the v4.x series (current QA-sweep frontier) is kept, and the boundary note now spans v2.x–v3.115.0.
+- §2 retains the live current-state reference: v4.x sprint index, best-results-by-system table, key-structural-results, classical-solver + QC-"ACTIVE FRONTIER" status, scope/architecture-locked. Touched only CLAUDE.md §2 (PM-editable per §13.5) + the archive doc; no code, papers, physics, or hard-prohibition sections. Repo-health: all three gates green (CLAUDE.md 140 KB, debug/ 537, MEMORY.md 14 KB).
+
 ## [4.18.0] - 2026-06-16
 
 ### Summary
