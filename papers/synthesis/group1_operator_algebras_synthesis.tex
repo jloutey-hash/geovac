@@ -128,19 +128,22 @@ with $k$-INDEPENDENT Lipschitz comparison constant.  The constant
 $4/\pi$ identifies, in both Riemannian (Paper~38) and Lorentzian
 (Paper~43~\S 10.2 / Paper~46) settings, as the $M_{1}$ Hopf-base
 measure signature of the master Mellin engine catalogued by the
-case-exhaustion theorem of Paper~32~\S\,VIII.  Three further closures land subsequent to the May~22, 2026 drafting
-of this synthesis and are recorded in
-\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}:\
-Paper~48 constructs the Krein-pointed proper quantum metric spaces
-and the bridge to Mondino--S\"amann Lorentzian pre-length spaces,
-giving the first quantitative pLGH-convergence panel in the
-synthetic-Lorentzian literature from operator-algebraic input;
-Paper~49 closes the strong-form bridge on the enlarged operator
-system via the Connes--Rovelli thermal-time stack across distinct
-KMS states, identifying off-orbit super-additivity as the
-operator-algebraic dual of the twin paradox quantified by
-Uhlmann's relative-entropy monotonicity; and Paper~50 demonstrates
-bit-exact reproduction of CFT-on-sphere partition functions on
+case-exhaustion theorem of Paper~32~\S\,VIII.  Three further papers (48, 49, 50) extend the arc and are recorded in
+\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49};\ two of
+their metric-level claims were subsequently descoped with the Paper~45
+retraction and are reported here in corrected form.
+Paper~48 constructs Krein-pointed proper quantum metric spaces and a
+bridge functor to the Mondino--S\"amann synthetic-Lorentzian
+pre-length spaces;\ the metric-level inheritance is descoped and the
+bridge survives as a conditional design.
+Paper~49 builds an OSLPLS (operator-system Lorentzian pre-length
+space) category and reads off-orbit super-additivity as the
+operator-algebraic dual of the twin paradox, with the deficit
+quantified by Datta's max-divergence chain inequality;\ the
+$\Lambda$-inheritance is descoped while the cocycle-deficit algebra
+survives.
+Paper~50 demonstrates bit-exact reproduction of CFT-on-sphere
+partition functions on
 $\sthree$ and $\sfive$ via the framework's existing Hurwitz machinery,
 revealing a master Mellin engine $M_{2}$/$M_{3}$ orthogonal
 decomposition of the (scalar, Dirac) sector and a log~3 cancellation
@@ -165,11 +168,15 @@ theorem).  Paper~38's Riemannian convergence theorem was briefly
 reduced to a conditional form with two named gaps;\ both gaps were
 closed (2026-06-10) by a translation-seminorm reframing, and the
 theorem now stands unconditionally in van~Suijlekom's state-space
-framework.  This synthesis is corrected at
-the highest-visibility points;\ where narrative detail below still
-reflects the pre-retraction state, the Status notes in Papers~38 and
-42--49 and the claims register
-(\texttt{docs/claims\_register.md}) are authoritative.
+framework.  This synthesis has been brought into line with the retraction
+throughout:\ each affected result (Headline~4, \S\ref{sec:lorentzian},
+and the Paper~46/47/48/49 closures) carries an inline descope note,
+and the surviving content --- the unconditional spatial convergence,
+the norm-resolvent de-compactification arrow, and the cocycle-deficit
+algebra --- is stated as such.  The Status notes in Papers~38
+and~42--49 and the claims register
+(\texttt{docs/claims\_register.md}) remain authoritative for fine
+detail.
 
 % =====================================================================
 \section{Introduction}
@@ -231,8 +238,8 @@ at all ranks via the PRV-summand bound of Kumar (1988) and Vinberg
 (1990), applied to the dominant image of the tensor product
 $V_{\lambda} \otimes V_{\lambda'}^{*}$.
 
-\paragraph{Headline 4: first Lorentzian propinquity convergence
-theorem.}
+\paragraph{Headline 4: the Lorentzian propinquity route is closed by a
+degeneracy theorem.}
 On truncated $\SU(2)\times \Uone_{T}$ Krein spectral triples
 $\Tcal^{L}_{\nmax,\Nt,T}$ built via the Bizi--Brouder--Besnard
 \cite{bizi_brouder_besnard2018} signature $(3,1)$ data at
@@ -1264,12 +1271,25 @@ closures in summary form.
 \subsection{Strong-form Lorentzian propinquity (Paper 46)}
 \label{sec:closures_paper46}
 
+\emph{Status (June 2026):\ the strong-form convergence claim of this
+subsection is descoped pending repair with the Paper~45 retraction.
+On the natural chirality-doubled substrate the operator-norm Lipschitz
+seminorm $L_{\mathrm{op}}$ has kernel far exceeding the scalars (every
+temporal multiplier $\mathbf{1} \otimes M^{\mathrm{temp}}$ is
+$L_{\mathrm{op}}$-invisible), so neither side of \eqref{eq:p46_main}
+is a quantum-metric distance between quantum compact metric spaces;\
+the bit-exact panel match below re-evaluates the same spatial rate
+formula and is not an independent convergence.  The enlarged-substrate
+algebra of Appendix~B survives and is the named starting point for the
+repair.  See Paper~46's Status note and
+\texttt{docs/claims\_register.md}.}
+
 Paper~45~\S 1.4 G1 named the strong-form Lorentzian propinquity (a
 Latr\'emoli\`ere-style metric on Krein spectral triples without
 $K^{+}$-restriction) as the principal open NCG-math problem of the
-Lorentzian arc.  Paper~46~\cite{paper46} closes this question on the
-natural chirality-doubled scalar-multiplier substrate of
-Paper~44~\cite{paper44} via the operator-norm Lipschitz seminorm
+Lorentzian arc.  Paper~46~\cite{paper46} \emph{claimed to close} this
+question on the natural chirality-doubled scalar-multiplier substrate
+of Paper~44~\cite{paper44} via the operator-norm Lipschitz seminorm
 $L_{\mathrm{op}}(a) := \opnorm{[\DL, a]}$:
 \begin{equation}\label{eq:p46_main}
 \Lambda^{\mathrm{strong}}\bigl(\Tcal^{L}_{\nmax, \Nt, T},\
@@ -1300,6 +1320,13 @@ at every panel cell.
 
 \subsection{De-compactification limit, norm-resolvent / spectral closure (Paper 47)}
 \label{sec:closures_paper47}
+
+\emph{Status (June 2026):\ the \emph{outer} norm-resolvent arrow of
+\eqref{eq:p47_composite} and the three-carrier identification survive
+the Paper~45 retraction unchanged;\ the \emph{inner} propinquity arrow
+(Paper~45/46 main theorem applied along the scaling) is descoped, so
+the composite is established at the norm-resolvent / spectral level
+only.  See Paper~47's Status note and \texttt{docs/claims\_register.md}.}
 
 Paper~45~\S 1.4 G2 named the de-compactification limit
 $T \to \infty$ on the temporal carrier $\Sone_{T}$ as a separate
@@ -1666,28 +1693,32 @@ Paper~50 is the twelfth math.OA standalone in the arc.
 \label{sec:open}
 % =====================================================================
 
-The arc closes the convergence side of the operator-algebra story at
-the K$^{+}$-weak-form level (Paper~45) and the modular-Hamiltonian
-side at the operator-system level on Riemannian (Paper~42) and
-Lorentzian (Paper~43) backgrounds.  Several questions remain open.
+The arc closes the convergence side of the operator-algebra story on
+the Riemannian / spatial side (Paper~38, unconditional) and the
+modular-Hamiltonian side at the operator-system level on Riemannian
+(Paper~42) and Lorentzian (Paper~43) backgrounds;\ the Lorentzian
+\emph{convergence} question is left open by Paper~45's annihilation
+theorem.  Several questions remain open.
 
-\paragraph{Strong-form Lorentzian propinquity (Q1) --- CLOSED by
-Paper~46 (\S\ref{sec:closures_paper46}).}
-As noted in \S\ref{sec:lorentzian}, the K$^{+}$-restriction is the
-move that lets the standard Latr\'emoli\`ere machinery apply
-verbatim.  Strong-form Lorentzian propinquity, formulated as a
-Latr\'emoli\`ere-style metric on Krein spectral triples in their
-own right (Paper~45~\S 1.4 G1), is now closed by
-Paper~46~\cite{paper46} via the operator-norm Lipschitz seminorm
-$L_{\mathrm{op}}(a) = \opnorm{[\DL, a]}$ on the natural
-chirality-doubled scalar-multiplier substrate of Paper~44.  The
-``free-upgrade'' reading holds:\ $\Lambda^{\mathrm{strong}}$ matches
-the $K^{+}$-weak-form bound bit-exactly at every panel cell, with
-$C_{3}^{\mathrm{op}}(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$.
-Paper~46~Appendix~B extends the closure to the enlarged operator
-system with chirality-flipping generators via a gradient-norm
-absorption mechanism, leaving the propinquity bound bit-exactly
-preserved.
+\paragraph{Strong-form Lorentzian propinquity (Q1) --- OPEN
+(Paper~46 descoped, \S\ref{sec:closures_paper46}).}
+Strong-form Lorentzian propinquity --- a Latr\'emoli\`ere-style metric
+on Krein spectral triples in their own right, without
+$K^{+}$-restriction (Paper~45~\S 1.4 G1) --- remains the principal
+open NCG-math problem of the Lorentzian arc.  Paper~46~\cite{paper46}
+proposed a closure via the operator-norm Lipschitz seminorm
+$L_{\mathrm{op}}(a) = \opnorm{[\DL, a]}$ on the chirality-doubled
+scalar-multiplier substrate of Paper~44, but that seminorm has kernel
+far exceeding the scalars (the temporal multipliers are
+$L_{\mathrm{op}}$-invisible), so the construction is not a
+quantum-metric distance and is descoped pending repair;\ the
+``free-upgrade'' bit-exact panel match is a re-evaluation of the
+spatial rate formula, not an independent Lorentzian convergence.  The
+enlarged-substrate algebra of Paper~46~Appendix~B (chirality-flipping
+generators with $\{J, M\} = 0$, where the commutators are non-zero)
+survives and is the named starting point for the repair.  A genuine
+strong-form theorem requires an indefinite-inner-product Lipschitz
+seminorm compatible with Krein-self-adjoint $\DL$;\ multi-month scale.
 
 \paragraph{De-compactification $T \to \infty$ (G2) --- CLOSED at
 norm-resolvent level by Paper~47 (\S\ref{sec:closures_paper47});\
@@ -1748,10 +1779,11 @@ Paper~32~\S 8.C records this as the standing structural verdict.
 Paper~44 highlights that the non-trivial K$^{+}$-positivity content of
 the Lorentzian operator system sits at the \emph{state} level, not the
 operator level.  The natural object is the Wasserstein--Kantorovich
-metric on $K^{+}$-states.  Paper~45's K$^{+}$-weak-form propinquity is
-the first concrete construction in this direction; substantially more
-mathematics on Wasserstein--Kantorovich on Krein-positive states is
-required to complete the state-side dictionary.
+metric on $K^{+}$-states.  Paper~45's K$^{+}$-weak-form analysis (now the annihilation theorem)
+is the first probe in this direction and shows the operator-level
+compression is degenerate;\ substantially more mathematics on
+Wasserstein--Kantorovich on Krein-positive \emph{states} is required
+to complete the state-side dictionary.
 
 \paragraph{Concluding remark.}
 The structural identification of GeoVac as an almost-commutative

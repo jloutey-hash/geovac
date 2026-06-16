@@ -41,7 +41,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 7 `Paper_7_Dimensionless_Vacuum.tex` | **KEYSTONE** | S³ conformal equivalence, 18 symbolic proofs — most-cited paper in the corpus |
 | 18 `paper_18_exchange_constants.tex` | ACTIVE | Transcendental taxonomy; master Mellin engine M1/M2/M3 |
 | 22 `paper_22_angular_sparsity.tex` | **KEYSTONE** | Potential-independent angular sparsity theorem (underwrites the Pauli scaling) |
-| 24 `paper_24_bargmann_segal.tex` | **KEYSTONE** | π-free HO lattice on S⁵; HO rigidity; Coulomb/HO asymmetry (4 layers) |
+| 24 `paper_24_bargmann_segal.tex` | **KEYSTONE** | π-free HO lattice on S⁵; HO rigidity; Coulomb/HO asymmetry (6 layers) |
 | 31 `paper_31_universal_coulomb_partition.tex` | **KEYSTONE** | Universal vs Coulomb-specific (A/D) split of the spectral triple |
 | 54 `paper_54_tensor_product_two_body.tex` | ACTIVE | Two-body selection rules from the tensor-product triple; radial coupling NOT forced |
 | 55 `paper_55_periods_of_geovac.tex` | ACTIVE | Periods of the Mellin sectors: pure-Tate / level-4 cyclotomic mixed-Tate |
@@ -96,7 +96,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
-| 2 `paper_2_alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α at 8.8×10⁻⁸; combination rule **conjectural** (12 mechanisms eliminated) |
+| 2 `paper_2_alpha.tex` | **OBSERVATION** | K = π(B+F−Δ) matches 1/α at 8.8×10⁻⁸; combination rule labeled an **Observation**, never derived (12 mechanisms eliminated) |
 | 25 `paper_25_hopf_gauge_structure.tex` | OBSERVATION | Hopf graph as discrete lattice-gauge structure |
 | 28 `paper_28_qed_s3.tex` | ACTIVE | QED on S³: 5 theorems; S_min irreducible at 200 digits |
 | 30 `paper_30_su2_wilson.tex` | ACTIVE | SU(2) Wilson gauge on S³ = SU(2); Paper 25 is its maximal torus |

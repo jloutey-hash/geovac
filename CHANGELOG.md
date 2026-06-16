@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.19.0] - 2026-06-16
+
+### Summary
+
+**Synthesis-layer coherence pass — group1 + field guide brought consistent; Paper 18 taxonomy reconciled; a pre-existing compile bug fixed.** A coherence pass (step 1 of the §9 branch-QA protocol — "synthesis update," NOT a `/qa` certification) across the three synthesis documents and the foundation papers they lean on, targeting three drift classes the recent QA never reached. group3 synthesis audited **clean** (the 7-round first-bite cert held). Two `claims-reviewer` agents ran the group3-synthesis + field-guide diagnostics; the PM verified every finding against primary text before acting. All edited `.tex` compile `-halt-on-error` exit 0. Memo: `debug/sprint_synthesis_coherence_pass_memo.md`.
+
+### Changed — group1 synthesis (Lorentzian descope coherence, 8 edits)
+
+The doc was patched at the top (abstract + a June-2026 Status note) but the descope was only ~80% threaded, and the holes were in the worst places: a self-contradiction (the "Honest scope" subsection said strong-form Lorentzian propinquity *open*; the §46 closure + outlook said *closed by Paper 46*) and a stale tail (the outlook's bold header *"Strong-form Lorentzian propinquity (Q1) — CLOSED by Paper 46"* — the reader's last impression was a retracted theorem dressed as a triumph).
+
+- Headline 4 title "first Lorentzian propinquity convergence theorem" → "the Lorentzian propinquity route is closed by a degeneracy theorem."
+- Abstract: Papers 48/49 reframed to their descoped state (bridge survives as a conditional design; cocycle-deficit algebra survives; Λ-inheritance descoped); the twin-paradox deficit miscredited to "Uhlmann's relative-entropy monotonicity" → **Datta's max-divergence chain inequality** (the body's correct attribution; ordinary relative entropy does not satisfy a chain inequality).
+- Top Status-note hedge ("where narrative below still reflects the pre-retraction state, trust the papers") tightened — the body is now coherent throughout, with inline descope notes at each affected result.
+- §46 closure: descope note added, "Paper 46 closes"→"claimed to close." §47 closure: note that the outer norm-resolvent arrow + three-carrier identification survive the retraction, the inner propinquity arrow is descoped.
+- Outlook: lead-in credits convergence to Paper 38 (Lorentzian convergence left open by the annihilation theorem); Q1 "CLOSED by Paper 46" → "OPEN (Paper 46 descoped)"; state-side softened.
+
+### Changed — field guide / trunk front door (coherence, 8 edits)
+
+The Lorentzian descope and the K hard-prohibition were already handled correctly; the defects were quiet drift:
+
+- κ "= −1/16, **derivable** from the packing construction" (in the keystone identity section §3) → "coincides with a conformal-geometry quantity — a numerical observation, not a derivation" (matches Paper 0's own text and the v4.13.0 κ→Observation downgrade).
+- "the graph Laplacian…has eigenvalues −(n²−1)" → reworded to point at the conformal equivalence with the continuum operator.
+- Tail self-contradiction: S_BH "= A/4 derivation **pending** the L6 sub-sprint (**closed** in May 2026)" → "closed by the L6 sub-sprint (May 2026, replica-weight-harmless theorem)."
+- Stale paper counts (Groups 1/3/5 advertised 14/7/7 → 16/11/11); "Papers 38–49 = eleven" → "Papers 42–49" (matches the cite list); garbled U(1)/Paper-25 cross-ref; stray `''`; dropped "independent" from "18 symbolic proofs" (per Paper 7's own caveat).
+
+### Changed — Paper 18 / Paper 24 (exchange-constant taxonomy reconciliation)
+
+The taxonomy count was inconsistent across the corpus: Paper 24 said **four** types, Paper 18 §IV intro/closing prose said **five** (retired names "calibration"/"flow"), and Paper 18's abstract + line 2141 ("a sixth named tier") + the developed body + the certified group3 synthesis said **six**. **Six is canonical** (the paper's own committed abstract). Resolved at the owning source (per the PI principle "deferral is churn"), not punted to the later cert:
+
+- Paper 18 §IV: intro prose → six tiers with canonical names; **added the missing 6th enumeration item** ("Inner-factor input data"), mirroring the paper's own definition (lines 2144–2150) and honest non-selection framing (admits a Higgs sector structurally; does NOT autonomously select the Yukawas; external calibration data, categorically disjoint from the M1/M2/M3 outer-factor periods); closing prose + the definition's disjointness list → canonical names.
+- Paper 24: stale "four types: intrinsic, calibration, embedding, flow" citation → Paper 18's current six-tier list.
+- *Left visible (not silently changed):* Paper 18 line 2065's heading calls the inner factor "a fourth tier" — that is the *Mellin-engine* counting scheme (M1/M2/M3 + inner = 4), distinct from the six-tier exchange taxonomy; the dual use of "tier" is a wording-judgment flagged for the full group3 cert.
+
+### Fixed
+
+- **Paper 18 pre-existing compile bug:** line 1052 used `\Z` (undefined control sequence; every other instance uses `\mathbb{Z}`), which halted the whole paper's compile. Fixed → Paper 18 now compiles `EXITCODE=0` (also confirming the taxonomy edits are error-free).
+- **`papers/INDEX.md`:** Paper 2 one-liner "combination rule **conjectural**" → "labeled an **Observation**, never derived" (the front-door map was violating the §13.5 hard prohibition); Paper 24 "Coulomb/HO asymmetry (4 layers)" → "(6 layers)" (verified vs Paper 24 line 443, "refined to six layers").
+- **CLAUDE.md §2** key-structural-results bullet: Coulomb/HO asymmetry "= 4 layers" → "= 6 layers."
+
+### Notes
+
+- group3 synthesis: audited by `claims-reviewer`, **no edits needed** — zero high-severity defects (no descoped-as-live, no internal contradiction, no κ/K/discrete-continuum violations, tail clean). The 7-round first-bite cert held.
+- Honest scope: a *coherence* pass, not a `/qa` certification (no calibration seeds, no panel verdict). No physics, no new equations, no new benchmarks; prose tiers and bookkeeping moved into line with already-established results. Two §13.5 near-violations were *fixed*, none introduced.
+- Open follow-ons: the Paper 18 "fourth tier" vs "sixth tier" wording disambiguation (full group3 cert); the structural anti-churn fix for cross-file duplicated facts (single-source-of-truth and/or a deterministic count-consistency check — the ratchet) is proposed, not built; group1 synthesis + field guide are coherence-passed, not `/qa`-certified.
+- New memory: `feedback_deferral_is_churn.md` (PI principle, 2026-06-16 — fix factual drift at its owning source on discovery).
+
 ## [4.18.1] - 2026-06-16
 
 ### Changed

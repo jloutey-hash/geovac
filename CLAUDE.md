@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.18.1 (June 16, 2026)
+**Version:** v4.19.0 (June 16, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Synthesis-layer coherence pass (2026-06-16, v4.19.0):** group1 synthesis + field guide brought consistent (Lorentzian descope, κ, stale counts); Paper 18 six-tier taxonomy reconciled + `\Z` compile bug fixed; group3 synth clean. See debug/sprint_synthesis_coherence_pass_memo.md.
 - **CLAUDE.md compaction round 3 (2026-06-16, v4.18.1):** §2 historical arc chronicles + the v3.x one-liner index moved verbatim to `docs/development_frontier_archive.md`; 160→140 KB, back under the 150 KB repo-health budget.
 - **`/qa` group3 first bite CERTIFIED (2026-06-16, v4.18.0):** Run #7 PASS (Papers 22/24/31 + synthesis); C11 title-gate hardened (KEYED + subtitle + `--gate`); 6 cross-branch stale titles fixed corpus-wide. See debug/sprint_group3_qa_firstbite_memo.md.
 - **`/qa` group3 first bite + Paper 8 closure (2026-06-16, v4.17.0):** Papers 22/24/31 + synthesis driven through 4 `/qa group3` re-cert runs (FAIL converged prose→labels→tests→peripheral; all cleared); Paper 8 phase-lock dead-end closed, C13 group2 PASS. See debug/sprint_group3_qa_firstbite_memo.md.
@@ -186,7 +187,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 - **Spectral-action supertrace (v2.26.1):** SD cancellation theorem, Δ⁻¹=40 from Euler-Maclaurin, (−) sign = (-1)^F grading. Two-term exactness on S³ Dirac. See `debug/st_supertrace_sprint_memo.md`.
 - **Nuclear systems (Paper 23):** Deuteron 16q/592 Pauli; He-4 16q/712 Pauli; composed nuclear-electronic deuterium 26q/614 Pauli. Fock rigidity theorem (S³ unique to −Z/r).
 - **Angular sparsity theorem (Paper 22):** ERI density depends only on l_max, not V(r). Universal across potentials.
-- **Bargmann-Segal lattice (Paper 24):** HO on S⁵ Hardy space, π-free, HO rigidity theorem. Coulomb/HO asymmetry = 4 layers.
+- **Bargmann-Segal lattice (Paper 24):** HO on S⁵ Hardy space, π-free, HO rigidity theorem. Coulomb/HO asymmetry = 6 layers.
 - **S⁵ gauge extension (v2.26.1):** U(1) Wilson transfers; SU(3) NOT natural; CP² quotient fails. See `debug/s5_gauge_structure_memo.md`.
 
 **Classical solver status: INVESTIGATION COMPLETE (v2.0.24).** 30+ tracks exhausted all solver × PK × basis combinations. Structural ceilings characterized. Composed at l_max=2 is the production operating point. See CHANGELOG.md for full track history.

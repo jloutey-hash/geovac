@@ -142,14 +142,16 @@ $(n, s)$~\cite{loutey_paper0}.  The resulting graph has nodes labeled
 by quantum-number tuples $(n, l, m, s)$ and edges encoding spectral
 selection rules.
 
-The graph Laplacian on this object has eigenvalues
+This graph is conformally equivalent to a continuous operator on the
+unit three-sphere (the Laplace--Beltrami operator;\ see
+\S\ref{sec:fock}), whose eigenvalues are
 \begin{equation}
 \label{eq:graph_eigs}
 \lambda_n = -(n^2 - 1), \qquad n \in \N_{\ge 1},
 \end{equation}
-with multiplicity $n^2$ on the unit-radius rescaling --- the spectrum
-of the hydrogen atom, to within an overall scale.  The shape of the
-periodic table fell out of the packing.
+with multiplicity $n^2$ --- the spectrum of the hydrogen atom, to
+within an overall scale.  The shape of the periodic table fell out of
+the packing.
 
 This was the seed:\ a combinatorial object that, when interrogated,
 returned the same numerology as observed atomic structure.  Whether
@@ -175,11 +177,13 @@ The decisive observation for GeoVac is this:\ the graph Laplacian on
 the packed lattice of \S\ref{sec:packing} is conformally equivalent to
 the continuous $\sthree$ Laplace--Beltrami operator, in a precise sense
 that can be checked symbolically.  Paper~7 of the GeoVac
-corpus~\cite{loutey_paper7} provides $18$ independent symbolic proofs
+corpus~\cite{loutey_paper7} provides $18$ symbolic proofs
 of this equivalence (\texttt{tests/test\_fock\_projection.py} and
 \texttt{tests/test\_fock\_laplacian.py}).  The universal scaling
-constant relating the two is $\kappa = -1/16$, derivable from the
-packing construction~\cite{loutey_paper0}.
+constant relating the two is $\kappa = -1/16$;\ its value
+\emph{coincides} with a conformal-geometry quantity --- a numerical
+observation, not a derivation
+(Paper~0~\cite{loutey_paper0}, Paper~7~\cite{loutey_paper7}).
 
 This is the framework's load-bearing identification:
 \begin{quote}
@@ -299,9 +303,8 @@ The rate constant $4/\pi$ is the substrate's $\mathrm{Vol}(S^2) /
 geometric mechanism, classified in
 \S\ref{sec:periods} below.
 
-Following Paper~38, the project produced eleven math.OA standalone
-papers (Papers~38--49) extending the framework along the Lorentzian
-axis~\cite{loutey_paper42, loutey_paper43, loutey_paper44,
+Following Paper~38, the project produced a math.OA arc extending the
+framework along the Lorentzian axis (Papers~42--49)~\cite{loutey_paper42, loutey_paper43, loutey_paper44,
 loutey_paper45, loutey_paper46, loutey_paper47, loutey_paper48,
 loutey_paper49}.  The most instructive outcome of that axis is
 \emph{negative}:\ the natural device for a ``Lorentzian propinquity''
@@ -318,7 +321,7 @@ modular-Hamiltonian results (Papers~42/43), the norm-resolvent
 de-compactification arrow (Paper~47), and the cocycle-deficit algebra
 of Paper~49.  The repaired Lorentzian target --- a Toeplitz temporal
 multiplier algebra and a non-compressing Krein-compatible seminorm
---- is stated as an open problem in Paper~45.''
+--- is stated as an open problem in Paper~45.
 
 \paragraph{Why this rotation mattered.}
 The shift from ``how accurately can we solve quantum chemistry?'' to
@@ -541,7 +544,7 @@ archive and a synthesis folder.  Each group is described in CLAUDE.md
 one-line summaries.
 
 \begin{itemize}
-  \item \textbf{Group~1 --- Operator algebras / NCG} ($14$ papers).
+  \item \textbf{Group~1 --- Operator algebras / NCG} ($16$ papers).
     Math.OA arc.  Headline:\ unconditional SU(2) state-space
     Gromov--Hausdorff convergence with explicit $4/\pi$ rate
     (Paper~38, translation-seminorm metrization);\ the Lorentzian degeneracy theorem
@@ -554,8 +557,8 @@ one-line summaries.
     accuracy ceilings characterized via the multi-focal-composition
     wall;\ Paper~8--9 and FCI-M are guardrail papers documenting
     proven negative results.
-  \item \textbf{Group~3 --- Foundations} ($7$ papers including this
-    field guide).  Headline:\ Paper~0 (packing), Paper~7
+  \item \textbf{Group~3 --- Foundations} ($11$ papers).
+    Headline:\ Paper~0 (packing), Paper~7
     (Fock-projection conformal equivalence), Paper~22 (angular
     sparsity), Paper~24 (Bargmann--Segal $\sfive$ lattice), Paper~31
     (universal/Coulomb partition), Paper~55 (periods classification).
@@ -563,10 +566,10 @@ one-line summaries.
     Qubit-encoding resource estimates.  Headline:\ $O(Q^{2.5})$
     composed Pauli scaling, $51\times$--$1712\times$ advantage over
     Gaussian baselines, $28$ molecules in the library (Paper~14).
-  \item \textbf{Group~5 --- QED / gauge / SM} ($7$ papers).
+  \item \textbf{Group~5 --- QED / gauge / SM} ($8$ papers).
     Headline:\ hydrogen Lamb shift at $-0.534\%$ one-loop closure
     (Paper~36);\ SU(2) Wilson lattice gauge structure with
-    maximal-torus reduction to U(1) Paper~25 (Paper~30);\ QED on
+    maximal-torus reduction to the U(1) of Paper~25 (Paper~30);\ QED on
     $\sthree$ with five theorems and the two-loop constant $S_{\min}$
     identified in closed form (Paper~28).
   \item \textbf{Group~6 --- Precision observations} ($4$ papers).
@@ -706,8 +709,9 @@ should start.
     QED on $\sthree$;\ Paper~36 is the bound-state QED arc closing
     the Lamb shift at $-0.534\%$ one-loop.
   \item \textbf{The physicist (gravity)}.  Read Paper~51.  Spectral
-    action approach, two-term exact on $\sthree$, $S_{\mathrm{BH}} =
-    A/4$ derivation pending the L6 sub-sprint (closed in May~2026).
+    action approach, two-term exact on $\sthree$;\ the
+    $S_{\mathrm{BH}} = A/4$ replica derivation was closed by the L6
+    sub-sprint (May~2026, replica-weight-harmless theorem).
   \item \textbf{The quantum computing practitioner}.  Read Paper~14
     and Paper~20.  Pauli scaling, OpenFermion/Qiskit/PennyLane
     export, market test against published Gaussian baselines.
