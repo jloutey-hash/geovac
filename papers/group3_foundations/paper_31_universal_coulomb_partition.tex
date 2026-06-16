@@ -75,7 +75,8 @@ The GeoVac framework~\cite{paper0,paper1,paper7} discretizes
 quantum-mechanical Hamiltonians on natural geometries by replacing
 the continuous Laplace--Beltrami operator with the graph Laplacian
 on a packed lattice of quantum-number labels.  For the hydrogen atom,
-the result is exact: the discrete spectrum $\lambda_n = -(n^2 - 1)$
+the result is exact: the continuum $S^3$ Laplace--Beltrami spectrum
+$\lambda_n = -(n^2 - 1)$ --- to which the graph Laplacian converges ---
 recovers the hydrogenic Rydberg series under Fock's stereographic
 projection $p_0 = \sqrt{-2E}$ from $S^3$ to momentum
 space~\cite{fock1935,bander_itzykson1966}.  The framework has been
@@ -446,8 +447,8 @@ potentials:
 \item Fock projection $p_0 = \sqrt{-2E}$ does not map the radial
   Schr\"odinger equation onto the free Laplacian on $S^3$.
 \item The integer eigenvalue spectrum $\lambda_n = -(n^2 - 1)$ of
-  the graph Laplacian does not coincide with the rescaled energy
-  spectrum.
+  the continuum $S^3$ Laplace--Beltrami operator (the graph-Laplacian
+  limit) does not coincide with the rescaled energy spectrum.
 \item The $\kappa = -1/16$ kinetic constant has no analog in the
   new system.
 \end{itemize}
@@ -812,9 +813,9 @@ Every result that depends on the explicit form of $D$ must be
 re-derived for the new system:
 
 \begin{itemize}
-\item The spectrum $\lambda_n$ of the graph Laplacian (no analog of
-  $\lambda_n = -(n^2 - 1)$ unless the system has $\mathrm{SO}(4)$
-  symmetry).
+\item The continuum $S^3$ spectrum $\lambda_n = -(n^2 - 1)$ that the
+  graph Laplacian converges to (no analog unless the system has
+  $\mathrm{SO}(4)$ symmetry).
 \item The kinetic calibration $\kappa$ (no analog of $-1/16$
   unless the projection is Fock-style).
 \item The transcendental content of spectral
@@ -947,8 +948,8 @@ partition organizes the same results across \emph{signatures}:\
 which features of the framework transfer cleanly from Euclidean $(3, 0)$
 to Lorentzian $(3, 1)$, and which require Krein-space machinery,
 Lorentzian-native heat-trace formalism, or a Lorentzian analog of the
-Latr\'emoli\`ere propinquity used in Paper~38~\cite{paper38} for the
-WH1 PROVEN result.  The signature partition is the structural sibling
+van~Suijlekom state-space Gromov--Hausdorff distance used in
+Paper~38~\cite{paper38} for the WH1 PROVEN result.  The signature partition is the structural sibling
 of the central-potential partition that is the main topic of this
 paper; both partitions arise from the same Connes spectral-triple data
 $(\mathcal{A}, \mathcal{H}, D)$.
@@ -1050,10 +1051,12 @@ work on three named blockers, with literature support to varying
 degrees:
 
 \begin{description}
-\item[B1\@.] \emph{Lorentzian propinquity.}  The Latr\'emoli\`ere
-  propinquity used in Papers~38--40~\cite{paper38} for the WH1 PROVEN
-  result is purely Riemannian as of May~2026 (Latr\'emoli\`ere,
-  Toyota, Hekkelman--McDonald, Leimbach--van~Suijlekom).  Constructing
+\item[B1\@.] \emph{Lorentzian propinquity.}  The van~Suijlekom
+  state-space Gromov--Hausdorff distance used in Paper~38~\cite{paper38}
+  for the WH1 PROVEN result---and the Latr\'emoli\`ere propinquity
+  family more broadly---is purely Riemannian as of May~2026
+  (Latr\'emoli\`ere, Toyota, Hekkelman--McDonald,
+  Leimbach--van~Suijlekom).  Constructing
   a Lorentzian propinquity is original NCG-mathematics work at the
   6--12 month scale.  The Nieuviarts~2025
   trigger-firing~\cite{nieuviarts2025a, nieuviarts2025b} may shorten
@@ -1496,7 +1499,7 @@ Phys.\ Rev.\ \textbf{57}, 641 (1940).
 A.~Borel and A.~Weil,
 ``Repr\'esentations lin\'eaires et espaces homog\`enes
 k\"ahleriens des groupes de Lie compacts,''
-S\'eminaire Bourbaki, expos\'e 100 (1954).
+as exposited by J.-P.~Serre, S\'eminaire Bourbaki, expos\'e 100 (1954).
 
 \bibitem{Dyall}
 K.~G.~Dyall and K.~F\ae gri,

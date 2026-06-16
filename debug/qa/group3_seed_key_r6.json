@@ -1,0 +1,24 @@
+{
+  "target": "group3",
+  "run": "re-cert run #6",
+  "run_date": "2026-06-16",
+  "scope": "first-pass subset Papers 22/24/31 + synthesis, AFTER the run-#5 C6 disposition (3 discrete-vs-continuum slips fixed in P31 x2 + P24 x1; worktree = HEAD 3f51ebc + overlaid working-tree P31/P24 with the fixes)",
+  "worktree": "../geovac-qa-seed-group3-r6 (branch qa-seed-group3-r6) + overlay",
+  "note": "Seeds varied from runs #1-5: S2 (tautological) replaces S3; S6 (discrete-vs-continuum) NEW this run to re-calibrate C6 detection AFTER the fix; S9 (status overstatement) NEW; S1 moved to P31 chamseddine; S4 moved to P24; S7 new stale variant (Paper 7 'Recovering'->'Deriving').",
+  "seeds": [
+    {"id": "S1", "class": "wrong external citation", "file": "paper_31_universal_coulomb_partition.tex", "location": "bibitem{chamseddine_connes1997} (~l.1448)", "planted": "Commun. Math. Phys. 182, 155 (1996)", "truth": "Commun. Math. Phys. 186, 731 (1997)", "expected_catcher": "citation-reviewer (P31)"},
+    {"id": "S2", "class": "tautological test (assert X==X)", "file": "tests/test_paper31_two_body.py", "location": "test_spectral_action_two_body_nmax2 (~l.254)", "planted": "assert pearson == pytest.approx(pearson, abs=0.02) (radial honest-negative anchor gutted to a self-comparison)", "truth": "assert pearson == pytest.approx(0.58, abs=0.02)", "expected_catcher": "code-reviewer (P31)"},
+    {"id": "S4", "class": "kappa-style overclaim (derived vs Observation)", "file": "paper_24_bargmann_segal.tex", "location": "~l.425", "planted": "'kappa = -1/16 --- derived from first principles via the Fock conformal projection ---'", "truth": "kappa is an Observation (coincidence with geometric 1/16; no derivation bridge)", "expected_catcher": "claims-reviewer (P24, C7/C8)"},
+    {"id": "S6", "class": "discrete-vs-continuum imprecision (C6)", "file": "paper_22_angular_sparsity.tex", "location": "intro (~l.61)", "planted": "'a discrete S^3 graph whose Laplacian directly produces the hydrogenic spectrum -(n^2-1) without any continuum limit'", "truth": "graph Laplacian L=D-A is positive-semidefinite; -(n^2-1) is the continuum S^3 LB value the graph CONVERGES to (this is the exact class fixed in run #5)", "expected_catcher": "claims-reviewer (P22, C6)"},
+    {"id": "S7", "class": "stale internal-title drift", "file": "paper_22_angular_sparsity.tex", "location": "bibitem{GeoVac_Paper7} (~l.894)", "planted": "'The Dimensionless Vacuum: Deriving the Schroedinger Equation from Scale-Invariant Graph Topology'", "truth": "real title uses 'Recovering', not 'Deriving'", "expected_catcher": "deterministic check_internal_titles.py"},
+    {"id": "S9", "class": "status overstatement of a keystone", "file": "group3_foundations_synthesis.tex", "location": "Paper-56 cosmic-Galois passage (~l.1060)", "planted": "'infinite-cutoff equality is now established ... the full cosmic-Galois equivalence a proven result' (upgrades the CONDITIONAL/open converse to PROVEN)", "truth": "Paper 56: only the INJECTION direction at FINITE cutoff is theorem-grade; infinite-cutoff converse equality on depth>=2 is the named multi-year OPEN question", "expected_catcher": "claims-reviewer (synthesis, C9)"}
+  ],
+  "controls": [
+    {"id": "C-A", "claim": "K = Observation everywhere (no K seed this run)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-B", "claim": "real test assertions EXCEPT S2", "status": "CORRECT - code-reviewer must NOT flag"},
+    {"id": "C-C", "claim": "density D=6.06% / D_pd=1.44% relabel; layer count six", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-D", "claim": "Wigner-3j 2/15; pi-free at finite cutoff NOT continuum", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-E", "claim": "v4.17.0 fixes: P24 jauchhill forward + Wybourne/Iachello converse; higgs_pickrell distinct-construction", "status": "CORRECT - must NOT be re-flagged"},
+    {"id": "C-G", "claim": "the run-#5 C6 FIXES are now correct: P31 'continuum S^3 LB spectrum -(n^2-1) --- to which the graph Laplacian converges', P31 'integer eigenvalue spectrum -(n^2-1) of the continuum S^3 LB operator (graph-Laplacian limit)', P24 'maps these continuum S^3 eigenvalues n^2-1'", "status": "CORRECT - must NOT be flagged as C6 violations"}
+  ]
+}

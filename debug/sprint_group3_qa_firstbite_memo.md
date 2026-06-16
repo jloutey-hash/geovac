@@ -119,3 +119,34 @@ since the 2026-06-14 downgrade). Worse than stale paper prose: *guidance instruc
   4. group3 first bite was Papers 22/24/31 only; Papers 18/54/55/56/57 remain for the full group3 cert.
 - **NOT a `/qa` PASS:** run #4 ended FAIL (the 3 residuals), now remediated. Per the qa.md hard rule,
   re-cert timing is the PI's; the PM does not self-trigger `/qa`.
+
+---
+
+## Runs #5–7 + C11 hardening + corpus title cleanup (2026-06-16, v4.18.0) — **first-bite CERTIFIED (PASS)**
+
+The first-bite subset (Papers 22/24/31 + synthesis) reached a calibrated `/qa group3` **PASS** at run #7, after the C6 class was closed thoroughly and the deterministic title gate was hardened.
+
+**Run #5 (FAIL → calibrated).** 6/6 sensitivity, 6/6 specificity (the v4.17.0 fixes held). 3 genuine residual **C6** discrete-vs-continuum slips found (P31 l.78/l.450, P24 l.64) — the class runs #1–2 only partly swept. PM-fixed.
+
+**Run #6 (FAIL → calibrated).** 6/6 sensitivity (incl. S7 in the previously-blind format), 6/6 specificity. **Two MORE C6 residuals** (P31 l.816, P22 l.95–96 — they span line breaks, so the line-based sweep missed them) + a genuine **deterministic-gate blind spot**: `check_internal_titles.py` only validated bibitems ending "GeoVac Paper N (YEAR)"; P22's internal bibitems end "GeoVac Technical Report (YEAR)" and were **silently uncertified** (S7 in that format slipped past). Lesson: patch-and-rerun *leaks* on a class — sweep the whole class at once + harden the detector.
+
+**Disposition (the fixes that earned the PASS):**
+- **Thorough C6 sweep** (multiline, all 4 files): fixed P22 l.95, P31 l.816, SYN l.382 + l.668 (the 2 sites the line-grep missed + the synthesis "(D−A) produces … n²−1" / "graph whose Laplacian eigenvalues *are* n²−1"). All now attribute −(n²−1) to the continuum the graph *converges to / is conformally identified with*. Verified by the multiline scan judging every candidate (P24 was already clean; "discrete spectrum" of a Sturm–Liouville operator and the HO Bargmann diagonal N+3/2 are correct usages, not C6).
+- **C11 hardened:** `KEYED` pattern resolves the paper number from the `\bibitem{GeoVac_PaperN}` key (covers the "Technical Report" format); `main_part()` now strips `:`-style subtitles (`: ` / `:\\ ` / `:\ `); `--gate <branch>` added (mirrors check_k_label / check_paper_test_refs). Self-test confirms it now catches the previously-blind P22 format.
+- **borelweil** (P31) → credits Serre as expositor; **propinquity** (P31 ×2) → WH1-PROVEN substrate renamed "van Suijlekom state-space GH" (was "Latrémolière propinquity").
+
+**Run #7 = PASS.** 6/6 sensitivity (S7 now caught in the Technical-Report format), zero false positives; the **C-G control held** — all four claims reviewers tagged every C6 sweep fix CORRECT and did not re-flag them (the sweep actually closed the class; no new C6 surfaced). All five dimensions exercised/calibrated/clean. Only genuine finding a synthesis NIT (bare "D" vs D_pd in one bullet, universality true either way).
+
+**Corpus-wide internal-title cleanup (the "jump in on other branches" pass).** The hardened check surfaced 6 pre-existing stale internal-title cites the old check was blind to — all verified GENUINE (diagnostic prints normalized cited-vs-real), all fixed to the current `\title`:
+- trunk/group1 **paper_32**: P14 ("…from Natural Geometry"→"…from Spectral Graph Theory"), P23 ("Nuclear Shell Model **Qubit** Hamiltonians…"→"…on the Hyperspherical Lattice") — *the trunk cert had the same blind spot*;
+- group5 **paper_2_alpha**: P2 self-cite (v4.14.2 retitle straggler);
+- group6 **paper_34**: P15, P19, P42 (P42 a real subtitle drift "…Theorem…"→"…Literal Identification…").
+`check_internal_titles` now **PASSES bare, corpus-wide**; the regression test restored to the bare (corpus-wide) invariant.
+
+**Dyall §9.3 / Grant §7.5 (P22).** The Oxford TOC confirms Dyall Ch. 9 = "Operators… under Time-Reversal Symmetry" → `§9.3` is wrong for the two-electron Coulomb reduction. Correct section unconfirmable from the web (Grant TOC didn't surface); dropped the section pointers, cite the books at work-level "(Dyall–Faegri, Grant)". Section numbers wanting the PI's physical-book check to restore.
+
+### Honest scope (runs #5–7)
+- **CERTIFIED (calibrated PASS):** group3 first-bite subset Papers 22/24/31 + the synthesis's coverage of them — survived the seed-catalog defect classes across all five dimensions, panel demonstrably discriminating (6/6 sensitivity each run).
+- **Tooling hardened (not a physics result):** C11 deterministic title gate (KEYED + subtitle + --gate); the class can no longer silently recur.
+- **Mechanical corpus hygiene:** 6 stale internal-title cites fixed corpus-wide; C6 wording precision.
+- **Open follow-ons:** full group3 cert (Papers 18/54/55/56/57 + full synthesis); a **trunk re-touch** is warranted (the hardened C11 now covers paper_32's keyed bibitems, just cleaned, but the trunk should be re-run against the hardened gate); Dyall/Grant section numbers (PI books); CF-1 (group4) still open; the group2 sweep should expect `debug/`-citation strays (C13) + now-covered keyed bibitems (C11).

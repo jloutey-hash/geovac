@@ -60,8 +60,16 @@ def norm(s: str) -> str:
 
 
 def main_part(title: str) -> str:
-    """Title with a trailing {\\large ...} / {\\Large ...} subtitle removed."""
-    return re.split(r"\{\s*\\[lL]arge\b", title, maxsplit=1)[0]
+    """Main title with a trailing subtitle removed.
+
+    Handles both subtitle styles in the corpus: a ``{\\large ...}`` block and a
+    ``Main Title:\\ Subtitle`` / ``Main Title: Subtitle`` colon separator. A cite
+    by the main title alone (subtitle dropped) is legitimate, so main_norm must
+    not carry the subtitle. Stripping only makes main_norm shorter, never adds a
+    false match (the full title is still matched separately)."""
+    t = re.split(r"\{\s*\\[lL]arge\b", title, maxsplit=1)[0]
+    t = re.split(r":(?=[\s\\])", t, maxsplit=1)[0]  # ": " / ":\\ " / ":\ " subtitle separators
+    return t
 
 
 def active_tex():
@@ -98,49 +106,92 @@ NORMAL = re.compile(
     re.DOTALL,
 )
 ZENODO = re.compile(r"``\s*GeoVac\s+Paper~?\s*(?P<n>\d+):\s*(?P<title>(?:(?!'')[\s\S])*?),?''", re.DOTALL)
+# KEYED: bibitems whose paper number lives in the \bibitem KEY rather than in a
+# trailing "GeoVac Paper N (YEAR)" marker -- e.g. P22's
+#   \bibitem{GeoVac_Paper7} J.~Loutey, ``Title,'' GeoVac Technical Report (2025).
+# Resolve N from the key (GeoVac_Paper7 / paper7 / Paper_7), then take the first
+# quoted title before the next \bibitem. Closes the run-#6 C11 blind spot where
+# the "Technical Report" format left an entire paper's internal cites uncertified.
+KEYED = re.compile(
+    r"\\bibitem\{(?:geovac[_-]?)?paper[_-]?(?P<n>\d+)[a-z_]*\}"
+    r"(?P<body>(?:(?!\\bibitem)[\s\S])*?)" + QUOTE,
+    re.DOTALL | re.IGNORECASE,
+)
 
 
-def check_one(fname, n, cited_title, tmap, mismatches, flagged):
+def check_one(fname, relpath, n, cited_title, tmap, mismatches, flagged):
     if n in ARCHIVED or n not in tmap:
         return
     full_norm, main_norm, raw, _ = tmap[n]
     cn = norm(cited_title)
     if cn == full_norm or cn == main_norm:
         return
-    rec = {"file": fname, "paper": n, "cited": " ".join(cited_title.split())[:80], "real": raw[:80]}
+    rec = {"file": fname, "path": relpath, "paper": n,
+           "cited": " ".join(cited_title.split())[:80], "real": raw[:80]}
     (flagged if n in PROPINQUITY else mismatches).append(rec)
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    argv = sys.argv[1:] if argv is None else argv
+    gate = None
+    if "--gate" in argv:
+        i = argv.index("--gate")
+        gate = argv[i + 1] if i + 1 < len(argv) else None
+
     tmap = build_title_map()
     mismatches, flagged = [], []
     for f in active_tex():
         if f.name in HOUSE_STYLE:
             continue
+        relpath = str(f.relative_to(PAPERS)).replace("\\", "/")
         txt = f.read_text(encoding="utf-8", errors="replace")
+        seen = set()  # (n, normalized cited) -> dedupe a bibitem matched by >1 pattern
+
+        def _check(n: int, title: str, _rel=relpath, _fn=f.name) -> None:
+            if title.strip().startswith("GeoVac Paper"):
+                return
+            key = (n, norm(title))
+            if key in seen:
+                return
+            seen.add(key)
+            check_one(_fn, _rel, n, title, tmap, mismatches, flagged)
+
         for m in ZENODO.finditer(txt):
-            check_one(f.name, int(m.group("n")), m.group("title"), tmap, mismatches, flagged)
+            _check(int(m.group("n")), m.group("title"))
         for m in NORMAL.finditer(txt):
-            t = m.group("title")
-            if t.strip().startswith("GeoVac Paper"):
-                continue
-            check_one(f.name, int(m.group("n")), t, tmap, mismatches, flagged)
+            _check(int(m.group("n")), m.group("title"))
+        for m in KEYED.finditer(txt):
+            _check(int(m.group("n")), m.group("title"))
+
+    # Partition by --gate: a mismatch FAILs only if its CITING file's path matches
+    # the gate token (e.g. 'group3'); out-of-gate mismatches are advisory AUDIT
+    # (mirrors check_k_label.py / check_paper_test_refs.py). No --gate => corpus-wide.
+    if gate:
+        gated = [r for r in mismatches if gate in r["path"]]
+        audit = [r for r in mismatches if gate not in r["path"]]
+    else:
+        gated, audit = mismatches, []
 
     print(f"title map: {len([k for k in tmap if isinstance(k,int)])} numbered papers + "
-          f"{[k for k in tmap if not isinstance(k,int)]}")
+          f"{[k for k in tmap if not isinstance(k,int)]}   [gated scope: {gate or 'ALL'}]")
     if flagged:
         print(f"\nFLAGGED (propinquity cluster, descope-pending -- not a failure): {len(flagged)}")
         for r in flagged:
             print(f"  [P{r['paper']}] {r['file']}: cited \"{r['cited']}\"")
-    if mismatches:
-        print(f"\n*** MISMATCH ({len(mismatches)}) -- internal cite does not match the paper's \\title: ***")
-        for r in mismatches:
+    if audit:
+        print(f"\n--- AUDIT (advisory, out-of-gate-scope) ({len(audit)}) -- stale titles in other branches: ---")
+        for r in audit:
+            print(f"  [P{r['paper']}] {r['path']}: cited \"{r['cited']}\"  != \"{r['real']}\"")
+    if gated:
+        print(f"\n*** MISMATCH ({len(gated)}) -- internal cite does not match the paper's \\title: ***")
+        for r in gated:
             print(f"  [P{r['paper']}] {r['file']}")
             print(f"      cited: \"{r['cited']}\"")
             print(f"      real : \"{r['real']}\"")
-        print("\nRESULT: FAIL (internal-title criterion)")
+        print(f"\nRESULT: FAIL (internal-title criterion{f', gated scope {gate}' if gate else ''})")
         return 1
-    print("\nRESULT: PASS -- every internal GeoVac citation matches the cited paper's \\title.")
+    print(f"\nRESULT: PASS -- every internal GeoVac citation in scope '{gate or 'ALL'}' "
+          f"matches the cited paper's \\title.")
     return 0
 
 

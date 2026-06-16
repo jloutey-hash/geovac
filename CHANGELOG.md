@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.18.0] - 2026-06-16
+
+### Summary
+
+**group3 first bite CERTIFIED (`/qa group3` run #7 PASS) + C11 deterministic-title gate hardened + corpus-wide internal-title cleanup.** Continuation of the v4.17.0 first-bite arc to its calibrated PASS. Runs #5 and #6 (both FAIL, both calibrated 6/6) peeled the last layer — residual discrete-vs-continuum (C6) slips the runs #1–2 sweep only partly cleared, and a deterministic-gate **blind spot**: `check_internal_titles.py` silently failed to certify P22's `\bibitem{GeoVac_PaperN}` "GeoVac Technical Report (YEAR)" bibitems (a planted stale title in that format slipped past). The lesson — *patch-and-rerun leaks on a class; sweep the whole class at once and harden the detector* — drove a thorough multiline C6 sweep and a C11 hardening, after which **run #7 = PASS** (6/6 sensitivity, zero false positives, the C6 sweep fixes confirmed not-re-flagged). The hardened check then surfaced 6 pre-existing stale internal-title cites in *other* branches (incl. 2 in the trunk paper_32) — all verified genuine and fixed, so the corpus is now internal-title-clean bare. Memo: `debug/sprint_group3_qa_firstbite_memo.md` (Runs #5–7 section).
+
+### Added
+
+- **`check_internal_titles.py` hardening (C11).** `KEYED` pattern resolves the paper number from the `\bibitem{GeoVac_PaperN}` / `{paperN}` key (certifies bibitems that carry no trailing "GeoVac Paper N (YEAR)" marker — e.g. the "GeoVac Technical Report (YEAR)" format P22 uses); `main_part()` now strips `:`-style subtitles (`: ` / `:\\ ` / `:\ `) so a legitimate main-title citation is accepted; `--gate <branch>` scoping added (mirrors `check_k_label` / `check_paper_test_refs` — gated FAIL + advisory AUDIT). Self-test confirms the previously-blind P22 format is now caught.
+
+### Changed — group3 first-bite papers (runs #5–7 disposition)
+
+- **C6 discrete-vs-continuum, swept thoroughly (4 sites):** Paper 22 l.95 ("reduction…to pure integers" → "convergence…to the pure integers of the continuum S³ Laplace–Beltrami operator"); Paper 31 l.78/l.450/l.816 (all three −(n²−1) attributions routed through the continuum operator the graph *converges to*); group3 synthesis l.382 ("Laplacian eigenvalues *are* n²−1" → "spectrum converges to the…n²−1 of the continuum S³ operator") and l.668 ("(D−A) *produces* n²−1" → "carries…through its conformal identification with the continuum"). The graph Laplacian L=D−A is positive-semidefinite; −(n²−1) is the continuum value it converges to.
+- **Paper 31 citations:** `borelweil` now credits Serre as expositor of Bourbaki exposé 100; the WH1-PROVEN substrate (×2) renamed from "Latrémolière propinquity" to "van Suijlekom state-space Gromov–Hausdorff distance" (the post-descope, correct scoping).
+- **Paper 22 Dyall/Grant:** the Oxford TOC confirms Dyall Ch. 9 is "Operators… under Time-Reversal Symmetry," so `§9.3` was wrong for the jj-coupled two-electron Coulomb reduction; the unverifiable section pointers (`§9.3`/`§7.5`) were dropped and the books cited at work-level. (Correct section numbers want a physical-book check.)
+
+### Changed — corpus-wide internal-title cleanup (the hardened C11 surfaced these)
+
+All 6 are pre-existing stale internal-title cites the old check was blind to (the citing bibitem used the keyed "Technical Report"-style format or the cited title was a full-form with a drifted subtitle); each verified GENUINE via a normalized cited-vs-real diagnostic and corrected to the cited paper's current `\title`:
+
+- **paper_32 (trunk/group1):** P14 "…from Natural Geometry" → "…from Spectral Graph Theory"; P23 "Nuclear Shell Model **Qubit** Hamiltonians and the Fock Projection Rigidity Theorem" → "…on the Hyperspherical Lattice". *(The trunk certification had the same C11 blind spot; a trunk re-touch against the hardened gate is warranted.)*
+- **paper_2_alpha (group5):** P2 self-cite "…Geometric Impedance: A Symplectic Framework" → "…a Spectral Coincidence on the Hopf Fibration" (v4.14.2 retitle straggler).
+- **paper_34 (group6):** P15 "Level 4 Geometry:…" → "The Level 4 Natural Geometry:…"; P19 "Coupled Composition:…" → "Toward PK-Free Molecular Hamiltonians:…"; P42 subtitle "…Theorem at Finite Cutoff" → "…Literal Identification at Finite Cutoff".
+- **`check_internal_titles` now PASSES bare, corpus-wide** (only the 3 descope-pending propinquity-cluster titles remain FLAGGED-not-failed). `tests/test_internal_title_consistency.py` restored to the bare corpus-wide assertion (the strongest invariant, now achievable).
+
+### Verdict
+
+- **`/qa group3` run #7 = PASS** (first-bite subset Papers 22/24/31 + synthesis). Calibrated panel: 6/6 sensitivity each run, zero false positives; all five dimensions (code / claims / citation / synthesis / deterministic) exercised, calibrated, clean; the C6 sweep fixes confirmed not-re-flagged (C-G control). Honest ceiling: certifies the first-bite subset, not the full group3 branch (Papers 18/54/55/56/57 + full synthesis remain).
+
+### Verification
+
+- Topological S³ proofs + QA-infra (C11/C13/K-label) + group3 paper tests: 91 passed, 13 slow-skipped. No `geovac/` production code changed (papers + the `check_internal_titles.py` QA tool + one regression test only). Hard-prohibitions (§13.5) intact: no K-label weakening, no fitted parameters, no negative-result deletion; C6 edits are discrete-vs-continuum *precision*, K labels untouched.
+
+### Carry-forward / open
+
+- **Trunk re-touch:** the hardened C11 now covers paper_32's keyed bibitems (just cleaned); the trunk should be re-run against the hardened gate at the PI's discretion.
+- **Dyall/Grant** section numbers (P22) — want the PI's physical-book check to restore precise sections.
+- group3 full cert (Papers 18/54/55/56/57); CF-1 (group4); group2 sweep should expect `debug/`-citation (C13) + keyed-bibitem (C11) items.
+
 ## [4.17.0] - 2026-06-16
 
 ### Summary

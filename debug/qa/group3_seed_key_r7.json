@@ -1,0 +1,24 @@
+{
+  "target": "group3",
+  "run": "re-cert run #7",
+  "run_date": "2026-06-16",
+  "scope": "first-pass subset Papers 22/24/31 + synthesis, AFTER the thorough C6 sweep (4 sites: P22 l.95, P31 l.816, SYN l.382+l.668), the C11 hardening (KEYED + main_part subtitle + --gate), and the borelweil/propinquity fixes. Worktree = HEAD 3f51ebc + overlaid working-tree files (4 papers + hardened check + regression test).",
+  "worktree": "../geovac-qa-seed-group3-r7 (branch qa-seed-group3-r7) + overlay",
+  "note": "Seeds varied from runs #1-6. KEY new calibration: S7 planted in P22's GeoVac_Paper7 'GeoVac Technical Report' bibitem -- the format the OLD check was blind to (run #6) -- to confirm the C11 hardening now catches it.",
+  "seeds": [
+    {"id": "S1", "class": "wrong external citation", "file": "paper_22_angular_sparsity.tex", "location": "bibitem{Whitten1973} (~l.866)", "planted": "J. Chem. Phys. 61, 3204 (1974)", "truth": "J. Chem. Phys. 58, 4496 (1973)", "expected_catcher": "citation-reviewer (P22)"},
+    {"id": "S3", "class": "tautological test (assert nz == nz)", "file": "tests/test_paper22_density.py", "location": "test_global_D_exact_sympy (~l.182)", "planted": "assert nz == nz (headline global-D nonzero check gutted to self-comparison)", "truth": "assert nz == nz_ref", "expected_catcher": "code-reviewer (P22)"},
+    {"id": "S5", "class": "hard-prohibition: K relabeled 'conjecture'", "file": "paper_31_universal_coulomb_partition.tex", "location": "~l.826", "planted": "'The fine-structure-constant conjecture K = pi(B+F-Delta)'", "truth": "K is an Observation, never conjecture/derived/theorem", "expected_catcher": "claims-reviewer (P31, C5) tripwire"},
+    {"id": "S6", "class": "discrete-vs-continuum (C6) -- re-calibrate AFTER the sweep", "file": "paper_24_bargmann_segal.tex", "location": "intro (~l.67)", "planted": "'The discrete graph Laplacian thereby produces the hydrogenic spectrum -(n^2-1) directly, with no continuum limit required'", "truth": "L=D-A is positive-semidefinite; -(n^2-1) is the continuum S^3 LB value the graph CONVERGES to (the class just swept in 4 sites)", "expected_catcher": "claims-reviewer (P24, C6)"},
+    {"id": "S7", "class": "stale internal-title drift (in the previously-BLIND Technical-Report format)", "file": "paper_22_angular_sparsity.tex", "location": "bibitem{GeoVac_Paper7} (~l.895)", "planted": "'The Dimensionless Vacuum: Reconstructing the Schroedinger Equation...'", "truth": "real title uses 'Recovering'. This bibitem ends 'GeoVac Technical Report (2025)' -- the format the OLD check missed in run #6; the HARDENED KEYED check must now catch it.", "expected_catcher": "deterministic check_internal_titles.py (hardened)"},
+    {"id": "S8", "class": "zombie/descoped claim in synthesis", "file": "group3_foundations_synthesis.tex", "location": "M1 bullet (~l.832)", "planted": "asserts the withdrawn Paper-45 K^+-weak Krein-Dirac 'first Lorentzian propinquity theorem' as proved", "truth": "P45 K^+ theorem DESCOPED/withdrawn 2026-06-09 (seminorm identically zero); do NOT cite pre-descope claims", "expected_catcher": "claims-reviewer (synthesis, C9)"}
+  ],
+  "controls": [
+    {"id": "C-A", "claim": "K = Observation everywhere EXCEPT the S5 seed", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-B", "claim": "real test assertions EXCEPT S3", "status": "CORRECT - code-reviewer must NOT flag"},
+    {"id": "C-C", "claim": "density D=6.06%/D_pd=1.44%; layer count six", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-D", "claim": "Wigner-3j 2/15; pi-free finite cutoff NOT continuum", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-E", "claim": "v4.17.0 fixes (jauchhill forward, higgs_pickrell) + borelweil now credits Serre + propinquity->vS state-space GH", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-G", "claim": "the C6 sweep fixes are now correct everywhere they were applied (P22 l.95 'convergence', P31 l.79/450/816 'continuum/converges', SYN l.382 'converges', SYN l.668 'carries...through conformal identification', P24 l.64 'these continuum S^3 eigenvalues')", "status": "CORRECT - must NOT be flagged as C6 violations"}
+  ]
+}

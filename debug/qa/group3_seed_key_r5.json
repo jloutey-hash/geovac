@@ -1,0 +1,24 @@
+{
+  "target": "group3",
+  "run": "re-cert run #5",
+  "run_date": "2026-06-16",
+  "scope": "first-pass subset Papers 22/24/31 + synthesis, AFTER v4.17.0 (run-#4 residuals cleared: new spinor test, P24 citations fixed, Paper 8 closed)",
+  "worktree": "../geovac-qa-seed-group3-r5 (branch qa-seed-group3-r5), from HEAD 3f51ebc",
+  "note": "Seeds varied from runs #1-4: S1 moved P22->P24 (bargmann1961), S4 moved P22->P31 (kappa), S5 moved P24->P31 (alpha-combination word), S3 moved P24-ho_entropy->P22-spinor (new test), S7 stays P31 bibitem but new stale variant, S8 new Lorentzian-P45 zombie.",
+  "seeds": [
+    {"id": "S1", "class": "wrong external citation", "file": "paper_24_bargmann_segal.tex", "location": "bibitem{bargmann1961} (~l.1257)", "planted": "Comm. Pure Appl. Math. 17, 215 (1963)", "truth": "Comm. Pure Appl. Math. 14, 187 (1961)", "expected_catcher": "citation-reviewer (P24)"},
+    {"id": "S3", "class": "false-positive test (self-referential assertion)", "file": "tests/test_paper22_spinor_density.py", "location": "test_spinor_fullgaunt_density (fast)", "planted": "assert _pct(nz, total) == _pct(nz, total) (replaces the nz==nz_ref + pct_ref reference checks; passes regardless of the actual spinor count)", "truth": "assert nz == nz_ref + _pct(nz,total)==pct_ref against SPINOR_FG", "expected_catcher": "code-reviewer (P22)"},
+    {"id": "S4", "class": "kappa-style overclaim (derived vs Observation)", "file": "paper_31_universal_coulomb_partition.tex", "location": "~l.563", "planted": "'kappa = -1/16 ... is derived from first principles via the Fock conformal projection'", "truth": "kappa is an Observation (coincides with geometric 1/16; no bridge derives it); 'derived from first principles' is the overclaim", "expected_catcher": "claims-reviewer (P31, C5/C8)"},
+    {"id": "S5", "class": "hard-prohibition: K relabeled 'conjecture'", "file": "paper_31_universal_coulomb_partition.tex", "location": "~l.529", "planted": "'the alpha-combination conjecture K = pi(B+F-Delta)'", "truth": "K is an Observation, never conjecture/derived/theorem", "expected_catcher": "claims-reviewer (P31, C5) tripwire; possibly C12 screen"},
+    {"id": "S7", "class": "stale internal-title drift", "file": "paper_31_universal_coulomb_partition.tex", "location": "bibitem{paper24} (~l.1594)", "planted": "'The Bargmann--Segal Construction: A pi-Free Harmonic-Oscillator Lattice on the 5-Sphere'", "truth": "real title 'The Bargmann-Segal Lattice: pi-Free Discretization of the Harmonic Oscillator on S^5'", "expected_catcher": "deterministic check_internal_titles.py"},
+    {"id": "S8", "class": "zombie/descoped claim in synthesis", "file": "group3_foundations_synthesis.tex", "location": "M1 bullet (~l.829)", "planted": "asserts the withdrawn Paper-45 K^+-weak Krein-Dirac Lorentzian propinquity theorem ('first Lorentzian propinquity theorem') as standing", "truth": "P45 K^+ theorem was DESCOPED/withdrawn 2026-06-09 (kernel identically zero); CLAUDE.md S6 says do NOT cite pre-descope claims", "expected_catcher": "claims-reviewer (synthesis, C9)"}
+  ],
+  "controls": [
+    {"id": "C-A", "claim": "K = Observation everywhere EXCEPT the S5 seed", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-B", "claim": "real test assertions (test_paper22_spinor_density exact spinor counts + structural checks, test_paper24/31 real assertions) EXCEPT the S3 seed", "status": "CORRECT - code-reviewer must NOT flag"},
+    {"id": "C-C", "claim": "density D=6.06% global / D_pd=1.44% relabel; Coulomb/HO layer count = six", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-D", "claim": "Wigner-3j = 2/15; pi-free at finite cutoff (NOT continuum); -(n^2-1) is continuum S^3, not the graph", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-E", "claim": "P24 jauchhill1940 = forward direction + Wybourne/Iachello converse (v4.17.0 fix); P24 higgs_pickrell2025 = accurate distinct 2-sphere-critical construction pointer (v4.17.0 fix)", "status": "CORRECT - must NOT be re-flagged"},
+    {"id": "C-F", "claim": "P22 spinor Table II cites tests/test_paper22_spinor_density.py; P22 Implementation cites the live test (v4.17.0 fix)", "status": "CORRECT - must NOT be flagged"}
+  ]
+}
