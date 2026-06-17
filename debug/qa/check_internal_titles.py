@@ -43,7 +43,13 @@ HOUSE_STYLE = {
 # retitle. Papers 38/39/40 are now DESCOPED (Latremoliere propinquity -> van
 # Suijlekom state-space GH) AND their cites converged (v4.14.x / v4.20.0 / v4.20.1),
 # so they are REMOVED from this set and ENFORCED: any future title/cite drift on
-# them now FAILS rather than flags. Only the Lorentzian leg (45-49) remains pending.
+# them now FAILS rather than flags. The Lorentzian leg (45-49) is descoped +
+# cite-wording-consistent (v4.20.3) but stays FLAGGED (not enforced): it is genuinely
+# PARTIAL / pending-repair (Paper 46 = enlarged-substrate repair target; 47/48/49
+# PARTIAL with surviving + descoped content), unlike the clean 38/39/40 descopes.
+# Full enforcement also awaits a C11 U(1)/\Uone notation-normalization unification
+# (literal "U(1)" norms to "u 1", the \Uone macro to "1", so literal cites can't yet
+# match the macro-form titles).
 PROPINQUITY = {45, 46, 47, 48, 49}
 ARCHIVED = {3, 4, 5, 6, 10, 21}              # out of scope
 

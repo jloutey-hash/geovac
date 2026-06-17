@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.3] - 2026-06-17
+
+### Changed — Lorentzian propinquity leg (Papers 45-49) consistency pass
+
+Completed the held propinquity-cluster by bringing the Lorentzian leg's titles / claims / cites consistent with its (already-decided, 2026-06-09) descope. Unlike the clean Euclidean descopes (38/39/40), this leg is heterogeneous — Paper 45 = degeneracy theorem (the K⁺ route is annihilated), Paper 46 descoped strong-form, Paper 47 norm-resolvent arrow survives, Papers 48/49 PARTIAL — so the pass was per-paper (mapped by a read-only investigation; PM-applied):
+
+- **Paper 46 retitled + descoped** (its Status note already had the descope; title/abstract/`thm:main` overclaimed past it): title "Strong-form Lorentzian propinquity **convergence**..." → "Strong-form Lorentzian propinquity ...: the natural-substrate degeneracy and the enlarged-substrate repair target"; abstract now leads with the degeneracy (the $\Lop$ seminorm is degenerate → the bound is a rate-formula evaluation, not a distance); `thm:main` renamed "Strong-form rate bound (descoped)" + inline descope flag; the "first strong-form Lorentzian propinquity convergence theorem" claim removed → open research target.
+- **Papers 48/49 abstract softening**: Paper 48's headline T6 "$G2$ metric-level closure / first quantitative pLGH-convergence panel" → "proposed, conditional on the upstream metric repair" (it inherits Paper 45's degenerate $\Lprop$); Paper 49's "Bridge Theorem holds at strict-strong-form rigor on four properties" → "stated on four properties, the metric-dependent ones descoped." Papers 45 and 47 were already title-consistent.
+- **Cite wording corpus-wide**: every stale "Lorentzian propinquity convergence" cite to Paper 45 → "...: a degeneracy theorem"; "Strong-form Lorentzian propinquity convergence" cite to Paper 46 → drop "convergence"; body phrasings "Papers 45/46 established Latrémolière propinquity convergence / completing the Lorentzian arc" → the descoped truth (Paper 45 = degeneracy / route-closed; Lorentzian quantum-metric convergence is an open target). Fixed across papers 39, 43, 50, 52, 56, 47, 48, 49, the group1 synthesis, and the field guide; genuine surviving content (Paper 47 norm-resolvent arrow, Paper 45 signature-agnostic product-carrier rate, the 4/π constant) kept intact.
+- **C11**: Papers 45-49 kept in the `PROPINQUITY` flag-don't-fail exception, now documented — the Lorentzian leg is descoped + wording-consistent but genuinely PARTIAL / pending-repair, distinct from the enforced clean 38/39/40 descopes. (A C11 `U(1)`/`\Uone` notation-normalization unification is the noted follow-up for eventual enforcement.)
+
+Verification: all 11 edited papers compile `-halt-on-error` exit 0; C11 PASS corpus-wide.
+
 ## [4.20.2] - 2026-06-17
 
 ### Changed — Paper 39 descope (state-space GH) + cite convergence + C11 hardening

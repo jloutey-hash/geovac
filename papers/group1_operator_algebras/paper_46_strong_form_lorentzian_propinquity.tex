@@ -132,8 +132,9 @@
 \newcommand{\Plancherel}{\hat}
 \newcommand{\Weyl}{\mathrm{Weyl}}
 
-\title{Strong-form Lorentzian propinquity convergence on truncated\\
-$\SU(2)\times\Uone_{T}$ Krein spectral triples}
+\title{Strong-form Lorentzian propinquity on truncated\\
+$\SU(2)\times\Uone_{T}$ Krein spectral triples:\\
+the natural-substrate degeneracy and the enlarged-substrate repair target}
 \author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
 This work was developed in an AI-augmented agentic workflow with
 Anthropic's Claude. Implementation, internal memos, and bibliographic
@@ -145,13 +146,15 @@ and editorial decisions are the author's responsibility.}}
 \maketitle
 
 \begin{abstract}
-We close the strong-form leg of the Lorentzian-extension arc for
-truncated Krein spectral triples by proving a Latr\'emoli\`ere
-quantum Gromov--Hausdorff propinquity convergence theorem on the
-\emph{full} Krein space, removing the $\Kplus$-restriction
-imposed in our companion paper~\cite{paper45} (descoped; see the Status note: the natural-substrate Lipschitz seminorm is
-degenerate and the bound is an evaluation of a closed-form rate
-formula, not a distance between quantum compact metric spaces). We work on the same
+We investigate the strong-form leg of the Lorentzian-extension arc for
+truncated Krein spectral triples, removing the $\Kplus$-restriction of
+the companion paper~\cite{paper45} by using the full-Krein-space
+operator-norm Lipschitz seminorm. \textbf{The strong-form construction
+on the natural substrate is descoped} (Status note below):\ that
+seminorm is degenerate --- its kernel far exceeds the scalars (every
+temporal multiplier is $\Lop$-invisible) --- so the closed-form bound
+below is an \emph{evaluation of a rate formula}, not a distance between
+quantum compact metric spaces. We work on the same
 compact-temporal Wick-rotated manifold $\Manifold$, with chirality-doubled
 Camporesi--Higuchi spinor space $\HGV^{\nmax}$ tensored with the
 $\Nt$-mode Fourier truncation of $L^{2}(\SoneT)$, BBB
@@ -166,13 +169,15 @@ commutator
 \end{equation*}
 in contrast to Paper~45's $\Kplus$-weak-form
 $\LPwk(a) = \opnorm{[\Pplus \DL \Pplus, \Pplus a \Pplus]}$ on $\Kplus$.
-We prove
+The closed-form rate bound is
 \begin{equation*}
    \Lprop\!\bigl(\Tcal^{L}_{\nmax,\Nt,T},\;
                  \Tcal^{L}_{\Manifold}\bigr)
    \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax,\Nt,T}
    \;\xrightarrow[(\nmax,\Nt)\to(\infty,\infty)]{}\; 0,
 \end{equation*}
+where (per the Status note) $\Lprop$ denotes the evaluation of this rate
+formula, \emph{not} a quantum-metric distance,
 with closed-form constant $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$,
 joint mass-concentration moment
 $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$, and assembled multiplier
@@ -196,14 +201,17 @@ identify a finite-cutoff envelope refinement of Paper~45
 eq.~(C3\_joint\_bound) (Appendix~\ref{app:correction}): the correct
 supremum range for the per-harmonic Lichnerowicz constant is
 $N \le 2\nmax - 1$, the Avery--Wen--Avery achievable envelope on $\nmax$
-shells, rather than the stated $N \le \nmax$. The asymptotic statement
-and Paper~45 Theorem~5.1 are unchanged. To our knowledge this is the
-first strong-form Lorentzian propinquity convergence theorem on
-truncated Krein spectral triples in the published math.OA literature,
-closing the named open problem in Paper~45~\S~1.4~G1. Honest scope:
-strong-form on the \emph{natural} substrate; strong-form on an
-\emph{enlarged} substrate including chirality-flipping generators with
-$\{J, M\} = 0$ remains a named follow-on (Sprint~L3b-2f).
+shells, rather than the stated $N \le \nmax$. The asymptotic rate formula
+and Paper~45's degeneracy theorem are unchanged. The strong-form
+\emph{convergence} is \emph{not} established:\ the natural-substrate
+seminorm is degenerate (Status note), so the Lorentzian quantum-metric
+convergence question remains a named open research target. The
+enlarged-substrate construction --- chirality-flipping generators with
+$\{J, M\} = 0$ (Appendix~\ref{app:enlarged}), precisely where the
+commutators are non-zero --- is the named repair starting point
+(Sprint~L3b-2f). The algebraic identities
+(Lemma~\ref{lem:temporal_invisibility}, now read as the diagnosis of the
+degeneracy) are unaffected.
 \end{abstract}
 
 \bigskip\noindent
@@ -1140,10 +1148,18 @@ Paper~45~Prop.~5.2~/~eq.~(height\_P) and Paper~38~\S~L5. \qedhere
 \section{Main theorem}\label{sec:main}
 % =====================================================================
 
-\begin{theorem}[Strong-form Lorentzian propinquity convergence]
+\begin{theorem}[Strong-form rate bound (descoped --- see Status note)]
 \label{thm:main}
-Let $\nmax \ge 1$, $\Nt \ge 1$, $T > 0$. The strong-form Latr\'emoli\`ere
-quantum Gromov--Hausdorff propinquity between the truncated Krein
+\emph{Descoped pending repair (Status and scope, June 2026):\ the
+seminorm $\Lop$ is degenerate on the natural substrate, so the quantity
+$\Lprop$ below is an evaluation of a closed-form rate formula, not a
+quantum Gromov--Hausdorff distance between quantum compact metric
+spaces. The statement is retained as the rate-formula identity; the
+Lorentzian quantum-metric convergence it was intended to assert is an
+open research target.}
+
+Let $\nmax \ge 1$, $\Nt \ge 1$, $T > 0$. The strong-form rate quantity
+$\Lprop$ between the truncated Krein
 metric spectral triple $\Tcal^{L}_{\nmax, \Nt, T}$ (under $\Lop$) and
 the continuum reference $\Tcal^{L}_{\Manifold}$ satisfies
 \begin{equation}\label{eq:main_bound_op}
