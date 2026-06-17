@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.21.0] - 2026-06-17
+
+### Added — C14 deterministic paper↔file reference integrity check
+
+Per PI direction (after the group3 run-4 `geovac/jlo_chi.py` defect — a claim citing a nonexistent code module — the PI chose to build a deterministic check to catch the broken-code-ref class corpus-wide rather than discover it one expensive panel at a time):
+
+- **`debug/qa/check_file_refs.py`** (+ `tests/test_file_ref_check.py`; wired into `docs/qa/criteria.md` as C14 and the `/qa` skill step-1 deterministic list). GATES (FAILs) on any `geovac/` / `benchmarks/` / `demo/` (permanent code/artifact) file path cited inline in a gated paper that does not resolve to a real file (glob refs need ≥1 match). Closes the C13 gap — C13 covers `tests/` refs only. `debug/` refs are **advisory**: the transient clean-room dir (§9) is pruned by design, so a dangling `debug/foo_memo.md` pointer is a hygiene smell, not a cert blocker.
+- **Corpus-wide sweep — serious class now CLEAN.** The only remaining serious-class hit besides the already-fixed jlo_chi.py was `geovac/hyperspherical.py` in Paper 34 (a solver *family* collapsed to a nonexistent single module); corrected to `geovac/hyperspherical_adiabatic.py` (the real Level-3 He adiabatic solver). `check_file_refs.py --gate-corpus` → GATED-MISSING 0. **group3 PASSES C14.**
+- **Advisory finding (for a PI hygiene decision):** 443 dangling `debug/` memo/script pointers across the corpus (papers citing sprint memos since cleaned up — concentrated in paper_34/35, the Lorentzian/precision arcs). Logged advisory; a sweep (e.g. a policy that papers cite the permanent record — CHANGELOG / the paper itself — rather than transient `debug/` files) is deferred to the PI.
+
+Verification: `check_file_refs.py --gate-corpus` GATED-MISSING 0; `tests/test_file_ref_check.py` 3 passed; Paper 34 compiles `-halt-on-error` exit 0.
+
 ## [4.20.8] - 2026-06-17
 
 ### Changed — `/qa group3` re-cert run 4 (FAIL) remediated

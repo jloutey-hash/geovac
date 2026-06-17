@@ -33,7 +33,7 @@ independent reviewers converge. Any verified MATERIAL defect ⇒ **FAIL**. Any
 gating dimension unexercised or uncalibrated ⇒ **INCONCLUSIVE** (not PASS). The
 verdict is the **AND across all review dimensions** (below).
 
-## Criteria (C1–C13; each binary — holds / does not)
+## Criteria (C1–C14; each binary — holds / does not)
 
 - **C1 — Backing exists & passes.** Every load-bearing claim in scope listed in
   `docs/claim_test_matrix.md` has a backing test (or an explicit
@@ -93,6 +93,15 @@ verdict is the **AND across all review dimensions** (below).
   — certified by `debug/qa/check_paper_test_refs.py --gate <branch>` (exit 0;
   also `tests/test_paper_test_refs.py`). Existence is the gate; matrix↔paper
   coverage and non-scope stale refs are advisory.
+- **C14 — Paper↔file reference integrity (deterministic).** Every `geovac/`,
+  `benchmarks/`, or `demo/` (permanent code/artifact) file path cited *inline*
+  in an in-scope paper resolves to a **real** file — certified by
+  `debug/qa/check_file_refs.py --gate <branch>` (exit 0; also
+  `tests/test_file_ref_check.py`). Closes the C13 gap (C13 covers `tests/` refs
+  only): the group3 run-4 `geovac/jlo_chi.py` defect was a claim citing a
+  nonexistent code module. `debug/` refs are **advisory** — the transient
+  clean-room dir (CLAUDE.md §9) is pruned by design, so dangling `debug/`
+  pointers are a hygiene smell, not a cert blocker.
 
 ## Branch-specific criteria (C14+)
 
@@ -115,7 +124,7 @@ not stop early on a pass.
 | Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` (one per in-scope paper) | prose ≤ tier; hard prohibitions intact |
 | External citations | C4 | `citation-reviewer` (one per in-scope paper) | cites resolve and say what we attribute |
 | Synthesis faithfulness | C9 | `claims-reviewer` (one on the branch synthesis) | **separate dispatch** from per-paper claims |
-| Deterministic | C10, C11, C12, C13 | scripts (`check_internal_titles.py`, `check_k_label.py --gate <branch>`, `check_paper_test_refs.py --gate <branch>`, compile) | not an LLM reviewer |
+| Deterministic | C10, C11, C12, C13, C14 | scripts (`check_internal_titles.py`, `check_k_label.py --gate <branch>`, `check_paper_test_refs.py --gate <branch>`, `check_file_refs.py --gate <branch>`, compile) | not an LLM reviewer |
 
 ## Coverage honesty
 

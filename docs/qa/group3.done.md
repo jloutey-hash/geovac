@@ -116,3 +116,12 @@ claim restates them (C7).
   debug/ script + a broken code-module ref (a class C13 does not cover — it
   checks test refs, not code-module refs). Seed key
   `debug/qa/group3_recert3_seed_key.json`. Remediation pending PI direction.
+- 2026-06-17 — **C14 added** (`debug/qa/check_file_refs.py`, paper↔file
+  reference integrity; `tests/test_file_ref_check.py`): closes the C13 gap
+  (gates `geovac/`/`benchmarks/`/`demo/` code-artifact refs that C13's
+  tests/-only scope missed — the jlo_chi.py class). Corpus-wide serious-class
+  sweep = **CLEAN** after fixing the one remaining hit
+  (`geovac/hyperspherical.py`→`hyperspherical\_adiabatic.py` in paper_34);
+  **group3 PASSES C14** (0 serious-class misses). **443 `debug/` dangling
+  pointers logged ADVISORY** (transient clean-room dir, pruned by design —
+  a separate hygiene-sweep decision for the PI, not a cert blocker).
