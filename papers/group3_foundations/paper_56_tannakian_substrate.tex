@@ -140,7 +140,11 @@ $t_{g} = 0$.
 \medskip
 \noindent\emph{Total bit-exact verification panel:\ $5{,}864$ zero
 residuals} ($\texttt{sympy}$-rational throughout) across PS-1/2/3/4 +
-TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj at $\nmax \in \{2, 3, 4\}$.
+TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj at $\nmax \in \{2, 3, 4\}$. The
+G4-Inj C4 sub-block is panel-size bookkeeping for the \emph{abelianized}
+image:\ its M3-column injectivity is \emph{refuted} (the genuine Gram is
+rank~1), so those residuals do not certify a closed immersion
+(Theorem~\ref{thm:injection_g4}).
 The fourteenth math.OA standalone in the \textsc{GeoVac} series.
 
 \medskip
@@ -1515,7 +1519,9 @@ $\nmax$ & $N(\nmax)$ & C1 & C2 & C3 & C4 & Total \\
 cosmic-Galois injection panel at every finite cutoff
 $\nmax \in \{1, 2, 3, 4\}$. The sum over the production grid
 $\{2, 3, 4\}$ contributes $2{,}904$ residuals to the master
-verification panel (Table~\ref{tab:verification}). Every count is
+verification panel (Table~\ref{tab:verification});\ the C4 row counts
+the \emph{abelianized} M3 panel (its closed-immersion injectivity is
+refuted --- Theorem~\ref{thm:injection_g4}). Every count is
 the explicit symbolic-zero output of
 \texttt{tests/test\_paper56\_injection\_g4.py}; the closed-form
 $R^{\mathrm{G4\text{-}Inj}}(\nmax) = 9 N(\nmax)^{2} + 6 N(\nmax) + 6$
@@ -1536,8 +1542,10 @@ cofiltered coherence of TC-2d
 \subsection{The natural realisation is Hodge / Hodge-de-Rham}\label{sec:open_g4_hodge}
 
 The injection $\Phi^{\mathrm{inj}}$ of Theorem~\ref{thm:injection_g4}
-identifies $U^*_{GV}$ as a closed sub-pro-algebraic group of
-$\mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$.  The motivic Galois
+identifies the \emph{abelianization} $(U^*_{GV})^{\mathrm{ab}}$ as a
+closed sub-pro-algebraic group of $\mathcal{U}_4^{\mathrm{ab}} \rtimes
+SL_2$ (it is \emph{not} a closed immersion of $U^*_{GV}$ itself --- the
+M3 column collapses to rank~1).  The motivic Galois
 group $\mathcal{G}_4$ admits multiple realisations --- Betti,
 algebraic de Rham, Hodge / Hodge-de-Rham, étale, $\ell$-adic,
 crystalline --- and the comparison map at the period-ring level is
@@ -1672,9 +1680,9 @@ cyclotomic motivic MZV as a \textsc{GeoVac} observable. At depth 1
 all required Hurwitz values do appear in the M3 column;\ at
 depth $\ge 2$ no \textsc{GeoVac} computation has yet produced an
 irreducible level-4 motivic MZV that is not reducible to depth-1
-products. Whether this absence is structural (\textsc{GeoVac} is a
-strict closed sub-pro-algebraic group of $\mathcal{G}_{4}$) or
-empirical (we have not looked hard enough) is the multi-year
+products. Whether this absence is structural (\textsc{GeoVac}'s abelianized image
+is a strict, i.e.\ proper, sub-pro-algebraic subgroup of
+$\mathcal{G}_{4}$) or empirical (we have not looked hard enough) is the multi-year
 forward research question --- and it is testable in finite
 sprint-scale steps by exhaustion at increasing loop order in the
 master Mellin engine.
@@ -1801,10 +1809,10 @@ gives the injective comparison at level 4.
 
 \begin{quote}
 \textbf{Theorem (cosmic-Galois injection, this paper).}\ The
-injection direction $\Ustar_{GV} \hookrightarrow \mathcal{U}_4
-\rtimes SL_2$ as a closed sub-pro-algebraic group (at the
-abelianization-of-unipotent level) is now \emph{closed at theorem
-grade}:\ see Theorem~\ref{thm:injection_g4} in
+injection direction $\Ustar_{GV} \rightarrow \mathcal{U}_4
+\rtimes SL_2$, realising the \emph{abelianized} image as a closed
+subgroup (at the abelianization-of-unipotent level), is now
+\emph{closed at theorem grade}:\ see Theorem~\ref{thm:injection_g4} in
 Section~\ref{sec:injection_g4} for the explicit period map, the
 four structural compatibilities (multiplicativity, depth-1
 coproduct compatibility, $SL_{2}$-to-Levi via $\chi_{4}$,

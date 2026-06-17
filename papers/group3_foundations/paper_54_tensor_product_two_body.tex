@@ -282,13 +282,18 @@ The connected two-body interaction $V_{\mathrm{conn}}$ from the
 rotationally invariant gauge field~\eqref{eq:A_full} satisfies:
 \begin{enumerate}
 \item[(i)] \textbf{$m$-conservation:} $m_1 + m_2 = m_1' + m_2'$ for
-  all nonzero matrix elements. Verified at $100\%$ at $n_{\max} \in
-  \{2, 3\}$.
+  all nonzero matrix elements --- structural for all $n$ (the
+  $M^\dagger \cdot [D, M]$ conjugate pairing forces the gauge field's
+  total $M = 0$), confirmed numerically at $n_{\max} \in \{2, 3\}$.
 \item[(ii)] \textbf{Gaunt compatibility:} $|\Delta l_1| = |\Delta
-  l_2| = k$ for all nonzero $(l_1, l_2) \to (l_1', l_2')$ channels.
-  Verified at $100\%$ at $n_{\max} \in \{2, 3\}$.
+  l_2| = k$ for all nonzero $(l_1, l_2) \to (l_1', l_2')$ channels ---
+  structural for all $n$ via the $3$-$Y$ selection rules of the
+  multiplier algebra (consistent with the potential-independent angular
+  sparsity theorem of Paper~22~\cite{paper22}), confirmed at
+  $n_{\max} \in \{2, 3\}$.
 \item[(iii)] \textbf{Pure monopole:} $100\%$ of $\|V\|^2$ is in the
-  $k = 0$ multipole channel at both cutoffs.
+  $k = 0$ multipole channel, \emph{verified at $n_{\max} \in \{2, 3\}$}
+  (computational; not asserted beyond the tested cutoffs).
 \item[(iv)] \textbf{Hermiticity and exchange symmetry} hold to
   machine precision ($< 10^{-17}$).
 \end{enumerate}

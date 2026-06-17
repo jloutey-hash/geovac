@@ -73,3 +73,12 @@ claim restates them (C7).
   gate (C10–C13) GREEN. **Remediated, not re-certified** — a fresh `/qa group3`
   (synthesis dimension worktree-pinned) certifies. Memo passes 1–2 +
   post-remediation honest scope: `debug/sprint_qa_group3bite2_memo.md`.
+- 2026-06-17 — **bite 2 re-cert run 2 = FAIL** (`/qa group3`, post-v4.20.5).
+  Calibrated panel (sensitivity 5/5, specificity 5/5; synthesis dimension
+  worktree-pinned this run). 8 verified MATERIAL defects — all *missed
+  instances* of already-fixed classes: C6 graph-produces-spectrum (P18 l.149/648,
+  P55 l.145); P56 "closed sub-pro-algebraic group" zombie (l.1539/1676/1805);
+  P57 bare-128 (l.77) + "38 forced" (l.175); P18 α²-Ihara false-badge + κ–B
+  no-test; P56 5,864-residual headline absorbing the refuted C4; P54
+  angular-theorem tier. Answer key `debug/qa/group3_recert_seed_key.json`.
+- 2026-06-17 — **run-2 findings REMEDIATED** (v4.20.6); re-run pending.

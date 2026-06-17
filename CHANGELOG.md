@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.6] - 2026-06-17
+
+### Changed — `/qa group3` re-cert run 2 (FAIL) remediated
+
+A second `/qa group3` certification run (post-v4.20.5; full 14-agent calibrated panel — **sensitivity 5/5, specificity 5/5**, synthesis dimension worktree-pinned) returned a trustworthy **FAIL**: 8 verified MATERIAL defects, every one a *missed instance* of a defect class the v4.20.0–v4.20.5 remediation had fixed elsewhere. All remediated here:
+
+- **C6 (discrete-vs-continuum), Paper 18** (l.149, 648) and **Paper 55** (l.145): "the graph Laplacian produces / gives the −(n²−1) / Coulomb spectrum" → the continuum Laplace–Beltrami spectrum the (positive-semidefinite) graph Laplacian *converges to*; κ = −1/16 labeled the matching scaling constant (Observation). (The C6 fix had previously landed only in Paper 57.)
+- **Paper 56 closed-immersion zombie** (l.1539, 1676, 1805): "closed sub-pro-algebraic group" → abelianized image / not-a-closed-immersion (the v4.20.0 sweep matched "closed immersion" but not this phrasing).
+- **Paper 57** (l.77) bare "dim 𝓜(D_F)=128 per generation" → matter-sector caveat + full-axiom 260; (l.175) "38 forced entries" → 35.
+- **Paper 18** α²-Ihara "(14/14 tests)" false-positive badge → explicit NO-TEST note; κ–B identity (eq:kappa_B_identity) coverage gap noted (arithmetic closes; the six Fock-weights are not regression-derived). Matrix rows added.
+- **Paper 56** "5,864 bit-exact residuals" headline → caveat that the C4 sub-block is panel-size bookkeeping (M3 injectivity refuted), not a closed-immersion verification.
+- **Paper 54** angular selection-rule theorem: items (i)/(ii) relabeled structural-for-all-n (the proof's M†[D,M] / 3-Y algebraic basis + Paper 22), item (iii) "verified at n_max≤3" (computational) — closing the tier overclaim.
+- Nit: Paper 55 l.826 denominator 4725 → 5670 (untested display-table typo; the M2 panel + production code had it right).
+
+Verification: all 5 edited papers compile `-halt-on-error` exit 0; C11/C12/C13 `--gate group3` PASS. Calibration + findings: `debug/qa/group3_recert_seed_key.json`, `docs/qa/group3.done.md` (run-2 log). A fresh `/qa group3` to certify is the next step.
+
 ## [4.20.5] - 2026-06-17
 
 ### Changed — group3 bite-2 lower-severity tail cleared

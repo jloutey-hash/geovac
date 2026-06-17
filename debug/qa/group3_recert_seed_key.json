@@ -1,0 +1,19 @@
+{
+  "run": "group3 re-certification (bite-2 remediated through v4.20.5), 2026-06-17",
+  "worktree": "../geovac-qa-seed-group3",
+  "scope": "bite-2 papers 18, 54, 55, 56, 57 + group3 foundations synthesis (bite-1 22/24/31 already PASS, run #7 v4.18.0)",
+  "seeds": [
+    {"id": "S2", "class": "circular/tautological test", "file": "tests/test_paper55_M2_mixed_tate.py", "loc": "test_witness_a0_dirac_vol_normalized (~l.141): assert _is_zero(coeffs['a0'] - coeffs['a0']) (was - sp.sqrt(pi))", "expected_catcher": "code-reviewer (paper 55)"},
+    {"id": "S4", "class": "kappa-style overclaim (derived / more fundamental)", "file": "papers/group3_foundations/paper_18_exchange_constants.tex", "loc": "VII.F Classification (~l.3078): '1/16 is derived from ... more fundamental' (was 'coincides ... Observation')", "expected_catcher": "claims-reviewer (paper 18)"},
+    {"id": "S1", "class": "fabricated theorem number", "file": "papers/group3_foundations/paper_55_periods_of_geovac.tex", "loc": "~l.1660: Charlton-Hoffman 'Thm 4.7' (real result is Thm 2.21 of arXiv:2204.14183)", "expected_catcher": "citation-reviewer (paper 55)"},
+    {"id": "S8", "class": "zombie/descoped claim in synthesis", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~l.1048: cosmic-Galois 'a proven, theorem-grade closed immersion' (REFUTED; the genuine result is the abelianized/rank-1 image)", "expected_catcher": "claims-reviewer (synthesis)"},
+    {"id": "S7", "class": "stale internal title", "file": "papers/group3_foundations/paper_18_exchange_constants.tex", "loc": "~l.3331: cites Paper 1 as 'Quantum Mechanics as a Packing Problem' (old title; current is 'Atomic Structure as a Packing Problem')", "expected_catcher": "deterministic check_internal_titles.py", "status_precheck": "CAUGHT — [P1] MISMATCH FAIL on worktree C11"}
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "file": "paper_56", "claim": "thm:injection_g4 = abelianized / rank-1 image (Reading A), explicitly NOT a closed immersion", "why_correct": "v4.20.0 correction grounded in the genuine period-map test"},
+    {"id": "M2", "file": "paper_57", "claim": "P5 98.3% framed as an internal-consistency check, not an independent discriminator", "why_correct": "v4.20.0; packing_reachable == F/C by construction"},
+    {"id": "M3", "file": "paper_18", "claim": "Eq.(zeta_d2) backed by test_qed_vacuum_polarization.py + test_qed_two_loop.py", "why_correct": "v4.20.0 cite correction"},
+    {"id": "M4", "file": "paper_56", "claim": "hgv primitive-space dim N = nmax(nmax+3)/2 (0<=l<=n)", "why_correct": "synced to pro_system.py"},
+    {"id": "M5", "file": "paper_55", "claim": "M2 periods in the pure-Tate even-weight sub-ring (backed by test_paper55_M2_mixed_tate.py)", "why_correct": "genuine; backed by the M2 test"}
+  ]
+}

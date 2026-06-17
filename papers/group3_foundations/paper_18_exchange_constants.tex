@@ -146,7 +146,9 @@ The compactness of $S^3$ is what makes the graph eigenvalues discrete
 integers; $\kappa$ converts this discrete spectrum to the non-compact
 $\mathbb{R}^3$ energy scale.
 
-The graph Laplacian on $S^3$ produces pure integer eigenvalues
+The continuum $S^3$ Laplace--Beltrami operator --- which the
+(positive-semidefinite) graph Laplacian converges to --- has pure
+integer eigenvalues
 \begin{equation}
   \lambda_n = -(n^2 - 1), \qquad n = 1, 2, 3, \ldots
   \label{eq:s3_eigenvalues}
@@ -528,7 +530,10 @@ is the dimensionless Breit--Pauli spin-orbit diagonal, gives a
 weighted Ihara zeta $\zeta_G^w(s)$ living in the ring
 $\mathbb{Q}(\alpha^2)[s]$ --- an explicit realization of the
 spinor-intrinsic tier without the $\gamma = \sqrt{1 - (Z\alpha)^2}$
-radical (\texttt{geovac/ihara\_zeta\_weighted.py}, 14/14 tests).
+radical (\texttt{geovac/ihara\_zeta\_weighted.py}; the module's 14 tests
+cover the weighted-Ihara infrastructure, not the degree-44 / $-35/648$
+values below, which are module-computed but not yet regression-tested ---
+a coverage gap logged in \texttt{docs/claim\_test\_matrix.md}).
 For Rule-A at $n_{\max}=3$, the inverse zeta expands as a polynomial
 in $\alpha$ of degree 44, with $\alpha^2$ coefficient carrying
 the clean rational prefactor $-35/648$. The coefficient is a
@@ -645,8 +650,8 @@ asymptotics carry $\pi^{5/2}$.
 Every algebraic operation in the GeoVac graph construction
 produces integers or rationals:
 \begin{itemize}
-  \item Eigenvalues of the graph Laplacian: $\lambda_n = -(n^2 - 1)$,
-    integer for all $n$.
+  \item The Laplace--Beltrami spectrum $\lambda_n = -(n^2 - 1)$ that the
+    graph Laplacian converges to: integer for all $n$.
   \item Degeneracies: $g_n = n^2$, integer.
   \item Gaunt integrals (Legendre normalization,
     $\int P_{l_1} P_k P_{l_2}\,dx$): ratios of factorials via
@@ -2514,8 +2519,12 @@ link in the GeoVac framework between the calibration constant and
 the Hopf base invariant: $|\kappa| = 1/d_{\max}^2$ appears as the
 universal denominator factor of the Fock-weight matrix elements,
 while $B$ appears in the Hopf-weighted sum.  The identity
-(\ref{eq:kappa_B_identity}) is verified by exact-rational symbolic
-computation with no fitted parameters.
+(\ref{eq:kappa_B_identity}) is exact-rational with no fitted parameters
+(the arithmetic closes:\ $9/4 + 51/16 + 165/16 = 63/4 = 6\,B\,|\kappa|$);
+the six Fock-weight values of Eq.~(\ref{eq:fock_weight_values}) are
+stated here, and a regression test deriving them from the graph and
+checking the identity is a logged coverage gap
+(\texttt{docs/claim\_test\_matrix.md}).
 
 \paragraph{2. A Dirichlet identity for $F$.}
 Define the Dirichlet series of the $S^3$ Fock shell degeneracy
