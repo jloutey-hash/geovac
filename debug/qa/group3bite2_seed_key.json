@@ -1,0 +1,20 @@
+{
+  "target": "group3 bite-2 (Papers 18, 54, 55, 56, 57 + full synthesis)",
+  "date": "2026-06-16",
+  "worktree": "../geovac-qa-seed-group3bite2",
+  "note": "Blind calibration controls. Reviewers are NOT told which items are seeded. Seeds live ONLY in the worktree + this file; never committed to the real corpus.",
+  "seeds": [
+    {"id": "S6", "dimension": "claims-prose", "file": "papers/group3_foundations/paper_18_exchange_constants.tex", "loc": "abstract, after the falsifiable-claim sentence", "class": "discrete-vs-continuum (C6)", "plant": "inserted 'the discrete graph Laplacian itself produces the hydrogenic spectrum -(n^2-1) directly on the lattice'", "expected_catcher": "claims-reviewer(paper18)"},
+    {"id": "S7", "dimension": "deterministic", "file": "papers/group3_foundations/paper_18_exchange_constants.tex", "loc": "bibitem{loutey_paper0}", "class": "stale internal title (C11)", "plant": "Paper 0 title -> 'Quantum State Space as a Packing Problem' (stale)", "expected_catcher": "check_internal_titles.py"},
+    {"id": "S8", "dimension": "synthesis", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "cosmic-Galois injection scope (~l.1062)", "class": "zombie / status overstatement (C9)", "plant": "flipped honest scope to 'infinite-cutoff equality is now established ... GeoVac realizes the full level-4 cosmic Galois group' (TRUE status: NOT claimed; forward question)", "expected_catcher": "claims-reviewer(synthesis)"},
+    {"id": "S1", "dimension": "citation", "file": "papers/group3_foundations/paper_55_periods_of_geovac.tex", "loc": "bibitem{glanois2015}", "class": "wrong external citation (C4)", "plant": "arXiv:1411.4947 -> arXiv:1609.03689 (wrong ID)", "expected_catcher": "citation-reviewer(paper55)"},
+    {"id": "S2", "dimension": "code", "file": "tests/test_paper56_injection_g4.py", "loc": "TestC4ClosedImmersion.test_c4_closed_immersion_verified", "class": "tautological test (C2)", "plant": "assert 1854 == 1854 (hardcoded vs itself, dressed as C4 verification)", "expected_catcher": "code-reviewer(paper56)"}
+  ],
+  "controls": [
+    {"id": "K1", "file": "paper_18", "claim": "six-tier exchange-constant taxonomy (intrinsic, conformal/calibration, embedding, algebraic-implicit, composition, inner-factor)", "status": "CORRECT (v4.19.0) - must NOT be flagged material"},
+    {"id": "K2", "file": "paper_54", "claim": "two-body radial coupling NOT forced (honest negative)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "K3", "file": "paper_55", "claim": "every GeoVac period is cyclotomic mixed-Tate at level <= 4 (classification tier)", "status": "CORRECT - must NOT be flagged"},
+    {"id": "K4", "file": "paper_57", "claim": "P5 packing-reachability discriminator at 98.3% with the I3 misclassification noted", "status": "CORRECT - must NOT be flagged"},
+    {"id": "K5", "file": "paper_56", "claim": "closed immersion at finite cutoff; Reading-A abelianization; infinite-cutoff equality NOT claimed", "status": "CORRECT (this is the TRUE scope the synthesis seed S8 overstates) - must NOT be flagged"}
+  ]
+}

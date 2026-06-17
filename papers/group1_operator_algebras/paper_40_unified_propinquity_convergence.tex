@@ -68,7 +68,7 @@
 \newcommand{\KS}{K}
 \newcommand{\Khat}{\widehat{K}}
 
-\title{Latr\'emoli\`ere propinquity convergence of \\
+\title{State-space Gromov--Hausdorff convergence of \\
 spectral truncations of compact Lie groups \\
 with bi-invariant metric}
 \author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
@@ -90,8 +90,8 @@ For each cutoff $\Lammax > 0$, let
 $\Tcal_\Lammax = (\Op_\Lammax, \Hilb_\Lammax, P_\Lammax \Dop_G P_\Lammax)$
 denote the Connes--van~Suijlekom spectral truncation obtained by
 projection onto irreducibles with Casimir~$\le \Lammax^2$. We prove that
-$\Tcal_\Lammax$ converges to $\Tcal_G$ in the Latr\'emoli\`ere quantum
-Gromov--Hausdorff propinquity for metric spectral triples, with
+$\Tcal_\Lammax$ converges to $\Tcal_G$ in van~Suijlekom's state-space
+Gromov--Hausdorff distance for metric spectral triples, with
 \begin{equation*}
    \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
    \;\le\; C_3(G) \cdot \gamma_\Lammax(G),
@@ -113,10 +113,18 @@ universality of $4/\pi$ identifies the propinquity rate with the
 $k=0$ sub-mechanism of a master Mellin engine
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the spectral triple, sharpening the
 structural reading of Paper~38 from a single-group observation to a
-class-wide theorem. The result upgrades the state-space
-Gromov--Hausdorff convergence proved by Gaudillot-Estrada and
-van~Suijlekom~\cite{gaudillot_estrada_vs2025} to Latr\'emoli\`ere
-propinquity with explicit Dirac-controlled rate.
+class-wide theorem. The result supplies an explicit
+Dirac-controlled rate for the state-space Gromov--Hausdorff convergence
+proved by Gaudillot-Estrada and van~Suijlekom~\cite{gaudillot_estrada_vs2025}.
+The strictly stronger Latr\'emoli\`ere propinquity is \emph{not}
+claimed:\ its dual-reach step is a named gap
+(Remark~\ref{rem:correction_L2}), exactly as for the rank-1 case
+(Paper~38). Moreover the general-$G$ lifted-state construction
+underlying even the state-space~GH statement is verified only for
+$\SU(2)$, so for general $G$ the convergence is conditional on that
+per-group spin-window decomposition;\ the closed-form rate
+$\gamma_\Lammax(G)$ and the universal $4/\pi$ constant (the genuine new
+content) are unaffected.
 \end{abstract}
 
 \bigskip\noindent
@@ -205,7 +213,7 @@ full Class~1 generality.
 Let $G$ be a compact connected Lie group of rank $r \ge 1$ with
 bi-invariant Riemannian metric (dual-Coxeter normalised). The
 truncated metric spectral triples $\Tcal_\Lammax$ converge to $\Tcal_G$
-in the Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity, with
+in van~Suijlekom's state-space Gromov--Hausdorff distance, with
 explicit rate
 \begin{equation}\label{eq:main_intro}
    \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
@@ -1711,7 +1719,9 @@ bi-invariant Riemannian metric in the dual-Coxeter normalisation, and
 let $\Tcal_G$ be its canonical metric spectral triple. Let
 $\Tcal_\Lammax$ be its Connes--van~Suijlekom truncation at Casimir
 cutoff $\Lammax > 0$. Then $\Tcal_\Lammax$ converges to $\Tcal_G$ in
-the Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity:
+van~Suijlekom's state-space Gromov--Hausdorff distance (unconditionally
+for $\SU(2)$; for general $G$ conditional on the per-group spin-window
+lifted-state decomposition of Remark~\ref{rem:correction_L2}):
 \begin{equation}\label{eq:main_thm_general}
    \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
    \;\le\; C_3(G) \cdot \gamma_\Lammax(G), \qquad
@@ -1769,7 +1779,7 @@ all of which are immediate consequences of Theorem~\ref{thm:main}.
 For $G = \SU(N)$ with the bi-invariant metric in the dual-Coxeter
 normalisation ($\Cas(\mathrm{ad}) = N$), the truncated metric
 spectral triples $\Tcal_\Lammax$ converge to $\Tcal_{\SU(N)}$ in
-Latr\'emoli\`ere propinquity at the universal rate
+van~Suijlekom's state-space Gromov--Hausdorff distance at the universal rate
 $\gamma_\Lammax = (4/\pi)\log\Lammax/\Lammax + O(1/\Lammax)$.
 \end{corollary}
 

@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.0] - 2026-06-16
+
+### Summary
+
+**`/qa group3` bite-2 (FAIL) + full remediation + a single shared QA definition-of-done.** Bite 2 of the group3 certification (Papers 18, 54, 55, 56, 57 + the full foundations synthesis) ran the calibrated 16-agent panel and returned a **trustworthy FAIL** — material defects across all five papers + the synthesis. The defects were then fully remediated in two passes; the three load-bearing ones were handled by *building genuine validation before reducing any claim* (PI directive), which decisively determined the truth in each case rather than shrinking claims to fit weak tests. group3's deterministic gate (C10–C13) is GREEN throughout; all edited `.tex` compile `-halt-on-error` exit 0; the 18 topological S³ proofs + the new Paper 56 genuine test pass (32 passed, 2 strict-xfail). Memo: `debug/sprint_qa_group3bite2_memo.md`; validation memos `debug/paper{56_injection,40_propinquity,57_p5}_*_memo.md`.
+
+### Added — QA infrastructure
+
+- **Single shared definition-of-done.** `docs/qa/criteria.md` now holds the canonical C1–C13 + verdict rule + the five review dimensions + the hard rules; the per-branch `docs/qa/{trunk,group1,group3}.done.md` are slimmed to thin profiles that *inherit* it and carry only branch-specific scope/deltas. Ends the copy-paste drift across branches.
+- **Genuine Paper 56 backing test** `tests/test_paper56_injection_g4_periodmap.py` — computes (does not hardcode) the M3 period-vector Gram matrix from the paper's own construction; ships as a strict-xfail falsifier of the C4 injectivity claim (replacing the tautological `gram = eye(n)` of `test_paper56_injection_g4.py`).
+
+### Closed — `/qa group3` bite 2 = FAIL, then remediated
+
+- **Gate run (FAIL).** Calibrated panel (code / claims / citation / deterministic dimensions calibrated; the synthesis dimension was uncalibrated this run — the reviewer cross-read the real corpus and missed its seed, a tooling gap now logged). Verified material defects: tautological keystone backing (Paper 56), conjecture-environment K-labels (Paper 18), Paper 38 "propinquity" drift (54/55/57), count contradictions (56/57), and absent `claim_test_matrix` rows.
+- **Remediation pass 1 (PM-fixables).** Paper 18 §13.5 conjecture-envs → observation; the Paper 38 propinquity→state-space-GH sweep (54/55/57, incl. retitled bibitems); citation fixes (Hoffman/Glanois/Boyle); Paper 57 C6; κ §VII.F reframed to "two routes / Observation" (dropped "more fundamental"/"derivable"); Paper 18 `zeta_d2` backing-cite corrected (dropped a false "80-digit PSLQ" claim, repointed to `test_qed_two_loop.py`); Paper 57 "128" → matter-sector caveat + full-axiom 260 (matches Paper 32's v4.16.1 correction); Paper 56 §hgv sector convention `0≤l<n`→`0≤l≤n` (synced to `pro_system.py`, which guards it explicitly); Paper 57 + `docs/forced_free_seam.md` catalogue count 62→**60** (35 F / 1 A / 24 C — the audit script and the 60-row table are ground truth).
+
+### Closed — the validation bucket (three keystone corrections, PI-approved)
+
+Three "build genuine validation before reducing the claim" investigations (3 dispatched agents, all PM-verified against primary text):
+
+- **Paper 56 cosmic-Galois injection — C4 REFUTED → corrected to the abelianized image (Reading A).** The headline closed-immersion rested on M3-column injectivity, "verified" only by a hardcoded `gram = eye(n)`. The genuine period-map computation gives **Gram rank 1, det 0** at n_max = 2, 3 — the only concrete per-sector M3 content the corpus supplies is the single scalar η_{(n,l)}, so distinct generators map to *collinear* periods and M3 collapses exactly as M1/M2 do. `thm:injection_g4` rewritten throughout (theorem statement, C4, proof, panel, honest-scope, abstract, scattered mentions) to the abelianized / rank-1 homomorphism — not a closed immersion. A genuinely injective refinement would require a sector-resolved rank-≥2 M3 period map that does not currently exist (named follow-on, uncertain outcome).
+- **Paper 40 — descoped Latrémolière propinquity → van Suijlekom state-space GH.** The paper's own L5 proof concedes the dual-reach `reach_P` step is a *named gap* ("a forward cb-norm controls no partial inverse"; `rem:correction_L2`: "the device actually used is van Suijlekom's state-space GH framework") — the identical defect Paper 38 was descoped for, with the 2026-06-09 sibling pass having corrected the proof body but left the title/abstract/theorem over-claiming. Title + abstract + `thm:main_intro` + `thm:main` + corollaries descoped to state-space GH; the general-G statement marked conditional on the per-group spin-window decomposition (verified only for SU(2)). Genuine new content (rate γ_Λ(G), universal 4/π, C₃ ≤ 1) untouched. Paper-40 internal cites in 55/57 retitled.
+- **Paper 57 P5 — reframed 98.3% discriminator → internal-consistency check.** Exact cross-tab over all 60 entries: the hand-assigned `packing_reachable` column is a perfect relabel of the F/C status (the one deliberate off-diagonal is the lone "misclassification"); an F/C-blind witness-existence check cannot discriminate (all 60 entries are witness-backed → 60% base rate), so the 98.3% returns only by reading witness *polarity*, which is the F/C judgment itself. P5 reframed across abstract, §1, §5.5, Table caption, §5.6, §6.1 as the consolidated F/C boundary; the genuine discovery (the two-family MF/period split) now carries the narrative.
+
+### Changed — group3 synthesis cascade
+
+- Paper 56 "proven, theorem-grade closed immersion" → abelianized homomorphism (not a closed immersion; M3 rank-1, Reading A); Paper 57 98.3% "discriminator" → internal-consistency check.
+
 ## [4.19.0] - 2026-06-16
 
 ### Summary

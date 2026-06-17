@@ -1,0 +1,65 @@
+# Group 1 (Operator algebras / NCG) — `/qa` profile
+
+> **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
+> file supplies only group1-specific scope + deltas + the branch-specific
+> criterion C14.
+
+> **STATUS: DRAFTED 2026-06-16 — NOT YET FROZEN.** Sequenced *after* group3
+> bite 2. Awaiting PI confirmation of scope + first bite before FREEZE.
+
+**Scope (non-trunk group1):** Papers **29, 39, 40, 42, 43, 44, 45, 46, 47, 48,
+49, 50, 52, 53** + the **group1 operator-algebras synthesis**. Trunk papers
+**32, 38** taken as already-certified (`/qa trunk` PASS); in scope only where a
+group1 paper restates them (C7).
+
+**Deterministic `--gate`:** `group1`.
+
+## Branch deltas (the only non-inherited content)
+
+- **C14 — Descope / partial status accuracy (branch-specific; the defining
+  criterion).** Every DESCOPED or PARTIAL paper presents withdrawn claims at
+  current status:
+  - Papers **45, 46 = DESCOPED** — the "first Lorentzian propinquity
+    (convergence) theorem" is **retracted**; Paper 45's headline is the K⁺
+    annihilation theorem; no body text presents weak/strong-form Lorentzian
+    propinquity convergence as established.
+  - Papers **47, 48, 49 = PARTIAL** — surviving arrows stated as surviving (47
+    norm-resolvent + three-carrier; 48 bridge as conditional design; 49
+    cocycle-deficit / OSLPLS algebra); descoped metric-level / Λ-inheritance
+    claims flagged descoped.
+  - The **product-carrier S³×S¹ convergence** is presented as
+    **signature-agnostic (Euclidean), NOT a Lorentzian claim**.
+  - Each carries an in-place Status note; no pre-descope claim cited as live.
+  *(If a second branch later needs C14, promote it into `criteria.md`.)*
+- **C4 high-priority for this branch.** The math.OA citation apparatus
+  (Connes–vS, Latrémolière, van Suijlekom state-space GH, Marcolli,
+  Camporesi–Higuchi, Bizi–Brouder–Besnard, Mondino–Sämann, Datta) is the
+  corpus's highest fabrication surface and *already produced a real defect here*
+  (the nonexistent "Latrémolière Thm 5.5 / Def 3.4" refs that drove the Paper 45
+  descope; the Paper 38 `avery_wen_avery` v4.14.1 fix). Every cited theorem/def
+  *number* is verified.
+- **C7 (trunk-dependent status).** Paper 38/WH1 as PROVEN scoped to the van
+  Suijlekom state-space GH distance; Paper 32 axioms / κ at current tiers.
+- **C8 (headline honesty), per-paper.** Paper 29 = Ramanujan + integer-algebraic
+  Ihara zeros; Paper 40 = 4/π rate **universal** (derived-numerics-pinned + PRV
+  tightness, not full symbolic proof beyond the verified panel); Paper 50 =
+  **bit-exact** CFT-on-sphere F-theorem match (arithmetic fact, not a CFT
+  derivation); Paper 45 headline = the **annihilation theorem** (a NEGATIVE
+  result), never a convergence theorem.
+
+## Proposed first bite (PI to confirm at FREEZE)
+
+- **(recommended) Papers 29, 40, 50 + synthesis** — the ACTIVE math.OA backbone
+  (Ramanujan / universal 4/π rate / CFT F-theorem); calibrate the panel on the
+  non-descoped core, C9 scoped to the synthesis's coverage of those three plus
+  its Lorentzian-descope narrative (coherence-passed v4.19.0).
+- **Bite 2 (proposed):** the **Lorentzian cluster 42–49** — the C14-heavy,
+  highest-risk subset, after the panel is calibrated.
+- *Alternative: attack the Lorentzian cluster first if you'd rather hit the risk
+  head-on while the descope is fresh.*
+
+## Change log
+- 2026-06-16 — **DRAFTED** by PM for PI review (third pre-registered `/qa`
+  target). Adds C14 (descope/partial status); flags C4 high-priority. Scope
+  excludes trunk-certified 32/38. **Awaiting PI freeze** (sequenced after group3
+  bite 2).

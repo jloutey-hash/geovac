@@ -47,7 +47,7 @@ For each entry we record three properties to be tested in the paper §5 candidat
 | B3 | $\mathbb{C}$ factor at $n=1$ | **F** | Door 4d (unique division algebra of $S^1$) | Inner | 1 | none | dimensionless |
 | B4 | $M_3(\mathbb{C})$ factor at $n=3$ | **F** | Door 4d (Hurwitz fallback at $S^5$) | Inner | 1 | none | dimensionless |
 | B5 | $\mathbb{H}$ vs $M_2(\mathbb{C})$ at $n=2$ | **A** | Door 4c NEGATIVE on $J$-sign-table; ℍ admitted, not forced; Door 4e Upgrade B closes if adopted | Inner | 1 | none | dimensionless |
-| B6 | $\dim \mathcal{M}(D_F) = 128$ per generation | **F** | Forced-Count Theorem, Paper 32 §VIII (`thm:forced_count`); $1024 \to 512 \to 128$ chain | Inner | 1 | none | dimensionless |
+| B6 | matter-sector $\dim \mathcal{M}(D_F)|_{\rm matter} = 128$ per generation | **F** | Forced-Count Theorem, Paper 32 §VIII (`thm:forced_count`); $1024 \to 512 \to 128$ matter-sector chain (full-axiom $D_F$ moduli dimension 260) | Inner | 1 | none | dimensionless |
 | B7 | Higgs admission (Mexican-hat structurally allowed) | **F** | Sprint H1 POSITIVE-THIN; Paper 32 §VIII.C | Inner | 1 | none | dimensionless |
 | B8 | Lower-bound forcing on gauge content (saturated, not subset) | **C** | Bertrand × Hopf gives upper bound only; structural-skeleton scope pattern | Gauge | 1 | none | dimensionless |
 
@@ -86,7 +86,7 @@ For each entry we record three properties to be tested in the paper §5 candidat
 | E3 | $F_2 = 5\sqrt{2}/3$ graph-native ($\pi$-free) | **F** | Paper 33 graph-native QED | QED | 1 | none | dimensionless |
 | E4 | $F_2/(\alpha/2\pi) = 1.084$ Parker–Toms ($R/12$ curvature) | **F** | Bit-exact; 0.5% match | QED | 1 | M2 | dimensionless |
 | E5 | $B = 42$ (Casimir), $F = \pi^2/6$ (Fock Dirichlet), $\Delta = 1/40$ ($g_3^{\rm Dirac}$) | **F** | Three independent spectral homes proven; 12 mechanisms eliminated | $\alpha$ | 1 | M1/M2/M2 | dimensionless |
-| E6 | Combination rule $K = \pi(B + F - \Delta)$ for $\alpha^{-1}$ | **C** | Numerical coincidence $8.8 \times 10^{-8}$; no derivation; stays conjectural per CLAUDE.md §13.5 | $\alpha$ | >1 | M1+M2 | dimensionless |
+| E6 | Combination rule $K = \pi(B + F - \Delta)$ for $\alpha^{-1}$ | **C** | Numerical coincidence $8.8 \times 10^{-8}$; no derivation; stays an Observation per CLAUDE.md §13.5 | $\alpha$ | >1 | M1+M2 | dimensionless |
 | E7 | Two-loop SE counterterms $Z_2, \delta m$ | **C** | LS-8a wall: framework cannot generate autonomous renormalization | QED | >1 | outside | dimensionful |
 | E8 | Multi-loop QED corrections beyond LS-7 | **C** | HF-5 wall (same mechanism as E7) | QED | >1 | outside | dimensionful |
 
@@ -129,7 +129,7 @@ For each entry we record three properties to be tested in the paper §5 candidat
 
 | # | Name | Status | Mechanism / Witness | Domain | MF | P | Dim |
 |---|------|:------:|---------------------|--------|:--:|:--:|:--:|
-| I1 | Fine-structure constant $\alpha$ (value) | **C** | E6 combination rule conjectural; $\alpha$ value external | $\alpha$ | >1 | M1+M2 | dimensionless |
+| I1 | Fine-structure constant $\alpha$ (value) | **C** | E6 combination rule is an Observation; $\alpha$ value external | $\alpha$ | >1 | M1+M2 | dimensionless |
 | I2 | Born rule probability rule $p = \lvert\langle a\lvert\psi\rangle\rvert^2$ | **C** | Gleason via Hilbert inheritance; framework does not improve on Gleason; `external_input_three_class_partition.md` Class 1 | Foundations | 1 | N/A | N/A |
 | I3 | Higgs direction $\hat n \in S^2$ | **C** | Boyle–Farnsworth input; possible Hopf-base identification flagged | Inner | 1 | M1 | dimensionless |
 
@@ -137,11 +137,11 @@ For each entry we record three properties to be tested in the paper §5 candidat
 
 ## Summary counts
 
-- **Forced (F):** 38 entries
+- **Forced (F):** 35 entries
 - **Admitted (A):** 1 entry
-- **Calibration (C):** 23 entries
+- **Calibration (C):** 24 entries
 
-Total: 62 entries across nine domains.
+Total: 60 entries across nine domains.
 
 ## Preliminary discriminator read
 

@@ -151,7 +151,7 @@ unipotent radical of the level-4 motivic Galois group
 $\mathcal{G}_{4} = \mathcal{G}_{\mathrm{MT}(\Z[i, 1/2])}$ of
 Deligne 2010 + Glanois 2015, with four structural compatibilities
 (multiplicativity, depth-1 coproduct, $SL_{2}$-to-Levi via
-cyclotomic $\chi_{4}$, closed-immersion via Glanois basis;\
+cyclotomic $\chi_{4}$, abelianized image via Glanois basis;\
 Section~\ref{sec:injection_g4},
 Theorem~\ref{thm:injection_g4}). The proof uses the
 Eskandari--Murty--Nemoto 2025 forcing-of-level-4 result + the
@@ -323,9 +323,10 @@ QSM.
 \subsection{The cutoff Hopf algebra $\HGV(\nmax)$}\label{sec:hgv}
 
 For each integer $\nmax \ge 1$ let
-$\Sec(\nmax) = \{(n, l) :\ 1 \le n \le \nmax, 0 \le l < n\}$ be the
-set of \emph{Coulomb sectors at cutoff $\nmax$}, $\Nsec(\nmax) =
-|\Sec(\nmax)| = \nmax(\nmax + 1)/2$. The \emph{primitive space} of
+$\Sec(\nmax) = \{(n, l) :\ 1 \le n \le \nmax, 0 \le l \le n\}$ be the
+set of \emph{Coulomb sectors at cutoff $\nmax$} (the construction's
+convention, matching \texttt{geovac/pro\_system.py}), $\Nsec(\nmax) =
+|\Sec(\nmax)| = \nmax(\nmax + 3)/2$. The \emph{primitive space} of
 $\HGV(\nmax)$ is the $\Q$-vector space
 \[
    V_{\nmax} = \bigoplus_{(n, l) \in \Sec(\nmax)} \bigoplus_{k \in \{0, 1, 2\}} \Q \cdot x_{(n, l), k},
@@ -1136,9 +1137,11 @@ the Tannakian dual $\Aut^{\otimes}(\fibfun)^{(\infty)}$ with
 $\Ga^{\infty} \rtimes SL_{2}$ as a pro-algebraic group, but does not
 yet compare it to a published motivic-Galois target. This section
 closes that comparison in the \emph{injection direction}:\ we
-exhibit an explicit closed-immersion of pro-algebraic groups
+exhibit an explicit homomorphism of pro-algebraic groups
 $\Phi^{\mathrm{inj}}:\ \Ustar_{GV} = \Ga^{\infty} \rtimes SL_{2}
-\hookrightarrow \mathcal{U}_{4} \rtimes SL_{2}$, where $\mathcal{U}_{4}$
+\rightarrow \mathcal{U}_{4} \rtimes SL_{2}$ onto the \emph{abelianized}
+level-4 image (Reading~A; not a closed immersion --- see
+Theorem~\ref{thm:injection_g4}), where $\mathcal{U}_{4}$
 is the pro-unipotent radical of the level-4 motivic Galois group
 $\mathcal{G}_{4} = \mathcal{G}_{\mathrm{MT}(\Z[i, 1/2])}$ of
 Deligne 2010~\cite{deligne2010} and Glanois
@@ -1209,12 +1212,21 @@ homomorphism of pro-algebraic groups
      \;\longrightarrow\;
    \mathcal{G}_{4} = \Gm \ltimes \mathcal{U}_{4},
 \]
-which is a \emph{closed immersion} of pro-algebraic groups, i.e.\
-an injective homomorphism whose image is Zariski-closed in the
-pro-algebraic topology. Equivalently, in coordinate-ring language,
-the dual map of $\Q$-Hopf algebras
-$\Phi^{\mathrm{inj}, *}:\ \mathcal{O}(\mathcal{G}_{4}) \twoheadrightarrow
-\mathcal{O}(\Ustar_{GV})$ is surjective.
+landing in the level-4 cosmic-Galois group. Under the only concrete
+per-sector period evaluation the construction supplies (the per-sector
+$\eta$-content;\ \S\ref{sec:injection_panel} and
+\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}), \emph{each}
+Mellin column --- M1, M2, \emph{and} M3 --- collapses to a single
+rank-1 target per (Mellin slot, Tate weight):\ the sector-indexed
+generators map to \emph{collinear} periods. $\Phi^{\mathrm{inj}}$ is
+therefore \emph{not} injective on the sector-indexed generators;\ it
+factors through the abelianization
+$\Ustar_{GV} \twoheadrightarrow (\Ustar_{GV})^{\mathrm{ab}}$ and realises
+the level-4 \emph{abelianized} image (Reading~A,
+Remark~\ref{rem:injection_honest_scope}). The earlier
+``closed-immersion'' reading required M3-column injectivity (distinct
+generators mapping to $\Q$-linearly independent periods);\ the genuine
+Gram computation refutes it (rank~1, det~0).
 
 The four structural compatibilities are:
 \begin{enumerate}
@@ -1240,15 +1252,19 @@ $\Phi^{\mathrm{inj}}(SL_{2})$). The non-trivial $SL_{2}$ action on
 $\mathrm{Sym}^{k} V_{\mathrm{fund}}$ is detected at the
 representation level (Theorem~\ref{thm:sl2_pw}), not at the
 period-grading level.
-\item \textbf{(C4) Closed-immersion (image is Zariski-closed).} The
-image $\Phi^{\mathrm{inj}}(\Ustar_{GV})$ is cut out inside
-$\mathcal{G}_{4}$ by the explicit Glanois 2015 basis relations
+\item \textbf{(C4) Abelianized image (Reading~A), not a closed
+immersion.} Under the construction's per-sector period content the M3
+column collapses to rank~1 per weight (like M1 and M2), so
+$\Phi^{\mathrm{inj}}$ is not injective on the sector-indexed generators
+and factors through the abelianization. The well-defined object is the
+abelianized image $\Phi^{\mathrm{inj}}((\Ustar_{GV})^{\mathrm{ab}})$,
+cut out inside $\mathcal{G}_{4}$ by the Glanois 2015 basis relations
 \cite{glanois2015} on the depth-graded MZV generators that fail to
-appear in the master Mellin engine output. Concretely, at each
-weight $w \ge 1$, the codimension of the image in $\mathcal{U}_{4}$
-is the number of level-4 depth-$\ge 2$ motivic MZVs at weight $w$
-which are not realised by any \textsc{GeoVac} M3 observable. This
-codimension is positive at depth $\ge 2$ (see honest scope below).
+appear in the master Mellin engine output. At each weight $w \ge 1$,
+the codimension of the (abelianized) image in $\mathcal{U}_{4}$ is the
+number of level-4 depth-$\ge 2$ motivic MZVs at weight $w$ not realised
+by any \textsc{GeoVac} M3 observable, positive at depth $\ge 2$ (see
+honest scope below).
 \end{enumerate}
 \end{theorem}
 
@@ -1301,25 +1317,31 @@ semidirect product structure is induced by the natural action of
 $SL_{2}$ on the $\mathrm{Sym}^{k}$ decomposition of the depth-1
 motivic Lie algebra.
 
-\emph{(C4) Closed-immersion via Glanois basis.} The Glanois 2015
-explicit basis $\mathcal{B}^{4}$~\cite{glanois2015} stratifies
-$\mathrm{Lie}(\mathcal{U}_{4})$ by depth and weight. At weight $w$
-and depth $d$, the basis has dimension
-$\dim \mathrm{gr}^{d}_{W} \mathrm{Lie}(\mathcal{U}_{4})_{w}$, given
-by Glanois 2015 Corollary 1.2. \textsc{GeoVac}'s image at weight
-$w$ and depth $d = 1$ is spanned by the M3 column generators
-$\{\pi(x_{(n, l), 1})\}$, finite-dimensional at each $(n, l)$ pair.
-The Goncharov--Deligne 2005 faithfulness
-result~\cite{goncharov_deligne2005} ensures that distinct M3
-generators map to linearly independent motivic periods, so
-$\Phi^{\mathrm{inj}}|_{\mathrm{depth} = 1, M_{3}}$ is injective on
-its image. The image is closed because (i) it is the kernel of the
-finitely many linear functionals on
-$\mathrm{Lie}(\mathcal{U}_{4})_{w}$ that vanish on the M3
-generators (a closed condition), and (ii) the pro-algebraic
-topology on $\mathcal{U}_{4}$ has each finite-weight piece as a
-finite-dimensional vector space over $\Q$ (Glanois 2015), so the
-intersection over all weights remains Zariski-closed.\qed
+\emph{(C4) Abelianized image via Glanois basis (not a closed
+immersion).} The Glanois 2015 explicit basis
+$\mathcal{B}^{4}$~\cite{glanois2015} stratifies
+$\mathrm{Lie}(\mathcal{U}_{4})$ by depth and weight. \textsc{GeoVac}'s
+image at weight $w$ and depth $d = 1$ is spanned by the M3 column
+generators $\{\pi(x_{(n, l), 1})\}$. The Goncharov--Deligne 2005
+faithfulness result~\cite{goncharov_deligne2005} would ensure that
+distinct M3 generators map to $\Q$-linearly independent periods
+\emph{provided} the per-sector M3 evaluation were rank $\ge 2$.
+However, the only concrete per-sector M3 content the corpus supplies is
+the single scalar $\eta_{(n,l)}$ (Paper~55), so each generator's period
+vector is $\eta_{(n,l)}$ times a shared Hurwitz block:\ the genuine
+Gram matrix has rank~1
+(\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py};
+Remark~\ref{rem:injection_honest_scope}). Distinct M3 generators
+therefore map to \emph{collinear} periods, the M3 column collapses
+exactly as M1/M2 do, and $\Phi^{\mathrm{inj}}$ is \emph{not} injective
+on the sector-indexed generators. What is well-defined is the
+abelianized image $\Phi^{\mathrm{inj}}((\Ustar_{GV})^{\mathrm{ab}})$,
+Zariski-closed in $\mathcal{U}_{4}$ (the kernel of the finitely many
+linear functionals vanishing on the realised M3 content, each
+finite-weight piece finite-dimensional over $\Q$ by Glanois 2015). A
+genuinely injective (closed-immersion) refinement would require a
+sector-resolved rank-$\ge 2$ M3 period map, a named follow-on of
+uncertain outcome.\qed
 \end{proof}
 
 \begin{remark}[Why level 4 and not level 1]\label{rem:why_level_4}
@@ -1374,14 +1396,25 @@ not a failure of the construction --- it is the structural
 manifestation of \textsc{GeoVac}'s three-bullet master Mellin engine
 partition (Paper~18 \S III.7), where M1 and M2 are pure-Tate and
 sector-blind by design.
-\item \emph{M3 column injectivity is the substantive content.}
-Only the M3 column ($k = 1$, vertex-parity Hurwitz) maps to a
-genuinely depth-graded target with non-trivial cyclotomic content.
-The faithful Goncharov--Deligne 2005 action on
-$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ implies M3-column
-injectivity (proof above), and this is the \emph{only} place where
-the injection $\Phi^{\mathrm{inj}}$ has genuinely new structural
-content compared to a naive set-theoretic period evaluation.
+\item \emph{The M3 column also collapses (genuine Gram rank~1).} The
+M3 column ($k = 1$, vertex-parity Hurwitz) is the only column mapping
+to a depth-graded target with non-trivial cyclotomic content, so it
+was expected to carry the injection's substantive content. However,
+the \emph{only concrete per-sector M3 evaluation the corpus supplies}
+is the single scalar $\eta_{(n,l)}$ (Paper~55), so each sector's M3
+period vector is $\eta_{(n,l)}$ times a shared Hurwitz block ---
+collinear across sectors. The genuine Gram computation
+(\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}) gives
+rank~1, det~0:\ distinct M3 generators do \emph{not} map to
+$\Q$-linearly independent periods, so M3-column injectivity is
+\emph{refuted} under this construction and M3 collapses exactly as
+M1/M2 do. The faithful Goncharov--Deligne 2005 action on
+$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would imply injectivity only
+for a \emph{sector-resolved} rank-$\ge 2$ M3 period map (a per-$(n,l)$
+parity decomposition of $D(s)$), which the corpus does not currently
+contain;\ supplying it is a named derivation follow-on of uncertain
+outcome. As it stands, $\Phi^{\mathrm{inj}}$ realises the
+\emph{abelianized} image (Reading~A) on all three columns.
 \item \emph{Depth-blindness on the GeoVac side.} The injection is
 constructed at depth 1 (linear combinations of single Hurwitz
 values). \textsc{GeoVac}'s primitive Hopf algebra cannot detect
@@ -1426,24 +1459,26 @@ bit-exact. The $SL_{2}$-to-Levi check is $\nmax$-independent because
 the cyclotomic character $\chi_{4}$ acts on the reductive factor
 and is blind to the $\nmax$-axis substrate;\ closed form $5$ bit-exact
 zero residuals per cutoff.
-\item \emph{(C4) Closed-immersion injectivity panel.} For each of
-the $N(\nmax)$ M3-column generators of $\HGV(\nmax)$ (the $k = 1$
-Mellin slot), the corresponding period-side image is a $\Q$-linear
-combination of Hurwitz values at quarter-integer shifts
-$\{\zeta(s, 1/4), \zeta(s, 3/4), \zeta(s, 5/4)\}$. The
+\item \emph{(C4) M3 period-map panel (abelianized; injectivity
+refuted).} For each of the $N(\nmax)$ M3-column generators of
+$\HGV(\nmax)$ (the $k = 1$ Mellin slot), the period-side image is the
+single per-sector scalar $\eta_{(n,l)}$ (Paper~55) times the shared
+Hurwitz block in $\{\zeta(s, 1/4), \zeta(s, 3/4), \zeta(s, 5/4)\}$.
 Goncharov--Deligne 2005 faithfulness on
-$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ implies that distinct
-generators map to $\Q$-linearly independent periods. We verify the
-symbolic non-degeneracy of the $N(\nmax) \times N(\nmax)$ Gram
-matrix of period-coefficient vectors (the standard basis, which is
-unimodular by the structural assignment) and confirm $\det = 1
-\ne 0$;\ this is one bit-exact residual per cutoff. The remaining
-$3 N(\nmax)$ structural identities are the depth-1 realisation of
-each of the $N(\nmax)$ M3 generators in the Glanois basis
-$\mathcal{B}^{4}$ via the three quarter-integer Hurwitz building
-blocks (3 identities per generator) together with the
-Eskandari--Murty--Nemoto level-4 forcing applied to each. Closed
-form:\ $1 + 3 N(\nmax)$ bit-exact zero residuals.
+$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would imply $\Q$-linear
+independence of distinct generators only for a rank-$\ge 2$ per-sector
+map;\ the actual per-sector content is rank~1. Computing (rather than
+assuming) the $N(\nmax) \times N(\nmax)$ Gram matrix of the
+period-coefficient vectors gives \textbf{rank~1, $\det = 0$} at every
+cutoff (\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}):\
+distinct generators map to collinear periods, so the M3 column is not
+injective and collapses to the abelianized rank-1 image. (The earlier
+panel asserted a unimodular ``standard basis'' Gram with $\det = 1$;\
+that was the hardcoded $\mathrm{eye}(N)$ the genuine computation
+refutes.) The depth-1 realisation of each generator in the Glanois
+basis $\mathcal{B}^{4}$ via the three quarter-integer Hurwitz blocks,
+with the Eskandari--Murty--Nemoto level-4 forcing, remains valid as the
+description of the (collapsed) abelianized image.
 \end{itemize}
 
 Summing across the four panels gives the closed-form per-cutoff
@@ -1540,8 +1575,9 @@ realisations are unreachable from GeoVac's data.
 
 The level-$4$ injection $\Phi^{\mathrm{inj}}: U^*_{GV} \hookrightarrow
 \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ of
-Theorem~\ref{thm:injection_g4} is therefore to be read as a
-\emph{Hodge / Hodge-de-Rham} closed immersion.  The Hain--Brown
+Theorem~\ref{thm:injection_g4} is therefore to be read as an
+\emph{abelianized} Hodge / Hodge-de-Rham homomorphism (Reading~A; not a
+closed immersion --- the M3 column collapses to rank~1).  The Hain--Brown
 relative completion of $SL_2(\Z)$ carries a canonical mixed Hodge
 structure (Hain 2014~\cite{hain2014}, Theorem~3.8);\ any future
 upgrade of the comparison target from $\mathcal{G}_4$ to a
@@ -1772,9 +1808,11 @@ grade}:\ see Theorem~\ref{thm:injection_g4} in
 Section~\ref{sec:injection_g4} for the explicit period map, the
 four structural compatibilities (multiplicativity, depth-1
 coproduct compatibility, $SL_{2}$-to-Levi via $\chi_{4}$,
-closed-immersion via Glanois basis), and the proof using
-Goncharov--Deligne 2005 faithfulness on
-$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$.
+abelianized image via Glanois basis), with the M3 column collapsing to
+rank~1 so the map is the abelianized homomorphism rather than an
+injective closed immersion (Goncharov--Deligne 2005 faithfulness on
+$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would apply only to a
+sector-resolved rank-$\ge 2$ M3 period map, not yet in the corpus).
 
 \textbf{Remaining conjecture (equality / exhaustion).}\ Equality
 $\Phi^{\mathrm{inj}}(\Ustar_{GV}) = \mathcal{U}_{4}^{\mathrm{ab}}

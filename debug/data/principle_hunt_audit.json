@@ -133,7 +133,7 @@
           "predicted": "F",
           "actual": "C",
           "family": "multi_focal_composition",
-          "reason": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; conjectural per 13.5"
+          "reason": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; Observation per 13.5"
         },
         {
           "id": "F2",
@@ -157,7 +157,7 @@
           "predicted": "F",
           "actual": "C",
           "family": "multi_focal_composition",
-          "reason": "inherits E6 (combination rule conjectural)"
+          "reason": "inherits E6 (combination rule is an Observation)"
         },
         {
           "id": "I2",
@@ -223,7 +223,7 @@
           "predicted": "F",
           "actual": "C",
           "family": "multi_focal_composition",
-          "reason": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; conjectural per 13.5"
+          "reason": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; Observation per 13.5"
         },
         {
           "id": "F1",
@@ -295,7 +295,7 @@
           "predicted": "F",
           "actual": "C",
           "family": "multi_focal_composition",
-          "reason": "inherits E6 (combination rule conjectural)"
+          "reason": "inherits E6 (combination rule is an Observation)"
         },
         {
           "id": "I3",
@@ -901,7 +901,7 @@
       "packing_reachable": "no",
       "family": "multi_focal_composition",
       "domain": "alpha",
-      "note": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; conjectural per 13.5"
+      "note": "numerical coincidence 8.8e-8; 12 mechanisms eliminated; Observation per 13.5"
     },
     {
       "id": "E7",
@@ -1177,7 +1177,7 @@
       "packing_reachable": "no",
       "family": "multi_focal_composition",
       "domain": "alpha",
-      "note": "inherits E6 (combination rule conjectural)"
+      "note": "inherits E6 (combination rule is an Observation)"
     },
     {
       "id": "I2",

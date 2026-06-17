@@ -130,7 +130,7 @@ ENTRIES = [
           'yes', 'none', 'alpha', 'three independent spectral homes proven'),
     Entry('E6', 'Combination rule K = pi(B + F - Delta) for alpha^-1', 'C', 2, 'M1+M2', 'dimensionless',
           'no', 'multi_focal_composition', 'alpha',
-          'numerical coincidence 8.8e-8; 12 mechanisms eliminated; conjectural per 13.5'),
+          'numerical coincidence 8.8e-8; 12 mechanisms eliminated; Observation per 13.5'),
     Entry('E7', 'Two-loop SE counterterms Z_2, delta m', 'C', 2, 'outside', 'dimensionful',
           'no', 'multi_focal_composition', 'qed', 'LS-8a wall'),
     Entry('E8', 'Multi-loop QED corrections beyond LS-7', 'C', 2, 'outside', 'dimensionful',
@@ -189,7 +189,7 @@ ENTRIES = [
 
     # I. Foundational calibration
     Entry('I1', 'Fine-structure constant alpha (value)', 'C', 2, 'M1+M2', 'dimensionless',
-          'no', 'multi_focal_composition', 'alpha', 'inherits E6 (combination rule conjectural)'),
+          'no', 'multi_focal_composition', 'alpha', 'inherits E6 (combination rule is an Observation)'),
     Entry('I2', 'Born rule p = |<a|psi>|^2', 'C', 1, 'N/A', 'N/A',
           'no', 'inner_factor_input_data', 'foundational',
           'Gleason via Hilbert inheritance; framework does not improve on Gleason'),

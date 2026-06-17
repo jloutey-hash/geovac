@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.19.0 (June 16, 2026)
+**Version:** v4.20.0 (June 16, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`/qa` group3 bite-2 + remediation (2026-06-16, v4.20.0):** bite-2 FAIL fully remediated — 3 keystone corrections (P56→abelianized, P40→state-space GH, P57 P5→consistency-check) + shared QA `criteria.md`. See debug/sprint_qa_group3bite2_memo.md.
 - **Synthesis-layer coherence pass (2026-06-16, v4.19.0):** group1 synthesis + field guide brought consistent (Lorentzian descope, κ, stale counts); Paper 18 six-tier taxonomy reconciled + `\Z` compile bug fixed; group3 synth clean. See debug/sprint_synthesis_coherence_pass_memo.md.
 - **CLAUDE.md compaction round 3 (2026-06-16, v4.18.1):** §2 historical arc chronicles + the v3.x one-liner index moved verbatim to `docs/development_frontier_archive.md`; 160→140 KB, back under the 150 KB repo-health budget.
 - **`/qa` group3 first bite CERTIFIED (2026-06-16, v4.18.0):** Run #7 PASS (Papers 22/24/31 + synthesis); C11 title-gate hardened (KEYED + subtitle + `--gate`); 6 cross-branch stale titles fixed corpus-wide. See debug/sprint_group3_qa_firstbite_memo.md.
@@ -301,6 +302,7 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | Brute high-precision summation of b1=2 high-log trailing multiple-t-values (S^(4) stage-1, 2026-06-13) | 1 | Four methods (Abel/Levin, sumem, manual E-M, analytic-tail agent) all under-converge / are wrong / are impractically slow — this is the known-hard MZV-computation problem. Reframe: these are LOW-WEIGHT hence classically reducible, so identify them SYMBOLICALLY (stage 2) rather than sum them numerically. See `debug/sprint_s4_scoping_memo.md` §S1.6f. |
 | sympy exact-Q rank for MZV-scale relation matrices (S^(4) stage-2, 2026-06-13) | 1 | sympy `Matrix.rank()` over Q is intractable at weight 11-13 (hundreds-to-thousands of admissible words; >17 min, no result). Use mod-p (large prime) streaming Gaussian elimination, cross-checked at a second prime; project to the target subspace during row construction. Standard for MZV rank computations. See `debug/sprint_s4_stage2_memo.md`. |
 | SO(4) Wigner-D critical points predict LiH R_eq (harmonic phase-lock probe, 2026-03-11; surfaced 2026-06-16) | 1 | Hypothesis: critical points of D^n_{(l'm'),(lm)}(γ) map via inverse-stereographic γ→R to LiH R_eq≈3.015 bohr (a closed-form R_eq from SO(4) rep theory). Result: NONE — 0 strong/near hits across 5 elements × 5 p₀. The incidental byproduct (Paper 8 Thm 1 σ-bond identities D²_(1,0),(1,0)≡1, D²_(0,0),(1,0)≡0) is real and now backed by `tests/test_paper8_sigma_bond_selection.py`. Archived probe `debug/archive/test_harmonic_phase_lock.py`. |
+| Paper 56 closed-immersion injectivity via per-sector η period map (2026-06-16) | 1 | Genuine M3 period-vector Gram is rank-1, det 0 (per-sector content is a single scalar η_{(n,l)} → collinear; collapses like M1/M2). The `gram=eye(n)` backing was tautological. C4 corrected to the abelianized/rank-1 image (Reading A); positive injectivity would need a sector-resolved rank-≥2 period map that does not exist. See debug/paper56_injection_validation_memo.md. |
 
 ---
 

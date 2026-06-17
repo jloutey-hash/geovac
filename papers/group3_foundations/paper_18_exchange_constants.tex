@@ -1675,10 +1675,11 @@ half-integer shift, producing the Hurwitz combination of
 Eq.~(\ref{eq:hurwitz_discriminant}); squaring maps odd-power spectral
 sums to even-power sums, structurally eliminating the $\zeta_R(2k{+}1)$
 visible in the unsquared sum and reducing the (2nd-order,~spinor) cell
-to scalar calibration.  Computational verification:
-\texttt{tests/test\_qed\_vacuum\_polarization.py}
-(Eq.~\ref{eq:zeta_d2}) and \texttt{tests/test\_qed\_vertex.py}
-(Eq.~\ref{eq:hurwitz_discriminant}), both at 80-digit PSLQ precision.
+to scalar calibration.  Computational verification:\ \texttt{tests/test\_qed\_vacuum\_polarization.py}
+checks Eq.~(\ref{eq:zeta_d2}) symbolically and against a direct
+Camporesi--Higuchi spectral sum, and \texttt{tests/test\_qed\_two\_loop.py}
+verifies the odd-zeta content of Eq.~(\ref{eq:hurwitz_discriminant}) via
+the Hurwitz closed form and a PSLQ parity classification.
 \end{proof}
 
 \paragraph{Three-tier collapse (corollary).}
@@ -2426,15 +2427,16 @@ The exchange constant for the Hopf bundle is $K$ itself---the
 the $S^1$ gauge fiber onto the $S^2$ photon base, measured
 in units of coupling strength.
 
-\begin{conjecture}
-The combination rule $K = \pi(B + F - \Delta)$ is a
+\begin{observation}[Spectral-geometric reading]
+The combination rule $K = \pi(B + F - \Delta)$ has the shape of a
 spectral-geometric exchange constant for the Hopf fibration,
 analogous to the Weyl--Selberg constants for compact manifolds.
-The specific form---$\pi$ multiplying a sum of Casimir data
-and zeta values---should be derivable from the spectral geometry
-of $S^1 \to S^3 \to S^2$, potentially via the heat kernel
-expansion or the analytic torsion of the Hopf bundle.
-\end{conjecture}
+Whether the specific form---$\pi$ multiplying a sum of Casimir data
+and zeta values---admits a derivation from the spectral geometry
+of $S^1 \to S^3 \to S^2$ (e.g.\ via the heat-kernel expansion or the
+analytic torsion of the Hopf bundle) is an open question; no such
+derivation is known. The combination rule itself remains an Observation.
+\end{observation}
 
 Two additional observations support this identification:
 
@@ -2479,7 +2481,7 @@ for $\Delta$. We observe that the three terms appear to occupy
 three categorically distinct tiers of the exchange-constant
 taxonomy rather than specializing a single common generator. We
 summarize the four structural findings below; none of them alters
-the conjectural status of Paper~2's cubic identity.
+the Observation-level status of Paper~2's cubic identity.
 
 \paragraph{1. A $\kappa$--$B$ identity from the Fock weight.}
 The Fock projection of the hydrogenic basis onto $S^3$ carries a
@@ -2599,8 +2601,8 @@ that exclude any common Dirichlet, sphere-spectral, or Hopf-fiber
 generator simultaneously producing $B$, $F$, and $\Delta$.
 \end{proof}
 
-\begin{conjecture}[Combination rule, restated]
-\label{conj:k_rule}
+\begin{observation}[Combination rule, restated]
+\label{obs:k_rule}
 The additive combination $K = \pi(B + F - \Delta)$, with the three
 components characterized by Theorem~\ref{thm:k_decomposition},
 equals $\alpha^{-1}$ to $8.8 \times 10^{-8}$.  No first-principles
@@ -2615,7 +2617,7 @@ Sprint~2 Q-tracks) confirms that all three components are invisible
 to the perturbative Connes--Chamseddine asymptotic expansion---$K/\pi$
 lives in the non-perturbative sector if it lives in any
 spectral-action sector at all.
-\end{conjecture}
+\end{observation}
 
 \paragraph{4. Negative results on candidate mechanisms.}
 The three-tier reading is supported by the systematic elimination
@@ -2671,7 +2673,7 @@ equals $\alpha^{-1}$ to $8.8 \times 10^{-8}$.  That is a question
 about the conspiracy of three categorically different objects---a
 finite sum, an infinite Dirichlet series, and a boundary
 product---rather than the specialization of a single generator.
-Paper~2's identification remains conjectural.
+Paper~2's identification remains an Observation.
 
 
 %% ========================================================================
@@ -2990,13 +2992,17 @@ the pencil structure (Track~S).  The Level~4 angular eigenvalues
 are piecewise-algebraic but do not satisfy a global characteristic
 polynomial.
 
-\subsection{Derivation of $\kappa = -1/16$}
+\subsection{Two routes to the value of $\kappa = -1/16$}
 \label{sec:kappa_derivation}
 
 The original identification of $\kappa = -1/16$ (Paper~0) was
 empirical: the unique constant that maps GeoVac graph eigenvalues
-onto the Rydberg energy levels.  We now derive this value and
-classify its origin.
+onto the Rydberg energy levels.  Below we give two independent routes
+to its numerical value and classify their agreement.  As recorded in
+Paper~0 and Paper~7, that the calibration scale coincides with a
+conformal-geometry quantity is an \emph{Observation}---a numerical
+coincidence with no known derivation bridging the two---not a
+derivation of $\kappa$'s calibration role from the geometry.
 
 \textit{Graph Laplacian spectrum.}  The GeoVac lattice
 (Paper~0) discretizes $S^3$ with states $|n,l,m\rangle$
@@ -3057,24 +3063,26 @@ adjacent shells, so the squared Fock coupling is
 with $c^2(n,0) = 1/16$ universally for all $n$.  Equivalently,
 $1/16 = 1/\Omega^4(0)$ where $\Omega(0) = 2$ is the stereographic
 conformal factor at $p = 0$.  The graph-degree derivation
-(Eq.~\ref{eq:kappa_derived}) and the Fock weight derivation converge
-on the same value because the graph's maximum vertex degree
-$d_{\max} = 4$ and the conformal factor $\Omega(0) = 2$ are
-independently determined by the same underlying $S^3$ geometry:
-$2 d_{\max} = \Omega(0)^4 = 2^4/2 = 8$.
+(Eq.~\ref{eq:kappa_derived}) and the Fock weight route yield the same
+value:\ the graph's maximum vertex degree $d_{\max} = 4$ and the
+conformal factor $\Omega(0) = 2$ are both fixed by the unit-$S^3$
+geometry the graph discretizes ($2 d_{\max} = \Omega(0)^4 = 2^4/2 = 8$).
+That the calibration scale $\kappa$ equals this geometric value is the
+Observation;\ no derivation links the two.
 
 A notable special case: $c^2(4,3) = 1/40 = \Delta$ (Paper~2), linking
 the highest-$l$ Fock coupling at the Paper~2 cutoff to the Dirac
 degeneracy $g_3^{\mathrm{Dirac}} = 40$.
 
-\textit{Classification.}  $\kappa$ is reclassified from ``calibration''
-to ``conformal'' in Table~\ref{tab:taxonomy}: its numerical value
-$1/16$ is derivable from the continuous conformal geometry of the Fock
-projection ($1/\Omega^4(0)$), not merely from the discrete graph
-connectivity.  The two derivations (graph degree and conformal factor)
-agree because the graph discretizes $S^3$, but the conformal-factor
-reading is more fundamental---it would hold for any discretization of
-$S^3$, not only the GeoVac lattice.  The Z-universality noted in
+\textit{Classification.}  In Table~\ref{tab:taxonomy} $\kappa$ sits in
+the ``conformal'' tier:\ its numerical value $1/16$ \emph{coincides}
+with the conformal-geometry quantity $1/\Omega^4(0)$ of the Fock
+projection, a value any discretization of $S^3$ would share.  The two
+routes (graph degree and conformal factor) return the same number
+because both are computed from the unit-$S^3$ geometry;\ that the
+calibration scale $\kappa$ equals it is an \emph{Observation} (a
+numerical coincidence, no known derivation bridge), consistent with the
+Observation-tier status of $\kappa$ recorded in Paper~0 and Paper~7.  The Z-universality noted in
 Paper~0 ($\kappa \to \kappa Z^2$ for any nuclear charge)
 reflects the Z-independence of the graph structure, with only
 the energy-shell scaling $E \propto Z^2$.
@@ -3230,7 +3238,7 @@ of Fock degeneracies at the packing exponent;
 $\Delta^{-1} = g_3^{\mathrm{Dirac}} = 40$ a finite Dirac mode
 degeneracy on the spinor bundle.  No common generator produces all
 three.  The combination rule $K = \alpha^{-1}$
-(Conjecture~\ref{conj:k_rule}) remains a numerical observation
+(Observation~\ref{obs:k_rule}) remains a numerical observation
 without first-principles derivation.
 
 \paragraph{Observation (structural incommensurability).}
@@ -3252,7 +3260,7 @@ open: (i)~whether the three-axis classification of
 Theorem~\ref{thm:three_axis} predicts the physical two-loop
 coefficient (not just the transcendental class); (ii)~the
 combination rule $K = \pi(B + F - \Delta)$ of
-Conjecture~\ref{conj:k_rule}, whose component decomposition is now
+Observation~\ref{obs:k_rule}, whose component decomposition is now
 Theorem~\ref{thm:k_decomposition} but whose additive conspiracy
 remains unexplained; (iii)~whether the structural incommensurability
 of Observation~\ref{obs:incommensurability} sharpens to a theorem

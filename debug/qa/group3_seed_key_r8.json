@@ -1,0 +1,24 @@
+{
+  "target": "group3",
+  "run": "re-cert run #8",
+  "run_date": "2026-06-16",
+  "scope": "first-pass subset Papers 22/24/31 + synthesis, on committed HEAD 4b53b85 (v4.18.0: run #7 PASS + C11 hardening + corpus title cleanup). Clean worktree from HEAD, NO overlay (all fixes committed).",
+  "worktree": "../geovac-qa-seed-group3-r8 (branch qa-seed-group3-r8)",
+  "note": "Fresh re-cert of the committed v4.18.0 state (verifies the post-run-#7 cross-branch + Dyall/Grant edits too). Seeds varied from runs #5-7.",
+  "seeds": [
+    {"id": "S2", "class": "tautological test (self-recompute)", "file": "tests/test_bargmann_graph.py", "location": "test_wigner3j_rank1_specific_value (~l.219)", "planted": "assert v == wigner3j_rank1_squared(...) (compares the value to a recomputation by the same function; passes regardless of correctness)", "truth": "assert v == Fraction(2, 15)", "expected_catcher": "code-reviewer (P24)"},
+    {"id": "S4", "class": "kappa-style overclaim (derived vs Observation)", "file": "paper_22_angular_sparsity.tex", "location": "~l.551 (Coulomb-specific list)", "planted": "'K = -1/16, derived from first principles via the Fock conformal projection'", "truth": "kappa is an Observation (coincides with geometric 1/16; no derivation bridge)", "expected_catcher": "claims-reviewer (P22, C7/C8)"},
+    {"id": "S6", "class": "discrete-vs-continuum (C6)", "file": "paper_31_universal_coulomb_partition.tex", "location": "~l.687 (flipped a correct conformal-identification sentence)", "planted": "'the Fock graph directly produces the discrete spectrum lambda_n = -(n^2-1)'", "truth": "L=D-A is positive-semidefinite; -(n^2-1) is the continuum S^3 LB value the graph is conformally identified with / converges to", "expected_catcher": "claims-reviewer (P31, C6)"},
+    {"id": "S1", "class": "wrong external citation", "file": "paper_24_bargmann_segal.tex", "location": "bibitem{hall1994} (~l.1273)", "planted": "J. Funct. Anal. 135, 211 (1996)", "truth": "J. Funct. Anal. 122, 103 (1994)", "expected_catcher": "citation-reviewer (P24)"},
+    {"id": "S7", "class": "stale internal-title drift", "file": "paper_31_universal_coulomb_partition.tex", "location": "bibitem{paper7} (~l.1538)", "planted": "'The Dimensionless Vacuum: Deriving the Schroedinger Equation...'", "truth": "real title uses 'Recovering'", "expected_catcher": "deterministic check_internal_titles.py (visible 'GeoVac Paper 7' format)"},
+    {"id": "S8", "class": "zombie/descoped claim in synthesis", "file": "group3_foundations_synthesis.tex", "location": "M1 bullet (~l.832)", "planted": "asserts the withdrawn Paper-45 K^+-weak Krein-Dirac 'first Lorentzian propinquity theorem' as established", "truth": "P45 K^+ theorem DESCOPED/withdrawn 2026-06-09; do NOT cite pre-descope claims", "expected_catcher": "claims-reviewer (synthesis, C9)"}
+  ],
+  "controls": [
+    {"id": "C-A", "claim": "K = Observation everywhere; no K=pi(B+F-Delta) presented stronger", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-B", "claim": "real test assertions EXCEPT S2 (the bargmann 2/15 line)", "status": "CORRECT - code-reviewer must NOT flag"},
+    {"id": "C-C", "claim": "density D=6.06%/D_pd=1.44%; layer count six", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-D", "claim": "Wigner-3j VALUE = 2/15 (the paper's number is right; only the TEST is seeded); pi-free finite cutoff", "status": "CORRECT - must NOT be flagged"},
+    {"id": "C-E", "claim": "v4.17.0/v4.18.0 fixes: jauchhill forward, higgs_pickrell distinct-2-sphere, borelweil-credits-Serre, propinquity->vS-state-space-GH, Dyall/Grant work-level cite", "status": "CORRECT - must NOT be re-flagged"},
+    {"id": "C-G", "claim": "all C6 sweep fixes correct EXCEPT the S6-flipped l.687 sentence (P22 l.95, P31 l.78/450/816, SYN l.382/668, P24 l.64 all remain correct)", "status": "CORRECT - must NOT be flagged as C6 violations"}
+  ]
+}
