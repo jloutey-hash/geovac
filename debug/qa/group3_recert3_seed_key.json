@@ -1,0 +1,21 @@
+{
+  "run": "group3 re-certification run 4 (post-v4.20.7 remediation), 2026-06-17",
+  "worktree": "../geovac-qa-seed-group3 (HEAD fcab9ed / v4.20.7)",
+  "scope": "bite-2 papers 18, 54, 55, 56, 57 + group3 foundations synthesis",
+  "seed_subset_note": "varied: run-2 S2/S4/S1/S8/S7; run-3 S5/S2/S1/S9/S7; run-4 S4/S2/S1/S8/S7 (different locations)",
+  "seeds": [
+    {"id": "S4", "class": "kappa overclaim (derived / more fundamental)", "file": "papers/group3_foundations/paper_18_exchange_constants.tex", "loc": "~l.3087 §VII.F Classification: '1/16 is derived from … and the conformal-factor reading is the more fundamental one' (was 'coincides … Observation')", "expected_catcher": "claims-reviewer (paper 18, C5/C7)"},
+    {"id": "S2", "class": "circular/tautological test", "file": "tests/test_paper55_M2_mixed_tate.py", "loc": "~l.147: assert _is_zero(a0_vol_norm - a0_vol_norm) (was - 8*pi**2)", "expected_catcher": "code-reviewer (paper 55)"},
+    {"id": "S1", "class": "wrong/fabricated arXiv ID", "file": "papers/group3_foundations/paper_55_periods_of_geovac.tex", "loc": "~l.3363: hoffman2019odd arXiv:1612.08232 (real is 1612.05232)", "expected_catcher": "citation-reviewer (paper 55)"},
+    {"id": "S8", "class": "zombie / descoped claim asserted as standing", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~l.342: Paper 38 spinor convergence re-asserted as 'Latrémolière propinquity convergence' (descoped → state-space GH)", "expected_catcher": "claims-reviewer (synthesis, C9)"},
+    {"id": "S7", "class": "stale internal title", "file": "papers/group3_foundations/paper_54_tensor_product_two_body.tex", "loc": "~l.538: cites Paper 14 as 'Qubit Encoding for the Composed Architecture' (real: 'Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory')", "expected_catcher": "deterministic check_internal_titles", "precheck": "CAUGHT ([P14] MISMATCH FAIL)"}
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "file": "paper_56", "claim": "thm:injection_g4 = abelianized / rank-1 image, not a closed immersion", "why_correct": "v4.20.0/.6/.7"},
+    {"id": "M2", "file": "paper_57", "claim": "P5 98.3% = internal-consistency check, not an independent discriminator", "why_correct": "v4.20.0"},
+    {"id": "M3", "file": "paper_18", "claim": "C6: continuum LB spectrum the (PSD) graph Laplacian converges to", "why_correct": "v4.20.6 C6 fix"},
+    {"id": "M4", "file": "paper_18", "claim": "the CORRECT κ statements (l.3010-3012, l.3091-3092: 'coincides … Observation, no derivation bridge') must NOT be flagged — only the planted l.3087 sentence is the defect", "why_correct": "v4.20.0 reframe; the surrounding κ framing is sound"},
+    {"id": "M5", "file": "paper_56", "claim": "C2 leg now grounded on Cartier–Milnor–Moore / coradical filtration (NOT Brown Prop 5.2); C1/C2 backing tests genuine-ified", "why_correct": "v4.20.7 fix — must NOT be re-flagged as a Brown-Prop-5.2 or tautological-test defect"},
+    {"id": "M6", "file": "paper_55", "claim": "M2 periods in the pure-Tate even-weight sub-ring (test_paper55_M2)", "why_correct": "genuine, backed"}
+  ]
+}

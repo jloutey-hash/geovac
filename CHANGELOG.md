@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.8] - 2026-06-17
+
+### Changed — `/qa group3` re-cert run 4 (FAIL) remediated
+
+Run-4 calibrated panel (sensitivity 5/5, specificity 6/6; **M5 confirms the v4.20.7 C2/CMM regrounding + genuine C1/C2 tests are ACCEPTED** — not re-flagged). 4th consecutive calibrated FAIL, but severity is decreasing across the series (keystone corrections → missed-instances → C2-leg citation+tests → these two small defects). Both remediated:
+
+- **[code/claims, Paper 18 l.1661] Theorem 1(2) worked example D(4) = 2ζ(2)+2ζ(3) was wrong** — that is the *Fock-index* series value; the Dirac D(4) = 6ζ(2) − 15/2·ζ(4) = π² − π⁴/12 is π-even (no ζ(3)) per the theorem's own Eq.(hurwitz_discriminant) at s=4 and `test_D4_is_pi_even`. The validated test contradicted the prose. Corrected: D(4) stated π-even; the odd-zeta witness moved to the correct D(5) = 14ζ(3) − 31/2·ζ(5) (matching `test_D5_contains_zeta3`).
+- **[code, Paper 55 l.1305] `thm:jlo_depth2_reading_A` cited a nonexistent `geovac/jlo_chi.py`** — the Reading-A JLO-cocycle disambiguation is backed by a debug/ script (`debug/sprint_na1_offdiag_substrate_memo.md`, cited at l.1310), not a `geovac/` module. Removed the fabricated code-module reference; the debug-memo backing remains. (This defect class — a broken *code-module* reference — is not covered by C13, which checks *test* references; a code-ref integrity check is a candidate deterministic-gate extension.)
+
+Verification: papers 18, 55 compile `-halt-on-error` exit 0; C11/C12/C13 `--gate group3` PASS. Calibration + findings: `debug/qa/group3_recert3_seed_key.json`, `docs/qa/group3.done.md` (run-4 log).
+
 ## [4.20.7] - 2026-06-17
 
 ### Changed — `/qa group3` re-cert run 3 (FAIL) remediated

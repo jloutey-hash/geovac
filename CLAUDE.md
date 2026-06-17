@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.20.7 (June 17, 2026)
+**Version:** v4.20.8 (June 17, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`/qa group3` run-4 FAIL → remediated (2026-06-17, v4.20.8):** 4th calibrated FAIL (5/5 sens, 6/6 spec; v4.20.7 C2/CMM fix accepted as control) — 2 small new defects fixed: P18 Thm 1(2) D(4) worked-example bug (Fock value → π-even Dirac, D(5) the odd-zeta example) + P55 nonexistent `geovac/jlo_chi.py` ref removed. Severity decreasing across runs. See CHANGELOG.
 - **`/qa group3` run-3 FAIL → remediated (2026-06-17, v4.20.7):** calibrated panel (5/5 sens, 6/6 spec — v4.20.6 fixes held as controls) peeled to a deeper P56 defect: `thm:injection_g4` C2 leg cited a nonexistent "Brown 2017 Prop 5.2" + had tautological C1/C2 tests; regrounded on Cartier–Milnor–Moore + genuine-ified the tests. See CHANGELOG.
 - **`/qa group3` run-2 FAIL → remediated (2026-06-17, v4.20.6):** calibrated panel (5/5 sensitivity, 5/5 specificity) caught 8 missed-instance defects (C6 in P18/P55, P56 closed-immersion zombie, P57 128/count, P18 badges, P54 tier); all fixed. See CHANGELOG.
 - **Bite-2 tail cleared (2026-06-17, v4.20.5):** 3 citation fixes (Deligne 1990 §5 / 2010 arXiv / Glanois venue); claim_test_matrix bite-2 rows + coverage gaps; tautological Paper-56 C4 tests skipped; check_k_label (conjecture-env + docs scan) + /qa reviewer path-pin hardened. See CHANGELOG.

@@ -99,3 +99,20 @@ claim restates them (C7).
   Plus SMALL: P56 §open_g4 boxed-theorem leads "closed at theorem grade …
   closed subgroup" before the abelianized qualifier. Seed key
   `debug/qa/group3_recert2_seed_key.json`. Remediation pending PI direction.
+- 2026-06-17 — **run-3 findings REMEDIATED** (v4.20.7): C2 regrounded on
+  Cartier–Milnor–Moore, C1/C2 tests genuine-ified, box reworded.
+- 2026-06-17 — **bite 2 re-cert run 4 = FAIL** (`/qa group3`, on v4.20.7).
+  Calibrated panel (sensitivity 5/5 — S4/S2/S1/S8/S7 all caught; specificity
+  6/6 — M1–M6, incl. M5 confirming the v4.20.7 C2/CMM fix is ACCEPTED, all
+  held). No spend-limit deaths. The v4.20.7 fixes confirmed; FAIL is **two
+  more genuine, deeper, distinct defects** (4th consecutive calibrated FAIL,
+  each on different papers — severity now down to a worked-example typo + a
+  broken code-ref): (1) **Paper 18 Thm 1(2) worked example D(4) = 2ζ(2)+2ζ(3)
+  is WRONG** (l.1661) — that is the *Fock-index* value; Dirac D(4) = π²−π⁴/12
+  (π-even, no ζ(3)) per the paper's own formula + `test_D4_is_pi_even`; the
+  odd-zeta example should be D(5). The validated test contradicts the prose.
+  (2) **Paper 55 `thm:jlo_depth2_reading_A` cites nonexistent
+  `geovac/jlo_chi.py`** (l.1305) — Reading-A disambiguation backed only by a
+  debug/ script + a broken code-module ref (a class C13 does not cover — it
+  checks test refs, not code-module refs). Seed key
+  `debug/qa/group3_recert3_seed_key.json`. Remediation pending PI direction.
