@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.21.2] - 2026-06-17
+
+### Changed — `debug/`-citation policy adopted (papers cite the permanent record)
+
+Between-branches corpus-wide review (after the group3 certification). All four deterministic gates are clean corpus-wide — **C11** (internal titles) PASS ALL-scope; **C12** (K-labels) **0 stale K-tier labels in any paper** (the earlier 24-label "conjectural" drift cleared by the branch sweeps; the 50 remaining audit hits are all in `docs/` memos, not papers); **C13** (test refs) PASS; **C14** serious class (code/artifact refs) PASS — **except** the C14 advisory: **443 dangling `debug/` references** across ~34 papers (paper_34: 103, the trunk-certified paper_32: 65, paper_28: 39, …), papers citing `debug/` sprint memos/scripts pruned per the clean-room rule.
+
+Per PI direction ("policy now, sweep later"):
+- **Policy adopted** (CLAUDE.md §9 Clean Room Rule + §13.11 content-home table; `docs/qa/criteria.md` C14): a paper must not cite a transient `debug/` memo/script as backing — the permanent homes are the paper's own derivation, `CHANGELOG.md` (chronicle), and `tests/` (regression). C14 gates the permanent code/artifact dirs (`geovac/`/`benchmarks/`/`demo/`) and treats `debug/` as advisory under this policy.
+- **Deferred:** the corpus-wide sweep to neutralize the existing ~443 dangling `debug/` refs is its own scheduled task (ref-removal TBD).
+
+Documentation/policy only — no code or paper-physics change.
+
+Status note (not a change): group1's `/qa` done-criteria profile is drafted (`docs/qa/group1.done.md`, 2026-06-16) and **awaiting PI freeze** — the branch run is un-started; proposed first bite = Papers 29/40/50 + synthesis. group3 is certified (bite-1 run #7 v4.18.0 + bite-2 run-5 v4.21.1).
+
 ## [4.21.1] - 2026-06-17
 
 ### Changed — group3 bite-2 CERTIFIED (`/qa group3` run 5 = PASS) ✅

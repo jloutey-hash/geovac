@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.21.1 (June 17, 2026)
+**Version:** v4.21.2 (June 17, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`debug/`-citation policy (2026-06-17, v4.21.2):** papers cite the permanent record (CHANGELOG / paper / tests), never transient `debug/` (§9 + C14 advisory); the ~443 existing dangling `debug/` refs (papers 34/32/28 …) = deferred corpus-wide sweep. Between-branches corpus deterministic sweep otherwise clean (C11/C12-papers/C13/C14-serious all PASS). See CHANGELOG.
 - **`/qa group3` CERTIFIED ✅ (2026-06-17, v4.21.1):** bite-2 (P18/54/55/56/57 + synthesis) PASSES run-5 — first calibrated PASS (5/5 sens, 6/6 spec; the v4.20.7 C2 + v4.20.8 D(4) fixes accepted as controls) after 4 remediation rounds; with bite-1 (22/24/31) PASS (run #7), **group3 certified**. NIT cleanups: slow-C1 genuine-ified + unused imports removed (P56 tests), P18 worked-example C6 wording. See CHANGELOG.
 - **C14 paper↔file-ref integrity check (2026-06-17, v4.21.0):** New deterministic gate (`debug/qa/check_file_refs.py`) closing the C13 gap — gates `geovac/`/`benchmarks/`/`demo/` code-artifact refs (the run-4 jlo_chi.py class), `debug/` advisory. Corpus serious-class sweep CLEAN (fixed paper_34 `hyperspherical.py`); group3 PASSES C14. 443 `debug/` dangling pointers logged advisory (PI hygiene-sweep decision pending). See CHANGELOG.
 - **`/qa group3` run-4 FAIL → remediated (2026-06-17, v4.20.8):** 4th calibrated FAIL (5/5 sens, 6/6 spec; v4.20.7 C2/CMM fix accepted as control) — 2 small new defects fixed: P18 Thm 1(2) D(4) worked-example bug (Fock value → π-even Dirac, D(5) the odd-zeta example) + P55 nonexistent `geovac/jlo_chi.py` ref removed. Severity decreasing across runs. See CHANGELOG.
@@ -539,6 +540,8 @@ The previous narrow 3-file allowlist (`tests/test_fock_projection.py`, `tests/te
 - Scripts -> `debug/`, `demo/`, `tests/`, or `benchmarks/` (never root)
 - Documentation -> `docs/`
 
+**Papers cite the permanent record, not transient `debug/` (policy, 2026-06-17 PI direction).** A paper must not cite a `debug/` sprint memo or script as backing. `debug/` is the transient clean-room dir (the bullets above) and is pruned over time, so a `\texttt{debug/...}` citation in a paper goes stale *by design* and leaves a dangling pointer (a reader following it hits a deleted file). The permanent homes are: the paper's own derivation, `CHANGELOG.md` (the sprint chronicle, §13.11), and `tests/` (the regression backing). The deterministic **C14** check (`debug/qa/check_file_refs.py`) gates the permanent code/artifact dirs (`geovac/`/`benchmarks/`/`demo/`) and reports `debug/` refs as **advisory** under this policy. *Standing debt (deferred sprint):* a corpus-wide sweep to neutralize the existing ~443 dangling `debug/` references (concentrated in papers 34/32/28; surfaced by the v4.21.0 C14 corpus sweep) is scheduled separately — the policy is adopted now, the ref-removal is its own task.
+
 ### Changelog Protocol
 
 **Changelog granularity:** Each CHANGELOG entry should correspond to a releasable unit of work — a new feature, a completed diagnostic arc, a paper update, or a benchmark result. Do not create a new version entry for intermediate debugging steps, parameter sweeps, or exploratory runs. If a task requires multiple iterations to complete, document it as a single entry when the task concludes, noting the key findings and negative results. Intermediate data belongs in `debug/` with timestamped filenames, not in the CHANGELOG.
@@ -842,7 +845,7 @@ CLAUDE.md is loaded into every PM session and every sub-agent dispatch. Its size
 | Sprint summary (CLAUDE.md §2 entry) | CLAUDE.md §2 | ≤ 30 words: name + date + verdict + memo path |
 | Dead-end record (§3) | CLAUDE.md §3 | ≤ 2 sentences + memo link |
 | Sprint memo | `debug/*.md` | ONE canonical memo per sprint, ≤ 5000 words |
-| Surviving structural findings | papers/group*/*.tex | The papers, not CLAUDE.md, are the permanent record |
+| Surviving structural findings | papers/group*/*.tex | The papers, not CLAUDE.md, are the permanent record; papers cite permanent records (CHANGELOG / the paper / tests), **never transient `debug/`** (§9 policy, C14) |
 | Cross-session facts | `memory/*.md` | One-liner index entry in MEMORY.md, ≤ 200 chars |
 | Active behavior rules | CLAUDE.md §13 | Short, dense, this section |
 

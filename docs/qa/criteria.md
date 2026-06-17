@@ -101,7 +101,10 @@ verdict is the **AND across all review dimensions** (below).
   only): the group3 run-4 `geovac/jlo_chi.py` defect was a claim citing a
   nonexistent code module. `debug/` refs are **advisory** — the transient
   clean-room dir (CLAUDE.md §9) is pruned by design, so dangling `debug/`
-  pointers are a hygiene smell, not a cert blocker.
+  pointers are a hygiene smell, not a cert blocker. Per the §9 policy (papers
+  cite the permanent record — CHANGELOG / the paper / tests — never transient
+  `debug/`), the existing ~443 dangling `debug/` refs (papers 34/32/28 …) are a
+  **deferred corpus-wide sweep**, adopted-as-policy 2026-06-17, ref-removal TBD.
 
 ## Branch-specific criteria (C14+)
 
