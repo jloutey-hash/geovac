@@ -70,6 +70,27 @@ group3 `/qa` first-pass test-backing (3 coder agents, 2026-06-16) closed the thr
 | 31 | §two_body Dirac resolvent Pearson 0.81/0.75 (n_max 2/3) | `test_paper31_two_body.py::test_resolvent_two_body_dirac_pearson` | `operator_system.py`, `casimir_ci.py` | BACKED-SOUND | 0.807/0.751; vs production Coulomb 0.825/0.75 (§3 dead-end) |
 | 31 | §two_body Laplacian resolvent uncorrelated (N=1 zero-mode kills (1s,1s)); Dirac regularizes | `test_paper31_two_body.py::test_resolvent_laplacian_zero_mode_decorrelation` | `operator_system.py`, `casimir_ci.py` | BACKED-SOUND | \|r_lap\|≪r_dir; paper's "r<0.05" is cutoff-specific (exact at n_max=3) |
 
+## Group 3 bite-2 (Papers 18, 54, 55, 56, 57) — populated 2026-06-17 (v4.20.x QA + validation bucket)
+
+The bite-2 `/qa` run + the PI-approved validation bucket. Coverage gaps (NO-TEST) are recorded here rather than silently omitted (the C1 deliverable); the keystone Paper 56 injection theorem was **refuted** by a genuine test and corrected.
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 18 | Exchange-constant taxonomy = six tiers | (descriptive classification; no single test) | — | (structural) | reconciled to six tiers (v4.19.0); a classification, not a computed claim |
+| 18 | κ = −1/16 via two converging routes | `test_trunk_qa_*` (graph degree) + conformal-factor read | `lattice.py` | OBSERVATION | matching coincidence, not a derivation (trunk v4.13.0); §VII.F reframed (v4.20.0) |
+| 18 | Eq.(zeta_d2): 2nd-order spinor → scalar | `test_qed_vacuum_polarization.py` + `test_qed_two_loop.py` | — | BACKED-WEAK | symbolic + CH spectral sum; the false "80-digit PSLQ" cite corrected (v4.20.0) |
+| 18 | α²-Ihara degree-44 / −35/648 headline | — | — | **NO-TEST** | coverage gap (the "14/14 tests" cite covers infrastructure only) |
+| 54 | Two-body angular selection rules (Gaunt / m-conservation / monopole) | (no dedicated `test_paper54`; angular leg shared with `test_paper31_two_body.py`) | `casimir_ci.py` | **NO-TEST** | coverage gap; radial coupling **NOT forced** (the honest negative, stated in-paper) |
+| 54 | §df_thc_connection bit-exact DF claims | `debug/` driver only (pytest-ignored) | — | **NO-TEST** | coverage gap (debug-only) |
+| 55 | Every GeoVac period = cyclotomic mixed-Tate at level ≤ 4 | `test_paper55_M2_mixed_tate.py` (M2 leg) | — | BACKED-WEAK | M2 sub-ring tested; full classification is broader (+ Charlton–Hoffman / Glanois cites verified, v4.20.x) |
+| 56 | `thm:injection_g4` closed immersion / C4 M3-injectivity | `test_paper56_injection_g4_periodmap.py` (genuine) | `pro_system.py` | **FALSE-POSITIVE → REFUTED** | genuine Gram rank-1 (det 0); C4 does NOT hold. Theorem corrected to abelianized/rank-1 image (Reading A, v4.20.0); old `test_paper56_injection_g4.py` C4 tests skipped; the genuine test ships as a strict-xfail falsifier |
+| 56 | C1 multiplicativity / C3 SL₂→Levi | `test_paper56_injection_g4_periodmap.py` | — | BACKED-WEAK / BACKED-SOUND | C1 = universal property of Sym (weak); C3 = real det computation (sound) |
+| 56 | §hgv primitive-space dim N = nₘₐₓ(nₘₐₓ+3)/2 | `pro_system.py::N_sectors` / `sectors_at_cutoff` | `pro_system.py` | BACKED-SOUND | §hgv synced to the code convention 0≤l≤n (v4.20.0) |
+| 56 | PS-4 endo-rigidity (872 residuals, ~15% of panel) | `debug/` driver only | — | **NO-TEST** | coverage gap (debug-only) |
+| 57 | P5 packing-reachability "98.3%" | `debug/principle_hunt_audit.py` (not pytest-collected) | — | **NO-TEST (consistency-check)** | `packing_reachable` ≡ F/C by construction → reframed as an internal-consistency check, not a discriminator (v4.20.0) |
+| 57 | Catalogue count = 60 (35 F / 1 A / 24 C) | `debug/principle_hunt_audit.py` | — | **NO-TEST** | count reconciled 62→60 (v4.20.0); driver computes it but isn't pytest-collected |
+| 57 | dim 𝓜(D_F) = 128 per generation (forced count) | `test_trunk_qa_forced_count_moduli.py` (Paper 32) | — | BACKED-SOUND | matter-sector caveat added; full-axiom = 260 (v4.20.0) |
+
 ## Other branches (chemistry / QC / QED-gauge / NCG-OA / precision) — PENDING
 
 _Pre-populated during the group3 sweep where a finding spilled into a future branch._

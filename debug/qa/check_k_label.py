@@ -89,6 +89,17 @@ NONSEL = re.compile(
 IMPERATIVE = re.compile(r"^\s*(?:\\item\s*)?(?:\\\w+\{[^}]*\}\s*)?(derive|prove)\b", re.IGNORECASE)
 CLAUSE_BREAK = re.compile(r"[.;:]\s|\n\s*\n|\\item")
 
+# Blind-spot fix 1 (group3 bite-2): a tier-asserting LaTeX environment. The K-rule
+# placed INSIDE one asserts >= that tier by the environment itself -- and strip_latex
+# blanks the \begin{} marker, so the clause scan below never sees the framing.
+# (paper_18 wrapped K in two \begin{conjecture} envs and the screen passed.)
+# observation/remark envs are COMPLIANT and intentionally absent from this list.
+PROHIBITED_ENV = re.compile(
+    r"\\begin\{(conjecture|theorem|proposition|lemma|corollary)\*?\}"
+    r"(?P<opt>\[(?:[^\[\]]|\[[^\]]*\])*\])?(?P<body>.*?)\\end\{\1\*?\}",
+    re.IGNORECASE | re.DOTALL,
+)
+
 
 def _blank(m: "re.Match[str]") -> str:
     return " " * len(m.group(0))
@@ -148,6 +159,30 @@ def scan_file(path: pathlib.Path) -> "list[tuple[int,str,str,str]]":
         ln = line_of(text, m.start())
         snippet = re.sub(r"\s+", " ", clause.strip())[:150]
         hits.append((ln, m.group(0), verdict, snippet))
+    # Blind-spot fix 1: the K-rule asserted inside a tier-asserting environment is
+    # a violation by the environment itself -> unconditional SUSPECT.
+    for em in PROHIBITED_ENV.finditer(raw):
+        env = em.group(1).lower()
+        opt = strip_latex(em.group("opt") or "")
+        body = strip_latex(em.group("body"))
+        # conjecture: K asserted as a conjecture ANYWHERE in the env is a violation.
+        # theorem/prop/lemma/cor: a violation only when the env is TITLED as the
+        # K-rule (K in the optional [title]); a passing body mention is handled by
+        # the clause scan above (with its COMPLIANT escapes), not double-flagged here.
+        target = (opt + " " + body) if env == "conjecture" else opt
+        if not K_ANCHOR.search(target):
+            continue
+        # Same compliance escapes as the clause scan: a NON-SELECTION / negated /
+        # hypothetical / future-goal env about K is COMPLIANT (e.g. the
+        # "No single-mechanism generation of the combination rule" theorem).
+        ctx = opt + " " + body
+        verdict = "SUSPECT"
+        if (NEG.search(ctx.lower()) or HYP.search(ctx.lower())
+                or NONSEL.search(ctx.lower()) or IMPERATIVE.search(ctx)):
+            verdict = "COMPLIANT"
+        ln = line_of(raw, em.start())
+        snip = re.sub(r"\s+", " ", ctx.strip())[:150]
+        hits.append((ln, env + " env", verdict, snip))
     return hits
 
 
@@ -161,10 +196,21 @@ def _gate_substr(argv: "list[str]") -> "str | None":
 
 
 def main() -> int:
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")   # snippets carry Delta, pi, etc.
+    except Exception:
+        pass
     show_all = "--all" in sys.argv
     gate_corpus = "--gate-corpus" in sys.argv
     gate_substr = _gate_substr(sys.argv)        # branch sweep: --gate group5_qed_gauge
     files = sorted(p for p in PAPERS.rglob("*.tex") if "archive" not in p.parts)
+    # Blind-spot fix 2 (group3 bite-2): K-labels also live in curated data files
+    # outside papers/ (docs/forced_free_seam.md, debug/principle_hunt_audit.py) that
+    # the .tex-only glob never saw. Scan them too (audit-scope unless --gate-corpus).
+    files += sorted((ROOT / "docs").glob("*.md"))
+    # (debug/*.py drivers are deliberately NOT scanned: the prose clause heuristic
+    #  mis-segments Python code -> false positives. Their K-labels are data values,
+    #  swept by hand; the prose data file docs/forced_free_seam.md is the real target.)
 
     def is_gated(p: pathlib.Path) -> bool:
         if gate_corpus:

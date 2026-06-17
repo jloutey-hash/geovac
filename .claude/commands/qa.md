@@ -35,6 +35,8 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
    - **Deterministic** (C10 compiles, C11 internal titles) — the scripts in step 1, not an LLM reviewer.
    Each LLM reviewer reviews **against the pre-registered criteria**, classifies findings MATERIAL vs NIT, and attaches a counterfactual to each MATERIAL finding ("if fixed, would a *target result* change?"). They are fresh agents that never saw each other or the discovery-mode rationale (§9 QA principle 2). **If a gating dimension cannot be exercised this run, the target verdict is INCONCLUSIVE — never PASS (step 7).**
 
+   **Path-pin (mandatory — the group3 bite-2 S8 miss).** Every reviewer prompt MUST give the ABSOLUTE **worktree** path (`../geovac-qa-seed-<target>/…`) for the files it reads, and MUST explicitly forbid reading the real corpus (`papers/…` under the project root). A reviewer that silently re-reads the real (unseeded) corpus misses every planted defect in its dimension and **de-calibrates the run with no error at all** — a synthesis `claims-reviewer` did exactly this:\ it first caught the planted synthesis seed, then *reversed* the catch after re-reading the live (unseeded) file. Before trusting a reviewer's calibration score, spot-check that its quoted line numbers/text came from the worktree, not the real corpus.
+
 5. **Score calibration — certify the reviewers (against the answer key).**
    - **Sensitivity:** fraction of planted defects the panel collectively caught. A planted class no reviewer caught ⇒ the panel is *blind to that class*.
    - **Specificity:** any known-good control flagged MATERIAL is a *false positive*.

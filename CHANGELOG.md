@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.5] - 2026-06-17
+
+### Changed — group3 bite-2 lower-severity tail cleared
+
+Closes the remaining bite-2 items (coverage gaps + citation verifications + tooling) tracked in `debug/sprint_qa_group3bite2_memo.md`:
+
+- **Citations** (a `citation-reviewer` verified all four against primary sources): Paper 56 `\cite[Thm.\ 2.3]{deligne_milne1982}` → `\cite[\S5]{deligne1990}` (the exterior-tensor-product theorem is Deligne 1990 §5; "Thm 2.3" does not exist in Deligne–Milne 1982 — a real wrong-ID, `deligne1990` already in the bib); Paper 18 `deligne2010` — dropped the wrong appended arXiv `math/0302267` (that ID is the Deligne–Goncharov 2003 paper; Deligne's solo 2010 IHÉS paper has no arXiv); Paper 18 `glanois2015` venue corrected to *J. Number Theory* **160** (2016) 334–384. (Eskandari–Murty–Nemoto 2025 and Charlton–Hoffman "Thm 2.21" verified GROUNDED — no change.)
+- **Coverage gaps** (`docs/claim_test_matrix.md`): new Group-3-bite-2 section (14 rows) mapping the load-bearing claims to backing tests and recording the NO-TEST gaps honestly (Paper 18 α²-Ihara; Paper 54 selection-rules / DF; Paper 56 PS-4; Paper 57 P5 / count). The keystone Paper 56 injection row is FALSE-POSITIVE → REFUTED with the genuine falsifier `test_paper56_injection_g4_periodmap.py`.
+- **Superseded test** (`tests/test_paper56_injection_g4.py`): the four tautological C4 tests (`gram = eye(n)` / `assert True`) are skipped with a pointer to the genuine period-map test — they asserted the now-refuted injectivity (37 passed / 10 skipped).
+- **Tooling — `debug/qa/check_k_label.py` hardened** (two bite-2 blind spots): (1) now catches the K-rule asserted INSIDE a tier-asserting environment (the `\begin{conjecture}` blind spot — `strip_latex` had blanked the marker), with the same NEG/NONSEL compliance escapes so the `thm:no_single_mechanism_K` non-selection theorem stays COMPLIANT; (2) now scans `docs/*.md` data files (e.g. `forced_free_seam.md`); + a UTF-8 stdout fix (the Δ-in-snippet crash). Trunk + group3 PASS; regression `tests/test_k_label_check.py` passes; discrimination preserved (a wrong title/label still fails).
+- **Tooling — `/qa` reviewer path-pin** (`.claude/commands/qa.md` step 4): dispatched reviewers must be given absolute worktree paths and forbidden from reading the real corpus (the S8 synthesis-reviewer miss, where a reviewer re-read the live unseeded file and reversed its catch).
+- **Subsumed:** the candidate "Paper-38-propinquity deterministic check" is now covered by the C11 enforcement (v4.20.4).
+
+Found but out of scope (pre-existing body debt, not a bite-2 item): `paper_18` has an undefined `\cite{paper7}` at line 176 — flagged for a future body-debt pass.
+
+Verification: paper_56 + paper_18 compile 2-pass (paper_56 0 undefined cites; paper_18's lone undefined `paper7` is pre-existing); C11 + C13 `--gate group3` PASS; `test_paper56_injection_g4.py` 37 passed / 10 skipped; `check_k_label.py` trunk + group3 PASS + regression passes. No production `geovac/` code changed.
+
 ## [4.20.4] - 2026-06-17
 
 ### Changed — C11 internal-title check: U(1)/\Uone normalization hardening

@@ -42,6 +42,18 @@ All three "build better validation" items were investigated (3 dispatched agents
 
 **Still remaining (lower-severity):** coverage gaps (`claim_test_matrix` rows + collected tests for the 18/54/56/57 `debug/`-only claims); two citation items (Paper 56 `deligne_milne1982` "Thm 2.3" likely-misnumbered; EMN "G∉MT(ℤ)" verify); tooling (harden `check_k_label` for `\begin{conjecture}` + `docs/` scan; pin `/qa` reviewers to the worktree path); the Paper-40-retitle cascade into group5 (`paper_41`) + the group1 synthesis (out of group3 scope — for those branches' sweeps); and retiring the superseded tautological C4 (`eye(n)`) in `tests/test_paper56_injection_g4.py`.
 
+## Remediation pass 3 (2026-06-17, v4.20.5) — lower-severity tail cleared
+
+- **Citations (verify-then-fix; citation-reviewer verified all 4):** Paper 56 `\cite[Thm.\ 2.3]{deligne_milne1982}` → `\cite[\S5]{deligne1990}` (the exterior-tensor-product theorem is Deligne 1990 §5; the cited "Thm 2.3" does not exist in Deligne–Milne 1982); Paper 18 `deligne2010` wrong arXiv `math/0302267` removed (it is the Deligne–Goncharov 2003 paper); Paper 18 `glanois2015` venue → *J. Number Theory* **160** (2016) 334–384. (EMN 2025 + Charlton–Hoffman "Thm 2.21" verified GROUNDED — no fix.)
+- **Coverage gaps:** added a Group-3-bite-2 section to `docs/claim_test_matrix.md` (14 rows) recording the load-bearing claims + the **NO-TEST** gaps honestly (Paper 18 α²-Ihara; Paper 54 selection-rules / DF; Paper 56 PS-4; Paper 57 P5 / count); the keystone Paper 56 injection row is FALSE-POSITIVE → REFUTED, with the genuine falsifier named.
+- **Superseded test:** the tautological C4 tests in `test_paper56_injection_g4.py` (`gram = eye(n)` / `assert True`) skipped with a pointer to the genuine `test_paper56_injection_g4_periodmap.py` — they asserted the now-refuted injectivity (37 passed / 10 skipped).
+- **Tooling — `check_k_label.py` hardened:** (1) catches the K-rule inside a tier-asserting environment (the conjecture-env blind spot) with the same NEG/NONSEL compliance escapes; (2) scans `docs/*.md` data files (`forced_free_seam.md`); + a UTF-8 stdout fix. Trunk + group3 PASS; regression `test_k_label_check.py` passes; discrimination preserved.
+- **Tooling — `/qa` reviewer path-pin:** `qa.md` step 4 now mandates absolute worktree paths + forbids reading the real corpus (the S8 synthesis-reviewer miss).
+- **Subsumed:** the "Paper-38-propinquity deterministic check" candidate is now covered by the C11 enforcement (v4.20.4) — propinquity titles are enforced corpus-wide, so a Paper-38/45 cite drifting from the state-space-GH title FAILS C11.
+- **Found (pre-existing, out of bite-2 scope):** `paper_18` body has an undefined `\cite{paper7}` (l.176, missing bibitem) — older body debt, flagged for a future pass.
+
+**Bite-2 remediation is now fully closed.**
+
 ## Remediation checklist
 
 ### QUICK WINS (wording / titles / labels — PM-fixable on sight)

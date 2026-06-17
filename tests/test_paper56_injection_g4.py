@@ -1,6 +1,14 @@
 """Bit-exact regression tests for Paper 56 §sec:injection_g4
 (Level-4 cosmic-Galois injection theorem).
 
+.. note:: The C4 closed-immersion / M3-injectivity tests in this file are
+   SUPERSEDED and REFUTED by ``tests/test_paper56_injection_g4_periodmap.py``:
+   their ``gram = eye(n)`` was a hardcoded premise, not a computation. The
+   genuine M3 period-vector Gram is rank-1 (det 0), so C4 injectivity does NOT
+   hold; Paper 56 ``thm:injection_g4`` was corrected to the abelianized /
+   rank-1 image (Reading A, v4.20.0). The four C4-injectivity tests below are
+   skipped accordingly; the C1/C2/C3 + residual-count bookkeeping tests stand.
+
 Theorem~\\ref{thm:injection_g4} states that the period map
 $\\pi: \\HGV \\to \\MT(\\Z[i, 1/2])$ dualises to a closed-immersion
 $\\Phi^{\\mathrm{inj}}: U^*_{GV} = \\Ga^\\infty \\rtimes SL_2
@@ -269,6 +277,7 @@ class TestC4ClosedImmersion:
         m3_generators = [g for g in gens if g[2] == 1]
         assert len(m3_generators) == expected_m3
 
+    @pytest.mark.skip(reason="C4 superseded+REFUTED: gram=eye(n) hardcoded; genuine Gram rank-1 (test_paper56_injection_g4_periodmap.py)")
     @pytest.mark.parametrize("n_max", [1, 2, 3, 4])
     def test_quarter_integer_hurwitz_linear_independence_per_cutoff(
         self, n_max: int
@@ -294,6 +303,7 @@ class TestC4ClosedImmersion:
             f"M3-column Gram matrix is degenerate at n_max={n_max} (C4 failed)"
         )
 
+    @pytest.mark.skip(reason="C4 superseded+REFUTED: gram=eye(n) hardcoded; genuine Gram rank-1 (test_paper56_injection_g4_periodmap.py)")
     def test_quarter_integer_hurwitz_linear_independence(self) -> None:
         """Distinct M3-column generators map to Q-linearly independent
         period values (proxy via independent symbolic basis).
@@ -320,6 +330,7 @@ class TestC4ClosedImmersion:
         assert det != 0, "M3-column Gram matrix is degenerate (C4 failed)"
         assert det == 1, "M3-column standard-basis Gram should be unimodular"
 
+    @pytest.mark.skip(reason="C4 superseded+REFUTED: injectivity does not hold; genuine Gram rank-1 (test_paper56_injection_g4_periodmap.py)")
     def test_goncharov_deligne_faithfulness_consequence(self) -> None:
         """At depth 1 / level 4, the M3-column is injective.
 
@@ -461,6 +472,7 @@ class TestExtendedCutoffSlow:
             f"C1 explicit panel at n_max={n_max}: {n_zero}/{expected} zero residuals"
         )
 
+    @pytest.mark.skip(reason="C4 superseded+REFUTED: gram=eye(n) hardcoded; genuine Gram rank-1 (test_paper56_injection_g4_periodmap.py)")
     @pytest.mark.parametrize("n_max", [3, 4])
     def test_c4_explicit_gram_panel(self, n_max: int) -> None:
         """Explicit N(n_max)-by-N(n_max) Gram non-degeneracy for C4."""
