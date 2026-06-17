@@ -66,7 +66,7 @@
 \newcommand{\KS}{K}
 \newcommand{\Khat}{\widehat{K}}
 
-\title{Latr\'emoli\`ere propinquity convergence of \\
+\title{State-space Gromov--Hausdorff convergence of \\
 truncated tensor-product Camporesi--Higuchi \\
 spectral triples on $\sthree \times \sthree$}
 \author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
@@ -85,7 +85,7 @@ tensor-product Camporesi--Higuchi spectral triple
 $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ on
 $\sthree \times \sthree$ at two (possibly distinct) focal lengths
 $\lambda_a, \lambda_b > 0$ converge to the continuum tensor-product
-triple in the Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity,
+triple in van~Suijlekom's state-space Gromov--Hausdorff distance,
 with explicit qualitative-rate bound
 \(
    \Lambda(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
@@ -104,10 +104,15 @@ Lipschitz comparison, Berezin reconstruction, propinquity assembly).
 The two technical risks specific to the tensor product --- a sharp
 Lipschitz comparison constant on the full operator system, and a
 rigorous bound on the cross-Stein--Weiss height term --- both close
-via the same graded Pythagorean mechanism. The result extends
+via the same graded Pythagorean mechanism. The strictly stronger
+Latr\'emoli\`ere propinquity is \emph{not} claimed:\ the dual-reach
+($\mathrm{reach}_P$) step of the joint assembly inherits the
+single-factor $\mathrm{reach}_P$ named gap of Papers~38/40 (the invalid
+cb-norm dual-reach), so the object established is van~Suijlekom
+state-space Gromov--Hausdorff convergence. The result extends
 \cite{connes_vs2021,leimbach_vs2024,loutey_paper38} to the simplest
-non-abelian tensor case in the Latr\'emoli\`ere framework, and closes
-a tensor-product propinquity case that the published literature on
+non-abelian tensor case, and closes a tensor-product state-space-GH
+case that the published literature on
 products of metric spectral triples~\cite{latremoliere2026,
 farsi_latremoliere2024,farsi_latremoliere2025,aguilar2019} does not
 cover; existing tensor-product propinquity results require the second
@@ -198,8 +203,8 @@ tensor-product truncated triple $\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb}$.
 \label{thm:main_intro}
 The truncated tensor-product triples $\Tcal_{\nmaxa} \otimes
 \Tcal_{\nmaxb}$ converge to $\Tcal_{\sthree}^{\lambda_a} \otimes
-\Tcal_{\sthree}^{\lambda_b}$ in the Latr\'emoli\`ere quantum
-Gromov--Hausdorff propinquity, with bound
+\Tcal_{\sthree}^{\lambda_b}$ in van~Suijlekom's state-space
+Gromov--Hausdorff distance, with bound
 \begin{equation}\label{eq:main_rate_intro}
    \Lambda\bigl(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
                 \Tcal_{\sthree}^{\lambda_a} \otimes
@@ -286,13 +291,22 @@ Section~\ref{sec:conclusion} concludes.
 \section{The setting}\label{sec:setup}
 % =====================================================================
 
-\paragraph{Propinquity convention.}
-Throughout, ``Latr\'emoli\`ere propinquity'' refers to the
-Gromov--Hausdorff propinquity for metric spectral triples introduced in
-Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017} (Adv.~Math.
-\textbf{404} (2022), Paper No.~108393, preprint
-\texttt{arXiv:1811.10843}, 2017), the same convention used in
-\cite{loutey_paper38}.
+\paragraph{Convergence convention and descope note.}
+The object established here is van~Suijlekom's \emph{state-space
+Gromov--Hausdorff distance} (the convention of Paper~38
+\cite{loutey_paper38}), \emph{not} the strictly stronger
+Latr\'emoli\`ere propinquity \cite{latremoliere_metric_st_2017}
+(Adv.~Math.\ \textbf{404} (2022), Paper No.~108393, preprint
+\texttt{arXiv:1811.10843}). The bound symbol $\Lambda(\cdot, \cdot)$
+below denotes the state-space GH distance. The joint assembly
+(Lemma~\ref{lem:L5-T}) bounds the dual reach
+$\mathrm{reach}_{P_{\nmaxa} \otimes P_{\nmaxb}}$ by inheriting the
+single-factor $\mathrm{reach}_P$ estimate;\ that single-factor step is
+the invalid cb-norm dual-reach that descoped Papers~38/40 from
+Latr\'emoli\`ere propinquity to state-space GH, so the joint result
+inherits the same named gap and is stated at the state-space-GH level.
+The rate, the joint Lipschitz constant $C_3^{(2)} < 1$, and the
+graded-Pythagorean cancellation are unaffected by this distinction.
 
 \subsection{Single-factor recall: the rescaled $\sthree$ Camporesi--Higuchi triple}
 \label{sec:single_factor_recall}
@@ -365,8 +379,10 @@ products $\Mat_a \otimes \Mat_b$ with $\Mat_\bullet \in \Op_{\nmax,
 
 \begin{theorem}[Main theorem]\label{thm:main}
 The truncated tensor-product Camporesi--Higuchi spectral triples
-converge to their continuum tensor-product limit in the
-Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity:
+converge to their continuum tensor-product limit in van~Suijlekom's
+state-space Gromov--Hausdorff distance (the strictly stronger
+Latr\'emoli\`ere propinquity is not claimed; see the convergence
+convention below):
 \begin{equation}\label{eq:main_thm}
    \Lambda\bigl(\Tcal_{\nmaxa}^{\lambda_a} \otimes
                 \Tcal_{\nmaxb}^{\lambda_b},\;
@@ -402,7 +418,9 @@ spectral Fej\'er kernel with closed-form Plancherel symbol; Lemma
 Connes--Marcolli graded Pythagorean Leibniz; Lemma~\ref{lem:L4-T} the
 joint Berezin reconstruction with the four properties needed for a
 Latr\'emoli\`ere tunneling pair; and Lemma~\ref{lem:L5-T} the
-propinquity assembly with explicit cross-Stein--Weiss height bound.
+state-space-GH assembly with explicit cross-Stein--Weiss height bound
+(modulo the inherited $\mathrm{reach}_P$ named gap; see the convergence
+convention).
 The factor $1 + 2\sqrt{2}$ in \eqref{eq:main_thm} is the sum of the
 joint reach contribution (bounded by $\max(\gamma)$, contributing $1$)
 and the joint height contribution (bounded by $2\sqrt{2}\max(\gamma)$
@@ -775,10 +793,10 @@ operator-norm reduction.
 \end{proof}
 
 % ---------------------------------------------------------------------
-\subsection{Lemma L5-T: joint propinquity assembly}\label{sec:L5-T}
+\subsection{Lemma L5-T: joint state-space-GH assembly}\label{sec:L5-T}
 % ---------------------------------------------------------------------
 
-\begin{lemma}[L5-T: joint propinquity bound from the joint tunneling
+\begin{lemma}[L5-T: joint state-space-GH bound from the joint tunneling
 pair]\label{lem:L5-T}
 The joint tunneling pair $(B_{\nmaxa, \nmaxb}, P_{\nmaxa} \otimes
 P_{\nmaxb})$ with $B_{\nmaxa, \nmaxb}$ from
@@ -820,7 +838,10 @@ the orthogonal projection.
 \;\le\; 2 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
 \end{equation*}
 The dual $\mathrm{reach}_{P_{\nmaxa} \otimes P_{\nmaxb}}$ inherits the
-same bound by symmetry of the joint convolution.
+same bound by symmetry of the joint convolution --- and with it the
+single-factor $\mathrm{reach}_P$ \emph{named gap} (the invalid cb-norm
+dual-reach that descoped Papers~38/40), so the bound below is at the
+state-space-GH level, not Latr\'emoli\`ere propinquity.
 
 \emph{Height.} By the Lipschitz-distortion form
 \cite[\S 4]{latremoliere_metric_st_2017}~\cite[Remark~3.8]{loutey_paper38},

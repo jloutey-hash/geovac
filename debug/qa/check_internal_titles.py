@@ -17,8 +17,9 @@ match the cited title against the full OR main title.
 
 Exit 0 = clean. Exit 1 = at least one MISMATCH outside the known exceptions.
 Exclusions (by design): house-style capsule files (deliberate short descriptors);
-archived papers (out of scope). The descope-pending propinquity cluster is
-FLAGGED, not failed.
+archived papers (out of scope). The descope-pending Lorentzian propinquity cluster
+(45-49) is FLAGGED, not failed; Papers 38/39/40 are now descoped + cite-converged
+and are ENFORCED (a title/cite mismatch on them FAILS).
 
 Usage:  python debug/qa/check_internal_titles.py
 """
@@ -37,7 +38,13 @@ HOUSE_STYLE = {
     "paper_57_forced_free_seam.tex",
     "group1_operator_algebras_synthesis.tex",
 }
-PROPINQUITY = {39, 40, 45, 46, 47, 48, 49}   # descope-pending titles -> flag, don't fail
+# Descope-pending titles -> FLAG (don't fail), because their cites legitimately
+# disagree with the (soon-to-change) \title during the held propinquity-cluster
+# retitle. Papers 38/39/40 are now DESCOPED (Latremoliere propinquity -> van
+# Suijlekom state-space GH) AND their cites converged (v4.14.x / v4.20.0 / v4.20.1),
+# so they are REMOVED from this set and ENFORCED: any future title/cite drift on
+# them now FAILS rather than flags. Only the Lorentzian leg (45-49) remains pending.
+PROPINQUITY = {45, 46, 47, 48, 49}
 ARCHIVED = {3, 4, 5, 6, 10, 21}              # out of scope
 
 # GeoVac title macros that carry semantic content lost by a blind \word strip.

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.2] - 2026-06-17
+
+### Changed — Paper 39 descope (state-space GH) + cite convergence + C11 hardening
+
+The Paper 39 cite divergence flagged in v4.20.1 traced to Paper 39 itself being an un-descoped propinquity overclaim — the tensor-product sibling of Papers 38/40, missed by the 2026-06-09 descope sprint and parked in the v4.15.0 "held-for-PI propinquity-cluster retitle." PI-approved descope + convergence:
+
+- **Paper 39 descoped** (mirrors Paper 40): title + abstract + both main theorems (`thm:main_intro`, `thm:main`) + the L5-T "joint assembly" lemma + the convergence-convention paragraph corrected from Latrémolière propinquity → van Suijlekom state-space GH. Mechanism: L5-T's dual reach `reach_{P_a⊗P_b}` *inherits* the single-factor `reach_P` named gap (the invalid cb-norm dual-reach that descoped Papers 38/40), so the established object is state-space GH. Genuine content (rate, universal 4/π, joint Lipschitz constant C₃⁽²⁾ < 1, graded-Pythagorean cancellation) left untouched.
+- **Cites converged** on the new Paper-39 title: `paper_32` already matched (it had anticipated the descope); `paper_23` (group4) fixed from a stale "Tensor-Product Propinquity Convergence for Composed Real-Space Spectral Triples" paraphrase.
+- **C11 hardened** (`debug/qa/check_internal_titles.py`): Papers 38/39/40 removed from the `PROPINQUITY` flag-don't-fail exception set (they are now descoped + cite-converged) → their internal-title consistency is now ENFORCED; future drift FAILS instead of flagging. Only the Lorentzian leg (45–49) remains descope-pending/flagged. (Note: C11 was not "blind" — its match is exact and it had correctly *flagged* the Paper 39 mismatch as descope-pending; the fix is to stop exempting the now-completed papers.)
+
+Verification: C11 PASS corpus-wide with 38/39/40 enforced (proves genuine convergence); C11 `--gate group3` PASS; regression `tests/test_internal_title_consistency.py` passes; Paper 39 + paper_23 compile `-halt-on-error` exit 0.
+
 ## [4.20.1] - 2026-06-17
 
 ### Changed — Paper 40 retitle/descope cite cascade (group1 + group5 + synthesis)
