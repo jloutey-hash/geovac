@@ -82,3 +82,20 @@ claim restates them (C7).
   no-test; P56 5,864-residual headline absorbing the refuted C4; P54
   angular-theorem tier. Answer key `debug/qa/group3_recert_seed_key.json`.
 - 2026-06-17 — **run-2 findings REMEDIATED** (v4.20.6); re-run pending.
+- 2026-06-17 — **bite 2 re-cert run 3 = FAIL** (`/qa group3`, on v4.20.6).
+  Calibrated panel (sensitivity 5/5 — S5/S2/S1/S9/S7 all caught; specificity
+  6/6 — M1–M6 incl. the v4.20.6 C6/κ/abelianized fixes all held). 4 reviewers
+  died mid-run on a spend limit, re-dispatched after tokens restored → all 5
+  dimensions ultimately exercised + calibrated (the first code-56 missed S2;
+  the fresh code-56 caught it — panel redundancy recovered). The 8 remediated
+  classes are confirmed FIXED (controls passed); the FAIL is a **deeper,
+  pre-existing defect** the gate peeled to: **Paper 56 `thm:injection_g4`
+  C1/C2 legs** — C1 multiplicativity test is tautological (`simplify(lhs −
+  product)` with identical operands), C2 coproduct test is vacuous (`assert
+  … is not None`), and C2's sole literature support, **"Brown 2017
+  Proposition 5.2," appears nonexistent** (Brown ICM-2014 §5 = depth-filtration
+  / modular-forms conjecture, eqs 5.1/5.2 + Conjecture 5.1, no Prop 5.2;
+  convergent run-2 "unverifiable" + run-3 "nonexistent" + ToC topic-mismatch).
+  Plus SMALL: P56 §open_g4 boxed-theorem leads "closed at theorem grade …
+  closed subgroup" before the abelianized qualifier. Seed key
+  `debug/qa/group3_recert2_seed_key.json`. Remediation pending PI direction.

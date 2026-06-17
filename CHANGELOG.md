@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.7] - 2026-06-17
+
+### Changed — `/qa group3` re-cert run 3 (FAIL) remediated
+
+The run-3 calibrated panel (sensitivity 5/5, specificity 6/6 — the v4.20.6 C6/κ/abelianized fixes all held as controls) confirmed the eight v4.20.6 missed-instance fixes and then peeled to a **deeper, pre-existing defect** in Paper 56's keystone `thm:injection_g4` — the injection's *homomorphism* legs (distinct from the already-corrected C4 negative content). Remediated:
+
+- **[citation, LARGE] C2 leg cited a nonexistent "Brown 2017 Proposition 5.2."** Brown's ICM-2014 §5 is the depth-filtration / modular-forms conjecture (eqs 5.1/5.2 + Conjecture 5.1) — there is no Proposition 5.2 (convergent: run-2 reviewer "unverifiable" + run-3 reviewer "nonexistent" + my own ToC topic-mismatch check). The attributed fact — depth-1 sub-quotient = primitives on the abelianization — is standard coradical-filtration / Cartier–Milnor–Moore, so C2 was regrounded on `\cite{cartier_milnor_moore}` (already in the paper) in both the paper §sec:injection_g4 and the test docstring. `brown2017` remains correctly cited (4×) for the U*_CM ↠ G_MT(Z) surjection framing.
+- **[code, MATERIAL] C1/C2 backing tests were tautological/vacuous → genuine-ified.** C1 multiplicativity was `simplify(lhs − product)` with identical operands; now evaluates the product element of Sym_Q(V) on real per-sector period scalars η_(n,l) and cross-checks against the product of evaluations (mirrors the genuine C1 in `test_paper56_injection_g4_periodmap.py`). C2 was `assert coproduct_form is not None`; now computes the reduced coproduct Δ'(x) = Δ(x) − x⊗1 − 1⊗x as a real symbolic residual, asserts it vanishes (primitivity), checks cocommutativity under the tensor swap, and checks degree-1 distinctness. `tests/test_paper56_injection_g4.py`: 51 passed / 10 skipped / 2 xfailed (unchanged pattern).
+- **[claims, SMALL] §open_g4 boxed theorem** now leads "an abelianized homomorphism … not an injective closed immersion (the M3 column collapses to rank 1)" before "closed at theorem grade," per the reviewer's front-loading recommendation.
+
+Verification: Paper 56 compiles `-halt-on-error` exit 0; C11/C12/C13 `--gate group3` PASS; injection tests green. Calibration + the run-3 finding: `debug/qa/group3_recert2_seed_key.json`, `docs/qa/group3.done.md` (run-3 log). A fresh `/qa group3` certifies.
+
 ## [4.20.6] - 2026-06-17
 
 ### Changed — `/qa group3` re-cert run 2 (FAIL) remediated

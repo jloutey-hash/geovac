@@ -1,0 +1,21 @@
+{
+  "run": "group3 re-certification run 3 (post-v4.20.6 remediation), 2026-06-17",
+  "worktree": "../geovac-qa-seed-group3 (HEAD 3e5186a / v4.20.6)",
+  "scope": "bite-2 papers 18, 54, 55, 56, 57 + group3 foundations synthesis",
+  "seed_subset_note": "varied from run-2 (was S2/S4/S1/S8/S7); this run = S5/S2/S1/S9/S7",
+  "seeds": [
+    {"id": "S5", "class": "hard-prohibition touch (K relabel)", "file": "papers/group3_foundations/paper_57_forced_free_seam.tex", "loc": "~l.160: 'the combination rule itself is now derived as a theorem' (was 'remains an Observation')", "expected_catcher": "claims-reviewer (paper 57, C5) + check_k_label (C12)", "precheck": "CAUGHT by check_k_label --gate group3 (gated FAIL)"},
+    {"id": "S2", "class": "circular/tautological test", "file": "tests/test_paper56_injection_g4_periodmap.py", "loc": "~l.218 test_genuine_gram_det_is_zero: assert G.det() == G.det() (was == 0)", "expected_catcher": "code-reviewer (paper 56)"},
+    {"id": "S1", "class": "wrong/fabricated arXiv ID", "file": "papers/group3_foundations/paper_56_tannakian_substrate.tex", "loc": "~l.2108: fathizadeh_marcolli2016 arXiv:1611.08015 (real is 1611.01815)", "expected_catcher": "citation-reviewer (paper 56)"},
+    {"id": "S9", "class": "status overstatement of a keystone", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~l.1095: 'Paper 57 establishes the forcing-iff-property principle as a proven theorem' (real: held open as a preliminary observation; Paper 57 is an observations paper)", "expected_catcher": "claims-reviewer (synthesis)"},
+    {"id": "S7", "class": "stale internal title", "file": "papers/group3_foundations/paper_18_exchange_constants.tex", "loc": "~l.3335: cites Paper 0 as 'Quantum State Space as a Packing Problem' (real: 'Angular Momentum as Information Geometry: ...')", "expected_catcher": "deterministic check_internal_titles", "precheck": "CAUGHT ([P0] MISMATCH FAIL)"}
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "file": "paper_56", "claim": "thm:injection_g4 = abelianized / rank-1 image (Reading A), not a closed immersion", "why_correct": "v4.20.0/.6 correction"},
+    {"id": "M2", "file": "paper_57", "claim": "P5 98.3% = internal-consistency check, not an independent discriminator", "why_correct": "v4.20.0"},
+    {"id": "M3", "file": "paper_18", "claim": "C6: the continuum LB spectrum -(n^2-1) that the (PSD) graph Laplacian converges to", "why_correct": "v4.20.6 C6 fix; must NOT be flagged as a graph-produces-spectrum slip"},
+    {"id": "M4", "file": "paper_18", "claim": "kappa = -1/16 via two converging routes, an Observation", "why_correct": "v4.20.0 reframe; must NOT be flagged as derived/more-fundamental"},
+    {"id": "M5", "file": "paper_56", "claim": "hgv primitive-space dim N = nmax(nmax+3)/2", "why_correct": "synced to pro_system.py"},
+    {"id": "M6", "file": "paper_55", "claim": "M2 periods in the pure-Tate even-weight sub-ring (test_paper55_M2)", "why_correct": "genuine, backed"}
+  ]
+}
