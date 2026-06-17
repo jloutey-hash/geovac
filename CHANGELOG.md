@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.1] - 2026-06-17
+
+### Changed — Paper 40 retitle/descope cite cascade (group1 + group5 + synthesis)
+
+Following the v4.20.0 descope of Paper 40 (Latrémolière propinquity → van Suijlekom state-space GH) and its retitle, the cite cascade was propagated corpus-wide (dispatched per-reference sweep, PM-verified + compiled):
+
+- **Bibitem titles** for `paper40_unified` / `paper40` / `loutey_paper40` updated to the new Paper-40 title across papers 38/39/42/43/44/45/46/47/48/49/50/52/53, paper_41 (group5), the group1 synthesis, and the field guide.
+- **Prose** attributing the descoped *propinquity* claim to Paper 40 — and, where stale, to Paper 38 (also descoped to state-space GH) — corrected to "van Suijlekom state-space Gromov--Hausdorff" convergence, with the general-G conditionality noted. References to Paper 40's genuine content (universal 4/π rate, Vandermonde–Plancherel cancellation theorem, L1–L5 lemma machinery, C₃ ≤ 1) left untouched.
+- **Paper 38 bibitems** in the synthesis + field guide retitled to Paper 38's actual title (the prose was fixed in the same sweep; these bibitems were the last stale cites).
+- One agent edit (`\SU` undefined in paper_52) fixed → `\mathrm{SU}`.
+
+C11 (internal-title check) PASS corpus-wide; all 17 edited papers compile `-halt-on-error` exit 0; zero residual stale Paper-40/38 propinquity-title strings. This closes the Paper-40-retitle cascade flagged in the v4.20.0 release notes.
+
 ## [4.20.0] - 2026-06-16
 
 ### Summary
