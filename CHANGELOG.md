@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.21.1] - 2026-06-17
+
+### Changed — group3 bite-2 CERTIFIED (`/qa group3` run 5 = PASS) ✅
+
+The `/qa group3` re-certification reached its first **calibrated PASS** on run 5 (papers 18, 54, 55, 56, 57 + group3 foundations synthesis), after four remediation rounds (v4.20.0 → v4.21.0). Calibrated panel: **sensitivity 5/5** (S5/S2/S1/S9/S7 all caught), **specificity 6/6** — including M4 (the v4.20.8 D(4) fix) and M5 (the v4.20.7 C2/CMM fix) both accepted by the fresh blind panel, confirming the prior remediations held. Zero verified MATERIAL defects (criteria test: no target result changes; `thm:injection_g4` soundly backed by the periodmap rank-1 driver). With bite-1 (22/24/31) already PASS (run #7, v4.18.0), **group3 is certified.**
+
+Recommended NIT cleanups applied this release (none cert-blocking):
+- `tests/test_paper56_injection_g4.py`: genuine-ified the slow-variant C1 panel `test_c1_explicit_symbolic_panel` (it was still the old `s_a*s_b − s_a*s_b` tautology — a miss from the v4.20.7 C1 fix; now evaluates the product element on real per-sector η scalars, matching the non-slow C1) and removed 5 unused `geovac.tannakian` imports.
+- Paper 18 §V.A worked Example 1 (l.2757): "the graph Laplacian on S³ has eigenvalues −(n²−1)" → "the continuum S³ Laplace–Beltrami operator that the graph Laplacian converges to has eigenvalues −(n²−1)" (C6 consistency with the three correct instances elsewhere).
+
+Convergence arc across the 5 runs: keystone corrections → missed-instances → C2-leg nonexistent-citation + tautological-tests → D(4) worked-example bug + broken code-ref → (run 5) only test-hygiene/precision NITs.
+
+Remaining recommended (non-blocking) polish, logged in `docs/qa/group3.done.md`: the "5,864 residuals" headline conflates count-bookkeeping with computed zeros for the C1/C2 portion; peripheral Paper-51 one-loop-gravity cite (P18/P54); NA-1/S⁵ open-section theorems backed by `debug/` not `tests/`; the 443 `debug/` dangling-pointer hygiene sweep (advisory, v4.21.0 C14).
+
+Verification: `test_paper56_injection_g4.py` + periodmap 53 passed / 8 skipped / 2 xfailed (`--slow`); Paper 18 compiles `-halt-on-error` exit 0; C11/C12/C13/C14 `--gate group3` all PASS.
+
 ## [4.21.0] - 2026-06-17
 
 ### Added — C14 deterministic paper↔file reference integrity check

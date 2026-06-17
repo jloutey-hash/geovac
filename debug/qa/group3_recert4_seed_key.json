@@ -1,0 +1,21 @@
+{
+  "run": "group3 re-certification run 5 (post-v4.21.0 / C14), 2026-06-17",
+  "worktree": "../geovac-qa-seed-group3 (HEAD 957ee2b / v4.21.0)",
+  "scope": "bite-2 papers 18, 54, 55, 56, 57 + group3 foundations synthesis",
+  "seed_subset_note": "run-2 S2/S4/S1/S8/S7; run-3 S5/S2/S1/S9/S7; run-4 S4/S2/S1/S8/S7; run-5 S5/S2/S1/S9/S7 (different locations again)",
+  "seeds": [
+    {"id": "S5", "class": "K hard-prohibition relabel", "file": "papers/group3_foundations/paper_18_exchange_constants.tex", "loc": "~l.2625: K eq alpha^-1 'is now derived as a theorem' (was 'an empirical observation, not a theorem')", "expected_catcher": "claims-reviewer (paper 18, C5) + check_k_label (C12)", "precheck": "CAUGHT by check_k_label --gate group3 (gated FAIL)"},
+    {"id": "S2", "class": "circular/tautological test", "file": "tests/test_paper56_injection_g4_periodmap.py", "loc": "~l.306 TestC3GenuineSL2Levi.test_panel_in_sl2: assert g.det() == g.det() (was == 1)", "expected_catcher": "code-reviewer (paper 56)"},
+    {"id": "S1", "class": "wrong/fabricated arXiv ID", "file": "papers/group3_foundations/paper_56_tannakian_substrate.tex", "loc": "~l.2114: eskandari_murty_nemoto2025 arXiv:2510.26048 (real is 2510.20648)", "expected_catcher": "citation-reviewer (paper 56)"},
+    {"id": "S9", "class": "status overstatement (kappa) in synthesis", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~l.253: kappa = -1/16 'is derived from a geometric quantity' (was 'coincides with'); kappa is an Observation, not derived", "expected_catcher": "claims-reviewer (synthesis, C9/C7)"},
+    {"id": "S7", "class": "stale internal title", "file": "papers/group3_foundations/paper_54_tensor_product_two_body.tex", "loc": "~l.531: cites Paper 7 as 'The Geometric Vacuum: ...' (real: 'The Dimensionless Vacuum: ...')", "expected_catcher": "deterministic check_internal_titles", "precheck": "CAUGHT ([P7] MISMATCH FAIL)"}
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "file": "paper_56", "claim": "thm:injection_g4 = abelianized / rank-1 image, not a closed immersion", "why_correct": "v4.20.0/.6/.7"},
+    {"id": "M2", "file": "paper_57", "claim": "P5 98.3% = internal-consistency check, not an independent discriminator", "why_correct": "v4.20.0"},
+    {"id": "M3", "file": "paper_18", "claim": "C6: continuum LB spectrum the (PSD) graph Laplacian converges to", "why_correct": "v4.20.6"},
+    {"id": "M4", "file": "paper_18", "claim": "Thm 1(2): Dirac D(4) = 6zeta(2)-15/2 zeta(4) = pi^2 - pi^4/12 (pi-even); D(5)=14 zeta(3)-31/2 zeta(5) the odd-zeta witness", "why_correct": "v4.20.8 fix; must NOT be re-flagged as the Fock-value bug"},
+    {"id": "M5", "file": "paper_56", "claim": "C2 leg grounded on Cartier-Milnor-Moore (not Brown Prop 5.2); C1/C2 backing tests genuine", "why_correct": "v4.20.7; must NOT be re-flagged"},
+    {"id": "M6", "file": "paper_18", "claim": "the CORRECT kappa statements (kappa = Observation, coincides, no derivation bridge) must NOT be flagged -- only the planted synthesis l.253 + paper_18 l.2625 are defects", "why_correct": "v4.20.0 reframe; surrounding kappa framing sound"}
+  ]
+}

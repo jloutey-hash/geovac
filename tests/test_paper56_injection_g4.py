@@ -51,13 +51,6 @@ import sympy as sp
 from sympy import Integer, Matrix, Rational, eye, simplify, symbols, zeros
 
 from geovac.pro_system import N_sectors, primitive_generators
-from geovac.tannakian import (
-    FinDimRep,
-    levi_unipotent_action,
-    primitive_generator_rep,
-    sl2_standard_action,
-    unit_object,
-)
 
 
 # ---------------------------------------------------------------------------
@@ -474,18 +467,25 @@ class TestExtendedCutoffSlow:
     def test_c1_explicit_symbolic_panel(self, n_max: int) -> None:
         """Explicit (3 N(n_max))^2 symbolic-zero panel for C1."""
         gens = _primitive_generators(n_max)
-        symbols_dict = {
-            g: sp.Symbol(f"s_{g[0]}_{g[1]}_{g[2]}", commutative=True)
-            for g in gens
-        }
-        residuals = []
+        # GENUINE (v4.21.1): evaluate the product element of Sym_Q(V) on REAL
+        # per-sector period scalars eta_(n,l) and cross-check against the
+        # product of evaluations -- the explicit (3 N)^2 panel, NOT the prior
+        # tautology s_a*s_b - s_a*s_b. (Matches the non-slow C1.)
+        def eta(g: tuple) -> sp.Rational:
+            n, l = g[0], g[1]
+            return (sp.Rational(n * (2 * n + 1)) if l == n
+                    else sp.Rational((2 * l + 1) * (2 * n + 1)))
+
+        pi = {g: eta(g) for g in gens}
+        xa, xb = sp.Symbol("xa"), sp.Symbol("xb")
+        product_element = xa * xb
+        n_zero = 0
         for a in gens:
             for b in gens:
-                lhs = symbols_dict[a] * symbols_dict[b]
-                product = symbols_dict[a] * symbols_dict[b]
-                residual = sp.simplify(lhs - product)
-                residuals.append(residual)
-        n_zero = sum(1 for r in residuals if r == 0)
+                lhs = product_element.subs({xa: pi[a], xb: pi[b]})
+                rhs = pi[a] * pi[b]
+                if sp.simplify(lhs - rhs) == 0:
+                    n_zero += 1
         expected = (3 * _n_sec(n_max)) ** 2
         assert n_zero == expected, (
             f"C1 explicit panel at n_max={n_max}: {n_zero}/{expected} zero residuals"

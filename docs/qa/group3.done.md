@@ -125,3 +125,17 @@ claim restates them (C7).
   **group3 PASSES C14** (0 serious-class misses). **443 `debug/` dangling
   pointers logged ADVISORY** (transient clean-room dir, pruned by design —
   a separate hygiene-sweep decision for the PI, not a cert blocker).
+- 2026-06-17 — **bite 2 re-cert run 5 = PASS** ✅ (`/qa group3`, on v4.21.0).
+  **First calibrated PASS** after 4 remediation rounds. Calibrated panel
+  (sensitivity 5/5 — S5/S2/S1/S9/S7 all caught; specificity 6/6 — M1–M6,
+  incl. M4 the v4.20.8 D(4) fix and M5 the v4.20.7 C2/CMM fix, both ACCEPTED
+  by the fresh blind panel). Zero verified MATERIAL defects (criteria test:
+  no target result changes; `thm:injection_g4` soundly backed by the
+  periodmap rank-1 driver). Residual NITs (recommended polish, non-blocking):
+  slow-variant C1 test still tautological + unused imports in
+  `test_paper56_injection_g4.py`; "5,864 residuals" headline conflates count
+  bookkeeping with computed zeros for the C1/C2 portion; worked-Example-1 C6
+  wording in P18; peripheral Paper-51 one-loop-gravity cite; NA-1/S⁵
+  open-section theorems backed by debug/ not tests/. Convergence arc: keystone
+  corrections → missed-instances → C2-leg → D(4)+broken-ref → test-hygiene
+  NITs. **BITE 2 CERTIFIED.** Seed key `debug/qa/group3_recert4_seed_key.json`.
