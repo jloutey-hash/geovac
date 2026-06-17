@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.20.4] - 2026-06-17
+
+### Changed — C11 internal-title check: U(1)/\Uone normalization hardening
+
+Hardened `debug/qa/check_internal_titles.py` so the three group-notation forms that the same paper's title and its citers use — `$\SU(2)\times\Uone_{T}$` (macro), `SU(2) $\times$ U(1)$_{T}$` (literal), `$\mathrm{SU}(2)\times\mathrm{U}(1)_{T}$` (mathrm) — all normalize identically. Root cause was a `norm()` bug: `\Uone`→"U1" produced `\timesU1` (no space), and the generic control-sequence strip `\[a-zA-Z]+` then swallowed `\timesU`, dropping the "U" entirely (the macro form normalized to "su 2 1 t" instead of "su 2 u 1 t"). Fix:
+
+- `\Uone` replacement "U1" → "U 1" (separated, matching the literal parenthetical "U(1)" → "u 1").
+- Macro replacements space-padded (`f" {rep} "`) so an adjacent control sequence is no longer swallowed.
+- `\mathrm{}` / `\mathbf{}` / `\text{}` / … wrappers stripped (contents kept), so `\mathrm{SU}` / `\mathrm{U}` unify with the bare macros and literals.
+
+Consequence: the Lorentzian-leg literal cites (Papers 45-49) now match their macro-form titles, so the **`PROPINQUITY` flag-don't-fail exception is emptied** — the entire propinquity cluster (38/39/40 Euclidean + 45-49 Lorentzian) is now ENFORCED; any future title/cite drift on these papers FAILS rather than flags.
+
+Verification: C11 PASS corpus-wide and `--gate group3` with the empty exception; regression `tests/test_internal_title_consistency.py` passes; discrimination preserved (a deliberately-wrong title still fails to match; the correct macro form matches). No `.tex` changed — `check_internal_titles.py` only.
+
 ## [4.20.3] - 2026-06-17
 
 ### Changed — Lorentzian propinquity leg (Papers 45-49) consistency pass

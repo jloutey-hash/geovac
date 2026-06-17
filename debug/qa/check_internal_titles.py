@@ -38,33 +38,44 @@ HOUSE_STYLE = {
     "paper_57_forced_free_seam.tex",
     "group1_operator_algebras_synthesis.tex",
 }
-# Descope-pending titles -> FLAG (don't fail), because their cites legitimately
-# disagree with the (soon-to-change) \title during the held propinquity-cluster
-# retitle. Papers 38/39/40 are now DESCOPED (Latremoliere propinquity -> van
-# Suijlekom state-space GH) AND their cites converged (v4.14.x / v4.20.0 / v4.20.1),
-# so they are REMOVED from this set and ENFORCED: any future title/cite drift on
-# them now FAILS rather than flags. The Lorentzian leg (45-49) is descoped +
-# cite-wording-consistent (v4.20.3) but stays FLAGGED (not enforced): it is genuinely
-# PARTIAL / pending-repair (Paper 46 = enlarged-substrate repair target; 47/48/49
-# PARTIAL with surviving + descoped content), unlike the clean 38/39/40 descopes.
-# Full enforcement also awaits a C11 U(1)/\Uone notation-normalization unification
-# (literal "U(1)" norms to "u 1", the \Uone macro to "1", so literal cites can't yet
-# match the macro-form titles).
-PROPINQUITY = {45, 46, 47, 48, 49}
+# The propinquity cluster (38/39/40 Euclidean + 45-49 Lorentzian) is now fully
+# descoped, cite-consistent, and ENFORCED (empty exception): any title/cite drift on
+# these papers FAILS rather than flags. Papers 38/39/40 (clean "Latremoliere
+# propinquity -> van Suijlekom state-space GH" descopes) were enforced across
+# v4.14.x / v4.20.0-2; the Lorentzian leg 45-49 (degeneracy / partial descopes)
+# became enforceable once the U(1)/\Uone notation-normalization unification above let
+# their literal cites match the macro-form titles (v4.20.4). Re-populate this set only
+# for a NEW paper whose title is mid-descope.
+PROPINQUITY: set = set()
 ARCHIVED = {3, 4, 5, 6, 10, 21}              # out of scope
 
 # GeoVac title macros that carry semantic content lost by a blind \word strip.
 MACROS = [
-    (r"\sthree", "S3"), (r"\sfive", "S5"), (r"\Uone", "U1"),
+    (r"\sthree", "S3"), (r"\sfive", "S5"), (r"\Uone", "U 1"),
     (r"\SU", "SU"), (r"\SL", "SL"), (r"\Ga", "Ga"), (r"\Aut", "Aut"),
     (r"\R", "R"), (r"\N", "N"),
 ]
+# \Uone -> "U 1" (SEPARATED) so the macro normalises identically to the literal
+# parenthetical form "U(1)" -> "u 1"; this unifies the three notations that the
+# same paper's title and its citers use ($\SU(2)\times\Uone_T$ macro,
+# "SU(2) U(1)_T" literal, "\mathrm{SU}(2)\times\mathrm{U}(1)_T"). Before this fix
+# the three forms normalised to "su 2 1 t" / "su 2 u 1 t" / "su 2 u 1 t" and the
+# Lorentzian-cluster cites (Papers 45-49) could never match their macro titles.
 
 
 def norm(s: str) -> str:
     s = re.sub(r"\\\\", " ", s)                         # \\ line break -> space
+    # Strip math-font wrappers, keeping their (space-padded) contents, so
+    # \mathrm{SU} normalises the same as the bare \SU macro and the literal "SU".
+    s = re.sub(
+        r"\\(?:mathrm|mathbf|mathit|mathsf|mathcal|text|emph|operatorname)\s*"
+        r"\{([^{}]*)\}", r" \1 ", s)
+    # Canonical macros. Replacements are SPACE-PADDED so that an adjacent control
+    # sequence (e.g. "\times\Uone" -> "\times U 1") is NOT swallowed by the generic
+    # control-sequence strip below (the bug that dropped the "U" of \Uone, giving
+    # "su 2 1 t" instead of "su 2 u 1 t").
     for mac, rep in MACROS:
-        s = re.sub(re.escape(mac) + r"(?![a-zA-Z])", rep, s)
+        s = re.sub(re.escape(mac) + r"(?![a-zA-Z])", f" {rep} ", s)
     s = re.sub(r"\\[a-zA-Z]+", " ", s)                  # remaining control sequences
     s = s.replace("^", "").replace("$", "")             # S^3 -> S3 (no space)
     s = re.sub(r"[{}~\\]", " ", s)                      # braces, ties, stray backslash
