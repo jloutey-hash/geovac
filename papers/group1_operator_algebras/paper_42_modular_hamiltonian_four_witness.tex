@@ -184,7 +184,7 @@ realises the same $\sigma_{i \cdot 2\pi} = $ identity period closure
 intrinsically, without recourse to the Wightman axiomatic Wick-rotation
 chain --- is structurally distinct, and has not been settled in the
 spectral-truncation literature
-of~\cite{connes_vs2021, leimbach_vs2024, hekkelman_mcdonald2024}.
+of~\cite{connes_vs2021, leimbach_vs2024}.
 
 The present paper closes this operator-system analog on the truncated
 Camporesi--Higuchi spectral triple $\Tcal_{\nmax}$ over the round
@@ -247,8 +247,8 @@ $\mathrm{two}\_m_j$ on the full-Dirac basis (odd integers
 in $\{-(2l+1), \ldots, +(2l+1)\}$), so $e^{i \cdot 2\pi \cdot n} = 1$
 for any integer $n$ produces the period closure pointwise at every
 $\nmax$ without requiring a Gromov--Hausdorff limit. The closure
-therefore strengthens the Paper~38 propinquity convergence at the
-operator level:\ Paper~38 gives a qualitative-rate propinquity
+therefore complements the Paper~38 state-space Gromov--Hausdorff convergence at the
+operator level:\ Paper~38 gives a qualitative-rate state-space-GH bound
 $O(\log \nmax / \nmax)$ on the metric-spectral-triple data; the
 present paper establishes the modular period closure
 \emph{at machine precision at every finite cutoff} as a structural
@@ -264,7 +264,12 @@ wedge-restricted Camporesi--Higuchi state and verify $\sigma_{i \cdot 2\pi}
 STRONG\_IDENTIFICATION via BW-$\alpha$ and UNIFIED\_STRONG via
 BW-$\gamma$. The Lorentzian extension to signature $(3, 1)$ via the
 Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018} Krein-space
-spectral triple is \emph{not} closed by this paper. Sprint L0 of
+spectral triple is carried out \emph{at finite cutoff} in
+\S\ref{sec:lorentzian_closure} (the operator-system four-witness period
+closure $\sigma_{2\pi} = \mathrm{id}$ on the Krein wedge); the
+continuum / Lorentzian-propinquity-rate extension is \emph{not} closed
+by this paper (the named open target, and Paper~45's degeneracy theorem
+closes off the natural Lorentzian-propinquity route). Sprint L0 of
 the present author's framework documentation
 (\texttt{debug/lorentzian\_l0\_audit\_memo.md},
 Paper~31~\S~8, Paper~34~\S~V.E) audits the 28 projections of the
@@ -297,7 +302,7 @@ identification on the truncated operator system, with the integer
 spectrum of the BW-$\alpha$ generator playing the role of the
 canonical $2\pi$-period of the continuum modular flow. A finite-lattice
 realisation in critical quantum spin chains was given by
-Zhu--Casini~\emph{et~al.}~\cite{zhu_casini2020}; the present
+Zhang~\emph{et~al.}~\cite{zhu_casini2020}; the present
 construction differs in that the underlying object is a continuum
 spectral triple on a non-flat compact $\sthree$ background, and the
 finite-dimensional structure comes from the spectral truncation of
@@ -318,7 +323,7 @@ treated here.
 
 \paragraph{Outline.}
 Section~\ref{sec:setup} recalls the truncated Camporesi--Higuchi
-spectral triple and the Paper~38 propinquity convergence result.
+spectral triple and the Paper~38 state-space Gromov--Hausdorff convergence result.
 Section~\ref{sec:lorentzian_readiness} summarises the Sprint L0
 Lorentzian-readiness audit, names the Riemannian scope of the present
 paper, and footnotes the Nieuviarts NO-GO on direct twist-morphism
@@ -363,7 +368,7 @@ spectral truncations established by
 Connes~\cite{connes1995, connes_vs2021} and developed in the
 GH-convergence context by
 Latr\'emoli\`ere~\cite{latremoliere2018, latremoliere_metric_st_2017},
-Hekkelman~\cite{hekkelman2022}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024},
+Hekkelman~\cite{hekkelman2022},
 Leimbach--van~Suijlekom~\cite{leimbach_vs2024}, and the present
 author's Paper~38~\cite{paper38} for the round $\sthree = \SU(2)$
 case.
@@ -1136,7 +1141,7 @@ GNS-Hilbert--Schmidt level.
 
 The closure of Theorem~\ref{thm:bw_gamma} is a finite-cutoff identity,
 not a propinquity limit statement. To confirm consistency with
-Paper~38's qualitative-rate propinquity bound~\eqref{eq:paper38_main},
+Paper~38's qualitative-rate state-space-GH bound~\eqref{eq:paper38_main},
 we compute the ratio
 \begin{equation*}
    \frac{\max_O r_W^{\TT}(O)}{\gamma_{\nmax}^{(\mathrm{L2})}}
@@ -1391,7 +1396,7 @@ hole, proper acceleration of the Rindler observer) parameterises the
 correspondence to the continuum physical observable but does not
 modify the underlying modular-Hamiltonian construction. The same
 $2\pi$ that appears as the Hopf-base measure factor $\Vol(S^2)/\pi^2$
-in the Paper~38 propinquity rate constant
+in the Paper~38 state-space-GH rate constant
 \eqref{eq:paper38_main} also drives the modular period closure of
 Theorems~\ref{thm:bw_alpha}--\ref{thm:bw_gamma}.
 
@@ -1509,7 +1514,7 @@ the integer spectrum of $K_\alpha^W$ playing the role of the
 canonical $2\pi$-period of the continuum modular flow.
 
 \paragraph{Lattice realisations.}
-Zhu--Casini~\emph{et~al.}~\cite{zhu_casini2020} verified the
+Zhang~\emph{et~al.}~\cite{zhu_casini2020} verified the
 Bisognano--Wichmann form of the modular Hamiltonian on critical
 quantum spin chains, finding the continuum BW prediction to hold to
 good approximation on finite lattices. The present paper differs in
@@ -1520,7 +1525,7 @@ structure comes from the spectral truncation of $\DCH$ via the
 Connes--van~Suijlekom framework, not from a real-space discretisation.
 The structural mechanism (integer-spectrum generator forcing the
 $\sigma_{2\pi} = \mathrm{id}$ period closure) is morally analogous to
-the lattice realisations of Zhu et al., but the construction lives on
+the lattice realisations of Zhang et al., but the construction lives on
 the operator-system side of the metric-spectral-triple framework
 rather than on the lattice-Hamiltonian side of condensed-matter
 physics.
@@ -1768,7 +1773,7 @@ mixed Riemannian / Hardy-sector spectral triples. This is also open.
 
 \paragraph{Final remark on the M1 master Mellin engine identification.}
 The $2\pi$ in the modular period of the present construction is the
-same $2\pi$ that drives the Paper~38 propinquity rate
+same $2\pi$ that drives the Paper~38 state-space-GH rate
 $4/\pi = \Vol(S^2)/\pi^2$ via the M1 Hopf-base measure mechanism
 (Paper~32~\S~VIII case-exhaustion theorem). The present paper
 establishes this identification at the operator-system level, not
@@ -2033,8 +2038,7 @@ in Papers~38--40 for the Riemannian-side GH-convergence theorem is
 purely Riemannian as of May~2026.  Subsequent
 literature (Toyota~\cite{toyota2023}, Farsi--Latr\'emoli\`ere
 2024/2025~\cite{farsi_latremoliere2024, farsi_latremoliere2025},
-Hekkelman--McDonald 2024 a/b~\cite{hekkelman_mcdonald2024,
-hekkelman_mcdonald2024b}) covers only Riemannian / Hilbert-space
+Hekkelman--McDonald 2024 a/b~\cite{hekkelman_mcdonald2024b}) covers only Riemannian / Hilbert-space
 structures.  No published Lorentzian propinquity construction exists.
 
 \item Constructing a Lorentzian propinquity is the named Sprint L3
@@ -2197,7 +2201,7 @@ The present paper is part of an integrated NCG-research programme
 developed by the present author. We briefly note the principal
 cross-references for the reader's orientation.
 
-\paragraph{Paper~38 (\cite{paper38}, propinquity convergence on
+\paragraph{Paper~38 (\cite{paper38}, state-space GH convergence on
 $\sthree$).}
 The Latr\'emoli\`ere quantum Gromov--Hausdorff propinquity convergence
 of the truncated Camporesi--Higuchi spectral triples $\Tcal_{\nmax}$
@@ -2374,17 +2378,9 @@ J.~B.~Hartle and S.~W.~Hawking,
 
 \bibitem[Hekkelman(2022)]{hekkelman2022}
 E.~Hekkelman,
-\newblock \emph{Truncations of the circle and Connes' geometric
-formula},
-\newblock M.Sc.\ thesis, Radboud University, 2022;
-\newblock arXiv:2206.13744.
-
-\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
-E.~Hekkelman and E.~McDonald,
-\newblock \emph{Spectral truncations of $T^d$ and quantum metric
-geometry},
-\newblock J.~Noncommut.~Geom., to appear (2024);
-\newblock arXiv:2403.18619.
+\newblock \emph{Truncated geometry on the circle},
+\newblock Lett.~Math.~Phys.\ \textbf{112} (2022), 20;
+\newblock arXiv:2111.13865.
 
 \bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
 E.~Hekkelman and E.~McDonald,
@@ -2402,8 +2398,8 @@ arXiv:math/0108005.
 
 \bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
 F.~Latr\'emoli\`ere,
-\newblock \emph{The Gromov--Hausdorff propinquity},
-\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+\newblock \emph{The quantum Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{368} (2016), 365--411.
 
 \bibitem[Latr\'emoli\`ere(2017)]{latremoliere_metric_st_2017}
 F.~Latr\'emoli\`ere,
@@ -2483,8 +2479,8 @@ R.~Verch,
 curved spacetime manifolds in a generally covariant framework},
 \newblock Comm.~Math.~Phys. \textbf{223} (2001), 261--288.
 
-\bibitem[Zhu, Casini, \emph{et al.}(2020)]{zhu_casini2020}
-J.~Zhu, H.~Casini, M.~Dalmonte, and P.~Hauke,
+\bibitem[Zhang \emph{et al.}(2020)]{zhu_casini2020}
+J.~Zhang, P.~Calabrese, M.~Dalmonte, and M.~A.~Rajabpour,
 \newblock \emph{Lattice Bisognano--Wichmann modular Hamiltonian in
 critical quantum spin chains},
 \newblock SciPost Phys.~Core \textbf{2} (2020), 007;

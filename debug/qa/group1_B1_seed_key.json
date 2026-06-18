@@ -1,0 +1,59 @@
+{
+  "run": "group1 Bite B sub-bite 1 \u2014 Papers 42, 43, 44 + synthesis, 2026-06-17",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-B1",
+  "seeds": [
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex",
+      "detail": "~l.401 'Lorentzian propinquity extension remains open; no construction published' -> 'is established here (Thm) ... published in this paper'. REAL: OPEN (Paper 45 later proved degeneracy/retraction). Catcher: claims-reviewer p43."
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+      "detail": "connes_vs2021 bibitem arXiv:2004.14115 -> 2004.14511. REAL Connes-vS 2021 CMP 383 = arXiv:2004.14115. Catcher: citation-reviewer p44."
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_modular_hamiltonian.py",
+      "detail": "test_modular_periodicity_n_max_2_BW: assert verdict=='STRONG_IDENTIFICATION' -> verdict==verdict (tautology; headline sigma_2pi(O)=O falsifier tests nothing). Catcher: code-reviewer p42."
+    },
+    {
+      "id": "S-claims-C8",
+      "file": "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
+      "detail": "abstract 'literal identification at the operator-system level (Riemannian) at every finite cutoff' -> 'at the continuum level for both signatures' (drops Riemannian-only + finite-cutoff; Lorentzian is the OPEN follow-up). Catcher: claims-reviewer p42."
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "detail": "~l.860 inserted 'Papers 43-44 establish the quantitative-rate Lorentzian propinquity convergence theorem at finite cutoff'. REAL: 43/44 say OPEN; Paper 45 degeneracy. Catcher: synthesis claims-reviewer."
+    }
+  ],
+  "controls_must_not_flag_material": [
+    {
+      "id": "M1",
+      "file": "paper_43",
+      "claim": "l.445 'Lorentzian-propinquity continuum closure open' (honest)"
+    },
+    {
+      "id": "M2",
+      "file": "paper_42",
+      "claim": "abstract 'Lorentzian extension ... remains the named multi-month follow-up' (honest)"
+    },
+    {
+      "id": "M3",
+      "file": "paper_44",
+      "claim": "'continuum/GH-limit/Lorentzian-propinquity convergence is open. No published Lorentzian propinquity construction exists' (honest)"
+    },
+    {
+      "id": "M4",
+      "file": "paper_44",
+      "claim": "bizi_brouder_besnard2018 arXiv:1611.07062 (REAL, correct)"
+    },
+    {
+      "id": "M5",
+      "file": "paper_42",
+      "claim": "'literal identification at the operator-system level (Riemannian)' as the correct scoped claim (non-seeded instances)"
+    }
+  ],
+  "known_genuine_preexisting": "paper_43 + paper_44 both cite the FABRICATED hekkelman_mcdonald2024 ('Spectral truncations of T^d', arXiv:2403.18619 = OpenMP paper) \u2014 same defect removed from paper_40 in Bite A. Expect citation-reviewers to catch independently; NOT a seed."
+}

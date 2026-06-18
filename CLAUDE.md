@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.22.1 (June 17, 2026)
+**Version:** v4.23.0 (June 18, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`/qa group1` Bite B sub-bite 1 (P42/43/44+synth) FAIL→remediated (2026-06-18, v4.23.0):** calibrated 10-agent panel (5/5 sens, 5/5 spec); **two reviewer LARGE findings overturned by PM verification** (§9 reconcile) — p42 "derived finding false" (reviewer omitted the β factor; finding CORRECT) + §10 "descoped-zombie" (over-flag; genuine finite-cutoff Krein closure). Genuine fixes: 6 wrong-ID/fabricated cites (hekkelman_mcdonald2024 ×3, zhu_casini authors, latremoliere2018 ×3, devastato, …) + Paper-38 propinquity→state-space-GH labels + P39 zombie + synthesis P45 degeneracy framing; van den Dungen/Nieuviarts theorem-numbers verified GROUNDED. See CHANGELOG + debug/sprint_qa_group1_biteB1_memo.md.
 - **Resurrect-pruned rule + S⁵ gap (2026-06-17, v4.22.1):** new standing rule [[feedback_resurrect_pruned_artifacts]] (recover pruned backing from git history before concluding untested); first application caught a walked-past case — Paper 50 S⁵ F-theorem, where resurrecting `ads_track_a_s5` exposed a factor-4 scalar-multiplicity bug in the original memo (paper value correct, now tested bit-exact). See CHANGELOG.
 - **`/qa group1` Bite A (P40/50+synth) FAIL→remediated (2026-06-17, v4.22.0):** calibrated (4/4 sens, 5/5 spec); fixed 2 wrong-ID + 1 fabricated citation, paper_50 F-theorem false-positive backing → genuine ζ′(0) test (KPS 1e-82), 3 Lorentzian/propinquity zombies; P40 rank≥2 universality pruned-memo resurrected → fit-sensitive, calibrated to A-over-B + named gap. See CHANGELOG + debug/sprint_qa_group1_biteA_memo.md.
 - **`/qa group1` Paper 29 FAIL→fixed (2026-06-17, v4.21.3):** first group1 run (single-paper, token slow-roll); calibrated panel (4/4 sens, 4/4 spec); science sound; fixed a degree-arithmetic error (84→80), 2 C4 citation conflations (matsuura→JHEP, yakaboylu→H-P-Hamiltonian), the McKenzie initial, + added the S⁵-N3 closed-form end-to-end test. See CHANGELOG.

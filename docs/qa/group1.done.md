@@ -84,3 +84,18 @@ group1 paper restates them (C7).
   `test_paper40_universal_rate.py`. Seed key `group1_A_seed_key.json`, memo
   `debug/sprint_qa_group1_biteA_memo.md`. **Remaining: Bite B (39, 42–49, 52,
   53) — Lorentzian cluster, smaller sub-bites.**
+- 2026-06-18 — **Bite B sub-bite 1 (Papers 42, 43, 44 + synthesis) = FAIL →
+  REMEDIATED** (v4.23.0). 10-agent panel calibrated (sensitivity 5/5,
+  specificity 5/5). **Two reviewer LARGE findings OVERTURNED by PM verification**
+  (§9 reconcile): paper_42's "derived finding is false" (reviewer omitted the
+  β factor — D_W generator is 2π·D_W, does NOT close; finding CORRECT, no
+  reframe) + §10 "descoped-zombie" (over-flag — genuine finite-cutoff Krein
+  closure; fixed the stale intro disclaimer instead). Genuine fixes: 6 wrong-ID/
+  fabricated citations (hekkelman_mcdonald2024 fabricated ×3, hekkelman2022,
+  zhu_casini2020 authors, latremoliere2018 ×3, avery, devastato) + theorem-
+  number verification (van den Dungen Prop 4.1 + Nieuviarts Def 2.2 GROUNDED) +
+  Paper-38 propinquity→state-space-GH labels + P39 zombie title + synthesis
+  Paper-45 degeneracy framing + paper44 bibitem. All compile clean; C11/C13/C14
+  PASS. Seed key `group1_B1_seed_key.json`, memo
+  `debug/sprint_qa_group1_biteB1_memo.md`. **Remaining: sub-bite 2 (45–49),
+  sub-bite 3 (39, 52, 53).**

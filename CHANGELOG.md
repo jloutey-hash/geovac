@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.23.0] - 2026-06-18
+
+### Changed — `/qa group1` Bite B sub-bite 1 (Papers 42, 43, 44 + synthesis): FAIL remediated
+
+Bite B (Lorentzian cluster) as smaller sub-bites; sub-bite 1 = Papers 42 (four-witness modular), 43 (Lorentzian extension), 44 (BBB Krein operator-system) + synthesis. 10-agent panel (claims/citation/code ×3 + synthesis). **Calibrated** (sensitivity 5/5, specificity 5/5). **Verdict FAIL** — defect-rich Lorentzian cluster, remediated.
+
+**Headline: two reviewer LARGE findings OVERTURNED by PM verification (§9 reconcile rule).** (1) code-p42 claimed paper_42's "derived finding" (H_local=K_α/β because D_W "wouldn't close") is mathematically false — WRONG: verified against `geovac/modular_hamiltonian.py`, the modular generator is **β·H_local**, so H_local=D_W → generator 2π·D_W → σ_2π residual 3.58 (does NOT close); the reviewer tested K=D_W directly, omitting the β=2π factor. Finding is CORRECT — no reframe. (2) claims-p42 flagged §10 as a descoped-zombie — OVER-FLAG: §10 is the genuine *finite-cutoff Krein* period closure (backed by `test_modular_hamiltonian_lorentzian`), not the descoped propinquity convergence; fixed the stale intro disclaimer instead of descoping.
+
+**Genuine fixes (verified):** citations — `hekkelman_mcdonald2024` ("Spectral truncations of T^d") **fabricated** (arXiv:2403.18619 = an OpenMP paper), removed from 42/43/44 (tori → Leimbach–vS); `hekkelman2022` p42 (2206.13744 = Kerr-Melvin BH → 2111.13865); `zhu_casini2020` p42 **fabricated authors** → Zhang–Calabrese–Dalmonte–Rajabpour (+3 prose); `latremoliere2018` ×3 (→ "quantum" GH propinquity, Trans. AMS 368 (2016)); `avery_wen_avery2002` p44 title/initial; `devastato_lizzi_martinetti2018` p44 wrong-ID → "Lorentz signature and twisted spectral triples," Devastato–Farnsworth–Lizzi–Martinetti, JHEP 03(2018)089, arXiv:1710.04965; Connes-vS "Def 2.39" → honest §2.7 ref; p43 dangling `\cite{paper44}` bibitem added. **Theorem-number verification (PI-requested):** van den Dungen Prop 4.1 + Nieuviarts Def 2.2 GROUNDED vs primary PDFs. **Status/C7:** Paper-38 "propinquity" → "state-space GH" (p42 ×6); P39 zombie title synced; synthesis Paper-45 "convergence" → degeneracy framing; paper_42 intro/§10 reconcile. All 4 files compile errors=0; C11/C13/C14 PASS. Memo `debug/sprint_qa_group1_biteB1_memo.md`; seed key `debug/qa/group1_B1_seed_key.json`. **Remaining: sub-bite 2 (45–49), sub-bite 3 (39, 52, 53).**
+
 ## [4.22.1] - 2026-06-17
 
 ### Added — resurrect-pruned-artifacts rule + walked-past S⁵ F-theorem gap closed
