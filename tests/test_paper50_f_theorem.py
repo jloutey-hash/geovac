@@ -31,7 +31,9 @@ from geovac.qed_two_loop import (
     dirac_dirichlet_series_hurwitz,
     dirac_dirichlet_series_numerical,
     dirac_F_theorem,
+    dirac_F_theorem_s5,
     scalar_F_theorem,
+    scalar_F_theorem_s5,
 )
 
 mp.mp.dps = 60
@@ -136,3 +138,44 @@ def test_F_theorem_cross_product_consistency():
     COMPUTED F-values rather than literals."""
     cross = dirac_F_theorem() - 2 * scalar_F_theorem()
     assert abs(cross - 3 * mp.zeta(3) / (4 * mp.pi ** 2)) < mp.mpf(10) ** (-40)
+
+
+# ---------------------------------------------------------------------------
+# S^5 extension (Thms scalar_S5 + dirac_S5) -- closed during the v4.22.1
+# resurrection of the pruned ads_track_a_s5 driver, which surfaced a factor-4
+# multiplicity bug in the ORIGINAL scalar computation (deg=4 at n=0 vs the
+# correct standard S^5 harmonic count 1).  The PAPER value (deg 1,6,20) is
+# correct; these tests recompute from the framework S^5 spectrum and confirm it.
+# ---------------------------------------------------------------------------
+
+def _Fs_S5_kps() -> mp.mpf:
+    return -mp.log(2) / 128 - mp.zeta(3) / (128 * mp.pi ** 2) + 15 * mp.zeta(5) / (256 * mp.pi ** 4)
+
+
+def _FD_S5_paper() -> mp.mpf:
+    return -3 * mp.log(2) / 128 - 5 * mp.zeta(3) / (128 * mp.pi ** 2) - 15 * mp.zeta(5) / (256 * mp.pi ** 4)
+
+
+def test_s5_scalar_degeneracy_is_standard_harmonic_count():
+    """The framework S^5 conformal-scalar multiplicity is the standard S^5
+    harmonic count 1, 6, 20 at n=0,1,2 (prefactor 1/12, NOT the resurrected
+    driver's buggy 1/3 which gives 4 at n=0)."""
+    for n, expect in ((0, 1), (1, 6), (2, 20)):
+        assert (2 * n + 4) * (n + 1) * (n + 2) * (n + 3) // 24 == expect
+
+
+def test_s5_scalar_F_theorem_matches_paper_closed_form():
+    """F_s^{S5} computed from the S^5 spectrum equals the paper closed form
+    -log2/128 - zeta(3)/128pi^2 + 15 zeta(5)/256pi^4, and is decisively NOT the
+    4x-larger value the pruned memo reported (the resurrection finding)."""
+    F_s = scalar_F_theorem_s5()
+    assert abs(F_s - _Fs_S5_kps()) < mp.mpf(10) ** (-40)
+    memo_buggy = 4 * _Fs_S5_kps()          # the resurrected driver's 1/3 over-count
+    assert abs(F_s - memo_buggy) > mp.mpf(10) ** (-3)
+
+
+def test_s5_dirac_F_theorem_matches_paper_closed_form():
+    """D'(0)^{S5} from the Weyl-CH Dirac spectrum equals the paper closed form
+    (with the log-3 cancellation built in)."""
+    F_D = dirac_F_theorem_s5()
+    assert abs(F_D - _FD_S5_paper()) < mp.mpf(10) ** (-40)

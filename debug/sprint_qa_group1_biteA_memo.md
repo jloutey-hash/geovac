@@ -108,6 +108,28 @@ come from a specific 2-param fit + the generic→canonical Λ rescaling
 - **Deferred (PI-acknowledged):** the 443 debug/-citation corpus sweep (paper_40
   still cites `sp2_g2_rate_memo`/`su4_rate_memo` — advisory debug-refs).
 
+## 7. Follow-on (v4.22.1): resurrect-pruned rule + walked-past S⁵ gap
+
+PI direction: make "resurrect pruned artifacts for context before concluding"
+a standing rule (`memory/feedback_resurrect_pruned_artifacts.md`), and look back
+for a walked-past case.
+
+**Walked-past case found + closed:** Paper 50's **S⁵ F-theorem** (Thm scalar_S5
+/ dirac_S5). The Bite-A S³ test noted the `ads_track_a_s5` backing was pruned and
+left S⁵ untested. Resurrecting it surfaced a **factor-4 multiplicity bug in the
+original scalar memo** (prefactor 1/3 → degeneracy 4 at n=0; standard S⁵
+harmonic count is 1). **The paper value is correct** (1/12, deg 1,6,20) —
+recomputed bit-exact: F_s^{S⁵} = −log2/128 − ζ(3)/128π² + 15ζ(5)/256π⁴;
+D′(0)^{S⁵} verified |diff|~1e-52 (Dirac memo + paper agree). New
+`qed_two_loop.{scalar,dirac}_F_theorem_s5` + S⁵ block in
+`test_paper50_f_theorem.py` (11 tests total). No paper edit (values already
+correct). S⁷ negative-finding memo also recovered → S⁷ catalogue-row NIT
+available for the next pass.
+
+**Lesson:** the rule's first application immediately caught a real (latent) bug
++ confirmed the paper over a buggy pruned source — exactly the "back /
+calibrate-with-evidence / build-fresh-from-original" payoff.
+
 ## 6. Next
 Bite B (PI: smaller sub-bites) — Lorentzian cluster 39, 42–49, 52, 53
 (C14-heavy). Suggested: 42–44, then 45–49, then 39/52/53.

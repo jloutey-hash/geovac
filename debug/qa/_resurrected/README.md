@@ -13,3 +13,18 @@ generic->canonical Lambda rescaling.  What is ROBUST is the A-over-B
 discrimination (G2: c_can ~ 1.1-1.8 << Reading-B 24/pi^2 = 2.432) and the
 machinery correctness (Haar = 1.0).  Paper 40 prose calibrated accordingly;
 backing test `tests/test_paper40_universal_rate.py`.
+
+## S⁵ F-theorem recovery (v4.22.1 — first application of the resurrect-pruned rule)
+
+Resurrected `ads_track_a_s5_{scalar,dirac}_partition_function.py` + memos to
+back Paper 50's S⁵ F-theorem (Thm scalar_S5 / dirac_S5), which the Bite-A S³
+test had walked past (S⁵ scripts noted pruned, left untested).
+
+**Finding:** the recovered *scalar* memo had a **factor-4 multiplicity bug**
+(prefactor 1/3 → degeneracy 4 at n=0; the standard S⁵ harmonic count is 1).
+The **paper value is correct** (prefactor 1/12, deg 1,6,20) — independently
+recomputed bit-exact: F_s^{S⁵} = −log2/128 − ζ(3)/128π² + 15ζ(5)/256π⁴.
+The Dirac memo + paper agree (both 1/12; D'(0)^{S⁵} verified |diff|~1e-52).
+Backing: `tests/test_paper50_f_theorem.py` (S⁵ block) +
+`qed_two_loop.{scalar,dirac}_F_theorem_s5`. (S⁷ negative-finding memo also
+recovered — the S⁷ catalogue-row NIT is available for the next pass.)

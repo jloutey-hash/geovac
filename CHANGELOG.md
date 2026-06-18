@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.22.1] - 2026-06-17
+
+### Added — resurrect-pruned-artifacts rule + walked-past S⁵ F-theorem gap closed
+
+New standing rule `memory/feedback_resurrect_pruned_artifacts.md` (PI direction): when a claim's backing is a pruned/deleted/archived artifact, **resurrect it from git history for context BEFORE concluding "untested / calibrate-down"** — the recovered computation either backs the claim, reveals fragility (calibrate with evidence), or supplies the original derivation for a non-circular fresh test. Dual of `no_dead_end_memories` / `validate_before_reducing`.
+
+**First application (lookback found a walked-past case):** Paper 50's S⁵ F-theorem (Thm scalar_S5 / dirac_S5). The v4.22.0 S³ test had noted the `ads_track_a_s5` backing was pruned and left S⁵ untested. Resurrecting it (`debug/qa/_resurrected/`) surfaced a **factor-4 multiplicity bug in the original scalar memo** (prefactor 1/3 → degeneracy 4 at n=0; the standard S⁵ harmonic count is 1). **The paper value is correct** (1/12, deg 1,6,20) — recomputed bit-exact from the framework S⁵ spectrum: F_s^{S⁵} = −log2/128 − ζ(3)/128π² + 15ζ(5)/256π⁴; D′(0)^{S⁵} verified (|diff|~1e-52). New `qed_two_loop.{scalar,dirac}_F_theorem_s5` + S⁵ block in `tests/test_paper50_f_theorem.py` (11 tests). No paper edit (values already correct). S⁷ negative-finding memo also recovered (S⁷ catalogue-row NIT queued).
+
 ## [4.22.0] - 2026-06-17
 
 ### Changed — `/qa group1` Bite A (Papers 40, 50 + synthesis): FAIL remediated

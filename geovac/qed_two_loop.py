@@ -74,6 +74,8 @@ __all__ = [
     "dirac_F_theorem",
     "conformal_scalar_zeta_s3",
     "scalar_F_theorem",
+    "scalar_F_theorem_s5",
+    "dirac_F_theorem_s5",
 ]
 
 
@@ -161,6 +163,50 @@ def scalar_F_theorem() -> mpmath.mpf:
                                    * mpmath.zeta(2 * int(k) - 2)),
                         [1, mpmath.inf]))
     return -zeta_prime_0 / 2
+
+
+def scalar_F_theorem_s5() -> mpmath.mpf:
+    """F_s on round unit S^5 for the conformally coupled scalar.
+
+    Spectrum: eigenvalue (n+3/2)(n+5/2) = v^2 - 1/4 (v = n+2), degeneracy
+    (2n+4)(n+1)(n+2)(n+3)/24 = v^2(v^2-1)/12 (the standard S^5 harmonic count
+    1, 6, 20, ... at n = 0, 1, 2).  The everywhere-meromorphic continuation is
+
+        zeta_S5(s) = (1/12) sum_{k>=0} poch(s,k)/k! 4^{-k}
+                     [zeta_R(2s+2k-4) - zeta_R(2s+2k-2)],
+
+    so F_s = -1/2 zeta'(0) = -log2/128 - zeta(3)/(128 pi^2) + 15 zeta(5)/(256 pi^4).
+
+    NOTE: the *original* sprint driver (debug/qa/_resurrected/ads_track_a_s5_*)
+    used the prefactor 1/3 (degeneracy v^2(v^2-1)/3 = 4x over-count, deg=4 at
+    n=0) and reported F_s ~ -0.0230 -- a factor-4 bug surfaced by resurrecting
+    the pruned computation (v4.22.1); the value below (deg 1,6,20) is correct.
+    """
+    k0 = 2 * mpmath.zeta(-4, 1, 1) - 2 * mpmath.zeta(-2, 1, 1)
+    tail = mpmath.nsum(
+        lambda k: (mpmath.mpf(1) / int(k) * mpmath.mpf(4) ** (-int(k))
+                   * (mpmath.zeta(2 * int(k) - 4) - mpmath.zeta(2 * int(k) - 2))),
+        [1, mpmath.inf])
+    zeta_prime_0 = (k0 + tail) / 12
+    return -zeta_prime_0 / 2
+
+
+def dirac_F_theorem_s5() -> mpmath.mpf:
+    """F_D = D'(0) on round unit S^5 for the Weyl Camporesi-Higuchi Dirac.
+
+    Spectrum: |lambda_n| = n+5/2, degeneracy (n+1)(n+2)(n+3)(n+4)/12 =
+    (u^2-9/4)(u^2-1/4)/12 (u = n+5/2; deg 2, 10, ... at n = 0, 1).  Hence
+
+        D(s) = (1/12)[zeta(s-4,5/2) - (5/2) zeta(s-2,5/2) + (9/16) zeta(s,5/2)],
+
+    and D'(0) = -3 log2/128 - 5 zeta(3)/(128 pi^2) - 15 zeta(5)/(256 pi^4)
+    (the log 3 from the half-integer Hurwitz shift cancels via the (1,-5/2,9/16)
+    multiplicity coefficients -- Paper 50 log-3 cancellation theorem).
+    """
+    a = mpmath.mpf(5) / 2
+    return (mpmath.zeta(-4, a, 1)
+            - mpmath.mpf(5) / 2 * mpmath.zeta(-2, a, 1)
+            + mpmath.mpf(9) / 16 * mpmath.zeta(0, a, 1)) / 12
 
 
 # ---------------------------------------------------------------------------
