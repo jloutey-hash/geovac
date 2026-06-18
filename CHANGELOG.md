@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.21.3] - 2026-06-17
+
+### Changed — `/qa group1` Paper 29 (single-paper cert): FAIL remediated
+
+First group1 `/qa` run (PI-scoped to one paper, token slow-roll): **Paper 29 (The GeoVac Hopf Graphs Are Ramanujan)**, dimensions = deterministic + code + claims + citation (synthesis excluded — single paper). Calibrated panel (sensitivity 4/4: S-claims C8 overclaim, S-citation C4 fabricated theorem-number, S-code `p−p` tautology, S-deterministic C13 stale-ref all caught; specificity 4/4: controls held). **Verdict FAIL** (soft) — the headline science is sound (the finite-size Ramanujan result is honestly stated in the body, bound *crossed* at modest sizes; algebraicity/π-free, Z₂-block factorization, Selberg-scope-boundary all verified), but genuine SMALL defects, now fixed:
+
+- **Degree arithmetic** (§5.3 / abstract): "12+22=34 non-trivial + 2·23=46 trivial recover the total degree 2|E|=84" — but 34+46=**80**. Corrected: the Ihara polynomial degree is 80; 2|E|=84 is the Hashimoto matrix size, the 4-gap being zeros at s=∞ from the degree-1 leaves.
+- **Citation C4** (the high-priority group1 criterion): `matsuura2025` fused two Matsuura–Ohta papers (the cited PTEP 2025 063B01 belongs to a different paper; arXiv:2204.06424 = JHEP 09(2022)178) → corrected to JHEP 09(2022)178. `yakaboylu2024` had a title/venue/arXiv three-way mismatch → aligned to J. Phys. A 57, 235204 (2024) / arXiv:2309.00405 "Hamiltonian for the Hilbert–Pólya conjecture." `hmy2024` "B. McKenzie" → "T. McKenzie."
+- **Coverage gap closed:** added `tests/test_ihara_zeta.py::test_s5_N3_zeta_matches_paper_closed_form` (slow) — builds the S⁵ N=3 graph, computes the Ihara–Bass inverse zeta, and asserts the published P₁₂/P₂₂ are exact factors with total degree 80 and cofactor (s²−1)²³ (previously checked only to series order s⁶ + via hardcoded polys; a P₁₂/P₂₂ typo is now caught).
+
+Verification: paper_29 compiles `-halt-on-error` exit 0; the new test + `test_galois_ihara.py` green; C11/C12/C13/C14 `--gate group1` PASS for paper_29. Calibration answer key: `debug/qa/group1_seed_key.json`.
+
 ## [4.21.2] - 2026-06-17
 
 ### Changed — `debug/`-citation policy adopted (papers cite the permanent record)

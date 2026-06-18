@@ -63,3 +63,12 @@ group1 paper restates them (C7).
   target). Adds C14 (descope/partial status); flags C4 high-priority. Scope
   excludes trunk-certified 32/38. **Awaiting PI freeze** (sequenced after group3
   bite 2).
+- 2026-06-17 — **Paper 29 (single-paper bite) = FAIL → FIXED** (v4.21.3).
+  PI-scoped to one paper (token slow-roll); dimensions deterministic + code +
+  claims + citation (synthesis excluded, single paper). Calibrated panel
+  (sensitivity 4/4, specificity 4/4). Science sound; fixed a degree-arithmetic
+  error (84→80), two C4 citation conflations (matsuura → JHEP 09(2022)178,
+  yakaboylu → H-P-Hamiltonian arXiv:2309.00405), the McKenzie initial, + closed
+  the S⁵-N3 closed-form coverage gap (new `test_s5_N3_zeta_matches_paper_closed_form`).
+  Seed key `debug/qa/group1_seed_key.json`. **Remaining group1 papers (39, 40,
+  42–53 + synthesis) pending.**

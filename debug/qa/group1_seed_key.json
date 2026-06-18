@@ -1,0 +1,17 @@
+{
+  "run": "group1 single-paper cert — Paper 29 (Ramanujan-Hopf), 2026-06-17 (token slow-roll)",
+  "worktree": "../geovac-qa-seed-group1 (HEAD 98b0082 / v4.21.2)",
+  "scope": "ONE paper: paper_29_ramanujan_hopf.tex. Dimensions exercised: deterministic (C10-C14) + code (C1-C2, paper 29 has tests) + claims (C3/C5/C6/C7/C8/C14) + citation (C4). Synthesis (C9) EXCLUDED (single paper). C12 vacuous (no K in paper 29); C11 has no parseable GeoVac cite in paper 29 (all \\emph format) so the deterministic seed is C13.",
+  "seeds": [
+    {"id": "S-claims", "class": "C8 headline overclaim (drop the honest finite-size negative)", "file": "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex", "loc": "abstract result (1), ~l.38-43: 'confirms the Kotani-Sunada bound holds strictly at every tested size; the GeoVac Hopf graphs are therefore asymptotically Ramanujan, establishing a graph-RH for the framework at all sizes' (REAL: the bound is CROSSED at modest sizes; graph-RH is a FINITE-SIZE statement, not asymptotic)", "expected_catcher": "claims-reviewer (paper 29, C8)"},
+    {"id": "S-citation", "class": "C4 nonexistent theorem number (the group1 high-priority failure mode)", "file": "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex", "loc": "~l.583: 'Kotani-Sunada Theorem 4.2' supplies the Xi-completion for the irregular case (real cite: Kotani-Sunada 2000, J. Math. Sci. Univ. Tokyo 7, 7; the attributed result is its Theorem 1.3, not 4.2)", "expected_catcher": "citation-reviewer (paper 29, C4)"},
+    {"id": "S-code", "class": "circular/tautological test", "file": "tests/test_galois_ihara.py", "loc": "test_s2_minus_s_plus_1_is_phi_6: assert sp.simplify(p - p) == 0 (was p - cyclotomic_poly(6,s)); now asserts p==p, not p==Phi_6", "expected_catcher": "code-reviewer (paper 29)"},
+    {"id": "S-deterministic", "class": "C13 stale test reference", "file": "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex", "loc": "~l.975: cites tests/test_ihara_zeta_galois.py (nonexistent; real is tests/test_ihara_zeta.py)", "expected_catcher": "deterministic check_paper_test_refs", "precheck": "CAUGHT (C13 --gate group1 GATED MISSING FAIL)"}
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "file": "paper_29", "claim": "result (2): algebraicity of zeros — every zeta_G(s)^-1 factors into integer-coefficient polynomials; no transcendental (pi, zeta(2), zeta(3)) in the zero set", "why_correct": "the paper's genuine measured result; backed by test_galois_ihara/test_ihara_zeta"},
+    {"id": "M2", "file": "paper_29", "claim": "result (4): scope boundary — Selberg-on-hydrogen structurally closed (Wick rotation S3->H3 yields no natural discrete quotient); Ihara->classical-zeta bridge blocked by bipartiteness", "why_correct": "honest negative result, must NOT be flagged as overclaim"},
+    {"id": "M3", "file": "paper_29", "claim": "external cite lps1988 = Lubotzky-Phillips-Sarnak, 'Ramanujan graphs', Combinatorica 8, 261 (1988)", "why_correct": "correct classical citation"},
+    {"id": "M4", "file": "paper_29", "claim": "result (3): the S5 N_max=3 zeta 12+22 dichotomy = the Z2 m_l->-m_l block decomposition of the Ihara-Bass matrix (the only sub-action of the Hopf U(1) commuting with a real integer adjacency)", "why_correct": "genuine structural factorization finding"}
+  ]
+}

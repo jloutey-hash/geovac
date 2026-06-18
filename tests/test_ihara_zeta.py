@@ -241,3 +241,32 @@ def test_functional_equation_irregular_flags_graph_rh_regime(s5_graphs):
     assert rep["regular"] is False
     assert "q_max" in rep and "q_min" in rep
     assert rep["q_max"] > rep["q_min"]
+
+
+@pytest.mark.slow
+def test_s5_N3_zeta_matches_paper_closed_form(s5_graphs):
+    """End-to-end (Paper 29, sec:closed_forms): the S^5 N_max=3 Ihara zeta
+    inverse factors EXACTLY as the published (s^2-1)^23 * P12(s) * P22(s)
+    (total degree 80), not merely to series order s^6.  Closes the closed-form
+    coverage gap (a typo in the published P12/P22 would now be caught) and pins
+    the corrected degree bookkeeping: the Hashimoto matrix has size 2|E|=84;
+    the 4 missing degrees are zeros at s=infinity from the degree-1 leaves."""
+    s = sp.symbols("s")
+    zeta = ihara_zeta_bass(s5_graphs[3], symbolic=True)
+    _, zinv = sp.fraction(sp.together(zeta))          # zeta = 1 / zinv
+    zinv = sp.expand(zinv)
+
+    P12 = 432*s**12 + 666*s**10 + 374*s**8 + 135*s**6 + 47*s**4 + 11*s**2 + 1
+    P22 = (829440*s**22 + 2453184*s**20 + 3308104*s**18 + 2696682*s**16
+           + 1470640*s**14 + 557227*s**12 + 146654*s**10 + 25709*s**8
+           + 2630*s**6 + 79*s**4 - 12*s**2 - 1)
+
+    # Published P12, P22 are EXACT factors of the graph-derived inverse zeta:
+    assert sp.rem(zinv, P12, s) == 0, "published P12 is not an exact factor"
+    assert sp.rem(zinv, P22, s) == 0, "published P22 is not an exact factor"
+    # Total degree is 80 (NOT the Hashimoto matrix size 84):
+    assert sp.Poly(zinv, s).degree() == 80
+    # Cofactor is (s^2-1)^23 up to overall sign (the 46 trivial zeros s=+-1):
+    cof = sp.cancel(zinv / (P12 * P22))
+    assert (sp.expand(cof - (s**2 - 1)**23) == 0
+            or sp.expand(cof + (s**2 - 1)**23) == 0), "cofactor != (s^2-1)^23"
