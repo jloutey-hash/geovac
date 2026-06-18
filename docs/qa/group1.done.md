@@ -70,5 +70,17 @@ group1 paper restates them (C7).
   error (84→80), two C4 citation conflations (matsuura → JHEP 09(2022)178,
   yakaboylu → H-P-Hamiltonian arXiv:2309.00405), the McKenzie initial, + closed
   the S⁵-N3 closed-form coverage gap (new `test_s5_N3_zeta_matches_paper_closed_form`).
-  Seed key `debug/qa/group1_seed_key.json`. **Remaining group1 papers (39, 40,
-  42–53 + synthesis) pending.**
+  Seed key `debug/qa/group1_seed_key.json`.
+- 2026-06-17 — **Bite A (Papers 40, 50 + synthesis) = FAIL → REMEDIATED**
+  (v4.22.0). Calibrated panel (sensitivity 4/4, specificity 5/5). Genuine
+  defects fixed: 2 wrong-ID + 1 fabricated citation (beccaria→1406.3542,
+  hartman→1807.11401, hekkelman-T^d removed→Leimbach-vS); paper_50 F-theorem
+  false-positive backing → genuine `test_paper50_f_theorem.py` (ζ′(0) from
+  framework spectrum → KPS 1e-82); 3 synthesis/paper-50 Lorentzian/propinquity
+  zombies; predictive-CFT + over-rigor calibration. **Paper 40 rank≥2
+  universality**: pruned `l2_universal_rate_memo` resurrected from git history
+  → genuine computation but **fit-sensitive** extraction; calibrated to rank-1
+  rigorous + rank≥2 A-over-B robust (named gap), backing
+  `test_paper40_universal_rate.py`. Seed key `group1_A_seed_key.json`, memo
+  `debug/sprint_qa_group1_biteA_memo.md`. **Remaining: Bite B (39, 42–49, 52,
+  53) — Lorentzian cluster, smaller sub-bites.**

@@ -160,9 +160,9 @@ at what rate.
 
 The flat-structure case was worked out in several papers between 2022
 and 2024. Hekkelman~\cite{hekkelman2022} treated the circle $S^1$ using
-Toeplitz/Fej\'er reconstruction. Hekkelman and
-McDonald~\cite{hekkelman_mcdonald2024} extended the analysis to flat
-tori $T^d$. Leimbach and van~Suijlekom~\cite{leimbach_vs2024} proved
+Toeplitz/Fej\'er reconstruction. Leimbach and
+van~Suijlekom~\cite{leimbach_vs2024} extended the analysis to flat
+tori $T^d$, proving
 Latr\'emoli\`ere propinquity convergence of truncated tori with
 explicit rate $O(1/\Lammax)$, using the standard Schur multiplier
 characterisation of the abelian-compact-group Fej\'er mechanism. A
@@ -248,17 +248,24 @@ and confirm the same verdict; see~\S\ref{sec:universal} for details.}.
 The universality is therefore not an artifact of $\SU(2)$ but a
 class-wide property of compact Lie groups with bi-invariant metric.
 
-Subsequent to the first draft of this paper, an analytical proof of
-universality has been completed (sprint L2-universal-proof, 2026-05-15)
-via a Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
-theorem, upgrading the result from numerical verification to a
-rigorous theorem at the same rigor level as Paper~38 Appendix~A. The
-detailed bookkeeping is documented in companion
-memo~\cite{l2_universal_rate_memo}. The exposition below in
-\S\ref{sec:L2} includes the analytical statement
-(Theorem~\ref{thm:universal_constant_analytical}) and proof sketch
-alongside the numerical verification on $\SU(2), \SU(3), \Sp(2), G_2$
-and an additional rank-$3$ datapoint on $\SU(4)$. In parallel, the
+The universality of $4/\pi$ is rigorous at rank~$1$ ($\SU(2)$:\
+Paper~38~\cite{paper38}, with the closed-form sum-rule of \S\ref{sec:L2}
+verified to $4/\pi$ by the doubling estimator in
+\texttt{geovac/central\_fejer\_su2.py}). For general $G$ the
+Plancherel-weight $\times$ Vandermonde-Jacobian cancellation theorem
+(Theorem~\ref{thm:universal_constant_analytical}) supplies the
+\emph{mechanism} as a proof sketch (\S\ref{sec:L2}), confirmed
+numerically at ranks~$1$--$2$ by direct Weyl integration
+($\SU(2), \SU(3), \Sp(2), G_2$; backing test
+\texttt{tests/test\_paper40\_universal\_rate.py}), with an additional
+rank-$3$ datapoint on $\SU(4)$. The numerical leading-constant
+extraction is \emph{fit-sensitive} --- the raw Stein--Weiss constant
+scatters with the fit order and the $\min L$ cut --- so what is
+\emph{robust} is the discrimination of Reading~A ($c = 4/\pi$) from
+the Weyl-formula Reading~B ($c = 2|W|/\pi^r$), decisive at $G_2$
+(extracted $c$ near $4/\pi \approx 1.27$, far from
+$24/\pi^2 \approx 2.43$). A fully rank-uniform analytical proof is a
+named gap. In parallel, the
 Lipschitz comparison constant $C_3(G) = 1$ has been rigorously
 established as asymptotic-tight at all ranks via the
 Parthasarathy--Ranga Rao--Varadarajan summand bound for the asymptotic
@@ -564,17 +571,18 @@ mass-concentration moment to a class-wide universal asymptotic
 $4/\pi \cdot \log \Lammax/\Lammax$.
 
 \paragraph{Status of the universality result.} The asymptotic
-universality of $4/\pi$ was originally established as a numerical
-observation across $\SU(3)$, $\Sp(2)$, and $G_2$
-(Theorem~\ref{thm:universal_constant} below). Subsequent to the first
-draft, an analytical proof has been completed via a
+universality of $4/\pi$ is \emph{rigorous at rank~$1$}
+($\SU(2)$, Paper~38) and \emph{numerically established} across
+$\SU(3)$, $\Sp(2)$, $G_2$ (and a rank-$3$ datapoint $\SU(4)$);
+Theorem~\ref{thm:universal_constant} below. For general $G$ the
 \emph{Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
-theorem} (Theorem~\ref{thm:universal_constant_analytical} below;
-companion memo~\cite{l2_universal_rate_memo}), upgrading the result
-from class-wide numerical verification to a rigorous theorem at the
-same rigor level as Paper~38 Appendix~A. The numerical verification on
-$\SU(3)$, $\Sp(2)$, $G_2$, and now $\SU(4)$ is retained as
-confirmatory.
+theorem} (Theorem~\ref{thm:universal_constant_analytical} below)
+supplies the \emph{mechanism} as a proof sketch; a fully rank-uniform
+analytical proof at the rigor level of Paper~38 Appendix~A is a named
+gap. The numerical extraction is fit-sensitive, so the robust content
+at rank~$\ge 2$ is the discrimination of Reading~A ($4/\pi$) from the
+Weyl-formula Reading~B (decisive at $G_2$); see the backing test
+\texttt{tests/test\_paper40\_universal\_rate.py}.
 
 \begin{definition}[Central spectral Fej\'er kernel]\label{def:central_fejer_general}
 For $\Lammax > 0$, define
@@ -767,10 +775,12 @@ Definition~\ref{def:central_fejer_general} satisfies
 with the leading coefficient $4/\pi$ universal across all $G$.
 \end{theorem}
 
-\begin{proof}[Proof sketch; detailed bookkeeping
-in~\cite{l2_universal_rate_memo}]
-The proof proceeds in three steps, matching the rigor level of
-Paper~38 Appendix~A.
+\begin{proof}[Proof sketch (mechanism; a fully rank-uniform
+write-up is a named gap)]
+The argument proceeds in three steps; at rank~$1$ it reduces to the
+rigorous Paper~38 Appendix~A computation, and at rank~$\ge 2$ it is
+given here at sketch level (the detailed Abel--Plana bookkeeping is
+not reproduced).
 
 \textbf{Step 1 (closed-form sum-rule).} Substituting
 Definition~\ref{def:central_fejer_general} into
@@ -817,10 +827,12 @@ $\sum_{d \text{ odd}} 1/d^2 = \pi^2/8$.
 
 The detailed Abel--Plana bookkeeping required to convert the
 leading-order asymptotic into a uniform $O(1/\Lammax)$ remainder is
-standard but tedious at general rank; it is documented in
-\S\S 4--8 of~\cite{l2_universal_rate_memo}. The rigor level matches
-the corresponding rank-$1$ Stein--Weiss analysis in Paper~38
-Appendix~A.
+standard but tedious at general rank; carrying it out to the rigor
+level of the rank-$1$ Stein--Weiss analysis in Paper~38 Appendix~A,
+uniformly in rank, is a named gap. At rank~$\ge 2$ the cancellation
+is corroborated numerically (recovered Weyl-integration drivers, see
+the backing test); the extraction is fit-sensitive, so the robust
+conclusion is Reading~A over Reading~B rather than the exact value.
 \end{proof}
 
 \paragraph{Numerical confirmation.} The analytical universality
@@ -1872,10 +1884,11 @@ $G_2$, $14.6\%$ for $\Sp(2)$, vs $51.6\%$ and $32.9\%$ for Reading B).
 \subsection{Why universality is structurally forced: the Plancherel
 $\times$ Vandermonde cancellation}\label{sec:why_universal}
 
-Universality is not coincidental. It is forced by the following
-cancellation theorem, which is now established at the rigor level of
-Paper~38 Appendix~A (Theorem~\ref{thm:universal_constant_analytical}
-above; detailed bookkeeping in~\cite{l2_universal_rate_memo}).
+Universality is not coincidental. The following cancellation theorem
+(Theorem~\ref{thm:universal_constant_analytical} above) is the
+proposed mechanism --- rigorous at rank~$1$ (Paper~38 Appendix~A) and
+given as a proof sketch at rank~$\ge 2$, where it is corroborated
+numerically (the fully rank-uniform write-up is a named gap).
 
 The central spectral Fej\'er kernel is built with Plancherel weights
 $\sqrt{\dim V_\pi}$ by definition of the Bo\.zejko--Fendler central
@@ -2209,14 +2222,7 @@ E.~Hekkelman,
 \newblock Lett.~Math.~Phys. \textbf{112} (2022), 20;
 \newblock arXiv:2111.13865.
 
-\bibitem[Hekkelman \& McDonald(2024a)]{hekkelman_mcdonald2024}
-E.~Hekkelman and E.~McDonald,
-\newblock \emph{Spectral truncations of $T^d$ and quantum metric
-geometry},
-\newblock J.~Noncommut.~Geom., to appear (2024);
-\newblock arXiv:2403.18619.
-
-\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024b}
 E.~Hekkelman and E.~McDonald,
 \newblock \emph{A noncommutative integral on spectrally truncated
 spectral triples, and a link with quantum ergodicity},
@@ -2307,8 +2313,8 @@ Camporesi--Higuchi spectral triples on $S^3$},
 
 \bibitem[Loutey, Paper~39(2026)]{paper39}
 J.~Loutey,
-\newblock \emph{Tensor-product propinquity convergence of metric
-spectral triples on $S^3$ at distinct focal lengths},
+\newblock \emph{State-space Gromov--Hausdorff convergence of truncated
+tensor-product Camporesi--Higuchi spectral triples on $S^3 \times S^3$},
 \newblock GeoVac internal preprint (May 2026), DOI via Zenodo.
 
 \bibitem[Loutey, internal memo (unified GH scoping)]{unified_gh_scoping_memo}
@@ -2328,14 +2334,6 @@ J.~Loutey,
 \newblock \emph{Dirac-triangle inequality: full proof with PRV-summand
 bound at all ranks}
 (\texttt{debug/dirac\_triangle\_full\_proof.md}),
-\newblock GeoVac internal working note (May 2026).
-
-\bibitem[Loutey, internal memo (L2 universal rate)]{l2_universal_rate_memo}
-J.~Loutey,
-\newblock \emph{Analytical proof of the universal $4/\pi$ rate constant
-via the Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
-theorem}
-(\texttt{debug/l2\_universal\_rate\_proof.md}),
 \newblock GeoVac internal working note (May 2026).
 
 \bibitem[Loutey, internal memo (SU(4) rate constant)]{su4_rate_memo}

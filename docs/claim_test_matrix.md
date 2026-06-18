@@ -99,3 +99,13 @@ _Pre-populated during the group3 sweep where a finding spilled into a future bra
 | Paper | Claim | Backing test | Code module | Status | Verdict |
 |---|---|---|---|---|---|
 | 8 | Thm 1 σ-bond selection rules: D²_(1,0),(1,0)(γ)≡1 (transparent mode), D²_(0,0),(1,0)(γ)≡0 (no s–p mixing) | `test_paper8_sigma_bond_selection.py` (10k-pt grid <1e-14 + closed forms) | `wigner_so4.py::wigner_D_so4` | BACKED-SOUND | machine-precision on the paper's grid + matches in-paper cos²+sin² / antisym closed forms. Replaces stale `debug/test_harmonic_phase_lock.py` cite (archived dead-end probe) |
+
+## Group 1 (operator algebras / NCG) — Bite A (Papers 40, 50, 2026-06-17, v4.21.x `/qa group1`)
+
+Calibrated panel (sensitivity 4/4, specificity 5/5). Two code gaps the Bite-A `code-reviewer` found were fixed with **genuine** tests (the prior "backing" was a false-positive / hardcoded literal).
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 50 | F-theorem: F_s = −½ζ′(0) and F_D = ζ′(0) on S³ reproduce KPS (log2/8−3ζ(3)/16π², log2/4+3ζ(3)/8π²) bit-exactly | `test_paper50_f_theorem.py` (8 tests) | `qed_two_loop.py::{scalar_F_theorem,dirac_F_theorem,conformal_scalar_zeta_s3}` | BACKED-SOUND | **was FALSE-POSITIVE** — only prior coverage was the literal cross-product in `test_paper55` (typed-in F-values, never computed). New test computes ζ′(0) from the framework S³ spectrum → KPS to 1e-82; two independent methods + spectrum-tie cross-checks |
+| 40 | SU(2) rank-1 rate constant = 4/π | `test_paper40_universal_rate.py::test_su2_rate_constant_is_4_over_pi` + `test_central_fejer_su2.py` | `central_fejer_su2.py` | BACKED-SOUND | doubling estimator → 4/π (rigorous rank-1; Paper 38 keystone) |
+| 40 | Universality at rank ≥ 2 (4/π for SU(3)/Sp(2)/G₂) | `test_paper40_universal_rate.py` (slow: Haar=1.0 + G₂ A-over-B) | recovered drivers `debug/qa/_resurrected/` | BACKED-WEAK | **calibrated** — exact 4/π extraction is FIT-SENSITIVE (raw Stein–Weiss const scatters with fit order/min-L cut; clean table values are fit-selected). Robust content tested: machinery correct (Haar=1.0) + G₂ extracted c ≪ Reading-B (24/π²), closer to A=4/π. Full rank-uniform proof = **named gap**; pruned `l2_universal_rate_memo` overclaim removed from prose |

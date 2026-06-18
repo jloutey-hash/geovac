@@ -71,6 +71,9 @@ __all__ = [
     "two_loop_vacuum_polarization_s3",
     "flat_space_limit_check",
     "classify_two_loop_transcendentals",
+    "dirac_F_theorem",
+    "conformal_scalar_zeta_s3",
+    "scalar_F_theorem",
 ]
 
 
@@ -86,6 +89,78 @@ def _lambda_n(n: int) -> mpmath.mpf:
 def _g_n_dirac(n: int) -> mpmath.mpf:
     """Full Dirac degeneracy g_n = 2(n+1)(n+2)."""
     return mpmath.mpf(2) * (n + 1) * (n + 2)
+
+
+# ---------------------------------------------------------------------------
+# F-theorem free energies F = -1/2 zeta'(0) on S^3 (Paper 50, Thm 3.4)
+# ---------------------------------------------------------------------------
+#
+# The S^3 spectral zeta zeta'(0) is the analytic continuation of the GeoVac
+# S^3 spectrum to the functional-determinant point s=0; the Klebanov-Pufu-Safdi
+# (2011) continuum free energies F_s, F_D are reproduced bit-exactly.  These
+# functions COMPUTE F from the framework spectrum (degeneracy + eigenvalue), so
+# a wrong spectrum is caught -- distinct from quoting the KPS literals.
+
+
+def dirac_F_theorem() -> mpmath.mpf:
+    """F_D = zeta'_Dirac(0) for the S^3 Dirac operator (Camporesi-Higuchi).
+
+    The Dirac spectral zeta D(s) = sum_{n>=0} 2(n+1)(n+2) (n+3/2)^{-s} has the
+    exact Hurwitz form D(s) = 2*zeta(s-2, 3/2) - (1/2)*zeta(s, 3/2) (same
+    representation as :func:`dirac_dirichlet_series_hurwitz`, valid for all s by
+    analytic continuation).  Hence
+
+        F_D = D'(0) = 2*zeta'(-2, 3/2) - (1/2)*zeta'(0, 3/2),
+
+    which equals the KPS value log(2)/4 + 3*zeta(3)/(8*pi^2) bit-exactly.
+    """
+    return (2 * mpmath.zeta(-2, mpmath.mpf(3) / 2, 1)
+            - mpmath.mpf(1) / 2 * mpmath.zeta(0, mpmath.mpf(3) / 2, 1))
+
+
+def conformal_scalar_zeta_s3(s, terms: int = 120) -> mpmath.mpf:
+    """Analytic continuation of the conformally coupled scalar zeta on unit S^3.
+
+    The conformal scalar has -Delta eigenvalue l(l+2) plus conformal mass
+    R/8 = 3/4, i.e. lambda_l = (l+1/2)(l+3/2) = (l+1)^2 - 1/4 with degeneracy
+    (l+1)^2.  Writing u = l+1,
+
+        zeta_scalar(s) = sum_{u>=1} u^2 (u^2 - 1/4)^{-s},
+
+    which converges only for Re(s) > 3/2.  The binomial expansion
+    (u^2-1/4)^{-s} = u^{-2s} sum_k poch(s,k)/k! (1/(4u^2))^k gives the
+    everywhere-meromorphic continuation
+
+        zeta_scalar(s) = sum_{k>=0} poch(s,k)/k! * 4^{-k} * zeta_R(2s+2k-2),
+
+    used here (the k-sum converges geometrically in 4^{-k}).
+    """
+    return mpmath.nsum(
+        lambda k: (mpmath.rf(s, int(k)) / mpmath.factorial(int(k))
+                   * mpmath.mpf(4) ** (-int(k))
+                   * mpmath.zeta(2 * s + 2 * int(k) - 2)),
+        [0, terms],
+    )
+
+
+def scalar_F_theorem() -> mpmath.mpf:
+    """F_s = -1/2 zeta'_scalar(0) for the conformally coupled scalar on S^3.
+
+    Differentiating the binomial continuation term-by-term at s=0 (only the
+    poch(s,k) factor's linear term survives, since poch(0,k)=0 for k>=1) gives
+
+        zeta'_scalar(0) = 2*zeta'(-2) + sum_{k>=1} (1/k) 4^{-k} zeta_R(2k-2),
+
+    so F_s = -1/2 zeta'_scalar(0) equals the KPS value
+    log(2)/8 - 3*zeta(3)/(16*pi^2) bit-exactly.
+    """
+    zeta_prime_0 = (2 * mpmath.zeta(-2, 1, 1)
+                    + mpmath.nsum(
+                        lambda k: (mpmath.mpf(1) / int(k)
+                                   * mpmath.mpf(4) ** (-int(k))
+                                   * mpmath.zeta(2 * int(k) - 2)),
+                        [1, mpmath.inf]))
+    return -zeta_prime_0 / 2
 
 
 # ---------------------------------------------------------------------------

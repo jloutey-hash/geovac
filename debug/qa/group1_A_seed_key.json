@@ -1,0 +1,18 @@
+{
+  "run": "group1 Bite A (non-descoped backbone) — Papers 40, 50 + synthesis, 2026-06-17",
+  "worktree": "../geovac-qa-seed-group1 (HEAD b8669df / v4.21.3, branch qa-seed-group1-A)",
+  "scope": "Papers 40, 50 + group1 synthesis. Dimensions: claims (40,50) + citation (40,50) + code (40/50 via shared backing tests test_paper45_asymptotic_rate + test_paper55_m1; 40/50 have no dedicated tests + cite no tests inline so C13 is vacuous for them) + synthesis C9. Deterministic baseline (C10 compile, C11, C12, C14) clean for 40/50/synth.",
+  "seeds": [
+    {"id": "S-claims-C8", "class": "C8 headline overclaim (drop the conditional/SU(2)-only honesty)", "file": "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex", "loc": "~l.122-125: 'the general-G lifted-state construction ... is verified for all compact Lie groups, so for general G the convergence is unconditional' (REAL: verified only for SU(2); for general G the convergence is CONDITIONAL on the per-group spin-window decomposition)", "expected_catcher": "claims-reviewer (paper 40, C8)"},
+    {"id": "S-citation-C4", "class": "wrong arXiv ID (C4 high-priority branch)", "file": "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex", "loc": "~l.2197: Gaudillot-Estrada & van Suijlekom bibitem arXiv:2310.17433 (real is 2310.14733)", "expected_catcher": "citation-reviewer (paper 40, C4)"},
+    {"id": "S-code-C2", "class": "circular/tautological test", "file": "tests/test_paper45_asymptotic_rate.py", "loc": "~l.290 (backs Paper 40's 4/pi): assert abs(a - a) < tol_n (was abs(a - FOUR_OVER_PI)); now asserts a==a, not a==4/pi", "expected_catcher": "code-reviewer (paper 40 backing tests)"},
+    {"id": "S-synthesis-C9", "class": "zombie / descoped result re-asserted as standing", "file": "papers/synthesis/group1_operator_algebras_synthesis.tex", "loc": "~l.162-167 Status note: 'an adversarial verification pass CONFIRMED the Lorentzian convergence claims ... yields a convergent weak-form Lorentzian propinquity (Paper 45's first Lorentzian propinquity convergence theorem)' (REAL: the pass RETRACTED the Lorentzian convergence; Paper 45 = annihilation/degeneracy theorem, the seminorm vanishes identically)", "expected_catcher": "claims-reviewer (synthesis, C9)"}
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "file": "paper_40", "claim": "~l.119: 'the strictly stronger Latrémolière propinquity is NOT claimed; its dual-reach step is a named gap' — the honest descope statement", "why_correct": "C14/C8 correct; must NOT be flagged"},
+    {"id": "M2", "file": "paper_40", "claim": "4/pi = Vol(S^2)/pi^2 is the universal rate constant (the genuine new content), identified across compact Lie groups", "why_correct": "the paper's genuine result"},
+    {"id": "M3", "file": "paper_50", "claim": "bit-exact CFT-on-sphere F-theorem match is an arithmetic fact, NOT a CFT derivation", "why_correct": "profile C8 for Paper 50; must NOT be flagged as overclaim"},
+    {"id": "M4", "file": "synthesis", "claim": "Headline 2: Riemannian (Paper 38) state-space GH propinquity convergence with explicit rate 4/pi", "why_correct": "correct (Paper 38 unconditional, state-space GH)"},
+    {"id": "M5", "file": "paper_40", "claim": "the descope handling: Paper 45's annihilation theorem stands in state-space GH; Lorentzian propinquity retracted", "why_correct": "correct descope narrative; must NOT be flagged"}
+  ]
+}

@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.22.0] - 2026-06-17
+
+### Changed — `/qa group1` Bite A (Papers 40, 50 + synthesis): FAIL remediated
+
+Second group1 `/qa` bite (after Paper 29): the active math.OA backbone **Paper 40 (universal 4/π rate), Paper 50 (CFT₃ F-theorem)** + the **group1 synthesis**, all five dimensions (deterministic / code / claims / citation / synthesis). **Calibrated panel** (sensitivity 4/4, specificity 5/5). **Verdict FAIL** — the panel vindicated the C4 high-priority flag with substantial *genuine* defects, all now fixed:
+
+**Citations (verified vs arXiv by PM):**
+- paper_50 `beccaria_tseytlin2017` — arXiv:1702.02325 = Smith/Goldfeld (math.NT), title matched no B–T paper → **Beccaria, Bekaert, Tseytlin, JHEP 08 (2014) 113, arXiv:1406.3542** (free conformal HS partition function).
+- paper_50 `hartman…2019` — arXiv:1902.10893 = Caputa–Datta–Shyam → **arXiv:1807.11401** (title/venue already correct).
+- paper_40 `hekkelman_mcdonald2024` ("Spectral truncations of T^d") — **fabricated** (arXiv:2403.18619 = an OpenMP shortest-path paper; no such Hekkelman–McDonald paper). Flat-tori work re-attributed to Leimbach–vS; bibitem removed.
+
+**Code backing (two false-positive/missing backings → genuine tests):**
+- paper_50 F-theorem was backed only by a literal cross-product in `test_paper55` (typed-in F-values). New `tests/test_paper50_f_theorem.py` (8 tests) + `qed_two_loop.py::{scalar_F_theorem, dirac_F_theorem, conformal_scalar_zeta_s3}` compute ζ′(0) from the framework S³ spectrum → KPS bit-exact (1e-82; Dirac via the shipped T9 Hurwitz form, scalar via the binomial continuation).
+- paper_40 rank≥2 universality had no genuine test (only SU(2)). The pruned `l2_universal_rate_memo` was **resurrected from git history** (`debug/qa/_resurrected/`): the rank-2 Weyl-integration runs + is reproducible (Haar = 1.0), but the leading-constant extraction is **fit-sensitive** (Stein–Weiss const scatters with fit order/min-L cut; the clean table values are fit-selected). New `tests/test_paper40_universal_rate.py` backs the robust content (SU(2) → 4/π; rank-2 Haar = 1.0; G₂ A-over-B discrimination, c ≪ Reading-B 24/π²). Paper 40 prose **calibrated**: rank-1 rigorous, rank≥2 mechanism = proof sketch + numerical (fit-sensitive), robust claim = A-over-B, full rank-uniform proof = named gap; "rigorous theorem at Paper 38 rigor at all ranks" + pruned-memo "detailed bookkeeping" cites removed.
+
+**Synthesis / status (Lorentzian + propinquity zombies):**
+- synthesis l.1797 "extended in turn to the Lorentzian K⁺-weak-form by Paper 45" (degeneracy, not extension) + §9.1 Paper-48 "G2 metric-level closure / theorem-grade bridge" inside a descoped subsection → conditioned to "proposed route".
+- paper_50 theorem + abstract "Latrémolière **propinquity** convergence via Paper 45" → state-space GH (Paper 38 descope); 5 bare cites pinned to the surviving product-carrier rate. "predictive classification of CFT physics" → "reproduction, not prediction". paper_40 Paper-39 cross-ref title synced.
+
+All three papers compile 0 errors / 0 undefined cites. Seed key `debug/qa/group1_A_seed_key.json`; memo `debug/sprint_qa_group1_biteA_memo.md`; claim matrix updated. **Remaining: Bite B (Papers 39, 42–49, 52, 53) — Lorentzian cluster, smaller sub-bites.**
+
+(Pre-existing, out of scope: `test_qed_two_loop.py` has a global `mpmath.mp.dps` test-isolation fragility — 7 failures only when co-run with `test_two_loop_self_energy.py`, passes alone, reproduces with these changes stashed out.)
+
 ## [4.21.3] - 2026-06-17
 
 ### Changed — `/qa group1` Paper 29 (single-paper cert): FAIL remediated
