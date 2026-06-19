@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.24.0] - 2026-06-18
+
+### Changed — `/qa group1` Bite B sub-bite 2 (Papers 45–49): FAIL remediated (full sweep)
+
+The descoped/partial Lorentzian core: Papers 45 (degeneracy theorem), 46 (strong-form, descoped), 47 (norm-resolvent, partial), 48 (Krein–MS bridge, partial), 49 (OSLPLS, partial) + synthesis. 13-agent panel. **Calibrated** (sensitivity 5/5, specificity 5/5). **Verdict FAIL** — the heaviest of the campaign — remediated in full per PI direction.
+
+**Defining pattern — "Status-note-only descope":** every one of Papers 45–49 has an honest, correct Status note recording the descope, but the descope was never propagated into the theorem bodies / abstracts / appendices / header comments, which still re-asserted the descoped/retracted Lorentzian-metric convergence as established (each paper self-contradicting). Remediation propagated each paper's own Status-note framing into ~20 zombie re-assertions (no judgment calls): p46 Appendix B "closes G1′" → proposed route (descoped; reproduces the degenerate seminorm), §6.6/6.7/8.5 "convergence closed/complete" → descoped; p47 header comment + §7 "closes Q1" → descoped/"would close"; p48 §2.2 "Paper 45 establishes convergence → 0 / Paper 46 free upgrade" → degeneracy/rate-formula, T3 "first quantitative pLGH-convergence panel" → rate panel (descoped), T6 "G2 closure at theorem-grade rigor" → proposed conditional route; p49 B4′ theorem tagged DESCOPED, aggregate "all four properties" → "three (B1′–B3′) + B4′ descoped", "all load-bearing checks pass"/"closes Q1′" → state-level + B4′ descoped.
+
+**Citations (verified vs arXiv + primary PDFs):** `devastato_lizzi_martinetti2018` wrong-ID in 45/46 → DFLM "Lorentz signature and twisted spectral triples," JHEP 03(2018)089/1710.04965; `hekkelman_mcdonald2024` fabricated/wrong-title in 46/47/48 (T^d/2403.18619=OpenMP) → removed/corrected; `bizi_brouder_besnard2018` p47 confabulated title+venue → real "Space and time dimensions…," JMP 59(2018)062303; `latremoliere_metric_st_2017` p47 wrong vol/"dual" → Adv.Math. 404(2022)108393; the nonexistent **Latrémolière Thm 5.5/Def 3.5** re-pointed to van Suijlekom state-space GH in p46. **Theorem-numbers verified GROUNDED:** van den Dungen Prop 4.1, Nieuviarts Def 2.2, Mondino–Sämann Def 2.3/3.8/4.4, Latrémolière hypertopology Def/Thm.
+
+All 5 papers compile errors=0/undefined=0; C11/C13/C14 PASS; p45 tests green. Deferred: NIT-grade citation-title slips (real arXiv IDs, verbatim-title drift). Memo `debug/sprint_qa_group1_biteB2_memo.md`; seed key `debug/qa/group1_B2_seed_key.json`. **Remaining: sub-bite 3 (Papers 39, 52, 53).**
+
 ## [4.23.0] - 2026-06-18
 
 ### Changed — `/qa group1` Bite B sub-bite 1 (Papers 42, 43, 44 + synthesis): FAIL remediated

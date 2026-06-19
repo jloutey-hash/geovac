@@ -99,3 +99,17 @@ group1 paper restates them (C7).
   PASS. Seed key `group1_B1_seed_key.json`, memo
   `debug/sprint_qa_group1_biteB1_memo.md`. **Remaining: sub-bite 2 (45–49),
   sub-bite 3 (39, 52, 53).**
+- 2026-06-18 — **Bite B sub-bite 2 (Papers 45–49) = FAIL → REMEDIATED** (full
+  sweep, PI direction; v4.24.0). 13-agent panel calibrated (sensitivity 5/5,
+  specificity 5/5). Heaviest FAIL: a systematic **"Status-note-only descope"** —
+  all 5 papers correctly recorded the descope in a Status note but re-asserted
+  the descoped Lorentzian-metric convergence as established throughout theorem
+  bodies/abstracts/appendices (p46 Appendix B "closes G1′", p47 header/§7, p48
+  T3/T6/§2.2, p49 B4′/aggregate). Propagated each paper's own Status-note framing
+  into ~20 zombie spots; fixed citations (devastato ×2, hekkelman ×3, bizi
+  confabulated title/venue p47, latremoliere ×; the nonexistent Latrémolière Thm
+  5.5 re-pointed in p46); theorem-numbers (van den Dungen/Nieuviarts/Mondino–
+  Sämann) verified GROUNDED. All 5 compile clean; C11/C13/C14 PASS. Deferred:
+  NIT-grade citation-title slips (real IDs). Seed key `group1_B2_seed_key.json`,
+  memo `debug/sprint_qa_group1_biteB2_memo.md`. **Remaining: sub-bite 3 (39, 52,
+  53).**

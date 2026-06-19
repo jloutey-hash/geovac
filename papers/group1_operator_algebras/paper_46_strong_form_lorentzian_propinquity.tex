@@ -270,8 +270,8 @@ quantum-metric convergence question is an open named research target.
 
 \subsection{Background: the Lorentzian-extension arc}\label{sec:background}
 
-This paper closes the strong-form leg of the Lorentzian-extension
-program for truncated GeoVac spectral triples. The arc proceeds through
+This paper addresses (and ultimately descopes) the strong-form leg of
+the Lorentzian-extension program for truncated GeoVac spectral triples. The arc proceeds through
 the math.OA quartet on the Riemannian side --- Papers
 38--40~\cite{paper38,paper39,paper40_unified} (Riemannian state-space
 Gromov--Hausdorff convergence on $\SU(2)$, on tensor products of $\SU(2)$ triples at
@@ -415,7 +415,7 @@ audit~\footnote{Paper~45 \S~1.3 and the internal preflight memo, May
 2026; verified across Latr\'emoli\`ere
 2017/2023/2025~\cite{latremoliere_metric_st_2017,latremoliere2018,farsi_latremoliere2025},
 Connes--vS~2021~\cite{connes_vs2021}, Leimbach--vS~2024~\cite{leimbach_vs2024},
-Hekkelman--McDonald~2024a/b~\cite{hekkelman_mcdonald2024,hekkelman_mcdonald2024b},
+Hekkelman--McDonald~2024~\cite{hekkelman_mcdonald2024b},
 Toyota~2023~\cite{toyota2023}, Farsi--Latr\'emoli\`ere
 2024~\cite{farsi_latremoliere2024}, vdD~2016~\cite{vandungen2016},
 BBB~2018~\cite{bizi_brouder_besnard2018}, Strohmaier~2006~\cite{strohmaier2006},
@@ -1123,8 +1123,10 @@ central subalgebra with bounded cb-norm;\ the dual residual is
 symmetric to (\ref{eq:reach_B_op}) and bounded by the same
 $\gammajoint$.
 
-(\ref{eq:height_B_op}) is the Lipschitz-distortion height of
-Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}\,Def.~3.5 under
+(\ref{eq:height_B_op}) is the Lipschitz-distortion height in the
+van~Suijlekom state-space Gromov--Hausdorff framework (the
+originally-cited Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}\,Def.~3.5
+does not exist --- see the Status note) under
 $\Lop$. By the L3 compatibility (Lemma~\ref{lem:L4op}~(d)) and the
 Stein--Weiss / Paper~38~\S~Appendix~A factor-wise step,
 \begin{equation*}
@@ -1221,9 +1223,10 @@ seminorm-independent. The strong-form is genuinely stronger as a
 \begin{remark}[Limit identification]\label{rem:limit_identification_op}
 The propinquity limit is the standard metric spectral triple
 $\Tcal^{L}_{\Manifold}$ on the continuum Krein space, under $\Lop$
-defined via the continuum Lorentzian Dirac $D^{L}_{\infty}$. By
-Latr\'emoli\`ere's metric-spectral-triple
-theorem~\cite{latremoliere_metric_st_2017}\,Thm.~5.5, the limit
+defined via the continuum Lorentzian Dirac $D^{L}_{\infty}$. In the
+van~Suijlekom state-space Gromov--Hausdorff framework (the
+originally-cited Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}\,Thm.~5.5
+does not exist; see the Status note), the limit
 identification is on the Wasserstein--Kantorovich state space of the
 limit triple. The strong-form construction is on the full Krein
 state space (not the $\Kplus$-restricted one), and the limit is
@@ -1430,15 +1433,17 @@ Riemannian truncated Camporesi--Higuchi spectral triple via the
 geometric BW-$\alpha$ and Tomita--Takesaki BW-$\gamma$ modular
 Hamiltonians on a hemispheric wedge. Paper~43~\cite{paper43} extends
 the closure to signature $(3, 1)$. Paper~45~\cite{paper45} closes the
-$\Kplus$-weak-form Lorentzian convergence; the present paper closes
-the strong-form Lorentzian convergence.
+$\Kplus$-weak-form Lorentzian \emph{degeneracy} theorem; the present
+paper \emph{descopes} the strong-form Lorentzian convergence
+(natural-substrate degeneracy).
 
 The triple $(42, 43, 45)$ together with Paper~46 constitute the
-operator-algebraic Lorentzian-extension closure of the math.OA quartet
-on the Riemannian side $(38, 39, 40)$. Both $\Kplus$-weak-form and
-strong-form Lorentzian propinquity convergence are now closed, leaving
-only the enlarged-substrate question (G1$'$) as the deepest open
-question on this side.
+operator-algebraic Lorentzian-extension work of the math.OA quartet
+on the Riemannian side $(38, 39, 40)$. Both the $\Kplus$-weak-form and
+strong-form Lorentzian propinquity convergence are \emph{descoped}
+(the natural-substrate seminorm is degenerate), leaving
+the metric-level convergence --- on the natural and enlarged
+substrates alike --- as the deepest open question on this side.
 
 \subsection{Relation to Mondino--S\"amann}\label{sec:mondino_samann_op}
 
@@ -1455,7 +1460,7 @@ respective categories.
 
 \subsection{Structural-skeleton scope}\label{sec:scope_skeleton_op}
 
-The strong-form convergence theorem obeys the structural-skeleton
+The strong-form bound (descoped as a convergence theorem) obeys the structural-skeleton
 discipline of the GeoVac framework:\ the bound determines the rate,
 the asymptotic constant, and the limit identification on the full
 Krein-state-space substrate at finite cutoff. It does not determine
@@ -2005,18 +2010,21 @@ both block and flip sectors. The L3b-2a / 2b / 2c / 2d sub-sprints
 established this envelope-preservation explicitly;\ the $\beta$-L5
 sub-sprint assembled the result.
 
-\subsection{Status of G1$'$ and the strict-strong-form closure}
+\subsection{Status of G1$'$:\ a proposed route (descoped)}
 \label{app:enlarged_status}
 
-Theorem~\ref{thm:enlarged_main} closes G1$'$ (\S~\ref{sec:enlarged_substrate})
-in the strict-strong-form sense:\ the strong-form Lorentzian
+Theorem~\ref{thm:enlarged_main} proposes a route toward G1$'$
+(\S~\ref{sec:enlarged_substrate}), at proof-sketch grade:\ the
+strong-form Lorentzian
 propinquity bound extends from the natural substrate to the enlarged
 operator system $\Op^{L}_{\mathrm{enlarged}}$ at the same numerical
 constant and the same asymptotic rate, with the chirality-flip
 content absorbed into the $\JL$-graded gradient norm
-$G^{\mathrm{enlarged}}$. The G1$'$ question is therefore answered:\
-the enlarged-substrate bound equals the natural-substrate bound at
-the operator-side constant $\Cthreeop$ and the convergence-rate
+$G^{\mathrm{enlarged}}$. This is \emph{not} a closure:\ the metric-level
+Lorentzian-propinquity convergence remains descoped (the bound still
+reproduces the degenerate natural-substrate seminorm); the
+enlarged-substrate bound merely equals the natural-substrate bound at
+the operator-side constant $\Cthreeop$ and the rate
 moment $\gammajoint$.
 
 \paragraph{Scope of the absorption step.} The gradient-norm
@@ -2033,23 +2041,26 @@ The remaining open questions on the Lorentzian side of the GeoVac
 framework are unchanged by this appendix:\ G2 (de-compactification
 $T \to \infty$, \S~\ref{sec:decompactification}), G3
 (cross-manifold extensions, \S~\ref{sec:cross_manifold}), and G4
-(inner-factor calibration data, \S~\ref{sec:inner_factor}). With G1$'$
-now closed, the operator-algebraic Lorentzian-extension closure of
-the math.OA quartet (Papers~$42, 43, 45, 46$) is structurally
-complete on the natural and enlarged substrates at finite cutoff;\
-the open questions are confined to limit-taking ($T \to \infty$),
-cross-manifold extensions, and inner-factor calibration, all of
-which are orthogonal to the present strong-form convergence theorem.
+(inner-factor calibration data, \S~\ref{sec:inner_factor}). With the
+G1$'$ route only proposed (not closed), the operator-algebraic
+Lorentzian-extension work of the math.OA quartet (Papers~$42, 43, 45,
+46$) is established at the finite-cutoff operator-system level only ---
+the metric-level Lorentzian-propinquity convergence is descoped on the
+natural and enlarged substrates alike;\
+the open questions include limit-taking ($T \to \infty$),
+cross-manifold extensions, and inner-factor calibration, alongside the
+descoped metric-level convergence itself.
 
-The closure result here strengthens the connection to the four-witness
+This appendix strengthens the connection to the four-witness
 Wick-rotation arc of \S~\ref{sec:four_witness_op}:\ Papers~$42, 43$
-close the modular structure on the natural-substrate hemispheric
-wedge, Paper~$45$ closes the $\Kplus$-weak-form convergence, the body
-of Paper~$46$ closes the strong-form on the natural substrate, and
-Theorem~\ref{thm:enlarged_main} extends the strong-form to the
-enlarged operator system. The chirality-flip content of operator
-algebras on Lorentzian Krein spectral triples at finite cutoff is now
-within the framework of Latr\'emoli\`ere propinquity convergence.
+close the modular structure (finite cutoff) on the natural-substrate
+hemispheric wedge, Paper~$45$ is the $\Kplus$-weak-form
+\emph{degeneracy} theorem, the body
+of Paper~$46$ \emph{descopes} the strong-form on the natural substrate,
+and Theorem~\ref{thm:enlarged_main} proposes (proof-sketch grade) a
+route on the enlarged operator system. The metric-level Lorentzian
+quantum-metric convergence at finite cutoff remains an open target;
+what is established is the finite-cutoff operator-system structure.
 
 % =====================================================================
 \begin{thebibliography}{99}
@@ -2097,11 +2108,10 @@ operator systems},
 \newblock Comm. Math. Phys. \textbf{383} (2021), 2021--2067;
 \newblock arXiv:2004.14115.
 
-\bibitem[Devastato, Lizzi \& Martinetti(2018)]{devastato_lizzi_martinetti2018}
-A.~Devastato, F.~Lizzi, and P.~Martinetti,
-\newblock \emph{Time as an emergent property in spectral physics:
-gauge theories from spectral noncommutative geometry},
-\newblock J.~Math.~Phys. \textbf{59} (2018), 112301.
+\bibitem[Devastato \emph{et al.}(2018)]{devastato_lizzi_martinetti2018}
+A.~Devastato, S.~Farnsworth, F.~Lizzi, and P.~Martinetti,
+\newblock \emph{Lorentz signature and twisted spectral triples},
+\newblock JHEP \textbf{03} (2018), 089; arXiv:1710.04965.
 
 \bibitem[Farsi \& Latr\'emoli\`ere(2024)]{farsi_latremoliere2024}
 C.~Farsi and F.~Latr\'emoli\`ere,
@@ -2132,12 +2142,6 @@ J.~B.~Hartle and S.~W.~Hawking,
 \newblock \emph{Path-integral derivation of black-hole radiance},
 \newblock Phys.~Rev. D \textbf{13} (1976), 2188--2203.
 
-\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
-E.~Hekkelman and E.~McDonald,
-\newblock \emph{Spectral truncations of $\mathbb{T}^{d}$ and quantum
-metric geometry},
-\newblock J.~Noncommut.~Geom., to appear (2024);
-\newblock arXiv:2403.18619.
 
 \bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
 E.~Hekkelman and E.~McDonald,

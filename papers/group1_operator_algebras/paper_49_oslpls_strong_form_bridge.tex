@@ -207,8 +207,11 @@ super-additivity on three-orbit triples, established via the
 \textbf{Connes--Rovelli thermal-time stack across distinct KMS states},
 a construction not previously published;\ (B3$^{\prime}$)
 pre-compactness via the Paper~44~\cite{paper44} propagation-number
-bound $\mathrm{prop}\le 4$ on the enlarged substrate;\ (B4$^{\prime}$)
-convergence transport from Paper~46's strong-form propinquity bound.
+bound $\mathrm{prop}\le 4$ on the enlarged substrate.  The fourth
+property, (B4$^{\prime}$) convergence transport, is \emph{descoped}:\
+it would follow from Paper~46's strong-form propinquity bound, but that
+seminorm is degenerate (Paper~45/46), so the metric-level convergence
+leg is not established.
 
 \medskip
 
@@ -383,7 +386,8 @@ multiplication operators on the spinor bundle with non-zero magnetic
 quantum number), which breaks Abelianness of the topography and
 takes the construction outside the Gelfand--Naimark setting.
 
-Paper~49 closes Q1$^{\prime}$.
+Paper~49 closes Q1$^{\prime}$ at the OSLPLS / state level (the
+metric-level convergence leg, B4$'$, is descoped).
 
 \subsection{Three structural moves}\label{sec:three_moves}
 
@@ -2018,12 +2022,16 @@ follows.
 \subsection{(B4$^{\prime}$) Convergence transport}
 \label{sec:b4prime}
 
-\begin{theorem}[B4$^{\prime}$ Convergence transport]
+\begin{theorem}[B4$^{\prime}$ Convergence transport --- \emph{DESCOPED}]
 \label{thm:b4prime}
-Let $\Lambda^{\mathrm{strong}}(\osXkrein_{n},\osXkrein_{\infty})\to 0$
-be the Krein-side strong-form propinquity convergence on the
-enlarged substrate (Paper~46~\cite{paper46} main theorem restricted
-to the full topography). Then the OSLPLS-target image
+\emph{(Descoped: the hypothesis below fails on the natural substrate ---
+the Paper~45/46 Krein-side seminorm is degenerate, so
+$\Lambda^{\mathrm{strong}}$ is a rate formula, not a metric. The
+statement is recorded as a conditional transport, not an established
+convergence.)}
+Suppose $\Lambda^{\mathrm{strong}}(\osXkrein_{n},\osXkrein_{\infty})\to 0$
+were a genuine Krein-side strong-form propinquity convergence on the
+enlarged substrate (Paper~46~\cite{paper46}). Then the OSLPLS-target image
 $\Wflip(\osXkrein_{n})$ converges to $\Wflip(\osXkrein_{\infty})$
 in the operator-system pLGH convergence sense (OSLPLS-equivalent of
 MS Def 3.12 via the embedding $\iota$). The convergence rate
@@ -2031,14 +2039,16 @@ transports verbatim from the Krein-side strong-form bound.
 \end{theorem}
 
 \begin{proof}[Proof sketch.]
-By functoriality of $\Wflip$ (Theorem~\ref{thm:functoriality}), the
-Krein-side propinquity convergence implies operator-system-level
-metric convergence on the bridge image at each truncation level $k$,
-which assembles to OSLPLS pLGH convergence via per-cover convergence.
+By functoriality of $\Wflip$ (Theorem~\ref{thm:functoriality}), a
+\emph{non-degenerate} Krein-side propinquity convergence would imply
+operator-system-level metric convergence on the bridge image at each
+truncation level $k$, assembling to OSLPLS pLGH convergence --- but the
+Krein-side seminorm is degenerate (Paper~45/46), so this leg is
+\emph{descoped}.
 The Paper~46 strong-form bound $\Lambda^{\mathrm{strong}}=
-\Lambda^{\mathrm{P45}}$ bit-exact (the "free upgrade" reading on the
-natural substrate) extends to the full $M\ne 0$ enlargement
-verbatim.
+\Lambda^{\mathrm{P45}}$ is bit-exact but degenerate (the "free upgrade"
+reads off the same degenerate seminorm); it carries to the full
+$M\ne 0$ enlargement as a \emph{rate formula}, not a metric convergence.
 \end{proof}
 
 \subsection{Aggregate Bridge Theorem 6.4$^{\prime}$-Q1$^{\prime}$}
@@ -2048,8 +2058,11 @@ verbatim.
 OSLPLS-target]\label{thm:bridge_strong}
 The functor $\Wflip:\KreinMMflip\to\OSLPLS$ defined by
 Definitions~\ref{def:Wflip}~and~\ref{def:Wflip_morphisms} is a
-well-defined functor satisfying all four Bridge Theorem properties
-on the strict-strong-form Krein--MS--OSLPLS bridge:
+well-defined functor satisfying the three structural/state-level Bridge
+Theorem properties (B1$'$)--(B3$'$) below; the fourth, (B4$'$)
+convergence transport, is \emph{descoped} (it inherits the degenerate
+Paper~45/46 seminorm) on
+the strict-strong-form Krein--MS--OSLPLS bridge:
 \begin{itemize}
 \item[(B1$^{\prime}$)] \textbf{Structural correspondence}
 (Theorem~\ref{thm:b1prime}):\ $\Wflip$ sends the full enlarged
@@ -2062,12 +2075,16 @@ thermal-time stack across distinct KMS states.
 \item[(B3$^{\prime}$)] \textbf{Pre-compactness inheritance}
 (Theorem~\ref{thm:b3prime}):\ $\varepsilon$-net cardinality bounded
 by $\mathrm{prop}^{2}\cdot\dim\le 16\cdot\dim$ at finite cutoff.
-\item[(B4$^{\prime}$)] \textbf{Convergence transport}
-(Theorem~\ref{thm:b4prime}):\ Krein-side strong-form propinquity
-convergence induces OSLPLS pLGH convergence at the same rate.
+\item[(B4$^{\prime}$)] \textbf{Convergence transport} [\emph{DESCOPED}]
+(Theorem~\ref{thm:b4prime}):\ the Krein-side strong-form propinquity
+seminorm is degenerate (Paper~45/46), so the would-be OSLPLS pLGH
+\emph{metric} convergence is descoped --- what transports is the
+closed-form rate, not a quantum-metric distance.
 \end{itemize}
-Together, (B1$^{\prime}$)--(B4$^{\prime}$) constitute the Bridge
-Theorem 6.4$^{\prime}$-Q1$^{\prime}$ on the OSLPLS-target.
+Together, (B1$^{\prime}$)--(B3$^{\prime}$) constitute the established
+(structural / state-level) part of the Bridge
+Theorem 6.4$^{\prime}$-Q1$^{\prime}$ on the OSLPLS-target; the
+metric-level convergence leg (B4$'$) is descoped.
 \end{theorem}
 
 \begin{remark}\label{rem:vs_phase1_comparison}
@@ -2224,13 +2241,16 @@ monotonicity deficits, substantially positive (66--81 nats) at all
 three panel cells.
 \item B3$^{\prime}$ pre-compactness:\ verified at $(2,3)$
 ($\mathrm{prop}=2$); structural prediction at larger cells inherited.
-\item B4$^{\prime}$ convergence transport:\ verified bit-exact at all
-three panel cells (Lambda matches Paper 45 reference exactly).
+\item B4$^{\prime}$ convergence transport [\emph{DESCOPED}]:\ the
+$\Lambda$ panel matches the Paper~45 reference exactly, but this is the
+degenerate \emph{rate-formula} reproduced (Paper~45/46), not a verified
+metric convergence --- the metric-level transport is descoped.
 \item Riemannian-limit recovery at $\Nt=1$:\ verified bit-exact at
 $\nmax\in\{2,3,4\}$.
 \end{itemize}
 
-\textbf{All load-bearing checks pass.}
+\textbf{All structural / state-level checks pass} (the B4$'$
+metric-convergence leg is descoped, not established).
 
 \subsection{Honest scope of the numerical panel}
 \label{sec:numerical_panel_scope}
@@ -2666,7 +2686,9 @@ move this question.
 \section{Conclusion}\label{sec:conclusion}
 % =====================================================================
 
-Paper~49 closes Q1$^{\prime}$ of the GeoVac math.OA arc by extending
+Paper~49 closes Q1$^{\prime}$ of the GeoVac math.OA arc at the OSLPLS /
+state level (the metric-level convergence leg B4$'$ is descoped, as it
+inherits the Paper~45/46 degeneracy) by extending
 the K$^{+}$-weak-form Krein--Mondino--S\"amann bridge of
 Paper~48~\cite{paper48} to the strict-strong-form on the full
 $M\ne 0$ Paper~46~\cite{paper46} Appendix~B enlarged Krein substrate.

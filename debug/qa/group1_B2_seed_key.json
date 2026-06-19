@@ -1,0 +1,66 @@
+{
+  "run": "group1 Bite B sub-bite 2 \u2014 Papers 45,46,47,48,49 + synthesis, 2026-06-18",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-B2",
+  "seeds": [
+    {
+      "id": "S-claims-C8",
+      "file": "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+      "catcher": "claims-45"
+    },
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.tex",
+      "catcher": "claims-46"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "catcher": "citation-48"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_p45_kplus_degeneracy.py",
+      "catcher": "code-45"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "catcher": "synthesis"
+    }
+  ],
+  "seed_detail": {
+    "S-claims-C8": "p45: flipped the degeneracy theorem (seminorm vanishes identically = NEGATIVE) into 'non-degenerate, yielding the first Lorentzian propinquity convergence theorem' (POSITIVE). REAL: Paper 45 is a degeneracy/annihilation theorem. Catcher claims-45.",
+    "S-claims-C14": "p46: flipped 'strong-form convergence is NOT established (descoped)' -> 'IS established, closing the question'. REAL: descoped, open. Catcher claims-46.",
+    "S-citation-C4": "p48: Mondino-Samann arXiv:2504.10380 -> 2504.10830 (transposed). Catcher citation-48.",
+    "S-code-C2": "p45 test_p45_kplus_degeneracy.py: 'assert restr.max() < TOL' -> 'assert restr.max()-restr.max() < TOL' (tautology; the load-bearing degeneracy proof). Catcher code-45.",
+    "S-synthesis-C9": "synthesis: 'composite established at the norm-resolvent/spectral level only' -> 'at the Lorentzian quantum-metric level' (re-asserts the descoped metric level). Catcher synthesis."
+  },
+  "controls_must_not_flag_material": [
+    {
+      "id": "M1",
+      "file": "p45",
+      "claim": "the degeneracy/annihilation theorem stated as a NEGATIVE result (honest) - must NOT flag"
+    },
+    {
+      "id": "M2",
+      "file": "p46",
+      "claim": "'natural-substrate degeneracy; enlarged-substrate repair target' honest descope - must NOT flag"
+    },
+    {
+      "id": "M3",
+      "file": "p47",
+      "claim": "norm-resolvent arrow survives; metric-level descoped (honest PARTIAL) - must NOT flag"
+    },
+    {
+      "id": "M4",
+      "file": "p48",
+      "claim": "bridge = conditional design; metric-level inheritance descoped (honest) - must NOT flag"
+    },
+    {
+      "id": "M5",
+      "file": "p49",
+      "claim": "OSLPLS cocycle-deficit algebra survives; strong-form bridge conditional (honest) - must NOT flag"
+    }
+  ],
+  "known_genuine_preexisting": "hekkelman_mcdonald2024 (fabricated, arXiv:2403.18619=OpenMP) present in 46/47/48/49; devastato_lizzi_martinetti2018 (wrong-ID) in 45/46 - same defects fixed in 42/43/44 (Bite B1). Expect citation reviewers to catch; will fix in remediation."
+}

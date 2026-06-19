@@ -7,9 +7,9 @@
 %   outer (norm-resolvent):           T_{S^3 x S^1_T(N_t)} -> T_{S^3 x R_t}
 %
 % Closes Paper 45 §1.4 G2 (de-compactification limit T -> infinity) at
-% the norm-resolvent / spectral level (§§3-4) AND at the propinquity /
-% metric level on the natural substrate (§7, Theorem 7.3, via
-% temporal-Lipschitz-invisibility zero-cost extent element).
+% the norm-resolvent / spectral level (§§3-4) ONLY; the propinquity /
+% metric level on the natural substrate (§7, Theorem 7.3) is DESCOPED
+% (it inherits the Paper 45 degeneracy) -- see the Status note.
 %
 % Ninth math.OA standalone in the GeoVac series.
 % Siblings: Paper 38 (SU(2) Riemannian propinquity), Paper 39 (tensor-
@@ -17,8 +17,8 @@
 % Lie groups), Paper 42 (Tomita-Takesaki Riemannian closure), Paper 43
 % (Lorentzian extension of the four-witness theorem), Paper 44
 % (Lorentzian operator-system substrate), Paper 45 (K+-weak-form
-% Lorentzian propinquity convergence), Paper 46 (strong-form
-% Lorentzian propinquity convergence on the natural and enlarged
+% Lorentzian degeneracy theorem), Paper 46 (strong-form
+% Lorentzian propinquity, descoped on the natural and enlarged
 % substrates).
 %
 % Status: first draft, May 2026, post-Sprint L3c-alpha / L3c-gamma
@@ -27,10 +27,10 @@
 %   debug/sprint_l3c_alpha_parametric_decompactification_memo.md
 %   debug/sprint_l3c_gamma_norm_resolvent_memo.md
 %
-% Honest scope: norm-resolvent at the outer arrow (§4), propinquity at
-% the inner arrow (§3). Theorem 7.3 upgrades to propinquity-level on
-% the natural substrate via the zero-cost extent element mechanism.
-% Enlarged-substrate extension remains open (Q2).
+% Honest scope: norm-resolvent at the outer arrow (§4) is what survives;
+% the inner arrow (§3) and Theorem 7.3's propinquity/metric-level upgrade
+% on the natural substrate are DESCOPED (they inherit the Paper 45
+% degeneracy). Metric-level convergence + enlarged-substrate remain open.
 % =====================================================================
 \documentclass[11pt,a4paper]{article}
 
@@ -1256,8 +1256,10 @@ $\sthree \times \R_{t}$ by combining three ingredients: the
 temporal-Lipschitz-invisibility identity of Paper~46
 (Lemma~3.2~\cite{paper46}), the Latr\'emoli\`ere pinned proper QMS
 hypertopology~\cite{latremoliere2025_hypertopology}, and its
-Krein-lift (Paper~48~\cite{paper48}\,\S~3). This closes Q1
-(G2-metric) on the natural substrate.
+Krein-lift (Paper~48~\cite{paper48}\,\S~3). This \emph{would} close Q1
+(G2-metric) on the natural substrate, but the metric level is
+\emph{descoped} (it inherits the Paper~45 degeneracy; see the Status
+note); only the norm-resolvent / spectral level (\S\S 3--4) is established.
 
 \begin{lemma}[Zero-cost extent element]\label{lem:extent_zero}
 Let $\chi_{T} \in C_{c}^{\infty}(\R)$ be a smooth cutoff with
@@ -1484,9 +1486,10 @@ norm resolvent sense, II:\ Quantitative results,''
 \emph{Math. Nachr.} (2026), arXiv:2507.01482.
 
 \bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
-N.~Bizi, C.~Brouder, F.~Besnard, ``Spectral action in Lorentzian
-signature,'' \emph{Class. Quant. Grav.} \textbf{35} (2018), 175004.
-arXiv:1611.07062.
+N.~Bizi, C.~Brouder, and F.~Besnard, ``Space and time dimensions of
+algebras with applications to Lorentzian noncommutative geometry and
+quantum electrodynamics,'' \emph{J. Math. Phys.} \textbf{59} (2018),
+062303. arXiv:1611.07062.
 
 \bibitem[Bunce \& Deddens(1975)]{bunce_deddens1975}
 J.~W.~Bunce, J.~A.~Deddens, ``A family of simple C*-algebras related
@@ -1543,9 +1546,9 @@ Y.~Katznelson, \emph{An Introduction to Harmonic Analysis}, 3rd ed.,
 Cambridge University Press, 2004.
 
 \bibitem[Latr\'emoli\`ere(2018/2023)]{latremoliere_metric_st_2017}
-F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity for
-metric spectral triples,'' \emph{Adv. Math.} \textbf{411} (2023),
-108790. arXiv:1811.10843.
+F.~Latr\'emoli\`ere, ``The Gromov--Hausdorff propinquity for
+metric spectral triples,'' \emph{Adv. Math.} \textbf{404} (2022),
+108393. arXiv:1811.10843.
 
 \bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
 F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff propinquity,''

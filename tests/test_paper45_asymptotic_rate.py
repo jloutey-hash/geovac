@@ -1,8 +1,8 @@
-r"""Asymptotic-rate verification for Paper 45 Theorem~\ref{thm:main}.
+r"""Asymptotic-rate verification for Paper 45's surviving spatial rate (Rem rem:asymp_rate).
 
 Paper: ``papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex''
 
-Theorem (Lorentzian propinquity convergence on truncated
+Surviving spatial state-space-GH rate (Paper 45's Lorentzian Lambda^L is
 SU(2) x U(1)_T Krein spectral triples, Paper 45 Theorem~\\ref{thm:main},
 Eq. eq:main_bound):
 
@@ -95,7 +95,7 @@ FOUR_OVER_PI = 4.0 / math.pi
 
 @pytest.mark.slow
 class TestPanelMonotoneDecrease:
-    """Verify the Theorem 4.1 monotone-decrease prediction at the buildable
+    """Verify the spatial-rate monotone-decrease prediction at the buildable
     panel cells.
 
     The task requests monotone Lambda decrease at n_max in {2,3,4,5,6} with
@@ -107,7 +107,7 @@ class TestPanelMonotoneDecrease:
     """
 
     def test_lambda_monotone_full_pair(self):
-        """Theorem 4.1 prediction: Lambda^L decreases strictly with n_max
+        """Spatial-rate prediction: gamma^SU decreases strictly with n_max
         at the buildable panel cells (2, 3), (3, 5), (4, 7)."""
         bounds = []
         for (n_max, N_t) in FULL_PAIR_CELLS:
