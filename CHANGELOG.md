@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.26.1] - 2026-06-19
+
+### Changed — Lorentzian-closure cross-reference consistency pass (P42, P43, synthesis, P35)
+
+The v4.26.0 structural closure (compact modular flow ⇒ finite-cutoff metric Euclidean ⇒ Lorentzian signature = Wick convention) was recorded in Paper 45 §open Q1 but the other Lorentzian-cluster papers + the WH7/temporal paper still framed "Lorentzian propinquity remains open" without the finite-cutoff mechanism — reading as if the whole question were open. Nothing was wrong (the *continuum* question genuinely remains open), but the resolved-vs-open boundary was not stated consistently. Light cross-reference pass (no content rewrites):
+
+- **Paper 43** §O1 + §scope_lorentzian: the "remains open / requires a non-compact extension" claim now carries the structural reason (finite-cutoff metric Euclidean because the modular flow is compact, P45 §Q1) — which *vindicates* the existing "requires a non-compact extension" statement (the reverse-triangle signature lives only in the non-compact continuum limit).
+- **Paper 42** O1: "remains OPEN" scoped to the continuum level; finite-cutoff metric noted as Euclidean/convention (P45 §Q1). (`\cite{paper45}` → plain text — P42 has no paper45 bibitem.)
+- **group1 synthesis** honest-scope: the Lorentzian "remains open" now states the finite-cutoff (Euclidean, compact-flow) vs continuum (open) split + the WH7 metric-level-dual reading.
+- **Paper 35** (Time as Projection): added the metric-level dual in the Bisognano–Wichmann-reading section — the same temporal compactification that injects π into the spectrum fixes the signature as a Wick-rotation convention (compactness ⇒ discreteness ⇒ π/β on both faces).
+
+All four compile errors=0 (P42/P35 residual undefined are pre-existing font-shape / `sec:projection_inventory` debt, not from this pass; P43 + synthesis 0/0).
+
 ## [4.26.0] - 2026-06-19
 
 ### Changed — Lorentzian-propinquity chase CLOSED: Paper 45 §open Q1 resolved on the convention branch (structural reason)
