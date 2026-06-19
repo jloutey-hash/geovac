@@ -230,8 +230,8 @@ Theorem~\ref{thm:tici}):\
 $\cocyc{1}{3}=\cocyc{1}{2}\cdot\sigma_{t}^{\omegaOrb{1}}(\cocyc{2}{3})$
 on the triple overlap, implicit in Connes 1973 (C4) but not previously
 isolated as a stack-consistency property. Strict super-additivity then
-follows from Datta's max-divergence chain
-inequality~\cite{datta2009} applied to the cocycle
+follows from the max-divergence chain inequality (elementary from the
+$D_{\max}$ definition;\ max-divergence due to Datta~\cite{datta2009}) applied to the cocycle
 entropy production:\ the detoured worldline through an intermediate
 KMS state pays \emph{two} max-divergence cocycle costs
 $\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$ while the direct
@@ -467,7 +467,7 @@ The detoured worldline $\omega_{x}\to\omega_{y}\to\omega_{z}$ pays
 \emph{two} max-divergence cocycle costs
 $\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$; the
 direct worldline $\omega_{x}\to\omega_{z}$ pays \emph{one} cost
-$\Delta_{\max}S^{1\to 3}$. Datta's max-divergence chain inequality~\cite{datta2009}
+$\Delta_{\max}S^{1\to 3}$. the max-divergence chain inequality (elementary from the $D_{\max}$ definition;\ \cite{datta2009})
 $\Delta_{\max}S^{1\to 3}\le\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$
 (strict when the three KMS states are pairwise distinct) translates to
 \[
@@ -1779,10 +1779,14 @@ under any cptp map~$\Phi$. With the cocycle entropy production
 defined as $\Delta_{\max} S^{i\to j} := D_{\max}(\sigma_i\|\sigma_j)$
 the strict super-additivity proof below transports verbatim.
 
-Inequality~\eqref{eq:lindblad_uhlmann} is the standard chain
-inequality for the max-divergence, proven as Theorem~11 of
-Datta~2009~\cite{datta2009} and reviewed in Wilde~\cite{wilde2017}
-Ch.~7. (We note in passing that the Umegaki relative entropy
+Inequality~\eqref{eq:lindblad_uhlmann} is the chain inequality for the
+max-divergence $D_{\max}(\rho\|\sigma)=\log\min\{\lambda:\rho\le\lambda\sigma\}$,
+which follows directly from its definition by transitivity of the operator
+order ($\rho_1\le\lambda_{12}\rho_2\le\lambda_{12}\lambda_{23}\rho_3$);\ it is
+verified bit-exactly in the framework (96/96 on modular-orbit triples,
+\texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}), with strictness when the
+three KMS states are pairwise distinct. The max-divergence is due to
+Datta~\cite{datta2009}; see also Wilde~\cite{wilde2017} Ch.~7. (We note in passing that the Umegaki relative entropy
 $S(\rho\|\sigma) = \mathrm{Tr}\,\rho(\log\rho - \log\sigma)$ does
 \emph{not} in general satisfy this chain inequality --- only the
 max-divergence does. Numerical evidence: a sweep of $\sim 600$
@@ -2141,8 +2145,9 @@ cells.}\label{tab:lambda_panel}
 
 The Lambda joint propinquity rate computed via the Bridge Theorem
 machinery agrees with the Paper~45~\cite{paper45} / Paper~47
-\cite{paper47} reference panel at zero residual. This confirms
-B4$^{\prime}$ convergence transport at machine precision.
+\cite{paper47} reference panel at zero residual. This reproduces the closed-form rate
+at zero residual --- a rate-formula consistency check, not a metric
+convergence (B4$^{\prime}$ is descoped).
 
 \subsection{max-divergence cocycle deficit
 (B2$^{\prime}$ structural surrogate)}
@@ -2755,9 +2760,10 @@ J.~J.~Bisognano, E.~H.~Wichmann, ``On the duality condition for
 quantum fields,'' \emph{J. Math. Phys.} \textbf{17} (1976), 303--321.
 
 \bibitem[Bizi, Brouder \& Besnard(2018)]{bizi_brouder_besnard2018}
-N.~Bizi, C.~Brouder, F.~Besnard, ``Spectral action in Lorentzian
-signature,'' \emph{Class. Quantum Grav.} \textbf{35} (2018), 175004.
-arXiv:1611.07062.
+N.~Bizi, C.~Brouder, F.~Besnard, ``Space and time dimensions of
+algebras with applications to Lorentzian noncommutative geometry and
+quantum electrodynamics,'' \emph{J. Math. Phys.} \textbf{59} (2018),
+062303. arXiv:1611.07062.
 
 \bibitem[Bousso, Chandrasekaran, Rath \& Shahbazi-Moghaddam(2020)]{bousso_casini_fisher_maldacena2020}
 R.~Bousso, V.~Chandrasekaran, P.~Rath, A.~Shahbazi-Moghaddam,
@@ -2824,8 +2830,9 @@ J.~B.~Hartle, S.~W.~Hawking, ``Path-integral derivation of black-hole
 radiance,'' \emph{Phys.~Rev.~D} \textbf{13} (1976), 2188--2203.
 
 \bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
-E.~Hekkelman, R.~McDonald, ``The semi-classical limit of Connes
-spectral triples on a torus,'' arXiv:2412.00628 (2024).
+E.~Hekkelman, E.~A.~McDonald, ``A noncommutative integral on
+spectrally truncated spectral triples, and a link with quantum
+ergodicity,'' arXiv:2412.00628 (2024).
 
 \bibitem[Ketterer(2026)]{ketterer2026}
 C.~Ketterer, ``$\ell$-convergence on metric measure spaces and
@@ -2868,10 +2875,10 @@ arXiv:2512.03573 (December 2025).
 F.~Latr\'emoli\`ere, ``Spectral propinquity in the $C^1$ topology,''
 arXiv:2603.19128 (March 2026).
 
-\bibitem[Leimbach \& van Suijlekom(2024)]{leimbach_vs2024}
-M.~Leimbach, W.~D.~van~Suijlekom, ``Convergence of Peter--Weyl
-truncations of compact quantum groups,'' \emph{Adv. Math.}
-\textbf{439} (2024), 109496. arXiv:2409.16698.
+\bibitem[Leimbach(2024)]{leimbach_vs2024}
+M.~Leimbach, ``Convergence of Peter--Weyl
+truncations of compact quantum groups,'' to appear, \emph{J.~Noncommut.
+Geom.} (2024); arXiv:2409.16698.
 
 \bibitem[Datta(2009)]{datta2009}
 N.~Datta, ``Min- and max-relative entropies and a new entanglement

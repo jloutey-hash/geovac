@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.27.0] - 2026-06-19
+
+### Changed — `/qa group1` re-certification Batch 1 (Papers 45–49 + synthesis): FAIL remediated + new deterministic gate C15
+
+PI-invoked group1 re-cert re-runs, batched ~5 papers (token budget), reordered Lorentzian-first. Batch 1 = the C14-heavy descoped core (45–49) + synthesis. 12-agent panel (claims ×5, citation ×5, code ×1, synthesis ×1), path-pinned to worktree (removed; no leak). **Calibrated:** sensitivity 4/5, specificity 5/5. **Verdict FAIL** — and the headline is that **the v4.24.0 (B2) full-sweep was incomplete**:\ the re-cert surfaced residual "Status-note-only descope" zombies + citation defects B2 missed. PI directive: remediate now, defer re-run. All findings PM-verified vs the real corpus (§9 reconcile) before fixing.
+
+**New deterministic gate C15 — inline arXiv-ID consistency** (`debug/qa/check_inline_arxiv.py`, `tests/test_inline_arxiv_check.py`, registered in `docs/qa/criteria.md`). The calibration miss was an inline `arXiv:2504.10830` seed (a transposition of the bibitem's `2504.10380`) that the bibitem-focused LLM citation reviewers didn't surface. C15 flags any inline arXiv ID that is a near-match (same length, Hamming ≤ 2) of a bibitem ID without equalling it — the transposed/typo'd-ID class, deterministically and ~100× cheaper than LLM reviewers. Complements (does not replace) the C4 LLM review, which still owns wrong-title/wrong-venue (right ID, wrong metadata).
+
+**C14 residual zombies remediated** (descoped → established re-assertions B2 missed): p46 Appendix B `thm:enlarged_main` "β-L5 closure" + opening prose → proposed route / proof-sketch / descoped (matching §B.5's own "not a closure"); p47 `thm:g2_metric` title "closure" → "route (descoped)"; p48 T6 "closes G2 metric-level" cluster ×4 → "proposed/conditional route (descoped)"; p49 "confirms B4′ convergence transport at machine precision" → "reproduces the rate formula (not a metric convergence; descoped)"; synthesis "all four properties hold theorem-grade" → "(B1′)–(B3′) theorem-grade; (B4′) descoped" + dropped the descoped Paper-46 4/π co-citation.
+
+**C7 remediated:** p48 ×4 Paper-38 "Riemannian propinquity hypertopology" → "state-space Gromov–Hausdorff" (body had contradicted its own bibitem).
+
+**C4 citations remediated** (B2 fixed p47 only / new): bizi confabulated title "Spectral action in Lorentzian signature, CQG 35 175004" → "Space and time dimensions…, JMP 59 (2018) 062303" in **p48 + p49**; leimbach wrong-author/venue → sole-author M. Leimbach, to appear JNCG; p49 hekkelman wrong-title → real "A noncommutative integral…" (2412.00628). **p49 Datta "Theorem 11" misattribution:** PM verification showed the max-divergence chain inequality `D_max(1‖3) ≤ D_max(1‖2)+D_max(2‖3)` is **elementary** (immediate from `D_max(ρ‖σ)=log min{λ:ρ≤λσ}` by transitivity of operator order) and framework-verified (96/96, `test_wh7_b3_phase3_sprint2.py`) — so the math and p49's strict-super-additivity headline STAND; only the false "Theorem 11 of Datta 2009" attribution was wrong (citation fix, not a retraction — the reviewer over-stated severity).
+
+All 5 papers compile errors=0/undefined=0; C5/C11/C13/C14/C15 group1 PASS. Deferred (NIT, B2 precedent): ~12 cosmetic citation title-paraphrases with correct arXiv IDs. Re-run deferred (PI) to after Batches 2–3. Memo `debug/sprint_qa_group1_rc1_memo.md`; seed key `debug/qa/group1_rc1_seed_key.json`.
+
 ## [4.26.1] - 2026-06-19
 
 ### Changed — Lorentzian-closure cross-reference consistency pass (P42, P43, synthesis, P35)

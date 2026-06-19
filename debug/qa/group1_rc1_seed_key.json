@@ -1,0 +1,48 @@
+{
+  "run": "group1 re-certification batch 1 (rc1) — Papers 45,46,47,48,49 + synthesis (descoped Lorentzian core), 2026-06-19",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-rc1",
+  "seeds": [
+    {
+      "id": "S-claims-C8",
+      "file": "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+      "catcher": "claims-45",
+      "class": "C8 headline honesty — flipped the annihilation theorem (NEGATIVE: no GH distance defined) to a POSITIVE 'a well-defined quantum GH distance is thereby established'.",
+      "anchor": "thereby established on it"
+    },
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_47_two_rate_hybrid_convergence.tex",
+      "catcher": "claims-47",
+      "class": "C14 descope/partial status — flipped the G2-metric closure claims from 'rest on the same degenerate metric quantity and are descoped' to 'now established at the metric level, closing the G2-metric problem'.",
+      "anchor": "now established at the metric level, closing the G2-metric problem"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "catcher": "citation-48",
+      "class": "C4 external citation — transposed Mondino-Samann arXiv:2504.10380 -> 2504.10830 (one inline occurrence; l.26 comment + l.1906 keep the correct ID).",
+      "anchor": "2504.10830"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "catcher": "synthesis",
+      "class": "C9 synthesis faithfulness — Paper-48 metric-level inheritance flipped from 'descoped ... conditional design' to 'established ... a proven functor'.",
+      "anchor": "metric-level inheritance is established and the"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_lorentzian_toeplitz_kplus.py",
+      "catcher": "code-45",
+      "class": "C2 tautological test — compact-flow assertion 'np.allclose(U, 1.0+0j)' (e^{2piK}=I) gutted to 'np.allclose(U, U)' (vacuously true).",
+      "anchor": "allclose(U, U, atol"
+    }
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "what": "p45 K+ annihilation theorem — genuine NEGATIVE/degeneracy result, correctly stated. Must NOT be flagged as overclaim."},
+    {"id": "M2", "what": "p47 outer arrow (norm-resolvent convergence + exponential tail) — genuinely SURVIVING the descope, correctly stated as operator-level."},
+    {"id": "M3", "what": "p45 §open Q1 compactness closure (v4.26.0) — finite-cutoff Euclidean / Lorentzian = Wick convention, correctly stated with the honest cap."},
+    {"id": "M4", "what": "devastato_lizzi_martinetti2018 = JHEP 03(2018)089 / arXiv:1710.04965 (verified in B2) — a correct citation, must NOT be flagged."},
+    {"id": "M5", "what": "product-carrier S^3 x S^1 convergence stated as signature-agnostic (Euclidean), NOT a Lorentzian claim — correct, must NOT be flagged as a descoped-zombie."}
+  ]
+}

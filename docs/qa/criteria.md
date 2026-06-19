@@ -105,6 +105,17 @@ verdict is the **AND across all review dimensions** (below).
   cite the permanent record — CHANGELOG / the paper / tests — never transient
   `debug/`), the existing ~443 dangling `debug/` refs (papers 34/32/28 …) are a
   **deferred corpus-wide sweep**, adopted-as-policy 2026-06-17, ref-removal TBD.
+- **C15 — Inline arXiv-ID consistency (deterministic).** No arXiv ID written
+  *inline in the body prose* is a near-match transposition (same length, Hamming
+  ≤ 2) of a bibitem ID without equalling it — certified by
+  `debug/qa/check_inline_arxiv.py --gate <branch>` (exit 0; also
+  `tests/test_inline_arxiv_check.py`). Closes the /qa group1 re-cert-1
+  calibration gap:\ an inline `arXiv:2504.10830` seed (a transposition of the
+  bibitem's `2504.10380`) slipped past the bibitem-focused LLM citation
+  reviewers. C15 is a **complement** to the C4 LLM citation review, not a
+  replacement:\ it catches transposed/typo'd IDs deterministically and cheaply;
+  the reviewer still owns wrong-title / wrong-venue / wrong-attribution (right
+  ID, wrong metadata — which C15 cannot see). Added 2026-06-19.
 
 ## Branch-specific criteria (C14+)
 

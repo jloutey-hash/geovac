@@ -132,4 +132,20 @@ group1 paper restates them (C7).
   robustly (v2 Wick involution = ω_q too) → WH7 weakens-to-convention confirmed;
   `test_lorentzian_toeplitz_kplus.py` (6/6). C5/C11/C13/C14 PASS. Seed key
   `group1_B3_seed_key.json`, memo `debug/sprint_qa_group1_biteB3_memo.md`.
-  **group1 branch QA COMPLETE.**
+  **All bites remediated** (per-paper FAIL→fixed) — but see the re-cert below.
+- 2026-06-19 — **RE-CERTIFICATION begun (PI), batched ~5 papers, Lorentzian-first.**
+  Re-running the calibrated `/qa` gate on the remediated corpus to convert
+  FAIL→remediated cycles into a trustworthy PASS. **Batch 1 (Papers 45–49 +
+  synthesis) = FAIL → REMEDIATED** (v4.27.0; re-run deferred to after Batches
+  2–3 per PI). 12-agent panel, calibrated (sensitivity 4/5 — citation missed an
+  inline-arXiv transposition seed; specificity 5/5). **Key finding: the v4.24.0
+  (B2) full-sweep was incomplete** — residual C14 "Status-note-only descope"
+  zombies (p46 thm:enlarged_main, p47 thm:g2_metric, p48 T6 ×4, p49 B4′,
+  synthesis l.1593+4/π), C7 (p48 ×4 "Riemannian propinquity hypertopology"), and
+  C4 (bizi/leimbach in p48+p49 — B2 fixed p47 only; p49 hekkelman title; p49
+  Datta "Theorem 11" → elementary + framework-verified, citation-fix). All
+  remediated, all compile clean, C5/C11/C13/C14/**C15** PASS. New deterministic
+  gate **C15** (`check_inline_arxiv.py`) closes the citation calibration gap
+  (inline-arXiv transposition class). Seed key `group1_rc1_seed_key.json`, memo
+  `debug/sprint_qa_group1_rc1_memo.md`. **Remaining: re-cert Batch 2 (42/43/44/53),
+  Batch 3 (29/39/40/50/52), then re-run all to certify.**

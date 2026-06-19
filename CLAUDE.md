@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.26.1 (June 19, 2026)
+**Version:** v4.27.0 (June 19, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -131,6 +131,8 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 ## 2. Current Development Frontier
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
+
+- **`/qa group1` re-cert Batch 1 (P45–49) FAIL→remediated + new gate C15 (2026-06-19, v4.27.0):** PI re-cert re-runs (Lorentzian-first); 12-agent panel, calibrated (4/5 sens — citation missed an inline-arXiv transposition; 5/5 spec). Headline: **the v4.24.0 B2 sweep was incomplete** — re-cert caught residual C14 "Status-note-only descope" zombies (p46 thm:enlarged_main, p47 thm:g2_metric, p48 T6 ×4, p49 B4′, synthesis) + C7 (p48 ×4) + C4 (bizi/leimbach/hekkelman in p48/p49; Datta "Theorem 11" → elementary+framework-verified, citation-fix-not-retraction), all remediated. New deterministic **C15** (`check_inline_arxiv.py`) closes the inline-arXiv-ID calibration gap (transposed-digit class, ~100× cheaper than LLM reviewers). Re-run deferred (PI) to after Batches 2–3. See CHANGELOG + debug/sprint_qa_group1_rc1_memo.md.
 
 - **Lorentzian-propinquity chase CLOSED — P45 §open Q1 resolved, convention branch (2026-06-19, v4.26.0):** structural reason behind every prior negative — the truncated BW boost is COMPACT (K=diag(2m_j), e^{2πiK}=I), so the metric is Euclidean (forward-triangle only); the Lorentzian signature is the Wick rotation of the KMS β=2π circle = convention (de-compactification strictly n→∞). Metric-level dual of WH7. `tests/test_lorentzian_toeplitz_kplus.py` 11/11. See debug/sprint_lorentzian_toeplitz_kplus_probe_memo.md. (v4.26.1: cross-referenced into P42/P43 §O1, group1 synthesis honest-scope, and P35 BW-reading — finite-cutoff Euclidean/convention vs continuum-open, stated consistently corpus-wide.)
 

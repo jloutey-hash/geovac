@@ -1604,17 +1604,18 @@ the Berezin-image support coincide.
 \label{app:enlarged}
 % =====================================================================
 
-We record the closure of the named follow-on question
+We examine the named follow-on question
 (G1$'$, Sprint~L3b-2f) from \S~\ref{sec:enlarged_substrate}:\ does
 the strong-form propinquity bound extend to chirality-flipping
 generators not present in the natural chirality-doubled
-scalar-multiplier substrate? This appendix shows that it does, with
-the substantive content that the chirality-flip enlargement is
-``paid'' entirely in a gradient-norm extension --- leaving the
-propinquity bound bit-exactly preserved at the same numerical value
-as the natural-substrate bound established in Theorem~\ref{thm:main}.
+scalar-multiplier substrate? This appendix proposes a route (proof-sketch
+grade, \emph{descoped} --- the underlying Krein seminorm is degenerate, see
+\S~B.5):\ the chirality-flip enlargement is
+``paid'' entirely in a gradient-norm extension, leaving the
+\emph{rate formula} bit-exactly equal to the natural-substrate value
+of Theorem~\ref{thm:main} (the same degenerate quantity, not a metric convergence).
 
-The arc that closes G1$'$ was internally executed as Sprint
+The arc that addresses G1$'$ was internally executed as Sprint
 L3b-2f-$\beta$ across four sub-sprints (a,b,c,d,e and a final
 $\beta$-L5 assembly). The structure of this appendix follows the
 $\beta$-L5 closure memo \S~6.6.
@@ -1643,7 +1644,7 @@ non-zero, and the temporal direction becomes Lipschitz-relevant.
 $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$ survive on the enlarged
 substrate, possibly with a different multiplicative constant?
 
-The closure below answers both questions affirmatively, with the
+The proposed route below addresses both questions (proof-sketch grade, descoped), with the
 chirality-flip content absorbed into the gradient-norm side of the
 L3 bound and the propinquity multiplier $\Cthreeop(\nmax) =
 \sqrt{1 - 1/\nmax}$ unchanged.
@@ -1910,7 +1911,7 @@ propinquity multiplier unchanged.
 \subsection{Main statement: strict-strong-form extension}
 \label{app:enlarged_main}
 
-\begin{theorem}[Strict-strong-form extension, $\beta$-L5 closure]
+\begin{theorem}[Strict-strong-form extension ($\beta$-L5 proposed route, proof-sketch grade --- descoped, see \S~B.5)]
 \label{thm:enlarged_main}
 On the enlarged operator system
 $\Op^{L}_{\mathrm{enlarged}} = \Op^{L} \cup \{ M^{\spat,\mathrm{flip}}
@@ -1927,7 +1928,9 @@ joint smooth gradient norm, the Latr\'emoli\`ere propinquity bound is
 with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ and
 $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$ identical to those of
 Theorem~\ref{thm:main}. The Riemannian-limit recovery at $\Nt = 1$ is
-bit-exact (Frobenius residual $0.0$ in float64).
+bit-exact (Frobenius residual $0.0$ in float64). \emph{Descoped}:\ the
+Krein seminorm is degenerate (Paper~45), so \eqref{eq:enlarged_main_bound}
+is the rate formula, not a metric convergence (see \S~B.5).
 \end{theorem}
 
 \begin{proof}
@@ -1951,8 +1954,9 @@ applies and the same $\Cthreeop(\nmax)$ bound holds. \qedhere
 \label{app:enlarged_interpretation}
 
 The substantive content of Theorem~\ref{thm:enlarged_main} is that
-the enlarged-substrate bound is bit-exactly equal to the
-natural-substrate bound of Theorem~\ref{thm:main}, at the same
+the enlarged-substrate rate formula is bit-exactly equal to the
+natural-substrate value of Theorem~\ref{thm:main} (the same degenerate
+quantity, not a metric convergence), at the same
 $\Cthreeop$ and the same $\gammajoint$, on the same numerical panel
 $(\nmax, \Nt) \in \{(2, 3), (3, 5), (4, 7)\}$ with values $2.0746$,
 $1.6101$, $1.3223$. The cost of the chirality-flip enlargement is
