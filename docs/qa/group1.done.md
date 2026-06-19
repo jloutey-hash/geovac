@@ -149,3 +149,19 @@ group1 paper restates them (C7).
   (inline-arXiv transposition class). Seed key `group1_rc1_seed_key.json`, memo
   `debug/sprint_qa_group1_rc1_memo.md`. **Remaining: re-cert Batch 2 (42/43/44/53),
   Batch 3 (29/39/40/50/52), then re-run all to certify.**
+- 2026-06-19 — **Re-cert Batch 2 (Papers 42, 43, 44, 53 + synthesis) = FAIL →
+  REMEDIATED** (v4.28.0; re-run deferred to after Batch 3 per PI). 14-agent panel,
+  calibrated (sensitivity 4/4, specificity 5/5); deterministic C5/C11/C13/C14/C15
+  PASS. Genuine fixes: p42 ×3 result-level C7 (Paper-38 "Latrémolière
+  propinquity"→state-space GH; the L5-lemma-name mention kept — matches P38's own
+  naming, reconcile), p44 C8 two-way UPGRADE (P38 "qualitative-rate"→unconditional
+  rate 4/π), **p53 status-note-only descope fixed in the theorem** (thm:interior
+  (b),(c) → plane-only; §boundary phantom Λ^{−1.30} corrected; stale "interior
+  reconstruction" ×2 → plane), p43 hekkelman2022 wrong-ID 2206.13744→2111.13865,
+  p53 stempak impossible-year→ETNA 14 (2002) 223–235, connes_vs Prop 4.2
+  sub-number softened, corpus-wide ack Edward→Eva-Maria Hekkelman (p42/43 + 38/39/40).
+  3 reviewer over-flags reconciled (synth phantom-52/53-coverage = summary exists
+  l.136–144; synth L5 = faithful to P38; vdD Prop 4.1 = GROUNDED per citation-42).
+  All compile errors=0/undef=0. Seed key `group1_rc2_seed_key.json`, memo
+  `debug/sprint_qa_group1_rc2_memo.md`. **Remaining: re-cert Batch 3 (29, 39, 40,
+  50, 52), then re-run all to certify.**

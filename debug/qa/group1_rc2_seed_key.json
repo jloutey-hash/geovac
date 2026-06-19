@@ -1,0 +1,42 @@
+{
+  "run": "group1 re-cert batch 2 (rc2) — Papers 42,43,44,53 + synthesis (Lorentzian foundations + disk), 2026-06-19",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-rc2",
+  "note": "C15 (inline-arXiv) is a deterministic, pre-validated gate (test_inline_arxiv_check.py 4/4, incl. the 2504.10830<->2504.10380 transposition); it does not need per-run LLM calibration. An attempted in-run C15 seed (p42 inline transposition) was a DUD and reverted: p42's van den Dungen bibitem omits the arXiv ID, so there was no bibitem ID to near-match (C15 correctly requires one). The 4 seeds below calibrate the 4 LLM dimensions.",
+  "seeds": [
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex",
+      "catcher": "claims-43",
+      "class": "C14 — flipped the descoped continuum Lorentzian propinquity from 'remains open, requiring a non-compact extension' to 'is now established, via a non-compact extension'.",
+      "anchor": "is now established}, via a non-compact"
+    },
+    {
+      "id": "S-citation-bibitem-C4",
+      "file": "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+      "catcher": "citation-44",
+      "class": "C4 — van den Dungen bibitem arXiv corrupted 1505.01939 -> 1505.04821 (a wrong ID that does not resolve to 'Krein spectral triples'); bibitem-level, the class the LLM citation reviewer owns (not C15, which only catches inline-vs-bibitem near-matches).",
+      "anchor": "1505.04821"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_paper53_plane_bochner_riesz.py",
+      "catcher": "code-53",
+      "class": "C2 — the plane-convergence assertion 'assert p > 0.3' (rate must converge) gutted to 'assert p > -1.0e9' (vacuous; any rate passes, defeats the convergence check).",
+      "anchor": "assert p > -1.0e9"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "catcher": "synthesis",
+      "class": "C9 — Lorentzian Λ-inheritance flipped from 'is descoped while the cocycle-deficit algebra survives' to 'is established while ...'.",
+      "anchor": "inheritance is established while"
+    }
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "what": "p42 four-witness modular theorem (BW/Unruh/Sewell/Hartle-Hawking = one theorem, β=2π) — genuine, must NOT be flagged."},
+    {"id": "M2", "what": "p43 finite-cutoff Wick-rotation/operator-system result — genuine surviving content; the CONTINUUM propinquity is correctly stated as open (do not flag the honest 'remains open')."},
+    {"id": "M3", "what": "p53 plane Bochner-Riesz convergence (the genuine rescue carrier, Λ^{-0.6..-0.9}, positivity s>=1/2) — correct, must NOT be flagged."},
+    {"id": "M4", "what": "connes_rovelli1994 (CQG 11 (1994) 2899) + camporesi_higuchi1996 (JGP 20 (1996) 1) — correct citations, must NOT be flagged."},
+    {"id": "M5", "what": "the v4.26.1 Lorentzian-closure cross-refs (finite-cutoff Euclidean / Lorentzian = Wick convention; continuum open) — correct, must NOT be flagged as overclaim or zombie."}
+  ]
+}

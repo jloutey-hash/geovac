@@ -320,7 +320,7 @@ azimuthal mode basis, $\dim\Op_{\Lambda}^{2}=N^{2}$ at every tested
 truncation $(K,J)\in\{(2,2),(2,3),(3,2),(3,3)\}$ with
 $N\in\{8,12,12,18\}$ (driver \texttt{l6\_disk\_prop2.py}). The disk
 operator system thus inherits the Connes--van~Suijlekom two-step
-generation of the Toeplitz circle~\cite[Prop.~4.2]{connes_vs2021}; the
+generation of the Toeplitz circle~\cite{connes_vs2021}; the
 $1/\rho^{2}$ coupling between radial and azimuthal sectors does not
 obstruct it. $\hfill\square$
 
@@ -357,19 +357,26 @@ normalised positive average (Markov).
 \label{thm:interior}
 Let $f\in C(\cone)$ be a Lipschitz observable supported in the interior
 $\{\rho\le\theta R\}$ for some fixed $\theta<1$. Then $\Berez_{\Lambda}$
-of Definition~\ref{def:berezin} satisfies, for all $\Lambda$:
+of Definition~\ref{def:berezin} satisfies (parts \emph{(a)},\emph{(d)}
+hold on the finite disk for all $\Lambda$; parts \emph{(b)},\emph{(c)}
+hold on the boundaryless plane $\R^{2}_{\alpha}$ only and are
+\emph{withdrawn on the finite disk}, Remark~\ref{rem:interior_correction}):
 \begin{enumerate}
 \item[\emph{(a)}] \textbf{Unitality:} $\Berez_{\Lambda}(1)=P_{\Lambda}=I$
 on $P_{\Lambda}\Hilb$ (exactly, since $g_{\Lambda}\equiv1$ for $f\equiv1$).
-\item[\emph{(b)}] \textbf{Positivity and contractivity:} for $s\ge2$,
+\item[\emph{(b)}] \textbf{Positivity and contractivity (plane only):}
+for $s\ge\tfrac12$ on $\R^{2}_{\alpha}$,
 $f\ge0\Rightarrow\Berez_{\Lambda}(f)\succeq0$, and
 $\opnorm{\Berez_{\Lambda}(f)}\le\supnorm{f}$ (because
-$\min f\le g_{\Lambda}\le\max f$).
-\item[\emph{(c)}] \textbf{Approximate identity:}
+$\min f\le g_{\Lambda}\le\max f$); see Theorem~\ref{thm:plane}. On the
+finite disk positivity fails ($\min g\approx-0.13$).
+\item[\emph{(c)}] \textbf{Approximate identity (plane only):}
 $\opnorm{\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}}\le
-\gamma_{\Lambda}\,\supnorm{\nabla f}$ with $\gamma_{\Lambda}\to0$; the
+\gamma_{\Lambda}\,\supnorm{\nabla f}$ with $\gamma_{\Lambda}\to0$ on
+$\R^{2}_{\alpha}$ (Theorem~\ref{thm:plane}); the
 bound is proportional to $\supnorm{\nabla f}$ (it vanishes for constant
-$f$), not to $\supnorm{f}$.
+$f$), not to $\supnorm{f}$. On the finite disk $\gamma_{\Lambda}$ does
+not decay ($\sim\Lambda^{+0.07}$).
 \item[\emph{(d)}] \textbf{Lipschitz compatibility:}
 $\opnorm{[D,\Berez_{\Lambda}(f)]}\le\supnorm{\nabla g_{\Lambda}}\le
 \supnorm{\nabla f}$ (the Markov average is non-expansive).
@@ -418,8 +425,10 @@ $\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}=P_{\Lambda}
 M_{g_{\Lambda}-f}P_{\Lambda}$, so the bound is $\supnorm{g_{\Lambda}-f}$;
 since $g_{\Lambda}-f$ is a smoothing difference that vanishes for
 constant $f$, it is controlled by $\supnorm{\nabla f}$ times the kernel
-width $\gamma_{\Lambda}$. For an interior-supported $f$ the kernel
-localisation gives $\gamma_{\Lambda}\to0$ at an algebraic rate. (d) is
+width $\gamma_{\Lambda}$. On the boundaryless plane the kernel
+localisation gives $\gamma_{\Lambda}\to0$ at an algebraic rate
+(Theorem~\ref{thm:plane}); on the finite disk it does not
+($\gamma_{\Lambda}\sim\Lambda^{+0.07}$, Remark~\ref{rem:interior_correction}). (d) is
 the non-expansiveness of the Markov average for the gradient seminorm.
 \end{proof}
 
@@ -479,7 +488,8 @@ propinquity by $C\gamma_{\Lambda}\to0$ by the standard
 assembly~\cite{latremoliere2015}. The cigar-tip entropy of Paper~51 is
 the zeroth Mellin moment of the apex tip, in which the bulk and boundary
 contributions cancel; faithfulness at the apex is therefore the
-relevant statement, and it is supplied by the interior reconstruction.
+relevant statement, and it is supplied by the plane reconstruction
+(Theorem~\ref{thm:plane}).
 \end{proof}
 
 \begin{remark}[Why the apex suffices]
@@ -489,7 +499,7 @@ difference in which the bulk Weyl term and the boundary contribution
 cancel before the entropy is taken (Paper~51, and the tip/bulk
 separation established there). The propinquity backbone needs to certify
 geometric faithfulness where the observable lives --- at the apex --- and
-the interior reconstruction does exactly that.
+the plane reconstruction does exactly that.
 \end{remark}
 
 % =====================================================================
@@ -504,8 +514,9 @@ $\Op_{\Lambda}=P_{\Lambda}C(\cone)P_{\Lambda}$ cannot represent a
 function with $f(R)\ne0$ near the boundary in sup-norm: the full-disk
 coefficient $\supnorm{g_{\Lambda}-f}/\supnorm{\nabla f}$ for
 $f=(\rho/R)^{2}$ (which equals $1$ at the boundary) stays flat near
-$0.3$ while the interior coefficient decays as $\Lambda^{-1.30}$
-(Remark~\ref{rem:numerics}). The same is true of any observable with
+$0.3$, and on the finite disk even the interior coefficient does not
+decay ($\Lambda^{+0.07}$, Remark~\ref{rem:numerics});\ convergence is
+recovered only on the boundaryless plane (Theorem~\ref{thm:plane}). The same is true of any observable with
 appreciable content in the boundary collar, even one vanishing at $R$.
 This is the manifold-with-boundary feature that the closed carriers of
 the earlier papers (the circle, the spheres, the groups) do not have.
@@ -742,7 +753,8 @@ Cambridge Univ.\ Press, 1993.
 
 \bibitem{stempak1989}
 K.~Stempak, ``On convergence and divergence of Fourier--Bessel series,''
-\textit{Electron.~Trans.~Numer.~Anal.} and related works on Ces\`aro and
+\textit{Electron.~Trans.~Numer.~Anal.}\ \textbf{14} (2002), 223--235;
+and related works on Ces\`aro and
 Riesz means of Fourier--Bessel / Hankel expansions; see also
 B.~Muckenhoupt and E.~M.~Stein, ``Classical expansions and their
 relation to conjugate harmonic functions,''
