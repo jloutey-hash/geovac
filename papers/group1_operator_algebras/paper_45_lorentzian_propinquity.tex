@@ -1695,7 +1695,34 @@ than diminishes the contrast.
 
 \begin{enumerate}
 \item[(Q1)] \textbf{The reopened target:\ a Lorentzian/Krein
-quantum-metric convergence theorem.} The degeneracy theorem collapses the former ``weak-form vs
+quantum-metric convergence theorem.}
+\textbf{Resolved on the convention branch (2026-06-19), with a structural
+reason.} The accumulated evidence below (operator Lipschitz seminorm
+signature-blind; boost-seminorm $Q$ a grading not a signature; the forward
+chain inequality the only universal state-level direction) has a single
+mechanism:\ \emph{the truncated Bisognano--Wichmann boost is compact}. The
+modular generator $K = \mathrm{diag}(2m_{j})$ has integer (odd) spectrum,
+so $e^{2\pi i K} = \mathbb{1}$ bit-exact at every finite cutoff (verified
+$n_{\max}=2..5$, falsifier \texttt{tests/test\_lorentzian\_toeplitz\_kplus.py})
+--- the modular flow is a $2\pi$-periodic rotation, the KMS $\beta=2\pi$
+circle, not a non-compact boost (forced:\ finite Hermitian $\Rightarrow$
+discrete spectrum $\Rightarrow$ compact flow). A compact circle carries only a
+\emph{Euclidean} (forward-triangle) metric; its Wick rotation $t \to it$
+(SO(2) $\to$ SO(1,1)) is what produces the \emph{reverse}-triangle Lorentzian
+proper time. So the Lorentzian signature requires the \emph{non-compact}
+continuum boost (continuous spectrum, type III):\ under the continuum
+range-normalization $K/\max|\mathrm{spec}|$ the spectral spacing $\to 0$
+and the flow period $\to \infty$ monotonically as $n_{\max} \to \infty$, so
+de-compactification --- and with it the reverse triangle --- is \emph{strictly}
+the $n_{\max} \to \infty$ limit that the finite-cutoff propinquity framework
+approaches but never reaches. \textbf{Conclusion:}\ at every finite cutoff the
+quantum metric is Euclidean (forward triangle, the only universal direction);
+the Lorentzian signature is the Wick rotation of the compact $2\pi$-circle ---
+a choice of contour (convention), not a truncation-level metric object. This
+is the metric-level dual of the WH7 reading (compactness $\Rightarrow$
+discreteness $\Rightarrow$ the $\pi/\beta$ of the KMS circle). The detailed
+failure analysis that this mechanism explains follows.
+The degeneracy theorem collapses the former ``weak-form vs
 strong-form'' split into a single open problem, with a sharper
 specification supplied by the failure analysis. Any viable construction must simultaneously:\
 (i) use a temporal multiplier algebra the Dirac can see — Toeplitz

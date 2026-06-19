@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.26.0] - 2026-06-19
+
+### Changed — Lorentzian-propinquity chase CLOSED: Paper 45 §open Q1 resolved on the convention branch (structural reason)
+
+PI direction "let's chase Lorentzian propinquity". Mapped the full frontier (P45 §open Q1 + the B3 Phase-3 arc's 5 panels + the v4.25.0 K⁺/Toeplitz probe) and identified the single mechanism behind every prior negative.
+
+**The truncated Bisognano–Wichmann boost is COMPACT.** The modular generator is `K = diag(2 m_j)` — odd-integer spectrum (the framework is π-free) — so `e^{2πiK} = I` bit-exact at every finite cutoff (verified n_max=2..5). The modular flow `e^{itK}` is therefore a 2π-periodic rotation — the KMS β=2π circle — not a non-compact boost. This is forced: finite truncation ⇒ finite Hermitian ⇒ discrete spectrum ⇒ compact/periodic flow.
+
+**A compact circle carries only a Euclidean (forward-triangle) metric.** Verified: S¹ geodesic distance is sub-additive (forward triangle); its Wick rotation `t→it` (SO(2)→SO(1,1)) flips it to the reverse triangle (Minkowski proper time, the Lorentzian signature). This one fact explains every prior negative: B3's "forward chain inequality is the only universal direction" = the circle's forward triangle; B3's interval "additive, mod 2π" = a compact angle; B3's boost-seminorm Q "a grading not a signature" = compact generator; the K⁺/Toeplitz seminorm "= ω_q, signature-blind" = the compact S¹ frequency has no signature.
+
+**De-compactification is strictly the n→∞ limit.** Under the continuum range-normalization `K/max|spec|`, the spectral spacing → 0 and the flow period → ∞ monotonically (n_max=2..5: spacing 0.667→0.222, period 18.8→56.5), so the spectrum approaches a continuous one — the non-compact continuum (type-III) boost, where the Lorentzian reverse-triangle would emerge — only in the limit, never at a finite cutoff.
+
+**Conclusion (P45 §open Q1 resolved, convention branch):** at every finite cutoff the quantum metric is Euclidean (forward triangle, the only universal direction); the Lorentzian signature is the Wick rotation of the compact 2π-circle — a choice of contour (convention), not a truncation-level metric. This is the metric-level dual of WH7 (compactness ⇒ discreteness ⇒ π/β; the Lorentzian leg is the free-side de-compactification). P45 §open Q1 updated (resolved-on-convention with the structural reason); CLAUDE.md §1.7 WH7 updated; falsifier `tests/test_lorentzian_toeplitz_kplus.py` extended (11/11: compact-flow `e^{2πiK}=I` + de-compactification trend). Honest cap (WH7 input iii): whether the continuum limit genuinely de-compactifies the metric is undecidable at any computable cutoff. Memo `debug/sprint_lorentzian_toeplitz_kplus_probe_memo.md`; p45 compiles errors=0/undefined=0 (27pp).
+
 ## [4.25.0] - 2026-06-18
 
 ### Changed — `/qa group1` Bite B sub-bite 3 (Papers 39, 52, 53): FAIL remediated (two PI-directed rescues) + Lorentzian-propinquity rescue probe

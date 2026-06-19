@@ -111,3 +111,51 @@ signature-triviality is ROBUST, not a v1 artifact.
 Driver (reproducible inline; freeze as `tests/test_lorentzian_toeplitz_kplus.py`
 if promoted): builds `temporal_shift(N_t,q)` in the `fourier_momentum_grid` basis,
 injects `I_spatial ⊗ S_q`, compares `s_full` / `s_restr` to `ω_q = 2πq/T`.
+
+---
+
+## Follow-on (2026-06-19, PI: "let's chase Lorentzian propinquity") — STRUCTURAL CLOSURE
+
+Mapped the full frontier (P45 §open Q1 + the B3 Phase-3 arc, 5 panels). All prior
+results converge on one pattern, and the **mechanism** is now identified:
+
+**The truncated modular/Bisognano–Wichmann boost is COMPACT.** The modular
+generator is `K_boost = diag(two_m_j)` (odd integers; `geovac/modular_hamiltonian.py`
+`_build_geometric_K_boost`), so `e^{2πiK}=I` bit-exact at n_max=2,3 (verified) — the
+modular flow `e^{itK}` is a **2π-periodic rotation (a circle = the KMS β=2π loop)**,
+not a non-compact boost. This is forced: a finite truncation ⇒ finite Hermitian K ⇒
+discrete (here integer) spectrum ⇒ compact/periodic flow.
+
+**A compact circle carries only a Euclidean (forward-triangle) metric.** Verified:
+geodesic distance on S¹ is sub-additive (forward triangle, 2000/2000). Its Wick
+rotation `t→it` sends SO(2)→SO(1,1), flipping forward→**reverse** triangle (Minkowski
+proper time, 20000/20000) — the Lorentzian signature.
+
+**This is the mechanism behind every prior negative:**
+- B3: "the (forward) chain inequality is the only universal direction" = the circle's
+  forward triangle. No sign-definite super-additive (reverse-triangle) functional
+  exists because the compact flow has no reverse triangle.
+- B3: the interval ℓ is "well-defined mod π/2π, additive" = a compact angle (S¹
+  geodesic), exactly the Euclidean case.
+- B3: the boost-seminorm Q is "a grading, not a metric signature" = compact generator.
+- This memo (v1/v2): the K⁺-compressed Toeplitz seminorm is `ω_q`, signature-blind
+  even under a genuine Wick involution = the compact S¹ frequency has no signature.
+
+**Closure.** *Lorentzian propinquity is not a finite-cutoff metric.* At every finite
+cutoff (and every computable band-exhaustion level — B3 fifth panel) the modular flow
+is compact ⇒ the natural metric is Euclidean (forward triangle). The Lorentzian
+signature (reverse triangle) requires the **non-compact** continuum boost (continuous
+spectrum, type III), which the spectrum approaches only as n_max→∞ (range
+[−(2n−1),(2n−1)] → unbounded) — i.e. in the continuum limit, never at a finite cutoff.
+On the truncation the boost is the Wick rotation `t→it` of the compact 2π-circle:\ a
+choice of contour, **convention**, not a metric object. This is the **metric-level
+dual of WH7**: compactness ⇒ discreteness ⇒ the π/β of the KMS circle, and the
+Lorentzian leg is the (free-side) de-compactification.
+
+This resolves P45 §open Q1's "is there a seminorm in which Lorentzian structure
+carries the metric data" on the **convention** branch, with a structural — not merely
+empirical — reason: there is none at finite cutoff because the modular flow is compact.
+The genuine non-compact boost is a continuum-limit / type-III object, outside the
+propinquity (finite-cutoff → continuum) framework's metric reach. Honest cap (WH7
+input iii): whether the continuum limit genuinely de-compactifies the metric is not
+decidable at any computable cutoff.
