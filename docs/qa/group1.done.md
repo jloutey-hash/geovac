@@ -165,3 +165,21 @@ group1 paper restates them (C7).
   All compile errors=0/undef=0. Seed key `group1_rc2_seed_key.json`, memo
   `debug/sprint_qa_group1_rc2_memo.md`. **Remaining: re-cert Batch 3 (29, 39, 40,
   50, 52), then re-run all to certify.**
+- 2026-06-19 — **Re-cert Batch 3 (Papers 29, 39, 40, 50, 52 + synthesis) = FAIL →
+  REMEDIATED** (v4.29.0; completes the three re-cert batches; certifying re-run
+  deferred per PI). 15-agent panel, calibrated (sensitivity 4/4, specificity 5/5);
+  C5/C11/C13/C14/C15 PASS. Genuine fixes: **p40** C8 twin (rank-uniform 4/π proof
+  "now complete"→named gap) + **C4 LARGE wrong-ID** (hekkelman_mcdonald_vs2024_ucp
+  = arXiv:2410.15454 is actually Bhattacharyya et al. → redirected to Rieffel/Hawkins,
+  fabricated bibitem removed) + 3 bibitem metadata (bizi title, latremoliere2016
+  venue, latremoliere2018 year/vol); **p39** "master theorem" zombie→sketch +
+  asymmetric-sup bug (corner→interior (8,5)) + Λ^full code-comment; **p50** C7 ×7 +
+  Henningson–Skenderis "inheritance"→taxonomic classification + "Weyl"→single
+  (3d) Dirac + lei initials; **p52** C7 ×12 (incomplete B-series body relabel);
+  **p29** 3-prism graph-ID bug (V=6/E=7/β₁=2, not C₃×P₂) + cross-paper dangling
+  \ref→Paper 28; **synth** Sachdev→Safdi. 2 over-flags reconciled (synth 52/53
+  coverage; vdD N/A). Coverage gaps logged, claims verified-true (p40 PRV C₃=1 not
+  wired into tests/; p29 bound-crossing JSON smoke test). All 6 papers compile
+  errors=0/undef=0. Seed key `group1_rc3_seed_key.json`, memo
+  `debug/sprint_qa_group1_rc3_memo.md`. **All three batches remediated — the
+  certifying re-run (45–49 / 42–44+53 / 29+39+40+50+52) is the next step.**

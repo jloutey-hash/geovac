@@ -333,13 +333,17 @@ The $S^3$ Coulomb graph at $n_{\max}=3$ has three connected components
 indexed by $\ell=0,1,2$.  The $\ell=0$ component is a 3-node path
 ($\beta_1=0$, $\zeta_{\ell=0}=1$); the $\ell=2$ component is a 5-node
 tree-like structure ($\beta_1=0$, $\zeta_{\ell=2}=1$).  \emph{All
-non-trivial Ihara content lives in the $\ell=1$ component}, which is
-the bipartite 3-prism / ladder graph $C_3\times P_2$.  The cyclotomic
+non-trivial Ihara content lives in the $\ell=1$ component}, a connected
+graph on $6$ vertices (the $m\in\{-1,0,1\}$ states of the $n=2,3$ shells)
+with $7$ edges --- consistent with the degree-$14$ inverse zeta
+($\deg\zeta_G^{-1} = 2E = 14$) and first Betti number
+$\beta_1 = E - V + 1 = 2$ (the two independent cycles visible in the
+factorisation).  The cyclotomic
 factors $s^2 \pm s + 1$ in~(\ref{eq:s3_closed}) have zeros at primitive
-sixth roots of unity (magnitude 1); they count the two triangles in
-the 3-prism.  The irreducible cubics $2s^3 \pm s^2 + s \pm 1$ have
+sixth roots of unity (magnitude 1); the irreducible cubics
+$2s^3 \pm s^2 + s \pm 1$ have
 zeros at $|s|\approx 0.739$ (real) and $|s|\approx 0.823$ (complex),
-corresponding to longer closed walks through the ladder.
+corresponding to longer closed walks through the component.
 
 The per-$\ell$ decomposition is a direct consequence of the Fock
 adjacency preserving $\ell$.  It is an intrinsic structural property
@@ -871,8 +875,8 @@ spectral-to-classical-RH bridge.  Full analysis in
 \texttt{debug/functional\_equation\_hunt\_memo.md}.
 
 \paragraph{Depth-2 $\chi_{-4}$ analog for $S_{\min}$
-(Sprint~4, RH-P).}  The depth-1 identity~(\ref{eq:D_diff_closed})
-of Paper~28 has no depth-2 analog for the CG-weighted irreducible
+(Sprint~4, RH-P).}  The depth-1 identity
+of Paper~28~\cite{paper28} has no depth-2 analog for the CG-weighted irreducible
 constant $S_{\min}$.  Splitting $S_{\min} = \sum_k T(k)^2$ by the
 parity of $k$ gives $S_{\min}^{\mathrm{even}} + S_{\min}^{\mathrm{odd}} =
 S_{\min}$ (sanity); the difference $S_{\min}^{\mathrm{diff}}$ is

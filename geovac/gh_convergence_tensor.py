@@ -1218,10 +1218,15 @@ def compute_tensor_propinquity_bound(
         Lambda <= C_3^{(2),fact} * max(gamma_a, gamma_b) = max(gamma_a, gamma_b)
     since C_3^{(2),fact} = 1.
 
-    The full-operator-system bound is
+    The full-operator-system bound reported in this field is the
+    conservative
         Lambda <= C_3^{(2),full} * max(gamma_a, gamma_b) = 2 max(gamma_a, gamma_b)
-    via the conservative Bozejko-Fendler estimate; tightening to 1 is the
-    natural follow-up sprint.
+    Bozejko-Fendler estimate.  NOTE (2026-06-18 correction): the earlier
+    "tighten to 1" follow-up was the *withdrawn* Pythagorean direction;
+    the correct comparison constant is the triangle bound
+    C_3^{(2)} <= sqrt(2) (see c3_full_triangle_bound).  The paper's
+    assembled Lambda^full column uses C_3^{(2)} * (1 + 2 sqrt 2) * max(gamma),
+    a tighter assembled bound than this conservative 2*gamma field.
 
     Both bounds vanish as n_a, n_b -> infinity.
     """

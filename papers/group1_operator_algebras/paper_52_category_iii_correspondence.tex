@@ -222,7 +222,7 @@ Section~\ref{sec:geovac_substrate} reviews the GeoVac substrate at
 the level needed for the structural argument.
 Section~\ref{sec:boundary_data} summarizes the bit-exact KPS matches
 from Paper 50~\cite{paper50}.
-Section~\ref{sec:propinquity_mechanism} identifies propinquity
+Section~\ref{sec:propinquity_mechanism} identifies state-space GH
 convergence (Paper 38) as the framework's analog of the holographic
 correspondence.
 Section~\ref{sec:modular_structure} addresses the wedge KMS modular
@@ -313,7 +313,7 @@ content of the limit triple, extracted via zeta-function derivatives
 spectral asymptotics of the discrete substrate, not reconstructed from
 any bulk. There is no ``bulk'' --- the discrete substrate is the
 framework's intrinsic object, and the continuum CFT is what the
-substrate looks like at the propinquity limit.
+substrate looks like at the state-space GH limit.
 
 \subsection{The three categories at a glance}
 
@@ -324,7 +324,7 @@ Category & Bulk object & Correspondence mechanism \\
 \midrule
 I (Holographic) & Bulk gravity in $d+1$ dimensions & Holographic dictionary; reconstruction \\
 II (Topological) & Bulk discrete / topological in $d+1$ dimensions & State-sum; topological invariant \\
-III (Spectral) & Discrete spectral triple at finite cutoff & Propinquity convergence; spectral asymptotics \\
+III (Spectral) & Discrete spectral triple at finite cutoff & State-space GH convergence; spectral asymptotics \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -488,28 +488,29 @@ per-group spin-window decomposition, verified for $\mathrm{SU}(2)$).
 
 \subsection{Why this is the ``correspondence'' mechanism}
 
-The propinquity convergence relates two operator-algebraic objects
+The state-space GH convergence relates two operator-algebraic objects
 (the discrete and continuum spectral triples) by a quantitative
 metric, with proven convergence rate. The boundary CFT$_{3}$
 partition function data of Section~\ref{sec:boundary_data} is
 extracted from the continuum spectral triple $\Tcal_{\infty}$ via the
 zeta-function derivative $-\tfrac{1}{2}\zeta'(0)$; this derivative is
-PRESERVED by the propinquity limit because
+PRESERVED by the state-space GH limit because
 \begin{itemize}
 \item the spectral data of $D_{\nmax}$ converges to that of
 $D_{\infty}$ in the operator-norm sense (per Berezin reconstruction,
 Paper 38 L4);
+% C7: state-space GH (van Suijlekom), not Latrémolière propinquity
 \item the spectral-zeta function converges term-by-term and uniformly
 on the strip $\mathrm{Re}(s) > d/2$;
 \item the meromorphic continuation to $s = 0$ commutes with the
-propinquity limit by standard analytic-continuation arguments.
+state-space GH limit by standard analytic-continuation arguments.
 \end{itemize}
 
 In holographic terminology, this is the framework's ``dictionary'':
 the discrete spectral triple at finite cutoff is the framework's
 ``bulk-like'' object (more precisely, its substrate), and the
 boundary CFT$_{3}$ data is what that object looks like at the
-propinquity limit. There is no separate ``bulk theory'' to translate
+state-space GH limit. There is no separate ``bulk theory'' to translate
 from; the spectral triple at finite cutoff is itself the framework's
 primary object.
 
@@ -521,7 +522,7 @@ modes. The boundary CFT exists in the same dimensional setting as the
 bulk's asymptotic boundary, and the dictionary translates between two
 distinct physical theories.
 
-Propinquity convergence recovers continuum CFT data from a discrete
+State-space GH convergence recovers continuum CFT data from a discrete
 substrate by taking the continuum limit of the substrate's spectral
 asymptotics. Both objects (discrete and continuum spectral triples)
 live in the same dimensional setting (both are spectral triples on
@@ -632,12 +633,12 @@ boundary operators.
 \subsection{The Category III alternative}
 
 The framework's mechanism for producing the boundary CFT$_{3}$ data
-is the propinquity convergence of Theorem~\ref{thm:propinquity}: the
+is the state-space GH convergence of Theorem~\ref{thm:propinquity}: the
 discrete spectral triple at finite cutoff approaches the continuum
 round-$\sthree$ spectral triple in an explicit metric, with proven
 convergence rate. The boundary CFT$_{3}$ data is the spectral-zeta
 content of the continuum limit, and this content is preserved by the
-propinquity limit by standard analytic-continuation arguments. This
+state-space GH limit by standard analytic-continuation arguments. This
 is structurally distinct from any holographic mechanism.
 
 \begin{remark}[What this paper is NOT claiming]
@@ -688,7 +689,7 @@ transcendental signature of any CFT$_{3}$ partition function decomposes
 under M1/M2/M3, but mapping this decomposition to interacting CFT$_{3}$
 data requires further analysis.
 
-\paragraph{Q4.} The Lorentzian extension of the propinquity convergence
+\paragraph{Q4.} The Lorentzian extension of the state-space GH convergence
 (Papers 45~\cite{paper45}, 46, 47~\cite{paper47}) extends Category III
 to non-compact carriers. Whether the framework's Lorentzian extension
 produces dS-thermal-state observables (Hawking radiation on the
@@ -701,8 +702,8 @@ dS/CFT predictions is open.
 
 This paper consolidates findings from the post-v3.20.0 continuation
 thread (2026-05-29) of the GeoVac development, building on Paper 50
-(boundary CFT$_{3}$ partition function data) and Paper 38 (propinquity
-convergence). The framework-positioning argument was developed in
+(boundary CFT$_{3}$ partition function data) and Paper 38 (state-space
+GH convergence). The framework-positioning argument was developed in
 internal memos
 \texttt{debug/sprint\_ds\_cft\_scoping\_memo.md}~\cite{debug:ds_cft_scoping}
 and

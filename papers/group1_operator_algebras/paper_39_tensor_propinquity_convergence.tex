@@ -759,8 +759,10 @@ bounded constant $C_3^{(2)} \le \sqrt 2$ does not disturb.
 For asymmetric cutoffs $\nmaxa \ne \nmaxb$, the supremum is again
 bounded by $\sqrt 2$ and is found by scanning the irrep grid. At
 $(\nmaxa, \nmaxb) = (10, 4)$ for example, the maximum over
-$[2,11] \times [2,5]$ is $\approx 1.17$ (at the top corner $(11,5)$,
-$\sqrt{196/144}$). In all cases $C_3^{(2)} \le \sqrt 2$, which is what
+$[2,11] \times [2,5]$ is $\approx 1.179$ at the \emph{interior} point
+$(8,5)$ ($\sqrt{121/87}$) --- the supremum need not occur at the grid
+corner $((11,5)$ gives only $\sqrt{196/144} \approx 1.167)$. In all
+cases $C_3^{(2)} \le \sqrt 2$, which is what
 the convergence theorem requires.
 \end{remark}
 
@@ -1008,7 +1010,9 @@ factorised-panel propinquity bound. The full-operator-system column
 $\Lambda^{\mathrm{full}}$ uses
 $\Lambda \le C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ with $1 + 2\sqrt{2} \approx
-3.828$. Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
+3.828$ (computed from this closed form; the supporting module's
+\texttt{propinquity\_bound\_full} field tracks a looser conservative
+$2\gamma$ estimate, not this assembled bound). Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
 exhibit monotone decrease across the diagonal panel.
 
 \paragraph{Three structural observations.}
@@ -1321,7 +1325,7 @@ Latr\'emoli\`ere, Carla Farsi, Matilde Marcolli, Eva-Maria Hekkelman,
 Edward McDonald, Malte Leimbach, and Carlos Perez-Sanchez for the
 foundational frameworks on which this paper builds; remaining errors
 are the author's own. This paper builds directly on
-\cite{loutey_paper38} (single-factor $\sthree$ propinquity
+\cite{loutey_paper38} (single-factor $\sthree$ state-space GH
 convergence) and on the multi-focal-composition track of the GeoVac
 internal record. As with~\cite{loutey_paper38}, this work was
 developed in an AI-augmented agentic workflow with Anthropic's Claude:
@@ -1473,10 +1477,10 @@ J.~Loutey,
 $\SU(2) \times U(1)_{T}$ Krein spectral triples: a degeneracy theorem},
 \newblock preprint, May 2026; proves the natural Lorentzian-propinquity
 seminorm degenerates, closing that route; its signature-agnostic
-product-carrier rate is structurally a $k = 2$,
-$G_{1} = \SU(2)$, $G_{2} = U(1)$ special case of the master theorem
-~\eqref{eq:master_theorem_v} of the present paper's
-\S\ref{sec:open}~(v) update.
+product-carrier rate is the $k = 2$,
+$G_{1} = \SU(2)$, $G_{2} = U(1)$ instance of the multi-factor form
+~\eqref{eq:master_theorem_v} (proved here only at $k = 2$; the
+general-$G$ statement is a sketch, \S\ref{sec:open}~(v)).
 
 \end{thebibliography}
 

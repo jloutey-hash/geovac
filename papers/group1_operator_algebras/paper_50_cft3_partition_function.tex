@@ -241,9 +241,11 @@ with the same multiplicity.
 
 \item \textbf{Camporesi--Higuchi Dirac.}
 Eigenvalues $|\lambda_{n}| = n + \tfrac{3}{2}$ with multiplicity
-$g_{n}^{\mathrm{Dirac}} = 2(n+1)(n+2)$ for the Weyl (single
-chirality) sector, $4(n+1)(n+2)$ for the full $4$-component
-Dirac. Both sectors carry the same Hurwitz-zeta structure under
+$g_{n}^{\mathrm{Dirac}} = 2(n+1)(n+2)$ for the single (3d) Dirac
+fermion (the standard $\sthree$ massless Dirac, whose $F_{D}$ is
+reproduced below; in odd dimension there is no Weyl projection),
+$4(n+1)(n+2)$ for the doubled four-component Dirac. Both carry the
+same Hurwitz-zeta structure under
 analytic continuation~\cite{paper22, paper23}.
 \end{itemize}
 
@@ -251,8 +253,8 @@ The truncation at level $\nmax$ retains all $n \le \nmax$ shells and
 defines the operator system
 $\Op_{\nmax} = P_{\nmax} \Acal P_{\nmax}$ in the
 Connes--van~Suijlekom framework~\cite{connes_vs2021}. Convergence
-$\Op_{\nmax} \to \Op_{\sthree}$ in the Latr\'emoli\`ere propinquity
-holds at rate $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
+$\Op_{\nmax} \to \Op_{\sthree}$ in van~Suijlekom's state-space
+Gromov--Hausdorff distance holds at rate $\gamma_{\nmax} \sim (4/\pi) \log(\nmax) /
 \nmax$~\cite{paper38}; the rate constant $4/\pi$ is the M1
 Hopf-base-measure signature of the master Mellin
 engine~\cite{paper18}.
@@ -1033,9 +1035,9 @@ Squashed $\sthree$ partition function & JKPS, Hama-Hosomichi-Lee & open: deforme
 \end{center}
 
 \paragraph{Holographic Weyl anomaly $\leftrightarrow$ Connes--Chamseddine spectral action: both live in M2.}
-A structural correspondence with the AdS/CFT literature that the framework
-inherits directly --- without additional computation --- is the M2-sector
-identification of the holographic Weyl anomaly and the
+A structural classification shared with the AdS/CFT literature that the framework
+obtains directly --- without additional computation --- is the M2-sector
+placement of the holographic Weyl anomaly and the
 Connes--Chamseddine spectral action.
 
 Henningson and Skenderis~\cite{henningson_skenderis1998} derived the Weyl
@@ -1057,26 +1059,28 @@ Sprint MR-B closed form, two-term-exact theorem). The spectral action
 therefore lives in the M2 ring of the master Mellin engine
 (Paper~18~\cite{paper18} \S III.7).
 
-\textbf{Structural correspondence.} Both the Henningson--Skenderis
+\textbf{Structural classification.} Both the Henningson--Skenderis
 holographic Weyl anomaly and the Connes--Chamseddine spectral action
 sit in the master Mellin engine's M2 sub-mechanism (Seeley--DeWitt
-heat-kernel ring $\sqrt{\pi}\cdot\Q \oplus \pi^{2}\cdot\Q$). Their
-correspondence is not a numerical coincidence but a structural
-inheritance: both compute the same operator-algebraic object (heat-kernel
-trace of $D^{2}$, evaluated via $\mathcal{M}[\mathrm{Tr}\,e^{-tD^{2}}]$
-at operator order $k = 2$) from two different sides --- bulk gravity
-(HS) and finite spectral triple (CC). The framework's discrete-cutoff
-realization (Paper~38~\cite{paper38} propinquity convergence at rate
-$4/\pi$) provides the operator-system-level realization of this
-correspondence at finite cutoff.
+heat-kernel ring $\sqrt{\pi}\cdot\Q \oplus \pi^{2}\cdot\Q$). This is a
+shared heat-kernel \emph{classification}, not a computed identity: both
+are heat-kernel-trace observables ($\mathcal{M}[\mathrm{Tr}\,e^{-tD^{2}}]$
+at operator order $k = 2$), the HS quantity computed on the bulk-gravity
+side and the CC quantity on the finite spectral triple. The framework
+does not compute the HS holographic anomaly; the content is the
+taxonomic placement of both in the M2 ring. The framework's
+discrete-cutoff realization (Paper~38~\cite{paper38} state-space GH
+convergence at rate $4/\pi$) is the operator-system-level home of the
+CC side.
 
 This is the framework's most direct contact point with established
 holographic computations in the M2 sector and is a corollary of the
 master Mellin engine case-exhaustion theorem (Paper~32 \S VIII), not
 a new computation. The substantive content is the explicit
 identification of HS's bulk computation as an M2-sector observable,
-which the framework's spectral action machinery on $\sthree$
-reproduces structurally at finite cutoff.
+placed in the same heat-kernel ring as the framework's spectral action
+on $\sthree$ --- a structural classification, not a reproduction of the
+holographic computation.
 
 \paragraph{Relation to the TT-bar cut-off AdS picture.}
 Hartman, Kruthoff, Shaghoulian, and Tajdini~\cite{hartman_kruthoff_shaghoulian_tajdini2019}
@@ -1152,13 +1156,13 @@ AdS$_{4}$/CFT$_{3}$ (ABJM) & AdS$_{4}$ M-theory & Holographic dictionary \\
 dS$_{4}$/CFT$_{3}$ & dS$_{4}$ & Hartle--Hawking wavefunctional \\
 Chern--Simons / WZW & 3D topological & State-sum / topological \\
 Connes--vS (2021) $S^{1}$ & Discrete spectral triple & Propinquity convergence \\
-\textbf{GeoVac} (this paper) & \textbf{Discrete spectral triple on $\sthree$} & \textbf{Latr\'emoli\`ere propinquity convergence at rate $4/\pi$} \\
+\textbf{GeoVac} (this paper) & \textbf{Discrete spectral triple on $\sthree$} & \textbf{State-space GH convergence at rate $4/\pi$} \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 The framework's analog of the holographic correspondence is the
-Paper~38~\cite{paper38} propinquity convergence theorem
+Paper~38~\cite{paper38} state-space GH convergence theorem
 $\Lambda(\Tcal_{\nmax}, \Tcal_{\infty}) \le C_{3} \gamma_{\nmax} \to 0$.
 This is a correspondence between two operator-algebraic objects (the
 discrete spectral triple at finite cutoff and the continuum spectral
@@ -1168,7 +1172,7 @@ characterized by:
 \begin{itemize}
 \item the ``bulk'' replaced by a discrete spectral-triple substrate
 (operator-system level, finite cutoff);
-\item the ``correspondence'' replaced by propinquity convergence in
+\item the ``correspondence'' replaced by state-space GH convergence in
 the continuum limit (Paper~38's five-lemma proof);
 \item boundary CFT data emerging from spectral asymptotics
 (zeta-function derivatives at zero), not from holographic reconstruction.
@@ -1178,7 +1182,7 @@ In one sentence: \emph{the framework is the discrete spectral-triple
 realization of the boundary CFT$_{3}$-on-$\sthree$ partition function
 data and modular structure, distinguished from AdS/CFT and dS/CFT by
 absence of any bulk gravitational theory and presence of a
-propinquity-convergence ``correspondence'' between operator-algebraic
+state-space-GH-convergence ``correspondence'' between operator-algebraic
 discretization levels}. This is not a new holographic correspondence
 (no bulk = no holography), nor a refutation of dS/CFT (the boundary
 data is consistent with what dS/CFT would predict); it is a structurally
@@ -1252,7 +1256,7 @@ functions via the GeoVac spectral triple.
 This paper is the twelfth math.OA standalone in the GeoVac series,
 following Papers~38, 39, 40, 42, 43, 44, 45, 46, 47, 48, 49.
 The previous eleven established operator-algebraic legitimacy of the
-framework's discrete-spectral-triple truncation, the propinquity
+framework's discrete-spectral-triple truncation, the spectral-truncation
 convergence theory at various levels (Riemannian, tensor-product,
 universal compact-Lie-group, K$^{+}$-weak-form Lorentzian,
 strong-form Lorentzian, norm-resolvent non-compact, K$^{+}$-weak-form
@@ -1381,7 +1385,7 @@ JHEP \textbf{06} (2011) 102, arXiv:1103.1181.
 \emph{Partition function of free conformal higher spin theory},
 JHEP \textbf{08} (2014) 113, arXiv:1406.3542.
 
-\bibitem{lei_van_leuven2024} J.~Lei and W.~D.~van Leuven,
+\bibitem{lei_van_leuven2024} Y.~Lei and S.~van Leuven,
 \emph{Modularity in $d > 2$ free conformal field theory},
 arXiv:2406.01567, 2024.
 
