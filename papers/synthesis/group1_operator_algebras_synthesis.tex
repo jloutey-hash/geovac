@@ -120,18 +120,28 @@ deferred by Connes and van Suijlekom \cite{connes_vs2021} remains
 open, now with a sharpened specification.  Paper~47's
 de-compactification limit $T \to \infty$ survives at the
 norm-resolvent / spectral level.  A
-master theorem (\S\ref{sec:closures_post_45}) subsumes Papers~38,~39,
-and~40 as special cases:\ for arbitrary $k \ge 1$ and arbitrary
-compact connected Lie groups $G_{1}, \ldots, G_{k}$, the k-fold
-tensor product propinquity converges at the universal $4/\pi$ rate
-with $k$-INDEPENDENT Lipschitz comparison constant.  The constant
+master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
+Papers~38,~39, and~40 as special cases:\ for arbitrary $k \ge 1$ and
+arbitrary compact connected Lie groups $G_{1}, \ldots, G_{k}$, the
+k-fold tensor product converges (state-space GH) at the universal
+$4/\pi$ rate with Lipschitz comparison constant $C_3^{(k)} \le
+\sqrt{k}$ (corrected 2026-06-18 from a withdrawn $k$-independent
+Pythagorean claim;\ only the $k\le2$ cases are proved).  The constant
 $4/\pi$ identifies, in both Riemannian (Paper~38) and Lorentzian
 (Paper~43~\S 10.2 / Paper~46) settings, as the $M_{1}$ Hopf-base
 measure signature of the master Mellin engine catalogued by the
-case-exhaustion theorem of Paper~32~\S\,VIII.  Three further papers (48, 49, 50) extend the arc and are recorded in
-\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49};\ two of
+case-exhaustion theorem of Paper~32~\S\,VIII.  Five further papers (48, 49, 50, 52, 53) extend the arc;\ Papers~48--50 are recorded in
+\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}, and Papers~52--53 are summarized below;\ two of
 their metric-level claims were subsequently descoped with the Paper~45
-retraction and are reported here in corrected form.
+retraction and are reported here in corrected form. Paper~50 reproduces
+the Klebanov--Pufu--Sachdev sphere F-theorem bit-exactly from the
+framework spectrum; Paper~52 frames the spectral-truncation convergence
+as a ``Category III'' discretization correspondence (the framework's
+analog of holography, at the state-space GH level); and Paper~53 treats
+the first non-homogeneous carrier --- the disk-with-cone --- where the
+finite disk is obstructed by its Dirichlet boundary and convergence is
+recovered only on the boundaryless plane (Bochner--Riesz, rate
+$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$).
 Paper~48 constructs Krein-pointed proper quantum metric spaces and a
 bridge functor to the Mondino--S\"amann synthetic-Lorentzian
 pre-length spaces;\ the metric-level inheritance is descoped and the
@@ -683,12 +693,17 @@ proved-at-qualitative-rate theorem closing the published-open NCG
 question of convergence for the tensor of two infinite metric
 spectral triples.  Two technical points underwrite the closure:
 \begin{itemize}\setlength\itemsep{0pt}
-\item \textbf{R1: asymmetric Pythagorean Leibniz.}  The Pythagorean
-Leibniz bound on tensor commutators (Connes--Marcolli graded form)
-combined with an asymmetric-supremum correction gives the full
-operator-system constant $C_{3}^{(2)}$ that is bounded away from
-$2 \sqrt{2}$ and approaches the single-factor $C_{3} = 1$
-asymptotically.
+\item \textbf{R1: tensor Lipschitz constant via the tight triangle
+bound.}  The graded Leibniz rule (Connes--Marcolli form) splits the
+joint commutator into two terms; the operator-norm \emph{triangle}
+bound on that sum gives the full operator-system constant
+$C_{3}^{(2)} \le \sqrt{2}$ (increasing to $\sqrt 2$). \emph{Correction
+(2026-06-18):} an earlier draft claimed a \emph{Pythagorean} refinement
+$C_{3}^{(2)} < 1$;\ that identity is false (graded anticommutation does
+not give operator-norm orthogonality --- verified maximally violated on
+the actual harmonics), and the triangle bound is tight. Convergence is
+unaffected ($\sqrt 2$ is a finite constant); only the cosmetic
+``$<1$'' sharpness claim changed.
 \item \textbf{R2: Latr\'emoli\`ere 2017 explicit
 $\varepsilon_{\mathrm{cross}}$.}  The cross term in the tunneling
 pair is bounded explicitly by Latr\'emoli\`ere
@@ -1434,46 +1449,43 @@ to $\Tcal_{\sthree}^{\otimes k}$, and (v) the higher-rank tensor product
 $\Tcal_{G_{1}} \otimes \Tcal_{G_{2}}$ at arbitrary compact connected
 Lie group factors.  Both closed on 2026-05-23.
 
-\textbf{(iii) k-fold extension --- $k$-independent constant.}  The
-sprint memo
-\texttt{debug/sprint\_paper39\_k\_fold\_extension\_memo.md}
-established the k-fold theorem at SU(2) factors with closed-form
-$C_{3}^{(k)} \le \sqrt{(N_{*} - 1)/(N_{*} + 1)}$ where $N_{*} :=
-\max_{j} n_{j}$ --- \textbf{$k$-INDEPENDENT, identical to the
-single-factor Paper~38 L3 constant}, asymptotic $\to 1^{-}$.  The
-$O(\sqrt{k})$ estimate that the GeoVac internal record had carried
-(triangle-inequality bound) was strictly improved by the k-fold
-Pythagorean Leibniz identity $\opnorm{\sum_{j} X_{j}}^{2} = \sum_{j}
-\opnorm{X_{j}}^{2}$ on the Connes-Marcolli graded module --- the $k$
-summands of $D^{(k)}$ pairwise anti-commute, so the cross-terms vanish
-and the sum-of-magnitudes bound is replaced by the sum-of-squares
-identity.  The improvement of $\sqrt{k}$ comes from precisely the
-Pythagorean refinement of the triangle inequality.
+\textbf{(iii) k-fold extension --- $\sqrt{k}$ constant (sketch).}  The
+k-fold extension to SU(2) factors uses the graded Leibniz rule and the
+operator-norm \emph{triangle} bound, giving
+$C_{3}^{(k)} \le \sqrt{k}\,\sqrt{(N_{*} - 1)/(N_{*} + 1)} \nearrow
+\sqrt{k}$ where $N_{*} := \max_{j} n_{j}$. \emph{Correction
+(2026-06-18):} an earlier draft claimed a $k$-\textbf{independent}
+constant $\sqrt{(N_*-1)/(N_*+1)}\to1^-$ via a ``Pythagorean Leibniz''
+sum-of-squares identity $\opnorm{\sum_j X_j}^2=\sum_j\opnorm{X_j}^2$.
+That identity is \textbf{false} (pairwise anticommutation of the
+$D^{(k)}$ summands does not make the commutator terms operator-norm
+orthogonal --- verified maximally violated at $k=2$ on the actual
+harmonics). The genuine $\sqrt{k}$ factor is real, not eliminated; for
+each fixed $k$ convergence still holds (finite constant), but the
+constant grows with the number of factors. Only the $k=2$ case is
+proved (Paper~39);\ $k>2$ is a sketch.
 
-\textbf{(v) Master theorem --- universal compact-Lie-group factors.}
+\textbf{(v) Master theorem --- universal compact-Lie-group factors
+(sketch).}
 Combining the k-fold extension with the universal $4/\pi$ rate of
-Paper~40~\cite{paper40_unified} produces the master theorem of the
-math.OA arc:
+Paper~40~\cite{paper40_unified} gives the expected multi-factor form
 
 \begin{equation}\label{eq:master_theorem}
-\boxed{\;\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
+\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
 \Tcal^{(k)}_{G_{1} \times \cdots \times G_{k}}\bigr)
-\;\le\; \sup_{j} C_{3}^{G_{j}}(n_{j}) \cdot \max_{j}
-\gamma^{G_{j}}_{n_{j}}\;}
+\;\le\; C_{3}^{(k)} \cdot \max_{j} \gamma^{G_{j}}_{n_{j}},
+\qquad
+C_{3}^{(k)} \le \sqrt{k}\,\sup_{j} C_{3}^{G_{j}}(n_{j}) \nearrow \sqrt{k},
 \end{equation}
 
 for arbitrary $k \ge 1$ and arbitrary compact connected Lie groups
-$G_{1}, \ldots, G_{k}$ with bi-invariant metrics.
-$C_{3}^{(k)}$ is $k$-INDEPENDENT (bounded by the worst-factor
-Paper~40 L3 constant, $\to 1^{-}$).  The joint rate inherits the
-universal $4/\pi$ asymptotic from Paper~40's
-Plancherel-weight $\times$ Vandermonde-Jacobian cancellation.
-
-The two extensions are \emph{structurally orthogonal}:\ the k-fold
-mechanism (Pythagorean Leibniz) acts on the factor-counting
-dimension; the general-$G$ mechanism (PRV-summand Weyl harmonics) acts
-on the per-factor structure.  Each preserves the other's content
-cleanly.
+$G_{1}, \ldots, G_{k}$ with bi-invariant metrics. \emph{Correction
+(2026-06-18):} this was boxed as a closed ``master theorem'' with a
+$k$-\textbf{independent} constant $\sup_j C_3^{G_j}(n_j)$;\ with the
+corrected triangle bound the constant carries a genuine $\sqrt{k}$ and
+is not $k$-independent. The joint rate still inherits the universal
+$4/\pi$ asymptotic; but this multi-factor / general-$G$ form is a
+\textbf{sketch} (only the $k=2$, $\SU(2)$ and $k=1$ cases are proved).
 
 The master theorem subsumes Papers~\cite{paper38}
 ($k = 1$, $G = \SU(2)$), \cite{paper40_unified}

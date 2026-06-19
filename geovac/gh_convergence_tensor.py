@@ -281,80 +281,48 @@ C_LIPSCHITZ_TENSOR_FACTORIZED: float = 1.0  # C_3^(2) on factorized panel
 C_LIPSCHITZ_TENSOR_FULL: float = 2.0        # C_3^(2) on full op-system (legacy / conservative)
 
 
-def c3_full_pythagorean_bound(n_max_a: int, n_max_b: int) -> float:
-    """R1-tightened C_3^(2),full bound via the SU(2) x SU(2) Pythagorean refinement.
+def c3_full_triangle_bound(n_max_a: int, n_max_b: int) -> float:
+    """C_3^(2),full bound via the (tight) triangle bound on the graded Leibniz rule.
 
-    *Sprint W2b-easy-tighten, R1 closure (path-a).*
+    *Corrected 2026-06-18 (/qa group1 Bite B-3): the earlier "Pythagorean
+    refinement" was WITHDRAWN — it is false. See the correction note below
+    and Paper 39 Remark "Withdrawn Pythagorean refinement".*
 
-    The conservative C_3^(2),full <= 2 came from triangle inequality on the
-    Connes-Marcolli Leibniz rule:
-        ||[D_{a,b}, M]||_op  <=  ||[D_a, M_f]|| ||M_g|| + ||M_f|| ||[D_b, M_g]||
-                              <=  1 * 1 + 1 * 1 = 2,
-    treating the two terms as a generic sum with no structure.
+    The Connes-Marcolli composed Dirac D_{a,b} = D_a ⊗ I + γ_a ⊗ D_b gives
+    the two-term graded Leibniz rule
+        [D_{a,b}, M_f ⊗ M_g] = [D_a, M_f] ⊗ M_g + (γ_a M_f) ⊗ [D_b, M_g]
+                             =: A + B,
+    and the operator-norm TRIANGLE inequality gives
+        ||A + B||_op  <=  ||[D_a, M_f]|| ||M_g|| + ||M_f|| ||[D_b, M_g]||.
 
-    The SU(2) x SU(2) Pythagorean refinement uses two structural facts:
+    Combining with the single-factor L3 estimate ||[D, M_{NLM}]||_op <= (N-1)
+    on the unit-normalised Avery harmonic, and the joint Lipschitz norm
+    sqrt(N_a^2 + N_b^2 - 2), gives the per-irrep ratio
+        C_3^{(2),full}(N_a, N_b)
+            <= sqrt( ((N_a-1) + (N_b-1))^2 / (N_a^2 + N_b^2 - 2) ).
+    For N_a = N_b = N this is sqrt(2(N-1)/(N+1)) -> sqrt(2). The global
+    constant is the sup over the irrep grid, bounded by sqrt(2).
 
-    (i) **Per-irrep operator-norm bound (single factor).** From single-factor
-        L3 (`debug/r25_l3_proof_memo.md` Eq. 4.2), for a multiplier M_{NLM}
-        on the round-S^3 Avery harmonic Y^{(3)}_{NLM},
-            ||[D, M_{NLM}]||_op  <=  (N - 1) * ||M_{NLM}||_op,
-        and the single-factor Lipschitz norm ||grad Y^{(3)}_{NLM}||_inf
-        scales as sqrt(N^2 - 1), giving the per-irrep ratio
-            C_3(N) := (N - 1) / sqrt(N^2 - 1)  =  sqrt((N-1)/(N+1))  ->  1^-.
-
-    (ii) **Pythagorean operator-norm formula (Connes-Marcolli graded sum).**
-        On the joint irrep V_{N_a} ⊗ V_{N_b}, the Connes-Marcolli composed
-        Dirac D_{a,b} = D_a ⊗ I + γ_a ⊗ D_b has KO-dim 6 grading, so the
-        two terms in the Leibniz rule for [D_{a,b}, M_a ⊗ M_b] anticommute.
-        The operator norm of an anticommuting sum on a graded module
-        satisfies the Pythagorean identity:
-            ||A ⊗ B + γ C ⊗ D||_op^2  =  ||A||^2 ||B||^2 + ||C||^2 ||D||^2  ,
-        modulo unit chirality; this is the SU(2) x SU(2) refinement of the
-        generic triangle bound (which would give ||A||||B|| + ||C||||D||).
-
-    Combining (i) and (ii), on the irrep V_{N_a} ⊗ V_{N_b}:
-        ||[D_{a,b}, M_{N_a, N_b}]||_op^2  <=  (N_a - 1)^2 + (N_b - 1)^2,
-    while the joint Lipschitz norm on the irrep is sqrt(N_a^2 + N_b^2 - 2)
-    (sum of single-factor squared Lipschitz bounds: (N_a^2 - 1) + (N_b^2 - 1)).
-
-    Therefore
-        C_3^{(2),full}(N_a, N_b)  <=  sqrt(((N_a-1)^2 + (N_b-1)^2) / (N_a^2 + N_b^2 - 2)).
-
-    For N_a = N_b = N, this collapses to sqrt((N-1)/(N+1)), matching the
-    single-factor L3 asymptotic. Globally:
-        C_3^{(2),full}  <=  sup_{(N_a, N_b): 2 <= N_a <= n_max_a + 1, 2 <= N_b <= n_max_b + 1}
-                                sqrt(((N_a-1)^2 + (N_b-1)^2) / (N_a^2 + N_b^2 - 2)).
-
-    This bound is < 1 for every finite (n_max_a, n_max_b) and approaches
-    1 from below as both n_max grow — i.e., C_3^{(2),full} = 1 + o(1).
+    WITHDRAWN PYTHAGOREAN CLAIM (false). The earlier version returned
+        sqrt( ((N_a-1)^2 + (N_b-1)^2) / (N_a^2 + N_b^2 - 2) )  ->  1^- ,
+    asserting an operator-norm Pythagorean identity ||A+B||^2 = ||A||^2 +
+    ||B||^2 from the graded anticommutation {A,B}=0. That implication is
+    FALSE for the operator norm (e.g. A=diag(1,0), B=diag(0,1): {A,B}=0
+    but ||A+B||^2 = 1 != 2). A direct test on the actual Camporesi-Higuchi
+    harmonics (tests/test_paper39_triangle_tight.py) finds the Pythagorean
+    ratio MAXIMALLY violated (= 2) and the triangle bound TIGHT (= 1) at a
+    pair of top-shell raising harmonics, where the two terms add
+    constructively. Hence C_3 -> sqrt(2), not 1^-. Convergence is
+    unaffected: sqrt(2) is a finite constant, so the propinquity bound
+    still -> 0 with gamma_n.
 
     Args:
         n_max_a, n_max_b: cutoffs (each >= 1).
 
     Returns:
-        Closed-form upper bound on C_3^{(2),full} via Pythagorean refinement.
-        Value is a strictly less-than-1 number for all finite cutoffs.
-
-    Notes:
-        **Erratum 2026-05-07 R1 re-attempt:** the C-W2b-easy-tighten
-        memo §1.3 claimed the supremum is attained at the maximal
-        (N_a, N_b) = (n_max_a + 1, n_max_b + 1), but elementary
-        calculus on the partial derivative
-            d/dN_a [((N_a-1)^2 + (N_b-1)^2) / (N_a^2 + N_b^2 - 2)]
-            = 2 * (N_a^2 + 2 N_a N_b - 4 N_a - N_b^2 + 2)
-              / (N_a^2 + N_b^2 - 2)^2
-        shows the partial is NEGATIVE when N_b > N_a + 1 + small (e.g.
-        at (N_a, N_b) = (2, 4) the numerator is -2). The supremum is
-        therefore NOT in general at the diagonal corner: at asymmetric
-        cutoffs (e.g. n_max_a=10, n_max_b=4), the actual supremum sits
-        at (N_a, N_b) = (n_max_a + 1, 2), giving the single-factor
-        ratio (N_a-1)/sqrt(N_a^2-1) = sqrt((N_a-1)/(N_a+1)) of the
-        larger cutoff alone. We replace the corner-evaluation with an
-        actual sup over the irrep grid, which is closed-form-bounded
-        above by max(sqrt((N_a-1)/(N_a+1)), sqrt((N_b-1)/(N_b+1))) —
-        the larger of the two single-factor L3 ratios. This matches
-        the structural intuition that the joint Lipschitz constant is
-        bounded by the worse of the two single-factor L3 constants.
+        Closed-form upper bound on C_3^{(2),full} via the tight triangle
+        bound. Equals 1 at (2,2), exceeds 1 for larger cutoffs, and
+        increases to sqrt(2).
     """
     N_a = n_max_a + 1
     N_b = n_max_b + 1
@@ -362,35 +330,35 @@ def c3_full_pythagorean_bound(n_max_a: int, n_max_b: int) -> float:
         # Degenerate case n_max < 1; fall back to conservative.
         return float(C_LIPSCHITZ_TENSOR_FULL)
 
-    # Compute the actual supremum across the irrep grid 2..N_a x 2..N_b,
-    # which is bounded by max of the two single-factor L3 ratios.  The sup
-    # is attained on the boundary of the grid (either the row N_b = 2 with
-    # N_a = N_a_max, or the column N_a = 2 with N_b = N_b_max, or the
-    # diagonal corner — depending on which of n_max_a, n_max_b dominates).
+    # The triangle-bound ratio is monotone non-decreasing toward the top
+    # corner; scan the full (small) irrep grid to be safe.
     sup = 0.0
-    # Sample the boundary: the sup over the rectangle [2, N_a] x [2, N_b]
-    # is attained on the boundary, since the function has no interior
-    # critical points in the unit-irrep interior.  We sample a closed-form
-    # boundary set: the four corners + the diagonal ridge.
-    for (na, nb) in [
-        (N_a, 2), (2, N_b),         # Single-factor maxima at minimal other irrep
-        (N_a, N_b),                 # Diagonal corner
-        (N_a, N_a), (N_b, N_b),     # Diagonal at each cutoff
-    ]:
-        if na < 2 or nb < 2:
-            continue
-        if na > N_a or nb > N_b:
-            continue
-        num = (na - 1) ** 2 + (nb - 1) ** 2
-        den = na ** 2 + nb ** 2 - 2
-        if den <= 0:
-            continue
-        r = float(np.sqrt(num / den))
-        if r > sup:
-            sup = r
+    for na in range(2, N_a + 1):
+        for nb in range(2, N_b + 1):
+            num = ((na - 1) + (nb - 1)) ** 2
+            den = na ** 2 + nb ** 2 - 2
+            if den <= 0:
+                continue
+            r = float(np.sqrt(num / den))
+            if r > sup:
+                sup = r
     if sup == 0.0:
         return float(C_LIPSCHITZ_TENSOR_FULL)
     return sup
+
+
+# Backward-compatible alias. NOTE: the name retains "pythagorean" for import
+# compatibility only; the returned value is the *triangle* bound (the
+# Pythagorean refinement was withdrawn 2026-06-18 as false — see the docstring
+# of c3_full_triangle_bound).
+def c3_full_pythagorean_bound(n_max_a: int, n_max_b: int) -> float:
+    """Deprecated alias for :func:`c3_full_triangle_bound` (see its docstring).
+
+    The "Pythagorean" name is historical; the Pythagorean operator-norm
+    identity it once used is false, and this now returns the tight triangle
+    bound (-> sqrt(2)).
+    """
+    return c3_full_triangle_bound(n_max_a, n_max_b)
 
 
 def c3_full_pythagorean_bound_symbolic(
@@ -415,7 +383,9 @@ def c3_full_pythagorean_bound_symbolic(
     N_b_max = sp.Integer(n_max_b + 1)
     if N_a_max < 2 or N_b_max < 2:
         return sp.Rational(C_LIPSCHITZ_TENSOR_FULL)
-    # Sample the boundary corners; sup is attained at one of these.
+    # Triangle bound (Pythagorean form WITHDRAWN 2026-06-18 as false; see
+    # c3_full_triangle_bound). The sup of the triangle ratio is attained at
+    # the top corner (N_a_max, N_b_max).
     candidates = [
         (N_a_max, sp.Integer(2)),
         (sp.Integer(2), N_b_max),
@@ -429,7 +399,7 @@ def c3_full_pythagorean_bound_symbolic(
             continue
         if na > N_a_max or nb > N_b_max:
             continue
-        num = (na - 1) ** 2 + (nb - 1) ** 2
+        num = ((na - 1) + (nb - 1)) ** 2
         den = na ** 2 + nb ** 2 - 2
         if den <= 0:
             continue

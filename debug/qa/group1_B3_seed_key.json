@@ -1,0 +1,46 @@
+{
+  "run": "group1 Bite B sub-bite 3 — Papers 39, 52, 53 + synthesis, 2026-06-18",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-B3",
+  "note": "Worktree removed at end of run (no seed reached the real corpus). This key was reconstructed from the run's calibration record after the worktree was pruned; the {id, file, catcher} fields are the load-bearing calibration record (sensitivity 5/5 — every planted seed caught by its expected catcher). The seed_detail prose is reconstructed to the planted defect-class, not verbatim.",
+  "calibration": {"sensitivity": "5/5", "specificity": "controls affirmed SOUND"},
+  "seeds": [
+    {
+      "id": "S-claims-C7",
+      "file": "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+      "catcher": "claims-39",
+      "class": "C7 trunk-dependent status (propinquity / state-space-GH label)"
+    },
+    {
+      "id": "S-claims-C8",
+      "file": "papers/group1_operator_algebras/paper_52_category_iii_correspondence.tex",
+      "catcher": "claims-52",
+      "class": "C8 headline honesty"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_52_category_iii_correspondence.tex",
+      "catcher": "citation-52",
+      "class": "C4 external citation (wrong-ID / transposed arXiv)"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "catcher": "synthesis",
+      "class": "C9 synthesis faithfulness"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/ (a paper_39 backing test)",
+      "catcher": "code-39",
+      "class": "C2 tautological / false-positive test"
+    }
+  ],
+  "seed_detail_reconstructed": {
+    "S-claims-C7": "p39: a descoped/state-space-GH result re-asserted as established Latrémolière propinquity convergence. Caught by claims-39.",
+    "S-claims-C8": "p52: a Category-III correspondence headline overstated beyond its state-space-GH backing. Caught by claims-52.",
+    "S-citation-C4": "p52: a transposed/wrong external arXiv ID. Caught by citation-52.",
+    "S-synthesis-C9": "synthesis: a per-paper claim re-asserted at a level the papers do not establish. Caught by synthesis claims-reviewer.",
+    "S-code-C2": "a paper_39 backing test mutated into a tautology (e.g. self-difference < tol). Caught by code-39."
+  },
+  "controls_note": "Honest controls (genuine degeneracy/descope framings, the genuine finite-cutoff results, the disk boundary-obstruction narrative) were affirmed SOUND — no known-good claim flagged MATERIAL."
+}

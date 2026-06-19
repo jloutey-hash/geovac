@@ -93,18 +93,24 @@ with explicit qualitative-rate bound
    \le C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
         \max(\gamma_{\nmaxa}/\lambda_a,\, \gamma_{\nmaxb}/\lambda_b),
 \)
-where $C_3^{(2)} < 1$ is a closed-form Pythagorean Lipschitz comparison
-constant arising from the Connes--Marcolli graded anticommutation
-$\{D_a \otimes I, \gamma_a \otimes D_b\} = 0$ on the KO-dimension-6
-graded module, and $\gamma_n = (4/\pi)\log n / n + O(1/n)$ inherits
+where $C_3^{(2)} \le \sqrt{2}$ is a closed-form Lipschitz comparison
+constant from the (tight) triangle bound on the Connes--Marcolli joint
+Leibniz rule, and $\gamma_n = (4/\pi)\log n / n + O(1/n)$ inherits
 from the single-factor result of~\cite{loutey_paper38}. The proof
 proceeds factor-by-factor through tensor extensions of the five
 single-factor lemmas (operator system, central spectral Fej\'er kernel,
 Lipschitz comparison, Berezin reconstruction, propinquity assembly).
-The two technical risks specific to the tensor product --- a sharp
-Lipschitz comparison constant on the full operator system, and a
-rigorous bound on the cross-Stein--Weiss height term --- both close
-via the same graded Pythagorean mechanism. The strictly stronger
+The two technical risks specific to the tensor product --- a
+closed-form Lipschitz comparison constant on the full operator system,
+and a rigorous bound on the cross-Stein--Weiss height term --- both
+close via the triangle bound on the joint Leibniz rule. (An earlier
+Pythagorean refinement claiming $C_3^{(2)} < 1$ has been
+\emph{withdrawn}:\ the graded anticommutation does \emph{not} make the
+two Leibniz terms operator-norm orthogonal --- on the actual
+Camporesi--Higuchi harmonics they add constructively, so the triangle
+bound is tight and $C_3^{(2)} \nearrow \sqrt{2}$, exceeding $1$ for
+cutoffs beyond $(3,3)$. The convergence theorem is unaffected, since
+$\sqrt{2}$ is a finite constant.) The strictly stronger
 Latr\'emoli\`ere propinquity is \emph{not} claimed:\ the dual-reach
 ($\mathrm{reach}_P$) step of the joint assembly inherits the
 single-factor $\mathrm{reach}_P$ named gap of Papers~38/40 (the invalid
@@ -130,7 +136,7 @@ single-character / Hopf-$S^1$ structure.
 \medskip\noindent
 \textbf{Keywords:}\ spectral triple, tensor product, Connes--Marcolli
 graded Dirac, quantum Gromov--Hausdorff propinquity, Camporesi--Higuchi
-Dirac, operator system, Berezin reconstruction, Pythagorean Leibniz
+Dirac, operator system, Berezin reconstruction, graded Leibniz
 rule, $\SU(2) \times \SU(2)$.
 
 % =====================================================================
@@ -139,7 +145,7 @@ rule, $\SU(2) \times \SU(2)$.
 
 The Connes--van~Suijlekom~\cite{connes_vs2021} framework of truncated
 operator systems and the subsequent propinquity-convergence results of
-Hekkelman~\cite{hekkelman2022}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024},
+Hekkelman~\cite{hekkelman2022}, Hekkelman--McDonald~\cite{hekkelman_mcdonald2024b},
 Leimbach--van~Suijlekom~\cite{leimbach_vs2024}, and the present
 author~\cite{loutey_paper38} establish quantitative
 Gromov--Hausdorff convergence for spectral truncations of a
@@ -219,35 +225,39 @@ O(1/n)$, and the joint Lipschitz comparison constant is
 \begin{equation}\label{eq:C3_2_intro}
    C_3^{(2)}(\nmaxa, \nmaxb)
    \;\le\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \\ 2 \le N_b \le \nmaxb+1}}
-            \sqrt{\frac{(N_a - 1)^2 + (N_b - 1)^2}{N_a^2 + N_b^2 - 2}},
+            \sqrt{\frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}
+                       {N_a^2 + N_b^2 - 2}},
 \end{equation}
-strictly less than $1$ at every finite $(\nmaxa, \nmaxb)$ and
-approaching $1$ from below as both cutoffs grow.
+bounded by $\sqrt 2$ at every finite $(\nmaxa, \nmaxb)$ and approaching
+$\sqrt 2$ from below as both cutoffs grow (this is the \emph{tight}
+triangle bound; the convergence is driven by $\gamma_n \to 0$, not by
+the constant).
 \end{theorem}
 
 The proof is a factor-by-factor lift of the five single-factor lemmas
 of~\cite{loutey_paper38} to the tensor product, supplemented by two
 new ingredients specific to the product:
 \begin{itemize}\setlength{\itemsep}{2pt}
-\item a Pythagorean Lipschitz comparison estimate that uses the
-Connes--Marcolli anticommutation
-$\{D_a \otimes I, \gamma_a \otimes D_b\} = 0$ on the KO-dim-6 graded
-module to refine the generic triangle bound
-$\norm{A + B}_{\mathrm{op}} \le \norm{A} + \norm{B}$ to
-$\sqrt{\norm{A}^2 + \norm{B}^2}$ (Lemma~\ref{lem:L3-T}); and
+\item a closed-form Lipschitz comparison estimate from the (tight)
+operator-norm triangle bound $\norm{A + B}_{\mathrm{op}} \le \norm{A}
++ \norm{B}$ on the two Connes--Marcolli Leibniz terms
+(Lemma~\ref{lem:L3-T}); and
 \item an explicit Stein--Weiss-type bound on the joint
-Lipschitz-distortion height of the tunnel map, again via the same
-Pythagorean mechanism applied to the joint commutator
-(Lemma~\ref{lem:L5-T}).
+Lipschitz-distortion height of the tunnel map, again via the triangle
+bound applied to the joint commutator (Lemma~\ref{lem:L5-T}).
 \end{itemize}
+(An earlier draft used a \emph{Pythagorean} refinement of these two
+bounds, claiming $C_3^{(2)} < 1$; that refinement is withdrawn --- the
+graded anticommutation does not produce operator-norm orthogonality
+--- and replaced throughout by the rigorous triangle bound, giving
+$C_3^{(2)} \le \sqrt 2$; see Remark~\ref{rem:no_pythagorean}.)
 
-The mechanism is unified: the same KO-dim-6 graded anticommutation
-that defines the Connes--Marcolli composed Dirac is what controls both
+The mechanism is unified: the same KO-dim-6 graded structure
+that defines the Connes--Marcolli composed Dirac splits both
 the joint Lipschitz constant (R1) and the joint height-distortion
-bound (R2). Each of the five single-factor lemmas of
-\cite{loutey_paper38} extends factor-by-factor with no novel
-analytical machinery beyond the Pythagorean refinement of the triangle
-inequality on the graded module.
+bound (R2) into Leibniz terms controlled by the triangle bound. Each
+of the five single-factor lemmas of \cite{loutey_paper38} extends
+factor-by-factor with no novel analytical machinery.
 
 \paragraph{Why this is the \emph{easy} case.}
 The same-manifold tensor product treated here is the most accessible
@@ -305,8 +315,9 @@ single-factor $\mathrm{reach}_P$ estimate;\ that single-factor step is
 the invalid cb-norm dual-reach that descoped Papers~38/40 from
 Latr\'emoli\`ere propinquity to state-space GH, so the joint result
 inherits the same named gap and is stated at the state-space-GH level.
-The rate, the joint Lipschitz constant $C_3^{(2)} < 1$, and the
-graded-Pythagorean cancellation are unaffected by this distinction.
+The rate and the joint Lipschitz constant $C_3^{(2)} \le \sqrt 2$
+(Lemma~\ref{lem:L3-T}, triangle bound) are unaffected by this
+distinction.
 
 \subsection{Single-factor recall: the rescaled $\sthree$ Camporesi--Higuchi triple}
 \label{sec:single_factor_recall}
@@ -356,8 +367,12 @@ in the standard Connes--Marcolli graded tensor product convention
          \DCH^{(b)} \;=\; 0,
 \end{equation}
 since $\{\DCH^{(a)}, \gamma_a\} = 0$ on the unit-round $\sthree$ Dirac.
-This anticommutation is the source of the Pythagorean Leibniz rule
-that makes the tensor product propinquity controllable.
+This anticommutation of the two \emph{Dirac} summands is what gives the
+clean two-term graded Leibniz rule \eqref{eq:joint_leibniz} (it does
+\emph{not}, however, make the two resulting \emph{commutator} terms
+operator-norm orthogonal --- see Remark~\ref{rem:no_pythagorean}); the
+joint commutator is then controlled by the triangle bound, which
+suffices to make the tensor-product propinquity convergent.
 
 The truncated tensor-product triple at cutoffs $(\nmaxa, \nmaxb)$ is
 \begin{equation}\label{eq:tensor_truncated}
@@ -396,11 +411,18 @@ with
 \begin{equation}\label{eq:C3_2_full}
    C_3^{(2)}(\nmaxa, \nmaxb)
    \;:=\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \\ 2 \le N_b \le \nmaxb+1}}
-            \sqrt{\frac{(N_a - 1)^2 + (N_b - 1)^2}{N_a^2 + N_b^2 - 2}}
-   \;<\; 1
+            \sqrt{\frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}
+                       {N_a^2 + N_b^2 - 2}}
+   \;\le\; \sqrt{2}
 \end{equation}
-at every finite $(\nmaxa, \nmaxb)$, and $C_3^{(2)} \nearrow 1^-$ as
-both cutoffs grow. The right-hand side of \eqref{eq:main_thm} tends to
+at every finite $(\nmaxa, \nmaxb)$, and $C_3^{(2)} \nearrow \sqrt{2}$
+as both cutoffs grow. (This is the \emph{tight} triangle bound on the
+joint Leibniz rule; it is achieved with equality on a pair of
+top-shell raising harmonics, where the two Leibniz terms add
+constructively. The earlier closed form
+$\sqrt{((N_a-1)^2+(N_b-1)^2)/(N_a^2+N_b^2-2)}<1$ rested on a Pythagorean
+operator-norm identity that does \emph{not} hold for these operators;
+see Lemma~\ref{lem:L3-T}.) The right-hand side of \eqref{eq:main_thm} tends to
 zero as $\nmaxa, \nmaxb \to \infty$, with rate
 $\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}) = O(\log \nmax / \nmax)$
 inherited from the single-factor central Fej\'er moment
@@ -415,7 +437,8 @@ lemma of~\cite{loutey_paper38}~\S 3. Lemma~\ref{lem:L1prime-T} provides
 the operator-system substrate; Lemma~\ref{lem:L2-T} the joint central
 spectral Fej\'er kernel with closed-form Plancherel symbol; Lemma
 \ref{lem:L3-T} the joint Lipschitz comparison constant via the
-Connes--Marcolli graded Pythagorean Leibniz; Lemma~\ref{lem:L4-T} the
+(tight) triangle bound on the Connes--Marcolli graded Leibniz rule;
+Lemma~\ref{lem:L4-T} the
 joint Berezin reconstruction with the four properties needed for a
 Latr\'emoli\`ere tunneling pair; and Lemma~\ref{lem:L5-T} the
 state-space-GH assembly with explicit cross-Stein--Weiss height bound
@@ -579,19 +602,38 @@ structural reason joint convergence is well-behaved.
 \end{remark}
 
 % ---------------------------------------------------------------------
-\subsection{Lemma L3-T: joint Lipschitz comparison via Pythagorean
-Leibniz}\label{sec:L3-T}
+\subsection{Lemma L3-T: joint Lipschitz comparison via the triangle
+bound on the graded Leibniz rule}\label{sec:L3-T}
 % ---------------------------------------------------------------------
 
 This is the central new technical content of the paper. The
 Connes--Marcolli graded Dirac \eqref{eq:CM_dirac_recall} on the
-KO-dim-6 graded module satisfies the anticommutation
-\eqref{eq:anticomm}, which refines the generic triangle bound
-$\norm{A + B}_{\mathrm{op}} \le \norm{A} + \norm{B}$ to a Pythagorean
-identity $\norm{A + B}_{\mathrm{op}}^2 = \norm{A}^2_{\mathrm{op}} +
-\norm{B}^2_{\mathrm{op}}$ when $\{A, B\} = 0$ on the graded module.
-This refinement is what turns the conservative joint Lipschitz constant
-$\le 2$ into a closed-form $C_3^{(2)} < 1$ at every finite cutoff.
+KO-dim-6 graded module splits the joint commutator into two Leibniz
+terms \eqref{eq:joint_leibniz}; the operator-norm triangle bound on
+that sum is what controls the joint Lipschitz comparison constant.
+
+\begin{remark}[Withdrawn Pythagorean refinement]\label{rem:no_pythagorean}
+An earlier version of this lemma claimed the \emph{Pythagorean}
+identity $\norm{A + B}_{\mathrm{op}}^2 = \norm{A}^2 + \norm{B}^2$ for
+the two Leibniz terms (citing the graded anticommutation
+$\{A,B\}=0$), which would have given $C_3^{(2)} < 1$. That refinement
+is \textbf{false}:\ $\{A,B\}=0$ does \emph{not} imply operator-norm
+orthogonality (the elementary counterexample
+$A=\mathrm{diag}(1,0)$, $B=\mathrm{diag}(0,1)$ has $\{A,B\}=0$ but
+$\norm{A+B}^2 = 1 \ne 2 = \norm{A}^2+\norm{B}^2$), and the
+specific factorisation that was invoked is invalid because the two
+Leibniz terms carry \emph{different} second tensor factors
+($\Mat_g[\DCH^{(b)},\Mat_g]$ vs.\ $[\DCH^{(b)},\Mat_g]\Mat_g$, which do
+not commute). A direct numerical test on the actual Camporesi--Higuchi
+harmonics (the supporting test below) finds the Pythagorean bound
+\emph{maximally violated} ($\norm{A+B}^2 / (\norm{A}^2+\norm{B}^2) = 2$
+exactly at a pair of top-shell raising harmonics, where the two terms
+add constructively) and the \emph{triangle} bound tight
+($\norm{A+B} = \norm{A}+\norm{B}$ there). The constant is therefore
+$C_3^{(2)} \nearrow \sqrt 2$, not $<1$. This does not affect
+convergence:\ $\sqrt 2$ is a finite constant, so the right-hand side of
+\eqref{eq:main_thm} still $\to 0$ as the cutoffs grow.
+\end{remark}
 
 \begin{lemma}[L3-T: joint Lipschitz comparison constant]\label{lem:L3-T}
 For every simple-tensor multiplier $\Mat_{f \otimes g} = \Mat_f
@@ -602,11 +644,13 @@ Connes--Marcolli commutator satisfies the Leibniz identity
    \;=\; [\DCH^{(a)}, \Mat_f] \otimes \Mat_g
         + (\gamma_a \Mat_f) \otimes [\DCH^{(b)}, \Mat_g],
 \end{equation}
-and the operator-norm Pythagorean identity
+and, by the operator-norm triangle inequality applied to the two
+Leibniz terms (which is \emph{tight} --- see
+Remark~\ref{rem:no_pythagorean}),
 \begin{equation}\label{eq:pythagorean_op_norm}
-   \bigl\|[D_{a,b}, \Mat_f \otimes \Mat_g]\bigr\|_{\mathrm{op}}^2
-   \;=\; \opnorm{[\DCH^{(a)}, \Mat_f]}^2 \cdot \opnorm{\Mat_g}^2
-        \;+\; \opnorm{\Mat_f}^2 \cdot \opnorm{[\DCH^{(b)}, \Mat_g]}^2.
+   \bigl\|[D_{a,b}, \Mat_f \otimes \Mat_g]\bigr\|_{\mathrm{op}}
+   \;\le\; \opnorm{[\DCH^{(a)}, \Mat_f]} \cdot \opnorm{\Mat_g}
+        \;+\; \opnorm{\Mat_f} \cdot \opnorm{[\DCH^{(b)}, \Mat_g]}.
 \end{equation}
 Combining \eqref{eq:pythagorean_op_norm} with the single-factor L3
 estimate \cite[Lemma~3.5]{loutey_paper38} for each factor at level
@@ -615,12 +659,12 @@ $(N_a, N_b)$ in the Avery 3-Y harmonic basis gives the per-irrep ratio
    \frac{\opnorm{[D_{a,b},\, \Mat_{N_a L_a M_a} \otimes
                                 \Mat_{N_b L_b M_b}]}^2}
         {\norm{Y^{(3)}_{N_a L_a M_a} \otimes Y^{(3)}_{N_b L_b M_b}}_{\mathrm{Lip}}^2}
-   \;\le\; \frac{(N_a - 1)^2 + (N_b - 1)^2}{N_a^2 + N_b^2 - 2}.
+   \;\le\; \frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}{N_a^2 + N_b^2 - 2}.
 \end{equation}
 Taking square roots and supping over the irrep grid gives the joint
 Lipschitz comparison constant $C_3^{(2)}(\nmaxa, \nmaxb)$ of
-\eqref{eq:C3_2_full}, which is strictly less than $1$ at every finite
-$(\nmaxa, \nmaxb)$.
+\eqref{eq:C3_2_full}, which is bounded by $\sqrt 2$ at every finite
+$(\nmaxa, \nmaxb)$ and increases to $\sqrt 2$ as the cutoffs grow.
 \end{lemma}
 
 \begin{proof}
@@ -639,40 +683,30 @@ $[\gamma_a \otimes \DCH^{(b)}, \Mat_f \otimes \Mat_g] = \gamma_a
 the scalar multiplier as a chirality-blind operator;\ in components,
 the chirality flip is absorbed into the $\gamma_a$ factor on the left).
 
-For the Pythagorean identity \eqref{eq:pythagorean_op_norm}, the
-anticommutation \eqref{eq:anticomm} extends to the operator product
-\begin{align*}
-\bigl\{[\DCH^{(a)}, \Mat_f] \otimes \Mat_g,\;
-       \gamma_a \Mat_f \otimes [\DCH^{(b)}, \Mat_g]\bigr\}
-&= \bigl([\DCH^{(a)}, \Mat_f] \cdot \gamma_a \Mat_f
-        + \gamma_a \Mat_f \cdot [\DCH^{(a)}, \Mat_f]\bigr)
-   \otimes \bigl(\Mat_g \cdot [\DCH^{(b)}, \Mat_g]\bigr) \\
-&\quad\hspace{2em} + \text{symmetric term} \\
-&= 0,
-\end{align*}
-using $\{\DCH^{(a)}, \gamma_a\} = 0$ to flip the relevant signs;\ the
-two terms on the right cancel pairwise. (The signs absorb cleanly
-into the chirality grading on the spinor bundle in the
-Connes--Marcolli convention~\cite{connes1995, marcolli_vs2014}.) For
-two operators $A, B$ on a Hilbert space with $\{A, B\} = 0$, we have
-$\norm{A + B}^2_{\mathrm{op}} = \norm{(A+B)^* (A+B)}_{\mathrm{op}} =
-\norm{A^*A + B^*B + A^*B + B^*A}_{\mathrm{op}}$. The cross terms
-$A^*B + B^*A$ vanish because $\{A, B\} = 0$ implies $\{A^*, B\} = 0$
-when $A^* B$ and $A B$ have compatible chirality structure (which they
-do here, on the graded module). Therefore
-$\norm{A + B}_{\mathrm{op}}^2 = \norm{A^* A + B^* B}_{\mathrm{op}}$,
-which equals $\norm{A}^2 + \norm{B}^2$ when $A^* A$ and $B^* B$ act
-on disjoint sectors of the graded module --- which is the situation
-here, since the two summands of $D_{a,b}$ act on the
-$\Hilb_a \otimes \Hilb_b$ tensor product through different
-factor-positions.\footnote{A self-contained formal verification at
-$(\nmaxa, \nmaxb) = (2,2), (2,3), (3,3)$ via direct sympy
-diagonalisation of the joint commutator on the Avery 3-Y basis is
-recorded in the supporting computational module
-\texttt{geovac/gh\_convergence\_tensor.py}, function
-\texttt{c3\_full\_pythagorean\_bound}, with the closed-form
-$\sqrt{(N_a - 1)^2 + (N_b - 1)^2}$ pythagorean form holding as a
-machine-precision identity on the orthonormal Avery basis.}
+The bound \eqref{eq:pythagorean_op_norm} is the operator-norm triangle
+inequality $\norm{A + B}_{\mathrm{op}} \le \norm{A} + \norm{B}$ applied
+to the two Leibniz terms $A = [\DCH^{(a)}, \Mat_f] \otimes \Mat_g$ and
+$B = (\gamma_a \Mat_f) \otimes [\DCH^{(b)}, \Mat_g]$, together with the
+multiplicativity of the operator norm on simple tensors
+($\norm{X \otimes Y} = \norm{X}\,\norm{Y}$, and $\norm{\gamma_a \Mat_f}
+= \norm{\Mat_f}$ since $\gamma_a$ is unitary). This bound is
+\emph{tight}:\ on a pair of top-shell raising harmonics the two terms
+align so that $\norm{A + B} = \norm{A} + \norm{B}$ exactly. There
+$\norm{A} = \norm{B}$, so $\norm{A+B}^2 = (2\norm{A})^2 = 4\norm{A}^2$
+while the Pythagorean value is $\norm{A}^2 + \norm{B}^2 = 2\norm{A}^2$
+--- a factor $2$ violation of the would-be identity (see
+Remark~\ref{rem:no_pythagorean} for why the
+graded anticommutation does \emph{not} give operator-norm
+orthogonality). The numerical verification on the actual
+Camporesi--Higuchi harmonics --- the joint commutator built from the
+real $\DCH$ matrices and the graded multipliers at
+$(\nmaxa, \nmaxb) = (2,2), (2,3)$, with the operator norm computed by
+singular-value decomposition --- finds, over every harmonic pair, the
+triangle ratio $\norm{A+B}/(\norm{A}+\norm{B})$ attaining its maximum
+$1$ and the Pythagorean ratio $\norm{A+B}^2/(\norm{A}^2+\norm{B}^2)$
+attaining its maximum $2$, confirming both the tightness of
+\eqref{eq:pythagorean_op_norm} and the failure of the Pythagorean form
+(backing test \texttt{tests/test\_paper39\_triangle\_tight.py}).
 
 For the per-irrep ratio \eqref{eq:per_irrep_ratio_T}, the
 single-factor L3 estimate \cite[Eq.~(3.18)]{loutey_paper38} gives
@@ -693,17 +727,15 @@ unit-normalised panel. Combining \eqref{eq:pythagorean_op_norm} and
 \eqref{eq:per_irrep_ratio_T}.
 
 The supremum over the irrep rectangle $[2, \nmaxa+1] \times
-[2, \nmaxb+1]$ in \eqref{eq:C3_2_full} is attained at the boundary:
-the partial derivative of the ratio with respect to $N_a$ has sign
-determined by the polynomial $N_a^2 + 2 N_a N_b - 4 N_a - N_b^2 + 2$,
-which is sign-changing on the rectangle for $N_b \gg N_a$ (e.g.\ at
-$(2, 4)$ the polynomial evaluates to $-2$). The supremum is therefore
-attained at one of three boundary points: $(\nmaxa+1, 2)$,
-$(2, \nmaxb+1)$, or $(\nmaxa+1, \nmaxb+1)$. Numerical evaluation at
-all three gives the displayed bound, strictly less than $1$ at every
-finite cutoff (e.g.\ $0.7071$ at $(2,2)$, $0.7746$ at $(3,3)$,
-$0.8165$ at $(4,4)$, with the diagonal closed form
-$C_3^{(2)}(n,n) = \sqrt{n/(n+2)} \nearrow 1^-$).
+[2, \nmaxb+1]$ in \eqref{eq:C3_2_full} is finite and bounded by
+$\sqrt 2$:\ since
+$\bigl((N_a-1)+(N_b-1)\bigr)^2 \le 2\bigl((N_a-1)^2+(N_b-1)^2\bigr)
+\le 2(N_a^2 + N_b^2 - 2)$, the per-irrep ratio never exceeds $2$. The
+supremum is computed by scanning the (finite) irrep grid; it equals
+$1$ at $(2,2)$, exceeds $1$ for every larger cutoff, and increases to
+$\sqrt 2 \approx 1.414$ as $\nmaxa, \nmaxb \to \infty$ (diagonal values
+$1.000$ at $(2,2)$, $1.095$ at $(3,3)$, $1.155$ at $(4,4)$; see
+Remark~\ref{rem:C3_2_diagonal}).
 \end{proof}
 
 \begin{remark}[Diagonal closed form]\label{rem:C3_2_diagonal}
@@ -711,23 +743,25 @@ On the diagonal $\nmaxa = \nmaxb = n$, the supremum in \eqref{eq:C3_2_full}
 is attained at the corner $(n+1, n+1)$ and reads
 \begin{equation*}
    C_3^{(2)}(n, n)
-   \;=\; \sqrt{\frac{2 n^2}{2(n+1)^2 - 2}}
-   \;=\; \sqrt{\frac{n}{n+2}}.
+   \;=\; \sqrt{\frac{(2n)^2}{2(n+1)^2 - 2}}
+   \;=\; \sqrt{\frac{2 n}{n+2}}.
 \end{equation*}
-Numerical values: $C_3^{(2)}(2,2) = \sqrt{2}/2 \approx 0.707$,
-$C_3^{(2)}(3,3) = \sqrt{3/5} \approx 0.775$, $C_3^{(2)}(10,10)
-\approx 0.913$, $C_3^{(2)}(100,100) \approx 0.990$.
+Numerical values: $C_3^{(2)}(2,2) = 1$, $C_3^{(2)}(3,3) =
+\sqrt{6/5} \approx 1.095$, $C_3^{(2)}(10,10) \approx 1.291$,
+$C_3^{(2)}(100,100) \approx 1.400$, with $C_3^{(2)}(n,n) \nearrow
+\sqrt 2$. The constant exceeds $1$ for every $n \ge 3$; the
+convergence in \eqref{eq:main_thm} is nonetheless driven entirely by
+the factor $\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}) \to 0$, which the
+bounded constant $C_3^{(2)} \le \sqrt 2$ does not disturb.
 \end{remark}
 
 \begin{remark}[Asymmetric supremum]\label{rem:asymmetric_sup}
-For asymmetric cutoffs $\nmaxa \ne \nmaxb$, the supremum can drift off
-the diagonal corner. At $(\nmaxa, \nmaxb) = (10, 4)$ for example, the
-boundary point $(11, 2)$ gives $\sqrt{101/123} \approx 0.906$, slightly
-larger than the corner $(11, 5)$ value $\sqrt{116/144} \approx 0.898$.
-The asymmetric supremum is bounded above by the worse of the two
-single-factor L3 ratios; in practice, sampling the three boundary
-points listed in the proof of Lemma~\ref{lem:L3-T} suffices to
-capture the supremum.
+For asymmetric cutoffs $\nmaxa \ne \nmaxb$, the supremum is again
+bounded by $\sqrt 2$ and is found by scanning the irrep grid. At
+$(\nmaxa, \nmaxb) = (10, 4)$ for example, the maximum over
+$[2,11] \times [2,5]$ is $\approx 1.17$ (at the top corner $(11,5)$,
+$\sqrt{196/144}$). In all cases $C_3^{(2)} \le \sqrt 2$, which is what
+the convergence theorem requires.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -765,8 +799,8 @@ $\opnorm{B_{\nmaxa, \nmaxb}(f \otimes g)} \le \norm{f}_\infty \cdot
 \end{equation*}
 \item[(d)] (Compatibility with L3-T.)
 $\opnorm{[D_{a,b}, B_{\nmaxa, \nmaxb}(f \otimes g)]} \le C_3^{(2)}
-\norm{f \otimes g}_{\mathrm{Lip}}$, with $C_3^{(2)} < 1$ given by
-\eqref{eq:C3_2_full}.
+\norm{f \otimes g}_{\mathrm{Lip}}$, with $C_3^{(2)} \le \sqrt 2$ given
+by \eqref{eq:C3_2_full}.
 \end{enumerate}
 \end{lemma}
 
@@ -788,7 +822,7 @@ take operator norms, and apply single-factor L4(c) on each summand.
 \textbf{(d)} Apply Lemma~\ref{lem:L3-T} to the simple tensor $B_a(f)
 \otimes B_b(g) \in \Op_{\nmaxa} \otimes \Op_{\nmaxb}$, using
 single-factor L4(d) for the per-factor commutator bound and the
-Pythagorean identity \eqref{eq:pythagorean_op_norm} for the
+triangle bound \eqref{eq:pythagorean_op_norm} for the
 operator-norm reduction.
 \end{proof}
 
@@ -855,8 +889,10 @@ Taking the supremum on simple tensors $h = f \otimes g$ with
 $L_f := \norm{\nabla f}_\infty$, $M_f := \norm{f}_\infty$ (and
 similarly for $g$) and using
 $\norm{f \otimes g}_{\mathrm{Lip}}^2 \le L_f^2 M_g^2 + M_f^2 L_g^2$
-(joint Lipschitz on the product Riemannian metric) together with the
-Pythagorean identity \eqref{eq:pythagorean_op_norm} applied to the
+(the pointwise continuum-gradient identity on the product Riemannian
+metric --- this Pythagorean form is for the \emph{classical} gradient
+and is exact) together with the triangle bound
+\eqref{eq:pythagorean_op_norm} applied to the
 joint commutator, single-factor L4(d) on each factor, and the
 elementary identity $|x - y| = (x^2 - y^2)/(x + y)$ on
 $\norm{h}_{\mathrm{Lip}}^2 - \norm{B(h)}_{\mathrm{Lip}}^2$ gives the
@@ -929,13 +965,13 @@ $\cbnorm{T^{(3,4)}} = 1/5$,
 $\cbnorm{T^{(4,4)}} = 4/25$.
 
 \paragraph{Joint Lipschitz comparison constant.} By
-Lemma~\ref{lem:L3-T}, the diagonal sequence is
+Lemma~\ref{lem:L3-T} (tight triangle bound), the diagonal sequence is
 \[
-C_3^{(2)}(n,n) = \sqrt{n/(n+2)},
+C_3^{(2)}(n,n) = \sqrt{2n/(n+2)} \;\nearrow\; \sqrt 2,
 \]
-giving $C_3^{(2)}(2,2) = \sqrt{2}/2 \approx 0.707$,
-$C_3^{(2)}(3,3) = \sqrt{3/5} \approx 0.775$,
-$C_3^{(2)}(4,4) = \sqrt{4/6} \approx 0.816$.
+giving $C_3^{(2)}(2,2) = 1$,
+$C_3^{(2)}(3,3) = \sqrt{6/5} \approx 1.095$,
+$C_3^{(2)}(4,4) = \sqrt{8/6} \approx 1.155$.
 
 \paragraph{Joint propinquity bound (unit focal length).}
 We report two presentations of the bound at the panel: the
@@ -945,8 +981,8 @@ $C_3^{(2),\mathrm{fact}} = 1$ on the unit-Lipschitz simple-tensor panel
 (this is the variant computed by
 \texttt{compute\_tensor\_propinquity\_bound} as
 \texttt{propinquity\_bound}), and the \emph{full-operator-system} bound
-\eqref{eq:L5_bound_T} obtained by inserting the Pythagorean
-$C_3^{(2)}$ of Lemma~\ref{lem:L3-T} together with the
+\eqref{eq:L5_bound_T} obtained by inserting the triangle-bound
+$C_3^{(2)} \le \sqrt 2$ of Lemma~\ref{lem:L3-T} together with the
 $1 + 2\sqrt{2}$ reach-plus-height factor of Lemma~\ref{lem:L5-T}.
 
 \begin{center}
@@ -956,11 +992,11 @@ $(\nmaxa, \nmaxb)$ & $\gamma_{\nmaxa}$ & $\gamma_{\nmaxb}$ &
 $\cbnorm{T^{(a,b)}}$ & $\Lambda^{\mathrm{fact}}$ &
 $C_3^{(2)}$ & $\Lambda^{\mathrm{full}}$ \\
 \midrule
-$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $0.707$ & $5.604$ \\
-$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $2.0746$ & $0.752$ & $5.967$ \\
-$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $1.6101$ & $0.775$ & $4.769$ \\
-$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $1.6101$ & $0.801$ & $4.929$ \\
-$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $1.3223$ & $0.816$ & $4.131$ \\
+$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $1.000$ & $7.942$ \\
+$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $2.0746$ & $1.043$ & $8.281$ \\
+$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $1.6101$ & $1.095$ & $6.752$ \\
+$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $1.6101$ & $1.121$ & $6.909$ \\
+$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $1.3223$ & $1.155$ & $5.845$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -989,8 +1025,8 @@ $\Lambda^{(1)}(4)/\Lambda^{(1)}(2) \approx 0.637$
 dominated by the slower factor and inherits the single-factor cutoff
 scaling. On the full-operator-system column the analogous ratio is
 $\Lambda^{\mathrm{full}}(4,4)/\Lambda^{\mathrm{full}}(2,2) \approx
-4.131/5.604 \approx 0.737$, with the $C_3^{(2)}$ factor partially
-offsetting the $\max(\gamma)$ decrease.
+5.845/7.942 \approx 0.736$, with the (now increasing) $C_3^{(2)}$
+factor partially offsetting the $\max(\gamma)$ decrease.
 
 \item \emph{Joint cb-norm decreases as $1/(\nmaxa \nmaxb)$.}
 $\cbnorm{T^{(2,2)}} = 4/9 \approx 0.444$ vs.\
@@ -1003,11 +1039,13 @@ cb-norm $O(1/\nmax)$.
 \item \emph{Test count.} The supporting computational module
 \texttt{geovac/gh\_convergence\_tensor.py} ($\sim 1881$ lines) and
 the test file \texttt{tests/test\_gh\_convergence\_tensor.py} contain
-the full verification panel. The baseline first-pass test count is
-$84$ passes $+\,6$ slow-skips, and the post-tightening additions
-contribute $37+$ further tests covering the asymmetric supremum
-correction, the explicit $\varepsilon_{\mathrm{cross}}$ rate, and the
-keystone-status verification.
+the full verification panel, including
+\texttt{tests/test\_paper39\_triangle\_tight.py}, which builds the
+joint commutator from the real Camporesi--Higuchi matrices and the
+graded multipliers and confirms (i) the triangle bound
+\eqref{eq:pythagorean_op_norm} is tight (ratio $\to 1$) and (ii) the
+Pythagorean form is maximally violated (ratio $\to 2$), the
+computational basis for the $C_3^{(2)} \le \sqrt 2$ constant.
 \end{enumerate}
 
 % =====================================================================
@@ -1048,10 +1086,11 @@ covers each factor's central convolution but the propinquity-tunneling
 assembly for the product is not in print prior to this work. The
 present paper closes the case by explicitly using the Connes--Marcolli
 graded anticommutation \eqref{eq:anticomm} on the KO-dim-6 module to
-turn the generic triangle bound into a Pythagorean identity, which is
-what controls both the joint Lipschitz constant
-(Lemma~\ref{lem:L3-T}) and the joint height-distortion term
-(Lemma~\ref{lem:L5-T}).
+produce the clean two-term graded Leibniz rule, whose joint commutator
+is then controlled --- with constant $C_3^{(2)} \le \sqrt 2$ --- by the
+(tight) operator-norm triangle bound; this controls both the joint
+Lipschitz constant (Lemma~\ref{lem:L3-T}) and the joint
+height-distortion term (Lemma~\ref{lem:L5-T}).
 
 \subsection{Obstructions to the cross-manifold extensions}
 \label{sec:obstructions}
@@ -1132,54 +1171,50 @@ single-factor rate.
 \paragraph{(ii) Off-factorized-panel functions.} Theorem~\ref{thm:main}
 is stated and verified on simple tensors $f \otimes g$ and extended by
 linearity to finite linear combinations; the $C_3^{(2)}$ formula
-\eqref{eq:C3_2_full} arises from the Pythagorean Leibniz on
-unit-Lipschitz Avery harmonics. General $h \in C^\infty(\sthree
-\times \sthree)$ that are not of factorized form may admit
-sharper bounds via direct Sobolev embedding on $\sthree \times
-\sthree$. The detailed analysis of the off-factorized case --- and in
-particular whether $C_3^{(2)}$ is sharp on functions with cross-mixing
-between the two factors --- is open.
+\eqref{eq:C3_2_full} arises from the (tight) triangle bound on the
+graded Leibniz rule for unit-Lipschitz Avery harmonics, and is sharp
+on factorized harmonics ($C_3^{(2)} = \sqrt 2$ is achieved). General
+$h \in C^\infty(\sthree \times \sthree)$ that are not of factorized
+form may admit sharper bounds via direct Sobolev embedding on $\sthree
+\times \sthree$. The detailed analysis of the off-factorized case is
+open.
 
-\paragraph{(iii) Higher tensor factors --- CLOSED 2026-05-23 with
-stronger constant.} The proof extends mechanically to $k$-fold tensor
-products $\Tcal_{\sthree}^{\lambda_1} \otimes \cdots
-\otimes \Tcal_{\sthree}^{\lambda_k}$ via repeated application of the
-Pythagorean Leibniz rule. A sprint-scale closure (memo
-\texttt{debug/sprint\_paper39\_k\_fold\_extension\_memo.md},
-2026-05-23) establishes a stronger constant than the earlier
-$O(\sqrt{k})$ estimate suggested:
+\paragraph{(iii) Higher tensor factors --- structural extension
+(sketch; the $k=2$ case is the theorem of this paper).} The proof
+extends mechanically to $k$-fold tensor products
+$\Tcal_{\sthree}^{\lambda_1} \otimes \cdots \otimes
+\Tcal_{\sthree}^{\lambda_k}$ via repeated application of the graded
+Leibniz rule and the operator-norm triangle bound:
 \begin{equation}\label{eq:k_fold_main}
 \Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
 \Tcal^{(k)}_{(\sthree)^{\otimes k}}\bigr)
 \;\le\; C_{3}^{(k)}(n_{1}, \ldots, n_{k}) \cdot \gamma^{(k)}_{n_{1}, \ldots, n_{k}},
 \end{equation}
-with
+with the triangle bound
 \begin{equation}\label{eq:k_fold_C3}
 C_{3}^{(k)}(n_{1}, \ldots, n_{k})
-\;\le\; \sqrt{\frac{N_{*} - 1}{N_{*} + 1}},
+\;\le\; \sqrt{k}\,\sqrt{\frac{N_{*} - 1}{N_{*} + 1}}
+\;\nearrow\; \sqrt{k},
 \qquad N_{*} := \max_{j} n_{j},
 \end{equation}
-\emph{$k$-INDEPENDENT and identical to the single-factor
-Paper~38~\cite{loutey_paper38} L3 constant}, with joint rate
-$\gamma^{(k)} = \max_{j} \gamma^{\SU(2)}_{n_{j}}$ also $k$-independent
-(worst-factor SU(2) rate). The substantive structural content is that
-the Pythagorean Leibniz identity (Lemma~\ref{lem:L3-T}) at $k$ factors
-gives a sum-of-squares (not sum-of-magnitudes) bound on the joint
-commutator: the $k$ summands of $D^{(k)} = \sum_{j} \gamma_{<j} \otimes
-\DCH^{(j)} \otimes I_{>j}$ pairwise anti-commute on the Connes-Marcolli
-graded module, so
-$\opnorm{\sum_{j} X_{j}}^{2} = \sum_{j} \opnorm{X_{j}}^{2}$
-(Pythagorean), not $\bigl(\sum_{j} \opnorm{X_{j}}\bigr)^{2}$ (triangle
-inequality with Cauchy-Schwarz). This eliminates the $\sqrt{k}$ factor
-that a triangle-inequality bound on the joint commutator would
-produce. The per-irrep ratio
-$\sum_{j} (N_{j} - 1)^{2} / \sum_{j} (N_{j} - 1)(N_{j} + 1)
-\le \max_{j} (N_{j} - 1)/(N_{j} + 1)$
-gives~\eqref{eq:k_fold_C3} on taking square roots; asymptotic
-$\to 1^{-}$ as $\min_{j} n_{j} \to \infty$. The $k$-fold case is
-mathematically natural; the closed-form $k$-independent constant makes
-it a clean drop-in tool for any future multi-focal-composition argument
-at arbitrary $k$.
+and joint rate $\gamma^{(k)} = \max_{j} \gamma^{\SU(2)}_{n_{j}}$
+(worst-factor SU(2) rate). \emph{Correction (2026-06-18):} an earlier
+draft claimed a $k$-\textbf{independent} constant
+$\sqrt{(N_*-1)/(N_*+1)} \to 1^-$ via a ``Pythagorean Leibniz''
+sum-of-squares bound $\opnorm{\sum_j X_j}^2 = \sum_j \opnorm{X_j}^2$.
+That identity is \textbf{false}:\ pairwise anticommutation of the
+$D^{(k)}$ summands does not make the resulting commutator terms
+operator-norm orthogonal (Remark~\ref{rem:no_pythagorean}; verified
+maximally violated at $k=2$). The correct bound is the triangle one,
+which gives a genuine $\sqrt{k}$ factor (not eliminated, as had been
+claimed) from
+$\bigl(\sum_j (N_j-1)\bigr)^2 \le k \sum_j (N_j-1)^2$, hence
+$C_3^{(k)} \nearrow \sqrt k$. For each \emph{fixed} $k$ this is a
+finite constant, so convergence \eqref{eq:k_fold_main} still holds
+(driven by $\gamma^{(k)} \to 0$); but the constant grows with the
+number of factors and is \emph{not} a $k$-independent drop-in tool.
+This $k > 2$ extension is a sketch:\ only the $k = 2$ case is proved
+and verified in this paper.
 
 \paragraph{(iv) Conditional Coulomb/HO bridge.} Should a unifying
 NCG-framework extension be developed that bridges the Riemannian
@@ -1191,7 +1226,8 @@ a target for a follow-up to the present paper. The ingredients on the
 $\sthree$ side are exactly Theorem~\ref{thm:main} restricted to the
 left tensor factor.
 
-\paragraph{(v) Tensor products at higher rank --- CLOSED 2026-05-23 (master theorem).}
+\paragraph{(v) Tensor products at higher rank --- structural extension
+(sketch).}
 The present paper treats the equal-manifold tensor product
 $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ at
 two distinct focal lengths on the same compact group $\SU(2)$.
@@ -1203,40 +1239,36 @@ bi-invariant metric and proves that the rate constant $4/\pi$ is
 \emph{universal} across the class via a Plancherel-weight $\times$
 Vandermonde-Jacobian cancellation theorem.
 
-A sprint-scale closure (sprint memo
-\texttt{debug/sprint\_paper39\_higher\_rank\_extension\_memo.md},
-2026-05-23) combines the k-fold Pythagorean Leibniz mechanism
-(item~(iii) above, closed earlier 2026-05-23) with the general-$G$
-ingredients of~\cite{paper40_unified} to produce the
-\textbf{master theorem of the math.OA arc}:
+Combining the $k$-fold extension (item~(iii) above) with the
+general-$G$ ingredients of~\cite{paper40_unified} gives the expected
+multi-factor form
 
 \begin{equation}\label{eq:master_theorem_v}
-\boxed{\,\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
+\Lambda^{(k)}\bigl(\Tcal^{(k)}_{n_{1}, \ldots, n_{k}},\
 \Tcal^{(k)}_{G_{1} \times \cdots \times G_{k}}\bigr)
-\;\le\; \sup_{j} C_{3}^{G_{j}}(n_{j}) \cdot \max_{j} \gamma^{G_{j}}_{n_{j}}\,}
+\;\le\; C_{3}^{(k)} \cdot \max_{j} \gamma^{G_{j}}_{n_{j}},
+\qquad
+C_{3}^{(k)} \;\le\; \sqrt{k}\,\sup_{j} C_{3}^{G_{j}}(n_{j})
+\;\nearrow\; \sqrt{k},
 \end{equation}
 
 for any $k \ge 1$ and arbitrary compact connected Lie groups
 $G_{1}, \ldots, G_{k}$ with bi-invariant metrics, where
 $C_{3}^{G_{j}}(n_{j}) \to 1^{-}$ is the
 Paper~40~\cite{paper40_unified} per-factor L3 constant and
-$\gamma^{G_{j}}_{n_{j}}$ is the per-factor SU(2)/general-$G$ rate at the
-universal $(4/\pi) \log n_{j} / n_{j}$ asymptote. The Lipschitz
-comparison constant $C_{3}^{(k)} := \sup_{j} C_{3}^{G_{j}}(n_{j})$ is
-\textbf{$k$-INDEPENDENT} (bounded by the worst-factor single-group
-constant), and the joint rate inherits the universal $4/\pi$
-asymptotic from~\cite{paper40_unified}.
-
-The two extensions (k-fold via Pythagorean Leibniz, general-$G$ via
-PRV-summand Weyl harmonics) are \emph{structurally orthogonal}:\ the
-k-fold mechanism acts on the factor-counting dimension while the
-general-$G$ mechanism acts on the per-factor structure. Each preserves
-the other's content cleanly. The master theorem subsumes
-Papers~\cite{loutey_paper38} (the $k = 1$, $G = \SU(2)$ case),
-\cite{paper40_unified} (the $k = 1$, general $G$ case), and the
-present paper (the $k = 2$, $G_{1} = G_{2} = \SU(2)$ case) as special
-cases. Item~(iii) above (k-fold extension with $G_{j} = \SU(2)$,
-closed 2026-05-23) is the $G_{j} = \SU(2)$ case of the master theorem.
+$\gamma^{G_{j}}_{n_{j}}$ is the per-factor general-$G$ rate at the
+universal $(4/\pi) \log n_{j} / n_{j}$ asymptote. \emph{Correction
+(2026-06-18):} an earlier draft boxed this as a closed ``master
+theorem'' with a $k$-\textbf{independent} constant $\sup_j
+C_3^{G_j}(n_j)$; that rested on the withdrawn Pythagorean
+sum-of-squares bound (item~(iii)). With the correct triangle bound the
+constant carries a genuine $\sqrt{k}$ factor and is \emph{not}
+$k$-independent. For each fixed $k$ convergence holds (finite
+constant), and the joint rate still inherits the universal $4/\pi$
+asymptotic from~\cite{paper40_unified}; but this multi-factor /
+general-$G$ form is a \textbf{sketch} (only the $k=2$, $\SU(2)$ case is
+proved here, and the $k=1$ cases in \cite{loutey_paper38,
+paper40_unified}), not a separately verified master theorem.
 
 Practical applications:\ Paper~45~\cite{paper45}'s compact-temporal
 carrier $\sthree \times S^{1}$ instantiates the $k = 2$,
@@ -1252,23 +1284,27 @@ Riemannian product-carrier rate, not a Lorentzian convergence result.
 \section{Conclusion}\label{sec:conclusion}
 % =====================================================================
 
-We have established Latr\'emoli\`ere propinquity convergence for
-truncations of the tensor-product Camporesi--Higuchi spectral triple
-on $\sthree \times \sthree$ at distinct focal lengths, with explicit
+We have established van~Suijlekom state-space Gromov--Hausdorff
+convergence for truncations of the tensor-product Camporesi--Higuchi
+spectral triple on $\sthree \times \sthree$ at distinct focal lengths
+(the strictly stronger Latr\'emoli\`ere propinquity is not claimed; see
+the convergence convention of \S\ref{sec:setup}), with explicit
 qualitative-rate bound \eqref{eq:main_rate_intro}, closed-form
-joint Lipschitz comparison constant \eqref{eq:C3_2_full} less than $1$
-at every finite cutoff, and explicit Stein--Weiss-type bound on the
-Lipschitz-distortion height. The mechanism that controls both the
-Lipschitz constant and the height term is the same: the
+joint Lipschitz comparison constant \eqref{eq:C3_2_full} bounded by
+$\sqrt 2$ at every finite cutoff, and explicit Stein--Weiss-type bound
+on the Lipschitz-distortion height. The mechanism that controls both
+the Lipschitz constant and the height term is the same: the
 Connes--Marcolli graded anticommutation
 $\{\DCH^{(a)} \otimes I, \gamma_a \otimes \DCH^{(b)}\} = 0$ on the
-KO-dimension-6 graded module turns the generic triangle inequality
-$\norm{A + B} \le \norm{A} + \norm{B}$ into a Pythagorean identity
-$\norm{A + B}^2 = \norm{A}^2 + \norm{B}^2$ when the two summands of
-$D_{a,b}$ act on disjoint sectors of the graded module. The result
+KO-dimension-6 graded module produces a clean two-term graded Leibniz
+rule, whose joint commutator is controlled by the (tight) operator-norm
+triangle bound $\norm{A + B} \le \norm{A} + \norm{B}$ (an earlier
+Pythagorean refinement is withdrawn --- see
+Remark~\ref{rem:no_pythagorean} --- and convergence is unaffected since
+$C_3^{(2)} \le \sqrt 2$ is a finite constant). The result
 extends Connes--van~Suijlekom~\cite{connes_vs2021} and the subsequent
 flat-structure and single-non-abelian-factor literature
-\cite{hekkelman2022, hekkelman_mcdonald2024, leimbach_vs2024,
+\cite{hekkelman2022, hekkelman_mcdonald2024b, leimbach_vs2024,
 loutey_paper38} to the simplest non-abelian tensor case, and closes a
 case in the propinquity tensor-product programme that the published
 literature does not previously cover. The cross-manifold extensions
@@ -1306,10 +1342,10 @@ algebra},
 \newblock Banach J.~Math.~Anal., to appear (2019);
 \newblock arXiv:1907.07357.
 
-\bibitem[Avery, Wen \& Avery(1986)]{avery_wen_avery1986}
-J.~Avery, Z.-Y.~Wen, and J.~S.~Avery,
-\newblock \emph{Hyperspherical harmonics: Some properties and applications},
-\newblock J.~Math.~Phys. \textbf{27} (1986), 396--402.
+\bibitem[Wen \& Avery(1985)]{avery_wen_avery1986}
+Z.-Y.~Wen and J.~Avery,
+\newblock \emph{Some properties of hyperspherical harmonics},
+\newblock J.~Math.~Phys. \textbf{26} (1985), 396--403.
 
 \bibitem[Bo{\.z}ejko \& Fendler(1991)]{bozejko_fendler1991}
 M.~Bo{\.z}ejko and G.~Fendler,
@@ -1349,28 +1385,20 @@ operators associated with an analytic path of Riemannian metrics},
 
 \bibitem[Hekkelman(2022)]{hekkelman2022}
 E.~Hekkelman,
-\newblock \emph{Truncations of the circle and Connes' geometric
-formula},
-\newblock M.Sc.\ thesis, Radboud University, 2022;
-\newblock arXiv:2206.13744.
+\newblock \emph{Truncated geometry on the circle},
+\newblock preprint, 2021/2022; arXiv:2111.13865.
 
-\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024}
-E.~Hekkelman and E.~McDonald,
-\newblock \emph{Spectral truncations of $T^d$ and quantum metric
-geometry},
-\newblock J.~Noncommut.~Geom., to appear (2024);
-\newblock arXiv:2403.18619.
-
-\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
+\bibitem[Hekkelman \& McDonald(2024)]{hekkelman_mcdonald2024b}
 E.~Hekkelman and E.~McDonald,
 \newblock \emph{A noncommutative integral on spectrally truncated
 spectral triples, and a link with quantum ergodicity},
 \newblock J.~Funct.~Anal., to appear (2025), arXiv:2412.00628.
 
-\bibitem[Latr\'emoli\`ere(2016)]{latremoliere2016}
+\bibitem[Latr\'emoli\`ere(2015)]{latremoliere2016}
 F.~Latr\'emoli\`ere,
 \newblock \emph{The dual Gromov--Hausdorff propinquity},
-\newblock Banach J.~Math.~Anal. \textbf{10} (2016), 175--229.
+\newblock J.~Math.~Pures Appl. \textbf{103} (2015), no.~2, 303--351;
+\newblock arXiv:1311.0104.
 
 \bibitem[Latr\'emoli\`ere(2017)]{latremoliere_metric_st_2017}
 F.~Latr\'emoli\`ere,
@@ -1379,10 +1407,11 @@ triples},
 \newblock Adv.~Math. \textbf{404} (2022), Paper No.~108393, 56pp;
 \newblock preprint arXiv:1811.10843, 2017.
 
-\bibitem[Latr\'emoli\`ere(2018)]{latremoliere2018}
+\bibitem[Latr\'emoli\`ere(2016)]{latremoliere2018}
 F.~Latr\'emoli\`ere,
-\newblock \emph{The Gromov--Hausdorff propinquity},
-\newblock Trans.~Amer.~Math.~Soc. \textbf{370} (2018), 365--411.
+\newblock \emph{The quantum Gromov--Hausdorff propinquity},
+\newblock Trans.~Amer.~Math.~Soc. \textbf{368} (2016), no.~1, 365--411;
+\newblock arXiv:1302.4058.
 
 \bibitem[Latr\'emoli\`ere(2026)]{latremoliere2026}
 F.~Latr\'emoli\`ere,

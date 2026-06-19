@@ -99,20 +99,27 @@ boundary. This is the spatial factor of the near-horizon cigar whose
 truncated heat trace carries the Bekenstein--Hawking--type tip entropy
 of the companion Paper~51. We construct a \emph{unital Markov--Cesàro
 Berezin} reconstruction $\Berez_{\Lambda}$ on $\cone$ and prove that, on
-apex-localised observables, it satisfies all four Latr\'emoli\`ere
-reconstruction properties: exact unitality (by the Markov
-normalisation), positivity and contractivity at Ces\`aro order
-$s\ge 2$ (the disk analogue of Fej\'er's theorem, i.e.\ positivity of a
-sufficiently high Ces\`aro mean of the Fourier--Bessel expansion), and
-an approximate identity controlled by $\norm{\nabla f}_{\infty}$ at an
-algebraic interior rate. Together with the propagation-number-two
+apex-localised observables, it has exact unitality (by the Markov
+normalisation), while the remaining reconstruction properties ---
+Ces\`aro positivity and a convergent approximate-identity interior
+rate --- are \emph{obstructed on the finite disk} by the Dirichlet
+boundary (see below) and are recovered on the boundaryless plane.
+Together with the propagation-number-two
 operator system and the gradient-norm Lipschitz seminorm, this yields
 the propinquity backbone for the cigar-tip entropy of Paper~51 at the
 local apex observable, upgrading its Lemma on geometric faithfulness
 from cited to proved for that purpose. The construction is verified
-numerically: unitality is exact, positivity holds at $s\ge2$, and the
-interior approximate-identity coefficient $\norm{\Berez_\Lambda(f)-P_\Lambda
-M_f P_\Lambda}/\norm{\nabla f}_\infty$ decays at rate $\Lambda^{-1.30}$.
+numerically: disk unitality is exact, but the finite-disk Markov--Ces\`aro
+reconstruction does \emph{not} achieve Ces\`aro positivity (minimum
+eigenvalue reaches $\approx -0.13$) nor a convergent interior rate (the
+disk drivers give $\norm{\Berez_\Lambda(f)-P_\Lambda M_f P_\Lambda}/
+\norm{\nabla f}_\infty \sim \Lambda^{+0.07}$, i.e.\ no decay) --- this
+is the Dirichlet-boundary obstruction, not a tail effect. The
+\emph{boundaryless plane} reconstruction (below) is what genuinely
+converges:\ the 2D Bochner--Riesz Berezin is positivity-preserving at
+order $s\ge\tfrac12$ (classical) and reconstructs every Schwartz
+observable at algebraic rate $\Lambda^{-0.6}$ to $\Lambda^{-0.9}$
+(test-function dependent).
 The only obstruction --- observables with content at the Dirichlet
 boundary $\rho=R$, where the eigenfunctions vanish and the Markov ratio
 becomes a $0/0$ limit independent of the observable --- is an artifact of
@@ -124,11 +131,14 @@ reconstructs every Schwartz observable with all four properties at an
 algebraic rate. Assembling Latr\'emoli\`ere's pointed/proper propinquity
 from these ingredients --- properness by Arzel\`a--Ascoli, reach the
 reconstruction rate, height the gradient-non-expansive Bochner--Riesz
-distortion --- establishes the full plane (hence de-compactified
-disk-with-cone) propinquity convergence at the qualitative-rate level,
-with the detailed pointed/proper bookkeeping transported from
-Latr\'emoli\`ere's framework. This is the metric-level analogue of the
-non-compact limit that Paper~47 closes at the spectral level.
+distortion --- establishes plane (hence de-compactified
+disk-with-cone) convergence at the qualitative-rate level, in
+van~Suijlekom's state-space Gromov--Hausdorff sense; the strictly
+stronger \emph{Latr\'emoli\`ere} propinquity carries the same named
+pointed/proper bookkeeping residual that the compact companion
+Papers~38/40 carry (the self-contained sharp-constant bound is the open
+residual). This is the metric-level analogue of the non-compact limit
+that Paper~47 closes at the spectral level.
 \end{abstract}
 
 % =====================================================================
@@ -148,12 +158,16 @@ van~Suijlekom state-space Gromov--Hausdorff convergence for the round three-sphe
 $\mathrm{SU}(2)$~\cite{paper38}, for tensor products of such
 factors~\cite{paper39}, for all simple compact Lie groups with a
 universal rate constant $4/\pi$~\cite{paper40}, and --- in
-Lorentzian signature on Krein spaces --- in
-Papers~\cite{paper44,paper45,paper46,paper47}. In every one of these,
-the reconstruction map (the L4 lemma in the five-lemma scheme of
-Paper~38) is built from the \emph{central Fej\'er kernel} of
-Peter--Weyl analysis, which exists because the carrier is a group or a
-homogeneous space and is positive by Fej\'er's classical theorem.
+the Lorentzian/Krein setting --- has probed the signature extension in
+Papers~\cite{paper44,paper47} (the genuinely Lorentzian-metric
+propinquity \emph{degenerates}:\ Paper~45's $K^{+}$ annihilation
+theorem, so the surviving statement there is the signature-agnostic
+product-carrier convergence, not a Lorentzian convergence theorem).
+In each of the established (Riemannian) cases the reconstruction map
+(the L4 lemma in the five-lemma scheme of Paper~38) is built from the
+\emph{central Fej\'er kernel} of Peter--Weyl analysis, which exists
+because the carrier is a group or a homogeneous space and is positive
+by Fej\'er's classical theorem.
 
 The present paper treats the first carrier that is neither: the
 two-dimensional flat \emph{disk} $\diskR$, optionally with a conical
@@ -196,16 +210,18 @@ propagation number $2$: $\Op_\Lambda^{2}$ spans the full matrix envelope
 Toeplitz value~\cite{connes_vs2021} and confirmed by direct computation.
 \item \textbf{(Berezin reconstruction, \S\ref{sec:berezin}).} The unital
 Markov--Ces\`aro map $\Berez_{\Lambda}$ of Definition~\ref{def:berezin}
-satisfies the four reconstruction properties on apex-localised
-observables (Theorem~\ref{thm:interior}): exact unitality, positivity
-and contractivity at Ces\`aro order $s\ge2$, and the approximate
-identity $\supnorm{\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}}\le
-\gamma_{\Lambda}\,\supnorm{\nabla f}$ with $\gamma_{\Lambda}\to0$.
-\item \textbf{(Apex backbone, \S\ref{sec:apex}).} For apex-local
-observables the truncated disk-with-cone triple converges to the
-continuum disk-with-cone in the propinquity
-(Corollary~\ref{cor:apex_backbone}); this establishes the
-geometric-faithfulness backbone of the Paper~51 cigar-tip entropy.
+has exact unitality. The remaining reconstruction properties are
+\emph{obstructed on the finite disk}:\ numerically the Ces\`aro
+construction is not positivity-preserving (minimum eigenvalue
+$\approx-0.13$) and its approximate-identity coefficient does not decay
+($\sim\Lambda^{+0.07}$) --- the Dirichlet-boundary obstruction
+(\S\ref{sec:boundary}).
+\item \textbf{(Apex backbone via the plane, \S\ref{sec:apex}).} The
+geometric-faithfulness backbone of the Paper~51 cigar-tip entropy ---
+apex-local observables (which do not see the boundary) --- is supplied
+by the boundaryless-plane convergence below, the de-compactified cone
+on which apex-local content lives;\ the finite-disk triple itself does
+not converge (boundary obstruction).
 \item \textbf{(De-compactification, \S\ref{sec:boundary}).} The boundary
 obstruction --- observables with content at $\rho=R$, where the
 eigenfunctions vanish and the Markov ratio becomes a $0/0$ limit
@@ -218,27 +234,37 @@ de-compactification.
 \item \textbf{(Plane propinquity, \S\ref{subsec:assembly}).} Assembling
 Latr\'emoli\`ere's pointed/proper propinquity from the plane reconstruction
 (properness by Arzel\`a--Ascoli, reach the reconstruction rate, height the
-gradient-non-expansive Bochner--Riesz distortion) establishes the full plane
-propinquity convergence $\Lprop(\Tcal_{\Lambda},\Tcal_{\infty})\le C\gamma
+gradient-non-expansive Bochner--Riesz distortion) establishes plane
+convergence $\Lprop(\Tcal_{\Lambda},\Tcal_{\infty})\le C\gamma
 _{\Lambda}\to0$ (Theorem~\ref{thm:plane_propinquity}) at the qualitative-rate
-level, with the pointed/proper bookkeeping transported from
-Latr\'emoli\`ere's framework.
+level, in van~Suijlekom's state-space Gromov--Hausdorff sense, with the
+pointed/proper bookkeeping transported from Latr\'emoli\`ere's framework.
 \end{itemize}
 
-This closes the de-compactified disk-with-cone propinquity; the residual is a
-self-contained pointed/proper bound with the sharp constant (\S\ref{sec:open},
-Q1), and the genuinely-new non-compact metric content sits in the boundaryless
-Bochner--Riesz reconstruction.
+This establishes the de-compactified disk-with-cone convergence at the
+state-space GH / qualitative-rate level; the strictly stronger Latr\'emoli\`ere
+propinquity carries a named self-contained pointed/proper sharp-constant
+residual (\S\ref{sec:open}, Q1), as in Papers~38/40, and the genuinely-new
+non-compact metric content sits in the boundaryless Bochner--Riesz reconstruction.
 
 \subsection{Honest scope}
-The interior reconstruction Theorem~\ref{thm:interior} is proved at the
-level its ingredients permit: unitality and contractivity are algebraic
-identities; positivity is the disk analogue of Fej\'er's theorem and
-rests on the (classical) Ces\`aro summability of Fourier--Bessel
-expansions~\cite{stempak1989, colzani1993}; the approximate-identity
-rate is the kernel-localisation estimate, stated as an algebraic bound
-and verified numerically at $\Lambda^{-1.30}$. The paper does not claim
-the full disk propinquity; that is the named open extension.
+On the finite disk, only unitality and contractivity hold (algebraic
+identities). The Ces\`aro \emph{positivity} hoped for as a disk analogue
+of Fej\'er's theorem does \emph{not} hold numerically (the Markov--Ces\`aro
+construction reaches minimum eigenvalue $\approx-0.13$), and the
+approximate-identity coefficient does \emph{not} decay (disk drivers give
+$\sim\Lambda^{+0.07}$;\ the earlier reported $\Lambda^{-1.30}$ is not
+reproduced) --- both are the Dirichlet-boundary obstruction
+(\S\ref{sec:boundary}), not a tail effect. The genuine, convergent,
+positivity-preserving reconstruction is on the boundaryless plane
+(Theorem~\ref{thm:plane}:\ Bochner--Riesz at $s\ge\tfrac12$, rate
+$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$, verified in
+\texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}), and the plane
+propinquity (Theorem~\ref{thm:plane_propinquity}) is at the
+qualitative-rate level. The paper does \emph{not} claim a finite-disk
+propinquity (the boundary obstructs it);\ the converging object is the
+de-compactified (plane) cone, which is what the apex-local Paper~51
+cigar-tip entropy requires.
 
 % =====================================================================
 \section{The disk-with-cone truncated spectral triple}
@@ -350,6 +376,27 @@ $\opnorm{[D,\Berez_{\Lambda}(f)]}\le\supnorm{\nabla g_{\Lambda}}\le
 \end{enumerate}
 \end{theorem}
 
+\begin{remark}[Correction, 2026-06-18 --- parts (b),(c) fail numerically
+on the finite disk]\label{rem:interior_correction}
+Parts \emph{(a)} (unitality, exact) and \emph{(d)} (Lipschitz
+non-expansiveness) hold and are verified. Parts \emph{(b)} and \emph{(c)}
+as stated do \emph{not} survive numerical test on the finite disk:\ the
+Markov--Ces\`aro construction at $s\ge2$ reaches minimum eigenvalue
+$\approx-0.13$ (\emph{not} positivity-preserving), and the
+approximate-identity coefficient does \emph{not} decay
+($\gamma_{\Lambda}\sim\Lambda^{+0.07}$, no convergence;\ the previously
+reported $\Lambda^{-1.30}$ is not reproduced --- driver
+\texttt{b3\_markov\_berezin.py}). Both failures are the
+Dirichlet-boundary obstruction analysed in \S\ref{sec:boundary}, not a
+tail effect:\ even interior-supported $f$ couple to boundary-vanishing
+eigenfunctions through the Ces\`aro ratio. The genuine
+positivity-preserving, convergent reconstruction is the boundaryless
+\emph{plane} Bochner--Riesz map (Theorem~\ref{thm:plane}), on which the
+apex backbone and the propinquity assembly are built. Parts (b),(c) are
+therefore retained only as the \emph{plane} statements; the finite-disk
+(b),(c) are withdrawn.
+\end{remark}
+
 \begin{proof}[Proof structure]
 (a) is immediate from $g_\Lambda=(\cdot)/(\cdot)\equiv1$ at $f\equiv1$,
 verified to machine precision (driver \texttt{b3\_markov\_berezin.py},
@@ -363,8 +410,10 @@ positive normalised average of $f$, giving $\min f\le g_{\Lambda}\le
 \max f$ and therefore both positivity and contractivity of
 $P_{\Lambda}M_{g_{\Lambda}}P_{\Lambda}$. (The truncated \emph{heat}
 weight $e^{-t\lambda}$ oscillates by Gibbs and is not positive; the
-Ces\`aro weight at $s\ge2$ is the fix, confirmed numerically: $\min
-g\ge0$ at $s\ge2$, while $s=1$ retains small negativity.) For (c),
+Ces\`aro weight at $s\ge2$ was the hoped-for fix, but numerically it
+does \emph{not} restore positivity on the finite disk --- $\min g
+\approx-0.13$ even at $s\ge2$, the boundary obstruction;\ see
+Remark~\ref{rem:interior_correction}.) For (c),
 $\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}=P_{\Lambda}
 M_{g_{\Lambda}-f}P_{\Lambda}$, so the bound is $\supnorm{g_{\Lambda}-f}$;
 since $g_{\Lambda}-f$ is a smoothing difference that vanishes for
@@ -374,19 +423,23 @@ localisation gives $\gamma_{\Lambda}\to0$ at an algebraic rate. (d) is
 the non-expansiveness of the Markov average for the gradient seminorm.
 \end{proof}
 
-\begin{remark}[Numerical verification]
+\begin{remark}[Numerical verification --- finite disk does not converge]
 \label{rem:numerics}
-With $f=(\rho/R)^{2}$ restricted to the interior $\rho\le0.9R$ and
-$s=2$: the coefficient $\supnorm{g_{\Lambda}-f}/\supnorm{\nabla f}$
-decays as $\Lambda^{-1.30}$ over $\Lambda=200\to6400$
-($0.091\to0.001$); the proportionality to $\supnorm{\nabla f}$ rather
-than $\supnorm{f}$ is confirmed by two test functions with different
-gradients agreeing in coefficient to a factor $1.32$; unitality holds to
-machine precision; and positivity ($\min g\ge0$) holds at $s\ge2$. For
-interior-concentrated observables (e.g.\ a Gaussian well inside the
-boundary) the \emph{full-disk} coefficient also decays
-($\Lambda^{-0.60}$), confirming the obstruction below is genuinely a
-boundary effect (driver \texttt{b3\_markov\_berezin.py}).
+Driver \texttt{b3\_markov\_berezin.py} (Markov--Ces\`aro on the finite
+disk, $s=2$, $\Lambda=100\to3200$):\ unitality is exact
+($\max|g_{1}-1|=0$); but the construction is \emph{not}
+positivity-preserving ($\min g$ reaches $\approx-0.13$), and the
+approximate-identity coefficient $\supnorm{g_{\Lambda}-f}/
+\supnorm{\nabla f}$ does \emph{not} decay --- a log--log fit gives
+$\Lambda^{+0.07}$ (the proportionality to $\supnorm{\nabla f}$ holds, to
+a factor $1.32$, but the magnitude does not shrink). An earlier draft
+reported $\Lambda^{-1.30}$ here;\ that is not reproduced by the driver
+and has been withdrawn (the boundary obstruction, \S\ref{sec:boundary}).
+The genuine convergence is on the boundaryless plane:\ driver
+\texttt{b3\_plane\_bochner\_riesz.py} gives positivity at $s\ge\tfrac12$
+and rate $\Lambda^{-0.6}$ to $\Lambda^{-0.9}$
+(Theorem~\ref{thm:plane};\ test
+\texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}).
 \end{remark}
 
 % =====================================================================
@@ -397,28 +450,31 @@ boundary effect (driver \texttt{b3\_markov\_berezin.py}).
 The conical defect $\alpha\ne1$ enters only through the azimuthal index
 $m_{\mathrm{eff}}=(k+\tfrac12)/\alpha$ of~\eqref{eq:eigenbasis}; the
 radial structure, the operator system, and the Berezin map are
-unchanged in form. Positivity of the cone heat semigroup
-(Cheeger~\cite{cheeger1983}) guarantees the Markov normalisation remains
-a positive average, so Theorem~\ref{thm:interior} extends verbatim to
-$\cone$ for any $\alpha>0$, with constants depending on $\alpha$ only
-through the apex eigenfunction exponents.
+unchanged in form. The conical defect commutes with the construction, so the disk analysis
+(including its boundary obstruction, Remark~\ref{rem:interior_correction})
+carries over to $\cone$ for any $\alpha>0$, with constants depending on
+$\alpha$ only through the apex eigenfunction exponents.
 
-\begin{corollary}[Apex backbone of the cigar-tip entropy]
+\begin{corollary}[Apex backbone of the cigar-tip entropy, via the plane]
 \label{cor:apex_backbone}
-For apex-localised observables, the truncated disk-with-cone triple
-$(\Op_{\Lambda},L)$ converges to the continuum disk-with-cone in the
-Latr\'emoli\`ere propinquity, with rate $\gamma_{\Lambda}$ of
-Theorem~\ref{thm:interior}. Consequently the geometric-faithfulness
-backbone of the cigar-tip entropy of Paper~51 holds at the local apex
-observable that the entropy requires.
+Apex-localised observables do not see the Dirichlet boundary, so their
+content lives on the de-compactified cone --- the boundaryless plane
+$\R^{2}_{\alpha}$. There the Bochner--Riesz reconstruction
+(Theorem~\ref{thm:plane}) converges, and the plane propinquity
+(Theorem~\ref{thm:plane_propinquity}) holds at the qualitative-rate
+level. Consequently the geometric-faithfulness backbone of the
+cigar-tip entropy of Paper~51 holds at the local apex observable that
+the entropy requires. (The finite disk-with-cone triple itself does
+\emph{not} converge --- boundary obstruction,
+Remark~\ref{rem:interior_correction}.)
 \end{corollary}
 
 \begin{proof}[Proof structure]
-The four reconstruction properties of Theorem~\ref{thm:interior},
+The plane reconstruction properties of Theorem~\ref{thm:plane},
 together with Proposition~\ref{prop:prop2} and the gradient-norm
 Lipschitz seminorm, are exactly the L1$'$/L3/L4 ingredients of the
 five-lemma propinquity assembly of~\cite[\S 3--5]{paper38}; the
-tunneling pair $(\Berez_{\Lambda},P_{\Lambda})$ then bounds the
+plane tunneling pair then bounds the
 propinquity by $C\gamma_{\Lambda}\to0$ by the standard
 assembly~\cite{latremoliere2015}. The cigar-tip entropy of Paper~51 is
 the zeroth Mellin moment of the apex tip, in which the bulk and boundary
@@ -587,11 +643,13 @@ gradient-non-expansive height bound --- are established here. The detailed
 tunneling and the local-uniformity of its reach and height) is transported from
 Latr\'emoli\`ere's framework~\cite{latremoliere2016, latremoliere2025}, in the
 same manner that the compact-carrier assembly of the companion
-papers~\cite{paper38, paper45} transports Latr\'emoli\`ere's compact propinquity
-from its L1$'$--L4 ingredients. With that transport, the full plane (hence
-de-compactified disk-with-cone) propinquity is established at the
-qualitative-rate level; a self-contained pointed/proper bound with the sharp
-constant $C$ is the residual. This is the metric-level analogue of the
+papers~\cite{paper38, paper45} transport the compact assembly
+from its L1$'$--L4 ingredients. With that transport, plane (hence
+de-compactified disk-with-cone) convergence is established at the
+qualitative-rate level in van~Suijlekom's state-space Gromov--Hausdorff
+sense; the strictly stronger Latr\'emoli\`ere propinquity carries the same
+named pointed/proper bookkeeping residual as Papers~38/40 (a self-contained
+bound with the sharp constant $C$). This is the metric-level analogue of the
 non-compact limit Paper~47 closes at the spectral level (its ``$G2$-metric''),
 here closed at the propinquity level for the boundaryless plane.
 \end{remark}
@@ -612,12 +670,16 @@ rather than cited --- is the residual, exactly as the compact-carrier
 papers~\cite{paper38, paper45} carried a named bookkeeping residual on
 Latr\'emoli\`ere's compact assembly.
 
-\paragraph{Q2 (sharp interior rate).} Theorem~\ref{thm:interior}(c)
-states an algebraic interior rate, verified at $\Lambda^{-1.30}$ for a
-representative observable. A sharp rate (and its dependence on the
-Ces\`aro order $s$ and on the apex exponent $\alpha$) would parallel the
-$O(\log n/n)$ rate of the group case~\cite{paper38,paper40} and locate
-the disk in the same rate hierarchy.
+\paragraph{Q2 (sharp plane rate).} The converging carrier is the plane
+(Theorem~\ref{thm:plane}), whose Bochner--Riesz reconstruction has a
+numerically measured, test-function-dependent algebraic rate
+$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$. A sharp closed-form rate (and its
+dependence on the Bochner--Riesz order $s$ and on the apex exponent
+$\alpha$) would parallel the $O(\log n/n)$ rate of the group
+case~\cite{paper38,paper40} and locate the plane cone in the same rate
+hierarchy. (The finite-disk interior rate is \emph{not} an open
+quantitative question but a closed negative one:\ it does not converge,
+Remark~\ref{rem:interior_correction}.)
 
 \paragraph{Q3 (boundary-adapted operator system).} An alternative to
 de-compactification is a boundary-adapted operator system --- mixed
@@ -656,12 +718,11 @@ F.~Latr\'emoli\`ere, ``Quantum metric spaces and the Gromov--Hausdorff
 propinquity,'' \textit{Contemp.~Math.}\ \textbf{676} (2016), 47--133.
 
 \bibitem{latremoliere2025}
-F.~Latr\'emoli\`ere, ``The covariant / pointed-proper Gromov--Hausdorff
-propinquity for locally compact quantum metric spaces,''
-arXiv:2512.03573 (2025) and related work on the propinquity in the
-pointed proper setting; see also F.~Latr\'emoli\`ere, ``The
-Gromov--Hausdorff propinquity for metric spectral triples,''
-\textit{Adv.~Math.}\ \textbf{404} (2022), 108393.
+F.~Latr\'emoli\`ere, ``The Gromov--Hausdorff propinquity for metric
+spectral triples,'' \textit{Adv.~Math.}\ \textbf{404} (2022), Paper
+No.~108393 (preprint arXiv:1811.10843); used here for the
+pointed/proper (locally compact) propinquity machinery transported to
+the boundaryless plane.
 
 \bibitem{connes_vs2021}
 A.~Connes and W.~D.~van~Suijlekom, ``Spectral truncations in

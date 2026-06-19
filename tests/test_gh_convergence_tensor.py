@@ -561,235 +561,123 @@ class TestSlowConvergence:
 
 
 # ---------------------------------------------------------------------------
-# §13. R1 closure: tightened C_3^{(2),full} via SU(2)xSU(2) Pythagorean bound
+# §13. C_3^{(2),full} via the TIGHT TRIANGLE bound on the graded Leibniz rule
+#      (corrected 2026-06-18: the earlier "Pythagorean refinement" was false;
+#       see geovac.gh_convergence_tensor.c3_full_triangle_bound and Paper 39
+#       Remark "Withdrawn Pythagorean refinement".)
 # ---------------------------------------------------------------------------
 
 
-class TestR1PythagoreanC3Bound:
-    """R1 closure (sprint W2b-easy-tighten, 2026-05-07).
+class TestTriangleC3Bound:
+    """C_3^{(2),full} <= sqrt(((N_a-1)+(N_b-1))^2 / (N_a^2+N_b^2-2)) -> sqrt(2).
 
-    The conservative C_3^{(2),full} <= 2 from generic Bozejko-Fendler
-    is tightened to C_3^{(2),full} <= sqrt(((N_a-1)^2 + (N_b-1)^2) /
-    (N_a^2 + N_b^2 - 2)) via the SU(2) x SU(2) Pythagorean refinement
-    of single-factor L3 + Connes-Marcolli graded Pythagorean Leibniz.
-    The bound is < 1 for every finite cutoff and -> 1^- as cutoffs
-    -> infinity. This is precisely "1 + o(1)".
+    Corrected 2026-06-18 (/qa group1 Bite B-3). The conservative
+    C_3^{(2),full} <= 2 (generic Bozejko-Fendler) tightens to the TIGHT
+    operator-norm triangle bound on the two Connes-Marcolli Leibniz
+    terms.  An earlier draft claimed a PYTHAGOREAN refinement
+    sqrt(((N_a-1)^2+(N_b-1)^2)/(...)) < 1; that is false (graded
+    anticommutation does not give operator-norm orthogonality -- verified
+    maximally violated on the actual harmonics in
+    test_paper39_triangle_tight.py).  The correct bound is the triangle
+    one: equals 1 at (2,2), exceeds 1 for larger cutoffs, and increases
+    to sqrt(2).  Convergence is unaffected (sqrt(2) is finite).
     """
 
-    def test_pythagorean_bound_at_22_equals_1_over_sqrt2(self):
-        """At (n_a, n_b) = (2, 2), the irrep is (N_a, N_b) = (3, 3),
-        so C_3^{(2),Pyth} = sqrt((4 + 4) / (9 + 9 - 2)) = sqrt(8/16)
-        = 1/sqrt(2) ≈ 0.7071.
-        """
-        c = c3_full_pythagorean_bound(2, 2)
-        assert c == pytest.approx(1.0 / np.sqrt(2.0), rel=1e-12)
+    def test_bound_at_22_equals_one(self):
+        """At (n_a,n_b)=(2,2), grid corner (3,3): sqrt((2+2)^2/(9+9-2))
+        = sqrt(16/16) = 1."""
+        assert c3_full_pythagorean_bound(2, 2) == pytest.approx(1.0, rel=1e-12)
 
-    def test_pythagorean_bound_at_33_equals_sqrt15_over_5(self):
-        """At (n_a, n_b) = (3, 3), the irrep is (N_a, N_b) = (4, 4),
-        so C_3^{(2),Pyth} = sqrt((9 + 9) / (16 + 16 - 2)) = sqrt(18/30)
-        = sqrt(3/5) = sqrt(15)/5.
-        """
+    def test_bound_at_33_equals_sqrt_6_over_5(self):
+        """At (3,3), corner (4,4): sqrt((3+3)^2/(16+16-2)) = sqrt(36/30)
+        = sqrt(6/5) ~ 1.095."""
         c = c3_full_pythagorean_bound(3, 3)
-        assert c == pytest.approx(np.sqrt(15.0) / 5.0, rel=1e-12)
+        assert c == pytest.approx(np.sqrt(6.0 / 5.0), rel=1e-12)
 
-    def test_pythagorean_symbolic_22(self):
-        """Symbolic value at (2,2) is sqrt(2)/2."""
+    def test_symbolic_22(self):
+        """Symbolic value at (2,2) is 1."""
         s = c3_full_pythagorean_bound_symbolic(2, 2)
-        # sqrt(8/16) = sqrt(1/2) = sqrt(2)/2
-        assert sp.simplify(s - sp.sqrt(2) / 2) == 0
+        assert sp.simplify(s - 1) == 0
 
-    def test_pythagorean_symbolic_33(self):
-        """Symbolic value at (3,3) is sqrt(3/5) = sqrt(15)/5."""
+    def test_symbolic_33(self):
+        """Symbolic value at (3,3) is sqrt(6/5)."""
         s = c3_full_pythagorean_bound_symbolic(3, 3)
-        assert sp.simplify(s - sp.sqrt(sp.Rational(3, 5))) == 0
+        assert sp.simplify(s - sp.sqrt(sp.Rational(6, 5))) == 0
 
-    def test_pythagorean_below_legacy_bound(self):
-        """At every (n_a, n_b), Pythagorean bound is strictly less than
-        the conservative legacy bound C_3_full = 2."""
+    def test_below_legacy_bound(self):
+        """The triangle bound is < the legacy conservative bound 2."""
         for nb in [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5),
                    (10, 10), (50, 50), (2, 3), (3, 4)]:
             c = c3_full_pythagorean_bound(*nb)
-            assert c < C_LIPSCHITZ_TENSOR_FULL, f"Pyth bound {c} not < 2 at {nb}"
+            assert c < C_LIPSCHITZ_TENSOR_FULL, f"bound {c} not < 2 at {nb}"
 
-    def test_pythagorean_below_one_at_every_finite(self):
-        """Pythagorean bound is strictly less than 1 at every finite cutoff."""
+    def test_bounded_by_sqrt2(self):
+        """The triangle bound never exceeds sqrt(2)."""
         for nb in [(1, 1), (2, 2), (3, 3), (5, 5),
-                   (10, 10), (100, 100), (2, 5), (3, 7)]:
+                   (10, 10), (100, 100), (2, 5), (3, 7), (500, 500)]:
             c = c3_full_pythagorean_bound(*nb)
-            assert c < 1.0, f"Pyth bound {c} not < 1 at {nb}"
+            assert c <= np.sqrt(2.0) + 1e-12, f"bound {c} > sqrt(2) at {nb}"
 
-    def test_pythagorean_approaches_one_asymptotically(self):
-        """The Pythagorean bound -> 1 as cutoffs -> infinity."""
-        # At (1000, 1000), should be very close to 1
+    def test_exceeds_one_beyond_22(self):
+        """The (corrected) bound EXCEEDS 1 for cutoffs beyond (2,2)
+        -- the opposite of the withdrawn Pythagorean '< 1' claim."""
+        for nb in [(3, 3), (4, 4), (5, 5), (10, 10), (100, 100)]:
+            c = c3_full_pythagorean_bound(*nb)
+            assert c > 1.0, f"corrected bound {c} should exceed 1 at {nb}"
+
+    def test_approaches_sqrt2_asymptotically(self):
+        """The bound -> sqrt(2) as cutoffs -> infinity."""
         c = c3_full_pythagorean_bound(1000, 1000)
-        assert c > 0.999
-        assert c < 1.0
+        assert c > 1.41
+        assert c < np.sqrt(2.0)
 
-    def test_pythagorean_symmetric(self):
-        """C_3^{(2),Pyth}(n_a, n_b) = C_3^{(2),Pyth}(n_b, n_a)."""
+    def test_symmetric(self):
+        """C_3(n_a, n_b) = C_3(n_b, n_a)."""
         assert c3_full_pythagorean_bound(2, 5) == c3_full_pythagorean_bound(5, 2)
         assert c3_full_pythagorean_bound(3, 7) == c3_full_pythagorean_bound(7, 3)
 
-    def test_pythagorean_monotone_for_large_n_a(self):
-        """C_3^{(2),Pyth}(n_a, n_b) is monotone non-decreasing in n_a once
-        n_a >= n_b (the per-irrep ratio asymptotes to 1 from below in
-        each variable). For n_a < n_b, the ratio can dip slightly because
-        the smaller-N factor dominates the sup of the SUM ratio. We test
-        the well-defined monotonicity on the diagonal and the eventual
-        convergence to 1 from below.
-        """
-        # Diagonal monotone increasing: c3(n,n) = sqrt(n/(n+2)) ↑ 1
-        seq_diag = [c3_full_pythagorean_bound(n, n) for n in [1, 2, 3, 5, 10, 50, 100]]
-        for i in range(len(seq_diag) - 1):
-            assert seq_diag[i] <= seq_diag[i + 1] + 1e-12, \
-                f"diagonal non-monotone at {i}: {seq_diag[i]} > {seq_diag[i+1]}"
-        # In each row, the supremum over n_a >= n_b - 1 is monotone increasing
-        for n_b in [2, 3, 4]:
-            seq = [c3_full_pythagorean_bound(n_a, n_b) for n_a in [n_b, n_b + 1, n_b + 2, n_b + 5]]
-            for i in range(len(seq) - 1):
-                assert seq[i] <= seq[i + 1] + 1e-12, \
-                    f"row n_b={n_b} not monotone for n_a >= n_b at i={i}: {seq[i]} > {seq[i+1]}"
+    def test_diagonal_monotone_increasing(self):
+        """Diagonal c3(n,n) = sqrt(2n/(n+2)) is monotone increasing to sqrt(2)."""
+        seq = [c3_full_pythagorean_bound(n, n) for n in [1, 2, 3, 5, 10, 50, 100]]
+        for i in range(len(seq) - 1):
+            assert seq[i] <= seq[i + 1] + 1e-12, \
+                f"diagonal non-monotone at {i}: {seq[i]} > {seq[i+1]}"
 
-    def test_pythagorean_min_irrep_caveat(self):
-        """For n_a < n_b, the Pythagorean bound c_3(n_a, n_b) can be
-        slightly below the diagonal value c_3(n_b, n_b), because the
-        per-irrep ratio sup_{N_a, N_b} sqrt(((N_a-1)^2 + (N_b-1)^2) /
-        (N_a^2 + N_b^2 - 2)) attains its sup at the maximal (N_a, N_b),
-        but if one cutoff is much smaller than the other, the maximal
-        ratio is mid-way in the curve. This test documents the dip
-        rather than treating it as a violation.
-
-        Specifically: c_3(2, 4) <= c_3(3, 4) <= c_3(4, 4).
-        """
-        c_24 = c3_full_pythagorean_bound(2, 4)
-        c_34 = c3_full_pythagorean_bound(3, 4)
-        c_44 = c3_full_pythagorean_bound(4, 4)
-        # Documented dip: c_24 might be <= c_34 or vice versa, but both
-        # < c_44 (since the diagonal saturates the sup):
-        assert c_24 < c_44
-        assert c_34 < c_44
-        # All < 1
-        assert c_24 < 1
-        assert c_34 < 1
-        assert c_44 < 1
-
-    def test_pythagorean_at_NN_closed_form(self):
-        """At equal cutoffs n_a = n_b = n, C_3^{(2),Pyth}(n, n) = sqrt(N/(N+2))
-        where N = n + 1; equivalently sqrt((n)/(n+2))."""
+    def test_diagonal_closed_form(self):
+        """At equal cutoffs n: c3(n,n) = sqrt(2n/(n+2)) (corner N=n+1):
+        sqrt(((n)+(n))^2 / (2(n+1)^2 - 2)) = sqrt(4n^2/(2n^2+4n))
+        = sqrt(2n/(n+2))."""
         for n in [2, 3, 4, 5, 10, 50]:
             c = c3_full_pythagorean_bound(n, n)
-            # N = n + 1; bound = sqrt(((N-1)^2 + (N-1)^2) / (N^2 + N^2 - 2))
-            #                  = sqrt(2(N-1)^2 / (2(N^2 - 1)))
-            #                  = sqrt((N-1)/(N+1))
-            #                  = sqrt(n / (n+2))
-            expected = np.sqrt(n / (n + 2.0))
+            expected = np.sqrt(2.0 * n / (n + 2.0))
             assert c == pytest.approx(expected, rel=1e-12), \
-                f"At (n,n)=({n},{n}): {c} != sqrt({n}/{n+2}) = {expected}"
+                f"At ({n},{n}): {c} != sqrt(2*{n}/{n+2}) = {expected}"
 
-    def test_tensor_l3_lipschitz_returns_pythagorean(self):
-        """tensor_L3_lipschitz returns the R1 Pythagorean bound."""
+    def test_dominates_corner(self):
+        """The grid-sup bound is >= the corner value at every cutoff."""
+        for (na, nb) in [(2, 2), (3, 3), (10, 4), (100, 2),
+                         (50, 5), (5, 50), (4, 4), (10, 10)]:
+            c = c3_full_pythagorean_bound(na, nb)
+            N_a, N_b = na + 1, nb + 1
+            c_corner = float(np.sqrt(((N_a - 1) + (N_b - 1)) ** 2
+                                     / (N_a ** 2 + N_b ** 2 - 2)))
+            assert c >= c_corner - 1e-12, \
+                f"At ({na},{nb}): grid-sup {c} < corner {c_corner}"
+
+    def test_tensor_l3_lipschitz_returns_triangle_bound(self):
+        """tensor_L3_lipschitz reports the triangle bound (via the alias)."""
         out = tensor_L3_lipschitz(2, 2)
-        assert "C_3_full_pythagorean" in out
+        assert "C_3_full_pythagorean" in out  # key name retained for compat
         assert out["C_3_full_pythagorean"] == pytest.approx(
             c3_full_pythagorean_bound(2, 2), rel=1e-12,
         )
 
-    def test_tensor_l3_lipschitz_pyth_dominates_factorized(self):
-        """The Pythagorean full-op-system bound is >= the factorized
-        panel constant (both <= 1 ideally)."""
-        out = tensor_L3_lipschitz(2, 2)
-        # Pythagorean is < 1; factorized is = 1; here the Pyth bound
-        # at (2,2) is 1/sqrt(2) ≈ 0.707, which IS < factorized = 1.
-        # That's fine — the factorized panel C_3 = 1 is the *worst case*
-        # bound on the factorized panel, while the Pyth bound applies
-        # to the FULL operator system but happens to be tighter at small n.
-        assert out["C_3_factorized"] == 1.0
-        # Sanity: Pyth >= 0
-        assert out["C_3_full_pythagorean"] >= 0
-
-
-class TestR1AsymmetricSupremum:
-    """R1 re-attempt (sprint W2b-easy-tighten 2026-05-07).
-
-    The first-pass W2b-easy-tighten memo §1.3 claimed the supremum of
-    the per-irrep Pythagorean ratio is attained at the diagonal corner
-    (N_a, N_b) = (n_max_a + 1, n_max_b + 1). Closer analysis of the
-    partial derivative shows the function is NOT monotone in each
-    argument when N_a and N_b are very asymmetric. For example, at
-    (N_a, N_b) = (2, 4), d/dN_a (ratio) is negative — the function
-    increases when N_a moves AWAY from N_b. Therefore at very
-    asymmetric cutoffs (e.g., n_max_a >> n_max_b), the supremum is at
-    (N_a, 2), giving the single-factor ratio sqrt((N_a-1)/(N_a+1)),
-    not the diagonal corner ratio.
-
-    This re-attempt tightens the implementation: the supremum is now
-    computed across the boundary of the irrep grid (a finite set of
-    closed-form points), and the bound is the maximum of the diagonal
-    closed form sqrt(n/(n+2)) and the single-factor maxima
-    sqrt((N_a-1)/(N_a+1)) and sqrt((N_b-1)/(N_b+1)). This matches the
-    structural intuition that the joint Lipschitz constant is bounded
-    above by the worse single-factor L3 ratio.
-    """
-
-    def test_asymmetric_supremum_10_4(self):
-        """At (n_max_a=10, n_max_b=4), the corner is (11, 5) but the
-        actual supremum is at (11, 2): sqrt(10/12) = 0.9129."""
-        c = c3_full_pythagorean_bound(10, 4)
-        # Single-factor max: sqrt((11-1)/(11+1)) = sqrt(10/12)
-        single_factor_max = np.sqrt(10.0 / 12.0)
-        # Boundary at (11, 2): sqrt(((10)^2 + (1)^2) / (121 + 4 - 2)) = sqrt(101/123)
-        boundary_11_2 = np.sqrt(101.0 / 123.0)
-        # The supremum should be at least the larger of these
-        # boundary_11_2 = 0.9062, single_factor_max = 0.9129
-        # The actual supremum across the rectangle [2,11] x [2,5] is at (11, 2)
-        # giving boundary_11_2 = 0.9062 (NOT single_factor_max — because the
-        # ratio at (11, 2) accounts for both N_a^2 and N_b^2 in the denom).
-        assert c == pytest.approx(boundary_11_2, rel=1e-12), \
-            f"Asymmetric supremum at (10,4): {c} != sqrt(101/123) = {boundary_11_2}"
-
-    def test_asymmetric_supremum_4_10(self):
-        """Symmetry: c3(4, 10) == c3(10, 4)."""
-        c1 = c3_full_pythagorean_bound(4, 10)
-        c2 = c3_full_pythagorean_bound(10, 4)
-        assert c1 == c2
-
-    def test_asymmetric_supremum_100_2(self):
-        """At (n_max_a=100, n_max_b=2), supremum is at (101, 2)."""
-        c = c3_full_pythagorean_bound(100, 2)
-        # At (101, 2): sqrt((100^2 + 1) / (101^2 + 4 - 2)) = sqrt(10001/10203)
-        boundary = np.sqrt(10001.0 / 10203.0)
-        assert c == pytest.approx(boundary, rel=1e-12)
-
-    def test_asymmetric_supremum_dominates_corner(self):
-        """The asymmetric-corrected bound is >= the naive corner-only
-        bound at every (n_max_a, n_max_b)."""
-        for (na, nb) in [(2, 2), (3, 3), (10, 4), (100, 2),
-                         (50, 5), (5, 50), (4, 4), (10, 10)]:
-            c_correct = c3_full_pythagorean_bound(na, nb)
-            # Naive: just evaluate at corner
-            N_a, N_b = na + 1, nb + 1
-            num = (N_a - 1) ** 2 + (N_b - 1) ** 2
-            den = N_a ** 2 + N_b ** 2 - 2
-            c_naive = float(np.sqrt(num / den))
-            # The corrected sup is ALWAYS >= the corner value
-            assert c_correct >= c_naive - 1e-12, \
-                f"At ({na},{nb}): corrected {c_correct} < naive {c_naive}"
-
-    def test_asymmetric_supremum_below_one_always(self):
-        """The corrected supremum is still strictly < 1 at every finite
-        cutoff. (This was the headline R1 closure claim.)"""
-        for (na, nb) in [(1, 1), (2, 2), (3, 3), (5, 5),
-                         (10, 4), (100, 2), (50, 50), (500, 500)]:
-            c = c3_full_pythagorean_bound(na, nb)
-            assert c < 1.0, f"Bound {c} >= 1 at ({na},{nb})"
-
-    def test_asymmetric_diagonal_unchanged(self):
-        """For symmetric cutoffs n_max_a = n_max_b, the corrected and
-        naive bounds coincide (diagonal is the supremum on the diagonal
-        case)."""
+    def test_diagonal_matches_closed_form(self):
+        """For symmetric cutoffs n_max_a = n_max_b, the grid-sup equals the
+        triangle diagonal closed form sqrt(2n/(n+2))."""
         for n in [1, 2, 3, 5, 10, 50, 100]:
             c_correct = c3_full_pythagorean_bound(n, n)
-            expected_diag = np.sqrt(n / (n + 2.0))
+            expected_diag = np.sqrt(2.0 * n / (n + 2.0))
             assert c_correct == pytest.approx(expected_diag, rel=1e-12)
 
 
@@ -1041,7 +929,7 @@ class TestR1R2KeystoneTheoremStatus:
         """TensorPropinquityBound exposes c_lipschitz_full_pythagorean."""
         b = compute_tensor_propinquity_bound(2, 2, gamma_prec=15)
         assert b.c_lipschitz_full_pythagorean > 0
-        assert b.c_lipschitz_full_pythagorean < 1
+        assert b.c_lipschitz_full_pythagorean <= np.sqrt(2.0) + 1e-12
         # Same value as the standalone function
         assert b.c_lipschitz_full_pythagorean == pytest.approx(
             c3_full_pythagorean_bound(2, 2), rel=1e-12,
@@ -1059,10 +947,10 @@ class TestR1R2KeystoneTheoremStatus:
 class TestR1R2SlowConvergence:
     """Slow tests: full panel verification of R1+R2 closure at (4,4) and (5,5)."""
 
-    def test_pythagorean_bound_at_55(self):
-        """At (5,5), Pyth bound is sqrt(5/7)."""
+    def test_triangle_bound_at_55(self):
+        """At (5,5), triangle bound is sqrt(2*5/(5+2)) = sqrt(10/7)."""
         c = c3_full_pythagorean_bound(5, 5)
-        assert c == pytest.approx(np.sqrt(5.0 / 7.0), rel=1e-12)
+        assert c == pytest.approx(np.sqrt(10.0 / 7.0), rel=1e-12)
 
     def test_eps_cross_at_55(self):
         """ε_cross at (5,5) is 2*sqrt(2) * gamma_5."""
@@ -1071,8 +959,8 @@ class TestR1R2SlowConvergence:
         expected = 2 * np.sqrt(2) * eps["gamma_a"]
         assert eps["epsilon_cross_bound"] == pytest.approx(expected, rel=1e-9)
 
-    def test_full_panel_pyth_within_one(self):
-        """Pythagorean bound stays < 1 on the full panel."""
+    def test_full_panel_triangle_within_sqrt2(self):
+        """Triangle bound stays <= sqrt(2) on the full panel."""
         for nb in [(2,2), (3,3), (4,4), (5,5), (10,10), (50,50), (100,100)]:
             c = c3_full_pythagorean_bound(*nb)
-            assert c < 1.0
+            assert c <= np.sqrt(2.0) + 1e-12

@@ -113,3 +113,23 @@ group1 paper restates them (C7).
   NIT-grade citation-title slips (real IDs). Seed key `group1_B2_seed_key.json`,
   memo `debug/sprint_qa_group1_biteB2_memo.md`. **Remaining: sub-bite 3 (39, 52,
   53).**
+- 2026-06-18 — **Bite B sub-bite 3 (Papers 39, 52, 53) = FAIL → REMEDIATED**
+  (v4.25.0; **completes group1**). 9-agent panel, calibrated (sensitivity 5/5,
+  specificity held). Two SERIOUS findings remediated **rescue-first** (PI
+  direction), both PM-verified vs code/drivers: **(p39)** the boxed C₃<1
+  Pythagorean keystone is FALSE + footnote fabricated — real-operator probe
+  gives Pyth-ratio 2.0 (maximally violated) / triangle-ratio 1.0 (tight), so
+  C₃→√2 (triangle); convergence theorem SURVIVES, "<1" downgraded; §10 k-fold/
+  master theorems "k-INDEPENDENT"→√k-sketch; new `test_paper39_triangle_tight.py`
+  + `c3_full_triangle_bound`; 4 citation fixes. **(p53)** disk positivity(s≥2)/
+  rate Λ^{−1.30} "verified numerically" are refuted/phantom (drivers: min eig
+  −0.13, Λ^{+0.07}) — rescue SUCCEEDS via the boundaryless plane (Bochner–Riesz
+  s≥½, Λ^{−0.6..−0.9}); new `test_paper53_plane_bochner_riesz.py`; thm:interior
+  (b),(c) withdrawn on the finite disk. p52: 4 C7 mislabels + §5 title.
+  Synthesis: Pythagorean→triangle + 52/53 coverage gap closed. **Bonus (PI
+  mid-sprint):** Lorentzian-propinquity rescue probe — P45 K⁺ annihilation is
+  spatial-multiplier-only (Toeplitz temporal survives K⁺=ω_q) but signature-blind
+  robustly (v2 Wick involution = ω_q too) → WH7 weakens-to-convention confirmed;
+  `test_lorentzian_toeplitz_kplus.py` (6/6). C5/C11/C13/C14 PASS. Seed key
+  `group1_B3_seed_key.json`, memo `debug/sprint_qa_group1_biteB3_memo.md`.
+  **group1 branch QA COMPLETE.**
