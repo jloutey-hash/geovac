@@ -264,9 +264,10 @@ reverse triangle inequality of synthetic Lorentzian geometry.
 joint propinquity panel
 $\Lprop(\nmax,\Nt)\in\{2.0746,1.6101,1.3223\}$ at
 $(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$ transports verbatim through the
-strong-form bridge. Datta max-divergence chain inequality is verified
-numerically with substantially positive deficits ($\sim 67$, $69$,
-$81$~nats respectively). Riemannian-limit recovery at $\Nt=1$ is
+strong-form bridge. An illustrative Umegaki relative-entropy panel
+shows substantially positive deficits ($\sim 67$, $69$, $81$~nats);\
+the load-bearing $D_{\max}$ chain is verified at $96/96$ cells
+(\texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}). Riemannian-limit recovery at $\Nt=1$ is
 bit-exact (Frobenius residual $=0.0$ in float64). Propagation number
 $\mathrm{prop}=2$ is verified at $(\nmax,\Nt)=(2,3)$ (Paper~46
 Appendix~B envelope-aware refinement predicts $\mathrm{prop}\le 4$).
@@ -522,8 +523,9 @@ named open (\S\ref{sec:open_cocycle_entropy}). Theorem
 \ref{thm:strict_super_additivity} establishes strict super-additivity
 qualitatively via the data-processing inequality but does not
 quantify the deficit. The numerical panel (\S\ref{sec:numerical_panel})
-verifies the Datta max-divergence chain inequality inequality at substantial positive
-deficits ($\sim 67$, $69$, $81$~nats at three panel cells) but the
+is an illustrative Umegaki relative-entropy cross-check (deficits
+$\sim 67$, $69$, $81$~nats at three cells);\ the load-bearing $D_{\max}$
+chain is verified at $96/96$ cells, but the
 closed-form quantification remains open.
 \item Cross-manifold extensions
 ($\Tcal_{\sthree}\otimes\Tcal_{\mathrm{Hardy}(S^{5})}$, blocked at the
@@ -2257,9 +2259,9 @@ verification is computationally blocked.
 \item B1$^{\prime}$ structural correspondence:\ indirect verification
 via the Lambda bit-exactness (the structural transport preserves the
 propinquity rate to numerical precision).
-\item B2$^{\prime}$ strict super-additivity:\ verified via Uhlmann
-monotonicity deficits, substantially positive (66--81 nats) at all
-three panel cells.
+\item B2$^{\prime}$ strict super-additivity:\ verified via the
+$D_{\max}$ chain ($96/96$ cells, \texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py});\
+the Umegaki panel deficits (66--81 nats at three cells) are illustrative.
 \item B3$^{\prime}$ pre-compactness:\ verified at $(2,3)$
 ($\mathrm{prop}=2$); structural prediction at larger cells inherited.
 \item B4$^{\prime}$ convergence transport [\emph{DESCOPED}]:\ the
@@ -2738,8 +2740,9 @@ operator algebras and synthetic Lorentzian geometry.
 The numerical verification panel (\S\ref{sec:numerical_panel})
 confirms all load-bearing predictions at the bit-exact panel cells
 $(\nmax,\Nt)\in\{(2,3),(3,5),(4,7)\}$:\ Lambda joint propinquity
-bit-exact with Paper~45 reference; max-divergence cocycle deficits
-substantially positive (66--81 nats); Riemannian-limit recovery at
+bit-exact with Paper~45 reference; Umegaki relative-entropy panel
+deficits substantially positive (66--81 nats, illustrative;\
+load-bearing $D_{\max}$ chain verified $96/96$); Riemannian-limit recovery at
 $\Nt=1$ bit-exact; propagation number $=2$ at the smallest cell.
 
 \textbf{Honest scope.} The bridge is established at the
@@ -2818,7 +2821,7 @@ A.~Connes, \emph{Noncommutative Geometry}, Academic Press, San Diego,
 \bibitem[Connes \& Rovelli(1994)]{connes_rovelli1994}
 A.~Connes, C.~Rovelli, ``Von Neumann algebra automorphisms and
 time-thermodynamics relation in generally covariant quantum theories,''
-\emph{Class. Quantum Grav.} \textbf{11} (1994), 2899--2917.
+\emph{Class. Quantum Grav.} \textbf{11} (1994), 2899--2918.
 
 \bibitem[Connes \& van Suijlekom(2021)]{connes_vs2021}
 A.~Connes, W.~D.~van~Suijlekom, ``Spectral truncations in
@@ -2837,7 +2840,8 @@ propinquity of the Dirac operators associated with an analytic path
 of Riemannian metrics,'' arXiv:2504.11715 (April 2025).
 
 \bibitem[Franco \& Eckstein(2014)]{franco_eckstein2014}
-N.~Franco, M.~Eckstein, ``Causality in noncommutative geometry,''
+N.~Franco, M.~Eckstein, ``An algebraic formulation of causality for
+noncommutative geometry,''
 \emph{Class. Quantum Grav.} \textbf{30} (2013), 135007 (and
 follow-ups).
 
@@ -2851,8 +2855,8 @@ spectrally truncated spectral triples, and a link with quantum
 ergodicity,'' arXiv:2412.00628 (2024).
 
 \bibitem[Ketterer(2026)]{ketterer2026}
-C.~Ketterer, ``$\ell$-convergence on metric measure spaces and
-applications,'' arXiv:2605.11271 (May 2026).
+C.~Ketterer, ``Convergence of Lorentzian spaces and curvature bounds
+for generalized cones,'' arXiv:2605.11271 (May 2026).
 
 \bibitem[Kubota(2026)]{kubota2026}
 T.~Kubota, ``A Lorentzian coarea inequality,'' arXiv:2605.09101
@@ -2888,7 +2892,8 @@ the class of pointed proper quantum metric spaces,''
 arXiv:2512.03573 (December 2025).
 
 \bibitem[Latr\'emoli\`ere(2026)]{latremoliere2026_spectral_c1}
-F.~Latr\'emoli\`ere, ``Spectral propinquity in the $C^1$ topology,''
+F.~Latr\'emoli\`ere, ``Spectral continuity of almost commutative
+manifolds for the $C^{1}$ topology on Riemannian metrics,''
 arXiv:2603.19128 (March 2026).
 
 \bibitem[Leimbach(2024)]{leimbach_vs2024}
@@ -2917,28 +2922,30 @@ geometry,'' \emph{J. Geom. Phys.} \textbf{75} (2014), 71--91.
 arXiv:1301.3480.
 
 \bibitem[Martinetti(2026)]{martinetti2026_adjacent}
-P.~Martinetti, ``Noncommutative causal structures and spectral
-triples,'' arXiv:2603.03216 (March 2026).
+P.~Martinetti, ``Twisted Standard Model and its Krein structure,''
+arXiv:2603.03216 (March 2026).
 
 \bibitem[Minguzzi \& Suhr(2024)]{minguzzi_suhr2024}
-E.~Minguzzi, S.~Suhr, ``Bounded Lorentzian metric spaces,''
+E.~Minguzzi, S.~Suhr, ``Lorentzian metric spaces and their
+Gromov--Hausdorff convergence,''
 \emph{Lett.~Math.~Phys.} \textbf{114} (2024), Paper No.~73, arXiv:2209.14384.
 
 \bibitem[Mondino, Ryborz \& S\"amann(2026)]{mondino_ryborz_samann2025}
-A.~Mondino, M.~Ryborz, C.~S\"amann, ``Stability of synthetic timelike
-curvature bounds,'' arXiv:2605.03172 (May 2026).
+A.~Mondino, V.~Ryborz, C.~S\"amann, ``Stability of Synthetic Timelike
+Ricci Bounds under $C^{0}$-Limits and Applications to Impulsive
+Gravitational Waves,'' arXiv:2605.03172 (May 2026).
 
 \bibitem[Mondino \& S\"amann(2025)]{mondino_samann2025_pointed}
 A.~Mondino, C.~S\"amann, ``Lorentzian Gromov--Hausdorff convergence
 and pre-compactness,'' arXiv:2504.10380~v4 (December 2025).
 
 \bibitem[M\"uller(2022)]{muller2022}
-O.~M\"uller, ``Lorentzian Gromov--Hausdorff convergence and Cauchy
-slabs,'' \emph{Comm.~Math.~Phys.} \textbf{391} (2022), 855--882.
+O.~M\"uller, ``Lorentzian Gromov--Hausdorff theory and finiteness
+results,'' \emph{Gen.~Relativ.~Gravit.\ \textbf{54} (2022), Art.~117}. arXiv:1912.00988.
 
 \bibitem[Nieuviarts(2026)]{nieuviarts2025_v2}
-G.~Nieuviarts, ``Twisted spectral triples and pseudo-Riemannian
-spectral geometry, v2,'' arXiv:2512.15450 (December 2025, May 2026 v2).
+G.~Nieuviarts, ``Emergence of Time from a Twisted Spectral Triple in
+Almost-Commutative Geometry,'' arXiv:2512.15450 (December 2025, May 2026 v2).
 
 \bibitem[Rotondo(2026)]{rotondo2026}
 M.~Rotondo, ``Thermal time and irreversibility from non-commuting
@@ -2946,8 +2953,8 @@ observables in accelerated quantum systems,'' arXiv:2604.08349
 (April~2026).
 
 \bibitem[Sakovich \& Sormani(2024)]{sakovich_sormani2024}
-A.~Sakovich, C.~Sormani, ``Timed Gromov--Hausdorff convergence of
-spacetimes with timelike curvature bounds,'' (2024). arXiv:2410.16800.
+A.~Sakovich, C.~Sormani, ``Introducing Various Notions of Distances
+between Space-Times,'' (2024). arXiv:2410.16800.
 
 \bibitem[Sewell(1982)]{sewell1982}
 G.~L.~Sewell, ``Quantum fields on manifolds:\ PCT and gravitationally
@@ -2955,8 +2962,8 @@ induced thermal states,'' \emph{Ann.~Phys.~(NY)} \textbf{141} (1982),
 201--224.
 
 \bibitem[Sormani \& Vega(2016)]{sormani_vega2016}
-C.~Sormani, C.~Vega, ``The null distance encodes causality,''
-\emph{Class. Quantum Grav.} \textbf{33} (2016), 085001.
+C.~Sormani, C.~Vega, ``Null distance on a spacetime,''
+\emph{Class. Quantum Grav.} \textbf{33} (2016), 085001. arXiv:1508.00531.
 
 \bibitem[Strohmaier(2006)]{strohmaier2006}
 A.~Strohmaier, ``On noncommutative and pseudo-Riemannian geometry,''

@@ -1,0 +1,43 @@
+{
+  "run": "group1 CERTIFYING RE-RUN-2 of batch 1 (rr1b) — Papers 45,46,47,48,49 + synthesis, 2026-06-21",
+  "purpose": "Re-run of the v4.30.0-remediated corpus to confirm convergence to a clean PASS. Fresh seeds (different sites than rr1).",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-rr1b",
+  "note": "C5/C11/C13/C14/C15 deterministic, run separately. The 4 seeds calibrate the 4 LLM dimensions.",
+  "seeds": [
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.tex",
+      "catcher": "claims-46",
+      "class": "C14 — the strong-form rate-bound theorem TITLE flipped from '(descoped --- see Status note)' to '(established)'. Paper 46's strong-form Lorentzian-propinquity convergence is DESCOPED; presenting the theorem as established is the zombie class.",
+      "anchor": "[Strong-form rate bound (established)]"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_47_two_rate_hybrid_convergence.tex",
+      "catcher": "citation-47",
+      "class": "C4 — Bunce-Deddens bibitem metadata corrupted: 'J. Funct. Anal. 19 (1975), 13-24' -> 'J. Funct. Anal. 23 (1977), 13-24' (wrong volume + year; the real paper is vol 19 (1975)). No arXiv ID, so C15 N/A; the LLM citation reviewer must verify the venue/vol/year.",
+      "anchor": "\\textbf{23}\n(1977), 13--24"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_wh7_b3_phase3_sprint2.py",
+      "catcher": "code-49",
+      "class": "C2 — the Datta D_max chain assertion 'assert ...chain_violations... == 0' gutted to '>= 0' (vacuous; a violation count is always >=0, so the chain-inequality check no longer constrains). This test now backs p49's load-bearing D_max claim (the v4.30.0 panel-fix points to it).",
+      "anchor": "chain_violations\"] >= 0, k"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "catcher": "synthesis",
+      "class": "C9 — Paper 47 composite status overstated: 'the composite is established at the norm-resolvent / spectral level only' -> 'at the full metric level' (drops the descope restriction; the inner propinquity arrow is descoped, so the metric-level composite is NOT established).",
+      "anchor": "established at the full metric level"
+    }
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "what": "p45 K+ annihilation/degeneracy theorem (genuine NEGATIVE result) — correct."},
+    {"id": "M2", "what": "p47 norm-resolvent outer arrow + three-carrier survival (genuine); the v4.30.0 thm:main Remark marking it analytic proof-by-argument (Reed-Simon XIII.16), R^outer established / R^inner descoped — correct, must NOT be flagged."},
+    {"id": "M3", "what": "p49 Datta D_max chain (elementary + 96/96 framework-verified) AND the v4.30.0 strictness fix ('strict generically; pairwise distinctness necessary not sufficient') AND the relabeled Umegaki illustrative panel (was mislabeled 'Datta max-divergence') — all correct, must NOT be re-flagged."},
+    {"id": "M4", "what": "product-carrier S^3 x S^1 = signature-agnostic (Euclidean), NOT Lorentzian — correct."},
+    {"id": "M5", "what": "the v4.30.0 remediations broadly (p46 'degeneracy theorem (convergence retracted)'; p48 §6.3 conditional/descoped closure; C7 state-space GH; latremoliere_metric_st_2017 -> Adv. Math. 404 (2022) 108393) — correct, must NOT be re-flagged as overclaim/zombie/miscite."}
+  ]
+}

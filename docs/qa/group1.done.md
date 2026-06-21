@@ -200,3 +200,18 @@ group1 paper restates them (C7).
   `debug/sprint_qa_group1_rerun1_memo.md`. **NOTE: Batch 1 re-run is FAIL→
   remediated, NOT yet a clean PASS — certification requires a clean calibrated
   pass (convergence). Re-run-2 of Batch 1 + Batches 2/3 re-runs still pending.**
+- 2026-06-21 — **Re-run-2 of Batch 1 (Papers 45–49 + synthesis) = FAIL →
+  REMEDIATED + dedicated C4 sweep** (v4.31.0). 2nd re-run calibrated (sensitivity
+  4/4, specificity 5/5); **the v4.30.0 keystone fixes HELD** (strictness
+  "generically", analytic-proof framing). Claims/code converged to SMALL residuals
+  (p47 Remark 7.6 + cb-norm; p49 ×4 Umegaki-summary propagation); C4 surfaced 2 new
+  LARGE (p47 hekkelman misattribution, p48 muller fabrication). Per PI, ran a
+  **dedicated exhaustive citation sweep** of 45–49 (every bibitem web-verified) →
+  drained the tail in one pass: ~25 bibitem corrections (wrong titles, years,
+  authors; muller→GRG 54 (2022) 117, farsi→2404.00240, martinetti title; 2×
+  hekkelman_mcdonald2024b dup removed). p48 MS-defs PI-caveat resolved (p49
+  independently verified MS Def 2.3/3.8/4.4 exist). All 5 compile errors=0/undef=0;
+  C5/C11/C13/C14/C15 PASS. Seed key `group1_rr1b_seed_key.json`, memo
+  `debug/sprint_qa_group1_rerun1b_sweep_memo.md`. **C4 tail now drained + claims/
+  code converged — the next clean re-run should certify Batch 1; Batches 2/3 still
+  pending (shared bibliography, tail likely reduced).**

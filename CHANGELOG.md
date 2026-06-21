@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.31.0] - 2026-06-21
+
+### Changed — `/qa group1` re-run-2 of Batch 1 (Papers 45–49 + synthesis) FAIL remediated + dedicated C4 citation sweep
+
+Second certifying re-run of Batch 1, then — per PI direction on the result — a dedicated exhaustive citation sweep of 45–49 to drain the C4 tail in one pass rather than keep iterating.
+
+**rr1b verdict: FAIL (calibrated) → remediated.** 14-agent panel (worktree removed; no seed leaked). Sensitivity 4/4 (S-claims-C14 p46 theorem-title; S-citation-C4 p47 Bunce–Deddens vol/year; S-code-C2 Datta chain `==0`→`>=0`; S-synthesis-C9 p47 composite "full metric level"). Specificity 5/5 — **the v4.30.0 keystone fixes HELD** (claims-49 confirmed strictness "generically"; code-47 confirmed the analytic proof-by-argument framing). The finding profile shifted: claims/code converged to SMALL residuals, but C4 surfaced 2 new LARGE issues no prior pass caught.
+
+Genuine MATERIAL defects remediated:
+- **Claims (SMALL):** p47 Remark 7.6 ("Theorem 7.3 holds on the natural substrate" → "construction restricted… metric-level closure descoped"); p47 L2 "cb-norm" contradiction ("$\cbnorm{S}=2/(\nmax+1)$" → "the Plancherel-mass maximum; the map is UCP, cb-norm 1", per the paper's own Status note); p49 ×4 summary spots (abstract/honest-scope/aggregate-status/conclusion) where the v4.30.0 panel-body Datta→Umegaki relabel hadn't propagated — now labeled illustrative Umegaki with the load-bearing $D_{\max}$ chain pointed to the 96/96 test.
+- **Citations LARGE:** p47 `hekkelman_mcdonald2024` misattribution (credited with "Tauberian/ℝ^d-covering/compact-to-non-compact" — not in arXiv:2412.00628; corrected, outer-arrow machinery is the correctly-cited Reed–Simon §XIII.16); p48 `muller2022` fabrication ("…Cauchy slabs, CMP 391 (2022) 855–882" — no such paper → real Müller GRG 54 (2022) Art. 117, arXiv:1912.00988).
+
+**Dedicated citation sweep (PI direction):** exhaustive per-paper verify (one citation-reviewer per paper, every bibitem web-checked) → applied ~25 corrections across 45–49 (many duplicated across p48/p49's shared bibliography): wrong titles (minguzzi_suhr, leimbach "for tori", latremoliere2018 +"quantum", sakovich_sormani, mondino_ryborz_samann +author V. Ryborz, ketterer, nieuviarts2025_v2, sormani_vega "Null distance on a spacetime", franco_eckstein "An algebraic formulation of causality…", latremoliere2026_spectral_c1, martinetti2026_adjacent); metadata (kostant 1965→1969, kubota T.→H., connes_rovelli 2917→2918, toyota M.→R., franco label 2014→2013); fabricated/unverifiable→real (farsi_latremoliere2024 → "Collapse in NCG and spectral continuity," arXiv:2404.00240; bertozzini → SIGMA 6 (2010) 067, arXiv:1007.4094); 2× duplicate `hekkelman_mcdonald2024b` removed (p47 uncited→deleted; p48 cited→repointed to `hekkelman_mcdonald2024`, then deleted).
+
+Reconcile catches: the p48 PI-grade caveat (MS Def 3.6/3.8/Thm 6.2 might not exist, underpinning Bridge B3/B4) is **resolved** — the p49 sweep independently verified MS Def 2.3/3.8/4.4 exist in arXiv:2504.10380 and say what's attributed → not a LARGE. p48 `latremoliere_metric_propinquity_2015` ("The dual GH propinquity," JMPA 103 (2015)) is a real paper, correct (not the "dual" error, which was only `_metric_st_2017`). p49 bizi `1611.07062` correct (rr1 seed was worktree-only).
+
+All 5 papers compile errors=0/undef=0 (p45 27pp, p46 26pp, p47 19pp, p48 30pp, p49 36pp); the two bibitem deletions/repoints verified non-breaking. C5/C11/C13/C14/C15 group1 PASS. Deferred (cosmetic, optional): stale cite-KEY strings whose displayed bibitems are now correct (key-years, the bousso key author names) — reader-invisible. Seed key `debug/qa/group1_rr1b_seed_key.json`, memo `debug/sprint_qa_group1_rerun1b_sweep_memo.md`. **C4 tail drained (exhaustive verify, not sampling) + claims/code converged — the next clean re-run should certify Batch 1; Batches 2/3 re-runs still pending (they share much of this bibliography, so their tail is likely reduced too).**
+
 ## [4.30.0] - 2026-06-21
 
 ### Changed — `/qa group1` CERTIFYING re-run, Batch 1 (Papers 45–49 + synthesis): FAIL remediated

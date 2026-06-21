@@ -172,9 +172,8 @@ GeoVac math.OA arc (siblings:\ Papers
 42~\cite{paper42}, 43~\cite{paper43}, 44~\cite{paper44},
 45~\cite{paper45}, 46~\cite{paper46}). The result composes Paper~45/46
 verbatim on the inner arrow with standard
-Reed--Simon~\cite{reed_simon_iv}\,\S~XIII.16 / Hekkelman--McDonald~2024
-\cite{hekkelman_mcdonald2024} compact-to-non-compact-domain machinery
-on the outer arrow.
+Reed--Simon~\cite{reed_simon_iv}\,\S~XIII.16 compact-to-non-compact-domain
+resolvent machinery on the outer arrow.
 \end{abstract}
 
 \subsection*{Status and scope (June 2026)}
@@ -595,8 +594,10 @@ independent of $T$ (the temporal multiplier algebra is the commutative
 diagonal subalgebra of $\Mat_{\Nt}(\C)$, with the specific Fourier
 momenta $\omega_{k} = 2\pi k/T$ appearing as numerical entries but not
 affecting the algebraic structure).
-\item \textbf{L2 (cb-norm, Paper~45~\S~5):}
-$\cbnorm{S_{K^{\mathrm{joint}}}} = 2/(\nmax+1)$, depending only on
+\item \textbf{L2 (Plancherel-mass bound, Paper~45~\S~5):}
+the relevant constant $2/(\nmax+1)$ is the maximum of the Plancherel
+mass distribution (the smoothing map itself is UCP with cb-norm $1$;
+see the Status note), depending only on
 $\nmax$ via Bo\.zejko--Fendler on the amenable compact product group
 $\SU(2)\times\Uone_{T}$. The U(1)$_{T}$ factor contributes cb-norm $1$
 at every $T$.
@@ -1193,15 +1194,15 @@ Franco--Eckstein~\cite{franco_eckstein2014}.
 
 \subsection{Position vs Hekkelman--McDonald 2024}\label{sec:vs_hm}
 
-Hekkelman--McDonald~2024~\cite{hekkelman_mcdonald2024} establishes
-Tauberian estimates on flat tori with an extension to $\R^{d}$ via
-covering map. Their framework is Riemannian (positive-definite metric),
-not Lorentzian, but the compact-to-non-compact-domain mechanism is
-structurally analogous to our outer arrow (\S~\ref{sec:outer}).
-The companion paper~\cite{hekkelman_mcdonald2024b} extends to
-non-commutative integration. Neither addresses the Krein /
-Lorentzian-signature setting; the present paper is to our knowledge
-the first to make the explicit identification of the non-compact
+Hekkelman--McDonald~2024~\cite{hekkelman_mcdonald2024} construct a
+noncommutative integral on spectrally truncated spectral triples (with
+a quantum-ergodicity application). Their setting is the compact
+truncation, Riemannian (positive-definite metric), not the non-compact
+de-compactification limit of the present outer arrow, and not the
+Krein / Lorentzian-signature setting; the present paper's outer-arrow
+resolvent machinery is the standard Reed--Simon~\S~XIII.16 comparison,
+not theirs. To our knowledge the present paper is the first to make the
+explicit identification of the non-compact
 Lorentzian Dirac as the norm-resolvent limit of a sequence of
 truncated Krein spectral triples.
 
@@ -1415,9 +1416,12 @@ extended from the compact to the non-compact carrier.
 
 \begin{remark}[Scope: natural substrate only]%
 \label{rem:g2_scope}
-Theorem~\ref{thm:g2_metric} holds on the \emph{natural substrate}
+Theorem~\ref{thm:g2_metric}'s construction is restricted to the
+\emph{natural substrate}
 (chirality-block-diagonal multipliers commuting with $\JL$, Paper~44
-Prop.~5.1). On the \emph{enlarged substrate}
+Prop.~5.1) --- and even there the metric-level closure is
+\emph{descoped} (it inherits Paper~45's degenerate seminorm; only the
+norm-resolvent/spectral level is established). On the \emph{enlarged substrate}
 (Paper~46 Appendix~B), the temporal-Lipschitz-invisibility identity
 fails: $[\DL^{\mathrm{diag}}, M^{\flip} \otimes M^{\temp}] \neq 0$
 in general, so $L^{K}(e_{T}) > 0$ and the zero-cost extent mechanism
@@ -1525,8 +1529,9 @@ C.~Farsi, F.~Latr\'emoli\`ere, ``Continuity for the spectral
 propinquity of the Dirac operators associated with an analytic path
 of Riemannian metrics,'' arXiv:2504.11715 (April 2025).
 
-\bibitem[Franco \& Eckstein(2014)]{franco_eckstein2014}
-N.~Franco, M.~Eckstein, ``Causality in noncommutative geometry,''
+\bibitem[Franco \& Eckstein(2013)]{franco_eckstein2014}
+N.~Franco, M.~Eckstein, ``An algebraic formulation of causality for
+noncommutative geometry,''
 \emph{Class. Quant. Grav.} \textbf{30} (2013), 135007 (and follow-ups).
 
 \bibitem[Gayral et al.(2004)]{gayral_gracia_bondia_iochum_schucker_varilly2004}
@@ -1542,14 +1547,6 @@ R.~Geroch, ``Topology in general relativity,'' \emph{J. Math. Phys.}
 E.-M.~Hekkelman, E.~McDonald, ``A noncommutative integral on
 spectrally truncated spectral triples, and a link with quantum
 ergodicity,'' arXiv:2412.00628 (2024).
-
-\bibitem[Hekkelman \& McDonald(2024b)]{hekkelman_mcdonald2024b}
-E.-M.~Hekkelman, E.~McDonald, ``A noncommutative integral on
-spectrally truncated spectral triples, and a link with quantum
-ergodicity,'' arXiv:2412.00628 (2024).
-[Duplicate of \texttt{hekkelman\_mcdonald2024}; an intended second
-Hekkelman--McDonald 2024 work could not be located in literature.
-PI to consolidate or supply correct second-paper reference.]
 
 \bibitem[Katznelson(2004)]{katznelson2004}
 Y.~Katznelson, \emph{An Introduction to Harmonic Analysis}, 3rd ed.,
