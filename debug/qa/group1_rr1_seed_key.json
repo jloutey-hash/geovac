@@ -1,0 +1,43 @@
+{
+  "run": "group1 CERTIFYING RE-RUN batch 1 (rr1) — Papers 45,46,47,48,49 + synthesis (Lorentzian descoped core), 2026-06-21",
+  "purpose": "Re-run of the remediated corpus (post v4.27.0 rc1) to convert FAIL->remediated into a trustworthy PASS. A clean+calibrated batch PASSES.",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-rr1",
+  "note": "C5/C11/C13/C14/C15 deterministic, run separately on real corpus. The 4 seeds below calibrate the 4 LLM dimensions.",
+  "seeds": [
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "catcher": "claims-48",
+      "class": "C14 — T6 headline flipped from '(descoped; see the Status note): a proposed G2 metric-level closure' to '(established): a G2 metric-level closure'. The G2 metric-level closure is DESCOPED (inherits Paper 45's degenerate Krein-side Lprop); re-asserting it as established is the status-note-only-descope zombie class.",
+      "anchor": "\\textbf{T6} (\\emph{established})"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_49_oslpls_strong_form_bridge.tex",
+      "catcher": "citation-49",
+      "class": "C4 — bizi_brouder_besnard2018 bibitem arXiv corrupted 1611.07062 -> 1611.09062 (wrong ID). Bibitem-only (the inline use is a \\cite, no inline arXiv prose), so C15 does not apply; the LLM citation reviewer must web-verify the bibitem ID resolves to the claimed paper.",
+      "anchor": "arXiv:1611.09062"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_p45_kplus_degeneracy.py",
+      "catcher": "code-45",
+      "class": "C2 — the T2 K+ compression-annihilation assertion 'assert norm(compressed) < TOL' (=1e-12, bit-exact zero) gutted to '< 1e12' (vacuous; any compression norm passes, defeats the annihilation-theorem check).",
+      "anchor": "assert np.linalg.norm(compressed) < 1e12"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "catcher": "synthesis",
+      "class": "C9 — Paper 45's contribution flipped from 'a degeneracy theorem, not a convergence instance' to 'the first Lorentzian propinquity convergence instance' (the RETRACTED claim; Paper 45's headline is the K+ annihilation NEGATIVE result).",
+      "anchor": "the first Lorentzian propinquity convergence"
+    }
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "what": "p45 K+ annihilation/degeneracy theorem (the genuine NEGATIVE result; P_+ D_GV P_+ = 0 bit-exact, restricted seminorm vanishes) — correct, must NOT be flagged."},
+    {"id": "M2", "what": "p47 norm-resolvent arrow + three-carrier survival (genuine surviving content of the descoped Lorentzian leg) — correct."},
+    {"id": "M3", "what": "p49 cocycle-deficit / Datta max-divergence chain inequality (elementary from the D_max definition + framework-verified 96/96; the 'Datta for the max-divergence' is a citation, NOT a 'Theorem 11' attribution — a citation-fix-not-retraction per rc1) — correct, must NOT be re-flagged as a retraction."},
+    {"id": "M4", "what": "product-carrier S^3 x S^1 convergence presented as signature-agnostic (Euclidean), NOT a Lorentzian claim — correct framing, must NOT be flagged."},
+    {"id": "M5", "what": "the v4.27.0 rc1 remediation (C14 Status-note-only-descope zombies fixed in p46/47/48/49 theorem bodies; C7 'propinquity'->state-space GH; bizi/leimbach/hekkelman citations fixed) — correct, must NOT be re-flagged as overclaim/zombie."}
+  ]
+}

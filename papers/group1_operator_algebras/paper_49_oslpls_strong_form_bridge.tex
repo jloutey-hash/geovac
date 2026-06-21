@@ -238,8 +238,9 @@ $\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$ while the direct
 worldline pays only $\Delta_{\max}S^{1\to 3}$, with the Datta chain
 inequality forcing
 $\Delta_{\max}S^{1\to 3}\le\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$,
-strictly when the three KMS states are pairwise distinct
-(Theorem~\ref{thm:strict_super_additivity}). The Umegaki relative
+strictly on a generic set of triples
+(Theorem~\ref{thm:strict_super_additivity}; pairwise distinctness is
+necessary but not sufficient). The Umegaki relative
 entropy itself does not satisfy this chain inequality in general
 (see \S\ref{sec:honest_scope_intro}); the max-divergence is the
 chain-stable surrogate.
@@ -469,7 +470,7 @@ $\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$; the
 direct worldline $\omega_{x}\to\omega_{z}$ pays \emph{one} cost
 $\Delta_{\max}S^{1\to 3}$. the max-divergence chain inequality (elementary from the $D_{\max}$ definition;\ \cite{datta2009})
 $\Delta_{\max}S^{1\to 3}\le\Delta_{\max}S^{1\to 2}+\Delta_{\max}S^{2\to 3}$
-(strict when the three KMS states are pairwise distinct) translates to
+(strict generically) translates to
 \[
   \ellOS(\omega_{x},\omega_{y}) + \ellOS(\omega_{y},\omega_{z}) \;<\; \ellOS(\omega_{x},\omega_{z}),
 \]
@@ -1729,8 +1730,13 @@ the cross-orbit cocycle transports of
   \ellOS(\omega_{x},\omega_{y}) + \ellOS(\omega_{y},\omega_{z}) \;\le\; \ellOS(\omega_{x},\omega_{z}),
   \label{eq:strict_super_additivity}
 \end{equation}
-with \textbf{strict inequality} whenever the three effective KMS
-states $\omegaOrb{1},\omegaOrb{2},\omegaOrb{3}$ are pairwise distinct.
+with \textbf{strict inequality} generically --- the deficit is
+substantially positive on the off-orbit panel (\S\ref{sec:uhlmann_panel})
+and at all $96/96$ tested $D_{\max}$ cells, though it can \emph{saturate}
+(deficit $=0$) for non-generic configurations, e.g.\ simultaneously
+diagonalisable states whose $D_{\max}$ ratios are attained at a common
+index. (Pairwise distinctness is necessary but not sufficient for
+strictness.)
 \end{theorem}
 
 \begin{proof}
@@ -1769,8 +1775,9 @@ inequality for cocycle entropy production}~\cite{datta2009}:
         + D_{\max}(\sigma_{2}\,\|\,\sigma_{3}),
   \label{eq:lindblad_uhlmann}
 \end{equation}
-with strict inequality when the three KMS states are pairwise
-distinct. Here $D_{\max}(\rho\|\sigma) := \log\,\|\sigma^{-1/2}\rho\,\sigma^{-1/2}\|_{\mathrm{op}}$
+with strict inequality generically (it can saturate when the
+$D_{\max}$ ratios of the three pairs are attained at a common
+eigenvector). Here $D_{\max}(\rho\|\sigma) := \log\,\|\sigma^{-1/2}\rho\,\sigma^{-1/2}\|_{\mathrm{op}}$
 is Datta's max-relative entropy, which dominates the Umegaki relative
 entropy ($S(\rho\|\sigma) \le D_{\max}(\rho\|\sigma)$) and satisfies
 the data-processing inequality
@@ -1784,8 +1791,9 @@ max-divergence $D_{\max}(\rho\|\sigma)=\log\min\{\lambda:\rho\le\lambda\sigma\}$
 which follows directly from its definition by transitivity of the operator
 order ($\rho_1\le\lambda_{12}\rho_2\le\lambda_{12}\lambda_{23}\rho_3$);\ it is
 verified bit-exactly in the framework (96/96 on modular-orbit triples,
-\texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}), with strictness when the
-three KMS states are pairwise distinct. The max-divergence is due to
+\texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}), with strictness
+generically (it can saturate for non-generic configurations whose
+$D_{\max}$ ratios align). The max-divergence is due to
 Datta~\cite{datta2009}; see also Wilde~\cite{wilde2017} Ch.~7. (We note in passing that the Umegaki relative entropy
 $S(\rho\|\sigma) = \mathrm{Tr}\,\rho(\log\rho - \log\sigma)$ does
 \emph{not} in general satisfy this chain inequality --- only the
@@ -1964,8 +1972,9 @@ super-additivity
 \[
   \ellOS(\omega_{x},\omega_{y})+\ellOS(\omega_{y},\omega_{z}) \;<\; \ellOS(\omega_{x},\omega_{z})
 \]
-holds when the three effective KMS states are pairwise distinct
-(Theorem~\ref{thm:strict_super_additivity}).
+holds generically (Theorem~\ref{thm:strict_super_additivity};\ strict
+on an open dense set, saturating only for non-generic aligned
+configurations).
 \item[(iii)] \emph{Other cases (Decomposition O Cases (ii), (iv)):}
 at least one pair has $\ellOS=-\infty$. Reverse triangle holds
 trivially via the Mondino--S\"amann convention $\pm\infty\mp\infty=0$.
@@ -2164,29 +2173,36 @@ $(3,5)$ & $41.436$ & $28.425$ & $1.141$ & $\mathbf{68.720}$ & \textbf{YES} \\
 $(4,7)$ & $46.338$ & $35.477$ & $0.559$ & $\mathbf{81.256}$ & \textbf{YES} \\
 \bottomrule
 \end{tabular}
-\caption{Datta max-divergence chain inequality deficits on
-representative off-orbit triples. The deficit
+\caption{\emph{Umegaki relative-entropy} chain deficits on three
+representative off-orbit triples (illustrative). The deficit
 $S(\rho_a\|\rho_b)+S(\rho_b\|\rho_c)-S(\rho_a\|\rho_c)$ is
-substantially positive (66--81 nats) at all three panel cells,
-confirming the structural operator-algebraic equivalent of
-Theorem~\ref{thm:strict_super_additivity} (the relative-entropy
-data-processing inequality holds with substantial deficit).}
+substantially positive (66--81 nats) at these three cells. This is an
+illustrative relative-entropy cross-check, \emph{not} the load-bearing
+verification:\ the Umegaki chain does not hold generically (\S below),
+so positivity here reflects the selected triples. The load-bearing
+\emph{$D_{\max}$} chain (the reverse triangle underlying
+Theorem~\ref{thm:strict_super_additivity}) is verified at all $96/96$
+cells in \texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}.}
 \label{tab:uhlmann_panel}
 \end{table}
 
-The max-divergence cocycle deficit is the structural operator-algebraic
-surrogate for the strict super-additivity claim of
-Theorem~\ref{thm:strict_super_additivity}. The relative entropies
+This Umegaki relative-entropy panel is an illustrative surrogate for
+the strict super-additivity claim of
+Theorem~\ref{thm:strict_super_additivity}; the load-bearing quantity is
+the $D_{\max}$ chain (verified $96/96$, above), not the Umegaki
+relative entropy (which does not satisfy the chain generically). The relative entropies
 are computed on density matrices
 $\rho_{i}=M_{i}^{\dagger}M_{i}/\Tr(M_{i}^{\dagger}M_{i})$ for
 multipliers $M_{i}$ selected via a greedy K-commutator + operator-
 commutator algorithm that screens for triples on three different
 modular orbits.
 
-Positive deficits at all panel cells confirm that
-$\DelS{1}{2}+\DelS{2}{3}>\DelS{1}{3}$ structurally; the load-bearing
-positivity of Theorem~\ref{thm:strict_super_additivity} is verified
-numerically.
+Positive deficits at these three off-orbit triples illustrate the
+reverse-triangle structure $\DelS{1}{2}+\DelS{2}{3}>\DelS{1}{3}$; the
+load-bearing positivity of Theorem~\ref{thm:strict_super_additivity} is
+verified at the $D_{\max}$ level ($96/96$ cells,
+\texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}), not by this
+illustrative Umegaki panel.
 
 \subsection{Riemannian-limit recovery at $\Nt=1$}
 \label{sec:riemannian_limit_panel}
@@ -2861,10 +2877,10 @@ F.~Latr\'emoli\`ere, ``Convergence of Cauchy sequences for the
 covariant Gromov--Hausdorff propinquity,'' \emph{J. Math. Anal. Appl.}
 \textbf{469} (2019), 378--404.
 
-\bibitem[Latr\'emoli\`ere(2023)]{latremoliere_metric_st_2017}
-F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity for
-metric spectral triples,'' \emph{Adv. Math.} \textbf{411} (2023),
-108790. arXiv:1811.10843.
+\bibitem[Latr\'emoli\`ere(2022)]{latremoliere_metric_st_2017}
+F.~Latr\'emoli\`ere, ``The Gromov--Hausdorff propinquity for
+metric spectral triples,'' \emph{Adv. Math.} \textbf{404} (2022),
+Paper No.~108393. arXiv:1811.10843.
 
 \bibitem[Latr\'emoli\`ere(2025)]{latremoliere2025_hypertopology}
 F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff hypertopology on

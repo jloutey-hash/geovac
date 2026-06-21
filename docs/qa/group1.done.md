@@ -183,3 +183,20 @@ group1 paper restates them (C7).
   errors=0/undef=0. Seed key `group1_rc3_seed_key.json`, memo
   `debug/sprint_qa_group1_rc3_memo.md`. **All three batches remediated — the
   certifying re-run (45–49 / 42–44+53 / 29+39+40+50+52) is the next step.**
+- 2026-06-21 — **CERTIFYING RE-RUN begun. Batch 1 (Papers 45–49 + synthesis) =
+  FAIL → REMEDIATED** (v4.30.0). The re-run (to convert FAIL→remediated into a
+  PASS) itself FAILed: calibrated (sensitivity 4/4, specificity 5/5),
+  C5/C11/C13/C14/C15 PASS, and it caught rc1-residuals **plus two
+  keystone-correctness issues all prior passes missed** — **p49 strict
+  super-additivity was FALSE** ("strict whenever pairwise distinct"; distinct
+  commuting states saturate the D_max chain at deficit 0 → restated "generically")
+  and **p49's "Datta max-divergence" panel was computed with Umegaki** (relabeled
+  illustrative + pointed to the real 96/96 D_max test); **p47's three surviving
+  keystones had no test** (marked analytic proof-by-argument). Plus C14 zombies
+  (p46 "closed convergence-theorem leg"→degeneracy; p48 §6.3 "closure
+  exists"→conditional/descoped), C7 (p46 l.1289), C4 (latremoliere "dual"→404
+  (2022); farsi_latremoliere2024 wrong-ID removed from p47). All 4 papers compile
+  errors=0/undef=0. Seed key `group1_rr1_seed_key.json`, memo
+  `debug/sprint_qa_group1_rerun1_memo.md`. **NOTE: Batch 1 re-run is FAIL→
+  remediated, NOT yet a clean PASS — certification requires a clean calibrated
+  pass (convergence). Re-run-2 of Batch 1 + Batches 2/3 re-runs still pending.**

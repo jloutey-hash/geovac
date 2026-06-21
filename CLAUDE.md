@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.29.0 (June 19, 2026)
+**Version:** v4.30.0 (June 21, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -131,6 +131,8 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 ## 2. Current Development Frontier
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
+
+- **`/qa group1` CERTIFYING re-run Batch 1 (P45–49) FAIL→remediated (2026-06-21, v4.30.0):** the re-run (to convert FAIL→remediated into a PASS) itself FAILed — calibrated (4/4 sens, 5/5 spec) and caught rc1-residuals **plus two keystone issues all prior passes missed**: **p49 strict-super-additivity was FALSE** ("strict whenever pairwise distinct" — distinct *commuting* states saturate the D_max chain, deficit=0; restated to "generically") and **p49's "Datta max-divergence" panel was actually computed with Umegaki** (relabeled illustrative + pointed to the real 96/96 D_max test); **p47 three surviving keystones had no test** (marked analytic proof-by-argument). Plus C14 zombies (p46 "closed convergence-theorem leg"→degeneracy; p48 §6.3 "closure exists"→conditional), C7 (p46), C4 (latremoliere "dual"→404(2022); farsi wrong-ID removed). All compile clean; gates PASS. **Certification needs a clean re-run (convergence) — this is FAIL→remediated, not yet PASS.** See CHANGELOG + debug/sprint_qa_group1_rerun1_memo.md.
 
 - **`/qa group1` re-cert Batch 3 (P29/39/40/50/52 + synth) FAIL→remediated — all 3 batches done (2026-06-19, v4.29.0):** 15-agent panel, calibrated (4/4 sens, 5/5 spec); C5/C11/C13/C14/C15 PASS. Genuine fixes: p40 C8 twin (rank-uniform proof "now complete"→named gap) + **C4 LARGE wrong-ID** (hekkelman_mcdonald_vs2024_ucp = arXiv:2410.15454 is actually Bhattacharyya et al.→redirected to Rieffel/Hawkins) + 3 bibitem metadata; p39 "master theorem" zombie→sketch + asymmetric-sup bug (corner→interior (8,5)) + Λ^full code-comment; p50 C7 ×7 + Henningson–Skenderis "inheritance"→taxonomic + "Weyl"→single Dirac; p52 C7 ×12 (incomplete B-series relabel); p29 3-prism graph-ID bug + cross-paper dangling \ref; synth Sachdev→Safdi. 2 over-flags reconciled. Coverage gaps logged (p40 PRV C₃=1, p29 bound-crossing — claims verified-true, weak tests). Re-run next. See CHANGELOG + debug/sprint_qa_group1_rc3_memo.md.
 

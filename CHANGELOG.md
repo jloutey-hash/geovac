@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.30.0] - 2026-06-21
+
+### Changed — `/qa group1` CERTIFYING re-run, Batch 1 (Papers 45–49 + synthesis): FAIL remediated
+
+PI-invoked `/qa group1` **certifying re-run** (convert the rc1/rc2/rc3 FAIL→remediated cycles into a trustworthy PASS), Lorentzian-first, Batch 1 = 45–49 + synthesis. PI directive on the FAIL: remediate all now (my judgment).
+
+**Verdict: FAIL (calibrated) → remediated.** 14-agent panel (claims ×5, citation ×5, code ×3, synthesis ×1), seed worktree removed (no leak; real corpus clean on all 4 anchors). **Sensitivity 4/4** (S-claims-C14 p48→claims-48; S-citation-C4 p49 bizi 1611.07062→1611.09062→citation-49; S-code-C2 p45 K⁺ annihilation `<TOL`→`<1e12`→code-45; S-synthesis-C9 p45 "first Lorentzian propinquity convergence"→synthesis). **Specificity 5/5** (M1–M5 affirmed). Deterministic C5/C11/C13/C14/C15 group1 PASS. **The re-run caught residuals rc1 missed plus two keystone-correctness issues all prior passes missed** — the gate working as designed.
+
+Genuine MATERIAL defects remediated (PM-verified vs primary text/code, §9 reconcile):
+- **p49 — strict super-additivity was FALSE as stated.** "Strict inequality whenever the three KMS states are pairwise distinct" is false: distinct *commuting* states give D_max chain deficit = exactly 0 (reproduced counterexample). Restated to "strict **generically** (substantially positive on the off-orbit panel and all 96/96 tested D_max cells; saturates for non-generic aligned configurations; pairwise distinctness necessary not sufficient)" at all ~6 sites.
+- **p49 — the numerical panel was mislabeled.** `tab:uhlmann_panel` captioned "Datta max-divergence chain inequality deficits" but the driver computes `_relative_entropy` = **Umegaki** (confirmed in source). The numbers are correct Umegaki values → relabeled "Umegaki relative-entropy chain deficits (illustrative)", demoted to an illustrative cross-check (the Umegaki chain is not generic), and the load-bearing D_max positivity pointed to the genuine 96/96 test `tests/test_wh7_b3_phase3_sprint2.py`. Not recomputed (numbers correct for Umegaki).
+- **p47 — three surviving keystones (outer-arrow norm-resolvent, Main theorem, three-carrier) had no backing test.** They are analytic (the T→∞ de-compactification is not computationally implemented). Added a Status Remark marking `thm:main` analytic **proof-by-argument** (Reed–Simon §XIII.16), R^outer established / R^inner descoped — closing the provenance gap honestly.
+- **C14 zombies (rc1-incomplete):** p46 l.286 "Paper 45 closed the convergence-theorem leg" → "established the K⁺-restricted weak-form **degeneracy** theorem (convergence claim retracted)"; p48 §6.3 "the synthetic-side closure exists; the bridge transports it back" → conditional/descoped, + §6.3 title "(proposed/descoped)" + "deepest **proposed** content"; p47 §6 section title "(descoped)".
+- **C7:** p46 l.1289 "Paper 38's SU(2) Riemannian propinquity bound" → "state-space GH bound".
+- **C4 (load-bearing):** `latremoliere_metric_st_2017` spurious "dual" + wrong vol/year (Adv. Math. 411 (2023) 108790 → 404 (2022) Paper 108393) in p48 + p49; `farsi_latremoliere2024` WRONG-ID (JFA 286/110293 is Matringe–Offen–Yang) removed from p47 (the claim is carried by 3 real companion cites).
+
+Reconcile catches (not-the-error): p48 `latremoliere_metric_propinquity_2015` ("The Dual GH Propinquity," JMPA 103 (2015) 303–351) is a real 2015 paper — correct, not the "dual" error (which was only in `_metric_st_2017`); p49 bizi `1611.09062` was the seed (worktree-only; real corpus correct).
+
+All 4 edited papers compile errors=0/undef=0 (p46 26pp, p47 19pp, p48 30pp, p49 36pp). Deferred (NIT cosmetic-citation sweep, rc-precedent): ~10 title-paraphrase/key-year slips on non-load-bearing adjacent-framework refs (p48 muller/sakovich/mondino_ryborz/minguzzi_suhr/ketterer/nieuviarts; p47 hekkelman dup self-flagged; p49 bousso key; p46 minguzzi/leimbach/latremoliere2018 titles; franco year labels). Seed key `debug/qa/group1_rr1_seed_key.json`, memo `debug/sprint_qa_group1_rerun1_memo.md`. **Certification status: Batch 1 re-run is FAIL→remediated, not yet a clean PASS — a clean calibrated pass (convergence) on all three batches is what certifies group1.**
+
 ## [4.29.0] - 2026-06-19
 
 ### Changed — `/qa group1` re-certification Batch 3 (Papers 29, 39, 40, 50, 52 + synthesis): FAIL remediated
