@@ -7,8 +7,23 @@ spectral triple.  It is the analog of `geovac.gh_convergence` for the
 Lorentzian / Krein setting, mirroring Paper 38's Riemannian SU(2)
 propinquity assembly under the K^+-restricted weak-form framing.
 
-Statement of the theorem (Paper 45 headline)
-============================================
+*** DESCOPED / THEOREM RETRACTED (2026-06-09, Paper 45) ***
+==========================================================
+The K^+-restricted weak-form Lorentzian propinquity theorem stated below
+has been WITHDRAWN.  Krein-self-adjointness of i*D_GV (x) I forces
+{J, D_GV (x) I} = 0, hence P^+ D_GV P^+ = 0 exactly, so the K^+-restricted
+Lipschitz seminorm is IDENTICALLY ZERO on the whole operator system
+(bit-exact; falsifier `tests/test_p45_kplus_degeneracy.py`).  The
+"first Lorentzian propinquity theorem" claim is retracted.  What survives:
+the SIGNATURE-AGNOSTIC product-carrier S^3 x S^1 convergence in the
+translation-action-seminorm framework (`prop:product_action_seminorm`,
+falsifier `tests/test_wh7_b1_joint.py`) -- Euclidean, NOT a Lorentzian
+claim.  The theorem text below is retained ONLY as the historical
+statement that the degeneracy result annihilates.  See Paper 45 + CLAUDE.md
+§6 live-status flags.
+
+Statement of the theorem (Paper 45 headline -- RETRACTED, see banner above)
+==========================================================================
 
 Let
   - T_L_continuum  = (C^infty(S^3 x S^1_T), L^2(S^3, Sigma_CH) (x) L^2(S^1_T),

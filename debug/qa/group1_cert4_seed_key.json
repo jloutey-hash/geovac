@@ -1,0 +1,60 @@
+{
+  "run": "group1_cert4",
+  "description": "CLEAN certifying re-run #4 of Batch 1 (Papers 45/46/47/48/49 + synthesis) after the v4.37.0 descope-tagging sweep. Seeds in worktree ../geovac-qa-seed-group1-cert4 (branch qa-seed-group1-cert4, base HEAD ee522a6). NEVER committed; worktree removed at end. Fresh seeds (different sites from cert1/2/3). Expectation: descope tail drained, so the panel should find the 5 seeds and zero new genuine defects -> certified PASS.",
+  "date": "2026-06-22",
+  "seeds": [
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_lorentzian_propinquity_foundation.py",
+      "location": "~l.202 (Riemannian-limit bit-exact reduction)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert details[\"max_residual\"] == 0.0' -> 'assert details[\"max_residual\"] < 1e9' (vacuous; defeats the N_t=1 = Paper 38 bit-exact reduction check).",
+      "truth": "The N_t=1 Riemannian-limit reduction is bit-exact (max_residual == 0.0); a 1e9 tolerance asserts nothing. (assert ok at l.201 backstops so the test still passes; reviewer must flag the vacuous l.202.)",
+      "expected_catcher": "code-48"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "~l.153 (Paper 49 Lambda-inheritance status)",
+      "defect_class": "C9 synthesis overstatement (descoped -> established)",
+      "planted": "Flipped 'the Lambda-inheritance is descoped while the cocycle-deficit algebra survives' -> '... is established while ...'.",
+      "truth": "The metric-level Lambda-inheritance (Paper 49 B4') is DESCOPED; only the cocycle-deficit algebra (D_max chain) survives.",
+      "expected_catcher": "synthesis"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "location": "~l.2458 (kunzinger_samann2018 bibitem title)",
+      "defect_class": "C4 wrong-title (arXiv:1711.08990 unchanged so C15 N/A)",
+      "planted": "Changed title 'Lorentzian length spaces' -> 'Causal structure of Lorentzian length spaces'.",
+      "truth": "arXiv:1711.08990 (Kunzinger-Samann) = 'Lorentzian length spaces', Ann. Global Anal. Geom. 54 (2018) 399-447.",
+      "expected_catcher": "citation-48"
+    },
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+      "location": "~l.1513 (product-carrier signature-agnostic statement)",
+      "defect_class": "C14 descope zombie (signature-agnostic -> Lorentzian)",
+      "planted": "Flipped 'It does \\emph{not} make the statement Lorentzian' -> 'It \\emph{does} make the statement Lorentzian'.",
+      "truth": "The product-carrier S3xS1 convergence is signature-agnostic (Euclidean/Wick-rotated), NOT Lorentzian (the translation seminorm is signature-blind).",
+      "expected_catcher": "claims-45"
+    },
+    {
+      "id": "S-claims-C7",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "location": "~l.1373-1374 (thm:compact_agreement)",
+      "defect_class": "C7 trunk-status mislabel (Paper 38 = state-space GH, not propinquity)",
+      "planted": "Flipped 'Paper~38 SU(2) state-space Gromov--Hausdorff hypertopology' -> 'Paper~38 SU(2) Latremoliere propinquity hypertopology' (in thm:compact_agreement). Correct mentions at l.533/1393 are in-paper controls.",
+      "truth": "Paper 38 = van Suijlekom state-space Gromov-Hausdorff convergence, NOT Latremoliere propinquity.",
+      "expected_catcher": "claims-48"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_45", "claim": "K+ annihilation NEGATIVE; product-carrier signature-agnostic (NOT Lorentzian); Paper 38 = state-space GH", "must_not_flag": true},
+    {"id": "M2", "file": "paper_46", "claim": "C3op closed form surviving; strong-form convergence + Appendix route descoped (now inline-tagged); prop:reach_height now tagged", "must_not_flag": true},
+    {"id": "M3", "file": "paper_47", "claim": "outer norm-resolvent + three-carrier proof-by-argument; inner arrow + G2 descoped (thm:inner now inline-tagged)", "must_not_flag": true},
+    {"id": "M4", "file": "paper_48", "claim": "N_t=1 reduction + prop=2 + B1/B3 survive; B4/T2/relaxed_triangle/coincidence/inframetric now inline-descope-tagged", "must_not_flag": true},
+    {"id": "M5", "file": "paper_49", "claim": "D_max chain 96/96 load-bearing; B4' descoped (tagged); B3' cardinality bound surviving", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "ALL prior fixes are CORRECT and must not be re-flagged: (cert1 v4.30.0..., cert1-batch1 v4.35.0) p46 informal-Main descope, p48 SS1.2+SS3 descope, p47 three_carriers proof-by-argument; (cert2 v4.35.1) p49 bousso authors; (cert3 v4.36.0) p48 abstract-B4 + thm:convergence_transport + thm:synthetic_compactness descope, synthesis bousso_etal2020 -> 2007.00230, p46 L1' proof-sketch; (v4.37.0 descope sweep) p47 thm:inner descope, p48 thm:bridge-B4 + thm:relaxed_triangle + thm:coincidence + thm:inframetric descope, p46 prop:reach_height_op note. These inline descope tags are the CORRECT state."
+}

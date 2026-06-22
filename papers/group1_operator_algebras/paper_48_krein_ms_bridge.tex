@@ -179,7 +179,10 @@ via on-orbit modular-flow equality plus an M-diagonal topography
 trivialization off-orbit, (B3) pre-compactness inheritance via
 Paper~44~\cite{paper44} propagation-number bound, (B4) convergence
 transport via Plancherel-nested Berezin compatibility with the
-Mondino--S\"amann Def~3.6 axioms.
+Mondino--S\"amann Def~3.6 axioms (\textbf{B4 descoped}:\ the convergence
+transport rests on the degenerate Krein metric of Paper~45 --- it is
+conditional pending substrate repair, not an established metric
+convergence; see the Status note).
 
 \medskip
 
@@ -1369,9 +1372,12 @@ where $\BigDeth(\mathbb{Y}^{K}, \mathcal{A}) :=
 \subsection{Compact-case agreement at $\Nt = 1$}\label{sec:compact_case}
 
 \begin{theorem}[Compact-case agreement]\label{thm:compact_agreement}
-When restricted to $\Nt = 1$, the Krein hypertopology on the class of
-Krein PPQMS reduces bit-exactly to the Paper~38~\cite{paper38} SU(2)
-state-space Gromov--Hausdorff hypertopology.
+When restricted to $\Nt = 1$, the Krein operator-system substrate and
+the SU(2) rate factor reduce bit-exactly to the Paper~38~\cite{paper38}
+SU(2) state-space Gromov--Hausdorff construction. The \emph{joint} L1
+rate carries an additive U(1) temporal offset $T/4$ (the Riemannian-limit
+temporal factor), so the bit-exact reduction is on the spatial substrate
+and its SU(2) rate, not on the joint rate.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
@@ -1380,9 +1386,13 @@ space alone); $\JL = J_{\spat}$; $\Kplus = \HGV^{\nmax, +}$;
 $\DL|_{\Nt=1} = i\DGV$ (temporal direction contributes nothing);
 $\Op^{L}|_{\Nt=1}$ is the chirality-doubled spinor lift of
 Paper~38~\cite{paper38}'s scalar substrate. By Paper~45~\cite{paper45}
-Sub-Sprint~D~\S~5 Riemannian-limit recovery,
-$\Lprop_{\nmax, 1, T} = \Lambda^{\mathrm{Paper~38}}_{\nmax}$
-bit-exact. The pointed-propinquity reduction follows.
+Sub-Sprint~D~\S~5 Riemannian-limit recovery, the SU(2) rate factor
+$\gamma_{\mathrm{SU(2)}}(\nmax) = \Lambda^{\mathrm{Paper~38}}_{\nmax}$
+bit-exact; the joint rate is $\gamma_{\mathrm{L1}}(\nmax, 1, T) =
+\gamma_{\mathrm{SU(2)}}(\nmax) + T/4$, the $T/4$ being the U(1)
+temporal-factor offset (uniform-circle expected $|\theta|$). The
+operator-system / spatial-substrate reduction is therefore bit-exact;
+the joint rate matches in its SU(2) factor up to that $T/4$ offset.
 \end{proof}
 
 \begin{remark}[The compact-case agreement object]\label{rem:compact_object}

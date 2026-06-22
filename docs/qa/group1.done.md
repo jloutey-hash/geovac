@@ -291,3 +291,13 @@ group1 paper restates them (C7).
   C5/C11/C13/C15 PASS. Memo `debug/sprint_qa_group1_descope_sweep_memo.md`. **The
   metric-convergence statements now each carry an inline descope tag — cert4 (the next
   calibrated re-run) should converge to a clean certified PASS.**
+
+- 2026-06-22 — **cert4 FAIL→remediated** (v4.38.0). Calibrated 5/5 sens, 5/5 spec; the
+  v4.37.0 descope tags HELD (no theorem-statement zombie re-surfaced). But cert4 found the
+  NEXT class — descope zombies in §1-Introduction PROSE (p47) + abstract enumerations
+  (p48 B4), a thm:compact_agreement substrate-vs-rate over-reach (joint rate carries the
+  U(1) T/4 offset; only substrate + SU(2) factor are bit-exact), and a p49 dangling driver
+  ref (→ tests/test_lorentzian_propinquity_foundation.py). All remediated; +NIT docstring
+  retraction banner. che_perales venue OVER-FLAG dropped (web-confirmed DGA 103 (2026)).
+  Compiles clean; C5/C11/C13/C14/C15 PASS. Memo cert_rerun1_memo §cert4. **Still not a
+  clean PASS — the prose/abstract descope layer is the remaining tail; cert5 next.**

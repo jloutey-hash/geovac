@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.38.0] - 2026-06-22
+
+### Changed
+- **`/qa group1` CERTIFYING re-run #4 (cert4) Batch 1 (Papers 45–49 + synthesis): FAIL→remediated.** Base = v4.37.0 descope-sweep state (HEAD ee522a6). Calibrated panel: **5/5 sensitivity** (all 5 fresh seeds caught — code C2 vacuous tolerance, synthesis C9 descoped→established flip, citation C4 kunzinger_samann2018 title, claims C14 p45 signature-agnostic→Lorentzian flip, claims C7 p48 thm:compact_agreement Paper-38-propinquity mislabel), **5/5 specificity** (controls M1–M5 + all prior fixes + the v4.37.0 descope tags NOT re-flagged — the theorem-statement sweep held perfectly).
+- **Verdict: FAIL→remediated, still not a clean certified PASS.** The v4.37.0 theorem-only descope sweep held (zero theorem-statement zombie re-surfaced), but cert4 surfaced the *next* class — descope zombies living in **§1-Introduction prose** and **abstract enumerations**, plus a rate-vs-substrate over-reach and a dangling driver ref. The cert loop is still finding genuine material per pass.
+
+### Closed (cert4 genuine defects, all remediated)
+- **Paper 47 §1 Introduction (C14 descope zombie, prose class):** the program restatement "The Lorentzian propinquity program of Papers 45–46 *establishes* that the finite-cutoff Lorentzian Krein spectral triple converges, in the Latrémolière propinquity, to the continuum…" stated the DESCOPED metric-convergence as established, with no inline tag (the theorem-statement sweep does not cover Introduction prose). Reworded to "*set out to establish*" + explicit "that metric/propinquity-level convergence is **descoped** — it rests on Paper 45's degenerate K⁺ seminorm; only the norm-resolvent / spectral leg survives, which is what the present paper closes."
+- **Paper 48 thm:compact_agreement (code/C8 over-reach):** "the Krein hypertopology reduces bit-exactly to the Paper 38 SU(2) state-space GH hypertopology" over-states the JOINT rate. Per `geovac/central_fejer_compact_temporal.py` (l.500), `gamma_l1(N_t=1) = gamma_su2 + T/4`: only the operator-system substrate and the SU(2) rate factor reduce bit-exact; the joint L1 rate carries an additive U(1) temporal offset T/4 (uniform-circle expected |θ|). Theorem statement + proof reworded to distinguish substrate (bit-exact) from joint rate (SU(2) factor + T/4 offset).
+- **Paper 48 abstract "Main theorem" enumeration (C14):** the B4 item ("convergence transport via Plancherel-nested Berezin compatibility") was listed under "holds at theorem-grade rigor" with no descope — a DIFFERENT abstract location from the cert3-fixed §1.2 overview. Added inline "(**B4 descoped**: rests on the degenerate Krein metric of Paper 45; conditional pending substrate repair)."
+- **Paper 49 driver reference (C13/C14-advisory):** repointed the nonexistent `q1prime_phase2b3_panel_compute.py` to the permanent backing `tests/test_lorentzian_propinquity_foundation.py` (§9 cite-permanent-records policy). C13 now resolves it live.
+- **NIT — `geovac/lorentzian_propinquity_compact_temporal.py` docstring:** added a prominent `*** DESCOPED / THEOREM RETRACTED ***` banner — the module's headline K⁺-restricted weak-form propinquity convergence theorem was withdrawn 2026-06-09 (P45 K⁺ degeneracy; falsifier `tests/test_p45_kplus_degeneracy.py`); what survives is the signature-agnostic product-carrier convergence (`tests/test_wh7_b1_joint.py`).
+
+### Reconciled (over-flag, NOT changed)
+- **che_perales bibitem venue** "Differential Geometry and its Applications, Volume 103 (2026)" — citation-47/49 reviewers flagged it as a fabricated venue on an unpublished preprint; web-verify CONFIRMED the paper (Che–Perales–Sormani, "Gromov's Compactness Theorem for the Intrinsic Timed Hausdorff Distance") IS published in DGA Vol. 103 (June 2026); the arXiv page simply lacks the journal-ref. Venue correct, left unchanged.
+
+### Verification
+- p47/p48/p49 compile errors=0, zero undefined cites/refs. C5/C11/C13/C14/C15 group1 deterministic gates PASS. `tests/test_lorentzian_propinquity_foundation.py` + `test_p45_kplus_degeneracy.py` + `test_wh7_b1_joint.py`: 57 passed, 2 slow-skipped.
+- **Next:** an inline descope scan of the §1-Introduction + abstract prose of P45–49 would drain the remaining tail (the theorem-statement sweep is done; the prose/abstract layer is the systematic home), then cert5.
+
 ## [4.37.0] - 2026-06-22
 
 ### Changed — group1 Lorentzian-cluster inline descope-tagging sweep (drain the recurring zombie tail)
