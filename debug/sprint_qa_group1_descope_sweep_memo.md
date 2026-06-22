@@ -38,3 +38,26 @@ p46/p47/p48 compile errors=0/undef=0; C5/C11/C13/C15 group1 PASS. p45/p49 unchan
 ## 6. Honest scope
 
 This is a corrective tagging sweep, not a /qa run (no seeds/calibration). It does NOT certify Batch 1 — it removes the systemic gap so the next calibrated cert re-run (cert4) can converge to a clean PASS. The claim is: every theorem/proposition in the cluster that asserts a metric-level Lorentzian/propinquity *convergence* (or a degenerate-metric property) now carries an inline descope tag, so a fresh adversarial reader checking statement-by-statement should find no new "Status-note-only descope" zombie. If cert4 still finds one, it is a genuinely-missed statement (the enumeration was line-by-line, so this should be exhaustive).
+
+---
+
+## Round 2 — prose/abstract descope sweep (2026-06-22, v4.39.0)
+
+**Trigger:** cert4 (v4.38.0) found that the v4.37.0 theorem-statement sweep held perfectly, but descope zombies remained in **§1-Introduction prose** (p47) and **abstract enumerations** (p48 B4). PI direction: run the prose/abstract sweep (analogous to round 1's theorem sweep) to drain that layer before cert5.
+
+**Method.** Read all five papers' abstract + §1 Introduction in full (P45 abstract 130–183 / §1 199–423; P46 148–215 / 268–472; P47 119–177 / 213–390; P48 147–231 / 268–630; P49 178–305 / 349–681), checking every metric-level Lorentzian/propinquity *convergence* (or degenerate-metric property) statement for an inline descope/structural tag. (PM-direct, same as round 1; cert5 is the fresh-adversary validation.)
+
+**Findings — 2 genuine of 10 regions:**
+| Region | Verdict | Fix |
+|---|---|---|
+| P45 abstract + §1 | CLEAN | negative paper; K⁺ annihilation + Remark[History and retraction] explicit |
+| P46 abstract + §1 | CLEAN | bold "descoped" + "convergence not established" + rate-formula tags throughout |
+| P47 abstract | CLEAN | inner/propinquity arrow tagged descoped inline; outer/norm-resolvent arrow (survives) correctly scoped; §1 fixed in cert4 |
+| **P48 abstract B2** | **FIX** | "Main theorem...holds at theorem-grade rigor:\ (B2) reverse triangle inequality" listed B2 flatly — but its own §1 (l.385–411) honestly calls B2 "structurally vacuous off-orbit." Abstract was *less honest than its own §1*. Restructured: B1/B3 structural (theorem-grade); B2 structural/vacuous; B4 descoped (B4 already tagged in cert4). |
+| P48 §1 | CLEAN | §1.2 overview already partitions structural (B1,B3) vs descoped (B4); T6/wedge-G2 descoped inline |
+| **P49 §1 l.510** | **FIX** | honest-scope bullet "Bridge Theorem 6.4′-Q1′ holds at theorem-grade rigor on the enlarged substrate" lacked the per-leg qualifier its abstract carries. Added "for its structural and thermal-time-stack legs (B1′/B2′/B3′); the metric-level convergence leg B4′ is descoped." |
+| P49 abstract | CLEAN | B4′ descoped; B2′ explained as surviving state-level thermal-time-stack (D_max chain); "generic" strictness + illustrative-Umegaki labels held |
+
+**Verification.** p48/p49 compile errors=0, zero undefined cites/refs; C5/C11/C13/C14/C15 group1 PASS.
+
+**Honest scope.** Corrective tagging sweep, not a /qa run (no seeds/calibration). Claim: every abstract + §1 statement in the cluster asserting a metric-level Lorentzian/propinquity convergence (or degenerate-metric property) now carries an inline descope/structural tag, so a fresh statement-by-statement read of the front matter should find no new prose/abstract zombie. Combined with round 1 (theorem statements), both the theorem-statement layer and the prose/abstract layer are now swept. If cert5 still finds a descope zombie, it is in the paper *body* (post-§1 prose), the remaining untouched layer.

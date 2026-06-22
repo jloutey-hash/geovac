@@ -301,3 +301,16 @@ group1 paper restates them (C7).
   retraction banner. che_perales venue OVER-FLAG dropped (web-confirmed DGA 103 (2026)).
   Compiles clean; C5/C11/C13/C14/C15 PASS. Memo cert_rerun1_memo §cert4. **Still not a
   clean PASS — the prose/abstract descope layer is the remaining tail; cert5 next.**
+
+- 2026-06-22 — **prose/abstract descope sweep DONE + CLAUDE.md compaction round 4** (v4.39.0,
+  PI-directed). Follow-on to cert4's finding that descope zombies survive in §1-prose/abstracts.
+  Read all five P45–49 abstracts + §1 Introductions in full; 2 genuine fixes of 10 regions:
+  **p48 abstract B2** (listed flatly under "theorem-grade rigor" though its own §1 calls B2
+  "structurally vacuous off-orbit" → restructured B1/B3 structural vs B2 structural/vacuous vs
+  B4 descoped) + **p49 §1** honest-scope bullet ("Bridge Theorem holds at theorem-grade rigor"
+  → added per-leg "structural+thermal-stack legs survive; B4′ descoped"). P45/46/47 abstracts +
+  P45/46/48 §1 + P49 abstract all already clean. Compiles clean; C5/C11/C13/C14/C15 PASS.
+  Both the theorem-statement layer (round 1, v4.37.0) and the prose/abstract layer (round 2) are
+  now swept; any remaining zombie would be in the paper *body*. CLAUDE.md 165→135 KB (round-4
+  §2 compaction: granular cert/historical one-liners → docs/development_frontier_archive.md).
+  **cert5 is the fresh-adversary validation.**

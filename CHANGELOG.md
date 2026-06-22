@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.39.0] - 2026-06-22
+
+### Changed
+- **group1 prose/abstract descope sweep (cert4 follow-on, PI-directed).** cert4 (v4.38.0) established that the v4.37.0 theorem-statement descope sweep held perfectly, but descope zombies survived in §1-Introduction prose and abstract enumerations — a layer the theorem-only sweep did not cover. This sweep reads all five P45–49 abstracts + §1 Introductions in full and tags every remaining metric-level Lorentzian/propinquity convergence (or degenerate-metric property) statement. PM-direct (same method as round 1); cert5 is the fresh-adversary validation.
+- **2 genuine fixes of 10 abstract+§1 regions:**
+  - **Paper 48 abstract B2:** the "Main theorem" enumeration listed "(B2) reverse triangle inequality" flatly under "holds at theorem-grade rigor," even though the paper's *own* §1.2 overview (l.385–411) honestly describes B2 as "structurally vacuous off-orbit." The abstract was less honest than its own §1. Restructured to partition the structural legs (B1, B3 — theorem-grade) from the metric-level legs riding Paper 45's degenerate Krein seminorm (B2 structural/vacuous off-orbit; B4 descoped — B4 was already tagged in cert4).
+  - **Paper 49 §1 honest-scope bullet (l.510):** "The strict-strong-form Bridge Theorem 6.4′-Q1′ holds at theorem-grade rigor on the enlarged substrate" lacked the per-leg qualifier the abstract carries. Added "for its structural and thermal-time-stack legs (B1′/B2′/B3′); the metric-level convergence leg B4′ is descoped."
+- **CLEAN (no fix needed):** P45 abstract + §1 (negative paper; K⁺ annihilation + Remark[History and retraction]); P46 abstract + §1 (bold "descoped" + rate-formula tags); P47 abstract (inner/propinquity arrow tagged descoped, outer/norm-resolvent arrow correctly scoped; §1 fixed in cert4); P48 §1 (already partitions structural vs descoped; T6/wedge-G2 descoped inline); P49 abstract (B4′ descoped, B2′ explained as surviving state-level thermal-time stack). Both the theorem-statement layer (round 1, v4.37.0) and the prose/abstract layer (round 2) are now swept; any remaining zombie would be in the paper *body*.
+- **CLAUDE.md compaction round 4: 165 KB → 135 KB** (back under the 150 KB repo-health budget, with 15 KB headroom). The granular per-run group1 cert one-liners (cert1–cert3, the rerun/C4 sweeps, the Batches 2/3 re-runs, coverage backfill) + the historical §2 index (trunk QA v4.12–v4.16, group3 cert run-by-run v4.16.x–v4.21.1, the S^(3)/S^(4) period sprints v4.5–v4.10, Hodge-SL₂, the B3 Phase-3 arc v4.1–v4.4, v4.0.0) moved verbatim to `docs/development_frontier_archive.md` (round-4 §2 index section). CLAUDE.md §2 now holds the live tip (cert4 + this sweep) + compact rollups of the group1 cert arc, the Lorentzian-chase closure, the group3-certified milestone, and the QA-infrastructure build. CHANGELOG.md remains the canonical chronicle.
+
+### Verification
+- p48/p49 compile errors=0, zero undefined cites/refs. C5/C11/C13/C14/C15 group1 deterministic gates PASS. Repo health OK (CLAUDE.md 135 KB ≤ 150 KB).
+
 ## [4.38.0] - 2026-06-22
 
 ### Changed
