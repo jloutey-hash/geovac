@@ -380,7 +380,11 @@ Bisognano--Wichmann vacuum as character of the topography, and
 $\hat{\Ucal}^{L}$ is the truncation cover.
 
 The Krein--Mondino--S\"amann Bridge Theorem (Theorem~\ref{thm:bridge})
-states that all four bridge properties hold at theorem-grade rigor:
+states that the \emph{structural} bridge properties (B1, B3) hold at
+theorem-grade rigor, while the \emph{metric-level convergence} leg (B4)
+is \textbf{descoped} --- it rests on the degenerate Krein metric of
+Paper~45 (the Status note), so it is a conditional transport pending
+substrate repair, not an established metric convergence:
 \begin{itemize}
 \item[(B1)] \emph{Structural correspondence}\ — $15$ rows of structural
 alignment (set, topology, time separation, basepoint, cover, scales,
@@ -394,10 +398,13 @@ is empty).
 \item[(B3)] \emph{Pre-compactness inheritance}\ — Mondino--S\"amann
 Thm~6.2 applies on the bridge image via the Paper~44 propagation-number
 $=2$ cardinality bound.
-\item[(B4)] \emph{Convergence transport}\ — Krein-side propinquity
-convergence under the Latr\'emoli\`ere hypertopology induces
+\item[(B4)] \emph{Convergence transport} (\textbf{descoped})\ — Krein-side
+convergence under the Latr\'emoli\`ere hypertopology \emph{would} induce
 Mondino--S\"amann pLGH convergence, with Plancherel-nested Berezin maps
-matching the MS Def~3.6 axioms one-to-one.
+matching the MS Def~3.6 axioms one-to-one; but the premise $\BigDeth\to0$
+is built from the degenerate Krein metric of Paper~45, so this transport
+is conditional pending substrate repair, not an established metric
+convergence.
 \end{itemize}
 
 The F2 mismatch is resolved via the Connes--Rovelli thermal-time
@@ -1713,13 +1720,16 @@ pre-compactness.
 \subsection{Convergence transport (B4) via Plancherel-nested
 Berezin}\label{sec:b4_convergence}
 
-\begin{theorem}[Convergence transport]\label{thm:convergence_transport}
+\begin{theorem}[Convergence transport --- \emph{descoped}]\label{thm:convergence_transport}
 If $\BigDeth(\mathbb{X}^{K}_{n}, \mathbb{X}^{K}_{\infty}) \to 0$ in
 the Krein hypertopology of Definition~\ref{def:krein_hypertopology},
 then $\Wfun(\mathbb{X}^{K}_{n}) \to \Wfun(\mathbb{X}^{K}_{\infty})$
 in the Mondino--S\"amann pLGH topology of
 Definition~\ref{def:plgh}, with the strong (timelike forward density)
-sense.
+sense. \emph{(Descoped:} $\BigDeth$ is built from the degenerate Krein
+Lipschitz seminorm $L^{K}$ of Paper~45, so the premise $\BigDeth\to0$ is
+not a non-degenerate metric convergence; this transport is conditional
+pending substrate repair, not an established metric-level result.\emph{)}
 \end{theorem}
 
 \begin{proof}[Proof sketch]
@@ -1865,7 +1875,11 @@ of GeoVac wedge Krein PPQMS at admissible-scaling cutoffs
 $(\nmax(k_{n}), \Nt(k_{n}), T(k_{n})) \to (\infty, \infty,
 T_{\infty})$ has a subsequence whose bridge images
 $\Wfun(\mathbb{X}^{K}_{\mathrm{wedge}}(k_{n}))$ converge in the
-Mondino--S\"amann pLGH sense to a covered LPLS limit.
+Mondino--S\"amann pLGH sense to a covered LPLS limit. \emph{(The
+pre-compactness leg survives via the propagation-number cardinality
+bound; the \textbf{convergence} of the subsequence to its limit inherits
+the metric-level descope of Theorem~\ref{thm:convergence_transport} --- it
+is conditional pending substrate repair.)}
 \end{theorem}
 
 \begin{proof}[Proof sketch]

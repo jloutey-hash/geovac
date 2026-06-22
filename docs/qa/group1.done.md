@@ -270,3 +270,16 @@ group1 paper restates them (C7).
   bibitem already correct). Fixed. p49 compiles errors=0/undef=0; C11/C13/C15 PASS.
   Seed key `group1_cert2_seed_key.json`. **Trajectory: cert1 = 4 defects (2 LARGE) →
   cert2 = 1 SMALL. One more clean re-run (zero defects) certifies Batch 1.**
+- 2026-06-22 — **CERTIFYING re-run #3 of Batch 1 (Papers 45–49 + synthesis) = FAIL →
+  REMEDIATED, 3 defects** (v4.36.0). 16-agent panel, calibrated (5/5 sens fresh seeds,
+  5/5 spec); cert1+cert2 fixes HELD. Convergence NOT monotone (a deeper Bridge-Theorem
+  read found a new zombie): **p48 C14 LARGE** (B4 convergence-transport + T2
+  synthetic-compactness asserted "theorem-grade rigor" on the degenerate Krein metric →
+  inline descope to abstract B4 item + thm:convergence_transport + thm:synthetic_compactness);
+  **synthesis C4 MATERIAL** (wrong-ID — bousso_etal2020 = arXiv:2008.03319 resolves to
+  Akers–Penington, a different paper → repointed to BCRS "Gravity dual of Connes cocycle
+  flow" 2007.00230 matching p49); **p46 C8 SMALL** (Appendix L1' prop=1 → proof-sketch tag).
+  All compile errors=0/undef=0; C11/C12/C15 PASS. Seed key `group1_cert3_seed_key.json`.
+  **Systemic finding: the Lorentzian cluster has Status-note-only descopes on many theorems;
+  a dedicated inline descope-tagging sweep of P46/P47/P48 is recommended before cert4
+  (efficient vs blind re-runs).**

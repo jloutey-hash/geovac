@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.36.0] - 2026-06-22
+
+### Changed — `/qa group1` CERTIFYING re-run #3 of Batch 1 (Papers 45–49 + synthesis) FAIL remediated (3 defects) + systemic descope-tagging gap identified
+
+Third clean certifying re-run. 16-agent panel (claims ×5, citation ×5 exhaustive, code ×5, synthesis ×1), throwaway worktree (base HEAD 82d8ea2), removed (no seed leaked). Deterministic dimension PASS.
+
+**Verdict: FAIL (calibrated) → remediated.** Calibration: sensitivity 5/5 (5 fresh seeds, again different sites: S-code-C2 test_paper46 `<1e-15`→`<1e9`; S-synthesis-C9 synth "descoped"→"established/unconditional"; S-citation-C4 p45 Minguzzi–Suhr title; S-claims-C14a p47 inner-arrow "descoped"→"established"; S-claims-C14b p46 Appendix "descoped"→"established"), specificity 5/5; the cert1+cert2 fixes HELD (none re-flagged — reviewers explicitly recognized the p46/p48 descope notes and p47 proof-by-argument registrations as correct).
+
+**The convergence is NOT monotone** (cert1=4, cert2=1, cert3=3) — a deeper adversarial read of the P48 Bridge Theorem surfaced a descope zombie that three prior passes missed. Three genuine defects remediated:
+- **p48 C14 LARGE (Bridge-Theorem B4 / T2 descope zombie):** the abstract Bridge summary asserted "all four bridge properties hold at theorem-grade rigor," and `thm:convergence_transport` (B4) + `thm:synthetic_compactness` (T2) asserted Mondino–Sämann pLGH *convergence* as established — while the premise $\BigDeth\to0$ rides on the degenerate Krein metric $L^K$ of Paper 45 (the Status note descopes T3/T6 but not B4/T2). Same "Status-note-only descope" class as cert1's §3 fix. Added inline descope to the abstract B4 item (B1/B3 structural survive; B4 metric-convergence descoped), `thm:convergence_transport`, and `thm:synthetic_compactness` (pre-compactness survives, convergence leg descoped).
+- **synthesis C4 MATERIAL (wrong-ID → different paper):** `bousso_etal2020` cited arXiv:**2008.03319**, which resolves to Akers–Penington "Leading order corrections to the quantum extremal surface prescription" — a *different* paper — under the authors "Bousso, Casini, Fisher, Maldacena" and title "Modular Hamiltonians on the null plane…" (the real such paper is arXiv:1703.10656 by Casini–Testé–Torroba), while the prose (l.1615) describes the kink-transform / Connes-cocycle gravity dual (p49's BCRS paper). Repointed the bibitem + prose to "Gravity dual of Connes cocycle flow," Bousso–Chandrasekaran–Rath–Shahbazi-Moghaddam, PRD 102 (2020) 066008, arXiv:2007.00230 (matching p49 §11). The canonical worst failure mode (wrong ID resolving to a different paper), caught by the reconcile web-verify.
+- **p46 C8 SMALL:** Appendix-B `L1'` $\prop_{\mathrm{achievable}}=1$ stated declaratively inside the (descoped) `thm:enlarged_main` proof → added a proof-sketch/descoped reservation to the proof header + the L1' line.
+
+**Systemic finding (raised to PI):** cert1 (§3 axiom lift) and cert3 (B4/T2) are the same class — the Lorentzian cluster (P46/P47/P48) carries many theorem statements whose descope lives only in a Status note, not inline on every theorem. A **dedicated inline descope-tagging sweep** of P46/P47/P48 (enumerate every theorem/proposition asserting a metric-level Lorentzian/propinquity convergence; ensure each carries an inline descope tag) is the efficient route to certification — analogous to the folded-in C4 citation sweeps — rather than firing blind cert re-runs that each find one more un-tagged instance.
+
+p46/p48/synthesis compile errors=0/undef=0; p45/p47/p49 unchanged in the real corpus (their only findings were planted seeds). C11/C12/C15 group1 PASS. Seed key `debug/qa/group1_cert3_seed_key.json`; memo `debug/sprint_qa_group1_cert_rerun1_memo.md` (§cert3 appended). **Recommend the descope-tagging sweep before cert4.**
+
 ## [4.35.1] - 2026-06-21
 
 ### Changed — `/qa group1` CERTIFYING re-run #2 of Batch 1 (Papers 45–49 + synthesis) FAIL remediated (one SMALL defect)

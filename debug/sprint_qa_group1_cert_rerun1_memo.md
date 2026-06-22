@@ -52,3 +52,16 @@ Second clean cert re-run after the §1–5 (v4.35.0) remediation. 16-agent panel
 NITs (not acted): connes_rovelli page 2918→2917; kubota title leading "A"; p47 §7.5 "Λ_prop" labels the SU(2) γ-rate; p47 latremoliere2018 §5-AF inline pointer; stale cite-key years.
 
 **Convergence:** cert1 = 4 genuine (2 LARGE descope zombies + 3 citations) → cert2 = 1 SMALL non-load-bearing citation. One more clean calibrated re-run (zero genuine defects) certifies Batch 1.
+
+## 7. cert3 (re-run #3, v4.36.0)
+
+Third clean cert re-run. 16-agent panel, **calibrated 5/5 sens (5 fresh seeds) / 5/5 spec**; cert1+cert2 fixes HELD (none re-flagged). Seed key `debug/qa/group1_cert3_seed_key.json`. Worktree removed, no leak.
+
+**Verdict: FAIL (calibrated) → remediated — convergence NOT monotone (cert1=4, cert2=1, cert3=3).** Three genuine defects, all reconciled before acting:
+- **p48 C14 LARGE (Bridge-Theorem B4/T2 descope zombie):** the abstract Bridge summary ("all four bridge properties hold at theorem-grade rigor") + `thm:convergence_transport` (B4) + `thm:synthetic_compactness` (T2) asserted Mondino–Sämann pLGH *convergence* as established, while the premise $\BigDeth\to0$ rides on the degenerate Krein metric $L^K$ (Status note descopes T3/T6 but not B4/T2). SAME class as cert1's §3 fix — a deeper Bridge-Theorem read found it. Fixed: inline descope on the abstract B4 item (B1/B3 survive; B4 descoped), `thm:convergence_transport`, `thm:synthetic_compactness` (pre-compactness survives, convergence descoped).
+- **synthesis C4 MATERIAL (wrong-ID → different paper):** `bousso_etal2020` = arXiv:2008.03319, which **web-resolves to Akers–Penington "Leading order corrections to the quantum extremal surface prescription"** (a different paper), under wrong authors/title, while the prose describes the kink-transform/Connes-cocycle gravity dual (p49's BCRS paper). Repointed bibitem + prose to "Gravity dual of Connes cocycle flow," Bousso–Chandrasekaran–Rath–Shahbazi-Moghaddam, PRD 102 (2020) 066008, arXiv:2007.00230. The cert3 synthesis reviewer flagged it as "same as p49"; the reconcile web-verify showed it was worse (wrong-ID resolving to a different paper).
+- **p46 C8 SMALL:** Appendix-B L1' $\prop_{\mathrm{achievable}}=1$ declarative inside the descoped `thm:enlarged_main` proof → proof-sketch reservation added.
+
+Reconcile note: the synthesis Bousso finding was elevated SMALL→MATERIAL by web-verify (the cert3 reviewer's "same as p49" framing was incomplete; it's a distinct wrong-ID confusion).
+
+**Systemic finding (the load-bearing takeaway):** cert1 (§3) and cert3 (B4/T2) are the same defect class — the Lorentzian cluster (P46/P47/P48) carries many theorem statements whose descope lives only in a Status note, not inline on each theorem. Each fresh deep read finds another un-tagged instance, so blind cert re-runs won't converge efficiently. **Recommended: a dedicated inline descope-tagging sweep of P46/P47/P48** (enumerate every theorem/proposition asserting a metric-level Lorentzian/propinquity convergence; ensure each carries an inline descope tag), analogous to the folded-in C4 citation sweeps, then re-run cert. This drains the tail in one pass.
