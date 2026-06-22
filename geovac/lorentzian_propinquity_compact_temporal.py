@@ -299,8 +299,10 @@ class LorentzianTunnelingPair:
         g_u1 = float(gamma_rate_circle(N_t, T, prec=gamma_prec))
         gamma_L1 = g_su2 + g_u1
 
-        # Joint Lichnerowicz constant per Sub-sprint A panel
-        c3_panel = c3_joint_panel_sup(n_max) if n_max >= 2 else 0.0
+        # L3 comparison constant = C_3 = 1 (Paper 38 Lemma L3, gradient
+        # seminorm).  The withdrawn sqrt-envelope c3_joint_panel_sup is
+        # op-norm-false and is NOT used as the constant (see its docstring).
+        c3_panel = C_LIPSCHITZ_JOINT_ASYMPTOTIC
 
         return cls(
             n_max=n_max,

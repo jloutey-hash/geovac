@@ -339,3 +339,15 @@ group1 paper restates them (C7).
   corpus-wide: eq + rem:envelope_v2 withdrawal + Q4 + production docstring + test reframe).
   All compile clean; gates PASS; tests green. **Lesson: the targeted set found a real miss the
   full cert hadn't, at 11 agents; keeping CODE in mattered. cert6 (full, w/ citation) still certifies.**
+
+- 2026-06-22 — **rem2 second targeted remediation pass** (v4.42.0, PI-directed). Claims+code+
+  synthesis+deterministic (citation dropped); remediation pass, not a cert. Calibrated 4/4 sens,
+  specificity held. Validated the rem1 Paper-45 C3 transport and **found it INCOMPLETE — 3 residual
+  sites**: p45 L4(d) proof (l.1131 C_3^(N)→C₃=1), p45 Table 1 (l.1570-1575 + caption → C₃=1, the
+  same Table-1 class rem1 fixed in p46 but didn't check in p45), and production c_lipschitz_joint
+  wiring (build() stored the √-value → now C₃=1; test → ==1.0). Plus 3 pre-existing descope-zombies
+  prior sweeps missed: synthesis Headline-4 ("propinquity satisfies [→0]" lead-in, retraction not
+  inline), p46 rem:limit_identification_op, p47 rem:bit_exact_g2 (metric-value remarks w/o inline
+  descope). +NIT: p46 p38-test-citation overstatement softened. All compile clean; gates PASS;
+  test 33/2. **The CODE dimension again caught what claims accepted (production wiring). cert6
+  (full, w/ citation) still certifies; next targeted pass re-validates rem2.**

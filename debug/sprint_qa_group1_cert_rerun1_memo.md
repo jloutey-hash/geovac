@@ -127,3 +127,27 @@ NITs (logged): p48 two tautological tests (`gamma_su2_residual==0.0` self-compar
 Verification: p45/p46 compile errors=0, no undefined cites/refs; C5/C11/C13/C14/C15 PASS; test_lorentzian_propinquity.py 33 passed/2 skipped; test_paper46_c3_operator_system.py 13/13 (unchanged).
 
 **Lesson:** the targeted (claims+code+synthesis, drop-citation) set was the right call — it found a real cross-paper miss the full cert hadn't, at 11 agents. The code dimension specifically caught the Paper-45 fabrication that the claims reviewer accepted as sound. cert6 (full, with citation) still needed to certify.
+
+---
+
+## rem2 — second targeted remediation pass (v4.42.0, 2026-06-22) — validated the rem1 Paper-45 transport, found it incomplete
+
+PI-directed second targeted re-run (claims+code+synthesis+deterministic; citation dropped again — converged clean, rem1 added no external bibitems). Primary job: validate the rem1 Paper-45 C3^op transport with a fresh panel (as rem1 validated cert5's p46 rework). **Remediation pass, NOT a cert** (citation unexercised ⇒ INCONCLUSIVE-for-cert by rule).
+
+Base HEAD 70d6998 (v4.41.0). 11 agents. Calibrated: **4/4 sensitivity** (code `<1e9` gut of the C3-rework's OWN backing test caught by code-46+code-45; claims-regression p45 eq:C3_joint_bound √-restore caught by claims-45; claims-C14-body p49 B4'→established caught by claims-49; synthesis-C9 Headline-4 flip caught by synthesis), **specificity held** (controls clean; the rem1 p46 fix + cert4/cert5 fixes confirmed holding — claims-46 verified ALL 18 p46 C3-constant appearances agree on C₃=1 incl. the Table-1 column rem1 fixed).
+
+**Headline: the rem1 Paper-45 transport was INCOMPLETE — 3 residual sites the rem1 pass missed**, all caught this round:
+- **p45 L4(d) proof (l.1131):** still used the withdrawn per-harmonic `C_3^(N) = (N−1)/√(N²−1)` (claims-45 M2) → C₃=1 (Paper 38 L3).
+- **p45 Table 1 (tab:panel, l.1570–1575 + caption l.1581):** still printed the withdrawn √-values 0.5774/0.7071/0.7746 + "Avery harmonic form" caption (claims-45 M3) — the SAME Table-1 class rem1 caught in p46 but never checked for in p45 → column → 1, caption → C₃=1.
+- **production `c_lipschitz_joint` (build(), l.303/313):** still wired with `c3_joint_panel_sup` (the √-value 0.5774…) as the live field (code-45) → now stores `C_LIPSCHITZ_JOINT_ASYMPTOTIC = 1.0` (C₃=1); the withdrawn √-function is unwired (kept documented-historical); `test_lorentzian_propinquity.py` c_lipschitz assertion → `== 1.0`.
+
+**Plus pre-existing residual descope-zombies prior sweeps missed** (genuine SMALLs):
+- **synthesis Headline 4 (l.256–261):** eq:headline_4 + "the propinquity satisfies [Λprop ≤ … → 0]" lead-in presented the retracted convergence as live (retraction 8 lines below, not inline) → "originally-claimed … bound (retracted; see below) was".
+- **p46 rem:limit_identification_op (l.1241–1254):** metric (Wasserstein–Kantorovich) limit "recovering the strong-form structure" without inline descope → added "(Descoped: identifies the intended limit object; convergence not established)".
+- **p47 rem:bit_exact_g2 (l.1419–1427):** Λ panel "inherited as the asymptotic non-compact propinquity values / free upgrade" without inline descope → "rate-formula values (Descoped: degenerate-K⁺ seminorm rate, not metric-level limits)".
+
+NIT fixed: p46 "C₃=1 backed by test_p38_action_seminorm.py" (×2, l.887/1529) overstated that test's content (it backs Paper 38 injectivity/smoothing, not the gradient-seminorm equality) → "Paper 38 L3, proof-by-argument; the companion translation-seminorm metrization is backed by …". NITs logged (not fixed): p48 `gamma_su2_residual==0.0` decorative tautology (recurring; real backing is the panel-consistency test); p47 thm:outer analytic-tag locality.
+
+Verification: p45/p46/p47/synthesis compile errors=0, no undefined cites/refs; C5/C11/C13/C14/C15 PASS; test_lorentzian_propinquity.py 33 passed/2 skipped.
+
+**Lesson:** the convergence loop is working as designed — each targeted pass validates the prior pass's rework and finds its misses. rem1 fixed p46 + transported to p45; rem2 found the p45 transport had 3 residual sites (a paper proof leg, the paper's own table, and the production wiring) + 3 pre-existing descope-zombies. The CODE dimension again caught what claims accepted (the production `c_lipschitz_joint` wiring). A fresh full cert6 (with citation) is still what certifies; the next targeted pass should re-validate rem2.

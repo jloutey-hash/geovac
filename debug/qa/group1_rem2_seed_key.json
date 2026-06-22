@@ -1,0 +1,55 @@
+{
+  "run": "group1_rem2",
+  "type": "TARGETED REMEDIATION PASS (not a certification)",
+  "description": "Second post-cert5 targeted /qa group1 re-run over the 3 LIVE dimensions (claims + code + synthesis + deterministic), dropping per-paper citation (converged clean; rem1 added no external bibitems). PI-directed. Primary job: validate the rem1 Paper 45 C3^op transport (a substantial fresh edit to p45 paper + production module + test) with a fresh adversarial panel, as rem1 validated the cert5 p46 rework; plus catch any remaining tail. Per the /qa all-dimensions rule this is a REMEDIATION PASS, NOT a cert (citation unexercised => INCONCLUSIVE-for-cert). Seeds in worktree ../geovac-qa-seed-group1-rem2 (branch qa-seed-group1-rem2, base HEAD 70d6998 = v4.41.0). NEVER committed; worktree removed at end. Seeds cover ONLY exercised dimensions (claims/code/synthesis); NO citation seed.",
+  "date": "2026-06-22",
+  "base_head": "70d6998",
+  "dimensions_exercised": ["claims", "code", "synthesis", "deterministic"],
+  "dimensions_skipped": ["citation (per-paper C4)"],
+  "seeds": [
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_paper46_c3_operator_system.py",
+      "location": "l.103 (test_envelope_max_monopole_commutes)",
+      "defect_class": "C2 vacuous/gutted tolerance (regression of the cert5/rem1 C3-rework's OWN backing test)",
+      "planted": "Changed 'assert lop < 1e-9' -> 'assert lop < 1e9' (vacuous; lop is a non-negative norm, so <1e9 asserts nothing). This guts the load-bearing envelope-max-commutes check that backs the C3=1 withdrawal of the sqrt-story.",
+      "truth": "The envelope-max monopole COMMUTES with D_GV bit-exact (lop == 0, asserted < 1e-9); a 1e9 tolerance defeats the check. Tests whether the panel catches a regression of the rework's own backing.",
+      "expected_catcher": "code-46"
+    },
+    {
+      "id": "S-claims-regression-p45",
+      "file": "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+      "location": "l.866-870 (eq:C3_joint_bound)",
+      "defect_class": "C8/C14 REGRESSION of the rem1 (v4.41.0) Paper-45 C3 transport (re-introduces the withdrawn sqrt-constant)",
+      "planted": "Flipped eq:C3_joint_bound from 'Cthreejoint <= CthreeSU = C_3 = 1' BACK to 'Cthreejoint <= CthreeSU <= sup_{N<=2nmax-1} (N-1)/sqrt(N^2-1) = sqrt(1-1/nmax) -> 1^-'. Re-introduces the op-norm-false sqrt-constant the rem1 transport withdrew; creates an eq-vs-rem:envelope_v2 contradiction (rem:envelope_v2 still says that sqrt-form is withdrawn).",
+      "truth": "Paper 45's L3 comparison constant is C_3 = 1 (Paper 38 L3, gradient seminorm); the sqrt((N-1)/(N+1)) / sqrt(1-1/nmax) envelope constant was WITHDRAWN at v4.41.0 (rem1; operator-norm-false; envelope-max commutes). Re-introducing it is the regressed defect.",
+      "expected_catcher": "claims-45 (and/or code-45)"
+    },
+    {
+      "id": "S-claims-C14-body-p49",
+      "file": "papers/group1_operator_algebras/paper_49_oslpls_strong_form_bridge.tex",
+      "location": "l.2095-2099 (aggregate Bridge Theorem B4' item)",
+      "defect_class": "C14 descope zombie in paper BODY (descoped -> established)",
+      "planted": "Flipped the B4' item from '[DESCOPED] ... metric convergence is descoped --- what transports is the closed-form rate, not a quantum-metric distance' -> '[ESTABLISHED] ... transports a genuine OSLPLS pLGH metric convergence --- a quantum-metric distance, not merely the closed-form rate'.",
+      "truth": "B4' (convergence transport) is DESCOPED -- the strong-form propinquity seminorm is degenerate (Paper 45/46); only the closed-form rate transports, not a metric distance.",
+      "expected_catcher": "claims-49"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "l.269-272 (Paper 45 K+ convergence-claim status)",
+      "defect_class": "C9 synthesis overstatement (retracted/degenerate -> upheld/nondegenerate)",
+      "planted": "Flipped 'was retracted in June 2026: the quantity Lprop is degenerate --- the K+ compression annihilates the spatial Dirac and the restricted Lipschitz seminorm vanishes identically' -> '... was upheld ...: Lprop is nondegenerate --- the K+ compression preserves the spatial Dirac and the restricted Lipschitz seminorm is a genuine metric'.",
+      "truth": "Paper 45's convergence claim (formerly Thm 5.1) was RETRACTED; the K+ compression ANNIHILATES the spatial Dirac (annihilation theorem); the restricted Lipschitz seminorm VANISHES identically (the NEGATIVE keystone). Different line from cert4(l.153)/cert5(l.147)/rem1(l.135).",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_45", "claim": "POST-rem1: eq:C3_joint_bound = C_3 = 1 is CORRECT; rem:envelope_v2 withdrawal correct; K+ annihilation NEGATIVE; product-carrier signature-agnostic. Do NOT flag C_3=1 as wrong / do NOT ask to restore sqrt.", "must_not_flag": true},
+    {"id": "M2", "file": "paper_46", "claim": "POST-rem1: C_3=1 corpus-wide incl. Table 1 column (now 1); envelope RANGE stands; sqrt-story withdrawn. test_paper46_c3_operator_system.py 13/13.", "must_not_flag": true},
+    {"id": "M3", "file": "paper_47", "claim": "outer norm-resolvent + three-carrier survive; inner descoped; §5.4 rate-formula/degeneracy tag (cert5).", "must_not_flag": true},
+    {"id": "M4", "file": "paper_48", "claim": "N_t=1 substrate+SU(2) bit-exact (joint rate +T/4); B1/B3 survive; B2 vacuous; B4 descoped; §1.2 partition + Table-1/abstract fixes.", "must_not_flag": true},
+    {"id": "M5", "file": "paper_49", "claim": "D_max chain 96/96 load-bearing; B4' descoped; B2' state-level survives; illustrative-Umegaki.", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "ALL prior fixes through v4.41.0 are CORRECT and must not be re-flagged. Includes cert1-cert5 + the v4.37.0/v4.39.0 sweeps + the v4.40.0 cert5 fixes (incl. p46 C3^op rework -> C_3=1, operator-system test) + the v4.41.0 rem1 fixes: p46 Table 1 column -> C_3=1, AND the Paper 45 C3^op transport (eq:C3_joint_bound -> C_3=1, rem:envelope_v2 withdrawal note, Q4, production c3_joint_panel_sup docstring reframe, test_lorentzian_propinquity.py reframe). p45/p46 C_3=1 is the CORRECT post-rem1 state; the sqrt(1-1/nmax) is correctly withdrawn -- a reviewer must NOT recommend restoring it. che_perales venue DGA 103 (2026) correct. Citation dimension NOT exercised this pass."
+}

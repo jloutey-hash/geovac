@@ -883,7 +883,8 @@ spinor lift, the gradient/translation-seminorm Lichnerowicz comparison
    \;\le\; C_{3} \cdot \norm{\nabla_{x} f_{s}}_{\infty}, \qquad C_{3} = 1,
 \end{equation}
 with equality on the continuum ($\opnorm{[\DGV, M_{f}]} =
-\norm{\nabla f}_{\infty}$, Paper~38~Lemma~L3, backed by
+\norm{\nabla f}_{\infty}$, Paper~38~Lemma~L3, proof-by-argument; the
+companion translation-seminorm metrization is backed by
 \texttt{tests/test\_p38\_action\_seminorm.py}). The comparison constant
 is $\nmax$-independent ($C_{3} = 1$);\ the natural-substrate multipliers
 in $\Op^{L}$ span shell-difference labels $N$ up to $2\nmax - 1$ (the
@@ -1252,6 +1253,10 @@ correspondingly on the full Krein-state Wasserstein--Kantorovich space.
 This is the substantive difference from Paper~45's $\Kplus$-weak-form
 limit identification:\ the limit object is now defined on the full
 Krein state space, recovering the strong-form structure in the limit.
+(\emph{Descoped}: this identifies the \emph{intended} limit object; the
+convergence to it is \emph{not} established --- the natural-substrate
+strong-form seminorm is degenerate (Theorem~\ref{thm:main}, Status note),
+so this is a target, not a metric-level result.)
 \end{remark}
 
 % =====================================================================
@@ -1522,7 +1527,8 @@ Lichnerowicz comparison
    \qquad C_{3} = 1,
 \end{equation*}
 with equality on the continuum ($\opnorm{[\DCH, M_{f}]} = \norm{\nabla f}_{\infty}$;
-backed by \texttt{tests/test\_p38\_action\_seminorm.py}). The comparison constant
+Paper~38~Lemma~L3, proof-by-argument; the companion translation-seminorm
+metrization is backed by \texttt{tests/test\_p38\_action\_seminorm.py}). The comparison constant
 is a single $\nmax$-independent value $1$, \emph{not} an $N$-dependent
 per-harmonic constant. Consequently the joint strong-form L3 bound
 (Lemma~\ref{lem:L3op}) carries $\Cthreeop(\nmax) = C_{3} = 1$ at every cutoff.

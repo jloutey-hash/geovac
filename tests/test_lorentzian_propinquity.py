@@ -103,9 +103,10 @@ class TestTunnelingPairConstruction:
         assert pair.N_t == 3
         assert pair.T == pytest.approx(2 * np.pi)
         assert pair.cb_norm_joint == sp.Rational(2, 3)
-        # c_lipschitz_joint stores the WITHDRAWN sqrt-envelope value (dataclass
-        # wiring check only; the L3 comparison constant is C_3 = 1, Paper 38 L3).
-        assert pair.c_lipschitz_joint == pytest.approx(1.0 / np.sqrt(3.0))
+        # c_lipschitz_joint is the L3 comparison constant C_3 = 1 (Paper 38 L3,
+        # gradient seminorm). The withdrawn sqrt-envelope formula is no longer
+        # wired here (op-norm-false; see c3_joint_panel_sup docstring).
+        assert pair.c_lipschitz_joint == pytest.approx(1.0)
         assert pair.gamma_joint_su2 > 0
         assert pair.gamma_joint_u1 > 0
         assert pair.gamma_joint_L1 > pair.gamma_joint_su2

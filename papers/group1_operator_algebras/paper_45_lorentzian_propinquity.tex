@@ -1128,8 +1128,9 @@ $B^{\SU(2)}_{\chid}$ chirality-block-diagonal with equal blocks. Then
 $[\gamma^{0} \otimes \partial_{t}, B^{\SU(2)}_{\chid}(f_{s}) \otimes
 I_{\Nt}] = [\gamma^{0}, B^{\SU(2)}_{\chid}(f_{s})] \otimes \partial_{t}
 = 0$, and the spatial term is bounded by Paper~38~\S~L3-compatibility
-with the per-harmonic constant $C_{3}^{(N)} = (N-1)/\sqrt{N^{2}-1}$,
-giving (\ref{eq:L4_L3compat}).
+with the comparison constant $C_{3} = 1$ (Paper~38 Lemma~L3, gradient
+seminorm; the earlier per-harmonic $(N-1)/\sqrt{N^{2}-1}$ is withdrawn,
+Remark~\ref{rem:envelope_v2}), giving (\ref{eq:L4_L3compat}).
 
 \emph{(e) Krein-positivity preservation.} For the convolution form,
 $[\JL, \Bjoint(f)] = \Pjoint\,[\JL, M_{\Kjoint \ast f}]\,\Pjoint$
@@ -1567,19 +1568,20 @@ Appendix~\ref{app:panel} for full data).
 $(\nmax, \Nt)$ & $\gammaSU$ & $\gammaU$ & $\Cthreejoint$ & cb-norm
    & $\Lprop$ bound & $\Nt = 1$ residual \\
 \midrule
-$(2, 1)$ & $2.0746$ & $\pi/2 \approx 1.5708$  & $0.5774$ & $2/3$ & $2.0746$ & $\mathbf{0.0}$ bit-exact \\
-$(3, 1)$ & $1.6101$ & $\pi/2$                  & $0.7071$ & $1/2$ & $1.6101$ & $\mathbf{0.0}$ bit-exact \\
-$(4, 1)$ & $1.3223$ & $\pi/2$                  & $0.7746$ & $2/5$ & $1.3223$ & $\mathbf{0.0}$ bit-exact \\
-$(2, 3)$ & $2.0746$ & $0.7220$                 & $0.5774$ & $2/3$ & $2.0746$ & --- \\
-$(3, 5)$ & $1.6101$ & $0.4956$                 & $0.7071$ & $1/2$ & $1.6101$ & --- \\
-$(4, 7)$ & $1.3223$ & $0.3841$                 & $0.7746$ & $2/5$ & $1.3223$ & --- \\
+$(2, 1)$ & $2.0746$ & $\pi/2 \approx 1.5708$  & $1$ & $2/3$ & $2.0746$ & $\mathbf{0.0}$ bit-exact \\
+$(3, 1)$ & $1.6101$ & $\pi/2$                  & $1$ & $1/2$ & $1.6101$ & $\mathbf{0.0}$ bit-exact \\
+$(4, 1)$ & $1.3223$ & $\pi/2$                  & $1$ & $2/5$ & $1.3223$ & $\mathbf{0.0}$ bit-exact \\
+$(2, 3)$ & $2.0746$ & $0.7220$                 & $1$ & $2/3$ & $2.0746$ & --- \\
+$(3, 5)$ & $1.6101$ & $0.4956$                 & $1$ & $1/2$ & $1.6101$ & --- \\
+$(4, 7)$ & $1.3223$ & $0.3841$                 & $1$ & $2/5$ & $1.3223$ & --- \\
 \bottomrule
 \end{tabular}
 \caption{Rate-formula panel.
 $\gammaSU$ values from Paper~38~\S~L2 closed-form Stein--Weiss
 computation;\ $\gammaU$ values from standard Fej\'er-on-$\SoneT$ at
-$T = 2\pi$;\ $\Cthreejoint$ from the Avery harmonic form
-$(N-1)/\sqrt{N^{2}-1}$. The column labeled ``cb-norm'' tabulates
+$T = 2\pi$;\ $\Cthreejoint = C_{3} = 1$ (Paper~38~\cite{paper38} Lemma~L3
+comparison constant; the earlier Avery-harmonic $(N-1)/\sqrt{N^{2}-1}$ form
+is withdrawn, Remark~\ref{rem:envelope_v2}). The column labeled ``cb-norm'' tabulates
 $2/(\nmax+1)$, which is the SU(2) Plancherel \emph{mass-distribution
 maximum}, not a cb-norm (the cb-norm of the smoothing map is $1$ at
 every cell;\ Lemma~\ref{lem:L2}). The ``$\Lprop$ bound'' column is the
