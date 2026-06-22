@@ -164,26 +164,30 @@ from geovac.operator_system_compact_temporal import (
 # Constants
 # ---------------------------------------------------------------------------
 
-# C_3^joint <= C_3^SU(2) = 1 from Sub-sprint A.
-# Per debug/l3b_2_sub_sprint_A_lichnerowicz_memo.md §5.1, the joint
-# constant is bounded by the per-harmonic closed form (N-1)/sqrt(N^2-1)
-# evaluated on the natural panel; asymptotically tight to 1^- as
-# n_max -> infinity.  At finite cutoff the supremum over the natural panel
-# is the per-harmonic-max formula below.
+# C_3^joint <= C_3^SU(2) = C_3 = 1: the Paper 38 Lemma L3 comparison
+# constant under the gradient/translation seminorm
+# (||[D_GV, M_f]|| = ||grad f||_inf on the continuum, C_3 = 1).
+# The asymptotic value is 1.
 C_LIPSCHITZ_JOINT_ASYMPTOTIC: float = 1.0
 
 
 def c3_joint_panel_sup(n_max: int) -> float:
-    """Sub-sprint A per-harmonic Lipschitz constant on the natural panel.
+    """WITHDRAWN per-harmonic sqrt-envelope formula (kept for documentation).
 
     Returns sup_{2 <= N <= n_max} (N-1)/sqrt(N^2 - 1).
 
-    This is the closed-form upper bound on the joint Lichnerowicz
-    constant inherited verbatim from Paper 38 §L3 via Sub-sprint A
-    Eq. (2.1) (the time-chirality cross term [gamma^0 (x) ∂_t,
-    a_s (x) a_t] vanishes bit-exactly under the compact-temporal
-    momentum-polynomial convention; the joint commutator reduces to
-    the spatial-only commutator i [D_GV, a_s] (x) a_t).
+    NOTE: this sqrt-envelope value is NOT the Lichnerowicz comparison
+    constant.  An earlier draft asserted a per-harmonic constant
+    C_3^(N) = (N-1)/sqrt(N^2-1) with envelope sup sqrt(1 - 1/n_max)
+    (operator-norm normalization), attributed to Paper 38 L3.  That is
+    WITHDRAWN: it is operator-norm-false (the envelope-max monopole
+    commutes with D_GV; the op-norm ratios exceed it and their sup grows
+    with n_max), refuted by tests/test_paper46_c3_operator_system.py.
+    The actual L3 comparison constant is C_3 = 1 under the
+    gradient/translation seminorm (Paper 38 Lemma L3;
+    C_LIPSCHITZ_JOINT_ASYMPTOTIC above).  This function computes the
+    withdrawn arithmetic only; it is dominated in the bound
+    (C_5^joint = max(...) = 1) and feeds no surviving result.
     """
     if n_max < 2:
         return 0.0

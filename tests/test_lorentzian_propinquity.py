@@ -1,8 +1,13 @@
 """Tests for the K^+-restricted weak-form Lorentzian propinquity assembly.
 
 Sprint L3b-2 Sub-Sprint D (2026-05-18): verification suite for the
-Latremoliere propinquity convergence theorem on the compact-temporal
-Lorentzian truncated Krein spectral triple.
+K^+-restricted weak-form assembly on the compact-temporal Lorentzian
+truncated Krein spectral triple. (The "propinquity convergence theorem"
+framing is RETRACTED -- Paper 45 Remark rem:history; the K^+ compression
+annihilates the spatial Dirac. The c3_joint_panel_sup assertions below
+test the WITHDRAWN sqrt-envelope arithmetic, not the L3 constant; the
+actual L3 comparison constant is C_3 = 1, Paper 38 L3, with the
+operator-system refutation in test_paper46_c3_operator_system.py.)
 
 Per CLAUDE.md §13.4a, every equation in the proof memo has a
 corresponding unit test.  Coverage:
@@ -56,25 +61,31 @@ class TestConstants:
         """The joint Lichnerowicz constant asymptote is 1 (Paper 38 §L3 inherited)."""
         assert C_LIPSCHITZ_JOINT_ASYMPTOTIC == 1.0
 
-    def test_c3_joint_panel_sup_n_max_2(self):
-        """At n_max=2, sup_{N<=2} (N-1)/sqrt(N^2-1) = 1/sqrt(3) ≈ 0.5774."""
+    # NOTE: c3_joint_panel_sup computes the WITHDRAWN sqrt-envelope formula
+    # (NOT the L3 comparison constant, which is C_3 = 1; Paper 38 L3). These
+    # tests pin only the withdrawn-formula arithmetic for documentation; the
+    # operator-system refutation of the sqrt-story is in
+    # test_paper46_c3_operator_system.py.
+    def test_c3_joint_panel_sup_n_max_2_withdrawn_formula(self):
+        """WITHDRAWN formula arithmetic: sup_{N<=2} (N-1)/sqrt(N^2-1) = 1/sqrt(3)."""
         val = c3_joint_panel_sup(2)
         expected = 1.0 / np.sqrt(3.0)
         assert abs(val - expected) < 1e-12
 
-    def test_c3_joint_panel_sup_n_max_3(self):
-        """At n_max=3, sup = 2/sqrt(8) = 1/sqrt(2) ≈ 0.7071."""
+    def test_c3_joint_panel_sup_n_max_3_withdrawn_formula(self):
+        """WITHDRAWN formula arithmetic: sup = 2/sqrt(8) = 1/sqrt(2)."""
         val = c3_joint_panel_sup(3)
         expected = 2.0 / np.sqrt(8.0)
         assert abs(val - expected) < 1e-12
 
-    def test_c3_joint_panel_sup_monotone(self):
-        """c3_joint_panel_sup is monotone increasing in n_max, → 1 asymptotically."""
+    def test_c3_joint_panel_sup_monotone_withdrawn_formula(self):
+        """WITHDRAWN formula arithmetic: monotone in n_max. (NOT the L3 constant,
+        which is the flat C_3 = 1; this sqrt-sup is op-norm-false as a constant.)"""
         vals = [c3_joint_panel_sup(n) for n in [2, 3, 4, 5, 6, 10, 100]]
         for a, b in zip(vals[:-1], vals[1:]):
             assert b > a, f"non-monotone: {a} >= {b}"
         assert vals[-1] < 1.0
-        assert vals[-1] > 0.99  # n=100 should be close to 1
+        assert vals[-1] > 0.99
 
 
 # ---------------------------------------------------------------------------
@@ -92,6 +103,8 @@ class TestTunnelingPairConstruction:
         assert pair.N_t == 3
         assert pair.T == pytest.approx(2 * np.pi)
         assert pair.cb_norm_joint == sp.Rational(2, 3)
+        # c_lipschitz_joint stores the WITHDRAWN sqrt-envelope value (dataclass
+        # wiring check only; the L3 comparison constant is C_3 = 1, Paper 38 L3).
         assert pair.c_lipschitz_joint == pytest.approx(1.0 / np.sqrt(3.0))
         assert pair.gamma_joint_su2 > 0
         assert pair.gamma_joint_u1 > 0

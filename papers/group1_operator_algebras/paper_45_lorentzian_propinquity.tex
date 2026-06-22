@@ -866,44 +866,46 @@ $L^{2}$-Pythagorean joint gradient norm (\ref{eq:joint_L1}),
 \begin{equation}\label{eq:C3_joint_bound}
    \Cthreejoint(\nmax, \Nt)
    \;\le\; \CthreeSU(\nmax)
-   \;\le\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
-   \;=\; \sqrt{1 - \frac{1}{\nmax}}
-   \;\xrightarrow{\nmax \to \infty}\; 1^{-},
+   \;=\; C_{3} \;=\; 1,
 \end{equation}
-where the supremum is taken over the natural-substrate envelope $N \le
-2\nmax - 1$ — the Avery--Wen--Avery $\Delta n = \pm 1$ ladder on
-$\nmax$ shells produces shell-difference labels $N$ up to $2\nmax - 1$
-via the chirality-doubling at the operator-system level (see
-Paper~44~\cite{paper44}~\S~3). The per-harmonic function
-$(N-1)/\sqrt{N^{2} - 1}$ is Paper~38~\cite{paper38} Lemma~L3 verbatim;
-the envelope range $N \le 2\nmax - 1$ extends Paper~38's $N \le \nmax$
-because Paper~38's Berezin map restricts to multiplier labels
-$N \le \nmax$ by Plancherel cutoff, while the Lorentzian natural
-substrate's full multiplier algebra reaches the larger envelope (see
-Remark~\ref{rem:envelope_v2} below).
+the Paper~38~\cite{paper38} Lemma~L3 comparison constant under the
+gradient/translation seminorm ($\opnorm{[\DGV, M_{f}]} = \norm{\nabla f}_{\infty}$
+on the continuum, $C_{3} = 1$). The natural-substrate multipliers span
+shell-difference labels $N \le 2\nmax - 1$ — the Avery--Wen--Avery
+$\Delta n = \pm 1$ ladder on $\nmax$ shells (see Paper~44~\cite{paper44}~\S~3),
+wider than Paper~38's Berezin-image range $N \le \nmax$ — but the L3
+comparison constant is $1$ over the whole envelope (the per-harmonic
+gradient-seminorm constant is $C_{3} = 1$ for every $N$). An earlier draft
+asserted an $N$-dependent $\sqrt{(N-1)/(N+1)}$ with envelope supremum
+$\sqrt{1 - 1/\nmax}$ (operator-norm normalization), attributed to Paper~38
+L3; that is withdrawn (see Remark~\ref{rem:envelope_v2} below).
 \end{lemma}
 
-\begin{remark}[On the supremum range]\label{rem:envelope_v2}
-The supremum is taken over the natural-substrate envelope $N \le
-2\nmax - 1$ rather than $N \le \nmax$. The per-harmonic functional
-form, the asymptotic limit $1^{-}$, and the rate expressions of
-\S~\ref{sec:withdrawn_assembly} (eq.~\ref{eq:main_bound}) are
-insensitive to this distinction.
-The finite-cutoff constant is sharpened by the envelope:\ at
-$\nmax = 3$, the natural-substrate generator
-$(N, L, M, p) = (4, 1, \pm 1, 0)$ has Lipschitz ratio $0.95$, which
-exceeds the per-shell value $C_3^{(3)} = 2/\sqrt{8} = 0.707$ but is
-bounded by the envelope-aware
-$C_3^{\mathrm{op}}(3) = ((2 \cdot 3 - 1) - 1)/\sqrt{(2 \cdot 3 - 1)^{2} - 1} = 4/\sqrt{24} = \sqrt{2/3} \approx 0.816$.
-Numerical-panel values in \S\ref{sec:panel} are unaffected (they
-quote $\gammajoint$ directly, not $\Cthreejoint \cdot \gammajoint$).
-The envelope refinement was identified in
-Paper~46~\cite{paper46}~\S~4.3 (the strong-form companion under
-$L_{\mathrm{op}}(a) := \opnorm{[\DL, a]}$); Paper~38 is unaffected
-because Paper~38's Berezin map restricts multiplier labels to
-$N \le \nmax$ by Plancherel cutoff, while the Lorentzian natural
-substrate's chirality-doubled multiplier algebra reaches the larger
-envelope (see Paper~46~Appendix~A for the cross-paper analysis).
+\begin{remark}[Withdrawn:\ the $\sqrt{1 - 1/\nmax}$ envelope constant]\label{rem:envelope_v2}
+The natural-substrate multipliers span the envelope $N \le 2\nmax - 1$
+(a genuine \emph{range} refinement of Paper~38's Berezin-image range
+$N \le \nmax$, via the Avery--Wen--Avery ladder, Paper~44~\S~3). An
+earlier draft further asserted a per-harmonic constant
+$C_3^{(N)} = (N-1)/\sqrt{N^{2}-1} = \sqrt{(N-1)/(N+1)}$ (operator-norm
+normalization) with envelope supremum
+$C_{3}^{\mathrm{op}}(\nmax) = \sqrt{1 - 1/\nmax}$, attributed to Paper~38 L3, and a
+worked ``Lipschitz ratio $0.95$'' for $(N,L,M,p) = (4,1,\pm1,0)$ with
+asymptotic tightness on the envelope-max harmonic $Y^{(3)}_{2\nmax-1,0,0}$.
+This is \emph{withdrawn}. A direct operator-system computation
+(Paper~46~\cite{paper46} Appendix~A, backing
+\texttt{tests/test\_paper46\_c3\_operator\_system.py}) shows: (i) Paper~38 L3
+has $C_{3} = 1$ under the gradient seminorm, not an $N$-dependent
+$\sqrt{(N-1)/(N+1)}$; (ii) the operator-norm ratios
+$\opnorm{[\DGV, M]}/\opnorm{M}$ do not realize $\sqrt{(N-1)/(N+1)}$ (they
+exceed it and their supremum grows with $\nmax$ rather than approaching
+$\sqrt{1-1/\nmax}$); and (iii) the envelope-max monopole
+$Y^{(3)}_{2\nmax-1,0,0}$ \emph{commutes} with $\DGV$ — the loosest, not the
+tightest, generator. The L3 comparison constant is $C_{3} = 1$
+(eq.~\ref{eq:C3_joint_bound}); since it feeds only the failed-assembly bound
+(\S~\ref{sec:withdrawn_assembly}, which produces no distance) and the
+surviving spatial / product-carrier convergence carries no $C_{3}$ factor,
+no result changes. Numerical-panel values in \S\ref{sec:panel} are
+unaffected (they quote $\gammajoint$ directly).
 \end{remark}
 
 \begin{proof}
@@ -963,11 +965,10 @@ $\sqrt{a^{2} + b^{2}} \ge a$ for $a, b \ge 0$, we obtain
 $a = \sum_{j} c_{j} (a_{s}^{j} \otimes a_{t}^{j})$ follows by triangle
 inequality on both sides.
 
-The bound (\ref{eq:C3_joint_bound}) takes the Paper~38~\S~L3
-per-harmonic form $(N-1)/\sqrt{N^{2}-1}$ on the natural-substrate
-envelope $N \le 2\nmax - 1$ (per Remark~\ref{rem:envelope_v2});
-asymptotic tightness $\to 1^{-}$ is via the per-harmonic
-Avery--Wen--Avery saturation on $Y^{(3)}_{N, 0, 0}$ as $N \to 2\nmax - 1$. \qedhere
+The bound (\ref{eq:C3_joint_bound}) uses the Paper~38~\S~L3
+gradient-seminorm comparison constant $\CthreeSU(\nmax) = C_{3} = 1$ (per
+Remark~\ref{rem:envelope_v2}); the natural-substrate envelope range
+$N \le 2\nmax - 1$ widens the multiplier labels but not the constant. \qedhere
 \end{proof}
 
 \begin{remark}[The temporal direction contributes zero]\label{rem:no_cross}
@@ -2006,9 +2007,10 @@ structure of the wedge KMS state) precludes the natural extension
 within the present framework.
 
 \item[(Q4)] \textbf{Sharp constants, deferred behind Q1.} The rate
-expressions retain $\Cthreejoint \le 1$ with finite-cutoff form
-$\sup_{N \le 2\nmax - 1} (N-1)/\sqrt{N^{2}-1} = \sqrt{1 - 1/\nmax}$
-(per Remark~\ref{rem:envelope_v2}). On the momentum-diagonal substrate the temporal contribution to
+expressions retain the Paper~38 L3 comparison constant
+$\Cthreejoint = \CthreeSU = C_{3} = 1$ (the earlier
+$\sqrt{1 - 1/\nmax}$ envelope form is withdrawn, per
+Remark~\ref{rem:envelope_v2}). On the momentum-diagonal substrate the temporal contribution to
 the Lipschitz seminorm is identically zero for \emph{all} multipliers
 (not only pure tensors), so questions about joint sharpness are moot
 until Q1 supplies a construction in which the temporal direction

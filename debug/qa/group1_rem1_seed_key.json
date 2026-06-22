@@ -1,0 +1,55 @@
+{
+  "run": "group1_rem1",
+  "type": "TARGETED REMEDIATION PASS (not a certification)",
+  "description": "Post-cert5 targeted /qa group1 re-run over the 3 LIVE dimensions only (claims + code + synthesis + deterministic), DROPPING the per-paper citation dimension (converged clean since the v4.31-4.33 dedicated C4 sweeps; cert4/cert5 found nothing genuine there). PI-directed (the last several certs' genuine defects all clustered in claims/code/synthesis). Per the /qa all-dimensions hard rule, dropping a gating dimension forces INCONCLUSIVE-for-certification: this run CANNOT return a certifying PASS; it is a remediation pass. A full run (with citation) is still required to certify Batch 1. Seeds in worktree ../geovac-qa-seed-group1-rem1 (branch qa-seed-group1-rem1, base HEAD 7901147 = v4.40.0). NEVER committed; worktree removed at end. Seeds cover ONLY the exercised dimensions (claims/code/synthesis); NO citation seed (citation not run this pass).",
+  "date": "2026-06-22",
+  "base_head": "7901147",
+  "dimensions_exercised": ["claims", "code", "synthesis", "deterministic"],
+  "dimensions_skipped": ["citation (per-paper C4)"],
+  "seeds": [
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_lorentzian_propinquity_foundation.py",
+      "location": "l.202 (test verify_riemannian_limit, N_t=1 operator-system bit-exact reduction)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert details[\"max_residual\"] == 0.0' -> '... < 1e9' (vacuous; max_residual is a non-negative residual, so <1e9 asserts nothing). l.201 'assert ok' backstops so the test still passes.",
+      "truth": "The N_t=1 operator-system Riemannian-limit reduction is bit-exact (max_residual == 0.0); a 1e9 tolerance defeats the bit-exact check. Different site from cert5 (test_wh7_b3_phase3_sprint2 l.96).",
+      "expected_catcher": "code-48 (and/or code-49; the foundation test backs p48/p49 N_t=1 + prop)"
+    },
+    {
+      "id": "S-claims-C14-body",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "location": "l.1578-1584 (body bridge-theorem (B4) item, post-§1)",
+      "defect_class": "C14 descope zombie in paper BODY (descoped -> established)",
+      "planted": "Flipped (B4) Convergence transport from '(descoped) ... conditional pending substrate repair, not an established metric convergence' -> '(established) ... a genuine metric-level convergence of the bridge images'.",
+      "truth": "B4 convergence transport is DESCOPED -- it rides Paper 45's degenerate Krein metric; not an established metric convergence. Different paper from cert5's p49 body B4' seed.",
+      "expected_catcher": "claims-48"
+    },
+    {
+      "id": "S-claims-C8-regression",
+      "file": "papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.tex",
+      "location": "l.181 (abstract C_3^op constant)",
+      "defect_class": "C8/C3 overclaim -- REGRESSION of the v4.40.0 cert5 fix (re-introduces the withdrawn sqrt-constant)",
+      "planted": "Flipped 'with Lipschitz comparison constant Cthreeop = C_3 = 1 (Paper 38 L3, gradient seminorm)' BACK to 'with closed-form envelope-aware constant Cthreeop(nmax) = sqrt(1 - 1/nmax) -> 1^-'. Tests whether the panel DEFENDS the cert5 fix (the abstract now contradicts the body Lemma L3, which still says C_3=1).",
+      "truth": "The L3 comparison constant is C_3 = 1 (Paper 38 L3); the sqrt((N-1)/(N+1))/sqrt(1-1/nmax) envelope-aware constant was WITHDRAWN at v4.40.0 (operator-norm-false; envelope-max monopole commutes; mis-attributed to Paper 38 L3). Re-introducing sqrt(1-1/nmax) is the regressed defect + creates an abstract-vs-body contradiction.",
+      "expected_catcher": "claims-46"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "l.135-136 (Papers 52-53 metric-level status)",
+      "defect_class": "C9 synthesis overstatement (descoped -> established)",
+      "planted": "Flipped 'their metric-level claims were subsequently descoped with the Paper 45 retraction and are reported here in corrected form' -> '... subsequently established despite the Paper 45 retraction and are reported here as confirmed metric convergences'.",
+      "truth": "The metric-level claims of Papers 52-53 were DESCOPED with the Paper 45 retraction (corrected form), NOT established. Different line from cert4 (l.153) and cert5 (l.147).",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_45", "claim": "K+ annihilation NEGATIVE; product-carrier signature-agnostic; Paper 38 = state-space GH; abstract retraction", "must_not_flag": true},
+    {"id": "M2", "file": "paper_46", "claim": "POST-v4.40.0 REWORK: L3 comparison constant C_3=1 (Paper 38 L3) is CORRECT; envelope RANGE N<=2nmax-1 stands; the sqrt(1-1/nmax) is correctly WITHDRAWN (rem:env_tightness, Appendix A). Do NOT flag C_3=1 as wrong, and do NOT ask to restore the sqrt-constant.", "must_not_flag": true},
+    {"id": "M3", "file": "paper_47", "claim": "outer norm-resolvent + three-carrier survive; inner arrow descoped; §5.4 panel now tagged rate-formula/degeneracy (cert5 v4.40.0 fix)", "must_not_flag": true},
+    {"id": "M4", "file": "paper_48", "claim": "N_t=1 substrate+SU(2) bit-exact (joint rate +T/4); B1/B3 structural survive; B2 vacuous off-orbit; B4 descoped; §1.2 partitioned + roadmap T/4 caveat (cert5 v4.40.0 fixes)", "must_not_flag": true},
+    {"id": "M5", "file": "paper_49", "claim": "D_max chain 96/96 load-bearing; B4' descoped; B2' state-level survives; illustrative-Umegaki label", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "ALL prior fixes through v4.40.0 are CORRECT and must not be re-flagged. Includes cert1-cert5 + the v4.37.0 theorem descope sweep + the v4.39.0 prose/abstract sweep + the v4.40.0 cert5 fixes: p47 §5.4 rate-formula tag, p48 §1.2 partition + §1-roadmap/cor T/4 caveat + abstract B2/B4, synthesis Umegaki relabel, AND the p46 C3^op rework (C_3=1 corpus-wide, envelope RANGE kept, sqrt-story withdrawn, test_paper46_c3_operator_system.py). In particular: p46 C_3=1 is the CORRECT post-rework state; the sqrt(1-1/nmax) is correctly withdrawn -- a reviewer must NOT recommend restoring it. che_perales venue DGA 103 (2026) correct. Citation dimension NOT exercised this pass."
+}

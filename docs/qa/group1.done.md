@@ -325,3 +325,17 @@ group1 paper restates them (C7).
   kept, pure-sympy test archived, operator-system test added (13/13). All compile clean;
   gates PASS. Memo cert_rerun1 §cert5. **Theorem + abstract/§1 + body layers all now swept;
   cert6 = first real shot at a clean PASS.**
+
+- 2026-06-22 — **rem1 targeted remediation pass** (v4.41.0, PI-directed). Re-ran ONLY the
+  3 live dimensions (claims+code+synthesis+deterministic), dropping the converged-clean
+  per-paper citation dimension → REMEDIATION PASS, not a cert (citation unexercised ⇒
+  INCONCLUSIVE-for-cert by rule). Calibrated 4/4 sens, specificity held; all cert5 fixes
+  confirmed holding. Caught TWO genuine cross-paper misses from the cert5 p46 rework:
+  (1) **p46 Table 1 column** still printed √(1−1/n_max) (cert5 swept prose/eqs, missed the
+  table) → fixed to C₃=1; (2) **Paper 45 carries the IDENTICAL C3^op fabrication** (eq:C3_joint_bound
+  √→√(1−1/n_max) "Paper 38 L3 verbatim" + false-positive test) — never swept (cert5 was p46-only).
+  code-45 caught it by running the machinery; **claims-45 had accepted the prose as sound** —
+  the two-dimension save the code dimension bought. Transported the p46 fix to Paper 45 (C₃=1
+  corpus-wide: eq + rem:envelope_v2 withdrawal + Q4 + production docstring + test reframe).
+  All compile clean; gates PASS; tests green. **Lesson: the targeted set found a real miss the
+  full cert hadn't, at 11 agents; keeping CODE in mattered. cert6 (full, w/ citation) still certifies.**

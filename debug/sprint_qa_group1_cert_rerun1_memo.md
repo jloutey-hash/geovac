@@ -107,3 +107,23 @@ LARGE (diagnostic-confirmed + reworked, PI-directed):
 Verification: p46/p47/p48/synthesis compile errors=0, zero undefined cites/refs; C5/C11/C13/C14/C15 group1 PASS; new test 13/13.
 
 **Convergence:** cert5 drained the BODY layer (p47 §5.4) + the last §1-prose residuals (p48 §1.2/roadmap) + the deepest defect (the p46 C3^op fabrication, now reworked). The cert loop has now swept theorem-statements (v4.37.0), abstract/§1 prose (v4.39.0), AND paper-body (cert5). cert6 next — first real shot at a clean PASS.
+
+---
+
+## rem1 — targeted remediation pass (v4.41.0, 2026-06-22) — claims+code+synthesis only (citation dropped)
+
+PI-directed targeted re-run: the last several certs' genuine defects all clustered in claims/code/synthesis, while citation converged clean (cert4/cert5 found nothing genuine there after the v4.31–4.33 C4 sweeps). Dropped the 5 per-paper citation reviewers → 11 agents (5 claims + 5 code + 1 synthesis + deterministic). **Per the all-dimensions hard rule this is a REMEDIATION PASS, not a cert** (citation unexercised ⇒ INCONCLUSIVE-for-certification by construction); a full run still certifies.
+
+Base HEAD 7901147 (v4.40.0). Calibrated: **4/4 sensitivity** (code `<1e9` vacuous detected by code-48+code-49 [correctly NIT — `assert ok` backstops]; claims-C14-body p48 B4→established by claims-48; claims-C8-regression p46 abstract √-restore by claims-46; synthesis-C9 by synthesis), **specificity held** (control items not false-flagged; all cert5 fixes confirmed holding).
+
+**The targeted set paid off — two genuine cross-paper misses from the cert5 p46 rework, neither of which a citation run would have prioritized:**
+- **p46 Table 1 column (l.1282–1287)** still printed √(1−1/n_max) = 0.7071/0.8165/0.8660 (caught independently by claims-46 + code-46). The cert5 rework swept prose/equations but missed the table. FIXED → C₃=1 column + caption.
+- **Paper 45 carries the IDENTICAL C3^op fabrication** (code-45, LARGE): `eq:C3_joint_bound` (√((N−1)/√(N²−1)) → √(1−1/n_max), "Paper 38 L3 **verbatim**"), `rem:envelope_v2` worked "ratio 0.95"/saturation, the production `c3_joint_panel_sup` docstring, and a **false-positive test** (`test_lorentzian_propinquity.py` only re-evaluates the formula). Same defect as p46, never swept (cert5 was p46-only). code-45 confirmed live (op-norm ratios 1.0/1.74, envelope-max commutes). **Notable: claims-45 ACCEPTED the "Paper 38 L3 verbatim" prose as sound — only the code dimension caught it by running the machinery.** This is why keeping CODE in the targeted set (not just claims+synthesis) mattered.
+
+**Paper 45 transport (PI-directed, mirror p46):** `eq:C3_joint_bound` → C₃=1 (Paper 38 L3 gradient seminorm); `rem:envelope_v2` → withdrawal note (op-norm-false; envelope-max commutes; cites test_paper46_c3_operator_system.py); proof close + Q4 → C₃=1; corrected the "Paper 38 L3 verbatim" attribution; `Prop spatial_conditional` left as-is (already correct with CthreeSU=1). Production `lorentzian_propinquity_compact_temporal.py`: `c3_joint_panel_sup` docstring + `C_LIPSCHITZ_JOINT_ASYMPTOTIC` comment reframed (the √-sup is the WITHDRAWN formula; C₃=1 is the constant; the function is dominated/harmless). `test_lorentzian_propinquity.py`: stale "propinquity convergence theorem" top docstring fixed; the 3 false-positive C3 test methods relabeled as "withdrawn √-formula arithmetic (NOT the L3 constant)" + the c_lipschitz_joint dataclass-wiring assertion annotated. (Test still 33 passed / 2 skipped — the arithmetic is correct; only the framing was false.)
+
+NITs (logged): p48 two tautological tests (`gamma_su2_residual==0.0` self-comparison; `gamma_l1==gamma_su2+gamma_u1` definitional — claims independently backed by the panel-consistency test); p48 §-headings "G2 metric-level closure"; p47 §7 "theorem-grade rigor" cross-paper watch-item; foundation-test `<1e9`/`assert ok` redundancy.
+
+Verification: p45/p46 compile errors=0, no undefined cites/refs; C5/C11/C13/C14/C15 PASS; test_lorentzian_propinquity.py 33 passed/2 skipped; test_paper46_c3_operator_system.py 13/13 (unchanged).
+
+**Lesson:** the targeted (claims+code+synthesis, drop-citation) set was the right call — it found a real cross-paper miss the full cert hadn't, at 11 agents. The code dimension specifically caught the Paper-45 fabrication that the claims reviewer accepted as sound. cert6 (full, with citation) still needed to certify.

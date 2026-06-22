@@ -1279,19 +1279,21 @@ rounding):
 \toprule
 $(\nmax, \Nt)$ & $\gammaSU$ & $\gammaU$ & $\Cthreeop$ & $\Lprop$ bound & Paper~45 $\Lpropweak$ \\
 \midrule
-$(2, 1)$ & $2.0746$ & --- & $0.7071$ & $\mathbf{2.0746}$ & $2.0746$ \\
-$(3, 1)$ & $1.6101$ & --- & $0.8165$ & $\mathbf{1.6101}$ & $1.6101$ \\
-$(4, 1)$ & $1.3223$ & --- & $0.8660$ & $\mathbf{1.3223}$ & $1.3223$ \\
-$(2, 3)$ & $2.0746$ & $0.7220$ & $0.7071$ & $\mathbf{2.0746}$ & $2.0746$ \\
-$(3, 5)$ & $1.6101$ & $0.4956$ & $0.8165$ & $\mathbf{1.6101}$ & $1.6101$ \\
-$(4, 7)$ & $1.3223$ & $0.3841$ & $0.8660$ & $\mathbf{1.3223}$ & $1.3223$ \\
+$(2, 1)$ & $2.0746$ & --- & $1$ & $\mathbf{2.0746}$ & $2.0746$ \\
+$(3, 1)$ & $1.6101$ & --- & $1$ & $\mathbf{1.6101}$ & $1.6101$ \\
+$(4, 1)$ & $1.3223$ & --- & $1$ & $\mathbf{1.3223}$ & $1.3223$ \\
+$(2, 3)$ & $2.0746$ & $0.7220$ & $1$ & $\mathbf{2.0746}$ & $2.0746$ \\
+$(3, 5)$ & $1.6101$ & $0.4956$ & $1$ & $\mathbf{1.6101}$ & $1.6101$ \\
+$(4, 7)$ & $1.3223$ & $0.3841$ & $1$ & $\mathbf{1.3223}$ & $1.3223$ \\
 \bottomrule
 \end{tabular}
 \caption{Numerical verification panel for Theorem~\ref{thm:main}.
 $\gammaSU$ values from Paper~38~\S~L2 closed-form Stein--Weiss
 computation;\ $\gammaU$ values from standard Fej\'er-on-$\SoneT$ at
-$T = 2\pi$;\ $\Cthreeop$ from~(\ref{eq:C3op_closed_form}) with
-envelope $N \le 2\nmax - 1$. The strong-form bound $\Lprop$ equals
+$T = 2\pi$;\ $\Cthreeop = C_{3} = 1$ from~(\ref{eq:C3op_closed_form})
+(Paper~38~\cite{paper38} Lemma~L3; the supremum over the envelope
+$N \le 2\nmax - 1$ of the gradient-seminorm per-harmonic constant is $1$).
+The strong-form bound $\Lprop$ equals
 Paper~45's $\Kplus$-weak-form $\Lpropweak$ bit-exactly at every cell;
 the relative residual $|\Lprop - \Lpropweak| / |\Lpropweak| \sim
 2.4 \times 10^{-5}$ is the 4-significant-digit rounding in Paper~45
