@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.32.0] - 2026-06-21
+
+### Changed — `/qa group1` certifying re-run of Batch 2 (Papers 42, 43, 44, 53 + synthesis) FAIL remediated + folded-in C4 sweep
+
+Certifying re-run of Batch 2, with an exhaustive citation verify folded in (citation reviewers checked every bibitem) so one run both calibrates the verdict and drains the Batch-2 C4 tail.
+
+**rr2 verdict: FAIL (calibrated) → remediated.** 12-agent panel (claims ×4, citation ×4 exhaustive, code ×3, synthesis ×1), worktree removed (no seed leaked). Sensitivity 4/4 (S-claims-C14 p43 "remains open"→"is now established"→claims-43; S-citation-C4 p42 Camporesi–Higuchi JGP 20 (1996)→24 (1998)→citation-42; S-code-C2 p42 four-witness period-closure `<1e-12`→`<1e12`→code-42; S-synthesis-C9 p53 "recovered only on the plane"→"on the finite disk"→synthesis). Specificity 5/5; the v4.28.0 rc2 fixes held.
+
+Genuine MATERIAL defects remediated:
+- **p42 C5/K hard-prohibition:** "Paper 2's status as a **conjectural** observation" → "as an **Observation**" (§13.5 — K=π(B+F−Δ) is an Observation, never conjectural). Plus C8 abstract/body alignment: the abstract said the Lorentzian (3,1) extension "remains the named multi-month follow-up" while §9 delivers a finite-cutoff Krein four-witness theorem → reworded (finite-cutoff Krein closure given in §9; the *continuum* closure is the follow-up).
+- **p43 C7 ×2:** "Paper 38's qualitative-rate **propinquity** convergence" → "**state-space GH** convergence" (the Lorentzian-propinquity *target* mentions, which are the open thing, correctly kept).
+- **p44 N_t>1 propagation coverage gap:** the headline prop_ach=2 "for all N_t" was tested only at N_t=1, and the code docstring asserted the *opposite* (prop=∞ at N_t>1). The code's own `achievable_envelope_dim` is dim_Weyl²·N_t (→prop=2), matching the paper; fixed the stale docstring + added `test_propagation_number_nmax_2_Nt_3_achievable_envelope` (prop=2, dims 42→192; passes).
+- **p53 LARGE citation misattribution:** `latremoliere2025` (co-cited 5× for the "pointed/proper locally-compact propinquity machinery" of the non-compact plane assembly) pointed to arXiv:1811.10843 — a compact/unital-only paper. Repointed to the actual pointed-proper-locally-compact work, the hypertopology paper arXiv:2512.03573. Plus: the stale FIRST-DRAFT header-comment (asserting disk positivity / Λ^{−1.30} / disk-as-carrier) corrected to the obstructed-disk/plane-carrier status; and "the Bochner–Riesz **kernel** is positive above the critical index" → "the Bochner–Riesz **means** are positivity-preserving … min g ≈ −2×10⁻⁴" (the kernel is sign-changing).
+
+C4 tail (11 SMALL, drained via the exhaustive sweep): p42 strohmaier label 2006→2000, latremoliere2018 label →2016; p43 leimbach "for tori", connes 1994, franco label 2013; p44 bizi "applications", bykov "…the unbounded case" title, latremoliere_metric_st_2017 preprint 2018, latremoliere2018 label →2016, leimbach "for tori", toyota R.
+
+Reconcile catches (over-flags, not acted): synthesis "Papers 52–53 have no body section" (the 52/53 summary is the inline abstract/intro block, no `\cite` → no bibitem; same as the Batch-2/3 reconcile); p43 l.401–402 "an analog of Paper 38 at (3,1)" names the Lorentzian propinquity *target* (correct, not a Paper-38 mislabel); p42 six-witness collapse tested via residual-equality (the Δ bit-identity is true, reviewer-verified — coverage NIT).
+
+All 4 papers compile errors=0/undef=0 (p42 28pp, p43 25pp, p44 18pp, p53 9pp); the new p44 test passes; touched code (`operator_system_lorentzian.py` docstring) is comment-only. C5/C11/C13/C14/C15 group1 PASS. Deferred NIT (cosmetic): stale cite-KEY names whose displayed bibitems are correct (p42 `ucp_maps_2024`=Rieffel 2004, `zhu_casini2020`=Zhang et al.; p53 `cheeger1983` orphan-but-correct). Seed key `debug/qa/group1_rr2_seed_key.json`, memo `debug/sprint_qa_group1_rerun2_memo.md`. **Batch 2's C4 tail drained + claims/code converged — next clean re-run should certify Batch 2; Batch 3 re-run still pending.**
+
 ## [4.31.0] - 2026-06-21
 
 ### Changed — `/qa group1` re-run-2 of Batch 1 (Papers 45–49 + synthesis) FAIL remediated + dedicated C4 citation sweep

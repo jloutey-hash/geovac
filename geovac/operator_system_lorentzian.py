@@ -707,12 +707,13 @@ class LorentzianTruncatedOperatorSystem:
           (a) With envelope = 'achievable':
               - At N_t = 1: prop = 2 (matches Paper 32 §III spatial result;
                 dim sequence 14, 64 = dim_Weyl^2 achievable envelope).
-              - At N_t > 1: prop = INFINITY because the temporal
-                commutative algebra never reaches M_{N_t}(C).  Dim
-                sequence saturates at dim_Weyl^2 * N_t (sub-target).
-                Achievable target is dim_Weyl^2 * N_t^2 in principle,
-                but the temporal subalgebra is rank-N_t-commutative,
-                bounding O^L^k below the full achievable.
+              - At N_t > 1: prop = 2 as well.  The achievable envelope is
+                dim_Weyl^2 * N_t (the commutative temporal subalgebra
+                contributes a factor N_t, not N_t^2), and O^L^2 fills it
+                (e.g. N_t = 3: dim sequence 42, 192 = dim_Weyl^2 * 3).
+                This is the paper's prop_ach = 2 for all N_t >= 1.  (It is
+                the 'full' envelope below, not the achievable one, that
+                gives INFINITY at N_t > 1.)
 
           (b) With envelope = 'full':
               - prop = INFINITY always (chirality-doubling blocks the

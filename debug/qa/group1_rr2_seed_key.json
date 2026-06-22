@@ -1,0 +1,43 @@
+{
+  "run": "group1 CERTIFYING re-run of Batch 2 (rr2) — Papers 42,43,44,53 + synthesis, 2026-06-21",
+  "purpose": "Re-run of the v4.28.0-remediated Batch 2 + an exhaustive C4 sweep folded in (citation reviewers verify EVERY bibitem) to drain the Batch-2 citation tail in one pass.",
+  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-rr2",
+  "note": "C5/C11/C13/C14/C15 deterministic, run separately. The 4 seeds calibrate the 4 LLM dimensions; citation reviewers ALSO run exhaustive (every bibitem) beyond the seed.",
+  "seeds": [
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex",
+      "catcher": "claims-43",
+      "class": "C14 — the descoped continuum Lorentzian-propinquity convergence (Lorentzian spectral triple on S^3 x R) flipped from 'remains open' to 'is now established'. It is OPEN/descoped; presenting it as established is the zombie class.",
+      "anchor": "S^3 x R — is now established"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
+      "catcher": "citation-42",
+      "class": "C4 — Camporesi-Higuchi bibitem venue corrupted: 'J. Geom. Phys. 20 (1996), 1-18' -> '24 (1998), 1-18' (wrong volume + year; the real paper is JGP 20 (1996) 1-18). No arXiv in the bibitem, so C15 N/A; the LLM citation reviewer must verify the venue/vol/year.",
+      "anchor": "\\textbf{24} (1998), 1--18"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_modular_hamiltonian.py",
+      "catcher": "code-42",
+      "class": "C2 — the four-witness BW period-closure bit-exact assertion 'assert pr[\"max_residual\"] < 1e-12' gutted to '< 1e12' (vacuous; any residual passes, defeats the period-closure check). Backs Paper 42's four-witness/period-2pi claim.",
+      "anchor": "max_residual\"] < 1e12"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "catcher": "synthesis",
+      "class": "C9 — Paper 53 status flipped from 'the finite disk is obstructed by its Dirichlet boundary and convergence is recovered only on the boundaryless plane' to 'convergence is recovered on the finite disk' (re-asserts the WITHDRAWN finite-disk convergence; the genuine carrier is the boundaryless plane).",
+      "anchor": "convergence is recovered on the finite disk"
+    }
+  ],
+  "controls_must_not_flag_material": [
+    {"id": "M1", "what": "p42 four-witness Wick-rotation theorem (BW/Unruh/Sewell/Hartle-Hawking = one theorem, beta=2pi; finite-cutoff bit-exact identity) — genuine, must NOT be flagged."},
+    {"id": "M2", "what": "p43 finite-cutoff Wick-rotation/four-witness result GENUINE; the CONTINUUM Lorentzian propinquity correctly stated OPEN/descoped (do not flag the honest 'remains open')."},
+    {"id": "M3", "what": "p44 BBB Krein operator-system construction (axioms, bit-exact Riemannian limit, envelope-dependent propagation number) — genuine; Lorentzian-metric descoped correctly."},
+    {"id": "M4", "what": "p53 boundaryless-plane Bochner-Riesz convergence (the genuine carrier, Lambda^{-0.6..-0.9}, positivity s>=1/2); the finite disk is OBSTRUCTED (thm:interior (b),(c) withdrawn) — correct, must NOT be re-flagged."},
+    {"id": "M5", "what": "the v4.28.0 (Batch-2 rc2) remediation (p42/p44 C7 state-space GH; p44 C8 upgrade unconditional/4pi; p53 status-note-only-descope fixed in the theorem; hekkelman2022 2111.13865; stempak ETNA 14 (2002)) — correct, must NOT be re-flagged."}
+  ]
+}

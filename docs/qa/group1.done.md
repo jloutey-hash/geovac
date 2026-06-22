@@ -215,3 +215,16 @@ group1 paper restates them (C7).
   `debug/sprint_qa_group1_rerun1b_sweep_memo.md`. **C4 tail now drained + claims/
   code converged — the next clean re-run should certify Batch 1; Batches 2/3 still
   pending (shared bibliography, tail likely reduced).**
+- 2026-06-21 — **Re-run of Batch 2 (Papers 42, 43, 44, 53 + synthesis) = FAIL →
+  REMEDIATED + folded-in C4 sweep** (v4.32.0). Calibrated (sensitivity 4/4,
+  specificity 5/5); exhaustive citation verify folded in (drained Batch-2 C4 in one
+  pass). Genuine fixes: **p42 C5/K hard-prohibition** ("conjectural observation"→
+  "Observation") + C8 abstract/body Lorentzian alignment; **p43 C7 ×2** (Paper-38
+  "qualitative-rate propinquity"→state-space GH); **p44 N_t>1 propagation coverage
+  gap** (stale docstring prop=∞→prop=2; new test passes); **p53 LARGE**
+  (latremoliere2025 = compact-only 1811.10843 → pointed-proper hypertopology
+  2512.03573) + stale header-comment corrected + stein_weiss kernel→means; +11
+  SMALL citation-tail. 3 over-flags reconciled. All 4 compile errors=0/undef=0;
+  C5/C11/C13/C14/C15 PASS. Seed key `group1_rr2_seed_key.json`, memo
+  `debug/sprint_qa_group1_rerun2_memo.md`. **Batch 2 C4 drained + claims/code
+  converged — next clean re-run should certify Batch 2; Batch 3 re-run pending.**

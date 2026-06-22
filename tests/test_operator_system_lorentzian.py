@@ -264,6 +264,16 @@ def test_propagation_number_nmax_2_Nt_3_full_envelope_infinity():
     assert dims[-1] < O.envelope_dim
 
 
+def test_propagation_number_nmax_2_Nt_3_achievable_envelope():
+    """prop = 2 at N_t = 3 (achievable envelope) -- the paper's
+    prop_ach = 2 for ALL N_t >= 1 (not just N_t = 1).  The achievable
+    envelope is dim_Weyl^2 * N_t and O^L^2 fills it (dim seq 42, 192)."""
+    O = LorentzianTruncatedOperatorSystem(n_max=2, N_t=3)
+    prop, dims = O.compute_propagation_number(envelope="achievable", max_k=3)
+    assert prop == 2, f"prop_ach should be 2 at N_t=3; got {prop}"
+    assert dims[-1] == 192  # O^2 fills the achievable envelope dim_Weyl^2 * N_t = 64*3
+
+
 def test_propagation_number_nmax_3_achievable_envelope():
     """prop = 2 at n_max = 3, N_t = 1 under achievable envelope.
 

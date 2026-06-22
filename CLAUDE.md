@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.31.0 (June 21, 2026)
+**Version:** v4.32.0 (June 21, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -131,6 +131,8 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 ## 2. Current Development Frontier
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
+
+- **`/qa group1` re-run Batch 2 (P42/43/44/53) FAIL→remediated + folded-in C4 sweep (2026-06-21, v4.32.0):** calibrated (4/4 sens, 5/5 spec); exhaustive citation verify folded in (drained Batch-2 C4 in one pass). Genuine fixes: **p42 C5/K hard-prohibition** ("conjectural observation"→"Observation") + C8 abstract/body Lorentzian alignment; **p43 C7 ×2** (Paper-38 "qualitative-rate propinquity"→state-space GH); **p44 N_t>1 propagation coverage gap** (stale docstring asserting prop=∞ fixed to prop=2; new `test_propagation_number_nmax_2_Nt_3_achievable_envelope` passes); **p53 LARGE** (latremoliere2025 = compact-only 1811.10843 → pointed-proper hypertopology 2512.03573) + stale header-comment corrected + stein_weiss "kernel positive"→"means positivity-preserving"; +11 SMALL citation-tail (labels/titles/authors). 3 over-flags reconciled. All compile clean; gates PASS. **C4 tail drained — next clean re-run should certify Batch 2.** See CHANGELOG + debug/sprint_qa_group1_rerun2_memo.md.
 
 - **`/qa group1` re-run-2 Batch 1 (P45–49) FAIL→remediated + dedicated C4 sweep (2026-06-21, v4.31.0):** 2nd re-run FAILed (calibrated 4/4 sens, 5/5 spec) but **the v4.30.0 keystone fixes HELD** (strictness "generically", analytic-proof framing); claims/code converged to SMALL residuals (p47 Remark 7.6 + cb-norm; p49 ×4 Umegaki-summary propagation) while **C4 surfaced 2 new LARGE** (p47 hekkelman misattribution, p48 muller fabrication). Per PI: **dedicated exhaustive citation sweep** of 45–49 drained the tail in one pass — ~25 bibitem corrections (wrong titles minguzzi/sakovich/ketterer/nieuviarts/sormani-vega/franco/…, years kostant 1969 / connes-rovelli 2918, authors kubota H./toyota R./ryborz V., fabrications muller→GRG54 + farsi→2404.00240 + martinetti title, 2× hekkelman_mcdonald2024b dup removed). p48 MS-defs PI-caveat **resolved** (p49 independently verified Def 2.3/3.8/4.4 exist). All compile clean; gates PASS. **C4 tail now drained — next clean re-run should certify Batch 1.** See CHANGELOG + debug/sprint_qa_group1_rerun1b_sweep_memo.md.
 

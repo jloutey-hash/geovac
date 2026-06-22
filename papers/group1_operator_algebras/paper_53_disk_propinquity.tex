@@ -17,12 +17,11 @@
 % groups, universal rate), 44 (Lorentzian operator system), 45/46
 % (Lorentzian propinquity), 47 (two-rate de-compactification).
 %
-% Status: FIRST DRAFT (2026-05-29). Interior reconstruction theorem is
-% proved (standard Cesaro-Bessel positivity + average contraction +
-% kernel localisation), verified numerically (interior rate
-% Lambda^{-1.30}, positivity at Cesaro order s>=2, unitality exact).
-% The full-disk propinquity for all of C(disk) is the named open
-% extension via the Paper-47 two-rate de-compactification on the disk.
+% Status: CORRECTED (2026-06). The finite disk is OBSTRUCTED (Dirichlet
+% boundary: positivity fails, min g ~ -0.13; interior rate Lambda^{+0.07},
+% no convergence; the earlier Lambda^{-1.30} was withdrawn). Convergence
+% is recovered ONLY on the boundaryless plane R^2_alpha (Bochner-Riesz,
+% s>=1/2, rate Lambda^{-0.6..-0.9}). thm:interior (b),(c) are plane-only.
 %
 % Built from sprint memos:
 %   debug/b3_disk_backbone_memo.md
@@ -565,8 +564,8 @@ For Ces\`aro order $s>\tfrac12$ (the Bochner--Riesz critical index in
 dimension two) and every radial Schwartz observable $f$, the map
 $\Berez_{\Lambda}^{\R^{2}}$ of~\eqref{eq:plane_berezin} satisfies the
 four reconstruction properties on the boundaryless plane: it is positive
-(the Bochner--Riesz kernel is positive above the critical
-index~\cite{stein_weiss}), contractive and unital after kernel
+(the Bochner--Riesz means are positivity-preserving above the critical
+index~\cite{stein_weiss}; confirmed numerically, $\min g \approx -2\times10^{-4}$), contractive and unital after kernel
 normalisation, and an approximate identity with
 $\supnorm{\Berez_{\Lambda}^{\R^{2}}(f)-f}\le\gamma_{\Lambda}
 \supnorm{\nabla f}$ and $\gamma_{\Lambda}\to0$ at an algebraic rate.
@@ -729,11 +728,10 @@ F.~Latr\'emoli\`ere, ``Quantum metric spaces and the Gromov--Hausdorff
 propinquity,'' \textit{Contemp.~Math.}\ \textbf{676} (2016), 47--133.
 
 \bibitem{latremoliere2025}
-F.~Latr\'emoli\`ere, ``The Gromov--Hausdorff propinquity for metric
-spectral triples,'' \textit{Adv.~Math.}\ \textbf{404} (2022), Paper
-No.~108393 (preprint arXiv:1811.10843); used here for the
-pointed/proper (locally compact) propinquity machinery transported to
-the boundaryless plane.
+F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff hypertopology on
+the class of pointed proper quantum metric spaces,'' arXiv:2512.03573
+(2025); the pointed/proper (locally compact) propinquity machinery
+transported here to the boundaryless plane.
 
 \bibitem{connes_vs2021}
 A.~Connes and W.~D.~van~Suijlekom, ``Spectral truncations in
