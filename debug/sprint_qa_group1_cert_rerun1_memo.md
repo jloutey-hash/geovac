@@ -39,3 +39,16 @@ Deterministic dimension (C5/C11/C12/C13/C14/C15) PASS before and after remediati
 ## 5. Honest scope
 
 This is **FAIL→remediated**, not a certified PASS. The genuine defects (p46/p48 descope zombies, p47 unregistered keystones, 3 citation fabrications/slips) were residuals the rr1/rr1b passes (different reviewer focus) did not surface. A clean calibrated re-run with zero genuine material defects is still required to certify Batch 1. Batches 2 and 3 also still need their clean cert re-runs.
+
+## 6. cert2 (re-run #2, v4.35.1)
+
+Second clean cert re-run after the §1–5 (v4.35.0) remediation. 16-agent panel, **calibrated 5/5 sens (5 FRESH seeds, different sites) / 5/5 spec**. Seed key `debug/qa/group1_cert2_seed_key.json`. Worktree removed, no leak.
+
+**The v4.35.0 cert1 fixes HELD — none re-flagged.** The claims reviewers explicitly recognized the p46/p48 inline descope notes and the p47 proof-by-argument matrix registrations as the correct state (specificity confirmed on the remediation itself, not just the controls).
+
+**Verdict: FAIL (calibrated) → remediated — converging.** Exactly ONE genuine new defect (vs cert1's four):
+- **p49 §11 C4 author misattribution (SMALL):** prose (l.2406–2407) credited arXiv:2007.00230 ("Gravity Dual of Connes Cocycle Flow") to "Bousso, Casini, Fisher, Maldacena" → web-verified **Bousso, Chandrasekaran, Rath, Shahbazi-Moghaddam** (bibitem already correct). Non-load-bearing positioning §. Prose fixed; stale cite key left as NIT.
+
+NITs (not acted): connes_rovelli page 2918→2917; kubota title leading "A"; p47 §7.5 "Λ_prop" labels the SU(2) γ-rate; p47 latremoliere2018 §5-AF inline pointer; stale cite-key years.
+
+**Convergence:** cert1 = 4 genuine (2 LARGE descope zombies + 3 citations) → cert2 = 1 SMALL non-load-bearing citation. One more clean calibrated re-run (zero genuine defects) certifies Batch 1.

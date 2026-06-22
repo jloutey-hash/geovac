@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.35.1] - 2026-06-21
+
+### Changed — `/qa group1` CERTIFYING re-run #2 of Batch 1 (Papers 45–49 + synthesis) FAIL remediated (one SMALL defect)
+
+Second clean certifying re-run of the Lorentzian batch, after the v4.35.0 remediation — a convergence test. 16-agent panel (claims ×5, citation ×5 exhaustive, code ×5, synthesis ×1), throwaway worktree (base HEAD eeac033), removed at end (no seed leaked, real-corpus scan clean). Deterministic dimension PASS.
+
+**Verdict: FAIL (calibrated) → remediated — but converging sharply.** Calibration: sensitivity 5/5 (5 FRESH seeds, different sites from cert1: S-claims-C14 p49 B4' "descoped"→"established"; S-claims-C7 p48 l.526 "state-space GH"→"Latrémolière propinquity"; S-citation-C4 p47 Mondino–Sämann title; S-code-C2 test_wh7_b1_joint l.33 `<1e-10`→`<1e9`; S-synthesis-C9 synth "norm-resolvent"→"metric/propinquity level"), specificity 5/5. **The v4.35.0 cert1 fixes HELD — none was re-flagged** (the claims reviewers explicitly recognized the p46/p48 descope notes and the p47 proof-by-argument registrations as the correct state).
+
+The calibrated panel found exactly **one** genuine new defect (vs cert1's four):
+- **p49 §11 C4 author misattribution (SMALL):** the body prose (l.2406–2407) attributed "Gravity Dual of Connes Cocycle Flow" (arXiv:2007.00230) to "Bousso, Casini, Fisher, and Maldacena" → web-verified actual authors **Bousso, Chandrasekaran, Rath, Shahbazi-Moghaddam** (the bibitem at l.2787 already had the correct authors; only the prose was wrong). Non-load-bearing strategic-positioning section (explicitly disclaims bulk-dual use). Fixed the prose names; the stale cite key `bousso_casini_fisher_maldacena2020` is left as a NIT (internal, not reader-visible, consistent with the cluster's stale-key convention).
+
+Reconcile NITs (not acted): connes_rovelli end-page 2918→2917; kubota title leading "A"; p47 §7.5 "Λ_prop" labels the SU(2) γ-rate constant (relabel suggestion); p47 latremoliere2018 §5-AF inline pointer (non-load-bearing); various stale cite-key years. All NIT.
+
+p49 compiles errors=0/undef=0; C11/C13/C15 group1 PASS. Seed key `debug/qa/group1_cert2_seed_key.json`; memo `debug/sprint_qa_group1_cert_rerun1_memo.md` (§cert2 appended). **Convergence trajectory: cert1 = 4 genuine defects (2 LARGE descope zombies + 3 citations); cert2 = 1 SMALL non-load-bearing citation. One more clean calibrated re-run (zero genuine defects) certifies Batch 1.**
+
 ## [4.35.0] - 2026-06-21
 
 ### Changed — `/qa group1` CERTIFYING re-run of Batch 1 (Papers 45–49 + synthesis) FAIL remediated

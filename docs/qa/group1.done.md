@@ -261,3 +261,12 @@ group1 paper restates them (C7).
   papers compile errors=0/undef=0; C5/C11/C12/C13/C14/C15 PASS. Seed key
   `group1_cert1_seed_key.json`, memo `debug/sprint_qa_group1_cert_rerun1_memo.md`.
   **A clean calibrated re-run (zero genuine defects) is still required to certify Batch 1.**
+- 2026-06-21 — **CERTIFYING re-run #2 of Batch 1 (Papers 45–49 + synthesis) = FAIL →
+  REMEDIATED, ONE SMALL defect** (v4.35.1). 16-agent panel, calibrated (5/5 sens with
+  5 FRESH seeds, 5/5 spec); **the v4.35.0 cert1 fixes HELD (none re-flagged)**. Converged
+  sharply: exactly one genuine new defect — p49 §11 C4 author misattribution
+  (bousso_casini_fisher_maldacena2020 prose "Bousso, Casini, Fisher, Maldacena" →
+  web-verified "Bousso, Chandrasekaran, Rath, Shahbazi-Moghaddam"; non-load-bearing,
+  bibitem already correct). Fixed. p49 compiles errors=0/undef=0; C11/C13/C15 PASS.
+  Seed key `group1_cert2_seed_key.json`. **Trajectory: cert1 = 4 defects (2 LARGE) →
+  cert2 = 1 SMALL. One more clean re-run (zero defects) certifies Batch 1.**

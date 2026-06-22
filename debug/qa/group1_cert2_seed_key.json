@@ -1,0 +1,60 @@
+{
+  "run": "group1_cert2",
+  "description": "CLEAN certifying re-run #2 of Batch 1 (Papers 45/46/47/48/49 + synthesis) — convergence test after the v4.35.0 cert1 remediation. Seeds planted ONLY in worktree ../geovac-qa-seed-group1-cert2 (branch qa-seed-group1-cert2, base HEAD eeac033). NEVER committed to real corpus; worktree removed at end. Fresh seeds (different sites from cert1).",
+  "date": "2026-06-21",
+  "seeds": [
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_49_oslpls_strong_form_bridge.tex",
+      "location": "~l.211 (B4' convergence-transport status)",
+      "defect_class": "C14 descope zombie (descoped result flipped to established)",
+      "planted": "Flipped '(B4') convergence transport, is \\emph{descoped}' -> '... is \\emph{established}'.",
+      "truth": "B4' (convergence transport) is DESCOPED (it would follow from Paper 46's strong-form propinquity bound, which is itself descoped/degenerate).",
+      "expected_catcher": "claims-49"
+    },
+    {
+      "id": "S-claims-C7",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "location": "~l.526 (N_t=1 compact-case agreement)",
+      "defect_class": "C7 trunk-status mislabel (Paper 38 = state-space GH, not propinquity)",
+      "planted": "Flipped 'Paper~38 SU(2) state-space Gromov--Hausdorff hypertopology' -> 'Paper~38 SU(2) Latremoliere propinquity hypertopology'. (Correct mentions at l.1356/1375 are in-paper controls.)",
+      "truth": "Paper 38 = van Suijlekom state-space Gromov-Hausdorff convergence, NOT Latremoliere propinquity.",
+      "expected_catcher": "claims-48"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_47_two_rate_hybrid_convergence.tex",
+      "location": "~l.1573 (mondino_samann2025 bibitem title)",
+      "defect_class": "C4 wrong-attribution (wrong title; arXiv ID unchanged so C15 N/A)",
+      "planted": "Changed title 'Lorentzian Gromov-Hausdorff convergence and pre-compactness' -> 'Gromov-Hausdorff convergence of globally hyperbolic spacetimes' (arXiv:2504.10380 unchanged).",
+      "truth": "arXiv:2504.10380 (Mondino-Samann) is 'Lorentzian Gromov-Hausdorff convergence and pre-compactness'.",
+      "expected_catcher": "citation-47"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_wh7_b1_joint.py",
+      "location": "l.33 (pure-spatial = factor-seminorm identity)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Loosened 'assert abs(L_joint(kron(A,I)) - L_spatial(A)) < 1e-10' -> '< 1e9' (vacuous; defeats the product-carrier joint=spatial check).",
+      "truth": "The joint seminorm on a pure-spatial multiplier equals the spatial seminorm to machine eps; a 1e9 tolerance asserts nothing.",
+      "expected_catcher": "code-45"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "~l.121-122 (Paper 47 de-compactification survival level)",
+      "defect_class": "C9 synthesis overstatement (norm-resolvent -> metric level)",
+      "planted": "Flipped 'Paper 47's de-compactification limit T->infinity survives at the norm-resolvent / spectral level' -> '... survives at the metric / propinquity level'.",
+      "truth": "Only the norm-resolvent / spectral arrow of Paper 47 survives; the metric/propinquity level is DESCOPED.",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_45", "claim": "K+ annihilation = degeneracy theorem (NEGATIVE), product-carrier signature-agnostic", "must_not_flag": true},
+    {"id": "M2", "file": "paper_46", "claim": "C3op closed form sqrt(1-1/n)->1 surviving; strong-form Lorentzian convergence descoped (now with inline descope on informal Main theorem)", "must_not_flag": true},
+    {"id": "M3", "file": "paper_47", "claim": "norm-resolvent outer arrow + three-carrier are proof-by-argument (now registered); metric level descoped", "must_not_flag": true},
+    {"id": "M4", "file": "paper_48", "claim": "N_t=1 reduces to Paper 38 state-space GH (l.1356/1375 correct); SS3 axiom lift categorical/structural (degenerate seminorm), now flagged", "must_not_flag": true},
+    {"id": "M5", "file": "paper_49", "claim": "D_max chain 96/96 load-bearing; strict super-additivity generically; Umegaki illustrative", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "v4.35.0 cert1 fixes are CORRECT and must not be re-flagged: p46 informal-Main-theorem inline (Descoped) note + l.1424 rate-formula relabel; p48 SS1.2+SS3 degeneracy/descope notes; p47 three_carriers proof-by-argument tag + matrix Batch-1 rows; p48/p49 farsi->Collapse/2404.00240; p49 kubota H.; p48 bertozzini title 'Modular Theory, NCG and Quantum Gravity'."
+}
