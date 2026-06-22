@@ -410,11 +410,12 @@ half-integer reflection (both blocks $14$-dimensional because $m_j$
 is half-integer, so there are no reflection-fixed points).
 \end{observation}
 
-Observation~\ref{obs:12_22} was validated by direct restriction of
+Observation~\ref{obs:12_22} is validated by direct restriction of
 $M(s)$ to each reflection block in exact sympy rational arithmetic
-(Sprint~2 Track RH-E, \texttt{debug/hopf\_u1\_block\_test\_memo.md}).
-The product $\det(M_{\text{sym}})\cdot\det(M_{\text{antisym}})$ equals
-the full $\det(M)$ symbolically.
+(\texttt{tests/test\_hopf\_u1\_block.py}, Track RH-E):\ each block
+determinant equals the stated factor polynomial, and the product
+$\det(M_{\text{sym}})\cdot\det(M_{\text{antisym}})$ equals the full
+$\det(M)$ symbolically.
 
 \begin{observation}[Magnetic reflection is Kramers; chirality reflection is Dirac-index--obstructed]
 \label{obs:chirality_obstruction}
@@ -714,7 +715,10 @@ driven by graph volume; as the graph grows, near-regular dense
 sub-blocks appear whose Perron exceeds $\sqrt{q_{\max}}$.  The
 graph-RH for GeoVac is a finite-size statement, secured for
 $n_{\max},N_{\max}\le 3$ and failing asymptotically for the three
-dense families.  Full data at \texttt{debug/data/alon\_boppana\_sweep.json}.
+dense families.  The finite-size sign flip (Ramanujan at small size,
+crossing at $V\approx 30$--$60$) is recomputed from the live graph
+spectra in \texttt{tests/test\_paper29\_bound\_crossing.py}; full data
+at \texttt{debug/data/alon\_boppana\_sweep.json}.
 
 \paragraph{Hopf-quotient block decomposition --- validated (Sprint~2, RH-E).}
 Observation~\ref{obs:12_22} has been verified by direct restriction of

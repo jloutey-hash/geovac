@@ -471,7 +471,9 @@ not an independent prediction of CFT physics.
 The von Neumann entropy of the wedge KMS state $\rhoW$ at canonical
 BW normalization $\beta = 2\pi$ is computed directly by
 diagonalizing $\Kalpha$ and applying $S(\rhoW) = -\Tr[\rhoW \log
-\rhoW]$. Sprint BH-Phase0
+\rhoW]$ (recomputed from the live BW construction, the slope-$2$
+scaling, the $\coth 1 - \log(2\sinh 1)$ constant, and the area-law
+rejection, in \texttt{tests/test\_paper50\_wedge\_kms.py}). Sprint BH-Phase0
 (2026-05-22)~\cite{debug:bh_phase0} first reported a small-cutoff
 log-linear fit $S(\rhoW) \approx 1.94 \log\nmax + 0.56$ over $\nmax
 \in \{2, \dots, 7\}$. A subsequent re-analysis (forcing-catalogue
@@ -642,7 +644,9 @@ truncated Camporesi--Higuchi spectral triple. Its spectrum is
 integer-valued in the canonical $(2\pi)^{-1}$ rescaling, with
 multiplicity $g(2k + 1) = (\nmax - k)(\nmax - k + 1)$. The
 modular flow $\sigma_{2\pi}(\Op) = \Op$ closes
-bit-exactly at every tested $\nmax$~\cite{paper42}.
+bit-exactly at every tested $\nmax$~\cite{paper42}. The odd-integer
+spectrum, the multiplicities, and the $2\pi$ closure are verified
+from the live BW construction in \texttt{tests/test\_paper50\_wedge\_kms.py}.
 
 \begin{theorem}[CHM identification at finite cutoff]
 \label{thm:chm_identification}

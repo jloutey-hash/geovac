@@ -11,7 +11,7 @@ import pytest
 import numpy as np
 import sympy as sp
 
-from debug.archive.misc.hopf_u1_block_test import (
+from _hopf_u1_block_data import (
     bargmann_scalar_data,
     dirac_ruleB_data,
     bargmann_m_reflection,
