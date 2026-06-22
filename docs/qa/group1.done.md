@@ -283,3 +283,11 @@ group1 paper restates them (C7).
   **Systemic finding: the Lorentzian cluster has Status-note-only descopes on many theorems;
   a dedicated inline descope-tagging sweep of P46/P47/P48 is recommended before cert4
   (efficient vs blind re-runs).**
+- 2026-06-22 — **Descope-tagging sweep DONE** (v4.37.0, PI-directed). Enumerated every
+  theorem/prop in P45–49; tagged the 6 metric-level-convergence statements with
+  Status-note-only descopes (p47 thm:inner; p48 thm:bridge-B4 / relaxed_triangle /
+  coincidence / inframetric; p46 prop:reach_height_op). Surviving results (norm-resolvent,
+  N_t=1, prop=2, B1/B3, D_max chain, B3' cardinality bound) left untagged. All compile clean;
+  C5/C11/C13/C15 PASS. Memo `debug/sprint_qa_group1_descope_sweep_memo.md`. **The
+  metric-convergence statements now each carry an inline descope tag — cert4 (the next
+  calibrated re-run) should converge to a clean certified PASS.**

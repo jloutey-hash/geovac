@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.37.0] - 2026-06-22
+
+### Changed — group1 Lorentzian-cluster inline descope-tagging sweep (drain the recurring zombie tail)
+
+PI-directed dedicated sweep, chosen over a blind cert4. The cert re-runs were not converging because the Lorentzian cluster (Papers 45–49) carries many theorem statements whose descope lives only in a distant Status note, not inline on the statement — so each fresh adversarial read surfaced another un-tagged metric-level-convergence claim (cert1 found the §3 axiom lift; cert3 found B4/T2). This sweep drains the tail in one pass, analogous to the folded-in C4 citation sweeps.
+
+Method: enumerated EVERY `\begin{theorem}/proposition/corollary` environment in all five papers (done directly via grep+read after the enumeration agents hit a transient classifier outage), classified each as METRIC-CONV-DESCOPED vs SURVIVING vs OTHER, and checked whether the statement itself (title or adjacent clause, not a distant Status note) carries an inline descope tag.
+
+Tagged the 6 metric-level-convergence statements that lacked an inline tag:
+- **p47 `thm:inner`** — asserts the inner-arrow propinquity convergence (Λ_prop ≤ C₃·γ→0) consuming Paper 45's degenerate Λ_prop; title → "Inner arrow — descoped" + inline caveat (only the outer norm-resolvent arrow survives).
+- **p48 `thm:bridge` (B4) item** — the Bridge Theorem's convergence-transport bullet (the abstract Bridge *summary* was tagged in cert3, but not the theorem statement itself); added "(descoped)" + the degenerate-Krein-metric caveat.
+- **p48 `thm:relaxed_triangle`, `thm:coincidence`, `thm:inframetric`** — the three Krein-metametric-property theorems in the post-§3 section (not covered by cert1's §3 descope note); each now carries an inline structural/categorical note (notably `thm:coincidence`'s "d=0 ⇒ isometry" — the leg degeneracy actually breaks — is flagged conditional on substrate repair).
+- **p46 `prop:reach_height_op`** — states the four Latrémolière propinquity constituents on the degenerate substrate; noted as rate-formula quantities feeding the descoped `thm:main`, not a metric convergence.
+
+Deliberately NOT tagged (genuinely surviving — tagging them would falsely descope established results): p47 thm:outer / thm:three_carriers (norm-resolvent, proof-by-argument), p47 thm:main (norm-resolvent convergence, with the R_inner term descoped in the adjacent Remark), p48 thm:compact_agreement / N_t=1 reduction / prop=2 / B1 structural / B3 pre-compactness / T1 (wedge-is-a-pLPS structural) / T4 (four-witness thermal) / T5 (Pythagorean foliations), p49 B1'/B2'/B3' (the B3' cardinality bound is combinatorial, not metric-dependent) / TICI / D_max chain, p45 K⁺ annihilation (negative) / product-carrier (signature-agnostic). P45 and P49's descoped items (P45 is the negative-result paper; P49 B4' DESCOPED) were already correctly inline-tagged.
+
+p46/p47/p48 compile errors=0/undef=0; C5/C11/C13/C15 group1 PASS. Memo `debug/sprint_qa_group1_descope_sweep_memo.md`. **Every metric-level-convergence statement in the cluster now carries an inline descope tag; cert4 should converge to a clean PASS.**
+
 ## [4.36.0] - 2026-06-22
 
 ### Changed — `/qa group1` CERTIFYING re-run #3 of Batch 1 (Papers 45–49 + synthesis) FAIL remediated (3 defects) + systemic descope-tagging gap identified
