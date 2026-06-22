@@ -1,0 +1,60 @@
+{
+  "run": "group1_cert1",
+  "description": "CLEAN certifying re-run of Batch 1 (Papers 45/46/47/48/49 + synthesis). Goal: convert FAIL->remediated into a certified PASS. Seeds planted ONLY in worktree ../geovac-qa-seed-group1-cert1 (branch qa-seed-group1-cert1, base HEAD 6aa0f54). NEVER committed to real corpus; worktree removed at end.",
+  "date": "2026-06-21",
+  "seeds": [
+    {
+      "id": "S-claims-C14",
+      "file": "papers/group1_operator_algebras/paper_45_lorentzian_propinquity.tex",
+      "location": "~l.181 (abstract retraction sentence)",
+      "defect_class": "C14 descope zombie (retracted Lorentzian-convergence presented as established)",
+      "planted": "Flipped 'that claim is retracted (Remark~ref{rem:history})' -> 'that claim is now established as the first Lorentzian propinquity convergence theorem (Theorem~ref{thm:kplus_annihilation})'.",
+      "truth": "Paper 45 is the K+ annihilation/degeneracy theorem (a NEGATIVE result); the Lorentzian-propinquity-convergence claim was RETRACTED.",
+      "expected_catcher": "claims-45"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_p45_kplus_degeneracy.py",
+      "location": "l.80 (T3 restricted-seminorm-vanishes assertion)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Loosened 'assert restr.max() < TOL' -> 'assert restr.max() < 1e9' (vacuous; defeats the degeneracy/annihilation check).",
+      "truth": "The restricted Lipschitz seminorm vanishes identically (restr.max() ~ machine eps); a 1e9 tolerance asserts nothing.",
+      "expected_catcher": "code-45"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_49_oslpls_strong_form_bridge.tex",
+      "location": "~l.2808 (che_perales_sormani2025 bibitem title)",
+      "defect_class": "C4 wrong-attribution (wrong title; arXiv ID unchanged so C15 N/A)",
+      "planted": "Changed title 'Gromov's compactness theorem for the intrinsic timed-Hausdorff distance' -> 'Stability of the null distance under Lorentzian Gromov-Hausdorff convergence' (arXiv:2510.13069 unchanged).",
+      "truth": "arXiv:2510.13069 (Che-Perales-Sormani) is 'Gromov's compactness theorem for the intrinsic timed-Hausdorff distance'.",
+      "expected_catcher": "citation-49"
+    },
+    {
+      "id": "S-claims-C7",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "location": "~l.1364 (Krein-pointed hypertopology extension remark)",
+      "defect_class": "C7 trunk-status mislabel (Paper 38 = state-space GH, not propinquity)",
+      "planted": "Flipped 'Paper~38's state-space Gromov--Hausdorff construction' -> 'Paper~38's Latremoliere propinquity construction'. (Other correct 'Paper 38 state-space GH' mentions at l.521/1344 are in-paper controls.)",
+      "truth": "Paper 38 = van Suijlekom state-space Gromov-Hausdorff convergence, NOT Latremoliere propinquity.",
+      "expected_catcher": "claims-48"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "~l.118 (Lorentzian descope sentence)",
+      "defect_class": "C9 synthesis overstatement (retracted result presented as re-established)",
+      "planted": "Flipped 'was retracted in June 2026' -> 'was re-established in June 2026' for the Lorentzian convergence claim of Papers 46/48/49.",
+      "truth": "The Lorentzian convergence claim was RETRACTED (Papers 45/46 descoped, 47/48/49 partial); not re-established.",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_45", "claim": "K+ annihilation = degeneracy theorem (NEGATIVE result), correctly stated", "must_not_flag": true},
+    {"id": "M2", "file": "paper_47", "claim": "norm-resolvent arrow survives (PARTIAL), Lorentzian metric-level descoped", "must_not_flag": true},
+    {"id": "M3", "file": "paper_48", "claim": "Krein PPQMS reduces bit-exactly to Paper 38 state-space GH (l.521/1344 correct)", "must_not_flag": true},
+    {"id": "M4", "file": "paper_49", "claim": "D_max chain inequality (96/96); strict super-additivity 'generically'; Umegaki panel illustrative", "must_not_flag": true},
+    {"id": "M5", "file": "synthesis", "claim": "Lorentzian descope (45/46 DESCOPED, 47/48/49 PARTIAL) correctly stated at l.135/147/153", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "v4.30.0/v4.31.0 rr1/rr1b remediation of 45-49 (strictness 'generically', analytic-proof framing, ~25 bibitem corrections, Status-note descopes) is CORRECT and must not be re-flagged."
+}

@@ -245,3 +245,19 @@ group1 paper restates them (C7).
   C5/C11/C13/C14/C15 PASS. Seed key `group1_rr3_seed_key.json`, memo
   `debug/sprint_qa_group1_rerun3_memo.md`. **All three batch re-runs now done; each
   needs one CLEAN re-run to convert FAIL→remediated into a certified PASS.**
+- 2026-06-21 — **CERTIFYING re-run #1 of Batch 1 (Papers 45–49 + synthesis) = FAIL →
+  REMEDIATED** (v4.35.0). First clean cert re-run; 16-agent panel, calibrated
+  (sensitivity 5/5, specificity 5/5) — but surfaced genuine defects beyond the seeds
+  (the convergence reality), so still FAIL→remediated, not yet PASS. Genuine fixes:
+  **p46 C14 LARGE** (informal Main theorem re-asserted withdrawn strong-form Lorentzian
+  quantum-GH convergence as a live metric distance → inline descope) + l.1424
+  "convergence theorem"→"(descoped) rate-formula result"; **p48 C14** (§3 "nine
+  Latrémolière axioms at theorem-grade rigor" → categorical/structural lift,
+  degenerate-seminorm descope at §1.2 + §3 opener); **p47 C1** (thm:outer/thm:three_carriers
+  registered proof-by-argument + three_carriers inline-tagged analytic; matrix Batch-1
+  rows added — 45–49 were unregistered); **C4 ×3** (farsi_latremoliere2024 "crossed
+  products" fabrication→Collapse/2404.00240 in p48+p49; kubota T.→H.; bertozzini
+  title→"Modular Theory, NCG and Quantum Gravity", all web-verified). All 4 edited
+  papers compile errors=0/undef=0; C5/C11/C12/C13/C14/C15 PASS. Seed key
+  `group1_cert1_seed_key.json`, memo `debug/sprint_qa_group1_cert_rerun1_memo.md`.
+  **A clean calibrated re-run (zero genuine defects) is still required to certify Batch 1.**
