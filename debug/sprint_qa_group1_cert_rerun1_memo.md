@@ -151,3 +151,24 @@ NIT fixed: p46 "C₃=1 backed by test_p38_action_seminorm.py" (×2, l.887/1529) 
 Verification: p45/p46/p47/synthesis compile errors=0, no undefined cites/refs; C5/C11/C13/C14/C15 PASS; test_lorentzian_propinquity.py 33 passed/2 skipped.
 
 **Lesson:** the convergence loop is working as designed — each targeted pass validates the prior pass's rework and finds its misses. rem1 fixed p46 + transported to p45; rem2 found the p45 transport had 3 residual sites (a paper proof leg, the paper's own table, and the production wiring) + 3 pre-existing descope-zombies. The CODE dimension again caught what claims accepted (the production `c_lipschitz_joint` wiring). A fresh full cert6 (with citation) is still what certifies; the next targeted pass should re-validate rem2.
+
+---
+
+## rem3 — CODE-DIMENSION-ONLY validation pass (v4.42.1, 2026-06-22) — first MATERIAL-clean dimension
+
+PI-directed narrow re-validation of ONLY the code/test-backing dimension (C1/C2). Code has been the high-yield dimension (caught the p45 fabrication in rem1 + the production c_lipschitz_joint wiring in rem2, both of which claims accepted). Job: confirm the rem2 code fixes held + the code dimension is MATERIAL-clean. **Validation pass, NOT a cert** (1 of 5 gating dimensions ⇒ INCONCLUSIVE-for-cert by construction).
+
+Base HEAD ecdb61f (v4.42.0). 5 code-reviewers (45–49), 4 code seeds (one per paper's backing test, all vacuous-tolerance, fresh sites). Calibrated: **4/4 sensitivity** — all 4 seeds caught (p45 `restr.max()<1e9` by code-45; p46 `sup>-1` by code-46; p48 `prop>=-1` by code-48 [graded MATERIAL — no backstop in that file]; p49 umegaki `>-1` by code-49). The panel graded by materiality correctly (NIT where a sibling/companion assertion backstops the gutted one; MATERIAL where not). **Specificity held** — the rem2 code fixes confirmed holding: production `c_lipschitz_joint = C_LIPSCHITZ_JOINT_ASYMPTOTIC = 1.0` (not the √-value), the withdrawn `c3_joint_panel_sup` unwired (documented-historical only), `test_paper46_c3_operator_system.py` envelope-max tight at <1e-9.
+
+**Result: ZERO new MATERIAL code defects in the real corpus — the first pass to come back MATERIAL-clean on its dimension.** The convergence has landed: rem3's genuine findings are all NITs (the long tail of the same classes).
+
+Genuine real-corpus NITs drained this pass (test/code hygiene, in scope):
+- **gamma_su2_residual tautology** (test_lorentzian_propinquity_foundation.py:440; 3rd flag — cert5/rem2/rem3): `== 0.0` on a function-vs-itself residual. Reframed the comment — it's a determinism/self-consistency check, NOT an independent Paper-38 cross-check (the genuine cross-check is test_joint_gamma_panel_paper38_consistency). Assertion unchanged (valid determinism check).
+- **`paper_38_bound` √-mis-attribution** (test_lorentzian_lichnerowicz.py, 10 occurrences): the per-harmonic √-form (N−1)/√(N²−1) was named "paper_38_bound" — but Paper 38 L3's constant is C₃=1, and the op-norm metric-reading √(1−1/n_max) is withdrawn. Renamed → `per_harmonic_bound` + docstrings clarified it's a finite-cutoff L¹-gradient bound (≤1), not the L3 constant. (The test itself is valid — the √-form bounds the L¹-normalized ratio; only the name mis-attributed.)
+- **test_paper45_asymptotic_rate.py:44 docstring** "C_3 = sqrt(1−1/n_max) ≤ 1" → C₃=1 (Paper 38 L3; √-form withdrawn).
+
+Logged, NOT fixed (out of code-only scope): p49 Table "joint propinquity rate" label reports the SU(2) factor not the joint rate (paper-prose, descoped B4′; for the next claims pass). The Umegaki "only jeffreys >50" finding was a SEED ARTIFACT (real corpus l.104 asserts umegaki >50 genuinely).
+
+Verification: tests pass (lichnerowicz 34/7-skip, asymptotic_rate green); C5/C13/C14 PASS. No assertion logic changed (comment/docstring + 1 variable rename).
+
+**Lesson:** the targeted-narrowing worked exactly as intended — three remediation laps (rem1 claims+code+synth → rem2 same → rem3 code-only) converged the code dimension to MATERIAL-clean, with each lap's findings narrower than the last (rem1: a fabrication; rem2: that fix's residuals; rem3: only hygiene NITs). cert6 (full, with citation) remains what certifies.

@@ -41,9 +41,11 @@ that we CAN build equals gamma_joint_su2 exactly:
 
    Lambda_bound = max(C_3 * gamma_su2, gamma_su2, gamma_su2, 0) = gamma_su2.
 
-(C_3 = sqrt(1 - 1/n_max) <= 1, so the height term is dominated by the
-reach terms; see compute_lorentzian_propinquity_bound in
-geovac/lorentzian_propinquity_compact_temporal.py.)
+(C_3 = 1, the Paper 38 Lemma L3 comparison constant (gradient seminorm);
+the height term is dominated by the reach terms. The earlier
+sqrt(1 - 1/n_max) envelope form is withdrawn (op-norm-false; see
+test_paper46_c3_operator_system.py). See compute_lorentzian_propinquity_bound
+in geovac/lorentzian_propinquity_compact_temporal.py.)
 
 The SU(2) factor gamma^SU_n_max is the Paper 38 L2 quantitative rate, which
 is independent of N_t and which can be computed without building the

@@ -1,0 +1,55 @@
+{
+  "run": "group1_rem3",
+  "type": "CODE-DIMENSION-ONLY VALIDATION PASS (not a certification)",
+  "description": "PI-directed narrow re-validation of ONLY the code/test-backing dimension (C1/C2). Code has been the high-yield dimension (caught the p45 fabrication in rem1 + the production c_lipschitz_joint wiring in rem2, both of which the claims reviewer accepted). This pass confirms the rem2 code fixes held (production c_lipschitz_joint = C_3 = 1 not the sqrt-value; test_paper46_c3_operator_system.py envelope-max-commutes tight at <1e-9; the relabeled withdrawn-formula tests; the foundation test ==0.0) and that no test still vacuously/false-positively backs a withdrawn quantity. Per the /qa all-dimensions rule this exercises 1 of 5 gating dimensions => INCONCLUSIVE-for-cert by construction; it is a code-dimension validation only. Seeds in worktree ../geovac-qa-seed-group1-rem3 (branch qa-seed-group1-rem3, base HEAD ecdb61f = v4.42.0). NEVER committed; worktree removed at end. Seeds are ALL code/C2 (vacuous tolerances), one per paper-with-substantive-tests, at NEW sites distinct from cert5/rem1/rem2.",
+  "date": "2026-06-22",
+  "base_head": "ecdb61f",
+  "dimensions_exercised": ["code", "deterministic"],
+  "dimensions_skipped": ["claims (per-paper)", "citation (per-paper)", "synthesis"],
+  "seeds": [
+    {
+      "id": "S-code-p45",
+      "file": "tests/test_p45_kplus_degeneracy.py",
+      "location": "l.80 (T3: restricted seminorm identically zero -- the K+ annihilation keystone)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert restr.max() < TOL' -> 'assert restr.max() < 1e9' (vacuous; restr.max() is a non-negative norm, so <1e9 asserts nothing). Guts the load-bearing annihilation check (restricted seminorm == 0).",
+      "truth": "The K+-restricted Lipschitz seminorm VANISHES identically (restr.max() < TOL=machine-eps); a 1e9 tolerance defeats the annihilation keystone's backing.",
+      "expected_catcher": "code-45"
+    },
+    {
+      "id": "S-code-p46",
+      "file": "tests/test_paper46_c3_operator_system.py",
+      "location": "l.83 (test_sup_opnorm_ratio_nowhere_near_sqrt_envelope)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert sup > np.sqrt(1 - 1 / n_max) + 0.5' -> 'assert sup > -1' (vacuous; sup is a non-negative op-norm ratio, so > -1 always true). Different site from rem2 (l.103 envelope-max).",
+      "truth": "The sup op-norm ratio is nowhere near sqrt(1-1/n_max) (it is 1.74/2.74/3.14, exceeding it by >0.5) -- one of the three pillars refuting the withdrawn sqrt-constant. A '> -1' tolerance asserts nothing.",
+      "expected_catcher": "code-46"
+    },
+    {
+      "id": "S-code-p48",
+      "file": "tests/test_lorentzian_propinquity_foundation.py",
+      "location": "l.215 (test propagation-number achievable envelope)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert prop == 2' -> 'assert prop >= -1' (vacuous; prop is -1 for non-achievable or a positive int, so >= -1 always true). Different site from rem1 (l.202 max_residual).",
+      "truth": "The propagation number is exactly 2 on the achievable envelope (load-bearing for p48 B3 pre-compactness). A '>= -1' tolerance asserts nothing and would pass even for prop=-1 (non-achievable).",
+      "expected_catcher": "code-48"
+    },
+    {
+      "id": "S-code-p49",
+      "file": "tests/test_wh7_b3_phase3_sprint2.py",
+      "location": "l.104 (test_umegaki_chain_fails_generically)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert ...[\"umegaki\"][\"chain_violations\"] > 50' -> '... > -1' (vacuous; chain_violations is a non-negative count, so > -1 always true). Different site from cert5 (l.96 dmax chain_violations).",
+      "truth": "The Umegaki chain FAILS generically (90/96 violations > 50) -- the load-bearing contrast that demotes the Umegaki panel to illustrative and motivates the D_max replacement. A '> -1' tolerance asserts nothing.",
+      "expected_catcher": "code-49"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "p45 backing", "claim": "K+ annihilation (restr seminorm == 0) genuinely bit-exact; product-carrier signature-agnostic. Do NOT flag the genuine annihilation/product-carrier tests.", "must_not_flag": true},
+    {"id": "M2", "file": "p46 backing (POST-rem2)", "claim": "test_paper46_c3_operator_system.py envelope-max-commutes is TIGHT (<1e-9, rem2 fix held); substrate-spans + op-norm-ratio tests genuine; production c_lipschitz_joint = C_3 = 1 (rem2 fix). Do NOT flag these as wrong.", "must_not_flag": true},
+    {"id": "M3", "file": "p48 backing", "claim": "N_t=1 bit-exact reduction (max_residual==0.0, rem1-era; foundation test l.202 is ==0.0 in real corpus); prop=2 genuine.", "must_not_flag": true},
+    {"id": "M4", "file": "p49 backing", "claim": "D_max chain 96/96 (chain_violations==0) genuine; N_t=1 residual ==0.0.", "must_not_flag": true},
+    {"id": "M5", "file": "withdrawn-formula tests", "claim": "the 3 relabeled test_c3_joint_panel_sup_*_withdrawn_formula tests + c_lipschitz_joint==1.0 assertion are the CORRECT post-rem2 state (the sqrt-arithmetic is documented-withdrawn, C_3=1 is the constant). Do NOT recommend restoring the sqrt as the constant.", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "ALL prior fixes through v4.42.0 are CORRECT and must not be re-flagged. Especially the rem1/rem2 code fixes: (rem1) p45 C3 transport, c3_joint_panel_sup docstring reframe; (rem2) production build() c_lipschitz_joint -> C_LIPSCHITZ_JOINT_ASYMPTOTIC=1.0 (C_3=1), test_paper46_c3_operator_system.py envelope-max tight <1e-9, the 3 relabeled withdrawn-formula tests, test_lorentzian_propinquity.py c_lipschitz assertion ==1.0. The sqrt(1-1/nmax) per-harmonic/envelope formula is WITHDRAWN as the C3 constant (C_3=1 is correct); c3_joint_panel_sup computing the sqrt-arithmetic as a documented-historical function (no longer wired live) is CORRECT. che_perales venue DGA 103 (2026) correct. Only the code/C2 dimension is exercised this pass."
+}

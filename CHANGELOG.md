@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.42.1] - 2026-06-22
+
+### Changed
+- **`/qa group1` rem3 — CODE-DIMENSION-ONLY validation pass (PI-directed).** Narrow re-validation of only the code/test-backing dimension (C1/C2) — code has been the high-yield dimension twice (it caught the p45 C3^op fabrication in rem1 and the production `c_lipschitz_joint` wiring in rem2, both of which the claims reviewer accepted). 5 code-reviewers (Papers 45–49), 4 vacuous-tolerance seeds (one per paper's backing test, fresh sites). **Validation pass, NOT a certification** (1 of 5 gating dimensions exercised ⇒ INCONCLUSIVE-for-cert by the all-dimensions rule).
+- Calibrated **4/4 sensitivity** — all seeds caught (p45 annihilation `restr.max()<1e9` by code-45; p46 `sup>-1` by code-46; p48 `prop>=-1` by code-48, correctly graded MATERIAL since no backstop in that file; p49 umegaki `>-1` by code-49). The panel graded by materiality correctly (NIT where a sibling/companion assertion backstops the gutted one). **Specificity held** — the rem2 code fixes confirmed holding: production `c_lipschitz_joint = C_LIPSCHITZ_JOINT_ASYMPTOTIC = 1.0` (not the √-value), the withdrawn `c3_joint_panel_sup` unwired, `test_paper46_c3_operator_system.py` envelope-max tight at `<1e-9`.
+- **Result: ZERO new MATERIAL code defects in the real corpus — the first /qa pass to come back MATERIAL-clean on its dimension.** The convergence has landed.
+
+### Closed (recurring test/code-hygiene NITs drained)
+- **gamma_su2_residual tautology** (`test_lorentzian_propinquity_foundation.py:438–440`; 3rd flag — cert5/rem2/rem3): the `== 0.0` residual compares `gamma_rate_su2` to itself (function-vs-itself). Reframed the comment — it is a determinism/self-consistency check, NOT an independent Paper-38 cross-check (the genuine cross-check is `test_joint_gamma_panel_paper38_consistency`). Assertion unchanged (a valid determinism check).
+- **`paper_38_bound` √-mis-attribution** (`test_lorentzian_lichnerowicz.py`, 10 occurrences): the per-harmonic √-form `(N−1)/√(N²−1)` was named "paper_38_bound", but Paper 38 L3's constant is C₃=1 and the op-norm metric-reading `√(1−1/n_max)` is withdrawn. Renamed → `per_harmonic_bound` + docstrings clarified it is a finite-cutoff L¹-gradient bound (≤1), not the L3 constant. (The test is valid — the √-form bounds the L¹-normalized ratio; only the name mis-attributed.)
+- **`test_paper45_asymptotic_rate.py:44` docstring** "C_3 = √(1−1/n_max) ≤ 1" → "C₃=1 (Paper 38 L3); the √(1−1/n_max) envelope form is withdrawn".
+
+### Logged, not fixed (out of code-only scope)
+- p49 Table "joint propinquity rate" label reports the SU(2) factor (not the joint rate `γ_su2 + γ_u1`); descoped B4′, paper-prose — for the next claims pass. (The Umegaki "only jeffreys >50" reviewer finding was a seed artifact — the real-corpus assertion is `umegaki > 50`, genuine.)
+
+### Verification
+- `test_lorentzian_lichnerowicz.py` 34 passed / 7 skipped; `test_paper45_asymptotic_rate.py` green; no residual `paper_38_bound`. C5/C13/C14 group1 PASS. No assertion logic changed (comments/docstrings + one variable rename).
+- **Lesson:** the targeted-narrowing worked as intended — three laps (rem1 claims+code+synth → rem2 same → rem3 code-only) converged the code dimension to MATERIAL-clean, each lap's findings narrower than the last (rem1: a fabrication; rem2: that fix's residuals; rem3: only hygiene NITs). cert6 (full, with citation) remains what certifies.
+
 ## [4.42.0] - 2026-06-22
 
 ### Changed

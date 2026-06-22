@@ -187,13 +187,17 @@ def test_temporal_only_multiplier_zero_commutator(n_max, N_t):
 
 @pytest.mark.parametrize("n_max,N_t", [(2, 3), (3, 5)])
 def test_joint_lichnerowicz_L1_single_tensor(n_max, N_t):
-    """For pure-tensor a = a_s (x) a_t: ||[D_L, a]||_op <= bound * RHS_L1.
+    """For pure-tensor a = a_s (x) a_t: ||[D_L, a]||_op <= per_harmonic_bound * RHS_L1.
 
-    Where bound = sup_{N<=n_max} (N-1)/sqrt(N^2-1) and
-    RHS_L1 = ||grad_x f_s||_inf * ||f_t||_inf + ||f_s||_inf * ||d_t f_t||_inf.
-
-    Since the LHS = spatial Paper 38 bound x ||a_t||_op, and ||a_t||_op =
-    ||f_t||_inf for momentum-diagonal a_t, the L^1 RHS upper bounds the LHS.
+    Where per_harmonic_bound = sup_{N<=n_max} (N-1)/sqrt(N^2-1) is the
+    finite-cutoff per-harmonic envelope quantity (<= 1), used here only as an
+    L^1-gradient-normalized upper bound. It is NOT the Paper 38 Lemma L3
+    comparison constant (that is C_3 = 1, gradient seminorm), and NOT the
+    withdrawn op-norm metric-constant sqrt(1-1/n_max) (op-norm-false; see
+    test_paper46_c3_operator_system.py). RHS_L1 =
+    ||grad_x f_s||_inf * ||f_t||_inf + ||f_s||_inf * ||d_t f_t||_inf;
+    since ||a_t||_op = ||f_t||_inf for momentum-diagonal a_t, the L^1 RHS
+    upper bounds the LHS.
     """
     from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_y3
 
@@ -202,7 +206,7 @@ def test_joint_lichnerowicz_L1_single_tensor(n_max, N_t):
     op_sys = CompactTemporalTruncatedOperatorSystem(n_max=n_max, N_t=N_t, T=T)
     D_L = lorentzian_dirac_compact_matrix(krein)
 
-    paper_38_bound = max(
+    per_harmonic_bound = max(
         (N - 1) / float(np.sqrt(N**2 - 1)) for N in range(2, n_max + 1)
     )
 
@@ -240,8 +244,8 @@ def test_joint_lichnerowicz_L1_single_tensor(n_max, N_t):
         # Bound holds with margin (the rough ||f_s||_inf ≤ 1 makes the bound
         # only slightly tighter; the L^1 bound is by construction looser
         # than the spatial-only bound)
-        assert ratio <= paper_38_bound + 1e-8, (
-            f"L^1 bound violated at {label}: {ratio:.4f} > {paper_38_bound:.4f}"
+        assert ratio <= per_harmonic_bound + 1e-8, (
+            f"L^1 bound violated at {label}: {ratio:.4f} > {per_harmonic_bound:.4f}"
         )
 
 
@@ -260,7 +264,7 @@ def test_joint_lichnerowicz_L2_single_tensor(n_max, N_t):
     op_sys = CompactTemporalTruncatedOperatorSystem(n_max=n_max, N_t=N_t, T=T)
     D_L = lorentzian_dirac_compact_matrix(krein)
 
-    paper_38_bound = max(
+    per_harmonic_bound = max(
         (N - 1) / float(np.sqrt(N**2 - 1)) for N in range(2, n_max + 1)
     )
 
@@ -292,8 +296,8 @@ def test_joint_lichnerowicz_L2_single_tensor(n_max, N_t):
         if rhs_L2 < 1e-14:
             continue
         ratio = lhs / rhs_L2
-        assert ratio <= paper_38_bound + 1e-8, (
-            f"L^2 bound violated at {label}: {ratio:.4f} > {paper_38_bound:.4f}"
+        assert ratio <= per_harmonic_bound + 1e-8, (
+            f"L^2 bound violated at {label}: {ratio:.4f} > {per_harmonic_bound:.4f}"
         )
 
 
@@ -303,8 +307,10 @@ def test_joint_lichnerowicz_L2_single_tensor(n_max, N_t):
 
 
 def test_asymptotic_tightness_closed_form_bound():
-    """The closed-form bound (N-1)/sqrt(N^2-1) is monotone increasing in N
-    and approaches 1 from below as N -> infinity.
+    """The per-harmonic form (N-1)/sqrt(N^2-1) is monotone increasing in N
+    and approaches 1 from below as N -> infinity. (This is the finite-cutoff
+    per-harmonic envelope quantity, not the Paper 38 L3 constant C_3 = 1; the
+    op-norm metric-constant reading sqrt(1-1/n_max) is withdrawn.)
     """
     bounds = [
         (N - 1) / float(np.sqrt(N**2 - 1)) for N in range(2, 200)
@@ -344,7 +350,7 @@ def test_C3_independent_of_Nt(n_max):
     from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_y3
 
     T = 2.0 * np.pi
-    paper_38_bound = max(
+    per_harmonic_bound = max(
         (N - 1) / float(np.sqrt(N**2 - 1)) for N in range(2, n_max + 1)
     )
     # Cache Lipschitz norms
@@ -410,7 +416,7 @@ def test_random_combinations_bound(n_max, N_t, seed):
     op_sys = CompactTemporalTruncatedOperatorSystem(n_max=n_max, N_t=N_t, T=T)
     D_L = lorentzian_dirac_compact_matrix(krein)
 
-    paper_38_bound = max(
+    per_harmonic_bound = max(
         (N - 1) / float(np.sqrt(N**2 - 1)) for N in range(2, n_max + 1)
     )
 
@@ -468,8 +474,8 @@ def test_random_combinations_bound(n_max, N_t, seed):
         if rhs_L1 < 1e-14:
             continue
         ratio = lhs / rhs_L1
-        assert ratio <= paper_38_bound + 1e-6, (
-            f"Random combo ratio {ratio:.4f} > bound {paper_38_bound:.4f}"
+        assert ratio <= per_harmonic_bound + 1e-6, (
+            f"Random combo ratio {ratio:.4f} > bound {per_harmonic_bound:.4f}"
         )
 
 

@@ -435,8 +435,11 @@ def test_riemannian_limit_compact_temporal_kernel():
         n_max=2, T=2 * np.pi, prec=20
     )
     assert ok, details
-    # gamma_su2 component is bit-identical to Paper 38 SU(2) gamma
-    # (same gamma_rate_su2 function call).
+    # Determinism / self-consistency check: gamma_su2 in the joint kernel is
+    # computed by the SAME gamma_rate_su2 call as Paper 38's SU(2) gamma, so
+    # this residual is 0.0 by construction. (This is NOT an independent
+    # Paper-38 cross-check; the genuine cross-check against literal Paper 38
+    # panel values is test_joint_gamma_panel_paper38_consistency below.)
     assert details["gamma_su2_residual"] == 0.0
     # gamma_u1 at N_t=1 is the constant Haar = uniform on S^1_T.
     # Mean of min(theta, T-theta) over theta in [0,T] = T/4.

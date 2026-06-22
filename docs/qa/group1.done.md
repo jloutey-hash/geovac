@@ -351,3 +351,13 @@ group1 paper restates them (C7).
   descope). +NIT: p46 p38-test-citation overstatement softened. All compile clean; gates PASS;
   test 33/2. **The CODE dimension again caught what claims accepted (production wiring). cert6
   (full, w/ citation) still certifies; next targeted pass re-validates rem2.**
+
+- 2026-06-22 — **rem3 CODE-DIMENSION-ONLY validation pass** (v4.42.1, PI-directed). 5 code-reviewers,
+  4 vacuous-tolerance seeds (one per paper's backing test). Calibrated 4/4 sens (graded by materiality);
+  specificity held (rem2 code fixes confirmed holding: production c_lipschitz_joint=1.0, √-formula
+  unwired, envelope-max tight). **ZERO new MATERIAL code defects — first MATERIAL-clean dimension.**
+  Drained 3 recurring test-hygiene NITs: gamma_su2_residual tautology comment (3rd flag → reframed as
+  determinism check), paper_38_bound √-mis-attribution (→ per_harmonic_bound + clarified), asymptotic_rate
+  docstring (C₃=1). Logged for next claims pass: p49 "joint propinquity rate" label = SU(2) factor.
+  Tests pass; gates PASS. **Three laps (rem1→rem2→rem3) converged the code dimension to MATERIAL-clean,
+  each lap narrower than the last. cert6 (full, w/ citation) certifies.**
