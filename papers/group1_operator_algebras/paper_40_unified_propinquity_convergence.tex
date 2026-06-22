@@ -113,7 +113,11 @@ universality of $4/\pi$ identifies the propinquity rate with the
 $k=0$ sub-mechanism of a master Mellin engine
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the spectral triple, sharpening the
 structural reading of Paper~38 from a single-group observation to a
-class-wide theorem. The result supplies an explicit
+class-wide result (rigorous at rank~$1$; numerically established at
+rank~$\ge 2$, where the robust content is the discrimination of $4/\pi$
+from the Weyl-formula alternative and a fully rank-uniform analytical
+proof is a named gap, see Remark~\ref{rem:correction_L2} and the status
+note in \S\ref{sec:L2}). The result supplies an explicit
 Dirac-controlled rate for the state-space Gromov--Hausdorff convergence
 proved by Gaudillot-Estrada and van~Suijlekom~\cite{gaudillot_estrada_vs2025}.
 The strictly stronger Latr\'emoli\`ere propinquity is \emph{not}
@@ -772,7 +776,11 @@ Definition~\ref{def:central_fejer_general} satisfies
    \;=\; \frac{4}{\pi} \cdot \frac{\log \Lammax}{\Lammax}
    \;+\; O\!\bigl(1/\Lammax\bigr),
 \end{equation}
-with the leading coefficient $4/\pi$ universal across all $G$.
+with the leading coefficient $4/\pi$ universal across all $G$. (Tier:\
+rigorous at rank~$1$, Paper~38; at rank~$\ge 2$ this is established as a
+proof sketch supplying the mechanism, the fully rank-uniform write-up
+being a named gap --- see the proof below and the status note in
+\S\ref{sec:L2}.)
 \end{theorem}
 
 \begin{proof}[Proof sketch (mechanism; a fully rank-uniform
@@ -1172,8 +1180,8 @@ in~\cite{dirac_triangle_memo}]
 Part~(a) is the
 Parthasarathy--Ranga Rao--Varadarajan conjecture, proved by
 Kumar~\cite{kumar1988} (and independently by Mathieu and Polo
-in~\cite{mathieu1989, polo1994}). Part~(b) follows from Vinberg's
-``dominance maximises inner product'' lemma~\cite{vinberg1990}:\ for
+in~\cite{mathieu1989, polo1994}). Part~(b) follows from the standard
+dominance-order fact~\cite[\S13]{humphreys1972}:\ for
 any element $v$ of the Cartan subalgebra and any
 $w \in W$, the dominant image $\overline{w \cdot v}$ in the closed
 fundamental Weyl chamber satisfies $\langle \overline{w \cdot v},
@@ -1411,7 +1419,7 @@ The Brauer--Klimyk signed-sum cancellation mechanism is the
 load-bearing structural ingredient that makes Lemma~\ref{lem:L3}
 rigorous at general rank for both PRV and non-PRV summands. The PRV
 case (Theorem~\ref{thm:prv_summand_bound}) closes via the
-dominance-maximises-inner-product lemma (Vinberg~\cite{vinberg1990})
+standard dominance-order fact~\cite[\S13]{humphreys1972}
 applied to the rho-shift, without invoking signed-sum cancellations
 directly; this is the most transparent special case. The interior case
 (Lemma~\ref{lem:L3_interior}) closes via the same algebraic
@@ -2358,12 +2366,11 @@ P.~Polo,
 \newblock Vari\'et\'es de Schubert et excellentes filtrations,
 \newblock \emph{Ast\'erisque} \textbf{173--174} (1989), 281--311.
 
-\bibitem[Vinberg(1990)]{vinberg1990}
-\`E.~B.~Vinberg,
-\newblock Some commutative subalgebras of a universal enveloping
-algebra,
-\newblock \emph{Math. USSR-Izv.} \textbf{36} (1991), 1--22 (translation
-of \emph{Izv. Akad. Nauk SSSR Ser. Mat.} \textbf{54} (1990), 3--25).
+\bibitem[Humphreys(1972)]{humphreys1972}
+J.~E.~Humphreys,
+\newblock \emph{Introduction to Lie Algebras and Representation Theory},
+\newblock Graduate Texts in Mathematics \textbf{9}, Springer, New York, 1972
+(the dominance partial order:\ \S10.1, \S13.2).
 
 \end{thebibliography}
 

@@ -293,8 +293,8 @@ F_{s}^{\KPS} &= \frac{\log 2}{8} - \frac{3\zeta(3)}{16\pi^{2}}
 F_{D}^{\KPS} &= \frac{\log 2}{4} + \frac{3\zeta(3)}{8\pi^{2}}
 \approx 0.218960, \label{eq:FD_KPS}
 \end{align}
-for the conformally coupled scalar and the free massless Weyl
-Dirac, respectively. Both values are expressed in terms of the
+for the conformally coupled scalar and the free massless
+Dirac fermion (no Weyl projection in odd dimension), respectively. Both values are expressed in terms of the
 functional determinant identities $F = -\tfrac{1}{2}\zeta'_{\Delta}(0)$
 (scalar) and $F = \zeta'_{|D|}(0)$ (Dirac), with the analytic
 continuation of the divergent spectral sum supplied by the standard
@@ -984,14 +984,15 @@ decomposition extends) is a natural follow-up.
 
 \item \textbf{Squashed-$\sthree$ generalization.} The KPS values
 above are for the round (unit) $\sthree$. The squashed-$\sthree$
-partition functions of supersymmetric and free
-CFTs~\cite{jafferis_klebanov_pufu_safdi2011} use deformed half-integer
+partition functions of supersymmetric
+CFTs~\cite{hama_hosomichi_lee2011} use deformed half-integer
 Hurwitz machinery that may not reduce to the framework's MR-B
 Jacobi-$\vartheta_{2}$ closed form. Whether the framework can match
 the squashed case is open.
 
-\item \textbf{Propinquity-rate convergence statement.} Theorem~\ref{thm:chm_identification}
-states convergence at the propinquity-bound level. A quantitative
+\item \textbf{State-space-GH-rate convergence statement.} Theorem~\ref{thm:chm_identification}
+states convergence at the state-space Gromov--Hausdorff level
+(inherited from Paper~38). A quantitative
 rate for the partition-function-side convergence $|F_{\nmax} -
 F^{\KPS}| \le C \cdot \gamma_{\nmax}$ with explicit $C$ requires a
 Mellin-domain version of the Berezin-reconstruction framework of
@@ -1020,9 +1021,9 @@ extension. The following table catalogues the current status:
 System & Continuum reference & Framework status & M-engine reading \\
 \midrule
 Free scalar (conformal) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M2 + M3 \\
-Free Dirac (Weyl, CH) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M2 + M3 \\
+Free Dirac (CH) on $\sthree$ & KPS~\cite{klebanov_pufu_safdi2011} & DONE Sec.~\ref{sec:partition} & M2 + M3 \\
 Free scalar (conformal) on $S^{5}$ & Beccaria-Tseytlin~\cite{beccaria_tseytlin2017} & DONE Sec.~\ref{sec:s5_extension} & M2 + M3 extended \\
-Free Dirac (Weyl, CH) on $S^{5}$ & Beccaria-Tseytlin~\cite{beccaria_tseytlin2017} & DONE Sec.~\ref{sec:s5_extension} & M2 + M3 extended \\
+Free Dirac (CH) on $S^{5}$ & Beccaria-Tseytlin~\cite{beccaria_tseytlin2017} & DONE Sec.~\ref{sec:s5_extension} & M2 + M3 extended \\
 Free scalar (conformal) on $S^{7}$ & --- & numerical only; PSLQ fails on simple ring & UNKNOWN (Remark~\ref{rem:general_d_conjecture}) \\
 \midrule
 Free Maxwell on $\sthree$ & 3D scalar duality~\cite{beccaria_tseytlin2017} & open: $\sthree$ Maxwell-scalar duality gives same as scalar & expected M2 + M3 \\
@@ -1380,6 +1381,10 @@ JHEP \textbf{10} (2011) 038, arXiv:1105.4598.
 \bibitem{jafferis_klebanov_pufu_safdi2011} D.~L.~Jafferis, I.~R.~Klebanov, S.~S.~Pufu, and B.~R.~Safdi,
 \emph{Towards the F-theorem: $N = 2$ field theories on the three-sphere},
 JHEP \textbf{06} (2011) 102, arXiv:1103.1181.
+
+\bibitem{hama_hosomichi_lee2011} N.~Hama, K.~Hosomichi, and S.~Lee,
+\emph{SUSY gauge theories on squashed three-spheres},
+JHEP \textbf{05} (2011) 014, arXiv:1102.4716.
 
 \bibitem{beccaria_tseytlin2017} M.~Beccaria, X.~Bekaert, and A.~A.~Tseytlin,
 \emph{Partition function of free conformal higher spin theory},

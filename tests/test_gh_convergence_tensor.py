@@ -37,6 +37,7 @@ from geovac.gh_convergence_tensor import (
     TensorTunnelingPair,
     c3_full_pythagorean_bound,
     c3_full_pythagorean_bound_symbolic,
+    c3_full_triangle_bound,
     compute_tensor_propinquity_bound,
     epsilon_cross_bound,
     gh_tensor_theorem_statement,
@@ -604,6 +605,19 @@ class TestTriangleC3Bound:
         s = c3_full_pythagorean_bound_symbolic(3, 3)
         assert sp.simplify(s - sp.sqrt(sp.Rational(6, 5))) == 0
 
+    def test_symbolic_asymmetric_interior_attainment(self):
+        """Asymmetric supremum is attained at an INTERIOR point, not a corner
+        (Paper 39, Remark 'Asymmetric supremum'). For (n_max_a, n_max_b)=(10,4)
+        the grid sup is sqrt(121/87) at (8,5), STRICTLY above the top-corner
+        value sqrt(196/144)=7/6. A corner-only scan (the pre-2026-06-21 bug)
+        would return 7/6 and under-report the supremum."""
+        s = c3_full_pythagorean_bound_symbolic(10, 4)
+        assert sp.simplify(s - sp.sqrt(sp.Rational(121, 87))) == 0
+        # strictly exceeds the top-corner value (the old buggy answer)
+        assert float(s) > float(sp.sqrt(sp.Rational(196, 144)))
+        # symbolic must match the numeric full-grid scan exactly
+        assert abs(float(s) - c3_full_triangle_bound(10, 4)) < 1e-12
+
     def test_below_legacy_bound(self):
         """The triangle bound is < the legacy conservative bound 2."""
         for nb in [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5),
@@ -893,13 +907,15 @@ class TestR1R2KeystoneTheoremStatus:
     """The combined R1 + R2 closure status of the keystone tensor-product
     propinquity bound after the W2b-easy-tighten sprint.
 
-    Net statement (sprint memo §6):
+    Net statement (sprint memo §6; Pythagorean form WITHDRAWN 2026-06-18 as
+    false, replaced by the triangle bound):
         Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
-            <= C_3^{(2),Pyth} * (max(γ_a, γ_b) + ε_cross)
-            <= C_3^{(2),Pyth} * (1 + 2*sqrt(2)) * max(γ_a, γ_b)
+            <= C_3^{(2)} * (max(γ_a, γ_b) + ε_cross)
+            <= C_3^{(2)} * (1 + 2*sqrt(2)) * max(γ_a, γ_b)
             -> 0  as cutoffs -> infinity,
-    where C_3^{(2),Pyth} = sqrt(((N_a-1)^2 + (N_b-1)^2) / (N_a^2 + N_b^2 - 2)),
-    < 1 at every finite cutoff, -> 1^-.
+    where C_3^{(2)} = sqrt(((N_a-1) + (N_b-1))^2 / (N_a^2 + N_b^2 - 2)) is the
+    triangle bound, <= sqrt(2) (NOT < 1), exceeding 1 beyond (2,2) and -> sqrt(2);
+    convergence survives because sqrt(2) is a finite constant and γ -> 0.
     """
 
     def test_five_lemma_status_l3_done(self):

@@ -228,3 +228,20 @@ group1 paper restates them (C7).
   C5/C11/C13/C14/C15 PASS. Seed key `group1_rr2_seed_key.json`, memo
   `debug/sprint_qa_group1_rerun2_memo.md`. **Batch 2 C4 drained + claims/code
   converged — next clean re-run should certify Batch 2; Batch 3 re-run pending.**
+- 2026-06-21 — **Re-run of Batch 3 (Papers 29, 39, 40, 50, 52 + synthesis) = FAIL →
+  REMEDIATED + folded-in C4 sweep** (v4.33.0). 15-agent panel, calibrated
+  (sensitivity 4/4, specificity 5/5); exhaustive citation verify folded in. Genuine
+  fixes: **p40 C4 LARGE** (vinberg1990 misattribution — the Weyl-chamber dominance
+  lemma backing C₃=1 tightness cited Vinberg's shift-of-argument paper → standard
+  dominance-order fact, Humphreys §13) + abstract/theorem tier caveat (rank-uniform
+  4/π = named gap); **p52 C14 LARGE** (Q4 Lorentzian zombie — descoped 45/46 +
+  partial 47 shown as established → descope-accurate) + C7 ×2; **p39 code C2**
+  (`c3_full_pythagorean_bound_symbolic` corner-only → full-grid; interior max
+  √(121/87) at (8,5); new regression test); **p50** C7 propinquity-bound→state-space
+  GH + squashed-S³ misattribution (JKPS→Hama–Hosomichi–Lee) + Weyl-3d-Dirac wording;
+  **p29** kotani "Thm 1.3 Ξ-completion"→proposal + bander title. Coverage gaps logged
+  (p29 Obs-2 block-decomp + alon-boppana JSON-smoke; p50 wedge-KMS + CHM —
+  verified-true, weak/no test; raise to PI). All 5 compile errors=0/undef=0;
+  C5/C11/C13/C14/C15 PASS. Seed key `group1_rr3_seed_key.json`, memo
+  `debug/sprint_qa_group1_rerun3_memo.md`. **All three batch re-runs now done; each
+  needs one CLEAN re-run to convert FAIL→remediated into a certified PASS.**

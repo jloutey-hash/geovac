@@ -1,0 +1,76 @@
+{
+  "run": "group1_rr3",
+  "description": "Batch-3 certifying re-run (Papers 29/39/40/50/52 + synthesis). Seeds planted ONLY in worktree ../geovac-qa-seed-group1-rr3 (branch qa-seed-group1-rr3, base HEAD e04b3e1). NEVER committed to real corpus; worktree removed at end.",
+  "date": "2026-06-21",
+  "seeds": [
+    {
+      "id": "S-claims-C8",
+      "file": "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex",
+      "location": "~l.43 (graph-RH characterization sentence)",
+      "defect_class": "C8 overclaim (prose > tier)",
+      "planted": "Flipped 'therefore a \\emph{finite-size} statement, not an asymptotic one.' -> 'therefore an \\emph{asymptotic} statement, establishing the graph Riemann Hypothesis.'",
+      "truth": "Paper 29's Ramanujan/Ihara-zero result is an integer-algebraic FINITE-SIZE statement; it is explicitly NOT an asymptotic RH-establishing claim (RH closed by three walls, Papers 28/29/30).",
+      "expected_catcher": "claims-29"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex",
+      "location": "~l.1378 (Klebanov-Pufu-Safdi bibitem)",
+      "defect_class": "C4 wrong arXiv ID (bibitem-only; C15 N/A since inline uses are \\cite)",
+      "planted": "Corrupted KPS arXiv:1105.4598 -> arXiv:1105.5498 (transposed/wrong number).",
+      "truth": "Klebanov-Pufu-Safdi 'F-Theorem without Supersymmetry', JHEP 10 (2011) 038 is arXiv:1105.4598.",
+      "expected_catcher": "citation-50"
+    },
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_paper40_universal_rate.py",
+      "location": "l.44 (SU(2) 4/pi convergence assertion)",
+      "defect_class": "C2 vacuous/gutted test (false-positive backing)",
+      "planted": "Loosened 'assert abs(a_large - target) < 0.05' -> '< 1e9' (vacuous; defeats the 4/pi convergence bound).",
+      "truth": "The rank-1 SU(2) anchor must converge to 4/pi within 5% by n=512; a 1e9 tolerance asserts nothing.",
+      "expected_catcher": "code-40"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "~l.136-138 (Paper 50 one-line summary)",
+      "defect_class": "C9 synthesis overstatement (arithmetic match -> CFT derivation)",
+      "planted": "Flipped 'Paper~50 reproduces the Klebanov--Pufu--Safdi sphere F-theorem bit-exactly from the framework spectrum' -> 'Paper~50 derives the Klebanov--Pufu--Safdi sphere F-theorem from a conformal field theory calculation'.",
+      "truth": "Paper 50 is a bit-exact ARITHMETIC match of the KPS F-value from the framework spectrum, NOT a CFT derivation.",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls": [
+    {
+      "id": "M1",
+      "file": "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex",
+      "claim": "Ramanujan/integer-algebraic Ihara-zero result is a genuine finite-size statement (NOT an RH proof).",
+      "must_not_flag": true
+    },
+    {
+      "id": "M2",
+      "file": "papers/group1_operator_algebras/paper_39_tensor_propinquity.tex",
+      "claim": "sqrt(2)-triangle correction (C3 -> sqrt2, triangle tight) is genuine; convergence survives; k-fold -> sqrt(k)-sketch.",
+      "must_not_flag": true
+    },
+    {
+      "id": "M3",
+      "file": "papers/group1_operator_algebras/paper_40_universal_rate.tex",
+      "claim": "rank-1 rigorous 4/pi + PRV C3=1 tightness genuine; rank-uniform 4/pi analytical proof is a NAMED gap (honest scope).",
+      "must_not_flag": true
+    },
+    {
+      "id": "M4",
+      "file": "papers/group1_operator_algebras/paper_50_cft3_partition_function.tex",
+      "claim": "KPS F-theorem bit-exact ARITHMETIC match from framework spectrum (not a CFT derivation) is genuine.",
+      "must_not_flag": true
+    },
+    {
+      "id": "M5",
+      "file": "papers/group1_operator_algebras/paper_52_category_iii_correspondence.tex",
+      "claim": "Category III at the state-space GH level (not propinquity) is the genuine, correctly-scoped framing.",
+      "must_not_flag": true
+    }
+  ],
+  "do_not_reflag_remediation": "v4.29.0 rc3: p40 C8/C4, p50 C7/HS, p52 C7, p29 3-prism corrections are CORRECT and must not be re-flagged."
+}

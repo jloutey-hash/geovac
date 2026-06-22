@@ -367,47 +367,43 @@ def c3_full_pythagorean_bound_symbolic(
     """Symbolic version of c3_full_pythagorean_bound.
 
     Returns the exact sympy expression for the supremum
-        sqrt(((N_a-1)^2 + (N_b-1)^2) / (N_a^2 + N_b^2 - 2))
+        sqrt(((N_a-1) + (N_b-1))^2 / (N_a^2 + N_b^2 - 2))
     over the irrep grid 2..(n_max_a+1) x 2..(n_max_b+1). For the
     symmetric case n_max_a = n_max_b = n, this reduces to
-    sqrt(n/(n+2)). For asymmetric cases, the supremum may be attained
-    at the boundary (e.g., (N_a, 2) when n_max_a >> n_max_b), giving
-    the single-factor ratio sqrt((N_a-1)/(N_a+1)).
+    sqrt(2n/(n+2)). For asymmetric cases the supremum is NOT in general
+    at a corner: it can be attained at an INTERIOR point. E.g. for
+    (n_max_a, n_max_b) = (10, 4) the grid sup is sqrt(121/87) at (8, 5),
+    strictly above the top-corner value sqrt(196/144) = 7/6 (Paper 39,
+    Remark "Asymmetric supremum"). The bound is therefore computed by an
+    exact full-grid scan, matching the numeric c3_full_triangle_bound.
 
-    Sprint W2b-easy-tighten R1 closure (re-attempt 2026-05-07): this is
-    the explicit closed form that replaces the conservative
-    C_3^{(2),full} = 2 placeholder, with the asymmetric-supremum
-    correction.
+    Sprint W2b-easy-tighten R1 closure (re-attempt 2026-05-07); full-grid
+    interior-attainment fix 2026-06-21 (the prior corner-only scan
+    under-reported the asymmetric supremum and contradicted Paper 39's
+    own Remark). This is the explicit closed form that replaces the
+    conservative C_3^{(2),full} = 2 placeholder.
     """
     N_a_max = sp.Integer(n_max_a + 1)
     N_b_max = sp.Integer(n_max_b + 1)
     if N_a_max < 2 or N_b_max < 2:
         return sp.Rational(C_LIPSCHITZ_TENSOR_FULL)
     # Triangle bound (Pythagorean form WITHDRAWN 2026-06-18 as false; see
-    # c3_full_triangle_bound). The sup of the triangle ratio is attained at
-    # the top corner (N_a_max, N_b_max).
-    candidates = [
-        (N_a_max, sp.Integer(2)),
-        (sp.Integer(2), N_b_max),
-        (N_a_max, N_b_max),
-    ]
-    # Compute symbolic ratios; pick the largest
+    # c3_full_triangle_bound). The sup of the triangle ratio over the irrep
+    # grid can be attained at an interior point for asymmetric cutoffs, so
+    # scan the full grid in exact rational arithmetic (n_max are small).
     best_ratio = None
     best_val = None
-    for (na, nb) in candidates:
-        if na < 2 or nb < 2:
-            continue
-        if na > N_a_max or nb > N_b_max:
-            continue
-        num = ((na - 1) + (nb - 1)) ** 2
-        den = na ** 2 + nb ** 2 - 2
-        if den <= 0:
-            continue
-        ratio = sp.Rational(num, den)
-        val = float(ratio)
-        if best_val is None or val > best_val:
-            best_val = val
-            best_ratio = ratio
+    for na in range(2, int(N_a_max) + 1):
+        for nb in range(2, int(N_b_max) + 1):
+            den = na ** 2 + nb ** 2 - 2
+            if den <= 0:
+                continue
+            num = ((na - 1) + (nb - 1)) ** 2
+            ratio = sp.Rational(num, den)
+            val = float(ratio)
+            if best_val is None or val > best_val:
+                best_val = val
+                best_ratio = ratio
     if best_ratio is None:
         return sp.Rational(C_LIPSCHITZ_TENSOR_FULL)
     return sp.sqrt(best_ratio)
