@@ -992,15 +992,17 @@ $\nmax$ is the angular cutoff and $\Nt$ is the temporal mode-count), the
 choice should be guided by the application. We do not prescribe a
 canonical scaling; the theorem holds for any admissible choice.
 
-\subsection{Empirical confirmation:\ numerical panel along admissible
-scalings}\label{sec:numerical_panel}
+\subsection{Rate-formula panel along admissible scalings (the inner
+arrow is descoped)}\label{sec:numerical_panel}
 
 A 24-cell panel sweep
 (Sprint L3c-$\alpha$.2, 2026-05-23; data in
 \texttt{debug/data/l3c\_alpha\_2\_numerical\_panel.json}) at
 $(\nmax, \Nt) \in \{2, 3\} \times \{3, 5, 7, 11\}$ along three
-scalings empirically confirms Theorem~\ref{thm:inner} (and hence the
-inner arrow of Theorem~\ref{thm:main}):
+scalings confirms the \emph{rate formula} of the (descoped)
+Theorem~\ref{thm:inner} --- not a metric-level convergence:\ the
+$\Nt$-independence below is the structural signature of the degenerate
+$\Kplus$ seminorm (Paper~45), not a propinquity limit:
 
 \begin{table}[h]
 \centering
@@ -1050,7 +1052,9 @@ cell, so the joint rate
 $\gammajoint = \max(\gamma^{\SU(2)}, \gamma^{U(1)}) =
 \gamma^{\SU(2)}$ exactly. The admissibility condition
 $T(\Nt)/\Nt \to 0$ ensures this dominance is preserved in the limit.
-The empirical panel confirms the theorem at full machine precision.
+The empirical panel confirms this rate-formula identity at full machine
+precision;\ it is \emph{not} evidence of a metric-level inner-arrow
+convergence, which is descoped (Theorem~\ref{thm:inner}).
 
 % =====================================================================
 \section{Three-carrier identification}\label{sec:three_carriers}

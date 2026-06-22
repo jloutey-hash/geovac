@@ -314,3 +314,14 @@ group1 paper restates them (C7).
   now swept; any remaining zombie would be in the paper *body*. CLAUDE.md 165→135 KB (round-4
   §2 compaction: granular cert/historical one-liners → docs/development_frontier_archive.md).
   **cert5 is the fresh-adversary validation.**
+
+- 2026-06-22 — **cert5 FAIL→remediated** (v4.40.0). Calibrated 5/5 sens, 5/5 spec.
+  cert5 hypothesis confirmed — remaining zombies were in the paper BODY: p47 §5.4
+  (descoped inner-arrow panel "confirms the theorem at full machine precision") +
+  §1-prose residuals (p48 §1.2 B1–B4, §1-roadmap substrate-vs-rate) + synthesis
+  Umegaki-misattribution. LARGE: **p46 C3^op fabrication** — diagnostic confirmed the
+  per-harmonic √((N−1)/(N+1)) / envelope √(1−1/n_max) is op-norm-false + mis-attributed
+  to Paper 38 L3 (which is C₃=1); reworked to C₃=1 corpus-wide in p46, envelope RANGE
+  kept, pure-sympy test archived, operator-system test added (13/13). All compile clean;
+  gates PASS. Memo cert_rerun1 §cert5. **Theorem + abstract/§1 + body layers all now swept;
+  cert6 = first real shot at a clean PASS.**

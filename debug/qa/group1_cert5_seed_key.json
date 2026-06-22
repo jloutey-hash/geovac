@@ -1,0 +1,61 @@
+{
+  "run": "group1_cert5",
+  "description": "CLEAN certifying re-run #5 of Batch 1 (Papers 45/46/47/48/49 + synthesis) after the v4.37.0 theorem-statement descope sweep AND the v4.39.0 prose/abstract descope sweep. Seeds in worktree ../geovac-qa-seed-group1-cert5 (branch qa-seed-group1-cert5, base HEAD e569534). NEVER committed; worktree removed at end. Fresh seeds at NEW sites (distinct from cert1/2/3/4). Hypothesis: theorem-statement + prose/abstract layers both swept, so any remaining genuine defect is in paper BODY (post-§1) prose. One seed (claims-C14) is deliberately planted in the p49 BODY to probe whether the panel reads the body.",
+  "date": "2026-06-22",
+  "base_head": "e569534",
+  "seeds": [
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_wh7_b3_phase3_sprint2.py",
+      "location": "l.96 (test_chain_theorem_functionals_hold, the 96/96 D_max chain)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert res[\"T2_chain_panel\"][k][\"chain_violations\"] == 0, k' -> '... >= 0, k' (vacuous; chain_violations is a non-negative count, so >=0 asserts nothing). The l.97 n_cells==96 assert backstops so the test still passes.",
+      "truth": "The load-bearing fact is ZERO chain_violations across 96 cells for dmax/bures/trace (the D_max chain holds bit-exactly, 96/96). A '>=0' tolerance defeats the check.",
+      "expected_catcher": "code-49"
+    },
+    {
+      "id": "S-claims-C14-body",
+      "file": "papers/group1_operator_algebras/paper_49_oslpls_strong_form_bridge.tex",
+      "location": "l.2078-2099 (thm:bridge_strong aggregate Bridge Theorem, BODY / post-§1)",
+      "defect_class": "C14 descope zombie in paper BODY (descoped -> established)",
+      "planted": "Flipped the aggregate Bridge Theorem's B4' leg from descoped to established in BOTH the theorem lead ('the fourth, (B4') convergence transport, is descoped (it inherits the degenerate Paper 45/46 seminorm)' -> 'all four ... including (B4') convergence transport, which is established') and the B4' itemize entry ('[DESCOPED] ... metric convergence is descoped --- what transports is the closed-form rate' -> 'transports a genuine OSLPLS pLGH metric convergence --- a quantum-metric distance, not merely a closed-form rate'). The trailing 'Together (B1')-(B3') constitute the established part' sentence left as-is (residual tension, part of the zombie).",
+      "truth": "B4' (convergence transport) is DESCOPED -- the strong-form propinquity seminorm is degenerate (Paper 45/46), so the OSLPLS pLGH metric convergence is NOT established; only the closed-form rate transports. This is the BODY-layer probe.",
+      "expected_catcher": "claims-49"
+    },
+    {
+      "id": "S-claims-C7",
+      "file": "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+      "location": "l.1405 (rem:compact_object, BODY)",
+      "defect_class": "C7 trunk-status mislabel (Paper 38 = state-space GH, not Latremoliere propinquity)",
+      "planted": "Changed 'a strict extension of Paper~38's state-space Gromov--Hausdorff construction, not a parallel one.' -> '... Paper~38's Latr\\'emoli\\`ere propinquity construction, not a parallel one.' Different site from cert4 (thm:compact_agreement l.1373); the l.1379 mention is an in-paper control.",
+      "truth": "Paper 38 = van Suijlekom state-space Gromov-Hausdorff convergence, NOT Latremoliere propinquity (the C7 rule).",
+      "expected_catcher": "claims-48"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_49_oslpls_strong_form_bridge.tex",
+      "location": "l.2906 (datta2009 bibitem title)",
+      "defect_class": "C4 wrong-title on a load-bearing cite (arXiv:0803.2770 unchanged so C15 N/A)",
+      "planted": "Changed title 'Min- and max-relative entropies and a new entanglement monotone' -> 'Max-relative entropy of entanglement under the data-processing inequality' for arXiv:0803.2770 (Datta 2009 IEEE TIT 55). Load-bearing: Datta's max-divergence backs p49's strict super-additivity (thm:strict_super_additivity).",
+      "truth": "arXiv:0803.2770 (Datta) = 'Min- and max-relative entropies and a new entanglement monotone', IEEE Trans. Inf. Theory 55 (2009), 2816-2826.",
+      "expected_catcher": "citation-49"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "l.147 (Paper 48 metric-level inheritance status)",
+      "defect_class": "C9 synthesis overstatement (descoped -> established)",
+      "planted": "Flipped 'the metric-level inheritance is descoped and the bridge survives as a conditional design.' -> 'the metric-level inheritance is established and the bridge survives as a verified metric convergence.' Different line/paper-coverage from cert4 (l.153, Paper 49 Lambda-inheritance).",
+      "truth": "Paper 48's metric-level inheritance (B4) is DESCOPED (degenerate Krein metric, Paper 45); the bridge survives only as a conditional/categorical design, NOT a verified metric convergence.",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_45", "claim": "K+ annihilation NEGATIVE; product-carrier signature-agnostic (NOT Lorentzian); Paper 38 = state-space GH; abstract retraction explicit", "must_not_flag": true},
+    {"id": "M2", "file": "paper_46", "claim": "strong-form natural-substrate descoped (bold); convergence NOT established; closed-form bound = rate-formula evaluation not a distance", "must_not_flag": true},
+    {"id": "M3", "file": "paper_47", "claim": "outer norm-resolvent + three-carrier survive; inner arrow + G2 descoped (inline-tagged); §1 program restatement descoped (cert4 v4.38.0 fix)", "must_not_flag": true},
+    {"id": "M4", "file": "paper_48", "claim": "N_t=1 substrate reduction bit-exact + prop=2 + B1/B3 structural survive; B2 structural/vacuous off-orbit + B4 descoped (v4.39.0 abstract fix); thm:compact_agreement substrate-bit-exact-vs-rate-T/4 (cert4 v4.38.0)", "must_not_flag": true},
+    {"id": "M5", "file": "paper_49", "claim": "D_max chain 96/96 load-bearing; B2' state-level thermal-stack survives; strict super-additivity 'generic'; illustrative-Umegaki label; §1 l.510 per-leg qualifier (v4.39.0)", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "ALL prior fixes are CORRECT and must not be re-flagged: (cert1 v4.30.0/4.35.0) p46 informal-Main descope, p47 three_carriers proof-by-argument, p48 SS1.2+SS3 descope, C4 sweep; (cert2 v4.35.1) p49 bousso authors; (cert3 v4.36.0) p48 abstract-B4 + thm:convergence_transport + thm:synthetic_compactness descope, synthesis bousso_etal2020 -> 2007.00230, p46 L1' proof-sketch; (v4.37.0 theorem descope sweep) p47 thm:inner descope, p48 thm:bridge-B4 + thm:relaxed_triangle + thm:coincidence + thm:inframetric descope, p46 prop:reach_height_op note; (cert4 v4.38.0) p47 §1 program restatement descoped, p48 thm:compact_agreement substrate-vs-rate, p48 abstract B4, p49 driver ref -> tests/test_lorentzian_propinquity_foundation.py, docstring banner; (v4.39.0 prose/abstract sweep) p48 abstract B2 structural/vacuous, p49 §1 l.510 per-leg qualifier. che_perales venue (DGA 103 (2026)) is CORRECT (web-confirmed) -- do NOT flag as fabricated. These are the CORRECT current state."
+}

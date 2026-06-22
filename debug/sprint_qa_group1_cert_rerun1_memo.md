@@ -86,3 +86,24 @@ OVER-FLAG reconciled (NOT a defect, NOT changed): **che_perales bibitem venue** 
 Verification: p47/p48/p49 compile errors=0, zero undefined cites/refs; C5/C11/C13/C14/C15 group1 PASS; foundation + p45-degeneracy + wh7-b1 tests 57 passed / 2 slow-skipped.
 
 **Convergence status:** cert4 found 4 new genuine defects of NEW classes (§1-prose + abstract-enumeration zombies, a rate-vs-substrate over-reach, a dangling driver). The cert loop is still finding genuine material per pass — NOT yet a clean certified PASS. Next sweep candidate (if the PI wants to drain this tail too): an inline descope scan of the §1 Introduction + abstract *prose* of P45–49 (the theorem-statement sweep is done; the prose/abstract layer is the remaining systematic home). Then cert5.
+
+---
+
+## cert5 (v4.40.0, 2026-06-22) — FAIL→remediated; body-layer + the p46 C3^op fabrication
+
+Base HEAD e569534 (v4.39.0, after both descope sweeps). Calibrated panel — 16 agents (5 papers × code/claims/citation + synthesis): **5/5 sensitivity** (all fresh seeds caught: code C2 vacuous `chain_violations>=0` by code-49; claims C14 BODY-zombie B4′→established by claims-49 + run-#4 self-contradiction rule; claims C7 Paper-38→propinquity by claims-48; citation C4 datta wrong-title by citation-49 [detected, graded NIT as ID/referent resolve]; synthesis C9 descoped→established by synthesis), **5/5 specificity** (controls M1–M5 not false-flagged; clean p45 came back clean all dimensions).
+
+**Verdict: FAIL→remediated.** The cert5 hypothesis (remaining zombies are in the paper BODY) confirmed: claims-47 found a body-layer descope zombie the abstract/§1 sweeps couldn't reach. Genuine material defects (all verified vs primary corpus):
+
+SMALL (remediated):
+- **p47 §5.4 (C14, body):** the numerical-panel subsection "Empirical confirmation… confirms the theorem at full machine precision" presented the DESCOPED inner-arrow Theorem thm:inner as machine-precision-confirmed with no inline descope; the panel tabulates the degenerate Λ_prop whose N_t-independence is the *degeneracy signature*. Re-tagged as a rate-formula/degeneracy check (title + intro + closing).
+- **p48 §1.2 (C14):** "(iii) the Bridge Theorem (B1)–(B4) at theorem-grade rigor" lumped descoped B4 + vacuous B2 under theorem-grade → partitioned (B1/B3 structural; B2 vacuous; B4 descoped).
+- **p48 §1-roadmap + cor:riemannian_limit_cross (C8 substrate-vs-rate):** "reduces bit-exactly to the hypertopology" without the joint-rate/T-4 caveat → substrate+SU(2)-factor bit-exact, joint rate carries U(1) T/4.
+- **synthesis (C9):** "max-divergence cocycle deficits 66.998/68.720/81.256" → relabeled *illustrative Umegaki* (load-bearing D_max chain 96/96) — the cert1-in-p49 fix surviving in the synthesis.
+
+LARGE (diagnostic-confirmed + reworked, PI-directed):
+- **p46 C3^op (C2 + C4-to-trunk + numerical falsehood):** code-46 flagged the per-harmonic Lichnerowicz bound `eq:C3_per_harmonic` (op-norm denominator `‖M^spat‖`, constant `√((N−1)/(N+1))`, envelope sup `C₃^op=√(1−1/n_max)`, "tight on the envelope-max harmonic") as backed only by a pure-sympy sup that never touches the operator system. **Focused diagnostic** (`debug/cert5_p46_c3op_diagnostic.py`) CONFIRMED at n_max∈{3,4,5}: (i) op-norm ratios `‖[D_GV,M]‖/‖M‖` = 1.0/1.74/… EXCEED `√((N−1)/(N+1))` at every N; (ii) the sup is 1.74/2.74/3.14 — GROWS with n_max, nowhere near `√(1−1/n_max)`; (iii) the envelope-max monopole Y^(3)_{2n_max−1,0,0} COMMUTES with D_GV (ratio 0 bit-exact) — the loosest, not the tightest. **Root cause:** the whole √-story is mis-attributed to Paper 38 L3, which actually states `‖[D_CH,M_f]‖ ≤ C₃‖∇f‖` with **C₃=1** (gradient/translation seminorm). **Rework (PI-directed):** collapsed C₃^op to the Paper 38 L3 value **C₃=1** corpus-wide in p46 (Lemma L3, abstract, informal+formal thm:main, L4(d), L5 enlarged appendix, §1.4 overview); kept the envelope RANGE refinement N≤2n_max−1 (true substrate reach, L4-relevant); rewrote rem:env_tightness + Appendix A as withdrawal notes with the diagnostic evidence; replaced the pure-sympy `test_paper46_C3op_closed_form.py` (→ `_archive/dead_ends/`) with the operator-system `test_paper46_c3_operator_system.py` (13/13). Impact bounded — feeds the DESCOPED rate formula; C₃^op·γ = γ, convergence →0 and panel values unaffected.
+
+Verification: p46/p47/p48/synthesis compile errors=0, zero undefined cites/refs; C5/C11/C13/C14/C15 group1 PASS; new test 13/13.
+
+**Convergence:** cert5 drained the BODY layer (p47 §5.4) + the last §1-prose residuals (p48 §1.2/roadmap) + the deepest defect (the p46 C3^op fabrication, now reworked). The cert loop has now swept theorem-statements (v4.37.0), abstract/§1 prose (v4.39.0), AND paper-body (cert5). cert6 next — first real shot at a clean PASS.

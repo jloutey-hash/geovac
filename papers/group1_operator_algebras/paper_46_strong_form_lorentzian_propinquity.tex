@@ -178,7 +178,8 @@ The closed-form rate bound is
 \end{equation*}
 where (per the Status note) $\Lprop$ denotes the evaluation of this rate
 formula, \emph{not} a quantum-metric distance,
-with closed-form constant $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$,
+with Lipschitz comparison constant $\Cthreeop = C_{3} = 1$
+(Paper~38~\cite{paper38} Lemma~L3, gradient/translation seminorm),
 joint mass-concentration moment
 $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$, and assembled multiplier
 $\Cfivejoint = 1$. The numerical panel matches Paper~45's $\Kplus$-weak-form
@@ -197,12 +198,16 @@ identity}
 which sharpens Paper~45 Lemma~4.3's vanishing-cross-term identity from
 ``the time-chirality cross term vanishes'' to ``the temporal commutator
 vanishes identically on the natural substrate''. As a byproduct we
-identify a finite-cutoff envelope refinement of Paper~45
-eq.~(C3\_joint\_bound) (Appendix~\ref{app:correction}): the correct
-supremum range for the per-harmonic Lichnerowicz constant is
+note a finite-cutoff envelope \emph{range} refinement of Paper~45
+eq.~(C3\_joint\_bound) (Appendix~\ref{app:correction}): the
+natural-substrate multipliers span shell-difference labels
 $N \le 2\nmax - 1$, the Avery--Wen--Avery achievable envelope on $\nmax$
-shells, rather than the stated $N \le \nmax$. The asymptotic rate formula
-and Paper~45's degeneracy theorem are unchanged. The strong-form
+shells, wider than the stated $N \le \nmax$. The L3 comparison
+\emph{constant} over that range is the Paper~38~\cite{paper38} Lemma~L3
+value $C_{3} = 1$ (an earlier draft's $N$-dependent
+$\sqrt{(N-1)/(N+1)}$ / envelope $\sqrt{1 - 1/\nmax}$ is withdrawn; see
+Remark~\ref{rem:env_tightness}). The asymptotic rate formula and
+Paper~45's degeneracy theorem are unchanged. The strong-form
 \emph{convergence} is \emph{not} established:\ the natural-substrate
 seminorm is degenerate (Status note), so the Lorentzian quantum-metric
 convergence question remains a named open research target. The
@@ -329,10 +334,10 @@ spectral triple at BBB $(m, n) = (4, 6)$,}
 \end{equation*}
 \emph{where $\Lprop$ is the Latr\'emoli\`ere quantum Gromov--Hausdorff
 propinquity for metric spectral triples~\cite{latremoliere_metric_st_2017}
-on the full Krein space under $\Lop$, with closed-form constant}
+on the full Krein space under $\Lop$, with Lipschitz comparison constant}
 \begin{equation*}
-   \Cthreeop(\nmax) \;:=\; \sqrt{1 - \frac{1}{\nmax}}
-   \;\xrightarrow{\nmax \to \infty}\; 1^{-}
+   \Cthreeop(\nmax) \;=\; C_{3} \;=\; 1
+   \qquad \text{(Paper~38~\cite{paper38} Lemma~L3)}
 \end{equation*}
 \emph{and joint mass-concentration moment
 $\gammajoint_{\nmax, \Nt, T} = O(\log\nmax/\nmax + T/\Nt)$.}
@@ -355,13 +360,15 @@ substantive new analytical content comprises three structural findings:
 $[\DL, a] = i[\DGV, M^{\spat}] \otimes M^{\temp}$ bit-exact, sharpening
 Paper~45 Lemma~4.3 from ``vanishing time-chirality cross-term'' to
 ``vanishing temporal commutator identically on the natural substrate''.
-\item[(F2)] \textbf{Envelope-aware $\Cthreeop$} (Lemma~\ref{lem:L3op}):
-the correct per-harmonic supremum range on the natural substrate is
-$N \le 2\nmax - 1$ (the Avery--Wen--Avery achievable envelope on $\nmax$
-shells), not $N \le \nmax$ as stated in Paper~45 eq.~(C3\_joint\_bound);
-the corresponding closed-form constant is $\sqrt{1 - 1/\nmax}$. Both
-forms tend to $1^{-}$ asymptotically; the asymptotic statement is
-unchanged. See Appendix~\ref{app:correction}.
+\item[(F2)] \textbf{Envelope \emph{range} refinement;\ $\Cthreeop = 1$}
+(Lemma~\ref{lem:L3op}): the natural-substrate multipliers span
+shell-difference labels $N \le 2\nmax - 1$ (the Avery--Wen--Avery
+achievable envelope on $\nmax$ shells), wider than the $N \le \nmax$ of
+Paper~45 eq.~(C3\_joint\_bound); the L3 comparison \emph{constant} over
+that range is the Paper~38~\cite{paper38} Lemma~L3 value $C_{3} = 1$ (an
+earlier draft's $N$-dependent $\sqrt{(N-1)/(N+1)}$ with envelope sup
+$\sqrt{1 - 1/\nmax}$ is withdrawn, Remark~\ref{rem:env_tightness}). See
+Appendix~\ref{app:correction}.
 \item[(F3)] \textbf{Free-upgrade reading} (Theorem~\ref{thm:main} and
 Remark~\ref{rem:free_upgrade}): the assembled multiplier
 $\Cfivejoint = \max(1, 1, \Cthreeop, 0) = 1$ (since $\Cthreeop \le 1$),
@@ -751,8 +758,8 @@ on tensor products) gives~(\ref{eq:tensor_factor}). \qedhere
 The five-lemma structure transfers from Paper~45 under the strong-form
 seminorm $\Lop$. L1$'$ is the operator-system substrate (Paper~44). L2
 is the joint cb-norm (Paper~45 Lemma~4.2, seminorm-independent). L3 is
-the joint Lichnerowicz comparison under $\Lop$ (this paper, with
-closed-form envelope-aware $\Cthreeop$). L4 is the joint Berezin
+the joint Lichnerowicz comparison under $\Lop$ (this paper, inheriting the
+Paper~38 L3 comparison constant $\Cthreeop = C_{3} = 1$). L4 is the joint Berezin
 reconstruction under $\Lop$ (this paper, four-plus-one properties). L5
 is the Latr\'emoli\`ere propinquity assembly (this paper, on the full
 Krein space).
@@ -826,22 +833,27 @@ and every $(\nmax, \Nt, T)$,
    \Lop(\Bjoint(f)) \;=\; \opnorm{[\DL, \Bjoint(f)]}
    \;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla^{\mathrm{joint}, L^{1}} f}_{\infty},
 \end{equation}
-with envelope-aware constant
+with Lipschitz comparison constant
 \begin{equation}\label{eq:C3op_closed_form}
    \Cthreeop(\nmax)
-   \;:=\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
-   \;=\; \sqrt{\frac{2\nmax - 2}{2\nmax}}
-   \;=\; \sqrt{1 - \frac{1}{\nmax}}
-   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
+   \;:=\; \sup_{2 \le N \le 2\nmax - 1} C_{3}^{(N)}
+   \;=\; C_{3} \;=\; 1
+   \qquad \text{for every } \nmax,
 \end{equation}
-The bound is asymptotically tight on the envelope-max Avery harmonic
-$Y^{(3)}_{2\nmax - 1, 0, 0}$.
+the Paper~38~\cite{paper38} Lemma~L3 constant:\ the per-harmonic
+\emph{gradient}-seminorm comparison constant is $C_{3}^{(N)} = C_{3} = 1$
+for every $N$ (Paper~38 L3 establishes $\opnorm{[\DGV, M_{f}]} =
+\norm{\nabla f}_{\infty}$ on the continuum), so its supremum over the
+achievable envelope $N \le 2\nmax - 1$ is $1$ at every cutoff. (An earlier
+draft asserted an $N$-dependent $C_{3}^{(N)} = \sqrt{(N-1)/(N+1)}$ with an
+envelope sup $\sqrt{1 - 1/\nmax}$; that is withdrawn ---
+see Remark~\ref{rem:env_tightness}.)
 \end{lemma}
 
 \begin{proof}
 The proof has four steps. (A) PURE\_TENSOR reduction;\ (B) tensor-norm
 factorization via the temporal-Lipschitz-invisibility identity;\ (C)
-Paper~38 spatial L3 with envelope-aware supremum;\ (D) Berezin
+Paper~38 spatial L3 with comparison constant $C_{3} = 1$;\ (D) Berezin
 contractivity on the temporal factor.
 
 \emph{Step A: PURE\_TENSOR reduction.}
@@ -863,40 +875,26 @@ By Corollary~\ref{cor:tensor_factor} applied to the Berezin image,
    \;=\; \opnorm{[\DGV, B^{\SU(2)}_{\chid}(f_{s})]} \cdot \opnorm{B^{\Uone}(f_{t})}.
 \end{equation*}
 
-\emph{Step C: Paper~38 spatial L3 with envelope-aware supremum.}
+\emph{Step C: Paper~38 spatial L3 ($C_{3} = 1$, gradient seminorm).}
 Paper~38~\cite{paper38} Lemma~L3 establishes, for the chirality-doubled
-spinor lift on the Avery harmonic $Y^{(3)}_{N, 0, 0}$,
+spinor lift, the gradient/translation-seminorm Lichnerowicz comparison
 \begin{equation}\label{eq:C3_per_harmonic}
-   \opnorm{[\DGV, M^{\spat}_{N, L, M}]}
-   \;\le\; C_{3}^{(N)} \cdot \opnorm{M^{\spat}_{N, L, M}}, \qquad
-   C_{3}^{(N)} = \sqrt{\frac{N - 1}{N + 1}},
+   \opnorm{[\DGV, B^{\SU(2)}_{\chid}(f_{s})]}
+   \;\le\; C_{3} \cdot \norm{\nabla_{x} f_{s}}_{\infty}, \qquad C_{3} = 1,
 \end{equation}
-with the per-harmonic constant monotonically increasing in $N$ from
-$C_{3}^{(2)} = \sqrt{1/3}$ to $\lim_{N \to \infty} C_{3}^{(N)} = 1$.
-Per Paper~38~\S~L3 proof, this bound is asymptotically tight on the
-natural Avery monopole.
-
-For $a_{s} = B^{\SU(2)}_{\chid}(f_{s})$ written in the Peter--Weyl
-basis $f_{s} = \sum_{N, L, M} c_{N L M}\,Y^{(3)}_{N, L, M}$, triangle
-inequality on the Berezin expansion and the per-harmonic
-bound~(\ref{eq:C3_per_harmonic}) yield
+with equality on the continuum ($\opnorm{[\DGV, M_{f}]} =
+\norm{\nabla f}_{\infty}$, Paper~38~Lemma~L3, backed by
+\texttt{tests/test\_p38\_action\_seminorm.py}). The comparison constant
+is $\nmax$-independent ($C_{3} = 1$);\ the natural-substrate multipliers
+in $\Op^{L}$ span shell-difference labels $N$ up to $2\nmax - 1$ (the
+Avery--Wen--Avery achievable envelope on $\nmax$ shells, Paper~44~\S~3),
+wider than Paper~45's stated $N \le \nmax$, but the comparison constant
+is $1$ over the whole envelope. Hence
 \begin{equation*}
    \opnorm{[\DGV, a_{s}]}
-   \;\le\; C_{3}^{\SU(2), \mathrm{env}}(\nmax) \cdot \norm{\nabla_{x} f_{s}}_{\infty},
+   \;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla_{x} f_{s}}_{\infty},
+   \qquad \Cthreeop(\nmax) = 1.
 \end{equation*}
-where the envelope-aware supremum
-\begin{equation}\label{eq:C3_env_sup}
-   C_{3}^{\SU(2), \mathrm{env}}(\nmax)
-   \;:=\; \sup_{2 \le N \le 2\nmax - 1} C_{3}^{(N)}
-\end{equation}
-is taken over the achievable-envelope range $N \le 2\nmax - 1$. The
-Avery--Wen--Avery $\Delta n = \pm 1$ ladder on $\nmax$ shells produces
-shell-difference labels $N$ up to $2\nmax - 1$ (Paper~44~\S~3), and
-the natural-substrate multipliers in $\Op^{L}$ include
-$N \in \{1, 2, \ldots, 2\nmax - 1\}$. By monotonicity of $C_{3}^{(N)}$,
-$C_{3}^{\SU(2), \mathrm{env}}(\nmax) = C_{3}^{(2\nmax - 1)} =
-\sqrt{(2\nmax - 2)/(2\nmax)} = \sqrt{1 - 1/\nmax}$, which is
-$\Cthreeop(\nmax)$.
 
 \emph{Step D: Berezin contractivity on the temporal factor.}
 For $a_{t} = B^{\Uone}(f_{t})$, Paper~45 Lemma~4.4(b) gives
@@ -929,28 +927,35 @@ pure-tensor summand and use the triangle inequality on both sides; the
 bound holds with the same constant $\Cthreeop$. \qedhere
 \end{proof}
 
-\begin{remark}[Asymptotic tightness on the envelope-max harmonic]
+\begin{remark}[Withdrawn:\ the envelope-max tightness / $\sqrt{1-1/\nmax}$ claim]
 \label{rem:env_tightness}
-The numerical verification at panel cells $(\nmax, \Nt) \in
-\{(2, 3), (3, 5)\}$ confirms that the bound~(\ref{eq:L3op_main})
-saturates exactly at the envelope-max Avery harmonic
-$Y^{(3)}_{2\nmax - 1, 0, 0}$:\ at $(\nmax, \Nt) = (3, 5)$, the
-generator $(N_{\spat} = 4, L = 1, M = \pm 1)$ has LHS/RHS ratio
-$\approx 0.949 = C_{3}^{(4)} / \Cthreeop(3) = \sqrt{3/5} /
-\sqrt{2/3}$, while the envelope-max generator $(N_{\spat} = 5)$ would
-saturate to ratio $1$ exactly. See Sub-sprint memo
-\texttt{debug/l3b\_2b\_lichnerowicz\_lop\_memo.md}~\S~5.
+An earlier draft claimed the bound~(\ref{eq:L3op_main}) is asymptotically
+tight on the envelope-max Avery harmonic $Y^{(3)}_{2\nmax - 1, 0, 0}$ with
+an $N$-dependent per-harmonic constant $C_{3}^{(N)} = \sqrt{(N-1)/(N+1)}$
+(operator-norm normalization) and envelope sup $\sqrt{1 - 1/\nmax}$. This
+is \emph{withdrawn}. A direct operator-system computation (driver
+\texttt{tests/test\_paper46\_c3\_operator\_system.py}) shows: (i) the envelope-max
+monopole \emph{commutes} with $\DGV$ ($\opnorm{[\DGV, M]} = 0$ bit-exact at
+$\nmax \in \{3, 4, 5\}$) --- it is the \emph{loosest}, not the tightest,
+generator; and (ii) the operator-norm ratios
+$\opnorm{[\DGV, M]} / \opnorm{M}$ do not realize $\sqrt{(N-1)/(N+1)}$ (they
+exceed it and their supremum grows with $\nmax$ rather than approaching
+$\sqrt{1 - 1/\nmax}$). The correct L3 comparison is the Paper~38~Lemma~L3
+gradient-seminorm bound with constant $C_{3} = 1$ used in~(\ref{eq:C3op_closed_form}),
+which feeds the \emph{descoped} rate formula and leaves the convergence
+$\to 0$ unaffected.
 \end{remark}
 
 \begin{remark}[Comparison with Paper~45 eq.~(C3\_joint\_bound)]
 \label{rem:vs_paper45_C3}
-Paper~45 eq.~(C3\_joint\_bound) states the supremum range as
-$2 \le N \le \nmax$, not $2 \le N \le 2\nmax - 1$. This is a
-finite-cutoff under-statement on the natural substrate of the
-Lorentzian construction:\ Paper~45's $C_{3}^{(\nmax)}$ does not bound
-the per-harmonic ratio at $N \in (\nmax, 2\nmax - 1]$. Both forms
-agree asymptotically ($\to 1^{-}$); the corrected form is the present
-$\Cthreeop$. See Appendix~\ref{app:correction} for the proposed refinement.
+Paper~45 eq.~(C3\_joint\_bound) states the multiplier supremum range as
+$2 \le N \le \nmax$, not $2 \le N \le 2\nmax - 1$. The natural-substrate
+\emph{range} correction stands --- the substrate genuinely spans
+shell-difference labels up to $2\nmax - 1$ (Avery--Wen--Avery, Paper~44~\S~3;
+verified, driver \texttt{tests/test\_paper46\_c3\_operator\_system.py}) --- but the
+L3 comparison \emph{constant} is the Paper~38~Lemma~L3 value $C_{3} = 1$ over
+that whole range (the earlier $\sqrt{1 - 1/\nmax}$ envelope-aware constant is
+withdrawn, Remark~\ref{rem:env_tightness}). See Appendix~\ref{app:correction}.
 \end{remark}
 
 \subsection{Lemma L4: joint Berezin reconstruction under $\Lop$}
@@ -998,7 +1003,7 @@ $(\nmax, \Nt) \to (\infty, \infty)$.
    \opnorm{[\DL, \Bjoint(f)]}
    \;\le\; \Cthreeop(\nmax) \cdot \norm{\nabla^{\mathrm{joint}} f}_{\infty},
 \end{equation}
-with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ from
+with $\Cthreeop(\nmax) = C_{3} = 1$ (Paper~38~\cite{paper38} Lemma~L3) from
 Lemma~\ref{lem:L3op}.
 \item[(e)] \emph{Krein-positivity preservation.} For every $f$,
 $[\JL, \Bjoint(f)] = 0$ bit-exact, hence $\Bjoint(f)$ preserves both
@@ -1183,7 +1188,7 @@ the continuum reference $\Tcal^{L}_{\Manifold}$ satisfies
    \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax, \Nt, T}
    \;\xrightarrow[(\nmax, \Nt) \to (\infty, \infty)]{}\; 0,
 \end{equation}
-with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$ from
+with $\Cthreeop(\nmax) = C_{3} = 1$ (Paper~38~\cite{paper38} Lemma~L3) from
 Lemma~\ref{lem:L3op} and $\gammajoint_{\nmax, \Nt, T}
 = O(\log\nmax/\nmax + T/\Nt)$ from Lemma~\ref{lem:L4op}~(c).
 The assembled multiplier $\Cfivejoint = \max(1, 1, \Cthreeop, 0) = 1$
@@ -1501,116 +1506,62 @@ decisions are the author's responsibility.
 \label{app:correction}
 % =====================================================================
 
-We record the finite-cutoff envelope refinement of Paper~45 eq.~(C3\_joint\_bound)
-that arose from the L3b-2b sub-sprint analysis. The asymptotic statement
-of Paper~45 is unchanged; the refinement applies only to the explicit
-finite-$\nmax$ form of the per-harmonic Lichnerowicz constant on the
-natural Lorentzian substrate.
+We record the finite-cutoff envelope-\emph{range} refinement of Paper~45
+eq.~(C3\_joint\_bound) and correct the comparison-constant claim of an
+earlier draft. The asymptotic statement of Paper~45 is unchanged.
 
-\subsection{The Paper~45 statement and the refinement}\label{app:correction_statement}
+\subsection{The L3 comparison constant is $C_{3} = 1$ (Paper~38 L3)}
+\label{app:correction_statement}
 
-Paper~45 eq.~(C3\_joint\_bound) (in our notation):
+Paper~38~\cite{paper38} Lemma~L3 establishes the gradient/translation-seminorm
+Lichnerowicz comparison
 \begin{equation*}
-   \Cthreejoint(\nmax, \Nt) \;\le\; \CthreeSU(\nmax)
-   \;\le\; \sup_{2 \le N \le \nmax} \frac{N - 1}{\sqrt{N^{2} - 1}}
-   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
+   \opnorm{[\DCH, M_{f}]} \;\le\; C_{3} \cdot \norm{\nabla f}_{\infty},
+   \qquad C_{3} = 1,
 \end{equation*}
+with equality on the continuum ($\opnorm{[\DCH, M_{f}]} = \norm{\nabla f}_{\infty}$;
+backed by \texttt{tests/test\_p38\_action\_seminorm.py}). The comparison constant
+is a single $\nmax$-independent value $1$, \emph{not} an $N$-dependent
+per-harmonic constant. Consequently the joint strong-form L3 bound
+(Lemma~\ref{lem:L3op}) carries $\Cthreeop(\nmax) = C_{3} = 1$ at every cutoff.
 
-The refined statement (this paper, Lemma~\ref{lem:L3op}):
-\begin{equation*}
-   \Cthreeop(\nmax)
-   \;\le\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
-   \;=\; \sqrt{1 - \frac{1}{\nmax}}
-   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
-\end{equation*}
+\subsection{The envelope \emph{range} refinement (stands)}
+\label{app:correction_explanation}
 
-Both forms tend to $1^{-}$ asymptotically; the refinement is a finite-cutoff
-correction.
+Paper~45 eq.~(C3\_joint\_bound) states the multiplier supremum range as
+$N \le \nmax$. On the natural chirality-doubled scalar-multiplier substrate
+$\Op^{L}_{\nmax, \Nt, T}$ of the Lorentzian construction the multipliers
+$M^{\spat}_{N, L, M}$ span shell-difference labels up to $N \le 2\nmax - 1$:\
+the Avery--Wen--Avery $\Delta n = \pm 1$ ladder on $\nmax$ shells produces
+shell-difference labels up to $2\nmax - 1$ (Paper~44~\S~3). This wider
+\emph{range} is genuine and is verified directly on the operator system
+(driver \texttt{tests/test\_paper46\_c3\_operator\_system.py}:\ multipliers with
+$N$ up to $2\nmax - 1$ are present at $\nmax \in \{3, 4, 5\}$). The range
+refinement matters for the L4 Berezin compatibility (Lemma~\ref{lem:L4op}~(d)),
+which engages the full natural-substrate envelope.
 
-\subsection{Why Paper~45's range $N \le \nmax$ is non-binding on the
-natural substrate}\label{app:correction_explanation}
+\subsection{Withdrawn:\ the per-harmonic $\sqrt{(N-1)/(N+1)}$ /
+envelope $\sqrt{1 - 1/\nmax}$ constant}\label{app:correction_text}
 
-The Avery--Wen--Avery $\Delta n = \pm 1$ ladder on $\nmax$ shells
-produces shell-difference labels $N$ up to $2\nmax - 1$ (Paper~44
-\S~3). The natural-substrate multipliers $M^{\spat}_{N, L, M}$ in
-$\Op^{L}_{\nmax, \Nt, T}$ include such labels in the range
-$N \in \{1, 2, \ldots, 2\nmax - 1\}$. At $\nmax = 3$, the per-harmonic
-constant at $N = 4$ is $C_{3}^{(4)} = 3/\sqrt{15} \approx 0.7746$,
-which exceeds Paper~45's stated $C_{3}^{(\nmax = 3)} = 2/\sqrt{8}
-\approx 0.7071$. The natural-substrate generator
-$(N_{\spat} = 4, L = 1, M = \pm 1, p = 0)$ has Lipschitz ratio
-$\approx 0.95 > C_{3}^{(3)} = 0.7071$ but $\le C_{3}^{(4)} = 0.7746$
-(L3b-2b sub-sprint \S~5).
-
-The numerical witness:
-
-\begin{table}[t]
-\centering
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{c|c|c|c|c|c}
-\toprule
-$\nmax$ & Paper~45 $C_{3}^{(\nmax)}$ & Envelope $\Cthreeop(\nmax)$ & $N_{\mathrm{env}}$ & $C_{3}^{(N_{\mathrm{env}})}$ & Paper~45 underbinds? \\
-\midrule
-$2$ & $0.5774$ & $0.7071$ & $3$ & $0.7071$ & YES \\
-$3$ & $0.7071$ & $0.8165$ & $5$ & $0.8165$ & YES \\
-$4$ & $0.7746$ & $0.8660$ & $7$ & $0.8660$ & YES \\
-$5$ & $0.8165$ & $0.8944$ & $9$ & $0.8944$ & YES \\
-$10$ & $0.9045$ & $0.9487$ & $19$ & $0.9487$ & YES \\
-$20$ & $0.9512$ & $0.9747$ & $39$ & $0.9747$ & YES \\
-\bottomrule
-\end{tabular}
-\caption{Envelope refinement at six $\nmax$ values. At every finite
-$\nmax$, Paper~45's stated $\sup_{N \le \nmax}$ under-states the bound
-required by the natural-substrate generators in the range
-$N \in (\nmax, 2\nmax - 1]$. The refined constant
-$\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ is the
-correct supremum value at the envelope.}\label{tab:correction}
-\end{table}
-
-\subsection{Envelope refinement of Paper~45 eq.~(C3\_joint\_bound)}\label{app:correction_text}
-
-We record the following minor refinement (applied to Paper~45 via
-Remark~\texttt{rem:envelope\_v2}). Paper~45 eq.~(C3\_joint\_bound)
-reads, after the refinement:
-\begin{equation*}
-   \Cthreejoint(\nmax, \Nt) \;\le\; \CthreeSU(\nmax)
-   \;\le\; \sup_{2 \le N \le 2\nmax - 1} \frac{N - 1}{\sqrt{N^{2} - 1}}
-   \;=\; \sqrt{1 - \frac{1}{\nmax}}
-   \;\xrightarrow{\nmax \to \infty}\; 1^{-}.
-\end{equation*}
-
-The accompanying explanation:\ the supremum range is the
-Avery--Wen--Avery achievable-envelope cutoff $N \le 2\nmax - 1$ on the
-natural chirality-doubled scalar-multiplier substrate of the
-Lorentzian construction, NOT the smaller range $N \le \nmax$. The
-$\Delta n = \pm 1$ ladder on $\nmax$ shells produces shell-difference
-labels $N$ up to $2\nmax - 1$ via Paper~44~\S~3. Both forms tend to
-$1^{-}$ asymptotically; the asymptotic statement (Paper~45 Theorem~5.1)
-is unchanged. Numerical panel values in Paper~45 \S~6 Table~1 are
-unchanged (they quote $\gammaSU$ directly, not
-$C_{3} \cdot \gammaSU$).
-
-\subsection{Why Paper~38 does NOT need the analogous refinement}
-\label{app:correction_paper38}
-
-Paper~38~\cite{paper38} \S~L3 Remark states
-$C_{3}(\nmax) \le \sup_{N \le \nmax} \sqrt{(N - 1)/(N + 1)}
-= \sqrt{(\nmax - 1)/(\nmax + 1)}$. Paper~38's Berezin map (Paper~38
-eq.~(B\_def)) restricts to $N \le \nmax$ by Plancherel cutoff; the
-propinquity assembly (Paper~38~\S~5.1 proof) bounds
-$\opnorm{[\DCH, B_{\nmax}(f)]} \le C_{3} \cdot \norm{\nabla f}_{\infty}$
-using the L3 bound on $N \le \nmax$ (the support of $B_{\nmax}(f)$).
-The natural substrate's full envelope $N \le 2\nmax - 1$ is NOT
-engaged in Paper~38's propinquity assembly; only Berezin-image
-multipliers with $N \le \nmax$ are.
-
-Therefore Paper~38~\S~L3 Remark is correct as stated. The refinement
-is Lorentzian-substrate-specific:\ the chirality-doubling at the
-operator-system level admits more multipliers than the Berezin-image
-level, and the natural-substrate envelope extends to $N \le 2\nmax - 1$.
-Paper~38 has no chirality-doubled multiplier algebra (it lives in a
-single copy of the chirality-doubled $\HGV$), and the envelope and
-the Berezin-image support coincide.
+An earlier draft asserted a per-harmonic constant
+$C_{3}^{(N)} = \sqrt{(N-1)/(N+1)}$ (operator-norm normalization
+$\opnorm{[\DGV, M]} \le C_{3}^{(N)} \opnorm{M}$) with envelope supremum
+$\Cthreeop(\nmax) = \sup_{N \le 2\nmax - 1} \sqrt{(N-1)/(N+1)}
+= \sqrt{1 - 1/\nmax}$, attributed to Paper~38 L3, together with a
+``Paper~45 underbinds'' table and an envelope-max tightness claim. This is
+\emph{withdrawn}. A direct operator-system computation (same driver) shows:\
+(i) Paper~38 L3 has $C_{3} = 1$ under the gradient seminorm, not an
+$N$-dependent $\sqrt{(N-1)/(N+1)}$;\ (ii) under the operator-norm
+normalization the earlier draft wrote, the measured ratios
+$\opnorm{[\DGV, M]}/\opnorm{M}$ do \emph{not} realize $\sqrt{(N-1)/(N+1)}$
+(they exceed it, and their supremum grows with $\nmax$ rather than
+approaching $\sqrt{1 - 1/\nmax}$);\ and (iii) the envelope-max monopole
+$Y^{(3)}_{2\nmax - 1, 0, 0}$ \emph{commutes} with $\DGV$
+($\opnorm{[\DGV, M]} = 0$ bit-exact at $\nmax \in \{3, 4, 5\}$) --- it is the
+loosest, not the tightest, generator. The correct L3 comparison constant is
+$C_{3} = 1$ (\S~\ref{app:correction_statement});\ since it feeds the
+\emph{descoped} rate formula, the convergence $\to 0$ and the panel values
+are unaffected.
 
 % =====================================================================
 \section{Strict-strong-form extension on the enlarged operator system}
@@ -1659,8 +1610,8 @@ substrate, possibly with a different multiplicative constant?
 
 The proposed route below addresses both questions (proof-sketch grade, descoped), with the
 chirality-flip content absorbed into the gradient-norm side of the
-L3 bound and the propinquity multiplier $\Cthreeop(\nmax) =
-\sqrt{1 - 1/\nmax}$ unchanged.
+L3 bound and the propinquity multiplier $\Cthreeop(\nmax) = C_{3} = 1$
+(Paper~38~\cite{paper38} Lemma~L3) unchanged.
 
 \subsection{The enlarged operator system and the J-graded gradient norm}
 \label{app:enlarged_substrate_def}
@@ -1827,8 +1778,8 @@ form
    \opnorm{[\DL, \Bjoint_{\mathrm{enlarged}}(f)]}
    \;\le\; \Cthreeop(\nmax) \cdot G^{\mathrm{enlarged}}(f),
 \end{equation}
-with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ as in eq.~(\ref{eq:C3op_closed_form}).
-The numerical constant is unchanged from the natural-substrate L3
+with $\Cthreeop(\nmax) = C_{3} = 1$ as in eq.~(\ref{eq:C3op_closed_form}).
+The comparison constant is unchanged from the natural-substrate L3
 bound (Lemma~\ref{lem:L3op}). The cost of the chirality-flip
 enlargement is absorbed entirely into the gradient-norm extension
 $G^{\mathrm{enlarged}}(f)$ via eq.~(\ref{eq:grad_norm_enlarged}).
@@ -1938,7 +1889,7 @@ joint smooth gradient norm, the Latr\'emoli\`ere propinquity bound is
    \;\le\; \Cthreeop(\nmax) \cdot \gammajoint_{\nmax,\Nt,T}
    \;\xrightarrow[(\nmax,\Nt)\to(\infty,\infty)]{}\; 0,
 \end{equation}
-with $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ and
+with $\Cthreeop(\nmax) = C_{3} = 1$ and
 $\gammajoint = O(\log\nmax/\nmax + T/\Nt)$ identical to those of
 Theorem~\ref{thm:main}. The Riemannian-limit recovery at $\Nt = 1$ is
 bit-exact (Frobenius residual $0.0$ in float64). \emph{Descoped}:\ the
