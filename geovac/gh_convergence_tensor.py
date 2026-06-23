@@ -970,8 +970,10 @@ def joint_height_simple_tensor(
               -  ||[D_{a,b}, B_a(f) (X) B_b(g)]||_op |.
 
     By Stein-Weiss applied to each factor + L4(d) compatibility +
-    Connes-Marcolli graded Pythagorean operator-norm formula
-    (R2 closure, sprint W2b-easy-tighten, see ``epsilon_cross_bound``):
+    the Connes-Marcolli graded triangle (sub-additive) operator-norm
+    bound (R2 closure, sprint W2b-easy-tighten, see ``epsilon_cross_bound``;
+    the earlier "Pythagorean" operator-norm identity was WITHDRAWN
+    2026-06-18 as false, Paper 39):
         height_{B_joint}  <=  (1 + 2*sqrt(2)) max(γ_a, γ_b)
                           =  O(max(γ_a, γ_b)),
     with the cross-Stein-Weiss term ε_cross = O(max(γ_a, γ_b)) — NOT
@@ -1137,9 +1139,11 @@ class TensorPropinquityBound:
         R2-explicit bound on the cross-Stein-Weiss term in the joint
         height (sprint W2b-easy-tighten, 2026-05-07): <= 2*sqrt(2) *
         max(gamma_a, gamma_b) on the unit-norm panel, with explicit
-        constant deriving from the Connes-Marcolli graded Pythagorean
-        Leibniz formula. Original C-W2b-easy claim (ε_cross = O(γ_a γ_b))
-        was incorrect; genuine rate is O(max(γ_a, γ_b)).
+        constant deriving from the Connes-Marcolli graded triangle
+        (sub-additive) Leibniz bound (the earlier "Pythagorean" identity
+        was WITHDRAWN 2026-06-18 as false, Paper 39). Original C-W2b-easy
+        claim (ε_cross = O(γ_a γ_b)) was incorrect; genuine rate is
+        O(max(γ_a, γ_b)).
     reach_joint_panel : float
         Empirical max joint reach over the 5-function product panel.
     height_joint_panel : float
@@ -1714,8 +1718,10 @@ def tensor_L5_assembly(
     unit-norm panel. Qualitative rate -> 0 is robust; constant shifts.
 
     The joint reach and joint height are now bounded by max(γ_a, γ_b)
-    via factor-by-factor inheritance from L4(c) (reach) and
-    Connes-Marcolli graded Pythagorean Leibniz (height, with R2 ε_cross).
+    via factor-by-factor inheritance from L4(c) (reach) and the
+    Connes-Marcolli graded triangle (sub-additive) Leibniz bound (height,
+    with R2 ε_cross; the earlier "Pythagorean" operator-norm identity was
+    WITHDRAWN 2026-06-18 as false, Paper 39).
 
     Args:
         n_max_a, n_max_b: cutoffs.

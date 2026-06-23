@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.46.0] - 2026-06-23
+
+### Changed
+- **`/qa group1` Batch 3 confirmation FULL re-cert (post-v4.45.0) — FAIL → remediated (PI-directed).** The clean re-cert the v4.45.0 preconditions unblocked. 16 LLM reviewers (code/claims/citation ×5 + synthesis) + a fresh synthesis re-dispatch + 5 deterministic gates. **Calibrated: sensitivity 5/5, specificity clean** (5 fresh seeds at sites distinct from the first cert; the v4.44/4.45 fixes served as M1–M6 controls and all held). The S-synthesis seed (state-space-GH→propinquity at the abstract) was MISSED by the first synthesis reviewer and CAUGHT by a focused fresh re-dispatch — calibration recovered. **FAIL — a NEW LARGE the first cert's reviewers didn't catch.**
+
+### Fixed (LARGE — the S⁷ zombie, corpus-wide)
+- **Paper 50 carried a withdrawn S⁷ "structural negative" as live, contradicting its own Erratum.** Paper 50 §8 Erratum (l.901-919) retracts the earlier S⁷ scalar "structural non-match" as a **false negative** (30-dps under-resolved search) and states the ladder generates closed forms at every odd rung S³–S¹¹ (genuine S⁷ relation at ≥200 dps). But the catalogue table (l.1031) still listed S⁷ "PSLQ fails … UNKNOWN" and the wall-list (l.1253-54) cited "the S⁷ scalar negative" as a live wall, and the **synthesis** (l.1709-18) carried the same retracted negative as an "open target." **Fixed:** catalogue row → DONE (in-ring R₇, ≥200 dps, Erratum); wall-list example → the genuine squashed-S³ deformed-Hurwitz wall; synthesis → "S⁷–S¹¹ ladder closure" (false-negative retracted, ladder generates).
+
+### Fixed (SMALL)
+- **code-39: the v4.44.0 zombie sweep was STILL incomplete** — 3 residual "Connes-Marcolli graded **Pythagorean** operator-norm/Leibniz" mechanism labels in `gh_convergence_tensor.py` docstrings (`joint_height_simple_tensor`, `epsilon_cross_bound_value`, `tensor_L5_assembly`) → corrected to the triangle (sub-additive) bound + WITHDRAWN flags. (The withdrawn Pythagorean identity was presented as the live mechanism; values/tests unaffected.)
+- **claims-40 tier visibility:** main-theorem 4.13(ii) "4/π universal" stated flatly → added the inline tier tag; the §L3.3 "rigorously at all ranks" headline split into the rank-uniform asymptotic C₃=1 leg (Kumar/PRV) vs the interior (INT) leg numerically verified at A₂/A₃/C₂/G₂ with F₄–E₈ a named follow-on.
+- **claims-50:** "the state-side constant is provably outside the spectral-zeta ring" (a PSLQ null at ceiling 10⁸ ≠ proof of non-membership) → softened to the numerical-disjointness statement + the structural (S = log of an integer) independent support.
+
+### Verified
+- Papers 40/50/synthesis compile clean (errors=0); C5/C11/C13/C14/C15 PASS; topo proofs 18/18; gh string/height tests 14 passed/1 skip; gh import OK. No `geovac/` logic changed (docstrings only). Memo: `debug/sprint_qa_group1_batch3_cert_memo.md` (§Re-cert rc).
+
 ## [4.45.0] - 2026-06-23
 
 ### Changed

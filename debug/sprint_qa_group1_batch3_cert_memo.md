@@ -66,3 +66,59 @@ PI directed "let's get started fixing those." All four named preconditions from 
 **D — p40 Vinberg missing bibitem — DONE.** The "Vinberg's lemma" (two usages) is the standard Weyl-dominance fact (dominant orbit rep maximises ⟨·,ρ⟩); re-attributed to the already-grounded `bourbaki_lie_8` rather than guess an unverified "Vinberg 1990" (which would risk a new C4 defect).
 
 **Status:** Papers 29/40/synthesis compile clean (errors=0); C5/C11(all)/C13/C14/C15 PASS; topo proofs 18/18 + p40 default 3/3 + slow 3/3 green. Batch 3 is now ready for a **clean full 5-dimension re-cert** (the LARGE backfill that blocked it is closed).
+
+---
+
+## Re-cert rc (full 5-dim, post-v4.45.0) — FAIL→remediated; NEW S⁷ zombie caught by fresh adversaries (2026-06-23, v4.46.0)
+
+Confirmation full re-cert after the v4.44.0+v4.45.0 remediation (the clean re-cert the preconditions
+blocked). Base HEAD f5011a8. Worktree `../geovac-qa-seed-g1b3-rc`. 5 fresh seeds (sites distinct from the
+first Batch-3 cert), controls M1–M6 = the v4.44/4.45 fixes. 16 LLM reviewers + 1 fresh synthesis re-dispatch.
+
+**Calibration: PASS — 5/5 sensitivity, clean specificity.**
+- S-code-50 (test_paper50_wedge_kms l.120 `<1e9`) → code-50 ✓
+- S-code-29 (test_ihara_zeta l.265 P12 `==`-tautology) → code-29 ✓
+- S-claims-52 (p52 abstract "is a genuine new holographic duality / literal bulk dual") → claims-52 ✓ (+ code-52 cross)
+- S-citation-50 (KPS arXiv 1105→1150) → citation-50 ✓ (WRONG-ID, LARGE)
+- S-synthesis (synth l.107 state-space-GH→Latrémolière propinquity) → **the first synthesis reviewer MISSED it; the focused fresh synthesis re-dispatch CAUGHT it** (calibration recovered).
+- M1–M6 all respected (the v4.44/4.45 fixes confirmed sound: p29 title/Obs/int_alg, p40 backfill/Vinberg/Leimbach-vS, p39 aguilar, p29 Marcolli-vS, p50 bit-exact-match framing).
+
+**Verdict: FAIL** — calibrated panel + genuine non-seed defects. Headline = a NEW LARGE the first cert's
+reviewers didn't catch.
+
+### MATERIAL-1 (LARGE) — the S⁷ zombie (verified vs primary text) — REMEDIATED
+Paper 50's **Erratum (§8, l.901-919)** retracts an earlier S⁷ scalar "structural non-match" as a FALSE
+NEGATIVE (30-dps under-resolved search) and states the ladder GENERATES closed forms at every odd rung
+S³–S¹¹ (genuine S⁷ relation at ≥200 dps, err ~2.4e-202). But the same paper's **catalogue table (l.1031)**
+still listed S⁷ as "numerical only; PSLQ fails on simple ring; UNKNOWN" and the **wall-list (l.1253-54)**
+cited "the S⁷ scalar negative" as a live category-(iii) wall — both contradicting the paper's own Erratum.
+The **synthesis (l.1709-18)** carried the same retracted negative as a live "open target." Caught by claims-50
++ both synthesis reviewers. **Fixed:** catalogue row → DONE (in-ring R₇, ≥200 dps, Erratum); wall-list example
+→ the genuine squashed-S³ deformed-Hurwitz wall; synthesis paragraph → "S⁷–S¹¹ ladder closure" (false-negative
+retracted, ladder generates).
+
+### MATERIAL-2 (SMALL) — code-39: v4.44.0 zombie sweep STILL incomplete (3 more sites) — REMEDIATED
+`gh_convergence_tensor.py` had 3 residual "Connes-Marcolli graded **Pythagorean** operator-norm/Leibniz"
+mechanism labels (`joint_height_simple_tensor` l.973, `epsilon_cross_bound_value` docstring l.1142,
+`tensor_L5_assembly` l.1722) — the withdrawn Pythagorean identity presented as the live mechanism. Fixed →
+triangle (sub-additive) bound + WITHDRAWN flags. (Lesson re-confirmed: sweep defect CLASSES exhaustively;
+the v4.44.0 sweep hit the theorem-statement/status strings but missed these mechanism docstrings.)
+
+### MATERIAL-3 (SMALL) — claims-40 tier-visibility — REMEDIATED
+Main-theorem 4.13(ii) stated "$4/\pi$ universal" flatly without an inline tier (abstract/§L2/Thm-header carry
+it) → added the inline tier tag. The §L3.3 headline "establishes Lemma L3 rigorously at all ranks" → split:
+the asymptotic C₃=1 leg IS rank-uniform (Kumar/PRV), but the interior (INT) leg is numerically verified at
+A₂/A₃/C₂/G₂ with the F₄–E₈ case-bookkeeping a named follow-on (the footnote's own concession, now in the
+headline).
+
+### MATERIAL-4 (SMALL) — claims-50 PSLQ-null overstatement — REMEDIATED
+p50 l.509 "the state-side constant is provably outside the spectral-zeta ring" (a PSLQ null at ceiling 10⁸ is
+not a proof of ring non-membership) → softened to "no integer relation up to ceiling 10⁸" + noted the
+structural (S = log of an integer) argument is the independent support.
+
+### NITs (logged): p29 β₁=23-vs-110 wording; p39 propinquity metadata (filename/keyword/comment); p40 §5.2 Bozejko-Fendler-kernel label; orphan bibitems + cosmetic key-years; synthesis L5 "propinquity assembly" wording.
+
+**Status:** v4.46.0 fixes all 4 (S⁷ zombie corpus-wide + code-39 docstrings + claims-40 tier tags + claims-50
+wording). Papers 40/50/synthesis compile clean (errors=0); C5/C11/C13/C14/C15 PASS; topo 18/18; gh import OK.
+The fresh-adversary re-cert caught a genuine zombie the first cert missed — Batch 3 needs one more clean full
+re-cert to certify (the S⁷-zombie class is now swept; a further pass validates).

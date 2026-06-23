@@ -1125,9 +1125,15 @@ case-bookkeeping exhaustively verified in exact sympy arithmetic at
 $5641/5641$ cells across $\SU(3)$, $\SU(4)$, $\Sp(2)$, and $G_2$
 (extended panel; see Remark~\ref{rem:numerical_certification_interior}).
 The combined closure
-(Corollary~\ref{cor:L3_closure_at_all_ranks}) establishes
-Lemma~\ref{lem:L3} rigorously at all ranks with $C_3(G) = 1$
-asymptotic-tight on every compact connected simple Lie group $G$.
+(Corollary~\ref{cor:L3_closure_at_all_ranks}) establishes the
+\emph{asymptotic-tight} $C_3(G) = 1$ leg rigorously at all ranks (via
+the PRV-summand bound of Kumar, which is genuinely rank-uniform) on
+every compact connected simple Lie group $G$. The \emph{interior} (INT)
+leg of Lemma~\ref{lem:L3} is proved analytically and verified by
+exhaustive numeric panels at the tested ranks ($A_2, A_3, C_2, G_2$);
+its rank-uniform case-bookkeeping for the higher exceptional ranks
+($F_4, E_6, E_7, E_8$) carries through the same analytical skeleton but
+is a named follow-on (Remark~\ref{rem:numerical_certification_interior}).
 
 \begin{proposition}[Rigorous proofs of (INT) at low rank and special
 summands]\label{prop:int_special_cases}
@@ -1758,7 +1764,11 @@ Lemma~\ref{lem:L3}, asymptotic-tight as $\Lammax \to \infty$.
 \item[(ii)] The leading rate constant $4/\pi$ is \emph{universal}
 across the class:\ independent of the rank of $G$, the order of the
 Weyl group $W(G)$, and the explicit Lie-type of $G$, in the
-dual-Coxeter normalisation.
+dual-Coxeter normalisation. (Tier:\ rigorous at rank~1; for general
+$G$ a proof-sketch mechanism numerically pinned at ranks~1--2 plus a
+rank-3 datapoint, the fully rank-uniform analytical proof being a
+named gap --- see Theorem~\ref{thm:universal_constant_analytical} and
+\S\ref{sec:L2}.)
 \end{enumerate}
 \end{theorem}
 
