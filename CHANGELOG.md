@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.0] - 2026-06-22
+
+### Changed
+- **`/qa group1` Batch 2 — FULL certifying run, FAIL → remediated (PI-directed).** First *all-5-dimension* cert of the Lorentzian-arc FOUNDATION papers (42 Tomita–Takesaki four-witness; 43 Lorentzian four-witness Wick-rotation; 44 BBB operator-system + prop=2; 53 disk-with-cone Berezin) + group1 synthesis. The two prior Batch-2 runs (rc2 v4.28.0, rerun2 v4.32.0) were claims+citation only and both predicted "next clean re-run should certify" — this run shows that was optimistic: the **code dimension, exercised in full for the first time on Batch 2, carried a FAIL.** 13 reviewers (code/claims/citation ×4 + synthesis ×1), opus, path-pinned, blind.
+- **Calibrated: sensitivity 5/5, specificity clean.** All five blind seeds caught (code vacuous-tolerance R²=I `<1e9`; claims-C7 Paper-38 "Latrémolière propinquity" mislabel; claims-C14 thm:interior disk-convergence zombie [caught ×2: claims-53 + code-53]; citation-C4 latremoliere2025 → arXiv:1811.10843 wrong-ID; synthesis-C9 disk-converges flip). Controls M1–M5 respected.
+
+### Closed (genuine material defects — remediated)
+- **p42 §5.5(II) "$D_W$ does not close the period closure" was FALSE (code-42).** The period closure is the conjugation $\sigma_{2\pi}(O)=U O U^{-1}$ with $U=e^{2\pi i\beta D_W}=-I$ (D_W half-integer spectrum); a global scalar cancels, $(-I)O(-I)=O$, so $D_W$ *does* close the flow (verified residual $1.9\times10^{-14}$). The genuine distinction is *operator-level* — $e^{2\pi i\beta D_W}=-I$ (spinor double-cover) vs $e^{2\pi i K_\alpha^W}=+I$ (identity), the same integer-spectrum structure underlying the WH7 compact-boost reading — not flow-closure. Rewrote §5.5(II) (l.1256–1278) + the sibling echo at l.698; the conclusion ($H_{\mathrm{local}}=K_\alpha^W$, not $D_W$) survives. **This overturned the run's own M1 control** — the paper's imprecise claim had been encoded as "protected"; the fresh code reviewer running the actual computation caught it (the two-way-verdict QA principle).
+- **p43 §5.2 deleted-debug citation (code-43).** §5.2 cited a *deleted* file `debug/h_local_orthogonality_formal_proof.py` as the "Source" for a load-bearing-adjacent closed form — doubly wrong (the chirality-pairing proof is in-paper, Lemma 5.5). Neutralized → CHANGELOG + the self-contained in-paper proof.
+- **p42 verch2001 descriptor (citation-42):** in-text "nuclearity-modular" (a *different* Verch paper) → "generally covariant spin-statistics and modular structure" (×2), matching the cited spin-statistics paper.
+- **p44 Connes–vS proposition numbers (citation-44):** "Proposition 4.2/4.3" → "§4" (×2) — web confirms §4 covers Toeplitz operator systems but not the exact numbers, and one source contradicted 4.2 (suggested 4.9); softened to the confirmed section pointer rather than assert a possibly-wrong proposition.
+- **p42 l.495/1650 C7 NITs:** two residual "propinquity convergence" labels on the Paper-38 result (missed by the rc2 sweep) → "state-space Gromov–Hausdorff convergence".
+
+### Coverage gaps (NO-TEST — logged in `docs/claim_test_matrix.md`, raised to PI, queued for backfill)
+- **p43 §5.2 Pythagorean** HS-orthogonality + closed form $r^2=\kappa_g^2 S(n)/4\pi^2+D(n)$ + 18-cell panel: in-paper proof self-contained, but no `tests/` numerical regression.
+- **p53 disk-obstruction negatives** (min g≈−0.13; interior rate $\Lambda^{+0.07}$) **+ prop:prop2**: only `debug/archive/` drivers + JSON — the negative-result half + the one numbered Proposition are unbacked in the permanent suite (resurrect into `tests/` per the v4.22.1 resurrect-pruned rule).
+- **p53 cited test `@pytest.mark.slow`** (skipped by default) — fast-gate or de-slow.
+- **p42 cross-witness collapse test BACKED-WEAK:** collapse is by-construction ($\beta$-independent $\rho_W$); test compares bit-identical paths → test-hardening queued.
+- The code-dimension coverage-gap backfill is the **named precondition** for the Batch-2 re-cert.
+
+### Verified clean
+- Citation apparatus across 42/43/44/53: **no fabricated arXiv IDs, no wrong-ID** (the canonical failure mode) beyond the caught seed; che_perales = DGA 103 (2026) confirmed grounded.
+- All edited papers compile errors=0 / undef refs+cites=0; deterministic C5/C11/C13/C14/C15 `--gate group1` PASS. Worktree removed + leak-scanned (real corpus clean on all 5 seed sites).
+- Memo: `debug/sprint_qa_group1_batch2_cert_memo.md`.
+
 ## [4.42.1] - 2026-06-22
 
 ### Changed

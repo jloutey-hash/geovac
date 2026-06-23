@@ -1,0 +1,63 @@
+{
+  "run": "group1_batch2",
+  "type": "FULL CERTIFYING run (all 5 gating dimensions)",
+  "description": "Full /qa group1 Batch 2 (Papers 42, 43, 44, 53 + synthesis) certifying run. Batch 2 = the Lorentzian-arc FOUNDATION papers (42 Tomita-Takesaki modular / four-witness; 43 Lorentzian four-witness Wick-rotation; 44 BBB operator-system substrate + prop=2; 53 disk-with-cone Berezin / disk-obstructed-plane-recovered). Both prior Batch-2 runs FAIL->remediated (rc2 v4.28.0, rerun2 v4.32.0; rerun2 noted 'C4 drained + claims/code converged -- next clean re-run should certify'). This is that certifying re-run: ALL dimensions (code C1/C2 + claims C3/C5/C6/C7/C8/C14 + citation C4 + synthesis C9 + deterministic C10-C15). A PASS requires a calibrated panel finding ZERO genuine material defects across all dimensions. Seeds in worktree ../geovac-qa-seed-group1-batch2 (branch qa-seed-group1-batch2, base HEAD 7017802 = v4.42.1). NEVER committed; worktree removed at end. Seeds cover every gating dimension; fresh sites in 42/43/44/53 + synthesis.",
+  "date": "2026-06-22",
+  "base_head": "7017802",
+  "dimensions_exercised": ["code", "claims", "citation", "synthesis", "deterministic"],
+  "seeds": [
+    {
+      "id": "S-code-C2",
+      "file": "tests/test_modular_hamiltonian.py",
+      "location": "l.90 (test_hemispheric_wedge_reflection_is_involution; R^2 = I)",
+      "defect_class": "C2 vacuous/gutted tolerance",
+      "planted": "Changed 'assert residual < 1e-13' -> 'assert residual < 1e9' (vacuous; residual = ||R^2 - I|| is a non-negative norm, so <1e9 asserts nothing). This is the only assertion in the test (no backstop) -- guts the wedge-reflection involution check that backs the four-witness wedge geometry (p42/43).",
+      "truth": "The hemispheric-wedge reflection R is an involution (R^2 = I bit-exact, residual < 1e-13) at n_max=2,3,4. A 1e9 tolerance defeats the check (would pass for any R).",
+      "expected_catcher": "code-42 (and/or code-43; test_modular_hamiltonian backs the four-witness wedge)"
+    },
+    {
+      "id": "S-claims-C7",
+      "file": "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+      "location": "l.1282 (principal-open-question Riemannian template)",
+      "defect_class": "C7 trunk-status mislabel (Paper 38 = state-space GH, not Latremoliere propinquity)",
+      "planted": "Changed 'Paper~38's state-space Gromov--Hausdorff convergence on S^3 = SU(2)' -> 'Paper~38's Latr\\'emoli\\`ere propinquity convergence on S^3 = SU(2)'. Re-introduces the Paper-38 mislabel that rc2 (v4.28.0) fixed corpus-wide.",
+      "truth": "Paper 38 = van Suijlekom STATE-SPACE Gromov-Hausdorff convergence, NOT Latremoliere propinquity (the C7 rule).",
+      "expected_catcher": "claims-44"
+    },
+    {
+      "id": "S-claims-C14-p53",
+      "file": "papers/group1_operator_algebras/paper_53_disk_propinquity.tex",
+      "location": "l.359-362 (thm:interior statement)",
+      "defect_class": "C14 descope zombie (withdrawn disk-convergence re-asserted)",
+      "planted": "Flipped thm:interior from '(a),(d) hold on the finite disk; (b),(c) hold on the boundaryless plane only and are WITHDRAWN on the finite disk' -> 'all parts (a)-(d) hold on the finite disk for all Lambda, establishing disk-with-cone metric convergence'. Re-introduces the withdrawn finite-disk convergence (the disk is OBSTRUCTED by its Dirichlet boundary; rc2/sub-bite-3 withdrew (b),(c) on the disk -> plane-only).",
+      "truth": "The finite disk is OBSTRUCTED by its Dirichlet boundary; thm:interior parts (b),(c) are WITHDRAWN on the finite disk and hold only on the boundaryless plane R^2_alpha (Bochner-Riesz). Only (a),(d) hold on the disk.",
+      "expected_catcher": "claims-53"
+    },
+    {
+      "id": "S-citation-C4",
+      "file": "papers/group1_operator_algebras/paper_53_disk_propinquity.tex",
+      "location": "l.732 (latremoliere2025 bibitem arXiv ID)",
+      "defect_class": "C4 wrong-ID (regression of the rerun2 v4.32.0 fix)",
+      "planted": "Changed latremoliere2025 'arXiv:2512.03573' -> 'arXiv:1811.10843'. Re-introduces the rerun2 LARGE defect: 1811.10843 is the COMPACT-only metric-spectral-triple propinquity paper, NOT the pointed-proper (locally compact) hypertopology the bibitem title 'pointed proper quantum metric spaces' describes (= 2512.03573).",
+      "truth": "Latremoliere 'quantum GH hypertopology on pointed proper quantum metric spaces' = arXiv:2512.03573 (2025); arXiv:1811.10843 is the compact-only propinquity-for-metric-spectral-triples paper (a DIFFERENT work). C15 N/A (no inline arXiv transposition; this is the bibitem ID).",
+      "expected_catcher": "citation-53"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "l.141-143 (Paper 53 disk coverage)",
+      "defect_class": "C9 synthesis overstatement (disk-obstructed -> disk-converges)",
+      "planted": "Flipped 'the finite disk is obstructed by its Dirichlet boundary and convergence is recovered only on the boundaryless plane' -> 'the finite disk converges despite its Dirichlet boundary, with the boundaryless plane confirming the metric reconstruction'.",
+      "truth": "Paper 53's finite disk is OBSTRUCTED by its Dirichlet boundary; convergence is recovered ONLY on the boundaryless plane (the disk does NOT converge). Synthesis must state the obstruction, not disk-convergence.",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_42", "claim": "Tomita-Takesaki four-witness: sigma_2pi(O)=O bit-exact, BW-alpha/gamma realisation; the 'derived' finding (D_W generator 2pi-factor does NOT close) is CORRECT (rc2 reconcile -- the beta-factor over-flag was overturned); K/combination-rule labeled Observation (rerun2 fix). Do NOT re-flag the derived finding or the L5-lemma name.", "must_not_flag": true},
+    {"id": "M2", "file": "paper_43", "claim": "Lorentzian four-witness Wick-rotation; Paper-38 = state-space GH (rc2/rerun2 C7 fixes); finite-cutoff Krein closure genuine (sub-bite-1 over-flag overturned).", "must_not_flag": true},
+    {"id": "M3", "file": "paper_44", "claim": "BBB operator-system substrate; prop=2 (N_t>1 coverage gap fixed rerun2, prop=2 not prop=inf); Paper-38 unconditional 4/pi rate (C8 UPGRADE rc2). Other Paper-38 refs = state-space GH (the l.1484 'continuum Lorentzian propinquity' is Paper 44's OWN object, not a Paper-38 mislabel).", "must_not_flag": true},
+    {"id": "M4", "file": "paper_53", "claim": "disk-with-cone Berezin; finite disk OBSTRUCTED (Dirichlet) -> plane-only Bochner-Riesz (s>=1/2, Lambda^{-0.6..-0.9}); thm:interior (a),(d) disk / (b),(c) plane-only-withdrawn-on-disk (sub-bite-3/rc2 fix); latremoliere2025=2512.03573 (rerun2 fix); stempak=ETNA 14(2002). These are CORRECT.", "must_not_flag": true},
+    {"id": "M5", "file": "synthesis", "claim": "Batch-2 coverage: 42 four-witness, 43 Lorentzian extension, 44 operator-system/prop=2, 53 disk-obstructed-plane-recovered -- all at current status. Do NOT flag the (correct) disk-obstruction framing.", "must_not_flag": true}
+  ],
+  "do_not_reflag_remediation": "ALL prior Batch-2 fixes are CORRECT and must not be re-flagged: (sub-bite-1 v4.23.0) 6 citation fixes (hekkelman_mcdonald2024 fabricated x3, hekkelman2022, zhu_casini authors, latremoliere2018 x3, avery, devastato), Paper-38 propinquity->state-space-GH, p44 bibitem; p42 beta-factor + section-10 closure over-flags OVERTURNED (do NOT re-raise). (sub-bite-3 v4.25.0) p53 disk positivity withdrawn -> plane-only, test_paper53_plane_bochner_riesz.py, thm:interior (b),(c) withdrawn on finite disk. (rc2 v4.28.0) p42 x3 C7 Paper-38->state-space-GH, p44 C8 P38-unconditional-4/pi, p53 status-note->theorem descope + Lambda^{-1.30} corrected, p43 hekkelman2022=2111.13865, p53 stempak=ETNA 14(2002), ack Edward->Eva-Maria Hekkelman; over-flags reconciled (synth 52/53-coverage exists, L5 faithful, vdD Prop 4.1 GROUNDED). (rerun2 v4.32.0) p42 'conjectural observation'->Observation + C8 Lorentzian alignment, p43 C7 x2, p44 N_t>1 prop=2, p53 latremoliere2025=2512.03573 + header + stein_weiss, +11 SMALL citation-tail. The cross-Batch-1 fixes (C3=1, Headline-4 retraction) touched the synthesis but not 42/43/44 directly. che_perales venue DGA 103 (2026) correct."
+}

@@ -361,3 +361,31 @@ group1 paper restates them (C7).
   docstring (C₃=1). Logged for next claims pass: p49 "joint propinquity rate" label = SU(2) factor.
   Tests pass; gates PASS. **Three laps (rem1→rem2→rem3) converged the code dimension to MATERIAL-clean,
   each lap narrower than the last. cert6 (full, w/ citation) certifies.**
+
+- 2026-06-22 — **Batch 2 FULL certifying run** (Papers 42, 43, 44, 53 + synthesis; v4.43.0, PI-directed).
+  First *all-5-dimension* cert of the Lorentzian-arc FOUNDATION papers (prior rc2 v4.28.0 + rerun2
+  v4.32.0 were claims+citation only). 13 reviewers (code/claims/citation ×4 + synthesis ×1), opus,
+  path-pinned, blind. **Calibrated: sensitivity 5/5** (all seeds caught — code vacuous-tolerance,
+  claims-C7 Latrémolière mislabel, claims-C14 thm:interior zombie [caught ×2 by claims-53 + code-53],
+  citation-C4 latremoliere2025 wrong-ID, synthesis-C9 disk-flip), **specificity clean** (M1–M5 controls
+  respected). **VERDICT: FAIL → remediated** — the CODE dimension (never fully exercised in prior
+  Batch-2 runs) carried the verdict:
+  - **p42 §5.5(II) "$D_W$ does not close the period closure" was FALSE** (code-42, verified $<10^{-13}$):
+    the period closure is the conjugation $\sigma_{2\pi}(O)=(-I)O(-I)=O$, and a global scalar $-I$
+    cancels — so $D_W$ *does* close the flow. **This overturned the M1 control** (I had encoded the
+    paper's imprecise claim as protected). Corrected to the operator-level lift ($e^{2\pi i\beta D_W}=-I$
+    double-cover vs $e^{2\pi i K_\alpha^W}=+I$); conclusion ($H_{\mathrm{local}}=K_\alpha^W$) survives.
+    Sibling echo at l.698 also fixed.
+  - **p43 §5.2 Pythagorean cluster** (code-43): HS-orthogonality + closed form + 18-cell panel have
+    NO `tests/` backing and cited a **deleted** `debug/h_local_orthogonality_formal_proof.py` →
+    citation neutralized (in-paper proof self-contained + CHANGELOG); numerical backfill = coverage gap.
+  - **p53 disk-obstruction negatives + prop:prop2** (code-53): only `debug/archive/` backing; cited
+    test `@slow`/skipped-by-default → coverage gaps.
+  - **citation:** p42 verch2001 "nuclearity-modular"→"generally covariant spin-statistics/modular"
+    (descriptor mismatch); p44 Connes–vS "Prop 4.2/4.3"→"§4" (unconfirmable prop numbers; one web
+    source contradicted 4.2). p42/43/44 citation apparatus otherwise fully grounded (no fabrications).
+  - **claims/synthesis:** MATERIAL-clean beyond seeds (only NITs: p42 l.495/1650 propinquity→state-space GH, fixed).
+  3 coverage gaps logged in `claim_test_matrix.md` (Batch-2 section) + raised to PI; queued for a
+  dedicated test-backfill sprint (v4.34.0 precedent). All papers compile errors=0 / undef=0;
+  C5/C11/C13/C14/C15 PASS. **Clean re-run (cert) still needed — this is FAIL→remediated, not yet PASS.
+  The code-dimension coverage-gap backfill is the named next step before re-cert.**

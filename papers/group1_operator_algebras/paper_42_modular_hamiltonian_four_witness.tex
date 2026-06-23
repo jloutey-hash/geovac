@@ -312,7 +312,8 @@ finite-dimensional structure comes from the spectral truncation of
 $\DCH$ rather than from a discretisation of physical space. The
 existing modular literature on Riemannian backgrounds includes
 Strohmaier~\cite{strohmaier2006} (Reeh--Schlieder on stationary
-spacetimes) and Verch~\cite{verch2001} (nuclearity-modular on curved
+spacetimes) and Verch~\cite{verch2001} (generally covariant
+spin-statistics and modular structure on curved
 backgrounds); these address the algebraic-QFT side, whereas the
 present paper anchors the modular structure on the
 Connes--van~Suijlekom truncated operator system. Direct attempts to
@@ -492,10 +493,11 @@ the analytic infrastructure that the present paper builds on.
 The present paper does not require the GH-convergence machinery in any
 load-bearing way:\ the period closure proved below is a
 finite-cutoff bit-exact identity, not a limit statement. The
-propinquity convergence~\eqref{eq:paper38_main} enters only as a
+state-space Gromov--Hausdorff convergence~\eqref{eq:paper38_main}
+enters only as a
 \emph{consistency} cross-check (Section~\ref{sec:tt_construction}),
 confirming that the modular construction inherits the M1 transcendental
-signature of the metric-side propinquity.
+signature of the metric-side state-space GH convergence.
 
 % =====================================================================
 \section{Lorentzian-readiness audit and Riemannian scope}
@@ -696,10 +698,12 @@ H_{\mathrm{local}} = K_\alpha^W$ is itself $\beta$-independent at the
 algebra-action level, so the wedge KMS state $\rho_W = e^{-K_\alpha^W}/Z$
 is the same for every $\beta$. This is a deliberate construction-level
 choice;\ an alternative choice $H_{\mathrm{local}} = D_W$ (the
-wedge-restricted Camporesi--Higuchi Dirac) would not produce the
-period closure of Section~\ref{sec:geometric_construction}, isolating
-\eqref{eq:H_local_def} as a derived structural finding. We return to
-this point in Section~\ref{sec:unified_closure}.
+wedge-restricted Camporesi--Higuchi Dirac) would lift the $\beta = 2\pi$
+period to the spinor double-cover $-I$ rather than the identity
+operator $+I$ of Section~\ref{sec:geometric_construction}
+(the conjugation flow still closes, but at the double-cover sign),
+isolating \eqref{eq:H_local_def} as a derived structural finding. We
+return to this point in Section~\ref{sec:unified_closure}.
 
 \subsection{Four-witness unification and unit normalisation}
 \label{sec:four_witness_unit}
@@ -1257,25 +1261,41 @@ If we had chosen $H_{\mathrm{local}} = D_W$ (the wedge-restricted
 Camporesi--Higuchi Dirac), then $\beta H_{\mathrm{local}} = 2\pi D_W$
 would have half-integer spectrum on the spinor basis (the eigenvalues
 of $D_W$ are $\chi \cdot (n + 1/2)$, with $n + 1/2$ half-integer), so
-$e^{i \cdot 2\pi \cdot \beta D_W}$ would \emph{not} be the identity at
-$\beta = 2\pi$. The bit-exact period closure would not hold, and the
-unified BW-$\alpha$ / BW-$\gamma$ structure would split.
+the \emph{operator-level} period lift $e^{i \cdot 2\pi \cdot \beta D_W}
+= -I$ at $\beta = 2\pi$ --- the global $-1$ of the spinor
+double cover --- whereas the boost-class $K_\alpha^W$ has odd-integer
+spectrum and $e^{i \cdot 2\pi \cdot K_\alpha^W} = +I$, the
+identity operator. We emphasise the precise sense of the distinction:\
+the modular flow $\sigma_t(\cdot) = U_t (\cdot) U_t^{-1}$ acts by
+\emph{conjugation}, in which a global scalar phase cancels, so the
+flow-level period closure $\sigma_{2\pi}(O) = O$ still holds with $D_W$
+(the $-I$ cancels:\ $(-I)\, O\, (-I) = O$;
+we verified this bit-exactly, residual $<10^{-13}$ at $n_{\max} =
+2,3,4$). The distinction is therefore \emph{not} at the flow level but
+at the operator level:\ only $K_\alpha^W$ lifts the $\beta = 2\pi$
+period to the identity operator $+I$; $D_W$ lifts it to the
+double-cover $-I$.
 
 This is a non-trivial structural finding. The framework's intrinsic
 Dirac $\DCH$ is the canonical spectral-action object on the
 Camporesi--Higuchi triple, and one might naively expect it to play the
 role of the local Hamiltonian for any natural KMS state on the
-truncated operator system. The above shows that this is not the case
-at $\beta = 2\pi$:\ the right local Hamiltonian for the BW vacuum on
-the wedge is the boost-class generator $K_\alpha^W$, not the
-wedge-restricted Dirac $D_W$. The two play complementary roles:\
+truncated operator system. The above shows that, while either choice
+generates a $2\pi$-periodic conjugation flow, only the boost-class
+generator $K_\alpha^W$ realises the canonical BW vacuum with the
+identity-operator period lift at $\beta = 2\pi$; the wedge-restricted
+Dirac $D_W$ carries the spinor double-cover sign instead. The two play
+complementary roles:\
 $\DCH$ is the spectral-action object (the Connes--Chamseddine input
 for the heat-kernel expansion); $K_\alpha^W$ is the
 wedge-modular-Hamiltonian object (the Tomita--Takesaki input for the
 modular-flow construction). On the round $\sthree$ they happen to
 agree up to an overall scale (both are diagonal in the spinor basis
 with simple spectral structure), but only one of them has the integer
-spectrum required for the bit-exact period closure at $\beta = 2\pi$.
+spectrum that lifts the $\beta = 2\pi$ period to the identity operator
+(the same integer-spectrum / $e^{2\pi i K} = +I$ structure
+that underlies the compact-boost reading of
+Section~\ref{sec:conclusion}).
 
 \begin{remark}[A speculative reading]\label{rem:speculation}
 We note, but do not pursue here, the possibility that the
@@ -1537,8 +1557,9 @@ physics.
 The standard algebraic-QFT references for modular structures on
 Riemannian backgrounds are
 Strohmaier~\cite{strohmaier2006} (Reeh--Schlieder on stationary
-spacetimes) and Verch~\cite{verch2001} (nuclearity-modular on compact
-Riemannian backgrounds). These address the modular-theoretic content
+spacetimes) and Verch~\cite{verch2001} (generally covariant
+spin-statistics and modular structure on curved
+backgrounds). These address the modular-theoretic content
 of axiomatic QFT on curved backgrounds. The present construction is
 spectral-triple-internal:\ it does not invoke a Wightman field algebra
 or a nuclearity argument, but rather works directly with the
@@ -1629,7 +1650,8 @@ finite cutoff. The structural reason is the integer spectrum of the
 BW local Hamiltonian, which forces $e^{i \cdot 2\pi \cdot K_\alpha^W}
 = I$ on the underlying Hilbert space and hence the bit-exact closure
 of the modular flow at $t = 2\pi$. Unlike Paper~38's qualitative-rate
-propinquity convergence~\eqref{eq:paper38_main}, the present closure
+state-space Gromov--Hausdorff convergence~\eqref{eq:paper38_main}, the
+present closure
 does not require a Gromov--Hausdorff limit and is not asymptotic in
 $\nmax$;\ it is a finite-cutoff exact identity.
 
