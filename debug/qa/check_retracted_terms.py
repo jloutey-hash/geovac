@@ -1,0 +1,241 @@
+#!/usr/bin/env python3
+r"""
+Deterministic retracted-claims / zombie-drift screen  --  the /qa "withdrawn-as-live" backstop.
+
+WHY THIS EXISTS (the 2026-06-23 lesson):
+  Every recurring /qa miss across the Batch-2 and Batch-3 cert arcs was NOT a
+  judgment failure -- it was a MECHANICAL consistency / stale-phrase drift sitting
+  in a low-salience structured region (a status-table cell, a docstring, a
+  footnote, one abstract clause). LLM reviewers reading a 1400-line document
+  top-to-bottom systematically under-weight those regions, so a withdrawn claim
+  re-surfaces and a judgment-mode panel walks past it. Concretely, the same class
+  slipped repeatedly:
+    * the withdrawn SU(2)xSU(2) "Pythagorean refinement" C_3<1 form -- left in
+      docstrings THREE times (v4.43.5, v4.44.0, v4.46.0 each swept it incompletely);
+    * the S^7 "structural negative" carried live in Paper 50's catalogue table +
+      wall-list + the synthesis while the SAME paper's erratum retracts it;
+    * "Latremoliere propinquity" used as the achieved metric where the result is
+      van Suijlekom STATE-SPACE GH;
+    * the Batch-2 "D_W/D_CH does not close the period closure" false-closure framing
+      (found in body, then synthesis, then abstract, then Paper 32 -- one class,
+      four locations).
+
+  A human/LLM sweep keeps missing sites; a grep does not. This screen moves the
+  RECURRING zombie classes OUT of expensive, high-variance judgment-mode review
+  and INTO a cheap, exhaustive, zero-variance deterministic check that runs every
+  /qa pass for ~0 tokens (the [[feedback_deferral_is_churn]] doctrine: duplicated
+  /drifting fact -> single-source / deterministic check).
+
+HOW IT WORKS:
+  THE REGISTRY (below) lists each retracted claim as {pattern, exempt_if_nearby,
+  files, severity, scope}. For every pattern hit the screen checks whether a
+  withdrawal marker (WITHDRAWN / retracted / "false" / Erratum / "state-space GH"
+  / "named gap" / ...) appears within +-WINDOW lines. A hit WITHOUT a nearby marker
+  is a live zombie:
+    * severity "fail"     -> FAILS the gate (exit 1) when in --gate scope;
+    * severity "advisory" -> printed for review, does NOT fail (used for the noisier
+      classes, e.g. bare "propinquity", where legit mentions abound).
+
+  It BACKS the claims/code/synthesis reviewers (guarantees exhaustive enumeration
+  of the known zombie phrases) -- it does not replace adjudication of NEW classes.
+  When a /qa run retires a claim, ADD its phrase here so it can never silently
+  re-surface.
+
+Exit 0 = no live fail-severity zombie in gated scope. Exit 1 = >=1.
+
+Usage:
+  python debug/qa/check_retracted_terms.py --gate group1
+  python debug/qa/check_retracted_terms.py            # all entries
+  python debug/qa/check_retracted_terms.py --all      # also print exempt (compliant) hits
+"""
+from __future__ import annotations
+
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
+
+# ---------------------------------------------------------------------------
+# THE REGISTRY -- append an entry whenever a /qa run retires/withdraws a claim.
+# Each entry: a retracted phrase (pattern) that must NOT appear as LIVE; it is
+# exempt only when a withdrawal marker (exempt_if_nearby) sits within +-WINDOW
+# lines.  Patterns are case-insensitive raw regex.  `files` are ROOT-relative
+# globs.  `severity`: "fail" (gates) | "advisory" (reports only).
+# ---------------------------------------------------------------------------
+REGISTRY = [
+    {
+        "id": "withdrawn-pythagorean-mechanism",
+        "scope": "group1",
+        "severity": "fail",
+        "retired": "2026-06-18 (Paper 39): the SU(2)xSU(2) Pythagorean operator-norm "
+                   "identity C_3<1->1 is FALSE on the real CH harmonics; live bound is "
+                   "the triangle C_3>=1->sqrt(2).",
+        # the zombie SIGNATURES (the legit product-metric 'Pythagorean d^2=d_a^2+d_b^2'
+        # / 'Pythagorean triangle inequality' / 'sup-norm Pythagorean' are NOT matched)
+        "pattern": r"Pythagorean\s+refinement"
+                   r"|graded\s+Pythagorean\s+(?:operator-norm|Leibniz)"
+                   r"|Pythagorean\s+operator-norm\s+(?:formula|identity)",
+        # exempt: a withdrawal flag nearby, OR the DIFFERENT (live, legit) Paper-43
+        # *modular* Pythagorean HS-orthogonality (||H-D||^2 = ||H||^2 + ||D||^2), which
+        # is a genuine result, not the withdrawn tensor-C_3 refinement.
+        "exempt_if_nearby": r"WITHDRAWN|withdrawn|retract|\bfalse\b|operator-norm-false"
+                            r"|historical|do\s+NOT\s+use|not\s+the\s+live|triangle"
+                            r"|modular|Hilbert--Schmidt|HS-orthogonal|\bHS\b|orthogonal",
+        "files": [
+            "geovac/gh_convergence_tensor.py",
+            "geovac/gh_convergence.py",
+            "papers/group1_operator_algebras/paper_39_*.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
+    {
+        "id": "s7-structural-negative",
+        "scope": "group1",
+        "severity": "fail",
+        "retired": "2026-06-23 (Paper 50 Erratum, S8): the S^7 scalar 'structural "
+                   "non-match' was a FALSE NEGATIVE (30-dps under-resolved search); the "
+                   "ladder GENERATES in-ring closed forms at every odd rung S^3..S^11.",
+        "pattern": r"S\^?\{?7\}?[^.\n]{0,70}(?:structural\s+non-match|PSLQ\s+fails"
+                   r"|scalar\s+negative)"
+                   r"|S\^?\{?7\}?[^&\n]{0,40}UNKNOWN",
+        "exempt_if_nearby": r"Erratum|false\s+negative|generates|in-ring|\\mathcal\{R\}"
+                            r"|DONE|ladder|earlier\s+draft|earlier\s+version",
+        "files": [
+            "papers/group1_operator_algebras/paper_50_*.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
+    {
+        "id": "batch2-false-closure",
+        "scope": "group1",
+        "severity": "fail",
+        "retired": "2026-06-22 (Papers 42/32): 'D_W (or D_CH) does not close the period "
+                   "closure' is FALSE -- conjugation by the scalar -I closes; the real "
+                   "distinction is operator-level e^{i2pi D_W}=-I (double cover) vs "
+                   "e^{i2pi K_alpha}=+I.",
+        "pattern": r"(?:D_?\{?CH\}?|D_W)[^.\n]{0,55}(?:would\s+not|does\s+not|cannot)"
+                   r"[^.\n]{0,35}(?:close|closure|produce\s+the\s+bit-exact)",
+        "exempt_if_nearby": r"corrected|operator-level|double\s+cover|-I\b|\+I\b|scalar\s+-?I",
+        "files": [
+            "papers/group1_operator_algebras/paper_42_*.tex",
+            "papers/group1_operator_algebras/paper_32_*.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
+    {
+        "id": "propinquity-as-achieved-metric",
+        "scope": "group1",
+        "severity": "advisory",   # noisy: legit framework/named-gap/descope mentions abound
+        "retired": "Papers 38/39/40 establish van Suijlekom STATE-SPACE GH, NOT the "
+                   "strictly-stronger Latremoliere quantum-GH propinquity (a named gap). "
+                   "Flag 'propinquity' asserted as the ACHIEVED convergence metric.",
+        "pattern": r"(?:converge\w*|established?|proves?|in\s+the)[^.\n]{0,45}"
+                   r"Latr[^.\n]{0,25}propinquity"
+                   r"|propinquity\s+(?:sense|convergence)\s+at\s+(?:quantitative|explicit)",
+        "exempt_if_nearby": r"not\s+claimed|named\s+gap|descoped|WITHDRAWN|degenerac"
+                            r"|state-space|strictly\s+stronger|open|target|annihilat",
+        "files": [
+            "papers/group1_operator_algebras/paper_39_*.tex",
+            "papers/group1_operator_algebras/paper_40_*.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
+]
+
+
+def _gate_substr(argv: "list[str]") -> "str | None":
+    for i, a in enumerate(argv):
+        if a.startswith("--gate="):
+            return a.split("=", 1)[1]
+        if a == "--gate" and i + 1 < len(argv):
+            return argv[i + 1]
+    return None
+
+
+def _resolve(globs: "list[str]") -> "list[pathlib.Path]":
+    out: "list[pathlib.Path]" = []
+    for g in globs:
+        out.extend(sorted(ROOT.glob(g)))
+    # de-dup, preserve order
+    seen, uniq = set(), []
+    for p in out:
+        if p not in seen and p.is_file():
+            seen.add(p)
+            uniq.append(p)
+    return uniq
+
+
+def scan_entry(entry: dict) -> "tuple[list, list]":
+    """Return (live_hits, exempt_hits); each item = (relpath, line_no, snippet)."""
+    pat = re.compile(entry["pattern"], re.IGNORECASE)
+    exempt = re.compile(entry["exempt_if_nearby"], re.IGNORECASE)
+    live, ok = [], []
+    for path in _resolve(entry["files"]):
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        for i, line in enumerate(lines):
+            if not pat.search(line):
+                continue
+            lo, hi = max(0, i - WINDOW), min(len(lines), i + WINDOW + 1)
+            window_txt = "\n".join(lines[lo:hi])
+            rel = path.relative_to(ROOT)
+            snip = re.sub(r"\s+", " ", line.strip())[:160]
+            if exempt.search(window_txt):
+                ok.append((rel, i + 1, snip))
+            else:
+                live.append((rel, i + 1, snip))
+    return live, ok
+
+
+def main() -> int:
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+    show_all = "--all" in sys.argv
+    gate = _gate_substr(sys.argv)
+    scope = f"scope '{gate}'" if gate else "ALL entries"
+
+    def selected(e: dict) -> bool:
+        return gate is None or e["scope"] == "all" or gate in e["scope"]
+
+    fail_hits, advisory_hits, exempt_total = [], [], 0
+    print(f"retracted-claims / zombie-drift screen   [{scope}]\n")
+    for e in REGISTRY:
+        if not selected(e):
+            continue
+        live, ok = scan_entry(e)
+        exempt_total += len(ok)
+        tag = "FAIL" if e["severity"] == "fail" else "ADVISORY"
+        status = "clean" if not live else f"{len(live)} LIVE"
+        print(f"  [{tag}] {e['id']}: {status}  (exempt/withdrawn-flagged: {len(ok)})")
+        for rel, ln, snip in live:
+            (fail_hits if e["severity"] == "fail" else advisory_hits).append(
+                (e["id"], rel, ln, snip))
+        if show_all:
+            for rel, ln, snip in ok:
+                print(f"        [exempt] {rel}:{ln}  {snip}")
+
+    if fail_hits:
+        print(f"\n*** LIVE RETRACTED CLAIM(S) ({len(fail_hits)}) -- a withdrawn claim "
+              f"re-surfaced WITHOUT a withdrawal flag in {scope}: ***")
+        for cid, rel, ln, snip in fail_hits:
+            print(f"  [{cid}] {rel}:{ln}\n      {snip}")
+
+    if advisory_hits:
+        print(f"\n--- ADVISORY ({len(advisory_hits)}) -- review (does NOT fail the gate): ---")
+        for cid, rel, ln, snip in advisory_hits:
+            print(f"  [{cid}] {rel}:{ln}\n      {snip}")
+
+    if fail_hits:
+        print(f"\nRESULT: FAIL ({len(fail_hits)} live retracted claim(s) in {scope})")
+        return 1
+    print(f"\nRESULT: PASS (no live fail-severity retracted claim in {scope}; "
+          f"{exempt_total} occurrence(s) correctly carry a withdrawal flag)")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

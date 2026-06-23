@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.47.0] - 2026-06-23
+
+### Added — /qa hardening (the recurring-zombie lesson, PI-directed)
+- **C16 retracted-claims / zombie-drift deterministic gate** (`debug/qa/check_retracted_terms.py`). Diagnosis behind it: every recurring /qa miss across the Batch-2/Batch-3 cert arcs was a **mechanical** consistency/stale-phrase drift in a low-salience structured region (status-table cell, docstring, footnote, one abstract clause) that judgment-mode LLM review systematically under-weights — *not* a judgment failure. The withdrawn Pythagorean C₃<1 form survived **three** incomplete LLM/hand sweeps (v4.43.5/v4.44.0/v4.46.0); a grep does not miss sites. C16 moves the recurring zombie classes out of expensive judgment review into a cheap, exhaustive, zero-variance check: a `REGISTRY` of every retired phrase (withdrawn Pythagorean operator-norm/refinement, the S⁷ "structural negative" vs its erratum, the Batch-2 false-closure framing, propinquity-as-achieved-metric) each with a withdrawal-flag exemption window; a hit *without* a nearby flag FAILs the gate. **On its first run it caught 2 residual Pythagorean comment-zombies** (`gh_convergence_tensor.py` l.1283/1742) the v4.46.0 docstring sweep had still missed — now fixed. Non-vacuity locked by `tests/test_retracted_terms_check.py` (fires on a re-introduced zombie, exempts a properly-withdrawn one). **Maintenance rule:** when a /qa run retires/withdraws a claim, add its phrase to the registry ([[feedback_deferral_is_churn]] single-source doctrine).
+- **Enumeration-forced reviewer doctrine** (qa.md step 4 + criteria.md). Every LLM-reviewer prompt now demands *exhaustive* enumeration of the low-salience regions (every status/catalogue-table row, every bibitem, every tier-term occurrence — state-space GH vs propinquity, derived vs match, withdrawn-vs-live — every backing-module docstring), one verdict per item, no sampling. Prefer one enumeration-forced reviewer per dimension over two vaguely-prompted ones (duplicate agents share blind spots; diversity/precision of instruction beats redundancy and costs less). After the panel, a one-agent **completeness-critic** names un-verified regions; a full find→fix→re-scan loop-until-dry is reserved for the final pre-certification convergence run.
+- **C16 added to `docs/qa/criteria.md`** (shared criteria + the deterministic dimension row) and to the `/qa` step-1 deterministic-check list.
+
+### Fixed
+- `geovac/gh_convergence_tensor.py`: 2 residual "Pythagorean refinement" comment-zombies (l.1283/1742, bare `# R1:` comments calling the withdrawn `c3_full_pythagorean_bound`) → WITHDRAWN-flagged. (Caught by C16 on first run.)
+
+### Verified
+- All 6 deterministic gates PASS group1 (C5/C11/C13/C14/C15/C16); `check_retracted_terms.py` clean (16 occurrences correctly carry a withdrawal flag); topo proofs 18/18; `test_retracted_terms_check.py` 5/5; gh import OK.
+
 ## [4.46.0] - 2026-06-23
 
 ### Changed

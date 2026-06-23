@@ -116,6 +116,24 @@ verdict is the **AND across all review dimensions** (below).
   replacement:\ it catches transposed/typo'd IDs deterministically and cheaply;
   the reviewer still owns wrong-title / wrong-venue / wrong-attribution (right
   ID, wrong metadata — which C15 cannot see). Added 2026-06-19.
+- **C16 — Retracted-claims / zombie-drift (deterministic).** No claim a prior
+  /qa run retired re-surfaces *as live* — i.e. without an inline withdrawal flag
+  — anywhere in the gated papers or their contained code/test modules. Certified
+  by `debug/qa/check_retracted_terms.py --gate <branch>` (exit 0), whose
+  `REGISTRY` holds each retired phrase + its exemption marker (the withdrawn
+  Pythagorean C₃<1 form, the S⁷ "structural negative" vs its erratum, the
+  Batch-2 false-closure framing, propinquity-as-achieved-metric, …).
+  **Added 2026-06-23 (the lesson):** every recurring miss across the
+  Batch-2/Batch-3 cert arcs was a *mechanical* drift in a low-salience region
+  (status-table cell, docstring, footnote, one abstract clause) that judgment-mode
+  LLM review walked past — the withdrawn Pythagorean form survived *three*
+  incomplete sweeps. A grep is exhaustive and zero-variance; this moves the
+  recurring zombie classes out of expensive judgment review and into a cheap
+  gate. **Maintenance rule:** when a run retires/withdraws a claim, ADD its
+  phrase to the registry (the [[feedback_deferral_is_churn]] single-source
+  doctrine). C16 is a **complement** to the C3/C7/C9 LLM review (it catches
+  *known* retracted phrases; the reviewers still own *new* overclaims and
+  judgment calls). `--gate <branch>` scans the gated papers + their code modules.
 
 ## Branch-specific criteria (C14+)
 
@@ -138,7 +156,18 @@ not stop early on a pass.
 | Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` (one per in-scope paper) | prose ≤ tier; hard prohibitions intact |
 | External citations | C4 | `citation-reviewer` (one per in-scope paper) | cites resolve and say what we attribute |
 | Synthesis faithfulness | C9 | `claims-reviewer` (one on the branch synthesis) | **separate dispatch** from per-paper claims |
-| Deterministic | C10, C11, C12, C13, C14 | scripts (`check_internal_titles.py`, `check_k_label.py --gate <branch>`, `check_paper_test_refs.py --gate <branch>`, `check_file_refs.py --gate <branch>`, compile) | not an LLM reviewer |
+| Deterministic | C10, C11, C12, C13, C14, C15, C16 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py` — each `--gate <branch>`; + compile) | not an LLM reviewer |
+
+**Enumeration mandate (the 2026-06-23 lesson).** Every LLM-reviewer prompt
+demands *exhaustive enumeration*, not sampling, of the low-salience structured
+regions where the recurring drifts hide — every status/catalogue-table row,
+every bibitem, every occurrence of the branch's tier-terms (state-space GH vs
+propinquity, derived vs match, withdrawn-vs-live), every docstring of the backing
+module — one verdict per item. Prefer one enumeration-forced reviewer per
+dimension over two vaguely-prompted ones (duplicate agents share blind spots).
+After the panel, a one-agent **completeness-critic** names un-verified regions;
+re-dispatch a focused reviewer for any gap. A full find→fix→re-scan
+loop-until-dry is reserved for the *final* pre-certification convergence run.
 
 ## Coverage honesty
 

@@ -1280,7 +1280,8 @@ def compute_tensor_propinquity_bound(
     bound_fact = C_LIPSCHITZ_TENSOR_FACTORIZED * gamma_max
     bound_full = C_LIPSCHITZ_TENSOR_FULL * gamma_max
 
-    # R1: Pythagorean refinement of C_3^{(2),full}
+    # R1 (WITHDRAWN 2026-06-18 as false, Paper 39; retained for back-compat):
+    # legacy Pythagorean C_3^{(2),full} bound -- live value is the triangle bound
     c3_pyth = c3_full_pythagorean_bound(n_max_a, n_max_b)
 
     # R2: explicit ε_cross bound on the joint Lipschitz-distortion height
@@ -1739,7 +1740,8 @@ def tensor_L5_assembly(
         lambda_a=lambda_a, lambda_b=lambda_b,
     )
 
-    # R1: Pythagorean refinement
+    # R1 (WITHDRAWN 2026-06-18 as false, Paper 39; retained for back-compat):
+    # legacy Pythagorean C_3 bound -- live value is the triangle bound
     c3_pyth = c3_full_pythagorean_bound(n_max_a, n_max_b)
 
     # R2: explicit ε_cross bound
