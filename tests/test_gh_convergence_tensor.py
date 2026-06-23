@@ -484,7 +484,11 @@ class TestTheoremStatement:
 
     def test_statement_mentions_key_pieces(self):
         s = gh_tensor_theorem_statement()
-        assert "Latremoliere" in s or "Latr" in s
+        # Convergence is in van Suijlekom's STATE-SPACE GH distance, NOT the
+        # Latremoliere propinquity (the latter is the open residual). Guard
+        # against the withdrawn-claim zombie re-entering the statement string.
+        assert "state-space" in s or "van Suijlekom" in s
+        assert "Latremoliere" not in s and "propinquity" not in s
         assert "Camporesi" in s
         assert "Fock" not in s or True  # not strictly required
         # Key bound symbols

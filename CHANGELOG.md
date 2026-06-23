@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.5] - 2026-06-22
+
+### Changed
+- **`/qa group1` Batch 3 — CODE-DIMENSION-only validation pass (PI-directed).** Code/test-backing (C1/C2) review of Papers 29/39/40/50/52 to surface NEW sweepable code-defect flavors (mirroring the Batch-2 corpus-wide sweeps). 5 code-reviewers, opus, blind, path-pinned, ran the tests. **Calibrated: sensitivity 4/4** (4 fresh vacuous-tolerance seeds caught: code-29/39/40/50; specificity clean, M1–M4 respected; code-52 correctly assessed Paper 52 as conceptual — no test needed). **Validation pass, NOT a cert** (1 of 5 gating dimensions ⇒ INCONCLUSIVE-for-cert).
+
+### Closed (NEW Flavor A — code-side withdrawn-claim zombies, swept corpus-wide)
+- A withdrawn/false claim living in a **production-code function's returned STRING or DOCSTRING** (invisible to the test suite) — the code-side analog of the Batch-2 paper zombies. `geovac/gh_convergence_tensor.py::gh_tensor_theorem_statement()` returned the WITHDRAWN Pythagorean refinement ("C₃ < 1 → 1", "1 + o(1)") **and** mislabeled the Paper-38-class convergence result as "Latrémolière propinquity" (it is van Suijlekom **state-space GH**). Swept across the contained `gh_convergence{,_tensor}.py` pair (5 sites): `gh_tensor_theorem_statement` + `tensor_L3_lipschitz` + `tensor_L5_assembly` (tensor) and `gh_theorem_statement` + `LimitIdentification.statement` + its docstring (single-factor) — all corrected to the **triangle bound C₃ ≥ 1 → √2** and **state-space GH** (the single-factor C₃ = 1 is correct; only the propinquity mislabel fixed). Strings/docstrings only — no production logic changed; the numeric functions (`c3_full_pythagorean_bound`, …) were already correctly annotated as withdrawn (v4.33.0) and return the triangle values.
+- **Sub-flavor — zombie-locking tests.** `tests/test_gh_convergence_tensor.py:487` and `tests/test_gh_convergence.py:456` *asserted the presence* of "Latremoliere"/"propinquity" in the statement strings — pinning the zombie in place. Both updated to assert the corrected "state-space"/"van Suijlekom" keywords **+ a guard that "Latremoliere"/"propinquity" do NOT appear**, so the zombie cannot silently re-enter.
+
+### Flagged (named follow-ons — not done this pass)
+- **Flavor B + p40 general-G C₃(G)=1 coverage gap (MATERIAL).** The rank-2 universality backing (SU(3)/Sp(2)/G₂ panels + the "5641/5641 cells" C₃=1 verifier) lives under the prunable `debug/qa/_resurrected/` and is imported into `test_paper40_universal_rate.py` under a `skipif`; the general-G C₃=1 verifier's `run_panel` is imported for its constructors but **never called**, so general-G C₃=1 has no `tests/` assertion (test_r25_l3_lipschitz_bound.py backs only S³/SU(2)). If `debug/` is pruned the rank-2 tests silently skip and the suite stays green on the SU(2) anchor alone. → dedicated backfill: add a reduced-panel C₃(G)=1 assertion + migrate the drivers to a permanent home (or harden the skip).
+- Flavor C (p52 "61+ digits" vs the 1e-40 test gate) **dissolved on reconcile** — code-50 measured the agreement at ~1e-82, so "61+" is a true conservative claim; the gate is merely loose, not wrong. No change.
+- Minor NITs: code-29 `test_galois_ihara` self-reference + Obs 2 inline tier; code-50 Thm 5.3 (S⁵ log-3) only indirectly tested.
+
+### Verified
+- `geovac/gh_convergence{,_tensor}.py` import clean (strings/docstrings only); the two edited theorem-statement tests pass; affected gh tests green. Worktree removed + leak-scanned (corpus clean on all 4 seed sites). Memo: `debug/sprint_qa_group1_batch3_code_memo.md`.
+
 ## [4.43.4] - 2026-06-22
 
 ### Changed

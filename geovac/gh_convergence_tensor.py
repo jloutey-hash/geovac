@@ -1515,20 +1515,23 @@ def tensor_L3_lipschitz(
     Verifies the Connes-Marcolli Leibniz rule produces:
       - Factorized panel C_3^{(2),fact} = 1 (single-factor C_3 = 1
         propagates via Leibniz dominant-term reading).
-      - Full operator system C_3^{(2),full} <= 1 + o(1) via the SU(2) x SU(2)
-        Pythagorean refinement (R1 closure, sprint W2b-easy-tighten).
+      - Full operator system C_3^{(2)} via the SU(2) x SU(2) graded-Leibniz
+        TRIANGLE bound. (The earlier "Pythagorean refinement" C_3 < 1 was
+        WITHDRAWN 2026-06-18 as false -- the operator-norm Pythagorean
+        identity fails on the real CH harmonics; see
+        c3_full_pythagorean_bound and Paper 39 Remark.)
         The conservative <= 2 bound (legacy, generic Bozejko-Fendler) is
         retained for cross-check.
 
-    R1 closure (sprint W2b-easy-tighten, 2026-05-07): the SU(2) x SU(2)
-    Pythagorean refinement gives the closed-form bound
-        C_3^{(2),full}(N_a, N_b)  <=  sqrt(((N_a-1)^2 + (N_b-1)^2) /
+    Triangle bound (corrected 2026-06-18): the SU(2) x SU(2) graded Leibniz
+    gives the closed-form bound
+        C_3^{(2)}(N_a, N_b)  =  sqrt(((N_a-1) + (N_b-1))^2 /
                                             (N_a^2 + N_b^2 - 2))
     for the irrep V_{N_a} ⊗ V_{N_b}, attained at
-    (N_a, N_b) = (n_max_a + 1, n_max_b + 1). For N_a = N_b = N this
-    reduces to sqrt((N-1)/(N+1)) -> 1^-, matching the single-factor L3
-    asymptotic. The bound is < 1 at every finite cutoff and -> 1 in the
-    limit; this is the precise meaning of "1 + o(1)".
+    (N_a, N_b) = (n_max_a + 1, n_max_b + 1). For N_a = N_b this reduces to
+    sqrt(2n/(n+2)) (= 1 at n=2, -> sqrt(2)). The bound is >= 1 at every
+    finite cutoff and -> sqrt(2) in the limit (NOT "< 1 -> 1"; that
+    Pythagorean reading was withdrawn as false).
 
     Args:
         n_max_a, n_max_b: cutoffs.
@@ -1686,10 +1689,12 @@ def tensor_L5_assembly(
     Two improvements over the C-W2b-easy first-pass version (sprint
     W2b-easy-tighten, 2026-05-07):
 
-    R1 closure: tensor_L3_lipschitz now exposes the SU(2) x SU(2)
-    Pythagorean refinement c3_full_pythagorean_bound, giving
-    C_3^{(2),full} <= 1 + o(1) (closed form, < 1 at every finite
-    n_max), instead of the conservative <= 2 placeholder.
+    Triangle bound: tensor_L3_lipschitz exposes the SU(2) x SU(2)
+    graded-Leibniz TRIANGLE bound c3_full_pythagorean_bound (name
+    historical), giving C_3^{(2)} >= 1, -> sqrt(2) (closed form),
+    instead of the conservative <= 2 placeholder. (The earlier
+    "Pythagorean refinement" C_3 < 1 -> 1 was withdrawn 2026-06-18 as
+    false.)
 
     R2 closure: epsilon_cross_bound exposes the rigorous bound on the
     cross-Stein-Weiss term in the joint height. The original
@@ -1814,39 +1819,43 @@ class FiveLemmaStatusTensor:
 def gh_tensor_theorem_statement() -> str:
     """The formal Theorem L5-T (tensor-product GH convergence) statement.
 
-    Updated 2026-05-07 (sprint W2b-easy-tighten) to reflect R1 + R2 closure:
-    the C_3^{(2),full} = 1 + o(1) refinement is now CLOSED via the
-    SU(2) x SU(2) Pythagorean bound, and the height ε_cross is now
-    bounded explicitly via the Connes-Marcolli graded Pythagorean
-    Leibniz at <= 2*sqrt(2) * max(gamma) on the unit-norm panel.
+    Corrected 2026-06-22 (/qa group1 Batch 3 code dimension): the convergence
+    is in van Suijlekom's STATE-SPACE Gromov-Hausdorff distance (NOT the
+    Latremoliere propinquity), and the joint Lipschitz comparison constant is
+    the TRIANGLE bound C_3^{(2)} = sqrt(((N_a-1)+(N_b-1))^2/(N_a^2+N_b^2-2)),
+    which is >= 1 and -> sqrt(2). The earlier "Pythagorean refinement"
+    (C_3 < 1 -> 1, "1 + o(1)") was WITHDRAWN 2026-06-18 as false (operator-norm
+    Pythagorean identity fails on the real CH harmonics) -- see Paper 39 Remark
+    "Withdrawn Pythagorean refinement" and ``c3_full_pythagorean_bound``.
     """
     return (
-        "Theorem L5-T (tensor-product GH convergence on S^3 x S^3, "
-        "R1 + R2 closed version). Let T_S3^a, T_S3^b denote two copies "
+        "Theorem L5-T (tensor-product GH convergence on S^3 x S^3). "
+        "Let T_S3^a, T_S3^b denote two copies "
         "of the Camporesi-Higuchi metric spectral triple at focal lengths "
         "lambda_a, lambda_b > 0, and let T_a = T_{n_a}^a, T_b = T_{n_b}^b "
         "be the Connes-vS truncated triples at cutoffs n_a, n_b "
         "respectively (each Paper 38 single-factor object). Then the "
         "truncated tensor-product triple T_a (X) T_b converges to "
-        "T_S3^a (X) T_S3^b in the Latremoliere quantum Gromov-Hausdorff "
-        "propinquity Lambda:\n\n"
+        "T_S3^a (X) T_S3^b in van Suijlekom's state-space Gromov-Hausdorff "
+        "distance Lambda:\n\n"
         "  Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)\n"
-        "      <=  C_3^{(2),Pyth} * (1 + 2*sqrt(2)) "
+        "      <=  C_3^{(2)} * (1 + 2*sqrt(2)) "
         "* max(gamma_{n_a}/lambda_a, gamma_{n_b}/lambda_b)\n"
         "      ->  0  as  n_a, n_b -> infinity,\n\n"
-        "where the joint Lipschitz comparison constant (R1 closure) "
-        "satisfies the closed-form Pythagorean refinement\n\n"
-        "  C_3^{(2),Pyth}(n_a, n_b)\n"
-        "      =  sqrt( ((N_a - 1)^2 + (N_b - 1)^2) / (N_a^2 + N_b^2 - 2) ),\n"
+        "where the joint Lipschitz comparison constant is the closed-form "
+        "TRIANGLE bound\n\n"
+        "  C_3^{(2)}(n_a, n_b)\n"
+        "      =  sqrt( ((N_a - 1) + (N_b - 1))^2 / (N_a^2 + N_b^2 - 2) ),\n"
         "      N_. = n_. + 1,\n\n"
-        "strictly less than 1 at every finite cutoff and -> 1 from "
-        "below as cutoffs -> infinity (this is precisely '1 + o(1)'). "
+        ">= 1 at every finite cutoff and -> sqrt(2) as cutoffs -> infinity "
+        "(the earlier 'Pythagorean' C_3 < 1 -> 1 refinement was withdrawn "
+        "2026-06-18 as false). "
         "The constant 1 + 2*sqrt(2) ~ 3.828 in front of max(gamma) "
         "comes from combining the joint reach bound (<= max(gamma) "
         "via factor-by-factor L4(c)) with the joint Lipschitz-distortion "
         "height bound (<= 2*sqrt(2) * max(gamma) via the Connes-Marcolli "
-        "graded Pythagorean Leibniz on the unit-norm panel; R2 closure "
-        "of the cross-Stein-Weiss term). The asymptotic constant on each "
+        "graded Leibniz on the unit-norm panel; cross-Stein-Weiss term). "
+        "The asymptotic constant on each "
         "factor is 4/pi (the M1 Hopf-base measure signature; Paper 38 + "
         "Sprint MR-A/B/C)."
     )

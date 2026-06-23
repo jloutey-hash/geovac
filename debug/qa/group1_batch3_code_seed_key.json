@@ -1,0 +1,60 @@
+{
+  "run": "group1_batch3_code (CODE-DIMENSION-ONLY validation pass)",
+  "type": "CODE-DIMENSION-ONLY validation pass (1 of 5 gating dimensions => INCONCLUSIVE-for-cert by the all-dimensions rule)",
+  "description": "Re-run of ONLY the code/test-backing dimension (C1/C2) for group1 Batch 3 (Papers 29, 39, 40, 50, 52). Goal: surface NEW flavors of code-dimension defects (vacuous tolerances, tautological/false-positive tests, hardcoded values, coverage gaps) to fix corpus-wide. Seeds in worktree ../geovac-qa-seed-g1b3-code (branch qa-seed-g1b3-code, base HEAD 4650573 = v4.43.4). NEVER committed; worktree removed at end.",
+  "date": "2026-06-22",
+  "base_head": "4650573",
+  "dimensions_exercised": ["code"],
+  "papers": {
+    "29": "paper_29_ramanujan_hopf (Ihara zeta / Ramanujan / Alon-Boppana / Hopf-U1 block); tests test_hopf_u1_block.py, test_paper29_bound_crossing.py, test_ihara_zeta*.py",
+    "39": "paper_39_tensor_propinquity_convergence (k-fold tensor-product propinquity / asymmetric C3); tests test_gh_convergence_tensor.py, test_paper39_triangle_tight.py",
+    "40": "paper_40_unified_propinquity_convergence (universal 4/pi rate on compact Lie groups); test test_paper40_universal_rate.py",
+    "50": "paper_50_cft3_partition_function (wedge KMS entropy / CHM / KPS F-theorem); tests test_paper50_wedge_kms.py, test_paper50_f_theorem.py",
+    "52": "paper_52_category_iii_correspondence (Category III discretization correspondence) -- NO dedicated test / no matrix row found; code-52 assesses whether it has load-bearing computational claims needing backing (potential coverage-gap flavor) vs purely conceptual riding on Paper 38"
+  },
+  "seeds": [
+    {
+      "id": "S-code-29",
+      "file": "tests/test_paper29_bound_crossing.py",
+      "location": "l.131 (per-family Alon-Boppana crossing check)",
+      "defect_class": "C2 vacuous tolerance (PARTIAL backstop at l.132 count==3)",
+      "planted": "assert dev > 0.0  ->  > -1e9 (vacuous; guts the per-family 'crosses the Alon-Boppana bound, dev>0' check). l.132 (count of d>0 == 3) partially backstops -> grade by materiality.",
+      "truth": "Each of the 3 named families crosses the Alon-Boppana bound (deviation dev > 0).",
+      "expected_catcher": "code-29"
+    },
+    {
+      "id": "S-code-39",
+      "file": "tests/test_gh_convergence_tensor.py",
+      "location": "l.619 (asymmetric-C3 symbolic == numeric full-grid match)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "assert abs(float(s) - c3_full_triangle_bound(10,4)) < 1e-12  ->  < 1e9 (vacuous; guts the symbolic-vs-numeric-grid match for the asymmetric C3 supremum sqrt(121/87)). l.615 backstops the symbolic value; the symbolic-vs-numeric-grid agreement is what this line uniquely checks.",
+      "truth": "The symbolic C3 full-Pythagorean bound equals the numeric full-grid scan to <1e-12 at (10,4).",
+      "expected_catcher": "code-39"
+    },
+    {
+      "id": "S-code-40",
+      "file": "tests/test_paper40_universal_rate.py",
+      "location": "l.75 (Haar-normalization machinery check for rank-2 groups A2/C2/G2)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "assert abs(haar - 1.0) < 1e-6  ->  < 1e9 (vacuous; guts the Haar=1.0 machinery-correctness check that the 4/pi rate extraction rides on). Standalone in the loop, no backstop.",
+      "truth": "The Haar-measure normalization integrates to 1.0 (<1e-6) for A2/C2/G2 -- the machinery the universal-rate extraction depends on.",
+      "expected_catcher": "code-40"
+    },
+    {
+      "id": "S-code-50",
+      "file": "tests/test_paper50_wedge_kms.py",
+      "location": "l.138 (wedge KMS entropy S_direct vs the paper's memo value)",
+      "defect_class": "C2 vacuous tolerance (PARTIAL backstop at l.139 S_direct vs S_thermo)",
+      "planted": "assert abs(S_direct - S_memo) < 1e-5  ->  < 1e9 (vacuous; guts the match of the live wedge entropy to the paper's stated value S_memo). l.139 (S_direct vs the thermodynamic identity) backstops the internal consistency but NOT the memo-value match -> grade by materiality.",
+      "truth": "The live wedge KMS entropy S_direct matches the paper's stated memo value to <1e-5.",
+      "expected_catcher": "code-50"
+    }
+  ],
+  "goal_and_notes": "Calibration: code dimension is calibrated if the 4 seeds (29/39/40/50) are caught. code-52 has no seed (no test) -- its calibration is via specificity (it must not fabricate a defect, and should correctly assess whether Paper 52 has load-bearing computational claims needing tests). The PRIMARY purpose is to surface GENUINE (non-seed) code-defect flavors for a corpus-wide sweep, mirroring the Batch-2 false-closure + closed-form sweeps. Validation pass, NOT a cert.",
+  "controls_must_not_flag": [
+    {"id": "M1", "claim": "Paper 39 c3_full_pythagorean_bound_symbolic was a FIXED bug (v4.33.0: corner-only scan -> full-grid; sqrt(121/87) interior sup). The current full-grid scan + test_symbolic_asymmetric_interior_attainment is BACKED-SOUND. Do NOT re-flag the fix."},
+    {"id": "M2", "claim": "Paper 29 test_hopf_u1_block.py provider relocated from debug/archive to tests/_hopf_u1_block_data.py (v4.34.0); test_paper29_bound_crossing.py recomputes spectra from live graphs (not JSON smoke). BACKED-SOUND."},
+    {"id": "M3", "claim": "Paper 50 test_paper50_wedge_kms.py + test_paper50_f_theorem.py (v4.34.0 backfill) recompute from live BW wedge spectrum; entropy/CHM/area-law-rejection genuinely backed. Do NOT flag as JSON-smoke."},
+    {"id": "M4", "claim": "Paper 40 4/pi rate is FIT-SENSITIVE / named-gap (the exact constant scatters; robust content = Haar=1.0 machinery + G2 extracted c << Reading-B). The paper states this honestly; do NOT flag the fit-sensitivity as a new defect (it is a known, in-paper caveat)."}
+  ]
+}

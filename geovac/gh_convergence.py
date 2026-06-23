@@ -771,10 +771,11 @@ def verify_convergence_to_zero(
 class LimitIdentification:
     """Companion result: identification of the propinquity limit.
 
-    The L5 theorem proves Lambda(T_{n_max}, T_S3) -> 0 in the
-    Latremoliere propinquity.  A separate question is: what is the
-    LIMIT object?  The natural candidate is the round-S^3 spectral
-    triple T_S3 itself, NOT the Wasserstein-Kantorovich state space.
+    The L5 theorem proves Lambda(T_{n_max}, T_S3) -> 0 in van
+    Suijlekom's state-space Gromov-Hausdorff distance.  A separate
+    question is: what is the LIMIT object?  The natural candidate is the
+    round-S^3 spectral triple T_S3 itself, NOT the Wasserstein-Kantorovich
+    state space.
 
     The limit identification with the Wasserstein-Kantorovich metric
     on the state space (P(S^3), d_Wass) follows from
@@ -814,7 +815,7 @@ class LimitIdentification:
 
     statement: str = (
         "lim_{n_max -> oo} (T_{n_max}, d_{D_{n_max}}) = (P(S^3), d_Wass) "
-        "in the Latremoliere quantum GH propinquity."
+        "in van Suijlekom's state-space Gromov-Hausdorff distance."
     )
     is_proved: bool = True
     proof_sketch_ref: str = "debug/r25_l5_proof_memo.md Section 7"
@@ -867,8 +868,8 @@ def gh_theorem_statement() -> str:
         "with Camporesi-Higuchi Dirac, and let T_{n_max} = (O_{n_max}, "
         "H_{n_max}, D_{n_max}) be the Connes-vS truncated triple at "
         "cutoff n_max with the truthful Camporesi-Higuchi Dirac. Then "
-        "the truncated triples converge to T_S3 in the Latremoliere "
-        "quantum Gromov-Hausdorff propinquity Lambda:\n\n"
+        "the truncated triples converge to T_S3 in van Suijlekom's "
+        "state-space Gromov-Hausdorff distance Lambda:\n\n"
         "  Lambda(T_{n_max}, T_S3)  <=  C_3 * gamma_{n_max}  ->  0 "
         "as  n_max -> infinity,\n\n"
         "where C_3 = 1 is the L3 Lipschitz comparison constant on the "

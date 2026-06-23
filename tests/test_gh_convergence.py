@@ -453,11 +453,14 @@ class TestTheoremStatement:
             "Lambda",
             "C_3",
             "gamma_{n_max}",
-            "Latremoliere",
+            "van Suijlekom",
+            "state-space",
             "Berezin",
-            "propinquity",
         ]:
             assert key in s, f"Missing key {key!r} in theorem statement"
+        # convergence is in van Suijlekom STATE-SPACE GH, NOT the Latremoliere
+        # propinquity (the open residual) -- guard against the zombie returning
+        assert "Latremoliere" not in s and "propinquity" not in s
 
     def test_statement_includes_qualitative_rate_caveat(self):
         s = gh_theorem_statement()

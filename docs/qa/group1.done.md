@@ -435,3 +435,16 @@ group1 paper restates them (C7).
   pinned, cross-witness named-test caveat. Compiles clean; gates PASS. **Lesson: sweep defect CLASSES
   corpus-wide, not instances. Both recurring classes (false-closure framing; §5.2 backing) are now
   fully swept — the remaining tail should be thin; a further confirmation re-cert certifies.**
+
+- 2026-06-22 — **Batch 3 CODE-DIMENSION validation pass** (Papers 29/39/40/50/52; v4.43.5, PI-directed).
+  5 code-reviewers, opus, blind. **Calibrated 4/4 sens**, spec clean; **validation pass, NOT a cert**
+  (1 of 5 dims). **NEW Flavor A — code-side withdrawn-claim zombies** (withdrawn/false claims in
+  production-code STRINGS/DOCSTRINGS, invisible to tests; the code analog of the Batch-2 paper zombies):
+  `gh_tensor_theorem_statement()` carried the withdrawn Pythagorean "C₃<1→1" + Paper-38-as-Latrémolière-
+  propinquity mislabel → swept the `gh_convergence{,_tensor}.py` pair (5 sites → triangle bound ≥1→√2,
+  state-space GH) + fixed a sub-flavor (2 tests that ASSERTED the zombie keyword's presence → corrected
+  + guard). **Flavor B (flagged): load-bearing backing on a prunable `debug/qa/_resurrected/` path with
+  skip-on-absence** + the compounding p40 general-G C₃(G)=1 coverage gap (the 5641-cell verifier's
+  run_panel never called) → named backfill follow-on. Flavor C (p52 "61 digits") dissolved (true claim).
+  Strings/docstrings only; affected tests green. **Code dimension MATERIAL-clean beyond the seeds +
+  the flagged p40 C₃ gap; Flavor A swept corpus-wide.** Memo: debug/sprint_qa_group1_batch3_code_memo.md.
