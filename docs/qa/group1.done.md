@@ -411,3 +411,16 @@ group1 paper restates them (C7).
   debug/→tests/; claim_test_matrix Batch-2 rows → BACKED-SOUND. C13 PASS; p43/p53 compile clean;
   80 passed/4 slow-skip. **The code-dimension precondition for the Batch-2 re-cert is now satisfied;
   the full re-cert can run.**
+
+- 2026-06-22 — **Batch 2 RE-CERT** (full 5-dim, post-backfill; v4.43.3, PI-directed). 13 reviewers,
+  opus, blind, path-pinned. **Calibrated: sensitivity 5/5, specificity clean** (M1–M6 respected). The
+  v4.43.2 backfill HELD — code dimension surfaced no new material defects beyond its seeds.
+  **VERDICT: FAIL → remediated** — 4 genuine material defects fixed: (1) **synthesis false-closure**
+  ("$e^{i2\pi n}=1$ would fail with $D_{CH}$" — the v4.43.0 §5.5(II) sweep had missed the synthesis's
+  parallel statement) → operator-level $-I$ vs $+I$ distinction; (2) p53 descoped Paper 45→40 as
+  compact-carrier precedent (×2); (3) p42 van den Dungen missing `\bibitem` added; (4) p42 "Prop. 4.2"
+  →"§4" (consistency w/ p44). NITs drained: p43 theorem residual 4e-16→7e-15 (matched its tables),
+  p42 §5.4 propinquity→state-space GH, **code-42 §5.5(II) coverage gap CLOSED** (new operator-level-lift
+  test). Compiles clean; gates PASS; 81 passed/4 slow-skip. **Still FAIL→remediated, not a clean PASS —
+  a fresh re-cert is the confirmation step** (this run's findings were a synthesis-sweep miss +
+  citation/cross-ref consistency, all now fixed).

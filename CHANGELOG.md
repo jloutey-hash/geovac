@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.3] - 2026-06-22
+
+### Changed
+- **`/qa group1` Batch 2 RE-CERT (full 5-dimension, post-backfill) — FAIL → remediated (PI-directed).** First full cert of Papers 42/43/44/53 + synthesis after the v4.43.2 coverage-gap backfill. 13 reviewers (code/claims/citation ×4 + synthesis ×1), opus, path-pinned, blind. **Calibrated: sensitivity 5/5, specificity clean** (all 5 fresh seeds caught: 2 code vacuous-tolerances, 1 claims-C14 descope-flip, 1 citation wrong-ID, 1 synthesis disk-zombie; controls M1–M6 respected). The v4.43.2 backfill HELD — the code dimension surfaced no new material defects beyond its seeds (code-53: all 4 backfilled gaps "pass by default"; code-42: collapse hardening "the strongest test in the file").
+
+### Closed (genuine material defects — remediated)
+- **Synthesis false-closure (LARGE, C9).** `group1_operator_algebras_synthesis.tex` §6.1 "Load-bearing scope finding" stated "the intrinsic $D_{CH}$ has half-integer spectrum, so … the bit-exact closure $e^{i2\pi n}=1$ would FAIL" — the exact false claim corrected in Paper 42 §5.5(II) at v4.43.0, but the synthesis's parallel statement was missed by that sweep. Corrected to the operator-level distinction: the conjugation flow $\sigma_{2\pi}$ closes with either generator (the global $-I$ cancels); only $K_\alpha^W$ lifts the period to the identity operator ($D_W$ lifts to the $-I$ double cover).
+- **p53 descoped-paper miscitation (SMALL, C7/C14).** `paper_53` l.656/680 cited the DESCOPED Paper 45 as a successful "compact-carrier" convergence precedent (contradicting the paper's own l.164 and Paper 45's withdrawn status). Repointed `\cite{paper38, paper45}` → `\cite{paper38, paper40}` (×2; matches the correct "Papers 38/40" pairing already used at l.138/661/689).
+- **p42 van den Dungen missing bibitem (SMALL, C4).** `vandungen2016` (arXiv:1505.01939, the load-bearing Lorentzian-Dirac construction recipe) was cited inline (with the arXiv ID in running text) but had no `\bibitem`. Added the formal bibliography entry + a `\cite{vandungen2016}` at the primary mention.
+- **p42 unconfirmable proposition number (precision, C4).** `\cite[Prop.~4.2]{connes_vs2021}` (l.462) softened to `\cite[\S 4]{connes_vs2021}` — the exact proposition number is unconfirmable (one source suggests a different number); consistent with the p44 §4 softening (v4.43.1).
+
+### Closed (NITs drained)
+- **p43 theorem residual bound** (thm:main_intro items i/ii/iii) stated "$\le 4\times10^{-16}$ across the panel" but its own Tables 1–2 show up to $7\times10^{-15}$; corrected to "$\le 7\times10^{-15}$" (×3).
+- **p42 §5.4** residual "propinquity" labels → "state-space GH" (subsection title + l.1165; the body already said state-space-GH).
+- **code-42 §5.5(II) coverage gap CLOSED** — the operator-level $e^{i2\pi D_W}=-I$ / $e^{i2\pi K_\alpha^W}=+I$ distinction (asserted "verified bit-exactly" in prose) now has a real test, `test_modular_hamiltonian.py::test_operator_level_period_lift_DW_vs_Kalpha` (verifies the two lifts $\mp I$, that they genuinely differ, and that the conjugation flow $\sigma_{2\pi}(O)=O$ closes with $D_W$); cited inline in §5.5(II).
+
+### Verified
+- All edited papers (42/43/53 + synthesis) compile errors=0/undef=0; C5/C11/C13/C14/C15 group1 PASS; 81 passed / 4 slow-skip across the affected tests. Worktree removed + leak-scanned (real corpus clean on all 5 seed sites). Memo: `debug/sprint_qa_group1_batch2_cert_memo.md` (§re-cert). **Still FAIL→remediated, not yet a clean PASS — a fresh re-cert is the confirmation step** (the genuine findings this run were a synthesis-sweep miss + cross-ref/citation consistency, all now fixed).
+
 ## [4.43.2] - 2026-06-22
 
 ### Added (coverage-gap test-backfill — the named Batch-2 re-cert precondition)

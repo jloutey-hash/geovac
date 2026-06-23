@@ -448,6 +448,49 @@ def test_cross_witness_collapse_requires_beta_cancellation():
     )
 
 
+def test_operator_level_period_lift_DW_vs_Kalpha():
+    """Paper 42 §5.5(II): the operator-level period lift distinguishes the intrinsic
+    wedge Dirac D_W (half-integer spectrum -> e^{i2pi D_W} = -I, the spinor double
+    cover) from the boost-class K_alpha^W (odd-integer spectrum -> e^{i2pi K_alpha} =
+    +I, the identity).  The CONJUGATION modular flow sigma_2pi(O) = U O U^{-1} closes
+    for BOTH (a global scalar cancels), so the distinction is at the operator level,
+    NOT the flow-closure level.  Backs the 'derived structural finding' of §5.5(II)
+    that was prose-only before (the v4.43.x cert coverage gap)."""
+    import scipy.linalg
+    for n_max in (2, 3, 4):
+        mh = for_bisognano_wichmann(n_max=n_max, axis="hopf")
+        K_alpha = mh.restrict_K_alpha_to_wedge()
+        D_W = mh.restrict_to_wedge_block(mh.D)
+        dim = D_W.shape[0]
+        Iden = np.eye(dim, dtype=np.complex128)
+
+        lift_DW = scipy.linalg.expm(1j * 2.0 * np.pi * D_W)
+        lift_Ka = scipy.linalg.expm(1j * 2.0 * np.pi * K_alpha)
+        # operator-level: D_W -> -I (double cover), K_alpha -> +I (identity)
+        assert np.linalg.norm(lift_DW + Iden) < 1e-12, (
+            f"n_max={n_max}: e^(i2pi D_W) should be -I; "
+            f"||lift+I|| = {np.linalg.norm(lift_DW + Iden):.2e}"
+        )
+        assert np.linalg.norm(lift_Ka - Iden) < 1e-12, (
+            f"n_max={n_max}: e^(i2pi K_alpha) should be +I; "
+            f"||lift-I|| = {np.linalg.norm(lift_Ka - Iden):.2e}"
+        )
+        # the lifts are genuinely DIFFERENT operators (not vacuously equal)
+        assert np.linalg.norm(lift_DW - lift_Ka) > 1.0, (
+            f"n_max={n_max}: the +I and -I lifts must differ (||diff||~2*sqrt(dim))"
+        )
+        # but the conjugation flow sigma_2pi(O) = U O U^{-1} closes for D_W too:
+        # the global -I cancels, (-I) O (-I) = O, for an arbitrary deterministic O
+        O = (np.arange(dim * dim, dtype=np.float64).reshape(dim, dim)
+             + 1j * np.arange(dim * dim, 0, -1, dtype=np.float64).reshape(dim, dim))
+        O = O / np.linalg.norm(O)   # scale-free so the residual reflects the lift
+        sigma_DW = lift_DW @ O @ lift_DW.conj().T
+        assert np.linalg.norm(sigma_DW - O) < 1e-12, (
+            f"n_max={n_max}: conjugation flow with D_W must close (scalar cancels); "
+            f"||sigma_2pi(O)-O|| = {np.linalg.norm(sigma_DW - O):.2e}"
+        )
+
+
 # ---------------------------------------------------------------------------
 # KMS condition (expectation level)
 # ---------------------------------------------------------------------------

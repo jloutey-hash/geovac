@@ -1,0 +1,67 @@
+{
+  "run": "group1_batch2_cert (re-cert after v4.43.2 backfill)",
+  "type": "FULL CERTIFYING run (all 5 gating dimensions: code C1/C2 + claims C3/C5/C6/C7/C8/C14 + citation C4 + synthesis C9 + deterministic C10-C15)",
+  "description": "Full /qa group1 Batch 2 (Papers 42, 43, 44, 53 + synthesis) re-cert from HEAD 81874e1 (v4.43.2). Goal: trustworthy PASS/FAIL after the v4.43.0 remediations + v4.43.1 code re-validation + v4.43.2 coverage-gap backfill. Seeds in worktree ../geovac-qa-seed-g1b2-cert (branch qa-seed-g1b2-cert). NEVER committed; worktree removed at end. Fresh seed sites (distinct from the v4.43.0 cert).",
+  "date": "2026-06-22",
+  "base_head": "81874e1",
+  "dimensions_exercised": ["code", "claims", "citation", "synthesis", "deterministic"],
+  "seeds": [
+    {
+      "id": "S-code-p43",
+      "file": "tests/test_modular_hamiltonian_lorentzian.py",
+      "location": "l.203 (BW-alpha period-closure max_alpha_residual)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "assert results['max_alpha_residual'] < 1e-12  ->  < 1e9 (vacuous; guts the BW-alpha Lorentzian period-closure bit-exactness).",
+      "truth": "BW-alpha Lorentzian period closure is bit-exact (max_alpha_residual < 1e-12).",
+      "expected_catcher": "code-43"
+    },
+    {
+      "id": "S-code-p44",
+      "file": "tests/test_operator_system_lorentzian.py",
+      "location": "l.364 (witness-pair NOT-in-O^L residual)",
+      "defect_class": "C2 vacuous tolerance (PARTIAL backstop at l.359 `assert not in_O_L` -> grade by materiality)",
+      "planted": "assert residual > 1e-6  ->  > -1e9 (vacuous; the 'significant residual certifies NOT in O^L' check). l.359 'assert not in_O_L' partially backstops via the production in_O_L flag.",
+      "truth": "The witness pair ab is NOT in O^L with a significant residual (~0.38 > 1e-6).",
+      "expected_catcher": "code-44"
+    },
+    {
+      "id": "S-claims-p44-C14",
+      "file": "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+      "location": "l.139 (Honest-scope statement)",
+      "defect_class": "C14 descope zombie (OPEN -> established)",
+      "planted": "'continuum / GH-limit / Lorentzian-propinquity convergence is open.'  ->  '... is established.' (flips the descoped/open status to a false achievement; self-contradicts the next sentence 'No published Lorentzian propinquity construction exists').",
+      "truth": "Continuum / Lorentzian-propinquity convergence is OPEN (no published construction; p44 closes only the finite-cutoff operator-system substrate).",
+      "expected_catcher": "claims-44"
+    },
+    {
+      "id": "S-citation-p42",
+      "file": "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
+      "location": "l.2345 (bizi_brouder_besnard2018 bibitem arXiv)",
+      "defect_class": "C4 wrong-ID (digit transposition)",
+      "planted": "arXiv:1611.07062 -> arXiv:1611.07026 (transposition; 1611.07062 is the real BBB 'Space and time dimensions of algebras...' paper; 07026 is wrong/nonexistent).",
+      "truth": "Bizi-Brouder-Besnard 2018 = arXiv:1611.07062 (JMP 59 (2018) 062303).",
+      "expected_catcher": "citation-42"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "l.140-144 (Paper 53 disk coverage)",
+      "defect_class": "C9 zombie (disk-obstructed -> disk-converges at withdrawn Lambda^{-1.30})",
+      "planted": "'the finite disk is obstructed by its Dirichlet boundary and convergence is recovered only on the boundaryless plane (rate Lambda^{-0.6} to Lambda^{-0.9})'  ->  'the finite disk converges with its Dirichlet boundary intact at the algebraic rate Lambda^{-1.30}, the boundaryless plane serving only as a cross-check.' Re-introduces BOTH the withdrawn disk-convergence AND the withdrawn Lambda^{-1.30} rate.",
+      "truth": "Paper 53: finite disk OBSTRUCTED (positivity fails, rate Lambda^{+0.07} no-decay, Lambda^{-1.30} WITHDRAWN); convergence recovered ONLY on the boundaryless plane (Lambda^{-0.6..-0.9}).",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls_must_not_flag": [
+    {"id": "M1", "claim": "p42 §5.5(II) CORRECTED (v4.43.0/v4.43.1): the operator-level period lift e^{i2pi D_W}=-I (double-cover) vs e^{i2pi K_alpha}=+I; the conjugation flow sigma_2pi(O)=(-I)O(-I)=O DOES close for D_W. Do NOT re-flag '(D_W) does not close' (that false claim was removed) NOR the e^{i2pi D_W} formula (the spurious beta was removed in v4.43.1)."},
+    {"id": "M2", "claim": "p53 disk-obstruction + prop2 (tests/test_paper53_disk_obstruction.py, NEW v4.43.2) + de-slowed plane test are BACKED-SOUND. Do NOT flag the de-slow or the new tests as defects."},
+    {"id": "M3", "claim": "p43 §5.2 Pythagorean (tests/test_paper43_pythagorean_hs_orthogonality.py, NEW v4.43.2) is BACKED-SOUND; in-paper Lemma 5.5 self-contained. Do NOT flag."},
+    {"id": "M4", "claim": "p42 cross-witness collapse hardened (test_cross_witness_modular_operator_bit_identical + negative control, v4.43.2). Do NOT flag the collapse test as tautological/weak."},
+    {"id": "M5", "claim": "p44 prop=2 GENUINELY computed (k-fold product rank, not hardcoded). The p44 Connes-vS citations softened Prop 4.2/4.3 -> §4 (v4.43.1) because the prop numbers were unconfirmable; do NOT flag the §4 softening as a defect."},
+    {"id": "M6", "claim": "che_perales = Differential Geometry and its Applications (DGA) 103 (2026) is GROUNDED (web-verified). Do NOT flag as fabricated."}
+  ],
+  "expected_genuine_findings_not_seeded": [
+    "synthesis l.868-871: repeats the v4.43.0-CORRECTED false claim 'the bit-exact closure e^{i2pi n}=1 would fail' with D_CH (a v4.43.0 remediation MISS — the §5.5(II) sweep didn't reach the synthesis). The conjugation flow DOES close (-I cancels); distinction is operator-level. Synthesis reviewer SHOULD catch this as genuine C9. Remediate after cert.",
+    "p42 l.462: 'Connes-vS [Prop. 4.2] {connes_vs2021}' — the SAME unconfirmable prop-number softened to §4 in p44 (v4.43.1). citation-42 may flag; reconcile (consistency: should also be softened to §4)."
+  ]
+}

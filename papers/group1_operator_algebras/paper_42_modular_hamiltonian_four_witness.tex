@@ -459,7 +459,7 @@ $\Tcal_{\nmax} = (\Op_{\nmax}, \Hilb_{\nmax}, D_{\nmax})$.
 Paper~32~\S~III of the present author's framework documentation
 verifies that the propagation invariant
 $\mathrm{prop}(\Op_{\nmax}) = 2$ at $\nmax \in \{2, 3, 4\}$, matching
-Connes--van~Suijlekom~\cite[Prop.~4.2]{connes_vs2021} for the
+Connes--van~Suijlekom~\cite[\S 4]{connes_vs2021} for the
 Toeplitz operator system on $S^1$ verbatim. This is the structural
 match that establishes $\Op_{\nmax}$ as the right operator-system
 host for spectral-triple-internal modular constructions.
@@ -1144,7 +1144,7 @@ $\sigma_{2\pi}^{\TT}(a) = I \cdot a \cdot I = a$ for every $a$. This is
 the same mechanism as Theorem~\ref{thm:bw_alpha} but realised at the
 GNS-Hilbert--Schmidt level.
 
-\subsection{Propinquity rate cross-check}\label{sec:propinquity_consistency}
+\subsection{State-space GH rate cross-check}\label{sec:propinquity_consistency}
 
 The closure of Theorem~\ref{thm:bw_gamma} is a finite-cutoff identity,
 not a propinquity limit statement. To confirm consistency with
@@ -1162,7 +1162,7 @@ The ratios are $8.7 \times 10^{-17}$, $3.0 \times 10^{-16}$,
 $7.1 \times 10^{-16}$, $1.4 \times 10^{-15}$:\ several orders of
 magnitude below the qualitative-rate bound at every tested $\nmax$.
 The L1 closure is therefore \emph{much stronger} than the qualitative-rate
-propinquity bound would predict at finite cutoff; the closure does not
+state-space-GH bound would predict at finite cutoff; the closure does not
 require the GH limit and is structural rather than asymptotic.
 
 % =====================================================================
@@ -1269,7 +1269,8 @@ the modular flow $\sigma_t(\cdot) = U_t (\cdot) U_t^{-1}$ acts by
 flow-level period closure $\sigma_{2\pi}(O) = O$ still holds with $D_W$
 (the $-I$ cancels:\ $(-I)\, O\, (-I) = O$;
 we verified this bit-exactly, residual $<10^{-13}$ at $n_{\max} =
-2,3,4$). The distinction is therefore \emph{not} at the flow level but
+2,3,4$;\ \texttt{tests/test\_modular\_hamiltonian.py}). The distinction
+is therefore \emph{not} at the flow level but
 at the operator level:\ only $K_\alpha^W$ lifts the $\beta = 2\pi$
 period to the identity operator $+I$; $D_W$ lifts it to the
 double-cover $-I$.
@@ -2101,8 +2102,8 @@ extension is the named open Sprint L3 target.
 \subsection{References and pointer to standalone writeup}
 \label{sec:lorentzian_closure_references}
 
-The construction recipe is van~den~Dungen 2016 Proposition~4.1~%
-(arXiv:1505.01939):\ Wick-rotate $g \to g_r$ (positive-definite),
+The construction recipe is van~den~Dungen~2016~\cite{vandungen2016}
+Proposition~4.1:\ Wick-rotate $g \to g_r$ (positive-definite),
 construct the standard Riemannian Dirac $\not{\!\!D}_{g_r}$, and set
 $D_L = i^t \cdot \not{\!\!D}_{g_r}$ as the Krein-self-adjoint
 Lorentzian Dirac with $\mathcal{J} = \gamma^0$.  At $(s, t) = (3, 1)$
@@ -2502,6 +2503,12 @@ truncations for groups with polynomial growth},
 W.~G.~Unruh,
 \newblock \emph{Notes on black-hole evaporation},
 \newblock Phys.~Rev. D \textbf{14} (1976), 870--892.
+
+\bibitem[van~den~Dungen(2016)]{vandungen2016}
+K.~van~den~Dungen,
+\newblock \emph{Krein spectral triples and the fermionic action},
+\newblock Math.~Phys.~Anal.~Geom. \textbf{19} (2016), 4;
+\newblock arXiv:1505.01939.
 
 \bibitem[Verch(2001)]{verch2001}
 R.~Verch,

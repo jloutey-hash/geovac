@@ -157,3 +157,30 @@ against the live machinery (not hardcode-and-assert; the v4.34.0 group3 discipli
 Paper citations repointed debug/→tests/ (p53 prop:prop2 + rem:interior_correction; p43 §5.2). claim_test_matrix
 Batch-2 rows → BACKED-SOUND. C13 PASS; p43/p53 compile errors=0/undef=0; 80 passed/4 slow-skip; no production
 code changed. **The code-dimension precondition for the Batch-2 re-cert is satisfied.**
+
+## 9. RE-CERT — full 5-dimension, post-backfill (v4.43.3, 2026-06-22)
+PI-directed full re-cert from HEAD 81874e1 (v4.43.2). Worktree `../geovac-qa-seed-g1b2-cert`, removed +
+leak-scanned (corpus clean). Seed key `debug/qa/group1_batch2_cert_seed_key.json`. 13 reviewers (code/
+claims/citation ×4 + synthesis ×1), opus, blind, path-pinned.
+
+**Calibration — sensitivity 5/5** (fresh seed sites): S-code-p43 (`max_alpha_residual<1e9`)→code-43;
+S-code-p44 (`residual>-1e9`)→code-44; S-claims-p44-C14 (OPEN→"established")→claims-44 + code-44;
+S-citation-p42 (bizi 1611.07026 wrong-ID)→citation-42; S-synthesis-C9 (disk-converges Λ^{-1.30})→synthesis.
+**Specificity clean** — M1 (§5.5(II) corrected), M2 (p53 backfill), M3 (p43 §5.2), M4 (p42 collapse), M5
+(p44 prop=2/§4), M6 (che_perales) all respected; the v4.43.2 backfill confirmed holding.
+
+**VERDICT: FAIL → remediated.** Genuine (non-seed) material defects, all fixed:
+| # | Defect | Dim | Grade |
+|---|---|---|---|
+| 1 | synthesis §6.1 "$e^{i2\pi n}=1$ would FAIL with $D_{CH}$" (v4.43.0 §5.5(II) sweep missed the synthesis) | C9 | LARGE |
+| 2 | p53 l.656/680 descoped Paper 45 as compact-carrier precedent → Paper 40 | C7/C14 | SMALL |
+| 3 | p42 van den Dungen inline-cited, no `\bibitem` → added | C4 | SMALL |
+| 4 | p42 l.462 Connes–vS "Prop. 4.2" (unconfirmable) → "§4" | C4 | precision |
+
+NITs drained: p43 thm residual 4e-16→7e-15 (matched its own tables); p42 §5.4 propinquity→state-space GH;
+**code-42 §5.5(II) coverage gap CLOSED** (`test_operator_level_period_lift_DW_vs_Kalpha` — verifies
+$e^{i2\pi D_W}=-I$, $e^{i2\pi K_\alpha}=+I$, lifts differ, conjugation flow closes with $D_W$; cited inline).
+
+Compiles clean; C5/C11/C13/C14/C15 PASS; 81 passed/4 slow-skip. **Honest cap:** still FAIL→remediated,
+NOT a clean PASS — this run's genuine findings were a synthesis-sweep miss + citation/cross-ref consistency
+(no code-dimension regression); a fresh full re-cert is the confirmation step toward a trustworthy PASS.
