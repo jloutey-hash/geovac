@@ -47,3 +47,22 @@ synthesis ×1), opus, path-pinned, blind; + 5 deterministic gates.
 - claims-50, claims-52, citation-50, citation-52: clean — the honest "bit-exact MATCH not derivation" (p50) and structural-correspondence/anti-ontological (p52) framings confirmed sound (M4 respected); code-29 confirmed the Ramanujan backing genuine (M2); code-52 confirmed p52 conceptual; the "61+ digits" is a true conservative claim.
 
 **Status:** v4.44.0 remediates defects 1–5 (synthesis + p29 + gh_convergence_tensor zombie sweep + 2 citations). Papers 29/39/40/synthesis compile clean (errors=0); C5/C11/C13/C14/C15 PASS; topo proofs 18/18 + the changed L3_T test green. **Batch 3 still needs a full 5-dimension clean re-cert AFTER the named p40 backfill (A) + PI rulings on B/C/D.**
+
+---
+
+## Re-cert preconditions RESOLVED (2026-06-23, v4.45.0)
+
+PI directed "let's get started fixing those." All four named preconditions from the FULL-cert FAIL are now addressed.
+
+**A (LARGE) — p40 general-G universality test-backfill — DONE.**
+- Migrated the two backing drivers (`dirac_triangle_extended_verify.py`, `sp2_g2_rate_constant.py`) out of the prunable `debug/qa/_resurrected/` → permanent `tests/rank2_rate_support/` (+ README). The S⁵/l2 provenance files stay (Paper-50 backing is in production `qed_two_loop.py`, not those drivers).
+- **Wired the previously-uncalled `verify_dirac_triangle`/`run_panel`** into a DEFAULT test `test_general_G_dirac_triangle_C3_leq_1` (reduced panels SU(3)/Sp(2)/G2, fail_count=0, 0<sup ratio≤1) — the general-G C₃≤1 keystone now has a live default assertion. **Un-slowed the Haar check** (`test_rank2_weyl_integration_haar_normalized` default at n_quad=40). Kept big-panel + Haar-80 + G2 A-over-B as `@slow`. Removed the `skipif` (drivers permanent).
+- **Honest-scope nuance surfaced & documented:** the all-σ Dirac triangle is PANEL-BOUNDED — a naive uniform sum≤4 panel FAILS (G2 (1,0)v(0,4): max_ratio 2.42) because a small-Casimir σ exceeds the bound, while the PRV/max-σ bound (what C₃ needs) still holds. The validated `@slow` test uses the original group-specific Casimir bounds (SU(3) p+q≤5, Sp(2) a+b≤3, G2 a+b≤2 — all fail_count=0). Paper-40 prose is honestly hedged already (rank-1-rigorous + asymptotic-PRV + named gap); claim_test_matrix rows 112/113 updated (113 NO-TEST → BACKED-SOUND). Default p40 tests 3 pass; slow 3 pass.
+
+**C — p29 "algebraic integer" math point — DONE (verified, MATERIAL).** Confirmed computationally: the Ihara *zeros* (roots of the non-monic Bass det `det(I−sA+s²Q)`, leading coeff `det Q = ∏(deg−1)≠±1`) are algebraic over ℚ but NOT algebraic integers — the paper's own closed-form factor `4s²+1` has zeros ±i/2 (minimal poly `4s²+1`, non-monic). The **reciprocal** zeros = Hashimoto T-eigenvalues (monic integer char poly `det(λI−T)`) ARE algebraic integers (±2i, `s²+4`). Corrected Cor `int_alg` (retitled "reciprocal Ihara zeros"; proof via the monic Hashimoto char poly; explicit `4s²+1`/`s²+4` example) + both synthesis spots (Headline 1 + the Observation block).
+
+**B — p29 title — DONE (PI chose "reframe to finite-size finding").** "The GeoVac Hopf Graphs Are Ramanujan" → **"Finite-Size Graph-RH for the GeoVac Hopf Graphs: Ihara Zeta, Bound-Crossing, and a Scope Boundary on Selberg-on-Hydrogen."** Corpus-wide bibitem sweep (9 citing papers across groups 1/3/4/5 + the synthesis paraphrase + p29 self-comment); **C11 PASS corpus-wide (ALL groups)**.
+
+**D — p40 Vinberg missing bibitem — DONE.** The "Vinberg's lemma" (two usages) is the standard Weyl-dominance fact (dominant orbit rep maximises ⟨·,ρ⟩); re-attributed to the already-grounded `bourbaki_lie_8` rather than guess an unverified "Vinberg 1990" (which would risk a new C4 defect).
+
+**Status:** Papers 29/40/synthesis compile clean (errors=0); C5/C11(all)/C13/C14/C15 PASS; topo proofs 18/18 + p40 default 3/3 + slow 3/3 green. Batch 3 is now ready for a **clean full 5-dimension re-cert** (the LARGE backfill that blocked it is closed).

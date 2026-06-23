@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.45.0] - 2026-06-23
+
+### Changed
+- **`/qa group1` Batch 3 re-cert preconditions RESOLVED (PI-directed "fix those").** All four named preconditions from the v4.44.0 FULL-cert FAIL are now addressed; Batch 3 is ready for a clean full re-cert.
+
+### Added / Fixed
+- **A (LARGE) — p40 general-G universality test-backfill (the v4.43.5 Flavor-B, confirmed by the cert).** Migrated the two backing drivers (`dirac_triangle_extended_verify.py`, `sp2_g2_rate_constant.py`) out of the prunable `debug/qa/_resurrected/` → permanent **`tests/rank2_rate_support/`** (+ README). **Wired the previously-uncalled `verify_dirac_triangle`/`run_panel`** into a DEFAULT test `test_general_G_dirac_triangle_C3_leq_1` (reduced panels SU(3)/Sp(2)/G2, fail_count=0, 0<sup ratio≤1 — the general-G C₃≤1 keystone now has a live default assertion); **un-slowed the Haar check** (n_quad=40 default); kept big-panel + Haar-80 + G2 A-over-B as `@slow`; removed the `skipif`. Surfaced + documented an honest-scope nuance: the all-σ Dirac triangle is **panel-bounded** (a uniform sum≤4 panel fails — G2 (1,0)v(0,4) max_ratio 2.42 — while the PRV/max-σ bound holds); the `@slow` test uses the original validated group-specific Casimir bounds (SU(3) p+q≤5, Sp(2) a+b≤3, G2 a+b≤2). `claim_test_matrix` rows 112/113 updated (113 NO-TEST → BACKED-SOUND). Default p40 tests 3 pass; slow 3 pass.
+- **C — p29 "algebraic integer" math point (MATERIAL, verified).** The Ihara *zeros* (roots of the non-monic Bass det, leading coeff $\det Q=\prod(\deg-1)\neq\pm1$) are algebraic over ℚ but NOT algebraic integers — the paper's own `4s²+1` factor has zeros ±i/2. The **reciprocal** zeros (Hashimoto T-eigenvalues, monic char poly `s²+4` → ±2i) ARE. Corrected Cor `int_alg` (retitled "reciprocal Ihara zeros"; monic-Hashimoto proof + explicit example) + both synthesis spots.
+- **B — p29 title reframed (PI choice).** "The GeoVac Hopf Graphs Are Ramanujan" → **"Finite-Size Graph-RH for the GeoVac Hopf Graphs: Ihara Zeta, Bound-Crossing, and a Scope Boundary on Selberg-on-Hydrogen"**; corpus-wide bibitem sweep (9 citing papers across groups 1/3/4/5 + synthesis + self-comment); **C11 PASS corpus-wide (ALL groups)**.
+- **D — p40 "Vinberg's lemma" (2 usages) re-attributed** to the standard Weyl-dominance lemma + the already-grounded `bourbaki_lie_8` (rather than guess an unverified "Vinberg 1990" that would risk a new C4 defect).
+
+### Verified
+- Papers 29/40/synthesis compile clean (errors=0); C5/C11(ALL)/C13/C14/C15 PASS; topo proofs 18/18 + p40 default 3/3 + slow 3/3 green. Memo: `debug/sprint_qa_group1_batch3_cert_memo.md` (§Re-cert preconditions RESOLVED).
+
 ## [4.44.0] - 2026-06-23
 
 ### Changed

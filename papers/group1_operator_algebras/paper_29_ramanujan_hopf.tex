@@ -1,4 +1,4 @@
-% Paper 29: The GeoVac Hopf Graphs Are Ramanujan
+% Paper 29: Finite-Size Graph-RH for the GeoVac Hopf Graphs
 % GeoVac Project, April 2026
 % v1.3 (Sprint-4 sync: RH-N HP operator reconstruction, RH-O FE hunt clean negative, RH-P depth-2 negative, RH-Q SU(2) Wilson gauge positive)
 
@@ -14,8 +14,8 @@
 \newtheorem{observation}{Observation}
 \newtheorem{hypothesis}{Hypothesis}
 
-\title{The GeoVac Hopf Graphs Are Ramanujan:\\
-Ihara Zeta, Graph-RH, and a Scope Boundary on Selberg-on-Hydrogen}
+\title{Finite-Size Graph-RH for the GeoVac Hopf Graphs:\\
+Ihara Zeta, Bound-Crossing, and a Scope Boundary on Selberg-on-Hydrogen}
 \author{GeoVac Project}
 \date{April 2026}
 
@@ -486,19 +486,30 @@ Corollary~\ref{cor:pi_free} extends Paper~24's $\pi$-free
 certificate from adjacency data to Ihara-zeta data.  The same
 bit-exact $\pi$-freeness is preserved under Ihara-zeta.
 
-\begin{corollary}[Integer-algebraicity of Ihara zeros]
+\begin{corollary}[Integer-algebraicity of the reciprocal Ihara zeros]
 \label{cor:int_alg}
-Every non-trivial Ihara zero of a GeoVac Hopf graph is the root of
-a $\mathbb{Z}$-coefficient integer polynomial (i.e., an algebraic
-integer); no rational scaling is required to clear denominators in
-the closed forms reported in Section~\ref{sec:closed_forms}.
+Every non-trivial \emph{reciprocal} Ihara zero of a GeoVac Hopf graph
+--- i.e.\ every nonzero eigenvalue of the Hashimoto edge operator $T$
+--- is an algebraic integer (a root of a \emph{monic}
+$\mathbb{Z}$-coefficient polynomial). The Ihara zeros themselves are
+algebraic over~$\mathbb{Q}$ (Corollary~\ref{cor:pi_free}) but are
+\emph{not} in general algebraic integers.
 \end{corollary}
 
 This sharpens Corollary~\ref{cor:pi_free} from ``algebraic over~$\mathbb{Q}$''
-to ``algebraic over~$\mathbb{Z}$.'' The strengthening is direct from
-the Ihara--Bass formula (\ref{eq:ihara_bass}): $A$ and $Q$ are integer
-matrices, so $\det(I - sA + s^2 Q)$ is an integer-coefficient polynomial
-in~$s$, and the $(1-s^2)^{r-c}$ prefactor preserves integer coefficients.
+to ``algebraic integer'' \emph{for the reciprocal zeros}, and is direct from
+the Hashimoto formulation: $T$ is a $0/1$ edge-adjacency matrix, so its
+characteristic polynomial $\det(\lambda I - T)$ is \emph{monic} with integer
+coefficients, and its eigenvalues (the reciprocal Ihara zeros) are therefore
+algebraic integers. The strengthening does \emph{not} pass to the Ihara zeros
+themselves:\ they are the roots of the Ihara--Bass determinant
+$\det(I - sA + s^2 Q)$, which has integer coefficients but leading coefficient
+$\det Q = \prod_v (\deg v - 1) \neq \pm 1$ in general --- so the zeros are
+algebraic over~$\mathbb{Q}$, not algebraic integers. (Concretely, the
+closed-form factor $4s^2 + 1$ of Section~\ref{sec:closed_forms} has Ihara zeros
+$\pm i/2$, algebraic but not algebraic integers; their reciprocals $\mp 2i$,
+roots of the monic $s^2 + 4$, are the $T$-eigenvalues and \emph{are} algebraic
+integers.)
 
 \begin{observation}[Galois structure of Ihara zeros]
 \label{obs:galois}
