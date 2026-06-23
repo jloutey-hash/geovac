@@ -6,12 +6,15 @@ backing only under debug/archive/, which is pruning-scheduled).  These tests
 RECOMPUTE the paper's own constructions from scratch and assert the *current*
 (corrected, 2026-06) claims:
 
-  (1) The finite disk-with-cone is OBSTRUCTED by its Dirichlet boundary.  The
-      Markov–Cesàro Berezin g_t = (e^{-tΔ}f)/(e^{-tΔ}1) of a *positive* radial
-      function f=(ρ/R)² is NOT positivity-preserving (min g ≈ −0.13 < 0) and its
-      interior approximation rate does NOT decay (Λ^{+0.07}, p>0).  This is the
-      negative result that pivots the paper to the boundaryless plane.
-      (Porting debug/archive/spectral_triple_arc/b3_markov_berezin.py.)
+  (1) The finite disk-with-cone is OBSTRUCTED by its Dirichlet boundary, but the
+      obstruction is the NON-DECAYING interior approximation rate (weight-robust,
+      ~Λ^{+0.07}, plateaus ~0.3), NOT positivity.  The Cesàro weight (1-λ/Λ)_+^s
+      at s>=2 (Def 4.1) PRESERVES positivity on the disk (min g > 0); only the
+      truncated HEAT weight e^{-tλ} fails positivity (Gibbs, min g ≈ −0.13).  The
+      non-decaying rate is what pivots the paper to the boundaryless plane (where
+      it decays Λ^{-0.6..-0.9}).  (Corrected 2026-06-23: the positivity leg was
+      previously mis-attributed to the Cesàro construction; the −0.13 dip is the
+      heat weight.  Was test_disk_markov_berezin_positivity_fails.)
 
   (2) prop:prop2 — the assembled disk operator system O_n = P_n C(disk) P_n has
       propagation number 2: O² already fills the full M_N(C) envelope at every
@@ -34,8 +37,9 @@ R = 1.0
 
 
 # --------------------------------------------------------------------------
-# (1) Finite-disk Markov–Cesàro Berezin — the OBSTRUCTION (positivity fails,
-#     interior rate does not decay).  k=0 (radial) sector: f=(ρ/R)² is radial.
+# (1) Finite-disk Berezin — the OBSTRUCTION is the NON-DECAYING interior rate
+#     (weight-robust), NOT positivity.  Cesàro (Def 4.1) preserves positivity;
+#     only the heat weight fails it.  k=0 (radial) sector: f=(ρ/R)² is radial.
 # --------------------------------------------------------------------------
 def _k0_modes(Jmax: int, Lam: float):
     """k=0 Dirichlet radial modes R_j(ρ)=√2/(R|J_1(a_j)|)·J_0(a_j ρ/R),
@@ -52,8 +56,9 @@ def _Rj(rho, a, norm):
     return norm * jv(0, a * rho / R)
 
 
-def _smooth_ratio(f_fn, modes, t, rho):
-    """Markov–Cesàro smoothed ratio g_t = (e^{-tΔ}f)/(e^{-tΔ}1) on the disk."""
+def _smooth_ratio(f_fn, modes, weight, rho):
+    """Markov smoothed ratio g = (Σ w_a<R_a,f>R_a)/(Σ w_a<R_a,1>R_a) on the
+    disk, for an arbitrary spectral weight w_a = weight(λ_a)."""
     xg, wg = leggauss(600)
     s = 0.5 * R * (xg + 1.0)
     ws = 0.5 * R * wg
@@ -63,46 +68,87 @@ def _smooth_ratio(f_fn, modes, t, rho):
         Rj_s = _Rj(s, a, norm)
         cf = np.sum(Rj_s * f_fn(s) * s * ws)   # <R_j, f>
         c1 = np.sum(Rj_s * 1.0 * s * ws)       # <R_j, 1>
-        e = np.exp(-t * lam)
+        w = weight(lam)
         Rj_rho = _Rj(rho, a, norm)
-        num += e * cf * Rj_rho
-        den += e * c1 * Rj_rho
+        num += w * cf * Rj_rho
+        den += w * c1 * Rj_rho
     return num / den
 
 
-def test_disk_markov_berezin_positivity_fails():
-    """Disk obstruction: f=(ρ/R)² ≥ 0 but g_t goes NEGATIVE (min ≈ −0.13) and the
-    interior rate does NOT decay (Λ^{+p}, p>0).  The opposite of the plane, where
-    positivity holds (min g ≈ −2e-4) and the rate converges (Λ^{-0.6..-0.9})."""
+def _heat_weight(Lam):
+    """Truncated heat weight w_a = e^{-t λ_a}, t = 1/Λ (Gibbs-non-positive)."""
+    return lambda lam: np.exp(-(1.0 / Lam) * lam)
+
+
+def _cesaro_weight(Lam, s=2):
+    """Cesàro weight w_a = (1 - λ_a/Λ)_+^s of Def 4.1 (positivity-preserving)."""
+    return lambda lam: max(0.0, (1.0 - lam / Lam)) ** s
+
+
+def test_disk_cesaro_positivity_holds_heat_fails():
+    """Positivity leg (corrected 2026-06-23): the Cesàro weight (Def 4.1) at
+    s>=2 PRESERVES positivity on the finite disk (min g > 0); the truncated
+    HEAT weight e^{-tλ} fails it (min g ≈ −0.13, Gibbs).  So positivity is NOT
+    the disk obstruction — the −0.13 dip belongs to the heat weight, not the
+    Cesàro construction."""
+    f1 = lambda r: (r / R) ** 2
+    rho = np.linspace(1e-4, R, 2000)
+    Jmax = 80
+    Lambdas = [100.0, 200.0, 400.0, 800.0, 1600.0]
+
+    cesaro_mins, heat_mins = [], []
+    for Lam in Lambdas:
+        modes = _k0_modes(Jmax, Lam)
+        g_c = _smooth_ratio(f1, modes, _cesaro_weight(Lam, s=2), rho)
+        g_h = _smooth_ratio(f1, modes, _heat_weight(Lam), rho)
+        cesaro_mins.append(float(g_c.min()))
+        heat_mins.append(float(g_h.min()))
+
+    # Cesàro (Def 4.1) PRESERVES positivity on the disk: min g > 0 at every Λ.
+    assert min(cesaro_mins) > 0.0, (
+        f"Cesàro s=2 must preserve positivity (min g > 0); got per-Lambda mins "
+        f"{[round(m,4) for m in cesaro_mins]}"
+    )
+    # the HEAT weight does NOT: it dips to ≈ −0.13 (the Gibbs failure).
+    assert min(heat_mins) < -0.05, (
+        f"heat weight should fail positivity (min g < -0.05); got "
+        f"{[round(m,4) for m in heat_mins]}"
+    )
+    # specifically the Λ=200 heat cell reproduces the paper's min g ≈ −0.13.
+    assert heat_mins[1] < -0.10, (
+        f"heat Lambda=200 min g = {heat_mins[1]:.4f}, expected < -0.10"
+    )
+
+
+def test_disk_interior_rate_does_not_decay():
+    """The genuine finite-disk OBSTRUCTION (weight-robust): the
+    approximate-identity coefficient does NOT decay toward 0 — it plateaus
+    ~0.3 across the Λ sweep, for BOTH the Cesàro and heat weights.  This is the
+    Dirichlet-boundary obstruction that pivots the paper to the plane (where the
+    rate decays Λ^{-0.6..-0.9})."""
     f1 = lambda r: (r / R) ** 2
     gradf1 = 2.0 / R
     rho = np.linspace(1e-4, R, 2000)
     Jmax = 80
     Lambdas = [100.0, 200.0, 400.0, 800.0, 1600.0]
 
-    mins, e1s = [], []
-    for Lam in Lambdas:
-        modes = _k0_modes(Jmax, Lam)
-        g1 = _smooth_ratio(f1, modes, 1.0 / Lam, rho)
-        mins.append(float(g1.min()))
-        e1s.append(float(np.max(np.abs(g1 - f1(rho))) / gradf1))
-
-    # (a) positivity FAILS: a positive f produces a Berezin image dipping well
-    #     below zero (the Dirichlet-boundary 0/0 artifact at ρ=R).
-    assert min(mins) < -0.05, (
-        f"expected disk positivity failure (min g < -0.05); got min over sweep "
-        f"= {min(mins):.4f} (per-Lambda mins={[round(m,4) for m in mins]})"
-    )
-    # specifically the Λ=200 cell reproduces the paper's min g ≈ −0.13
-    assert mins[1] < -0.10, f"Lambda=200 min g = {mins[1]:.4f}, expected < -0.10"
-
-    # (b) interior rate does NOT decay: log-log slope p = +slope > 0
-    #     (Λ^{+0.07} no-decay), unlike the plane's p < 0 convergence.
-    p = float(np.polyfit(np.log(Lambdas), np.log(e1s), 1)[0])
-    assert p > 0.0, (
-        f"disk interior rate must NOT decay (slope > 0); got Lambda^{{{p:.3f}}} "
-        f"(e1={[round(e,4) for e in e1s]})"
-    )
+    for name in ("cesaro", "heat"):
+        e1s = []
+        for Lam in Lambdas:
+            modes = _k0_modes(Jmax, Lam)
+            w = _cesaro_weight(Lam, s=2) if name == "cesaro" else _heat_weight(Lam)
+            g = _smooth_ratio(f1, modes, w, rho)
+            e1s.append(float(np.max(np.abs(g - f1(rho))) / gradf1))
+        # no decay: the coefficient stays bounded away from 0 (plateaus ~0.3),
+        # i.e. it does NOT approach 0 like the plane's Λ^{-0.6..-0.9}.
+        assert min(e1s) > 0.15, (
+            f"{name}: interior rate must NOT decay (e1 plateaus, min > 0.15); "
+            f"got e1={[round(e,4) for e in e1s]}"
+        )
+        # and the last value is not an order of magnitude below the first.
+        assert e1s[-1] > 0.5 * e1s[0], (
+            f"{name}: e1 must not converge; first={e1s[0]:.4f}, last={e1s[-1]:.4f}"
+        )
 
 
 # --------------------------------------------------------------------------

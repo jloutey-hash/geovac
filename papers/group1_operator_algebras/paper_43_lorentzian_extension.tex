@@ -1519,19 +1519,36 @@ generator $K_{\alpha}^{W} = J_{\mathrm{polar}}^{W}$ acts on the
 wedge basis by integer eigenvalues $2 m_{j}$ that depend only on
 the angular-momentum quantum number, not on the chirality.
 
-\item[(I2)] \emph{Odd parity of $\DL^{W}$:}
-$\{\Pi_{W}, \DL^{W}\} = 0$. Both factors of
+\item[(I2)] \emph{Mixed parity of $\DL^{W}$ --- temporal odd, spatial
+even-but-sign-paired:}
 $\DL = i(\gamma^{0} \otimes \partial_{t} + \DGV \otimes I_{\Nt})$
-are $\Pi_{W}$-odd on the wedge:\ the BBB temporal gamma
-$\gamma^{0}$ anticommutes with $\gamma^{5}$ in the chiral basis
-(Paper~44~\S~3), and the wedge-restricted Camporesi--Higuchi
-$D_{W}^{\mathrm{GV}}$ is $\Pi_{W}$-odd via the unfolded-wedge
-basis change (the diagonal-in-$(n_{\mathrm{fock}}, l, m_{j})$
-matrix elements of the truthful chirality-diagonal $\DGV$ become
-off-diagonal cross-terms in the unfolded basis where $\Pi_{W}$
-swaps the two CH-chirality eigenvalues at fixed
-$(n_{\mathrm{fock}}, l, m_{j})$).
+splits on the wedge into a $\Pi_{W}$-\emph{odd} temporal factor and a
+$\Pi_{W}$-\emph{even} spatial factor.
+\emph{(I2a, temporal --- odd):}
+$\{\Pi_{W}, i\gamma^{0} \otimes \partial_{t}\} = 0$, since the BBB temporal
+gamma $\gamma^{0}$ anticommutes with $\gamma^{5}$ in the chiral basis
+(Paper~44~\S~3).
+\emph{(I2b, spatial --- even and chirality sign-paired):}
+$[\Pi_{W}, \DGV^{W}] = 0$. The truthful Camporesi--Higuchi $\DGV$ is
+\emph{diagonal} in the chirality index $\chi$ with eigenvalue
+$\chi\,(n_{\mathrm{fock}} + \tfrac{1}{2})$ --- this is the very
+chirality-as-$\gamma^{5}$ identification whose corollary is that the BBB
+\emph{universal} axiom $\{\chi, D\} = 0$ \emph{fails} on the truthful
+$\DGV$ (\S\ref{sec:bbb_axiom_finding}); $\DGV^{W}$ therefore
+\emph{commutes} with $\Pi_{W}$, it is not $\Pi_{W}$-odd. Instead it is
+\emph{sign-paired}:\ within each $(n_{\mathrm{fock}}, l, |m_{j}|)$ group
+the $\chi = +1$ and $\chi = -1$ partners carry equal-magnitude,
+opposite-sign eigenvalues, i.e.\ $\DGV^{W} = \Pi_{W}\,|\DGV^{W}|$ with
+$|\DGV^{W}|$ $\Pi_{W}$-even and $\chi$-independent.
 \end{enumerate}
+The orthogonality therefore decomposes into an even$\times$odd
+cancellation for the temporal factor (Lemma~\ref{lem:parity_HS}) and a
+chirality-pairing cancellation for the spatial factor
+(Lemma~\ref{lem:pairing_HS}); the earlier ``$\DL^{W}$ is $\Pi_{W}$-odd''
+one-line statement was incorrect for the spatial factor and is corrected
+here to this mixed-parity form, consistent with
+\S\ref{sec:bbb_axiom_finding} and the
+chirality-pairing test (\texttt{tests/test\_paper43\_pythagorean\_hs\_orthogonality.py}).
 
 \begin{lemma}[Parity / HS-orthogonality]\label{lem:parity_HS}
 Let $\mathcal{H}$ be finite-dimensional, $\Pi : \mathcal{H} \to
@@ -1552,6 +1569,26 @@ $\Pi B \Pi^{-1} = -B$ from $\{\Pi, B\} = 0$. Hence
 $\Tr(A^{\dagger} B) = 0$.
 \end{proof}
 
+\begin{lemma}[Chirality-pairing / HS-orthogonality]\label{lem:pairing_HS}
+Let $\Pi = \mathrm{diag}(\chi_{i})$, $\chi_{i} \in \{\pm1\}$, be a unitary
+involution with $\Tr\Pi = 0$ whose $\pm1$ eigenspaces are paired
+group-by-group. Let $A$ be $\Pi$-even and \emph{$\chi$-independent}
+(equal eigenvalues on the $\chi = +1$ and $\chi = -1$ partners of each
+group), and let $B = \Pi\,|B|$ with $|B|$ $\Pi$-even and $\chi$-independent
+(so $B$ is $\Pi$-even with equal-magnitude, opposite-sign eigenvalues on
+the partners). Then
+$\langle A, B\rangle_{\mathrm{HS}} := \Tr(A^{\dagger}B) = 0$.
+\end{lemma}
+
+\begin{proof}
+In the joint eigenbasis $A$, $B$ are diagonal, so
+$\Tr(A^{\dagger}B) = \sum_{\mathrm{groups}}
+\big(\bar a_{+}b_{+} + \bar a_{-}b_{-}\big)$ over the $\chi = \pm1$
+partners. By hypothesis $a_{+} = a_{-} =: a$ ($\chi$-independence of $A$)
+and $b_{+} = -b_{-}$ ($B = \Pi|B|$ with $|B|$ $\chi$-independent), so each
+group contributes $\bar a\,(b_{+} + b_{-}) = 0$.
+\end{proof}
+
 \begin{theorem}[Pythagorean HS-orthogonality, formal closure]
 \label{thm:pythagorean_formal}
 Under the construction of \S\ref{sec:lorentzian_dirac} at finite
@@ -1570,10 +1607,18 @@ $\Frob{H_{\mathrm{local}} - \DL^{W}}^{2}$.
 \end{theorem}
 
 \begin{proof}
-Apply Lemma~\ref{lem:parity_HS} with $\mathcal{H} = \mathcal{K}_{W}$,
-$\Pi = \Pi_{W}$, $A = H_{\mathrm{local}}$ (Input~I1's even parity),
-$B = \DL^{W}$ (Input~I2's odd parity). The lemma gives
-$\Tr(H_{\mathrm{local}}^{\dagger} \DL^{W}) = 0$ directly.
+Decompose $\DL^{W} = \DL^{W,\mathrm{temp}} + \DL^{W,\mathrm{spat}}$ along
+Input~I2, with $\DL^{W,\mathrm{temp}} = i\gamma^{0}\otimes\partial_{t}$ and
+$\DL^{W,\mathrm{spat}} = \DGV^{W}\otimes I_{\Nt}$ (restricted to the wedge).
+For the temporal factor (I2a, $\Pi_{W}$-odd) apply
+Lemma~\ref{lem:parity_HS} with $A = H_{\mathrm{local}}$ (Input~I1's even
+parity), $B = \DL^{W,\mathrm{temp}}$:\
+$\Tr(H_{\mathrm{local}}^{\dagger}\DL^{W,\mathrm{temp}}) = 0$. For the
+spatial factor (I2b, $\Pi_{W}$-even and chirality sign-paired) apply
+Lemma~\ref{lem:pairing_HS} with $A = H_{\mathrm{local}}$ (even and
+$\chi$-independent by I1) and $B = \DGV^{W} = \Pi_{W}|\DGV^{W}|$:\
+$\Tr(H_{\mathrm{local}}^{\dagger}\DL^{W,\mathrm{spat}}) = 0$. The sum
+vanishes, giving $\Tr(H_{\mathrm{local}}^{\dagger}\DL^{W}) = 0$.
 \end{proof}
 
 The L2-F.1 numerical panel at 18 cells is empirical corroboration
@@ -1582,19 +1627,20 @@ $\sim 10^{-14}$ are float64 roundoff in the matrix-element
 evaluation, not finite-cutoff bound noise. The
 \emph{universality across six witnesses} is implied:\ the theorem
 statement is $\kappa_{g}$-independent (witnesses parameterise
-$\kappa_{g}$, which rescales $H_{\mathrm{local}}$ inside the
-$\Pi_{W}$-even subspace but cannot rotate it into the $\Pi_{W}$-odd
-subspace where $\DL^{W}$ sits), so all six produce bit-exact zero
-by the same argument.
+$\kappa_{g}$, which rescales $H_{\mathrm{local}}$ but affects neither
+the even$\times$odd cancellation of the temporal factor nor the
+chirality-pairing cancellation of the spatial factor), so all six
+produce bit-exact zero by the same argument.
 
 \paragraph{Honest scope (post-formal-proof).}
 The theorem closes Paper~43's named follow-on
 (\S~\ref{sec:open_questions}~O4) at finite $(\nmax, \Nt)$ in the
 operator-algebraic sense. Three caveats remain:
 (i)~the proof rests on the three structural inputs from
-Papers~42/43/44 (the $\Pi_{W}$ identification with BBB $\gamma^{5}$
-and the two parity statements I1, I2), each established in the
-cited papers but not re-derived here from first principles;
+Papers~42/43/44 (the $\Pi_{W}$ identification with BBB $\gamma^{5}$,
+the even parity I1, and the mixed-parity statement I2 --- temporal
+$\Pi_{W}$-odd, spatial $\Pi_{W}$-even-and-sign-paired), each established
+in the cited papers but not re-derived here from first principles;
 (ii)~the continuum limit $(\nmax, \Nt, T) \to \infty$ requires
 Paper~47~\cite{paper47}'s two-rate hybrid convergence at the
 norm-resolvent level, not the present operator-algebraic identity;

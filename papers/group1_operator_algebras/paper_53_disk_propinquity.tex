@@ -17,11 +17,16 @@
 % groups, universal rate), 44 (Lorentzian operator system), 45/46
 % (Lorentzian propinquity), 47 (two-rate de-compactification).
 %
-% Status: CORRECTED (2026-06). The finite disk is OBSTRUCTED (Dirichlet
-% boundary: positivity fails, min g ~ -0.13; interior rate Lambda^{+0.07},
-% no convergence; the earlier Lambda^{-1.30} was withdrawn). Convergence
-% is recovered ONLY on the boundaryless plane R^2_alpha (Bochner-Riesz,
-% s>=1/2, rate Lambda^{-0.6..-0.9}). thm:interior (b),(c) are plane-only.
+% Status: CORRECTED (2026-06; positivity-leg re-attributed 2026-06-23).
+% The finite disk is OBSTRUCTED by the Dirichlet boundary, but the
+% obstruction is the NON-DECAYING interior rate (Lambda^{+0.07}, no
+% convergence; the earlier Lambda^{-1.30} was withdrawn), NOT positivity:
+% the Cesaro weight (1-lam/Lam)^s at s>=2 (Def 4.1) DOES preserve
+% positivity on the finite disk (min g > 0). The min g ~ -0.13 dip is the
+% truncated HEAT weight e^{-t lam} (Gibbs), not the Cesaro construction.
+% Convergence is recovered ONLY on the boundaryless plane R^2_alpha
+% (Bochner-Riesz, s>=1/2, rate Lambda^{-0.6..-0.9}). thm:interior (c) is
+% plane-only; (b) positivity holds on both disk (Cesaro) and plane.
 %
 % Built from sprint memos:
 %   debug/b3_disk_backbone_memo.md
@@ -99,21 +104,26 @@ truncated heat trace carries the Bekenstein--Hawking--type tip entropy
 of the companion Paper~51. We construct a \emph{unital Markov--Cesàro
 Berezin} reconstruction $\Berez_{\Lambda}$ on $\cone$ and prove that, on
 apex-localised observables, it has exact unitality (by the Markov
-normalisation), while the remaining reconstruction properties ---
-Ces\`aro positivity and a convergent approximate-identity interior
-rate --- are \emph{obstructed on the finite disk} by the Dirichlet
-boundary (see below) and are recovered on the boundaryless plane.
+normalisation), while Ces\`aro positivity \emph{also} holds on the finite disk at order
+$s\ge2$, the remaining property --- a convergent approximate-identity
+interior rate --- is \emph{obstructed on the finite disk} by the Dirichlet
+boundary (see below) and is recovered on the boundaryless plane.
 Together with the propagation-number-two
 operator system and the gradient-norm Lipschitz seminorm, this yields
 the propinquity backbone for the cigar-tip entropy of Paper~51 at the
 local apex observable, upgrading its Lemma on geometric faithfulness
 from cited to proved for that purpose. The construction is verified
-numerically: disk unitality is exact, but the finite-disk Markov--Ces\`aro
-reconstruction does \emph{not} achieve Ces\`aro positivity (minimum
-eigenvalue reaches $\approx -0.13$) nor a convergent interior rate (the
-disk drivers give $\norm{\Berez_\Lambda(f)-P_\Lambda M_f P_\Lambda}/
+numerically: disk unitality is exact and the Ces\`aro construction of
+Definition~\ref{def:berezin} at order $s\ge2$ \emph{does} preserve
+positivity on the finite disk (minimum eigenvalue $>0$ across the
+$\Lambda$ sweep), but it does \emph{not} achieve a convergent interior
+rate (the disk drivers give $\norm{\Berez_\Lambda(f)-P_\Lambda M_f P_\Lambda}/
 \norm{\nabla f}_\infty \sim \Lambda^{+0.07}$, i.e.\ no decay) --- this
-is the Dirichlet-boundary obstruction, not a tail effect. The
+is the Dirichlet-boundary obstruction, not a tail effect. (The minimum
+eigenvalue reaches $\approx -0.13$ only for the truncated \emph{heat}
+weight $e^{-t\lambda}$, which is Gibbs-non-positive;\ the Ces\`aro weight
+restores positivity but not convergence, so the genuine obstruction is
+the non-decaying rate --- weight-robust --- not positivity.) The
 \emph{boundaryless plane} reconstruction (below) is what genuinely
 converges:\ the 2D Bochner--Riesz Berezin is positivity-preserving at
 order $s\ge\tfrac12$ (classical) and reconstructs every Schwartz
@@ -209,12 +219,15 @@ propagation number $2$: $\Op_\Lambda^{2}$ spans the full matrix envelope
 Toeplitz value~\cite{connes_vs2021} and confirmed by direct computation.
 \item \textbf{(Berezin reconstruction, \S\ref{sec:berezin}).} The unital
 Markov--Ces\`aro map $\Berez_{\Lambda}$ of Definition~\ref{def:berezin}
-has exact unitality. The remaining reconstruction properties are
-\emph{obstructed on the finite disk}:\ numerically the Ces\`aro
-construction is not positivity-preserving (minimum eigenvalue
-$\approx-0.13$) and its approximate-identity coefficient does not decay
+has exact unitality and, at order $s\ge2$, is positivity-preserving on
+the finite disk (minimum eigenvalue $>0$ across the $\Lambda$ sweep). The
+\emph{convergence} property is nonetheless \emph{obstructed on the finite
+disk}:\ its approximate-identity coefficient does not decay
 ($\sim\Lambda^{+0.07}$) --- the Dirichlet-boundary obstruction
-(\S\ref{sec:boundary}).
+(\S\ref{sec:boundary}). (The minimum eigenvalue dips to $\approx-0.13$
+only for the truncated \emph{heat} weight, which is Gibbs-non-positive;\
+the Ces\`aro weight restores positivity but not convergence, so the
+obstruction is the non-decaying rate, not positivity.)
 \item \textbf{(Apex backbone via the plane, \S\ref{sec:apex}).} The
 geometric-faithfulness backbone of the Paper~51 cigar-tip entropy ---
 apex-local observables (which do not see the boundary) --- is supplied
@@ -247,14 +260,19 @@ residual (\S\ref{sec:open}, Q1), as in Papers~38/40, and the genuinely-new
 non-compact metric content sits in the boundaryless Bochner--Riesz reconstruction.
 
 \subsection{Honest scope}
-On the finite disk, only unitality and contractivity hold (algebraic
-identities). The Ces\`aro \emph{positivity} hoped for as a disk analogue
-of Fej\'er's theorem does \emph{not} hold numerically (the Markov--Ces\`aro
-construction reaches minimum eigenvalue $\approx-0.13$), and the
-approximate-identity coefficient does \emph{not} decay (disk drivers give
-$\sim\Lambda^{+0.07}$;\ the earlier reported $\Lambda^{-1.30}$ is not
-reproduced) --- both are the Dirichlet-boundary obstruction
-(\S\ref{sec:boundary}), not a tail effect. The genuine, convergent,
+On the finite disk, unitality and contractivity hold (algebraic
+identities), and the Ces\`aro \emph{positivity} hoped for as a disk
+analogue of Fej\'er's theorem \emph{does} hold numerically for the
+Ces\`aro weight at $s\ge2$ (minimum eigenvalue $>0$ across the
+$\Lambda$ sweep). What fails on the finite disk is \emph{convergence}:\
+the approximate-identity coefficient does \emph{not} decay (disk drivers
+give $\sim\Lambda^{+0.07}$;\ the earlier reported $\Lambda^{-1.30}$ is not
+reproduced) --- the Dirichlet-boundary obstruction
+(\S\ref{sec:boundary}), not a tail effect. (The minimum eigenvalue
+$\approx-0.13$ belongs to the truncated \emph{heat} weight $e^{-t\lambda}$,
+which is Gibbs-non-positive;\ it is not the Ces\`aro construction of
+Definition~\ref{def:berezin}, which preserves positivity but still does
+not converge.) The genuine, convergent,
 positivity-preserving reconstruction is on the boundaryless plane
 (Theorem~\ref{thm:plane}:\ Bochner--Riesz at $s\ge\tfrac12$, rate
 $\Lambda^{-0.6}$ to $\Lambda^{-0.9}$, verified in
@@ -356,19 +374,23 @@ normalised positive average (Markov).
 \label{thm:interior}
 Let $f\in C(\cone)$ be a Lipschitz observable supported in the interior
 $\{\rho\le\theta R\}$ for some fixed $\theta<1$. Then $\Berez_{\Lambda}$
-of Definition~\ref{def:berezin} satisfies (parts \emph{(a)},\emph{(d)}
-hold on the finite disk for all $\Lambda$; parts \emph{(b)},\emph{(c)}
-hold on the boundaryless plane $\R^{2}_{\alpha}$ only and are
-\emph{withdrawn on the finite disk}, Remark~\ref{rem:interior_correction}):
+of Definition~\ref{def:berezin} satisfies (parts \emph{(a)},\emph{(b)},
+\emph{(d)} hold on the finite disk for all $\Lambda$ at Ces\`aro order
+$s\ge2$; part \emph{(c)} holds on the boundaryless plane
+$\R^{2}_{\alpha}$ only and is \emph{withdrawn on the finite disk},
+Remark~\ref{rem:interior_correction}):
 \begin{enumerate}
 \item[\emph{(a)}] \textbf{Unitality:} $\Berez_{\Lambda}(1)=P_{\Lambda}=I$
 on $P_{\Lambda}\Hilb$ (exactly, since $g_{\Lambda}\equiv1$ for $f\equiv1$).
-\item[\emph{(b)}] \textbf{Positivity and contractivity (plane only):}
-for $s\ge\tfrac12$ on $\R^{2}_{\alpha}$,
-$f\ge0\Rightarrow\Berez_{\Lambda}(f)\succeq0$, and
+\item[\emph{(b)}] \textbf{Positivity and contractivity:}
+for the Ces\`aro weight at $s\ge2$,
+$f\ge0\Rightarrow\Berez_{\Lambda}(f)\succeq0$ and
 $\opnorm{\Berez_{\Lambda}(f)}\le\supnorm{f}$ (because
-$\min f\le g_{\Lambda}\le\max f$); see Theorem~\ref{thm:plane}. On the
-finite disk positivity fails ($\min g\approx-0.13$).
+$\min f\le g_{\Lambda}\le\max f$) --- verified on \emph{both} the finite
+disk ($\min g>0$ across the $\Lambda$ sweep) and the plane
+($s\ge\tfrac12$; see Theorem~\ref{thm:plane}). (The $\min g\approx-0.13$
+dip belongs to the truncated heat weight $e^{-t\lambda}$, not to the
+Ces\`aro weight.)
 \item[\emph{(c)}] \textbf{Approximate identity (plane only):}
 $\opnorm{\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}}\le
 \gamma_{\Lambda}\,\supnorm{\nabla f}$ with $\gamma_{\Lambda}\to0$ on
@@ -382,25 +404,28 @@ $\opnorm{[D,\Berez_{\Lambda}(f)]}\le\supnorm{\nabla g_{\Lambda}}\le
 \end{enumerate}
 \end{theorem}
 
-\begin{remark}[Correction, 2026-06-18 --- parts (b),(c) fail numerically
-on the finite disk]\label{rem:interior_correction}
-Parts \emph{(a)} (unitality, exact) and \emph{(d)} (Lipschitz
-non-expansiveness) hold and are verified. Parts \emph{(b)} and \emph{(c)}
-as stated do \emph{not} survive numerical test on the finite disk:\ the
-Markov--Ces\`aro construction at $s\ge2$ reaches minimum eigenvalue
-$\approx-0.13$ (\emph{not} positivity-preserving), and the
-approximate-identity coefficient does \emph{not} decay
-($\gamma_{\Lambda}\sim\Lambda^{+0.07}$, no convergence;\ the previously
-reported $\Lambda^{-1.30}$ is not reproduced ---
-\texttt{tests/test\_paper53\_disk\_obstruction.py}). Both failures are the
-Dirichlet-boundary obstruction analysed in \S\ref{sec:boundary}, not a
-tail effect:\ even interior-supported $f$ couple to boundary-vanishing
-eigenfunctions through the Ces\`aro ratio. The genuine
-positivity-preserving, convergent reconstruction is the boundaryless
-\emph{plane} Bochner--Riesz map (Theorem~\ref{thm:plane}), on which the
-apex backbone and the propinquity assembly are built. Parts (b),(c) are
-therefore retained only as the \emph{plane} statements; the finite-disk
-(b),(c) are withdrawn.
+\begin{remark}[Correction, 2026-06-23 --- only part (c) fails on the
+finite disk; (b) holds for the Ces\`aro weight]\label{rem:interior_correction}
+Parts \emph{(a)} (unitality, exact), \emph{(b)} (positivity and
+contractivity, for the Ces\`aro weight at $s\ge2$), and \emph{(d)}
+(Lipschitz non-expansiveness) hold on the finite disk and are verified.
+Part \emph{(c)} as stated does \emph{not} survive numerical test on the
+finite disk:\ the approximate-identity coefficient does \emph{not} decay
+($\gamma_{\Lambda}\sim\Lambda^{+0.07}$ and stays $\approx0.3$ across the
+sweep, no convergence;\ the previously reported $\Lambda^{-1.30}$ is not
+reproduced --- \texttt{tests/test\_paper53\_disk\_obstruction.py}). This
+is the Dirichlet-boundary obstruction analysed in \S\ref{sec:boundary},
+not a tail effect:\ even interior-supported $f$ couple to
+boundary-vanishing eigenfunctions through the Ces\`aro ratio. An earlier
+(2026-06-18) draft of this remark additionally claimed part (b) fails
+(minimum eigenvalue $\approx-0.13$);\ that figure belongs to the truncated
+\emph{heat} weight $e^{-t\lambda}$ (Gibbs-non-positive), \emph{not} to the
+Ces\`aro weight of Definition~\ref{def:berezin}, which preserves
+positivity ($\min g>0$). The genuine \emph{convergent} reconstruction is
+the boundaryless \emph{plane} Bochner--Riesz map (Theorem~\ref{thm:plane}),
+on which the apex backbone and the propinquity assembly are built. Part
+(c) is therefore retained only as the \emph{plane} statement; the
+finite-disk (c) is withdrawn.
 \end{remark}
 
 \begin{proof}[Proof structure]
@@ -414,11 +439,13 @@ Ces\`aro summability of Hankel/Fourier--Bessel
 expansions~\cite{stempak1989,colzani1993}. Hence $g_{\Lambda}$ is a
 positive normalised average of $f$, giving $\min f\le g_{\Lambda}\le
 \max f$ and therefore both positivity and contractivity of
-$P_{\Lambda}M_{g_{\Lambda}}P_{\Lambda}$. (The truncated \emph{heat}
-weight $e^{-t\lambda}$ oscillates by Gibbs and is not positive; the
-Ces\`aro weight at $s\ge2$ was the hoped-for fix, but numerically it
-does \emph{not} restore positivity on the finite disk --- $\min g
-\approx-0.13$ even at $s\ge2$, the boundary obstruction;\ see
+$P_{\Lambda}M_{g_{\Lambda}}P_{\Lambda}$ --- confirmed numerically on the
+finite disk ($\min g>0$ across the $\Lambda$ sweep,
+\texttt{tests/test\_paper53\_disk\_obstruction.py}). (The truncated
+\emph{heat} weight $e^{-t\lambda}$ oscillates by Gibbs and is \emph{not}
+positive --- $\min g\approx-0.13$; the Ces\`aro weight at $s\ge2$ is the
+fix and \emph{does} restore positivity on the finite disk. What it does
+\emph{not} fix is convergence;\ see (c) and
 Remark~\ref{rem:interior_correction}.) For (c),
 $\Berez_{\Lambda}(f)-P_{\Lambda}M_{f}P_{\Lambda}=P_{\Lambda}
 M_{g_{\Lambda}-f}P_{\Lambda}$, so the bound is $\supnorm{g_{\Lambda}-f}$;
@@ -433,20 +460,23 @@ the non-expansiveness of the Markov average for the gradient seminorm.
 
 \begin{remark}[Numerical verification --- finite disk does not converge]
 \label{rem:numerics}
-Driver \texttt{b3\_markov\_berezin.py} (Markov--Ces\`aro on the finite
-disk, $s=2$, $\Lambda=100\to3200$):\ unitality is exact
-($\max|g_{1}-1|=0$); but the construction is \emph{not}
-positivity-preserving ($\min g$ reaches $\approx-0.13$), and the
-approximate-identity coefficient $\supnorm{g_{\Lambda}-f}/
-\supnorm{\nabla f}$ does \emph{not} decay --- a log--log fit gives
-$\Lambda^{+0.07}$ (the proportionality to $\supnorm{\nabla f}$ holds, to
-a factor $1.32$, but the magnitude does not shrink). An earlier draft
-reported $\Lambda^{-1.30}$ here;\ that is not reproduced by the driver
-and has been withdrawn (the boundary obstruction, \S\ref{sec:boundary}).
-The genuine convergence is on the boundaryless plane:\ driver
-\texttt{b3\_plane\_bochner\_riesz.py} gives positivity at $s\ge\tfrac12$
-and rate $\Lambda^{-0.6}$ to $\Lambda^{-0.9}$
-(Theorem~\ref{thm:plane};\ test
+Test \texttt{tests/test\_paper53\_disk\_obstruction.py} (Markov on the
+finite disk, $\Lambda=100\to1600$):\ unitality is exact; the Ces\`aro
+weight $(1-\lambda/\Lambda)_{+}^{s}$ at $s\ge2$ is
+\emph{positivity-preserving} ($\min g>0$ across the sweep). The
+\emph{convergence} property fails:\ the approximate-identity coefficient
+$\supnorm{g_{\Lambda}-f}/\supnorm{\nabla f}$ does \emph{not} decay --- a
+log--log fit gives $\sim\Lambda^{+0.07}$ and the magnitude stays
+$\approx0.3$ across the sweep (the proportionality to $\supnorm{\nabla f}$
+holds, to a factor $1.32$). By contrast the truncated \emph{heat} weight
+$e^{-t\lambda}$ ($t=1/\Lambda$) dips to $\min g\approx-0.13$ (Gibbs,
+non-positive), with the same non-decaying rate --- confirming the heat
+weight is the non-positive one and the obstruction (the non-decaying
+rate) is weight-robust. An earlier draft reported $\Lambda^{-1.30}$ for
+the rate;\ that is not reproduced and has been withdrawn (the boundary
+obstruction, \S\ref{sec:boundary}). The genuine convergence is on the
+boundaryless plane:\ positivity at $s\ge\tfrac12$ and rate
+$\Lambda^{-0.6}$ to $\Lambda^{-0.9}$ (Theorem~\ref{thm:plane};\ test
 \texttt{tests/test\_paper53\_plane\_bochner\_riesz.py}).
 \end{remark}
 

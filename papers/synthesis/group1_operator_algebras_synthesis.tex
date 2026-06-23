@@ -1446,19 +1446,28 @@ involution;\
 (I2) $[\Pi_{W}, H_{\mathrm{local}}] = 0$ (even parity of the
 geometric BW-$\alpha$ generator $K_{\alpha}^{W} = J_{\mathrm{polar}}^{W}$
 under wedge chirality);\
-(I3) $\{\Pi_{W}, \DL^{W}\} = 0$ (odd parity of the wedge-restricted
-Lorentzian Dirac, via $\{\gamma^{0}, \gamma^{5}\} = 0$ on the
-temporal factor and the unfolded-wedge basis change on the spatial
-factor).
+(I3) the wedge-restricted Lorentzian Dirac $\DL^{W}$ has \emph{mixed}
+parity --- its temporal factor is $\Pi_{W}$-\emph{odd}
+($\{\gamma^{0}, \gamma^{5}\} = 0$) while its spatial factor $\DGV^{W}$ is
+$\Pi_{W}$-\emph{even} but chirality \emph{sign-paired} ($\DGV$ is
+chirality-diagonal --- the same fact that makes the BBB universal axiom
+$\{\chi, D\} = 0$ \emph{fail} on the truthful $\DGV$ ---
+so $\DGV^{W} = \Pi_{W}|\DGV^{W}|$ with $|\DGV^{W}|$ even and
+$\chi$-independent).
 
-The orthogonality follows from a parity / cyclicity-of-trace lemma:\
-for any unitary involution $\Pi$ on a Hilbert space, $[\Pi, A] = 0$,
+The orthogonality follows from two cyclicity-of-trace lemmas:\
+(a)~for any unitary involution $\Pi$, $[\Pi, A] = 0$ and
 $\{\Pi, B\} = 0$ imply $\Tr(A^{\dagger} B) = 0$ via
-$\Tr(X) = \Tr(\Pi X \Pi^{-1})$ giving
-$\Tr(A^{\dagger} B) = \Tr(A^{\dagger} \cdot (-B)) = -\Tr(A^{\dagger} B)$,
-forcing $0$.  The bit-exact L2-F.1 numerical panel at 18 cells is
-empirical corroboration of the now-algebraic identity at
-machine precision.
+$\Tr(A^{\dagger} B) = \Tr(A^{\dagger} \cdot (-B)) = -\Tr(A^{\dagger} B)$
+(this kills the temporal factor);\ (b)~for $A$ even and
+$\chi$-independent and $B = \Pi|B|$ even and sign-paired,
+$\Tr(A^{\dagger} B)$ cancels pairwise across the $\chi = \pm1$ partners
+(this kills the spatial factor).  The bit-exact L2-F.1 numerical panel
+at 18 cells is empirical corroboration of the now-algebraic identity at
+machine precision.  (An earlier one-line ``$\DL^{W}$ is $\Pi_{W}$-odd''
+statement was corrected to this mixed-parity form, 2026-06-23, after the
+chirality-pairing test showed $\DGV^{W}$ is chirality-diagonal hence
+$\Pi_{W}$-even.)
 
 \subsection{Master theorem of the math.OA arc}
 \label{sec:closures_master_theorem}

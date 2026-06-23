@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.6] - 2026-06-23
+
+### Changed
+- **`/qa group1` Batch 2 rc2 confirmation re-cert (full 5-dimension) — FAIL → remediated (PI-directed).** Re-cert from HEAD 6c8e2c5 (v4.43.5), testing whether the v4.43.4 corpus-wide sweeps left only a thin tail. 13 reviewers (claims/citation/code ×4 + synthesis ×1), opus, path-pinned to the throwaway worktree, blind. **Calibrated: sensitivity 5/5, specificity clean** (all 5 fresh seeds caught — incl. a fresh C5 K-prohibition seed → claims-42; controls M1–M5 respected). Worktree removed + leak-scan CLEAN. **Two genuine non-seed MATERIAL defects, BOTH caught by the CODE dimension** (running the operators / running both weights), both accepted by claims+citation+synthesis — the recurring arc pattern. Both live in the paper-BODY proof/claim layer the prior claims/citation-heavy Batch-2 runs never exercised against the live machinery.
+
+### Fixed (MATERIAL-1, Paper 43 §5.2 — formal proof mechanism)
+- **Theorem 5.7's Input I2 ("$\DL^W$ is $\Pi_W$-odd") is false for the spatial Dirac.** The backing test (`test_paper43_pythagorean_hs_orthogonality.py` l.46) and a direct check show the spatial wedge Dirac $\DGV^W$ is **diagonal** (eigenvalue $\chi(n+\tfrac12)$), i.e. $\Pi_W$-**even** — contradicting I2 *and* the paper's own §5.3 BBB-axiom finding ($\{\chi,D\}=0$ fails ⇒ $\DGV$ chirality-even). The orthogonality holds via the **chirality sign-pairing** the test actually exercises; the temporal $\gamma^0$ part *is* $\Pi_W$-odd. **Fix:** corrected I2 to mixed parity (I2a temporal-odd via `lem:parity_HS`; I2b spatial-even-sign-paired via a new `lem:pairing_HS`), split Theorem 5.7's proof accordingly, fixed honest-scope (i) + the implied-universality passage; transported the same fix to the synthesis (I3 + two-lemma proof). Conclusion + closed form unchanged (test 11/11).
+
+### Fixed (MATERIAL-2, Paper 53 §4 — positivity leg mis-attributed)
+- **The "Cesàro weight fails positivity, min g ≈ −0.13" claim is false.** Direct recompute: the Cesàro weight (Def 4.1) at $s=2,4,6$ **preserves** positivity ($\min g>0$ at every $\Lambda$); the $-0.13$ dip is the truncated **heat** weight $e^{-t\lambda}$ (Gibbs), which the paper itself concedes is trivially non-positive — and the backing test computed the heat weight while calling itself Markov–Cesàro. The genuine finite-disk obstruction is the **non-decaying approximate-identity rate** (e1 plateaus ~0.3, weight-robust). **Fix:** corrected every Paper-53 positivity statement (header, abstract ×2, §Results, §Honest-scope, thm:interior header + part (b), `rem:interior_correction`, proof structure, `rem:numerics`) — Cesàro preserves positivity, heat fails, obstruction = rate; rewrote the test into `test_disk_cesaro_positivity_holds_heat_fails` (Cesàro min g>0 ∧ heat min g<−0.10) + `test_disk_interior_rate_does_not_decay` (e1 plateaus >0.15 both weights). Updated `claim_test_matrix.md` rows 43 + 53. Tests 9/9.
+
+### Logged (NITs — non-blocking)
+- citation-43 BBB Table-1 signs at (4,6): reviewer (ar5iv, self-hedged) read ε=−1/κ″=−1, but ε=+1 is forced by the code-verified $J^2=+I$ and the reviewer's own "relations are BBB-consistent" — almost certainly an ar5iv parse artifact; **no edit** (a blind edit from an unreliable source would risk introducing the real error), flagged for a dedicated BBB-PDF check.
+- recurring C7 "propinquity" wording in source comments / §1.2(a) thread heading / L5 lemma name / thm:plane_propinquity header (state-space-GH-neutralized); code-44 "exactly 0.0" prose vs ≤1e-14 gate; citation key-year labels.
+
+### Verified
+- Papers 43/53 + synthesis compile clean (errors=0; `lem:pairing_HS` resolves). C5/C11/C13/C14/C15 PASS. Topo proofs 18/18 + the changed 43/53 tests green (35 passed). No `geovac/` code changed (papers + one test + docs). Memo: `debug/sprint_qa_group1_batch2_cert_memo.md` §11.
+
 ## [4.43.5] - 2026-06-22
 
 ### Changed

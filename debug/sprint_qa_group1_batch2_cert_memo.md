@@ -210,3 +210,68 @@ Compiles clean; C5/C11/C13/C14/C15 PASS; 45 passed/1 slow-skip (p43/p44 tests) +
 **Honest cap:** still FAIL→remediated. But both recurring classes are now swept corpus-wide (false-closure
 grep-clean; §5.2 closed-form backed), so the remaining tail should be thin — a further confirmation re-cert
 is the certification step.
+
+---
+
+## §11. rc2 confirmation re-cert (2026-06-23, v4.43.6) — FAIL→remediated; CODE dimension caught two genuine MATERIAL defects
+
+PI invoked `/qa group1 batch2` hoping the v4.43.4 corpus-wide sweeps left only a thin tail (a PASS).
+Full 5-dimension certifying run from HEAD 6c8e2c5 (v4.43.5). Worktree `../geovac-qa-seed-g1b2-rc2`,
+5 fresh seeds (one per gating dimension incl. a fresh C5 K-prohibition seed) + 5 controls M1–M5
+(`debug/qa/group1_batch2_rc2_seed_key.json`). 13 reviewers (claims×4, synthesis×1, citation×4, code×4),
+all opus, path-pinned to the worktree, forbidden the real corpus.
+
+**Calibration: PASS — 5/5 sensitivity, clean specificity.**
+- S-claims-p42-C5 (K "is a derived consequence with a first-principles derivation") → claims-42 ✓ (MATERIAL/LARGE C5)
+- S-synthesis-C9 ("σ_2π(O)=O in the continuum limit") → synthesis ✓ (MATERIAL/LARGE)
+- S-code-p42 (test l.762 `<1e9`) → code-42 ✓ (vacuous tol; SMALL, n=3 sibling backstops)
+- S-code-p44 (test l.180 `<1e9`) → code-44 ✓ (NIT, L176 `assert ok` backstops)
+- S-citation-p53 (latremoliere2015 vol 103→113) → citation-53 ✓ (SMALL)
+- M1–M5 all respected (no control false-flagged). Worktree removed + leak-scan CLEAN.
+
+**Verdict: FAIL** — calibrated panel + 2 verified non-seed MATERIAL defects, BOTH caught by the CODE
+dimension (running the operators / running both weights), both accepted by claims+citation+synthesis.
+This is the recurring arc pattern: the code dimension catches what prose review accepts.
+
+### MATERIAL-1 (code-43, LARGE) — Paper 43 §5.2 formal proof: Input I2 false for the spatial Dirac
+Theorem 5.7's proof routes through Lemma `lem:parity_HS` (A even × B odd) with B = the whole wedge Dirac
+D_W^L claimed Π_W-**odd** (I2). The backing test (`test_paper43_pythagorean_hs_orthogonality.py` l.46) and
+a direct check show the **spatial** wedge Dirac D_GV^W is **diagonal** (eigenvalue χ·(n+½)), i.e.
+Π_W-**EVEN** ([Π_W,D_W]=0, {Π_W,D_W}≠0) — contradicting I2 AND the paper's own §5.3 BBB-axiom finding
+({χ,D}=0 fails ⇒ D_GV chirality-even). The orthogonality is true via the **chirality sign-pairing** the
+test actually exercises (χ=+1/−1 partners, equal H, opposite D). The temporal γ⁰ part IS Π_W-odd, so the
+Lemma correctly handles only that factor.
+**Fix (v4.43.6):** corrected I2 to mixed parity (I2a temporal-odd via `lem:parity_HS`; I2b spatial-even-
+sign-paired via a NEW `lem:pairing_HS`); split Theorem 5.7's proof accordingly; fixed honest-scope (i) and
+the "implied universality" passage. Same fix transported to the synthesis (I3 + the two-lemma proof). The
+conclusion + closed form stand (test unchanged, 11/11).
+
+### MATERIAL-2 (code-53, MATERIAL) — Paper 53 §4 positivity leg: −0.13 is the heat weight, not Cesàro
+The paper claimed the **Cesàro** weight (Def 4.1, s≥2) fails positivity, min g ≈ −0.13. Direct recompute
+(`scratchpad/check_cesaro.py`): the Cesàro weight at s=2,4,6 is **positivity-preserving** (min g > 0 at
+every Λ); the −0.13 is the truncated **heat** weight e^{−tλ} (Gibbs), which the paper itself concedes is
+trivially non-positive. The backing test computed the heat weight while calling itself Markov–Cesàro. The
+genuine finite-disk obstruction is the **non-decaying approximate-identity rate** (e1 plateaus ~0.3,
+weight-robust: heat slope +0.10, Cesàro +0.055 — verified `scratchpad/check_cesaro_rate.py`), which forces
+the plane pivot. Positivity is NOT the obstruction.
+**Fix (v4.43.6):** corrected all Paper-53 positivity statements (header comment, abstract ×2, §Results,
+§Honest-scope, thm:interior header + part (b), rem:interior_correction, proof structure, rem:numerics) —
+Cesàro preserves positivity on the disk; heat fails; obstruction = non-decaying rate. Rewrote the test:
+`test_disk_cesaro_positivity_holds_heat_fails` (Cesàro min g>0 ∧ heat min g<−0.10) +
+`test_disk_interior_rate_does_not_decay` (e1 plateaus >0.15 both weights). Updated claim_test_matrix rows
+53 + 43. Tests 9/9.
+
+### NITs (logged, non-blocking)
+- citation-43 BBB Table-1 signs at (4,6): reviewer (ar5iv, self-hedged) read ε=−1/κ″=−1; but ε=+1 is
+  FORCED by the code-verified J²=+I and the reviewer's own "relations are BBB-consistent." Almost certainly
+  an ar5iv parse artifact; no load-bearing impact (the four boxed relations are bit-exact-verified). **No
+  edit made** (a blind edit from an unreliable source would risk introducing the real error); flagged for a
+  dedicated BBB-PDF check.
+- recurring C7 "propinquity" wording in source comments / §1.2(a) thread heading / L5 lemma name /
+  thm:plane_propinquity header (state-space-GH-neutralized); Cesàro-order s≥2(disk) vs s≥1/2(plane) is
+  correct (different objects); code-44 "exactly 0.0" prose vs ≤1e-14 gate; citation key-year labels.
+
+**Status:** v4.43.6 fixes both MATERIAL defects + compiles clean (43/53/synthesis errors=0), C5/C11/C13/C14/
+C15 PASS, topo proofs 18/18 + 43/53 tests green. Both defects were in the paper-BODY proof/claim layer that
+the prior Batch-2 runs (claims/citation-heavy) never exercised against the live machinery. A further
+confirmation re-cert is the certification step.
