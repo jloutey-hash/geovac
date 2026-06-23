@@ -354,11 +354,22 @@ def test_Unruh_modular_periodicity_strong_at_a_2():
 
 # ---------------------------------------------------------------------------
 # Cross-witness collapse
+#
+# NOTE: the `verify_cross_witness_collapse` tests below check that the
+# period-closure RESIDUALS agree across witnesses. Those residuals are
+# kappa_g/beta-independent by construction (the flow uses K_geometric only), so
+# these are weak consistency checks, NOT the load-bearing collapse backing. The
+# genuine cross-witness collapse (bit-identical modular OPERATORS rho/Delta/K_TT
+# across genuinely-distinct-beta witnesses, with a beta-cancellation negative
+# control) is proved by `test_cross_witness_modular_operator_bit_identical` and
+# `test_cross_witness_collapse_requires_beta_cancellation` above.
 # ---------------------------------------------------------------------------
 
 
 def test_cross_witness_collapse_n_max_2():
-    """All four witnesses give bit-identical period-closure residuals."""
+    """All four witnesses give bit-identical period-closure residuals (weak
+    consistency check; see the section note — the operator-level test is the
+    load-bearing collapse backing)."""
     results = verify_cross_witness_collapse(n_max=2)
     assert results["max_consistency_residual"] < 1e-14, (
         f"Cross-witness inconsistency at n_max=2: "

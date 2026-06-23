@@ -120,3 +120,47 @@ def test_pythagorean_hs_orthogonality_lorentzian(n_max, N_t):
     norm_D = np.linalg.norm(D_W_L, "fro")
     r_sq = np.linalg.norm(H_local - D_W_L, "fro") ** 2
     assert abs(r_sq - (norm_H**2 + norm_D**2)) < 1e-10
+
+
+# --------------------------------------------------------------------------
+# §5.2 closed form (eq:pythagorean_residual): r^2 = kappa_g^2 S(n)/(4 pi^2) + D(n),
+# S(n), D(n) pure rationals -> 1/pi^2 is the SOLE transcendental in the residual.
+# Recompute-from-framework backing for the PSLQ {r^2, 1, 1/pi^2} claim.
+# --------------------------------------------------------------------------
+def _S(n):
+    from fractions import Fraction
+    return Fraction(n * (n + 1) * (n + 2) * (2 * n**2 + 4 * n - 1), 15)
+
+
+def _D(n):
+    from fractions import Fraction
+    return Fraction(n * (n + 1) * (n + 2) * (2 * n + 1) * (2 * n + 3), 20)
+
+
+@pytest.mark.parametrize("n_max", [1, 2, 3, 4])
+def test_pythagorean_residual_closed_form(n_max):
+    """||H_local||^2 = kappa_g^2 S(n)/(4 pi^2) and ||D_W||^2 = D(n), with S,D pure
+    rationals. With kappa_g=1 (BW): ||H_local||^2 * 4 pi^2 must equal the rational
+    S(n) exactly (-> the 1/pi^2 is the only transcendental in the H piece), and
+    ||D_W||^2 must equal the rational D(n). This backs the §5.2 closed form and the
+    PSLQ {r^2, 1, 1/pi^2} integer-relation claim from the live wedge operators."""
+    mh = for_bisognano_wichmann(n_max=n_max, axis="hopf")   # kappa_g = 1, beta = 2*pi
+    H_local = mh.restrict_K_alpha_to_wedge() / mh.beta
+    D_W = mh.restrict_to_wedge_block(mh.D)                  # ||D_L^W|| = ||D_GV^W|| at N_t=1
+    norm_H_sq = float(np.linalg.norm(H_local, "fro") ** 2)
+    norm_D_sq = float(np.linalg.norm(D_W, "fro") ** 2)
+
+    S, D = float(_S(n_max)), float(_D(n_max))
+    # ||H_local||^2 * 4 pi^2 (kappa_g=1) == rational S(n): the 1/pi^2 is the sole transcendental
+    assert abs(norm_H_sq * 4.0 * np.pi**2 - S) < 1e-9, (
+        f"n={n_max}: ||H||^2*4pi^2 = {norm_H_sq * 4.0 * np.pi**2:.6f}, expected S(n) = {S}"
+    )
+    # ||D_W||^2 == rational D(n)
+    assert abs(norm_D_sq - D) < 1e-9, (
+        f"n={n_max}: ||D_W||^2 = {norm_D_sq:.6f}, expected D(n) = {D}"
+    )
+    # the full residual closed form (kappa_g=1)
+    r_sq = float(np.linalg.norm(H_local - D_W, "fro") ** 2)
+    assert abs(r_sq - (S / (4.0 * np.pi**2) + D)) < 1e-9, (
+        f"n={n_max}: r^2 = {r_sq:.6f}, closed form = {S/(4.0*np.pi**2) + D:.6f}"
+    )

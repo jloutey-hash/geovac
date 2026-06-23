@@ -1420,7 +1420,12 @@ are pure rationals in $\nmax$.
 
 The closed form is verified at $\nmax \in \{1, \ldots, 6\}$ by PSLQ
 at 100~dps with coefficient ceiling $10^6$ on the basis $\{r^2, 1,
-1/\pi^2\}$;\ every panel cell returns a clean integer relation.
+1/\pi^2\}$;\ every panel cell returns a clean integer relation. The
+recompute-from-framework backing
+(\texttt{tests/test\_paper43\_pythagorean\_hs\_orthogonality.py}) checks
+$\Frob{H_{\mathrm{local}}}^2 \cdot 4\pi^2 = S(\nmax)$ and
+$\Frob{\DL^W}^2 = D(\nmax)$ against the live wedge operators --- i.e.\
+$1/\pi^2$ is the sole transcendental in the residual.
 The rational coefficients $S, D$ are recognisable as cumulative
 wedge-Casimir traces:\ $S(\nmax)/4 = \sum_{\mathrm{wedge}} m_j^2$ is
 the squared angular-momentum trace around the Hopf axis, and

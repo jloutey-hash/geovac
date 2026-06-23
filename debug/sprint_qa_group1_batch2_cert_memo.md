@@ -184,3 +184,29 @@ $e^{i2\pi D_W}=-I$, $e^{i2\pi K_\alpha}=+I$, lifts differ, conjugation flow clos
 Compiles clean; C5/C11/C13/C14/C15 PASS; 81 passed/4 slow-skip. **Honest cap:** still FAIL→remediated,
 NOT a clean PASS — this run's genuine findings were a synthesis-sweep miss + citation/cross-ref consistency
 (no code-dimension regression); a fresh full re-cert is the confirmation step toward a trustworthy PASS.
+
+## 10. FRESH re-cert — full 5-dimension (v4.43.4, 2026-06-22)
+PI-directed confirmation re-cert from HEAD 83bd369 (v4.43.3). Worktree `../geovac-qa-seed-g1b2-rc`,
+removed + leak-scanned (corpus clean). Seed key `debug/qa/group1_batch2_rc_seed_key.json`. 13 reviewers,
+opus, blind, path-pinned.
+
+**Calibration — sensitivity 5/5** (fresh seed sites): S-code-p43 (`abs(hs_ip)<1e9`)→code-43; S-code-p53
+(`min(mins)<1e9`)→code-53; S-claims-p43-C7 (state-space GH→Latrémolière)→claims-43; S-citation-p44
+(hekkelman 13865→13685 wrong-ID)→citation-44; S-synthesis-C9 (finite cutoff→continuum limit)→synthesis.
+**Specificity clean** — M1–M7 respected (the v4.43.x fixes confirmed holding).
+
+**VERDICT: FAIL → remediated.** 2 genuine material defects, **both recurring classes in new locations**:
+| Class | This run's locations | Fix |
+|---|---|---|
+| 1. False-closure framing ("$D_{CH}$ would not produce the closure") | **p42 abstract** (l.127-129) + **Paper 32** (l.6720-6724) | corpus-wide grep sweep → operator-level distinction; re-grep now CLEAN |
+| 2. §5.2 closed-form ($r^2=\kappa_g^2 S(n)/4\pi^2+D(n)$, $1/\pi^2$, PSLQ) untested | p43 §5.2 (only ⟨H,D⟩=0/Pythagorean were backed by v4.43.2) | new `test_pythagorean_residual_closed_form` ($\|H\|^2 4\pi^2=S(n)$, $\|D\|^2=D(n)$); §5.2 prose cites it |
+
+Class-1 history: §5.5(II) body (v4.43.0) → synthesis (v4.43.3) → p42 abstract + Paper 32 (this run). The
+location-by-location fixing is why fresh adversaries kept finding the class; **the corpus-wide grep sweep
+is the convergent fix.** NITs drained: connes_rovelli end-page 2918→2917; witness-pair ~38% magnitude
+pinned (`>1e-6`→`0.30<r<0.45`); cross-witness named-test caveat (operator-level test is load-bearing).
+
+Compiles clean; C5/C11/C13/C14/C15 PASS; 45 passed/1 slow-skip (p43/p44 tests) + cross-witness 8 passed.
+**Honest cap:** still FAIL→remediated. But both recurring classes are now swept corpus-wide (false-closure
+grep-clean; §5.2 closed-form backed), so the remaining tail should be thin — a further confirmation re-cert
+is the certification step.

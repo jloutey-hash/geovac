@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.4] - 2026-06-22
+
+### Changed
+- **`/qa group1` Batch 2 FRESH re-cert (full 5-dimension) — FAIL → remediated (PI-directed).** Confirmation re-cert from HEAD 83bd369 (v4.43.3). 13 reviewers (code/claims/citation ×4 + synthesis ×1), opus, path-pinned, blind. **Calibrated: sensitivity 5/5, specificity clean** (all 5 fresh seeds caught — 2 code vacuous-tolerances, 1 claims-C7 Paper-38 mislabel, 1 citation wrong-ID, 1 synthesis continuum-limit overstatement; controls M1–M7 respected). Two genuine material defects — **both the same defect classes re-surfacing in new locations** (the Batch-2 long tail), so this remediation swept each class CORPUS-WIDE rather than by location.
+
+### Closed (Class 1 — false-closure framing, swept corpus-wide)
+- The false claim that the intrinsic Camporesi–Higuchi Dirac "would not produce the bit-exact closure" / "the bit-exact closure would not hold" appeared in **two more locations** after v4.43.0 (§5.5(II) body) and v4.43.3 (synthesis) fixed it: the **p42 abstract** (l.127–129) and **Paper 32** (l.6720–6724, the trunk spectral-triple paper). A corpus-wide grep across all group1 papers + synthesis confirms these were the last two; both corrected to the operator-level distinction (conjugation flow closes with either generator — the global $-I$ cancels; only $K_\alpha^W$ lifts the $\beta=2\pi$ period to the identity operator, $D_W$ to the $-I$ spinor double cover). Re-grep now returns **zero** false-closure instances corpus-wide.
+
+### Closed (Class 2 — §5.2 closed-form coverage gap)
+- The §5.2 closed form $\|H_{\mathrm{local}}-D_W^L\|^2 = \kappa_g^2 S(n)/4\pi^2 + D(n)$ (with $S(n),D(n)$ pure rationals, the transcendental $1/\pi^2$, and the "PSLQ on $\{r^2,1,1/\pi^2\}$" claim) had **no test** — the v4.43.2 backfill tested only ⟨H,D⟩=0 and the Pythagorean identity. New `test_paper43_pythagorean_hs_orthogonality.py::test_pythagorean_residual_closed_form` (n_max=1–4): verifies $\|H_{\mathrm{local}}\|^2\cdot 4\pi^2 = S(n)$ and $\|D_W\|^2 = D(n)$ against the live wedge operators (κ_g=1) — i.e. $1/\pi^2$ is the sole transcendental in the residual. §5.2 prose now cites the test.
+
+### Closed (NITs)
+- p42 `connes_rovelli1994` end page 2899–**2918** → 2899–**2917** (recurring across runs).
+- Witness-pair non-closure residual pinned to the paper's ~38% value (`test_operator_system_lorentzian.py`: `> 1e-6` → `0.30 < residual < 0.45` at N_t=1 and N_t=3) — the headline magnitude was previously unguarded.
+- Cross-witness-collapse named tests (`test_modular_hamiltonian.py`) given a section caveat: the `verify_cross_witness_collapse` residual checks are κ_g-independent-by-construction (weak); the load-bearing collapse backing is the operator-level `test_cross_witness_modular_operator_bit_identical` + negative control (v4.43.2).
+
+### Verified
+- p42/p43/p32 compile errors=0/undef=0; C5/C11/C13/C14/C15 group1 PASS; affected tests green (45 passed/1 slow-skip + cross-witness 8 passed). Worktree removed + leak-scanned (corpus clean on all 5 seed sites). Memo: `debug/sprint_qa_group1_batch2_cert_memo.md` (§rc-fresh). **Still FAIL→remediated; a further re-cert confirms — but both recurring classes are now swept corpus-wide, so the remaining tail should be thin.**
+
 ## [4.43.3] - 2026-06-22
 
 ### Changed

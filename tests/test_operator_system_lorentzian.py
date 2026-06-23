@@ -360,9 +360,9 @@ def test_witness_pair_nmax_2_Nt_1():
         f"Witness pair unexpectedly in O^L "
         f"(residual {residual:.3e})"
     )
-    # Significant residual (not numerical artifact)
-    assert residual > 1e-6, (
-        f"ab residual {residual:.3e} too small to certify NOT in O^L"
+    # Significant residual, pinned to the paper's ~38% non-closure (Thm 8.1: 0.3812)
+    assert 0.30 < residual < 0.45, (
+        f"ab residual {residual:.4f} should be ~0.38 (the paper's ~38% non-closure)"
     )
 
 
@@ -387,7 +387,7 @@ def test_witness_pair_nmax_2_Nt_3():
     assert a is not None
     in_O_L, residual = test
     assert not in_O_L
-    assert residual > 1e-6
+    assert 0.30 < residual < 0.45  # paper Thm 8.1: ~0.3589 at N_t=3
 
 
 # ---------------------------------------------------------------------------

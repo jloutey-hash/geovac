@@ -1,0 +1,65 @@
+{
+  "run": "group1_batch2_rc (FRESH confirmation re-cert after v4.43.3)",
+  "type": "FULL CERTIFYING run (all 5 gating dimensions) — confirmation step toward a trustworthy PASS",
+  "description": "Fresh full /qa group1 Batch 2 (Papers 42,43,44,53 + synthesis) re-cert from HEAD 83bd369 (v4.43.3). Goal: PASS (calibrated panel, zero genuine material defects across all 5 dimensions) or FAIL→remediate. Seeds in worktree ../geovac-qa-seed-g1b2-rc (branch qa-seed-g1b2-rc). NEVER committed; worktree removed at end. Fresh seed sites distinct from the v4.43.0 cert AND the v4.43.3 re-cert.",
+  "date": "2026-06-22",
+  "base_head": "83bd369",
+  "dimensions_exercised": ["code", "claims", "citation", "synthesis", "deterministic"],
+  "seeds": [
+    {
+      "id": "S-code-p43",
+      "file": "tests/test_paper43_pythagorean_hs_orthogonality.py",
+      "location": "l.82 (Riemannian HS-orthogonality assertion)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "assert abs(hs_ip) < 1e-12  ->  < 1e9 (vacuous; guts the Riemannian <H_local,D_W>_HS=0 check). l.117 (Lorentzian cell) is a different cell, not a backstop for the Riemannian assertion.",
+      "truth": "<H_local, D_W>_HS = 0 to <1e-12 (the §5.2 Pythagorean orthogonality).",
+      "expected_catcher": "code-43"
+    },
+    {
+      "id": "S-code-p53",
+      "file": "tests/test_paper53_disk_obstruction.py",
+      "location": "l.92 (disk positivity-fails over the Lambda sweep)",
+      "defect_class": "C2 vacuous tolerance (PARTIAL backstop at l.97 mins[1]<-0.10 for the Lambda=200 cell)",
+      "planted": "assert min(mins) < -0.05  ->  < 1e9 (vacuous; defeats the disk-obstruction positivity-fails check — would pass even if positivity held). l.97 still pins the Lambda=200 cell -> grade by materiality.",
+      "truth": "The disk Markov-Cesaro Berezin of a positive f goes negative (min g < -0.05, ~-0.13) — positivity FAILS (the obstruction).",
+      "expected_catcher": "code-53"
+    },
+    {
+      "id": "S-claims-p43-C7",
+      "file": "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex",
+      "location": "l.1823-1824 (§ Lorentzian-propinquity continuum closure remains open)",
+      "defect_class": "C7 Paper-38 mislabel (state-space GH -> Latremoliere propinquity)",
+      "planted": "'Paper~38's qualitative-rate state-space GH convergence'  ->  '... qualitative-rate Latremoliere propinquity convergence'. Mislabels Paper 38's result (state-space GH, not Latremoliere propinquity).",
+      "truth": "Paper 38 = van Suijlekom STATE-SPACE Gromov-Hausdorff convergence, NOT Latremoliere propinquity.",
+      "expected_catcher": "claims-43"
+    },
+    {
+      "id": "S-citation-p44",
+      "file": "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+      "location": "l.1580 (hekkelman2022 bibitem arXiv)",
+      "defect_class": "C4 wrong-ID (digit transposition)",
+      "planted": "arXiv:2111.13865 -> arXiv:2111.13685 (transposition 865->685; 13865 is the real Hekkelman 'Truncated Geometry on the Circle', 13685 is wrong/nonexistent).",
+      "truth": "Hekkelman 'Truncated Geometry on the Circle' = arXiv:2111.13865 (2022; LMP 112 (2022) 20).",
+      "expected_catcher": "citation-44"
+    },
+    {
+      "id": "S-synthesis-C9",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "location": "l.896-897 (Paper 43 Lorentzian four-witness theorem header)",
+      "defect_class": "C9 status overstatement (finite cutoff -> continuum)",
+      "planted": "theorem header 'Lorentzian four-witness at finite cutoff'  ->  '... in the continuum limit'. Overstates Paper 43's Lorentzian four-witness as a continuum result (the continuum/Lorentzian-propinquity is OPEN per p43 §scope + the Paper 45 descope).",
+      "truth": "Paper 43's Lorentzian four-witness is a FINITE-CUTOFF bit-exact result; the continuum/Lorentzian-propinquity convergence is OPEN.",
+      "expected_catcher": "synthesis"
+    }
+  ],
+  "controls_must_not_flag": [
+    {"id": "M1", "claim": "p42 §5.5(II) corrected + the NEW operator-level-lift test (v4.43.3: test_operator_level_period_lift_DW_vs_Kalpha). e^{i2pi D_W}=-I double-cover vs e^{i2pi K_alpha}=+I; conjugation flow closes for both. Do NOT re-flag."},
+    {"id": "M2", "claim": "synthesis §6.1 'Load-bearing scope finding' CORRECTED (v4.43.3) to the operator-level distinction; the conjugation flow closes with either generator. Do NOT re-flag as 'closure would fail with D_CH' (that false claim was removed)."},
+    {"id": "M3", "claim": "p53 l.656/680 now cite Paper 40 (not the descoped Paper 45) as the compact-carrier precedent (v4.43.3). Do NOT flag paper40 as wrong."},
+    {"id": "M4", "claim": "p42 van den Dungen now has a \\bibitem (v4.43.3); p42 + p44 Connes-vS softened to '§4' (unconfirmable prop number). Do NOT flag the §4 softening or the vandungen bibitem."},
+    {"id": "M5", "claim": "p43 thm:main_intro residual bound is now '<=7e-15' (v4.43.3, matches Tables 1-2). Do NOT flag as wrong (the prior 4e-16 was the error)."},
+    {"id": "M6", "claim": "The v4.43.2 backfill tests are BACKED-SOUND: test_paper53_disk_obstruction (disk-negatives + prop2), test_paper43_pythagorean_hs_orthogonality (§5.2), de-slowed plane test, p42 collapse hardening. prop=2 genuinely computed. Do NOT flag these as defects (only the planted vacuous-tolerance seeds in them are real)."},
+    {"id": "M7", "claim": "che_perales = Differential Geometry and its Applications (DGA) 103 (2026) GROUNDED. Do NOT flag as fabricated."}
+  ],
+  "goal": "This is the CONFIRMATION re-cert. If the panel is calibrated (5/5 sens, clean spec) AND finds ZERO genuine (non-seed) material defects across all 5 dimensions, Batch 2 CERTIFIES (PASS)."
+}

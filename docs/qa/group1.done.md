@@ -424,3 +424,14 @@ group1 paper restates them (C7).
   test). Compiles clean; gates PASS; 81 passed/4 slow-skip. **Still FAIL→remediated, not a clean PASS —
   a fresh re-cert is the confirmation step** (this run's findings were a synthesis-sweep miss +
   citation/cross-ref consistency, all now fixed).
+
+- 2026-06-22 — **Batch 2 FRESH re-cert** (full 5-dim; v4.43.4, PI-directed). 13 reviewers, opus, blind,
+  path-pinned. **Calibrated: sensitivity 5/5, specificity clean** (M1–M7 respected). **VERDICT: FAIL →
+  remediated** — 2 genuine material defects, **both the same classes re-surfacing in new locations**:
+  (1) false-closure framing found AGAIN in the **p42 abstract** + **Paper 32** (after v4.43.0 fixed the
+  §5.5(II) body and v4.43.3 the synthesis) → **corpus-wide grep sweep, now CLEAN**; (2) p43 §5.2
+  closed-form ($r^2=\kappa_g^2 S(n)/4\pi^2+D(n)$, $1/\pi^2$, PSLQ) had no test → new
+  `test_pythagorean_residual_closed_form`. NITs: connes_rovelli end-page, witness-pair ~38% magnitude
+  pinned, cross-witness named-test caveat. Compiles clean; gates PASS. **Lesson: sweep defect CLASSES
+  corpus-wide, not instances. Both recurring classes (false-closure framing; §5.2 backing) are now
+  fully swept — the remaining tail should be thin; a further confirmation re-cert certifies.**
