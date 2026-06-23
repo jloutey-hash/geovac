@@ -275,3 +275,41 @@ Cesàro preserves positivity on the disk; heat fails; obstruction = non-decaying
 C15 PASS, topo proofs 18/18 + 43/53 tests green. Both defects were in the paper-BODY proof/claim layer that
 the prior Batch-2 runs (claims/citation-heavy) never exercised against the live machinery. A further
 confirmation re-cert is the certification step.
+
+---
+
+## §12. CODE-DIMENSION-only validation (2026-06-23, v4.43.7) — v4.43.6 fixes HELD, code MATERIAL-clean
+
+PI invoked `/qa group1 batch2 code dimension only` — a fresh adversarial pass on the two v4.43.6
+code-touching fixes (the §11 honest cap: "the new corrections have not themselves been through a fresh
+adversarial pass"). **Validation pass, NOT a cert** (1 of 5 gating dimensions ⇒ INCONCLUSIVE-for-cert at
+the target level). Base HEAD d28a373 (v4.43.6). Worktree `../geovac-qa-seed-g1b2-code`, 4 fresh code seeds
+(one per Batch-2 paper-with-tests, distinct from rc2's l.762/l.180), controls M1–M5 (the v4.43.6 fixes +
+established-sound backing). `debug/qa/group1_batch2_code_dimension_seed_key.json`. 4 code-reviewers, opus,
+path-pinned, blind, RAN the tests.
+
+**Calibration: PASS — 4/4 sensitivity, clean specificity.**
+- S-code-42 (l.425 cross-witness ρ residual `<1e9`) → code-42 ✓ (vacuous tol; NIT — Δ/K_TT siblings l.429/432 backstop at <1e-13)
+- S-code-43 (l.230 BW-γ Tomita `<1e9`) → code-43 ✓ (dead gate; NIT — battery <1e-12 + verdict backstop)
+- S-code-44 (l.222 `assert dims == dims`) → code-44 ✓ (tautology; NIT — `prop==2` l.219 + sibling dims==192/400 backstop)
+- S-code-53 (l.108 Cesàro positivity `>-1e9`) → code-53 ✓ (graded SMALL/FALSE-POSITIVE — the only gate on the corrected positivity leg, least backstopped)
+- **M1–M5 all respected.** code-43 affirmed the v4.43.6 mixed-parity §5.2 proof sound; code-53 confirmed by direct recompute the Cesàro-vs-heat framing correct; code-44 prop=2 genuinely computed; code-42 collapse+β-control genuine; closed-form+operator-lift sound. Zero controls false-flagged.
+
+**Verdict (code dimension): VALIDATION PASS — calibrated + MATERIAL-clean.** Zero genuine non-seed MATERIAL
+defects. Every reviewer "fix" recommendation targeted a SEED; the real corpus already has the correct tight
+tolerances at all four sites (verified post-removal: `<1e-13` / `<1e-12` / `==[14,64]` / `>0.0`). **The two
+v4.43.6 fixes HELD under fresh adversarial review** (the run's purpose): the §5.2 mixed-parity proof and the
+p53 Cesàro-positivity re-attribution are both confirmed sound.
+
+**Roll-up: INCONCLUSIVE-for-cert** — only the code dimension exercised; claims/citation/synthesis/deterministic
+not re-run this pass (a Batch-2 cert needs all 5). This validates the v4.43.6 remediation, it does not certify
+Batch 2.
+
+### NITs logged (pre-existing, non-blocking, all backstopped or non-load-bearing)
+- code-42: `verify_witness` STRONG_IDENTIFICATION verdict gate `<1e-10` (production) vs true ~1e-16, periodicity tests assert on the verdict string — backstopped bit-exactly by `test_K_geometric_integer_spectrum` (integer to 1e-14 + odd-parity exact). NIT.
+- code-43: `test_six_witness_collapse_lorentzian` checks only scalar periodicity residuals, not Δ_L/K_TT directly — reviewer verified the stronger claim is TRUE (ρ/Δ_L/K_TT bit-identical across β). Optional hardening. NIT.
+- code-43: §5.2 "8.9e-16 / 18-cell six-witness panel" cited from an archived driver (only the BW κ_g=1 cell has a live test); reviewer reproduced the number + it's a proven κ_g-independent corollary. Coverage NIT.
+- code-43: M3 Reading-A test tautological (identical arithmetic twice) — mirrors a weak, honestly-labeled convention OBSERVATION. NIT.
+- code-44: wedge Prop 9.2 numeric panel pinned only in a slow/skipped test (fast test checks bound well-formedness). Non-load-bearing connective material. NIT.
+
+No code/paper edits this run (MATERIAL-clean). The Batch-2 cert still needs a full 5-dimension clean re-cert.

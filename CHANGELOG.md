@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.7] - 2026-06-23
+
+### Changed
+- **`/qa group1` Batch 2 CODE-DIMENSION-only validation — v4.43.6 fixes HELD, code MATERIAL-clean (PI-directed).** Fresh adversarial pass on the two v4.43.6 code-touching fixes (the §11 honest cap: they had not themselves been through fresh review). 4 `code-reviewer`s (Papers 42/43/44/53), opus, path-pinned to the throwaway worktree, blind, RAN the tests. **Validation pass, NOT a cert** — 1 of 5 gating dimensions ⇒ **INCONCLUSIVE-for-cert** at the target level. **Calibrated: sensitivity 4/4** (4 fresh code seeds caught — one vacuous-tolerance/tautology per paper, distinct from rc2's sites: cross-witness ρ `<1e9`→code-42; BW-γ Tomita `<1e9`→code-43; `dims==dims` tautology→code-44; Cesàro-positivity `>-1e9`→code-53), **specificity clean** (M1–M5 respected). Worktree removed + leak-scan CLEAN.
+- **The two v4.43.6 fixes were confirmed sound under fresh adversarial review:** code-43 independently affirmed the corrected **mixed-parity §5.2 proof** (temporal γ⁰ odd / spatial D_GV^W diagonal-Π_W-even-sign-paired) is sound and matches §5.3; code-53 **confirmed by direct recompute** the corrected **Cesàro-preserves-positivity / heat-fails / obstruction-is-the-non-decaying-rate** framing is correct.
+- **Zero genuine non-seed MATERIAL defects.** Every reviewer fix-recommendation targeted a planted SEED; the real corpus already carries the correct tight tolerances at all four sites (`<1e-13` / `<1e-12` / `==[14,64]` / `>0.0`, verified post-removal).
+
+### Logged (NITs — pre-existing, non-blocking, all backstopped or non-load-bearing)
+- code-42: production `verify_witness` verdict gate `<1e-10` vs true ~1e-16 (backstopped bit-exactly by `test_K_geometric_integer_spectrum`). code-43: `test_six_witness_collapse_lorentzian` checks scalar residuals not Δ_L/K_TT directly (stronger claim verified TRUE); §5.2 "8.9e-16 / 18-cell panel" cited from an archived driver (only BW κ_g=1 cell has a live test; reviewer reproduced the number + proven κ_g-independent corollary); M3 Reading-A test tautological (mirrors a weak labeled OBSERVATION). code-44: wedge Prop 9.2 panel pinned only in a slow/skipped test (non-load-bearing connective material).
+
+### Verified
+- No `geovac/`, paper, or test edits this run (MATERIAL-clean). The Batch-2 cert still needs a full 5-dimension clean re-cert (claims/citation/synthesis/deterministic not re-run this pass). Memo: `debug/sprint_qa_group1_batch2_cert_memo.md` §12.
+
 ## [4.43.6] - 2026-06-23
 
 ### Changed
