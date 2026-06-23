@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.1] - 2026-06-22
+
+### Changed
+- **`/qa group1` Batch 2 — CODE-DIMENSION-only re-validation pass (PI-directed).** Narrow re-run of only C1/C2 for Papers 42/43/44/53 (same shape as the Batch-1 rem3 pass), to confirm the v4.43.0 code-dimension fixes hold and check for new code-material defects. 4 code-reviewers, opus, path-pinned, blind; 4 fresh vacuous-tolerance seeds (one per backing test, distinct from the full-run sites). **Validation pass, NOT a cert** (1 of 5 gating dimensions ⇒ INCONCLUSIVE-for-cert by the all-dimensions rule).
+- **Calibrated: sensitivity 4/4** — all seeds caught (p42 l.124 `PQP<1e9`; p43 l.180 `K_L=K_α residual<1e9`; p44 l.180 `max_residual<1e9`; p53 l.96 rate `p>-1e9`). **Specificity confirmed the v4.43.0 fixes hold:** code-42 *independently recomputed* §5.5(II) and verified the corrected prose matches the computation ($e^{i2\pi D_W}=-I$ exactly; the conjugation flow $\sigma_{2\pi}(O)=(-I)O(-I)=O$ closes at residual ~1e-16); p44 prop=2 confirmed genuinely computed (k-fold product ranks, dim O¹=14 < 64=dim O², not hardcoded); p43 §5.2 deleted-debug citation gone.
+- **Result: zero new MATERIAL code defects** beyond the 4 seeds and the already-logged coverage gaps (p43 §5.2 Pythagorean numeric panel; p53 disk-obstruction negatives + prop:prop2 + the `@slow`-gated cited test). The code dimension is MATERIAL-clean beyond the known tail; the coverage-gap backfill remains the named re-cert precondition.
+
+### Closed (NIT drained)
+- **p42 §5.5(II) spurious-β formula** (caught by code-42's recompute): the v4.43.0 fix wrote the period lift as $e^{i\cdot 2\pi\cdot\beta D_W}$, which at $\beta=2\pi$ evaluates to $e^{i\cdot 4\pi^2(n+1/2)}$ — *not* $-I$. The operator the code actually uses (and that equals $-I$) is $e^{i\cdot 2\pi\cdot D_W}$; corrected to match, symmetric with $e^{i\cdot 2\pi\cdot K_\alpha^W}=+I$. The substance of the v4.43.0 fix (flow closes; distinction is operator-level $-I$ vs $+I$ double-cover) is unaffected. p42 compiles errors=0/undef=0.
+- Worktree removed + leak-scanned (real corpus clean). Seed key: `debug/qa/group1_batch2_code_seed_key.json`. Memo: `debug/sprint_qa_group1_batch2_cert_memo.md` (§code-validation).
+
 ## [4.43.0] - 2026-06-22
 
 ### Changed

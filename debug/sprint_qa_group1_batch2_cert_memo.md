@@ -106,3 +106,38 @@ font-shape warnings, not refs).
   `debug/archive/` per [[feedback_resurrect_pruned_artifacts]]) before re-cert.
 - **Not yet certified.** This is FAIL→remediated. A clean full re-run (cert) is still required; the
   coverage-gap backfill is the named precondition.
+
+## 7. Code-dimension re-validation pass (v4.43.1, 2026-06-22)
+PI-directed narrow re-run of ONLY C1/C2 (Papers 42/43/44/53), same shape as the Batch-1 rem3 pass.
+Worktree `../geovac-qa-seed-g1b2-code` (base HEAD 59c6ea4 = v4.43.0), removed + leak-scanned (corpus clean).
+Seed key `debug/qa/group1_batch2_code_seed_key.json`. 4 code-reviewers, opus, blind, path-pinned.
+
+**Validation pass, NOT a cert** (1 of 5 gating dimensions ⇒ INCONCLUSIVE-for-cert).
+
+**Calibration — sensitivity 4/4.** Fresh vacuous-tolerance seeds (distinct sites from the full run), all caught:
+| Seed | Site | Catcher |
+|---|---|---|
+| S-code-p42 | `test_modular_hamiltonian.py:124` (PQP `<1e9`) | code-42 |
+| S-code-p43 | `test_modular_hamiltonian_lorentzian.py:180` (K_L=K_α `<1e9`) | code-43 (+code-42) |
+| S-code-p44 | `test_operator_system_lorentzian.py:180` (max_residual `<1e9`) | code-44 |
+| S-code-p53 | `test_paper53_plane_bochner_riesz.py:96` (rate `p>-1e9`) | code-53 |
+
+**Fix-validation (the point of the pass):**
+- **p42 §5.5(II) v4.43.0 fix HOLDS** — code-42 *independently recomputed*: $e^{i2\pi D_W}=-I$ exactly,
+  $\sigma_{2\pi}^{D_W}(O)=O$ closes at residual ~1e-16, "the prose MATCHES the computation." The substance
+  of the v4.43.0 correction is confirmed by fresh computation.
+- **p44 prop=2 genuinely computed** (k-fold product ranks; dim O¹=14 < 64=dim O²; not hardcoded) — confirmed.
+- **p43 deleted-debug citation gone** — confirmed; the §5.2 in-paper Lemma 5.5 is self-contained.
+
+**Zero new MATERIAL code defects** beyond the 4 seeds and the already-logged coverage gaps
+(p43 §5.2 Pythagorean numeric panel; p53 disk-negatives + prop:prop2; p53 `@slow`-gated test). These
+were re-found (expected — still open, backfill pending), consistent with the logged state.
+
+**One NEW NIT drained:** the v4.43.0 §5.5(II) formula carried a spurious β — $e^{i2\pi\beta D_W}$ at
+$\beta=2\pi$ is $e^{i4\pi^2(n+1/2)}\ne-I$; the operator the code uses is $e^{i2\pi D_W}=-I$. Corrected
+(symmetric with $e^{i2\pi K_\alpha^W}=+I$); substance unaffected; p42 compiles errors=0/undef=0.
+
+**Verdict:** the code dimension is **MATERIAL-clean beyond the known coverage-gap tail**, and the v4.43.0
+fixes are confirmed holding. The coverage-gap backfill (resurrect p53 `debug/archive/` drivers into `tests/`;
+add the p43 Pythagorean numeric regression; de-slow / fast-gate the p53 plane test) remains the named
+precondition for a full Batch-2 re-cert.

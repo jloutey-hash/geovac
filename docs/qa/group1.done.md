@@ -389,3 +389,14 @@ group1 paper restates them (C7).
   dedicated test-backfill sprint (v4.34.0 precedent). All papers compile errors=0 / undef=0;
   C5/C11/C13/C14/C15 PASS. **Clean re-run (cert) still needed — this is FAIL→remediated, not yet PASS.
   The code-dimension coverage-gap backfill is the named next step before re-cert.**
+
+- 2026-06-22 — **Batch 2 CODE-DIMENSION-only re-validation pass** (Papers 42/43/44/53; v4.43.1, PI-directed).
+  Narrow re-run of only C1/C2 (4 code-reviewers, opus, blind, path-pinned), 4 fresh vacuous-tolerance seeds
+  (one per backing test, distinct sites from the full run). **Validation pass, NOT a cert** (1 of 5 dims ⇒
+  INCONCLUSIVE-for-cert). **Calibrated 4/4 sens** (all seeds caught). **The v4.43.0 fixes CONFIRMED HOLDING:**
+  code-42 *independently recomputed* §5.5(II) → corrected prose matches the computation ($e^{i2\pi D_W}=-I$,
+  conjugation flow closes ~1e-16); p44 prop=2 genuinely computed (not hardcoded); p43 deleted-debug citation
+  gone. **Zero new MATERIAL code defects** beyond the 4 seeds + the already-logged coverage gaps. One NEW NIT
+  drained: a spurious β in the v4.43.0 §5.5(II) formula ($e^{i2\pi\beta D_W}$→$e^{i2\pi D_W}$). p42 compiles
+  clean. **Code dimension is MATERIAL-clean beyond the known coverage-gap tail; the backfill remains the
+  re-cert precondition.**

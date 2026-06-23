@@ -1,0 +1,52 @@
+{
+  "run": "group1_batch2_code",
+  "type": "CODE-DIMENSION-ONLY validation pass (1 of 5 gating dimensions ⇒ INCONCLUSIVE-for-cert by the all-dimensions rule)",
+  "description": "Re-run of ONLY the code/test-backing dimension (C1/C2) for group1 Batch 2 (Papers 42, 43, 44, 53), same shape as the Batch-1 rem3 validation pass. Purpose: (1) confirm the v4.43.0 code-dimension fixes hold (p42 §5.5(II) prose now MATCHES the computation — the conjugation flow closes for D_W, distinction is operator-level; p43 deleted-debug citation gone); (2) check for any NEW code-material defects beyond the already-logged coverage gaps. The coverage gaps (p43 §5.2 Pythagorean numeric panel; p53 disk-obstruction negatives + prop:prop2; p53 @slow-gating; p42 cross-witness collapse weak) are KNOWN-OPEN (logged in claim_test_matrix Batch-2 section, queued for backfill) — confirming them is expected, NOT a new finding. Seeds in worktree ../geovac-qa-seed-g1b2-code (branch qa-seed-g1b2-code, base HEAD 59c6ea4 = v4.43.0). NEVER committed; worktree removed at end.",
+  "date": "2026-06-22",
+  "base_head": "59c6ea4",
+  "dimensions_exercised": ["code"],
+  "seeds": [
+    {
+      "id": "S-code-p42",
+      "file": "tests/test_modular_hamiltonian.py",
+      "location": "l.124 (test_hemispheric_wedge_restrict_to_wedge_kills_complement)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "Changed 'assert np.linalg.norm(PQP) < 1e-12' -> '< 1e9'. Sole assertion in the function; guts the complementary-wedge orthogonality check P_W Q P_W = 0 (the wedge geometry backing the four-witness construction). No backstop -> MATERIAL.",
+      "truth": "P_W Q P_W = 0 bit-exact (||PQP|| < 1e-12); the +1 and -1 reflection eigenspaces are orthogonal.",
+      "expected_catcher": "code-42"
+    },
+    {
+      "id": "S-code-p43",
+      "file": "tests/test_modular_hamiltonian_lorentzian.py",
+      "location": "l.180 (test_K_L_alpha_at_N_t_1_equals_spatial_K_alpha)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "Changed 'assert residual < 1e-14' -> '< 1e9'. Sole assertion in the function; guts the bit-exact K_L=K_alpha at N_t=1 (the Riemannian-limit identity for Paper 42 §5). No backstop -> MATERIAL.",
+      "truth": "K_L_alpha = K_alpha = diag(two_m_j) bit-identically at N_t=1 (residual < 1e-14).",
+      "expected_catcher": "code-43"
+    },
+    {
+      "id": "S-code-p44",
+      "file": "tests/test_operator_system_lorentzian.py",
+      "location": "l.180 (test_riemannian_limit_bit_exact)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "Changed 'assert details[\"max_residual\"] == 0.0' -> '< 1e9'. Guts the bit-exact Riemannian-limit residual (the paper's stated 'load-bearing falsifier'). The sibling dim/count asserts (l.184-187) check DIFFERENT quantities and do not backstop the residual value -> MATERIAL.",
+      "truth": "Riemannian limit at N_t=1 is bit-exact (max_residual == 0.0 against an independently-built FullDirac reference).",
+      "expected_catcher": "code-44"
+    },
+    {
+      "id": "S-code-p53",
+      "file": "tests/test_paper53_plane_bochner_riesz.py",
+      "location": "l.96 (test_plane_bochner_riesz_converges)",
+      "defect_class": "C2 vacuous tolerance",
+      "planted": "Changed 'assert p > 0.3' -> 'p > -1e9'. Guts the plane-convergence rate threshold (fitted log-log slope p = -slope > 0.3). PARTIALLY backstopped by l.101 (errs[-1] < errs[0]) which catches a fully-broken case but NOT a marginal/zero-rate one -> grade on reconcile (likely MATERIAL: the quantitative rate claim is the headline).",
+      "truth": "Plane Bochner-Riesz converges at rate Lambda^{-0.6..-0.9} (fitted p > 0.3; measured 0.882 gaussian / 0.629 narrow).",
+      "expected_catcher": "code-53"
+    }
+  ],
+  "controls": [
+    {"id": "M1", "file": "paper_42 / test_modular_hamiltonian.py", "claim": "p42 §5.5(II) prose now CORRECTLY states the operator-level distinction (e^{2pi i beta D_W}=-I double-cover vs e^{2pi i K_alpha}=+I); the conjugation flow sigma_2pi(O)=(-I)O(-I)=O DOES close for D_W (v4.43.0 fix). A code reviewer running the computation should find the prose CONSISTENT with the computation, NOT re-flag '(D_W) does not close' (that claim was REMOVED). The BW-alpha/BW-gamma period closure + flow conjugacy + J_TT^2=+I (GNS) backing tests are genuine.", "must_not_flag": true},
+    {"id": "M2", "file": "paper_43 / test_modular_hamiltonian_lorentzian.py", "claim": "p43 §5.2 deleted-debug citation (h_local_orthogonality_formal_proof.py) was NEUTRALIZED in v4.43.0 (-> in-paper Lemma 5.5 + CHANGELOG). The chirality-pairing proof is self-contained in-paper. Lorentzian four-witness + N_t=1 recovery + Connes-axiom BBB signs are genuinely backed. Do NOT re-flag the (now-gone) deleted-file citation.", "must_not_flag": true},
+    {"id": "M3", "file": "paper_44 / test_operator_system_lorentzian.py", "claim": "prop=2 is GENUINELY computed (k-fold product rank; dim O^1=14 < 64=dim O^2 verified, not hardcoded); Riemannian limit vs independent FullDirac reference; Krein-positivity-trivial via real-J commutators with random-matrix control. BACKED-SOUND (code-44 v4.43.0). The l.222 'assert dims==[14,64]' literals are verified non-circular. Do NOT re-flag prop=2 as hardcoded.", "must_not_flag": true},
+    {"id": "M4-known-gaps", "file": "all", "claim": "KNOWN coverage gaps, already logged (claim_test_matrix Batch-2 section) + queued for backfill: p43 §5.2 Pythagorean numeric panel (no tests/ regression); p53 disk-obstruction negatives (min g~-0.13, rate Lambda^{+0.07}) + prop:prop2 (debug/archive only); p53 cited test @slow/skipped-by-default; p42 cross-witness collapse test BACKED-WEAK (by-construction beta-independence). Re-finding these is EXPECTED and CONSISTENT with the logged state -- reconcile against the logged list; they are the known tail, NOT new defects. The backfill is the named re-cert precondition."}
+  ]
+}
