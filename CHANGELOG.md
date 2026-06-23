@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.43.2] - 2026-06-22
+
+### Added (coverage-gap test-backfill — the named Batch-2 re-cert precondition)
+- **`tests/test_paper53_disk_obstruction.py`** (NEW) — closes the two Paper-53 coverage gaps. (1) Disk OBSTRUCTION negative: recomputes the Markov–Cesàro Berezin g_t of a positive f=(ρ/R)² and asserts positivity FAILS (min g < −0.10 at Λ=200, ≈ −0.13) and the interior rate does NOT decay (log-log slope > 0, Λ^{+0.07}) — the negative that pivots the paper to the plane. (2) prop:prop2: builds the disk operator system and asserts O² fills the full M_N(C) envelope (prop=2) at (K,J) ∈ {(2,2),(2,3),(3,2),(3,3)}, N ∈ {8,12,12,18}, via the live `geovac.operator_system.operator_system_dim`. (Resurrects the `debug/archive/` driver computations per the resurrect-pruned rule.)
+- **`tests/test_paper43_pythagorean_hs_orthogonality.py`** (NEW) — closes the Paper-43 §5.2 gap. Recomputes the panel from the live machinery: ⟨H_local, D_W⟩_HS = 0 (<1e-12), the chirality pairing (equal H_local / opposite D_W eigenvalues, max diff/sum <1e-14), and the Pythagorean corollary ‖H−D‖²=‖H‖²+‖D‖² (<1e-10), across Riemannian (n_max=2,3,4) + Lorentzian (2,1),(3,1),(2,3),(3,3) cells. The in-paper Lemma 5.5 proof remains the self-contained backstop.
+
+### Changed
+- **p53 plane test de-slowed** — removed the two `@pytest.mark.slow` markers from `test_paper53_plane_bochner_riesz.py` (each test ~0.3s, file ~1.5s); the headline plane-convergence claim now has default-CI backing instead of being skipped by default.
+- **p42 cross-witness collapse hardened** — the BACKED-WEAK collapse test (which compared bit-identical code paths) is supplemented by two new tests in `test_modular_hamiltonian.py`: `test_cross_witness_modular_operator_bit_identical` (builds each witness's Δ through the β-dependent ρ_W=e^{-βH_local} path with genuinely distinct β, asserts ρ/Δ/K_TT bit-identical <1e-13 — the β cancels because βH_local=K_α^W) and `test_cross_witness_collapse_requires_beta_cancellation` (negative control: without the 1/β, ρ_W is β-dependent, ‖Δρ‖≈4.7e-4 vs <1e-13 — a 9-order separation proving the collapse is non-vacuous).
+- **Paper citations repointed debug/→tests/** for the backfilled claims: p53 `prop:prop2` and `rem:interior_correction` now cite `tests/test_paper53_disk_obstruction.py`; p43 §5.2 now cites `tests/test_paper43_pythagorean_hs_orthogonality.py` (replacing the v4.43.0 CHANGELOG-note placeholder + the `debug/data/...json` source line). The §9 permanent-record policy: these claims now have a `tests/` home.
+- **`docs/claim_test_matrix.md`** Batch-2 rows updated NO-TEST/BACKED-WEAK → BACKED-SOUND.
+
+### Verified
+- C13 paper↔test reference integrity PASS (the new inline test citations resolve); p43/p53 compile errors=0/undef=0; 80 passed / 4 slow-skip across the affected files (`test_paper53_disk_obstruction`, `test_paper53_plane_bochner_riesz`, `test_paper43_pythagorean_hs_orthogonality`, `test_modular_hamiltonian`). No production code changed. Memo: `debug/sprint_qa_group1_batch2_cert_memo.md` (§backfill).
+
 ## [4.43.1] - 2026-06-22
 
 ### Changed

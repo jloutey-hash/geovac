@@ -400,3 +400,14 @@ group1 paper restates them (C7).
   drained: a spurious β in the v4.43.0 §5.5(II) formula ($e^{i2\pi\beta D_W}$→$e^{i2\pi D_W}$). p42 compiles
   clean. **Code dimension is MATERIAL-clean beyond the known coverage-gap tail; the backfill remains the
   re-cert precondition.**
+
+- 2026-06-22 — **Batch 2 coverage-gap test-backfill** (v4.43.2, PI-directed; the named re-cert
+  precondition). All 4 code-dimension coverage gaps closed with recompute-from-framework tests
+  (validated vs live machinery, not hardcode-and-assert): `tests/test_paper53_disk_obstruction.py`
+  (disk positivity-fails + rate-no-decay + prop2 via live `operator_system_dim`);
+  `tests/test_paper43_pythagorean_hs_orthogonality.py` (§5.2 ⟨H,D⟩=0 + Pythagorean + chirality pairing,
+  7 cells); p53 plane test **de-slowed** (default-CI backing); p42 collapse **hardened** (bit-identical
+  ρ/Δ/K_TT across distinct-β witnesses + β-cancellation negative control). Paper citations repointed
+  debug/→tests/; claim_test_matrix Batch-2 rows → BACKED-SOUND. C13 PASS; p43/p53 compile clean;
+  80 passed/4 slow-skip. **The code-dimension precondition for the Batch-2 re-cert is now satisfied;
+  the full re-cert can run.**

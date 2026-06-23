@@ -385,6 +385,69 @@ def test_cross_witness_kappa_g_values_distinct():
     assert results["Unruh_a2"]["kappa_g"] == 2.0
 
 
+def test_cross_witness_modular_operator_bit_identical():
+    """The cross-witness collapse is a NON-TRIVIAL consequence of the BW choice
+    H_local = K_alpha^W / beta, not a code-identity.
+
+    Each witness has a GENUINELY DIFFERENT beta (= 2*pi/kappa_g), and beta enters
+    the Tomita construction through rho_W = e^{-beta H_local}/Z.  Because
+    beta H_local = K_alpha^W is beta-independent, the density matrix rho_W (and
+    hence the full modular operator Delta and modular Hamiltonian K_TT) is
+    bit-identical across the witnesses.  We compare the OPERATORS (not just the
+    period-closure residuals, which are all ~0 and would match trivially)."""
+    n_max = 3
+    witnesses = {
+        "BW": for_bisognano_wichmann(n_max=n_max),       # beta = 2*pi
+        "HH_M1": for_hartle_hawking(n_max=n_max, M=1.0),  # beta = 8*pi
+        "Unruh_a2": for_unruh(n_max=n_max, a=2.0),        # beta = pi
+    }
+    betas = {name: w.beta for name, w in witnesses.items()}
+    # the betas must be genuinely distinct (else the collapse is vacuous)
+    bvals = sorted(betas.values())
+    assert all(b2 - b1 > 0.5 for b1, b2 in zip(bvals, bvals[1:])), (
+        f"witness betas not distinct enough: {betas}"
+    )
+
+    tms = {name: w.tomita_structure() for name, w in witnesses.items()}
+    ref = tms["BW"]
+    for name, t in tms.items():
+        assert np.linalg.norm(t.rho - ref.rho) < 1e-13, (
+            f"{name}: rho_W not bit-identical to BW (beta={betas[name]:.3f} vs "
+            f"{betas['BW']:.3f}); ||drho||={np.linalg.norm(t.rho - ref.rho):.2e}"
+        )
+        assert np.linalg.norm(t.Delta_matrix - ref.Delta_matrix) < 1e-13, (
+            f"{name}: Delta not bit-identical to BW"
+        )
+        assert np.linalg.norm(t.K_TT - ref.K_TT) < 1e-13, (
+            f"{name}: K_TT not bit-identical to BW"
+        )
+
+
+def test_cross_witness_collapse_requires_beta_cancellation():
+    """Negative control: WITHOUT the 1/beta in H_local the collapse FAILS.
+
+    If one (wrongly) set H_local = K_alpha^W (no division by beta), then
+    rho_W = e^{-beta K_alpha^W}/Z is genuinely beta-dependent, so witnesses with
+    different beta give DIFFERENT density matrices.  This confirms the collapse
+    tested above is a real consequence of the H_local = K_alpha^W/beta
+    construction, not an artifact of comparing identical code paths."""
+    n_max = 3
+    un = for_unruh(n_max=n_max, a=2.0)               # beta = pi   (widest spread)
+    hh = for_hartle_hawking(n_max=n_max, M=1.0)       # beta = 8*pi
+    assert abs(un.beta - hh.beta) > 0.5
+
+    # beta-independent H_local (the WRONG choice) -> beta-dependent rho_W
+    tms_un = un.tomita_structure(H_local=un.restrict_K_alpha_to_wedge())
+    tms_hh = hh.tomita_structure(H_local=hh.restrict_K_alpha_to_wedge())
+    drho = np.linalg.norm(tms_un.rho - tms_hh.rho)
+    # ~4.7e-4 here vs < 1e-13 for the bit-identical (correct-/beta) collapse: a
+    # ~9-order separation confirms the collapse is non-vacuous.
+    assert drho > 1e-5, (
+        f"control FAILED to discriminate: rho_W should be beta-dependent without "
+        f"the 1/beta, but ||drho||={drho:.2e} (collapse test would be vacuous)"
+    )
+
+
 # ---------------------------------------------------------------------------
 # KMS condition (expectation level)
 # ---------------------------------------------------------------------------

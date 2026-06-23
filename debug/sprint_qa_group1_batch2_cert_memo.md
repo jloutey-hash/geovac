@@ -141,3 +141,19 @@ $\beta=2\pi$ is $e^{i4\pi^2(n+1/2)}\ne-I$; the operator the code uses is $e^{i2\
 fixes are confirmed holding. The coverage-gap backfill (resurrect p53 `debug/archive/` drivers into `tests/`;
 add the p43 Pythagorean numeric regression; de-slow / fast-gate the p53 plane test) remains the named
 precondition for a full Batch-2 re-cert.
+
+## 8. Coverage-gap test-backfill (v4.43.2, 2026-06-22)
+PI-directed (the named re-cert precondition). All 4 gaps closed; recompute-from-framework, validated
+against the live machinery (not hardcode-and-assert; the v4.34.0 group3 discipline).
+
+| Gap | Backfill | Assertion |
+|---|---|---|
+| p53 disk-obstruction negative | `tests/test_paper53_disk_obstruction.py::test_disk_markov_berezin_positivity_fails` | positive f=(ρ/R)² → min g < −0.10 at Λ=200 (positivity fails) + log-log slope > 0 (rate no-decay, Λ^{+0.07}) |
+| p53 prop:prop2 | `..._disk_obstruction.py::test_disk_operator_system_prop2` (4 cells) | O² fills $M_N(\C)$ (prop=2), N∈{8,12,12,18}, via live `operator_system_dim` |
+| p43 §5.2 Pythagorean | `tests/test_paper43_pythagorean_hs_orthogonality.py` (7 cells) | ⟨H_local,D_W⟩_HS<1e-12; chirality pairing max diff/sum<1e-14; ‖H−D‖²=‖H‖²+‖D‖² (<1e-10); Riemannian + Lorentzian |
+| p53 plane @slow | `test_paper53_plane_bochner_riesz.py` de-slowed | both markers removed; runs by default (~1.5s) |
+| p42 collapse BACKED-WEAK | `test_modular_hamiltonian.py` +2 tests | bit-identical ρ/Δ/K_TT across distinct-β witnesses (<1e-13) **+ negative control** (β-dependent ρ without 1/β, ≈4.7e-4 vs <1e-13 = 9-order separation) |
+
+Paper citations repointed debug/→tests/ (p53 prop:prop2 + rem:interior_correction; p43 §5.2). claim_test_matrix
+Batch-2 rows → BACKED-SOUND. C13 PASS; p43/p53 compile errors=0/undef=0; 80 passed/4 slow-skip; no production
+code changed. **The code-dimension precondition for the Batch-2 re-cert is satisfied.**

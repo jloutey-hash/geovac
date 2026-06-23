@@ -71,7 +71,6 @@ _LAMBDAS = [5.0, 10.0, 20.0, 40.0, 80.0, 160.0]
 _S = 2.0  # Bochner-Riesz order (>= 1/2 guarantees classical positivity)
 
 
-@pytest.mark.slow
 @pytest.mark.parametrize("name", list(_TESTS))
 def test_plane_bochner_riesz_converges(name: str) -> None:
     """The plane reconstruction error decays at a genuine algebraic rate p > 0.
@@ -101,7 +100,6 @@ def test_plane_bochner_riesz_converges(name: str) -> None:
     assert errs[-1] < errs[0], f"{name}: error did not decrease over the Lambda sweep"
 
 
-@pytest.mark.slow
 def test_plane_bochner_riesz_positivity() -> None:
     """f >= 0 => B_Lambda(f) >= 0 (classical Bochner-Riesz positivity, s >= 1/2).
 
