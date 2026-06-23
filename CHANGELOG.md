@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.44.0] - 2026-06-23
+
+### Changed
+- **`/qa group1` Batch 3 FIRST FULL cert (P29/39/40/50/52 + synth) — FAIL → remediated (PI-directed).** First all-5-dimension cert of Batch 3 (prior runs were code-only v4.43.5 + the v4.34.0 backfill). 16 LLM reviewers (code/claims/citation ×5 + synthesis ×1), opus, path-pinned, blind, + 5 deterministic gates. **Calibrated: sensitivity 6/6** (one seed per gating dimension — flipped-exponent F-theorem, vacuous crossing-tol, state-space-GH→propinquity, proof-sketch→"complete symbolic proof", Marcolli-vS wrong-arXiv, reproduction→derivation), **specificity clean** (M1–M5 respected). Worktree removed + leak-scan CLEAN. **FAIL — genuine non-seed MATERIAL defects in ALL FOUR LLM dimensions.**
+
+### Fixed (this pass)
+- **Synthesis (C9, LARGE): fabricated Paper-29 theorem citations + Observation→theorem promotion.** The synthesis cited "Paper 29, Theorems 5.1–5.2 and Corollary 5.3" and wrapped the Ramanujan result in `\begin{theorem}` ("for every n_max∈{2,3,4,5} satisfies strictly") — but Paper 29 has **no** `\begin{theorem}` and §7 shows S³ **crosses** at n=5. Demoted to a remark-tier Observation, removed the fabricated cites, corrected to the finite-size statement (3/4 families cross at modest sizes). Plus added the Paper-40 universality tier-caveat (rank-1-rigorous + proof-sketch + numerics + named gap).
+- **Paper 29 (C8): Observation 1 over-scope** ("for every graph tested" contradicted by its own §7) → scoped to small cutoffs + finite-size note; §5 "open question" → forward-ref to §7's crossing resolution.
+- **`geovac/gh_convergence_tensor.py` (C1/C2): completed the v4.43.5 code-side-zombie sweep** that was incomplete — module docstring + `FiveLemmaStatusTensor.L3_T` (withdrawn Pythagorean "C₃<1, =1+o(1)") + `TensorPropinquityBound`/`c_lipschitz_full_pythagorean` docstring + `epsilon_cross_bound` false-Pythagorean-identity mechanism + comment residuals → state-space GH + triangle bound C₃≥1→√2 + WITHDRAWN flags; **+ fixed the zombie-pinning test** (`test_five_lemma_status_l3_done` asserted `"Pythagorean" in L3_T` → now asserts "triangle bound"/"WITHDRAWN" + guards). Strings/docstrings only, no logic change.
+- **Citations (C4): p40 Leimbach-vS** "Latrémolière propinquity convergence"→state-space GH (C7 class); **p39 aguilar2019** venue ("Banach J. Math. Anal., to appear 2019"→Banach Center Publ. 120 (2020), 9–36) + title.
+
+### Flagged (named re-cert preconditions — raised to PI, NOT fixed this pass)
+- **p40 general-G universality test-backfill (LARGE; confirmed v4.43.5 Flavor-B):** code-40 found the general-G C₃=1 verifier (`verify_dirac_triangle`/`run_panel`) imported for constructors but **never called** (general-rank keystone has no live assertion); rank-2 tests `@pytest.mark.slow` (default-skipped → cert exercises only SU(2) rank-1); per-group table values (G2 1.177) untested and live G2 panel = 1.695. FIX = wire the verifier into a default test + migrate `debug/qa/_resurrected/` drivers + reduced fast rank-2 panel + reconcile table values. Dedicated sprint.
+- **p29 title** "…Are Ramanujan" (unqualified; body/§7 qualify it) — editorial; **p29 "algebraic integer" math point** (non-monic Ihara–Bass justification; likely the reciprocal-zeros are the algebraic integers) — primary-math check; **p40 "Vinberg's lemma"** missing bibitem; terras2010 Thm 2.3 unverifiable.
+
+### Verified
+- Papers 29/39/40 + synthesis compile clean (errors=0); C5/C11/C13/C14/C15 PASS; topo proofs 18/18 + the changed `test_five_lemma_status_l3_done` green. Memo: `debug/sprint_qa_group1_batch3_cert_memo.md`.
+
 ## [4.43.7] - 2026-06-23
 
 ### Changed

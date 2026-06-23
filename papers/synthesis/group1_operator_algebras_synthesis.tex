@@ -97,9 +97,11 @@ operator-algebra arc of the GeoVac framework
 explicit almost-commutative spectral triple
 $(\AGV, \HGV, \DGV)$ on the Fock-projected unit three-sphere with a
 Camporesi--Higuchi spinor Dirac operator, places it in the
-Marcolli--van~Suijlekom gauge-network lineage, and proves four
-load-bearing theorems.  First, the underlying truncated graphs are
-Ramanujan, with integer-algebraic Ihara zeros (Paper~29).  Second, the
+Marcolli--van~Suijlekom gauge-network lineage, and establishes four
+load-bearing results.  First, the underlying truncated graphs are
+Ramanujan \emph{at small sizes} --- a finite-size graph-RH Observation
+(three of four families cross the Kotani--Sunada bound at modest sizes,
+Paper~29~\S7), with integer-algebraic Ihara zeros (Paper~29).  Second, the
 Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ converge to the
 continuum spectral triple $\Tcal_{\sthree}$ in the van~Suijlekom
 state-space Gromov--Hausdorff sense at quantitative rate
@@ -204,14 +206,17 @@ Papers~\cite{paper29,paper32,paper38,paper39,paper40_unified,paper42,paper43,pap
 Together they form a self-contained research thread in mathematical
 operator algebras with four headline results.
 
-\paragraph{Headline 1: the Hopf graphs are Ramanujan.}
+\paragraph{Headline 1: the Hopf graphs are Ramanujan at small sizes.}
 The finite Fock-projected $\sthree$ Coulomb graphs and the
 Bargmann--Segal $\sfive$ holomorphic graphs satisfy the
-Kotani--Sunada Ramanujan bound at every tested cutoff.  Their Ihara
-zeta zeros are algebraic integers with integer coefficients; no $\pi$
-or transcendental content appears in the Ihara polynomial
-factorizations (Paper~29~\cite{paper29}, Theorems~5.1--5.2 and
-Corollary~5.3).
+Kotani--Sunada Ramanujan bound at small cutoffs --- a \emph{finite-size}
+graph-RH:\ three of four families (including $\sthree$ Coulomb at
+$\nmax = 5$) cross the bound at modest sizes, so the property does not
+persist asymptotically (Paper~29~\S7).  Their Ihara zeta zeros are
+algebraic integers with integer coefficients; no $\pi$ or transcendental
+content appears in the Ihara polynomial factorizations
+(Paper~29~\cite{paper29}, Observation [Ramanujan] and the closed-form
+Ihara factorizations of \S5).
 
 \paragraph{Headline 2: Riemannian state-space Gromov--Hausdorff
 convergence with explicit rate $4/\pi$.}
@@ -246,7 +251,13 @@ root direction's Euler--Catalan asymptote, in the dual-Coxeter
 normalisation.  The constant $C_{3} = 1$ remains asymptotically tight
 at all ranks via the PRV-summand bound of Kumar (1988) and Vinberg
 (1990), applied to the dominant image of the tensor product
-$V_{\lambda} \otimes V_{\lambda'}^{*}$.
+$V_{\lambda} \otimes V_{\lambda'}^{*}$.  \emph{Tier:}\ this universality
+is rigorous at rank~1 ($\SU(2)$) and, for general $G$, is a
+proof-sketch mechanism (the Plancherel$\times$Vandermonde cancellation)
+numerically pinned at ranks~1--2 ($\SU(2),\SU(3),\mathrm{Sp}(2),G_{2}$) with one
+rank-3 datapoint; a fully rank-uniform analytical proof is a named gap
+(Paper~40~\S L2), and the per-group rate-constant extractions are
+fit-sensitive.
 
 \paragraph{Headline 4: the Lorentzian propinquity route is closed by a
 degeneracy theorem.}
@@ -449,21 +460,25 @@ computed in Paper~29~\S 4~\cite{paper29} via the Ihara--Bass
 determinantal formula and via the $2E \times 2E$ Hashimoto
 non-backtracking edge operator.
 
-\begin{theorem}[Paper~29, Theorems~5.1--5.2]
+\begin{remark}[Observation --- Paper~29, Ramanujan bound + \S7 bound-crossing]
 \label{thm:ramanujan}
-For every $\nmax \in \{2, 3, 4, 5\}$, the Fock-projected $\sthree$
-graph $G_{\nmax}$ satisfies the Kotani--Sunada Ramanujan bound
-strictly:\ the largest non-trivial Hashimoto eigenvalue sits strictly
-inside the spectral radius $\sqrt{q_{\max}}$ associated with the
-maximum (Perron) vertex degree.  All non-trivial Ihara zeros are
-algebraic integers; the corresponding Ihara polynomials factor over
-$\Z[s]$ into integer-coefficient pieces, and several factorizations
-admit explicit closed forms (e.g.~$(4s^{2}+1)^{2}$, $(9s^{2}+1)^{4}$,
-the $12 + 22$ dichotomy for $\sfive$ at $N_{\max} = 3$).
-\end{theorem}
+At small cutoffs the Fock-projected $\sthree$ graph $G_{\nmax}$
+satisfies the Kotani--Sunada Ramanujan bound strictly:\ the largest
+non-trivial Hashimoto eigenvalue sits strictly inside the spectral
+radius $\sqrt{q_{\max}}$ associated with the maximum (Perron) vertex
+degree.  This is a \emph{finite-size} statement, not an asymptotic
+theorem:\ Paper~29~\S7 shows three of four families (including
+$\sthree$ Coulomb at $\nmax = 5$) \emph{cross} the bound at modest
+sizes, so the graph-RH does not persist as $\nmax \to \infty$.  All
+non-trivial Ihara zeros are algebraic integers; the corresponding Ihara
+polynomials factor over $\Z[s]$ into integer-coefficient pieces, and
+several factorizations admit explicit closed forms
+(e.g.~$(4s^{2}+1)^{2}$, $(9s^{2}+1)^{4}$, the $12 + 22$ dichotomy for
+$\sfive$ at $N_{\max} = 3$).
+\end{remark}
 
 \paragraph{Structural consequences.}
-Theorem~\ref{thm:ramanujan} secures two facts about the truncated
+The Observation~\ref{thm:ramanujan} secures two facts about the truncated
 graphs that are used implicitly elsewhere in the arc.  First, no $\pi$
 or transcendental quantity appears anywhere in the Ihara
 polynomials, in any of the tested factorizations

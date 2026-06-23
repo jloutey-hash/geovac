@@ -927,7 +927,10 @@ class TestR1R2KeystoneTheoremStatus:
         status = FiveLemmaStatusTensor()
         d = status.to_dict()
         assert "DONE" in d["L3_T"]
-        assert "Pythagorean" in d["L3_T"]
+        # the live full-op-system bound is the triangle C_3 >= 1 -> sqrt(2);
+        # the withdrawn Pythagorean refinement must be flagged WITHDRAWN, not live
+        assert "triangle bound" in d["L3_T"]
+        assert "WITHDRAWN" in d["L3_T"]
 
     def test_five_lemma_status_l5_done(self):
         """L5-T should report DONE after R2 closure of the height bookkeeping."""

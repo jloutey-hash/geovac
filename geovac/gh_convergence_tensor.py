@@ -27,8 +27,8 @@ Let
         algebra = O_a (X) O_b  (operator-system tensor product)
     living at KO-dim 3 + 3 = 6 (Connes-Marcolli convention).
 
-**Theorem L5-T (tensor-product GH convergence).** *In the Latremoliere
-quantum Gromov-Hausdorff propinquity Lambda, the truncated tensor-product
+**Theorem L5-T (tensor-product GH convergence).** *In van Suijlekom's
+state-space Gromov-Hausdorff distance Lambda, the truncated tensor-product
 triples T_a (X) T_b converge to T_S3^a (X) T_S3^b as n_a, n_b -> infinity:*
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
@@ -37,8 +37,11 @@ triples T_a (X) T_b converge to T_S3^a (X) T_S3^b as n_a, n_b -> infinity:*
 
 *The joint Lipschitz comparison constant on the factorized observable
 panel is C_3^{(2)} = 1 (inheriting the L3 single-factor C_3 = 1 via the
-Connes-Marcolli Leibniz identity), and on the full operator system is
-bounded by C_3^{(2)} <= 2 via the Bozejko-Fendler product cb-norm.*
+Connes-Marcolli Leibniz identity); on the full operator system the live
+bound is the triangle bound C_3^{(2)} >= 1 -> sqrt(2). (The earlier
+SU(2)xSU(2) Pythagorean refinement C_3^{(2)} < 1 -> 1 was WITHDRAWN
+2026-06-18 as operator-norm-false; see Paper 39 "Withdrawn Pythagorean
+refinement".)*
 
 Strategic significance
 ======================
@@ -163,9 +166,10 @@ What remains for follow-up:
   - Joint L3 on the FULL (not factorized) operator system: symbolic
     Bozejko-Fendler product cb-norm verification beyond the factorized
     panel is sketched but not proved exhaustively. The factorized panel
-    case gives C_3 = 1; the full operator system case gives C_3 <= 2.
-    Follow-up sprint would tighten the latter to C_3 = 1 + o(1) via
-    a dual-triangle-inequality lift of Paper 38 §3.4.
+    case gives C_3 = 1; the full operator system case gives the triangle
+    bound C_3 >= 1 -> sqrt(2). (An earlier "tighten to C_3 = 1 + o(1)"
+    Pythagorean plan was WITHDRAWN 2026-06-18 as operator-norm-false,
+    Paper 39.)
   - Joint L5 height bookkeeping at the Latremoliere 2017/2023 level
     is sketched (cross-term epsilon_cross flagged as Stein-Weiss
     contribution); the rigorous height computation requires reading
@@ -275,8 +279,10 @@ from geovac.r25_l3_lipschitz_bound import (
 # system (general elements of O_a (X) O_b), the Leibniz rule produces
 # the conservative bound C_3^(2) <= 2 via the generic triangle inequality;
 # the SU(2) x SU(2) Pythagorean refinement (R1, sprint W2b-easy-tighten,
-# 2026-05-07) tightens this to C_3^(2) <= 1 + o(1) via the closed form
-# below — see ``c3_full_pythagorean_bound``.
+# 2026-05-07) that claimed to tighten this to C_3^(2) <= 1 + o(1) was
+# WITHDRAWN 2026-06-18 (operator-norm-false, Paper 39); the live full-op-
+# system bound is the triangle C_3^(2) >= 1 -> sqrt(2) — see
+# ``c3_full_triangle_bound``.
 C_LIPSCHITZ_TENSOR_FACTORIZED: float = 1.0  # C_3^(2) on factorized panel
 C_LIPSCHITZ_TENSOR_FULL: float = 2.0        # C_3^(2) on full op-system (legacy / conservative)
 
@@ -828,13 +834,17 @@ def epsilon_cross_bound(
 
         ||B_a(f) ⊗ B_b(g)||_Lip^{O_joint}  =  ||[D_{a,b}, B_a(f) ⊗ B_b(g)]||_op.
 
-    By Connes-Marcolli Leibniz (KO-dim 6 grading), the two terms in the
-    expansion ANTICOMMUTE on the graded module, so the operator norm
-    satisfies the Pythagorean identity:
+    NOTE (corrected 2026-06-18): an earlier draft asserted a Pythagorean
+    operator-norm IDENTITY here (||.||_op^2 = ||.||_op^2 + ||.||_op^2) from a
+    claimed anticommutation; that identity is FALSE in general (Paper 39,
+    "Withdrawn Pythagorean refinement"). The live bound is the triangle
+    (sub-additive) inequality:
 
-        ||[D_{a,b}, B_a(f) ⊗ B_b(g)]||_op^2
-            =  ||[D_a, B_a(f)]||_op^2 ||B_b(g)||_op^2
-              +  ||B_a(f)||_op^2 ||[D_b, B_b(g)]||_op^2.
+        ||[D_{a,b}, B_a(f) ⊗ B_b(g)]||_op
+            <=  ||[D_a, B_a(f)]||_op ||B_b(g)||_op
+              +  ||B_a(f)||_op ||[D_b, B_b(g)]||_op,
+
+    which is what the returned value below computes (height telescoping).
 
     Single-factor L4(d) + L5 height bounds (Paper 38 single-factor):
 
@@ -1118,10 +1128,11 @@ class TensorPropinquityBound:
     c_lipschitz_full : float
         Joint C_3 on the full operator system, conservative legacy <= 2.
     c_lipschitz_full_pythagorean : float
-        Joint C_3 on full op-system, R1-tightened Pythagorean bound
-        (sprint W2b-easy-tighten, 2026-05-07): <= sqrt(((N_a-1)^2 +
-        (N_b-1)^2)/(N_a^2 + N_b^2 - 2)) at the maximal irrep, < 1 at
-        every finite cutoff and -> 1^- as cutoffs -> infinity.
+        WITHDRAWN (2026-06-18): the SU(2)xSU(2) Pythagorean operator-norm
+        identity is false (Paper 39, "Withdrawn Pythagorean refinement");
+        the live full-op-system bound is the triangle C_3 >= 1 -> sqrt(2)
+        (see ``c3_full_triangle_bound``). Field retained for back-compat;
+        do NOT use as the live constant.
     epsilon_cross_bound_value : float
         R2-explicit bound on the cross-Stein-Weiss term in the joint
         height (sprint W2b-easy-tighten, 2026-05-07): <= 2*sqrt(2) *
@@ -1582,7 +1593,7 @@ def tensor_L3_lipschitz(
         "lambda_b": lambda_b,
         "C_3_factorized": C_LIPSCHITZ_TENSOR_FACTORIZED,    # = 1
         "C_3_full_op_system": C_LIPSCHITZ_TENSOR_FULL,      # <= 2 (legacy)
-        "C_3_full_pythagorean": c3_pyth,                    # <= 1 + o(1) (R1)
+        "C_3_full_pythagorean": c3_pyth,                    # WITHDRAWN 2026-06-18 (false); live = triangle >=1->sqrt2
         "use_pythagorean_bound": bool(use_pythagorean_bound),
         "empirical_C_3_max_panel": empirical_C_3_max,
         # R1: empirical should be within Pythagorean bound on the factorized panel
@@ -1794,9 +1805,9 @@ class FiveLemmaStatusTensor:
     L2_T: str = "DONE (tensor_L2_central_fejer, closed-form factorization)"
     L3_T: str = (
         "DONE (tensor_L3_lipschitz, factorized panel C_3=1; "
-        "full O_sys C_3 <= sqrt(((N_a-1)^2 + (N_b-1)^2)/(N_a^2 + N_b^2 - 2)) "
-        "via SU(2)xSU(2) Pythagorean refinement, R1 closure 2026-05-07; "
-        "= 1 + o(1) asymptotically)"
+        "full O_sys triangle bound C_3 >= 1 -> sqrt(2); the earlier "
+        "SU(2)xSU(2) Pythagorean refinement (C_3<1, =1+o(1)) was "
+        "WITHDRAWN 2026-06-18 as operator-norm-false; state-space GH)"
     )
     L4_T: str = "DONE (tensor_L4_berezin, factor-by-factor + 5-fn panel verification)"
     L5_T: str = (
