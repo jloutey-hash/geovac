@@ -1109,7 +1109,10 @@ class TensorTunnelingPair:
 
 @dataclass
 class TensorPropinquityBound:
-    """The Latremoliere quantum-GH propinquity bound at joint cutoff (n_a, n_b).
+    """The van Suijlekom state-space GH bound at joint cutoff (n_a, n_b).
+
+    (State-space Gromov-Hausdorff distance, NOT the strictly-stronger Latremoliere
+    propinquity -- the dual-reach step is a named gap; see the module header.)
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
         <= C_3^{(2)} * max(gamma_a/lambda_a, gamma_b/lambda_b)

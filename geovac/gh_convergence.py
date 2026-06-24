@@ -23,8 +23,9 @@ Let
     (`geovac/full_dirac_operator_system.py`), and D_{n_max} the truthful
     Camporesi-Higuchi Dirac restricted to the truncation.
 
-**Theorem L5 (GH convergence on S^3).** *In the Latremoliere quantum
-Gromov-Hausdorff propinquity Lambda, the truncated triples T_{n_max}
+**Theorem L5 (GH convergence on S^3).** *In the van Suijlekom state-space
+Gromov-Hausdorff distance (NOT the strictly-stronger Latremoliere propinquity,
+whose dual-reach step is a named gap), the truncated triples T_{n_max}
 converge to the round-S^3 triple as n_max -> infinity:*
 
     Lambda(T_{n_max}, T_S3)  <=  C_L5  *  gamma_{n_max}  ->  0,
@@ -491,13 +492,17 @@ class TunnelingPair:
 
 @dataclass
 class PropinquityBound:
-    """The Latremoliere quantum-GH propinquity bound at cutoff n_max.
+    """The van Suijlekom state-space GH bound at cutoff n_max.
+
+    (This is the state-space Gromov-Hausdorff distance, NOT the strictly-stronger
+    Latremoliere quantum-GH propinquity: the dual-reach step reach_P below is a
+    named gap, so propinquity is not claimed -- see Paper 38/40.)
 
     Lambda(T_{n_max}, T_S3) <= bound = max(reach_B, reach_P, height_B, height_P)
 
     For our tunneling pair (per Paper 38 §3.5 corrected L5 proof):
       - reach_B  <= gamma_{n_max} (L2 mass-concentration rate) * C_3 = 1
-      - reach_P  <= gamma_{n_max} (dual reach, L2(c) cb-norm symmetry)
+      - reach_P  <= gamma_{n_max} (dual reach, L2(c) cb-norm symmetry; NAMED GAP)
       - height_B <= gamma_{n_max} (Lipschitz-distortion of B; L4(d) +
                                    Stein-Weiss, Paper 38 Appendix A)
       - height_P  = 0             (P is a projection)

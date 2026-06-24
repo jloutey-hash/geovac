@@ -39,6 +39,21 @@ from geovac.qed_two_loop import (
 mp.mp.dps = 60
 
 
+@pytest.fixture(autouse=True)
+def _hp_dps():
+    """Re-establish 60 dps before EVERY test in this module and restore after.
+
+    The high-precision F-theorem asserts (1e-40) depend on the global mpmath
+    precision, which a co-running test in a mixed batch can leave below contract
+    (the precision-contract hazard, CLAUDE.md §3). A module-level assignment is
+    not enough; this autouse fixture makes each test self-contained.
+    """
+    old = mp.mp.dps
+    mp.mp.dps = 60
+    yield
+    mp.mp.dps = old
+
+
 # --- KPS reference closed forms ----------------------------------------------
 
 def _F_s_kps() -> mp.mpf:

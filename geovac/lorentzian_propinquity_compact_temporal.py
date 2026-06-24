@@ -463,8 +463,15 @@ class LorentzianTunnelingPair:
 
 @dataclass
 class LorentzianPropinquityBound:
-    """The K^+-restricted weak-form Lorentzian Latremoliere propinquity bound.
+    """Container for the (DESCOPED) K^+-restricted weak-form Lorentzian rate-formula.
 
+    *** The convergence reading below is WITHDRAWN / RETRACTED (2026-06-09; see the
+    module banner): the K^+ seminorm is degenerate, so Lambda^L is NOT a quantum-metric
+    distance and the "-> 0" is NOT a live convergence claim. This dataclass holds the
+    rate-formula evaluation only (a signature-agnostic spatial quantity), NOT a
+    Latremoliere propinquity. ***
+
+    Historical (withdrawn) form:
     Lambda^L(T_L_truncated, T_L_continuum)
         <= max(reach_B, reach_P, height_B, height_P)
         <= C_3^joint * gamma^joint
@@ -531,11 +538,14 @@ def compute_lorentzian_propinquity_bound(
     gamma_prec: int = 30,
     verify_riemannian_limit: bool = False,
 ) -> LorentzianPropinquityBound:
-    """Compute the K^+-restricted weak-form Lorentzian propinquity bound.
+    """Compute the (DESCOPED) K^+-restricted weak-form Lorentzian rate-formula.
 
     This is the main entry point for Sub-sprint D.  Assembles the
-    L1'-L4 ingredients via the LorentzianTunnelingPair and reads off
-    the Latremoliere propinquity bound under the K^+ weak-form framing.
+    L1'-L4 ingredients via the LorentzianTunnelingPair and reads off the
+    rate-formula value.  NOTE (2026-06-09, see module banner): the K^+
+    seminorm is degenerate, so the returned quantity is a rate-formula
+    evaluation, NOT a Latremoliere / quantum-metric propinquity distance
+    (that convergence claim is WITHDRAWN).
 
     Args:
         n_max: spatial Fock cutoff.
@@ -631,10 +641,11 @@ def lorentzian_gh_convergence_table(
     *,
     gamma_prec: int = 30,
 ) -> Dict[Tuple[int, int], LorentzianPropinquityBound]:
-    """Compute Lambda^L bounds at a sequence of (n_max, N_t) cells.
+    """Compute Lambda^L rate-formula values at a sequence of (n_max, N_t) cells.
 
     Returns a dict mapping (n_max, N_t) -> LorentzianPropinquityBound,
-    demonstrating the joint convergence rate.
+    tabulating the (DESCOPED) rate-formula value at each cell -- NOT a metric
+    convergence (the K^+ seminorm is degenerate; see module banner).
 
     Args:
         cell_list: list of (n_max, N_t) cells.

@@ -7,6 +7,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.48.3] - 2026-06-23
+
+### `/qa group1` — WHOLE-GROUP re-cert #2 (hardened detectors) — FAIL → remediated (PI-invoked)
+
+First pass with all three hardened detectors in place (per-paper C14 sharpening + C16
+code-docstring scope + the synthesis fix). Deterministic layer all-PASS.
+
+**Calibration: PERFECT — 10/10 seeds caught, specificity clean.** Both recovery tests
+passed: **claims-C CAUGHT the p46 "established at the metric level" descope seed it MISSED
+last run** (the generalized per-paper C14 enumerate-and-quote rule works), and the synthesis
+lead-in catch held. All v4.48.2 fixes + priors held as controls — no regression.
+
+**Dimension verdicts:** **Claims / Synthesis / Citation are now MATERIAL-CLEAN** (zero
+non-seed defects — first time; the detector hardening converged the LLM-judgment dimensions).
+The Code dimension carried the FAIL with **4 genuine SMALL defects, all the same
+code-docstring / cross-paper-consistency "stale-prose one-scope-over" class** (no
+logic/tolerance/false-positive defects beyond the seeds). **VERDICT: FAIL → remediated,
+not yet certified.**
+
+### Changed — remediation (the code-docstring-stale-prose class, swept comprehensively)
+- **geovac/lorentzian_propinquity_compact_temporal.py**: the v4.48.2 fix tagged only the
+  module docstring; the SIBLING docstrings (`LorentzianPropinquityBound` class, l.466;
+  `compute_lorentzian_propinquity_bound`, l.534; `lorentzian_gh_convergence_table`, l.634)
+  still stated the retracted convergence "→ 0" as live → inline WITHDRAWN/descoped tags +
+  "rate-formula, not a Latrémolière/quantum-metric distance" framing.
+- **geovac/gh_convergence.py** (l.26, 495) + **geovac/gh_convergence_tensor.py** (l.1112):
+  the established object mislabeled "Latrémolière quantum-GH propinquity" → "van Suijlekom
+  state-space GH distance (NOT the strictly-stronger Latrémolière propinquity; dual-reach =
+  named gap)".
+- **tests/test_paper29_int_alg.py** (l.16, 60): the test docstring/comment still cited the
+  fictitious "4s²+1" worked example (v4.48.2 fixed only the executable body) → "2s²+1 / s²+2"
+  (the real S⁵ N_max=2 factor).
+- **papers/.../paper_48_krein_ms_bridge.tex** (T5, l.2028): carried the pre-correction
+  "Π_W-odd per input (I2)" → mixed-parity (temporal γ⁰ odd, spatial D_GV even), matching the
+  v4.43.6-corrected Paper 43 input.
+- **tests/test_paper50_f_theorem.py**: module-global `mp.dps = 60` was polluted in mixed test
+  batches (co-running tests left global precision below the F-theorem 1e-40 contract → spurious
+  failures) → added an autouse fixture re-establishing/restoring 60 dps per test (the
+  precision-contract hazard, CLAUDE.md §3). Verified by a mixed-batch run.
+
+### Verification
+- C16 `--gate group1` PASS; 47 passed / 2 slow-skip (incl. the mixed-batch dps check);
+  p48 compiles errors=0. Worktree removed, leak-scan clean. Run record:
+  `debug/qa/group1_rc3_run_notes.md`.
+
+### Status — cert-bar decision point (PI)
+group1 NOT yet certified, but **convergence is now monotone and the residual is fully
+characterized**: across the three whole-group runs the defect severity went LARGE → SMALL →
+SMALL-code-docstring-only, calibration went 9/10 → 9/10 → 10/10, and the LLM-judgment
+dimensions (claims/synthesis/citation) are now material-clean. The ONLY remaining class is
+mechanical code-docstring stale-prose — not science, not judgment, not in the papers — which
+keeps re-surfacing one scope over each fresh-adversary pass. The strict /qa PASS bar (zero
+verified MATERIAL) makes this a FAIL; the open question for the PI is whether to (a) iterate
+strictly to zero, (b) set the certification bar at "calibrated + zero-LARGE + judgment-clean
++ deterministic-green + code-docstring-stale-prose = fix-on-sight NIT" (a frozen-criteria
+change), or (c) build a deterministic docstring-scan gate first, then iterate.
+
 ## [4.48.2] - 2026-06-23
 
 ### `/qa group1` — WHOLE-GROUP CONFIRMATION re-cert — FAIL → remediated (PI-invoked)

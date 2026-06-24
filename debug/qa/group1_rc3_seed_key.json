@@ -1,42 +1,19 @@
 {
-  "run": "group1 re-cert batch 3 (rc3) — Papers 29,39,40,50,52 + synthesis (results backbone), 2026-06-19",
-  "worktree_abs": "C:/Users/jlout/Desktop/geovac-qa-seed-group1-rc3",
-  "note": "C5/C11/C13/C14/C15 are deterministic, run separately on real corpus (no per-run LLM calibration). The 4 seeds below calibrate the 4 LLM dimensions (claims / citation / code / synthesis).",
-  "seeds": [
-    {
-      "id": "S-claims-C8",
-      "file": "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
-      "catcher": "claims-40",
-      "class": "C8 — flipped the honestly-named gap 'A fully rank-uniform analytical proof is a named gap' to 'is now complete (Theorem ...)'. The rank-uniform 4/pi analytical proof is OPEN (rank-1 rigorous, rank<=2 numerical); only the C3(G)=1 PRV asymptotic-tightness is established (do NOT conflate — that is control M3).",
-      "anchor": "analytical proof is\nnow complete (Theorem"
-    },
-    {
-      "id": "S-citation-C4",
-      "file": "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex",
-      "catcher": "citation-29",
-      "class": "C4 — Matsuura-Ohta 'Kazakov-Migdal model on graphs and the Ihara zeta function' (JHEP 09 (2022) 178) bibitem arXiv corrupted 2204.06424 -> 2210.06424 (a wrong ID; the LLM citation reviewer must web-verify the ID resolves to the claimed paper). Bibitem-only (no inline counterpart) so C15 does not apply.",
-      "anchor": "arXiv:2210.06424"
-    },
-    {
-      "id": "S-code-C2",
-      "file": "tests/test_paper50_f_theorem.py",
-      "catcher": "code-50",
-      "class": "C2 — the scalar KPS F-theorem bit-exact assertion 'assert abs(F_s - _F_s_kps()) < 10**(-40)' gutted to '< 10**(40)' (vacuous; any value passes, defeats the bit-exact check).",
-      "anchor": "< mp.mpf(10) ** (40)"
-    },
-    {
-      "id": "S-synthesis-C9",
-      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
-      "catcher": "synthesis",
-      "class": "C9 — Paper 50 status overstated from 'reproduces the KPS sphere F-theorem bit-exactly from the framework spectrum' (an arithmetic match) to 'derives the KPS sphere F-theorem from a conformal field theory calculation' (a CFT derivation — the C8 'arithmetic fact, not a CFT derivation' honesty line).",
-      "anchor": "derives\nthe Klebanov--Pufu--Sachdev sphere F-theorem from a conformal field\ntheory calculation"
-    }
-  ],
-  "controls_must_not_flag_material": [
-    {"id": "M1", "what": "p29 Ramanujan bound + integer-algebraic Ihara zeta zeros (no pi/transcendental in the Ihara polynomial factorizations) — genuine, must NOT be flagged."},
-    {"id": "M2", "what": "p39 C3 -> sqrt(2) triangle correction (the v4.25.0 B3 keystone fix; Pythagorean <1 was withdrawn) + k-fold -> sqrt(k) sketch — genuine, must NOT be flagged as wrong/overclaim."},
-    {"id": "M3", "what": "p40 rank-1 rigorous 4/pi AND the C3(G)=1 PRV asymptotic-tight-at-all-ranks result (Theorem prv_summand_bound) — both genuine; distinct from the rank-uniform 4/pi ANALYTICAL proof (which is the named gap = seed S-claims-C8). Must NOT flag the PRV tightness as overclaim."},
-    {"id": "M4", "what": "p50 bit-exact KPS sphere F-theorem ARITHMETIC match (S3 and S5; KPS value log2/8 - 3 zeta(3)/(16 pi^2)) — genuine, must NOT be flagged."},
-    {"id": "M5", "what": "p52 Category III discretization correspondence at the state-space GH level (framework analog of holography) — genuine, must NOT be flagged as overclaim."}
-  ]
+  "run": "/qa group1 WHOLE-GROUP re-cert #2 (hardened detectors) post v4.48.2",
+  "date": "2026-06-23",
+  "worktree": "../geovac-qa-rc3-group1 (from 5110a4a, v4.48.2)",
+  "key_tests": "claims-C must now CATCH the p46 descope seed it MISSED last run (generalized per-paper C14 rule); synthesis recovery must hold; v4.48.2 fixes must not regress.",
+  "seeds": {
+    "CODE-p53": "tests/test_paper53_disk_obstruction.py min(e1s)>0.15 -> >-1e9 (vacuous)",
+    "CODE-p46": "tests/test_paper46_c3_operator_system.py lop<1e-9 -> <1e9 (vacuous)",
+    "CLAIMS-A/p40": "C8 'named gap' -> 'now complete for every rank G'",
+    "CLAIMS-B/p44": "C14 'convergence is open' -> 'is established by this construction'",
+    "CLAIMS-C/p46-KEY": "C14 'strong-form ... is descoped' -> 'is established at the metric level' (the seed claims-C MISSED last run)",
+    "CLAIMS-D/p50": "C8 'bit-exact reproduction' -> 'derivation as genuine 3d CFTs'",
+    "CITE-A/p40": "C4 wrong-ID connes_vs 2004.14115 -> 2009.04510",
+    "CITE-B/p45": "C4 wrong-number vdD Proposition 4.1 -> 3.5",
+    "CITE-C/p50": "C4 wrong-author CHM 2011 + fabricated 4th author T. Faulkner",
+    "SYNTH": "C9 'the established K+ ... propinquity bound was [->0]' (recovery-hold test)"
+  },
+  "controls_must_not_flag": "p29 2s^2+1 worked example (v4.48.2); p45 inline-WITHDRAWN docstring (v4.48.2); p47 G1 'descoped' (v4.48.2); p47 C3=1; p53 Cesaro-positive; p50 S^7 DONE; p42 -I/+I; p43 mixed-parity; p40 panel-bounded C3"
 }

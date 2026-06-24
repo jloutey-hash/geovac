@@ -13,8 +13,9 @@ Cor `int_alg` makes a sharp distinction between two spectra:
     this is != 1, so the Bass polynomial is NON-monic => the Ihara zeros are
     algebraic over Q but NOT algebraic integers.
 
-The paper's worked example is the factor 4 s^2 + 1 (Ihara zeros +- i/2, NOT
-algebraic integers) versus its reciprocal s^2 + 4 (+- 2i, algebraic integers).
+The paper's worked example is the real S^5 N_max=2 factor 2 s^2 + 1 (Ihara zeros
++- i/sqrt(2), NOT algebraic integers) versus its reciprocal s^2 + 2 (+- i*sqrt(2),
+the Hashimoto T-eigenvalues, algebraic integers).
 
 This file is the backing for the corollary's keystone PRECISION -- the
 monic/non-monic split -- which the algebraicity-envelope test only covers at the
@@ -57,7 +58,7 @@ def _is_algebraic_integer(alpha) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# the corollary's literal worked example: 4 s^2 + 1  vs  s^2 + 4
+# the corollary's literal worked example: 2 s^2 + 1  vs  s^2 + 2 (real S^5 factor)
 # ---------------------------------------------------------------------------
 def test_worked_example_ihara_zero_not_integer_reciprocal_is():
     """The actual GeoVac S^5 N_max=2 closed-form factor is 2 s^2 + 1 (NON-monic):
