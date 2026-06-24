@@ -578,8 +578,10 @@ Paper~45 / Paper~46 main theorem,
 \Tcal^{L}_{\sthree\times \Sone_{T(\Nt)}}\bigr)
 \;\le\; \Cthreejoint(\nmax)\,\gammajoint\bigl(\nmax, \Nt, T(\Nt)\bigr),
 \end{equation}
-with $\Cthreejoint(\nmax) = \sqrt{1 - 1/\nmax} \to 1^{-}$
-(Paper~46~\S~4.3 envelope-aware form, $T$- and $\Nt$-independent) and
+with $\Cthreejoint(\nmax) = 1$ (Paper~38 Lemma~L3, gradient/translation
+seminorm; the earlier operator-norm envelope form $\sqrt{1 - 1/\nmax}$ is
+\emph{withdrawn} as operator-norm-false, see Paper~46~App.~A.3), $T$- and
+$\Nt$-independent, and
 \begin{equation}\label{eq:inner_rate}
 \gammajoint\bigl(\nmax, \Nt, T(\Nt)\bigr)
 \;=\; \max\bigl(O(\log\nmax/\nmax),\ O(T(\Nt)/\Nt)\bigr)
@@ -612,8 +614,9 @@ at every $T$.
 $[\DL, a_{s}\otimes a_{t}] = i[\DGV, a_{s}]\otimes a_{t}$ bit-exact for
 every $(\nmax, \Nt, T)$, because $[\gamma^{0}, a_{s}] = 0$ on the
 natural substrate and $[\partial_{t}, a_{t}] = 0$ for momentum-diagonal
-$a_{t}$. The constant $\Cthreejoint(\nmax, \Nt) \le \sqrt{1 - 1/\nmax}$
-is $T$- and $\Nt$-independent.
+$a_{t}$. The constant $\Cthreejoint(\nmax, \Nt) = 1$ (Paper~38 L3; the earlier
+$\sqrt{1 - 1/\nmax}$ operator-norm form is withdrawn) is $T$- and
+$\Nt$-independent.
 \item \textbf{L4 (Berezin, Paper~45~\S~5):} the joint Berezin map
 $B^{\mathrm{joint}} = B^{\SU(2)} \otimes B^{U(1)_{T}}$ has approximate
 identity with rate
@@ -1342,9 +1345,12 @@ $\Tcal^{L,\mathrm{pp}}_{S^{3} \times \R_{t}}$:
    \;\to\; 0
    \qquad \forall\, r > 0,
 \end{equation}
-where $\Cthreeop(\nmax) = \sqrt{1 - 1/\nmax}$ (Paper~46),
-$\gamma_{\nmax} = 2/(\nmax + 1)$ (Paper~45 L2), and
-$\epsilon(T) \to 0$ as $T \to \infty$.
+where $\Cthreeop(\nmax) = 1$ (Paper~38 Lemma~L3; the earlier
+$\sqrt{1 - 1/\nmax}$ operator-norm envelope form is \emph{withdrawn},
+Paper~46~App.~A.3), $\gamma_{\nmax} = O(\log\nmax/\nmax)$ (the Paper~45 L2
+Berezin approximate-identity rate; note $2/(\nmax+1)$ is the Plancherel
+mass-distribution maximum, not the rate, and the smoothing map has cb-norm
+$1$), and $\epsilon(T) \to 0$ as $T \to \infty$.
 \end{theorem}
 
 \begin{proof}

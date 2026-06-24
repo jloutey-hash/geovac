@@ -150,13 +150,15 @@ unexercised gating dimension forces **INCONCLUSIVE**, never PASS. Verdict = AND
 across dimensions. A clean dimension never short-circuits another; the run does
 not stop early on a pass.
 
-| Dimension | Criteria gated | Reviewer | Notes |
+Reviewer count per dimension follows the **granularity & scaling rule** in `qa.md` step 4 (set agents-per-dimension by depth-need, not uniformly) — the "Reviewer" column below gives the *type* and its native granularity, not a fixed per-paper count:
+
+| Dimension | Criteria gated | Reviewer (type · granularity) | Notes |
 |---|---|---|---|
-| Code / test-backing | C1, C2 | `code-reviewer` (one per in-scope paper with tests) | RUN the tests; does each *prove* its claim? |
-| Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` (one per in-scope paper) | prose ≤ tier; hard prohibitions intact |
-| External citations | C4 | `citation-reviewer` (one per in-scope paper) | cites resolve and say what we attribute |
+| Code / test-backing | C1, C2 | `code-reviewer` · **1 paper/agent** (does not consolidate) | RUN the tests; does each *prove* its claim? |
+| Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` · **chunk ~3–4 papers/agent** | prose ≤ tier; hard prohibitions intact |
+| External citations | C4 | `citation-reviewer` · **chunk ~5–6 papers/agent** | cites resolve and say what we attribute |
 | Synthesis faithfulness | C9 | `claims-reviewer` (one on the branch synthesis) | **separate dispatch** from per-paper claims |
-| Deterministic | C10, C11, C12, C13, C14, C15, C16 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py` — each `--gate <branch>`; + compile) | not an LLM reviewer |
+| Deterministic | C10, C11, C12, C13, C14, C15, C16 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
 
 **Enumeration mandate (the 2026-06-23 lesson).** Every LLM-reviewer prompt
 demands *exhaustive enumeration*, not sampling, of the low-salience structured

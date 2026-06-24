@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.48.0] - 2026-06-23
+
+### `/qa group1` — FIRST WHOLE-GROUP run (chunked panel) — FAIL → remediated (PI-invoked)
+
+First single-invocation `/qa` of an entire group: all 14 group1 papers (29, 39, 40,
+42–50, 52, 53) + the operator-algebras synthesis, exercising the new reviewer
+**granularity & scaling rule** (qa.md step 4 / criteria.md, authored earlier the same
+day). Validated that "run against the whole group at once" is feasible.
+
+**Orchestration (what the whole-group run proved out).**
+- **Deterministic layer FIRST, whole-group, ~0 tokens:** C5 / C10 (compile 14/14
+  errors=0) / C11 / C13 / C14 (436 `debug/` advisory) / C15 / C16 — **all PASS**. This is
+  the cheapest, most exhaustive cross-paper pass and caught the bulk of consistency drift
+  before any LLM dispatch.
+- **Chunked LLM panel, ~21 agents dispatched in waves** (no rate-limit failures):
+  code 1 paper/agent (12 agents incl. an analytic-trio audit for 47/48/52), claims chunked
+  ~3–4/agent (4 agents), citation chunked ~5/agent (3 agents), synthesis (1) + a
+  completeness pass. Per-chunk seeds planted in **non-first** papers so a consolidated agent
+  could not pass by reading only paper 1.
+- **Calibration: sensitivity 10/11, specificity clean** (all M1–M6 controls respected).
+  The single miss was the **synthesis** plant: the reviewer read past a planted "established
+  bound" lead-in because an intact retraction sentence sat 12 lines below — the run-#4
+  K-sentence lesson ("a live word near an intact retraction still counts") resurfacing in the
+  synthesis dimension. ⇒ synthesis dimension UNDER-CALIBRATED this run; a clean re-cert
+  requires a sharpened synthesis prompt. (The synthesis reviewer was not blind — it
+  independently caught a real `eq:p46_main` zombie.)
+
+**VERDICT: FAIL → remediated** (not a certification — a clean confirmation re-run is still
+required). Five genuine non-seed MATERIAL defects, dominated by one recurring CLASS:
+
+### Changed — remediation (the √(1−1/n_max) "C3^op" zombie class, swept corpus-wide)
+- **Paper 47** (`paper_47_two_rate_hybrid_convergence.tex`): Thm `inner` (eq:inner_bound)
+  and Thm `g2_metric` (eq:g2_metric_bound) cited the **withdrawn operator-norm envelope
+  constant** `C_3^op/C_3^joint = √(1−1/n_max)` (attributed to Paper 46, which retracted it in
+  App. A.3) as a live constant → collapsed to **C₃=1** (Paper 38 Lemma L3, gradient/translation
+  seminorm), with the √ form explicitly tagged withdrawn. Also fixed the g2_metric rate
+  `γ = 2/(n+1)` (the Plancherel mass-distribution maximum) → the Berezin approximate-identity
+  rate `O(log n_max/n_max)`, consistent with the paper's own Thm `inner` (cb-norm is 1).
+- **Synthesis** (`group1_operator_algebras_synthesis.tex`): `eq:p46_main` printed the same
+  √(1−1/n_max) as a live "closed-form … surviving verbatim from Paper 45" → marked withdrawn
+  (correct comparison C₃=1, Paper 38 L3). v4.40/4.41 had collapsed C3^op→C₃=1 in p45/p46 only;
+  this transports the fix to the two papers the prior sweeps never reached.
+- **Paper 53 backing** (`tests/test_paper53_plane_bochner_riesz.py`): the plane-test docstring
+  attributed the −0.13 disk positivity failure to the Cesàro/Markov–Cesàro construction (the
+  withdrawn conflation) → re-attributed to the **heat** weight (Cesàro s≥2 PRESERVES positivity;
+  the genuine obstruction is the non-decaying rate, weight-robust).
+- **Paper 45 backing** (`geovac/lorentzian_propinquity_compact_temporal.py`):
+  `lorentzian_theorem_statement()` returned the **retracted** K⁺-restricted weak-form Lorentzian
+  propinquity convergence theorem (+ C₃^joint→1⁻) as "the Theorem 4.1 statement for inclusion in
+  Paper 45," with `tests/test_lorentzian_propinquity.py::TestTheoremStatement` *pinning* the
+  zombie keywords — the v4.43.5 code-side-zombie pattern surviving in the p45 module. Rewrote the
+  function to return the current **K⁺-annihilation** headline (with the convergence form clearly
+  WITHDRAWN) and rewrote the test to assert the current claim + guard the zombie from re-entering.
+
+### Added — C16 maintenance (the gate now catches the class that re-surfaced)
+- `debug/qa/check_retracted_terms.py`: new `withdrawn-c3op-envelope-sqrt` REGISTRY entry
+  (FAIL severity) matching the `√(1−1/n_max)` operator-norm envelope form across the Lorentzian
+  cluster + synthesis, exempt only near a withdrawal flag. C16's existing "Pythagorean" pattern
+  did not match the √ envelope expression — which is precisely why the class re-surfaced in
+  p47/synthesis. Re-run PASS (35 occurrences all withdrawal-flagged, 0 live). Per the
+  maintenance rule (when a /qa run retires a claim, add its phrase to C16).
+
+### Verification
+- All edited papers compile errors=0 (p47, synthesis three-pass clean). C16 `--gate group1` PASS.
+  `tests/test_lorentzian_propinquity.py::TestTheoremStatement` + `test_retracted_terms_check.py`
+  + `test_paper53_plane_bochner_riesz.py` green (11 passed). Worktree removed; leak-scan clean.
+- Run record: `debug/qa/group1_whole_run_notes.md`; seed key `debug/qa/group1_whole_seed_key.json`.
+
+### Coverage gaps raised (not fixed this run)
+- Paper 29 Cor `int_alg` (reciprocal Ihara zeros = algebraic integers) has no backing test —
+  LARGE, recurring, math is true (3-line backfill). Flavor-B durability: load-bearing backing on
+  prunable `debug/` paths (p49 96/96 chain, p50 S⁷ ladder, p46/47/48 panels) — migration backfill.
+  Paper 29 Dirac-B3 tests hang ~40 min un-`@slow`. Assorted cosmetic citation/comment NITs.
+
 ## [4.47.0] - 2026-06-23
 
 ### Added — /qa hardening (the recurring-zombie lesson, PI-directed)

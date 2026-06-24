@@ -143,6 +143,32 @@ REGISTRY = [
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
         ],
     },
+    {
+        "id": "withdrawn-c3op-envelope-sqrt",
+        "scope": "group1",
+        "severity": "fail",
+        "retired": "2026-06-23 (Papers 45/46; surfaced live in 47+synthesis on the "
+                   "first whole-group /qa): the operator-norm 'C3^op / Cthreejoint' "
+                   "envelope constant sqrt(1 - 1/n_max) (= sup_{N<=2n_max-1} "
+                   "sqrt((N-1)/(N+1))) is operator-norm-FALSE; the correct Paper-38 "
+                   "Lemma-L3 (gradient/translation seminorm) value is C_3 = 1. NOTE: "
+                   "Paper 38's own per-harmonic sqrt((N-1)/(N+1)) gradient ratio is the "
+                   "LEGIT form and is a DIFFERENT expression -- not matched here.",
+        # zombie signature = the ENVELOPE form sqrt(1 - 1/n_max) specifically
+        # (matches \sqrt{1 - 1/\nmax}, \sqrt{1-1/n_{\max}}, sqrt(1 - 1/n_max)).
+        "pattern": r"\\?sqrt\s*[\{(]\s*1\s*-\s*1\s*/\s*\\?n_?\{?\\?max",
+        "exempt_if_nearby": r"withdrawn|WITHDRAWN|retract|operator-norm-false"
+                            r"|\bfalse\b|earlier|historical|App\.?~?A\.3|do\s+NOT",
+        "files": [
+            "papers/group1_operator_algebras/paper_44_*.tex",
+            "papers/group1_operator_algebras/paper_45_*.tex",
+            "papers/group1_operator_algebras/paper_46_*.tex",
+            "papers/group1_operator_algebras/paper_47_*.tex",
+            "papers/group1_operator_algebras/paper_48_*.tex",
+            "papers/group1_operator_algebras/paper_49_*.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
 ]
 
 

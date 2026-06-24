@@ -1,9 +1,12 @@
 """Paper 53 backing test: the boundaryless plane R^2_alpha Bochner-Riesz Berezin.
 
 Paper 53's genuine convergent carrier is NOT the finite-radius Dirichlet disk
-(whose Markov-Cesaro reconstruction is obstructed by the boundary -- positivity
-fails, min g < 0, and the interior approximate-identity error does NOT decay:
-the disk driver gives Lambda^{+0.07}, not a convergent rate).  The CLEAN route,
+(whose reconstruction is obstructed by the boundary: the interior
+approximate-identity error does NOT decay -- the disk driver gives
+Lambda^{+0.07}, not a convergent rate -- and, separately, the HEAT weight
+fails positivity there (min g ~ -0.13, the Gibbs failure) while the Cesaro
+weight s>=2 PRESERVES positivity (min g > 0); the obstruction is the
+non-decaying rate, weight-robust, NOT a Cesaro positivity failure).  The CLEAN route,
 already invoked in the paper as the cure, is the de-compactified cone = the
 boundaryless plane R^2 via the 2D Bochner-Riesz / Cesaro band-limit of the
 Hankel transform:
@@ -105,7 +108,9 @@ def test_plane_bochner_riesz_positivity() -> None:
 
     Checked on the (everywhere-positive) Gaussian; the reconstructed g must stay
     non-negative up to small numerical/quadrature tolerance -- the opposite of
-    the finite-disk Markov-Cesaro construction, where min g reaches ~ -0.13.
+    the finite-disk HEAT weight, where min g reaches ~ -0.13 (the disk Cesaro
+    weight, by contrast, preserves positivity; the disk obstruction is the
+    non-decaying rate, not a Cesaro positivity failure).
     """
     d = _TESTS["gaussian"]
     f, fhat = d["f"], d["fhat"]

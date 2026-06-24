@@ -345,24 +345,30 @@ class TestFiveLemmaStatus:
 
 
 class TestTheoremStatement:
-    """Tests for the formal Theorem 4.1 statement (for Paper 45)."""
+    """Tests for the CURRENT Paper 45 headline statement (the K^+ annihilation
+    theorem). Guards against the WITHDRAWN weak-form convergence theorem
+    re-entering the returned string (the v4.43.5 code-side-zombie pattern)."""
 
-    def test_statement_contains_key_pieces(self):
-        """The theorem statement contains the K^+-restricted weak-form framing."""
+    def test_statement_is_the_annihilation_theorem(self):
+        """The current headline is the K^+ annihilation (degeneracy) theorem."""
         stmt = lorentzian_theorem_statement()
-        assert "Lambda^L" in stmt
-        assert "C_3^joint" in stmt
-        assert "gamma^joint" in stmt
-        assert "K^+" in stmt
-        assert "Paper 38" in stmt
-        assert "weak-form" in stmt
-        assert "Latremoliere" in stmt
+        assert "annihilat" in stmt.lower()
+        assert "vanishes identically" in stmt or "P_+ (D_GV (x) I) P_+ = 0" in stmt
+        assert "DEGENERATE" in stmt or "degenerate" in stmt.lower()
+        # the surviving convergence is van Suijlekom STATE-SPACE GH, not propinquity
+        assert "state-space" in stmt.lower()
+
+    def test_withdrawn_convergence_claim_is_flagged_not_live(self):
+        """If the retracted weak-form convergence form is mentioned, it must
+        carry the WITHDRAWN/retracted flag -- never presented as live."""
+        stmt = lorentzian_theorem_statement()
+        if "C_3^joint" in stmt or "-> 0" in stmt:
+            assert "WITHDRAWN" in stmt or "retracted" in stmt.lower()
 
     def test_statement_names_honest_scope(self):
-        """The theorem statement explicitly names the strong-form gap."""
+        """The statement explicitly names the strong-form open gap."""
         stmt = lorentzian_theorem_statement()
         assert "Honest scope" in stmt or "strong-form" in stmt
-        assert "K^+ restriction" in stmt or "K^+-restricted" in stmt
 
 
 # ---------------------------------------------------------------------------
