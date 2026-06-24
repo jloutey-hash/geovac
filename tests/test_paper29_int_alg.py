@@ -60,21 +60,38 @@ def _is_algebraic_integer(alpha) -> bool:
 # the corollary's literal worked example: 4 s^2 + 1  vs  s^2 + 4
 # ---------------------------------------------------------------------------
 def test_worked_example_ihara_zero_not_integer_reciprocal_is():
-    """+- i/2 (Ihara zeros, roots of the NON-monic 4 s^2 + 1) are NOT algebraic
-    integers; +- 2i (their reciprocals, roots of the MONIC s^2 + 4) ARE."""
+    """The actual GeoVac S^5 N_max=2 closed-form factor is 2 s^2 + 1 (NON-monic):
+    its Ihara zeros +- i/sqrt(2) are NOT algebraic integers; their reciprocals
+    +- i*sqrt(2) (the Hashimoto T-eigenvalues, roots of the MONIC s^2 + 2) ARE."""
     s = sp.symbols("s")
-    ihara_factor = sp.Poly(4 * s**2 + 1, s)          # the Ihara-zero side
-    recip_factor = sp.Poly(s**2 + 4, s)              # the reciprocal side
-    assert ihara_factor.LC() == 4                    # non-monic
+    ihara_factor = sp.Poly(2 * s**2 + 1, s)          # the Ihara-zero side (real S^5 factor)
+    recip_factor = sp.Poly(s**2 + 2, s)              # the reciprocal side
+    assert ihara_factor.LC() == 2                    # non-monic
     assert recip_factor.LC() == 1                    # monic
-    # i/2 is a root of 4s^2+1 and is NOT an algebraic integer
-    assert ihara_factor.eval(sp.I / 2) == 0
-    assert not _is_algebraic_integer(sp.I / 2)
-    # 2i is a root of s^2+4 and IS an algebraic integer
-    assert recip_factor.eval(2 * sp.I) == 0
-    assert _is_algebraic_integer(2 * sp.I)
-    # they are exact reciprocals: (i/2) * (-2i) = 1
-    assert sp.simplify((sp.I / 2) * (-2 * sp.I)) == 1
+    z = sp.I / sp.sqrt(2)                            # an Ihara zero of 2s^2+1
+    assert sp.simplify(ihara_factor.as_expr().subs(s, z)) == 0
+    assert not _is_algebraic_integer(z)             # i/sqrt(2): min poly 2x^2+1, LC 2
+    recip = -sp.I * sp.sqrt(2)                       # its reciprocal (a T-eigenvalue)
+    assert sp.simplify(recip_factor.as_expr().subs(s, recip)) == 0
+    assert _is_algebraic_integer(recip)             # i*sqrt(2): min poly x^2+2, LC 1
+    # exact reciprocals: (i/sqrt2) * (-i*sqrt2) = 1
+    assert sp.simplify(z * recip) == 1
+
+
+def test_s5_nmax2_factor_is_2s2plus1_live():
+    """Tie the corollary's worked example to the LIVE framework: the S^5 N_max=2
+    Ihara zeta^{-1} genuinely contains the factor (2 s^2 + 1) (recomputed via
+    ihara_zeta_bass on the live Bargmann graph), and that factor carries the
+    non-monic (Ihara-zeros-not-algebraic-integer) signature of Cor int_alg."""
+    from geovac.nuclear.bargmann_graph import build_bargmann_graph
+    s = sp.symbols("s")
+    A = (build_bargmann_graph(2).adjacency_dense() != 0).astype(int)
+    zeta = ihara_zeta_bass(A, symbolic=True)
+    num, _ = sp.fraction(sp.together(1 / zeta))
+    _, remainder = sp.div(sp.expand(num), 2 * s**2 + 1, s)
+    assert sp.simplify(remainder) == 0, "2 s^2 + 1 must divide the live S^5 N_max=2 zeta^{-1}"
+    assert sp.Poly(2 * s**2 + 1, s).LC() == 2          # non-monic => Ihara zeros not alg-int
+    assert not _is_algebraic_integer(sp.I / sp.sqrt(2))
 
 
 # ---------------------------------------------------------------------------

@@ -41,9 +41,11 @@ the K^+-restrictions T_L_continuum^+ = P^+ T_L_continuum P^+ and
 T_L_truncated^+ = P^+ T_L_truncated P^+, on which J = +I and the Krein
 product reduces to a genuine Hilbert-space inner product.
 
-**Theorem (Sub-sprint D main result; Paper 45 §5).** *The truncated Krein
-spectral triples T_L_truncated converge to T_L_continuum in the
-K^+-restricted weak-form Lorentzian Latremoliere propinquity:*
+**Theorem (Sub-sprint D; Paper 45 §5) -- WITHDRAWN / RETRACTED 2026-06-09
+(see banner above); retained ONLY as the historical statement the K^+
+degeneracy annihilates, NOT a live result -- do NOT cite.** *[Historical]
+The truncated Krein spectral triples T_L_truncated converge to T_L_continuum
+in the K^+-restricted weak-form Lorentzian Latremoliere propinquity:*
 
     Lambda^L(T_L_truncated, T_L_continuum)  <=  C_3^joint * gamma^joint   ->  0
 
@@ -81,7 +83,9 @@ the operator level (Sub-sprint C §6 Lemma 6.1), so K^+ is a J-eigenspace
 where Latremoliere 2017's Riemannian propinquity machinery transfers
 verbatim under the Wick-rotated metric convention.
 
-The claim of priority is therefore precisely:
+The claim of priority [WITHDRAWN 2026-06-09 with the convergence theorem
+above -- the K^+ seminorm is degenerate, so this priority claim no longer
+stands] was:
   - The K^+-restricted weak-form Lorentzian Latremoliere propinquity
     has not been previously defined nor convergence-proved on truncated
     Krein spectral triples in the published math.OA literature.

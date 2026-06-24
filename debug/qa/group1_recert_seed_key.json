@@ -1,0 +1,26 @@
+{
+  "run": "/qa group1 — WHOLE-GROUP CONFIRMATION re-cert (post v4.48.0/.1)",
+  "date": "2026-06-23",
+  "worktree": "../geovac-qa-recert-group1 (from cad3394, v4.48.1)",
+  "purpose": "confirm v4.48.0/.1 fixes held (specificity) + synthesis calibration RECOVERY (sharpened claims-reviewer must catch the lead-in seed) + no new defects.",
+  "seeds": [
+    {"id": "CODE-p40", "dim": "code", "file": "tests/test_paper40_universal_rate.py", "defect": "vacuous tol 0.05->5.0 (4/pi convergence check defanged)", "catcher": "code-40"},
+    {"id": "CODE-p50", "dim": "code", "file": "tests/test_paper50_f_theorem.py", "defect": "vacuous tol 10^-40 -> 10^+40 (bit-exact F-theorem check defanged)", "catcher": "code-50"},
+    {"id": "CLAIMS-A", "dim": "claims", "chunk": "[29,39,40]", "file": "paper_40", "defect": "C8: 'named gap' -> 'now complete for every rank G' (rank-uniform overclaim)", "catcher": "claims-A (non-first)"},
+    {"id": "CLAIMS-B", "dim": "claims", "chunk": "[42,43,44]", "file": "paper_44", "defect": "C14: 'convergence is open' -> 'is established by this construction'", "catcher": "claims-B (non-first)"},
+    {"id": "CLAIMS-C", "dim": "claims", "chunk": "[45,46,47]", "file": "paper_46", "defect": "C14: 'strong-form ... is descoped' -> 'is established at the metric level'", "catcher": "claims-C (non-first)"},
+    {"id": "CLAIMS-D", "dim": "claims", "chunk": "[48,49,50,52,53]", "file": "paper_52", "defect": "C8: 'bit-exact reproductions' -> 'genuine derivation of the standard CFTs'", "catcher": "claims-D (non-first)"},
+    {"id": "CITE-A", "dim": "citation", "chunk": "[29,39,40,42,43]", "file": "paper_39", "defect": "C4 wrong-ID: farsi_latremoliere2024 arXiv:2404.00240 -> 2410.09988 (fabricated)", "catcher": "cite-A (non-first)"},
+    {"id": "CITE-B", "dim": "citation", "chunk": "[44,45,46,47,48]", "file": "paper_45", "defect": "C4 wrong-number: van den Dungen 2016 Proposition 4.1 -> 7.2", "catcher": "cite-B (non-first)"},
+    {"id": "CITE-C", "dim": "citation", "chunk": "[49,50,52,53]", "file": "paper_50", "defect": "C4 wrong-author: Casini-Huerta-Myers 2011 'R. C. Myers' -> 'M. Smolkin'", "catcher": "cite-C (non-first)"},
+    {"id": "SYNTH-leadin", "dim": "synthesis", "file": "synthesis l.~269-270", "defect": "C9 retracted-bound-shown-as-live: 'the established K+ ... propinquity bound was [->0]' (inline retraction removed; retraction sentence still 12 lines below). THE calibration-recovery test for the sharpened claims-reviewer.", "catcher": "synthesis (sharpened)"}
+  ],
+  "controls_must_not_flag": [
+    {"id": "F1", "claim": "p47 Cthreeop/Cthreejoint = C_3 = 1 (Paper 38 L3); the sqrt(1-1/nmax) form correctly WITHDRAWN", "status": "v4.48.0 fix; must NOT be flagged as wrong or as needing the sqrt form"},
+    {"id": "F2", "claim": "synthesis eq:p46_main sqrt(1-1/nmax) marked withdrawn -> C_3=1", "status": "v4.48.0 fix"},
+    {"id": "F3", "claim": "p53 plane-test docstring: -0.13 = HEAT weight (Cesaro preserves)", "status": "v4.48.0 fix"},
+    {"id": "F4", "claim": "p45 lorentzian_theorem_statement() = K+ annihilation headline (convergence WITHDRAWN)", "status": "v4.48.0 fix (code)"},
+    {"id": "F5", "claim": "p29 Cor int_alg backed by test_paper29_int_alg.py (reciprocal=alg-int, Ihara-zeros-not)", "status": "v4.48.1 backfill; must NOT be flagged as untested"},
+    {"id": "M1-M6", "claim": "p42 -I/+I closure; p43 spatial D_W Pi_W-even; p53 Cesaro-positive/heat-fails; p29 reciprocal-alg-int; p40 panel-bounded C3 (asymptotic PRV); p50 S^7 DONE in-ring", "status": "all prior fixes; must NOT regress"}
+  ]
+}

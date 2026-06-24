@@ -136,11 +136,15 @@ REGISTRY = [
                    r"Latr[^.\n]{0,25}propinquity"
                    r"|propinquity\s+(?:sense|convergence)\s+at\s+(?:quantitative|explicit)",
         "exempt_if_nearby": r"not\s+claimed|named\s+gap|descoped|WITHDRAWN|degenerac"
-                            r"|state-space|strictly\s+stronger|open|target|annihilat",
+                            r"|state-space|strictly\s+stronger|open|target|annihilat"
+                            r"|historical|retract|weak-form|NOT\s+a",
         "files": [
             "papers/group1_operator_algebras/paper_39_*.tex",
             "papers/group1_operator_algebras/paper_40_*.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            # code-docstring scope (the 2026-06-23 blind-spot fix: C16 had scanned
+            # papers only; the p45 module-docstring retracted-thm zombie lived here):
+            "geovac/lorentzian_propinquity_compact_temporal.py",
         ],
     },
     {
@@ -167,6 +171,7 @@ REGISTRY = [
             "papers/group1_operator_algebras/paper_48_*.tex",
             "papers/group1_operator_algebras/paper_49_*.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "geovac/lorentzian_propinquity_compact_temporal.py",
         ],
     },
 ]

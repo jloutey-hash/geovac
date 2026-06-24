@@ -7,6 +7,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.48.2] - 2026-06-23
+
+### `/qa group1` — WHOLE-GROUP CONFIRMATION re-cert — FAIL → remediated (PI-invoked)
+
+The certifying confirmation re-run after v4.48.0/.1. Deterministic layer all-PASS
+(C16 now also scans the geovac lorentzian code module). **Calibration 9/10,
+specificity clean.** The headline result: **the SYNTHESIS calibration RECOVERED** —
+the sharpened claims-reviewer (v4.48.1) flagged the re-planted "the *established*
+K⁺ … propinquity bound *was* … → 0" lead-in **despite** the retraction sentence 12
+lines below. All v4.48.0/.1 fixes HELD under fresh review (p45 function, p53
+docstring, p46 C₃=1, synthesis √-withdrawn, p29 int_alg backfill). **VERDICT: FAIL →
+remediated — not yet certified.**
+
+### Changed — remediation (3 genuine SMALL non-seed defects, fresh-adversary finds)
+- **Paper 29** (`paper_29_ramanujan_hopf.tex`): the Cor `int_alg` worked example and
+  `obs:galois` cited a **non-existent** closed-form factor `4s²+1`; the live S⁵ N_max=2
+  Ihara ζ⁻¹ factors as `…(2s²+1)²…` (verified via `ihara_zeta_bass`). Corrected to
+  `2s²+1` (Ihara zeros ±i/√2, not algebraic integers) / reciprocal `s²+2` (±i√2, the
+  monic T-eigenvalue side). `tests/test_paper29_int_alg.py` updated to the real factor
+  + a new `test_s5_nmax2_factor_is_2s2plus1_live` that recomputes the S⁵ ζ⁻¹ and
+  confirms `(2s²+1)` divides it (ties the worked example to the live framework).
+- **geovac/lorentzian_propinquity_compact_temporal.py**: the module-docstring inner
+  Theorem block + priority claim stated the retracted K⁺ weak-form convergence theorem
+  as live present-tense prose *under* (not within) the top retraction banner (the
+  v4.38.0 fix was banner-only). Added inline WITHDRAWN/RETRACTED tags to the theorem
+  statement and the priority claim, matching the v4.48.0 function-level fix.
+- **Paper 47** (`paper_47_two_rate_hybrid_convergence.tex`): §1 G1 gap-list said
+  strong-form Lorentzian propinquity is "closed on the natural substrate in Paper 46" —
+  but Paper 46 is DESCOPED → "descoped (rate-formula only, metric-level convergence
+  open, as that seminorm is degenerate)".
+- (Reconciled NIT, not changed: the synthesis Lemma-L5 "Latrémolière propinquity
+  assembly" flag — matches Paper 38's own lemma name; prior-reconciled v4.43.3.)
+
+### Changed — calibration / blind-spot fixes (the durable wins)
+- **`.claude/agents/claims-reviewer.md`**: the descope "enumerate-and-quote every status
+  clause" rule (added synthesis-only in v4.48.1) GENERALIZED to **per-paper C14** review.
+  The re-cert exposed that `claims-C` MISSED its planted p46 "established at the metric
+  level" seed because it harmonised the live clause with the "(degenerate)" qualifier in
+  the same sentence — the per-paper analog of the synthesis miss. Rule now: "a nearby
+  hedge does NOT cure a live-sounding clause; treat the live clause and its hedge as
+  separate items and flag the live one" — both miss directions recorded.
+- **C16** (`debug/qa/check_retracted_terms.py`): added
+  `geovac/lorentzian_propinquity_compact_temporal.py` to the propinquity + withdrawn-c3op
+  entries — closing the code-docstring blind spot `code-45` named (C16 had scanned
+  `papers/*.tex` only, so a retracted-theorem zombie in a `geovac/` docstring was
+  invisible to the deterministic gate).
+
+### Verification
+- p29 + p47 compile errors=0. C16 `--gate group1` PASS (38 occurrences withdrawal-flagged,
+  0 live; now scanning the lorentzian code module). `tests/test_paper29_int_alg.py` (7) +
+  `test_retracted_terms_check.py` (5) + `TestTheoremStatement` (2) green. Worktree removed,
+  leak-scan clean. Run record: `debug/qa/group1_recert_run_notes.md`.
+
+### Status / coverage honesty
+group1 NOT yet certified. Convergence is tightening: zero LARGE this run, all residuals
+SMALL, synthesis calibration recovered, two calibration/blind-spot mechanisms closed.
+Coverage limitation: Wave B (rest of code: p39/42/43/44/49 + analytic-trio 47/48/52) was
+not re-run this turn (verdict is FAIL regardless; those papers had no v4.48.0 change and
+were clean in the prior whole-group run), and the `claims-C` chunk was under-calibrated
+this run (now addressed by the prompt fix, needs re-validation). The recurring "fresh
+adversaries surface new latent SMALL items each pass" reality is now a standing PI
+decision: keep iterating toward a clean PASS, or set the certification bar at
+"calibrated panel / zero-LARGE / all-SMALL-fixed / deterministic-green."
+
 ## [4.48.1] - 2026-06-23
 
 ### Re-cert prep for the group1 whole-group run (PI-directed)
