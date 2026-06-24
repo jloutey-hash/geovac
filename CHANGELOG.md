@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.48.1] - 2026-06-23
+
+### Re-cert prep for the group1 whole-group run (PI-directed)
+
+Two of the v4.48.0 follow-ons, done before the certifying confirmation re-run:
+
+- **Coverage backfill — Paper 29 Cor `int_alg` (the recurring keystone-precision gap).**
+  New `tests/test_paper29_int_alg.py` backs the algebraic-integer dichotomy at the
+  precision the corollary asserts: the **reciprocal** Ihara zeros (Hashimoto
+  T-eigenvalues) are algebraic *integers* because T is 0/1 ⇒ monic ℤ characteristic
+  polynomial; the Ihara zeros *themselves* are algebraic over ℚ but **not** algebraic
+  integers because the Bass polynomial det(I−sA+s²Q) is non-monic (leading coeff
+  det Q = ∏(d_v−1) ≠ 1, witnessed cleanly on K4 = 16). Includes the corollary's literal
+  worked example (4s²+1 ↦ ±i/2 not algebraic integers, vs s²+4 ↦ ±2i which are) via the
+  sympy minimal-polynomial LC=±1 discriminator, and the live-graph S³ Hashimoto-integrality
+  check. Recompute-from-framework, not hardcoded. The prior algebraicity-envelope test
+  backed only the weaker "algebraic over ℚ"; this closes the gap raised across rc3 and the
+  whole-group run. `claim_test_matrix.md` updated (BACKED-SOUND).
+- **Reviewer sharpening — `claims-reviewer` synthesis rule (the SYNTH-miss lesson).** Added
+  the synthesis analog of the rule-5 K-tripwire discipline: for every DESCOPED / RETRACTED /
+  WITHDRAWN result, enumerate-and-quote *every* synthesis sentence stating that result's
+  strength; a live-sounding lead-in ("the **established** bound", "this **closes** …", "the
+  bound **was** … → 0") is a MATERIAL zombie **even when a retraction sentence sits elsewhere
+  in the same paragraph** — a nearby "(retracted)" does not cure a live lead-in (a
+  self-contradicting paragraph still FAILS). This is the exact failure the whole-group run's
+  synthesis reviewer hit (read past a planted "established K⁺ bound … → 0" lead-in because a
+  retraction sentence sat 12 lines below).
+
+**Deferred (flagged, not done):** the Flavor-B `debug/`-path durability migration. The p49
+load-bearing backing pulls a connected cluster of 13 `wh7_b*` drivers consumed by 8 test
+files with shared cross-imports (`wh7_b1_joint_product_gh` feeds both p45 and p49); a partial
+move breaks siblings and a clean move is a ~21-edit mini-sprint touching the whole WH7 test
+chain. The code reviewers graded it a NIT/durability concern, not a cert blocker, so it is a
+dedicated follow-up sprint rather than fold-in-before-the-cert work.
+
 ## [4.48.0] - 2026-06-23
 
 ### `/qa group1` — FIRST WHOLE-GROUP run (chunked panel) — FAIL → remediated (PI-invoked)
