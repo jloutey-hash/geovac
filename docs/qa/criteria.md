@@ -25,6 +25,22 @@ claim's tier, a test's validity, a citation's referent, or a reader's takeaway
 Everything else (wording, formatting, clarity) is a **NIT**: logged, never
 blocking.
 
+**Code-docstring stale-prose is a NIT class (2026-06-24 PI direction, set at group1
+certification).** Stale/withdrawn prose living in a `geovac/*.py` or `tests/*.py`
+**docstring or comment** — e.g. a retracted convergence statement left as live prose,
+or a result mislabeled "Latrémolière propinquity" where it is van Suijlekom state-space
+GH — is a **fix-on-sight NIT, not a MATERIAL cert blocker**, *provided* the authoritative
+source (the paper), the claim's tier, and the test's *logic/tolerances* are all correct.
+Rationale: the paper — not the code docstring — is the authoritative source (§1); such
+prose changes no result, claim, tier, or reader-of-the-paper takeaway; it is a long tail
+(every backing-module docstring is a potential site) that fresh-adversary passes surface
+one-scope-over indefinitely; and it is cheaply caught on sight by `code-reviewer` + the
+**C16 docstring gate** (the propinquity / withdrawn-c3op entries now scan the backing
+code modules, advisory severity). A code-docstring zombie that has drifted into a *paper*,
+or that corrupts a test's *logic* (wrong tolerance, tautology, false-positive), remains
+MATERIAL. This refines (does not relax) the §"Material vs nit" counterfactual: a code
+docstring is not "a result, claim, tier, citation, or paper-reader takeaway."
+
 ## Verdict rule
 
 A branch **PASSES** only when a *calibrated* reviewer panel returns **zero

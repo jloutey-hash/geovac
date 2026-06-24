@@ -4,8 +4,17 @@
 > file supplies only group1-specific scope + deltas + the branch-specific
 > criterion C14.
 
-> **STATUS: DRAFTED 2026-06-16 — NOT YET FROZEN.** Sequenced *after* group3
-> bite 2. Awaiting PI confirmation of scope + first bite before FREEZE.
+> **STATUS: CERTIFIED 2026-06-24 (v4.49.0).** group1 (Papers 29/39/40/42–50/52/53
+> + synthesis) is certified at the bar set by PI direction at certification:
+> **calibrated panel (the v4.48.3 whole-group run scored 10/10 sensitivity, clean
+> specificity) + zero verified MATERIAL in the authoritative dimensions
+> (papers / claims / synthesis / citations / test-logic) + deterministic-green
+> (C5/C10/C11/C13/C14/C15/C16)**, with code-docstring stale-prose reclassified as a
+> fix-on-sight NIT (see `criteria.md` §"Material vs nit", 2026-06-24) surfaced by the
+> C16 docstring gate. Certification arc: 3 whole-group runs (v4.48.0 → v4.48.2 →
+> v4.48.3), monotone convergence (severity LARGE→SMALL→docstring-only; calibration
+> 9/10→9/10→10/10; the LLM-judgment dimensions reached material-clean). Corrections
+> are applied in place; re-run `/qa group1` any time to re-confirm.
 
 **Scope (non-trunk group1):** Papers **29, 39, 40, 42, 43, 44, 45, 46, 47, 48,
 49, 50, 52, 53** + the **group1 operator-algebras synthesis**. Trunk papers
@@ -448,3 +457,18 @@ group1 paper restates them (C7).
   run_panel never called) → named backfill follow-on. Flavor C (p52 "61 digits") dissolved (true claim).
   Strings/docstrings only; affected tests green. **Code dimension MATERIAL-clean beyond the seeds +
   the flagged p40 C₃ gap; Flavor A swept corpus-wide.** Memo: debug/sprint_qa_group1_batch3_code_memo.md.
+- 2026-06-23/24 — **WHOLE-GROUP cert arc → CERTIFIED** (v4.43.6 … v4.49.0; per-run detail in
+  CHANGELOG.md). The batch arc was superseded by three single-invocation **whole-group** `/qa group1`
+  runs once the chunked-panel granularity rule (qa.md step 4) made it feasible:
+  **v4.48.0** (first whole-group; FAIL→remediated — √(1−1/n_max) C3^op zombie class swept p47+synthesis;
+  synthesis under-calibrated), **v4.48.2** (FAIL→remediated — synthesis calibration RECOVERED via the
+  sharpened reviewer; p45/p29/p47 SMALL fixes; claims-C under-calibrated), **v4.48.3** (FAIL→remediated —
+  **calibration PERFECT 10/10**, both recovery tests passed, **papers/claims/synthesis/citation
+  MATERIAL-CLEAN**; the only residual was the code-docstring stale-prose class, swept comprehensively).
+  Seed keys `group1_whole_seed_key.json`, `group1_recert_seed_key.json`, `group1_rc3_seed_key.json`;
+  run notes `group1_whole_run_notes.md`, `group1_recert_run_notes.md`, `group1_rc3_run_notes.md`.
+- 2026-06-24 — **CERTIFIED (v4.49.0, PI direction).** Bar: calibrated + zero-MATERIAL in the
+  authoritative dimensions (papers/claims/synthesis/citations/test-logic) + deterministic-green;
+  code-docstring stale-prose = fix-on-sight NIT (criteria.md §"Material vs nit", 2026-06-24) surfaced
+  by the C16 docstring gate (propinquity/withdrawn-c3op entries now scan the lorentzian +
+  gh_convergence backing modules). group1 is the second branch certified (after group3, v4.21.1).

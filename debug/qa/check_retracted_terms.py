@@ -142,9 +142,14 @@ REGISTRY = [
             "papers/group1_operator_algebras/paper_39_*.tex",
             "papers/group1_operator_algebras/paper_40_*.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
-            # code-docstring scope (the 2026-06-23 blind-spot fix: C16 had scanned
-            # papers only; the p45 module-docstring retracted-thm zombie lived here):
+            # code-docstring scope (the 2026-06-23/24 docstring-gate: C16 had scanned
+            # papers only; the recurring code-docstring stale-prose class -- state-space
+            # GH mislabeled "Latremoliere propinquity", retracted-convergence-as-live --
+            # lived in these backing modules' docstrings. Advisory severity = the
+            # fix-on-sight NIT bar set at group1 certification, v4.49.0):
             "geovac/lorentzian_propinquity_compact_temporal.py",
+            "geovac/gh_convergence.py",
+            "geovac/gh_convergence_tensor.py",
         ],
     },
     {

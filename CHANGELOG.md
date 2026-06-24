@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.49.0] - 2026-06-24
+
+### group1 CERTIFIED ✅ (PI direction) — second branch certified after group3
+
+PI set the certification bar and certified group1 (Papers 29/39/40/42–50/52/53 +
+synthesis) on the strength of the v4.48.3 whole-group run.
+
+**The bar (a deliberate, dated, PI-authorized criteria refinement — `criteria.md`
+§"Material vs nit"):** a branch certifies on **calibrated panel + zero verified MATERIAL
+in the authoritative dimensions (papers / claims / synthesis / citations / test-logic) +
+deterministic-green (C5/C10/C11/C13/C14/C15/C16)**. **Code-docstring stale-prose**
+(withdrawn/stale prose in a `geovac/*.py` or `tests/*.py` docstring/comment — a retracted
+statement left as live prose, or state-space GH mislabeled "Latrémolière propinquity") is
+reclassified as a **fix-on-sight NIT, not a MATERIAL cert blocker**, because the paper —
+not the code docstring — is the authoritative source, such prose changes no result/claim/
+tier/paper-reader takeaway, it is a long tail that fresh-adversary passes surface
+one-scope-over indefinitely, and it is cheaply caught by `code-reviewer` + the C16 docstring
+gate. (A docstring zombie that drifts into a *paper*, or corrupts a test's *logic*, remains
+MATERIAL.)
+
+**The certification arc** (three single-invocation whole-group `/qa group1` runs, enabled by
+the chunked-panel granularity rule):
+- **v4.48.0** — first whole-group; FAIL→remediated. √(1−1/n_max) "C3^op" zombie class swept
+  corpus-wide (p47 + synthesis); synthesis dimension under-calibrated (missed its lead-in seed).
+- **v4.48.2** — FAIL→remediated. Synthesis calibration RECOVERED (the v4.48.1 claims-reviewer
+  sharpening); 3 SMALL fixes; claims-C (per-paper C14) under-calibrated.
+- **v4.48.3** — FAIL→remediated, **calibration PERFECT 10/10**: claims-C *demonstrably* caught
+  the p46 descope seed it had missed (generalized per-paper C14 rule); synthesis recovery held.
+  **Papers/claims/synthesis/citation dimensions MATERIAL-CLEAN.** Residual = code-docstring
+  stale-prose only, swept comprehensively.
+
+Monotone convergence across the arc: defect severity LARGE→SMALL→docstring-only; calibration
+9/10→9/10→10/10; LLM-judgment dimensions → material-clean. The two calibration mechanisms that
+each missed a seed once (synthesis lead-in; per-paper C14 descope) were both hardened and then
+each *demonstrably* caught the seed it had missed — the gate's discriminating power, shown.
+
+### Added — the C16 docstring gate (closes the recurring class deterministically)
+- `debug/qa/check_retracted_terms.py`: the propinquity-as-achieved-metric (advisory) +
+  withdrawn-c3op (fail) entries now scan the backing **code modules**
+  (`lorentzian_propinquity_compact_temporal.py`, `gh_convergence.py`, `gh_convergence_tensor.py`),
+  not just `papers/*.tex` — so code-docstring stale-prose of the known signatures is surfaced
+  every `/qa` run for ~0 tokens (advisory = the fix-on-sight NIT bar). `docs/qa/group1.done.md`
+  marked CERTIFIED.
+
+### Status
+group3 (v4.21.1) and group1 (v4.49.0) certified. Branch-QA sweep continues on the remaining
+groups; `/qa <branch>` re-confirms any time.
+
 ## [4.48.3] - 2026-06-23
 
 ### `/qa group1` — WHOLE-GROUP re-cert #2 (hardened detectors) — FAIL → remediated (PI-invoked)
