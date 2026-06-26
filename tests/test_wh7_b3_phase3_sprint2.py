@@ -22,7 +22,7 @@ Pins:
       operational interval functional (flow parameter recovered from state
       pairs by trace-distance matching) is well-defined and additive.
 
-Driver: debug/wh7_b3_phase3_sprint2.py (deterministic seeds; pinned by this
+Driver: tests/wh7_support/wh7_b3_phase3_sprint2.py (deterministic seeds; pinned by this
 reference).
 """
 import sys
@@ -30,7 +30,7 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_b3_phase3_sprint2 as p32  # noqa: E402
 
 COMMUTING = ("(1.0,0.0) spacelike", "(2.0,0.0) spacelike")

@@ -1491,7 +1491,7 @@ Connes--van~Suijlekom $\Sone$ pattern~\cite{connes_vs2021};\ driver
 \texttt{debug/wh7\_toeplitz\_temporal\_probe.py}, max error
 $1.4\times10^{-14}$). The joint claims are verified numerically on the
 $j \le 1$ Peter--Weyl window tensored with a $K = 2$ Fourier window
-(\texttt{debug/wh7\_b1\_joint\_product\_gh.py};\ frozen falsifier
+(\texttt{tests/wh7\_support/wh7\_b1\_joint\_product\_gh.py};\ frozen falsifier
 \texttt{tests/test\_wh7\_b1\_joint.py}):\ Peter--Weyl orthonormality of
 the quadrature at $10^{-15}$;\ pure-factor exactness of
 $L_{\mathrm{joint}}$ at $0$ and $10^{-16}$;\ the Leibniz envelope
@@ -1789,7 +1789,7 @@ evidence that the signature, if it is metric at all, must enter at the
 state/modular level (the boost candidate above), not through any
 $\Kplus$-compressed Lipschitz seminorm. A first finite-cutoff probe of
 the boost candidate (driver
-\texttt{debug/wh7\_b3\_boost\_seminorm\_probe.py};\ frozen falsifier
+\texttt{tests/wh7\_support/wh7\_b3\_boost\_seminorm\_probe.py};\ frozen falsifier
 \texttt{tests/test\_wh7\_b3\_boost.py};\ Peter--Weyl window $j \le 1$,
 full reachable multiplier system of rank $55$, boost $K = 2J_{z}$ in
 Paper~42's doubled \texttt{two\_m\_j} convention) returns four exact
@@ -1814,7 +1814,7 @@ all nine classes:\ $m' = 0$ classes purely spacelike ($Q$-ratio $= -1$
 exactly), top weights timelike from $b = 3/2$ upward, and the $b = 1$
 top weight sitting \emph{on the cone} ($q_{\min} = 0$ to $10^{-6}$).
 Phase~2 (driver
-\texttt{debug/wh7\_b3\_phase2\_cone\_structure.py};\ falsifier
+\texttt{tests/wh7\_support/wh7\_b3\_phase2\_cone\_structure.py};\ falsifier
 \texttt{tests/test\_wh7\_b3\_phase2.py}) closes the classifier's
 closed form and the rate-level reverse-triangle question:\
 (e) in Hilbert--Schmidt norm the causal ratio equals the symbol
@@ -1844,7 +1844,7 @@ super-additivity from relative-entropy monotonicity, i.e.\ the
 Paper~49 cocycle machinery, which survives the descope — and that
 construction, together with any convergence statement, is the
 remaining (Phase~3) target. A first state-level panel
-(\texttt{debug/wh7\_b3\_phase3\_state\_intervals.py};\ falsifier
+(\texttt{tests/wh7\_support/wh7\_b3\_phase3\_state\_intervals.py};\ falsifier
 \texttt{tests/test\_wh7\_b3\_phase3.py}) lays the foundation:\ wedge
 KMS state, flow-invariance, $2\pi$ orbit period and orbit injectivity
 all at $10^{-13}$ or better;\ the Datta max-divergence chain
@@ -1857,7 +1857,7 @@ projection shifts the exponents by $< 0.1$). Honest caveat:\ the
 \emph{excess} over the on-orbit baseline is reference-state
 dependent (sign included);\ only the absolute chain inequality is
 universal. A second state-level panel
-(\texttt{debug/wh7\_b3\_phase3\_sprint2.py};\ falsifier
+(\texttt{tests/wh7\_support/wh7\_b3\_phase3\_sprint2.py};\ falsifier
 \texttt{tests/test\_wh7\_b3\_phase3\_sprint2.py}) resolves both the
 scaling and the caveat by a single symmetry:\ when the kick generator
 commutes with the boost ($[G, K] = 0$, zero weight transfer — exactly
@@ -1901,12 +1901,12 @@ architecture this fixes:\ the interval is the flow parameter, costs
 enter as an even (quadratic) penalty layer for admissible
 (weight-conserving) deformations and a signed first-order layer
 otherwise. A third state-level panel
-(\texttt{debug/wh7\_b3\_phase3\_sprint3.py};\ falsifier
+(\texttt{tests/wh7\_support/wh7\_b3\_phase3\_sprint3.py};\ falsifier
 \texttt{tests/test\_wh7\_b3\_phase3\_sprint3.py}) settles the
 admissibility and convergence questions at sprint grade.
 \emph{Admissibility:}\ the wedge folding \emph{reorganizes} the
 Phase-2 causal classes, and a fourth, exact-arithmetic panel
-(\texttt{debug/wh7\_b3\_phase3\_sprint3b\_fold\_rule.py};\ falsifier
+(\texttt{tests/wh7\_support/wh7\_b3\_phase3\_sprint3b\_fold\_rule.py};\ falsifier
 \texttt{tests/test\_wh7\_b3\_fold\_rule.py}) gives the closed form.
 Blockwise, plain-swap reflection conjugation acts as
 $[R\,C^{b}_{\mu'\mu}\,R]_{(j_{1},j_{2})} =
@@ -1947,8 +1947,8 @@ cutoff-stable at $2{\times}10^{-4}$. The convergence statement for
 fixed band-limited data is therefore \emph{exact}, not asymptotic;\
 the genuinely open limit is band exhaustion (increasing bands). A
 fifth panel (multi-agent;\ shared substrate
-\texttt{debug/wh7\_band\_exhaustion\_lib.py}, probes
-\texttt{debug/wh7\_band\_exh\_*.py};\ falsifier
+\texttt{tests/wh7\_support/wh7\_band\_exhaustion\_lib.py}, probes
+\texttt{tests/wh7\_support/wh7\_band\_exh\_*.py};\ falsifier
 \texttt{tests/test\_wh7\_band\_exhaustion.py}) closes that question at
 the numerical level on the folded Peter--Weyl wedge at
 $j_{\max} \in \{1, \ldots, 3\}$ (wedge dimensions $9$--$78$) with

@@ -7,7 +7,7 @@ Pins: KMS/flow/period anchors; orbit injectivity; the D_max chain inequality
 primary-configuration excess positivity + bimodal scaling split; AND the honest
 caveat (excess sign is reference-state dependent, documented by T5).
 
-Driver: debug/wh7_b3_phase3_state_intervals.py (deterministic seeds; pinned by
+Driver: tests/wh7_support/wh7_b3_phase3_state_intervals.py (deterministic seeds; pinned by
 this reference).
 """
 import sys
@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_b3_phase3_state_intervals as p3  # noqa: E402
 
 

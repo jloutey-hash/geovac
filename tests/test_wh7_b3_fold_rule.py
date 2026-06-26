@@ -21,7 +21,7 @@ Pins:
       (flow-commuting, admissible) operators at every tested window, and
       the folded (2,2) at j_max = 1 is purely mirror.
 
-Driver: debug/wh7_b3_phase3_sprint3b_fold_rule.py (exact arithmetic; pinned
+Driver: tests/wh7_support/wh7_b3_phase3_sprint3b_fold_rule.py (exact arithmetic; pinned
 by this reference).
 """
 import sys
@@ -29,7 +29,7 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_b3_phase3_sprint3b_fold_rule as fr  # noqa: E402
 
 RATIOS_MU0 = {"(1.0,0.0) spacelike": 6.0 / 19, "(2.0,0.0) spacelike": 5.0 / 6,

@@ -2,9 +2,9 @@
 """Frozen falsifier for the B3 Phase-3 band-exhaustion program (2026-06-10).
 
 Multi-agent workflow (3 probes + rate-ID + adversarial; drivers
-debug/wh7_band_exh_{legs,penalties,intervals,rates,adversarial}.py); this
+tests/wh7_support/wh7_band_exh_{legs,penalties,intervals,rates,adversarial}.py); this
 falsifier RECOMPUTES the load-bearing facts directly from the shared substrate
-library (debug/wh7_band_exhaustion_lib.py), independent of the agent drivers.
+library (tests/wh7_support/wh7_band_exhaustion_lib.py), independent of the agent drivers.
 
 Pins:
   (1) the EXACT NORM CLOSED FORM: the folded null-class compression has
@@ -37,7 +37,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_band_exhaustion_lib as lib  # noqa: E402
 
 LADDER = lib.JMAX_LADDER                      # [1, 3/2, 2, 5/2, 3]

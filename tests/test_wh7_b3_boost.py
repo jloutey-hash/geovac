@@ -5,14 +5,14 @@ system rank 55; sigma_{2pi} closure + half-period band-parity grading bit-exact;
 boost-alone kernel dim 9 (boost-invariant multipliers); frame kernel dim 1;
 causal-classifier sign pattern with the b=1 top weight on the cone.
 
-Driver: debug/wh7_b3_boost_seminorm_probe.py (pinned by this reference).
+Driver: tests/wh7_support/wh7_b3_boost_seminorm_probe.py (pinned by this reference).
 """
 import sys
 from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_b3_boost_seminorm_probe as b3  # noqa: E402
 
 

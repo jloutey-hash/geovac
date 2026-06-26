@@ -48,7 +48,7 @@ from scipy.linalg import expm
 from scipy.stats import spearmanr
 
 ROOT = Path(__file__).resolve().parent
-REPO = ROOT.parent
+REPO = ROOT.parent.parent  # project root (moved debug/ -> tests/wh7_support/, 2026-06-26)
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(REPO))
 import wh7_b1_joint_product_gh as b1  # noqa: E402

@@ -25,7 +25,7 @@ Pins:
       sign-definite even-sector penalty; only the chain inequality is
       universal.
 
-Driver: debug/wh7_b3_phase3_sprint3.py (deterministic seeds; pinned by this
+Driver: tests/wh7_support/wh7_b3_phase3_sprint3.py (deterministic seeds; pinned by this
 reference).
 """
 import sys
@@ -33,7 +33,7 @@ from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_b3_phase3_sprint3 as p33  # noqa: E402
 
 

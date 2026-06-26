@@ -8,7 +8,7 @@ class-diagonal definite-type inertia of the causal form (graded cone, NOT a
 Lorentzian signature); (c) the op-norm null ray at C^1_{+-1,0}; (d) the
 NEGATIVE: rate-level reverse triangle fails on the timelike sector.
 
-Driver: debug/wh7_b3_phase2_cone_structure.py (pinned by this reference).
+Driver: tests/wh7_support/wh7_b3_phase2_cone_structure.py (pinned by this reference).
 """
 import sys
 from pathlib import Path
@@ -16,7 +16,7 @@ from pathlib import Path
 import pytest
 from sympy import Rational, S
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_b3_phase2_cone_structure as p2  # noqa: E402
 
 

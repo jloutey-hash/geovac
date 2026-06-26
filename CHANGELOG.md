@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.49.1] - 2026-06-26
+
+### Flavor-B durability migration — WH7/Lorentzian test backings off the prune-by-design `debug/` path
+
+The load-bearing computational drivers for the WH7 / Lorentzian-propinquity arc (Papers 45
+and 49 + the B3 Phase-3 / band-exhaustion sprints) lived in `debug/` — the transient
+clean-room directory (CLAUDE.md §9), pruned over time *by design* — and were imported by the
+`tests/test_wh7_*.py` falsifiers via `sys.path.insert(.../debug)`. That made a paper's only
+backing a **silent-loss hazard**: the archive sweep would delete the driver and the test would
+die with an `ImportError`, taking the backing with it (the "Flavor-B" class flagged across the
+group1 cert arc, e.g. Paper 49's load-bearing 96/96 D_max chain). This was the last named
+group1 follow-on.
+
+**The migration** (same fix-pattern as `tests/rank2_rate_support/`, v4.45/4.49):
+- `git mv`'d the **13-driver `wh7_b*` cluster** `debug/` → **`tests/wh7_support/`** (a permanent,
+  non-prunable, non-collected support dir): `wh7_b1_joint_product_gh`, `wh7_b3_{boost_seminorm_probe,
+  phase2_cone_structure, phase3_sprint2, phase3_sprint3, phase3_sprint3b_fold_rule,
+  phase3_state_intervals}`, `wh7_band_{exhaustion_lib, exh_adversarial, exh_intervals, exh_legs,
+  exh_penalties, exh_rates}`. The standalone `debug/wh7_toeplitz_temporal_probe.py` was left in
+  `debug/` deliberately — its test recomputes the facts rather than importing it (a genuine
+  transient probe, not load-bearing).
+- Cross-imports auto-resolve (each driver does `sys.path.insert(0, Path(__file__).parent)`, so
+  moving the cluster together keeps them consistent); the only path edits were the 2
+  `REPO = ROOT.parent` → `ROOT.parent.parent` depth fixes (sprint2/sprint3, for `import geovac`
+  in standalone runs).
+- Repointed the **8 consumer tests** (`sys.path.insert` → `tests/wh7_support`) + their "Driver:
+  debug/…" docstrings, **paper_45's 9 inline driver cites** (`debug/wh7\_b*` → `tests/wh7\_support/…`
+  — now §9-compliant, citing the permanent record not transient `debug/`), and the
+  `claim_test_matrix.md` Paper-49 row. Added `tests/wh7_support/README.md`.
+
+### Verification
+- 71 wh7 tests (all 8 `test_wh7_*` files) pass post-move; 30 topo/toeplitz (`test_fock_projection`,
+  `test_fock_laplacian`, `test_wh7_toeplitz_temporal`) green. C13 (paper↔test refs) / C14 (file
+  refs) / C16 PASS; paper_45 compiles errors=0.
+
 ## [4.49.0] - 2026-06-24
 
 ### group1 CERTIFIED ✅ (PI direction) — second branch certified after group3

@@ -2,7 +2,7 @@
 """Frozen falsifier for B1: joint S^3 x S^1_T action-seminorm convergence machinery
 (2026-06-10, v3.112.0). Pins Paper 45 Proposition `prop:product_action_seminorm`.
 
-Imports the driver debug/wh7_b1_joint_product_gh.py (pinned at debug/ top level by
+Imports the driver tests/wh7_support/wh7_b1_joint_product_gh.py (pinned at debug/ top level by
 this reference). Module import builds the SU(2) quadrature grid (~seconds).
 """
 import sys
@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "debug"))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "wh7_support"))
 import wh7_b1_joint_product_gh as b1  # noqa: E402
 
 K = 2
