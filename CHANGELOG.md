@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.49.2] - 2026-06-26
+
+### CLAUDE.md §2 round-5 compaction (clears the >150 KB repo-health WARN)
+
+CLAUDE.md had crept to 158 KB (over the 150 KB budget) across the group1 cert arc. Moved the
+~20 granular per-run `/qa group1` cert one-liners (v4.40.0–v4.47.0 + the Batch/cert/rem
+rollups + the early bites A/B1/B2/B3) verbatim from §2 → `docs/development_frontier_archive.md`
+(round-5), replacing them with one pointer line. They are fully superseded by the §2 "group1
+CERTIFIED" summary; per-run detail remains in CHANGELOG v4.21–4.49 + `debug/qa/*_memo.md`. Kept
+in §2: the Flavor-B + group1-CERTIFIED + Lorentzian-chase-CLOSED + group3-CERTIFIED +
+QA-gate-built milestones, the older-index pointer, and the best-results tables. **CLAUDE.md
+158 → 135 KB**; repo-health CLAUDE.md gate back to OK.
+
+(Also recorded for the PI: an external-model review of the certified foundations papers was
+verified against primary text — 3 of its 4 issues were invalid, resting on misattributed paper
+numbers [Paper 24/31 content cited as "Paper 21"], a non-existent/inverted concept ["helical
+pitch" is a *rejected* fitted parameter in Paper 2, not a foundational mechanism; α is an
+Observation, not a derivation], and unawareness of the Papers 38–40 GH-convergence arc that
+Paper 31 already cross-references; only the anisotropic/universal-sector scope question was a
+valid small clarification. No corpus changes made from the review.)
+
 ## [4.49.1] - 2026-06-26
 
 ### Flavor-B durability migration — WH7/Lorentzian test backings off the prune-by-design `debug/` path
