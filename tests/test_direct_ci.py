@@ -72,7 +72,20 @@ class TestDirectCIAccuracy:
     """Direct CI reproduces known benchmark energies."""
 
     def test_direct_ci_he_accuracy(self) -> None:
-        """He nmax=5: E < -2.84 Ha (matches matrix baseline -2.8448)."""
+        """He nmax=5 direct CI (exact h1 + grid Slater): E = -2.84483 Ha (2.03%).
+
+        Two-sided recompute-pin. The previous guard (`E < -2.84`) was a
+        FALSE-POSITIVE: it is one-sided, so a grossly-wrong-but-too-low
+        energy (e.g. an unphysical -3.0) would also pass. We pin the
+        actual framework value and add a variational-bound sanity.
+
+        This is the *exact*-h1 + 2000-pt-grid-Slater config (the
+        LatticeIndex default for vee_method='slater_full'); it lands at
+        2.03% above the exact NR He energy -2.903724 Ha. NOTE this is
+        DISTINCT from the FCI-A *hybrid*-h1 headline (-2.893582 / 0.349%,
+        pinned in tests/test_casimir_ci.py::TestFCIAHybridHe).
+        """
+        E_HE_EXACT = -2.903724  # exact non-relativistic He ground state
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
@@ -80,10 +93,24 @@ class TestDirectCIAccuracy:
                 vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
             E, _ = _direct_solve(idx)
-        assert E[0] < -2.84, f"He nmax=5: E={E[0]:.6f}, expected < -2.84"
+        assert abs(E[0] - (-2.84483)) < 1e-3, (
+            f"He nmax=5 exact-h1: E={E[0]:.6f}, expected -2.84483 ± 1e-3"
+        )
+        assert E[0] > E_HE_EXACT, (
+            f"He nmax=5: E={E[0]:.6f} violates variational bound "
+            f"(exact={E_HE_EXACT})"
+        )
 
+    @pytest.mark.slow
     def test_direct_ci_li_accuracy(self) -> None:
-        """Li nmax=4: E < -7.39 Ha (matches matrix baseline -7.3959)."""
+        """Li nmax=4 direct CI (exact h1 + grid Slater): E = -7.39592 Ha (1.10%).
+
+        Two-sided recompute-pin replacing the one-sided `E < -7.39` guard.
+        Reference is the exact NR Li energy -7.4781 Ha; this config sits
+        1.10% above it (matches FCI-A Table convergence row, -7.395921).
+        Marked slow: ~19s (34,220-SD assembly + sparse eigensolve).
+        """
+        E_LI_EXACT = -7.4781  # exact non-relativistic Li ground state
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
@@ -91,7 +118,13 @@ class TestDirectCIAccuracy:
                 vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
             E, _ = _direct_solve(idx)
-        assert E[0] < -7.39, f"Li nmax=4: E={E[0]:.6f}, expected < -7.39"
+        assert abs(E[0] - (-7.395921)) < 1e-3, (
+            f"Li nmax=4 exact-h1: E={E[0]:.6f}, expected -7.395921 ± 1e-3"
+        )
+        assert E[0] > E_LI_EXACT, (
+            f"Li nmax=4: E={E[0]:.6f} violates variational bound "
+            f"(exact={E_LI_EXACT})"
+        )
 
 
 class TestDirectCINewAtoms:
@@ -111,8 +144,16 @@ class TestDirectCINewAtoms:
         print(f"  Be nmax=3: E={E[0]:.6f} Ha")
 
 
+    @pytest.mark.slow
     def test_direct_ci_be_nmax4(self) -> None:
-        """Be (4e) nmax=4: completes and E < -14.0 Ha."""
+        """Be (4e) nmax=4 direct CI (exact h1 + grid Slater): E = -14.5355 Ha (0.90%).
+
+        Two-sided recompute-pin replacing the one-sided `E < -14.0` guard.
+        Reference is the exact NR Be energy -14.6674 Ha; this config sits
+        0.90% above it (matches FCI-A Table convergence row, -14.535460).
+        Marked slow: ~6 min (487,635-SD assembly + sparse eigensolve).
+        """
+        E_BE_EXACT = -14.6674  # exact non-relativistic Be ground state
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
@@ -120,12 +161,26 @@ class TestDirectCINewAtoms:
                 vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
             E, _ = _direct_solve(idx)
-        assert E[0] < -14.0, f"Be nmax=4: E={E[0]:.6f}, expected < -14.0"
-        error = abs(E[0] - (-14.6674)) / 14.6674 * 100
+        assert abs(E[0] - (-14.535460)) < 2e-3, (
+            f"Be nmax=4 exact-h1: E={E[0]:.6f}, expected -14.535460 ± 2e-3"
+        )
+        assert E[0] > E_BE_EXACT, (
+            f"Be nmax=4: E={E[0]:.6f} violates variational bound "
+            f"(exact={E_BE_EXACT})"
+        )
+        error = abs(E[0] - E_BE_EXACT) / abs(E_BE_EXACT) * 100
         print(f"  Be nmax=4: E={E[0]:.4f} Ha, error={error:.2f}%")
 
+    @pytest.mark.slow
     def test_direct_ci_li_nmax5(self) -> None:
-        """Li nmax=5 (216k SDs): completes and E < -7.39 Ha."""
+        """Li nmax=5 (216k SDs) direct CI (exact h1 + grid Slater): E = -7.39775 Ha (1.07%).
+
+        Two-sided recompute-pin replacing the one-sided `E < -7.39` guard.
+        Reference is the exact NR Li energy -7.4781 Ha; this config sits
+        1.07% above it (matches FCI-A Table convergence row, -7.397751).
+        Marked slow: ~2 min (215,820-SD assembly + sparse eigensolve).
+        """
+        E_LI_EXACT = -7.4781  # exact non-relativistic Li ground state
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             idx = LatticeIndex(
@@ -133,8 +188,14 @@ class TestDirectCINewAtoms:
                 vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
             E, _ = _direct_solve(idx)
-        assert E[0] < -7.39, f"Li nmax=5: E={E[0]:.6f}, expected < -7.39"
-        error = abs(E[0] - (-7.4781)) / 7.4781 * 100
+        assert abs(E[0] - (-7.397751)) < 1e-3, (
+            f"Li nmax=5 exact-h1: E={E[0]:.6f}, expected -7.397751 ± 1e-3"
+        )
+        assert E[0] > E_LI_EXACT, (
+            f"Li nmax=5: E={E[0]:.6f} violates variational bound "
+            f"(exact={E_LI_EXACT})"
+        )
+        error = abs(E[0] - E_LI_EXACT) / abs(E_LI_EXACT) * 100
         print(f"  Li nmax=5: E={E[0]:.4f} Ha, error={error:.2f}%")
 
 

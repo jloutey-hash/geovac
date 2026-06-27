@@ -10,10 +10,14 @@ Validates:
 6. Convergence of the self-consistent sequence
 """
 
+import warnings
+
 import numpy as np
 import pytest
 from fractions import Fraction
 
+from geovac.lattice_index import LatticeIndex
+from geovac.direct_ci import DirectCISolver
 from geovac.casimir_ci import (
     build_fci_matrix,
     solve_self_consistent,
@@ -925,4 +929,96 @@ class TestSubblockMisc:
         # Variational bound
         assert E_1S > -2.903724377, (
             f"E(1¹S) = {E_1S:.10f} violates variational bound"
+        )
+
+
+# ========================================================================
+# FCI-A Table I — He headline configurations (hybrid h1)
+# ========================================================================
+#
+# The FCI-A paper (paper_fci_atoms.tex) reports two He n_max=5 headline
+# energies, BOTH using the hybrid one-electron Hamiltonian (exact
+# hydrogenic diagonal -Z²/(2n²) + graph-Laplacian off-diagonal κ·L_pq,
+# Eq. h1_hybrid). They differ only in how the two-electron Slater radial
+# integrals R^k are evaluated:
+#
+#   * GRID hybrid  — R^k on a 2000-point uniform grid (Y_k potential
+#     method). Table tab:convergence_detail row Z=2, n_max=5:
+#     E = -2.893582 Ha, 0.35% above exact NR He (-2.903724 Ha).
+#     Path: LatticeIndex(..., vee_method='slater_full', h1_method='hybrid').
+#
+#   * GRAPH-NATIVE — R^k from exact float-algebraic hydrogenic integrals
+#     (compute_rk_float), removing the grid truncation error. At n_max=5
+#     this IMPROVES accuracy to 0.2496% (more accurate than the grid).
+#     Path: casimir_ci.build_graph_native_fci(Z=2, n_max=5).
+#
+# Both were previously coverage gaps (the only He accuracy guard,
+# test_direct_ci_he_accuracy, ran the *exact*-h1 config = 2.03%, and the
+# graph-native tests stopped at n_max=3). These tests recompute from the
+# framework and pin the actual values.
+
+class TestFCIAHybridHe:
+    """FCI-A He Table I headlines: grid-hybrid (-2.893582) and graph-native."""
+
+    E_HE_EXACT = -2.903724  # exact non-relativistic He ground state
+
+    def test_hybrid_grid_he_nmax5(self):
+        """Grid-hybrid He n_max=5 = -2.893582 Ha (0.349%), FCI-A Table I headline.
+
+        Recompute via the documented Table-I path: LatticeIndex hybrid h1
+        + 2000-pt-grid Slater (vee_method='slater_full'), assembled with
+        DirectCISolver (the paper's assembly method). Fast (~3 s).
+        """
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            idx = LatticeIndex(
+                n_electrons=2, max_n=5, nuclear_charge=2,
+                vee_method='slater_full', h1_method='hybrid',
+            )
+            E, _ = DirectCISolver(idx).solve()
+        # Recompute-pin on the paper headline energy.
+        assert abs(E[0] - (-2.893582)) < 1e-3, (
+            f"He n_max=5 grid-hybrid: E={E[0]:.6f}, expected -2.893582 ± 1e-3"
+        )
+        # Headline accuracy: 0.349% above exact, and variationally bounded.
+        error_pct = abs(E[0] - self.E_HE_EXACT) / abs(self.E_HE_EXACT) * 100
+        assert error_pct < 0.40, (
+            f"He n_max=5 grid-hybrid error {error_pct:.4f}% exceeds 0.40% "
+            f"(headline 0.349%)"
+        )
+        assert E[0] > self.E_HE_EXACT, (
+            f"He n_max=5 grid-hybrid E={E[0]:.6f} violates variational bound"
+        )
+
+    @pytest.mark.slow
+    def test_graph_native_he_nmax5(self):
+        """Graph-native He n_max=5 = -2.896476 Ha (0.2496%), more accurate than grid.
+
+        Exact float-algebraic Slater integrals remove the grid truncation
+        error, dropping the n_max=5 error from 0.349% (grid) to 0.2496%.
+        Marked slow: the n_max=5 graph-native build is ~2 min (266-config
+        FCI with exact-rational/float R^k evaluation per matrix element).
+
+        NO-TEST (deliberate): the FCI-A 0.19% headline is at n_max=7, whose
+        graph-native build is computationally impractical for CI (the
+        config count and exact-integral cost both blow up). It is left
+        uncovered by design rather than faked; the n_max=5 = 0.25% point
+        below establishes the graph-native-beats-grid trend the headline
+        extends.
+        """
+        H = build_graph_native_fci(Z=2, n_max=5)
+        assert H.shape == (266, 266)
+        E0 = float(np.linalg.eigvalsh(H)[0])
+        # Recompute-pin on the actual graph-native value.
+        assert abs(E0 - (-2.896476)) < 1e-3, (
+            f"He n_max=5 graph-native: E={E0:.6f}, expected -2.896476 ± 1e-3"
+        )
+        # ~0.25% accuracy, beating the 0.349% grid result, variationally bounded.
+        error_pct = abs(E0 - self.E_HE_EXACT) / abs(self.E_HE_EXACT) * 100
+        assert 0.20 < error_pct < 0.30, (
+            f"He n_max=5 graph-native error {error_pct:.4f}% outside "
+            f"(0.20%, 0.30%) — expected ~0.2496%"
+        )
+        assert E0 > self.E_HE_EXACT, (
+            f"He n_max=5 graph-native E={E0:.6f} violates variational bound"
         )

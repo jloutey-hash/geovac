@@ -102,3 +102,6 @@ geovac/_cache/
 
 # Compiled paper PDFs (regeneratable from .tex sources via pdflatex)
 papers/**/*.pdf
+
+# /qa calibration seed answer-keys — must NEVER be committed (QA hard rule)
+debug/qa/*_seed_key.json

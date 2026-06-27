@@ -506,3 +506,89 @@ class TestLmaxConvergenceReport:
         print("  approximation, not a code bug.")
         print("=" * 72)
         assert True
+
+
+# ======================================================================
+# LiH l_max divergence — KEYSTONE (Paper 17 §V): R_eq increases (diverges)
+# monotonically with l_max, so l_max=2 is the optimal operating point.
+# ======================================================================
+
+@pytest.fixture(scope="module")
+def lih_l2_sigma_pi():
+    """LiH at l_max=2 with sigma+pi channels (ab initio PK), wide grid.
+
+    Same configuration family as ``lih_l3_sigma_pi`` / ``lih_l4_sigma_pi``
+    (LiH_ab_initio, m_max=1, l_max_per_m={0: l_max, 1: 2}, wide R-grid,
+    fit_window=2.0) — only the sigma-channel l_max changes — so the three
+    fixtures form a consistent l_max sweep for the divergence test below.
+    """
+    s = ComposedDiatomicSolver.LiH_ab_initio(
+        l_max=2, m_max=1, l_max_per_m={0: 2, 1: 2},
+        n_alpha=60, verbose=True,
+    )
+    s.solve_core()
+    s.scan_pes(R_grid=_lih_r_grid_extended_wide(), n_Re=300)
+    s.fit_spectroscopic_constants(fit_window=2.0)
+    s._print_summary()
+    return s
+
+
+@pytest.mark.slow
+class TestLmaxDivergenceMonotone:
+    """Composed LiH R_eq DIVERGES (increases) monotonically with l_max.
+
+    Paper 17 §V keystone: in the single-channel adiabatic / PK-composed
+    architecture, each additional angular channel lowers the energy
+    preferentially at large R (diffuse electron cloud), pushing R_eq
+    monotonically OUTWARD with increasing l_max — i.e. *away* from the
+    experimental 3.015 bohr. This is structural to the PK/composed
+    architecture (CLAUDE.md §3: the 2D variational solver reproduces the
+    same +0.15..0.22 bohr/l_max drift, so it is NOT an adiabatic artifact),
+    which is exactly why l_max=2 is the optimal operating point.
+
+    This replaces the prior print-only `assert True` "convergence report"
+    with a genuine recompute: R_eq strictly increasing across the three
+    points l_max in {2, 3, 4} (§13.4a negative-result verification —
+    monotonic divergence over >=3 points), all built identically via
+    ``ComposedDiatomicSolver.LiH_ab_initio`` (only sigma l_max varies).
+    """
+
+    def test_r_eq_increases_with_l_max(
+        self,
+        lih_l2_sigma_pi: ComposedDiatomicSolver,
+        lih_l3_sigma_pi: ComposedDiatomicSolver,
+        lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """R_eq(l=2) < R_eq(l=3) < R_eq(l=4): the documented divergence."""
+        R2 = lih_l2_sigma_pi.spectro['R_eq']
+        R3 = lih_l3_sigma_pi.spectro['R_eq']
+        R4 = lih_l4_sigma_pi.spectro['R_eq']
+        d23 = R3 - R2
+        d34 = R4 - R3
+        print(f"\n  R_eq(l=2) = {R2:.4f} bohr")
+        print(f"  R_eq(l=3) = {R3:.4f} bohr  (drift {d23:+.4f})")
+        print(f"  R_eq(l=4) = {R4:.4f} bohr  (drift {d34:+.4f})")
+        print(f"  experiment = 3.015 bohr (R_eq moves AWAY with l_max)")
+        assert R3 > R2, (
+            f"R_eq did not increase from l=2 ({R2:.4f}) to l=3 ({R3:.4f}); "
+            f"divergence not reproduced")
+        assert R4 > R3, (
+            f"R_eq did not increase from l=3 ({R3:.4f}) to l=4 ({R4:.4f}); "
+            f"divergence not reproduced")
+
+    def test_r_eq_error_grows_monotonically(
+        self,
+        lih_l2_sigma_pi: ComposedDiatomicSolver,
+        lih_l3_sigma_pi: ComposedDiatomicSolver,
+        lih_l4_sigma_pi: ComposedDiatomicSolver,
+    ) -> None:
+        """Error vs experiment grows with l_max (l_max=2 is the optimum)."""
+        ref = 3.015
+        errs = [abs(s.spectro['R_eq'] - ref) / ref for s in
+                (lih_l2_sigma_pi, lih_l3_sigma_pi, lih_l4_sigma_pi)]
+        print(f"\n  R_eq errors: l=2 {errs[0]*100:.1f}%, "
+              f"l=3 {errs[1]*100:.1f}%, l=4 {errs[2]*100:.1f}%")
+        assert errs[1] > errs[0] and errs[2] > errs[1], (
+            f"R_eq error not monotonically increasing with l_max: {errs}")
+        # l_max=2 is the minimum-error (optimal) operating point of the three.
+        assert errs[0] == min(errs)

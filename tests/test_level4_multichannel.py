@@ -18,6 +18,31 @@ from geovac.level4_multichannel import (
 )
 
 
+# Exact H2 dissociation energy (Kolos & Wolniewicz)
+D_E_EXACT_H2 = 0.17447  # Ha
+
+
+@pytest.fixture(scope='module')
+def solve_2d_lmax4_sigma_pi():
+    """Paper 15 headline solve, computed once and shared.
+
+    The 2D *variational* solver (``n_coupled=-1``) -- the paper's headline
+    solver -- at l_max=4, m_max=1 (sigma+pi, 29 channels), R=1.4 bohr, on the
+    paper's grid (n_alpha=60, n_Re=120).  This single solve takes ~5 minutes,
+    so it is shared across the slow Paper-12-comparison and cusp-headline
+    tests rather than being recomputed in each.
+
+    NOTE: this is deliberately NOT the default adiabatic solver
+    (``n_coupled=1``), which Paper 15 disavows: at this truncation the
+    adiabatic solver returns 105.2% of D_e (Table II), a variational-bound
+    violation.  The 2D solver returns the correct variational ~94.1%.
+    """
+    return solve_level4_h2_multichannel(
+        R=1.4, l_max=4, m_max=1, n_coupled=-1,
+        n_alpha=60, n_Re=120, verbose=False,
+    )
+
+
 class TestChannelStructure:
     """Tests for channel indexing and symmetry."""
 
@@ -169,16 +194,34 @@ class TestFullSolver:
             f"l_max=3 D_e={result['D_e_pct']:.1f}%, expected > 80%"
         )
 
-    def test_exceeds_paper12(self) -> None:
-        """l_max=4 should exceed Paper 12's 92.4% D_e."""
+    @pytest.mark.slow
+    def test_2d_sigma_only_below_paper12(self) -> None:
+        """Paper 15 Table III: 2D-variational sigma-only (l_max=4, 13 ch) gives
+        87.0% of D_e -- BELOW Paper 12's 92.4%.
+
+        This asserts the paper's ACTUAL claim.  Previously this test
+        (test_exceeds_paper12) ran the DEFAULT adiabatic solver
+        (n_coupled=1), which returns 98.6% at this truncation (Table II) and
+        passed an assertion ``D_e_pct > 92.4`` -- the OPPOSITE of the paper's
+        sigma-only result and via a solver the paper explicitly disavows
+        (~11% overcounting, variational-bound violating).  We now use the 2D
+        variational solver (n_coupled=-1); the sigma-only result correctly
+        lands below Paper 12, which only the sigma+pi expansion overtakes.
+        Asserting < 92.4% also rejects the disavowed adiabatic path (98.6%).
+
+        Recompute: D_e = 0.1523 Ha (87.3%), matching the paper's 87.0%.
+        """
         result = solve_level4_h2_multichannel(
-            R=1.4, l_max=4,
-            n_alpha=150, n_Re=300,            verbose=False,
+            R=1.4, l_max=4, m_max=0, n_coupled=-1,
+            n_alpha=60, n_Re=120, verbose=False,
         )
-        print(f"\n  l_max=4: D_e = {result['D_e']:.6f} Ha "
-              f"({result['D_e_pct']:.1f}% of exact)")
-        assert result['D_e_pct'] > 92.4, (
-            f"l_max=4 D_e={result['D_e_pct']:.1f}%, expected > 92.4% (Paper 12)"
+        print(f"\n  2D l_max=4 sigma-only ({result['n_ch']} ch): "
+              f"D_e = {result['D_e']:.6f} Ha ({result['D_e_pct']:.1f}% of exact)")
+        assert result['n_ch'] == 13
+        assert 82.0 < result['D_e_pct'] < 92.4, (
+            f"2D l_max=4 sigma-only D_e={result['D_e_pct']:.1f}%, expected ~87% "
+            f"and BELOW Paper 12's 92.4% (an adiabatic regression would read "
+            f"~98.6%, above 92.4%)"
         )
 
 
@@ -345,16 +388,29 @@ class TestPhase3Solver:
             f"m_max=0 ({result_s['D_e_pct']:.1f}%)"
         )
 
-    def test_mmax1_exceeds_paper12(self) -> None:
-        """l_max=4, m_max=1 should exceed Paper 12's 92.4%."""
-        result = solve_level4_h2_multichannel(
-            R=1.4, l_max=4, m_max=1,
-            n_alpha=100, n_Re=250, verbose=False,
-        )
-        print(f"\n  l_max=4, m_max=1: {result['n_ch']} channels, "
+    @pytest.mark.slow
+    def test_mmax1_exceeds_paper12(self, solve_2d_lmax4_sigma_pi) -> None:
+        """Paper 15 Table III headline: 2D-variational sigma+pi (l_max=4, 29 ch)
+        recovers 94.1% of D_e -- EXCEEDING Paper 12's 92.4%.
+
+        Uses the 2D variational solver (n_coupled=-1), the paper's headline
+        solver.  Previously this test ran the DEFAULT adiabatic solver
+        (n_coupled=1), which returns 105.2% here (Table II) -- a
+        variational-bound violation the paper disavows.  The band
+        92.4 < pct < 100 therefore does double duty: it (a) confirms the
+        paper's "exceeds Paper 12" claim and (b) rejects the adiabatic
+        false-positive by enforcing the variational bound D_e <= D_e_exact.
+
+        Recompute: D_e = 0.1642 Ha (94.1%), matching the paper exactly.
+        """
+        result = solve_2d_lmax4_sigma_pi
+        print(f"\n  2D l_max=4 sigma+pi: {result['n_ch']} channels, "
               f"D_e = {result['D_e']:.6f} Ha ({result['D_e_pct']:.1f}%)")
-        assert result['D_e_pct'] > 92.4, (
-            f"l_max=4 m_max=1 D_e={result['D_e_pct']:.1f}%, expected > 92.4%"
+        assert result['n_ch'] == 29
+        assert 92.4 < result['D_e_pct'] < 100.0, (
+            f"2D l_max=4 sigma+pi D_e={result['D_e_pct']:.1f}%, expected ~94.1% "
+            f"(above Paper 12's 92.4% and below the variational bound 100%; "
+            f"an adiabatic regression would read ~105%)"
         )
 
 
@@ -607,6 +663,63 @@ class TestOriginShift:
         assert r['D_e'] > 0, (
             f"HeH+ should be bound with charge-center origin at l_max=3, "
             f"got D_e = {r['D_e']:.6f}"
+        )
+
+
+class TestHeadline2DCusp:
+    """The paper's headline method: 2D variational solver + Schwartz cusp.
+
+    Paper 15's converged headline is 96.0% of D_e at l_max=6, sigma+pi
+    (61 channels), with the 2D variational solver and the R-dependent
+    Schwartz cusp correction.  That converged run is too slow for CI
+    (~754 s per PES point, Paper 15 Sec. VII.E).  The strongest tractable
+    recompute is the same 2D+cusp machinery at l_max=4 (documented at 94.3%),
+    which this test exercises end-to-end.
+    """
+
+    @pytest.mark.slow
+    def test_lmax4_2d_cusp_de(self, solve_2d_lmax4_sigma_pi) -> None:
+        """2D-variational sigma+pi (l_max=4) + Schwartz cusp -> 94.3% of D_e.
+
+        Exercises the full headline pipeline: the variational 2D solver
+        (n_coupled=-1) followed by the R-dependent Schwartz cusp correction
+        (geovac.cusp_correction).  The correction is a small NEGATIVE energy
+        shift (~ -0.39 mHa at R_eq for l_max=4), so it raises D_e from 94.1%
+        to 94.3%, above Paper 12's 92.4%.
+
+        NO-TEST (documented, not faked): the converged 96.0% / l_max=6 / 61-ch
+        2D+cusp value is intentionally NOT asserted -- a single l_max=6 2D
+        solve is ~754 s (Paper 15 Sec. VII.E), beyond a tractable CI budget.
+        This l_max=4 case validates the identical machinery at a feasible cost.
+        """
+        from geovac.cusp_correction import cusp_correction_h2_point
+
+        result = solve_2d_lmax4_sigma_pi
+        D_e_unc = result['D_e']
+        pct_unc = result['D_e_pct']
+
+        # R-dependent Schwartz cusp correction (negative); E_atoms = -1.0 Ha.
+        dE = cusp_correction_h2_point(result['R'], l_max=result['l_max'])
+        E_corr = result['E_total'] + dE
+        D_e_corr = result['E_atoms'] - E_corr
+        pct_corr = D_e_corr / D_E_EXACT_H2 * 100.0
+
+        print(f"\n  2D l_max=4 sigma+pi: D_e uncorr = {D_e_unc:.6f} Ha "
+              f"({pct_unc:.1f}%)")
+        print(f"  cusp dE(R={result['R']}, l_max={result['l_max']}) = "
+              f"{dE * 1000:.3f} mHa")
+        print(f"  D_e corrected = {D_e_corr:.6f} Ha ({pct_corr:.1f}%)")
+
+        # Cusp correction is negative and raises D_e.
+        assert dE < 0, f"cusp correction should be negative, got {dE:.6e}"
+        assert D_e_corr > D_e_unc, (
+            f"cusp-corrected D_e ({D_e_corr:.6f}) should exceed uncorrected "
+            f"({D_e_unc:.6f})"
+        )
+        # Recompute lands at ~94.3% (paper documents 94.3% for 2D+cusp l_max=4).
+        assert 92.4 < pct_corr < 100.0, (
+            f"2D+cusp l_max=4 D_e={pct_corr:.1f}%, expected ~94.3% "
+            f"(above Paper 12's 92.4%, within the variational ceiling)"
         )
 
 

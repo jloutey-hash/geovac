@@ -1,10 +1,10 @@
 """
-ARCHIVED 2026-05-23 (Cleanup Track B): Track J algebraic Laguerre infrastructure
+RESTORED 2026-06-27: the Track J algebraic Laguerre infrastructure
 (_laguerre_moment_matrices, _associated_laguerre_moment_matrices,
-_lowered_moment_matrix, _stieltjes_matrix) was removed from
-geovac/prolate_spheroidal_lattice.py in v2.7.0 (commit 8d692a0). The simplified
-ProlateSpheroidalLattice in current code uses pure FD; the algebraic Laguerre
-infrastructure is no longer present.
+_lowered_moment_matrix, _stieltjes_matrix) was restored to
+geovac/prolate_spheroidal_lattice.py from 8d692a0^ (it had been removed in the
+v2.7.0 compaction, commit 8d692a0). The algebraic Laguerre infrastructure is
+present again and this test is live.
 
 Tests for associated Laguerre moment matrices, lowered moment matrix,
 and Stieltjes integral matrix (Track J infrastructure).

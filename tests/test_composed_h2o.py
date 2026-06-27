@@ -339,6 +339,62 @@ def test_h2o_7_blocks():
 
 
 # ---------------------------------------------------------------------------
+# Paper 17 H2O composed PES R_eq (ComposedWaterSolver -- the *classical* PES
+# solver, geovac/composed_water.py; distinct from build_composed_h2o above
+# which builds the qubit Hamiltonian).
+# ---------------------------------------------------------------------------
+
+@pytest.mark.slow
+def test_h2o_composed_pes_r_eq():
+    """Paper 17 Sec V: the uncoupled five-block charge-center H2O PES.
+
+    Paper 17 reports R_eq = 1.34 bohr (26% error vs 1.809 expt) for the
+    Morse-fit R_eq of the *uncoupled* (include_coupling=False) charge-center
+    PES at l_max=2, n_alpha=100, on the R-grid linspace(1.4, 4.4, 16),
+    n_Re=300 -- the exact config of the archived driver
+    debug/archive/.../h2o_charge_center_scan.py that produced 1.34.
+
+    RECOMPUTE-FROM-FRAMEWORK FINDING (2026-06): with the current code this
+    config gives R_eq = 1.459 bohr (19.4% error) -- a MATERIAL shift toward
+    experiment from the paper's stale 1.34 bohr (26%). The uncoupled path
+    does NOT invoke extract_channel_data (the inter-fiber bond-lone exchange,
+    which runs only when coupling is enabled), so this shift is NOT from the
+    recent extract_channel_data PK-consistency fix; it is general solver
+    evolution since the paper was written. The test asserts the CURRENT value;
+    Paper 17 Sec V (the 1.34 bohr / 26% sentence) should be reconciled to
+    1.459 bohr / 19.4%.
+
+    NOTE: faithful reproduction of the paper config (16 R-points x n_Re=300
+    Level-4 bond solves) makes this a heavy slow test (~25 min); it is kept
+    config-faithful so the comparison to the paper's 1.34 is apples-to-apples.
+    """
+    from geovac.composed_water import ComposedWaterSolver
+
+    solver = ComposedWaterSolver(
+        l_max=2, n_alpha=100, include_coupling=False, verbose=False)
+    solver.solve_core()
+    solver.solve_lone_pair()
+    R_grid = np.linspace(1.4, 4.4, 16)
+    solver.scan_pes(R_grid=R_grid, n_Re=300)
+    spectro = solver.fit_spectroscopic_constants(fit_window=1.0)
+
+    R_eq = spectro['R_eq']
+    R_ref = 1.809
+    err = abs(R_eq - R_ref) / R_ref
+    print(f"\n  H2O composed (uncoupled, charge-center) R_eq = {R_eq:.4f} bohr "
+          f"(expt {R_ref}, err {err*100:.1f}%); paper 1.34 bohr / 26%")
+
+    # CURRENT recomputed value: R_eq ~= 1.459 bohr, 19.4% error (paper: 1.34
+    # bohr / 26% -- STALE). If a future change moves R_eq out of this band,
+    # re-measure and reconcile Paper 17 Sec V.
+    assert 0.17 <= err <= 0.22, (
+        f"H2O R_eq error {err*100:.1f}% outside the current ~19.4% band "
+        f"(R_eq={R_eq:.4f} bohr); re-measure and reconcile Paper 17")
+    assert 1.42 <= R_eq <= 1.50, (
+        f"H2O R_eq={R_eq:.4f} bohr outside current ~1.459 band")
+
+
+# ---------------------------------------------------------------------------
 # Run module directly for quick diagnostics
 # ---------------------------------------------------------------------------
 

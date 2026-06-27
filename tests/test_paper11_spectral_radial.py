@@ -1,9 +1,10 @@
 """
-ARCHIVED 2026-05-23 (Cleanup Track B): Spectral radial solver in prolate
-spheroidal coordinates (ProlateSpheroidalLattice radial_method='spectral',
-n_basis parameter, _laguerre_moment_matrices) was removed from
-geovac/prolate_spheroidal_lattice.py in v2.7.0 (commit 8d692a0). The simplified
-ProlateSpheroidalLattice in current code uses pure FD. All spectral tests dead.
+RESTORED 2026-06-27: the spectral radial solver in prolate spheroidal
+coordinates (ProlateSpheroidalLattice radial_method='spectral', n_basis,
+_laguerre_moment_matrices, _build_laguerre_matrices_algebraic) was restored to
+geovac/prolate_spheroidal_lattice.py from 8d692a0^ (it had been removed in the
+v2.7.0 compaction, commit 8d692a0). This test is live again and backs the
+Paper 11 spectral-radial headline (H2+ 0.0002% at n_basis=20).
 
 Tests for the spectral Laguerre radial solver in prolate spheroidal coordinates.
 

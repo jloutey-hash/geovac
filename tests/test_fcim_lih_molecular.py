@@ -1,11 +1,19 @@
 """
-Tests for LiH heteronuclear FCI via MolecularLatticeIndex.
+Tests for LiH heteronuclear FCI via MolecularLatticeIndex (FCI-M guardrail).
 
 LiH is the first heteronuclear molecule in GeoVac FCI.
 Uses same-atom V_ee approximation with cross-atom s-orbital V_ee.
 BSSE (Basis Set Superposition Error) is quantified via Boys-Bernardi
 counterpoise correction. CP-corrected binding energies are the
 physically meaningful quantities.
+
+RESTORED 2026-06-27: MolecularLatticeIndex (the LCAO/graph-concatenation
+molecular-encoding arc) was DELIBERATELY removed from geovac/lattice_index.py in
+the v2.7.0 compaction (commit 8d692a0); it is the FCI-M guardrail (CLAUDE.md
+sections 3.5 / 14), superseded by natural geometry. The code is resurrected to
+geovac/_archive/superseded/molecular_lattice_index.py (NOT production) and this
+test imports it from there, so the FCI-M headline numbers stay reproducible:
+LiH D_e^CP ~ 0.110 Ha, BSSE ~ 0.115 Ha, monotonic (no-equilibrium) PES.
 
 Experimental references:
     R_eq = 3.015 Bohr (1.595 Angstrom)
@@ -19,14 +27,22 @@ import warnings
 import numpy as np
 import pytest
 
-from geovac.lattice_index import (
+from geovac._archive.superseded.molecular_lattice_index import (
     MolecularLatticeIndex, LatticeIndex, compute_bsse_correction,
     compute_cross_atom_J, compute_cross_atom_K, compute_overlap_element,
 )
 
 
-# Suppress V_ee method warnings in tests
-pytestmark = pytest.mark.filterwarnings("ignore::UserWarning")
+# Suppress V_ee method warnings in tests.
+# Whole module marked slow: the heteronuclear FCI builds (numerical `quad`
+# cross-atom integrals + full-CI diagonalizations) run ~611s for the 47 tests,
+# with several individual tests >10s. This is a restored guardrail/archive test
+# of superseded MolecularLatticeIndex code (CLAUDE.md sections 3.5 / 14), not
+# daily-regression core pipeline, so it is skipped by default; run with --slow.
+pytestmark = [
+    pytest.mark.filterwarnings("ignore::UserWarning"),
+    pytest.mark.slow,
+]
 
 
 def _build_lih(R: float, nmax: int = 2, n_bridges: int = 10,
@@ -209,7 +225,17 @@ class TestLiHCounterpoise:
     """Tests for BSSE counterpoise correction."""
 
     def test_bsse_is_negative(self):
-        """BSSE lowers energy (negative correction) at nmax=2."""
+        """BSSE lowers energy (negative correction) at nmax=2.
+
+        MAGNITUDE NOTE (FCI-A/M coverage): the FCI-M paper headline
+        magnitudes — D_e^CP ≈ 0.110 Ha and BSSE ≈ 0.115 Ha — are reported
+        at n_max=3 (367k Slater determinants), which is far too slow for
+        CI (the n_max=2 build below is already in the multi-second/@slow
+        regime; the 367k-SD n_max=3 build is uncomputable in routine
+        testing). This sign-level guard at n_max=2 (BSSE < 0) is therefore
+        the deliberate CI backing; the n_max=3 magnitude is a documented
+        NO-TEST, not faked here. See docs/claim_test_matrix.md (FCI-A/M row).
+        """
         result = compute_bsse_correction(
             Z_A=3, Z_B=1, nmax_A=2, nmax_B=2, R=3.015,
             n_electrons_A=3, n_electrons_B=1,
@@ -233,6 +259,14 @@ class TestLiHCounterpoise:
         center, lowering E_mol below the true FCI limit for this basis.
         CP-corrected energies are the reliable quantity.
         See CHANGELOG v0.9.9 for full diagnosis.
+
+        MAGNITUDE NOTE (FCI-A/M coverage): the FCI-M paper headline
+        magnitude D_e^CP ≈ 0.110 Ha (with BSSE ≈ 0.115 Ha) is an n_max=3
+        result (367k Slater determinants), which is uncomputable in routine
+        CI (n_max=2 here is already @slow). This test therefore pins only
+        the SIGN (D_e^CP > 0, i.e. CP-corrected binding) at n_max=2 — the
+        deliberate CI guard. The n_max=3 magnitude is a documented NO-TEST
+        (not faked). See docs/claim_test_matrix.md (FCI-A/M row).
         """
         result = compute_bsse_correction(
             Z_A=3, Z_B=1, nmax_A=2, nmax_B=2, R=3.015,

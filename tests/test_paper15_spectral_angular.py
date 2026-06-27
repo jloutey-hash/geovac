@@ -1,10 +1,11 @@
 """
-ARCHIVED 2026-05-23 (Cleanup Track B): Track K Jacobi spectral angular solver
-(Level4SpectralAngular, solve_angular_spectral, compute_adiabatic_curve_spectral)
-depends on compute_core_screening_analytical, which was removed from
-geovac/level4_multichannel.py in v2.7.0 (commit 8d692a0). Module import fails;
-all tests collected here are dead. Simplified level4_multichannel.py in current
-code retains only the FD pathway.
+UN-ARCHIVED 2026-06-27: this test was wrongly archived in the v2.7.0 compaction
+(its stated blocker — compute_core_screening_analytical removed from
+level4_multichannel.py — was false: geovac/level4_spectral_angular.py defines its
+own compute_core_screening_analytical and imports clean). The Track K Jacobi
+spectral angular solver (Level4SpectralAngular, solve_angular_spectral,
+compute_adiabatic_curve_spectral) is LIVE; this test passes 18/18 and backs the
+Paper 15 spectral-angular headline (20x dimension reduction, 269x sweep speedup).
 
 Tests for Level 4 spectral angular solver (Track K).
 

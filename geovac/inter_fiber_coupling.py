@@ -324,16 +324,24 @@ def extract_channel_data(
             ang_density_all.append(np.zeros(n_alpha))
             continue
 
-        # pk_potentials was removed from solve_angular_multichannel during
-        # the composed_qubit + classical-PK-partitioning refactor (CLAUDE.md
-        # §3, "PK modifications" series).  PK is now applied at the
-        # composed_qubit level, not at the angular-eigenvalue level.  The
-        # parameter is preserved in upstream signatures for API backward-
-        # compatibility but is not propagated here.  Callers that need
-        # PK-aware channel data should use the composed_qubit pipeline.
+        # Propagate PK into the angular eigenvalue problem so the channel
+        # eigenvectors (vec_2d) are consistent with the PK-aware radial
+        # wavefunction F.  The classical PES path (ComposedTriatomicSolver /
+        # ComposedWaterSolver) solves each bond pair WITH PK via
+        # solve_level4_h2_multichannel (PK restored v3.56.0 Sprint F.2), but
+        # the v2.7.0 composed_qubit refactor had dropped PK *here*, leaving the
+        # inter-fiber angular eigenvectors PK-blind while F was PK-aware.  That
+        # mismatch specifically broke the off-diagonal 1-RDM exchange
+        # (full_exchange mode, Paper 17 Eq. eq:full_exchange / BeH2 11.7%),
+        # which depends on the PK-shaped l-channel mixing; monopole and
+        # exchange (extract_origin_density / compute_overlap_diagnostic) use a
+        # coarser density and are insensitive, so PK is *not* re-wired there.
+        # The composed_qubit pipeline passes pk_potentials=None (it partitions
+        # PK classically), so that path is bit-unchanged.
         _, vecs, _, channels = solve_angular_multichannel(
             rho, Re_s, l_max, n_alpha=n_alpha,
             Z_A=Z_A, Z_B=Z_B, z0=z0,
+            pk_potentials=pk_potentials,
         )
 
         if channels_out is None:

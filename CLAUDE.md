@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.49.2 (June 26, 2026)
+**Version:** v4.50.0 (June 27, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`/qa group2` whole-group run#1 FAIL→remediated (2026-06-27, v4.50.0):** calibrated 10/10; **no paper headline wrong** — v2.7.0-dropped code restored (P11/P15 spectral, MolecularLatticeIndex→_archive), BeH₂ regression fixed (11.7% recovered) + H2O improved 26%→19.4%, all coverage gaps backfilled; re-cert next. See debug/qa/group2_whole_run_notes.md.
 - **Flavor-B durability migration DONE (2026-06-26, v4.49.1):** the load-bearing WH7/Lorentzian-arc test backings (Papers 45/49 + the B3 Phase-3 / band-exhaustion sprints) lived in `debug/` (the prune-by-design clean-room) and were imported by `tests/test_wh7_*.py` — a silent-loss hazard. `git mv`d the 13-driver `wh7_b*` cluster `debug/` → **`tests/wh7_support/`** (permanent), fixed the 2 `REPO=ROOT.parent` depth lines, repointed the 8 consumer tests + their docstrings + paper_45's 9 driver cites (now §9-compliant) + the claim-matrix p49 row; added a README. The standalone `debug/wh7_toeplitz_temporal_probe.py` stays (its test recomputes, not imports). 71 wh7 + 30 topo/toeplitz tests green; C13/C14/C16 PASS; p45 errors=0. Same fix-pattern as `tests/rank2_rate_support/`. Closes the last named group1 follow-on. See CHANGELOG.
 - **`/qa group1` WHOLE-GROUP cert arc → CERTIFIED ✅ (2026-06-24, v4.49.0):** group1 (P29/39/40/42–50/52/53 + synthesis) certified via three single-invocation **whole-group** runs (v4.48.0→4.48.2→4.48.3) once the chunked-panel granularity rule (qa.md step 4) made whole-group feasible. Monotone convergence: defect severity LARGE→SMALL→code-docstring-only; calibration 9/10→9/10→**10/10 PERFECT**; the LLM-judgment dimensions (claims/synthesis/citation) → **MATERIAL-CLEAN**. Two calibration mechanisms recovered en route (synthesis lead-in via the v4.48.1 claims-reviewer sharpening; per-paper C14 via its v4.48.2 generalization — each *demonstrably* caught the seed it had missed the prior run). **Cert bar (PI direction, criteria.md §Material-vs-nit 2026-06-24):** calibrated + zero verified MATERIAL in the authoritative dimensions (papers/claims/synthesis/citations/test-logic) + deterministic-green (C5/C10/C11/C13/C14/C15/C16); **code-docstring stale-prose = fix-on-sight NIT** surfaced by the C16 docstring gate (propinquity / withdrawn-c3op entries now scan the lorentzian + gh_convergence backing modules). Second branch certified (after group3 v4.21.1). Per-run detail: CHANGELOG v4.48.0–4.49.0 + debug/qa/group1_{whole,recert,rc3}_run_notes.md.
 - **`/qa group1` cert-arc per-run one-liners → archived (round-5 §2 compaction, 2026-06-26, v4.49.1):** the granular per-run `/qa group1` cert bullets (v4.40.0–v4.47.0 + the Batch/cert/rem rollups + the early bites A/B1/B2/B3), superseded by the **group1 CERTIFIED** bullet above, moved verbatim to `docs/development_frontier_archive.md`. Per-run chronicle: CHANGELOG v4.21–4.49 + debug/qa/*_memo.md.
@@ -145,8 +146,8 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 | System | Result | Method | Paper |
 |:-------|:-------|:-------|:-----:|
-| He (atom) | 0.019% | 2D variational S⁵ + cusp, l_max=7 | 13 |
-| He (graph-native CI) | 0.20% | Zero-parameter, exact algebraic integrals, n_max=9 | 13 |
+| He (atom) | 0.004% (cusp); 0.022% (raw) | 2D variational, cusp l_max=4 / raw l_max=7 | 13 |
+| He (graph-native CI) | 0.19% | Zero-parameter, exact algebraic integrals, n_max=7 | 13 |
 | H⁻ | Bound, over-binds 21% | Graph-native CI, Z_c≈1.84 boundary | 13 |
 | PsH | 4.1% | Level 3, sign-flipped charge | 13 |
 | H₂⁺ | 0.0002% | Spectral Laguerre | 11 |
@@ -348,7 +349,7 @@ The core organizational principle of the project. Each electron configuration ha
 |:-----:|:-------|:-----------------|:------------|:-----:|
 | 1 | H (1-center, 1e) | S3 (Fock) | < 0.1% | 7 |
 | 2 | H2+ (2-center, 1e) | Prolate spheroid | 0.0002% (spectral) | 11 |
-| 3 | He (1-center, 2e) | Hyperspherical | 0.019% (2D var + self-consistent cusp); 0.20% (graph-native CI n_max=9, 0 params, exact algebraic integrals) | 13 |
+| 3 | He (1-center, 2e) | Hyperspherical | 0.004% (2D var, cusp l_max=4); 0.022% (raw l_max=7); 0.19% (graph-native CI n_max=7, 0 params, exact algebraic integrals) | 13 |
 
 *Level 3 note:* The previous 0.05% result used the FD adiabatic solver (lucky error cancellation, non-variational). The adiabatic coupled-channel solver converges to a structural floor of 0.19-0.20% (v2.0.8). The 2D variational solver (Track DI, v2.6.0) breaks this floor: raw 0.022% at l_max=7 (tensor-product Laguerre × Gegenbauer basis, 8000 dim), cusp-corrected 0.004% at l_max=4. The 2D solver treats R and α simultaneously, capturing non-adiabatic R-α correlation that the adiabatic approximation misses. l_max convergence is monotonic; the per-channel angular basis (n_basis=40 Gegenbauer functions) is the convergence bottleneck, not partial-wave truncation.
 | 4 | H2 (2-center, 2e) | Mol-frame hyperspherical | 96.0% D_e | 15 |

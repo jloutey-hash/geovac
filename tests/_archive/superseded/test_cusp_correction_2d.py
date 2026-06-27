@@ -1,3 +1,10 @@
+"""ARCHIVED 2026-06-27 (superseded). The cusp_correction_h2_pes API dropped the
+E_atoms dissociation-reference parameter (now V_NN; internal E_inf=E_pes[-1] for
+R>8 else -1.0), which this file's test_2d_baseline_consistency relied on -> D_e
+reference wrong for R>8 grids (336.8% vs 79.5%). The 2D+cusp pipeline is now
+covered by tests/test_level4_multichannel.py::TestHeadline2DCusp::test_lmax4_2d_cusp_de
+(Agent-3 backfill, /qa group2). Not collected (in _archive). See debug/qa/group2_whole_run_notes.md.
+"""
 """
 Tests for Track X2 cusp correction applied to 2D variational Level 4 H2 solver.
 
@@ -85,7 +92,7 @@ def _apply_cusp(scan: dict) -> dict:
     E_pes = scan['E_totals']
     l_max = scan['l_max']
 
-    pes_result = cusp_correction_h2_pes(R_grid, E_pes, l_max=l_max, E_atoms=-1.0)
+    pes_result = cusp_correction_h2_pes(R_grid, E_pes, l_max=l_max)
 
     per_point_cusp = []
     for pp in scan['per_point']:

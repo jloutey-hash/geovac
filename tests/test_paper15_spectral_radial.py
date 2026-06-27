@@ -1,9 +1,13 @@
 """
-ARCHIVED 2026-05-23 (Cleanup Track B): Track I Level 4 spectral Laguerre radial
-solver (solve_adiabatic_radial_spectral, solve_coupled_channel_radial_spectral,
-solve_direct_2d_spectral) was removed from geovac/level4_multichannel.py in
-v2.7.0 (commit 8d692a0). Simplified solve_level4_h2_multichannel retains only
-the FD pathway. All tests in this file reference dead spectral entry points.
+RESTORED 2026-06-27: the Track I Level 4 spectral Laguerre radial solver
+(solve_adiabatic_radial_spectral, solve_coupled_channel_radial_spectral,
+solve_direct_2d_spectral) + the radial_method/angular_method wiring in
+solve_level4_h2_multichannel were restored to geovac/level4_multichannel.py from
+8d692a0^ (removed in the v2.7.0 compaction). The Level 3 Laguerre helper
+solve_radial_spectral — DELETED (not renamed) in v2.7.0 — was resurrected into
+geovac/hyperspherical_radial.py so the adiabatic spectral path is genuinely
+spectral. This test is live again and backs the Paper 15 spectral-radial 16x
+headline (n_Re=400 -> n_basis=25).
 
 Tests for the Level 4 spectral Laguerre radial solver (Track I).
 

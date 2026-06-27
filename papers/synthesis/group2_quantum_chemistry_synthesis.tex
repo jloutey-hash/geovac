@@ -1,0 +1,961 @@
+% group2_quantum_chemistry_synthesis.tex
+% GeoVac Group 2 Synthesis: Quantum Chemistry / Natural Geometry Hierarchy Arc
+% Status: Project archive synthesis, June 2026
+% Audience: quantum chemists, electronic-structure theorists
+
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{observation}{Observation}
+\newtheorem{conjecture}{Conjecture}
+
+\begin{document}
+
+\title{The Natural Geometry Hierarchy:\\
+A Synthesis of the GeoVac Quantum-Chemistry Arc}
+\thanks{Group~2 synthesis in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{June 26, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The Geometric Vacuum (GeoVac) framework discretizes non-relativistic
+electronic structure on \emph{natural geometries}:\ for each separable
+quantum system there is a coordinate system in which the Coulomb
+singularities become boundary conditions and the Laplace--Beltrami
+operator discretizes on a sparse graph with quantum-number labels for
+nodes.  This synthesis assembles the framework's quantum-chemistry
+arc---the nine Group~2 papers spanning one-electron atoms, the
+two-center one-electron ion, the two-electron atom, the two-center
+two-electron molecule, and the core--valence and polyatomic
+extensions---into a single coherent narrative organized by the
+\emph{natural geometry hierarchy}.  The hierarchy is a grid indexed by
+the number of nuclear centers and the number of electrons:\ $S^3$
+(Fock) for atoms~\cite{loutey_paper7}, the prolate spheroid for
+$\mathrm{H}_2^+$~\cite{loutey_paper11}, hyperspherical coordinates for
+He~\cite{loutey_paper13}, molecule-frame hyperspherical coordinates for
+$\mathrm{H}_2$~\cite{loutey_paper15}, and composed fiber bundles for
+core--valence and polyatomic systems~\cite{loutey_paper17,
+loutey_paper19}.  Three threads run through the arc.  \emph{First}, an
+algebraic-first program:\ the angular content is computed exactly from
+Gaunt coefficients and Wigner $3j$ symbols at every level, the
+prolate-spheroidal electron--electron repulsion is replaced by an
+algebraic Neumann expansion~\cite{loutey_paper12}, the radial solvers
+reduce to three-term Laguerre recurrences, and the split-region
+Legendre nuclear coupling terminates exactly via the $3j$ triangle
+inequality~\cite{loutey_paper15}; what currently survives as quadrature
+($Z_{\mathrm{eff}}$ screening, the adiabatic potential curves, the
+hyperradial coupling) is named explicitly, and finding algebraic
+replacements is an ongoing goal rather than a deficiency.
+\emph{Second}, two proven structural negative theorems delimit the
+design space:\ in a single-center molecular Sturmian basis with a
+shared momentum scale the one-electron Hamiltonian is proportional to
+the overlap matrix, so its eigenvalues are independent of the
+internuclear distance and cannot bind~\cite{loutey_paper8}; and a graph
+built by concatenating atom-centered lattices has an $R$-independent
+intra-atomic kinetic energy, producing a monotonically attractive
+potential-energy surface with no equilibrium~\cite{loutey_fci_mol}.
+\emph{Third}, honest accuracy ceilings:\ the framework reaches
+$0.0002\%$ for $\mathrm{H}_2^+$, $0.004\%$--$0.022\%$ (properly
+variational) for He, $96.0\%$ of $D_e$ for $\mathrm{H}_2$, and---in the
+composed architecture, whose accuracy bottleneck is the
+Phillips--Kleinman pseudopotential---$5.3\%$, $11.7\%$, and $19.4\%$
+equilibrium-bond-length error for LiH, $\mathrm{BeH}_2$, and
+$\mathrm{H}_2\mathrm{O}$ respectively.  The classical-solver
+investigation is complete:\ its accuracy ceilings are characterized,
+and the framework is positioned as a zero-parameter, structurally
+sparse \emph{research instrument}---a computationally principled
+alternative whose primary downstream value (qubit-Hamiltonian sparsity
+for quantum simulation) lives in the quantum-computing arc---not as a
+replacement for production quantum chemistry.  The discrete graph and
+the continuous Laplace--Beltrami operator are dual descriptions
+connected by proven conformal maps; the interpretive question of which
+is more fundamental is left open.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{Introduction}
+\label{sec:intro}
+%% ========================================================================
+
+The Group~3 foundations arc of GeoVac establishes that the hydrogen
+atom's momentum-space Schr\"odinger equation maps, by Fock's 1935
+stereographic projection~\cite{fock1935}, onto the free Laplacian on
+the unit three-sphere $S^3$, and that a discrete graph on
+quantum-number labels converges to the $S^3$ Laplace--Beltrami operator
+in the continuum limit~\cite{loutey_paper0, loutey_paper1,
+loutey_paper7}.  That arc answers a question about a single
+one-electron atom.  The present synthesis takes up the question the
+foundations arc opens but does not close:\ what is the right
+discretization for a \emph{molecule}, or for an atom with \emph{more
+than one electron}?
+
+The organizing answer is the \emph{natural geometry principle}, stated
+first in Paper~11~\cite{loutey_paper11}:\ every separable quantum
+system has a natural lattice, namely the lattice that discretizes the
+Laplace--Beltrami operator in the coordinate system where the problem
+separates.  For a one-center one-electron system that coordinate system
+is $S^3$; for a two-center one-electron system it is the prolate
+spheroid; for a one-center two-electron system it is the hyperspherical
+coordinate system; for a two-center two-electron system it is the
+molecule-frame hyperspherical system; and for systems with electrons on
+separated length scales (a tight core and a diffuse valence shell) the
+natural object is a \emph{composed} geometry---a fiber bundle in which
+each electron group inhabits its own natural coordinate system, coupled
+by screening functions and pseudopotentials.  Crucially, this is not a
+linear tower in which each level subsumes the previous one:\ the
+Level-4 two-electron coordinates $(R_e, \alpha)$ are simply undefined
+for a single electron, so the hierarchy is a two-dimensional grid
+indexed by (number of centers) $\times$ (number of
+electrons)~\cite{loutey_paper17}.
+
+This grid structure is the reason the chemistry arc is not a single
+algorithm but a sequence of natural geometries, each with its own
+separation of variables, its own algebraic content, and its own
+accuracy ceiling.  Table~\ref{tab:hierarchy} summarizes the hierarchy
+and the headline result at each level; the body of this synthesis
+unpacks each row, the algebraic structure that makes it work, and the
+two proven theorems that mark the boundaries of what natural geometry
+can and cannot do.
+
+\begin{table*}[t]
+\centering
+\caption{The GeoVac natural geometry hierarchy for quantum chemistry.
+Each level is the coordinate system in which the corresponding system
+separates; the result column reports the headline figure at its stated
+tier, with the source paper.  Composed (Level~5) results are limited by
+the Phillips--Kleinman pseudopotential, the characterized accuracy
+ceiling of the composed architecture (Sec.~\ref{sec:composed}).}
+\label{tab:hierarchy}
+\begin{tabular}{l l l l c}
+\toprule
+Level & System (centers, electrons) & Natural geometry & Headline result & Paper \\
+\midrule
+1 & atom (1, 1) & $S^3$ (Fock projection) & $<0.1\%$ (one-electron) & \cite{loutey_paper7} \\
+2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & $0.0002\%$ energy (spectral Laguerre) & \cite{loutey_paper11} \\
+3 & He (1, 2) & hyperspherical & $0.004\%$--$0.022\%$ (2D variational); $0.19\%$ (graph-native CI) & \cite{loutey_paper13} \\
+4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels) & \cite{loutey_paper15} \\
+4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 64\%$ (unbound $D_e$, no PK) & \cite{loutey_paper17} \\
+5 & LiH (core+valence) & composed (L3 $\oplus$ L4) & $R_{\mathrm{eq}}$ $5.3\%$ ($l$-dependent PK) & \cite{loutey_paper17} \\
+5 & $\mathrm{BeH}_2$ (polyatomic) & composed $+$ 1-RDM exchange & $R_{\mathrm{eq}}$ $11.7\%$ & \cite{loutey_paper17} \\
+5 & $\mathrm{H}_2\mathrm{O}$ (triatomic) & composed (five-block, uncoupled) & $R_{\mathrm{eq}}$ $19.4\%$ & \cite{loutey_paper17} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+GeoVac is presented throughout as a discretization framework that
+exploits natural geometry, not as a new foundation for quantum
+mechanics.  The discrete graph and the continuous Laplace--Beltrami
+operator are dual descriptions connected by the proven conformal maps
+of the foundations arc, and the interpretive question of ontological
+priority is left to the reader.  The framework's concrete
+advantages---a zero-parameter construction from nuclear charges and
+geometry alone, angular-momentum selection rules baked into the basis,
+exact algebraic matrix elements, and structural
+sparsity---are independent of that interpretive question and are the
+properties this synthesis foregrounds.
+
+%% ========================================================================
+\section{Level 1--2: From the Atom to the Diatomic Ion}
+\label{sec:level12}
+%% ========================================================================
+
+\subsection{The atomic baseline and the bond sphere}
+
+The one-electron atomic baseline is the $S^3$ graph of the foundations
+arc:\ the discrete Fock lattice reproduces the Rydberg spectrum and
+solves one-electron atoms to better than $0.1\%$ with no free
+parameters~\cite{loutey_paper1, loutey_paper7}.  The natural first
+question for chemistry is whether the same $S^3$ object handles a
+\emph{molecule}.  Paper~8~\cite{loutey_paper8} pursues this directly:\
+it shows that a diatomic molecule is geometrically a single $S^3$ with
+two weighted poles---the \emph{bond sphere}---in which the internuclear
+distance $R$ encodes as a polar angle $\gamma$ through
+$\cos\gamma = (p_0^2 - p_R^2)/(p_0^2 + p_R^2)$, and all cross-atom
+matrix elements are $SO(4)$ Wigner $D$-matrix elements evaluated at the
+bond rotation $e^{i\gamma A_y}$.  The geometry is consistent, and it
+yields exact selection rules for $\sigma$-bonds:\ the bond rotation
+preserves $m=0$ within $l=1$ and does not mix $s$ and $p$ states,
+$D^2_{10,10}(\gamma) = 1$ and $D^2_{00,10}(\gamma) = 0$ for all
+$\gamma$~\cite{loutey_paper8}.
+
+\subsection{The Sturmian structural theorem (a guardrail)}
+
+The bond sphere construction also produces the arc's first proven
+\emph{negative} theorem, and it is load-bearing for everything that
+follows.  In the molecular Sturmian basis~\cite{avery2004} with a shared momentum scale
+$p_0$, the one-electron Hamiltonian matrix is
+\begin{equation}
+H_{ij} = \frac{p_0^2}{2}\!\left(\frac{1}{\beta_j} - 1\right) S_{ij},
+\label{eq:sturmian_structural}
+\end{equation}
+where $S_{ij}$ is the overlap matrix and $\beta_j$ is the Sturmian
+eigenvalue of orbital~$j$.  Because $H \propto S$, the generalized
+eigenvalues $E_k = \tfrac{1}{2}p_0^2(1/\beta_k - 1)$ are independent of
+the bond angle $\gamma$, hence independent of the internuclear
+distance~$R$~\cite{loutey_paper8}.  A basis that produces
+$R$-independent eigenvalues cannot describe binding, which is by
+definition an $R$-dependent lowering of the energy.  Paper~8 sharpens
+this further:\ for a heteronuclear diatomic with charge ratio
+$Z_A/Z_B > 1$ there is no atom-centered shared-$p_0$ Sturmian basis
+that binds both centers simultaneously, and the dual-scale repair drives
+the two $p_0$ values toward a geometric mean that eliminates the scale
+separation~\cite{loutey_paper8}.
+
+This theorem is a guardrail in the project's sense:\ it rules out an
+entire class of single-center, shared-exponent molecular encodings
+(nested hyperspherical, unified-basis, single-$p_0$ Sturmian CI), and
+the resolution it forces---reintroduce the $R$-dependent spectrum by
+moving to the prolate spheroidal coordinates where the diatomic
+actually separates---is the natural-geometry principle in action.
+
+\subsection{The prolate spheroidal lattice for $\mathrm{H}_2^+$}
+
+Paper~11~\cite{loutey_paper11} implements that resolution.  The
+two-center one-electron problem separates in prolate spheroidal
+coordinates $(\xi, \eta, \phi)$~\cite{flammer1957}, and the separated equations
+discretize on a prolate spheroidal lattice with a spectral angular
+solver (Legendre basis) and a spectral radial solver~\cite{trefethen2000}, with Brent
+root-finding in the separation parameter $c^2 = -R^2 E_{\mathrm{elec}}/2$
+to enforce self-consistency.  The method has zero free parameters:\ all
+inputs are nuclear charges, the internuclear distance, and the basis
+resolution.  With the spectral Laguerre radial solver at
+$n_{\mathrm{basis}} = 20$, the $\mathrm{H}_2^+$ ground-state energy is
+$E_{\min} = -0.6025$~Ha against the exact $-0.6026$~Ha~\cite{bates1953}---a $0.0002\%$
+error, the most accurate single result in the chemistry
+arc---with the correct dissociation to $\mathrm{H}+p$ as
+$R \to \infty$~\cite{loutey_paper11}.  The spectral solver achieves a
+$250\times$ dimension reduction, a $270\times$ speedup, and a
+$5000\times$ accuracy improvement over a finite-difference baseline
+whose $1.01\%$ error is shown to be a discretization artifact, not an
+intrinsic limit of the basis~\cite{loutey_paper11}.
+
+The algebraic structure here is the first concrete instance of the
+arc's central theme.  For $\sigma$ states ($m=0$), the spectral
+Laguerre matrix elements are computed entirely from three-term
+recurrence relations on Laguerre moment matrices, eliminating numerical
+quadrature from the radial solver completely (the overlap is exact,
+$S_{mn} = \delta_{mn}/2\alpha$, and the kinetic and potential matrices
+are finite sums of moments, reproduced to $\sim\!10^{-12}$ against
+quadrature)~\cite{loutey_paper11}.  For $\pi$ and $\delta$ states
+($m \neq 0$) an associated Laguerre basis absorbs the centrifugal $1/x$
+singularity via a partial-fraction decomposition and a Stieltjes
+integral recurrence, reducing the non-algebraic content of the entire
+solver to a \emph{single} transcendental seed, the exponential-integral
+value $e^a E_1(a)$; all higher moments follow from the rational
+recurrence $S_0^{(k)}(a) = \Gamma(k) - a\,S_0^{(k-1)}(a)$ for $k \ge
+1$~\cite{loutey_paper11}.  This is the exchange-constant taxonomy of the
+foundations arc made concrete:\ the irreducible transcendental content
+of the diatomic radial problem is one seed in the \emph{composition}
+tier, tagged to a specific integral, rather than diffuse numerical
+error~\cite{loutey_paper18}.
+
+%% ========================================================================
+\section{Level 3: The Two-Electron Atom and the Cusp}
+\label{sec:level3}
+%% ========================================================================
+
+\subsection{Algebraic $V_{ee}$ on the prolate spheroidal lattice}
+
+Before leaving the diatomic geometry, Paper~12~\cite{loutey_paper12}
+adds the second electron and confronts the electron--electron
+repulsion $\langle \phi_i | 1/r_{12} | \phi_j \rangle$ over the
+six-dimensional two-particle configuration space.  Standard numerical
+quadrature on a grid converges slowly because of the Coulomb
+singularity at $r_{12} = 0$ and saturates near $80\%$ of the exact
+$\mathrm{H}_2$ dissociation energy regardless of basis size.  The
+algebraic replacement is the Neumann expansion~\cite{neumann1878} of $1/r_{12}$ in prolate
+spheroidal coordinates, which decomposes each six-dimensional integral
+into a finite sum of products of one-dimensional auxiliary integrals
+computable by recurrence relations:\ the angular moments $C_l(q)$, the
+exponential moments $A_n(\alpha)$, and the first- and second-kind
+Legendre moments all satisfy exact three-term recurrences, so the
+$V_{ee}$ matrix is exact within the Neumann truncation order with no
+quadrature grids and no fitted parameters~\cite{loutey_paper12}.  A
+selection rule $C_l(q) = 0$ for $q < l$ or $(q-l)$ odd truncates the
+effective sum automatically.
+
+On $\mathrm{H}_2$ at $R = 1.4011$~bohr the algebraic Neumann $V_{ee}$
+reaches $92.4\%$ of the exact $D_e$ with $72$ basis functions, against
+$80.1\%$ for numerical $V_{ee}$ at the same basis size---a uniform
+$12$--$20$ percentage-point improvement at every basis size from $1$ to
+$72$ functions, and the Neumann result plateaus, confirming that the
+$V_{ee}$ \emph{integration} error has been
+eliminated~\cite{loutey_paper12}.  The paper then diagnoses the
+remaining $7.6\%$ gap honestly:\ it is a one-electron basis
+completeness limit, not an integration error.  The electron--electron
+cusp requires the non-analytic terms $r_{12}^{1/2}$ and
+$r_{12}\ln r_{12}$ (the Kato/Fock structure~\cite{kato1957}) that no polynomial prolate
+spheroidal basis can represent.  This is the framework's embedding-tier
+transcendental:\ the cusp is two-dimensional in the angular pair
+coordinate and is the canonical example of an exchange constant that no
+single algebraic insertion reproduces~\cite{loutey_paper18}.  The
+diagnosis identifies the next natural geometry---hyperspherical
+coordinates, where the coalescence is a boundary condition rather than
+a coordinate singularity.
+
+\subsection{The hyperspherical lattice for helium}
+
+Paper~13~\cite{loutey_paper13} introduces that geometry.  In
+hyperspherical coordinates~\cite{aquilanti1986, avery1989} the He problem becomes a coupled-channel
+expansion in which the angular eigenvalue problem depends parametrically
+on the hyperradius~$R$, so the channel functions vary with~$R$; this
+coupled-channel structure has the form of a fiber bundle and is the
+mathematical prototype for electron--nuclear coupling in molecules.
+The electron--electron cusp at $\alpha = \pi/4$, $\theta_{12}=0$ becomes
+a boundary condition rather than a singularity~\cite{loutey_paper13}.
+
+The accuracy results here are reported at carefully separated tiers, and
+the synthesis preserves the distinction.  The original single-channel
+adiabatic solver gives $E = -2.9052$~Ha, nominally $0.05\%$ from the
+exact $-2.9037$~Ha, but it is \emph{non-variational}:\ it lies below the
+exact energy through a fortuitous cancellation of adiabatic and
+finite-difference error, and the paper labels it as
+such~\cite{loutey_paper13}.  The properly variational results come from
+a two-dimensional variational solver that treats the hyperradius and
+hyperangle simultaneously, avoiding the adiabatic approximation:\
+$0.022\%$ raw at $l_{\max}=7$ and $0.004\%$ with a Schwartz cusp
+correction at $l_{\max}=4$, both genuine variational upper
+bounds~\cite{loutey_paper13}.  A separate, fully zero-parameter route
+is the graph-native configuration interaction, which uses the graph
+Laplacian as the one-body operator with exact rational Slater
+integrals and reaches $0.19\%$ at $n_{\max}=7$ with no free
+parameters~\cite{loutey_paper13}.  Each route exercises a different
+part of the algebraic registry:\ the angular sector is exact throughout
+(Gaunt integrals $G(l,k,l') = 2\,(l\,k\,l'\,|\,0\,0\,0)^2$, $SO(6)$
+Casimir eigenvalues $\nu(\nu+4)/2$, closed-form perturbation
+coefficients), while the adiabatic potential curves $U_{\mathrm{eff}}(R)$
+and the parametric angular eigenvalues $\mu(R)$ remain point-by-point
+diagonalizations---numerical content named explicitly as a current,
+not fundamental, feature~\cite{loutey_paper13, loutey_paper18}.
+
+Paper~13 also documents an instructive negative result:\ in the
+\emph{adiabatic} approximation, increasing $l_{\max}$ beyond $0$
+worsens the energy, because the finite-difference treatment of the
+boundary singularities $l(l+1)/\cos^2\alpha$ and $l(l+1)/\sin^2\alpha$
+degrades faster than the partial-wave content improves; the adiabatic
+channel truncation has an intrinsic floor near $0.19\%$--$0.20\%$.  The
+2D variational solver is what breaks that floor~\cite{loutey_paper13}.
+The same fiber-bundle structure, coupled to a nuclear lattice, delivers
+an end-to-end demonstration:\ ab initio rovibrational constants for
+$\mathrm{H}_2$ with zero spectroscopic input, the fundamental
+$\nu_{01} = 4157~\mathrm{cm}^{-1}$ ($0.1\%$) and the rotational
+constant $B_e = 59.5~\mathrm{cm}^{-1}$ ($2.2\%$)~\cite{loutey_paper13}.
+
+%% ========================================================================
+\section{Level 4: The Two-Center Two-Electron Molecule}
+\label{sec:level4}
+%% ========================================================================
+
+The two-center two-electron molecule $\mathrm{H}_2$~\cite{james1933} combines all five
+Coulomb singularities and had resisted a single natural coordinate
+system.  Paper~15~\cite{loutey_paper15} introduces molecule-frame
+hyperspherical coordinates $(R_e, \alpha, \theta_1, \theta_2, \Phi)$
+parameterized by the dimensionless ratio $\rho = R/(2R_e)$, where $R$
+is the internuclear distance and $R_e$ the electronic hyperradius.  The
+electron--electron cusp appears at $\alpha = \pi/4$, $\theta_{12} = 0$
+\emph{independent of molecular geometry}---a structural advantage over
+prolate spheroidal coordinates, where the cusp is a coordinate
+singularity---and the angular eigenvalue problem depends on $(R, R_e)$
+only through $\rho$, collapsing a two-dimensional parameter sweep to one
+dimension~\cite{loutey_paper15}.
+
+A coupled-channel expansion in body-frame partial waves $(l_1, m_1,
+l_2, m_2)$ with the gerade constraint $l_1 + l_2$ even and $m_1 + m_2 =
+0$, solved with the same two-dimensional $(R_e, \alpha)$ variational
+solver that avoids the adiabatic approximation, recovers $96.0\%$ of
+the exact $D_e$~\cite{kolos1968} at $l_{\max}=6$ with $\sigma$ and $\pi$ channels ($61$
+channels; a complete-basis extrapolation reaches
+$\sim\!97\%$)~\cite{loutey_paper15}.  This exceeds the $92.4\%$ that
+prolate spheroidal CI with algebraic Neumann integrals achieved
+(Paper~12), confirming the cusp-resolution advantage of the
+hyperspherical geometry.  The framework extends to heteronuclear
+diatomics:\ for $\mathrm{HeH}^+$ a charge-center origin shift and
+removal of the gerade constraint recover $93.1\%$ of the exact $D_e$ at
+$l_{\max}=4$ with $\sigma+\pi$ channels~\cite{loutey_paper15}.
+
+The algebraic content reaches its cleanest statement here.  The nuclear
+potential coupling is a split-region Legendre expansion whose sum over
+Gaunt integrals terminates \emph{exactly} at $k = l' + l$ by the $3j$
+triangle inequality $|l' - l| \le k \le l' + l$---no truncation
+parameter, exact to machine precision in all
+regimes~\cite{loutey_paper15}.  This is the arc's prime example of a
+continuous integration replaced by a finite algebraic sum once the
+right structure is identified.  What remains numerical is named:\ the
+$Z_{\mathrm{eff}}$ screening correction (Gauss--Legendre quadrature),
+and the angular eigenvalue sweep at each $\rho$, which is a
+point-by-point diagonalization because the split-region structure is
+piecewise smooth~\cite{loutey_paper15, loutey_paper18}.
+
+Paper~15 is careful about variational hygiene.  The adiabatic
+approximation systematically \emph{over}-estimates $D_e$ by roughly
+$11\%$ relative to the 2D variational solver, and at $l_{\max}=4$ with
+$m_{\max}=1$ the adiabatic $D_e$ exceeds the exact value, violating the
+variational principle; the 2D result is the correct bound, and the
+$\sim\!10$ percentage-point gap between them is the kinetic-energy cost
+of non-adiabatic coupling~\cite{loutey_paper15}.  The convergence also
+shows an even--odd staircase:\ even-$l_{\max}$ increments add large
+gains (the gerade constraint forces direct nuclear coupling only at even
+$l_{\max}$) while odd increments are negligible---a selection-rule
+signature, not a numerical accident~\cite{loutey_paper15}.
+
+%% ========================================================================
+\section{Level 5: Composed Geometries and the Accuracy Ceiling}
+\label{sec:composed}
+%% ========================================================================
+
+\subsection{The composition principle}
+
+Systems with core electrons resist a single natural geometry because
+core and valence electrons occupy different length scales, and---as
+noted in Sec.~\ref{sec:intro}---the hierarchy does not collapse
+downward (Level-4 coordinates are undefined for one
+electron)~\cite{loutey_paper17}.  Paper~17~\cite{loutey_paper17}
+introduces \emph{composed} natural geometries:\ fiber bundles in which
+each electron group inhabits its own natural coordinate system, coupled
+by screening functions and ab initio Phillips--Kleinman (PK)
+pseudopotentials~\cite{phillips_kleinman1959} derived entirely from the core wavefunction.  For LiH,
+the $\mathrm{Li}^+\,1s^2$ core is solved by the Level-3 hyperspherical
+method, yielding a screening function $Z_{\mathrm{eff}}(r)$ and the PK
+parameters; the two valence electrons are solved by the Level-4
+molecule-frame method with $Z_{\mathrm{eff}}$ injected; and the
+potential-energy surface is scanned by a $\rho$-collapse adiabatic
+method.  The construction uses \emph{zero} experimental molecular
+data---all PK inputs are atomic (the core wavefunction, the ionization
+energy, the nuclear charges)~\cite{loutey_paper17}.
+
+\subsection{Results and the PK accuracy ceiling}
+
+The composed LiH potential-energy surface gives $R_{\mathrm{eq}} =
+3.21$~bohr at $l_{\max}=2$ ($6.4\%$ error versus the experimental
+$3.015$~bohr~\cite{huber1979}, improved from $17\%$ in the LCAO baseline) and
+$\omega_e = 1471~\mathrm{cm}^{-1}$ ($4.6\%$); an $l$-dependent PK
+variant, which restricts the projector to the $l=0$ core channels,
+reduces the bond-length error to $5.3\%$~\cite{loutey_paper17}.  The
+same parameter-free formula transfers to $\mathrm{BeH}_2$ and
+$\mathrm{H}_2\mathrm{O}$:\ with full one-reduced-density-matrix
+inter-fiber exchange, $\mathrm{BeH}_2$ reaches $11.7\%$
+bond-length error (matching a single-parameter fitted exchange model at
+zero free parameters), and the uncoupled $\mathrm{H}_2\mathrm{O}$
+construction reaches $19.4\%$ (improved from $26\%$ by the v3.x PK-consistency fix) with a correct qualitative
+surface~\cite{loutey_paper17}.
+
+Two findings establish that the PK pseudopotential is the
+\emph{characterized accuracy ceiling} of the composed architecture, not
+a tunable knob.  First, the PK barrier is essential, not cosmetic:\
+removing it collapses $R_{\mathrm{eq}}$ to $0.88$~bohr, so PK is what
+creates the bonding-versus-Pauli-repulsion balance that produces an
+equilibrium at all~\cite{loutey_paper17}.  Second, the residual error
+is structural.  Across all four solver$\times$PK combinations the
+bond-length error saturates near $5$--$6\%$ at the $l_{\max}=2$
+operating point, and the $l_{\max}$ drift (the systematic outward
+creep of $R_{\mathrm{eq}}$ with partial-wave order) is not removed by
+the 2D variational solver, by the $l$-dependent PK, or by an
+$R$-dependent PK whose reference length cannot be derived from atomic
+quantities without circular reasoning~\cite{loutey_paper17}.  The paper
+attributes this to a deep correlation wall---labeled W1e, the composed
+architecture's instance of the framework's multi-focal composition wall
+pattern---and documents that single-mechanism repairs each saturate
+well below closure:\ a bonding-orbital PK extension at a $43\%$ ceiling,
+explicit-core Hartree pressure at $\sim\!26\%$, basis enlargement at
+$\sim\!10\%$, with Schmidt orthogonalization and core correlation each
+contributing negligibly~\cite{loutey_paper17}.
+
+\subsection{Equilibrium without PK: the Level-4N control}
+
+That PK is a \emph{cost of factorization} rather than a missing physics
+term is established by the Level-4N control, the exact $N$-electron
+generalization in which all four LiH electrons share one
+$S^{11}$ Hilbert space under $SO(12)$ with $S_4$
+antisymmetry~\cite{loutey_paper17}.  At $l_{\max}=2$ ($12$ $S_4$
+channels, angular dimension $2592$) the Level-4N surface has a genuine
+equilibrium near $R_{\mathrm{eq}} \approx 1.0$--$1.1$~bohr ($\approx
+64\%$ error) with \emph{no} PK---demonstrating that binding exists
+without the pseudopotential, and that the $l_{\max}=2$ $S_4\,[2,2]$
+angular basis is genuinely insufficient for LiH binding rather than the
+encoding being wrong.  The composed geometry trades this exact
+inter-group antisymmetry for a $144\times$ angular compression (cost
+scaling $l_{\max}^2$ versus $l_{\max}^{11}$), which is what makes the
+composed architecture the production operating point despite the
+$5$--$6\%$ ceiling~\cite{loutey_paper17}.  The reason the trade is
+forced and not a matter of convenience is a structural obstruction:\
+exact antisymmetry requires a shared coordinate system, while
+composition factorizes the wavefunction into incompatible coordinate
+systems---so the three tested PK alternatives (node exclusion, a
+fiber-bundle Berry connection, spectral orthogonality) each fail for the
+same reason~\cite{loutey_paper17}.
+
+%% ========================================================================
+\section{The PK-Free Alternative and the FCI Encodings}
+\label{sec:pkfree_fci}
+%% ========================================================================
+
+\subsection{Balanced coupled composition (Paper 19)}
+
+Paper~19~\cite{loutey_paper19} pursues the natural follow-on:\ can the
+PK pseudopotential be replaced by explicit cross-block physics?  The
+balanced coupled Hamiltonian adds cross-center nuclear attraction
+$V_{ne}$ via a multipole expansion with exact Gaunt termination
+(the multipole sum terminates at $L_{\max} = 2 l_{\max}$ by the same
+$3j$ selection rules, with no truncation error), restoring the
+cross-block one-body coupling that the composed architecture
+lacks; these missing one-body terms are the Shibuya--Wulfman integrals of Coulomb Sturmian theory~\cite{shibuya1965, loutey_paper19}.  The result is the PK-free alternative for
+single-point energies at fixed geometry:\ LiH four-electron FCI reaches
+$0.20\%$ energy error at $n_{\max}=3$ (down from $1.8\%$ at $n_{\max}=2$),
+using analytical incomplete-gamma cross-center integrals at machine
+precision~\cite{loutey_paper19}.  The structural cost is geometric
+rather than energetic:\ the equilibrium bond length still drifts to
+$R_{\mathrm{eq}} = 3.28$~bohr ($\approx 8.8\%$ error), though the drift
+per $n_{\max}$ step is about three times smaller than the PK
+$l_{\max}$ drift~\cite{loutey_paper19}.  The honest reading is that
+energy converges excellently while geometry drifts, making the balanced
+coupled Hamiltonian optimal for single-point quantum simulation at
+fixed geometries rather than for full potential-energy
+surfaces~\cite{loutey_paper19}.  Paper~19 also records a clean
+negative:\ cross-block electron--electron integrals \emph{without} the
+matching cross-center $V_{ne}$ are energetically unbalanced ($29\%$
+error, worse than PK), and a harmonic-driven orthogonalization wall
+blocks second-row hydrides such as NaH, which PK cross-center coupling
+reduces but does not close~\cite{loutey_paper19}.
+
+\subsection{Graph-native FCI for atoms}
+
+The atomic FCI paper~\cite{loutey_fci_atoms} solves multi-electron
+atoms directly on the sparse $S^3$ graph Hamiltonian using
+Slater--Condon rules~\cite{Slater1960, CondonShortley1935} with exact $R^k$ radial integrals and Gaunt
+coefficients, with Slater determinants indexed as sorted tuples of
+spin-orbital labels (relational lattice indexing).  Helium reaches
+$0.35\%$ at $n_{\max}=5$ (grid-based) and $0.19\%$ at $n_{\max}=7$ with
+exact rational Slater integrals; lithium $1.07\%$ and beryllium
+$0.90\%$ at $n_{\max}=4$ (the latter with $487{,}635$
+determinants)~\cite{loutey_fci_atoms}.  The Hamiltonian is sparse
+(fill fraction $0.68\%$ for He at $n_{\max}=5$, $0.12\%$ for Li at
+$n_{\max}=4$) with a sub-quadratic nonzero-count growth exponent
+$\alpha \approx 1.4$--$1.5$.  The paper documents an instructive
+variational subtlety:\ a hybrid one-body operator that mixes graph
+Laplacian off-diagonals (carrying $\kappa = -1/16$) improves He but
+violates the variational principle for three-electron lithium, so the
+exact hydrogenic one-body operator is required for monotonic
+convergence~\cite{loutey_fci_atoms}.  The dominant remaining error for
+heteronuclear LiH at $n_{\max}=3$ is basis truncation, not integral
+incompleteness---the basis-set superposition error there exceeds the
+experimental binding energy, so the raw binding number is reported with
+its counterpoise correction~\cite{boys_bernardi} and its honest caveat~\cite{loutey_fci_atoms}.
+
+\subsection{The graph-concatenation theorem (a second guardrail)}
+
+The molecular FCI paper~\cite{loutey_fci_mol} supplies the arc's second
+proven negative theorem.  A topological LCAO architecture that builds a
+molecular graph by concatenating atom-centered hydrogenic lattices
+(via Mulliken cross-nuclear attraction, Slater--Condon repulsion, and
+overlap bridges) is shown to have an intra-atomic graph-Laplacian
+kinetic energy that is \emph{completely $R$-independent} by
+construction:\ the atomic lattice structure does not change as the
+nuclei approach.  The balanced Hamiltonian therefore produces a
+monotonically attractive potential-energy surface with no equilibrium
+geometry---the binding energy decreases smoothly from $0.464$~Ha at
+$R=1.5$~bohr to $0.042$~Ha at $R=5.0$~bohr, with a virial ratio far
+from unity~\cite{loutey_fci_mol}.  The paper documents a $29$-version
+diagnostic arc that falsifies basis-set superposition error as the
+geometric driver, rules out orbital-exponent relaxation, and---citing
+the Sturmian structural theorem of Paper~8---disproves every
+single-center Sturmian and bond-sphere alternative as a repair; a
+single-parameter Fock-weighted kinetic correction partially restores an
+equilibrium ($R_{\mathrm{eq}} \approx 3.8$~bohr) but cannot fit
+$R_{\mathrm{eq}}$ and $D_e$ simultaneously~\cite{loutey_fci_mol,
+loutey_paper8}.
+
+Together the two negative theorems---Sturmian structural ($H \propto S$
+$\Rightarrow$ $R$-independent eigenvalues, Paper~8) and graph
+concatenation ($R$-independent kinetic energy $\Rightarrow$ no
+equilibrium, the molecular FCI paper)---are guardrails:\ they explain
+\emph{why} the natural-geometry hierarchy is necessary.  A molecule
+must be discretized in coordinates where the separation introduces
+$R$-dependence (prolate spheroidal, molecule-frame hyperspherical, or
+composed), because the two obvious shortcuts (one shared-exponent
+single-center basis; one concatenated graph) are provably incapable of
+binding.
+
+%% ========================================================================
+\section{The Algebraic-First Thread}
+\label{sec:algebraic}
+%% ========================================================================
+
+A single discipline runs through every level of the hierarchy:\ replace
+continuous integration with algebraic evaluation wherever the structure
+allows, and name what remains.  This is the chemistry-arc instance of
+the framework's prime directive (the discrete angular/selection-rule
+structure is exact at all levels and must never be approximated; the
+radial/parametric content is level-dependent and a legitimate target
+for numerical improvement).  Table~\ref{tab:algebraic} catalogues the
+state of the algebraic registry across the arc.
+
+\begin{table*}[t]
+\centering
+\caption{The algebraic-first registry across the chemistry arc.
+\emph{Algebraic} = closed-form or exact-recurrence from quantum-number
+labels with no quadrature; \emph{algebraic (one seed)} = exact up to a
+single tagged transcendental; \emph{numerical} = currently requires
+quadrature or point-by-point diagonalization, named as a present (not
+fundamental) feature.}
+\label{tab:algebraic}
+\begin{tabular}{l l l}
+\toprule
+Level / object & Status & Mechanism (paper) \\
+\midrule
+Angular coupling (all levels) & algebraic & Gaunt $/$ Wigner $3j$; selection rules \cite{loutey_paper13, loutey_paper15, biedenharn1981} \\
+$\mathrm{H}_2^+$ radial, $\sigma$ ($m=0$) & algebraic & three-term Laguerre recurrence \cite{loutey_paper11} \\
+$\mathrm{H}_2^+$ radial, $\pi/\delta$ ($m\neq0$) & algebraic (one seed) & assoc.\ Laguerre $+$ seed $e^a E_1(a)$ \cite{loutey_paper11} \\
+Prolate spheroidal $V_{ee}$ & algebraic & Neumann expansion, recurrence moments \cite{loutey_paper12} \\
+He hyperradial $S$, $K$ matrices & algebraic & three-term Laguerre recurrence \cite{loutey_paper13} \\
+Nuclear coupling (Level 4) & algebraic & split-region Legendre, $3j$-triangle termination \cite{loutey_paper15} \\
+Cross-center $V_{ne}$ (balanced) & algebraic & multipole, exact Gaunt termination $L_{\max}=2l_{\max}$ \cite{loutey_paper19} \\
+Slater $F^k$ integrals (graph-native) & algebraic & exact rational $S^3$ node overlap \cite{loutey_paper13, loutey_fci_atoms} \\
+$Z_{\mathrm{eff}}$ screening & numerical & Gauss--Legendre quadrature \cite{loutey_paper15, loutey_paper17} \\
+Adiabatic potential $U(R)$, $\mu(R)$ & numerical & point-by-point diagonalization \cite{loutey_paper13} \\
+Hyperradial coupling (Levels 3--4) & numerical & FD $/$ spectral radial solve \cite{loutey_paper13, loutey_paper15} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+The pattern is consistent with the foundations-arc taxonomy of
+Paper~18~\cite{loutey_paper18}.  The angular sector is intrinsic
+(rational, $\pi$-free).  The diatomic radial seed $e^a E_1(a)$ and the
+Slater-integral seeds are composition-tier transcendentals tied to a
+specific integral.  The electron--electron cusp is the embedding-tier
+exchange constant.  And the items still in the numerical column---the
+$Z_{\mathrm{eff}}$ screening, the adiabatic curves, the hyperradial
+coupling---are precisely the places where an algebraic structure has
+not yet been found, which the project records as an ongoing goal rather
+than a deficiency:\ the Neumann expansion (Paper~12) and the
+split-region Legendre termination (Paper~15) are existence proofs that
+quadrature walls in this arc \emph{can} dissolve once the right
+structure is identified~\cite{loutey_paper12, loutey_paper15}.
+
+%% ========================================================================
+\section{Positioning: A Research Instrument}
+\label{sec:positioning}
+%% ========================================================================
+
+The classical-solver investigation summarized in this synthesis is
+complete:\ the natural-geometry hierarchy has been built level by level,
+its algebraic content catalogued, and its accuracy ceilings
+characterized.  The framework's value proposition is best stated against
+those ceilings honestly.
+
+\subsection{What the framework offers}
+
+The construction is \emph{zero-parameter}:\ every result in
+Table~\ref{tab:hierarchy} takes as input only nuclear charges,
+geometry, and a basis resolution---no fitted potentials, no empirical
+screening constants, no experimental molecular data (the PK
+pseudopotential of Paper~17 is derived entirely from the atomic core
+wavefunction)~\cite{loutey_paper11, loutey_paper17}.  Angular-momentum
+selection rules are baked into the basis, so the matrix elements that
+vanish by symmetry are never computed, and the surviving ones are exact
+algebraic quantities.  The Hamiltonians are structurally sparse, with
+sub-quadratic nonzero growth~\cite{loutey_fci_atoms}.  These structural
+properties---not interpretive claims about the nature of quantum
+mechanics---are the framework's actual advantages.
+
+\subsection{Where the headline value lives}
+
+The arc's strongest computational payoff is not the classical
+ground-state energies but the qubit Hamiltonians they imply.  The
+angular sparsity that this synthesis documents at the integral level is
+the structural reason the composed-geometry qubit encodings achieve
+favorable Pauli-term scaling for variational quantum simulation; that
+result, its scaling exponents, and its molecular benchmarks belong to
+the quantum-computing arc (Group~4) and are referenced here, not
+re-derived.  This synthesis establishes the chemistry-side foundation of
+that payoff:\ the natural-geometry hierarchy, the algebraic-first
+integral structure, and the two negative theorems that justify the
+composed encoding.
+
+\subsection{The benchmarking discipline}
+
+Where the framework is compared to other methods, the comparison is to
+the strongest available baseline, and unfavorable comparisons are stated
+plainly.  The composed potential-energy surfaces carry $5$--$19.4\%$
+bond-length error, well above production quantum-chemistry accuracy; the
+honest reading is that the framework is a computationally principled
+\emph{alternative} offering sparsity, scaling, and structural insight,
+not a replacement for correlated electronic-structure methods.  The
+papers report the proven negatives---the Sturmian and concatenation
+theorems, the PK ceiling, the W1e wall, the failed PK alternatives and
+cusp treatments---as a first-class part of the corpus, because the
+characterization of what natural geometry \emph{cannot} do is as
+load-bearing as what it can~\cite{loutey_paper8, loutey_fci_mol,
+loutey_paper17}.
+
+%% ========================================================================
+\section{Open Questions and Outlook}
+\label{sec:open}
+%% ========================================================================
+
+Three structural questions remain open at the close of the
+classical-solver arc.
+
+\paragraph{The composed accuracy ceiling (W1e).}  The composed
+architecture saturates near $5$--$6\%$ bond-length error at its
+$l_{\max}=2$ operating point, with the residual diagnosed as a
+multi-determinant correlation wall whose single-mechanism repairs each
+close only a fraction~\cite{loutey_paper17}.  Whether a composition
+rule exists that closes W1e without sacrificing the $144\times$ angular
+compression---i.e.\ without reverting to the exact-but-expensive
+Level-4N encoding---is the central open chemistry question.  The
+diagnostic record (the failed PK alternatives, the structural
+obstruction that exact antisymmetry requires a shared coordinate
+system) suggests the answer is tied to the framework's
+sparsity-versus-binding trade-off rather than to a missing integral.
+
+\paragraph{Algebraic replacement of the remaining quadrature.}  The
+numerical column of Table~\ref{tab:algebraic}---$Z_{\mathrm{eff}}$
+screening, the adiabatic potential curves, the hyperradial
+coupling---is the standing target of the algebraic-first program.  The
+existence proofs (Neumann $V_{ee}$, split-region Legendre termination)
+show such replacements are achievable in principle; whether the
+adiabatic curves $\mu(R)$, which Paper~13 records as genuinely
+transcendental in $R$, admit an algebraic-implicit form (defined by a
+polynomial equation over a known coefficient ring) is open.
+
+\paragraph{Second-row and polyatomic extension.}  The balanced coupled
+Hamiltonian binds first-row hydrides but hits an orthogonalization wall
+for second-row systems such as NaH~\cite{loutey_paper19}, and the
+polyatomic $\mathrm{H}_2\mathrm{O}$ construction validates only
+bond--bond coupling, with bond--lone and lone--lone couplings
+unphysical at the present level~\cite{loutey_paper17}.  Both are named
+boundaries of the current encoding rather than refutations of the
+hierarchy.
+
+None of these open questions destabilizes the structural results of the
+arc.  The natural-geometry hierarchy is established level by level; the
+algebraic-first content is catalogued; the two negative theorems are
+proven; and the accuracy ceilings are characterized.  The open
+questions are frontier questions about how far the framework's
+sparsity can be pushed before its accuracy ceiling binds, not
+foundational concerns.
+
+%% ========================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%% ========================================================================
+
+The Group~2 quantum-chemistry arc of GeoVac is the systematic
+construction of the natural-geometry hierarchy for electronic
+structure.  Each level is the coordinate system in which a given system
+separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
+for $\mathrm{H}_2^+$ ($0.0002\%$)~\cite{loutey_paper11}, hyperspherical
+coordinates for He ($0.004\%$--$0.022\%$ variational, $0.19\%$
+graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
+coordinates for $\mathrm{H}_2$ ($96.0\%$ of
+$D_e$)~\cite{loutey_paper15}, and composed fiber bundles for
+core--valence and polyatomic systems ($5.3\%$, $11.7\%$, $19.4\%$
+bond-length error for LiH, $\mathrm{BeH}_2$,
+$\mathrm{H}_2\mathrm{O}$)~\cite{loutey_paper17}.  The arc is held
+together by an algebraic-first discipline---exact angular coupling,
+algebraic Neumann $V_{ee}$~\cite{loutey_paper12}, Laguerre recurrences,
+and $3j$-terminating Legendre expansions~\cite{loutey_paper15}---and is
+bounded by two proven negative theorems:\ a single-center shared-$p_0$
+Sturmian basis cannot bind a molecule~\cite{loutey_paper8}, and a
+concatenated atom-centered graph has no equilibrium~\cite{loutey_fci_mol}.
+Those theorems are why the hierarchy is necessary, not optional.
+
+The framework is a zero-parameter, structurally sparse research
+instrument whose accuracy ceilings are now characterized and whose
+strongest downstream payoff---qubit-Hamiltonian sparsity for quantum
+simulation---lives in the quantum-computing arc.  The discrete graph
+and the continuous Laplace--Beltrami operator are dual descriptions
+connected by proven conformal maps; the framework's concrete
+advantages do not depend on which description one regards as
+fundamental, and that interpretive question is left open.
+
+\section*{Acknowledgments}
+
+This synthesis paper consolidates work across the Group~2
+quantum-chemistry arc of the GeoVac project.  The author thanks the
+broader open-source computational quantum-chemistry community for the
+libraries (NumPy, SciPy, sympy, mpmath, PySCF) that make this work
+possible.  The framework's papers and code are publicly archived on
+Zenodo with permanent DOIs; this synthesis is a project-archive
+document and is not formatted for journal submission.
+
+%================================================================
+\begin{thebibliography}{99}
+%================================================================
+
+%---- External / classical references ----
+
+\bibitem{fock1935}
+V.~Fock,
+``Zur Theorie des Wasserstoffatoms,''
+Z.\ Phys.\ \textbf{98}, 145 (1935).
+
+\bibitem{bates1953}
+D.~R.~Bates, K.~Ledsham, and A.~L.~Stewart,
+``Wave functions of the hydrogen molecular ion,''
+Philos.\ Trans.\ R.\ Soc.\ Lond.\ A \textbf{246}, 215 (1953).
+
+\bibitem{flammer1957}
+C.~Flammer,
+\textit{Spheroidal Wave Functions}
+(Stanford University Press, Stanford, 1957).
+
+\bibitem{neumann1878}
+C.~Neumann,
+\textit{\"Uber die Entwicklung einer Function nach den Kugelfunctionen}
+(Teubner, Leipzig, 1878).
+
+\bibitem{james1933}
+H.~M.~James and A.~S.~Coolidge,
+``The ground state of the hydrogen molecule,''
+J.\ Chem.\ Phys.\ \textbf{1}, 825 (1933).
+
+\bibitem{kolos1968}
+W.~Ko\l{}os and L.~Wolniewicz,
+``Improved theoretical ground-state energy of the hydrogen molecule,''
+J.\ Chem.\ Phys.\ \textbf{49}, 404 (1968).
+
+\bibitem{kato1957}
+T.~Kato,
+``On the eigenfunctions of many-particle systems in quantum mechanics,''
+Commun.\ Pure Appl.\ Math.\ \textbf{10}, 151 (1957).
+
+\bibitem{aquilanti1986}
+V.~Aquilanti, S.~Cavalli, and G.~Grossi,
+``Hyperspherical coordinates for molecular dynamics by the method of trees,''
+J.\ Chem.\ Phys.\ \textbf{85}, 1362 (1986).
+
+\bibitem{avery1989}
+J.~Avery,
+\textit{Hyperspherical Harmonics: Applications in Quantum Theory}
+(Kluwer Academic, Dordrecht, 1989).
+
+\bibitem{avery2004}
+J.~Avery and J.~Avery,
+``Generalized Sturmians and atomic spectra,''
+Adv.\ Quantum Chem.\ \textbf{47}, 159 (2004).
+
+\bibitem{shibuya1965}
+T.~Shibuya and C.~E.~Wulfman,
+``Molecular orbitals in momentum space,''
+Proc.\ R.\ Soc.\ Lond.\ A \textbf{286}, 376 (1965).
+
+\bibitem{biedenharn1981}
+L.~C.~Biedenharn and J.~D.~Louck,
+\textit{Angular Momentum in Quantum Physics}
+(Addison-Wesley, Reading, MA, 1981).
+
+\bibitem{CondonShortley1935}
+E.~U.~Condon and G.~H.~Shortley,
+\textit{The Theory of Atomic Spectra}
+(Cambridge University Press, Cambridge, 1935).
+
+\bibitem{Slater1960}
+J.~C.~Slater,
+\textit{Quantum Theory of Atomic Structure}, Vols.~I and~II
+(McGraw-Hill, New York, 1960).
+
+\bibitem{boys_bernardi}
+S.~F.~Boys and F.~Bernardi,
+``The calculation of small molecular interactions by the differences of separate total energies,''
+Mol.\ Phys.\ \textbf{19}, 553 (1970).
+
+\bibitem{huber1979}
+K.~P.~Huber and G.~Herzberg,
+\textit{Molecular Spectra and Molecular Structure IV: Constants of Diatomic Molecules}
+(Van Nostrand Reinhold, New York, 1979).
+
+\bibitem{phillips_kleinman1959}
+J.~C.~Phillips and L.~Kleinman,
+``New method for calculating wave functions in crystals and molecules,''
+Phys.\ Rev.\ \textbf{116}, 287 (1959).
+
+\bibitem{trefethen2000}
+L.~N.~Trefethen,
+\textit{Spectral Methods in MATLAB}
+(SIAM, Philadelphia, 2000).
+
+%---- GeoVac papers ----
+
+\bibitem{loutey_paper0}
+J.~Loutey,
+``Angular Momentum as Information Geometry: Isotropic Packing and the Universal Angular Cross-Section,''
+GeoVac Paper~0 (2026).
+
+\bibitem{loutey_paper1}
+J.~Loutey,
+``The Geometric Atom: Atomic Structure as a Packing Problem,''
+GeoVac Paper~1 (2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation from Scale-Invariant Graph Topology,''
+GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper8}
+J.~Loutey,
+``Bond Sphere: Diatomic Molecules as $S^3$ and their Natural Sturmian Basis,''
+GeoVac Papers~8--9 (2026).
+
+\bibitem{loutey_paper11}
+J.~Loutey,
+``The Molecular Fock Projection: Diatomic Molecules as Prolate Spheroidal Lattices,''
+GeoVac Paper~11 (2026).
+
+\bibitem{loutey_paper12}
+J.~Loutey,
+``Algebraic Two-Electron Integrals on the Prolate Spheroidal Lattice,''
+GeoVac Paper~12 (2026).
+
+\bibitem{loutey_paper13}
+J.~Loutey,
+``The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel Graphs,''
+GeoVac Paper~13 (2026).
+
+\bibitem{loutey_paper15}
+J.~Loutey,
+``The Level~4 Natural Geometry: Two-Center Two-Electron Molecules in Molecule-Frame Hyperspherical Coordinates,''
+GeoVac Paper~15 (2026).
+
+\bibitem{loutey_paper17}
+J.~Loutey,
+``Composed Natural Geometries for Core--Valence Diatomics: LiH and BeH$^+$ from Discrete Graph Topology,''
+GeoVac Paper~17 (2026).
+
+\bibitem{loutey_paper18}
+J.~Loutey,
+``Spectral-Geometric Exchange Constants: Projecting Discrete Spectra onto Continuous Manifolds,''
+GeoVac Paper~18 (2026).
+
+\bibitem{loutey_paper19}
+J.~Loutey,
+``Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian Integrals and Coupled Composition,''
+GeoVac Paper~19 (2026).
+
+\bibitem{loutey_fci_atoms}
+J.~Loutey,
+``Full Configuration Interaction on a Sparse Graph Hamiltonian: Multi-electron Atoms via Relational Lattice Indexing,''
+GeoVac FCI (atoms) Paper (2026).
+
+\bibitem{loutey_fci_mol}
+J.~Loutey,
+``Topological Full Configuration Interaction for Heteronuclear Diatomics: LiH as a Benchmark,''
+GeoVac FCI (molecules) Paper (2026).
+
+\end{thebibliography}
+
+\end{document}

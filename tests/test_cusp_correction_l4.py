@@ -94,8 +94,7 @@ def _apply_cusp_and_analyze(scan: dict) -> dict:
     # Use the known dissociation limit E_atoms = -1.0 Ha (H + H),
     # NOT the solver's large-R value (which may not converge due to
     # finite hyperradial grid).
-    pes_result = cusp_correction_h2_pes(R_grid, E_pes, l_max=l_max,
-                                        E_atoms=-1.0)
+    pes_result = cusp_correction_h2_pes(R_grid, E_pes, l_max=l_max)
 
     # Per-point corrections for detailed reporting
     per_point_cusp = []

@@ -525,7 +525,7 @@ Table~\ref{tab:beh} reports the results.
 \begin{table}
 \caption{BeH$^+$ spectroscopic constants at $l_{\max}=2$.
   Reference values are indicative, from high-level ab initio
-  calculations on light hydride ions~\cite{bishop1979}.}
+  calculations on light hydride ions~\cite{huber1979}.}
 \label{tab:beh}
 \begin{ruledtabular}
 \begin{tabular}{lddd}
@@ -1065,11 +1065,13 @@ balance between bonding stabilization and Pauli repulsion
 (Sec.~\ref{sec:req}) requires an explicit core-exclusion mechanism;
 screening via $Z_{\rm eff}(r)$ alone is insufficient.
 
-This diagnostic also confirms that the $l_{\max}$ divergence of
-$R_{\rm eq}$ is entirely from the adiabatic approximation, not
-from the PK form: without PK there is no equilibrium to diverge.
-The 2D variational solver (Paper~15), which eliminates the adiabatic
-approximation, is the correct fix path.
+This diagnostic shows only that PK is required for an equilibrium to
+exist at all: without PK there is no minimum to diverge.  It does
+\emph{not} localize the $l_{\max}$ divergence to the adiabatic
+approximation; the variational analysis below shows the 2D solver
+produces the \emph{same} drift, so the divergence is intrinsic to the
+composed-geometry architecture, not the adiabatic approximation or
+the PK form.  The operating point remains $l_{\max} = 2$.
 
 \paragraph{Ab initio $R_{\rm ref}$ derivation (negative result).}
 \label{par:rref_negative}
@@ -1439,9 +1441,12 @@ $P_{l_1}(\cos\theta) \cdot P_{l_2}(\cos\theta)$, recovering the
 linear formula at $\theta = \pi$.  Six coupling pairs arise:
 one bond--bond, four bond--lone, and one lone--lone.
 
-The uncoupled PES with charge-center origin gives $R_{\rm eq} = 1.34$~bohr
-(26\% error vs 1.809 experimental), with the correct qualitative shape:
-repulsive wall, well-defined minimum, and smooth dissociation.  The
+The uncoupled PES with charge-center origin gives $R_{\rm eq} = 1.459$~bohr
+(19.4\% error vs 1.809 experimental), with the correct qualitative shape:
+repulsive wall, well-defined minimum, and smooth dissociation.  (This
+$19.4\%$ figure reflects the PK-consistency fix that propagates the
+Phillips--Kleinman pseudopotential into the inter-fiber angular eigenvalue
+problem; earlier versions reported $26\%$ / $1.34$~bohr before the fix.)  The
 bond--bond coupling (${\sim}0.5$~Ha) is consistent with BeH$_2$ and
 barely affects $R_{\rm eq}$.  However, the bond--lone and lone--lone
 couplings are unphysical: the $S \cdot F^0$ factorization produces
@@ -1779,11 +1784,6 @@ Solid State Phys.\ \textbf{24}, 249 (1970).
 G.~B.~Bachelet, D.~R.~Hamann, and M.~Schl\"uter,
 ``Pseudopotentials that work: From H to Pu,''
 Phys.\ Rev.\ B \textbf{26}, 4199 (1982).
-
-\bibitem{bishop1979}
-D.~M.~Bishop and L.~M.~Cheung,
-``A theoretical investigation of HeH$^+$,''
-J.~Mol.\ Spectrosc.\ \textbf{75}, 462 (1979).
 
 \bibitem{paper0}
 J.~Loutey,

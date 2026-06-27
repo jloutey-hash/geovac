@@ -41,8 +41,9 @@ coordinates, which decomposes each six-dimensional integral into a
 finite sum of products of one-dimensional auxiliary integrals
 computable by recurrence relations.  The resulting two-electron
 integrals are exact within the Neumann truncation order $L$, with
-no quadrature grids, no fitted parameters, and no numerical
-integration of any kind in the $V_{ee}$ matrix.
+no six-dimensional quadrature and no fitted parameters; the sole
+residual numerical integration is a single one-dimensional adaptive
+quadrature for the log-singular second-kind Legendre moment $B_l$.
 
 A systematic convergence study on H$_2$ at $R = 1.4011$~bohr
 demonstrates that the Neumann algebraic $V_{ee}$ yields 92.4\% of
@@ -122,11 +123,13 @@ which converts each $V_{ee}$ matrix element into a finite
 sum of products of one-dimensional integrals.  These auxiliary
 integrals---angular moments $C_l(p)$, exponential moments
 $A_n(\alpha)$, and first- and second-kind Legendre moments
-$A_l(p,\alpha)$ and $B_l(p,\alpha)$---are computed exactly by
-recurrence relations, with no quadrature grids of any kind.
-The result is quantum chemistry without integrals: the
-two-electron repulsion matrix is constructed entirely from
-algebraic operations on quantum number labels.
+$A_l(p,\alpha)$ and $B_l(p,\alpha)$---are computed by recurrence
+relations and closed forms, with the sole exception of the
+log-singular second-kind moment $B_l$, which uses a single
+one-dimensional adaptive quadrature (Sec.~III.D).  The
+six-dimensional repulsion integral is thereby reduced to a finite
+sum of algebraic operations on quantum number labels plus this one
+1D quadrature.
 
 The structure of this paper is as follows.
 Section~\ref{sec:neumann} derives the Neumann expansion and
@@ -887,8 +890,9 @@ integration bottleneck in the two-electron prolate spheroidal CI
 for H$_2$.  The key results are:
 
 \begin{enumerate}
-  \item \textbf{92.4\% of exact $D_e$} with algebraic $V_{ee}$,
-    zero numerical integration, and zero fitted parameters.
+  \item \textbf{92.4\% of exact $D_e$} with algebraic $V_{ee}$ (a single 1D
+    quadrature for the log-singular $B_l$ moment) and zero fitted
+    parameters.
   \item \textbf{12--20 percentage point improvement} over numerical
     $V_{ee}$ at every basis size from 1 to 72 functions.
   \item \textbf{Numerical $V_{ee}$ saturates at $\sim$80\%}
@@ -906,8 +910,10 @@ for H$_2$.  The key results are:
 \end{enumerate}
 
 The result demonstrates a form of quantum chemistry where
-recurrence relations on quantum number labels entirely replace
-numerical quadrature for electron-electron repulsion.  Just as
+recurrence relations on quantum number labels replace the
+six-dimensional quadrature for electron-electron repulsion, leaving
+only a single one-dimensional quadrature for the log-singular $B_l$
+moment.  Just as
 Paper~7 showed that atomic energies are encoded in the
 topology of $S^3$, this paper shows that molecular
 electron-electron repulsion is encoded in the algebraic

@@ -6,6 +6,8 @@
 \newtheorem{theorem}{Theorem}
 
 %% ========================================================================
+\begin{document}
+
 \title{The Level~4 Natural Geometry:\\
 Two-Center Two-Electron Molecules\\
 in Molecule-Frame Hyperspherical Coordinates}
@@ -19,7 +21,6 @@ in Molecule-Frame Hyperspherical Coordinates}
 %% ========================================================================
 %% ABSTRACT
 %% ========================================================================
-\begin{document}
 \begin{abstract}
 The natural geometry hierarchy assigns each separable quantum system
 a coordinate system in which Coulomb singularities become boundary
@@ -641,7 +642,7 @@ $l_{\max}$
 \hline
 CBS &  \multicolumn{1}{c}{---}  & & \multicolumn{1}{c}{${\sim}97$} & \\
 \hline
-4 ($\delta$) & 87.6 & +0.65$^\dagger$ & --- & 37 \\
+4 ($\delta$) & 87.6 & \multicolumn{1}{c}{$+0.65^{\dagger}$} & --- & 37 \\
 \end{tabular}
 \end{ruledtabular}
 {\footnotesize ${}^\dagger$$\delta$-channel ($m_{\max}=2$) gain
@@ -1025,12 +1026,13 @@ The mechanism is that asymmetric nuclear coupling populates odd-$l$
 channels---forbidden in homonuclear systems---which preferentially
 stabilize large-$R$ configurations.  H$_2$ places 94\% of its
 channel weight in the $(0{,}0)$ channel, while HeH$^+$ places only
-68\%, with 20\% in odd-$l$ channels.  This drift is an artifact
-of the single-channel adiabatic approximation; the variational
-2D solver (Sec.~\ref{sec:2d_solver}), which treats
-$(R_e, \alpha)$ simultaneously, does not suffer from this
-truncation and is the identified path to eliminating the
-$l_{\max}$ divergence in composed geometries.
+68\%, with 20\% in odd-$l$ channels.  This drift reflects the single-channel angular truncation for the
+bare, asymmetric Level~4 system.  It must not be conflated with the
+$R_{\rm eq}$ divergence of the \emph{composed} geometry: there the
+variational 2D solver produces the \emph{same} drift
+(Paper~17~\cite{paper17}), so that divergence is structural to the
+PK/composed architecture, not a single-channel adiabatic artifact
+removable by the 2D solver.
 
 \subsection{Spectral Laguerre radial solver}
 \label{sec:spectral_radial_l4}

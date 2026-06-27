@@ -200,6 +200,57 @@ def full_exchange_at_R3(beh2_setup):
 
 
 # ---------------------------------------------------------------------------
+# 4b. PK reaches the inter-fiber angular solve (regression guard)
+# ---------------------------------------------------------------------------
+
+def test_extract_channel_data_propagates_pk(beh2_setup):
+    """``extract_channel_data`` must pass PK into the angular eigenproblem.
+
+    Regression guard for the v2.7.0 shim (documented in
+    ``docs/molecular_refactor_handoff.md`` §4): ``extract_channel_data``
+    silently dropped ``pk_potentials`` when calling
+    ``solve_angular_multichannel``.  After v3.56.0 restored PK to the radial
+    wavefunction F (via ``solve_level4_h2_multichannel``) but left the shim,
+    the inter-fiber angular eigenvectors became PK-blind while F was PK-aware.
+    That mismatch fed PK-blind eigenvectors into the off-diagonal 1-RDM
+    exchange (``full_exchange``), drifting BeH2 R_eq from 2.80 (11.7%) to
+    3.00 (19.7%) — collapsing ``full_exchange`` onto the ``exchange`` minimum.
+
+    If PK is propagated, the channel eigenvectors MUST change when PK is
+    supplied vs. withheld.  A bit-identical result means the shim regressed.
+    """
+    s = beh2_setup
+    R = 3.0
+    l4 = solve_level4_h2_multichannel(
+        R=R, Z_A=s['Z_eff'], Z_B=s['Z_ligand'],
+        l_max=s['l_max'], n_alpha=s['n_alpha'], n_Re=300,
+        verbose=False, pk_potentials=s['pk_potentials'],
+    )
+    cd_pk = extract_channel_data(
+        l4, R, Z_A=s['Z_eff'], Z_B=s['Z_ligand'],
+        l_max=s['l_max'], n_alpha=s['n_alpha'],
+        pk_potentials=s['pk_potentials'], n_sample_Re=8,
+    )
+    cd_nopk = extract_channel_data(
+        l4, R, Z_A=s['Z_eff'], Z_B=s['Z_ligand'],
+        l_max=s['l_max'], n_alpha=s['n_alpha'],
+        pk_potentials=None, n_sample_Re=8,
+    )
+    # Compare the mid-range angular eigenvector (sign-agnostic — eigh phase).
+    k = len(cd_pk['Re_samples']) // 2
+    v_pk = np.abs(cd_pk['vec_2d_list'][k])
+    v_nopk = np.abs(cd_nopk['vec_2d_list'][k])
+    max_diff = float(np.max(np.abs(v_pk - v_nopk)))
+    assert max_diff > 1e-4, (
+        f"extract_channel_data appears to ignore pk_potentials "
+        f"(max eigenvector diff = {max_diff:.2e}); the PK-drop shim has "
+        f"regressed — inter-fiber angular eigenvectors are PK-blind while the "
+        f"radial wavefunction F is PK-aware, which silently breaks the "
+        f"off-diagonal 1-RDM full_exchange R_eq."
+    )
+
+
+# ---------------------------------------------------------------------------
 # 5. Full exchange is negative (attractive)
 # ---------------------------------------------------------------------------
 
@@ -222,6 +273,13 @@ def test_full_exchange_offdiag_nonzero(full_exchange_at_R3):
     contributing exchange terms weighted by (-1)^{l1+l1'} and cross-channel
     F^0. These may add to or subtract from the diagonal exchange depending
     on parity, but should be > 1% of the diagonal magnitude.
+
+    NOTE: this is a sanity check, NOT the PK-propagation regression guard.
+    The off-diagonal stays nonzero even in the PK-blind regression (the bug
+    was wrong-valued PK-blind eigenvectors, not a zeroed off-diagonal). The
+    actual regression guards are ``test_extract_channel_data_propagates_pk``
+    (fast) and ``test_full_exchange_reduces_req_error`` (R_eq inward of
+    exchange).
     """
     result = full_exchange_at_R3['result']
     E_offdiag = abs(result['E_exchange_offdiag'])
@@ -267,31 +325,49 @@ def test_full_exchange_r_dependence(beh2_setup):
 # 8. Full exchange reduces R_eq error (improvement over S*F^0)
 # ---------------------------------------------------------------------------
 
+@pytest.mark.slow
 def test_full_exchange_reduces_req_error(beh2_setup):
-    """R_eq error with full exchange should be < 20% (S*F^0 baseline).
+    """Full 1-RDM exchange pins BeH2 R_eq at ~11.7% AND beats S*F^0 exchange.
 
-    This validates that including off-diagonal 1-RDM terms improves
-    the BeH2 equilibrium geometry.
+    Two assertions, both regression guards for the PK-propagation shim
+    (see ``test_extract_channel_data_propagates_pk``):
+
+    1. ``full_exchange`` R_eq error < 15% (Paper 17 Table: 2.80 bohr / 11.7%).
+       The PK-blind regression drifted this to 3.00 bohr / 19.7%.
+    2. ``full_exchange`` R_eq is STRICTLY inward of the diagonal ``exchange``
+       (S*F^0) R_eq.  When the off-diagonal 1-RDM path is PK-blind it collapses
+       onto the ``exchange`` minimum (both 3.00 bohr) and this strict
+       inequality fails — the sharpest catch for the "full == exchange"
+       regression class.
     """
     from geovac.composed_triatomic import ComposedTriatomicSolver
 
-    solver = ComposedTriatomicSolver.BeH2(
+    R_grid = np.arange(2.2, 3.7, 0.2)  # brackets both minima (2.80 / 3.00)
+
+    solver_full = ComposedTriatomicSolver.BeH2(
         l_max=2, interbond_mode='full_exchange', verbose=False)
-    solver.solve_core()
-    R_grid = np.arange(1.8, 4.5, 0.2)
-    pes = solver.scan_pes(R_grid=R_grid, n_Re=300)
+    solver_full.solve_core()
+    pes_full = solver_full.scan_pes(R_grid=R_grid, n_Re=300)
+    R_eq_full = pes_full['R_eq']
 
-    R_eq = pes['R_eq']
+    solver_exch = ComposedTriatomicSolver.BeH2(
+        l_max=2, interbond_mode='exchange', verbose=False)
+    solver_exch.solve_core()
+    pes_exch = solver_exch.scan_pes(R_grid=R_grid, n_Re=300)
+    R_eq_exch = pes_exch['R_eq']
+
     R_ref = 2.507  # bohr
-    error_pct = abs(R_eq - R_ref) / R_ref * 100.0
+    error_pct = abs(R_eq_full - R_ref) / R_ref * 100.0
 
-    # 2026-06-04: tolerance relaxed 25% → 30% to accommodate the post-v3.x
-    # 1-RDM exchange path which now lands at ~28%. The "improvement vs
-    # S*F^0 baseline" claim is the load-bearing one; the absolute threshold
-    # has drifted as PK and cross-block h1 evolved.
-    assert error_pct < 30.0, (
-        f"R_eq = {R_eq:.3f} bohr, error = {error_pct:.1f}% "
-        f"(should be < 30%, with S*F^0 baseline at 20%)"
+    assert error_pct < 15.0, (
+        f"full_exchange R_eq = {R_eq_full:.3f} bohr, error = {error_pct:.1f}% "
+        f"(Paper 17: 2.80 bohr / 11.7%; PK-blind regression gives 3.00/19.7%)"
+    )
+    assert R_eq_full < R_eq_exch - 1e-9, (
+        f"full_exchange R_eq ({R_eq_full:.3f}) must be strictly inward of "
+        f"exchange R_eq ({R_eq_exch:.3f}); equality means the off-diagonal "
+        f"1-RDM exchange has collapsed onto the diagonal S*F^0 mode "
+        f"(PK-propagation regression)."
     )
 
 
