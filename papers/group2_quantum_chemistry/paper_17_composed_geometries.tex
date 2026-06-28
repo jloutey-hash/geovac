@@ -69,8 +69,9 @@ Four levels of this hierarchy have been established:
 
 \item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).
   Prolate spheroidal coordinates separate the two-center Coulomb problem
-  exactly.  Paper~11~\cite{paper11} achieves 0.70\% error with a sparse
-  lattice and zero free parameters.
+  exactly.  Paper~11~\cite{paper11} achieves $0.0002\%$ energy error
+  (spectral Laguerre radial solver; 0.70\% with the original
+  finite-difference lattice) and zero free parameters.
 
 \item[Level~3] \emph{One-center, two-electron} (He).
   Hyperspherical coordinates $(R_e, \alpha, \hat{r}_1, \hat{r}_2)$
@@ -83,8 +84,10 @@ Four levels of this hierarchy have been established:
   $(R_e, \alpha, \theta_1, \theta_2, \Phi)$ parameterized by
   $\rho = R/(2R_e)$ resolve all five Coulomb singularities simultaneously.
   Paper~15~\cite{paper15} recovers 96.0\% of $D_e$ for H$_2$
-  ($l_{\max}=6$, 61~channels) and
-  93.1\% for HeH$^+$ with $\sigma{+}\pi$ channels.
+  ($l_{\max}=6$, 61~channels, 2D variational) and
+  93.1\% for HeH$^+$ in the \emph{adiabatic} treatment ($\sigma{+}\pi$
+  channels)---a non-variational over-binding figure whose consistent
+  2D-variational value is only $\sim\!5\%$ of $D_e$.
 \end{description}
 
 Level~4 handles H$_2$ and HeH$^+$ but these are \emph{core-free}
@@ -1531,10 +1534,10 @@ The natural geometry hierarchy is now:
 Level & System & Geometry & Best result \\
 \midrule
 1 & H       & $S^3$ (Fock)           & $<0.1\%$ error \\
-2 & H$_2^+$ & Prolate spheroid       & 0.70\% error \\
+2 & H$_2^+$ & Prolate spheroid       & 0.0002\% error (spectral) \\
 3 & He      & Hyperspherical         & 0.05\% error \\
 4 & H$_2$   & Mol-frame hypersp.     & 96.0\% $D_e$ \\
-4N & LiH    & Full mol-frame hypersp. (SO(12)) & $R_{\rm eq}$: 67\% ($l_{\max} = 2$--3) \\
+4N & LiH    & Full mol-frame hypersp. (SO(12)) & $R_{\rm eq}$: 63.5\% ($l_{\max}=2$, 2D variational; unbound $D_e$) \\
 5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 5.3\% error \\
 5 & BeH$^+$ & Composed (Level 3+4)   & Bound, physical \\
 5 & BeH$_2$ & Composed (Level 3+4+4) & $R_{\rm eq}$: 11.7\% error \\

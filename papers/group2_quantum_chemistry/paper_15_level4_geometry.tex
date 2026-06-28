@@ -87,8 +87,9 @@ Three levels of this hierarchy have been established and validated:
 \item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).  In prolate
   spheroidal coordinates $(\xi,\eta,\phi)$, the two nuclear Coulomb
   singularities $1/r_A + 1/r_B$ separate into independent equations.
-  Paper~11~\cite{paper11} achieves 0.70\% error for H$_2^+$ with a
-  sparse finite-difference lattice.
+  Paper~11~\cite{paper11} achieves $0.0002\%$ energy error for H$_2^+$
+  with a spectral Laguerre radial solver (0.70\% with the original
+  finite-difference lattice).
 \item[Level~3] \emph{One-center, two-electron} (He).  Hyperspherical
   coordinates $(R_e,\alpha,\hat r_1,\hat r_2)$ resolve the
   electron--electron cusp $1/r_{12}$ as a boundary condition at
@@ -759,8 +760,11 @@ $l_{\max}$ & $m_{\max}$ & $N_{\rm ch}$ &
 The system is unbound at $l_{\max} \le 3$ ($\sigma$-only) because
 the total energy lies above the He dissociation limit.  At
 $l_{\max} = 4$ with $\sigma$-only channels, 76.8\% of $D_e$
-is recovered; adding $\pi$ channels brings this to 93.1\%,
-a 16-percentage-point improvement that mirrors the H$_2$ pattern.
+is recovered; adding $\pi$ channels brings this to 93.1\% in the
+\emph{adiabatic} treatment.  This is a non-variational over-binding
+figure---the consistent two-dimensional variational treatment recovers
+only $\sim\!5\%$ of $D_e$, so it is not parity with the variational
+H$_2$ result.
 
 The slower convergence compared to H$_2$ (which is already
 bound at $l_{\max} = 1$) reflects the asymmetric charge
@@ -1291,7 +1295,10 @@ The main results are:
     by removing the gerade constraint, activating odd-$k$ multipole
     coupling, and shifting the origin to the charge center
     (Eq.~\ref{eq:charge_center}), recovering 93.1\% of the exact
-    $D_e$ at $l_{\max} = 4$ with $\sigma{+}\pi$ channels.
+    $D_e$ at $l_{\max} = 4$ with $\sigma{+}\pi$ channels in the
+    \emph{adiabatic} treatment---a non-variational over-binding figure
+    (the consistent 2D-variational value is only $\sim\!5\%$ of $D_e$,
+    not parity with the variational H$_2$ result).
 \end{enumerate}
 
 The natural geometry hierarchy is now:
@@ -1301,10 +1308,10 @@ The natural geometry hierarchy is now:
 Level & System & Geometry & Best $D_e$ \\
 \midrule
 1 & H       & $S^3$ (Fock)        & $<0.1\%$ error \\
-2 & H$_2^+$ & Prolate spheroid    & 0.70\% error \\
+2 & H$_2^+$ & Prolate spheroid    & 0.0002\% error (spectral) \\
 3 & He      & Hyperspherical      & 0.05\% error \\
 4 & H$_2$   & Mol.-frame hypersp. & 96.0\% \\
-4 & HeH$^+$ & Mol.-frame hypersp. & 93.1\% \\
+4 & HeH$^+$ & Mol.-frame hypersp. & 93.1\% (adiabatic; ${\sim}5\%$ variational) \\
 \bottomrule
 \end{tabular}
 \end{center}

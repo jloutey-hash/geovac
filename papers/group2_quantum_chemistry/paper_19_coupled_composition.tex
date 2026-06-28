@@ -28,7 +28,7 @@ molecular Hamiltonians by partitioning electrons into single-center
 blocks and coupling them via Phillips--Kleinman (PK) pseudopotentials.
 This produces structurally sparse qubit Hamiltonians---$O(Q^{2.5})$
 Pauli scaling, 51--1{,}712$\times$ fewer terms than Gaussian
-baselines (Paper~14)---but PK limits accuracy to 5.3--26\%
+baselines (Paper~14)---but PK limits accuracy to 5.3--19.4\%
 equilibrium bond length error.  PK cannot be improved: six
 modification attempts have failed (v2.0.6--23), and the overcounting
 diverges at higher angular momentum.
@@ -90,7 +90,7 @@ effective repulsive barrier.
 
 PK is the framework's accuracy bottleneck.  At $l_{\max} = 2$ (the
 optimal operating point), LiH achieves 5.3\% $R_{\rm eq}$ error;
-BeH$_2$ gives 11.7\%; H$_2$O gives 26\%.  These errors are
+BeH$_2$ gives 11.7\%; H$_2$O gives 19.4\%.  These errors are
 structural, not numerical: the $l_{\max}$ divergence
 (+0.15--0.22~bohr per additional angular channel) is confirmed to
 originate in PK overcounting, not in the adiabatic approximation

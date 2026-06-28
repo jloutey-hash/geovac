@@ -60,9 +60,12 @@ hyperradial coupling) is named explicitly, and finding algebraic
 replacements is an ongoing goal rather than a deficiency.
 \emph{Second}, two proven structural negative theorems delimit the
 design space:\ in a single-center molecular Sturmian basis with a
-shared momentum scale the one-electron Hamiltonian is proportional to
-the overlap matrix, so its eigenvalues are independent of the
-internuclear distance and cannot bind~\cite{loutey_paper8}; and a graph
+shared momentum scale the one-electron Hamiltonian and overlap obey the
+two-term identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$
+and share a single orthogonal $SO(4)$ Wigner-$D$ congruence, so the
+generalized eigenvalues are independent of the internuclear distance and
+cannot bind unless the Sturmian scale $\beta_k(R)$ itself becomes
+$R$-dependent~\cite{loutey_paper8}; and a graph
 built by concatenating atom-centered lattices has an $R$-independent
 intra-atomic kinetic energy, producing a monotonically attractive
 potential-energy surface with no equilibrium~\cite{loutey_fci_mol}.
@@ -148,7 +151,7 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & $0.0002\%$ energy (spectral Laguerre) & \cite{loutey_paper11} \\
 3 & He (1, 2) & hyperspherical & $0.004\%$--$0.022\%$ (2D variational); $0.19\%$ (graph-native CI) & \cite{loutey_paper13} \\
 4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels) & \cite{loutey_paper15} \\
-4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 64\%$ (unbound $D_e$, no PK) & \cite{loutey_paper17} \\
+4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 63.5\%$ ($l_{\max}=2$, 2D variational; unbound $D_e$, no PK) & \cite{loutey_paper17} \\
 5 & LiH (core+valence) & composed (L3 $\oplus$ L4) & $R_{\mathrm{eq}}$ $5.3\%$ ($l$-dependent PK) & \cite{loutey_paper17} \\
 5 & $\mathrm{BeH}_2$ (polyatomic) & composed $+$ 1-RDM exchange & $R_{\mathrm{eq}}$ $11.7\%$ & \cite{loutey_paper17} \\
 5 & $\mathrm{H}_2\mathrm{O}$ (triatomic) & composed (five-block, uncoupled) & $R_{\mathrm{eq}}$ $19.4\%$ & \cite{loutey_paper17} \\
@@ -199,12 +202,16 @@ The bond sphere construction also produces the arc's first proven
 follows.  In the molecular Sturmian basis~\cite{avery2004} with a shared momentum scale
 $p_0$, the one-electron Hamiltonian matrix is
 \begin{equation}
-H_{ij} = \frac{p_0^2}{2}\!\left(\frac{1}{\beta_j} - 1\right) S_{ij},
+H_{ij} = -\frac{p_0^2}{2}\,S_{ij} + (1-\beta_j)\,V_{ij},
 \label{eq:sturmian_structural}
 \end{equation}
-where $S_{ij}$ is the overlap matrix and $\beta_j$ is the Sturmian
-eigenvalue of orbital~$j$.  Because $H \propto S$, the generalized
-eigenvalues $E_k = \tfrac{1}{2}p_0^2(1/\beta_k - 1)$ are independent of
+where $S_{ij}$ is the overlap matrix, $V_{ij}$ the nuclear-attraction
+matrix, and $\beta_j$ is the Sturmian eigenvalue of orbital~$j$.  The
+Hamiltonian is \emph{not} a scalar multiple of $S$:\ both $(H,S)$ carry
+their entire $R$-dependence through the same $SO(4)$ Wigner-$D$
+congruence $D^{(n)}(\gamma(R))$, so the generalized eigenvalues
+$\varepsilon_k = \tfrac{1}{2}p_0^2 - p_0^2/\beta_k$ (which equals
+$-p_0^2/2$ only in the degenerate case $\beta_k=1$) are independent of
 the bond angle $\gamma$, hence independent of the internuclear
 distance~$R$~\cite{loutey_paper8}.  A basis that produces
 $R$-independent eigenvalues cannot describe binding, which is by
@@ -385,7 +392,11 @@ prolate spheroidal CI with algebraic Neumann integrals achieved
 hyperspherical geometry.  The framework extends to heteronuclear
 diatomics:\ for $\mathrm{HeH}^+$ a charge-center origin shift and
 removal of the gerade constraint recover $93.1\%$ of the exact $D_e$ at
-$l_{\max}=4$ with $\sigma+\pi$ channels~\cite{loutey_paper15}.
+$l_{\max}=4$ with $\sigma+\pi$ channels in the \emph{adiabatic}
+treatment~\cite{loutey_paper15}; this is a non-variational over-binding
+figure---the consistent two-dimensional variational treatment recovers
+only $\sim\!5\%$ of $D_e$, so this is not parity with the
+$\mathrm{H}_2$ result.
 
 The algebraic content reaches its cleanest statement here.  The nuclear
 potential coupling is a split-region Legendre expansion whose sum over
@@ -578,8 +589,9 @@ equilibrium ($R_{\mathrm{eq}} \approx 3.8$~bohr) but cannot fit
 $R_{\mathrm{eq}}$ and $D_e$ simultaneously~\cite{loutey_fci_mol,
 loutey_paper8}.
 
-Together the two negative theorems---Sturmian structural ($H \propto S$
-$\Rightarrow$ $R$-independent eigenvalues, Paper~8) and graph
+Together the two negative theorems---Sturmian structural (shared
+$SO(4)$ Wigner-$D$ congruence $\Rightarrow$ $R$-independent eigenvalues,
+Paper~8) and graph
 concatenation ($R$-independent kinetic energy $\Rightarrow$ no
 equilibrium, the molecular FCI paper)---are guardrails:\ they explain
 \emph{why} the natural-geometry hierarchy is necessary.  A molecule

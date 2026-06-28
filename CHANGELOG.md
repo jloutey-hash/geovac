@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.50.2] - 2026-06-27
+
+`/qa group2` re-cert **run #3 = FAIL → remediated** (confirmation re-cert of v4.50.1). Calibrated **10/11** (cs3/P17 unscored — that code-reviewer over-ran its slow composed-PES pipelines; worktree torn down before it returned), specificity **6/6**. **The rs8-class fix is CONFIRMED:** cs5 (FCI-M vacuous `E_lih<100` binding guard — the exact class that slipped run #2) was caught this run by the sharpened per-assertion code prompt. The FAIL is the **cross-paper "second-locus" propagation layer**: run-#1/#2 fixed each correction at its primary locus; the echoes across other papers + the synthesis were never synced. Canonical record: `debug/qa/group2_recert3_run_notes.md`. **Next: `/qa group2` run #4 (certified-PASS attempt).**
+
+### Changed (papers — propagation sweep, ~25 loci across 10 files, all to already-decided canonical forms)
+- **P8 Sturmian two-term identity / SO(4)-congruence** (NOT H∝S) propagated to its stale echoes: synthesis abstract + Eq.(1) + §592; `paper_fci_molecules` body + tab:versions (4 cells); `paper_11` intro + discussion; `paper_fci_atoms` MO-FCI diagonal (`ε_k=½p₀²−p₀²/β_k`, not uniform −p₀²/2).
+- **HeH⁺ 93.1% = adiabatic/non-variational over-binding; 2D-variational ~5%; no H2 "parity"** propagated to: P15 body + conclusion (bullet + table); P17 intro; synthesis.
+- **P13 cusp** tables/captions: 0.05% (single-channel adiabatic) + 0.004% (cusp extrapolation) tagged **non-variational**; the 0.022% raw is the proper variational bound.
+- **H2O 26% → 19.4%** in `paper_19` abstract + intro (stale pre-PK-consistency-fix value).
+- **FCI-A LiH** abstract + conclusion: framed as vertical fixed-R binding (0.110 Ha / ~19–20%) with **monotonically-attractive / no-equilibrium** (R-independent graph-Laplacian kinetic).
+- **H2+ 0.0002% (spectral)** canonical headline propagated to cross-cites in P8/P11/P12/P15/P17/FCI-M that still read the superseded FD "0.70%".
+- **LiH cross-ref 0.110 Ha / ~20% / no-equilibrium** (not the stale fortuitous "0.093 Ha / 1.0%") in P8 + P11.
+- **GENUINE FALSE CLAIM FIXED** — `paper_fci_atoms` §convergence: "Li FCI below the HF limit 0.6% / recovers correlation" was FALSE (Li 1.10–1.15% > HF 0.61%); corrected — only He recovers correlation, Li remains above the HF limit.
+- **`paper_fci_atoms`** "Both surpass STO-3G" → restricted to He (Li STO-3G uncomputed).
+- **`paper_fci_molecules` abstract** Fock-weighted correction: now discloses the scale λ is a **fitted** parameter (form Paper-7-derived; labeled qualitative diagnostic, not zero-parameter).
+- **P12** "no/without any numerical quadrature" (lines 307/837) → honest "all but B_l by recurrence; B_l = single 1D quadrature" / "without six-dimensional quadrature".
+- **Level-4N R_eq** reconciled to 63.5% (l_max=2, 2D-variational; unbound D_e) with l_max tags in synthesis + P17 conclusion table.
+- Compile: all 10 touched papers content-errors=0 (only environmental missing-figure draft errors); 0 new undefined refs. Deterministic C10–C16 PASS post-sweep. No code/tests touched.
+
 ## [4.50.1] - 2026-06-27
 
 `/qa group2` re-cert **run #2 = FAIL → remediated** (confirmation re-cert of the v4.50.0 corpus). Calibrated **8/9** sensitivity (rs8 missed by code-FCI-M → that agent's code dim INCONCLUSIVE; specificity 6/6); all five dimensions exercised; deterministic C10–C16 PASS. The re-cert peeled a **new defect layer** (the expected fresh-adversary "one scope over" pattern; group1/group3 each took several cycles). **Investigate-before-downgrade overturned TWO more reviewer "downgrades."** Canonical record: `debug/qa/group2_recert_run_notes.md`. **Next: re-run `/qa group2` (run #3) for the certified PASS.**

@@ -36,16 +36,21 @@ and Gaunt angular coupling coefficients.
 For helium, the ground-state energy converges monotonically to
 $-2.8936\,\text{Ha}$ (0.35\% error versus exact) at $n_{\max}=5$;
 for lithium, to $-7.3978\,\text{Ha}$ (1.07\% error) at $n_{\max}=5$.
-Both surpass PySCF/STO-3G accuracy on the same systems.
+Helium surpasses PySCF/STO-3G accuracy on the same system (the lithium
+STO-3G comparison is not computed).
 For beryllium (4 electrons), the solver achieves $E = -14.536\,\text{Ha}$
 (0.90\% error) at $n_{\max}=4$ with $487{,}635$ determinants---the
 first four-electron calculation in this framework.
 For lithium hydride (4 electrons, first heteronuclear molecule), the
-CP-corrected binding energy is $D_e^{\text{CP}} = 0.110\,\text{Ha}$ at the
-experimental geometry (19\% error versus experiment), with basis truncation
-at $n_{\max}=3$ identified as the dominant error source via systematic
+CP-corrected \emph{vertical} binding energy at the fixed experimental
+geometry is $D_e^{\text{CP}} = 0.110\,\text{Ha}$ (19\% error versus
+experiment); the $R$-independence of the graph-Laplacian kinetic energy
+makes the potential-energy surface monotonically attractive with no
+equilibrium geometry, so this is a fixed-$R$ binding energy rather than
+an optimized $D_e$.  Basis truncation
+at $n_{\max}=3$ is identified as the dominant error source via systematic
 diagnostic decomposition, and basis set superposition error (0.115~Ha)
-quantified and removed via Boys--Bernardi counterpoise correction.
+is quantified and removed via Boys--Bernardi counterpoise correction.
 An excitation-driven direct CI algorithm following
 Knowles and Handy~\cite{Knowles1984} replaces the $O(N_{\text{SD}}^2)$
 pairwise determinant loop with $O(N_{\text{SD}} \times N_{\text{connected}})$
@@ -378,8 +383,10 @@ correlation beyond mean-field theory.
 For lithium with exact $h_1$, the error decreases monotonically:
 5.04\% ($n_{\max}=2$) $\to$ 1.15\% ($n_{\max}=3$) $\to$ 1.10\%
 ($n_{\max}=4$).
-The lithium error at $n_{\max} \geq 3$ is below the HF limit of
-0.6\%, similarly indicating recovery of correlation energy.
+The lithium error at $n_{\max} \geq 3$ (1.10--1.15\%) remains
+\emph{above} the Hartree--Fock limit of $0.61\%$, so---unlike
+helium---the lithium FCI does not recover correlation energy beyond
+mean-field theory at the basis sizes reached here.
 
 % --- Figure 2 ---
 \begin{figure}
@@ -784,8 +791,9 @@ n_{\text{rad}}, \beta_k)$ for each MO.  At $n_{\max} = 3$:
 10 spatial MOs, 20 spin-orbitals.
 
 \item \texttt{h1\_mo[i,j]}: dense $10 \times 10$ one-electron matrix.
-Diagonal: $-p_0^2/2$ (uniform).  Off-diagonal: $D$-matrix elements
-weighted by nuclear charges (same-$m$ block-diagonal).
+Diagonal: $\varepsilon_k = \tfrac12 p_0^2 - p_0^2/\beta_k$ (equals
+$-p_0^2/2$ only in the degenerate case $\beta_k=1$).  Off-diagonal:
+$D$-matrix elements weighted by nuclear charges (same-$m$ block-diagonal).
 
 \item \texttt{eri\_mo[i,j,k,l]}: dense $10 \times 10 \times 10 \times 10$
 two-electron integral tensor.  Computed from projected atom-centered
@@ -842,9 +850,12 @@ with sub-quadratic nonzero growth and $>$99\% sparsity, which
 distinguishes this approach from conventional Gaussian-basis FCI.
 We demonstrate the extension to heteronuclear molecules with LiH,
 the first diatomic calculation in the framework: the CP-corrected
-binding energy ($D_e^{\text{CP}} = 0.110$~Ha, 19\% error) confirms
-that the molecular bridge architecture transfers correctly to
-asymmetric systems. A systematic diagnostic decomposition---zeroing cross-nuclear,
+\emph{vertical} binding energy at fixed geometry ($D_e^{\text{CP}} =
+0.110$~Ha, 19\% error) confirms that the molecular bridge architecture
+transfers correctly to asymmetric systems---though, as in the
+homonuclear case, the $R$-independent graph-Laplacian kinetic energy
+yields a monotonically attractive surface with no equilibrium geometry.
+A systematic diagnostic decomposition---zeroing cross-nuclear,
 cross-atom $V_{ee}$, and bridge terms independently---identifies basis
 truncation at $n_{\max}=3$ as the dominant error source: BSSE (0.115~Ha)
 exceeds the experimental binding energy, and the 17~mHa overbinding is

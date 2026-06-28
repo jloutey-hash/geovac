@@ -97,9 +97,12 @@ as a single $S^3$ with two weighted poles---and derived the $SO(4)$
 Wigner $D$-matrix elements that rotate atomic orbitals from one
 center to another~\cite{loutey_paper8}.  However, that same paper
 proved a negative structural theorem: in the molecular Sturmian basis
-with a shared momentum scale $p_0$, the Hamiltonian is proportional
-to the overlap matrix ($H_{ij} \propto S_{ij}$), rendering the
-generalized eigenvalues independent of $R$.  Binding in this
+with a shared momentum scale $p_0$, the one-electron Hamiltonian and
+overlap obey the two-term identity
+$H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and share a single
+orthogonal $SO(4)$ Wigner-$D$ congruence (so $H$ is block-, not scalar-,
+proportional to $S$), rendering the generalized eigenvalues independent
+of $R$.  Binding in this
 framework requires the full $R$-dependent eigenvalue spectrum
 $\beta_k(R)$ from the continuous prolate spheroidal PDE---reintroducing
 the very continuous spatial geometry the graph was meant to replace.
@@ -107,10 +110,11 @@ the very continuous spatial geometry the graph was meant to replace.
 For heteronuclear systems, the situation is worse: no shared $p_0$
 exists that simultaneously represents both atomic length scales.
 The LCAO approach (atom-centered lattices with bridges) partially
-circumvents this, achieving $D_e^{\text{CP}} = 0.093$~Ha for LiH
-at nmax$= 3$ (1.0\% error)~\cite{loutey_lcao_fci}, but carries
-intrinsic BSSE and an $R$-independent kinetic energy that shifts
-$R_{\mathrm{eq}}$ to $\sim 2.5$~bohr (expt.\ 3.015).
+circumvents this, achieving a vertical binding energy
+$D_e^{\text{CP}} = 0.110$~Ha for LiH at nmax$= 3$ ($\sim 20\%$ error
+vs experiment)~\cite{loutey_lcao_fci}, but carries intrinsic BSSE and
+an $R$-independent kinetic energy, producing a monotonically attractive
+potential-energy surface with no equilibrium geometry.
 
 This paper takes a fundamentally different approach.  Rather than
 forcing molecules onto $S^3$, we ask: \emph{what is the natural
@@ -870,8 +874,10 @@ orbital exponents to optimize.
 
 Paper~8--9 proved that the molecular Sturmian basis on a single
 $S^3$ with shared momentum scale $p_0$ cannot produce
-$R$-dependent binding: the Hamiltonian is proportional to the
-overlap matrix, making eigenvalues geometry-independent.  The
+$R$-dependent binding: the one-electron $(H,S)$ obey the two-term
+identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and
+share a single $SO(4)$ Wigner-$D$ congruence, making the eigenvalues
+geometry-independent.  The
 prolate spheroidal lattice resolves this impasse by abandoning
 the single-center $S^3$ geometry entirely.  Rather than forcing
 two centers onto one sphere, each center retains its identity
@@ -889,8 +895,9 @@ by the energy eigenvalue.
 
 The LCAO approach~\cite{loutey_lcao_fci} constructs a molecular
 basis by combining atom-centered lattices with bridge elements.
-While successful for energetics ($D_e^{\text{CP}} = 0.093$~Ha
-for LiH, 1.0\% error), it has inherent limitations:
+While it gives a vertical binding energy ($D_e^{\text{CP}} = 0.110$~Ha
+for LiH, $\sim 20\%$ error, no equilibrium geometry), it has inherent
+limitations:
 \begin{enumerate}
   \item \textbf{BSSE:} Combining two lattices creates basis set
     superposition error ($-0.115$~Ha for LiH at nmax$= 3$),

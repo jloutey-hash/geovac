@@ -26,8 +26,8 @@ Prolate Spheroidal Lattice}
 
 \begin{abstract}
 Paper~11 established the prolate spheroidal lattice as the natural
-geometry for diatomic molecules, solving H$_2^+$ to 0.70\% error
-with zero free parameters.  The extension to two electrons requires
+geometry for diatomic molecules, solving H$_2^+$ to $0.0002\%$ energy
+error (spectral Laguerre solver) with zero free parameters.  The extension to two electrons requires
 electron-electron repulsion integrals $\langle\phi_i|1/r_{12}|\phi_j\rangle$
 over the six-dimensional two-particle configuration space.  The
 standard approach---numerical quadrature on a grid in prolate
@@ -83,8 +83,8 @@ Coulomb problem separates into coupled ordinary differential
 equations~\cite{loutey_paper11}.
 
 Paper~11 implemented this principle for the one-electron
-molecule H$_2^+$, achieving 0.70\% energy error with zero free
-parameters.  The extension to two electrons introduces a
+molecule H$_2^+$, achieving $0.0002\%$ energy error (spectral Laguerre
+solver) with zero free parameters.  The extension to two electrons introduces a
 qualitatively new challenge: the electron-electron repulsion
 integral
 \begin{equation}
@@ -303,8 +303,10 @@ sufficient since our basis functions have $q_{\max} \leq 8$.
 The factorized form~\eqref{eq:factorized} reduces each
 $V_{ee}$ matrix element to products of three families of
 one-dimensional integrals: $C_l(q)$, $A_n(\alpha)$ and
-its Legendre generalizations, and $B_l(p, \alpha)$.  All
-are computed by recurrence relations.
+its Legendre generalizations, and $B_l(p, \alpha)$.  The
+$C_l$ and $A_n$ families are computed by pure recurrence
+relations; the log-singular second-kind moment $B_l$ requires
+a single one-dimensional adaptive quadrature (below).
 
 \subsection{Angular moments \texorpdfstring{$C_l(q)$}{Cl(q)}}
 
@@ -814,7 +816,7 @@ of natural geometries:
   \item \textbf{Two-center, one-electron} (H$_2^+$):
     Prolate spheroidal coordinates $(\xi, \eta, \varphi)$.
     The Schr\"odinger equation separates into two coupled ODEs.
-    Accuracy: 0.70\%~\cite{loutey_paper11}.
+    Accuracy: 0.0002\% (spectral Laguerre)~\cite{loutey_paper11}.
   \item \textbf{Two-center, two-electron} (H$_2$):
     Prolate spheroidal $\times$ prolate spheroidal with
     Neumann-algebraic $V_{ee}$.  One-electron physics is
@@ -834,16 +836,17 @@ Coulomb singularity ($1/r_{12}$), and the coalescence cusp
 identifies each singularity's natural coordinate system and
 discretizes the Laplace--Beltrami operator in that system.
 
-\subsection{Quantum chemistry without integrals}
+\subsection{Quantum chemistry without six-dimensional quadrature}
 
 The Neumann algebraic $V_{ee}$ realizes a form of quantum
-chemistry in which all two-electron integrals are computed
-from recurrence relations on quantum number labels, without
-any numerical quadrature.  Combined with the analytical
-kinetic energy (integration by parts) and nuclear attraction
-(simple polynomial moments), the \emph{entire} Hamiltonian
-matrix can in principle be constructed without numerical
-integration.
+chemistry in which the two-electron integrals are reduced to
+recurrence relations on quantum number labels, the sole residual
+numerical step being a single one-dimensional adaptive quadrature
+for the log-singular second-kind moment $B_l$.  Combined with the
+analytical kinetic energy (integration by parts) and nuclear
+attraction (simple polynomial moments), the \emph{entire}
+Hamiltonian matrix is constructed without any six-dimensional
+quadrature.
 
 This has conceptual significance beyond computational
 efficiency: it demonstrates that the physics of

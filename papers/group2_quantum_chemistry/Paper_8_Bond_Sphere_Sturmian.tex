@@ -1269,9 +1269,12 @@ mechanism.
 \paragraph{Computational path forward.}
 The bond sphere is geometrically consistent but its computational
 implementation requires either the full LCAO architecture---which
-preserves atom-specific length scales and produces $D_e^{\text{CP}}
-= 0.093$~Ha at nmax$= 3$ (1.0\% error vs.\ experiment, documented in
-the companion paper~\cite{loutey_fci})---or a non-Sturmian basis that
+preserves atom-specific length scales and produces a vertical binding
+energy $D_e^{\text{CP}} = 0.110$~Ha at nmax$= 3$ ($\sim 20\%$ error
+vs.\ experiment, with the $R$-independent graph-Laplacian kinetic energy
+giving a monotonically attractive PES with no equilibrium geometry,
+documented in the companion paper~\cite{loutey_fci})---or a non-Sturmian
+basis that
 avoids the $SO(4)$-congruence (geometry-blind) constraint of
 Theorem~\ref{thm:structural}.
 The LCAO path is validated; the bond sphere geometry provides the
@@ -1286,8 +1289,9 @@ spheroid.  In prolate spheroidal coordinates $(\xi, \eta, \varphi)$,
 the two-center Coulomb problem separates exactly, and discretizing
 the Laplace-Beltrami operator on this manifold yields a molecular
 lattice with $R$-dependence built into the metric.  For H$_2^+$, this
-approach achieves $R_{\mathrm{eq}} = 2.001$~bohr (0.21\% error) and
-$E_{\min} = -0.598$~Ha (0.70\% error) with zero fitted
+approach achieves $R_{\mathrm{eq}} = 2.001$~bohr (0.21\% error) at the
+finite-difference level, while the spectral Laguerre radial solver
+reaches $0.0002\%$ energy error, both with zero fitted
 parameters~\cite{loutey_paper11}.
 
 

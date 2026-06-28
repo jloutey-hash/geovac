@@ -531,8 +531,13 @@ smaller matrix.
 
 \begin{table}[t]
 \caption{Comparison of GeoVac methods for the He ground-state
-energy.  The hyperspherical solver achieves 0.05\% error
-with a $600\times 600$ sparse matrix in 3~seconds.}
+energy.  The single-channel adiabatic hyperspherical solver achieves
+0.05\% error with a $600\times 600$ sparse matrix in 3~seconds; this is
+a \emph{non-variational} figure---the converged energy lies below the
+exact value (see text).  The properly variational two-dimensional
+treatment (Track~DI) reaches 0.022\% (raw, $l_{\max}=7$); the Schwartz
+cusp-corrected 0.004\% ($l_{\max}=4$) is itself a non-variational
+extrapolation that lies below the exact value.}
 \label{tab:comparison}
 \begin{ruledtabular}
 \begin{tabular}{lddc}
@@ -544,7 +549,7 @@ with a $600\times 600$ sparse matrix in 3~seconds.}
     & -2.851 & 1.82 & $50$ \\
   Full CI ($n_{\max}=5$, Slater)
     & -2.854 & 1.71 & $215{,}820$ \\
-  \textbf{Hyperspherical (1 ch.)}
+  \textbf{Hyperspherical (1 ch., non-var.)}
     & \textbf{-2.905} & \textbf{0.05} & $\mathbf{600}$ \\
   Exact~\cite{Pekeris1958}
     & -2.9037 & 0 & --- \\
@@ -713,7 +718,10 @@ operator discretizes cleanly on a sparse graph}.
 \begin{table*}[t]
 \caption{The natural geometry hierarchy.  Each level resolves a
 qualitatively different singularity.  The matrix dimension and
-accuracy refer to the current GeoVac implementation.}
+accuracy refer to the current GeoVac implementation.  The Level-3 He
+figure is the single-channel adiabatic, \emph{non-variational} value;
+the proper variational two-dimensional treatment reaches 0.022\% (raw,
+$l_{\max}=7$).}
 \label{tab:hierarchy}
 \begin{ruledtabular}
 \begin{tabular}{lcccccc}
@@ -725,7 +733,7 @@ accuracy refer to the current GeoVac implementation.}
   2 & H$_2^+$ (two-center, 1$e^-$) & Prolate spheroid & Two-center
     $1/r_A + 1/r_B$ & $\sim\!20$ & 0.0002 & 11 \\
   3 & He (one-center, 2$e^-$) & Hyperspherical & $e$-$e$ cusp
-    $1/r_{12}$ & $\sim\!600$ & 0.05 & \textbf{13} \\
+    $1/r_{12}$ & $\sim\!600$ & 0.05 (non-var.) & \textbf{13} \\
   4 & H$_2$ (two-center, 2$e^-$) & ? & Combined &
     --- & --- & Future \\
 \end{tabular}
