@@ -181,7 +181,9 @@ class TestSpectralHeteronuclear:
             radial_method='spectral', n_basis=20
         )
         E_tot = lat.total_energy()
-        assert E_tot < -1.0, f"HeH2+ E={E_tot:.4f} should be well bound"
+        # Converged spectral value (n_basis>=20): -1.512193 Ha (Paper 11 reports -1.512).
+        assert abs(E_tot - (-1.512193)) < 1e-3, \
+            f"HeH2+ E={E_tot:.4f} Ha, expected -1.5122 Ha (converged spectral)"
 
 
 class TestSpectralPerformance:

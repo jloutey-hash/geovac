@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.50.4] - 2026-06-28
+
+`/qa group2` re-cert **run #5 = FAIL → remediated** (confirmation re-cert of v4.50.3). **Calibration PERFECT for the 2nd straight run: sensitivity 11/11, specificity 6/6** (every seed caught incl. cs5/FCI-M rs8-class a 4th time; run-#4 fixes confirmed not re-flagged). Canonical record: `debug/qa/group2_recert5_run_notes.md`.
+
+### Changed (papers — 2 thin genuine residuals + recurring NIT, all verified clearly-correct)
+- **P11 HeH²⁺ E=−1.475 → −1.512** (secondary number; recomputed: the restored spectral solver gives −1.512193 Ha, converged across n_basis=20/25/30; the FD-era −1.475 was under-resolved). Test guard tightened to pin −1.512.
+- **P17 H2O 26%→19.4% provenance attribution corrected** — the 19.4% number is correct (sound headline); the causal note wrongly credited the inter-fiber PK-consistency fix. Verified via `test_composed_h2o.py` docstring: the *uncoupled* PES never invokes `extract_channel_data`, so the improvement is general solver evolution, not the fix. Note rewritten.
+- **Synthesis −0.6025 → −0.6026** (recurring H2+ E_min transcription slip, flagged runs #3/#4/#5, now fixed).
+- **P12 §V.D "the V_ee integral is exact" → B_l-quadrature caveat** (the "exact"-overclaim NIT class; the angular series terminates exactly, only B_l is quadrature).
+- Verified: P11 HeH²⁺ test pins −1.512 (passes); deterministic C10–C16 PASS; P11/P12/P17/synthesis compile content_err=0, undef=0; no other code touched.
+
+### The thin-residual asymptote (PI cert-bar decision pending)
+Runs #4 and #5 both returned PERFECT calibration + exactly 2 thin genuine residuals, different each run, **none a DoD-listed headline** (#4: synthesis cusp-variational, fci_molecules C6; #5: P11 HeH²⁺ secondary number, P17 H2O provenance). Every authoritative headline is verified correct + soundly backed, twice. The remaining residuals are the long tail (secondary numbers, provenance notes, transcription slips, "exact"-wording) — the class group1's cert bar treats as fix-on-sight NITs. Whether to certify at the current bar, adopt a NIT carve-out for that class, or run once more is a **PI cert-bar timing judgment**.
+
 ## [4.50.3] - 2026-06-28
 
 `/qa group2` re-cert **run #4 = FAIL → remediated** (confirmation re-cert of v4.50.2). **Calibration PERFECT: sensitivity 11/11, specificity 6/6** — every seed caught (5 code incl. **cs3/P17 via the fast-test carry-forward** that fixes the run-#3 over-run, and **cs5/FCI-M rs8-class a 3rd time**), every control clean; the panel is fully calibrated per-agent across all five dimensions. Closest run yet — only **2 thin residual framing-syncs**. Canonical record: `debug/qa/group2_recert4_run_notes.md`. **Next: `/qa group2` run #5 (certified-PASS attempt).**
