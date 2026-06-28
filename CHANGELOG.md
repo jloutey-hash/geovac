@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.50.3] - 2026-06-28
+
+`/qa group2` re-cert **run #4 = FAIL → remediated** (confirmation re-cert of v4.50.2). **Calibration PERFECT: sensitivity 11/11, specificity 6/6** — every seed caught (5 code incl. **cs3/P17 via the fast-test carry-forward** that fixes the run-#3 over-run, and **cs5/FCI-M rs8-class a 3rd time**), every control clean; the panel is fully calibrated per-agent across all five dimensions. Closest run yet — only **2 thin residual framing-syncs**. Canonical record: `debug/qa/group2_recert4_run_notes.md`. **Next: `/qa group2` run #5 (certified-PASS attempt).**
+
+### Changed (papers — 2 genuine residuals, both clearly-correct framing-syncs)
+- **Synthesis cusp 0.004% "variational" → non-variational** (3 prose loci: abstract, §Level-3 body, conclusion + the Table-I He row). Paper 13's run-#2 correction (the Schwartz cusp-corrected 0.004% lies marginally below exact — a non-variational extrapolation; only the 0.022% raw is a variational bound) had been propagated to paper_13 but not to the synthesis. Now labeled correctly everywhere.
+- **fci_molecules C6** (lines 138-139, 169-170): "exact graph Laplacian eigenvalues ε_n=−Z²/(2n²)" → "the hydrogenic eigenvalues … the continuum image of the graph spectrum under the Fock projection, not graph-Laplacian eigenvalues". The bare graph Laplacian is positive-semidefinite; the negative hydrogenic energies are not its eigenvalues (the companion fci_atoms already phrased this correctly). Discrete-vs-continuum (C6) fix. (The other corpus-wide "graph Laplacian eigenvalue" mentions — Paper 7, P18, P11, archive — are correct usage of the actual L=D−A spectrum and were left untouched.)
+- Verified: full-class re-grep clean; deterministic C10–C16 PASS; synthesis + fci_molecules compile content_err=0, undef=0; no code/tests touched.
+
 ## [4.50.2] - 2026-06-27
 
 `/qa group2` re-cert **run #3 = FAIL → remediated** (confirmation re-cert of v4.50.1). Calibrated **10/11** (cs3/P17 unscored — that code-reviewer over-ran its slow composed-PES pipelines; worktree torn down before it returned), specificity **6/6**. **The rs8-class fix is CONFIRMED:** cs5 (FCI-M vacuous `E_lih<100` binding guard — the exact class that slipped run #2) was caught this run by the sharpened per-assertion code prompt. The FAIL is the **cross-paper "second-locus" propagation layer**: run-#1/#2 fixed each correction at its primary locus; the echoes across other papers + the synthesis were never synced. Canonical record: `debug/qa/group2_recert3_run_notes.md`. **Next: `/qa group2` run #4 (certified-PASS attempt).**

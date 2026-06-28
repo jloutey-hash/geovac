@@ -70,8 +70,9 @@ built by concatenating atom-centered lattices has an $R$-independent
 intra-atomic kinetic energy, producing a monotonically attractive
 potential-energy surface with no equilibrium~\cite{loutey_fci_mol}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
-$0.0002\%$ for $\mathrm{H}_2^+$, $0.004\%$--$0.022\%$ (properly
-variational) for He, $96.0\%$ of $D_e$ for $\mathrm{H}_2$, and---in the
+$0.0002\%$ for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
+$l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
+for He, $96.0\%$ of $D_e$ for $\mathrm{H}_2$, and---in the
 composed architecture, whose accuracy bottleneck is the
 Phillips--Kleinman pseudopotential---$5.3\%$, $11.7\%$, and $19.4\%$
 equilibrium-bond-length error for LiH, $\mathrm{BeH}_2$, and
@@ -149,7 +150,7 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 \midrule
 1 & atom (1, 1) & $S^3$ (Fock projection) & $<0.1\%$ (one-electron) & \cite{loutey_paper7} \\
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & $0.0002\%$ energy (spectral Laguerre) & \cite{loutey_paper11} \\
-3 & He (1, 2) & hyperspherical & $0.004\%$--$0.022\%$ (2D variational); $0.19\%$ (graph-native CI) & \cite{loutey_paper13} \\
+3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $0.19\%$ (graph-native CI) & \cite{loutey_paper13} \\
 4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels) & \cite{loutey_paper15} \\
 4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 63.5\%$ ($l_{\max}=2$, 2D variational; unbound $D_e$, no PK) & \cite{loutey_paper17} \\
 5 & LiH (core+valence) & composed (L3 $\oplus$ L4) & $R_{\mathrm{eq}}$ $5.3\%$ ($l$-dependent PK) & \cite{loutey_paper17} \\
@@ -334,9 +335,10 @@ finite-difference error, and the paper labels it as
 such~\cite{loutey_paper13}.  The properly variational results come from
 a two-dimensional variational solver that treats the hyperradius and
 hyperangle simultaneously, avoiding the adiabatic approximation:\
-$0.022\%$ raw at $l_{\max}=7$ and $0.004\%$ with a Schwartz cusp
-correction at $l_{\max}=4$, both genuine variational upper
-bounds~\cite{loutey_paper13}.  A separate, fully zero-parameter route
+$0.022\%$ raw at $l_{\max}=7$ (a genuine variational upper bound) and
+$0.004\%$ with a Schwartz cusp correction at $l_{\max}=4$ (a
+non-variational extrapolation that lies marginally below the exact
+energy)~\cite{loutey_paper13}.  A separate, fully zero-parameter route
 is the graph-native configuration interaction, which uses the graph
 Laplacian as the one-body operator with exact rational Slater
 integrals and reaches $0.19\%$ at $n_{\max}=7$ with no free
@@ -771,8 +773,8 @@ construction of the natural-geometry hierarchy for electronic
 structure.  Each level is the coordinate system in which a given system
 separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
 for $\mathrm{H}_2^+$ ($0.0002\%$)~\cite{loutey_paper11}, hyperspherical
-coordinates for He ($0.004\%$--$0.022\%$ variational, $0.19\%$
-graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
+coordinates for He ($0.022\%$ variational raw / $0.004\%$ non-variational
+cusp, $0.19\%$ graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
 coordinates for $\mathrm{H}_2$ ($96.0\%$ of
 $D_e$)~\cite{loutey_paper15}, and composed fiber bundles for
 core--valence and polyatomic systems ($5.3\%$, $11.7\%$, $19.4\%$

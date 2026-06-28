@@ -135,8 +135,10 @@ The \texttt{MolecularLatticeIndex} instantiates two independent atomic
 subgraphs: a lithium lattice with nuclear charge $Z_A=3$ and a hydrogen
 lattice with $Z_B=1$.  Each subgraph is a scale-invariant hydrogenic
 lattice defined on its own $S^3$ conformal manifold~\cite{paper7},
-retaining its atom-centered conformal structure and the exact eigenvalue
-spectrum $\varepsilon_{n} = -Z^2/(2n^2)$.  At $n_{\max}=3$, the lithium
+retaining its atom-centered conformal structure and recovering, under the
+Fock projection, the hydrogenic spectrum $\varepsilon_{n} = -Z^2/(2n^2)$
+(the bare graph Laplacian is positive-semidefinite; these negative
+energies are its continuum image, not graph-Laplacian eigenvalues).  At $n_{\max}=3$, the lithium
 subgraph contributes $\sum_{n=1}^{3}n^2 = 14$ spatial orbitals and the
 hydrogen subgraph contributes another 14, yielding a combined molecular
 basis of 28 spatial orbitals (56 spin-orbitals).
@@ -166,8 +168,10 @@ molecular Hamiltonian takes the block form
 where $\mathbf{H}_A$ and $\mathbf{H}_B$ are the isolated atomic
 Hamiltonians and $\mathbf{V}_{AB}$ encodes the inter-atomic coupling.
 
-The diagonal blocks carry exact graph Laplacian eigenvalues
-$\varepsilon_n = -Z^2/(2n^2)$ supplemented by the Mulliken
+The diagonal blocks carry the hydrogenic eigenvalues
+$\varepsilon_n = -Z^2/(2n^2)$ (the continuum image of the graph spectrum
+under the Fock projection, not graph-Laplacian eigenvalues) supplemented
+by the Mulliken
 cross-nuclear attraction: each orbital $\phi_i^{(A)}$ centered on atom
 $A$ experiences the potential of nucleus $B$ via the diagonal matrix
 element
