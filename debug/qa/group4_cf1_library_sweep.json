@@ -1,0 +1,354 @@
+{
+  "rows": [
+    {
+      "mol": "LiH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 333,
+      "Np_global_ML": 837,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 195,
+      "eri_nz_global": 321
+    },
+    {
+      "mol": "BeH2",
+      "Q": 50,
+      "M": 25,
+      "Np_pair_diagonal": 555,
+      "Np_global_ML": 1395,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 325,
+      "eri_nz_global": 535
+    },
+    {
+      "mol": "CH4",
+      "Q": 90,
+      "M": 45,
+      "Np_pair_diagonal": 999,
+      "Np_global_ML": 2511,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 585,
+      "eri_nz_global": 963
+    },
+    {
+      "mol": "NH3",
+      "Q": 80,
+      "M": 40,
+      "Np_pair_diagonal": 888,
+      "Np_global_ML": 2232,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 520,
+      "eri_nz_global": 856
+    },
+    {
+      "mol": "H2O",
+      "Q": 70,
+      "M": 35,
+      "Np_pair_diagonal": 777,
+      "Np_global_ML": 1953,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 455,
+      "eri_nz_global": 749
+    },
+    {
+      "mol": "HF",
+      "Q": 60,
+      "M": 30,
+      "Np_pair_diagonal": 666,
+      "Np_global_ML": 1674,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 390,
+      "eri_nz_global": 642
+    },
+    {
+      "mol": "NaH",
+      "Q": 20,
+      "M": 10,
+      "Np_pair_diagonal": 222,
+      "Np_global_ML": 558,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 130,
+      "eri_nz_global": 214
+    },
+    {
+      "mol": "MgH2",
+      "Q": 40,
+      "M": 20,
+      "Np_pair_diagonal": 444,
+      "Np_global_ML": 1116,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 260,
+      "eri_nz_global": 428
+    },
+    {
+      "mol": "SiH4",
+      "Q": 80,
+      "M": 40,
+      "Np_pair_diagonal": 888,
+      "Np_global_ML": 2232,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 520,
+      "eri_nz_global": 856
+    },
+    {
+      "mol": "PH3",
+      "Q": 70,
+      "M": 35,
+      "Np_pair_diagonal": 777,
+      "Np_global_ML": 1953,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 455,
+      "eri_nz_global": 749
+    },
+    {
+      "mol": "H2S",
+      "Q": 60,
+      "M": 30,
+      "Np_pair_diagonal": 666,
+      "Np_global_ML": 1674,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 390,
+      "eri_nz_global": 642
+    },
+    {
+      "mol": "HCl",
+      "Q": 50,
+      "M": 25,
+      "Np_pair_diagonal": 555,
+      "Np_global_ML": 1395,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 325,
+      "eri_nz_global": 535
+    },
+    {
+      "mol": "KH",
+      "Q": 20,
+      "M": 10,
+      "Np_pair_diagonal": 222,
+      "Np_global_ML": 558,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 130,
+      "eri_nz_global": 214
+    },
+    {
+      "mol": "CaH2",
+      "Q": 40,
+      "M": 20,
+      "Np_pair_diagonal": 444,
+      "Np_global_ML": 1116,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 260,
+      "eri_nz_global": 428
+    },
+    {
+      "mol": "GeH4",
+      "Q": 80,
+      "M": 40,
+      "Np_pair_diagonal": 888,
+      "Np_global_ML": 2232,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 520,
+      "eri_nz_global": 856
+    },
+    {
+      "mol": "AsH3",
+      "Q": 70,
+      "M": 35,
+      "Np_pair_diagonal": 777,
+      "Np_global_ML": 1953,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 455,
+      "eri_nz_global": 749
+    },
+    {
+      "mol": "H2Se",
+      "Q": 60,
+      "M": 30,
+      "Np_pair_diagonal": 666,
+      "Np_global_ML": 1674,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 390,
+      "eri_nz_global": 642
+    },
+    {
+      "mol": "HBr",
+      "Q": 50,
+      "M": 25,
+      "Np_pair_diagonal": 555,
+      "Np_global_ML": 1395,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 325,
+      "eri_nz_global": 535
+    },
+    {
+      "mol": "LiF",
+      "Q": 70,
+      "M": 35,
+      "Np_pair_diagonal": 777,
+      "Np_global_ML": 1953,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 455,
+      "eri_nz_global": 749
+    },
+    {
+      "mol": "CO",
+      "Q": 100,
+      "M": 50,
+      "Np_pair_diagonal": 1110,
+      "Np_global_ML": 2790,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 650,
+      "eri_nz_global": 1070
+    },
+    {
+      "mol": "N2",
+      "Q": 100,
+      "M": 50,
+      "Np_pair_diagonal": 1110,
+      "Np_global_ML": 2790,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 650,
+      "eri_nz_global": 1070
+    },
+    {
+      "mol": "F2",
+      "Q": 100,
+      "M": 50,
+      "Np_pair_diagonal": 1110,
+      "Np_global_ML": 2790,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 650,
+      "eri_nz_global": 1070
+    },
+    {
+      "mol": "NaCl",
+      "Q": 50,
+      "M": 25,
+      "Np_pair_diagonal": 555,
+      "Np_global_ML": 1395,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 325,
+      "eri_nz_global": 535
+    },
+    {
+      "mol": "ScH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "TiH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "VH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "CrH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "MnH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "FeH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "CoH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "NiH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "CuH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "ZnH",
+      "Q": 30,
+      "M": 15,
+      "Np_pair_diagonal": 277,
+      "Np_global_ML": 901,
+      "ratio": 3.252707581227437,
+      "eri_nz_pd": 155,
+      "eri_nz_global": 299
+    },
+    {
+      "mol": "SrH",
+      "Q": 20,
+      "M": 10,
+      "Np_pair_diagonal": 222,
+      "Np_global_ML": 558,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 130,
+      "eri_nz_global": 214
+    },
+    {
+      "mol": "BaH",
+      "Q": 20,
+      "M": 10,
+      "Np_pair_diagonal": 222,
+      "Np_global_ML": 558,
+      "ratio": 2.5135135135135136,
+      "eri_nz_pd": 130,
+      "eri_nz_global": 214
+    }
+  ]
+}

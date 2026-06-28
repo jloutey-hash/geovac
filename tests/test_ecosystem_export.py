@@ -130,7 +130,7 @@ def test_system_builds(hamiltonian_cache, system: str) -> None:
 
     Slim: representative coverage handled by
     ``test_representative_builds_and_pauli``; this fills out the long-tail
-    of the 40-molecule library under ``--slow``.
+    of the 37-system ``_SYSTEM_REGISTRY`` under ``--slow``.
     """
     H = hamiltonian_cache(system)
     assert H.n_qubits > 0

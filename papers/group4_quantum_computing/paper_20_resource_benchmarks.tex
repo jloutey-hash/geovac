@@ -51,9 +51,11 @@ minimum at the qubit-Hamiltonian level. We document this scope boundary
 empirically in \S\ref{subsec:scope_boundary}; the framework's
 primary value proposition is structural sparsity with quantitative
 truncation-error bounds (Paper~38 propinquity), not energy-accuracy
-parity with CCSD(T) on second-row systems.  The library covers 38 molecules across three rows of the periodic table
-($Z=1$--36), including multi-center systems
-(CO, N$_2$, F$_2$, CH$_2$O, C$_2$H$_2$, C$_2$H$_6$), mixed
+parity with CCSD(T) on second-row systems.  The \texttt{hamiltonian()}
+registry covers 37 systems (35 composed molecules across three rows of
+the periodic table, $Z=1$--36, plus the He and H$_2$ reference atoms),
+including multi-center systems
+(CO, N$_2$, F$_2$), mixed
 frozen-core molecules (NaCl), and the full first transition series as hydrides (ScH through ZnH),
 with Pauli scaling $O(Q^{2.5})$
 confirmed universal across all three rows, compared to
@@ -659,13 +661,13 @@ corrections are Tier 3+.
 \section{Available Systems}
 \label{sec:systems}
 
-Table~\ref{tab:molecules} lists all 38 molecules currently available
-in the GeoVac Hamiltonian library, spanning three rows of the periodic
-table ($Z = 1$--36).
-Table~\ref{tab:multicenter} lists the 8 multi-center molecules added
-in v2.2, including heteronuclear diatomics (LiF, CO), homonuclear
-diatomics (N$_2$, F$_2$), a mixed frozen-core system (NaCl), and
-polyatomics with multiple heavy atoms (CH$_2$O, C$_2$H$_2$, C$_2$H$_6$).
+The GeoVac Hamiltonian library comprises 37 systems (35 composed
+molecules plus the He and H$_2$ reference atoms), spanning three rows of
+the periodic table ($Z = 1$--36); Tables~\ref{tab:molecules}--%
+\ref{tab:transition_metals} enumerate the molecular systems.
+Table~\ref{tab:multicenter} lists the 5 multi-center molecules added
+in v2.2: heteronuclear diatomics (LiF, CO), homonuclear
+diatomics (N$_2$, F$_2$), and a mixed frozen-core system (NaCl).
 Table~\ref{tab:transition_metals} lists all ten first-row transition metal
 hydrides (v2.8), which use [Ar] frozen cores and isolated
 $d$-orbital valence blocks spanning $Z = 21$--30.
@@ -712,8 +714,7 @@ GeH$_4$  & Ar$d$ & 80 & 7{,}273 & 813.3 & 167 \\
 \begin{table}[h]
 \caption{Multi-center molecules added in v2.2 at $n_{\max}=2$.
   LiF, CO, N$_2$, and F$_2$ use He frozen cores; NaCl uses mixed
-  frozen cores (Na [Ne] + Cl [Ne]); CH$_2$O, C$_2$H$_2$, and
-  C$_2$H$_6$ use He frozen cores on each heavy atom.}
+  frozen cores (Na [Ne] + Cl [Ne]).}
 \label{tab:multicenter}
 \begin{ruledtabular}
 \begin{tabular}{llcrrrr}
@@ -724,9 +725,6 @@ CO       & He   & 14 & 7 & 100 & 1{,}111 & 21 \\
 N$_2$    & He   & 14 & 7 & 100 & 1{,}111 & 21 \\
 F$_2$    & He   & 18 & 9 & 100 & 1{,}111 & 21 \\
 NaCl     & Ne+Ne & 8 & 4 &  50 &    556 & 21 \\
-CH$_2$O  & He   & 16 & 8 & 120 & 1{,}333 & 21 \\
-C$_2$H$_2$ & He & 14 & 7 & 120 & 1{,}333 & 21 \\
-C$_2$H$_6$ & He & 18 & 9 & 160 & 1{,}777 & 21 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -764,7 +762,7 @@ ZnH & $3d^{10} 4s^2$ & Ar & 30 & 277 & 9.23 \\
 
 A key practical result visible in Tables~\ref{tab:molecules}
 and~\ref{tab:multicenter} is that the composed Pauli term count is
-\emph{exactly linear} in the qubit count $Q$ across all 38 molecules:
+\emph{exactly linear} in the qubit count $Q$ across the composed molecular library:
 \begin{equation}
   N_{\text{Pauli}} = 11.10 \times Q\,.
   \label{eq:linear}
@@ -970,7 +968,8 @@ including the anomalous configurations of Cr ($3d^5 4s^1$) and Cu ($3d^{10} 4s^1
 Main-group third-row atoms
 ($Z=19$--20 and $Z=31$--36) are supported via [Ar]
 and [Ar]3$d^{10}$ frozen cores~\cite{GeoVac_ScopeBoundary}.
-The library currently includes 38 molecules.
+The library currently includes 37 systems (35 composed molecules plus
+the He and H$_2$ reference atoms).
 
 \paragraph{Qubit count.}
 GeoVac Hamiltonians use more qubits than Gaussian alternatives at the

@@ -43,11 +43,11 @@ number $\nu = N - \lambda_1$.  For all atoms with ground-state spin
 $S < N/2$, the spatial irrep has $\lambda_1 = 2$, giving the
 universal result $\nu = N - 2$ and $\mufree = 2(N-2)(N-1)$.  This
 formula, combined with the structure of the $S_N$ irrep, yields a
-classification of atoms into four types---A (trivial), B~(noble gas),
-C~(alkali), D~(alkaline earth)---that recasts the periodic table's
-group structure in representation-theoretic language.  The periodic law
+classification of atoms into five types---A (trivial), B~(noble gas),
+C~(alkali), D~(alkaline earth), E~(open shell)---that recasts the periodic
+table's group structure in representation-theoretic language.  The periodic law
 corresponds to the repetition of the $S_N$ irrep sequence
-$\mathrm{C} \to \mathrm{D} \to \cdots \to \mathrm{B}$ within each
+$\mathrm{C} \to \mathrm{D} \to \mathrm{E} \to \mathrm{B}$ within each
 period.  This classification maps onto, rather than predicts, the
 known periodic table structure; its value lies in providing a
 unified group-theoretic framework for a pattern that is usually
@@ -149,7 +149,7 @@ important to distinguish them from the new contributions.
     universal angular quantum number $\nu = N - 2$ and $\mufree =
     2(N-2)(N-1)$.  This specific identification appears to be new.
 
-  \item \textbf{The four-type classification (A/B/C/D).}  The
+  \item \textbf{The five-type classification (A/B/C/D/E).}  The
     observation that the $S_N$ irrep shape naturally partitions atoms
     into types that map onto the periodic table's group structure
     provides a group-theoretic reformulation of the empirical pattern.
@@ -358,7 +358,7 @@ While $\nu = N - 2$ and $\mufree = 2(N-2)(N-1)$ are universal, the
 configuration.  This shape encodes the internal structure of the
 atom---how the $N$~electrons partition into core and valence.
 
-We define four structure types based on the spatial Young diagram:
+We define five structure types based on the spatial Young diagram:
 
 \subsection{Type A: Trivial ($N = 1$)}
 
@@ -409,6 +409,22 @@ The ionization energy is intermediate (Be:~$9.3\eV$, Mg:~$7.6\eV$,
 Ca:~$6.1\eV$)---higher than alkali metals (the valence pair is harder
 to break) but lower than noble gases (the valence pair is still
 distinguishable from the core).
+
+\subsection{Type E: Open shell (partially filled $p$ or $d$)}
+
+Atoms with a partially filled $p$ shell (boron through fluorine) or
+$d$ shell (the transition metals) carry an open valence shell with
+$S > 0$ but $S < N/2$.  The spatial irrep is neither the democratic
+$[2^{N/2}]$ of Type~B/D nor the single-defect $[2^{(N-1)/2},1]$ of
+Type~C, but an intermediate shape with several columns of unequal
+height set by the open-shell occupancy and Hund's rule.  This is the
+broadest class and the one where intra-shell exchange coupling is
+strongest; the composed-builder implementation refines it further into
+a $p$-block dispatch (type~E) and a separate $d$-block dispatch
+(type~F) because the angular machinery differs, but at the
+representation-theory level both are open-shell instances of the same
+intermediate-irrep family.  Ionization energies span the widest range
+(B:~$8.3\eV$ to F:~$17.4\eV$), tracking the filling of the open shell.
 
 Table~\ref{tab:types} summarizes the classification.
 

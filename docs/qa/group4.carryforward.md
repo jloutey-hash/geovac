@@ -14,10 +14,25 @@ Findings surfaced while QA-ing another branch that **land on group4 papers** and
 
 **Lands on:** Paper 14 (qubit encoding — 51×–1712× vs Gaussian, LiH-vs-STO-3G market test, O(Q^2.5)); Paper 20 (resource benchmarks).
 
-**Disposition for group4 QA (do NOT do now — group4's bite):**
-1. Decide: keep the pair-diagonal approximation (then **disclose** it and re-state the multipliers honestly) or switch production to the global rule (denser, re-prices the headline).
-2. Quantify the re-pricing across the 40-molecule library — **cheap: Pauli-count only, build-only, no FCI** (LiH is 2.51×; systems with more same-l valence electrons will re-price harder).
+**Disposition for group4 QA:**
+1. Decide: keep the pair-diagonal approximation (then **disclose** it and re-state the multipliers honestly) or switch production to the global rule (denser, re-prices the headline). *(Pending PI decision; the sweep below shows option A — disclose — is well-supported.)*
+2. ~~Quantify the re-pricing across the library~~ **DONE 2026-06-28** — see below + `debug/qa/group4_cf1_library_sweep_memo.md`.
 3. The *energy* deltas for BeH₂/H₂O need a tractable correlated method (full number-projected FCI is intractable at the composed active space — that was the 2 h hang in the diagnostic), but the energy axis is a chemistry footnote, not the group4 concern.
+
+### CF-1 QUANTIFIED — library-wide re-pricing sweep (2026-06-28, group4 pre-work)
+
+Driver `debug/qa/group4_cf1_library_sweep.py` (build-only, no FCI) over all 35 composed library molecules. **The re-pricing factor is constant within valence class** (the dropped m-swaps are a valence-l angular property, not molecule geometry):
+
+| Valence class | N_Pauli/Q pair-diag (production) | N_Pauli/Q global-M_L (physical) | re-pricing |
+|:--------------|:-------------------------------:|:-------------------------------:|:----------:|
+| main-group s/p (23 mols) | **11.10** | **27.9** | **2.51×** |
+| d-block TM hydrides (10 mols) | **9.23** | **30.0** | **3.25×** |
+
+Two material consequences:
+1. **Scaling survives, prefactor re-prices.** O(Q^2.5) / "N_Pauli = 11.10·Q exact" / linear-in-Q are ROBUST (constant ratio ⇒ unchanged log-log slope). What re-prices: the multiplier magnitude, and the absolute market-test line — **Paper 20's "LiH 334 vs STO-3G 907" → 837 vs 907 ≈ parity** under the physical rule (does not survive); Paper 14's "51×–1712× vs Gaussian" → ≈20×–680× (one-to-two orders; qualitative advantage survives).
+2. **The "d-orbitals are sparser" claim REVERSES.** Papers 14 + 20 both say d-block 9.23 < main-group 11.10 "due to more restrictive Gaunt rules." Under the physical rule d-block is **30.0·Q — denser than main-group 27.9·Q**: the low pair-diagonal 9.23 is an artifact of dropping MORE m-swaps at higher l (3.25× vs 2.51×), not sparser physics. MATERIAL for disposition.
+
+Library-size note (**DECIDED 37, ship as-is — PI 2026-06-28; applied corpus-wide**): `_SYSTEM_REGISTRY` ships **37 systems** (35 composed molecules + `he` + `h2`). Five corpus numbers had disagreed (docstring 28 / Paper 14 30 / registry 37 / Paper 20 38 / CLAUDE.md 40); the 3 organics CH₂O/C₂H₂/C₂H₆ Paper 20 listed are **not buildable** (bond-length entries only, no registry entry). All synced to 37: Paper 14, Paper 20 (organics removed from abstract + multi-center table 8→5), synthesis, docstring, test comment, claims_register, CLAUDE.md §2+§1.1+§1.5. LiH "333" in the sweep is the raw-builder count; the shipping `hamiltonian()` API gives **334** (matches Paper 20 + CLAUDE.md) — 334 is correct, no fix.
 
 **Evidence:** `debug/qa/group3_density_diagnostic_memo.md` (LiH result + sanity), `debug/qa/group3_followup_density_layers_memo.md` (mechanism + full doc mapping), driver `debug/qa/group3_density_diagnostic.py`.
 

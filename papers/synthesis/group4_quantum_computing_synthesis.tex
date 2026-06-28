@@ -1,0 +1,443 @@
+% group4_quantum_computing_synthesis.tex
+% GeoVac Group 4 Synthesis: Quantum Computing / Structural Sparsity Arc
+% Status: Project archive synthesis, June 2026
+% Audience: quantum-computing / NISQ / VQE researchers
+% Spine: encoding (14) -> resources (20) -> periodicity foundation (16) -> nuclear extension (23)
+
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{observation}{Observation}
+
+\begin{document}
+
+\title{Structural Sparsity for Quantum Simulation:\\
+A Synthesis of the GeoVac Quantum-Computing Arc}
+\thanks{Group~4 synthesis in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{June 28, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The Geometric Vacuum (GeoVac) framework discretizes electronic
+structure on natural geometries, producing sparse graph Hamiltonians
+whose angular content is fixed by Gaunt selection rules.  This synthesis
+assembles the framework's quantum-computing arc---the four Group~4
+papers---into a single resource-oriented narrative.  The spine is:\ the
+qubit encoding and its Pauli/$1$-norm scaling~\cite{loutey_paper14}; the
+benchmarked resource library across three periodic-table
+rows~\cite{loutey_paper20}; the $S_N$ representation-theoretic
+foundation that classifies the atomic building
+blocks~\cite{loutey_paper16}; and the nuclear shell-model extension that
+delineates exactly which part of the framework
+transfers~\cite{loutey_paper23}.  The unifying value proposition is
+\emph{structural}, not accuracy-based:\ after the Jordan--Wigner
+transformation the GeoVac lattice Hamiltonian yields $O(Q^{3.15})$ Pauli
+terms for atoms and $O(Q^{2.5})$ for composed multi-center molecules
+(versus $O(Q^{3.9\text{--}4.3})$ for Gaussian baselines), with a
+sub-quadratic Pauli $1$-norm $\lambda = O(Q^{1.69})$ ($R^2=0.997$) that
+controls Trotter depth and qubitization query cost.  Two disciplines run
+through the arc.  \emph{First}, we separate the robust \emph{scaling}
+exponents---unchanged under the choice of electron-repulsion selection
+rule---from the \emph{absolute multipliers}, which depend on a stated
+pair-diagonal angular approximation and are disclosed as such.
+\emph{Second}, every comparison is made at \emph{matched qubit count},
+not matched accuracy:\ the composed basis carries classical
+equilibrium-geometry errors of $5$--$26\%$, so the framework is
+positioned for fixed-geometry NISQ/VQE simulation (Pauli count, QWC
+measurement groups), not for fault-tolerant geometry optimisation.  The
+nuclear extension is honest in the same way:\ its binding energies are
+encoding-validation benchmarks far from experiment, and the Fock
+projection rigidity theorem states precisely that the conformal $S^3$
+structure does \emph{not} transfer to the harmonic-oscillator basis---only
+the angular machinery and the qubit encoding do.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{Introduction: a structural value proposition}
+%% ========================================================================
+
+The classical-solver investigation that occupies the GeoVac
+quantum-chemistry arc (Group~2) reached a clear verdict:\ the
+natural-geometry hierarchy characterises what discrete graph
+Hamiltonians can and cannot achieve for ground-state potential-energy
+surfaces, and on the accuracy axis it is not competitive with production
+quantum chemistry.  The framework's computational value lies elsewhere.
+The same construction that makes the classical accuracy bounded---a
+single-center angular basis with Gaunt-enforced selection rules and a
+pseudopotential-partitioned composed geometry---makes the resulting
+\emph{qubit} Hamiltonians structurally sparse.  This synthesis collects
+the four papers that develop and benchmark that observation.
+
+The reader should hold two framings in mind throughout.  First, the
+advantage is in \emph{resource scaling and term counts}, measured at
+\emph{matched qubit count}, not in energy accuracy:\ at $n_{\max}=2$ the
+composed basis carries $5$--$26\%$ classical equilibrium-geometry errors
+(LiH/BeH$_2$/H$_2$O), so the natural use is single-point simulation at a
+fixed nuclear geometry, where the sparsity is free and the geometry
+error does not enter.  Second, the framework targets the NISQ/VQE
+regime---where Pauli term count and the number of qubitwise-commuting
+(QWC) measurement groups dominate cost---rather than the fault-tolerant
+QPE regime, although the sub-quadratic Pauli $1$-norm is also the
+relevant quantity for qubitization.
+
+The four papers form a dependency spine.
+Paper~14~\cite{loutey_paper14} establishes the encoding and its scaling
+laws.  Paper~20~\cite{loutey_paper20} benchmarks a $37$-system library
+(35 composed molecules + He + H$_2$) across three periodic-table rows and exports them to the
+standard quantum-software ecosystems.  Paper~16~\cite{loutey_paper16}
+supplies the $S_N$ representation-theoretic classification of the atomic
+building blocks that the composed builder assembles.
+Paper~23~\cite{loutey_paper23} extends the angular machinery to the
+nuclear shell model and proves, via the Fock rigidity theorem, the
+boundary of what transfers.
+
+%% ========================================================================
+\section{The angular-sparsity mechanism}
+%% ========================================================================
+
+The structural origin of every resource result in this arc is a single
+fact about the two-electron integral (ERI) tensor.  In a single-center
+basis indexed by $(n,\ell,m)$, the angular part of each ERI is a product
+of Gaunt coefficients, and a Gaunt coefficient vanishes unless its three
+angular momenta satisfy the $3j$ triangle inequality and the magnetic
+selection rule.  As the number of spatial orbitals $M$ grows, the
+fraction of nonzero ERIs therefore \emph{decays}---empirically as
+$\sim 1/M^2$---whereas a Gaussian ERI tensor remains near-dense at
+$O(1)$ occupancy.  This is the potential-independent angular-sparsity
+theorem of Paper~22 (Group~3):\ the ERI density depends only on
+$\ell_{\max}$, not on the radial potential $V(r)$.  The sparsity
+survives the Jordan--Wigner transformation because it is carried by the
+angular labels, which JW does not mix.
+
+\paragraph{The selection rule actually realised, and its disclosure.}
+A precise statement of the sparsity requires naming \emph{which} angular
+selection rule the production composed pipeline realises.  The exact
+Coulomb rule is the global-$M_L$ rule, $m_a+m_b=m_c+m_d$.  The
+production composed builder realises instead the \emph{pair-diagonal}
+rule $m_a=m_c \wedge m_b=m_d$:\ a legitimate sparsifying approximation
+that retains the diagonal magnetic channels and drops the genuinely
+nonzero ``m-swap'' integrals (e.g.\ $\braket{p_{+1}p_{-1}|p_{-1}p_{+1}}$,
+angular factor $\approx 0.49$).  This distinction matters for the
+\emph{magnitude} of the sparsity advantage but not for its \emph{scaling}.
+A library-wide build-only sweep shows that switching to the exact
+global-$M_L$ rule multiplies the composed Pauli count by a
+\emph{constant factor within each valence class}---$2.51\times$ for
+main-group ($s,p$) molecules and $3.25\times$ for $d$-block transition-metal
+hydrides---because the dropped m-swaps are a property of the valence
+angular content, not of the molecular geometry.  Consequently:
+\begin{itemize}
+\item the \emph{scaling} exponents and the exact linearity
+$N_{\mathrm{Pauli}} = c\,Q$ are unchanged (a constant prefactor leaves the
+log-log slope invariant);
+\item the \emph{absolute multipliers} and any absolute market-test line
+re-price by the constant factor, and are reported below with the rule
+they assume stated explicitly.
+\end{itemize}
+We adopt the convention of \emph{disclosing} the pair-diagonal rule and
+reporting both the pair-diagonal multiplier and its global-$M_L$
+re-pricing, rather than presenting the pair-diagonal count as exact
+angular-selection-rule sparsity.
+
+%% ========================================================================
+\section{The encoding and its scaling laws (Paper~14)}
+%% ========================================================================
+
+Paper~14 transforms the GeoVac lattice Hamiltonian to qubits via
+Jordan--Wigner and characterises the resulting Pauli decomposition by
+several operationally distinct metrics.
+
+\paragraph{Term count.}
+For single-center atoms the Pauli term count scales as $O(Q^{3.15})$ in
+the qubit number $Q$, compared with Gaussian molecular Pauli-scaling
+exponents in the $Q^{3.9}$--$Q^{4.3}$ range~\cite{trenev2025};\ the
+specific electronic-structure values $Q^{4.25}$ (LiH) and $Q^{3.92}$
+(H$_2$O) are GeoVac's own recomputation via the OpenFermion/Qiskit-Nature
+pipeline applied in that baseline.
+For composed multi-center molecules the pseudopotential-partitioned
+architecture produces block-diagonal ERIs and a \emph{universal}
+$O(Q^{2.5})$ scaling, with an exponent spread of only $0.02$ across the
+benchmarked molecules---independent of molecular topology.  Across the
+library the composed count is, remarkably, \emph{exactly linear} in the
+qubit count,
+\begin{equation}
+N_{\mathrm{Pauli}} = c\,Q,\qquad
+c = 11.10~(\text{main group}),\quad 9.23~(d\text{-block}),
+\label{eq:linearity}
+\end{equation}
+under the production pair-diagonal rule.  (Under the exact global-$M_L$
+rule the coefficients become $27.9$ and $30.0$; note that the ordering
+reverses---the $d$-block, which is \emph{sparser} under the pair-diagonal
+rule, is in fact \emph{denser} under the exact rule, because higher
+angular momentum carries more m-swap channels to drop.  The
+pair-diagonal $d$-block sparsity is thus an artifact of the
+approximation, not a selection-rule property, and is labeled as such.)
+
+\paragraph{Measurement and Trotter cost.}
+Two further metrics govern practical cost.  The number of QWC
+measurement groups---the dominant factor in the measurement overhead of
+variational algorithms---scales as $O(Q^{3.36})$.  The Pauli $1$-norm
+$\lambda = \sum_i |c_i|$, which bounds both Trotter step counts and
+qubitization query complexity, scales as $O(Q^{1.69})$ with
+$R^2 = 0.997$.  This sub-quadratic $1$-norm scaling is the key
+fault-tolerant-relevant result:\ Trotter circuit depth grows far more
+slowly with system size than the raw term count alone would suggest.
+All Gaussian baselines are validated against published integral
+values~\cite{trenev2025} and against analytic references (Szabo and
+Ostlund for H$_2$; analytical Slater-type orbitals for He).
+
+\paragraph{Tier discipline.}
+The scaling exponents are \emph{measured} quantities (log-log fits with
+reported $R^2$), not derived; the angular selection rules underlying the
+ERI-density decay are \emph{exact}; and the composed sparsity advantage
+\emph{magnitude} is a measured quantity under a named ERI rule.  The
+construction itself is zero-parameter:\ the Hamiltonian follows from
+nuclear charges and geometry alone.
+
+%% ========================================================================
+\section{The benchmarked resource library (Paper~20)}
+%% ========================================================================
+
+Paper~20 turns the encoding into a usable artifact:\ the
+\texttt{hamiltonian()} registry of $37$ systems ($35$ composed molecular
+qubit Hamiltonians spanning $Z=1$--$36$ across three periodic-table rows,
+plus the He and H$_2$ reference atoms), including multi-center systems
+(CO, N$_2$, F$_2$), mixed frozen-core molecules (NaCl), and
+the first transition series as hydrides (ScH through ZnH), exported to
+Qiskit, OpenFermion, and PennyLane.
+
+\paragraph{Two architectures.}
+The library exposes two composed-molecular architectures with
+complementary strengths.  The \emph{composed} (pseudopotential, PK)
+architecture is the sparser of the two:\ LiH requires $334$ Pauli terms
+at $30$ qubits, with $13\times$ fewer QWC groups than the Gaussian STO-3G
+reference at $12$ qubits.  The market-test comparison ``$334$ versus
+$907$ STO-3G Pauli terms'' is stated under the pair-diagonal rule; under
+the exact global-$M_L$ rule LiH re-prices to $837$ terms, i.e.\ near
+parity ($0.92\times$) with STO-3G's $907$---so the broad
+``one-to-three-orders-of-magnitude sparser'' headline rests on the
+scaling gap and the multi-center block structure, while the specific
+small-system market-test line is sensitive to the ERI rule and is
+reported with that caveat.  The \emph{balanced coupled} (PK-free)
+architecture trades sparsity for chemistry:\ it binds LiH at the
+experimental equilibrium geometry $R_{\mathrm{eq}}=3.015$~bohr with $878$
+Pauli terms at $30$ qubits and a $0.20\%$ single-point energy error at
+the well minimum when solved exactly (number-projected FCI).
+
+\paragraph{Row-conditional chemistry scope.}
+The chemistry-accuracy scope at $n_{\max}=2$ is honestly
+\emph{row-conditional}:\ first-row hydrides (LiH, BeH$_2$, H$_2$O, \dots)
+bind with documented PES topology, while second-row hydrides (NaH and
+below) exhibit monotone overattraction under every tested
+configuration---frozen-core balanced, multi-zeta valence, screened
+cross-center, explicit-core Hartree--Fock---with no interior PES minimum
+at the qubit-Hamiltonian level.  This scope boundary is documented
+empirically, not papered over:\ the framework's value proposition is
+structural sparsity with quantitative truncation-error bounds
+(Paper~38 propinquity), not energy-accuracy parity with CCSD(T) on
+second-row systems.
+
+\paragraph{Frozen cores.}
+Second- and third-row molecules use analytical frozen cores ([Ne], [Ar],
+[Ar]$3d^{10}$); the frozen-core energy enters only through the identity
+operator and does not affect the quantum measurement cost.
+Isostructural molecules with frozen cores produce identical Pauli counts
+across rows---the periodic-table structure is visible directly in the
+resource counts.
+
+%% ========================================================================
+\section{The representation-theoretic foundation (Paper~16)}
+%% ========================================================================
+
+The composed builder assembles molecules from atomic building blocks,
+and Paper~16 supplies the group-theoretic classification of those
+blocks.  After separation of the hyperradius, the $N$-electron angular
+dynamics live on $S^{3N-1}$ and the angular kinetic energy is the
+$\mathrm{SO}(3N)$ Casimir operator with eigenvalue
+$\mu_{\mathrm{free}} = \nu(\nu + 3N - 2)/2$.  Fermionic antisymmetry
+restricts the spatial wavefunction to the $S_N$ irreducible
+representation conjugate to the spin Young diagram, whose first-column
+length $\lambda_1$ fixes the minimum angular quantum number
+$\nu = N - \lambda_1$.  For every atom with ground-state spin $S<N/2$ the
+spatial irrep has $\lambda_1=2$, giving the universal result
+\begin{equation}
+\nu = N-2,\qquad \mu_{\mathrm{free}} = 2(N-2)(N-1).
+\end{equation}
+
+This produces a five-type classification of atoms---A (trivial), B
+(noble gas), C (alkali), D (alkaline earth), E (open shell)---and recasts
+the periodic law as the repetition of the $S_N$ irrep sequence
+$\mathrm{C}\to\mathrm{D}\to\mathrm{E}\to\mathrm{B}$ within each period.
+The classification is implemented in \texttt{atomic\_classifier.py},
+which refines the open-shell type~E into a $p$-block dispatch (E) and a
+separate $d$-block dispatch (F) for the composed builder, and supplies
+the universal angular quantum number $\nu = N-2$.
+
+\paragraph{Honest framing.}
+The classification \emph{maps onto, rather than predicts}, the known
+periodic table:\ its value is a unified group-theoretic language for a
+pattern usually described empirically, not a derivation of chemistry
+from first principles.  Paper~16 also establishes a structural fact
+relevant to the relativistic extension:\ the topology $(\nu,
+\mu_{\mathrm{free}})$ is smooth through $Z = 1/\alpha \approx 137$, so
+the Dirac instability is a \emph{metric} singularity on $S^{3N-1}$, not a
+topological one.
+
+%% ========================================================================
+\section{The nuclear extension and its boundary (Paper~23)}
+%% ========================================================================
+
+Paper~23 applies the angular-sparsity machinery to a system the
+conformal $S^3$ projection cannot reach---the nuclear shell model---and
+in doing so delineates exactly which part of the framework is universal.
+
+\paragraph{What the angular machinery delivers.}
+Built on the harmonic-oscillator single-particle basis with a
+Mayer--Jensen spin--orbit term, the construction reproduces the HO shell
+closures $2, 8, 20, 40, 70, 112$ directly from graph state counting, and
+recovers the physical magic numbers $2, 8, 20, 28, 50, 82, 126$ with a
+spin--orbit strength $v_{ls}/\hbar\omega \approx 0.17$ and a Nilsson
+$\ell(\ell+1)$ correction $d_{\ell\ell}/\hbar\omega \approx 0.02$.  The
+qubit encodings inherit the angular sparsity:\ the deuteron ($1p+1n$)
+requires $16$ qubits and $592$ non-identity Pauli terms using the
+Minnesota nucleon--nucleon potential and
+Moshinsky--Talmi brackets; helium-4 ($2p+2n$) requires $16$ qubits and
+$712$ Pauli terms despite a Hilbert space $12.25\times$ larger---only
+$1.20\times$ more terms, a direct consequence of the angular selection
+rules carrying through to multi-particle systems.  A composed
+nuclear--electronic deuterium encoding ($26$ qubits) validates the
+multi-block architecture and quantifies the $\sim 10^{13}$ coefficient
+ratio between nuclear, electronic, and hyperfine scales.
+
+\paragraph{The rigidity boundary.}
+\begin{theorem}[Fock projection rigidity]
+The $S^3$ conformal projection that makes electronic Hamiltonians
+equivalent to a graph Laplacian is unique to the Coulomb potential and
+does not extend to the harmonic-oscillator or Woods--Saxon systems.
+\end{theorem}
+For nuclear Hamiltonians the GeoVac contribution is therefore the
+angular machinery and qubit encoding only, \emph{not} the conformal
+projection.  This is the structural dual of the foundations-side HO
+rigidity theorem (Paper~24).
+
+\paragraph{Honest framing.}
+All nuclear physics inputs (Minnesota parameters, spin--orbit strength,
+$\hbar\omega$) follow the standard shell-model literature---they are not
+GeoVac-derived---and the quantitative binding energies at
+$N_{\mathrm{shells}}=2$ are far from experiment.  They are to be read as
+\emph{encoding-validation benchmarks}, demonstrating that the two-species
+sparse qubit architecture works, not as a nuclear-structure calculation.
+
+%% ========================================================================
+\section{Honest scope and positioning}
+%% ========================================================================
+
+\paragraph{What is robust.}
+The scaling laws are the load-bearing results and are robust:\ atomic
+$O(Q^{3.15})$, composed $O(Q^{2.5})$ universal, $1$-norm $O(Q^{1.69})$,
+QWC $O(Q^{3.36})$, and the exact linearity
+$N_{\mathrm{Pauli}}=c\,Q$ \eqref{eq:linearity}.  These are unaffected by
+the ERI-rule choice (constant prefactor) and rest on the
+potential-independent angular-sparsity theorem (Paper~22).  The qubit
+library is a concrete, exported, reproducible artifact.
+
+\paragraph{What is conditional.}
+The \emph{absolute} sparsity multipliers and small-system market-test
+lines depend on the disclosed pair-diagonal ERI rule and re-price by a
+constant factor under the exact global-$M_L$ rule (LiH to near parity
+with STO-3G).  All Pauli comparisons are at matched qubit count, not
+matched accuracy:\ the composed basis carries $5$--$26\%$ classical
+$R_{\mathrm{eq}}$ errors, the chemistry-accuracy scope is row-conditional
+(first-row binds; second-row overattracts), and the nuclear binding
+energies are encoding-validation benchmarks far from experiment.
+
+\paragraph{What was tried and did not work.}
+The arc includes several honest negatives that bound the design space.
+Discrete $\mathbb{Z}_2$ tapering beyond the Hopf $m_\ell \to -m_\ell$
+symmetry does not transfer to relativistic chemistry:\ neither
+$\kappa$-parity, direct-basis $m_j$-parity, nor rotated-basis
+$m_j$-parity commutes with the Dirac--Coulomb Hamiltonian, because the
+$jj$-coupled Coulomb operator couples sign-counted sectors under
+sum-conservation (not parity) rules.  Adding off-diagonal cross-block
+$h_1$ coupling to gain binding produces $16\times$ over-binding on LiH;
+the framework's binding wall is structurally inseparable from its
+encoding advantages.  A non-abelian gauge upgrade of the composed Dirac
+does not reduce the Pauli count below the $\mathbb{Z}_2$-tapered
+identity, because tapering requires a Hamiltonian \emph{symmetry} and the
+gauge freedom is a basis change, not a symmetry.  The spectral action is
+the wrong functional for chemistry observables at finite cutoff.  These
+negatives are recorded so they are not re-derived.
+
+\paragraph{Positioning.}
+The natural target is variational, NISQ-era simulation---where the Pauli
+term count and the number of QWC measurement groups dominate cost---at
+fixed molecular geometry.  The sub-quadratic Pauli $1$-norm makes the
+encodings relevant to qubitization as well, but the framework is not
+positioned as a fault-tolerant-QPE or geometry-optimisation tool, and it
+is not a replacement for production quantum chemistry.  It is a
+structurally sparse, zero-parameter, ecosystem-exported library of qubit
+Hamiltonians with quantitative truncation-error bounds---a research
+instrument for the resource-estimation and algorithm-development side of
+quantum simulation.
+
+%% ========================================================================
+%% BIBLIOGRAPHY
+%% ========================================================================
+\begin{thebibliography}{99}
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The Dimensionless Vacuum:\ Recovering the Schr\"odinger Equation from Scale-Invariant Graph Topology,''
+GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper14}
+J.~Loutey,
+``Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory,''
+GeoVac Paper~14 (2026).
+
+\bibitem{loutey_paper16}
+J.~Loutey,
+``The Periodic Table Recast as $S_N$ Representation Theory on $S^{3N-1}$,''
+GeoVac Paper~16 (2026).
+
+\bibitem{loutey_paper20}
+J.~Loutey,
+``Structurally Sparse Molecular Hamiltonians for Near-Term Quantum Simulation,''
+GeoVac Paper~20 (2026).
+
+\bibitem{loutey_paper22}
+J.~Loutey,
+``Potential-Independent Angular Sparsity for Qubit Hamiltonians in Spherical Fermion Systems,''
+GeoVac Paper~22 (2026).
+
+\bibitem{loutey_paper23}
+J.~Loutey,
+``Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice,''
+GeoVac Paper~23 (2026).
+
+\bibitem{trenev2025}
+D.~Trenev, P.~J.~Ollitrault, S.~M.~Harwood, T.~P.~Gujarati,
+S.~Raman, A.~Mezzacapo, and S.~Mostame,
+``Refining resource estimation for the quantum computation of
+vibrational molecular spectra through Trotter error analysis,''
+Quantum \textbf{9}, 1630 (2025); arXiv:2311.03719.
+[Cited for the $Q^{3.9}$--$Q^{4.3}$ Gaussian-baseline scaling range and
+resource-estimation methodology; the specific LiH/H$_2$O electronic-structure
+exponents are GeoVac's own recomputation in that pipeline, per Paper~14.]
+
+\end{thebibliography}
+
+\end{document}

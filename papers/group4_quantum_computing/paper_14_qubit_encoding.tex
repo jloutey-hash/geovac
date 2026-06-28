@@ -53,9 +53,8 @@ qubit counts, not matched accuracy; the composed basis carries
 classical equilibrium-geometry errors of 5--26\% (LiH/BeH$_2$/H$_2$O;
 Sec.~\ref{sec:accuracy}), making the framework optimal for fixed-geometry
 quantum simulation rather than geometry optimisation.
-Across all 30~molecules in the
-library (He through C$_2$H$_6$, spanning $Z = 1$--36, including
-transition metal hydrides ScH and TiH), the composed
+Across the composed molecular library (35 molecules spanning
+$Z = 1$--36, including the first transition series ScH--ZnH), the composed
 Pauli count is exactly linear in the qubit count:
 $N_{\mathrm{Pauli}} = 11.10 \times Q$ (exact, non-identity terms), with d-orbital blocks
 producing a \emph{lower} coefficient (9.23) due to more restrictive
@@ -1319,10 +1318,10 @@ this:
 \end{enumerate}
 The universality of the $Q^{2.5}$ exponent across LiH, BeH$_2$, and
 H$_2$O---systems with 3, 5, and~7 orbital blocks,
-respectively---is confirmed by a 28-molecule library spanning
+respectively---is confirmed by the composed molecular library spanning
 $Z = 1$--36, including multi-center systems (LiF, CO, N$_2$, F$_2$,
-NaCl, CH$_2$O, C$_2$H$_2$, C$_2$H$_6$) with up to 8~nuclei
-(Sec.~\ref{sec:multi_center}).  Across all 28~molecules, the composed
+NaCl) with up to 4~nuclei
+(Sec.~\ref{sec:multi_center}).  Across the composed molecules, the composed
 Pauli count is exactly linear in~$Q$: $N_{\mathrm{Pauli}} \approx
 11.10 \times Q$, confirming that the scaling advantage extends
 to arbitrary polyatomic systems via the fiber bundle
@@ -1462,8 +1461,8 @@ $Q = 120$.  The Pauli count is determined entirely by the qubit
 count~$Q$, not by the number of blocks, the block structure, or the
 atomic species.
 
-Across all 30 molecules in the library---from He ($Q = 10$) through
-C$_2$H$_6$ ($Q = 160$), including transition metal hydrides
+Across the 35 composed molecules in the library---spanning
+$Z = 1$--36 and including the transition metal hydrides
 (Sec.~\ref{sec:d_orbitals})---the composed Pauli count obeys
 \begin{equation}
   N_{\mathrm{Pauli}} = 11.10 \times Q,
@@ -1480,11 +1479,12 @@ nuclei, more electron pairs) increases~$Q$ and~$N_{\mathrm{Pauli}}$
 in exact proportion, because each block contributes an independent
 set of Pauli terms with no cross-block coupling.
 
-With these eight multi-center systems, the total GeoVac molecule
-library spans 30 molecules across $Z = 1$--36, including first-row
+With these five multi-center systems, the GeoVac library spans
+37 systems (35 composed molecules plus the He and H$_2$ reference atoms)
+across $Z = 1$--36, including first-row
 (H$_2$ through CH$_4$), second-row (NaH through SiH$_4$),
-third-row (KH through HBr), multi-center (LiF through
-C$_2$H$_6$), and transition metal hydrides (ScH, TiH;
+third-row (KH through HBr), multi-center (LiF, CO, N$_2$, F$_2$, NaCl),
+and the ten transition metal hydrides (ScH--ZnH;
 Sec.~\ref{sec:d_orbitals}).  All are accessible via the
 \texttt{hamiltonian()} API with ecosystem export to Qiskit,
 OpenFermion, and PennyLane.
@@ -2259,7 +2259,7 @@ every block carries a $2p$ shell), the total qubit reduction is
   \Delta Q = 2 + n_{\rm sb}.
 \end{equation}
 
-Applied across the 37-molecule library covered by the
+Applied across the 37-system library covered by the
 \texttt{ecosystem\_export} interface, this gives $\Delta Q$ ranging
 from $-3$ (He, H$_2$; $n_{\rm sb} = 1$) to $-12$ (CO, N$_2$, F$_2$;
 $n_{\rm sb} = 10$), with total library qubit savings of $254$

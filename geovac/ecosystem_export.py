@@ -852,8 +852,10 @@ def hamiltonian(
     Build a GeoVac qubit Hamiltonian and return as a
     ``GeoVacHamiltonian`` object with ecosystem export methods.
 
-    Supports 28 molecular systems: 14 main-group hydrides (first/second/
-    third row), 10 transition metal hydrides, plus He and H2.
+    Supports 37 molecular systems (the ``_SYSTEM_REGISTRY``): 18 main-group
+    hydrides (first through fourth row), 5 multi-center molecules (LiF, CO,
+    N2, F2, NaCl), 10 transition metal hydrides (ScH-ZnH), 2 alkaline-earth
+    monohydrides (SrH, BaH), plus He and H2.
 
     Parameters
     ----------
