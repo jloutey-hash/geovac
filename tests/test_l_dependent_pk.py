@@ -191,10 +191,21 @@ class TestLiHL2Comparison:
         l-dependent should give a similar but slightly different R_eq."""
         R_cb = lih_l2_channel_blind.spectro['R_eq']
         R_ld = lih_l2_l_dependent.spectro['R_eq']
-        print(f"\n  l_max=2 channel_blind R_eq = {R_cb:.3f}")
-        print(f"  l_max=2 l_dependent  R_eq = {R_ld:.3f}")
+        R_exp = 3.015  # LiH experimental R_eq (bohr)
+        err_cb = abs(R_cb - R_exp) / R_exp * 100.0
+        err_ld = abs(R_ld - R_exp) / R_exp * 100.0
+        print(f"\n  l_max=2 channel_blind R_eq = {R_cb:.3f} ({err_cb:.1f}% err)")
+        print(f"  l_max=2 l_dependent  R_eq = {R_ld:.3f} ({err_ld:.1f}% err)")
         # Should be physically reasonable
         assert 2.0 <= R_ld <= 5.0
+        # Paper 17 HEADLINE (abstract / Sec III.D / CLAUDE.md Sec 5): l-dependent PK
+        # reduces LiH R_eq error from 6.9% (channel_blind) to 5.3% (l_dependent).
+        # Pin both the IMPROVEMENT direction and the documented ~5.3% magnitude so
+        # the headline is no longer NO-TEST (re-cert finding, 2026-06-27).
+        assert err_ld < err_cb, \
+            f"l_dependent R_eq err ({err_ld:.1f}%) should beat channel_blind ({err_cb:.1f}%)"
+        assert err_ld < 7.0, \
+            f"l_dependent R_eq error {err_ld:.1f}% exceeds the documented ~5.3% headline"
 
 
 # ======================================================================

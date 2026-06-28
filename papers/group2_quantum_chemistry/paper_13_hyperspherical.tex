@@ -39,9 +39,10 @@ The original adiabatic solver obtains $E = -2.9052$~Ha with a single
 channel---nominally 0.05\% from the exact $-2.9037$~Ha, but
 non-variational (below the exact energy due to fortuitous error
 cancellation).  A 2D variational solver treating hyperradius and
-hyperangle simultaneously (Note added v2.6.0) achieves 0.004\% with
-Schwartz cusp correction at $l_{\max} = 4$, and 0.022\% raw at
-$l_{\max} = 7$---properly variational upper bounds in all cases.
+hyperangle simultaneously (Note added v2.6.0) achieves a properly
+variational $0.022\%$ raw at $l_{\max} = 7$; a further Schwartz
+cusp \emph{extrapolation} at $l_{\max} = 4$ reaches $0.004\%$ but
+lies marginally below the exact energy (non-variational).
 A graph-native FCI using the graph Laplacian as the one-body operator
 with exact rational Slater integrals achieves 0.19\% at $n_{\max} = 7$
 with zero free parameters.  The hyperspherical lattice is structurally
@@ -1812,9 +1813,11 @@ This nominal 0.05\% result is non-variational---the energy lies below
 the exact value due to fortuitous cancellation between the adiabatic
 approximation error and the finite-difference discretization error
 (see Note added v2.6.0).  A 2D variational solver treating
-hyperradius and hyperangle simultaneously achieves properly
-variational upper bounds: 0.022\% raw at $l_{\max} = 7$, 0.004\%
-with Schwartz cusp correction at $l_{\max} = 4$.
+hyperradius and hyperangle simultaneously achieves a properly
+variational $0.022\%$ raw at $l_{\max} = 7$ (above the exact
+energy); the Schwartz cusp correction at $l_{\max} = 4$ is an
+\emph{extrapolation} that reaches $0.004\%$ but lies marginally
+below the exact energy (non-variational).
 
 The hyperspherical lattice extends the natural geometry principle to
 multi-particle systems: it is structurally the same kind of object
@@ -1841,9 +1844,12 @@ fortuitous cancellation between the adiabatic approximation error
 (which raises the energy) and the finite-difference discretization
 error (which lowers it).  A 2D variational solver treating
 $(R_e, \alpha)$ simultaneously (\texttt{level3\_variational.py})
-yields properly variational upper bounds: 0.022\% raw at
-$l_{\max} = 7$, 0.004\% with Schwartz cusp correction at
-$l_{\max} = 4$.  The adiabatic structural floor of 0.19--0.20\%
+yields a properly variational $0.022\%$ raw at $l_{\max} = 7$
+(above exact); the Schwartz cusp correction at $l_{\max} = 4$ is
+an extrapolation reaching $0.004\%$ that lies marginally below the
+exact energy (non-variational; recomputed $0.0035\%$,
+$E_{\rm corr} = -2.90383$~Ha vs exact $-2.90372$~Ha).  The
+adiabatic structural floor of 0.19--0.20\%
 (Sec.~XI) is broken at $l_{\max} \geq 2$ (0.053\% raw).  The
 convergence bottleneck is the per-channel angular basis size, not the
 partial-wave truncation.
@@ -1990,7 +1996,7 @@ M.~Abdouraman, A.~Frapiccini, B.~Hamido, F.~Mota-Furtado,
 P.~F.~O'Mahony, D.~Mitnik, G.~Gasaneo, and B.~Piraux,
 ``Sturmian bases for two-electron systems in hyperspherical
 coordinates,''
-Phys.\ Rev.\ A \textbf{94}, 023403 (2016).
+J.\ Phys.\ B: At.\ Mol.\ Opt.\ Phys.\ \textbf{49}, 235005 (2016).
 
 \bibitem{Aquilanti2001}
 V.~Aquilanti, S.~Cavalli, C.~Coletti, D.~Di~Domenico, and G.~Grossi,

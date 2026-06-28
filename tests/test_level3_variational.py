@@ -156,12 +156,28 @@ class TestCuspCorrection:
             n_basis_R=25, n_basis_alpha=40, l_max=4, alpha_R=2.0,
             n_quad_alpha=150,
         )
+        E_raw = res['energies'][0]
+        # The RAW 2D energy is a proper variational upper bound (above exact).
+        assert E_raw > E_EXACT, \
+            f"raw 2D energy {E_raw:.6f} must be above exact {E_EXACT} (variational)"
+
         dE_cusp = cusp_correction_he(Z=2.0, l_max=4)
-        E_corrected = res['energies'][0] + dE_cusp
+        E_corrected = E_raw + dE_cusp
         error_pct = abs((E_corrected - E_EXACT) / E_EXACT) * 100.0
 
         assert error_pct < 0.01, \
             f"Cusp-corrected error {error_pct:.5f}% exceeds 0.01% target"
+
+        # The Schwartz cusp correction is an EXTRAPOLATION, not a variational
+        # bound: at l_max=4 the raw energy is already close, so the correction
+        # OVER-shoots and lands marginally BELOW exact.  Paper 13 (corrected
+        # 2026-06-27 in the /qa group2 re-cert) labels the cusp-corrected 0.004%
+        # as non-variational for exactly this reason; this assertion pins it so
+        # the "properly variational in all cases" overclaim cannot return.
+        assert E_corrected < E_EXACT, \
+            (f"cusp-corrected {E_corrected:.6f} expected BELOW exact {E_EXACT} "
+             f"(non-variational extrapolation); if this now lies above exact, the "
+             f"paper's non-variational caveat must be revisited")
 
     def test_raw_lmax5_sub_005pct(self) -> None:
         """Raw 2D solver at l_max=5 with large basis should be < 0.05%."""

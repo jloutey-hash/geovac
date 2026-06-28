@@ -144,6 +144,31 @@ class TestLiHBinding:
         assert E_eq[0] < E_far[0], \
             f"No binding: E(R=3)={E_eq[0]:.4f} >= E(R=8)={E_far[0]:.4f}"
 
+    def test_lih_pes_monotone_no_interior_minimum(self):
+        """No-equilibrium guardrail: PES is monotone over R, no interior minimum.
+
+        The weak 2-point check (test_lih_pes_is_bound) is satisfied by a NORMAL
+        binder too (E(R_eq) < E(dissociation)).  This R-scan is the discriminating
+        test: a real binder has an interior minimum near R~3 (so E(2.5) > E(3.0)),
+        whereas the graph-concatenation FCI-M PES is MONOTONICALLY attractive with
+        NO interior minimum (R-independent graph-Laplacian kinetic energy) -- E
+        decreases monotonically as R decreases across the chemical range.  Pins the
+        FCI-M no-equilibrium guardrail (re-cert finding, 2026-06-27).
+        """
+        R_grid = [2.5, 3.0, 4.0, 5.0]
+        E = []
+        for R in R_grid:
+            mol = _build_lih(R=R, nmax=2)
+            e, _ = mol.compute_ground_state(n_states=1)
+            E.append(e[0])
+        # Strictly increasing in R => monotonically attractive, no interior minimum
+        # (a binder with R_eq~3 would instead give E[0] (R=2.5) > E[1] (R=3.0)).
+        for i in range(len(E) - 1):
+            assert E[i] < E[i + 1], (
+                f"PES not monotone (interior minimum present): "
+                f"E(R={R_grid[i]})={E[i]:.4f} >= E(R={R_grid[i+1]})={E[i+1]:.4f} "
+                f"-- contradicts the FCI-M no-equilibrium guardrail")
+
     def test_lih_dissociation_limit(self):
         """E(LiH, R=10) approaches E(Li) + E(H) within 20%."""
         mol_far = _build_lih(R=10.0, nmax=2)

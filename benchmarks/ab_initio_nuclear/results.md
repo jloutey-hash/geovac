@@ -6,12 +6,17 @@
 
 **Input:** Nuclear charges (Z=1) and hydrogen mass only. Zero experimental spectroscopic input.
 
-> **Note (2026-03-15):** These results use the prolate spheroidal CI PES, which
-> differs from Paper 13's Hylleraas + Neumann V_ee PES. Paper 13 reports
-> omega_e = 4435 cm-1 and nu_01 = 4157 cm-1 (within 1% of experiment) using the
-> more accurate Hylleraas basis. The prolate CI omega_e = 4918 cm-1 (+11.8%)
-> overestimates due to poor dissociation-tail energies at R > 4 bohr. See
-> Paper 13 Section IX for the authoritative spectroscopic results.
+> **Note (2026-03-15, corrected 2026-06-27):** The omega_e here (4918 cm-1,
+> +11.8%) and Paper 13 Section IX (4435 cm-1, +0.8%) use the SAME Neumann
+> V_ee PES (same D_e ~ 0.161-0.165 Ha); the difference is the Morse FIT RANGE,
+> not the basis. Fitting the wide range R in [0.8, 6.0] (this table) lets the
+> poorly-described dissociation tail (R > 4 bohr, 2x2 CI failure) distort the
+> curvature -> omega_e = 4918. Fitting the near-minimum range R in [1.0, 2.0]
+> (Paper 13 Section IX recipe) gives omega_e = 4396 cm-1 (-0.1%), nu_01 = 4123,
+> B_e = 59.3 -- reproducing the Section IX values to ~1%. The near-minimum fit
+> is the spectroscopically correct one (omega_e/B_e are curvature-at-minimum
+> quantities). Backing test: tests/test_h2_rovib_morse.py. See Paper 13
+> Section IX for the authoritative spectroscopic results.
 
 ## PES Data
 

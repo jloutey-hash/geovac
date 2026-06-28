@@ -179,6 +179,32 @@ REGISTRY = [
             "geovac/lorentzian_propinquity_compact_temporal.py",
         ],
     },
+    {
+        "id": "tc-qubit-validated-success",
+        "scope": "group2",
+        "severity": "fail",
+        "retired": "2026-06-27 (Papers 15/17; surfaced live on the group2 re-cert): the "
+                   "transcorrelated (TC) qubit pipeline 'has been validated / succeeds / "
+                   "eliminates the basis divergence (5.3->8.2 pct)' is FALSE -- the Track "
+                   "BX-3 benchmark was a qubit-(Fock)-space-diagonalization false positive "
+                   "(wrong-particle-number sectors below the variational bound). Under "
+                   "particle-number-projected FCI (Track TC-V) the standard pipeline "
+                   "converges to ~2.0 pct and TC plateaus at ~3.4 pct (WORSE). The cusp is "
+                   "an energy-evaluation, not a wavefunction, problem.",
+        "pattern": r"transcorrelated[^.\n]{0,90}(?:has\s+been\s+validated|is\s+validated|succeeds)"
+                   r"|\bTC\b[^.\n]{0,40}(?:has\s+been\s+validated|\bvalidated\b|succeeds)"
+                   r"|eliminat\w+\s+the\s+basis\s+divergence"
+                   r"|from\s+divergent[^.\n]{0,45}to\s+convergent",
+        "exempt_if_nearby": r"false\s+positive|dead\s+end|non-Hermitian|wrong-particle-number"
+                            r"|Fock\)?\s+space|not\s+pursued|worse\s+than|particle-number-projected"
+                            r"|TC-V|WITHDRAWN|retract|\bfalse\b",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_15_*.tex",
+            "papers/group2_quantum_chemistry/paper_17_*.tex",
+            "papers/group2_quantum_chemistry/paper_fci_*.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+        ],
+    },
 ]
 
 

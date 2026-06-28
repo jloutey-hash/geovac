@@ -47,10 +47,15 @@ $l_{\max}=6$ with $\sigma$ and $\pi$ channels (61~channels,
 CBS extrapolation ${\sim}97\%$),
 exceeding the 92.4\% achieved by prolate spheroidal CI with algebraic
 Neumann integrals (Paper~12).
-The framework extends naturally to heteronuclear diatomics: for
-HeH$^+$ ($Z_A=2$, $Z_B=1$), a charge-center origin shift and removal
-of the gerade constraint recover 93.1\% of the exact $D_e$ at
-$l_{\max}=4$ with $\sigma{+}\pi$ channels (57~channels).
+The framework extends to heteronuclear diatomics (HeH$^+$,
+$Z_A=2$, $Z_B=1$) via a charge-center origin shift and removal of the
+gerade constraint; the adiabatic solver recovers 93.1\% of the exact
+$D_e$ at $l_{\max}=4$ ($\sigma{+}\pi$, 57~channels), but---unlike
+H$_2$---a consistent 2D variational treatment at the same truncation
+recovers only ${\sim}5\%$, the absolute energy error ($2.4\%$) being
+comparable to the small $0.075$~Ha binding.  The He-like ($Z=2$) core
+and charge asymmetry thus converge substantially more slowly than
+H$_2$, and the adiabatic value is a non-variational over-binding.
 The solver has a double-adiabatic coupled-channel structure---nuclear
 coordinates as outer slow variable, hyperradius as inner slow variable,
 angular channels as fast variables---generalizing the single-adiabatic
@@ -991,13 +996,22 @@ consistent across channel counts and suggests that the charge
 center is the natural expansion point for asymmetric Coulomb
 problems in hyperspherical coordinates.
 
-The 93.1\% recovery for HeH$^+$ at $l_{\max} = 4$ matches the
-94.1\% achieved for H$_2$ at the same truncation, indicating
-that the partial-wave expansion converges at comparable rates
-once the origin is optimally placed.  This parity supports the
-interpretation that the remaining ${\sim}6\%$ gap is dominated
-by higher partial waves rather than by the heteronuclear
-asymmetry itself.
+The 93.1\% recovery quoted above is an \emph{adiabatic} value
+(Table~\ref{tab:heh_convergence}).  A consistent 2D variational
+treatment---the same solver that yields H$_2$'s 94.1\% at this
+truncation---instead gives $E_{\rm total} = -2.9077$~Ha for HeH$^+$
+at $l_{\max}=4$, i.e.\ only ${\sim}5\%$ of $D_e$: the variational
+energy lies $2.4\%$ ($0.071$~Ha) above exact, an error comparable to
+the entire $0.075$~Ha binding.  The adiabatic solver's apparent
+$93.1\%$ is therefore a non-variational over-binding coincidence
+(the same mechanism that produces the spurious He adiabatic
+``$0.05\%$'' of Paper~13), not a genuine partial-wave convergence.
+Contrary to a naive H$_2$ parity, the heteronuclear $Z=2$ system
+converges \emph{substantially more slowly} than H$_2$: the charge
+asymmetry spreads angular weight across many channels (only $26\%$
+in $(0,0)$ for a $6{:}1$ ratio) and the He-like core demands both
+higher $l_{\max}$ and a finer hyperradial grid than the
+H$_2$-matched parameters used here.
 
 \paragraph{Heteronuclear convergence and the composed-geometry
 boundary.}
@@ -1190,23 +1204,27 @@ At $l_{\max} = 4$, the correction differential (between $R_{\rm eq}$ and
 dissociation) is 0.39~mHa.  The cusp correction is a property of the
 partial-wave basis truncation, not of the hyperradial solution method.
 
-\paragraph{Transcorrelated alternative (v2.0.35).}
-A complementary approach removes the cusp algebraically rather than
+\paragraph{Transcorrelated alternative (explored; dead end).}
+A complementary approach attempts to remove the cusp algebraically rather than
 correcting it post hoc.  The transcorrelated (TC) transformation
 $H_{\mathrm{TC}} = e^{-J} H\, e^{J}$ with Jastrow factor
 $J = \tfrac{1}{2} r_{12}$ replaces $1/r_{12}$ with a smooth
-gradient operator, converting the algebraic partial-wave convergence
-to exponential.  This transformation is incompatible with the
+gradient operator.  This transformation is incompatible with the
 adiabatic solver (the gradient operator is $O(1)$ while $V_{ee}$ is
-$O(R)$ in the angular eigenvalue problem; Track~BX-2), but succeeds
-in the second-quantized qubit pipeline (Track~BX-3), where integrals
-are computed directly without adiabatic separation.  For He, the TC
-qubit Hamiltonian converges to 3.3--3.6\% error across
-$n_{\max} = 1$--$3$, eliminating the basis divergence seen in the
-standard encoding (5.3\%$\to$8.2\%).  The Gaunt angular selection
-rules are preserved (the Jastrow is rotationally invariant), with
-a constant $1.68\times$ Pauli term overhead from non-Hermiticity.
-See Paper~14, Sec.~IV for composed-molecule TC benchmarks.
+$O(R)$ in the angular eigenvalue problem; Track~BX-2).  An initial
+second-quantized benchmark (Track~BX-3) appeared to show the TC qubit
+Hamiltonian converging to 3.3--3.6\% error for He while the standard
+encoding diverged ($5.3\%\to8.2\%$), but this was a \emph{false
+positive}: the benchmark diagonalized the full qubit (Fock) space,
+including wrong-particle-number sectors, which for a non-Hermitian TC
+Hamiltonian admits artifactually low eigenvalues below the variational
+bound.  Under correct particle-number-projected full CI (Track~TC-V),
+the standard encoding does \emph{not} diverge---it converges to
+${\sim}2.0\%$---while TC plateaus at ${\sim}3.4\%$, i.e.\ \emph{worse}
+than the untransformed pipeline.  The cusp is therefore an
+energy-evaluation problem, not a wavefunction problem, and TC is not
+pursued further; the Schwartz post-hoc correction above remains the
+operative method.
 
 \paragraph{Irreducibility of the per-$\rho$ diagonalization.}
 The angular eigenvalues $\mu(\rho)$ are computed by pointwise

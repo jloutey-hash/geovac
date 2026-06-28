@@ -35,10 +35,13 @@ following from $SO(4)$ representation theory.
 The $D$-matrix enforces selection rules for $\sigma$-bonds:
 $D^2_{10,10}(\gamma) = 1$ and $D^2_{00,10}(\gamma) = 0$ for all $\gamma$.
 \emph{Negative theorem:}
-In the molecular Sturmian basis with shared momentum scale $p_0$,
-$H_{ij} \propto S_{ij}$; eigenvalues are independent of $R$.
-Binding requires the $R$-dependent prolate spheroidal spectrum $\beta_k(R)$,
-reintroducing continuous geometry.
+In the molecular Sturmian basis with shared momentum scale $p_0$, the
+one-electron Hamiltonian and overlap obey the two-term identity
+$H_{ij} = -\tfrac{1}{2}p_0^2 S_{ij} + (1-\beta_j)V_{ij}$, and their entire
+$R$-dependence is a single orthogonal $SO(4)$ congruence $D^{(n)}(\gamma(R))$
+that cancels in the generalized eigenvalue problem: the eigenvalues are
+independent of $R$.  Binding then requires the $R$-dependent prolate
+spheroidal spectrum $\beta_k(R)$, reintroducing continuous geometry.
 The resolution---discretizing the Laplace--Beltrami operator in prolate
 spheroidal coordinates---is developed in the companion
 Paper~11~\cite{loutey_paper11}.
@@ -92,10 +95,11 @@ the Fiedler vector zero-crossing.  Section~\ref{sec:sturmian} introduces
 the Sturmian basis.  Section~\ref{sec:beta} develops the $\beta_k$
 eigenvalue problem via prolate spheroidal separation.
 Section~\ref{sec:failure} proves why atom-centered approximations fail.
-Section~\ref{sec:uniform} states the uniform diagonal theorem.
+Section~\ref{sec:uniform} states the Sturmian diagonal theorem.
 Section~\ref{sec:structural_theorem} proves the Sturmian structural
-theorem: the Hamiltonian is proportional to the overlap matrix, making
-eigenvalues geometry-independent.
+theorem: the whole $R$-dependence of $(H,S)$ is a single $SO(4)$ congruence
+that cancels in the generalized eigenvalue problem, making the eigenvalues
+geometry-independent.
 Section~\ref{sec:multi_electron} extends the structural theorem to
 multi-electron systems via Coulomb and generalized Sturmian CI.
 Section~\ref{sec:selection_rules} derives the $SO(4)$ selection rules
@@ -177,15 +181,18 @@ is only consistent when all basis functions share one $p_0$.
 heteronuclear molecules} (Sec.~\ref{sec:failure}), with the precise
 threshold $\beta > p_0/(2Z_B)$ for binding.
 
-\item \textbf{Uniform diagonal theorem}
-(Sec.~\ref{sec:uniform}).  In the molecular Sturmian basis,
-$\varepsilon_k = -p_0^2/2$ for every orbital.
+\item \textbf{Sturmian diagonal theorem}
+(Sec.~\ref{sec:uniform}).  In the molecular Sturmian basis, the diagonal
+$\varepsilon_k = \tfrac{1}{2}p_0^2 - p_0^2/\beta_k$ is fixed by the Sturmian
+eigenvalue $\beta_k$ alone, independent of $(l,m)$ and $\gamma$.
 
 \item \textbf{Sturmian structural theorem}
 (Sec.~\ref{sec:structural_theorem}).  In the molecular Sturmian basis
-with shared $p_0$, the Hamiltonian is proportional to the overlap
-matrix; eigenvalues are independent of the bond angle $\gamma$ and
-hence of $R$.  Binding requires $\beta_k(R)$ from the full PDE.
+with shared $p_0$, the one-electron $(H,S)$ obey the two-term identity
+$H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and share a single
+$SO(4)$ congruence $D^{(n)}(\gamma(R))$, so the eigenvalues are independent
+of the bond angle $\gamma$ and hence of $R$.  Binding requires $\beta_k(R)$
+from the full PDE.
 
 \item \textbf{$SO(4)$ selection rules for $\sigma$-bonds}
 (Sec.~\ref{sec:selection_rules}).
@@ -805,59 +812,76 @@ mechanism described above.
 
 
 %% ========================================================================
-\section{The Uniform Diagonal Theorem}
+\section{The Sturmian Diagonal Theorem}
 \label{sec:uniform}
 %% ========================================================================
 
-\begin{theorem}[Uniform diagonal]
+\begin{theorem}[Sturmian diagonal]
 \label{thm:uniform}
 In the molecular Sturmian basis with shared $p_0$, the diagonal of the
-one-electron Hamiltonian is
+one-electron Hamiltonian is fixed by the Sturmian eigenvalue $\beta_k$
+alone:
 \begin{equation}
 \varepsilon_k = -\frac{p_0^2}{2}
++ (1-\beta_k)\,\langle S_k | V_{\mathrm{mol}} | S_k \rangle
+= \frac{p_0^2}{2} - \frac{p_0^2}{\beta_k},
 \label{eq:uniform_diag}
 \end{equation}
-for every orbital $k$, regardless of quantum numbers.
+independent of the angular quantum numbers $(l,m)$ and of the bond geometry
+$\gamma$.  For atomic Coulomb Sturmians, where $\beta$ depends only on the
+shell ($\beta_n = p_0 n/Z$), $\varepsilon_k$ is uniform within each
+$n$-shell.  (It equals $-p_0^2/2$ only in the degenerate case $\beta_k=1$,
+where the Sturmian coincides with a physical eigenstate.)
 \end{theorem}
 
 \begin{proof}
-Each molecular Sturmian $S_k$ satisfies
-$(-\frac{1}{2}\nabla^2 - \beta_k V_{\text{mol}}) S_k = E_0 S_k$
-with $E_0 = -p_0^2/2$.  The diagonal matrix element of the full
-one-electron Hamiltonian $\hat{h}_1 = -\frac{1}{2}\nabla^2 + V_{\text{mol}}$
-is
+The molecular Sturmian $S_k$ satisfies
+$(-\frac{1}{2}\nabla^2 + \beta_k V_{\mathrm{mol}}) S_k = E_0 S_k$
+with $E_0 = -p_0^2/2$.  Writing the full one-electron Hamiltonian as
+$\hat{h}_1 = (-\frac{1}{2}\nabla^2 + \beta_k V_{\mathrm{mol}})
++ (1-\beta_k)V_{\mathrm{mol}}$ and taking the (normalized) diagonal
+expectation value gives the first equality,
 \begin{equation}
-\langle S_k | \hat{h}_1 | S_k \rangle
-= E_0 + (1 - \beta_k^{-1})\,
-\langle S_k | V_{\text{mol}} | S_k \rangle.
+\varepsilon_k = E_0 + (1 - \beta_k)\,
+\langle S_k | V_{\mathrm{mol}} | S_k \rangle.
 \end{equation}
-In the exact molecular Sturmian basis with proper normalization, the
-$V_{\text{mol}}$ expectation value is $-p_0^2/\beta_k$, giving
+The virial theorem for the homogeneous Coulomb potential
+$\beta_k V_{\mathrm{mol}} \propto 1/r$ gives
+$2\langle T\rangle = -\beta_k\langle V_{\mathrm{mol}}\rangle$; combined with
+$\langle T\rangle + \beta_k\langle V_{\mathrm{mol}}\rangle = E_0 = -p_0^2/2$
+this fixes
+$\langle S_k | V_{\mathrm{mol}} | S_k \rangle = -p_0^2/\beta_k$, giving the
+second equality
 \begin{equation}
-\varepsilon_k = -\frac{p_0^2}{2} - \frac{p_0^2}{\beta_k}
-+ \frac{p_0^2}{\beta_k} = -\frac{p_0^2}{2}.
+\varepsilon_k = -\frac{p_0^2}{2} + (1-\beta_k)\!\left(-\frac{p_0^2}{\beta_k}\right)
+= \frac{p_0^2}{2} - \frac{p_0^2}{\beta_k}.
 \end{equation}
 \end{proof}
 
 \paragraph{Physical interpretation.}
-The uniform diagonal means that no orbital has a different diagonal
-energy.  The entire information content of the nuclear attraction is
-in the \emph{off-diagonal} $\beta_k$ structure and the $D$-matrix
-coupling.  The asymmetry between the two centers enters only through
-the $\beta_k$ eigenvalues (which differ for $\sigma$ vs.\ $\pi$ MOs
+The diagonal energy is fixed entirely by the Sturmian eigenvalue
+$\beta_k$; it is blind to the angular quantum numbers $(l,m)$ and to the
+bond angle $\gamma$.  All geometric and angular differentiation between
+orbitals is therefore carried by the \emph{off-diagonal} structure---the
+$D$-matrix coupling weighted by $\beta_k$-dependent factors---rather than
+by the orbital energies.  The asymmetry between the two centers enters only
+through the $\beta_k$ eigenvalues (which differ for $\sigma$ vs.\ $\pi$ MOs
 and depend on $Z_A, Z_B, R$) and through the $D$-matrix rotation
 angle $\gamma$.
 
 \paragraph{Consistency with the $\beta_k$ discussion.}
 The $\beta_k$ eigenvalues (Sec.~\ref{sec:beta}) parametrize the
 nuclear attraction: orbital $k$ has effective charge $\beta_k Z$
-in the Sturmian equation.  This information enters the FCI Hamiltonian
-through the off-diagonal matrix elements (the $D$-matrix coupling
-weighted by $\beta_k$-dependent factors), not through the diagonal.
-The diagonal is uniformly $-p_0^2/2$, and all orbital differentiation
-is off-diagonal.  This is the correct architecture for a bond sphere
-FCI: the basis is adapted to the molecular potential, and the nuclear
-charges appear in the coupling structure, not in the orbital energies.
+in the Sturmian equation.  They set the diagonal energies through
+$\varepsilon_k = \tfrac{p_0^2}{2} - p_0^2/\beta_k$
+(Eq.~\eqref{eq:uniform_diag}) and weight the off-diagonal $D$-matrix
+coupling.  What is \emph{absent} from the diagonal is the angular and
+geometric content: $\varepsilon_k$ records only the radial Sturmian scale
+$\beta_k$ and is independent of $(l,m)$ and of $\gamma(R)$, so all
+bond-geometry dependence lives off-diagonal.  This is the correct
+architecture for a bond sphere FCI: the basis is adapted to the molecular
+potential, the diagonal records only the radial Sturmian scale, and the
+bond geometry appears in the coupling structure.
 
 
 %% ========================================================================
@@ -875,16 +899,28 @@ continuous PDE at every~$R$.
 \begin{theorem}[Sturmian structural theorem]
 \label{thm:structural}
 In the molecular Sturmian basis with shared momentum scale $p_0$,
-the one-electron Hamiltonian matrix satisfies
+the one-electron Hamiltonian and overlap matrices obey the two-term
+Sturmian identity
 \begin{equation}
-H_{ij} = \frac{p_0^2}{2}\!\left(\frac{1}{\beta_j} - 1\right) S_{ij},
+H_{ij} = -\frac{p_0^2}{2}\,S_{ij} + (1-\beta_j)\,V_{ij},
 \label{eq:H_prop_S}
 \end{equation}
-where $S_{ij}$ is the overlap matrix and $\beta_j$ is the Sturmian
-eigenvalue of orbital~$j$.  The Hamiltonian is proportional to the overlap
-matrix.  Consequently, the generalized eigenvalues
+where $S_{ij}=\langle S_i|S_j\rangle$ is the overlap matrix,
+$V_{ij}=\langle S_i|V_{\mathrm{mol}}|S_j\rangle$ is the nuclear-attraction
+matrix, and $\beta_j$ is the Sturmian eigenvalue (effective-charge
+multiplier, $\beta_n = p_0 n/Z$) of orbital~$j$.  The Hamiltonian is
+\emph{not} a scalar multiple of $S$; rather, in the bond-sphere
+construction both $S$ and $V$ (hence $H$) carry their \emph{entire}
+$R$-dependence through the same $SO(4)$ Wigner $D$-matrix
+$D^{(n)}(\gamma(R))$: within-center blocks are $R$-independent
+(orthonormal Sturmians, $S=\mathbb{1}$; uniform self-attraction,
+$V=-\tfrac{p_0^2}{\beta}\mathbb{1}$, Theorem~\ref{thm:uniform}), while
+cross-center blocks are proportional to $D^{(n)}(\gamma)$.  Consequently
+$(H,S)$ at any two distances are related by the orthogonal congruence
+$U(\gamma)=\mathrm{blockdiag}(\mathbb{1},D^{(n)}(\gamma))$, under which both
+matrices pull back to $R$-independent forms, so the generalized eigenvalues
 \begin{equation}
-E_k = \frac{p_0^2}{2}\!\left(\frac{1}{\beta_k} - 1\right)
+H\,\mathbf{c}_k = E_k\, S\,\mathbf{c}_k
 \label{eq:E_geom_indep}
 \end{equation}
 are independent of the bond angle $\gamma$ and hence independent of the
@@ -893,28 +929,36 @@ internuclear distance~$R$.
 
 \begin{proof}
 Each Sturmian function $S_j$ satisfies
-$(-\tfrac{1}{2}\nabla^2 - \beta_j V_{\text{mol}}) S_j = E_0 S_j$
-with $E_0 = -p_0^2/2$.  The matrix element of the physical Hamiltonian
-$\hat{h}_1 = -\tfrac{1}{2}\nabla^2 + V_{\text{mol}}$ between Sturmians
-$S_i$ and $S_j$ is
-\begin{align}
-H_{ij} &= \langle S_i | \hat{h}_1 | S_j \rangle \notag \\
-       &= E_0\, S_{ij} + (1 - \beta_j^{-1})
-          \langle S_i | V_{\text{mol}} | S_j \rangle.
-\end{align}
-But $\langle S_i | V_{\text{mol}} | S_j \rangle
-= -\beta_j^{-1}\langle S_i | (\hat{h}_1 - E_0) | S_j \rangle
-= -\beta_j^{-1}(H_{ij} - E_0 S_{ij})$, which gives the recursion.
-When $\beta_j$ is treated as a fixed parameter (independent of $R$),
-the overlap matrix $S_{ij}$ depends on $\gamma(R)$ through the
-$D$-matrix coupling, but $H_{ij}/S_{ij}$ does not.  The generalized
-eigenvalue problem $H\mathbf{c} = E\, S\mathbf{c}$ then yields
-eigenvalues $E_k$ that depend only on $\{p_0, \beta_k\}$, not on
-$\gamma$.  The nuclear repulsion $V_{NN} = Z_A Z_B / R$ adds a purely
-$1/R$ potential, producing a monotonically repulsive total energy with
-no minimum.  This was confirmed numerically in v0.9.34 diagnostic
-(bond sphere Hamiltonian analysis): $E_{\text{total}}(R)$ is a
-pure~$1/R$ curve with no bound state.
+$(-\tfrac{1}{2}\nabla^2 + \beta_j V_{\mathrm{mol}}) S_j = E_0 S_j$
+with $E_0 = -p_0^2/2$ and $V_{\mathrm{mol}} = -Z_A/r_A - Z_B/r_B$.
+Writing the physical one-electron Hamiltonian as
+$\hat{h}_1 = -\tfrac{1}{2}\nabla^2 + V_{\mathrm{mol}}
+= (-\tfrac{1}{2}\nabla^2 + \beta_j V_{\mathrm{mol}})
++ (1-\beta_j)V_{\mathrm{mol}}$ and acting on $S_j$ gives
+$\hat{h}_1 S_j = E_0 S_j + (1-\beta_j)V_{\mathrm{mol}} S_j$; projecting on
+$\langle S_i|$ yields Eq.~\eqref{eq:H_prop_S}.  (The physical matrix
+$H_{ij}=\langle S_i|\hat h_1|S_j\rangle$ is Hermitian by self-adjointness of
+$\hat h_1$; for orbitals on the same center, or for a homonuclear shell with a
+single $\beta$, the column factor $(1-\beta_j)$ and the row factor
+$(1-\beta_i)$ already agree, and the production assembly symmetrizes the
+per-column form in the general heteronuclear case.)
+
+Because $D^{(n)}(\gamma)$ is orthogonal,
+$D^{(n)}(\gamma)^{\!\top} D^{(n)}(\gamma)=\mathbb{1}$, the congruence
+$U(\gamma)=\mathrm{blockdiag}(\mathbb{1},D^{(n)}(\gamma))$ satisfies
+$U^{\!\top} S(\gamma)\,U = S_0$ and $U^{\!\top} H(\gamma)\,U = H_0$ with
+$S_0,H_0$ independent of $\gamma$.  Since
+$\det(H-E S) = \det(U)^2\,\det(H_0 - E S_0)$, the generalized eigenvalues
+of $(H,S)$ equal those of the $R$-independent pair $(H_0,S_0)$ and are thus
+independent of $\gamma$, hence of $R$.  The nuclear repulsion
+$V_{NN} = Z_A Z_B / R$ then adds a purely $1/R$ term, producing a
+monotonically repulsive total energy with no minimum.  This is verified to
+machine precision by the bond-sphere backing test
+\texttt{tests/test\_paper8\_sturmian\_structural.py}: across
+$R\in\{1.5,3,5,8\}$~bohr the $D^{(n)}(\gamma(R))$ blocks vary strongly
+(spread~$>0.3$) yet the generalized eigenvalues of $(H,S)$ are
+bit-exactly $R$-independent, and $E_{\mathrm{total}}(R)$ is a strictly
+decreasing pure-$1/R$ curve with no interior minimum (no bound state).
 \end{proof}
 
 \begin{corollary}[Binding requires $\beta_k(R)$]
@@ -961,9 +1005,10 @@ incompatibility.  The heteronuclear problem thus remains open.
 \label{sec:multi_electron}
 %% ========================================================================
 
-The structural theorem (Theorem~\ref{thm:structural}) proves
-$H \propto S$ for one-electron molecular Sturmians with shared
-momentum scale~$p_0$.  The natural question is whether multi-electron
+The structural theorem (Theorem~\ref{thm:structural}) proves that the
+one-electron $(H,S)$ share a single $SO(4)$ congruence---so the
+generalized eigenvalues are $R$-independent---for molecular Sturmians with
+shared momentum scale~$p_0$.  The natural question is whether multi-electron
 Sturmians---where the electron--electron repulsion $V_{ee}$ introduces
 coupling beyond one-body structure---can circumvent this limitation and
 produce basis sets that outperform standard hydrogenic FCI for atoms
@@ -1057,9 +1102,9 @@ of within-configuration orbital flexibility outweighs this gain.
 The generalized Sturmian's isoenergetic constraint removes
 $n$-dependent radial differentiation---a multi-electron analog of the
 single-electron structural theorem
-(Theorem~\ref{thm:structural}).  In the one-electron case,
-$H \propto S$ makes eigenvalues geometry-independent.  In the
-multi-electron case, the constraint
+(Theorem~\ref{thm:structural}).  In the one-electron case, the shared
+$SO(4)$ congruence of $(H,S)$ makes the eigenvalues geometry-independent.
+In the multi-electron case, the constraint
 $Z_{\mathrm{eff}} = \beta_\nu Z$ (uniform within each
 configuration) limits the radial flexibility that $V_{ee}$ can
 exploit, and no variant tested overcomes the fundamental tradeoff
@@ -1208,9 +1253,11 @@ proofs and the kinetic scale factor $-1/16$ are unchanged.
 
 \paragraph{Negative theorem: Sturmian basis limits.}
 The Sturmian structural theorem (Theorem~\ref{thm:structural}) proves
-that in the shared-$p_0$ Sturmian basis, the one-electron Hamiltonian is
-proportional to the overlap matrix, making eigenvalues independent of the
-bond angle $\gamma$ and hence of~$R$.  Binding requires the full
+that in the shared-$p_0$ Sturmian basis, the one-electron $(H,S)$ obey the
+two-term identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and
+carry their entire $R$-dependence in a single orthogonal $SO(4)$ congruence,
+making the generalized eigenvalues independent of the bond angle $\gamma$
+and hence of~$R$.  Binding requires the full
 $R$-dependent prolate spheroidal eigenvalue spectrum $\beta_k(R)$, which
 reintroduces continuous spatial geometry (Corollary~\ref{cor:binding}).
 For heteronuclear diatomics, no shared $p_0$ simultaneously represents
@@ -1225,7 +1272,8 @@ implementation requires either the full LCAO architecture---which
 preserves atom-specific length scales and produces $D_e^{\text{CP}}
 = 0.093$~Ha at nmax$= 3$ (1.0\% error vs.\ experiment, documented in
 the companion paper~\cite{loutey_fci})---or a non-Sturmian basis that
-avoids the proportionality constraint of Theorem~\ref{thm:structural}.
+avoids the $SO(4)$-congruence (geometry-blind) constraint of
+Theorem~\ref{thm:structural}.
 The LCAO path is validated; the bond sphere geometry provides the
 theoretical framework within which the LCAO results are understood.
 

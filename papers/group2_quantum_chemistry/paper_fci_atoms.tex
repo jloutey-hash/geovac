@@ -472,10 +472,15 @@ Table~\ref{tab:lih} summarizes the LiH potential energy surface.
 The CP-corrected binding energy at the experimental geometry
 ($R = 3.015$~bohr) is $D_e^{\text{CP}} = 0.110$~Ha, overestimating
 the experimental value $D_e = 0.0924$~Ha~\cite{Huber1979} by 19\%.
-The CP-corrected surface has a minimum near $R = 2.5$~bohr
-($D_e^{\text{CP}} = 0.171$~Ha), contracted by approximately 17\%
-relative to experiment. Both discrepancies trace to basis incompleteness at $n_{\max}=3$
-(Sec.~\ref{sec:limitations}).
+The CP-corrected binding energy increases monotonically as $R$
+decreases over the sampled range (the deepest computed point is
+$D_e^{\text{CP}} = 0.171$~Ha at $R = 2.5$~bohr, the smallest $R$
+sampled---not an interior minimum).  Consistent with the
+graph-concatenation analysis of the companion molecular paper, the
+balanced Hamiltonian produces a \emph{monotonically attractive}
+surface with no equilibrium geometry: the $R$-independent
+graph-Laplacian kinetic energy, not basis incompleteness, is the
+structural cause (Sec.~\ref{sec:limitations}).
 
 \paragraph{Error budget.}
 A systematic diagnostic decomposition---zeroing cross-nuclear attraction,
@@ -950,9 +955,10 @@ replaced by exact rational values from the $S^3$ density overlap
 formula (Paper~7, Sec.~V).  Combined with the graph Laplacian as the
 one-body operator, this yields a ``graph-native'' FCI where the
 entire Hamiltonian matrix is rational.  For He at $n_{\max} = 5$:
-graph-native achieves 0.22\% error vs.\ the 0.35\% reported in
+graph-native achieves 0.25\% error vs.\ the 0.35\% reported in
 the original paper, confirming that the analytical integrals are more
-accurate than the grid-based numerics.  At $n_{\max} = 7$: 0.19\%
+accurate than the grid-based numerics (the error decreases to
+0.23\% at $n_{\max} = 6$).  At $n_{\max} = 7$: 0.19\%
 with 1,218 configurations.
 
 A variant using exact hydrogenic one-body matrix elements (diagonal,

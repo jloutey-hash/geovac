@@ -1416,18 +1416,21 @@ the kinetic correction is uniform and SCF is unlikely to provide
 differential $R$-dependence.
 
 A fourth direction---transcorrelated (TC) integrals in the qubit
-pipeline---has been validated (Track~BX-3, v2.0.35).  The TC
-transformation $H_{\mathrm{TC}} = e^{-J} H\, e^{J}$ with
-$J = \tfrac{1}{2}r_{12}$ replaces the Coulomb ERI with a smooth
-gradient operator within each composed block, eliminating the
-$1/r_{12}$ cusp that drives the $1/(l+\tfrac{1}{2})^4$ partial-wave
-convergence floor.  For He, this changes the basis convergence from
-divergent (5.3\%$\to$8.2\% with $n_{\max}$) to convergent
-(3.3--3.6\% plateau).  The composed Pauli count increases by a
-constant factor of $1.68\times$ (from non-Hermiticity of the gradient
-operator), preserving the $O(Q^{2.5})$ scaling.  Electronic-only
-1-norm overhead is 9--16\%.  Cross-block perturbative MP2 corrections
-were also investigated but found negligible ($< 0.5$~mHa for LiH).
+pipeline---was explored (Tracks~BX-3/TC-V, v2.0.35) but found to be a
+dead end.  The TC transformation $H_{\mathrm{TC}} = e^{-J} H\, e^{J}$
+with $J = \tfrac{1}{2}r_{12}$ replaces the Coulomb ERI with a smooth
+gradient operator within each composed block, formally removing the
+$1/r_{12}$ cusp.  An initial benchmark appeared to show TC converging
+to a 3.3--3.6\% plateau for He where the standard encoding diverged
+($5.3\%\to8.2\%$), but that divergence was an artifact of diagonalizing
+the full qubit (Fock) space including wrong-particle-number sectors;
+under correct particle-number-projected full CI the standard pipeline
+converges to ${\sim}2.0\%$ and does not diverge, so TC's ${\sim}3.4\%$
+plateau is in fact \emph{worse} than the untransformed result.  The
+cusp is an energy-evaluation problem, not a wavefunction problem
+(cf.\ Paper~13), and TC is not pursued further.  Cross-block
+perturbative MP2 corrections were also investigated but found
+negligible ($< 0.5$~mHa for LiH).
 
 \paragraph{H$_2$O: first triatomic PES.}
 The composed geometry extends to H$_2$O as a five-block decomposition:
@@ -1500,9 +1503,12 @@ single high-dimensional coordinate system.  The key results:
   fitted model (12\%) with zero free parameters.
 
 \item All four solver $\times$ PK combinations have been exhausted
-  (Table~\ref{tab:solver_pk}).  The 2D variational solver reduces
-  drift by $4\times$; $l$-dependent PK has zero additional effect on
-  the 2D solver.  A residual $+0.15$~bohr/$l_{\max}$ drift is
+  (Table~\ref{tab:solver_pk}).  The 2D variational solver does
+  \emph{not} substantially reduce the drift (the earlier
+  ``$4\times$'' reduction was a coarse-grid artifact, retracted in
+  v2.0.32; the fine-grid 2D drift is comparable to the adiabatic
+  drift); $l$-dependent PK has zero additional effect on the 2D
+  solver.  A residual $+0.15$--$0.30$~bohr/$l_{\max}$ drift is
   intrinsic to the composed-geometry approximation.  Without PK,
   no equilibrium exists in the classical composed solver.
   (Paper~19~\cite{loutey_paper19} shows that the balanced coupled
