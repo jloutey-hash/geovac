@@ -573,11 +573,19 @@ def compute_eri_tensor(
 
 def angular_zero_count(n_max: int, l_max: int) -> Tuple[int, int]:
     """
-    Count angular zeros purely from Gaunt selection rules.
+    Count angular zeros under the PAIR-DIAGONAL angular selection rule (rule A).
 
     Enumerates all (n_r, l, m) states with n_r = 0..n_max, l = 0..l_max,
-    m = -l..+l and counts how many ERI elements are zero by angular selection
-    rules alone (triangle, parity, m-conservation).
+    m = -l..+l and counts how many ERI elements vanish by angular selection
+    (triangle, parity, and the m rule).  NOTE (CF-1 / criteria.md "Dual-rule ERI
+    framing"): this realizes the PAIR-DIAGONAL approximation -- ``ck_coefficient``
+    has q = mc - ma, so it is nonzero only when m_a = m_c (and m_b = m_d), which
+    is the sparsity/QC-product rule A, NOT the exact global-M_L Coulomb rule B
+    (m_a + m_b = m_c + m_d).  It therefore returns the realized density D_pd
+    (e.g. 1.44% at l_max=3), not the universal selection-rule density D (6.06%).
+    The ``m_a + m_b == m_c + m_d`` guard below is redundant given the
+    pair-diagonal ``ck_coefficient``.  Pinned by
+    tests/test_paper22_density.py + tests/test_paper14_eri_rule.py.
 
     Returns (angular_zeros, total_elements).
     """

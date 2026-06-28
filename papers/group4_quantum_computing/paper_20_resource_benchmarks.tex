@@ -541,7 +541,7 @@ point infeasible.
 \label{subsec:paper20_tier2}
 
 Table~\ref{tab:paper20_tier2} reports resource metrics for the
-spin-ful composed encoding of Paper~14~\S\ref{sec:spinor_composed}
+spin-ful composed encoding of Paper~14
 (Dirac-on-$S^3$ Tier 2 construction). Three single-bond hydrides
 spanning $Z \in \{3, 4, 20\}$, at $n_{\max} = 2$ and $n_{\max} = 3$.
 Every metric is computed from the algebraic-first pipeline described
@@ -588,7 +588,7 @@ Reading Table~\ref{tab:paper20_tier2}:
   \item At $n_{\max}=2$, all GeoVac molecules sit at
     $0.02$--$0.03\times$ the Sunaga RaH-18q Pauli count at native
     $Q \in \{20, 30\}$. Projected to matched $Q = 18$ via the
-    O($Q^{2.5}$) scaling law of Paper~14~\S\ref{sec:composed} and the
+    O($Q^{2.5}$) scaling law of Paper~14 and the
     Tier 2 $\sim 4.2\times$ rel/scalar multiplier (post-TR), the advantage is
     $80\times$--$120\times$.
   \item At $n_{\max}=3$, the absolute GeoVac Pauli count overtakes
@@ -616,7 +616,7 @@ in Sunaga et al.~\cite{Sunaga2025} Supplemental Material Tables
 S1--S3. These were not extracted in the Tier 2 sprint timeframe. The
 footnote row in Table~\ref{tab:paper20_tier2} marks this as deferred;
 sharpening the head-to-head at matched $Q = 18$ per-molecule is
-future work, noted in Paper~14~\S\ref{subsec:spinor_scope}.
+future work, noted in Paper~14.
 
 \textbf{Matched-$Q$ feasibility (Sprint 3).} GeoVac's native-$Q$ ladder
 for the composed architecture is discrete and determined by natural
@@ -640,7 +640,7 @@ correction.
 \textbf{Accuracy caveats.} The Tier 2 spin-ful encoding inherits the
 composed architecture's $5$--$26\,\%$ $R_{\mathrm{eq}}$ error from
 Paper~17 and the Breit--Pauli leading-order $Z\alpha^2$ approximation
-from Paper~14~\S\ref{sec:spinor_composed}. Sunaga's DC-UCCSD is
+from Paper~14. Sunaga's DC-UCCSD is
 accuracy-targeted ($0.47\%$ vs CASCI for CaH). Table~\ref{tab:paper20_tier2}
 is a \emph{resource estimation} table at fixed single-point
 geometries, not a spectroscopic accuracy benchmark.
@@ -734,8 +734,11 @@ NaCl     & Ne+Ne & 8 & 4 &  50 &    556 & 21 \\
   (bond) / $n_{\max}=3$ (d-block).
   All use [Ar] frozen cores (18 electrons) with $d$-orbital valence
   blocks ($l_{\min} = 2$).  The Pauli/$Q$ ratio of~9.23
-  falls below the main-group coefficient of~11.10, reflecting
-  sparser $d$-orbital ERIs (4.0\% density vs.\ 8.9\% for $s$+$p$).
+  falls below the main-group coefficient of~11.10 \emph{under the
+  pair-diagonal ERI approximation} (Sec.~\ref{sec:eri_rule}); this is an
+  artifact of dropping more $m$-swap integrals at higher angular momentum,
+  not a sparser exact selection rule---under the exact global-$M_L$ rule the
+  $d$-block ratio is \emph{higher} (30.0 vs.\ 27.9).
   Isostructural invariance holds: all ten hydrides share the same
   block topology and produce identical Pauli counts.
   Cr and Cu have anomalous configurations ($3d^5 4s^1$ and $3d^{10} 4s^1$).}
@@ -779,6 +782,28 @@ This linear nuclear scaling is a stronger result than the
 $O(Q^{2.5})$ within-molecule basis scaling (Table~\ref{tab:scaling}),
 which describes how cost grows when expanding the angular basis on a
 \emph{fixed} molecule.
+
+\subsection{The pair-diagonal ERI approximation: sparsity vs.\ accuracy}
+\label{sec:eri_rule}
+
+The absolute Pauli counts and multipliers in this library are realized under a
+\emph{pair-diagonal} angular selection rule ($m_a = m_c$, $m_b = m_d$), a
+deliberate sparsifying approximation:\ the production builders drop the
+genuinely-nonzero \emph{$m$-swap} two-electron integrals that the exact
+global-$M_L$ Coulomb rule ($m_a + m_b = m_c + m_d$) keeps.  Its energy effect is
+sub-chemical ($\sim$\,mHa), and it is the right choice when sparsity---not energy
+accuracy---is the purpose.  The approximation re-prices the absolute counts by a
+constant factor per valence class---$2.51\times$ (main group), $3.25\times$
+($d$-block)---and \emph{not} the $O(Q^{2.5})$ / linear scaling (a constant
+prefactor leaves the slope unchanged).  Under the exact rule the LiH
+small-molecule market test is near parity with STO-3G (838 vs.\ 907) and the
+$d$-block coefficient is \emph{higher} (30.0), not lower; the scaling advantage
+and the large-system multipliers are unaffected.  The exact rule is the one the
+framework uses for precision physics; adopting it in the QC product
+(``option~B'') was considered and deliberately left on the table, because the
+pair-diagonal approximation is the quality quantum-simulation approximation that
+serves this library's purpose.  The realized rule is pinned by
+\texttt{tests/test\_paper14\_eri\_rule.py}.
 
 Second-row molecules are accessed identically to first-row:
 \begin{lstlisting}
@@ -996,7 +1021,12 @@ $\approx 11.10$), meaning that adding atoms to a molecule increases
 quantum cost linearly.
 For LiH, this yields 2.7$\times$ fewer Pauli terms
 and 13$\times$ fewer measurement groups than Gaussian STO-3G, growing
-to 190$\times$ fewer terms against cc-pVDZ.  For first-row hydrides
+to 190$\times$ fewer terms against cc-pVDZ.  These \emph{absolute} multipliers
+are realized under the pair-diagonal ERI approximation
+(Sec.~\ref{sec:eri_rule}); under the exact global-$M_L$ rule the LiH
+small-molecule count is near parity with STO-3G (838 vs.\ 907), while the
+\emph{scaling} advantage (linear vs.\ $O(Q^{4})$) and the large-system
+multipliers are unaffected.  For first-row hydrides
 at fixed equilibrium geometries, the balanced coupled architecture
 achieves 0.20\% single-point energy error at FCI; for second-row
 hydrides, the qubit Hamiltonian's potential-energy surface does not

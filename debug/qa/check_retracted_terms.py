@@ -205,6 +205,34 @@ REGISTRY = [
             "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
         ],
     },
+    {
+        "id": "pair-diagonal-as-exact-sparsity",
+        "scope": "group4",
+        "severity": "fail",
+        "retired": "2026-06-28 (Papers 14/20; CF-1, the A/B dual-rule framing -- "
+                   "criteria.md 'Dual-rule ERI framing'): the composed/atomic Pauli-sparsity "
+                   "advantage is realized under the PAIR-DIAGONAL ERI approximation (rule A, "
+                   "q=mc-ma, m_a=m_c & m_b=m_d), NOT the exact global-M_L Coulomb selection "
+                   "rule (rule B). A sparsity claim that presents a pair-diagonal number as the "
+                   "EXACT/full Gaunt-selection-rule value -- without disclosing the "
+                   "pair-diagonal approximation -- is a framing zombie. Under rule B the LiH "
+                   "market test is PARITY (838 vs 907) and the d-block is DENSER (30.0 vs 27.9).",
+        # zombie signatures: the 2.7x-vs-STO-3G market test; the d-block-sparser / 9.23-as-
+        # genuine-selection-rule claim. (The LEGIT disclosed forms carry 'pair-diagonal' /
+        # 'approximation' nearby and are exempted.)
+        "pattern": r"2\.7\s*(?:x|×|\\times|\$\\times\$)?\s*(?:fewer|less)"
+                   r"|9\.23[^.\n]{0,80}(?:Gaunt|restrictive|sparser|selection\s+rule)"
+                   r"|(?:lower|sparser)[^.\n]{0,40}9\.23"
+                   r"|d-?orbital[^.\n]{0,60}(?:sparser|more\s+restrictive\s+Gaunt)",
+        "exempt_if_nearby": r"pair-diagonal|pair\s+diagonal|approximation|global-M_L"
+                            r"|global\s+rule|global-?ML|exact\s+rule|\bparity\b|CF-1|disclos"
+                            r"|left\s+on\s+the\s+table|artifact\s+of",
+        "files": [
+            "papers/group4_quantum_computing/paper_14_*.tex",
+            "papers/group4_quantum_computing/paper_20_*.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+        ],
+    },
 ]
 
 

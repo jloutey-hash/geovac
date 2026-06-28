@@ -57,6 +57,51 @@ items each, never a headline). **A stale number or attribution that touches a Do
 relax) the counterfactual: a secondary number and a provenance note are not a headline result,
 its tier, or its reader takeaway. (Fix them on sight regardless; they just do not gate the cert.)
 
+## Dual-rule ERI framing (A = sparsity, B = accuracy) — the framing-zombie rule
+
+**The principle (2026-06-28 PI direction).** The codebase *intentionally* carries
+**two electron-repulsion-integral (ERI) angular selection rules**, for two different
+purposes, and a claim is honest only when it uses — and names — the rule that matches its
+stated purpose:
+
+- **Rule A — pair-diagonal** (`composed_qubit._ck_coefficient` and
+  `lattice_index._ck_coefficient`, both `q = mc − ma` ⇒ nonzero only when `m_a=m_c ∧
+  m_b=m_d`). This is the **sparsity / QC-product rule**: it drops genuinely-nonzero
+  *m-swap* ERIs to yield a sparser qubit Hamiltonian. It is the rule the **shipped QC
+  product** uses everywhere (`ecosystem_export.hamiltonian()` → composed *and* atomic). It
+  is a **legitimate quality QC approximation** (energy effect ~mHa, sub-chemical) — *when
+  the point is sparsity*.
+- **Rule B — global-M_L** (`casimir_ci._gaunt_ck`, `q = ma − mc` ⇒ the exact Coulomb
+  rule `m_a+m_b=m_c+m_d`). This is the **physics-accuracy rule**, used only in the
+  precision-physics paths (`cusp_correction`, `dirac_ci`, `internal_multifocal`) — *when
+  the point is accuracy*. It is **not** in the QC product.
+
+This split is correct by design: **A where sparsity is the point, B where accuracy is the
+point.** (The full study is `debug/sprint_group4_prework_memo.md` + the CF-1 carryforward.)
+
+**A framing zombie** is a claim that breaks the A/B match:
+1. a **pair-diagonal (A) resource/sparsity number presented as the *exact* / full
+   Gaunt-selection-rule value** without disclosing the pair-diagonal approximation — e.g.
+   the "2.7× fewer Pauli than STO-3G" market test (under B it is **parity**, 838 vs 907),
+   the "d-orbital blocks are *sparser* (9.23<11.10)" claim (under B the d-block is **denser**,
+   30.0>27.9), or the realized ERI density (D_pd≈1.44%) presented as *the* Gaunt
+   selection-rule density (the universal D≈6.06%);
+2. a **physics-accuracy claim that silently rests on the pair-diagonal (A) approximation**
+   (e.g. an "exact integrals" energy framing where the angular selection is actually A);
+3. the **wrong density/count for the stated context** (D=6.06% used where the realized
+   product is described, or D_pd=1.44% used where the universal selection-rule density is meant).
+
+**Enforcement.** The `claims-reviewer` (C3/C8) MUST **enumerate every sparsity / ERI-density
+/ Pauli-count / "Gaunt selection rule" claim** in scope and verify each names its rule (A
+pair-diagonal *disclosed as an approximation* for sparsity; B for accuracy). The deterministic
+**C16** entry `pair-diagonal-as-exact-sparsity` backstops the *known* retired framings (the
+market-test line, the d-block-sparser claim) — they may not re-surface without a
+pair-diagonal/approximation disclosure within ±WINDOW lines. Disclosing A also means stating
+that **B was considered and deliberately left on the table** (sparsity is the chosen purpose
+for this corner of the corpus). This is a sharpening of C3 (prose ≤ tier) + C8 (headline
+honesty) + §1.5 (benchmarking), shared across branches that make sparsity claims (group4
+primary; group3 Papers 22/31 already carry the D-vs-D_pd disclosure).
+
 ## Verdict rule
 
 A branch **PASSES** only when a *calibrated* reviewer panel returns **zero
@@ -234,6 +279,14 @@ quietly rises.
   thin profiles. No criterion was changed in the extraction — C1–C13 are
   verbatim the trunk/group3 standard, generalized (branch-specific watch-notes
   moved into the profiles).
+- 2026-06-28 — **Added the "Dual-rule ERI framing (A = sparsity, B = accuracy)" section**
+  (PI direction, during group4 pre-work). Codifies the framing-zombie rule: the codebase
+  carries two ERI selection rules on purpose — pair-diagonal (A) for the sparsity/QC product
+  (must be disclosed as an approximation wherever a sparsity claim uses it), global-M_L (B)
+  for physics accuracy. A pair-diagonal number presented as the exact selection-rule value is
+  a framing zombie. Enforced by the claims-reviewer (enumerate every sparsity/density/Pauli
+  claim) + the new C16 entry `pair-diagonal-as-exact-sparsity`. Sharpens C3/C8/§1.5; shared
+  (group4 primary, group3 P22/31 related). Repo study: `debug/sprint_group4_prework_memo.md`.
 - 2026-06-28 — **Added the "Secondary stale-number / provenance-attribution is a NIT class"
   carve-out** to §"Material vs nit" (PI direction, set at group2 certification). The analog of
   the 2026-06-24 code-docstring carve-out: a stale/imprecise number on a NON-§C8-headline

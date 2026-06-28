@@ -56,9 +56,13 @@ quantum simulation rather than geometry optimisation.
 Across the composed molecular library (35 molecules spanning
 $Z = 1$--36, including the first transition series ScH--ZnH), the composed
 Pauli count is exactly linear in the qubit count:
-$N_{\mathrm{Pauli}} = 11.10 \times Q$ (exact, non-identity terms), with d-orbital blocks
-producing a \emph{lower} coefficient (9.23) due to more restrictive
-Gaunt selection rules at higher angular momentum.
+$N_{\mathrm{Pauli}} = 11.10 \times Q$ (exact, non-identity terms; $d$-orbital
+blocks give 9.23).  These counts are realized under a \emph{pair-diagonal}
+angular approximation ($m_a=m_c$, $m_b=m_d$) adopted deliberately for sparsity;
+the exact global-$M_L$ Coulomb rule (used in the framework's precision-physics
+paths, and considered but left on the table here) gives $\approx 2.5\times$ more
+terms with the \emph{same} scaling, under which the $d$-block coefficient is in
+fact \emph{higher}, not lower (Sec.~\ref{sec:eri_rule}).
 \end{abstract}
 
 \maketitle
@@ -384,9 +388,43 @@ $(l_1, l_2, l_3, k)$ quartets grows as $O(n_{\max}^3)$.  With
 $M = n_{\max}^2$ spatial orbitals, this gives
 $n_{\mathrm{ERI}} \sim O(n_{\max}^3 \cdot n_{\max}^2) = O(M^{5/2})$,
 so $\rho_{\mathrm{ERI}} = n_{\mathrm{ERI}} / M^4 \sim M^{-3/2}$.
-The empirical $M^{-2}$ decay is slightly steeper, likely due to additional
-$m$-selection rules ($m_1 + m_2 = m_3 + m_4$) not captured in this
-order-of-magnitude estimate.
+The empirical $M^{-2}$ decay is slightly steeper than this $M^{-3/2}$
+order-of-magnitude estimate; the realized density also depends on which
+angular selection rule the production code applies, discussed next.
+
+\subsection{The pair-diagonal ERI approximation: sparsity vs.\ accuracy}
+\label{sec:eri_rule}
+
+The Pauli counts, ERI densities, and absolute multipliers reported in this
+paper are realized under a \emph{pair-diagonal} angular selection rule:\ the
+production encoders (\texttt{lattice\_index} for atoms, \texttt{composed\_qubit}
+for molecules) retain a two-electron integral only when each electron conserves
+its magnetic number separately ($m_a = m_c$ \emph{and} $m_b = m_d$), dropping the
+genuinely-nonzero \emph{$m$-swap} integrals that the exact Coulomb rule
+($m_a + m_b = m_c + m_d$, global $M_L$) keeps.  This is a deliberate
+\emph{sparsifying approximation}:\ its energy effect is sub-chemical
+($\sim$\,mHa), and it is the right choice when sparsity---not energy
+accuracy---is the purpose, which is the purpose of a resource analysis.
+
+The approximation re-prices the \emph{absolute} counts by a constant factor
+within each valence class---$2.51\times$ for main-group ($s,p$) systems,
+$3.25\times$ for $d$-block---and \emph{not} the scaling exponents (a constant
+prefactor leaves the log--log slope, and the exact linearity
+$N_{\mathrm{Pauli}} = c\,Q$, unchanged).  Two consequences follow.  First, the
+small-molecule market-test multipliers shrink under the exact rule (LiH:\
+$334 \to 838$ Pauli, i.e.\ near parity with STO-3G's 907), while the
+\emph{scaling} advantage (linear vs.\ $O(Q^{3.9\text{--}4.3})$) and the
+large-system multipliers survive.  Second, the $d$-block's \emph{lower}
+pair-diagonal coefficient (9.23 vs.\ 11.10) \emph{reverses} under the exact rule
+(30.0 vs.\ 27.9---$d$-blocks become \emph{denser}):\ the low pair-diagonal
+$d$-coefficient is an artifact of dropping more $m$-swap integrals at higher
+angular momentum, not a sparser selection rule.  The exact global-$M_L$ rule is
+the one the framework applies in its precision-physics paths (cusp correction,
+relativistic, multi-focal); switching the QC product to it (``option~B'') was
+considered and deliberately left on the table, because the pair-diagonal
+approximation is the quality quantum-simulation approximation that serves the
+sparsity purpose.  The realized rule is pinned by
+\texttt{tests/test\_paper14\_eri\_rule.py}.
 
 \subsection{Recoupling sparsity in H-set coupled bases}
 \label{sec:recoupling_sparsity}

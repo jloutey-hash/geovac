@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.52.0 (June 28, 2026)
+**Version:** v4.53.0 (June 28, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **group4 A/B ERI-framing rule (2026-06-28, v4.53.0):** CF-1 dispositioned **A=disclose** (product confirmed uniformly pair-diagonal); codified the "Dual-rule ERI framing" QA rule (criteria.md + C16 + test); Papers 14/20 disclose; no cert run yet. See debug/sprint_group4_eri_framing_memo.md.
 - **group4 QA pre-work + backfill (2026-06-28, v4.52.0):** DoD/synthesis/matrix built; 4 keystone scaling exponents + nuclear counts/1-norms pinned; library→37 (organics dropped), P16→5-type, P23 1-norms synced; no cert run yet. See debug/sprint_group4_prework_memo.md.
 - **group2 CERTIFIED ✅ (2026-06-28, v4.51.0) — 3rd certified branch (after group3, group1).** Five whole-group `/qa group2` runs (v4.50.0→v4.50.4); runs #4+#5 both PERFECT calibration (11/11 sens, 6/6 spec) at the **thin-residual asymptote** (each surfaced only 2 thin secondary/provenance items, never a §C8 headline). **No group2 headline was ever wrong** across the arc. Certified under a new **secondary-number/provenance NIT carve-out** (criteria.md §Material-vs-nit, 2026-06-28 PI direction — the analog of group1's code-docstring carve-out): a stale non-headline number or a wrong provenance note on an otherwise-correct headline is fix-on-sight, not cert-blocking; anything touching a §C8 headline stays MATERIAL. DoD `docs/qa/group2.done.md` (CERTIFIED). Per-run detail: CHANGELOG v4.50.0–v4.51.0 + debug/qa/group2_{whole,recert,recert3,recert4,recert5}_run_notes.md.
 - **`/qa group2` re-cert#5 FAIL→remediated (2026-06-28, v4.50.4):** PERFECT calibration again (11/11, 6/6; rs8 4th catch) — thin-residual asymptote: 2 thin genuine residuals (P11 HeH⁺ secondary stale −1.475→−1.512 [recomputed]; P17 H2O 19.4%-correct but provenance-note cause wrong) + recurring synth −0.6025→−0.6026 → all fixed; CERTIFIED v4.51.0 via the NIT carve-out. See debug/qa/group2_recert5_run_notes.md.

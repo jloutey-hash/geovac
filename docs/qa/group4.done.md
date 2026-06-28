@@ -57,16 +57,22 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
      9.23→**30.0**, becoming DENSER than main-group's 27.9 (the "$d$ sparser" claim REVERSES).
      See `group4.carryforward.md` + `debug/qa/group4_cf1_library_sweep_memo.md`.
 
-3. **CF-1 disclosure (the load-bearing FREEZE decision).** The production composed pipeline
-   realizes the **pair-diagonal** ERI rule ($m_a=m_c \wedge m_b=m_d$), a legitimate
-   *sparsifying approximation* that drops genuinely-nonzero m-swap ERIs, NOT the exact
-   global-$M_L$ Coulomb selection rule. Whichever disposition the PI freezes —
-   **(A)** keep pair-diagonal + **disclose** it (one sentence + the constant re-pricing
-   factor; retract the parity-losing STO-3G market-test line; qualify "$d$ sparser" as
-   pair-diagonal-specific), or **(B)** switch production to global-$M_L$ (re-prices every
-   headline) — the cert criterion is that Papers 14 + 20 **state the rule they use and do
-   not present pair-diagonal multipliers as exact angular-selection-rule sparsity.** An
-   undisclosed pair-diagonal multiplier presented as exact is MATERIAL.
+3. **CF-1 disclosure — DECIDED A (disclose), applied 2026-06-28; now governed by the shared
+   [criteria.md "Dual-rule ERI framing"](criteria.md) rule.** The PI chose **option A**: keep
+   the pair-diagonal rule ($m_a=m_c \wedge m_b=m_d$) as the *quality QC sparsity approximation*
+   and **disclose** it; **B (global-$M_L$) was deliberately left on the table** (it is the
+   physics-accuracy rule, used in the precision-physics paths). Applied: Papers 14 + 20 each
+   carry a `\label{sec:eri_rule}` disclosure subsection (the rule, the constant 2.51×/3.25×
+   re-pricing, the STO-3G→parity and $d$-block-reversal consequences, B-left-on-table); the
+   abstract d-block claim + the 2.7×-market-test line + the TM-table caption now carry the
+   pair-diagonal qualifier. **The cert criterion** (now a *framing-zombie* check): every
+   sparsity/density/Pauli claim names its rule (A disclosed for sparsity, B for accuracy); an
+   **undisclosed pair-diagonal multiplier presented as the exact selection-rule value is
+   MATERIAL** — enforced by the `claims-reviewer` (enumerate every such claim) + the
+   deterministic **C16 entry `pair-diagonal-as-exact-sparsity`** + the characterization test
+   `tests/test_paper14_eri_rule.py` (pins that the product realizes A). The repo study
+   confirmed the QC product is **uniformly A** (atomic `lattice_index` + composed
+   `composed_qubit`); see `debug/sprint_group4_prework_memo.md`.
 
 4. **Nuclear honesty (Paper 23).** The nuclear binding energies at $N_{\rm shells}=2$ are
    **encoding-validation benchmarks, far from experiment** — stated as such, never as a
@@ -144,9 +150,17 @@ all cited tests RUN GREEN: 254 + 105 + 78 passed) surfaced four cross-corpus inc
 and a coverage profile the cert reviewers should treat as enumeration targets. **Backfill +
 inconsistency pass done 2026-06-28** (PI-directed "address the backfill/inconsistencies first"):
 
-1. **CF-1 pair-diagonal ERI** (the load-bearing FREEZE decision above) — quantified:
-   constant 2.51× main-group / 3.25× $d$-block; LiH re-prices to parity vs STO-3G; scaling robust.
-   **Still pending the PI's A-vs-B disposition.**
+1. ✅ **CF-1 pair-diagonal ERI** — **DECIDED A (disclose, PI direction 2026-06-28) + applied;
+   codified as a shared QA rule.** Quantified: constant 2.51× main-group / 3.25× $d$-block;
+   LiH→parity vs STO-3G; scaling robust. **The repo study confirmed the QC product is uniformly
+   A** (atomic + composed pair-diagonal; global-$M_L$ B lives only in the precision-physics paths).
+   Applied: the `sec:eri_rule` disclosure subsections in Papers 14/20 + the qualified d-block/
+   market-test/TM-caption loci; the **shared [criteria.md "Dual-rule ERI framing"](criteria.md)**
+   rule + the **C16 `pair-diagonal-as-exact-sparsity`** deterministic backstop + the
+   **`tests/test_paper14_eri_rule.py`** characterization test (product realizes A; B re-prices
+   2.51×/3.25×) + the `angular_zero_count` docstring fix. **Cross-branch flag (NOT auto-fixed):**
+   group2 Paper 13/fci_atoms "exact rational Slater integrals" doesn't disclose the pair-diagonal
+   angular subset (radial R^k exact, angular = A; energy-negligible) — for a future group2 re-touch.
 2. ✅ **Library size** — **DECIDED 37 (ship as-is, PI direction 2026-06-28) + applied corpus-wide.**
    `_SYSTEM_REGISTRY` = **37 systems** (35 composed molecules + He + H2). Synced everywhere:
    Paper 14 (28/30→37 systems / 35 composed), Paper 20 (38→37; the **3 non-buildable organics
