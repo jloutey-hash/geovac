@@ -41,6 +41,22 @@ or that corrupts a test's *logic* (wrong tolerance, tautology, false-positive), 
 MATERIAL. This refines (does not relax) the §"Material vs nit" counterfactual: a code
 docstring is not "a result, claim, tier, citation, or paper-reader takeaway."
 
+**Secondary stale-number / provenance-attribution is a NIT class (2026-06-28 PI direction,
+set at group2 certification).** A **stale or imprecise computed number on a NON-headline
+secondary result** (one not listed in the branch's `<branch>.done.md` §C8 headline set —
+e.g. an illustrative HeH²⁺ energy in a paper whose headline is H₂⁺), **or a provenance /
+causal-attribution sentence on an otherwise-correct headline** (the headline number is
+right; only the stated *reason* it changed is wrong), is a **fix-on-sight NIT, not a MATERIAL
+cert blocker**, *provided* every DoD §C8 headline, its tier, and its backing test are correct.
+Rationale: it passes the §"Material vs nit" counterfactual *negatively* — no DoD-listed result,
+tier, or paper-reader takeaway-of-a-headline changes; and it is the long-tail class a
+fresh-adversary pass surfaces ~1–2-per-run indefinitely on a large corpus (the group2 run-#4/#5
+asymptote: perfect 11/11+6/6 calibration both runs, yet 2 thin DIFFERENT secondary/provenance
+items each, never a headline). **A stale number or attribution that touches a DoD §C8 headline
+— or that makes a headline number itself wrong — remains MATERIAL.** This refines (does not
+relax) the counterfactual: a secondary number and a provenance note are not a headline result,
+its tier, or its reader takeaway. (Fix them on sight regardless; they just do not gate the cert.)
+
 ## Verdict rule
 
 A branch **PASSES** only when a *calibrated* reviewer panel returns **zero
@@ -218,3 +234,11 @@ quietly rises.
   thin profiles. No criterion was changed in the extraction — C1–C13 are
   verbatim the trunk/group3 standard, generalized (branch-specific watch-notes
   moved into the profiles).
+- 2026-06-28 — **Added the "Secondary stale-number / provenance-attribution is a NIT class"
+  carve-out** to §"Material vs nit" (PI direction, set at group2 certification). The analog of
+  the 2026-06-24 code-docstring carve-out: a stale/imprecise number on a NON-§C8-headline
+  secondary result, or a wrong causal/provenance note on an otherwise-correct headline, is a
+  fix-on-sight NIT, not a cert blocker — provided every DoD §C8 headline + tier + backing test
+  is correct; anything touching a headline stays MATERIAL. Motivated by the group2 run-#4/#5
+  thin-residual asymptote (perfect 11/11+6/6 calibration both runs, ~2 thin secondary/provenance
+  items each, never a headline). Refines (does not relax) the counterfactual.

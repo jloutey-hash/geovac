@@ -3,9 +3,13 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only group2-specific scope + deltas + the branch watch-notes.
 
-> **STATUS: FROZEN 2026-06-26 (PI-confirmed).** Pre-registration complete; the
-> whole-group `/qa group2` run is authorized. Criteria are locked for this run —
-> no goalpost-moving in either direction. Corrections are applied in place.
+> **STATUS: CERTIFIED ✅ 2026-06-28 (v4.51.0, PI direction).** Five whole-group `/qa group2`
+> runs (v4.50.0→v4.50.4); runs #4 and #5 returned PERFECT calibration (11/11 sens, 6/6 spec)
+> with only thin secondary/provenance residuals (the thin-residual asymptote), all fixed.
+> Every §C8 authoritative headline is verified-correct + soundly-backed; no headline was ever
+> wrong. Certified under the 2026-06-28 secondary-number/provenance NIT carve-out
+> (criteria.md §"Material vs nit"). Third certified branch (after group3, group1). See the
+> Change log below + CHANGELOG v4.50.0–v4.51.0.
 
 **Scope (non-trunk group2):** the **9 quantum-chemistry papers** —
 **Paper 8** (Bond Sphere / Sturmian), **Paper 11** (prolate spheroidal H$_2^+$),
@@ -149,3 +153,16 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   `debug/qa/group2_seed_key.json`. **Disposition: TIER-1 structural items need PI
   strategic direction (restore deleted code vs descope/reframe headlines) before
   remediation.**
+- 2026-06-27/28 — **Re-cert arc #2–#5 → CERTIFIED ✅ (2026-06-28, v4.51.0).** Five whole-group
+  runs total. The FAILs peeled monotonically thinning layers: #1 restorations (v2.7.0-dropped
+  code) → #2 framing/§3-TC-reassertion + P8 theorem re-derivation → #3 cross-paper second-locus
+  propagation (~25 loci) → #4 two thin framing-syncs → #5 two thin secondary/provenance residuals.
+  **Runs #4 and #5 both returned PERFECT calibration (sensitivity 11/11, specificity 6/6)** with
+  only thin DIFFERENT secondary/provenance residuals (never a §C8 headline) — the thin-residual
+  asymptote. **NO group2 paper headline was ever wrong** across the arc (the run-#1 FAIL resolved
+  into restorations + one regression fix + one improvement; the genuine corrections were a single
+  false claim [FCI-A "Li beats HF", run #3] + framing/secondary-number/provenance fixes). Every
+  §C8 authoritative headline is verified-correct + soundly-backed, twice over. **Certified per the
+  2026-06-28 secondary-number/provenance NIT carve-out** (criteria.md §"Material vs nit"): the
+  remaining long-tail residuals are fix-on-sight NITs, not cert blockers. Per-run detail:
+  CHANGELOG v4.50.0–v4.51.0 + `debug/qa/group2_{whole,recert,recert3,recert4,recert5}_run_notes.md`.

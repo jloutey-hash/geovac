@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.51.0] - 2026-06-28
+
+**group2 (quantum chemistry) CERTIFIED ✅ — third certified branch (after group3, group1).** Five whole-group `/qa group2` runs (v4.50.0→v4.50.4) drove the branch through monotonically thinning FAIL→remediate layers to the **thin-residual asymptote**: runs #4 and #5 BOTH returned PERFECT calibration (sensitivity 11/11, specificity 6/6) with only ~2 thin secondary/provenance residuals each, never a §C8 headline. **No group2 paper headline was ever wrong** across the entire arc — the run-#1 FAIL resolved into restorations (v2.7.0-dropped code) + one BeH2 regression fix + one H2O improvement; the only genuine corrections thereafter were a single false claim (FCI-A "Li beats HF", run #3), framing/§3-reassertion fixes (TC, run #2), the P8 theorem re-derivation (run #2), cross-paper propagation (run #3), and thin secondary-number/provenance fixes (runs #4/#5). Every §C8 authoritative headline (H2+ 0.0002%, He 0.022/0.004/0.19%, H2 96.0% of D_e, LiH 5.3%, BeH2 11.7%, H2O 19.4%, balanced-LiH 0.20%, FCI He/Li/Be, both guardrail negatives) is verified-correct + soundly-backed, twice over.
+
+### Added
+- **criteria.md §"Material vs nit" — secondary-number / provenance-attribution NIT carve-out** (2026-06-28 PI direction, set at group2 certification; the analog of the 2026-06-24 code-docstring carve-out). A stale/imprecise number on a NON-§C8-headline secondary result, or a wrong causal/provenance note on an otherwise-correct headline, is a fix-on-sight NIT, not a cert blocker — provided every DoD §C8 headline + tier + backing test is correct; anything touching a headline (or making a headline number itself wrong) stays MATERIAL. Motivated by the run-#4/#5 asymptote.
+
+### Changed
+- `docs/qa/group2.done.md` → **CERTIFIED ✅** (status header + change-log cert record).
+- CLAUDE.md §2 → group2 CERTIFIED one-liner (compacts the per-run cert-arc bullets).
+
 ## [4.50.4] - 2026-06-28
 
 `/qa group2` re-cert **run #5 = FAIL → remediated** (confirmation re-cert of v4.50.3). **Calibration PERFECT for the 2nd straight run: sensitivity 11/11, specificity 6/6** (every seed caught incl. cs5/FCI-M rs8-class a 4th time; run-#4 fixes confirmed not re-flagged). Canonical record: `debug/qa/group2_recert5_run_notes.md`.
