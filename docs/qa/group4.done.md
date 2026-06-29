@@ -262,3 +262,21 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   (P14 26 / P16 7 / P20 12 / P23 11 / synth 4 pp); no production code edited. **The certified-PASS
   confirmation run is the next `/qa group4` — HELD for PI timing, NOT auto-fired.** Per-run detail:
   CHANGELOG v4.55.0 + `debug/sprint_group4_recert_remediation_memo.md`.
+- 2026-06-29 — **confirmation cert (3rd run, whole-group) = FAIL → ALL remediated; recert HELD per PI (v4.56.0).**
+  Panel FULLY CALIBRATED (sensitivity **7/7** valid seeds — c1 excluded as inert/dud; specificity **6/6**,
+  incl. the citation-reviewer *confirming* the now-correct Chawla2024 cite). The run peeled a deeper layer
+  (a full relativistic-table internal-consistency cross-check prior runs' chunking skipped). Findings:
+  **(M1)** P14 `tab:sunaga` stale GeoVac native 805/534 vs the paper's own `tab:spinor_resource` 1413/942
+  → fixed (advantage 16–24×→**9–13×**, obs-3 QWC 6571→11865; v4.55.0's A-fix had left P14↔P20 inconsistent);
+  **(M2)** P20 abstract "binds at R_eq=3.015" vs body's computed **3.227** → reworded (n=2 resource vs n=3
+  accuracy separated); **(M3)** 0.20% n=3 headline has no test → logged coverage gap; **(M4)** synth
+  1/M²→1/M; **(M5)** P23 §4 title→"First **Two-Species**…"; **(projected)** P14↔P20→honest **17–32×**.
+  **(rel λ_ni conflict — "diagnose first" per PI):** code's first-row LiH/BeH rel 1-norm matched neither
+  table (BeH n=2 code 143.96 vs table 40.26) while frozen-core CaH matched exactly → diagnosed as a
+  **stale table, NOT a code regression** (the table's BeH rel λ 40.26 was physically impossible: 3.5×
+  BELOW its own scalar 139.12; the first-row λ path drifted after the table's v2.15.0 vintage, Pauli
+  counts unchanged) → tables + obs-2 + P20 prose corrected to code values + **new pinning test
+  `tests/test_paper14_rel_lambda.py`** (4 passed; λ was never test-guarded — the gap that let it drift).
+  Deterministic gates PASS; all 5 papers compile clean. Deferred NITs (citation source-check):
+  Pachucki 2023-vs-2018, rocca/caesura authors, ScH 277/278. **Certified-PASS run is the next `/qa group4`,
+  HELD for PI.** Per-run detail: CHANGELOG v4.56.0 + `debug/sprint_group4_confirm_cert_remediation_memo.md`.

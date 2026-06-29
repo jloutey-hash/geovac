@@ -1709,11 +1709,11 @@ $n_{\max}$ & Mol. & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{sc}}$ & $N_{\mathrm{Pauli
 1 & LiH & 6   & 9        & 9      & 1.00$\times$ & 4.72   & 1 \\
 1 & BeH & 6   & 9        & 9      & 1.00$\times$ & 9.41   & 1 \\
 1 & CaH & 4   & 6        & 6      & 1.00$\times$ & 2.03   & 1 \\
-2 & LiH & 30  & 333      & 1\,413 & 4.24$\times$ & 29.97  & 121 \\
-2 & BeH & 30  & 333      & 1\,413 & 4.24$\times$ & 40.26  & 111 \\
+2 & LiH & 30  & 333      & 1\,413 & 4.24$\times$ & 40.59  & 121 \\
+2 & BeH & 30  & 333      & 1\,413 & 4.24$\times$ & 143.96 & 111 \\
 2 & CaH & 20  & 222      &    942 & 4.24$\times$ & 18.68  & 111 \\
-3 & LiH & 84  & 7\,878   & 89\,226 & 11.33$\times$ & 204.93 & 11\,865 \\
-3 & BeH & 84  & 7\,878   & 89\,226 & 11.33$\times$ & 278.51 & 11\,843 \\
+3 & LiH & 84  & 7\,878   & 89\,226 & 11.33$\times$ & 218.78 & 11\,865 \\
+3 & BeH & 84  & 7\,878   & 89\,226 & 11.33$\times$ & 413.90 & 11\,843 \\
 3 & CaH & 56  & 5\,252   & 59\,484 & 11.33$\times$ & 125.36 & 11\,843 \\
 \end{tabular}
 \end{ruledtabular}
@@ -1730,23 +1730,24 @@ Three observations on Table~\ref{tab:spinor_resource}:
     on $Q$ and on the angular structure, not on nuclear charge or
     valence configuration.
 
-  \item \emph{1-norm does not inflate; at $n_{\max}=3$ it decreases.}
+  \item \emph{1-norm increases modestly; no order-of-magnitude inflation.}
     The non-identity 1-norm $\lambda_{\mathrm{ni}}$ at the
-    relativistic encoding is within $\pm 20\%$ of the scalar value
-    at $n_{\max}=1,2$ and \emph{decreases} by $30$--$40\%$ at
-    $n_{\max}=3$ (LiH 170.59 Ha $\to$ 126.75 Ha;
-    BeH 346.09 Ha $\to$ 297.03 Ha;
-    CaH 96.45 Ha $\to$ 65.81 Ha; scalar values from the
-    parallel T3 run with \texttt{relativistic=False}). Interpretation:
-    spinor $jj$-coupling distributes Coulomb matrix elements across
-    narrower angular channels, and at finite truncation the aggregate
-    1-norm is reduced. This is a structurally favorable result for
-    QPE resource estimation where $\lambda$ dominates query
-    complexity~\cite{ChildsBerry}.
+    relativistic encoding is within $\sim 13\%$ of the scalar value
+    at $n_{\max}=1,2$ and increases by $\sim 20$--$30\%$ at $n_{\max}=3$
+    (scalar $\to$ rel: LiH 170.59 Ha $\to$ 218.78 Ha;
+    BeH 346.09 Ha $\to$ 413.90 Ha;
+    CaH 96.45 Ha $\to$ 125.36 Ha; scalar values from the
+    parallel build with \texttt{relativistic=False}, rel values
+    from Table~\ref{tab:spinor_resource}). There is no
+    order-of-magnitude inflation: spinor $jj$-coupling redistributes
+    Coulomb matrix elements across angular channels, so the aggregate
+    1-norm stays the same order as the scalar encoding---the spinor
+    Hamiltonian remains tractable for QPE resource estimation, where
+    $\lambda$ dominates query complexity~\cite{ChildsBerry}.
 
   \item \emph{QWC grouping cost grows sharply.} LiH $n_{\max}=3$
     scalar produces $790$ QWC groups; the spin-ful encoding produces
-    $6\,571$ ($8.3\times$). The richer Pauli structure of $jj$-coupling
+    $11\,865$ ($15.0\times$). The richer Pauli structure of $jj$-coupling
     distributes the Hamiltonian across more distinct Pauli words, so
     QWC cliques are smaller. This cost is VQE-specific and can be
     mitigated by symmetry-compressed (SCD) or tensor-factorized
@@ -1830,16 +1831,18 @@ to extrapolate GeoVac to matched $Q = 18$.}
 \begin{tabular}{cccccc}
 Molecule & $Q$ (GeoVac) & GeoVac $N_{\mathrm{Pauli}}$ & Chawla RaH-18q & Native ratio & Proj.\ at $Q=18$ \\
 \hline
-LiH & 30 & 805 & 12\,556 & 0.064$\times$ & 0.015$\times$--0.026$\times$ \\
-BeH & 30 & 805 & 12\,556 & 0.064$\times$ & 0.015$\times$--0.026$\times$ \\
-CaH & 20 & 534 & 12\,556 & 0.043$\times$ & 0.023$\times$--0.030$\times$ \\
+LiH & 30 & 1\,413 & 12\,556 & 0.113$\times$ & 0.031$\times$ \\
+BeH & 30 & 1\,413 & 12\,556 & 0.113$\times$ & 0.031$\times$ \\
+CaH & 20 & 942 & 12\,556 & 0.075$\times$ & 0.058$\times$ \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-Native $Q$ gives GeoVac a $16$--$24\times$ advantage against RaH-18q;
-projected to matched $Q = 18$ the advantage widens to
-$\sim 40$--$67\times$. This is structural, not accidental: the
+Native $Q$ gives GeoVac a $9$--$13\times$ advantage against RaH-18q;
+projected to matched $Q = 18$ via the O($Q^{2.5}$) composed scaling
+law the advantage is $\sim 17$--$32\times$ (LiH/BeH project to
+$32\times$; CaH, already near matched $Q$, to $17\times$). This is
+structural, not accidental: the
 composed + frozen-core architecture eliminates the large cv2z
 primitive basis that dominates Chawla et al.'s 18q Pauli tensor.
 

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.55.0 (June 28, 2026)
+**Version:** v4.56.0 (June 29, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -132,6 +132,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **group4 confirmation cert (3rd run) FAIL→remediated; recert HELD per PI (2026-06-29, v4.56.0):** calibrated 7/7, 6/6; 5 findings + a diagnosed **stale-table** drift fixed — P14 relativistic tab:sunaga 805/534→1413/942 (advantage 9–13×), P20 R_eq 3.015→3.227, synth 1/M²→1/M, P23 title→"two-species", and the rel-λ_ni first-row cells (table physically impossible: BeH rel<scalar) corrected to code + **new pinning test**. See debug/sprint_group4_confirm_cert_remediation_memo.md.
 - **group4 re-cert FAIL→remediated; recert HELD per PI (2026-06-28, v4.55.0):** calibrated 8/8, 5/5; 4 findings fixed — Swain→**Chawla** cite (RaH-18q: 47,099=integrals, **12,556**=rel Pauli; v4.54.0's Swain fill was itself wrong), trenev range→methodology-only, P14 §origin zombie, P20 STO-3G raw-vs-reduced convention disclosed; certified-PASS run held for PI timing. See debug/sprint_group4_recert_remediation_memo.md.
 - **group4 first cert FAIL→remediated (2026-06-28, v4.54.0):** calibrated 8/8 sens, 5/5 spec; 9 genuine MATERIAL findings all fixed (framing zombies, μ_free code bug, test_balanced RED, trenev/Sunaga misattributions, conjecture, propinquity). See debug/sprint_group4_cert_remediation_memo.md.
 - **group4 A/B ERI-framing rule (2026-06-28, v4.53.0):** CF-1 dispositioned **A=disclose** (product confirmed uniformly pair-diagonal); codified the "Dual-rule ERI framing" QA rule (criteria.md + C16 + test); Papers 14/20 disclose; no cert run yet. See debug/sprint_group4_eri_framing_memo.md.
