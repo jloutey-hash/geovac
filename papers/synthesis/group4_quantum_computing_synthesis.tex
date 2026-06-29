@@ -165,10 +165,9 @@ For single-center atoms the Pauli term count scales as $O(Q^{3.15})$ in
 the qubit number $Q$, compared with Gaussian molecular Pauli-scaling
 exponents in the $Q^{3.9}$--$Q^{4.3}$ range; the
 specific electronic-structure values $Q^{4.25}$ (LiH) and $Q^{3.92}$
-(H$_2$O), and the range they bracket, are GeoVac's own recomputation via
-the OpenFermion/Qiskit-Nature pipeline (the resource-estimation
-methodology follows Trenev et al.~\cite{trenev2025}, a vibrational-spectra
-study that reports no electronic Gaussian scaling exponents).
+(H$_2$O), and the range they bracket, are GeoVac's own log-log fit of
+the published Gaussian Pauli counts of Trenev et al.~\cite{trenev2025}
+(Table~5, Appendix~B; Jordan--Wigner with 2-qubit reduction).
 For composed multi-center molecules the pseudopotential-partitioned
 architecture produces block-diagonal ERIs and a \emph{universal}
 $O(Q^{2.5})$ scaling, with an exponent spread of only $0.02$ across the
@@ -197,8 +196,9 @@ qubitization query complexity, scales as $O(Q^{1.69})$ with
 $R^2 = 0.997$.  This sub-quadratic $1$-norm scaling is the key
 fault-tolerant-relevant result:\ Trotter circuit depth grows far more
 slowly with system size than the raw term count alone would suggest.
-All Gaussian baselines are validated against published integral
-values~\cite{trenev2025} and against analytic references (Szabo and
+All Gaussian baselines are the published Pauli
+counts of Trenev et al.~\cite{trenev2025} (Table 5, Appendix B), cross-checked
+against analytic references (Szabo and
 Ostlund for H$_2$; analytical Slater-type orbitals for He).
 
 \paragraph{Tier discipline.}
@@ -234,10 +234,11 @@ parity ($0.92\times$) with STO-3G's $907$---so the broad
 scaling gap and the multi-center block structure, while the specific
 small-system market-test line is sensitive to the ERI rule and is
 reported with that caveat.  The \emph{balanced coupled} (PK-free)
-architecture trades sparsity for chemistry:\ it binds LiH at the
-experimental equilibrium geometry $R_{\mathrm{eq}}=3.015$~bohr with $878$
-Pauli terms at $30$ qubits and a $0.20\%$ single-point energy error at
-the well minimum when solved exactly (number-projected FCI).
+architecture trades sparsity for chemistry:\ it binds LiH with an FCI
+minimum at a computed $R_{\mathrm{eq}}=3.227$~bohr (7.0\% above the
+experimental 3.015~bohr) at $n_{\max}=2$ ($878$ Pauli terms, $30$ qubits);
+a single-point evaluation at the experimental geometry reaches a $0.20\%$
+energy error at $n_{\max}=3$ when solved exactly (number-projected FCI).
 
 \paragraph{Row-conditional chemistry scope.}
 The chemistry-accuracy scope at $n_{\max}=2$ is honestly
@@ -436,9 +437,11 @@ S.~Raman, A.~Mezzacapo, and S.~Mostame,
 ``Refining resource estimation for the quantum computation of
 vibrational molecular spectra through Trotter error analysis,''
 Quantum \textbf{9}, 1630 (2025); arXiv:2311.03719.
-[Cited for the $Q^{3.9}$--$Q^{4.3}$ Gaussian-baseline scaling range and
-resource-estimation methodology; the specific LiH/H$_2$O electronic-structure
-exponents are GeoVac's own recomputation in that pipeline, per Paper~14.]
+[Cited for the electronic-structure Gaussian-basis Pauli counts in
+Table~5 (Appendix~B; Jordan--Wigner with 2-qubit reduction), the
+Gaussian baseline; the $Q^{3.9}$--$Q^{4.3}$ scaling exponents (and the
+specific LiH/H$_2$O exponents) are GeoVac's own log-log fit of those
+published counts, per Paper~14.]
 
 \end{thebibliography}
 

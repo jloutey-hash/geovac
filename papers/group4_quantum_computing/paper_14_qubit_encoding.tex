@@ -22,9 +22,9 @@ exhibit structurally favorable Pauli decompositions for quantum simulation.
 After Jordan--Wigner transformation, the GeoVac lattice Hamiltonian yields
 $O(Q^{3.15})$ Pauli string terms in the number of qubits~$Q$, compared
 to $O(Q^{4+})$ for conventional Gaussian-basis Hamiltonians
-(our own OpenFermion recomputation gives
-$Q^{4.25}$ for LiH and $Q^{3.92}$ for H$_2$O, spanning $Q^{3.9}$--$Q^{4.3}$;
-methodology of Trenev~\textit{et al.}~\cite{trenev2025}).  The advantage originates in angular momentum
+(our own log-log fit of the published Pauli counts of
+Trenev~\textit{et al.}~\cite{trenev2025} gives
+$Q^{4.25}$ for LiH and $Q^{3.92}$ for H$_2$O, spanning $Q^{3.9}$--$Q^{4.3}$).  The advantage originates in angular momentum
 selection rules---enforced by Gaunt integrals at the two-electron integral
 level---which cause the electron repulsion integral (ERI) tensor density
 to decay as $\sim 1/M$ (empirically $\approx M^{-0.85}$--$M^{-1}$) with
@@ -49,8 +49,8 @@ repulsion integrals with a universal Pauli scaling of $O(Q^{2.5})$,
 independent of molecular topology (exponent spread~$0.02$ across three
 molecules).  At equal qubit counts, this represents two or more
 orders of magnitude fewer Pauli terms than Gaussian baselines
-(counts recomputed via OpenFermion, $Q^{3.9}$--$Q^{4.3}$ span;
-methodology~\cite{trenev2025})---an
+(published counts of Trenev~\textit{et al.}~\cite{trenev2025},
+$Q^{3.9}$--$Q^{4.3}$ span fitted by us)---an
 advantage that grows with system size
 due to the $\sim 1.5$ exponent gap.  These comparisons are at matched
 qubit counts, not matched accuracy; the composed basis carries
@@ -324,8 +324,8 @@ cc-pVDZ produces 23{,}189 terms at 100\% ERI density---a
   lines show power-law fits; gray dotted lines indicate $Q^2$ and $Q^4$
   reference scaling.  The GeoVac exponent ($\alpha = 3.15$) is
   significantly below the $Q^{3.9}$--$Q^{4.3}$ Gaussian molecular
-  range (our own OpenFermion recompute, with specific exponents
-  $\alpha = 3.92$--$4.25$; methodology~\cite{trenev2025}).}
+  range (specific exponents $\alpha = 3.92$--$4.25$, our log-log fit
+  of the published Pauli counts of Trenev~\textit{et al.}~\cite{trenev2025}).}
   \label{fig:pauli_scaling}
 \end{figure}
 
@@ -334,14 +334,13 @@ yield:
 \begin{align}
   \alpha_{\mathrm{GeoVac}}   &= 3.15, \quad R^2 = 0.9995. \label{eq:geovac_exp}
 \end{align}
-For the Gaussian baseline, we recompute molecular Pauli counts via the
-OpenFermion/Qiskit-Nature pipeline (Jordan--Wigner with 2-qubit
-reduction), following the resource-estimation methodology of
-Trenev~\textit{et al.}~\cite{trenev2025} (whose own target is
-vibrational spectra), giving system-specific exponents: $\alpha = 4.25$
+For the Gaussian baseline, we take the published molecular Pauli counts
+(Jordan--Wigner with 2-qubit reduction) of
+Trenev~\textit{et al.}~\cite{trenev2025} (Table~5, Appendix~B) and fit
+them in log--log space, giving system-specific exponents: $\alpha = 4.25$
 for LiH ($R^2 = 0.999$, 3~basis sets) and $\alpha = 3.92$ for H$_2$O
 ($R^2 > 0.999$, 3~basis sets), both within the $Q^{3.9}$--$Q^{4.3}$
-span of our recomputation.  These supersede our earlier estimate
+span of those fits.  These supersede our earlier estimate
 of $\alpha_{\mathrm{Gaussian}} \approx 4.6$ from synthetic
 integrals~\cite{helgaker2000}.
 
@@ -797,21 +796,18 @@ Specifically:
   ($6.8\times$ lower).
 \end{itemize}
 
-For molecular systems beyond minimal basis, we compute Gaussian Pauli
-counts via the OpenFermion/Qiskit-Nature pipeline (Jordan--Wigner with
-2-qubit reduction, exploiting particle number and spin symmetry) for LiH
-and H$_2$O across three Gaussian basis sets, following the
-resource-estimation methodology of Trenev~\textit{et al.}~\cite{trenev2025}
-(whose own target is vibrational spectra, not these electronic counts).
+For molecular systems beyond minimal basis, we take the published
+Gaussian Pauli counts (Jordan--Wigner with 2-qubit reduction,
+exploiting particle number and spin symmetry) for LiH
+and H$_2$O across three Gaussian basis sets from
+Trenev~\textit{et al.}~\cite{trenev2025} (Table~5, Appendix~B).
 These data are reported in Table~\ref{tab:gaussian_published}.
 
 \begin{table}[t]
-\caption{Gaussian Pauli term counts computed via the
-OpenFermion/Qiskit-Nature pipeline following the methodology of
-Trenev~\textit{et al.}~\cite{trenev2025} (not published counts from that
-work, whose target is vibrational spectra), Jordan--Wigner encoding with
-2-qubit reduction.  Fitted exponents use all three basis sets per
-molecule.}
+\caption{Published Gaussian Pauli term counts from
+Trenev~\textit{et al.}~\cite{trenev2025} (Table~5, Appendix~B),
+Jordan--Wigner encoding with 2-qubit reduction.  Fitted exponents are
+our own log-log fit using all three basis sets per molecule.}
 \label{tab:gaussian_published}
 \begin{ruledtabular}
 \begin{tabular}{llrrr}
@@ -1046,25 +1042,25 @@ ratio.
 \subsection{Comparison with Gaussian bases}
 \label{sec:composed_gaussian}
 
-We compare the composed GeoVac Pauli counts against the Gaussian data
-we computed via the OpenFermion/Qiskit-Nature pipeline (methodology of
-Trenev~\textit{et al.}~\cite{trenev2025}) for LiH and H$_2$O
+We compare the composed GeoVac Pauli counts against the published
+Gaussian data of Trenev~\textit{et al.}~\cite{trenev2025}
+(Table~5, Appendix~B) for LiH and H$_2$O
 (Table~\ref{tab:gaussian_published}).
 
-For LiH, the three recomputed Gaussian data points (STO-3G at $Q = 10$,
+For LiH, the three published Gaussian data points (STO-3G at $Q = 10$,
 6-31G at $Q = 20$, cc-pVDZ at $Q = 36$) yield a fitted exponent
 $\alpha_G = 4.25$ ($R^2 = 0.999$).  For H$_2$O, the corresponding
 points ($Q = 12, 24, 46$) give $\alpha_G = 3.92$ ($R^2 > 0.999$).
 
 Table~\ref{tab:equal_qubit} shows the equal-qubit comparison for
-H$_2$O, using the recomputed Gaussian power law for interpolation.
+H$_2$O, using our fitted Gaussian power law for interpolation.
 
 \begin{table}[t]
 \caption{Equal-qubit Pauli term comparison for H$_2$O.  Gaussian
-values are interpolated from the recomputed $Q^{3.92}$ power law
-(methodology of Trenev~\textit{et al.}~\cite{trenev2025}).  GeoVac uses raw
-Jordan--Wigner; Gaussian uses 2-qubit reduction (conservative for
-GeoVac).}
+values are interpolated from the $Q^{3.92}$ power law (our log-log fit
+of the published counts of Trenev~\textit{et al.}~\cite{trenev2025}).
+GeoVac uses raw Jordan--Wigner; Gaussian uses 2-qubit reduction
+(conservative for GeoVac).}
 \label{tab:equal_qubit}
 \begin{ruledtabular}
 \begin{tabular}{rrrd{4.0}d{3.1}}
@@ -1590,8 +1586,8 @@ composition.  ScH ($Z = 21$) and TiH ($Z = 22$) are constructed with
 an [Ar] frozen core (18 electrons) and valence blocks that include an
 isolated $d$-orbital block ($l_{\min} = 2$, $l_{\max} = 2$) alongside
 an $s$-orbital bond pair.  At $n_{\max} = 2$, both molecules require
-$Q = 30$ qubits and produce 278 composed Pauli terms---fewer than
-LiH (334 terms at the same~$Q$)---with Pauli/$Q = 9.23$, below the
+$Q = 30$ qubits and produce 277 non-identity Pauli terms---fewer than
+LiH ($333$ at the same~$Q$)---giving Pauli/$Q = 9.23$, below the
 universal coefficient of~11.10.  The reduction reflects the $d$-block's
 lower ERI density entering the block-diagonal sum.
 
@@ -2296,8 +2292,8 @@ orthogonal axes and their benefits are additive.
 symmetries to eliminate redundant qubits.  The GeoVac lattice
 Hamiltonian preserves $S_z$ and particle-number symmetry, so the
 same 2-qubit reduction available to Gaussian encodings applies.
-Indeed, our recomputed Gaussian baselines (following the methodology of
-Trenev~\textit{et al.}~\cite{trenev2025}) already use this reduction; GeoVac's
+Indeed, the published Gaussian baselines of
+Trenev~\textit{et al.}~\cite{trenev2025} already use this reduction; GeoVac's
 advantages are reported \emph{without} it, making the comparisons
 conservative.
 
@@ -2850,9 +2846,8 @@ GeoVac lattice produces $1.3\times$ and $8.1\times$ fewer Pauli
 terms with $3.8\times$ and $6.8\times$ lower 1-norm, respectively.
 The 6-31G entry in Table~\ref{tab:pauli} still uses synthetic
 integrals with representative sparsity.  The molecular Gaussian
-baselines use Pauli counts we recomputed via the
-OpenFermion/Qiskit-Nature pipeline (methodology of
-Trenev~\textit{et al.}~\cite{trenev2025}).  The structural
+baselines use the published Pauli counts of
+Trenev~\textit{et al.}~\cite{trenev2025} (Table~5, Appendix~B).  The structural
 conclusion---Gaussian ERIs are near-dense while lattice ERIs
 are selection-rule-sparse---is robust and well
 established~\cite{helgaker2000}.
@@ -2963,8 +2958,9 @@ computing approach for multi-electron molecules.
 \paragraph{Note added v2.0.44.}
 Paper~20 presents the GeoVac Hamiltonian library as a practical tool
 for the quantum computing community, including FCI accuracy benchmarks
-across the LiH potential energy surface, matched-accuracy resource
-comparisons against Gaussian baselines, and ecosystem export to
+across the LiH potential energy surface, matched-qubit (not
+matched-accuracy) resource comparisons against Gaussian baselines,
+and ecosystem export to
 Qiskit, OpenFermion, and PennyLane.  The balanced coupled architecture
 (Paper~19) achieves 0.20\% energy error at FCI, demonstrating that
 the composed partition Hamiltonian is accurate when solved exactly.
@@ -3162,7 +3158,7 @@ G.~Burkat and S.~Fitzpatrick,
 arXiv:2506.09151 (2025).
 
 \bibitem{rocca2024}
-D.~Rocca, C.~L.~Cortes, J.~F.~Gonthier, P.~D.~Johnson, and R.~M.~Parrish,
+D.~Rocca, C.~L.~Cortes, J.~F.~Gonthier, P.~J.~Ollitrault, and R.~M.~Parrish,
 ``Reducing the runtime of fault-tolerant quantum simulations in chemistry
 through symmetry-compressed double factorization,''
 J.\ Chem.\ Theory Comput.\ \textbf{20}, 4639--4653 (2024).
@@ -3189,15 +3185,12 @@ S.~Raman, A.~Mezzacapo, and S.~Mostame,
 ``Refining resource estimation for the quantum computation of
 vibrational molecular spectra through Trotter error analysis,''
 Quantum \textbf{9}, 1630 (2025); arXiv:2311.03719.
-[Cited for the resource-estimation methodology ONLY; this is a
-vibrational-spectra study and reports no electronic Gaussian
-scaling exponents.  The $Q^{3.92}$/$Q^{4.25}$ LiH/H$_2$O exponents
-(and the $Q^{3.9}$--$Q^{4.3}$ span they bracket), together with the
-specific LiH and H$_2$O Pauli term counts in
-Table~\ref{tab:gaussian_published}, are GeoVac's own
-recomputation via the OpenFermion/Qiskit-Nature pipeline,
-applied to electronic-structure Hamiltonians rather than the
-vibrational-structure target of the cited paper.]
+[Cited for the electronic-structure Gaussian-basis Pauli counts in
+Table~5 (Appendix~B; Jordan--Wigner with 2-qubit reduction), used as
+the Gaussian baseline in Table~\ref{tab:gaussian_published}; the
+$Q^{3.92}$/$Q^{4.25}$ LiH/H$_2$O exponents and the
+$Q^{3.9}$--$Q^{4.3}$ span they bracket are our own log-log fit of
+those published counts.]
 
 \bibitem{loutey_paper19}
 J.~Loutey,

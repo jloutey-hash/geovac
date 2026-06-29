@@ -280,3 +280,21 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   Deterministic gates PASS; all 5 papers compile clean. Deferred NITs (citation source-check):
   Pachucki 2023-vs-2018, rocca/caesura authors, ScH 277/278. **Certified-PASS run is the next `/qa group4`,
   HELD for PI.** Per-run detail: CHANGELOG v4.56.0 + `debug/sprint_group4_confirm_cert_remediation_memo.md`.
+- 2026-06-29 — **4th cert (PASS-confirmation, whole-group) = FAIL → ALL remediated; recert HELD per PI (v4.57.0).**
+  Panel FULLY CALIBRATED (sensitivity **8/8**, specificity **6/6** — confirmed every v4.55/v4.56 fix). A thin
+  converging layer. **HEADLINE — Trenev attribution REVERSED (corrects the v4.54.0 finding 4 + v4.55.0 finding B
+  recorded above):** a "diagnose-first" web-verification of Trenev (arXiv:2311.03719) found its **Appendix B /
+  Table 5 ("Electronic structure vs Vibrational structure") DOES tabulate the electronic Gaussian JW Pauli counts
+  for LiH/H2O — all six GeoVac values (276/5851/63519; 551/8921/107382) match Table 5 exactly.** So the earlier
+  "Trenev is vibrational-only / no electronic counts / counts are GeoVac's own recompute" was WRONG (it missed
+  Appendix B); the **code (`composed_qubit.py` "Source: Trenev Table 5") was right all along.** Reverted corpus-wide
+  to *counts = Trenev Table 5 (App. B); exponents = GeoVac's log-log fit of those published counts* (P14 11 loci +
+  bibitem, P20 caption + refs.bib, synthesis body + bibitem, code docstrings); **no numeric value changed.** Other
+  findings: **(F2)** P20:957 "/balanced" zombie dropped (balanced LiH binds — flagship result); **(S1)** synthesis
+  R_eq=3.015→3.227 (the v4.56.0 M2 fix hadn't propagated to the synthesis); **(F3/F5)** P14 matched-qubit wording +
+  P20 RaH species-mismatch caveat; **NITs** ScH 277 non-identity / rocca P.J.~Ollitrault / synth "Pauli counts".
+  **New tests:** `test_paper20_library.py` (37 systems) + `test_paper16_dirac_metric.py` (§VI formula/smoothness) —
+  6/6 green, closing two recurring no-test flags. Deterministic gates PASS; edited papers compile clean. Deferred
+  NITs (non-blocking carve-out): Pachucki year/FW source-check, Navrátil title-venue, duplicate caesura, dangling
+  P20 .bib, "M=n_max²" text, rel n=3 + 0.20% n=3 coverage. Per-run detail: CHANGELOG v4.57.0 +
+  `debug/sprint_group4_4thcert_remediation_memo.md`.

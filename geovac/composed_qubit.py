@@ -68,9 +68,9 @@ _PK_HELIKE_DEFAULTS = {
 # Source: D. Trenev, P. J. Ollitrault, S. M. Harwood, T. P. Gujarati,
 #         S. Raman, A. Mezzacapo, S. Mostame,
 #         "Refining resource estimation for the quantum computation of
-#         molecular spectra through Trotter error analysis,"
+#         vibrational molecular spectra through Trotter error analysis,"
 #         Quantum (2025). arXiv:2311.03719.
-#         Table 5, Jordan-Wigner encoding with 2-qubit reduction.
+#         Table 5 (Appendix B), Jordan-Wigner encoding with 2-qubit reduction.
 # ---------------------------------------------------------------------------
 
 GAUSSIAN_LIH_PUBLISHED: Dict[str, Dict[str, Any]] = {
@@ -107,7 +107,7 @@ _TRENEV_REFERENCE = (
     "D. Trenev, P. J. Ollitrault, S. M. Harwood, T. P. Gujarati, "
     "S. Raman, A. Mezzacapo, S. Mostame, "
     "\"Refining resource estimation for the quantum computation of "
-    "molecular spectra through Trotter error analysis,\" "
+    "vibrational molecular spectra through Trotter error analysis,\" "
     "Quantum (2025). arXiv:2311.03719."
 )
 
@@ -1730,7 +1730,7 @@ def build_equal_qubit_comparison() -> List[Dict[str, Any]]:
 def fit_gaussian_lih_published_exponent() -> Dict[str, Any]:
     """
     Fit a power law N_pauli = C * Q^alpha to the 3 published LiH data points
-    from Trenev et al. (Quantum 2025, Table 5, JW with 2-qubit reduction).
+    from Trenev et al. (Quantum 2025, Table 5 (Appendix B), JW with 2-qubit reduction).
 
     Returns
     -------
@@ -2861,7 +2861,7 @@ def _fit_power_law_general(data: List[Dict]) -> Dict[str, float]:
 def fit_gaussian_h2o_published_exponent() -> Dict[str, Any]:
     """
     Fit a power law N_pauli = C * Q^alpha to the 3 published H2O data points
-    from Trenev et al. (Quantum 2025, Table 5, JW with 2-qubit reduction).
+    from Trenev et al. (Quantum 2025, Table 5 (Appendix B), JW with 2-qubit reduction).
     """
     Q_arr = np.array([v['Q'] for v in GAUSSIAN_H2O_PUBLISHED.values()], dtype=float)
     N_arr = np.array([v['N_pauli'] for v in GAUSSIAN_H2O_PUBLISHED.values()], dtype=float)

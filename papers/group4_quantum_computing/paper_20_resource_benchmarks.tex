@@ -425,11 +425,10 @@ Gaussian raw Jordan-Wigner baselines.
   toward parity (qubit-reduced STO-3G LiH is 276 at $Q=10$ vs.\ GeoVac
   composed 334); the raw-vs-raw and reduced-vs-reduced comparisons bracket
   the genuine advantage.  The Gaussian Pauli
-  counts were computed independently via the OpenFermion/Qiskit-Nature
-  pipeline (Trenev et al.~\cite{Trenev2025}---a vibrational-spectra
-  resource study---is cited for the resource-estimation methodology only,
-  not for the $Q^{3.9\text{--}4.3}$ Gaussian-scaling range or these specific
-  electronic-structure counts, both of which are GeoVac's own recomputation).
+  counts are the published values of Trenev et al.~\cite{Trenev2025}
+  (Table~5, Appendix~B; Jordan--Wigner with 2-qubit reduction); the
+  $Q^{3.9\text{--}4.3}$ Gaussian-scaling exponents are GeoVac's own log-log
+  fit of those published counts.
   ``---'' indicates data not available.}
 \label{tab:resources}
 \begin{ruledtabular}
@@ -612,7 +611,9 @@ Reading Table~\ref{tab:paper20_tier2}:
     O($Q^{2.5}$) scaling law of Paper~14 and the
     Tier 2 $\sim 4.2\times$ rel/scalar multiplier (post-TR), the advantage is
     $17\times$--$32\times$ (CaH at $Q=20$ barely shrinks to $Q=18$, setting
-    the low end; LiH/BeH at $Q=30$ set the high end).
+    the low end; LiH/BeH at $Q=30$ set the high end). This is not
+    species-matched---RaH ($Z=88$) differs from LiH/BeH/CaH, and the
+    per-species Chawla cells are deferred (cf.\ Paper~14).
   \item At $n_{\max}=3$, the absolute GeoVac Pauli count overtakes
     Chawla et al.\ at matched $Q$ (LiH/BeH reach 7.1$\times$ of the RaH-18q
     number at $Q = 84$; CaH sits at $4.74\times$ at $Q = 56$). This
@@ -955,7 +956,7 @@ diatomics where the multipole expansion terminates exactly),
 downstream consumers receive an integral set that reproduces
 the framework's qubit-level energetics.  For systems where
 the composed Hamiltonian itself does not bind under qubit FCI
-(LiH composed/balanced and NaH balanced at production
+(LiH composed and NaH balanced at production
 $n_{\max}$, observed in Sprints R3-A and R3-B,
 2026-06-07), the exported integrals reproduce the same
 non-binding PES; classical correlation methods consuming the
