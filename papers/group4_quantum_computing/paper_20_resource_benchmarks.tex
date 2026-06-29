@@ -50,7 +50,7 @@ screened cross-center, explicit-core Hartree--Fock --- with no interior PES
 minimum at the qubit-Hamiltonian level. We document this scope boundary
 empirically in \S\ref{subsec:scope_boundary}; the framework's
 primary value proposition is structural sparsity with quantitative
-truncation-error bounds (Paper~38 propinquity), not energy-accuracy
+truncation-error bounds (Paper~38 state-space GH convergence), not energy-accuracy
 parity with CCSD(T) on second-row systems.  The \texttt{hamiltonian()}
 registry covers 37 systems (35 composed molecules across three rows of
 the periodic table, $Z=1$--36, plus the He and H$_2$ reference atoms),
@@ -61,8 +61,9 @@ with Pauli scaling $O(Q^{2.5})$
 confirmed universal across all three rows, compared to
 $O(Q^{3.9\text{--}4.3})$ for Gaussian baselines.  The composed Pauli
 count is exactly linear in qubit count (coefficient $11.10$, exact,
-for main-group molecules; $9.23$ for $d$-orbital blocks, which are
-sparser due to more restrictive Gaunt selection rules),
+for main-group molecules; $9.23$ for $d$-orbital blocks under the
+pair-diagonal ERI approximation (Sec.~\ref{sec:eri_rule})---the exact
+global-$M_L$ rule makes the $d$-block coefficient higher, not lower),
 so adding atoms to a molecule increases quantum cost linearly.
 Second- and third-row molecules use analytical frozen cores
 ([Ne], [Ar], [Ar]3$d^{10}$); the frozen-core energy enters only
@@ -411,9 +412,14 @@ Gaussian raw Jordan-Wigner baselines.
 \begin{table*}[t]
 \caption{Quantum resource comparison: GeoVac vs.\ Gaussian raw JW.
   GeoVac composed values use PK classical partitioning
-  (electronic-only 1-norm). Gaussian data: computed from
-  OpenFermion (STO-3G) and Trenev et al.~\cite{Trenev2025}
-  (6-31G, cc-pVDZ).  ``---'' indicates data not available.}
+  (electronic-only 1-norm); the GeoVac--Gaussian Pauli/QWC multipliers
+  (e.g.\ $2.7\times$) use the pair-diagonal ERI rule (Sec.~\ref{sec:eri_rule})
+  and re-price toward parity under the exact rule.  The Gaussian Pauli
+  counts were computed independently via the OpenFermion/Qiskit-Nature
+  pipeline (Trenev et al.~\cite{Trenev2025}---a vibrational-spectra
+  resource study---is cited for the resource-estimation methodology and the
+  $Q^{3.9\text{--}4.3}$ Gaussian-scaling range, not for these specific
+  electronic-structure counts).  ``---'' indicates data not available.}
 \label{tab:resources}
 \begin{ruledtabular}
 \begin{tabular}{llccccc}
@@ -444,7 +450,9 @@ Values $> 1$ favor GeoVac; values $< 1$ favor Gaussian.}
 
 The comparison is most favorable for LiH, where the GeoVac composed
 Hamiltonian has $2.7\times$ fewer Pauli terms and $13\times$ fewer
-QWC measurement groups than Gaussian STO-3G, with a nearly identical
+QWC measurement groups than Gaussian STO-3G (these absolute multipliers
+use the pair-diagonal ERI rule, Sec.~\ref{sec:eri_rule}; near parity under
+the exact rule), with a nearly identical
 electronic 1-norm (33.3 vs.\ 34.3~Ha).  Against larger Gaussian bases,
 the advantage grows: $190\times$ fewer Pauli terms than cc-pVDZ.
 
@@ -499,8 +507,8 @@ For fault-tolerant QPE, the relevant cost metric is the Pauli 1-norm
 $\lambda = \sum_j |c_j|$, which determines the Trotter step
 count.\footnote{%
 The GH-convergence theorem on the GeoVac spectral
-triple~\cite{GeoVac_Paper38} (Latrémolière propinquity
-$\Lambda(T_{n_{\max}}, T_{S^3}) \le C_3 \gamma_{n_{\max}}$ with
+triple~\cite{GeoVac_Paper38} (van Suijlekom state-space Gromov--Hausdorff
+distance $\Lambda(T_{n_{\max}}, T_{S^3}) \le C_3 \gamma_{n_{\max}}$ with
 $\gamma_{n_{\max}} \to 0$) admits a single-particle
 Lipschitz-distortion \emph{heuristic} estimate
 $\|H_\infty - H_{n_{\max}}\|_{\rm op}
@@ -557,12 +565,12 @@ T3 output). $N_{\mathrm{Pauli}}^{\mathrm{rel}}$: non-identity Pauli
 string count in the $(\kappa, m_j)$-labeled JW encoding. $\lambda_{\mathrm{ni}}$:
 non-identity Hamiltonian 1-norm. QWC: greedy qubit-wise-commuting
 group count. ``scalar'' repeats the spinless benchmark at the same
-molecular spec topology. Sunaga ratio = $N_{\mathrm{Pauli}}^{\mathrm{rel}} / 47\,099$,
-the single calibrated Sunaga RaH-18q cell~\cite{Sunaga2025}.}
+molecular spec topology. Swain ratio = $N_{\mathrm{Pauli}}^{\mathrm{rel}} / 47\,099$,
+the single calibrated Swain RaH-18q cell~\cite{Swain2022}.}
 \label{tab:paper20_tier2}
 \begin{ruledtabular}
 \begin{tabular}{cccccccc}
-Molecule & $n_{\max}$ & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & $N_{\mathrm{Pauli}}^{\mathrm{sc}}$ & $\lambda_{\mathrm{ni}}$ (Ha) & QWC & Sunaga ratio \\
+Molecule & $n_{\max}$ & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & $N_{\mathrm{Pauli}}^{\mathrm{sc}}$ & $\lambda_{\mathrm{ni}}$ (Ha) & QWC & Swain ratio \\
 \hline
 LiH & 2 & 30 &  1\,413 & 333    &  29.97 &  121 & 0.030$\times$ \\
 LiH & 3 & 84 & 89\,226 & 7\,878 & 204.93 & 11\,865 & 1.895$\times$ \\
@@ -573,11 +581,11 @@ CaH & 3 & 56 & 59\,484 & 5\,252 & 125.36 & 11\,843 & 1.263$\times$ \\
 SrH & 2 & 20 &    942  & 223    &  18.68 &  111 & 0.020$\times$ \\
 BaH & 2 & 20 &    942  & 223    &  18.68 &  111 & 0.020$\times$ \\
 \hline\hline
-\multicolumn{8}{l}{\footnotesize Sunaga RaH-18q~\cite{Sunaga2025}: 47\,099 Pauli (rel), 12\,556 Pauli (non-rel), $Q = 18$.} \\
+\multicolumn{8}{l}{\footnotesize Swain RaH-18q~\cite{Swain2022}: 47\,099 Pauli (rel), 12\,556 Pauli (non-rel), $Q = 18$.} \\
 \multicolumn{8}{l}{\footnotesize SrH, BaH added Sprint 3 (v2.14.0) via [Kr] and [Xe] frozen cores (\texttt{geovac/neon\_core.py}).} \\
 \multicolumn{8}{l}{\footnotesize CaH/SrH/BaH at $Q=20$ bit-identical ($N_{\mathrm{Pauli}}^{\mathrm{rel}} = 942$, $\lambda_{\mathrm{ni}} = 18.68$, QWC $= 111$): isostructural invariance.} \\
 \multicolumn{8}{l}{\footnotesize Sprint 4 Track TR (v2.15.0): rel Pauli counts corrected 1.76$\times$ (n=2) / 1.92$\times$ (n=3) upward via missing jj reduced-matrix-element phase fix.} \\
-\multicolumn{8}{l}{\footnotesize Sunaga SI Tables S1--S3 (per-molecule matched-$Q$ data): accessibility \textbf{deferred}.} \\
+\multicolumn{8}{l}{\footnotesize Swain et al.\ SI Tables S1--S3 (per-molecule matched-$Q$ data): accessibility \textbf{deferred}.} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
@@ -586,13 +594,13 @@ Reading Table~\ref{tab:paper20_tier2}:
 
 \begin{itemize}
   \item At $n_{\max}=2$, all GeoVac molecules sit at
-    $0.02$--$0.03\times$ the Sunaga RaH-18q Pauli count at native
+    $0.02$--$0.03\times$ the Swain RaH-18q Pauli count at native
     $Q \in \{20, 30\}$. Projected to matched $Q = 18$ via the
     O($Q^{2.5}$) scaling law of Paper~14 and the
     Tier 2 $\sim 4.2\times$ rel/scalar multiplier (post-TR), the advantage is
     $80\times$--$120\times$.
   \item At $n_{\max}=3$, the absolute GeoVac Pauli count overtakes
-    Sunaga at matched $Q$ (LiH/BeH reach 1.9$\times$ of the RaH-18q
+    Swain et al.\ at matched $Q$ (LiH/BeH reach 1.9$\times$ of the RaH-18q
     number at $Q = 84$; CaH sits at $1.26\times$ at $Q = 56$). This
     is the expected sparsity-exponent regime: as $l_{\max}$ grows,
     the composed architecture's per-block sparsity advantage narrows.
@@ -601,8 +609,8 @@ Reading Table~\ref{tab:paper20_tier2}:
     relativistic coupling. For LiH $n_{\max}=3$, scalar gives
     170.59 Ha and rel gives 204.93 Ha ($+20\%$); for CaH,
     96.45 Ha $\to$ 125.36 Ha ($+30\%$). The modest inflation is
-    favorable relative to Sunaga's DC-UCCSD 1-norm (not reported
-    in Sunaga's main text).
+    favorable relative to Swain et al.'s DC-UCCSD 1-norm (not reported
+    in Swain et al.'s main text).
   \item The QWC column is inflated ($\sim 8\times$ in the worst case).
     The richer $jj$-coupled Pauli structure distributes the
     Hamiltonian across more distinct Pauli words; VQE measurement
@@ -610,9 +618,9 @@ Reading Table~\ref{tab:paper20_tier2}:
     or tensor-factorized measurement strategies.
 \end{itemize}
 
-\textbf{Deferred Sunaga cells.} The per-molecule Pauli counts, 1-norm,
+\textbf{Deferred Swain et al.\ cells.} The per-molecule Pauli counts, 1-norm,
 and QWC values for BeH, MgH, CaH, SrH, BaH at $Q = 18$ are reported
-in Sunaga et al.~\cite{Sunaga2025} Supplemental Material Tables
+in Swain et al.~\cite{Swain2022} Supplemental Material Tables
 S1--S3. These were not extracted in the Tier 2 sprint timeframe. The
 footnote row in Table~\ref{tab:paper20_tier2} marks this as deferred;
 sharpening the head-to-head at matched $Q = 18$ per-molecule is
@@ -633,14 +641,14 @@ matched-$Q$ per-molecule comparison. This is a structural difference
 from Gaussian-basis approaches where $Q$ is tunable by choice of
 basis set (STO-3G vs cc-pVDZ vs cc-pVTZ). At native $Q=20$,
 CaH/SrH/BaH relativistic Hamiltonians give $942$ Pauli terms (post-TR,
-Sprint 4 v2.15.0), which is $0.020\times$ Sunaga's RaH-18q ($50\times$
+Sprint 4 v2.15.0), which is $0.020\times$ Swain et al.'s RaH-18q ($50\times$
 fewer) and preserves a sparsity win under any pessimistic $Q=20 \to Q=18$
 correction.
 
 \textbf{Accuracy caveats.} The Tier 2 spin-ful encoding inherits the
 composed architecture's $5$--$26\,\%$ $R_{\mathrm{eq}}$ error from
 Paper~17 and the Breit--Pauli leading-order $Z\alpha^2$ approximation
-from Paper~14. Sunaga's DC-UCCSD is
+from Paper~14. Swain et al.'s DC-UCCSD is
 accuracy-targeted ($0.47\%$ vs CASCI for CaH). Table~\ref{tab:paper20_tier2}
 is a \emph{resource estimation} table at fixed single-point
 geometries, not a spectroscopic accuracy benchmark.
@@ -822,11 +830,12 @@ treatment.
 
 Transition metal hydrides (Table~\ref{tab:transition_metals}) fall
 \emph{below} the 11.10 coefficient: all ten first-row hydrides have
-Pauli/$Q = 9.23$.  This reflects the sparser ERI tensor of $d$-orbital
-blocks (4.0\% density vs.\ 8.9\% for $s$+$p$), which produce fewer
-Pauli terms per qubit.  The 11.10 coefficient is therefore an upper
-bound that applies to $s$/$p$-dominated main-group molecules;
-$d$-orbital systems are cheaper.
+Pauli/$Q = 9.23$ under the pair-diagonal ERI approximation
+(Sec.~\ref{sec:eri_rule}).  This lower ratio is an \emph{artifact} of the
+pair-diagonal rule dropping more $m$-swap integrals at higher angular
+momentum: under the exact global-$M_L$ rule the $d$-block ratio is
+\emph{higher} (30.0 vs.\ 27.9), not lower---so $d$-orbital blocks are not
+genuinely cheaper to encode than $s$/$p$ blocks at the exact rule.
 
 \subsection{Installation and usage}
 
@@ -860,8 +869,8 @@ Every \texttt{GeoVacHamiltonian} returned by the public API
 carries a metadata field \texttt{propinquity\_bound} that
 evaluates the closed-form
 $\Lambda \le C_3 \cdot \gamma_{n_{\max}}$ from
-\cite{GeoVac_Paper38} (Paper~38, the SU(2)
-propinquity convergence theorem) at the cutoff $n_{\max}$
+\cite{GeoVac_Paper38} (Paper~38, the van Suijlekom
+state-space Gromov--Hausdorff convergence theorem) at the cutoff $n_{\max}$
 used to build the Hamiltonian.  The L2 central-Fejér sum-rule
 gives $\gamma_{n_{\max}=2,3,4} = 2.0746 / 1.6101 / 1.3223$
 with asymptotic rate $4/\pi$ (the Hopf-base measure
@@ -986,9 +995,10 @@ enters only through the identity operator and does not affect
 quantum measurement cost.
 The full first transition series ($Z = 21$--30) is implemented as
 hydrides with [Ar] frozen cores and isolated $d$-orbital valence blocks.
-$d$-Orbital blocks are structurally sparser than $s$/$p$ blocks
-(4.0\% vs.\ 8.9\% ERI density), producing a lower Pauli-per-qubit
-ratio.  The atomic classifier handles all ten elements automatically,
+$d$-Orbital blocks have a lower Pauli-per-qubit ratio (9.23 vs.\ 11.10)
+\emph{under the pair-diagonal ERI approximation} (Sec.~\ref{sec:eri_rule});
+under the exact global-$M_L$ rule this reverses ($d$-block denser).
+The atomic classifier handles all ten elements automatically,
 including the anomalous configurations of Cr ($3d^5 4s^1$) and Cu ($3d^{10} 4s^1$).
 Main-group third-row atoms
 ($Z=19$--20 and $Z=31$--36) are supported via [Ar]
@@ -1009,10 +1019,11 @@ the bottleneck, this tradeoff is favorable.
 
 The GeoVac Hamiltonian library provides structurally sparse qubit
 Hamiltonians for molecular quantum simulation across three rows
-of the periodic table (38~molecules, $Z = 1$--36), including
-multi-center systems with multiple heavy atoms and the full first
-transition series as hydrides (ScH through ZnH) whose $d$-orbital blocks are sparser than
-main-group $s$/$p$ blocks.  The
+of the periodic table (37 systems---35 composed molecules plus He and
+H$_2$---$Z = 1$--36), including multi-center systems with multiple heavy
+atoms and the full first transition series as hydrides (ScH through ZnH;
+their lower $d$-block Pauli/$Q$ ratio is a pair-diagonal-rule artifact,
+Sec.~\ref{sec:eri_rule}, not a sparser exact selection rule).  The
 structural sparsity---$O(Q^{2.5})$ Pauli scaling from Gaunt selection
 rules---is confirmed universal across all three rows and all molecular
 topologies, independent of the core treatment (Level~3-solved or frozen).
@@ -1033,7 +1044,7 @@ hydrides, the qubit Hamiltonian's potential-energy surface does not
 exhibit an interior minimum at $n_{\max}=2$ under any of the engineering
 configurations we tested (Section~\ref{subsec:scope_boundary}).  The
 framework's primary value proposition is structural sparsity with
-quantitative truncation-error bounds (Paper~38 propinquity, exposed as
+quantitative truncation-error bounds (Paper~38 state-space GH bound, exposed as
 metadata on every Hamiltonian export), not energy-accuracy parity with
 CCSD(T) across the full periodic-table-row range.
 

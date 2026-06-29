@@ -220,10 +220,17 @@ REGISTRY = [
         # zombie signatures: the 2.7x-vs-STO-3G market test; the d-block-sparser / 9.23-as-
         # genuine-selection-rule claim. (The LEGIT disclosed forms carry 'pair-diagonal' /
         # 'approximation' nearby and are exempted.)
-        "pattern": r"2\.7\s*(?:x|×|\\times|\$\\times\$)?\s*(?:fewer|less)"
-                   r"|9\.23[^.\n]{0,80}(?:Gaunt|restrictive|sparser|selection\s+rule)"
+        # NOTE: broadened 2026-06-28 after the group4 first-cert FAIL surfaced
+        # ~10 C16-dodging phrasings ("cheaper to encode", "more economical",
+        # "structurally sparser than s/p", bare "2.7x Pauli") -- the reviewers
+        # caught them; these patterns now backstop the recurrence.
+        "pattern": r"2\.7\s*(?:x|×|\\times|\$\\times\$)?\s*(?:fewer|less|Pauli)"
+                   r"|9\.23[^.\n]{0,80}(?:Gaunt|restrictive|sparser|selection\s+rule|economical|cheaper)"
                    r"|(?:lower|sparser)[^.\n]{0,40}9\.23"
-                   r"|d-?orbital[^.\n]{0,60}(?:sparser|more\s+restrictive\s+Gaunt)",
+                   r"|d-?orbital[^.\n]{0,60}(?:sparser|more\s+restrictive\s+Gaunt|cheaper|economical)"
+                   r"|d-electron[^.\n]{0,40}cheaper"
+                   r"|structurally\s+sparser\s+than\s+\$?s\$?/?\$?p\$?"
+                   r"|more\s+economical\s+angular",
         "exempt_if_nearby": r"pair-diagonal|pair\s+diagonal|approximation|global-M_L"
                             r"|global\s+rule|global-?ML|exact\s+rule|\bparity\b|CF-1|disclos"
                             r"|left\s+on\s+the\s+table|artifact\s+of",

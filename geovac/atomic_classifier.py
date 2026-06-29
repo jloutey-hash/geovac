@@ -553,7 +553,8 @@ class AtomClassification:
     nu : int
         Angular quantum number N - 2 (Paper 16).
     mu_free : float
-        Pauli centrifugal cost 2 * nu^2.
+        Pauli centrifugal cost = SO(3N) Casimir nu*(nu+3N-2)/2
+        = 2(N-2)(N-1) for nu=N-2 (Paper 16 eq:mu_formula).
     pk_params : Optional[Dict[str, float]]
         Phillips-Kleinman parameters {'A': float, 'B': float}, or None.
     pk_source : str
@@ -673,7 +674,7 @@ def classify_atom(Z: int) -> AtomClassification:
     if Z not in _ATOM_DATA:
         N = Z  # neutral atom
         nu = max(N - 2, 0)
-        mu_free = 2.0 * nu ** 2 if nu > 0 else 0.0
+        mu_free = nu * (nu + 3 * N - 2) / 2.0 if nu > 0 else 0.0
 
         if 39 <= Z <= 54:
             note = (
@@ -720,7 +721,7 @@ def classify_atom(Z: int) -> AtomClassification:
     data = _ATOM_DATA[Z]
     N = Z  # neutral atom
     nu = max(N - 2, 0)
-    mu_free = 2.0 * nu ** 2 if nu > 0 else 0.0
+    mu_free = nu * (nu + 3 * N - 2) / 2.0 if nu > 0 else 0.0
 
     # Determine PK parameters
     pk_source = data['pk_source']

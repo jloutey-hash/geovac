@@ -300,12 +300,15 @@ class TestResourceTable:
     ]
 
     def _build(self, spec_name, max_n, kwargs):
-        import geovac.composed_qubit as cq
+        import geovac.molecular_spec as ms
         from geovac.balanced_coupled import build_balanced_hamiltonian
-        spec_func = getattr(cq, spec_name)
-        # Determine R for balanced builder
+        spec_func = getattr(ms, spec_name)
+        # R / molecule-specific R aliases go to the balanced builder, NOT the
+        # spec factory (hydride_spec rejects R_SH/R_PH/R_SiH).
         R_val = kwargs.get('R') or kwargs.get('R_SH') or kwargs.get('R_PH') or kwargs.get('R_SiH')
-        spec = spec_func(max_n=max_n, **kwargs)
+        spec_kwargs = {k: v for k, v in kwargs.items()
+                       if k not in ('R_SH', 'R_PH', 'R_SiH')}
+        spec = spec_func(max_n=max_n, **spec_kwargs)
         result = build_balanced_hamiltonian(spec, R=R_val)
         return result
 

@@ -222,3 +222,24 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   pre-validated GREEN** incl. the new synthesis — C11/C13/C14/C15/C16 PASS, synthesis compiles
   clean (C11 caught + fixed two wrong bibitem titles in the draft). The 5 known drifts + 14
   NO-TEST gaps (above) folded in as enumeration targets. First bite = whole-group (proposed; PI confirms).
+- 2026-06-28 — **FROZEN + first cert (whole-group) = FAIL → REMEDIATED (v4.54.0).** Panel
+  FULLY CALIBRATED (sensitivity **8/8**, specificity **5/5** — every gating dimension's plant
+  caught, zero false positives; the disclosed `sec:eri_rule` correctly NOT flagged → the new
+  framing dimension is calibrated). Verified MATERIAL defects (seeds excluded), all remediated:
+  (1) ~10 C16-dodging **framing zombies** (P14/P20 undisclosed d-block-"cheaper/sparser/
+  economical" + "2.7×" market-test loci) — disclosed; **C16 `pair-diagonal-as-exact-sparsity`
+  pattern broadened** to catch the dodgers; (2) **μ_free code bug** (`atomic_classifier` `2ν²`
+  → Casimir `ν(ν+3N−2)/2`; test + 3 P16 loci re-pinned; diagnostic-only, no Hamiltonian
+  affected); (3) **`test_balanced_row2` RED** (12 fails → 39 pass; spec-factory module +
+  R-alias kwargs); (4) **trenev2025 misattribution** (15 P14 loci + P20 caption → GeoVac
+  OpenFermion recompute, Trenev = methodology + range); (5) **"~1/M²"→"~1/M"** (9 P14 loci);
+  (6) **P23 "conjecture"→"observation"** (C5); (7) **Paper-38 "Latrémolière propinquity"→
+  "state-space GH"** (P14/P20/P23/synthesis/bibitem); (8) **P20 "38 molecules"→37**. All
+  deterministic gates PASS; affected tests green (atomic_classifier 197, balanced_row2 39,
+  eri_rule 3); all 5 papers compile clean. **(9) placeholder cites RESOLVED** (PI-directed
+  explorer search): `Sunaga2025`→**Swain et al. arXiv:2211.06907** (was misattributed; RaH
+  18q/47,099 numbers exact, re-keyed across P14/P20/.bib), `caesura2025`→**PRX Quantum 6,
+  030337** (+BLISS-THC), `ChildsBerry`→**arXiv:1501.01715**, `MartinezYRomero2004`→
+  **physics/0402061**, `BJL`→**withdrawn** (unverifiable). C4 clean; P14/P20 recompile clean.
+  **All 9 material findings remediated** → ready to re-run `/qa group4` for the certified PASS.
+  Per-run detail: CHANGELOG v4.54.0.

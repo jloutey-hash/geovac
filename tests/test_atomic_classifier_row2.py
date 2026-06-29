@@ -128,15 +128,17 @@ class TestQuantumNumbersRow2:
     def test_nu(self, Z: int, nu: int) -> None:
         assert classify_atom(Z).nu == nu
 
+    # mu_free = SO(3N) Casimir nu(nu+3N-2)/2 = 2(N-2)(N-1) for nu=N-2
+    # (Paper 16 eq:mu_formula); N=Z for neutral atoms.
     @pytest.mark.parametrize("Z, mu_free", [
-        (11, 2.0 * 9**2),    # 162.0
-        (12, 2.0 * 10**2),   # 200.0
-        (13, 2.0 * 11**2),   # 242.0
-        (14, 2.0 * 12**2),   # 288.0
-        (15, 2.0 * 13**2),   # 338.0
-        (16, 2.0 * 14**2),   # 392.0
-        (17, 2.0 * 15**2),   # 450.0
-        (18, 2.0 * 16**2),   # 512.0
+        (11, 2.0 * 9 * 10),    # 180.0
+        (12, 2.0 * 10 * 11),   # 220.0
+        (13, 2.0 * 11 * 12),   # 264.0
+        (14, 2.0 * 12 * 13),   # 312.0
+        (15, 2.0 * 13 * 14),   # 364.0
+        (16, 2.0 * 14 * 15),   # 420.0
+        (17, 2.0 * 15 * 16),   # 480.0
+        (18, 2.0 * 16 * 17),   # 544.0
     ])
     def test_mu_free(self, Z: int, mu_free: float) -> None:
         assert classify_atom(Z).mu_free == pytest.approx(mu_free)
@@ -197,7 +199,7 @@ class TestSupportRow2:
         c = classify_atom(19)
         assert c.N_electrons == 19
         assert c.nu == 17  # 19 - 2
-        assert c.mu_free == pytest.approx(2.0 * 17**2)
+        assert c.mu_free == pytest.approx(2.0 * 17 * 18)  # 612 = 2(N-2)(N-1)
 
 
 # ---------------------------------------------------------------------------
@@ -218,7 +220,7 @@ class TestDataclassRow2:
         assert c.n_valence_electrons == 1
         assert c.Z_eff_valence == pytest.approx(1.0)
         assert c.nu == 9
-        assert c.mu_free == pytest.approx(162.0)
+        assert c.mu_free == pytest.approx(180.0)  # 2*9*10 = 2(N-2)(N-1)
         assert c.pk_params is None
         assert c.pk_source == 'frozen_core'
         assert c.core_config == '1s2 2s2 2p6'
@@ -239,7 +241,7 @@ class TestDataclassRow2:
         assert c.n_valence_electrons == 8
         assert c.Z_eff_valence == pytest.approx(8.0)
         assert c.nu == 16
-        assert c.mu_free == pytest.approx(512.0)
+        assert c.mu_free == pytest.approx(544.0)  # 2*16*17 = 2(N-2)(N-1)
         assert c.pk_params is None
         assert c.pk_source == 'frozen_core'
         assert c.core_config == '1s2 2s2 2p6'

@@ -132,17 +132,19 @@ class TestQuantumNumbers:
     def test_nu(self, Z: int, nu: int) -> None:
         assert classify_atom(Z).nu == nu
 
+    # mu_free = SO(3N) Casimir nu(nu+3N-2)/2 = 2(N-2)(N-1) for nu=N-2
+    # (Paper 16 eq:mu_formula); N=Z for neutral atoms.
     @pytest.mark.parametrize("Z, mu_free", [
         (1, 0.0),
         (2, 0.0),
-        (3, 2.0),     # 2 * 1^2
-        (4, 8.0),     # 2 * 2^2
-        (5, 18.0),    # 2 * 3^2
-        (6, 32.0),    # 2 * 4^2
-        (7, 50.0),    # 2 * 5^2
-        (8, 72.0),    # 2 * 6^2
-        (9, 98.0),    # 2 * 7^2
-        (10, 128.0),  # 2 * 8^2
+        (3, 4.0),     # 2*(1)(2)
+        (4, 12.0),    # 2*(2)(3)
+        (5, 24.0),    # 2*(3)(4)
+        (6, 40.0),    # 2*(4)(5)
+        (7, 60.0),    # 2*(5)(6)
+        (8, 84.0),    # 2*(6)(7)
+        (9, 112.0),   # 2*(7)(8)
+        (10, 144.0),  # 2*(8)(9)
     ])
     def test_mu_free(self, Z: int, mu_free: float) -> None:
         assert classify_atom(Z).mu_free == pytest.approx(mu_free)
