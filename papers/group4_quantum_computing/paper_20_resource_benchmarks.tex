@@ -36,8 +36,10 @@ a spectral graph theory framework (GeoVac) that exploits natural coordinate
 separations in molecular electronic structure, producing block-diagonal
 electron repulsion integrals and Gaunt-enforced selection rules that persist
 through Jordan-Wigner encoding. For the composed architecture (PK-partitioned),
-LiH requires 334 Pauli terms at 30 qubits versus 907 for Gaussian STO-3G
-at 12 qubits, with 13$\times$ fewer qubitwise-commuting measurement groups.
+the composed LiH Hamiltonian is near parity with minimal-basis STO-3G on
+Pauli count (334 vs.\ STO-3G's 276 reduced / 907 raw) while using more
+qubits; the decisive resource advantages are the $O(Q^{2.5})$ Pauli scaling
+and a 190$\times$ reduction versus cc-pVDZ.
 The balanced coupled architecture (PK-free) binds LiH with an FCI minimum
 at a computed $R_{\mathrm{eq}} = 3.227$~bohr (7.0\% above the experimental
 3.015~bohr) at $n_{\max}=2$ (878 Pauli terms, 30 qubits); a single-point
@@ -461,15 +463,15 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
 Values $> 1$ favor GeoVac; values $< 1$ favor Gaussian.}
 \end{table*}
 
-The comparison is most favorable for LiH, where the GeoVac composed
-Hamiltonian has $2.7\times$ fewer Pauli terms and $13\times$ fewer
-QWC measurement groups than Gaussian STO-3G (these absolute multipliers
-use the pair-diagonal ERI rule, Sec.~\ref{sec:eri_rule}, and the raw-JW
-STO-3G count; they narrow toward parity under the exact rule \emph{or}
-under a uniform 2-qubit-reduced convention---see the caption of
-Table~\ref{tab:resources}), with a nearly identical
-electronic 1-norm (33.3 vs.\ 34.3~Ha).  Against larger Gaussian bases,
-the advantage grows: $190\times$ fewer Pauli terms than cc-pVDZ.
+For the small-molecule minimal-basis case, the composed LiH Hamiltonian is
+near parity with Gaussian STO-3G on Pauli count---334 terms vs.\ STO-3G's
+276 (qubit-reduced) or 907 (raw JW), with a nearly identical electronic
+1-norm (33.3 vs.\ 34.3~Ha)---while using more qubits (30 vs.\ 10--12).  The
+favorable $2.7\times$/$13\times$ multipliers hold only against the
+un-reduced raw-907 baseline and under the pair-diagonal ERI rule
+(Sec.~\ref{sec:eri_rule}); they are not the framework's load-bearing
+advantage.  That advantage appears against larger Gaussian bases, where the
+gap widens decisively: $190\times$ fewer Pauli terms than cc-pVDZ.
 
 For H$_2$O, the composed Hamiltonian has \emph{more} Pauli terms than
 STO-3G (778 vs.\ 551, advantage $0.71\times$) because the GeoVac

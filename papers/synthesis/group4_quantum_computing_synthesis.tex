@@ -226,14 +226,14 @@ The library exposes two composed-molecular architectures with
 complementary strengths.  The \emph{composed} (pseudopotential, PK)
 architecture is the sparser of the two:\ LiH requires $334$ Pauli terms
 at $30$ qubits, with $13\times$ fewer QWC groups than the Gaussian STO-3G
-reference at $12$ qubits.  The market-test comparison ``$334$ versus
-$907$ STO-3G Pauli terms'' is stated under the pair-diagonal rule; under
-the exact global-$M_L$ rule LiH re-prices to $838$ terms, i.e.\ near
-parity ($0.92\times$) with STO-3G's $907$---so the broad
-``one-to-three-orders-of-magnitude sparser'' headline rests on the
-scaling gap and the multi-center block structure, while the specific
-small-system market-test line is sensitive to the ERI rule and is
-reported with that caveat.  The \emph{balanced coupled} (PK-free)
+reference at $12$ qubits.  The small-system market-test comparison ``$334$ versus $907$ STO-3G Pauli
+terms'' is near parity once conventions are matched:\ STO-3G's qubit-reduced
+count is $276$ (vs.\ the composed $334$), and under the exact global-$M_L$
+rule LiH re-prices to $838$ ($0.92\times$ the raw $907$).  The broad
+``one-to-three-orders-of-magnitude sparser'' advantage therefore rests on
+the scaling gap and the multi-center block structure, \emph{not} on the
+small-molecule minimal-basis count---which is convention-sensitive and near
+parity.  The \emph{balanced coupled} (PK-free)
 architecture trades sparsity for chemistry:\ it binds LiH with an FCI
 minimum at a computed $R_{\mathrm{eq}}=3.227$~bohr (7.0\% above the
 experimental 3.015~bohr) at $n_{\max}=2$ ($878$ Pauli terms, $30$ qubits);
