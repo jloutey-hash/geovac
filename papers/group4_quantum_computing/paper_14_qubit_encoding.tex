@@ -22,9 +22,9 @@ exhibit structurally favorable Pauli decompositions for quantum simulation.
 After Jordan--Wigner transformation, the GeoVac lattice Hamiltonian yields
 $O(Q^{3.15})$ Pauli string terms in the number of qubits~$Q$, compared
 to $O(Q^{4+})$ for conventional Gaussian-basis Hamiltonians
-(Trenev~\textit{et al.}~report a $Q^{3.9}$--$Q^{4.3}$
-range~\cite{trenev2025}; our own OpenFermion recomputation gives
-$Q^{4.25}$ for LiH and $Q^{3.92}$ for H$_2$O).  The advantage originates in angular momentum
+(our own OpenFermion recomputation gives
+$Q^{4.25}$ for LiH and $Q^{3.92}$ for H$_2$O, spanning $Q^{3.9}$--$Q^{4.3}$;
+methodology of Trenev~\textit{et al.}~\cite{trenev2025}).  The advantage originates in angular momentum
 selection rules---enforced by Gaunt integrals at the two-electron integral
 level---which cause the electron repulsion integral (ERI) tensor density
 to decay as $\sim 1/M$ (empirically $\approx M^{-0.85}$--$M^{-1}$) with
@@ -49,7 +49,8 @@ repulsion integrals with a universal Pauli scaling of $O(Q^{2.5})$,
 independent of molecular topology (exponent spread~$0.02$ across three
 molecules).  At equal qubit counts, this represents two or more
 orders of magnitude fewer Pauli terms than Gaussian baselines
-(range~\cite{trenev2025}; counts recomputed via OpenFermion)---an
+(counts recomputed via OpenFermion, $Q^{3.9}$--$Q^{4.3}$ span;
+methodology~\cite{trenev2025})---an
 advantage that grows with system size
 due to the $\sim 1.5$ exponent gap.  These comparisons are at matched
 qubit counts, not matched accuracy; the composed basis carries
@@ -323,8 +324,8 @@ cc-pVDZ produces 23{,}189 terms at 100\% ERI density---a
   lines show power-law fits; gray dotted lines indicate $Q^2$ and $Q^4$
   reference scaling.  The GeoVac exponent ($\alpha = 3.15$) is
   significantly below the $Q^{3.9}$--$Q^{4.3}$ Gaussian molecular
-  range~\cite{trenev2025}; the specific exponents
-  ($\alpha = 3.92$--$4.25$) are our own OpenFermion recomputation.}
+  range (our own OpenFermion recompute, with specific exponents
+  $\alpha = 3.92$--$4.25$; methodology~\cite{trenev2025}).}
   \label{fig:pauli_scaling}
 \end{figure}
 
@@ -340,7 +341,7 @@ Trenev~\textit{et al.}~\cite{trenev2025} (whose own target is
 vibrational spectra), giving system-specific exponents: $\alpha = 4.25$
 for LiH ($R^2 = 0.999$, 3~basis sets) and $\alpha = 3.92$ for H$_2$O
 ($R^2 > 0.999$, 3~basis sets), both within the $Q^{3.9}$--$Q^{4.3}$
-range reported by that work.  These supersede our earlier estimate
+span of our recomputation.  These supersede our earlier estimate
 of $\alpha_{\mathrm{Gaussian}} \approx 4.6$ from synthetic
 integrals~\cite{helgaker2000}.
 
@@ -839,8 +840,8 @@ conservative (GeoVac uses more qubits per orbital than the Gaussian
 baseline).
 
 These recomputed molecular exponents ($\alpha = 4.25$ for LiH,
-$\alpha = 3.92$ for H$_2$O; both within the $Q^{3.9}$--$Q^{4.3}$ range
-of Ref.~\cite{trenev2025}) supersede the earlier estimate of
+$\alpha = 3.92$ for H$_2$O; both within the $Q^{3.9}$--$Q^{4.3}$ span
+of our recomputation) supersede the earlier estimate of
 $\alpha \approx 4.6$ obtained from synthetic integrals.  Both remain
 well above the GeoVac single-geometry exponent of~3.15 and the
 composed-system exponent of~2.5 (Sec.~\ref{sec:composed}).
@@ -1805,51 +1806,51 @@ times $\alpha^2$, no radial quadrature, diagonal. Darwin and
 mass-velocity corrections are explicitly out of scope at Tier 2;
 sub-MHz spectroscopic accuracy is not a design goal.
 
-\subsection{Swain et al.\ head-to-head}
+\subsection{Chawla et al.\ head-to-head}
 \label{subsec:sunaga}
 
 Table~\ref{tab:sunaga} compares GeoVac's Tier 2 relativistic Pauli
-counts to Swain et al.~\cite{Swain2022}'s
+counts to Chawla et al.~\cite{Chawla2024}'s
 OpenFermion-Dirac / cv2z construction at $Q = 18$. The only fully
-calibrated Swain cell available in the main paper is RaH at 18q
-(47\,099 relativistic Pauli strings); per-molecule counts for BeH,
+calibrated Chawla cell available in the main paper is RaH at 18q
+(12\,556 relativistic Pauli strings); per-molecule counts for BeH,
 MgH, CaH, SrH, BaH at 18q are in the Supplemental Material Tables
 S1--S3, which are \textbf{flagged as deferred} from this comparison
 (inaccessible in the sprint timeframe).
 
 \begin{table}[h]
-\caption{GeoVac Tier 2 vs.\ Swain et al.~\cite{Swain2022}. Native-$Q$
+\caption{GeoVac Tier 2 vs.\ Chawla et al.~\cite{Chawla2024}. Native-$Q$
 GeoVac numbers at $n_{\max}=2$ compared to the single available
-Swain cell (RaH-18q). The ``projected'' column uses the
+Chawla cell (RaH-18q). The ``projected'' column uses the
 Paper~14 \S\ref{sec:composed} O($Q^{2.5}$) composed scaling
 law combined with the Tier 2 rel/scalar multiplier ($\sim$4.2$\times$)
 to extrapolate GeoVac to matched $Q = 18$.}
 \label{tab:sunaga}
 \begin{ruledtabular}
 \begin{tabular}{cccccc}
-Molecule & $Q$ (GeoVac) & GeoVac $N_{\mathrm{Pauli}}$ & Swain RaH-18q & Native ratio & Proj.\ at $Q=18$ \\
+Molecule & $Q$ (GeoVac) & GeoVac $N_{\mathrm{Pauli}}$ & Chawla RaH-18q & Native ratio & Proj.\ at $Q=18$ \\
 \hline
-LiH & 30 & 805 & 47\,099 & 0.017$\times$ & 0.004$\times$--0.007$\times$ \\
-BeH & 30 & 805 & 47\,099 & 0.017$\times$ & 0.004$\times$--0.007$\times$ \\
-CaH & 20 & 534 & 47\,099 & 0.011$\times$ & 0.006$\times$--0.008$\times$ \\
+LiH & 30 & 805 & 12\,556 & 0.064$\times$ & 0.015$\times$--0.026$\times$ \\
+BeH & 30 & 805 & 12\,556 & 0.064$\times$ & 0.015$\times$--0.026$\times$ \\
+CaH & 20 & 534 & 12\,556 & 0.043$\times$ & 0.023$\times$--0.030$\times$ \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-Native $Q$ gives GeoVac a $60$--$90\times$ advantage against RaH-18q;
+Native $Q$ gives GeoVac a $16$--$24\times$ advantage against RaH-18q;
 projected to matched $Q = 18$ the advantage widens to
-$\sim 150$--$250\times$. This is structural, not accidental: the
+$\sim 40$--$67\times$. This is structural, not accidental: the
 composed + frozen-core architecture eliminates the large cv2z
-primitive basis that dominates Swain et al.'s 18q Pauli tensor.
+primitive basis that dominates Chawla et al.'s 18q Pauli tensor.
 
-\textbf{Honest caveats on the Swain et al.\ comparison.}
+\textbf{Honest caveats on the Chawla et al.\ comparison.}
 \begin{enumerate}
   \item The RaH-vs-LiH / BeH / CaH comparison is not species-matched.
-    The four cells missing from Swain et al.'s main paper (BeH-18q,
+    The four cells missing from Chawla et al.'s main paper (BeH-18q,
     MgH-18q, CaH-18q, SrH-18q, BaH-18q) would make this a genuine
     head-to-head.
   \item GeoVac composed accuracy is 5--26 \% $R_{\mathrm{eq}}$ error
-    at the matched molecules (Paper 17); Swain et al.'s DC-UCCSD is
+    at the matched molecules (Paper 17); Chawla et al.'s DC-UCCSD is
     accuracy-targeted ($0.47\%$ vs CASCI for CaH). The comparison
     is \emph{resource estimation at fixed single-point geometry},
     not a spectroscopic benchmark.
@@ -1934,7 +1935,7 @@ dominant).
 Three natural extensions are Tier 3+ work:
 \begin{enumerate}
   \item Frozen-core [Kr] infrastructure for SrH, BaH, RaH — would
-    enable direct point-by-point Swain et al.\ comparison at native $Q = 18$
+    enable direct point-by-point Chawla et al.\ comparison at native $Q = 18$
     and close the four deferred cells in Table~\ref{tab:sunaga}.
   \item Martínez-y-Romero Dirac-Coulomb radial recursions to bind
     $\gamma$ — would lift Table~\ref{tab:spinor_resource} from
@@ -2180,19 +2181,18 @@ constraints eliminate the vast majority of the $M^4$ possible ERI entries.
 The surviving entries grow as $O(M^2)$---a quadratic reduction in the
 dominant cost term of Eq.~\eqref{eq:pauli_scaling}.
 
-The $d$-orbital results of Sec.~\ref{sec:d_orbitals} demonstrate that
-this sparsity \emph{increases} with angular momentum: $d$-$d$ ERI
-density is 4.0\% versus 8.9\% for $s$+$p$, because the Gaunt triangle
-inequality $|l_a - l_c| \le k \le l_a + l_c$ allows only $k = 0, 2, 4$
-for $l = 2$, the same three multipole orders as $l = 1$ but distributed
-over a larger angular space ($5 \times 5$ vs.\ $3 \times 3$ magnetic
-quantum number grids).  This is the structural opposite of Gaussian
-bases, where transition metal $d$-orbitals produce the densest ERI
-tensors due to the absence of angular selection rules in the molecular
-orbital basis.  For quantum simulation of strongly correlated $d$-electron
-systems---transition metal complexes, catalytic intermediates---the
-GeoVac lattice offers a structural sparsity advantage that grows with
-the angular complexity of the system.
+The $d$-orbital results of Sec.~\ref{sec:d_orbitals} show that the
+\emph{pair-diagonal} ERI density is lower at higher angular momentum
+($d$-$d$ density 4.0\% vs.\ 8.9\% for $s$+$p$), because the pair-diagonal
+rule drops more $m$-swap integrals as the magnetic grid grows
+($5 \times 5$ for $l = 2$ vs.\ $3 \times 3$ for $l = 1$).  This is a
+property of the \emph{pair-diagonal approximation}, not the exact
+selection rule: under the exact global-$M_L$ Coulomb rule the $d$-block
+is \emph{denser}, not sparser (Sec.~\ref{sec:eri_rule}).  Gaussian bases
+remain near-dense for transition-metal $d$-orbitals regardless of rule;
+the apparent ``advantage that grows with angular complexity'' for the
+GeoVac lattice is therefore an artifact of the pair-diagonal approximation,
+not a genuine structural saving for strongly correlated $d$-electron systems.
 
 \subsubsection{Analytical Pauli count for the $s$+$p$ block}
 \label{sec:111}
@@ -2293,8 +2293,8 @@ orthogonal axes and their benefits are additive.
 symmetries to eliminate redundant qubits.  The GeoVac lattice
 Hamiltonian preserves $S_z$ and particle-number symmetry, so the
 same 2-qubit reduction available to Gaussian encodings applies.
-Indeed, the Gaussian baselines from Trenev~\textit{et
-al.}~\cite{trenev2025} already use this reduction; GeoVac's
+Indeed, our recomputed Gaussian baselines (following the methodology of
+Trenev~\textit{et al.}~\cite{trenev2025}) already use this reduction; GeoVac's
 advantages are reported \emph{without} it, making the comparisons
 conservative.
 
@@ -2967,7 +2967,8 @@ Qiskit, OpenFermion, and PennyLane.  The balanced coupled architecture
 the composed partition Hamiltonian is accurate when solved exactly.
 
 \paragraph{Note added v2.4.0.}
-The molecule library now spans 30 systems ($Z = 1$--36), including
+The molecule library now spans 37 systems (35 composed molecules plus
+the He and H$_2$ reference atoms), including
 two transition metal hydrides: ScH ($Z = 21$, [Ar] frozen core) and
 TiH ($Z = 22$, [Ar] frozen core).  Both use isolated $d$-orbital
 valence blocks ($l_{\min} = l_{\max} = 2$) with ERI density of 4.0\%,
@@ -3185,10 +3186,12 @@ S.~Raman, A.~Mezzacapo, and S.~Mostame,
 ``Refining resource estimation for the quantum computation of
 vibrational molecular spectra through Trotter error analysis,''
 Quantum \textbf{9}, 1630 (2025); arXiv:2311.03719.
-[Cited for the resource-estimation methodology and the
-$Q^{3.9}$--$Q^{4.3}$ Gaussian-baseline scaling exponents.
-The specific LiH and H$_2$O Pauli term counts in
-Table~\ref{tab:gaussian_published} are GeoVac's own
+[Cited for the resource-estimation methodology ONLY; this is a
+vibrational-spectra study and reports no electronic Gaussian
+scaling exponents.  The $Q^{3.92}$/$Q^{4.25}$ LiH/H$_2$O exponents
+(and the $Q^{3.9}$--$Q^{4.3}$ span they bracket), together with the
+specific LiH and H$_2$O Pauli term counts in
+Table~\ref{tab:gaussian_published}, are GeoVac's own
 recomputation via the OpenFermion/Qiskit-Nature pipeline,
 applied to electronic-structure Hamiltonians rather than the
 vibrational-structure target of the cited paper.]
@@ -3204,8 +3207,12 @@ GeoVac Paper~19 (2026).
 % 2026-06-28 by literature search:
 %   ChildsBerry          -> Berry, Childs & Kothari, FOCS 2015 (arXiv:1501.01715)
 %   MartinezYRomero2004  -> arXiv:physics/0402061 (2004)
-%   Sunaga2025           -> RE-KEYED to Swain2022 (arXiv:2211.06907); the
-%                           RaH-18q benchmark was mis-attributed to Sunaga.
+%   Sunaga2025           -> RE-KEYED to Chawla2024 (arXiv:2406.04992 =
+%                           Phys. Rev. A 111, 022817 (2025)); the RaH-18q
+%                           benchmark was mis-attributed to Sunaga, then
+%                           mis-keyed to Swain2022 (arXiv:2211.06907, a
+%                           different 12q-active-space dipole paper with no
+%                           RaH-18q cell). Corrected to Chawla et al. 2026-06-28.
 %   BJL                  -> WITHDRAWN (unverifiable; cite removed, prose reworded)
 % Dyall confirmed from Paper 31; Reiher 2017 / Szmytkowski 2007 well-known.
 % ----------------------------------------------------------------------
@@ -3245,12 +3252,13 @@ A.~L.~Salas-Brito,
 ``Relativistic recursion relations for transition matrix elements,''
 arXiv:physics/0402061 (2004).
 
-\bibitem{Swain2022}
-K.~R.~Swain, V.~S.~Prasannaa, K.~Sugisaki, and B.~P.~Das,
-``Molecular electric dipole moments: from light to heavy molecules
-using a relativistic VQE algorithm,'' arXiv:2211.06907 (2022).
-[RaH: 18-qubit active space; 47{,}099 relativistic / 12{,}556
-non-relativistic Pauli terms.]
+\bibitem{Chawla2024}
+P.~Chawla, V.~S.~Prasannaa, K.~R.~Swain, K.~Sugisaki, and B.~P.~Das,
+``Relativistic VQE calculations of molecular electric dipole moments on
+quantum hardware,'' Phys.\ Rev.\ A \textbf{111}, 022817 (2025);
+arXiv:2406.04992.
+[RaH 18-qubit active space: 12{,}556 relativistic / 2{,}740
+non-relativistic Pauli terms (47{,}099 / 4{,}249 two-electron integrals).]
 
 \end{thebibliography}
 

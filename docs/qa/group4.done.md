@@ -243,3 +243,22 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   **physics/0402061**, `BJL`→**withdrawn** (unverifiable). C4 clean; P14/P20 recompile clean.
   **All 9 material findings remediated** → ready to re-run `/qa group4` for the certified PASS.
   Per-run detail: CHANGELOG v4.54.0.
+- 2026-06-28 — **re-cert (whole-group) = FAIL → ALL 4 REMEDIATED; recert HELD per PI (v4.55.0).**
+  Panel FULLY CALIBRATED again (sensitivity **8/8**, specificity **5/5** — the v4.54.0-disclosed
+  `sec:eri_rule` and the now-correct Swain cite both correctly NOT flagged). 4 verified MATERIAL
+  findings (seeds excluded): **(A)** the v4.54.0 `Sunaga2025`→`Swain2022` fill was ITSELF a
+  misattribution — the RaH-18q benchmark is **Chawla et al. arXiv:2406.04992 = PRA 111, 022817**;
+  **47,099 = two-electron integrals, NOT Pauli; rel Pauli = 12,556** (non-rel 2,740) — re-keyed
+  `Swain2022`→`Chawla2024` (P14 bibitem + P20 `@article` + all `\cite`), recomputed the P20
+  ratio column on 12,556 (×3.751); **(B)** trenev2025 (vibrational-spectra) still credited with
+  the Q^3.9–4.3 range → **methodology cite ONLY** (range/exponents are GeoVac's recompute; P14 7
+  loci + bibitem, P20 caption + bib, synthesis); **(C)** P14 §origin framing zombie ("advantage
+  that grows with angular complexity") → disclosed as a pair-diagonal artifact (exact rule = d-block
+  denser); **(D)** P20 STO-3G market test convention mix — LiH "907@Q12" is RAW while every other
+  Gaussian count is 2-qubit-reduced (matches `GAUSSIAN_LIH_PUBLISHED` 276@Q10) → caption + prose
+  DISCLOSE that the 2.7× is raw-vs-raw and narrows to parity under uniform reduction (not a number
+  reversal). NITs swept: 30→**37 systems** (P14), "Propinquity-derived"→"GH-convergence-derived"
+  §heading + 382 (P20). Deterministic gates C11/C13/C14/C15/C16 PASS; all 5 papers compile clean
+  (P14 26 / P16 7 / P20 12 / P23 11 / synth 4 pp); no production code edited. **The certified-PASS
+  confirmation run is the next `/qa group4` — HELD for PI timing, NOT auto-fired.** Per-run detail:
+  CHANGELOG v4.55.0 + `debug/sprint_group4_recert_remediation_memo.md`.

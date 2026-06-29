@@ -163,10 +163,12 @@ several operationally distinct metrics.
 \paragraph{Term count.}
 For single-center atoms the Pauli term count scales as $O(Q^{3.15})$ in
 the qubit number $Q$, compared with Gaussian molecular Pauli-scaling
-exponents in the $Q^{3.9}$--$Q^{4.3}$ range~\cite{trenev2025};\ the
+exponents in the $Q^{3.9}$--$Q^{4.3}$ range; the
 specific electronic-structure values $Q^{4.25}$ (LiH) and $Q^{3.92}$
-(H$_2$O) are GeoVac's own recomputation via the OpenFermion/Qiskit-Nature
-pipeline applied in that baseline.
+(H$_2$O), and the range they bracket, are GeoVac's own recomputation via
+the OpenFermion/Qiskit-Nature pipeline (the resource-estimation
+methodology follows Trenev et al.~\cite{trenev2025}, a vibrational-spectra
+study that reports no electronic Gaussian scaling exponents).
 For composed multi-center molecules the pseudopotential-partitioned
 architecture produces block-diagonal ERIs and a \emph{universal}
 $O(Q^{2.5})$ scaling, with an exponent spread of only $0.02$ across the
