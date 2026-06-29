@@ -53,8 +53,8 @@ empirically in \S\ref{subsec:scope_boundary}; the framework's
 primary value proposition is structural sparsity with quantitative
 truncation-error bounds (Paper~38 state-space GH convergence), not energy-accuracy
 parity with CCSD(T) on second-row systems.  The \texttt{hamiltonian()}
-registry covers 37 systems (35 composed molecules across three rows of
-the periodic table, $Z=1$--36, plus the He and H$_2$ reference atoms),
+registry covers 37 systems (35 composed molecules spanning
+$Z=1$--56, H through Ba, plus the He and H$_2$ reference atoms),
 including multi-center systems
 (CO, N$_2$, F$_2$), mixed
 frozen-core molecules (NaCl), and the full first transition series as hydrides (ScH through ZnH),
@@ -424,11 +424,14 @@ Gaussian raw Jordan-Wigner baselines.
   uniform 2-qubit-reduced convention the headline LiH multiplier narrows
   toward parity (qubit-reduced STO-3G LiH is 276 at $Q=10$ vs.\ GeoVac
   composed 334); the raw-vs-raw and reduced-vs-reduced comparisons bracket
-  the genuine advantage.  The Gaussian Pauli
-  counts are the published values of Trenev et al.~\cite{Trenev2025}
-  (Table~5, Appendix~B; Jordan--Wigner with 2-qubit reduction); the
+  the genuine advantage.  The \emph{2-qubit-reduced} Gaussian Pauli counts
+  (LiH 6-31G/cc-pVDZ and all H$_2$O entries) are the published values of
+  Trenev et al.~\cite{Trenev2025} (Table~5, Appendix~B; Jordan--Wigner with
+  2-qubit reduction; their reduced STO-3G LiH value is 276 at $Q=10$); the
+  raw STO-3G LiH count (907, $Q=12$) used as the matched-raw market-test
+  baseline is the raw-JW value, not a Trenev-reduced count.  The
   $Q^{3.9\text{--}4.3}$ Gaussian-scaling exponents are GeoVac's own log-log
-  fit of those published counts.
+  fit of the published reduced counts.
   ``---'' indicates data not available.}
 \label{tab:resources}
 \begin{ruledtabular}
@@ -472,8 +475,9 @@ For H$_2$O, the composed Hamiltonian has \emph{more} Pauli terms than
 STO-3G (778 vs.\ 551, advantage $0.71\times$) because the GeoVac
 encoding uses 70 qubits (15 spatial orbitals per block $\times$ 5 blocks
 $\times$ 2 spins) while STO-3G uses only 12 qubits (7 spatial orbitals
-with frozen core).  The meaningful comparison is at comparable basis
-quality: against cc-pVDZ (46 qubits), GeoVac wins by $138\times$.
+with frozen core).  At matched qubit count (not matched accuracy---the
+composed H$_2$O carries a 26\% $R_{\rm eq}$ error), against cc-pVDZ
+(46 qubits) GeoVac has $138\times$ fewer Pauli terms.
 The $O(Q^{2.2})$ vs.\ $O(Q^4)$ scaling guarantees that the GeoVac
 advantage increases with basis size.
 
@@ -684,8 +688,8 @@ corrections are Tier 3+.
 \label{sec:systems}
 
 The GeoVac Hamiltonian library comprises 37 systems (35 composed
-molecules plus the He and H$_2$ reference atoms), spanning three rows of
-the periodic table ($Z = 1$--36); Tables~\ref{tab:molecules}--%
+molecules plus the He and H$_2$ reference atoms), spanning
+$Z = 1$--56 (H through Ba); Tables~\ref{tab:molecules}--%
 \ref{tab:transition_metals} enumerate the molecular systems.
 Table~\ref{tab:multicenter} lists the 5 multi-center molecules added
 in v2.2: heteronuclear diatomics (LiF, CO), homonuclear
@@ -831,8 +835,8 @@ Second-row molecules are accessed identically to first-row:
 \begin{lstlisting}
 from geovac.ecosystem_export import hamiltonian
 H = hamiltonian('NaH', R=3.566)
-print(H.n_terms, H.one_norm_nonidentity)
-# 239, 18.91
+print(H.n_terms, H.one_norm)
+# 223, 171.46
 \end{lstlisting}
 
 \noindent The Pauli scaling exponent $Q^{2.50}$ is confirmed across both
@@ -878,7 +882,7 @@ designed to interoperate with external correlation engines
 to know anything about GeoVac's internal spectral-triple
 construction.  Three additions ship in this release.
 
-\paragraph{GH-convergence-derived basis-truncation error bound.}
+\paragraph{GH-convergence-derived basis-truncation rate.}
 Every \texttt{GeoVacHamiltonian} returned by the public API
 carries a metadata field \texttt{propinquity\_bound} (legacy field name;
 the bound itself is the van Suijlekom state-space Gromov--Hausdorff
@@ -892,14 +896,17 @@ gives $\gamma_{n_{\max}=2,3,4} = 2.0746 / 1.6101 / 1.3223$
 with asymptotic rate $4/\pi$ (the Hopf-base measure
 $\mathrm{Vol}(S^2)/\pi^2$ signature of the master Mellin
 engine M1, see~\cite{GeoVac_Paper18}).  This is, to our
-knowledge, the first quantitative basis-truncation error
-estimate exposed at a chemistry-consumer API in any framework.
-The bound is system-independent (it is a property of the
+knowledge, the first quantitative basis-truncation \emph{convergence-rate}
+estimate exposed at a chemistry-consumer API---a proven state-space GH
+metric rate, \emph{not} a direct energy-error bound (the operator-to-energy
+lift is a loose heuristic that overshoots by 3--4 orders of magnitude; see
+the Trotter-budget footnote).
+The rate is system-independent (it is a property of the
 spectral-triple truncation, not of the chemistry content),
 so chemistry consumers reading the metadata see the same
-``this energy sits within $\gamma_{n_{\max}}$ of the
-framework's $n_{\max}$-truncation limit'' message regardless
-of which molecule they are running.
+``the operator is within state-space GH distance $\gamma_{n_{\max}}$ of the
+$n_{\max}\to\infty$ limit'' message (a convergence rate, not a direct
+energy-error bound) regardless of which molecule they are running.
 
 \paragraph{FCIDUMP export.}  The \texttt{GeoVacHamiltonian}
 class now exposes a \texttt{to\_fcidump(filename)} method that

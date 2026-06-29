@@ -298,3 +298,20 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   NITs (non-blocking carve-out): Pachucki year/FW source-check, Navrátil title-venue, duplicate caesura, dangling
   P20 .bib, "M=n_max²" text, rel n=3 + 0.20% n=3 coverage. Per-run detail: CHANGELOG v4.57.0 +
   `debug/sprint_group4_4thcert_remediation_memo.md`.
+- 2026-06-29 — **5th cert (whole-group) = FAIL → remediated; CLOSEST to PASS; recert HELD per PI (v4.58.0).**
+  Panel FULLY CALIBRATED (sensitivity **8/8**, specificity **6/6**); **6 of 8 dimensions clean-except-their-seed**,
+  and **every accumulated v4.55–4.57 fix confirmed accepted** — the Trenev reversal **triple-confirmed** (two code
+  reviewers + the citation reviewer reading the PDF Appendix B). A thin framing/attribution-precision layer.
+  **(#2)** P20 §VI GH bound: γ is a proven state-space-GH **convergence rate, NOT a direct energy bound** (was
+  oversold via "this energy sits within γ" + "error bound", contra the own footnote) → reworded. **(M-A)** the raw
+  STO-3G **907** (the 2.7×/13× denominator) was over-blanketed under "Trenev Table 5 (2-qubit reduction)" by my own
+  v4.57.0 reversal — but Table 5's reduced STO-3G LiH is **276**; caption now carves out 907 as the raw-JW
+  matched-raw baseline. **(M-C)** "Z=1–36" → **"Z=1–56 (H through Ba)"** (registry has SrH Z=38 + BaH Z=56,
+  probe-confirmed). **Claims SMALL:** §1.5 "comparable accuracy" (P14:2782) / "comparable basis quality" (P20:475)
+  → matched-qubit; CF-1 lead +pair-diagonal qualifier (P14:1580); P14:980 "composed 7–8.8% [Paper17]" → **balanced
+  [Paper19]** (composed=5.3%). **NITs:** NaH worked example (showed balanced 239 + non-existent attr) → 223/171.46
+  via `H.one_norm`; atomic_classifier docstrings +'F'/'d_block'; Pachucki prose 2023→2018 (bibitem verified to
+  support claim); P14 "recomputed"→"published Trenev counts". Deterministic gates PASS; papers compile clean.
+  **PI-flagged (not auto-decided):** M-A market-direction (raw-907 2.7× vs Trenev-reduced 276 parity — caption
+  brackets both); M-B (0.20% n=3 no CI test, heavy 84q FCI) deferred; "three rows" framing sweep; secondary-number
+  reconciliations; citation NITs. Per-run detail: CHANGELOG v4.58.0 + `debug/sprint_group4_5thcert_remediation_memo.md`.

@@ -827,7 +827,8 @@ H$_2$O & cc-pVDZ  & 46 &   107\,382 & \\
 \end{table}
 
 \noindent
-\textbf{Note on qubit reduction:} The recomputed Gaussian values use a
+\textbf{Note on qubit reduction:} The published Gaussian counts of
+Trenev~\textit{et al.}~\cite{trenev2025} (Table~5, Appendix~B) use a
 2-qubit reduction (exploiting particle number and spin symmetry),
 giving $Q = 10$ for LiH STO-3G rather than the raw Jordan--Wigner count
 of $Q = 12$.  The GeoVac values throughout this paper use raw
@@ -996,7 +997,7 @@ $\lambda = 202$ at $Q = 84$, giving Trotter step counts of
 $r \approx 4{,}500$ at $\epsilon = 10^{-3}$ for the largest basis
 tested.  At $Q = 30$ ($n_{\max} = 2$), LiH requires only 835~Trotter
 steps at chemical accuracy ($\epsilon = 10^{-3}$)---compared to the
-recomputed Gaussian LiH STO-3G value of 276~Pauli terms at $Q = 10$,
+published Trenev Gaussian LiH STO-3G value of 276~Pauli terms at $Q = 10$,
 where the 1-norm (not published) would require a comparable or larger
 step count on fewer qubits.
 
@@ -1085,7 +1086,7 @@ For direct (non-interpolated) comparison: at $Q = 70$ ($n_{\max} = 2$),
 GeoVac produces 778~Pauli terms for H$_2$O, while the recomputed
 Gaussian STO-3G value is 551~terms at $Q = 12$.  At $Q = 196$
 ($n_{\max} = 3$), GeoVac's 18\,383~terms remains far below the
-recomputed Gaussian cc-pVDZ count of 107\,382 at $Q = 46$.  These
+published Trenev Gaussian cc-pVDZ count of 107\,382 at $Q = 46$.  These
 comparisons at \emph{different} qubit counts illustrate that GeoVac
 achieves comparable term counts while encoding substantially more
 orbital degrees of freedom.
@@ -1190,7 +1191,7 @@ simulation cost from those that affect only energy accuracy:
   not $r$-dependent.  A self-consistent $Z_{\mathrm{eff}}(r)$ would
   change energies but not the orbital block structure.
 \item \textbf{Gaussian comparison uses 2-qubit reduction:} The
-  recomputed Gaussian Pauli counts use a 2-qubit reduction
+  published Trenev Gaussian Pauli counts use a 2-qubit reduction
   (particle number and spin symmetry); GeoVac does not.  This
   makes the comparison conservative for GeoVac.
 \item \textbf{$R_{\mathrm{eq}}$ error measures PES shape, not
@@ -1577,9 +1578,10 @@ $d$-only ($l = 2$) & 5 & 10 & 4.0\% & 56 & 5.60 \\
 
 The $d$-only block is the sparsest: 4.0\% ERI density and
 Pauli/$Q = 5.60$, compared to 8.9\% and 54.22 for the $s$+$p$ block
-that dominates main-group molecules.  Higher angular momentum produces
-\emph{tighter} selection rules, the opposite of the Gaussian situation
-where $d$-orbital integrals are among the densest.
+that dominates main-group molecules.  Under the pair-diagonal ERI rule,
+higher angular momentum produces a leaner pair-diagonal ERI
+tensor---\emph{tighter} selection rules---the opposite of the Gaussian
+situation where $d$-orbital integrals are among the densest.
 
 This sparsity is exploited for transition metal hydrides via frozen-core
 composition.  ScH ($Z = 21$) and TiH ($Z = 22$) are constructed with
@@ -2778,9 +2780,10 @@ For LiH~STO-3G (6~spatial orbitals, $Q = 12$, FCI $E = -7.881$~Ha),
 the raw JW Hamiltonian has 907~Pauli terms, $\lambda = 34.3$~Ha, and
 273~QWC groups.  The composed GeoVac LiH ($Q = 30$, electronic-only
 with PK partitioned classically) has 334~Pauli terms,
-$\lambda = 33.3$~Ha, and 21~QWC groups.  At comparable accuracy
-($\sim$5\% $R_\mathrm{eq}$ error for both minimal-basis representations),
-GeoVac achieves 2.7$\times$ fewer Pauli terms and 13$\times$ fewer
+$\lambda = 33.3$~Ha, and 21~QWC groups.  At matched qubit count
+(not matched accuracy---the composed LiH carries $\sim$5\% $R_\mathrm{eq}$
+geometry error and does not bind under qubit FCI),
+GeoVac has 2.7$\times$ fewer Pauli terms and 13$\times$ fewer
 QWC groups (these absolute multipliers use the pair-diagonal ERI rule,
 Sec.~\ref{sec:eri_rule}; near parity under the exact rule), with
 essentially identical 1-norm ($0.97\times$).

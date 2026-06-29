@@ -543,7 +543,7 @@ class AtomClassification:
     N_electrons : int
         Total electron count (neutral atom).
     structure_type : str
-        Paper 16 structure type: 'A', 'B', 'C', 'D', or 'E'.
+        Paper 16 structure type: 'A', 'B', 'C', 'D', 'E', or 'F'.
     n_core_electrons : int
         Number of core electrons (0 for H, He).
     n_valence_electrons : int
@@ -567,7 +567,7 @@ class AtomClassification:
         Period in the periodic table.
     group_type : str
         Descriptive group: 'hydrogen', 'noble_gas', 'alkali_metal',
-        'alkaline_earth', 'p_block'.
+        'alkaline_earth', 'p_block', 'd_block'.
     supported : bool
         Whether this atom is supported for composed geometry.
     support_note : str
