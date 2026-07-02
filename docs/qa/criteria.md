@@ -211,6 +211,24 @@ verdict is the **AND across all review dimensions** (below).
   doctrine). C16 is a **complement** to the C3/C7/C9 LLM review (it catches
   *known* retracted phrases; the reviewers still own *new* overclaims and
   judgment calls). `--gate <branch>` scans the gated papers + their code modules.
+- **C17 — Headline-number registry (deterministic).** Every occurrence of a
+  DoD §C8 headline-number *family* carries its canonical value — certified by
+  `debug/qa/check_headline_numbers.py --gate <branch>` (exit 0; also
+  `tests/test_headline_numbers_check.py`, which self-tests each family against
+  synthetic wrong values). **Added 2026-07-02 (PI direction; the 7th-group4-cert
+  meta-lesson):** the genuine-MATERIAL classes that kept surviving calibrated
+  judgment review had become *mechanical* — (a) second-locus propagation (a
+  decided headline corrected at one locus, stale at another: Z=1–36 vs 56 at
+  five loci; a memo-listed KH fix never applied) and (b) number-vs-source
+  drift (a "190×" floor against a cited table whose own floor is 51×; a stale
+  33.3 1-norm vs the live 32.6) — classes an LLM panel finds one locus at a
+  time at full price, and a registry finds exhaustively for ~0. Families hold
+  either known-wrong variant patterns (C16-style) or a capture+canonical pair,
+  with require-context windows (so different quantities sharing a numeral,
+  e.g. periodic-row "Z=1–10" prose or the ℓ-parity 0.97 Pauli-ratio cells,
+  never false-positive) and exemption windows for historical mentions.
+  **Maintenance rule (mirrors C16): when a run corrects or demotes a headline
+  number, ADD/UPDATE its family here.**
 
 ## Branch-specific criteria (C14+)
 
@@ -235,7 +253,7 @@ Reviewer count per dimension follows the **granularity & scaling rule** in `qa.m
 | Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` · **chunk ~3–4 papers/agent** | prose ≤ tier; hard prohibitions intact |
 | External citations | C4 | `citation-reviewer` · **chunk ~5–6 papers/agent** | cites resolve and say what we attribute |
 | Synthesis faithfulness | C9 | `claims-reviewer` (one on the branch synthesis) | **separate dispatch** from per-paper claims |
-| Deterministic | C10, C11, C12, C13, C14, C15, C16 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
+| Deterministic | C10, C11, C12, C13, C14, C15, C16, C17 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py`, `check_headline_numbers.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
 
 **Enumeration mandate (the 2026-06-23 lesson).** Every LLM-reviewer prompt
 demands *exhaustive enumeration*, not sampling, of the low-salience structured
@@ -247,6 +265,50 @@ dimension over two vaguely-prompted ones (duplicate agents share blind spots).
 After the panel, a one-agent **completeness-critic** names un-verified regions;
 re-dispatch a focused reviewer for any gap. A full find→fix→re-scan
 loop-until-dry is reserved for the *final* pre-certification convergence run.
+
+## Run shapes: full runs vs delta-verification runs (2026-07-02, PI direction)
+
+**The cost meta-lesson (seven group4 cycles):** the gate was priced as full
+re-verification (~9–11 reviewers re-reading every paper, ~2–3M tokens/run),
+but between runs the corpus changes by a ~10–20-locus remediation diff, and
+from run ~4 onward the marginal yield was dominated by mechanical classes now
+owned by the deterministic gates (C16/C17). The arc paid full price on "this
+is probably the certifying run" four times. Run shapes are therefore:
+
+- **Full run** — the complete protocol (all dimensions, whole-paper
+  enumeration, completeness-critic). Fired at exactly two moments: the
+  **first cert** of a fresh target, and the **final certifying pass**. Only a
+  full run can produce **PASS** (an unexercised dimension still forces
+  INCONCLUSIVE — unchanged).
+- **Delta-verification run** — after any FAIL→remediation. Scope = the git
+  diff since the last calibrated run: one reviewer per **affected** dimension;
+  the changed loci **pasted into the prompt** with surrounding context
+  (paste-don't-point — the reviewer does not re-read 3,000-line papers to see
+  20 lines); **≥1 seed planted in the diff** per dispatched agent (calibration
+  still per-agent); deterministic gates still run **whole-target** (they are
+  free and guard the unchanged surface). Verdict: **CLEAN-DELTA / DEFECTS** —
+  a delta run can never produce PASS; **a clean delta is the precondition for
+  firing the full certifying run.** Skip the completeness-critic on deltas.
+- **Rationale:** text that survived a calibrated panel does not lose its
+  verification by sitting unchanged; the deterministic layer (now including
+  the C16 zombie registry and the C17 headline-number registry) guards the
+  unchanged surface between runs. Expected cost: ~0.5M tokens per delta cycle
+  vs ~2.5M per full run.
+
+**Model tiering with calibration as the safety net (2026-07-02).** The
+citation and code dimensions default to **Sonnet-class** reviewers; claims
+and synthesis stay **Opus-class** (they carry the judgment calls where even
+Opus shows severity variance). The seeded-calibration design converts model
+adequacy from a prior into a per-run *measurement*: a tiered agent that
+misses its seed is de-calibrated and its dimension is re-dispatched on the
+Opus tier (the run-6 P16 recovery pattern). When a dimension runs below the
+Opus tier, plant **two seeds** for that agent (calibration resolution).
+
+**Terser reporting contract (2026-07-02).** The enumeration mandate governs
+the *reading*; the *report* is: defects + two-way upgrades + a compact
+coverage checklist (which regions were enumerated). Reviewers do NOT
+reproduce per-item verdict tables for sound items — soundness is evidenced
+by the coverage checklist, the seeds, and PM spot-checks, not by report prose.
 
 ## Coverage honesty
 
@@ -287,6 +349,13 @@ quietly rises.
   a framing zombie. Enforced by the claims-reviewer (enumerate every sparsity/density/Pauli
   claim) + the new C16 entry `pair-diagonal-as-exact-sparsity`. Sharpens C3/C8/§1.5; shared
   (group4 primary, group3 P22/31 related). Repo study: `debug/sprint_group4_prework_memo.md`.
+- 2026-07-02 — **Added C17 (headline-number registry gate), the "Run shapes" section
+  (full vs delta-verification runs), model tiering with calibration as the safety net
+  (+two-seeds-per-tiered-agent), and the terser reporting contract** (PI direction,
+  post-7th-group4-cert cost review: one full run ≈ a 5-hour token session; seven
+  full-price cycles on group4 with marginal yield converging to mechanical classes).
+  A delta run can never produce PASS; a clean delta is the precondition for the full
+  certifying run. C17 self-tests in `tests/test_headline_numbers_check.py` (6/6).
 - 2026-06-28 — **Added the "Secondary stale-number / provenance-attribution is a NIT class"
   carve-out** to §"Material vs nit" (PI direction, set at group2 certification). The analog of
   the 2026-06-24 code-docstring carve-out: a stale/imprecise number on a NON-§C8-headline

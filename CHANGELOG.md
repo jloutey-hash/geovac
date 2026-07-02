@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.62.1] - 2026-07-02
+
+**QA cost-reduction package (PI-directed, post-7th-cert meta-review).** One full /qa run ≈ 2–3M tokens (~a 5-hour session); the group4 arc paid full price on "this is probably the certifying run" four times while marginal yield converged to mechanical classes. Three structural changes:
+
+### Added
+- **C17 — headline-number registry gate** (`debug/qa/check_headline_numbers.py` + mirror `tests/test_headline_numbers_check.py`, 6/6 incl. per-family synthetic-positive self-tests): DoD §C8 headline families with canonical values, require-context windows (periodic-row "Z=1–10" prose and the ℓ-parity 0.97 Pauli-ratio cells never false-positive — the first was caught and scoped on the gate's very first corpus run), and exemption windows. Kills the two surviving MATERIAL classes (second-locus propagation; number-vs-source drift) for ~0 tokens. v1 registry: library-z-span, pauli-advantage-floor, library-count, binds-at-3.015, lih-onenorm-stale. Maintenance rule mirrors C16. PASSES on the current corpus.
+- **Run shapes** (criteria.md §Run-shapes + qa.md step 1): FULL runs only at first-cert and the final certifying pass (only a full run can PASS); after any FAIL→remediation a **delta-verification run** reviews the git diff since the last calibrated run (one reviewer per affected dimension, changed loci pasted into the prompt, ≥1 seed in the diff, deterministic gates whole-target, no critic; verdict CLEAN-DELTA/DEFECTS, ~0.5M vs ~2.5M tokens). **A clean delta is the precondition for firing the full certifying run** — formalizing the PI's "small-scale verifications before committing to a full run."
+- **Model tiering with calibration as the safety net** (qa.md step 3+4): citation + code dimensions default Sonnet with TWO seeds each; claims + synthesis stay Opus; a tiered agent that misses its seed → re-dispatch on Opus (the run-6 P16 recovery pattern). Plus the **terser reporting contract** (enumeration governs the reading; reports = defects + upgrades + coverage checklist) and **completeness-critic on full runs only**.
+
+### Changed
+- `docs/qa/criteria.md` (C17 + Run-shapes + tiering + reporting; dated change-log entry), `.claude/commands/qa.md` (step 1/3/4), memory `qa_gate_methodology.md` + MEMORY.md index. Open investigation logged: whether custom reviewer agents can skip the automatic CLAUDE.md context load (~10–15% further savings if togglable).
+
 ## [4.62.0] - 2026-07-02
 
 **/qa group4 7th cert (whole-group, PI-fired) = FAIL → ALL remediated; certifying run (8th) HELD per PI.** Panel FULLY CALIBRATED — **sensitivity 8/8, specificity 6/6** (fresh seed set, all classes varied from run 6; every seed caught by its own agent, three caught cross-dimension; two seeds detected-but-graded-down on severity, both with sound reviewer reasoning — one seed was genuinely inert in situ because redundant pins already carried the direction). Run survived one ECONNRESET and one account-spend-limit interruption via transcript-resume.
