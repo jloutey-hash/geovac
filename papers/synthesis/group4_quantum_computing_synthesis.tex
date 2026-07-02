@@ -226,7 +226,8 @@ The library exposes two composed-molecular architectures with
 complementary strengths.  The \emph{composed} (pseudopotential, PK)
 architecture is the sparser of the two:\ LiH requires $334$ Pauli terms
 at $30$ qubits, with $13\times$ fewer QWC groups than the Gaussian STO-3G
-reference at $12$ qubits.  The small-system market-test comparison ``$334$ versus $907$ STO-3G Pauli
+reference at $12$ qubits (raw baseline, pair-diagonal rule --- the same
+conventions as the Pauli comparison next).  The small-system market-test comparison ``$334$ versus $907$ STO-3G Pauli
 terms'' is near parity once conventions are matched:\ STO-3G's qubit-reduced
 count is $276$ (vs.\ the composed $334$), and under the exact global-$M_L$
 rule LiH re-prices to $838$ ($0.92\times$ the raw $907$).  The broad
@@ -249,7 +250,7 @@ configuration---frozen-core balanced, multi-zeta valence, screened
 cross-center, explicit-core Hartree--Fock---with no interior PES minimum
 at the qubit-Hamiltonian level.  This scope boundary is documented
 empirically, not papered over:\ the framework's value proposition is
-structural sparsity with quantitative truncation-error bounds
+structural sparsity with quantitative truncation-convergence rates
 (Paper~38 state-space GH convergence), not energy-accuracy parity with CCSD(T) on
 second-row systems.
 
@@ -392,7 +393,7 @@ encodings relevant to qubitization as well, but the framework is not
 positioned as a fault-tolerant-QPE or geometry-optimisation tool, and it
 is not a replacement for production quantum chemistry.  It is a
 structurally sparse, zero-parameter, ecosystem-exported library of qubit
-Hamiltonians with quantitative truncation-error bounds---a research
+Hamiltonians with quantitative truncation-convergence rates---a research
 instrument for the resource-estimation and algorithm-development side of
 quantum simulation.
 

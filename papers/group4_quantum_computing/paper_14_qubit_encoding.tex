@@ -2526,9 +2526,12 @@ Total  & 292 & \textbf{268} & $+24$ \\
 \end{center}
 The audit gate verifies GF($2$)-independence of each candidate
 stabiliser; $24$ of $132$ panel candidates pass and contribute.
-Spectrum preservation verified bit-exactly to $<2 \times 10^{-15}$
-Ha on LiH max\_n=$1$ via full diagonalisation (test
-\texttt{tests/test\_symmetry\_adapted\_basis.py}).  Combined with
+Ground-sector agreement between the extended and extended$+$hidden
+tapered forms is verified to $<10^{-10}$~Ha on LiH max\_n=$1$ via full
+diagonalisation, alongside block-diagonality and stabiliser-audit
+checks (test \texttt{tests/test\_symmetry\_adapted\_basis.py}); the
+naive-vs-tapered spectrum comparison is carried by the H$_2$
+$\ell$-parity test above.  Combined with
 Hopf $+ \ell$-parity, the production
 \texttt{tapered='full'} pipeline saves $30 \to 20$ on LiH (33\%
 reduction) and $90 \to 62$ on CH$_4$ (31\%) over naive JW --- a
@@ -2778,7 +2781,7 @@ To our knowledge, no published DF, THC, or SCDF $\lambda$~values exist
 for molecules at the 10--70~qubit operating scale of the present work
 (LiH at $Q = 30$, H$_2$O at $Q = 70$), because these systems are too
 small for the overhead of block-encoding to be beneficial.
-The Pauli term advantage reported here (190$\times$--1,712$\times$,
+The Pauli term advantage reported here (51$\times$--1,712$\times$,
 Sec.~\ref{sec:composed_gaussian}) is therefore against raw
 Jordan--Wigner encoding, the representation used by VQE and other
 near-term variational algorithms.  The 1-norm comparison

@@ -267,7 +267,13 @@ class TestDeuteronHamiltonian:
 
     @pytest.mark.slow
     def test_export_round_trip(self):
-        """Export to OpenFermion format and verify eigenvalue matches."""
+        """Export to OpenFermion format; sanity-check the spectrum (finite).
+
+        The FCI-eigenvalue match is INFORMATIONAL only: the Pauli export
+        carries the disclosed off-diagonal sign limitation (paper
+        subsec:known_limitation), so an exact match is not asserted; the
+        matrix path is the source of truth (test_nuclear_electronic).
+        """
         try:
             from openfermion import QubitOperator
         except ImportError:
@@ -310,6 +316,7 @@ class TestDeuteronHamiltonian:
             if abs(e - E_gs_fci) < 1.0:  # within 1 MeV
                 found = True
                 break
-        # May not find exact match due to Pauli encoding approximations
-        # Just check that the OF Hamiltonian is reasonable
+        # `found` is informational (disclosed sign limitation, see docstring);
+        # deliberately NOT asserted. Sanity: spectrum finite.
+        _ = found
         assert np.isfinite(evals_of[0]), "OF eigenvalues should be finite"

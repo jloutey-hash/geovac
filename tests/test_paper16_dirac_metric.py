@@ -57,4 +57,5 @@ def test_metric_diverges_while_topology_does_not() -> None:
     """The §VI thesis: as Z*alpha -> 1 the metric (delta_1s) diverges while the
     quantum numbers (mu_free) stay finite/integer -- metric singularity, not topological."""
     assert _delta_1s(137) > _delta_1s(79) > _delta_1s(29)   # metric blows up
+    assert _delta_1s(137) > 1.0e3                           # ...and by MAGNITUDE (local self-sufficiency)
     assert _mu_free(137) == 36720 and isinstance(_mu_free(137), int)  # topology untouched

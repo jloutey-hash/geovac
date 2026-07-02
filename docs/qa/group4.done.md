@@ -334,3 +334,21 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   regions (zero MATERIAL); focused citation re-dispatch found the Migdalek–Bylicki wrong-ID. Post-remediation:
   6 gates PASS, 4 papers 0-errors, 144 affected tests green, zero seed leakage. **Certifying run (7th) HELD
   for PI.** Per-run detail: CHANGELOG v4.60.0 + `debug/sprint_group4_6thcert_remediation_memo.md`.
+- 2026-07-02 — **7th cert (whole-group, PI-fired) = FAIL → ALL remediated; certifying (8th) run HELD per PI (v4.62.0).**
+  Panel FULLY CALIBRATED (sensitivity **8/8**, specificity **6/6**; fresh seed classes — every seed caught by its
+  own agent, three caught cross-dimension; two detected-but-severity-downgraded with sound reasoning, one seed
+  genuinely inert in situ). 3 verified genuine MATERIALs, all remediated: **(M1)** P16:292 printed a FALSE identity
+  (μ_free/N² = 2−8/N+8/N²; correct 2−6/N+4/N², matching the paper's own table) → fixed; **(M2)** P14:2781 floor
+  "190×–1,712×" vs the cited table's own 51× floor → fixed; **(M3)** the magic-number presence scan (min_gap=1e-10)
+  is necessary-not-sufficient on a §C8 headline — PM probe: six lower magics ARE the six dominant gaps ≤126 but
+  **126 is non-dominant** (0.107ℏω, ten sub-shell boundaries larger; >126 = truncation-edge artifacts) → new
+  `tests/test_paper23_magic_gaps.py` (gap-structure pins + dominance + non-dominance bands) + honest P23 disclosure
+  sentence; production scan untouched. **Critic follow-through:** live sweep of ALL 12 balanced tab:molecules cells —
+  counts exact, **λ_ni column stale 9/12** (0.3–7%) → re-synced + `tests/test_paper20_balanced_lambda.py` pins every
+  cell; the run-6 KH fix had never landed (PM propagation miss) AND its 28.15 proved unreproducible → **31.6**
+  (factory experimental R, pinned; reproduce-before-syncing reaffirmed). NITs: GH "truncation-error bounds"→
+  "truncation-convergence rates" (5 loci; reviewer severity-split recorded), Navratil title↔venue, 13×-QWC qualifier,
+  P14 symmetry-adapted sentence honesty, deuteron round-trip docstring, dirac-metric magnitude assert, matrix
+  upgrades (878→SOUND, Z=1–56, O(Q^2.5) LiH-fit note, magic→SOUND, +2 §VII rows). Post-remediation: 6 gates PASS,
+  5 papers 0-errors, 12/12+3/3+7/7 new/affected pins green, zero seed leakage. **Certifying run (8th) HELD for PI.**
+  Per-run detail: CHANGELOG v4.62.0 + `debug/sprint_group4_7thcert_remediation_memo.md`.

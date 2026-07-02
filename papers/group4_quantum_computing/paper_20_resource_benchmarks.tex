@@ -53,7 +53,7 @@ screened cross-center, explicit-core Hartree--Fock --- with no interior PES
 minimum at the qubit-Hamiltonian level. We document this scope boundary
 empirically in \S\ref{subsec:scope_boundary}; the framework's
 primary value proposition is structural sparsity with quantitative
-truncation-error bounds (Paper~38 state-space GH convergence), not energy-accuracy
+truncation-convergence rates (Paper~38 state-space GH convergence), not energy-accuracy
 parity with CCSD(T) on second-row systems.  The \texttt{hamiltonian()}
 registry covers 37 systems (35 composed molecules spanning
 $Z=1$--56, H through Ba, plus the He and H$_2$ reference atoms),
@@ -382,7 +382,7 @@ overbinding (the 0.20\% / $D_e \times 2.4$ pattern documented in
 \S\ref{sec:applicability}).  Users running second-row or below should
 treat the qubit Hamiltonian as a \emph{resource-estimation target}
 only, not as a chemistry-accuracy Hamiltonian.  The Pauli counts,
-1-norm bounds, and GH-convergence error bounds are correct in either case
+1-norm bounds, and GH convergence rates are correct in either case
 (they are properties of the operator, not its physics fidelity), so
 algorithm research that benchmarks against scaling behaviour transfers
 cleanly across the scope boundary.  Algorithm research that wants
@@ -709,7 +709,10 @@ $d$-orbital valence blocks spanning $Z = 21$--30.
   Isostructural pairs (rows 2--3) produce identical Pauli counts.
   The \texttt{hamiltonian()} API currently returns composed encoding
   for all rows; balanced data shown here are from Paper~19's
-  \texttt{build\_balanced\_hamiltonian()}.}
+  \texttt{build\_balanced\_hamiltonian()} (every cell pinned by
+  \texttt{tests/test\_paper20\_balanced\_lambda.py}; the
+  $\lambda_{\text{ni}}$ column was re-synced to the live builder
+  2026-07-02).}
 \label{tab:molecules}
 \begin{ruledtabular}
 \begin{tabular}{llrrrr}
@@ -723,18 +726,18 @@ NH$_3$   & He   & 80 &    889 & 149.4 & 21 \\
 CH$_4$   & He   & 90 & 1{,}000 & 129.1 & 21 \\
 \colrule
 NaH      & Ne   & 20 &    239 &  18.9 &  29 \\
-MgH$_2$  & Ne   & 40 & 1{,}501 & 103.2 & 109 \\
+MgH$_2$  & Ne   & 40 & 1{,}501 & 101.9 & 109 \\
 HCl      & Ne   & 50 & 2{,}936 & 798.8 & 133 \\
-H$_2$S   & Ne   & 60 & 4{,}119 & 810.9 & 141 \\
-PH$_3$   & Ne   & 70 & 5{,}582 & 829.0 & 159 \\
-SiH$_4$  & Ne   & 80 & 7{,}273 & 848.6 & 169 \\
+H$_2$S   & Ne   & 60 & 4{,}119 & 816.9 & 141 \\
+PH$_3$   & Ne   & 70 & 5{,}582 & 834.9 & 159 \\
+SiH$_4$  & Ne   & 80 & 7{,}273 & 853.6 & 169 \\
 \colrule
-KH       & Ar   & 20 &    239 &  27.5 &  29 \\
-CaH$_2$  & Ar   & 40 & 1{,}501 & 119.8 & 114 \\
-HBr      & Ar$d$ & 50 & 2{,}936 & 807.2 & 132 \\
-H$_2$Se  & Ar$d$ & 60 & 4{,}119 & 833.6 & 142 \\
-AsH$_3$  & Ar$d$ & 70 & 5{,}582 & 886.2 & 159 \\
-GeH$_4$  & Ar$d$ & 80 & 7{,}273 & 813.3 & 167 \\
+KH       & Ar   & 20 &    239 &  31.6 &  29 \\
+CaH$_2$  & Ar   & 40 & 1{,}501 & 118.9 & 114 \\
+HBr      & Ar$d$ & 50 & 2{,}936 & 809.4 & 132 \\
+H$_2$Se  & Ar$d$ & 60 & 4{,}119 & 820.2 & 142 \\
+AsH$_3$  & Ar$d$ & 70 & 5{,}582 & 824.2 & 159 \\
+GeH$_4$  & Ar$d$ & 80 & 7{,}273 & 815.8 & 167 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1069,7 +1072,7 @@ hydrides, the qubit Hamiltonian's potential-energy surface does not
 exhibit an interior minimum at $n_{\max}=2$ under any of the engineering
 configurations we tested (Section~\ref{subsec:scope_boundary}).  The
 framework's primary value proposition is structural sparsity with
-quantitative truncation-error bounds (Paper~38 state-space GH bound, exposed as
+quantitative truncation-convergence rates (Paper~38 state-space GH rate, exposed as
 metadata on every Hamiltonian export), not energy-accuracy parity with
 CCSD(T) across the full periodic-table-row range.
 

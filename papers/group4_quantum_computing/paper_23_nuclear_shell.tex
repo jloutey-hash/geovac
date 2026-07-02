@@ -184,8 +184,18 @@ obtain
 which is consistent with the Mayer--Jensen parameters tabulated in
 standard shell-model references~\cite{Suhonen2007,Talmi1993}. These
 are nuclear-physics inputs; the GeoVac framework contributes nothing
-to their determination. Table~\ref{tab:levels} gives the level
-ordering, with shell closures marked.
+to their determination. The recovered gaps are not uniform in
+magnitude:\ within the physically meaningful region (cumulative
+occupancy $\leq 126$; boundaries above this sit at the $n_{\max}=7$
+truncation edge, where the missing $N=7$ intruder levels distort the
+spectrum), the six lower magic numbers $2, 8, 20, 28, 50, 82$ are the
+six \emph{largest} gaps, while $126$ appears as a clear but
+non-dominant gap ($\approx 0.11\,\hbar\omega$), tied with the known
+sub-shell boundary at $40$ and below several intermediate sub-shell
+gaps ($14, 56, 104, 118$) --- the expected granularity of the
+two-parameter Mayer--Jensen form at this $n_{\max}$ (gap structure
+pinned by \texttt{tests/test\_paper23\_magic\_gaps.py}). Table~\ref{tab:levels}
+gives the level ordering, with shell closures marked.
 
 \begin{table}[t]
   \centering
@@ -1275,8 +1285,7 @@ arXiv:2509.08948 (2025).
 
 \bibitem{Navratil2000}
 P.~Navr\'atil, J.~P. Vary, and B.~R. Barrett,
-``Large-Basis Ab Initio No-Core Shell Model and Its Application to
-$^{12}$C,''
+``Properties of $^{12}$C in the Ab Initio Nuclear Shell Model,''
 Phys.~Rev.~Lett.~\textbf{84}, 5728 (2000).
 
 \bibitem{BarrettNavratilVary2013}

@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.62.0] - 2026-07-02
+
+**/qa group4 7th cert (whole-group, PI-fired) = FAIL → ALL remediated; certifying run (8th) HELD per PI.** Panel FULLY CALIBRATED — **sensitivity 8/8, specificity 6/6** (fresh seed set, all classes varied from run 6; every seed caught by its own agent, three caught cross-dimension; two seeds detected-but-graded-down on severity, both with sound reviewer reasoning — one seed was genuinely inert in situ because redundant pins already carried the direction). Run survived one ECONNRESET and one account-spend-limit interruption via transcript-resume.
+
+### Changed (verified genuine MATERIAL — all remediated)
+- **M1 (P16:292):** the printed per-electron expansion μ_free/N² = "2 − 8/N + 8/N²" is a **false identity** (correct: 2 − 6/N + 4/N²; the paper's own table column matched the correct form). Fixed; caught by the strength-matching prompt sharpening.
+- **M2 (P14:2781):** Pauli-advantage floor "190×–1,712×" vs the cited table's own floor **51×** (51/746/1,712) and P20's "51–1,712×". Fixed →51×.
+- **M3 (C2 test-validity, P23 magic-number headline):** the presence scan's min_gap=1e-10 is necessary-not-sufficient, nine OoM below the real gap scale — could never catch a magic-gap collapse. PM probe: the six lower magics ARE the six largest gaps (≤126), but **126 is non-dominant** (0.107 ℏω; ten non-magic sub-shell boundaries larger) and boundaries above 126 are n_max=7 truncation-edge artifacts. New **`tests/test_paper23_magic_gaps.py`** (seven gap/ℏω pins + dominance-of-six + 126-non-dominance, region-scoped with the edge rationale) + an honest gap-magnitude disclosure sentence in P23. Production scan untouched (its default moves eq:optimal — result-changing).
+
+### Changed (completeness-critic follow-through — the balanced-λ column)
+- Live sweep of ALL 12 `tab:molecules` balanced cells: **every Pauli count exact**, but the **λ_ni column stale at per-cell drafting vintage in 9/12** (0.3–7%; AsH₃ 886.2→824.2 worst). All cells re-synced to the live builder; **new `tests/test_paper20_balanced_lambda.py`** pins every cell (the balanced analog of test_paper14_rel_lambda); caption carries the sync note. En route: the run-6 KH fix (27.5→28.15) had never actually been applied (PM propagation miss), and 28.15 itself proved **unreproducible** at any geometry — final KH cell **31.6** (factory experimental R=4.243), pinned. Reproduce-before-syncing reaffirmed.
+
+### Changed (NITs, fix-on-sight)
+- GH phrasing tightened at all five real-corpus loci: "truncation-error bounds" → "truncation-convergence rates" (P20 abstract + ×2 body; synthesis ×2) — the severity split between reviewers on this cluster recorded (adjudicated NIT; all loci fixed regardless). Navratil2000 title↔venue mixed pair → PRL title restored. Synthesis 13× QWC given the raw/pair-diagonal qualifier. P14 symmetry-adapted sentence reworded to what its test proves (naive comparison carried by the H₂ ℓ-parity test). P23 deuteron export-round-trip docstring made honest (FCI match informational; sign-limitation ref). Dirac-metric divergence test given a local magnitude assert. Matrix: 878-pin BACKED-WEAK→SOUND (stale note), Z=1–36→56, the "O(Q^2.5) never fit" note→LiH-fit BACKED-WEAK (universality still open), magic row→BACKED-SOUND via the gap test, two §VII rows added (cross-register 69 + magnetization 57 tests were backed-but-unlogged).
+
+### State
+6 deterministic gates PASS post-remediation; 5 papers compile 0-errors; 12/12 balanced-λ + 3/3 magic-gap + 7/7 affected fast pins green; worktree removed; zero seed leakage (8/8 signatures grepped absent). **The certifying (8th) run is HELD for PI timing.** Canonical memo `debug/sprint_group4_7thcert_remediation_memo.md`.
+
 ## [4.61.0] - 2026-07-02
 
 **WH8 registered + Born-measure probe NEGATIVE (PI-directed solo sprint, group4-recert pause).** The question — does the graph's skeleton-side measure generate Born statistics? — tested in three legs and closed negative, upgrading the Born rule's Class-1 placement (external-input three-class partition) from classification to **tested negative**, and complementing the 2026-05-26 derivation-direction structural closure (Paper 34 §VIII, sprint `ahha_born_rule_attempt`: three routes reduce to standard GNS/Gleason inheritance) with the missing generation-direction computation + frozen falsifier.
