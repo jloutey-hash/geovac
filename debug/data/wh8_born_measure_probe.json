@@ -1,0 +1,89 @@
+{
+  "leg_a": {
+    "dim": 4,
+    "tv_flat_exact_zero": 0.0,
+    "tv_generic": 0.33333333333333337,
+    "born_generic": [
+      0.03333333333333333,
+      0.13333333333333333,
+      0.3,
+      0.5333333333333333
+    ],
+    "counting": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ]
+  },
+  "leg_b": {
+    "system": "He graph-native CI, max_n=3, vee=slater_full (0 params)",
+    "n_sd": 378,
+    "E0_Ha": -2.840438822031299,
+    "support_size": 20,
+    "sz0_sector_size": 196,
+    "top_configs": [
+      {
+        "weight": 0.9081299490665856,
+        "config": [
+          "n1l0m0u",
+          "n1l0m0d"
+        ]
+      },
+      {
+        "weight": 0.040448258091071734,
+        "config": [
+          "n1l0m0u",
+          "n2l0m0d"
+        ]
+      },
+      {
+        "weight": 0.040448233286460474,
+        "config": [
+          "n1l0m0d",
+          "n2l0m0u"
+        ]
+      },
+      {
+        "weight": 0.0050707575405228205,
+        "config": [
+          "n1l0m0d",
+          "n3l0m0u"
+        ]
+      },
+      {
+        "weight": 0.005070739470812862,
+        "config": [
+          "n1l0m0u",
+          "n3l0m0d"
+        ]
+      }
+    ],
+    "tv_born_vs_uniform_basis": 0.9859404242279404,
+    "tv_born_vs_uniform_support": 0.8581299490665856,
+    "tv_born_vs_uniform_sz0_sector": 0.9737203179951381
+  },
+  "leg_c": {
+    "note": "flat state on the GS support, evolved under the CI H",
+    "t_grid": [
+      0.0,
+      0.01,
+      0.02,
+      0.05,
+      0.1,
+      0.2,
+      0.5
+    ],
+    "tv_vs_counting": [
+      8.673617379884037e-16,
+      2.625782644701674e-06,
+      1.0502176342887248e-05,
+      6.559687184743562e-05,
+      0.00026179233949134156,
+      0.0010377091869548279,
+      0.0060887790923668875
+    ],
+    "small_t_growth_exponent": 1.9998689215601653
+  },
+  "verdict": "NEGATIVE (expected): the skeleton counting measure does not generate Born statistics on physical states, and the coincidence locus is dynamically unstable."
+}
