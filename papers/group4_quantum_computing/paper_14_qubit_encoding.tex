@@ -2642,12 +2642,19 @@ $\chi_k^H = 2$ (additive baseline of $H_{\rm left\ block} \otimes I
 
 \paragraph*{Universal interior profile.}
 For the standard $\{1s, 2s, 2p_{-1,0,+1}\}$ valence at $n_{\max}=2$,
-the interior bond rank within any sub-block follows the universal
-sequence $\chi_k^H = \{4, 16, 16, 9, 9, 9, 6, 3, 3, 2\}$ at cuts $k =
-1, \ldots, 10$, depending only on the orbital basis (not on the
-sub-block role or the molecule).  Verified bit-exactly across LiH
-(3 sub-blocks), BeH$_2$ (5 sub-blocks), and H$_2$O (7 sub-blocks), at
-$12/12$ sub-block boundaries giving $\chi_k = 2$ and $8\times$
+the interior bond rank within a sub-block follows the universal core
+sequence $\chi_k^H = \{16, 16, 9, 9, 9, 6, 3\}$ at local cuts $k =
+2, \ldots, 8$, depending only on the orbital basis; the edge cuts are
+position-dependent (first cut: $4$ for the leading sub-block, $5$ for
+sub-blocks with a completed block to their left --- one extra additive
+baseline mode; the final sub-block's last cut saturates to the
+chain-end value $2$).  The leading-sub-block sequence at cuts
+$1,\ldots,10$ is $\{4, 16, 16, 9, 9, 9, 6, 3, 3, 2\}$.  Verified
+bit-exactly on LiH at $29/29$ cuts (recomputed from the live builder
+and pinned by \texttt{tests/test\_paper14\_mpo\_rank.py}); the
+$\chi_k = 2$ boundary saturation is verified across LiH
+(3 sub-blocks), BeH$_2$ (5 sub-blocks), and H$_2$O (7 sub-blocks) at
+$12/12$ sub-block boundaries, giving $8\times$
 interior/boundary ratio.  The dominant rank carrier transitions with
 the cut position:\ $L=0$ governs cuts $1$--$3$ (1s--2s cross-cut
 active), $L=1$ governs cuts $4$--$6$
@@ -2661,9 +2668,11 @@ On LiH, statement~(A) holds at $29/29$ cuts
 (eq.~\eqref{eq:chi_h1_closed} exact); (B) and (C) hold at $29/29$
 with average slack $2.3$ and $5.9$ respectively, both from shared
 additive baseline modes between $h_1, V_{ee}^L$.  Driver and data
-files:\ \texttt{debug/sprint\_s2\_v2\_unified\_panel.py} +
-\texttt{debug/data/sprint\_s2\_v2\_unified\_panel.json}.  Memo:\
-\texttt{debug/sprint\_s2\_v2\_memo.md}.  Negative control extended to
+files (permanent):\ \texttt{tests/mpo\_rank\_support/sprint\_s2\_v2\_unified\_panel.py} +
+\texttt{tests/mpo\_rank\_support/data/sprint\_s2\_v2\_unified\_panel.json};
+the full LiH panel is recomputed from the live builder and the shipped
+panel pinned by \texttt{tests/test\_paper14\_mpo\_rank.py}
+(sprint chronicle:\ CHANGELOG v3.54.0).  Negative control extended to
 the balanced-coupled library:\ across LiH, BeH$_2$, H$_2$O at $12/12$
 sub-block boundaries the chi$=2$ floor is broken into a clean
 two-value quantization $\chi_k^{H,\,{\rm balanced}} \in \{9, 16\}$ that
@@ -2675,8 +2684,10 @@ double-factorisation rank of the $\{1s, 2s, 2p\}$ valence basis
 inherits the F3 graded structure: the same Laguerre--Gaunt ring that
 fixes DF rank fixes the per-boundary lift, bit-identically across
 three molecules and twelve boundaries (Sprint S1 / S2-v2 negative
-controls,
-\texttt{debug/sprint\_s2\_v2\_balanced\_library\_memo.md}).
+controls; panel data
+\texttt{tests/mpo\_rank\_support/data/sprint\_s2\_v2\_balanced\_library\_panel.json},
+pinned by \texttt{tests/test\_paper14\_mpo\_rank.py}; chronicle
+CHANGELOG v3.54.0).
 
 This bond-rank inheritance is a chemistry-side manifestation of the
 spectral-truncation GH-convergence structure underlying the GeoVac
