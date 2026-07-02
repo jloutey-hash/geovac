@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.62.2] - 2026-07-02
+
+**group4 delta-verification #1 = CLEAN-DELTA (first run under the v4.62.1 run-shapes protocol) → the full certifying (8th) run is EARNED.** Diff-scoped over the 7th-cert remediation (9 files); 7 deterministic gates whole-target PASS; 3 pasted-hunk reviewers, sensitivity 4/4 / specificity clean — the Sonnet-tiered code reviewer caught BOTH its seeds (validating the tiering-with-calibration design on its first outing); one claims reviewer rationalized a planted self-contradiction past its own sentence → de-calibrated, recovered by a sharpened internal-consistency re-dispatch (lesson baked into qa.md's enumeration mandate). Zero genuine defects in the diff. **Cost ~334k subagent tokens vs ~2.5M for a full run (~7.5×), including the recalibration.** DoD chronicle + seed key updated.
+
 ## [4.62.1] - 2026-07-02
 
 **QA cost-reduction package (PI-directed, post-7th-cert meta-review).** One full /qa run ≈ 2–3M tokens (~a 5-hour session); the group4 arc paid full price on "this is probably the certifying run" four times while marginal yield converged to mechanical classes. Three structural changes:

@@ -352,3 +352,13 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   upgrades (878→SOUND, Z=1–56, O(Q^2.5) LiH-fit note, magic→SOUND, +2 §VII rows). Post-remediation: 6 gates PASS,
   5 papers 0-errors, 12/12+3/3+7/7 new/affected pins green, zero seed leakage. **Certifying run (8th) HELD for PI.**
   Per-run detail: CHANGELOG v4.62.0 + `debug/sprint_group4_7thcert_remediation_memo.md`.
+- 2026-07-02 — **Delta-verification #1 (PI-fired, first run under the v4.62.1 run-shapes protocol) = CLEAN-DELTA → the full certifying (8th) run is EARNED.**
+  Scope = diff 51a8b1a..HEAD (the 7th-cert remediation: 206 insertions across 9 files). Deterministic gates ×7
+  (incl. the new C17) whole-target PASS. Three delta reviewers, hunks pasted (no file reads, no worktree, no critic):
+  **sensitivity 4/4** (code-Sonnet caught BOTH its seeds incl. an independent top-6 recompute; synthesis caught its
+  QWC-qualifier flip; claims #1 MISSED its "126-dominant" self-contradiction seed by constructing a charitable
+  reading → de-calibrated, discarded; sharpened internal-consistency re-dispatch caught it immediately — the lesson
+  baked into qa.md), **specificity clean** (no genuine hunk falsely flagged). All genuine remediation hunks verified
+  across dimensions; citation delta (Navratil title) = the calibrated run-7 reviewer's own verified correction,
+  PM-applied, disclosed. **Cost: ~334k subagent tokens (~7.5x below a full run), including one recalibration
+  re-dispatch.** Seed key `debug/qa/group4_delta1_seed_key.json`.
