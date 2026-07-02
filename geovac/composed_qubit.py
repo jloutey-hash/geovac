@@ -1261,7 +1261,9 @@ def composed_lih_scaling_sweep(
 
     Calls build_composed_lih(max_n_core=n, max_n_val=n) for each n,
     collects Pauli term counts, fits N_pauli = a x Q^α, and compares
-    to He single-geometry (Q^3.15) and Gaussian molecular (Q^4.60) scaling.
+    to He single-geometry (Q^3.15) and a historical Gaussian-molecular
+    anchor (Q^4.60 -- superseded by the published Trenev Table 5 fits,
+    Q^3.9-4.3; see Paper 20 tab:resources.  Kept for sweep continuity).
 
     Parameters
     ----------
@@ -1360,7 +1362,7 @@ def composed_lih_scaling_sweep(
         print(f"  {'GeoVac He (single-geom)':>25} {'3.15':>10}"
               f" {'Paper 14, nmax=2-5':>30}")
         print(f"  {'Gaussian molecular':>25} {'4.60':>10}"
-              f" {'literature estimate':>30}")
+              f" {'historical anchor (superseded)':>30}")
 
         # He comparison at matching max_n
         print(f"\n  --- He single-geometry comparison at matching max_n ---")

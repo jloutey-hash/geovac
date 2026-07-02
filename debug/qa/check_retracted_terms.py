@@ -240,6 +240,27 @@ REGISTRY = [
             "papers/synthesis/group4_quantum_computing_synthesis.tex",
         ],
     },
+    {
+        "id": "organics-in-library",
+        "scope": "group4",
+        "severity": "fail",
+        "retired": "2026-06-28 (v4.52.0 library decision): CH2O/C2H2/C2H6 are "
+                   "non-buildable and were REMOVED from the shipping library "
+                   "(37 systems = 35 composed + He + H2). The 6th cert (v4.60.0) "
+                   "found + removed surviving P14 tab:multi_center rows and prose "
+                   "counts; this entry backstops any re-surfacing of the organics "
+                   "as live library members / with live Pauli counts.",
+        # zombie signature: an organic presented with a live count or as a
+        # library row (a mention with a removed/dropped qualifier is exempt)
+        "pattern": r"C\$?_\{?2\}?\$?H\$?_\{?[26]\}?\$?\s*(?:&|both\s+yield|at\s+\$?Q|yields?)"
+                   r"|CH\$?_\{?2\}?\$?O\s*(?:&|both\s+yield|at\s+\$?Q|yields?)",
+        "exempt_if_nearby": r"removed|dropped|non-buildable|not\s+(?:in|part\s+of)\s+the"
+                            r"|historical|retired|de-shipped",
+        "files": [
+            "papers/group4_quantum_computing/*.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+        ],
+    },
 ]
 
 

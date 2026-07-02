@@ -356,10 +356,10 @@ def test_pauli_coefficient_range():
     # Nuclear coefficients are ~MeV = ~37000 Ha
     # Hyperfine coefficients are ~10^-7 Ha
     # Finite-size coefficients are ~10^-10 Ha
-    # Ratio should be > 10^10
+    # Ratio should be > 10^12 (measured ~4e13; Paper 23 tab:ne-scales ~2e13)
     assert analysis['max_coefficient'] > 1e3      # nuclear scale
     assert analysis['min_coefficient'] < 1e-6     # coupling scale
-    assert analysis['coefficient_ratio'] > 1e9
+    assert analysis['coefficient_ratio'] > 1e12
 
 
 # ---------------------------------------------------------------------------

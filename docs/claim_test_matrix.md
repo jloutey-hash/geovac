@@ -237,12 +237,12 @@ Initial claim→test mapping for the four group4 papers (14/16/20/23); this bran
 
 | Paper | Claim | Backing test | Code module | Status | Verdict |
 |---|---|---|---|---|---|
-| 16 | **ν = N − 2** (S<N/2, λ₁=2); code ν=max(N−2,0) | `test_atomic_classifier.py::TestPeriodNuMu::test_nu` (parametrized Z=1..) | `atomic_classifier.py` | **BACKED-SOUND** | exact per-Z assertions; code clamps ν≥0 for closed shells (minor) |
+| 16 | **ν = N − 2** (S<N/2, λ₁=2); code ν=max(N−2,0) | `test_atomic_classifier.py::TestQuantumNumbers::test_nu` (parametrized Z=1..; class name synced 2026-07-01) | `atomic_classifier.py` | **BACKED-SOUND** | exact per-Z assertions; code clamps ν≥0 for closed shells (minor) |
 | 16 | **μ_free = 2(N−2)(N−1)** | `test_atomic_classifier.py::test_mu_free` | `atomic_classifier.py` | **BACKED-SOUND** | exact per-Z assertions |
-| 16 | **5-type classification A/B/C/D/E** | `test_atomic_classifier.py::TestStructureType::test_structure_type` | `atomic_classifier.py::classify_atom` | **BACKED-SOUND** (paper synced 2026-06-28) | Paper 16 corrected to **5 types (A/B/C/D/E)** consistently (abstract + §IV intro + new Type E subsection now match the Table + conclusion + code + CLAUDE.md §1.5). The code further splits open-shell E into a p-block dispatch (E) and a d-block dispatch (F); the paper notes this as an implementation refinement |
+| 16 | **5-type classification A/B/C/D/E** | `test_atomic_classifier.py::TestStructureTypes::test_structure_type` | `atomic_classifier.py::classify_atom` | **BACKED-SOUND** (paper synced 2026-06-28) | Paper 16 corrected to **5 types (A/B/C/D/E)** consistently (abstract + §IV intro + new Type E subsection now match the Table + conclusion + code + CLAUDE.md §1.5). The code further splits open-shell E into a p-block dispatch (E) and a d-block dispatch (F); the paper notes this as an implementation refinement |
 | 16 | Periodic law = repeating S_N irrep sequence C→D→…→B per period | `test_atomic_classifier.py::test_group_type` | `atomic_classifier.py` | **BACKED-WEAK** | per-Z group_type asserted; the period-repetition *sequence* claim is not directly tested |
 | 16 | Per-pair limit: μ_free → exactly 4 units angular momentum per antisymmetric pair as N→∞ | — | — | **NO-TEST** | asymptotic claim; no test |
-| 16 | Z=137 (Z=1/α) **smooth** → Dirac instability is a **metric** singularity, not topological | — | — | **NO-TEST** | proof-by-argument; no test (grep for 137 finds none in the classifier tests) |
+| 16 | Z=137 (Z=1/α) **smooth** → Dirac instability is a **metric** singularity, not topological | `test_paper16_dirac_metric.py` (4 tests: μ_free smooth/exact at N=137; δ_1s reproduces tab:metric row-by-row incl. the >10³ pinch) | self-contained (§VI formulas) | **BACKED-SOUND** (test added v4.57.0; matrix row was stale; all 6 δ rows pinned 2026-07-01) | closes gap #10 |
 
 ### Paper 23 (nuclear shell)
 
@@ -255,7 +255,7 @@ Initial claim→test mapping for the four group4 papers (14/16/20/23); this bran
 | 23 | Deuteron **1-norm ≈ 342 MeV** (non-I, hw=10) | `test_paper23_resource_counts.py::test_deuteron_resource_counts` (==342.2±1) | `nuclear/nuclear_hamiltonian.py` | **BACKED-SOUND** (paper synced + pinned 2026-06-28) | the stale **227.3** drafting-era number (code stable since v2.7.0, no regression) corrected to the reproducible **342.2 MeV**; now pinned so it can't silently drift |
 | 23 | He-4 **16 qubits** | `test_nuclear_he4.py::test_he4_qubit_count` (==16) | `nuclear/nuclear_hamiltonian.py` | **BACKED-SOUND** | exact |
 | 23 | He-4 **712 Pauli terms**; 1-norm ~467/462 MeV (no/with Coulomb, hw=10) | `test_paper23_resource_counts.py::test_he4_resource_counts_no_coulomb` / `_with_coulomb` (==712, 1-norm pinned) | `nuclear/nuclear_hamiltonian.py` | **BACKED-SOUND** (paper synced + pinned 2026-06-28) | count now pinned exactly; the He-4 1-norm was ALSO stale (paper 557/552 → reproducible **467/462 MeV**), corrected + pinned |
-| 23 | He-4 needs only **1.20×** more Pauli despite **12.25×** larger Hilbert dim | `test_nuclear_he4.py::test_he4_more_pauli_than_deuteron` (qualitative >) | `nuclear/nuclear_hamiltonian.py` | **BACKED-WEAK** | only `>` is asserted; recompute gives ratio **1.203** (reproduces); 12.25× dim ratio not asserted |
+| 23 | He-4 needs only **1.20×** more Pauli despite **12.25×** larger Hilbert dim | endpoints exactly pinned: counts 592/712 (`test_paper23_resource_counts.py`, `==`) + dims 64/784 (`test_deuteron_hilbert_dim`/`test_he4_hilbert_dim`, exact shapes) | `nuclear/nuclear_hamiltonian.py` | **BACKED-SOUND** (upgraded 2026-07-01, 6th-cert two-way verdict) | 712/592=1.203 and 784/64=12.25 are exact rationals of pinned endpoints |
 | 23 | He-4 intra-species antisymmetrisation (pp/nn Pauli exclusion) | `test_nuclear_he4.py::test_he4_pp_antisymmetric`, `::test_he4_nn_antisymmetric`, `::test_he4_antisymmetry_property` | `nuclear/nuclear_hamiltonian.py` | **BACKED-SOUND** | exclusion + exchange-antisymmetry verified |
 | 23 | He-4 pp Coulomb = small repulsive correction | `test_nuclear_he4.py::test_he4_coulomb_small_correction` (0<dE<2 MeV) | `nuclear/nuclear_hamiltonian.py` | **BACKED-SOUND** | sign + magnitude bounded |
 | 23 | Composed nuclear–electronic deuterium **26 qubits** (16+10), multi-block architecture | `test_nuclear_electronic.py::test_composed_hamiltonian_qubit_count` (Q_total==26, 16+10) + block/hermiticity/hyperfine tests | `nuclear/nuclear_electronic.py` | **BACKED-SOUND** (26q) | total 26q + block decomposition genuinely tested |
@@ -273,7 +273,7 @@ Initial claim→test mapping for the four group4 papers (14/16/20/23); this bran
 7. **OPEN** — **P20 13× fewer QWC groups** — factor not asserted.
 8. **OPEN** — **P20 balanced-LiH 878 Pauli + 0.20%@n=3** — counts/accuracy not pinned (cross-ref group2 P19 NO-TEST).
 9. **OPEN** — **P16 per-pair 4-units asymptotic** — no test.
-10. **OPEN** — **P16 Z=137 metric-not-topological** — no test.
+10. ✅ **CLOSED** — **P16 Z=137 metric-not-topological** → `test_paper16_dirac_metric.py` (added v4.57.0; all tab:metric δ rows pinned 2026-07-01).
 11. ✅ **CLOSED** — **P23 deuteron 592 / He-4 712 Pauli counts** → `test_paper23_resource_counts.py` (exact pins).
 12. ✅ **CLOSED + paper synced** — **P23 deuteron 1-norm** 227→**342 MeV** (paper corrected; pinned).
 13. ✅ **CLOSED + paper synced (1-norm)** — **P23 He-4 1-norm** 557/552→**467/462 MeV** (paper corrected; pinned). The **1.20×/12.25× ratios** remain only qualitative `>`.

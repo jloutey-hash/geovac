@@ -43,8 +43,11 @@ def test_mu_free_monotone_finite_across_Z137() -> None:
 
 
 def test_delta_1s_table_values() -> None:
-    """Metric side reproduces tab:metric (paper §VI): perturbative -> singular."""
+    """Metric side reproduces tab:metric (paper §VI): perturbative -> singular.
+    Every delta_1s row of the table is pinned (QA 2026-07-01 tightening)."""
+    assert abs(_delta_1s(1) - 0.00005) < 0.00002  # non-relativistic
     assert abs(_delta_1s(29) - 0.047) < 0.002    # mildly relativistic
+    assert abs(_delta_1s(47) - 0.133) < 0.003    # relativistic
     assert abs(_delta_1s(79) - 0.498) < 0.005    # strongly relativistic
     assert abs(_delta_1s(118) - 2.87) < 0.05     # near-singular
     assert _delta_1s(137) > 1.0e3                # conical singularity (~10^3), the metric pinch

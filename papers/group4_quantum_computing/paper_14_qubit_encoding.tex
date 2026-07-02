@@ -58,7 +58,7 @@ classical equilibrium-geometry errors of 5--26\% (LiH/BeH$_2$/H$_2$O;
 Sec.~\ref{sec:accuracy}), making the framework optimal for fixed-geometry
 quantum simulation rather than geometry optimisation.
 Across the composed molecular library (35 molecules spanning
-$Z = 1$--36, including the first transition series ScH--ZnH), the composed
+$Z = 1$--56, H through Ba, including the first transition series ScH--ZnH), the composed
 Pauli count is exactly linear in the qubit count:
 $N_{\mathrm{Pauli}} = 11.10 \times Q$ (exact, non-identity terms; $d$-orbital
 blocks give 9.23).  These counts are realized under a \emph{pair-diagonal}
@@ -419,7 +419,9 @@ production encoders (\texttt{lattice\_index} for atoms, \texttt{composed\_qubit}
 for molecules) retain a two-electron integral only when each electron conserves
 its magnetic number separately ($m_a = m_c$ \emph{and} $m_b = m_d$), dropping the
 genuinely-nonzero \emph{$m$-swap} integrals that the exact Coulomb rule
-($m_a + m_b = m_c + m_d$, global $M_L$) keeps.  This is a deliberate
+($m_a + m_b = m_c + m_d$, global $M_L$) keeps (e.g.\
+$\langle p_{+1}p_{-1}|p_{-1}p_{+1}\rangle$, per-vertex angular factor
+$|c^2(1,{\pm}1;1,{\mp}1)| = \sqrt{6}/5 \approx 0.49$).  This is a deliberate
 \emph{sparsifying approximation}:\ its energy effect is sub-chemical
 ($\sim$\,mHa), and it is the right choice when sparsity---not energy
 accuracy---is the purpose, which is the purpose of a resource analysis.
@@ -1371,15 +1373,15 @@ this:
   ERI count from $O(M^4)$ to $O(\sum_b M_b^4)$.
 \item \textbf{Angular selection rules preserved:} Each block retains
   the Gaunt integral sparsity from the single-center case, with ERI
-  density decreasing as $\sim 1/M_b^2$ within each block.
+  density decreasing as $\sim 1/M_b$ within each block.
 \item \textbf{Composition is additive:} Adding a new atomic center
   adds a new ERI block but does not create cross-block entries.
 \end{enumerate}
 The universality of the $Q^{2.5}$ exponent across LiH, BeH$_2$, and
 H$_2$O---systems with 3, 5, and~7 orbital blocks,
 respectively---is confirmed by the composed molecular library spanning
-$Z = 1$--36, including multi-center systems (LiF, CO, N$_2$, F$_2$,
-NaCl) with up to 4~nuclei
+$Z = 1$--56, including the five multi-center systems (LiF, CO, N$_2$, F$_2$,
+NaCl)
 (Sec.~\ref{sec:multi_center}).  Across the composed molecules, the composed
 Pauli count is exactly linear in~$Q$: $N_{\mathrm{Pauli}} \approx
 11.10 \times Q$, confirming that the scaling advantage extends
@@ -1484,8 +1486,8 @@ The composed architecture handles molecules with more than two nuclei
 through the same block-diagonal construction: each electron pair
 occupies an independent orbital block, and cross-block ERIs are zero
 by the pseudopotential approximation.  Table~\ref{tab:multi_center}
-reports composed Pauli counts for eight multi-center systems at
-$n_{\max} = 2$, including molecules with up to eight nuclei.
+reports composed Pauli counts for the five multi-center systems
+in the shipping library at $n_{\max} = 2$.
 
 \begin{table}[t]
 \caption{Composed (block-diagonal) Pauli term counts for multi-center
@@ -1502,9 +1504,6 @@ CO       & 14 & 7 & 100 &   1{,}111 \\
 N$_2$    & 14 & 7 & 100 &   1{,}111 \\
 F$_2$    & 18 & 9 & 100 &   1{,}111 \\
 NaCl     &  8 & 4 &  50 &     556 \\
-CH$_2$O  & 16 & 8 & 120 &   1{,}333 \\
-C$_2$H$_2$ & 14 & 7 & 120 & 1{,}333 \\
-C$_2$H$_6$ & 18 & 9 & 160 & 1{,}777 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1515,13 +1514,12 @@ Pauli counts (1{,}111) despite different nuclear charges, confirming
 that the invariance observed for frozen-core pairs
 (Sec.~\ref{sec:second_row}) extends to multi-center topologies.
 Similarly, CO, N$_2$, and F$_2$ all yield 1{,}111 terms at
-$Q = 100$; and CH$_2$O and C$_2$H$_2$ both yield 1{,}333 at
-$Q = 120$.  The Pauli count is determined entirely by the qubit
+$Q = 100$.  The Pauli count is determined entirely by the qubit
 count~$Q$, not by the number of blocks, the block structure, or the
 atomic species.
 
 Across the 35 composed molecules in the library---spanning
-$Z = 1$--36 and including the transition metal hydrides
+$Z = 1$--56 and including the transition metal hydrides
 (Sec.~\ref{sec:d_orbitals})---the composed Pauli count obeys
 \begin{equation}
   N_{\mathrm{Pauli}} = 11.10 \times Q,
@@ -1540,7 +1538,7 @@ set of Pauli terms with no cross-block coupling.
 
 With these five multi-center systems, the GeoVac library spans
 37 systems (35 composed molecules plus the He and H$_2$ reference atoms)
-across $Z = 1$--36, including first-row
+across $Z = 1$--56 (H through Ba), including first-row
 (H$_2$ through CH$_4$), second-row (NaH through SiH$_4$),
 third-row (KH through HBr), multi-center (LiF, CO, N$_2$, F$_2$, NaCl),
 and the ten transition metal hydrides (ScH--ZnH;
@@ -2029,7 +2027,7 @@ accuracy.
 Sprint~5 Track~DV (2026) fully characterized the bipolar harmonic
 expansion of
 $Y^{(K)}(\hat r_{12})/r_{12}^{K+1}$
-(Varshalovich~\S5.17, Brink--Satchler App.~5) for the He
+(Varshalovich~\S5.17; Brink--Satchler) for the He
 $(1s)(2p)$ configuration: only a single bipolar channel
 $(k_1\!=\!0, k_2\!=\!2)$ is angular-allowed for the direct path,
 and only $(k_1\!=\!1, k_2\!=\!1)$ is allowed for the exchange path
@@ -2071,8 +2069,8 @@ $66\%$ SO-only T8 baseline, same sign as NIST) meets the Sprint~3
 BF-D target of $<20\%$ accuracy.  The $2.6\%$ residual on the
 smaller $(P_1, P_2)$ splitting is at the limit of the
 four-coefficient rational approximation; further reduction requires
-finite-mass recoil or higher-order QED corrections (Drake~1971
-\S IV, not in scope).
+finite-mass recoil or higher-order QED corrections (treated in
+Drake's helium fine-structure reviews; not in scope here).
 
 Extensions to Li $2\,^2\!P$ and Be $2s2p\,^3\!P$ (Sprint~3 BF-E)
 were initially reported as honest negatives at $+118\%$ (Li) and $88\%$
@@ -2109,8 +2107,9 @@ while $2p^{2}$ has even parity $(-1)^{1+1} = +1$, and the
 parity-even $1/r_{12}$ operator gives zero coupling.  This is verified
 symbolically in \texttt{tests/test\_breit\_integrals.py}
 (\texttt{test\_2config\_2s2p\_2p2\_parity\_forbidden}).
-Core polarization (Migdalek-Bylicki
-Phys.~Rev.~A \textbf{57}, 3456 (1998), with $\alpha_{d}({\rm Li}^{+}) = 0.192$
+Core polarization (a Migdalek--Bylicki-type model potential,
+e.g.\ Phys.~Rev.~A \textbf{24}, 649 (1981), evaluated here with
+$\alpha_{d}({\rm Li}^{+}) = 0.192$
 and $r_{c} = 0.55$~a.u.) is a small correction for Li that
 \emph{worsens} agreement (from $+8.9\%$ to $+25\%$) because it is
 attractive and increases $\zeta_{2p}$; the Sprint~3 hypothesis that CP
@@ -2477,8 +2476,11 @@ $\Delta Q_\ell = n_{\rm sb}$ (one stabiliser per sub-block with
 $\ell$-odd content) is matched bit-exactly across the panel.  The
 Pauli-count ratio is uniformly $\sim 0.97$ (a $\sim 3\%$ reduction
 beyond Hopf-only), making this a \emph{strict improvement} over
-Hopf-only on both axes.  Verified bit-exact spectrum preservation
-on small systems (test \texttt{tests/test\_extended\_tapering.py}).
+Hopf-only on both axes.  Ground-state spectrum preservation is
+verified on H$_2$: the minimum over tapered sector choices matches
+the naive JW ground energy to $<10^{-10}$
+(test \texttt{tests/test\_extended\_tapering.py},
+\texttt{test\_extended\_hopf\_ell\_spectrum\_preserved\_h2}).
 
 \subsubsection{Hidden per-sub-block particle-conservation Z$_2$:\
 meta-investigation via symmetry-adapted basis}
@@ -2760,7 +2762,7 @@ circuit.  Published benchmarks focus on large active spaces: FeMoCo at
 108--152~qubits~\cite{lee2021}, cytochrome~P450 at
 96--116~qubits~\cite{caesura2025}, and similar production-scale systems,
 with further reductions reported through improved tensor factorization
-and active volume compilation~\cite{caesura2025_tensor_factorization}.
+and active volume compilation~\cite{caesura2025}.
 To our knowledge, no published DF, THC, or SCDF $\lambda$~values exist
 for molecules at the 10--70~qubit operating scale of the present work
 (LiH at $Q = 30$, H$_2$O at $Q = 70$), because these systems are too
@@ -2780,13 +2782,13 @@ For LiH~STO-3G (6~spatial orbitals, $Q = 12$, FCI $E = -7.881$~Ha),
 the raw JW Hamiltonian has 907~Pauli terms, $\lambda = 34.3$~Ha, and
 273~QWC groups.  The composed GeoVac LiH ($Q = 30$, electronic-only
 with PK partitioned classically) has 334~Pauli terms,
-$\lambda = 33.3$~Ha, and 21~QWC groups.  At matched qubit count
+$\lambda = 32.6$~Ha, and 21~QWC groups.  At matched qubit count
 (not matched accuracy---the composed LiH carries $\sim$5\% $R_\mathrm{eq}$
 geometry error and does not bind under qubit FCI),
 GeoVac has 2.7$\times$ fewer Pauli terms and 13$\times$ fewer
 QWC groups (these absolute multipliers use the pair-diagonal ERI rule,
 Sec.~\ref{sec:eri_rule}; near parity under the exact rule), with
-essentially identical 1-norm ($0.97\times$).
+essentially identical 1-norm ($0.95\times$).
 The 1-norm parity reflects that $\lambda$ is dominated by one-body
 terms (core energies, PK), which scale with nuclear charge rather than
 orbital count.  The Pauli and QWC advantage are the VQE-relevant
@@ -2802,7 +2804,7 @@ BLISS-THC factorization for cytochrome P450 in a (63e, 58o) active
 space ($Q = 116$ spin-orbitals): 999~memory qubits,
 $\lambda_{\mathrm{BLISS\text{-}THC}} \approx 133$~Ha,
 and $1.71 \times 10^9$ Toffoli gates after circuit improvements;
-the prior-art THC of Goings \textit{et al.}~\cite{lee2021}
+the prior-art THC of Goings \textit{et al.}~\cite{goings2022}
 reported $\lambda_{\mathrm{THC}} = 388.9$~Ha and
 $7.79 \times 10^9$ Toffolis at the same active space.  Caesura's
 $\sim$233$\times$ runtime speedup over baseline THC combines a
@@ -2814,8 +2816,8 @@ a factor of 2 of the symmetry-shifted lower bound 69.3~Ha for
 P450~\cite{caesura2025}.  These resource estimates are reported
 for a single P450 active space, the smallest molecule in the
 Caesura benchmark; the GeoVac multi-center library
-(Tracks~CU--CX) includes ethane C$_2$H$_6$ at $Q = 160$ with
-$1{,}777$~Pauli terms under the composed encoding (CLAUDE.md~\S2),
+reaches CO and N$_2$ at $Q = 100$ with
+$1{,}111$~Pauli terms under the composed encoding (Sec.~\ref{sec:multi_center}),
 but Pauli term count and 1-norm/Toffoli count are not directly
 comparable metrics --- Pauli count drives VQE measurement overhead
 and Trotterization step depth, while the BLISS-THC pipeline
@@ -3048,6 +3050,14 @@ J.~Lee, D.~W.~Berry, C.~Gidney, \textit{et al.},
 hypercontraction,''
 PRX Quantum \textbf{2}, 030305 (2021).
 
+\bibitem{goings2022}
+J.~J.~Goings, A.~White, J.~Lee, C.~S.~Tautermann, M.~Degroote,
+C.~Gidney, T.~Shiozaki, R.~Babbush, and N.~C.~Rubin,
+``Reliably assessing the electronic structure of cytochrome P450 on
+today's classical computers and tomorrow's quantum computers,''
+Proc.\ Natl.\ Acad.\ Sci.\ \textbf{119}, e2203533119 (2022);
+arXiv:2202.01244.
+
 %% --- Jordan--Wigner and fermion-to-qubit mappings ---
 
 \bibitem{jordan1928}
@@ -3157,7 +3167,7 @@ GeoVac Paper~29 (2026).
 
 \bibitem{burkat_fitzpatrick2025}
 G.~Burkat and S.~Fitzpatrick,
-``The Quantum Paldus Transform: O(d$^3$) circuit for $u(d) \times SU(2)$ block-diagonalization,''
+``The Quantum Paldus Transform: Efficient Circuits with Applications,''
 arXiv:2506.09151 (2025).
 
 \bibitem{rocca2024}
@@ -3167,20 +3177,12 @@ through symmetry-compressed double factorization,''
 J.\ Chem.\ Theory Comput.\ \textbf{20}, 4639--4653 (2024).
 
 \bibitem{caesura2025}
-A.~E.~Caesura, C.~L.~Cortes, A.~Pol, S.~Sim, M.~Steudtner,
+A.~E.~Caesura, C.~L.~Cortes, W.~Pol, S.~Sim, M.~Steudtner,
 G.-L.~R.~Anselmetti, M.~Degroote, N.~Moll, R.~Santagati, M.~Streif,
 and C.~S.~Tautermann,
 ``Faster quantum chemistry simulations on a quantum computer with
 improved tensor factorization and active volume compilation,''
 PRX Quantum \textbf{6}, 030337 (2025); arXiv:2501.06165.
-
-\bibitem{caesura2025_tensor_factorization}
-A.~E.~Caesura, C.~L.~Cortes, A.~Pol, S.~Sim, M.~Steudtner,
-G.-L.~R.~Anselmetti, M.~Degroote, N.~Moll, R.~Santagati, M.~Streif,
-and C.~S.~Tautermann,
-``Faster quantum chemistry simulations on a quantum computer with
-improved tensor factorization and active volume compilation,''
-arXiv:2501.06165 (2025).
 
 \bibitem{trenev2025}
 D.~Trenev, P.~J.~Ollitrault, S.~M.~Harwood, T.~P.~Gujarati,
@@ -3254,7 +3256,7 @@ arXiv:physics/0402061 (2004).
 \bibitem{Chawla2024}
 P.~Chawla, V.~S.~Prasannaa, K.~R.~Swain, K.~Sugisaki, and B.~P.~Das,
 ``Relativistic VQE calculations of molecular electric dipole moments on
-quantum hardware,'' Phys.\ Rev.\ A \textbf{111}, 022817 (2025);
+trapped ion quantum hardware,'' Phys.\ Rev.\ A \textbf{111}, 022817 (2025);
 arXiv:2406.04992.
 [RaH 18-qubit active space: 12{,}556 relativistic / 2{,}740
 non-relativistic Pauli terms (47{,}099 / 4{,}249 two-electron integrals).]

@@ -97,7 +97,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     $Q^{3.92}$ H$_2$O, `trenev2025`); QWC groups **$O(Q^{3.36})$**; 1-norm $\lambda$
     **$O(Q^{1.69})$**, $R^2=0.997$ (the key FT result); composed **$O(Q^{2.5})$** universal
     (exponent spread 0.02); $N_{\rm Pauli}=11.10\,Q$ exact (9.23 $d$-block); ERI density
-    $\sim 1/M^2$. ⚑ "two-or-more orders of magnitude / 51×–1712× vs Gaussian" + "$d$-block
+    $\sim 1/M$ (corrected v4.54.0; this watch-note synced 2026-07-01). ⚑ "two-or-more orders of magnitude / 51×–1712× vs Gaussian" + "$d$-block
     sparser"; matched-qubit-not-accuracy caveat MANDATORY.
   - **Paper 16:** $\mu_{\rm free}=\nu(\nu+3N-2)/2$ (SO(3N) Casimir); $\nu=N-2$ universal for
     $S<N/2$; **5 atom types A/B/C/D/E** (FIXED 2026-06-28 — abstract+§IV synced to the Table+
@@ -107,8 +107,8 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     (the market test — re-prices to parity under global-$M_L$); balanced coupled (PK-free)
     binds LiH at **$R_{\rm eq}=3.015$ bohr, 878 Pauli @ 30q, 0.20%** single-point energy at
     the minimum; **row-conditional** chemistry-accuracy (first-row binds; second-row NaH↓
-    monotone overattraction — the honest §scope_boundary); library **38 molecules** (Z=1–36;
-    ⚑ reconcile vs Paper 14 "30" / CLAUDE.md "40" / 35 shipping); $O(Q^{2.5})$ universal vs
+    monotone overattraction — the honest §scope_boundary); library **37 systems** (35 composed
+    + He + H2, $Z=1$–56 H–Ba; decided 2026-06-28, this watch-note synced 2026-07-01); $O(Q^{2.5})$ universal vs
     Gaussian $O(Q^{3.9-4.3})$; ⚑ $11.10\,Q$ / $9.23$ $d$-block; frozen cores enter via
     identity only.
   - **Paper 23:** HO closures **2,8,20,40,70,112** from graph state counting; magic
@@ -315,3 +315,22 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   **PI-flagged (not auto-decided):** M-A market-direction (raw-907 2.7× vs Trenev-reduced 276 parity — caption
   brackets both); M-B (0.20% n=3 no CI test, heavy 84q FCI) deferred; "three rows" framing sweep; secondary-number
   reconciliations; citation NITs. Per-run detail: CHANGELOG v4.58.0 + `debug/sprint_group4_5thcert_remediation_memo.md`.
+- 2026-07-01 — **6th cert (whole-group, PI-fired) = FAIL → ALL remediated; recert HELD per PI (v4.60.0).**
+  Panel FULLY CALIBRATED (sensitivity **8/8**, specificity **6/6**); one calibration wrinkle: the P16 code
+  reviewer #1 MISSED its seed (ordering-only divergence asserts blessed as SOUND) → clean discarded, fresh
+  strength-matching re-dispatch CAUGHT it (capped-δ counterfactual) — the per-dimension fix-and-re-run path.
+  Seed s1 caught twice independently. 3 verified genuine MATERIALs, all remediated: **(M1)** the v4.58.0 M-C
+  Z=1–36→Z=1–56 fix had missed P20's conclusion + 4 P14 loci (second-locus propagation class); **(M2)** P14
+  ℓ-parity "verified bit-exact spectrum preservation (test test_extended_tapering.py)" — the cited file had
+  NO eigenvalue comparison (`_spectrum_lowest` defined, never called) → new
+  `test_extended_hopf_ell_spectrum_preserved_h2` PASSES <1e-10, sentence repointed; **(M3)** P14
+  tab:multi_center still carried the v4.52.0-de-shipped organics CH₂O/C₂H₂/C₂H₆ (8 rows vs prose "these
+  five") → removed + **C16 `organics-in-library` registry entry**. NITs: LiH λ 33.3→32.6 / 0.97×→0.95×
+  (closes the v4.59.0-deferred 33.3/32.59 reconciliation; §1.5 echo PI-flagged), FriarPayne→PRA 56,5173(1997),
+  goings2022 bibitem added, Migdalek–Bylicki wrong-ID fixed, Pachucki2018 re-key, duplicate caesura merged,
+  all six tab:metric rows pinned, 10¹³ guard →1e12, matrix upgrades (Z=137 gap #10 CLOSED; He-4 ratios
+  →BACKED-SOUND), DoD watch-notes synced (~1/M; 37 systems Z=1–56). Coverage closure: completeness-critic
+  surfaced P14 §V.G (never enumerated by any prior panel) → focused claims re-dispatch CLEAN across all 8
+  regions (zero MATERIAL); focused citation re-dispatch found the Migdalek–Bylicki wrong-ID. Post-remediation:
+  6 gates PASS, 4 papers 0-errors, 144 affected tests green, zero seed leakage. **Certifying run (7th) HELD
+  for PI.** Per-run detail: CHANGELOG v4.60.0 + `debug/sprint_group4_6thcert_remediation_memo.md`.

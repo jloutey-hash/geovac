@@ -207,6 +207,51 @@ def test_extended_ell_parity_reduces_pauli_on_lih(lih_spec_default):
     assert n_p_ext < n_p_hopf
 
 
+@pytest.mark.slow
+def test_extended_hopf_ell_spectrum_preserved_h2():
+    """Hopf + ℓ-parity extended tapering preserves the H₂ ground-state
+    energy: the minimum over tapered sector-sign choices equals the naive
+    JW ground energy to machine precision.  Backs the Paper 14
+    §ell-parity 'spectrum preservation' sentence (QA 2026-07-01: that
+    sentence previously cited this file, but no eigenvalue comparison
+    existed here — `_spectrum_lowest` was defined and never called)."""
+    from itertools import product
+    from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+    from geovac.extended_tapering import extended_tapered_from_spec
+
+    spec = MolecularSpec(
+        name='H2',
+        blocks=[OrbitalBlock(
+            label='H2_bond', block_type='bond_pair', Z_center=1.0,
+            n_electrons=2, max_n=2,
+        )],
+        nuclear_repulsion_constant=1.0 / 1.4,
+    )
+    base = extended_tapered_from_spec(
+        spec, use_hopf=True, use_ell_parity=True,
+        use_atom_swap=False, use_inversion=False,
+    )
+    E_naive = _spectrum_lowest(
+        base['qubit_op_naive'], n_qubits=base['Q_naive'],
+    )[0]
+    n_kept = base['n_stabs_kept']
+    E_best = None
+    for signs in product([+1, -1], repeat=n_kept):
+        out = extended_tapered_from_spec(
+            spec, use_hopf=True, use_ell_parity=True,
+            use_atom_swap=False, use_inversion=False,
+            sector_signs=signs,
+        )
+        e = _spectrum_lowest(
+            out['qubit_op_tapered'], n_qubits=out['Q_tapered'],
+        )[0]
+        if E_best is None or e < E_best:
+            E_best = e
+    assert abs(E_best - E_naive) < 1e-10, (
+        f"extended-tapered ground energy {E_best!r} != naive {E_naive!r}"
+    )
+
+
 def test_extended_savings_panel():
     """Across the representative panel, extended tapering with
     Hopf + ℓ-parity should yield ΔQ_extended == ΔQ_hopf + n_sub_blocks_with_lodd

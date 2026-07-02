@@ -11,6 +11,11 @@ follow Paper 16 (Chemical Periodicity as Representation Theory):
   Type C: single valence over closed core -- simplest composed (Li)
   Type D: s² valence over closed core     -- paired valence (Be)
   Type E: open p-shell valence            -- exchange coupling important (B-F)
+  Type F: open d-shell valence            -- code-level split of Type E for
+                                             the d-block (Sc-Zn); Paper 16
+                                             treats E/F as one representation-
+                                             theory type with an implementation
+                                             refinement
 
 PK parameters from Paper 17 Table 1 (computed for Li, Be) or ab initio
 from Level 3 hyperspherical solver (Track BI, v2.0.30) for Z=5-9.

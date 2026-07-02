@@ -406,8 +406,10 @@ calculations require $N_{\mathrm{shells}} \gtrsim 6$--$8$. We therefore
 emphasize that the results in Table~\ref{tab:deuteron} are
 \emph{encoding-validation} benchmarks, not nuclear-structure
 predictions. The Pauli count and $1$-norm characterize the cost of
-the qubit Hamiltonian, and the FCI diagonalization verifies that the
-Pauli encoding reproduces the matrix representation. Recent
+the qubit Hamiltonian; the FCI validation is performed on the matrix
+representation (the source of truth), while the Pauli-string export is
+validated structurally, subject to the off-diagonal sign limitation
+disclosed in Sec.~\ref{subsec:known_limitation}. Recent
 deuteron-targeted quantum-resource
 work~\cite{SarmaStevenson2025,PillaiRamanan2025} provides direct
 comparison points at comparable qubit count for the encoding cost
@@ -569,7 +571,7 @@ relative to the nuclear-scale diagonal.
   \begin{tabular}{lc}
     Contribution & Scale (Ha) \\
     \hline
-    Max Pauli coeff (nuclear)    & $\sim 3 \times 10^{5}$ \\
+    Max Pauli coeff (nuclear)    & $\sim 5 \times 10^{5}$ \\
     Electronic binding scale     & $\sim 10^{-1}$ \\
     Hyperfine coeff (per Pauli)  & $\sim 10^{-8}$ \\
     Finite-size shift (analytic) & $\sim 10^{-10}$ \\
@@ -608,6 +610,7 @@ of adding cross-block couplings, even if the single-pass solution is
 not practical.
 
 \subsection{Known limitation}
+\label{subsec:known_limitation}
 
 The Pauli encoding of the off-diagonal one-body terms in the deuteron
 builder of Sec.~\ref{sec:deuteron} carries a known sign issue: the
@@ -808,7 +811,7 @@ $|E_1| \cdot m_e/m_p = +2.72 \times 10^{-4}$~Ha at the
 $2.86\%$ level. The same numerical agreement appears against the
 leading-order term of the Pachucki--Patkó\v{s}--Yerokhin 2018
 Foldy--Wouthuysen-reduced two-particle
-Hamiltonian~\cite{Pachucki2023}.
+Hamiltonian~\cite{Pachucki2018}.
 
 The choice $\lambda_n = 2\sqrt{M_p/m_e}$ is structural rather than
 fitted: the value is determined by requiring the leading
@@ -1019,7 +1022,7 @@ Wineland--Ramsey~1972~\cite{WinelandRamsey1972} measurement of
 $327.384352522(2)$~MHz, a residual of $+40$~ppm.
 
 The leading-order Zemach correction with $r_Z(D) = 2.593$~fm
-(Friar--Payne~2005~\cite{FriarPayne2005}) gives
+(Friar--Payne~1997~\cite{FriarPayne1997}) gives
 $\Delta\nu_Z/\nu_F = -98.0$~ppm at the operator level via
 \texttt{geovac.magnetization\_density.hydrogen\_zemach\_eides\_leading\_order},
 matching the analytic Eides $-2 Z m_e r_Z$ to floating-point precision.
@@ -1112,7 +1115,7 @@ memo~\cite{TrackNiZenodo}.
 Three downstream sprints are named but not pursued in this paper:
 (i) multi-shell $n_{\max} \geq 2$ on both joint registers, to close
 the next-order sign disagreement against
-Pachucki~2018~\cite{Pachucki2023} and lift the basis-truncation
+Pachucki~2018~\cite{Pachucki2018} and lift the basis-truncation
 ceiling on $V_{eN}$; (ii) full Pachucki~$(Z\alpha)^4$ match in the
 multi-shell extension, requiring the integer-power coefficients to
 agree term-by-term rather than only at leading order; (iii) $n_e$-projected
@@ -1134,8 +1137,10 @@ Coulomb-specific component:
 \begin{itemize}
   \item \textbf{Universal (applies to HO, Woods--Saxon, NN potentials).}
     The angular selection rules from Wigner $3j$ symbols and the Gaunt
-    integral; the $O(Q^4)$ single-center and $O(Q^{2.5})$ composed
-    Pauli scaling; the block structure of the two-body tensor; the
+    integral; the angular-sparsity reduction of single-center Pauli
+    scaling below the naive $O(Q^4)$ (measured $O(Q^{3.15})$ for
+    Coulomb atoms) and the $O(Q^{2.5})$ composed Pauli scaling; the
+    block structure of the two-body tensor; the
     qubit encoding via Jordan--Wigner on species-specific registers.
   \item \textbf{Coulomb-specific.} The $S^3$ conformal projection
     $p_0 = \sqrt{-2E_n}$; the SO(4) hidden symmetry and the Runge--Lenz
@@ -1366,7 +1371,7 @@ A.~H.~Chamseddine and A.~Connes,
 Fundamental Interactions Including Gravity. Part I,''
 Fortschr.~Phys.~\textbf{58}, 553 (2010).
 
-\bibitem{Pachucki2023}
+\bibitem{Pachucki2018}
 K.~Pachucki, V.~Patkó\v{s}, and V.~A.~Yerokhin,
 ``Three-Photon Exchange Nuclear Structure Correction in Hydrogenic
 Systems,''
@@ -1383,10 +1388,10 @@ D.~J.~Wineland and N.~F.~Ramsey,
 ``Atomic Deuterium Maser,''
 Phys.~Rev.~A \textbf{5}, 821 (1972).
 
-\bibitem{FriarPayne2005}
+\bibitem{FriarPayne1997}
 J.~L.~Friar and G.~L.~Payne,
 ``Higher-order nuclear-size corrections in atomic hydrogen,''
-\emph{Phys.~Rev.~C} \textbf{72}, 014002 (2005); deuteron Zemach radius
+\emph{Phys.~Rev.~A} \textbf{56}, 5173 (1997); deuteron Zemach radius
 $r_Z(D) = 2.593(16)$~fm.
 
 \bibitem{PachuckiYerokhin2010}
