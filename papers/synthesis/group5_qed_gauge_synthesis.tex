@@ -1,0 +1,600 @@
+% group5_qed_gauge_synthesis.tex
+% GeoVac Group 5 Synthesis: QED / Gauge / Gravity Arc
+% Status: Project archive synthesis, June 2026
+% Audience: HEP / gauge-theory / NCG-adjacent readers
+% Spine: forced gauge structure (25,30,41) -> graph-native QED (33,28)
+%        -> the alpha observation (2) -> bound-state precision QED (36)
+%        -> spectral-action gravity sketch (51) -> honest scope
+
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{observation}{Observation}
+
+\begin{document}
+
+\title{Gauge Structure, QED, and Gravity from the Spectral Geometry of
+$S^3$:\\ A Synthesis of the GeoVac QED/Gauge Arc}
+\thanks{Group~5 synthesis in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{June 30, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The Geometric Vacuum (GeoVac) framework discretizes the hydrogen
+bound-state manifold as the unit three-sphere $S^3$ via Fock's conformal
+projection.  This synthesis assembles the eight Group~5
+papers---gauge structure, graph-native QED, precision bound-state QED,
+and a spectral-action gravity sketch---into one narrative around a single
+organizing distinction:\ \emph{the gauge group structure is largely
+forced by the spectral geometry of $S^3$ and its Hopf fibration
+$S^1\!\to\!S^3\!\to\!S^2$, while the couplings are
+calibration/observation, not derived}.  The graph carries a $U(1)$
+Wilson/Hodge lattice gauge structure~\cite{loutey_paper25}, a non-abelian
+$\mathrm{SU}(2)$ Wilson theory because $S^3=\mathrm{SU}(2)$ as a
+manifold~\cite{loutey_paper30}, and---on the cross-$\ell$ Dirac
+graph---a $U(1)$ structurally compatible with three-dimensional compact
+electrodynamics~\cite{loutey_paper41}; the natural gauge reach is
+$U(1)\times\mathrm{SU}(2)\times\mathrm{SU}(3)$, with $\mathrm{SU}(3)$
+entering only as a pure-gauge theory whose natural matter coupling is
+obstructed.  The framework's QED is genuinely graph-native in its
+selection-rule and period content:\ the eight perturbative selection
+rules partition $1{+}6{+}1$ by which graph ingredient recovers
+them~\cite{loutey_paper33}, and the $S^3$ Dirac spectral sums reproduce
+the flat-space QED transcendentals ($\zeta(3)$, $\zeta(5)$, Catalan~$G$,
+$\zeta(5,3)$) through a depth-filtered period
+tower~\cite{loutey_paper28}.  The fine-structure constant satisfies the
+cubic $\alpha^3-K\alpha+1=0$ with $K=\pi(B+F-\Delta)$ assembled from
+three spectral invariants of the Hopf bundle, each with an independently
+established spectral home; this
+is recorded strictly as an \textbf{Observation} (agreement
+$8.8\times10^{-8}$, twelve single-mechanism derivations eliminated),
+never as a derivation~\cite{loutey_paper2}.  Bound-state QED reaches
+sub-percent one-loop Lamb-shift closure with no GeoVac-specific
+fit~\cite{loutey_paper36}, and a spectral-action gravity sketch yields an
+\emph{exactly} two-term Einstein--Hilbert action together with a set of
+honest negatives that bound a still-open discrete-substrate
+program~\cite{loutey_paper51}.  The discipline throughout matches the
+rest of the corpus:\ every load-bearing claim wears its tier, the
+structural results are foregrounded, and the couplings are positioned as
+the free, calibration side of the construction.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{Introduction: forced structure, free couplings}
+%% ========================================================================
+
+The GeoVac program establishes that the discrete graph Laplacian for
+hydrogen is mathematically equivalent to the Laplace--Beltrami operator
+on the unit three-sphere~$S^3$, related to the Schr\"odinger equation by
+Fock's 1935 conformal projection~\cite{loutey_paper7}.  The Group~5 arc
+asks what the \emph{same} spectral geometry says about the rest of
+electromagnetism, the gauge sector, and---most speculatively---gravity.
+A single distinction organizes the answer, and it is the through-line of
+this synthesis.
+
+\emph{The gauge group structure is largely forced.}  The three-sphere
+carries a canonical principal-bundle structure, the Hopf fibration
+$S^1\!\to\!S^3\!\to\!S^2$, and $S^3$ \emph{is} the group manifold
+$\mathrm{SU}(2)$.  These two facts are not GeoVac inputs; they are
+geometry.  Reading the GeoVac graph through its incidence matrix turns
+them into an abelian and then a non-abelian Wilson lattice gauge theory
+on the same nodes and edges that carry the Coulomb spectrum
+(\S\ref{sec:gauge}).  The natural gauge reach saturates at
+$U(1)\times\mathrm{SU}(2)\times\mathrm{SU}(3)$, and where it stops is
+itself structural:\ $\mathrm{SU}(3)$ admits only a pure-gauge Wilson
+theory, its natural matter coupling obstructed by a Clebsch--Gordan
+intertwiner wall (a sharpening of the Coulomb/harmonic-oscillator
+asymmetry of Paper~24~\cite{loutey_paper24}).
+
+\emph{The couplings are not.}  The fine-structure constant, the QED
+multi-loop constants, and the cutoff function of the gravity sector are
+all on the other side of the ledger:\ calibration or observation, in the
+two-layer language of Paper~34~\cite{loutey_paper34}.  The framework's
+most precise number---$\alpha$ reproduced to $8.8\times10^{-8}$---is held
+explicitly at \textbf{Observation} tier, with no claim of derivation
+(\S\ref{sec:alpha}).  This is the same discipline that runs through the
+quantum-chemistry and quantum-computing arcs:\ lead with the structural
+result, name the calibration boundary, and let the tier of each claim be
+visible in the prose.
+
+Following the framework's positioning convention, the discrete graph
+topology and the continuous Hopf/spectral-action geometry are treated as
+\emph{dual descriptions} connected by proven maps;\ no ontological
+priority is asserted for either, and the synthesis leads with concrete
+structural content rather than interpretive claims about the nature of
+electromagnetism or gravity.
+
+The eight papers form a loose dependency order.  Papers~25, 30, and~41
+build the gauge structure.  Papers~33 and~28 develop graph-native QED:\
+its selection rules and its perturbative period content.  Paper~2 reports
+the $\alpha$ observation.  Paper~36 turns the Dirac-$S^3$ machinery onto
+precision bound-state observables.  Paper~51 sketches the spectral-action
+gravity sector and---characteristically---records what did not work.
+
+%% ========================================================================
+\section{Gauge structure from the Hopf bundle}\label{sec:gauge}
+%% ========================================================================
+
+\paragraph{The Hodge/Wilson dictionary on the graph (Paper~25).}
+With $B$ the node--edge incidence matrix of the GeoVac graph, the node
+Laplacian $L_0=BB^{\top}$ is the matter propagator (it converges to
+$-\Delta_{S^3}$~\cite{loutey_paper7}) and the edge Laplacian
+$L_1=B^{\top}B$ is the discrete Hodge-1 Laplacian whose kernel counts
+cycles---the photon propagator in temporal gauge.  Assigning a $U(1)$
+connection $U_e=e^{i\theta_e}$ to each edge and collapsing the magnetic
+label $m_\ell$ over its $2\ell+1$ Hopf fiber reproduces the $S^2$ base
+graph exactly.  None of the underlying mathematics is new (graph Hodge
+theory, Wilson lattice gauge theory, the Marcolli--van~Suijlekom
+gauge-network spectral triple~\cite{marcolli_vs}); what Paper~25 claims is
+the \emph{synthesis}---one physically motivated discretization on which
+matter, an abelian connection, and the Hopf base coexist.  The paper is
+explicit about its tier:\ ``an observational synthesis paper. No new
+experimental or computational prediction is derived,'' and the
+edge-Laplacian spectrum of a finite Hopf graph is necessarily
+algebraic ($\pi$-free), so no transcendental can hide in the gauge
+1-forms themselves.
+
+\paragraph{$\mathrm{SU}(2)$ because $S^3=\mathrm{SU}(2)$ (Paper~30).}
+The rank-1 non-abelian case is special:\ the manifold \emph{is} the gauge
+group.  With links $U_e\in\mathrm{SU}(2)$, plaquettes the primitive
+non-backtracking (Ihara) cycles, and Wilson action
+$S_W=\beta\sum_P\bigl(1-\tfrac12\,\mathrm{Re}\,\mathrm{tr}\,U_P\bigr)$,
+the construction is a gauge-invariant, Haar-normalizable finite theory.
+Two results carry real weight.  The maximal-torus (Cartan) reduction
+reproduces Paper~25's $U(1)$ action to machine precision
+($|S_W-S_{U(1)}|<10^{-12}$)---stated as a \textbf{proposition with a
+proof}---so Paper~25 is exactly the abelian sub-sector of a genuinely
+non-abelian theory.  The second-order weak-coupling expansion returns
+Paper~25's $L_1=B^{\top}B$ as the kinetic term, with non-abelian
+couplings first entering at order $A^4$.  The kinetic normalization is
+universal,
+\begin{equation}
+\text{coeff} = \frac{1}{4N_c}
+\;\Longrightarrow\;
+\tfrac18\ (\mathrm{SU}(2)),\quad
+\tfrac1{12}\ (\mathrm{SU}(3)),
+\end{equation}
+verified symbolically and numerically.  The scope is explicitly bounded:\
+this is a compact-graph construction, \emph{not} a Yang--Mills mass-gap
+or confinement claim on $\mathbb{R}^4$; the Monte-Carlo plaquette data is
+leading-order and agrees with the character expansion only to the
+$\sim\!20\%$ level at intermediate $\beta$.
+
+\paragraph{Where the gauge reach stops.}
+The non-abelian story does not continue to $\mathrm{SU}(3)$ as a
+\emph{natural} matter-coupled theory.  On the $S^5$ Bargmann--Segal
+lattice (the harmonic-oscillator analog of $S^3$) a pure-gauge Wilson
+$\mathrm{SU}(3)$ is well defined and machine-precision verified (the same
+$1/(4N_c)=1/12$ coefficient, Cartan reduction over $7{,}765$ plaquettes
+to $<1.5\times10^{-11}$), but the natural matter sector cannot be coupled
+in the strict Wilson sense:\ the Clebsch--Gordan intertwiner obstruction
+re-appears at the matter level, and a least-squares fit of the
+$m_\ell$-quotient to $\mathbb{CP}^2$ fails uniformly ($\approx25\%$
+residual).  This is the gauge-side face of the Coulomb/HO asymmetry
+catalogued in Paper~24~\cite{loutey_paper24}:\ $U(1)$ transfers
+universally, $\mathrm{SU}(2)$ is forced by $S^3=\mathrm{SU}(2)$, and
+$\mathrm{SU}(3)$ is gauge-natural but matter-obstructed.  The cumulative
+reading is that the natural gauge content of the construction saturates
+at $U(1)\times\mathrm{SU}(2)\times\mathrm{SU}(3)$---the structural reach,
+not a derivation of the Standard-Model gauge group, and consistent with
+the spectral-triple gauge analysis of Paper~32~\cite{loutey_paper32}.
+
+\paragraph{The Dirac Rule-B graph and 3D compact $U(1)$ (Paper~41).}
+Paper~25's scalar Wilson $U(1)$ has a structural limitation:\ on the
+scalar Fock graph the gauge theory factorizes into disjoint per-$\ell$
+two-dimensional grids, so it is really 2D compact $U(1)$ with no genuine
+three-dimensional phase structure.  The cross-$\ell$ Dirac ``Rule~B''
+graph (the $E1$ dipole adjacency, $|\Delta\ell|=1$) repairs this:\ every
+edge flips $\ell$-parity, the graph is a single connected component, and
+its spectral dimension climbs $1.86\to2.27\to2.54$ toward~3 as
+$n_{\max}=3\to5$.  Wilson $U(1)$ on Rule~B is then tested against seven
+independent structural witnesses (spectral dimension, Migdal--Kadanoff RG
+flow, Gaussian perimeter law, strong-coupling area law, a DeGrand--Toussaint
+monopole-density signature decaying over five decades, full
+Monte-Carlo Wilson loops, and finite-$T$ Polyakov loops on
+$G_B\times C_{N_t}$).  Six pass cleanly and one (full-MC Wilson loops) is
+a ``nuanced weak pass.''  The verdict is stated at exactly the tier the
+evidence supports:\ the theory is \emph{structurally compatible} with 3D
+compact $U(1)$ (the permanent-confinement, no-finite-$T$-deconfinement
+universality class) and inconsistent with 4D---\textbf{explicitly not}
+``uniquely identified with 3D up to universality,'' and with the
+$n_{\max}\!\to\!\infty$ continuum limit left uncomputed.
+
+%% ========================================================================
+\section{Graph-native QED: selection rules and periods}\label{sec:qed}
+%% ========================================================================
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lcl}
+\hline\hline
+Construction & Count & Tier reading \\
+\hline
+Scalar graph $+$ scalar photon      & $1/8$ & I: graph-native (Gaunt) \\
+Native Dirac graph (scalar photon)  & $4/8$ & $+$ spinor labels \\
+Vector photon $+$ scalar electrons  & $7/8$ & II: $+6$ at $1/(4\pi)$/loop \\
+Vector photon $+$ Dirac electrons   & $8/8$ & III: $+$ Furry, free \\
+\hline\hline
+\end{tabular}
+\caption{The $1{+}6{+}1$ partition of the eight QED selection rules by
+recoverability on the GeoVac construction.  The word ``scalar'' is
+overloaded:\ the $1/8$ row is the scalar \emph{photon} on the scalar
+graph;\ the $7/8$ row is scalar \emph{electrons} with the \emph{vector}
+photon.}
+\label{tab:partition}
+\end{table}
+
+The QED arc asks how much of perturbative quantum electrodynamics is
+visible on the bare combinatorial graph, before any continuum projection.
+Two complementary answers emerge:\ a clean partition of the selection
+rules, and a clean accounting of the perturbative transcendentals.
+
+\paragraph{The $1{+}6{+}1$ partition of selection rules (Paper~33).}
+The eight standard perturbative-QED selection rules partition into three
+tiers by \emph{which} ingredient of the construction is needed to recover
+each (Table~\ref{tab:partition}).
+
+On the scalar Fock graph with a scalar ($1$-cochain) photon, exactly
+\emph{one} rule survives---the Gaunt/Clebsch--Gordan angular-momentum
+sparsity baked into the discrete edge set (graph-native, Tier~I, free).
+Promoting the photon to a vector harmonic carrying explicit angular
+labels $(q,m_q)$ with Wigner-$3j$ vertex coupling recovers
+\emph{six} angular-momentum rules at once, at a cost of exactly
+$1/(4\pi)$ per loop---identified as the $S^2$ Weyl exchange constant of
+the Hopf base, an entry in Paper~18's calibration tier~\cite{loutey_paper18}
+(Tier~II).  The eighth rule, charge conjugation / Furry, is recovered for
+\emph{Dirac} electrons at zero cost by a single-particle spinor phase
+constraint $V(a,a,q,m_q)=0$ (proven, sympy-exact for six cases), a
+kinematic identity distinct from second-quantized $C$-symmetry
+(Tier~III).  The load-bearing structural statement is the dividing line:\
+the photon must carry angular quantum numbers $(L,M_L)$, not merely a
+spin index at the vertex, to recover the six angular rules---which is
+precisely why those six sit on the calibration side and only the Gaunt
+rule is graph-native.
+
+\paragraph{The perturbative period tower (Paper~28).}
+The $S^3$ Dirac spectral geometry (Camporesi--Higuchi spectrum
+$|\lambda_n|=n+\tfrac32$, Hodge-1 photon, $\mathrm{SO}(4)$ vertex rules)
+produces the \emph{same} transcendentals as flat-space perturbative QED
+through a purely spectral mechanism organized by operator order and
+vertex topology.  Three results anchor the arc, each at theorem tier:
+\begin{itemize}
+\item \textbf{T9 (two-term theorem).}  The $D^2$ spectral zeta is a
+two-term $\pi^{\text{even}}$ polynomial with rational coefficients at
+every integer $s$---no odd-zeta content; operator order (even vs.\ odd
+$s$) is the primary transcendental discriminant.
+\item \textbf{$\chi_{-4}$ bridge (Theorem~3).}  A spectral-zeta-to-Dirichlet-$L$
+identity, $D_{\text{even}}(s)-D_{\text{odd}}(s)=2^{\,s-1}\bigl(\beta(s)-\beta(s-2)\bigr)$
+with $\beta(s)=L(s,\chi_{-4})$, in which vertex parity acts as the
+Dirichlet character; proven, and verified symbolically and by PSLQ to
+100 digits.  It is consistent with but does not enforce the Riemann
+hypothesis for $\beta$.
+\item \textbf{Realized-depth tower.}  Loop order bounds the multiple-zeta
+depth but does not automatically mint new irreducibles; the realized
+depth grows strictly more slowly, $\le k-1$.  The two-loop sunset
+constant reduces entirely,
+$S_{\min}\in\mathbb{Q}[\pi^2,\ln2,\zeta(3),\zeta(5)]$ (depth $\le1$);
+the three-loop chain $S^{(3)}=31.5726\ldots$ first introduces a genuine
+depth-2 period, $\zeta(5,3)$, as its \emph{only} irreducible beyond the
+single-zeta ring.
+\end{itemize}
+On the finite graph, all of these quantities are $\pi$-free rationals or
+algebraic numbers---the transcendentals enter only through the infinite
+spectral sums of the continuum projection.  The continuum self-energy
+zero is correspondingly \emph{broken} on the graph (the pendant-edge
+proposition gives $\Sigma_{\text{graph}}(\text{GS})=2(n_{\max}-1)/n_{\max}\to2\neq0$),
+and is recovered only once the vector-photon angular labels of Paper~33
+are restored.  A graph-native anomalous moment
+$F_2/[\alpha/2\pi]=1.084$ lands within $0.4\%$ of the Parker--Toms curved-space
+value---reported as a numerical match, not a derivation.
+
+%% ========================================================================
+\section{The fine-structure-constant observation}\label{sec:alpha}
+%% ========================================================================
+
+The arc's most precise---and most carefully bounded---result is
+Paper~2's.  The fine-structure constant satisfies the depressed cubic
+\begin{equation}
+\alpha^3-K\alpha+1=0,\qquad
+K=\pi\!\left(B+F-\Delta\right)
+ =\pi\!\left(42+\frac{\pi^2}{6}-\frac{1}{40}\right),
+\label{eq:K}
+\end{equation}
+where the three coefficients are spectral invariants of the Hopf bundle
+components:\ $B=42$ is the degeneracy-weighted Casimir trace of the $S^2$
+base (with the selection principle $B/N=\dim S^3=3$ proven algebraically
+to fix the cutoff $n_{\max}=3$ uniquely), $F=\zeta(2)=\pi^2/6$ is the
+spectral zeta of the $S^1$ fiber (equivalently the Fock-degeneracy
+Dirichlet series at the packing exponent $d_{\max}=4$~\cite{loutey_paper0}),
+and $\Delta=1/40$ is an $S^3$ boundary term equal to the reciprocal of
+the single-level Dirac degeneracy $g_3^{\text{Dirac}}=2(n{+}1)(n{+}2)|_{n=3}=40$.
+The physical root gives $\alpha^{-1}=137.036011$, matching CODATA to a
+relative error of $8.8\times10^{-8}$ with zero free parameters; a
+combinatorial search over $1.92\times10^9$ comparable formulas returns a
+$p$-value of $5.2\times10^{-9}$.
+
+The status of Eq.~\eqref{eq:K} must be stated exactly, and it is a
+\textbf{hard prohibition} of the framework that it be stated no more
+strongly.  The combination rule $K=\pi(B+F-\Delta)$ is an
+\textbf{Observation}:\ an empirical numerical coincidence with structural
+support, \emph{never} a derivation, conjecture, prediction, or theorem.
+Each ingredient has an \emph{independently derived} spectral home---a
+``three-homes'' theorem establishes that $B$, $F$, $\Delta$ live in two
+distinct sectors of $S^3$ (scalar and spinor), are three different object
+types (finite trace, infinite Dirichlet series, single-level degeneracy),
+and that no spectral construction on $S^3$ generates all three at
+once---but their \emph{combination} is not derived.  A multi-phase
+structural-decomposition program eliminated twelve single-mechanism
+derivations of the rule, leaving the cross-sector sum a genuine open
+question:\ in the paper's own assessment, the geometric arena (Link~1)
+and the per-component invariants (Link~2) are established, while the
+additive combination (Link~3) is ``not established.''  The synthesis
+inherits this verdict verbatim:\ what is structural here is each spectral
+home; what is observational is that they sum to $\alpha^{-1}/\pi$.
+
+%% ========================================================================
+\section{Bound-state precision QED}\label{sec:bsqed}
+%% ========================================================================
+
+Paper~36 turns the Dirac-$S^3$ infrastructure onto Lamb-shift-class
+observables, where the answer is known independently and the test is one
+of internal consistency rather than prediction.  The hydrogen
+$2S_{1/2}$--$2P_{1/2}$ Lamb shift comes out at $1052.19$~MHz against the
+experimental $1057.845$~MHz---a $-0.534\%$ one-loop residual---using only
+the bare graph plus three standard projections (Fock, the
+Camporesi--Higuchi spinor lift, and the Drake--Swainson asymptotic
+subtraction, which is Paper~34's thirteenth catalogued
+projection~\cite{loutey_paper34}), with \emph{no} GeoVac-specific fitted
+parameter.  Companion systems land comparably:\ muonic hydrogen at
+$-0.10\%$ and the muonium $2S$--$2P$ Lamb shift at $+0.013\%$ (the
+cleanest match in the set).
+
+The honest reading is that this is \emph{observation-side} physics in the
+two-layer sense.  The framework genuinely \emph{derives} the spectral-sum
+structure---the Bethe logarithms, computed natively in the
+acceleration form, agree with Drake--Swainson to better than $1\%$---but
+\emph{imports} the QED constants (the $10/9$ one-loop self-energy
+coefficient, the Uehling kernel) from the standard Eides convention; in
+the Paper~34 language, Layer~1 (the bare Dirac-$S^3$ spectrum) is
+$\pi$-free, and every $\pi$ enters through a Layer-2 projection.  The
+two-loop sector is the explicit boundary:\ the bare iterated
+spectral action reproduces the flat-space two-loop \emph{divergence}
+faithfully but does not generate renormalization counterterms, so finite
+multi-loop predictions remain external input.  The result is therefore
+positioned as one-loop closure with the two-loop closure descoped to a
+renormalization extension---a precision test passed, not a new QED
+calculation.
+
+%% ========================================================================
+\section{The spectral-action gravity sketch}\label{sec:gravity}
+%% ========================================================================
+
+The most speculative paper in the arc, Paper~51, asks whether the
+Fock-projected $S^3$ supports a sensible gravity reading at the
+Chamseddine--Connes spectral-action level~\cite{chamseddine_connes}.  It
+is positioned, correctly and throughout, as an \emph{exploratory,
+structural-sketch} program---``with the standard caveats of the
+Connes--Chamseddine program''---not as established physics, and it is
+unusually candid about what failed.
+
+One result is solid.  A spectral-zeta identity on the Camporesi--Higuchi
+spinor spectrum, $\zeta_{\text{unit}}(-k)=0$ for all $k\ge0$ (proven via
+a Bernoulli identity $B_{2k+1}(3/2)=(2k+1)/4^k$), \emph{forces} the
+spectral action on $S^3$ to be \emph{exactly two-term}---Einstein--Hilbert
+plus a cosmological constant, with no higher-curvature corrections at any
+order.  This is a genuine theorem, and it supplies the algebraic
+mechanism behind the ``remarkable cancellations'' noted by
+Chamseddine--Connes; it is spinor-bundle-specific (the scalar and
+transverse-traceless sectors retain the full infinite Seeley--DeWitt
+series).  From it follow, at the spectral-action level, a Bekenstein--Hawking
+entropy $S_{\text{BH}}=A\Lambda^2/(12\pi)$ (continuum replica
+derivation), an effective Newton constant $G_{\text{eff}}=6\pi/\Lambda^2$,
+a de~Sitter vacuum, a proven Fierz--Pauli ``$J$-blindness'' theorem, and
+a proven (Layer-2, rate-level) replica-weight-harmless theorem.
+
+The negatives are the point, and they are stated plainly:
+\begin{itemize}
+\item the conical-defect tip coefficient $A=1/(24\pi)$ was \emph{supplied
+analytically}, not extracted---all three discrete-substrate
+discretization schemes undershoot the target;
+\item the M\"obius factor $\alpha/(2\alpha-1)$, once read as a continuum
+$\alpha>1$ ``mechanism,'' is a \emph{finite-lattice-spacing artifact}:\
+as the radial mesh refines, the recovery climbs back toward the plain
+Sommerfeld--Cheeger value, so there is no exotic mechanism to find;
+\item no cutoff function cures the infrared over-count across all
+$\Lambda$ (clean negative);
+\item the Newton-constant ``factor of~2'' is a Wald-forced bookkeeping
+artifact, \emph{not} a scalar-vs-Dirac cone-coefficient difference (2D
+Dirac and scalar share the same $(1/12)(1/\alpha-\alpha)$ cone term);
+\item Bisognano--Wichmann wedge entanglement entropy is \emph{not} an
+area law---it scales as $\sim2\log n_{\max}$ (area-law fit rejected at
+$R^2=0.83$), so the entropy comes from the replica/spectral-action route,
+not from wedge entanglement.
+\end{itemize}
+The overall verdict is that GeoVac fixes the \emph{structural skeleton} of
+gravity at the spectral-action level---the two-term action is forced---while
+the cutoff function remains external calibration data and the full
+discrete-substrate re-derivation of $S_{\text{BH}}$ is an explicitly
+open, multi-month program.  Represented at its true tier, this is a
+proven two-term-exactness theorem wrapped in an honest, still-open
+exploratory arc.
+
+%% ========================================================================
+\section{Honest scope and positioning}
+%% ========================================================================
+
+\paragraph{What is robust.}
+The load-bearing results are structural and proven.  The Hodge/Wilson
+dictionary ($L_0=BB^{\top}$ matter, $L_1=B^{\top}B$ photon) is exact, as
+is the machine-precision $\mathrm{SU}(2)$ maximal-torus reduction that
+makes Paper~25 the Cartan sector of Paper~30.  The QED selection-rule
+partition $1{+}6{+}1$ and the perturbative period results---the T9
+two-term theorem, the $\chi_{-4}$ Dirichlet-$L$ bridge, and the
+realized-depth tower with $\zeta(5,3)$ as the first genuine depth-2
+period---are theorems with symbolic/PSLQ backing.  The spectral-action
+two-term exactness on $S^3$ is a proven theorem.  Each of the three
+$\alpha$-ingredients $B$, $F$, $\Delta$ has an independently derived
+spectral home.
+
+\paragraph{What is conditional or observational.}
+The fine-structure combination rule $K=\pi(B+F-\Delta)$ is an
+\textbf{Observation}, not a derivation---the single most important tier
+statement in the arc.  The bound-state QED matches are observation-side:\
+the spectral-sum structure is derived but the QED constants are imported,
+and every $\pi$ enters through a Layer-2 projection.  The Rule-B gauge
+theory is ``structurally compatible with 3D compact $U(1)$,'' not
+``identified'' with it, and its spectral-dimension-to-3 evidence rests on
+a finite-size extrapolation.  The entire gravity sector is a
+spectral-action-level structural sketch with an open discrete-substrate
+program.
+
+\paragraph{What was tried and did not work.}
+The arc is bounded by clean negatives.  $\mathrm{SU}(3)$ has no natural
+matter-coupled lattice gauge theory---the Clebsch--Gordan intertwiner
+obstruction caps the natural gauge reach (a face of the Coulomb/HO
+asymmetry).  The scalar graph photon misses seven of the eight selection
+rules because it carries no angular quantum numbers; recovering them is a
+calibration cost ($1/(4\pi)$ per loop), not graph-native content.  Twelve
+single-mechanism derivations of the $\alpha$ combination rule were
+eliminated.  The gravity sector contributes five recorded negatives---the
+M\"obius finite-spacing artifact, the failed IR-over-count cure, the
+analytically-supplied (not extracted) tip coefficient, the Wald
+bookkeeping factor of~2, and the non-area-law wedge entropy---each kept
+on the record so it is not re-derived.
+
+\paragraph{Positioning.}
+Read as a whole, the Group~5 arc is a structural map of how far the
+spectral geometry of $S^3$ reaches into electromagnetism, the gauge
+sector, and gravity, with the boundary between forced structure and free
+coupling drawn explicitly at every step.  The gauge group structure, the
+selection-rule partition, the QED period tower, and the two-term gravity
+action are the structural assets;\ the fine-structure constant, the QED
+multi-loop constants, and the gravity cutoff are the calibration side.
+The discrete and continuous descriptions are dual, with no ontological
+priority asserted for either.  The arc is not a derivation of $\alpha$,
+not a derivation of the Standard-Model gauge group, and not a theory of
+quantum gravity;\ it is a disciplined account of which structures the
+framework forces and which numbers it must be told.
+
+%% ========================================================================
+%% BIBLIOGRAPHY
+%% ========================================================================
+\begin{thebibliography}{99}
+
+\bibitem{loutey_paper0}
+J.~Loutey,
+``Angular Momentum as Information Geometry:\ Isotropic Packing and the
+Universal Angular Cross-Section,''
+GeoVac Paper~0 (2026).
+
+\bibitem{loutey_paper2}
+J.~Loutey,
+``The Fine Structure Constant as a Spectral Coincidence on the Hopf
+Fibration,''
+GeoVac Paper~2 (2026).
+[The combination rule $K=\pi(B+F-\Delta)$ is recorded strictly as an
+Observation; see \S\ref{sec:alpha}.]
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The Dimensionless Vacuum:\ Recovering the Schr\"odinger Equation from
+Scale-Invariant Graph Topology,''
+GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper18}
+J.~Loutey,
+``Spectral-Geometric Exchange Constants:\ Projecting Discrete Spectra
+onto Continuous Manifolds,''
+GeoVac Paper~18 (2026).
+
+\bibitem{loutey_paper24}
+J.~Loutey,
+``The Bargmann--Segal Lattice:\ $\pi$-Free Discretization of the
+Harmonic Oscillator on $S^5$,''
+GeoVac Paper~24 (2026).
+
+\bibitem{loutey_paper25}
+J.~Loutey,
+``The Hopf Graph as a Lattice Gauge Structure:\ A Framework Observation,''
+GeoVac Paper~25 (2026).
+
+\bibitem{loutey_paper28}
+J.~Loutey,
+``QED on $S^3$:\ Spectral Geometry of Perturbative Transcendentals,''
+GeoVac Paper~28 (2026).
+
+\bibitem{loutey_paper30}
+J.~Loutey,
+``$\mathrm{SU}(2)$ Wilson Lattice Gauge Structure on the GeoVac Hopf
+Graph:\ The Non-Abelian Sibling of Paper~25,''
+GeoVac Paper~30 (2026).
+
+\bibitem{loutey_paper32}
+J.~Loutey,
+``The GeoVac Spectral Triple,''
+GeoVac Paper~32 (2026).
+
+\bibitem{loutey_paper33}
+J.~Loutey,
+``The $1{+}6{+}1$ Partition of QED Selection Rules on $S^3$:\ Graph
+Topology, Angular Momentum, and the Dirac Spinor Phase Constraint,''
+GeoVac Paper~33 (2026).
+
+\bibitem{loutey_paper34}
+J.~Loutey,
+``GeoVac as a Two-Layer Framework:\ Projection Taxonomy and the
+Empirical Matches Catalog,''
+GeoVac Paper~34 (2026).
+
+\bibitem{loutey_paper36}
+J.~Loutey,
+``Bound-State QED on $S^3$:\ One-Loop Closure of the Hydrogen Lamb
+Shift,''
+GeoVac Paper~36 (2026).
+
+\bibitem{loutey_paper38}
+J.~Loutey,
+``State-space Gromov--Hausdorff convergence of truncated
+Camporesi--Higuchi spectral triples on $S^3$,''
+GeoVac Paper~38 (2026).
+
+\bibitem{loutey_paper41}
+J.~Loutey,
+``Wilson $U(1)$ Lattice Gauge on the Dirac-Rule-B Graph:\ Structural
+Compatibility with 3D Compact $U(1)$ on a Non-Cubic Substrate, Including
+the Polyakov Monopole-Density Signature,''
+GeoVac Paper~41 (2026).
+
+\bibitem{loutey_paper51}
+J.~Loutey,
+``Gravity from the GeoVac Spectral Action:\ Continuum Results and the
+Discrete-Substrate Program,''
+GeoVac Paper~51 (2026).
+
+\bibitem{marcolli_vs}
+M.~Marcolli and W.~D.~van Suijlekom,
+``Gauge networks in noncommutative geometry,''
+J.~Geom.\ Phys.\ \textbf{75}, 71 (2014); arXiv:1301.3480.
+
+\bibitem{chamseddine_connes}
+A.~H.~Chamseddine and A.~Connes,
+``The Spectral Action Principle,''
+Commun.\ Math.\ Phys.\ \textbf{186}, 731 (1997).
+
+\end{thebibliography}
+
+\end{document}
