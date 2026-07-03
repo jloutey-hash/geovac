@@ -41,9 +41,9 @@ updates of link angles and DeGrand-Toussaint monopole extraction.
 
 Output
 ======
-    debug/data/xcwg_monopole_density.json
+    tests/wilson_rule_b_support/data/xcwg_monopole_density.json
     debug/xcwg_monopole_density_memo.md          (separately)
-    debug/plots/xcwg_monopole_density.png        (if matplotlib available)
+    tests/wilson_rule_b_support/data/xcwg_monopole_density.png        (if matplotlib available)
 """
 
 from __future__ import annotations
@@ -58,7 +58,7 @@ from typing import Dict, List, Tuple, Optional
 import numpy as np
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 if _HERE not in sys.path:
@@ -830,7 +830,7 @@ def main():
         ax[1].legend(loc="lower left", fontsize=7)
 
         fig.tight_layout()
-        plot_path = os.path.join(_HERE, "plots", "xcwg_monopole_density.png")
+        plot_path = os.path.join(_HERE, "data", "xcwg_monopole_density.png")
         os.makedirs(os.path.dirname(plot_path), exist_ok=True)
         fig.savefig(plot_path, dpi=120)
         plt.close(fig)

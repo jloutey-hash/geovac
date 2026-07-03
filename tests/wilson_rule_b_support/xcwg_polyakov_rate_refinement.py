@@ -117,7 +117,7 @@ We will quantify both: dual graph topology AND spectral gap.
 Output
 ======
 
-  debug/data/xcwg_polyakov_rate_refinement.json
+  tests/wilson_rule_b_support/data/xcwg_polyakov_rate_refinement.json
   debug/xcwg_polyakov_rate_refinement_memo.md (separately)
 """
 
@@ -133,7 +133,7 @@ from typing import Dict, List, Tuple, Optional
 import numpy as np
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 if _HERE not in sys.path:
@@ -840,7 +840,7 @@ def analyze_rule_b(n_max: int = 2) -> Dict:
 def analyze_what_was_measured(n_max: int = 2) -> Dict:
     """Determine what XCWG-G actually measured: sigma_ens, sigma_comb, or mu_comb.
 
-    From `debug/data/xcwg_full_mc_wilson_loops.json`:
+    From `tests/wilson_rule_b_support/data/xcwg_full_mc_wilson_loops.json`:
       sigma_ens : ensemble area-law slope (perimeter contaminated)
       sigma_comb: joint area+perimeter fit, AREA coefficient (statistically zero)
       mu_comb  : joint area+perimeter fit, PERIMETER coefficient

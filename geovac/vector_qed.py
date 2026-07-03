@@ -501,11 +501,15 @@ def check_selection_rules(
     }
 
     # 3. SO(4) channel count W
-    # For each (n_ext, n_int) pair, count how many (l_ext, l_int, q) triples
-    # produce nonzero vertex coupling.
+    # Closed form: for each (n_ext, n_int) pair, the number of
+    # (l_ext, l_int, q) channels allowed by the parity rule
+    # (l_ext + l_int + q odd) and the l-triangle inequality.
+    # Real check (de-tautologized 2026-07-03; was a hardcoded pass=True):
+    # the channel count extracted from the ACTUAL vertex tensor support
+    # must agree with the closed form for every (n_ext, n_int) pair.
     w_counts = {}
     for n_ext in range(1, n_max + 1):
-        for n_int in range(2, n_max + 1):  # internal excludes n=1
+        for n_int in range(1, n_max + 1):
             count = 0
             for l_ext in range(0, n_ext):
                 for l_int in range(0, n_int):
@@ -515,12 +519,30 @@ def check_selection_rules(
                                 count += 1
             w_counts[(n_ext, n_int)] = count
 
+    observed_channels: Dict[Tuple[int, int], set] = {}
+    for i, (n_a, l_a, m_a) in enumerate(states):
+        for j, (n_b, l_b, m_b) in enumerate(states):
+            for k, (q, m_q) in enumerate(modes):
+                if abs(V[i, j, k]) > 1e-15:
+                    observed_channels.setdefault((n_a, n_b), set()).add(
+                        (l_a, l_b, q))
+    w_observed = {pair: len(chs) for pair, chs in observed_channels.items()}
+    all_pairs = set(w_counts) | set(w_observed)
+    channel_mismatches = [
+        pair for pair in sorted(all_pairs)
+        if w_counts.get(pair, 0) != w_observed.get(pair, 0)
+    ]
+
     rules['3_so4_channel_count'] = {
-        'pass': True,  # W is always well-defined
+        'pass': len(channel_mismatches) == 0,
         'w_counts': {f'({k[0]},{k[1]})': v for k, v in w_counts.items()},
+        'w_observed': {f'({k[0]},{k[1]})': v for k, v in w_observed.items()},
+        'mismatches': [f'({p[0]},{p[1]})' for p in channel_mismatches],
         'description': (
-            'Number of (l_ext, l_int, q) triples with nonzero coupling '
-            'for each (n_ext, n_int) pair. Structural, always passes.'
+            'Per-(n_ext, n_int) count of (l_ext, l_int, q) channels in the '
+            'vertex tensor support, compared against the closed-form count '
+            'from parity (l_ext+l_int+q odd) + l-triangle. Pass = the '
+            'realized support matches the closed form for every pair.'
         ),
     }
 
@@ -564,27 +586,12 @@ def check_selection_rules(
         ),
     }
 
-    # 6. Furry's theorem (tadpole = 0)
-    # Tadpole: sum_{q, m_q} V(a, a, q, m_q) * G_gamma(q) for each a
-    tadpole = np.zeros(N_e)
-    for a_idx in range(N_e):
-        for k_idx, (q, m_q) in enumerate(modes):
-            tadpole[a_idx] += V[a_idx, a_idx, k_idx] * vector_photon_propagator(q)
-    tadpole_max = float(np.max(np.abs(tadpole)))
+    # Rule numbering follows Paper 33 Table 1 (aligned 2026-07-03; the code
+    # keys previously had 6 and 7 swapped relative to the paper, and key 8
+    # held a Hermiticity check that is true by construction for any real
+    # vertex -- a tautology, replaced by the paper's actual Rule 8).
 
-    rules['6_furry_theorem'] = {
-        'pass': tadpole_max < 1e-14,
-        'tadpole_max_abs': tadpole_max,
-        'description': (
-            'Tadpole = sum_{q,m_q} V(a,a,q,m_q)*G_gamma(q) = 0 for all a. '
-            'Enforced by parity: V(a,a,q,m_q) requires l_a+l_a+q odd => q odd, '
-            'and triangle with l_a=l_a forces q=0..2*l_a, but q must also be '
-            'nonzero (q>=1). For l_a=0: q must equal 0 (triangle), but q>=1 => '
-            'V=0. For l_a>0: 3j(l,q,l;-m,0,m) with q odd gives V(a,a,q,0).'
-        ),
-    }
-
-    # 7. Ward identity: ||[Sigma, H0]|| / ||Sigma|| ~ 0
+    # 6. Ward identity: ||[Sigma, H0]|| / ||Sigma|| ~ 0
     # H0 = diag(n^2 - 1) = the free Fock Laplacian eigenvalues
     H0 = np.diag([s[0] ** 2 - 1 for s in states]).astype(float)
     commutator = Sigma @ H0 - H0 @ Sigma
@@ -592,7 +599,7 @@ def check_selection_rules(
     sigma_norm = np.linalg.norm(Sigma, 'fro')
     ward_ratio = comm_norm / sigma_norm if sigma_norm > 1e-30 else 0.0
 
-    rules['7_ward_identity'] = {
+    rules['6_ward_identity'] = {
         'pass': bool(ward_ratio < 0.01),  # Threshold for approximate Ward
         'commutator_norm': comm_norm,
         'sigma_norm': sigma_norm,
@@ -604,21 +611,50 @@ def check_selection_rules(
         ),
     }
 
-    # 8. Charge conjugation
-    # Check that the photon modes have definite C-parity (-1)^q,
-    # and that only C-even combinations contribute to the self-energy.
-    # In practice: the self-energy sum with parity constraint (l_a+l_b+q odd)
-    # already selects the correct C-parity sector.
-    # We check by verifying Sigma is Hermitian (C-even observable).
-    sigma_hermitian = bool(np.allclose(Sigma, Sigma.T, atol=1e-14))
+    # 7. Charge conjugation / Furry's theorem (tadpole = 0)
+    # Tadpole: sum_{q, m_q} V(a, a, q, m_q) * G_gamma(q) for each a
+    tadpole = np.zeros(N_e)
+    for a_idx in range(N_e):
+        for k_idx, (q, m_q) in enumerate(modes):
+            tadpole[a_idx] += V[a_idx, a_idx, k_idx] * vector_photon_propagator(q)
+    tadpole_max = float(np.max(np.abs(tadpole)))
 
-    rules['8_charge_conjugation'] = {
-        'pass': sigma_hermitian,
-        'is_hermitian': sigma_hermitian,
-        'max_antisym': float(np.max(np.abs(Sigma - Sigma.T))),
+    rules['7_furry_theorem'] = {
+        'pass': tadpole_max < 1e-14,
+        'tadpole_max_abs': tadpole_max,
         'description': (
-            'Self-energy is Hermitian (symmetric for real matrix), '
-            'consistent with C-even observable.'
+            'Tadpole = sum_{q,m_q} V(a,a,q,m_q)*G_gamma(q) = 0 for all a. '
+            'Enforced by parity: V(a,a,q,m_q) requires l_a+l_a+q odd => q odd, '
+            'and triangle with l_a=l_a forces q=0..2*l_a, but q must also be '
+            'nonzero (q>=1). For l_a=0: q must equal 0 (triangle), but q>=1 => '
+            'V=0. For l_a>0: 3j(l,q,l;-m,0,m) with q odd gives V(a,a,q,0).'
+        ),
+    }
+
+    # 8. Triangle inequality on SO(4) (Paper 33 Table 1 Rule 8):
+    # every realized coupling must satisfy |n_a - n_b| <= q <= n_a + n_b - 2,
+    # where q is the photon SO(4) harmonic level and n the Fock principal
+    # quantum number. The upper bound is a genuine consequence of parity +
+    # l-triangle + l <= n-1; the lower bound is contingent (it can fail for
+    # |n_a - n_b| >= 3 at larger truncations because the vertex radial factor
+    # is R = 1), so this check is honest, not built-in.
+    triangle_violations = 0
+    for i, (n_a, l_a, m_a) in enumerate(states):
+        for j, (n_b, l_b, m_b) in enumerate(states):
+            for k, (q, m_q) in enumerate(modes):
+                if abs(V[i, j, k]) > 1e-15:
+                    if not (abs(n_a - n_b) <= q <= n_a + n_b - 2):
+                        triangle_violations += 1
+
+    rules['8_triangle_on_n'] = {
+        'pass': triangle_violations == 0 and vertex_nnz > 0,
+        'violations': triangle_violations,
+        'nonzero_checked': vertex_nnz,
+        'description': (
+            'All nonzero V entries satisfy |n_a - n_b| <= q <= n_a + n_b - 2 '
+            '(continuum SO(4) triangle inequality on principal quantum '
+            'numbers, Fock 1-indexed convention). Vacuous-guard: fails if '
+            'the vertex tensor has no support at all.'
         ),
     }
 
@@ -905,7 +941,9 @@ def dirac_vertex_coupling(
          has an i-factor on the small component. For a=b, the two terms V_LS and
          V_SL have equal radial integrals (f*g = g*f) and angular integrals
          related by Hermiticity, but opposite signs from the i-factor. This is
-         a kinematic identity of the single-particle Dirac vertex.
+         a kinematic identity of the single-particle Dirac vertex, derived
+         symbolically (independently of this function) in
+         tests/test_paper33_furry_derivation.py.
       1. l-parity: l_a + l_b + q must be odd (E-type / vector coupling)
       2. l-triangle: |l_a - l_b| <= q <= l_a + l_b (orbital angular momentum)
       3. j-triangle: |j_a - j_b| <= q <= j_a + j_b (total angular momentum)
@@ -1233,33 +1271,13 @@ def check_dirac_selection_rules(
     }
 
     # 3. SO(4) channel count
-    w_counts = {}
-    for n_ext in range(1, n_max + 1):
-        for n_int in range(1, n_max + 1):
-            count = 0
-            for s_ext in states:
-                if s_ext.n_fock != n_ext:
-                    continue
-                for s_int in states:
-                    if s_int.n_fock != n_int:
-                        continue
-                    l_ext = kappa_to_l(s_ext.kappa)
-                    l_int = kappa_to_l(s_int.kappa)
-                    j_ext = float(s_ext.j)
-                    j_int = float(s_int.j)
-                    for q_val in range(1, q_max + 1):
-                        if (l_ext + l_int + q_val) % 2 == 1:
-                            l_ok = abs(l_ext - l_int) <= q_val <= l_ext + l_int
-                            j_ok = abs(j_ext - j_int) <= q_val <= j_ext + j_int
-                            if l_ok and j_ok:
-                                count += 1
-                                break
-                    else:
-                        continue
-                    break
-            w_counts[(n_ext, n_int)] = count
-
-    # Recompute properly: count distinct (kappa_ext, kappa_int, q) triples
+    # Closed form: distinct (kappa_ext, kappa_int, q) triples allowed by
+    # l-parity + l-triangle + j-triangle for each (n_ext, n_int) pair.
+    # Real check (de-tautologized 2026-07-03; was a hardcoded pass=True):
+    # the channel count extracted from the ACTUAL vertex tensor support
+    # must agree with the closed form for every pair. (The diagonal
+    # spinor-phase zero V(a,a,*)=0 removes no channel: every allowed
+    # (kappa, kappa, q) triple retains off-diagonal m_j support.)
     w_counts_proper = {}
     for n_ext in range(1, n_max + 1):
         for n_int in range(1, n_max + 1):
@@ -1286,12 +1304,32 @@ def check_dirac_selection_rules(
                                 count += 1
             w_counts_proper[(n_ext, n_int)] = count
 
+    observed_channels: Dict[Tuple[int, int], set] = {}
+    for i, s_a in enumerate(states):
+        for j, s_b in enumerate(states):
+            for k, (q, m_q) in enumerate(modes):
+                if abs(V[i, j, k]) > 1e-15:
+                    observed_channels.setdefault(
+                        (s_a.n_fock, s_b.n_fock), set()).add(
+                            (s_a.kappa, s_b.kappa, q))
+    w_observed = {pair: len(chs) for pair, chs in observed_channels.items()}
+    all_pairs = set(w_counts_proper) | set(w_observed)
+    channel_mismatches = [
+        pair for pair in sorted(all_pairs)
+        if w_counts_proper.get(pair, 0) != w_observed.get(pair, 0)
+    ]
+
     rules['3_so4_channel_count'] = {
-        'pass': True,
+        'pass': len(channel_mismatches) == 0,
         'w_counts': {f'({k[0]},{k[1]})': v for k, v in w_counts_proper.items()},
+        'w_observed': {f'({k[0]},{k[1]})': v for k, v in w_observed.items()},
+        'mismatches': [f'({p[0]},{p[1]})' for p in channel_mismatches],
         'description': (
-            'Number of (kappa_ext, kappa_int, q) triples with nonzero coupling '
-            'for each (n_ext, n_int) pair. Uses j-triangle and l-parity.'
+            'Per-(n_ext, n_int) count of distinct (kappa_ext, kappa_int, q) '
+            'channels in the vertex tensor support, compared against the '
+            'closed-form count from l-parity + l-triangle + j-triangle. '
+            'Pass = the realized support matches the closed form for every '
+            'pair.'
         ),
     }
 
@@ -1335,13 +1373,38 @@ def check_dirac_selection_rules(
         ),
     }
 
-    # 6. Furry's theorem (tadpole = 0)
+    # Rule numbering follows Paper 33 Table 1 (aligned 2026-07-03; the code
+    # keys previously had 6 and 7 swapped relative to the paper, and key 8
+    # held a Hermiticity check that is true by construction for any real
+    # vertex -- a tautology, replaced by the paper's actual Rule 8).
+
+    # 6. Ward identity: ||[Sigma, H0]|| / ||Sigma|| ~ 0
+    # H0 = diag(|lambda_n|) = diag(n_fock + 1/2), the Dirac eigenvalues
+    H0 = np.diag([float(s.n_fock + 0.5) for s in states])
+    commutator = Sigma @ H0 - H0 @ Sigma
+    comm_norm = np.linalg.norm(commutator, 'fro')
+    sigma_norm = np.linalg.norm(Sigma, 'fro')
+    ward_ratio = comm_norm / sigma_norm if sigma_norm > 1e-30 else 0.0
+
+    rules['6_ward_identity'] = {
+        'pass': bool(ward_ratio < 0.01),
+        'commutator_norm': comm_norm,
+        'sigma_norm': sigma_norm,
+        'ratio': ward_ratio,
+        'description': (
+            '||[Sigma, H0]|| / ||Sigma|| where H0 = diag(n+1/2) = Dirac '
+            'eigenvalues. For exact Ward identity this vanishes.'
+        ),
+    }
+
+    # 7. Charge conjugation / Furry's theorem (tadpole = 0)
     # Tadpole: sum_{q, m_q} V(a, a, q, m_q) * G_gamma(q)
     # The Dirac spinor phase constraint (Rule 0 in dirac_vertex_coupling)
     # enforces V(a, a, q, m_q) = 0 for all diagonal couplings, so the
     # tadpole vanishes identically. The mechanism is the off-diagonal
     # block structure of the Dirac alpha-matrix combined with the
-    # i-factor in the small component of the Dirac spinor.
+    # i-factor in the small component of the Dirac spinor -- derived
+    # symbolically in tests/test_paper33_furry_derivation.py.
     tadpole = np.zeros(N_e)
     for a_idx in range(N_e):
         for k_idx, (q, m_q) in enumerate(modes):
@@ -1352,7 +1415,7 @@ def check_dirac_selection_rules(
     # Count how many states have nonzero tadpole
     tadpole_nonzero = int(np.sum(np.abs(tadpole) > 1e-14))
 
-    rules['6_furry_theorem'] = {
+    rules['7_furry_theorem'] = {
         'pass': tadpole_max < 1e-14,
         'tadpole_max_abs': tadpole_max,
         'tadpole_rms': tadpole_rms,
@@ -1365,51 +1428,30 @@ def check_dirac_selection_rules(
         ),
     }
 
-    # 7. Ward identity: ||[Sigma, H0]|| / ||Sigma|| ~ 0
-    # H0 = diag(|lambda_n|) = diag(n_fock + 1/2), the Dirac eigenvalues
-    H0 = np.diag([float(s.n_fock + 0.5) for s in states])
-    commutator = Sigma @ H0 - H0 @ Sigma
-    comm_norm = np.linalg.norm(commutator, 'fro')
-    sigma_norm = np.linalg.norm(Sigma, 'fro')
-    ward_ratio = comm_norm / sigma_norm if sigma_norm > 1e-30 else 0.0
+    # 8. Triangle inequality on SO(4) (Paper 33 Table 1 Rule 8):
+    # every realized coupling must satisfy |n_a - n_b| <= q <= n_a + n_b - 2,
+    # where q is the photon SO(4) harmonic level and n_fock the principal
+    # quantum number. The upper bound follows from parity + l-triangle +
+    # l <= n-1; the lower bound is contingent (can fail for |n_a - n_b| >= 3
+    # at larger truncations, R = 1 radial factor), so this is an honest check.
+    triangle_violations = 0
+    for i, s_a in enumerate(states):
+        for j, s_b in enumerate(states):
+            for k, (q, m_q) in enumerate(modes):
+                if abs(V[i, j, k]) > 1e-15:
+                    if not (abs(s_a.n_fock - s_b.n_fock) <= q
+                            <= s_a.n_fock + s_b.n_fock - 2):
+                        triangle_violations += 1
 
-    rules['7_ward_identity'] = {
-        'pass': bool(ward_ratio < 0.01),
-        'commutator_norm': comm_norm,
-        'sigma_norm': sigma_norm,
-        'ratio': ward_ratio,
+    rules['8_triangle_on_n'] = {
+        'pass': triangle_violations == 0 and vertex_nnz > 0,
+        'violations': triangle_violations,
+        'nonzero_checked': vertex_nnz,
         'description': (
-            '||[Sigma, H0]|| / ||Sigma|| where H0 = diag(n+1/2) = Dirac '
-            'eigenvalues. For exact Ward identity this vanishes.'
-        ),
-    }
-
-    # 8. Charge conjugation / kappa symmetry
-    # Check that Sigma is symmetric (Hermitian for real case)
-    sigma_hermitian = bool(np.allclose(Sigma, Sigma.T, atol=1e-14))
-
-    # Also check kappa -> -kappa symmetry: for each pair of states that
-    # differ only in sign of kappa (same n, same l, same |m_j|),
-    # their diagonal self-energy elements should be equal.
-    kappa_sym_max_diff = 0.0
-    kappa_sym_pairs_checked = 0
-    for i, si in enumerate(states):
-        for j, sj in enumerate(states):
-            if (si.n_fock == sj.n_fock and si.kappa == -sj.kappa
-                    and si.two_m_j == sj.two_m_j):
-                diff = abs(Sigma[i, i] - Sigma[j, j])
-                kappa_sym_max_diff = max(kappa_sym_max_diff, diff)
-                kappa_sym_pairs_checked += 1
-
-    rules['8_charge_conjugation'] = {
-        'pass': sigma_hermitian,
-        'is_hermitian': sigma_hermitian,
-        'max_antisym': float(np.max(np.abs(Sigma - Sigma.T))),
-        'kappa_symmetry_max_diff': kappa_sym_max_diff,
-        'kappa_symmetry_pairs_checked': kappa_sym_pairs_checked,
-        'description': (
-            'Self-energy is Hermitian (symmetric for real). '
-            'Additionally checks kappa -> -kappa symmetry of diagonal elements.'
+            'All nonzero V entries satisfy |n_a - n_b| <= q <= n_a + n_b - 2 '
+            '(continuum SO(4) triangle inequality on principal quantum '
+            'numbers, Fock 1-indexed convention). Vacuous-guard: fails if '
+            'the vertex tensor has no support at all.'
         ),
     }
 

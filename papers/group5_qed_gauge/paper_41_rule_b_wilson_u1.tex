@@ -582,7 +582,9 @@ with multiplicity:
 together with the kernel dimensions $\dim\ker L_0=c=1$ (connectedness) and
 $\dim\ker L_1=\beta_1$ (cycle rank). We verified this numerically at
 $n_\text{max}\in\{2,3\}$ in the pilot driver
-(\texttt{debug/xcwg\_u1\_wilson\_rule\_b\_pilot.py}):
+(\texttt{tests/wilson\_rule\_b\_support/xcwg\_u1\_wilson\_rule\_b\_pilot.py};
+the kernel dimensions and spectra below are pinned by
+\texttt{tests/test\_paper41\_wilson\_witnesses.py}):
 
 \begin{itemize}
 \item $n_\text{max}=2$: $\dim\ker L_0=1$, $\dim\ker L_1=11=\beta_1$, nonzero
@@ -815,8 +817,11 @@ The MK recursion reproduces standard limits in two regimes:
 $\beta_\text{eff}\approx 2^{1-k}\beta^k$, verified to $\le 0.25\%$ at
 $\beta=0.03$ for $k=8.8$.
 \item Weak coupling ($\beta\to\infty$):
-$\beta_\text{eff}\approx\beta/k$, verified to $\le 2\%$ at $\beta=50$ for
-$k=8.8$.
+$\beta_\text{eff}\approx\beta/k$, approached as $O(1/\beta)$: $8.6\%$ at
+$\beta=50$ and $\le 2\%$ at $\beta=200$ for $k=8.8$. (The July~2026
+durability migration corrected an earlier ``$\le 2\%$ at $\beta=50$''
+misstatement against the archived \texttt{beta\_eff\_table}; the recompute
+is pinned by \texttt{tests/test\_paper41\_wilson\_witnesses.py}.)
 \end{itemize}
 
 \subsection{Flow direction and absence of non-trivial fixed point}
@@ -955,8 +960,8 @@ absent from the Gaussian sector. The $\alpha\approx 1$ result therefore
 geometry; it does \emph{not} contradict permanent confinement of the full
 compact theory.
 
-The earlier reading of the same numerical data (in the sprint pilot memo at
-\texttt{debug/xcwg\_wilson\_loop\_scaling\_memo.md}) interpreted the
+The earlier reading of the same numerical data (in the May~2026 XCWG-C
+sprint pilot memo) interpreted the
 $\alpha\approx 1$ result as ``the second witness fails the area-law test, and
 the two-witness verification is therefore not established.'' That reading
 conflated the free-photon sector (where perimeter law is correct in 3D) with
@@ -2008,7 +2013,12 @@ is internally self-consistent; the v5 update converts caveat (vi) from
 \label{sec:seven_witness}
 % ===================================================================
 
-The seven independent diagnostics give:
+The seven independent diagnostics give (the table values are pinned by the
+frozen regression suite \texttt{tests/test\_paper41\_wilson\_witnesses.py}:
+witnesses 1--4 and all graph-structural facts recomputed from scratch, the
+seeded Monte-Carlo fit values of witnesses 5--7 pinned against the archived
+JSON in \texttt{tests/wilson\_rule\_b\_support/data/} together with
+reduced-statistics fixed-seed smoke runs):
 
 \begin{center}
 \begin{tabular}{lll}
@@ -2025,7 +2035,7 @@ Witness & Diagnostic & Verdict \\
 2 (\S\ref{sec:mk_rg}) & MK $\beta_\text{eff}$ flow at $n_\text{max}=2,3$ &
   monotone to $\beta=0$, no UV fixed point \\
   & Asymptotic-limit verification &
-  match strong/weak coupling within $\le 2\%$ \\
+  strong $\le 0.25\%$ ($\beta{=}0.03$); weak $\le 2\%$ ($\beta{=}200$) \\
 \midrule
 3 (\S\ref{sec:gaussian_wilson}) & Gaussian $\langle S(L)\rangle\sim L^\alpha$
   at $n_\text{max}=2,3,4,5$ & $\alpha\in[0.89,1.18]$ \\
@@ -2456,19 +2466,24 @@ follow-on; and XCWG-H (Polyakov loops on a brand-new product-graph
 construction $G_B\times C_{N_t}$, \S\ref{sec:polyakov_loop}), which delivers
 a clean seventh-witness pass for persistent confinement at finite
 temperature via the homological Polyakov-loop class. All numerical data
-are reproducible from the driver scripts and JSON output files in the
-\texttt{debug/} directory of the GeoVac repository, including
-\texttt{debug/xcwg\_nlo\_character\_expansion.py} and
-\texttt{debug/data/xcwg\_nlo\_character\_expansion.json} for the v2 NLO
-results; \texttt{debug/xcwg\_monopole\_density.py} together with
-\texttt{debug/data/xcwg\_monopole\_density.json} and
-\texttt{debug/plots/xcwg\_monopole\_density.png} for the v3 monopole-density
-results; \texttt{debug/xcwg\_full\_mc\_wilson\_loops.py} together with
-\texttt{debug/data/xcwg\_full\_mc\_wilson\_loops.json} and
-\texttt{debug/plots/xcwg\_full\_mc\_wilson\_loops.png} for the v4 XCWG-G
-full-MC Wilson-loop results; and \texttt{debug/xcwg\_polyakov\_loop.py}
-together with \texttt{debug/data/xcwg\_polyakov\_loop.json} for the v4
-XCWG-H Polyakov-loop results. Per CLAUDE.md~\S 1.5, no ontological
+are reproducible from the driver scripts and JSON output files preserved
+in the permanent \texttt{tests/wilson\_rule\_b\_support/} directory of the
+GeoVac repository (migrated there from the transient \texttt{debug/}
+clean-room in July~2026), including
+\texttt{xcwg\_nlo\_character\_expansion.py} and
+\texttt{data/xcwg\_nlo\_character\_expansion.json} for the v2 NLO
+results; \texttt{xcwg\_monopole\_density.py} together with
+\texttt{data/xcwg\_monopole\_density.json} and
+\texttt{data/xcwg\_monopole\_density.png} for the v3 monopole-density
+results; \texttt{xcwg\_full\_mc\_wilson\_loops.py} together with
+\texttt{data/xcwg\_full\_mc\_wilson\_loops.json} and
+\texttt{data/xcwg\_full\_mc\_wilson\_loops.png} for the v4 XCWG-G
+full-MC Wilson-loop results; and \texttt{xcwg\_polyakov\_loop.py}
+together with \texttt{data/xcwg\_polyakov\_loop.json} for the v4
+XCWG-H Polyakov-loop results. The cheaply recomputable witness values and
+the archived seeded Monte-Carlo fits are pinned by the frozen regression
+suite \texttt{tests/test\_paper41\_wilson\_witnesses.py}. Per
+CLAUDE.md~\S 1.5, no ontological
 priority is asserted for the discrete graph over the continuum manifold;
 the two are dual descriptions connected by Paper~7's Fock projection.
 

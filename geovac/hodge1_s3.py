@@ -10,22 +10,41 @@ on the unit 3-sphere S³:
 This is the natural kinetic operator for a massless spin-1 (photon)
 field on S³ in Lorenz gauge.
 
-Spectrum (SO(4) representation theory)
---------------------------------------
-On the unit S³ (radius R = 1):
+Spectrum and labeling convention (IMPORTANT)
+--------------------------------------------
+The literature spectrum of the Hodge-de Rham Laplacian on 1-forms of
+the unit S³ (Ikeda-Taniguchi 1978; Camporesi 1990) consists of TWO
+families at DIFFERENT eigenvalues:
 
-    Eigenvalues:   mu_n = n(n + 2)   for n = 1, 2, 3, ...
-    Degeneracies:  d_n  = 2n(n + 2)   (total)
+    exact (longitudinal, df):  mu = k(k+2),   multiplicity (k+1)^2,
+                               k = 1, 2, ...  (gradients of scalar
+                               harmonics; Delta_1 df = d Delta_0 f)
+    coclosed (transverse):     mu = (k+1)^2,  multiplicity 2k(k+2),
+                               k = 1, 2, ...  (curl eigenforms,
+                               *d omega = +-(k+1) omega, the two curl
+                               chiralities each of dimension k(k+2);
+                               k = 1 gives the 6 Killing forms at
+                               eigenvalue 4 = 2(n-1)|_{n=3})
 
-The total degeneracy decomposes into:
+No zero modes exist because beta_1(S^3) = 0 (simply connected).
 
-    d_n^T  = 2(n^2 - 1)   transverse (divergence-free, physical photon)
-                           for n >= 2; d_1^T = 3 (conformal Killing)
-    d_n^L  = 2n + 1        longitudinal (exact = pure gauge = d(scalar))
+THIS MODULE uses a flat labeling convention instead: level n carries
+    hodge1_eigenvalue(n)             = n(n+2)   (the EXACT-family value)
+    hodge1_degeneracy(n, 'all')      = 2n(n+2)  (numerically the
+                                       Ikeda-Taniguchi COCLOSED
+                                       multiplicity at the same label n,
+                                       which in the literature is
+                                       attached to eigenvalue (n+1)^2)
+    hodge1_degeneracy(n, 'transverse') = n(n+2) (one curl chirality)
+    hodge1_degeneracy(n, 'longitudinal') = n(n+2)
 
-At n = 1: mu_1 = 3, d_1 = 6. These are the conformal Killing vectors
-(3 transverse + 3 longitudinal). No zero modes exist because
-beta_1(S^3) = 0 (S^3 is simply connected).
+i.e. the transverse/longitudinal 50/50 split at a COMMON eigenvalue is
+a module convention (per-chirality counting), not the literature
+eigenspace decomposition. Consumers that need the literature spectrum
+(e.g. photon determinants / heat kernels on S^3) must use the
+two-family form above. The independent symbolic verification of the
+two families and of the Weitzenboeck shift lives in
+tests/test_hodge1_s3.py (test_weitzenbock_*).
 
 Bochner-Weitzenbock identity
 ----------------------------
@@ -33,20 +52,17 @@ On a Riemannian manifold, the Hodge Laplacian on 1-forms satisfies
 
     Delta_1 = nabla* nabla + Ric
 
-On S^3 with Ric = 2g (constant Ricci curvature), this gives the
-relation between the Hodge-1 eigenvalues and the scalar Laplacian:
-
-    mu_n^{(1-form)} = lambda_{n+1}^{(scalar)} + 2
-
-where lambda_k^{(scalar)} = k^2 - 1 is the scalar Laplace-Beltrami
-eigenvalue on S^3 at level k. Substituting:
-
-    mu_n = (n+1)^2 - 1 + 2 = n^2 + 2n = n(n + 2).
+On unit S^3, Ric = 2g, so Delta_1 = nabla*nabla + 2 as an operator
+identity on ALL 1-forms. This is verified symbolically (Hopf
+coordinates, generic 1-form components) in
+tests/test_hodge1_s3.py::test_weitzenbock_operator_identity_generic.
+Consequences per family: rough (connection) eigenvalues are
+k(k+2) - 2 on the exact family and (k+1)^2 - 2 on the coclosed family.
 
 The +2 Ricci shift is a continuum curvature effect. GeoVac's
 combinatorial edge Laplacian L_1 = B^T B (Paper 25) has nonzero
 eigenvalues matching the scalar spectrum n^2 - 1, NOT the Hodge-1
-spectrum n(n+2). The Ricci shift is absent from the graph.
+spectrum. The Ricci shift is absent from the graph.
 
 Radius scaling
 --------------
@@ -167,7 +183,9 @@ class VectorHarmonicLabel:
 # ---------------------------------------------------------------------------
 
 def hodge1_eigenvalue(n: int, R: sp.Expr = Integer(1)) -> sp.Expr:
-    """Eigenvalue mu_n of the Hodge-1 Laplacian on S^3 of radius R.
+    """Level-n eigenvalue of the Hodge-1 Laplacian on S^3 of radius R
+    in this module's labeling convention (the EXACT-family value; the
+    coclosed family sits at (n+1)^2/R^2 -- see the module docstring).
 
     mu_n = n(n + 2) / R^2   for n = 1, 2, 3, ...
 
@@ -211,73 +229,28 @@ def hodge1_degeneracy(n: int, mode_type: ModeType = "all") -> int:
 
     Notes
     -----
-    At n = 1: mu_1 = 3, total = 6 (3 transverse conformal Killing + 3 long.).
-    The transverse degeneracy 2(n^2 - 1) gives 0 at n = 1 from the formula,
-    but there are 3 conformal Killing vectors. The general formula for
-    transverse 1-forms on S^d is (Camporesi 1990):
+    Labeling convention (see the module docstring for the full statement).
+    The literature decomposition of the 1-form spectrum on unit S^3
+    (Ikeda-Taniguchi 1978; Camporesi 1990) is two families at DIFFERENT
+    eigenvalues:
 
-        d_n^T = (d-1)(n+d-2)!/(n!(d-2)!) * [2n+d-1]/(n+d-2) - ...
+        exact (df):   eigenvalue k(k+2),  multiplicity (k+1)^2, k >= 1
+        coclosed:     eigenvalue (k+1)^2, multiplicity 2k(k+2), k >= 1
+                      (two curl chiralities *d = +-(k+1), each of
+                      dimension k(k+2); k=1 = the 6 Killing forms at
+                      eigenvalue 4)
 
-    For S^3 (d=3), the transverse degeneracy is:
-        n = 1: 3 (conformal Killing vectors, NOT co-exact)
-        n >= 2: 2(n^2 - 1) = 2(n-1)(n+1) (co-exact transverse)
+    This function returns the module's flat per-level counts:
+        'all'          -> 2n(n+2)  (numerically the coclosed multiplicity
+                          at label n; in the literature it sits at
+                          eigenvalue (n+1)^2, not n(n+2))
+        'transverse'   -> n(n+2)   (one curl chirality)
+        'longitudinal' -> n(n+2)
 
-    Total check: d_n^T + d_n^L = 2(n^2-1) + (2n+1) = 2n^2 + 2n - 1
-    But we need d_n = 2n(n+2) = 2n^2 + 4n, so the simple formula doesn't
-    add up for general n. The correct decomposition is:
-
-    For n >= 2:
-        d_n^T (co-exact, physical) = 2(n^2 - 1) = 2(n-1)(n+1)
-        d_n^L (exact, pure gauge)  = (n+1)^2 = scalar degeneracy at level n+1
-
-    Check: 2(n-1)(n+1) + (n+1)^2 = (n+1)[2(n-1) + (n+1)] = (n+1)(3n-1).
-    That's not 2n(n+2) either.
-
-    The correct SO(4) decomposition (Camporesi 1990, Rubin-Ordonez 1984):
-        Total 1-form modes at eigenvalue n(n+2): 2n(n+2)
-        Exact (longitudinal): (n+1)^2 - 1 = n^2 + 2n = n(n+2)  [NO]
-
-    Let me be precise. On S^d, the 1-form spectrum has three types:
-    1. Co-exact transverse: from curl of 1-forms (physical photon modes)
-    2. Exact (longitudinal): d(scalar), pure gauge
-    3. Harmonic: zero modes (beta_1 = 0 on S^3, so none)
-
-    For S^3 the precise count (Rubin-Ordonez 1984, Higuchi 1987):
-
-    Scalar harmonics at level k (k >= 0): eigenvalue k(k+2), degeneracy (k+1)^2.
-    Vector (1-form) harmonics at eigenvalue mu = n(n+2):
-        Longitudinal (exact): d(Y_n) where Y_n are scalar harmonics at level n.
-            These have eigenvalue n(n+2) + 2 under Delta_1... no, d commutes
-            with Delta on exact forms: Delta_1(df) = d(Delta_0 f), so if
-            Delta_0 f = n(n+2) f, then Delta_1(df) = n(n+2) df.
-            Degeneracy: (n+1)^2 (same as scalar at level n), but excluding
-            n=0 (d(constant) = 0). So for n >= 1: (n+1)^2 longitudinal modes
-            at eigenvalue n(n+2).
-        Transverse (co-exact + harmonic): total - longitudinal.
-            = 2n(n+2) - (n+1)^2 = 2n^2 + 4n - n^2 - 2n - 1 = n^2 + 2n - 1
-
-    Check n=1: total 6, long (1+1)^2 = 4, trans 6-4 = 2.
-    But the literature says 3 conformal Killing at n=1...
-
-    Actually, the standard reference (Rubin-Ordonez 1984) for S^3:
-        Total at eigenvalue mu_n = n(n+2): 2n(n+2)
-        This splits into exact and co-exact:
-            Exact: deg = n(n+2) [from scalar harmonics at level n]
-            Co-exact: deg = n(n+2) [from scalar harmonics at level n as well,
-                      via the Hodge star duality on S^3]
-
-    On S^3 (odd-dimensional), the Hodge star maps k-forms to (3-k)-forms.
-    For 1-forms, * maps to 2-forms. Co-exact 1-forms delta(omega_2) =
-    *d*(omega_2) correspond to 2-forms, which on S^3 are dual to 1-forms.
-
-    The clean result for S^3 specifically:
-        At eigenvalue mu_n = n(n+2) (n >= 1):
-            Exact (longitudinal): n(n+2) modes
-            Co-exact (transverse): n(n+2) modes
-            Total: 2n(n+2)
-
-    This is the simplest and most symmetric decomposition: exact and co-exact
-    contribute equally due to Hodge duality on S^3.
+    The 50/50 split at a common eigenvalue is a module convention used
+    by the QED vertex-counting code (per-chirality weights), NOT the
+    literature eigenspace decomposition. Independent literature anchor:
+    tests/test_hodge1_s3.py::test_degeneracy_ikeda_taniguchi_anchor.
     """
     if n < 1:
         raise ValueError("n must be >= 1 for the Hodge-1 spectrum")
@@ -451,61 +424,30 @@ def hodge1_propagator_diagonal(n: int, R: sp.Expr = Integer(1)) -> sp.Expr:
 # ---------------------------------------------------------------------------
 
 def verify_bochner_weitzenbock(n_max: int = 20) -> bool:
-    """Verify mu_n^{(1-form)} = lambda_{n+1}^{(scalar)} + 2 for n=1..n_max.
+    """Arithmetic-corollary check of the Bochner-Weitzenbock shift for
+    the EXACT (longitudinal) 1-form family on unit S^3.
 
-    The scalar Laplacian eigenvalue on S^3 at level k is
-    lambda_k = k^2 - 1 (k = 1, 2, 3, ...).
+    The operator identity Delta_1 = nabla*nabla + Ric with Ric = 2g gives
+    mu_Hodge = mu_conn + 2 on every 1-form eigenspace. For the exact
+    family (omega = df with Delta_0 f = n(n+2) f), mu_Hodge = n(n+2) and
+    hence mu_conn = n(n+2) - 2. This function checks that arithmetic
+    relation against hodge1_eigenvalue(n).
 
-    The Bochner-Weitzenbock identity on S^3 (Ric = 2g) gives:
-        mu_n = lambda_{n+1} + 2 = (n+1)^2 - 1 + 2 = n^2 + 2n + 2 - 1 + 2
-    Wait: lambda_{n+1} = (n+1)^2 - 1 = n^2 + 2n.
-    Then lambda_{n+1} + 2 = n^2 + 2n + 2.
-    But mu_n = n(n+2) = n^2 + 2n.
-
-    Hmm, the relationship is more subtle. The Bochner-Weitzenbock identity
-    Delta_1 = nabla* nabla + Ric means:
-        mu_n^{BW} = lambda_n^{connection} + 2
-
-    where lambda_n^{connection} is the eigenvalue of the connection
-    Laplacian nabla* nabla, not the scalar Laplacian. The connection
-    Laplacian on 1-forms is related to but distinct from the scalar
-    Laplacian.
-
-    The correct relationship is through the SO(4) representation theory:
-    the 1-form harmonics at level n correspond to the representation
-    (n/2, n/2) tensor (1/2, 1/2) of SO(4) = SU(2) x SU(2), where
-    (1/2, 1/2) is the vector representation. The eigenvalue is determined
-    by the Casimir.
-
-    The simplest exact relationship is:
-        mu_n^{(1-form)} = (n+1)^2 - 1  + (Ricci correction for 1-forms)
-
-    Actually the clean fact is: the scalar harmonic at level k has
-    eigenvalue lambda_k = k(k+2) for k = 0, 1, 2, ... (using the
-    convention where lambda_0 = 0 for constants). Then
-    mu_n^{(1-form)} = n(n+2) exactly matches the scalar eigenvalue at
-    level n. The Hodge-1 eigenvalue at level n equals the scalar eigenvalue
-    at the SAME level n.
-
-    The Bochner-Weitzenbock identity connects the Hodge Laplacian to the
-    connection Laplacian via Delta_1 = nabla* nabla + Ric. On S^3 with
-    Ric_{ij} = 2 g_{ij}, this means:
-        mu_n^{Hodge-1} = mu_n^{conn} + 2
-
-    The connection Laplacian eigenvalues on 1-forms on S^3 are
-    mu_n^{conn} = n(n+2) - 2 = n^2 + 2n - 2.
-
-    Verification: mu_n^{Hodge-1} = n^2 + 2n - 2 + 2 = n^2 + 2n = n(n+2). OK.
-
-    For this function, we verify the relationship:
-        mu_n^{Hodge-1} = mu_n^{conn} + 2
-
-    where mu_n^{conn} = n(n+2) - 2.
+    HONESTY NOTE: taken alone this check is circular (mu_conn is written
+    down from the same formula). The independent, metric-level
+    verification -- symbolic construction of both Delta_Hodge and
+    nabla*nabla in Hopf coordinates, generic 1-form components, plus
+    Killing-form and exact-form eigenvalue anchors -- lives in
+    tests/test_hodge1_s3.py::test_weitzenbock_operator_identity_generic
+    and companions (group5 cert finding E17 remediation). For the
+    coclosed (transverse) family the literature eigenvalues are
+    (n+1)^2 with rough eigenvalue (n+1)^2 - 2, NOT covered by this
+    function (see the module docstring's labeling-convention note).
 
     Returns
     -------
     bool
-        True iff the identity holds for all n = 1..n_max.
+        True iff mu_Hodge(n) = [n(n+2) - 2] + 2 for all n = 1..n_max.
     """
     for n in range(1, n_max + 1):
         mu_hodge = hodge1_eigenvalue(n)

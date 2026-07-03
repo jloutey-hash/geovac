@@ -13,7 +13,7 @@ Constructs explicitly at n_max = 2 and n_max = 3:
     closed walks
   - Weak-coupling kinetic-term sanity check at n_max = 2
 
-All output to debug/data/xcwg_u1_wilson_rule_b_pilot.json (no production code
+All output to tests/wilson_rule_b_support/data/xcwg_u1_wilson_rule_b_pilot.json (no production code
 modifications, per sprint constraints).
 """
 
@@ -29,7 +29,7 @@ import numpy as np
 
 # Make geovac importable without installing the package.
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 

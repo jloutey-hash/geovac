@@ -44,8 +44,8 @@ Settings tuned for ~30-60 min single-agent runtime:
 
 Outputs
 =======
-  - debug/data/xcwg_full_mc_wilson_loops_nmax4.json
-  - debug/plots/xcwg_full_mc_wilson_loops_nmax4.png (if matplotlib)
+  - tests/wilson_rule_b_support/data/xcwg_full_mc_wilson_loops_nmax4.json
+  - tests/wilson_rule_b_support/data/xcwg_full_mc_wilson_loops_nmax4.png (if matplotlib)
 """
 
 from __future__ import annotations
@@ -60,7 +60,7 @@ from typing import Dict, List, Tuple
 import numpy as np
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 if _HERE not in sys.path:
@@ -443,7 +443,7 @@ def main():
             ax[2].legend(loc="best", fontsize=8)
 
             fig.tight_layout()
-            plot_path = os.path.join(_HERE, "plots", "xcwg_full_mc_wilson_loops_nmax4.png")
+            plot_path = os.path.join(_HERE, "data", "xcwg_full_mc_wilson_loops_nmax4.png")
             os.makedirs(os.path.dirname(plot_path), exist_ok=True)
             fig.savefig(plot_path, dpi=120)
             plt.close(fig)

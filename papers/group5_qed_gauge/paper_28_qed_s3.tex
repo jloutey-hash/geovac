@@ -3536,11 +3536,14 @@ $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2N/(N+1)
 \end{proof}
 
 \noindent\textbf{Verification:} Eq.~\eqref{eq:pendant_edge} is
-continuously verified by \texttt{tests/test\_graph\_qed\_self\_energy.py}
-(exact \texttt{sympy} rational arithmetic at $n_{\max} = 2$); the
-original sprint driver additionally swept $n_{\max} = 2$--$5$
-numerically (v2.26-era measurement, archived). The formula itself is
-proven in the theorem above for all $n_{\max}$.
+continuously verified by \texttt{tests/test\_graph\_qed\_self\_energy.py}:
+at $n_{\max} = 2$ in exact \texttt{sympy} rational arithmetic (GS block
+$[[1,1],[1,1]]$), and at $n_{\max} = 3, 4$ numerically to $10^{-10}$
+(\texttt{TestPendantEdgeSweep}, added 2026-07-03 after the
+\texttt{graph\_qed\_photon} $n_{\max} \ge 4$ eigenvalue-sort crash fix;
+the exact-\texttt{sympy} photon pseudoinverse at $n_{\max} \ge 3$
+exceeds any reasonable test budget, so those points are numeric).  The
+formula itself is proven in the theorem above for all $n_{\max}$.
 
 \subsubsection{Layer 3: Selection-rule gap}
 

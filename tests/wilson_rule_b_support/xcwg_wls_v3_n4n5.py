@@ -2,7 +2,7 @@
 import os, sys, json
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 sys.path.insert(0, _ROOT); sys.path.insert(0, _HERE)
 sys.stdout.reconfigure(line_buffering=True)
 

@@ -30,8 +30,8 @@ Strategy
 
 Output
 ======
-    debug/data/xcwg_full_mc_wilson_loops.json
-    debug/plots/xcwg_full_mc_wilson_loops.png      (if matplotlib available)
+    tests/wilson_rule_b_support/data/xcwg_full_mc_wilson_loops.json
+    tests/wilson_rule_b_support/data/xcwg_full_mc_wilson_loops.png      (if matplotlib available)
 """
 
 from __future__ import annotations
@@ -47,7 +47,7 @@ import numpy as np
 from scipy.special import i0, i1
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 if _HERE not in sys.path:
@@ -916,7 +916,7 @@ def main():
     }
 
     # XCWG-F Polyakov rho_M fit parameters (from
-    # debug/data/xcwg_monopole_density.json, n_max=2)
+    # tests/wilson_rule_b_support/data/xcwg_monopole_density.json, n_max=2)
     rho_M_A_xcwgF = 0.7471301473307033
     rho_M_c_xcwgF = 9.40152906810695
     out["xcwg_f_rho_M_fit_used_for_polyakov_cross_check"] = {
@@ -1232,7 +1232,7 @@ def main():
         ax[2].legend(loc="upper right", fontsize=8)
 
         fig.tight_layout()
-        plot_path = os.path.join(_HERE, "plots", "xcwg_full_mc_wilson_loops.png")
+        plot_path = os.path.join(_HERE, "data", "xcwg_full_mc_wilson_loops.png")
         os.makedirs(os.path.dirname(plot_path), exist_ok=True)
         fig.savefig(plot_path, dpi=120)
         plt.close(fig)

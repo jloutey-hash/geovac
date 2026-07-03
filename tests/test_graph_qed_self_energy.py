@@ -614,6 +614,49 @@ class TestStructuralProperties:
 
 
 # ===========================================================================
+# Pendant-edge closed form sweep (Paper 28 prop:pendant_edge / Paper 33)
+# ===========================================================================
+
+class TestPendantEdgeSweep:
+    """Sigma_graph(GS) = 2(n_max - 1)/n_max (pendant-edge theorem).
+
+    n_max=2 is covered EXACTLY (sympy rational) by TestSelfEnergyT0:
+    the GS block is [[1,1],[1,1]], i.e. value 1 = 2(2-1)/2.  This class
+    extends the sweep to n_max=3,4 on the NUMERIC path (exact=False,
+    agreement to <= 1e-10): the exact-sympy path at n_max >= 3 exceeds
+    any reasonable test budget (the E=40 exact photon pseudoinverse runs
+    for tens of minutes), so the closed form is verified numerically
+    there.  Added 2026-07-03, after the graph_qed_photon n_max >= 4
+    eigenvalue sort-key crash fix (1st-cert E4) unblocked this path.
+    """
+
+    @pytest.mark.parametrize("n_max", [3, 4])
+    def test_gs_self_energy_matches_closed_form(self, n_max):
+        """GS diagonal = 2(n_max-1)/n_max, degenerate across m_j = +-1/2."""
+        se = compute_self_energy(n_max, t=Rational(0), exact=False)
+        labels = list(iter_dirac_labels(n_max))
+        gs_idx = _ground_state_indices(labels)
+        assert len(gs_idx) == 2
+        expected = 2.0 * (n_max - 1) / n_max
+        for i in gs_idx:
+            assert abs(se.Sigma_numpy[i, i] - expected) < 1e-10
+        # degeneracy across the two m_j components
+        assert abs(se.Sigma_numpy[gs_idx[0], gs_idx[0]]
+                   - se.Sigma_numpy[gs_idx[1], gs_idx[1]]) < 1e-12
+
+    @pytest.mark.parametrize("n_max", [3, 4])
+    def test_gs_block_is_rank_one_constant(self, n_max):
+        """The full 2x2 GS block is (2(n_max-1)/n_max) * ones(2,2), the
+        same rank-1 pattern as the exact [[1,1],[1,1]] block at n_max=2."""
+        se = compute_self_energy(n_max, t=Rational(0), exact=False)
+        labels = list(iter_dirac_labels(n_max))
+        gs_idx = _ground_state_indices(labels)
+        expected = 2.0 * (n_max - 1) / n_max
+        block = se.Sigma_numpy[np.ix_(gs_idx, gs_idx)]
+        assert np.allclose(block, expected * np.ones((2, 2)), atol=1e-10)
+
+
+# ===========================================================================
 # Edge cases
 # ===========================================================================
 

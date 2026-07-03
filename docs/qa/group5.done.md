@@ -122,6 +122,18 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
   P28-adjacent files — C14 reports advisory, not blocking.
 
 ## Change log
+- 2026-07-03 — **Tier-2 backing sprints COMPLETE (PI-directed; v4.65.0).** Five parallel tracks:
+  Furry derivation ported (21 symbolic tests; census de-tautologized, totals unchanged); XCWG
+  durability migration (14 drivers → tests/wilson_rule_b_support/, 24 witness tests); P51 three
+  headlines pinned AT PAPER SCALE (a₀=1.991913, SC 0.994312, K_cone 7+ digits vs an independent
+  cone reference) + 27 tier tags; P30 Prop 3 CORRECTED (kinetic form = co-exact completion, NOT
+  ∝L1 — withdrawal note) + MC table pinned bit-identically + Bochner replaced by a genuine symbolic
+  operator-identity proof + S²-quotient/S⁵ pins + CP² 24.98%→40.8% SUPERSEDED (provably-unachievable
+  floor; negative strengthened); P2 B=42/selection-uniqueness/circulant exact tests + F₂ exact in
+  ℚ(√6); P36 Lamb chain ported + pinned (1052.19 assembly + N=40 Bethe logs) with two claim
+  corrections (1S crossing artifact; Drake 2P ref). ~90 net new tests; gates 7/7; controls green.
+  **Named follow-up (PI):** hodge1/P28 transverse-eigenvalue labeling (q(q+2) vs literature (q+1)²).
+  Next: Tier-2 delta run, then the certifying FULL run.
 - 2026-07-03 — **Delta-verification #1 over the v4.64.0 diff = CLEAN-DELTA → certifying FULL run EARNED (v4.64.1).**
   Five payload-pinned reviewers (2 Opus claims + Opus synthesis + Sonnet code + Sonnet citation);
   **sensitivity 7/7 + 2 cross-catches, specificity clean, zero genuine MATERIAL.** The citation agent

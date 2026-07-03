@@ -17,16 +17,19 @@ The structural question (May 2026 RG sprint context):
   does the graph still effectively look 2D?
 
 Output:
-  - debug/data/xcwg_rule_b_spectral_dim.json
-  - debug/plots/xcwg_rule_b_spectral_dim.png
+  - tests/wilson_rule_b_support/data/xcwg_rule_b_spectral_dim.json
+  - tests/wilson_rule_b_support/data/xcwg_rule_b_spectral_dim.png
 
-CONTEXT: GeoVac, Project_Geometric, 2026-05-15.
+CONTEXT: GeoVac, Project_Geometric, 2026-05-15.  Migrated from debug/ to
+tests/wilson_rule_b_support/ (2026-07-03 durability migration); consumed by
+tests/test_paper41_wilson_witnesses.py.
 """
 
 from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -36,6 +39,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.linalg
 import scipy.sparse.csgraph
+
+# Make geovac importable when run standalone from tests/wilson_rule_b_support/.
+_REPO = str(Path(__file__).resolve().parents[2])
+if _REPO not in sys.path:
+    sys.path.insert(0, _REPO)
 
 from geovac.fock_graph_hodge import FockGraphHodge
 from geovac.ihara_zeta_dirac import build_dirac_s3_graph
@@ -566,9 +574,9 @@ def make_plots(results: Dict, t_values: np.ndarray, out_path: Path) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    root = Path(__file__).resolve().parent.parent
-    data_path = root / "debug" / "data" / "xcwg_rule_b_spectral_dim.json"
-    plot_path = root / "debug" / "plots" / "xcwg_rule_b_spectral_dim.png"
+    here = Path(__file__).resolve().parent
+    data_path = here / "data" / "xcwg_rule_b_spectral_dim.json"
+    plot_path = here / "data" / "xcwg_rule_b_spectral_dim.png"
     data_path.parent.mkdir(parents=True, exist_ok=True)
     plot_path.parent.mkdir(parents=True, exist_ok=True)
 

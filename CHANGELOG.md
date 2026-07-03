@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.65.0] - 2026-07-03
+
+**group5 Tier-2 backing sprints COMPLETE (PI-directed) — five parallel worker tracks; ~90 net new tests; six genuine claim corrections found by validate-before-pinning; two production tautologies replaced with real physics checks.**
+
+### Added (tests + support infrastructure)
+- `tests/test_paper33_furry_derivation.py` (21): the Furry V(a,a)=0 mechanism ported from the archived driver into pointwise-symbolic sympy proofs with non-vacuity guards — Thm dirac_8_of_8 now has genuine symbolic backing (the production short-circuit is a cited consistency check, no longer the backing).
+- `tests/test_paper41_wilson_witnesses.py` (24) + `tests/wilson_rule_b_support/` (14 migrated drivers + data + README): all seven P41 witnesses durable — d_s recomputed, MK flow exact, Wilson α by full deterministic enumeration, MC pinned from seeded archives; the four dangling paper cites repointed.
+- `tests/test_paper51_g44_headlines.py` (6) + `tests/gravity_support/` (g6_fierz_pauli migrated): a₀=1.991913 at FULL paper scale, SC recovery 0.994312 at the production substrate, K_cone at 7+ digits against an independently-built cone-Dirac reference; P51 gains 27 inline provenance tier tags (had zero).
+- `tests/test_paper2_ingredients.py` (13): B=42 exact-Fraction + symbolic closed forms; B/N=3 selection uniqueness (sympy-solve); the Z₃-circulant charpoly s³−Ks+1. `tests/test_paper36_lamb_chain.py` (9) + `tests/paper36_lamb_support/`: the LS-6a assembly reproduces 1052.19 MHz + every component-table entry; N=40 Sturmian Bethe logs recomputed. F₂(1,1) pinned exact-algebraic: (688−152√6)/253125.
+- `tests/test_paper25_s2_quotient.py` (5): the S² quotient spectrum exactly {0,0,0,1,3,6}. S⁵ plaquette censuses pinned (incl. 7,765). P30 additions: the 1/8=1/(4N_c) kinetic coefficient (mirroring SU(3)'s 1/12 test), the seeded MC Wilson table bit-identical, gauge-invariance tightened to 1e-13.
+
+### Changed/Fixed (production + papers — six claim corrections, all disclosed in place)
+- **P30 Prop 3 corrected (MATERIAL):** the SU(2) Wilson kinetic form is the CO-EXACT COMPLETION of L1 to the full Hodge-1 Laplacian (rank 2 vs 11, L1·B₂=0) — not "L1 up to a positive scalar"; withdrawal note + 8 loci synced + pinned by test_kinetic_form_is_curl_complement_of_L1.
+- **P25/synthesis CP² residual superseded:** 24.98% is provably unachievable (convention-robust ≥33% floor; least-squares 40.8%) — the negative strengthened, both documents synced.
+- **P33 R6:** the scalar-Ward "residual ~10⁻³ at n_max=3" was never backed (the archived JSON says 3.107/FAIL) → "exact at n_max=2, ≈3.1 at n_max=3". **P36:** ln k₀(1S)=3.002 was an N=20 crossing artifact (N=40 → 3.268) — corrected + disclosed; Drake–Swainson 2P ref −0.0314→−0.030017. **P41:** MK "≤2% at β=50" → 8.6% (≤2% only at β=200), per its own archive.
+- **Census de-tautologized** (geovac/vector_qed.py): rules 3+8 are now real support-vs-closed-form checks (verified n_max=2 AND 3); rule numbering aligned to the paper's Table 1; census totals unchanged (7/8, 8/8). Pendant edge verified numerically ≤1e-10 at n_max=3,4 (papers scoped honestly; exact path over budget).
+- **The Bochner–Weitzenböck 2==2 tautology replaced** by a genuine symbolic operator identity (Δ_Hodge − ∇*∇ = 2·id on arbitrary 1-forms in Hopf coordinates) + literature anchors; hodge1_s3 docstrings honest-ified (zero behavior change).
+
+### Named follow-up (PI)
+- hodge1_s3/Paper 28 transverse-eigenvalue labeling: the module's q(q+2) convention vs the literature two-family spectrum ((q+1)² coclosed) — touches P28's photon-propagator diagonal; documented in docstrings + test anchors, P28 remediation deferred as its own item.
+
+### State
+All affected suites green (468 P33/QED + 368 P30/P25 + 120 P51 + 64 P2/P36 + 24 P41); benchmark controls pass (H2+/H2, 29); topological 18/18; gates 7/7; 9 papers + synthesis 0-errors. Next per run-shapes: the Tier-2 delta run, then the certifying FULL run. Canonical memo `debug/sprint_group5_1stcert_memo.md`.
+
 ## [4.64.1] - 2026-07-03
 
 **group5 delta-verification #1 = CLEAN-DELTA → the certifying FULL run is earned.** Five payload-pinned reviewers over the Tier-1 remediation diff (patch-file payloads — the delta protocol's paste-don't-point without orchestration overhead): sensitivity **7/7** (+2 cross-catches; the code agent caught both the dropped-restore and the >=0-tautology seeds via sibling comparison and disk cross-check; the citation agent DOI-verified both volume-digit seeds), specificity clean, **zero genuine MATERIAL** — all 12 new bibliographic facts GROUNDED. Post-run polish: P28 FP/J-blindness slash tightened; parker1980 locator honestly widened to Chs. 6–7; fegan1983 content verified (1978 Trans. AMS; key misnomer harmless). Gates 7/7 PASS; ~510k subagent tokens. Certifying FULL run = PI timing call vs the open Tier-2 backing sprints.

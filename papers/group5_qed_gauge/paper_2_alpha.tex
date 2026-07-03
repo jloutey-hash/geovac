@@ -272,6 +272,16 @@ The base manifold invariant is
   \vphantom{\Bigg|}
 \end{equation}
 
+\emph{Verification.}  The ingredient identities of this section are
+pinned by exact symbolic tests (no floats):
+\texttt{tests/test\_paper2\_ingredients.py} recomputes $B(3) = 42$
+term-by-term from Eq.~(\ref{eq:casimir}), proves the closed forms
+(\ref{eq:innersum})--(\ref{eq:ratioclosed}) symbolically, and
+confirms that the selection $B/N = 3$ holds at $n_{\max} = 3$ and
+fails at $n_{\max} \in \{1, 2, 4, 5\}$ (Table~\ref{tab:selection}).
+The generalized $S^d$ identity of \S\ref{sec:s3_specificity} is
+pinned separately in \texttt{tests/test\_paper2\_corrections.py}.
+
 
 \subsection{Triple selection at $n_{\max}=3$}\label{sec:triple_selection}
 
@@ -919,7 +929,12 @@ $\det M = -1$), this becomes
   s^3 - Ks + 1 = 0,
 \end{equation}
 which is \textit{exactly} the paper's cubic with $s = \alpha$. The
-eigenvalues of $M$ are the three roots of the cubic.
+eigenvalues of $M$ are the three roots of the cubic.  (The
+characteristic-polynomial shape, the tracelessness, the determinant
+identity $\det M = b^3 + c^3$, and the substitution to
+$s^3 - Ks + 1$ are verified symbolically in
+\texttt{tests/test\_paper2\_ingredients.py}, alongside the $SU(2)$
+structure-constant analog below.)
 
 \subsection{Physical interpretation}
 

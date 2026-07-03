@@ -317,8 +317,20 @@ class TestSelectionRules:
         assert rules_n2['2_vertex_parity_gs_zero']['pass'] is True
 
     def test_so4_channel_count(self, rules_n2):
-        """Rule 3: SO(4) channel count W is well-defined."""
-        assert rules_n2['3_so4_channel_count']['pass'] is True
+        """Rule 3: vertex-support channel count matches the closed form.
+
+        De-tautologized 2026-07-03 (was a hardcoded pass=True): the count of
+        (l_ext, l_int, q) channels realized in the vertex tensor must equal
+        the parity + l-triangle closed form for every (n_ext, n_int) pair.
+        At n_max=2, q_max=1 the only allowed channel is (1,1,1) at (2,2).
+        """
+        rule = rules_n2['3_so4_channel_count']
+        assert rule['pass'] is True
+        assert rule['mismatches'] == []
+        assert rule['w_counts']['(2,2)'] == 1
+        assert rule['w_observed']['(2,2)'] == 1
+        # every pair other than (2,2) has zero allowed channels
+        assert all(v == 0 for k, v in rule['w_counts'].items() if k != '(2,2)')
 
     def test_delta_m_conservation_passes(self, rules_n2):
         """Rule 4: Delta_m conservation."""
@@ -331,11 +343,15 @@ class TestSelectionRules:
         assert rules_n2['5_spatial_parity']['violations'] == 0
 
     def test_furry_theorem(self, rules_n2):
-        """Rule 6: Furry's theorem (tadpole vanishes)."""
+        """Rule 7 (Paper 33 Table 1): Furry's theorem (tadpole vanishes).
+
+        Key renamed 6_furry_theorem -> 7_furry_theorem 2026-07-03 to align
+        with the paper's Table 1 numbering (7 = charge conjugation / Furry).
+        """
         # Note: may not pass depending on parity structure
         # At n_max=2 with l_max=1, diagonal couplings l=1,l=1,q=1
         # are allowed by parity (1+1+1=3 odd), so tadpole may be nonzero
-        rule = rules_n2['6_furry_theorem']
+        rule = rules_n2['7_furry_theorem']
         # Paper 33 Thm 1 (scalar_7_of_8): Furry is the ONE rule that FAILS
         # for scalar electrons (E-type parity allows diagonal l=l couplings
         # for odd q); the Dirac construction recovers it (test_furry_passes).
@@ -344,9 +360,18 @@ class TestSelectionRules:
             "scalar Furry unexpectedly PASSES -- the 7/8 census and Paper 33 "
             "Thm 1 would both be wrong; investigate before trusting")
 
-    def test_charge_conjugation_passes(self, rules_n2):
-        """Rule 8: Charge conjugation (Hermiticity)."""
-        assert rules_n2['8_charge_conjugation']['pass'] is True
+    def test_triangle_on_n_passes(self, rules_n2):
+        """Rule 8 (Paper 33 Table 1): triangle inequality on SO(4),
+        |n_a - n_b| <= q <= n_a + n_b - 2 on the vertex tensor support.
+
+        Replaced 2026-07-03: the old key 8_charge_conjugation checked
+        Hermiticity of Sigma, which is symmetric BY CONSTRUCTION for any
+        real vertex (tautology). The paper's actual Rule 8 had no check.
+        """
+        rule = rules_n2['8_triangle_on_n']
+        assert rule['pass'] is True
+        assert rule['violations'] == 0
+        assert rule['nonzero_checked'] > 0  # non-vacuous
 
     def test_summary_count(self, rules_n2):
         """Summary has correct total count (8 rules)."""
@@ -439,16 +464,18 @@ class TestWardIdentity:
     """Tests for the Ward identity diagnostic."""
 
     def test_ward_ratio_finite(self):
-        """Ward identity ratio is finite and non-negative."""
+        """Ward identity (Rule 6, Paper 33 Table 1) ratio is finite and
+        non-negative. Key renamed 7_ward_identity -> 6_ward_identity
+        2026-07-03 to align with the paper's numbering (6 = Ward)."""
         result = compute_self_energy(n_max=2, q_max=1)
-        rule = result.selection_rules['7_ward_identity']
+        rule = result.selection_rules['6_ward_identity']
         assert rule['ratio'] >= 0
         assert np.isfinite(rule['ratio'])
 
     def test_ward_ratio_n3(self):
         """Ward identity ratio at n_max=3."""
         result = compute_self_energy(n_max=3, q_max=2)
-        rule = result.selection_rules['7_ward_identity']
+        rule = result.selection_rules['6_ward_identity']
         assert rule['ratio'] >= 0
         assert np.isfinite(rule['ratio'])
         # Record for diagnostic
@@ -709,7 +736,7 @@ class TestDiracSelfEnergyN2:
 
     def test_ward_identity_exact_at_n2(self, result_n2):
         """Ward identity is exact at n_max=2 (Sigma is n-block-diagonal)."""
-        rule = result_n2.selection_rules['7_ward_identity']
+        rule = result_n2.selection_rules['6_ward_identity']
         assert rule['ratio'] < 1e-12
 
     def test_contains_pi(self, result_n2):
@@ -771,8 +798,8 @@ class TestDiracSelfEnergyN3:
 
     def test_ward_identity_fails_at_n3(self, result_n3):
         """Ward identity fails at n_max=3 (cross-n couplings)."""
-        rule = result_n3.selection_rules['7_ward_identity']
-        # Ward ratio ~0.61
+        rule = result_n3.selection_rules['6_ward_identity']
+        # Ward ratio ~0.59
         assert rule['ratio'] > 0.1
 
     def test_vertex_nonzero_count(self, result_n3):
@@ -814,8 +841,17 @@ class TestDiracSelectionRules:
         assert rules_n2['2_vertex_parity_gs_zero']['gs_block_max_abs'] == 0.0
 
     def test_so4_channel_count_passes(self, rules_n2):
-        """Rule 3: SO(4) channel count."""
-        assert rules_n2['3_so4_channel_count']['pass'] is True
+        """Rule 3: vertex-support (kappa_ext, kappa_int, q) channel count
+        matches the l-parity + l-triangle + j-triangle closed form.
+
+        De-tautologized 2026-07-03 (was a hardcoded pass=True).
+        """
+        rule = rules_n2['3_so4_channel_count']
+        assert rule['pass'] is True
+        assert rule['mismatches'] == []
+        # non-vacuous: the (2,2) pair carries realized channels at n_max=2
+        assert rule['w_observed']['(2,2)'] > 0
+        assert rule['w_counts']['(2,2)'] == rule['w_observed']['(2,2)']
 
     def test_delta_mj_passes(self, rules_n2):
         """Rule 4: Delta_m_j conservation."""
@@ -828,23 +864,30 @@ class TestDiracSelectionRules:
         assert rules_n2['5_spatial_parity']['violations'] == 0
 
     def test_furry_passes(self, rules_n2):
-        """Rule 6: Furry's theorem passes (Dirac spinor phase kills tadpole)."""
-        assert rules_n2['6_furry_theorem']['pass'] is True
-        assert rules_n2['6_furry_theorem']['tadpole_nonzero_count'] == 0
+        """Rule 7 (Paper 33 Table 1): Furry's theorem passes (Dirac spinor
+        phase kills the tadpole). Symbolic derivation of the mechanism:
+        tests/test_paper33_furry_derivation.py."""
+        assert rules_n2['7_furry_theorem']['pass'] is True
+        assert rules_n2['7_furry_theorem']['tadpole_nonzero_count'] == 0
 
     def test_ward_identity_passes_at_n2(self, rules_n2):
-        """Rule 7: Ward identity passes at n_max=2.
+        """Rule 6 (Paper 33 Table 1): Ward identity passes at n_max=2.
 
         At n_max=2, Sigma is block-diagonal within each n-shell, so
         [Sigma, H0] = 0 exactly (H0 = diag(n+1/2) is also n-diagonal).
         Breaks at n_max=3 where cross-n couplings appear.
         """
-        assert rules_n2['7_ward_identity']['pass'] is True
-        assert rules_n2['7_ward_identity']['ratio'] < 1e-12
+        assert rules_n2['6_ward_identity']['pass'] is True
+        assert rules_n2['6_ward_identity']['ratio'] < 1e-12
 
-    def test_charge_conjugation_passes(self, rules_n2):
-        """Rule 8: Charge conjugation (Hermiticity)."""
-        assert rules_n2['8_charge_conjugation']['pass'] is True
+    def test_triangle_on_n_passes(self, rules_n2):
+        """Rule 8 (Paper 33 Table 1): triangle inequality on SO(4),
+        |n_a - n_b| <= q <= n_a + n_b - 2 on the vertex tensor support.
+        Replaced the tautological Hermiticity check 2026-07-03."""
+        rule = rules_n2['8_triangle_on_n']
+        assert rule['pass'] is True
+        assert rule['violations'] == 0
+        assert rule['nonzero_checked'] == 20  # known support at n_max=2
 
     def test_summary_total_is_eight(self, rules_n2):
         """Summary counts all 8 rules."""
@@ -885,8 +928,8 @@ class TestScalarDiracComparison:
         """Scalar fails Furry, Dirac passes via spinor phase constraint."""
         scalar = compute_self_energy(n_max=2, q_max=1)
         dirac = compute_dirac_self_energy(n_max=2, q_max=1)
-        assert scalar.selection_rules['6_furry_theorem']['pass'] is False
-        assert dirac.selection_rules['6_furry_theorem']['pass'] is True
+        assert scalar.selection_rules['7_furry_theorem']['pass'] is False
+        assert dirac.selection_rules['7_furry_theorem']['pass'] is True
 
     def test_dirac_has_more_states(self):
         """Dirac basis is larger than scalar (10 vs 5 at n_max=2)."""
@@ -901,6 +944,273 @@ class TestScalarDiracComparison:
         dirac = compute_dirac_self_energy(n_max=2, q_max=1)
         assert scalar.contains_pi is True
         assert dirac.contains_pi is True
+
+
+# ===========================================================================
+# Paper 33 census aggregates: the four-column partition table
+# (Table tab:partition: scalar Fock 1/8, Dirac graph 4/8,
+#  vector+scalar 7/8, vector+Dirac 8/8)
+# ===========================================================================
+
+def _scalar_fock_graph_tally(n_max: int = 2) -> dict:
+    """Honest 8-rule tally for the GRAPH-NATIVE scalar-photon construction
+    (Paper 28 / Paper 33 sec. 2: photon = 1-cochain on the Fock graph,
+    G_gamma = L_1^+, CG-projected vertex).  Paper 33 Table 1 numbering.
+
+    Added 2026-07-03: the 1/8 census leg previously had no aggregate test
+    anywhere (its provenance was the archived driver
+    debug/archive/qed_arc/gn_selection_rule_census.py). Each rule below is
+    a real computation on production geovac modules; the per-rule criteria
+    follow that archived census (the source of the paper's column).
+    """
+    import sympy as sp
+    from sympy import Rational
+    from geovac.graph_qed_vertex import (
+        build_projection_matrix,
+        build_vertex_tensor as gq_build_vertex,
+        vertex_tensor_to_matrices,
+    )
+    from geovac.graph_qed_photon import build_fock_graph
+    from geovac.graph_qed_propagator import (
+        DiracGraphOperator,
+        electron_propagator as gq_electron_propagator,
+    )
+    from geovac.graph_qed_self_energy import (
+        compute_self_energy as gq_self_energy,
+        compute_vertex_correction as gq_vertex_correction,
+    )
+    from geovac.qed_vertex import so4_channel_count
+
+    P, dirac_labels, _ = build_projection_matrix(n_max)
+    fock_data = build_fock_graph(n_max)
+    entries, N_dirac, _, E_fock = gq_build_vertex(
+        n_max, P=P, dirac_labels=dirac_labels, fock_data=fock_data)
+    tally = {}
+
+    # Rule 1 (Gaunt/CG sparsity): every Fock edge is a ladder move
+    # (L-edge dm=+-1 or T-edge dn=+-1) and the vertex tensor is sparse.
+    ladder_ok = True
+    for (v1, v2) in fock_data.edges:
+        s1, s2 = fock_data.states[v1], fock_data.states[v2]
+        dn, dl, dm = (abs(s1[0] - s2[0]), abs(s1[1] - s2[1]),
+                      abs(s1[2] - s2[2]))
+        if not ((dn == 0 and dl == 0 and dm == 1)
+                or (dn == 1 and dl == 0 and dm == 0)):
+            ladder_ok = False
+    tally[1] = ladder_ok and (len(entries) < N_dirac * N_dirac * E_fock)
+
+    # Rule 2 (GS structural zero): Sigma(GS block) == 0?
+    # Pendant-edge theorem (Paper 28 prop): it is NOT (= 2(n_max-1)/n_max).
+    se = gq_self_energy(n_max, t=Rational(0), exact=True)
+    tally[2] = bool(se.ground_state_zero)
+
+    # Rule 3 (SO(4) channel count): every realized coupling must carry a
+    # continuum SO(4) channel W > 0 (CH convention, edge photon level
+    # q_CH = min endpoint level - 1, per the archived census convention).
+    w0 = 0
+    for a_idx, b_idx, e_idx, _val in entries:
+        da, db = dirac_labels[a_idx], dirac_labels[b_idx]
+        v1, v2 = fock_data.edges[e_idx]
+        q_ch = min(fock_data.states[v1][0], fock_data.states[v2][0]) - 1
+        if so4_channel_count(da.n_fock - 1, db.n_fock - 1, q_ch) == 0:
+            w0 += 1
+    tally[3] = (w0 == 0)
+
+    # Rule 4 (Delta m_j): each coupling's electron dm_j must be carried by
+    # the photon edge's magnetic transfer (+- dm_edge).
+    mj_viol = 0
+    for a_idx, b_idx, e_idx, _val in entries:
+        da, db = dirac_labels[a_idx], dirac_labels[b_idx]
+        v1, v2 = fock_data.edges[e_idx]
+        dm_edge = fock_data.states[v2][2] - fock_data.states[v1][2]
+        d2mj = db.two_m_j - da.two_m_j
+        if d2mj != 2 * dm_edge and d2mj != -2 * dm_edge:
+            mj_viol += 1
+    tally[4] = (mj_viol == 0)
+
+    # Rule 5 (spatial parity E1): every realized coupling has l_a + l_b odd.
+    par_viol = sum(
+        1 for a_idx, b_idx, _e, _v in entries
+        if (kappa_to_l(dirac_labels[a_idx].kappa)
+            + kappa_to_l(dirac_labels[b_idx].kappa)) % 2 == 0)
+    tally[5] = (par_viol == 0)
+
+    # Rule 6 (Ward): commutator Ward identity [D, Lambda] == [Sigma, D].
+    vc = gq_vertex_correction(n_max, t=Rational(0), exact=True)
+    op = DiracGraphOperator(n_max=n_max, t=Rational(0))
+    D_np = np.array(op.matrix_sympy().tolist(), dtype=float)
+    S_np, L_np = se.Sigma_numpy, vc.Lambda_total_numpy
+    ward_diff = np.max(np.abs((D_np @ L_np - L_np @ D_np)
+                              - (S_np @ D_np - D_np @ S_np)))
+    tally[6] = bool(ward_diff < 1e-10)
+
+    # Rule 7 (Furry): tadpole sum_e Tr(V_e G_e) == 0 (sympy-exact).
+    V_mats = vertex_tensor_to_matrices(entries, N_dirac, E_fock)
+    G_e, _ = gq_electron_propagator(op, exact=True)
+    tadpole = sum(sp.nsimplify((V_mats[e] * G_e).trace())
+                  for e in range(E_fock))
+    tally[7] = (sp.simplify(tadpole) == 0)
+
+    # Rule 8 (triangle on n): q_edge >= 1 and |dn| <= q_edge <= n_a+n_b-2
+    # with the edge photon level q_CH = min endpoint level - 1.
+    tri_viol = 0
+    for a_idx, b_idx, e_idx, _val in entries:
+        da, db = dirac_labels[a_idx], dirac_labels[b_idx]
+        v1, v2 = fock_data.edges[e_idx]
+        q_ch = min(fock_data.states[v1][0], fock_data.states[v2][0]) - 1
+        if not (q_ch >= 1 and abs(da.n_fock - db.n_fock) <= q_ch
+                <= da.n_fock + db.n_fock - 2):
+            tri_viol += 1
+    tally[8] = (tri_viol == 0)
+
+    return tally
+
+
+def _native_dirac_graph_tally(n_max: int = 2) -> dict:
+    """Honest 8-rule tally for the NATIVE DIRAC GRAPH construction
+    (Paper 33 sec. 3: nodes (n, kappa, m_j), Rule B / E1 adjacency,
+    scalar 1-cochain photon).  Paper 33 Table 1 numbering.
+
+    Added 2026-07-03: the 4/8 census leg previously had no aggregate test
+    anywhere (provenance: archived driver
+    debug/archive/qed_arc/dirac_graph_qed_sprint.py, whose per-rule
+    criteria this tally follows, on the production Rule B graph builder).
+    """
+    from geovac.ihara_zeta_dirac import build_dirac_s3_graph
+
+    A, labels, _deg, _desc = build_dirac_s3_graph(n_max, "B")
+    Vn = len(labels)
+    edges = sorted((i, j) for i in range(Vn) for j in range(i + 1, Vn)
+                   if A[i, j] != 0)
+    E = len(edges)
+    tally = {}
+
+    # Photon propagator G_gamma = L_1^+ and symmetrized edge vertices.
+    B_inc = np.zeros((Vn, E))
+    for k, (i, j) in enumerate(edges):
+        B_inc[i, k] = 1.0
+        B_inc[j, k] = -1.0
+    L1 = B_inc.T @ B_inc
+    G_gamma = np.linalg.pinv(L1)
+    V_mats = []
+    for (i, j) in edges:
+        Ve = np.zeros((Vn, Vn))
+        Ve[i, j] = 1.0
+        Ve[j, i] = 1.0
+        V_mats.append(Ve)
+    Sigma = np.zeros((Vn, Vn))
+    for e1 in range(E):
+        for e2 in range(E):
+            g = G_gamma[e1, e2]
+            if abs(g) > 1e-15:
+                Sigma += g * (V_mats[e1] @ V_mats[e2].T)
+
+    # Rule 1 (Gaunt/CG): every Rule B edge is E1/CG-allowed
+    # (|dl| = 1, |dm_j| <= 1) and the edge set is sparse.
+    ok1 = all(
+        abs(kappa_to_l(labels[i].kappa) - kappa_to_l(labels[j].kappa)) == 1
+        and abs(labels[i].two_m_j - labels[j].two_m_j) <= 2
+        for (i, j) in edges)
+    tally[1] = ok1 and E < Vn * (Vn - 1) // 2
+
+    # Rule 2 (GS zero): Sigma(GS block) == 0? (GS couples through its
+    # radial edges, so it is NOT.)
+    gs_idx = [i for i, lab in enumerate(labels) if lab.n_fock == 1]
+    tally[2] = bool(np.allclose(Sigma[np.ix_(gs_idx, gs_idx)], 0,
+                                atol=1e-12))
+
+    # Rule 3 (SO(4) channel count): every edge coupling must carry a
+    # continuum W > 0 (CH convention, edge level q_CH = min n_fock - 1).
+    from geovac.qed_vertex import so4_channel_count
+    w0 = sum(
+        1 for (i, j) in edges
+        if so4_channel_count(
+            labels[i].n_fock - 1, labels[j].n_fock - 1,
+            min(labels[i].n_fock, labels[j].n_fock) - 1) == 0)
+    tally[3] = (w0 == 0)
+
+    # Rule 4 (Delta m_j): every photon edge carries |dm_j| <= 1
+    # (a spin-1 photon can balance it) -- built into the node labels.
+    tally[4] = all(abs(labels[i].two_m_j - labels[j].two_m_j) <= 2
+                   for (i, j) in edges)
+
+    # Rule 5 (spatial parity E1): every edge has l_i + l_j odd.
+    tally[5] = all(
+        (kappa_to_l(labels[i].kappa) + kappa_to_l(labels[j].kappa)) % 2 == 1
+        for (i, j) in edges)
+
+    # Rule 6 (Ward): [D, Lambda] == [Sigma, D] with the CH Dirac operator.
+    D_op = np.zeros((Vn, Vn))
+    for i, lab in enumerate(labels):
+        chi = 1 if lab.kappa < 0 else -1
+        D_op[i, i] = chi * ((lab.n_fock - 1) + 1.5)
+    G_e = np.linalg.inv(D_op)
+    Lam = np.zeros((Vn, Vn))
+    for e1 in range(E):
+        for e2 in range(E):
+            g = G_gamma[e1, e2]
+            if abs(g) > 1e-15:
+                Lam += g * (V_mats[e1] @ G_e @ V_mats[e2].T)
+    ward_diff = np.max(np.abs((D_op @ Lam - Lam @ D_op)
+                              - (Sigma @ D_op - D_op @ Sigma)))
+    tally[6] = bool(ward_diff < 1e-10)
+
+    # Rule 7 (Furry): tadpole AND 3-vertex closed loop both vanish
+    # (the off-diagonal edge vertex + l-parity bipartite structure).
+    tadpole = sum(G_e[i, j] + G_e[j, i] for (i, j) in edges)
+    triangle = 0.0
+    for e1 in range(E):
+        VG1 = V_mats[e1] @ G_e
+        for e2 in range(E):
+            VG12 = VG1 @ (V_mats[e2] @ G_e)
+            for e3 in range(E):
+                triangle += np.trace(VG12 @ V_mats[e3] @ G_e)
+    tally[7] = bool(abs(tadpole) < 1e-12 and abs(triangle) < 1e-12)
+
+    # Rule 8 (triangle on n): q_edge >= 1 and |dn| <= q_edge <= n_i+n_j-2.
+    tally[8] = all(
+        (min(labels[i].n_fock, labels[j].n_fock) - 1) >= 1
+        and abs(labels[i].n_fock - labels[j].n_fock)
+        <= (min(labels[i].n_fock, labels[j].n_fock) - 1)
+        <= labels[i].n_fock + labels[j].n_fock - 2
+        for (i, j) in edges)
+
+    return tally
+
+
+class TestCensusAggregates:
+    """Aggregate census tests for the two graph-photon legs of Paper 33's
+    partition table (the vector-photon legs 7/8 and 8/8 are asserted in
+    TestScalarDiracComparison / TestDiracSelectionRules)."""
+
+    def test_scalar_fock_census_is_1_of_8(self):
+        """Paper 33 sec. 2 / Table tab:partition column 1: the graph-native
+        scalar-photon baseline recovers EXACTLY 1/8 rules (Gaunt/CG only)."""
+        tally = _scalar_fock_graph_tally(2)
+        expected = {1: True, 2: False, 3: False, 4: False,
+                    5: False, 6: False, 7: False, 8: False}
+        assert tally == expected, f"scalar-Fock tally moved: {tally}"
+        assert sum(tally.values()) == 1
+
+    def test_native_dirac_graph_census_is_4_of_8(self):
+        """Paper 33 sec. 3 / Table tab:partition column 2: the native Dirac
+        graph (Rule B) recovers EXACTLY 4/8 rules (Gaunt/CG, Delta m_j,
+        spatial parity, Furry)."""
+        tally = _native_dirac_graph_tally(2)
+        expected = {1: True, 2: False, 3: False, 4: True,
+                    5: True, 6: False, 7: True, 8: False}
+        assert tally == expected, f"native-Dirac tally moved: {tally}"
+        assert sum(tally.values()) == 4
+
+    def test_partition_table_totals(self):
+        """The full bottom row of Table tab:partition: 1/8, 4/8, 7/8, 8/8."""
+        totals = (
+            sum(_scalar_fock_graph_tally(2).values()),
+            sum(_native_dirac_graph_tally(2).values()),
+            compute_self_energy(2, 1).selection_rules['_summary']['pass_count'],
+            compute_dirac_self_energy(2, 1).selection_rules['_summary']['pass_count'],
+        )
+        assert totals == (1, 4, 7, 8)
 
 
 def test_scalar_l1_self_energy_is_one_over_4pi():

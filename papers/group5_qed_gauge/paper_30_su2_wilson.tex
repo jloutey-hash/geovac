@@ -45,12 +45,19 @@ $U(1)$ Wilson--Hodge action to machine precision.  Paper~25 is the
 Cartan-subalgebra projection of the present theory; the abelian
 construction it documents is a structural sub-sector of a genuinely
 non-abelian one.
-(2)~\emph{Edge Laplacian $L_1 = B^{\top} B$ as weak-coupling kinetic
-term.}  Linearizing $S_W$ around the trivial vacuum $U_e = I$
-produces, at second order in the gauge field, Paper~25's discrete
-Hodge-1 Laplacian acting on $\mathfrak{su}(2)$-valued $1$-cochains.
-The object Paper~25 introduced as the ``gauge propagator'' is the
-kinetic sector of the non-abelian Wilson action.
+(2)~\emph{The weak-coupling kinetic term completes the Hodge-1
+Laplacian.}  Linearizing $S_W$ around the trivial vacuum $U_e = I$
+produces, at second order in the gauge field, the plaquette (curl)
+quadratic form $(\beta/8) \sum_a \langle A^a, B_2 B_2^{\top} A^a\rangle$
+on $\mathfrak{su}(2)$-valued $1$-cochains, with per-plaquette
+per-component coefficient $1/8 = 1/(4 N_c)$.  This curl form is
+\emph{not} a scalar multiple of Paper~25's edge Laplacian
+$L_1 = B^{\top} B$ (the two have complementary supports: the plaquette
+rows span $\ker L_1$ exactly); it is the co-exact part that completes
+$L_1$ to the full discrete Hodge-1 Laplacian
+$B^{\top} B + B_2 B_2^{\top}$ of the 2-complex with the Ihara
+plaquettes attached as faces, exactly the face structure
+Paper~25~\S II anticipates.
 (3)~\emph{Plaquette enumeration and Monte Carlo Wilson-loop data.}
 On the $S^3$ Coulomb graph at $n_{\max} = 2, 3, 4$, the first-Betti
 counts are $\beta_1 = 0, 2, 8$ and the primitive 4-cycle counts are
@@ -58,7 +65,7 @@ $0, 2, 8$; a 2000-sample Metropolis run on $n_{\max} = 3$ at $\beta
 \in \{0.5, 1, 2, 5\}$ gives Wilson expectations $\langle W \rangle =
 0.126, 0.158, 0.332, 0.681$, monotonic with $\beta$ and
 matched to the leading-order character expansion at the $\sim 20\%$
-level.  All 26 tests in \texttt{tests/test\_su2\_wilson\_gauge.py}
+level.  All 33 tests in \texttt{tests/test\_su2\_wilson\_gauge.py}
 pass.
 The scope is a compact-graph non-abelian lattice gauge construction,
 not a Yang--Mills mass-gap claim on $\mathbb{R}^4$; the paper closes
@@ -129,9 +136,10 @@ is (i)~the choice of plaquettes as the primitive closed non-backtracking
 walks of Paper~29~\cite{paper29}'s Ihara zeta machinery, rather than the
 elementary four-cycles of a hypercubic lattice, (ii)~the confirmation
 that the maximal-torus reduction is \emph{exactly} Paper~25's $U(1)$
-construction, and (iii)~the identification of Paper~25's edge Laplacian
-$L_1$ as the weak-coupling kinetic term of the present non-abelian
-action.
+construction, and (iii)~the identification of the weak-coupling kinetic term as the
+plaquette (curl) quadratic form that completes Paper~25's edge
+Laplacian $L_1$ to the full discrete Hodge-1 Laplacian of the
+plaquette-filled 2-complex.
 
 \paragraph*{Scope.}  This is an observation paper.  What it establishes
 is a self-consistent non-abelian lattice gauge structure on the finite
@@ -157,7 +165,8 @@ plaquette structure, Wilson action, and gauge transformation.
 Section~\ref{sec:characters} gives the character expansion of the
 partition function on $\mathrm{SU}(2)$.  Section~\ref{sec:results}
 reports the three structural results: $U(1)$-reduction exactness,
-$L_1$ as kinetic term, and plaquette/Wilson-loop data.
+the kinetic-term / Hodge-completion result, and plaquette/Wilson-loop
+data.
 Section~\ref{sec:action_principles} places the construction inside a
 framework-wide synthesis: the GeoVac project now exhibits five
 independent action principles, each organizing a different sector of
@@ -330,9 +339,13 @@ where $v_0$ is the base vertex.  The trace
 $\mathrm{tr}\,U_P$ is therefore gauge-invariant, and so is the action
 $S_W$.  Numerical verification on $n_{\max} = 3$ with random Haar link
 variables and random Haar gauge transformations gives
-$|S_W[U] - S_W[g U g^{-1}]| < 2 \times 10^{-15}$ (machine precision);
-see \texttt{tests/test\_su2\_wilson\_gauge.py}, class
-\texttt{TestGaugeInvariance}.
+$|S_W[U] - S_W[g U g^{-1}]| \leq 2.7 \times 10^{-15}$ (machine
+precision; worst case over 100 seeded Haar trials, and
+$1.8 \times 10^{-15}$ in the recorded reference run); the committed
+tests assert $< 10^{-13}$ per trial --- see
+\texttt{tests/test\_su2\_wilson\_gauge.py}, class
+\texttt{TestGaugeInvariance} and
+\texttt{test\_s3\_coulomb\_max\_n3\_endtoend}.
 
 \subsection{Partition function}
 
@@ -516,17 +529,21 @@ expansion (\ref{eq:character_expansion}) therefore restricts to the
 classical Jacobi--Anger expansion of $\exp(\beta \cos \theta)$ on the
 maximal torus---Paper~25's abelian expansion recovered term by term.
 
-\subsection{Result 2: $L_1 = B^{\top} B$ is the weak-coupling kinetic term}
+\subsection{Result 2: the weak-coupling kinetic term completes
+$L_1 = B^{\top} B$ to the full Hodge-1 Laplacian}
 \label{sec:L1_kinetic}
 
 Paper~25~\S II--III introduces the edge Laplacian $L_1 = B^{\top} B$
 as the ``discrete Hodge-1 Laplacian'' whose kernel dimension equals
 $\beta_1$ and whose nonzero spectrum coincides with the nonzero
-spectrum of $L_0$ (by singular-value decomposition of $B$).  In the
-Paper~25 gauge-theoretic reading, $L_1$ is the gauge-field propagator
-of a $U(1)$ photon on the graph.  The present section identifies
-$L_1$ as the \emph{kinetic term} of the $\mathrm{SU}(2)$ Wilson action
-at weak coupling.
+spectrum of $L_0$ (by singular-value decomposition of $B$), and notes
+that on a bare 1-complex only the \emph{exact} part
+$d_0 d_0^*$ of the manifold Hodge-1 operator
+$\Delta_1 = d_0 d_0^* + d_1^* d_1$ is available --- the co-exact part
+requires faces.  The present section identifies the \emph{kinetic
+term} of the $\mathrm{SU}(2)$ Wilson action at weak coupling and
+shows it is exactly that missing co-exact (curl) part, built on the
+Ihara plaquettes as faces.
 
 Write each link variable as an exponential of a
 $\mathfrak{su}(2)$-valued gauge field,
@@ -574,52 +591,78 @@ S_W[U] = \frac{\beta}{8} \sum_P \Bigl(\sum_{e \in P} A_e^{a}\Bigr)^2
 = \frac{\beta}{8}\, A^{a\top} M A^{a} + O(A^4),
 \label{eq:wilson_quadratic}
 \end{equation}
-where $M$ is the plaquette-incidence bilinear form on the edge
-space.  On a simplicial 1-complex without triangular faces, $M$
-reduces to $L_1 = B^{\top} B$ acting on
-$\mathfrak{su}(2)$-valued 1-cochains.  More precisely, after the
-Laplace--Beltrami convention (cycle-weighted incidence), the kinetic
-form is proportional to $L_1$; on the finite graph with our Ihara
-plaquette choice the proportionality constant is fixed by the plaquette
-lengths.  The punchline is insensitive to constants:
+where $M = B_2 B_2^{\top}$ is the plaquette-incidence bilinear form
+on the edge space, built from the signed edge--face incidence matrix
+$B_2$ whose columns are the (signed) indicator vectors of the Ihara
+plaquettes.  In Hodge terms, $M = d_1^* d_1$ is the \emph{co-exact
+(curl) part} of the Hodge-1 Laplacian of the 2-complex obtained by
+attaching the plaquettes as faces.  It is \emph{not} proportional to
+Paper~25's $L_1 = B^{\top} B = d_0 d_0^*$: the two quadratic forms
+have complementary supports.  On the $n_{\max} = 3$ graph
+($E = 13$, $\beta_1 = 2$) one computes $\operatorname{rank} M = 2 =
+\beta_1$, $\operatorname{rank} L_1 = 11 = E - \beta_1$, and
+$L_1 B_2 = 0$ exactly --- the plaquette columns span $\ker L_1$ (the
+cycle space), which is precisely where the divergence form $L_1$
+vanishes.  Their sum $L_1 + M$ has full rank $E$ and is the complete
+discrete Hodge-1 Laplacian of the plaquette-filled 2-complex
+(verified in \texttt{tests/test\_su2\_wilson\_gauge.py}, class
+\texttt{TestWeakCouplingKinetic}).  The structural statement is:
 
-\begin{proposition}[$L_1$ is the $\mathrm{SU}(2)$ Wilson kinetic term]
+\begin{proposition}[Wilson kinetic term = co-exact completion of $L_1$]
 \label{prop:L1_kinetic}
 The second-order expansion of the $\mathrm{SU}(2)$ Wilson action
 (\ref{eq:wilson_action}) around the trivial vacuum is
 \begin{equation}
-S_W[U] = \tfrac{\beta}{8} \sum_a \langle A^{a}, L_1^{(\text{plaq})} A^{a}\rangle
+S_W[U] = \tfrac{\beta}{8} \sum_a \langle A^{a}, B_2 B_2^{\top} A^{a}\rangle
 + O(A^4) + (\text{non-abelian})
 \label{eq:L1_kinetic_form}
 \end{equation}
-where $L_1^{(\text{plaq})}$ is the plaquette-weighted edge Laplacian
-matrix built from the incidence $B$ via the plaquette-boundary map.
-On a triangle-free simplicial 1-complex where every plaquette is a
-simple cycle, $L_1^{(\text{plaq})}$ coincides with Paper~25's edge
-Laplacian $L_1 = B^{\top} B$ up to a positive scalar multiple
-determined by the plaquette-length distribution.  The $\mathfrak{su}(2)$
-components $A^{a}$ ($a = 1, 2, 3$) are kinetic-decoupled at
-quadratic order; non-abelian couplings first enter at order $A^4$.
+where $B_2$ is the signed edge--plaquette incidence matrix (the
+discrete $d_1$-boundary data supplied by the Ihara plaquette
+enumeration).  The kinetic quadratic form $B_2 B_2^{\top}$ is the
+co-exact (curl) part of the discrete Hodge-1 Laplacian of the
+plaquette-filled 2-complex; it is supported exactly on
+$\ker(L_1) = \ker(B^{\top} B)$, the $\beta_1$-dimensional cycle
+space, and together with Paper~25's exact part it assembles the full
+Hodge-1 operator $\Delta_1^{\text{disc}} = B^{\top} B +
+B_2 B_2^{\top}$ (full rank at $n_{\max} = 3$).  The
+$\mathfrak{su}(2)$ components $A^{a}$ ($a = 1, 2, 3$) are
+kinetic-decoupled at quadratic order with the universal per-plaquette
+per-component coefficient $1/8 = 1/(4 N_c)|_{N_c = 2}$; non-abelian
+couplings first enter at order $A^4$.
 \end{proposition}
 
-The proposition makes explicit what was implicit in Paper~25:
-$L_1 = B^{\top} B$ is not just a combinatorial object; it is the
-quadratic form of a lattice gauge kinetic term, with the same scalar
-structure for each $\mathfrak{su}(2)$ component $A^a$.  Paper~25's
-reading of $L_1$ as a ``gauge propagator'' is the weak-coupling
-Gaussian approximation to the present non-abelian Wilson dynamics.
+\textbf{Provenance: MEASURED.}  The $1/8$ coefficient and the
+quadratic form are verified numerically against exact
+matrix-exponential holonomies, both on a triangle plaquette and on
+the full $n_{\max} = 3$ graph (relative deviation $2.0 \times 10^{-3}$
+at $\epsilon = 0.01$ shrinking to $7.3 \times 10^{-5}$ at
+$\epsilon = 0.005$, the $O(A^4)$ remainder), in
+\texttt{tests/test\_su2\_wilson\_gauge.py}::\texttt{TestWeakCoupling%
+Kinetic} --- the $\mathrm{SU}(2)$ mirror of the $\mathrm{SU}(3)$
+$1/12$ test in \texttt{tests/test\_su3\_wilson\_s5.py}.  An earlier
+version of this proposition asserted that the kinetic form
+``coincides with $L_1 = B^{\top} B$ up to a positive scalar
+multiple''; that assertion was wrong (the two forms have
+complementary supports, as the rank computation above shows) and is
+withdrawn --- the correct statement is the completion statement,
+which matches the face-structure reading already recorded in
+Paper~25~\S II.
 
-\begin{observation}[Paper 25's $L_1$ is kinetic, not interacting]
+\begin{observation}[The Wilson kinetic sector completes the Hodge pair]
 \label{obs:L1_structural}
-Paper~25's $L_1 = B^{\top} B$ is the \emph{kinetic} sector of a
-non-abelian Wilson theory.  It is not the interaction vertex: the
+At weak coupling the non-abelian Wilson theory contributes the
+co-exact half of the Hodge-1 pair: the free (Gaussian) sector is the
+curl form $B_2 B_2^{\top}$ on the cycle space, while Paper~25's
+$L_1 = B^{\top} B$ is the exact half, whose role is combinatorial
+(divergence / gradient sector) rather than plaquette-kinetic.  The
 non-abelian self-couplings (cubic and quartic $A$-vertices) appear at
 order $A^3$ and $A^4$ in the Wilson action expansion and involve the
-structure constants of $\mathfrak{su}(2)$, namely $\epsilon^{abc}$.
-The $L_1$ that Paper~25 associates with ``the gauge propagator'' is
-exactly the free piece: the propagator of a massless non-abelian
-gauge field in the weak-coupling limit, with self-interactions
-parametrically suppressed.
+structure constants of $\mathfrak{su}(2)$, namely $\epsilon^{abc}$;
+they are parametrically suppressed at weak coupling.  The QED role of
+the co-exact propagator $(B_2 B_2^{\top})^+$ --- recovering the
+continuum self-energy structural zero that $L_1^+$ alone cannot ---
+is established in Paper~28 (see Paper~25~\S II).
 \end{observation}
 
 \begin{remark}[universal $\mathrm{SU}(N)$ kinetic coefficient]
@@ -630,12 +673,16 @@ expansion of the Wilson action
 $S_W[U] = \beta \sum_P (1 - (1/N_c)\,\mathrm{Re}\,\mathrm{tr}\,U_P)$
 on a general gauge group $\mathrm{SU}(N_c)$ produces a per-plaquette
 per-component coefficient of $1/(4 N_c)$.  The $\mathrm{SU}(2)$ value
-$1/8$ derived above is the $N_c = 2$ specialization.  The
-$\mathrm{SU}(3)$ value $1/12$ is verified independently in
+$1/8$ derived above is the $N_c = 2$ specialization, verified
+numerically in \texttt{tests/test\_su2\_wilson\_gauge.py}::%
+\texttt{TestWeakCouplingKinetic::test\_quadratic\_expansion\_numerically}.
+The $\mathrm{SU}(3)$ value $1/12$ is verified independently in
 Sprint~ST-SU3 (\texttt{debug/st\_su3\_wilson\_memo.md}~\S~4)
 symbolically and numerically on the Bargmann--Segal $S^5$ graph
 ($120$ degrees of freedom at $N_\text{max} = 2$, relative error
-$\sim O(\epsilon^2)$ consistent with $O(A^4)$ leading correction).
+$\sim O(\epsilon^2)$ consistent with $O(A^4)$ leading correction;
+frozen test \texttt{tests/test\_su3\_wilson\_s5.py}::%
+\texttt{TestWeakCouplingKinetic}).
 The mechanism: more colors $\Rightarrow$ smaller per-component
 coefficient because the $(1/N_c)\,\mathrm{Re}\,\mathrm{tr}$
 normalization in the Wilson action divides by $N_c$ while the
@@ -659,8 +706,13 @@ primitive 4-cycles in the $p$-block.
 \begin{table}[h]
 \centering
 \caption{Wilson-loop expectation on the $n_{\max} = 3$ Coulomb graph,
-loop = $p$-block 4-cycle.  MC: Metropolis sampling, 2000 samples,
-stderr reported.  Leading-order character expansion:
+loop = first $p$-block 4-cycle
+[$(2,1,-1) \to (2,1,0) \to (3,1,0) \to (3,1,-1)$].  MC: Metropolis
+sampling, 2000 samples, stderr reported; the seeded chain is
+bit-deterministic and the four rows are pinned by the frozen test
+\texttt{tests/test\_su2\_wilson\_gauge.py}::%
+\texttt{TestMonteCarloWilsonLoop} (slow-marked).  Leading-order
+character expansion:
 $d_1(\beta) / d_0(\beta) = I_2(\beta) / I_1(\beta)$.  Numerical data:
 \texttt{debug/data/su2\_wilson\_gauge\_results.json}.}
 \label{tab:wilson_loop}
@@ -813,11 +865,13 @@ compact GeoVac Hopf graph at any $n_{\max}$, with (i) link variables
 in $\mathrm{SU}(2)$, (ii) plaquettes as primitive closed
 non-backtracking walks, (iii) Wilson action and partition function
 well-defined without renormalization, (iv) exact $U(1)$ reduction to
-Paper~25 in the maximal-torus limit, (v) $L_1 = B^{\top} B$
-identified as the weak-coupling kinetic term.  All 26 tests in
-\texttt{tests/test\_su2\_wilson\_gauge.py} pass, including the
-numerical $U(1)$-reduction test (lines 142--160) and end-to-end gauge
-invariance at machine precision.
+Paper~25 in the maximal-torus limit, (v) the weak-coupling kinetic
+term identified as the co-exact (curl) completion of
+$L_1 = B^{\top} B$, with universal coefficient $1/8 = 1/(4N_c)$.
+All 33 tests in \texttt{tests/test\_su2\_wilson\_gauge.py} pass,
+including the numerical $U(1)$-reduction test, end-to-end gauge
+invariance at machine precision (asserted $< 10^{-13}$), the kinetic
+quadratic-form tests, and the seeded Monte Carlo Wilson-loop table.
 
 \paragraph*{What this paper does NOT establish.}
 \begin{itemize}
@@ -1046,7 +1100,7 @@ side.  The reading of Paper~24 \S~V is updated accordingly.
 
 Sprint 4 Track RH-Q constructed SU(2) Wilson lattice gauge theory on
 the GeoVac Hopf graph (module \texttt{geovac/su2\_wilson\_gauge.py},
-26 tests passing).  The present paper formalizes that construction
+33 tests passing).  The present paper formalizes that construction
 and places it in context relative to Paper~25's abelian $U(1)$
 predecessor.
 
@@ -1054,10 +1108,13 @@ Three structural results summarize the content:
 (1)~the maximal-torus reduction of the $\mathrm{SU}(2)$ Wilson action
 recovers Paper~25's $U(1)$ Wilson--Hodge action exactly, so
 Paper~25 is the Cartan-subalgebra sector of a non-abelian theory;
-(2)~the edge Laplacian $L_1 = B^{\top} B$ that Paper~25 introduced as
-a ``gauge propagator'' is the weak-coupling kinetic term of the
-non-abelian Wilson action, with non-abelian self-interactions
-entering only at quartic order in the gauge field;
+(2)~the weak-coupling kinetic term of the non-abelian Wilson action
+is the co-exact (curl) quadratic form on the Ihara plaquettes ---
+coefficient $1/8 = 1/(4N_c)$ per plaquette per
+$\mathfrak{su}(2)$ component --- which completes the edge Laplacian
+$L_1 = B^{\top} B$ that Paper~25 introduced to the full discrete
+Hodge-1 Laplacian, with non-abelian self-interactions entering only
+at quartic order in the gauge field;
 (3)~plaquette enumeration on the $S^3$ Coulomb graph matches
 Paper~29's Ihara cycle counts, and direct Monte Carlo on $n_{\max} = 3$
 gives monotonic $\beta$-dependence of the Wilson loop expectation

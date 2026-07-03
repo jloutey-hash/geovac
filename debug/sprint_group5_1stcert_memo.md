@@ -297,3 +297,76 @@ formalism may span the gauge chapter); fegan1983's content verified as the real 
 Trans. AMS paper (key misnomer, harmless). Deterministic 7/7 PASS; P28 recompiles 0.
 Cost ≈510k subagent tokens across 5 agents. **Next: the final certifying FULL run —
 PI's timing call, weighing the open Tier-2 backing sprints.**
+
+
+## Tier-2 backing sprints — COMPLETE (2026-07-03, v4.65.0; PI-directed "run tier 2")
+
+Five parallel worker tracks (A: P33/QED, B: P41/XCWG, C: P51, D: P30+P25, E: P2+P36),
+twice interrupted by the monthly spend limit and resumed from transcripts. All deliverables
+landed; every affected suite green; both benchmark controls pass (H2+/H2, 29 tests);
+topological baseline 18/18; 7/7 gates PASS; 9 papers + synthesis compile 0-errors.
+
+**Track A (P33):** Furry derivation PORTED (tests/test_paper33_furry_derivation.py, 21
+symbolic tests incl. non-vacuity guards — the production hardcode is now a consistency
+check, not the backing); census rules 3+8 DE-TAUTOLOGIZED (real support-vs-closed-form
+checks, verified n_max=2 AND 3; Rule 8 = the paper's triangle-on-n, lower-bound contingency
+at n_max≥5 disclosed); 6/7 numbering aligned to the paper; 1/8 + 4/8 census AGGREGATES
+built from production modules (exact pass patterns); census totals unchanged (7/8, 8/8
+bit-for-bit). Pendant n_max=3,4 verified numerically ≤1e-10 (exact path >25 min, over
+budget — honest fallback, papers scoped). **Claim correction: P33's R6 scalar-Ward
+"residual ~10⁻³ at n_max=3" was NEVER backed (the archived JSON recorded 3.107/FAIL) —
+corrected to "exact at n_max=2, degrades to ≈3.1 at n_max=3" with a dated note.**
+
+**Track B (P41):** the XCWG durability migration — 14 drivers + 12 JSONs + 2 PNGs
+git-mv'd to tests/wilson_rule_b_support/ (wh7 pattern, README, path fixes); NEW
+tests/test_paper41_wilson_witnesses.py (24 tests, ~10s): d_s 1.86/2.27/2.54 recomputed,
+MK k_eff exact, Wilson-loop α=1.1775 by full deterministic enumeration, structural facts
+exact, MC witnesses pinned from seeded archives + bit-identical reduced-stat smokes; all
+4 paper debug/ cites repointed. **Claim correction: the MK weak-coupling "≤2% at β=50"
+contradicted its own archived table (8.6% at β=50; ≤2% only at β=200) — fixed.**
+
+**Track C (P51):** g6_fierz_pauli → tests/gravity_support/ (import fixed); NEW
+tests/test_paper51_g44_headlines.py — all three headlines VALIDATED-then-PINNED at
+paper scale: a₀=1.991913 (full N_φ=192), SC recovery mean 0.994312 at the production
+substrate (+ the week-3 best cell 1.0000212), K_cone vs an INDEPENDENTLY-built cone-Dirac
+reference at 5.4–6.4e-8 (7+ digits, inside the 6-digit claim) with O(r_h²) convergence;
+27 inline provenance tier tags added across P51 (was ZERO).
+
+**Track D (P30+P25) — the deepest findings:** (1) **P30 Prop 3 as stated was FALSE** —
+the SU(2) kinetic form M=B₂B₂ᵀ is NOT ∝ L1 (rank 2 vs 11; L1·B₂=0, complementary
+supports); it is the CO-EXACT COMPLETION of L1 to the full Hodge-1 Laplacian (L1+M rank
+13). Corrected at 8 loci with an explicit withdrawal note; the 1/8=1/(4N_c) coefficient
+itself PINNED numerically (mirroring the SU(3) 1/12 test). (2) MC Wilson table pinned
+bit-identically (the exact loop found; determinism verified). (3) the Bochner 2==2
+tautology replaced by a GENUINE symbolic operator identity: Δ_Hodge − ∇*∇ = 2·id proven
+on arbitrary-function 1-forms in Hopf coordinates + Killing/exact-form anchors + literature
+degeneracies. (4) S² quotient spectrum pinned exactly {0,0,0,1,3,6} (charpoly). (5) S⁵
+censuses pinned incl. the 7,765; **the CP² 24.98% residual is IRREPRODUCIBLE and provably
+unachievable (minimax floor ≥33% vs data; least-squares 40.8%) — paper + synthesis
+superseded to 40.8% + floor (negative strengthened).** (6) su2 gauge-invariance tests
+tightened 1e-10/1e-8 → 1e-13 (measured 1.3–2.7e-15); prose reworded to demonstrated
+values. **NEW NAMED FOLLOW-UP (PI):** hodge1_s3's transverse eigenvalue labeling
+(q(q+2)) vs the literature two-family spectrum ((q+1)² coclosed) — touches Paper 28's
+photon-propagator diagonal and eq:hodge1_spectrum; module docstrings honest-ified (zero
+behavior change, all consumers green); P28 remediation deferred as its own item.
+
+**Track E (P2+P36):** NEW tests/test_paper2_ingredients.py (13): B=42 exact-Fraction from
+the paper's own definition + symbolic closed forms; B/N=3 selection UNIQUENESS (exact at
+n_max=3, fails at 1,2,4,5; sympy-solve uniqueness); the Z₃-circulant charpoly s³−Ks+1
+symbolic. F₂ pinned EXACT-ALGEBRAIC: F₂(1,1) = (688−152√6)/253125 ∈ ℚ(√6) (not rational —
+never a paper claim; disclosed). P36 Lamb chain: NEW tests/test_paper36_lamb_chain.py (9)
++ tests/paper36_lamb_support/ port — the full LS-6a assembly reproduces 1052.19 MHz and
+every component-table entry (fast), Sturmian Bethe logs at N=40 recomputed (slow ~50s).
+**Claim corrections: the paper's ln k₀(1S)=3.002 was an N=20 crossing artifact of a
+non-converging drift (N=40 → 3.268, +9.5%) — corrected + disclosed; the Drake–Swainson
+2P reference −0.0314 → −0.030017.**
+
+**Merge (PM):** synthesis CP² 25%→40.8%+floor sync; gates 7/7; controls green;
+~90 new tests net across 8 new/extended files + 2 support dirs.
+
+**PI flags collected (tell-about-paper-edits):** the P30 Prop-3 withdrawal wording; the
+hodge1/P28 eigenvalue-labeling follow-up (named, deferred); P33 R6, P36 1S/Drake-ref,
+P41 MK-β50, P25/synthesis CP²-supersession claim corrections — all made in place with
+dated/disclosing notes per §13.8.
+
+Next per run-shapes: delta-verification over the Tier-2 diff, then the certifying FULL run.

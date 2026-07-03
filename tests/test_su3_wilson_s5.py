@@ -516,3 +516,164 @@ class TestMonteCarlo:
         # Monotonic increasing
         for i in range(len(results) - 1):
             assert results[i] < results[i + 1] + 0.05
+
+
+# ---------------------------------------------------------------------------
+# 12. Paper 25 Sec. VII.A pins: Bargmann graph counts, plaquette census,
+#     and the CP^2-quotient negative (group5 cert finding E10).
+#     Reference data: debug/data/st_su3_plaquettes.json (Sprint ST-SU3)
+#     and debug/data/s5_graph_spectrum.json (Sprint 5 Track S5).
+# ---------------------------------------------------------------------------
+
+def _graph_counts(N_max):
+    """(V, E, c, beta_1) of the Bargmann graph at N_max."""
+    A = bargmann_adjacency_dense(N_max)
+    V = A.shape[0]
+    E = int(A.sum()) // 2
+    seen = set()
+    c = 0
+    for s in range(V):
+        if s in seen:
+            continue
+        c += 1
+        stack = [s]
+        while stack:
+            x = stack.pop()
+            if x in seen:
+                continue
+            seen.add(x)
+            stack.extend(int(y) for y in np.nonzero(A[x])[0] if y not in seen)
+    return V, E, c, E - V + c
+
+
+class TestPaper25S5Pins:
+    """Pins the ST-SU3 graph/plaquette census used by Paper 25 Sec. VII.A
+    and Paper 30's SU(3) remark (7,765 plaquettes at N_max = 3)."""
+
+    def test_graph_counts(self):
+        # (V, E, c, beta_1) per debug/data/st_su3_plaquettes.json
+        assert _graph_counts(2) == (10, 15, 1, 6)
+        assert _graph_counts(3) == (20, 42, 1, 23)
+        assert _graph_counts(4) == (35, 90, 1, 56)
+
+    def test_graph_counts_nmax5(self):
+        """Paper 25 Sec. VII.A: at N_max = 5 the Bargmann graph has
+        56 nodes, 165 edges, beta_1 = 110."""
+        assert _graph_counts(5) == (56, 165, 1, 110)
+
+    def test_plaquette_census_nmax2(self):
+        from collections import Counter
+        A = bargmann_adjacency_dense(2)
+        pl = enumerate_plaquettes(A, max_length=8, both_orientations=False)
+        cnt = Counter(len(P) for P in pl)
+        assert dict(cnt) == {4: 15, 6: 21, 8: 146}
+        assert len(pl) == 182
+
+    def test_plaquette_census_nmax3(self):
+        """N_max = 3, lengths <= 8: 88 + 526 + 7151 = 7,765 plaquettes --
+        the count quoted in Paper 30's higher-rank remark (Cartan
+        reduction verified 'at 7,765 plaquettes')."""
+        from collections import Counter
+        A = bargmann_adjacency_dense(3)
+        pl = enumerate_plaquettes(A, max_length=8, both_orientations=False)
+        cnt = Counter(len(P) for P in pl)
+        assert dict(cnt) == {4: 88, 6: 526, 8: 7151}
+        assert len(pl) == 7765
+
+    def test_plaquette_census_nmax4_short(self):
+        from collections import Counter
+        A = bargmann_adjacency_dense(4)
+        pl = enumerate_plaquettes(A, max_length=6, both_orientations=False)
+        cnt = Counter(len(P) for P in pl)
+        assert dict(cnt) == {4: 272, 6: 2934}
+
+    @pytest.mark.slow
+    def test_plaquette_census_nmax4_full(self):
+        """N_max = 4 up to L = 8 (about 40 s)."""
+        from collections import Counter
+        A = bargmann_adjacency_dense(4)
+        pl = enumerate_plaquettes(A, max_length=8, both_orientations=False)
+        cnt = Counter(len(P) for P in pl)
+        assert dict(cnt) == {4: 272, 6: 2934, 8: 64021}
+        assert len(pl) == 67227
+
+
+class TestPaper25CP2Quotient:
+    """Paper 25 Sec. VII.A, negative result: the m_l-quotient of the
+    Bargmann graph at N_max = 5 is NOT a CP^2 discretization.
+
+    Pins (a) the 12-sector quotient Laplacian spectrum (multiplicity
+    scheme: inter-sector weights count crossing edges), (b) the ratio
+    range 0.08--0.19 against the Fubini-Study CP^2 spectrum 4k(k+2),
+    and (c) the no-fit quantification: the least-squares single
+    rescaling leaves a 40.8% maximum relative residual, and NO single
+    rescaling can do better than ~33% under either normalization."""
+
+    # From debug/data/s5_graph_spectrum.json (multiplicity scheme),
+    # printed rounded in Paper 25 Sec. VII.A.
+    QUOT_SPECTRUM = [
+        0.0, 2.223909298693098, 4.869922893611419, 4.941588428412833,
+        11.650776112948813, 12.10849084926421, 18.737405154015647,
+        28.090079613186617, 33.578934595571994, 50.60534212790485,
+        63.765529144643054, 99.42802178174746,
+    ]
+
+    def _quotient_eigs(self):
+        from geovac.nuclear.bargmann_graph import build_bargmann_graph
+        g = build_bargmann_graph(5)
+        nodes = g.nodes
+        A = bargmann_adjacency_dense(5)
+        V = A.shape[0]
+        secs = sorted(set((N, l) for (N, l, m) in nodes))
+        si = {s: i for i, s in enumerate(secs)}
+        W = np.zeros((len(secs), len(secs)))
+        for i in range(V):
+            for j in range(i + 1, V):
+                if A[i, j]:
+                    a = (nodes[i][0], nodes[i][1])
+                    b = (nodes[j][0], nodes[j][1])
+                    if a != b:
+                        W[si[a], si[b]] += 1
+                        W[si[b], si[a]] += 1
+        L = np.diag(W.sum(axis=1)) - W
+        return secs, np.sort(np.linalg.eigvalsh(L))
+
+    def test_twelve_sectors(self):
+        secs, _ = self._quotient_eigs()
+        assert secs == [(0, 0), (1, 1), (2, 0), (2, 2), (3, 1), (3, 3),
+                        (4, 0), (4, 2), (4, 4), (5, 1), (5, 3), (5, 5)]
+        assert [2 * l + 1 for (N, l) in secs] == [1, 3, 1, 5, 3, 7,
+                                                  1, 5, 9, 3, 7, 11]
+
+    def test_quotient_spectrum(self):
+        _, ev = self._quotient_eigs()
+        assert np.allclose(ev, self.QUOT_SPECTRUM, atol=1e-8)
+        # and the rounded values printed in the paper
+        printed = [0, 2.22, 4.87, 4.94, 11.65, 12.11, 18.74, 28.09,
+                   33.58, 50.61, 63.77, 99.43]
+        assert np.allclose(np.round(ev, 2), printed, atol=1e-9)
+
+    def test_cp2_no_uniform_fit(self):
+        """Ratios lambda_quot,k / lambda_CP2,k in [0.08, 0.19]; the
+        least-squares single rescaling leaves a 40.8% max relative
+        residual; the minimax-optimal rescaling still leaves 50%
+        (residual vs fit) / 33% (residual vs data). CP^2 Fubini-Study
+        (holomorphic sectional curvature 4): lambda_k = 4k(k+2)."""
+        _, ev = self._quotient_eigs()
+        q = ev[1:]                                     # 11 nonzero
+        c = np.array([4.0 * k * (k + 2) for k in range(1, 12)])
+        r = q / c
+        assert 0.08 < r.min() < r.max() < 0.19
+        assert abs(r.min() - 0.0824) < 5e-4            # k = 3
+        assert abs(r.max() - 0.1853) < 5e-4            # k = 1
+        # least-squares rescaling q ~ s * c
+        s = float(q @ c / (c @ c))
+        resid_ls = np.max(np.abs(q - s * c) / (s * c))
+        assert abs(resid_ls - 0.4078) < 5e-3
+        # convention-robust floor: for ANY rescaling s, the max relative
+        # residual is >= sqrt(rmax/rmin) - 1 (vs fit) and
+        # >= 1 - sqrt(rmin/rmax) (vs data)
+        floor_fit = np.sqrt(r.max() / r.min()) - 1.0
+        floor_data = 1.0 - np.sqrt(r.min() / r.max())
+        assert floor_fit > 0.49
+        assert floor_data > 0.33

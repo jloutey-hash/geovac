@@ -12,8 +12,11 @@ Numerical check from Paper 51 §6:
     n_max = 2: analytical S^(2) weight vs 5-point stencil, max rel err 1.24e-6.
 
 This test reuses the existing decomposition machinery in
-debug/g6_fierz_pauli.py (build_fp_basis, s2_weight_matrix, CHBasis,
-compute_s2_stencil) and verifies the load-bearing claims directly:
+tests/gravity_support/g6_fierz_pauli.py (build_fp_basis, s2_weight_matrix,
+CHBasis, compute_s2_stencil) — migrated from debug/ on 2026-07-03 per the
+durability policy (debug/ is prune-by-design; see
+tests/gravity_support/README.md) — and verifies the load-bearing claims
+directly:
 
     (A) Per-sector eigenvalue SET equality across J = 0, 1, 2.
     (B) Within-sector multiplicity ratio 1 : 1 : 3.
@@ -24,7 +27,6 @@ Per CLAUDE.md §13.4a, this is a symbolic-identity / numerical cross-check
 verification of the theorem statement.
 """
 
-import importlib.util
 import sys
 from pathlib import Path
 
@@ -32,20 +34,13 @@ import numpy as np
 import pytest
 
 # ---------------------------------------------------------------------------
-# Import the debug module that hosts the production decomposition machinery.
+# Import the decomposition machinery from its permanent home
+# tests/gravity_support/ (the wh7_support import pattern).
 # ---------------------------------------------------------------------------
-_DEBUG_PATH = Path(__file__).resolve().parent.parent / "debug" / "g6_fierz_pauli.py"
+sys.path.insert(0, str(Path(__file__).resolve().parent / "gravity_support"))
 
+import g6_fierz_pauli as g6  # noqa: E402
 
-def _load_g6_module():
-    spec = importlib.util.spec_from_file_location("g6_fierz_pauli", _DEBUG_PATH)
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["g6_fierz_pauli"] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
-
-g6 = _load_g6_module()
 CHBasis = g6.CHBasis
 build_fp_basis = g6.build_fp_basis
 s2_weight_matrix = g6.s2_weight_matrix

@@ -44,7 +44,7 @@ The Rule B value of "q" (plaquettes per edge) is 9.4 at n_max=3 and
 being decimated and how its surrounding plaquettes are distributed.
 
 Output:
-  debug/data/xcwg_mk_blockspin_rule_b.json
+  tests/wilson_rule_b_support/data/xcwg_mk_blockspin_rule_b.json
 """
 
 from __future__ import annotations
@@ -60,7 +60,7 @@ from scipy.special import iv
 
 # Make geovac importable.
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 

@@ -466,3 +466,73 @@ class TestModeDependence:
             assert "V_magnetic" in entry
             assert "F2_over_schwinger" in entry
             assert "correction" in entry
+
+
+# ---------------------------------------------------------------------------
+# Exact symbolic pins at (n_ext=1, n_max=1) -- group5 track E, 2026-07-02
+# ---------------------------------------------------------------------------
+
+class TestExactSymbolicPins:
+    """Exact symbolic pins for the F_2 pipeline at (n_ext=1, n_max=1, q_probe=1).
+
+    The CG pipeline is sympy-exact up to the float boundary:
+    compute_anomalous_magnetic_moment floats B / V / F2 only when packing
+    its return dict, while the public helpers tree_level_probe_magnetic and
+    compute_vertex_3pt_single_level return exact sympy expressions.  These
+    tests recompute the SAME quantities from the exact helpers and pin them
+    symbolically, without touching the production signature.
+
+    Honest scope note (the "exact-rational gap"): F_2(n_ext=1, n_max=1) is
+    NOT a rational number.  The SO(4) CG products carry sqrt(2)/sqrt(3)
+    factors, so the exact value lives in the quadratic field Q(sqrt(6)):
+
+        V_mag        = 2*sqrt(2)/3 - 2*sqrt(3)/9
+        B(n_int = 0) = 0                (vertex parity forbids 0->0 at q=1)
+        B(n_int = 1) = 112*sqrt(2)/50625 - 128*sqrt(3)/91125
+        F_2          = (688 - 152*sqrt(6)) / 253125
+
+    The pin is therefore exact-ALGEBRAIC rather than exact-rational --
+    strictly stronger than the float pins above, but the number itself is
+    irrational.  (Rationality was never claimed by Papers 2/33 for this
+    ratio; the graph-native rationality results concern the F_2
+    parity/selection structure, not this normalized CG ratio.)
+    """
+
+    def test_v_magnetic_exact_symbolic(self) -> None:
+        """V_mag(n=1, j=1/2, q=1) = 2*sqrt(2)/3 - 2*sqrt(3)/9 exactly."""
+        from sympy import sqrt, simplify
+        v = tree_level_probe_magnetic(1, Rational(1, 2), q_probe=1)
+        expected = 2 * sqrt(2) / 3 - 2 * sqrt(3) / 9
+        assert simplify(v - expected) == 0
+
+    def test_b_magnetic_exact_symbolic(self) -> None:
+        """B(n_int=0) = 0 exactly; B(n_int=1) = 112*sqrt(2)/50625
+        - 128*sqrt(3)/91125 exactly."""
+        from sympy import sqrt, simplify
+        j = Rational(1, 2)
+        b0 = (compute_vertex_3pt_single_level(1, j, Rational(1, 2), 0)
+              - compute_vertex_3pt_single_level(1, j, Rational(-1, 2), 0))
+        assert simplify(b0) == 0
+        b1 = (compute_vertex_3pt_single_level(1, j, Rational(1, 2), 1)
+              - compute_vertex_3pt_single_level(1, j, Rational(-1, 2), 1))
+        expected = 112 * sqrt(2) / 50625 - 128 * sqrt(3) / 91125
+        assert simplify(b1 - expected) == 0
+
+    def test_f2_nmax1_exact_algebraic(self) -> None:
+        """F_2(n_ext=1, n_max=1) = (688 - 152*sqrt(6))/253125 exactly, and
+        the production float equals this exact value to 1e-15 relative."""
+        from sympy import sqrt, simplify, radsimp
+        j = Rational(1, 2)
+        v = tree_level_probe_magnetic(1, j, q_probe=1)
+        b = S.Zero
+        for n_int in (0, 1):
+            b += (compute_vertex_3pt_single_level(1, j, Rational(1, 2), n_int)
+                  - compute_vertex_3pt_single_level(1, j, Rational(-1, 2),
+                                                    n_int))
+        f2_exact = radsimp(b / v)
+        expected = (688 - 152 * sqrt(6)) / 253125
+        assert simplify(f2_exact - expected) == 0
+        # the float pipeline agrees with the exact value at machine precision
+        result = compute_anomalous_magnetic_moment(n_ext=1, n_max=1, q_probe=1)
+        f2_float = result["F2"]
+        assert abs(f2_float - float(expected)) <= 1e-15 * abs(f2_float)

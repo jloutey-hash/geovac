@@ -41,7 +41,7 @@ U(1) verdict and indicate a Kaluza-Klein deconfinement transition.
 
 Output
 ======
-    debug/data/xcwg_polyakov_loop.json
+    tests/wilson_rule_b_support/data/xcwg_polyakov_loop.json
     debug/xcwg_polyakov_loop_memo.md          (separately)
 """
 
@@ -57,7 +57,7 @@ from typing import Dict, List, Tuple, Optional
 import numpy as np
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 if _HERE not in sys.path:

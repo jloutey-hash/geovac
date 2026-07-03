@@ -66,8 +66,10 @@ single-particle Dirac spinor phase constraint, costing nothing
 The partition is independent of the Paper~2 fine-structure-constant
 observation and stands on its own as an observation about the structural cost of
 recovering each QED selection rule on a discrete spectral
-construction.  All claims are verified by 100 tests in
-\texttt{tests/test\_vector\_qed.py}.
+construction.  All claims are verified by 103 tests in
+\texttt{tests/test\_vector\_qed.py} (including aggregate tallies of all
+four census columns) plus the 21-test symbolic Furry derivation in
+\texttt{tests/test\_paper33\_furry\_derivation.py}.
 \end{abstract}
 
 % ===================================================================
@@ -136,7 +138,10 @@ along with the per-loop $1/(4\pi)$ calibration cost and the
 zero-cost Dirac kinematic identity for Furry.  No new physics, no
 fitting parameters; the result follows from explicit construction in
 \texttt{geovac/vector\_qed.py} and verification in
-\texttt{tests/test\_vector\_qed.py} (100 tests).
+\texttt{tests/test\_vector\_qed.py} (103 tests, including aggregate
+tallies of all four census columns) and
+\texttt{tests/test\_paper33\_furry\_derivation.py} (the symbolic Furry
+derivation, 21 tests).
 
 % ===================================================================
 \section{The Graph-Native Baseline: 1/8}
@@ -188,12 +193,16 @@ the Fock graph: its unique edge $e_0$ connects it to $|2, 0, 0\rangle$.
 The path-graph Laplacian inverse evaluated at this leaf edge gives
 $G_\gamma[e_0, e_0] = (n_{\max} - 1)/n_{\max}$ exactly, and the vertex
 bilinear contributes a factor of~2; this is the only contribution to
-$\Sigma(\mathrm{GS})$.  Continuously verified at $n_{\max} = 2$
-(exact rational arithmetic) in
-\texttt{tests/test\_graph\_qed\_self\_energy.py}; the original sprint
-driver additionally swept $n_{\max} = 2$--$5$ (archived measurement).
-The closed form itself holds for all $n_{\max}$ by the path-graph
-Laplacian identity above.
+$\Sigma(\mathrm{GS})$.  Continuously verified in
+\texttt{tests/test\_graph\_qed\_self\_energy.py}: at $n_{\max} = 2$ in
+exact rational arithmetic (the GS block is $[[1,1],[1,1]]$), and at
+$n_{\max} = 3, 4$ numerically to $10^{-10}$
+(\texttt{TestPendantEdgeSweep}, added 2026-07-03 after the
+\texttt{graph\_qed\_photon} $n_{\max} \ge 4$ eigenvalue-sort crash fix;
+the exact-\texttt{sympy} pseudoinverse at $n_{\max} \ge 3$ exceeds any
+reasonable test budget, so those points are numeric).  The closed form
+itself holds for all $n_{\max}$ by the path-graph Laplacian identity
+above.
 \end{proof}
 
 The continuum mechanism (vertex parity: $l_a + l_b + l_\gamma$ odd
@@ -319,19 +328,31 @@ $\Sigma(\mathrm{GS}) = 0$ exactly.
 \item[(R3)] The triangle inequality on the $3j$ symbol forces
 $|l_a - l_b| \le q \le l_a + l_b$; combined with the vector
 photon's full $\mathrm{SO}(4)$ harmonic content, this reproduces the
-continuum channel-count constraint.
+continuum channel-count constraint.  Census check (de-tautologized
+2026-07-03): the per-$(n_a, n_b)$ channel count realized in the
+vertex-tensor support matches the parity + triangle closed form for
+every pair (verified at $n_{\max} = 2, 3$).
 \item[(R4)] The $3j$ symbol enforces $m_a + m_q = m_b$.
 \item[(R5)] Built into the parity step.
-\item[(R6)] At $n_{\max} = 2$ the Ward identity holds exactly; at
-higher $n_{\max}$ it holds up to truncation $O(1/n_{\max})$ (verified
-at $n_{\max} = 3$, residual $\sim 10^{-3}$).
+\item[(R6)] At $n_{\max} = 2$ the Ward identity holds exactly
+(commutator ratio $\|[\Sigma, H_0]\| / \|\Sigma\| < 10^{-12}$); at
+$n_{\max} = 3$ it degrades (measured ratio $\approx 3.1$) because
+cross-$n$ couplings break the commutator metric on the truncated
+basis --- the same degradation the Dirac census discloses
+(Theorem~\ref{thm:dirac_8_of_8}).  The census is evaluated at
+$n_{\max} = 2$.  (Corrected 2026-07-03: this item previously claimed
+a $\sim 10^{-3}$ residual at $n_{\max} = 3$, which the production
+diagnostic does not reproduce.)
 \item[(R7)] FAILS: $V(a, a, q, m_q)$ for $a = (n, l \ge 1, m)$ and
 $q$ odd contains terms proportional to
 $\langle l, m | l, m; q, 0 \rangle_{3j} \ne 0$, allowing closed loops
 with odd vertex count.
-\item[(R8)] The triangle inequality on $n$ holds at every photon
-mode; the vector photon spans the required $n_\gamma$ range up to
-$2(n_{\max} - 1)$, sufficient for $n_{\max} \ge 2$.
+\item[(R8)] Verified on the vertex-tensor support: every realized
+coupling satisfies $|n_a - n_b| \le q \le n_a + n_b - 2$ (census
+check \texttt{8\_triangle\_on\_n}, added 2026-07-03).  The upper
+bound follows from the parity step, the $l$-triangle, and
+$l \le n - 1$; the lower bound is contingent and holds at the tested
+truncations $n_{\max} = 2, 3$.
 \end{itemize}
 \end{proof}
 
@@ -409,9 +430,15 @@ zero before integration, $V(a, a, q, m_q) = \int_{S^2} \psi^{\dagger}
 $q \ge 1$.
 
 The proof is closed.  Six concrete cases at $\kappa \in
-\{-1, +1, -2\}$ and $m_j \in \{\pm 1/2, +3/2\}$ have been verified
-symbolically in \texttt{debug/paper33\_furry\_verification.py},
-giving sympy-exact $V(a, a, q = 1, m_q = 0) = 0$ in every case.
+\{-1, +1, -2\}$ and $m_j \in \{\pm 1/2, +3/2\}$ are verified
+symbolically in \texttt{tests/test\_paper33\_furry\_derivation.py}
+(ported 2026-07-03 from the archived sprint driver): the bilinear
+$V_{LS} + V_{SL}$ simplifies to exactly zero pointwise on $S^2$
+(Step~3), $\Im\,M \equiv 0$ with $M \not\equiv 0$ (the mechanism of
+Remark~\ref{rem:mechanism}), and the projected integral
+$V(a, a, q, m_q) = 0$ sympy-exactly in every case.  The derivation is
+independent of the production vertex code, whose diagonal
+short-circuit it backs.
 \end{proof}
 
 \begin{remark}[The mechanism is $m_l$ conservation, not Hermiticity]
@@ -497,7 +524,11 @@ baseline is:
 By Theorems~\ref{thm:scalar_7_of_8} and~\ref{thm:dirac_8_of_8},
 together with Proposition~\ref{prop:pendant_edge} and
 Sec.~\ref{sec:dirac_graph}.  Verified numerically in
-\texttt{tests/test\_vector\_qed.py} (100 tests).
+\texttt{tests/test\_vector\_qed.py}: each of the four census totals
+$1/8$, $4/8$, $7/8$, $8/8$ is asserted as an aggregate per-rule tally
+(\texttt{TestCensusAggregates}, added 2026-07-03), and the Tier-III
+Furry mechanism is derived symbolically in
+\texttt{tests/test\_paper33\_furry\_derivation.py}.
 \end{proof}
 
 \begin{table}[h]
@@ -712,8 +743,11 @@ $1/(4\pi)$ per loop (Tier~II, calibration), and one (Furry's theorem)
 is recovered by a kinematic identity of the Dirac single-particle
 vertex bilinear at zero cost (Tier~III).
 
-The partition is structural and verified by 100 tests in
-\texttt{tests/test\_vector\_qed.py}.  It does not depend on the
+The partition is structural and verified by 103 tests in
+\texttt{tests/test\_vector\_qed.py} (each census total asserted as an
+aggregate per-rule tally) together with the symbolic Furry derivation
+in \texttt{tests/test\_paper33\_furry\_derivation.py}.  It does not
+depend on the
 Paper~2 observation about the fine-structure constant; it stands as an
 observation about the cost of recovering each QED selection rule on a
 discrete spectral construction.

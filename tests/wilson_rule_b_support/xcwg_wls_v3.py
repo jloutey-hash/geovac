@@ -24,7 +24,7 @@ from typing import Dict, List, Iterable, Tuple
 import numpy as np
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 sys.path.insert(0, _ROOT); sys.path.insert(0, _HERE)
 
 from geovac.ihara_zeta_dirac import build_dirac_s3_graph

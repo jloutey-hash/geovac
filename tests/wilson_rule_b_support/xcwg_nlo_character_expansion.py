@@ -48,7 +48,7 @@ Methodology
 
 Output
 ======
-    - debug/data/xcwg_nlo_character_expansion.json
+    - tests/wilson_rule_b_support/data/xcwg_nlo_character_expansion.json
     - debug/xcwg_nlo_character_expansion_memo.md (separately)
 
 Notes
@@ -72,7 +72,7 @@ import numpy as np
 from scipy.special import iv
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 if _HERE not in sys.path:

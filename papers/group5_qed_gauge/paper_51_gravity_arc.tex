@@ -185,13 +185,15 @@ The continuum arc produces the following structural results.
         (\Lambda R) + O(e^{-\Lambda^2 R^2})$, with no higher-curvature
         power corrections at any order. The action extremizes at
         $\Rcrit \Lambda = 1/\sqrt{6}$ (formal de Sitter selection).
+        (SYMBOLIC PROOF;
+        \texttt{tests/test\_paper51\_zeta\_unit\_neg\_k.py}.)
 
   \item \textbf{Thermal product factorization} (G2): the spectral
         action on $\sthree \times S^{1}_{\beta}$ factorizes by the
         heat-kernel identity $K_{\sthree \times S^1}(t) = K_{\sthree}(t)
         \cdot K_{S^1}(t)$ and reproduces Einstein--Hilbert plus a
         cosmological constant with the GeoVac substrate's
-        two-term exactness preserved.
+        two-term exactness preserved. (INTERNAL THEOREM.)
 
   \item \textbf{Bundle-specific exactness} (G3): the two-term
         exactness is specific to the Camporesi--Higuchi spinor
@@ -200,7 +202,8 @@ The continuum arc produces the following structural results.
         Connes--Chamseddine infinite Seeley--DeWitt expansion. We
         derive the closed form
         $a_k^{\Delta} = 2\pi^2/k!$ for the scalar Laplacian on
-        unit $\sthree$.
+        unit $\sthree$. (SYMBOLIC PROOF;
+        \texttt{tests/test\_paper51\_scalar\_ak.py}.)
 
   \item \textbf{$S^2$ Dirac and Bekenstein--Hawking} (G4-1, G4-2):
         The $S^2$ Dirac with integer spectrum $|\lambda_n| = n + 1$,
@@ -213,12 +216,15 @@ The continuum arc produces the following structural results.
         $2$ relative to G7 is a \emph{forced bookkeeping artifact}, not
         calibration, by Wald's theorem in the two-term-exact
         Einstein-gravity sector --- see \S\ref{sec:g4}).
+        (INTERNAL THEOREM, continuum-level.)
 
   \item \textbf{Decompactified de Sitter vacuum} (G5): the
         $\beta \to \infty$ decompactification of the G2 product
         gives a zero-temperature de Sitter vacuum on
         $\sthree \times \mathbb{R}_\tau$ with closed-form minimum
         action density $s_{\min} = -\Lambda/(12\sqrt{6})$.
+        (SYMBOLIC PROOF;
+        \texttt{tests/test\_paper51\_dS\_vacuum.py}.)
 
   \item \textbf{Graviton diagnostic} (G6-Diag-Full): within the
         $(1, 1)$ irrep of $SO(4) = SU(2) \times SU(2)$, physical
@@ -226,6 +232,7 @@ The continuum arc produces the following structural results.
         $V = i[X, D_0]$) have positive kinetic eigenvalue at every
         tested $n_{\max} \in \{1, 2, 3\}$, satisfying the necessary
         condition for graviton dynamics on the discrete substrate.
+        (MEASURED, sprint-scale.)
 
   \item \textbf{Fierz--Pauli decomposition and $J$-blindness} (G6-FP):
         the $(1, 1)$ subspace decomposes under the diagonal
@@ -239,13 +246,15 @@ The continuum arc produces the following structural results.
         trace vs.\ longitudinal) requires the metric identification,
         not just the spectral action. This structurally closes the
         graviton program at the spectral-action level.
+        (INTERNAL THEOREM;
+        \texttt{tests/test\_paper51\_j\_blindness.py}.)
 
   \item \textbf{Newton constant and cosmological constant} (G7):
         $\Geff = 6\pi/\Lambda^2$ and $\Lcc = 6\Lambda^2$ for Gaussian
         cutoff. The cosmological-constant-scale gap of $\sim 10^{120}$
         between predicted $\Lcc/M_{\rm Planck}^2 = 6$ and observed
         $\sim 10^{-120}$ is the standard Connes--Chamseddine issue,
-        inherited not GeoVac-specific.
+        inherited not GeoVac-specific. (INTERNAL THEOREM.)
 
   \item \textbf{Cutoff dependence} (G8): for arbitrary cutoff $f$,
         $\Geff = 6\pi/(\phi(1) \Lambda^2)$,
@@ -254,6 +263,8 @@ The continuum arc produces the following structural results.
         combination is cutoff-independent. The cutoff function is
         external Class~1 calibration data alongside Yukawas, $Z_2/\delta m$
         multi-loop QED counterterms, and the Born rule.
+        (INTERNAL THEOREM;
+        \texttt{tests/test\_paper51\_cutoff\_mellin.py}.)
 \end{enumerate}
 
 The discrete-substrate arc opens with G4-3:
@@ -271,6 +282,8 @@ The discrete-substrate arc opens with G4-3:
         the off-shell tip deformation used in the replica method.
         Sub-sprints G4-3a through G4-6 are named for a multi-month
         commitment ($\sim 6$--$12$ months estimated).
+        (MEASURED, sprint-scale;
+        \texttt{tests/test\_paper51\_L6\_full.py} F1--F7 panel.)
 \end{enumerate}
 
 The paper is organized as follows. Section~\ref{sec:substrate}
@@ -344,7 +357,8 @@ integer $k$ and $\phi(1/2) = \sqrt{\pi}$, $\phi(3/2) = \sqrt{\pi}/2$.
 \label{sec:g1}
 % =====================================================================
 
-\begin{theorem}[Spectral zeta identity at non-positive integers]
+\begin{theorem}[Spectral zeta identity at non-positive integers ---
+SYMBOLIC PROOF; \texttt{tests/test\_paper51\_zeta\_unit\_neg\_k.py}]
 \label{thm:zeta_unit_neg_k}
 For the Camporesi--Higuchi spectrum on unit $\sthree$, the spectral
 zeta function
@@ -377,7 +391,8 @@ The identity in Theorem~\ref{thm:zeta_unit_neg_k} forces the
 Mellin-transform expansion of $\mathrm{Tr}\, f(D^2/\Lambda^2)$ on
 $\sthree_R$ to truncate at low order.
 
-\begin{corollary}[Two-term exactness of the spectral action]
+\begin{corollary}[Two-term exactness of the spectral action ---
+SYMBOLIC PROOF; \texttt{tests/test\_paper51\_zeta\_unit\_neg\_k.py}]
 \label{cor:two_term}
 For Gaussian cutoff on $\sthree_R$, the spectral action equals
 \begin{equation}
@@ -467,7 +482,8 @@ kernel factorizes:
                             = K_{\sthree}(t) \cdot \frac{\beta}{\sqrt{4\pi t}}.
 \end{equation}
 
-\begin{corollary}[4D spectral action with exact two-term structure]
+\begin{corollary}[4D spectral action with exact two-term structure ---
+INTERNAL THEOREM]
 \label{cor:zeta_4D_neg_k}
 The Chamseddine--Connes spectral action on $\sthree_R \times S^1_\beta$
 for Gaussian cutoff equals
@@ -514,7 +530,8 @@ spectrum.
 has spectrum $\lambda_n^{\Delta} = n(n+2)$ with multiplicity $(n+1)^2$.
 
 \begin{theorem}[Closed-form Seeley--DeWitt coefficients for scalar
-                Laplacian on unit $\sthree$]
+                Laplacian on unit $\sthree$ --- SYMBOLIC PROOF;
+                \texttt{tests/test\_paper51\_scalar\_ak.py}]
 \label{thm:scalar_ak}
 The heat trace satisfies
 \begin{equation}
@@ -676,7 +693,8 @@ the limit. The spectral action density becomes
 \end{equation}
 with extremum at $\Rcrit \Lambda = 1/\sqrt{6}$ (same as G1, G2).
 
-\begin{theorem}[Closed-form de Sitter vacuum action density]
+\begin{theorem}[Closed-form de Sitter vacuum action density ---
+SYMBOLIC PROOF; \texttt{tests/test\_paper51\_dS\_vacuum.py}]
 \label{thm:dS_vacuum}
 The minimum action density at the de Sitter extremum is
 \begin{equation}
@@ -731,7 +749,8 @@ signs (gauge-orbit curvature, not physical). A 5-point finite-difference
 stencil verifies the analytical eigenvalues to relative difference
 $10^{-9}$.
 
-\begin{proposition}[Necessary condition for graviton dynamics]
+\begin{proposition}[Necessary condition for graviton dynamics ---
+MEASURED, sprint-scale ($n_{\max} \le 3$)]
 \label{prop:graviton_physical}
 The GeoVac substrate admits physical $(1, 1)$ modes with positive
 kinetic eigenvalue at every tested $n_{\max} \in \{1, 2, 3\}$, after
@@ -789,7 +808,8 @@ instead of $1 + 3 + 5 = 9$).
 
 \subsection{J-blindness theorem}
 
-\begin{theorem}[$J$-blindness of $S^{(2)}$]
+\begin{theorem}[$J$-blindness of $S^{(2)}$ --- INTERNAL THEOREM;
+\texttt{tests/test\_paper51\_j\_blindness.py}]
 \label{thm:j_blindness}
 The Gaussian spectral-action second variation $S^{(2)}$ restricted to
 the $(1, 1)$ subspace of $\mathrm{Herm}(H_{n_{\max}})$ has identical
@@ -908,7 +928,8 @@ matching gives
   \Lambda^4 \text{ term}: &\quad \Lcc = 6 \Lambda^2.
 \end{align}
 
-\begin{proposition}[Newton constant and cosmological constant]
+\begin{proposition}[Newton constant and cosmological constant ---
+INTERNAL THEOREM]
 \label{prop:newton_cc}
 The GeoVac spectral action on $\sthree_R \times S^1_\beta$ with
 Gaussian cutoff produces Newton constant $\Geff = 6 \pi / \Lambda^2$
@@ -950,7 +971,8 @@ scale).
 
 \paragraph{General formulas.}
 
-\begin{theorem}[Cutoff-dependent gravity predictions]
+\begin{theorem}[Cutoff-dependent gravity predictions --- INTERNAL
+THEOREM; \texttt{tests/test\_paper51\_cutoff\_mellin.py}]
 \label{thm:cutoff_dep}
 For arbitrary smooth positive cutoff $f$ with finite Mellin moments
 $\phi(1), \phi(2)$, the GeoVac spectral action on $\sthree_R \times
@@ -1262,6 +1284,10 @@ grading), F3 (continuum recovery at small $t$) closed at sprint scale:
         \textbf{0.4\%} of continuum); rank-2 ratio
         $K^{\rm Dirac}/K^{\rm scalar} = 1.9998$ bit-essentially-exact.
 \end{itemize}
+(MEASURED, sprint-scale; F1--F7 are exercised as a live panel in
+\texttt{tests/test\_paper51\_L6\_full.py}, and the F3 sweet-spot value
+is pinned --- as $a_0^{\rm Dirac} = 2 R_{\rm Dirac}(0.1) = 1.992$ ---
+in \texttt{tests/test\_paper51\_g44\_headlines.py}.)
 
 The lowest-mode validation $|\lambda_{\min}^{\rm Dirac}|$ converges to
 $\pi/R$ (the half-integer angular momentum Bessel zero
@@ -1311,6 +1337,13 @@ substantive structural finding: \textbf{the discrete-substrate gravity
 has two scales} --- the substrate UV $a$ and the warp scale $r_h$ ---
 and the asymptotic-free condition is local (holds at large $\rho$,
 fails at the apex where $r(\rho_1) \approx a$).
+(MEASURED, sprint-scale;
+\texttt{tests/test\_paper51\_g44\_headlines.py} recomputes the
+independent cone-Dirac reference $r(\rho) = \rho$ at the G4-4b-c
+substrate $N_\rho = 20$, $a = 0.3$, $N_\phi = 12$, $l_{\max} = 3$ and
+pins the match at $6 \times 10^{-8}$ relative --- 7 digits, inside the
+6-digit claim --- with the $O(r_h^2)$ convergence and the plateau
+ratio $K_{\rm cone}/K_{\rm disk}(t{=}0.5) = 50.848$.)
 
 \paragraph{Level 1.5 spin connection.} Adding the scalar $(r'/r)^2$
 correction to $D^2$ (the leading scalar piece of the
@@ -1344,7 +1377,9 @@ conical-defect tip coefficient is identified at bit-exact precision:
 Best extraction (G4-4c week 3): $\alpha = 2/5$, $t = 2.0$, recovery
 $= 1.000021$ (relative error $2.1 \times 10^{-5}$). Nine of eleven
 tested $\alpha$ values reach $> 99.5\%$ recovery somewhere in the
-$t$-sweep. This is the continuum Dowker~(1977)~\cite{dowker1977} /
+$t$-sweep. (MEASURED, sprint-scale; the best-cell recovery is
+recomputed at the production substrate and pinned in
+\texttt{tests/test\_paper51\_g44\_headlines.py}.) This is the continuum Dowker~(1977)~\cite{dowker1977} /
 Cheeger--Simons~\cite{cheeger1983, solodukhin1995} spinor
 conical-defect heat-kernel coefficient with \emph{opposite sign} from
 scalar Sommerfeld/Cheeger~\cite{sommerfeld1894} and
@@ -1378,6 +1413,9 @@ its ground mode has zero effective centrifugal in the $u$-rep.
 \textbf{The anti-periodic spinor BC with half-integer angular
 momentum is structurally essential for clean conical-defect SC
 extraction on a discrete substrate.}
+(MEASURED, sprint-scale; the spinor row --- per-$\alpha$ recoveries
+and the 99.4\% panel mean at $t = 1.0$ --- is recomputed and pinned
+in \texttt{tests/test\_paper51\_g44\_headlines.py}.)
 
 \paragraph{$\alpha > 1$ structural asymmetry.} A clean negative
 landed: at $\alpha > 1$ (excess-angle / saddle-cone), the recovery
@@ -1402,6 +1440,9 @@ $t = 0.1$, $N_\phi = 192$:
   a_0^{\rm Dirac} = 1.992
   \quad\text{(continuum: 2.0, recovery \textbf{99.6\%})}.
 \end{equation}
+(MEASURED; recomputed at the paper's own substrate
+$N_\rho = 200$, $a = 0.05$, $N_\phi = 192$, $t = 0.1$ and pinned in
+\texttt{tests/test\_paper51\_g44\_headlines.py}.)
 Sub-leading $a_1$ (boundary) is small at the sweet spot; a clean
 identification requires multi-window fitting or continuum
 extrapolation, deferred. The naive polynomial fit at small $t$ is
@@ -1425,6 +1466,7 @@ $N_0 = 120$) gives, at sweet-spot $t = 5.0$:
   - K^{\rm Dirac}_{\rm disk}\right]_{\alpha = 1}^{\rm discrete}
   = 0.1612 \quad\text{(continuum: } 0.1667, \text{ recovery \textbf{96.69\%}).}
 \end{equation}
+(MEASURED, sprint-scale.)
 
 \subsection{Implications for the multi-month $S_{\BH}$ program}
 
@@ -1652,7 +1694,8 @@ $S_{\BH}$. \textbf{The cutoff-function calibration data (Class~1 per
 \S\ref{sec:g8}) controls all three sectors simultaneously, but
 through different Mellin moments.}
 
-\begin{theorem}[Sector-wise Mellin moment map]
+\begin{theorem}[Sector-wise Mellin moment map --- INTERNAL THEOREM;
+\texttt{tests/test\_paper51\_cutoff\_mellin.py}]
 \label{thm:sector_mellin}
 Let $f$ be a cutoff function with regulated Mellin moments
 $\phi(s) = \int_0^\infty f(x)\, x^{s-1}\, dx$, and let the
@@ -2214,7 +2257,8 @@ $K_n(\alpha,t)=\sum_{j\ge0} g_j^{(n)}(\alpha)$ and the per-mode replica
 contribution is $C_j(\alpha)=-g_j^{(n)\prime}(\alpha)$. The continuum objects
 $g_j$, $K$ are the $n\to\infty$ limits.
 
-\begin{theorem}[L6: replica-weight-harmless convergence]
+\begin{theorem}[L6: replica-weight-harmless convergence --- INTERNAL
+THEOREM; \texttt{tests/test\_paper51\_L6\_full.py}]
 \label{thm:L6}
 Fix $t>0$ and $\delta\in(0,1)$. As $n\to\infty$ the maps
 $\alpha\mapsto K_n(\alpha,t)$ converge to $\alpha\mapsto K(\alpha,t)$ in
@@ -2710,7 +2754,7 @@ probability sits on the ground shell with degeneracy
 $\nmax(\nmax + 1) \sim \nmax^2$, giving
 $S \approx \log(\nmax^2) = 2\,\log\nmax$. The
 Bekenstein--Hawking $S_{\mathrm{BH}} = A/(4G)$ of
-\S\ref{sec:BH_entropy} therefore comes from the spectral-action
+\S\ref{sec:g4} therefore comes from the spectral-action
 replica mechanism, \emph{not} from BW entanglement entropy.
 The two routes to $S_{\mathrm{BH}}$ in quantum gravity
 (entanglement vs.\ spectral action) are structurally

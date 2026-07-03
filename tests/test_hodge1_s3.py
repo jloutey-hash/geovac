@@ -117,20 +117,188 @@ def test_smallest_eigenvalue_is_3():
 
 
 # ---------------------------------------------------------------------------
-# Bochner-Weitzenbock verification
+# Bochner-Weitzenbock verification (INDEPENDENT symbolic route)
 # ---------------------------------------------------------------------------
+#
+# The previous tests here were a tautology: mu_conn was DEFINED as
+# n(n+2) - 2 and the assertion reduced to 2 == 2 (group5 cert finding E17).
+# They are replaced by a genuinely independent verification: the operator
+# identity  Delta_Hodge = nabla*nabla + 2  (Bochner-Weitzenbock with
+# Ric = 2g) is verified SYMBOLICALLY on the unit round S^3 in Hopf
+# coordinates (eta, xi1, xi2), metric g = diag(1, sin^2 eta, cos^2 eta),
+# by explicit construction of both operators from the metric (Christoffel
+# symbols, covariant derivatives, d and delta). Nothing is assumed about
+# the spectrum.
+#
+# Literature anchors verified alongside (Ikeda-Taniguchi 1978,
+# Camporesi 1990):
+#   * exact family:    Delta_H(df) = k(k+2) df, rough = k(k+2) - 2
+#   * coclosed family: the Killing 1-form has Delta_H = 4 = 2(n-1)|_{n=3}
+#     (lowest CO-EXACT eigenvalue is 4 with multiplicity 6 = dim so(4),
+#     NOT 3 -- see the module docstring's labeling-convention note).
 
-def test_bochner_weitzenbock():
-    """mu_n = mu_n^{conn} + 2 for n = 1..20."""
+_HOPF = None
+
+
+def _hopf_calculus():
+    """Symbolic exterior/covariant calculus on unit S^3, Hopf coordinates.
+
+    Returns (coords, hodge_laplacian, rough_laplacian, scalar_laplacian)
+    where the three operators act on component lists / scalars.
+    """
+    global _HOPF
+    if _HOPF is not None:
+        return _HOPF
+    eta, x1, x2 = sp.symbols('eta xi1 xi2', real=True)
+    coords = [eta, x1, x2]
+    g = sp.diag(1, sp.sin(eta) ** 2, sp.cos(eta) ** 2)
+    ginv = g.inv()
+    sqrtg = sp.sin(eta) * sp.cos(eta)
+    n = 3
+    Gamma = [[[sp.simplify(sum(ginv[k, m] * (sp.diff(g[m, i], coords[j])
+                                             + sp.diff(g[m, j], coords[i])
+                                             - sp.diff(g[i, j], coords[m]))
+                               for m in range(n)) / 2)
+               for j in range(n)] for i in range(n)] for k in range(n)]
+
+    def cov_d1(w):
+        # T[i][j] = nabla_i w_j
+        return [[sp.diff(w[j], coords[i]) - sum(Gamma[k][i][j] * w[k]
+                                                for k in range(n))
+                 for j in range(n)] for i in range(n)]
+
+    def rough_laplacian(w):
+        # (nabla* nabla w)_i = -g^{jk} (nabla_j nabla_k w)_i
+        T = cov_d1(w)
+        out = []
+        for i in range(n):
+            s = 0
+            for j in range(n):
+                for k in range(n):
+                    njT = (sp.diff(T[k][i], coords[j])
+                           - sum(Gamma[m][j][k] * T[m][i] for m in range(n))
+                           - sum(Gamma[m][j][i] * T[k][m] for m in range(n)))
+                    s += ginv[j, k] * njT
+            out.append(-s)
+        return out
+
+    def hodge_laplacian(w):
+        # (d delta + delta d) w  for a 1-form w
+        dw_scalar = -sum(sp.diff(sqrtg * sum(ginv[i, j] * w[j]
+                                             for j in range(n)),
+                                 coords[i]) for i in range(n)) / sqrtg
+        d_delta = [sp.diff(dw_scalar, coords[i]) for i in range(n)]
+        F = [[sp.diff(w[j], coords[i]) - sp.diff(w[i], coords[j])
+              for j in range(n)] for i in range(n)]
+        delta_d = []
+        for j in range(n):
+            s = 0
+            for i in range(n):
+                for k in range(n):
+                    niF = (sp.diff(F[k][j], coords[i])
+                           - sum(Gamma[m][i][k] * F[m][j] for m in range(n))
+                           - sum(Gamma[m][i][j] * F[k][m] for m in range(n)))
+                    s += ginv[i, k] * niF
+            delta_d.append(-s)
+        return [d_delta[i] + delta_d[i] for i in range(n)]
+
+    def scalar_laplacian(f):
+        return -sum(sp.diff(sqrtg * sum(ginv[i, j] * sp.diff(f, coords[j])
+                                        for j in range(n)), coords[i])
+                    for i in range(n)) / sqrtg
+
+    _HOPF = (coords, hodge_laplacian, rough_laplacian, scalar_laplacian)
+    return _HOPF
+
+
+def test_weitzenbock_operator_identity_generic():
+    """SYMBOLIC PROOF (patch-level): Delta_Hodge - nabla*nabla = 2 * id on
+    1-forms of unit S^3, for a 1-form with three ARBITRARY function
+    components. This is the Bochner-Weitzenbock identity with Ric = 2g,
+    verified with no spectral input whatsoever."""
+    coords, hodge, rough, _ = _hopf_calculus()
+    eta, x1, x2 = coords
+    a = sp.Function('a')(eta, x1, x2)
+    b = sp.Function('b')(eta, x1, x2)
+    c = sp.Function('c')(eta, x1, x2)
+    w = [a, b, c]
+    H = hodge(w)
+    R = rough(w)
+    for i in range(3):
+        assert sp.simplify(sp.expand(H[i] - R[i] - 2 * w[i])) == 0
+
+
+def test_weitzenbock_killing_form():
+    """The Killing 1-form omega = sin^2(eta) d xi1 satisfies
+    Delta_H omega = 4 omega and nabla*nabla omega = 2 omega.
+
+    Anchors the CO-EXACT (transverse) family: its lowest Hodge eigenvalue
+    on unit S^3 is 4 (multiplicity 6 = dim so(4); Ikeda-Taniguchi coclosed
+    k=1 eigenvalue (k+1)^2), and the Ricci shift +2 is realized as
+    4 = 2 + 2."""
+    coords, hodge, rough, _ = _hopf_calculus()
+    eta = coords[0]
+    w = [sp.Integer(0), sp.sin(eta) ** 2, sp.Integer(0)]
+    H = hodge(w)
+    R = rough(w)
+    for i in range(3):
+        assert sp.simplify(H[i] - 4 * w[i]) == 0
+        assert sp.simplify(R[i] - 2 * w[i]) == 0
+
+
+def test_weitzenbock_exact_form_level1():
+    """The exact 1-form omega = df with f = cos(eta) cos(xi2) (a level-1
+    scalar harmonic, Delta_0 f = 3 f) satisfies Delta_H omega = 3 omega
+    and nabla*nabla omega = 1 omega.
+
+    Anchors the EXACT (longitudinal) family at eigenvalue n(n+2) = 3
+    (n=1) and its rough eigenvalue n(n+2) - 2 = 1: the arithmetic
+    relation mu_conn = n(n+2) - 2 used by verify_bochner_weitzenbock()
+    is here derived from the metric for the exact family, not assumed."""
+    coords, hodge, rough, scalar_lap = _hopf_calculus()
+    eta, x1, x2 = coords
+    f = sp.cos(eta) * sp.cos(x2)
+    assert sp.simplify(scalar_lap(f) - 3 * f) == 0
+    w = [sp.diff(f, coords[i]) for i in range(3)]
+    H = hodge(w)
+    R = rough(w)
+    for i in range(3):
+        assert sp.simplify(H[i] - 3 * w[i]) == 0
+        assert sp.simplify(R[i] - 1 * w[i]) == 0
+
+
+def test_bochner_weitzenbock_arithmetic_corollary():
+    """verify_bochner_weitzenbock() checks the exact-family arithmetic
+    relation mu_Hodge(n) = [n(n+2) - 2] + 2. On its own this is circular;
+    it is kept as an API-consistency check because the +2 shift and the
+    exact-family rough eigenvalue are now independently established by
+    the symbolic tests above."""
     assert verify_bochner_weitzenbock(20) is True
 
 
-def test_bochner_weitzenbock_ricci_shift():
-    """Explicit check: the Ricci shift is exactly +2 at every level."""
-    for n in range(1, 21):
-        mu = hodge1_eigenvalue(n)
-        mu_conn = Integer(n) * Integer(n + 2) - Integer(2)
-        assert mu - mu_conn == 2
+# ---------------------------------------------------------------------------
+# Degeneracy: independent literature anchor (Ikeda-Taniguchi)
+# ---------------------------------------------------------------------------
+
+def test_degeneracy_ikeda_taniguchi_anchor():
+    """Independent anchor for the degeneracy formula 2n(n+2).
+
+    Ikeda-Taniguchi (1978): coclosed 1-eigenforms on S^3 have eigenvalue
+    (k+1)^2 with multiplicity m_k = 2k(k+2), k >= 1. Hardcoded literature
+    values (independent of the module's formula):
+        k=1: m = 6  = dim so(4)   (Killing forms, eigenvalue 4)
+        k=2: m = 16                (eigenvalue 9)
+        k=3: m = 30                (eigenvalue 16)
+    The module's total degeneracy hodge1_degeneracy(k, 'all') equals this
+    coclosed multiplicity numerically at the same label k. NOTE the
+    labeling-convention caveat (module docstring): in the literature this
+    multiplicity is attached to Hodge eigenvalue (k+1)^2, not k(k+2);
+    the module attaches level k to the exact-family eigenvalue k(k+2)."""
+    literature = {1: 6, 2: 16, 3: 30}
+    for k, m in literature.items():
+        assert hodge1_degeneracy(k, mode_type="all") == m
+        # closed form of the I-T multiplicity, derived independently:
+        assert m == 2 * ((k + 1) ** 2 - 1)
 
 
 # ---------------------------------------------------------------------------

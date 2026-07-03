@@ -373,7 +373,11 @@ collapse into ``fiber'' structure that does not appear in the base.
 Track~$\alpha$-D~\cite{Paper2} computed this base graph explicitly:
 its Laplacian has eigenvalues $\{0, 0, 0, 1, 3, 6\}$ (three zero
 modes reflecting the three disconnected components inherited from
-the $S^3$ graph).
+the $S^3$ graph).  The quotient construction and the exact spectrum
+are pinned live in \texttt{tests/test\_paper25\_s2\_quotient.py}
+(sympy-exact: characteristic polynomial $x^3(x-1)(x-3)(x-6)$;
+crossing-count weights $1, 1, 3$ on the s-chain and $p$-block radial
+bundles, $d$-chain sector isolated).
 
 \subsection{$U(1)$ phase on edges}
 
@@ -474,7 +478,8 @@ transitions, and signed incidence matrix $B$.  Then:
 \item The Hopf quotient (collapsing $m_l$-fibers) yields a
   sub-graph $G^{S^2}$ on $(n, l)$ sectors, with Laplacian spectrum
   $\{0, 0, 0, 1, 3, 6\}$ at $n_{\max} = 3$ (Track
-  $\alpha$-D~\cite{Paper2}).
+  $\alpha$-D~\cite{Paper2}; pinned exactly in
+  \texttt{tests/test\_paper25\_s2\_quotient.py}).
 \item Natural $U(1)$ phases on edges arise from the
   ladder-operator amplitudes; a node-local redefinition
   $\psi_v \to e^{i\chi_v} \psi_v$ acts as a gauge transformation in
@@ -826,7 +831,9 @@ structure is universal.} At $N_{\max} = 5$, the Bargmann graph has
 Laplacian $L_0 = B B^{\top}$, and edge Laplacian
 $L_1 = B^{\top} B$ are well-defined; the first Betti number
 $\beta_1 = E - V + c = 110$ counts independent cycle
-classes.  Under a node-local $U(1)$ gauge transformation
+classes (graph counts at $N_{\max} = 2$--$5$ and the plaquette
+censuses pinned live in \texttt{tests/test\_su3\_wilson\_s5.py},
+class \texttt{TestPaper25S5Pins}).  Under a node-local $U(1)$ gauge transformation
 $\psi_v \to e^{i\chi_v}\psi_v$, the dipole edge amplitudes transform
 covariantly, exactly as in Section~III.C for the $S^3$ case.  The
 combinatorial Hodge decomposition and the SVD identity between
@@ -864,10 +871,18 @@ curvature~$K = 4$ is
 $\lambda_k = 4k(k+2)$ with degeneracy $(k+1)^3$, giving
 $\{0, 12, 32, 60, 96, 140, \ldots\}$ with multiplicities
 $\{1, 8, 27, 64, 125, 216, \ldots\}$.  A least-squares fit of the
-quotient spectrum to the $\mathbb{CP}^2$ sequence under a single
-linear rescaling has a $24.98\%$ maximum relative residual; the
-ratios $\lambda_{\text{quot},k} / \lambda_{\mathbb{CP}^2, k}$ range
-between~$0.08$ and~$0.19$, with no uniform fit.  The quotient is a
+eleven nonzero quotient eigenvalues to the $\mathbb{CP}^2$ sequence
+under a single linear rescaling leaves a $40.8\%$ maximum relative
+residual; the ratios
+$\lambda_{\text{quot},k} / \lambda_{\mathbb{CP}^2, k}$ range
+between~$0.082$ and~$0.185$, so \emph{no} single rescaling can leave
+less than ${\approx}50\%$ maximum residual against the fit
+(${\approx}33\%$ against the data) --- there is no uniform fit under
+any convention.  (An earlier version quoted a $24.98\%$ residual from
+an unrecorded fit convention; it is superseded by the pinned
+computation in \texttt{tests/test\_su3\_wilson\_s5.py}, class
+\texttt{TestPaper25CP2Quotient}, which also pins the twelve-sector
+spectrum above.)  The quotient is a
 combinatorial SO(3)-labeled graph, not a spectral discretization
 of the Kähler $\mathbb{CP}^2$.
 
@@ -932,7 +947,7 @@ Bargmann is well-defined; matter coupling rediscovers the CG
 obstruction.}  Sprint~ST-SU3 (May~2026,
 \texttt{debug/st\_su3\_wilson\_memo.md}, with module
 \texttt{geovac/su3\_wilson\_s5.py} and tests
-\texttt{tests/test\_su3\_wilson\_s5.py} 39/39 pass)
+\texttt{tests/test\_su3\_wilson\_s5.py} 49/49 pass, two slow-marked)
 revisits the non-abelian question with a structurally different
 construction: link variables $U_e \in \mathrm{SU}(3)$ as external
 $3\times 3$ matrices in the \emph{fundamental} representation,

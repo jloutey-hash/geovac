@@ -20,8 +20,13 @@ import json
 import time
 from pathlib import Path
 
-OUT_DIR = Path(__file__).parent / "data"
-OUT_DIR.mkdir(exist_ok=True)
+# This module lives in tests/gravity_support/ (migrated from debug/ on
+# 2026-07-03; see README.md in this directory). Standalone driver runs
+# still write to the transient clean-room dir debug/data/; the mkdir is
+# deferred to main() so that importing this module from the test suite
+# has no filesystem side effects.
+_REPO = Path(__file__).resolve().parents[2]
+OUT_DIR = _REPO / "debug" / "data"
 
 _cg_cache = {}
 
@@ -364,6 +369,7 @@ def main():
 
     lichnerowicz_comparison(all_results)
 
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     out_path = OUT_DIR / "g6_fierz_pauli.json"
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2, default=str)

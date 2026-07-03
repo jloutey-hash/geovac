@@ -15,7 +15,7 @@ Uses K = d_1^T d_1 (Track B3 correction; NOT L_1 = B^T B which gives a contact
 zero on closed loops since closed loops live in ker B).
 
 Output:
-    - debug/data/xcwg_wilson_loop_scaling.json
+    - tests/wilson_rule_b_support/data/xcwg_wilson_loop_scaling.json
     - debug/xcwg_wilson_loop_scaling_memo.md (separately written)
 """
 
@@ -32,7 +32,7 @@ import numpy as np
 
 # Make geovac importable without installing the package.
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir))
+_ROOT = os.path.abspath(os.path.join(_HERE, os.pardir, os.pardir))  # repo root (tests/wilson_rule_b_support/ -> two levels up)
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 
