@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.63.1] - 2026-07-02
+
+**`/qa group5` pre-work — DoD drafted for PI freeze; no panel run.** `docs/qa/group5.done.md` created (8 papers + synthesis; branch deltas: the K = π(B+F−Δ) hard prohibition AT HOME in Paper 2 with enumerate-every-K-sentence, graph-QED census honesty incl. the 1/8→4/8→7/8→8/8 ladder's structural conditions and F₂→0-not-α, gravity-arc dead-end honesty for Paper 51's demoted mechanisms, physics-tier honesty for the Lamb −0.534%; per-paper C8 headline enumeration; run-shapes + committed-seeds hardening inherited). Deterministic baseline: 7/7 gates PASS after fixing the 2 C5 hits (P30's not-claimed list heading "A new"→"No new derivation of α"; the synthesis K-clause "independently derived invariants"→"independently established spectral home" — Observation framing untouched) and 4 stale C11 internal titles (P24/P34/P38/P41 synced). The group5 synthesis .tex was untracked — first committed. Matrix has zero group5 rows (expected; the first cert populates it). **Next: PI freezes the DoD, then the first-cert FULL run fires.**
+
 ## [4.63.0] - 2026-07-02
 
 **`/qa group4` 8th cert (FULL certifying pass) = PASS → group4 CERTIFIED ✅ — the fourth certified branch (after group3, group1, group2).** Fired by the PI after delta-1 CLEAN (the v4.62.1 run-shapes precondition). First full run under the cost package: 5 Sonnet-tiered reviewers (code ×4 + citation) with two seeds each + 3 Opus (claims ×2 + synthesis), terser reports, C17 live.
