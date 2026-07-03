@@ -498,6 +498,27 @@ class TestMultipoleTermination:
         V_high, _, _ = cross_register_eri_matrix(spec_high)
         assert V_low[0, 0, 0, 0] == pytest.approx(V_high[0, 0, 0, 0], rel=1e-15)
 
+    def test_d_orbital_termination_tight_at_L4(self) -> None:
+        """Paper 23 SVII: termination at L_max = l_e + l_e' verified through
+        l = 2 (added 8th cert, 2026-07-02 -- the prose claimed l in {0,1,2}
+        but only l <= 1 was instantiated). n_max=3 on both registers:
+        L_max=4 equals L_max=10 exactly (termination), and the L=4 channel
+        genuinely contributes on the d x d block (tightness ~8.5e-5)."""
+        def build(L: int):
+            spec = CrossRegisterVneSpec(
+                lam_e=1.0, n_max_e=3, lam_n=10.0, n_max_n=3,
+                Z_nuc=1.0, L_max=L,
+            )
+            return cross_register_eri_matrix(spec)
+
+        V10, states, _ = build(10)
+        V4, _, _ = build(4)
+        V3, _, _ = build(3)
+        assert np.allclose(V4, V10, rtol=1e-14, atol=1e-16)
+        d = [i for i, s in enumerate(states) if s[1] == 2]
+        blk = np.ix_(d, d, d, d)
+        assert np.max(np.abs(V4[blk] - V3[blk])) > 1e-6
+
 
 # ---------------------------------------------------------------------------
 # Spec validation

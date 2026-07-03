@@ -249,3 +249,25 @@ class TestDataclassRow2:
         assert c.period == 3
         assert c.group_type == 'noble_gas'
         assert c.supported is True
+
+
+# ---------------------------------------------------------------------------
+# Heavy rows of Paper 16 tab:mu_values (8th cert backfill, 2026-07-02):
+# Kr/Xe/Rn/Og ride the classifier's generic fallback formula path (Xe/Rn are
+# not in _ATOM_DATA, supported=False) and had zero test coverage anywhere.
+# ---------------------------------------------------------------------------
+
+class TestHeavyRowFormulaPath:
+    """nu = N-2 and mu_free = 2(N-2)(N-1) on the fallback path, pinned to
+    the Paper 16 tab:mu_values heavy rows."""
+
+    @pytest.mark.parametrize("Z, nu, mu_free", [
+        (36, 34, 2380.0),    # Kr
+        (54, 52, 5512.0),    # Xe (fallback: not in _ATOM_DATA)
+        (86, 84, 14280.0),   # Rn (fallback)
+        (118, 116, 27144.0), # Og
+    ])
+    def test_heavy_row(self, Z: int, nu: int, mu_free: float) -> None:
+        c = classify_atom(Z)
+        assert c.nu == nu
+        assert c.mu_free == pytest.approx(mu_free)

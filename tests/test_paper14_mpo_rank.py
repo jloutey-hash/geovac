@@ -125,3 +125,24 @@ def test_unified_panel_recomputes_from_live_builder() -> None:
             f"{(chi_H, chi_h1, chi_Vee)} vs shipped "
             f"{(s['chi_H'], s['chi_h1'], s['chi_Vee'])}"
         )
+
+
+@pytest.mark.slow
+def test_balanced_panel_lih_recomputes_from_live_builder() -> None:
+    """8th-cert backfill (2026-07-02): the balanced negative-control panel gets
+    the same live-recompute drift guard as the LiH composed panel -- LiH (the
+    cheapest of the three panel molecules) is rebuilt end-to-end and every
+    boundary chi must match the shipped JSON bit-exactly."""
+    import sprint_s2_v2_balanced_library_panel as bal_panel
+    from geovac.molecular_spec import lih_spec
+
+    shipped = json.loads(
+        (Path(bal_panel.__file__).parent / "data"
+         / "sprint_s2_v2_balanced_library_panel.json").read_text()
+    )["LiH"]
+    live = bal_panel.analyze_pair("LiH", lih_spec, shipped["R"])
+    assert live["n_pauli_composed"] == shipped["n_pauli_composed"]
+    assert live["n_pauli_balanced"] == shipped["n_pauli_balanced"]
+    for got, want in zip(live["boundary_data"], shipped["boundary_data"]):
+        assert (got["cut"], got["chi_composed"], got["chi_balanced"]) == (
+            want["cut"], want["chi_composed"], want["chi_balanced"]), (got, want)

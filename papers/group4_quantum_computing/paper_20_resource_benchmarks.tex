@@ -288,12 +288,17 @@ is solved exactly via FCI:
 
 For BeH$_2$ ($Q=50$), the balanced coupled 4-electron FCI gives
 $E=-14.146$~Ha (10.7\% error), compared to $-11.497$~Ha (27.4\%)
-for composed with PK.  The balanced 1-norm (304.7~Ha) is 14\% lower
-than composed (354.9~Ha), demonstrating that the PK-free architecture
-is cheaper for quantum simulation.
+for composed with PK.  The balanced 1-norm (306.4~Ha) is 18\% lower
+than composed with PK in-Hamiltonian (373.4~Ha; the previously printed
+354.9 came from the deprecated legacy BeH$_2$ builder path---the live
+values are pinned by \texttt{tests/test\_paper20\_library.py}),
+demonstrating that the PK-free architecture is cheaper in the QPE
+regime, where PK must be encoded; with PK partitioned classically (the
+VQE default), the composed electronic-only 1-norm (66.0~Ha,
+Table~\ref{tab:resources}) is far lower.
 
 For H$_2$O ($Q=70$), FCI is infeasible (10 electrons), but the
-Hamiltonian metrics are available: 5{,}798 Pauli terms, 1{,}509~Ha
+Hamiltonian metrics are available: 5{,}798 Pauli terms, 1{,}511~Ha
 1-norm, 168 QWC groups.  The balanced 1-norm is $0.054\times$ the
 composed total (which is dominated by the PK barrier at $Z_{\text{eff}}=6$),
 and $4.2\times$ the composed electronic-only 1-norm.
@@ -313,7 +318,7 @@ cross-center $V_{ne}$ multipole expansion includes a monopole ($1/R$)
 component that decays slowly, causing the electronic energy to remain
 unconverged even at $R = 100$~bohr.  The practical dissociation energy
 computed from the PES well depth ($D_e = 0.161$~Ha at $n_{\max}=2$)
-overestimates the experimental value (0.092~Ha) by 74\%.  Users
+overestimates the experimental value (0.092~Ha) by 75\%.  Users
 requiring dissociation energies should use Gaussian-basis methods for
 the dissociation limit and GeoVac Hamiltonians for single-point
 calculations at experimentally known or DFT-optimized geometries.
@@ -378,7 +383,8 @@ to set the scope boundary at the second-row hydride threshold:
 
 \paragraph{Implication for users.}  Users running the framework for
 first-row hydride chemistry can expect bound PES with quantitative
-overbinding (the 0.20\% / $D_e \times 2.4$ pattern documented in
+overbinding (the 0.20\% single-point / $D_e$ overestimated by
+$\sim$75\% vs.\ experiment pattern documented in
 \S\ref{sec:applicability}).  Users running second-row or below should
 treat the qubit Hamiltonian as a \emph{resource-estimation target}
 only, not as a chemistry-accuracy Hamiltonian.  The Pauli counts,
@@ -450,13 +456,13 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
 \colrule
 \multirow{4}{*}{H$_2$O}
  & GeoVac composed & 70 & 778 & 361 & 21 & --- \\
- & GeoVac balanced & 70 & 5{,}798 & 1{,}509 & 168 & --- \\
+ & GeoVac balanced & 70 & 5{,}798 & 1{,}511 & 168 & --- \\
  & Gaussian STO-3G & 12 & 551 & --- & --- & $0.71\times$ Pauli \\
  & Gaussian cc-pVDZ & 46 & 107{,}382 & --- & --- & $138\times$ Pauli \\
 \colrule
 \multirow{2}{*}{BeH$_2$}
- & GeoVac composed & 50 & 556 & 67.4 & 21 & --- \\
- & GeoVac balanced & 50 & 2{,}652 & 304.7 & 138 & --- \\
+ & GeoVac composed & 50 & 556 & 66.0 & 21 & --- \\
+ & GeoVac balanced & 50 & 2{,}652 & 306.4 & 138 & --- \\
 \end{tabular}
 \end{ruledtabular}
 \raggedright\footnotesize{$^a$Ratio of Gaussian to GeoVac composed Pauli terms.
@@ -477,10 +483,11 @@ For H$_2$O, the composed Hamiltonian has \emph{more} Pauli terms than
 STO-3G (778 vs.\ 551, advantage $0.71\times$) because the GeoVac
 encoding uses 70 qubits (15 spatial orbitals per block $\times$ 5 blocks
 $\times$ 2 spins) while STO-3G uses only 12 qubits (7 spatial orbitals
-with frozen core).  At matched qubit count (not matched accuracy---the
-composed H$_2$O carries a 26\% $R_{\rm eq}$ error), against cc-pVDZ
-(46 qubits) GeoVac has $138\times$ fewer Pauli terms.
-The $O(Q^{2.2})$ vs.\ $O(Q^4)$ scaling guarantees that the GeoVac
+with frozen core).  Against cc-pVDZ (46 qubits vs.\ GeoVac's 70---GeoVac
+uses $1.5\times$ more; not matched accuracy either, as the composed
+H$_2$O carries a 26\% $R_{\rm eq}$ error), GeoVac has $138\times$
+fewer Pauli terms.
+The measured $O(Q^{2.2})$ vs.\ $O(Q^4)$ scaling implies that the GeoVac
 advantage increases with basis size.
 
 \subsection{Scaling exponents}
@@ -841,7 +848,9 @@ Second-row molecules are accessed identically to first-row:
 from geovac.ecosystem_export import hamiltonian
 H = hamiltonian('NaH', R=3.566)
 print(H.n_terms, H.one_norm)
-# 223, 171.46
+# 223, 171.46  (composed API: 222 non-identity + identity; FULL 1-norm
+#  incl. the identity coefficient -- cf. the BALANCED Table row
+#  (239 terms, lambda_ni = 18.9), a different builder and convention)
 \end{lstlisting}
 
 \noindent The Pauli scaling exponent $Q^{2.50}$ is confirmed across both
@@ -922,8 +931,9 @@ PySCF dependency added) and produces files that read back
 bit-exactly: round-trip on LiH composed at $n_{\max} = 2$
 gives $\max|h_1^{\rm diff}| = 0.0$ and
 $\max|\mathrm{eri}^{\rm diff}| = 0.0$; a seven-system sample
-across LiH, BeH$_2$, H$_2$O, NaH, KH, MgH$_2$, CaH$_2$ gives
-relative error below $10^{-10}$ across all integrals.  This
+across LiH, BeH$_2$, H$_2$O, NaH, CO, ScH, H$_2$ gives
+relative error below $10^{-10}$ across all integrals
+(\texttt{tests/test\_ecosystem\_export.py}).  This
 exporter unblocks DMRG (via Block2 / pyscf), CCSD(T) (via
 pyscf), and AFQMC (via Auxiliary-Field Monte Carlo packages)
 simultaneously.

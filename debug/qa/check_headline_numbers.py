@@ -98,6 +98,20 @@ REGISTRY = [
         "exempt_if_nearby": r"historical|stale|rested\s+on|retired",
         "files": GROUP4_FILES,
     },
+    {
+        "id": "beh2-h2o-qpe-onenorm-vintage",
+        "scope": "group4",
+        "severity": "fail",
+        "canonical_note": "QPE-regime 1-norm cells (identity-included convention), "
+                          "live-builder values pinned 2026-07-02 (8th cert): BeH2 "
+                          "balanced 306.4 / composed-with-PK 373.4 (354.9 was the "
+                          "deprecated legacy-builder vintage), H2O balanced 1,511. "
+                          "Retired variants: 354.9, 304.7, 1{,}509 (as the balanced "
+                          "H2O 1-norm).",
+        "pattern": r"354\.9|304\.7|1\{,\}509~?Ha",
+        "exempt_if_nearby": r"legacy|previously\s+printed|vintage|historical|stale",
+        "files": GROUP4_FILES,
+    },
 ]
 
 

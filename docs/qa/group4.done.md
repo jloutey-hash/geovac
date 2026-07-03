@@ -3,12 +3,19 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only group4-specific scope + deltas + the branch watch-notes.
 
-> **STATUS: DRAFTED 2026-06-28 for PI freeze** (fifth pre-registered `/qa` target; the
-> QC/NISQ/VQE branch). Inherits criteria.md C1–C16. Branch-defining risk = **QC-resource-
-> claim honesty + the CF-1 pair-diagonal-ERI disposition** (encoded as a C8/C3/C5/§1.5
-> sharpening, not a new number). The §C8 headline numbers below are pending the **CF-1
-> decision** (disclose-and-keep vs switch-to-global; see `docs/qa/group4.carryforward.md`
-> + the 2026-06-28 sweep) — FREEZE must resolve which set is authoritative.
+> **STATUS: CERTIFIED ✅ 2026-07-02 (v4.63.0)** — the 8th `/qa group4` run (the FULL
+> certifying pass, fired after delta-1 CLEAN under the v4.62.1 run-shapes protocol)
+> **PASSED**: 13/13 sensitivity (incl. all 10 Sonnet-tier seeds) / 6/6 specificity, zero
+> remaining verified MATERIAL after three in-run loop-until-dry cycles, deterministic ×7
+> green, all new pins green, zero seed leakage. Fourth certified branch (after group3
+> v4.21.1, group1 v4.49.0, group2 v4.51.0). Chronicle in the change log below; canonical
+> memo `debug/sprint_group4_8thcert_memo.md`.
+>
+> *(Original freeze note, retained for the record:)* DRAFTED 2026-06-28 for PI freeze
+> (fifth pre-registered `/qa` target; the QC/NISQ/VQE branch). Inherits criteria.md
+> C1–C17. Branch-defining risk = **QC-resource-claim honesty + the CF-1
+> pair-diagonal-ERI disposition** (encoded as a C8/C3/C5/§1.5 sharpening, not a new
+> number). CF-1 resolved **A=disclose** (v4.53.0).
 
 **Scope (non-trunk group4):** the **4 quantum-computing papers** —
 **Paper 14** (qubit encoding / Pauli-sparsity — the KEYSTONE), **Paper 16**
@@ -105,7 +112,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     metric (not topological) singularity, smooth through $Z=1/\alpha$.
   - **Paper 20:** ⚑ LiH composed **334 Pauli @ 30q vs STO-3G 907 @ 12q, 13× fewer QWC**
     (the market test — re-prices to parity under global-$M_L$); balanced coupled (PK-free)
-    binds LiH at **$R_{\rm eq}=3.015$ bohr, 878 Pauli @ 30q, 0.20%** single-point energy at
+    binds LiH at **$R_{\rm eq}=3.227$ bohr computed (7.0% above the experimental 3.015), 878 Pauli @ 30q, 0.20%** single-point energy at
     the minimum; **row-conditional** chemistry-accuracy (first-row binds; second-row NaH↓
     monotone overattraction — the honest §scope_boundary); library **37 systems** (35 composed
     + He + H2, $Z=1$–56 H–Ba; decided 2026-06-28, this watch-note synced 2026-07-01); $O(Q^{2.5})$ universal vs
@@ -352,6 +359,25 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   upgrades (878→SOUND, Z=1–56, O(Q^2.5) LiH-fit note, magic→SOUND, +2 §VII rows). Post-remediation: 6 gates PASS,
   5 papers 0-errors, 12/12+3/3+7/7 new/affected pins green, zero seed leakage. **Certifying run (8th) HELD for PI.**
   Per-run detail: CHANGELOG v4.62.0 + `debug/sprint_group4_7thcert_remediation_memo.md`.
+- 2026-07-02 — **8th cert (FULL certifying pass, PI-fired post-clean-delta) = PASS → group4 CERTIFIED ✅ (v4.63.0).**
+  First full run under the v4.62.1 cost package. Calibration **13/13 sens / 6/6 spec** (2 seeds per
+  Sonnet-tiered agent ×5 + 1 per Opus ×3; every seed caught by its own agent; P23-code proved the planted
+  "hw-grid interpolation" rationale fabricated by reading the production source; P20-code proved the planted
+  justifying comment false by checking the claimed alternate coverage). Three in-run loop-until-dry cycles:
+  **(1) panel** → 4 genuine MATERIALs remediated (P14 stale TM-automation ×2 loci vs the registry-verified
+  all-ten state; §hopf 6-system/254 claims un-tested → He spectrum test + per_block 254-sum pin + honest
+  scoping; P20 FCIDUMP seven-system list → the actually-tested set; matched-qubit→matched-raw-JW-convention
+  ×2) + the §BeH₂–H₂O λ-convention re-verification (identity-INCLUDED; composed-BeH₂ 354.9 was
+  legacy-builder vintage → 373.4 live, QPE direction survives at 18%; 6 cells pinned + new C17 family);
+  **(2) critic→gap-closure** (12 never-enumerated regions) → 1 MATERIAL: **eq:dirac_fs printed (Zα)⁴ vs the
+  Z⁴α² its own code/test/sibling-term carry** (the run-7 P16 wrong-printed-equation class) → fixed, 43/43;
+  **(3) re-scan of the remediation diff** (18 hunks, seeded) → 1 tail defect my own sync introduced
+  (P14:1036 sibling 355/361 → 66/359 live) → fixed, dry. Backfills: P16 heavy-row pins (Kr/Xe/Rn/Og),
+  ℓ=2 multipole termination (live-verified tight), balanced-MPO drift guard, 32.6 pin, P23 3×10⁵→5×10⁵
+  body locus, citations (Tung Wei-Cheng, Burkat J./N., Chawla v2 title, 5 P16 orphans removed).
+  Protocol hardening adopted: commit seeds onto the worktree branch (two reviewers legitimately enumerated
+  uncommitted seeds via git diff). Cost ≈2.49M subagent tokens, ~half billed at Sonnet tier, 13 seeds,
+  3 cycles. Canonical memo `debug/sprint_group4_8thcert_memo.md`.
 - 2026-07-02 — **Delta-verification #1 (PI-fired, first run under the v4.62.1 run-shapes protocol) = CLEAN-DELTA → the full certifying (8th) run is EARNED.**
   Scope = diff 51a8b1a..HEAD (the 7th-cert remediation: 206 insertions across 9 files). Deterministic gates ×7
   (incl. the new C17) whole-target PASS. Three delta reviewers, hunks pasted (no file reads, no worktree, no critic):

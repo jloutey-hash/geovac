@@ -372,3 +372,78 @@ class TestEcosystemExportTapered:
         ham_ext = hamiltonian('LiH', max_n=2, tapered='extended')
         ham_full = hamiltonian('LiH', max_n=2, tapered='full')
         assert ham_ext._metadata['Q_tapered'] - ham_full._metadata['Q_tapered'] == 2
+
+
+# ---------------------------------------------------------------------------
+# Paper 14 SS[hopf_tapering] quantified library claims (8th-cert backfill,
+# 2026-07-02): the 254-qubit library saving and a second continuously-verified
+# spectrum-preservation case (He) beyond H2.  The 6-system 4e-15 measurement
+# is v2.6.0 memo-recorded; the paper sentence now cites exactly this backing.
+# ---------------------------------------------------------------------------
+
+class TestLibraryTaperingHeadlines:
+
+    @pytest.mark.slow
+    def test_library_delta_q_sum_is_254(self) -> None:
+        """Sum of per_block-mode delta_Q over all 37 systems = 254 qubits
+        (the paper's savings convention: He/H2 save 3, CO/N2/F2 save 12;
+        global mode saves a uniform 3/system = 111, a different quantity)."""
+        from geovac.ecosystem_export import hamiltonian, _SYSTEM_REGISTRY
+        total = 0
+        for name in sorted(set(_SYSTEM_REGISTRY.values())):
+            H = hamiltonian(name, tapered='per_block')
+            total += H.metadata['delta_Q']
+        assert total == 254, f"library delta_Q sum {total}, paper says 254"
+
+    def test_he_ground_state_preserved(self) -> None:
+        """He (Q=10): the tapered ground energy matches the naive ground
+        energy after the standard sector-sign sweep (the H2 end-to-end
+        pattern, second continuously-verified system)."""
+        from itertools import product
+
+        from openfermion import jordan_wigner
+
+        from geovac.composed_qubit import build_composed_hamiltonian
+        from geovac.molecular_spec import MolecularSpec, OrbitalBlock
+        from geovac.qubit_encoding import build_fermion_op_from_integrals
+        from geovac.z2_tapering import (
+            apply_hopf_tapering, build_pm_rotation, hopf_tapered_from_spec,
+            rotate_h1_eri,
+        )
+
+        spec = MolecularSpec(
+            name='He',
+            blocks=[OrbitalBlock(
+                label='He_core', block_type='atomic', Z_center=2.0,
+                n_electrons=2, max_n=2,
+            )],
+            nuclear_repulsion_constant=0.0,
+        )
+        out = hopf_tapered_from_spec(spec, mode='global')
+        result = build_composed_hamiltonian(spec, pk_in_hamiltonian=True)
+        qop_naive = jordan_wigner(build_fermion_op_from_integrals(
+            result['h1'], result['eri'], result['nuclear_repulsion'],
+        ))
+        E_naive = _ground_state_energy(qop_naive, out['Q_naive'])
+
+        n_stab = out['Q_naive'] - out['Q_tapered']
+        qop_rot = jordan_wigner(build_fermion_op_from_integrals(
+            *rotate_h1_eri(
+                result['h1'], result['eri'],
+                build_pm_rotation(out['orbital_table'])[0],
+            ),
+            result['nuclear_repulsion'],
+        ))
+        best_E = None
+        for signs in product([+1, -1], repeat=n_stab):
+            qop_tap, _ = apply_hopf_tapering(
+                qop_rot, out['parity'], orbital_table=out['orbital_table'],
+                mode='global', sector_signs=list(signs),
+            )
+            E = _ground_state_energy(qop_tap, out['Q_tapered'])
+            if E is not None and (best_E is None or E < best_E):
+                best_E = E
+
+        assert best_E is not None
+        rel_err = abs(best_E - E_naive) / max(abs(E_naive), 1e-30)
+        assert rel_err < 1e-12, (E_naive, best_E)

@@ -989,7 +989,7 @@ BeH$_2$ & 1 &  10 &   198.20 &      4{,}432 &     14{,}015 \\
       & 3 & 140 &   735.60 &     16{,}449 &     52{,}015 \\
 \hline
 H$_2$O$^\dagger$ & 1 &  14 & 18{,}913 &  422{,}904 & 1{,}337{,}503 \\
-      & 2 &  70 & 28{,}053 &  627{,}356 & 1{,}983{,}698 \\
+      & 2 &  70 & 28{,}055 &  627{,}356 & 1{,}983{,}698 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1031,10 +1031,10 @@ $E_{\mathrm{full}} = \langle\psi|H_{\mathrm{elec}}|\psi\rangle
 + \langle\psi|H_{\mathrm{PK}}|\psi\rangle$
 holds with residual $< 10^{-13}$~Ha.
 This quantum--classical partitioning reduces the H$_2$O quantum
-Hamiltonian 1-norm from $28{,}053$~Ha to $361$~Ha ($78\times$),
-with no approximation.  The partitioned 1-norms across all composed
-systems are comparable: LiH $33$~Ha, BeH$_2$ $355$~Ha, H$_2$O
-$361$~Ha.
+Hamiltonian 1-norm from $28{,}055$~Ha to $359$~Ha ($78\times$),
+with no approximation.  The partitioned electronic 1-norms across the
+composed systems all sit far below their with-PK values: LiH $33$~Ha,
+BeH$_2$ $66$~Ha, H$_2$O $359$~Ha.
 
 The commutator-based bound (Sec.~\ref{sec:onenorm}) provides an
 additional $4$--$5\times$ step reduction for composed systems at
@@ -1303,7 +1303,9 @@ $n_{\max} = 3$ ($2.31\times$).  For the composed pipeline at
 $n_{\max} = 2$, including the angular gradient increases Pauli counts
 from 562 $\to$ 1{,}498 (LiH), 936 $\to$ 2{,}496 (BeH$_2$), and
 1{,}310 $\to$ 3{,}494 (H$_2$O)---a uniform $2.67\times$ ratio---bringing
-the total TC/standard ratio to $4.49\times$.  The angular gradient is
+the total TC/standard ratio to $4.49\times$ (the gradient sprint's
+baseline build differs from Table~\ref{tab:tc_composed} by 2--3 terms,
+separate vintage runs; the multipliers are unaffected).  The angular gradient is
 therefore a \emph{negative result for quantum efficiency}: the cost
 exceeds the accuracy benefit by more than two orders of magnitude at the
 composed operating point.  The radial-only TC Hamiltonian
@@ -1344,17 +1346,18 @@ System & $Q$ & \multicolumn{2}{c}{Pauli terms}
   & & Comp. & Bal. & Comp. & Bal. \\
 \hline
 LiH     &  30 &    333 &    878 &  32.6 &   74.1 \\
-BeH$_2$ &  50 &    555 & 2{,}652 &  66.0 &  304.7 \\
-H$_2$O  &  70 &    777 & 5{,}798 & 359   & 1{,}509 \\
+BeH$_2$ &  50 &    555 & 2{,}652 &  66.0 &  306.4 \\
+H$_2$O  &  70 &    777 & 5{,}798 & 359   & 1{,}511 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
 The Pauli ratio grows with block count ($2.63\times$ to $7.45\times$),
-but the 1-norm ratio favors balanced for BeH$_2$ ($0.86\times$
-composed) where PK's $Z^2$-scaled barrier is costly.  For H$_2$O,
-the balanced 1-norm (1{,}509~Ha) is $18.6\times$ lower than the
-full composed 1-norm with PK (28{,}053~Ha).  Composed and balanced
+but the 1-norm ratio favors balanced for BeH$_2$ ($0.82\times$
+composed with PK in-Hamiltonian, the QPE-relevant convention; live
+builders) where PK's $Z^2$-scaled barrier is costly.  For H$_2$O,
+the balanced 1-norm (1{,}511~Ha) is $18.6\times$ lower than the
+full composed 1-norm with PK (28{,}055~Ha).  Composed and balanced
 are thus complementary encoding strategies: composed is cheaper for
 VQE (Pauli-count dominated), balanced is cheaper for QPE on heavy
 atoms (1-norm dominated, PK eliminated).  The balanced coupled
@@ -1591,9 +1594,11 @@ LiH ($333$ at the same~$Q$)---giving Pauli/$Q = 9.23$, below the
 universal coefficient of~11.10.  The reduction reflects the $d$-block's
 lower ERI density entering the block-diagonal sum.
 
-This is a scoping result: the atomic classifier does not yet automate
-transition metal decomposition ($Z = 23$--30), and the Hamiltonians
-have not been benchmarked against FCI or Gaussian baselines.
+The atomic classifier now automates the full first transition series
+($Z = 21$--30, type-F dispatch), and all ten hydrides (ScH--ZnH) ship
+in the 37-system library; the Hamiltonians remain resource-level
+results---they have not been benchmarked against FCI or Gaussian
+baselines.
 Nevertheless, the structural finding---that $d$-orbital blocks have a
 lower \emph{pair-diagonal} Pauli/$Q$ ratio than $s$/$p$ blocks
 (Sec.~\ref{sec:eri_rule})---is an artifact of the pair-diagonal rule
@@ -1907,8 +1912,8 @@ per the new Paper~18 \S IV subtier (forthcoming, drop-in in
 \texttt{verify\_spinor\_pi\_free} certifier (in
 \texttt{geovac/spinor\_certificate.py}, Track T5) walks the sympy
 expression tree of each matrix element and rejects any appearance of
-$\pi$, $\zeta$, $\log$, $E_1$, or unregistered free symbol. T3's
-symbolic spin-orbit block passes the certifier cleanly for all
+$\pi$, $\zeta$, $\log$, $E_1$, or unregistered free symbol. The
+symbolic spin-orbit block (Track T2) passes the certifier cleanly for all
 $n_{\max}$ up to 4; manual contamination (e.g., injecting
 $\pi \cdot \alpha^2 / 96$ into a coefficient) is rejected with a
 clear diagnostic.
@@ -1958,8 +1963,8 @@ exactly.  The three terms---spin-orbit (Tier~2, Track~T2), Darwin, and
 mass-velocity (Tier~3, Track~T8)---combine to the Dirac formula
 \begin{equation}\label{eq:dirac_fs}
   E_{\mathrm{SO}} + E_{\mathrm{D}} + E_{\mathrm{MV}}
-  \;=\; -\frac{(Z\alpha)^4}{2n^4}\left[\frac{n}{j+\tfrac{1}{2}}
-        - \frac{3}{4}\right],
+  \;=\; -\frac{Z^4\alpha^2}{2n^4}\left[\frac{n}{j+\tfrac{1}{2}}
+        - \frac{3}{4}\right] \quad \text{(Hartree units)},
 \end{equation}
 verified as an exact sympy symbolic equality for all 16 hydrogenic
 states $(n,l,j)$ through $n = 4$ and all $Z$ tested (including symbolic
@@ -2207,11 +2212,14 @@ coefficient $c^0(l,m;l,m) = 1$ for any angular momentum.  Under
 Jordan--Wigner encoding, the number-operator products $n_p n_q$ map to $Z$
 and $ZZ$ strings, giving $\binom{Q}{1} + \binom{Q}{2} = 55$ terms.
 
-The 56 \emph{exchange} terms arise from 40 non-direct ERIs across three
-Gaunt channels: (i)~$s$--$s$ exchange ($1s \leftrightarrow 2s$, 12 ERIs
-$\to$ 16 Pauli terms), (ii)~$s$--$p$ cross-Coulomb (off-diagonal $s \times$
-diagonal $p$, 24 ERIs $\to$ 24 terms), and (iii)~$k=1$ dipole coupling
-($s \leftrightarrow 2p_0$, 16 ERIs $\to$ 16 terms).  The total 65 nonzero
+The 56 \emph{exchange} terms arise from the 40 non-direct ERIs (65
+total minus 25 direct; 24 at $k=0$ and 16 at $k=1$, forced by the same
+pair combinatorics as the $7^2+4^2$ count below) across three Gaunt
+channels: (i)~$s$--$s$ exchange (both pairs off-diagonal
+$1s \leftrightarrow 2s$; 16 Pauli terms), (ii)~$s$-off-diagonal
+cross-Coulomb (one $(1s,2s)$ pair against a diagonal $s$ or $p$ pair;
+24 terms), and (iii)~$k=1$ dipole coupling ($s \leftrightarrow 2p_0$,
+16 ERIs $\to$ 16 terms).  The total 65 nonzero
 ERI quartets per block follow from $7^2 + 4^2 = 65$ allowed Gaunt pair
 combinations at $k=0$ and $k=1$.
 
@@ -2326,11 +2334,13 @@ Applied across the 37-system library covered by the
 \texttt{ecosystem\_export} interface, this gives $\Delta Q$ ranging
 from $-3$ (He, H$_2$; $n_{\rm sb} = 1$) to $-12$ (CO, N$_2$, F$_2$;
 $n_{\rm sb} = 10$), with total library qubit savings of $254$
-(mean $-6.9$ per molecule) and machine-precision spectrum
-preservation ($|\Delta E_{\rm GS}|/|E_{\rm GS}| \le 4 \times 10^{-15}$
-verified directly for every system small enough to diagonalise the
+(mean $-6.9$ per molecule; the library sum is pinned by
+\texttt{tests/test\_z2\_tapering.py}) and machine-precision spectrum
+preservation ($|\Delta E_{\rm GS}|/|E_{\rm GS}| \le 4 \times 10^{-15}$,
+measured at v2.6.0 for every system small enough to diagonalise the
 naive Hamiltonian sparsely at $Q_{\rm naive} \le 20$: H$_2$, He,
-NaH, KH, SrH, BaH).  The remaining $31/37$ systems rely on the
+NaH, KH, SrH, BaH; the H$_2$ and He cases are continuously verified by
+\texttt{tests/test\_z2\_tapering.py}).  The remaining $31/37$ systems rely on the
 structural argument:\ the basis rotation is orthogonal, the
 $\{P_i\}$ are mutually commuting Pauli $Z$-strings with disjoint
 qubit supports (per-stabiliser commutator residual $< 10^{-13}$
@@ -2796,10 +2806,11 @@ For LiH~STO-3G (6~spatial orbitals, $Q = 12$, FCI $E = -7.881$~Ha),
 the raw JW Hamiltonian has 907~Pauli terms, $\lambda = 34.3$~Ha, and
 273~QWC groups.  The composed GeoVac LiH ($Q = 30$, electronic-only
 with PK partitioned classically) has 334~Pauli terms,
-$\lambda = 32.6$~Ha, and 21~QWC groups.  At matched qubit count
-(not matched accuracy---the composed LiH carries $\sim$5\% $R_\mathrm{eq}$
-geometry error and does not bind under qubit FCI),
-GeoVac has 2.7$\times$ fewer Pauli terms and 13$\times$ fewer
+$\lambda = 32.6$~Ha, and 21~QWC groups.  At matched raw-JW
+convention---not matched qubit count (GeoVac uses $2.5\times$ more
+qubits, $Q=30$ vs.\ $12$) and not matched accuracy (the composed LiH
+carries $\sim$5\% $R_\mathrm{eq}$ geometry error and does not bind
+under qubit FCI)---GeoVac has 2.7$\times$ fewer Pauli terms and 13$\times$ fewer
 QWC groups (these absolute multipliers use the pair-diagonal ERI rule,
 Sec.~\ref{sec:eri_rule}; near parity under the exact rule), with
 essentially identical 1-norm ($0.95\times$).
@@ -2987,8 +2998,8 @@ the composed partition Hamiltonian is accurate when solved exactly.
 \paragraph{Note added v2.4.0.}
 The molecule library now spans 37 systems (35 composed molecules plus
 the He and H$_2$ reference atoms), including
-two transition metal hydrides: ScH ($Z = 21$, [Ar] frozen core) and
-TiH ($Z = 22$, [Ar] frozen core).  Both use isolated $d$-orbital
+the full first transition series of hydrides (ScH--ZnH; $Z = 21$--30,
+[Ar] frozen cores).  All ten use isolated $d$-orbital
 valence blocks ($l_{\min} = l_{\max} = 2$) with ERI density of 4.0\%,
 half that of $s$+$p$ blocks (8.9\%).  The resulting Pauli/$Q$
 ratio of~9.23 falls below the universal coefficient of~11.10 \emph{under
@@ -3180,7 +3191,7 @@ J.~Loutey,
 GeoVac Paper~29 (2026).
 
 \bibitem{burkat_fitzpatrick2025}
-G.~Burkat and S.~Fitzpatrick,
+J.~Burkat and N.~Fitzpatrick,
 ``The Quantum Paldus Transform: Efficient Circuits with Applications,''
 arXiv:2506.09151 (2025).
 
