@@ -123,6 +123,26 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
 
 ## Change log
 
+- 2026-07-02 — **1st cert (FULL run, whole-group) = FAIL (fully calibrated) → remediation register
+  opened (see `debug/sprint_group5_1stcert_memo.md`).** Panel 11 agents + critic + 4-agent recovery
+  wave + gap-closure: **final sensitivity 18/18 scoreable seeds** (per-dimension after recovery;
+  2 seeds retired instrument-invalid — planted in the WH1 comparator file), **specificity 6/6**;
+  4 cross-catches (the P51 abstract seed caught by four independent agents). Tier lesson: Sonnet-code
+  missed 4 tolerance seeds under BROAD prompts but caught the class under NARROW assert-audit prompts
+  (prompt scope > model tier). Genuine yield (registers A–F, E1–E20): the pre-downgrade
+  conjecture-idiom class (P25 whole-paper + P33 ×2); P51 propinquity zombies ×2 (C16 pattern gap);
+  P28:1990 carries the §3-documented-WRONG factor-of-2 cone reading that P51 rebuts (found by the
+  first-ever P28↔P51 embedded-gravity-block diff — every shared NUMBER matches); parker1980
+  misattribution on the 0.4%-match headline; P36 phantom bibitems (Antognini/Karshenboim/PDG/CODATA);
+  Furry 8/8 HARDCODED in production (tests = tautology; the real derivation archived, assert-free);
+  two more production-tautology census rules + swapped rule numbering; compute_self_energy(4) CRASH
+  (sorted-by-float on complex-cast sympy eigenvalues) making "verified n_max=2..6" currently false;
+  corpus-wide mpmath.mp.dps collection-order collision (11 reproducible failures); the
+  Bochner–Weitzenböck 2==2 tautology; an unconditionally-true NaN assert; assert-strength attrition
+  at the pride-of-place numbers (8.8e-8 gated at 1e-3; 0.2363 gated at >0). Gate hardenings queued:
+  C13 bare-function-name cites; C16 propinquity broadening. Remediation = Tier-1 fix-on-sight block
+  + Tier-2 named sprint-scale follow-ons (memo §Verdict), then delta cycles → final certifying FULL run.
+
 - 2026-07-02 — DRAFTED for PI freeze (v4.63.1 pre-work): deterministic gates all
   7 PASS after fixing the 2 C5 hits (P30 not-claimed heading "A new"→"No new
   derivation of α"; synthesis "independently derived invariants"→"independently
