@@ -35,12 +35,14 @@ on the GeoVac graph.  When QED is built on the scalar Fock graph with
 Gaunt/Clebsch--Gordan sparsity built into the angular-momentum vertex.
 Building on the native Dirac graph with $(n, \kappa, m_j)$ node labels
 recovers three additional spinor-intrinsic rules ($\Delta m_j$
-conservation, spatial parity, charge conjugation) for a total of
+conservation, spatial parity, and Furry's theorem---the
+charge-conjugation consequence, recovered kinematically) for a total of
 4/8.  Promoting the photon from a scalar 1-cochain to a vector
 harmonic with explicit $(q, m_q)$ angular labels and Wigner~$3j$
 vertex coupling recovers six angular-momentum rules at once
-(Gaunt/CG, vertex parity, $\mathrm{SO}(4)$ channel count, $\Delta m_j$,
-spatial parity, Ward identity), at the cost of exactly one factor of
+(vertex parity, $\mathrm{SO}(4)$ channel count, the triangle inequality
+on $n$, $\Delta m_j$, spatial parity, Ward identity), at the cost of
+exactly one factor of
 $1/(4\pi)$ per loop, which we identify as the $S^2$ Weyl exchange
 constant of the Hopf base.  This recovers 7/8 rules for scalar
 electrons.  The eighth rule, Furry's theorem, is recovered for Dirac
@@ -62,9 +64,9 @@ single-particle Dirac spinor phase constraint, costing nothing
 (zero-cost identity at the vertex bilinear).
 \end{itemize}
 The partition is independent of the Paper~2 fine-structure-constant
-conjecture and stands as an observation about the structural cost of
+observation and stands on its own as an observation about the structural cost of
 recovering each QED selection rule on a discrete spectral
-construction.  All claims are verified by 99 tests in
+construction.  All claims are verified by 100 tests in
 \texttt{tests/test\_vector\_qed.py}.
 \end{abstract}
 
@@ -134,7 +136,7 @@ along with the per-loop $1/(4\pi)$ calibration cost and the
 zero-cost Dirac kinematic identity for Furry.  No new physics, no
 fitting parameters; the result follows from explicit construction in
 \texttt{geovac/vector\_qed.py} and verification in
-\texttt{tests/test\_vector\_qed.py} (99 tests).
+\texttt{tests/test\_vector\_qed.py} (100 tests).
 
 % ===================================================================
 \section{The Graph-Native Baseline: 1/8}
@@ -186,8 +188,12 @@ the Fock graph: its unique edge $e_0$ connects it to $|2, 0, 0\rangle$.
 The path-graph Laplacian inverse evaluated at this leaf edge gives
 $G_\gamma[e_0, e_0] = (n_{\max} - 1)/n_{\max}$ exactly, and the vertex
 bilinear contributes a factor of~2; this is the only contribution to
-$\Sigma(\mathrm{GS})$.  Verified at $n_{\max} = 2, 3, 4, 5, 6$ in
-\texttt{tests/test\_graph\_qed\_self\_energy.py}.
+$\Sigma(\mathrm{GS})$.  Continuously verified at $n_{\max} = 2$
+(exact rational arithmetic) in
+\texttt{tests/test\_graph\_qed\_self\_energy.py}; the original sprint
+driver additionally swept $n_{\max} = 2$--$5$ (archived measurement).
+The closed form itself holds for all $n_{\max}$ by the path-graph
+Laplacian identity above.
 \end{proof}
 
 The continuum mechanism (vertex parity: $l_a + l_b + l_\gamma$ odd
@@ -340,7 +346,8 @@ $\gamma^\mu$-vertex coupling with the $\boldsymbol{\alpha}$-matrix
 form, the vertex bilinear satisfies $V(a, a, q, m_q) = 0$
 identically.  In particular Furry's theorem (Rule~7) holds on the
 Dirac graph + vector-photon construction, recovering 8/8 selection
-rules.
+rules (census evaluated at $n_{\max} = 2$; the Ward-identity ratio
+degrades at $n_{\max} = 3$ --- see the open questions in \S VI).
 \end{theorem}
 
 \begin{proof}
@@ -490,7 +497,7 @@ baseline is:
 By Theorems~\ref{thm:scalar_7_of_8} and~\ref{thm:dirac_8_of_8},
 together with Proposition~\ref{prop:pendant_edge} and
 Sec.~\ref{sec:dirac_graph}.  Verified numerically in
-\texttt{tests/test\_vector\_qed.py} (99 tests).
+\texttt{tests/test\_vector\_qed.py} (100 tests).
 \end{proof}
 
 \begin{table}[h]
@@ -548,7 +555,8 @@ self-energy is
 \]
 when summed over the only allowed $q$ at $n_{\max} = 2$ ($q = 1$ with
 $m_q \in \{-1, 0, 1\}$).  Verified in test
-\texttt{test\_vector\_qed\_l1\_4pi}.
+\texttt{test\_scalar\_l1\_self\_energy\_is\_one\_over\_4pi}
+(\texttt{tests/test\_vector\_qed.py}).
 \end{proof}
 
 \subsection{Why $1/(4\pi)$}
@@ -557,11 +565,13 @@ The $S^2 = S^3 / S^1$ Hopf base has total surface area $4\pi$ (in
 unit-radius normalization).  Wigner-3$j$ matrix elements integrated
 over the full angular range produce a factor of $1/(4\pi)$ as the
 solid-angle normalization of the Weyl Hodge--star operator on the
-1-form sector of $S^2$~\cite{paper25,jeffrey2010}.  In the spectral
-action language~\cite{chamseddine_connes2010}, the per-loop factor
-$1/(4\pi)$ is the $a_2$ heat-kernel coefficient of the vector
-Laplacian on $S^2$, which appears as the Hopf-base contribution at
-each gauge-loop integration in the $S^3$ spectral expansion.
+1-form sector of $S^2$~\cite{paper25,jeffrey2010}.  Phrased in the
+spectral-action vocabulary of~\cite{chamseddine_connes2010} (the
+vocabulary, not a theorem of that reference), the per-loop factor
+$1/(4\pi)$ is read as the $a_2$ heat-kernel coefficient of the vector
+Laplacian on $S^2$, appearing as the Hopf-base contribution at
+each gauge-loop integration in the $S^3$ spectral expansion ---
+GeoVac's own identification.
 
 \begin{observation}[Per-loop $1/(4\pi)$ as Paper~18 calibration]
 \label{obs:paper18_calibration}
@@ -702,9 +712,9 @@ $1/(4\pi)$ per loop (Tier~II, calibration), and one (Furry's theorem)
 is recovered by a kinematic identity of the Dirac single-particle
 vertex bilinear at zero cost (Tier~III).
 
-The partition is structural and verified by 99 tests in
+The partition is structural and verified by 100 tests in
 \texttt{tests/test\_vector\_qed.py}.  It does not depend on the
-Paper~2 conjecture about the fine-structure constant; it stands as an
+Paper~2 observation about the fine-structure constant; it stands as an
 observation about the cost of recovering each QED selection rule on a
 discrete spectral construction.
 
@@ -720,8 +730,8 @@ this form in the QED literature.
 \begin{thebibliography}{99}
 
 \bibitem{jeffrey2010}
-A.~Jeffrey, \textit{Handbook of Mathematical Formulas and
-Integrals}, 4th ed., Academic Press (2010).
+A.~Jeffrey and H.-H.~Dai, \textit{Handbook of Mathematical
+Formulas and Integrals}, 4th ed., Academic Press (2008).
 
 \bibitem{chamseddine_connes2010}
 A.~H.~Chamseddine and A.~Connes, ``Noncommutative geometry as a

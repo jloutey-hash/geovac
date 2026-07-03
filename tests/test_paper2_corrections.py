@@ -27,9 +27,10 @@ def test_paper2_cubic_root_value():
 
 
 def test_paper2_viiid_identity_k0():
-    """Paper 2 §VIII.D: with the corrected lower limit k=0, the ratio
-    B_formal(m)/N(m) = d collapses to numerator d(m-2)(m+d+2), root m=2 -
-    matching the paper's stated quadratic. k=1 does NOT give this."""
+    """Paper 2 §VIII.E (S³ specificity): with the corrected lower limit k=0,
+    the ratio B_formal(m)/N(m) = d collapses to numerator d(m-2)(m+d+2),
+    root m=2 - matching the paper's stated quadratic. k=1 does NOT give
+    this (asserted below since the 1st-cert remediation, 2026-07-03)."""
     d, m, k = sp.symbols('d m k', positive=True)
     g = sp.binomial(k + d, d) - sp.binomial(k + d - 2, d)
     absL = k * (k + d - 1)
@@ -41,3 +42,8 @@ def test_paper2_viiid_identity_k0():
     assert sp.simplify(num.subs(m, -(d + 2))) == 0
     # N(2) = (d+1)(d+4)/2 under the corrected k=0 lower limit
     assert sp.simplify(N.subs(m, 2) - (d + 1) * (d + 4) / 2) == 0
+    # the falsifiable converse: the k=1 lower limit does NOT vanish at m=2
+    N1 = sp.summation(g, (k, 1, m))
+    Bf1 = sp.Rational(1, 2) * sp.summation(g * absL, (k, 1, m))
+    num1 = sp.simplify(sp.numer(sp.together(sp.simplify(Bf1 / N1 - d))))
+    assert sp.simplify(num1.subs(m, 2)) != 0

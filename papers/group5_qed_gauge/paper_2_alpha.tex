@@ -113,10 +113,10 @@ eigenvalues of the Laplace--Beltrami operator on $S^3$ are
 \end{equation}
 with degeneracy $g_n = n^2$, reproducing the hydrogen spectrum upon
 projection to flat space via the energy-shell constraint
-$p_0^2 = -2E$~\cite{paper7}. This identification is exact: the graph
-Laplacian on the discrete lattice and the continuum operator on $S^3$
-share the same spectrum, as verified by 18 independent symbolic
-proofs~\cite{paper7}.
+$p_0^2 = -2E$~\cite{paper7}. This identification is exact in the continuum limit: the graph
+Laplacian on the discrete lattice converges to the continuum operator
+on $S^3$, whose spectrum is $-(n^2-1)$, as verified by 18 independent
+symbolic proofs~\cite{paper7}.
 
 The three-sphere admits a unique fiber bundle structure, the Hopf
 fibration~(\ref{eq:hopf}). Concretely, the map
@@ -153,9 +153,11 @@ lattice gauge theory on the underlying graph. The discrete $S^3$ Hopf
 graph of Paper~7, with the $U(1)$ and $SU(2)$ gauge extensions
 developed elsewhere in the GeoVac corpus, is a specific instance of
 this general construction. The Perez-S\'anchez
-correction~\cite{perez_sanchez_2024, perez_sanchez_2024_comment}
-clarifies that the continuum limit of such gauge networks is
-Yang--Mills without Higgs.
+correction~\cite{perez_sanchez_2024_comment}
+clarifies that the continuum limit of the original gauge networks is
+Yang--Mills without Higgs (the companion quiver
+extension~\cite{perez_sanchez_2024} obtains Yang--Mills--Higgs for
+its own enlarged construction).
 
 The present paper does not derive $\alpha$: it reports a numerical
 observation within the published graph-spectral-triple lineage. The
@@ -399,16 +401,6 @@ The EM formula explains \emph{why} a single-level degeneracy appears
 as a structural ingredient of~$K$: it is the boundary correction when
 summing the spectral action up to the selection-principle cutoff.
 
-%======================================================================
-% Paper 2, Section IV — DROP-IN REWRITE (proposed by Track D5)
-% Replaces the current §IV "The Formula" (lines 272-322 of
-% papers/group5_qed_gauge/paper_2_alpha.tex) with a structurally
-% upgraded version that reflects the Phase 4B-4I sprint series.
-% Conjectural status of K = π(B + F − Δ) is preserved.
-%
-% Status: drop-in proposal, NOT auto-applied. PI to review per
-% CLAUDE.md §13.5 (reframing a conjectural paper requires PI approval).
-%======================================================================
 \section{The Formula and its Three Homes}\label{sec:formula}
 %======================================================================
 
@@ -492,7 +484,8 @@ carried out an extended structural-decomposition program, documented in
 detail in the project's change log, to test this hypothesis across a
 wide range of spectral-theoretic mechanisms.
 
-The program ran for eight phases (4B through 4I) and eliminated nine
+The program ran for eight phases (4B through 4I), plus the Sprint-A
+and Sprint K-CC follow-ons, and eliminated twelve
 distinct mechanisms:
 Hopf-twist spectral comparison on $S^1 \times S^2$;
 packing-$\pi$ hypothesis with $\pi$ forced by Paper~0 axioms;
@@ -584,7 +577,7 @@ derived'' (answered by the four positive identifications above) to
 %----------------------------------------------------------------------
 
 The Tier 1 Dirac-on-$S^3$ sprint of 2026 (tracks D1--D5) was the last of
-the nine mechanisms tested. Because the Dirac sector was the most
+the twelve mechanisms tested. Because the Dirac sector was the most
 structurally promising (it already contained $\Delta^{-1} = 40$ as a
 clean identity), a detailed record of why it also fails to lift $B$ and
 $F$ is worth inlining. The arguments are short and closed-form.
@@ -676,7 +669,11 @@ noncombinable.
 Together, obstructions 1--3 close the Dirac-on-$S^{3}$ avenue for
 unifying the three ingredients of $K$. All supporting computations are
 exact sympy symbolic identities; no floating-point evaluation enters
-the arguments above. Sources:
+the arguments above. The base spectrum/degeneracy functions live in
+the tested production module; the obstruction-specific identities
+themselves were computed in the archived sprint drivers and are
+recorded in the memos (they are not implemented in the production
+module). Sources:
 \texttt{geovac/dirac\_s3.py},
 \texttt{debug/dirac\_d2\_memo.md},
 \texttt{debug/dirac\_d3\_memo.md},
@@ -810,7 +807,7 @@ from first principles. The agreement of
   \pi\!\left(42 + \frac{\pi^{2}}{6} - \frac{1}{40}\right)
 \end{equation}
 with $\alpha^{-1}$ to $8.8 \times 10^{-8}$ — that is, 7 decimal digits,
-which cannot be reproduced in the extensive combinatorial search of
+which no other physically-motivated formula reproduces in the extensive combinatorial search of
 \S\ref{sec:statistical} — remains a structural coincidence of unknown
 origin. We have made the mystery sharper (three spectral homes across
 two sectors of $S^{3}$), but we have not resolved it.
@@ -1646,9 +1643,10 @@ geometry,'' \textit{J.\ Geom.\ Phys.}\ \textbf{75}, 71 (2014),
 arXiv:1301.3480.
 
 \bibitem{perez_sanchez_2024}
-C.~I.~Perez-S\'anchez, preprint (2024), arXiv:2401.03705. (Revisits
-the continuum limit of Marcolli--van Suijlekom gauge networks;
-establishes that the limit is Yang--Mills without Higgs.)
+C.~I.~Perez-S\'anchez, ``Bratteli networks and the Spectral Action on
+quivers,'' preprint (2024), arXiv:2401.03705. (Extends MvS gauge
+networks to quivers/Bratteli networks; obtains Yang--Mills--Higgs as
+the smooth limit of that extended construction.)
 
 \bibitem{perez_sanchez_2024_comment}
 C.~I.~Perez-S\'anchez, Comment, preprint (2025), arXiv:2508.17338.

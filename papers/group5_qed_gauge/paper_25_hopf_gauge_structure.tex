@@ -82,7 +82,7 @@ neighboring states, and its graph Laplacian converges to the
 Laplace--Beltrami operator on the unit $S^3$ in the
 continuum limit (Paper~7, eighteen symbolic proofs).
 
-Separately, Paper~2 conjectures that the Hopf fibration
+Separately, Paper~2 proposes that the Hopf fibration
 $S^1 \to S^3 \to S^2$---the same $S^3$ that hosts the electron's
 bound-state manifold---is more than a geometric coincidence.  In the
 Paper~2 reading, $S^3$ is the electron state space, $S^2$ is the
@@ -129,45 +129,49 @@ Suijlekom~\cite{MarcolliVanSuijlekom2014}, which defines systems of
 finite spectral triples on graphs whose spectral action is a Wilson
 lattice gauge theory; the present GeoVac construction is a specific
 instance of that framework at the data level (with the continuum
-limit, as corrected by
-Perez-Sanchez~\cite{PerezSanchez2024,PerezSanchez2025Comment},
-being Yang--Mills without Higgs);\ the forced-graph claim
+limit of the original gauge networks, as corrected by the
+Perez-Sanchez Comment~\cite{PerezSanchez2025Comment},
+being Yang--Mills without Higgs --- the quiver
+extension~\cite{PerezSanchez2024} obtains Yang--Mills--Higgs for its
+own enlarged construction);\ the forced-graph claim
 (Bertrand $\times$ Fock projection) and the master Mellin engine
 are GeoVac-original structural extensions not predicted by the MvS
 scaffolding.
 
 We do not claim a new derivation of $\alpha$.  We do claim that the
-Paper~2 conjecture can be placed inside an established mathematical
-framework.  In that framework, $B$ is a Casimir-weighted node-trace
+Paper~2 observation and its proposed interpretation can be placed
+inside an established mathematical framework.  In that framework, $B$ is a Casimir-weighted node-trace
 on the $S^2$ quotient graph; $F$ is a spectral zeta of the infinite
 Fock-degeneracy lattice at the packing exponent; $\Delta$ is a
 boundary-mode count on the squared-Dirac sector.  The $\mathbb{Z}_3$
 circulant structure of the cubic self-consistency equation
 (Paper~2~\cite{Paper2}) becomes a three-fold projection structure on
-the three bundle components.  What remains conjectural is not the
+the three bundle components.  What remains open is not the
 existence of these quantities---they are computable and have been
 computed in Phases 4B--4G~\cite{Paper2}---but their additive
-combination and its physical interpretation.
+combination (an Observation, not a derivation; \S 13.5 standing
+label) and its proposed physical interpretation.
 
 \paragraph*{Scope.} This is an observational synthesis paper.  No new
 experimental or computational prediction is derived.  The purpose is
 (i) to document a framework connection that has not been made in
 either the GeoVac papers or the broader literature, (ii) to place the
-conjectural components of Paper~2 inside an established mathematical
+open components of Paper~2 (the observed combination rule and its
+proposed interpretation) inside an established mathematical
 vocabulary, and (iii) to identify open questions (e.g., the $S^5$
 Bargmann--Segal analog, the Breit tensor extension) that become
 natural within the lattice-gauge framing.  The paper is a
 companion to Paper~21's broader synthesis~\cite{Paper21}, focused on
 one specific structural observation.
 
-\paragraph*{What is conjectural and what is sharp.} The
+\paragraph*{What is open and what is sharp.} The
 \emph{mathematical} decomposition of the Hopf graph into
 node-Laplacian, edge-Laplacian, and $S^2$-quotient components is
 sharp: these are exactly computable, exactly described in Sections
 II--III.  The \emph{physical} interpretation of the bundle components
-(electron/photon/gauge) is Paper~2's conjecture, flagged throughout
-as such.  The interpretive gap is deliberate: we do not assert the
-conjecture is correct.  We assert that if it is correct, the
+(electron/photon/gauge) is Paper~2's proposed interpretation, flagged
+throughout as such.  The interpretive gap is deliberate: we do not
+assert the interpretation is correct.  We assert that if it is correct, the
 mathematics already in the literature places it in a specific
 lattice-gauge context.
 
@@ -586,7 +590,7 @@ Section~IV.A: a finite matter trace, an infinite gauge zeta, and a
 boundary Dirac mode count.  The Hermiticity arises from the
 compatibility of the $U(1)$ gauge structure across the three tiers.
 This is the same observation as Paper~2, rewritten in
-lattice-gauge language.  It does not sharpen the conjecture; it does
+lattice-gauge language.  It does not sharpen the observation; it does
 label its components with established gauge-theoretic names.
 
 %% ========================================================================
@@ -601,11 +605,13 @@ label its components with established gauge-theoretic names.
 This paper does \emph{not}:
 \begin{itemize}
 \item Derive the fine-structure constant $\alpha$ from first
-  principles.  Paper~2 is, and remains, a conjecture.  The present
-  paper shifts the conjecture into gauge-theoretic language without
+  principles.  Paper~2 is, and remains, an Observation with a
+  proposed interpretation---not a derivation.  The present paper
+  shifts that content into gauge-theoretic language without
   removing any of its undetermined inputs.
 \item Prove the combination rule $K = \pi(B + F - \Delta)$.  Phases
-  4B--4H eliminated nine specific derivation mechanisms; the
+  4B--4I plus two follow-on sprints eliminated twelve specific
+  derivation mechanisms; the
   additive rule remains a numerical coincidence at $p = 5.2 \times
   10^{-9}$~\cite{Paper2}.
 \item Produce a continuum limit in which the edge Laplacian
@@ -779,7 +785,7 @@ The GeoVac project arrived at (3) for purely computational reasons
 (sparse qubit Hamiltonians from angular-momentum selection rules;
 see Paper~14~\cite{Paper14}).  The overlap with (1) and (2) was
 invisible from inside any single community.  Recognizing it from
-within the GeoVac pipeline required the Paper~2 conjecture, which in
+within the GeoVac pipeline required the Paper~2 observation, which in
 turn required the Phase~4B--4H structural decomposition to
 identify the three spectral homes of $B$, $F$, $\Delta$.  We flag
 the gap to place future GeoVac work at the intersection
@@ -1034,7 +1040,7 @@ not to execute them.
 The GeoVac framework builds a discrete graph on the unit $S^3$
 whose node Laplacian converges to the Laplace--Beltrami operator on
 $S^3$ in the continuum limit.  Section~III of this paper made the
-observation---previously implicit in the Paper~2 conjecture but never
+observation---previously implicit in Paper~2 but never
 stated as its own claim---that the same graph, together with its
 signed incidence matrix $B$, carries all the combinatorial
 ingredients of a lattice gauge theory.  The node Laplacian
@@ -1043,7 +1049,7 @@ $L_1 = B^{\top} B$ is the discrete Hodge--1 Laplacian; the Hopf
 quotient collapsing $m_l$-fibers produces the $S^2$ base graph on
 which gauge-neutral propagation lives.
 
-Under the Paper~2 conjectural interpretation, the three components
+Under the Paper~2 proposed interpretation, the three components
 of the Hopf bundle acquire physical labels: $S^3$ as electron bound
 states, $S^1$ as $U(1)$ gauge phase, $S^2$ as photon momentum sphere.
 The Paper~2 combination rule $K = \pi(B + F - \Delta)$ becomes a
@@ -1051,7 +1057,8 @@ cross-sector spectral invariant of the lattice-gauge structure:
 $B$ is a Casimir-weighted matter trace on the $S^2$ base, $F$ is a
 spectral zeta of the photon-sector modes in the infinite-shell
 limit, and $\Delta$ is a Dirac-mode boundary count.  The additive
-rule itself remains conjectural, just as in Paper~2; what changes
+rule itself remains an Observation---observed, not derived---just as
+in Paper~2; what changes
 is the vocabulary available to talk about it.
 
 What is sharp in this paper is the mathematics: the GeoVac graph
@@ -1062,7 +1069,7 @@ base graph.  What remains a proposal is the physical interpretation of
 the bundle components and of the additive combination rule.  The
 separation is deliberate and honest: the mathematical decomposition
 needs no further justification, while the physical reading remains
-Paper~2's conjecture.
+Paper~2's proposed interpretation.
 
 The framework observation does not resolve the open problem of why
 $K = \pi(B + F - \Delta)$ reproduces $\alpha^{-1}$.  It does locate

@@ -385,7 +385,8 @@ def verdict(c_2s_value: mpmath.mpf) -> Dict[str, object]:
     if rel_err < mpmath.mpf("0.10"):
         tier = "POSITIVE: sub-percent two-loop closure"
     elif rel_err < mpmath.mpf("0.50"):
-        tier = "MIXED: structural form correct, calibration off"
+        tier = ("WEAK: structural form correct, calibration off "
+                "(the paper's LS-8a WEAK verdict band)")
     elif rel_err < mpmath.mpf("9.0"):
         # Within an order of magnitude (3.63 +/- factor of 10)
         tier = "WEAK: order of magnitude, framework needs refinement"

@@ -160,7 +160,7 @@ def test_verdict_positive_tier():
 def test_verdict_mixed_tier():
     v = verdict(C_2S_LITERATURE * mpmath.mpf("1.30"))
     assert v["sign_correct"]
-    assert "MIXED" in v["verdict_tier"]
+    assert "WEAK: structural form correct" in v["verdict_tier"]  # renamed from MIXED, 1st-cert 2026-07-03
 
 
 def test_verdict_weak_tier():
@@ -186,7 +186,8 @@ def test_verdict_sign_check():
 # ---------------------------------------------------------------------------
 
 def test_n_ext_zero_rainbow_well_defined():
-    """For n_ext=0 (1S), the rainbow sum is also computable (and positive)."""
+    """For n_ext=0 (1S), the rainbow sum is computable; at the test's own
+    parameters it is exactly 0.0 (the assert below is >= 0 accordingly)."""
     R = rainbow_se_spectral_sum(n_ext=0, n_max=3)
     assert R >= 0  # At very small n_max R might be 0 due to vertex parity
 
@@ -209,11 +210,28 @@ def test_c_2s_at_n_max_4_within_factor_of_2():
 # ---------------------------------------------------------------------------
 
 def test_vertex_parity_inheritance():
-    """The two-loop SE inherits the vertex parity selection rule from one-loop."""
-    # If we replace _vertex_allowed by a permissive rule, the sum should grow.
-    # Here we just verify that the strict selection produces a non-trivial nonzero result.
+    """The two-loop SE inherits the vertex parity selection rule from
+    one-loop. 1st-cert strengthening (2026-07-03): the old body only
+    asserted R,C > 0, which a permissive vertex also satisfies. The rule
+    is enforced REDUNDANTLY -- both by the _vertex_allowed guard and by
+    the SO(4) channel weights, which vanish on exactly the forbidden
+    triples (monkeypatching the guard alone provably changes nothing).
+    Inheritance is therefore asserted at the weight level: every triple
+    the one-loop vertex forbids carries ZERO weight in the two-loop sum."""
+    import geovac.two_loop_self_energy as mod
+
     R = rainbow_se_spectral_sum(n_ext=1, n_max=2)
     C = crossed_se_spectral_sum(n_ext=1, n_max=2)
-    # Both are nonzero — vertex selection allows some configurations
     assert R > 0
     assert C > 0
+
+    checked = forbidden = 0
+    for a in range(0, 6):
+        for b in range(0, 6):
+            for q in range(1, a + b + 1):
+                checked += 1
+                if not mod._vertex_allowed(a, b, q):
+                    forbidden += 1
+                    assert mod._so4_channel_count(a, b, q) == 0, (a, b, q)
+    assert forbidden > 0, "rule never fired in range -- test is vacuous"
+    assert checked > forbidden  # and it does not forbid everything

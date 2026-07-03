@@ -126,6 +126,25 @@ REGISTRY = [
         ],
     },
     {
+        "id": "propinquity-as-achieved-metric-group5",
+        "scope": "group5",
+        "severity": "fail",
+        "retired": "group5 1st cert (2026-07-03): P51 carried two "
+                   "'Latremoliere propinquity' keystone-metric restatements "
+                   "(:159 abstract-adjacent, :2233 inside a Lemma) that the "
+                   "line-based group1 pattern missed (converge/Latr split "
+                   "across a line break). Post-fix the gated group5 scope has "
+                   "ZERO legitimate Latremoliere mentions, so the bare "
+                   "pattern is safe at fail severity here.",
+        "pattern": r"Latr[^\n]{0,30}propinquity",
+        "exempt_if_nearby": r"named\s+gap|state-space|strictly\s+stronger"
+                            r"|NOT\s+the|historical|retract",
+        "files": [
+            "papers/group5_qed_gauge/*.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+        ],
+    },
+    {
         "id": "propinquity-as-achieved-metric",
         "scope": "group1",
         "severity": "advisory",   # noisy: legit framework/named-gap/descope mentions abound

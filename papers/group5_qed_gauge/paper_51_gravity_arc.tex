@@ -155,8 +155,9 @@ spectrum up to a calibration constant
 $\kappa = -1/16$~\cite{paper0, paper24}. The framework's spectral
 triple $(\mathcal{A}_{GV}, \mathcal{H}_{GV}, D_{GV})$ has been shown
 in~\cite{paper32, paper38} to admit a Connes axiom audit at finite
-cutoff ($J^2 = -I$, $JD = +DJ$, KO-dim 3) and to converge in
-Latr\'emoli\`ere propinquity to the round-$\sthree$ Camporesi--Higuchi
+cutoff ($J^2 = -I$, $JD = +DJ$, KO-dim 3) and to converge in the
+van Suijlekom state-space Gromov--Hausdorff distance to the
+round-$\sthree$ Camporesi--Higuchi
 spectral triple as $n_{\max} \to \infty$.
 
 This paper organizes a sprint sequence (G1 through G8 plus the
@@ -761,7 +762,7 @@ graviton.
 \subsection{Dimensions}
 
 \begin{center}
-\begin{tabular}{ccccccc}
+\begin{tabular}{cccccc}
 \hline
 $n_{\max}$ & $\dim H$ & $J{=}0$ & $J{=}1$ & $J{=}2$ & Total \\
 \hline
@@ -772,6 +773,13 @@ $n_{\max}$ & $\dim H$ & $J{=}0$ & $J{=}1$ & $J{=}2$ & Total \\
 \hline
 \end{tabular}
 \end{center}
+
+\noindent\emph{Convention note:} $\dim H$ here sums the CH spinor
+degeneracies with the shell index starting at $n=0$
+($\dim H = \tfrac{2}{3}(n_{\max}{+}1)(n_{\max}{+}2)(n_{\max}{+}3)$),
+while \S II counts shells from $n=1$ --- so \S II's ``$n_{\max}=3$
+gives 40 modes'' corresponds to this table's $n_{\max}=2$ row. Same
+space, shell labels offset by one.
 
 Within-sector modes (where $\|[D_0, V]\|^2 = 0$) scale as
 $1{:}1{:}3$ across $J = 0, 1, 2$ rather than the na\"ive $1{:}3{:}5$,
@@ -1336,7 +1344,7 @@ conical-defect tip coefficient is identified at bit-exact precision:
 Best extraction (G4-4c week 3): $\alpha = 2/5$, $t = 2.0$, recovery
 $= 1.000021$ (relative error $2.1 \times 10^{-5}$). Nine of eleven
 tested $\alpha$ values reach $> 99.5\%$ recovery somewhere in the
-$t$-sweep. This is the continuum Dowker (1977) /
+$t$-sweep. This is the continuum Dowker~(1977)~\cite{dowker1977} /
 Cheeger--Simons~\cite{cheeger1983, solodukhin1995} spinor
 conical-defect heat-kernel coefficient with \emph{opposite sign} from
 scalar Sommerfeld/Cheeger~\cite{sommerfeld1894} and
@@ -1981,7 +1989,8 @@ verbatim that the spin-1/2 result ``resembles the scalar case,''
 mirroring the standard antisymmetric Cheeger formula
 $-(1/12)(1/\alpha-\alpha)$ without modification. The Solodukhin 2011
 Living Review~\cite{solodukhin2011_review} and the Beccaria--Tseytlin
-2017 conically-deformed-sphere work likewise do not surface the
+2017 conically-deformed-sphere work~\cite{beccaria_tseytlin2017}
+likewise do not surface the
 Möbius factor in their treatments. The unanimous literature signal
 supports the substrate-universal reading: the Möbius pattern is a
 structural feature of the discrete substrate (tied to the lowest
@@ -2230,9 +2239,10 @@ heat-trace rate); the third is the new content.
 \label{lem:L6_backbone}
 For each fixed $\alpha$ near $1$, the truncated constant-warp metric spectral
 triples $\mathcal{T}_{n,\alpha}$ converge to the continuum tip triple
-$\mathcal{T}_\alpha$ in the Latr\'emoli\`ere propinquity,
-$\Lambda(\mathcal{T}_{n,\alpha},\mathcal{T}_\alpha)\le C_3\,\gamma_n\to0$, with
-$C_3$ truncation-independent.
+$\mathcal{T}_\alpha$ in the van Suijlekom state-space Gromov--Hausdorff
+distance, $d_{\mathrm{GH}}(\mathcal{T}_{n,\alpha},\mathcal{T}_\alpha)
+\le C_3\,\gamma_n\to0$, with $C_3$ truncation-independent (the
+full-disk metric statement is deferred; see the open questions).
 \end{lemma}
 
 \noindent\emph{Source.} At constant warp $r(\rho)=r_h$ the cigar squared-Dirac
@@ -2809,9 +2819,18 @@ including gravity,'' \textit{Fortsch.~Phys.}\ \textbf{58}, 553--600
 J.~Cheeger, ``Spectral geometry of singular Riemannian spaces,''
 \textit{J.~Differential Geom.}\ \textbf{18}, 575--657 (1983).
 
+\bibitem{dowker1977}
+J.~S.~Dowker, ``Quantum field theory on a cone,''
+\textit{J.~Phys.~A}\ \textbf{10}, 115--124 (1977).
+
+\bibitem{beccaria_tseytlin2017}
+M.~Beccaria and A.~A.~Tseytlin, ``$C_T$ for conformal higher spin
+fields from partition function on conically deformed sphere,''
+\textit{J.~High Energy Phys.}\ \textbf{09}, 123 (2017).
+
 \bibitem{sommerfeld1894}
 A.~Sommerfeld, ``\"Uber verzweigte Potentiale im Raum,''
-\textit{Proc.~London Math.~Soc.}\ \textbf{28}, 395--429 (1894).
+\textit{Proc.~London Math.~Soc.}\ \textbf{28}, 395--429 (1896).
 
 \bibitem{solodukhin1995}
 S.~N.~Solodukhin, ``The conical singularity and quantum corrections to
@@ -2820,8 +2839,8 @@ entropy of black hole,'' \textit{Phys.~Rev.~D}\ \textbf{51}, 609--617
 
 \bibitem{frolov_fursaev1997}
 V.~P.~Frolov and D.~V.~Fursaev, ``Plenty of nothing: black hole
-entropy in induced gravity,'' \textit{J.~High Energy Phys.}\ \textbf{9707},
-008 (1997).
+entropy in induced gravity,'' \textit{Phys.~Rev.~D}\ \textbf{56},
+2212--2225 (1997).
 
 \bibitem{fursaev_solodukhin1995}
 D.~V.~Fursaev and S.~N.~Solodukhin, ``On the description of the
@@ -2849,45 +2868,6 @@ J.~S.~Dowker, ``Heat kernels on curved cones,''
 \textit{Class.~Quant.~Grav.}\ \textbf{11}, L137--L140 (1994),
 arXiv:hep-th/9406002.
 
-\bibitem{bekenstein1973}
-J.~D.~Bekenstein, ``Black holes and entropy,''
-\textit{Phys.~Rev.~D}\ \textbf{7}, 2333--2346 (1973).
-
-\bibitem{hawking1975}
-S.~W.~Hawking, ``Particle creation by black holes,''
-\textit{Comm.~Math.~Phys.}\ \textbf{43}, 199--220 (1975).
-
-\bibitem{gibbons_hawking1977}
-G.~W.~Gibbons and S.~W.~Hawking, ``Action integrals and partition
-functions in quantum gravity,'' \textit{Phys.~Rev.~D}\ \textbf{15},
-2752--2756 (1977).
-
-\bibitem{seeley1969}
-R.~T.~Seeley, ``The resolvent of an elliptic boundary problem,''
-\textit{Amer.~J.~Math.}\ \textbf{91}, 889--920 (1969).
-
-\bibitem{dewitt1965}
-B.~S.~DeWitt, \textit{Dynamical theory of groups and fields}
-(Gordon and Breach, New York, 1965).
-
-\bibitem{connes1994}
-A.~Connes, \textit{Noncommutative Geometry} (Academic Press, San Diego,
-1994).
-
-\bibitem{connes1996}
-A.~Connes, ``Gravity coupled with matter and the foundation of
-non-commutative geometry,'' \textit{Comm.~Math.~Phys.}\ \textbf{182},
-155--176 (1996).
-
-\bibitem{kastler1995}
-D.~Kastler, ``The Dirac operator and gravitation,''
-\textit{Comm.~Math.~Phys.}\ \textbf{166}, 633--643 (1995).
-
-\bibitem{kalau_walze1995}
-W.~Kalau and M.~Walze, ``Gravity, non-commutative geometry and the
-Wodzicki residue,'' \textit{J.~Geom.~Phys.}\ \textbf{16}, 327--344
-(1995).
-
 \bibitem{rovelli2004}
 C.~Rovelli, \textit{Quantum Gravity} (Cambridge University Press,
 Cambridge, 2004).
@@ -2896,31 +2876,11 @@ Cambridge, 2004).
 J.~Ambj{\o}rn, J.~Jurkiewicz, and R.~Loll, ``Reconstructing the
 universe,'' \textit{Phys.~Rev.~D}\ \textbf{72}, 064014 (2005).
 
-\bibitem{weinberg1979}
-S.~Weinberg, ``Ultraviolet divergences in quantum theories of
-gravitation,'' in \textit{General Relativity: An Einstein Centenary
-Survey}, eds.\ S.~W.~Hawking and W.~Israel (Cambridge University
-Press, 1979), 790--831.
-
-\bibitem{niedermaier_reuter2006}
-M.~Niedermaier and M.~Reuter, ``The asymptotic safety scenario in
-quantum gravity,'' \textit{Living Rev.~Relativ.}\ \textbf{9}, 5
-(2006).
-
-\bibitem{maldacena1998}
-J.~M.~Maldacena, ``The large $N$ limit of superconformal field
-theories and supergravity,'' \textit{Adv.~Theor.~Math.~Phys.}
-\textbf{2}, 231--252 (1998).
-
 \bibitem{homsak_veroni2024}
 V.~Hom\v{s}ak and S.~Veroni, ``Boltzmannian state counting for
 black hole entropy in causal set theory,''
 \textit{Phys.~Rev.~D}\ \textbf{109}, 124035 (2024),
 arXiv:2404.11670.
-
-\bibitem{krajewski1998}
-T.~Krajewski, ``Classification of finite spectral triples,''
-\textit{J.~Geom.~Phys.}\ \textbf{28}, 1--30 (1998).
 
 \bibitem{marcolli_vs2014}
 M.~Marcolli and W.~D.~van Suijlekom, ``Gauge networks in

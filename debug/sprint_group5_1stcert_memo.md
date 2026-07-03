@@ -1,4 +1,4 @@
-# /qa group5 — 1st cert (FULL run) — 2026-07-02 — IN PROGRESS
+# /qa group5 — 1st cert (FULL run) — 2026-07-02/03 — FAIL → Tier-1 REMEDIATED
 
 **Shape:** FULL (fresh target; DoD frozen by PI same day). Worktree at 8f3efce, 18 seeds
 committed on-branch (run-8 hardening; git status clean). Panel: 5 code (Sonnet ×2 seeds),
@@ -219,3 +219,60 @@ test-hermeticity bug, phantom bibitems) rather than mechanical drift.
   E10 P25 quotient/S⁵; E11 P51 headline ports + tests/gravity_support migration; E12 P51
   tier-tagging pass; E13 P2 B=42/circulant tests; E17 Bochner independent verification.
 Then delta-verification cycle(s) per the run-shapes protocol → final certifying FULL run.
+
+
+## Tier-1 remediation applied (2026-07-03, v4.64.0) — PI-confirmed
+
+**Papers (all compile 0-errors):** P25 conjecture-idiom sweep (14 loci; rule→Observation,
+physical reading→proposed interpretation; nine→twelve); P33 conjecture ×2 + abstract six-rule
+list (Gaunt→triangle-on-n) + charge-conjugation→Furry harmonized with P28 + 8/8 census scoped
+to n_max=2 + fabricated cite → real test + 99→100 tests + jeffrey→Jeffrey-Dai-2008 +
+chamseddine vocabulary-not-theorem reword; P36 conclusion re-synced to §5.2's corrected
+reading (Table-7.4 misreading; LS-7 done-WEAK) + wrong module cite fixed + Drake–Swainson real
+title + 4 phantom bibitems added & wired (Antognini/Karshenboim/CODATA/PDG) + Schwartz scope;
+P28 factor-of-2 → the Wald-forced reading (the §3-documented-WRONG cone attribution removed) +
+parker1980 re-pointed (textbook §6 primary; 1984 PRD = background) + petermann sign +197/144 +
+3 propinquity zombies → state-space GH + G6-FP status updated + pendant verification claim
+honestly scoped + n_max 8→12 + one-obs→two + coincidence echo; P51 propinquity ×2 → state-space
+GH (the Lemma honestly deferred) + sommerfeld 1896 + frolov venue PRD 56 2212 + Dowker-1977 &
+Beccaria–Tseytlin bibitems added & wired + 13 orphans removed + dim-H convention note
+(shell-index offset resolved) ; P30 conjectural-framework → observation-tier program +
+least-action softened + Fegan/Menotti–Onofri cites fixed + 4 orphans removed; P2 nine→twelve
+×2 + stale DROP-IN comment block deleted + C6 phrasing (converges-to) + p-value phrasing +
+perez_sanchez 2024/2025 unbundled (both P2+P25) + §IV source-list honesty (obstruction
+identities = archived drivers, not the production module); synthesis 4 NITs (spectral-sum
+label, proposition tier, Link-2 largely, CP²-residual → Paper 25 §VII provenance) + P33
+pendant claim scoped.
+
+**Tests/code:** E6 mp.dps hermeticity FIXED (autouse set/restore fixtures ×4 files; the
+original 11-failure SCOPE order now 624 passed/0 failed); E18 NaN always-true assert → real
+isfinite; E19: k=1 converse now asserted, vertex-parity inheritance asserted at the WEIGHT
+level (the guard-level monkeypatch provably changes nothing — the rule is redundantly enforced
+via SO(4) channel weights; documented in-test), verdict() MIXED band → the paper's WEAK
+vocabulary (+test synced), §VIII.D→§VIII.E, "(and positive)"→exact-0.0 docstring; the
+vacuous furry test → asserts the documented scalar-Furry FAILURE; new
+test_scalar_l1_self_energy_is_one_over_4pi (exact, 1e-14); **E4 production bug FIXED**
+(graph_qed_photon eigenvalue sort key → re(N(x)); all 277 graph_qed consumers green) — the
+n_max≥3 pendant sweep verification remains a Tier-2 item (exact eigenvals are slow); P51
+zeta heat-kernel docstring aligned with its assert strength.
+
+**Gate hardenings:** C13 now resolves bare \texttt{test\_fn} FUNCTION citations (the P33
+fabricated-cite class; file-name fallback added after it caught P32's informal
+test_real_structure cite — all 6 scopes PASS); C16 gained the fail-severity group5
+propinquity entry (the line-break class that hid P51:159/:2233).
+
+**Verification:** 7/7 group5 gates PASS post-remediation; 8 papers + synthesis compile
+0-errors; all touched suites green (vector_qed 100, paper2+two_loop 23, qed-family 624 in
+the formerly-failing order, graph_qed 277, zeta 40).
+
+**Tier-2 named follow-ons (logged in group5.done.md):** Furry derivation port; census rules
+de-tautologize + renumber (paper Table-1 6↔7 vs code keys) + triangle-on-SO(4) check + census
+aggregate tests (1/8, 4/8, ==7); pendant n_max≥3 exact sweep (post-crash-fix); P36 Lamb-chain
+durable backing; P41 XCWG durability migration (tests/wilson_rule_b_support/); P51
+tier-tagging pass + a₀/SC/K_cone ports + j_blindness debug-import migration
+(tests/gravity_support/); P30 kinetic-1/8 + seeded-MC tests; P25 S²-quotient-spectrum +
+S⁵ data pins; Bochner–Weitzenböck independent verification; P2 B=42/circulant exact tests;
+F₂ nonzero exact-rational pins; su2 gauge-invariance tolerance-vs-prose reconciliation.
+
+Next per the run-shapes protocol: **delta-verification run** over this remediation diff,
+then the final certifying FULL run.

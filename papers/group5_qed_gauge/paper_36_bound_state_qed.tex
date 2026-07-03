@@ -275,9 +275,11 @@ $\ell > 0$ wavefunction has $\psi_{2P}(0) = 0$, so the contact-density
 contribution is identically zero in any basis size.  The
 finite-basis $J_v / I_v$ ratio is $0/0$, with $J_v$ being itself
 finite.  This is a structural floor: no Sturmian basis size can
-resolve it.  The standard literature treatment (Schwartz~\cite{schwartz1961},
-Drake--Swainson~\cite{drake_swainson}) regularizes the ratio by
-asymptotic-subtraction techniques.
+resolve it.  The standard literature treatment regularizes the ratio by
+asymptotic-subtraction techniques: the integral-representation
+technique originates with Schwartz~\cite{schwartz1961} (for the
+helium ground state) and was extended to hydrogen $p$-states by
+Drake--Swainson~\cite{drake_swainson}.
 
 \subsection{Acceleration form: 3.3$\times$ tighter for $s$-states}
 
@@ -630,8 +632,11 @@ bound-state Sturmian projection, which is the LS-8a sprint scope.
 \end{proposition}
 
 LS-7 verified that the framework's two-loop machinery is structurally
-adequate: \texttt{geovac/qed\_two\_loop.py} computes connected double
-Dirac Dirichlet sums in closed form via half-integer Hurwitz, and
+adequate: \texttt{geovac/two\_loop\_self\_energy.py} (backed by
+\texttt{tests/test\_two\_loop\_self\_energy.py}) computes the two-loop
+SE bracket; the separate \texttt{geovac/qed\_two\_loop.py} computes
+connected double Dirac Dirichlet sums in closed form via
+half-integer Hurwitz, and
 the $1/\pi^2$ prefactor of the two-loop SE emerges from iterated
 Schwinger proper-time integration as Paper~35 predicts.  No
 structural obstruction was encountered.
@@ -779,7 +784,7 @@ U(s) = \int_1^\infty \!\! dt \; e^{-st}
 against the muonic 2$S$ and 2$P$ wavefunctions, yielding
 $\Delta E_U(2S) = -210.59$ meV, $\Delta E_U(2P) = -5.59$ meV, and
 $\Delta E^{\mu p}_\text{VP} = +205.007$ meV.  \textbf{Match to
-Antognini~2013: $<1$ ppm} against the canonical literature value
+Antognini~2013~\cite{antognini2013}: $<1$ ppm} against the canonical literature value
 $205.0074$ meV.
 
 \paragraph{Numerical result.}  The component decomposition
@@ -817,7 +822,7 @@ blocked by the LS-8a renormalization wall (multi-loop QED $\delta m$,
 $Z_2$ counterterms not generated natively by the bare spectral action)
 plus QCD-internal nuclear polarizability (structurally outside the
 spectral-action framework).  The proton radius puzzle is resolved
-[PDG~2024], so this sprint is a \emph{framework calibration check} on
+(PDG~2024~\cite{pdg2024}), so this sprint is a \emph{framework calibration check} on
 the precision frontier of bound-state QED, not a new physics
 measurement.
 
@@ -859,7 +864,7 @@ $m_\text{red}(e\mu^+)$:
 
 \begin{tabular}{lcc}
 \toprule
-Component & Framework (MHz) & Karshenboim 2005 (MHz) \\
+Component & Framework (MHz) & Karshenboim 2005~\cite{karshenboim2005} (MHz) \\
 \midrule
 SE($2S$) Eides \S\,3.2 & $+1061.31$ & --- \\
 SE($2P$) Eides \S\,3.2 & $-12.82$ & --- \\
@@ -968,7 +973,7 @@ A_\text{hf}^\text{Mu}
 \end{equation}
 with $m_\text{red}(e\,\mu^+) = m_\mu / (m_e + m_\mu) \approx
 0.99519\, m_e$, $Z=1$ (single antimuon charge), and $g_e, g_\mu$ either
-Dirac~$=2$ or full CODATA values (the difference being $a_e + a_\mu$
+Dirac~$=2$ or full CODATA values~\cite{codata2018} (the difference being $a_e + a_\mu$
 absorbed into the magnetic moment).  Schwinger one-loop applies as
 multiplicative $(1 + \alpha/2\pi)^2$ acting on the strict-Dirac BF.
 No magnetization-density operator (point lepton); no cross-register
@@ -1041,11 +1046,14 @@ implementation had inadvertently subtracted the Uehling kernel
 constant $4/15$ from the canonical $10/9$, double-counting Uehling
 as a separate VP contribution).
 
-The remaining $-5.65$~MHz residual is in the
-Eides--Grotch--Shelyuto Table~7.4 multi-loop band $[+3.5, +10.7]$~MHz
-with the correct positive sign, and is the test target for the
-LS-7 multi-loop sprint sequence and Paper~35's
-Prediction~1 in the multi-loop sector.
+The remaining $-5.65$~MHz residual decomposes, per the corrected
+reading of \S 5.2, into $\approx +1.20$~MHz of genuine multi-loop QED
+plus $\approx +4.4$~MHz of non-loop sectors (the earlier
+``Table~7.4 multi-loop band'' attribution was a misreading of which
+Eides table carries the multi-loop total).  Sprint LS-7/LS-8a
+(\S 6.1) tested the two-loop leg and returned a WEAK verdict at the
+renormalization wall; the residual remains the standing target for
+Paper~35's Prediction~1 in the multi-loop sector.
 
 The structural reading is that the framework's bound-state QED
 machinery on Dirac-$S^3$ is built from three Paper~34 projections
@@ -1121,6 +1129,25 @@ Eides~\S\,3.2 Canonical Convention,''
 H.~A.~Bethe, ``The Electromagnetic Shift of Energy Levels,''
 \textit{Phys.\ Rev.}\ \textbf{72}, 339 (1947).
 
+\bibitem{antognini2013}
+A.~Antognini \textit{et al.}, ``Proton structure from the measurement
+of 2S--2P transition frequencies of muonic hydrogen,''
+\textit{Science}\ \textbf{339}, 417--420 (2013).
+
+\bibitem{karshenboim2005}
+S.~G.~Karshenboim, ``Precision physics of simple atoms: QED tests,
+nuclear structure and fundamental constants,''
+\textit{Phys.\ Rep.}\ \textbf{422}, 1--63 (2005).
+
+\bibitem{codata2018}
+E.~Tiesinga, P.~J.~Mohr, D.~B.~Newell, and B.~N.~Taylor, ``CODATA
+recommended values of the fundamental physical constants: 2018,''
+\textit{Rev.\ Mod.\ Phys.}\ \textbf{93}, 025010 (2021).
+
+\bibitem{pdg2024}
+S.~Navas \textit{et al.}\ (Particle Data Group), ``Review of particle
+physics,'' \textit{Phys.\ Rev.\ D}\ \textbf{110}, 030001 (2024).
+
 \bibitem{eides2001}
 M.~I.~Eides, H.~Grotch, and V.~A.~Shelyuto, ``Theory of light
 hydrogenic bound states,''
@@ -1135,8 +1162,9 @@ C.~Schwartz, ``Lamb Shift in the Helium Atom,''
 \textit{Phys.\ Rev.}\ \textbf{123}, 1700 (1961).
 
 \bibitem{drake_swainson}
-G.~W.~F.~Drake and R.~A.~Swainson, ``Bethe logarithms for hydrogenic
-atoms,'' \textit{Phys.\ Rev.\ A}\ \textbf{41}, 1243 (1990).
+G.~W.~F.~Drake and R.~A.~Swainson, ``Bethe logarithms for hydrogen
+up to $n=20$, and approximations for two-electron atoms,''
+\textit{Phys.\ Rev.\ A}\ \textbf{41}, 1243--1246 (1990).
 
 \bibitem{yerokhin2024_two_loop_se}
 V.~A.~Yerokhin, Z.~Harman, and C.~H.~Keitel,

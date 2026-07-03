@@ -822,7 +822,8 @@ Three structural features are visible:
 
 \subsection{Headline result}
 
-At $n_{\max} = 8$ (converged to 5 significant figures):
+At $n_{\max} = 12$ (converged to 5 significant figures; the value is
+already stable at $n_{\max} = 8$):
 \begin{equation}
   \frac{F_2}{\alpha/(2\pi)} = 1.084,
   \label{eq:F2_ratio}
@@ -1569,8 +1570,11 @@ propagate with positive kinetic eigenvalue. SUFFICIENT conditions ---
 Fierz--Pauli kinetic structure separating TT graviton (2 polarizations)
 from longitudinal/scalar modes (7 of the 9 within $(1, 1)$), gauge
 invariance of the TT projector, propagator structure, and continuum
-graviton emergence via Paper~38-style propinquity --- are not
-verified here and constitute the full G6 multi-month sprint. The
+graviton emergence via Paper~38-style state-space GH convergence ---
+are not verified here; the Fierz--Pauli/J-blindness leg has since
+been completed (Paper~51, \S Fierz--Pauli + the J-blindness theorem),
+and the remaining sufficiency legs constitute the multi-month G6
+program. The
 $S^3$ Fock projection rigidity (Paper~23) fixes the background metric;
 graviton candidates here are operator-level perturbations of $D$, not
 direct metric perturbations.
@@ -1604,7 +1608,7 @@ tensor field at each point; the discrete inner gauge connects different
 $\lambda$-sectors. These reconcile only as $n_{\max}\to\infty$, when the
 cross-sector directions assemble into continuum diffeomorphisms that
 remove $7$ of the $9$ within-sector modes. Thus the graviton DOF
-reduction is a \emph{propinquity-limit phenomenon} (Paper~38-style),
+reduction is a \emph{continuum-limit phenomenon} (Paper~38-style state-space GH),
 not an internal-to-the-block projection --- which is the structural
 reason the Fierz--Pauli decomposition is the multi-month G6 task and
 not a sprint-scale one. Source:
@@ -1631,7 +1635,7 @@ directly or establish the dictionary showing the $(1,1)$ bilinear carries
 the physical graviton. Together with the GD-1 finding, the multi-month G6
 has two sharply identified must-dos: (i) test the helicity-2 sector and
 fix the dictionary; (ii) realize the $9 \to 2$ gauge reduction in the
-continuum (propinquity) limit. Source:
+continuum (state-space GH) limit. Source:
 \texttt{debug/sprint\_gd4\_graviton\_irrep\_memo.md}.
 
 \paragraph{Helicity-2 modes are positive too (Sprint GD-5).}
@@ -1988,11 +1992,17 @@ $G_N = 3\pi/\Lambda^2$.
 \paragraph{Factor-of-2 calibration with G7.} The Newton constant from
 \S\ref{sec:newton_cc_extremality} (G2's spectral action matching) is
 $G_{\rm eff} = 6\pi/\Lambda^2$. The factor-of-2 difference from
-$G_N = 3\pi/\Lambda^2$ reflects the standard scalar vs Dirac
-conical-defect coefficient normalization (Solodukhin 1995,
-Frolov--Fursaev 1997). The structural emergence of $A \cdot \Lambda^2$
-from the conical tip is the load-bearing finding; the precise
-prefactor calibration is downstream.
+$G_N = 3\pi/\Lambda^2$ is \emph{not} a scalar-vs-Dirac conical-defect
+coefficient (the 2D Dirac and scalar cones share the coefficient
+$(1/12)(1/\alpha - \alpha)$; Fursaev--Miele 1996, confirmed by the
+G4-4c discrete extraction): it is a bookkeeping artifact forced by
+Wald's theorem --- two-term exactness implies pure Einstein gravity,
+so action-$G$ and entropy-$G$ are the \emph{same} constant, and the 2
+lives in a 4D-bulk vs factorized-$2\mathrm{D}\times 2\mathrm{D}$
+normalization mismatch to be closed by convention audit (Paper~51,
+Wald-forces-entropy-relation remark). The structural emergence of
+$A \cdot \Lambda^2$ from the conical tip is the load-bearing finding;
+the precise prefactor calibration is downstream.
 
 \paragraph{Discrete-substrate analog.} For G4-3 onwards (multi-month):
 \begin{itemize}
@@ -3136,7 +3146,7 @@ The \emph{same} transcendental constants---$\zeta(3)$, Catalan~$G$,
 Dirichlet $\beta(4)$---appear in both the $S^3$ spectral sums and
 flat-space two-loop QED~\cite{rosner1967,laporta1996}.
 Coefficient matching for the full Petermann--Sommerfield two-loop
-anomalous magnetic moment $a_2 = -197/144 + \pi^2/12 + 3\zeta(3)/4 -
+anomalous magnetic moment $a_2 = 197/144 + \pi^2/12 + 3\zeta(3)/4 -
 \pi^2\ln 2/2$~\cite{petermann1957,sommerfield1957} requires matching
 specific diagram topologies and renormalization subtractions, which is
 beyond the scope of spectral sums.  At one loop, the $S^3$
@@ -3525,10 +3535,12 @@ $\Sigma_{\mathrm{graph}}(\mathrm{GS}) = 2N/(N+1)
 = 2(n_{\max}-1)/n_{\max}$.
 \end{proof}
 
-\noindent\textbf{Verification:} Eq.~\eqref{eq:pendant_edge} verified
-numerically for $n_{\max} = 2, 3, \ldots, 100$ (machine-precision
-agreement) and symbolically (exact \texttt{sympy} rational arithmetic)
-at $n_{\max} = 3, 4$.
+\noindent\textbf{Verification:} Eq.~\eqref{eq:pendant_edge} is
+continuously verified by \texttt{tests/test\_graph\_qed\_self\_energy.py}
+(exact \texttt{sympy} rational arithmetic at $n_{\max} = 2$); the
+original sprint driver additionally swept $n_{\max} = 2$--$5$
+numerically (v2.26-era measurement, archived). The formula itself is
+proven in the theorem above for all $n_{\max}$.
 
 \subsubsection{Layer 3: Selection-rule gap}
 
@@ -4336,7 +4348,7 @@ tadpole at the vertex level.  No second-quantized field theory is needed.
 \label{sec:discussion}
 % ===================================================================
 
-The five theorems, two propositions, and one observation of this paper,
+The five theorems, two propositions, and two observations of this paper,
 together with the anomalous magnetic moment computation
 (Sec.~\ref{sec:anomalous_moment}), the graph-native QED infrastructure
 (Sec.~\ref{sec:graph_native_qed}), and the vector-photon QED construction
@@ -4448,7 +4460,9 @@ Parker--Toms prediction within 0.4\%.
 The curvature coefficient identification
 $c_2 = (2 - B\Delta - F\Delta - F/B)/5$
 (Sec.~\ref{sec:curvature_coefficients}) is the first concrete
-numerical bridge between Papers~2 and~28: the three spectral objects
+numerical bridge between Papers~2 and~28 (a numerical coincidence,
+not a derivation --- \S\ref{sec:curvature_coefficients}): the three
+spectral objects
 $B = 42$, $F = \pi^2/6$, $\Delta = 1/40$ that compose the
 $\alpha$~construction $K = \pi(B + F - \Delta)$ also appear as the
 geometric invariants controlling the second curvature correction to the
@@ -4684,12 +4698,15 @@ the electron,''
 \textit{Phys.~Rev.}\ \textbf{73}, 416--417 (1948).
 
 \bibitem{parker1980}
-L.~Parker and D.~J.~Toms, ``Renormalization-group analysis of grand
-unified theories in curved spacetime,''
-\textit{Phys.~Rev.~D}\ \textbf{29}, 1584 (1984);
-see also L.~Parker and D.~J.~Toms,
-\textit{Quantum Field Theory in Curved Spacetime}
-(Cambridge University Press, 2009), Sec.~6.
+L.~Parker and D.~J.~Toms,
+\textit{Quantum Field Theory in Curved Spacetime:\ Quantized Fields
+and Gravity} (Cambridge University Press, 2009), Sec.~6 --- the
+curved-spacetime effective-action formalism from which the leading
+curvature correction quoted here follows; see also L.~Parker and
+D.~J.~Toms, ``Renormalization-group analysis of grand unified
+theories in curved spacetime,''
+\textit{Phys.~Rev.~D}\ \textbf{29}, 1584 (1984) (background:
+curvature-dependent coupling running, not the $g{-}2$ formula).
 
 \bibitem{camporesi1996}
 R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac

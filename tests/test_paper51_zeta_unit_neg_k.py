@@ -183,8 +183,12 @@ def _two_term_asymptotic(t, dps=50):
     exponentially small (controlled by the lowest-mode contribution
     exp(-9t/4)).
 
-    Verified numerically at t = 0.005 to 50-digit precision, matching the
-    direct mode-sum to better than 1e-49 relative error.
+    The two-term form matches the direct mode-sum to the dps floor at
+    small t (the true remainder is exponentially suppressed); the ASSERT
+    below enforces the much weaker falsifier rel_err < sqrt(t)/10, which
+    is what a polynomial t^(1/2) contamination (i.e. a nonzero
+    zeta_unit(-k)) would violate. (Docstring aligned with the assert
+    strength, 1st-cert 2026-07-03.)
     """
     mp.mp.dps = dps
     t_mp = mp.mpf(t)

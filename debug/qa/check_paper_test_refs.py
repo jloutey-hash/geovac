@@ -63,6 +63,10 @@ REF = re.compile(
     r"|test(?:\\?_[A-Za-z0-9*]+)+\.py"                 # bare but .py-suffixed
 )
 MATRIX_TEST = re.compile(r"\btest_[A-Za-z0-9_]+\b")
+# bare FUNCTION-name citation inside \texttt{...}, no .py suffix and no tests/
+# prefix (the group5 1st-cert P33 class: a paper citing a nonexistent test
+# FUNCTION, invisible to the file-level REF pattern). Hardened 2026-07-03.
+BARE_FN = re.compile(r"\\texttt\{(test(?:\\_[A-Za-z0-9]+)+)\}")
 
 
 def stem(ref: str) -> str:
@@ -125,6 +129,22 @@ def main() -> int:
                 (gated_missing if is_gated(p) else audit_missing).append((rel, ln, name))
             elif st == "ARCHIVED":
                 archived.append((rel, ln, name))
+        # bare function-name citations: the named function must exist in tests/
+        for m in BARE_FN.finditer(raw):
+            fn = m.group(1).replace("\\_", "_")
+            if fn.endswith(".py") or "*" in fn:
+                continue
+            span_l, span_r = max(0, m.start() - 40), m.end() + 8
+            ctx = raw[span_l:span_r]
+            if "tests/" in ctx or ".py" in raw[m.end():m.end() + 4]:
+                continue  # the file-level REF pattern owns these
+            hit = (ROOT / "tests" / (fn + ".py")).exists() or any(
+                ("def " + fn + "(") in q.read_text(encoding="utf-8", errors="replace")
+                for q in (ROOT / "tests").glob("*.py"))
+            if not hit:
+                ln = raw.count("\n", 0, m.start()) + 1
+                (gated_missing if is_gated(p) else audit_missing).append(
+                    (rel, ln, fn + " (function)"))
 
     # matrix coverage (advisory): matrix tests never cited inline anywhere
     matrix_tests: set[str] = set()

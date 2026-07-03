@@ -336,12 +336,13 @@ class TestSelectionRules:
         # At n_max=2 with l_max=1, diagonal couplings l=1,l=1,q=1
         # are allowed by parity (1+1+1=3 odd), so tadpole may be nonzero
         rule = rules_n2['6_furry_theorem']
-        # Record the outcome for diagnostic purposes
-        if not rule['pass']:
-            # This is informational -- Furry's theorem on the finite graph
-            # may not hold exactly due to the E-type parity allowing
-            # diagonal l=l couplings for odd q
-            pass
+        # Paper 33 Thm 1 (scalar_7_of_8): Furry is the ONE rule that FAILS
+        # for scalar electrons (E-type parity allows diagonal l=l couplings
+        # for odd q); the Dirac construction recovers it (test_furry_passes).
+        # 8th-cert fix 2026-07-02: this body was a vacuous no-assert stub.
+        assert rule['pass'] is False, (
+            "scalar Furry unexpectedly PASSES -- the 7/8 census and Paper 33 "
+            "Thm 1 would both be wrong; investigate before trusting")
 
     def test_charge_conjugation_passes(self, rules_n2):
         """Rule 8: Charge conjugation (Hermiticity)."""
@@ -900,3 +901,20 @@ class TestScalarDiracComparison:
         dirac = compute_dirac_self_energy(n_max=2, q_max=1)
         assert scalar.contains_pi is True
         assert dirac.contains_pi is True
+
+
+def test_scalar_l1_self_energy_is_one_over_4pi():
+    """Paper 33 Prop [1/(4pi)]: each l=1 diagonal self-energy entry of the
+    scalar+vector construction at n_max=2, q_max=1 equals exactly 1/(4pi)
+    (the S^2 Weyl exchange constant). Added 1st-cert remediation 2026-07-02:
+    the proposition previously cited a nonexistent test name."""
+    import math
+
+    result = compute_self_energy(n_max=2, q_max=1)
+    diag = [float(result.Sigma[i, i].real if hasattr(result.Sigma[i, i], "real")
+                  else result.Sigma[i, i]) for i in range(result.Sigma.shape[0])]
+    target = 1.0 / (4.0 * math.pi)
+    # indices 0,1 = 1s,2s (structural zeros); 2,3,4 = the 2p triplet
+    assert diag[0] == 0.0 and diag[1] == 0.0
+    for i in (2, 3, 4):
+        assert abs(diag[i] - target) < 1e-14, (i, diag[i], target)

@@ -574,9 +574,13 @@ def compute_photon_propagator(n_max: int,
     # Eigenvalue data
     L1_eigs = L1.eigenvals()
     pi_free = _all_eigenvalues_pi_free(list(L1_eigs.keys()))
+    # sympy eigenvals() at n_max >= 4 can return roots (e.g. CRootOf) whose
+    # direct float() cast raises "Cannot convert complex to float" even though
+    # L1 is real PSD (spurious ~1e-30j dust); sort on the real part.
+    # 1st-cert fix 2026-07-02 (the n_max>=4 crash).
     nonzero_evs = sorted(
         [ev for ev in L1_eigs if ev != Integer(0)],
-        key=lambda x: float(x)
+        key=lambda x: float(sp.re(sp.N(x)))
     )
 
     # Gauge zero modes (kernel)

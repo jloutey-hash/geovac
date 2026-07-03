@@ -122,6 +122,18 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
   P28-adjacent files — C14 reports advisory, not blocking.
 
 ## Change log
+- 2026-07-03 — **Tier-1 remediation of the 1st-cert register APPLIED (PI-confirmed; v4.64.0).**
+  All A/B/C/D/F prose+citation classes fixed (P25 14-loci conjecture sweep; P28 Wald factor-of-2 +
+  parker repoint + 3 propinquity zombies; P36 conclusion/module/bibitems; P51 propinquity ×2 +
+  venue/year/bibitem layer + 13 orphans + dim-H note; P30/P2/synthesis batches) + the test/code
+  layer (mp.dps hermeticity 624-green-in-failing-order; NaN assert; vacuous-furry → asserts the
+  documented failure; 1/(4π) test replacing the fabricated cite; weight-level parity-inheritance;
+  verdict() WEAK-band alignment; **graph_qed n_max≥4 crash fixed**, 277 consumers green) + two
+  gate hardenings (C13 bare-function cites — immediately caught & resolved a P32 informal cite;
+  C16 group5 propinquity entry). 7/7 gates PASS; 9 documents compile 0-errors. **Tier-2 named
+  follow-ons** (memo §Tier-2): Furry port, census de-tautologize + aggregate tests, pendant
+  n≥3 sweep, P36 Lamb backing, P41 XCWG migration, P51 tier-tagging + headline ports, P30/P25
+  test builds, Bochner independent check, P2 exact tests, F₂ rational pins. Next: delta run.
 
 - 2026-07-02 — **1st cert (FULL run, whole-group) = FAIL (fully calibrated) → remediation register
   opened (see `debug/sprint_group5_1stcert_memo.md`).** Panel 11 agents + critic + 4-agent recovery

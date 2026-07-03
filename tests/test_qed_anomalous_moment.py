@@ -349,9 +349,12 @@ class TestCGAmplitude:
             jL, jR, j, Rational(1, 2),
             jL, jR, j, Rational(1, 2),
             jpL, jpR, Rational(0), Rational(0))
-        # Result is a sympy expression (exact algebraic)
-        assert float(amp) != float('nan')
-        assert float(amp) != float('inf')
+        # Result is a sympy expression (exact algebraic).
+        # 1st-cert E18 fix 2026-07-02: the old "!= float('nan')" was
+        # unconditionally TRUE (IEEE NaN != NaN), verifying nothing.
+        import math
+        famp = float(amp)
+        assert math.isfinite(famp), famp
 
     def test_symmetry_mj_flip(self) -> None:
         """CG amplitudes for m_j and -m_j are generally different."""

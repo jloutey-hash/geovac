@@ -26,6 +26,24 @@ from sympy import Rational, zeta, pi, Symbol, expand, Integer
 mpmath.mp.dps = 80
 
 
+@pytest.fixture(autouse=True)
+def _pin_mp_dps():
+    """Pin mpmath precision per-test (1st-cert E6 fix, 2026-07-02).
+
+    Module-level ``mp.dps`` assignments fire at collection time, so the
+    LAST-collected module silently set the precision for EVERY test's
+    execution (11 reproducible order-dependent failures). The module-level
+    assignment above is kept for import-time constants; this fixture
+    guarantees the file's intended precision at run time and restores the
+    ambient value afterwards.
+    """
+    import mpmath
+    _old = mpmath.mp.dps
+    mpmath.mp.dps = 80
+    yield
+    mpmath.mp.dps = _old
+
+
 # ----------------------------------------------------------------------
 # Numerical primitives
 # ----------------------------------------------------------------------

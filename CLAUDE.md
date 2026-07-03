@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.63.1 (July 2, 2026)
+**Version:** v4.64.0 (July 3, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -136,6 +136,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **group5 1st cert FAIL (calibrated 18/18+6/6) → Tier-1 remediated (2026-07-02/03, v4.64.0):** conjecture-idiom sweep (P25 ×14 + P33/P30/P2); P28 Wald factor-of-2 + parker repoint + petermann sign; P36 phantom bibitems + retracted-reading conclusion; P51 propinquity ×2 + citation layer; mp.dps hermeticity bug (624-green); graph_qed n_max≥4 crash fixed; fabricated test cite → real 1/(4π) pin; C13/C16 hardened. Tier-2 named; delta run next. See debug/sprint_group5_1stcert_memo.md.
 - **group5 pre-work: DoD drafted for PI freeze (2026-07-02, v4.63.1):** branch deltas = K-prohibition home (C5/C12 sharpest) + graph-QED census honesty + gravity-arc dead-end honesty + physics-tier; deterministic 7/7 PASS after 2 C5 + 4 C11 fixes; synthesis first committed. Panel awaits the PI's DoD freeze. See docs/qa/group5.done.md.
 - **group4 CERTIFIED ✅ (2026-07-02, v4.63.0) — 4th certified branch (after group3, group1, group2).** 8th cert (FULL certifying pass, post-clean-delta) = PASS: calibrated 13/13 (all 10 Sonnet-tier seeds caught) / 6/6; three in-run loop-until-dry cycles remediated 6 genuine defects (stale TM-automation state, untested hopf 6-system/254 claims → new pins, FCIDUMP list, matched-axis wording ×2, eq:dirac_fs (Zα)⁴→Z⁴α², legacy-vintage BeH₂ λ cells → live + pinned). ≈2.49M subagent tokens, ~half Sonnet-billed. See debug/sprint_group4_8thcert_memo.md.
 - **QA cost package (PI-directed, 2026-07-02, v4.62.1):** C17 headline-number registry gate (mechanical-class killer, self-tested 6/6); run shapes — FULL only at first-cert + final certifying pass, delta-verification runs between (diff-scoped, ~0.5M vs ~2.5M tokens; clean delta = precondition for the full run); Sonnet-tiered citation/code reviewers with 2-seed calibration as the safety net; terser reports; critic on full runs only. criteria.md + qa.md + memory synced. See CHANGELOG v4.62.1.
