@@ -276,3 +276,24 @@ F₂ nonzero exact-rational pins; su2 gauge-invariance tolerance-vs-prose reconc
 
 Next per the run-shapes protocol: **delta-verification run** over this remediation diff,
 then the final certifying FULL run.
+
+
+## Delta-verification #1 (2026-07-03, v4.64.1) — CLEAN-DELTA → the certifying FULL run is EARNED
+
+Five payload-pinned reviewers over the v4.64.0 remediation diff (a protocol refinement:
+agents read ONE patch file each from the scratchpad — paste-don't-point economics without
+routing 1,100 diff lines through orchestration). **Sensitivity 7/7** (every seed caught by
+its assigned agent; claims-2 additionally cross-caught both citation seeds): s-d1 P25
+"en route to a derivation" tier creep (3 sibling hunks quoted against it); s-d2 the P36
+component swap (caught via the must-be-the-smaller-piece reasoning); s-d3 Link-2
+"fully"; s-d4 the >=0 anti-vacuity tautology; s-d5 the dropped fixture restore (sibling
+comparison + disk cross-check); s-d6/s-d7 the two volume digits (DOI-verified).
+**Specificity clean** — all genuine hunks verified sound across five agents; the citation
+agent confirmed 12/12 new bibliographic facts GROUNDED, several as corrections of real
+prior errors (Frolov–Fursaev venue, Petermann sign, dropped authors, the Pérez-Sánchez
+conflation). **Zero genuine MATERIAL in the diff.** Post-run polish: the FP/J-blindness
+slash NIT tightened (P28); the parker locator honestly widened to Chs. 6–7 (the g−2
+formalism may span the gauge chapter); fegan1983's content verified as the real 1978
+Trans. AMS paper (key misnomer, harmless). Deterministic 7/7 PASS; P28 recompiles 0.
+Cost ≈510k subagent tokens across 5 agents. **Next: the final certifying FULL run —
+PI's timing call, weighing the open Tier-2 backing sprints.**

@@ -122,6 +122,13 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
   P28-adjacent files — C14 reports advisory, not blocking.
 
 ## Change log
+- 2026-07-03 — **Delta-verification #1 over the v4.64.0 diff = CLEAN-DELTA → certifying FULL run EARNED (v4.64.1).**
+  Five payload-pinned reviewers (2 Opus claims + Opus synthesis + Sonnet code + Sonnet citation);
+  **sensitivity 7/7 + 2 cross-catches, specificity clean, zero genuine MATERIAL.** The citation agent
+  verified all 12 new bibliographic facts GROUNDED (several = fixes of real prior errors). Post-run
+  polish: FP/J-blindness slash NIT; parker locator → Chs. 6–7; fegan1983 content verified. Gates 7/7.
+  ~510k tokens. The certifying FULL run awaits PI timing (the Tier-2 backing sprints remain open —
+  certifying before or after them is the PI's sequencing call).
 - 2026-07-03 — **Tier-1 remediation of the 1st-cert register APPLIED (PI-confirmed; v4.64.0).**
   All A/B/C/D/F prose+citation classes fixed (P25 14-loci conjecture sweep; P28 Wald factor-of-2 +
   parker repoint + 3 propinquity zombies; P36 conclusion/module/bibitems; P51 propinquity ×2 +

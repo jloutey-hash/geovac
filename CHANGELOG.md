@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.64.1] - 2026-07-03
+
+**group5 delta-verification #1 = CLEAN-DELTA → the certifying FULL run is earned.** Five payload-pinned reviewers over the Tier-1 remediation diff (patch-file payloads — the delta protocol's paste-don't-point without orchestration overhead): sensitivity **7/7** (+2 cross-catches; the code agent caught both the dropped-restore and the >=0-tautology seeds via sibling comparison and disk cross-check; the citation agent DOI-verified both volume-digit seeds), specificity clean, **zero genuine MATERIAL** — all 12 new bibliographic facts GROUNDED. Post-run polish: P28 FP/J-blindness slash tightened; parker1980 locator honestly widened to Chs. 6–7; fegan1983 content verified (1978 Trans. AMS; key misnomer harmless). Gates 7/7 PASS; ~510k subagent tokens. Certifying FULL run = PI timing call vs the open Tier-2 backing sprints.
+
 ## [4.64.0] - 2026-07-03
 
 **`/qa group5` 1st-cert Tier-1 remediation (PI-confirmed) — the full fix-on-sight register applied; Tier-2 sprint-scale follow-ons named; delta run next.**
