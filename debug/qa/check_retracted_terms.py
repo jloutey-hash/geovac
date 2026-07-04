@@ -67,6 +67,56 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "cp2-50pct-vs-fit-floor",
+        "scope": "group5",
+        "severity": "fail",
+        "retired": "2026-07-03 (group5 delta-2): the P25 CP^2 'no rescaling can leave "
+                   "less than ~50% maximum residual against the fit' floor is INVALID as "
+                   "a one-sided bound (sqrt(rmax/rmin)-1 is not a vs-fit floor; the LS "
+                   "fit itself achieves 40.8%). Sharp one-sided floor = "
+                   "(rmax-rmin)/(rmax+rmin) ~ 38%; the >=33% vs-data floor stands.",
+        "pattern": r"50\\?\%\$?\s+maximum\s+(?:relative\s+)?residual\s+against\s+the\s+fit"
+                   r"|minimax-optimal\s+rescaling\s+still\s+leaves\s+50",
+        "exempt_if_nearby": r"overstat|supersed|WITHDRAWN|retract|invalid|not\s+a\s+valid"
+                            r"|corrected",
+        "files": [
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+            "tests/test_su3_wilson_s5.py",
+        ],
+    },
+    {
+        "id": "drake-swainson-3d-mistranscription",
+        "scope": "group5",
+        "severity": "fail",
+        "retired": "2026-07-03 (group5 delta-2): the P36 3D Bethe-log reference "
+                   "-0.005249 was a mistranscription of Drake--Swainson 1990 Table I "
+                   "(actual -0.0052321481; residual +0.07%, not -0.24%).",
+        "pattern": r"0\.005249",
+        "exempt_if_nearby": r"mistranscrib|corrected|supersed|earlier\s+printing|WITHDRAWN",
+        "files": [
+            "papers/group5_qed_gauge/paper_36_bound_state_qed.tex",
+            "tests/test_paper36_lamb_chain.py",
+            "tests/paper36_lamb_support/*.py",
+        ],
+    },
+    {
+        "id": "cheeger-simons-cone-attribution",
+        "scope": "group5",
+        "severity": "fail",
+        "retired": "2026-07-03 (group5 delta-2): 'Cheeger--Simons' is a phantom "
+                   "co-author pair for the spinor conical-defect heat-kernel "
+                   "coefficient (cites are Cheeger 1983 solo + Solodukhin 1995 solo; "
+                   "Cheeger--Simons is the unrelated differential-characters work). "
+                   "Correct label: Cheeger--Solodukhin.",
+        "pattern": r"Cheeger--?Simons",
+        "exempt_if_nearby": r"differential\s+character|corrected|phantom|WITHDRAWN",
+        "files": [
+            "papers/group5_qed_gauge/*.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+        ],
+    },
+    {
         "id": "withdrawn-pythagorean-mechanism",
         "scope": "group1",
         "severity": "fail",

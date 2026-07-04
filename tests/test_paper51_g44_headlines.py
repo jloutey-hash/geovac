@@ -128,6 +128,13 @@ class TestConeDiracSaturationReference:
     substrate on which the paper's claim was recorded). At this substrate
     the measured agreement at r_h = 10^-3 is 5.4e-8..6.4e-8 relative
     (7+ digits), comfortably inside the paper's "6+ digits".
+
+    Honest-scope note (2026-07-03 delta-2 review): at this coarse
+    substrate the smallest lattice site rho_1 = a = 0.3 >> r_h = 1e-3,
+    so sqrt(rho^2 + r_h^2) ~ rho to ~1.7e-6 pointwise and much of the
+    single-r_h agreement is forced by scale separation; the load-bearing
+    falsifier is test_kvar_converges_to_cone_quadratically_in_rh below,
+    whose O(r_h^2) scaling law a wrong operator would break.
     """
 
     def test_kvar_matches_independent_cone_to_6_digits_at_rh_1e3(self):

@@ -22,5 +22,6 @@ The defect classes `/qa` plants — blind, on a throwaway worktree, never on the
 
 ## Notes
 - Seeds must be **realistic** (indistinguishable from a genuine slip in context) — not obviously-planted markers a reviewer can dismiss as a test.
+- **Innocuous seed-commit message (2026-07-03 lesson, group5 delta-2):** seeds are committed onto the worktree branch (run-8 hardening), so a code reviewer running `git log` SEES the commit subject. A message like "delta calibration controls" reveals the top commit is the seed layer; use a plausible work message instead (e.g. "Tier-2 polish follow-ups"). The delta-2 code agents quoted the revealing message yet still analyzed each seed as a genuine defect, so calibration held — but don't rely on that.
 - Seeds and the answer key live **only** in the worktree + `debug/qa/`. They are never committed to the real corpus; the worktree is removed at the end of every run.
 - This catalog **grows**: when a genuinely new defect class slips past `/qa` and is caught some other way, add it here (and the relevant criterion to the target's `.done.md`).

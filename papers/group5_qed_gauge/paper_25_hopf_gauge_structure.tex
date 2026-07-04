@@ -873,14 +873,19 @@ $\{0, 12, 32, 60, 96, 140, \ldots\}$ with multiplicities
 $\{1, 8, 27, 64, 125, 216, \ldots\}$.  A least-squares fit of the
 eleven nonzero quotient eigenvalues to the $\mathbb{CP}^2$ sequence
 under a single linear rescaling leaves a $40.8\%$ maximum relative
-residual; the ratios
+residual (measured against the fitted values); the ratios
 $\lambda_{\text{quot},k} / \lambda_{\mathbb{CP}^2, k}$ range
-between~$0.082$ and~$0.185$, so \emph{no} single rescaling can leave
-less than ${\approx}50\%$ maximum residual against the fit
-(${\approx}33\%$ against the data) --- there is no uniform fit under
-any convention.  (An earlier version quoted a $24.98\%$ residual from
-an unrecorded fit convention; it is superseded by the pinned
-computation in \texttt{tests/test\_su3\_wilson\_s5.py}, class
+between~$0.082$ and~$0.185$, so \emph{no} single rescaling can bring
+the maximum relative residual below the sharp two-point floor
+$(r_{\max} - r_{\min})/(r_{\max} + r_{\min}) \approx 38\%$ under
+either normalization (a fortiori ${\geq}33\%$ against the data;
+deviation \emph{factor} $\sqrt{r_{\max}/r_{\min}} \approx 1.50$) ---
+there is no uniform fit under any convention.  (An earlier version
+quoted a $24.98\%$ residual from an unrecorded fit convention, and a
+first corrected printing overstated the against-the-fit floor as
+${\approx}50\%$ --- the one-sided minimax is the $38\%$ two-point
+floor above; both are superseded by the pinned computation in
+\texttt{tests/test\_su3\_wilson\_s5.py}, class
 \texttt{TestPaper25CP2Quotient}, which also pins the twelve-sector
 spectrum above.)  The quotient is a
 combinatorial SO(3)-labeled graph, not a spectral discretization

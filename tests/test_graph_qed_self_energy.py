@@ -653,7 +653,8 @@ class TestPendantEdgeSweep:
         gs_idx = _ground_state_indices(labels)
         expected = 2.0 * (n_max - 1) / n_max
         block = se.Sigma_numpy[np.ix_(gs_idx, gs_idx)]
-        assert np.allclose(block, expected * np.ones((2, 2)), atol=1e-10)
+        assert np.allclose(block, expected * np.ones((2, 2)), atol=1e-10,
+                           rtol=0)
 
 
 # ===========================================================================

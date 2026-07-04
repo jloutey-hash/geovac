@@ -122,6 +122,21 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
   P28-adjacent files — C14 reports advisory, not blocking.
 
 ## Change log
+- 2026-07-03 — **Delta-verification #2 over the v4.65.0 Tier-2 diff = DEFECTS → remediated in-run (v4.65.1).**
+  Seven payload/path-pinned reviewers (2 Opus claims + Opus synthesis + Sonnet citation + 3 Sonnet code,
+  two seeds per Sonnet agent); **sensitivity 11/11 + 5 cross-catches, specificity 6/6**; deterministic
+  8/8 (C10 9/9; C11 after an out-of-scope group6-synthesis title fix). **One genuine MATERIAL-SMALL in
+  the diff:** the P25 CP² "≈50% max residual against the fit" floor is an invalid one-sided bound
+  (PM-verified: sharp minimax floor (rmax−rmin)/(rmax+rmin) ≈ 38.5%; the LS fit itself achieves 40.8%
+  vs fit) → paper + test corrected to the sharp 38% floor; the ≥33% vs-data floor / 40.8% LS residual /
+  no-uniform-fit verdict / synthesis all stand. Out-of-diff fix-on-sight (carve-out classes): P36 3D
+  Drake–Swainson ref −0.005249 → −0.0052321481 (+0.07%, four loci synced, slow suite 9/9); P51
+  Cheeger–Simons → Cheeger–Solodukhin; P30 abstract rows→columns-of-B₂; rtol=0 tightening; cone-reference
+  honest-scope note. 3 new C16 entries; C12-catches-the-K-seed gate datum; innocuous-seed-commit-message
+  process note; P28 F₂-evenness coverage gap logged (matrix). All 27 P51 tier tags verified SOUND; the
+  P30→P28 co-exact-propagator cross-reference PM-verified against P28 primary text (supported). Touched
+  tests + compiles + gates re-green. **Next: the certifying FULL run (PI timing); a micro-delta over the
+  remediation diff is the conservative option.**
 - 2026-07-03 — **Tier-2 backing sprints COMPLETE (PI-directed; v4.65.0).** Five parallel tracks:
   Furry derivation ported (21 symbolic tests; census de-tautologized, totals unchanged); XCWG
   durability migration (14 drivers → tests/wilson_rule_b_support/, 24 witness tests); P51 three

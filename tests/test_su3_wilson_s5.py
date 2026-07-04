@@ -606,8 +606,13 @@ class TestPaper25CP2Quotient:
     scheme: inter-sector weights count crossing edges), (b) the ratio
     range 0.08--0.19 against the Fubini-Study CP^2 spectrum 4k(k+2),
     and (c) the no-fit quantification: the least-squares single
-    rescaling leaves a 40.8% maximum relative residual, and NO single
-    rescaling can do better than ~33% under either normalization."""
+    rescaling leaves a 40.8% maximum relative residual (vs fit), and NO
+    single rescaling can do better than the sharp two-point floor
+    (rmax-rmin)/(rmax+rmin) ~ 38% under either one-sided normalization
+    (a fortiori >= 33% vs data; deviation factor sqrt(rmax/rmin) ~ 1.50).
+    Corrected 2026-07-03: an earlier docstring/paper printing overstated
+    the vs-fit floor as ~50% (= sqrt(rmax/rmin)-1, which is NOT a valid
+    one-sided floor -- the LS fit itself beats it at 40.8%)."""
 
     # From debug/data/s5_graph_spectrum.json (multiplicity scheme),
     # printed rounded in Paper 25 Sec. VII.A.
@@ -656,8 +661,9 @@ class TestPaper25CP2Quotient:
     def test_cp2_no_uniform_fit(self):
         """Ratios lambda_quot,k / lambda_CP2,k in [0.08, 0.19]; the
         least-squares single rescaling leaves a 40.8% max relative
-        residual; the minimax-optimal rescaling still leaves 50%
-        (residual vs fit) / 33% (residual vs data). CP^2 Fubini-Study
+        residual (vs fit); the sharp one-sided minimax floor is
+        (rmax-rmin)/(rmax+rmin) ~ 38.5% under either normalization,
+        a fortiori >= 33% vs data. CP^2 Fubini-Study
         (holomorphic sectional curvature 4): lambda_k = 4k(k+2)."""
         _, ev = self._quotient_eigs()
         q = ev[1:]                                     # 11 nonzero
@@ -670,10 +676,15 @@ class TestPaper25CP2Quotient:
         s = float(q @ c / (c @ c))
         resid_ls = np.max(np.abs(q - s * c) / (s * c))
         assert abs(resid_ls - 0.4078) < 5e-3
-        # convention-robust floor: for ANY rescaling s, the max relative
-        # residual is >= sqrt(rmax/rmin) - 1 (vs fit) and
-        # >= 1 - sqrt(rmin/rmax) (vs data)
-        floor_fit = np.sqrt(r.max() / r.min()) - 1.0
+        # convention-robust floors: for ANY rescaling s, the max relative
+        # residual (under EITHER one-sided normalization) is >= the sharp
+        # two-point minimax (rmax-rmin)/(rmax+rmin); the weaker
+        # 1 - sqrt(rmin/rmax) bounds the vs-data convention.  (The former
+        # docstring's sqrt(rmax/rmin)-1 "vs fit floor" is NOT a valid
+        # one-sided floor -- the LS fit itself beats it at 40.8%.)
+        floor_sharp = (r.max() - r.min()) / (r.max() + r.min())
         floor_data = 1.0 - np.sqrt(r.min() / r.max())
-        assert floor_fit > 0.49
+        assert floor_sharp > 0.38
         assert floor_data > 0.33
+        # and the LS residual respects the sharp floor
+        assert resid_ls > floor_sharp

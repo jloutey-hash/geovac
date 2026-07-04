@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.65.1] - 2026-07-03
+
+**`/qa group5` delta-verification #2 (over the v4.65.0 Tier-2 diff) = DEFECTS → remediated in-run.** Seven payload/path-pinned reviewers (2 Opus claims + Opus synthesis + Sonnet citation + 3 Sonnet code); **sensitivity 11/11 seeds + 5 cross-catches, specificity 6/6 controls**; deterministic gates 8/8 (C10 compiles 9/9 + re-compiles post-fix).
+
+### Fixed (one genuine MATERIAL in the diff + fix-on-sight items)
+- **P25 CP² floor overstatement (MATERIAL-SMALL, delta-introduced, PM-verified numerically):** "no rescaling can leave less than ≈50% maximum residual against the fit" is an INVALID one-sided bound — √(rmax/rmin)−1 is not a vs-fit floor (the LS fit itself achieves 40.8% vs fit; scan-verified minimax 38.47%). Paper + `test_su3_wilson_s5.py` corrected to the sharp two-point floor (rmax−rmin)/(rmax+rmin) ≈ 38% with supersession note; the ≥33% vs-data floor, the 40.8% LS residual, the no-uniform-fit verdict, and the synthesis line all stand unchanged.
+- **P36 3D Bethe-log reference mistranscription (citation panel; secondary-number carve-out):** −0.005249 → the actual Drake–Swainson 1990 Table I value −0.0052321481; residual −0.24% → **+0.07%** (the "cleanest from-scratch Bethe log" got cleaner). Synced at all four loci: paper + `test_paper36_lamb_chain.py` (docstring/assert/header) + `paper36_lamb_support/bethe_log_sturmian.py` DRAKE_REF; slow suite re-run 9/9.
+- **P51 "Cheeger–Simons" → "Cheeger–Solodukhin"** (phantom co-author; the attached cites are Cheeger 1983 solo + Solodukhin 1995 solo; Cheeger–Simons is the unrelated differential-characters work).
+- **group6 synthesis: 5 stale internal titles** (P18/P24/P28/P31/P32) synced to real `\title{}`s — C11 back to corpus-wide PASS (out-of-scope fix-on-sight per deferral-is-churn).
+- **P30 abstract:** "plaquette rows span ker L₁" → "plaquette columns of B₂" (transpose slip vs the Proposition). **`test_graph_qed_self_energy.py`:** `np.allclose(..., rtol=0)` so the claimed 1e-10 is literal. **`test_paper51_g44_headlines.py`:** honest-scope docstring note (the r_h≪a scale separation forces much of the single-r_h agreement; the O(r_h²)-scaling test is the load-bearing falsifier).
+
+### Added (gate + process hardening)
+- **3 new C16 registry entries** (`cp2-50pct-vs-fit-floor`, `drake-swainson-3d-mistranscription`, `cheeger-simons-cone-attribution`) — the retired values/phrases can never silently resurface.
+- **Gate datum:** the C5/C12 deterministic screen CATCHES the planted "derived footing" K-seed (worktree run FAILs on exactly the seeded line) — the K-prohibition has a working deterministic backstop for this phrasing class on top of the claims reviewer that also caught it.
+- **Seed-catalog process note:** innocuous worktree seed-commit messages (the "calibration controls" subject was visible to code agents running `git log`; calibration held regardless, but don't rely on it).
+- **Coverage note (matrix):** P28 "F₂(t) is an even rational function of t" — the evenness itself is untested (only t=0, t=−1/16 evaluated); logged, not delta-blocking.
+
+### Verdict
+- Delta = **DEFECTS → remediated**; touched tests green (CP² 3/3, Lamb 9/9 --slow, self-energy+g44 82 fast), 4 papers + group6 synthesis recompile 0-errors, C5/C11/C16/C17 re-PASS. Certifying FULL run next at PI timing (a micro-delta over this remediation diff is the conservative option). Worktree removed; zero seed leakage verified.
+
 ## [4.65.0] - 2026-07-03
 
 **group5 Tier-2 backing sprints COMPLETE (PI-directed) — five parallel worker tracks; ~90 net new tests; six genuine claim corrections found by validate-before-pinning; two production tautologies replaced with real physics checks.**
