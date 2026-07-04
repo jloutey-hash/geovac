@@ -444,3 +444,77 @@ def test_witness1_archive_matches_recompute():
         d_s = sdim.extract_spectral_dimension(T_GRID, P, c, V)["d_s_window"]
         d_s_arch = d["rule_b"][str(n_max)]["spectral_dimension"]["d_s_window"]
         assert abs(d_s - d_s_arch) < 1e-9
+
+
+# =====================================================================
+# Cert-run additions (2026-07-04): numeric re-derivations + v5 pins
+# =====================================================================
+
+def test_witness6_perimeter_dominance_from_numeric_fields():
+    """W6 re-derived from the archived JSON's NUMERIC fields (not the
+    driver's own verdict flags): at every beta the joint-fit area
+    coefficient is tiny while the perimeter coefficient is large and
+    positive -- the honest weak-pass 'perimeter-dominated' reading.
+    Added 2026-07-04 (cert run: the verdict-label asserts alone could
+    not catch a silently flipped fit)."""
+    d = _load("xcwg_full_mc_wilson_loops.json")
+    rows = d["n_max_2"]["sigma_results"]
+    assert len(rows) >= 5
+    for r in rows:
+        s, mu = r["sigma_MC_combined"], r["mu_MC_combined"]
+        assert abs(s) < 0.05          # area coefficient tiny at every beta
+        assert mu > 0.0               # perimeter coefficient positive
+        assert mu > 5 * abs(s)        # perimeter dominance, per row
+    # strong-coupling rows carry the large perimeter signal (mu decays
+    # with beta as <W> -> 1; the flat signal lives at small beta)
+    strong = {r["beta"]: r["mu_MC_combined"] for r in rows if r["beta"] <= 0.3}
+    assert all(mu > 0.1 for mu in strong.values()) and len(strong) == 3
+
+
+def test_witness7_confinement_from_numeric_fields():
+    """W7 re-derived from the archived JSON's numeric fields: every
+    non-degenerate (N_t, beta) cell has Re<P> and Im<P> zero within
+    2 sigma (paper: all 6 cells within 2 sigma).  Added 2026-07-04."""
+    d = _load("xcwg_polyakov_loop.json")
+    checked = 0
+    for row in d["verdict_summary"]:
+        if row["degenerate_N_t_2"]:
+            continue
+        assert abs(row["re_P_mean"]) <= 2.0 * row["re_P_se"], row
+        assert abs(row["im_P_mean"]) <= 2.0 * row["im_P_se"], row
+        checked += 1
+    assert checked == 6
+
+
+def test_v5_nmax4_sigma_comb_pins():
+    """Paper 41 sec 6.5 (XCWG-G n_max=4): graph V=60/E=312/beta_1=253;
+    joint-fit sigma_comb at beta=0.3 is -0.080 +/- 0.002 with z = -48
+    (the statistically-NEGATIVE structural surprise the paper reports).
+    Added 2026-07-04 (this v5 subsection had zero regression backing)."""
+    d = _load("xcwg_full_mc_wilson_loops_nmax4.json")
+    n4 = d["n_max_4"]
+    assert (n4["V"], n4["E"], n4["beta_1_graph"]) == (60, 312, 253)
+    rows = {r["beta"]: r for r in d["verdict"]["per_beta_status"]}
+    r03 = rows[0.3]
+    assert abs(r03["sigma_comb"] - (-0.0803)) < 0.0005
+    assert abs(r03["sigma_comb_se"] - 0.00166) < 0.0002
+    assert abs(r03["z_score"] - (-48.3)) < 0.5
+    assert d["verdict"]["outcome"].startswith("NEGATIVE_SIGMA_COMB")
+
+
+def test_v5_polyakov_rate_resolution_pins():
+    """Paper 41 sec 6.7 (XCWG-J): dual graph V=60/E=288/avg degree 9.60/
+    lambda_2 = 2.138; rate-constant resolution c_sigma_ens = 1.196 vs
+    c_mu_comb = 1.242 (4% agreement).  Added 2026-07-04 (zero
+    regression backing before)."""
+    d = _load("xcwg_polyakov_rate_refinement.json")
+    n2 = d["n_max_2"]
+    dg = n2["dual_graph_unweighted"]
+    assert (dg["V_dual"], dg["E_dual"]) == (60, 288)
+    assert abs(dg["avg_degree"] - 9.60) < 0.01
+    assert abs(n2["dual_spectrum_unweighted"]["spectral_gap_lambda2"]
+               - 2.138) < 0.001
+    m = d["n_max_2_what_measured"]
+    assert abs(m["c_sigma_ens"] - 1.196) < 0.001
+    assert abs(m["c_mu_comb"] - 1.242) < 0.001
+    assert abs(m["c_sigma_ens"] / m["c_mu_comb"] - 1.0) < 0.05

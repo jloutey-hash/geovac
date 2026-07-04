@@ -3,8 +3,10 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only group5-specific scope + deltas + the branch watch-notes.
 
-> **STATUS: DRAFTED 2026-07-02 for PI freeze** (sixth pre-registered `/qa` target; the
-> HEP/gauge-theory branch). Inherits criteria.md C1–C17 + the v4.62.1 run-shapes
+> **STATUS: CERTIFIED ✅ 2026-07-04** (certifying FULL run PASS after in-run
+> loop-until-dry convergence; 5th certified branch, after group3/group1/group2/group4.
+> Run notes: `debug/qa/group5_cert_run_notes.md`.) Originally drafted 2026-07-02
+> (sixth pre-registered `/qa` target; the HEP/gauge-theory branch). Inherits criteria.md C1–C17 + the v4.62.1 run-shapes
 > protocol (first cert = FULL run; delta-verification cycles between; final certifying
 > FULL only after a clean delta; Sonnet-tiered code/citation reviewers with two seeds
 > each; seeds COMMITTED onto the worktree branch per the run-8 hardening).
@@ -122,6 +124,24 @@ required per C1/C2 — and MEASURED where numerical (C_VP/C_SE, F₂ scaling).
   P28-adjacent files — C14 reports advisory, not blocking.
 
 ## Change log
+- 2026-07-04 — **Certifying FULL run = PASS → group5 CERTIFIED ✅ (v4.66.0).**
+  19 agents (~3.9M tokens): 8 Sonnet code (1/paper) + 4 Opus claims + 2 Sonnet citation +
+  Opus synthesis + 2 recovery re-dispatches + rescan + completeness-critic + gap-closure.
+  **Sensitivity 25/25 seeds (2 via the run-6 recovery protocol), specificity 8/8**;
+  deterministic 7 gates + C10 9/9 green at every wave. ~20 genuine MATERIALs, ALL
+  remediated across 2 loop-until-dry cycles — second-locus zombies (P51 Q2 Wald factor-2,
+  φ(2) S_BH prefactor, Möbius-open clause; synthesis L₁-kinetic; Furry "by Hermiticity" ×5),
+  tier calibration (scalar_ak → INTERNAL THEOREM; P2 EM factor-2 disclosed), stale numbers
+  (P36 68 ppm, 202.16; P30 2–35%, three-loop table recomputed), and coverage gaps closed
+  with ~25 new pins (replica S_BH, golden L₁ spectrum, D₄–D₆ values, P41 v5 JSONs, census
+  n_max=3, EM-tail documented-failure guard + RuntimeWarning). Durability: p-value driver →
+  tests/paper2_support/; muonic drivers resurrected → tests/paper36_precision_support/
+  (archived-measured). 3 new C16 entries (self-tested). **No §C8 headline was ever wrong.**
+  Named follow-ups: p-value reduced-slice pin; MH/Mu re-validation + pin wiring; D₄–D₆
+  Euler-sum derivation pins; LS-2 velocity live recompute (the 3.3× denominator);
+  F₂-evenness-in-t; hodge1/P28 labeling (PI-named, now disclosed inline at
+  eq:hodge1_spectrum); L6 production-number regeneration. Full chronicle:
+  debug/qa/group5_cert_run_notes.md.
 - 2026-07-03 — **Delta-verification #2 over the v4.65.0 Tier-2 diff = DEFECTS → remediated in-run (v4.65.1).**
   Seven payload/path-pinned reviewers (2 Opus claims + Opus synthesis + Sonnet citation + 3 Sonnet code,
   two seeds per Sonnet agent); **sensitivity 11/11 + 5 cross-catches, specificity 6/6**; deterministic

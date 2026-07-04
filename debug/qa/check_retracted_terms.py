@@ -67,6 +67,62 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "su2-kinetic-equals-L1",
+        "scope": "group5",
+        "severity": "fail",
+        "retired": "2026-07-04 (group5 cert run): the P30 weak-coupling kinetic form "
+                   "is the co-exact completion B2 B2^T with support complementary to "
+                   "L1 (L1 vanishes on the cycle space); the 'kinetic term = L1 / "
+                   "proportional to L1' reading is withdrawn (P30 Prop 2 correction, "
+                   "v4.65.0; the synthesis echo was caught by the cert panel).",
+        "pattern": r"L_1\s*=\s*B\^?\{?\\top\}?\s*B\$?\s+as\s+the\s+kinetic\s+term"
+                   r"|returns\s+Paper~?25's\s+\$?L_1.{0,30}kinetic\s+term"
+                   r"|kinetic\s+form\s+reduces\s+to\s+\$?L_1"
+                   r"|kinetic\s+term.{0,40}proportional\s+to\s+\$?L_1"
+                   r"|\$?L_1\$?.{0,20}up\s+to\s+a\s+positive\s+scalar\s+multiple",
+        "exempt_if_nearby": r"withdrawn|WITHDRAWN|wrong|incorrect|complementary"
+                            r"|completes?|completion|co-exact|corrected|not\s+a\s+multiple",
+        "files": [
+            "papers/group5_qed_gauge/*.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+            "tests/test_su2_wilson_gauge.py",
+        ],
+    },
+    {
+        "id": "wald-factor2-cone-coefficient",
+        "scope": "group5",
+        "severity": "fail",
+        "retired": "2026-07-04 (group5 cert run): attributing the G7/G4-2 factor of 2 "
+                   "to a scalar-vs-Dirac conical-defect coefficient calibration is the "
+                   "2026-05-30-rejected reading (the cones share the coefficient "
+                   "magnitude; the factor is Wald-forced bookkeeping). The Q2 open-"
+                   "question echo was caught by the cert panel.",
+        "pattern": r"scalar\s+vs\s+Dirac\s+conical-defect\s+coefficient\s+calibration"
+                   r"|factor[- ]of[- ]2.{0,60}scalar[- ]vs[- ]Dirac\s+co(?:ne|efficient)",
+        "exempt_if_nearby": r"incorrect|rejected|WRONG|Wald|bookkeeping|does\s+NOT|not\s+come",
+        "files": [
+            "papers/group5_qed_gauge/paper_51_gravity_arc.tex",
+            "papers/group5_qed_gauge/paper_28_qed_s3.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+        ],
+    },
+    {
+        "id": "sbh-phi2-prefactor",
+        "scope": "group5",
+        "severity": "fail",
+        "retired": "2026-07-04 (group5 cert run): the naive 'S_BH prefactor ~ "
+                   "phi(2)/phi(1) for arbitrary cutoff' prediction was REJECTED by "
+                   "G4-5d (65% deviation; the tip term lives at the log-regulated "
+                   "phi(0) moment). A live echo in the Connection-to-G8 subsection "
+                   "was caught by the cert panel.",
+        "pattern": r"prefactor\s*\$?\\propto\s*\\phi\(2\)/\\phi\(1\)\$?\s+for\s+arbitrary\s+cutoff",
+        "exempt_if_nearby": r"REJECTED|rejected|naive|\\phi\(0\)|not\s+\\phi\(2\)",
+        "files": [
+            "papers/group5_qed_gauge/paper_51_gravity_arc.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+        ],
+    },
+    {
         "id": "cp2-50pct-vs-fit-floor",
         "scope": "group5",
         "severity": "fail",

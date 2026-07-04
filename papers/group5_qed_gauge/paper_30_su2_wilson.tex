@@ -64,8 +64,9 @@ counts are $\beta_1 = 0, 2, 8$ and the primitive 4-cycle counts are
 $0, 2, 8$; a 2000-sample Metropolis run on $n_{\max} = 3$ at $\beta
 \in \{0.5, 1, 2, 5\}$ gives Wilson expectations $\langle W \rangle =
 0.126, 0.158, 0.332, 0.681$, monotonic with $\beta$ and
-matched to the leading-order character expansion at the $\sim 20\%$
-level.  All 33 tests in \texttt{tests/test\_su2\_wilson\_gauge.py}
+matched to the leading-order character expansion at the $2$--$35\%$
+level across the four $\beta$ values (closest at the strong- and
+weak-coupling ends).  All 36 tests in \texttt{tests/test\_su2\_wilson\_gauge.py}
 pass.
 The scope is a compact-graph non-abelian lattice gauge construction,
 not a Yang--Mills mass-gap claim on $\mathbb{R}^4$; the paper closes
@@ -77,8 +78,8 @@ organizing principle of least action.
 An $\mathrm{SU}(3)$ sibling on the Bargmann--Segal $S^5$ graph
 (Paper~24) has been constructed in Sprint~ST-SU3
 (\texttt{debug/st\_su3\_wilson\_memo.md}, May~2026), confirming
-Theorem~1's analog (Cartan reduction to $U(1)\times U(1)$) and
-Theorem~2's analog (kinetic coefficient $1/12 = 1/(4 N_c)$) at machine
+Proposition~1's analog (Cartan reduction to $U(1)\times U(1)$) and
+Proposition~2's analog (kinetic coefficient $1/12 = 1/(4 N_c)$) at machine
 precision; matter coupling on $S^5$ encounters the Sprint~5 Track~S5
 Clebsch--Gordan-intertwiner obstruction, sharpening Paper~24's
 Coulomb/HO asymmetry to four layers (spectrum-computing $L_0$,
@@ -728,8 +729,10 @@ $\beta$ & $\langle W \rangle_{\mathrm{MC}}$ & $\pm\,$stderr & $\langle W \rangle
 \end{tabular}
 \end{table}
 
-The two estimates agree at the $\sim 20\%$ level at intermediate
-$\beta$.  Discrepancy is structural: the leading-order character
+The two estimates agree at the $2$--$35\%$ level ($1.8\%$, $34\%$,
+$23\%$, $5.3\%$ at $\beta = 0.5, 1, 2, 5$; loosest at intermediate
+$\beta$; corrected 2026-07-03 from an earlier ``$\sim 20\%$''
+characterization that understated the $\beta = 1$ row).  Discrepancy is structural: the leading-order character
 expansion treats plaquettes $P_A$ and $P_B$ of
 Eq.~(\ref{eq:p_block_plaquettes}) as independent, which they are not
 (they share the undirected edge $\{(2,1,0), (3,1,0)\}$).  Monte Carlo
@@ -868,7 +871,7 @@ well-defined without renormalization, (iv) exact $U(1)$ reduction to
 Paper~25 in the maximal-torus limit, (v) the weak-coupling kinetic
 term identified as the co-exact (curl) completion of
 $L_1 = B^{\top} B$, with universal coefficient $1/8 = 1/(4N_c)$.
-All 33 tests in \texttt{tests/test\_su2\_wilson\_gauge.py} pass,
+All 36 tests in \texttt{tests/test\_su2\_wilson\_gauge.py} pass,
 including the numerical $U(1)$-reduction test, end-to-end gauge
 invariance at machine precision (asserted $< 10^{-13}$), the kinetic
 quadratic-form tests, and the seeded Monte Carlo Wilson-loop table.
@@ -1032,13 +1035,13 @@ elements, so an SU(3) action on the $(N, 0)$ tower fails the Wilson
 Sprint~ST-SU3 (May~2026,
 \texttt{debug/st\_su3\_wilson\_memo.md}, with module
 \texttt{geovac/su3\_wilson\_s5.py} and tests
-\texttt{tests/test\_su3\_wilson\_s5.py} 39/39 pass) tested a
+\texttt{tests/test\_su3\_wilson\_s5.py} 49/49 pass, two slow-marked) tested a
 structurally different question: \emph{Wilson lattice gauge theory}
 with link variables $U_e \in \mathrm{SU}(3)$ as external 3$\times$3
 matrices in the fundamental representation, independent of the shell
 index $N$.  The construction parallels the present paper's
-$\mathrm{SU}(2)$ on $S^3$.  Three structural theorems mirror the
-present results:
+$\mathrm{SU}(2)$ on $S^3$.  Three structural results mirror those of
+the present paper:
 
 \begin{itemize}
 \setlength\itemsep{0pt}
@@ -1100,7 +1103,7 @@ side.  The reading of Paper~24 \S~V is updated accordingly.
 
 Sprint 4 Track RH-Q constructed SU(2) Wilson lattice gauge theory on
 the GeoVac Hopf graph (module \texttt{geovac/su2\_wilson\_gauge.py},
-33 tests passing).  The present paper formalizes that construction
+36 tests passing, 2026-07-04 count).  The present paper formalizes that construction
 and places it in context relative to Paper~25's abelian $U(1)$
 predecessor.
 

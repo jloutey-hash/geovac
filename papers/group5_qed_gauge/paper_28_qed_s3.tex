@@ -129,8 +129,9 @@ electrons, the sole failure is Furry's theorem; for Dirac electrons,
 the diagonal vertex coupling $V(a, a, q, m_q) = 0$ vanishes
 identically by the \emph{Dirac spinor phase constraint}: the
 $\alpha$-matrix is off-diagonal in large/small component space, and
-for $a = b$ the cross terms cancel by Hermiticity combined with the
-$i$-factor on the small component.  This is a kinematic identity of
+for $a = b$ the cross terms combine, via Hermiticity and the
+$i$-factor on the small component, into an imaginary part that
+$m_l$ conservation forces to vanish.  This is a kinematic identity of
 the single-particle vertex, not the field-theoretic charge conjugation
 mechanism.  For Dirac electrons, the 8~rules partition as
 $1$--$7$--$8$: graph topology $\to$ angular momentum conservation
@@ -164,13 +165,20 @@ The present paper extends this taxonomy to perturbative QED by computing
 spectral sums that probe the interaction structure of quantum
 electrodynamics on~$S^3$.
 
-All calculations in the paper use three modules in the \texttt{geovac}
+All calculations in the paper use four modules in the \texttt{geovac}
 codebase: \texttt{qed\_vacuum\_polarization} (one-loop heat kernel),
 \texttt{qed\_vertex} (two-loop sunset with vertex parity),
 \texttt{qed\_self\_energy} (one-loop self-energy and vertex correction),
 and \texttt{qed\_three\_loop} (three-loop chain topology with $O(N^3)$
 factorization).  Every stated numerical value is backed by a test in
-\texttt{tests/test\_qed\_*.py} (combined 117 tests, all passing).
+\texttt{tests/test\_qed\_*.py} (the four named modules' suites collect
+150 tests; the full glob collects 645 as of 2026-07-04 --- all
+passing).  Two scope notes (2026-07-04): the Sommerfeld
+product-survival closed forms $D_4$--$D_6$ are pinned at value level
+in \texttt{tests/test\_paper28\_gap\_closure\_pins.py} (their
+Euler-sum derivation pins are a named follow-up), and the flat-space
+consistency checks are frozen in
+\texttt{tests/test\_qed\_flat\_limit.py}.
 
 The central finding is that the $S^3$ spectral geometry produces the
 \emph{same} transcendental constants that appear in flat-space
@@ -228,6 +236,14 @@ eigenvalues and degeneracies
   \mu_q = q(q+2), \qquad d_q^T = q(q+2), \qquad q = 1, 2, 3, \ldots
   \label{eq:hodge1_spectrum}
 \end{equation}
+(Labeling-convention note, 2026-07-04: this is the framework's
+$q$-labeling as implemented and documented in
+\texttt{geovac/hodge1\_s3.py}; the literature's coclosed/transverse
+family --- Ikeda--Taniguchi 1978, Camporesi 1990 --- is indexed so
+that the eigenvalue reads $(k+1)^2$ with multiplicity $2k(k+2)$.
+Reconciling the two labelings at the operator level is the named
+hodge1/P28 follow-up, deferred as its own item; the module's anchor
+test documents the divergence.)
 The Ricci shift $+2$ relative to the scalar Laplacian eigenvalues
 $\ell(\ell+2)$ follows from the Bochner--Weitzenb\"ock identity
 $\Delta_1 = \nabla^*\nabla + \mathrm{Ric}$ on $S^3$
@@ -2383,8 +2399,9 @@ properties:
 \item[(ii)] $I(n_1, n_2) = I(n_2, n_1)$ (symmetric).
 \item[(iii)] $I(n, n) = 2n-2 = 2(n-1)$ for $n \ge 1$.
 \item[(iv)] \textbf{Closed form} (proved in dossier round-1c; verified
-  against \texttt{geovac/qed\_vertex.py} for all $n_1, n_2 \le 12$;
-  frozen in \texttt{tests/test\_smin\_decomposition.py}):
+  against \texttt{geovac/qed\_vertex.py} for all $n_1, n_2 \le 8$ in
+  the frozen test \texttt{tests/test\_smin\_decomposition.py}; the
+  archived dossier run swept to $\le 12$):
   \begin{equation}
     I(n_1, n_2) = 2\min(n_1, n_2) - 1 - [n_1 = n_2], \qquad
     n_1, n_2 \ge 1.
@@ -2458,8 +2475,11 @@ direct $O(N^5)$ sum to $< 10^{-78}$ at $n_{\max} = 10, 15$ across
 four parameter combinations (default $a=4,p=1$; vertex-restricted;
 higher exponents $a=6,p=2$; with and without CG weights).  The
 factorized algorithm at $n_{\max} = 50$ completes in $< 60$ seconds.
-Tests: 10 in \texttt{TestFactorizedMatchesDirect} and
-\texttt{TestFactorizedConvergence} (all passing).
+Tests: 7 in \texttt{TestFactorizedMatchesDirect} and
+\texttt{TestFactorizedConvergence} (all passing; the frozen
+factorized-vs-direct gate is $10^{-25}$ --- the $< 10^{-78}$
+agreement quoted above is the measured value at the working
+precision, re-confirmed 2026-07-04).
 
 \subsection{Convergence analysis (corrected 2026-06-11)}
 
@@ -2547,7 +2567,10 @@ individual evaluator errors.
 
 PSLQ at 220/340~dps against the complete conjectural level-2
 weight-homogeneous bases identifies all four previously pending
-components (residuals $2.6\times10^{-216}$ to $7.3\times10^{-339}$):
+components (residuals $2.6\times10^{-216}$ to $7.3\times10^{-339}$
+in the archived dossier run; the frozen regression
+\texttt{tests/test\_s3\_decomposition.py} re-gates the identifications
+at $10^{-30}$/45~dps):
 \begin{align}
   t_3(2,1,1) &= \tfrac{1}{2}\mathrm{Li}_4(\tfrac12)
    + \tfrac{1}{48}\ln^4 2 + \tfrac{1}{24}\pi^2\ln^2 2
@@ -2571,8 +2594,10 @@ components (residuals $2.6\times10^{-216}$ to $7.3\times10^{-339}$):
   \label{eq:t3_341}
 \end{align}
 Every component of the $S^{(3)}$ decomposition except the weight-10
-graded piece ($-2048\,t_3(4,3,3) - 1024\,t_3(4,4,2)$; level-2 basis
-dimension 89, not executed; parity heuristic predicts depth $\le 2$)
+graded piece ($W_{10} = -2048\,t_3(4,3,3) - 1024\,t_3(4,4,2)
+- 512\,t_2(8,2) - 1536\,t_2(4,6)$, the full four-term graded piece;
+level-2 basis dimension 89, not executed; parity heuristic predicts
+depth $\le 2$)
 is now an identified element of the level-2 ring, with the genuine
 depth-2 generators $t(5,1)$ (weight 6) and $t(5,3)$, $t(7,1)$
 (weight 8) entering at coefficients $\pm\tfrac12$.
@@ -2937,7 +2962,10 @@ At 200~dps, PSLQ identifies
   + \frac{71}{8}\,\zeta(7)
   - \frac{9}{2}\,\zeta(3)\zeta(4)\,,
 \end{equation}
-with residual $< 10^{-195}$.  The product $\zeta(2)\zeta(5)$ cancels
+with residual $< 10^{-195}$ (archived PSLQ run; the value is pinned
+live in \texttt{tests/test\_paper28\_gap\_closure\_pins.py}, and the
+$D_4$/$D_5$ decimals were independently cross-verified by direct
+partial summation, 2026-07-04).  The product $\zeta(2)\zeta(5)$ cancels
 \emph{algebraically}: its coefficient vanishes exactly (verified in
 exact rational arithmetic from the Euler sum decomposition), while
 $\zeta(3)\zeta(4)$ survives with coefficient $-9/2$.
@@ -3224,17 +3252,21 @@ CG-weighted.  The limit is $S^{(3)} = 31.5726\ldots$
 (Eq.~\eqref{eq:s3_value}): raw partial sums carry zero reliable digits
 at these truncations --- the $(\ln N)^2/N^2$ increment law, not the
 naively fitted power law, governs the tail
-(Sec.~\ref{sec:three_loop}).}
+(Sec.~\ref{sec:three_loop}).  Rows recomputed 2026-07-04 from
+\texttt{geovac/qed\_three\_loop.py} and pinned in
+\texttt{tests/test\_paper28\_gap\_closure\_pins.py}; an earlier
+printing carried stale values (1.399/3.741/5.836/7.729/15.23) from a
+pre-refactor run.}
 \label{tab:three_loop_convergence}
 \begin{tabular}{@{}cccc@{}}
 \toprule
 $n_{\max}$ & $S^{(3)}(n_{\max})$ & $\Delta$ from previous & Time (s) \\
 \midrule
-5  & 1.399 & --- & $< 0.1$ \\
-10 & 3.741 & 2.342 & $< 0.1$ \\
-15 & 5.836 & 2.095 & 0.2 \\
-20 & 7.729 & 1.893 & 0.5 \\
-50 & 15.23 & --- & $< 60$ \\
+5  & 1.062 & --- & $< 0.1$ \\
+10 & 3.572 & 2.510 & $< 0.1$ \\
+15 & 5.908 & 2.336 & 0.2 \\
+20 & 7.872 & 1.964 & 0.5 \\
+50 & 14.798 & --- & $< 60$ \\
 $\infty$ & $31.5726\ldots$ & --- & (decomposition route) \\
 \bottomrule
 \end{tabular}
@@ -4300,12 +4332,15 @@ i g \cdot \Omega_{-\kappa})$ has an $i$-factor on the small component,
 and the Dirac $\alpha$-matrix
 $\alpha = \left(\begin{smallmatrix} 0 & \sigma \\ \sigma & 0
 \end{smallmatrix}\right)$ is off-diagonal in large/small component space.
-For $a = b$, the vertex decomposes as
-$V_{LS} + V_{SL} = f g \langle \Omega_\kappa | \sigma \cdot \varepsilon
-| \Omega_{-\kappa} \rangle + g f \langle \Omega_{-\kappa} |
-\sigma \cdot \varepsilon | \Omega_\kappa \rangle^* = 0$
-by Hermiticity.  The cross terms cancel exactly, making
-$V(a, a, q, m_q) = 0$ for all $q$ and $m_q$.
+For $a = b$, the vertex decomposes as a Hermitian pair whose
+small-component $i$ phase reduces it to an imaginary part,
+$V_{LS} + V_{SL} \propto f g \,\mathrm{Im}\,
+\langle \Omega_\kappa | \sigma \cdot \varepsilon | \Omega_{-\kappa}
+\rangle$, and $m_l$ conservation forces that imaginary part to
+vanish --- the mechanism is $m_l$ conservation, not Hermiticity
+alone (Paper~33's mechanism remark; sympy-exact in
+\texttt{tests/test\_paper33\_furry\_derivation.py}).  The cross terms
+cancel exactly, making $V(a, a, q, m_q) = 0$ for all $q$ and $m_q$.
 
 This is \emph{not} Furry's theorem in the field-theoretic sense.  In
 continuum QED, Furry works because for every electron loop there is a
@@ -4343,7 +4378,8 @@ a categorically different ingredient that is absent from the graph/vector
 construction.  For \textbf{Dirac electrons}, the $7 \to 8$ transition
 is closed by the Dirac spinor phase constraint at zero additional cost:
 the off-diagonal $\alpha$-matrix combined with the $i$-factor on the
-small component makes $V(a, a, q, m_q) = 0$ identically, killing the
+small component reduces $V(a, a, q, m_q)$ to an imaginary part that
+$m_l$ conservation forces to zero identically, killing the
 tadpole at the vertex level.  No second-quantized field theory is needed.
 
 % ===================================================================
@@ -4408,7 +4444,8 @@ for scalar electrons only --- the field-theory barrier (requiring
 second-quantized charge conjugation for Furry's theorem).  For Dirac
 electrons, no field-theory barrier exists: the Dirac spinor phase
 constraint ($V(a, a, q, m_q) = 0$ identically from the off-diagonal
-$\alpha$-matrix and the $i$-factor on the small component) closes the
+$\alpha$-matrix, the $i$-factor on the small component, and $m_l$
+conservation) closes the
 $7 \to 8$ gap at the single-particle vertex level, without invoking
 particle--antiparticle cancellation.
 The vector QED sprint (Sec.~\ref{sec:vq_sprint}) provides five

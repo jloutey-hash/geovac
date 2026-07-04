@@ -249,10 +249,11 @@ def test_heat_kernel_two_term_exactness(t):
 
 
 def test_heat_kernel_no_t_half_contamination():
-    """Stronger cross-check: fit a polynomial in sqrt(t) to the residual
-    (Tr e^{-t D^2}) - (two-term asymptotic) at several small t values
-    and verify the t^{1/2}, t^{3/2}, ... coefficients are zero
-    (within numerical noise from finite mode truncation).
+    """Stronger cross-check: at several small t values, verify the
+    residual (Tr e^{-t D^2}) - (two-term asymptotic) is at least an
+    order of magnitude below the sqrt(t) scale a t^{1/2} contamination
+    would set (per-t ratio bound; docstring aligned to the actual
+    assert 2026-07-04 -- no polynomial fit is performed).
 
     If zeta_unit(0) were nonzero, the trace would carry a
     Gamma(0) * a_0 * t^0 contribution (logarithmically divergent prefactor,

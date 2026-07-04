@@ -566,3 +566,64 @@ class TestMonteCarloWilsonLoop:
                     n_samples=2000, n_thermalize=500, seed=12)
         assert m1 == m2
         assert s1 == s2
+
+
+# ---------------------------------------------------------------------------
+# Cert-run coverage-gap closures (2026-07-04)
+# ---------------------------------------------------------------------------
+
+class TestCertRunCoverageClosures:
+    """Paper 30 claims that were true-but-untested at the certifying
+    /qa run: the full-graph U(1)-reduction instance, the Table-1
+    n_max=4 row, and the MC-vs-leading-order character-expansion band
+    (the corrected '2--35%' characterization)."""
+
+    def test_u1_reduction_full_graph_n3_beta2(self):
+        """Result 1, full-graph instance: random U(1)-diagonal links on
+        the FULL n_max=3 Coulomb graph at beta=2 give |S_W - S_U1| = 0
+        to machine precision (the paper's 'fuller random-Haar-diagonal
+        check ... = 0 exactly')."""
+        lat = GeometricLattice(max_n=3)
+        A = lat.adjacency.toarray()
+        oriented, _ = enumerate_oriented_edges(A)
+        plaqs = enumerate_plaquettes(A, max_length=6, both_orientations=False)
+        rng = np.random.default_rng(7)
+        phases, links = {}, {}
+        for e in oriented:
+            if e.source < e.target:
+                phi = rng.uniform(-np.pi, np.pi)
+                phases[(e.source, e.target)] = phi
+                links[(e.source, e.target)] = diagonal_su2_from_phase(phi)
+        beta = 2.0
+        S_su2 = wilson_action(plaqs, links, beta)
+        S_u1 = u1_action_from_su2(plaqs, phases, beta)
+        assert abs(S_su2 - S_u1) < 1e-12
+
+    def test_table1_nmax4_row(self):
+        """Table 1, n_max=4 row: V=30, E=34, c=4, beta_1=8; plaquette
+        census N4=8, N6=7, N8=18."""
+        from collections import Counter
+        from scipy.sparse.csgraph import connected_components
+        lat = GeometricLattice(max_n=4)
+        A = lat.adjacency.toarray()
+        V = lat.num_states
+        E = int(np.count_nonzero(A) // 2)
+        c = int(connected_components(lat.adjacency, directed=False)[0])
+        assert (V, E, c, E - V + c) == (30, 34, 4, 8)
+        plaqs = enumerate_plaquettes(A, max_length=8, both_orientations=False)
+        cnt = Counter(len(p) for p in plaqs)
+        assert (cnt[4], cnt[6], cnt[8]) == (8, 7, 18)
+
+    def test_mc_vs_leading_order_character_expansion_band(self):
+        """Result 3: the four MC means sit within 40% of the
+        leading-order character expectation I_2(beta)/I_1(beta)
+        (measured deviations 1.8/34/23/5.3% -- the corrected 2--35%
+        characterization; an earlier printing said '~20%')."""
+        from scipy.special import iv
+        table = {0.5: 0.126, 1.0: 0.158, 2.0: 0.332, 5.0: 0.681}
+        devs = []
+        for beta, mc in table.items():
+            lo = iv(2, beta) / iv(1, beta)
+            devs.append(abs(mc - lo) / lo)
+            assert abs(mc - lo) / lo < 0.40, (beta, mc, lo)
+        assert max(devs) > 0.20   # the beta=1 row genuinely exceeds 20%

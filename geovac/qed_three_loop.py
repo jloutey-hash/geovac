@@ -54,6 +54,7 @@ References
 from __future__ import annotations
 
 import time
+import warnings
 from typing import Dict, List, Optional, Tuple
 
 import mpmath
@@ -867,6 +868,19 @@ def three_loop_euler_maclaurin_tail(
     decrease fast enough, we return a conservative estimate from the last
     increment alone.
 
+    .. warning::
+        At the PHYSICAL exponents (a=4, p=1) -- this function's own
+        defaults -- the increments follow a LOG-MODULATED law
+        (ln N)^2/N^2, NOT a power law, and the fitted-exponent estimate
+        is INVALID (CLAUDE.md section 3, the Levin/EM-on-log-modulated
+        dead-end row; Paper 28's own retraction of the N^-1.31 "power
+        law").  Measured 2026-07-04: at n_max=50 this estimator returns
+        ~62.6 where the true remaining tail is ~16.77.  A
+        RuntimeWarning is emitted in that regime; the estimate is
+        usable only for genuinely power-law regimes such as a=6, p=2.
+        The paper's S^(3) headline uses the decomposition route
+        (three_loop_decomposition), never this estimator.
+
     Parameters
     ----------
     n_max : int
@@ -883,6 +897,17 @@ def three_loop_euler_maclaurin_tail(
     mpmath.mpf
         Estimated tail correction S(inf) - S(n_max).
     """
+    if p == 1:
+        warnings.warn(
+            "three_loop_euler_maclaurin_tail: at p=1 (the physical photon "
+            "exponent) the partial-sum increments are log-modulated "
+            "((ln N)^2/N^2), not power-law; the fitted-exponent tail "
+            "estimate is INVALID in this regime (documented dead-end, "
+            "CLAUDE.md sec. 3 / Paper 28 retraction). Use the "
+            "decomposition route for the true S^(3).",
+            RuntimeWarning,
+            stacklevel=2,
+        )
     # Compute a sequence of closely-spaced partial sums
     n_pts = min(n_em_terms, 8)
     s_vals = []

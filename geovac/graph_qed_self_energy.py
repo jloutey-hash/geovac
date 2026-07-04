@@ -80,8 +80,12 @@ Transcendental taxonomy (Paper 18)
 - Vertex V: algebraic (CG coefficients = sqrt(rational))
 - Photon propagator G_gamma: rational (pseudoinverse of integer matrix)
 - Electron propagator G_e: rational (inverse of rational Dirac matrix)
-- Self-energy Sigma: rational (V . G_gamma . V^T contracts sqrt's)
-- Vertex correction Lambda: rational (same mechanism)
+- Self-energy Sigma: DIAGONAL entries rational (V . G_gamma . V^T
+  contracts sqrt's on the diagonal); off-diagonal n_fock = 2 entries
+  retain sqrt(2)/sqrt(3)/sqrt(6) (see test_sigma_not_rational /
+  test_sigma_off_diagonal_structure; docstring corrected 2026-07-04)
+- Vertex correction Lambda: same structure (diagonal rational,
+  off-diagonal algebraic)
 
 All quantities live in the intrinsic tier -- no pi, no zeta.
 

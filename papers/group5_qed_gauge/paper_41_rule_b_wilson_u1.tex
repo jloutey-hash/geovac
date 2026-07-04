@@ -622,9 +622,11 @@ L_1\;=\;d_0^\top d_0\,+\,d_1^\top d_1\quad(\text{with }d_0=B^\top),
 splitting edge cochains into the longitudinal (image of $d_0$, pure-gauge)
 and transverse (image of $d_1^\top$, physical photon) sectors. The Faddeev--Popov
 gauge fixing removes the longitudinal modes, leaving $K=d_1^\top d_1$ as the
-quadratic kinetic operator. We verified at $n_\text{max}\in\{2,3,4,5\}$ that
+quadratic kinetic operator. We verified that
 $\mathrm{rank}(K)=\mathrm{rank}(d_1)=\beta_1$, matching the Hodge theorem on
-the 2-complex.
+the 2-complex ($n_\text{max}=2$ in the frozen suite,
+\texttt{tests/test\_paper41\_wilson\_witnesses.py}; $n_\text{max}=3,4,5$
+in the archived driver run).
 
 This convention will matter explicitly when computing Gaussian Wilson loops in
 \S\ref{sec:gaussian_wilson}; using $L_1^+$ instead of $K^+$ would give contact
@@ -1899,7 +1901,7 @@ observable: \emph{YES} (homological Polyakov class $\dim\ker(d_1)=1$ at
 $N_t\in\{4,8\}$).
 (2) The kinematic degeneracy at $N_t=2$ is correctly identified and
 excluded: \emph{YES} ($\dim\ker(d_1)=0$ matches $P\equiv 1$ identity).
-(3) $\langle P\rangle=0$ within 3$\sigma$ at every non-degenerate $(\beta,N_t)$:
+(3) $\langle P\rangle=0$ within 2$\sigma$ at every non-degenerate $(\beta,N_t)$:
 \emph{YES} (all 6 cells within 2$\sigma$, largest 1.7$\sigma$).
 (4) Two-point correlator exhibits confined-phase exponential decay with
 $N_t$-dependence in the right direction: \emph{YES} (per-step ratio 0.83 at
@@ -1931,8 +1933,9 @@ the dual graph and resolves the disagreement: it is not a missing rate
 correction, but a category mismatch between two different observables.
 
 \paragraph{The dual graph $G_B^*$ at $n_\text{max}=2$.} Vertices of $G_B^*$ are
-Rule B's plaquettes (44 at $n_\text{max}=2$); edges connect plaquettes sharing
-an edge in Rule B. The construction gives $V_\text{dual}=60$,
+Rule B's monopole sites (the size-3 closed 2-cycles of the XCWG-F
+construction; 60 at $n_\text{max}=2$); edges connect sites sharing a
+plaquette. The construction gives $V_\text{dual}=60$,
 $E_\text{dual}=288$, average degree $9.60$ (vs $\mathbb{Z}^3$'s constant degree
 $6$). The dual Laplacian $L_\text{dual}=D_\text{dual}-A_\text{dual}$ has
 spectral gap $\lambda_2=2.138$ (vs $\mathbb{Z}^3$'s $\lambda_2=3.0$ on the

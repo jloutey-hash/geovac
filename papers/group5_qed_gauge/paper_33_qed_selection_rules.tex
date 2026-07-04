@@ -48,8 +48,9 @@ constant of the Hopf base.  This recovers 7/8 rules for scalar
 electrons.  The eighth rule, Furry's theorem, is recovered for Dirac
 electrons by a kinematic identity of the single-particle vertex: the
 $\alpha$-matrix is off-diagonal in the large/small-component
-decomposition, and the $i$ phase on the small component forces
-$V(a, a, q, m_q) = V_{LS} + V_{SL} = 0$ identically by Hermiticity.
+decomposition, and the $i$ phase on the small component reduces
+$V(a, a, q, m_q) = V_{LS} + V_{SL}$ to an imaginary part that $m_l$
+conservation forces to vanish identically.
 This is \emph{not} the standard second-quantized $C$-symmetry
 mechanism; it is a single-particle phase constraint that produces
 Furry as a kinematic identity at the level of the vertex bilinear.
@@ -368,7 +369,7 @@ form, the vertex bilinear satisfies $V(a, a, q, m_q) = 0$
 identically.  In particular Furry's theorem (Rule~7) holds on the
 Dirac graph + vector-photon construction, recovering 8/8 selection
 rules (census evaluated at $n_{\max} = 2$; the Ward-identity ratio
-degrades at $n_{\max} = 3$ --- see the open questions in \S VI).
+degrades at $n_{\max} = 3$ --- see the open questions in \S VIII).
 \end{theorem}
 
 \begin{proof}
@@ -504,8 +505,11 @@ the Hopf base.
 \item[Tier III (Dirac kinematic, 1 rule).]  Rule~7 (Furry's theorem)
 is recovered by the Dirac spinor phase constraint
 (Theorem~\ref{thm:dirac_8_of_8}), which forces the diagonal vertex
-bilinear $V(a, a, q, m_q)$ to vanish identically by Hermiticity and
-the off-diagonal structure of $\boldsymbol{\alpha}$.  The cost of
+bilinear $V(a, a, q, m_q)$ to vanish identically: Hermiticity and
+the off-diagonal structure of $\boldsymbol{\alpha}$ reduce it to an
+imaginary part, and $m_l$ conservation kills that imaginary part
+(Remark~\ref{rem:mechanism} --- the mechanism is $m_l$ conservation,
+not Hermiticity alone).  The cost of
 this recovery is zero: the constraint is a kinematic identity at the
 single-particle level, not a calibration.
 \end{description}

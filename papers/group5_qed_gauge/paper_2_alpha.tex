@@ -405,11 +405,15 @@ sharper reading from the Euler--Maclaurin (EM) decomposition of the
 Dirac mode-count sum.  For any cutoff $N$,
 $\sum_{n=0}^{N} g_{D}(n) = \text{integral} + [g_{D}(0) + g_{D}(N)]/2
 + \text{Bernoulli corrections}$; the upper boundary term is
-$g_{D}(N)/2 = 2(N+1)(N+2)$.  At $N = n_{\mathrm{CH}} = 3$ this equals
-$2 \cdot 4 \cdot 5 = 40 = \Delta^{-1}$.
-The EM formula explains \emph{why} a single-level degeneracy appears
-as a structural ingredient of~$K$: it is the boundary correction when
-summing the spectral action up to the selection-principle cutoff.
+$g_{D}(N)/2 = (N+1)(N+2)$.  At $N = n_{\mathrm{CH}} = 3$ this equals
+$4 \cdot 5 = 20 = \Delta^{-1}/2$ (corrected 2026-07-03: an earlier
+printing equated the half-degeneracy boundary term with the full
+$\Delta^{-1} = 40$).
+The EM boundary correction thus supplies the single-level degeneracy
+only up to a factor of $2$; the reading is suggestive --- the boundary
+of the spectral-action sum at the selection-principle cutoff --- but
+the identification $\Delta^{-1} = g_{3}^{\mathrm{Dirac}} = 40$ itself
+rests on the Phase~4H closed form, not on Euler--Maclaurin.
 
 \section{The Formula and its Three Homes}\label{sec:formula}
 %======================================================================
@@ -790,7 +794,7 @@ natural stopping point. The program has achieved:
   \item A canonical spectral home for each of $B$, $F$, $\Delta$,
     established in closed form.
   \item A complete enumeration of the mechanisms by which these three
-    ingredients might share a common spectral generator, with nine
+    ingredients might share a common spectral generator, with twelve
     mechanisms eliminated and no surviving candidate.
   \item Identification of $\zeta(3)$ as a new framework transcendental
     in the Dirac sector, distinct from the Riemann-zeta-at-even-integer
@@ -1052,8 +1056,10 @@ representation theory. The remaining gap: why the degeneracy-weighted
 Casimir trace specifically (rather than some other spectral quantity)
 for each bundle component. The second selection principle
 (Sec.~\ref{sec:second_selection}) provides independent support.}
-\footnotetext[2]{The Hermiticity of the circulant is now proven:
-$b$ and $c$ are necessarily complex conjugates (Sec.~VI\,D). This is
+\footnotetext[2]{The Hermiticity of the circulant follows once all
+three cubic roots satisfy $s_i^2 < 4K/3$ --- verified numerically
+and pinned in \texttt{tests/test\_paper2\_corrections.py} --- making
+$b$ and $c$ necessarily complex conjugates (Sec.~VI\,D). This is
 consistent with $U(1)$ gauge structure but does not yet derive
 $bc = K/3$.}
 
@@ -1629,7 +1635,11 @@ B.~Robertson, ``Wyler's expression for the fine-structure constant,''
 \bibitem{phase2_audit}
 J.~Loutey, ``Paper~2 Computational Audit: Phases 1--4,'' GeoVac
 supplementary material (2026). Available at
-\texttt{debug/alpha\_audit/} in the project repository.
+\texttt{debug/alpha\_audit/} in the project repository; the
+combinatorial-search driver behind the $p$-value is preserved
+durably at \texttt{tests/paper2\_support/phase2\_combinatorial.py}
+(2026-07-04; archived-measured --- the full $1.92\times10^9$ sweep is
+not regression-gated).
 
 \bibitem{phase1_kappa}
 J.~Loutey, ``$\kappa = -1/16$ Investigation: Phase~1,'' GeoVac

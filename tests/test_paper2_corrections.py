@@ -3,8 +3,36 @@ Regression tests locking the two verified Paper 2 corrections applied in the
 confidence-review-infra sprint (2026-06-01).
 See debug/sprint_confidence_review_infra_memo.md.
 """
+import pytest
 import sympy as sp
 from mpmath import mp, mpf, pi, zeta, polyroots
+
+
+@pytest.fixture(autouse=True)
+def _mp_dps_hermetic():
+    """Restore mpmath precision after each test (the corpus-wide mp.dps
+    collection-order hermeticity discipline, v4.64.0)."""
+    saved = mp.dps
+    yield
+    mp.dps = saved
+
+
+def test_paper2_circulant_roots_satisfy_hermiticity_premise():
+    """Paper 2 footnote 2 premise: all three roots of s^3 - K s + 1 = 0
+    are real with s_i^2 < 4K/3, which forces the circulant's b, c to be
+    complex conjugates (Sec. VI D).  Added 2026-07-04 (cert run): the
+    footnote's 'proven' rested on this numerically-true but previously
+    untested premise."""
+    mp.dps = 30
+    K = pi * (42 + zeta(2) - mpf(1) / 40)
+    roots = polyroots([1, 0, -K, 1])
+    assert len(roots) == 3
+    for r in roots:
+        assert abs(r.imag) < mpf(10) ** -20      # all real
+        assert r.real ** 2 < 4 * K / 3           # the Hermiticity premise
+    # and with sensible margin: the closest root sits ~25% below the bound
+    margin = max(float(r.real ** 2 / (4 * K / 3)) for r in roots)
+    assert margin < 0.80
 
 
 def test_paper2_cubic_root_value():

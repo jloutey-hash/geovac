@@ -10,9 +10,10 @@
 % structural floor (LS-3 acceleration form + LS-4 Drake-Swainson
 % asymptotic subtraction) and identified a one-loop double-counting bug
 % in the original LS-1 implementation (LS-6a Eides convention fix).  The
-% remaining +5.65 MHz residual is the genuine alpha^5 multi-loop ceiling
-% and is the test target for any subsequent multi-loop sprint (Paper 35
-% Prediction 1, multi-loop sector).
+% remaining -5.65 MHz residual decomposes per LS-7 into ~+1.20 MHz
+% multi-loop plus ~+4.4 MHz non-loop pieces (the original "genuine
+% alpha^5 multi-loop ceiling" reading was revised by LS-7; see the
+% revised-decomposition subsection).
 
 \documentclass[11pt]{article}
 \usepackage{amsmath,amssymb,amsthm}
@@ -177,7 +178,10 @@ Section~\ref{sec:outlook} closes with the remaining open question:
 the LS-7 multi-loop test of Paper~35's Prediction~1.
 
 \subsection*{Sprint provenance}
-The computational evidence is in
+The hydrogen Lamb chain is continuously verified by
+\texttt{tests/test\_paper36\_lamb\_chain.py} with the Sturmian
+machinery ported durably to \texttt{tests/paper36\_lamb\_support/}
+(2026-07-03); the original sprint evidence is in
 \texttt{debug/ls\{1,2,3,4,6a\}\_*.md} and the corresponding scripts
 and JSON data files.  The framework infrastructure modules used are
 \texttt{geovac/qed\_self\_energy.py}, \texttt{geovac/qed\_vacuum\_polarization.py},
@@ -267,7 +271,7 @@ LS-2 implemented the velocity-form Bethe log via the Sturmian
 projection at $\lambda = Z/n$.  At a Sturmian basis size $N$ the
 truncated values converge to ln $k_0(2S) = 2.726$ (Drake--Swainson
 1990 reference value 2.81177; LS-2 residual $-3.1\%$ at $N = 50$)
-and ln $k_0(1S) = 2.924$ (reference 2.98412; $-2.0\%$ at $N = 50$).
+and ln $k_0(1S) = 2.924$ (reference 2.98413; $-2.0\%$ at $N = 50$).
 
 For 2$P$, however, the velocity-form denominator
 $I_v(2P) = (Z^4/n^3)\,\delta_{\ell,0}$ vanishes exactly: the
@@ -760,7 +764,7 @@ implementing $Z_2$ and $\delta m$ at the spectral level.
 \end{proposition}
 
 This is honest scope.  GeoVac-internal projections (Paper~34's
-fifteen) handle the \emph{finite} parts of one-loop bound-state QED
+twenty-eight) handle the \emph{finite} parts of one-loop bound-state QED
 via Drake--Swainson + Eides~\S\,3.2 conventions (closed at sub-percent
 in Paper~36).  They do NOT autonomously regularize the multi-loop
 UV divergences; renormalization counterterms remain external input.
@@ -831,7 +835,7 @@ Higher-order multi-loop (lit.\ input) & --- & $+0.189$ \\
 Recoil NLO (lit.\ input) & --- & $-0.045$ \\
 Nuclear polarizability (lit.\ input) & --- & $+0.013$ \\
 \midrule
-Framework $+$ literature & $+202.17$ & $+202.53$ \\
+Framework $+$ literature & $+202.17$ & $+202.16$ \\
 \midrule
 Experimental (CREMA) & \multicolumn{2}{c}{$+202.3706(23)$} \\
 Residual & \multicolumn{2}{c}{$-0.10\%$} \\
@@ -863,9 +867,13 @@ with the residual decomposing exactly into the LS-8a wall plus
 leading-order $m_\text{red}$ approximations --- exactly the structure
 predicted by Sprint H1 and Sprint LS-8a.
 
-Sprint provenance: \texttt{debug/sprint\_mh\_track\_a.py},
-\texttt{debug/sprint\_mh\_track\_a\_memo.md},
-\texttt{debug/data/sprint\_mh\_track\_a.json}.
+Sprint provenance: the driver is preserved durably at
+\texttt{tests/paper36\_precision\_support/sprint\_mh\_track\_a.py}
+(resurrected 2026-07-04 from the pruned
+\texttt{debug/sprint\_mh\_track\_a.py}; archived-measured, not yet
+regression-gated --- re-validation is a named follow-up), with the
+original sprint memo and JSON in the \texttt{debug/} clean-room
+record.
 
 % -------------------------------------------------------------------
 \subsection{Sprint Mu Lamb: Muonium Fine Structure Closes at $+0.013\%$}
@@ -921,7 +929,8 @@ recoil'' to the framework total double-counts.
 multiplication of the Paper~36 normal-H framework value $1052.19$~MHz
 by the reduced-mass ratio $0.995729$ gives $1047.696$~MHz.  The native
 Eides-bracket compute gives $1047.625$~MHz.  Agreement to within
-$0.071$~MHz / $7$~ppm of the value.  This is the sharpest verification
+$0.071$~MHz / $68$~ppm of the value (corrected 2026-07-03: an earlier
+printing misstated this as $7$~ppm).  This is the sharpest verification
 yet of the rest-mass projection theorem (Paper~34 \S\,III.14) at the
 Lamb-shift bracket level.
 
@@ -960,10 +969,11 @@ Refined Prediction~1) and the rest-mass projection's leading-order
 absorption of recoil-mixing.  The bound-state QED architecture's
 \emph{native scope} is the one-loop sector; the four-system catalogue
 demonstrates that this scope is robust under the rest-mass projection
-across the full $e/\mu/p$ swap matrix.  Sprint provenance:
-\texttt{debug/precision\_catalogue\_muonium\_lamb.py},
-\texttt{debug/precision\_catalogue\_muonium\_lamb\_memo.md},
-\texttt{debug/data/precision\_catalogue\_muonium\_lamb.json}.
+across the full $e/\mu/p$ swap matrix.  Sprint provenance: the driver
+is preserved durably at
+\texttt{tests/paper36\_precision\_support/precision\_catalogue\_muonium\_lamb.py}
+(resurrected 2026-07-04; archived-measured, not yet regression-gated),
+with the memo and JSON in the \texttt{debug/} record.
 
 \subsection{Muonium catalogue closure: triple completes at the LS-8a wall}
 \label{sec:muonium_triple_closure}
@@ -1047,9 +1057,10 @@ where the framework's leading-order isolation of the LS-8a wall is
 quantitatively unambiguous.
 
 \paragraph{Sprint provenance.}
-\texttt{debug/precision\_catalogue\_muonium\_hfs.py},
-\texttt{debug/precision\_catalogue\_muonium\_hfs\_memo.md},
-\texttt{debug/data/precision\_catalogue\_muonium\_hfs.json}.
+The driver is preserved durably at
+\texttt{tests/paper36\_precision\_support/precision\_catalogue\_muonium\_hfs.py}
+(resurrected 2026-07-04; archived-measured, not yet regression-gated),
+with the memo and JSON in the \texttt{debug/} record.
 
 % ===================================================================
 \section{Conclusion}
@@ -1195,7 +1206,7 @@ up to $n=20$, and approximations for two-electron atoms,''
 \bibitem{yerokhin2024_two_loop_se}
 V.~A.~Yerokhin, Z.~Harman, and C.~H.~Keitel,
 ``Two-loop electron self-energy for low nuclear charges,''
-Phys.\ Rev.\ Lett.\ \textbf{(in press)} (2024); arXiv:2411.12459.
+Phys.\ Rev.\ Lett.\ \textbf{133}, 251803 (2024); arXiv:2411.12459.
 
 \bibitem{camporesi_higuchi}
 R.~Camporesi and A.~Higuchi, ``On the eigenfunctions of the Dirac

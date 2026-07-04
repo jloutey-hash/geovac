@@ -1178,6 +1178,25 @@ def _native_dirac_graph_tally(n_max: int = 2) -> dict:
     return tally
 
 
+class TestSelectionRulesN3Regression:
+    """Paper 33 R3/R8 at n_max = 3: the de-tautologized census checks
+    (SO(4) channel count vs closed form; triangle-on-n on the realized
+    support) hold at the larger truncation the paper claims ('verified
+    at n_max = 2, 3').  Added 2026-07-04 (cert-run coverage-gap
+    closure: only n_max = 2 was regression-tested for these two
+    rule keys)."""
+
+    def test_scalar_rules_3_and_8_pass_at_n3(self):
+        rules = compute_self_energy(3, 1).selection_rules
+        assert rules['3_so4_channel_count']['pass'] is True
+        assert rules['8_triangle_on_n']['pass'] is True
+
+    def test_dirac_rules_3_and_8_pass_at_n3(self):
+        rules = compute_dirac_self_energy(3, 1).selection_rules
+        assert rules['3_so4_channel_count']['pass'] is True
+        assert rules['8_triangle_on_n']['pass'] is True
+
+
 class TestCensusAggregates:
     """Aggregate census tests for the two graph-photon legs of Paper 33's
     partition table (the vector-photon legs 7/8 and 8/8 are asserted in

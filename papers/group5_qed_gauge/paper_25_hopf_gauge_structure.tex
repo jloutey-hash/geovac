@@ -97,7 +97,7 @@ K = \pi \left( B + F - \Delta \right)
 reproduces $\alpha^{-1}$ at $8.8 \times 10^{-8}$ with zero free
 parameters and $p$-value $5.2 \times 10^{-9}$
 (Paper~2~\cite{Paper2}).  Seven sprints of structural decomposition
-(Phases 4B--4H) have identified each of $B$, $F$, $\Delta$ as
+(Phases 4B--4I) have identified each of $B$, $F$, $\Delta$ as
 spectrally natural objects on distinct corners of the Hopf bundle,
 but the additive combination rule itself remains unexplained.
 
@@ -416,7 +416,10 @@ computed in Track Q1--B~\cite{Q1B}:
   \tfrac{5+\sqrt{5}}{2},\, 5\}.
 \label{eq:L1_spectrum}
 \end{equation}
-The two zero modes confirm $\beta_1 = 2$.  The golden-ratio
+The two zero modes confirm $\beta_1 = 2$.  (The full spectrum is
+pinned sympy-exactly, live from \texttt{GeometricLattice}, in
+\texttt{tests/test\_paper25\_s2\_quotient.py}, 2026-07-04.)  The
+golden-ratio
 eigenvalues come from the path graph $P_5$ of the d-chain; the
 eigenvalues $\{1, 3, 3, 5\}$ come from the p-block (which contains
 both cycles).  The characteristic polynomial factors completely over
@@ -894,8 +897,8 @@ of the Kähler $\mathbb{CP}^2$.
 \paragraph*{Structural interpretation: two-layer Coulomb/HO
 asymmetry becomes three-layer.} Paper~24 established the
 Coulomb/HO asymmetry at the level of the \emph{spectrum} (on
-$S^3$, $L_0 = D - A$ computes the Coulomb spectrum via
-$\kappa = -1/16$; on $S^5$, $L_0$ is spectrally inert and the HO
+$S^3$, $L_0 = D - A$ yields the Coulomb spectrum in the continuum
+limit via the $\kappa = -1/16$ projection; on $S^5$, $L_0$ is spectrally inert and the HO
 spectrum is in the diagonal).  The present sprint adds a third
 layer at the level of \emph{gauge-structure content}: the abelian
 $U(1)$ Wilson vocabulary is universal, but its physical content is

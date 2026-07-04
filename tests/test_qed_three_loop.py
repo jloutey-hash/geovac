@@ -260,13 +260,40 @@ class TestFactorizedConvergence:
 
 
 class TestEulerMaclaurinTail:
-    """Tests for the Euler-Maclaurin tail correction."""
+    """Tests for the Euler-Maclaurin tail correction.
 
-    def test_tail_correction_positive_direction(self):
-        """For this monotonically increasing sum, tail should be positive."""
-        tail = three_loop_euler_maclaurin_tail(n_max=15, n_em_terms=5, a=4, p=1)
-        # The sum is increasing, so the tail estimate should be positive
-        assert float(tail) > 0, f"Tail correction is negative: {float(tail)}"
+    The p=1 physical regime is a DOCUMENTED dead-end (log-modulated
+    (ln N)^2/N^2 increments; CLAUDE.md sec. 3 / Paper 28's retraction
+    of the N^-1.31 'power law').  Rewritten 2026-07-04 (cert-run gap
+    closure): the old test asserted only tail > 0 at the broken default
+    regime -- vacuously true for a wrong value.  The tests now assert
+    the estimator WARNS there and PIN the documented failure (the
+    vacuous-furry remediation pattern, v4.64.0)."""
+
+    def test_tail_warns_in_log_modulated_regime(self):
+        """At the physical a=4, p=1 the estimator emits RuntimeWarning."""
+        with pytest.warns(RuntimeWarning, match="log-modulated"):
+            tail = three_loop_euler_maclaurin_tail(
+                n_max=15, n_em_terms=5, a=4, p=1)
+        assert mpmath.isfinite(tail)
+
+    def test_tail_estimate_wrong_at_physical_exponents(self):
+        """Documented failure, pinned: at n_max=20, a=4, p=1 the estimate
+        (~0.35) undershoots the true remaining tail S_inf - S(20) =
+        31.5726... - 7.8719... ~ 23.7 by ~67x (and overshoots ~3.7x at
+        n_max=50).  The estimator must NOT be trusted at the physical
+        exponents; the S^(3) headline uses the decomposition route."""
+        import warnings as _w
+        with _w.catch_warnings():
+            _w.simplefilter("ignore", RuntimeWarning)
+            tail = three_loop_euler_maclaurin_tail(
+                n_max=20, n_em_terms=5, a=4, p=1)
+        true_tail = 31.5726 - 7.8719
+        ratio = float(tail) / true_tail
+        assert ratio < 1.0 / 3.0 or ratio > 3.0, (
+            f"estimator unexpectedly accurate at the physical exponents "
+            f"(ratio {ratio:.3f}) -- if genuinely fixed, update Paper 28 "
+            f"and CLAUDE.md sec. 3 before trusting it")
 
     def test_tail_correction_finite(self):
         """Tail correction returns a finite value."""

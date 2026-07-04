@@ -99,3 +99,41 @@ class TestS2QuotientNmax3:
         Lnp = np.array(L.tolist(), dtype=float)
         evals = np.sort(np.linalg.eigvalsh(Lnp))
         assert np.allclose(evals, [0, 0, 0, 1, 3, 6], atol=1e-12)
+
+
+def test_full_graph_edge_laplacian_golden_spectrum():
+    """Paper 25 Eq. (eq:L1_spectrum): the edge Laplacian L1 = B^T B of
+    the FULL n_max=3 Hopf graph (V=14, E=13) has the exact golden-ratio
+    spectrum {0 x2, 3/2-sqrt5/2, 1 x2, 5/2-sqrt5/2, 2, 3/2+sqrt5/2,
+    3 x3, 5/2+sqrt5/2, 5}.  Added 2026-07-04 (certifying /qa run:
+    this equation previously had no test and was cited only to an
+    internal memo)."""
+    import sympy as sp
+    lat = GeometricLattice(max_n=3)
+    A = np.asarray(lat.adjacency.toarray())
+    V = A.shape[0]
+    edges = [(i, j) for i in range(V) for j in range(i + 1, V) if A[i, j]]
+    assert (V, len(edges)) == (14, 13)
+    B = sp.zeros(V, len(edges))
+    for k, (i, j) in enumerate(edges):
+        B[i, k] = -1
+        B[j, k] = 1
+    L1 = B.T * B
+    x = sp.symbols("x")
+    s5 = sp.sqrt(5)
+    expected = {
+        sp.Integer(0): 2,
+        sp.Rational(3, 2) - s5 / 2: 1,
+        sp.Integer(1): 2,
+        sp.Rational(5, 2) - s5 / 2: 1,
+        sp.Integer(2): 1,
+        s5 / 2 + sp.Rational(3, 2): 1,
+        sp.Integer(3): 3,
+        s5 / 2 + sp.Rational(5, 2): 1,
+        sp.Integer(5): 1,
+    }
+    assert sum(expected.values()) == 13
+    poly_expected = sp.expand(sp.prod([(x - k) ** v for k, v in expected.items()]))
+    assert sp.expand(L1.charpoly(x).as_expr() - poly_expected) == 0
+    # and beta_1 = dim ker L1 = 2 (the two p-block 4-cycles)
+    assert expected[sp.Integer(0)] == 2
