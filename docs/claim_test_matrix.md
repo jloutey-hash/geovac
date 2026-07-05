@@ -92,7 +92,30 @@ The bite-2 `/qa` run + the PI-approved validation bucket. Coverage gaps (NO-TEST
 | 57 | Catalogue count = 60 (35 F / 1 A / 24 C) | `debug/principle_hunt_audit.py` | — | **NO-TEST** | count reconciled 62→60 (v4.20.0); driver computes it but isn't pytest-collected |
 | 57 | dim 𝓜(D_F) = 128 per generation (forced count) | `test_trunk_qa_forced_count_moduli.py` (Paper 32) | — | BACKED-SOUND | matter-sector caveat added; full-axiom = 260 (v4.20.0) |
 
-## Other branches (chemistry / QC / QED-gauge / NCG-OA / precision) — PENDING
+## Group 6 (precision / observations — the projection arc; Papers 26, 27, 34, 35) — populated 2026-07-04 (`/qa group6` first cert)
+
+First-cert code review + remediation test-writing. Two new backing files (`test_paper26_entanglement.py`, `test_paper35_kg_panel.py`) close the load-bearing coverage gaps the panel found (P26's lead decoupling headline + P35's 200-case π-free panel + the Casimir attribution were NO-TEST). P34/P35 Lorentzian §III.29 "literal identification at the Krein level" reconciled to the 2026-06 descope (signature-blind/convention); C16 entry `lorentzian-literal-identification-krein` + C17 family `dirac-casimir-s3-sign` added.
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 26 | Energy-entanglement decoupling: h1_off (κ=−1/16) = 10–39% E_corr but <0.2% S; V_ee_off ~100% S | `test_paper26_entanglement.py::test_paper26_energy_entanglement_decoupling` | `debug/archive/misc/energy_entanglement_decoupling.py` | BACKED-SOUND | **new (1st cert)** — reproduces 0.098–0.387 / <0.2% / ~1.0; the module computed but never asserted these |
+| 26 | Entanglement entropy S ~ Z^{−2.56} | `test_paper26_entanglement.py::test_paper26_entanglement_entropy_z_scaling` (+ `test_paper27_entropy.py::test_paper26_27_consistency_z_scaling`) | same | BACKED-SOUND | exponent −2.563 |
+| 26 | Basis-intrinsic sparsity: 42.4%→99.2% step at identity; ERI count Z-independent (265 @ n_max=2) | `test_paper26_entanglement.py::{test_paper26_basis_intrinsic_sparsity_step_function, test_paper26_eri_count_is_z_independent}` | same | BACKED-SOUND | **new (1st cert)** |
+| 26 | Core-valence decoupling: MI ≈2e-3 by Z=4 (Be), <1e-3 for Z≥5 (B), O(0.1) Li — the composed-factorization justification | `test_paper26_entanglement.py::test_paper26_core_valence_decoupling_thresholds` | `debug/archive/misc/entanglement_first_row.py::run_atom` | BACKED-SOUND | **new (cert run)** — recomputes Be/B/Li at n_max=2 (matches Table II / entanglement_first_row.json); closes the secondary-headline gap Code-A + synthesis flagged |
+| 26 | Reported entropy = vN entropy of normalized 1-RDM (occupation entropy) | (definition corrected in-paper Sec. II) | `entanglement_geometry.py::von_neumann_entropy` | BACKED-SOUND | mislabel "single-orbital ρ_A" → corrected to the computed measure |
+| 27 | One-body non-degenerate GS single-particle entropy ≡ 0 (S_kin/S_full ~1e-14, He n_max=2,3) | `test_paper27_entropy.py::test_paper27_table1_ep1_reproduction` | same + `entanglement_geometry.py` | BACKED-SOUND | keystone; non-degeneracy qualifier essential (backed by `..proposition_nondegeneracy_qualifier`) |
+| 27 | Area law A_n = g_n² = 4n⁴ (pair-counting, not one-particle) | `test_paper27_entropy.py::test_paper27_area_law_pair_counts` | (combinatorial) | BACKED-SOUND | corrects the earlier one-particle reading |
+| 27 | HO closed-shell any-central-potential entropy ≡ 0 (Moshinsky–Talmi) | `test_paper27_entropy.py::test_paper27_ep2b_ho_gs_is_single_determinant` | `geovac/nuclear/ho_two_fermion.py` | BACKED-SOUND | INTERNAL THEOREM; table `E_full` synced 14.898→22.185 |
+| 27 | Block-entropy γ_∞ ≈ 1.96 (Richardson n_max=2–5, below RS 2) | `test_paper27_entropy.py::{test_paper27_ep2i_gamma_asymptote, test_paper27_ep2l_nmax5_below_two}` | same | BACKED-SOUND | extrapolated (MEASURED); the test *refutes* any "=2 proven" reading |
+| 34 | 28 named projections × three-axis tagging | `test_paper34_projection_spot_checks{,_batch1,2,3}.py` | various | BACKED-SOUND / BACKED-WEAK | III.14 ring-closure / III.21 "33" / III.23 dims / III.26 are weaker-than-prose (NIT); §III.27 slow-only |
+| 34 | K = π(B+F−Δ) ≈ 137.036 = **Observation** | (correctly untested; combination not derived) | — | BACKED-SOUND | C5 clean after 4 "conjecture"→Observation fixes |
+| 34 | Wick-rotation projection: Riemannian period-closure σ_2π=I bit-exact | `tests/test_modular_hamiltonian_lorentzian.py` | `modular_hamiltonian_lorentzian.py` | BACKED-SOUND (Riemannian) | Lorentzian "literal identification at Krein level" **WITHDRAWN** 2026-06 (P45 K⁺ descope; `test_lorentzian_toeplitz_kplus.py`) — signature-blind/convention |
+| 35 | KG spectrum π-free in ℚ[√d] for rational m² — 200-case panel (n∈[1,50]×m²∈{0,1,¼,2}) | `test_paper35_kg_panel.py::test_paper35_kg_spectrum_pi_free_200_case_panel` | (self-contained sympy) | BACKED-SOUND | **new (1st cert)** — genuine π-freeness over all 200 cases (the old III.14 spot-check only asserted `is_rational`; `debug/kg1_*` pruned) |
+| 35 | π enters at temporal compactification; first π-mode (n=0,k=1) ω²=4π²/β² | `test_paper35_kg_panel.py::test_paper35_first_pi_bearing_eigenvalue_is_temporal` (+ `test_paper35_predictions.py`) | `thermal_tensor_triple.py` | BACKED-SOUND | **new** |
+| 35 | Scalar S³ Casimir E_Cas = 1/240; Dirac S³ Casimir = **+17/480** (positive) | `test_paper35_kg_panel.py::{..scalar_casimir_1_over_240, ..dirac_casimir_plus_17_over_480}` (+ `test_thermal_tensor_triple.py`) | `geovac/thermal_tensor_triple.py` | BACKED-SOUND | **new**; the delta run caught a wrong-direction 1st-cert sign fix — E=−½ζ_{\|D\|}(−1)=−½·(−17/240)=**+17/480** (same sign class as +1/240); reverted across paper/code/tests |
+| 35 | iff (π ⟺ temporal/spectral integration) | `test_paper35_predictions.py` (208-check panel) + Paper 32 §VIII case-exhaustion theorem (scoped to §III.1–§III.15) | — | BACKED-SOUND (in scope) / OBSERVATION (general) | WH7 REGISTERED; "structural corollary" now scoped to the theorem's 15 projections |
+
+## Other branches (chemistry / QC / QED-gauge / NCG-OA) — PENDING
 
 _Pre-populated during the group3 sweep where a finding spilled into a future branch._
 

@@ -36,6 +36,30 @@ GROUP4_FILES = [
 
 REGISTRY = [
     {
+        "id": "dirac-casimir-s3-sign",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Dirac S^3 Casimir = +17/480 (POSITIVE). E = -1/2 "
+                          "zeta_{|D|}(-1) = -1/2*(-17/240): the half-integer Dirac "
+                          "shift makes zeta_{|D|}(-1) itself negative, so the fermion "
+                          "-1/2 factor returns a POSITIVE Casimir -- same sign class "
+                          "as the scalar +1/240 (Paper 35 KG-5 derivation, verified "
+                          "numerically to 40 dps). The group6 DELTA run (2026-07-04) "
+                          "caught a wrong-direction 1st-cert 'fix' that had flipped all "
+                          "6 P35 loci + the code + the test to -17/480; reverted to "
+                          "+17/480 across paper/code/tests. The NEGATIVE -17/480 is the "
+                          "retired sign error.",
+        # a NEGATIVE 17/480 (minus in front) is now the retired sign error
+        "pattern": r"-\s*17/480|-\s*\\tfrac\{17\}\{480\}|-\s*\\frac\{17\}\{480\}",
+        "require_nearby": r"Dirac|Casimir|zeta_\{\|D\|\}|KG-5|full.?[Dd]irac",
+        "exempt_if_nearby": r"historical|stale|previously|corrected|heuristic"
+                            r"|earlier|naive|retired|reverted|wrong-direction",
+        "files": [
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
         "id": "library-z-span",
         "scope": "group4",
         "severity": "fail",

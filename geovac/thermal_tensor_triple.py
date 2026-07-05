@@ -422,16 +422,22 @@ def scalar_casimir_S3() -> dict:
 def dirac_casimir_S3() -> dict:
     """Spatial Casimir for the full-Dirac sector on unit S^3 (KG-5, Paper 35).
 
-        E_Cas^{Dirac} = -17/480
+        E_Cas^{Dirac} = -1/2 zeta_{|D|}(-1) = -1/2 * (-17/240) = +17/480
 
-    Sign convention: negative because fermions contribute with opposite sign
-    relative to bosons in zeta-regularized vacuum energy.
+    POSITIVE. The fermionic vacuum energy is E = -1/2 sum |lambda_n|
+    = -1/2 zeta_{|D|}(-1); the half-integer Dirac shift (a = 3/2) makes
+    zeta_{|D|}(-1) = -17/240 itself NEGATIVE, so the -1/2 fermion factor
+    returns a POSITIVE Casimir -- the same sign convention as the scalar
+    +1/240. This is the value the Paper 35 KG-5 derivation is authoritative
+    for (ζ_{|D|}(-1) = -17/240 -> E = +17/480; verified numerically to 40 dps).
+    An earlier hardcoded -17/480 (a naive "fermions oppose bosons" heuristic
+    that ignored the already-negative zeta) was corrected 2026-07-04 to match
+    the paper's derivation (/qa group6 delta run).
 
-    Paper 35 KG-5 verification: 17/480 EXACT RATIONAL in the full-Dirac
-    convention, matching Camporesi-Higuchi 1996 to 40 dps.
+    Exact rational, no pi (half-integer Hurwitz / Bernoulli at a = 3/2).
     """
     return {
-        "casimir_energy_unit_S3_full_dirac": sp.Rational(-17, 480),
+        "casimir_energy_unit_S3_full_dirac": sp.Rational(17, 480),
         "rational_no_pi": True,
         "reference": "Paper 35 KG-5, Camporesi-Higuchi 1996",
         "structural_meaning": (
@@ -607,7 +613,7 @@ def transcendental_audit() -> dict:
             "appears_in": "scalar_casimir_S3",
         },
         {
-            "quantity": "Spatial Dirac Casimir = -17/480 (NO pi)",
+            "quantity": "Spatial Dirac Casimir = +17/480 (NO pi)",
             "factor": "spatial S^3",
             "mechanism": "(none — rational Bernoulli value)",
             "tag": "M2 collapses to rational at half-integer Hurwitz "
@@ -660,7 +666,7 @@ def transcendental_audit() -> dict:
             "(c) The sqrt(pi) Seeley-DeWitt coefficients come from the "
             "    Mellin transform on s of the heat-kernel trace. "
             "All of these are continuous-integration projections. The "
-            "rational values (Casimir 1/240, -17/480; eta 7/8) come from "
+            "rational values (Casimir 1/240, 17/480; eta 7/8) come from "
             "DISCRETE Hurwitz / Bernoulli evaluations and contain no pi — "
             "consistent with Paper 35 Prediction 1 verbatim."
         ),

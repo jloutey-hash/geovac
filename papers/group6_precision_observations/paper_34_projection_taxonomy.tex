@@ -198,7 +198,7 @@ the ``zero-projection'' matches in the catalogue
 (Section~\ref{sec:catalog}).  Examples:
 \begin{itemize}
 \setlength\itemsep{0pt}
-\item Pauli term count $N_\text{Pauli} = 11.11 \cdot Q$ (across 28
+\item Pauli term count $N_\text{Pauli} = 11.10 \cdot Q$ (across 35
 composed molecules; Paper~14).
 \item Magic numbers $2, 8, 20, 28, 50, 82, 126$ (HO + spin-orbit
 graph eigenvalue counting; Paper~23).
@@ -267,11 +267,11 @@ realization), all atomic energy computations.
 \textbf{Source:} $S^3 \cong \mathrm{SU}(2)$.\\
 \textbf{Target:} $S^2$ base $\times S^1$ fibre.\\
 \textbf{Variables introduced:} $\alpha$ (the fine-structure constant
-treated as a candidate observable in Paper~2's conjecture).\\
+treated as a candidate observable in Paper~2's Observation).\\
 \textbf{Dimension introduced:} dimensionless.\\
 \textbf{Transcendental signature:} $\pi = \mathrm{Vol}(S^2)/4$
 (Hopf measure factor; Sprint~A $\alpha$-PI identification).\\
-\textbf{Used in:} Paper~2 (fine-structure conjecture), Paper~25
+\textbf{Used in:} Paper~2 (fine-structure Observation), Paper~25
 (Wilson--Hodge gauge structure), Paper~30 (SU(2) Wilson sibling).
 
 \subsection{Bargmann--Segal transform: $\mathbb{R}^3$ HO $\to S^5$ Hardy space}
@@ -2409,9 +2409,12 @@ Lorentzian extension remains open at the multi-month NCG-mathematics
 scale and is documented as a deepening of this entry, not as a
 separate candidate.
 
-\textbf{Sprint L2-E (2026-05-17):\ literal identification at the Krein
-operator-system level (finite cutoff).}\ The Lorentzian-side analog of
-the Sprint L1 closure above is now closed at the strongest level.
+\textbf{Sprint L2-E (2026-05-17):\ Krein-space period closure,
+signature-blind at finite cutoff.}\ A Lorentzian-side analog of
+the Sprint L1 period closure was constructed (the strong
+``literal identification'' reading recorded below was subsequently
+\emph{withdrawn} --- see the 2026-06 status update at the end of this
+entry).
 Sprint L2 (sub-sprints L2-A scoping, L2-B Krein space, L2-C Lorentzian
 Dirac, L2-D Connes axiom audit, L2-E Krein-level modular Hamiltonian;
 Paper~32~\S~VIII.E.E) builds the Lorentzian Krein space
@@ -2423,7 +2426,7 @@ $(s, t) = (3, 1)$~\cite{bizi_brouder_besnard2018}, then constructs the
 hemispheric wedge $W_L = P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$
 and the wedge KMS state $\rho_W^L = e^{-K_L^{\alpha, W}}/Z$ under the
 BW choice $H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$.  The
-Krein-level four-witness Wick-rotation theorem closes bit-exactly at
+Krein-space period-closure identities close bit-exactly at
 every tested $(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$:\
 BW-$\alpha$ period closure $\sigma_{2\pi}^{L, \alpha}(O) = O$, BW-$\gamma$
 Tomita period closure $\sigma_{2\pi}^{L, \mathrm{TT}}(a) = a$, flow
@@ -2431,21 +2434,41 @@ conjugacy $\sigma_t^{L, \mathrm{TT}} = \sigma_{-t}^{L, \alpha}$ at
 general $t$, and six-witness collapse all at residual $\leq 4 \times
 10^{-16}$ (machine precision).  At $N_t = 1$ the Lorentzian-side
 construction reduces bit-identically to Paper~42's Riemannian
-construction (Frobenius residual exactly $0.0$), confirming Sprint L2-E
-is the genuine Lorentzian \emph{extension} of Paper~42, not a parallel
-construction.  Substantive structural finding:\ Paper~42~\S~7.2 open
+construction (Frobenius residual exactly $0.0$); the $N_t > 1$ content
+is temporal-derivative structure layered on the same compact KMS
+$\beta = 2\pi$ circle (see the 2026-06 status update below).
+Substantive structural finding:\ Paper~42~\S~7.2 open
 question O3 (``$H_{\mathrm{local}} \neq D_W$'') is
 \textbf{signature-INDEPENDENT at the Riemannian limit} and refined
 upward at $N_t > 1$ by temporal-derivative content (the gap between
 the spectral-action object and the modular-Hamiltonian generator
-widens with temporal cutoff).  \textbf{Net status:} the Wick-rotation
-projection now \textbf{lifts from ``structural correspondence at the
-metric-functional level'' to ``literal identification at the Krein
-operator-system level (finite cutoff)''} at every tested
-$(n_{\max}, N_t)$.  The continuum / Lorentzian-propinquity-rate-level
-extension (Sprint L3) remains open as a separate frontier;\ no
-published Lorentzian propinquity construction exists as of
-May~2026.  Cross-manifold W2b
+widens with temporal cutoff).  \textbf{Net status (as computed, May~2026):} the period-closure
+identities $\sigma_{2\pi}^{L}(O) = O$ hold bit-exactly at every tested
+$(n_{\max}, N_t)$, and the $N_t = 1$ slice reduces to Paper~42's
+Riemannian construction.
+
+\textbf{Status update (2026-06 --- the ``literal identification''
+reading is WITHDRAWN).}\ The subsequent Paper~45 $K^+$-annihilation
+theorem (2026-06-09) and the compact-boost closure (2026-06-19) show
+that these period-closure identities do \emph{not} constitute a
+Lorentzian metric identification at finite cutoff.  The truncated
+Bisognano--Wichmann boost generator $K = \mathrm{diag}(2m_j)$ has
+\emph{integer} spectrum, so $\mathrm{e}^{2\pi\mathrm{i}K} = I$
+bit-exactly at every finite cutoff:\ the modular flow is the compact
+KMS $\beta = 2\pi$ \emph{circle}, not a non-compact boost, and a
+compact circle carries only a Euclidean (forward-triangle) metric.
+The Krein $K^+$ compression is signature-blind (the restricted
+Lipschitz seminorm is unchanged under a temporal Wick involution), so
+the Lorentzian \emph{signature} is metrically invisible to any
+finite-cutoff seminorm;\ the Lorentzian reverse-triangle requires the
+non-compact continuum boost (continuous spectrum), reached only as
+$n_{\max}\to\infty$.  The finite-cutoff statement is therefore
+Euclidean/convention, and the earlier ``literal identification at the
+Krein operator-system level'' and ``genuine Lorentzian extension''
+framing is withdrawn (Paper~45 descope; the group1 synthesis
+honest-scope note).  What survives is the norm-resolvent /
+period-closure computation, read as the compact-side KMS statement.
+No published finite-cutoff Lorentzian propinquity construction exists.  Cross-manifold W2b
 ($\mathcal{T}_{S^3} \otimes \mathcal{T}_{\mathrm{Hardy}(S^5)}$) is
 structurally distinct from the $(3, 1)$ extension closed here and
 remains open per Paper~32~\S~VIII.D ``frontier-of-field framing.''
@@ -2704,8 +2727,9 @@ with Gleason but does not reach further than Gleason at the
 substrate level.  The honest framework-internal classification of
 the Born rule is therefore that it sits at the
 \emph{calibration-data tier} in the sense of Paper~18~\S~IV.6
-(inner-factor input data) and CLAUDE.md~\S~1.7 WH5 (calibration as
-external input):\ alongside the Yukawa couplings, the fine-structure
+(inner-factor input data) and CLAUDE.md~\S~1.7 WH8 (the Born measure as
+the observation projection's exchange constant, external calibration
+input):\ alongside the Yukawa couplings, the fine-structure
 constant $\alpha$, the gauge-group lower-bound calibration, and the
 multi-loop QED counterterms (LS-8a renormalization gap), the
 probability-weighting structure of measurement is external to the
@@ -3301,7 +3325,7 @@ Match & Projection(s) & Vars & Dim & Trans.\ class & Match \\
 \midrule
 \endhead
 \textbf{Zero-projection (Layer~1 only)} & & & & & \\
-Pauli count $N = 11.11{\cdot}Q$ & --- & none & dimensionless &
+Pauli count $N = 11.10{\cdot}Q$ & --- & none & dimensionless &
 integer/rational & exact \\
 Magic numbers $2,8,20,28,\ldots$ & HO + LS counting & none &
 dimensionless & integer & exact \\
@@ -3561,7 +3585,7 @@ projection depth.  ``Trans.\ class'' uses Paper~18's tier names.
 ``Match'' is the precision against standard known values:
 ``exact'' or ``exact symbolic'' means equality at machine
 precision; numerical percentages are residuals.  The bottom row
-documents Paper~2's $\alpha$ conjecture explicitly as a
+documents Paper~2's $\alpha$ Observation explicitly as a
 multi-projection coincidence; the combination rule itself is a
 numerical observation without first-principles derivation
 (Paper~18 \S~III.5; Paper~2 status v2.26.1).}
@@ -8399,7 +8423,7 @@ rationale; for full discussion see \texttt{debug/lorentzian\_l0\_audit\_memo.md}
 24 & Adiabatic / Born-Oppenheimer & T.F. & MH & Scale separation; relativistic BO well-defined. \\
 25 & Coupled-channel / adiabatic curve & T.F. & M & ODE machinery; transcendental inherits from Fock. \\
 26 & Gauge choice (Coulomb/Lorenz/Feynman) & W.M.F. & MH & Coulomb-gauge $1/(4\pi) = $ M1; Ward identity holds. \\
-27 & Wick rotation / signature change & W.M.F. & H & THE BRIDGE; literal identification at Krein level (finite cutoff): Sprint L2-B/C/D/E closed bit-exact (2026-05-16/17). \\
+27 & Wick rotation / signature change & W.M.F. & H & THE BRIDGE; Krein-space period closure bit-exact but signature-blind --- Lorentzian ``literal identification'' withdrawn 2026-06 (compact-boost / $K^+$ descope; \S~\ref{sec:proj_wick_rotation}). \\
 28 & Apparatus identity / state-side & T.F. & MH & State-side; PSLQ-disjoint from master Mellin engine. \\
 \bottomrule
 \end{tabular}
@@ -8433,8 +8457,9 @@ not a contradiction with the Riemannian theorem, but a structural
 sharpening that becomes a Sprint L2 consistency check
 (cf.~Paper~31~\S~8.4 and Paper~32~\S~VIII.E).
 
-\paragraph{Sprint L2-E closure of the Wick-rotation projection at the
-Krein-operator-system level (2026-05-17).}
+\paragraph{Sprint L2-E:\ Krein-space period closure of the
+Wick-rotation projection --- signature-blind (2026-05-17; the
+``literal identification'' reading was withdrawn 2026-06, below).}
 The Wick-rotation projection (\S~\ref{sec:proj_wick_rotation}) was
 named at Sprint L0 as the BRIDGE projection from Riemannian to
 Lorentzian content;\ the operator-system-level literal identification
@@ -8446,28 +8471,32 @@ Paper~32~\S~VIII.E.E
 cutoff:\ on $\mathcal{K}_{n_{\max}, N_t} = \mathcal{H}_{\rm GV}^{n_{\max}}
 \otimes \mathbb{C}^{N_t}$ at signature $(3, 1)$, with the Lorentzian
 wedge $W_L = P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$ and the
-BW choice $H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$, the Krein-level
-four-witness Wick-rotation theorem closes bit-exactly:\ BW-$\alpha$
+BW choice $H_{\mathrm{local}} = K_L^{\alpha, W}/\beta$, the Krein-space
+period-closure identities close bit-exactly:\ BW-$\alpha$
 period closure, BW-$\gamma$ Tomita period closure, flow conjugacy
 $\sigma_t^{L, \mathrm{TT}} = \sigma_{-t}^{L, \alpha}$, and six-witness
 collapse all at residual $\leq 4 \times 10^{-16}$ across
 $(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$.  At $N_t = 1$
 the construction reduces bit-identically to Paper~42's Riemannian
-closure~\cite{paper42}, confirming Sprint L2-E is the Lorentzian
-\emph{extension} of Paper~42, not a parallel construction.  The
-headline structural finding:\ Paper~42~\S~7.2 ``$H_{\mathrm{local}}
+closure~\cite{paper42} (the $N_t = 1$ slice), on the same compact KMS
+$\beta = 2\pi$ circle.  The
+structural finding that survives:\ Paper~42~\S~7.2 ``$H_{\mathrm{local}}
 \neq D_W$'' open question O3 is \textbf{signature-INDEPENDENT at the
 Riemannian limit} ($\|H_{\mathrm{local}} - D_L^W\|_F|_{N_t=1}$ equals
 the Riemannian-side residual bit-exact at every tested $n_{\max}$);\
 the spectral-action--vs--modular-Hamiltonian generator distinction is
 a deeper structural feature of the framework, not a peculiarity of
-the round-$S^3$ Riemannian truncation.  The Wick-rotation projection
-in \S~\ref{sec:proj_wick_rotation} therefore promotes from
-``structural correspondence at the metric-functional level'' to
-``literal identification at the Krein operator-system level (finite
-cutoff).''  The continuum / Lorentzian-propinquity-rate-level extension
-(Sprint L3) remains open as a separate frontier;\ no published
-Lorentzian propinquity construction exists as of May~2026.
+the round-$S^3$ Riemannian truncation.  \emph{Status (2026-06):} the
+``literal identification at the Krein operator-system level'' reading is
+\textbf{withdrawn} --- the Paper~45 $K^+$-annihilation theorem
+(2026-06-09) and the compact-boost closure (2026-06-19) show the
+truncated BW boost $K = \mathrm{diag}(2m_j)$ has integer spectrum
+($\mathrm{e}^{2\pi\mathrm{i}K} = I$ bit-exact), so the period closure is
+the compact KMS $\beta = 2\pi$ circle and the Lorentzian signature is
+metrically invisible at finite cutoff (Euclidean/convention; see the
+status update in \S~\ref{sec:proj_wick_rotation}).  What survives is the
+period-closure computation as a compact-side KMS statement.  No
+finite-cutoff Lorentzian propinquity construction exists.
 
 \paragraph{Sprint L2-D refinement of the M3 trivialization prediction
 (2026-05-16).}
@@ -9180,6 +9209,11 @@ match across witnesses at machine precision; period closure is
 independent of $\kappa_g$).  This lifts the four-witness Wick-rotation
 theorem from ``structural correspondence'' to ``literal identification
 at the operator-system level (Riemannian)'' at every finite cutoff.
+(This Riemannian period-closure survives the 2026-06 descope of the
+\emph{Lorentzian} ``literal identification at the Krein level'' reading
+--- see the status update in \S~\ref{sec:proj_wick_rotation} --- because
+$\sigma_{2\pi} = $ identity is precisely the compact KMS $\beta = 2\pi$
+circle; only the Lorentzian-signature promotion was withdrawn.)
 \S~\ref{sec:proj_wick_rotation} honest-scope paragraph updated;
 \S~\ref{sec:offprecision} new ``Modular periodicity'' row added as
 machinery-witness for the closure.
@@ -9271,7 +9305,7 @@ $(\mathbb{Z}/8) \times (\mathbb{Z}/8)$-valued sign table.
 
 \textbf{The Lorentzian-NCG literature provides several published
 prescriptions} (Strohmaier~2006~\cite{strohmaier2006};
-Franco--Eckstein~2014~\cite{franco_eckstein2014} temporal Lorentzian
+Franco~2014~\cite{franco_eckstein2014} temporal Lorentzian
 spectral triples; Bizi--Brouder--Besnard 2018 $(m,n)$
 classification; van~den~Dungen~2016~\cite{van_den_dungen2016} Krein
 fermionic action; Devastato--Lizzi--Martinetti~2018~\cite{devastato_lizzi_martinetti2018}
@@ -9468,7 +9502,7 @@ decoherence-flavored content (preferred basis = centralizer of
 $H_{\mathrm{local}}$ in $\mathcal{A}_W$) but not modifying the Born
 weighting.  The framework's structural position is therefore:\ the
 Born rule sits at the calibration-data tier (Paper~18~\S~IV.6
-inner-factor input data; CLAUDE.md~\S~1.7 WH5; the
+inner-factor input data; CLAUDE.md~\S~1.7 WH8; the
 external-input three-class partition documented in memory file
 \texttt{external\_input\_three\_class\_partition.md}), alongside the
 Yukawa couplings, $\alpha$, the gauge-group lower-bound calibration,
@@ -9822,7 +9856,7 @@ and quantum electrodynamics,'' \textit{J.\ Math.\ Phys.}\ \textbf{59},
 062303 (2018).  arXiv:1611.07062.
 
 \bibitem{franco_eckstein2014}
-N.~Franco and M.~Eckstein, ``Temporal Lorentzian spectral triples,''
+N.~Franco, ``Temporal Lorentzian spectral triples,''
 \textit{Reviews in Mathematical Physics}\ \textbf{26}, 1430007
 (2014).  arXiv:1210.6575.
 
@@ -9831,8 +9865,8 @@ K.~van~den~Dungen, ``Krein spectral triples and the fermionic
 action,'' \textit{Math.\ Phys.\ Anal.\ Geom.}\ \textbf{19}, 4 (2016).
 
 \bibitem{devastato_lizzi_martinetti2018}
-A.~Devastato, F.~Lizzi, and P.~Martinetti, ``Lorentz signature and
-twisted spectral triples,'' \textit{JHEP}\ \textbf{03}, 089 (2018).
+A.~Devastato, S.~Farnsworth, F.~Lizzi, and P.~Martinetti, ``Lorentz
+signature and twisted spectral triples,'' \textit{JHEP}\ \textbf{03}, 089 (2018).
 arXiv:1710.04965.
 
 \bibitem{nieuviarts2025a}

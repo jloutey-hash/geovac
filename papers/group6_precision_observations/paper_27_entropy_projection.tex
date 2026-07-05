@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{dcolumn}
 \usepackage{xcolor}
 
 \begin{document}
@@ -107,6 +108,16 @@ a projection-class observable.  Section~\ref{sec:predictions}
 states two falsifiable predictions, one for the Bargmann--Segal
 harmonic oscillator lattice~\cite{GeoVac_Paper24} and one
 across the GeoVac molecular library.
+
+\emph{Provenance (register tiers).}  The entanglement-inertness of the
+one-body operator (\S~\ref{sec:operator}) and the harmonic-oscillator
+zero-entropy rigidity (\S~\ref{sec:predictions}) are INTERNAL THEOREMS;
+the $S_{\mathrm{kin}}/S_{\mathrm{full}}\sim10^{-14}$ numerical
+confirmation and the block-entropy exponent $\gamma_\infty\approx1.96$
+(a Richardson extrapolation, \emph{not} an exact value) are MEASURED;
+the area-law $A_n=g_n^2$ recovery is an exact combinatorial identity
+(SYMBOLIC).  Entropy is placed as an embedding-class OBSERVATION in the
+Paper~18 exchange-constant taxonomy.
 
 %=================================================================
 \section{Operator-Theoretic Result}
@@ -545,8 +556,8 @@ $N_{\max}$ & \multicolumn{1}{c}{$E_{\mathrm{full}}$ (MeV)}
             & \multicolumn{1}{c}{$S_{\mathrm{full}}$ (nats)}
             & \multicolumn{1}{c}{$\lVert[H_{HO},V]\rVert_F/\lVert H_{HO}\rVert_F$} \\
 \hline
-2 &  14.898 & 30.000 & 0.0 & 7.9\times 10^{-16} \\
-3 &  14.898 & 30.000 & 0.0 & 4.4\times 10^{-16} \\
+2 &  22.185 & 30.000 & 0.0 & 7.9\times 10^{-16} \\
+3 &  22.185 & 30.000 & 0.0 & 4.4\times 10^{-16} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -721,7 +732,7 @@ directly (Table~\ref{tab:gamma_surface}).
 local slope of $S_B$ vs.\ $\tilde{w}_B/\delta_B$ between $Z=15$
 and $Z=30$ decreases monotonically with $n_{\max}$, crossing
 $2$ between $n_{\max}=2$ and $3$.  Richardson extrapolation
-on $n_{\max}=3,4,5$ gives an asymptotic slope
+on $n_{\max}=2,3,4,5$ gives an asymptotic slope
 $\gamma_{\infty} \approx 1.96$, \emph{below} the
 non-degenerate Rayleigh--Schr\"odinger value of $2$.  The
 global-window $\gamma$ over $Z\in\{2,3,4,6,10,15,30\}$ is
@@ -737,9 +748,9 @@ $n_{\max}$
 2 & 2.373 & 1.992 \\
 3 & 2.223 & 1.976 \\
 4 & 2.182 & 1.966 \\
-5 & --    & 1.959 \\
+5 & \multicolumn{1}{c}{--} & 1.959 \\
 \hline
-$\infty$ (extrapolated) & --- & $\approx 1.96$ \\
+$\infty$ (extrapolated) & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{$\approx 1.96$} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1000,7 +1011,7 @@ test in the codebase.
     \texttt{::test\_paper27\_commutator\_saturates\_not\_vanishes}
     (\texttt{--slow}).
   \item Table~\ref{tab:ep2c} and
-    Eq.~\eqref{eq:pred2} (the dimensionless power law
+    Eq.~\eqref{eq:pred2_universal} (the dimensionless power law
     $S_B = 8.16\,\tilde{w}_B^{2.383}$, $R^{2}=0.998$):
     \textbf{Verified} by
     \texttt{tests/test\_paper27\_entropy.py::\allowbreak

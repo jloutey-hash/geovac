@@ -67,6 +67,32 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "lorentzian-literal-identification-krein",
+        "scope": "group6",
+        "severity": "fail",
+        "retired": "2026-07-04 (group6 first-cert run): P34 III.29's pre-descope "
+                   "Lorentzian claims -- 'literal identification at the Krein "
+                   "operator-system level (finite cutoff)' and 'genuine Lorentzian "
+                   "extension of Paper 42' (Sprint L2-E, 2026-05-17) -- are WITHDRAWN. "
+                   "The 2026-06-09 P45 K+ annihilation theorem + the 2026-06-19 "
+                   "compact-boost closure show the truncated BW boost is compact "
+                   "(integer spectrum, e^{2 pi i K}=I), so the period closure is the "
+                   "compact KMS beta=2pi circle and the Lorentzian signature is "
+                   "metrically invisible at finite cutoff (Euclidean/convention). "
+                   "NOTE: the Riemannian operator-system-level closure is NOT retired. "
+                   "Completeness-critic catch.",
+        "pattern": r"genuine\s+Lorentzian\s+(?:\\emph\{)?extension"
+                   r"|literal\s+identification\s+at\s+the\s+Krein"
+                   r"|Krein-level\s+four-witness\s+Wick-rotation\s+theorem\s+closes",
+        "exempt_if_nearby": r"withdrawn|WITHDRAWN|signature-blind|compact[- ]boost"
+                            r"|compact\s+KMS|K\^?\+|descope|convention|period[- ]closure"
+                            r"|Euclidean|not\s+constitute",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
         "id": "su2-kinetic-equals-L1",
         "scope": "group5",
         "severity": "fail",

@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{booktabs}
+\usepackage{dcolumn}
 \usepackage{xcolor}
 
 \begin{document}
@@ -40,7 +41,8 @@ maps reveal a hub migration pattern---$1s \to 2s \to 2p$---that
 tracks the partially filled shell across the first row of the
 periodic table.
 Fourth, core-valence decoupling: the core-valence mutual
-information drops below $10^{-3}$ by $Z = 4$, quantitatively
+information falls to $\approx 2\times10^{-3}$ by $Z = 4$ and below
+$10^{-3}$ for $Z \geq 5$, quantitatively
 justifying the composed fiber bundle factorization used in the
 GeoVac molecular framework.
 In the composed molecular architecture, per-block entanglement is
@@ -100,6 +102,14 @@ The results establish four structural properties of the angular
 momentum eigenbasis that are relevant to quantum simulation
 resource estimation.
 
+\emph{Provenance (register tiers).}  All four properties---the
+energy--entanglement decoupling, the $S\sim Z^{-2.56}$ scaling, the
+$42.4\%\!\to\!99.2\%$ basis-intrinsic sparsity step (with a
+$Z$-independent nonzero ERI count), and the core--valence factorization
+thresholds---are MEASURED (computed) results.  The reported entropy is
+the von Neumann entropy of the normalized one-body reduced density
+matrix throughout.
+
 %=================================================================
 \section{The Three-Layer Decomposition}
 \label{sec:threelayer}
@@ -145,12 +155,16 @@ off-diagonal elements, and the three layers are not separable.
 
 \subsection{Energy-entanglement decoupling}
 
-We compute the ground-state energy and single-orbital entanglement
-entropy $S = -\text{Tr}(\rho_A \ln \rho_A)$ for each layer by
-exact diagonalization (full configuration interaction) of He-like
-ions at $n_{\max} = 4$.  The single-orbital entanglement entropy
-is computed from the 1-RDM eigenvalues of the FCI ground state,
-partitioning the system into one spatial orbital and the remainder.
+We compute the ground-state energy and the entanglement entropy
+$S = -\sum_i (n_i/N)\log(n_i/N)$ --- the von Neumann entropy of the
+normalized one-body reduced density matrix (equivalently the
+natural-orbital occupation entropy, with $n_i$ the 1-RDM eigenvalues
+and $N$ the electron number) --- for each layer by exact
+diagonalization (full configuration interaction) of He-like ions at
+$n_{\max} = 4$.  This entropy is a genuine correlation measure:\ it
+vanishes exactly when the ground state is a single Slater determinant
+and is nonzero only through the two-body interaction, which is the
+property used throughout this paper.
 
 Table~\ref{tab:decoupling} presents the fractional contribution
 of each off-diagonal layer to the total correlation energy
@@ -166,8 +180,8 @@ because the layers are not orthogonal projections of the
 correlation energy; cross-terms between the layers contribute
 positively).  $f_S^{\text{h1}}$ and $f_S^{\text{Vee}}$:
 fractional contribution to the entanglement entropy.
-$S_{\text{total}}$: total single-orbital entanglement entropy
-in nats.
+$S_{\text{total}}$: total entanglement entropy (von Neumann entropy of
+the normalized 1-RDM) in nats.
 \label{tab:decoupling}}
 \begin{ruledtabular}
 \begin{tabular}{cddddd}
@@ -435,7 +449,7 @@ B--Ne & 5--10 & $< 10^{-3}$ \\
 \end{table}
 
 The core-valence mutual information drops sharply with $Z$.  By
-$Z = 4$ (beryllium), $I_{\text{cv}} < 0.002$, and for $Z \geq 5$
+$Z = 4$ (beryllium), $I_{\text{cv}} \approx 0.002$, and for $Z \geq 5$
 it is below $10^{-3}$.  The composed factorization's assumption
 of negligible core-valence entanglement is quantitatively justified
 for all atoms from boron onward.
@@ -604,9 +618,9 @@ Third, the orbital mutual information network exhibits a hub
 migration pattern---$1s \to 2s \to 2p$---that tracks the
 partially filled shell across the first row.
 
-Fourth, core-valence mutual information drops below $10^{-3}$
-by $Z = 4$, quantitatively justifying the composed fiber bundle
-factorization.
+Fourth, core-valence mutual information falls to $\approx 2\times10^{-3}$
+by $Z = 4$ and below $10^{-3}$ for $Z \geq 5$, quantitatively justifying
+the composed fiber bundle factorization.
 
 These results establish that the $O(Q^{2.5})$ Pauli scaling of
 the GeoVac qubit Hamiltonians is a direct consequence of the

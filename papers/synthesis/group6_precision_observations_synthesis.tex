@@ -1,0 +1,571 @@
+% group6_precision_observations_synthesis.tex
+% GeoVac Group 6 Synthesis: Precision Observations / Projection Arc
+% Status: Project archive synthesis, June 2026
+% Audience: precision AMO / mathematical-physics readers
+% Spine: two-layer framework (34) -> time as projection (35)
+%        -> entropy as projection (27) -> entanglement (26)
+%        -> multi-observable focal-length program (34 SS V.C/V.D)
+
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{observation}{Observation}
+\newtheorem{prediction}{Prediction}
+
+\begin{document}
+
+\title{Observables as Projections of a $\pi$-free Graph:\\
+A Synthesis of the GeoVac Precision-Observation Arc}
+\thanks{Group~6 synthesis in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{June 30, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The Geometric Vacuum (GeoVac) framework separates into two structurally
+distinct layers, and that separation is the organizing principle of its
+precision-observation arc.  \emph{Layer~1} is a bare combinatorial graph:
+quantum-number labels $(n,\ell,m,\ldots)$, integer eigenvalues, rational
+or algebraic matrix elements, no physical units, and---verified
+symbolically---no $\pi$.  \emph{Layer~2} is a finite family of named
+projections from that graph onto continuous physical settings; every
+physical variable, every dimension, and every transcendental constant
+that appears in any GeoVac calculation enters through exactly one
+projection and is traceable to it.  This synthesis assembles the four
+Group~6 papers into a single narrative built on that thesis.  The spine
+is:\ the projection taxonomy and its three-axis tagging
+(Paper~34~\cite{loutey_paper34}); time as the prototype \emph{free-side}
+projection---$\pi$ enters the Klein--Gordon spectrum on
+$S^3\times\mathbb{R}$ at exactly one step, temporal compactification,
+while rest mass preserves the algebraic ring
+(Paper~35~\cite{loutey_paper35}); entropy as an embedding-class
+projection artifact, identically zero on the one-body graph and finite
+only after the metric embedding of the two-body repulsion
+(Paper~27~\cite{loutey_paper27}); and the entanglement structure that
+isolates that repulsion in the angular-momentum eigenbasis
+(Paper~26~\cite{loutey_paper26}).  A multi-observable focal-length
+program closes the arc:\ Roothaan autopsies decompose precision atomic
+observables into projection-chain-tagged components, exposing literature
+convention mismatches and framework kernel gaps that single-observable
+analyses cannot see.  Two disciplines run throughout.  \emph{First},
+every transcendental named here is tagged to its projection---$\pi$ via
+the Hopf and Fock volume measures, $\pi^{2k}$ via the spectral action,
+$\zeta(2k)$ via even-zeta Dirichlet series, odd~$\zeta$ and Catalan~$G$
+via the half-integer-Hurwitz spinor lift, $2\pi$ via temporal
+compactification.  \emph{Second}, the precision matches are sub-percent
+\emph{framework-native} agreements that surface convention and kernel
+issues; they are \emph{not} first-principles predictions of the constants,
+and the multi-focal-composition wall---the framework has no native theorem
+for composing multiple Fock-style projections---is named as an active
+boundary.  The unifying reading is that ``discreteness is compactness''
+made operational:\ the discrete skeleton is the compact/closed regime,
+and a transcendental is precisely the price of releasing compactness by
+integrating over a promoted continuous parameter.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{Introduction: two layers, one organizing observation}
+%% ========================================================================
+
+The GeoVac quantum-chemistry and quantum-computing arcs (Groups~2 and~4)
+treat the framework as a sparse graph-Hamiltonian engine.  The
+operator-algebra arc (Group~1) treats the same construction as a discrete
+spectral triple.  These two readings are not in conflict; they describe
+two different \emph{layers} of one object, and the precision-observation
+arc collected here is the arc that names the layers and the bridge between
+them.
+
+Layer~1 is the bare combinatorial graph.  Its nodes are
+representation-theoretic labels of compact Lie groups; its Laplacian
+eigenvalues are integers ($n^2-1$ on the Coulomb $S^3$ graph, $N$ on the
+Bargmann--Segal $S^5$ graph); its matrix elements are rational or
+algebraic over $\mathbb{Q}[\sqrt{2},\sqrt{3},\sqrt{6},\ldots]$ from
+Wigner~$3j$ algebra.  That no $\pi$ appears in Layer~1 is not an
+aspiration but a verified certificate:\ on both the Coulomb $S^3$ Fock
+graph and the Bargmann--Segal $S^5$ graph, every adjacency entry, every
+eigenvalue, and every coupling coefficient is exact rational/algebraic in
+exact arithmetic (Paper~24~\cite{loutey_paper24}, Paper~28's
+graph-native QED certificate).  This is a SYMBOLIC certificate, not a
+numerical observation.
+
+Layer~2 is a finite family of named maps from the bare graph to physical
+settings:\ the Fock 1935 conformal projection, the Hopf bundle, the
+Bargmann--Segal transform, the Connes--Chamseddine spectral action, the
+Sturmian reparameterization, the Camporesi--Higuchi spinor lift, the
+Wigner~$3j$/$D$ couplings, temporal compactification, and others.  Each
+projection introduces specific physical variables ($Z$, $\alpha$,
+$\hbar\omega$, $R$, $\beta$, $\Lambda$, $\ldots$), attaches specific
+dimensions to graph data, and carries a specific transcendental
+signature.  The load-bearing structural claim of the arc is an
+Observation, asserted at exactly that tier:
+
+\begin{observation}[Single-projection origin of physical content]
+Every coupling constant, energy scale, length scale, and transcendental
+constant appearing in any GeoVac computation traces to exactly one
+projection in Layer~2.  The bare graph contains none of $\alpha$, $Z$,
+$\hbar\omega$, $R$, $\Lambda$, $\pi$, or $\zeta(2k)$; these enter by, and
+only by, the projection the calculation invokes.
+\end{observation}
+
+This is the operational form of the project's organizing observation that
+\emph{discreteness is compactness}.  Compact groups have discrete spectra
+(Peter--Weyl), and the bit-exact rational skeleton is the closed/compact
+regime; the continuum---and with it every transcendental---is what remains
+when compactness is released.  Calibration data is continuum (un-packed)
+data, which is why the skeleton is forced and rational while the
+projections are free and transcendental.  The four Group~6 papers make
+this concrete:\ Paper~34 catalogues the projections; Paper~35 locates the
+exact step at which the prototype free-side projection (time) injects
+$\pi$; Papers~27 and~26 show entropy and entanglement to be projection
+artifacts, zero on the bare graph and finite only after metric embedding.
+
+We hold one framing discipline throughout, following the GeoVac rhetoric
+rule:\ the discrete graph and its continuous projections are dual
+descriptions connected by proven maps, and no ontological priority is
+asserted for either.  The contribution is a vocabulary that makes the
+question ``where does this $\pi$ come from?'' answerable, not a claim
+about which description is fundamental.
+
+%% ========================================================================
+\section{The projection taxonomy and master-Mellin tagging (Paper~34)}
+%% ========================================================================
+
+Paper~34 is the keystone of this group:\ the living catalogue of
+\emph{twenty-eight} projection mechanisms, each tagged along three
+independent axes---(a)~the physical variables it introduces, (b)~the
+dimension or unit it attaches to graph data, and (c)~its transcendental
+signature in the sense of Paper~18~\cite{loutey_paper18}.  The
+transcendental axis is a structural sibling of Paper~18's transcendental
+classification:\ each tier corresponds to a projection type, and reading
+the dictionary in either direction recovers the other.  A representative
+slice of the dictionary is reproduced in Table~\ref{tab:axes}.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{p{2.5cm} p{1.7cm} p{2.9cm}}
+\toprule
+Projection & Dimension & Transcendental signature \\
+\midrule
+Fock conformal & energy & $\kappa=-1/16$; $\pi$ via $\mathrm{Vol}(S^3)$ \\
+Hopf bundle & dimensionless & $\pi = \mathrm{Vol}(S^2)/4$ \\
+Bargmann--Segal & energy & \textit{none} (graph $\pi$-free) \\
+Spectral action & energy & $\pi^{2k}\!\cdot\mathbb{Q}$ observables \\
+Spinor lift (CH) & dimensionless & half-int.\ Hurwitz $\to$ odd~$\zeta$; $G$, $\beta(4)$ \\
+Wigner $3j$ & dimensionless & $\mathbb{Q}[\sqrt{2k{+}1}]_k$ \\
+Vector-photon & dimensionless & $1/(4\pi)$ per loop \\
+Rest-mass & mass & \textit{trivial} (ring-preserving) \\
+Temporal window & time & $2\pi\!\cdot\mathbb{Q}$ per Matsubara mode \\
+\bottomrule
+\end{tabular}
+\caption{A slice of the Paper~34 projection dictionary.  Each row is a
+named structural construction that introduces specific physical content
+into Layer~1 graph data; the transcendental signature is in the sense of
+Paper~18.  The full dictionary catalogues twenty-eight projections.}
+\label{tab:axes}
+\end{table}
+
+\paragraph{Where the transcendentals live.}
+The dictionary makes the tagging discipline mechanical.  The kinetic
+constant $\kappa=-1/16$ and the volume $\pi$ enter at the Fock conformal
+projection; the dimensionless $\pi=\mathrm{Vol}(S^2)/4$ at the Hopf
+bundle; the $\pi^{2k}\cdot\mathbb{Q}$ content of vacuum-polarization-type
+observables (e.g.\ $\Pi=1/(48\pi^2)$) at the Connes--Chamseddine spectral
+action; the even-zeta value $\zeta_R(2)$ (the Fock-Dirichlet object $F$)
+at a Dirichlet series at $s=4$; the half-integer Hurwitz content that
+promotes to odd~$\zeta$, Catalan's~$G$, and $\beta(4)$ at the
+Camporesi--Higuchi spinor lift's vertex selection; and $2\pi\cdot\mathbb{Q}$
+at temporal compactification (Sec.~\ref{sec:time}).  None of these is an
+anonymous transcendental:\ each is pinned to a projection row, which is
+the discipline this group exists to model.  The fine-structure
+combination $1/(4\pi)$ per loop is tagged to the vector-photon promotion;
+the Paper~2 fine-structure combination rule that consumes it remains an
+\textbf{Observation}, never a derivation, and the taxonomy is consistent
+with that tiering rather than strengthening it.
+
+\paragraph{The engine versus the catalogue.}
+The computational engine behind the transcendental tags is the master
+Mellin engine---the Mellin transform of $\mathrm{Tr}\,(D^k e^{-tD^2})$ at
+$k\in\{0,1,2\}$, whose three domains $M_1/M_2/M_3$ generate the $\pi^{2k}$,
+even-zeta, and odd-zeta/Catalan tiers respectively.  That engine is
+developed in Paper~18~\S III.7 (Group~3, the foundations trunk); Paper~34
+is the \emph{catalogue} that consumes its output and assigns each tier to
+a projection.  The synthesis-level reading is that the transcendental
+axis is the only genuinely independent axis of the three:\ Sprint~TX-A's
+dimensional axiomatization found the variable and dimension axes to be
+perfectly correlated, so the dictionary's content reduces to the
+projection~$\leftrightarrow$~transcendental map.
+
+%% ========================================================================
+\section{Time as the prototype free-side projection (Paper~35)}
+\label{sec:time}
+%% ========================================================================
+
+Paper~35 answers the question Paper~34 leaves open---\emph{where exactly}
+does $\pi$ enter, and at no other step---in the simplest non-trivial
+relativistic system the framework describes:\ a free scalar on
+$S^3\times\mathbb{R}$ governed by the Klein--Gordon equation.
+
+\paragraph{The before/after.}
+The bare Klein--Gordon spectrum is $\pi$-free in the algebraic-extension
+ring $\mathbb{Q}[\sqrt{d_i}]$ for every rational mass-squared parameter.
+This is verified SYMBOLICALLY for $n\in[1,50]$ across the panel
+$m^2\in\{0,1,1/4,2\}$ (200 cases, zero transcendentals).  Mass is
+therefore a \emph{rest-mass projection}:\ it introduces a parameter of
+dimension mass and \emph{preserves} the bare-graph ring.  Compactify the
+temporal direction, $S^3\times\mathbb{R}\to S^3\times S^1_\beta$, and the
+spectrum acquires Matsubara modes $\omega^t_k = 2\pi k/\beta$; the first
+$\pi$-bearing eigenvalue is the $(n{=}0,k{=}1)$ mode with
+$\omega^2=4\pi^2$.  Every $(n,0)$ eigenvalue is $\pi$-free; every
+$(n,k\neq0)$ eigenvalue carries $2\pi/\beta$.  The conformally coupled
+massless scalar Casimir energy on unit $S^3$ (spatial only, no temporal
+compactification) is the exact rational $E_{\mathrm{Cas}}=1/240$, with no
+transcendental at any step; the Stefan--Boltzmann constant $\pi^2/90$
+appears only in the high-temperature expansion on
+$S^3\times S^1_\beta$---through the Matsubara sum, i.e.\ exactly the
+spectral $\pi$-injection.
+
+\paragraph{The sharpened reading and its tier.}
+This forces a refinement of the Paper~34 dictionary:\ the implicit
+``scalar parameter projection'' splits into a ring-preserving
+\emph{rest-mass projection} (introduces $m$, signature trivial) and an
+\emph{observation/temporal-window projection} (introduces $\beta$,
+signature $2\pi\cdot\mathbb{Q}$ per mode).  The structural statement is
+that a GeoVac observable contains $\pi$ if and only if its evaluation
+includes a continuous integration over a temporal or spectral parameter
+promoted from the discrete graph spectrum.  This is a structural
+OBSERVATION supported by a symbolic verification panel (the 208-case
+panel that Paper~34's prediction subsection cites as a downstream control);
+it is asserted at that tier, not as a theorem about all observables.
+Time is, in this reading, the prototype free-side projection:\ the
+observer's finite-time measurement window is the formal mechanism by
+which the continuum---and $\pi$---enters.
+
+This connects directly to the project's internal working hypothesis that
+time-discreteness is observer-compactification (WH7):\ the only temporal
+structure the metric can see is compactified time, and compactified time
+is automatically discrete.  We flag the honest cap that internal
+diagnostic work attaches to that hypothesis---whether the Lorentzian
+\emph{signature} is metrically visible at finite cutoff remains open, and
+the relevant falsifier (a metrically visible temporal algebra on a
+non-compact carrier) is an active probe, not a closed result.  Paper~35's
+load-bearing content---that $\pi$ enters at temporal compactification and
+that rest mass is ring-preserving---stands independently of that open
+question.
+
+%% ========================================================================
+\section{Entropy as an embedding-class projection (Paper~27)}
+%% ========================================================================
+
+Paper~27 places entanglement entropy in the same two-layer frame and
+shows it to be a projection artifact rather than an intrinsic feature of
+the graph.
+
+\paragraph{One-body operators are entanglement-inert.}
+The operator-theoretic result is an INTERNAL THEOREM:\ on any finite
+lattice, the von~Neumann entropy of any reduced density matrix derived
+from a \emph{non-degenerate} ground state of a purely one-body fermionic
+Hamiltonian is identically zero (the ground state is a single Slater
+determinant).  Numerically this is confirmed to machine precision,
+$S_{\mathrm{kin}}/S_{\mathrm{full}}\sim10^{-14}$ for He at
+$n_{\max}=2,3$.  All ground-state entanglement is generated by the
+two-body interaction $V_{ee}$.  The non-degeneracy qualifier is
+essential---open-shell and dissociated-bond states escape the floor---and
+is stated as such.
+
+\paragraph{The ``area law'' is pair counting.}
+Earlier framework material presented a holographic scaling
+$S_n=k\log A_n$ with $A_n\propto n^4$ in one-particle language.  Paper~27
+re-derives it rigorously as a \emph{pair-counting} statement:\
+$A_n=g_n^2$ with shell degeneracy $g_n=2n^2$, so the factor of four is
+the two-body signature, not a genuine area law.  This corrects the
+earlier presentation in place rather than propagating it---a model of the
+two-way verdict discipline (a claim is re-priced to what its backing
+supports).
+
+\paragraph{A second rigidity statement.}
+On the Bargmann--Segal harmonic-oscillator lattice, the two-fermion
+closed-shell ground-state entropy is identically zero for \emph{any}
+central two-body potential.  The mechanism is an INTERNAL THEOREM:\
+Moshinsky--Talmi total-quanta conservation makes
+$N_1+N_2 = N_{\mathrm{rel}}+N_{CM}$ a good quantum number, so the
+closed-shell ground state is the one-dimensional lowest-quanta sector---a
+single determinant $|(0s)^2\rangle$, confirmed bit-identically at
+$N_{\max}=2,3$ with commutator residual $\|[H_{HO},V]\|_F/\|H_{HO}\|_F
+\sim10^{-16}$.  This is the entropy-side dual of the Fock and
+Bargmann--Segal rigidity theorems of Paper~24.
+
+\paragraph{Taxonomy placement.}
+Entropy slots cleanly as an \emph{embedding-class} observable in the
+Paper~18 taxonomy and a projection artifact in the Paper~34 frame:\ zero
+on the combinatorial graph (one-body operator alone, no transcendental),
+finite only after the metric embedding of $1/r_{12}$ onto the pair-state
+graph, where the spectral eigenvalues of $V_{ee}$ become irrational.  The
+combinatorial graph is entropy-blind; entropy is the price of projecting
+onto the metric continuum.  A measured refinement accompanies the
+placement:\ Coulomb-lattice block entropy obeys a universal two-variable
+scaling $S_B = A\,(\tilde w_B/\delta_B)^\gamma$ whose local exponent
+Richardson-extrapolates to $\gamma_\infty\approx1.96$, slightly below the
+non-degenerate second-order Rayleigh--Schr\"odinger value of~$2$---a
+MEASURED extrapolation, reported with its residual gap attributed to
+multi-shell aggregation, not claimed as exactly~$2$.
+
+%% ========================================================================
+\section{Entanglement structure of the angular-momentum basis (Paper~26)}
+%% ========================================================================
+
+Paper~26 supplies the computational backbone for the entropy thesis by
+characterizing \emph{where} the two-body entanglement lives in the
+angular-momentum eigenbasis---the basis of hydrogenic radial functions
+times spherical harmonics labeled by $(n,\ell,m)$.
+
+\paragraph{Energy--entanglement decoupling.}
+The off-diagonal one-body Hamiltonian (graph-Laplacian topology, coupling
+$\kappa=-1/16$) carries $10$--$39\%$ of the correlation energy but
+$<0.2\%$ of the single-orbital entanglement entropy; the off-diagonal
+electron repulsion carries $100\%$ of the entanglement.  The total
+entanglement entropy scales as $S\sim Z^{-2.56}$ across He-like ions.
+These are MEASURED quantities across $Z=2$--$10$ at $n_{\max}=2$--$4$.
+The structural origin is that a one-body operator is separable and cannot
+entangle orbitals, while $V_{ee}$ is the irreducible two-body interaction;
+the angular-momentum basis, by nearly diagonalizing the one-body physics,
+isolates the entanglement in $V_{ee}$ alone.
+
+\paragraph{Basis-intrinsic sparsity.}
+Among orbital bases for spherically symmetric systems, the
+angular-momentum eigenbasis is an \emph{isolated} point of ERI sparsity:\
+any unitary rotation of orbital indices, however small, fills the ERI
+tensor from $42\%$ to $99\%$ density in a step-function transition at the
+identity, and the nonzero ERI count is $Z$-independent (sparsity is
+purely geometric).  This MEASURED step-function is the entanglement-side
+counterpart of the potential-independent angular-sparsity theorem
+(Paper~22, Group~3) and the structural root of the $O(Q^{2.5})$ composed
+Pauli scaling reported in the quantum-computing arc (Group~4):\ the same
+basis that decouples one-body energy from two-body entanglement is the
+one that produces sparse ERIs.
+
+\paragraph{Network topology and the factorization it justifies.}
+Orbital mutual-information maps exhibit a hub-migration pattern
+($1s\to2s\to2p$) tracking the partially filled shell across the first
+row, and core--valence mutual information falls to $\approx 2\times10^{-3}$
+by $Z=4$ and below $10^{-3}$ for $Z\geq5$.
+The latter is the quantitative justification for the composed
+fiber-bundle factorization used in the molecular framework:\ per-block
+entanglement is $R$-independent, with core/bond entropy ratios of
+$\sim50\times$ at matched qubit count.  Paper~26 states its limitations
+plainly---$n_{\max}=2$ for the first-row network maps, $R$-independence
+is a property of the composed architecture (not of the true molecular
+ground state, whose entanglement diverges at dissociation), and the
+$d$-orbital extension is open.
+
+%% ========================================================================
+\section{The multi-observable focal-length program (Paper~34 \S V)}
+%% ========================================================================
+
+The arc's most distinctive instrument is the multi-observable
+focal-length decomposition program:\ the discovery that a global fit of
+several precision observables through one structural dictionary exposes
+systematics that no single-observable analysis can see.
+
+\paragraph{Roothaan autopsies.}
+For observables with a multi-component literature decomposition---the
+hydrogen Lamb shift, the $21$~cm and muonic hyperfine intervals, the
+muonic-deuterium Lamb shift---Paper~34 hosts \emph{Roothaan autopsies}:\
+decomposition tables that present each measured observable as a sum of
+focal-length-tagged components, each carrying its explicit projection
+chain and a framework-native (FN) versus Layer-2-input (L2) status.  The
+hydrogen $1S$ Lamb-shift autopsy is representative:\ the framework-native
+components (self-energy via Fock\,$\circ$\,Sturmian\,$\circ$\,spectral
+action\,$\circ$\,Drake--Swainson, Uehling vacuum polarization via
+Fock\,$\circ$\,spectral action, $\ldots$) sum to $+1057.19$~MHz, $99.9\%$
+of the $1057.845(9)$~MHz measurement, with the Layer-2 inputs
+(multi-loop QED, finite-size, recoil~NLO) summing to a near-cancellation
+specific to this observable.  These are MEASURED decompositions whose
+residuals sit within the cited compilation precision; the autopsy makes
+the projection-chain dictionary's reach visible at the observable level.
+
+\paragraph{Convention exposures versus kernel gaps.}
+The program's signature finding-type is the \emph{literature convention
+exposure}:\ a multi-observable global fit surfaces itemization
+differences between independent precision compilations
+(Eides, Karshenboim, Krauth, Pachucki--Yerokhin, Antognini,
+Friar--Payne) at the sub-percent level the framework operates at.  Six
+are catalogued, including:\ the $\sim0.01\%$-of-$\nu_F$ recoil/multi-loop
+itemization difference that propagates to $\sim25$~mfm in an extracted
+Zemach radius; the Friar-moment convention difference between an RMS
+radius $\langle r^2\rangle^{1/2}$ and a first moment $\langle r\rangle$
+(a Gaussian-profile factor $\langle r^2\rangle/\langle r\rangle^2=4/\pi
+\approx1.27$, i.e.\ $+12.7\%$ on the Friar moment); and the resolution of
+a $3\sigma$ helium fine-structure disagreement traced to a numerically
+incorrect relativistic Bethe-log itemization in an older compilation.
+The complementary finding-type is the \emph{framework kernel gap}:\
+places where the framework's leading-order operator (Eides Zemach,
+Foldy--Friar contact, Friar moment) is too coarse for the precision
+target.  Each precision tightening tends to relocate the load-bearing
+systematic from one to the other; cataloguing which class a given
+observable lands in is itself the program's output.
+
+\paragraph{The structural prediction that replaced the naive one.}
+A falsifiable structural PREDICTION emerges from re-tagging the matches
+catalogue by the number of Layer-2 inputs a chain consumes.  An earlier
+form scaled the residual with projection \emph{depth}; the May~2026
+synthesis pass falsified that form on the catalogue itself (depth-3
+chains exist at residual~$0$ and at $+286$~ppm; depth-4 chains at
+$+2$~ppm and at $+0.534\%$).  The replacement is the \emph{Layer-2-presence
+bound}:\ the residual of a catalogue row is bounded above by the larger
+of the framework's basis-quality residual at zero Layer-2 inputs and the
+largest single Layer-2 input consumed,
+\[
+|\epsilon(\text{obs})| \;\leq\;
+\max\!\bigl(\epsilon_{\text{basis}},\ \max_i |L_2^{(i)}|\bigr).
+\]
+Zero-Layer-2 chains run from machine-exact (Stefan--Boltzmann $\pi^2/90$,
+hydrogen static polarizability $\tfrac92 a_0^3$, $S^3$ Casimir $1/240$) to
+basis-quality ceilings ($-0.534\%$ for the one-loop Lamb-shift closure);
+one-input chains tighten to tens of ppm or below; multi-input chains sit
+in the multi-focal-wall regime, dominated by the largest single input.
+This is a PREDICTION, consistent with the present catalogue and
+falsifiable by future calculation, not a phenomenological fit.
+
+%% ========================================================================
+\section{Honest scope and positioning}
+%% ========================================================================
+
+\paragraph{What is robust.}
+The load-bearing results are structural and verified at their stated
+tiers.  The $\pi$-free Layer~1 certificate is SYMBOLIC (exact arithmetic,
+both Coulomb $S^3$ and Bargmann--Segal $S^5$).  The Klein--Gordon
+$\pi$-injection at temporal compactification is a SYMBOLIC panel
+($200$ cases; $E_{\mathrm{Cas}}^{S^3}=1/240$ and the conformal-scalar
+chain exact).  The one-body entanglement-inertness and the HO
+zero-entropy rigidity are INTERNAL THEOREMS with machine-precision
+numerical confirmation.  The two-layer thesis and the single-projection
+origin of physical content are stated as OBSERVATIONS, asserted at that
+tier and no higher.  The projection dictionary is a concrete, structured
+artifact:\ every transcendental in the arc wears its projection tag.
+
+\paragraph{What is conditional.}
+The precision matches are sub-percent \emph{framework-native} agreements,
+not first-principles predictions of the physical constants.  Each
+consumes external Layer-2 inputs (Zemach radii, $g$-factors, multi-loop
+QED coefficients, nuclear polarizabilities) in their native compilation
+conventions, and the program's value is precisely that it surfaces
+where those conventions and the framework's leading-order kernels are too
+coarse---a diagnostic instrument for precision systematics, not a
+replacement for the precision compilations.  The block-entropy exponent
+$\gamma_\infty\approx1.96$ is a MEASURED extrapolation, not the exact
+second-order value~$2$.  The entropy area-law and the $R$-independence of
+composed block entanglement are properties of the construction, stated
+with their limitations, not physical statements about molecular
+entanglement at dissociation.
+
+\paragraph{The active wall.}
+The arc's principal open boundary is the \emph{multi-focal-composition
+wall}:\ the framework couples discrete labels cleanly but has \emph{no}
+native composition theorem for combining multiple Fock-style projections.
+Six independent instances are on record across domains (the Yukawa
+non-selection theorem, the LS-8a renormalization scale, the HF spatial
+recoil/Zemach/multi-loop attempts, the chemistry W1e wall).  This is why
+multi-Layer-2-input observables sit in the residual-dominated regime of
+the Layer-2-presence bound, and why the precision program's deepest
+residuals are structural rather than numerical.  The wall is named as an
+active boundary, not papered over.
+
+\paragraph{Positioning.}
+The natural reading of this arc is as a \emph{vocabulary and a
+diagnostic}.  The two-layer framework gives every GeoVac observable a
+definite answer to ``where does each transcendental enter,'' and the
+multi-observable focal-length program turns that vocabulary into an
+instrument that exposes convention mismatches and kernel gaps in precision
+atomic physics.  The discrete skeleton and its continuous projections are
+dual descriptions; the contribution is structural traceability, not an
+ontological claim and not a derivation of the constants the projections
+consume.
+
+%% ========================================================================
+%% BIBLIOGRAPHY
+%% ========================================================================
+\begin{thebibliography}{99}
+
+\bibitem{loutey_paper0}
+J.~Loutey,
+``Angular Momentum as Information Geometry:\ Isotropic Packing and the
+Universal Angular Cross-Section,''
+GeoVac Paper~0 (2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The Dimensionless Vacuum:\ Recovering the Schr\"odinger Equation from
+Scale-Invariant Graph Topology,''
+GeoVac Paper~7 (2026).
+
+\bibitem{loutey_paper18}
+J.~Loutey,
+``Spectral-Geometric Exchange Constants: Projecting Discrete Spectra
+onto Continuous Manifolds,''
+GeoVac Paper~18 (2026).
+[Master Mellin engine, \S III.7; transcendental-tier classification.]
+
+\bibitem{loutey_paper24}
+J.~Loutey,
+``The Bargmann--Segal Lattice: $\pi$-Free Discretization of the Harmonic
+Oscillator on $S^5$,''
+GeoVac Paper~24 (2026).
+[Layer-1 $\pi$-free certificate; HO rigidity theorem.]
+
+\bibitem{loutey_paper26}
+J.~Loutey,
+``Entanglement Structure of the Angular Momentum Eigenbasis:\
+Energy-Entanglement Decoupling and Basis-Intrinsic Sparsity,''
+GeoVac Paper~26 (2026).
+
+\bibitem{loutey_paper27}
+J.~Loutey,
+``Entropy as a Projection Artifact:\ One-Body Operators are
+Entanglement-Inert on Sparse Lattices,''
+GeoVac Paper~27 (2026).
+
+\bibitem{loutey_paper28}
+J.~Loutey,
+``QED on $S^3$: Spectral Geometry of Perturbative Transcendentals,''
+GeoVac Paper~28 (2026).
+[Graph-native QED $\pi$-free certificate.]
+
+\bibitem{loutey_paper31}
+J.~Loutey,
+``The Universal/Coulomb Partition of the GeoVac Spectral Triple,''
+GeoVac Paper~31 (2026).
+
+\bibitem{loutey_paper32}
+J.~Loutey,
+``The GeoVac Spectral Triple: A Synthesis Paper Locking the Framework
+into the Marcolli--van~Suijlekom Gauge-Network Lineage,''
+GeoVac Paper~32 (2026).
+
+\bibitem{loutey_paper34}
+J.~Loutey,
+``GeoVac as a Two-Layer Framework:\ Projection Taxonomy and the Empirical
+Matches Catalog,''
+GeoVac Paper~34 (2026).
+
+\bibitem{loutey_paper35}
+J.~Loutey,
+``Time as Projection:\ The Klein--Gordon Spectrum on
+$S^3\times\mathbb{R}$ and the Algebraic / Observation Split,''
+GeoVac Paper~35 (2026).
+
+\end{thebibliography}
+
+\end{document}

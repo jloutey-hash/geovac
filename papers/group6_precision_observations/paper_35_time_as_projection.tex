@@ -118,7 +118,7 @@ the Layer~2 dictionary are responsible?  Most of the canonical
 $\pi$-bearing observables in GeoVac to date (vacuum polarization,
 $\beta$-functions, Stefan--Boltzmann constants, fine-structure
 calibration $1/(4\pi)$) have been pinned to specific projections
-empirically -- the Hopf bundle for the $\alpha$ conjecture, the
+empirically -- the Hopf bundle for the $\alpha$ Observation, the
 Connes--Chamseddine spectral action for one-loop QED, the vector-photon
 promotion for the $1/(4\pi)$ per-loop Weyl measure on the Hopf base.
 But there is no single statement of the form ``$\pi$ enters at step $X$,
@@ -383,8 +383,10 @@ computable, single-projection match: the projection invoked is the Fock
 conformal projection (Paper~34 Table~1 row 1) plus the conformal
 coupling shift; the transcendental signature is rational; and the value
 $1/240$ matches an independently established physics quantity.  By the
-projection-depth criterion of Paper~34, a single-projection match
-should be exact, and indeed it is.
+Layer-2-presence bound of Paper~34 (this is a zero-Layer-2-input,
+rational-analytic chain), a single-projection match of this kind
+should sit at the framework's basis-quality limit -- here exact -- and
+indeed it is.
 
 \begin{observation}[The dimensional Casimir ladder: $S^1, S^3, S^5$ and
 the Bernoulli rungs (Sprint GB-3)]
@@ -517,10 +519,10 @@ $K = \pi(B+F-\Delta)$ viewed from the ladder. Source:
 \label{sec:paper34}
 % ===================================================================
 
-Paper~34's current projection dictionary lists thirteen named
-projections, but does not separately index ``introduce a mass parameter
+Paper~34's projection dictionary, in the form current when this sprint
+ran, did not separately index ``introduce a mass parameter
 into the spectrum'' from ``compactify the temporal direction for
-finite-time observation.''  In practice these have been bundled with
+finite-time observation.''  In practice these had been bundled with
 Fock-conformal (which carries $Z$ and $E$) or with the spectral action
 (which carries $\Lambda$).  This sprint shows the bundling is too
 coarse: the mass projection is ring-preserving, while the
@@ -633,13 +635,14 @@ after sprint KG-5):
 \begin{enumerate}
 \setlength\itemsep{0pt}
 \item \textbf{Pauli term counts} (Paper~14): the universal $N_\text{Pauli}
-= 11.11 \cdot Q$ rule across 28 composed molecules is integer/rational
+= 11.10 \cdot Q$ rule across 35 composed molecules is integer/rational
 at every $Q$.
 \item \textbf{Nuclear magic numbers} (Paper~23): $\{2, 8, 20, 28, 50,
 82, 126\}$ from HO + spin-orbit graph eigenvalue counting; all integers.
-\item \textbf{Hydrogenic atomic eigenvalues on the bare graph}
+\item \textbf{Hydrogenic atomic eigenvalues via the Fock/$S^3$ projection}
 (Paper~7): $\lambda_n = -(n^2 - 1)$ for the Fock-projected Coulomb
-operator; pure integers at every $n$.
+operator (a continuum $S^3$ Laplace--Beltrami property, not a bare-graph
+one); pure integers at every $n$.
 \item \textbf{Bargmann--Segal HO graph} (Paper~24): bit-exactly
 $\pi$-free in exact rational arithmetic at every finite $N_\text{max}$,
 verified for $N_\text{max} \leq 5$.
@@ -799,7 +802,7 @@ we have not identified.  Either resolution would be informative.
 Track~TS-D of Sprint~TS (May~2026; memo
 \texttt{debug/track\_ts\_d\_paper35\_triple\_test\_memo.md}) tested
 Prediction~\ref{pred:pi_iff_temporal} against each of Paper~34's
-fifteen projections through the spectral-triple lens of
+fifteen then-catalogued projections through the spectral-triple lens of
 Paper~32~\cite{paper32}, and found that every $\pi$-source identifiable
 in any projection reduces to one of three triple-framing mechanisms:
 M1 (Hopf-base measure $\mathrm{Vol}(S^2)/4$), M2 (Seeley--DeWitt
@@ -813,14 +816,22 @@ mechanism $\mathcal{M}[\mathrm{Tr}(D^k\,e^{-tD^2})]$ parametrized by
 operator order $k \in \{0, 1, 2\}$ — the master-mechanism reading is
 recorded in Paper~18~\S\,III.7.
 
-Under the case-exhaustion theorem,
-Prediction~\ref{pred:pi_iff_temporal} is no longer empirically
-load-bearing alone: it is a structural corollary of the GeoVac
-spectral triple's three operating modes (Hopf decomposition of the
-spinor bundle, heat kernel of $D^2$, vertex-parity selection on the
-Camporesi--Higuchi spectrum).  The 208/208 confirmation still
-constitutes the empirical foundation; the theorem provides the
-structural why.
+The case-exhaustion theorem is proven \emph{by exhaustion over the
+Paper~34 projections \S\,III.1--\S\,III.15} (the fifteen then
+catalogued), for which ``the converged value contains $\pi$'',
+``the chain contains a continuous spectral/temporal integration'', and
+``the chain engages one of M1/M2/M3'' are shown equivalent.
+\emph{Within that scope}, Prediction~\ref{pred:pi_iff_temporal} is
+therefore a structural corollary of the GeoVac spectral triple's three
+operating modes (Hopf decomposition of the spinor bundle, heat kernel
+of $D^2$, vertex-parity selection on the Camporesi--Higuchi spectrum),
+rather than a bare empirical regularity.  For observables outside the
+theorem's enumerated scope (the projections added since, and the
+general biconditional over \emph{all} GeoVac observables) the reading
+remains the \emph{structural Observation} of this paper --- WH7 is
+registered, not proven --- with the 208/208 confirmation as its
+empirical foundation; the theorem supplies the structural ``why''
+where it applies.
 
 % ===================================================================
 \section{Tensor-product verification on $T_{S^3} \otimes T_{S^1_\beta}$}
@@ -874,7 +885,7 @@ In the zero-$T$ limit the thermal partition function reduces to the
 spatial Casimir on $S^3$, recovering Paper~35 KG-3 and KG-5 verbatim:
 \begin{align*}
 E_{\mathrm{Cas}}^{\mathrm{conformal\;scalar},\,S^3} &= \tfrac{1}{240}, \\
-E_{\mathrm{Cas}}^{\mathrm{full\;Dirac},\,S^3} &= -\tfrac{17}{480},
+E_{\mathrm{Cas}}^{\mathrm{full\;Dirac},\,S^3} &= \tfrac{17}{480},
 \end{align*}
 both \emph{rational}.  The half-integer Hurwitz / Bernoulli-polynomial
 collapse mechanism noted in §V transports verbatim to the tensor
@@ -914,7 +925,7 @@ measure, $\mathrm{Vol}(S^3)/\pi^2$, $M_2$ modular exponent $\pi^2$,
 $M_2$ Seeley--DeWitt prefactor $\sqrt{\pi}$); 5 on $S^1_\beta$
 (Matsubara modes, Bose--Einstein integrand, theta-inversion prefactor,
 Hopf-measure factor, fermionic $\eta(4)$ ratio); 3 rational with no
-$\pi$ (scalar Casimir $1/240$, Dirac Casimir $-17/480$, fermionic
+$\pi$ (scalar Casimir $1/240$, Dirac Casimir $17/480$, fermionic
 $7/8$ ratio).  By mechanism: 3 $M_1$, 4 $M_2$, 0 $M_3$ (no vertex
 coupling in the free thermal partition function), 1 $M_1\times M_2$
 product (Stefan--Boltzmann), 2 rational collapses ($M_2$ at

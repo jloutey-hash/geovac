@@ -5,7 +5,7 @@ Verification panel:
 * Stefan-Boltzmann factorisation as M1 (Hopf measure) x M2 (zeta(4)).
 * Stefan-Boltzmann Dirac with fermionic eta factor 7/8.
 * Tensor-product mode construction (D = D_S^3 (x) 1 + gamma (x) D_tau).
-* Closed-form Casimir on unit S^3 (scalar 1/240, Dirac -17/480).
+* Closed-form Casimir on unit S^3 (scalar 1/240, Dirac +17/480).
 * Modular residual (MR-B closed form transferred verbatim).
 * Transcendental audit (10 sources tagged by tensor factor and Mellin
   mechanism).
@@ -204,7 +204,10 @@ class TestSpatialCasimirs:
 
     def test_dirac_casimir_rational(self):
         dc = dirac_casimir_S3()
-        assert dc["casimir_energy_unit_S3_full_dirac"] == sp.Rational(-17, 480)
+        # +17/480: E = -1/2 zeta_{|D|}(-1) = -1/2*(-17/240); the half-integer
+        # shift makes zeta negative, so the fermion factor returns POSITIVE
+        # (same sign class as the scalar +1/240). Paper 35 KG-5 derivation.
+        assert dc["casimir_energy_unit_S3_full_dirac"] == sp.Rational(17, 480)
         assert dc["rational_no_pi"] is True
         assert sp.pi not in sp.sympify(
             dc["casimir_energy_unit_S3_full_dirac"]).atoms()
@@ -327,7 +330,7 @@ class TestTranscendentalAudit:
     def test_rational_collapses_match_paper_35(self):
         a = transcendental_audit()
         partition = a["summary"]["mechanism_partition"]
-        # Spatial Casimir 1/240, Dirac Casimir -17/480 — two rational
+        # Spatial Casimir 1/240, Dirac Casimir +17/480 — two rational
         # collapses verified in Paper 35 KG-3 / KG-5.
         assert partition["rational_collapse_count"] >= 2
 
@@ -381,7 +384,7 @@ class TestSelfCheck:
         assert results["dirac_mode_count"] == 15
         # Casimirs.
         assert results["scalar_casimir"] == sp.Rational(1, 240)
-        assert results["dirac_casimir"] == sp.Rational(-17, 480)
+        assert results["dirac_casimir"] == sp.Rational(17, 480)
         # Modular exponent.
         assert results["modular_exponent"] == sp.pi**2
         # Audit complete.
