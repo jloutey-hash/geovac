@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.68.2] - 2026-07-05
+
+**Full-corpus PDF refresh (59/59 three-pass) + orphaned-figure resurrection + C10 hardening.** First complete rebuild under the tracked-PDF policy.
+
+### Fixed
+- **Three group2 papers (P13 hyperspherical, P15 level4-geometry, FCI-A) had been silently compiling with DRAFT BOXES**: the 2026-05-22 audience-group reorganization moved the `.tex` files but orphaned their figure dirs under the old `papers/core/` layout (deleted in the "archive cleanup" commit), and one benchmarks PNG was lost in the OneDrive-migration incident. Without `-halt-on-error`, pdflatex exits 0 on missing figures — so compile checks kept "passing." **8 assets resurrected from git history** (`53cbef2^:papers/core/{figures,paper_15_figures}/` → `papers/group2_quantum_chemistry/`; `895f311^` for `benchmarks/ab_initio_nuclear/h2_pes_morse.png`), per the resurrect-pruned-artifacts rule. All three now compile with real figures.
+- **C10 hardened** (criteria.md): compile checks must run `-halt-on-error`; a `pdftex.def Error` (missing figure → draft box) in the log is a FAIL, not a pass.
+
+### Changed
+- All 59 live papers (groups 1–6 + synthesis) recompiled three-pass clean; PDFs refreshed in the tracked record. `papers/archive/` left frozen (historical drafts).
+
 ## [4.68.1] - 2026-07-05
 
 **`/sprint-close` for the layer-discipline arc (v4.67.8–v4.68.0).** Canonical umbrella memo `debug/sprint_layer_discipline_arc_memo.md` (the three rules 11–13 + C18 build/harden/promote history + sweep execution + the 11/11-seed verification record + honest scope); CLAUDE.md §2's two arc bullets consolidated into one memo-pointing one-liner (replace-never-append). No paper/code content in this release. Steps skipped with cause: §3 dead-end row (no failed approach — remediation arc), paper edits (landed in-arc), MEMORY (2 rules + 1 correction landed in-arc), reference tables (no new benchmarks/mappings), /regression (no production code in the arc's diff).

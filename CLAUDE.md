@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.68.1 (July 5, 2026)
+**Version:** v4.68.2 (July 5, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -136,6 +136,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Full-corpus PDF refresh (2026-07-05, v4.68.2):** 59/59 three-pass under the tracked-PDF policy; 8 orphaned group2 figure assets resurrected from pre-reorg history (P13/P15/FCI-A had silently rendered draft boxes); C10 hardened to halt-on-error. See CHANGELOG v4.68.2.
 - **Layer-discipline arc (2026-07-04/05, v4.67.8–v4.68.0):** rules 11–13 + C18 gate (all-FAIL); ~230 durations retired corpus-wide; 3 seeded deltas CLEAN (11/11); Q1′/Q2′ adjudicated; PDF tracking adopted. See debug/sprint_layer_discipline_arc_memo.md.
 - **/qa group1 citation delta = CLEAN (2026-07-04, v4.67.6):** synthesis follow-on #2 — two PHANTOM group1-synth cites (fabricated papers) resolved; full bib re-scan CLEAN (35/37 GROUNDED, 2/2 seeds). See debug/sprint_synthesis_cert_memo.md §8.
 - **synthesis layer CERTIFIED ✅ (2026-07-04, v4.67.3) — 7th and FINAL certified target; the whole-corpus QA sweep is COMPLETE (trunk + group1–6 + synthesis).** `/qa synthesis` (field guide + 6 group syntheses; code dim WAIVED, backing inherited): 1st FULL run INCONCLUSIVE (PM worktree-from-HEAD while the field guide had uncommitted PI edits → claims dim reviewed stale text) → field-guide re-run CLEAN → citation delta DEFECTS (3 LARGE wrong-cites in the *certified* group1 bib the branch cert missed: `hekkelman2022` 2206.13744=black-hole-paper→2111.13865, `hekkelman_mcdonald2024` 2403.18619=OpenMP-paper→removed+flagged, `latremoliere_metric_st` Adv.Math 415/2023→404/2022; +7 title/label SMALLs) → remediated (v4.67.1/.2) → **citation re-delta CLEAN + calibrated (2/2 seeds, zero MATERIAL, 1 minguzzi-title NIT fixed)**. Per PI direction a clean citation delta = the certifying pass. Honest ceiling: full group-synthesis citation audit remains a standing candidate (PI-deferred). See docs/qa/synthesis.done.md.

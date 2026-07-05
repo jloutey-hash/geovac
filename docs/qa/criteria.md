@@ -181,7 +181,11 @@ verdict is the **AND across all review dimensions** (below).
   review.)
 - **C10 — Compiles.** Each in-scope paper compiles with ERRORS=0 (pre-existing
   non-blocking undefined-citation warnings noted, not MATERIAL unless they break
-  a load-bearing reference).
+  a load-bearing reference). **Run pdflatex with `-halt-on-error`** — without it,
+  a missing figure asset exits 0 and silently renders a draft box (the 2026-07-05
+  lesson: P13/P15/FCI-A "passed" compile checks for weeks with three orphaned
+  figure dirs the 2026-05-22 reorg left behind under `papers/core/`; a `pdftex.def
+  Error` in the log is a FAIL).
 - **C11 — Internal-citation titles (deterministic).** Every internal GeoVac
   citation in scope names the cited paper by its current `\title` — certified by
   `debug/qa/check_internal_titles.py` (exit 0; also
