@@ -57,6 +57,24 @@ items each, never a headline). **A stale number or attribution that touches a Do
 relax) the counterfactual: a secondary number and a provenance note are not a headline result,
 its tier, or its reader takeaway. (Fix them on sight regardless; they just do not gate the cert.)
 
+**Withdrawal-chronicle placement is a NIT class (2026-07-04 PI direction, set at the
+synthesis retraction-language pass).** The **chronicle** of a claim withdrawal — dates,
+process narrative ("an adversarial verification pass retracted…", "this synthesis has been
+brought into line…"), event-framed references ("descoped with the Paper 45 retraction") —
+belongs to the **object of record** (the paper's Status note / History remark,
+`docs/claims_register.md`, CHANGELOG.md), NOT to the synthesis layer. A synthesis (field
+guide or group synthesis) carries **current state only**: what stands, what is
+withdrawn/descoped and the *mathematical reason* (e.g. "descoped by Paper 45's degeneracy
+theorem"), plus at most a one-clause flag with pointer for a headline-grade withdrawal
+(stale-DOI reader protection — earlier Zenodo releases circulate the pre-withdrawal claim).
+Vocabulary: **claims are "withdrawn" or "descoped"; reserve "retraction" for whole-paper
+retraction, which has never occurred in the corpus.** Chronicle language found in a
+synthesis is a **fix-on-sight NIT, not a MATERIAL cert blocker**, *provided* the
+current-state assertion is accurate. **A synthesis that asserts a withdrawn claim as live
+remains MATERIAL (the zombie rule), unchanged.** A negative *result* (e.g. a degeneracy
+theorem) is content, not withdrawal language — it stays. Convention codified in
+`docs/authoring_conventions.md` project-wide rule 11.
+
 ## Dual-rule ERI framing (A = sparsity, B = accuracy) — the framing-zombie rule
 
 **The principle (2026-06-28 PI direction).** The codebase *intentionally* carries
@@ -230,6 +248,22 @@ verdict is the **AND across all review dimensions** (below).
   **Maintenance rule (mirrors C16): when a run corrects or demotes a headline
   number, ADD/UPDATE its family here.**
 
+- **C18 — Project-course duration language (deterministic).** No wall-clock
+  duration (years / months / weeks / days) is attached to the project's own
+  course or events — certified by `debug/qa/check_duration_language.py`
+  (exit 0; `--selftest` built in). Historical-duration classes ("N years ago",
+  "units of work", "across N days", "took N months") **FAIL**; forward
+  effort-estimate vocabulary ("multi-month", "multi-year", "week-scale") is
+  **ADVISORY standing debt** (~190 pre-existing instances in certified group
+  papers) until the corpus-wide sweep retires it, then promoted to FAIL.
+  Sequence language, real dates, version anchors, and unit-free effort
+  vocabulary ("sprint-scale", "deep wall") are fine; external-world history is
+  exempt. **Added 2026-07-04 (PI direction; the incident: the field guide
+  claimed "Three years ago the project…" when the whole project is far
+  younger — LLM drafting is unreliable about elapsed project time, so this is
+  a grep-class check, not a judgment call).** Convention:
+  `docs/authoring_conventions.md` rule 12.
+
 ## Branch-specific criteria (C14+)
 
 A branch may add criteria numbered **C14+** *in its profile* when it carries a
@@ -335,6 +369,20 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-07-04 — **Added C18 (project-course duration-language gate)** +
+  `docs/authoring_conventions.md` rule 12 (PI direction, set at the synthesis
+  time-language pass). No wall-clock units on the project's own course:
+  historical durations FAIL (the "Three years ago the project…" incident);
+  forward effort-estimates ("multi-month/-year") are advisory standing debt
+  (~190 instances) pending the corpus sweep. Check self-tested;
+  `debug/qa/check_duration_language.py`.
+- 2026-07-04 — **Added the "Withdrawal-chronicle placement" NIT class** to §"Material vs
+  nit" + `docs/authoring_conventions.md` project-wide rule 11 (PI direction, set at the
+  synthesis retraction-language pass). Synthesis layer = current state + one-clause
+  headline-grade flags with pointer; the chronicle (dates, process narrative) lives with
+  the object of record (paper Status notes, claims register, CHANGELOG). Claims are
+  "withdrawn/descoped," never "retracted" (no whole-paper retraction has occurred).
+  Zombie rule unchanged: a withdrawn claim asserted as live is MATERIAL.
 - 2026-06-16 — **Extracted** from `trunk.done.md` / `group3.done.md` (which were
   ~90% identical) into this single shared standard, per PI direction
   ("consolidate to a single definition of done"). The three branch files become

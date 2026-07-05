@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.8] - 2026-07-04
+
+**Two layer-discipline passes over the certified synthesis layer + their codification (PI-directed): (1) withdrawal-chronicle placement, (2) project-course duration language.** Closed with a seeded claims+citation micro-delta (calibrated 4/4 after one recovery re-dispatch) that also surfaced and fixed 2 genuine MATERIALs in certified text.
+
+### Changed — retraction-language pass
+- Field guide (4 loci) + group1 synthesis (13 loci): withdrawal *chronicle* (dates, process narrative, "descoped with the Paper 45 retraction" event-framing) pushed down to the papers of record; syntheses now carry current state only ("descoped by Paper 45's degeneracy theorem"), one consolidated status box (group1), one-clause headline-grade flags with pointer. Vocabulary standardized: claims are "withdrawn/descoped", never "retracted" (no whole-paper retraction has occurred in the corpus).
+- New `docs/authoring_conventions.md` **rule 11** (withdrawal placement / layer discipline) + `docs/qa/criteria.md` **"Withdrawal-chronicle placement" NIT class** (chronicle language in a synthesis = fix-on-sight NIT; asserting a withdrawn claim as live stays MATERIAL — zombie rule unchanged).
+
+### Changed — duration-language pass
+- PI incident: the field guide claimed "Three years ago the project produced transcendentals…" — the whole project is far younger; LLM drafting is unreliable about elapsed project time. All synthesis-layer duration attachments fixed (the fabricated-historical instance + 14 forward effort-estimates, incl. 3 capitalized "Multi-year" the manual grep missed and the deterministic check caught); 2 fail-tier historical durations in certified group papers fixed on sight (P57 "one day of work" → "a single sprint wave"; P51 "across two days" / "~4–8 months end-to-end" → unit-free).
+- New **C18** deterministic gate `debug/qa/check_duration_language.py` (self-tested, 10 positives / 8 negatives): historical-duration classes FAIL (now 0 corpus-wide); forward effort-estimate vocabulary ("multi-month/-year", "week-scale") is ADVISORY standing debt = **190 instances** (P55 38, P32 36, P51 22, P56 15, P28 14, …) pending a corpus-wide sweep sprint — the sibling of the ~443 `debug/`-refs sweep. Registered in qa.md step 1 + criteria.md; convention = `docs/authoring_conventions.md` **rule 12**; standing memory rule `feedback_no_duration_language.md`. Sequence language, real dates, version anchors, and unit-free effort vocabulary ("sprint-scale", "deep wall") remain fine.
+
+### Fixed — genuine MATERIALs surfaced by the micro-delta (certified text; PM-verified against primary sources)
+- **CvS-deferral misattribution** (group1 abstract + Headline 4): "the question deferred by Connes and van Suijlekom remains open" — but Paper 44 pins the CvS 2021 "elsewhere" deferral as the *Riemannian GH-convergence* question (3 loci in arXiv:2004.14115v2), which Paper 38 **closed**; what remains open is its *Lorentzian analog*. Both loci now say exactly that.
+- **4/π universality prose > tier** (group1 abstract + field-guide twin): flat "universal across compact connected Lie groups" → tier mirrored inline (compact **simple** groups; rigorous at rank 1, numerically pinned at higher ranks, rank-uniform analytical proof a named gap) — the Headline-3 hedges the two summary loci had dropped.
+- NITs: "summarized below" → "at the end of this abstract" (no body §52/53 exists; the summaries are the abstract's own); field-guide Q2′ vs synthesis Q1′ label drift on the P49 OSLPLS result logged for PI adjudication (two internal taxonomies; no change made).
+
+### Verification
+- Micro-delta (delta run shape, post-cert): claims dim calibrated 2/2 seeds (S8 zombie caught first pass; S9 status-overstatement caught by a sharpened internal-consistency recovery re-dispatch — the delta-1 lesson repeating); citation dim (Sonnet-tier) 2/2 seeds (wrong-referent cite + wrong arXiv ID); specificity clean — the one flag on a designated control (M4 attribution) was PM-verified GENUINE against Paper 44, so it is a finding, not a false positive. Worktree removed, branch deleted, zero seed leakage (grep-verified). Answer key: `debug/qa/synthdelta_retraction_pass_seed_key.json`.
+- Deterministic: C5-K / C11 / C13 / C14 / C15 / C16 (all 46 withdrawal flags intact through the compression) / C17 / **C18 (new)** all PASS; 6 touched papers recompile clean (field guide, group1/3/5 syntheses, P51, P57), zero undefined refs. No `geovac/` production code touched → no `/regression` triggered; no §13.5 hard prohibition touched.
+
 ## [4.67.7] - 2026-07-04
 
 **`/sprint-close` for the synthesis follow-on #2 + `/qa group1` citation delta** (continuation of the synthesis-cert sprint; the canonical memo is extended, not duplicated).

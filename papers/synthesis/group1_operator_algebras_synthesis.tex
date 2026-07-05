@@ -108,18 +108,21 @@ state-space Gromov--Hausdorff sense at quantitative rate
 $\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_3 \gamma_{\nmax}$
 with $C_3 = 1$ and asymptotic constant $4/\pi$ (Paper~38).
 Third, the rate constant $4/\pi$ is universal across the class of
-simple compact Lie groups with bi-invariant metric, via a
-Plancherel-weight $\times$ Vandermonde-Jacobian cancellation in the
-dual-Coxeter normalisation (Paper~40).  Fourth, the natural route to a Lorentzian convergence theorem on
+simple compact Lie groups with bi-invariant metric --- rigorous at
+rank~1, numerically pinned at ranks~1--2 for general $G$ with the
+rank-uniform analytical proof a named gap --- via a Plancherel-weight
+$\times$ Vandermonde-Jacobian cancellation in the dual-Coxeter
+normalisation (Paper~40).  Fourth, the natural route to a Lorentzian convergence theorem on
 truncated $\SU(2)\times\Uone_{t}$ Krein spectral triples ---
 compressing to the Krein-positive subspace --- is closed by a
 degeneracy theorem (Paper~45):\ the compression annihilates the
 spatial Dirac and the restricted Lipschitz seminorm vanishes
 identically.  An earlier convergence claim through this device,
 together with the strong-form and bridge extensions built on it
-(Papers~46, 48, 49), was retracted in June 2026;\ the question
-deferred by Connes and van Suijlekom \cite{connes_vs2021} remains
-open, now with a sharpened specification.  Paper~47's
+(Papers~46, 48, 49), is withdrawn;\ the Lorentzian analog of the
+convergence question Connes and van Suijlekom \cite{connes_vs2021}
+deferred to ``elsewhere'' (and which Paper~38 closed on the
+Riemannian side) remains open, now with a sharpened specification.  Paper~47's
 de-compactification limit $T \to \infty$ survives at the
 norm-resolvent / spectral level.  A
 master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
@@ -127,15 +130,14 @@ Papers~38,~39, and~40 as special cases:\ for arbitrary $k \ge 1$ and
 arbitrary compact connected Lie groups $G_{1}, \ldots, G_{k}$, the
 k-fold tensor product converges (state-space GH) at the universal
 $4/\pi$ rate with Lipschitz comparison constant $C_3^{(k)} \le
-\sqrt{k}$ (corrected 2026-06-18 from a withdrawn $k$-independent
-Pythagorean claim;\ only the $k\le2$ cases are proved).  The constant
+\sqrt{k}$ (only the $k\le2$ cases are proved).  The constant
 $4/\pi$ identifies, in both Riemannian (Paper~38) and Lorentzian
 (Paper~43~\S 10.2) settings, as the $M_{1}$ Hopf-base
 measure signature of the master Mellin engine catalogued by the
 case-exhaustion theorem of Paper~32~\S\,VIII.  Five further papers (48, 49, 50, 52, 53) extend the arc;\ Papers~48--50 are recorded in
-\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}, and Papers~52--53 are summarized below;\ two of
-their metric-level claims were subsequently descoped with the Paper~45
-retraction and are reported here in corrected form. Paper~50 reproduces
+\S\ref{sec:closures_post_47}--\S\ref{sec:closures_post_49}, and Papers~52--53 are summarized at the end of this abstract;\ metric-level
+claims among them descoped by Paper~45's degeneracy theorem are
+reported here in corrected form. Paper~50 reproduces
 the Klebanov--Pufu--Safdi sphere F-theorem bit-exactly from the
 framework spectrum; Paper~52 frames the spectral-truncation convergence
 as a ``Category III'' discretization correspondence (the framework's
@@ -171,24 +173,21 @@ and exhibits the structural relationships between the papers; no
 new theorems are introduced.
 \end{abstract}
 
-\bigskip\noindent\textbf{Status note (June 2026).}  An adversarial
-verification pass retracted the Lorentzian convergence claims of this
-arc:\ the K$^{+}$-compression device underlying Papers~45--46 and the
-bridge constructions of Papers~48--49 is degenerate (the compressed
+\bigskip\noindent\textbf{Status.}  The metric-level Lorentzian
+convergence claims of this arc are withdrawn:\ the
+K$^{+}$-compression device underlying Papers~45--46 and the bridge
+constructions of Papers~48--49 is degenerate (the compressed
 Lipschitz seminorm vanishes identically;\ Paper~45's annihilation
-theorem).  Paper~38's Riemannian convergence theorem was briefly
-reduced to a conditional form with two named gaps;\ both gaps were
-closed (2026-06-10) by a translation-seminorm reframing, and the
-theorem now stands unconditionally in van~Suijlekom's state-space
-framework.  This synthesis has been brought into line with the retraction
-throughout:\ each affected result (Headline~4, \S\ref{sec:lorentzian},
-and the Paper~46/47/48/49 closures) carries an inline descope note,
-and the surviving content --- the unconditional spatial convergence,
-the norm-resolvent de-compactification arrow, and the cocycle-deficit
-algebra --- is stated as such.  The Status notes in Papers~38
-and~42--49 and the claims register
-(\texttt{docs/claims\_register.md}) remain authoritative for fine
-detail.
+theorem, \S\ref{sec:lorentzian}).  What stands:\ the unconditional
+Riemannian convergence theorem in van~Suijlekom's state-space
+framework (Paper~38, translation-seminorm metrization), the
+operator-system substrate (Paper~44), the norm-resolvent
+de-compactification arrow (Paper~47), and the cocycle-deficit
+algebra and OSLPLS category design (Paper~49).  Each affected
+section below carries a one-line status flag;\ the Status notes in
+the papers of record and the claims register
+(\texttt{docs/claims\_register.md}) are authoritative for the full
+history.
 
 % =====================================================================
 \section{Introduction}
@@ -266,8 +265,8 @@ degeneracy theorem.}
 On truncated $\SU(2)\times \Uone_{T}$ Krein spectral triples
 $\Tcal^{L}_{\nmax,\Nt,T}$ built via the Bizi--Brouder--Besnard
 \cite{bizi_brouder_besnard2018} signature $(3,1)$ data at
-$(m,n) = (4,6)$, the originally-claimed $K^{+}$-restricted weak-form
-Lorentzian propinquity bound (\emph{retracted}; see below) was
+$(m,n) = (4,6)$, the natural $K^{+}$-restricted weak-form
+Lorentzian propinquity target bound is
 \begin{equation}
 \Lprop(\Tcal^{L}_{\nmax,\Nt,T}, \Tcal^{L}_{\Manifold})
 \;\le\; C_3^{\mathrm{joint}} \cdot \gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
@@ -279,13 +278,15 @@ with $\gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
 $\Lprop(\cdot,\cdot) := \Lambda(\cdot|_{\Kplus},\cdot|_{\Kplus})$ is
 the propinquity of the standard metric spectral triple obtained from
 the Krein-positive subspace $\Kplus = \{|\psi\rangle : \JL|\psi\rangle
-= +|\psi\rangle\}$.  The corresponding convergence claim (formerly Theorem~5.1 of
-Paper~45) was retracted in June 2026:\ the quantity $\Lprop$ is
+= +|\psi\rangle\}$.  The target fails structurally:\ the quantity $\Lprop$ is
 degenerate --- the K$^{+}$ compression annihilates the spatial Dirac
 and the restricted Lipschitz seminorm vanishes identically
-(Paper~45's annihilation theorem~\cite{paper45}).  The question
-Connes and van~Suijlekom \cite{connes_vs2021} deferred to
-``elsewhere'' remains open, now with a sharpened specification.
+(Paper~45's annihilation theorem~\cite{paper45}) --- and the earlier
+convergence claim through this device (formerly Theorem~5.1 of
+Paper~45) is withdrawn.  The Lorentzian analog of the convergence
+question Connes and van~Suijlekom \cite{connes_vs2021} deferred to
+``elsewhere'' (closed on the Riemannian side by Paper~38) remains
+open, now with a sharpened specification.
 
 \paragraph{Position against the literature.}
 The arc sits in the lineage of Connes--van~Suijlekom 2021
@@ -805,7 +806,7 @@ Paper~40 provides the missing rate constant, the Lipschitz spinor
 bound, and the asymptotic tightness on the state-space GH substrate;
 the further step from state-space GH to spectral-triple-level
 Latr\'emoli\`ere propinquity (the dual-reach step) is a conceded named
-gap (the same descope applied to Paper~38), so for general $G$ the
+gap (the same scope boundary as Paper~38), so for general $G$ the
 result is conditional on a per-group spin-window decomposition,
 verified here only for $\SU(2)$.
 
@@ -1099,9 +1100,8 @@ $(\nmax, \Nt) = (2,3), (3,5)$;\ frozen falsifier in the repository
 test suite.)
 \end{theorem}
 
-An earlier revision of the arc claimed a convergence theorem through
-this device (formerly Theorem~5.1 of Paper~45);\ the claim was
-retracted in June 2026.  The rate expression
+An earlier convergence claim through this device (formerly
+Theorem~5.1 of Paper~45) is withdrawn.  The rate expression
 \begin{equation}
 C_{3}^{\mathrm{joint}} \cdot \gamma^{\mathrm{joint}}_{\nmax,\Nt,T}
 \;=\;
@@ -1195,8 +1195,8 @@ applies on the compression.  Strong-form Lorentzian propinquity
 (Latr\'emoli\`ere-style metric on Krein spectral triples in their own
 right, without K$^{+}$-restriction) requires an indefinite-inner-product
 analog of the operator-norm Lipschitz seminorm with appropriate
-behaviour under Krein-self-adjoint $\DL$.  This remains an open
-NCG-math problem; multi-month scale.
+behaviour under Krein-self-adjoint $\DL$.  This remains a
+substantial open NCG-math problem.
 \item[(G2)] \textbf{De-compactification $T \to \infty$.}  The temporal
 factor is compactified to $\Uone_{T}$ with finite radius $T$.
 De-compactification to non-compact $\R_{t}$ is a separate program
@@ -1329,8 +1329,8 @@ closures in summary form.
 \subsection{Strong-form Lorentzian propinquity (Paper 46)}
 \label{sec:closures_paper46}
 
-\emph{Status (June 2026):\ the strong-form convergence claim of this
-subsection is descoped pending repair with the Paper~45 retraction.
+\emph{Status:\ the strong-form convergence claim of this subsection
+is withdrawn.
 On the natural chirality-doubled substrate the operator-norm Lipschitz
 seminorm $L_{\mathrm{op}}$ has kernel far exceeding the scalars (every
 temporal multiplier $\mathbf{1} \otimes M^{\mathrm{temp}}$ is
@@ -1339,8 +1339,7 @@ is a quantum-metric distance between quantum compact metric spaces;\
 the bit-exact panel match below re-evaluates the same spatial rate
 formula and is not an independent convergence.  The enlarged-substrate
 algebra of Appendix~B survives and is the named starting point for the
-repair.  See Paper~46's Status note and
-\texttt{docs/claims\_register.md}.}
+repair.}
 
 Paper~45~\S 1.4 G1 named the strong-form Lorentzian propinquity (a
 Latr\'emoli\`ere-style metric on Krein spectral triples without
@@ -1381,12 +1380,13 @@ at every panel cell.
 \subsection{De-compactification limit, norm-resolvent / spectral closure (Paper 47)}
 \label{sec:closures_paper47}
 
-\emph{Status (June 2026):\ the \emph{outer} norm-resolvent arrow of
-\eqref{eq:p47_composite} and the three-carrier identification survive
-the Paper~45 retraction unchanged;\ the \emph{inner} propinquity arrow
-(Paper~45/46 main theorem applied along the scaling) is descoped, so
+\emph{Status:\ the \emph{outer} norm-resolvent arrow of
+\eqref{eq:p47_composite} and the three-carrier identification stand;\
+the \emph{inner} propinquity arrow
+(Paper~45/46 main theorem applied along the scaling) is descoped by
+Paper~45's degeneracy theorem, so
 the composite is established at the norm-resolvent / spectral level
-only.  See Paper~47's Status note and \texttt{docs/claims\_register.md}.}
+only.}
 
 Paper~45~\S 1.4 G2 named the de-compactification limit
 $T \to \infty$ on the temporal carrier $\Sone_{T}$ as a separate
@@ -1562,10 +1562,9 @@ to fourteen.
 (Paper 48)}
 \label{sec:closures_paper48}
 
-\emph{Status (June 2026):\ the metric-level content of this
-subsection is descoped with the Paper~45 retraction;\ the bridge
-design survives as a conditional proposal.  See the Status notes in
-Papers~48--49 and \texttt{docs/claims\_register.md}.}
+\emph{Status:\ the metric-level content of this
+subsection is descoped by Paper~45's degeneracy theorem;\ the bridge
+design survives as a conditional proposal.}
 
 Paper~48~\cite{paper48} constructs Krein-pointed proper quantum metric
 spaces $\mathbf{KreinMetaMet}_{\mathrm{pp}}$ as the natural Krein-lift
@@ -1584,7 +1583,7 @@ identifies these as two readings of the same wedge KMS state, related
 by Wick rotation.  The bridge is functorial, not isometric.
 
 \emph{Conditional} on the bridge construction --- whose K$^{+}$-weak-form
-input is descoped with the Paper~45 retraction --- Bridge Theorem~6.4
+input is descoped by Paper~45's degeneracy theorem --- Bridge Theorem~6.4
 with all four properties (B1)+(B2)+(B3)+(B4) would yield seven newly
 accessible theorems on the GeoVac hemispheric wedge, including:
 (T3) bit-exact panel inheritance --- the
@@ -1608,11 +1607,10 @@ Papers~38, 42, 43, 44, 45, 46, 47, 29, 32, 40.
 quantum information (Paper 49)}
 \label{sec:closures_paper49}
 
-\emph{Status (June 2026):\ the $\Lambda$-inheritance and
-K$^{+}$-framed claims of this subsection are descoped with the
-Paper~45 retraction;\ the cocycle-deficit algebra and the OSLPLS
-category design survive.  See Paper~49's Status note and
-\texttt{docs/claims\_register.md}.}
+\emph{Status:\ the $\Lambda$-inheritance and
+K$^{+}$-framed claims of this subsection are descoped by
+Paper~45's degeneracy theorem;\ the cocycle-deficit algebra and the
+OSLPLS category design survive.}
 
 Paper~49~\cite{paper49} closes Paper~48~\S 8.1's open question Q1$'$
 by constructing an \emph{OSLPLS} (Operator-System Lorentzian
@@ -1709,17 +1707,15 @@ restricting the substrate-natural ring to $\log 2 \cdot \Q + \zeta(3)/
 \pi^{2} \cdot \Q + \zeta(5)/\pi^{4} \cdot \Q$ on $\sfive$.
 
 \paragraph{$S^{7}$--$S^{11}$ ladder closure.}
-An earlier draft reported the $S^{7}$ scalar value as a structural
-non-match (``no PSLQ relation in the tested bases'').  Paper~50's
-Erratum (\S 8) identifies this as a \emph{false negative} from an
-under-resolved ($30$-digit) search:\ at $\geq 200$ digits the genuine
-$S^{7}$ scalar relation has integer coefficients of order $10^{4}$ and
-lies in the substrate-natural ring $\mathcal{R}_{7}$ (reconstruction
-error $\approx 2.4\times10^{-202}$, reproduced by the Door-1 driver at
-$260$ dps).  The ladder therefore \emph{generates}:\ every odd rung
+The ladder \emph{generates}:\ every odd rung
 $S^{3}, \dots, S^{11}$ has a rational-coefficient closed form in
 $\mathcal{R}_{d}$, with no transcendental outside $\mathcal{R}_{d}$
-(Paper~50~\S 8, Erratum).
+(Paper~50~\S 8).  An earlier reported $S^{7}$ non-match was a
+search-resolution artifact (a $30$-digit PSLQ search;\ the genuine
+$S^{7}$ scalar relation, with integer coefficients of order $10^{4}$,
+lies in $\mathcal{R}_{7}$ and appears at $\geq 200$ digits with
+reconstruction error $\approx 2.4\times10^{-202}$ ---
+Paper~50~\S 8, Erratum).
 
 \paragraph{Cataloguing the master Mellin engine in physics.}
 The S$^{3}$ and S$^{5}$ closures are recorded in Paper~50~\S 9 as the
@@ -1787,11 +1783,12 @@ enlarged-substrate algebra of Paper~46~Appendix~B (chirality-flipping
 generators with $\{J, M\} = 0$, where the commutators are non-zero)
 survives and is the named starting point for the repair.  A genuine
 strong-form theorem requires an indefinite-inner-product Lipschitz
-seminorm compatible with Krein-self-adjoint $\DL$;\ multi-month scale.
+seminorm compatible with Krein-self-adjoint $\DL$;\ a substantial
+open program.
 
 \paragraph{De-compactification $T \to \infty$ (G2) --- CLOSED at
 norm-resolvent level by Paper~47 (\S\ref{sec:closures_paper47});\
-G2-metric open as multi-month frontier.}
+G2-metric open as a named frontier.}
 The temporal factor $\Uone_{T}$ is finite; the standard physics
 applications (Hawking, Unruh) require non-compact $\R_{t}$.  The
 rate $T/\Nt \to 0$ in \eqref{eq:p45_rate} is the joint
@@ -1803,7 +1800,7 @@ the \emph{metric / propinquity} level closure on a non-compact carrier
 (G2-metric or equivalently G1-genuine on the non-compact substrate),
 which requires a non-compact extension of Latr\'emoli\`ere's
 propinquity not in the published literature as of May~2026.  This is
-named multi-month frontier (Sprint L3e in our internal taxonomy),
+named open frontier (Sprint L3e in our internal taxonomy),
 with the path-of-least-resistance being a pointed-propinquity bridge
 to the Mondino--S\"amann synthetic Lorentzian GH program
 (\S\ref{sec:closures_paper47}).
@@ -1848,7 +1845,7 @@ Paper~32~\S 8.C records this as the standing structural verdict.
 Paper~44 highlights that the non-trivial K$^{+}$-positivity content of
 the Lorentzian operator system sits at the \emph{state} level, not the
 operator level.  The natural object is the Wasserstein--Kantorovich
-metric on $K^{+}$-states.  Paper~45's K$^{+}$-weak-form analysis (now the annihilation theorem)
+metric on $K^{+}$-states.  Paper~45's K$^{+}$-weak-form analysis (the annihilation theorem)
 is the first probe in this direction and shows the operator-level
 compression is degenerate;\ substantially more mathematics on
 Wasserstein--Kantorovich on Krein-positive \emph{states} is required
