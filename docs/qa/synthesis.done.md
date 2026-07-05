@@ -1,0 +1,145 @@
+# Synthesis layer (the field guide + cross-group narrative) — `/qa` profile
+
+> **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
+> file supplies only synthesis-specific scope + deltas + watch-notes.
+
+> **STATUS: FROZEN 2026-07-04** (PI-confirmed; frozen as drafted. **Code/test-backing
+> dimension WAIVED by PI direction** — the synthesis layer inherits its backing from
+> the already-certified group-synthesis papers, so C1/C2 is **out of scope** for this
+> target, NOT an unexercised gating dimension. The gating dimensions are therefore
+> **claims (C3/C5/C6/C8) + citations (C4) + synthesis-faithfulness (C9) +
+> deterministic (C10–C17)**; the verdict is the AND across those four.) Eighth and
+> FINAL pre-registered
+> `/qa` target — the top-of-tree readiness gate, fired after all six paper groups
+> certified: trunk + group1–6). Inherits criteria.md C1–C17 + the v4.62.1 run-shapes
+> protocol (first cert = FULL run; delta cycles between; final certifying FULL only
+> after a clean delta; Sonnet-tiered citation reviewers with two seeds each). The
+> synthesis layer's **backing is the already-certified corpus** — its job is
+> *faithful aggregation*, so the branch-defining risk is **cross-group fidelity: the
+> field guide must restate each certified result at its certified TIER and each
+> headline NUMBER at its certified value, resurrect no withdrawn/descoped result,
+> and never promote the α-combination past Observation.**
+
+**Scope (the synthesis target):**
+- **PRIMARY — the field guide** `papers/synthesis/geovac_field_guide.tex` (the
+  cross-group "what is GeoVac" narrative identity document; ~931 lines, 27 external
+  bibitems, inline `\begin{thebibliography}`). This is the one **uncertified**
+  synthesis document — it gets the full review across every dimension.
+- **SECONDARY — the six group syntheses** (`group{1..6}_*_synthesis.tex`). Each was
+  already the **C9 dimension of its own branch cert** (all six branches CERTIFIED),
+  so they are **not** re-reviewed in full here; they are checked for (a) **mutual
+  cross-group consistency** and (b) **faithfulness to the now-frozen certified
+  papers** — carried by the deterministic gates (whole-`synthesis` scope) + one
+  cross-group claims pass, not six fresh per-synthesis dispatches.
+
+**Deterministic `--gate`:** `synthesis` (substring-matches every
+`papers/synthesis/*.tex` — the field guide **and** the six group syntheses).
+
+## Branch deltas (the only non-inherited content)
+
+### Branch-defining criterion 1: cross-group tier fidelity (the field guide restates certified results — C3/C7/C9)
+
+The field guide narrates results from all six groups. Every load-bearing restatement
+must carry the **certified tier** of its source paper — no promotion. The
+`claims-reviewer` (field guide) + the cross-group `claims-reviewer` must enumerate
+and verify each against the certified corpus:
+- **WH1 = PROVEN unconditional** (Paper 38, state-space GH); **WH5 = Observation**
+  (α is a projection constant, not derivable); **WH7 = REGISTERED, not proven**;
+  **WH8 = tested-negative** (Born).
+- **Paper 2 K = π(B+F−Δ) = Observation** — never derived/conjecture/theorem. The
+  field guide has a bullet literally headed **"The α-derivation"** (≈L610) whose body
+  correctly frames it as an unresolved coincidence (WH5, twelve mechanisms); verify
+  the *heading + body together* assert no more than Observation (a heading that reads
+  as a derivation claim, uncured by the body, is MATERIAL under the enumerate-and-quote
+  rule). C12 backstops the formula; the semantic pass owns the framing.
+- **Descoped/withdrawn results must stay withdrawn:** Paper 45 DESCOPED (K⁺ theorem);
+  the Lorentzian "literal identification at the Krein level" (withdrawn 2026-06); the
+  depth-linear residual form (falsified → Layer-2-presence bound); the withdrawn
+  Pythagorean C₃<1 form. Any resurrection is a MATERIAL zombie (C16 backstops the
+  known phrases; the reviewer owns new ones).
+- **κ = −1/16 = Observation** (matches the geometric 1/16; no derivation bridge),
+  never "derived".
+
+### Branch-defining criterion 2: headline-number fidelity (C8/C17)
+
+Every headline NUMBER the field guide quotes must equal its certified-paper value.
+The C17 registry currently gates the group syntheses but **not** the field guide
+(`GROUP4_FILES` omits it) — so the `claims-reviewer` must **enumerate every number**
+in the field guide and match it to its source, and any correction ADDS the field
+guide to the relevant C17 family (maintenance rule). The enumerated headlines:
+- Natural-geometry table (≈L225): He **0.004%** (cusp) / the per-level best results —
+  must match the CLAUDE.md §5 / Paper 13 certified table.
+- Resource headline (≈L243): **O(Q^2.5)** composed Pauli scaling, **O(Q^1.69)**
+  sub-quadratic 1-norm (R²=0.997), **37-system** library — must match certified
+  group4/Paper 14 (verified GROUNDED at draft: paper_14 L37/635/758 = 1.694/0.997).
+  The Pauli-multiplier "near parity with STO-3G" framing must carry the v4.59.0 M-A
+  honest read (not the retired raw-2.7× headline).
+- α block (≈L479–615): **α⁻¹ ≈ 137.036**, K = π(B+F−Δ), **twelve** eliminated
+  mechanisms, agreement 8.8×10⁻⁸ — must match Paper 2 / the group5 cert.
+
+### Branch-defining criterion 3: aggregation faithfulness (C9 — the core dimension)
+
+The field guide is a *synthesis of syntheses*. The cross-group `claims-reviewer`
+verifies it faithfully aggregates the six certified group syntheses + the papers:
+no claim that overstates convergence between groups, no result attributed to the
+wrong group, no "the framework proves X" where X is a working hypothesis, and the
+§1.5 dual-description / no-ontological-priority rhetoric held throughout (the field
+guide is the most narrative document in the corpus — highest interpretive-drift
+surface). The "forced/free seam" and "packing → periodic table" origin-story framing
+(WH3) may be stated as the project's internal reading but not as established physics.
+
+### Branch-defining criterion 4: code-backing is OUT OF SCOPE (C1/C2 waived — PI direction 2026-07-04)
+
+The synthesis layer has **no own backing tests** — every field-guide headline traces
+to an already-certified paper claim, and **all six group syntheses already passed
+their branch certs (C9 + the papers' C1/C2)**. Per PI direction at freeze, the
+code/test-backing dimension is therefore **WAIVED / out of scope for the synthesis
+target** — no `code-reviewer` is dispatched and its absence does **not** force
+INCONCLUSIVE (it is a pre-registered scoping decision, not an unexercised gating
+dimension). Headline-number correctness is still guarded — by **C17** (deterministic)
++ the **claims-reviewer's** enumerate-every-number pass against the certified corpus
+(criterion 2) — so a wrong *quoted* number is still MATERIAL; it is only the
+*re-running of the underlying tests* that is waived (they were run at branch-cert
+time). A field-guide number with no certified-paper source is still a coverage gap → raised.
+
+## C8 headline enumeration (the field guide — the C17 families to extend as needed)
+
+- **Identity:** discrete spectral triple = Marcolli–vS 2014 graph-network instance at
+  the data level + forced-graph claim + master Mellin engine; transcendentals =
+  cyclotomic mixed-Tate periods. Tier = the corpus's certified structural claims.
+- **κ = −1/16** (Observation); **λ_n = −(n²−1)** = Fock-projected continuum spectrum
+  (NOT a bare-graph property — C6).
+- **Natural-geometry hierarchy** table: He 0.004% cusp / 0.022% raw / 0.19% CI; H₂⁺
+  0.0002%; H₂ 96.0% D_e; LiH R_eq 5.3%; etc. (Paper 13/11/15/17 certified values).
+- **O(Q^2.5)** Pauli, **O(Q^1.69)** 1-norm (R²=0.997), **37-system** library (Paper 14).
+- **α⁻¹ ≈ 137.036**, K = π(B+F−Δ) Observation, twelve mechanisms, 8.8×10⁻⁸ (Paper 2).
+
+## Known logged gaps at freeze (not blockers; verify still-logged)
+
+- **C17 does not yet gate the field guide** (`GROUP4_FILES` etc. omit it) — expected
+  NO-REGISTRY-COVERAGE on the field-guide numbers; the claims pass carries them this
+  run, and corrections extend the families.
+- The corpus-wide dangling-`debug/`-refs debt (§9 standing) — C14 advisory.
+- The six group syntheses are **certified**; a genuine NEW defect in one is possible
+  (post-freeze drift) but the expected yield is cross-group-consistency NITs, not
+  fresh MATERIAL.
+
+## Change log
+- 2026-07-04 — **1st cert (FULL run) = INCONCLUSIVE (setup error) → genuine MATERIAL found + remediated → field-guide re-run CLEAN.**
+  Panel: 3 LLM agents (2 Opus claims [field guide + cross-group/6-syntheses] + Sonnet citation; code dim WAIVED per freeze) + a re-run.
+  **Calibration: sensitivity 6/6 planted seeds (run-1) + 2/2 (re-run); specificity clean.** Deterministic C10 (7/7 compile) + C11–C17 PASS.
+  **SETUP ERROR (PM):** the seed worktree was built from HEAD, but `geovac_field_guide.tex` carried *uncommitted* working-tree edits (pre-session PI fixes: He 0.019%→0.004%, 28→37 molecules, two→six syntheses). So the claims dimensions reviewed STALE field-guide text → their verdict on the real corpus is untrustworthy ⇒ **INCONCLUSIVE** (primary target not validly exercised). Lesson: for any target with uncommitted in-scope edits, SYNC the working-tree files into the worktree before seeding (as done for the group6 untracked synthesis).
+  **Genuine MATERIAL found by the VALID dimensions (bib unchanged HEAD↔worktree; verified vs primary sources) + remediated:**
+  (i) group1 synthesis `latremoliere2018` — "The Gromov–Hausdorff propinquity, TAMS 370 (2018)" → real "**The Quantum** Gromov–Hausdorff Propinquity, TAMS **368** (2016)" (arXiv:1302.4058); load-bearing at group1 L1418; a genuine drift in a *certified* branch (the cross-cutting synthesis cert's value).
+  (ii) field guide `glanois` journal — "J. Number Theory 182, 36–90 (2018)" → real "**160, 334–384 (2016)**".
+  (iii) field guide D6 — Paper 49 "retracted vs closed" tension scoped to *metric-level* retraction (OSLPLS algebra-level bridge survives, Q2′).
+  NITs fixed: `connes_vs2021` p.2059→2067; group1 `connes1995` y.1995→1994; CLAUDE.md §2 κ "Derivable from Fock" → Observation.
+  **Re-run** (worktree correctly synced to the current corpus; fresh 2 seeds He-0.4%-drift + Lorentzian-re-zombie): **CLEAN + calibrated** — both defects were the planted seeds; controls (κ=Observation, α-block, WH1, retraction paragraph, correct Lorentzian sibling loci, 37-system, C6, §1.5) verified faithful; 2 secondary items PM-verified faithful (5,864 residuals = Paper 56 L1720; CC φ(2)/φ(1) dimensionful = consistent with Paper 51's dimensionless φ(2)/φ(1)²).
+  **Net:** the corrected corpus is clean, but this INVOCATION cannot PASS (setup error + genuine MATERIAL). Next: a fresh certifying FULL run on the corrected corpus (correctly-synced worktree) — expected clean. Seeds: `debug/qa/synthesis_seed_key.json` (gitignored). Worktrees removed, no leak.
+- 2026-07-04 — **FROZEN (PI-confirmed).** Scope (field guide full + six syntheses
+  cross-consistency), four branch-defining criteria, C8 field-guide headline
+  enumeration. PI froze as drafted and **WAIVED the code/test-backing dimension** for
+  the synthesis target ("skip code tests on the synthesis layer — the group synthesis
+  papers already passed"): C1/C2 is out of scope, gating dimensions = claims +
+  citations + synthesis-faithfulness + deterministic, verdict = AND across those four.
+  FULL first-cert run proceeding.

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.67.0 (July 4, 2026)
+**Version:** v4.67.1 (July 4, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -136,6 +136,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **`/qa synthesis` 1st cert = INCONCLUSIVE→remediated (2026-07-04, v4.67.1) — delta pending.** Setup error (worktree from HEAD while the field guide had uncommitted PI edits) → claims dim reviewed stale text (INCONCLUSIVE); field-guide re-run on the correct text CLEAN + calibrated (6/6 + 2/2 seeds). Genuine MATERIAL found by the valid citation dim + remediated: group1-synth `latremoliere2018` (→ "Quantum GH Propinquity", TAMS 368/2016) + field-guide `glanois` (→ JNT 160/2016); + D6 Paper-49 metric-level scoping, 2 NITs, CLAUDE.md §2 κ→Observation. Corpus now clean; a delta over the remediation diff (PI-directed = certifying pass if clean) is next. See docs/qa/synthesis.done.md.
 - **group6 CERTIFIED ✅ (2026-07-04, v4.67.0) — 6th certified branch (last paper group before synthesis-layer cert).** `/qa group6` (P26/27/34/35 + synthesis): first-cert FAIL → delta DEFECTS → micro-delta CLEAN → certifying FULL PASS (8/8 seeds, 6/6 spec, zero verified MATERIAL, C10–C17 green). Headline fixes: C10 dcolumn (P26/27 never compiled); Dirac Casimir +17/480 (delta caught a wrong-direction 1st-cert flip); §III.29 Lorentzian "literal-identification" WITHDRAWN; 2 new backing tests + 15 matrix rows. See docs/qa/group6.done.md + CHANGELOG v4.67.0.
 - **group5 CERTIFIED ✅ (2026-07-04, v4.66.0) — 5th certified branch.** Certifying FULL run PASS: 25/25 seeds (2 via recovery re-dispatch), 8/8 spec; ~20 genuine MATERIALs all remediated in 2 loop-until-dry cycles (P51 Q2/φ(2)/Möbius zombies, Furry mechanism ×5, scalar_ak tier, stale tables) + ~25 new pins + 3 C16 entries; no §C8 headline ever wrong. See debug/qa/group5_cert_run_notes.md.
 - **group5 delta-2 = DEFECTS→remediated (2026-07-03, v4.65.1):** 11/11 seeds + 5 cross, 6/6 spec, gates 8/8; 1 genuine MATERIAL (P25 CP² vs-fit floor 50%→sharp 38.5%) + fix-on-sight (P36 3D Drake ref −0.005249→−0.0052321/+0.07%, Cheeger–Solodukhin, C11 titles); 3 C16 entries; C12 catches the K-seed. Certifying FULL next (PI timing). See docs/qa/group5.done.md.
@@ -188,7 +189,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 | Composed Pauli | O(Q^2.5) | 51x-1712x vs Gaussian, 35 composed molecules | 14 |
 | Atomic Pauli | O(Q^3.15) | 1.3x-8.1x vs cc-pVDZ/cc-pVTZ | 14 |
 **Key structural results (details in papers and CHANGELOG.md):**
-- **κ = −1/16 derivation (v2.26.1):** Derivable from Fock projection, not fitted. Paper 18 reclassified κ to "conformal." See `debug/probe_kappa_sprint_memo.md`.
+- **κ = −1/16 (v2.26.1; Observation, not derived — v4.13.0 QA):** the matching κ *coincides* with the geometric 1/16 of the Fock projection (a numerical observation; no derivation bridge — never "derived"). Not fitted. See `debug/probe_kappa_sprint_memo.md`, `memory/kappa_observation_not_derived.md`.
 - **α structural decomposition (Phases 4B-4I, April 2026):** B=42 (Casimir), F=π²/6 (Fock Dirichlet at d_max), Δ=1/40 (Dirac degeneracy g_3). Three independent spectral homes; combination rule K=π(B+F−Δ) is a numerical observation, not derived (conjecture→observation downgrade 2026-06-14). 12 mechanisms eliminated. See Paper 2, CHANGELOG.
 - **Spectral-action supertrace (v2.26.1):** SD cancellation theorem, Δ⁻¹=40 from Euler-Maclaurin, (−) sign = (-1)^F grading. Two-term exactness on S³ Dirac. See `debug/st_supertrace_sprint_memo.md`.
 - **Nuclear systems (Paper 23):** Deuteron 16q/592 Pauli; He-4 16q/712 Pauli; composed nuclear-electronic deuterium 26q/614 Pauli. Fock rigidity theorem (S³ unique to −Z/r).

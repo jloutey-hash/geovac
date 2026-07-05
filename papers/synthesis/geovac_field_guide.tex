@@ -63,7 +63,12 @@ not preference --- what the underlying geometry forces from what
 empirical measurement supplies.  This field guide is the project's
 identity statement.  It tells the arc from origin to current frontier
 without recapitulating the technical machinery, and points each kind
-of reader toward the right entry into the corpus.  The one-sentence
+of reader toward the right entry into the corpus.  As the project's \emph{grand
+synthesis} it now sits atop a complete layer of six audience-targeted
+group syntheses---one per branch (Groups~1--6), each digesting its
+branch in a few pages---and composes them into a single front-to-back
+reading that routes each reader to the right branch digest.  The
+one-sentence
 reading:\ \emph{GeoVac is a discrete spectral triple whose periods
 classify the projective content of physics, sharply separating what
 geometry forces from what measurement supplies.}
@@ -217,7 +222,7 @@ Level & System & Natural geometry & Best accuracy & Paper \\
 \midrule
 1 & H (1-center, 1e) & $\sthree$ (Fock) & $< 0.1\%$ & 7 \\
 2 & H$_2^+$ (2-center, 1e) & Prolate spheroid & $0.0002\%$ & 11 \\
-3 & He (1-center, 2e) & Hyperspherical & $0.019\%$ & 13 \\
+3 & He (1-center, 2e) & Hyperspherical & $0.004\%$ (cusp) & 13 \\
 4 & H$_2$ (2-center, 2e) & Mol-frame hyperspherical & $96.0\%$ $D_e$ & 15 \\
 5 & LiH (composed) & Composed (Level 3 $\otimes$ Level 4) & $5.3\%$ $R_{\mathrm{eq}}$ & 17 \\
 \bottomrule
@@ -235,10 +240,13 @@ Phase~2 reached known structural ceilings.  Heavy molecules
 framework's accuracy targets through identifiable channels (the
 ``multi-focal-composition wall'' documented in six independent
 sprints).  The framework's most natural quantum-simulation
-application --- $O(Q^{2.5})$ Pauli scaling on the composed
-architecture, $51\times$--$1712\times$ Pauli-count advantage over
-published Gaussian baselines, $28$ molecules in the
-library~\cite{loutey_paper14} --- shipped at the end of Phase~2.
+application --- $O(Q^{2.5})$ composed Pauli scaling with a
+sub-quadratic $O(Q^{1.69})$ $1$-norm, benchmarked across a $37$-system
+library~\cite{loutey_paper14} --- shipped at the end of Phase~2.  The
+absolute Pauli multipliers are convention-sensitive (near parity with
+minimal-basis STO-3G, $\sim 190\times$ sparser than cc-pVDZ);\ the
+load-bearing advantage is the scaling, not any single market-test
+ratio.
 
 But a different question began to dominate the conversation around the
 project, and that question is where the rest of this guide goes.
@@ -313,13 +321,15 @@ annihilates the spatial Dirac, so the compressed Lipschitz seminorm
 vanishes identically (Paper~45's degeneracy
 theorem~\cite{loutey_paper45}, with a bit-exact frozen falsifier).
 An earlier convergence claim through that device, together with the
-strong-form and bridge extensions built on it (Papers~46, 48, 49),
-was retracted in June 2026;\ each paper carries a Status note, and
+\emph{metric-level} strong-form and bridge convergence claims built on
+it (Papers~46, 48, 49), was retracted in June 2026;\ each paper carries
+a Status note, and
 \texttt{docs/claims\_register.md} records the retraction.  What
 survives:\ the operator-system substrate (Paper~44), the four-witness
 modular-Hamiltonian results (Papers~42/43), the norm-resolvent
 de-compactification arrow (Paper~47), and the cocycle-deficit algebra
-of Paper~49.  The repaired Lorentzian target --- a Toeplitz temporal
+of Paper~49 (whose OSLPLS strong-form bridge stands at the algebra level,
+Q2$'$).  The repaired Lorentzian target --- a Toeplitz temporal
 multiplier algebra and a non-compressing Krein-compatible seminorm
 --- is stated as an open problem in Paper~45.
 
@@ -348,8 +358,8 @@ transcendentals.  Matrix elements are rationals (or, at most,
 algebraic over $\Q$).  This has been checked across the corpus:
 verified explicitly on the unit $\sthree$ Coulomb spectrum (Paper~7),
 on the Hopf bundle gauge structure (Paper~25), on the Bargmann--Segal
-$\sfive$ Hardy lattice (Paper~24), and on $28$ molecular
-species in the qubit Hamiltonian library (Paper~14).
+$\sfive$ Hardy lattice (Paper~24), and on the $37$ molecular and
+atomic species in the qubit Hamiltonian library (Paper~14).
 
 \paragraph{Transcendentals enter at projection.}
 Layer~1 by itself does not produce physical observables.  Observables
@@ -564,8 +574,10 @@ one-line summaries.
     (universal/Coulomb partition), Paper~55 (periods classification).
   \item \textbf{Group~4 --- Quantum computing} ($4$ papers).
     Qubit-encoding resource estimates.  Headline:\ $O(Q^{2.5})$
-    composed Pauli scaling, $51\times$--$1712\times$ advantage over
-    Gaussian baselines, $28$ molecules in the library (Paper~14).
+    composed Pauli scaling and a sub-quadratic $O(Q^{1.69})$ $1$-norm
+    across a $37$-system library (Papers~14/20);\ absolute Pauli
+    multipliers are convention-sensitive (near parity with STO-3G,
+    $\sim 190\times$ vs cc-pVDZ).
   \item \textbf{Group~5 --- QED / gauge / SM} ($8$ papers).
     Headline:\ hydrogen Lamb shift at $-0.534\%$ one-loop closure
     (Paper~36);\ SU(2) Wilson lattice gauge structure with
@@ -581,8 +593,11 @@ one-line summaries.
 
 The \texttt{papers/archive/} folder contains historical and
 superseded drafts.  The \texttt{papers/synthesis/} folder contains
-this field guide plus two group-level syntheses (Group~1 and
-Group~3) drafted May~2026.
+this field guide together with a complete layer of \emph{six}
+group-level syntheses---one per audience branch (Groups~1--6), each
+digesting its branch in four to six pages.  This field guide is the
+grand synthesis that composes them;\ a reader who wants a single
+branch should read that branch's group synthesis directly.
 
 % =====================================================================
 \section{What's Open}
@@ -668,7 +683,12 @@ the interpretive question is left to the reader.
 % =====================================================================
 
 This is a multi-paper corpus.  Here is where each kind of reader
-should start.
+should start.  Each audience now has a one-document digest---its
+\emph{group synthesis}---which is the recommended first stop before
+the individual papers:\ Group~1 (operator algebras), Group~2
+(quantum chemistry), Group~3 (foundations), Group~4 (quantum
+computing), Group~5 (QED / gauge / gravity), and Group~6 (precision
+observations).  The per-paper entries below are the second step.
 
 \begin{itemize}
   \item \textbf{The mathematician (NCG, math.OA, spectral triples)}.
@@ -792,7 +812,7 @@ A.~Connes, \textit{Noncommutative Geometry}, Academic Press (1994).
 \bibitem{connes_vs2021}
 A.~Connes and W.~D.~van Suijlekom, ``Spectral truncations in
 noncommutative geometry and operator systems,''
-\textit{Commun.\ Math.\ Phys.}~\textbf{383}, 2021--2059 (2021).
+\textit{Commun.\ Math.\ Phys.}~\textbf{383}, 2021--2067 (2021).
 
 \bibitem{marcolli_vs2014}
 M.~Marcolli and W.~D.~van Suijlekom, ``Gauge networks in
@@ -820,8 +840,8 @@ $\mathbb{G}_m - \mu_N$, pour $N = 2, 3, 4, 6$ ou $8$,''
 \bibitem{glanois2015}
 C.~Glanois, ``Motivic unipotent fundamental groupoid of
 $\mathbb{G}_m \setminus \mu_N$ for $N = 2, 3, 4, 6, 8$ and Galois
-descents,'' arXiv:1411.4947 (2015);\ \textit{J.\ Number Theory}~\textbf{182},
-36--90 (2018).
+descents,'' arXiv:1411.4947 (2015);\ \textit{J.\ Number Theory}~\textbf{160},
+334--384 (2016).
 
 \bibitem{fathizadeh_marcolli2016}
 F.~Fathizadeh and M.~Marcolli, ``Periods and motives in the spectral

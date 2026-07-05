@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.1] - 2026-07-04
+
+**`/qa synthesis` first-cert remediation checkpoint (INCONCLUSIVE → remediated; delta pending).** The synthesis-layer cert (field guide + six group syntheses; code dimension WAIVED per PI, backing inherited from the certified papers) first-fired INCONCLUSIVE due to a PM **worktree setup error** — the seed worktree was built from HEAD while `geovac_field_guide.tex` carried uncommitted working-tree edits, so the claims dimension reviewed stale text. Calibration held (sensitivity 6/6 + 2/2 on the re-run; specificity clean) and the valid dimensions surfaced genuine, primary-source-verified citation MATERIAL. This checkpoint commits the remediation + the pre-existing field-guide edits onto a clean base so the certifying delta runs against committed state.
+
+### Fixed (genuine MATERIAL + NITs, verified vs primary sources)
+- **group1 synthesis `latremoliere2018`** — "The Gromov–Hausdorff propinquity, Trans. AMS **370** (2018)" → the real paper is "**The Quantum** Gromov–Hausdorff Propinquity, Trans. AMS **368** (2016), 365–411" (arXiv:1302.4058); load-bearing at group1 L1418. A genuine drift in an already-certified branch — the cross-cutting synthesis cert's value.
+- **field guide `glanois`** — journal "J. Number Theory **182**, 36–90 (**2018**)" → real "**160**, 334–384 (**2016**)" (arXiv 1411.4947 was already correct).
+- **field guide D6** — Paper 49 "retracted vs closed" tension scoped to *metric-level* retraction (the OSLPLS algebra-level bridge survives, Q2′), harmonizing L324 with L649.
+- NITs: field guide `connes_vs2021` end-page 2059→2067; group1 `connes1995` year 1995→1994; CLAUDE.md §2 κ line "Derivable from Fock projection" → Observation (coincides with the geometric 1/16; no derivation bridge — v4.13.0 QA).
+
+### Verified faithful (re-run + PM spot-check, no change)
+- Field-guide re-run on the correct text: clean; controls (κ=Observation, α-block, WH1 unconditional, the Lorentzian retraction paragraph + correct degeneracy-theorem sibling loci, 37-system, O(Q^2.5)/O(Q^1.69), C6, §1.5) all faithful.
+- Secondary items PM-verified faithful: "5,864 bit-exact residuals" = Paper 56 (L1720); the CC formula Λ_cc = 6φ(2)/φ(1)·Λ² (dimensionful) is consistent with Paper 51's dimensionless φ(2)/φ(1)² ≈ 10⁻¹²⁴ (extra φ(1) from EH-coefficient normalization; 10¹²⁰ vs 10⁻¹²⁴ = reciprocal conventions).
+
+### Process
+- Setup-error lesson recorded in `docs/qa/synthesis.done.md`: for any target with uncommitted in-scope edits, SYNC the working-tree files into the worktree before seeding.
+
 ## [4.67.0] - 2026-07-04
 
 **`/qa group6` certifying FULL run = PASS → group6 CERTIFIED ✅ (6th certified branch, after group3/group1/group2/group4/group5; the last paper group before the synthesis-layer cert).** Scope: the 4 precision/projection papers — P26 (entanglement), P27 (entropy-as-projection, KEYSTONE), P34 (two-layer projection taxonomy / 28-projection catalogue), P35 (time-as-projection) — + the group6 synthesis. Arc: **first-cert FULL = FAIL → delta-verification = DEFECTS → micro-delta = CLEAN → certifying FULL = PASS.** Certifying run: 8-reviewer panel (3 Opus code + 2 Opus claims + Sonnet citation + Opus synthesis) + completeness-critic, over a fresh 8-seed set. **Calibration: sensitivity 8/8 planted seeds, specificity 6/6 controls**; every gating dimension exercised + calibrated; **zero verified MATERIAL** in any authoritative dimension; C10 (5/5 compile ERRORS=0) + C11–C17 all PASS whole-target; 18/18 check self-tests. Convergence: the hedged-K-forcing seed caught independently by Claims-B AND the completeness-critic.
