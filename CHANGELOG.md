@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.6] - 2026-07-04
+
+**Synthesis follow-on #2: the two "pending confirmation" group1-synthesis citations resolved — both were PHANTOM (fabricated) citations.** Deeper research (Hekkelman's own publication list + arXiv author search) confirmed neither cited paper exists under its title:
+- `hekkelman_mcdonald2024` "Spectral truncations of $\T^d$ and quantum metric geometry" — **does not exist**; Hekkelman's only McDonald collaboration is arXiv:2412.00628, already cited as `hekkelman_mcdonald2024b`. The phantom bibitem is **removed**; its two `\cite` usages repointed — the lineage list keeps the real `...2024b`, and the L670 Berezin–Toeplitz-torus claim now cites the real **Connes–van Suijlekom** operator-systems paper (`connes_vs2021` = CMP 383/2021 = arXiv:2004.14115), which actually treats the torus truncation.
+- `farsi_latremoliere2024` "Continuity of spectral propinquity for spectrally truncated spheres" — **does not exist**; repointed to the real 2024 Farsi–Latrémolière paper "**Collapse in noncommutative geometry and spectral continuity**," **arXiv:2404.00240** (2024).
+
+Both were in the group1 "position against the literature" lineage paragraph — a second wave of the same wrong-arXiv/phantom-citation class the group1 branch cert missed (after v4.67.2's Kerr–Melvin/OpenMP wrong-IDs). group1 synthesis recompiles ERRORS=0, no undefined-citation warnings. A `/qa group1` citation-dimension delta over this diff follows.
+
 ## [4.67.5] - 2026-07-04
 
 **`/sprint-close` for the `/qa synthesis` cert + §2-compaction sprint.** Canonical memo `debug/sprint_synthesis_cert_memo.md` (the four-move arc: 1st-cert INCONCLUSIVE from a PM worktree setup error → field-guide re-run CLEAN → citation delta DEFECTS → re-delta CLEAN → CERTIFIED; the §2 compaction; §6 honest-scope). MEMORY.md `branch_qa_sweep_phase` index updated to COMPLETE (all 7 targets certified). No production code touched in this sprint (papers/docs only); no `/regression` triggered; no hard-prohibition (§13.5) touched. Closes the whole-corpus branch-QA sweep.
