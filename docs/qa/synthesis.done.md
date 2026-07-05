@@ -125,6 +125,15 @@ time). A field-guide number with no certified-paper source is still a coverage g
   fresh MATERIAL.
 
 ## Change log
+- 2026-07-04 — **Citation-dimension delta (PI-directed, "clean = pass") = DEFECTS → LARGEs remediated in-run; NOT a pass.**
+  1 Sonnet citation reviewer, 2 seeds (re-corrupted the two v4.67.1-fixed cites: latremoliere2018 368→366, glanois 160→162).
+  **Calibration: 2/2 seeds caught; specificity clean** (the 5 remediated cites verified: connes_vs2021/connes1995-text/brown2012 correct; the two "still-wrong" were the seeds). Deterministic 7/7 whole-target.
+  **But the full group1-synthesis bibliography scan surfaced GENUINE non-seed MATERIAL (verified vs primary sources) — in a CERTIFIED branch the group1 cert missed:**
+  (i) `hekkelman2022` arXiv **2206.13744 = a Kerr–Melvin black-hole imaging paper** (Hou et al.) — real: "Truncated geometry on the circle," Lett. Math. Phys. 112 (2022) 20, **arXiv:2111.13865**. FIXED.
+  (ii) `hekkelman_mcdonald2024` arXiv **2403.18619 = an OpenMP shortest-path CS paper** (Calderón et al.) — the real "Spectral truncations of Tᵈ" ID is unconfirmable via search; the wrong ID REMOVED + flagged pending author confirmation.
+  (iii) `latremoliere_metric_st_2017` "Adv. Math. **415** (2023), 108876, 88pp" → real **404 (2022), 108393, 56pp** (arXiv:1811.10843 journal-ref). FIXED.
+  SMALLs fixed: `connes1995` in-text label 1995→1994; `mondino_samann2025` title dropped extraneous "Synthetic". SMALL/NIT remaining (PI direction): `hawkins2000` title-mashup, `latremoliere2025_hypertopology` title paraphrase, `farsi_latremoliere2024` (no arXiv ID, UNVERIFIABLE).
+  All three wrong-arXiv/venue defects sat in group1's load-bearing "position against the literature" paragraph (L297–303). **Implication (raised to PI):** the group1 branch cert's citation coverage had a real gap; a full citation re-sweep of the group syntheses may be warranted. **Next:** finish the remaining SMALLs, then re-run the citation delta (clean = pass); the fixes are uncommitted pending PI review.
 - 2026-07-04 — **1st cert (FULL run) = INCONCLUSIVE (setup error) → genuine MATERIAL found + remediated → field-guide re-run CLEAN.**
   Panel: 3 LLM agents (2 Opus claims [field guide + cross-group/6-syntheses] + Sonnet citation; code dim WAIVED per freeze) + a re-run.
   **Calibration: sensitivity 6/6 planted seeds (run-1) + 2/2 (re-run); specificity clean.** Deterministic C10 (7/7 compile) + C11–C17 PASS.

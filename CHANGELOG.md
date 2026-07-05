@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.2] - 2026-07-04
+
+**`/qa synthesis` citation-delta remediation — group1-synthesis bibliography (the delta = DEFECTS; a certified branch's citation drift the branch cert missed).** The PI-directed citation-dimension delta (calibrated 2/2 seeds, specificity clean) scanned the full group1 bibliography and surfaced genuine, primary-source-verified citation MATERIAL in the *already-certified* group1 synthesis — all in its load-bearing "position against the literature" paragraph (L297–303). Remediated:
+
+### Fixed
+- `hekkelman2022` — arXiv **2206.13744** resolved to "Image of Kerr–Melvin black hole with thin accretion disk" (Hou et al., astrophysics) → corrected to "Truncated geometry on the circle," Lett. Math. Phys. 112 (2022) Paper 20, **arXiv:2111.13865**.
+- `hekkelman_mcdonald2024` — arXiv **2403.18619** resolved to "Enhanced OpenMP Algorithm to Compute All-Pairs Shortest Path" (Calderón et al., HPC) → the wrong ID **removed** (the real "Spectral truncations of Tᵈ" ID is unconfirmable via search; flagged pending author confirmation; venue "J. Noncommut. Geom., to appear" retained).
+- `latremoliere_metric_st_2017` — "Adv. Math. **415** (2023), Paper 108876, 88pp" → **404 (2022), Paper 108393, 56pp** (arXiv:1811.10843 journal-ref).
+- `hawkins2000` — title mashup "Quantization of equivariant vector bundles…" → the real "**Geometric** quantization of vector bundles and the correspondence with deformation quantization" (CMP 215, 409–432, 2000 were correct).
+- `latremoliere2025_hypertopology` — paraphrased title → exact "The **quantum** Gromov–Hausdorff **hypertopology on the class of** pointed proper quantum metric spaces" (arXiv:2512.03573).
+- `mondino_samann2025` — dropped extraneous "Synthetic" from the title (real: "Lorentzian Gromov–Hausdorff convergence and pre-compactness," arXiv:2504.10380).
+- `connes1995` — in-text label year 1995→1994 (body was already 1994).
+- `farsi_latremoliere2024` — no arXiv ID + unconfirmable title → flagged "pending confirmation" (retained as prior-art lineage credit; not fabricated).
+
+### Process / implication
+- The wrong-arXiv-ID class (two IDs resolving to a black-hole imaging paper and an OpenMP CS paper) is a §3 error class the group1 branch cert's citation pass did not catch — the cross-cutting synthesis-layer cert surfaced it. A full external-citation re-sweep of the group syntheses is a candidate follow-up (PI deferred it this cycle). group1 synthesis recompiles ERRORS=0; deterministic gates green. Next: re-run the citation delta (clean = the synthesis-layer certifying pass).
+
 ## [4.67.1] - 2026-07-04
 
 **`/qa synthesis` first-cert remediation checkpoint (INCONCLUSIVE → remediated; delta pending).** The synthesis-layer cert (field guide + six group syntheses; code dimension WAIVED per PI, backing inherited from the certified papers) first-fired INCONCLUSIVE due to a PM **worktree setup error** — the seed worktree was built from HEAD while `geovac_field_guide.tex` carried uncommitted working-tree edits, so the claims dimension reviewed stale text. Calibration held (sensitivity 6/6 + 2/2 on the re-run; specificity clean) and the valid dimensions surfaced genuine, primary-source-verified citation MATERIAL. This checkpoint commits the remediation + the pre-existing field-guide edits onto a clean base so the certifying delta runs against committed state.
