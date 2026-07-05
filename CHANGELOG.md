@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.7] - 2026-07-04
+
+**`/sprint-close` for the synthesis follow-on #2 + `/qa group1` citation delta** (continuation of the synthesis-cert sprint; the canonical memo is extended, not duplicated).
+
+### Closed
+- **`/qa group1` citation-dimension delta = CLEAN + calibrated** (verifying the v4.67.6 phantom-citation remediation). Full re-scan of the group1-synthesis bibliography, sharpened to verify each cite *resolves to a real paper*: sensitivity 2/2, specificity clean, **35 of 37 external cites GROUNDED, zero genuine non-seed defects** (no phantoms, no wrong-IDs, no fabricated titles remain); all v4.67.1–.6 fixes confirmed correct; phantom `hekkelman_mcdonald2024` confirmed correctly absent. The group1-synthesis bibliography is clean after two remediation waves + this confirming delta. Worktree removed, no seed leaked; nothing to remediate (the 2 findings were the planted seeds).
+- Follow-on #2 (from the synthesis cert) is **CLOSED**: both flagged cites were PHANTOM, resolved in v4.67.6.
+
+### Changed
+- `debug/sprint_synthesis_cert_memo.md` extended with §8 (follow-on #2 + the group1 citation delta; the phantom-citation-wave lesson) + §6 follow-on-status update. MEMORY.md `branch_qa_sweep_phase` body updated with the phantom-wave + the strengthened "a branch cert is not a permanent guarantee for its bibliography" lesson.
+
+### Verification / scope
+- No `geovac/` production code touched (papers/docs only) → no `/regression` triggered; no §13.5 hard-prohibition touched. The delta found zero genuine defects → no corpus change beyond v4.67.6. Standing follow-on: a full external-citation re-scan of the groups 2–6 syntheses (sharpened for phantoms) — PI-deferred.
+
 ## [4.67.6] - 2026-07-04
 
 **Synthesis follow-on #2: the two "pending confirmation" group1-synthesis citations resolved — both were PHANTOM (fabricated) citations.** Deeper research (Hekkelman's own publication list + arXiv author search) confirmed neither cited paper exists under its title:
