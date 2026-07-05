@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.4] - 2026-07-04
+
+**CLAUDE.md §2 compaction round 6 (152 KB → 140 KB; back under the 150 KB budget).** With the whole-corpus branch-QA sweep COMPLETE (all 7 targets certified), §2's ~30 accumulated `/qa` bullets are collapsed to the **7 CERTIFIED one-liners** (the live index: synthesis + group1–6) + a single round-6 rollup pointer. The 26 superseded per-run/intermediate bullets — group2 (whole-run + re-cert #2–#5), group4 (pre-work / A-B-ERI / first-through-8th-certifying cert / M-A call), group5 (pre-work / 1st-cert / delta-1 / Tier-2 / delta-2), plus the QA-cost-package, WH8-probe, Flavor-B-migration, Lorentzian-chase-closed, QA-gate-build, and group1-archived-note bullets — are moved **verbatim** to `docs/development_frontier_archive.md` (each is superseded by its group's CERTIFIED summary or captured in its canonical home: criteria.md/qa.md, §1.5/§1.7, the papers, CHANGELOG). Per §13.11 rule 9 (status updates replace, superseded text moves to its history home) + the round-2–5 compaction precedent. No content lost; repo-health WARN cleared.
+
 ## [4.67.3] - 2026-07-04
 
 **`/qa synthesis` citation RE-DELTA = CLEAN + calibrated → synthesis layer CERTIFIED ✅ — the 7th and FINAL certified target; the whole-corpus branch-QA sweep is COMPLETE (trunk + group1–6 + synthesis).** One Sonnet citation reviewer, 2 fresh seeds (latremoliere_metric_st vol 404→402, deligne2010 IHES 112→114): **sensitivity 2/2, specificity clean**; all seven v4.67.2-remediated citations re-verified correct; deterministic gates 7/7 whole-target; **zero MATERIAL.**
