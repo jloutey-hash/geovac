@@ -3,7 +3,19 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only synthesis-specific scope + deltas + watch-notes.
 
-> **STATUS: FROZEN 2026-07-04** (PI-confirmed; frozen as drafted. **Code/test-backing
+> **STATUS: CERTIFIED ✅ 2026-07-04** (7th and FINAL certified target — the whole-corpus
+> QA sweep is complete: trunk + group1–6 + synthesis). Path: 1st FULL run INCONCLUSIVE
+> (PM worktree setup error) → field-guide re-run CLEAN → citation delta DEFECTS (3 LARGE
+> group1-bib wrong-cites the branch cert missed) → remediated (v4.67.1/.2) → citation
+> **re-delta CLEAN + calibrated (2/2 seeds, specificity clean, zero MATERIAL; 1 NIT
+> minguzzi-title fixed on sight)**. Per PI direction a clean citation delta = the
+> certifying pass; all gating dims (claims re-run, citations re-delta, synthesis-
+> faithfulness, deterministic) calibrated + clean; code/test-backing WAIVED (inherited).
+> **Honest ceiling:** the group1 bibliography needed two remediation cycles — a full
+> external-citation audit of all group syntheses remains a standing candidate (PI-deferred);
+> groups 2–6 synthesis bibs got light spot-checks this cert (they passed their branch certs).
+> Run notes: this session + `debug/qa/synthesis_{seed,delta,redelta}_seed_key.json` (gitignored).
+> Originally FROZEN 2026-07-04 (PI-confirmed; frozen as drafted. **Code/test-backing
 > dimension WAIVED by PI direction** — the synthesis layer inherits its backing from
 > the already-certified group-synthesis papers, so C1/C2 is **out of scope** for this
 > target, NOT an unexercised gating dimension. The gating dimensions are therefore
@@ -125,6 +137,9 @@ time). A field-guide number with no certified-paper source is still a coverage g
   fresh MATERIAL.
 
 ## Change log
+- 2026-07-04 — **Citation RE-DELTA = CLEAN + calibrated → synthesis layer CERTIFIED ✅ (v4.67.3; PI-directed clean-citation-delta = pass).**
+  1 Sonnet citation reviewer, 2 fresh seeds (latremoliere_metric_st vol 404→402, deligne2010 IHES 112→114).
+  **Sensitivity 2/2; specificity clean** — all 7 v4.67.2-remediated cites re-verified CORRECT (hekkelman2022=2111.13865, hekkelman_mcdonald honest-flag, latremoliere_metric_st 404/108393, hawkins2000 title, latremoliere2025 title, mondino_samann no-"Synthetic", connes1995 label 1994). Deterministic 7/7 whole-target. **Zero MATERIAL.** One genuine non-seed NIT: `minguzzi_suhr2024` title "Bounded Lorentzian metric spaces" → real "Lorentzian metric spaces and their Gromov–Hausdorff convergence" (arXiv:2209.14384 / LMP 114/73 correct — referent right; non-load-bearing) — fixed on sight (v4.67.3). Worktree removed, no leak (seeds 402/114 absent; correct 404/112 present; both wrong arXiv IDs gone). **Verdict per PI direction: clean calibrated citation delta = the certifying pass.**
 - 2026-07-04 — **Citation-dimension delta (PI-directed, "clean = pass") = DEFECTS → LARGEs remediated in-run; NOT a pass.**
   1 Sonnet citation reviewer, 2 seeds (re-corrupted the two v4.67.1-fixed cites: latremoliere2018 368→366, glanois 160→162).
   **Calibration: 2/2 seeds caught; specificity clean** (the 5 remediated cites verified: connes_vs2021/connes1995-text/brown2012 correct; the two "still-wrong" were the seeds). Deterministic 7/7 whole-target.

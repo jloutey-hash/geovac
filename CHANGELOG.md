@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.3] - 2026-07-04
+
+**`/qa synthesis` citation RE-DELTA = CLEAN + calibrated → synthesis layer CERTIFIED ✅ — the 7th and FINAL certified target; the whole-corpus branch-QA sweep is COMPLETE (trunk + group1–6 + synthesis).** One Sonnet citation reviewer, 2 fresh seeds (latremoliere_metric_st vol 404→402, deligne2010 IHES 112→114): **sensitivity 2/2, specificity clean**; all seven v4.67.2-remediated citations re-verified correct; deterministic gates 7/7 whole-target; **zero MATERIAL.**
+
+### Fixed
+- `minguzzi_suhr2024` — title "Bounded Lorentzian metric spaces" → the real "Lorentzian metric spaces and their Gromov–Hausdorff convergence" (arXiv:2209.14384 / Lett. Math. Phys. 114 (2024) 73 were correct — the referent was right; a NIT, non-load-bearing, fixed on sight).
+
+### Certification
+- **Verdict (per PI direction, "a clean citation delta = the certifying pass"):** all gating dimensions — field-guide claims (re-run CLEAN + calibrated on the correct text), citations (re-delta CLEAN + calibrated), synthesis-faithfulness / 6 group syntheses (run-1 calibrated + clean), deterministic (C10–C17 PASS) — are exercised, calibrated, and MATERIAL-clean; code/test-backing WAIVED (inherited from the certified papers). **The synthesis layer is CERTIFIED.**
+- **Honest ceiling:** the path was rocky (1st cert INCONCLUSIVE from a PM worktree setup error; the group1 bibliography needed two citation-remediation cycles surfacing 3 LARGE wrong-arXiv/venue cites its branch cert had missed, plus this re-delta's NIT). A full external-citation audit of all group syntheses remains a standing candidate (PI-deferred this cycle); groups 2–6 synthesis bibs received only light spot-checks this cert (they passed their branch certs). "CERTIFIED" = survived the calibrated detectors across the exercised dimensions, not provably exhaustive on the groups 2–6 bibs.
+
 ## [4.67.2] - 2026-07-04
 
 **`/qa synthesis` citation-delta remediation — group1-synthesis bibliography (the delta = DEFECTS; a certified branch's citation drift the branch cert missed).** The PI-directed citation-dimension delta (calibrated 2/2 seeds, specificity clean) scanned the full group1 bibliography and surfaced genuine, primary-source-verified citation MATERIAL in the *already-certified* group1 synthesis — all in its load-bearing "position against the literature" paragraph (L297–303). Remediated:
