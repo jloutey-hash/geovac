@@ -111,17 +111,29 @@ def strip_comments(text: str) -> str:
 
 
 def scan_file(path: Path, patterns: List[Tuple[str, str]]) -> List[Tuple[str, int, str, str]]:
+    """Scan with newlines treated as spaces (LaTeX semantics) so phrases
+    spanning a source line break are still caught (the 'several years\\nof
+    investigation' miss), mapping each hit back to its source line."""
     hits = []
     text = strip_comments(path.read_text(encoding="utf-8", errors="replace"))
-    for lineno, line in enumerate(text.splitlines(), 1):
-        for name, pat in patterns:
-            for m in re.finditer(pat, line, re.IGNORECASE):
-                allowed = any(
-                    sub in str(path).replace("\\", "/") and re.search(apat, line, re.IGNORECASE)
-                    for sub, apat in ALLOWLIST
-                )
-                if not allowed:
-                    hits.append((name, lineno, m.group(0), line.strip()[:120]))
+    lines = text.splitlines()
+    starts: List[int] = []          # char offset of each line in the joined text
+    pos = 0
+    for line in lines:
+        starts.append(pos)
+        pos += len(line) + 1        # +1 for the space that replaces the newline
+    joined = " ".join(lines)
+    from bisect import bisect_right
+    for name, pat in patterns:
+        for m in re.finditer(pat, joined, re.IGNORECASE):
+            lineno = bisect_right(starts, m.start())          # 1-indexed line
+            context = lines[lineno - 1].strip()[:120]
+            allowed = any(
+                sub in str(path).replace("\\", "/") and re.search(apat, context, re.IGNORECASE)
+                for sub, apat in ALLOWLIST
+            )
+            if not allowed:
+                hits.append((name, lineno, m.group(0), context))
     return hits
 
 
@@ -138,6 +150,8 @@ def selftest() -> int:
         "the derivation took three months",
         "a week-long diagnostic arc",
         "19 sub-sprints across two days",
+        # phrase spanning a LaTeX source line break (join semantics)
+        "Over several years\nof investigation, it acquired",
     ]
     negatives = [
         "closed POSITIVE-THIN in May 2026",
@@ -151,7 +165,8 @@ def selftest() -> int:
     ]
     ok = True
     for s in positives:
-        if not any(re.search(p, s, re.IGNORECASE) for _, p in all_patterns):
+        s_joined = s.replace("\n", " ")     # the scan_file join semantics
+        if not any(re.search(p, s_joined, re.IGNORECASE) for _, p in all_patterns):
             print(f"  [selftest FAIL] should match but did not: {s!r}")
             ok = False
     for s in negatives:

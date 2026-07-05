@@ -114,6 +114,36 @@ dimension). Headline-number correctness is still guarded — by **C17** (determi
 *re-running of the underlying tests* that is waived (they were run at branch-cert
 time). A field-guide number with no certified-paper source is still a coverage gap → raised.
 
+### Branch-defining criterion 5: layer-discipline rules 11–13 (added 2026-07-05, pre-registered before the post-cert delta run)
+
+Three PI-directed conventions adopted 2026-07-04 now gate the synthesis layer
+(shared-standard homes: `criteria.md` §Material-vs-nit + `authoring_conventions.md`
+rules 11–13; chronicled in CHANGELOG v4.67.8 + the register pass):
+
+- **Rule 11 — withdrawal-chronicle placement.** The synthesis layer carries **current
+  state only**: what stands, what is withdrawn/descoped *with the mathematical reason*
+  ("descoped by Paper 45's degeneracy theorem"), at most one-clause headline-grade
+  flags with pointer. The chronicle (dates, process narrative, event-framed
+  "descoped with the Paper X retraction") lives in the papers of record + claims
+  register + CHANGELOG. Claims are "withdrawn/descoped", never "retracted".
+  Severity: chronicle language = fix-on-sight NIT; **a withdrawn claim asserted as
+  live remains MATERIAL** (zombie rule unchanged — criterion 1 above).
+- **Rule 12 — no project-course durations.** No wall-clock units (years/months/weeks/
+  days) attached to the project's own course — historical or forward-estimate.
+  **Deterministic: C18** (`debug/qa/check_duration_language.py --gate synthesis`,
+  line-join semantics) — historical classes FAIL; forward effort-estimate vocabulary
+  is advisory debt (0 in the synthesis layer after the 2026-07-04/05 passes).
+- **Rule 13 — audience-register discipline.** Reader-facing prose readable without
+  the internal chronicle: bare verdict-metaphors translated or defined at first use;
+  sprint/track/WH codenames kept **only** as parenthetical chronicle anchors under
+  the field guide's "Reading conventions" paragraph / each group synthesis's
+  first-use footnote; formalized named concepts (multi-focal-composition wall, W1e)
+  introduced at first use. Severity: fix-on-sight NIT; MATERIAL only if register
+  obscures a claim's tier or referent.
+
+Reviewers on any synthesis run verify conformance to all three; the deterministic
+gate set for this target is now **C10–C18**.
+
 ## C8 headline enumeration (the field guide — the C17 families to extend as needed)
 
 - **Identity:** discrete spectral triple = Marcolli–vS 2014 graph-network instance at
@@ -137,6 +167,9 @@ time). A field-guide number with no certified-paper source is still a coverage g
   fresh MATERIAL.
 
 ## Change log
+- 2026-07-05 — **Post-cert DELTA #3 (PI-invoked, register-pass diff + criterion-5 conformance) = CLEAN-DELTA + calibrated → cert STANDS with rules 11–13 verified.**
+  Shape: delta (the v4.67.8 diff was delta-verified 2026-07-04 with calibrated claims 2/2 + Sonnet citation 2/2; this run covers the register-pass diff — prose-only, so claims/faithfulness was the sole affected LLM dimension). Deterministic 9/9 whole-target (C10 all-7 compile 3-pass, C11, C13–C17, **C18 first gated outing: 0 fail-tier, 0 advisory in the synthesis layer**, C5-K backstop). 1 Opus claims reviewer, enumeration + internal-consistency + tier-table forced: **sensitivity 2/2** (S8 group4 binding-wall-closed zombie; S9 field-guide N_gen-forced overstatement — the S9 class caught FIRST-PASS this run; yesterday's recovery-prompt sharpening baked in), **specificity 4/4** (reading-conventions ¶, abstract, W1e bullet, group5 intertwiner sentence — all controls clean). **Zero genuine MATERIAL.** Rule-11/13 residual scan: all 7 files CONFORM (forbidden-fragment grep zero hits; "wall" first-use glossed per document). NITs logged, no action: "closed at sprint scale" register residue (sprint is glossed); group3 "across 2025–2026" (calendar-span date anchor — exempt per rule 12); field-guide L120 "Years later," (autobiographical, personal-life not project-course); group4 gloss NIT was a seed artifact. Worktree removed, zero leakage (grep-verified). Key: `debug/qa/synthesis_delta3_seed_key.json`.
+- 2026-07-05 — **Criterion 5 added (rules 11–13 pre-registered; deterministic set → C10–C18)** ahead of the PI-invoked post-cert `/qa synthesis` run covering the v4.67.8 layer-discipline diff + the uncommitted register pass. Cert status unchanged by this edit; the run verifies it.
 - 2026-07-04 — **Citation RE-DELTA = CLEAN + calibrated → synthesis layer CERTIFIED ✅ (v4.67.3; PI-directed clean-citation-delta = pass).**
   1 Sonnet citation reviewer, 2 fresh seeds (latremoliere_metric_st vol 404→402, deligne2010 IHES 112→114).
   **Sensitivity 2/2; specificity clean** — all 7 v4.67.2-remediated cites re-verified CORRECT (hekkelman2022=2111.13865, hekkelman_mcdonald honest-flag, latremoliere_metric_st 404/108393, hawkins2000 title, latremoliere2025 title, mondino_samann no-"Synthetic", connes1995 label 1994). Deterministic 7/7 whole-target. **Zero MATERIAL.** One genuine non-seed NIT: `minguzzi_suhr2024` title "Bounded Lorentzian metric spaces" → real "Lorentzian metric spaces and their Gromov–Hausdorff convergence" (arXiv:2209.14384 / LMP 114/73 correct — referent right; non-load-bearing) — fixed on sight (v4.67.3). Worktree removed, no leak (seeds 402/114 absent; correct 404/112 present; both wrong arXiv IDs gone). **Verdict per PI direction: clean calibrated citation delta = the certifying pass.**

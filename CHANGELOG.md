@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.67.9] - 2026-07-05
+
+**Layer-discipline pass #3 (audience register / insider terminology, PI-directed) + rule 13 + C18 line-join upgrade + PI-invoked `/qa synthesis` post-cert delta = CLEAN-DELTA (cert stands; rules 11–13 verified).**
+
+### Changed
+- **Register pass over all 7 syntheses** (PI: "Multi-year wall is another instance of insider terminology"): field guide gains a "Reading conventions" paragraph (sprint anchors → CHANGELOG.md; CLAUDE.md §-refs → the internal coordination file; "wall" = structural obstruction established by multiple independent negative results); bare verdict-metaphors translated ("Deep wall." → "A deep structural obstruction; no known line of attack", "no sprint-scale handle" → "no sprint-scale line of attack is known", "The chemistry W1e wall" → "The chemistry correlation wall (W1e)", "TC-stone" → "TC step"); first-use convention footnotes in group1/3/6; group4's sole "binding wall" glossed in-line; group5 "intertwiner wall" → "obstructed at the Clebsch–Gordan intertwiner level". **group2 untouched — already the model pattern** ("a guardrail in the project's sense: …"), cited as the exemplar in the rule. Codenames KEPT as parenthetical chronicle anchors per PI direction (provenance into the DOI-stamped repo).
+- **Codified:** `docs/authoring_conventions.md` **rule 13** (audience-register discipline) + `docs/qa/criteria.md` "Insider-register language" NIT class; standing memory rule `feedback_audience_register.md`.
+- **Second fabricated duration caught:** the field-guide abstract's "Over several years of investigation" (project far younger) — missed by C18 because the phrase spans a LaTeX source line break. Fixed ("Over the course of the investigation") and **C18 upgraded to line-join semantics** (newline = space, hits mapped back to source lines; validated against the pre-fix HEAD text — catches `years of investigation` at its exact line; selftest 11 positives / 8 negatives).
+- `docs/qa/synthesis.done.md`: **criterion 5** (rules 11–13 pre-registered per PI direction BEFORE the run; deterministic set → C10–C18) + the delta-run record.
+
+### Verification — `/qa synthesis` (PI-invoked, DELTA shape over the register diff)
+- Deterministic 9/9 whole-target, incl. **C18's first gated outing: 0 fail-tier + 0 advisory in the synthesis layer**; C10 all-7 compile (register-touched 6 at three-pass).
+- 1 Opus claims/faithfulness reviewer (enumeration + internal-consistency + tier-table forced): **sensitivity 2/2** (S8 group4 wall-asserted-closed zombie; S9 field-guide N_gen-forced overstatement — the S9 class caught FIRST-PASS this run, the 2026-07-04 recovery-prompt sharpening now baked into the base prompt), **specificity 4/4** controls clean. **Zero genuine MATERIAL.** Rule-11/13 residual scan: all 7 files CONFORM (forbidden-fragment grep zero hits; per-file "wall" first-use glossing verified).
+- NITs logged, no action: "closed at sprint scale" (sprint glossed); group3 "across 2025–2026" (calendar-span date anchor, exempt); field-guide "Years later," (autobiographical, personal-life). Worktree removed, branch deleted, zero seed leakage (grep-verified). Key: `debug/qa/synthesis_delta3_seed_key.json` (gitignored).
+- Verdict: **CLEAN-DELTA** — a delta never emits PASS; the 2026-07-04 certification stands, now conformant to and verified against rules 11–13.
+
 ## [4.67.8] - 2026-07-04
 
 **Two layer-discipline passes over the certified synthesis layer + their codification (PI-directed): (1) withdrawal-chronicle placement, (2) project-course duration language.** Closed with a seeded claims+citation micro-delta (calibrated 4/4 after one recovery re-dispatch) that also surfaced and fixed 2 genuine MATERIALs in certified text.

@@ -75,6 +75,15 @@ remains MATERIAL (the zombie rule), unchanged.** A negative *result* (e.g. a deg
 theorem) is content, not withdrawal language — it stays. Convention codified in
 `docs/authoring_conventions.md` project-wide rule 11.
 
+**Insider-register language is a NIT class (2026-07-04 PI direction, set at the synthesis
+register pass).** Project-internal register in reader-facing prose — bare-verdict metaphors
+("Deep wall.", "no sprint-scale handle"), undefined internal codenames, coordination-file
+jargon presumed known — is a **fix-on-sight NIT, not a cert blocker**; treatment per
+`docs/authoring_conventions.md` rule 13 (translate bare verdicts to academic language;
+keep sprint/track/WH codenames as parenthetical chronicle anchors under a per-document
+reading-conventions note; introduce formalized named concepts at first use). It becomes
+MATERIAL only when the register obscures a claim's tier or referent.
+
 ## Dual-rule ERI framing (A = sparsity, B = accuracy) — the framing-zombie rule
 
 **The principle (2026-06-28 PI direction).** The codebase *intentionally* carries
@@ -369,6 +378,13 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-07-04 — **Added the "Insider-register language" NIT class** +
+  `docs/authoring_conventions.md` rule 13 (PI direction, set at the synthesis register
+  pass). Reader-facing documents readable without the internal chronicle: bare-verdict
+  metaphors translated, codenames kept as chronicle anchors under a reading-conventions
+  note, named concepts defined at first use. Same pass: C18 scanner upgraded to LaTeX
+  line-join semantics (catches phrases spanning source line breaks — the "several
+  years / of investigation" miss), validated against the pre-fix HEAD text.
 - 2026-07-04 — **Added C18 (project-course duration-language gate)** +
   `docs/authoring_conventions.md` rule 12 (PI direction, set at the synthesis
   time-language pass). No wall-clock units on the project's own course:
