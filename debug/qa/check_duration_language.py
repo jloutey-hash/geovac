@@ -39,14 +39,10 @@ ROOT = Path(__file__).resolve().parents[2]
 NUM = r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|several|a few|many)"
 UNIT = r"(?:year|month|week|day)"
 
-# Two severity tiers:
-#   FAIL     -- historical wall-clock durations about the project's course
-#               (the fabricated-elapsed-time class; zero tolerance).
-#   ADVISORY -- forward effort-estimate vocabulary (multi-month / multi-year /
-#               week-scale ...). Also banned by rule 12, but ~190 pre-existing
-#               instances live in certified group papers; counted as STANDING
-#               DEBT until the corpus-wide sweep sprint retires them, then
-#               promote to FAIL (the C14 debug/-refs precedent).
+# All duration classes are FAIL tier (2026-07-05 promotion: the corpus-wide
+# sweep retired the ~190-instance forward effort-estimate debt, so the former
+# ADVISORY tier is promoted per the standing plan; the C14 debug/-refs
+# precedent). ADVISORY_PATTERNS kept as an (empty) hook for future staging.
 FAIL_PATTERNS: List[Tuple[str, str]] = [
     ("duration-ago",
      rf"\b{NUM}\s+{UNIT}s?\s+ago\b"),
@@ -61,16 +57,24 @@ FAIL_PATTERNS: List[Tuple[str, str]] = [
      rf"\binto\s+(?:days|weeks|months)\b"),
     ("project-took-units",
      rf"\btook\s+(?:{NUM}\s+)?{UNIT}s?\b"),
-]
-
-ADVISORY_PATTERNS: List[Tuple[str, str]] = [
+    # -- promoted from ADVISORY 2026-07-05 --
     ("multi-unit-estimate",
      rf"\bmulti[- ]{UNIT}\b"),
     ("unit-scale-estimate",
      rf"\b{UNIT}s?-scale\b"),
     ("unit-long",
      rf"\b{NUM}?[- ]?{UNIT}s?-long\b"),
+    # -- added 2026-07-05: numeric/adjectival forms the sweep found by
+    #    judgment ("1-week sprint", "$\sim 6$--$12$ months", "2--3 days") --
+    ("numeric-duration",
+     rf"\b\d+\$?(?:\s*--?\s*\$?\d+\$?)?[-\s]+{UNIT}s?\b"),
+    # -- added 2026-07-05 (sweep-delta finding): word-number adjectivals
+    #    ("a focused two-day session") escape the digit-based pattern --
+    ("wordnum-duration",
+     rf"\b(?:one|two|three|four|five|six|seven|eight|nine|ten)-{UNIT}\b"),
 ]
+
+ADVISORY_PATTERNS: List[Tuple[str, str]] = []
 
 # Per-occurrence exemptions: (filename-substring, regex) pairs whose matches
 # are allowed (add sparingly; each entry needs a comment saying why).
@@ -152,6 +156,12 @@ def selftest() -> int:
         "19 sub-sprints across two days",
         # phrase spanning a LaTeX source line break (join semantics)
         "Over several years\nof investigation, it acquired",
+        # numeric/adjectival forms (post-promotion additions)
+        "completed in a focused two-day session",
+        "a 1-week sprint at highest priority",
+        "commitment ($\\sim 6$--$12$ months estimated)",
+        "NotImplementedError ($\\sim 2$-$3$ days, bundled)",
+        "multi-week+ architectural lifts",
     ]
     negatives = [
         "closed POSITIVE-THIN in May 2026",
@@ -162,6 +172,9 @@ def selftest() -> int:
         "a decade-long experimental anomaly (proton radius, external)",
         "subsequently descoped by the degeneracy theorem",
         "13 CPU-h at 30 dps never returned",
+        "J. Math. Phys. 59 (2018), 062303",
+        "Fields Inst. Commun. 12",
+        "the long-range Stage-2 program at sprint scale",
     ]
     ok = True
     for s in positives:

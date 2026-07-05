@@ -260,18 +260,21 @@ verdict is the **AND across all review dimensions** (below).
 - **C18 — Project-course duration language (deterministic).** No wall-clock
   duration (years / months / weeks / days) is attached to the project's own
   course or events — certified by `debug/qa/check_duration_language.py`
-  (exit 0; `--selftest` built in). Historical-duration classes ("N years ago",
-  "units of work", "across N days", "took N months") **FAIL**; forward
-  effort-estimate vocabulary ("multi-month", "multi-year", "week-scale") is
-  **ADVISORY standing debt** (~190 pre-existing instances in certified group
-  papers) until the corpus-wide sweep retires it, then promoted to FAIL.
-  Sequence language, real dates, version anchors, and unit-free effort
-  vocabulary ("sprint-scale", "deep wall") are fine; external-world history is
-  exempt. **Added 2026-07-04 (PI direction; the incident: the field guide
-  claimed "Three years ago the project…" when the whole project is far
-  younger — LLM drafting is unreliable about elapsed project time, so this is
-  a grep-class check, not a judgment call).** Convention:
-  `docs/authoring_conventions.md` rule 12.
+  (exit 0; `--selftest` built in; LaTeX line-join semantics so phrases
+  spanning source line breaks are caught). **All classes FAIL** (2026-07-05
+  promotion after the corpus-wide sweep retired the ~190-instance forward
+  effort-estimate debt): historical durations ("N years ago", "units of
+  work", "across N days", "took N months"), effort-estimate vocabulary
+  ("multi-month", "multi-year", "week-scale"), and numeric/adjectival forms
+  ("1-week sprint", "$\sim 6$--$12$ months", "2--3 days"). Approved unit-free
+  replacements: "sprint-scale", "beyond sprint scale", "bounded",
+  "a substantial program", "long-range", "deep frontier". Sequence language,
+  real dates, version anchors are fine; external-world history is exempt.
+  **Added 2026-07-04 (PI direction; the incident: the field guide claimed
+  "Three years ago the project…" when the whole project is far younger —
+  LLM drafting is unreliable about elapsed project time, so this is a
+  grep-class check, not a judgment call). Promoted to all-FAIL 2026-07-05
+  at the corpus sweep.** Convention: `docs/authoring_conventions.md` rule 12.
 
 ## Branch-specific criteria (C14+)
 

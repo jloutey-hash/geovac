@@ -687,7 +687,7 @@ different starting points.
 A natural question is whether PK can be eliminated in a quantum
 simulation context, where antisymmetry is enforced by the
 creation/annihilation algebra rather than by explicit orthogonalization.
-A scoping investigation (Track~CB, v2.0.37) tested replacing PK with
+A scoping investigation (Track~CB, v2.0.37)\footnote{Sprint/track designations are anchors into the project's internal chronicle (\texttt{CHANGELOG.md} in the repository).} tested replacing PK with
 explicit cross-block two-electron integrals for LiH:
 the result is negative.  Cross-block ERIs add core--valence electron
 repulsion, but the composed orbital basis (different $Z_{\rm eff}$ per
@@ -770,8 +770,8 @@ shape (not eigenvalue), with the actual Na 3s screened wavefunction
 having mean radius $\langle r \rangle = 4.47$~bohr versus the
 hydrogenic Z=1 1s mean radius of $1.50$~bohr. Wavefunction-shape
 substitution in cross-$V_{ne}$ and within-block ERIs is the next
-named engineering closure (1-week sprint via physical-$n$ hydrogenic
-relabeling, or multi-week sprint via strict-Schmidt
+named engineering closure (sprint-scale via physical-$n$ hydrogenic
+relabeling, or beyond sprint scale via strict-Schmidt
 orthogonalization).
 
 \paragraph{Update post-Sprint $\alpha$ arc (2026-05-23): a third layer
@@ -807,11 +807,11 @@ variational state itself.
 Three named follow-on directions surface from the $\alpha$ arc, ranked
 in Paper~19 Sec.~\ref{sec:w1c_residual}: (i) NaH $n_{\max}=3$ test
 bundled with W1c+multi-zeta unified architecture
-($\sim 1$~week, falsifies/confirms Layer~3 as a basis-size artifact);
+(sprint-scale; falsifies/confirms Layer~3 as a basis-size artifact);
 (ii) cross-$V_{ne}$ kernel-shape substitution
-($\sim 1$-$2$~weeks, parallel diagnostic of Track~3's original named
+(sprint-scale, parallel diagnostic of Track~3's original named
 target); (iii) removal of the screened-path multi-zeta
-\texttt{NotImplementedError} ($\sim 2$-$3$ days, bundled with item (i)).
+\texttt{NotImplementedError} (bundled with item (i)).
 The architectural addition from $\alpha$-Multi-zeta + $\alpha$-PES is
 retained per the architectural-cleanliness rule.  Synthesis memo:
 \texttt{debug/sprint\_modular\_alpha\_arc\_synthesis\_memo.md}.
@@ -905,7 +905,7 @@ INDEPENDENT sub-sub-mechanisms each with $10$--$25\%$ closure
 ceiling: basis-truncation ($\sim 10\%$ PES, F6) +
 Hartree-pressure ($\sim 25\%$ 2-pt, F5) +
 deep-correlation-residual ($\sim 65$--$90\%$ of wall, requires
-multi-week+ architectural lift: Schmidt orthogonalization at
+an architectural lift beyond sprint scale: Schmidt orthogonalization at
 basis-construction level, or full-correlation [Ne] cores). The W1e
 closure remains OPEN with a clean three-sub-sub-mechanism
 characterization. Methodological side finding: 2-point gates at
@@ -923,7 +923,7 @@ addendum F4--F6 extension.
 
 \paragraph{Closure of the W1e sprint-scale candidate space (Schmidt +
 core correlation Day-1 diagnostics, 2026-05-23).} The two named
-multi-week+ candidates from the F4--F6 refinement (Schmidt
+beyond-sprint-scale candidates from the F4--F6 refinement (Schmidt
 orthogonalization at basis-construction level; fully correlated
 [Ne] cores) were tested by Day-1 diagnostics and both ruled out.
 Schmidt orthogonalization of H 1s against Na [Ne] core at NaH

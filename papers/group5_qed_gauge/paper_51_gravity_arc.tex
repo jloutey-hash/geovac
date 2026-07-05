@@ -105,7 +105,7 @@ $\Lcc = 6 \phi(2)/\phi(1) \cdot \Lambda^2$, and
 $\Rcrit \Lambda = \sqrt{\phi(1)/(6\phi(2))}$; \emph{no} simple
 combination is cutoff-independent, classifying the cutoff function as
 external Class~1 calibration data (G8). Finally, we report on the
-multi-month discrete-substrate program. The substrate
+extended discrete-substrate program. The substrate
 $\mathcal{G}_{\rm cigar} = \mathbb{Z}_+(a)|_{N_\rho} \times \mathbb{Z}/N_\phi
 \times \mathrm{Fock}(S^2, l_{\max})$ is operational at sprint scale
 through five closed sub-sprints (G4-3a / cleanup / b / c / d, plus
@@ -131,11 +131,11 @@ recovery. The half-integer angular momentum + anti-periodic spinor
 BC cleanly extracts the conical-defect tip term where the integer
 scalar BC does not (BC-sector diagnostic: spinor 99.4\% vs scalar
 66.3\% on the same substrate). The load-bearing structural
-quantities for the multi-month $S_{\BH}$ derivation
+quantities for the extended $S_{\BH}$ derivation
 (G4-5 discrete replica method + G4-6 full $S_{\BH}$ calculation)
 are quantitatively validated; the remaining work is integration
-over $t$ with cutoff regularization, estimated at $\sim 4$--$8$
-months end-to-end.
+over $t$ with cutoff regularization, a bounded remaining program
+end-to-end.
 \end{abstract}
 
 \tableofcontents
@@ -283,8 +283,8 @@ The discrete-substrate arc opens with G4-3:
         holds at the operator level. The conical-defect parameter
         $\alpha = N_\phi/N_0$ identifies the discrete analog of
         the off-shell tip deformation used in the replica method.
-        Sub-sprints G4-3a through G4-6 are named for a multi-month
-        commitment ($\sim 6$--$12$ months estimated).
+        Sub-sprints G4-3a through G4-6 are named as a substantial
+        program commitment, well beyond sprint scale.
         (MEASURED, sprint-scale;
         \texttt{tests/test\_paper51\_L6\_full.py} F1--F7 panel.)
 \end{enumerate}
@@ -1111,7 +1111,7 @@ substrate.
 \subsection{Sub-sprint sequence (updated)}
 \label{subsec:g4_3_sequence}
 
-G4-3 opens a multi-month discrete-substrate sub-sprint sequence.
+G4-3 opens an extended discrete-substrate sub-sprint sequence.
 Status as of this version of the paper:
 \begin{itemize}
   \item \textbf{G4-3a}: constant-warp substrate + scoping
@@ -1161,22 +1161,22 @@ Status as of this version of the paper:
         truncation edge), structural to the uniform-$\phi$ FD
         angular discretization.
   \item \textbf{G4-4}: warped Dirac spectrum on the discrete
-        substrate ($\sim 5$--$8$ months, multi-month).
+        substrate (a major sub-program beyond sprint scale).
         Architectural scoping memo (G4-4 first-move) closed;
         sub-sprint sequence G4-4a/b/c/d/e/f named with
         load-bearing falsifiers F1 (constant-warp factorization),
         F2 (chirality grading), F3 (continuum recovery at small $t$).
-  \item \textbf{G4-5}: discrete replica method ($\sim 2$--$4$
-        months). \emph{Now identified as the proper target for
+  \item \textbf{G4-5}: discrete replica method (beyond sprint
+        scale). \emph{Now identified as the proper target for
         literal Sommerfeld--Cheeger extraction} per the G4-3c-proper
         structural diagnosis.
   \item \textbf{G4-6}: full discrete-substrate $S_{\BH}$ derivation
-        from the G4-4 + G4-5 fusion ($\sim 2$--$4$ months).
+        from the G4-4 + G4-5 fusion (beyond sprint scale).
 \end{itemize}
 
-Estimated total commitment after the G4-3a$\to$G4-3d-UV closure:
-$\sim 9$--$16$ months for end-to-end discrete-substrate derivation of
-$S_{\BH}$ from G4-4 onwards.
+The end-to-end discrete-substrate derivation of $S_{\BH}$ from G4-4
+onwards remains a substantial multi-stage commitment after the
+G4-3a$\to$G4-3d-UV closure.
 
 \subsection{Honest scope at G4-3 closure}
 \label{subsec:g4_3_honest_scope}
@@ -1189,7 +1189,7 @@ construction, variable-warp tip-regular substrate built, conical-defect
 parameterization defined via $N_\phi(\alpha)$ wedge lattice, continuum
 Weyl law verified at finer than $1\%$ in the UV sweet spot. The
 remaining sub-sprints G4-4, G4-5, G4-6 form the
-\emph{multi-month commitment} to derive $S_{\BH}$ from the discrete
+\emph{extended commitment} to derive $S_{\BH}$ from the discrete
 substrate.
 
 \textbf{What is NOT extracted at sprint scale:}
@@ -1201,8 +1201,8 @@ substrate.
         that is structurally larger than the SC tip term at this
         discretization).
   \item Discrete spinor Dirac on the cigar substrate
-        (G4-4 multi-month target).
-  \item Discrete replica method (G4-5 multi-month target).
+        (G4-4 extended target).
+  \item Discrete replica method (G4-5 extended target).
 \end{itemize}
 
 The G4-3c-proper finding is the sharpening result: the literal
@@ -1243,16 +1243,16 @@ $\phi(0)$, not $\phi(2)$.
 % =====================================================================
 
 The G4-3 sub-sprint sequence (\S\ref{sec:g4_3}) closes the discrete
-substrate. G4-4 is the next sub-sprint of the multi-month $S_{\BH}$
+substrate. G4-4 is the next sub-sprint of the extended $S_{\BH}$
 program: building the \emph{Dirac operator} on the discrete substrate
 and extracting the load-bearing structural quantities for the replica
 method.
 
 This section reports a substantial collapse of the scoping estimate:
-the G4-4 program was sized at 5--8 months for sub-sprints
+the G4-4 program was sized as a major sub-program for sub-sprints
 G4-4a/b/c/d/e/f, but the load-bearing structural quantities for
 $S_{\BH}$ are now \emph{quantitatively validated at sprint scale}
-across 14 sub-sprints completed in a focused two-day session.
+across 14 sub-sprints completed in a single focused session.
 
 \subsection{Architectural inputs from G4-3}
 
@@ -1491,7 +1491,7 @@ $N_0 = 120$) gives, at sweet-spot $t = 5.0$:
 \end{equation}
 (MEASURED, sprint-scale.)
 
-\subsection{Implications for the multi-month $S_{\BH}$ program}
+\subsection{Implications for the extended $S_{\BH}$ program}
 
 The replica method derives the BH entropy as
 \begin{equation}
@@ -1517,14 +1517,14 @@ Connes--Chamseddine cutoff issue, structural to the framework and
 external to the discrete substrate.
 
 \paragraph{Sprint-scale closure implication.} Before this session, the
-multi-month $S_{\BH}$ program (G4-5 discrete replica method + G4-6
-full $S_{\BH}$ derivation, $\sim$ 9--16 months end-to-end per G4-4
-scoping) rested on an architectural sketch. \textbf{The remaining
-multi-month work is integration over $t$ with proper cutoff
+extended $S_{\BH}$ program (G4-5 discrete replica method + G4-6
+full $S_{\BH}$ derivation, a substantial end-to-end commitment per
+G4-4 scoping) rested on an architectural sketch. \textbf{The remaining
+program work is integration over $t$ with proper cutoff
 regularization, not foundational uncertainty}; the load-bearing
 quantities (tip coefficient $-1/12$ and replica derivative $+1/6$)
 are extracted to sub-percent precision at sprint scale and reduce to
-their continuum continuum counterparts at the optimal discretization
+their continuum counterparts at the optimal discretization
 point.
 
 \subsection{G4-5: discrete replica method for $S_{\BH}$}
@@ -1822,7 +1822,7 @@ load-bearing reductions bit-exact in both reduction directions.
 \end{enumerate}
 
 \paragraph{Implications for G4-6 (full $S_{\BH}$ closure).} The
-remaining multi-month work for G4-6 is:
+remaining program work for G4-6 is:
 \begin{itemize}
   \item Subleading $O(a^2/r_h^2)$ UV corrections via multi-substrate
         continuum extrapolation;
@@ -1833,13 +1833,12 @@ remaining multi-month work for G4-6 is:
         close the T2 high-$m$ overshoot in the tip-recovery diagnostic.
 \end{itemize}
 
-End-to-end G4-6 estimate: \textbf{4--7 months} on top of G4-5
-closure (further sharpened to \textbf{3--6 months} after the v3.19.0
+The end-to-end G4-6 commitment shrank further after the v3.19.0
 post-G4-5 follow-on push closed the $\alpha > 1$ structural asymmetry
-at the analytical level; see Sec.~\ref{subsec:g4_5_followon} below).
-The end-to-end multi-month $S_{\BH}$ program is now
-substantially shorter than the original G4-4 scoping estimate
-(9--16 months) because the structural quantities have crystallized
+at the analytical level (see Sec.~\ref{subsec:g4_5_followon} below).
+The end-to-end $S_{\BH}$ program is now
+substantially smaller than the original G4-4 scoping estimate
+because the structural quantities have crystallized
 into a single sector-wise moment map.
 
 \paragraph{The structural-skeleton-scope reading at G4-5 closure.}
@@ -1861,7 +1860,7 @@ form and Mellin map empirical confirmation}
 
 A second 5-agent parallel dispatch following the v3.18.0 G4-5 closure
 landed five non-overlapping tracks targeting open issues plus the
-multi-month G4-6 scoping. The substantive new content is one
+extended G4-6 scoping. The substantive new content is one
 analytical closed form (the $\alpha > 1$ Möbius modification) and one
 empirical confirmation (the sector-wise Mellin moment map).
 
@@ -2171,7 +2170,7 @@ $813.4\%$ (spectral overshoot). The FD and spectral results
 continuum value is the IR Lichnerowicz coefficient, not the per-$t$
 UV target. Identifying the correct UV target requires a
 wedge-spectral-density heat-kernel expansion --- a named follow-on
-for the G4-6 multi-month program.
+for the extended G4-6 program.
 
 \paragraph{IR cutoff cure clean negative.} Three cutoff variants
 (Gaussian, polynomial, sharp) tested across six $\Lambda \in
@@ -2182,7 +2181,8 @@ lattice spacing $a = 0.05$ and $r_h = 2$), independent of $\Lambda$.
 The continuum prediction $r_h^2 \Lambda^2 / 3$ has clean $\Lambda^2$
 scaling that the discrete extraction cannot inherit at fixed
 substrate. The proper cure is substrate UV refinement
-($a \to a/2$, multi-week compute scaling $N_\rho \to 400$), not a
+($a \to a/2$, a compute scaling to $N_\rho \to 400$ beyond sprint
+scale), not a
 cutoff-function adjustment. A side correction: extending the
 $t$-grid from G4-5c's 8 points to 13 points shifts the $\Lambda = 2$
 recovery from $0.85$ to $\textbf{1.96}$, identifying $\Lambda \in
@@ -2193,7 +2193,7 @@ target structural closures now have empirical evidence in hand:
 $\alpha > 1$ closed analytically (Track 5);
 FD/spectral UV bracketing identifies the structural gap (Track 2);
 sector-wise moment map empirically confirmed (Track 1). The G4-6
-estimate sharpens from $4$--$7$ months to $\textbf{3--6 months}$ as
+estimate sharpens further as
 the $\alpha > 1$ sub-sprint is removed from the sequence.
 
 % ---------------------------------------------------------------------
@@ -2632,7 +2632,7 @@ triangulation, AdS/CFT, asymptotic safety) in two main ways:
         the substrate.
 \end{enumerate}
 
-The discrete-substrate arc opening (G4-3) is the natural multi-month
+The discrete-substrate arc opening (G4-3) is the natural extended
 follow-on: if the continuum arc shows what the GeoVac substrate can
 say about gravity at the spectral action level, the discrete-substrate
 arc shows what it says \emph{intrinsically}, before passing to the
@@ -2658,7 +2658,7 @@ the spinor conical-defect tip coefficient $-\tfrac{1}{12}(1/\alpha - \alpha)$
 is identified at \textbf{5 significant figures} on the discrete
 substrate (\S\ref{subsec:g4_4c}); the replica derivative $+1/6$ is
 extracted at \textbf{96.69\%} (\S\ref{subsec:g4_4def}). The structural
-quantities for the multi-month $S_{\BH}$ derivation are quantitatively
+quantities for the extended $S_{\BH}$ derivation are quantitatively
 validated on the discrete substrate at sub-percent precision. Both
 results land at sprint scale on the same UV-refined panels that
 verified the Weyl law --- there is one substrate, and the bridges to
@@ -2700,7 +2700,7 @@ the spinor sector cleanly extracts the conical-defect tip term where
 the integer scalar sector does not. This refines Q1: G4-5/G4-6 builds
 on a quantitatively validated foundation, not on a sketch.
 
-\textbf{Open at multi-month scale:} (i) the $\alpha > 1$ structural
+\textbf{Open beyond sprint scale:} (i) the $\alpha > 1$ structural
 asymmetry (recovery N$_0$-independent at 67.88\%, suggesting
 sub-leading corrections to the continuum SC at excess angles, or a
 different effective tip coefficient at saddle cones); (ii) the joint

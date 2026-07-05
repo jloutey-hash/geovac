@@ -1589,7 +1589,7 @@ invariance of the TT projector, propagator structure, and continuum
 graviton emergence via Paper~38-style state-space GH convergence ---
 are not verified here; the J-blindness leg has since
 been completed (Paper~51, \S Fierz--Pauli + the J-blindness theorem),
-and the remaining sufficiency legs constitute the multi-month G6
+and the remaining sufficiency legs constitute the extended G6
 program. The
 $S^3$ Fock projection rigidity (Paper~23) fixes the background metric;
 graviton candidates here are operator-level perturbations of $D$, not
@@ -1626,7 +1626,7 @@ cross-sector directions assemble into continuum diffeomorphisms that
 remove $7$ of the $9$ within-sector modes. Thus the graviton DOF
 reduction is a \emph{continuum-limit phenomenon} (Paper~38-style state-space GH),
 not an internal-to-the-block projection --- which is the structural
-reason the Fierz--Pauli decomposition is the multi-month G6 task and
+reason the Fierz--Pauli decomposition is the extended G6 task and
 not a sprint-scale one. Source:
 \texttt{debug/sprint\_gd1\_graviton\_dof\_memo.md}.
 
@@ -1646,9 +1646,9 @@ $\delta D \leftrightarrow h_{\mu\nu}$ dictionary, which can shift irrep
 assignments --- the \emph{local} polarization space is $(1,1)$ while the
 \emph{global} TT harmonic modes are $|\Delta j| = 2$. So GD-4 does not
 refute the necessary-condition result; it identifies a concrete gap: the
-multi-month G6 must either examine the $|\Delta j| = 2$ $\delta D$-modes
+extended G6 must either examine the $|\Delta j| = 2$ $\delta D$-modes
 directly or establish the dictionary showing the $(1,1)$ bilinear carries
-the physical graviton. Together with the GD-1 finding, the multi-month G6
+the physical graviton. Together with the GD-1 finding, the extended G6
 has two sharply identified must-dos: (i) test the helicity-2 sector and
 fix the dictionary; (ii) realize the $9 \to 2$ gauge reduction in the
 continuum (state-space GH) limit. Source:
@@ -1670,7 +1670,7 @@ TT-graviton irrep class. \emph{Honest scope:} the irrep-blindness that
 makes this immediate is exactly the G6 approximation --- the
 \emph{sufficient} condition (a TT kinetic structure \emph{distinct} from
 the trace, Fierz--Pauli) requires lifting $A_\lambda$ to an
-irrep-resolved second variation, the multi-month task where the
+irrep-resolved second variation, the extended-G6 task where the
 blindness must break. GD-5 closes the necessary condition for the TT
 sector; it does not close the TT-vs-trace distinction. Source:
 \texttt{debug/sprint\_gd5\_helicity2\_memo.md}.
@@ -1726,11 +1726,11 @@ on truncated $S^3$ at finite $n_{\max}$) does NOT natively describe
 the cigar: the cigar's spatial section is $\mathbb{R} \times S^2$
 (non-compact radial, $S^2$ instead of $S^3$), and the horizon is a
 smooth conical tip in the $(\tau, r)$ plane. Constructing the
-discrete spectral triple analog on the cigar requires multi-month
+discrete spectral triple analog on the cigar requires substantial
 new infrastructure: spatial $S^2$ truncation, non-compact radial
 regularization, horizon tip preservation under discretization, and
 verification that the boundary heat-kernel coefficient generates the
-correct GHY term. This is the full G4 multi-month sprint.
+correct GHY term. This is the full G4 program.
 
 Sprint G4 first-pass: \texttt{debug/g4\_cigar\_BH\_entropy.py} and
 \texttt{debug/g4\_cigar\_BH\_entropy\_memo.md}.
@@ -1869,7 +1869,7 @@ Sprint G7 driver: \texttt{debug/g7\_extremality\_newton.py}, memo
 \subsection{$S^2$ Dirac and the cigar's spatial spinor structure}
 \label{sec:S2_dirac_cigar}
 
-Sprint G4-1 (first sub-sprint of the multi-month G4 full) tests whether
+Sprint G4-1 (first sub-sprint of the full G4 program) tests whether
 the framework's two-term exactness on $S^3$ Dirac
 (\S\ref{sec:parametric_spectral_action_4D}, Theorem~\ref{thm:zeta_unit_neg_k})
 propagates to the $S^2$ Dirac that appears in the cigar's spatial
@@ -2020,7 +2020,7 @@ Wald-forces-entropy-relation remark). The structural emergence of
 $A \cdot \Lambda^2$ from the conical tip is the load-bearing finding;
 the precise prefactor calibration is downstream.
 
-\paragraph{Discrete-substrate analog.} For G4-3 onwards (multi-month):
+\paragraph{Discrete-substrate analog.} For G4-3 onwards (the extended program):
 \begin{itemize}
 \item Define $\alpha$-deformation of the discrete substrate at the tip
 \item Compute the conical contribution from the discrete Dirac
@@ -2030,7 +2030,7 @@ the precise prefactor calibration is downstream.
 \end{itemize}
 
 The conceptual framework is now in place;
-multi-month implementation follows.
+the full implementation program follows.
 
 Sprint G4-2 driver: \texttt{debug/g4\_2\_conical\_replica.py} and memo
 \texttt{debug/g4\_2\_conical\_replica\_memo.md}.
@@ -2175,7 +2175,7 @@ rather than at the continuum level.
 
 This sprint is \emph{scoping + first-pass}: define the discrete
 substrate, identify the load-bearing pieces, and specify the
-multi-month sub-sprint sequence G4-3a through G4-6.
+sub-sprint sequence G4-3a through G4-6.
 
 \paragraph{Discrete substrate.}
 For the cigar's near-horizon limit
@@ -2207,7 +2207,7 @@ This factorization holds at the operator level on the discrete
 substrate.
 
 \paragraph{Sub-sprint sequence.}
-G4-3 opens the multi-month discrete-substrate track:
+G4-3 opens the extended discrete-substrate track:
 \begin{itemize}
   \item \textbf{G4-3a} (this): constant-warp substrate + scoping
   \item G4-3a-cleanup: Hermitian discrete polar Laplacian (engineering)
@@ -2218,7 +2218,8 @@ G4-3 opens the multi-month discrete-substrate track:
   \item G4-5: discrete replica method
   \item G4-6: full discrete-substrate $S_{BH}$ derivation
 \end{itemize}
-Estimated multi-month commitment: $\sim 6$--$12$ months.
+Estimated commitment: a substantial multi-stage program, well
+beyond sprint scale.
 
 \paragraph{Honest scope of G4-3a.}
 G4-3a is \emph{scoping}: substrate definition, constant-warp
@@ -2253,8 +2254,8 @@ is structural, not a feature of G4-3 specifically.
 \paragraph{Gravity-arc status.}
 Continuum gravity arc: G1--G8 complete (sprint-scale closure).
 Discrete-substrate gravity arc: G4-3a opens; G4-3b through G4-6
-estimated $\sim 6$--$12$ months to full $S_{BH}$ derivation on
-the discrete substrate. This is the natural multi-month
+run to the full $S_{BH}$ derivation on
+the discrete substrate. This is the natural
 commitment for the next major project arc.
 
 Sprint G4-3a driver: \texttt{debug/g4\_3\_warped\_substrate.py};

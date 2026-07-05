@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.68.0] - 2026-07-05
+
+**Corpus-wide duration/register sweep COMPLETE + C18 promoted to all-FAIL + Q1′/Q2′ adjudication + repo tidy (PDF-tracking policy, Notes.bib untracked).** The three follow-ons from the v4.67.9 session, PI-directed ("sounds like we need to do 1, 2, and 3").
+
+### Changed — the corpus sweep (item 1)
+- **~228 wall-clock-duration instances retired across 25 papers in 6 groups**: the 190-instance advisory debt (multi-month / multi-year / week-scale vocabulary) + 38 numeric/adjectival forms the extended patterns caught ("1-week sprint", "$\sim 6$--$12$ months", "4--8 week follow-up", "across two days"). Uniform unit-free vocabulary: sprint-scale / beyond sprint scale / bounded / a substantial program / long-range / deep frontier. Proportionate register mini-pass rode along (first-use chronicle-anchor footnotes; e.g. P34, P19).
+- Hybrid execution: 5 parallel sweep agents cleared ~64 instances before dying at the monthly spend limit (their partial edits PM-verified by diff review — correct class only, no numbers/math/citations touched); the remaining ~164 finished in main session. The deterministic C18 work-list made the interruption cleanly resumable — remaining hits = remaining work, no transcript archaeology.
+- **C18 promoted to all-FAIL** (the standing plan, executed): former ADVISORY tier promoted + new `numeric-duration` pattern (catches LaTeX-wrapped "$\sim N$--$M$ months" forms); selftest 15 positives / 11 negatives. **Corpus-wide: 0 hits over 59 papers at the promoted tier.** criteria.md C18 entry, authoring_conventions.md rule 12, and qa.md step-1 registry updated.
+
+### Fixed — Q1′/Q2′ label drift (item 2; adjudicated against Paper 49, the paper of record)
+- Paper 49 closes **Q1′** (the strong-form Krein–MS bridge, Paper 48 §8.1); **Q2′** (the genuine non-commutative Mondino–Sämann extension) is explicitly **not** closed — "partially addressed" via the OSLPLS containment — and the closed-form cocycle-entropy deficit is a third, separate named open item (P49 §10 catalogues both). Fixed: field guide ×2 loci (bridge now tagged Q1′; the Q2′ bullet head was already correct), group1 synthesis (deficit question de-conflated from Q2′; both open items now stated).
+- The 2026-05-31 memory reading ("Q2′ CLOSED — OSLPLS IS the answer") overstated the paper's final certified text — memory file + index corrected (a verify-current-state incident: three documents and a memory, four readings, one paper of record).
+
+### Changed — repo tidy (item 3)
+- **PDF policy (PI decision): paper PDFs are TRACKED product artifacts** — papers are the product; GitHub + Zenodo DOI snapshots must stay self-containedly readable. The contradictory `papers/**/*.pdf` ignore stanza (which ~35 legacy-tracked PDFs already violated) replaced with the tracked-policy note; all compiled paper PDFs added; touched PDFs refresh at each release.
+- `*Notes.bib` identified as REVTeX footnote sidecars (auto-generated on every compile): 15 untracked + pattern ignored — retires that churn class. Also ignored: `debug/compile_output/` (4.4 MB generated), `geovac/_archive/superseded/cache/`, `tests/_durations.json`. HeH recompute log relocated to `debug/data/`; 4 small archive-sweep artifacts (B3 JSONs, sp_splitting plot) committed.
+
+### Verification
+- C18: **0 fail / 0 advisory over 59 papers** at the all-FAIL tier. C16 (all 46 withdrawal flags intact through the replace_all edits) / C11 / C5-K / C13 / C17 all PASS post-sweep. All 25 touched papers recompile clean (two-pass). No `geovac/` production code touched; no §13.5 prohibition touched.
+
+### Verification — sweep DELTA (PI-directed, pre-release on the staged diff) = CLEAN-DELTA + fully calibrated
+- Shape: one run, 4 chunked Opus claims reviewers over all **267 hunks** (A group1 95, B group3+synthesis 72, C group5 42, D group6+group2 58), old-text manifests generated into the worktree, review axes = meaning / tier / technical-content preservation. **Sensitivity 5/5 seeds** (false-closure verb flip, original→routine scope inversion, open-frontier→"within reach" zombie, dropped-N_ρ→400 content loss, sprint-scale downgrade) — several caught via cross-locus reasoning (sibling loci in P43/P47; the P34 triple-occurrence; four P56 open-status statements). **Specificity clean** (all 5 controls sound; the Q1′/Q2′ corrections explicitly verified against Paper 49's spec). **Zero genuine MATERIAL.**
+- Genuine NITs found + remediated in-run: P44 doubled article ("a natural a bounded"); P51 pre-existing "continuum continuum" typo; **P51 residual historical duration "a focused two-day session"** (word-number adjectivals escaped the digit-based C18 pattern → new `wordnum-duration` pattern added, selftest 16/11, corpus re-scan 0/0); paper_55 vocabulary harmonized (3× "substantial open program" → "long-range open program" for the Stage-2 program). 3 re-touched papers recompile clean. Worktree removed, zero seed leakage (grep-verified, N_ρ token intact). Key: `debug/qa/sweepdelta_seed_key.json` (gitignored).
+
 ## [4.67.9] - 2026-07-05
 
 **Layer-discipline pass #3 (audience register / insider terminology, PI-directed) + rule 13 + C18 line-join upgrade + PI-invoked `/qa synthesis` post-cert delta = CLEAN-DELTA (cert stands; rules 11–13 verified).**

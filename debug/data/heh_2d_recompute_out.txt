@@ -1,0 +1,35 @@
+Level 4 multichannel solver for Z_A=2.0, Z_B=1.0 at R = 1.4600 bohr
+  l_max=4, m_max=1, n_ch=57
+  Heteronuclear: Z_A=2.0, Z_B=1.0
+  Origin shift: z0=0.2433 (R_A=0.4867, R_B=0.9733)
+  angular_method=fd (n_alpha=60), matrix 3420x3420
+  n_Re=120
+  Direct 2D solver (no adiabatic approximation)
+  Direct 2D solver: 410400 x 410400 sparse matrix
+  (120 R_e points x 57 channels x 60 alpha points)
+  Nonzeros: 14524460
+  Eigenvalues found: [-4.27752305 -3.51856169 -3.3511413 ]
+  sigma = -4.4236
+  2D solve: 735.26s
+
+  === Results (l_max=4, 57 channels) ===
+  E_total    = -2.907660 Ha  (exact: -2.978700)
+  D_e        = 0.003960 Ha  (exact: 0.075000)
+  D_e / exact = 5.3%
+  Total time: 735.26s
+
+================================================================
+HeH+ 2D-VARIATIONAL RECOMPUTE (l_max=4, sigma+pi, charge-center)
+================================================================
+  result keys     : ['D_e', 'D_e_pct', 'E_atoms', 'E_elec', 'E_total', 'R', 'R_e_grid_angular', 'R_e_grid_radial', 'V_NN', 'Z', 'Z_A', 'Z_B', 'angular_method', 'channels', 'homonuclear', 'l_max', 'm_max', 'n_ch', 'n_coupled', 'origin', 'radial_method', 'wavefunction', 'z0']
+  N_channels      : 57
+  z0 (origin)     : 0.2433 bohr (charge-center)
+  V_NN = Z_A Z_B/R: 1.369863 Ha
+  E_elec          : -4.277523 Ha
+  E_total         : -2.907660 Ha   (exact -2.9787)
+  E_atoms (He)    : -2.903700 Ha
+  D_e = E_atoms-E_total = 0.003960 Ha   (exact 0.075)
+  D_e / D_e^exact : 5.3%   (adiabatic paper value: 93.1%)
+  variational?    : E_total > exact (OK above)
+  wall time       : 735.3s
+================================================================

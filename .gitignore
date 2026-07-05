@@ -100,8 +100,17 @@ temp/
 # Hylleraas-Eckart closed-form precompilation cache (derivable from code)
 geovac/_cache/
 
-# Compiled paper PDFs (regeneratable from .tex sources via pdflatex)
-papers/**/*.pdf
+# Paper PDFs are TRACKED product artifacts (PI policy 2026-07-05): papers are
+# the product; GitHub + Zenodo DOI snapshots must stay self-containedly readable.
+# Refresh touched PDFs at each release.
 
 # /qa calibration seed answer-keys — must NEVER be committed (QA hard rule)
 debug/qa/*_seed_key.json
+
+# REVTeX footnote sidecar files (auto-generated on every compile)
+*Notes.bib
+
+# Generated compile/test artifacts
+debug/compile_output/
+geovac/_archive/superseded/cache/
+tests/_durations.json

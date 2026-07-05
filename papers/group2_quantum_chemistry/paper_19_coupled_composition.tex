@@ -94,7 +94,7 @@ BeH$_2$ gives 11.7\%; H$_2$O gives 19.4\%.  These errors are
 structural, not numerical: the $l_{\max}$ divergence
 (+0.15--0.22~bohr per additional angular channel) is confirmed to
 originate in PK overcounting, not in the adiabatic approximation
-(Track~BQ, v2.0.32).  Six attempts to modify PK have failed
+(Track~BQ, v2.0.32).\footnote{Sprint/track designations are anchors into the project's internal chronicle (\texttt{CHANGELOG.md} in the repository).}  Six attempts to modify PK have failed
 (projector, spectral, self-consistent, $R$-dependent, $l$-dependent,
 $l$-dependent on 2D solver), and the ab initio $R_{\rm ref}$
 derivation failed because the relevant scale (${\sim}3$~bohr) is
@@ -969,14 +969,14 @@ for binding recovery. The genuine engineering closure is
 within-block ERIs} --- not eigenvalue substitution. Two architectural
 options remain:
 \begin{enumerate}
-  \item \textbf{Physical-$n$ hydrogenic relabeling (1-week sprint)}:
+  \item \textbf{Physical-$n$ hydrogenic relabeling (sprint-scale)}:
     rewrite the orbital-state lists so that block\_n=1 with $l=0$ on
     Na uses physical $n=3$ hydrogenic shape (Slater integrals,
     $V_{ne}$ integrals, all evaluated at the physical principal
     quantum number) at $Z_{\rm orb}$ chosen to match the asymptotic
     Na valence Z. Cheap, uses existing hydrogenic Slater
     infrastructure, but introduces a minor convention break.
-  \item \textbf{Strict-Schmidt orthogonalization (multi-week sprint)}:
+  \item \textbf{Strict-Schmidt orthogonalization (beyond sprint scale)}:
     explicitly Schmidt-subtract the heavy-atom core orbitals from the
     valence basis before computing all matrix elements; mathematically
     definitive but requires re-implementing $h_1$, ERI, and cross-$V_{ne}$
@@ -1123,14 +1123,14 @@ second-row alkali hydrides decomposes into three structural layers:
 
 \paragraph{Three named follow-on directions.}
 \begin{enumerate}
-  \item \textbf{NaH $n_{\max}=3$ test} ($\sim 1$~week, highest priority).
+  \item \textbf{NaH $n_{\max}=3$ test} (sprint-scale, highest priority).
     Bundled with the screened-path multi-zeta combination (currently
     flagged with \texttt{NotImplementedError}).  Falsifies or confirms
     Layer~3 as a basis-size artifact: if the larger basis lets the FCI
     ground state acquire Na-side weight, multi-zeta is load-bearing
     and the $\alpha$-PES verdict flips POSITIVE.
   \item \textbf{Cross-$V_{ne}$ kernel-shape substitution}
-    ($\sim 1$-$2$~weeks, parallel).  Track~3's diagnostic (2026-05-09)
+    (sprint-scale, parallel).  Track~3's diagnostic (2026-05-09)
     identified this as the original named target with a substantial
     $-0.674$~Ha differential at $R = 2.5$~bohr.  The $\alpha$-PES Step~1
     finding ($-0.135$~Ha) is a smaller-effect cousin; the
@@ -1139,7 +1139,7 @@ second-row alkali hydrides decomposes into three structural layers:
     to use physical-$n$ orbital decomposition on the heavy-atom side
     instead of $n_\text{block}$ hydrogenic.
   \item \textbf{W1c + multi-zeta combination by removing
-    NotImplementedError} ($\sim 2$-$3$ days, bundled with item~1).
+    NotImplementedError} (bundled with item~1).
     Architectural unification of the bare and screened paths.
 \end{enumerate}
 
@@ -1259,7 +1259,7 @@ architectural-absence finding).} Following the F1 max\_n=3 CLEAN NEGATIVE,
 the next named target was the cross-$V_{ne}$ kernel-shape substitution on
 the H partner side (Track~3's P2). Per the diagnostic-before-engineering
 rule, F2 ran the Step~1 algebraic diagnostic before committing to a
-1-2~week production extension: five matrix elements computed via converged
+production extension: five matrix elements computed via converged
 3D numerical quadrature vs the framework's default multipole expansion at
 $L_\text{max}=4$. Largest converged differential: $2.0\times 10^{-5}$~Ha
 on the H 1s diagonal cross-$V_{ne}$ contribution, which is $2.7\times 10^{-4}
@@ -1409,7 +1409,7 @@ F1$\to$F2$\to$F3 arc).}
 \textbf{Three named F4 follow-on candidates.}
 \begin{enumerate}\setlength\itemsep{0pt}
 \item \textbf{F4 — Bonding-orbital Phillips-Kleinman extension (TOP PRIORITY,
-  ${\sim}1$~week).} Extend
+  sprint-scale).} Extend
   \texttt{geovac/phillips\_kleinman\_cross\_center.py} to act on the
   cross-block-h1-constructed bonding orbital (rather than on the
   partner-side valence diagonal). After cross-block h1 is added in F3's
@@ -1423,7 +1423,7 @@ F1$\to$F2$\to$F3 arc).}
   $2\times$ experimental binding energy. Extends existing PK infrastructure
   rather than requiring new architecture.
 \item \textbf{F3-extend: $l>0$ cross-block h1 + non-axial geometry
-  ($\sim 2$~weeks).} Current F3 cross-block h1 is s-s only; mixed angular
+  (a major structural extension).} Current F3 cross-block h1 is s-s only; mixed angular
   momentum requires spherical harmonic decomposition at both centers with
   their own quantization axes, bipolar harmonic algebra or full 3D
   Lebedev quadrature, and non-collinear geometry handling. Necessary to
@@ -1479,8 +1479,8 @@ candidates and refined the W1e mechanism into a structurally distinct
 multi-sub-mechanism reading. \textbf{None of the three candidates
 closes W1e on its own; together they account for at most
 ${\sim}10$--$25\%$ of the wall, leaving ${\sim}65$--$90\%$ as
-genuinely-deep correlation requiring architectural lifts at the
-multi-week+ scale.}
+genuinely-deep correlation requiring architectural lifts beyond
+sprint scale.}
 
 \textbf{F4 --- bonding-orbital PK extension RULED OUT
 (rank-1 PK saturation $\to 43\%$ closure ceiling).} The Step~1
@@ -1565,10 +1565,10 @@ each with a measured closure ceiling within sprint-scale reach:
 \item \textbf{W1e-deep-correlation-residual:} ${\sim}65$--$90\%$ of
   the wall remains beyond mean-field + single-determinant +
   basis-enlargement architecture. Closure candidates: Schmidt
-  orthogonalization at the basis-construction level (${\sim}3$--$4$
-  weeks), explicit treatment of [Ne] core as fully correlated
-  (multi-month, requires occupancy-restriction FCI infrastructure
-  not present in framework), or acceptance that the framework's
+  orthogonalization at the basis-construction level (beyond sprint
+  scale), explicit treatment of [Ne] core as fully correlated
+  (a major structural extension: requires occupancy-restriction FCI
+  infrastructure not present in framework), or acceptance that the framework's
   structural-skeleton scope (CLAUDE.md §1.7) does not autonomously
   extend to binding energetics at the second-row regime within
   current compute budgets.
@@ -1614,7 +1614,7 @@ Sprint $\beta$-update F4-F6-APPENDED-TO-F3-BASELINE synthesis:
 \subsubsection{Closure of the W1e sprint-scale candidate space and cross-domain pattern (Schmidt + core correlation, 2026-05-23)}
 \label{sec:w1e_schmidt_core_correlation}
 
-The two named multi-week+ candidates from \S\ref{sec:w1e_refinement_f4_f6}
+The two named beyond-sprint-scale candidates from \S\ref{sec:w1e_refinement_f4_f6}
 (``Schmidt orthogonalization at basis-construction level'' and
 ``fully correlated [Ne] cores'') were tested by Day-1 diagnostics,
 executing the diagnostic-before-engineering rule at sprint-cycle scale.
@@ -1669,7 +1669,7 @@ predicted ceiling), F6 basis enlargement at $n_{\max} = 4$
 ($\sim 10^{-3}$--$10^{-2}$ of wall). The W1e wall is deep
 multi-determinant correlation at the heavy-atom valence/core
 boundary in the second-row regime; closure candidates beyond
-sprint scale are multi-month architectural commitments
+sprint scale are major architectural commitments
 (self-consistent $Z_\text{eff}$ depending on cross-center
 electronic density; fully-correlated all-electron treatment
 incompatible with the two-electron active-space architecture;
@@ -1736,32 +1736,32 @@ inverted from screening-potential mode to explicit-orbital mode;
 \texttt{geovac/multi\_zeta\_orbitals.py} provides the basis
 infrastructure). The chemistry-side distinguishing feature is that
 the relevant external input (atomic-structure data) is
-\emph{closer at hand} than UV-completion physics --- multi-week to
-multi-month architectural commitments rather than a fundamental
+\emph{closer at hand} than UV-completion physics --- substantial
+architectural commitments beyond sprint scale rather than a fundamental
 UV completion outside the framework.
 
 \textbf{Closure-prospect classification: (a-with-caveat)
-sprint-scale exhausted but multi-month tractable for components,
-with a calibration-external residual whose magnitude depends on
-the Reading A vs Reading B verdict.} The three sub-sub-mechanisms
+sprint-scale exhausted but tractable for components as a
+substantial open program, with a calibration-external residual
+whose magnitude depends on the Reading A vs Reading B verdict.} The three sub-sub-mechanisms
 identified at F4-F6 (basis-truncation $\sim 10.2\%$ / Hartree-pressure
 $\sim 25.7\%$ / deep-correlation-residual $65$--$90\%$) stack to
 $\sim 35$--$45\%$ combined ceiling at sprint scale; the question is
-whether multi-month implementation pushes this to $\sim 85$--$95\%$
+whether implementation beyond sprint scale pushes this to $\sim 85$--$95\%$
 (Reading A: active-space deficit, well-defined CCSD-class closure)
 or to $\sim 30$--$50\%$ leaving a structurally bounded residual
 (Reading B: architectural-scope boundary analogous to H1's
 Yukawa-undetermined verdict).
 
-\textbf{Explicit-core 12-electron HF on NaH (~2--4 weeks) is the
+\textbf{Explicit-core 12-electron HF on NaH is the
 named load-bearing diagnostic.} Implement HF on the full 12-electron
 NaH problem in the framework's existing basis machinery (single-zeta
 CR67 + multi-zeta for valence, $\sim 120$-orbital matrix size at
 $n_{\max} = 2$). Run 8-point PES sweep. Decision-gate: if HF gives
 internal minimum at $R_\text{eq} \in [3.0, 4.5]$~bohr with
 $D_e \in [0.04, 0.12]$~Ha $\rightarrow$ \textbf{Reading A confirmed}
-(W1e is active-space deficit; multi-month CCSD-class post-HF closure
-path is well-defined). If HF still gives monotone-descending PES
+(W1e is active-space deficit; a well-defined CCSD-class post-HF closure
+path exists beyond sprint scale). If HF still gives monotone-descending PES
 $\rightarrow$ \textbf{Reading B confirmed} (W1e is structurally tied
 to the composed-architecture choice; chemistry-domain
 architectural-scope boundary established, structurally analogous to
