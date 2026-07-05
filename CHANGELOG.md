@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.68.1] - 2026-07-05
+
+**`/sprint-close` for the layer-discipline arc (v4.67.8–v4.68.0).** Canonical umbrella memo `debug/sprint_layer_discipline_arc_memo.md` (the three rules 11–13 + C18 build/harden/promote history + sweep execution + the 11/11-seed verification record + honest scope); CLAUDE.md §2's two arc bullets consolidated into one memo-pointing one-liner (replace-never-append). No paper/code content in this release. Steps skipped with cause: §3 dead-end row (no failed approach — remediation arc), paper edits (landed in-arc), MEMORY (2 rules + 1 correction landed in-arc), reference tables (no new benchmarks/mappings), /regression (no production code in the arc's diff).
+
 ## [4.68.0] - 2026-07-05
 
 **Corpus-wide duration/register sweep COMPLETE + C18 promoted to all-FAIL + Q1′/Q2′ adjudication + repo tidy (PDF-tracking policy, Notes.bib untracked).** The three follow-ons from the v4.67.9 session, PI-directed ("sounds like we need to do 1, 2, and 3").
