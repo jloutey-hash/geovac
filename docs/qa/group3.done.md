@@ -52,8 +52,13 @@ claim restates them (C7).
   - **Paper 56** = Tannakian/cosmic-Galois reconstruction as a **theorem-grade
     closed immersion at finite cutoff** with honest scope (infinite-cutoff
     equality NOT claimed; Reading A).
-  - **Paper 57** = forced/free P5 packing-reachability discriminator at its
-    **true 98.3%** with the I3 ambiguous misclassification noted, not "100%".
+  - **Paper 57** = forced/free P5 packing-reachability is an **internal-consistency
+    check**, not an independent discriminator — the packing-reachable tag is the F/C
+    label by construction, so its **98.3%** is an agreement rate (not a discovered
+    accuracy), with the I3 ambiguous case noted, not "100%" (Paper 57 §6.1). The
+    genuine discriminator signal is the two-family decomposition. *(A reviewer
+    presenting P5 as a genuine discriminator / "98.3% accuracy" / a principle that
+    "decides forcedness" is a MATERIAL overstatement.)*
   - *(Bite-1: Paper 22 angular sparsity theorem; Paper 24 π-free Bargmann–Segal
     lattice + Coulomb/HO six-layer asymmetry; Paper 31 A/D partition — certified.)*
 - **No branch-specific C14+** (no DESCOPED/PARTIAL papers in group3 scope).
@@ -139,3 +144,12 @@ claim restates them (C7).
   open-section theorems backed by debug/ not tests/. Convergence arc: keystone
   corrections → missed-instances → C2-leg → D(4)+broken-ref → test-hygiene
   NITs. **BITE 2 CERTIFIED.** Seed key `debug/qa/group3_recert4_seed_key.json`.
+- 2026-07-05 — **C8 Paper 57 headline tightened** (PI direction, post-Topos-4 v4.70.0
+  delta-QA): "P5 packing-reachability **discriminator** at 98.3%" → "P5 is an
+  **internal-consistency check, not a discriminator** (98.3% = agreement rate, not
+  accuracy; Paper 57 §6.1)". Brings the DoD into line with Paper 57's own body (the
+  §6.1 tautology resolution) and the corrected field-guide seam paragraph; the
+  looser "discriminator/accuracy" wording was flagged by the Topos-4 synthesis
+  reviewer as the source of the field-guide overstatement. No criterion changed;
+  the headline statement is made tier-honest (a deliberate, dated edit — not a
+  mid-review goalpost move; bite-2 cert stands).
