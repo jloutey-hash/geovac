@@ -417,15 +417,32 @@ valuation freedom is itself a site-side fact.  Four computed legs
     $M_3$:\ $\{0, 4, 6\}$;\ $\HH$ (real form):\ $\{0, 2\}$ (the
     $\C_q$ family over $S^2/\{\pm\}$).
   \item \textbf{The B5 correspondence} (MEASURED, order-invariant
-    level):\ $\mathcal{C}(M_2(\C))$ and $\mathcal{C}(\HH)$ have
-    \emph{identical} order invariants (height-$1$ fan;\ one point
-    stratum plus one $2$-parameter family of maximal elements), while
-    $\mathcal{C}(M_3(\C))$ differs (height $2$).  The site is blind
-    exactly at the catalogue's lone admitted-not-forced entry (B5,
-    $\HH$ vs $M_2(\C)$, Door~4c) and sighted exactly at $k = 3$ where
-    the Hurwitz fallback forces $M_3(\C)$:\ the catalogue's third
-    value corresponds to the degenerate dimension of site
-    reconstruction, decided without consulting any witness derivation.
+    level):\ $\mathcal{C}(M_2(\C))$ is the height-$1$ flat fan (one
+    point stratum plus one $2$-parameter family of maximal
+    $2$-dimensional subalgebras, moduli $\R P^2$, with no intermediate
+    elements) --- the minimal non-rigid Boolean block, which is
+    \emph{precisely} the excluded case of the D\"oring--Harding /
+    Hamhalter reconstruction theorems~\cite{doring_harding2016,%
+    hamhalter2011}:\ an order isomorphism $\mathcal{C}(A) \to
+    \mathcal{C}(B)$ is induced by a Jordan *-isomorphism for all $A$
+    with \emph{no type I$_2$ summand} (and $A \ne \C \oplus \C$), and
+    type I$_2$ is exactly $M_2(\C)$.  At $k = 3$ the appearance of
+    intermediate subalgebras (height $2$) restores this rigidity.  We
+    observe that $\mathcal{C}(\HH)$, for the real *-algebra $\HH$ whose
+    complexification is $\HH \otimes_\R \C \cong M_2(\C)$, shares this
+    height-$1$ fan and the same $\R P^2$ maximal-element moduli, so the
+    two candidates at the catalogue's lone admitted-not-forced entry
+    (B5, $\HH$ vs $M_2(\C)$, Door~4c) are indistinguishable by these
+    order invariants;\ we record this $M_2(\C)/\HH$ coincidence as a
+    framework observation (not located in the Bohrification literature,
+    which treats complex C*-algebras).  We do \emph{not} claim the
+    poset fails to determine $M_2(\C)$ as a complex C*-algebra --- for
+    finite-dimensional complex $A$, $\mathcal{C}(A)$ determines $A$ up
+    to *-isomorphism with no exception~\cite{lindenhovius2015} --- only
+    that the Jordan-induction / automorphism-rigidity reconstruction
+    degenerates at type I$_2$, which is exactly the $k = 2$ slot where
+    the catalogue admits $\HH$ over $M_2(\C)$.  This is decided from
+    site properties without consulting any witness derivation.
   \item \textbf{Machine-verified Kochen--Specker witness} (bit-exact):\
     the orthogonality hypergraph of primitive integer rays in $\R^3$
     with entries in $\{-2, \ldots, 2\}$ ($49$ rays, $26$ orthonormal
@@ -490,6 +507,34 @@ valuation freedom is itself a site-side fact.  Four computed legs
     the same-center case (dimension $3$ only) --- the site restatement
     of cross-center composition being the framework's hardest wall.
     Backing:\ \texttt{tests/test\_topos3\_exact\_meet.py}.
+  \item \textbf{General-parameter vanishing lemma} (exact, Sprint
+    Topos-4):\ the by-product lemma of item~5 is closed in general
+    form.  For same-$l$ inter-frame overlaps the exact unnormalized
+    overlap factors as $S = (\text{positive prefactor}) \cdot
+    P_{n_1, n_2, l}(t)$ in the rate variable
+    $t = (Z_1/n_1 - Z_2/n_2)/(Z_1/n_1 + Z_2/n_2) \in (-1, 1)$, with
+    $P$ an explicit polynomial of degree $D = n_1 + n_2 - 2l - 2$
+    (for $n_1 = n_2$, $P$ is even in $t$ by frame-swap symmetry;\ for
+    the single-radial-node family $n_1 = n_2 = l + 2$, where $D = 2$, it
+    is exactly the symmetric Jacobi / Gegenbauer polynomial $P_2^{(l,l)}$,
+    but for higher $D$ it is not in general a classical Jacobi), so
+    $S = 0 \Leftrightarrow P(t) = 0$.  The roots
+    fall into three structural families:\ (i)~$t = 0$ (rate
+    coincidence), a root \emph{exactly} when $|n_1 - n_2| \ge 2$
+    (proved over the $n, l$ grid --- the structural form of item~5's
+    exhaustively-verified $(\Leftarrow)$ direction);\ (ii)~$t =
+    (n_2 - n_1)/(n_2 + n_1)$ (equal-exponent hydrogenic orthogonality
+    $\langle n_1 l | n_2 l \rangle = 0$), always a root for
+    $n_1 \ne n_2$;\ and (iii)~residual roots, generically
+    \emph{irrational}.  The ``sporadic'' off-coincidence zeros are
+    exactly the \emph{rational} residual roots:\ in the scan $Z, n < 7$
+    there are precisely two families, $(n_1, n_2, l) = (5, 5, 3)$ with
+    $P = 1 - 9 t^2$ (roots $\pm 1/3$, the item~5 boundary case,
+    realised at $(Z, Z') = (1, 2)$) and $(4, 5, 2)$ with roots
+    $\pm 1/2$;\ the integer zero census fully accounts $253 = 37 +
+    210 + 6$ over the three families.  Individual-element zeros do not
+    disturb the block \emph{connectivity} on which items~5--6 rest.
+    Backing:\ \texttt{tests/test\_topos4\_vanishing\_lemma.py}.
 \end{enumerate}
 
 Under this dichotomy the four theorem-grade non-selection results of
@@ -502,23 +547,51 @@ Hopf-base $S^2$, an $M_1$ site object) and an external \emph{point}
 (the valuation $\hat n$) --- the ``conditional'' tag is precisely the
 open question whether the internal space is the GeoVac $S^2$.
 
+\paragraph{The Family-1 census (Sprint Topos-4).}  Mapping all $17$
+multi-focal ($\mathrm{MF} > 1$) calibration entries onto the site
+mechanism shows that \emph{Family~1 is not mechanism-homogeneous}.  The
+meet-collapse $\to$ join-obstruction mechanism (items~5--6) is the
+Bohr-site image of the \emph{spatial-composition sub-sector
+specifically} (G1, G2, G5;\ Paper~32
+Theorem~\texttt{thm:spatial\_composition\_radial\_wall}) --- only $3$
+of the $17$ entries.  The other $14$ reach externality by
+\emph{valuation, not composition}:\ six via a test-function / cutoff
+valuation (E7, E8, G3, G4 renormalization;\ D5, D6 cutoff moments;\
+Theorems \texttt{thm:single\_cutoff\_spectral\_action},
+\texttt{thm:cutoff\_function\_external}), and eight via a point / scale
+/ period valuation (F1 Yukawa and its duplicate catalogue label G6;\
+F4, F5, F6, F7;\ E6, I1).  The
+$\mathrm{MF} > 1$ tag that defines Family~1 is therefore orthogonal to
+the site-mechanism split:\ at the site level the two valuation routes
+carry the \emph{same} status as Family~2 (valuation the site cannot
+supply), so the operative site taxonomy is \textbf{meet-collapse}
+(spatial-frame composition) \textbf{vs.\ valuation} (everything else,
+Family~2 included).  This sharpens item~5's headline from ``Family-1
+externality $=$ meet-collapse'' (an over-generalisation from the two
+computed spatial instances) to its precise form:\
+spatial-composition-sub-sector externality $=$ meet-collapse.
+
 \emph{Honest scope.}  The dichotomy is a \emph{partial} meta-theorem:\
 it covers the skeleton (commutative $\mathcal{A}_{\mathrm{GV}}$, Bohr
 topos Boolean), the inner-factor family (Family~2, via the
 Kochen--Specker obstruction), the admitted value (site degeneracy),
-and the valuation-freedom dimensions --- all decided from site
-properties without locating witnesses (the non-circularity P5 could
-not achieve).  The multi-focal family (Family~1, $17$ entries) is formalized at
-\emph{mechanism} level on both corpus-faithful instances (item~5:\ the
-mixed-exponent frame pair;\ item~6:\ the two-center pair, confirming
-the pre-registered $m$-grading prediction);\ the extension to the full
-$17$-entry census and a general-parameter form of the vanishing lemma
-remain open follow-ons, as are the full $60$-entry classification and
-the relation to general site-reconstruction theorems at the
-exceptional dimension $k = 2$ (literature verification pending).  Nothing here
-touches the Observation status of the combination rule $K$:\ its
-\emph{value} classifies as an external valuation, consistent with and
-not upgrading that label.
+the valuation-freedom dimensions, and --- at mechanism level on the
+three spatial-composition entries --- the meet-collapse route of the
+multi-focal family, all decided from site properties without locating
+witnesses (the non-circularity P5 could not achieve).  The
+general-parameter vanishing lemma (item~7) and the $17$-entry census
+(above) are now closed;\ the relation to general site-reconstruction
+theorems at the exceptional dimension $k = 2$ is stated affirmatively
+in item~2 above (D\"oring--Harding / Hamhalter type-I$_2$
+exception~\cite{doring_harding2016, hamhalter2011}, with the
+non-degeneracy of the complex isomorphism class kept
+explicit~\cite{lindenhovius2015}).  The full $60$-entry classification
+(upgrading the F/C column to a site-derived column) and internal-logic
+statements of the eight non-selection theorems remain open catalogue
+follow-ons.  Nothing here touches the Observation status of the
+combination rule $K$:\ its \emph{value} classifies as an external
+valuation (route~3 of the census), consistent with and not upgrading
+that label.
 
 \subsection{Sprints C3 + F3 closure:  four theorem-grade non-selection results}
 \label{sec:c3_closure}
@@ -681,6 +754,15 @@ J. Bertrand, \emph{Th\'eor\`eme relatif au mouvement d'un point attir\'e vers un
 
 \bibitem{boyle_farnsworth2018}
 L. Boyle and S. Farnsworth, \emph{A new algebraic structure in the standard model of particle physics}, arXiv:1604.00847.
+
+\bibitem{doring_harding2016}
+A. D\"oring and J. Harding, \emph{Abelian subalgebras and the Jordan structure of a von Neumann algebra}, Houston J. Math. \textbf{42} (2016) 559--568;\ arXiv:1009.4945.  (Thm 3.4:\ an order isomorphism of the poset of abelian subalgebras is induced by a Jordan *-isomorphism for algebras with no type I$_2$ summand and $\ne \C \oplus \C$.)
+
+\bibitem{hamhalter2011}
+J. Hamhalter, \emph{Isomorphisms of ordered structures of abelian C*-subalgebras of C*-algebras}, J. Math. Anal. Appl. \textbf{383} (2011) 391--399;\ doi:10.1016/j.jmaa.2011.05.035.  (C*-algebra extension of the reconstruction theorem;\ uniqueness holds as long as $A$ is not two-dimensional.)
+
+\bibitem{lindenhovius2015}
+A. J. Lindenhovius, \emph{Classifying finite-dimensional C*-algebras by posets of their commutative C*-subalgebras}, Int. J. Theor. Phys. \textbf{54} (2015) 4615--4635;\ arXiv:1501.03030.  (Thm 1:\ for finite-dimensional $A$, $\mathcal{C}(A)$ determines $A$ up to *-isomorphism, with no type I$_2$ exception.)
 
 \bibitem{debug_yukawa_pslq}
 GeoVac sprint memo:  \texttt{debug/sprint\_yukawa\_pslq\_memo.md} (2026-06-03):  Sprint Yukawa-PSLQ clean negative across 162 PSLQ cells.
