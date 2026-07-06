@@ -663,6 +663,30 @@ The $n_{\max} = 3$ analytical PES (5 R-points):
 \end{ruledtabular}
 \end{table}
 
+\subsection{Fixed-geometry energy versus well shape}
+
+The convergent energy and the persistent outward $R_{\rm eq}$ drift are two
+independent read-outs of the same residual: the energy error is its magnitude
+at a fixed geometry, whereas $R_{\rm eq}$ is fixed by its \emph{slope} at the
+true minimum.  The well \emph{curvature} is a third, independent read-out.  A
+harmonic fit to the $n_{\max}=2$ balanced PES about its minimum gives
+$\omega_e \approx 2040$~cm$^{-1}$ for LiH, some $45\%$ above the experimental
+$1406$~cm$^{-1}$ (force constant $0.14$ vs.\ $0.066$~Ha/bohr$^2$).  The balanced
+construction---the more accurate of the two architectures on \emph{energy}
+($0.20\%$ at $n_{\max}=3$)---therefore misplaces both the position \emph{and}
+the curvature of the minimum: its residual is concentrated in the \emph{shape}
+of the potential well, not in the fixed-geometry energy (the well depth $D_e$
+itself is a separate, distinct read-out and is not extracted here).  This
+mirrors the composed/PK result (Paper~17), where the \emph{parameter-free}
+pseudopotential barrier reproduces $\omega_e$ to $4.6\%$ but caps the attainable
+energy accuracy.  For LiH the two architectures thus trade energy accuracy
+against curvature accuracy, and neither reproduces the full well; universality
+of this trade across hydrides is untested (a measured result; the curvature
+quoted here is the $n_{\max}=2$ fine-grid value for LiH).  For single-geometry applications
+(fixed-nucleus qubit Hamiltonians) only the energy read-out enters, which is why
+the balanced construction remains well matched to that use despite its
+well-shape errors.
+
 \subsection{Summary of conjecture status}
 
 Conjecture~\ref{conj:sparsity} (Pauli count): \textbf{confirmed}.

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.70.0 (July 5, 2026)
+**Version:** v4.71.0 (July 6, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -136,6 +136,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Chemistry-error projection decomposition (2026-07-06, v4.71.0):** balanced chemistry error = convergent fixed-geometry energy + structural well-SHAPE defect (LiH ω_e +45% too stiff); overlap-slope tilt law FALSIFIED (curve-fit artifact). Paper 19 §new + test. See debug/sprint_chem_error_projection_memo.md.
 - **Sprint Topos-4 GO (2026-07-05, v4.70.0):** the three v4.69.0 Bohr-site follow-ons closed (P57 §open). k=2 lit-check → **P57 B5 corrected** (type-I₂ Jordan-induction exception, Döring–Harding/Hamhalter; NOT iso-class blindness per Lindenhovius; M₂/ℍ = framework observation; +3 cites). General vanishing lemma: S = prefactor·P(t), explicit degree-D poly (Gegenbauer P₂^(l,l) only for the single-radial-node family n=l+2; even-in-t but not classical-Jacobi for higher D — v4.70.0 delta-QA scope fix); zeros = rate-coincidence(⟺|Δn|≥2) ∪ same-Z-orthogonality ∪ residual; sporadic = rational residual roots; census 253=37+210+6; test-pinned. 17-entry census: **meet-collapse = spatial-composition sub-sector only (3/17); Family-1 NOT mechanism-homogeneous** (site taxonomy = meet-collapse vs valuation). See debug/sprint_topos4_followons_memo.md.
 - **Sprints Topos-1+2+3 GO (2026-07-05, v4.69.0):** Bohr-site meta-theorem for the forced/free seam (P57 §open): B5 = site-degeneracy, inner-factor values KS-external (machine witness), I3 factorized; Family-1 = meet-collapse→join-obstruction on BOTH instances — meet = angular algebra (same-center) and m-grading (two-center, prediction confirmed); ladder 14→9→5. Follow-ons closed in Topos-4 (v4.70.0). See debug/sprint_topos{1,2,3}_*_memo.md.
 - **Field guide de-apparatused + cold-reader QA dimension (2026-07-05, v4.68.3):** conventions ¶ deleted, 17 loci stripped to self-contained prose (rule 13 tiered-strict); new criterion-6 cold-reader pass found 4 more MATERIALs incl. a rendering bug — all fixed. See CHANGELOG v4.68.3.
@@ -165,7 +166,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 | H₂ | 96.0% D_e | Level 4, l_max=6, 61 channels | 15 |
 | LiH | R_eq 5.3% | Composed, l-dependent PK, l_max=2 | 17 |
 | BeH₂ | R_eq 11.7% | Composed, full 1-RDM exchange | 17 |
-| H₂O | R_eq 26% | Composed, 5-block, zero parameters | 17 |
+| H₂O | R_eq 19.4% | Composed, 5-block, zero parameters | 17 |
 | LiH (4N) | R_eq 63.5% | Full 4e mol-frame, PK-free | 17 |
 | Composed Pauli | O(Q^2.5) | 51x-1712x vs Gaussian, 35 composed molecules | 14 |
 | Atomic Pauli | O(Q^3.15) | 1.3x-8.1x vs cc-pVDZ/cc-pVTZ | 14 |
@@ -292,6 +293,7 @@ Critical institutional memory. Do not re-derive these dead ends. Full details in
 | Paper 56 closed-immersion injectivity via per-sector η period map (2026-06-16) | 1 | Genuine M3 period-vector Gram is rank-1, det 0 (per-sector content is a single scalar η_{(n,l)} → collinear; collapses like M1/M2). The `gram=eye(n)` backing was tautological. C4 corrected to the abelianized/rank-1 image (Reading A); positive injectivity would need a sector-resolved rank-≥2 period map that does not exist. See debug/paper56_injection_validation_memo.md. |
 | Nested 2D adaptive quadrature for two-center overlap SUPPORT questions (Topos-3 attempt, 2026-07-05) | 1 | Support/connectivity needs exact zeros; quadrature cannot prove a zero and costs hours with no partial output (machinery correct — ⟨1s\|1s⟩(R) to 12 digits — cost disqualifying). Use the Mulliken/Ruedenberg auxiliary-integral closed forms (A_n/B_n): exact, fast, decidable. See CHANGELOG v4.69.0. |
 | Graph counting/degeneracy measure as Born-rule generator (WH8 Step-1, 2026-07-01) | 1 | Counting = Born exactly on the flat locus and only there (exact-rational TV=1/3 generic 4-multiplet); TV=0.86 vs the He graph-native CI ground state (90.8% on 1s²); the locus is dynamically unstable under the graph's own H (t², exponent 2.00). Born measure = the observation projection's exchange constant, Gleason-unique. Complements the 2026-05-26 derivation-direction closure (Paper 34 §VIII). See debug/sprint_wh8_born_probe_memo.md. |
+| Overlap-slope law for the balanced-solver R_eq tilt (2026-07-06) | 1 | ε'(R) ∝ 1s–1s bond-overlap slope S'(R) FALSIFIED: the R²=0.996 fit was an intercept-driven curve-fit artifact (pointwise ratio ε'/S' spans 114%, changes sign); ε'(R) is ~linear while any two-center overlap slope is exponential. The near-equilibrium residual is a low-order curvature-mismatch polynomial, not overlap-shaped. See debug/sprint_chem_error_projection_memo.md. |
 
 ---
 
@@ -369,7 +371,7 @@ The core organizational principle of the project. Each electron configuration ha
 | 4N | LiH (2-center, 4e) | Full mol-frame hypersp. (SO(12)) | R_eq 63.5% (l_max=2, 2D variational; unbound D_e) | 17 |
 | 5 | LiH (core+valence) | Composed (Level 3 + 4) | R_eq 5.3% | 17 |
 | 5 | BeH₂ (polyatomic) | Composed (Level 3 + 4) + exchange | R_eq 11.7% | 17 |
-| 5 | H₂O (triatomic) | Composed (Level 3 + 4) + lone pairs | R_eq 26% | 17 |
+| 5 | H₂O (triatomic) | Composed (Level 3 + 4) + lone pairs | R_eq 19.4% | 17 |
 | Nested | Be (1-center, 4e) | S¹¹ (SO(12)), H-set | Q=10, 112 Pauli, 4.9% | Track DF |
 
 *Level 4N note:* Level 4N is the exact N-electron generalization of Level 4's mol-frame hyperspherical coordinates (SO(3N) replacing SO(6), S_N antisymmetry replacing the gerade constraint). Level 5 (composed geometry) approximates Level 4N, trading exact inter-group antisymmetry for 144x angular compression via PK. The l_max=2 result (R_eq ≈ 1.1 bohr, 63.5% error) demonstrates that equilibrium exists without PK. Track AR (v2.0.23) confirmed that D_e overcounting was an adiabatic artifact: the 2D variational solver gives E_min = -7.79 Ha (variational bound respected, above exact -8.07) with D_e = -0.19 Ha (unbound), versus the adiabatic solver's D_e = +0.49 Ha (5.3x exact). The l_max=2 S₄ [2,2] angular basis is genuinely insufficient for LiH binding. Track AS (v2.0.23) confirmed composed encoding is categorically sparser than full N-electron encoding (334 vs 3,288 Pauli terms, 20x lower 1-norm). Composed geometry's 144x angular compression and structural sparsity are essential, not approximations of convenience.

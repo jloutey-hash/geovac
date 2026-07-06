@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.71.0] - 2026-07-06
+
+**Sprint: chemistry-error projection decomposition (diagnostic).** PI-directed exploration of whether the chemistry solver's error can be characterized as projection content -- the chemistry-solver analog of the §1.8 focal-length program, which did not previously exist. Prior-art-cleared (NEW as an integrated program: the ingredients existed scattered, but no signed cross-system atlas, no PK-residual model, and §1.8 / Paper 34 §V.C are atomic-precision-only). Diagnostic-before-engineering mode (PK has 6+ honest negatives).
+
+### Added
+- **Paper 19 §"Fixed-geometry energy versus well shape"** (new subsection): the balanced-coupled residual separates into a convergent fixed-geometry ENERGY component and a structural well-SHAPE component. The balanced (PK-free) construction -- the more energy-accurate of the two architectures (0.20% at n_max=3) -- has a well ~45% too stiff for LiH (omega_e ~= 2040 vs 1406 cm^-1; force constant 0.14 vs 0.066 Ha/bohr^2), so its residual is concentrated in the shape (position + curvature), not the fixed-geometry energy. Mirrors the composed/PK result (Paper 17: the parameter-free PK reproduces omega_e to 4.6% but caps energy accuracy) -- the two architectures trade energy accuracy against curvature accuracy (LiH; universality untested). For single-geometry qubit Hamiltonians only the energy read-out enters, which is why the balanced construction remains well matched to that use.
+- **tests/test_paper19_well_shape.py** (backing, slow ~80s): live balanced LiH n_max=2 curvature at its minimum -> omega_e ~= 2040 (+45%), curvature 2.11x k_true, R_eq +6.9%. Offset-immune (2nd-derivative), sidestepping the raw-E_coupled core-double-count that caused a prior false-positive. QA delta: code-reviewer PASS (independently reproduced the curvature across four fit schemes, max residual 0.02 mHa); claims-reviewer MATERIAL-SMALL, all reconciled (incl. "tuned" -> "parameter-free" for Paper 17's 4.6% PK, LiH-scope tag, superlative softened, "depth" -> "fixed-geometry energy").
+- **docs/claim_test_matrix.md**: new BACKED-SOUND row for the well-shape claim (complements the existing `test_paper19_balanced_lih` E/R_eq backing).
+- **docs/validation_benchmarks.md**: LiH balanced omega_e well-curvature row.
+
+### Changed
+- **Doc bug fix (H2O composed R_eq 26% -> 19.4%):** verified against Paper 17 (which already reads 19.4% and labels 26%/1.34 bohr the superseded value); corrected the stale figure in CLAUDE.md §2 and §5 (§5 on explicit PI direction) and docs/accuracy_target_analysis.md (two spots).
+
+### Closed (diagnostic -- negative)
+- **Overlap-slope law FALSIFIED.** The balanced tilt eps'(R) is not proportional to the 1s-1s bond-overlap slope S'(R): the R^2 = 0.996-0.9998 regressions were intercept-driven curve-fit artifacts (pointwise ratio eps'/S' spans 114% and changes sign). eps'(R) is ~linear while any two-center overlap slope is exponential -- the residual near equilibrium is a low-order (curvature-mismatch) polynomial, not overlap-shaped. No zero-parameter tilt model in hand.
+- **In-sprint correction:** the "1.5-2.2x too stiff" claim was an inner-wall (R_true) evaluation artifact; re-anchored at each curve's own minimum, composed stiffness is ~right (+4.6% at l_max=2, reconciling with Paper 17) and only balanced is genuinely +45%.
+
+Deliverables also include the signed cross-system error atlas (`debug/data/chem_error_atlas.md`) and the autopsy scripts (`debug/sprint_pk_amplification_lih.py`, `debug/sprint_tilt_overlap_law.py`, `debug/sprint_tilt_stiffness_honest.py`). Memo: `debug/sprint_chem_error_projection_memo.md`.
+
 ## [4.70.0] - 2026-07-05
 
 **Sprint Topos-4: the three named Bohr-site follow-ons of the v4.69.0 arc closed = all three GO.** PI-directed ("let's work our follow-ons from last session"). The honestly-small, non-blocking follow-ons named in Paper 57 §sec:open_bohr — the k=2 site-reconstruction literature check, the 17-entry Family-1 census, and the general-parameter vanishing lemma — are closed. One produced a *required paper correction*.

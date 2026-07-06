@@ -13,6 +13,7 @@
 | H2 Level 4 (2D solver) | 96.0% D_e | Molecule-frame hyperspherical |
 | HeH+ Level 4 | 93.1% D_e | Heteronuclear extension |
 | LiH Composed (ab initio PK) | R_eq 6.4% | Composed geometry |
+| LiH balanced ω_e (n_max=2) | +45% (2040 vs 1406 cm⁻¹) | Well-shape defect (Paper 19) |
 | BeH+ Composed | Bound, physical | Transferability |
 | Hyperspherical (20 tests) | 0 failures | Angular + adiabatic + radial |
 | Muonic H energy ratio | < 0.01% | Mass-independence |
