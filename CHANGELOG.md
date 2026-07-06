@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.69.0] - 2026-07-05
+
+**Sprint Topos-1: Bohrification probe of the forced/free seam = GO (positive-partial) — a partial answer to Paper 57 §open's named meta-theorem question, with two theorem-grade legs.** Origin: external-reviewer direction triage (modular-flows and graph-entanglement directions ruled out against the record — the 2026-06-19 compactness closure and the BH-Phase0 §3 row respectively; the topos direction was untested).
+
+### Added
+- **The candidate meta-theorem, tested**: FORCED ⇔ Bohr-site property (no valuation data); CALIBRATION ⇔ valuation the site cannot supply (KS-obstructed); ADMITTED ⇔ site-degenerate; valuation-freedom *dimensions* are site-side facts. Four computed legs, all bit-exact:
+  - **The B5 correspondence (headline)**: C(M₂(ℂ)) and C(ℍ) have identical order invariants (height-1 fan; point + 2-parameter family) while C(M₃) differs (height 2; {0,4,6}) — the site is blind exactly at the catalogue's lone admitted-not-forced entry (B5, ℍ vs M₂, Door 4c) and sighted at k=3. The catalogue's third value = the degenerate dimension of site reconstruction, decided witness-free.
+  - **Machine-verified Kochen–Specker witness (headline)**: primitive integer rays in ℝ³, entries {−2..2} (49 rays, 26 triples, containing the Conway–Kochen family) admit NO 0/1 coloring — exhaustive search; range-1 (13 rays) IS colorable. Dim-≥3 blocks valuation-obstructed / dim-2 choiceable / dim-1 pointed: three site statuses.
+  - Site strata of M_k(ℂ) ↔ partitions (family dim k²−Σλᵢ²); the GeoVac Casimir flag is a maximal chain (dims (2,3,5)/(3,6,14)) with the surprise pin **[A, L²] = 0** — the lattice edge rule conserves l (a selection rule that is itself a site fact); moduli-dimension internality (128/260 pins re-run green).
+  - 14-entry classification sample consistent, incl. both hard cases: **I3 factorizes** (internal *space* = Hopf-base S², external *point* = the valuation n̂ — the "conditional" tag is the open identification of the space); non-circularity audit: no witness derivations consulted (the P5 tautology avoided).
+- **Paper 57 §open remark** "A Bohr-site partial meta-theorem (Sprint Topos-1)" (\S sec:open_bohr) with inline tiers + forward pointer from the sharpened-question paragraph; three-pass clean. Backing: `tests/test_topos1_site_invariants.py` (4/4, self-contained — the P29 no-debug-imports lesson applied at birth); 4 new claim-matrix rows.
+- Honest scope in paper + memo: **partial** — Family 1 (17 multi-focal entries) not formalized (externality as absence of site-composition morphisms = named follow-on); 14/60 sample; B5 at order-invariant level; site-reconstruction literature (k=2 exceptional dimension) flagged for verification; **§13.5 untouched** (K's *value* classifies as external valuation, consistent with and not upgrading the Observation label).
+
+### Closed
+- Reviewer directions 1 (modular flows as algebraic time) and 2 (graph entanglement / discrete RT) ruled out against the existing record — no new work; the dead-end gate did its job.
+
+Memo: `debug/sprint_topos1_bohr_probe_memo.md`; driver `debug/compute_topos1_bohr_probe.py`; data `debug/data/sprint_topos1_bohr_probe.json`.
+
+### Added — Sprint Topos-2 (same day, PI-directed follow-on): Family-1 externality FORMALIZED at mechanism level = GO
+- **The meet theorem (bit-exact, 4-cell panel)**: for two same-center hydrogenic Fock frames at Z=1 vs Z′∈{2,3} (the mixed-exponent setting of the Track-DF/Löwdin wall), the exact rational inter-frame overlap is (l,m)-block-diagonal with **connected support in every block** — so the meet of the two frame MASAs is **exactly the angular-grading algebra** (collapse 14→9 at n_max=3, 30→16 at n_max=4). *Frame composition preserves the angular structure and nothing else* — the site-theoretic statement of the corpus's angular/radial seam (Paper 22 angular sparsity composes; Paper 32 spatial-composition radial wall).
+- **The join obstruction**: connected support + Burnside ⇒ the join is the full M_d per (l,m) block; d≥3 blocks at n_max≥3 ⇒ KS-obstructed (Topos-1's machine witness applies). **Family-1 externality = meet-collapse followed by join-obstruction** — a provably different *route* to valuation-need than Family-2's ab-initio noncommutativity, same terminus: exactly the two-family decomposition's "same surface verdict, different structural reasons."
+- **By-product rate-coincidence lemma** (with honest boundary): Z₁/n₁=Z₂/n₂ ∧ |Δn|≥2 ⇒ exact zero overlap (same-variable Laguerre band structure; exhaustive Z′≤5, n≤6, zero exceptions); the converse is panel-scoped (sporadic off-coincidence zero at Z′=2, l=3, n=n′=5, pinned). Process note: the first-draft biconditional was FALSE and the backing test caught it pre-publication (S(1s¹|2s²)=−1/4, same-rate, nonzero) — the audit loop working.
+- Paper 57 §sec:open_bohr gains item 5 + honest-scope upgrade ("not yet formalized" → "formalized at mechanism level on one corpus-faithful instance"); three-pass clean. Exact pins: 2/27, −1/4, 256/81. Backing `tests/test_topos2_family1_meetjoin.py` (5/5, self-contained, exact Fractions); 3 matrix rows. Follow-ons: two-center instance (m-only meet expected), 17-entry census, general vanishing lemma.
+- Memo: `debug/sprint_topos2_family1_meetjoin_memo.md`; driver + JSON in `debug/`.
+
+### Added — Sprint Topos-3 (exact redo, same day): two-center meet = m-grading CONFIRMED; the meet-dimension ladder completes
+- **The pre-registered prediction confirms exactly**: for two-center frames (Z′∈{1,3} × R∈{1,2}, n_max=3), every inter-frame overlap reduces in prolate coordinates to e⁻ᵖ(U·e^q + V·e⁻^q) with U,V exact rationals (Mulliken–Ruedenberg auxiliary integrals; the classical polynomial cancellation ASSERTED in code; zero-decidable by e^±q independence over ℚ). Every m-block has **full** exact support — the same-center rate-coincidence zeros do not survive displacement — so the **two-center meet is exactly the m-grading algebra**. The **meet-dimension ladder 14 → 9 → 5** (identical → same-center different-focal → two-center) measures composition symmetry; the two-center join is *more* KS-obstructed ({6,3} vs same-center {3}) — the site restatement of cross-center composition being the framework's hardest wall (the chemistry record).
+- Machinery certified against the classical ⟨1s|1s⟩(R)=(1+R+R²/3)e⁻ᴿ as an **exact rational identity** (7/3, 13/3, 103/12 at R=1,2,7/2) — a cross-check that also caught a /2-exponent implementation bug before any conclusion was drawn. Backing `tests/test_topos3_exact_meet.py` (3/3, ~2 s); Paper 57 §sec:open_bohr item 6 + honest-scope update (both corpus-faithful Family-1 instances now done; remaining: 17-entry census, general vanishing lemma). Memo `debug/sprint_topos3_exact_meet_memo.md`.
+- **Tool lesson (the reason this took two attempts)**: the first attempt used nested 2D mpmath quadrature — machinery correct (12-digit smoke tests) but hours of runtime with no partial output, and quadrature categorically cannot prove the exact zeros a support question needs; killed at PI call. The exact route delivered the same answer in under a minute. §3 row recorded (the algebraic-first violation); the parked quadrature driver kept with its status header as the incident artifact (`debug/compute_topos3_two_center_meet.py`).
+
+## [4.68.3] - 2026-07-05
+
+**Field guide de-apparatused (the conventions-paragraph approach rejected by the PI, replaced by full self-containment) + the cold-reader QA dimension added and immediately exercised.**
+
+### Changed
+- **The "Reading conventions" paragraph DELETED** — the PI's diagnosis accepted: a paragraph teaching readers internal jargon (sprints, dates, CLAUDE.md) institutionalizes the register defect in the corpus's front door rather than fixing it. All 17 body loci stripped: sprint/date chronicle anchors removed (claims stand on their paper citations), CLAUDE.md §-references replaced with paper cites or `papers/INDEX.md`, TC/G4a/Door-4 codenames translated to prose, the "wall" gloss moved inline to its first use. Internal-workflow mentions now appear ONLY in the deliberate end-of-guide methodology-disclosure section.
+- **Rule 13 sharpened to the tiered strict form**: field guide = fully self-contained academic prose (no workflow apparatus outside the disclosure section); group syntheses may keep sparse first-use-footnoted anchors. The lampshade lesson recorded: the rejected paragraph had been rule-blessed and even served as a known-good QA control — **a mis-specified rule passes its own conformance check**.
+- **New synthesis DoD criterion 6 — the cold-reader audience pass**: an audience-persona reviewer reads the field guide cold and flags anything presuming internal knowledge. The missing dimension behind "why is our QA not finding this": every register defect of the arc was caught by PI read-through because no reviewer ever read as the audience.
+
+### Fixed (first cold-reader outing — 4 MATERIALs the strip itself missed)
+- §7: "between v3.97.0 and v3.103.0" version-span chronology → plain date (an internal-version anchor a newcomer cannot calibrate).
+- §9: "G4a … closed POSITIVE-THIN … G4b …" status-report register → survey prose ("positive, but structurally thin").
+- §5: unexpanded "OSLPLS" + unglossed "Q1′" in the load-bearing what-survives inventory → expanded, label dropped.
+- §10: **raw `\S sec:open\_g4` label leaking into the rendered Reader's Map** → reworded (genuine rendering defect).
+- NITs fixed on sight: Perez-Sanchez 2024/2025 cited in prose but absent from the bibliography → both verified bibitems added (copied from the certified group1 synthesis; arXiv:2401.03705, arXiv:2508.17338); qubit count $Q$ and "composed" now defined at first use. Cold-reader two-way verdict: the narrative spine is self-contained; failures clustered in closure-reporting passages — all remediated.
+
+### Verification
+- Field guide three-pass clean, zero citation warnings; C11/C13/C16/C18 synthesis-scope PASS post-strip.
+
 ## [4.68.2] - 2026-07-05
 
 **Full-corpus PDF refresh (59/59 three-pass) + orphaned-figure resurrection + C10 hardening.** First complete rebuild under the tracked-PDF policy.

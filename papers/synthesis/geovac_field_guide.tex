@@ -76,19 +76,6 @@ geometry forces from what measurement supplies.}
 
 \tableofcontents
 
-\paragraph*{Reading conventions.}
-Three pieces of project-internal shorthand appear throughout.
-Parenthetical designations of the form (Sprint Read~2, 2026-06-03)
-are anchors into the project's internal chronicle
-(\texttt{CHANGELOG.md} in the repository), where each investigation
---- a ``sprint,'' the project's unit of focused work --- is recorded
-with its full evidence trail.  References of the form
-CLAUDE.md~\S~1.7 point into the project's internal coordination file
-(described at the end of this guide).  And ``wall'' is shorthand for
-a structural obstruction established by multiple independent
-negative results --- a documented boundary, not a conjecture of
-difficulty.
-
 % =====================================================================
 \section{How This Started}
 \label{sec:origin}
@@ -251,9 +238,12 @@ same conformal-equivalence identification as in
 Phase~2 reached known structural ceilings.  Heavy molecules
 ($Z \ge 20$ or strong multi-determinant correlation) escape the
 framework's accuracy targets through identifiable channels (the
-``multi-focal-composition wall'' documented in six independent
-sprints).  The framework's most natural quantum-simulation
-application --- $O(Q^{2.5})$ composed Pauli scaling with a
+``multi-focal-composition wall'' --- the project's name for a
+structural obstruction established by multiple independent negative
+results --- documented across six independent diagnostic
+investigations).  The framework's most natural quantum-simulation
+application --- Pauli-operator counts scaling as $O(Q^{2.5})$ in the
+qubit count $Q$ for the core--valence ``composed'' encoding, with a
 sub-quadratic $O(Q^{1.69})$ $1$-norm, benchmarked across a $37$-system
 library~\cite{loutey_paper14} --- shipped at the end of Phase~2.  The
 absolute Pauli multipliers are convention-sensitive (near parity with
@@ -289,7 +279,8 @@ The precise structural claim:
 GeoVac is a discrete spectral triple that is an \emph{instance} of
 the Marcolli--van Suijlekom 2014 gauge-network construction
 \cite{marcolli_vs2014} at the data level (refined by the
-Perez-Sanchez 2024/2025 clarification that the continuum limit is
+Perez-Sanchez clarification~\cite{perez_sanchez2024, perez_sanchez2025}
+that the continuum limit is
 Yang--Mills without Higgs in general) and an \emph{extension} of it
 at the structural level via the forced-graph claim (Bertrand
 $\times$ Fock projection), the master Mellin engine, and the
@@ -340,8 +331,8 @@ Status notes.  What
 survives:\ the operator-system substrate (Paper~44), the four-witness
 modular-Hamiltonian results (Papers~42/43), the norm-resolvent
 de-compactification arrow (Paper~47), and the cocycle-deficit algebra
-of Paper~49 (whose OSLPLS strong-form bridge stands at the algebra level,
-Q1$'$).  The repaired Lorentzian target --- a Toeplitz temporal
+of Paper~49 (whose operator-system Lorentzian pre-length-space bridge
+stands at the algebra level).  The repaired Lorentzian target --- a Toeplitz temporal
 multiplier algebra and a non-compressing Krein-compatible seminorm
 --- is stated as an open problem in Paper~45.
 
@@ -476,8 +467,7 @@ construction, independent of any empirical input:
   \item The Standard Model gauge group $U(1) \times SU(2) \times
     SU(3)$ truncated at $n \le 3$ in the complex-Hopf tower
     $S^{2n-1} \to SU(n)$ is forced by Bertrand $\times$ Hopf-tower
-    structural saturation (CLAUDE.md~\S~1.7 WH4 and the May~2026
-    Door~4 Sprint).
+    structural saturation (Paper~32~\S~VIII).
   \item The dimension of the inner Dirac moduli space is
     $\dim \mathcal{M}(D_F) = 128$ per generation, $8$ in the diagonal
     slice.  Bertrand-shaped Forced-Count Theorem (Paper~32~\S~VIII,
@@ -499,14 +489,12 @@ outside any structural derivation it offers:
     Observations folder~\cite{loutey_paper2};\ twelve mechanisms
     have been eliminated for a single-principle derivation of $K$.
   \item The Yukawa coupling values.  A 162-cell PSLQ sweep against
-    low-coefficient pure-Tate periods (Sprint Yukawa-PSLQ,
-    2026-06-03) returned zero hits.  The Yukawa Dirichlet ring lives
+    low-coefficient pure-Tate periods returned zero hits.  The Yukawa Dirichlet ring lives
     in Paper~18~\S~IV.6's sixth tier (parameter-tied Dirichlet,
     categorically disjoint from M1/M2/M3).
   \item The generation count $N_{\mathrm{gen}} = 3$.  The
     Hopf-tower-to-representation extension was ruled out as a
-    shortcut for forcing $N_{\mathrm{gen}}$
-    (Sprint Read~2, 2026-06-03):\ the ``3 algebra factors'' and the
+    shortcut for forcing $N_{\mathrm{gen}}$:\ the ``3 algebra factors'' and the
     ``3 generations'' are different $3$s in the standard SM
     representation.  A deep structural obstruction;\ no known line
     of attack.
@@ -525,8 +513,7 @@ itself controlled by named theorems:
 \begin{itemize}
   \item The Forced-Count Theorem (Paper~32~\S~VIII):\ the gauge structure
     of GeoVac is forced.
-  \item The Yukawa Non-Selection Theorem (Sprint H1
-    POSITIVE-THIN closure, 2026-05-31):\ the framework's
+  \item The Yukawa Non-Selection Theorem (Paper~32~\S~VIII):\ the framework's
     almost-commutative extension admits a Higgs structure but does
     not autonomously select the Yukawa matrix.
   \item The $\eta$-Trivialization Theorem and AC-Factorization
@@ -537,15 +524,15 @@ itself controlled by named theorems:
 \end{itemize}
 
 These three theorems collectively pin the seam:\ values are free,
-relations are forced (CLAUDE.md~\S~1.7 WH4 closure).  This is the
+relations are forced.  This is the
 project's most operationally useful structural reading.
 
-\paragraph{The C-arc closure (June 2026).}  The forced/free seam
+\paragraph{The closure of the seam (June 2026).}  The forced/free seam
 discipline above was reframed as a theorem-grade structural
-characterization between v3.97.0 and v3.103.0 (June 2026).  Paper~57
+characterization in June 2026.  Paper~57
 catalogues sixty named entries across nine domains (35 forced, 1
 admitted-not-forced, 24 calibration); a five-candidate principle
-probe (Sprint~C2) found that ``packing-reachability'' (P5) classifies
+probe found that ``packing-reachability'' (P5) classifies
 the catalogue at 98.3\% accuracy.  Paper~32~\S~VIII now consolidates
 eight theorem-grade non-selection results (Forced-Count, H1 Yukawa,
 $N_{\mathrm{gen}}$, KO-dimension, single-cutoff spectral action,
@@ -562,9 +549,9 @@ longer an empirical observation;\ it is a theorem-bound boundary.
 
 The GeoVac corpus is $50$+ papers organised into six audience-targeted
 groups (\texttt{papers/group1\_operator\_algebras/}, etc.) plus an
-archive and a synthesis folder.  Each group is described in CLAUDE.md
-\S~6 with detailed paper-by-paper coverage.  This section gives
-one-line summaries.
+archive and a synthesis folder.  Each group is described
+paper-by-paper in the repository's \texttt{papers/INDEX.md}.  This
+section gives one-line summaries.
 
 \begin{itemize}
   \item \textbf{Group~1 --- Operator algebras / NCG} ($16$ papers).
@@ -626,41 +613,40 @@ would require:
     $K = \pi(B + F - \Delta)$ matches the empirical $\alpha^{-1}$ at
     $8.8 \times 10^{-8}$ relative precision, but is classified as a
     numerical observation, not a derivation.  Twelve mechanisms
-    eliminated for a single-principle derivation.  CLAUDE.md~\S~1.7
-    WH5 reads ``$\alpha$ is a projection constant, not a derivable
-    number.''
-  \item \textbf{The Yukawa values}.  Sprint Yukawa-PSLQ (2026-06-03)
+    eliminated for a single-principle derivation;\ the project's
+    standing internal reading is that $\alpha$ is a projection
+    constant, not a derivable number.
+  \item \textbf{The Yukawa values}.  A dedicated PSLQ search
     ruled out the Yukawas as low-coefficient pure-Tate periods.  They
     are Class~1 calibration data and live in Paper~18~\S~IV.6's sixth
     tier.  Whether they admit a deeper non-period derivation is open
     and falls outside the master Mellin engine's classification scope.
   \item \textbf{$N_{\mathrm{gen}} = 3$}.  A deep structural
-    obstruction;\ no sprint-scale line of attack is known
-    (Sprint Read~2, 2026-06-03).
+    obstruction;\ no line of attack is known.
   \item \textbf{The cosmological constant problem}.  Standard fine-tuning
     $\sim 10^{120}$ inherited from the Connes--Chamseddine spectral
     action expansion (Paper~51 G7).  No GeoVac-specific resolution
     proposed.
   \item \textbf{The chemistry correlation wall (W1e)}.  Multi-determinant FCI correlation
     in second-row and heavier diatomic binding is below the
-    framework's structural accuracy ceiling.  Six diagnostic sprints
-    (May~2026) identified the wall as multi-focal-composition rather
-    than a missing single mechanism.
+    framework's structural accuracy ceiling.  Six independent
+    diagnostic investigations identified the obstruction as
+    multi-focal-composition rather than a missing single mechanism.
   \item \textbf{The M2/M3 motivic Galois unification (Q5')}.  Both M2 and
     M3 engage the cyclotomic field $\Q(i) = \Q(\zeta_4)$, but via
     structurally independent mechanisms.  Whether a single Tannakian
     symmetry unifies them is an open mathematical research project
-    (Sprint A7, 2026-06-03).  Deep frontier.
-  \item \textbf{Deligne--Milne pro-finite reconstruction (TC-2 converse)}.
+    (Paper~55~\S~7.6).  A deep frontier.
+  \item \textbf{Deligne--Milne pro-finite reconstruction}.
     Paper~56 closes the cosmic-Galois inclusion $\Phi:\
     U^{*(n_{\max})} \hookrightarrow \mathrm{Aut}^\otimes(\omega)$ at
     finite cutoff via the Tannakian dual of an explicit Hopf algebra.
     The converse equality $\mathrm{Aut}^\otimes(\omega) =
     \lim_\leftarrow U^{*(n_{\max})}$ at the pro-finite limit
     (Deligne--Milne 1982 Theorem~2.11) is the named deep
-    frontier;\ each TC step (TC-1a..f, TC-2a..d) nonetheless closed
-    at sprint scale at finite cutoff, suggesting the pro-finite
-    assembly may do the same once the right transition-map machinery
+    frontier;\ every intermediate step nonetheless closed readily at
+    finite cutoff, suggesting the pro-finite assembly may prove
+    similarly tractable once the right transition-map machinery
     is in place.
   \item \textbf{Non-commutative Mondino--S\"amann (Q2')}.  Paper~49 closes
     the strong-form Krein--MS bridge (Q1$'$) on the enlarged-substrate
@@ -675,13 +661,13 @@ would require:
     outside the discrete-substrate principle.  The closest GeoVac
     analog is the discrete-warped-substrate program of
     Paper~51~\S G4-3 (named follow-on).
-  \item \textbf{Full Standard Model spectral triple}.  G4a (Connes
-    Standard Model on $\sthree$ alone) was closed POSITIVE-THIN in
-    May~2026;\ G4b (genuine cross-manifold $\sthree \otimes
-    \mathrm{Hardy}(\sfive)$) is blocked at the
-    Coulomb-versus-harmonic-oscillator asymmetry of Paper~24~\S~V at
-    layer~4 (modular Hamiltonian of the wedge KMS state).  Resolution
-    requires NCG-framework extension.
+  \item \textbf{Full Standard Model spectral triple}.  The Connes
+    Standard Model on $\sthree$ alone was closed in May~2026 ---
+    positive, but structurally thin;\ the genuine cross-manifold
+    construction $\sthree \otimes \mathrm{Hardy}(\sfive)$ is blocked
+    at the Coulomb-versus-harmonic-oscillator asymmetry of
+    Paper~24~\S~V at layer~4 (modular Hamiltonian of the wedge KMS
+    state).  Resolution requires NCG-framework extension.
 \end{itemize}
 
 What is \emph{not} open --- but is sometimes asked --- is whether
@@ -731,7 +717,7 @@ observations).  The per-paper entries below are the second step.
     converse equality with the Deligne--Milne reconstruction at
     pro-finite limit is the named deep frontier.  Open
     M2/M3 unification question (Q5') discussed in Paper~55~\S~7.6
-    and Paper~56~\S sec:open\_g4.
+    and Paper~56's open-questions section.
   \item \textbf{The physicist (atomic, molecular, optical)}.  Read
     Papers~7, 22, and 14.  Paper~7 is the Fock-projection conformal
     equivalence;\ Paper~22 is the angular sparsity theorem (universal
@@ -744,8 +730,8 @@ observations).  The per-paper entries below are the second step.
     the Lamb shift at $-0.534\%$ one-loop.
   \item \textbf{The physicist (gravity)}.  Read Paper~51.  Spectral
     action approach, two-term exact on $\sthree$;\ the
-    $S_{\mathrm{BH}} = A/4$ replica derivation was closed by the L6
-    sub-sprint (May~2026, replica-weight-harmless theorem).
+    $S_{\mathrm{BH}} = A/4$ replica derivation was closed by the
+    replica-weight-harmless theorem.
   \item \textbf{The quantum computing practitioner}.  Read Paper~14
     and Paper~20.  Pauli scaling, OpenFermion/Qiskit/PennyLane
     export, market test against published Gaussian baselines.
@@ -833,6 +819,14 @@ M.~Marcolli and W.~D.~van Suijlekom, ``Gauge networks in
 noncommutative geometry,''
 \textit{J.\ Geom.\ Phys.}~\textbf{75}, 71--91 (2014);\ preprint
 arXiv:1301.3480 (2013).
+
+\bibitem{perez_sanchez2024}
+C.~I.~Perez-Sanchez, ``Bratteli networks and the Spectral Action on
+quivers,'' arXiv:2401.03705 (2024).
+
+\bibitem{perez_sanchez2025}
+C.~I.~Perez-Sanchez, ``Comment on `Gauge networks in noncommutative
+geometry','' arXiv:2508.17338 (2025).
 
 \bibitem{latremoliere2017}
 F.~Latr\'emoli\`ere, ``The dual Gromov-Hausdorff propinquity,''

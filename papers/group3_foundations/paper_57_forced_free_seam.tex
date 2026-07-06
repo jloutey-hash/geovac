@@ -393,7 +393,132 @@ Sprint C2 (\S\ref{sec:p5}) introduced packing-reachability and left open whether
 
 \paragraph{A direct check settles it.} We attempted to determine packing-reachability by an \emph{F/C-blind} criterion --- ``does the corpus carry a cited theorem or bit-exact test for this entry?'' --- applied identically to every entry.  It does not discriminate:  all 60 entries carry such a witness (the forced entries via forcing derivations, the calibration entries via the non-selection theorems of Paper~32~\S VIII and the negative-search memos), so an F/C-blind witness-existence check predicts ``forced'' for all 60 and scores at the 60\% base rate.  The 98.3\% is recovered only by reading each witness's \emph{polarity} (forcing vs.\ non-selection), and that polarity reading \emph{is} the F/C judgment.  We therefore conclude that P5 \textbf{cannot be made non-circular}:  it is the forced/free boundary restated, and its agreement with the F/C label is an internal-consistency check.  This does not weaken the catalogue --- the structural discovery is the two-family decomposition and its independent multi-focal-depth / period-class signatures (\S\ref{sec:principles}), which P5 consolidates.
 
-\paragraph{The sharpened open question.} The open question is correspondingly sharpened:  not ``is P5 tautological'' (it is), but whether the packing-reachable boundary admits a \emph{meta-theorem} --- a structural characterization deciding forcedness \emph{without} first locating the forcing-or-non-selection witness.  A theorem of the form ``any observable on the GeoVac spectral triple is forced iff packing-reachable'' would lift the boundary from internal bookkeeping to structural truth.  It is long-range, NCG-research-grade, and named here as the sharpest follow-on of the Sprint C2 finding.
+\paragraph{The sharpened open question.} The open question is correspondingly sharpened:  not ``is P5 tautological'' (it is), but whether the packing-reachable boundary admits a \emph{meta-theorem} --- a structural characterization deciding forcedness \emph{without} first locating the forcing-or-non-selection witness.  A theorem of the form ``any observable on the GeoVac spectral triple is forced iff packing-reachable'' would lift the boundary from internal bookkeeping to structural truth.  It is long-range, NCG-research-grade, and named here as the sharpest follow-on of the Sprint C2 finding.  A first answer --- covering the skeleton, the inner-factor family, the admitted value, and, at mechanism level on both corpus-faithful instances, the multi-focal family --- is the Bohr-site dichotomy of \S\ref{sec:open_bohr}.
+
+\subsection{A Bohr-site partial meta-theorem (Sprint Topos-1)}
+\label{sec:open_bohr}
+
+For a finite-dimensional C*-algebra $A$, let $\mathcal{C}(A)$ denote the
+poset of commutative unital *-subalgebras (the \emph{Bohr site} of the
+topos approach to quantum logic).  Sprint Topos-1 tested the candidate
+meta-theorem:\ an entry is \textbf{forced} iff it is a property of the
+site (plus the distinguished GeoVac flag) requiring no valuation data;\
+\textbf{calibration} iff it is valuation data --- a point the site
+cannot supply;\ \textbf{admitted} iff the site is \emph{degenerate}
+(cannot distinguish the candidates);\ and the \emph{dimension} of each
+valuation freedom is itself a site-side fact.  Four computed legs
+(backing:\ \texttt{tests/test\_topos1\_site\_invariants.py}, bit-exact):
+
+\begin{enumerate}\setlength{\itemsep}{1pt}
+  \item \textbf{Site strata} (INTERNAL THEOREM, combinatorial):\
+    conjugacy strata of commutative unital *-subalgebras of $M_k(\C)$
+    correspond to integer partitions of $k$ with stratum family
+    dimension $k^2 - \sum_i \lambda_i^2$:\ $M_2$:\ $\{0, 2\}$;\
+    $M_3$:\ $\{0, 4, 6\}$;\ $\HH$ (real form):\ $\{0, 2\}$ (the
+    $\C_q$ family over $S^2/\{\pm\}$).
+  \item \textbf{The B5 correspondence} (MEASURED, order-invariant
+    level):\ $\mathcal{C}(M_2(\C))$ and $\mathcal{C}(\HH)$ have
+    \emph{identical} order invariants (height-$1$ fan;\ one point
+    stratum plus one $2$-parameter family of maximal elements), while
+    $\mathcal{C}(M_3(\C))$ differs (height $2$).  The site is blind
+    exactly at the catalogue's lone admitted-not-forced entry (B5,
+    $\HH$ vs $M_2(\C)$, Door~4c) and sighted exactly at $k = 3$ where
+    the Hurwitz fallback forces $M_3(\C)$:\ the catalogue's third
+    value corresponds to the degenerate dimension of site
+    reconstruction, decided without consulting any witness derivation.
+  \item \textbf{Machine-verified Kochen--Specker witness} (bit-exact):\
+    the orthogonality hypergraph of primitive integer rays in $\R^3$
+    with entries in $\{-2, \ldots, 2\}$ ($49$ rays, $26$ orthonormal
+    triples;\ containing the Conway--Kochen ray family) admits
+    \emph{no} $0/1$ frame-function coloring (exhaustive search), while
+    the range-$1$ set ($13$ rays) is colorable.  Hence dim-$\ge 3$
+    blocks are valuation-\emph{obstructed} (their values are
+    necessarily external data), dim-$2$ blocks are
+    valuation-\emph{choiceable}, dim-$1$ blocks are pointed --- three
+    site statuses matching forced / admitted / calibration structure
+    at the block level.
+  \item \textbf{The GeoVac flag} (bit-exact, $n_{\max} = 2, 3$):\ the
+    Casimir chain $\langle n \rangle \subset \langle n, L^2 \rangle
+    \subset \langle n, L^2, L_z \rangle$ is a maximal chain of
+    commutative subalgebras of dimensions $(2, 3, 5)$ and
+    $(3, 6, 14)$;\ the graph adjacency satisfies $[A, L^2] = 0$
+    exactly (the edge rule conserves $l$ --- a selection rule that is
+    itself a site fact) with $\|[A, n]\|, \|[A, L_z]\| > 0$.
+  \item \textbf{Family-1 mechanism:\ frame-meet collapse} (bit-exact,
+    Sprint Topos-2):\ for two same-center hydrogenic Fock frames at
+    exponents $Z = 1$ and $Z' \in \{2, 3\}$ (the mixed-exponent
+    setting of the Track-DF / L\"owdin wall), the exact rational
+    inter-frame overlap is $(l, m)$-block-diagonal with
+    \emph{connected} support in every block ($n_{\max} \le 4$), so the
+    meet of the two frame MASAs is \emph{exactly the angular-grading
+    algebra} (collapse $14 \to 9$ and $30 \to 16$):\ frame composition
+    preserves the angular structure and nothing else --- the site
+    statement of the angular-sparsity / radial-wall seam
+    (Papers~22, 32).  The join generates the full matrix algebra on
+    each $(l, m)$ block (connected support + irreducibility), and
+    blocks of dimension $\ge 3$ appear at $n_{\max} \ge 3$, so
+    composed radial observables land in Kochen--Specker-obstructed
+    algebras:\ \textbf{Family-1 externality = meet-collapse followed
+    by join-obstruction} --- a provably different \emph{route} to
+    valuation-need than Family-2's ab-initio noncommutativity, with
+    the same terminus (matching the two-family decomposition:\ same
+    surface verdict, different structural reasons).  By-product exact
+    lemma:\ rate coincidence $Z_1/n_1 = Z_2/n_2$ with
+    $|n_1 - n_2| \ge 2$ forces a vanishing inter-frame overlap
+    (same-variable Laguerre band structure;\ verified exhaustively for
+    $Z' \le 5$, $n \le 6$), while the converse is panel-scoped (one
+    sporadic off-coincidence zero at $Z' = 2$, $l = 3$, $n = n' = 5$).
+    Backing:\ \texttt{tests/test\_topos2\_family1\_meetjoin.py}.
+  \item \textbf{Two-center meet:\ the $m$-grading exactly} (exact,
+    Sprint Topos-3):\ for frames at centers separated by $R$ along $z$
+    ($Z' \in \{1, 3\}$, $R \in \{1, 2\}$, $n_{\max} = 3$), every
+    inter-frame overlap reduces in prolate spheroidal coordinates to
+    $e^{-p}(U e^{q} + V e^{-q})$ with $U, V$ exact rationals
+    (Mulliken--Ruedenberg auxiliary integrals;\ zero-decidability by
+    the linear independence of $e^{\pm q}$ over $\Q$;\ machinery
+    certified against the classical $\langle 1s|1s\rangle(R) =
+    (1 + R + R^2/3)\,e^{-R}$ as an exact rational identity at
+    $R = 1, 2, 7/2$).  Every $m$-block has \emph{full} exact support
+    --- the same-center rate-coincidence zeros do not survive
+    displacement --- so the two-center meet is \emph{exactly the
+    $m$-grading algebra}, confirming the prediction pre-registered
+    above.  The resulting \textbf{meet-dimension ladder}
+    $14 \to 9 \to 5$ (identical frames $\to$ same-center different
+    focal $\to$ two-center, $n_{\max} = 3$) measures the symmetry of
+    the composition, and the two-center join is \emph{more}
+    Kochen--Specker-obstructed (blocks of dimension $6$ and $3$) than
+    the same-center case (dimension $3$ only) --- the site restatement
+    of cross-center composition being the framework's hardest wall.
+    Backing:\ \texttt{tests/test\_topos3\_exact\_meet.py}.
+\end{enumerate}
+
+Under this dichotomy the four theorem-grade non-selection results of
+\S\ref{sec:c3_closure} re-read as site statements (the moduli
+\emph{dimension} $128/260$ is a site-side fact;\ the moduli
+\emph{point}, the multiplicity factor, and the real-structure
+signature are valuations), and the lone P5 exception I3 factorises:\
+the Higgs direction splits into an internal \emph{space} (the
+Hopf-base $S^2$, an $M_1$ site object) and an external \emph{point}
+(the valuation $\hat n$) --- the ``conditional'' tag is precisely the
+open question whether the internal space is the GeoVac $S^2$.
+
+\emph{Honest scope.}  The dichotomy is a \emph{partial} meta-theorem:\
+it covers the skeleton (commutative $\mathcal{A}_{\mathrm{GV}}$, Bohr
+topos Boolean), the inner-factor family (Family~2, via the
+Kochen--Specker obstruction), the admitted value (site degeneracy),
+and the valuation-freedom dimensions --- all decided from site
+properties without locating witnesses (the non-circularity P5 could
+not achieve).  The multi-focal family (Family~1, $17$ entries) is formalized at
+\emph{mechanism} level on both corpus-faithful instances (item~5:\ the
+mixed-exponent frame pair;\ item~6:\ the two-center pair, confirming
+the pre-registered $m$-grading prediction);\ the extension to the full
+$17$-entry census and a general-parameter form of the vanishing lemma
+remain open follow-ons, as are the full $60$-entry classification and
+the relation to general site-reconstruction theorems at the
+exceptional dimension $k = 2$ (literature verification pending).  Nothing here
+touches the Observation status of the combination rule $K$:\ its
+\emph{value} classifies as an external valuation, consistent with and
+not upgrading that label.
 
 \subsection{Sprints C3 + F3 closure:  four theorem-grade non-selection results}
 \label{sec:c3_closure}

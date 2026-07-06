@@ -330,3 +330,29 @@ Initial claim→test mapping for the four group4 papers (14/16/20/23); this bran
 - ✅ **P23 deuteron 1-norm 227 vs 342** (+ He-4 557/552 vs 467/462) — FIXED: papers synced to the reproducible code values + pinned by tests (code stable since v2.7.0, no regression; the drafting-era numbers were stale).
 
 **CF-1-affected (pair-diagonal ERI approximation) claims:** all composed-Pauli multipliers — P14/P20 O(Q^2.5), 11.10/9.23 linear coefficients, LiH 333/334 vs STO-3G 907 (re-prices to 837 / 1.08× parity under the physical global-M_L rule), and the "51×–1712× / two-OoM vs Gaussian" market lines. The O(Q^2.5) *scaling structure* and Paper 22 potential-independence are unaffected; what re-prices is the *magnitude* of the multiplier and the disclosure that part of it is an undisclosed approximation (see `docs/qa/group4.carryforward.md` CF-1).
+
+## Group 3 — Paper 57 Bohr-site remark (Sprint Topos-1, 2026-07-05)
+
+The §open "partial meta-theorem" remark added by Sprint Topos-1; every quantitative claim in the remark pinned by a self-contained test (no debug/ imports — the P29 provider lesson applied at birth).
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 57 | Site strata of M_k(ℂ) ↔ partitions; family dim k²−Σλᵢ² (M₂: {0,2}; M₃: {0,4,6}) | `test_topos1_site_invariants.py::test_site_strata_partitions` | self-contained (mirrors `debug/compute_topos1_bohr_probe.py`) | BACKED-SOUND | combinatorial identity + refinement order verified |
+| 57 | B5 correspondence: C(M₂(ℂ)) and C(ℍ) order-invariants coincide (height-1 fan, {0,2}); C(M₃) differs (height 2, {0,4,6}) | `test_topos1_site_invariants.py::test_b5_site_degeneracy_and_m3_contrast` | self-contained | BACKED-SOUND | the catalogue's lone admitted-not-forced entry sits at the site-degenerate dimension; k=3 sighted |
+| 57 | Machine KS witness: integer rays range 2 (49 rays, 26 triples) UNSAT; range 1 (13 rays) SAT | `test_topos1_site_invariants.py::test_kochen_specker_machine_witness` | self-contained (exhaustive backtracking) | BACKED-SOUND | bit-exact dim-3 valuation obstruction + dim-2 contrast |
+| 57 | GeoVac flag chain dims (2,3,5)/(3,6,14); ‖[A,L²]‖=0 (Δl=0 edge rule), ‖[A,n]‖=√2/√10, ‖[A,L_z]‖=2/4 | `test_topos1_site_invariants.py::test_geovac_flag_chain_and_grading` | `geovac/lattice.py` | BACKED-SOUND | maximal chain + conserved-l grading verified on the live lattice |
+
+### Paper 57 Bohr-site remark — Family-1 leg (Sprint Topos-2, 2026-07-05)
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 57 | Meet theorem: two mixed-exponent Fock frames (Z=1 vs Z′∈{2,3}) share exactly the angular-grading algebra (connected support per (l,m) block; collapse 14→9, 30→16) | `test_topos2_family1_meetjoin.py::test_meet_is_angular_algebra_everywhere` | self-contained (exact Fractions; mirrors `debug/compute_topos2_family1_meetjoin.py`) | BACKED-SOUND | frame composition preserves angular structure and nothing else — the site statement of the Paper 22/32 angular/radial seam |
+| 57 | Join KS-obstruction: d≥3 blocks at n_max≥3 (connected support + Burnside ⇒ M_d; KS via the Topos-1 machine witness) — Family-1 externality = meet-collapse → join-obstruction | `test_topos2_family1_meetjoin.py::test_join_has_ks_obstructed_block` (+ Topos-1 KS test) | self-contained | BACKED-SOUND | route distinct from Family-2's ab-initio obstruction; same terminus |
+| 57 | Rate-coincidence lemma: (⇐) Z₁/n₁=Z₂/n₂ ∧ \|Δn\|≥2 ⇒ zero overlap (exhaustive Z′≤5, n≤6); (⇒) panel-scoped, boundary case (Z′=2, l=3, n=n′=5) pinned | `test_topos2_family1_meetjoin.py::test_rate_coincidence_lemma` + `::test_lemma_boundary_sporadic_zero` | self-contained | BACKED-SOUND | first draft was a false biconditional — the test caught the overclaim pre-publication (S(1s¹\|2s²)=−1/4 same-rate nonzero); corrected band form survived widened sweep |
+
+### Paper 57 Bohr-site remark — two-center leg (Sprint Topos-3, 2026-07-05)
+
+| Paper | Claim | Backing test | Code module | Status | Verdict |
+|---|---|---|---|---|---|
+| 57 | Machinery certification: normalized ⟨1s\|1s⟩(R) = (1+R+R²/3)e⁻ᴿ as an EXACT rational identity (7/3, 13/3, 103/12 at R=1,2,7/2) | `test_topos3_exact_meet.py::test_machinery_exact_crosscheck` | self-contained (Mulliken–Ruedenberg A/B auxiliary integrals; mirrors `debug/compute_topos3_exact_meet.py`) | BACKED-SOUND | classical closed form reproduced symbolically; the /2-exponent bug was caught by this cross-check before any conclusion |
+| 57 | Two-center meet = m-grading exactly: full exact support in every m-block (Z′∈{1,3}, R∈{1,2}, n_max=3); ladder 14→9→5 | `test_topos3_exact_meet.py::test_two_center_meet_m1_m2_blocks_and_ladder` + `::test_two_center_meet_m0_block_full_support` | self-contained | BACKED-SOUND | pre-registered prediction confirmed; same-center rate-coincidence zeros do not survive displacement; join KS-dims {6,3} > same-center {3} |

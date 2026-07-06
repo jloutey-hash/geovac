@@ -1,0 +1,224 @@
+{
+ "Z1=1,Z2=2,n_max=3": {
+  "N_states": 14,
+  "blocks": {
+   "l=0": {
+    "n_values": [
+     1,
+     2,
+     3
+    ],
+    "dim": 3,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "2/27"
+   },
+   "l=1": {
+    "n_values": [
+     2,
+     3
+    ],
+    "dim": 2,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "256/81"
+   },
+   "l=2": {
+    "n_values": [
+     3
+    ],
+    "dim": 1,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "720"
+   }
+  },
+  "meet_is_angular_algebra": true,
+  "meet_dim (=#(l,m) classes)": 9,
+  "meet_collapse_ratio": "14 -> 9",
+  "join_blocks": [
+   3,
+   2,
+   1
+  ],
+  "join_max_block_dim": 3,
+  "join_ks_obstructed (dim>=3 block present)": true,
+  "loewdin_fill_in": {
+   "frame1_masa_block_sparsity": "1/3 (diagonal)",
+   "frame2_projector_in_frame1": "dense (full support => all d^2 entries)"
+  }
+ },
+ "Z1=1,Z2=2,n_max=4": {
+  "N_states": 30,
+  "blocks": {
+   "l=0": {
+    "n_values": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "dim": 4,
+    "full_support": false,
+    "support_components": 1,
+    "sample_overlap": "2/27"
+   },
+   "l=1": {
+    "n_values": [
+     2,
+     3,
+     4
+    ],
+    "dim": 3,
+    "full_support": false,
+    "support_components": 1,
+    "sample_overlap": "256/81"
+   },
+   "l=2": {
+    "n_values": [
+     3,
+     4
+    ],
+    "dim": 2,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "720"
+   },
+   "l=3": {
+    "n_values": [
+     4
+    ],
+    "dim": 1,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "1174405120/2187"
+   }
+  },
+  "meet_is_angular_algebra": true,
+  "meet_dim (=#(l,m) classes)": 16,
+  "meet_collapse_ratio": "30 -> 16",
+  "join_blocks": [
+   4,
+   3,
+   2,
+   1
+  ],
+  "join_max_block_dim": 4,
+  "join_ks_obstructed (dim>=3 block present)": true,
+  "loewdin_fill_in": {
+   "frame1_masa_block_sparsity": "1/4 (diagonal)",
+   "frame2_projector_in_frame1": "support-dense per components"
+  }
+ },
+ "Z1=1,Z2=3,n_max=3": {
+  "N_states": 14,
+  "blocks": {
+   "l=0": {
+    "n_values": [
+     1,
+     2,
+     3
+    ],
+    "dim": 3,
+    "full_support": false,
+    "support_components": 1,
+    "sample_overlap": "1/32"
+   },
+   "l=1": {
+    "n_values": [
+     2,
+     3
+    ],
+    "dim": 2,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "3/4"
+   },
+   "l=2": {
+    "n_values": [
+     3
+    ],
+    "dim": 1,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "98415/1024"
+   }
+  },
+  "meet_is_angular_algebra": true,
+  "meet_dim (=#(l,m) classes)": 9,
+  "meet_collapse_ratio": "14 -> 9",
+  "join_blocks": [
+   3,
+   2,
+   1
+  ],
+  "join_max_block_dim": 3,
+  "join_ks_obstructed (dim>=3 block present)": true,
+  "loewdin_fill_in": {
+   "frame1_masa_block_sparsity": "1/3 (diagonal)",
+   "frame2_projector_in_frame1": "support-dense per components"
+  }
+ },
+ "Z1=1,Z2=3,n_max=4": {
+  "N_states": 30,
+  "blocks": {
+   "l=0": {
+    "n_values": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "dim": 4,
+    "full_support": false,
+    "support_components": 1,
+    "sample_overlap": "1/32"
+   },
+   "l=1": {
+    "n_values": [
+     2,
+     3,
+     4
+    ],
+    "dim": 3,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "3/4"
+   },
+   "l=2": {
+    "n_values": [
+     3,
+     4
+    ],
+    "dim": 2,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "98415/1024"
+   },
+   "l=3": {
+    "n_values": [
+     4
+    ],
+    "dim": 1,
+    "full_support": true,
+    "support_components": 1,
+    "sample_overlap": "40320"
+   }
+  },
+  "meet_is_angular_algebra": true,
+  "meet_dim (=#(l,m) classes)": 16,
+  "meet_collapse_ratio": "30 -> 16",
+  "join_blocks": [
+   4,
+   3,
+   2,
+   1
+  ],
+  "join_max_block_dim": 4,
+  "join_ks_obstructed (dim>=3 block present)": true,
+  "loewdin_fill_in": {
+   "frame1_masa_block_sparsity": "1/4 (diagonal)",
+   "frame2_projector_in_frame1": "support-dense per components"
+  }
+ }
+}

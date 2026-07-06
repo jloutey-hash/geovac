@@ -1,0 +1,281 @@
+{
+ "T1_site_strata": {
+  "M1(C)": {
+   "strata": [
+    {
+     "partition": [
+      1
+     ],
+     "family_dim_real": 0,
+     "subalgebra_dim": 1
+    }
+   ],
+   "order": [],
+   "height": 0
+  },
+  "M2(C)": {
+   "strata": [
+    {
+     "partition": [
+      2
+     ],
+     "family_dim_real": 0,
+     "subalgebra_dim": 1
+    },
+    {
+     "partition": [
+      1,
+      1
+     ],
+     "family_dim_real": 2,
+     "subalgebra_dim": 2
+    }
+   ],
+   "order": [
+    [
+     "[2]",
+     "<=",
+     "[1, 1]"
+    ]
+   ],
+   "height": 1
+  },
+  "M3(C)": {
+   "strata": [
+    {
+     "partition": [
+      3
+     ],
+     "family_dim_real": 0,
+     "subalgebra_dim": 1
+    },
+    {
+     "partition": [
+      2,
+      1
+     ],
+     "family_dim_real": 4,
+     "subalgebra_dim": 2
+    },
+    {
+     "partition": [
+      1,
+      1,
+      1
+     ],
+     "family_dim_real": 6,
+     "subalgebra_dim": 3
+    }
+   ],
+   "order": [
+    [
+     "[3]",
+     "<=",
+     "[2, 1]"
+    ],
+    [
+     "[3]",
+     "<=",
+     "[1, 1, 1]"
+    ],
+    [
+     "[2, 1]",
+     "<=",
+     "[1, 1, 1]"
+    ]
+   ],
+   "height": 2
+  },
+  "H(real)": {
+   "strata": [
+    {
+     "partition": "R1",
+     "family_dim_real": 0,
+     "subalgebra_dim": 1
+    },
+    {
+     "partition": "C_q",
+     "family_dim_real": 2,
+     "subalgebra_dim": 2
+    }
+   ],
+   "order": [
+    [
+     "R1",
+     "<=",
+     "C_q"
+    ]
+   ],
+   "height": 1
+  }
+ },
+ "T2_b5_degeneracy": {
+  "C(M2)": {
+   "height": 1,
+   "n_strata": 2,
+   "family_dims": [
+    0,
+    2
+   ]
+  },
+  "C(H)": {
+   "height": 1,
+   "n_strata": 2,
+   "family_dims": [
+    0,
+    2
+   ]
+  },
+  "order_invariants_coincide": true,
+  "C(M3)_contrast": {
+   "height": 2,
+   "n_strata": 3,
+   "family_dims": [
+    0,
+    4,
+    6
+   ]
+  },
+  "reading": "site cannot force H over M2(C): the Bohr-site order invariants coincide (height-1 fan, point + 2-parameter family) -- matching catalogue entry B5 admitted-not-forced"
+ },
+ "T3_ks_dim3": {
+  "searches": [
+   {
+    "range": 1,
+    "n_rays_total": 13,
+    "n_rays_in_triples": 9,
+    "n_triples": 4,
+    "coloring_exists": true
+   },
+   {
+    "range": 2,
+    "n_rays_total": 49,
+    "n_rays_in_triples": 49,
+    "n_triples": 26,
+    "coloring_exists": false
+   }
+  ],
+  "ks_witness_at_range": 2,
+  "reading": "machine-verified Kochen-Specker witness: the integer-ray orthogonality hypergraph at range 2 admits NO 0/1 frame-function coloring => no global valuation on any M3 block => inner-factor values are necessarily EXTERNAL (valuation data)"
+ },
+ "T4_geovac_flag": {
+  "max_n=2": {
+   "N": 5,
+   "flag_dims": [
+    2,
+    3,
+    5
+   ],
+   "flag_dims_expected": [
+    2,
+    3,
+    5
+   ],
+   "flag_is_chain": true,
+   "comm_norm_A_n": 1.4142135623730951,
+   "comm_norm_A_L2": 0.0,
+   "comm_norm_A_Lz": 2.0
+  },
+  "max_n=3": {
+   "N": 14,
+   "flag_dims": [
+    3,
+    6,
+    14
+   ],
+   "flag_dims_expected": [
+    3,
+    6,
+    14
+   ],
+   "flag_is_chain": true,
+   "comm_norm_A_n": 3.1622776601683795,
+   "comm_norm_A_L2": 0.0,
+   "comm_norm_A_Lz": 4.0
+  }
+ },
+ "T5_moduli_pin": {
+  "pytest_passed": true,
+  "tail": [
+   "7 passed, 1 skipped in 11.01s"
+  ]
+ },
+ "classification_sample": [
+  {
+   "entry": "A: graph spectrum + n^2 degeneracies",
+   "catalogue": "FORCED",
+   "topos_verdict": "internal: flag-chain dims are site facts (T4)"
+  },
+  {
+   "entry": "A: E1/Gaunt selection rules",
+   "catalogue": "FORCED",
+   "topos_verdict": "internal: A's nonzero pattern + nonzero [A, diag] grading are site facts (T4)"
+  },
+  {
+   "entry": "A: S^3 outer manifold",
+   "catalogue": "FORCED",
+   "topos_verdict": "internal: A_GV commutative => Bohr topos Boolean; skeleton classical"
+  },
+  {
+   "entry": "B: gauge group U(1)xSU(2)xSU(3)",
+   "catalogue": "FORCED",
+   "topos_verdict": "internal: unitary groups of the blocks; M3 site reconstruction nondegenerate (T1/T2 contrast)"
+  },
+  {
+   "entry": "B: inner-algebra factor count = 3",
+   "catalogue": "FORCED",
+   "topos_verdict": "internal: 3 connected block components of the site"
+  },
+  {
+   "entry": "B: Forced-Count moduli DIMENSION 128/260",
+   "catalogue": "FORCED",
+   "topos_verdict": "internal: dimension computed from rep structure, no valuation (T5)"
+  },
+  {
+   "entry": "B5: H vs M2(C)",
+   "catalogue": "ADMITTED-NOT-FORCED",
+   "topos_verdict": "site-DEGENERATE: C(M2) and C(H) order-invariants coincide (T2); k=2 is the valuation-choiceable dim (KS absent, T3 contrast) -- the third value"
+  },
+  {
+   "entry": "F1: Yukawa VALUES",
+   "catalogue": "CALIBRATION (Family 2)",
+   "topos_verdict": "external: a valuation on KS-obstructed blocks (T3); the moduli POINT"
+  },
+  {
+   "entry": "F2: N_gen = 3",
+   "catalogue": "CALIBRATION (Family 2)",
+   "topos_verdict": "external: rep multiplicity -- site of A_F is N_gen-blind (same site, any N_gen)"
+  },
+  {
+   "entry": "E: K = pi(B+F-Delta) value",
+   "catalogue": "CALIBRATION (Observation, sec 13.5)",
+   "topos_verdict": "external: a numerical valuation across three spectral objects; no site derivation"
+  },
+  {
+   "entry": "G8: cutoff moments phi(k)",
+   "catalogue": "CALIBRATION",
+   "topos_verdict": "external: test-function valuation data"
+  },
+  {
+   "entry": "I: kappa = -1/16 matching",
+   "catalogue": "CALIBRATION (Observation)",
+   "topos_verdict": "external: matching valuation between graph and continuum"
+  },
+  {
+   "entry": "Family 1 rep: multi-focal walls (W1e, recoil, Zemach)",
+   "catalogue": "CALIBRATION (Family 1)",
+   "topos_verdict": "external, DIFFERENT kind: absence of a composition morphism between two Fock-style sites (not a block valuation) -- structural sketch, named follow-on"
+  },
+  {
+   "entry": "I3: Higgs direction n-hat in S^2",
+   "catalogue": "CONDITIONAL",
+   "topos_verdict": "split resolves the tag: the internal SPACE (Hopf-base S^2, an M1 site object) vs the external POINT (the valuation n-hat); 'conditional' = open whether the internal space is the GeoVac S^2 -- the dichotomy separates the two halves"
+  }
+ ],
+ "gate": {
+  "b5_site_degenerate": true,
+  "ks_witness": 2,
+  "flag_chain_ok": true,
+  "moduli_pin_passed": true
+ }
+}

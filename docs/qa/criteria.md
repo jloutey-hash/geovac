@@ -385,6 +385,13 @@ quietly rises.
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
 ## Change log
+- 2026-07-05 — **Rule 13 sharpened to the tiered strict form + cold-reader dimension
+  added** (synthesis.done.md criterion 6; PI direction). The field guide must be fully
+  self-contained (no workflow apparatus outside its disclosure section); a conventions
+  paragraph teaching internal jargon is a register defect, not a cure. QA lesson
+  memorialized: a mis-specified rule passes its own conformance check — the offending
+  paragraph had been a designated known-good control; audience-experience defects need
+  a persona dimension (cold reader), not more conformance review.
 - 2026-07-04 — **Added the "Insider-register language" NIT class** +
   `docs/authoring_conventions.md` rule 13 (PI direction, set at the synthesis register
   pass). Reader-facing documents readable without the internal chronicle: bare-verdict

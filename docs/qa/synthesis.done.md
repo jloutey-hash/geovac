@@ -144,6 +144,26 @@ rules 11–13; chronicled in CHANGELOG v4.67.8 + the register pass):
 Reviewers on any synthesis run verify conformance to all three; the deterministic
 gate set for this target is now **C10–C18**.
 
+### Branch-defining criterion 6: cold-reader audience pass (added 2026-07-05, PI direction)
+
+Every synthesis run on the **field guide** dispatches one **cold-reader** reviewer:
+an Opus agent instructed to read the document start-to-finish AS the target
+audience persona (a mathematician/physicist who has never seen the project),
+explicitly disregarding any project knowledge it holds from context, and to flag
+**every point where the document presumes internal knowledge** — workflow files,
+sprint/track codenames, chronicle anchors, undefined shorthand, register that
+reads as project-management notes. A front-door passage that *requires* internal
+machinery to parse is MATERIAL; jargon-flavor that a cold reader can still follow
+is a NIT. Rationale: the 2026-07-05 lesson — all four register defects of the
+layer-discipline arc were caught by PI read-through, never by QA, because (i) the
+reviewers checked conformance to pre-registered rules, and a **mis-specified rule
+passes its own conformance check** (the offending "Reading conventions" paragraph
+was itself a designated known-good control); (ii) no dimension ever read the
+document as its audience. This criterion is the audience-experience dimension.
+Known limitation: sub-agents preload project context, so the cold read is
+role-played, not literal — the instruction "judge only what the document itself
+supplies" is load-bearing and the reviewer must quote the document, not the corpus.
+
 ## C8 headline enumeration (the field guide — the C17 families to extend as needed)
 
 - **Identity:** discrete spectral triple = Marcolli–vS 2014 graph-network instance at
