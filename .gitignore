@@ -114,3 +114,9 @@ debug/qa/*_seed_key.json
 debug/compile_output/
 geovac/_archive/superseded/cache/
 tests/_durations.json
+
+# The viz/ web app uses a conventional src/lib/ source directory. The Python
+# build-artifact rules above (lib/, build/, dist/ — all unanchored) would
+# otherwise silently swallow it (they broke the v4.72.0 CI build). Re-include
+# the web app's source tree; viz/ has its own .gitignore for node_modules/dist.
+!viz/src/lib/

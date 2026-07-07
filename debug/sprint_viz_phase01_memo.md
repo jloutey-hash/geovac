@@ -74,3 +74,9 @@ The composed-scaling legend quoted a 3-point exponent that the exporter's *own c
 ## 8. To go live
 
 Commit + push (via `/release`), then one-time in the GitHub repo: **Settings → Pages → Source: GitHub Actions**. The workflow deploys to `jloutey-hash.github.io/geovac`.
+
+## 9. Postscript — v4.72.1 CI build fix
+
+The v4.72.0 GitHub Actions `deploy-viz` build **failed** (the `data-check` job passed, isolating it to the site build). Cause: the repo-root `.gitignore` has an **unanchored** Python build-artifact rule `lib/` that also matches the web app's conventional `viz/src/lib/` — so `git add viz/` in the release silently dropped `data.ts` / `route.ts` / `types.ts`. On the fresh CI checkout `tsc` reported `Cannot find module './lib/route'` (×3) with a long tail of cascading implicit-`any` errors. It never reproduced locally because the files were present on disk. Fix: `!viz/src/lib/` negation in `.gitignore` + the three files committed; verified by extracting the staged tree to a clean dir and running `npm ci && npm run build` (exit 0).
+
+**Reusable lesson:** this Python repo's `.gitignore` has several unanchored build rules (`lib/`, `build/`, `dist/`, `var/`, `parts/`, `wheels/`) that silently swallow same-named directories *anywhere* in the tree. After adding any new top-level tooling directory, run `git ls-files <dir>` (or `git check-ignore -v`) to confirm nothing was dropped **before** relying on a commit — a local build passing does not prove the committed set is complete. The disciplined verification for any "works locally, fails in CI" build is to extract the staged/committed tree into a clean directory and build there.
