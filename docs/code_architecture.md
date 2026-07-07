@@ -10,8 +10,8 @@
 
 | Task | Module | Entry Point |
 |:-----|:-------|:------------|
-| Atomic lattice | `geovac/lattice.py` | `GeometricLattice(Z, max_n)` |
-| Atomic Hamiltonian | `geovac/hamiltonian.py` | `GraphHamiltonian(lattice)` |
+| Atomic lattice | `geovac/lattice.py` | `GeometricLattice(max_n, nuclear_charge=Z)` |
+| Atomic Hamiltonian | `geovac/atomic_solver.py` | `AtomicSolver(max_n, Z)` · `solve_atom(Z, max_n)` (drift fix 2026-07-06: previously listed `GraphHamiltonian(lattice)` never existed; `geovac/hamiltonian.py` is He-specific) |
 | Multi-electron FCI | `geovac/lattice_index.py` | `LatticeIndex(Z, n_electrons, max_n)` |
 | Direct CI (large systems) | `geovac/direct_ci.py` | `DirectCISolver(lattice_index)` |
 | Molecular FCI (LCAO) | `geovac/lattice_index.py` | `MolecularLatticeIndex(atoms, R)` |

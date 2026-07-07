@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.71.0 (July 6, 2026)
+**Version:** v4.72.0 (July 6, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -136,6 +136,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Web visualization Phases 0+1 (2026-07-06, v4.72.0):** tooling — `geovac/viz_export.py` (data exporter, single-source-of-truth) + static Vite/React site (M1 lattice, M2 QC dashboard), §5-reviewed, deploy workflow; site-live pends PI push + Pages enable. See debug/sprint_viz_phase01_memo.md.
 - **Chemistry-error projection decomposition (2026-07-06, v4.71.0):** balanced chemistry error = convergent fixed-geometry energy + structural well-SHAPE defect (LiH ω_e +45% too stiff); overlap-slope tilt law FALSIFIED (curve-fit artifact). Paper 19 §new + test. See debug/sprint_chem_error_projection_memo.md.
 - **Sprint Topos-4 GO (2026-07-05, v4.70.0):** the three v4.69.0 Bohr-site follow-ons closed (P57 §open). k=2 lit-check → **P57 B5 corrected** (type-I₂ Jordan-induction exception, Döring–Harding/Hamhalter; NOT iso-class blindness per Lindenhovius; M₂/ℍ = framework observation; +3 cites). General vanishing lemma: S = prefactor·P(t), explicit degree-D poly (Gegenbauer P₂^(l,l) only for the single-radial-node family n=l+2; even-in-t but not classical-Jacobi for higher D — v4.70.0 delta-QA scope fix); zeros = rate-coincidence(⟺|Δn|≥2) ∪ same-Z-orthogonality ∪ residual; sporadic = rational residual roots; census 253=37+210+6; test-pinned. 17-entry census: **meet-collapse = spatial-composition sub-sector only (3/17); Family-1 NOT mechanism-homogeneous** (site taxonomy = meet-collapse vs valuation). See debug/sprint_topos4_followons_memo.md.
 - **Sprints Topos-1+2+3 GO (2026-07-05, v4.69.0):** Bohr-site meta-theorem for the forced/free seam (P57 §open): B5 = site-degeneracy, inner-factor values KS-external (machine witness), I3 factorized; Family-1 = meet-collapse→join-obstruction on BOTH instances — meet = angular algebra (same-center) and m-grading (two-center, prediction confirmed); ladder 14→9→5. Follow-ons closed in Topos-4 (v4.70.0). See debug/sprint_topos{1,2,3}_*_memo.md.
@@ -423,7 +424,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 | Task | Module · Entry point |
 |:-----|:---------------------|
-| Atomic lattice / Hamiltonian | `geovac/lattice.py` `GeometricLattice(Z, max_n)` · `geovac/hamiltonian.py` `GraphHamiltonian(lattice)` |
+| Atomic lattice / Hamiltonian | `geovac/lattice.py` `GeometricLattice(max_n, nuclear_charge=Z)` · `geovac/atomic_solver.py` `AtomicSolver(max_n, Z)` |
 | Multi-electron FCI | `geovac/lattice_index.py` `LatticeIndex(Z, n_electrons, max_n)`; direct CI at N_SD ≥ 5000 |
 | Molecular spec + composed builder | `geovac/molecular_spec.py` `MolecularSpec` · `geovac/composed_qubit.py` `build_composed_hamiltonian(spec)` + `*_spec()` factories |
 | Balanced coupled builder | `geovac/balanced_coupled.py` `build_balanced_hamiltonian(spec, nuclei)` |
