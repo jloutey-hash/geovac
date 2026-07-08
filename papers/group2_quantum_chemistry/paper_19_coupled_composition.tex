@@ -677,6 +677,17 @@ construction---the more accurate of the two architectures on \emph{energy}
 the curvature of the minimum: its residual is concentrated in the \emph{shape}
 of the potential well, not in the fixed-geometry energy (the well depth $D_e$
 itself is a separate, distinct read-out and is not extracted here).  This
+shape residual is localized to the one-particle orbital basis: the tilt
+$\varepsilon'$ and curvature (both evaluated at the true minimum) are
+\emph{bit-invariant} to the cross-center $V_{\rm ne}$ angular multipole order
+(identical across $L=2$--$8$, the multipole series Gaunt-terminating at $L=2$
+for the $l\le 1$ orbitals) and to the radial quadrature
+($n_{\rm grid}=2000$--$16000$).  Equivalently, at the true minimum the computed
+electronic energy gradient is $9.0\%$ weaker than the
+$+Z_A Z_B/R^2$ required to balance nuclear repulsion, a deficit that does not
+move under angular or quadrature refinement---so the well-shape error is an
+orbital-basis-completeness effect, not an integral-evaluation or angular-%
+truncation effect (LiH $n_{\max}=2$; a measured result).  This
 mirrors the composed/PK result (Paper~17), where the \emph{parameter-free}
 pseudopotential barrier reproduces $\omega_e$ to $4.6\%$ but caps the attainable
 energy accuracy.  For LiH the two architectures thus trade energy accuracy
