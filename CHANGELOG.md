@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.73.2] - 2026-07-08
+
+**Process fix: the `/ahha` skill now grounds-then-verifies before proposing.** A generative `/ahha` pass on the v4.73.x composition-wall work pitched a connection as novel — *"the chemical bond is a Connes–Chamseddine inner fluctuation over a 2-point finite geometry; binding is the spectral-action double-well"* — framing it as unifying two arcs that "run in separate universes." On the mandatory current-state check the framing was **stale**: both legs were already settled on 2026-06-07. The structural leg is proven bit-exact (Sprint M-vS-2: the production LiH `h1` **is** a Marcolli–van Suijlekom gauge network on the Li↔H bond quiver, residual 0.0 — the bond-as-connection object is the edge intertwiner). The dynamical leg is structurally dead (Sprint M-vS-2 Q2: S(D)(R) monotone, no binding; Spectral-Action-Expansion: a finite-dim Dirac has no UV divergence, so the Chamseddine–Connes Seeley–DeWitt hierarchy that would build the Higgs double-well cannot arise — the CC binding mechanism is a continuum phenomenon the n_max cutoff removes). Memo: `debug/sprint_ahha_grounding_memo.md`.
+
+### Root cause
+- `/ahha` had a **generate → hedge-audit → defend** flow that filtered for *false caution* (trained flatness) but had **no step checking candidates against the current corpus** — no filter for *false novelty*. The standing rule `feedback_verify_current_state` (2026-06-14) covers this but was scoped to "before forming a **verdict**"; a generative pass slipped under the trigger because it feels like generation, not conclusion. That exemption was the blind spot.
+
+### Changed
+- **`.claude/commands/ahha.md`** — two steps inserted around the existing generate/hedge core (not a rewrite). **Step 0 (Ground):** load the owning paper section + relevant group synthesis + §2/§3 for the domain *before* generating (scoped to the domain). **Step 2 (Verify):** search the related papers/CHANGELOG/memos per candidate and classify ALREADY / PARTIALLY / UN-SURFACED, then **re-aim** (explicit guard: re-aims, does not suppress — a partially-surfaced connection re-aimed to its open leg is often the best output). Old Steps 2/3 → 3/4, with the division of labor made explicit: **Step 2 kills false novelty; Step 3 kills false caution.**
+- **`memory/feedback_verify_current_state.md`** — trigger widened from "concluding" to "concluding **or proposing a connection/direction from corpus state (a generative pass such as /ahha)**"; "your own mental model of the corpus" added alongside the debug/ memo as an untrustworthy snapshot; 2026-07-08 incident appended to **Why**. MEMORY.md index line updated to match.
+- **CLAUDE.md §9 Current-State Check** — same widening in the canonical workflow doc ("Before forming or reporting a verdict — *or proposing a new connection or direction from corpus state*").
+
+### Verification
+- No `geovac/` production code changed (skill + CLAUDE.md + memory files only). `/regression` not applicable — nothing in the diff maps to a consumer test; the topological-integrity baseline is unaffected by doc/skill/memory edits. Hard-prohibitions (§13.5) clean: CLAUDE.md edits confined to §1 (version only) / §2 / §9 (Workflow — PM-editable); no NO-tier section touched.
+
 ## [4.73.1] - 2026-07-07
 
 **Follow-on (PI-directed): the "sparsity-destroying option" — documented negative.** After v4.73.0 established that GeoVac's sparsity and molecular accuracy are the two ends of one trade, the PI asked to explore actually paying the density to buy correct binding: restore the neglected cross-center overlap S in the balanced LiH basis, Löwdin-orthogonalize the integrals, and measure geometry improvement + Pauli inflation.
