@@ -243,3 +243,32 @@ deliverable.
   primary formula not verbatim-extracted); the cross-n *overlap* refutation is decisive (my
   computation + the SW-is-a-translation structural argument), the "closed form exists" leg is
   literature-grounded not re-derived.
+
+## 7. Follow-on: the sparsity-DESTROYING option (PI-directed 2026-07-07)
+PI asked to explore actually paying the density to buy binding: restore the neglected
+overlap S in balanced LiH, Loewdin-orthogonalize the integrals, measure geometry + Pauli.
+Driver `debug/sprint_lowdin_tradeoff.py`, data `debug/data/lowdin_tradeoff.json`.
+
+**Result: the cheap retrofit is STRUCTURALLY IMPOSSIBLE (clean negative).**
+- Sparse baseline reproduces exactly (R_eq +6.9%, omega_e +45% / 2037 cm^-1, 878 Pauli) --
+  machinery validated. Robust two-centre overlap (fixed Gauss-Legendre, 1s-1s exact to 1e-16)
+  replaced the hanging topos3 adaptive quad.
+- The restored overlap S is **non-PSD** (S_min=-0.037 at short R; 2 near-null directions):
+  the balanced basis is near-linearly-dependent once overlap is honest (redundant s-functions:
+  core-1s Z=3, bond-1s Z=1, partner-1s overlap 0.33-0.65).
+- Loewdin (even floored) gives **garbage** (E=-54 Ha vs -15.2 correct; NO interior minimum;
+  Pauli 878->15706 = 17.9x, consistent with Track DF's 14x).
+- **Diagnosis:** the builder's h1/eri are NOT clean <i|h|j> matrix elements of a basis with a
+  computable overlap (h1 diagonal = isolated-atom -Z^2/2n^2; cross terms = multipole /
+  operator-approximation surrogates). Bolting an independent S + Loewdin onto them mixes
+  incompatible objects. To do it correctly you must rebuild ALL integrals (S, h1, eri)
+  CONSISTENTLY from the same basis functions = standard two-centre molecular Coulomb-Sturmian
+  QC (Avery / Herbst-Avery-Dreuw) -> GeoVac sheds its only distinctive advantage (sparsity).
+- **Honest scope:** did NOT prove a proper cross-n Sturmian build fails to bind (Herbst-Avery-
+  Dreuw bind fine); showed (a) the retrofit is inconsistent/impossible, (b) the proper version
+  IS standard QC at ~18x the Pauli cost, and (c) A/B/C already predicted overlap-restoration
+  would not fix the geometry (defect = max_n orbital-basis completeness, a different axis).
+- **Verdict: the sparsity-destroying option is a REPLACEMENT of GeoVac with standard QC, not a
+  modification of it.** Not worth pursuing unless the goal is to reimplement molecular Sturmian
+  QC. Confirms the session's through-line: sparsity and accuracy are the two ends of one trade;
+  you cannot keep the sparse Pauli advantage and fix the geometry at the same time.
