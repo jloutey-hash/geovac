@@ -73,7 +73,10 @@ shift-classes = **2** (for n_max ≥ 2; 1 at n_max=1 where only odd shells exist
   headline rank-1→rank-2 change or propagation to the "uncertain outcome" pointers.**
 
 ## Decision
-Banked for PI review. **HELD pending PI OK:** CHANGELOG entry, CLAUDE.md §2
-one-liner, MEMORY index line, propagation to the other "uncertain outcome"
-mentions (C4 proof; §sec:open_g4; §sec:open_na1), and any commit. The load-bearing
-gate is the interpretive admission of the χ₋₄-graded observable into the period map.
+v4.74.0 shipped the finding as an additive remark (`rem:m3_parity_rank`) with the
+theorem headline held at rank-1. **v4.74.1 (PI-directed):** the PI admitted the
+χ₋₄-graded trace into the canonical period map, so the headline was flipped
+rank-1 → rank-2 coherently — `def:period_map` enriched, ~13 downstream mentions
+updated, each preserving the theorem's conclusion (abelianized / not-faithful,
+unchanged since rank 2 ≪ N). No negative suppressed: rank-1 survives as the
+parity-blind sub-statement. See CHANGELOG v4.74.1.

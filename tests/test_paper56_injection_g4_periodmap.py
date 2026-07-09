@@ -53,11 +53,18 @@ G[i,j] = <p_i, p_j> and check its rank == N (the depth-1 injectivity that
 C4 asserts).
 
 RESULT (see DECISION GATE in the module-level verdict below): the genuine
-Gram has rank 1, det 0 -- the M3-column period map is NOT injective on
-sectors under the only concrete per-sector evaluation the paper supplies.
-The collinearity is structural: the per-sector M3 content is a single
-scalar multiple of one shared building block. Each test below documents
-exactly which compatibility (C1-C4) is genuinely backed vs tautological.
+Gram has rank 1, det 0 -- the PARITY-BLIND M3-column period map is NOT
+injective on sectors. The collinearity is structural: the parity-blind
+per-sector M3 content is a single scalar multiple of one shared building
+block. Each test below documents exactly which compatibility (C1-C4) is
+genuinely backed vs tautological.
+
+NOTE (v4.74.1): the paper now ENRICHES the period map with the proven
+chi_-4 vertex parity (Paper 28 Thm 3), giving M3 rank 2 -- see
+tests/test_paper56_m3_parity_rank.py and Remark rem:m3_parity_rank. This
+file computes the parity-BLIND restriction (rank 1), now the rank-1
+sub-statement of thm:injection_g4(C4); full injectivity (rank N) remains
+refuted either way.
 """
 from __future__ import annotations
 

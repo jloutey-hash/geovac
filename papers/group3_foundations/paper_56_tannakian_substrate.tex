@@ -142,9 +142,9 @@ $t_{g} = 0$.
 residuals} ($\texttt{sympy}$-rational throughout) across PS-1/2/3/4 +
 TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj at $\nmax \in \{2, 3, 4\}$. The
 G4-Inj C4 sub-block is panel-size bookkeeping for the \emph{abelianized}
-image:\ its M3-column injectivity is \emph{refuted} (the genuine Gram is
-rank~1), so those residuals do not certify a closed immersion
-(Theorem~\ref{thm:injection_g4}).
+image:\ its \emph{full} M3-column injectivity is \emph{refuted} (the
+$\chi_{-4}$-enriched Gram is rank~$2 \ll N$), so those residuals do not
+certify a closed immersion (Theorem~\ref{thm:injection_g4}).
 The fourteenth math.OA standalone in the \textsc{GeoVac} series.
 
 \medskip
@@ -1196,7 +1196,14 @@ Camporesi--Higuchi spectrum on $S^{3}$ (Paper~32 \S VIII;\ Paper~18
 \[
    \pi(x_{(n, l), 1}) \;=\; m_{3}^{(n, l)} \in M_{3} \;\subset\; \MT(\Z[i, 1/2]),
 \]
-extended multiplicatively to all of $\HGV = \Sym_{\Q}(V)$ (Paper~55
+where the $k = 1$ (M3) evaluation carries the sector's \emph{full}
+first-order period content --- both the ungraded trace and the proven
+$\chi_{-4}$ vertex-parity grading $\mathrm{Tr}((-1)^{N} D\,e^{-tD^{2}})$
+(Paper~28~\cite{loutey_paper28} Theorem~3), so $m_{3}^{(n, l)}$ records
+which quarter-integer Hurwitz shift-class the sector feeds ($3/4$ if its
+Camporesi--Higuchi shell is even, $5/4$ if odd;\
+Remark~\ref{rem:m3_parity_rank}). The map is extended
+multiplicatively to all of $\HGV = \Sym_{\Q}(V)$ (Paper~55
 Theorems~3.2, 4.1, and~5.1 establish the three target inclusions).
 \end{definition}
 
@@ -1216,21 +1223,24 @@ homomorphism of pro-algebraic groups
      \;\longrightarrow\;
    \mathcal{G}_{4} = \Gm \ltimes \mathcal{U}_{4},
 \]
-landing in the level-4 cosmic-Galois group. Under the only concrete
-per-sector period evaluation the construction supplies (the per-sector
-$\eta$-content;\ \S\ref{sec:injection_panel} and
-\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}), \emph{each}
-Mellin column --- M1, M2, \emph{and} M3 --- collapses to a single
-rank-1 target per (Mellin slot, Tate weight):\ the sector-indexed
-generators map to \emph{collinear} periods. $\Phi^{\mathrm{inj}}$ is
-therefore \emph{not} injective on the sector-indexed generators;\ it
-factors through the abelianization
+landing in the level-4 cosmic-Galois group. Under the per-sector period
+evaluation of Definition~\ref{def:period_map}, the M1 and M2 columns
+each collapse to a single rank-1 target per (Mellin slot, Tate weight),
+while the M3 column has rank $2$ --- the two $\chi_{-4}$ vertex-parity
+classes (Remark~\ref{rem:m3_parity_rank});\ its parity-blind restriction
+(the per-sector $\eta$-content alone;\ \S\ref{sec:injection_panel},
+\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}) is rank-1. In
+every case the rank is far below the sector count $N$, so
+$\Phi^{\mathrm{inj}}$ is \emph{not} injective on the sector-indexed
+generators;\ it factors through the
+abelianization
 $\Ustar_{GV} \twoheadrightarrow (\Ustar_{GV})^{\mathrm{ab}}$ and realises
 the level-4 \emph{abelianized} image (Reading~A,
 Remark~\ref{rem:injection_honest_scope}). The earlier
-``closed-immersion'' reading required M3-column injectivity (distinct
-generators mapping to $\Q$-linearly independent periods);\ the genuine
-Gram computation refutes it (rank~1, det~0).
+``closed-immersion'' reading required \emph{full} M3-column injectivity
+(all $N$ distinct generators mapping to $\Q$-linearly independent
+periods);\ the genuine Gram computation refutes it ($\mathrm{rank} = 2
+\ll N$).
 
 The four structural compatibilities are:
 \begin{enumerate}
@@ -1257,10 +1267,12 @@ $\mathrm{Sym}^{k} V_{\mathrm{fund}}$ is detected at the
 representation level (Theorem~\ref{thm:sl2_pw}), not at the
 period-grading level.
 \item \textbf{(C4) Abelianized image (Reading~A), not a closed
-immersion.} Under the construction's per-sector period content the M3
-column collapses to rank~1 per weight (like M1 and M2), so
-$\Phi^{\mathrm{inj}}$ is not injective on the sector-indexed generators
-and factors through the abelianization. The well-defined object is the
+immersion.} Under the enriched per-sector period content
+(Definition~\ref{def:period_map}) the M3 column has rank $2$ per weight
+--- the two $\chi_{-4}$ vertex-parity classes
+(Remark~\ref{rem:m3_parity_rank}) --- while M1 and M2 collapse to
+rank-1;\ every rank is $\ll N$, so $\Phi^{\mathrm{inj}}$ is not injective
+on the sector-indexed generators and factors through the abelianization. The well-defined object is the
 abelianized image $\Phi^{\mathrm{inj}}((\Ustar_{GV})^{\mathrm{ab}})$,
 cut out inside $\mathcal{G}_{4}$ by the Glanois 2015 basis relations
 \cite{glanois2015} on the depth-graded MZV generators that fail to
@@ -1331,24 +1343,25 @@ faithfulness result~\cite{goncharov_deligne2005} would ensure that
 distinct M3 generators map to $\Q$-linearly independent periods
 \emph{provided} the per-sector M3 evaluation were rank $\ge 2$.
 However, the only concrete per-sector M3 content the corpus supplies is
-the single scalar $\eta_{(n,l)}$ (Paper~55), so each generator's period
-vector is $\eta_{(n,l)}$ times a shared Hurwitz block:\ the genuine
-Gram matrix has rank~1
-(\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py};
-Remark~\ref{rem:injection_honest_scope}). Distinct M3 generators
-therefore map to \emph{collinear} periods, the M3 column collapses
-exactly as M1/M2 do, and $\Phi^{\mathrm{inj}}$ is \emph{not} injective
-on the sector-indexed generators. What is well-defined is the
+the single scalar $\eta_{(n,l)}$ (Paper~55), so the parity-blind
+restriction has all period vectors collinear:\ its Gram is rank~1
+(\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}). The
+enriched map (Definition~\ref{def:period_map}) adds the $\chi_{-4}$
+vertex-parity grading, which sorts sectors into the two shift-classes
+$3/4$ (even shell) and $5/4$ (odd shell);\ its Gram has rank~$2$
+(Remark~\ref{rem:m3_parity_rank},
+\texttt{tests/test\_paper56\_m3\_parity\_rank.py}). Because $2 \ll N$,
+$\Phi^{\mathrm{inj}}$ is still \emph{not} injective on the
+sector-indexed generators. What is well-defined is the
 abelianized image $\Phi^{\mathrm{inj}}((\Ustar_{GV})^{\mathrm{ab}})$,
 Zariski-closed in $\mathcal{U}_{4}$ (the kernel of the finitely many
 linear functionals vanishing on the realised M3 content, each
 finite-weight piece finite-dimensional over $\Q$ by Glanois 2015). A
-genuinely injective (closed-immersion) refinement would require distinct
+genuinely injective (closed-immersion) refinement would require all $N$
 sectors to map to $\Q$-linearly independent periods;\ the $\chi_{-4}$
-vertex-parity resolution (Remark~\ref{rem:m3_parity_rank}) supplies the
-named sector-resolved map and raises the rank to $2$, but is capped there
-(two parity classes), so it does \emph{not} yield a closed immersion for
-$N > 2$.\qed
+vertex-parity route is capped at rank~$2$ (two parity classes), so it
+refines the rank-1 collapse but does \emph{not} reach a closed immersion
+for $N > 2$ (Remark~\ref{rem:m3_parity_rank}).\qed
 \end{proof}
 
 \begin{remark}[Why level 4 and not level 1]\label{rem:why_level_4}
@@ -1403,26 +1416,23 @@ not a failure of the construction --- it is the structural
 manifestation of \textsc{GeoVac}'s three-bullet master Mellin engine
 partition (Paper~18 \S III.7), where M1 and M2 are pure-Tate and
 sector-blind by design.
-\item \emph{The M3 column also collapses (genuine Gram rank~1).} The
-M3 column ($k = 1$, vertex-parity Hurwitz) is the only column mapping
-to a depth-graded target with non-trivial cyclotomic content, so it
-was expected to carry the injection's substantive content. However,
-the \emph{only concrete per-sector M3 evaluation the corpus supplies}
-is the single scalar $\eta_{(n,l)}$ (Paper~55), so each sector's M3
-period vector is $\eta_{(n,l)}$ times a shared Hurwitz block ---
-collinear across sectors. The genuine Gram computation
-(\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}) gives
-rank~1, det~0:\ distinct M3 generators do \emph{not} map to
-$\Q$-linearly independent periods, so M3-column injectivity is
-\emph{refuted} under this construction and M3 collapses exactly as
-M1/M2 do. The faithful Goncharov--Deligne 2005 action on
-$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would imply injectivity only
-for a \emph{sector-resolved} rank-$\ge 2$ M3 period map (a per-$(n,l)$
-parity decomposition of $D(s)$). Such a map is now supplied by the
-$\chi_{-4}$ vertex parity (Remark~\ref{rem:m3_parity_rank}):\ it raises
-the M3 rank to $2$ but is capped there, so it refines --- without
-reaching --- injectivity. As it stands, $\Phi^{\mathrm{inj}}$ realises the
-\emph{abelianized} image (Reading~A) on all three columns.
+\item \emph{The M3 column is rank $2$ (parity-blind restriction rank-1).}
+The M3 column ($k = 1$, vertex-parity Hurwitz) is the only column
+mapping to a depth-graded target with non-trivial cyclotomic content.
+Its parity-blind per-sector content is the single scalar
+$\eta_{(n,l)}$ (Paper~55), under which each sector's period vector is
+$\eta_{(n,l)}$ times a shared Hurwitz block --- collinear, Gram rank~1,
+det~0 (\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}). The
+faithful Goncharov--Deligne 2005 action on
+$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would give \emph{full}
+injectivity only for a rank-$N$ M3 period map. The \emph{enriched} map
+(Definition~\ref{def:period_map}) adds the proven $\chi_{-4}$ vertex
+parity --- the per-$(n,l)$ parity decomposition of $D(s)$ --- which
+sorts sectors into the two shift-classes $3/4, 5/4$ and raises the M3
+rank to $2$ (Remark~\ref{rem:m3_parity_rank},
+\texttt{tests/test\_paper56\_m3\_parity\_rank.py}), capped there. Since
+$2 \ll N$, $\Phi^{\mathrm{inj}}$ still realises the \emph{abelianized}
+image (Reading~A) on all three columns.
 \item \emph{Depth-blindness on the GeoVac side.} The injection is
 constructed at depth 1 (linear combinations of single Hurwitz
 values). \textsc{GeoVac}'s primitive Hopf algebra cannot detect
@@ -1438,9 +1448,11 @@ sprint-scale NA-1 depth-2 Mellin test.
 \end{remark}
 
 \begin{remark}[Vertex-parity resolution of the M3 column]\label{rem:m3_parity_rank}
-The rank-1 collapse of the M3 column (Remark~\ref{rem:injection_honest_scope})
-is a property of the parity-\emph{blind} per-sector content $\eta_{(n,l)}$.
-The follow-on named there --- a ``sector-resolved rank-$\ge 2$ M3 period map,
+The M3 column's parity-\emph{blind} restriction is rank-1 --- its
+per-sector content is the single scalar $\eta_{(n,l)}$
+(Remark~\ref{rem:injection_honest_scope}). This remark backs the rank-2
+statement of Theorem~\ref{thm:injection_g4}(C4). The follow-on --- a
+``sector-resolved rank-$\ge 2$ M3 period map,
 a per-$(n,l)$ parity decomposition of $D(s)$'' --- is supplied by the
 \emph{proven} $\chi_{-4}$ vertex-parity identity (Paper~28~\cite{loutey_paper28}
 Theorem~3):\ even Camporesi--Higuchi shells contribute at Hurwitz shift $3/4$
@@ -1456,9 +1468,9 @@ genuine independent period, not a manufactured sign:\ $D_{\mathrm{even}}(4)$ and
 $D_{\mathrm{odd}}(4)$ are $\Q$-linearly independent in
 $\{\pi^2, \pi^4, G, \beta(4)\}$.
 
-Two consequences. First, the rank-1 reading of
-Theorem~\ref{thm:injection_g4}(C4) is an under-resolution of the parity-blind
-functional;\ the M3 image is $2$-dimensional, indexing the two motivic
+Two consequences. First, this is why Theorem~\ref{thm:injection_g4}(C4)
+records rank $2$ (not the parity-blind rank-1):\ the M3 image is
+$2$-dimensional, indexing the two motivic
 \emph{levels} the $\chi_{-4}$ mechanism accesses (level-2 un-restricted
 $\oplus$ level-4 $\chi_{-4}$). Second --- sharpening the follow-on's implicit
 hope that ``rank-$\ge 2 \Rightarrow$ injectivity'' --- the parity route is
@@ -1467,13 +1479,14 @@ hope that ``rank-$\ge 2 \Rightarrow$ injectivity'' --- the parity route is
 \textsc{GeoVac} is a strict, \emph{rank-2} abelianized subgroup, neither rank-1
 nor faithful.
 
-\emph{Scope.} Admitting the $\chi_{-4}$-graded trace
-$\mathrm{Tr}((-1)^{N} D\,e^{-tD^2})$ into the period map is a legitimate
-refinement --- it is the same $k = 1$ Mellin slot and a proven \textsc{GeoVac}
-observable (Paper~28~\cite{loutey_paper28} Theorem~3) --- but it enriches the
-map of Definition~\ref{def:period_map}. The linear-algebra facts above hold
-regardless;\ the rank-1$\,\to\,$rank-2 update to the headline of
-Theorem~\ref{thm:injection_g4} is held pending adjudication of that admission.
+\emph{Scope.} The $\chi_{-4}$-graded trace
+$\mathrm{Tr}((-1)^{N} D\,e^{-tD^2})$ is admitted into the period map
+(Definition~\ref{def:period_map}) as genuine first-order period content
+--- it is the same $k = 1$ Mellin slot and a proven \textsc{GeoVac}
+observable (Paper~28~\cite{loutey_paper28} Theorem~3). Under this
+enriched map the M3 column is rank $2$, which is the rank recorded by
+Theorem~\ref{thm:injection_g4}(C4);\ the parity-blind restriction to the
+ungraded trace alone is the rank-1 sub-statement.
 \end{remark}
 
 \subsection{Numerical verification panel}\label{sec:injection_panel}
@@ -1512,14 +1525,17 @@ $\HGV(\nmax)$ (the $k = 1$ Mellin slot), the period-side image is the
 single per-sector scalar $\eta_{(n,l)}$ (Paper~55) times the shared
 Hurwitz block in $\{\zeta(s, 1/4), \zeta(s, 3/4), \zeta(s, 5/4)\}$.
 Goncharov--Deligne 2005 faithfulness on
-$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would imply $\Q$-linear
-independence of distinct generators only for a rank-$\ge 2$ per-sector
-map;\ the actual per-sector content is rank~1. Computing (rather than
-assuming) the $N(\nmax) \times N(\nmax)$ Gram matrix of the
+$\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would imply \emph{full}
+$\Q$-linear independence of all $N$ generators only for a rank-$N$
+per-sector map;\ the $\chi_{-4}$-enriched content is rank $2$
+(parity-blind rank-1). Computing (rather than assuming) the
+$N(\nmax) \times N(\nmax)$ Gram matrix of the parity-blind
 period-coefficient vectors gives \textbf{rank~1, $\det = 0$} at every
-cutoff (\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py}):\
-distinct generators map to collinear periods, so the M3 column is not
-injective and collapses to the abelianized rank-1 image. (The earlier
+cutoff (\texttt{tests/test\_paper56\_injection\_g4\_periodmap.py});\ the
+enriched $\chi_{-4}$ map is \textbf{rank $2$}
+(\texttt{tests/test\_paper56\_m3\_parity\_rank.py};
+Remark~\ref{rem:m3_parity_rank}), still $\ll N$, so the M3 column is not
+injective and lands in the abelianized image. (The earlier
 panel asserted a unimodular ``standard basis'' Gram with $\det = 1$;\
 that was the hardcoded $\mathrm{eye}(N)$ the genuine computation
 refutes.) The depth-1 realisation of each generator in the Glanois
@@ -1588,7 +1604,7 @@ The injection $\Phi^{\mathrm{inj}}$ of Theorem~\ref{thm:injection_g4}
 identifies the \emph{abelianization} $(U^*_{GV})^{\mathrm{ab}}$ as a
 closed sub-pro-algebraic group of $\mathcal{U}_4^{\mathrm{ab}} \rtimes
 SL_2$ (it is \emph{not} a closed immersion of $U^*_{GV}$ itself --- the
-M3 column collapses to rank~1).  The motivic Galois
+M3 column is rank~$2$, $\ll N$).  The motivic Galois
 group $\mathcal{G}_4$ admits multiple realisations --- Betti,
 algebraic de Rham, Hodge / Hodge-de-Rham, étale, $\ell$-adic,
 crystalline --- and the comparison map at the period-ring level is
@@ -1628,7 +1644,7 @@ The level-$4$ injection $\Phi^{\mathrm{inj}}: U^*_{GV} \hookrightarrow
 \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ of
 Theorem~\ref{thm:injection_g4} is therefore to be read as an
 \emph{abelianized} Hodge / Hodge-de-Rham homomorphism (Reading~A; not a
-closed immersion --- the M3 column collapses to rank~1).  The Hain--Brown
+closed immersion --- the M3 column is rank~$2$, $\ll N$).  The Hain--Brown
 relative completion of $SL_2(\Z)$ carries a canonical mixed Hodge
 structure (Hain 2014~\cite{hain2014}, Theorem~3.8);\ any future
 upgrade of the comparison target from $\mathcal{G}_4$ to a
@@ -1854,15 +1870,15 @@ gives the injective comparison at level 4.
 \textbf{Theorem (cosmic-Galois injection, this paper).}\ The
 injection direction is an \emph{abelianized homomorphism}
 $\Ustar_{GV} \rightarrow \mathcal{U}_4 \rtimes SL_2$ --- \emph{not}
-an injective closed immersion (the M3 column collapses to rank~1) ---
-realising the abelianized image as a closed subgroup at the
+an injective closed immersion (the M3 column is rank~$2$, capped,
+$\ll N$) --- realising the abelianized image as a closed subgroup at the
 abelianization-of-unipotent level; this is now
 \emph{closed at theorem grade}:\ see Theorem~\ref{thm:injection_g4} in
 Section~\ref{sec:injection_g4} for the explicit period map, the
 four structural compatibilities (multiplicativity, depth-1
 coproduct compatibility, $SL_{2}$-to-Levi via $\chi_{4}$,
-abelianized image via Glanois basis), with the M3 column collapsing to
-rank~1 so the map is the abelianized homomorphism rather than an
+abelianized image via Glanois basis), with the M3 column at rank~$2$
+($\ll N$) so the map is the abelianized homomorphism rather than an
 injective closed immersion (Goncharov--Deligne 2005 faithfulness on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would apply only to a
 sector-resolved rank-$\ge 2$ M3 period map;\ the $\chi_{-4}$ vertex

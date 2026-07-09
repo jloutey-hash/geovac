@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.74.1] - 2026-07-08
+
+**Paper 56: the M3 rank-2 finding promoted from remark to theorem headline (PI-directed).** v4.74.0 documented the rank-2 result as an additive remark and held the theorem headline at rank-1, pending a definitional call: whether the χ₋₄-graded trace is admitted into the *canonical* period map. The PI adjudicated — yes, it is admitted (same k=1 operator order, a proven GeoVac observable) — so this commit makes the flip coherently across the theorem.
+
+### Changed (`papers/group3_foundations/paper_56_tannakian_substrate.tex`)
+- **`def:period_map` enriched:** the k=1 (M3) evaluation now carries the sector's *full* first-order period content — the ungraded trace **and** the proven χ₋₄ vertex-parity grading Tr((−1)ᴺ D e^{−tD²}) (Paper 28 Thm 3) — so m₃^{(n,l)} records which quarter-integer Hurwitz shift-class (3/4 even shell, 5/4 odd) the sector feeds.
+- **`thm:injection_g4`(C4) headline flipped rank-1 → rank-2:** the M3 column is rank 2 (the two χ₋₄ vertex-parity classes); M1/M2 stay rank-1; the parity-blind restriction is the rank-1 sub-statement. **The theorem's conclusion is unchanged** — rank 2 ≪ N still gives the abelianized, non-injective, not-a-closed-immersion homomorphism. Every downstream mention updated for consistency (theorem statement, C4 proof, honest-scope remark, injection panel, §open_g4 theorem box + compatibility box, abstract, Hodge-realisation section — ~13 spots), each preserving the "≪ N ⇒ abelianized / not-faithful" conclusion.
+- `rem:m3_parity_rank` reframed from "held pending" to the backing for the C4 rank-2 statement.
+- **No negative result suppressed:** the rank-1 fact survives as the parity-blind sub-statement; `test_paper56_injection_g4_periodmap.py` docstring notes it is now that sub-statement.
+
+### Verification
+- `tests/test_paper56_m3_parity_rank.py` (14/14) backs the rank-2 headline; `test_paper56_injection_g4_periodmap.py` (parity-blind rank-1) unaffected. Both green (28 passed, 2 xfailed = the rank≠N refutation). Paper 56 compiles 3-pass clean **in-place** (the v4.74.0 undefined-ref scare was a `-output-directory` vs stale-in-source-aux harness artifact, not a paper defect); PDF refreshed. No `geovac/` production code changed.
+
+Memo: `debug/sprint_m3_parity_rank_memo.md`.
+
 ## [4.74.0] - 2026-07-08
 
 **Paper 56 cosmic-Galois injection: the M3 period-map rank is 2, not 1 — the named "sector-resolved rank-≥2" follow-on resolved.** Grounding the injection theorem (`thm:injection_g4`) during an `/ahha` deep-dive surfaced its named open follow-on — a "sector-resolved rank-≥2 M3 period map (a per-$(n,l)$ parity decomposition of $D(s)$)," flagged "of uncertain outcome / not currently in the corpus." This sprint supplies exactly that object and resolves it.
