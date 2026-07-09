@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.75.0] - 2026-07-09
+
+**`/ahha` → `/aha`: idea-generation skill redesigned (divergent-then-convergent) and renamed (spelling fix).** PI direction. The old `/ahha` was guardrail-heavy — one generative step ("reach for what a veteran would make") wrapped in four disciplining steps. That optimized for *defensible* connections (the in-neighborhood ones a veteran already sees) over *surprising* ones, because the verification mindset leaked into generation. The redesign separates the two with a hard wall: generate wild, then filter hard.
+
+### Changed
+- **New skill `.claude/commands/aha.md`** (replaces `ahha.md`), two-phase:
+  - **Phase A — generate wild (judgment OFF):** two reach-engines with skepticism suspended — **A1 Outlier** (strip the work to a domain-agnostic skeleton; scan genuinely distant fields — biology / economics / linguistics / … — for the same structure; optionally dispatched as a blind subagent given only the skeleton) and **A2 Inversion** (take the wall / negative / assumption and ask "what if this IS the answer?" — where GeoVac's real ahas came from: the composition wall became the finding, discreteness=compactness, Born-as-exchange-constant, κ).
+  - **Phase B — filter hard (the guardrails, quarantined):** B1 verify-against-corpus (kills false novelty), B2 falsifier, B3 hedge-audit (kills false caution), then defend one.
+  - Rationale: reaching is cheap, the filter is where rigor lives — so let generation be lateral and let the guardrails catch the junk *after*. Keeps every guardrail; stops them shrinking the reach.
+- **Renamed `/ahha` → `/aha`** (spelling fix) across **live** surfaces: the skill file, CLAUDE.md §2/§9/§13.9b, `memory/feedback_verify_current_state.md` + its MEMORY.md index. **Historical occurrences left intact** (they record the past under the then-name; renaming would be revisionist): the `ahha_born_rule_attempt` sprint codename (CLAUDE.md §1.7, Paper 34, a memory file), the May-2026 `/ahha` past-sprint references in `memory/layer2_hidden_lattices.md`, the CHANGELOG v4.73.2 entry, the `debug/sprint_ahha_*` artifacts, and git history.
+
+### Verification
+- New skill loads (`aha` in the available-skills list); no stale `/ahha` live command reference remains in CLAUDE.md or the active memory rule (grep-confirmed). No `geovac/` production code, paper physics, or tests changed — generative-tooling change only. (A skill is a saved prompt; "verification" = loads + reads coherently; value is judged in use.)
+
 ## [4.74.2] - 2026-07-09
 
 **Delta-QA of the v4.74.1 M3 rank-1→2 flip: CLEAN-DELTA (calibrated), two panel-surfaced NITs hardened.** A PI-invoked `/qa` delta on the v4.74.0→v4.74.1 Paper 56 change ran **CLEAN-DELTA**: both LLM dimensions calibrated (claims caught its planted self-contradiction seed; code caught both planted test seeds — a vacuous `rank()>=1` and a tautological `assert 2==2`), all deterministic gates (C10–C18) green, **0 verified MATERIAL defects** in the committed delta. Two genuine NITs the calibrated panel surfaced *beyond* the seeds are fixed here.
