@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.74.0] - 2026-07-08
+
+**Paper 56 cosmic-Galois injection: the M3 period-map rank is 2, not 1 — the named "sector-resolved rank-≥2" follow-on resolved.** Grounding the injection theorem (`thm:injection_g4`) during an `/ahha` deep-dive surfaced its named open follow-on — a "sector-resolved rank-≥2 M3 period map (a per-$(n,l)$ parity decomposition of $D(s)$)," flagged "of uncertain outcome / not currently in the corpus." This sprint supplies exactly that object and resolves it.
+
+### Finding
+- **Parity-resolved M3 period map is rank 2** (bit-exact, `debug/sprint_m3_parity_rank_probe.py`; test `tests/test_paper56_m3_parity_rank.py`, 14/14). The corpus rank-1 collapse (`tests/test_paper56_injection_g4_periodmap.py`) is a property of the parity-**blind** per-sector scalar $\eta_{(n,l)}$. Resolving each Coulomb sector by its Camporesi–Higuchi shell parity — the **proven** $\chi_{-4}$ vertex-parity identity (Paper 28 Thm 3: even shells → Hurwitz shift 3/4, odd → 5/4, with $D_{\rm even}-D_{\rm odd}=2^{s-1}(\beta(s)-\beta(s-2))$ pure level-4 Dirichlet-$L$) — gives Gram rank **2** at every $n_{\max}\ge2$ (rank 1 at $n_{\max}=1$, only odd shells), under both sector↔shell offset conventions.
+- **Anti-artifact check:** $D_{\rm even}(4)$ and $D_{\rm odd}(4)$ are $\mathbb{Q}$-linearly independent in $\{\pi^2,\pi^4,G,\beta(4)\}$ (rank 2/2) — the second direction is a genuine period, not a manufactured sign.
+- **Interpretation:** rank = the two motivic **levels** the $\chi_{-4}$ mechanism accesses (level-2 un-restricted ⊕ level-4 $\chi_{-4}$). **Provably capped at 2** (two parity classes), so the parity route **cannot** deliver a faithful closed immersion (rank $N$) for $N>2$: GeoVac is a strict, **rank-2** abelianized subgroup — not rank-1, not faithful.
+
+### Changed (`papers/group3_foundations/paper_56_tannakian_substrate.tex`)
+- Added Remark `rem:m3_parity_rank` documenting the rank-2 finding (**additive**; the existing rank-1 statement of `thm:injection_g4`(C4), correct for the parity-blind functional, is preserved).
+- Corrected **three now-stale claims** (false the moment the map was constructed + tested): the C4-proof "named follow-on of uncertain outcome," the `rem:injection_honest_scope` "supplying it is a … follow-on of uncertain outcome," and the §`sec:open_g4` "not yet in the corpus" — each now references `rem:m3_parity_rank` and states the resolved outcome (rank 2, capped, refines-but-does-not-reach injectivity).
+
+### Honest scope / held
+- The **headline** of `thm:injection_g4` remains **rank-1** — correct for the period map as defined (`def:period_map`, the ungraded $k=1$ trace). Flipping it to rank-2 requires **admitting the $\chi_{-4}$-graded trace $\mathrm{Tr}((-1)^N D\,e^{-tD^2})$ into the canonical period map** — a legitimate refinement (same $k=1$ slot, a proven observable) but a **definitional judgment pending PI adjudication**. The most honest state keeps both facts side by side: rank-1 for the defined map, rank-2 for the $\chi_{-4}$-enriched map (Remark).
+- Big picture unchanged: strict subgroup, now demonstrably **rank-2** rather than rank-1; depth-≥2 equality is a separate open axis (JLO-Depth2 Reading A), unaffected.
+
+### Verification
+- `tests/test_paper56_m3_parity_rank.py` 14/14 pass; existing `test_paper56_injection_g4_periodmap.py` unaffected (tests the parity-blind map, correctly rank 1). Paper 56 compiles `-halt-on-error` exit 0. No `geovac/` production code changed.
+
+Memo: `debug/sprint_m3_parity_rank_memo.md`.
+
 ## [4.73.2] - 2026-07-08
 
 **Process fix: the `/ahha` skill now grounds-then-verifies before proposing.** A generative `/ahha` pass on the v4.73.x composition-wall work pitched a connection as novel — *"the chemical bond is a Connes–Chamseddine inner fluctuation over a 2-point finite geometry; binding is the spectral-action double-well"* — framing it as unifying two arcs that "run in separate universes." On the mandatory current-state check the framing was **stale**: both legs were already settled on 2026-06-07. The structural leg is proven bit-exact (Sprint M-vS-2: the production LiH `h1` **is** a Marcolli–van Suijlekom gauge network on the Li↔H bond quiver, residual 0.0 — the bond-as-connection object is the edge intertwiner). The dynamical leg is structurally dead (Sprint M-vS-2 Q2: S(D)(R) monotone, no binding; Spectral-Action-Expansion: a finite-dim Dirac has no UV divergence, so the Chamseddine–Connes Seeley–DeWitt hierarchy that would build the Higgs double-well cannot arise — the CC binding mechanism is a continuum phenomenon the n_max cutoff removes). Memo: `debug/sprint_ahha_grounding_memo.md`.

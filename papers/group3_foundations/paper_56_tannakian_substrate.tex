@@ -1343,9 +1343,12 @@ abelianized image $\Phi^{\mathrm{inj}}((\Ustar_{GV})^{\mathrm{ab}})$,
 Zariski-closed in $\mathcal{U}_{4}$ (the kernel of the finitely many
 linear functionals vanishing on the realised M3 content, each
 finite-weight piece finite-dimensional over $\Q$ by Glanois 2015). A
-genuinely injective (closed-immersion) refinement would require a
-sector-resolved rank-$\ge 2$ M3 period map, a named follow-on of
-uncertain outcome.\qed
+genuinely injective (closed-immersion) refinement would require distinct
+sectors to map to $\Q$-linearly independent periods;\ the $\chi_{-4}$
+vertex-parity resolution (Remark~\ref{rem:m3_parity_rank}) supplies the
+named sector-resolved map and raises the rank to $2$, but is capped there
+(two parity classes), so it does \emph{not} yield a closed immersion for
+$N > 2$.\qed
 \end{proof}
 
 \begin{remark}[Why level 4 and not level 1]\label{rem:why_level_4}
@@ -1415,9 +1418,10 @@ $\Q$-linearly independent periods, so M3-column injectivity is
 M1/M2 do. The faithful Goncharov--Deligne 2005 action on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would imply injectivity only
 for a \emph{sector-resolved} rank-$\ge 2$ M3 period map (a per-$(n,l)$
-parity decomposition of $D(s)$), which the corpus does not currently
-contain;\ supplying it is a named derivation follow-on of uncertain
-outcome. As it stands, $\Phi^{\mathrm{inj}}$ realises the
+parity decomposition of $D(s)$). Such a map is now supplied by the
+$\chi_{-4}$ vertex parity (Remark~\ref{rem:m3_parity_rank}):\ it raises
+the M3 rank to $2$ but is capped there, so it refines --- without
+reaching --- injectivity. As it stands, $\Phi^{\mathrm{inj}}$ realises the
 \emph{abelianized} image (Reading~A) on all three columns.
 \item \emph{Depth-blindness on the GeoVac side.} The injection is
 constructed at depth 1 (linear combinations of single Hurwitz
@@ -1431,6 +1435,45 @@ or whether the abelianization is the correct geometric realisation
 (Reading A wins) is the genuinely open question pending the
 sprint-scale NA-1 depth-2 Mellin test.
 \end{itemize}
+\end{remark}
+
+\begin{remark}[Vertex-parity resolution of the M3 column]\label{rem:m3_parity_rank}
+The rank-1 collapse of the M3 column (Remark~\ref{rem:injection_honest_scope})
+is a property of the parity-\emph{blind} per-sector content $\eta_{(n,l)}$.
+The follow-on named there --- a ``sector-resolved rank-$\ge 2$ M3 period map,
+a per-$(n,l)$ parity decomposition of $D(s)$'' --- is supplied by the
+\emph{proven} $\chi_{-4}$ vertex-parity identity (Paper~28~\cite{loutey_paper28}
+Theorem~3):\ even Camporesi--Higuchi shells contribute at Hurwitz shift $3/4$
+and odd shells at $5/4$, with $D_{\mathrm{even}}(s) - D_{\mathrm{odd}}(s) =
+2^{s-1}(\beta(s) - \beta(s-2))$ pure level-4 Dirichlet-$L$ content. Each Coulomb
+sector $(n,l)$ sits in its shell's parity class, so the parity-resolved period
+vector is $\eta_{(n,l)}$ times the basis vector of its shift-class, and the Gram
+rank equals the number of populated shift-classes:\ \textbf{rank $2$ at every
+$\nmax \ge 2$} (rank $1$ at $\nmax = 1$, where only odd shells exist), bit-exact
+under both sector$\leftrightarrow$shell offset conventions
+(\texttt{tests/test\_paper56\_m3\_parity\_rank.py}). The two shift-classes are a
+genuine independent period, not a manufactured sign:\ $D_{\mathrm{even}}(4)$ and
+$D_{\mathrm{odd}}(4)$ are $\Q$-linearly independent in
+$\{\pi^2, \pi^4, G, \beta(4)\}$.
+
+Two consequences. First, the rank-1 reading of
+Theorem~\ref{thm:injection_g4}(C4) is an under-resolution of the parity-blind
+functional;\ the M3 image is $2$-dimensional, indexing the two motivic
+\emph{levels} the $\chi_{-4}$ mechanism accesses (level-2 un-restricted
+$\oplus$ level-4 $\chi_{-4}$). Second --- sharpening the follow-on's implicit
+hope that ``rank-$\ge 2 \Rightarrow$ injectivity'' --- the parity route is
+\emph{capped} at rank $2$ (there are only two parity classes), so it
+\emph{cannot} deliver a faithful closed immersion (rank $N$) for $N > 2$:\
+\textsc{GeoVac} is a strict, \emph{rank-2} abelianized subgroup, neither rank-1
+nor faithful.
+
+\emph{Scope.} Admitting the $\chi_{-4}$-graded trace
+$\mathrm{Tr}((-1)^{N} D\,e^{-tD^2})$ into the period map is a legitimate
+refinement --- it is the same $k = 1$ Mellin slot and a proven \textsc{GeoVac}
+observable (Paper~28~\cite{loutey_paper28} Theorem~3) --- but it enriches the
+map of Definition~\ref{def:period_map}. The linear-algebra facts above hold
+regardless;\ the rank-1$\,\to\,$rank-2 update to the headline of
+Theorem~\ref{thm:injection_g4} is held pending adjudication of that admission.
 \end{remark}
 
 \subsection{Numerical verification panel}\label{sec:injection_panel}
@@ -1822,7 +1865,9 @@ abelianized image via Glanois basis), with the M3 column collapsing to
 rank~1 so the map is the abelianized homomorphism rather than an
 injective closed immersion (Goncharov--Deligne 2005 faithfulness on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$ would apply only to a
-sector-resolved rank-$\ge 2$ M3 period map, not yet in the corpus).
+sector-resolved rank-$\ge 2$ M3 period map;\ the $\chi_{-4}$ vertex
+parity now supplies one at rank~2, capped there, so it refines but does
+not reach a closed immersion --- Remark~\ref{rem:m3_parity_rank}).
 
 \textbf{Remaining conjecture (equality / exhaustion).}\ Equality
 $\Phi^{\mathrm{inj}}(\Ustar_{GV}) = \mathcal{U}_{4}^{\mathrm{ab}}
