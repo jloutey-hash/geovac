@@ -93,15 +93,49 @@ class TestParityResolvedRank:
         assert r == 2 < N_sectors(n_max)
 
 
+# --- the D(4) motivic period vectors in the basis {pi^2, pi^4, G=beta(2), beta(4)}
+#     (Paper 28 Thm 3, eq D_even_4 / D_odd_4) -- shared by the checks below. ---
+_D_EVEN_4 = [Rational(1, 2), Rational(-1, 24), -4, 4]
+_D_ODD_4 = [Rational(1, 2), Rational(-1, 24), 4, -4]
+
+
 class TestShiftClassIndependence:
     """Anti-artifact check: the two shift-classes are a genuine independent
     period, not a manufactured sign. D_even(4), D_odd(4) in {pi^2,pi^4,G,beta4}."""
 
     def test_shift_classes_independent(self) -> None:
-        #                pi^2            pi^4         G   beta(4)
-        D_even = Matrix([[Rational(1, 2), Rational(-1, 24), -4, 4]])
-        D_odd = Matrix([[Rational(1, 2), Rational(-1, 24), 4, -4]])
-        assert Matrix.vstack(D_even, D_odd).rank() == 2
+        assert Matrix.vstack(Matrix([_D_EVEN_4]), Matrix([_D_ODD_4])).rank() == 2
+
+
+def sector_period_vector(n: int, l: int, conv: str = "n") -> list:
+    """Per-sector M3 period vector in the motivic basis {pi^2, pi^4, G, beta(4)}
+    at s=4: eta_{(n,l)} * (D_even(4) if even shell else D_odd(4)). This ties the
+    rank to the ACTUAL Paper 28 Thm 3 period content -- NOT an abstract 2-bucket
+    (which gives rank 2 for *any* 2-way split of n, independent of the physics)."""
+    base = _D_EVEN_4 if shift_class(n, conv) == 0 else _D_ODD_4
+    return [eta(n, l) * b for b in base]
+
+
+class TestRankFromActualPeriodVectors:
+    """The DISCRIMINATING rank-2 test (addresses the '2 disjoint buckets make
+    rank 2 automatically' critique): build each sector's period vector as
+    eta * (D_even(4) | D_odd(4)) in the motivic basis and pin the Gram rank.
+    Unlike the abstract-bucket construction, this rank-2 FAILS if D_even/D_odd
+    were collinear (a 'manufactured sign') -- so the rank-2 pass is genuine."""
+
+    @pytest.mark.parametrize("n_max", [2, 3, 4])
+    @pytest.mark.parametrize("conv", ["n", "n-1"])
+    def test_rank_two_from_motivic_period_vectors(self, n_max: int, conv: str) -> None:
+        P = Matrix([sector_period_vector(n, l, conv)
+                    for (n, l) in sectors_at_cutoff(n_max)])
+        assert P.rank() == 2
+
+    def test_manufactured_sign_collapses_to_rank_one(self) -> None:
+        """Proves the test above is discriminating, not automatic: if D_odd were
+        -D_even (the exact manufactured-sign artifact the paper rules out), the
+        two-shift-class period system collapses to rank 1."""
+        D_even = Matrix([_D_EVEN_4])
+        assert Matrix.vstack(D_even, -D_even).rank() == 1
 
 
 if __name__ == "__main__":

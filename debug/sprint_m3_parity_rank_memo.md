@@ -80,3 +80,12 @@ rank-1 → rank-2 coherently — `def:period_map` enriched, ~13 downstream menti
 updated, each preserving the theorem's conclusion (abelianized / not-faithful,
 unchanged since rank 2 ≪ N). No negative suppressed: rank-1 survives as the
 parity-blind sub-statement. See CHANGELOG v4.74.1.
+
+**Delta-QA (v4.74.2, 2026-07-09):** PI-invoked `/qa` on the flip ran **CLEAN-DELTA
+(calibrated)** — claims 1/1 + code 2/2 seeds caught, 0 false-positives; all
+deterministic gates (C10–C18) green; 0 verified MATERIAL in the committed delta.
+Two panel NITs hardened: (1) rank-2 test strengthened to discriminate the physical
+χ₋₄ split — `TestRankFromActualPeriodVectors` builds η·(D_even|D_odd) in the motivic
+basis + a manufactured-sign sanity check (21/21); (2) the "levels" gloss harmonized
+with "shift-classes". Also reconciled the stale DoD §C8 Paper 56 line ("closed
+immersion" → "abelianized homomorphism"). See CHANGELOG v4.74.2.

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.74.2] - 2026-07-09
+
+**Delta-QA of the v4.74.1 M3 rank-1→2 flip: CLEAN-DELTA (calibrated), two panel-surfaced NITs hardened.** A PI-invoked `/qa` delta on the v4.74.0→v4.74.1 Paper 56 change ran **CLEAN-DELTA**: both LLM dimensions calibrated (claims caught its planted self-contradiction seed; code caught both planted test seeds — a vacuous `rank()>=1` and a tautological `assert 2==2`), all deterministic gates (C10–C18) green, **0 verified MATERIAL defects** in the committed delta. Two genuine NITs the calibrated panel surfaced *beyond* the seeds are fixed here.
+
+### Changed
+- **`tests/test_paper56_m3_parity_rank.py` — rank-2 backing strengthened** (code-reviewer finding 3, the valuable catch): the prior rank-2 tests proved rank-2 as a near-automatic consequence of *any* 2-bucket split of n, with the genuine-period content in a disconnected hardcoded check. Added `TestRankFromActualPeriodVectors` — builds each sector's period vector as η·(D_even(4)|D_odd(4)) in the motivic basis {π²,π⁴,G,β(4)} and pins *that* Gram rank to 2 (both offset conventions) — plus `test_manufactured_sign_collapses_to_rank_one` proving the test fails on a manufactured sign. The rank-2 backing now discriminates the physical χ₋₄ split, not just the bucket count. **21/21 pass** (was 14; +7).
+- **Paper 56 `rem:m3_parity_rank`** (claims NIT): the "two motivic levels" gloss harmonized with the "two shift-classes {3/4,5/4}" framing used everywhere else — same 2-space, sum/difference basis. PDF refreshed.
+- **`docs/qa/group3.done.md` §C8 Paper 56 reconciled** (PI direction): "theorem-grade closed immersion at finite cutoff" → "abelianized homomorphism (Reading A), **NOT** a closed immersion (M3 rank 2 via χ₋₄, capped ≪ N)". The stale line predated the v4.20.0 bite-2 remediation (C4 refuted → abelianized) and was never synced to the certified paper body; same pattern as the 2026-07-05 P57 reconciliation. **bite-2 cert stands.**
+
+### Verification
+- `tests/test_paper56_m3_parity_rank.py` 21/21; Paper 56 compiles 3-pass clean in-place; no `geovac/` production code changed. Delta-QA calibration scorecard: claims 1/1 sensitivity + 0 false-positive; code 2/2 sensitivity + 0 false-positive; deterministic C10–C18 all PASS.
+
+Memo: `debug/sprint_m3_parity_rank_memo.md`.
+
 ## [4.74.1] - 2026-07-08
 
 **Paper 56: the M3 rank-2 finding promoted from remark to theorem headline (PI-directed).** v4.74.0 documented the rank-2 result as an additive remark and held the theorem headline at rank-1, pending a definitional call: whether the χ₋₄-graded trace is admitted into the *canonical* period map. The PI adjudicated — yes, it is admitted (same k=1 operator order, a proven GeoVac observable) — so this commit makes the flip coherently across the theorem.

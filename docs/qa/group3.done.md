@@ -50,8 +50,11 @@ claim restates them (C7).
   - **Paper 55** = every GeoVac period = **cyclotomic mixed-Tate at level ≤ 4**
     as a *classification* (tier-appropriate), not a derivation of physics.
   - **Paper 56** = Tannakian/cosmic-Galois reconstruction as a **theorem-grade
-    closed immersion at finite cutoff** with honest scope (infinite-cutoff
-    equality NOT claimed; Reading A).
+    abelianized homomorphism (Reading A) at finite cutoff** — explicitly **NOT a
+    closed immersion** (M3 column rank 2 via χ₋₄ vertex parity, capped ≪ N;
+    parity-blind restriction rank-1) — with honest scope (infinite-cutoff
+    equality NOT claimed). *(A reviewer presenting the injection as a genuine
+    closed immersion / faithful / rank-N is a MATERIAL overstatement.)*
   - **Paper 57** = forced/free P5 packing-reachability is an **internal-consistency
     check**, not an independent discriminator — the packing-reachable tag is the F/C
     label by construction, so its **98.3%** is an agreement rate (not a discovered
@@ -153,3 +156,13 @@ claim restates them (C7).
   reviewer as the source of the field-guide overstatement. No criterion changed;
   the headline statement is made tier-honest (a deliberate, dated edit — not a
   mid-review goalpost move; bite-2 cert stands).
+- 2026-07-09 — **C8 Paper 56 headline reconciled** (PI direction, post-v4.74.1
+  delta-QA): "theorem-grade **closed immersion** at finite cutoff" → "theorem-grade
+  **abelianized homomorphism** (Reading A), NOT a closed immersion (M3 rank 2 via
+  χ₋₄ vertex parity, capped ≪ N; parity-blind restriction rank-1)". The old wording
+  predated the v4.20.0 bite-2 remediation that refuted the closed-immersion reading
+  (C4 refuted → abelianized); the DoD line was never synced to the certified paper
+  body. A deliberate, dated edit bringing the DoD into line with the certified paper
+  (same pattern as the 2026-07-05 P57 reconciliation) — not a mid-review goalpost
+  move; bite-2 cert stands. Surfaced by the v4.74.1 (M3 rank-1→2 flip) delta-QA,
+  which ran CLEAN-DELTA (calibrated) against the corrected framing.
