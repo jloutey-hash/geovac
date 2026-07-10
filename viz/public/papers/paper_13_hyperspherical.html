@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The natural geometry principle states that every separable quantum system has a natural lattice—a discrete graph whose nodes carry quantum number labels and whose edges encode transition amplitudes. For atoms, this is Fock&#x27;s three-sphere $S^3$ (Papers 0, 1, 7); for diatomic molecules, the prolate…">
+<title>The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel Graphs — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel Graphs</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 13 · Quantum Chemistry · DOI: <a href="https://doi.org/10.5281/zenodo.21286720">10.5281/zenodo.21286720</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group2_quantum_chemistry/paper_13_hyperspherical.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">The natural geometry principle states that every separable quantum system has a natural lattice—a discrete graph whose nodes carry quantum number labels and whose edges encode transition amplitudes. For atoms, this is Fock&#x27;s three-sphere $S^3$ (Papers 0, 1, 7); for diatomic molecules, the prolate spheroid (Paper 11). Paper 12 identified the electron-electron cusp as the limiting factor in prolate spheroidal CI for H$_2$ and pointed to hyperspherical coordinates as the next natural geometry for multi-electron systems. This paper introduces the hyperspherical lattice for helium. The original adiabatic solver obtains $E = -2.9052$ Ha with a single channel—nominally 0.05% from the exact $-2.9037$ Ha, but non-variational (below the exact energy due to fortuitous error cancellation). A 2D variational solver treating hyperradius and hyperangle simultaneously (Note added v2.6.0) achieves a properly variational $0.022%$ raw at $l_{\max} = 7$; a further Schwartz cusp extrapolation at $l_{\max} = 4$ reaches $0.004%$ but lies marginally below the exact energy (non-variational). A graph-native FCI using the graph Laplacian as the one-body operator with exact rational Slater integrals achieves 0.19% at $n_{\max} = 7$ with zero free parameters. The hyperspherical lattice is structurally the same kind of object as the atomic $S^3$ lattice and the molecular prolate spheroidal lattice, but with one key generalization: it is a coupled-channel expansion in which the angular eigenvalue problem depends parametrically on the hyperradius, so that the channel functions vary with $R$. This coupled-channel structure has the form of a fiber bundle and provides the mathematical prototype for electron-nuclear coupling in molecules. As a demonstration of the framework&#x27;s end-to-end capability, we combine the prolate spheroidal electron lattice with a nuclear lattice to produce ab initio rovibrational frequencies for H$_2$ with zero experimental spectroscopic input: the fundamental vibrational frequency $\nu_{01} = 4157$ cm$^{-1}$ (0.1% error) and the rotational constant $B_e = 59.5$ cm$^{-1}$ (2.2% error), computed from first principles using only nuclear charges and masses.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

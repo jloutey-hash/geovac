@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Geometric Vacuum (GeoVac) framework discretizes electronic structure on natural geometries, producing sparse graph Hamiltonians whose angular content is fixed by Gaunt selection rules. This synthesis assembles the framework&#x27;s quantum-computing arc—the four Group 4 papers—into a single…">
+<title>Structural Sparsity for Quantum Simulation: A Synthesis of the GeoVac Quantum-Computing Arc — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Structural Sparsity for Quantum Simulation: A Synthesis of the GeoVac Quantum-Computing Arc</h1>
+<p class="meta">Josh Loutey · GeoVac synthesis document · Synthesis / Reading Guides · DOI: <a href="https://doi.org/10.5281/zenodo.21286864">10.5281/zenodo.21286864</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/synthesis/group4_quantum_computing_synthesis.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">The Geometric Vacuum (GeoVac) framework discretizes electronic structure on natural geometries, producing sparse graph Hamiltonians whose angular content is fixed by Gaunt selection rules. This synthesis assembles the framework&#x27;s quantum-computing arc—the four Group 4 papers—into a single resource-oriented narrative. The spine is: the qubit encoding and its Pauli/$1$-norm scaling [ref]; the benchmarked resource library across three periodic-table rows [ref]; the $S_N$ representation-theoretic foundation that classifies the atomic building blocks [ref]; and the nuclear shell-model extension that delineates exactly which part of the framework transfers [ref]. The unifying value proposition is structural, not accuracy-based: after the Jordan–Wigner transformation the GeoVac lattice Hamiltonian yields $O(Q^{3.15})$ Pauli terms for atoms and $O(Q^{2.5})$ for composed multi-center molecules (versus $O(Q^{3.9–4.3})$ for Gaussian baselines), with a sub-quadratic Pauli $1$-norm $\lambda = O(Q^{1.69})$ ($R^2=0.997$) that controls Trotter depth and qubitization query cost. Two disciplines run through the arc. First, we separate the robust scaling exponents—unchanged under the choice of electron-repulsion selection rule—from the absolute multipliers, which depend on a stated pair-diagonal angular approximation and are disclosed as such. Second, every comparison is made at matched qubit count, not matched accuracy: the composed basis carries classical equilibrium-geometry errors of $5$–$26%$, so the framework is positioned for fixed-geometry NISQ/VQE simulation (Pauli count, QWC measurement groups), not for fault-tolerant geometry optimisation. The nuclear extension is honest in the same way: its binding energies are encoding-validation benchmarks far from experiment, and the Fock projection rigidity theorem states precisely that the conformal $S^3$ structure does not transfer to the harmonic-oscillator basis—only the angular machinery and the qubit encoding do.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

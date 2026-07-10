@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The natural geometry hierarchy assigns each separable quantum system a coordinate system in which Coulomb singularities become boundary conditions and the Laplace–Beltrami operator discretizes on a sparse graph: $S^3$ for hydrogen (Paper 7), prolate spheroidal for H$_2^+$ (Paper 11), and…">
+<title>The Level 4 Natural Geometry: Two-Center Two-Electron Molecules in Molecule-Frame Hyperspherical Coordinates — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>The Level 4 Natural Geometry: Two-Center Two-Electron Molecules in Molecule-Frame Hyperspherical Coordinates</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 15 · Quantum Chemistry · DOI: <a href="https://doi.org/10.5281/zenodo.21286722">10.5281/zenodo.21286722</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group2_quantum_chemistry/paper_15_level4_geometry.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">The natural geometry hierarchy assigns each separable quantum system a coordinate system in which Coulomb singularities become boundary conditions and the Laplace–Beltrami operator discretizes on a sparse graph: $S^3$ for hydrogen (Paper 7), prolate spheroidal for H$_2^+$ (Paper 11), and hyperspherical for helium (Paper 13). The two-center, two-electron molecule H$_2$ combines all five Coulomb singularities and has resisted a single natural coordinate system. We introduce molecule-frame hyperspherical coordinates $(R_e,α,\theta_1,\theta_2,\Phi)$ parameterized by the dimensionless ratio $\rho = R/(2R_e)$, where $R$ is the internuclear distance and $R_e$ the electronic hyperradius. The electron–electron cusp appears at $α=π/4$, $\theta_{12}=0$, independent of molecular geometry—a structural advantage over prolate spheroidal coordinates, where it is a coordinate singularity. The angular eigenvalue problem depends on $(R,R_e)$ only through $\rho$, collapsing a two-dimensional parameter sweep to one dimension. A coupled-channel expansion in body-frame partial waves $(l_1,m_1,l_2,m_2)$ with $l_1+l_2$ even (gerade symmetry) and $m_1+m_2=0$, solved with a variational two-dimensional $(R_e,α)$ solver that avoids the adiabatic approximation, recovers 96.0% of the exact dissociation energy $D_e$ at $l_{\max}=6$ with $\sigma$ and $π$ channels (61 channels, CBS extrapolation ${\sim}97%$), exceeding the 92.4% achieved by prolate spheroidal CI with algebraic Neumann integrals (Paper 12). The framework extends to heteronuclear diatomics (HeH$^+$, $Z_A=2$, $Z_B=1$) via a charge-center origin shift and removal of the gerade constraint; the adiabatic solver recovers 93.1% of the exact $D_e$ at $l_{\max}=4$ ($\sigma{+}π$, 57 channels), but—unlike H$_2$—a consistent 2D variational treatment at the same truncation recovers only ${\sim}5%$, the absolute energy error ($2.4%$) being comparable to the small $0.075$ Ha binding. The He-like ($Z=2$) core and charge asymmetry thus converge substantially more slowly than H$_2$, and the adiabatic value is a non-variational over-binding. The solver has a double-adiabatic coupled-channel structure—nuclear coordinates as outer slow variable, hyperradius as inner slow variable, angular channels as fast variables—generalizing the single-adiabatic expansion of Paper 13.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

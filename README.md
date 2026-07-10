@@ -1,6 +1,6 @@
 # GeoVac: Structurally Sparse Qubit Hamiltonians from Graph Theory
 
-![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-4.0.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20482394-blue)](https://doi.org/10.5281/zenodo.20482394)
+![Status](https://img.shields.io/badge/Status-Research-blue) ![Version](https://img.shields.io/badge/Version-4.75.0-blue) ![License](https://img.shields.io/badge/License-MIT-orange) [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20482394-blue)](https://doi.org/10.5281/zenodo.20482394)
 
 GeoVac constructs **structurally sparse qubit Hamiltonians** for molecular quantum simulation. The angular momentum selection rules of the hyperspherical harmonic basis enforce block-diagonal electron repulsion integrals, producing Hamiltonians with **O(Q^2.5) Pauli term scaling** — a **51x to 1,712x advantage** over published Gaussian baselines across LiH, BeH₂, and H₂O (Paper 14). These comparisons are at matched qubit counts, not matched accuracy; the accuracy ceilings of the underlying basis are stated plainly in *Scope and Limitations* below and in [`docs/claims_register.md`](docs/claims_register.md).
 
@@ -25,7 +25,7 @@ Install the standalone Hamiltonian package: `pip install geovac-hamiltonians`
 | Molecules | **38** (H₂ through C₂H₆, 3 periodic table rows, 10 transition metals); **35** via `hamiltonian()` API |
 | Pauli scaling | **O(Q^2.5)** composed, universal coefficient 11.10 × Q |
 | Advantage vs Gaussian | **51×–1,712×** fewer Pauli terms (LiH/BeH₂/H₂O) |
-| 1-norm (LiH) | **33.3 Ha** (matches STO-3G 34.3 Ha, 13× fewer QWC groups) |
+| 1-norm (LiH) | **32.6 Ha** (0.95× vs STO-3G 34.3 Ha, 13× fewer QWC groups) |
 | He accuracy | **0.019%** (2D variational + self-consistent cusp, zero free parameters) |
 | H₂ accuracy | **96.0% D_e** (molecule-frame hyperspherical, l_max=6) |
 | Algebraic integrals | Exact hypergeometric R^k evaluator eliminates grid quadrature for Slater integrals |

@@ -1,0 +1,415 @@
+{
+  "paper_38_su2_propinquity_convergence": {
+    "deposition_id": 21286585,
+    "state": "published",
+    "title": "State-space Gromov–Hausdorff convergence of truncated Camporesi–Higuchi spectral triples on S³",
+    "doi": "10.5281/zenodo.21286585",
+    "url": "https://zenodo.org/record/21286585"
+  },
+  "paper_29_ramanujan_hopf": {
+    "deposition_id": 21286655,
+    "state": "published",
+    "title": "Finite-Size Graph-RH for the GeoVac Hopf Graphs: Ihara Zeta, Bound-Crossing, and a Scope Boundary on Selberg-on-Hydrogen",
+    "doi": "10.5281/zenodo.21286655",
+    "url": "https://zenodo.org/record/21286655"
+  },
+  "paper_32_spectral_triple": {
+    "deposition_id": 21286660,
+    "state": "published",
+    "title": "The GeoVac Spectral Triple: A Synthesis Paper Locking the Framework into the Marcolli–van Suijlekom Gauge-Network Lineage",
+    "doi": "10.5281/zenodo.21286660",
+    "url": "https://zenodo.org/record/21286660"
+  },
+  "paper_39_tensor_propinquity_convergence": {
+    "deposition_id": 21286666,
+    "state": "published",
+    "title": "State-space Gromov–Hausdorff convergence of truncated tensor-product Camporesi–Higuchi spectral triples on S³ × S³",
+    "doi": "10.5281/zenodo.21286666",
+    "url": "https://zenodo.org/record/21286666"
+  },
+  "paper_40_unified_propinquity_convergence": {
+    "deposition_id": 21286668,
+    "state": "published",
+    "title": "State-space Gromov–Hausdorff convergence of spectral truncations of compact Lie groups with bi-invariant metric",
+    "doi": "10.5281/zenodo.21286668",
+    "url": "https://zenodo.org/record/21286668"
+  },
+  "paper_42_modular_hamiltonian_four_witness": {
+    "deposition_id": 21286670,
+    "state": "published",
+    "title": "Tomita–Takesaki modular structure on truncated SU(2) spectral triples: four-witness Wick-rotation literal identification at finite cutoff",
+    "doi": "10.5281/zenodo.21286670",
+    "url": "https://zenodo.org/record/21286670"
+  },
+  "paper_43_lorentzian_extension": {
+    "deposition_id": 21286683,
+    "state": "published",
+    "title": "Lorentzian extension of the four-witness Wick-rotation theorem on truncated S³ × ℝ spectral triples at finite cutoff",
+    "doi": "10.5281/zenodo.21286683",
+    "url": "https://zenodo.org/record/21286683"
+  },
+  "paper_44_lorentzian_operator_system": {
+    "deposition_id": 21286687,
+    "state": "published",
+    "title": "Operator-system extension of the BBB Krein spectral triple at finite cutoff: propagation number and envelope dependence on the Camporesi–Higuchi spinor bundle",
+    "doi": "10.5281/zenodo.21286687",
+    "url": "https://zenodo.org/record/21286687"
+  },
+  "paper_45_lorentzian_propinquity": {
+    "deposition_id": 21286689,
+    "state": "published",
+    "title": "Lorentzian propinquity on truncated SU(2)×U(1)_T Krein spectral triples: a degeneracy theorem",
+    "doi": "10.5281/zenodo.21286689",
+    "url": "https://zenodo.org/record/21286689"
+  },
+  "paper_46_strong_form_lorentzian_propinquity": {
+    "deposition_id": 21286692,
+    "state": "published",
+    "title": "Strong-form Lorentzian propinquity on truncated SU(2)×U(1)_T Krein spectral triples: the natural-substrate degeneracy and the enlarged-substrate repair target",
+    "doi": "10.5281/zenodo.21286692",
+    "url": "https://zenodo.org/record/21286692"
+  },
+  "paper_47_two_rate_hybrid_convergence": {
+    "deposition_id": 21286696,
+    "state": "published",
+    "title": "Norm-resolvent convergence to the non-compact Lorentzian Krein spectral triple on S³×ℝ_t and the two-rate hybrid limit",
+    "doi": "10.5281/zenodo.21286696",
+    "url": "https://zenodo.org/record/21286696"
+  },
+  "paper_48_krein_ms_bridge": {
+    "deposition_id": 21286699,
+    "state": "published",
+    "title": "Krein-pointed proper quantum metric spaces and the bridge to Mondino–Sämann Lorentzian pre-length spaces, with application to the GeoVac hemispheric wedge",
+    "doi": "10.5281/zenodo.21286699",
+    "url": "https://zenodo.org/record/21286699"
+  },
+  "paper_49_oslpls_strong_form_bridge": {
+    "deposition_id": 21286703,
+    "state": "published",
+    "title": "Operator-system Lorentzian pre-length spaces and the strong-form Krein–Mondino–Sämann bridge: cross-KMS-state thermal-time stack and strict super-additivity",
+    "doi": "10.5281/zenodo.21286703",
+    "url": "https://zenodo.org/record/21286703"
+  },
+  "paper_50_cft3_partition_function": {
+    "deposition_id": 21286705,
+    "state": "published",
+    "title": "Boundary CFT_3-on-S³ observables on the truncated GeoVac spectral triple: partition function, wedge KMS entropy, and Casini–Huerta–Myers modular Hamiltonian",
+    "doi": "10.5281/zenodo.21286705",
+    "url": "https://zenodo.org/record/21286705"
+  },
+  "paper_52_category_iii_correspondence": {
+    "deposition_id": 21286707,
+    "state": "published",
+    "title": "Discrete spectral-triple realization of CFT_3-on-S³ partition function data: a non-holographic alternative to dS/CFT",
+    "doi": "10.5281/zenodo.21286707",
+    "url": "https://zenodo.org/record/21286707"
+  },
+  "paper_53_disk_propinquity": {
+    "deposition_id": 21286712,
+    "state": "published",
+    "title": "Berezin reconstruction for the disk-with-cone truncated spectral triple, and the apex backbone of the cigar-tip entropy",
+    "doi": "10.5281/zenodo.21286712",
+    "url": "https://zenodo.org/record/21286712"
+  },
+  "paper_11_prolate_spheroidal": {
+    "deposition_id": 21286714,
+    "state": "published",
+    "title": "The Molecular Fock Projection: Diatomic Molecules as Prolate Spheroidal Lattices",
+    "doi": "10.5281/zenodo.21286714",
+    "url": "https://zenodo.org/record/21286714"
+  },
+  "paper_12_algebraic_vee": {
+    "deposition_id": 21286718,
+    "state": "published",
+    "title": "Algebraic Two-Electron Integrals on the Prolate Spheroidal Lattice",
+    "doi": "10.5281/zenodo.21286718",
+    "url": "https://zenodo.org/record/21286718"
+  },
+  "paper_13_hyperspherical": {
+    "deposition_id": 21286720,
+    "state": "published",
+    "title": "The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel Graphs",
+    "doi": "10.5281/zenodo.21286720",
+    "url": "https://zenodo.org/record/21286720"
+  },
+  "paper_15_level4_geometry": {
+    "deposition_id": 21286722,
+    "state": "published",
+    "title": "The Level 4 Natural Geometry: Two-Center Two-Electron Molecules in Molecule-Frame Hyperspherical Coordinates",
+    "doi": "10.5281/zenodo.21286722",
+    "url": "https://zenodo.org/record/21286722"
+  },
+  "paper_17_composed_geometries": {
+    "deposition_id": 21286726,
+    "state": "published",
+    "title": "Composed Natural Geometries for Core-Valence Diatomics: LiH and BeH^+ from Discrete Graph Topology",
+    "doi": "10.5281/zenodo.21286726",
+    "url": "https://zenodo.org/record/21286726"
+  },
+  "paper_19_coupled_composition": {
+    "deposition_id": 21286728,
+    "state": "published",
+    "title": "Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian Integrals and Coupled Composition",
+    "doi": "10.5281/zenodo.21286728",
+    "url": "https://zenodo.org/record/21286728"
+  },
+  "Paper_8_Bond_Sphere_Sturmian": {
+    "deposition_id": 21286732,
+    "state": "published",
+    "title": "Bond Sphere: Diatomic Molecules as S^3 and their Natural Sturmian Basis",
+    "doi": "10.5281/zenodo.21286732",
+    "url": "https://zenodo.org/record/21286732"
+  },
+  "paper_fci_atoms": {
+    "deposition_id": 21286734,
+    "state": "published",
+    "title": "Full configuration interaction on a sparse graph Hamiltonian: Multi-electron atoms via relational lattice indexing",
+    "doi": "10.5281/zenodo.21286734",
+    "url": "https://zenodo.org/record/21286734"
+  },
+  "paper_fci_molecules": {
+    "deposition_id": 21286736,
+    "state": "published",
+    "title": "Topological Full Configuration Interaction for Heteronuclear Diatomics: LiH as a Benchmark",
+    "doi": "10.5281/zenodo.21286736",
+    "url": "https://zenodo.org/record/21286736"
+  },
+  "Paper_0_Geometric_Packing": {
+    "deposition_id": 21286740,
+    "state": "published",
+    "title": "Angular Momentum as Information Geometry: Isotropic Packing and the Universal Angular Cross-Section",
+    "doi": "10.5281/zenodo.21286740",
+    "url": "https://zenodo.org/record/21286740"
+  },
+  "paper_18_exchange_constants": {
+    "deposition_id": 21286744,
+    "state": "published",
+    "title": "Spectral-Geometric Exchange Constants: Projecting Discrete Spectra onto Continuous Manifolds",
+    "doi": "10.5281/zenodo.21286744",
+    "url": "https://zenodo.org/record/21286744"
+  },
+  "paper_1_spectrum": {
+    "deposition_id": 21286750,
+    "state": "published",
+    "title": "The Geometric Atom: Atomic Structure as a Packing Problem",
+    "doi": "10.5281/zenodo.21286750",
+    "url": "https://zenodo.org/record/21286750"
+  },
+  "paper_22_angular_sparsity": {
+    "deposition_id": 21286753,
+    "state": "published",
+    "title": "Potential-Independent Angular Sparsity for Qubit Hamiltonians in Spherical Fermion Systems",
+    "doi": "10.5281/zenodo.21286753",
+    "url": "https://zenodo.org/record/21286753"
+  },
+  "paper_24_bargmann_segal": {
+    "deposition_id": 21286755,
+    "state": "published",
+    "title": "The Bargmann–Segal Lattice: π-Free Discretization of the Harmonic Oscillator on S^5",
+    "doi": "10.5281/zenodo.21286755",
+    "url": "https://zenodo.org/record/21286755"
+  },
+  "paper_31_universal_coulomb_partition": {
+    "deposition_id": 21286757,
+    "state": "published",
+    "title": "The Universal/Coulomb Partition of the GeoVac Spectral Triple What belongs to angular momentum, what belongs to -Z/r, and why the difference matters",
+    "doi": "10.5281/zenodo.21286757",
+    "url": "https://zenodo.org/record/21286757"
+  },
+  "paper_54_tensor_product_two_body": {
+    "deposition_id": 21286760,
+    "state": "published",
+    "title": "Two-body interactions from the tensor-product spectral triple: Selection rules from the algebra, coupling strengths from the metric",
+    "doi": "10.5281/zenodo.21286760",
+    "url": "https://zenodo.org/record/21286760"
+  },
+  "paper_55_periods_of_geovac": {
+    "deposition_id": 21286764,
+    "state": "published",
+    "title": "Periods of GeoVac: a cyclotomic mixed-Tate classification of the master Mellin engine",
+    "doi": "10.5281/zenodo.21286764",
+    "url": "https://zenodo.org/record/21286764"
+  },
+  "paper_56_tannakian_substrate": {
+    "deposition_id": 21286766,
+    "state": "published",
+    "title": "The Tannakian substrate of GeoVac: a finite-cutoff pro-system, a neutral Tannakian category, and an explicit G_a^(3N) ⋊ SL_2 inclusion into Aut^(⊗)(ω)",
+    "doi": "10.5281/zenodo.21286766",
+    "url": "https://zenodo.org/record/21286766"
+  },
+  "paper_57_forced_free_seam": {
+    "deposition_id": 21286768,
+    "state": "published",
+    "title": "Forced and Free Content in the GeoVac Framework: An Observations Paper",
+    "doi": "10.5281/zenodo.21286768",
+    "url": "https://zenodo.org/record/21286768"
+  },
+  "Paper_7_Dimensionless_Vacuum": {
+    "deposition_id": 21286774,
+    "state": "published",
+    "title": "The Dimensionless Vacuum: Recovering the Schrödinger Equation from Scale-Invariant Graph Topology",
+    "doi": "10.5281/zenodo.21286774",
+    "url": "https://zenodo.org/record/21286774"
+  },
+  "paper_14_qubit_encoding": {
+    "deposition_id": 21286779,
+    "state": "published",
+    "title": "Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory",
+    "doi": "10.5281/zenodo.21286779",
+    "url": "https://zenodo.org/record/21286779"
+  },
+  "paper_16_periodicity": {
+    "deposition_id": 21286783,
+    "state": "published",
+    "title": "The Periodic Table Recast as S_N Representation Theory on S^(3N-1)",
+    "doi": "10.5281/zenodo.21286783",
+    "url": "https://zenodo.org/record/21286783"
+  },
+  "paper_20_resource_benchmarks": {
+    "deposition_id": 21286785,
+    "state": "published",
+    "title": "Structurally Sparse Molecular Hamiltonians for Near-Term Quantum Simulation",
+    "doi": "10.5281/zenodo.21286785",
+    "url": "https://zenodo.org/record/21286785"
+  },
+  "paper_23_nuclear_shell": {
+    "deposition_id": 21286787,
+    "state": "published",
+    "title": "Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice",
+    "doi": "10.5281/zenodo.21286787",
+    "url": "https://zenodo.org/record/21286787"
+  },
+  "paper_25_hopf_gauge_structure": {
+    "deposition_id": 21286793,
+    "state": "published",
+    "title": "The Hopf Graph as a Lattice Gauge Structure: A Framework Observation",
+    "doi": "10.5281/zenodo.21286793",
+    "url": "https://zenodo.org/record/21286793"
+  },
+  "paper_28_qed_s3": {
+    "deposition_id": 21286799,
+    "state": "published",
+    "title": "QED on S^3: Spectral Geometry of Perturbative Transcendentals",
+    "doi": "10.5281/zenodo.21286799",
+    "url": "https://zenodo.org/record/21286799"
+  },
+  "paper_2_alpha": {
+    "deposition_id": 21286802,
+    "state": "published",
+    "title": "The Fine Structure Constant as a Spectral Coincidence on the Hopf Fibration",
+    "doi": "10.5281/zenodo.21286802",
+    "url": "https://zenodo.org/record/21286802"
+  },
+  "paper_30_su2_wilson": {
+    "deposition_id": 21286806,
+    "state": "published",
+    "title": "SU(2) Wilson Lattice Gauge Structure on the GeoVac Hopf Graph: The Non-Abelian Sibling of Paper 25",
+    "doi": "10.5281/zenodo.21286806",
+    "url": "https://zenodo.org/record/21286806"
+  },
+  "paper_33_qed_selection_rules": {
+    "deposition_id": 21286817,
+    "state": "published",
+    "title": "The 1+6+1 Partition of QED Selection Rules on S^3: Graph Topology, Angular Momentum, and the Dirac Spinor Phase Constraint",
+    "doi": "10.5281/zenodo.21286817",
+    "url": "https://zenodo.org/record/21286817"
+  },
+  "paper_36_bound_state_qed": {
+    "deposition_id": 21286819,
+    "state": "published",
+    "title": "Bound-State QED on S^3: One-Loop Closure of the Hydrogen Lamb Shift",
+    "doi": "10.5281/zenodo.21286819",
+    "url": "https://zenodo.org/record/21286819"
+  },
+  "paper_41_rule_b_wilson_u1": {
+    "deposition_id": 21286824,
+    "state": "published",
+    "title": "Wilson U(1) Lattice Gauge on the Dirac-Rule-B Graph: Structural Compatibility with 3D Compact U(1) on a Non-Cubic Substrate, Including the Polyakov Monopole-Density Signature",
+    "doi": "10.5281/zenodo.21286824",
+    "url": "https://zenodo.org/record/21286824"
+  },
+  "paper_51_gravity_arc": {
+    "deposition_id": 21286826,
+    "state": "published",
+    "title": "Gravity from the GeoVac spectral action: continuum results and the discrete-substrate program",
+    "doi": "10.5281/zenodo.21286826",
+    "url": "https://zenodo.org/record/21286826"
+  },
+  "paper_26_entanglement": {
+    "deposition_id": 21286828,
+    "state": "published",
+    "title": "Entanglement Structure of the Angular Momentum Eigenbasis: Energy-Entanglement Decoupling and Basis-Intrinsic Sparsity",
+    "doi": "10.5281/zenodo.21286828",
+    "url": "https://zenodo.org/record/21286828"
+  },
+  "paper_27_entropy_projection": {
+    "deposition_id": 21286841,
+    "state": "published",
+    "title": "Entropy as a Projection Artifact: One-Body Operators are Entanglement-Inert on Sparse Lattices",
+    "doi": "10.5281/zenodo.21286841",
+    "url": "https://zenodo.org/record/21286841"
+  },
+  "paper_34_projection_taxonomy": {
+    "deposition_id": 21286845,
+    "state": "published",
+    "title": "GeoVac as a Two-Layer Framework: Projection Taxonomy and the Empirical Matches Catalog",
+    "doi": "10.5281/zenodo.21286845",
+    "url": "https://zenodo.org/record/21286845"
+  },
+  "paper_35_time_as_projection": {
+    "deposition_id": 21286852,
+    "state": "published",
+    "title": "Time as Projection: The Klein-Gordon Spectrum on S^3 × ℝ and the Algebraic / Observation Split",
+    "doi": "10.5281/zenodo.21286852",
+    "url": "https://zenodo.org/record/21286852"
+  },
+  "geovac_field_guide": {
+    "deposition_id": 21286854,
+    "state": "published",
+    "title": "GeoVac: A Field Guide From a Packing Puzzle to Periods of the Spectral Triple",
+    "doi": "10.5281/zenodo.21286854",
+    "url": "https://zenodo.org/record/21286854"
+  },
+  "group1_operator_algebras_synthesis": {
+    "deposition_id": 21286856,
+    "state": "published",
+    "title": "The operator-algebra arc of the GeoVac framework: a reading guide for spectral triples, Latrémolière propinquity, and Lorentzian convergence",
+    "doi": "10.5281/zenodo.21286856",
+    "url": "https://zenodo.org/record/21286856"
+  },
+  "group2_quantum_chemistry_synthesis": {
+    "deposition_id": 21286858,
+    "state": "published",
+    "title": "The Natural Geometry Hierarchy: A Synthesis of the GeoVac Quantum-Chemistry Arc",
+    "doi": "10.5281/zenodo.21286858",
+    "url": "https://zenodo.org/record/21286858"
+  },
+  "group3_foundations_synthesis": {
+    "deposition_id": 21286862,
+    "state": "published",
+    "title": "Foundations of the Geometric Vacuum Framework: A Synthesis of the Spectral Graph Theory Arc",
+    "doi": "10.5281/zenodo.21286862",
+    "url": "https://zenodo.org/record/21286862"
+  },
+  "group4_quantum_computing_synthesis": {
+    "deposition_id": 21286864,
+    "state": "published",
+    "title": "Structural Sparsity for Quantum Simulation: A Synthesis of the GeoVac Quantum-Computing Arc",
+    "doi": "10.5281/zenodo.21286864",
+    "url": "https://zenodo.org/record/21286864"
+  },
+  "group5_qed_gauge_synthesis": {
+    "deposition_id": 21286867,
+    "state": "published",
+    "title": "Gauge Structure, QED, and Gravity from the Spectral Geometry of S^3: A Synthesis of the GeoVac QED/Gauge Arc",
+    "doi": "10.5281/zenodo.21286867",
+    "url": "https://zenodo.org/record/21286867"
+  },
+  "group6_precision_observations_synthesis": {
+    "deposition_id": 21286869,
+    "state": "published",
+    "title": "Observables as Projections of a π-free Graph: A Synthesis of the GeoVac Precision-Observation Arc",
+    "doi": "10.5281/zenodo.21286869",
+    "url": "https://zenodo.org/record/21286869"
+  }
+}

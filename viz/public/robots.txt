@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jloutey-hash.github.io/geovac/sitemap.xml

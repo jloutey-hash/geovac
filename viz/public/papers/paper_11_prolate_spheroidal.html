@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Fock&#x27;s 1935 stereographic projection maps the hydrogen atom onto the unit three-sphere $S^3$, where the Schrödinger equation becomes a pure Laplace–Beltrami eigenvalue problem with no potential term. The GeoVac program discretizes this $S^3$ as a graph Laplacian, achieving $&lt;0.1%$ error for…">
+<title>The Molecular Fock Projection: Diatomic Molecules as Prolate Spheroidal Lattices — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>The Molecular Fock Projection: Diatomic Molecules as Prolate Spheroidal Lattices</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 11 · Quantum Chemistry · DOI: <a href="https://doi.org/10.5281/zenodo.21286714">10.5281/zenodo.21286714</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">Fock&#x27;s 1935 stereographic projection maps the hydrogen atom onto the unit three-sphere $S^3$, where the Schrödinger equation becomes a pure Laplace–Beltrami eigenvalue problem with no potential term. The GeoVac program discretizes this $S^3$ as a graph Laplacian, achieving $&lt;0.1%$ error for one-electron atoms with zero free parameters (Papers 0, 1, 7). For molecules, however, $S^3$ is not the natural geometry: the single-$p_0$ momentum scale cannot encode the $R$-dependent bonding physics (Paper 8–9, negative theorem). We resolve this by identifying the natural geometry principle: every separable quantum system has a natural lattice—the lattice that discretizes the Laplace–Beltrami operator in the coordinate system where separation occurs. For one-center systems that geometry is $S^3$; for two-center systems it is the prolate spheroid. We discretize the separated prolate spheroidal equations for H$_2^+$ using a spectral angular solver (Legendre basis) and two radial solvers—a self-adjoint finite-difference (FD) scheme and a spectral Laguerre basis—with Brent root-finding in the separation parameter $c^2 = -R^2 E_{\mathrm{elec}}/2$ to enforce self-consistency. For $\sigma$ states ($m = 0$), the spectral Laguerre matrix elements are computed algebraically from three-term recurrence relations, eliminating numerical quadrature entirely. For $π$ and $\delta$ states ($m \neq 0$), an associated Laguerre basis absorbs the centrifugal $1/x$ singularity via partial-fraction decomposition and Stieltjes integral recurrence, reducing the non-algebraic content to a single transcendental seed value $e^a E_1(a)$. The method has zero free parameters: all inputs are nuclear charges, internuclear distance, and basis/grid resolution. Results for H$_2^+$ with the spectral Laguerre radial solver ($n_{\mathrm{basis}} = 20$): minimum energy $E_{\min} = -0.6026$ Ha (0.0002% error vs. exact $-0.6026$ Ha), equilibrium bond length $R_{\mathrm{eq}} = 2.005$ bohr (0.38% error), and correct dissociation to H + p at $R \to \infty$. The spectral solver achieves a $250×$ dimension reduction, $270×$ speedup, and $5000×$ accuracy improvement over the FD solver, whose 1.01% error was a discretization artifact. This establishes the prolate spheroidal lattice as the molecular analog of Fock&#x27;s atomic $S^3$ projection.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

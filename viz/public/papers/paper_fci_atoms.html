@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="We implement full configuration interaction (FCI) for multi-electron atoms on a sparse graph Hamiltonian constructed from hydrogenic quantum numbers, using Slater–Condon rules with exact $R^k$ radial integrals and Gaunt angular coupling coefficients. For helium, the ground-state energy converges…">
+<title>Full configuration interaction on a sparse graph Hamiltonian: Multi-electron atoms via relational lattice indexing — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Full configuration interaction on a sparse graph Hamiltonian: Multi-electron atoms via relational lattice indexing</h1>
+<p class="meta">Josh Loutey · GeoVac Paper fci · Quantum Chemistry · DOI: <a href="https://doi.org/10.5281/zenodo.21286734">10.5281/zenodo.21286734</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group2_quantum_chemistry/paper_fci_atoms.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">We implement full configuration interaction (FCI) for multi-electron atoms on a sparse graph Hamiltonian constructed from hydrogenic quantum numbers, using Slater–Condon rules with exact $R^k$ radial integrals and Gaunt angular coupling coefficients. For helium, the ground-state energy converges monotonically to $-2.8936 Ha$ (0.35% error versus exact) at $n_{\max}=5$; for lithium, to $-7.3978 Ha$ (1.07% error) at $n_{\max}=5$. Helium surpasses PySCF/STO-3G accuracy on the same system (the lithium STO-3G comparison is not computed). For beryllium (4 electrons), the solver achieves $E = -14.536 Ha$ (0.90% error) at $n_{\max}=4$ with $487{,}635$ determinants—the first four-electron calculation in this framework. For lithium hydride (4 electrons, first heteronuclear molecule), the CP-corrected vertical binding energy at the fixed experimental geometry is $D_e^{CP} = 0.110 Ha$ (19% error versus experiment); the $R$-independence of the graph-Laplacian kinetic energy makes the potential-energy surface monotonically attractive with no equilibrium geometry, so this is a fixed-$R$ binding energy rather than an optimized $D_e$. Basis truncation at $n_{\max}=3$ is identified as the dominant error source via systematic diagnostic decomposition, and basis set superposition error (0.115 Ha) is quantified and removed via Boys–Bernardi counterpoise correction. An excitation-driven direct CI algorithm following Knowles and Handy [ref] replaces the $O(N_{SD}^2)$ pairwise determinant loop with $O(N_{SD} × N_{connected})$ assembly, achieving a 36$×$ speedup for lithium. The Hamiltonian is assembled via a relational lattice index that maps Slater determinants to sparse matrix entries without evaluating continuous four-center integrals, achieving $&gt;$99% sparsity at the largest basis sizes tested. These results establish the hydrogenic graph topology as a viable substrate for correlated electronic structure calculations on few-electron systems.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

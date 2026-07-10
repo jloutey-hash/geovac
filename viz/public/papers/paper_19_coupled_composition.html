@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The composed natural geometry framework (Paper 17) constructs molecular Hamiltonians by partitioning electrons into single-center blocks and coupling them via Phillips–Kleinman (PK) pseudopotentials. This produces structurally sparse qubit Hamiltonians—$O(Q^{2.5})$ Pauli scaling, 51–1{,}712$×$…">
+<title>Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian Integrals and Coupled Composition — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian Integrals and Coupled Composition</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 19 · Quantum Chemistry · DOI: <a href="https://doi.org/10.5281/zenodo.21286728">10.5281/zenodo.21286728</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group2_quantum_chemistry/paper_19_coupled_composition.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">The composed natural geometry framework (Paper 17) constructs molecular Hamiltonians by partitioning electrons into single-center blocks and coupling them via Phillips–Kleinman (PK) pseudopotentials. This produces structurally sparse qubit Hamiltonians—$O(Q^{2.5})$ Pauli scaling, 51–1{,}712$×$ fewer terms than Gaussian baselines (Paper 14)—but PK limits accuracy to 5.3–19.4% equilibrium bond length error. PK cannot be improved: six modification attempts have failed (v2.0.6–23), and the overcounting diverges at higher angular momentum. We report a negative result (Track CB, v2.0.37): replacing PK with explicit cross-block electron-electron integrals without corresponding cross-center nuclear attraction integrals produces an unbalanced Hamiltonian (29% error, worse than PK&#x27;s 15%). The root cause is identified: two-center one-body integrals $\langle \psi_{nlm}^A | V_B | \psi_{n&#x27;l&#x27;m&#x27;}^A \rangle$, where an orbital on center $A$ feels the nuclear potential of center $B$, are required for energy balance but absent from the single-center framework. We observe that these missing integrals are precisely the Shibuya–Wulfman integrals of the Coulomb Sturmian literature [ref], which are computed via Fock&#x27;s momentum-space projection onto $S^3$—the same conformal map that underlies the GeoVac framework (Paper 7). The mathematical foundation is therefore already in place. We review the convergence properties of the Shibuya–Wulfman expansion, identify the Coulomb resolution technique [ref] as a potentially faster alternative, and outline the ``coupled composition&#x27;&#x27; architecture that would result from incorporating two-center integrals. If the angular expansion converges in few terms at molecular bond lengths, the coupled Hamiltonian would be PK-free, structurally sparse, and significantly more accurate than the current composed framework. This paper presents the balanced coupled architecture, documents its mathematical foundations, and reports computational benchmarks across three molecules (LiH, BeH$_2$, H$_2$O). We report computational results from the first three phases. The convergence concern is resolved: the multipole expansion of the cross-center potential terminates exactly at $L_{\max} = 2l_{\max}$ by Gaunt selection rules (33 one-body terms at $n_{\max}=2$). The balanced Hamiltonian has 878 Pauli terms (Conjecture 1 confirmed). Four-electron FCI gives $R_{\rm eq}$ error of 7.0% and $D_e = 0.037$ Ha—the only bound configuration among all four coupling schemes tested (Conjecture 2 not confirmed in strict sense, but the comparison crosses FCI regimes). At $n_{\max} = 3$ ($Q = 84$), single-point FCI gives 0.20% energy error (down from 1.8%) with analytical integrals (incomplete gamma functions, machine precision), confirming convergence. The $R_{\rm eq}$ drift is structural to the block decomposition ($+0.053$ bohr per $n_{\max}$ step, $3×$ smaller than PK&#x27;s $+0.15$–$0.22$ bohr/$l_{\max}$), not numerical.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

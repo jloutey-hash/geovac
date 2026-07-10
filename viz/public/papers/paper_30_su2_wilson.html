@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Paper 25 [ref] placed the GeoVac Hopf graph inside the Wilson–Hodge lattice-gauge vocabulary with a $U(1)$ connection on edges, and explicitly left as open (\S VII.A) the question of whether a non-abelian gauge structure is natural on the same graph. This paper answers that question for the compact…">
+<title>SU(2) Wilson Lattice Gauge Structure on the GeoVac Hopf Graph: The Non-Abelian Sibling of Paper 25 — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>SU(2) Wilson Lattice Gauge Structure on the GeoVac Hopf Graph: The Non-Abelian Sibling of Paper 25</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 30 · QED and Gauge Theory · DOI: <a href="https://doi.org/10.5281/zenodo.21286806">10.5281/zenodo.21286806</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group5_qed_gauge/paper_30_su2_wilson.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">Paper 25 [ref] placed the GeoVac Hopf graph inside the Wilson–Hodge lattice-gauge vocabulary with a $U(1)$ connection on edges, and explicitly left as open (\S VII.A) the question of whether a non-abelian gauge structure is natural on the same graph. This paper answers that question for the compact simply-connected non-abelian Lie group of rank 1, $\mathrm{SU}(2)$. The coincidence $S^3 = \mathrm{SU}(2)$ (as manifolds) makes this case structurally special: the underlying manifold of the GeoVac graph is the gauge group. Taking link variables $U_e \in \mathrm{SU}(2)$, plaquettes as the primitive closed non-backtracking walks of the Ihara zeta setup [ref], and the Wilson action $S_W[U] = \beta \sum_P \bigl(1 - \tfrac{1}{2}\mathrm{Re} \mathrm{tr} U_P\bigr)$, we obtain a gauge-invariant finite-dimensional lattice gauge theory with Haar-normalizable partition function. Three structural results follow. (1) $U(1)$ reduction to Paper 25. The diagonal (maximal-torus) sector of $\mathrm{SU}(2)$ link variables reproduces Paper 25&#x27;s $U(1)$ Wilson–Hodge action to machine precision. Paper 25 is the Cartan-subalgebra projection of the present theory; the abelian construction it documents is a structural sub-sector of a genuinely non-abelian one. (2) The weak-coupling kinetic term completes the Hodge-1 Laplacian. Linearizing $S_W$ around the trivial vacuum $U_e = I$ produces, at second order in the gauge field, the plaquette (curl) quadratic form $(\beta/8) \sum_a \langle A^a, B_2 B_2^{\top} A^a\rangle$ on $\mathfrak{su}(2)$-valued $1$-cochains, with per-plaquette per-component coefficient $1/8 = 1/(4 N_c)$. This curl form is not a scalar multiple of Paper 25&#x27;s edge Laplacian $L_1 = B^{\top} B$ (the two have complementary supports: the plaquette columns of $B_2$ span $\ker L_1$ exactly); it is the co-exact part that completes $L_1$ to the full discrete Hodge-1 Laplacian $B^{\top} B + B_2 B_2^{\top}$ of the 2-complex with the Ihara plaquettes attached as faces, exactly the face structure Paper 25 \S II anticipates. (3) Plaquette enumeration and Monte Carlo Wilson-loop data. On the $S^3$ Coulomb graph at $n_{\max} = 2, 3, 4$, the first-Betti counts are $\beta_1 = 0, 2, 8$ and the primitive 4-cycle counts are $0, 2, 8$; a 2000-sample Metropolis run on $n_{\max} = 3$ at $\beta \in \{0.5, 1, 2, 5\}$ gives Wilson expectations $\langle W \rangle = 0.126, 0.158, 0.332, 0.681$, monotonic with $\beta$ and matched to the leading-order character expansion at the $2$–$35%$ level across the four $\beta$ values (closest at the strong- and weak-coupling ends). All 36 tests in tests/test_su2_wilson_gauge.py pass. The scope is a compact-graph non-abelian lattice gauge construction, not a Yang–Mills mass-gap claim on $ℝ^4$; the paper closes with a synthesis observation that the GeoVac framework now carries five action principles—maximum entropy on nodes, Rayleigh–Ritz on node-wavefunctions, Wilson action on gauge edges, Ihara path-integral on walks, and spectral action on Dirac spectrum—suggesting—though we do not claim—a framework-wide organizing principle of least action. An $\mathrm{SU}(3)$ sibling on the Bargmann–Segal $S^5$ graph (Paper 24) has been constructed in Sprint ST-SU3 (debug/st_su3_wilson_memo.md, May 2026), confirming Proposition 1&#x27;s analog (Cartan reduction to $U(1)× U(1)$) and Proposition 2&#x27;s analog (kinetic coefficient $1/12 = 1/(4 N_c)$) at machine precision; matter coupling on $S^5$ encounters the Sprint 5 Track S5 Clebsch–Gordan-intertwiner obstruction, sharpening Paper 24&#x27;s Coulomb/HO asymmetry to four layers (spectrum-computing $L_0$, calibration $π$, Wilson gauge with natural matter coupling, and the universal Wilson–Hodge vocabulary; the first three Coulomb-specific, the fourth universal).</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

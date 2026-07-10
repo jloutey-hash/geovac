@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="We organize the GeoVac project&#x27;s gravity arc (sprints G1 through G8, plus the discrete-substrate opening G4-3, all completed 2026-05-28) as a standalone document. On the Fock-projected unit three-sphere $S³$ the Camporesi–Higuchi spinor spectrum $|\lambda_n| = n + 3/2$ with multiplicity…">
+<title>Gravity from the GeoVac spectral action: continuum results and the discrete-substrate program — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Gravity from the GeoVac spectral action: continuum results and the discrete-substrate program</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 51 · QED and Gauge Theory · DOI: <a href="https://doi.org/10.5281/zenodo.21286826">10.5281/zenodo.21286826</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group5_qed_gauge/paper_51_gravity_arc.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">We organize the GeoVac project&#x27;s gravity arc (sprints G1 through G8, plus the discrete-substrate opening G4-3, all completed 2026-05-28) as a standalone document. On the Fock-projected unit three-sphere $S³$ the Camporesi–Higuchi spinor spectrum $|\lambda_n| = n + 3/2$ with multiplicity $2(n+1)(n+2)$ produces a spectral zeta identity $ζ_{\rm unit}(-k) = 0$ for every $k \geq 0$, which forces the Chamseddine–Connes spectral action on $S³_R$ to be exactly two-term at every cutoff and extremize at $u_{\rm crit} = R\Lambda = 1/\sqrt{6}$ (G1). This extends the ``remarkable cancellations&#x27;&#x27; that Chamseddine and Connes [ref] observed on $S³$ and $S³ × S^1$ from an asymptotic phenomenon to an exact structural identity at every order, with the Bernoulli identity $B_{2k+1}(3/2) = (2k{+}1)/4^k$ supplying the algebraic mechanism; the present paper&#x27;s contribution is the mechanism, not the observation. The two-term exactness propagates to $S³ × S^{1}_{\beta}$ by heat-kernel factorization, recovering Einstein–Hilbert plus a cosmological constant with no higher-curvature corrections at any order (G2), and survives the $\beta \to \infty$ decompactification to a zero-temperature de Sitter vacuum on $S³ × ℝ_\tau$ with closed-form minimum action density $s_{\min} = -\Lambda/(12\sqrt{6})$ (G5). The two-term exactness is spinor-bundle-specific: scalar and transverse-traceless tensor heat traces inherit the standard Connes–Chamseddine infinite Seeley–DeWitt expansion (G3, closed-form proof $a_k^{\Delta} = 2π^2/k!$). On the Euclidean Schwarzschild cigar the $S^{2}$ Dirac heat trace at the spatial horizon section reproduces standard CC continuum behavior with $a_1 = -4π/3$ (G4-1), and the Sommerfeld–Cheeger conical-defect contribution combined with the replica method gives $S_{\BH} = A \Lambda^2/(12 π)$ (G4-2). The kinetic graviton sector of the $(1,1)$ irrep of $SO(4) = SU(2) × SU(2)$ admits physical modes with positive kinetic eigenvalue after gauge-orbit classification via $V = i[X, D_0]$, satisfying the necessary condition for graviton dynamics (G6-Diag-Full). The subsequent Fierz–Pauli analysis (G6-FP) decomposes the $(1,1)$ subspace under the diagonal $SU(2)$ into $J{=}0 \oplus J{=}1 \oplus J{=}2$ and proves a $J$-blindness theorem: the spectral action $S^{(2)}$ has identical eigenvalue spectra across all three $J$-sectors, by Schur&#x27;s lemma from the $SO(4)$ invariance of the trace functional. The Fierz–Pauli decomposition (TT vs. trace vs. longitudinal) therefore requires the metric identification $\delta D \leftrightarrow \delta g_{\mu\nu}$, not just the spectral action. The Newton constant $\Geff = 6π/\Lambda^2$ and the cosmological constant $\Lcc = 6\Lambda^2$ emerge from the G2 coefficients (G7), with the standard cosmological-constant-scale gap inherited from Connes–Chamseddine. For an arbitrary cutoff function $f$ with Mellin moments $\phi(s) = \int_0^\infty f(x) x^{s-1} dx$, the gravity predictions generalize to $\Geff = 6π/(\phi(1) \Lambda^2)$, $\Lcc = 6 \phi(2)/\phi(1) \cdot \Lambda^2$, and $\Rcrit \Lambda = \sqrt{\phi(1)/(6\phi(2))}$; no simple combination is cutoff-independent, classifying the cutoff function as external Class 1 calibration data (G8). Finally, we report on the extended discrete-substrate program. The substrate $\mathcal{G}_{\rm cigar} = \mathbb{Z}_+(a)|_{N_\rho} × \mathbb{Z}/N_\phi × \mathrm{Fock}(S^2, l_{\max})$ is operational at sprint scale through five closed sub-sprints (G4-3a / cleanup / b / c / d, plus the G4-3d-UV extension): Hermitian polar Laplacian built, variable warp realized, and the continuum Weyl law $K(t) \sim A/(4π t)$ verified within $1%$ at the sweet-spot $t \approx 0.1$, $N_\phi = 192$. The wedge-lattice proper conical-defect test (G4-3c-proper) has the correct sign at every apex angle $α$ but shows that on the scalar side the literal Sommerfeld–Cheeger $(1/12)(1/α - α)$ extraction sits below the bulk-subtraction discretization floor at sprint scale. On the spinor side, however — the natural object for the Dirac spectral triple — the situation reverses dramatically: the G4-4 sub-sprint sequence (14 sub-sprints across G4-4a/b/c/d/e/f) closes the warped Dirac program at sprint scale, identifying the spinor conical-defect tip coefficient $\Delta_K^{\rm Dirac, tip}(α) = -(1/12)(1/α - α)$ at 5 significant figures (opposite sign from scalar SC, identical magnitude; sweet spot $α = 2/5$, $t = 2.0$, rel. err. $2.1 × 10^{-5}$) and extracting the replica-method derivative $d \Delta_K^{\rm Dirac}/dα|_{α = 1} = +1/6$ at 96.69% recovery. The half-integer angular momentum + anti-periodic spinor BC cleanly extracts the conical-defect tip term where the integer scalar BC does not (BC-sector diagnostic: spinor 99.4% vs scalar 66.3% on the same substrate). The load-bearing structural quantities for the extended $S_{\BH}$ derivation (G4-5 discrete replica method + G4-6 full $S_{\BH}$ calculation) are quantitatively validated; the remaining work is integration over $t$ with cutoff regularization, a bounded remaining program end-to-end.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

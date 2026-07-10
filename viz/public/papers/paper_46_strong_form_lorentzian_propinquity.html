@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="We investigate the strong-form leg of the Lorentzian-extension arc for truncated Krein spectral triples, removing the $\Kplus$-restriction of the companion paper [ref] by using the full-Krein-space operator-norm Lipschitz seminorm. The strong-form construction on the natural substrate is descoped…">
+<title>Strong-form Lorentzian propinquity on truncated SU(2)×U(1)_T Krein spectral triples: the natural-substrate degeneracy and the enlarged-substrate repair target — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Strong-form Lorentzian propinquity on truncated SU(2)×U(1)_T Krein spectral triples: the natural-substrate degeneracy and the enlarged-substrate repair target</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 46 · Operator Algebras / Noncommutative Geometry · DOI: <a href="https://doi.org/10.5281/zenodo.21286692">10.5281/zenodo.21286692</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">We investigate the strong-form leg of the Lorentzian-extension arc for truncated Krein spectral triples, removing the $\Kplus$-restriction of the companion paper [ref] by using the full-Krein-space operator-norm Lipschitz seminorm. The strong-form construction on the natural substrate is descoped (Status note below): that seminorm is degenerate — its kernel far exceeds the scalars (every temporal multiplier is $\Lop$-invisible) — so the closed-form bound below is an evaluation of a rate formula, not a distance between quantum compact metric spaces. We work on the same compact-temporal Wick-rotated manifold $\Manifold$, with chirality-doubled Camporesi–Higuchi spinor space $\HGV^{n_max}$ tensored with the $\Nt$-mode Fourier truncation of $L^{2}(\SoneT)$, BBB classification [ref] signs at $(m, n) = (4, 6)$, and Lorentzian Dirac $\DL = i(\gamma^{0} ⊗ \partial_{t} + \DGV ⊗ I_{\Nt})$ per van den Dungen 2016 [ref] Proposition 4.1. The strong-form Lipschitz seminorm is the natural operator-norm commutator $$ \Lop(a) \;:=\; \opnorm{[\DL, a]} \qquad on the full Krein space, $$ in contrast to Paper 45&#x27;s $\Kplus$-weak-form $\LPwk(a) = \opnorm{[\Pplus \DL \Pplus, \Pplus a \Pplus]}$ on $\Kplus$. The closed-form rate bound is $$ \Lprop\!\bigl(\Tcal^{L}_{n_max,\Nt,T},\; \Tcal^{L}_{\Manifold}\bigr) \;\le\; \Cthreeop(n_max) \cdot \gammajoint_{n_max,\Nt,T} \;\xrightarrow[(n_max,\Nt)\to(\infty,\infty)]{}\; 0, $$ where (per the Status note) $\Lprop$ denotes the evaluation of this rate formula, not a quantum-metric distance, with Lipschitz comparison constant $\Cthreeop = C_{3} = 1$ (Paper 38 [ref] Lemma L3, gradient/translation seminorm), joint mass-concentration moment $\gammajoint = O(\logn_max/n_max + T/\Nt)$, and assembled multiplier $\Cfivejoint = 1$. The numerical panel matches Paper 45&#x27;s $\Kplus$-weak-form bit-exactly: $\Lprop(2, 3) = 2.0746$, $\Lprop(3, 5) = 1.6101$, $\Lprop(4, 7) = 1.3223$. The Riemannian-limit recovery at $\Nt = 1$ is bit-exact (Frobenius residual $0.0$ in float64) at $n_max \in \{2, 3, 4\}$. The proof transports the five-lemma structure L1$&#x27;$, L2, L3, L4, L5 of Paper 45 under the strong-form seminorm. The load-bearing analytical input is the temporal-Lipschitz-invisibility identity $$ [\DL, a_{s} ⊗ a_{t}] \;=\; i [\DGV, a_{s}] ⊗ a_{t} \qquad \text{bit-exact for every $a \in \Op^{L}$}, $$ which sharpens Paper 45 Lemma 4.3&#x27;s vanishing-cross-term identity from ``the time-chirality cross term vanishes&#x27;&#x27; to ``the temporal commutator vanishes identically on the natural substrate&#x27;&#x27;. As a byproduct we note a finite-cutoff envelope range refinement of Paper 45 eq. (C3_joint_bound) (Appendix (ref)): the natural-substrate multipliers span shell-difference labels $N \le 2n_max - 1$, the Avery–Wen–Avery achievable envelope on $n_max$ shells, wider than the stated $N \le n_max$. The L3 comparison constant over that range is the Paper 38 [ref] Lemma L3 value $C_{3} = 1$ (an earlier draft&#x27;s $N$-dependent $\sqrt{(N-1)/(N+1)}$ / envelope $\sqrt{1 - 1/n_max}$ is withdrawn; see Remark (ref)). The asymptotic rate formula and Paper 45&#x27;s degeneracy theorem are unchanged. The strong-form convergence is not established: the natural-substrate seminorm is degenerate (Status note), so the Lorentzian quantum-metric convergence question remains a named open research target. The enlarged-substrate construction — chirality-flipping generators with $\{J, M\} = 0$ (Appendix (ref)), precisely where the commutators are non-zero — is the named repair starting point (Sprint L3b-2f). The algebraic identities (Lemma (ref), now read as the diagnosis of the degeneracy) are unaffected.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="We construct the Tannakian substrate of the GeoVac spectral triple at finite cutoff and verify, bit-exact on explicit $sympy$-rational panels, every prerequisite of the Deligne–Milne 1982 neutral Tannakian theorem on an abelian primitive Hopf algebra $\HGV(n_max) = \Sym_{\Q}(V_{n_max})$ whose…">
+<title>The Tannakian substrate of GeoVac: a finite-cutoff pro-system, a neutral Tannakian category, and an explicit G_a^(3N) ⋊ SL_2 inclusion into Aut^(⊗)(ω) — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>The Tannakian substrate of GeoVac: a finite-cutoff pro-system, a neutral Tannakian category, and an explicit G_a^(3N) ⋊ SL_2 inclusion into Aut^(⊗)(ω)</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 56 · Mathematical Foundations · DOI: <a href="https://doi.org/10.5281/zenodo.21286766">10.5281/zenodo.21286766</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group3_foundations/paper_56_tannakian_substrate.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">We construct the Tannakian substrate of the GeoVac spectral triple at finite cutoff and verify, bit-exact on explicit $sympy$-rational panels, every prerequisite of the Deligne–Milne 1982 neutral Tannakian theorem on an abelian primitive Hopf algebra $\HGV(n_max) = \Sym_{\Q}(V_{n_max})$ whose primitive space $V_{n_max}$ has $\Q$-dimension $3 N(n_max)$ (one generator per (sector, Mellin slot) pair). The construction has two halves. \noindentPro-system half. A cofiltered system of finite-cutoff truncations $\{\HGV(n_max)\}_{n_max\in\N}$ with explicit Hopf-algebra transition maps $\Phi_{m, k} : \HGV(m) \to \HGV(k)$ (block-diagonal truncations) satisfies the cofiltered axiom, is $\Ustar$-equivariant, admits a well-defined inverse limit $\Ginf \cong \Q^{\N_{\mathrm{sec}}}$ into which the continuum cochains $\chi_{\infty}$, $\eta_{\infty}$ and the continuum Mellin lift $F(s)$ of v3.66.0 FO1–FO3 project coherently, and has finite-cutoff endomorphism algebra $\End_{\mathrm{compat}}(\Oh_{n_max})$ that is block-lower-triangular of closed-form dimension $\dim = \sum_{j \le i \le n_max}(i + 1)(j + 1)$. \noindentTannakian half. The finite-dimensional representation category $\Repcat(\HGV(n_max))$ is an abelian, symmetric monoidal, rigid $\Q$-linear category (axioms TC-1a, TC-1b, TC-1c bit-exact); the no-op forgetful $ω : \Repcat \to \Vecbf_{\Q}$ is a faithful exact $⊗$-functor (TC-1d); and the pro-unipotent factor of the cosmic Galois group $\Ulev = G_a^{3 N(n_max)} ⋊ SL_{2}$ admits an explicit inclusion \[ \Phimap : \Ulev(\Q) \longrightarrow Aut^{⊗}(ω), \qquad \Phimap(t, g)(V) = \exp\!\Bigl(\sum_{g\in\mathfrak{P}} t_{g} X_{g}^{V}\Bigr) ⊗ \rho_{V_{\mathrm{PW}}}(g) \] on the natural-substrate panel $V ⊗ V_{\mathrm{PW}}$, which is bit-exact at every point of the verification grid (TC-1e + TC-1f). At $n_max = 2$ the inclusion is full-panel injective: for every one of the $3 \cdot N(2) = 15$ primitive generators $g$ a 2-dim test rep $V_{g}$ detects $g$ uniquely with $\eta_{V_{g}}(t) = I$ iff $t_{g} = 0$. \emph{Total bit-exact verification panel: $5{,}864$ zero residuals} ($sympy$-rational throughout) across PS-1/2/3/4 + TC-1a/b/c/d/e/f + TC-2a/b/c/d + G4-Inj at $n_max \in \{2, 3, 4\}$. The G4-Inj C4 sub-block is panel-size bookkeeping for the abelianized image: its full M3-column injectivity is refuted (the $\chi_{-4}$-enriched Gram is rank $2 \ll N$), so those residuals do not certify a closed immersion (Theorem (ref)). The fourteenth math.OA standalone in the GeoVac series. \noindentCosmic-Galois injection. We close the injection direction $\Ustar_{GV} \hookrightarrow \mathcal{U}_{4} ⋊ SL_{2}$ into the (abelianization of the) unipotent radical of the level-4 motivic Galois group $\mathcal{G}_{4} = \mathcal{G}_{\mathrm{MT}(\Z[i, 1/2])}$ of Deligne 2010 + Glanois 2015, with four structural compatibilities (multiplicativity, depth-1 coproduct, $SL_{2}$-to-Levi via cyclotomic $\chi_{4}$, abelianized image via Glanois basis;\ Section (ref), Theorem (ref)). The proof uses the Eskandari–Murty–Nemoto 2025 forcing-of-level-4 result + the Goncharov–Deligne 2005 faithful action on $π_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$. Equality / surjectivity on the depth-$\ge 2$ content is the named long-range forward research question. \noindentHonest scope. We close the inclusion direction $Aut^{⊗}(ω) \supseteq \Ulev$ at finite cutoff with both Levi factors explicit (TC-1e/TC-1f). The converse equality $Aut^{⊗}(ω) = \Ulev$ at finite cutoff is closed by the TC-2 sub-arc: TC-2a (abelian factor at $n_max = 2$), TC-2b ($SL_{2}$ factor on the Peter–Weyl panel), TC-2c (higher cutoffs $n_max \in \{3, 4\}$), and TC-2d (pro-system cofiltered coherence on the natural-substrate panel). The remaining long-range content is the inverse-limit equality of $\Phi^{\mathrm{inj}}$ — the pro-finite Tannakian theorem coherent with v3.66.0 FO3 Interpretation C on $\Ginf$ (PS-3) and with exhaustion of every level-4 cyclotomic motivic MZV in the GeoVac master Mellin engine output.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

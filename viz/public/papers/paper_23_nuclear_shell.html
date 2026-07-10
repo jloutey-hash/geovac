@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="We present structurally sparse qubit Hamiltonians for the nuclear shell model, constructed by applying the GeoVac angular-sparsity framework to the harmonic oscillator (HO) single-particle basis with a Mayer–Jensen spin–orbit term. The HO shell closures $2, 8, 20, 40, 70, 112$ emerge directly from…">
+<title>Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 23 · Quantum Computing · DOI: <a href="https://doi.org/10.5281/zenodo.21286787">10.5281/zenodo.21286787</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group4_quantum_computing/paper_23_nuclear_shell.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">We present structurally sparse qubit Hamiltonians for the nuclear shell model, constructed by applying the GeoVac angular-sparsity framework to the harmonic oscillator (HO) single-particle basis with a Mayer–Jensen spin–orbit term. The HO shell closures $2, 8, 20, 40, 70, 112$ emerge directly from graph state counting, and the physical magic numbers $2, 8, 20, 28, 50, 82, 126$ are recovered with a spin–orbit strength $v_{ls}/\hbar\omega \approx 0.17$ and a Nilsson $\ell(\ell+1)$ correction $d_{\ell\ell}/\hbar\omega \approx 0.02$. We build the first two-species qubit encoding for the deuteron ($1p+1n$, $16$ qubits, $592$ non-identity Pauli terms, $1$-norm $\approx 342$ MeV) using the Minnesota nucleon–nucleon potential and Moshinsky–Talmi brackets, and extend the architecture to helium-4 ($2p+2n$, $16$ qubits, $712$ Pauli terms) with intra-species antisymmetrization and proton–proton Coulomb repulsion. Despite a Hilbert-space dimension $12.25×$ larger than the deuteron, He-4 requires only $1.20×$ more Pauli terms — a direct consequence of the angular selection rules that carry through to multi-particle systems. A composed nuclear–electronic deuterium encoding ($26$ qubits) validates the multi-block architecture and quantifies the $\sim 10^{13}$ coefficient ratio between nuclear, electronic, and hyperfine scales. We state and apply the Fock projection rigidity theorem: the $S^3$ conformal projection that makes electronic Hamiltonians equivalent to a graph Laplacian is unique to the Coulomb potential and does not extend to HO or Woods–Saxon systems. For nuclear Hamiltonians, the GeoVac contribution is therefore the angular machinery and qubit encoding, not the conformal projection. All nuclear physics inputs (Minnesota parameters, spin–orbit strength, $\hbar\omega$) follow the standard shell-model literature; the quantitative binding energies at $N_{\mathrm{shells}}=2$ are far from experiment and should be read as encoding-validation benchmarks, not as a nuclear-structure calculation.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

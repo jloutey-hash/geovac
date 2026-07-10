@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="We show that qubit Hamiltonians derived from spectral graph theory lattices exhibit structurally favorable Pauli decompositions for quantum simulation. After Jordan–Wigner transformation, the GeoVac lattice Hamiltonian yields $O(Q^{3.15})$ Pauli string terms in the number of qubits $Q$, compared to…">
+<title>Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 14 · Quantum Computing · DOI: <a href="https://doi.org/10.5281/zenodo.21286779">10.5281/zenodo.21286779</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group4_quantum_computing/paper_14_qubit_encoding.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">We show that qubit Hamiltonians derived from spectral graph theory lattices exhibit structurally favorable Pauli decompositions for quantum simulation. After Jordan–Wigner transformation, the GeoVac lattice Hamiltonian yields $O(Q^{3.15})$ Pauli string terms in the number of qubits $Q$, compared to $O(Q^{4+})$ for conventional Gaussian-basis Hamiltonians (our own log-log fit of the published Pauli counts of Trenev et al. [ref] gives $Q^{4.25}$ for LiH and $Q^{3.92}$ for H$_2$O, spanning $Q^{3.9}$–$Q^{4.3}$). The advantage originates in angular momentum selection rules—enforced by Gaunt integrals at the two-electron integral level—which cause the electron repulsion integral (ERI) tensor density to decay as $\sim 1/M$ (empirically $\approx M^{-0.85}$–$M^{-1}$) with the number of spatial orbitals $M$, while Gaussian ERI tensors remain near-dense at $O(1)$. Beyond term counts, we quantify two operationally relevant cost metrics: the number of qubitwise-commuting (QWC) measurement groups scales as $O(Q^{3.36})$, and the Pauli 1-norm $\lambda = \sum_i |c_i|$—which controls both Trotter step counts and qubitization query complexity—scales as $O(Q^{1.69})$ with $R^2 = 0.997$. The sub-quadratic 1-norm scaling is the key result for fault-tolerant simulation: it implies that Trotter circuit depth grows far more slowly with system size than term counts alone would suggest. All Gaussian baselines are validated against published integral values (Szabo and Ostlund for H$_2$; analytical STO for He). For composed multi-center systems, the pseudopotential approximation of the composed natural geometry framework [ref] yields block-diagonal electron repulsion integrals with a universal Pauli scaling of $O(Q^{2.5})$, independent of molecular topology (exponent spread $0.02$ across three molecules). At equal qubit counts, this represents two or more orders of magnitude fewer Pauli terms than Gaussian baselines (published counts of Trenev et al. [ref], $Q^{3.9}$–$Q^{4.3}$ span fitted by us)—an advantage that grows with system size due to the $\sim 1.5$ exponent gap. These comparisons are at matched qubit counts, not matched accuracy; the composed basis carries classical equilibrium-geometry errors of 5–26% (LiH/BeH$_2$/H$_2$O; Sec. (ref)), making the framework optimal for fixed-geometry quantum simulation rather than geometry optimisation. Across the composed molecular library (35 molecules spanning $Z = 1$–56, H through Ba, including the first transition series ScH–ZnH), the composed Pauli count is exactly linear in the qubit count: $N_{\mathrm{Pauli}} = 11.10 × Q$ (exact, non-identity terms; $d$-orbital blocks give 9.23). These counts are realized under a pair-diagonal angular approximation ($m_a=m_c$, $m_b=m_d$) adopted deliberately for sparsity; the exact global-$M_L$ Coulomb rule (used in the framework&#x27;s precision-physics paths, and considered but left on the table here) gives $\approx 2.5×$ more terms with the same scaling, under which the $d$-block coefficient is in fact higher, not lower (Sec. (ref)).</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

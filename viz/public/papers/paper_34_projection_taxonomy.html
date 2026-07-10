@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The GeoVac framework decomposes into two structurally separate layers. Layer 1 is a bare combinatorial graph: quantum-number labels $(n,\ell,m,\ldots)$, integer eigenvalues, rational matrix elements, no physics. Layer 2 is a finite family of named projections from the bare graph onto physical…">
+<title>GeoVac as a Two-Layer Framework: Projection Taxonomy and the Empirical Matches Catalog — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>GeoVac as a Two-Layer Framework: Projection Taxonomy and the Empirical Matches Catalog</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 34 · Precision Observations · DOI: <a href="https://doi.org/10.5281/zenodo.21286845">10.5281/zenodo.21286845</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group6_precision_observations/paper_34_projection_taxonomy.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">The GeoVac framework decomposes into two structurally separate layers. Layer 1 is a bare combinatorial graph: quantum-number labels $(n,\ell,m,\ldots)$, integer eigenvalues, rational matrix elements, no physics. Layer 2 is a finite family of named projections from the bare graph onto physical settings. Every physical variable, every dimensional unit, and every transcendental constant that appears in any GeoVac calculation enters through exactly one projection, and is fully traceable to it. We catalogue twenty-eight projection mechanisms and tag each one along three independent axes: (a) which physical variables it introduces (charge $Z$, coupling $α$, energy scale $\hbar\omega$, internuclear distance $R$, gauge coupling $\beta$, cutoff $\Lambda$, $\ldots$); (b) which physical dimension or unit it attaches to graph data (energy, length, dimensionless, solid angle); and (c) its transcendental signature in the sense of Paper 18 (rational, $π^{2k}$, half-integer Hurwitz, odd $ζ$, Dirichlet $L$, $\ldots$). The projection axis is a structural sibling of Paper 18&#x27;s transcendental axis: each transcendental tier corresponds to a specific projection type, and reading the dictionary in either direction recovers the other. We then assemble the empirical matches catalogue: a tagged table of GeoVac quantities that match standard known physics values to machine precision (or stated uncertainty). Each row is annotated by projection(s), variable(s), dimension, transcendental class, and match precision. Reading the catalogue surfaces a falsifiable structural prediction: [Layer-2-presence bound.] The residual error of a catalogue row is bounded above by the larger of (i) the framework&#x27;s basis-quality residual at zero Layer-2 inputs, and (ii) the largest single Layer-2 input consumed by the chain. Equivalently: $|\epsilon(observable)| \leq \max\bigl(\epsilon_basis(framework), \max_i |L_2^{(i)}|\bigr)$. The genuine axis ordering catalogue precision is observable-class (zero-, one-, multi-Layer-2-input) crossed with the framework&#x27;s basis-quality limit; chained projection depth is a downstream proxy that fails in both directions. This replaces an earlier naive form that scaled residual linearly with chain depth; the May 2026 synthesis pass falsified the depth form on the catalogue itself (depth-3 chains exist at residual $0$ and at $+286$ ppm; depth-4 chains exist at $+2$ ppm and at $+0.534%$). The Lamb shift example (depth-4 chain, $-0.534%$ residual at converged basis) is consistent with the framework&#x27;s one-loop QED basis-quality limit; the H 1S polarizability example (depth-3 chain, residual $0$) is consistent with the zero-Layer-2-input class for rational-analytic-answer observables. This paper introduces no new computation. It is a structural consolidation of the framework&#x27;s self-presentation: language for discussing where physics enters, what carries dimensions, and which transcendentals are forced by which projection.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

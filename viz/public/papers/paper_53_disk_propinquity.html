@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The metric-spectral-triple convergence program underlying the GeoVac framework [ref] has so far treated compact groups and homogeneous spaces, where the central Fejér kernel of Peter–Weyl supplies the Berezin reconstruction map. We treat the first non-group, non-homogeneous case: the…">
+<title>Berezin reconstruction for the disk-with-cone truncated spectral triple, and the apex backbone of the cigar-tip entropy — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>Berezin reconstruction for the disk-with-cone truncated spectral triple, and the apex backbone of the cigar-tip entropy</h1>
+<p class="meta">Josh Loutey · GeoVac Paper 53 · Operator Algebras / Noncommutative Geometry · DOI: <a href="https://doi.org/10.5281/zenodo.21286712">10.5281/zenodo.21286712</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/group1_operator_algebras/paper_53_disk_propinquity.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">The metric-spectral-triple convergence program underlying the GeoVac framework [ref] has so far treated compact groups and homogeneous spaces, where the central Fejér kernel of Peter–Weyl supplies the Berezin reconstruction map. We treat the first non-group, non-homogeneous case: the two-dimensional disk-with-cone $\cone$, a flat disk of radius $R$ with a conical defect of apex multiple $α$ at its centre and a Dirichlet boundary. This is the spatial factor of the near-horizon cigar whose truncated heat trace carries the Bekenstein–Hawking–type tip entropy of the companion Paper 51. We construct a unital Markov–Cesàro Berezin reconstruction $\Berez_{\Lambda}$ on $\cone$ and prove that, on apex-localised observables, it has exact unitality (by the Markov normalisation), while Ces\`aro positivity also holds on the finite disk at order $s\ge2$, the remaining property — a convergent approximate-identity interior rate — is obstructed on the finite disk by the Dirichlet boundary (see below) and is recovered on the boundaryless plane. Together with the propagation-number-two operator system and the gradient-norm Lipschitz seminorm, this yields the propinquity backbone for the cigar-tip entropy of Paper 51 at the local apex observable, upgrading its Lemma on geometric faithfulness from cited to proved for that purpose. The construction is verified numerically: disk unitality is exact and the Ces\`aro construction of Definition (ref) at order $s\ge2$ does preserve positivity on the finite disk (minimum eigenvalue $&gt;0$ across the $\Lambda$ sweep), but it does not achieve a convergent interior rate (the disk drivers give $\norm{\Berez_\Lambda(f)-P_\Lambda M_f P_\Lambda}/ \norm{\nabla f}_\infty \sim \Lambda^{+0.07}$, i.e. no decay) — this is the Dirichlet-boundary obstruction, not a tail effect. (The minimum eigenvalue reaches $\approx -0.13$ only for the truncated heat weight $e^{-t\lambda}$, which is Gibbs-non-positive; the Ces\`aro weight restores positivity but not convergence, so the genuine obstruction is the non-decaying rate — weight-robust — not positivity.) The boundaryless plane reconstruction (below) is what genuinely converges: the 2D Bochner–Riesz Berezin is positivity-preserving at order $s\ge\tfrac12$ (classical) and reconstructs every Schwartz observable at algebraic rate $\Lambda^{-0.6}$ to $\Lambda^{-0.9}$ (test-function dependent). The only obstruction — observables with content at the Dirichlet boundary $\rho=R$, where the eigenfunctions vanish and the Markov ratio becomes a $0/0$ limit independent of the observable — is an artifact of the finite-radius compactification, not of the function&#x27;s decay, and is not removed by the naive $R\to\infty$ limit of the disk. The cure is the boundaryless carrier itself: on the plane $ℝ^{2}$ (the de-compactified cone), the band-limited Bochner–Riesz Berezin reconstructs every Schwartz observable with all four properties at an algebraic rate. Assembling Latrémolière&#x27;s pointed/proper propinquity from these ingredients — properness by Arzel\`a–Ascoli, reach the reconstruction rate, height the gradient-non-expansive Bochner–Riesz distortion — establishes plane (hence de-compactified disk-with-cone) convergence at the qualitative-rate level, in van Suijlekom&#x27;s state-space Gromov–Hausdorff sense; the strictly stronger Latrémolière propinquity carries the same named pointed/proper bookkeeping residual that the compact companion Papers 38/40 carry (the self-contained sharp-constant bound is the open residual). This is the metric-level analogue of the non-compact limit that Paper 47 closes at the spectral level.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>

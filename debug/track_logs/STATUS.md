@@ -1,6 +1,11 @@
 # GeoVac Track Status
 
-Last updated: 2026-05-08
+> **RETIRED 2026-07-09.** This file is no longer maintained. Final disposition
+> of every backlog item below (and all other open items) lives in
+> `docs/project_closeout_plan.md` §A. Historical session summaries are
+> preserved below unchanged.
+
+Last updated: 2026-05-08 (retired 2026-07-09)
 
 ---
 

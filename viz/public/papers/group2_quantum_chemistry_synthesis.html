@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Geometric Vacuum (GeoVac) framework discretizes non-relativistic electronic structure on natural geometries: for each separable quantum system there is a coordinate system in which the Coulomb singularities become boundary conditions and the Laplace–Beltrami operator discretizes on a sparse…">
+<title>The Natural Geometry Hierarchy: A Synthesis of the GeoVac Quantum-Chemistry Arc — GeoVac</title>
+<style>
+:root { color-scheme: light dark; }
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 1rem/1.6 system-ui, sans-serif; }
+a { color: #2a78d6; }
+h1 { line-height: 1.3; font-size: 1.5rem; }
+.meta { color: #777; font-size: 0.9rem; }
+.abstract { text-align: justify; }
+nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+footer { margin-top: 2.5rem; border-top: 1px solid #7774;
+         padding-top: 1rem; font-size: 0.85rem; color: #777; }
+li { margin: 0.4rem 0; }
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav><a href="index.html">← All GeoVac papers</a></nav>
+<h1>The Natural Geometry Hierarchy: A Synthesis of the GeoVac Quantum-Chemistry Arc</h1>
+<p class="meta">Josh Loutey · GeoVac synthesis document · Synthesis / Reading Guides · DOI: <a href="https://doi.org/10.5281/zenodo.21286858">10.5281/zenodo.21286858</a>
+ · <a href="https://github.com/jloutey-hash/geovac/blob/main/papers/synthesis/group2_quantum_chemistry_synthesis.pdf">PDF</a></p>
+<h2>Abstract</h2>
+<p class="abstract">The Geometric Vacuum (GeoVac) framework discretizes non-relativistic electronic structure on natural geometries: for each separable quantum system there is a coordinate system in which the Coulomb singularities become boundary conditions and the Laplace–Beltrami operator discretizes on a sparse graph with quantum-number labels for nodes. This synthesis assembles the framework&#x27;s quantum-chemistry arc—the nine Group 2 papers spanning one-electron atoms, the two-center one-electron ion, the two-electron atom, the two-center two-electron molecule, and the core–valence and polyatomic extensions—into a single coherent narrative organized by the natural geometry hierarchy. The hierarchy is a grid indexed by the number of nuclear centers and the number of electrons: $S^3$ (Fock) for atoms [ref], the prolate spheroid for $\mathrm{H}_2^+$ [ref], hyperspherical coordinates for He [ref], molecule-frame hyperspherical coordinates for $\mathrm{H}_2$ [ref], and composed fiber bundles for core–valence and polyatomic systems [ref]. Three threads run through the arc. First, an algebraic-first program: the angular content is computed exactly from Gaunt coefficients and Wigner $3j$ symbols at every level, the prolate-spheroidal electron–electron repulsion is replaced by an algebraic Neumann expansion [ref], the radial solvers reduce to three-term Laguerre recurrences, and the split-region Legendre nuclear coupling terminates exactly via the $3j$ triangle inequality [ref]; what currently survives as quadrature ($Z_{\mathrm{eff}}$ screening, the adiabatic potential curves, the hyperradial coupling) is named explicitly, and finding algebraic replacements is an ongoing goal rather than a deficiency. Second, two proven structural negative theorems delimit the design space: in a single-center molecular Sturmian basis with a shared momentum scale the one-electron Hamiltonian and overlap obey the two-term identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and share a single orthogonal $SO(4)$ Wigner-$D$ congruence, so the generalized eigenvalues are independent of the internuclear distance and cannot bind unless the Sturmian scale $\beta_k(R)$ itself becomes $R$-dependent [ref]; and a graph built by concatenating atom-centered lattices has an $R$-independent intra-atomic kinetic energy, producing a monotonically attractive potential-energy surface with no equilibrium [ref]. Third, honest accuracy ceilings: the framework reaches $0.0002%$ for $\mathrm{H}_2^+$, $0.022%$ (properly variational, raw $l_{\max}=7$) down to $0.004%$ (a non-variational cusp extrapolation) for He, $96.0%$ of $D_e$ for $\mathrm{H}_2$, and—in the composed architecture, whose accuracy bottleneck is the Phillips–Kleinman pseudopotential—$5.3%$, $11.7%$, and $19.4%$ equilibrium-bond-length error for LiH, $\mathrm{BeH}_2$, and $\mathrm{H}_2\mathrm{O}$ respectively. The classical-solver investigation is complete: its accuracy ceilings are characterized, and the framework is positioned as a zero-parameter, structurally sparse research instrument—a computationally principled alternative whose primary downstream value (qubit-Hamiltonian sparsity for quantum simulation) lives in the quantum-computing arc—not as a replacement for production quantum chemistry. The discrete graph and the continuous Laplace–Beltrami operator are dual descriptions connected by proven conformal maps; the interpretive question of which is more fundamental is left open.</p>
+
+<footer>
+<p>GeoVac — an independent research project. Code, tests, and all papers:
+<a href="https://github.com/jloutey-hash/geovac">https://github.com/jloutey-hash/geovac</a> · Corpus archive DOI:
+<a href="https://doi.org/10.5281/zenodo.20482394">10.5281/zenodo.20482394</a> ·
+<a href="../index.html">Interactive visualizations</a></p>
+</footer>
+</body>
+</html>
