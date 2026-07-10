@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v4.75.0 (July 9, 2026)
+**Version:** v4.76.0 (July 9, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -136,6 +136,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Close-out freeze (2026-07-09, v4.76.0):** Repo frozen-not-abandoned; 59 per-paper Zenodo DOIs published; 443 dangling debug/ refs resurrected; dispositions PI-approved. See debug/sprint_closeout_distribution_memo.md + docs/project_closeout_plan.md.
 - **M3 period-map rank (2026-07-08–09, v4.74.0–2):** Paper 56 cosmic-Galois M3 column = rank 2 not 1 via χ₋₄ vertex parity (capped at 2, not faithful); resolves the named rank-≥2 follow-on. v4.74.1 (PI-directed) admitted the χ₋₄-graded trace into `def:period_map` and flipped `thm:injection_g4`(C4) headline rank-1→2 coherently (conclusion unchanged, rank-1 kept as parity-blind sub-statement). v4.74.2: delta-QA = CLEAN-DELTA (calibrated); rank-2 test hardened to discriminate the physical split; DoD §C8 reconciled (was stale "closed immersion"). See debug/sprint_m3_parity_rank_memo.md.
 - **/aha skill redesigned + renamed (2026-07-09, v4.75.0):** the aha pass (was misspelled `/ahha`) is now two-phase — Phase A generates wild (cross-domain Outlier + Inversion, judgment off), Phase B filters hard (ground/verify/hedge/defend). Separates ideation from quality-control so the guardrails stop shrinking the reach. See CHANGELOG v4.75.0.
 - **Sparsity-destroying option (2026-07-07, v4.73.1):** Löwdin-retrofit of GeoVac integrals = garbage (inconsistent h1/eri, S non-PSD, 17.9× Pauli); done right it IS standard Sturmian QC — a replacement, not a modification. See debug/sprint_commutator_and_explorer_memo.md §7.

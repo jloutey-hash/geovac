@@ -1,6 +1,6 @@
 # GeoVac Close-Out & Distribution Plan
 
-**Date:** 2026-07-09 · **Status:** DRAFT — dispositions in §A are recommendations awaiting PI approval; tooling in §B is built and dry-run-verified.
+**Date:** 2026-07-09 · **Status:** §A dispositions **PI-APPROVED** (2026-07-09; item 1 pro-finite = FREEZE). §B executed same day: 59 per-paper DOIs published, paper pages live-on-push, metadata + pip-install fixed. §A item 6 refs sweep executed (443→0 by resurrection). Remaining: PI publishes the GitHub Release at the v4.76.0 tag; B6 re-test after ~2–6 weeks.
 
 **Context.** PI judgment (2026-07-09): the project is largely done — the equivalence program succeeded, the walls are named, the whole-corpus QA sweep is complete. Two workstreams follow: (A) give every open item an explicit disposition instead of a scattered implicit backlog, and (B) fix the distribution problem. The PI's acceptance criterion for (B): *the corpus should be readily discoverable by an AI searching for related work.*
 
@@ -88,6 +88,17 @@ Re-run after indexing latency (~2–6 weeks post-publish):
 Criterion met when the relevant per-paper record (or the repo) appears in its own neighborhood's results.
 
 ---
+
+## C-pre. The end-state model (PI framing, 2026-07-09): a frozen, resumable repo
+
+The repo closes as **frozen, not abandoned**: no live research threads, but everything a future resume needs stays in place — the §A FREEZE items are *named open problems in their owning papers* (the natural pick-up points), and the institutional memory (CLAUDE.md, the §3 dead-end table, the WH register, QA certifications, `memory/`) is already designed for cold-start resumption.
+
+**Resume protocol — adding a paper N to the frozen repo** (the tooling makes this ~zero rework):
+1. Write `papers/group*/paper_N_*.tex`, compile the PDF (tracked-PDF policy), tests per §13.4a.
+2. `python debug/zenodo_manifest_build.py` — picks the new paper up automatically.
+3. `python debug/zenodo_upload.py --only paper_N --execute` → review draft → `--publish` (fresh token; all prior papers skip via the ledger `debug/data/zenodo_upload_results.json`).
+4. `python debug/build_paper_pages.py` — new abstract page + sitemap entry, DOI link included.
+5. Commit + push (auto-deploys the page), `/release`, publish a GitHub **Release** (refreshes the corpus record).
 
 ## C. Sequencing
 

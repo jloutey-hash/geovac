@@ -51,7 +51,7 @@ Note on H2O 1-norm: The Phillips-Kleinman pseudopotential (PK) is a one-body ope
 ## Try It
 
 ```bash
-pip install geovac-hamiltonians
+pip install "geovac-hamiltonians @ git+https://github.com/jloutey-hash/geovac.git#subdirectory=geovac-hamiltonians"
 ```
 
 ```python

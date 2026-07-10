@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.76.0] - 2026-07-09
+
+**Close-out: the freeze-point release.** PI judgment: the research program is complete — the equivalence program succeeded, the walls are named, whole-corpus QA is certified. This release closes the repo as **frozen, not abandoned** (resumable; see `docs/project_closeout_plan.md` §C-pre for the add-a-paper resume protocol) and ships the distribution fix that was the close-out's second workstream. Memo: `debug/sprint_closeout_distribution_memo.md`.
+
+### Added
+- **59 per-paper Zenodo records published** (PI-reviewed drafts, PI-authorized publish): every paper in group1–6 + synthesis now has its own DOI with real title, abstract, keywords, CC-BY-4.0, PDF, and cross-links to the repo + corpus DOI. Motivation (measured 2026-07-09): topic-based web search in GeoVac's three home neighborhoods returned zero GeoVac results — the sole scholarly-index surface was one Zenodo zip of the repo at v3.35.0. Ledger: `debug/data/zenodo_upload_results.json`; tooling: `debug/zenodo_manifest_build.py` + `debug/zenodo_upload.py` (retry-hardened: Zenodo's edge resets default python-urllib UA and intermittently serves HTML-400s; resume-by-title prevents duplicates).
+- **Crawlable paper pages** on the live GitHub Pages site: 59 static abstract pages + grouped index (`viz/public/papers/`, generator `debug/build_paper_pages.py`) with DOI links, plus `sitemap.xml` and `robots.txt` — the viz SPA serves crawlers an empty div; these pages are what an AI searching for related work actually reads.
+- **`docs/project_closeout_plan.md`**: the close-out working doc — §A disposition table (PI-APPROVED: 6 CLOSE, 4 FREEZE-as-named-open incl. the pro-finite limit per PI freeze call, 1 ABANDON, 2 MERGE→B, 1 no-action), §B distribution plan + B6 pre-registered success test, §C-pre frozen-repo resume protocol.
+
+### Changed
+- **~443 dangling `debug/` paper references → 0, by resurrection** (§A item 6): instead of rewriting citations across ~25 certified papers, the 294 cited-but-pruned artifacts were restored from git history to their original paths (`debug/sweep_debug_refs.py` + `_families.py`; the resurrect-pruned-artifacts pattern at scale). Policy re-read recorded: freezing makes `debug/` permanent record, inverting §9's transience premise. Zero paper .tex files touched.
+- **`pip install geovac-hamiltonians` fixed on all three instructing surfaces** (README, package README, `docs/geovac_positioning.md`): the package was never published to PyPI; instructions now use the verified git-subdirectory install.
+- **Stale metadata refreshed**: README version badge / CITATION.cff / `.zenodo.json` (all drifted at 4.0.0 since 2026-06-10) → current; README LiH 1-norm 33.3→32.6 Ha / 0.95× (per the 2026-07-01 retirement); `debug/track_logs/STATUS.md` retired into the plan's disposition table.
+
+### Closed
+- The close-out itself: no live research threads remain. The four FREEZE items are named open problems in their owning papers (P56 pro-finite, P57 topos classification, WH7-B2, P34 Cs hyperfine). Pending single PI action: publish a GitHub **Release** at this tag (the GitHub→Zenodo webhook fires on Releases, not tags — the corpus record last refreshed at ≈v3.35.0).
+
+### Verification
+- 59 published DOIs verified individually via API detail-GETs (title/PDF/metadata per record); pip instruction dry-run-installed end-to-end from the public repo; refs sweep re-measured 0 genuinely dangling post-restore (19 residual parser hits are family-glob citation prefixes whose members all exist). No `geovac/` production code or paper .tex changed; topological-integrity proofs run at release. **Not yet verifiable:** actual search discoverability (indexing latency ~2–6 weeks; B6 re-test is the registered check; indexing ≠ ranking; arXiv remains the un-attempted ceiling).
+
 ## [4.75.0] - 2026-07-09
 
 **`/ahha` → `/aha`: idea-generation skill redesigned (divergent-then-convergent) and renamed (spelling fix).** PI direction. The old `/ahha` was guardrail-heavy — one generative step ("reach for what a veteran would make") wrapped in four disciplining steps. That optimized for *defensible* connections (the in-neighborhood ones a veteran already sees) over *surprising* ones, because the verification mindset leaked into generation. The redesign separates the two with a hard wall: generate wild, then filter hard.

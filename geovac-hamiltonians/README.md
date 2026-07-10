@@ -9,17 +9,21 @@ Gaussian bases).
 
 ## Install
 
+The package is not on PyPI; install it straight from the repository:
+
 ```bash
-pip install geovac-hamiltonians
+pip install "geovac-hamiltonians @ git+https://github.com/jloutey-hash/geovac.git#subdirectory=geovac-hamiltonians"
 ```
 
 Optional exports:
 
 ```bash
-pip install geovac-hamiltonians[qiskit]      # Qiskit SparsePauliOp export
-pip install geovac-hamiltonians[pennylane]    # PennyLane Hamiltonian export
-pip install geovac-hamiltonians[all]          # both
+pip install "geovac-hamiltonians[qiskit] @ git+https://github.com/jloutey-hash/geovac.git#subdirectory=geovac-hamiltonians"     # Qiskit SparsePauliOp export
+pip install "geovac-hamiltonians[pennylane] @ git+https://github.com/jloutey-hash/geovac.git#subdirectory=geovac-hamiltonians"  # PennyLane Hamiltonian export
+pip install "geovac-hamiltonians[all] @ git+https://github.com/jloutey-hash/geovac.git#subdirectory=geovac-hamiltonians"        # both
 ```
+
+(From a local clone: `pip install ./geovac-hamiltonians` from the repo root.)
 
 ## Quick start
 
