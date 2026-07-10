@@ -33,7 +33,7 @@ PUBLIC_DIR = ROOT / "viz" / "public"
 
 SITE_BASE = "https://jloutey-hash.github.io/geovac"
 REPO_URL = "https://github.com/jloutey-hash/geovac"
-CORPUS_DOI = "10.5281/zenodo.20482394"
+CORPUS_DOI = "10.5281/zenodo.18738360"
 AUTHOR = "Josh Loutey"
 
 GROUP_LABEL = {

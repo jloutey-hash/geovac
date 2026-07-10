@@ -47,8 +47,8 @@ USER_AGENT = "geovac-zenodo-upload/1.1 (mailto:jloutey@gmail.com)"
 CREATOR = {"name": "Loutey, Josh",
            "affiliation": "Independent Researcher, Kent, Washington"}
 REPO_URL = "https://github.com/jloutey-hash/geovac"
-CORPUS_DOI = "10.5281/zenodo.20482394"
-CORPUS_VERSION = "v4.75.0"
+CORPUS_DOI = "10.5281/zenodo.18738360"
+CORPUS_VERSION = "v4.76.0"
 RETRIES = 5
 
 GROUP_LABEL = {
