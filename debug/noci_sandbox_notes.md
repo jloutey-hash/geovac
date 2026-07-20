@@ -136,9 +136,55 @@ not run as QC-product steps. Residual option (PI call only): N4-as-diagnosis —
 3-det NOCI with genuine integrals as a W1e closure-mechanism confirmation (would show
 the wall is bindable cross-center physics, decoupled from any sparsity claim).
 
+## Step 4 — N4-as-diagnosis: NaH BINDS (`noci_nah_probe.py`, 2026-07-19, PI-authorized)
+
+PI authorized the diagnosis variant post-N3b ("Avery style, soup-to-nuts"); NO sparsity
+claim. New machinery (`noci_md_engine.py`), all validated at machine precision before
+use: McMurchie–Davidson s/p Gaussian engine (vs N1 closed forms 4e-16; p functions vs
+FD center-derivatives ~1e-11); general-N Löwdin-cofactor non-orthogonal Slater–Condon
+(vs N2 permutation machinery 4e-16; vs the stored N2 LiH ladder 2e-15 — N2's explicit
+permutation expansion dies past ~6 electrons, this replaces it); bitstring FCI (vs
+stored N2 FCI 2e-15); 6-Gaussian STO shape fits for 2p/3s (⟨fit|STO⟩ = 1.000000).
+
+Setup: all-electron 12e NaH; Na {1s, 2s, 2p×3, 3s} + H {1s} (M=7 spatial); zetas
+variational on the ISOLATED Na atom only (best = CR-like {10.63, 3.3, 3.44, 0.836};
+E(Na) = −161.0845 Ha vs Clementi minimal-STO RHF anchor ≈ −161.12); H ζ=1 — the
+molecular curve is a fragment prediction. Checks: rotational invariance (z vs 111 axis)
+1.1e-13; non-orthogonal 91-det complete space = Löwdin bitstring FCI span identity
+0.0e+00 bit-exact.
+
+| method | R_eq (a0) | D_e | % of in-basis FCI binding |
+|---|---|---|---|
+| cov (2) | 3.954 | 0.686 eV | 58.4% |
+| cov + Na⁺H⁻ ionic (3) | **3.736** | **1.071 eV** | **91.1%** |
+| all 4 | 3.713 | 1.080 eV | 91.9% |
+| FCI (91) | 3.595 | 1.175 eV | 100% |
+| Löwdin cov (2) | — | unbound | −38.0% |
+| Löwdin cov+ionH (3) | 3.658 | 0.136 eV | 11.6% |
+
+**ALL FOUR PRE-REGISTERED GATES PASS.** G1 interior minimum ✓ (the corpus NEVER
+produced one for NaH); G2 R_eq = 3.736 a0 = +4.8% vs experiment 3.566 ✓; G3 D_e =
+1.071 eV sane vs experiment 1.961 ✓ (55% — minimal-basis underbinding, the same
+pattern as N2's LiH at 53% of experiment); G4 compactness 91.1% ≥ 85% ✓. The in-basis
+FCI R_eq = 3.595 a0 lands +0.8% from experiment.
+
+**Diagnosis confirmed by construction.** The wall the corpus hit on NaH (W1e: monotone
+descent through F1–F6, Schmidt, kwarg sweep, Sprint B.1 explicit-core HF, R3-B DMRG)
+is the HAMILTONIAN SPECIFICATION — surrogate/missing cross-center physics — not the
+correlation treatment: with genuine end-to-end integrals, the same 3-determinant
+compactness that carried LiH binds NaH at ~5% geometry error. Both N2 readings
+replicate at 12 electrons / second row / with p orbitals: non-orthogonal compactness
+(91.1%) and orthogonalization-damages-only-truncated-spaces (Löwdin 3-det keeps 11.6%,
+Löwdin 2-det destroyed — LiH was 15.0% / destroyed).
+
+Avery-call relevance: natural centerpiece demo — the framework's hardest documented
+failure, bound by the Averys' species of machinery (genuine two-center integrals over
+Slater-type fragments) plus 3 fragment-native determinants.
+Data: `debug/data/noci_nah_probe_results.json`.
+
 ## Honest gaps
 
-Steps 1–2 use Gaussian-fitted STO integrals, NOT GeoVac-native integrals. Step 3a
+Steps 1–2 and 4 use Gaussian-fitted STO integrals, NOT GeoVac-native integrals. Step 3a
 closed the hybrid question (no metric patching, ever); Step 3b closed the sparsity
 question (genuine cross-center tensor is l-dense; gate STOP). The g census is
 structural (symmetry-rule counting in the complex-m basis; 'allowed' entries verified
@@ -166,8 +212,9 @@ the one architecture that never transforms it. Every alternative is a documented
   vs the surrogate tensor's? Gate: if the genuine bare tensor keeps O(same) sparsity
   (angular Gaunt selection surviving on cross-center terms), the roadmap holds; if it
   densifies, the NOCI route loses its sparsity payoff and the thread STOPS honestly.
-- **N4 — NaH, the prize target.** [NOT RUN — N3b gate STOP. Survives only as the
-  optional N4-as-diagnosis variant (PI call), decoupled from sparsity claims.] Needs p
+- **N4 — NaH, the prize target.** [RUN 2026-07-19 as N4-as-diagnosis (PI-authorized,
+  decoupled from sparsity claims) — **ALL GATES PASS**, see Step 4. The p-orbital
+  engine blocker was closed by `noci_md_engine.py`.] Needs p
   orbitals on Na → either an s+p Gaussian engine (Obara–Saika recursion, a real build)
   or reuse of N3b genuine Sturmian integrals. Run the same 3-det ladder (covalent Na–H,
   ionic Na⁺H⁻). Gate: interior minimum, R_eq near exp ≈ 3.57 a0, D_e sane (exp ≈
@@ -204,10 +251,12 @@ per-center exponents), but reload it before any basis unification idea.
 3. Freeze lockdown: pushurl = PUSH-DISABLED... + `.git/hooks/pre-push`; undo only on PI
    direction (`git config --unset remote.origin.pushurl` + delete hook). Sandbox rules:
    no pushes, no version bumps, no CHANGELOG, no paper edits.
-4. Thread state: N3b DONE, gate = STOP (2026-07-19). Nothing is queued. Open PI
-   decisions: (a) accept the STOP and archive the thread, or (b) authorize the
-   N4-as-diagnosis variant (NaH 3-det NOCI as W1e closure-mechanism confirmation,
-   no sparsity claim). Census driver: `debug/noci_n3b_census.py`.
+4. Thread state (2026-07-19 end of day): N3b gate = STOP (sparsity payoff dead);
+   N4-as-diagnosis RUN, ALL GATES PASS (NaH binds, +4.8% R_eq, 91.1% compactness —
+   W1e localization confirmed by construction). N5/N6 remain not-run (QC-product
+   steps, moot under the N3b STOP). Nothing queued. Open: Avery call prep owed when
+   a date lands — N4 is the centerpiece demo. Drivers: `debug/noci_n3b_census.py`,
+   `debug/noci_md_engine.py` (+ its validation suite), `debug/noci_nah_probe.py`.
 5. Avery thread (separate but converging): availability email sent 2026-07-19; when a
    call date lands, build the one-page call prep. Primer for the PI:
    `debug/avery_framework_primer.md` (copied here from the temp scratchpad).
