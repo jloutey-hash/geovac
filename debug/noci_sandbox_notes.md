@@ -76,11 +76,77 @@ device-measured S_IJ/H_IJ. No cheap bridge exists; the bridge IS the Avery machi
 Caveat: builder-style surrogates are mimics on a textbook basis (structure-level, not
 builder-reproducing). E's "R_eq=2.0" rows are grid-edge, i.e. no interior minimum.
 
+## Step 3b — genuine-integral sparsity census (`noci_n3b_census.py`, 2026-07-19)
+
+**Inventory (roadmap question answered):** `geovac/shibuya_wulfman.py` exposes
+cross-center V_ne ONLY (same-center bra-ket pairs, off-center nucleus; plus
+mismatched-lambda and multi-zeta variants) — no two-center overlap, kinetic, or ERIs.
+Topos-3's exact Mulliken/Ruedenberg A_n/B_n machinery SURVIVES
+(`debug/compute_topos3_exact_meet.py` + `tests/test_topos3_exact_meet.py`): genuine
+two-center overlaps at arbitrary (n,l,m,Z) as exact rationals, zero-decidable
+(Lindemann). `geovac/neumann_vee.py` is m=0-only Neumann V_ee (sigma states, the
+spheroidal solvers) — not a general engine. **No two-center ERI engine exists anywhere
+in the corpus.**
+
+**New machinery (exact, validated):** extended the Topos-3 route with 1/r_A and 1/r_B
+kernels (each cancels against the volume element (xi^2-eta^2); cancellation asserted)
+→ genuine cross-center h via the hydrogenic eigen-trick, with the bra/ket assembly
+identity (E_a S − Z_B I_B = E_b S − Z_A I_A) holding EXACTLY (rational equality) on
+every entry — a machinery certificate. Four quadrature cross-checks at ~2e-16.
+
+**Census (A: Z=3 at origin, B: Z=1 at R=3 zhat, hydrogenic n_max=2 per center, M=10):**
+
+| object | genuine nonzero | builder nonzero | dense | genuine zeros are |
+|---|---|---|---|---|
+| S | 32 | 10 (identity) | 100 | m-rule only |
+| h | 44 | 22 (no cross block = W1d) | 100 | m-rule only |
+| g (ordered) | 2,944 (29.4%) | 214 (2.1%) | 10,000 | m-rule + Gaunt |
+
+g at n_max=3 (M=28): genuine 114,280 (18.6%) vs builder 7,600 (1.2%) — **inflation
+13.8x → 15.0x, rising with basis.** The genuine tensor is essentially m-rule-only
+(per-side Gaunt feasibility cuts < 6% beyond the m-rule); the cross classes
+(AA|AB + AB|AB + AB|BB) are 80% of it. Cross-S magnitudes 0.08–0.52; cross-h
+magnitudes 0.19–0.80 Ha — **bond-scale, not perturbative** (an independent
+quantification of W1d/W1e: the builder's architecturally-absent cross-block h entries
+are load-bearing). Data: `debug/data/noci_n3b_census_results.json`.
+
+**GATE VERDICT: STOP branch.** Gaunt l-selection does NOT survive on cross-center
+terms — only the axial m-rule does (exact, structural; Topos-3's meet-is-m-grading,
+now quantified on the full (S,h,g)). The genuine bare molecular tensor is l-dense in
+every cross-center class. The roadmap's differentiator (i) — "untransformed bare-tensor
+use keeps l-sparsity" — is FALSE at the molecular level: untransformedness protects
+only the same-center (atomic) sector.
+
+**The re-reading this buys (the census's real yield):** the corpus's 17.9x Löwdin
+inflation (v4.73.1) and Track DF's 14x were never the price of orthogonalization —
+they are the price of the genuine cross-center physics itself (~15x is the genuine
+tensor's own inflation over the builder). "Löwdin destroys sparsity" and "the
+molecular tensor is intrinsically l-dense cross-center" are the same fact seen twice;
+Löwdin was paying the honest price. l-sparsity is a property of the atomic sector
+only; no molecular representation keeps it while binding, because binding lives in
+the cross-center classes.
+
+What survives: N2's compactness (3 dets = 97.6% FCI binding) untouched; the m-rule is
+exact (factor 3–5 at these bases); the (AA|BB) Coulomb class is low-rank via bipolar
+multipole (SW-style); S/h are M^2 objects. A constant-factor story — not the corpus's
+structural-scaling story.
+
+**Thread disposition per the pre-registered gate: STOPPED honestly at N3b.** N4/N5/N6
+not run as QC-product steps. Residual option (PI call only): N4-as-diagnosis — NaH
+3-det NOCI with genuine integrals as a W1e closure-mechanism confirmation (would show
+the wall is bindable cross-center physics, decoupled from any sparsity claim).
+
 ## Honest gaps
 
-These probes use Gaussian-fitted STO integrals, NOT GeoVac-native integrals. Step 3a
-closed the hybrid question (no metric patching, ever); the remaining gap is genuine
-fragment integrals at GeoVac scale — which is the Avery machinery's home ground.
+Steps 1–2 use Gaussian-fitted STO integrals, NOT GeoVac-native integrals. Step 3a
+closed the hybrid question (no metric patching, ever); Step 3b closed the sparsity
+question (genuine cross-center tensor is l-dense; gate STOP). The g census is
+structural (symmetry-rule counting in the complex-m basis; 'allowed' entries verified
+generically nonzero only for S/h where the exact machinery decides — no numerical
+two-center ERIs were computed). The real-harmonic builder count differs only by the
+±m mixing. The builder comparator is the Gaunt-selected same-center superset
+(convention-B-like); the production pair-diagonal A-convention is sparser still, so
+the reported inflation factors are LOWER bounds.
 
 ## THE LONG PATH — roadmap to "does NOCI-on-GeoVac work?" (written 2026-07-19, pre-reset)
 
@@ -90,7 +156,9 @@ h1 = 16× over-binding); hybrid metric-patching is closed by N3a (collapse); the
 untransformed genuine tensor RETAINS l-sparsity (commutator memo arc-closure) and NOCI is
 the one architecture that never transforms it. Every alternative is a documented dead end.
 
-- **N3b — genuine-integral sparsity census (next, no new math needed).** Inventory what
+- **N3b — genuine-integral sparsity census.** [DONE 2026-07-19 — GATE = STOP; see
+  Step 3b above. The genuine tensor densifies (l-dense cross-center, ~15x); the
+  roadmap's sparsity payoff does not exist.] Inventory what
   `geovac/shibuya_wulfman.py` actually exposes (V_ne only? overlap? kinetic?) and whether
   Topos-3's Mulliken A_n/B_n closed-form code survives anywhere (grep debug/, tests/).
   Then: compute the GENUINE bare (S,h,g) tensor for a real GeoVac fragment pair
@@ -98,19 +166,23 @@ the one architecture that never transforms it. Every alternative is a documented
   vs the surrogate tensor's? Gate: if the genuine bare tensor keeps O(same) sparsity
   (angular Gaunt selection surviving on cross-center terms), the roadmap holds; if it
   densifies, the NOCI route loses its sparsity payoff and the thread STOPS honestly.
-- **N4 — NaH, the prize target.** The system the framework could NOT bind. Needs p
+- **N4 — NaH, the prize target.** [NOT RUN — N3b gate STOP. Survives only as the
+  optional N4-as-diagnosis variant (PI call), decoupled from sparsity claims.] Needs p
   orbitals on Na → either an s+p Gaussian engine (Obara–Saika recursion, a real build)
   or reuse of N3b genuine Sturmian integrals. Run the same 3-det ladder (covalent Na–H,
   ionic Na⁺H⁻). Gate: interior minimum, R_eq near exp ≈ 3.57 a0, D_e sane (exp ≈
   1.9–2.0 eV — VERIFY against a standard source before gating). Success = compact NOCI
   binds the framework's hardest documented failure with genuine integrals.
-- **N5 — device-side NOQE resource table.** State-prep for fragment determinants over the
+- **N5 — device-side NOQE resource table.** [NOT RUN — N3b gate STOP.] State-prep for fragment determinants over the
   native qubit register (Thouless rotation from an orthonormal computational reference —
   needs only the M² orbital-coefficient object, NOT the M⁴ transformed ERI tensor: this
   distinction is the whole ballgame). Hadamard-test counts: n_det(n_det+1)/2 × (1 + native
   Pauli terms) per PES point; shot-noise amplification via κ(S_config) (measured ≈ 15 at
   LiH). Deliverable: LiH/NaH resource table vs the Löwdin-inflated alternative.
-- **N6 — verdict + the Avery intersection.** If N3b–N5 hold: "GeoVac fragment states +
+- **N6 — verdict + the Avery intersection.** [RESOLVED by N3b on the negative branch:
+  the honest negative is written into Step 3b; the Avery intersection remains real but
+  as THEIR framework's home ground (standard molecular Sturmian QC), not as a
+  GeoVac-sparsity joint program.] If N3b–N5 hold: "GeoVac fragment states +
   genuine Avery integrals + NOQE = sparse quantum chemistry that binds" — the natural
   joint program (their integral machinery × our encoding/labels × device-measured glue).
   If any gate fails, write the honest negative into these notes and stop.
@@ -132,8 +204,10 @@ per-center exponents), but reload it before any basis unification idea.
 3. Freeze lockdown: pushurl = PUSH-DISABLED... + `.git/hooks/pre-push`; undo only on PI
    direction (`git config --unset remote.origin.pushurl` + delete hook). Sandbox rules:
    no pushes, no version bumps, no CHANGELOG, no paper edits.
-4. Continue at N3b (cheap, decisive) unless the PI says otherwise. NaH (N4) blocked on
-   the p-orbital engine or N3b integrals.
+4. Thread state: N3b DONE, gate = STOP (2026-07-19). Nothing is queued. Open PI
+   decisions: (a) accept the STOP and archive the thread, or (b) authorize the
+   N4-as-diagnosis variant (NaH 3-det NOCI as W1e closure-mechanism confirmation,
+   no sparsity claim). Census driver: `debug/noci_n3b_census.py`.
 5. Avery thread (separate but converging): availability email sent 2026-07-19; when a
    call date lands, build the one-page call prep. Primer for the PI:
    `debug/avery_framework_primer.md` (copied here from the temp scratchpad).
