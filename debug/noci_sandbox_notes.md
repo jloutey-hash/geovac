@@ -194,6 +194,54 @@ two-center ERIs were computed). The real-harmonic builder count differs only by 
 (convention-B-like); the production pair-diagonal A-convention is sparser still, so
 the reported inflation factors are LOWER bounds.
 
+## Named deferred build — general-m two-center ERI engine (identified 2026-08-09, NOT started)
+
+Follow-on from N3b's inventory finding ("no two-center ERI engine exists anywhere in the
+corpus"). The concrete missing machinery: the **Paper 12 Neumann V_ee expansion in prolate
+spheroidal coordinates, generalized past m = 0** (`geovac/neumann_vee.py` is sigma-only).
+This is a BUILD, not a discovery — there is no undiscovered symmetry trick waiting (Fock
+rigidity, Track NH: the S³ conformal projection is unique to −Z/r, no two-center analog).
+
+**Already in hand (do not rebuild):** exact two-center overlaps at arbitrary (n,l,m,Z) as
+rationals, zero-decidable (Topos-3 Mulliken/Ruedenberg A_n/B_n, `debug/compute_topos3_exact_meet.py`
++ `tests/test_topos3_exact_meet.py`); cross-center one-electron h via the hydrogenic
+eigen-trick, certified by the exact rational bra/ket identity on every entry (N3b).
+Missing piece = the two-electron general-m case, plus its own validation suite.
+
+**What it buys.** Accuracy per basis function → fewer spatial orbitals → **fewer qubits**
+(correct cusp + correct exponential tail; Gaussians have neither, hence several primitives
+per Slater). The trade "pay classical integral cost, buy basis compactness" is favorable
+ONLY in the quantum-resource setting, where integral evaluation is offline preprocessing
+and qubit count is the binding constraint. It also removes the Gaussian-fit layer from the
+N1/N2/N4 probes (see Honest gaps above), making those results native.
+
+**What it does NOT buy — three hard bounds:**
+1. **Sparsity unchanged.** Tensor stays l-dense cross-center; the N3b gate stays shut.
+   Gain is accuracy/qubit, NOT Pauli-terms/qubit. An ERI-engine pitch framed as a
+   sparsity win would be a framing zombie.
+2. **Does not fix N4's 55%-of-experiment D_e.** That was minimal-basis incompleteness
+   (no polarization/diffuse, 3 dets), NOT fit error — the 6-Gaussian STO fits measured
+   ⟨fit|STO⟩ = 1.000000. LiH's 53% is the same pattern.
+3. **Classically SLOWER.** Gaussian two-center ERIs collapse via the Gaussian product
+   theorem with decades of optimized recursion; Slater/Neumann needs auxiliary functions
+   and the genuine FOUR-center case is the real historical blocker that lost STOs the field.
+
+**Scope correction (recorded because it is easy to overstate):** "integral compute cost
+doesn't matter" holds ONLY for single-point qubit-Hamiltonian construction. It fails for
+PES scans, geometry optimization, MD, and many-atom 4-center work, where cost multiplies
+by geometries and by center-quadruples.
+
+**Two-sparsity taxonomy (the bound on all scale ambitions).** Symmetry sparsity (exact,
+label-derived, GeoVac's kind) is an atomic-sector property — SO(4) at one center, axial
+only at two (m-rule, constant factor 3–5 per N3b), discrete point group once bent.
+Distance sparsity (approximate, screening/density-fitting/DM-truncation) is what
+linear-scaling chemistry runs on and it IMPROVES with size. GeoVac has the first and none
+of the second ⇒ architecturally a small-system framework; advantages shrink with atom
+count (cross classes already ~80% of the genuine tensor at two centers).
+
+**Gate:** requires un-freezing the repo (v4.76.0, pushurl disabled + pre-push hook) — a PI
+decision, not a technical one. Recorded here so the option survives the freeze.
+
 ## THE LONG PATH — roadmap to "does NOCI-on-GeoVac work?" (written 2026-07-19, pre-reset)
 
 **The elimination argument (why this is the only road):** operator-side routes are all
@@ -254,7 +302,9 @@ per-center exponents), but reload it before any basis unification idea.
 4. Thread state (2026-07-19 end of day): N3b gate = STOP (sparsity payoff dead);
    N4-as-diagnosis RUN, ALL GATES PASS (NaH binds, +4.8% R_eq, 91.1% compactness —
    W1e localization confirmed by construction). N5/N6 remain not-run (QC-product
-   steps, moot under the N3b STOP). Nothing queued. Open: Avery call prep owed when
+   steps, moot under the N3b STOP). Nothing queued as a sprint; one named deferred
+   build identified 2026-08-09 (general-m two-center ERI engine — see its section
+   above; accuracy-per-qubit only, NOT a sparsity fix). Open: Avery call prep owed when
    a date lands — N4 is the centerpiece demo. Drivers: `debug/noci_n3b_census.py`,
    `debug/noci_md_engine.py` (+ its validation suite), `debug/noci_nah_probe.py`.
 5. Avery thread (separate but converging): availability email sent 2026-07-19; when a
