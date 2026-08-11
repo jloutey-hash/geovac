@@ -65,7 +65,14 @@ an honest bill.  Second \textbf{[OBSERVATION]}, four independent attempts
 to relocate the non-orthogonality---into the operator, into a dual basis,
 into a high-symmetry embedding, into device-measured many-body
 overlaps---each moved the cost without reducing it, because the cost
-measures the physical asymmetry of a two-center problem.
+measures the physical asymmetry of a two-center problem.  A fifth,
+measured here, is the sharpest: enabling equivalent-atom-swap tapering
+\emph{reduces} the qubit saving ($\mathrm{BeH_2}$ $12 \to 9$,
+$\mathrm{N_2}$ $22 \to 19$, $\mathrm{F_2}$ $22 \to 15$) while inflating
+the Pauli count $2.3$--$3.6\times$, because the swap rotation merges
+per-block abelian gradings into joint stabilizers.  A permutation
+identifies blocks, and identifying blocks destroys the per-block labels
+that generate the sparsity.
 
 We close with a demonstration \textbf{[PANEL-VERIFIED]}: all-electron
 12-electron NaH, the framework's hardest documented failure, binds at
@@ -249,17 +256,38 @@ factor.  Bent molecules carry only a finite point group and therefore a
 finite grading.
 \end{corollary}
 
-\begin{prediction}[Water, untested]
-\label{pred:water}
 $\mathrm{H_2O}$ has point group $C_{2v}$, which is order four and
-\emph{abelian}, isomorphic to $\mathbb{Z}_2 \times \mathbb{Z}_2$.  All
-its irreducibles are one-dimensional, so it admits a clean two-bit
-grading and exactly two qubits of symmetry-based reduction---not a
-multiplicative factor.  This sharpens the qualitative expectation that
-the framework's angular advantage degrades for non-linear molecules into
-a specific count, and is falsifiable on the existing $\mathrm{H_2O}$
-build.
+\emph{abelian}, isomorphic to $\mathbb{Z}_2 \times \mathbb{Z}_2$; all its
+irreducibles are one-dimensional, so Corollary~\ref{cor:point_group}
+predicts a two-bit spatial grading---two qubits, not a multiplicative
+factor.  We attempted to test this and could not, for a reason that is
+itself a structural finding.
+
+\begin{observation}[The composed builder carries no angular geometry]
+\label{obs:no_angle}
+\texttt{molecular\_spec.py} contains no bond angle: \texttt{h2o\_spec} is
+\texttt{hydride\_spec(8)}, parameterized by nuclear charge and a
+\emph{single} O--H distance distributed across five blocks (core, two
+bond pairs, two lone pairs), with \texttt{MolecularSpec.nuclei = None}.
+The composed $\mathrm{H_2O}$ Hamiltonian therefore does not represent
+$C_{2v}$ at all, and the framework's reported $\mathrm{H_2O}$ geometry
+error is a purely radial coordinate with no angular degree of freedom.
+Corollary~\ref{cor:point_group} is consequently \emph{not well posed} on
+this builder in the bent case; supplying hand-built bent nuclei would
+test a symmetry the Hamiltonian does not encode.
+\end{observation}
+
+\begin{prediction}[Conditional, for any angular build]
+\label{pred:angular}
+In a build that does carry angular geometry, a molecule whose point group
+is abelian of order $2^k$ admits a $k$-bit spatial grading and no more.
+This remains falsifiable, but not on the present builder.
 \end{prediction}
+
+What \emph{is} measurable on the present builder is the linear case, where
+geometry is angle-free and therefore unambiguous---and it returns a result
+we did not anticipate, reported as
+Observation~\ref{obs:permutation_cost} below.
 
 The measured factor of $3$--$5$ for the $m$-rule at the bases of
 Sec.~\ref{sec:census} is the $\mathbb{Z}$-grading case of
@@ -309,11 +337,62 @@ happenstance~\cite{artacho1991};
 angular basis requirement explodes---LiH at $63.5\%$ $R_{\rm eq}$ error
 with $l_{\max} = 2$ genuinely insufficient;
 \item into \textbf{device-measured many-body overlaps} (NOCI): succeeds
-at the state level, but the operator is dense independently.
+at the state level, but the operator is dense independently;
+\item into a \textbf{permutation symmetry} (equivalent-atom swap): net
+loss, measured---see Observation~\ref{obs:permutation_cost}.
 \end{enumerate}
 The invariant is that the cost measures the physical asymmetry of a
 two-center problem.  The currency is a choice; the total is not.
 \end{observation}
+
+The fifth entry was measured for this paper and is the sharpest instance,
+because the trade is visible term by term.
+
+\begin{observation}[Permutation symmetry costs qubits on this builder]
+\label{obs:permutation_cost}
+Enabling equivalent-atom-swap tapering \emph{reduces} the qubit saving and
+inflates the Pauli count, in every configuration tested
+(Table~\ref{tab:swap}).  The mechanism is visible in the retained
+stabilizer labels: the swap rotation merges the per-block Hopf and
+$\ell$-parity stabilizers into joint \texttt{SWAP\_JOINT} stabilizers, so
+one permutation stabilizer is bought at the price of several per-block
+abelian gradings.  \textbf{[MEASURED]}
+\end{observation}
+
+\begin{table}[b]
+\caption{Equivalent-atom-swap tapering against two baselines.
+$\Delta Q$ is qubits removed (larger is better); Pauli counts are for the
+tapered operator.  LiH has no equivalent atoms and is the null control.}
+\label{tab:swap}
+\begin{ruledtabular}
+\begin{tabular}{llrrr}
+system & baseline & $\Delta Q$ & $\Delta Q$ +swap & Pauli ratio \\
+\hline
+$\mathrm{BeH_2}$ & Hopf only & 7 & 6 & $3.50\times$ \\
+$\mathrm{BeH_2}$ & Hopf $+\ \ell$ & 12 & 9 & $3.60\times$ \\
+$\mathrm{N_2}$ & Hopf $+\ \ell$ & 22 & 19 & $2.30\times$ \\
+$\mathrm{F_2}$ & Hopf only & 12 & 9 & $3.50\times$ \\
+$\mathrm{F_2}$ & Hopf $+\ \ell$ & 22 & 15 & $3.60\times$ \\
+LiH & Hopf $+\ \ell$ & 8 & 8 & $1.00\times$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+This is consistent with Theorem~\ref{thm:abelian_residue} rather than
+incidental to it.  A permutation is not an abelian grading of the existing
+block structure; it is an operation that \emph{identifies} blocks, and
+identifying blocks destroys the per-block labels that generated the
+sparsity.  The abelian residue is not merely what survives---it is what
+can be exploited without collapsing the structure that carries it.
+
+\emph{Documentation discrepancy.} The docstring of
+\texttt{extended\_tapered\_from\_spec} states that atom-swap ``saves
+additional qubits on polyatomics ($\mathrm{BeH_2}$ +1, $\mathrm{H_2O}$ +1,
+$\mathrm{NH_3}$ +1, $\mathrm{CH_4}$ +2).''  The measured $\mathrm{BeH_2}$
+value is $-1$ against the Hopf-only baseline and $-3$ against Hopf
+$+\ \ell$; the sign is wrong under both.  We report the measurement and
+do not attempt to adjudicate whether the documentation was always
+incorrect or the behavior regressed.
 
 Observation~\ref{obs:cost_conservation} is labeled an observation, not a
 theorem: it is a pattern across four instances with a plausible cause,
@@ -415,21 +494,25 @@ count grows: the abelian grading shrinks with symmetry, while the dense
 cross-center classes grow with the number of center pairs.
 
 \begin{table}[b]
-\caption{Claim $\to$ backing.  Test backfill from the exploratory drivers
-into \texttt{tests/} is a precondition for this paper's release; see
-Sec.~\ref{sec:scope}.}
+\caption{Claim $\to$ backing.  \textsc{live} $=$ passing test in
+\texttt{tests/test\_paper58\_abelian\_residue.py}.  \textsc{owed} $=$
+result stands on an exploratory driver and must be migrated
+self-contained into \texttt{tests/} before this paper is a finished
+artifact; see Sec.~\ref{sec:scope}.}
 \label{tab:backing}
 \begin{ruledtabular}
 \begin{tabular}{lll}
-claim & tier & backing (\texttt{tests/}) \\
+claim & tier & backing \\
 \hline
-Table~\ref{tab:census} & MEASURED & \texttt{..p58\_census} \\
-Eq.~\eqref{eq:braket_certificate} & SYMBOLIC & \texttt{..p58\_certificate} \\
-Thm.~\ref{thm:abelian_residue} & INTERNAL & \texttt{..p58\_m\_rule} \\
-Pred.~\ref{pred:water} & UNTESTED & --- \\
+Table~\ref{tab:census} & MEASURED & \textsc{owed} \\
+Eq.~\eqref{eq:braket_certificate} & SYMBOLIC & \textsc{owed} \\
+Thm.~\ref{thm:abelian_residue} & INTERNAL & \textsc{owed} \\
+Obs.~\ref{obs:no_angle} & MEASURED & \textsc{live} \\
+Pred.~\ref{pred:angular} & UNTESTABLE & (needs angular build) \\
 Obs.~\ref{obs:cost_conservation} & OBSERVATION & CHANGELOG v4.73.x \\
-Table~\ref{tab:nah} & PANEL-VER. & \texttt{..p58\_nah} \\
-Obs.~\ref{obs:truncation} & MEASURED & \texttt{..p58\_nah} \\
+Obs.~\ref{obs:permutation_cost} & MEASURED & \textsc{live} \\
+Table~\ref{tab:nah} & PANEL-VER. & \textsc{owed} \\
+Obs.~\ref{obs:truncation} & MEASURED & \textsc{owed} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}

@@ -1,0 +1,206 @@
+{
+  "_h2o_not_well_posed": {
+    "reason": "composed builder carries no bond angle; C2v unrepresented",
+    "evidence": "molecular_spec.py has zero hits for angle|104|bent|theta; h2o_spec == hydride_spec(8), single O-H distance, 5 blocks"
+  },
+  "N2": {
+    "point_group": "D_inf_h",
+    "nuclei_provenance": "spec-supplied",
+    "configs": {
+      "hopf+ell": {
+        "Q_naive": 100,
+        "Q_tapered": 78,
+        "delta_Q": 22,
+        "n_stabs_kept": 22,
+        "n_kinds": 22,
+        "spatial_kinds": [],
+        "n_pauli_tapered": 940,
+        "n_pauli_naive": 1110
+      },
+      "+swap": {
+        "Q_naive": 100,
+        "Q_tapered": 81,
+        "delta_Q": 19,
+        "n_stabs_kept": 19,
+        "n_kinds": 19,
+        "spatial_kinds": [
+          "hopf:('SWAP_JOINT', (0, 'N_core', 'center'), (5, 'N_core', 'center'))",
+          "hopf:('SWAP_JOINT', (4, 'N_lp', 'center'), (6, 'N_lp', 'center'))",
+          "ell_parity:('SWAP_JOINT', (0, 'N_core', 'center'), (5, 'N_core', 'center'))",
+          "ell_parity:('SWAP_JOINT', (4, 'N_lp', 'center'), (6, 'N_lp', 'center'))",
+          "atom_swap"
+        ],
+        "n_pauli_tapered": 2164,
+        "n_pauli_naive": 1110
+      },
+      "+swap+inversion": {
+        "Q_naive": 100,
+        "Q_tapered": 81,
+        "delta_Q": 19,
+        "n_stabs_kept": 19,
+        "n_kinds": 19,
+        "spatial_kinds": [
+          "hopf:('SWAP_JOINT', (0, 'N_core', 'center'), (5, 'N_core', 'center'))",
+          "hopf:('SWAP_JOINT', (4, 'N_lp', 'center'), (6, 'N_lp', 'center'))",
+          "ell_parity:('SWAP_JOINT', (0, 'N_core', 'center'), (5, 'N_core', 'center'))",
+          "ell_parity:('SWAP_JOINT', (4, 'N_lp', 'center'), (6, 'N_lp', 'center'))",
+          "atom_swap"
+        ],
+        "n_pauli_tapered": 2164,
+        "n_pauli_naive": 1110
+      }
+    },
+    "n_equivalent_atom_pairs": 1,
+    "centrosymmetric": true,
+    "spatial_delta_Q": -3
+  },
+  "F2": {
+    "point_group": "D_inf_h",
+    "nuclei_provenance": "spec-supplied",
+    "configs": {
+      "hopf+ell": {
+        "Q_naive": 100,
+        "Q_tapered": 78,
+        "delta_Q": 22,
+        "n_stabs_kept": 22,
+        "n_kinds": 22,
+        "spatial_kinds": [],
+        "n_pauli_tapered": 940,
+        "n_pauli_naive": 1110
+      },
+      "+swap": {
+        "Q_naive": 100,
+        "Q_tapered": 85,
+        "delta_Q": 15,
+        "n_stabs_kept": 15,
+        "n_kinds": 15,
+        "spatial_kinds": [
+          "hopf:('SWAP_JOINT', (0, 'F_core', 'center'), (5, 'F_core', 'center'))",
+          "hopf:('SWAP_JOINT', (2, 'F_lp_1', 'center'), (6, 'F_lp_1', 'center'))",
+          "hopf:('SWAP_JOINT', (3, 'F_lp_2', 'center'), (7, 'F_lp_2', 'center'))",
+          "hopf:('SWAP_JOINT', (4, 'F_lp_3', 'center'), (8, 'F_lp_3', 'center'))",
+          "ell_parity:('SWAP_JOINT', (0, 'F_core', 'center'), (5, 'F_core', 'center'))",
+          "ell_parity:('SWAP_JOINT', (2, 'F_lp_1', 'center'), (6, 'F_lp_1', 'center'))",
+          "ell_parity:('SWAP_JOINT', (3, 'F_lp_2', 'center'), (7, 'F_lp_2', 'center'))",
+          "ell_parity:('SWAP_JOINT', (4, 'F_lp_3', 'center'), (8, 'F_lp_3', 'center'))",
+          "atom_swap"
+        ],
+        "n_pauli_tapered": 3388,
+        "n_pauli_naive": 1110
+      },
+      "+swap+inversion": {
+        "Q_naive": 100,
+        "Q_tapered": 85,
+        "delta_Q": 15,
+        "n_stabs_kept": 15,
+        "n_kinds": 15,
+        "spatial_kinds": [
+          "hopf:('SWAP_JOINT', (0, 'F_core', 'center'), (5, 'F_core', 'center'))",
+          "hopf:('SWAP_JOINT', (2, 'F_lp_1', 'center'), (6, 'F_lp_1', 'center'))",
+          "hopf:('SWAP_JOINT', (3, 'F_lp_2', 'center'), (7, 'F_lp_2', 'center'))",
+          "hopf:('SWAP_JOINT', (4, 'F_lp_3', 'center'), (8, 'F_lp_3', 'center'))",
+          "ell_parity:('SWAP_JOINT', (0, 'F_core', 'center'), (5, 'F_core', 'center'))",
+          "ell_parity:('SWAP_JOINT', (2, 'F_lp_1', 'center'), (6, 'F_lp_1', 'center'))",
+          "ell_parity:('SWAP_JOINT', (3, 'F_lp_2', 'center'), (7, 'F_lp_2', 'center'))",
+          "ell_parity:('SWAP_JOINT', (4, 'F_lp_3', 'center'), (8, 'F_lp_3', 'center'))",
+          "atom_swap"
+        ],
+        "n_pauli_tapered": 3388,
+        "n_pauli_naive": 1110
+      }
+    },
+    "n_equivalent_atom_pairs": 1,
+    "centrosymmetric": true,
+    "spatial_delta_Q": -7
+  },
+  "LiH": {
+    "point_group": "C_inf_v",
+    "nuclei_provenance": "hand-built (linear, angle-free)",
+    "configs": {
+      "hopf+ell": {
+        "Q_naive": 30,
+        "Q_tapered": 22,
+        "delta_Q": 8,
+        "n_stabs_kept": 8,
+        "n_kinds": 8,
+        "spatial_kinds": [],
+        "n_pauli_tapered": 282,
+        "n_pauli_naive": 333
+      },
+      "+swap": {
+        "Q_naive": 30,
+        "Q_tapered": 22,
+        "delta_Q": 8,
+        "n_stabs_kept": 8,
+        "n_kinds": 8,
+        "spatial_kinds": [],
+        "n_pauli_tapered": 282,
+        "n_pauli_naive": 333
+      },
+      "+swap+inversion": {
+        "Q_naive": 30,
+        "Q_tapered": 22,
+        "delta_Q": 8,
+        "n_stabs_kept": 8,
+        "n_kinds": 8,
+        "spatial_kinds": [],
+        "n_pauli_tapered": 282,
+        "n_pauli_naive": 333
+      }
+    },
+    "n_equivalent_atom_pairs": 0,
+    "centrosymmetric": false,
+    "spatial_delta_Q": 0
+  },
+  "BeH2": {
+    "point_group": "D_inf_h",
+    "nuclei_provenance": "hand-built (linear, angle-free)",
+    "configs": {
+      "hopf+ell": {
+        "Q_naive": 50,
+        "Q_tapered": 38,
+        "delta_Q": 12,
+        "n_stabs_kept": 12,
+        "n_kinds": 12,
+        "spatial_kinds": [],
+        "n_pauli_tapered": 470,
+        "n_pauli_naive": 555
+      },
+      "+swap": {
+        "Q_naive": 50,
+        "Q_tapered": 41,
+        "delta_Q": 9,
+        "n_stabs_kept": 9,
+        "n_kinds": 9,
+        "spatial_kinds": [
+          "hopf:('SWAP_JOINT', (1, 'BeH2_bond_1', 'center'), (2, 'BeH2_bond_2', 'center'))",
+          "hopf:('SWAP_JOINT', (1, 'BeH2_bond_1', 'partner'), (2, 'BeH2_bond_2', 'partner'))",
+          "ell_parity:('SWAP_JOINT', (1, 'BeH2_bond_1', 'center'), (2, 'BeH2_bond_2', 'center'))",
+          "ell_parity:('SWAP_JOINT', (1, 'BeH2_bond_1', 'partner'), (2, 'BeH2_bond_2', 'partner'))",
+          "atom_swap"
+        ],
+        "n_pauli_tapered": 1694,
+        "n_pauli_naive": 555
+      },
+      "+swap+inversion": {
+        "Q_naive": 50,
+        "Q_tapered": 41,
+        "delta_Q": 9,
+        "n_stabs_kept": 9,
+        "n_kinds": 9,
+        "spatial_kinds": [
+          "hopf:('SWAP_JOINT', (1, 'BeH2_bond_1', 'center'), (2, 'BeH2_bond_2', 'center'))",
+          "hopf:('SWAP_JOINT', (1, 'BeH2_bond_1', 'partner'), (2, 'BeH2_bond_2', 'partner'))",
+          "ell_parity:('SWAP_JOINT', (1, 'BeH2_bond_1', 'center'), (2, 'BeH2_bond_2', 'center'))",
+          "ell_parity:('SWAP_JOINT', (1, 'BeH2_bond_1', 'partner'), (2, 'BeH2_bond_2', 'partner'))",
+          "atom_swap"
+        ],
+        "n_pauli_tapered": 1694,
+        "n_pauli_naive": 555
+      }
+    },
+    "n_equivalent_atom_pairs": 1,
+    "centrosymmetric": true,
+    "spatial_delta_Q": -3
+  }
+}

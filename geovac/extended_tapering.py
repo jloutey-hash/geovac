@@ -923,12 +923,28 @@ def extended_tapered_from_spec(
         in the composed path: saves ``+n_sub_blocks`` qubits AND
         reduces Pauli count (~3–15% in the verification panel).
     use_atom_swap : bool, default False
-        Apply equivalent-atom permutation Z₂ tapering.  Saves
-        additional qubits on polyatomics (BeH₂ +1, H₂O +1, NH₃ +1,
-        CH₄ +2) BUT typically inflates the Pauli count 2–4× because
-        the rotation mixes orbitals across sub-blocks.  Off by
-        default; opt in if minimizing qubit count is more important
-        than minimizing Pauli/measurement count.
+        Apply equivalent-atom permutation Z₂ tapering.  **Measured to
+        COST qubits, not save them** (2026-08-10, Paper 58; pinned by
+        ``tests/test_paper58_abelian_residue.py``): the swap rotation
+        merges the per-block Hopf and ℓ-parity stabilizers into joint
+        ``SWAP_JOINT`` stabilizers, so one permutation stabilizer is
+        bought at the price of several per-block gradings.  Measured
+        ΔQ change from enabling it --- BeH₂ −1 (Hopf-only baseline) /
+        −3 (Hopf+ℓ); N₂ −3; F₂ −3 (Hopf-only) / −7 (Hopf+ℓ) --- with
+        the Pauli count inflating 2.3–3.6× as well.  No-op when the
+        geometry has no equivalent atoms (LiH), and silently skipped
+        entirely when ``nuclei`` is not supplied (``nuclei_list``
+        guard below), which is easy to mistake for "no effect".
+        Off by default; there is currently no measured configuration
+        in which enabling it helps.
+
+        NOTE: this docstring previously advertised "saves additional
+        qubits on polyatomics (BeH₂ +1, H₂O +1, NH₃ +1, CH₄ +2)".
+        That is wrong in SIGN for BeH₂ under both baselines.  Whether
+        the documentation was always incorrect or the behavior
+        regressed has NOT been adjudicated; the H₂O/NH₃/CH₄ figures
+        were not re-measured.  Corrected on sight rather than left
+        standing.
     use_inversion : bool, default False
         Apply spatial inversion Z₂ on top of atom-swap.  Often
         redundant with atom-swap + ℓ-parity (the inversion stabilizer
