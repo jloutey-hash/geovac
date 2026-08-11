@@ -1,6 +1,7 @@
 # Build plan — general-m two-center ERI engine (Neumann, σ ≠ 0)
 
-**Status:** RETARGETED to option (A) per PI direction 2026-08-11 - build the
+**Status:** FULL BUILD per PI direction 2026-08-11 (option A, all classes
+including Ruedenberg Part II exchange). Increment 1 DONE, validated - build the
 atom-centered two-center ERI engine directly. Phase 0-prime in progress; see
 section 8. The Hylleraas-extension route (sections 1-3) is superseded and kept
 only as the record of why. Phase 0 Q2 (seed set) carries over intact. Written 2026-08-11 on `work/sparsity-boundary`.
@@ -384,3 +385,66 @@ is content with a support-only criterion plus MD-grade numerics.
 
 Reminder from section 1: obtain the 1954 errata (Roothaan & Ruedenberg, JCP 22,
 765) before transcribing any Part I formula.
+
+---
+
+## 9. Full build - increment log
+
+### Strategic decision: DERIVE, do not transcribe
+
+The 1954 errata to Roothaan/Ruedenberg Parts I-II could not be obtained.
+Transcribing formulas that cannot be cross-checked against their own errata is
+how silent sign errors enter, so every piece of this build is derived
+symbolically and validated against independent numerics (`eri_md`). That is the
+footing Phase 0 and 0' used successfully, and it removes the errata dependency
+from the critical path entirely.
+
+### Increment 1 - (AA|BB) reduced to a one-electron problem. DONE.
+
+Driver: `debug/eri_aabb_multipole.py`.
+
+The key decomposition, which avoids any bipolar expansion of 1/r12 for this
+class:
+
+    (ab|cd) = integral rho_B(r2) V_A(r2) d3r2,     V_A = potential of rho_A
+
+because rho_A = conj(chi_a) chi_b is a ONE-CENTER distribution whose Coulomb
+potential is closed-form. (AA|BB) therefore collapses to the same structural
+class as cross-center V_ne, which `shibuya_wulfman.py` already handles
+(Q-B verified, L_max = l1 + l2).
+
+Built and validated:
+- **Step 1** exact multipole decomposition of the orbital product, radial parts
+  polynomial x single exponential, angular parts exact Gaunt/Wigner-3j. Term
+  counts match Phase 0' (e.g. (2,1,1)x(2,1,1) -> L in {0,2}).
+- **Step 2** V_L(r) from the two-region radial integral, exact.
+
+Validation, three independent legs:
+- V1 monopole sum rule: int rho d3r = <chi_a|chi_b> exactly - 1, 1, 0, 1 on
+  (1s,1s), (2s,2s), (1s,2s), (2p0,2p0). Catches normalization errors.
+- V2 pointwise reconstruction: the (L,M) sum reproduces the direct product
+  conj(chi_a)(r) chi_b(r) to **1.2e-18** across 3 orbital pairs x 3 sample
+  points. This is the strong check - it would catch any Gaunt phase or
+  normalization error.
+- V3 large-r limit: r * V_0(r) constant at 4 pi with monopole charge q = 1.
+
+**Coherence result worth noting.** The E_1 seed appears in this class exactly
+where the derivation says it must, and nowhere else: the upper-region integrand
+carries exponent k+1-L, which turns negative once L > k+1. Measured - at L = 0
+the only function present is `exp`; at L = 2, `Ei` appears. That is Phase 0 Q2's
+seed classification confirmed **in a completely different computational route**
+from the one it was derived on, which is real evidence the classification is
+structural rather than an artifact of the Neumann route.
+
+Minor cleanup carried forward: sympy emits `exp_polar` from the upper-region
+integration (branch bookkeeping). Harmless but should be simplified away before
+this becomes production code.
+
+### Next increments
+
+- **1b** step 3 for (AA|BB): the two-center integral int rho_B V_A. Same class
+  as cross-center V_ne. Gate: agree with `eri_md` on the census configuration.
+- **2** hybrid (AA|AB), (AB|BB) - genuinely two-center distribution, no
+  termination about either nucleus.
+- **3** exchange (AB|AB) - Ruedenberg Part II proper. Together with 2, ~80% of
+  the census tensor.
