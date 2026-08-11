@@ -1,0 +1,17 @@
+{
+  "config": {
+    "Z_A": 3.0,
+    "Z_B": 1.0,
+    "R": 3.0,
+    "M": 10,
+    "tol": 1e-10
+  },
+  "nonzero": 2976,
+  "dense": 10000,
+  "density_pct": 29.76,
+  "cross_class_nonzero": 2758,
+  "l_selection_probe": -0.21803840771594993,
+  "axial_residual_z": 2.220446049250313e-16,
+  "axial_residual_x_control": 0.1310065174518158,
+  "caveat": "Gaussian-fitted floats; zeros are threshold decisions, not decided. Real Cartesian basis, not complex-m."
+}
