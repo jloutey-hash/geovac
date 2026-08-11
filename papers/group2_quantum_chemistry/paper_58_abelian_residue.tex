@@ -487,6 +487,18 @@ Observation~\ref{obs:truncation} holds at four and twelve electrons,
 first and second row, with and without $p$ orbitals.  It generalizes to
 systems not yet run and is cheap to falsify.
 
+The mechanism is also visible at \emph{fixed} geometry, without reference
+to a dissociation limit, which makes it the cleanest form to check.  On
+LiH at $R = 3.25\,a_0$ in a three-orbital fitted-Slater basis, against a
+complete-space FCI of $-8.887049$~Ha: three fragment-native determinants
+land $+1.32$~mHa above it, while the \emph{same three} determinants built
+on L\"owdin-orthogonalized orbitals land $+40.52$~mHa above---a
+$30.6\times$ larger error at identical determinant count.  At two
+determinants the errors are $+19.4$~mHa and $+118.7$~mHa
+($6.1\times$).  The complete spaces agree to machine precision, so the
+damage is attributable to truncation and not to the orthogonalization
+corrupting the integrals.
+
 %% ========================================================================
 \section{Scope}
 \label{sec:scope}
@@ -536,7 +548,8 @@ Pred.~\ref{pred:angular} & UNTESTABLE & (needs angular build) \\
 Obs.~\ref{obs:cost_conservation} & OBSERVATION & CHANGELOG v4.73.x \\
 Obs.~\ref{obs:permutation_cost} & MEASURED & \textsc{live} \\
 Table~\ref{tab:nah} & PANEL-VER. & \textsc{owed} \\
-Obs.~\ref{obs:truncation} & MEASURED & \textsc{owed} \\
+Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
+fit quality, span id. & MEASURED & \textsc{live} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}

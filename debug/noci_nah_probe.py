@@ -13,7 +13,7 @@ surrogate cross-center physics) is confirmed by construction.
 Design (mirrors N2, scaled up):
   - All-electron, 12 electrons.  Basis: Na {1s, 2s, 2px, 2py, 2pz, 3s},
     H {1s} -- M = 7 spatial orbitals (14 spin-orbitals).
-  - Integrals: McMurchie-Davidson s/p engine (noci_md_engine, validated at
+  - Integrals: McMurchie-Davidson s/p engine (geovac.noci_engine, validated at
     machine precision against N1 closed forms + FD derivatives).
   - Shapes: hardcoded STO-6G 1s and STO-3G 2s (N1/N2 lineage); 2p and 3s
     least-squares 6-Gaussian fits of the zeta=1 Slater shapes (<fit|STO> =
@@ -54,7 +54,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from noci_md_engine import (
+from geovac.noci_engine import (
     HARTREE_TO_EV,
     STO3G_2S,
     STO6G_1S,

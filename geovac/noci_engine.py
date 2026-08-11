@@ -512,12 +512,30 @@ def _random_sym_tensors(m: int, rng) -> Tuple[np.ndarray, np.ndarray, np.ndarray
 
 
 def run_validations() -> None:
+    """Print-based cross-validation suite (development aid, not a test).
+
+    The V-A and V-B legs cross-check this engine against the INDEPENDENT
+    closed-form s-orbital implementations that live in the exploratory probes
+    (``debug/noci_{h2,lih}_probe.py``).  Those probes are transient by policy,
+    so the dependency is optional: if they are absent, this function reports
+    the fact and runs only the self-contained legs.  Asserting coverage of the
+    self-contained legs lives in ``tests/test_paper58_noci_engine.py``.
+    """
     import sys
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from noci_h2_probe import (Basis1s, STO6G_1S as N1_6G, eri as eri_s,
-                               integral_set, kinetic as kin_s,
-                               nuclear as nuc_s, overlap as ov_s)
-    from noci_lih_probe import STO3G_2S as N2_2S, det_pair_elements
+    _here = os.path.dirname(os.path.abspath(__file__))
+    for _cand in (_here, os.path.join(os.path.dirname(_here), "debug")):
+        if _cand not in sys.path:
+            sys.path.insert(0, _cand)
+    try:
+        from noci_h2_probe import (Basis1s, STO6G_1S as N1_6G, eri as eri_s,
+                                   integral_set, kinetic as kin_s,
+                                   nuclear as nuc_s, overlap as ov_s)
+        from noci_lih_probe import STO3G_2S as N2_2S, det_pair_elements
+    except ModuleNotFoundError as exc:
+        print(f"[run_validations] cross-check probes unavailable ({exc.name}); "
+              "skipping V-A/V-B. Self-contained coverage: "
+              "tests/test_paper58_noci_engine.py")
+        return
 
     print("=== N4 engine validation suite ===\n")
     rng = np.random.default_rng(7)
@@ -619,9 +637,17 @@ def run_validations() -> None:
             worst = max(worst, abs(s_ref - s_new), abs(h_ref - h_new))
     print(f"V-D  gensc vs permutation machinery (random tensors): worst = {worst:.2e}")
 
-    # V-E: gensc on the real LiH ladder vs stored N2 results at R=3.25
-    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           "data", "noci_lih_probe_results.json")) as fh:
+    # V-E: gensc on the real LiH ladder vs stored N2 results at R=3.25.
+    # The stored JSON lives under the transient debug/ tree; this module moved
+    # to geovac/ (v-work, Paper 58), so resolve from the repo root and treat a
+    # missing file as a skip rather than a crash.
+    _repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    _n2_path = os.path.join(_repo, "debug", "data",
+                            "noci_lih_probe_results.json")
+    if not os.path.exists(_n2_path):
+        print(f"V-E  skipped: stored N2 results not present at {_n2_path}")
+        return
+    with open(_n2_path) as fh:
         n2 = json.load(fh)
     z1s, z2s, zh = n2["zetas"]["Li1s"], n2["zetas"]["Li2s"], n2["zetas"]["H"]
     n1_orbs = [Basis1s(pos_li, z1s, *N1_6G), Basis1s(pos_li, z2s, *N2_2S),
