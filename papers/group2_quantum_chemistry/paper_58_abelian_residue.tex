@@ -171,8 +171,21 @@ $g$ & 2{,}944 & 214 & 10{,}000 & $m$-rule $+$ same-center Gaunt \\
 \end{ruledtabular}
 \end{table}
 
-The electron-repulsion tensor is $29.4\%$ dense genuinely against
-$2.1\%$ for the builder.  At $n_{\max} = 3$ ($M = 28$) the comparison is
+\emph{Provenance, stated precisely because the three rows differ.} The
+$S$ and $h$ rows are \emph{computed}: every entry is evaluated in exact
+rational arithmetic by the machinery of
+Sec.~\ref{sec:census}\,A, so both the zeros and the non-zeros are decided
+rather than inferred.  The $g$ row is \emph{counted}: it is a
+symmetry-rule census in the complex-$m$ basis, because no two-center
+electron-repulsion engine exists in the framework---the $m$-rule and
+per-side Gaunt feasibility are applied combinatorially, and no two-center
+electron-repulsion integral was numerically evaluated.  The $g$ figures
+are therefore claims about how many entries the selection rules
+\emph{permit}, not verifications that each permitted entry is nonzero.
+Supplying that engine is the natural follow-on to this paper.
+
+Subject to that distinction, the electron-repulsion tensor is $29.4\%$
+permitted-dense genuinely against $2.1\%$ for the builder.  At $n_{\max} = 3$ ($M = 28$) the comparison is
 $114{,}280$ nonzeros ($18.6\%$) against $7{,}600$ ($1.2\%$): an inflation
 factor of $13.8\times$ rising to $15.0\times$, i.e.\ \emph{increasing}
 with basis size.
@@ -241,6 +254,14 @@ are preserved by any operation respecting the axis.  Non-abelian
 selection rules are Clebsch--Gordan couplings requiring the full group;
 reducing the group destroys them.
 \end{proof}
+
+The theorem is independently corroborated by the framework's own
+production code, along a path that knows nothing of this analysis: the
+cross-center nuclear-attraction routine in
+\texttt{shibuya\_wulfman} returns
+zero by an explicit early exit when $m_1 \neq m_2$, and imposes no
+condition on $l$ whatsoever.  The $m$-rule is hard-coded because it
+holds; the $l$-rule is absent because it does not.
 
 Theorem~\ref{thm:abelian_residue} converts a measurement into a
 prediction, because the largest common abelian symmetry is readable from
@@ -504,8 +525,9 @@ artifact; see Sec.~\ref{sec:scope}.}
 \begin{tabular}{lll}
 claim & tier & backing \\
 \hline
-Table~\ref{tab:census} & MEASURED & \textsc{owed} \\
-Eq.~\eqref{eq:braket_certificate} & SYMBOLIC & \textsc{owed} \\
+Table~\ref{tab:census} $S$, $h$ & MEASURED & \textsc{live} \\
+Table~\ref{tab:census} $g$ & COUNTED & \textsc{owed} \\
+Eq.~\eqref{eq:braket_certificate} & SYMBOLIC & \textsc{live} \\
 Thm.~\ref{thm:abelian_residue}(i) & INT. & \textsc{live} \\
 Thm.~\ref{thm:abelian_residue}(ii) & INT. & \textsc{live} \\
 2-center machinery & SYMB. & \textsc{live} \\

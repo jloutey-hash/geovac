@@ -230,11 +230,21 @@ def _G_lm(l: int, m: int, x):
     return sp.diff(sp.legendre(l, t), t, m).subs(t, x)
 
 
-def _overlap_UV(Z1, n1, l1, Z2, n2, l2, m, R):
-    """Two-center overlap as e^{-p}(U e^{q} + V e^{-q}); U, V exact rationals.
+def _two_center_UV(Z1, n1, l1, Z2, n2, l2, m, R, kernel="S"):
+    """Two-center matrix element as e^{-p}(U e^{q} + V e^{-q}), U/V exact.
 
-    Overlap == 0 <=> U == V == 0, by Lindemann independence of the
+    Element == 0 <=> U == V == 0, by Lindemann independence of the
     exponentials -- so vanishing is DECIDABLE.
+
+    kernel selects the operator between the two orbitals:
+      'S'    : identity        -> overlap
+      '1/rA' : 1/r_A           -> nuclear attraction to center A
+      '1/rB' : 1/r_B           -> nuclear attraction to center B
+    In prolate spheroidal coordinates r_A = (R/2)(xi + eta) and
+    r_B = (R/2)(xi - eta), while the volume element carries
+    (xi^2 - eta^2) = (xi + eta)(xi - eta).  So each Coulomb kernel cancels
+    one factor of the volume element exactly, leaving a polynomial -- which
+    is why the `den == 1` assertion below is a real check and not a formality.
     """
     m = abs(m)
     Rs = sp.Rational(R.numerator, R.denominator)
@@ -245,13 +255,18 @@ def _overlap_UV(Z1, n1, l1, Z2, n2, l2, m, R):
     ct_a = (1 + _xi * _eta) / (_xi + _eta)
     ct_b = (_xi * _eta - 1) / (_xi - _eta)
     s2 = (_xi ** 2 - 1) * (1 - _eta ** 2)
+    geom = {
+        "S": half ** 3 * (_xi ** 2 - _eta ** 2),
+        "1/rA": half ** 2 * (_xi - _eta),
+        "1/rB": half ** 2 * (_xi + _eta),
+    }[kernel]
     expr = (sum(c * ra ** k for k, c in c1.items())
             * sum(c * rb ** k for k, c in c2.items())
             * s2 ** m / ((_xi + _eta) * (_xi - _eta)) ** m
             * _G_lm(l1, m, ct_a) * _G_lm(l2, m, ct_b)
-            * half ** 3 * (_xi ** 2 - _eta ** 2))
+            * geom)
     num, den = sp.fraction(sp.cancel(sp.together(expr)))
-    assert den == 1, "classical prolate cancellation failed"
+    assert den == 1, f"prolate cancellation failed for kernel {kernel!r}"
     poly = sp.Poly(sp.expand(num), _xi, _eta)
     p = (a + b) * Rs / 2
     q = (a - b) * Rs / 2
@@ -273,6 +288,218 @@ def _overlap_UV(Z1, n1, l1, Z2, n2, l2, m, R):
     U = sum(c * a_c[i] * sp.Rational(2, j + 1)
             for (i, j), c in zip(poly.monoms(), poly.coeffs()) if j % 2 == 0)
     return sp.nsimplify(U), None
+
+
+def _overlap_UV(Z1, n1, l1, Z2, n2, l2, m, R):
+    """Overlap: the identity-kernel case of _two_center_UV."""
+    return _two_center_UV(Z1, n1, l1, Z2, n2, l2, m, R, kernel="S")
+
+
+def _hydrogenic_E(Z: Fraction, n: int):
+    z = sp.Rational(Z.numerator, Z.denominator)
+    return -z ** 2 / (2 * n ** 2)
+
+
+def _certificate_residuals(Z1, n1, l1, Z2, n2, l2, m, R,
+                           *, bra_n=None, swap_kernels=False):
+    """Residuals of  E_a S + Z_A I_A  ==  E_b S + Z_B I_B, coefficient-wise.
+
+    The identity is the hydrogenic eigen-trick: the kinetic energy obtained by
+    letting (-1/2 grad^2 - Z_A/r_A) act LEFT on the bra must equal the value
+    obtained by letting (-1/2 grad^2 - Z_B/r_B) act RIGHT on the ket.  It is
+    linear in the bra/ket pair, so any common normalization cancels and
+    unnormalized radial functions are legitimate.
+
+    S, I_A and I_B share the same (p, q), so e^{-p}e^{+q} and e^{-p}e^{-q} are
+    linearly independent functions of R and the identity must hold on EACH
+    coefficient separately -- a strictly stronger check than agreement at one R.
+
+    bra_n / swap_kernels are deliberate corruptions used by the mutation guard.
+    """
+    S = _two_center_UV(Z1, n1, l1, Z2, n2, l2, m, R, "S")
+    IA = _two_center_UV(Z1, n1, l1, Z2, n2, l2, m, R, "1/rA")
+    IB = _two_center_UV(Z1, n1, l1, Z2, n2, l2, m, R, "1/rB")
+    if swap_kernels:
+        IA, IB = IB, IA
+    E1 = _hydrogenic_E(Z1, bra_n if bra_n is not None else n1)
+    E2 = _hydrogenic_E(Z2, n2)
+    z1 = sp.Rational(Z1.numerator, Z1.denominator)
+    z2 = sp.Rational(Z2.numerator, Z2.denominator)
+    out = []
+    for k in (0, 1):
+        if S[k] is None:
+            continue
+        out.append(sp.simplify((E1 * S[k] + z1 * IA[k])
+                               - (E2 * S[k] + z2 * IB[k])))
+    return out
+
+
+_CERT_PANEL = [
+    (1, 1, 0, 1, 1, 0, 0),
+    (1, 1, 0, 1, 2, 1, 0),
+    (1, 2, 1, 3, 2, 1, 1),
+    (1, 1, 0, 3, 2, 0, 0),
+    (1, 2, 0, 3, 3, 2, 0),
+    (2, 2, 1, 1, 3, 1, 1),
+]
+
+
+def test_paper58_braket_certificate():
+    """Eq. (1): E_a S - Z_B I_B == E_b S - Z_A I_A, exactly, entrywise.
+
+    This is the machinery certificate for the cross-center one-body integrals:
+    it fails if S, I_A or I_B is computed wrong, so it is the check that lets
+    the census claim genuine (rather than merely self-consistent) integrals.
+    """
+    R = Fraction(1)
+    for Z1, n1, l1, Z2, n2, l2, m in _CERT_PANEL:
+        res = _certificate_residuals(Fraction(Z1), n1, l1,
+                                     Fraction(Z2), n2, l2, m, R)
+        assert res, f"no coefficient legs produced for {(Z1, n1, l1, Z2, n2, l2, m)}"
+        assert all(r == 0 for r in res), (
+            f"bra/ket certificate violated at "
+            f"Z1={Z1}({n1},{l1}) Z2={Z2}({n2},{l2}) m={m}: residuals {res}"
+        )
+
+
+def test_paper58_braket_certificate_is_sensitive():
+    """Mutation guard: the certificate must DETECT a corrupted integral.
+
+    Without this, the certificate could be an algebraic tautology that holds
+    regardless of whether the integrals are right.  Two independent
+    corruptions must both break it.
+    """
+    R = Fraction(1)
+    # Use a case with Z1 != Z2 and n1 != n2 so both corruptions are visible.
+    Z1, n1, l1, Z2, n2, l2, m = 1, 1, 0, 3, 2, 0, 0
+
+    # (a) wrong bra eigenvalue (pretend the 1s orbital is a 2s).
+    bad = _certificate_residuals(Fraction(Z1), n1, l1, Fraction(Z2), n2, l2,
+                                 m, R, bra_n=n1 + 1)
+    assert any(r != 0 for r in bad), (
+        "certificate did not notice a wrong hydrogenic eigenvalue; it is "
+        "tautological and cannot certify the integrals"
+    )
+
+    # (b) I_A and I_B interchanged (i.e. attraction to the wrong nucleus).
+    bad = _certificate_residuals(Fraction(Z1), n1, l1, Fraction(Z2), n2, l2,
+                                 m, R, swap_kernels=True)
+    assert any(r != 0 for r in bad), (
+        "certificate did not notice I_A and I_B being interchanged"
+    )
+
+
+# ===========================================================================
+# Census, Table 1 -- the S and h rows (the COMPUTED rows).
+#
+# Configuration: Z_A = 3 at the origin, Z_B = 1 at R = 3 zhat, hydrogenic
+# n_max = 2 per center, so 5 orbitals per center and M = 10.
+#
+# The paper's counts decompose exactly, which is what makes them checkable:
+#   S = 32 = 10 same-center (orthonormality of same-Z hydrogenics) + 22 cross
+#   h = 44 = 22 same-center (off-center nuclear attraction) + 22 cross
+# with 22 = 2 blocks x 11 matching-m pairs, since the m multiset {0,0,-1,0,1}
+# gives 3*3 + 1*1 + 1*1 = 11.
+#
+# Mixed exactness, stated: the cross blocks are exact rationals (this file's
+# machinery); the same-center h block uses the production float routine
+# geovac.shibuya_wulfman.compute_cross_center_vne_element, so its zeros are
+# threshold decisions, not decided ones.  The g row is NOT covered here -- it
+# is symmetry-rule counting in the paper and no two-center ERI engine exists.
+# ===========================================================================
+
+_NMAX2_STATES = [(1, 0, 0), (2, 0, 0), (2, 1, -1), (2, 1, 0), (2, 1, 1)]
+_CENSUS_ZA, _CENSUS_ZB, _CENSUS_R = Fraction(3), Fraction(1), Fraction(3)
+
+
+def _matching_m_pairs():
+    return [(a, b) for a in _NMAX2_STATES for b in _NMAX2_STATES
+            if a[2] == b[2]]
+
+
+def test_paper58_census_matching_m_count():
+    """The combinatorial backbone of Table 1: 11 matching-m pairs per block."""
+    assert len(_NMAX2_STATES) == 5
+    assert len(_matching_m_pairs()) == 11, (
+        "matching-m pair count changed; Table 1's 22 = 2 x 11 cross-block "
+        "figure no longer decomposes as stated"
+    )
+
+
+def test_paper58_census_cross_blocks_exact():
+    """Cross-center S and h are nonzero on every matching-m pair, exactly.
+
+    Establishes the 22-entry cross-block contribution to BOTH rows of
+    Table 1, in exact rational arithmetic.  h is assembled by the certified
+    eigen-trick h = E_a S - Z_B I_B (Eq. 1), so this leg also exercises the
+    certificate on the census configuration rather than only on its own panel.
+    """
+    zb = sp.Rational(_CENSUS_ZB.numerator, _CENSUS_ZB.denominator)
+    dead_S, dead_h = [], []
+    for (n1, l1, m1), (n2, l2, m2) in _matching_m_pairs():
+        S = _two_center_UV(_CENSUS_ZA, n1, l1, _CENSUS_ZB, n2, l2,
+                           m1, _CENSUS_R, "S")
+        IB = _two_center_UV(_CENSUS_ZA, n1, l1, _CENSUS_ZB, n2, l2,
+                            m1, _CENSUS_R, "1/rB")
+        if not _nonzero(*S):
+            dead_S.append(((n1, l1, m1), (n2, l2, m2)))
+        E1 = _hydrogenic_E(_CENSUS_ZA, n1)
+        h = tuple(None if S[k] is None else sp.simplify(E1 * S[k] - zb * IB[k])
+                  for k in (0, 1))
+        if not _nonzero(*h):
+            dead_h.append(((n1, l1, m1), (n2, l2, m2)))
+
+    assert dead_S == [], f"cross-center S vanished on matching-m pairs: {dead_S}"
+    assert dead_h == [], f"cross-center h vanished on matching-m pairs: {dead_h}"
+
+
+def test_paper58_census_same_center_h_block():
+    """Same-center h block: off-center nuclear attraction, 11 nonzeros.
+
+    Uses the PRODUCTION routine, which independently corroborates
+    Thm. 1(i): it returns 0.0 for m1 != m2 by an explicit early return, and
+    imposes no condition on l whatsoever.
+    """
+    sw = pytest.importorskip("geovac.shibuya_wulfman")
+
+    Z_orb, Z_nuc, R = 3.0, 1.0, 3.0
+    nonzero_pairs, m_mismatch_nonzero = 0, []
+    for (n1, l1, m1) in _NMAX2_STATES:
+        for (n2, l2, m2) in _NMAX2_STATES:
+            val = sw.compute_cross_center_vne_element(
+                Z_orb, n1, l1, m1, n2, l2, m2, Z_nuc, R, L_max=l1 + l2)
+            if abs(val) > 1e-10:
+                nonzero_pairs += 1
+                if m1 != m2:
+                    m_mismatch_nonzero.append(((n1, l1, m1), (n2, l2, m2), val))
+
+    assert m_mismatch_nonzero == [], (
+        "production cross-center V_ne is nonzero for m1 != m2, contradicting "
+        f"Thm. 1(i): {m_mismatch_nonzero}"
+    )
+    assert nonzero_pairs == 11, (
+        f"expected 11 nonzero same-center h entries per center, got "
+        f"{nonzero_pairs}; Table 1's h = 44 no longer decomposes as 22 + 22"
+    )
+
+
+def test_paper58_census_totals():
+    """Table 1 totals: S = 32 and h = 44, from the verified decomposition.
+
+    Same-center S is 5 per center by orthonormality of same-Z hydrogenic
+    orbitals (distinct (n,l,m) are orthogonal; the diagonal is nonzero), which
+    is asserted rather than recomputed.  Everything else is checked above.
+    """
+    cross_per_block = len(_matching_m_pairs())
+    same_center_S_per_center = len(_NMAX2_STATES)      # orthonormal diagonal
+    same_center_h_per_center = cross_per_block          # matching-m coupling
+
+    S_total = 2 * same_center_S_per_center + 2 * cross_per_block
+    h_total = 2 * same_center_h_per_center + 2 * cross_per_block
+
+    assert S_total == 32, f"Table 1 S total is {S_total}, paper says 32"
+    assert h_total == 44, f"Table 1 h total is {h_total}, paper says 44"
+    assert 2 * len(_NMAX2_STATES) == 10, "M should be 10 for this configuration"
 
 
 def _nonzero(U, V) -> bool:
