@@ -1,0 +1,13 @@
+{
+  "n_max": 3,
+  "M": 28,
+  "nonzero": 154176,
+  "dense": 614656,
+  "density_pct": 25.083298625572677,
+  "counted_permitted": 114280,
+  "counted_density_pct": 18.59,
+  "tol": 1e-10,
+  "caveat": "Gaussian-fitted floats, real Cartesian basis; the paper's count is complex-m, and the two differ by the +/-m mixing.",
+  "INVALID": true,
+  "invalid_reason": "Basis bug: five raw Cartesian d monomials (dxy,dxz,dyz,dxx,dzz) used as a stand-in for the five real l=2 harmonics. Cartesian d has six components and the pure l=2 set needs traceless combinations (2zz-xx-yy, xx-yy); raw xx and zz carry l=0 admixture. Also omits dyy, so the basis is not axially symmetric about z and cannot respect the m-structure the census counts. The 25.08 pct figure is meaningless against the complex-m count. Paper 58 n_max=3 row stays COUNTED-ONLY."
+}

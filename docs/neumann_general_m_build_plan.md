@@ -1,6 +1,6 @@
 # Build plan — general-m two-center ERI engine (Neumann, σ ≠ 0)
 
-**Status:** Phase 0 DONE (GO/GO). Phases 1-2 not started. Written 2026-08-11 on `work/sparsity-boundary`.
+**Status:** Phase 0 DONE (GO/GO). Phase 1 BLOCKED - target mismatch found 2026-08-11, see section 7. Awaiting a PI scope decision. Written 2026-08-11 on `work/sparsity-boundary`.
 **Motivation:** the single structural hole in Paper 58. Its Table 1 `g` row is
 COUNTED (symmetry-rule counting, corroborated numerically at n_max=2 only)
 because no general-m two-center ERI engine exists anywhere in the corpus. Every
@@ -263,3 +263,68 @@ Restated because this is the way the idea could come back mis-sold
   transcribing Part I formulas in Phase 1.
 - ~~Check whether the seed is already tagged~~ — **done during planning**:
   Paper 18 §"Level 2: e^a E₁(a)" carries it. Cite, do not re-derive.
+
+---
+
+## 7. Phase 1 blocker - the module this plan proposed to extend serves a
+different basis than the target (found 2026-08-11)
+
+`neumann_vee.py` takes a list of `HylleraasBasisFunction`, which is a
+JAMES-COOLIDGE function
+
+    phi = exp(-alpha(xi_1 + xi_2)) * xi_1^j xi_2^k eta_1^l eta_2^m r_12^p
+
+where `.l` and `.m` are POWERS OF ETA, not angular momenta, and the basis has
+no azimuthal dependence at all (1-Sigma-g+). So the module is the V_ee engine
+for the Hylleraas / James-Coolidge H2 spheroidal solver, and its documented
+"m = 0 only" means sigma = 0 for a basis that never had an azimuthal index.
+
+Consequences:
+
+1. Extending it to sigma != 0 does NOT produce what Paper 58 needs. It would
+   give V_ee for James-Coolidge functions carrying azimuthal dependence -
+   useful for Pi/Delta states of H2 in the spheroidal solver - not two-center
+   ERIs over atom-centered (n,l,m) orbitals on two nuclei.
+
+2. Phase 0 Q1 is scoped to the wrong basis. The termination proof integrated
+   P_tau^sigma against P_la^ma(eta) P_lc^mc(eta), treating the angular factors
+   as functions of eta alone. That is right for spheroidal-natural functions.
+   For atom-centered orbitals cos(theta_A) = (1 + xi*eta)/(xi + eta) MIXES xi
+   and eta, so the eta integral does not separate that way and the tight
+   tau_max = l_a + l_c result does not transfer. Consistent with the
+   literature: two-center STO ERIs are hard enough that Ruedenberg Part II is
+   an entire paper about them.
+
+3. Phase 0 Q2 SURVIVES intact. The single-logarithm structure of Q_tau^sigma
+   and its reduction to exp(+-a) E_1(a * shift) are properties of the Neumann
+   kernel and the exponential radial factor, independent of the multiplying
+   basis. The seed-set conclusion stands.
+
+### Options for the PI
+
+- (A) RETARGET - build the atom-centered two-center ERI engine directly
+  (Roothaan Part I / Ruedenberg Part II machinery). This is the real
+  molecular-STO ERI problem and is LARGER than this plan assumed; it is why
+  only a handful of STO codes exist. Phase 0 Q1 would have to be redone for
+  cos(theta_A) = (1 + xi*eta)/(xi + eta).
+- (B) RESCOPE to the spheroidal solver - generalize `neumann_vee.py` to
+  sigma != 0 as planned, delivering Pi/Delta V_ee for the Hylleraas H2 basis.
+  A real capability, cheap relative to (A), but it does NOT close the g row.
+- (C) LEAVE the g row as it is - honestly labelled COUNTED, corroborated at
+  n_max=2. See below for why the n_max=3 leg is not cheaply closable either.
+
+### Why the cheap route is also closed
+
+An attempt to corroborate the n_max=3 leg with the existing MD engine
+(`debug/p58_eri_census_nmax3.py`) produced two results:
+
+- GENUINE, REUSABLE: d functions in `geovac/noci_engine.py` ARE trustworthy
+  despite the "s/p" docstring - validated against an independent
+  second-centre-derivative-of-s route at 7.8e-9 / 5.5e-8 relative error.
+- INVALID, recorded as such: the census number it produced (25.08 pct vs the
+  counted 18.59 pct) rests on a basis bug - five raw Cartesian d monomials
+  standing in for the five real l=2 harmonics, which is not an l=2 set (raw xx
+  and zz carry l=0 admixture) and is not even axially symmetric (dyy omitted).
+  Doing it properly needs contracted harmonics, which the single-`lmn`
+  interface of `eri_md` does not express, and would turn 82,621 quartets into
+  millions of calls. Paper 58's n_max=3 labelling is correct and UNCHANGED.
