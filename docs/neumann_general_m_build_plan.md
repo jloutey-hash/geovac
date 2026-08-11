@@ -1,6 +1,6 @@
 # Build plan — general-m two-center ERI engine (Neumann, σ ≠ 0)
 
-**Status:** PLANNED, not started. Written 2026-08-11 on `work/sparsity-boundary`.
+**Status:** Phase 0 DONE (GO/GO). Phases 1-2 not started. Written 2026-08-11 on `work/sparsity-boundary`.
 **Motivation:** the single structural hole in Paper 58. Its Table 1 `g` row is
 COUNTED (symmetry-rule counting, corroborated numerically at n_max=2 only)
 because no general-m two-center ERI engine exists anywhere in the corpus. Every
@@ -105,7 +105,48 @@ study and the deliverable weakens to "high precision with quantified error."
 Gates are pre-registered because that is what made N3b and N4 trustworthy —
 each was stopped or passed against criteria written before the run.
 
-### Phase 0 — Diagnostic (no code)
+### Phase 0 — Diagnostic — **DONE 2026-08-11, GO on both questions**
+
+Both answered symbolically, not by assertion. Drivers:
+`debug/phase0_neumann_tau_termination.py`, `debug/phase0_neumann_seed_set.py`.
+
+**Q1 — does the τ sum terminate? YES, and the bound is tight.**
+Exact symbolic integration of `∫ P_τ^σ P_{l_a}^{m_a} P_{l_c}^{m_c} dη` over
+[−1,1] with σ = |m_a − m_c| as forced by the azimuthal integral. Ten cases
+spanning σ = 0, 1, 2 up to (l=3, m=2): every one terminates, and the highest
+non-vanishing τ **equals l_a + l_c exactly** in all ten — not merely ≤. So the
+Neumann series is a *finite* sum, τ_max = l_a + l_c per side, matching the
+`shibuya_wulfman` L_max = l₁ + l₂ precedent. **No convergence study is needed
+and Phase 3 is not required.**
+
+**Q2 — is the seed set ⊆ {e^a·E₁(a)}? YES.** Two steps.
+*(1)* Q_τ^σ(ξ) carries exactly **one** transcendental at every (τ, σ) tested
+(τ ≤ 4, σ ≤ 2): after flattening, the expression is degree 1 in
+{ln(ξ+1), ln(ξ−1)} with equal-and-opposite coefficients — i.e. it depends only
+on L = ln((ξ+1)/(ξ−1)) — with no other transcendental in the algebraic parts.
+Nothing proliferates as τ or σ grows.
+*(2)* The L branch integrates in closed form to
+
+    ∫_c^∞ e^{−aξ} L(ξ) dξ = (e^{−ac}/a)·ln((c+1)/(c−1))
+                            + (1/a)[ e^{+a}E₁(a(c+1)) − e^{−a}E₁(a(c−1)) ]
+
+verified against numerical quadrature at nine (a, c) pairs, worst deviation
+**9.9 × 10⁻³²** at 30-digit precision. Both transcendental terms are
+e^{±a}E₁(a·shift): literally the Stieltjes seed with shifted argument.
+
+**Consequence.** The deliverable is confirmed as "exact up to one *already
+classified* seed": the `g` row can reach MEASURED, and the
+`feedback_tag_transcendentals` obligation is discharged by citing Paper 18
+§"Level 2: e^a E₁(a)" rather than deriving anything new.
+
+*Checker bug worth not repeating:* the first Q2 probe reported "no logarithm
+present" for every (τ, σ). That was the checker, not the mathematics — sympy's
+`expand`/`simplify` rewrites `log((ξ+1)/(ξ−1))` into split and
+exponent-folded forms, so substituting the literal composite log never matched.
+Flatten with `expand_log(force=True)` first, then map the two logs onto separate
+symbols and test for equal-and-opposite coefficients.
+
+### Phase 0 — original framing (superseded by the result above)
 Answer two things on paper:
 1. Does the τ sum terminate for fixed (l_a, l_b, l_c, l_d)? (§2)
 2. What is the transcendental seed set of the σ ≠ 0 ξ-integrals? Is it
