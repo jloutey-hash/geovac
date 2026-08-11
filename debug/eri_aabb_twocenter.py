@@ -47,7 +47,7 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "debug"))
 
-from eri_aabb_multipole import (  # noqa: E402
+from geovac.two_center_eri import (  # noqa: E402
     V_L_radial, multipole_decomposition, r_s,
 )
 from geovac import noci_engine as E  # noqa: E402

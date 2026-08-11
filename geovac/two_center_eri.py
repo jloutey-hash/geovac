@@ -125,23 +125,55 @@ def multipole_decomposition(Z1, n1, l1, m1, Z2, n2, l2, m2):
 
 # ----------------------------------------------------------- Step 2: potential
 
+def lower_integral(q: int, b, r):
+    """int_0^r s^q e^{-b s} ds, closed form, q >= 0.
+
+        = q!/b^{q+1} [ 1 - e^{-b r} sum_{j=0}^{q} (b r)^j / j! ]
+    """
+    assert q >= 0, f"lower_integral needs q >= 0, got {q}"
+    tail = sum((b * r) ** j / sp.factorial(j) for j in range(q + 1))
+    return sp.factorial(q) / b ** (q + 1) * (1 - sp.exp(-b * r) * tail)
+
+
+def upper_integral(p: int, b, r):
+    """int_r^inf s^p e^{-b s} ds, closed form, any integer p.
+
+    p >= 0 :  e^{-b r} sum_{k=0}^{p} p!/(k! b^{p-k+1}) r^k        -- E_1-free
+    p == -1:  E_1(b r)                                            -- THE SEED
+    p <= -2:  downward recurrence from E_1, obtained by parts:
+                  I(p) = ( b I(p+1) - r^{p+1} e^{-b r} ) / (p+1)
+
+    Written out explicitly rather than handed to sympy's `integrate`, which
+    routes negative exponents through its branch machinery and emits
+    `exp_polar`. Doing it by hand removes that artifact AND makes the seed
+    content explicit -- E_1 appears exactly once, at p = -1, and propagates
+    algebraically. That is Phase 0 Q2's conclusion made operational.
+    """
+    if p >= 0:
+        return sp.exp(-b * r) * sum(
+            sp.factorial(p) / (sp.factorial(k) * b ** (p - k + 1)) * r ** k
+            for k in range(p + 1))
+    if p == -1:
+        return sp.E1(b * r)
+    acc = sp.E1(b * r)                      # I(-1)
+    for pp in range(-2, p - 1, -1):         # walk down to I(p)
+        acc = (b * acc - r ** (pp + 1) * sp.exp(-b * r)) / (pp + 1)
+    return acc
+
+
 def V_L_radial(rad, b, L):
     """V_L(r) exactly, from the two-region radial integral.
 
-    Returns a sympy expression in r. The upper-region integrand carries exponent
-    k+1-L; when that is negative the integral produces E_1(b r), which is where
-    the already-classified Stieltjes seed enters this class.
+        V_L(r) = (4 pi/(2L+1)) [ r^{-(L+1)} int_0^r rho_L s^{L+2} ds
+                               + r^{L}      int_r^inf rho_L s^{1-L} ds ]
+
+    Lower exponent k+L+2 is always >= 0. Upper exponent k+1-L goes negative once
+    L > k+1, which is exactly where E_1 enters -- see upper_integral.
     """
-    lo = sum(c * sp.integrate(sp.Symbol("s", positive=True) ** (k + L + 2)
-                              * sp.exp(-b * sp.Symbol("s", positive=True)),
-                              (sp.Symbol("s", positive=True), 0, r_s))
-             for k, c in rad.items())
-    hi = sum(c * sp.integrate(sp.Symbol("s", positive=True) ** (k + 1 - L)
-                              * sp.exp(-b * sp.Symbol("s", positive=True)),
-                              (sp.Symbol("s", positive=True), r_s, sp.oo))
-             for k, c in rad.items())
+    lo = sum(c * lower_integral(k + L + 2, b, r_s) for k, c in rad.items())
+    hi = sum(c * upper_integral(k + 1 - L, b, r_s) for k, c in rad.items())
     pref = 4 * sp.pi / (2 * L + 1)
-    return sp.simplify(pref * (r_s ** (-(L + 1)) * lo + r_s ** L * hi))
+    return sp.expand(pref * (r_s ** (-(L + 1)) * lo + r_s ** L * hi))
 
 
 # ------------------------------------------------------------------ validation

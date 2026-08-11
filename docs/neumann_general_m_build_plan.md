@@ -476,6 +476,38 @@ normalization bookkeeping. Fixed foundation, not something to re-check later.
 Together with the one-center classes (`hypergeometric_slater.py`) this is ~20%
 of the census tensor on a validated path.
 
+### Pre-1c cleanup. DONE.
+
+1. **`exp_polar` eliminated at the source.** sympy's `integrate` routes negative
+   exponents through branch machinery and emitted `exp_polar`, which would have
+   propagated into 1c's closed form and made simplification unreliable. Replaced
+   with hand-written closed forms:
+
+       int_0^r s^q e^{-bs} ds  =  q!/b^{q+1} [1 - e^{-br} sum_j (br)^j/j!]
+       int_r^inf s^p e^{-bs} ds:  p >= 0  -> finite sum, E_1-free
+                                  p = -1  -> E_1(br)          <- THE SEED
+                                  p <= -2 -> downward recurrence from E_1
+
+   This does double duty: it removes the artifact AND makes the seed accounting
+   explicit, so it is really the first piece of 1c. V_L now shows `expint` where
+   E_1 belongs and nothing else. 1b re-verified unchanged at 2.10e-14.
+
+2. **Module promoted** `debug/eri_aabb_multipole.py` -> `geovac/two_center_eri.py`
+   (git mv, history preserved), validated four independent ways before promotion.
+
+3. **Regression net built**: `tests/test_two_center_eri_aabb.py`, 22 tests, 1.6s.
+   Pins the radial integrals against quadrature (including the negative-exponent
+   branch), the Phase 0' multipole structure, the seed accounting (E_1 absent at
+   L=0, present at L=2 -- pinned so 1c cannot lose it), the monopole sum rule,
+   pointwise reconstruction, no-exp_polar, and the exact J(R) gate.
+
+   This is what 1c needs: without it the closed form would be checked only
+   against what I happened to remember.
+
+4. **Regression clean**: 18 symbolic S^3 proofs; 62 passed / 10 skipped across
+   consumers of every module touched; 274 passed / 24 skipped on the
+   neumann/vee/hylleraas selection.
+
 ### Next increments
 
 - **1c** replace 1b's quadrature with the closed form. This is where the E_1
