@@ -300,6 +300,8 @@
  },
  "checks": {
   "rot_invariance": 1.1368683772161603e-13,
-  "span_identity": 2.0428571428571445
+  "span_identity": 1.7763568394002505e-15,
+  "span_identity_R": 3.5,
+  "_correction_note": "span_identity was corrupted by variable shadowing in the driver: the JSON was written after the PES loop, which rebinds vnn, so the stored value used vnn(R=10) against an e_fci_z built from vnn(R=3.5). Stored value was 2.0428571428571445; the offset is exactly vnn(3.5)-vnn(10)=143/70=2.0428571428571427. Corrected 2026-08-11; driver fixed to capture checks in scope. The console output at run time was always correct."
  }
 }

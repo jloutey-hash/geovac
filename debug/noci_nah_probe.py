@@ -199,8 +199,17 @@ def main() -> None:
     sos = [(p, sp) for p in range(7) for sp in (UP, DN)]
     all_dets = [[sos[k] for k in c] for c in combinations(range(14), 12)]
     e_span, _ = noci_ground_gensc(all_dets, s, h, g)
+    # Capture the check values HERE, at the R=3.5 scope where they are defined.
+    # The PES loop below rebinds `vnn` on every iteration, so evaluating this
+    # expression at the JSON-dump site (after the loop) silently used vnn(R=10)
+    # against an e_fci_z built from vnn(R=3.5) -- inflating the stored figure by
+    # exactly vnn(3.5) - vnn(10) = 11/3.5 - 11/10 = 143/70 = 2.0428571...
+    # The console line was always correct; only the serialized field was wrong.
+    checks = {"rot_invariance": abs(e_fci_z - e_fci_rot),
+              "span_identity": abs(e_span + vnn - e_fci_z),
+              "span_identity_R": 3.5, "n_dets_span": len(all_dets)}
     print(f"[checks] span identity |FCI_nonorth - FCI_Loewdin| = "
-          f"{abs(e_span + vnn - e_fci_z):.2e}  "
+          f"{checks['span_identity']:.2e}  "
           f"({len(all_dets)} dets, {time.time() - t0:.0f} s)\n")
 
     # --- PES sweep ---
@@ -303,8 +312,7 @@ def main() -> None:
                    "gates": {"G1": bool(g1), "G2": bool(g2), "G3": bool(g3),
                              "G4": bool(g4)},
                    "exp": {"R_eq_a0": R_EQ_EXP, "D_e_eV": D_E_EXP_EV},
-                   "checks": {"rot_invariance": abs(e_fci_z - e_fci_rot),
-                              "span_identity": abs(e_span + vnn - e_fci_z)}},
+                   "checks": checks},
                   fh, indent=1)
     print(f"\n[saved] {out_path}")
 
