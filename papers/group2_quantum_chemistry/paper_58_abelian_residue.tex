@@ -32,10 +32,10 @@ generated from quantum-number labels by Gaunt selection, with no spatial
 quadrature.  This yields structurally sparse qubit Hamiltonians---334
 Pauli terms for LiH at $Q = 30$, $O(Q^{2.5})$ scaling (Paper~14)---at
 the cost of a documented binding failure for second-row diatomics
-(the W1e wall, Papers~19/20).
+(the W1e wall, Papers~19/20~\cite{loutey_paper19,loutey_paper20}).
 
 We settle the question of whether that trade was necessary.  Using exact
-rational two-center machinery (Mulliken--Ruedenberg auxiliary functions
+rational two-center machinery (Mulliken--Roothaan auxiliary functions
 for overlaps; a hydrogenic eigen-trick for cross-center one-body terms,
 certified by an exact bra/ket identity holding entrywise), we census the
 \emph{genuine} bare tensor $(S, h, g)$ for a real fragment pair and find:
@@ -106,7 +106,7 @@ orthogonalization, core-correlation estimates, basis enlargement to
 $n_{\max} = 4$, an explicit-core Hartree--Fock treatment with twelve
 electrons, and a DMRG cross-check that reproduced FCI bit-identically at
 finite sector dimension without producing an interior minimum
-(Papers~19/20; CHANGELOG v2.19.4--v3.87.0).  The wall was localized to
+(Papers~19/20~\cite{loutey_paper19,loutey_paper20}; CHANGELOG v2.19.4--v3.87.0).  The wall was localized to
 the Hamiltonian specification---the projection from the continuous
 Level-4 solver to second-quantized $(h_1, \text{eri}, e_{\rm core})$
 integrals---rather than to the treatment of correlation.
@@ -128,8 +128,8 @@ The answer is no, and the reason is group-theoretic rather than technical.
 \subsection{Machinery and certificate}
 
 Two-center overlaps at arbitrary $(n, l, m, Z)$ are computed as exact
-rationals via the Mulliken--Ruedenberg auxiliary functions
-$A_n$/$B_n$~\cite{mulliken1949,ruedenberg1951}, evaluated in prolate
+rationals via the Mulliken--Roothaan auxiliary functions
+$A_n$/$B_n$~\cite{mulliken1949,roothaan1951}, evaluated in prolate
 spheroidal coordinates where the two-center problem
 separates~\cite{loutey_paper11}.  Because the result is rational,
 vanishing is \emph{decidable} rather than inferred from a numerical
@@ -188,8 +188,10 @@ Subject to that distinction, the electron-repulsion tensor is $29.4\%$
 permitted-dense genuinely against $2.1\%$ for the builder.
 
 \emph{Numerical corroboration of the $g$ row.} The counting can be checked
-without the missing Neumann engine, by evaluating the same tensor with a
-McMurchie--Davidson Gaussian engine over fitted Slater shapes.  On the
+without the missing Neumann engine~\cite{ruedenberg1951}, by evaluating
+the same tensor with a
+McMurchie--Davidson Gaussian engine~\cite{mcmurchie1978} over fitted
+Slater shapes.  On the
 census configuration this gives $2{,}976$ of $10{,}000$ entries above
 $10^{-10}$, i.e.\ $29.8\%$ dense against the $29.4\%$ counted---agreement
 at the level the basis convention permits, since the numerical evaluation
@@ -352,7 +354,8 @@ qubit results rest on.
 \subsection{L\"owdin was paying an honest bill}
 
 The corpus previously recorded a $17.9\times$ Pauli inflation from
-retrofitting L\"owdin orthogonalization onto the balanced LiH integrals
+retrofitting L\"owdin orthogonalization~\cite{lowdin1950} onto the
+balanced LiH integrals
 (CHANGELOG v4.73.1), and a $14\times$ inflation in the earlier
 heterogeneous-nested experiment.  Both were read as the price of
 orthogonalization, and orthogonalization was accordingly treated as the
@@ -380,8 +383,12 @@ each succeeded in moving it and failed to reduce it:
 \item into the \textbf{operator} (L\"owdin $S^{-1/2}$): operator
 densifies $17.9\times$;
 \item into a \textbf{dual basis} (biorthogonal encoding): densifies
-comparably, and by theorem rather than
-happenstance~\cite{artacho1991};
+comparably.  The metric provably does not disappear---in the contravariant
+representation it reappears as an $S^{-1}$ contraction, and the dual
+creation/annihilation operators cease to be Hermitian
+conjugates~\cite{artacho1991}---but whether that $S^{-1}$ is
+\emph{dense} is a property of the two-center Slater basis, measured here
+rather than imported;
 \item into a \textbf{high-symmetry embedding} (hyperspherical Level~4N):
 angular basis requirement explodes---LiH at $63.5\%$ $R_{\rm eq}$ error
 with $l_{\max} = 2$ genuinely insufficient;
@@ -588,27 +595,50 @@ fit quality, span id. & MEASURED & \textsc{live} \\
 \begin{thebibliography}{99}
 
 \bibitem{loutey_paper11}
-J.~Loutey, ``Prolate Spheroidal Natural Geometry for Two-Center
-One-Electron Systems,'' Paper 11 in the Geometric Vacuum series.
+J.~Loutey, ``The Molecular Fock Projection:\ Diatomic Molecules as
+Prolate Spheroidal Lattices,'' GeoVac Paper~11 (2026).
 
 \bibitem{loutey_paper14}
-J.~Loutey, ``Qubit Encodings from Natural Geometry,'' Paper 14 in the
-Geometric Vacuum series.
+J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Spectral Graph
+Theory,'' GeoVac Paper~14 (2026).
+
+\bibitem{loutey_paper19}
+J.~Loutey, ``Balanced coupled composition:\ PK-free molecular
+Hamiltonians via Shibuya--Wulfman integrals,'' GeoVac Paper~19 (2026).
+
+\bibitem{loutey_paper20}
+J.~Loutey, ``Quantum resource benchmarks for structurally sparse
+Hamiltonians,'' GeoVac Paper~20 (2026).
 
 \bibitem{mulliken1949}
 R.~S.~Mulliken, C.~A.~Rieke, D.~Orloff, and H.~Orloff, ``Formulas and
 numerical tables for overlap integrals,''
-\textit{J.\ Chem.\ Phys.}\ \textbf{17}, 1248 (1949).
+\textit{J.\ Chem.\ Phys.}\ \textbf{17}, 1248--1267 (1949).
+
+\bibitem{roothaan1951}
+C.~C.~J.~Roothaan, ``A study of two-center integrals useful in
+calculations on molecular structure.\ I,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{19}, 1445--1458 (1951).
 
 \bibitem{ruedenberg1951}
 K.~Ruedenberg, ``A study of two-center integrals useful in calculations
-on molecular structure,''
-\textit{J.\ Chem.\ Phys.}\ \textbf{19}, 1459 (1951).
+on molecular structure.\ II.\ The two-center exchange integrals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{19}, 1459--1477 (1951).
+
+\bibitem{lowdin1950}
+P.-O.~L\"owdin, ``On the non-orthogonality problem connected with the use
+of atomic wave functions in the theory of molecules and crystals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{18}, 365--375 (1950).
+
+\bibitem{mcmurchie1978}
+L.~E.~McMurchie and E.~R.~Davidson, ``One- and two-electron integrals
+over Cartesian Gaussian functions,''
+\textit{J.\ Comput.\ Phys.}\ \textbf{26}, 218--231 (1978).
 
 \bibitem{artacho1991}
-E.~Artacho and L.~M.~del~Bosch, ``Nonorthogonal basis sets in quantum
-mechanics: Representations and second quantization,''
-\textit{Phys.\ Rev.\ A}\ \textbf{43}, 5770 (1991).
+E.~Artacho and L.~Mil\'ans del~Bosch, ``Nonorthogonal basis sets in
+quantum mechanics:\ Representations and second quantization,''
+\textit{Phys.\ Rev.\ A}\ \textbf{43}, 5770--5777 (1991).
 
 \end{thebibliography}
 
