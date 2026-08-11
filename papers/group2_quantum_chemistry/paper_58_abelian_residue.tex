@@ -571,6 +571,17 @@ basis-set-superposition correction, the atom references being computed in
 atom-only bases) and reproduces the pattern of the four-electron LiH case at
 $53\%$; it is not an integral-fidelity effect.
 
+As with LiH, the reading is sharper at \emph{fixed} geometry, where no
+dissociation scan enters and the numbers are pinned by test.  At
+$R = 3.5\,a_0$, against an isolated-atom dissociation reference of
+$-161.584337$~Ha and an in-basis FCI binding of $1.170$~eV:\ two covalent
+determinants recover $50.9\%$ of that binding, three recover $89.3\%$, and
+all four $90.6\%$---while the \emph{same} three on L\"owdin-orthogonalized
+orbitals recover $10.8\%$, and the L\"owdin two-determinant case is not
+merely unbound but actively repulsive relative to the separated atoms
+($-153\%$).  The well-minimum figures in Table~\ref{tab:nah} and these
+fixed-geometry figures tell the same story by two routes.
+
 The L\"owdin comparators are the informative rows.  Orthogonalizing the
 orbitals and truncating to the \emph{same} number of determinants retains
 $11.6\%$ of the binding, and the two-determinant case is destroyed
@@ -634,8 +645,9 @@ count grows: the abelian grading shrinks with symmetry, while the dense
 cross-center classes grow with the number of center pairs.
 
 \begin{table}[b]
-\caption{Claim $\to$ backing.  \textsc{live} $=$ passing test in
-\texttt{tests/test\_paper58\_abelian\_residue.py}.  \textsc{owed} $=$
+\caption{Claim $\to$ backing.  \textsc{live} $=$ passing test in the
+\texttt{tests/test\_paper58\_*} suite (four files; per-claim mapping in
+\texttt{docs/claim\_test\_matrix.md}).  \textsc{owed} $=$
 result stands on an exploratory driver and must be migrated
 self-contained into \texttt{tests/} before this paper is a finished
 artifact.  \textsc{corrob.} $=$ numerically corroborated but not exactly
@@ -656,7 +668,9 @@ Obs.~\ref{obs:no_angle} & MEASURED & \textsc{live} \\
 Pred.~\ref{pred:angular} & UNTESTABLE & (needs angular build) \\
 Obs.~\ref{obs:cost_conservation} & OBSERVATION & CHANGELOG v4.73.x \\
 Obs.~\ref{obs:permutation_cost} & MEASURED & \textsc{live} \\
-Table~\ref{tab:nah} & PANEL-VER. & \textsc{owed} \\
+Tab.~\ref{tab:nah}, fixed $R$ & MEAS. & \textsc{live} \\
+Tab.~\ref{tab:nah}, minima & PANEL & \textsc{owed} \\
+NaH atom-only $\zeta$ & MEAS. & \textsc{live} \\
 Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
 \end{tabular}
