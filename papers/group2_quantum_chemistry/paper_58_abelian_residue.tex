@@ -151,8 +151,13 @@ The assembly carries its own certificate: the bra/ket identity
 E_a S - Z_B I_B \;=\; E_b S - Z_A I_A
 \label{eq:braket_certificate}
 \end{equation}
-holds as an \emph{exact rational equality} on every entry, which is a
-machinery check no fortuitous cancellation survives.  Four independent
+holds as an \emph{exact rational equality} on a six-case panel and on every
+entry of the census configuration---and coefficient-wise on both
+exponential legs, which is strictly stronger than agreement at a single
+$R$.  Its diagnostic power is itself tested rather than assumed:\ two
+independent corruptions of the inputs (a wrong bra eigenvalue, and $I_A$
+interchanged with $I_B$) each break the identity, so it is demonstrably not
+an algebraic tautology.  Four independent
 quadrature cross-checks agree at $\sim 2 \times 10^{-16}$.
 
 \subsection{Result}
@@ -268,7 +273,9 @@ $\hat{O}$ be invariant under the molecular symmetry group.  Then:
 $\langle ab | \hat{O} | cd \rangle = 0$ unless
 $m_a + m_b = m_c + m_d$.
 \item[(ii)] No $l$-selection rule holds between basis functions on
-different centers.
+different centers.  More strongly, the cross-center support is \emph{full}
+in $l$ at fixed $m$:\ the re-expansion does not terminate, so every
+admissible $l$ couples.
 \item[(iii)] Of the per-center $SO(3)$ labels, only those of the common
 axial subgroup $U(1) \cong SO(2)$ survive cross-center; by Pontryagin
 duality its characters are the integers, so the surviving \emph{cross-center}
@@ -534,7 +541,12 @@ $11/3.5 - 11/10 = 143/70$.)
 
 \begin{table}[b]
 \caption{NaH, all-electron 12e, $M = 7$.  Percentages are of in-basis FCI
-binding.  Experiment: $R_{\rm eq} = 3.566\,a_0$, $D_e = 1.961$~eV.}
+binding.  Experiment: $R_{\rm eq} = 3.5667\,a_0$
+($r_e = 1.8874$~\AA)~\cite{huberherzberg}.  The comparison value
+$D_e = 1.961$~eV is inherited from the framework's earlier compilation and
+its primary source is \emph{not yet verified}; it is not tabulated on the
+NIST pages carrying $r_e$, so every $D_e$ percentage below should be read as
+provisional pending that check.}
 \label{tab:nah}
 \begin{ruledtabular}
 \begin{tabular}{lrrr}
@@ -669,6 +681,12 @@ Hamiltonians via Shibuya--Wulfman integrals,'' GeoVac Paper~19 (2026).
 \bibitem{loutey_paper20}
 J.~Loutey, ``Quantum resource benchmarks for structurally sparse
 Hamiltonians,'' GeoVac Paper~20 (2026).
+
+\bibitem{huberherzberg}
+K.~P.~Huber and G.~Herzberg, \textit{Constants of Diatomic Molecules}
+(Van Nostrand Reinhold, New York, 1979);\ $^{23}$NaH $X\,^1\Sigma^+$
+$r_e = 1.8874$~\AA\ $= 3.5667\,a_0$, as tabulated in the NIST Chemistry
+WebBook (accessed 2026-08-11).
 
 \bibitem{mulliken1949}
 R.~S.~Mulliken, C.~A.~Rieke, D.~Orloff, and H.~Orloff, ``Formulas and

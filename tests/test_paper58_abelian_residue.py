@@ -154,6 +154,37 @@ def test_paper58_swap_cost():
 
 
 @pytest.mark.slow
+def test_paper58_swap_cost_table_rows():
+    """Pin the remaining Table III rows: N2 and F2, both baselines.
+
+    test_paper58_swap_cost covers BeH2 only, so before this the N2/F2 rows and
+    the Hopf-only baseline rested on an exploratory probe rather than a test.
+    Values from the paper's Table III (delta_Q before -> after enabling swap):
+        N2  Hopf+ell  22 -> 19      F2  Hopf-only  12 -> 9
+        F2  Hopf+ell  22 -> 15      BeH2 Hopf-only  7 -> 6
+    Pinned exactly, since these are quoted numbers rather than a direction.
+    """
+    from geovac import molecular_spec as ms
+
+    expected = {
+        ("N2", True): (22, 19),
+        ("F2", False): (12, 9),
+        ("F2", True): (22, 15),
+    }
+    for (name, ell), (want_base, want_swap) in expected.items():
+        spec = getattr(ms, name.lower() + "_spec")()
+        nuclei = spec.nuclei
+        assert nuclei, f"{name}_spec should supply nuclei for the swap leg"
+        dq_base, _ = _taper(spec, nuclei, ell=ell, swap=False)
+        dq_swap, _ = _taper(spec, nuclei, ell=ell, swap=True)
+        label = "hopf+ell" if ell else "hopf-only"
+        assert (dq_base, dq_swap) == (want_base, want_swap), (
+            f"Table III row [{name}, {label}] is {dq_base}->{dq_swap}, "
+            f"paper states {want_base}->{want_swap}"
+        )
+
+
+@pytest.mark.slow
 def test_paper58_swap_null_control():
     """LiH has no equivalent atoms, so the swap flag must be a no-op.
 
