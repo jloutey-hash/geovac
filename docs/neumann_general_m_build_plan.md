@@ -1,6 +1,9 @@
 # Build plan — general-m two-center ERI engine (Neumann, σ ≠ 0)
 
-**Status:** Phase 0 DONE (GO/GO). Phase 1 BLOCKED - target mismatch found 2026-08-11, see section 7. Awaiting a PI scope decision. Written 2026-08-11 on `work/sparsity-boundary`.
+**Status:** RETARGETED to option (A) per PI direction 2026-08-11 - build the
+atom-centered two-center ERI engine directly. Phase 0-prime in progress; see
+section 8. The Hylleraas-extension route (sections 1-3) is superseded and kept
+only as the record of why. Phase 0 Q2 (seed set) carries over intact. Written 2026-08-11 on `work/sparsity-boundary`.
 **Motivation:** the single structural hole in Paper 58. Its Table 1 `g` row is
 COUNTED (symmetry-rule counting, corroborated numerically at n_max=2 only)
 because no general-m two-center ERI engine exists anywhere in the corpus. Every
@@ -328,3 +331,56 @@ An attempt to corroborate the n_max=3 leg with the existing MD engine
   Doing it properly needs contracted harmonics, which the single-`lmn`
   interface of `eri_md` does not express, and would turn 82,621 quartets into
   millions of calls. Paper 58's n_max=3 labelling is correct and UNCHANGED.
+
+---
+
+## 8. Phase 0-prime - retargeted diagnostic (option A), in progress
+
+### 8.1 The problem is three problems, not one
+
+A two-center ERI (ab|cd) with each index on A or B splits into classes needing
+genuinely different machinery. Class weights are from Paper 58's census at
+n_max=2:
+
+| class | what it is | weight | machinery |
+|---|---|---|---|
+| (AA\|AA), (BB\|BB) | one-center | 7.3% | SOLVED - `hypergeometric_slater.py`, exact Fractions |
+| (AA\|BB) | two one-center distributions on opposite nuclei | 13.2% | finite bipolar multipole; **support now decidable, see 8.2** |
+| (AA\|AB), (AB\|BB) | hybrid: one distribution two-center | part of the ~80% cross bulk | OPEN |
+| (AB\|AB) | exchange: both distributions two-center | part of the ~80% cross bulk | OPEN - this is Ruedenberg 1951 Part II's entire subject |
+
+So ~80% of the tensor sits in the two classes that carry a genuinely two-center
+charge distribution. That is the real cost of option (A), and it is not
+reducible by cleverness in the easy classes.
+
+### 8.2 RESULT: (AA|BB) support is decidable from labels alone
+
+Driver: `debug/phase0p_eri_class_structure.py`. Exact Gaunt coefficients via
+Wigner 3-j. For the one-center product conj(Y_l1m1) * Y_l2m2 on a single
+nucleus, nine cases up to (l=2, m=2) all confirm:
+
+- **termination** at L <= l1 + l2 (highest surviving L equals it),
+- **parity selection** l1 + l2 + L even,
+- **M rule** M = m2 - m1 and nothing else.
+
+So each side contributes the finite multipole set L in {|l1-l2|, ..., l1+l2}
+with that parity, and (AA|BB) is a **finite double sum over (L_A, L_B) with no
+truncation**, whose support is readable from the labels. This is the
+two-electron analog of the L_max = l1 + l2 termination `shibuya_wulfman.py`
+already achieves for cross-center V_ne (Q-B verified).
+
+**Consequence:** (AA|BB) is the correct first build target - self-contained,
+terminating, decidable, and it reuses the multipole pattern already validated
+in the corpus for the one-electron case.
+
+### 8.3 Still open before any of the hard classes is built
+
+The hybrid and exchange classes carry a two-center distribution whose angular
+content about either nucleus does **not** terminate, because
+cos(theta_A) = (1 + xi*eta)/(xi + eta) mixes the coordinates. Those are the
+Ruedenberg Part II problem and need their own scoping pass before any code:
+the open question is whether the corpus wants exact-up-to-seed values there or
+is content with a support-only criterion plus MD-grade numerics.
+
+Reminder from section 1: obtain the 1954 errata (Roothaan & Ruedenberg, JCP 22,
+765) before transcribing any Part I formula.
