@@ -10,10 +10,33 @@ where ξ_< = min(ξ₁,ξ₂), ξ_> = max(ξ₁,ξ₂).
 This converts V_ee matrix elements from 5D numerical quadrature to
 sums of 1D algebraic integrals — exact within the Neumann truncation.
 
-References:
-    Roothaan (1951) J. Chem. Phys. 19, 1445
-    Shavitt (1963) Methods in Computational Physics, Vol. 2
-    Harris & Michels (1966) Adv. Chem. Phys. 13, 205
+References (verified against primary sources 2026-08-11):
+    Roothaan (1951) J. Chem. Phys. 19, 1445-1458 -- Part I. Carries the claim:
+        its abstract gives formulas for overlap, kinetic-energy, BOTH
+        nuclear-attraction kernels, and the two-center Coulomb repulsion
+        integral, for Slater-type AOs on centers a and b.
+    Ruedenberg (1951) J. Chem. Phys. 19, 1459-1477 -- Part II, the general
+        two-center two-electron treatment. Cite for the ERI/Neumann case only;
+        Part II contains NO overlap or nuclear-attraction formulas.
+    Mulliken, Rieke, Orloff & Orloff (1949) J. Chem. Phys. 17, 1248-1267 --
+        the (p, t) parametrization the A_n/B_n auxiliary functions live in.
+    Harris & Michels (1967) Adv. Chem. Phys. 13, 205-266 -- STO molecular
+        integrals. NOTE: 1967, not 1966 (manuscript received June 1966).
+    Errata to Parts I/II: Roothaan & Ruedenberg, J. Chem. Phys. 22, 765 (1954).
+        Consult before transcribing any formula from Part I.
+
+    REMOVED -- Shavitt (1963) Methods in Computational Physics Vol. 2 was cited
+    here and is MISATTRIBUTED: that chapter is "The Gaussian Function in
+    Calculations of Statistical Mechanics and Quantum Mechanics", i.e. Gaussian
+    basis functions -- the opposite methodological choice to this module's
+    Slater/prolate-spheroidal machinery. (The prolate-spheroidal chapter in that
+    same volume is Barnett's zeta-function expansion, which is also not Neumann.)
+    Do not reinstate it, and do not carry it into a paper.
+
+    A_n/B_n priority is genuinely contested: secondary sources credit Kotani,
+    Amemiya & Simose (1938) Proc. Phys.-Math. Soc. Japan 3rd ser. 20, 1a-22 with
+    introducing them, but the 1938 original has not been read. Treat the
+    community-standard "Mulliken auxiliary functions" as the safe attribution.
 """
 
 import numpy as np

@@ -71,11 +71,37 @@ The existing module keeps only σ = 0. Generalizing needs three pieces:
 | η (angular) half | tractable | ∫ P_τ^{σ}(η) × polynomial(η) dη. Extends the existing `compute_Cl_table` / `legendre_poly_coeffs` / `poly_product_coeffs`. **Polynomial ⇒ plausibly terminating (see §2).** |
 | ξ (radial) half | **the hard part** | needs the associated Legendre function of the **second** kind Q_τ^{σ} on [1,∞), with the ordered ξ_< / ξ_> split. Generalizes `compute_B0_table` / `compute_Bl_table`. Q carries the log/E₁ structure and its recurrences are the numerically delicate ones. |
 
-Literature anchors already cited in the module: Roothaan (1951) — now correctly
-in Paper 58's bibliography — plus Shavitt (1963) *Methods in Computational
-Physics* Vol. 2 and Harris & Michels (1966) *Adv. Chem. Phys.* **13**, 205.
-**Neither Shavitt nor Harris & Michels has been verified against a primary
-source; do that before either is cited in a paper.**
+**Literature anchors — verified 2026-08-11, and one of them was wrong.**
+
+- **Roothaan (1951) Part I**, JCP **19**, 1445–1458 — carries the machinery. Its
+  abstract gives overlap, kinetic-energy, *both* nuclear-attraction kernels, and
+  the two-center Coulomb repulsion integral for Slater AOs on centers a and b.
+  Four-for-four on what this build needs.
+- **Ruedenberg (1951) Part II**, JCP **19**, 1459–1477 — the general two-center
+  two-electron treatment; correct for the ERI/Neumann case, and **contains no
+  overlap or nuclear-attraction formulas**, so never cite it for those.
+- **Mulliken et al. (1949)**, JCP **17**, 1248–1267 — the (p, t) parametrization
+  the A_n/B_n auxiliary functions live in.
+- **Harris & Michels**, Adv. Chem. Phys. **13**, 205–266 — **1967, not 1966**.
+- **ERRATA to Parts I and II: Roothaan & Ruedenberg, JCP 22, 765 (1954).**
+  Directly relevant to Phases 1–2: consult before transcribing any formula from
+  Part I.
+- **Shavitt (1963) is MISATTRIBUTED and has been removed** from
+  `neumann_vee.py`. That chapter is "The Gaussian Function in Calculations of
+  Statistical Mechanics and Quantum Mechanics" — Gaussian basis functions, the
+  opposite methodological choice. The prolate-spheroidal chapter in that same
+  volume is Barnett's zeta-function expansion, which is also not Neumann. Do not
+  reinstate it and do not carry it into a paper.
+
+A_n/B_n **priority is contested**: secondary sources credit Kotani, Amemiya &
+Simose (1938), Proc. Phys.-Math. Soc. Japan 3rd ser. **20**, 1a–22, with
+introducing them, but the 1938 original has not been read. Safe attribution is
+the community-standard "Mulliken auxiliary functions A_n/B_n", cited to
+Mulliken 1949 + Roothaan 1951 Part I. Note also that
+**"Mulliken–Ruedenberg" is an occupied term** denoting the *semiempirical*
+Mulliken–Rüdenberg ERI approximation (overlap-weighted one-center products) —
+nearly the opposite of exact rational evaluation. That, rather than mere
+non-attestation, is why the corpus's old label had to go.
 
 ---
 
@@ -231,7 +257,9 @@ Restated because this is the way the idea could come back mis-sold
 
 - Un-freeze the repo (`remote.origin.pushurl` is `PUSH-DISABLED--…`, plus a
   `pre-push` hook). PI decision, not technical.
-- Verify Shavitt (1963) and Harris & Michels (1966) against primary sources.
-  (Roothaan 1951 is already verified and correctly cited in Paper 58.)
+- ~~Verify Shavitt and Harris & Michels~~ — **done 2026-08-11**: Shavitt was
+  misattributed and is removed; Harris & Michels is 1967. See §1.
+- **Obtain the 1954 errata** (Roothaan & Ruedenberg, JCP 22, 765) before
+  transcribing Part I formulas in Phase 1.
 - ~~Check whether the seed is already tagged~~ — **done during planning**:
   Paper 18 §"Level 2: e^a E₁(a)" carries it. Cite, do not re-derive.
