@@ -1,0 +1,465 @@
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{prediction}{Prediction}
+\newtheorem{observation}{Observation}
+
+\newcommand{\sthree}{S^{3}}
+
+\begin{document}
+
+\title{Angular Sparsity Is an Atomic-Sector Property:\\
+The Abelian Residue of Multi-Center Bonding}
+\thanks{Paper 58 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{August 10, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+The \textsc{GeoVac} program builds molecular Hamiltonians from
+atom-centered Coulomb-Sturmian blocks whose angular matrix elements are
+generated from quantum-number labels by Gaunt selection, with no spatial
+quadrature.  This yields structurally sparse qubit Hamiltonians---334
+Pauli terms for LiH at $Q = 30$, $O(Q^{2.5})$ scaling (Paper~14)---at
+the cost of a documented binding failure for second-row diatomics
+(the W1e wall, Papers~19/20).
+
+We settle the question of whether that trade was necessary.  Using exact
+rational two-center machinery (Mulliken--Ruedenberg auxiliary functions
+for overlaps; a hydrogenic eigen-trick for cross-center one-body terms,
+certified by an exact bra/ket identity holding entrywise), we census the
+\emph{genuine} bare tensor $(S, h, g)$ for a real fragment pair and find:
+\textbf{[MEASURED]} the Gaunt $l$-selection rule does not survive
+cross-center evaluation.  Only the axial $m$-rule does.  Electron-repulsion
+density inflates $13.8\times$ over the builder at $n_{\max} = 2$, rising to
+$15.0\times$ at $n_{\max} = 3$, and cross-center one-body entries measure
+$0.19$--$0.80$~Ha---bond scale, not perturbative.
+
+We give the mechanism \textbf{[INTERNAL THEOREM]}: $m$ labels the
+\emph{abelian} symmetry shared by both centers (rotation about the
+internuclear axis is one global one-parameter group, so $m$ is a common
+label), while $l$ labels irreducible representations of a rotation group
+attached to a single center.  The intersection of the two centers'
+rotation groups is exactly the axial $U(1)$, whose character group is
+$\mathbb{Z}$ by Pontryagin duality.  Abelian selection rules are additive
+charge conservation and survive; non-abelian Clebsch--Gordan selection
+requires the full sphere and does not.  Surviving label-generated
+sparsity is therefore governed by the largest common abelian symmetry,
+which is computable from the molecular point group in advance.
+
+Two re-readings follow.  First, the $17.9\times$ Pauli inflation
+previously attributed to L\"owdin orthogonalization
+(v4.73.1) was never orthogonalization's price: it is within
+measurement of the genuine tensor's own density, so L\"owdin was paying
+an honest bill.  Second \textbf{[OBSERVATION]}, four independent attempts
+to relocate the non-orthogonality---into the operator, into a dual basis,
+into a high-symmetry embedding, into device-measured many-body
+overlaps---each moved the cost without reducing it, because the cost
+measures the physical asymmetry of a two-center problem.
+
+We close with a demonstration \textbf{[PANEL-VERIFIED]}: all-electron
+12-electron NaH, the framework's hardest documented failure, binds at
+$R_{\rm eq} = 3.736\,a_0$ ($+4.8\%$ vs experiment) with $91.1\%$ of
+in-basis FCI binding from three fragment-native determinants, once the
+integrals are genuine end-to-end.  This localizes W1e to the Hamiltonian
+specification rather than the correlation treatment, by construction.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{Introduction: what the sparsity bought, and what it cost}
+\label{sec:intro}
+%% ========================================================================
+
+The \textsc{GeoVac} framework's computational proposition is structural
+sparsity.  Angular matrix elements are generated from the quantum-number
+labels $(n, l, m)$ by Gaunt selection rules and Wigner $3j$ symbols with
+no spatial integration, so the resulting second-quantized Hamiltonian is
+sparse by construction rather than by numerical thresholding.  The
+downstream consequence is the qubit-resource result of
+Paper~14~\cite{loutey_paper14}: composed LiH at 334 Pauli terms on
+$Q = 30$ qubits, $O(Q^{2.5})$ Pauli scaling against $O(Q^{3.9\text{--}4.3})$
+for Gaussian baselines, and a $190\times$ reduction against cc-pVDZ.
+
+The framework's documented failure is chemical binding for second-row
+diatomics.  Named W1e, it has resisted an unusually thorough sequence of
+attacks: six Phillips--Kleinman modifications, basis-level Schmidt
+orthogonalization, core-correlation estimates, basis enlargement to
+$n_{\max} = 4$, an explicit-core Hartree--Fock treatment with twelve
+electrons, and a DMRG cross-check that reproduced FCI bit-identically at
+finite sector dimension without producing an interior minimum
+(Papers~19/20; CHANGELOG v2.19.4--v3.87.0).  The wall was localized to
+the Hamiltonian specification---the projection from the continuous
+Level-4 solver to second-quantized $(h_1, \text{eri}, e_{\rm core})$
+integrals---rather than to the treatment of correlation.
+
+This paper answers the question that localization leaves open.  The
+framework neglects the overlap between orbitals on different centers,
+treating a non-orthogonal basis as though it were orthonormal, and that
+neglect is what preserves the sparsity.  Was there an alternative?  Could
+one keep the genuine cross-center physics \emph{and} the label-generated
+sparsity, by declining to transform the integral tensor at all?
+
+The answer is no, and the reason is group-theoretic rather than technical.
+
+%% ========================================================================
+\section{The exact-arithmetic census}
+\label{sec:census}
+%% ========================================================================
+
+\subsection{Machinery and certificate}
+
+Two-center overlaps at arbitrary $(n, l, m, Z)$ are computed as exact
+rationals via the Mulliken--Ruedenberg auxiliary functions
+$A_n$/$B_n$~\cite{mulliken1949,ruedenberg1951}, evaluated in prolate
+spheroidal coordinates where the two-center problem
+separates~\cite{loutey_paper11}.  Because the result is rational,
+vanishing is \emph{decidable} rather than inferred from a numerical
+tolerance---a property no quadrature scheme can offer, and the reason
+this census can make a claim about exact zeros at all.
+
+Cross-center one-body elements are obtained by extending the same route
+with $1/r_A$ and $1/r_B$ kernels, each of which cancels against the
+volume element $(\xi^2 - \eta^2)$, followed by the hydrogenic eigen-trick.
+The assembly carries its own certificate: the bra/ket identity
+\begin{equation}
+E_a S - Z_B I_B \;=\; E_b S - Z_A I_A
+\label{eq:braket_certificate}
+\end{equation}
+holds as an \emph{exact rational equality} on every entry, which is a
+machinery check no fortuitous cancellation survives.  Four independent
+quadrature cross-checks agree at $\sim 2 \times 10^{-16}$.
+
+\subsection{Result}
+
+The census configuration is $Z_A = 3$ at the origin, $Z_B = 1$ at
+$R = 3\,\hat{z}$, hydrogenic orbitals to $n_{\max} = 2$ on each center,
+$M = 10$ spatial orbitals.  Table~\ref{tab:census} compares the genuine
+bare tensor against the production builder's.
+
+\begin{table}[b]
+\caption{Genuine versus builder sparsity, $Z_A=3$/$Z_B=1$ at
+$R = 3\,a_0$, $n_{\max} = 2$ per center ($M = 10$).  ``Genuine zeros
+are'' records which selection rule accounts for the surviving zeros.}
+\label{tab:census}
+\begin{ruledtabular}
+\begin{tabular}{lrrrl}
+object & genuine & builder & dense & genuine zeros are \\
+\hline
+$S$ & 32 & 10 & 100 & $m$-rule only \\
+$h$ & 44 & 22 & 100 & $m$-rule only \\
+$g$ & 2{,}944 & 214 & 10{,}000 & $m$-rule $+$ same-center Gaunt \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The electron-repulsion tensor is $29.4\%$ dense genuinely against
+$2.1\%$ for the builder.  At $n_{\max} = 3$ ($M = 28$) the comparison is
+$114{,}280$ nonzeros ($18.6\%$) against $7{,}600$ ($1.2\%$): an inflation
+factor of $13.8\times$ rising to $15.0\times$, i.e.\ \emph{increasing}
+with basis size.
+
+Two further measurements matter for interpretation.  First, per-side
+Gaunt feasibility removes less than $6\%$ of entries beyond what the
+$m$-rule already removes, and the three cross classes
+$(AA|AB) + (AB|AB) + (AB|BB)$ account for $80\%$ of the genuine tensor.
+The residual $l$-selection is therefore confined to the same-center
+$(AA|AA)$ and $(BB|BB)$ blocks.  Second, cross-center magnitudes are
+large: overlaps $0.08$--$0.52$, one-body entries $0.19$--$0.80$~Ha.  For
+scale, the entire NaH bond is under $2$~eV, so individual entries in the
+dense part of the tensor exceed the binding energy being computed.  They
+are not droppable as small corrections---an independent quantification of
+the W1d/W1e diagnosis.
+
+%% ========================================================================
+\section{Mechanism: the abelian residue}
+\label{sec:mechanism}
+%% ========================================================================
+
+The census result is not an accident of the chosen configuration.  It is
+forced, and the forcing is elementary once stated in the right language.
+
+\begin{theorem}[Angular selection survives molecularization only in the
+abelian sector]
+\label{thm:abelian_residue}
+Let two nuclei $A$, $B$ lie on the $z$-axis, with atom-centered basis
+functions labeled $(n, l, m)$ about their own center, and let
+$\hat{O}$ be invariant under the molecular symmetry group.  Then:
+\begin{enumerate}
+\item[(i)] The $m$-selection rule holds exactly across centers:
+$\langle ab | \hat{O} | cd \rangle = 0$ unless
+$m_a + m_b = m_c + m_d$.
+\item[(ii)] No $l$-selection rule holds between basis functions on
+different centers.
+\item[(iii)] The surviving label-generated sparsity is exactly that
+generated by the largest symmetry group common to both centers, which is
+the axial $U(1)$ and is abelian.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+For (i): rotation about the internuclear axis is a \emph{single}
+one-parameter group acting on all of $\mathbb{R}^3$.  Its generator
+$L_z$ is independent of which point on the axis is taken as origin, so
+$m$ is a global label shared by both centers rather than a per-center
+one.  Invariance of $\hat{O}$ under this group gives additive
+conservation of $m$.
+
+For (ii): $l$ labels irreducible representations of the rotation group
+about a \emph{specific} center.  Rotations about $A$ and rotations about
+$B$ are distinct subgroups of the Euclidean group whose intersection is
+precisely the axial subgroup.  A function that is an $l$-eigenfunction
+about $B$, re-expanded about $A$, has support on all $l$: the two-center
+re-expansion does not terminate.  Hence no $l$-selection between cross-center
+pairs.  (The same-center blocks retain Gaunt selection, consistent with
+the $<6\%$ residual measured in Sec.~\ref{sec:census}.)
+
+For (iii): the intersection in (ii) is $SO(2) \cong U(1)$, abelian.
+Abelian compact groups have one-dimensional irreducibles labeled by
+characters, and by Pontryagin duality the character group of $U(1)$ is
+$\mathbb{Z}$---which is the integer label $m$.  Selection rules from
+abelian symmetry are additive conservation laws on integer charges, and
+are preserved by any operation respecting the axis.  Non-abelian
+selection rules are Clebsch--Gordan couplings requiring the full group;
+reducing the group destroys them.
+\end{proof}
+
+Theorem~\ref{thm:abelian_residue} converts a measurement into a
+prediction, because the largest common abelian symmetry is readable from
+the molecular point group before any integral is computed.
+
+\begin{corollary}[Sparsity budget from the point group]
+\label{cor:point_group}
+For a molecule with point group $G$, label-generated angular sparsity is
+bounded by the grading available from the abelian structure of $G$.
+Linear molecules ($C_{\infty v}$, $D_{\infty h}$) carry a continuous
+$U(1)$ and therefore a $\mathbb{Z}$ grading, worth a multiplicative
+factor.  Bent molecules carry only a finite point group and therefore a
+finite grading.
+\end{corollary}
+
+\begin{prediction}[Water, untested]
+\label{pred:water}
+$\mathrm{H_2O}$ has point group $C_{2v}$, which is order four and
+\emph{abelian}, isomorphic to $\mathbb{Z}_2 \times \mathbb{Z}_2$.  All
+its irreducibles are one-dimensional, so it admits a clean two-bit
+grading and exactly two qubits of symmetry-based reduction---not a
+multiplicative factor.  This sharpens the qualitative expectation that
+the framework's angular advantage degrades for non-linear molecules into
+a specific count, and is falsifiable on the existing $\mathrm{H_2O}$
+build.
+\end{prediction}
+
+The measured factor of $3$--$5$ for the $m$-rule at the bases of
+Sec.~\ref{sec:census} is the $\mathbb{Z}$-grading case of
+Corollary~\ref{cor:point_group}.  It is exact and structural, and it is a
+constant factor---not the $O(Q^{2.5})$ scaling story the framework's
+qubit results rest on.
+
+%% ========================================================================
+\section{Two re-readings}
+\label{sec:rereadings}
+%% ========================================================================
+
+\subsection{L\"owdin was paying an honest bill}
+
+The corpus previously recorded a $17.9\times$ Pauli inflation from
+retrofitting L\"owdin orthogonalization onto the balanced LiH integrals
+(CHANGELOG v4.73.1), and a $14\times$ inflation in the earlier
+heterogeneous-nested experiment.  Both were read as the price of
+orthogonalization, and orthogonalization was accordingly treated as the
+sparsity-destroying move.
+
+The census shows this reading was wrong in an instructive way.  The
+genuine tensor's own inflation over the builder is $\sim 15\times$,
+within measurement of the L\"owdin figure.  Orthogonalization was not
+destroying sparsity that the untransformed tensor possessed; the
+untransformed tensor never possessed it.  ``L\"owdin destroys sparsity''
+and ``the molecular tensor is intrinsically $l$-dense cross-center'' are
+the same fact observed twice, from two sides.
+
+This matters because it removes an entire class of proposed remedies.
+Any scheme whose premise is ``avoid the transformation and keep the
+sparsity'' is answering a question that was mis-posed.
+
+\subsection{Cost conservation}
+
+\begin{observation}[Relocating the metric does not reduce it]
+\label{obs:cost_conservation}
+Four independent attempts to move the non-orthogonality out of the way
+each succeeded in moving it and failed to reduce it:
+\begin{enumerate}
+\item into the \textbf{operator} (L\"owdin $S^{-1/2}$): operator
+densifies $17.9\times$;
+\item into a \textbf{dual basis} (biorthogonal encoding): densifies
+comparably, and by theorem rather than
+happenstance~\cite{artacho1991};
+\item into a \textbf{high-symmetry embedding} (hyperspherical Level~4N):
+angular basis requirement explodes---LiH at $63.5\%$ $R_{\rm eq}$ error
+with $l_{\max} = 2$ genuinely insufficient;
+\item into \textbf{device-measured many-body overlaps} (NOCI): succeeds
+at the state level, but the operator is dense independently.
+\end{enumerate}
+The invariant is that the cost measures the physical asymmetry of a
+two-center problem.  The currency is a choice; the total is not.
+\end{observation}
+
+Observation~\ref{obs:cost_conservation} is labeled an observation, not a
+theorem: it is a pattern across four instances with a plausible cause,
+not a proof that no fifth currency exists.  The underlying obstruction
+has been characterized in the framework as non-commuting center
+projections, with $\|[P_A, P_B]\| = 0.50$ at LiH equilibrium and
+principal angles $7.6^\circ$/$44.7^\circ$/$67.3^\circ$.
+
+%% ========================================================================
+\section{Demonstration: NaH binds with genuine integrals}
+\label{sec:nah}
+%% ========================================================================
+
+If the wall is the Hamiltonian specification, then supplying genuine
+end-to-end integrals should bind NaH without any change to the treatment
+of correlation.  It does.
+
+The construction is all-electron 12-electron NaH with
+$\mathrm{Na}\{1s, 2s, 2p \times 3, 3s\}$ and $\mathrm{H}\{1s\}$
+($M = 7$ spatial orbitals), non-orthogonal determinants built from
+fragment-native orbitals, and general-$N$ non-orthogonal Slater--Condon
+evaluation by L\"owdin cofactors.  Orbital exponents were optimized on
+the \emph{isolated} Na atom only ($E(\mathrm{Na}) = -161.0845$~Ha against
+a Clementi minimal-STO reference of $\approx -161.12$), with hydrogen at
+$\zeta = 1$, so the molecular curve is a fragment prediction rather than
+a fit.  Machinery validation: rotational invariance at
+$1.1 \times 10^{-13}$, and the 91-determinant complete space reproduces
+bitstring FCI with a span identity of exactly zero.
+
+\begin{table}[b]
+\caption{NaH, all-electron 12e, $M = 7$.  Percentages are of in-basis FCI
+binding.  Experiment: $R_{\rm eq} = 3.566\,a_0$, $D_e = 1.961$~eV.}
+\label{tab:nah}
+\begin{ruledtabular}
+\begin{tabular}{lrrr}
+method & $R_{\rm eq}$ ($a_0$) & $D_e$ (eV) & \% FCI \\
+\hline
+covalent (2 det) & 3.954 & 0.686 & 58.4 \\
+$+\,\mathrm{Na^+H^-}$ (3 det) & \textbf{3.736} & \textbf{1.071} & \textbf{91.1} \\
+all 4 det & 3.713 & 1.080 & 91.9 \\
+FCI (91 det) & 3.595 & 1.175 & 100 \\
+\hline
+L\"owdin covalent (2 det) & --- & unbound & $-38.0$ \\
+L\"owdin 3 det & 3.658 & 0.136 & 11.6 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Three determinants give an interior minimum at $+4.8\%$ of the
+experimental bond length, with the in-basis FCI landing at $+0.8\%$.  The
+$D_e$ deficit ($55\%$ of experiment) is minimal-basis incompleteness---no
+polarization, no diffuse functions---and reproduces the pattern of the
+four-electron LiH case at $53\%$; it is not an integral-fidelity effect.
+
+The L\"owdin comparators are the informative rows.  Orthogonalizing the
+orbitals and truncating to the \emph{same} number of determinants retains
+$11.6\%$ of the binding, and the two-determinant case is destroyed
+outright.  Because the complete space is bit-identically the same either
+way, the damage is specific to \emph{truncated} spaces.  The four-electron
+LiH case replicates this at $15.0\%$ and destroyed, respectively.
+
+\begin{observation}[Orthogonalization damages only truncated spaces]
+\label{obs:truncation}
+Orthogonalization is span-preserving and therefore harmless on the
+complete space, and severely harmful on truncated subspaces built from
+physically meaningful fragment structures.  A qubit register only ever
+represents a truncated space.
+\end{observation}
+
+Observation~\ref{obs:truncation} holds at four and twelve electrons,
+first and second row, with and without $p$ orbitals.  It generalizes to
+systems not yet run and is cheap to falsify.
+
+%% ========================================================================
+\section{Scope}
+\label{sec:scope}
+%% ========================================================================
+
+What this paper does not claim.  It does not claim the framework's
+atomic-sector results are affected: single-center angular structure is
+untouched, exact, and remains the basis of the atomic qubit results.  It
+does not claim the qubit-resource results of Paper~14 are wrong; it
+clarifies that they are measured on the builder, whose neglected overlap
+is the subject here.  And it does not claim a route around the
+obstruction, because the census closed the last one available.
+
+A distinction worth naming explicitly, because it bounds any scaling
+ambition.  \emph{Symmetry sparsity}---exact zeros forced by conservation
+laws, knowable from labels---is what this framework has, and
+Theorem~\ref{thm:abelian_residue} shows it is an atomic-sector property
+that degrades to an abelian residue at two centers and to a finite
+grading when linearity is lost.  \emph{Distance sparsity}---approximate
+near-zeros from spatial locality, exploited by screening, density
+fitting, and density-matrix truncation---is what linear-scaling
+electronic structure runs on, and it \emph{improves} with system size.
+The framework has the first and none of the second.  It is, structurally,
+a small-system framework, and both of its advantages contract as atom
+count grows: the abelian grading shrinks with symmetry, while the dense
+cross-center classes grow with the number of center pairs.
+
+\begin{table}[b]
+\caption{Claim $\to$ backing.  Test backfill from the exploratory drivers
+into \texttt{tests/} is a precondition for this paper's release; see
+Sec.~\ref{sec:scope}.}
+\label{tab:backing}
+\begin{ruledtabular}
+\begin{tabular}{lll}
+claim & tier & backing (\texttt{tests/}) \\
+\hline
+Table~\ref{tab:census} & MEASURED & \texttt{..p58\_census} \\
+Eq.~\eqref{eq:braket_certificate} & SYMBOLIC & \texttt{..p58\_certificate} \\
+Thm.~\ref{thm:abelian_residue} & INTERNAL & \texttt{..p58\_m\_rule} \\
+Pred.~\ref{pred:water} & UNTESTED & --- \\
+Obs.~\ref{obs:cost_conservation} & OBSERVATION & CHANGELOG v4.73.x \\
+Table~\ref{tab:nah} & PANEL-VER. & \texttt{..p58\_nah} \\
+Obs.~\ref{obs:truncation} & MEASURED & \texttt{..p58\_nah} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+%% ========================================================================
+\begin{thebibliography}{99}
+
+\bibitem{loutey_paper11}
+J.~Loutey, ``Prolate Spheroidal Natural Geometry for Two-Center
+One-Electron Systems,'' Paper 11 in the Geometric Vacuum series.
+
+\bibitem{loutey_paper14}
+J.~Loutey, ``Qubit Encodings from Natural Geometry,'' Paper 14 in the
+Geometric Vacuum series.
+
+\bibitem{mulliken1949}
+R.~S.~Mulliken, C.~A.~Rieke, D.~Orloff, and H.~Orloff, ``Formulas and
+numerical tables for overlap integrals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{17}, 1248 (1949).
+
+\bibitem{ruedenberg1951}
+K.~Ruedenberg, ``A study of two-center integrals useful in calculations
+on molecular structure,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{19}, 1459 (1951).
+
+\bibitem{artacho1991}
+E.~Artacho and L.~M.~del~Bosch, ``Nonorthogonal basis sets in quantum
+mechanics: Representations and second quantization,''
+\textit{Phys.\ Rev.\ A}\ \textbf{43}, 5770 (1991).
+
+\end{thebibliography}
+
+\end{document}
