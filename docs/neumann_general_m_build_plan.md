@@ -440,10 +440,47 @@ Minor cleanup carried forward: sympy emits `exp_polar` from the upper-region
 integration (branch bookkeeping). Harmless but should be simplified away before
 this becomes production code.
 
+### Increment 1b - (AA|BB) closed end to end. DONE, gate PASS.
+
+Driver: `debug/eri_aabb_twocenter.py`. Chain:
+
+    (ab|cd) = integral rho_B(r2) V_A(r2) d3r2
+
+with A at the origin, B at R zhat. The phi integral is trivial (shared z axis,
+enforcing M_A + M_B = 0), leaving a 2D quadrature over (r_B, theta_B) with
+r_A = sqrt(r_B^2 + R^2 + 2 r_B R cos th_B).
+
+**Integrated numerically on purpose.** The closed form comes in 1c, only after
+the decomposition + normalization chain is known good -- otherwise a
+disagreement cannot be localized between "decomposition wrong" and "closed form
+wrong".
+
+**Checked against an EXACT analytic reference**, not just against `eri_md`: for
+two 1s densities at common exponent the classic VB J integral is closed-form,
+J(R) = (1/R)[1 - e^{-2rho}(1 + (11/8)rho + (3/4)rho^2 + rho^3/6)], rho = zeta R.
+
+| R | this build | exact J(R) | diff |
+|---|---|---|---|
+| 1.50 | 0.490337466197 | 0.490337466197 | 6e-16 |
+| 2.50 | 0.368387798663 | 0.368387798663 | 3e-15 |
+| 4.00 | 0.247553918338 | 0.247553918338 | 2e-14 |
+
+Worst deviation 2.1e-14. `eri_md` on the same case agrees only to 3.1e-7 -- that
+gap is the STO->Gaussian fits, not either implementation, which is precisely why
+the exact reference was worth finding. With only `eri_md` as a gate, a real
+1e-7-level derivation error would have been invisible.
+
+Consequence: the multipole decomposition, the potential, and the two-center
+assembly are each individually correct -- including every Gaunt phase and the
+normalization bookkeeping. Fixed foundation, not something to re-check later.
+Together with the one-center classes (`hypergeometric_slater.py`) this is ~20%
+of the census tensor on a validated path.
+
 ### Next increments
 
-- **1b** step 3 for (AA|BB): the two-center integral int rho_B V_A. Same class
-  as cross-center V_ne. Gate: agree with `eri_md` on the census configuration.
+- **1c** replace 1b's quadrature with the closed form. This is where the E_1
+  seed becomes explicit and the class turns exact-up-to-seed rather than
+  merely accurate. Gate: reproduce 1b's numbers, which now reproduce J(R).
 - **2** hybrid (AA|AB), (AB|BB) - genuinely two-center distribution, no
   termination about either nucleus.
 - **3** exchange (AB|AB) - Ruedenberg Part II proper. Together with 2, ~80% of
