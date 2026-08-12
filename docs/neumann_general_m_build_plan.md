@@ -488,6 +488,45 @@ One pass is worth it given how 1c went. Note that 1c's shell-kernel device does
 NOT carry over - it works because the A-side is a shell potential, making the
 r_A integral the angular one; here it is a genuine radial integral.
 
+### 8.4.1 Increment 2 status (2026-08-11)
+
+**(1) answered** (`debug/inc2_prebuild_diagnostic.py`): E_1 SURVIVES the (L,L')
+sum on three quartets - not a per-term artifact. Same run corrected the seed set
+(see the box above).
+
+**(2) was SKIPPED before writing the assembly, and the assembly then hit exactly
+the wall it predicted.** Recorded as a process failure, not just a technical one.
+
+**Built and validated:** `hybrid_closed_form` is exact for an s-type one-center
+pair (l_a = l_b = 0), <= 4e-13 against the quadrature reference over six quartets
+spanning l_c = 0,1,2, m != 0 and mixed Z, all `exp`-only. Plus the E_1 machinery
+`e1_moment` / `e1_moment_shifted`, validated to ~1e-15, `e1_moment` branch-safe
+in sign(a+c) via Ein - needed because the mirror class (AB|BB) drives that rate
+negative. l > 0 raises NotImplementedError carrying the reason and the fix.
+
+**Reformulation VERIFIED for l > 0** (`debug/inc2_shell_reformulation_check.py`),
+three legs:
+
+| leg | check | result |
+|---|---|---|
+| S1 | shell representation reproduces V_L(r) | 2.6e-12 |
+| S2 | inside-branch r_A powers, and the E_1 rates produced | all >= +1; rates = a_c x > 0 |
+| S3 | three-region split of the r_A integral vs unsplit | 7.2e-17 |
+
+S3 includes r_B = R exactly, where lo = 0 - the precise point that broke the
+V_L-split formulation. The inside branch handles it at power +L and nothing
+diverges. (An end-to-end shell-vs-reference leg was tried and dropped: S1 already
+shows the representation is exact pointwise, so threading it through the
+validated outer quadrature is the same identity at triple-quadrature cost. It ran
+>25 min on one term without finishing.)
+
+**Remaining for the l > 0 closed form** - the symbolic assembly, a substantial
+chunk on a now-de-risked path: three nested integrals (r_A innermost, so the only
+exponential in play is R_c's with rate a_c > 0 and every E_1 argument is
+positive), six sub-regions from the two splits at r_A = x and r_A = R, and
+negative-power handling at the r_B and x stages. The E_1 moments it consumes
+already exist and are validated.
+
 ### 8.5 RESULT: the exchange class is feasible and convergent; the STOP criterion is not met
 
 Phase 0-e, 2026-08-11. Driver `debug/phase0e_exchange_scoping.py` (prints every
