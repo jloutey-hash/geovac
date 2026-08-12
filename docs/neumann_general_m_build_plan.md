@@ -391,10 +391,13 @@ Ruedenberg Part II problem and need their own scoping pass before any code:
 the open question is whether the corpus wants exact-up-to-seed values there or
 is content with a support-only criterion plus MD-grade numerics.
 
-*Superseded for the HYBRID class by §8.4 (2026-08-11). The stated obstruction
-turns out not to apply there: the reduction never expands the two-center density
-about either nucleus, so its non-terminating angular content is avoided rather
-than defeated. It still stands for the EXCHANGE class.*
+*Superseded for BOTH classes (2026-08-11): see §8.4 (hybrid) and §8.5 (exchange).
+For the hybrid class the reduction never expands the two-center density about
+either nucleus, so the non-terminating angular content is avoided rather than
+defeated. For the exchange class the stated reason is simply wrong -
+cos(theta_A) never appears alone, only inside r_A^l P_l^m(cos theta_A), which is
+a solid harmonic and therefore polynomial; the actual obstruction is the eta
+exponential. Both classes are now scoped GO.*
 
 Reminder from section 1: obtain the 1954 errata (Roothaan & Ruedenberg, JCP 22,
 765) before transcribing any Part I formula.
@@ -468,6 +471,114 @@ quartet only; (2) is there a formulation keeping the r_A powers non-negative?
 One pass is worth it given how 1c went. Note that 1c's shell-kernel device does
 NOT carry over - it works because the A-side is a shell potential, making the
 r_A integral the angular one; here it is a genuine radial integral.
+
+### 8.5 RESULT: the exchange class is feasible and convergent; the STOP criterion is not met
+
+Phase 0-e, 2026-08-11. Driver `debug/phase0e_exchange_scoping.py` (prints every
+number below); full record in `debug/sprint_phase0e_exchange_scoping_memo.md`.
+**Verdict: GO**, with the
+scoping partial in a way that matters (sigma = 0 and 1s only - see below).
+
+**Why the earlier reductions do not start.** Both distributions are two-center,
+so neither has a closed-form potential and there is nothing to reduce to. The
+kernel must be expanded: Neumann in prolate spheroidal, both electrons in one
+(xi, eta) system - the plan's original subject.
+
+**One structural point in this class's favour.** r_A = R(xi+eta)/2 makes each
+orbital product separate into e^{-p xi} e^{-q eta}; R_nl(r_A)/r_A^l is a
+polynomial; r_A^l Y_lm(Om_A) is a solid harmonic; and the two rho^{|m|}
+half-powers pair with the kernel's (1-eta^2)^{|sigma|/2} to an integer power
+(|m_a|+|m_b|+|m_a-m_b| is always even). So the whole integrand is a POLYNOMIAL
+in (xi, eta) times separable exponentials - **no negative powers at all**, unlike
+the hybrid class. The pathology that gave the hybrid class its seed is absent;
+this class gets its transcendentals from the kernel instead.
+
+**EQ1 - the termination criterion, sharper than §7's.** The eta integrals are
+int_{-1}^{1} eta^k P_tau(eta) e^{-q eta} d eta with q = (alpha - beta) R / 2.
+At q = 0 that is orthogonality against a degree-k polynomial and vanishes for
+tau > k; at q != 0 it never vanishes. Measured both ways. Hence
+
+    tau terminates  <=>  q = 0  <=>  the two centres carry the SAME exponent
+
+which also explains Phase 0 Q1 rather than treating it as basis-specific:
+James-Coolidge is e^{-alpha(xi_1+xi_2)}, pure xi, so q = 0 identically.
+**Homonuclear terminates; LiH and NaH do not.** In the terminating case
+tau_max is the eta-degree of the integrand (2 for 1s x 1s, from the volume
+factor alone), so it grows with l.
+
+**EQ1b - convergence, and the first end-to-end exchange number in the corpus.**
+Full Neumann sum for (1s_A 1s_B | 1s_A 1s_B), sigma = 0, vs `eri_md` swept over
+fit quality. Homonuclear (alpha=beta=1, R=2) terminates at tau = 2, every other
+term <= 1e-29. Heteronuclear (alpha=3, beta=1, R=3) is infinite but factorially
+convergent: relative residual 3.4e-5 at tau=6, 1.2e-7 at tau=8, **1.2e-10 at
+tau=10**. In both cases the reference converges monotonically ONTO the Neumann
+value as the fit improves:
+
+| n_gauss | homonuclear \|Neumann-md\| | heteronuclear \|Neumann-md\| |
+|:---:|---|---|
+| 6 | 1.51e-06 | 9.36e-06 |
+| 8 | 2.00e-07 | 5.26e-07 |
+| 10 | 9.84e-09 | 8.82e-08 |
+| 12 | **5.17e-09** | **2.52e-08** |
+
+That validates the Neumann normalization, the ordered xi_< / xi_> split, the eta
+integrals and the prefactor together. **The plan's STOP criterion is explicitly
+not met**: tau ~ 8 buys 1e-7 and tau ~ 10 buys 1e-10, past where the Gaussian
+reference can follow.
+
+**EQ2 - the seed set is strictly larger than the hybrid's.** Phase 0 Q2's
+formula for int_c^oo e^{-a xi} L(xi) dxi was verified at nine INTERIOR (a, c)
+points and never at the endpoint this class actually uses: the exchange xi
+integral starts at **c = 1 exactly**, where both the ln and the E_1 diverge.
+Expanding both singular pieces, the -ln(c-1) terms cancel and the finite part is
+
+    (e^{-a}/a)[ln 2 + gamma + ln a] + (e^{a}/a) E_1(2a)
+
+confirmed numerically, deviation shrinking as O((c-1)ln(c-1)) to **2.8e-06** at
+c-1 = 1e-6. So at the endpoint the E_1 singularity converts into an explicit
+Euler gamma and an explicit ln, and the class carries
+
+    {E_1(lambda R)}  U  {gamma}  U  {ln}
+
+Derived from the Phase 0 Q2 endpoint, not transcribed - the errata dependency
+stays off the critical path. Consistent with the textbook H2 exchange integral,
+the classic place gamma and ln R appear in a two-centre result.
+
+**Tagging obligation (feedback_tag_transcendentals): E_1 is already tagged
+(Paper 18 "Level 2"); gamma and ln are NEW to this build and are NOT yet
+classified.** They must be tagged against Paper 18 / Paper 34 before any exchange
+result reaches a paper.
+
+**EQ3 - cost driver.** Measured on the eta integral (the xi half depends on p,
+not q). Normalized to tau = 0, at R = 3: q=0 is machine zero beyond tau=2;
+q=0.75 reaches 1e-6 by tau=6; q=3.0 reaches 2e-6 by tau=10; q=7.5 only 1e-3 by
+tau=10. The proxy is CONSERVATIVE - at q=3 it reads 2e-6 where the full term
+reads 1.2e-10 - so treat it as an upper bound. LiH spans q in {0.75, 3.0}, so
+tau ~ 10 is comfortably enough; q >~ 7 would want a term-count check rather than
+a fixed truncation.
+
+**What was NOT tested - read before scheduling increment 3.**
+1. **sigma = 0 only.** All of the above is m = 0 orbitals. The plan's actual
+   deliverable is the general-m engine, needing Q_tau^sigma for sigma != 0.
+   Phase 0 Q2 verified that function's single-transcendental structure up to
+   sigma <= 2, so there is a foundation - but the termination criterion, the seed
+   set and the term count above were all established only at sigma = 0.
+2. **1s orbitals only.** Higher l raises the eta-degree (hence tau_max in the
+   terminating case) and enlarges the polynomial. No qualitative change is
+   suggested, but it is untested.
+3. **Quadrature, not closed form.** The ordered double integral was evaluated
+   numerically. Closing it in closed form IS increment 3's central task and is
+   not de-risked by this pass. The 1c lesson applies with full force.
+
+**Seed set across the three classes** - it grows monotonically with difficulty,
+which is a clean structural reading worth keeping:
+
+| class | share | status | seed set |
+|---|---|---|---|
+| one-center | 7% | solved | none |
+| (AA\|BB) | 13% | closed form (1c) | none - elementary |
+| hybrid | ~40% | scoped GO (§8.4) | {E_1} |
+| exchange | ~40% | scoped GO at sigma=0 (§8.5) | {E_1, gamma, ln} |
 
 ---
 
