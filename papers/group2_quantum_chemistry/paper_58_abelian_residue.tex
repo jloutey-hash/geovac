@@ -202,6 +202,54 @@ are therefore claims about how many entries the selection rules
 \emph{permit}, not verifications that each permitted entry is nonzero.
 Supplying that engine is the natural follow-on to this paper.
 
+\emph{Status of that follow-on.}  It is now partially supplied, and the
+per-class outcome bears directly on what the $g$ row could become.  Three
+of the four classes are closed in exact form and validated against
+independent engines: the one-center classes, $(AA|BB)$, and the hybrid
+pair $(AA|AB)$/$(AB|BB)$.  The exchange class $(AB|AB)$---Ruedenberg's own
+subject~\cite{ruedenberg1951}---is assembled and validated for general
+$(l,m)$, but its ordered radial double integral is not in closed form.
+The transcendental content is not uniform across the classes, and grows
+with them:
+
+\begin{center}
+\begin{tabular}{lll}
+\hline\hline
+class & closed form & transcendental content \\
+\hline
+one-center, $(AA|BB)$ & yes & none---elementary \\
+$(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \ln\}$ \\
+$(AB|AB)$             & no  & $\{E_1, \ln, \gamma\}$ (scoped, not built) \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\textbf{This does not upgrade the $g$ row}, for two independent reasons.
+First, no re-census has been run with the new machinery, so the counted
+figures stand exactly as counted.  Second, and structurally, what the row
+needs is zero-\emph{decidability}, and that is available only where a
+closed form exists.  $(AA|BB)$ is elementary, so its vanishing is a
+question about a finite combination of exponentials with algebraic
+coefficients---the same shape as the $S$ and $h$ rows, though we have not
+carried the separation argument through.  The hybrid classes would be
+decidable only subject to an independence argument over $\{E_1, \ln\}$.
+The exchange class has no closed form to argue about at all.  Since the
+three genuinely cross classes carry $80\%$ of the tensor, the majority of
+the $g$ row remains outside decidable reach, and the honest expectation is
+now that it will stay there: the seed set grows with class difficulty
+rather than closing.
+
+What the build does settle is narrower, and worth stating because it is
+exactly the sector this paper's mechanism concerns.  The classes in which
+the residual $l$-selection survives---$(AA|AA)$, $(BB|BB)$ and
+$(AA|BB)$, together $20.5\%$ of the genuine tensor---are now exactly
+computable in closed form and carry no transcendental seed whatever.  An
+$l$-selection census restricted to those classes is therefore no longer
+gated on the missing engine.  The three cross classes, which
+Theorem~\ref{thm:abelian_residue} says carry no residual $l$-selection,
+are also the three that resist closed form; the two facts are
+independent, but they point the same way.
+
 Subject to that distinction, the electron-repulsion tensor is $29.4\%$
 permitted-dense genuinely against $2.1\%$ for the builder.
 
@@ -659,6 +707,7 @@ claim & tier & backing \\
 \hline
 Table~\ref{tab:census} $S$, $h$ & MEASURED & \textsc{live} \\
 Table~\ref{tab:census} $g$ & COUNTED & \textsc{corrob.} \\
+2-center ERI engine, per class & MEASURED & \textsc{live} \\
 axial invariance & MEASURED & \textsc{live} \\
 Eq.~\eqref{eq:braket_certificate} & SYMBOLIC & \textsc{live} \\
 Thm.~\ref{thm:abelian_residue}(i) & INT. & \textsc{live} \\
