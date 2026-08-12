@@ -391,8 +391,83 @@ Ruedenberg Part II problem and need their own scoping pass before any code:
 the open question is whether the corpus wants exact-up-to-seed values there or
 is content with a support-only criterion plus MD-grade numerics.
 
+*Superseded for the HYBRID class by §8.4 (2026-08-11). The stated obstruction
+turns out not to apply there: the reduction never expands the two-center density
+about either nucleus, so its non-terminating angular content is avoided rather
+than defeated. It still stands for the EXCHANGE class.*
+
 Reminder from section 1: obtain the 1954 errata (Roothaan & Ruedenberg, JCP 22,
 765) before transcribing any Part I formula.
+
+### 8.4 RESULT: the hybrid class is a generalization of 1c, not a new build
+
+Phase 0-h, 2026-08-11. Driver `debug/phase0h_hybrid_scoping.py`; full record in
+`debug/sprint_phase0h_hybrid_scoping_memo.md`. **Verdict: GO**, seed named in
+advance, one gate re-priced.
+
+**The reduction.** rho_1 = conj(chi_a^A) chi_b^A is one-center, so its potential
+is closed-form (increment 1) and
+
+    (ab|cd) = sum g_1 * gaunt * int d3r F(r_A) Y_{L'M'}(Om_A) G(r_B) Y_{ld md}(Om_B)
+
+with F = conj(R_c) * V_L and G = R_d. That is **the same master integral 1c
+already evaluates**, with a more general A-side radial function. Angular sum
+finite (two nested terminating Gaunt couplings). Confirmed at **2.8e-17** against
+a pointwise route that bypasses the Gaunt re-coupling.
+
+**HQ2 - when does the seed appear.** Measured over 8 label combinations, the
+minimum power of r_A obeys
+
+    min power = -2 (l_a + l_b)
+
+depending **only on the one-center pair** - l_c and l_d cancel out. So the class
+is elementary iff the one-center pair is s-type (and then only marginally, at
+p = 0 exactly). (AA|BB)'s protection (k >= l1+l2 vs Gaunt's L <= l1+l2) has no
+analogue here, because the r_A dependence is R_c * V_L and R_c starts at l_c,
+which is the wrong quantity to fight -(L+1).
+
+**HQ3 - which seed.** E_1 survives at decay rates {a, a+b}: sums of orbital
+exponents, nothing else. The outer r_B integral closes on it via
+
+    int_0^inf e^{-ct} E_1(a(t+R)) dt = E_1(aR)/c - e^{cR} E_1((c+a)R)/c
+
+verified to **2.3e-18**. Result: elementary terms plus E_1(lambda R) constants -
+i.e. e^{+-a} E_1(a*shift), the **Stieltjes seed of Phase 0 Q2 / Paper 18
+"Level 2"**. Not a new transcendental class; tagging discharged by citation.
+
+Phase 0 Q2's seed prediction was right all along - increment 1 simply put it in
+the wrong class. (AA|BB) never had it; the hybrid class does. The E_1 branch of
+`upper_integral`, built in the pre-1c cleanup with no live consumer, was built
+for this class.
+
+**Gate (d) is mis-priced here, by ~70x.** The plan's "~1e-6 expectation" holds
+for (AA|BB), where both densities are one-center. A hybrid's two-center overlap
+density samples the exponential tail between the nuclei, exactly where a Gaussian
+fit is worst:
+
+| n_gauss | <fit\|STO> | deviation from the exact reduction |
+|:---:|---|---|
+| 6 (default) | 0.999999381 | **6.9e-05** |
+| 8 | 0.999999973 | 1.4e-06 |
+| 10 | 0.999999998 | 4.7e-07 |
+| 12 | 1.000000000 | 2.3e-07 |
+
+**Use n_gauss >= 10 for classes 2 and 3**, and treat `eri_md` there as a coarse
+gate, not a precision one. This nearly produced a false negative in this sprint:
+HQ1 first read as a FAILED reduction at 6.9e-05, until the fit sweep and the
+pointwise route located the error in the reference rather than the derivation.
+
+**Scope.** This scopes the hybrid class ONLY. The exchange class (AB|AB) has two
+two-center distributions, neither with a closed-form potential, so the reduction
+does not start. That remains the genuine Ruedenberg Part II problem and needs its
+own pass.
+
+**Open before coding increment 2**, in order: (1) do the E_1 coefficients survive
+the *sum* over (L, L'), or cancel as they did in 1c? - measured per-term on one
+quartet only; (2) is there a formulation keeping the r_A powers non-negative?
+One pass is worth it given how 1c went. Note that 1c's shell-kernel device does
+NOT carry over - it works because the A-side is a shell potential, making the
+r_A integral the angular one; here it is a genuine radial integral.
 
 ---
 
