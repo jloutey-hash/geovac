@@ -3,7 +3,10 @@
 **Status:** FULL BUILD per PI direction 2026-08-11 (option A, all classes
 including Ruedenberg Part II exchange). Increments 1 / 1b / **1c DONE** - the
 (AA|BB) class is closed-form and **elementary** (no E_1, no log); see section 9.
-Classes 2 and 3 open. The Hylleraas-extension route (sections 1-3) is superseded
+**Increment 2 DONE** - the hybrid class is closed-form for ANY l, carrying
+{exp, E_1, log}; see section 8.4.2. **Class 3 (exchange) is scoped GO but
+UNBUILT**, and its scoping covers sigma = 0 / 1s only (section 8.5).
+The Hylleraas-extension route (sections 1-3) is superseded
 and kept only as the record of why. Phase 0 Q2 (seed set) carries over intact for
 the Neumann route it was derived on. Written 2026-08-11 on `work/sparsity-boundary`.
 **Motivation:** the single structural hole in Paper 58. Its Table 1 `g` row is
