@@ -176,6 +176,340 @@ def V_L_radial(rad, b, L):
     return sp.expand(pref * (r_s ** (-(L + 1)) * lo + r_s ** L * hi))
 
 
+# =============================================================================
+# Increment 1c -- the two-center assembly in CLOSED FORM
+# =============================================================================
+#
+# WHY NOT JUST MAKE INCREMENT 1b's ROUTE SYMBOLIC
+# -----------------------------------------------
+# 1b evaluated (ab|cd) = int rho_B V_A by quadrature. Making THAT symbolic is a
+# trap: V_A(r) = q_L r^{-(L+1)} + e^{-br}(Laurent), and the two pieces are each
+# singular at r -> 0 even though V_A is regular there. Any such split generates
+# E_1 / log terms that then have to cancel against each other. They do cancel --
+# but a derivation that manufactures them and leans on simplification to remove
+# them is how a sign error hides.
+#
+# THE FORMULATION THAT NEVER GENERATES THEM
+# -----------------------------------------
+# Do BOTH angular integrals first, at fixed radii. The shell-shell kernel
+#
+#     K(x, y) = int dOmega_1 dOmega_2  Y_{LA MA}(Om_1) Y_{LB MB}(Om_2) / |r1 - r2|
+#
+# (r1 = x n1 from A, r2 = R zhat + y n2 from B) is obtained by putting a unit
+# multipole shell of radius x at A -- whose potential is the textbook
+# (4pi/(2LA+1)) Y_{LA MA}(Om) min^LA / max^{LA+1} -- and integrating it over the
+# B shell. Substituting u = cos th_B -> r_A turns that into a 1D integral of a
+# RATIONAL function of r_A, with no exponential anywhere. Consequently:
+#
+#   * K is rational in (x, y, R) on each region -- no transcendentals at all;
+#   * the r_A powers are all EVEN on the outside branch and all ODD and >= 1 on
+#     the inside branch, so r_A^{-1} never occurs and NO LOGARITHM is produced;
+#   * after multiplying by x^2 rad_A and y^2 rad_B every power is >= 0, so the
+#     remaining double integral is polynomial x exponential.
+#
+# So the class is elementary with E_1 STRUCTURALLY ABSENT, not accidentally
+# cancelling. That agrees with the exact reference J(R), which is purely
+# exponential-polynomial.
+#
+# SEED ACCOUNTING (corrects the increment-1 note). E_1 cannot enter this class at
+# all. `V_L_radial` reaches its E_1 branch only when the upper-region exponent
+# k + 1 - L goes negative, but a real orbital product has k >= l1 + l2 while
+# Gaunt caps L at l1 + l2, so k + 1 - L >= 1 always. Increment 1 measured `Ei` by
+# forcing the 1s x 1s radial (k = 0) through L = 2, a multipole that product does
+# not have. See debug/inc1c_seed_accounting.py.
+#
+# REGIONS. The min/max splits at r_A = x while r_A ranges over [|y-R|, y+R]:
+#
+#   y < R (lo = R-y):  x <= R-y all-outside | R-y < x < R+y split | x >= R+y all-inside
+#   y > R (lo = y-R):  x <= y-R all-outside | y-R < x < y+R split | x >= y+R all-inside
+
+x_s = sp.Symbol("x", positive=True)      # A-shell radius
+y_s = sp.Symbol("y", positive=True)      # B-shell radius
+t_s = sp.Symbol("t", positive=True)      # r_A, the angular integration variable
+R_s = sp.Symbol("R", positive=True)      # internuclear separation
+
+
+def _legendre_rational_part(L: int, M: int, w):
+    """P_L^M(w) with the sin^|M| factor stripped off.
+
+    Returns `part` with  P_L^M(w) = part * (1 - w^2)^{|M|/2}, Condon-Shortley:
+
+        P_L^m  = (-1)^m (1-w^2)^{m/2} d^m P_L/dw^m          (m >= 0)
+        P_L^-m = (-1)^m (L-m)!/(L+m)! P_L^m
+    """
+    m = abs(M)
+    u = sp.Dummy("u")
+    D = sp.diff(sp.legendre(L, u), u, m)      # differentiate BEFORE substituting
+    part = sp.Integer(-1) ** m * D
+    if M < 0:
+        part *= sp.Integer(-1) ** m * sp.factorial(L - m) / sp.factorial(L + m)
+    return sp.expand(part.subs(u, w))
+
+
+def _sph_norm(L: int, M: int):
+    """N_{LM} in Y_LM = N_LM P_L^M(cos th) e^{i M phi}, signed M."""
+    return sp.sqrt(sp.Rational(2 * L + 1, 4) / sp.pi
+                   * sp.factorial(L - M) / sp.factorial(L + M))
+
+
+def angular_factor(LA: int, MA: int, LB: int, MB: int, R=R_s):
+    """N_A N_B P_LA^MA(cos th_A) P_LB^MB(cos th_B), rational in (t, y).
+
+    t = r_A, y = r_B, A at the origin, B at R zhat:
+
+        cos th_A = (t^2 - y^2 + R^2) / (2 R t)
+        cos th_B = (t^2 - y^2 - R^2) / (2 y R)
+
+    The two sin^|M| factors combine into (rho^2/(t y))^{|M|} with rho the common
+    cylindrical radius -- which is what keeps the whole expression rational.
+    """
+    assert MA + MB == 0, "the phi integral already forced M_A + M_B = 0"
+    m = abs(MA)
+    cA = (t_s ** 2 - y_s ** 2 + R ** 2) / (2 * R * t_s)
+    cB = (t_s ** 2 - y_s ** 2 - R ** 2) / (2 * y_s * R)
+    rho2 = y_s ** 2 - ((t_s ** 2 - y_s ** 2 - R ** 2) / (2 * R)) ** 2
+    part = _legendre_rational_part(LA, MA, cA) * _legendre_rational_part(LB, MB, cB)
+    return (_sph_norm(LA, MA) * _sph_norm(LB, MB) * part
+            * (rho2 / (t_s * y_s)) ** m)
+
+
+def _antiderivative_laurent(expr, v):
+    """Antiderivative of a Laurent polynomial in v; asserts no v^{-1} term.
+
+    The assertion is load-bearing: a surviving v^{-1} means a logarithm, i.e.
+    that the class is not elementary after all.
+    """
+    out = sp.Integer(0)
+    for term in sp.Add.make_args(sp.expand(expr)):
+        c, e = term.as_coeff_exponent(v)
+        assert e != -1, f"a logarithm would appear: {term}"
+        out += c * v ** (e + 1) / (e + 1)
+    return out
+
+
+def _canonical_terms(expr, v):
+    """expr -> [(coeff, power, decay)] with expr = sum coeff * v**power * exp(-decay*v)."""
+    out = []
+    for term in sp.Add.make_args(sp.expand(expr)):
+        if term == 0:                      # integrand vanished (e.g. a Gaunt zero)
+            continue
+        coeff, power, decay = sp.Integer(1), sp.Integer(0), sp.Integer(0)
+        for f in sp.Mul.make_args(term):
+            if f == v:
+                power += 1
+            elif f.is_Pow and f.base == v:
+                power += f.exp
+            elif isinstance(f, sp.exp):
+                arg = sp.expand(f.args[0])
+                d = -sp.diff(arg, v)
+                decay += d
+                coeff *= sp.exp(sp.expand(arg + d * v))
+            else:
+                coeff *= f
+        assert not coeff.has(v), f"failed to separate {v} in {term}"
+        out.append((coeff, power, decay))
+    return out
+
+
+def integrate_poly_exp(expr, v, lo, hi):
+    """int_lo^hi expr dv for expr = sum coeff v^p e^{-decay v}, p >= 0 integer.
+
+    Reuses `upper_integral`, whose p >= 0 branch is E_1-free by construction, so
+    this routine cannot introduce the seed even by accident.
+    """
+    total = sp.Integer(0)
+    for coeff, p, d in _canonical_terms(expr, v):
+        p = int(p)
+        assert p >= 0, f"negative power {v}^{p} reached the integrator"
+        if d == 0:
+            assert hi is not sp.oo, "divergent: no decay over an unbounded range"
+            total += coeff * (hi ** (p + 1) - lo ** (p + 1)) / (p + 1)
+        else:
+            hi_term = 0 if hi is sp.oo else upper_integral(p, d, hi)
+            total += coeff * (upper_integral(p, d, lo) - hi_term)
+    return sp.expand(total)
+
+
+def shell_kernel_antiderivatives(LA: int, MA: int, LB: int, MB: int, R=R_s):
+    """(A_in, A_out, prefactor) for the shell-shell kernel.
+
+    A_in / A_out are antiderivatives in t of the inside / outside branch
+    integrands, so over any sub-range [p, q] of t the kernel contribution is
+    prefactor / (y R) * (A(q) - A(p)).
+    """
+    ang = angular_factor(LA, MA, LB, MB, R)
+    inside = t_s * (t_s ** LA / x_s ** (LA + 1)) * ang       # t < x
+    outside = t_s * (x_s ** LA / t_s ** (LA + 1)) * ang      # t > x
+    A_in = _antiderivative_laurent(inside, t_s)
+    A_out = _antiderivative_laurent(outside, t_s)
+    pref = 4 * sp.pi / (2 * LA + 1) * 2 * sp.pi
+    return A_in, A_out, pref
+
+
+def _assert_no_shifted_denominator(core):
+    """The kernel must be a Laurent monomial in y -- no (y +- R) downstairs.
+
+    A surviving (y +- R)^{-k} would make the outer y-integral produce E_1, i.e.
+    would mean the class is NOT elementary. Checked, not assumed.
+    """
+    _num, den = sp.fraction(core)
+    den = sp.expand(den)
+    if den.free_symbols & {y_s}:
+        assert sp.Poly(den, y_s).is_monomial, (
+            f"kernel denominator {sp.factor(den)} is not a monomial in y: the "
+            "(y +- R) factors failed to cancel, so the class would carry E_1")
+
+
+def _pair_contribution(LA, MA, radA, bA, LB, MB, radB, bB, R=R_s):
+    """One (L_A,M_A) x (L_B,M_B) multipole pair, integrated over both radii."""
+    A_in, A_out, pref = shell_kernel_antiderivatives(LA, MA, LB, MB, R)
+
+    fA = sum(c * x_s ** (k + 2) for k, c in radA.items()) * sp.exp(-bA * x_s)
+    fB = sum(c * y_s ** (k + 2) for k, c in radB.items()) * sp.exp(-bB * y_s)
+    hi = y_s + R
+
+    def K(lo, branch):
+        if branch == "out":
+            core = A_out.subs(t_s, hi) - A_out.subs(t_s, lo)
+        elif branch == "in":
+            core = A_in.subs(t_s, hi) - A_in.subs(t_s, lo)
+        else:                                        # split at t = x
+            core = ((A_in.subs(t_s, x_s) - A_in.subs(t_s, lo))
+                    + (A_out.subs(t_s, hi) - A_out.subs(t_s, x_s)))
+        # The out-branch antiderivative carries t^{-(2LA-1)} terms, so t = y +- R
+        # leaves (y +- R) in denominators. They cancel identically against the
+        # (R^2 - y^2)^j numerators -- that cancellation is exactly why the class
+        # stays elementary, so force it here and check it.
+        core = sp.cancel(sp.together(core))
+        _assert_no_shifted_denominator(core)
+        return pref / (y_s * R) * core
+
+    total = sp.Integer(0)
+    for lo, y_lo, y_hi in ((R - y_s, sp.Integer(0), R), (y_s - R, R, sp.oo)):
+        inner = sp.Integer(0)
+        for branch, x_lo, x_hi in (("out", sp.Integer(0), lo),
+                                   ("split", lo, hi),
+                                   ("in", hi, sp.oo)):
+            inner += integrate_poly_exp(sp.expand(fA * K(lo, branch)),
+                                        x_s, x_lo, x_hi)
+        total += integrate_poly_exp(sp.expand(fB * inner), y_s, y_lo, y_hi)
+    return total
+
+
+def aabb_closed_form(ZA, orbA1, orbA2, ZB, orbB1, orbB2, R=R_s, simplify=False):
+    """(ab|cd) with a,b on centre A (origin) and c,d on centre B (R zhat).
+
+    Exact and quadrature-free. `orb*` are (n, l, m) with complex Y_lm. Returns a
+    sympy expression built from rationals, sqrt, pi and exp -- no expint, no log.
+
+    Cost note: this is the *exact* path, not a fast one. A d-function quartet
+    takes a few seconds of symbolic work; batching a census tensor would want a
+    numeric evaluator built on the same term structure.
+    """
+    termsA = multipole_decomposition(ZA, *orbA1, ZA, *orbA2)
+    termsB = multipole_decomposition(ZB, *orbB1, ZB, *orbB2)
+    total = sp.Integer(0)
+    for LA, MA, gA, radA, bA in termsA:
+        for LB, MB, gB, radB, bB in termsB:
+            if MA + MB != 0:               # the phi integral kills these
+                continue
+            total += gA * gB * _pair_contribution(LA, MA, radA, bA,
+                                                  LB, MB, radB, bB, R)
+    total = sp.expand(total)
+    return sp.simplify(total) if simplify else total
+
+
+def aabb_value(ZA, orbA1, orbA2, ZB, orbB1, orbB2, R, prec: int = 30) -> float:
+    """`aabb_closed_form` evaluated at a numeric R."""
+    expr = aabb_closed_form(ZA, orbA1, orbA2, ZB, orbB1, orbB2, sp.nsimplify(R))
+    return float(sp.re(sp.N(expr, prec)))
+
+
+# ------------------------------------------------- independent numeric references
+
+def plm_signed(L: int, M: int, u):
+    """P_L^M(u), Condon-Shortley, signed M, vectorized (numeric)."""
+    from scipy.special import factorial, lpmv
+    m = abs(M)
+    P = lpmv(m, L, u)
+    if M < 0:
+        P = (-1.0) ** m * factorial(L - m) / factorial(L + m) * P
+    return P
+
+
+def sph_norm_numeric(L: int, M: int) -> float:
+    from scipy.special import factorial
+    return float(np.sqrt((2 * L + 1) / (4 * np.pi)
+                         * factorial(L - M) / factorial(L + M)))
+
+
+def aabb_quadrature(ZA, orbA1, orbA2, ZB, orbB1, orbB2, R) -> float:
+    """(ab|cd) by 2D quadrature of int rho_B V_A -- increment 1b's route.
+
+    Kept as the reference the closed form is checked against. It shares
+    `multipole_decomposition` and `V_L_radial` (validated in increment 1 to
+    1.2e-18 by pointwise reconstruction) but NOT the shell kernel, the region
+    logic, or the symbolic double integral -- i.e. it is independent of
+    everything increment 1c adds, which is what lets it referee the M != 0 cases
+    that a Cartesian-Gaussian engine cannot express directly.
+    """
+    from scipy import integrate
+
+    termsA = multipole_decomposition(ZA, *orbA1, ZA, *orbA2)
+    termsB = multipole_decomposition(ZB, *orbB1, ZB, *orbB2)
+
+    total = 0.0
+    for LA, MA, gA, radA, bA in termsA:
+        VA = sp.lambdify(r_s, V_L_radial(radA, bA, LA), "numpy")
+        nA = sph_norm_numeric(LA, MA)
+        for LB, MB, gB, radB, bB in termsB:
+            if MA + MB != 0:
+                continue
+            radB_f = sp.lambdify(
+                r_s, sum(c * r_s ** k for k, c in radB.items()) * sp.exp(-bB * r_s),
+                "numpy")
+            nB = sph_norm_numeric(LB, MB)
+
+            def integrand(u, rb, LA=LA, MA=MA, LB=LB, MB=MB, VA=VA,
+                          radB_f=radB_f, nA=nA, nB=nB):
+                rA = np.sqrt(rb * rb + R * R + 2 * rb * R * u)
+                if rA < 1e-12:
+                    return 0.0
+                cA = np.clip((R + rb * u) / rA, -1.0, 1.0)
+                return float(np.real(
+                    radB_f(rb) * rb * rb * nB * plm_signed(LB, MB, np.array([u]))[0]
+                    * VA(rA) * nA * plm_signed(LA, MA, np.array([cA]))[0]))
+
+            val, _ = integrate.dblquad(integrand, 0.0, 60.0,
+                                       lambda _r: -1.0, lambda _r: 1.0,
+                                       epsabs=1e-11, epsrel=1e-11)
+            total += float(sp.re(gA * gB)) * 2 * np.pi * val
+    return total
+
+
+def shell_kernel_quadrature(LA, MA, LB, MB, x, y, R, n=160, nphi=256) -> float:
+    """Shell kernel by direct angular quadrature -- the convention check.
+
+    Vectorized Gauss-Legendre in the two polar variables, periodic midpoint rule
+    in the azimuth. phi_1 is fixed at 0 and the residual azimuthal symmetry
+    supplies the overall 2 pi. Independent of every symbolic step in 1c.
+    """
+    u1, w1 = np.polynomial.legendre.leggauss(n)
+    u2, w2 = np.polynomial.legendre.leggauss(n)
+    ph = (np.arange(nphi) + 0.5) * 2 * np.pi / nphi
+
+    U1, U2, PH = u1[:, None, None], u2[None, :, None], ph[None, None, :]
+    s1, s2 = np.sqrt(1 - U1 ** 2), np.sqrt(1 - U2 ** 2)
+    d2 = (x ** 2 + y ** 2 + R ** 2 + 2 * R * y * U2
+          - 2 * x * (s1 * y * s2 * np.cos(PH) + U1 * (R + y * U2)))
+    d = np.sqrt(np.maximum(d2, 1e-300))
+
+    fA = sph_norm_numeric(LA, MA) * plm_signed(LA, MA, u1)[:, None, None]
+    fB = sph_norm_numeric(LB, MB) * plm_signed(LB, MB, u2)[None, :, None]
+    wt = w1[:, None, None] * w2[None, :, None] * (2 * np.pi / nphi)
+    return 2 * np.pi * float(np.sum(fA * fB * np.cos(MB * PH) / d * wt))
+
+
 # ------------------------------------------------------------------ validation
 
 def real_Y(l, m, theta, phi):

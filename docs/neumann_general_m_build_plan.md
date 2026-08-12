@@ -1,10 +1,11 @@
 # Build plan — general-m two-center ERI engine (Neumann, σ ≠ 0)
 
 **Status:** FULL BUILD per PI direction 2026-08-11 (option A, all classes
-including Ruedenberg Part II exchange). Increment 1 DONE, validated - build the
-atom-centered two-center ERI engine directly. Phase 0-prime in progress; see
-section 8. The Hylleraas-extension route (sections 1-3) is superseded and kept
-only as the record of why. Phase 0 Q2 (seed set) carries over intact. Written 2026-08-11 on `work/sparsity-boundary`.
+including Ruedenberg Part II exchange). Increments 1 / 1b / **1c DONE** - the
+(AA|BB) class is closed-form and **elementary** (no E_1, no log); see section 9.
+Classes 2 and 3 open. The Hylleraas-extension route (sections 1-3) is superseded
+and kept only as the record of why. Phase 0 Q2 (seed set) carries over intact for
+the Neumann route it was derived on. Written 2026-08-11 on `work/sparsity-boundary`.
 **Motivation:** the single structural hole in Paper 58. Its Table 1 `g` row is
 COUNTED (symmetry-rule counting, corroborated numerically at n_max=2 only)
 because no general-m two-center ERI engine exists anywhere in the corpus. Every
@@ -39,6 +40,13 @@ So the realistic deliverable is:
 
 That is still a large upgrade over symmetry-rule counting. It is **not** the
 same claim as the S/h rows, and Paper 58 must not be edited to imply otherwise.
+
+*Refined by increment 1c (2026-08-11): the seed question is **per class**, and
+the answer is not uniform. (AA|BB) came out with **no seed at all** - elementary,
+exp only. That is better than this section anticipated, but it follows from both
+charge distributions being one-center, which is exactly what the hybrid and
+exchange classes lack. Do not generalize it to them; re-ask the question on each
+class's own support.*
 
 **(c) The seed is already classified, and the seed set is probably already
 closed.** Checked during planning: **Paper 18 §"Level 2: e^a E₁(a) (Laguerre
@@ -428,13 +436,26 @@ Validation, three independent legs:
   normalization error.
 - V3 large-r limit: r * V_0(r) constant at 4 pi with monopole charge q = 1.
 
-**Coherence result worth noting.** The E_1 seed appears in this class exactly
-where the derivation says it must, and nowhere else: the upper-region integrand
-carries exponent k+1-L, which turns negative once L > k+1. Measured - at L = 0
-the only function present is `exp`; at L = 2, `Ei` appears. That is Phase 0 Q2's
-seed classification confirmed **in a completely different computational route**
-from the one it was derived on, which is real evidence the classification is
-structural rather than an artifact of the Neumann route.
+**~~Coherence result~~ - WITHDRAWN by increment 1c, 2026-08-11.** This increment
+reported that the E_1 seed appears in the (AA|BB) class "exactly where the
+derivation says it must": measured, at L = 0 only `exp` is present and at L = 2
+`Ei` appears. The measurement is real but was taken **off the physical support**.
+It evaluated `V_L_radial(rad, b, L=2)` with `rad` the 1s x 1s radial product -
+and a 1s x 1s product has no L = 2 multipole at all (Phase 0': L in
+{|l1-l2|,...,l1+l2} = {0}). So the probe forced the function through a term the
+decomposition does not contain.
+
+On the support the class actually has, **E_1 never enters**. The upper-region
+exponent is k+1-L; a real orbital product starts at k = l1+l2 while Gaunt caps L
+at l1+l2, so k+1-L >= 1 always. Checked over every surviving (pair, L) up to
+n = 4: 146 terms, zero negatives (`debug/inc1c_seed_accounting.py`). This is also
+what the exact reference was saying all along - J(R) is purely
+exponential-polynomial, with no E_1 anywhere.
+
+Phase 0 Q2's seed classification is **not** affected: it is a statement about
+Q_tau^sigma in the Neumann/spheroidal route, and it stands there. What is
+withdrawn is the claim that this class independently corroborates it. It does not
+corroborate it; it is silent on it.
 
 Minor cleanup carried forward: sympy emits `exp_polar` from the upper-region
 integration (branch bookkeeping). Harmless but should be simplified away before
@@ -508,12 +529,91 @@ of the census tensor on a validated path.
    consumers of every module touched; 274 passed / 24 skipped on the
    neumann/vee/hylleraas selection.
 
+### Increment 1c - (AA|BB) in CLOSED FORM. DONE, all gates PASS.
+
+Code: `geovac/two_center_eri.py` (section "Increment 1c"). Driver:
+`debug/inc1c_closed_form.py`. Tests: `tests/test_two_center_eri_aabb.py`.
+
+**Result: the class is ELEMENTARY - exp, rationals, sqrt and pi. No E_1, no
+logarithm, at any l or M.** So the deliverable for this class is better than the
+"exact up to one known seed" that §0 anticipated: there is no seed to carry.
+
+**The formulation matters, and the obvious one is a trap.** Making 1b's route
+symbolic - integrate rho_B against V_A - looks like the natural next step, but
+V_A(r) = q_L r^{-(L+1)} + e^{-br}(Laurent) splits a regular function into two
+pieces that are each singular at r -> 0. Every such split manufactures E_1 and
+log terms that must then cancel against each other. They *do* cancel (the
+coefficient identity is (d - b)^{s-1} = c^{s-1}), but a derivation that
+generates spurious transcendentals and then leans on simplification to remove
+them is precisely how a sign error hides. That was the reason to change
+formulation rather than push harder on the first one.
+
+**What replaced it.** Do both angular integrals first, at fixed radii, via the
+shell-shell kernel
+
+    K(x,y) = int dOm_1 dOm_2 Y_{LA MA}(Om_1) Y_{LB MB}(Om_2) / |r1 - r2|
+
+obtained by putting a unit multipole shell of radius x at A - whose potential is
+the textbook (4pi/(2LA+1)) Y_LM min^L/max^{L+1} - and integrating it over the B
+shell. Substituting u = cos th_B -> r_A makes that a 1D integral of a RATIONAL
+function of r_A, no exponentials. Three structural consequences, each asserted in
+code rather than assumed:
+
+- r_A powers are all EVEN on the outside branch and ODD and >= 1 on the inside
+  branch, so r_A^{-1} never occurs -> **no logarithm** (`_antiderivative_laurent`);
+- substituting t = y +- R leaves (y +- R) denominators that cancel identically
+  against the (R^2 - y^2)^j numerators -> **no E_1 from the outer integral**
+  (`_assert_no_shifted_denominator`);
+- after multiplying by x^2 rad_A and y^2 rad_B every power is >= 0, so what
+  remains is polynomial x exponential (`integrate_poly_exp` asserts p >= 0).
+
+Region structure (min/max splits at r_A = x while r_A ranges over [|y-R|, y+R]):
+
+    y < R (lo = R-y):  x <= R-y out | R-y < x < R+y split | x >= R+y in
+    y > R (lo = y-R):  x <= y-R out | y-R < x < y+R split | x >= y+R in
+
+**Validation, five legs.**
+
+| leg | what | result |
+|---|---|---|
+| V0 | shell kernel vs direct 3-fold angular quadrature, 7 (LA,MA,LB,MB) x 3 geometries, both branches | 4.2e-14 |
+| V1 | (1s1s\|1s1s) vs the exact VB J integral | 5.6e-17, **and symbolically identical** |
+| V2 | l>0 and M!=0 vs the 1b quadrature route (shares no 1c code) | 2.6e-14 |
+| V3 | centre swap (cd\|ab) = (-1)^{sum l} (ab\|cd) | 0.0 (bit-exact) |
+| V4 | Gate (d): McMurchie-Davidson on the census config Z_A=3, Z_B=1, R=3 | 1.1e-6, fit-limited |
+
+V1 is the strongest and is worth stating precisely: the closed form does not
+merely agree with J(R) numerically, it **simplifies to the textbook expression
+term by term** -
+
+    (1/R)[1 - e^{-2R}(1 + 11R/8 + 3R^2/4 + R^3/6)]
+
+which is the 1951-era result reproduced by derivation, with the errata
+dependency still off the critical path. V3 matters more than it looks: regions
+A/B/C are not symmetric under x <-> y, so swapping which centre sits at the
+origin routes the computation through different region logic, and it comes back
+bit-exact.
+
+V2 is the only reference that can referee M != 0 - a Cartesian-Gaussian engine
+cannot express a single complex Y_lm with m != 0. (V4 gets at m = +-1 only
+indirectly, via conj(Y11)Y11 = (px^2 + py^2)/2.)
+
+**Cost.** This is the exact path, not a fast one: a d-function quartet takes a
+few seconds of symbolic work. Batching a census tensor wants a numeric evaluator
+built on the same term structure - noted, not built.
+
+**Status.** With the one-center classes (`hypergeometric_slater.py`), ~20% of the
+census tensor is now closed-form exact rather than merely accurate.
+
 ### Next increments
 
-- **1c** replace 1b's quadrature with the closed form. This is where the E_1
-  seed becomes explicit and the class turns exact-up-to-seed rather than
-  merely accurate. Gate: reproduce 1b's numbers, which now reproduce J(R).
 - **2** hybrid (AA|AB), (AB|BB) - genuinely two-center distribution, no
   termination about either nucleus.
 - **3** exchange (AB|AB) - Ruedenberg Part II proper. Together with 2, ~80% of
   the census tensor.
+
+Do not carry 1c's elementarity forward as an expectation. It came from both
+charge distributions being one-center, which is exactly the property classes 2
+and 3 lack; Ruedenberg Part II being an entire paper on the exchange case is the
+warning. The seed question has to be re-asked per class, on each class's own
+support - which is the specific mistake increment 1 made and 1c corrected.
