@@ -425,6 +425,329 @@ def aabb_value(ZA, orbA1, orbA2, ZB, orbB1, orbB2, R, prec: int = 30) -> float:
     return float(sp.re(sp.N(expr, prec)))
 
 
+# =============================================================================
+# Increment 2 -- the HYBRID class (AA|AB), (AB|BB)
+# =============================================================================
+#
+# THE REDUCTION (Phase 0-h). One distribution is one-center, so its potential is
+# closed-form and the quartet becomes
+#
+#     (ab|cd) = sum g_1 * gaunt * int d3r F(r_A) Y_{L'M'}(Om_A)
+#                                         G(r_B) Y_{ld md}(Om_B)
+#
+# with F = conj(R_c) * V_L and G = R_d -- the same master integral increment 1c
+# evaluates, with a more general A-side radial function. The angular sum is
+# finite (two nested terminating Gaunt couplings), confirmed to 2.8e-17 against
+# a pointwise route that bypasses the re-coupling.
+#
+# WHY 1c's SHELL-KERNEL DEVICE DOES NOT CARRY OVER. There the A-side was a shell
+# potential, which made the r_A integral the ANGULAR one -- all-even powers, so
+# no logarithm. Here F is a genuine radial function and the r_A integral is a
+# genuine radial integral. Its minimum power is
+#
+#     min power of r_A = -2 (l_a + l_b)
+#
+# depending ONLY on the one-center pair (l_c and l_d cancel out). So the class is
+# elementary iff that pair is s-type, and carries E_1 otherwise. Measured over 8
+# label combinations in debug/phase0h_hybrid_scoping.py.
+#
+# SEED SET: {E_1(lambda R)} U {ln(rate ratio)}.
+# The r_A range is [|r_B - R|, r_B + R] and BOTH endpoints matter. The r_B + R
+# endpoint is E_1-closed. The |r_B - R| endpoint passes through zero at the
+# coincidence r_B = R, where E_1 is logarithmically singular, and it is NOT
+# E_1-closed -- Euler gamma cancels but a logarithm survives. The log's argument
+# is a ratio of decay rates and is R-INDEPENDENT, unlike the exchange class's.
+# (Phase 0-h originally claimed {E_1} alone, having checked only the r_B + R
+# endpoint; corrected by debug/inc2_prebuild_diagnostic.py.)
+#
+# The E_1 coefficients survive the sum over (L, L') -- checked on three quartets
+# -- so they are carried, not simplified away.
+
+
+def hybrid_terms(ZA, oa, ob, oc, ZB, od):
+    """Decompose a hybrid quartet into master-integral terms.
+
+    a, b, c on centre A; d on centre B. Yields
+    (coeff, L, L', M', l_d, m_d) for
+
+        coeff * int d3r [conj(R_c) V_L](r_A) Y_{L'M'}(Om_A) R_d(r_B) Y_{ld md}(Om_B)
+    """
+    (_nc, lc, mc), (_nd, ld, md) = oc, od
+    for L, M, g1, _radA, _bA in multipole_decomposition(ZA, *oa, ZA, *ob):
+        Mp = M - mc                                   # Gaunt M rule
+        if Mp + md != 0:                              # the phi integral
+            continue
+        for Lp in range(abs(lc - L), lc + L + 1):
+            if (lc + L + Lp) % 2 != 0 or abs(Mp) > Lp:
+                continue
+            gc = gaunt_LM(lc, mc, L, M, Lp, Mp)       # <Y_L'M'|conj(Y_lcmc) Y_LM>
+            if gc == 0:
+                continue
+            yield g1 * gc, L, Lp, Mp, ld, md
+
+
+def hybrid_F_radial(ZA, oa, ob, oc, L):
+    """F(r_A) = conj(R_c)(r_A) * V_L(r_A), exact."""
+    coeffs, a = radial_poly(ZA, oc[0], oc[1])
+    Nc = radial_norm(ZA, oc[0], oc[1])
+    Rc = sum(Nc * c * r_s ** k for k, c in coeffs.items()) * sp.exp(-a * r_s)
+    for LL, _M, _g, rad, b in multipole_decomposition(ZA, *oa, ZA, *ob):
+        if LL == L:
+            return sp.expand(Rc * V_L_radial(rad, b, L))
+    raise ValueError(f"no multipole L={L} in this pair")
+
+
+# --------------------------------------- E_1-carrying integrals over r_B
+
+def e1_moment(n: int, c, a, X):
+    """int_0^X t^n e^{-c t} E_1(a t) dt -- the LOG-producing family.
+
+    Derivation (not transcribed). Integrate by parts with
+
+        v(t) = int_0^t s^n e^{-c s} ds = n!/c^{n+1} [1 - e^{-ct} sum_{j<=n}(ct)^j/j!]
+
+    chosen because it vanishes like t^{n+1}, which kills the boundary term at
+    t = 0 where E_1 is singular. Since d/dt E_1(at) = -e^{-at}/t,
+
+        int_0^X t^n e^{-ct} E_1(at) dt = v(X) E_1(aX) + int_0^X v(t) e^{-at}/t dt
+
+    In the second integral the j = 0 piece of v and the bare 1 are each divergent
+    at t = 0 and cancel:
+
+        int_eps^X e^{-at}/t - int_eps^X e^{-(a+c)t}/t
+            -> ln((a+c)/a) - E_1(aX) + E_1((a+c)X)
+
+    THAT is where the logarithm comes from -- gamma cancels, ln((a+c)/a) does
+    not. The remaining j >= 1 pieces have non-negative powers and are elementary.
+
+    n = 0, X = R reproduces the identity verified to ~5e-16 in
+    debug/inc2_prebuild_diagnostic.py; X = oo collapses to
+    (n!/c^{n+1})[ln((a+c)/a) - sum_{j=1}^{n} (1/j)(c/(a+c))^j], the tail of the
+    logarithm's own series.
+    """
+    pref = sp.factorial(n) / c ** (n + 1)
+    if X is sp.oo:
+        assert c > 0, "int_0^oo needs positive decay"
+        tail = sum(sp.Rational(1, j) * (c / (a + c)) ** j for j in range(1, n + 1))
+        return pref * (sp.log((a + c) / a) - tail)
+    mu = a + c
+    vX = lower_integral(n, c, X)
+    body = _ein(mu * X) - _ein(a * X)
+    body -= sum(c ** j / sp.factorial(j) * _lower_any(j - 1, mu, X)
+                for j in range(1, n + 1))
+    return vX * sp.E1(a * X) + pref * body
+
+
+def _ein(z):
+    """Ein(z) = int_0^z (1 - e^{-w})/w dw -- ENTIRE, so branch-safe in sign(z).
+
+    Needed because the mirror hybrid class (AB|BB) drives the combined rate
+    mu = a + c negative: there the one-center pair sits on the LIGHT centre, so
+    the E_1 rate can be smaller than the other centre's orbital exponent. The
+    naive ln((a+c)/a) form would then take a log of a negative number.
+
+        z > 0:  Ein(z) = gamma + ln(z)  + E_1(z)
+        z < 0:  Ein(z) = gamma + ln(-z) - Ei(-z)
+        z = 0:  0
+
+    Writing the log piece as Ein(mu X) - Ein(a X) keeps it real on both branches
+    and reduces to ln(mu/a) + E_1(mu X) - E_1(a X) when both are positive.
+    """
+    if z == 0:
+        return sp.Integer(0)
+    if z.is_negative:
+        return sp.EulerGamma + sp.log(-z) - sp.Ei(-z)
+    return sp.EulerGamma + sp.log(z) + sp.E1(z)
+
+
+def _lower_any(q: int, b, r):
+    """int_0^r s^q e^{-b s} ds for q >= 0, allowing b of either sign (b = 0 too)."""
+    if b == 0:
+        return r ** (q + 1) / (q + 1)
+    return lower_integral(q, b, r)
+
+
+def e1_moment_shifted(n: int, c, a, s, X):
+    """int_0^X t^n e^{-c t} E_1(a (t + s)) dt with s > 0 -- NO logarithm.
+
+    Same by-parts, but d/dt E_1(a(t+s)) = -e^{-a(t+s)}/(t+s) has no singularity
+    on the range, so nothing diverges and nothing has to cancel. Substituting
+    w = t + s turns every piece into an E_1 or an elementary incomplete-gamma
+    term.
+    """
+    pref = sp.factorial(n) / c ** (n + 1)
+    vX = pref if X is sp.oo else lower_integral(n, c, X)
+
+    def _upper_pair(rate, lo, hi_shift):
+        """int_lo^{lo+X} w^{k} e^{-rate w} dw expressed via upper_integral."""
+        if X is sp.oo:
+            return lambda k: upper_integral(k, rate, lo)
+        return lambda k: (upper_integral(k, rate, lo)
+                          - upper_integral(k, rate, lo + hi_shift))
+
+    pair_a = _upper_pair(a, s, X)
+    pair_ac = _upper_pair(a + c, s, X)
+
+    # int_0^X e^{-a t}/(t+s) dt = e^{a s} * int_s^{s+X} w^{-1} e^{-a w} dw
+    acc = sp.exp(a * s) * pair_a(-1)
+    # j runs from ZERO here. In e1_moment the j = 0 piece is consumed cancelling
+    # the divergence against the bare term; with s > 0 nothing diverges, so it
+    # is an ordinary term and dropping it is simply wrong.
+    for j in range(0, n + 1):
+        # int_0^X t^j e^{-(a+c)t}/(t+s) dt, w = t+s
+        inner = sum(sp.binomial(j, k) * (-s) ** (j - k) * pair_ac(k - 1)
+                    for k in range(j + 1))
+        acc -= c ** j / sp.factorial(j) * sp.exp((a + c) * s) * inner
+    tailE1 = 0 if X is sp.oo else sp.E1(a * (X + s))
+    return vX * tailE1 + pref * sp.exp(-a * s) * acc
+
+
+def _canon_e1(expr, v):
+    """expr -> [(coeff, power, decay, e1_arg or None)].
+
+    Same decomposition as `_canonical_terms` but also pulls out a single E_1
+    factor. The inner r_A integral is linear in E_1, so at most one per term.
+    """
+    out = []
+    for term in sp.Add.make_args(sp.expand(expr)):
+        if term == 0:
+            continue
+        coeff, power, decay, e1 = sp.Integer(1), sp.Integer(0), sp.Integer(0), None
+        for f in sp.Mul.make_args(term):
+            if f == v:
+                power += 1
+            elif f.is_Pow and f.base == v:
+                power += f.exp
+            elif isinstance(f, sp.exp):
+                arg = sp.expand(f.args[0])
+                d = -sp.diff(arg, v)
+                decay += d
+                coeff *= sp.exp(sp.expand(arg + d * v))
+            elif f.func is sp.expint and f.args[0] == 1:
+                assert e1 is None, "two E_1 factors in one term"
+                e1 = sp.expand(f.args[1])
+            else:
+                coeff *= f
+        assert not coeff.has(v), f"failed to separate {v} in {term}"
+        out.append((coeff, int(power), decay, e1))
+    return out
+
+
+def _integrate_with_e1(expr, v, X):
+    """int_0^X expr dv where expr may carry one E_1 factor per term.
+
+    Dispatches on the E_1 argument's linear form alpha*v + beta:
+
+        beta = 0, alpha > 0  ->  e1_moment            (the log-producing case)
+        alpha > 0, beta > 0  ->  e1_moment_shifted
+        alpha < 0            ->  reflected: substitute w = s0 - v and reduce to
+                                 a DIFFERENCE of e1_moment at two upper limits
+    """
+    total = sp.Integer(0)
+    for coeff, p, d, e1 in _canon_e1(expr, v):
+        if e1 is None:
+            hi_term = 0 if X is sp.oo else upper_integral(p, d, X)
+            total += coeff * (upper_integral(p, d, sp.Integer(0)) - hi_term) \
+                if d != 0 else coeff * X ** (p + 1) / (p + 1)
+            continue
+        alpha = sp.simplify(sp.diff(e1, v))
+        beta = sp.simplify(e1 - alpha * v)
+        if alpha > 0 and beta == 0:
+            total += coeff * e1_moment(p, d, alpha, X)
+        elif alpha > 0:
+            total += coeff * e1_moment_shifted(p, d, alpha, beta / alpha, X)
+        else:                                            # reflected
+            A = -alpha
+            s0 = sp.simplify(beta / A)
+            assert X is not sp.oo, "reflected E_1 needs a finite range"
+            inner = sum(
+                sp.binomial(p, k) * s0 ** (p - k) * (-1) ** k
+                * (e1_moment(k, -d, A, s0) - e1_moment(k, -d, A, s0 - X))
+                for k in range(p + 1))
+            total += coeff * sp.exp(-d * s0) * inner
+    return total
+
+
+_NEGATIVE_POWER_MSG = """\
+hybrid_closed_form: r_A power {p} < 0 (l_a={la}, l_b={lb}).
+
+SCOPE: this builder is exact for a one-center pair that is s-type
+(l_a = l_b = 0), where the minimum r_A power is exactly 0. Phase 0-h measured
+that minimum as -2(l_a + l_b), depending ONLY on the one-center pair, so any
+l > 0 there reaches this branch.
+
+WHY IT IS NOT SIMPLY A MISSING CASE. V_L(r) is REGULAR at r -> 0 (it goes like
+r^L), but the split V_L = q_L r^{-(L+1)} + e^{-br}(Laurent) breaks it into two
+individually singular pieces whose divergences cancel only when recombined. The
+r_A integral's lower limit |r_B - R| passes through zero at r_B = R, so those
+spurious divergences land inside the r_B integration and each term diverges
+while the sum is finite. That is precisely the wall increment 1c hit, and the
+lesson there was to REFORMULATE rather than generate-and-cancel.
+
+The fix, by analogy with 1c: decompose the one-center distribution into shells,
+carrying the shell radius x as a parameter through the r_A and r_B integrals
+(NOT integrating it first, which just rebuilds V_L). Then V_L is replaced by the
+piecewise pure power min(r_A,x)^L / max(r_A,x)^{L+1}; r_A -> 0 forces the INSIDE
+branch, whose power is +L, so nothing spurious is ever generated. The cost is a
+third integration variable and a richer region structure.
+
+The E_1 machinery this needs already exists and is validated: e1_moment
+(branch-safe in sign(a+c)) and e1_moment_shifted, both to ~1e-15.
+"""
+
+
+def hybrid_closed_form(ZA, oa, ob, oc, ZB, od, R=R_s):
+    """(ab|cd) with a, b, c on centre A (origin) and d on centre B (R zhat).
+
+    Exact and quadrature-free. **Currently scoped to an s-type one-center pair**
+    (l_a = l_b = 0); anything else raises NotImplementedError with the reason and
+    the reformulation needed. See `_NEGATIVE_POWER_MSG`.
+    """
+    coeffs_d, ad = radial_poly(ZB, od[0], od[1])
+    Nd = radial_norm(ZB, od[0], od[1])
+    G_poly = sum(Nd * c * y_s ** k for k, c in coeffs_d.items())
+
+    lo_s, hi_s = sp.Symbol("lo", positive=True), sp.Symbol("hi", positive=True)
+    u_s = sp.Symbol("u", positive=True)
+
+    total = sp.Integer(0)
+    for coeff, L, Lp, Mp, ld, md in hybrid_terms(ZA, oa, ob, oc, ZB, od):
+        F = hybrid_F_radial(ZA, oa, ob, oc, L)
+        ang = angular_factor(Lp, Mp, ld, md, R)
+        # The angular factor carries y^{-1} and y^{-|M|}; those are covered by
+        # y^2 rad_B, but only AFTER combining. Cancel here, before the r_A
+        # integral spreads them across terms -- same discipline as 1c's
+        # _assert_no_shifted_denominator.
+        ang_full = sp.cancel(sp.together(ang * G_poly * y_s))
+        _num, den = sp.fraction(ang_full)
+        assert not sp.expand(den).has(y_s), (
+            f"negative r_B power survived: denominator {sp.factor(den)}")
+        rA_part = sp.expand(F.subs(r_s, t_s) * ang_full * t_s)
+
+        inner = sp.Integer(0)
+        for c_, p_, d_ in _canonical_terms(rA_part, t_s):
+            assert d_ != 0, "every F term should carry an exponential"
+            if p_ < 0:
+                raise NotImplementedError(
+                    f"hybrid_closed_form: r_A power {p_} < 0 "
+                    f"(l_a={oa[1]}, l_b={ob[1]}).\n\n" + _NEGATIVE_POWER_MSG)
+            inner += c_ * (upper_integral(p_, d_, lo_s) - upper_integral(p_, d_, hi_s))
+
+        expG = sp.exp(-ad * y_s)
+        block = sp.Integer(0)
+        # y in [0, R]: lo = R - y, hi = R + y ; substitute u = R - y
+        expr1 = (inner.subs({lo_s: R - y_s, hi_s: R + y_s}) * expG)
+        expr1 = sp.expand(expr1.subs(y_s, R - u_s))
+        block += _integrate_with_e1(expr1, u_s, R)
+        # y in [R, oo): lo = y - R, hi = y + R ; substitute t = y - R
+        expr2 = (inner.subs({lo_s: y_s - R, hi_s: y_s + R}) * expG)
+        expr2 = sp.expand(expr2.subs(y_s, R + u_s))
+        block += _integrate_with_e1(expr2, u_s, sp.oo)
+
+        total += coeff * block
+    return sp.expand(2 * sp.pi / R * total)
+
+
 # ------------------------------------------------- independent numeric references
 
 def plm_signed(L: int, M: int, u):
@@ -484,6 +807,41 @@ def aabb_quadrature(ZA, orbA1, orbA2, ZB, orbB1, orbB2, R) -> float:
                                        lambda _r: -1.0, lambda _r: 1.0,
                                        epsabs=1e-11, epsrel=1e-11)
             total += float(sp.re(gA * gB)) * 2 * np.pi * val
+    return total
+
+
+def hybrid_quadrature(ZA, oa, ob, oc, ZB, od, R) -> float:
+    """Hybrid (ab|cd) by 2D quadrature -- the reference `hybrid_closed_form` is
+    checked against. a, b, c on A; d on B.
+
+    Shares the Gaunt re-coupling and V_L_radial, but none of the closed-form
+    integration machinery, so it referees exactly what increment 2 adds.
+    """
+    from scipy import integrate
+
+    coeffs_d, ad = radial_poly(ZB, od[0], od[1])
+    Nd = radial_norm(ZB, od[0], od[1])
+    Rd = sp.lambdify(
+        r_s, sum(Nd * c * r_s ** k for k, c in coeffs_d.items()) * sp.exp(-ad * r_s),
+        "numpy")
+
+    total = 0.0
+    for coeff, L, Lp, Mp, ld, md in hybrid_terms(ZA, oa, ob, oc, ZB, od):
+        Ff = sp.lambdify(r_s, hybrid_F_radial(ZA, oa, ob, oc, L), "numpy")
+        nA, nB = sph_norm_numeric(Lp, Mp), sph_norm_numeric(ld, md)
+
+        def integrand(u, rb, Ff=Ff, Lp=Lp, Mp=Mp, ld=ld, md=md, nA=nA, nB=nB):
+            rA = np.sqrt(rb * rb + R * R + 2 * rb * R * u)
+            if rA < 1e-12:
+                return 0.0
+            cA = np.clip((R + rb * u) / rA, -1.0, 1.0)
+            return float(np.real(
+                Ff(rA) * nA * plm_signed(Lp, Mp, np.array([cA]))[0]
+                * Rd(rb) * rb * rb * nB * plm_signed(ld, md, np.array([u]))[0]))
+
+        val, _ = integrate.dblquad(integrand, 0.0, 60.0, lambda _r: -1.0,
+                                   lambda _r: 1.0, epsabs=1e-11, epsrel=1e-11)
+        total += float(sp.re(coeff)) * 2 * np.pi * val
     return total
 
 

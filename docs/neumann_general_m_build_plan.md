@@ -436,7 +436,23 @@ exponents, nothing else. The outer r_B integral closes on it via
 
 verified to **2.3e-18**. Result: elementary terms plus E_1(lambda R) constants -
 i.e. e^{+-a} E_1(a*shift), the **Stieltjes seed of Phase 0 Q2 / Paper 18
-"Level 2"**. Not a new transcendental class; tagging discharged by citation.
+"Level 2"**.
+
+> **CORRECTED 2026-08-11** by the increment-2 pre-build diagnostic
+> (`debug/inc2_prebuild_diagnostic.py`). HQ3 checked only the `r_B + R`
+> endpoint. The r_A range is `[|r_B - R|, r_B + R]`, and the OTHER endpoint
+> passes through zero at the coincidence `r_B = R`, where E_1 is logarithmically
+> singular. It is not E_1-closed:
+>
+>     int_0^R  e^{-cu} E_1(au) du = (1/c)[ln((a+c)/a) + E_1((a+c)R)
+>                                          - e^{-cR} E_1(aR)]
+>     int_0^inf e^{-ct} E_1(at) dt = ln((a+c)/a)/c
+>
+> both verified to ~5e-16. Gamma cancels; **a logarithm survives**. Corrected
+> hybrid seed set: **{E_1(lambda R)} U {ln(rate ratio)}**, the log being
+> R-INDEPENDENT (a ratio of decay rates), unlike the exchange class's ln a.
+> Same diagnostic also confirms the E_1 coefficients **survive the (L, L') sum**
+> on three quartets, so the builder must carry them.
 
 Phase 0 Q2's seed prediction was right all along - increment 1 simply put it in
 the wrong class. (AA|BB) never had it; the hybrid class does. The E_1 branch of
@@ -577,8 +593,12 @@ which is a clean structural reading worth keeping:
 |---|---|---|---|
 | one-center | 7% | solved | none |
 | (AA\|BB) | 13% | closed form (1c) | none - elementary |
-| hybrid | ~40% | scoped GO (§8.4) | {E_1} |
-| exchange | ~40% | scoped GO at sigma=0 (§8.5) | {E_1, gamma, ln} |
+| hybrid | ~40% | scoped GO (§8.4) | {E_1, ln} - log R-INDEPENDENT (rate ratio) |
+| exchange | ~40% | scoped GO at sigma=0 (§8.5) | {E_1, ln, gamma} - log argument scales with R |
+
+(hybrid row corrected 2026-08-11; the original "{E_1}" missed the |r_B - R|
+endpoint. The monotone reading survives in refined form: hybrid gains an
+R-independent log, exchange an R-dependent one plus an explicit gamma.)
 
 ---
 

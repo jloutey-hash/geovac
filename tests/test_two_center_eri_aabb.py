@@ -341,3 +341,100 @@ def test_aabb_reproduces_exact_J_integral(R):
     assert abs(total - ref) < 1e-9, (
         f"R={R}: chain gives {total:.12f}, exact J(R) = {ref:.12f}"
     )
+
+
+# ------------------------------------- increment 2: the hybrid class (AA|AB)
+
+def test_e1_moment_matches_quadrature_both_branches():
+    """int_0^X t^n e^{-ct} E_1(at) dt -- the LOG-producing family.
+
+    Includes c < 0, where the combined rate mu = a + c goes negative. That is
+    not exotic: the mirror hybrid class (AB|BB) puts the one-center pair on the
+    LIGHT centre, so the naive ln((a+c)/a) form would take a log of a negative
+    number. The Ein formulation is branch-safe and this pins it.
+    """
+    from scipy import integrate
+    from scipy.special import exp1
+    from geovac.two_center_eri import e1_moment
+
+    for n in (0, 1, 2, 3):
+        for c, a, X in ((1.3, 2.0, 3.0), (-1.0, 3.0, 2.0),
+                        (-3.0, 1.0, 2.5), (-2.0, 2.0, 3.0)):
+            got = float(sp.N(e1_moment(n, sp.nsimplify(c), sp.nsimplify(a),
+                                       sp.nsimplify(X)), 30))
+            ref, _ = integrate.quad(
+                lambda t, n=n, c=c, a=a: t ** n * np.exp(-c * t) * exp1(a * t),
+                0, X, limit=500, epsabs=1e-16, epsrel=1e-14)
+            assert abs(got - ref) <= 1e-11 * max(abs(ref), 1.0), \
+                f"n={n} c={c} a={a} X={X}: {got} vs {ref}"
+
+
+def test_e1_moment_shifted_matches_quadrature():
+    """int_0^X t^n e^{-ct} E_1(a(t+s)) dt with s > 0 -- no logarithm.
+
+    The j = 0 term of the sum is an ordinary term here (in the unshifted case it
+    is consumed cancelling a divergence). Dropping it was a real bug; this pins
+    it.
+    """
+    from scipy import integrate
+    from scipy.special import exp1
+    from geovac.two_center_eri import e1_moment_shifted
+
+    for n in (0, 1, 2, 3):
+        for c, a, s, X in ((1.3, 2.0, 6.0, 3.0), (0.7, 3.0, 3.0, 1.5)):
+            got = float(sp.N(e1_moment_shifted(
+                n, sp.nsimplify(c), sp.nsimplify(a), sp.nsimplify(s),
+                sp.nsimplify(X)), 30))
+            ref, _ = integrate.quad(
+                lambda t, n=n, c=c, a=a, s=s:
+                    t ** n * np.exp(-c * t) * exp1(a * (t + s)),
+                0, X, limit=400, epsabs=1e-18, epsrel=1e-15)
+            assert abs(got - ref) <= 1e-12 * abs(ref), \
+                f"n={n} c={c} a={a} s={s} X={X}: {got} vs {ref}"
+
+
+@pytest.mark.parametrize("name,ZA,oa,ob,oc,ZB,od", [
+    ("(1s 1s|1s 1s_B)",   Fraction(3), (1, 0, 0), (1, 0, 0), (1, 0, 0),
+     Fraction(1), (1, 0, 0)),
+    ("(1s 1s|2p0 2p0_B)", Fraction(3), (1, 0, 0), (1, 0, 0), (2, 1, 0),
+     Fraction(1), (2, 1, 0)),
+    ("(2s 2s|2p1 2p1_B)", Fraction(3), (2, 0, 0), (2, 0, 0), (2, 1, 1),
+     Fraction(2), (2, 1, 1)),
+    ("(1s 1s|3d1 2p1_B)", Fraction(3), (1, 0, 0), (1, 0, 0), (3, 2, 1),
+     Fraction(2), (2, 1, 1)),
+])
+def test_hybrid_closed_form_matches_quadrature(name, ZA, oa, ob, oc, ZB, od):
+    """s-type one-center pair: exact against the independent quadrature route."""
+    from geovac.two_center_eri import hybrid_closed_form, hybrid_quadrature
+    R = sp.Rational(5, 2)
+    got = float(sp.re(sp.N(hybrid_closed_form(ZA, oa, ob, oc, ZB, od, R), 30)))
+    ref = hybrid_quadrature(ZA, oa, ob, oc, ZB, od, 2.5)
+    assert abs(got - ref) < 1e-11, f"{name}: {got} vs {ref}"
+
+
+def test_hybrid_s_type_is_elementary():
+    """min r_A power = -2(l_a + l_b), so an s-type pair stays E_1-free.
+
+    Depends ONLY on the one-center pair -- l_c and l_d cancel out -- which is
+    why d functions on the far centre do not spoil it.
+    """
+    from geovac.two_center_eri import hybrid_closed_form
+    for oc, od in (((1, 0, 0), (1, 0, 0)), ((2, 1, 0), (2, 1, 0)),
+                   ((3, 2, 1), (2, 1, 1))):
+        e = hybrid_closed_form(Fraction(3), (1, 0, 0), (1, 0, 0), oc,
+                               Fraction(2), od, sp.Rational(5, 2))
+        assert not e.atoms(sp.expint), f"E_1 in s-type hybrid {oc}/{od}"
+        assert not e.atoms(sp.log), f"log in s-type hybrid {oc}/{od}"
+
+
+def test_hybrid_l_gt_0_is_guarded_not_silently_wrong():
+    """l > 0 on the one-center pair must raise, not return a wrong number.
+
+    That branch needs the shell reformulation (see _NEGATIVE_POWER_MSG): the
+    split V_L = q_L r^{-(L+1)} + e^{-br}(Laurent) manufactures divergences that
+    only cancel unsplit, and the r_A lower limit passes through zero at r_B = R.
+    """
+    from geovac.two_center_eri import hybrid_closed_form
+    with pytest.raises(NotImplementedError, match="r_A power"):
+        hybrid_closed_form(Fraction(3), (2, 1, 0), (2, 1, 0), (1, 0, 0),
+                           Fraction(1), (1, 0, 0), sp.Rational(5, 2))

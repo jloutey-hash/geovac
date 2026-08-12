@@ -99,8 +99,31 @@ verified numerically at three (c, a, R) points, **worst deviation 2.3e-18**.
 
 So the class closes on elementary terms plus `E_1(lambda R)` constants with
 `lambda` a sum of orbital exponents — i.e. `e^{+-a} E_1(a * shift)`, the
-**Stieltjes seed of Phase 0 Q2 / Paper 18 "Level 2"**. Not a new class; the
-tagging obligation is discharged by citation, not new derivation.
+**Stieltjes seed of Phase 0 Q2 / Paper 18 "Level 2"**.
+
+> **CORRECTED 2026-08-11 by the increment-2 pre-build diagnostic
+> (`debug/inc2_prebuild_diagnostic.py`). The seed set above is INCOMPLETE.**
+>
+> The r_A range is `[|r_B - R|, r_B + R]`, so there are TWO endpoints. This leg
+> checked only `r_B + R`, which is indeed E_1-closed. The other endpoint,
+> `|r_B - R|`, passes through **zero** at the coincidence `r_B = R`, where E_1 is
+> logarithmically singular — and that endpoint is not E_1-closed:
+>
+>     int_0^R  e^{-cu} E_1(au) du = (1/c)[ln((a+c)/a) + E_1((a+c)R)
+>                                          - e^{-cR} E_1(aR)]
+>     int_0^inf e^{-ct} E_1(at) dt = ln((a+c)/a)/c
+>
+> both verified to ~5e-16. Euler gamma cancels, but **a logarithm survives**.
+>
+> Corrected seed set: **{E_1(lambda R)} ∪ {ln(rate ratio)}**. The log's argument
+> is a ratio of decay rates and is **R-independent**, which still distinguishes
+> it from the exchange class's `ln a` (argument scales with R) and from that
+> class's explicit gamma. The monotone-growth reading across classes survives in
+> refined form; the claim "hybrid carries E_1 alone" does not.
+>
+> Also settled by the same diagnostic: the E_1 coefficients **survive the sum
+> over (L, L')** — checked on three quartets — so they are not a per-term
+> artifact and the builder must carry them rather than simplify them away.
 
 A pleasing consistency: Phase 0 Q2's seed prediction was right all along. It was
 increment 1 that put it in the wrong class — (AA|BB) never had it. It belongs
