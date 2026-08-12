@@ -505,11 +505,45 @@ Note the construction also exposes q = (alpha - beta)R/2 directly, which is the
 Phase 0-e termination criterion: q = 0 exactly when the two centres carry the
 same orbital exponent.
 
-**Remaining for increment 3:** the eta half (elementary -- with the half-powers
-now integral, it is int_{-1}^{1} poly(eta) e^{-q eta} d eta, which existing
-machinery covers); the sigma != 0 wiring; and the ordered xi double integral
-int int P_tau^sigma(xi_<) Q_tau^sigma(xi_>) in CLOSED FORM, which is the
-genuinely hard part and remains unbuilt.
+### 8.5.2 Increment 3b - assembled for general (l, m), eta half CLOSED (2026-08-11)
+
+`exchange_value` (promoted from `debug/inc3b_exchange_assembly.py`). The two phi
+integrals force sigma = m_a - m_b AND sigma = m_d - m_c, so one sigma is fixed by
+the labels and the quartet vanishes unless they agree (M_L conservation). The
+kernel gives each electron exactly one (.)^{|s|/2} on each of its xi and eta --
+whichever side of the ordering it lands on -- so the half-powers combine to
+H_i = h_i + |sigma|/2, an INTEGER by 3a's parity fact. The eta halves then factor
+completely and only xi stays coupled:
+
+    (ab|cd) = C sum_tau w_tau sum_{j1k1,j2k2} c1 c2 Beta_1 Beta_2 Xi(j1,j2,tau)
+
+**eta half CLOSED** (polynomial x exponential on [-1,1]); **xi half still
+NUMERICAL**.
+
+| leg | check | result |
+|---|---|---|
+| V1 | reduces to the Phase 0-e sigma=0 1s value | 1.5e-11 |
+| V2 | M_L conservation kills mismatched sigma | exact 0 |
+| V3 | **sigma = 1** vs McMurchie-Davidson | 7.5e-08 (fit-limited) |
+| V4 | sigma = 0 control, same Cartesian route | 3.1e-07 (fit-limited) |
+
+V3 is the leg that matters: a sigma = 0 check CANNOT catch an error in any
+sigma-dependent factor -- the (-1)^sigma, the [(tau-s)!/(tau+s)!]^2, or the
+P^mu / Q^mu conventions on (1,oo) vs (-1,1). Routed through
+2p_{+1} = -(px + i py)/sqrt(2), with axial symmetry cancelling the px/py cross
+terms and equating the diagonal ones. Uses n_gauss >= 10 per the Phase 0-h
+finding; exchange is the worst case for that, both densities being two-centre.
+
+(A first pass at V3 used a quartet that M_L conservation kills, so it returned
+zero and validated nothing. Recorded because a passing-but-vacuous check is the
+failure mode this whole leg exists to prevent.)
+
+**Remaining for increment 3:** the ordered xi double integral
+int int P_tau^sigma(xi_<) Q_tau^sigma(xi_>) in CLOSED FORM -- the genuinely hard
+part, and now the ONLY numerical step left. Note also that Phase 0-e's scoping
+claims (termination criterion, seed set, term count) were established at
+sigma = 0 / 1s; the assembly can now re-check them off that corner, which has not
+yet been done.
 
 **Scope.** This scopes the hybrid class ONLY. The exchange class (AB|AB) has two
 two-center distributions, neither with a closed-form potential, so the reduction

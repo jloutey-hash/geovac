@@ -552,3 +552,61 @@ def test_spheroidal_product_is_polynomial_and_exact(oa, ob):
                  * np.exp(-float(p) * xv - float(q) * ev)
                  * np.exp(1j * (ob[2] - oa[2]) * phv))
         assert abs(direct - built) < 1e-12, f"{oa}x{ob} at ({xv},{ev}): {direct} vs {built}"
+
+
+# ------------------ increment 3b: exchange class assembled for general (l,m)
+
+def test_exchange_ml_conservation():
+    """sigma = m_a - m_b must equal sigma = m_d - m_c, or the quartet vanishes.
+
+    Two independent phi integrals impose it, one per electron.
+    """
+    from geovac.two_center_eri import exchange_value
+    v = exchange_value(Fraction(3), (2, 1, 1), (1, 0, 0),
+                       Fraction(1), (1, 0, 0), (1, 0, 0), 3.0, tau_max=4)
+    assert v == 0.0
+
+
+def test_exchange_reproduces_phase0e_partial_sum():
+    """The general (l, m) assembly must reduce to the sigma=0 1s result.
+
+    Pinned against the Phase 0-e partial sum at tau = 6, which was itself
+    validated against McMurchie-Davidson. This is the regression that catches a
+    general-case rewrite silently breaking the case that already worked.
+    """
+    from geovac.two_center_eri import exchange_value
+    v = exchange_value(Fraction(3), (1, 0, 0), (1, 0, 0),
+                       Fraction(1), (1, 0, 0), (1, 0, 0), 3.0, tau_max=6)
+    assert abs(v - 0.0063039227) < 1e-9, v
+
+
+@pytest.mark.slow
+def test_exchange_sigma_nonzero_vs_md():
+    """sigma != 0 against an independent engine -- the leg that actually bites.
+
+    A sigma=0 check cannot catch an error in any sigma-dependent factor: the
+    (-1)^sigma, the [(tau-s)!/(tau+s)!]^2, or the P^mu / Q^mu conventions on
+    (1,oo) vs (-1,1). Routed through 2p_{+1} = -(px + i py)/sqrt(2); axial
+    symmetry cancels the px/py cross terms and equates the diagonal ones, leaving
+    (px_A 1s_B | 1s_A px_B).
+
+    n_gauss >= 10 per the Phase 0-h finding that the 6-Gaussian default is far
+    too loose for two-centre overlap densities -- and exchange is the worst case,
+    since BOTH densities are two-centre.
+    """
+    from geovac import noci_engine as E
+    from geovac.two_center_eri import exchange_value
+    shapes = {}
+    for kind, (l, nr) in (("1s", (0, 1)), ("2p", (1, 2))):
+        arr, dco, _q = E.fit_sto_shape(l, nr, n_gauss=10)
+        shapes[kind] = (arr, dco)
+    pa, pb = np.array([0., 0., 0.]), np.array([0., 0., 3.])
+
+    def B(c, kind, zeta, lmn):
+        return E.sto_shape_basis(c, kind, zeta, shapes, lmn)
+
+    got = exchange_value(Fraction(3), (2, 1, 1), (1, 0, 0),
+                         Fraction(1), (1, 0, 0), (2, 1, 1), 3.0, tau_max=10)
+    md = E.eri_md(B(pa, "2p", 1.5, (1, 0, 0)), B(pb, "1s", 1.0, (0, 0, 0)),
+                  B(pa, "1s", 3.0, (0, 0, 0)), B(pb, "2p", 0.5, (1, 0, 0)))
+    assert abs(got - md) < 1e-5, f"sigma=1: {got} vs md {md}"
