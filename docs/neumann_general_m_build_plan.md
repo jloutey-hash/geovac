@@ -520,12 +520,47 @@ shows the representation is exact pointwise, so threading it through the
 validated outer quadrature is the same identity at triple-quadrature cost. It ran
 >25 min on one term without finishing.)
 
-**Remaining for the l > 0 closed form** - the symbolic assembly, a substantial
-chunk on a now-de-risked path: three nested integrals (r_A innermost, so the only
-exponential in play is R_c's with rate a_c > 0 and every E_1 argument is
-positive), six sub-regions from the two splits at r_A = x and r_A = R, and
-negative-power handling at the r_B and x stages. The E_1 moments it consumes
-already exist and are validated.
+### 8.4.2 Increment 2 COMPLETE - the hybrid class is closed for ANY l (2026-08-11)
+
+`hybrid_closed_form` now dispatches between two validated routes:
+
+- **l_a = l_b = 0** -> `_hybrid_direct` (V_L used straight; every r_A power is
+  >= 0, so no seed and the answer is `exp`-only). Cheaper.
+- **otherwise** -> `hybrid_closed_form_shell`.
+
+Validated against `hybrid_quadrature` at <= **3.5e-14** across the blocking
+quartet (2p0 2p0|1s 1s_B), d functions, m != 0 and mixed Z. The two routes agree
+**bit-exactly** on their s-type overlap - independent derivations of the same
+number, since the direct route never forms a shell integral and the shell route
+never forms V_L.
+
+**Ordering that made it work.** r_B innermost: its limits |r_A - R| and r_A + R
+do not involve x, which holds the region count at 6 rather than 12. The price is
+that the r_B lower limit contributes e^{+a_d r_A} on the r_A < R side, so the r_A
+decay is a_c - a_d and can go NEGATIVE - handled by `finite_power_exp` (Ein/Ei
+branches), every such range being finite so nothing diverges.
+
+**Transcendental content, as corrected.** The fixed-x double integral carries
+only `exp` and a single E_1 at a POSITIVE rate, so the existing moments consume
+it directly (x < R -> `e1_moment`; x > R -> substitute w = x - R ->
+`e1_moment_shifted`). The finished closed form carries exactly
+**{exp, E_1, log}** for l > 0 and **{exp}** for s-type - realizing the seed set
+the pre-build diagnostic corrected Phase 0-h to.
+
+Three bugs found and fixed during assembly, each a distinct trap:
+1. the angular factor's y^{-1}, y^{-|M|} are covered by y^2 rad_B only AFTER
+   combining, so they must be cancelled before the r_A integral spreads them;
+2. the shell weight's x^{k+2} covers the inside branch's x^{-(L+1)} only after
+   the powers are combined - substituting x -> R + w first leaves
+   (R+w)^{-(L+1)} against a numerator polynomial that never cancels;
+3. a CONSTANT E_1 (e.g. E_1(dR) from the outside branch at the fixed endpoint R)
+   is part of the coefficient, not the weight; dispatching on it gives alpha = 0
+   and divides by zero (this produced silent `nan`, not an exception).
+
+Regression: 74 passed / 3 skipped; 18 symbolic S^3 proofs green.
+
+**Class status:** one-center SOLVED, (AA|BB) CLOSED (1c), hybrid CLOSED
+(increment 2). Exchange remains scoped-GO but unbuilt (section 8.5).
 
 ### 8.5 RESULT: the exchange class is feasible and convergent; the STOP criterion is not met
 

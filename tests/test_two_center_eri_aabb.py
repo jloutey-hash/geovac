@@ -427,14 +427,78 @@ def test_hybrid_s_type_is_elementary():
         assert not e.atoms(sp.log), f"log in s-type hybrid {oc}/{od}"
 
 
-def test_hybrid_l_gt_0_is_guarded_not_silently_wrong():
-    """l > 0 on the one-center pair must raise, not return a wrong number.
+@pytest.mark.parametrize("name,oa,ob,oc,ZB,od", [
+    ("(2p0 2p0|1s 1s_B)",   (2, 1, 0), (2, 1, 0), (1, 0, 0), Fraction(1), (1, 0, 0)),
+    ("(2p0 2p0|2p0 1s_B)",  (2, 1, 0), (2, 1, 0), (2, 1, 0), Fraction(1), (1, 0, 0)),
+    ("(2p1 2p1|1s 1s_B)",   (2, 1, 1), (2, 1, 1), (1, 0, 0), Fraction(1), (1, 0, 0)),
+    ("(2p1 2p1|2p1 2p1_B)", (2, 1, 1), (2, 1, 1), (2, 1, 1), Fraction(2), (2, 1, 1)),
+    ("(3d0 3d0|1s 1s_B)",   (3, 2, 0), (3, 2, 0), (1, 0, 0), Fraction(1), (1, 0, 0)),
+])
+def test_hybrid_l_gt_0_via_shells(name, oa, ob, oc, ZB, od):
+    """l > 0 on the one-center pair, through the shell reformulation.
 
-    That branch needs the shell reformulation (see _NEGATIVE_POWER_MSG): the
-    split V_L = q_L r^{-(L+1)} + e^{-br}(Laurent) manufactures divergences that
-    only cancel unsplit, and the r_A lower limit passes through zero at r_B = R.
+    The first row is the quartet that BLOCKED the direct route: V_L is regular
+    at r -> 0 but its split into q_L r^{-(L+1)} + e^{-br}(Laurent) is not, and
+    the r_A lower limit passes through zero at r_B = R. Carrying the shell radius
+    as a parameter makes r_A -> 0 fall in the inside branch, power +L, so nothing
+    spurious is generated.
+    """
+    from geovac.two_center_eri import hybrid_closed_form, hybrid_quadrature
+    R = sp.Rational(5, 2)
+    got = float(sp.re(sp.N(hybrid_closed_form(Fraction(3), oa, ob, oc, ZB, od,
+                                              R), 30)))
+    ref = hybrid_quadrature(Fraction(3), oa, ob, oc, ZB, od, 2.5)
+    assert abs(got - ref) < 1e-11, f"{name}: {got} vs {ref}"
+
+
+def test_hybrid_two_routes_agree_on_the_s_type_overlap():
+    """The direct (V_L) and shell routes overlap at l_a = l_b = 0; they must agree.
+
+    Independent derivations of the same number -- the direct route never forms a
+    shell integral and the shell route never forms V_L.
+    """
+    from geovac.two_center_eri import _hybrid_direct, hybrid_closed_form_shell
+    R = sp.Rational(5, 2)
+    for oc, od in (((1, 0, 0), (1, 0, 0)), ((2, 1, 0), (2, 1, 0))):
+        a = float(sp.re(sp.N(_hybrid_direct(
+            Fraction(3), (1, 0, 0), (1, 0, 0), oc, Fraction(1), od, R), 30)))
+        b = float(sp.re(sp.N(hybrid_closed_form_shell(
+            Fraction(3), (1, 0, 0), (1, 0, 0), oc, Fraction(1), od, R), 30)))
+        assert abs(a - b) < 1e-13, f"{oc}/{od}: direct {a} vs shell {b}"
+
+
+def test_hybrid_seed_set_is_E1_plus_log_for_l_gt_0():
+    """The corrected seed set, realized.
+
+    Phase 0-h originally claimed {E_1} alone, having checked only the r_B + R
+    endpoint; the |r_B - R| endpoint passes through zero and contributes a
+    logarithm. The built closed form carries exactly exp, E_1 and log -- and the
+    s-type case stays elementary, since the seed depends only on the one-center
+    pair.
     """
     from geovac.two_center_eri import hybrid_closed_form
-    with pytest.raises(NotImplementedError, match="r_A power"):
-        hybrid_closed_form(Fraction(3), (2, 1, 0), (2, 1, 0), (1, 0, 0),
-                           Fraction(1), (1, 0, 0), sp.Rational(5, 2))
+    R = sp.Rational(5, 2)
+    e = hybrid_closed_form(Fraction(3), (2, 1, 0), (2, 1, 0), (1, 0, 0),
+                           Fraction(1), (1, 0, 0), R)
+    names = {type(f).__name__ for f in e.atoms(sp.Function)}
+    assert "expint" in names and "log" in names, names
+    assert names <= {"exp", "expint", "log"}, names
+
+
+@pytest.mark.parametrize("p", [0, 2, -1, -2, -4])
+def test_finite_power_exp_both_signs(p):
+    """int_lo^hi r^p e^{-br} dr for either sign of b.
+
+    b < 0 is reached whenever the r_B lower limit |r_A - R| contributes
+    e^{+a_d r_A}, which is why upper_integral's E_1 branch is not enough there.
+    """
+    from scipy import integrate
+    from geovac.two_center_eri import finite_power_exp
+    for b, lo, hi in ((1.3, 0.4, 2.7), (-1.1, 0.5, 2.0), (-2.5, 0.3, 1.8)):
+        got = float(sp.N(finite_power_exp(p, sp.nsimplify(b), sp.nsimplify(lo),
+                                          sp.nsimplify(hi)), 30))
+        ref, _ = integrate.quad(
+            lambda r, p=p, b=b: r ** p * np.exp(-b * r), lo, hi,
+            limit=400, epsabs=1e-15, epsrel=1e-14)
+        assert abs(got - ref) <= 1e-11 * max(abs(ref), 1.0), \
+            f"p={p} b={b}: {got} vs {ref}"

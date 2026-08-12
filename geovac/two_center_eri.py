@@ -602,6 +602,35 @@ def e1_moment_shifted(n: int, c, a, s, X):
     return vX * tailE1 + pref * sp.exp(-a * s) * acc
 
 
+def finite_power_exp(p: int, b, lo, hi):
+    """int_lo^hi r^p e^{-b r} dr for ANY integer p and EITHER sign of b (b != 0).
+
+    Needed by the shell reformulation: with r_B integrated innermost, its lower
+    limit |r_A - R| contributes e^{+a_d r_A} on the r_A < R side, so the r_A
+    decay is a_c - a_d and can be negative. The range there is finite, so nothing
+    diverges -- but `upper_integral`'s p = -1 branch returns E_1(b r), which is
+    not real for b < 0.
+
+        p >= 0 : the p >= 0 antiderivative difference, valid for either sign
+        p == -1: b > 0 -> E_1(b lo) - E_1(b hi)
+                 b < 0 -> Ei(|b| hi) - Ei(|b| lo)
+        p <= -2: by parts, I(p) = [r^{p+1}e^{-br}/(p+1)] + b/(p+1) * I(p+1)
+    """
+    if p >= 0:
+        return upper_integral(p, b, lo) - upper_integral(p, b, hi)
+    if p == -1:
+        if b.is_negative:
+            beta = -b
+            return sp.Ei(beta * hi) - sp.Ei(beta * lo)
+        return sp.E1(b * lo) - sp.E1(b * hi)
+    acc = finite_power_exp(-1, b, lo, hi)
+    for pp in range(-2, p - 1, -1):
+        bnd = (hi ** (pp + 1) * sp.exp(-b * hi)
+               - lo ** (pp + 1) * sp.exp(-b * lo)) / (pp + 1)
+        acc = bnd + b / (pp + 1) * acc
+    return acc
+
+
 def _canon_e1(expr, v):
     """expr -> [(coeff, power, decay, e1_arg or None)].
 
@@ -623,9 +652,12 @@ def _canon_e1(expr, v):
                 d = -sp.diff(arg, v)
                 decay += d
                 coeff *= sp.exp(sp.expand(arg + d * v))
-            elif f.func is sp.expint and f.args[0] == 1:
+            elif f.func is sp.expint and f.args[0] == 1 and f.args[1].has(v):
                 assert e1 is None, "two E_1 factors in one term"
                 e1 = sp.expand(f.args[1])
+            # a CONSTANT E_1 -- e.g. E_1(d R) from the outside branch evaluated
+            # at the fixed endpoint R -- is part of the coefficient, not the
+            # weight. Dispatching on it would give alpha = 0 and divide by zero.
             else:
                 coeff *= f
         assert not coeff.has(v), f"failed to separate {v} in {term}"
@@ -668,6 +700,117 @@ def _integrate_with_e1(expr, v, X):
     return total
 
 
+def shell_inner_double(ZA, oa, ob, oc, ZB, od, L, Lp, Mp, ld, md, x, R=R_s,
+                       branch=None):
+    """The (r_A, r_B) double integral at FIXED shell radius x.
+
+        int int dr_A dr_B  r_A r_B  R_c(r_A) S(r_A,x) ang(r_A,r_B) G(r_B)
+
+    over the triangle domain |r_B - R| <= r_A <= r_B + R, with
+    S(r_A,x) = min(r_A,x)^L / max(r_A,x)^{L+1}.
+
+    ORDERING. r_B is innermost because its limits |r_A - R|, r_A + R do not
+    involve x -- that keeps the region count at 6 rather than 12. The price is
+    that the r_B lower limit contributes e^{+a_d r_A} on the r_A < R side, so the
+    r_A decay is a_c - a_d and can be negative; `finite_power_exp` handles that
+    branch, and every such range is finite so nothing diverges.
+
+    Regions (two orderings of the splits at r_A = x and r_A = R):
+
+        x < R : [0,x] in/W<   [x,R] out/W<   [R,oo) out/W>
+        x > R : [0,R] in/W<   [R,x] in/W>    [x,oo) out/W>
+    """
+    coeffs_d, ad = radial_poly(ZB, od[0], od[1])
+    Nd = radial_norm(ZB, od[0], od[1])
+    G_poly = sum(Nd * c * y_s ** k for k, c in coeffs_d.items())
+
+    ang = angular_factor(Lp, Mp, ld, md, R)
+    ang_full = sp.cancel(sp.together(ang * G_poly * y_s))
+    _num, den = sp.fraction(ang_full)
+    assert not sp.expand(den).has(y_s), "negative r_B power survived"
+
+    # --- step 1: r_B innermost, elementary (all powers >= 0, no E_1)
+    body = sp.expand(ang_full * sp.exp(-ad * y_s))
+    W_lt = integrate_poly_exp(body, y_s, R - t_s, t_s + R)     # r_A < R
+    W_gt = integrate_poly_exp(body, y_s, t_s - R, t_s + R)     # r_A > R
+
+    coeffs_c, ac = radial_poly(ZA, oc[0], oc[1])
+    Nc = radial_norm(ZA, oc[0], oc[1])
+    Rc = sum(Nc * c * t_s ** k for k, c in coeffs_c.items()) * sp.exp(-ac * t_s)
+
+    def _piece(W, branch, lo, hi):
+        S = (t_s ** L / x ** (L + 1)) if branch == "in" else (x ** L / t_s ** (L + 1))
+        out = sp.Integer(0)
+        for c_, p_, d_ in _canonical_terms(sp.expand(t_s * Rc * S * W), t_s):
+            if branch == "in":
+                assert p_ >= 0, f"inside branch power {p_} < 0"
+            if hi is sp.oo:
+                assert d_ > 0, "unbounded range needs positive decay"
+                out += c_ * upper_integral(p_, d_, lo)
+            else:
+                out += c_ * finite_power_exp(p_, d_, lo, hi)
+        return out
+
+    if branch is None:
+        branch = "lt" if sp.simplify(x - R).is_negative else "gt"
+    if branch == "lt":
+        return (_piece(W_lt, "in", sp.Integer(0), x)
+                + _piece(W_lt, "out", x, R)
+                + _piece(W_gt, "out", R, sp.oo))
+    return (_piece(W_lt, "in", sp.Integer(0), R)
+            + _piece(W_gt, "in", R, x)
+            + _piece(W_gt, "out", x, sp.oo))
+
+
+def hybrid_closed_form_shell(ZA, oa, ob, oc, ZB, od, R=R_s):
+    """(ab|cd) hybrid, via the shell reformulation -- valid for ANY l on the
+    one-center pair, unlike `hybrid_closed_form`.
+
+    Step 3 of the build: integrate the fixed-x double integral against the shell
+    weight x^2 rad_1(x), splitting at x = R. The fixed-x expression carries only
+    `exp` and a single E_1 at a POSITIVE rate, so the two moments already built
+    consume it directly:
+
+        x < R  ->  e1_moment(n, c, mu, R)
+        x > R  ->  substitute w = x - R, then e1_moment_shifted(n, c, mu, R, oo)
+    """
+    w_s = sp.Symbol("w", positive=True)
+    total = sp.Integer(0)
+    for coeff, L, Lp, Mp, ld, md in hybrid_terms(ZA, oa, ob, oc, ZB, od):
+        rad1, b1 = None, None
+        for LL, _M, _g, rad, b in multipole_decomposition(ZA, *oa, ZA, *ob):
+            if LL == L:
+                rad1, b1 = rad, b
+                break
+        weight = (4 * sp.pi / (2 * L + 1)
+                  * sum(c * x_s ** (k + 2) for k, c in rad1.items())
+                  * sp.exp(-b1 * x_s))
+
+        e_lt = shell_inner_double(ZA, oa, ob, oc, ZB, od, L, Lp, Mp, ld, md,
+                                  x_s, R, branch="lt")
+        e_gt = shell_inner_double(ZA, oa, ob, oc, ZB, od, L, Lp, Mp, ld, md,
+                                  x_s, R, branch="gt")
+        for e in (e_lt, e_gt):
+            assert not e.atoms(sp.Ei), "Ei reached step 3 -- needs its own moment"
+
+        # Expand in x FIRST. The inside branch carries x^{-(L+1)}, covered by the
+        # weight's x^{k+2} with k >= l_a + l_b >= L -- but only once the powers
+        # are combined. Substituting x -> R + w before that leaves (R+w)^{-(L+1)}
+        # against a numerator polynomial, which never cancels.
+        lt = sp.expand(weight * e_lt)
+        gt = sp.expand(weight * e_gt)
+        for e in (lt, gt):
+            for term in sp.Add.make_args(e):
+                pw = sum(int(f.exp) if (f.is_Pow and f.base == x_s)
+                         else (1 if f == x_s else 0)
+                         for f in sp.Mul.make_args(term))
+                assert pw >= 0, f"shell weight failed to cover x^{pw}"
+        part = _integrate_with_e1(lt, x_s, R)
+        part += _integrate_with_e1(sp.expand(gt.subs(x_s, R + w_s)), w_s, sp.oo)
+        total += coeff * part
+    return sp.expand(2 * sp.pi / R * total)
+
+
 _NEGATIVE_POWER_MSG = """\
 hybrid_closed_form: r_A power {p} < 0 (l_a={la}, l_b={lb}).
 
@@ -699,10 +842,26 @@ The E_1 machinery this needs already exists and is validated: e1_moment
 def hybrid_closed_form(ZA, oa, ob, oc, ZB, od, R=R_s):
     """(ab|cd) with a, b, c on centre A (origin) and d on centre B (R zhat).
 
-    Exact and quadrature-free. **Currently scoped to an s-type one-center pair**
-    (l_a = l_b = 0); anything else raises NotImplementedError with the reason and
-    the reformulation needed. See `_NEGATIVE_POWER_MSG`.
+    Exact and quadrature-free, for ANY l. Dispatches between two validated
+    routes:
+
+      l_a = l_b = 0  -> `_hybrid_direct`, which uses V_L straight. Every r_A
+                        power is >= 0 there, so no seed appears and the answer
+                        is elementary (`exp` only). Cheaper.
+      otherwise      -> `hybrid_closed_form_shell`. The V_L split would
+                        manufacture divergences that cancel only unsplit, so the
+                        shell representation is used instead. Carries {E_1, ln}.
+
+    Both routes are validated against `hybrid_quadrature`, and they agree with
+    each other on the s-type overlap -- see the tests.
     """
+    if oa[1] == 0 and ob[1] == 0:
+        return _hybrid_direct(ZA, oa, ob, oc, ZB, od, R)
+    return hybrid_closed_form_shell(ZA, oa, ob, oc, ZB, od, R)
+
+
+def _hybrid_direct(ZA, oa, ob, oc, ZB, od, R=R_s):
+    """Hybrid via V_L directly. Valid only for an s-type one-center pair."""
     coeffs_d, ad = radial_poly(ZB, od[0], od[1])
     Nd = radial_norm(ZB, od[0], od[1])
     G_poly = sum(Nd * c * y_s ** k for k, c in coeffs_d.items())
@@ -727,9 +886,9 @@ def hybrid_closed_form(ZA, oa, ob, oc, ZB, od, R=R_s):
         inner = sp.Integer(0)
         for c_, p_, d_ in _canonical_terms(rA_part, t_s):
             assert d_ != 0, "every F term should carry an exponential"
-            if p_ < 0:
+            if p_ < 0:                       # caller should have gone via shells
                 raise NotImplementedError(
-                    f"hybrid_closed_form: r_A power {p_} < 0 "
+                    f"_hybrid_direct: r_A power {p_} < 0 "
                     f"(l_a={oa[1]}, l_b={ob[1]}).\n\n" + _NEGATIVE_POWER_MSG)
             inner += c_ * (upper_integral(p_, d_, lo_s) - upper_integral(p_, d_, hi_s))
 
