@@ -907,6 +907,94 @@ def _hybrid_direct(ZA, oa, ob, oc, ZB, od, R=R_s):
     return sp.expand(2 * sp.pi / R * total)
 
 
+# =============================================================================
+# Increment 3a -- the EXCHANGE class: (xi, eta) expansion of an orbital product
+# =============================================================================
+#
+# Both distributions are two-center, so neither has a closed-form potential and
+# the reductions used for (AA|BB) and the hybrid class do not start. The kernel
+# itself must be expanded -- Neumann in prolate spheroidal, both electrons in one
+# (xi, eta) system (Phase 0-e, plan section 8.5).
+#
+# What makes that tractable is that the whole integrand is a POLYNOMIAL in
+# (xi, eta) times separable exponentials. With A at the origin and B at R zhat,
+#
+#     r_A = R(xi+eta)/2      z_A   = R(1+xi eta)/2
+#     r_B = R(xi-eta)/2      rho^2 = (R^2/4)(xi^2-1)(1-eta^2)
+#
+# and R_nl(r)/r^l is a polynomial while r^l Y_lm(Om) is a solid harmonic, so the
+# only non-polynomial piece is rho^{|m|}. That collects into a half-power which
+# becomes an INTEGER once the kernel's own (1-eta^2)^{|sigma|/2} is folded in,
+# because |m_a| + |m_b| + |sigma| is always even with sigma = m_a - m_b forced by
+# the azimuthal integral.
+#
+# Verified for general (n,l,m) in debug/inc3a_spheroidal_expansion.py: polynomial
+# in every case, reproducing the product pointwise to 1.7e-18.
+
+xi_s = sp.Symbol("xi", positive=True)
+eta_s = sp.Symbol("eta")
+
+
+def solid_harmonic_poly(l: int, m: int, z, rho2):
+    """r^l P_l^m(cos th) with the rho^{|m|} factor STRIPPED, as a polynomial.
+
+    P_l^m(w) = part(w) (1-w^2)^{|m|/2}, so with w = z/r,
+
+        r^l P_l^m = [r^{l-|m|} part(z/r)] * rho^{|m|}
+
+    and the bracket is a polynomial in (z, r^2): `part` has degree l-|m| and
+    parity (-1)^{l-|m|}, so only even leftover powers of r occur and
+    r^2 = rho^2 + z^2.
+    """
+    w = sp.Symbol("w")
+    mm = abs(m)
+    out = sp.Integer(0)
+    for (j,), c in sp.Poly(_legendre_rational_part(l, m, w), w).terms():
+        e = l - mm - j
+        assert e >= 0 and e % 2 == 0, f"odd leftover power r^{e} at l={l}, m={m}"
+        out += c * z ** j * (rho2 + z ** 2) ** (e // 2)
+    return sp.expand(out)
+
+
+def two_center_spheroidal_product(ZA, oa, ZB, ob, R=R_s):
+    """conj(chi_a^A) chi_b^B in prolate spheroidal -> (P, half_power, p, q).
+
+        product = P(xi,eta) * [(xi^2-1)(1-eta^2)]^{half_power}
+                  * exp(-p xi - q eta) * e^{i(m_b - m_a) phi}
+
+    p = (alpha+beta)R/2, q = (alpha-beta)R/2. Note q = 0 exactly when the two
+    centres carry the same orbital exponent -- which Phase 0-e identified as the
+    criterion for the tau sum to TERMINATE.
+    """
+    (na, la, ma), (nb, lb, mb) = oa, ob
+    ca, alpha = radial_poly(ZA, na, la)
+    cb, beta = radial_poly(ZB, nb, lb)
+    Na, Nb = radial_norm(ZA, na, la), radial_norm(ZB, nb, lb)
+
+    r_A = R * (xi_s + eta_s) / 2
+    r_B = R * (xi_s - eta_s) / 2
+    z_A = R * (1 + xi_s * eta_s) / 2
+    rho2 = R ** 2 / 4 * (xi_s ** 2 - 1) * (1 - eta_s ** 2)
+
+    def _radial_over_rl(coeffs, N, l, r, r2):
+        out = sp.Integer(0)
+        for k, c in coeffs.items():
+            e = k - l
+            assert e >= 0, f"radial power {k} below l={l}"
+            out += N * c * (r ** e if e % 2 else r2 ** (e // 2))
+        return sp.expand(out)
+
+    radA = _radial_over_rl(ca, Na, la, r_A, sp.expand(r_A ** 2))
+    radB = _radial_over_rl(cb, Nb, lb, r_B, sp.expand(r_B ** 2))
+    angA = _sph_norm(la, ma) * solid_harmonic_poly(la, ma, z_A, rho2)
+    angB = _sph_norm(lb, mb) * solid_harmonic_poly(lb, mb, z_A - R, rho2)
+
+    P = sp.expand(radA * radB * angA * angB
+                  * (R / 2) ** (abs(ma) + abs(mb)))
+    return (P, sp.Rational(abs(ma) + abs(mb), 2),
+            (alpha + beta) * R / 2, (alpha - beta) * R / 2)
+
+
 # ------------------------------------------------- independent numeric references
 
 def plm_signed(L: int, M: int, u):

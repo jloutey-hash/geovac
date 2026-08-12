@@ -479,6 +479,38 @@ gate, not a precision one. This nearly produced a false negative in this sprint:
 HQ1 first read as a FAILED reduction at 6.9e-05, until the fit sweep and the
 pointwise route located the error in the reference rather than the derivation.
 
+### 8.5.1 Increment 3a - the (xi, eta) expansion, VERIFIED (2026-08-11)
+
+Foundation for the exchange class, done before anything is built on it. Phase 0-e
+argued ON PAPER that the whole exchange integrand is a POLYNOMIAL in (xi, eta)
+times separable exponentials -- the property that makes the Neumann route
+tractable at all -- but only machine-checked it for 1s, where it is trivial.
+
+Now verified for general (n, l, m), both centres, m != 0 and negative m
+(`debug/inc3a_spheroidal_expansion.py`, promoted to
+`two_center_spheroidal_product`):
+
+- polynomial in EVERY case tested (l up to 2, degrees 0-8);
+- reproduces conj(chi_a^A) chi_b^B pointwise to **1.7e-18**;
+- the parity fact the construction rests on -- |m_a| + |m_b| + |sigma| even with
+  sigma = m_a - m_b -- holds in every case, including ones with a genuine
+  half-integer leftover (half_power = 3/2), which becomes an integer once the
+  kernel's own (1-eta^2)^{|sigma|/2} is folded in.
+
+Two supporting facts, both asserted in code: R_nl(r)/r^l is a polynomial (R_nl
+starts at r^l), and r^l Y_lm is a solid harmonic, so the ONLY non-polynomial
+piece is rho^{|m|}.
+
+Note the construction also exposes q = (alpha - beta)R/2 directly, which is the
+Phase 0-e termination criterion: q = 0 exactly when the two centres carry the
+same orbital exponent.
+
+**Remaining for increment 3:** the eta half (elementary -- with the half-powers
+now integral, it is int_{-1}^{1} poly(eta) e^{-q eta} d eta, which existing
+machinery covers); the sigma != 0 wiring; and the ordered xi double integral
+int int P_tau^sigma(xi_<) Q_tau^sigma(xi_>) in CLOSED FORM, which is the
+genuinely hard part and remains unbuilt.
+
 **Scope.** This scopes the hybrid class ONLY. The exchange class (AB|AB) has two
 two-center distributions, neither with a closed-form potential, so the reduction
 does not start. That remains the genuine Ruedenberg Part II problem and needs its

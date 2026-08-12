@@ -502,3 +502,53 @@ def test_finite_power_exp_both_signs(p):
             limit=400, epsabs=1e-15, epsrel=1e-14)
         assert abs(got - ref) <= 1e-11 * max(abs(ref), 1.0), \
             f"p={p} b={b}: {got} vs {ref}"
+
+
+# ---------------------- increment 3a: exchange-class spheroidal expansion
+
+@pytest.mark.parametrize("oa,ob", [
+    ((1, 0, 0), (1, 0, 0)), ((2, 1, 0), (1, 0, 0)), ((2, 1, 1), (2, 1, 1)),
+    ((2, 1, 1), (2, 1, -1)), ((3, 2, 2), (2, 1, 1)), ((3, 1, -1), (3, 2, 1)),
+])
+def test_spheroidal_product_is_polynomial_and_exact(oa, ob):
+    """conj(chi_a^A) chi_b^B is polynomial in (xi, eta) x separable exponentials.
+
+    This is the foundation of the whole exchange class: it is what makes the
+    Neumann route tractable at all. Phase 0-e argued it on paper and only ever
+    checked 1s, where it is trivial.
+
+    Also pins the parity fact the construction relies on: |m_a| + |m_b| + |sigma|
+    is even with sigma = m_a - m_b, so the leftover rho half-power becomes an
+    integer once the kernel's own (1-eta^2)^{|sigma|/2} is folded in. Cases with
+    a genuine half-integer half_power (e.g. 3/2) are included on purpose.
+    """
+    from geovac.two_center_eri import (eta_s, two_center_spheroidal_product,
+                                       radial_norm, radial_poly, xi_s)
+    Rv = 2.5
+    P, half, p, q = two_center_spheroidal_product(
+        Fraction(3), oa, Fraction(1), ob, sp.Rational(5, 2))
+    assert P.is_polynomial(xi_s, eta_s), f"{oa}x{ob}: not polynomial"
+
+    sigma = oa[2] - ob[2]
+    assert (abs(oa[2]) + abs(ob[2]) + abs(sigma)) % 2 == 0, "parity claim broken"
+    assert (half + sp.Rational(abs(sigma), 2)).is_integer, "half-power not integral"
+
+    def chi(Z, n, l, m, r, th, ph):
+        c, a = radial_poly(Z, n, l)
+        N = radial_norm(Z, n, l)
+        rad = sum(float(N * cc) * r ** k for k, cc in c.items()) \
+            * np.exp(-float(a) * r)
+        return rad * complex(sp.Ynm(l, m, th, ph).expand(func=True).evalf())
+
+    Pf = sp.lambdify((xi_s, eta_s), P, "numpy")
+    for xv, ev, phv in ((1.7, 0.3, 0.7), (2.4, -0.6, 2.1), (1.15, 0.85, 4.4)):
+        rA, rB = Rv * (xv + ev) / 2, Rv * (xv - ev) / 2
+        zA = Rv * (1 + xv * ev) / 2
+        thA = np.arccos(np.clip(zA / rA, -1, 1))
+        thB = np.arccos(np.clip((zA - Rv) / rB, -1, 1))
+        direct = np.conj(chi(Fraction(3), *oa, rA, thA, phv)) \
+            * chi(Fraction(1), *ob, rB, thB, phv)
+        built = (Pf(xv, ev) * ((xv ** 2 - 1) * (1 - ev ** 2)) ** float(half)
+                 * np.exp(-float(p) * xv - float(q) * ev)
+                 * np.exp(1j * (ob[2] - oa[2]) * phv))
+        assert abs(direct - built) < 1e-12, f"{oa}x{ob} at ({xv},{ev}): {direct} vs {built}"
