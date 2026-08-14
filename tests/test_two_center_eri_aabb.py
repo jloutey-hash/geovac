@@ -610,3 +610,77 @@ def test_exchange_sigma_nonzero_vs_md():
     md = E.eri_md(B(pa, "2p", 1.5, (1, 0, 0)), B(pb, "1s", 1.0, (0, 0, 0)),
                   B(pa, "1s", 3.0, (0, 0, 0)), B(pb, "2p", 0.5, (1, 0, 0)))
     assert abs(got - md) < 1e-5, f"sigma=1: {got} vs md {md}"
+
+
+# ------------- increment 3c: the ordered xi integral closes, at weight 1
+
+@pytest.mark.parametrize("n", [0, 1, 2, 3])
+def test_log_moment_matches_quadrature(n):
+    """int_0^oo t^n e^{-ct} ln t dt -- the family that carries Euler's gamma."""
+    from scipy import integrate
+    from geovac.two_center_eri import log_moment
+    for c in (0.7, 1.3, 2.5):
+        got = float(sp.N(log_moment(n, sp.nsimplify(c)), 30))
+        ref, _ = integrate.quad(
+            lambda t, n=n, c=c: t ** n * np.exp(-c * t) * np.log(t),
+            0, np.inf, limit=400, epsabs=1e-14, epsrel=1e-13)
+        assert abs(got - ref) <= 1e-11 * max(abs(ref), 1.0), f"n={n} c={c}"
+
+
+@pytest.mark.parametrize("n", [0, 1, 2, 3])
+def test_log_shift_moment_matches_quadrature(n):
+    """int_0^oo t^n e^{-ct} ln(t+s) dt, s > 0 -- no divergence is ever formed."""
+    from scipy import integrate
+    from geovac.two_center_eri import log_shift_moment
+    for c, s in ((1.3, 2.0), (0.7, 2.0), (2.5, 1.0)):
+        got = float(sp.N(log_shift_moment(n, sp.nsimplify(c), sp.nsimplify(s)), 30))
+        ref, _ = integrate.quad(
+            lambda t, n=n, c=c, s=s: t ** n * np.exp(-c * t) * np.log(t + s),
+            0, np.inf, limit=400, epsabs=1e-14, epsrel=1e-13)
+        assert abs(got - ref) <= 1e-11 * max(abs(ref), 1.0), f"n={n} c={c} s={s}"
+
+
+def test_ordered_xi_integral_closes_at_weight_one():
+    """THE periods result: the ordered double integral closes, and at weight 1.
+
+    It is an iterated integral over a simplex -- the shape that defines a period
+    -- so the natural expectation is that it lands one rung up, at weight 2
+    (dilogarithms, zeta(2)). It does not. The closed form carries exp, E_1, log
+    and Euler's gamma, and nothing higher.
+
+    Established at sigma = 0. For sigma != 0 the d^sigma Q_tau derivatives put
+    poles at xi = +-1; increment 3a's parity fact makes the net exponent there
+    exactly 0, but that is argued rather than verified.
+    """
+    from geovac.two_center_eri import ordered_xi_closed
+    p1, p2 = sp.symbols("p1 p2", positive=True)
+    e = ordered_xi_closed(p1, p2)
+    names = {type(f).__name__ for f in e.atoms(sp.Function)}
+    assert names <= {"exp", "expint", "log"}, f"unexpected functions {names}"
+    assert not (names & {"polylog", "dilog", "lerchphi", "zeta"}), \
+        "a weight-2 object reached the closed form"
+    assert e.has(sp.EulerGamma), "gamma should be present -- it is the xi=1 endpoint"
+
+
+@pytest.mark.parametrize("p", [sp.Rational(3, 2), sp.Integer(2), sp.Integer(3)])
+def test_ordered_xi_closed_matches_quadrature(p):
+    """The closed form against a direct nested quadrature of the same object."""
+    from scipy import integrate
+    from scipy.special import eval_legendre
+    from geovac.two_center_eri import ordered_xi_closed
+
+    pf = float(p)
+
+    def outer(x1):
+        lo, _ = integrate.quad(lambda x2: np.exp(-pf * x2), 1.0, x1,
+                               epsabs=1e-13, epsrel=1e-12, limit=200)
+        hi, _ = integrate.quad(
+            lambda x2: np.exp(-pf * x2) * 0.5 * np.log((x2 + 1) / (x2 - 1)),
+            x1, np.inf, epsabs=1e-13, epsrel=1e-12, limit=200)
+        q0 = 0.5 * np.log((x1 + 1) / (x1 - 1))
+        return np.exp(-pf * x1) * (q0 * lo + eval_legendre(0, x1) * hi)
+
+    ref, _ = integrate.quad(outer, 1.0, np.inf, epsabs=1e-12, epsrel=1e-11,
+                            limit=200)
+    got = float(sp.re(sp.N(ordered_xi_closed(p, p), 30)))
+    assert abs(got - ref) <= 1e-10 * max(abs(ref), 1e-3), f"p={pf}: {got} vs {ref}"

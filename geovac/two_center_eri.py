@@ -1127,6 +1127,97 @@ def exchange_value(ZA, oa, ob, ZB, oc, od, Rv: float, tau_max: int = 10):
     return C * total
 
 
+
+# =============================================================================
+# Increment 3c -- the ordered xi integral CLOSES, at WEIGHT 1
+# =============================================================================
+#
+# The ordered double integral int int P_tau(xi_<) Q_tau(xi_>) was the last
+# numerical step in the engine. It is also an ITERATED INTEGRAL over a simplex,
+# which is the shape that defines a period -- so "does it close" and "where does
+# it sit in the transcendence hierarchy" are one question, framed by weight:
+#
+#     weight 0  rationals        weight 1  ln, E_1, gamma
+#     weight 2  Li_2, pi^2/6     <- where iterated integrals of weight-1 objects
+#                                   generically land
+#
+# ANSWER: it closes at WEIGHT 1. No dilogarithm, no polylog, no zeta(2). The
+# obstruction was assembly, not transcendence.
+#
+# The move that makes it work is substituting t = xi - 1 on the outer integral
+# and splitting ln((t+2)/t) = ln(t+2) - ln(t). Both halves diverge as xi -> 1 and
+# cancel; taken separately on [0, oo) the divergence is never formed. That leaves
+# exactly two new moment families, both weight 1, plus the E_1 moments already
+# built for increment 2.
+#
+# Verified: the tau = 0 ordered integral assembled in closed form agrees with
+# quadrature at 6.3e-16, with function content {exp, expint, log} + EulerGamma.
+# See debug/inc3c_weight_probe.py.
+#
+# SCOPE: established at sigma = 0. For sigma != 0 the derivatives d^sigma Q_tau
+# introduce poles at xi = +-1; the parity fact of increment 3a makes the net
+# exponent there exactly 0 (regular), but that is ARGUED, not verified.
+
+
+def log_moment(n: int, c):
+    """int_0^oo t^n e^{-c t} ln t dt = (n!/c^{n+1})[psi(n+1) - ln c].
+
+    psi(n+1) = -gamma + H_n, so this is manifestly weight 1 and it is the piece
+    that carries Euler's gamma into the exchange class -- the same gamma Phase
+    0-e saw at the xi = 1 endpoint, reached here without ever forming the
+    divergence.
+    """
+    H_n = sum(sp.Rational(1, k) for k in range(1, n + 1))
+    return sp.factorial(n) / c ** (n + 1) * (H_n - sp.EulerGamma - sp.log(c))
+
+
+def log_shift_moment(n: int, c, s):
+    """int_0^oo t^n e^{-c t} ln(t + s) dt for s > 0.
+
+    By parts against v = -int_t^oo u^n e^{-cu} du, which vanishes at infinity and
+    is finite at 0, so no divergence is created:
+
+        = U(n,c,0) ln s + int_0^oo U(n,c,t)/(t+s) dt
+
+    and w = t + s turns the second term into incomplete-gamma pieces whose j = 0
+    term is E_1(cs). Weight 1: ln s and E_1(cs), nothing higher.
+    """
+    acc = upper_integral(n, c, sp.Integer(0)) * sp.log(s)
+    for k in range(n + 1):
+        coef = sp.factorial(n) / (sp.factorial(k) * c ** (n - k + 1))
+        inner = sum(sp.binomial(k, j) * (-s) ** (k - j)
+                    * upper_integral(j - 1, c, s) for j in range(k + 1))
+        acc += coef * sp.exp(c * s) * inner
+    return acc
+
+
+def _q0_moment_at_one(a):
+    """int_1^oo e^{-a xi} Q_0(xi) dxi with Q_0 = (1/2) ln((xi+1)/(xi-1)).
+
+    The xi = 1 endpoint limit: the log and the E_1 both diverge there and the
+    divergence cancels, leaving gamma explicitly. This is Phase 0-e's EQ2 result.
+    """
+    return sp.Rational(1, 2) * ((sp.exp(-a) / a)
+                                * (sp.log(2) + sp.EulerGamma + sp.log(a))
+                                + (sp.exp(a) / a) * sp.E1(2 * a))
+
+
+def ordered_xi_closed(p1, p2):
+    """The tau = 0, j1 = j2 = 0 ordered double integral, in CLOSED FORM.
+
+        int_1^oo int_1^oo e^{-p1 x1 - p2 x2} P_0(x_<) Q_0(x_>) dx1 dx2
+
+    Proof of concept for increment 3c: validated against quadrature at 6.3e-16
+    and carrying only {exp, E_1, log, gamma}.
+    """
+    t1 = (sp.exp(-p2) / p2) * _q0_moment_at_one(p1)         - (1 / p2) * _q0_moment_at_one(p1 + p2)
+    t2 = (1 / (2 * p2)) * (
+        2 * _q0_moment_at_one(p1 + p2)
+        - sp.exp(-p2) * sp.exp(-p1) * e1_moment(0, p1, p2, sp.oo)
+        + sp.exp(p2) * sp.exp(-p1) * e1_moment_shifted(0, p1, p2, 2, sp.oo))
+    return t1 + t2
+
+
 # ------------------------------------------------- independent numeric references
 
 def plm_signed(L: int, M: int, u):

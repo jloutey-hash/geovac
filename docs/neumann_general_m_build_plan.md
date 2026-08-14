@@ -538,7 +538,50 @@ finding; exchange is the worst case for that, both densities being two-centre.
 zero and validated nothing. Recorded because a passing-but-vacuous check is the
 failure mode this whole leg exists to prevent.)
 
-**Remaining for increment 3:** the ordered xi double integral
+### 8.5.3 Increment 3c - the ordered xi integral CLOSES, at WEIGHT 1 (2026-08-12)
+
+The last numerical step in the engine. It is an ITERATED INTEGRAL over a simplex
+(the xi_< / xi_> ordering IS the simplex), which is the shape that defines a
+period -- so "does it close" and "where in the transcendence hierarchy" are one
+question. Iterated integrals of weight-1 objects generically land at weight 2
+(Li_2, zeta(2)); that was the expectation.
+
+**They do not here. It closes at WEIGHT 1.** The tau = 0 ordered integral,
+assembled in closed form (`ordered_xi_closed`), agrees with quadrature at
+**6.3e-16**, with function content **{exp, expint, log} + EulerGamma** -- no
+dilogarithm, no polylog, no zeta(2). Pinned by
+`test_ordered_xi_integral_closes_at_weight_one`.
+
+**The move.** Substitute t = xi - 1 on the outer integral and split
+ln((t+2)/t) = ln(t+2) - ln(t). Both halves diverge as xi -> 1 and cancel; taken
+separately on [0,oo) the divergence is NEVER FORMED, which is why nothing of
+higher weight is generated. Same lesson as 1c and 2 in a third costume.
+
+Two new weight-1 moment families, validated to ~1e-15:
+
+    log_moment(n,c)        = int_0^oo t^n e^{-ct} ln t dt = (n!/c^{n+1})(H_n - gamma - ln c)
+    log_shift_moment(n,c,s)= int_0^oo t^n e^{-ct} ln(t+s) dt
+
+`log_moment` is the carrier of Euler's gamma (psi(n+1) = -gamma + H_n) -- the same
+gamma Phase 0-e met at the xi = 1 endpoint, reached without forming the
+divergence. Note xi = 1 is the DEGENERATE ellipse, i.e. the internuclear axis, so
+gamma enters at the axis: an observation-side (Layer 2) feature.
+
+**SCOPE.** Established at **sigma = 0**. For sigma != 0 the d^sigma Q_tau
+derivatives put poles of order up to sigma at xi = +-1; 3a's parity fact makes the
+net exponent there exactly 0 (regular), but that is ARGUED, not verified, and it
+is the one place a higher-weight object could still enter. General (tau, j, H) is
+assembly over existing primitives -- nobody has built the loop.
+
+**TAGGING OWED.** E_1 is tagged (Paper 18 "Level 2"). **ln and gamma are NOT** --
+new to this build, flagged and still owed. No exchange result should reach a paper
+before that is done.
+
+**Does NOT revive the QC case.** QC-1 (2026-08-12) tested the compactness claim
+negative for independent reasons. Closing this integral buys speed and
+zero-decidability, not device cost.
+
+**Remaining for increment 3 (superseded by 8.5.3 above):** the ordered xi double integral
 int int P_tau^sigma(xi_<) Q_tau^sigma(xi_>) in CLOSED FORM -- the genuinely hard
 part, and now the ONLY numerical step left. Note also that Phase 0-e's scoping
 claims (termination criterion, seed set, term count) were established at
