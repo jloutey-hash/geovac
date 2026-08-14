@@ -206,11 +206,11 @@ Supplying that engine is the natural follow-on to this paper.
 per-class outcome bears directly on what the $g$ row could become.  Three
 of the four classes are closed in exact form and validated against
 independent engines: the one-center classes, $(AA|BB)$, and the hybrid
-pair $(AA|AB)$/$(AB|BB)$.  The exchange class $(AB|AB)$---Ruedenberg's own
-subject~\cite{ruedenberg1951}---is assembled and validated for general
-$(l,m)$, but its ordered radial double integral is not in closed form.
-The transcendental content is not uniform across the classes, and grows
-with them:
+pair $(AA|AB)$/$(AB|BB)$.  For the exchange class $(AB|AB)$---Ruedenberg's
+own subject~\cite{ruedenberg1951}---the assembly is validated for general
+$(l,m)$ and its ordered radial double integral, the last non-closed step,
+now closes as well; what remains unbuilt is only the assembly loop over
+general $(\tau, j, H)$, which runs over primitives already in hand.
 
 \begin{center}
 \begin{tabular}{lll}
@@ -219,10 +219,28 @@ class & closed form & transcendental content \\
 \hline
 one-center, $(AA|BB)$ & yes & none---elementary \\
 $(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \ln\}$ \\
-$(AB|AB)$             & no  & $\{E_1, \ln, \gamma\}$ (scoped, not built) \\
+$(AB|AB)$             & ordered integral yes; & $\{E_1, \ln, \gamma\}$ \\
+                      & general loop unbuilt & \\
 \hline\hline
 \end{tabular}
 \end{center}
+
+The transcendental content grows across the classes, but---and this is the
+structurally important part---it does \emph{not} escalate in weight.  The
+ordered radial integral is an iterated integral over a simplex, the shape
+that defines a period, and iterated integrals of weight-one objects
+generically land at weight two (dilogarithms, $\zeta(2)$).  This one does
+not: assembled in closed form it agrees with quadrature to
+$6.3 \times 10^{-16}$ and contains only $\exp$, $E_1$, $\ln$ and Euler's
+$\gamma$.  Nor does $\sigma \neq 0$ break it.  The derivatives
+$d^{\sigma} Q_{\tau}/d\xi^{\sigma}$ carry poles of order up to $\sigma$ at
+$\xi = \pm 1$, but they are absorbed exactly by the $(\xi^2-1)^{H}$
+prefactor, because per electron the net exponent there is
+$(|m_a| + |m_b| - |m_a - m_b|)/2 \geq 0$ by the triangle inequality---with
+equality, i.e.\ exact absorption, whenever $m_a$ and $m_b$ have opposite
+signs.  Verified to $2.5 \times 10^{-14}$ with no weight-two content at
+any $\sigma$ tested.  So the seed sets above form a weight-one filtration
+throughout.
 
 \textbf{This does not upgrade the $g$ row}, for two independent reasons.
 First, no re-census has been run with the new machinery, so the counted
@@ -232,12 +250,21 @@ closed form exists.  $(AA|BB)$ is elementary, so its vanishing is a
 question about a finite combination of exponentials with algebraic
 coefficients---the same shape as the $S$ and $h$ rows, though we have not
 carried the separation argument through.  The hybrid classes would be
-decidable only subject to an independence argument over $\{E_1, \ln\}$.
-The exchange class has no closed form to argue about at all.  Since the
-three genuinely cross classes carry $80\%$ of the tensor, the majority of
-the $g$ row remains outside decidable reach, and the honest expectation is
-now that it will stay there: the seed set grows with class difficulty
-rather than closing.
+decidable subject to an independence argument over $\{E_1, \ln\}$, and the
+exchange class subject to one over $\{E_1, \ln, \gamma\}$.  None of those
+three arguments has been carried through, and until they are, the $g$
+row's zeros remain counted rather than decided.
+
+We state the outlook carefully, because the natural pessimistic reading is
+wrong.  The obstruction is \emph{not} that the seed set escalates: it is a
+weight-one filtration at every class, so the exchange case is a harder
+independence question than the hybrid case but not a categorically
+different one.  Nor is it that a closed form is missing: one now exists for
+every class.  What is missing is the independence arguments themselves,
+plus a re-census run through the new machinery.  Both are ordinary work
+rather than obstructions in principle---which is a materially better
+position than the counted row has occupied until now, and materially worse
+than a decided row.
 
 What the build does settle is narrower, and worth stating because it is
 exactly the sector this paper's mechanism concerns.  The classes in which
@@ -245,10 +272,12 @@ the residual $l$-selection survives---$(AA|AA)$, $(BB|BB)$ and
 $(AA|BB)$, together $20.5\%$ of the genuine tensor---are now exactly
 computable in closed form and carry no transcendental seed whatever.  An
 $l$-selection census restricted to those classes is therefore no longer
-gated on the missing engine.  The three cross classes, which
-Theorem~\ref{thm:abelian_residue} says carry no residual $l$-selection,
-are also the three that resist closed form; the two facts are
-independent, but they point the same way.
+gated on the missing engine.  That is the sharpest thing the build
+supplies for this paper: the sector where
+Theorem~\ref{thm:abelian_residue} predicts residual $l$-selection to
+survive is now exactly computable, and computable with no transcendental
+seed at all, so a census over it would test the theorem's positive content
+directly rather than by counting.
 
 Subject to that distinction, the electron-repulsion tensor is $29.4\%$
 permitted-dense genuinely against $2.1\%$ for the builder.
