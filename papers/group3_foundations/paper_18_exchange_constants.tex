@@ -279,6 +279,60 @@ numbers.  The transcendental appears only when this selection
 rule is represented as a rational function in a continuous
 coordinate.
 
+\subsubsection{The full Level-2 seed set: $\{e^a E_1(a), \ln, \gamma_E\}$}
+\label{sec:level2_seed_set}
+
+Track~J isolated $e^a E_1(a)$ for the \emph{one}-electron problem at
+$m \neq 0$.  The two-electron two-centre problem --- the electron
+repulsion integrals over prolate spheroidal coordinates --- is the
+same projection carried further, and it is worth recording what the
+complete seed set turns out to be, because the answer is smaller than
+one might fear and its two negatives are load-bearing.
+
+A native closed-form evaluation of all four two-centre ERI classes
+(Paper~58) gives seeds
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Class & Seeds & Weight \\
+\hline
+$(AA|BB)$ & --- (elementary) & 0 \\
+$(AA|AB)$, $(AB|BB)$ & $e^a E_1(a)$, $\ln$ & 1 \\
+$(AB|AB)$ & $e^a E_1(a)$, $\ln$, $\gamma_E$ & 1 \\
+\hline
+\end{tabular}
+\end{center}
+The seed set \emph{grows} with class difficulty; the transcendence
+\emph{weight} does not.  Each new object has a structural home rather
+than being an independent import.  The logarithm is the Neumann kernel
+$Q_0(\xi) = \tfrac12\ln[(\xi{+}1)/(\xi{-}1)]$, i.e.\ the same prolate
+spheroidal curvature seen from the kernel side instead of the moment
+side; $\gamma_E$ is not independent of $E_1$ at all, arriving with it
+through $E_1(z) = -\gamma_E - \ln z + \mathrm{Ein}(z)$.  All three
+therefore sit in the \emph{embedding} tier alongside $1/r_{12}$: they
+are the cost of the continuum two-centre geometry, not content of the
+graph.
+
+Two absences matter more than the list.  First, \textbf{no $\pi$
+survives}: it enters through the spherical normalisations and cancels
+identically against the $4\pi$ of the Coulomb kernel, so no
+calibration-tier constant appears anywhere in a two-centre ERI, and
+the master Mellin engine's $M_1/M_2/M_3$ sub-mechanisms are simply not
+in this chain.  Second, \textbf{no weight-two object appears} --- no
+dilogarithm, no $\zeta(2)$ --- although the ordered $\xi_< / \xi_>$
+integral is formally an iterated integral over a simplex, exactly the
+shape that generically produces $\mathrm{Li}_2$.  It closes at weight
+one instead.
+
+The two absences together are what make the $(AA|BB)$ class
+\emph{decidable}.  With no $\pi$ and no weight-two content the closed
+form is $A_0(R) + \sum_j A_j(R)e^{-\lambda_j R}$ with $A_j, \lambda_j$
+rational, so by Lindemann--Weierstrass the entry vanishes if and only
+if every $A_j$ does --- a decision, not a numerical threshold.  This is
+the sense in which cataloguing a transcendental \emph{buys} something
+rather than merely labelling it: knowing the exact seed set is what
+licenses an exact zero test downstream.
+
 \subsection{Level 3: $\mu(R)$ ($S^3 \times S^3 \to$ hyperspherical)}
 \label{sec:mu}
 

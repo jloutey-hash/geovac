@@ -1096,7 +1096,52 @@ in the hydrogenic / $Z_\text{eff}$-rational basis (Slater-type
 integrals evaluate to rationals at integer screening and to
 incomplete-gamma combinations at fractional screening, per
 \S~\ref{sec:proj_3j} sibling derivations and Paper~19 \S~III.C).  No
-transcendental is introduced at any step.\\
+transcendental is introduced at any step \emph{when both densities sit
+on the same centre}.
+
+\emph{Two-centre scope (added 2026-08-13).}  The ring-preserving
+statement above is a one-centre statement, and it is worth saying
+exactly where it stops.  When the two densities sit on
+\emph{different} centres the same projection is carried out in prolate
+spheroidal coordinates with the Neumann ordered-$\xi_</\xi_>$ split
+(\S~\ref{sec:proj_sturmian}; Paper~12, Paper~58), and there the radial
+factor is no longer a Slater integral.  A native closed-form
+evaluation of all four two-centre classes shows what enters, and it is
+a short list: the Level-2 Stieltjes seed $e^a E_1(a)$ (Paper~18
+\S~Level~2), the logarithm --- inherited from the Neumann kernel
+$Q_0(\xi) = \tfrac12 \ln\!\big[(\xi{+}1)/(\xi{-}1)\big]$, so it is the
+\emph{same} embedding object seen from the kernel side rather than the
+moment side --- and the Euler--Mascheroni constant $\gamma_E$, which
+arrives inseparably with $E_1$ through
+$E_1(z) = -\gamma_E - \ln z + \mathrm{Ein}(z)$.  All three sit in the
+\textbf{embedding} tier of Paper~18's taxonomy, the same tier as the
+$1/r_{12}$ cusp content: they are what the continuum two-centre
+geometry costs, not what the graph contains.  The seed set grows with
+class difficulty --- none for $(AA|BB)$, $\{E_1, \ln\}$ for the hybrid
+classes, $\{E_1, \ln, \gamma_E\}$ for exchange --- but the
+\emph{weight} does not: every class closes at transcendence weight
+one.
+
+Two negatives carry more structural content than the list itself.
+First, \textbf{no $\pi$ survives}: it enters through the spherical
+normalisations and cancels identically against the $4\pi$ of the
+Coulomb kernel, so the calibration tier is untouched and the
+master-Mellin sub-mechanisms $M_1/M_2/M_3$ (\S~\ref{sec:proj_hopf},
+\S~\ref{sec:proj_spectral_action}) are simply not in this chain.
+Second, \textbf{no weight-two object appears} --- no $\mathrm{Li}_2$,
+no $\zeta(2)$ --- even though the ordered simplex integral is formally
+a period of exactly the type that produces dilogarithms.  The two
+together are what make the $(AA|BB)$ entries \emph{decidable}: the
+closed form reduces to $A_0(R) + \sum_j A_j(R) e^{-\lambda_j R}$ with
+$A_j$ rational and $\lambda_j$ rational, so Lindemann--Weierstrass
+decides vanishing exactly rather than by threshold (Paper~58, decided
+census: $195/195$ permitted entries nonzero, zero accidental
+zeros).  Had $\pi$ or a
+dilogarithm survived, that decision procedure would not exist.  The
+chain is Fock conformal (\S~\ref{sec:proj_fock}) $\to$ Sturmian
+(\S~\ref{sec:proj_sturmian}) $\to$ the present multipole projection
+evaluated across two centres; three-axis tag $(L, \text{dimension-preserving},
+\{E_1, \ln, \gamma_E\}$ at weight one$)$.\\
 \textbf{Used in:} essentially every multi-electron matrix element in
 the codebase.  Specific instances: Level~4 mol-frame hyperspherical
 $V_{ee}$ and $V_{ne}$ coupling (Paper~15 \S~V, split-region Legendre
