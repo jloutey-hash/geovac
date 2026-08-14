@@ -684,3 +684,43 @@ def test_ordered_xi_closed_matches_quadrature(p):
                             limit=200)
     got = float(sp.re(sp.N(ordered_xi_closed(p, p), 30)))
     assert abs(got - ref) <= 1e-10 * max(abs(ref), 1e-3), f"p={pf}: {got} vs {ref}"
+
+
+# ---------- increment 3d: sigma != 0 does not break the weight-1 result
+
+@pytest.mark.parametrize("tau,sigma,H", [
+    (1, 1, 1), (2, 1, 1), (2, 2, 2), (3, 1, 1), (3, 2, 2), (3, 3, 3), (4, 2, 2),
+])
+def test_sigma_poles_are_absorbed_by_the_prefactor(tau, sigma, H):
+    """d^sigma Q_tau has poles of order up to sigma at xi = +-1; (xi^2-1)^H eats them.
+
+    This is the one place a weight-2 object could have entered the exchange
+    class. It cannot, because H - |sigma| = (|m_a|+|m_b|-|m_a-m_b|)/2 >= 0 by the
+    triangle inequality, so both pieces come out polynomial.
+    """
+    from geovac.two_center_eri import Q_tau_sigma_split, xi_s
+    a, b = Q_tau_sigma_split(tau, sigma)
+    pref = (xi_s ** 2 - 1) ** H
+    pl = sp.cancel(sp.expand(pref * a))
+    pr = sp.cancel(sp.together(pref * b))
+    assert pl.is_polynomial(xi_s), f"tau={tau} s={sigma}: log coefficient not polynomial"
+    assert pr.is_polynomial(xi_s), f"tau={tau} s={sigma}: pole survived the prefactor"
+
+
+def test_triangle_bound_forbids_new_poles():
+    """H - |sigma| >= 0 for every (m_a, m_b) -- the reason 3d closes.
+
+    H = (|m_a|+|m_b|)/2 + |sigma|/2 with sigma = m_a - m_b, so the net exponent
+    against a pole of order |sigma| is (|m_a|+|m_b|-|m_a-m_b|)/2, non-negative by
+    the triangle inequality and zero exactly when m_a, m_b have opposite signs.
+    """
+    worst = None
+    for ma in range(-3, 4):
+        for mb in range(-3, 4):
+            sig = ma - mb
+            H = sp.Rational(abs(ma) + abs(mb), 2) + sp.Rational(abs(sig), 2)
+            assert H.is_integer, f"half-power not integral at ({ma},{mb})"
+            net = H - abs(sig)
+            worst = net if worst is None else min(worst, net)
+            assert net >= 0, f"({ma},{mb}) gives net exponent {net} < 0"
+    assert worst == 0, f"expected the bound to be attained, got {worst}"

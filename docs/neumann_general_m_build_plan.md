@@ -570,11 +570,43 @@ gamma Phase 0-e met at the xi = 1 endpoint, reached without forming the
 divergence. Note xi = 1 is the DEGENERATE ellipse, i.e. the internuclear axis, so
 gamma enters at the axis: an observation-side (Layer 2) feature.
 
-**SCOPE.** Established at **sigma = 0**. For sigma != 0 the d^sigma Q_tau
-derivatives put poles of order up to sigma at xi = +-1; 3a's parity fact makes the
-net exponent there exactly 0 (regular), but that is ARGUED, not verified, and it
-is the one place a higher-weight object could still enter. General (tau, j, H) is
-assembly over existing primitives -- nobody has built the loop.
+**SCOPE.** ~~Established at sigma = 0 only.~~ **CLOSED by 3d below (2026-08-12):
+sigma != 0 stays at weight 1.** General (tau, j, H) is assembly over existing
+primitives -- nobody has built the loop.
+
+### 8.5.4 Increment 3d - sigma != 0 does NOT break weight 1. Named risk CLOSED.
+
+The one place a weight-2 object could still have entered:
+Q_tau^sigma = (xi^2-1)^{|sigma|/2} d^sigma Q_tau/dxi^sigma, and d^sigma of
+Q_0 has POLES of order up to sigma at xi = +-1. If they outran the prefactor the
+endpoint would be more singular than sigma = 0 and the closed form could climb.
+
+**They never do, by the TRIANGLE INEQUALITY.** Per electron the net exponent at
+xi = 1 is
+
+    H - |sigma| = ( |m_a| + |m_b| - |m_a - m_b| ) / 2  >=  0
+
+with equality exactly when m_a, m_b have opposite signs (or one vanishes).
+Machine-checked over every (m_a, m_b) in [-3,3]: minimum exactly 0.
+
+| leg | check | result |
+|---|---|---|
+| S1 | triangle bound over all (m_a, m_b) | min = 0, never negative |
+| S2 | both pieces polynomial after the prefactor, tau<=4, sigma<=3 | 7/7 YES |
+| S3 | single xi integral vs quadrature + weight census | <=2.5e-14, **no weight-2 atoms** |
+
+So the exchange class is **weight 1 for general sigma**, not just sigma = 0.
+Content throughout: {exp, expint, log} + EulerGamma.
+
+**The trap, third occurrence and a new variant.** The Phase 0 note warns that
+sympy rewrites log((xi+1)/(xi-1)) so a `.coeff()` match silently finds nothing.
+Not covered there: **`sp.expand` distributes INSIDE the log argument** -- it
+becomes log(xi/(xi-1) + 1/(xi-1)) -- after which `expand_log(force=True)` cannot
+split it either, and the checker reports "no logarithm" with the logarithm in
+plain sight. Both my first and second attempts here died on it. The fix now in
+production (`Q_tau_sigma_split`): never hand sympy the log at all -- carry Q_0 as
+an opaque coefficient and differentiate the PAIR by hand using
+Q_0' = -1/(xi^2-1).
 
 **TAGGING OWED.** E_1 is tagged (Paper 18 "Level 2"). **ln and gamma are NOT** --
 new to this build, flagged and still owed. No exchange result should reach a paper

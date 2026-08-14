@@ -1159,6 +1159,37 @@ def exchange_value(ZA, oa, ob, ZB, oc, od, Rv: float, tau_max: int = 10):
 # exponent there exactly 0 (regular), but that is ARGUED, not verified.
 
 
+def Q_tau_sigma_split(tau: int, sigma: int, var=None):
+    """Q_tau^sigma stripped of its (xi^2-1)^{sigma/2}, as (a, b) with
+
+        d^sigma Q_tau / dxi^sigma  =  a(xi) * Q_0(xi)  +  b(xi),
+        Q_0 = (1/2) ln((xi+1)/(xi-1)),  Q_0' = -1/(xi^2 - 1)
+
+    NEVER hand the logarithm to sympy. The plan's Phase 0 note records that
+    expand/simplify rewrite log((xi+1)/(xi-1)) so a .coeff() match silently finds
+    nothing. Worse, and not covered by that note: `sp.expand` distributes INSIDE
+    the argument -- it becomes log(xi/(xi-1) + 1/(xi-1)) -- after which
+    expand_log(force=True) cannot split it either, and the check reports "no
+    logarithm" while the logarithm is sitting right there.
+
+    So Q_0 is carried as an opaque coefficient and the PAIR is differentiated by
+    hand. Exact, and immune to all of that.
+
+    Why it matters: a(xi) is a polynomial but b(xi) has poles of order up to
+    sigma at xi = +-1. Those are absorbed exactly by the (xi^2-1)^H prefactor,
+    since H - |sigma| = (|m_a| + |m_b| - |m_a - m_b|)/2 >= 0 by the TRIANGLE
+    INEQUALITY. That is why sigma != 0 creates no new singularity and the whole
+    class stays at weight 1 -- see debug/inc3d_sigma_pole_probe.py.
+    """
+    v = xi_s if var is None else var
+    a, b = sp.legendre(tau, v), sp.Integer(0)
+    for k in range(1, tau + 1):
+        b -= sp.legendre(k - 1, v) * sp.legendre(tau - k, v) / k
+    for _ in range(sigma):
+        a, b = sp.diff(a, v), sp.together(sp.diff(b, v) - a / (v ** 2 - 1))
+    return sp.simplify(a), sp.simplify(b)
+
+
 def log_moment(n: int, c):
     """int_0^oo t^n e^{-c t} ln t dt = (n!/c^{n+1})[psi(n+1) - ln c].
 
