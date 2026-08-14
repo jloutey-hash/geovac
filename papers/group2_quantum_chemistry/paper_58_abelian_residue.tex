@@ -27,7 +27,9 @@ The Abelian Residue of Multi-Center Bonding}
 
 \begin{abstract}
 The \textsc{GeoVac} program builds molecular Hamiltonians from
-atom-centered Coulomb-Sturmian blocks whose angular matrix elements are
+atom-centered hydrogenic blocks (screened $Z_{\mathrm{eff}}$ per block,
+\emph{not} shared-$p_{0}$ Coulomb--Sturmian, which Papers~8--9 rule out
+for heteronuclear pairs) whose angular matrix elements are
 generated from quantum-number labels by Gaunt selection, with no spatial
 quadrature.  This yields structurally sparse qubit Hamiltonians---334
 Pauli terms for LiH at $Q = 30$, $O(Q^{2.5})$ scaling (Paper~14)---at
@@ -126,6 +128,74 @@ one keep the genuine cross-center physics \emph{and} the label-generated
 sparsity, by declining to transform the integral tensor at all?
 
 The answer is no, and the reason is group-theoretic rather than technical.
+
+\subsection{A change of method, not a refinement}
+\label{sec:method_break}
+
+It is worth stating plainly what this paper does differently, because the
+step is easy to mistake for an incremental improvement in integral quality.
+It is not.  Every previous \textsc{GeoVac} molecular builder evaluates its
+integrals in the \emph{atomic sector}: each orbital product entering an
+integral sits on a single nucleus, and inter-nuclear coupling enters
+through a surrogate.  Three generations, distinguished by what they do at
+the bond:
+
+\begin{enumerate}
+\item \textbf{Composed geometry} (Paper~17~\cite{loutey_paper17}).  A
+  Phillips--Kleinman pseudopotential replaces explicit two-body
+  core--valence Coulomb with one-body $Z_{\mathrm{eff}}$ screening, so
+  \emph{cross-block electron-repulsion integrals vanish identically}.  The
+  bond is not present in the two-body tensor at all.
+
+\item \textbf{Balanced coupled composition}
+  (Papers~19/20~\cite{loutey_paper19,loutey_paper20}).  The pseudopotential
+  is eliminated and cross-block repulsion is restored, balanced by a
+  cross-center nuclear-attraction term.  But both restored pieces remain
+  atomic-sector objects: the cross-center one-body integral is
+  $\langle \psi^{A}_{nlm} | -Z_B/|\mathbf{r}-\mathbf{R}_B| |
+  \psi^{A}_{n'l'm'} \rangle$, with \emph{both} orbitals on center $A$ and
+  only the nucleus displaced, and the restored cross-block repulsion is
+  constructed so as to continue obeying Gaunt triangle selection.  The
+  orbital products are still one-center; the $l$-selection rule still holds.
+
+\item \textbf{This paper.}  The integrals are evaluated over orbital
+  products that genuinely span two nuclei, $\langle \chi^{A} | \cdot |
+  \chi^{B} \rangle$.  That is the step neither prior generation takes.
+\end{enumerate}
+
+The distinction is not cosmetic, and the census below measures its price
+exactly.  Because generations 1 and 2 never form a two-center orbital
+product, the Gaunt $l$-selection rule is exact for them by construction,
+and the label-generated sparsity follows.  Once the product genuinely
+spans two centers, that rule fails---only the axial $m$-rule survives---and
+the permitted density inflates by $13.8\times$ at $n_{\max} = 2$.  The
+sparsity was never a discovered property of molecular electronic structure;
+it was a property of declining to evaluate the bond.
+
+The demonstration in Sec.~\ref{sec:nah} is the corresponding gain.  NaH is
+the system the prior generations could not bind under any modification
+attempted, and it binds here with three fragment-native determinants.  We
+therefore read W1e not as a defect to be repaired within the atomic-sector
+construction, but as the accumulated cost of that construction---which
+makes the present route a replacement for it rather than a correction to
+it.  What the replacement forfeits is precisely the qubit-resource
+proposition Paper~14 rests on; Sec.~\ref{sec:rereadings} states that
+trade as a conservation law rather than a defeat.
+
+\emph{Scope of this subsection.}  The three-generation description is a
+statement about what the builders compute, verifiable from their
+construction, not a new result.  The demonstration below (Sec.~\ref{sec:nah})
+is a diatomic.  A polyatomic extension has since been measured
+(BeH$_2$ and H$_2$O, basis ladder to $M = 19$): at matched minimal basis and
+matched correlation treatment the present route improves the geometry only
+modestly over generation~1 ($+10.0\%$ vs $11.7\%$ for BeH$_2$, $+14.9\%$ vs
+$19.4\%$ for H$_2$O), but the error is basis-limited rather than
+method-limited and falls to $+1.4\%$ and $+2.5\%$ respectively once the basis
+is enlarged---and the H$_2$O bond angle, an observable generation~1 cannot
+represent at all, comes out at $106.3^\circ$ against an experimental
+$104.5^\circ$.  Those figures are RHF over Gaussian-fitted Slater shapes in
+the same engine used for Sec.~\ref{sec:nah}; they are reported here as scope,
+not as a result of this paper.
 
 %% ========================================================================
 \section{The exact-arithmetic census}
@@ -844,13 +914,17 @@ Prolate Spheroidal Lattices,'' GeoVac Paper~11 (2026).
 J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Spectral Graph
 Theory,'' GeoVac Paper~14 (2026).
 
+\bibitem{loutey_paper17}
+J.~Loutey, ``Composed Natural Geometries for Core-Valence Diatomics:\
+LiH and BeH$^{+}$ from Discrete Graph Topology,'' GeoVac Paper~17 (2026).
+
 \bibitem{loutey_paper19}
-J.~Loutey, ``Balanced coupled composition:\ PK-free molecular
-Hamiltonians via Shibuya--Wulfman integrals,'' GeoVac Paper~19 (2026).
+J.~Loutey, ``Toward PK-Free Molecular Hamiltonians:\ Two-Center
+Sturmian Integrals and Coupled Composition,'' GeoVac Paper~19 (2026).
 
 \bibitem{loutey_paper20}
-J.~Loutey, ``Quantum resource benchmarks for structurally sparse
-Hamiltonians,'' GeoVac Paper~20 (2026).
+J.~Loutey, ``Structurally Sparse Molecular Hamiltonians for
+Near-Term Quantum Simulation,'' GeoVac Paper~20 (2026).
 
 \bibitem{huberherzberg}
 K.~P.~Huber and G.~Herzberg, \textit{Constants of Diatomic Molecules}

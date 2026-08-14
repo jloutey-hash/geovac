@@ -1,6 +1,6 @@
 % group2_quantum_chemistry_synthesis.tex
 % GeoVac Group 2 Synthesis: Quantum Chemistry / Natural Geometry Hierarchy Arc
-% Status: Project archive synthesis, June 2026
+% Status: Project archive synthesis, revised August 2026 (Paper 58 promotion)
 % Audience: quantum chemists, electronic-structure theorists
 
 \documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
@@ -23,7 +23,7 @@ A Synthesis of the GeoVac Quantum-Chemistry Arc}
 \author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
 
-\date{June 26, 2026}
+\date{August 14, 2026}
 
 %% ========================================================================
 %% ABSTRACT
@@ -36,10 +36,11 @@ quantum system there is a coordinate system in which the Coulomb
 singularities become boundary conditions and the Laplace--Beltrami
 operator discretizes on a sparse graph with quantum-number labels for
 nodes.  This synthesis assembles the framework's quantum-chemistry
-arc---the nine Group~2 papers spanning one-electron atoms, the
+arc---the ten Group~2 papers spanning one-electron atoms, the
 two-center one-electron ion, the two-electron atom, the two-center
-two-electron molecule, and the core--valence and polyatomic
-extensions---into a single coherent narrative organized by the
+two-electron molecule, the core--valence and polyatomic
+extensions, and the genuine two-center tensor census---into a single
+coherent narrative organized by the
 \emph{natural geometry hierarchy}.  The hierarchy is a grid indexed by
 the number of nuclear centers and the number of electrons:\ $S^3$
 (Fock) for atoms~\cite{loutey_paper7}, the prolate spheroid for
@@ -68,7 +69,12 @@ cannot bind unless the Sturmian scale $\beta_k(R)$ itself becomes
 $R$-dependent~\cite{loutey_paper8}; and a graph
 built by concatenating atom-centered lattices has an $R$-independent
 intra-atomic kinetic energy, producing a monotonically attractive
-potential-energy surface with no equilibrium~\cite{loutey_fci_mol}.
+potential-energy surface with no equilibrium~\cite{loutey_fci_mol}.  A
+later genuine two-center census sharpens where the sparsity lives:\ evaluated
+over orbital products that span two nuclei the Gaunt $l$-selection rule
+fails and only the axial $m$-rule survives, so the angular sparsity is an
+\emph{atomic-sector} property---the abelian residue of the molecular
+point group~\cite{loutey_paper58}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
 $0.0002\%$ for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
 $l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
@@ -485,7 +491,10 @@ pattern---and documents that single-mechanism repairs each saturate
 well below closure:\ a bonding-orbital PK extension at a $43\%$ ceiling,
 explicit-core Hartree pressure at $\sim\!26\%$, basis enlargement at
 $\sim\!10\%$, with Schmidt orthogonalization and core correlation each
-contributing negligibly~\cite{loutey_paper17}.
+contributing negligibly~\cite{loutey_paper17}.  This wall is later
+relocated from the correlation treatment to the Hamiltonian specification
+itself, and given a group-theoretic mechanism, in
+Sec.~\ref{sec:pkfree_fci}.
 
 \subsection{Equilibrium without PK: the Level-4N control}
 
@@ -542,7 +551,81 @@ negative:\ cross-block electron--electron integrals \emph{without} the
 matching cross-center $V_{ne}$ are energetically unbalanced ($29\%$
 error, worse than PK), and a harmonic-driven orthogonalization wall
 blocks second-row hydrides such as NaH, which PK cross-center coupling
-reduces but does not close~\cite{loutey_paper19}.
+reduces but does not close~\cite{loutey_paper19}.  That NaH wall is
+crossed in Paper~58 (next subsection), by evaluating the integrals over
+genuine two-center orbital products rather than atomic-sector
+surrogates---at the cost of the label-generated
+sparsity~\cite{loutey_paper58}.
+
+\subsection{The abelian residue:\ why the sparsity is atomic-sector (Paper 58)}
+
+Paper~58~\cite{loutey_paper58} closes the question the balanced-coupled
+work leaves open---whether the label-generated sparsity and the genuine
+cross-center physics can coexist---and the answer is group-theoretic
+rather than technical.  Every prior molecular builder evaluates its
+integrals in the \emph{atomic sector}:\ each orbital product entering an
+integral sits on a single nucleus, and inter-nuclear coupling enters
+through a surrogate (the composed builder's $Z_{\mathrm{eff}}$ screening;
+the balanced builder's displaced-nucleus one-body term, with both
+orbitals still on one center).  Because neither ever forms a genuine
+two-center orbital product, the Gaunt $l$-selection rule is exact for
+them \emph{by construction}, and the sparsity follows.
+
+Evaluated instead over orbital products that genuinely span two nuclei,
+$\langle \chi^A | \cdot | \chi^B \rangle$, in exact rational arithmetic
+(Mulliken auxiliary functions for the overlaps; a hydrogenic eigen-trick
+for the cross-center one-body term, certified entry-wise by an exact
+bra/ket identity), the census measures that the Gaunt $l$-selection rule
+does \emph{not} survive while the axial $m$-rule does, and the
+symmetry-permitted electron-repulsion density inflates $13.8\times$ over
+the builder at $n_{\max}=2$.  An internal theorem supplies the mechanism.
+The label $m$ names the abelian symmetry both centers share---rotation
+about the internuclear axis is a single global one-parameter
+group---while $l$ names irreducible representations of a rotation group
+attached to one center.  The intersection of the two centers' rotation
+groups is exactly the axial $U(1)$, whose character group is $\mathbb{Z}$
+by Pontryagin duality; abelian selection rules are additive charge
+conservation and survive, whereas non-abelian Clebsch--Gordan selection
+needs the full sphere and does not.  \emph{The surviving cross-center
+sparsity is the abelian residue of the molecular point group, readable in
+advance.}
+
+Two re-readings follow.  First, the sparsity previously charged to
+L\"owdin orthogonalization (a $17.9\times$ Pauli inflation) was largely a
+bill already owed:\ the genuine tensor's own permitted density inflates by
+the same order ($\sim\!15\times$) before any transformation, so
+orthogonalization is not, in the bulk, the cause of the density blamed on
+it.  Second, four earlier relocations of the non-orthogonality each moved
+the cost without reducing it---the cost measures the physical asymmetry
+of a two-center problem---and equivalent-atom-swap tapering \emph{reduces}
+the qubit saving while inflating the Pauli count, because identifying
+blocks by permutation destroys the per-block abelian labels that generate
+the sparsity.  The sparsity-versus-binding trade is a conservation law,
+not a defeat.
+
+The corresponding gain is a panel-verified demonstration.  All-electron
+twelve-electron NaH---the framework's hardest documented binding failure,
+which six Phillips--Kleinman modifications, an explicit-core
+Hartree--Fock treatment, and a DMRG cross-check had each left
+unbound---binds at $R_{\mathrm{eq}} = 3.736\,a_0$ ($+4.8\%$ versus
+experiment), recovering $91.1\%$ of the in-basis FCI binding from three
+fragment-native determinants, and with \emph{fewer} correlation degrees
+of freedom than the runs that failed---which is what carries the
+inference.  This localizes W1e to the Hamiltonian specification rather
+than the correlation treatment:\ the wall was the atomic-sector
+construction, not the determinant expansion.  The demonstration
+deliberately forfeits the sparsity, because the sparsity and the
+atomic-sector evaluation are the same choice.
+
+A subsequently supplied two-center electron-repulsion engine closes all
+four integral classes in exact form (at transcendence weight one,
+$\pi$-free over $\{E_1, \ln, \gamma\}$), which upgrades the $(AA|BB)$
+block of the census from \emph{counted} to \emph{decided}:\ all $195$
+symmetry-permitted entries are proven genuinely nonzero by
+Lindemann--Weierstrass separation, with no accidental zeros and none
+missed by the counting.  The three genuinely cross classes---$80\%$ of
+the tensor---remain \emph{counted} pending an independence argument over
+their $\{E_1, \ln, \gamma\}$ seeds~\cite{loutey_paper58}.
 
 \subsection{Graph-native FCI for atoms}
 
@@ -694,7 +777,12 @@ the structural reason the composed-geometry qubit encodings achieve
 favorable Pauli-term scaling for variational quantum simulation; that
 result, its scaling exponents, and its molecular benchmarks belong to
 the quantum-computing arc (Group~4) and are referenced here, not
-re-derived.  This synthesis establishes the chemistry-side foundation of
+re-derived.  Paper~58~\cite{loutey_paper58} sharpens the scope of that
+payoff:\ the $l$-selection component of the sparsity is an atomic-sector
+property, exact for the composed encoding precisely because it evaluates
+per center, so the favorable scaling characterizes small systems
+evaluated in the atomic sector rather than genuine multi-center
+integration.  This synthesis establishes the chemistry-side foundation of
 that payoff:\ the natural-geometry hierarchy, the algebraic-first
 integral structure, and the two negative theorems that justify the
 composed encoding.
@@ -725,16 +813,21 @@ classical-solver arc.
 
 \paragraph{The composed accuracy ceiling (W1e).}  The composed
 architecture saturates near $5$--$6\%$ bond-length error at its
-$l_{\max}=2$ operating point, with the residual diagnosed as a
-multi-determinant correlation wall whose single-mechanism repairs each
-close only a fraction~\cite{loutey_paper17}.  Whether a composition
-rule exists that closes W1e without sacrificing the $144\times$ angular
-compression---i.e.\ without reverting to the exact-but-expensive
-Level-4N encoding---is the central open chemistry question.  The
-diagnostic record (the failed PK alternatives, the structural
-obstruction that exact antisymmetry requires a shared coordinate
-system) suggests the answer is tied to the framework's
-sparsity-versus-binding trade-off rather than to a missing integral.
+$l_{\max}=2$ operating point.  Whether a composition rule could close
+W1e without sacrificing the $144\times$ angular compression---i.e.\
+without reverting to the exact-but-expensive Level-4N encoding---was the
+central open chemistry question of the classical-solver arc; Paper~58
+answers it in the negative and gives the reason~\cite{loutey_paper58}.
+The $l$-selection sparsity is exact only in the atomic sector---it is the
+abelian residue that survives genuine two-center evaluation---so closing
+the bond requires forming the two-center orbital products that destroy
+it.  W1e is thereby relocated from the correlation treatment (a DMRG
+cross-check reproduces FCI bit-identically without binding) to the
+Hamiltonian specification itself, and the sparsity-versus-binding trade
+is a conservation law rather than a missing integral.  What remains open
+is quantitative:\ how much of the residual a genuine-integral
+construction recovers across a range of systems, of which NaH ($+4.8\%$)
+is the first data point.
 
 \paragraph{Algebraic replacement of the remaining quadrature.}  The
 numerical column of Table~\ref{tab:algebraic}---$Z_{\mathrm{eff}}$
@@ -747,11 +840,14 @@ transcendental in $R$, admit an algebraic-implicit form (defined by a
 polynomial equation over a known coefficient ring) is open.
 
 \paragraph{Second-row and polyatomic extension.}  The balanced coupled
-Hamiltonian binds first-row hydrides but hits an orthogonalization wall
-for second-row systems such as NaH~\cite{loutey_paper19}, and the
-polyatomic $\mathrm{H}_2\mathrm{O}$ construction validates only
-bond--bond coupling, with bond--lone and lone--lone couplings
-unphysical at the present level~\cite{loutey_paper17}.  Both are named
+Hamiltonian hit an orthogonalization wall for second-row systems such as
+NaH~\cite{loutey_paper19}; the genuine two-center construction of
+Paper~58 crosses it (NaH binds at $+4.8\%$), at the cost of the
+sparsity~\cite{loutey_paper58}.  The polyatomic $\mathrm{H}_2\mathrm{O}$
+construction validates only bond--bond coupling, with bond--lone and
+lone--lone couplings unphysical at the composed
+level~\cite{loutey_paper17}; extending the genuine-integral route past
+two centers is the open polyatomic question.  Both remain named
 boundaries of the current encoding rather than refutations of the
 hierarchy.
 
@@ -959,6 +1055,11 @@ GeoVac Paper~18 (2026).
 J.~Loutey,
 ``Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian Integrals and Coupled Composition,''
 GeoVac Paper~19 (2026).
+
+\bibitem{loutey_paper58}
+J.~Loutey,
+``Angular Sparsity Is an Atomic-Sector Property: The Abelian Residue of Multi-Center Bonding,''
+GeoVac Paper~58 (2026).
 
 \bibitem{loutey_fci_atoms}
 J.~Loutey,
