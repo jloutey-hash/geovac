@@ -1068,3 +1068,75 @@ charge distributions being one-center, which is exactly the property classes 2
 and 3 lack; Ruedenberg Part II being an entire paper on the exchange case is the
 warning. The seed question has to be re-asked per class, on each class's own
 support - which is the specific mistake increment 1 made and 1c corrected.
+
+---
+
+## 10. Where the engine stops: the polyatomic scoping (2026-08-13)
+
+Measured before proposing any build, on the PI's question "can we plan to solve
+water?" Drivers `debug/poly0_three_center_burden.py`, `debug/poly1_rotation_gate.py`;
+memo `debug/sprint_decided_census_and_polyatomic_scoping_memo.md` §3.
+
+### 10.1 The three-centre burden
+
+A molecule's ERI tensor splits by how many *distinct* centres its four orbital
+indices touch. This engine covers one and two.
+
+| system | 1-centre | 2-centre | 3-centre | cost of dropping 3-centre |
+|:---|---:|---:|---:|---:|
+| H2 (2 nuclei, null control) | 18.0% | 82.0% | 0.0% | +0.00000000 Ha |
+| BeH2 (3 nuclei, linear control) | 25.1% | 64.9% | 10.0% | -0.54180387 Ha |
+| **H2O (3 nuclei, bent)** | 31.1% | 55.2% | 13.7% | **-2.34720266 Ha** |
+
+The percentage columns are the misleading ones; the last column is the gate.
+Water's 3-centre block is 13.7% of sum|g| and 420 of 2401 entries, but dropping
+it costs 1467x chemical accuracy — and the sign is a variational catastrophe (the
+energy goes *below* the true value, because the 3-centre terms are largely
+repulsive and removing repulsion over-binds). **There is no truncation story.**
+
+The H2 row returning exactly +0.0 is the control on the partition machinery. Both
+columns come from the same McMurchie-Davidson reference tensor, partitioned, so no
+fit error enters — the figure is about the partition, not the basis.
+
+Structural consolation: water has only three nuclei, hence **no 4-centre integrals
+at all**. Water needs exactly one new capability, not two.
+
+### 10.2 The rotation gate: the axial engine transports
+
+The engine is inherently axial (prolate spheroidal puts both centres on z) and
+water's O-H bonds sit at +-52.25 degrees. The standard route — evaluate in the
+frame where the pair axis IS z, rotate each index back with a Wigner-D, the same
+trick `shibuya_wulfman` already uses for the ONE-body cross-centre integral —
+holds to `2.2e-16` over five orientations, with an l=1 shell in the basis so the
+(x,y,z) bookkeeping is genuinely exercised.
+
+**Net: 1981 of 2401 entries (86.3% of sum|g|) are reachable exactly today, at any
+geometry, with what this arc already built.** The gap is precisely the 420
+three-centre entries.
+
+### 10.3 Why three centres is hard, and the routes
+
+Prolate spheroidal coordinates are built from exactly *two* foci; a third nucleus
+has nowhere to sit. Gaussians escape this because two Gaussians on different
+centres multiply into a single Gaussian on a third point — Slater functions have
+no product theorem. This is the 70-year-old reason Gaussians won quantum
+chemistry, not a GeoVac-specific wall.
+
+- **A. One-centre re-expansion** (Loewdin / Barnett-Coulson) — **GUARDRAIL**
+  (CLAUDE.md §3.5, Papers 8-9). Truncation is in `l`, destroying the exact angular
+  sparsity the framework is built on: the polyatomic replay of the Loewdin-retrofit
+  dead end. Also re-enters Cor. `dual_p0` (no shared p0 for heteronuclear; water is
+  O + H). Works numerically, costs the framework its identity.
+- **B. Gaussian transform** (Shavitt-Karplus) — exact, no `l`-truncation, keeps
+  the basis, but leaves a numerical integral per ERI: forfeits closed form,
+  Lindemann decidability, and compiled-evaluation speed.
+- **C. Momentum space / Fourier** — kernel is 4pi/k^2, translation is a phase
+  e^{ik.R}, three centres = three phases. This *is* the Fock projection, and the
+  one-body 3-centre analog is already solved in-repo. Whether the two-body case
+  closes is **genuinely open**; most GeoVac-native route.
+- **D. Decide rather than solve** — Paper 58's Prediction `angular` (C2v abelian
+  of order 4 ⇒ 2-bit spatial grading) is a *support* claim, not an energy claim.
+  Cheapest real deliverable; recommended first. Paper 58 marks it "not falsifiable
+  on the present builder" because the composed builder carries no bond angle
+  (Obs. `no_angle`) — that obstruction is about the composed builder, not the
+  framework.

@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.79.0] - 2026-08-13
+
+**Where the two-centre engine stops: the polyatomic scoping.** Diagnostic before
+engineering, on the question "can we plan to solve water?" Two gates, measured
+before any build was proposed. Memo:
+`debug/sprint_decided_census_and_polyatomic_scoping_memo.md` §3; owning doc
+`docs/neumann_general_m_build_plan.md` §10.
+
+### Added
+
+- **Poly-0 — the three-centre burden.** A molecule's ERI tensor splits by how many
+  *distinct* centres its four orbital indices touch; this engine covers one and two.
+
+  | system | 1-centre | 2-centre | 3-centre | cost of dropping 3-centre |
+  |:---|---:|---:|---:|---:|
+  | H₂ (2 nuclei, null control) | 18.0% | 82.0% | 0.0% | **+0.00000000 Ha** |
+  | BeH₂ (3 nuclei, linear control) | 25.1% | 64.9% | 10.0% | −0.54180387 Ha |
+  | **H₂O (3 nuclei, bent)** | 31.1% | 55.2% | 13.7% | **−2.34720266 Ha** |
+
+  The percentage columns are the misleading ones and the last is the gate. Water's
+  3-centre block is 13.7% of Σ|g| and 420 of 2401 entries — but dropping it costs
+  **1467× chemical accuracy**, and the sign is a variational catastrophe: the energy
+  goes *below* the true value, because the 3-centre terms are largely repulsive and
+  removing repulsion over-binds. There is no truncation story. The H₂ row returning
+  exactly +0.0 is the control on the partition machinery. Both columns come from the
+  *same* McMurchie–Davidson reference tensor, partitioned, so no fit error enters the
+  comparison. Structural consolation: water has only three nuclei, hence **no
+  4-centre integrals at all** — it needs exactly one new capability, not two.
+  Driver `debug/poly0_three_center_burden.py`.
+
+- **Poly-1 — the rotation gate.** The engine is inherently axial (prolate spheroidal
+  puts both centres on z) and water's O–H bonds sit at ±52.25°. The standard route —
+  evaluate in the frame where the pair axis *is* z, rotate each index back with a
+  Wigner-D, the same trick `shibuya_wulfman` already uses for the **one**-body
+  cross-centre integral — holds at `max |g_lab − (D⊗D⊗D⊗D)·g_axis| = 2.2e-16` over
+  five orientations, with an l=1 shell in the basis so the (x,y,z) index bookkeeping
+  is genuinely exercised (a wrong-basis bug could not hide). **Net: 1981 of 2401
+  entries (86.3% of Σ|g|) are reachable exactly today, at any geometry, with what
+  this arc already built.** The gap is precisely the 420 three-centre entries.
+  Driver `debug/poly1_rotation_gate.py`.
+
+### Changed
+
+- `docs/neumann_general_m_build_plan.md` gains §10 (polyatomic scoping: the burden
+  table, the rotation gate, and the four routes priced — one-centre re-expansion
+  ⚠️ guardrail, Gaussian transform, momentum space, and "decide rather than solve").
+
+### Closed
+
+- **Drop-the-3-centre-block is dead as a polyatomic strategy** — the obvious first
+  thing anyone would try, killed by its own gate at 1467× chemical accuracy with the
+  wrong sign. Recorded in CLAUDE.md §3.
+
+- **Why three centres is hard, stated plainly.** Prolate spheroidal coordinates are
+  built from exactly two foci; a third nucleus has nowhere to sit. Gaussians escape
+  because two Gaussians on different centres multiply into a single Gaussian on a
+  third point — Slater functions have no product theorem. This is the 70-year-old
+  reason Gaussians won quantum chemistry, not a GeoVac-specific wall.
+
+- **Guardrail fired (§3.5, Papers 8–9).** The one-centre re-expansion route
+  (Löwdin / Barnett–Coulson) truncates in `l`, destroying the exact angular sparsity
+  the framework is built on — the polyatomic replay of the Löwdin-retrofit dead end
+  — and re-enters Cor. `dual_p0` (no shared p₀ for heteronuclear; water is O + H).
+  Flagged, not taken.
+
+- **Honest framing carried forward.** This does not establish that native water is
+  worth building. The same arc found no accuracy advantage over Gaussians, no
+  qubit/Pauli advantage (QC-1), and a 420× speed figure (QC-2) that is against
+  in-repo pure Python rather than a production C code. The case for water is
+  *structural* — an exact, decidable sparsity statement for a bent molecule — and
+  the cheapest version of it is Paper 58's untested Prediction `angular` (C₂ᵥ
+  abelian of order 4 ⇒ 2-bit spatial grading), which is a support claim and needs
+  no 3-centre closure at all.
+
 ## [4.78.0] - 2026-08-13
 
 **The (AA|BB) block goes from counted to decided, and the arc's transcendentals
