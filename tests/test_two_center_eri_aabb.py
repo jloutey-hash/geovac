@@ -724,3 +724,62 @@ def test_triangle_bound_forbids_new_poles():
             worst = net if worst is None else min(worst, net)
             assert net >= 0, f"({ma},{mb}) gives net exponent {net} < 0"
     assert worst == 0, f"expected the bound to be attained, got {worst}"
+
+
+# ------- increment 3e: the general (tau, sigma, H, j) assembly loop
+
+def test_ordered_xi_general_reproduces_the_tau0_special_case():
+    """The general loop must reduce to 3c's hand-built tau = 0 form."""
+    from geovac.two_center_eri import ordered_xi_closed, ordered_xi_general
+    for p in (sp.Rational(3, 2), sp.Integer(2)):
+        g = float(sp.re(sp.N(ordered_xi_general(0, 0, 0, 0, 0, 0, p, p), 30)))
+        c = float(sp.re(sp.N(ordered_xi_closed(p, p), 30)))
+        assert abs(g - c) < 1e-13, f"p={p}: general {g} vs special {c}"
+
+
+@pytest.mark.parametrize("tau,sg,H1,H2,j1,j2,s1,s2", [
+    (2, 0, 1, 1, 1, 0, "2", "3/2"),
+    (1, 1, 1, 1, 0, 0, "3/2", "2"),
+    (2, 1, 1, 1, 1, 1, "2", "2"),
+    (2, 2, 2, 2, 0, 0, "3/2", "5/2"),
+])
+def test_ordered_xi_general_matches_nested_quadrature(tau, sg, H1, H2, j1, j2,
+                                                      s1, s2):
+    """General parameters, including p1 != p2, against direct nested quadrature."""
+    from scipy import integrate
+    from geovac.two_center_eri import (Q_tau_sigma_split, ordered_xi_general,
+                                       xi_s)
+    P1, P2 = sp.Rational(s1), sp.Rational(s2)
+    p1, p2 = float(P1), float(P2)
+    Pp = sp.diff(sp.legendre(tau, xi_s), xi_s, sg) if sg else sp.legendre(tau, xi_s)
+    a, b = Q_tau_sigma_split(tau, sg)
+    Pf = sp.lambdify(xi_s, Pp, "numpy")
+    af, bf = sp.lambdify(xi_s, a, "numpy"), sp.lambdify(xi_s, b, "numpy")
+
+    def DQ(u):
+        return float(af(u)) * 0.5 * np.log((u + 1) / (u - 1)) + float(bf(u))
+
+    def outer(x1):
+        lo, _ = integrate.quad(
+            lambda x2: x2 ** j2 * (x2 ** 2 - 1) ** H2 * np.exp(-p2 * x2)
+            * float(Pf(x2)), 1.0, x1, epsabs=1e-13, epsrel=1e-12, limit=200)
+        hi, _ = integrate.quad(
+            lambda x2: x2 ** j2 * (x2 ** 2 - 1) ** H2 * np.exp(-p2 * x2) * DQ(x2),
+            x1, np.inf, epsabs=1e-13, epsrel=1e-12, limit=200)
+        return (x1 ** j1 * (x1 ** 2 - 1) ** H1 * np.exp(-p1 * x1)
+                * (DQ(x1) * lo + float(Pf(x1)) * hi))
+
+    ref, _ = integrate.quad(outer, 1.0, np.inf, epsabs=1e-12, epsrel=1e-11,
+                            limit=200)
+    got = float(sp.re(sp.N(ordered_xi_general(tau, sg, H1, H2, j1, j2, P1, P2), 30)))
+    assert abs(got - ref) <= 1e-10 * max(abs(ref), 1e-3), f"{got} vs {ref}"
+
+
+def test_ordered_xi_general_stays_weight_one():
+    """General parameters must not introduce a weight-2 object either."""
+    from geovac.two_center_eri import ordered_xi_general
+    p1, p2 = sp.symbols("p1 p2", positive=True)
+    e = ordered_xi_general(2, 1, 1, 1, 1, 1, p1, p2)
+    names = {type(f).__name__ for f in e.atoms(sp.Function)}
+    assert names <= {"exp", "expint", "log"}, f"unexpected {names}"
+    assert not (names & {"polylog", "dilog", "zeta"}), "weight-2 object appeared"

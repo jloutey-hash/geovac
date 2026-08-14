@@ -136,6 +136,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > Full sprint chronicles live in `CHANGELOG.md`. This section is a compact index. Sprint detail is in the memos linked below.
 
+- **Increment 3e (2026-08-12, v4.77.0):** general (tau,sigma,H,j) ordered-xi assembly loop BUILT; <=1.0e-13 vs nested quadrature incl. p1!=p2, still weight 1. Exchange class closed-form. Never yet used end-to-end on a molecule. See docs/neumann_general_m_build_plan.md §8.5.5.
 - **Increment 3d (2026-08-12, v4.77.0):** sigma != 0 does NOT break weight 1 -- d^sigma Q_tau poles are absorbed exactly, by the TRIANGLE INEQUALITY (H-|s| = (|m_a|+|m_b|-|m_a-m_b|)/2 >= 0). Named risk CLOSED. See debug/inc3d_sigma_pole_probe.py.
 - **Increment 3c / periods (2026-08-12, v4.77.0):** the ordered xi integral CLOSES, at **weight 1** ({exp, E_1, log, gamma}; no dilogarithm) -- validated 6.3e-16 at sigma=0. Obstruction was assembly, not transcendence. ln and gamma still UNTAGGED. See debug/sprint_inc3c_weight_one_memo.md.
 - **QC-1 compactness NEGATIVE (2026-08-12, v4.77.0):** contraction is free in qubit terms, so contracted Gaussians match Slater at matched M — no qubit/Pauli gain; with sparsity already out, the ERI engine has no established QC advantage. See debug/sprint_qc1_basis_compactness_memo.md.

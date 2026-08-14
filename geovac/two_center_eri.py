@@ -1249,6 +1249,139 @@ def ordered_xi_closed(p1, p2):
     return t1 + t2
 
 
+# ------------------------------------------------------------------------
+# Increment 3e -- the general (tau, sigma, H, j) ordered-xi assembly loop
+# ------------------------------------------------------------------------
+# The last unbuilt piece. No open questions in it: 3c settled the weight, 3d
+# settled the sigma-pole structure, and every primitive it dispatches to is
+# already validated. This is bookkeeping, and it is written as dispatch so it
+# stays that way.
+#
+# The outer integrand reduces to terms of the shape
+#
+#     coeff * x^k * e^{-lambda x} * {1, Q_0(x), E_1(a(x-1)), E_1(a(x+1))}
+#
+# and under t = x - 1 each of those four maps onto an existing primitive:
+#
+#     1               -> upper_integral(n, lambda, 0)
+#     Q_0(x)          -> [log_shift_moment(n,lambda,2) - log_moment(n,lambda)]/2
+#     E_1(a(x-1))     -> e1_moment(n, lambda, a, oo)
+#     E_1(a(x+1))     -> e1_moment_shifted(n, lambda, a, 2, oo)
+#
+# Q_0 is carried as an OPAQUE FUNCTION until that final substitution, for the
+# reason recorded on Q_tau_sigma_split: handing sympy the logarithm early is how
+# this went wrong twice.
+
+_Q0 = sp.Function("Q0")
+
+
+def _q0_moment_symbolic(n: int, a, c):
+    """int_c^oo xi^n e^{-a xi} Q_0(xi) dxi with c symbolic.
+
+    By parts against v = -int_xi^oo, using Q_0' = -1/(xi^2-1):
+
+        = Q_0(c) U(n,a,c) - int_c^oo U(n,a,xi)/(xi^2-1) dxi
+
+    and w = xi -+ 1 turns the second term into incomplete-gamma pieces whose
+    j = 0 members are E_1(a(c-1)) and E_1(a(c+1)).
+    """
+    out = _Q0(c) * upper_integral(n, a, c)
+    for k in range(n + 1):
+        coef = sp.factorial(n) / (sp.factorial(k) * a ** (n - k + 1))
+        minus = sum(sp.binomial(k, j) * upper_integral(j - 1, a, c - 1)
+                    for j in range(k + 1)) * sp.exp(-a)
+        plus = sum(sp.binomial(k, j) * (-1) ** (k - j)
+                   * upper_integral(j - 1, a, c + 1)
+                   for j in range(k + 1)) * sp.exp(a)
+        out -= coef * (minus - plus) / 2
+    return out
+
+
+def _poly_terms(expr, v):
+    """[(coeff, power)] for a polynomial in v, asserting no negative powers."""
+    out = []
+    for term in sp.Add.make_args(sp.expand(expr)):
+        c, e = term.as_coeff_exponent(v)
+        assert e >= 0 and int(e) == e, f"non-polynomial power {e} in {term}"
+        out.append((c, int(e)))
+    return out
+
+
+def ordered_xi_general(tau: int, sigma: int, H1: int, H2: int,
+                       j1: int, j2: int, p1, p2):
+    """The ordered xi double integral in closed form, for general parameters.
+
+        int_1^oo int_1^oo  xi1^j1 (xi1^2-1)^H1  xi2^j2 (xi2^2-1)^H2
+                           e^{-p1 xi1 - p2 xi2}
+                           D^P_tau(xi_<) D^Q_tau(xi_>)  dxi1 dxi2
+
+    with D^P = d^sigma P_tau/dxi^sigma and D^Q = d^sigma Q_tau/dxi^sigma.
+    Requires H2 >= sigma and H1 >= sigma, which the triangle inequality
+    guarantees for physical (m_a, m_b) -- see Q_tau_sigma_split.
+    """
+    x, t = sp.Symbol("x", positive=True), sp.Symbol("t", positive=True)
+    Pp = sp.diff(sp.legendre(tau, xi_s), xi_s, sigma) if sigma         else sp.legendre(tau, xi_s)
+    Qa, Qb = Q_tau_sigma_split(tau, sigma)
+
+    def side(j, H, poly):
+        return sp.expand(sp.cancel(sp.together(
+            xi_s ** j * (xi_s ** 2 - 1) ** H * poly)))
+
+    B_P = side(j2, H2, Pp)          # electron 2, P branch
+    B_Qa = side(j2, H2, Qa)         # electron 2, Q branch, log part
+    B_Qb = side(j2, H2, Qb)         # electron 2, Q branch, rational part
+
+    # inner integrals as functions of the outer variable x
+    I_lo = sum(c * (upper_integral(k, p2, sp.Integer(1)) - upper_integral(k, p2, x))
+               for c, k in _poly_terms(B_P, xi_s))
+    I_hi = sum(c * _q0_moment_symbolic(k, p2, x) for c, k in _poly_terms(B_Qa, xi_s))
+    I_hi += sum(c * upper_integral(k, p2, x) for c, k in _poly_terms(B_Qb, xi_s))
+
+    A_P = side(j1, H1, Pp).subs(xi_s, x)
+    A_Qa = side(j1, H1, Qa).subs(xi_s, x)
+    A_Qb = side(j1, H1, Qb).subs(xi_s, x)
+    outer = sp.expand(sp.exp(-p1 * x) * (
+        (A_Qa * _Q0(x) + A_Qb) * I_lo + A_P * I_hi))
+
+    # --- dispatch: substitute t = x - 1 and route each term to its primitive
+    total = sp.Integer(0)
+    for term in sp.Add.make_args(sp.expand(outer.subs(x, t + 1))):
+        coeff, power, decay, kind, rate = sp.Integer(1), 0, sp.Integer(0), None, None
+        for f in sp.Mul.make_args(term):
+            if f == t:
+                power += 1
+            elif f.is_Pow and f.base == t:
+                power += int(f.exp)
+            elif isinstance(f, sp.exp):
+                arg = sp.expand(f.args[0])
+                d = -sp.diff(arg, t)
+                decay += d
+                coeff *= sp.exp(sp.expand(arg + d * t))
+            elif f.func is _Q0:
+                assert kind is None, "two transcendental factors in one term"
+                kind = "q0"
+            elif f.func is sp.expint and f.args[0] == 1 and f.args[1].has(t):
+                assert kind is None, "two transcendental factors in one term"
+                arg = sp.expand(f.args[1])
+                rate = sp.simplify(sp.diff(arg, t))
+                shift = sp.simplify(arg / rate - t)
+                kind = "e1" if shift == 0 else "e1s"
+            else:
+                coeff *= f
+        assert not coeff.has(t), f"failed to separate t in {term}"
+        n = int(power)
+        if kind is None:
+            total += coeff * upper_integral(n, decay, sp.Integer(0))
+        elif kind == "q0":
+            total += coeff * (log_shift_moment(n, decay, sp.Integer(2))
+                              - log_moment(n, decay)) / 2
+        elif kind == "e1":
+            total += coeff * e1_moment(n, decay, rate, sp.oo)
+        else:
+            total += coeff * e1_moment_shifted(n, decay, rate, shift, sp.oo)
+    return total
+
+
 # ------------------------------------------------- independent numeric references
 
 def plm_signed(L: int, M: int, u):

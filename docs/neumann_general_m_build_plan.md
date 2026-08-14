@@ -570,9 +570,33 @@ gamma Phase 0-e met at the xi = 1 endpoint, reached without forming the
 divergence. Note xi = 1 is the DEGENERATE ellipse, i.e. the internuclear axis, so
 gamma enters at the axis: an observation-side (Layer 2) feature.
 
-**SCOPE.** ~~Established at sigma = 0 only.~~ **CLOSED by 3d below (2026-08-12):
-sigma != 0 stays at weight 1.** General (tau, j, H) is assembly over existing
-primitives -- nobody has built the loop.
+**SCOPE.** ~~Established at sigma = 0 only.~~ **CLOSED by 3d (sigma) and 3e
+(general tau, j, H) below, both 2026-08-12.** The exchange class's ordered xi
+integral is now closed-form for general parameters; see §8.5.5.
+
+### 8.5.5 Increment 3e - the general assembly loop, BUILT (2026-08-12)
+
+`ordered_xi_general(tau, sigma, H1, H2, j1, j2, p1, p2)`. The last unbuilt piece
+of increment 3, and it contained no open questions: 3c settled the weight, 3d the
+sigma-pole structure, and every primitive it dispatches to was already validated.
+Written as dispatch so it stays that way -- the outer integrand reduces to
+
+    coeff * x^k * e^{-lambda x} * {1, Q_0(x), E_1(a(x-1)), E_1(a(x+1))}
+
+and under t = x - 1 each of the four routes to an existing moment.
+
+Validated against direct nested quadrature at **<= 1.0e-13** over tau <= 3,
+sigma <= 2, H <= 2, j <= 1, **including p1 != p2**; reproduces 3c's hand-built
+tau = 0 form exactly; symbolic content still {exp, expint, log} + EulerGamma, so
+**weight 1 holds for general parameters**.
+
+Q_0 is carried as an OPAQUE FUNCTION until the final substitution, for the reason
+recorded on `Q_tau_sigma_split`: handing sympy the logarithm early is how this
+went wrong twice in 3d.
+
+**Status: the exchange class's ordered xi integral is closed-form, general.**
+What has never been done is using the engine end to end on a molecule -- see
+§8.6.
 
 ### 8.5.4 Increment 3d - sigma != 0 does NOT break weight 1. Named risk CLOSED.
 
