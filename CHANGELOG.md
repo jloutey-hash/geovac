@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.77.0] - 2026-08-12
+
+**Two-center ERI engine: three of four classes closed in exact form.** First
+resume of work after the v4.76.0 freeze (local only; not released). Supplies most
+of the engine Paper 58 named as its natural follow-on. Owning doc:
+`docs/neumann_general_m_build_plan.md`.
+
+### Added
+- **(AA|BB) in closed form and ELEMENTARY** (increments 1c). Not merely equal to the textbook VB `J` integral numerically — it *simplifies to it term by term*, `(1/R)[1 − e^{−2R}(1 + 11R/8 + 3R²/4 + R³/6)]`, i.e. the 1951-era result reproduced by derivation with the unobtainable 1954 errata still off the critical path. Five validation legs, worst 4.2e-14 on the machine-precision ones. The winning move was reformulation, not effort: computing `V_A` first splits a regular function into two individually singular pieces whose divergences cancel — a shell-kernel formulation never generates them.
+- **Hybrid class (AA|AB), (AB|BB) in closed form for ANY l** (increment 2), carrying `{E₁, ln}`. Validated ≤3.5e-14; the two routes (direct `V_L` for s-type pairs, shells otherwise) agree **bit-exactly** on their overlap — independent derivations of the same number. New validated primitives: `e1_moment` (branch-safe in sign(a+c) via `Ein`, needed because the mirror class (AB|BB) drives that rate negative), `e1_moment_shifted`, `finite_power_exp`.
+- **Exchange class (AB|AB) assembled for general (l, m)** (increments 3a/3b), η half closed, ordered ξ double integral still numerical. σ≠0 agrees with McMurchie–Davidson to 7.5e-8. 3a verified the load-bearing structural claim — the two-center orbital product is polynomial in (ξ,η) — for general (n,l,m) at 1.7e-18; it had only ever been checked for 1s, where it is trivial.
+- `tests/test_two_center_eri_aabb.py` grown 22 → 82 tests.
+
+### Changed
+- **Paper 58**: records the follow-on's per-class outcome and states explicitly that it does **NOT** upgrade the `g` row — no re-census was run, and zero-*decidability* exists only where a closed form does. Backing table gains one row; the `g` row's own tier is unchanged (COUNTED / corrob.).
+
+### Corrected
+- **The E₁ seed is NOT in the (AA|BB) class.** Increment 1's "coherence result" measured it by forcing the 1s×1s radial through `V_L_radial` at L=2 — a multipole that product does not have. On the physical support the exponent is ≥ 1 always (146 terms to n=4, zero negatives). The exact reference had been saying so all along: `J(R)` is purely exponential-polynomial.
+- **The hybrid seed set is `{E₁, ln}`, not `{E₁}`.** Phase 0-h verified the outer closure at one endpoint; the other passes through zero at the coincidence `r_B = R`, where E₁ is log-singular and not E₁-closed. γ cancels; a logarithm survives.
+- **Plan §7's stated reason for τ non-termination was wrong.** `cos θ_A` never appears alone, only inside the solid harmonic, which is polynomial. The real criterion is the η exponential: **τ terminates ⟺ the two centres carry the same orbital exponent** — which also explains Phase 0 Q1 instead of leaving it basis-specific.
+- **Plan §8.3's obstruction does not apply to the hybrid class**: the reduction never expands the two-center density about either nucleus, so its non-terminating angular content is avoided rather than defeated.
+- **Gate (d) is mis-priced by ~70× for two-center overlap densities.** The 6-Gaussian default gives 6.9e-05 where the fits promise ~1e-6; use `n_gauss ≥ 10` for classes 2–3. This nearly produced a false negative — a correct reduction first read as FAILED.
+
+### Closed
+- The deliverable framing "exact up to one known seed" is dead: the seed set **grows** with class difficulty (none / {E₁,ln} / {E₁,ln,γ}). CLAUDE.md §3 row added. Phase 0 Q2's conclusion was about the Neumann *route*, not each class's own support.
+
+### Scope
+- **Two-center only.** Prolate spheroidal is defined by two foci; axial symmetry is not the blocker (BeH₂ is linear and still unreachable). Measured on BeH₂: quartets spanning ≤2 centers are 82.5% by count / 94.4% by Σ|g|, but the 3-center residual is bond-scale (largest 0.102 Ha), so it cannot be dropped.
+- Sparsity is **unchanged** — the gain is accuracy/qubit, not Pauli-terms/qubit, and the compactness claim remains unquantified.
+
 ## [4.76.0] - 2026-07-09
 
 **Close-out: the freeze-point release.** PI judgment: the research program is complete — the equivalence program succeeded, the walls are named, whole-corpus QA is certified. This release closes the repo as **frozen, not abandoned** (resumable; see `docs/project_closeout_plan.md` §C-pre for the add-a-paper resume protocol) and ships the distribution fix that was the close-out's second workstream. Memo: `debug/sprint_closeout_distribution_memo.md`.
