@@ -783,3 +783,43 @@ def test_ordered_xi_general_stays_weight_one():
     names = {type(f).__name__ for f in e.atoms(sp.Function)}
     assert names <= {"exp", "expint", "log"}, f"unexpected {names}"
     assert not (names & {"polylog", "dilog", "zeta"}), "weight-2 object appeared"
+
+
+def test_aabb_closed_form_is_lindemann_separable():
+    """(AA|BB) is zero-DECIDABLE by the same argument that decides S and h.
+
+    Paper 58's S and h rows are decided because each entry is
+    e^{-p}(U e^q + V e^{-q}) with U, V exact rationals, so it vanishes iff
+    U = V = 0 by Lindemann. This pins the analogous structure for (AA|BB):
+    every pi CANCELS -- the harmonic normalisations against the 4pi/(2L+1) of
+    the multipole potential -- leaving A_0(R) + sum_j A_j(R) e^{-lambda_j R}
+    with A_j rational and lambda_j rational. For algebraic R the exponents are
+    distinct algebraic numbers, so {1, e^{-lambda_j R}} is linearly independent
+    over the algebraics and the sum vanishes iff every A_j does.
+
+    The load-bearing part is that the pi power is COMMON across terms. If it
+    mixed, vanishing would need independence of pi against the exponentials,
+    which is open (Schanuel territory) rather than classical.
+    """
+    from geovac.two_center_eri import aabb_closed_form, R_s
+    Z2_, Z3_ = Fraction(2), Fraction(3)
+    for args in ((Z1, (1, 0, 0), (1, 0, 0), Z1, (1, 0, 0), (1, 0, 0)),
+                 (Z3_, (2, 1, 0), (2, 1, 0), Z1, (1, 0, 0), (1, 0, 0)),
+                 (Z3_, (2, 1, 1), (2, 1, 1), Z2_, (2, 1, 0), (2, 1, 0))):
+        e = sp.expand(aabb_closed_form(*args))
+        powers = set()
+        for term in sp.Add.make_args(e):
+            pw = 0
+            for f in sp.Mul.make_args(term):
+                if f == sp.pi:
+                    pw += 1
+                elif f.is_Pow and f.base == sp.pi:
+                    pw += f.exp
+            powers.add(sp.nsimplify(pw))
+        assert len(powers) == 1, f"pi power mixes across terms: {powers}"
+        # every exponential rate rational, so the exponents are algebraic in R
+        for f in e.atoms(sp.exp):
+            rate = sp.simplify(-sp.diff(f.args[0], R_s))
+            assert rate.is_rational, f"non-rational exponential rate {rate}"
+        assert not e.atoms(sp.expint), "E_1 present -- not Lindemann-separable"
+        assert not e.atoms(sp.log), "log present -- not Lindemann-separable"

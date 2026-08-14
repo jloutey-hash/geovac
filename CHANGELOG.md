@@ -32,6 +32,8 @@ of the engine Paper 58 named as its natural follow-on. Owning doc:
 - **Gate (d) is mis-priced by ~70× for two-center overlap densities.** The 6-Gaussian default gives 6.9e-05 where the fits promise ~1e-6; use `n_gauss ≥ 10` for classes 2–3. This nearly produced a false negative — a correct reduction first read as FAILED.
 
 ### Closed
+- **Paper 58 `(AA|BB)` is zero-DECIDABLE** — a positive result, not a hedge. Every π cancels from the closed form (harmonic normalisations against the multipole potential's 4π/(2L+1)), leaving `A_0(R) + Σ A_j(R) e^{−λ_j R}` with `A_j` rational and `λ_j` rational. For algebraic R the exponents are distinct algebraic numbers, so Lindemann–Weierstrass gives linear independence and the entry vanishes iff every coefficient does — **the same separation the paper's MEASURED S and h rows already use**. Load-bearing detail: the π power must be COMMON across terms (it is, and is zero); if it mixed, decidability would need π-vs-exponential independence, which is open. Pinned by `test_aabb_closed_form_is_lindemann_separable`.
+- **Consequence for the paper's own sector:** the classes carrying residual l-selection — (AA|AA), (BB|BB), (AA|BB) — are exactly the ones now decidable. The sector Theorem `abelian_residue` makes a positive prediction about is no longer merely countable. The census has not been run, so the `g` row's tier is unchanged; what changed is that running it would now yield decided zeros rather than thresholded ones.
 - The deliverable framing "exact up to one known seed" is dead: the seed set **grows** with class difficulty (none / {E₁,ln} / {E₁,ln,γ}). CLAUDE.md §3 row added. Phase 0 Q2's conclusion was about the Neumann *route*, not each class's own support.
 
 ### Scope

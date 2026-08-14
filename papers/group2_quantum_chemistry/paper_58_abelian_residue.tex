@@ -209,8 +209,9 @@ independent engines: the one-center classes, $(AA|BB)$, and the hybrid
 pair $(AA|AB)$/$(AB|BB)$.  For the exchange class $(AB|AB)$---Ruedenberg's
 own subject~\cite{ruedenberg1951}---the assembly is validated for general
 $(l,m)$ and its ordered radial double integral, the last non-closed step,
-now closes as well; what remains unbuilt is only the assembly loop over
-general $(\tau, j, H)$, which runs over primitives already in hand.
+now closes as well, for general $(\tau, \sigma, H, j)$ and unequal
+exponents (agreement with nested quadrature at $10^{-13}$).  All four
+classes therefore have closed-form machinery.
 
 \begin{center}
 \begin{tabular}{lll}
@@ -219,8 +220,7 @@ class & closed form & transcendental content \\
 \hline
 one-center, $(AA|BB)$ & yes & none---elementary \\
 $(AA|AB)$, $(AB|BB)$  & yes & $\{E_1, \ln\}$ \\
-$(AB|AB)$             & ordered integral yes; & $\{E_1, \ln, \gamma\}$ \\
-                      & general loop unbuilt & \\
+$(AB|AB)$             & yes & $\{E_1, \ln, \gamma\}$ \\
 \hline\hline
 \end{tabular}
 \end{center}
@@ -246,14 +246,39 @@ throughout.
 First, no re-census has been run with the new machinery, so the counted
 figures stand exactly as counted.  Second, and structurally, what the row
 needs is zero-\emph{decidability}, and that is available only where a
-closed form exists.  $(AA|BB)$ is elementary, so its vanishing is a
-question about a finite combination of exponentials with algebraic
-coefficients---the same shape as the $S$ and $h$ rows, though we have not
-carried the separation argument through.  The hybrid classes would be
-decidable subject to an independence argument over $\{E_1, \ln\}$, and the
-exchange class subject to one over $\{E_1, \ln, \gamma\}$.  None of those
-three arguments has been carried through, and until they are, the $g$
-row's zeros remain counted rather than decided.
+closed form exists.
+
+For $(AA|BB)$ that argument now goes through, and by exactly the route the
+$S$ and $h$ rows already use.  Every $\pi$ cancels from the closed form---
+the harmonic normalisations against the $4\pi/(2L+1)$ of the multipole
+potential---leaving
+
+\[
+  (ab|cd) \;=\; A_0(R) \;+\; \sum_j A_j(R)\, e^{-\lambda_j R},
+\]
+
+with $A_j$ rational functions and $\lambda_j$ rational.  Checked on
+$(1s\,1s|1s\,1s)$, $(2p_0 2p_0|1s\,1s)$ and $(2p_{+1} 2p_{+1}|2p_0 2p_0)$
+across $Z$ combinations: the $\pi$ power is common (indeed zero) in every
+term.  For algebraic $R$ the exponents $-\lambda_j R$ are distinct
+algebraic numbers, so by Lindemann--Weierstrass the family
+$\{1, e^{-\lambda_j R}\}$ is linearly independent over the algebraic
+numbers and the expression vanishes \emph{iff} every $A_j$ does.  That is
+the same separation the $S$ and $h$ rows are decided by, applied to a
+class that now has the closed form to support it.
+
+The hybrid and exchange classes do not follow: they carry
+$\{E_1, \ln\}$ and $\{E_1, \ln, \gamma\}$ respectively, and would need an
+independence argument over those seeds, which we have not attempted.
+
+\emph{Consequence for this paper's own sector.}  The classes carrying
+residual $l$-selection---$(AA|AA)$, $(BB|BB)$, $(AA|BB)$---are precisely
+the ones that are now zero-\emph{decidable}: the one-centre classes
+trivially, $(AA|BB)$ by the argument above.  So the sector that
+Theorem~\ref{thm:abelian_residue} makes a positive prediction about is no
+longer merely countable but decidable.  The census over it has not been
+run, so the $g$ row's tier is unchanged; what has changed is that running
+it would now produce decided zeros rather than thresholded ones.
 
 We state the outlook carefully, because the natural pessimistic reading is
 wrong.  The obstruction is \emph{not} that the seed set escalates: it is a
@@ -278,6 +303,24 @@ Theorem~\ref{thm:abelian_residue} predicts residual $l$-selection to
 survive is now exactly computable, and computable with no transcendental
 seed at all, so a census over it would test the theorem's positive content
 directly rather than by counting.
+
+\emph{The two halves compose.}  The census machinery of
+Sec.~\ref{sec:census} supplies exact two-centre $S$ and $h$---the
+Mulliken/Ruedenberg auxiliary route and the hydrogenic eigen-trick---and
+named the missing two-centre electron-repulsion engine as its one gap.
+With that engine supplied, the three ingredients now compose into a
+complete calculation carrying no Gaussian fit anywhere.  Verified on
+$\mathrm{H}_2$ at $R = 1.4$~bohr in a $1s$-per-centre basis: total FCI
+energy $-1.106556606091$~Ha.  Evaluating the identical basis through
+Gaussian-fitted integrals converges monotonically onto that value as the
+fit deepens ($2.7\times10^{-3}$, $3.0\times10^{-4}$, $4.5\times10^{-5}$,
+$8.0\times10^{-6}$, $1.9\times10^{-6}$~Ha at $4, 6, 8, 10, 12$
+primitives), confirming the native value is the exact one.  The residual
+sits in $h$, not in $g$: the electron-repulsion tensors agree to
+$1.9\times10^{-8}$ and the overlaps to $1.5\times10^{-8}$ at ten
+primitives, while the one-electron terms lag because kinetic energy probes
+the nuclear cusp, where a sum of Gaussians converges slowly by
+construction.
 
 Subject to that distinction, the electron-repulsion tensor is $29.4\%$
 permitted-dense genuinely against $2.1\%$ for the builder.
