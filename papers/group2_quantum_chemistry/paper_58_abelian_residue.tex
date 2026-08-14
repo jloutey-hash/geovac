@@ -274,11 +274,46 @@ independence argument over those seeds, which we have not attempted.
 \emph{Consequence for this paper's own sector.}  The classes carrying
 residual $l$-selection---$(AA|AA)$, $(BB|BB)$, $(AA|BB)$---are precisely
 the ones that are now zero-\emph{decidable}: the one-centre classes
-trivially, $(AA|BB)$ by the argument above.  So the sector that
-Theorem~\ref{thm:abelian_residue} makes a positive prediction about is no
-longer merely countable but decidable.  The census over it has not been
-run, so the $g$ row's tier is unchanged; what has changed is that running
-it would now produce decided zeros rather than thresholded ones.
+trivially---they are exact rationals---and $(AA|BB)$ by the argument
+above.  So the sector that Theorem~\ref{thm:abelian_residue} makes a
+positive prediction about is no longer merely countable but decidable.
+
+\emph{And the decision has now been run on $(AA|BB)$.}  On the census
+configuration, that block holds $625$ entries of which the counting rules
+permit $195$.  Deciding each one by the separation above---grouping the
+closed form by exponential rate and asking whether every rational
+coefficient vanishes---gives
+
+\begin{center}
+\begin{tabular}{lr}
+\hline\hline
+outcome & count \\
+\hline
+decided nonzero & 195 \\
+zero, vanishing Gaunt coefficient & 0 \\
+zero, accidental (Gaunt nonzero, radial sum cancels) & 0 \\
+\hline\hline
+\end{tabular}
+\end{center}
+
+\textbf{All $195$ permitted entries are genuinely nonzero.}  There are no
+accidental zeros and no symmetry zeros that the counting missed, so on
+this block the counted density is not an overcount but is \emph{exactly}
+the true density.  This is a decision rather than a measurement: no
+threshold is involved anywhere, and it upgrades the block from
+\textsc{counted} to \textsc{decided}.
+
+It also settles, for this block, the reading the Gaussian corroboration
+could only suggest.  That check found $29.8\%$ against $29.4\%$ counted
+and attributed the gap to the real-Cartesian versus complex-$m$ basis
+convention rather than to over-permissive counting; the decided census
+confirms there is no over-permissiveness here to find.
+
+The $g$ row's overall tier is nonetheless unchanged, because $(AA|BB)$ and
+the one-centre classes together are only the $20.5\%$ that carries
+residual $l$-selection.  The three genuinely cross classes---$80\%$ of the
+tensor---remain counted, and will until an independence argument over
+$\{E_1, \ln, \gamma\}$ is available.
 
 We state the outlook carefully, because the natural pessimistic reading is
 wrong.  The obstruction is \emph{not} that the seed set escalates: it is a

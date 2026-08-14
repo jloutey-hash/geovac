@@ -823,3 +823,46 @@ def test_aabb_closed_form_is_lindemann_separable():
             assert rate.is_rational, f"non-rational exponential rate {rate}"
         assert not e.atoms(sp.expint), "E_1 present -- not Lindemann-separable"
         assert not e.atoms(sp.log), "log present -- not Lindemann-separable"
+
+
+def test_decided_census_aabb_block_has_no_accidental_zeros():
+    """Step 2: every permitted (AA|BB) entry is DECIDED nonzero.
+
+    Paper 58's `g` row is counted -- it says which entries the rules PERMIT,
+    never whether each permitted entry is nonzero, and its Gaussian corroboration
+    decides zeros by a 1e-10 float threshold. With (AA|BB) in closed form and
+    Lindemann-separable, each entry can be DECIDED: group by exponential rate,
+    ask whether every rational coefficient vanishes.
+
+    Result on the census configuration (Z_A=3, Z_B=1, n_max=2, R=3): all 195
+    permitted entries are genuinely nonzero -- no accidental zeros, no symmetry
+    zeros the counting missed. So the counted density is exactly the true
+    density on this block.
+
+    Sampled here (the full 195-entry sweep is ~110 s and lives in
+    debug/step2_decided_census.py); the sample is chosen to include l>0 on both
+    sides and m != 0, where an accidental cancellation would be most likely.
+    """
+    from geovac.two_center_eri import aabb_closed_form, R_s
+    Z3_ = Fraction(3)
+    sample = [((1, 0, 0), (1, 0, 0), (1, 0, 0), (1, 0, 0)),
+              ((2, 1, 0), (2, 1, 0), (2, 1, 0), (2, 1, 0)),
+              ((2, 1, 1), (2, 1, 0), (2, 1, 0), (2, 1, 1)),
+              ((1, 0, 0), (2, 1, 1), (2, 1, 1), (2, 0, 0))]
+    for a, b, c, d in sample:
+        e = aabb_closed_form(Z3_, a, b, Z1, c, d)
+        groups: dict = {}
+        for term in sp.Add.make_args(sp.expand(e)):
+            rate, coeff = sp.Integer(0), sp.Integer(1)
+            for f in sp.Mul.make_args(term):
+                if isinstance(f, sp.exp):
+                    arg = sp.expand(f.args[0])
+                    dd = -sp.diff(arg, R_s)
+                    rate += dd
+                    coeff *= sp.exp(sp.expand(arg + dd * R_s))
+                else:
+                    coeff *= f
+            k = sp.nsimplify(rate)
+            groups[k] = groups.get(k, 0) + coeff
+        nonzero = any(sp.simplify(cc.subs(R_s, 3)) != 0 for cc in groups.values())
+        assert nonzero, f"({a}{b}|{c}{d}) decided ZERO -- an accidental zero"
