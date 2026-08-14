@@ -4,8 +4,11 @@
 including Ruedenberg Part II exchange). Increments 1 / 1b / **1c DONE** - the
 (AA|BB) class is closed-form and **elementary** (no E_1, no log); see section 9.
 **Increment 2 DONE** - the hybrid class is closed-form for ANY l, carrying
-{exp, E_1, log}; see section 8.4.2. **Class 3 (exchange) is scoped GO but
-UNBUILT**, and its scoping covers sigma = 0 / 1s only (section 8.5).
+{exp, E_1, log}; see section 8.4.2. **Class 3 (exchange): 3a/3b/3c DONE** -
+assembled for general (l, m) with the eta half closed (8.5.2), and the ordered xi
+integral -- the last numerical step -- now CLOSES at **weight 1** (8.5.3),
+verified at sigma = 0. Remaining: the sigma != 0 pole structure at xi = +-1
+(argued regular, NOT verified) and assembly over general (tau, j, H).
 The Hylleraas-extension route (sections 1-3) is superseded
 and kept only as the record of why. Phase 0 Q2 (seed set) carries over intact for
 the Neumann route it was derived on. Written 2026-08-11 on `work/sparsity-boundary`.
