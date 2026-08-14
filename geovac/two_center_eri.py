@@ -1041,7 +1041,8 @@ def _deriv(expr, mu: int):
     return sp.diff(expr, _z, mu) if mu else expr
 
 
-def exchange_value(ZA, oa, ob, ZB, oc, od, Rv: float, tau_max: int = 10):
+def exchange_value(ZA, oa, ob, ZB, oc, od, Rv: float, tau_max: int = 10,
+                   exact_xi: bool = False):
     """Exchange (ab|cd): a,c on A; b,d on B. eta half closed, xi half numerical."""
     from scipy import integrate
     sig1 = oa[2] - ob[2]
@@ -1090,6 +1091,23 @@ def exchange_value(ZA, oa, ob, ZB, oc, od, Rv: float, tau_max: int = 10):
         Dpf = sp.lambdify(_z, Dp, "numpy")
         Dqf = sp.lambdify(_z, Dq, "numpy")
 
+        _xi_cache: dict = {}
+
+        def xi_double_exact(j1, j2):
+            """The ordered xi integral in CLOSED FORM (increment 3e), cached.
+
+            Same object as the numerical `xi_double` below, evaluated from
+            `ordered_xi_general` instead of nested quadrature. Cached because the
+            symbolic build is the expensive part and (j1, j2) repeat across the
+            coefficient loops.
+            """
+            key = (tau, s, H1, H2, j1, j2)
+            if key not in _xi_cache:
+                _xi_cache[key] = float(sp.re(sp.N(ordered_xi_general(
+                    tau, s, H1, H2, j1, j2, sp.nsimplify(p1f),
+                    sp.nsimplify(p2f)), 30)))
+            return _xi_cache[key]
+
         def xi_double(j1, j2):
             def outer(x1):
                 def lo_int(x2):
@@ -1117,7 +1135,8 @@ def exchange_value(ZA, oa, ob, ZB, oc, od, Rv: float, tau_max: int = 10):
                 if abs(B2[k2]) < 1e-300:
                     continue
                 acc += (float(cc1) * float(cc2) * B1[k1] * B2[k2]
-                        * xi_double(j1, j2))
+                        * (xi_double_exact(j1, j2) if exact_xi
+                           else xi_double(j1, j2)))
 
         w = ((-1) ** sig1 * (2 * tau + 1)
              * float(sp.factorial(tau - s) / sp.factorial(tau + s)) ** 2)
