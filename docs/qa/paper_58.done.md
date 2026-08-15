@@ -3,16 +3,17 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-58 scope + deltas + watch-notes.
 
-> **STATUS: CERTIFIED ✅ 2026-08-14 (PI direction — "good enough for certification").**
-> First **single-paper** `/qa` target. Certified on a **CLEAN DELTA**, not a machine-
-> emitted full-run PASS: the first-cert FULL run (4 calibrated dimensions, sensitivity
-> 6/6, on the pre-Avery-edit paper) + the calibrated delta-verification pass (on the
-> Avery-scoping + citation additions) both returned fully-calibrated panels, and every
-> verified finding was remediated and re-verified. **The final FULL certifying run on
-> the combined text was WAIVED by PI judgment.** Honest cap: no single FULL run covered
-> the final combined state; the cert rests on (full calibrated run of the base) + (full
-> calibrated delta of the additions) + an all-green deterministic layer (C10–C18). Paper
-> 58 (Aug 10) postdates the 2026-06-28 group2 cert, so this is its own cert record.
+> **STATUS: CERTIFIED ✅ 2026-08-15 — FULL certifying run PASS.** First single-paper
+> `/qa` target. Certified by a **full calibrated run over the final combined text**
+> (Paper 58 + the group2 synthesis's Paper-58 content): the panel was **fully calibrated**
+> (sensitivity **6/6** planted seeds caught — 2 code, 2 citation, 1 claims, 1 synthesis;
+> specificity clean, no known-good control false-flagged), with **zero verified material
+> defects** beyond the seeds across all four dimensions (code / claims / citations /
+> synthesis) plus the completeness-critic, on an all-green deterministic layer (C10–C18).
+> This **discharges the 2026-08-14 honest cap**: the earlier cert was on a clean delta with
+> the full run PI-waived; the full run has now been run and PASSED, so no single-FULL-run
+> gap remains. Only NIT-tier residue survives (see change log). Paper 58 (Aug 10) postdates
+> the 2026-06-28 group2 cert; this is its own cert record.
 
 **Scope (single-paper):**
 - **Paper 58** — `papers/group2_quantum_chemistry/paper_58_abelian_residue.tex`
@@ -158,6 +159,17 @@ Sonnet) get 2 seeds each. Answer key → `debug/qa/paper_58_seed_key.json`.
   Standing follow-up (PI-noted, not blocking): sweep the corpus's Avery/hyperspherical
   citations (Papers 16/34, other syntheses) for the same `avery2004` composite that this
   run found had propagated from the certified group2 synthesis.
+- 2026-08-15 — **FULL certifying run = PASS** (the PI-waived full run, now run). Fresh
+  seeded worktree over the final combined text; 6 seeds (2 code / 2 citation / 1 claims /
+  1 synthesis) all caught, specificity clean; **zero verified material defects** beyond
+  seeds across code / claims / citations / synthesis + completeness-critic; deterministic
+  C10–C18 all green. Honest cap DISCHARGED. NIT-tier residue (fix-on-sight, non-blocking):
+  (a) the H2 native-FCI value and the 195 census total are backed only by OWED `debug/`
+  drivers (matrix-logged), not pytest asserts — recommend pinning both in `tests/`;
+  (b) uncited provisional benchmarks (D_e = 1.961 eV flagged provisional; Clementi
+  −161.12); (c) the `(ab|cd)` closed-form display equation lacks a `\label` (§13.4a);
+  (d) "conservation law" / "readable in advance" rhetoric slightly ahead of its hedge.
+  Seed key `debug/qa/paper_58_full_seed_key.json`; worktree removed, no seed leaked.
 - 2026-08-14 — **FROZEN (PI: Path A + "freeze as written").** Review begins:
   deterministic `--gate group2` on the real corpus; seeded worktree + panel for the
   four LLM dimensions + completeness-critic.
