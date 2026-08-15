@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [4.80.0] - 2026-08-15
+
+**`/qa paper 58` — first single-paper certification, Avery audience-scoping, and a contained citation-composite fix.** The `/qa` gate run on Paper 58 ("Angular Sparsity Is an Atomic-Sector Property"), certified by PI direction on a clean delta. Canonical record: `docs/qa/paper_58.done.md` (the frozen DoD + full run chronicle).
+
+### Added
+
+- **`/qa paper 58` certification (first single-paper target).** Frozen DoD `docs/qa/paper_58.done.md` (Path A). First-cert FULL run (4 calibrated dimensions, sensitivity 6/6, specificity clean) + a calibrated delta-verification pass on the later additions; all-green deterministic layer (C10–C18). Certified **by PI direction** on the clean delta; the final FULL certifying run on the combined text was **waived by PI judgment** — honest cap recorded in the DoD STATUS (not a machine-emitted full-run PASS).
+- **Avery audience-scoping of Paper 58** (per PI review of its fit for James Avery as reader): a lineage paragraph situating GeoVac as the *discrete/combinatorial skeleton* of the Averys' continuous Coulomb-Sturmian / hyperspherical-harmonic framework ("GeoVac adds nothing to that continuous apparatus"); the radial-closed-form by-product (weight-one, π-free, no dilogarithm) surfaced into the abstract as the Avery-relevant hook; machinery-vs-insight recalibrated so the borrowed two-center machinery reads as standard and the novelty is the discrete/sparsity reading.
+- **Five citations added to Paper 58, each PM-verified vs primary sources before insertion:** Löwdin 1955 (Phys. Rev. **97**, 1474 — the non-orthogonal cofactor method behind the NaH NOCI result; the already-cited `lowdin1950` is a *different* Löwdin paper), Thom–Head-Gordon 2009 (JCP **131**, 124113) + Sundstrom–Head-Gordon 2014 (JCP **140**, 114103) [NOCI methodology], Barnett–Coulson 1951 (Phil. Trans. R. Soc. A **243**, 221) and Filter–Steinborn 1978 (Phys. Rev. A **18**, 1) [two-center Slater-integral literature].
+
+### Changed / Fixed
+
+- **`avery2004` fabricated-composite citation — fixed in both Paper 58 and the certified group2 synthesis.** The bibitem welded the 2006 book's title ("Generalized Sturmians and Atomic Spectra") onto the 2004 *Adv. Quantum Chem.* **47** article's venue/volume with a wrong page — no single real source matched as printed. Surfaced by the delta citation-reviewer, verified against primary, corrected to the real 2006 World Scientific book (`avery2006`). It had propagated from the June-certified synthesis into Paper 58.
+- **C11 internal-title fixes:** Paper 58's bibitem titles for Papers 19 and 20 were wrong/outdated; corrected to match each paper's `\title` (C11 `--gate group2` re-run PASS).
+- **§I.A polyatomic-extension backing committed + matrix-logged.** The BeH₂/H₂O genuine-integral RHF ladder figures (M=19; geometry error +1.40%/+2.46%; H₂O angle 106.27°) had no committed backing artifact; the Poly-3 sprint driver/data/memo were committed and a `docs/claim_test_matrix.md` row added.
+
+### Closed
+
+- **Paper 58 CERTIFIED** (PI direction, clean delta; full run waived — see DoD honest cap).
+- **Avery / hyperspherical citation sweep — CLEAN.** Corpus-wide check confirmed the `avery2004` composite was *contained* to the synthesis + Paper 58 (both fixed); every other Avery citation (Paper 19's avery2000/2004/2012/2014, Paper 8's `avery_book`, group3 synthesis's `avery_book1989`) is a distinct, real, correctly-attributed work, all PM-verified vs primary.
+
 ## [4.79.0] - 2026-08-13
 
 **Where the two-centre engine stops: the polyatomic scoping.** Diagnostic before
