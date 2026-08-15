@@ -89,6 +89,12 @@ freedom than the runs that failed, which is what makes the inference go
 through.  This localizes W1e to the Hamiltonian specification rather than
 the correlation treatment on this system.  The demonstration deliberately
 forfeits the sparsity: it makes no sparsity claim.
+
+A by-product bears on the continuous theory the census borrows from:\ the
+radial integral at the core of the two-center exchange coupling closes in
+elementary form (weight one, $\pi$-free, no dilogarithm), so the
+$(AA|BB)$ block is not merely counted but \emph{decided}---all $195$
+permitted entries proven nonzero by Lindemann--Weierstrass separation.
 \end{abstract}
 
 \maketitle
@@ -131,6 +137,22 @@ The answer is no, and the reason is group-theoretic rather than technical.
 
 \subsection{A change of method, not a refinement}
 \label{sec:method_break}
+
+\emph{Relation to the continuous theory.}  Evaluating integrals over
+genuine two-center orbital products is, in itself, nothing new:\ it is
+standard Coulomb--Sturmian practice, developed over decades by Avery and
+co-workers on the many-center hyperspherical-harmonic
+foundation~\cite{avery1989, avery2006}, and the framework's cross-center
+one-body couplings are precisely the Shibuya--Wulfman
+integrals~\cite{shibuya1965} of that theory
+(Paper~19~\cite{loutey_paper19}).  \textsc{GeoVac} adds nothing to that
+continuous apparatus.  What is new is not the integrals but the
+\emph{discrete} reading of them:\ which of the continuous theory's
+couplings survive as exact, label-forced zeros when the angular content
+is carried to a qubit Hamiltonian, and which do not.  In that sense this
+paper is the discrete/combinatorial skeleton of a continuous
+subject---the relationship the angular selection rules already bear to
+their Gaunt and Wigner origins, now traced into the two-center case.
 
 It is worth stating plainly what this paper does differently, because the
 step is easy to mistake for an incremental improvement in integral quality.
@@ -206,8 +228,10 @@ not as a result of this paper.
 
 Two-center overlaps at arbitrary $(n, l, m, Z)$ are computed as exact
 rationals via the Mulliken auxiliary functions
-$A_n$/$B_n$~\cite{mulliken1949,roothaan1951}, evaluated in prolate
-spheroidal coordinates where the two-center problem
+$A_n$/$B_n$~\cite{mulliken1949,roothaan1951}---one of several classical
+routes to two-center Slater integrals~\cite{barnett_coulson1951,
+filter_steinborn1978}---evaluated in prolate spheroidal coordinates
+where the two-center problem
 separates~\cite{loutey_paper11}.  Because the result is rational,
 vanishing is \emph{decidable} rather than inferred from a numerical
 tolerance---a property no quadrature scheme can offer, and the reason
@@ -751,8 +775,9 @@ correlation cannot have been what was missing.
 The construction is all-electron 12-electron NaH with
 $\mathrm{Na}\{1s, 2s, 2p \times 3, 3s\}$ and $\mathrm{H}\{1s\}$
 ($M = 7$ spatial orbitals), non-orthogonal determinants built from
-fragment-native orbitals, and general-$N$ non-orthogonal Slater--Condon
-evaluation by L\"owdin cofactors.  Orbital exponents were optimized on
+fragment-native orbitals~\cite{thom2009, sundstrom2014}, and general-$N$
+non-orthogonal Slater--Condon evaluation by L\"owdin
+cofactors~\cite{lowdin1955}.  Orbital exponents were optimized on
 the \emph{isolated} Na atom only ($E(\mathrm{Na}) = -161.0845$~Ha against
 a Clementi minimal-STO reference of $\approx -161.12$), with hydrogen at
 $\zeta = 1$, so the molecular curve is a fragment prediction rather than
@@ -961,6 +986,44 @@ over Cartesian Gaussian functions,''
 E.~Artacho and L.~Mil\'ans del~Bosch, ``Nonorthogonal basis sets in
 quantum mechanics:\ Representations and second quantization,''
 \textit{Phys.\ Rev.\ A}\ \textbf{43}, 5770--5777 (1991).
+
+\bibitem{avery1989}
+J.~Avery, \textit{Hyperspherical Harmonics:\ Applications in Quantum
+Theory} (Kluwer Academic, Dordrecht, 1989).
+
+\bibitem{avery2006}
+J.~E.~Avery and J.~S.~Avery, \textit{Generalized Sturmians and Atomic
+Spectra} (World Scientific, Singapore, 2006).
+
+\bibitem{shibuya1965}
+T.~Shibuya and C.~E.~Wulfman, ``Molecular orbitals in momentum space,''
+\textit{Proc.\ R.\ Soc.\ Lond.\ A}\ \textbf{286}, 376 (1965).
+
+\bibitem{lowdin1955}
+P.-O.~L\"owdin, ``Quantum theory of many-particle systems.\ I.\ Physical
+interpretations by means of density matrices, natural spin-orbitals, and
+convergence problems in the method of configurational interaction,''
+\textit{Phys.\ Rev.}\ \textbf{97}, 1474--1489 (1955).
+
+\bibitem{thom2009}
+A.~J.~W.~Thom and M.~Head-Gordon, ``Hartree--Fock solutions as a
+quasidiabatic basis for nonorthogonal configuration interaction,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{131}, 124113 (2009).
+
+\bibitem{sundstrom2014}
+E.~J.~Sundstrom and M.~Head-Gordon, ``Non-orthogonal configuration
+interaction for the calculation of multielectron excited states,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{140}, 114103 (2014).
+
+\bibitem{barnett_coulson1951}
+M.~P.~Barnett and C.~A.~Coulson, ``The evaluation of integrals occurring
+in the theory of molecular structure.\ Parts I \& II,''
+\textit{Philos.\ Trans.\ R.\ Soc.\ Lond.\ A}\ \textbf{243}, 221--249 (1951).
+
+\bibitem{filter_steinborn1978}
+E.~Filter and E.~O.~Steinborn, ``Extremely compact formulas for molecular
+two-center one-electron integrals and Coulomb integrals over Slater-type
+atomic orbitals,'' \textit{Phys.\ Rev.\ A}\ \textbf{18}, 1 (1978).
 
 \end{thebibliography}
 

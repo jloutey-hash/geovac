@@ -3,11 +3,16 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-58 scope + deltas + watch-notes.
 
-> **STATUS: FROZEN 2026-08-14 (PI direction — Path A, "freeze as written").** The
-> criteria below are the goalposts for this run; no moving in either direction, per
-> the gate's hard rule. First **single-paper** `/qa` target: Paper 58 (dated Aug 10
-> 2026) postdates the group2 certification (2026-06-28) by six weeks, so the group2
-> cert does not cover it and the shared benchmarking/guardrail deltas are re-applied here.
+> **STATUS: CERTIFIED ✅ 2026-08-14 (PI direction — "good enough for certification").**
+> First **single-paper** `/qa` target. Certified on a **CLEAN DELTA**, not a machine-
+> emitted full-run PASS: the first-cert FULL run (4 calibrated dimensions, sensitivity
+> 6/6, on the pre-Avery-edit paper) + the calibrated delta-verification pass (on the
+> Avery-scoping + citation additions) both returned fully-calibrated panels, and every
+> verified finding was remediated and re-verified. **The final FULL certifying run on
+> the combined text was WAIVED by PI judgment.** Honest cap: no single FULL run covered
+> the final combined state; the cert rests on (full calibrated run of the base) + (full
+> calibrated delta of the additions) + an all-green deterministic layer (C10–C18). Paper
+> 58 (Aug 10) postdates the 2026-06-28 group2 cert, so this is its own cert record.
 
 **Scope (single-paper):**
 - **Paper 58** — `papers/group2_quantum_chemistry/paper_58_abelian_residue.tex`
@@ -127,6 +132,32 @@ Sonnet) get 2 seeds each. Answer key → `debug/qa/paper_58_seed_key.json`.
 - 2026-08-14 — **DRAFTED** by PM for PI freeze. First single-paper `/qa` target
   (Paper 58 postdates the 2026-06-28 group2 cert). Inherits criteria.md C1–C18 + the
   group2 benchmarking/guardrail deltas.
+- 2026-08-14 — **DELTA-verification run (Avery-scoping edits) = DEFECTS → remediated.**
+  Paste-don't-point, seeded. Deterministic whole-target green. Claims delta CALIBRATED
+  (caught W3 seed) + clean on the real lineage paragraph + abstract hook. Citation delta
+  CALIBRATED (caught the wrong-year + wrong-title seeds) AND surfaced a **genuine**
+  defect: the `avery2004` bibitem is a fabricated composite (2006 book title + 2004
+  article venue/vol/year + wrong page) — verified vs primary; **inherited verbatim from
+  the CERTIFIED group2 synthesis**. Fixed in BOTH Paper 58 and the synthesis →
+  `avery2006` (Avery & Avery, *Generalized Sturmians and Atomic Spectra*, World
+  Scientific 2006); both recompile clean. Missing-cites sweep (advisory) returned a
+  ranked list; load-bearing gaps: Löwdin 1955 (the actual non-orthogonal cofactor
+  method; `lowdin1950` is a *different* Löwdin paper), the Head-Gordon NOCI pair,
+  Barnett–Coulson 1951.
+- 2026-08-14 — **Missing cites ADDED (PI: 3 load-bearing + top optional), each
+  PM-verified vs primary sources before insertion:** Löwdin 1955 (Phys. Rev. 97, 1474 —
+  the non-orthogonal cofactor method; note the already-cited `lowdin1950` is a
+  *different* Löwdin paper), Thom–Head-Gordon 2009 (JCP 131, 124113) + Sundstrom–
+  Head-Gordon 2014 (JCP 140, 114103) [NOCI], Barnett–Coulson 1951 (Phil. Trans. R. Soc.
+  A 243, 221), Filter–Steinborn 1978 (Phys. Rev. A 18, 1). Each placed at its supporting
+  claim (cofactor eval; NOCI demo; two-center Slater-integral machinery); compiles clean,
+  all 5 cited (no orphans). Citation delta now clean.
+- 2026-08-14 — **CERTIFIED (PI direction: "good enough for certification").** Final FULL
+  certifying run WAIVED by PI; cert rests on the clean delta + the base FULL run + green
+  deterministic layer (see STATUS honest cap). Committed to `work/sparsity-boundary`.
+  Standing follow-up (PI-noted, not blocking): sweep the corpus's Avery/hyperspherical
+  citations (Papers 16/34, other syntheses) for the same `avery2004` composite that this
+  run found had propagated from the certified group2 synthesis.
 - 2026-08-14 — **FROZEN (PI: Path A + "freeze as written").** Review begins:
   deterministic `--gate group2` on the real corpus; seeded worktree + panel for the
   four LLM dimensions + completeness-critic.
