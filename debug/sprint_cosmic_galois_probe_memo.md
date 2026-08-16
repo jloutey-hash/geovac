@@ -72,20 +72,42 @@ each by a **direct closed-form residual** (~1e-51, independent of PSLQ):
 
 Verdict: the periods populate the modular/Γ-value (cosmic-Galois) ring **systematically**.
 
-## Rung 3 — the integrated T2 as a Γ(2) multiple modular value (FRONTIER)
-`debug/routeC_cosmic_galois_rung3.py`. The observable-level statement: the integrated
-T2 pulls back (via λ=1−ρ) to an iterated integral over X(2) of period-weighted forms =
-a candidate **Γ(2) MMV / elliptic polylogarithm** — the SAME open object as the ABW
-closed form. Four independent lines converge on "genuine Γ(2) elliptic MMV, not
-reducible": (a) modular home Γ(2) [Rung 1]; (b) fiber periods are Γ-values [Rung 2];
-(c) NOT in the weight-0/1/2 polylog ring [`routeC_weight_probe.py`]; (d) the single
-fiber does not close it [ABW in-module obstruction]. Bounded probe: the integrated
-collinear value is not a low-height single-fiber period product (precision-limited,
-illustrative). **Two frontier obstacles, both flagged honestly:** (i) explicit
-realization needs the Γ(2) iterated-Eisenstein/elliptic-polylog basis; (ii) even a
-PSLQ-grade *value* of the integrated observable needs a dedicated evaluator — naive
-nested tanh-sinh times out (>260 s at dps≥18). = the collaboration/frontier piece
-(Avery track, HELD).
+## Rung 3 — the integrated T2 as a Γ(2) multiple modular value (FRONTIER; obstacle ii resolved)
+`debug/routeC_cosmic_galois_rung3.py` (setup), `debug/routeC_fast_evaluator.py` (evaluator),
+`debug/routeC_cosmic_galois_rung3b.py` (principled probe). The observable-level statement:
+the integrated T2 pulls back (via λ=1−ρ) to an iterated integral over X(2) of
+period-weighted forms = a candidate **Γ(2) MMV / elliptic polylogarithm** — the SAME
+open object as the ABW closed form. Four independent lines converge on "genuine Γ(2)
+elliptic MMV, not reducible": (a) modular home Γ(2) [Rung 1]; (b) fiber periods are
+Γ-values [Rung 2]; (c) NOT in the weight-0/1/2 polylog ring [`routeC_weight_probe.py`];
+(d) the single fiber does not close it [ABW in-module obstruction].
+
+**Obstacle (ii) — a high-precision value — RESOLVED.** The naive nested tanh-sinh times
+out (>260 s at dps≥18) because the outer (s,t) *adaptive* nest over-resolves (the per-fiber
+k-integral is fast, ~0.13 s). Fix (`routeC_fast_evaluator.py`): a **fixed tensor
+Gauss–Legendre grid + sin² substitution** (kills the √s endpoint non-analyticity so GL
+converges fast) **+ s↔t symmetry**. Collinear value **T2 = 0.39535576590171392** to ~17
+stable digits (N=40 vs 52 agree 5.1e-18; supersedes weight_probe's loose "0.3953557703",
+consistent with the memo's cited 0.395355766), extensible with N/dps. (Bug caught en
+route: hand-rolled GL used the wrong Legendre-derivative identity — fixed to
+P_N′=N(xP_N−P_{N−1})/(x²−1).)
+
+**Principled weight-graded exclusion (`routeC_cosmic_galois_rung3b.py`).** At ~17 digits,
+maxcoeff ≤1e4, V is NOT a low-height closure in any of: the period ring {1,π,ϖ,π²,ϖ²,ϖπ}
+(ϖ=K(1/2)); the full period+quasi-period ring (+E(1/2)); the classical polylog ring
+(Catalan, ln2, Li₂(½)). **Audit catch (kept honest):** the two apparent "hits" had
+**V-coefficient 0** — basis-internal identities (the Legendre relation 4E ϖ−2ϖ²=π at the
+self-dual τ=i point; the Li₂(½) identity), NOT closures of V; a genuine closure needs
+rel[0]≠0. So a bounded, principled exclusion: the integrated value is not a low-height
+classical / single-fiber period-ring combination — consistent with a genuine Γ(2)
+elliptic MMV.
+
+**Obstacle (i) — REMAINS the frontier.** Explicit MMV realization needs the Γ(2)
+iterated-Eisenstein / elliptic-polylog (Brown-style multiple-modular-value) basis — the
+deep specialist piece. Now sharpenable with a concrete high-precision number + the proven
+"genuine-elliptic-MMV-not-classical" status → the concrete hand-off for the collaboration
+(Brown/Kleinschmidt for the MMV machinery; Avery for the momentum-space Sturmian side).
+= collaboration/frontier piece (Avery track, HELD).
 
 ## Files
 `debug/routeC_cosmic_galois_rung1.py` (A–E), `debug/routeC_cosmic_galois_rung2.py`

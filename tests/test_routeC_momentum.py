@@ -293,3 +293,74 @@ def test_modulus_source_is_in_module_not_period_plus_bessel():
     assert res_A2 / res_A3 < 10                          # Hyp A SATURATES (flat = exact)
     assert res_C2 / res_C3 > mp.mpf(10) ** 3             # Hyp C IMPROVES (approximation)
     assert res_C2 / res_A2 > mp.mpf(10) ** 8             # equal budget: period+Bessel far worse
+
+
+# ---------------------------------------------------------------------------
+# Cosmic-Galois pins (Paper 59 sec:modular): the elliptic family is the
+# Legendre / Gamma(2) universal family, its CM-fiber periods are Gamma-values,
+# and the integrated observable is a Gamma(2) multiple modular value.
+# ---------------------------------------------------------------------------
+
+def test_cosmic_galois_family_is_gamma2():
+    """lambda(tau(rho)) = 1 - rho exactly (Paper 59 eq:lambda_rho): the family is the
+    Legendre / Gamma(2) universal family, tau(rho)=i K(rho)/K(1-rho)."""
+    import mpmath as mp
+    mp.mp.dps = 30
+
+    def lam_theta(tau):
+        q = mp.e ** (1j * mp.pi * tau)
+        return (mp.jtheta(2, 0, q) / mp.jtheta(3, 0, q)) ** 4
+
+    for rho in ['0.37', '0.6', '0.15']:
+        r = mp.mpf(rho)
+        tau = 1j * mp.ellipk(r) / mp.ellipk(1 - r)
+        lam = mp.re(lam_theta(tau))
+        assert abs(lam - (1 - r)) < mp.mpf(10) ** -20, (rho, lam)
+
+
+def test_cosmic_galois_cm_periods_are_gamma_values():
+    """CM-fiber periods are Gamma-values (Chowla-Selberg), at two fundamental
+    discriminants (Paper 59 sec:modular): disc -4 (tau=i, rho=1/2, in the physical
+    domain) and disc -8 (tau=i sqrt2)."""
+    import mpmath as mp
+    mp.mp.dps = 40
+    # disc -4
+    K4 = mp.ellipk(mp.mpf('0.5'))
+    cf4 = mp.gamma(mp.mpf(1) / 4) ** 2 / (4 * mp.sqrt(mp.pi))
+    assert abs(K4 - cf4) < mp.mpf(10) ** -30
+    # disc -8: lambda_2 = 3 - 2 sqrt2
+    lam2 = 3 - 2 * mp.sqrt(2)
+    K8 = mp.ellipk(lam2)
+    cf8 = (mp.sqrt(1 + mp.sqrt(2)) * mp.gamma(mp.mpf(1) / 8) * mp.gamma(mp.mpf(3) / 8)
+           / (2 ** mp.mpf('3.25') * mp.sqrt(mp.pi)))
+    assert abs(K8 - cf8) < mp.mpf(10) ** -30
+
+
+def test_cosmic_galois_integrated_value():
+    """The integrated collinear T2 = 0.39535576590171392... (Paper 59 sec:modular),
+    via the fast evaluator (GL tensor + sin^2 substitution + s<->t symmetry).  A
+    float64 low-order reproduction pins it to ~6 digits (the high-precision 17-digit
+    value is in debug/routeC_fast_evaluator.py)."""
+    from numpy.polynomial.legendre import leggauss
+    from scipy.integrate import quad
+
+    def Pf(x, k):
+        c = x * (1 - x); D = np.sqrt(c * k * k + 1)
+        return c * np.exp(-D) * (1 / D ** 3 + 3 / D ** 4 + 3 / D ** 5)
+
+    def Jf(s, t):
+        b = s + t
+        f = lambda k: (np.sin(k * b) / (k * b) if k * b > 1e-12 else 1.0) * Pf(s, k) * Pf(t, k)
+        v, _ = quad(f, 0, np.inf, limit=400)
+        return v
+
+    N = 24
+    x, w = leggauss(N)
+    phi = (np.pi / 4) * (x + 1); wphi = (np.pi / 4) * w
+    s = np.sin(phi) ** 2; jac = np.sin(2 * phi)
+    tot = 0.0
+    for i in range(N):
+        for j in range(N):
+            tot += wphi[i] * jac[i] * wphi[j] * jac[j] * Jf(s[i], s[j])
+    T2 = (8 / np.pi) * tot
+    assert abs(T2 - 0.395355766) < 1e-6, T2

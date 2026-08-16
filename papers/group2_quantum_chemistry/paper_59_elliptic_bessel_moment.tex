@@ -464,6 +464,65 @@ absence from a targeted search, not a proof of absence; the residual risk is
 an obscure single source.
 
 %% ========================================================================
+\section{The modular structure and its cosmic-Galois periods}
+\label{sec:modular}
+%% ========================================================================
+
+The genus-one curve of Eq.~\eqref{eq:curve} is not an arbitrary elliptic curve:
+the family over the scale-ratio base is a \emph{modular} family, and its periods
+are periods of a specific modular curve.  Forming the modular parameter from the
+two periods of Sec.~\ref{sec:obstruction}, $\tau(\rho)=iK(\rho)/K(1-\rho)$, the
+theta-series modular lambda satisfies \textbf{[MEASURED, $10^{-41}$; classical]}
+%
+\begin{equation}
+  \lambda\big(\tau(\rho)\big) = 1-\rho ,
+  \label{eq:lambda_rho}
+\end{equation}
+%
+an exact, rational---indeed linear---modulus map.  The family is therefore the
+Legendre family, the universal elliptic curve over the modular curve
+$X(2)=\Gamma(2)\backslash\mathfrak{H}^{\ast}$, pulled back along
+$\lambda=1-\rho$; it is non-isotrivial ($j(\rho)$ varies) with three cusps at
+$\rho\in\{0,1,\infty\}$ matching the three cusps of $\Gamma(2)$ (the cusp
+$\rho=1$ is the coincident-scale diagonal).  The periods $K(1-\rho),K(\rho)$ are
+the $\Gamma(2)$ modular periods.
+
+Since $\rho=c_{2}/c_{1}$ ranges over all of $(0,\infty)$ as the Feynman
+parameters range over $(0,1)$, the parameter integral sweeps the entire real
+locus of $X(2)$ and passes through every complex-multiplication fibre.  There the
+periods are $\Gamma$-values by Chowla--Selberg \textbf{[MEASURED, $\sim\!10^{-51}$;
+classical]}: at $\tau=i$ (the fibre $\rho=\tfrac12$, \emph{inside} the physical
+domain), $K(\tfrac12)=\Gamma(1/4)^{2}/(4\sqrt\pi)$; at $\tau=i\sqrt2$
+(discriminant $-8$), $K=(1+\sqrt2)^{1/2}\Gamma(1/8)\Gamma(3/8)/(2^{13/4}\sqrt\pi)$.
+A molecular three-center integral thus has, at the fibres its own parameter
+integral visits, periods that are classical $\Gamma$-values---across distinct
+fundamental discriminants, so the arithmetic tracks the fibre rather than a single
+coincidence.
+
+\emph{The integrated integral is an elliptic multiple modular value.}  The full
+parameter integral pulls back, via Eq.~\eqref{eq:lambda_rho}, to an iterated
+integral over $X(2)$ of period-weighted forms---a multiple modular value for
+$\Gamma(2)$ in the sense of Brown, i.e.\ an elliptic polylogarithm.  A dedicated
+evaluator (a fixed Gauss--Legendre tensor grid with a $\sin^{2}$ substitution that
+removes the endpoint non-analyticity, replacing the divergent-cost adaptive
+quadrature) gives the collinear value \textbf{[MEASURED, $\sim\!17$ digits]}
+$0.39535576590171392\ldots$; a weight-graded search finds it is \emph{not} a
+low-height combination of the central fibre's period $K(\tfrac12)$, its
+quasi-period $E(\tfrac12)$, and $\pi$, nor of the classical polylogarithms,
+consistent with a genuine (non-classical, multi-fibre) elliptic multiple modular
+value.  \textbf{[OBSERVATION]} This places the three-center integral inside the
+elliptic (genus-one) layer of the cosmic-Galois / mixed-elliptic-motive structure
+that the Geometric Vacuum program's Tannakian substrate reaches
+for~\cite{loutey_paper56}---the concrete elliptic period the mixed-Tate substrate
+could not itself supply.  \textbf{[OPEN]} Its explicit realization in the
+$\Gamma(2)$ iterated-Eisenstein basis is the natural next step, of a piece with the
+finite closed form of Sec.~\ref{sec:obstruction}.  We note the level is
+$\Gamma(2)$---the classical \emph{universal} Legendre level, below the two-loop
+sunrise's $\Gamma_{1}(6)$; landing on the Legendre family is expected for a
+four-branch-point curve, so the content here is the rational modulus map and the
+in-domain complex-multiplication fibres, not an exotic level.
+
+%% ========================================================================
 \section{Scope, and the open frontier}
 \label{sec:scope}
 %% ========================================================================
@@ -594,6 +653,11 @@ Vacuum,'' Paper~18 in this series.
 \bibitem{loutey_paper34}
 J.~Loutey, ``A Projection Taxonomy for Physical Observables,'' Paper~34 in
 this series.
+
+\bibitem{loutey_paper56}
+J.~Loutey, ``The Tannakian Substrate of the Geometric Vacuum: A Finite-Cutoff
+Pro-System, a Neutral Tannakian Category, and a Cosmic-Galois Injection,''
+Paper~56 in this series.
 
 \bibitem{loutey_paper58}
 J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property: The Abelian
