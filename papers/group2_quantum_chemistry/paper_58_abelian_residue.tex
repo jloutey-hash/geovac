@@ -396,7 +396,13 @@ accidental zeros and no symmetry zeros that the counting missed, so on
 this block the counted density is not an overcount but is \emph{exactly}
 the true density.  This is a decision rather than a measurement: no
 threshold is involved anywhere, and it upgrades the block from
-\textsc{counted} to \textsc{decided}.
+\textsc{counted} to \textsc{decided}.  The same decision run over a
+$5\times 7$ grid of charge pairs and internuclear distances---including the
+equal-charge and rate-coincidence configurations, where degenerate
+exponential rates are the likeliest source of an accidental cancellation,
+and a node-bearing $n_{\max}=3$ sample---returns $195/195$ nonzero at every
+point, so the verdict is a property of the class rather than of the census
+configuration.
 
 It also settles, for this block, the reading the Gaussian corroboration
 could only suggest.  That check found $29.8\%$ against $29.4\%$ counted
@@ -410,16 +416,37 @@ residual $l$-selection.  The three genuinely cross classes---$80\%$ of the
 tensor---remain counted, and will until an independence argument over
 $\{E_1, \ln, \gamma\}$ is available.
 
-We state the outlook carefully, because the natural pessimistic reading is
-wrong.  The obstruction is \emph{not} that the seed set escalates: it is a
-weight-one filtration at every class, so the exchange case is a harder
-independence question than the hybrid case but not a categorically
-different one.  Nor is it that a closed form is missing: one now exists for
-every class.  What is missing is the independence arguments themselves,
-plus a re-census run through the new machinery.  Both are ordinary work
-rather than obstructions in principle---which is a materially better
-position than the counted row has occupied until now, and materially worse
-than a decided row.
+We state the outlook carefully, because both natural readings are wrong.
+The pessimistic one---that the seed set escalates---is wrong: it is a
+weight-one filtration at every class, and a closed form now exists for every
+class.  But the optimistic one---that the remaining independence argument is
+therefore \emph{ordinary work}---is wrong too, because \emph{weight one is
+not the same as decidable}.  The $(AA|BB)$ decision went through only because
+that class is the one place $\pi$ cancels \emph{and} no $E_1$, $\ln$ or
+$\gamma$ appears: pure $\{e^{-\lambda R}\}$, which Lindemann--Weierstrass
+separates at any algebraic $R$.  The cross classes carry $E_1(\mu R)$ (hybrid
+and exchange) and, for the exchange class, a standalone Euler $\gamma$ that
+survives assembly at every $\tau$.  Deciding an entry's vanishing at a fixed
+$R$ then requires those seed \emph{values} to be linearly independent---and
+$E_1$-value independence at algebraic points is an open problem of
+transcendence theory, while $\gamma$ is not known even to be irrational.
+That is a genuine obstruction in principle, not ordinary work, and it draws
+a \emph{categorical} line---$(AA|BB)$ decidable, the $E_1/\gamma$ classes
+not---rather than the gradient the weight-one filtration alone suggests.
+
+What \emph{is} available now is one rung weaker and unconditional.  The seed
+\emph{functions} $\{1, e^{-\lambda R}, E_1(\mu R), \ln R\}$ are linearly
+independent over $\mathbb{Q}(R)$---a theorem (Liouville--Rosenlicht: $E_1$ is
+the standard non-elementary integral, transcendental over the exponential
+field)---so every cross-class entry is nonzero \emph{as a function of $R$}
+unless its grouped coefficients vanish, and any zero is therefore isolated at
+special $R$.  With the Gaussian corroboration above already showing the
+permitted entries generically nonzero, the honest position for the cross
+classes is: functionally nonvanishing (unconditional), generically nonzero
+(measured), and pointwise-\textsc{decidable} only \emph{conditional} on a
+Schanuel-type independence hypothesis for the $E_1$ and $\gamma$ values.  That
+is materially better than counted, and blocked from decided by open
+transcendence rather than by missing labour.
 
 What the build does settle is narrower, and worth stating because it is
 exactly the sector this paper's mechanism concerns.  The classes in which

@@ -1099,7 +1099,17 @@ columns come from the same McMurchie-Davidson reference tensor, partitioned, so 
 fit error enters — the figure is about the partition, not the basis.
 
 Structural consolation: water has only three nuclei, hence **no 4-centre integrals
-at all**. Water needs exactly one new capability, not two.
+at all**.
+
+> **CORRECTED 2026-08-14 by Poly-2.** This section originally read "water needs
+> exactly one new capability, not two." That is true *within the ERI tensor*
+> (3-centre yes, 4-centre no) but it was measured over the two-body tensor only.
+> The **one-body** V_ne matrix also has a three-centre block — elements
+> `<chi_i|-Z_A/r_A|chi_j>` with `c(i)`, `c(j)` and `A` all distinct — which is
+> equally absent from the repo and **costs more**: dropping it is −6.92 Ha in
+> water against the ERI block's −2.35 Ha. Water needs **two** new capabilities;
+> the one-body one is the larger in energy and the smaller in difficulty. See
+> §10.4.
 
 ### 10.2 The rotation gate: the axial engine transports
 
@@ -1131,12 +1141,141 @@ chemistry, not a GeoVac-specific wall.
   the basis, but leaves a numerical integral per ERI: forfeits closed form,
   Lindemann decidability, and compiled-evaluation speed.
 - **C. Momentum space / Fourier** — kernel is 4pi/k^2, translation is a phase
-  e^{ik.R}, three centres = three phases. This *is* the Fock projection, and the
-  one-body 3-centre analog is already solved in-repo. Whether the two-body case
-  closes is **genuinely open**; most GeoVac-native route.
+  e^{ik.R}, three centres = three phases. This *is* the Fock projection. Whether
+  the two-body case closes is **genuinely open**; most GeoVac-native route.
+  > **CORRECTED 2026-08-14 (Poly-2).** This bullet originally added "and the
+  > one-body 3-centre analog is already solved in-repo." **It is not.**
+  > `shibuya_wulfman.py` computes `<psi^A_{nlm}|-Z_B/r_B|psi^A_{n'l'm'}>` —
+  > *both* orbitals on centre A, nucleus at B — which is a **two**-centre
+  > integral. A repo-wide search finds no three-centre machinery in `geovac/`
+  > at all. Route C was priced with a non-existent head start; the genuine
+  > one-body three-centre integral is itself an open build (§10.4).
 - **D. Decide rather than solve** — Paper 58's Prediction `angular` (C2v abelian
   of order 4 ⇒ 2-bit spatial grading) is a *support* claim, not an energy claim.
   Cheapest real deliverable; recommended first. Paper 58 marks it "not falsifiable
   on the present builder" because the composed builder carries no bond angle
   (Obs. `no_angle`) — that obstruction is about the composed builder, not the
   framework.
+
+---
+
+## 10.4 Poly-2: the 3-centre ERI block does not decompose (2026-08-14)
+
+Driver `debug/poly2_three_center_topology.py`; memo
+`debug/sprint_poly2_three_center_topology_memo.md`. Same methodology as Poly-0 —
+one McMurchie-Davidson reference tensor, partitioned, so no fit error enters.
+
+### The two topologies
+
+With three distinct centres among four indices the centre multiset is forced to
+{X,X,Y,Z}, and there are exactly two topologies:
+
+| | arrangement | structure | difficulty |
+|:--|:--|:--|:--|
+| **T1** | (XX\|YZ) | doubled centre inside ONE density ⇒ that density is one-centre, its potential is closed-form already (increment 1) ⇒ collapses to a three-centre **one-electron** integral | reducible |
+| **T2** | (XY\|XZ) | doubled centre split across densities ⇒ two two-centre densities on a triangle, neither with a closed-form potential, and no (xi,eta) system holds three foci | the genuine wall |
+
+Counting is forced, not measured: of the 12 index arrangements 4 are T1 and 8 are
+T2, giving **140 / 280** for water. T2 is twice as numerous.
+
+### The result: the blocks CANCEL, so partial coverage is worse than none
+
+Pre-registered prediction (T1 carries most of the energy) **FAILED**, and the
+additivity check found the stronger fact.
+
+| system | drop T1 | drop T2 | drop BOTH | T1+T2 vs both |
+|:--|--:|--:|--:|--:|
+| BeH2 (linear) | −0.436 Ha | **−16.139 Ha** | −0.542 Ha | mismatch **16.03** |
+| H2O (bent) | −3.090 Ha | −4.359 Ha | −2.347 Ha | mismatch **5.10** |
+
+Dropping T2 alone costs BeH2 **30x more than dropping the entire 3-centre block**
+(E falls to −31.88 Ha against a true −15.74). The 8-fold bra↔ket symmetry is
+bit-exactly preserved under every drop, so each truncated tensor is a legitimate
+Hermitian two-electron operator — the blow-up is real, not a solver artifact.
+
+**Reading.** T1 and T2 carry large, mutually cancelling contributions. There is no
+"close the reducible tier first and defer the hard one" story: keeping one without
+the other is far worse than having neither. This generalizes Poly-0's lesson one
+level — Poly-0 showed the 3-centre block cannot be dropped; Poly-2 shows it cannot
+be **split**.
+
+*Scope, stated precisely:* the drop test models "T2 **missing**", not "T2
+**approximate**". A hybrid tensor with T1 in closed form and T2 from Gaussians at
+1e-6 would be numerically fine. But that hybrid buys nothing: the Gaussians were
+already exact to fit quality (no accuracy gain), and a tensor that is part
+closed-form and part fitted is **not Lindemann-decidable at all** (no structural
+gain). Closed-form value is all-or-nothing at the tensor level.
+
+### The one-body three-centre block, which Poly-0 never measured
+
+| system | 3-centre h-entries | sum\|v\| | cost of dropping |
+|:--|--:|--:|--:|
+| BeH2 | 22 / 49 | 1.4884 | **−2.133 Ha** |
+| H2O | 22 / 49 | 5.4370 | **−6.923 Ha** |
+
+Water's one-body three-centre burden is **~3x the two-body one** (6.92 vs 2.35 Ha).
+The rebuild is asserted against `integral_set_md` to 1e-10 in the driver, so the
+partition is validated, not assumed. §10.1 is corrected accordingly.
+
+### Consequence for the build order
+
+The three-centre **one-electron** integral is the right next target — not because
+it solves water (it does not; the two-body block remains), but because it is the
+**cheapest decisive probe of whether this arc's central structural property
+survives a third centre**. Every piece already exists in a degenerate,
+strictly-simpler configuration:
+
+- density `chi_Y* chi_Z` in the Y-Z spheroidal system = polynomial x separable
+  exponentials — increment 3a, `two_center_spheroidal_product`, verified 1.7e-18
+  for general (n,l,m);
+- Neumann-expand `1/|r - X|` in that same system with the second point **pinned**
+  at X, so the ordered `xi_< / xi_>` split is at a **fixed** `xi_X` rather than
+  coupled — strictly simpler than the double ordering `ordered_xi_general` already
+  closed (increment 3e);
+- phi integral forces sigma = m (increment 3b bookkeeping); eta half already CLOSED
+  (§8.5.2);
+- tau-termination criterion is EQ1's q = (alpha-beta)R/2: terminates for equal
+  exponents, else factorially convergent (1.2e-10 at tau=10, EQ1b).
+
+**The question worth answering: does weight 1 survive the third centre?** The arc's
+headline is that the two-centre engine closes at transcendence weight one and
+pi-free. Whether a third centre introduces weight-2 content (Li_2, zeta(2)) is
+sharp, decidable, and unasked. A negative is as valuable as a positive: it would
+name, structurally, why polyatomics are hard in this framework rather than merely
+recording that they are.
+
+### RESULT (2026-08-15): weight 1 survives, and it is gamma-FREE
+
+Built and validated. The 3-centre one-electron integral `<chi_Y|-Z_X/|r-X||chi_Z>`
+is the two-electron exchange assembly with electron 2's density replaced by a point
+charge at X: its eta-integral becomes P_tau(eta_X), its xi-integration collapses to
+a FIXED split at xi_X, and the prefactor loses one electron's a^3*2pi. The numerical
+assembly reproduces an independent 3-D quadrature reference (X-centred spherical
+grid) at ~1e-7 for 1s x 1s (-0.341962) and 2p0 x 1s (-0.186875); the tau-sum
+converges by tau_max=10.
+
+The closed form (built through the engine's validated weight-1 moments --
+`finite_power_exp`, `upper_integral`, `log_shift_moment`) has function content
+**{exp, E_1, ln} -- weight one, no dilogarithm, and gamma-FREE.** Sharper than the
+two-centre exchange: that class's Euler gamma came from its xi=1 endpoint, and a
+source pinned at xi_X > 1 never reaches it, so gamma drops out. {exp, E_1, ln} is a
+proper subset of the exchange seed set {exp, E_1, ln, gamma}.
+
+**So weight-1 -- the arc's central structural property -- survives a third centre.**
+And the object closed is not merely a probe: `<chi_Y|-Z_X/r_X|chi_Z>` (all three
+distinct) IS water's **one-body three-centre V_ne block**, the LARGER of its two
+missing capabilities (-6.92 Ha vs the two-body -2.35 Ha, section 10.4). So water is
+now one capability away, and the remaining one is the harder (two-body) T2 wall.
+
+Honest scope: (a) built + weight-inspected for sigma=0 (cases A, B); sigma!=0 is
+predicted identical by the increment-3d pole-absorption argument (same Q_tau^sigma
+machinery), sigma=-1 reference (-0.027107) in hand for when that assembly is built.
+(b) This does NOT solve water -- closed-form value is all-or-nothing at the tensor
+level (10.4), so a Hamiltonian with the one-body block closed but the two-body T2
+block still missing/fitted is neither accurate nor Lindemann-decidable. The two-body
+3-centre ERI remains the genuine wall. (c) For DECIDABILITY the {E_1} seed still
+blocks a pointwise decision (the v4.81.0 cross-class wall), but gamma-freedom puts
+this object one transcendence-wall better than the exchange class.
+
+Drivers: `debug/bet1_three_center_1e_{reference,assembly,symbolic}.py`. Backing:
+`tests/test_two_center_eri_aabb.py::test_three_center_1e_closes_weight_one_gamma_free`.

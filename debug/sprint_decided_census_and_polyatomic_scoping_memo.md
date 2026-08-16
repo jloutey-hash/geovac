@@ -133,7 +133,14 @@ repulsive and removing repulsion over-binds. **There is no truncation story.**
 The H₂ row returning exactly +0.0 is the control on the partition machinery.
 
 Structural consolation: water has only three nuclei, so it has **no 4-centre
-integrals at all**. Water needs exactly one new capability, not two.
+integrals at all**. ~~Water needs exactly one new capability, not two.~~
+
+> **CORRECTED 2026-08-14 (Poly-2, `debug/sprint_poly2_three_center_topology_memo.md`).**
+> The "one new capability" line was measured over the **two-body tensor only**.
+> The one-body V_ne matrix has a three-centre block too — `<chi_i|-Z_A/r_A|chi_j>`
+> with `c(i)`, `c(j)`, `A` all distinct — equally absent from the repo and
+> **costing more**: −6.92 Ha in water against the ERI block's −2.35 Ha. Water
+> needs **two** new capabilities.
 
 Method note: both columns come from the *same* McMurchie–Davidson reference
 tensor, partitioned. No fit error enters the comparison — the dropped-energy
@@ -172,7 +179,7 @@ not a GeoVac-specific wall.
 |:---|:---|
 | **A.** One-centre re-expansion (Löwdin / Barnett–Coulson) | ⚠️ **GUARDRAIL** (§3.5, Papers 8–9). Truncation is in `l`, destroying the exact angular sparsity the framework is built on — the polyatomic replay of the Löwdin-retrofit dead end already in §3. Also re-enters Cor. `dual_p0` (no shared p₀ for heteronuclear; water is O + H). Works numerically, costs the framework its identity. |
 | **B.** Gaussian transform (Shavitt–Karplus) | Exact, no `l`-truncation, preserves the basis — but leaves a numerical integral per ERI, forfeiting closed form, Lindemann decidability, and the compiled-evaluation speed. Sound chemistry; converts the distinctive product into an ordinary one. |
-| **C.** Momentum space / Fourier (Sturmian-native) | Coulomb kernel is 4π/k², translation is a phase e^{ik·R}; three centres = three phases. This *is* the Fock projection, and the one-body 3-centre analog is already solved in-repo. Whether the two-body case closes is **genuinely open**. Most GeoVac-native route; the right question for the Avery call. |
+| **C.** Momentum space / Fourier (Sturmian-native) | Coulomb kernel is 4π/k², translation is a phase e^{ik·R}; three centres = three phases. This *is* the Fock projection. Whether the two-body case closes is **genuinely open**. Most GeoVac-native route; the right question for the Avery call. ⚠️ **CORRECTED 2026-08-14:** this cell originally claimed "the one-body 3-centre analog is already solved in-repo." **False.** `shibuya_wulfman.py` is the *two*-centre integral (both orbitals on A, nucleus at B); no three-centre machinery exists in `geovac/`. Route C was priced with a head start it does not have. |
 | **D.** Decide rather than solve | Paper 58's Prediction `angular` (C₂ᵥ abelian of order 4 ⇒ **2-bit spatial grading, two qubits, not a multiplicative factor**) is a *support* claim, not an energy claim. Cheapest real deliverable. **Recommended first.** |
 
 Note on D: Paper 58 marks that prediction "not falsifiable on the present

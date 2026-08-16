@@ -866,3 +866,133 @@ def test_decided_census_aabb_block_has_no_accidental_zeros():
             groups[k] = groups.get(k, 0) + coeff
         nonzero = any(sp.simplify(cc.subs(R_s, 3)) != 0 for cc in groups.values())
         assert nonzero, f"({a}{b}|{c}{d}) decided ZERO -- an accidental zero"
+
+
+def test_decided_census_aabb_robust_off_census_config():
+    """Bet 2: the (AA|BB) 'no accidental zeros' is a class property, not census-specific.
+
+    The permitted set and Gaunt-zero count are pure angular data (charge/R-independent);
+    only accidental *radial* zeros can move across configs. A 5x7 charge x R grid (full
+    195 entries each, incl. equal-charge and rate-coincidence, plus an n_max=3
+    node-bearing sample) is clean in debug/bet2_aabb_accidental_zero_sweep.py; sampled
+    here at an off-census config -- equal charges Z=1, R=5/2, the degeneracy case where
+    coincident exponential rates are the likeliest source of a cancellation.
+    """
+    from geovac.two_center_eri import aabb_closed_form, R_s
+    Z1_ = Fraction(1)
+    Rv = sp.Rational(5, 2)
+    sample = [((1, 0, 0), (1, 0, 0), (1, 0, 0), (1, 0, 0)),
+              ((2, 1, 0), (2, 1, 0), (2, 1, 0), (2, 1, 0)),
+              ((2, 1, 1), (2, 1, 0), (2, 1, 0), (2, 1, 1)),
+              ((1, 0, 0), (2, 1, 1), (2, 1, 1), (2, 0, 0))]
+    for a, b, c, d in sample:
+        e = aabb_closed_form(Z1_, a, b, Z1_, c, d)   # equal charges -> degenerate rates
+        groups: dict = {}
+        for term in sp.Add.make_args(sp.expand(e)):
+            rate, coeff = sp.Integer(0), sp.Integer(1)
+            for f in sp.Mul.make_args(term):
+                if isinstance(f, sp.exp):
+                    arg = sp.expand(f.args[0])
+                    dd = -sp.diff(arg, R_s)
+                    rate += dd
+                    coeff *= sp.exp(sp.expand(arg + dd * R_s))
+                else:
+                    coeff *= f
+            k = sp.nsimplify(rate)
+            groups[k] = groups.get(k, 0) + coeff
+        nonzero = any(sp.simplify(cc.subs(R_s, Rv)) != 0 for cc in groups.values())
+        assert nonzero, f"({a}{b}|{c}{d}) accidental zero at equal-charge/R=5/2"
+
+
+def test_exchange_gamma_survives_every_tau():
+    """Bet 3: standalone Euler gamma appears at EVERY tau, so it does not cancel in
+    assembly -- the exchange class is gamma-blocked for decidability (gamma is not known
+    irrational), on top of the E_1 wall it shares with the hybrid class. This is what
+    makes the cross-class census DECISION transcendence-hard rather than 'ordinary work':
+    weight-one already contains E_1 and gamma, and only (AA|BB) (pure {exp}, pi cancelled)
+    is Lindemann-decidable.
+    """
+    from geovac.two_center_eri import ordered_xi_general
+    p1, p2 = sp.symbols("p1 p2", positive=True)
+    for tau in (0, 1, 2, 3):
+        e = ordered_xi_general(tau, 0, 0, 0, 0, 0, p1, p2)
+        assert e.has(sp.EulerGamma), f"gamma absent at tau={tau} -- would break the wall claim"
+
+
+def test_three_center_1e_closes_weight_one_gamma_free():
+    """Bet 1: the 3-centre ONE-electron integral <chi_Y|-Z_X/r_X|chi_Z> closes at
+    weight one AND gamma-free for a source pinned off the foci axis (xi_X > 1).
+
+    Structure: with the source pinned, the ordered Neumann split is at a FIXED xi_X,
+    so per (tau, density-monomial) the xi integral is
+        Q_tau(s0) * int_1^{s0} poly*P_tau e^{-p xi} dxi          (finite, elementary)
+      + P_tau(s0) * int_{s0}^inf poly*(-W_tau) e^{-p xi} dxi     (elementary)
+      + P_tau(s0) * int_{s0}^inf poly*P_tau*Q0 e^{-p xi} dxi     (the only transcendence)
+    composing the engine's validated weight-1 moments. The two-centre exchange carried
+    Euler gamma from its xi=1 endpoint; a source at xi_X>1 never reaches it, so gamma
+    drops out -> {exp, E_1, ln}, a proper subset of the exchange seed set. So weight-1
+    (the arc's central property) survives the third centre. Full 3-D validation vs an
+    independent reference: debug/bet1_three_center_1e_{reference,assembly,symbolic}.py.
+    """
+    from scipy import integrate
+    from scipy.special import eval_legendre
+    from geovac.two_center_eri import (finite_power_exp, log_shift_moment,
+                                       upper_integral)
+    xi = sp.Symbol("xi", positive=True)
+
+    def xi_pinned(j1, H1, tau, p, s0):
+        poly = sp.expand(xi ** j1 * (xi ** 2 - 1) ** H1)
+        Ptau = sp.legendre(tau, xi)
+        W = sum(sp.legendre(k - 1, xi) * sp.legendre(tau - k, xi) / sp.Integer(k)
+                for k in range(1, tau + 1))
+        Q0s = sp.log((s0 + 1) / (s0 - 1)) / 2
+        Ps = Ptau.subs(xi, s0)
+        Qs = Ps * Q0s - (W.subs(xi, s0) if tau else 0)
+        pP = sp.Poly(sp.expand(poly * Ptau), xi)
+        inner = Qs * sum(b * finite_power_exp(n, p, sp.Integer(1), s0)
+                         for (n,), b in pP.terms())
+        negW = sp.Poly(sp.expand(-poly * W), xi) if tau else sp.Poly(0, xi)
+        oelem = sum(b * upper_integral(n, p, s0) for (n,), b in negW.terms())
+        olog = sp.Integer(0)
+        for (n,), b in pP.terms():
+            Lp = sp.exp(-p * s0) * sum(sp.binomial(n, m) * s0 ** (n - m)
+                                       * log_shift_moment(m, p, s0 + 1) for m in range(n + 1))
+            Lm = sp.exp(-p * s0) * sum(sp.binomial(n, m) * s0 ** (n - m)
+                                       * log_shift_moment(m, p, s0 - 1) for m in range(n + 1))
+            olog += b * sp.Rational(1, 2) * (Lp - Lm)
+        return inner + Ps * (oelem + olog)
+
+    # (i) weight verdict, symbolic p and s0
+    p_s, s0_s = sp.symbols("p s0", positive=True)
+    for (j1, H1, tau) in [(0, 0, 0), (0, 0, 1), (2, 1, 2), (0, 0, 3)]:
+        e = xi_pinned(j1, H1, tau, p_s, s0_s)
+        funcs = {type(f).__name__ for f in e.atoms(sp.Function)}
+        assert funcs <= {"exp", "expint", "log"}, f"unexpected {funcs}"
+        assert not e.has(sp.EulerGamma), "gamma should drop out for a source at xi_X>1"
+        assert not (funcs & {"polylog", "dilog", "zeta"}), "weight-2 object appeared"
+
+    # (ii) correctness vs a direct quadrature of the SAME pinned integral
+    p_v, s0_v = sp.Rational(7, 4), sp.Rational(53, 32)     # p, xi_X (>1)
+    pf, s0f = float(p_v), float(s0_v)
+    for (j1, H1, tau) in [(0, 0, 1), (2, 1, 2)]:
+        got = float(sp.re(sp.N(xi_pinned(j1, H1, tau, p_v, s0_v), 30)))
+
+        def integrand(x, use_Q):
+            base = x ** j1 * (x * x - 1) ** H1 * np.exp(-pf * x) * eval_legendre(tau, x)
+            if not use_Q:
+                return base
+            Q0 = 0.5 * np.log((x + 1) / (x - 1))
+            Wv = sum(eval_legendre(k - 1, x) * eval_legendre(tau - k, x) / k
+                     for k in range(1, tau + 1))
+            return (x ** j1 * (x * x - 1) ** H1 * np.exp(-pf * x)
+                    * (eval_legendre(tau, x) * Q0 - Wv))
+        inner, _ = integrate.quad(lambda x: integrand(x, False), 1.0, s0f,
+                                  epsabs=1e-13, epsrel=1e-12, limit=200)
+        outer, _ = integrate.quad(lambda x: integrand(x, True), s0f, np.inf,
+                                  epsabs=1e-13, epsrel=1e-12, limit=200)
+        Q0s = 0.5 * np.log((s0f + 1) / (s0f - 1))
+        Ps = eval_legendre(tau, s0f)
+        Ws = sum(eval_legendre(k - 1, s0f) * eval_legendre(tau - k, s0f) / k
+                 for k in range(1, tau + 1))
+        ref = (Ps * Q0s - Ws) * inner + Ps * outer
+        assert abs(got - ref) < 1e-9, f"(j1={j1},H1={H1},tau={tau}): {got} vs {ref}"
