@@ -1141,7 +1141,24 @@ dilogarithm survived, that decision procedure would not exist.  The
 chain is Fock conformal (\S~\ref{sec:proj_fock}) $\to$ Sturmian
 (\S~\ref{sec:proj_sturmian}) $\to$ the present multipole projection
 evaluated across two centres; three-axis tag $(L, \text{dimension-preserving},
-\{E_1, \ln, \gamma_E\}$ at weight one$)$.\\
+\{E_1, \ln, \gamma_E\}$ at weight one$)$.
+
+\emph{Three-centre continuation (added 2026-08-16).}  Carried to a
+\emph{third} centre---the two-body three-centre integral $(XY|XZ)$, two
+two-centre densities sharing one centre on different axes---the same
+Fock~$\to$~Sturmian~$\to$~multipole chain, evaluated in momentum space, leaves
+the two densities on Fock spheres of \emph{different} radii, and the two-centre
+negatives do not survive.  The radial kernel lives on the elliptic curve
+$y^2 = (c_1 k^2 + 1)(c_2 k^2 + 1)$, whose $D=0$ period is a complete elliptic
+integral $K$ (modulus $m = 1 - c_{\min}/c_{\max}$ over the Feynman family,
+degenerate only at $c_1 = c_2$).  The transcendental axis is thus genus-one
+elliptic---an elliptic polylogarithm, a new ring within the embedding
+tier---so the embedding tier is genus-graded: genus zero at two centres, genus
+one at three, the third centre leaving the polylogarithm/MZV tower rather than
+climbing it.  Three-axis tag $(L, \text{dimension-preserving}, \{$elliptic
+$K$ / elliptic polylog$\}$ at genus one$)$; the elliptic period is verified
+numerically to $31$ digits, the closed form not derived (Paper~18
+\S~Level~2, three-centre genus grading).\\
 \textbf{Used in:} essentially every multi-electron matrix element in
 the codebase.  Specific instances: Level~4 mol-frame hyperspherical
 $V_{ee}$ and $V_{ne}$ coupling (Paper~15 \S~V, split-region Legendre

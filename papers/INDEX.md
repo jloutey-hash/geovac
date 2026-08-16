@@ -82,6 +82,8 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 19 `paper_19_coupled_composition.tex` | ACTIVE | Balanced coupled builder; PK-free cross-center V_ne |
 | `paper_fci_atoms.tex` | ACTIVE | He/Li/Be FCI benchmarks |
 | `paper_fci_molecules.tex` | **GUARDRAIL** | LCAO graph-concatenation fails (R-independent kinetic energy) — why natural geometry was necessary |
+| 58 `paper_58_abelian_residue.tex` | ACTIVE | Angular sparsity is an atomic-sector property (abelian residue); exact two-center ERI census + NaH NOCI binding |
+| 59 `paper_59_elliptic_bessel_moment.tex` | ACTIVE | Three-center ERI = an elliptic Bessel moment (momentum space); genus-0→genus-1 at the third center; finite closed form open |
 
 ## Group 4 — Quantum computing (`group4_quantum_computing/`)
 

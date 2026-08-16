@@ -1,0 +1,15 @@
+Bet 2 n_max=3 extension: permitted entries containing an n=3 orbital = 7425
+sampling 100 (seed 58)
+
+=== census-like 3:1  (Z_A=3, Z_B=1) ===
+  positive control decided zero: True
+  gaunt-zero(angular)=0  radially-live=100  (build 547s)
+    R=   3: nonzero=100 accidental= 0  clean
+    R= 5/2: nonzero=100 accidental= 0  clean
+
+=== equal 2:2  (Z_A=2, Z_B=2) ===
+  positive control decided zero: True
+  gaunt-zero(angular)=0  radially-live=100  (build 549s)
+    R=   3: nonzero=100 accidental= 0  clean
+    R= 5/2: nonzero=100 accidental= 0  clean
+

@@ -1,0 +1,610 @@
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{observation}{Observation}
+
+\begin{document}
+
+\title{The Three-Center Electron-Repulsion Integral Is an Elliptic
+Bessel Moment:\\
+Genus One at the Third Center in Momentum-Space Slater Theory}
+\thanks{Paper 59 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{August 16, 2026}
+
+%% ========================================================================
+%% ABSTRACT
+%% ========================================================================
+
+\begin{abstract}
+Two-center electron-repulsion integrals over Slater-type orbitals close
+in elementary functions plus the exponential integral, the logarithm, and
+Euler's~$\gamma$---a genus-zero transcendence class---which is why the
+two-center problem has been solved since Roothaan and Ruedenberg.  The
+genuine three-center integral has resisted a closed form for seventy years,
+and the standard verdict is that it is simply hard: reduce it to an infinite
+series or a one-dimensional quadrature and be done.  We give it a structural
+reading instead.  Evaluating the two-electron three-center integral
+$(XY|XZ)$ over $1s$ orbitals in momentum space---the Fock projection under
+which Coulomb--Sturmians become hyperspherical harmonics, the setting native
+to the Averys' generalized-Sturmian program---the three centers enter as
+three \emph{phases} rather than three foci, so the coordinate obstruction
+(prolate spheroidal coordinates admit exactly two foci) dissolves.
+\textbf{[MEASURED]} The resulting momentum integral reproduces the exact
+integral (agreement $1.9\times10^{-14}$ against a closed-form Gaussian
+reference; $4.3\times10^{-7}$ against an independent Slater evaluation), and
+its angular part collapses to a single spherical Bessel kernel.
+\textbf{[MEASURED / classical]} What remains---the radial content---is a
+two-scale Bessel moment whose period is a \emph{complete elliptic integral}
+(verified to 31 digits), living on the genus-one curve
+$y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$; it degenerates to the genus-zero
+two-center case exactly on the diagonal $c_{1}=c_{2}$.  \textbf{[SYMBOLIC +
+MEASURED]} The one-mass slice is the Laplace transform of the elliptic
+differential---an elliptic deformation of the Bessel $K_{0}$, reducing to
+$K_{0}(D)$ when the two orbital scales coincide and to the complete elliptic
+integral $K$ at zero separation---and satisfies an explicit fourth-order
+Picard--Fuchs equation with polynomial coefficients (residual
+$\sim\!10^{-24}$), whose characteristic exponents are the four branch points
+of the curve.  \textbf{[OBSERVATION]} This places a molecular integral inside
+the modern theory of Bessel moments and two-mass elliptic Feynman integrals;
+a targeted literature search finds that connection unmade in either field.
+\textbf{[OPEN]} We do \emph{not} give the finite closed form, and we show the
+natural route to it is obstructed: the elliptic-dilogarithm (unequal-mass
+sunrise) mechanism does not engage, because the modulus Picard--Fuchs source
+is not an elementary subtopology but lies in the integral's own Gauss--Manin
+$D$-module---the branch-point boundary that would supply the sunrise's tadpole
+vanishes identically.  \textbf{[OBSERVATION]} The object is therefore a
+genuinely new elliptic transcendent one level \emph{above} the
+elliptic-dilogarithm tower, a period of a rank-four irregular connection;
+\textbf{[OPEN]} whether it admits any closed form is a differential-Galois
+question we leave open.  The message is not a solution
+but a relocation: the third center does not make the radial integral messier
+within the two-center class, it raises the transcendence one genus, past the
+reach of the sunrise machinery.
+\end{abstract}
+
+\maketitle
+
+%% ========================================================================
+\section{The two-center class, and the wall beyond it}
+%% ========================================================================
+
+The electron-repulsion integral over Slater-type orbitals on two centers is
+one of the oldest solved problems in molecular quantum mechanics.  In prolate
+spheroidal coordinates, with the two nuclei at the foci, the Neumann
+expansion of $1/r_{12}$ terminates against the orbital angular momenta, and
+every integral reduces to elementary functions together with the exponential
+integral $E_{1}$, the logarithm, and Euler's constant~$\gamma$.  In the
+transcendence bookkeeping of the Geometric Vacuum program (Paper~18), these
+are \emph{embedding-tier} constants---the cost of the continuum two-center
+geometry rather than content of the discrete graph---and, decisively, they
+sit at transcendence \emph{weight one}: no $\pi$ survives (it cancels against
+the Coulomb $4\pi$), and no dilogarithm appears, even though the ordered
+radial integral has the simplex shape that generically produces one.  This
+weight-one closure is what lets the two-center repulsion density be
+\emph{decided} rather than merely counted (Paper~58): the closed form is a
+rational combination of $\{1,\,e^{-\lambda R}\}$, and Lindemann--Weierstrass
+separates its zeros.
+
+The genuine three-center integral has no such story.  Prolate spheroidal
+coordinates are built from exactly two foci; a third nucleus has nowhere to
+sit.  Gaussians escape this because two Gaussians on different centers
+multiply into a single Gaussian on a third point---Slater orbitals have no
+product theorem---and this, not any Geometric-Vacuum-specific limitation, is
+the seventy-year-old reason Gaussian bases displaced Slater orbitals for
+polyatomic quantum chemistry.  The modern state of the art for three-center
+Slater repulsion integrals (Ref.~\cite{ozdogan2012}) reduces them to a single
+infinite expansion or a one-dimensional numerical quadrature; the one
+celebrated closed form in correlated two-electron theory, Fromm and Hill's
+analytic evaluation~\cite{fromm_hill1987}, is a \emph{dilogarithm}---a
+genus-zero object---and belongs to a different integral topology (the
+one-center, $r_{12}$-correlated master integral), which lacks the structure
+we are about to exhibit.
+
+This paper asks what the three-center integral \emph{is}, transcendentally,
+and answers: it is an elliptic object.  The two-center weight-one closure is
+a genus-zero fact and it stops at two centers.  The third center raises the
+transcendence one genus, to the elliptic (genus-one) world of Bessel moments
+and two-mass sunrise Feynman integrals.  We establish this constructively,
+validate every step numerically, place the object in the literature, and mark
+the finite closed form as open.
+
+\emph{Lineage and scope.}  The momentum-space route is not new machinery.
+Momentum-space Coulomb--Sturmians are hyperspherical harmonics under Fock's
+conformal projection~\cite{fock1935}, the framework the Averys built into the
+generalized-Sturmian method~\cite{avery1989,avery2006}, and the closest prior
+art to the present calculation is the Averys' own momentum-space evaluation of
+Coulomb--Sturmian repulsion integrals~\cite{avery_avery_4center}, which
+stops---as all prior work does---at expansion and numerics.  What is new here
+is the reading: that the residual radial object is a specific elliptic Bessel
+moment, and hence that a molecular integral is an instance of the
+elliptic-Feynman-integral class.  We work throughout with $1s$ orbitals at a
+common exponent; the generalization to higher $(n,\ell,m)$ multiplies the
+integrand by solid harmonics and shifts exponents but does not change the
+genus, and we return to this in Sec.~\ref{sec:scope}.
+
+%% ========================================================================
+\section{The momentum-space reduction}
+\label{sec:momentum}
+%% ========================================================================
+
+Write the chemist integral for two densities
+$\rho_{1}=\chi_{X}\chi_{Y}$ and $\rho_{2}=\chi_{X}\chi_{Z}$, two two-center
+$1s$ densities that share the center $X$ on different axes.  With the Fourier
+representation of the kernel,
+$1/|\bm r_{1}-\bm r_{2}| = (2\pi^{2})^{-1}\!\int d^{3}k\,
+e^{i\bm k\cdot(\bm r_{1}-\bm r_{2})}/k^{2}$, the integral becomes
+%
+\begin{equation}
+  (XY|XZ) = \frac{1}{2\pi^{2}}\int \frac{d^{3}k}{k^{2}}\,
+  \tilde\rho_{1}(\bm k)\,\overline{\tilde\rho_{2}(\bm k)},
+  \qquad
+  \tilde\rho(\bm k)=\!\int\! \rho(\bm r)\,e^{i\bm k\cdot\bm r}\,d^{3}r .
+  \label{eq:momentum}
+\end{equation}
+%
+Each center now appears only through a phase $e^{i\bm k\cdot\bm R}$: three
+centers are three phases, not three foci, and there is nothing to
+diagonalize.  Equation~\eqref{eq:momentum} is exact; the only content is the
+density Fourier transform $\tilde\rho$ and the $\bm k$ integral.
+
+We verify Eq.~\eqref{eq:momentum} two independent ways on the reference
+geometry $X=(0,0,0)$, $Y=(0,0,2)$, $Z=(1.5,0,0.5)$ (bohr), $\zeta=1$, for
+which a McMurchie--Davidson evaluation over $8$-Gaussian $1s$ fits gives the
+ground truth $(XY|XZ)=0.204941722$.  \textbf{[MEASURED]} Using the closed-form
+Fourier transform of the Gaussian-fitted density (a product of Gaussians is a
+Gaussian) in Eq.~\eqref{eq:momentum} reproduces the McMurchie--Davidson value
+on the \emph{same} fits to $1.9\times10^{-14}$: the momentum formula, the
+Fourier and Coulomb conventions, and the $\bm k$-quadrature are correct.
+Independently, computing the \emph{true} Slater density transform (no Gaussian
+fit) by a one-parameter reduction of the two-center Yukawa product reproduces
+the ground truth to $4.3\times10^{-7}$.  Both are pinned in the regression
+suite~\cite{test_routeC}.
+
+\emph{The angular integral closes to a spherical Bessel kernel.}  Writing
+each Slater factor through $e^{-\zeta r}=-\partial_{\zeta}(e^{-\zeta r}/r)$
+and the Feynman parametrization of the resulting Yukawa product, the three
+phases combine into a \emph{single} phase $e^{i\bm k\cdot\bm W}$ with
+$\bm W(s,t)=(t-s)\bm X+s\bm Y-t\bm Z$ ($s,t$ the two Feynman parameters), so
+the angular integral is elementary,
+%
+\begin{equation}
+  \int d\Omega_{\bm k}\, e^{i\bm k\cdot\bm W}
+  = 4\pi\, j_{0}(k|\bm W|)
+  = 4\pi\,\frac{\sin(k|\bm W|)}{k|\bm W|}.
+  \label{eq:angular}
+\end{equation}
+%
+The whole integral reduces to a two-dimensional Feynman integral over a
+one-dimensional radial ($k$) integral,
+%
+\begin{align}
+  (XY|XZ) = \frac{8}{\pi}\,
+  &\partial_{\zeta_{a}}\partial_{\zeta_{b}}
+   \partial_{\zeta_{c}}\partial_{\zeta_{d}}
+   \!\int_{0}^{1}\!\!ds\!\int_{0}^{1}\!\!dt\!\int_{0}^{\infty}\!\!dk\;
+   j_{0}(k|\bm W|)\notag\\[-2pt]
+  &\times\frac{e^{-D_{1}\Delta_{1}}}{\Delta_{1}}\,
+          \frac{e^{-D_{2}\Delta_{2}}}{\Delta_{2}}
+  \;\Bigg|_{\zeta=1},
+  \label{eq:reduced}
+\end{align}
+%
+with $\Delta_{1}=\sqrt{c_{1}k^{2}+1}$, $\Delta_{2}=\sqrt{c_{2}k^{2}+1}$,
+$c_{1}=s(1-s)$, $c_{2}=t(1-t)$, and $D_{1}=|X-Y|$, $D_{2}=|X-Z|$.  The
+$\partial_{\zeta}$'s (a bookkeeping device restoring the Slater from the
+Yukawa) and the $(s,t)$ integrations are elementary operations; the
+transcendental content is entirely in the radial factor.
+Equation~\eqref{eq:reduced} reproduces the ground truth to
+$1.8\times10^{-6}$ \textbf{[MEASURED]}, the residual being the finite-order
+angular and Feynman quadrature.
+
+%% ========================================================================
+\section{The transcendence jump: genus zero to genus one}
+\label{sec:genus}
+%% ========================================================================
+
+The radial factor of Eq.~\eqref{eq:reduced} carries two dispersion factors
+$\Delta_{1},\Delta_{2}$ with \emph{different} scales $c_{1}\neq c_{2}$.  A
+single such factor is benign.  Under Fock's substitution
+$k\sqrt{c}=m\sinh\theta$ it linearizes, and \textbf{[MEASURED, $6\times
+10^{-18}$]}
+%
+\begin{equation}
+  \int_{0}^{\infty}\!\!\cos(kb)\,
+  \frac{e^{-D\sqrt{c\,k^{2}+m^{2}}}}{\sqrt{c\,k^{2}+m^{2}}}\,dk
+  = \frac{1}{\sqrt{c}}\,
+    K_{0}\!\Big(\tfrac{m}{\sqrt{c}}\sqrt{c\,D^{2}+b^{2}}\Big),
+  \label{eq:K0}
+\end{equation}
+%
+a Bessel $K_{0}$: the momentum-space Coulomb--Sturmian object, living on a
+rational (genus-zero) curve.  This is why the two-center engine is weight one.
+
+Two different scales cannot be linearized together.  Their product is
+governed by the algebraic curve
+%
+\begin{equation}
+  y^{2} = (c_{1}k^{2}+1)(c_{2}k^{2}+1),
+  \label{eq:curve}
+\end{equation}
+%
+a quartic with four distinct branch points $k=\pm i/\sqrt{c_{1}},\,
+\pm i/\sqrt{c_{2}}$ whenever $c_{1}\neq c_{2}$: an \emph{elliptic curve},
+genus one.  When $c_{1}=c_{2}$ the branch points collide and the quartic
+becomes a perfect square---rational, genus zero.  The cleanest witness is the
+period.  At $D_{1}=D_{2}=0$ the radial integral is exactly a complete
+elliptic integral \textbf{[MEASURED, 31 digits; classical]},
+%
+\begin{equation}
+  \int_{0}^{\infty}\!\frac{dk}{\sqrt{(c_{1}k^{2}+1)(c_{2}k^{2}+1)}}
+  = \frac{1}{a_{1}\sqrt{c_{1}c_{2}}}\,K(m),
+  \label{eq:period}
+\end{equation}
+%
+with $a_{i}=1/\sqrt{c_{i}}$ and modulus $m=1-c_{\min}/c_{\max}$
+(nondegenerate, $0<m<1$), while on the diagonal $c_{1}=c_{2}=c$ it collapses
+to the elementary $\pi/(2\sqrt{c})$.  Since $c_{1}=s(1-s)$ and $c_{2}=t(1-t)$
+range independently over $[0,\tfrac14]$, the full integral~\eqref{eq:reduced}
+is an integral over a \emph{family} of elliptic curves, of modulus
+$m(s,t)=1-c_{\min}/c_{\max}$, degenerate only on the measure-zero locus
+$s=t$ or $s=1-t$.  Every term generated by the $\partial_{\zeta}$'s is a
+meromorphic function on the same curve~\eqref{eq:curve}, so the whole integral
+is a period of this elliptic family.
+
+The structural statement is that the embedding tier of the transcendence
+taxonomy (Papers~18,~34) is \emph{genus-graded}: genus zero
+($\{E_{1},\ln,\gamma\}$) at two centers, genus one (elliptic) at three.
+The two two-center negatives---no $\pi$, no dilogarithm---are genus-zero
+properties; the third center does not climb to a higher rung of the
+polylogarithm weight tower but leaves that tower for the elliptic one.  This
+is the transcendence-level form of ``no coordinate system for three foci,''
+and it also explains, after the fact, why an attempt to identify the three-center
+value against dilogarithm constants was structurally doomed: the constants are
+in the wrong class.
+
+%% ========================================================================
+\section{The reduction: an elliptic Bessel moment}
+\label{sec:reduction}
+%% ========================================================================
+
+The radial factor can be named precisely.  Applying Eq.~\eqref{eq:K0} to each
+factor and Parseval's theorem, the radial core (at fixed Feynman parameters,
+before the elementary $j_{0}$ and $\partial_{\zeta}$ wrapping) is a two-mass
+Bessel moment \textbf{[MEASURED, 30 digits]},
+%
+\begin{equation}
+  M = \frac{2}{\pi\sqrt{c_{1}c_{2}}}
+  \int_{0}^{\infty}\!\! db\;
+  K_{0}\!\big(a_{1}\sqrt{p_{1}^{2}+b^{2}}\big)\,
+  K_{0}\!\big(a_{2}\sqrt{p_{2}^{2}+b^{2}}\big),
+  \label{eq:besselmoment}
+\end{equation}
+%
+with $a_{i}=1/\sqrt{c_{i}}$ and $p_{i}=D_{i}\sqrt{c_{i}}$.  This is a
+shifted-argument, two-scale member of the Bessel-moment family; it is not one
+of the single-scale moments $\int_{0}^{\infty}t^{k}K_{0}^{n}(t)\,dt$
+catalogued in closed form by Bailey, Borwein, Broadhurst and
+Glasser~\cite{bbbg2008}.
+
+A change of variable $x=\sqrt{c_{1}k^{2}+1}$ on the one-mass slice
+$N(D)\equiv M(D,0)$ puts it in the cleanest canonical form: the Laplace
+transform of the holomorphic elliptic differential,
+%
+\begin{equation}
+  N(D) = \frac{1}{\sqrt{c_{1}}}
+  \int_{1}^{\infty}\!
+  \frac{e^{-Dx}\,dx}{\sqrt{(x^{2}-1)(\rho\,x^{2}+1-\rho)}},
+  \qquad \rho=\frac{c_{2}}{c_{1}}.
+  \label{eq:laplace}
+\end{equation}
+%
+This is a single explicit one-dimensional integral of an elementary
+integrand---already sharper than the infinite series of the standard
+treatment~\cite{ozdogan2012}, and it makes the elliptic structure manifest.
+It is an \emph{elliptic deformation of the Bessel} $K_{0}$: as $\rho\to0$
+(coincident scales) $N\to K_{0}(D)$, and at $D=0$ it is the complete elliptic
+integral $K$ of Eq.~\eqref{eq:period}.
+
+Because $1/\sqrt{Q}$, $Q(x)=(x^{2}-1)(\rho x^{2}+1-\rho)$, satisfies the
+first-order relation $Q f' + \tfrac12 Q' f = 0$, and the boundary at the
+branch point $x=1$ vanishes ($Q(1)^{1/2}=0$), integration by parts against
+$e^{-Dx}$ (using $\int_{1}^{\infty}x^{n}e^{-Dx}f\,dx=(-1)^{n}L^{(n)}(D)$,
+$L\equiv\sqrt{c_{1}}\,N$) yields an exact fourth-order Picard--Fuchs equation
+with polynomial coefficients \textbf{[SYMBOLIC PROOF; MEASURED residual
+$\sim\!10^{-24}$]},
+%
+\begin{equation}
+  D\rho\,L'''' + 2\rho\,L''' + D(1{-}2\rho)L'' + (1{-}2\rho)L'
+  - D(1{-}\rho)L = 0.
+  \label{eq:pf}
+\end{equation}
+%
+Its characteristic polynomial factors as
+$\rho(s^{2}-1)\big(s^{2}+(1-\rho)/\rho\big)$, whose roots $s=\pm1$ and
+$s=\pm i\sqrt{(1-\rho)/\rho}$ are exactly the four branch points of the
+curve~\eqref{eq:curve}: the $K_{0}/I_{0}$ sector from the $(x^{2}-1)$ pair,
+the oscillatory $J_{0}/Y_{0}$ sector from the other.  A subordination
+identity casts the same object as a two-scale sunrise integral,
+$\propto\int\!\!\int ds_{1}ds_{2}\,(s_{1}s_{2})^{-1/2}
+e^{-D_{1}^{2}/4s_{1}-s_{1}-D_{2}^{2}/4s_{2}-s_{2}}/\sqrt{s_{1}c_{1}+s_{2}c_{2}}$,
+whose second-Symanzik-type $\sqrt{\text{linear form}}$ is the genus-one
+signature and separates only when $c_{1}=c_{2}$.
+
+One numerical fact pins the object's class beyond the period.  $N(D)$ is
+\emph{non-analytic in $D$ at $D=0$}: it carries a $D\ln D$ term
+\textbf{[MEASURED]}, so it is not a pure elliptic integral ($K$/$E$ are
+analytic in their parameters).  The elliptic $D=0$ period together with the
+$D\ln D$ nonanalyticity are the two fingerprints of an
+\emph{elliptic ${\oplus}$ logarithmic} object---the inhomogeneous
+(``regulator'') term of the Picard--Fuchs solution associated with the elliptic
+dilogarithm~\cite{blochvanhove2015,adamsbognerweinzierl2014}---a
+correspondence whose reach we test, and bound, in
+Sec.~\ref{sec:obstruction}.
+
+%% ========================================================================
+\section{The elliptic-dilogarithm route is obstructed}
+\label{sec:obstruction}
+%% ========================================================================
+
+The unequal-mass sunrise is closed by variation of parameters: a second-order
+Picard--Fuchs operator in the external variable annihilates the two periods,
+its inhomogeneity is an elementary subtopology (a tadpole), and the particular
+solution---an iterated integral of the periods against that elementary
+source---is the elliptic dilogarithm~\cite{adamsbognerweinzierl2014,
+blochvanhove2015}.  Running the same machinery on $N(D)$ is the natural
+attempt.  It does not close, and the reason is structural.
+
+The curve $y^{2}=Q(x,\rho)$ of Eq.~\eqref{eq:curve} moves with the modulus
+$\rho$, not with the Laplace variable $D$.  Accordingly the two periods
+$K(\rho),K(1-\rho)$ are the homogeneous solutions of the second-order modulus
+operator \textbf{[MEASURED: both annihilated to $10^{-18}$;
+$L(0,\rho)=K(1-\rho)$ to $19$ digits]}
+%
+\begin{equation}
+  \mathcal{M}_{\rho}
+  = \rho(1-\rho)\,\partial_{\rho}^{2} + (1-2\rho)\,\partial_{\rho}
+    - \tfrac14 ,
+  \label{eq:modpf}
+\end{equation}
+%
+and they are \emph{not} solutions of the fourth-order operator in
+$D$: a constant gives $\mathcal{O}[1]=-D(1-\rho)\neq0$, and the single
+Bessel functions of both sectors, $K_{0}(D),I_{0}(D)$ and
+$J_{0}(\omega D),Y_{0}(\omega D)$ with $\omega=\sqrt{(1-\rho)/\rho}$, are
+likewise not $D$-solutions \textbf{[MEASURED]} (they are coupled, which is why
+Eq.~\eqref{eq:pf} does not factor into elementary Bessel operators).  The
+elliptic-dilogarithm construction lives on the periods, so it must be run in
+the modulus $\rho$.
+
+There it meets the obstruction.  Acting with $\mathcal{M}_{\rho}$ under the
+integral sign is an exact total derivative \textbf{[SYMBOLIC PROOF; exact
+residual $0$]},
+%
+\begin{equation}
+  \mathcal{M}_{\rho}\big[Q^{-1/2}\big]
+  = \frac{d}{dx}\!\left[\,g(x)\,Q^{-1/2}\right],
+  \quad
+  g(x)=\frac{-x(x^{2}-1)}{4(\rho x^{2}+1-\rho)},
+  \quad g(1)=0,
+  \label{eq:exactform}
+\end{equation}
+%
+so for $D\neq0$ the modulus source is
+$S(D,\rho)\equiv\mathcal{M}_{\rho}[L]=D\!\int_{1}^{\infty}e^{-Dx}g\,Q^{-1/2}dx$.
+Because $g$ \emph{vanishes at the branch point} $x=1$, differentiating in the
+modulus produces no branch-point boundary term: the analogue of the sunrise's
+pinched propagator---the elementary tadpole that would be the
+inhomogeneity---is absent, and the source stays on the elliptic curve.
+Quantitatively \textbf{[MEASURED, $45$ digits]}, $S$ closes exactly and
+finitely only inside the integral's own Gauss--Manin $D$-module,
+%
+\begin{equation}
+  S(D,\rho)=\sum_{k=0}^{3}P_{k}(D,\rho)\,\partial_{D}^{k}L,
+  \qquad \deg_{D}P_{k}=2,
+  \label{eq:inmodule}
+\end{equation}
+%
+with held-out residual $5\times10^{-44}$, flat under increase of the fit
+degree (numerically an exact finite identity); whereas the genuine
+variation-of-parameters shape---period level $\{L,\partial_{D}L\}$ plus an
+elementary Bessel subtopology $\{K_{0},K_{1}\}(D)$, $\{J_{0},Y_{0}\}(\omega
+D)$---only \emph{approximates} it (residual $2\times10^{-14}$ falling
+geometrically to $3\times10^{-30}$ across fit degrees, never saturating).  The
+inhomogeneity is in-module, not a simpler subtopology, and variation of
+parameters against the periods is therefore circular.
+
+\textbf{[OBSERVATION]} $N(D)$ is thus one transcendence level above the
+sunrise.  It is not an elliptic dilogarithm of elementary or period-level
+arguments; it is a period of the rank-four irregular connection defined by
+Eq.~\eqref{eq:pf}, for which the sunrise mechanism supplies no reduction to
+the elliptic-polylogarithm tower.  Whether it admits a closed form of any
+kind is a differential-Galois question---whether the fourth-order operator
+factors over the differential field generated by the periods
+$K(\rho),K(1-\rho)$---which we leave open.
+
+%% ========================================================================
+\section{Placement in the literature}
+\label{sec:literature}
+%% ========================================================================
+
+The object of Eqs.~\eqref{eq:besselmoment}--\eqref{eq:pf} sits inside a
+fully developed body of mathematics, applied so far only to problems far from
+chemistry.  Two-mass elliptic Feynman integrals---the sunrise/banana
+family---are evaluated in terms of elliptic dilogarithms as inhomogeneous
+solutions of exactly this kind of Picard--Fuchs equation
+\cite{blochvanhove2015,adamsbognerweinzierl2014,blochkerrvanhove2015}; their
+periods are the complete elliptic integrals of Eq.~\eqref{eq:period}, and at
+special (complex-multiplication) scale ratios their values reach critical
+$L$-values of modular forms~\cite{broadhurst2016,fresansabbahyu2023}.  The
+closest published analog to Eq.~\eqref{eq:besselmoment} is a doubled-argument
+Bessel moment that Broadhurst evaluated as a product of complete elliptic
+integrals via a lattice-Green-function contour~\cite{broadhurst2008}: the
+same ``two-scale moment $\to$ product of $K$'s'' mechanism we expect at
+rational $\rho$.
+
+On the chemistry side the treatment is uniformly numerical: three-center
+Slater repulsion integrals are reduced to infinite series or one-dimensional
+quadrature~\cite{ozdogan2012,barnett_coulson1951}, and the Averys'
+momentum-space Coulomb--Sturmian route~\cite{avery_avery_4center}, closest in
+spirit to ours, likewise stops at expansion and numerics.  We could find no
+paper drawing the bridge in either direction: no chemistry reference names an
+electron-repulsion integral as a Bessel moment or an elliptic Feynman
+integral, and no amplitudes reference applies the elliptic machinery to a
+molecular integral.  \textbf{[OBSERVATION]} The identification---that the
+three-center Slater integral, via the Fock projection, is a two-scale Bessel
+moment on the sunrise elliptic curve---appears to be unmade.  This is an
+absence from a targeted search, not a proof of absence; the residual risk is
+an obscure single source.
+
+%% ========================================================================
+\section{Scope, and the open frontier}
+\label{sec:scope}
+%% ========================================================================
+
+\emph{Scope.}  The demonstration is for $1s$ orbitals at a common exponent.
+Higher $(n,\ell,m)$ multiply the integrand of Eq.~\eqref{eq:reduced} by
+solid-harmonic polynomials in $\bm k$ and shift the exponents; these change
+the weights and arguments but not the genus of the curve~\eqref{eq:curve},
+which is set by the two distinct scales.  The result is a statement about the
+transcendence \emph{class} of the three-center integral, established on its
+simplest genuine instance.  It does not by itself deliver a polyatomic energy:
+a molecular Hamiltonian requires the full three-center tensor, and a value
+that is part closed-form and part numerical is neither more accurate (the
+Gaussian fits are already exact to fit quality) nor decidable.  What the
+reduction buys is an exact, fast, geometry-native evaluator for the
+three-center integral and---the point of this paper---a precise diagnosis of
+why it is hard.
+
+\emph{The open problem.}  As shown in Sec.~\ref{sec:obstruction}, the
+elliptic-dilogarithm route is obstructed: $N(D)$ is not an elliptic
+dilogarithm of elementary or period-level data but a period of the rank-four
+irregular connection~\eqref{eq:pf}.  The remaining question is whether that
+connection admits \emph{any} closed form---equivalently, whether its
+fourth-order operator factors over the differential field generated by the
+periods $K(\rho),K(1-\rho)$---a differential-Galois problem we do not settle.
+(This tempers a literature-scout expectation that the object would sit at the
+tractable elliptic-dilogarithm level because it has only two propagator
+factors; that pattern-match from the sunrise is overridden by the in-module
+computation of Sec.~\ref{sec:obstruction}.)  Because it continues the Averys'
+momentum-space Sturmian program and requires elliptic-Feynman-integral
+technique one level beyond the sunrise, it is the natural place for
+collaboration.
+
+%% ========================================================================
+\section{Conclusion}
+%% ========================================================================
+
+The three-center electron-repulsion integral is not merely a harder version
+of the two-center one; it is an object of higher genus.  Two centers close at
+genus zero over $\{E_{1},\ln,\gamma\}$; three centers, read in momentum space
+where the coordinate obstruction dissolves, reduce to a two-scale Bessel
+moment on an elliptic curve, an elliptic deformation of the Bessel $K_{0}$
+with an explicit fourth-order Picard--Fuchs equation and a period that is a
+complete elliptic integral.  The seventy-year difficulty of polyatomic Slater
+integrals is, at the level of transcendence, a genus jump; and a classical
+molecular integral turns out to be an instance of the modern theory of
+elliptic Feynman integrals---a bridge that, to our knowledge, had not been
+drawn.  The finite closed form remains open---and, we have shown, past the
+reach of the sunrise's elliptic-dilogarithm mechanism, whose inhomogeneity is
+absent here: the object is a period of a rank-four irregular connection, and
+whether it closes at all is a differential-Galois question, posed here as the
+frontier it deserves to be.
+
+%% ========================================================================
+\begin{thebibliography}{99}
+
+\bibitem{fock1935}
+V.~Fock, ``Zur Theorie des Wasserstoffatoms,''
+\textit{Z.\ Phys.}\ \textbf{98}, 145--154 (1935).
+
+\bibitem{avery1989}
+J.~Avery, \textit{Hyperspherical Harmonics:\ Applications in Quantum
+Theory} (Kluwer Academic, Dordrecht, 1989).
+
+\bibitem{avery2006}
+J.~E.~Avery and J.~S.~Avery, \textit{Generalized Sturmians and Atomic
+Spectra} (World Scientific, Singapore, 2006).
+
+\bibitem{avery_avery_4center}
+J.~E.~Avery and J.~S.~Avery, ``4-Center STO interelectron repulsion
+integrals with Coulomb Sturmians,'' \textit{Adv.\ Quantum Chem.}\ (Elsevier),
+ScienceDirect S0065327617300710.
+
+\bibitem{shibuya1965}
+T.~Shibuya and C.~E.~Wulfman, ``Molecular orbitals in momentum space,''
+\textit{Proc.\ R.\ Soc.\ Lond.\ A}\ \textbf{286}, 376 (1965).
+
+\bibitem{ozdogan2012}
+T.~\"Ozdo\u{g}an and E.~Ruiz, ``Evaluation of three-center two-electron
+repulsion integrals over Slater-type orbitals,'' arXiv:1209.3755 (2012).
+
+\bibitem{barnett_coulson1951}
+M.~P.~Barnett and C.~A.~Coulson, ``The evaluation of integrals occurring
+in the theory of molecular structure.\ Parts I \& II,''
+\textit{Philos.\ Trans.\ R.\ Soc.\ Lond.\ A}\ \textbf{243}, 221--249 (1951).
+
+\bibitem{fromm_hill1987}
+D.~M.~Fromm and R.~N.~Hill, ``Analytic evaluation of the three-electron
+integral,'' \textit{Phys.\ Rev.\ A}\ \textbf{36}, 1013--1044 (1987).
+
+\bibitem{bbbg2008}
+D.~H.~Bailey, J.~M.~Borwein, D.~Broadhurst, and M.~L.~Glasser, ``Elliptic
+integral evaluations of Bessel moments and applications,''
+\textit{J.\ Phys.\ A}\ \textbf{41}, 205203 (2008); arXiv:0801.0891.
+
+\bibitem{broadhurst2008}
+D.~Broadhurst, ``Elliptic integral evaluation of a Bessel moment by contour
+integration of a lattice Green function,'' arXiv:0801.4813 (2008).
+
+\bibitem{blochvanhove2015}
+S.~Bloch and P.~Vanhove, ``The elliptic dilogarithm for the sunset graph,''
+\textit{J.\ Number Theory}\ \textbf{148}, 328--364 (2015); arXiv:1309.5865.
+
+\bibitem{adamsbognerweinzierl2014}
+L.~Adams, C.~Bogner, and S.~Weinzierl, ``The two-loop sunrise graph in two
+space-time dimensions with arbitrary masses in terms of elliptic
+dilogarithms,'' \textit{J.\ Math.\ Phys.}\ \textbf{55}, 102301 (2014);
+arXiv:1405.5640.
+
+\bibitem{blochkerrvanhove2015}
+S.~Bloch, M.~Kerr, and P.~Vanhove, ``A Feynman integral via higher normal
+functions,'' \textit{Compos.\ Math.}\ \textbf{151}, 2329--2375 (2015);
+arXiv:1406.2664.
+
+\bibitem{broadhurst2016}
+D.~Broadhurst, ``Feynman integrals, $L$-series and Kloosterman moments,''
+arXiv:1604.03057 (2016).
+
+\bibitem{fresansabbahyu2023}
+J.~Fres\'an, C.~Sabbah, and J.-D.~Yu, ``Quadratic relations between Bessel
+moments,'' \textit{Algebra Number Theory}\ \textbf{17}, 541--602 (2023);
+arXiv:2006.02702.
+
+\bibitem{loutey_paper18}
+J.~Loutey, ``Exchange Constants: A Transcendence Taxonomy for the Geometric
+Vacuum,'' Paper~18 in this series.
+
+\bibitem{loutey_paper34}
+J.~Loutey, ``A Projection Taxonomy for Physical Observables,'' Paper~34 in
+this series.
+
+\bibitem{loutey_paper58}
+J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property: The Abelian
+Residue of Multi-Center Bonding,'' Paper~58 in this series.
+
+\bibitem{test_routeC}
+\textsc{GeoVac} regression suite, \texttt{tests/test\_routeC\_momentum.py}
+(momentum reproduction of the three-center integral; the single-dispersion
+$K_{0}$ identity; the elliptic-curve period), and
+\texttt{tests/test\_two\_center\_eri\_aabb.py} (two-center weight-one census).
+
+\end{thebibliography}
+
+\end{document}

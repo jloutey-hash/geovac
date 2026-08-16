@@ -1143,6 +1143,11 @@ chemistry, not a GeoVac-specific wall.
 - **C. Momentum space / Fourier** — kernel is 4pi/k^2, translation is a phase
   e^{ik.R}, three centres = three phases. This *is* the Fock projection. Whether
   the two-body case closes is **genuinely open**; most GeoVac-native route.
+  **OPENED + method validated + obstruction IDENTIFIED 2026-08-16 (§10.5): the
+  coordinate wall dissolves, the angular Omega_k integral closes to a j0 Bessel
+  kernel, and the transcendence is ELLIPTIC (genus 1) — the third centre raises the
+  two-centre engine's genus-0 {E1,ln,gamma} to a genus-1 elliptic family, degenerate
+  only on the shared-Fock-scale diagonal.**
   > **CORRECTED 2026-08-14 (Poly-2).** This bullet originally added "and the
   > one-body 3-centre analog is already solved in-repo." **It is not.**
   > `shibuya_wulfman.py` computes `<psi^A_{nlm}|-Z_B/r_B|psi^A_{n'l'm'}>` —
@@ -1279,3 +1284,92 @@ this object one transcendence-wall better than the exchange class.
 
 Drivers: `debug/bet1_three_center_1e_{reference,assembly,symbolic}.py`. Backing:
 `tests/test_two_center_eri_aabb.py::test_three_center_1e_closes_weight_one_gamma_free`.
+
+---
+
+## 10.5 Route C: the two-body 3-centre ERI in momentum space (2026-08-16)
+
+The remaining genuine polyatomic wall is the two-body three-centre ERI
+`T2 = (XY|XZ)` — two two-centre densities sharing centre X on two different axes,
+for which no prolate-spheroidal system exists (§10.4). Route C attacks it in
+momentum space, where the Coulomb kernel is `4pi/k^2`, a translation is a phase
+`e^{ik.R}`, and three centres are three PHASES rather than three foci. Driver
+`debug/routeC_momentum_poc.py`; memo `debug/sprint_routeC_momentum_memo.md`;
+backing `tests/test_routeC_momentum.py`.
+
+### The method is exact — the coordinate wall dissolves
+
+```
+(XY|XZ) = (1/2pi^2) int d3k/k^2  rho1~(k) conj(rho2~(k)),   rho~(k)=int rho(r)e^{ik.r}d3r
+```
+Validated two independent ways against the ground truth `0.20494172`:
+- **Gaussian density FT** (closed form) vs `eri_md` on the same Gaussians: **1.9e-14**
+  (isolates formula + conventions + k-integrator). `rho~(0)` = the overlap, exactly.
+- **TRUE Slater density FT** via a Feynman/Yukawa reduction, independent of the
+  Gaussian fit: **4.3e-7** (finite-difference `d/dzeta` limited).
+
+### The angular integral closes GeoVac-natively (j0 Bessel kernel)
+
+Writing the Slater FT via `e^{-zr} = -d/dz(e^{-zr}/r)` and the Yukawa-product
+convolution (Feynman-parametrized), the three phases combine into ONE phase
+`e^{ik.W}`, `W(s,t) = (t-s)X + sY - tZ`, so `int dOmega_k e^{ik.W} = 4pi j0(k|W|)`
+and the whole ERI reduces to a **2D Feynman x 1D radial** integral (validated 1.8e-6):
+```
+(XY|XZ) = (8/pi) d4/dza dzb dzc dzd  int_0^1 ds int_0^1 dt int_0^inf dk
+            j0(k|W|) e^{-D1 Delta1}/Delta1  e^{-D2 Delta2}/Delta2 |_{zeta=1}
+Delta1 = sqrt(s(1-s)k^2 + s za^2 + (1-s) zb^2),  D1 = |X-Y|;   Delta2 analogous.
+```
+
+### The transcendence obstruction, IDENTIFIED: the third centre is ELLIPTIC (genus 1)
+
+A SINGLE dispersion factor closes under the Fock substitution `k sqrt(c)=m sinh(theta)`:
+```
+int_0^inf cos(kb) e^{-D sqrt(c k^2+m^2)}/sqrt(c k^2+m^2) dk
+     = (1/sqrt c) K0( (m/sqrt c) sqrt(c D^2 + b^2) )        (verified 6e-18)
+```
+— a Bessel `K0`, the momentum-space Coulomb-Sturmian (Fock) object, on a **genus-0
+(rational) curve**; this is why the two-centre engine closed at weight 1 over
+`{E1, ln, gamma}`. The three-centre integrand carries **TWO dispersion factors with
+different scales `c1=s(1-s) != c2=t(1-t)`**, whose product defines the algebraic curve
+
+    y^2 = (c1 k^2 + 1)(c2 k^2 + 1)      — a QUARTIC,
+
+an **elliptic curve (genus 1) whenever c1 != c2**, degenerating to a perfect square
+(rational, genus 0) exactly on the diagonal `c1 = c2`. Decisive witness — the `D=0`
+period is a **complete elliptic integral** (verified 31 digits):
+
+    int_0^inf dk / sqrt((c1 k^2+1)(c2 k^2+1)) = (1/(a1 sqrt(c1 c2))) K(m),
+    a1 = 1/sqrt(c1),  m = 1 - (a2/a1)^2   (nondegenerate, 0 < m < 1)
+
+whereas the diagonal gives `int dk/(c k^2+1) = pi/(2 sqrt c)`, elementary. Over the
+`(s,t)` Feynman domain this is a **family of elliptic curves**, modulus
+`m(s,t) = 1 - c_min/c_max`, degenerate only on the measure-zero locus `s=t` or
+`s=1-t`. Every `d/dzeta`-generated term (`1/Delta_i^{3,4,5} e^{-D_i Delta_i}`) is
+meromorphic on the *same* curve, so the whole ERI is a period/quasi-period of this
+elliptic family.
+
+**Resolution.** The third centre raises the transcendence from genus-0
+polylogarithms (`{E1, ln, gamma}`, the two-centre engine) to **genus-1 ELLIPTIC
+transcendentals (elliptic polylogarithms)**. This is the exact momentum-space/Fock
+form of the "no shared hypersphere for three foci" wall — the two densities' Fock
+scales coincide (a *shared* S^3) only on the degenerate diagonal `c1=c2`. It also
+explains why a dilog/zeta(2) PSLQ never lands: wrong transcendence CLASS (elliptic,
+not polylog). Supporting numerics: the collinear value `0.395355766...` is provably
+NOT a rational combination of `{1, e^-2, e^-4}` (weight-0 PSLQ returns only huge
+spurious coefficients) — consistent with a genus-1 object, not the exp-polynomial the
+two-centre exchange `J(R)` was.
+
+Rigorous backbone (verified >=30 digits): (i) subordination reduces the two-scale
+radial integral to a **sunrise-type** Feynman integral
+`Phi(0)=(1/2sqrt pi) int int ds1 ds2 (s1 s2)^{-1/2} e^{-D1^2/4s1-s1-D2^2/4s2-s2}/sqrt(s1 c1+s2 c2)`
+whose Symanzik `sqrt`(linear form) is the genus-1 signature and separates only when
+`c1=c2`; (ii) the `D=0` elliptic-`K` period above.
+
+Frontier (THE Avery-call topic): the closed form of `T2` in **elliptic
+polylogarithms** on this elliptic family (the genus-1 analogue of `{E1,ln,gamma}` on
+the rational two-centre curve). Scope: s-type validated; higher l is mechanical
+(solid-harmonic polynomials in k) and does not change the genus. Does NOT solve water
+(value is all-or-nothing at the tensor level, §10.4); buys an exact GeoVac-native
+evaluator + the transcendence diagnosis. Driver `debug/routeC_momentum_poc.py`
+(evaluator + elliptic witness), `debug/routeC_weight_probe.py` (collinear value +
+weight-0 exclusion); test `tests/test_routeC_momentum.py`.
