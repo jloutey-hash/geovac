@@ -1,0 +1,103 @@
+{
+  "cis": [
+    {
+      "band": 1,
+      "dev": 0.0,
+      "n_pi": 0,
+      "total_over_pi": 0.0,
+      "centers": []
+    },
+    {
+      "band": 2,
+      "dev": 0.0,
+      "n_pi": 3,
+      "total_over_pi": 3.0,
+      "centers": [
+        [
+          2.268,
+          2.696
+        ],
+        [
+          2.446,
+          2.446
+        ],
+        [
+          2.696,
+          2.268
+        ]
+      ]
+    },
+    {
+      "band": 3,
+      "dev": 0.0,
+      "n_pi": 3,
+      "total_over_pi": 3.0,
+      "centers": [
+        [
+          2.268,
+          2.696
+        ],
+        [
+          2.446,
+          2.446
+        ],
+        [
+          2.696,
+          2.268
+        ]
+      ]
+    }
+  ],
+  "loops": [
+    {
+      "tag": "tiny @central (encl 1)",
+      "center": [
+        2.445,
+        2.445
+      ],
+      "r": 0.12,
+      "transport_sign": -1.0,
+      "phase": "pi"
+    },
+    {
+      "tag": "mid @central (encl 1)",
+      "center": [
+        2.445,
+        2.445
+      ],
+      "r": 0.2,
+      "transport_sign": -1.0,
+      "phase": "pi"
+    },
+    {
+      "tag": "big enclosing all 3",
+      "center": [
+        2.482,
+        2.482
+      ],
+      "r": 0.4,
+      "transport_sign": -1.0,
+      "phase": "pi"
+    }
+  ],
+  "central_ci": {
+    "loc": [
+      2.445,
+      2.445
+    ],
+    "crossing_band": 2
+  },
+  "monopole": {
+    "g": [
+      0.050560374662528274,
+      0.050560348422157286
+    ],
+    "h": [
+      0.003813514857230094,
+      -0.0038141227980283514
+    ],
+    "ay_max": 0.0,
+    "jacobian": -0.000385656117571831,
+    "crossing_band": 2
+  }
+}

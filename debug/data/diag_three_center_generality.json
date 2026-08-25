@@ -1,0 +1,196 @@
+{
+  "Q1_basis": [
+    {
+      "tag": "minimal {1s,2p0} (control)   d=2.5 Z=1 struct",
+      "n": 6,
+      "evmin": 0.0697819017754312,
+      "dimAp": 1,
+      "pair_dimAp": [
+        6,
+        6,
+        6
+      ],
+      "irreducible": true
+    },
+    {
+      "tag": "minimal {1s,2p0} (control)   d=2.5 Be Z=2 phys",
+      "n": 6,
+      "evmin": 0.13672617455414113,
+      "dimAp": 1,
+      "pair_dimAp": [
+        6,
+        6,
+        6
+      ],
+      "irreducible": true
+    },
+    {
+      "tag": "enriched {1s,2s,2p0}         d=2.5 Z=1 struct",
+      "n": 9,
+      "evmin": 0.0025005057557928694,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true
+    },
+    {
+      "tag": "enriched {1s,2s,2p0}         d=2.5 Be Z=2 phys",
+      "n": 9,
+      "evmin": 0.013767397515013765,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true
+    },
+    {
+      "tag": "enriched {1s,2s,2p0} d=15 FAR control",
+      "n": 9,
+      "evmin": 0.9355603079389138,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        13,
+        12
+      ],
+      "irreducible": true
+    }
+  ],
+  "Q2_geometry": [
+    {
+      "tag": "bond angle 180.0 deg",
+      "n": 9,
+      "evmin": 0.13672617455414027,
+      "dimAp": 2,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": false,
+      "angle": 180
+    },
+    {
+      "tag": "bond angle 160.0 deg",
+      "n": 9,
+      "evmin": 0.1382755773769762,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "angle": 160
+    },
+    {
+      "tag": "bond angle 140.0 deg",
+      "n": 9,
+      "evmin": 0.14119156000769933,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "angle": 140
+    },
+    {
+      "tag": "bond angle 120.0 deg",
+      "n": 9,
+      "evmin": 0.14052570218531055,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "angle": 120
+    },
+    {
+      "tag": "bond angle 104.5 deg",
+      "n": 9,
+      "evmin": 0.13348266967298938,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "angle": 104.5
+    },
+    {
+      "tag": "bond angle  90.0 deg",
+      "n": 9,
+      "evmin": 0.11984903944344005,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "angle": 90
+    },
+    {
+      "tag": "H2O  O Z=1",
+      "n": 9,
+      "evmin": 0.010134030924148728,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "system": "H2O_ZO1"
+    },
+    {
+      "tag": "H2O  O Z=2",
+      "n": 9,
+      "evmin": 0.06760320321079445,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "system": "H2O_ZO2"
+    },
+    {
+      "tag": "H2O  O Z=4",
+      "n": 9,
+      "evmin": 0.15422968616061722,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "system": "H2O_ZO4"
+    },
+    {
+      "tag": "H2O-geom d=15 FAR control (Z=2/1)",
+      "n": 9,
+      "evmin": 0.96785965326545,
+      "dimAp": 1,
+      "pair_dimAp": [
+        12,
+        12,
+        12
+      ],
+      "irreducible": true,
+      "system": "far"
+    }
+  ]
+}

@@ -47,7 +47,7 @@ $y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$; it degenerates to the genus-zero
 two-center case exactly on the diagonal $c_{1}=c_{2}$.  \textbf{[SYMBOLIC +
 MEASURED]} The one-mass slice is the Laplace transform of the elliptic
 differential---an elliptic deformation of the Bessel $K_{0}$, reducing to
-$K_{0}(D)$ when the two orbital scales coincide and to the complete elliptic
+$K_{0}(D)$ when one scale decouples ($\rho\to0$) and to the complete elliptic
 integral $K$ at zero separation---and satisfies an explicit fourth-order
 Picard--Fuchs equation with polynomial coefficients (residual
 $\sim\!10^{-24}$), whose characteristic exponents are the four branch points
@@ -61,9 +61,12 @@ is not an elementary subtopology but lies in the integral's own Gauss--Manin
 $D$-module---the branch-point boundary that would supply the sunrise's tadpole
 vanishes identically.  \textbf{[OBSERVATION]} The object is therefore a
 genuinely new elliptic transcendent one level \emph{above} the
-elliptic-dilogarithm tower, a period of a rank-four irregular connection;
-\textbf{[OPEN]} whether it admits any closed form is a differential-Galois
-question we leave open.  The message is not a solution
+elliptic-dilogarithm tower, a period of a rank-four irregular connection.
+\textbf{[SYMBOLIC + MEASURED]} That connection is \emph{irreducible}---it is the
+Fourier--Laplace transform of an irreducible connection, and its monodromy admits
+no invariant coordinate subspace---so no closed form arises through factorization;
+\textbf{[OPEN]} whether the irreducible object admits a transcendental closed form
+we leave open.  The message is not a solution
 but a relocation: the third center does not make the radial integral messier
 within the two-center class, it raises the transcendence one genus, past the
 reach of the sunrise machinery.
@@ -76,35 +79,38 @@ reach of the sunrise machinery.
 %% ========================================================================
 
 The electron-repulsion integral over Slater-type orbitals on two centers is
-one of the oldest solved problems in molecular quantum mechanics.  In prolate
+one of the oldest solved problems in molecular quantum
+mechanics~\cite{harris_michels1967}.  In prolate
 spheroidal coordinates, with the two nuclei at the foci, the Neumann
 expansion of $1/r_{12}$ terminates against the orbital angular momenta, and
 every integral reduces to elementary functions together with the exponential
 integral $E_{1}$, the logarithm, and Euler's constant~$\gamma$.  In the
-transcendence bookkeeping of the Geometric Vacuum program (Paper~18), these
+transcendence bookkeeping of the Geometric Vacuum program (Paper~18~\cite{loutey_paper18}), these
 are \emph{embedding-tier} constants---the cost of the continuum two-center
 geometry rather than content of the discrete graph---and, decisively, they
-sit at transcendence \emph{weight one}: no $\pi$ survives (it cancels against
-the Coulomb $4\pi$), and no dilogarithm appears, even though the ordered
-radial integral has the simplex shape that generically produces one.  This
-weight-one closure is what lets the two-center repulsion density be
-\emph{decided} rather than merely counted (Paper~58): the closed form is a
-rational combination of $\{1,\,e^{-\lambda R}\}$, and Lindemann--Weierstrass
-separates its zeros.
+sit at transcendence \emph{weight one}, and no dilogarithm appears, even
+though the ordered radial integral has the simplex shape that generically
+produces one.  In the direct-Coulomb $(AA|BB)$ class---and there alone---even
+the prefactor $\pi$ cancels against the Coulomb $4\pi$, leaving a rational
+combination of $\{1,\,e^{-\lambda R}\}$ whose zeros Lindemann--Weierstrass
+separates;\ that is what lets \emph{that block} be \emph{decided} rather than
+merely counted (Paper~58~\cite{loutey_paper58}).  It does not extend to the
+three genuinely cross classes, which carry $E_1$, $\ln$ and $\gamma$ seeds and
+remain counted---weight one is not the same as decidable.
 
 The genuine three-center integral has no such story.  Prolate spheroidal
 coordinates are built from exactly two foci; a third nucleus has nowhere to
 sit.  Gaussians escape this because two Gaussians on different centers
-multiply into a single Gaussian on a third point---Slater orbitals have no
-product theorem---and this, not any Geometric-Vacuum-specific limitation, is
-the seventy-year-old reason Gaussian bases displaced Slater orbitals for
-polyatomic quantum chemistry.  The modern state of the art for three-center
+multiply into a single Gaussian on a third point~\cite{boys1950}---Slater
+orbitals have no product theorem---and this, not any Geometric-Vacuum-specific
+limitation, is the seventy-year-old reason Gaussian bases displaced Slater
+orbitals for polyatomic quantum chemistry.  The modern state of the art for three-center
 Slater repulsion integrals (Ref.~\cite{ozdogan2012}) reduces them to a single
 infinite expansion or a one-dimensional numerical quadrature; the one
-celebrated closed form in correlated two-electron theory, Fromm and Hill's
+celebrated closed form in correlated three-electron theory, Fromm and Hill's
 analytic evaluation~\cite{fromm_hill1987}, is a \emph{dilogarithm}---a
 genus-zero object---and belongs to a different integral topology (the
-one-center, $r_{12}$-correlated master integral), which lacks the structure
+one-center, explicitly correlated master integral), which lacks the structure
 we are about to exhibit.
 
 This paper asks what the three-center integral \emph{is}, transcendentally,
@@ -116,15 +122,24 @@ validate every step numerically, place the object in the literature, and mark
 the finite closed form as open.
 
 \emph{Lineage and scope.}  The momentum-space route is not new machinery.
-Momentum-space Coulomb--Sturmians are hyperspherical harmonics under Fock's
-conformal projection~\cite{fock1935}, the framework the Averys built into the
-generalized-Sturmian method~\cite{avery1989,avery2006}, and the closest prior
-art to the present calculation is the Averys' own momentum-space evaluation of
-Coulomb--Sturmian repulsion integrals~\cite{avery_avery_4center}, which
-stops---as all prior work does---at expansion and numerics.  What is new here
-is the reading: that the residual radial object is a specific elliptic Bessel
-moment, and hence that a molecular integral is an instance of the
-elliptic-Feynman-integral class.  We work throughout with $1s$ orbitals at a
+Molecular integrals over exponential-type orbitals have long been evaluated by
+Fourier transformation, molecular orbitals in momentum space going back to
+Shibuya and Wulfman~\cite{shibuya1965}:\ the transform of a two-center orbital
+product is classical~\cite{trivedi_steinborn1983}, its reduction to
+four-dimensional (Fock)
+hyperspherical harmonics goes back to Niukkanen~\cite{niukkanen1984}, and the
+general one- and two-electron multicenter integrals close, via the
+Fourier-transform method together with Feynman's identity, to low-dimensional
+numerical quadrature~\cite{grotendorst_steinborn1988}.  Momentum-space
+Coulomb--Sturmians are hyperspherical harmonics under Fock's conformal
+projection~\cite{fock1935}, the framework the Averys built into the
+generalized-Sturmian method~\cite{avery1989,avery2006,avery_avery2015} and
+applied to Coulomb--Sturmian repulsion
+integrals~\cite{avery_avery_4center,avery2013}---the closest prior art to the
+present calculation, which stops, as all prior work does, at expansion and
+numerics.  What is new here is the reading: that the residual radial object is a
+specific elliptic Bessel moment, and hence that a molecular integral is an
+instance of the elliptic-Feynman-integral class.  We work throughout with $1s$ orbitals at a
 common exponent; the generalization to higher $(n,\ell,m)$ multiplies the
 integrand by solid harmonics and shifts exponents but does not change the
 genus, and we return to this in Sec.~\ref{sec:scope}.
@@ -244,12 +259,13 @@ elliptic integral \textbf{[MEASURED, 31 digits; classical]},
 %
 \begin{equation}
   \int_{0}^{\infty}\!\frac{dk}{\sqrt{(c_{1}k^{2}+1)(c_{2}k^{2}+1)}}
-  = \frac{1}{a_{1}\sqrt{c_{1}c_{2}}}\,K(m),
+  = \frac{1}{\sqrt{c_{\max}}}\,K(m),
   \label{eq:period}
 \end{equation}
 %
-with $a_{i}=1/\sqrt{c_{i}}$ and modulus $m=1-c_{\min}/c_{\max}$
-(nondegenerate, $0<m<1$), while on the diagonal $c_{1}=c_{2}=c$ it collapses
+with modulus $m=1-c_{\min}/c_{\max}$
+(nondegenerate, $0<m<1$;\ prefactor verified for both orderings of
+$c_{1},c_{2}$ in \texttt{test\_paper59\_euclidean\_dictionary.py}), while on the diagonal $c_{1}=c_{2}=c$ it collapses
 to the elementary $\pi/(2\sqrt{c})$.  Since $c_{1}=s(1-s)$ and $c_{2}=t(1-t)$
 range independently over $[0,\tfrac14]$, the full integral~\eqref{eq:reduced}
 is an integral over a \emph{family} of elliptic curves, of modulus
@@ -259,7 +275,7 @@ meromorphic function on the same curve~\eqref{eq:curve}, so the whole integral
 is a period of this elliptic family.
 
 The structural statement is that the embedding tier of the transcendence
-taxonomy (Papers~18,~34) is \emph{genus-graded}: genus zero
+taxonomy (Papers~18,~34~\cite{loutey_paper18,loutey_paper34}) is \emph{genus-graded}: genus zero
 ($\{E_{1},\ln,\gamma\}$) at two centers, genus one (elliptic) at three.
 The two two-center negatives---no $\pi$, no dilogarithm---are genus-zero
 properties; the third center does not climb to a higher rung of the
@@ -306,10 +322,15 @@ transform of the holomorphic elliptic differential,
 \end{equation}
 %
 This is a single explicit one-dimensional integral of an elementary
-integrand---already sharper than the infinite series of the standard
-treatment~\cite{ozdogan2012}, and it makes the elliptic structure manifest.
+integrand.  A low-dimensional reduction is the expected output of the
+Fourier-transform method---the same machinery reduces multicenter Slater
+integrals to two- or three-dimensional quadrature~\cite{grotendorst_steinborn1988}
+and three-center integrals to a semi-infinite oscillatory Bessel
+integral~\cite{safouhi2001}---so what is new is not the reduction itself but the
+\emph{elliptic reading} of the integrand it produces, which makes the genus-one
+structure manifest.
 It is an \emph{elliptic deformation of the Bessel} $K_{0}$: as $\rho\to0$
-(coincident scales) $N\to K_{0}(D)$, and at $D=0$ it is the complete elliptic
+(the one-mass limit, one scale decoupling) $N\to K_{0}(D)$, and at $D=0$ it is the complete elliptic
 integral $K$ of Eq.~\eqref{eq:period}.
 
 Because $1/\sqrt{Q}$, $Q(x)=(x^{2}-1)(\rho x^{2}+1-\rho)$, satisfies the
@@ -330,7 +351,13 @@ Its characteristic polynomial factors as
 $\rho(s^{2}-1)\big(s^{2}+(1-\rho)/\rho\big)$, whose roots $s=\pm1$ and
 $s=\pm i\sqrt{(1-\rho)/\rho}$ are exactly the four branch points of the
 curve~\eqref{eq:curve}: the $K_{0}/I_{0}$ sector from the $(x^{2}-1)$ pair,
-the oscillatory $J_{0}/Y_{0}$ sector from the other.  A subordination
+the oscillatory $J_{0}/Y_{0}$ sector from the other.  (A differential-equation
+method for molecular two-electron integrals is itself established:\
+Pachucki~\cite{pachucki2009} evaluates the \emph{two}-center integral from a
+second-order equation in the internuclear distance, closing it in elementary
+functions;\ the genus jump appears here as the step from that second-order,
+genus-zero equation to the fourth-order Picard--Fuchs equation of an elliptic
+curve.)  A subordination
 identity casts the same object as a two-scale sunrise integral,
 $\propto\int\!\!\int ds_{1}ds_{2}\,(s_{1}s_{2})^{-1/2}
 e^{-D_{1}^{2}/4s_{1}-s_{1}-D_{2}^{2}/4s_{2}-s_{2}}/\sqrt{s_{1}c_{1}+s_{2}c_{2}}$,
@@ -344,9 +371,34 @@ analytic in their parameters).  The elliptic $D=0$ period together with the
 $D\ln D$ nonanalyticity are the two fingerprints of an
 \emph{elliptic ${\oplus}$ logarithmic} object---the inhomogeneous
 (``regulator'') term of the Picard--Fuchs solution associated with the elliptic
-dilogarithm~\cite{blochvanhove2015,adamsbognerweinzierl2014}---a
+dilogarithm~\cite{blochvanhove2015,adamsbognerweinzierl2014,broedel_sunrise2018}---a
 correspondence whose reach we test, and bound, in
 Sec.~\ref{sec:obstruction}.
+
+\textbf{[SYMBOLIC + MEASURED]} \emph{The kinematics.} Equation~\eqref{eq:K0} is the frequency
+representation of the two-dimensional Euclidean propagator: with
+$G_{a}(\tau,x)=(2\pi)^{-1}K_{0}(a\sqrt{\tau^{2}+x^{2}})$ the Green's function of
+$-\Delta+a^{2}$ on $\mathbb{R}^{2}$, its left-hand side is exactly
+$(2\pi/\sqrt{c})\,G_{a}(p,b)$ with mass $a=\zeta/\sqrt{c}$, Euclidean time $p=D\sqrt{c}$ and
+space $b$, and the fibre~\eqref{eq:besselmoment} is exactly the two-propagator correlator
+$M=4\pi a_{1}a_{2}\int_{\mathbb{R}}db\,G_{a_{1}}(p_{1},b)\,G_{a_{2}}(p_{2},b)$: two Euclidean
+packets of unequal mass, evolved from a point source for Euclidean times $p_{1},p_{2}$ and
+overlapped on one spatial slice \textbf{[MEASURED, $10^{-30}$ and $10^{-31}$ at five parameter
+points each;\ \texttt{test\_paper59\_euclidean\_dictionary.py}]}. Three things become visible.
+First, the Feynman parameters are
+K\"all\'en--Lehmann spectral variables: $c=s(1-s)$ forces $a=\zeta/\sqrt{c}\ge2\zeta$, so each
+two-centre density is dispersed over its own two-particle cut and the elliptic modulus
+$\rho=c_{2}/c_{1}=(a_{1}/a_{2})^{2}$ is the squared ratio of the two spectral masses---the
+genus jump is a mass-splitting phenomenon, and the three cusps are equal masses ($\rho=1$)
+and one mass at the heavy end of its cut ($\rho\to0,\infty$). Second, the exponential twist
+is $a_{i}p_{i}=\zeta D_{i}$, \emph{independent of the Feynman parameter}: the family is swept
+at fixed mass$\times$time, and the physical point is one Compton wavelength of Euclidean-time
+displacement, the $u=D$ endpoint of the source-time superposition
+$e^{-D\Delta}\Delta^{-n}=\frac{1}{(n-1)!}\int_{D}^{\infty}(u-D)^{n-1}e^{-u\Delta}\,du$ that
+converts the Yukawa into the Slater. Third, $j_{0}(k|\bm W|)$ is a uniform smearing of the
+shared spatial coordinate over the composite separation, so the third centre enters
+\emph{only} through space while the bond lengths set the two Euclidean-time offsets
+\textbf{[MEASURED, $1.8\times10^{-10}$ for the full position-space fibre]}.
 
 %% ========================================================================
 \section{The elliptic-dilogarithm route is obstructed}
@@ -358,13 +410,17 @@ Picard--Fuchs operator in the external variable annihilates the two periods,
 its inhomogeneity is an elementary subtopology (a tadpole), and the particular
 solution---an iterated integral of the periods against that elementary
 source---is the elliptic dilogarithm~\cite{adamsbognerweinzierl2014,
-blochvanhove2015}.  Running the same machinery on $N(D)$ is the natural
+blochvanhove2015}.  (The full unequal-mass sunrise has since been closed to all
+orders in $\varepsilon$ as iterated integrals on $\overline{\mathcal M}_{1,3}$
+by Bogner, M\"uller-Stach and Weinzierl~\cite{bognermsw2019}---a \emph{Fuchsian}
+object; the point below is that $N(D)$ is its irregular Laplace dual and so lies
+outside that technology.)  Running the same machinery on $N(D)$ is the natural
 attempt.  It does not close, and the reason is structural.
 
 The curve $y^{2}=Q(x,\rho)$ of Eq.~\eqref{eq:curve} moves with the modulus
 $\rho$, not with the Laplace variable $D$.  Accordingly the two periods
 $K(\rho),K(1-\rho)$ are the homogeneous solutions of the second-order modulus
-operator \textbf{[MEASURED: both annihilated to $10^{-18}$;
+operator \textbf{[MEASURED: both annihilated to $10^{-25}$;
 $L(0,\rho)=K(1-\rho)$ to $19$ digits]}
 %
 \begin{equation}
@@ -402,7 +458,7 @@ Because $g$ \emph{vanishes at the branch point} $x=1$, differentiating in the
 modulus produces no branch-point boundary term: the analogue of the sunrise's
 pinched propagator---the elementary tadpole that would be the
 inhomogeneity---is absent, and the source stays on the elliptic curve.
-Quantitatively \textbf{[MEASURED, $45$ digits]}, $S$ closes exactly and
+Quantitatively \textbf{[MEASURED]}, $S$ closes exactly and
 finitely only inside the integral's own Gauss--Manin $D$-module,
 %
 \begin{equation}
@@ -411,8 +467,9 @@ finitely only inside the integral's own Gauss--Manin $D$-module,
   \label{eq:inmodule}
 \end{equation}
 %
-with held-out residual $5\times10^{-44}$, flat under increase of the fit
-degree (numerically an exact finite identity); whereas the genuine
+with held-out residual saturating flat under increase of the fit degree
+(below $10^{-25}$ in the regression witness, $5\times10^{-44}$ at driver
+precision; numerically an exact finite identity); whereas the genuine
 variation-of-parameters shape---period level $\{L,\partial_{D}L\}$ plus an
 elementary Bessel subtopology $\{K_{0},K_{1}\}(D)$, $\{J_{0},Y_{0}\}(\omega
 D)$---only \emph{approximates} it (residual $2\times10^{-14}$ falling
@@ -421,13 +478,185 @@ inhomogeneity is in-module, not a simpler subtopology, and variation of
 parameters against the periods is therefore circular.
 
 \textbf{[OBSERVATION]} $N(D)$ is thus one transcendence level above the
-sunrise.  It is not an elliptic dilogarithm of elementary or period-level
-arguments; it is a period of the rank-four irregular connection defined by
-Eq.~\eqref{eq:pf}, for which the sunrise mechanism supplies no reduction to
-the elliptic-polylogarithm tower.  Whether it admits a closed form of any
-kind is a differential-Galois question---whether the fourth-order operator
-factors over the differential field generated by the periods
-$K(\rho),K(1-\rho)$---which we leave open.
+sunrise---above the \emph{fully solved} sunrise, not merely its leading elliptic
+dilogarithm:\ the all-orders unequal-mass sunrise is now closed as iterated
+integrals on $\overline{\mathcal M}_{1,3}$~\cite{bognermsw2019}, a period of a
+\emph{Fuchsian} connection, whereas $N(D)$ is not.  It is not an elliptic
+dilogarithm of elementary or period-level arguments; it is a period of the
+rank-four irregular connection defined by Eq.~\eqref{eq:pf}, for which the
+sunrise mechanism supplies no reduction to the elliptic-polylogarithm
+tower~\cite{bonisch2021}.  \textbf{[SYMBOLIC]} The irregularity is explicit at
+the operator level:\ at $D=\infty$ the operator of Eq.~\eqref{eq:pf} admits four
+formal exponential solutions $e^{\lambda D}$ with
+$\lambda\in\{\pm1,\pm i\sqrt{(1-\rho)/\rho}\}$---its leading Newton edge is a
+full-width slope-one segment, so it is irregular of Poincar\'e rank one, the
+four $\lambda$ being exactly the branch points (the $K_{0}/I_{0}$ and
+$J_{0}/Y_{0}$ Bessel sectors), whereas the sunrise/Legendre period operator is
+regular singular at infinity ($\lambda=0$ only).  The two operators therefore
+sit on opposite sides of the Laplace transform, and the Fuchsian
+elliptic-polylogarithm machinery of~\cite{bognermsw2019} cannot reach $N(D)$.
+Whether $N(D)$ admits a closed form of any kind is a differential-Galois
+question---whether the fourth-order operator factors over the differential
+field generated by the periods $K(\rho),K(1-\rho)$---settled below, negatively, at the
+reducibility level (the operator does not factor);\ what remains open is only whether a
+\emph{transcendental} closed form exists at the irreducible level.
+
+\textbf{[MEASURED]} The same irregularity is visible in $N(D)$ itself, as a
+\emph{resurgent} structure.  Expanded about the Bessel point $\rho=0$
+($N\to K_{0}(D)$), the one-mass slice has the explicit elementary term series
+%
+\begin{equation}
+  N(D) = \frac{1}{\sqrt{c_{1}}}\sum_{n\ge0}(-1)^{n}
+  \frac{\big((2n-1)!!\big)^{2}}{2^{n}\,n!}\,\rho^{n}\,\frac{K_{n}(D)}{D^{n}},
+\end{equation}
+%
+each coefficient a rational multiple of an \emph{integer-order} Bessel
+function---the transcendence does not escalate---but the series is
+\emph{asymptotic}, diverging factorially (optimal truncation at
+$n\!\sim\!1$--$3$, a few digits, then unbounded).  Equivalently the
+$D\to\infty$ expansion $N(D)\sim e^{-D}\sum_{k}b_{k}D^{-(k+1/2)}$ is
+Gevrey-one, and its Borel transform is the algebraic function
+$\psi(\zeta)=[(\zeta+2)(\rho(1+\zeta)^{2}+1-\rho)]^{-1/2}$ on the very curve
+\eqref{eq:curve}, singular exactly at the three non-dominant branch points
+$\zeta\in\{-2,\,-1\pm i\sqrt{(1-\rho)/\rho}\}$---the Stokes actions linking the
+$e^{-D}$ sector to the $e^{+D}$ and $e^{\pm i\sqrt{(1-\rho)/\rho}\,D}$ ones.  A
+Borel--Pad\'e resummation confirms these locations (at $\rho=\tfrac15$:\
+$\zeta=-2$ and $-1\pm2i$, recovered to $\sim\!1\%$).  So the residual
+transcendence of $N(D)$ is not exotic:\ it is the resurgence of an elementary
+Bessel series, its Stokes data pinned to the branch points of the elliptic
+curve.
+
+\textbf{[MEASURED]} The resurgence, moreover, \emph{closes with algebraic Stokes
+data}.  The Borel transform $\psi(\zeta)$ carries only square-root singularities,
+so its amplitude at each is algebraic:\ $a_{*}=1$ at $\zeta=-2$, and
+$a_{*}^{2}=-\tfrac12\mp\tfrac{i}{2}\sqrt{\rho/(1-\rho)}$ at
+$\zeta=-1\pm i\sqrt{(1-\rho)/\rho}$ (matched to the closed-form residue to
+$10^{-37}$, and confirmed to be the large-order growth constants by singularity
+analysis; the dominant Stokes ray switches from the real to the complex pair at
+$\rho=\tfrac14$).  These amplitudes \emph{are} the Stokes constants connecting the
+four exponential sectors, so the entire trans-series of $N(D)$ over
+$\{e^{\pm D},\,e^{\pm i\sqrt{(1-\rho)/\rho}\,D}\}$ has \emph{algebraic} connection
+data.  The one genuinely elliptic ingredient enters only at the boundary:\ at $D=0$
+the open Laplace thimbles close into the cycles of the curve and
+$\sqrt{c_{1}}\,N(0)=K(1-\rho)$ exactly ($14$ digits).  So the closed form at the
+irregular level is explicit:\ $N(D)$ is the Borel--Laplace transform of the algebraic
+differential $\psi$, with algebraic Stokes data and an elliptic-period
+$K(1-\rho)$ normalization---as far as a genuinely irregular, genus-one object
+reduces.  What remains transcendental is the elliptic period at the boundary and the
+standard Borel--Laplace resummation, not any new constant.
+
+\textbf{[OBSERVATION]} Structurally this is the genus-one analogue of the classical
+resurgence of the modified Bessel function $K_{0}$---the archetypal rank-one
+irregular equation, whose large-argument series has an algebraic Borel transform and
+elementary Stokes data~\cite{dingle1973,costin2008}.  The natural home for the
+algebraic-Stokes-versus-transcendental-period dichotomy seen here is Sabbah's theory
+of Stokes structures for Fourier--Laplace transforms of algebraic
+connections~\cite{sabbah_stokes2013}, in which the Stokes data is local at the
+irregular point (hence algebraic) while transcendental periods enter through the
+regular points (hence $K(1-\rho)$ at $D=0$).  The closest worked instance is the
+rank-two, genus-\emph{zero} Bessel/Kloosterman connection treated via irregular Hodge
+theory~\cite{fresansabbahyu2023}; and the only resurgence analysis of the
+sunrise/banana family we found operates in the modular parameter $q=e^{2\pi i\tau}$
+(the $|q|\to1$ limit), not the Laplace-dual $D$~\cite{broadhurst_dorigoni2026}.  The
+present genus-one, Laplace-dual reading appears unmade;\ an absence from a targeted
+search, not a proof.
+
+\emph{A concrete route from the solved dual.}  Because $N(D)$ is the Laplace
+transform of the sunrise elliptic differential and the unequal-mass sunrise is
+now known in full closed form~\cite{bognermsw2019}, one concrete---if not
+obviously tractable---route to $N(D)$ is to Laplace-transform that solution
+directly, an operation that necessarily leaves the elliptic-polylogarithm class
+for the Bessel-moment/resurgence one, consistent with the irregular character
+just established.  We have not carried this out.
+
+\emph{The rank-four label is not vacuous: a base-field reducibility scan.}
+That $N(D)$ is a period of a genuinely rank-four object---rather than one
+secretly carrying lower-rank content---is itself a reducibility statement, and
+it can be tested directly.  Two structural facts constrain
+Eq.~\eqref{eq:pf}.  First, the operator is \emph{formally self-adjoint},
+$L^{*}=L$ \textbf{[SYMBOLIC PROOF]}, so its differential Galois group lies in
+the symplectic group $\mathrm{Sp}_{4}(\mathbb{C})$---the signature of a
+polarized period.  Second, its indicial exponents at the regular singular point
+$D=0$ are $\{0,1,1,2\}$ \textbf{[SYMBOLIC PROOF]}; the \emph{double} exponent at
+$1$ is the local-monodromy source of the $D\ln D$ nonanalyticity noted above.
+A search over the base field $\mathbb{Q}(\rho)(D)$ then returns \emph{no} factor
+of order one or two---hence, by self-adjointness, none of order three---with
+polar locus at the true singularities $\{0,\infty\}$
+\textbf{[SYMBOLIC, positive-control validated]}: there is no hyperexponential
+solution $e^{\lambda D}Q(D)$ for any $\lambda\in\{\pm1,\pm i\omega,0\}$, and the
+only two order-two factorizations the symbol $(s^{2}-1)(s^{2}+\omega^{2})$
+admits over $\mathbb{Q}(\rho)$---the two Bessel sectors---both fail.  The two
+natural elementary structures are excluded by the exponents alone: $L$ is
+neither the symmetric product of its Bessel sectors (which would carry exponents
+$\{0,0,0,0\}$) nor a symmetric cube.  This is strong evidence
+that Eq.~\eqref{eq:pf} is irreducible over $\mathbb{Q}(\rho)(D)$, and hence that
+the rank-four label is earned.  The eigenring sharpens it to a single residual
+target.  The endomorphism algebra of the solution space is trivial,
+$E(L)=\mathbb{C}$ \textbf{[computed at $\rho=1/5$; robust across pole windows]}, so
+$L$ is indecomposable; and the symplectic form pairs the exponential solution
+$y_{\lambda}$ at $D=\infty$ with $y_{-\lambda}$.  A non-degenerate invariant
+subspace would split $V=W\oplus W^{\perp}$ and enlarge the eigenring, so every
+invariant subspace is \emph{isotropic}; the exponential torus $T=(\mathbb{C}^{*})^{2}$
+confines invariant subspaces to spans of the four lines
+$\{y_{\pm1},y_{\pm i\omega}\}$, whose two symplectic pairs (the Bessel sectors)
+are non-degenerate.  A one-dimensional isotropic invariant subspace is a
+hyperexponential solution, already excluded.  Hence $L$ is
+reducible over $\mathbb{C}(D)$ \emph{iff} one of the four ``mixed'' Lagrangian
+planes $\mathrm{span}\{y_{\pm1},y_{\pm i\omega}\}$ is invariant---equivalently,
+iff the Stokes matrices at $D=\infty$~\cite{sabbah_stokes2013} fail to couple the real
+exponential pair $\{\pm1\}$ to the imaginary pair $\{\pm i\omega\}$.  This is
+decidable, and it is settled twice over---once in principle, once explicitly.
+
+\emph{In principle.}  The reduction is an instance of the Fourier--Laplace
+transform of $D$-modules, where irreducibility is automatic.  Let $\mathcal{L}$ be
+the rank-one meromorphic connection on $\mathbb{P}^{1}$ whose flat sections are
+$Q^{-1/2}$: it is regular singular, with local monodromy $-1$ at each of the four
+branch points $x\in\{\pm1,\pm i\omega\}$ and trivial monodromy at $\infty$ (there
+$Q^{-1/2}\sim x^{-2}$).  Having rank one, $\mathcal{L}$ is irreducible, so its
+minimal (intermediate) extension $j_{!*}\mathcal{L}$ to $\mathbb{A}^{1}$ is a
+\emph{simple} holonomic $D$-module.  (Because every finite local monodromy is
+$-1\neq1$ and hence has no invariant, $j_!\mathcal{L}=j_{!*}\mathcal{L}=j_*\mathcal{L}$,
+so ``the $D$-module generated by $Q^{-1/2}$'' is unambiguous.)  The Laplace kernel
+$e^{-Dx}$ makes the radial integral the Fourier--Laplace transform
+$\mathrm{FL}(j_{!*}\mathcal{L})$, and $\mathrm{FL}$ is an exact auto-equivalence of
+the category of holonomic $D$-modules on the affine line (with its dual
+coordinate)~\cite{katz1990}; an equivalence sends simple objects to simple
+objects, so $\mathrm{FL}(j_{!*}\mathcal{L})$ is simple.  Its generic rank
+is the total drop of $\mathcal{L}$---one unit at each branch point, where the
+monodromy $-1$ leaves no invariant, and none at the regular point $\infty$, hence
+\emph{four}, matching the order of Eq.~\eqref{eq:pf}, of which $N(D)$ is the
+defining (cyclic) solution.  A simple holonomic $D$-module of generic rank four
+restricts to an irreducible connection over the function field, so \textbf{the
+operator of Eq.~\eqref{eq:pf} is irreducible} over $\mathbb{C}(D)$, hence over
+$\mathbb{Q}(\rho)(D)$.  Simplicity is a property of the connection at the generic
+point, so it forbids a factor of \emph{any} order---apparent singularities and
+all; the monodromy computation next verifies it by hand.
+
+\emph{Explicitly.}  The same conclusion is exhibited, and the mechanism made
+visible, by the monodromy.  The four exponentials are the branch points
+$x\in\{\pm1,\pm i\omega\}$ of $y^{2}=Q$ in the Borel (Laplace-dual) plane, and the
+monodromy of $L$ around $D=0$, computed in the exponential-line basis of
+Lefschetz-thimble solutions $\int e^{-Dx}\,dx/\sqrt{Q}$, is \textbf{[MEASURED;
+exact-integer certificate]} the integer unipotent matrix
+%
+\begin{equation*}
+  M_{0}=\begin{pmatrix}-1&2&2&2\\-2&3&2&2\\-2&2&3&2\\2&-2&-2&-1\end{pmatrix},
+\end{equation*}
+%
+the \emph{same} for $\rho=\tfrac15$ and $\rho=\tfrac13$ (a topological invariant
+of the branch-point configuration), with a single $2\times2$ Jordan block---the
+lone $D\ln D$ log---and \emph{no} invariant coordinate subspace.  The Stokes
+matrices therefore \emph{do} couple the real and imaginary exponential pairs, no
+mixed plane survives, and the reducibility criterion above returns
+\emph{irreducible}---confirming the structural argument concretely.
+\textbf{[SYMBOLIC + MEASURED]} Consequently $N(D)$ is a period of an \emph{irreducible}
+rank-four connection: it admits no closed form through any factorization of $L$,
+and the sole remaining route to a closed form is a genuinely transcendental one at
+the full rank-four level---the elliptic-polylogarithm / $\Gamma(2)$
+multiple-modular-value structure of Sec.~\ref{sec:modular}.  The differential-%
+Galois \emph{reducibility} question is thereby settled (negatively: $L$ is
+irreducible); the transcendental closed form is the one problem that remains
+open~\cite{test_routeC}.
 
 %% ========================================================================
 \section{Placement in the literature}
@@ -442,7 +671,8 @@ solutions of exactly this kind of Picard--Fuchs equation
 \cite{blochvanhove2015,adamsbognerweinzierl2014,blochkerrvanhove2015}; their
 periods are the complete elliptic integrals of Eq.~\eqref{eq:period}, and at
 special (complex-multiplication) scale ratios their values reach critical
-$L$-values of modular forms~\cite{broadhurst2016,fresansabbahyu2023}.  The
+$L$-values of modular
+forms~\cite{broadhurst2016,fresansabbahyu2023,zhou_wick2018,zhou_wronskian2018}.  The
 closest published analog to Eq.~\eqref{eq:besselmoment} is a doubled-argument
 Bessel moment that Broadhurst evaluated as a product of complete elliptic
 integrals via a lattice-Green-function contour~\cite{broadhurst2008}: the
@@ -461,7 +691,20 @@ molecular integral.  \textbf{[OBSERVATION]} The identification---that the
 three-center Slater integral, via the Fock projection, is a two-scale Bessel
 moment on the sunrise elliptic curve---appears to be unmade.  This is an
 absence from a targeted search, not a proof of absence; the residual risk is
-an obscure single source.
+an obscure single source.  \textbf{[OBSERVATION]} A second placement datum is
+arithmetic:\ the conductor-$4$ content this family carries (the $\mathbb{Z}[i]$
+theta series $\theta_{3}^{2}$ of Sec.~\ref{sec:modular};\ $G=\beta(2)=
+L(2,\chi_{-4})$ in the corrected ring) is absent from the established
+Bessel-moment corpus, which sits at levels/conductors $3, 6, 8,
+15$~\cite{broadhurst2016,fresansabbahyu2023,zhou_wick2018}---a targeted search
+finds no Catalan-constant appearance in any of these---the nearest $\chi_{-4}$
+appearance being the topological-string sector of the Broadhurst--Dorigoni
+programme~\cite{broadhurst_dorigoni2026}.  The family thus occupies an
+apparently unclaimed arithmetic slot (conductor $4$) in that literature, of a
+piece with the unmade bridge above.  (Reconciliation with the value-level searches of
+Sec.~4:\ the conductor-$4$ arithmetic is a property of the \emph{family} and of the
+$D\to0$ shadow;\ the physical integrated value itself shows no measured conductor-$4$
+content at reachable heights.)
 
 %% ========================================================================
 \section{The modular structure and its cosmic-Galois periods}
@@ -487,6 +730,25 @@ $\rho\in\{0,1,\infty\}$ matching the three cusps of $\Gamma(2)$ (the cusp
 $\rho=1$ is the coincident-scale diagonal).  The periods $K(1-\rho),K(\rho)$ are
 the $\Gamma(2)$ modular periods.
 
+\emph{The modulus is a four-point cross-ratio.}  Identity~\eqref{eq:lambda_rho}
+has an elementary source.  Under $u=x^{2}$ the quartic model reduces $2\!:\!1$ to
+the elliptic curve $v^{2}=u(u-1)(\rho u+1-\rho)$, whose periods are
+$K(\rho),K(1-\rho)$ and whose four branch points are
+$\{0,1,\infty,(\rho-1)/\rho\}$.  Their six-element cross-ratio orbit is
+$\{(\rho-1)/\rho,\;1/\rho,\;\rho/(\rho-1),\;\rho,\;1-\rho,\;-1/(\rho-1)\}$
+\textbf{[SYMBOLIC]}, and it contains \emph{both} period arguments $\rho$ and
+$1-\rho$; the Legendre value $1-\rho$ is one of its members.  The elliptic
+modulus of the three-center integral is therefore the classical modulus of four
+marked points on $\mathbb{P}^{1}$---the tame four-subspace ($\tilde D_{4}$)
+modulus, equivalently the cross-ratio of the four regular singular points of a
+rank-two Fuchsian system (the isomonodromic setting whose deformation is
+Painlev\'e~VI).  One caveat fixes the reading: the four points are the branch
+data of the \emph{two} spectral masses $c_{1},c_{2}$ through $\rho=c_{2}/c_{1}$
+(each mass contributes a $\pm$ pair, one pair sent to $\{0,\infty\}$ and the
+other to $\{1,(\rho-1)/\rho\}$ by the reduction), \emph{not} the four positions
+of four scattering centers---the modulus counts the two densities, not the
+number of nuclei.
+
 Since $\rho=c_{2}/c_{1}$ ranges over all of $(0,\infty)$ as the Feynman
 parameters range over $(0,1)$, the parameter integral sweeps the entire real
 locus of $X(2)$ and passes through every complex-multiplication fibre.  There the
@@ -499,28 +761,600 @@ integral visits, periods that are classical $\Gamma$-values---across distinct
 fundamental discriminants, so the arithmetic tracks the fibre rather than a single
 coincidence.
 
-\emph{The integrated integral is an elliptic multiple modular value.}  The full
+\emph{The integrated integral is an elliptic Bessel moment.}  The full
 parameter integral pulls back, via Eq.~\eqref{eq:lambda_rho}, to an iterated
-integral over $X(2)$ of period-weighted forms---a multiple modular value for
-$\Gamma(2)$ in the sense of Brown, i.e.\ an elliptic polylogarithm.  A dedicated
-evaluator (a fixed Gauss--Legendre tensor grid with a $\sin^{2}$ substitution that
-removes the endpoint non-analyticity, replacing the divergent-cost adaptive
-quadrature) gives the collinear value \textbf{[MEASURED, $\sim\!17$ digits]}
-$0.39535576590171392\ldots$; a weight-graded search finds it is \emph{not} a
-low-height combination of the central fibre's period $K(\tfrac12)$, its
-quasi-period $E(\tfrac12)$, and $\pi$, nor of the classical polylogarithms,
-consistent with a genuine (non-classical, multi-fibre) elliptic multiple modular
-value.  \textbf{[OBSERVATION]} This places the three-center integral inside the
+integral over $X(2)$ of period-weighted forms.  The fibre, however, carries an
+irregular exponential (Bessel) twist---it degenerates to the Bessel value
+$K_{0}(1)$ as $\rho\to0$, which is not a modular period---so the object is
+properly a \emph{Bessel moment of the Legendre family}, an irregular/exponential
+period in the sense of Fres\'an--Sabbah--Yu~\cite{fresansabbahyu2023}, of which
+the $\Gamma(2)$ multiple modular value in the sense of Brown~\cite{brown_mmv2014}
+(an elliptic polylogarithm~\cite{brown_levin2011,beilinson_levin1994}) is the
+regular $D\to0$ shadow.  A dedicated
+evaluator---a fixed Gauss--Legendre tensor grid with a $\sin^{2}$ substitution on
+the smooth bulk and, at the $(s,t)\to(0,0)$ corner, a Duffy angular split followed
+by the radial substitution $\rho=\sigma^{2}$ ($\rho=s+t$) that renders the
+$\rho^{3/2}$ corner integrand \emph{analytic} in $\sigma$ and so restores spectral
+Gauss--Legendre convergence---gives the collinear value \textbf{[MEASURED,
+$18$ digits confirmed]} $0.3953557659017139641\ldots$ (correct to $18$ digits;\ the
+$19$th is superseded by the certified value below).  The earlier $\sim\!16$-digit
+figure was not an intrinsic wall but an under-resolution of the corner and of the
+one wide sub-domain flagged above (both closed here; the corner by $\rho=\sigma^{2}$,
+the sub-domain by cross-validated Gauss--Legendre and $\tanh$--$\sinh$ quadrature);
+the $\sim\!20$-digit ceiling was a fixed-fibre-grid artifact, not intrinsic:\ on the
+decay-scaled map $k=Lu/(1-u)$, $L=1/(\sqrt{c_{1}}+\sqrt{c_{2}})$, a fixed Gauss--Legendre
+fibre is \emph{spectral} to $40$-plus digits (the fibre is not the bottleneck), and a
+rebuilt spectral evaluator ($\rho=\sigma^{2}$ radial + $\sin^{2}$ angular corner, kink-free
+trapezoid split) independently reproduces the value to $16$ digits (the two structurally
+distinct evaluators agree to $16$ digits; a naive single-axis outer-grid push produces
+non-monotonic near-coincidences past that and is not trusted); the residual precision limit
+is the outer-integral Gauss--Legendre rate ($\sim e^{-0.55N}$, complex-singularity-limited), so
+within the $(s,t)$ frame a definitive evaluation required a different representation---supplied
+below by the exact $(k,w)$ refactorization, Eq.~\eqref{eq:kw}, not by the modular route.  \textbf{[MEASURED]} A guarded
+integer-relation search with a same-magnitude decoy control finds the value is
+\emph{not} a low-height combination of the small disc-$4$ complex-multiplication
+ring $\{1,\pi,\,K(\tfrac12)=\Gamma(\tfrac14)^{2}/4\sqrt\pi\}$ at weight $\le2$: the
+relation height is far above low and is matched by the decoy, the signature of no
+low-height relation---and this leg is decisive, since a weight-$\le2$ disc-$4$
+basis is small enough to resolve at the reachable precision.  The wider searches,
+through weight three and against the disc-$8$-inclusive ring
+$\{\pi,K(\tfrac12),P_{8}\}$, are only \emph{consistent} with the negative at
+present: those bases are over-determined at $\sim\!19$ digits---the spurious
+low-height hits differ from one precision to the next, and are matched by the
+decoy---a limitation removed below.  All of this is consistent with a genuine
+(non-classical, multi-fibre) elliptic Bessel-moment period.
+
+\textbf{[SYMBOLIC + MEASURED]} Both the precision wall and the pending
+weight-three decision are closed by an exact refactorization.  Writing
+$j_{0}(kb)=\int_{0}^{1}\cos(kbw)\,dw$ decouples the $b=s+t$ phase, and the
+reflection symmetry $P(s,k)=P(1-s,k)$ of the collinear packet makes the inner
+integral real, so the $(s,t)$ double integral collapses to the \emph{square of a
+one-dimensional integral}:
+\begin{equation}
+T2=\frac{8}{\pi}\int_{0}^{\infty}\!\!dk\int_{0}^{1}\!\!dw\,\cos(kw)\,R(k,w)^{2},
+\quad
+R(k,w)=\int_{0}^{1}\!\cos\big(kw(s-\tfrac12)\big)\,P(s,k)\,ds.
+\label{eq:kw}
+\end{equation}
+In this frame the complex off-axis $(s,t)$ singularity that produced the
+$\sim\!13$--$14$-digit outer wall does not exist (the $k$-integrand is entire in
+$w$;\ the $s$-integrand is analytic on $[0,1]$), no fibre is ever evaluated, and
+the entire precision question is the closed-form large-$k$ tail (a Watson
+expansion;\ the Gevrey structure relocates to a truncation floor $e^{-K/2}$ with
+the cut $K$ freely chosen).  Six parameter-disjoint runs---two independent
+parallel configurations agreeing to $1.7\times10^{-67}$, the identity itself
+verified against a fully independent two-dimensional evaluation to $69$--$96$
+digits---certify
+\[
+T2=0.395355765901713964325229296804847564260563977867082108935234265469\ldots
+\]
+($66$ digits;\ a \emph{decomposed} certification---identity, quadrature and tail legs
+each closed independently, at higher precision than any single end-to-end pipeline;\
+\texttt{tests/test\_paper59\_t2\_value.py} pins the identity, the $K^{-7}$ tail law, and the
+digit-$19$ correction of the frozen anchor above, and the certified entry with its full
+evidence accounting is in the reference artifact,
+\texttt{benchmarks/certified\_reference/}).
+At this precision the guarded, decoy-calibrated integer-relation searches become
+decisive across the board:\ the corrected weight-$\le3$ ring
+$\{\pi,K(\tfrac12)^{\pm1},G\}$ is \textbf{decisively negative} at height
+$\le10$ ($64$ working digits, two precisions), as are disc-$4$ through weight
+three and disc-$8$ through weight two at heights up to $10^{4}$--$10^{12}$, and
+eight targeted Catalan probes---\emph{no measured conductor-$4$
+($\beta(2)$/Catalan) content exists in the integrated observable at clean
+heights}.  This sharpens the shadow reading (the finite
+weight-three-requiring-$G$ element belongs to the $D\to0$ shadow, not to $T2$)
+and answers the Paper~56 seam test T-2 in the negative at the clean-height
+bound.  Two calibration riders:\ a decision on the dimension-twenty ring was
+never available at the previously projected $\sim\!32$--$40$ digits (height
+budgets scale as $10^{D/n}$ in the ring dimension $n$), and the negative
+excludes \emph{clean} closed forms, not large-height ones.  The resurgent
+trans-series program below is untouched---digits and closed form are separate
+questions;\ the closed form remains [OPEN].
+
+\textbf{[MEASURED]} Two refinements sharpen this.  \emph{First}, the fibre
+precision wall is removable.  The edge oscillation of $j_{0}(k(s+t))$---which runs
+over a $k$-range $\sim\!1/\sqrt{c_{\min}}$ as a Fock scale collapses and limited
+every fixed- and decay-grid fibre quadrature to $\sim\!16$--$22$ digits---is
+eliminated by an \emph{oscillation-free} evaluator:\ split the radial integral as
+$\int_{0}^{K}+\int_{K}^{\infty}$ and evaluate the oscillatory tail
+$\int_{K}^{\infty}\sin(kb)\,e^{-Ak}\,k^{-n}\,dk=\operatorname{Im}\!\big[z^{\,n-1}
+\Gamma(1{-}n,zK)\big]$ in closed form ($z=A-ib$, $A=\sqrt{c_{1}}+\sqrt{c_{2}}$,
+$b=s+t$), the tail amplitudes taken from the $1/k$-series of the
+cancellation-stabilised combination $g(k)=P_{1}(k)P_{2}(k)\,e^{Ak}k^{6}$ (a single
+$\Gamma(-6,zK)$ plus downward recurrence).  This reproduces the decay-grid fibre to
+$40$--$45$ digits at every $(s,t)$, the corner included, and reproduces the collinear
+value to its confirmed digits.  With the fibre no longer the bottleneck, the residual
+precision wall of that frame was the \emph{outer} $(s,t)$-integral's corner-limited
+convergence---which held the value near a $\sim\!19$-digit ceiling there until the $(k,w)$
+refactorization of Eq.~\eqref{eq:kw} dissolved the question---not the fibre.  This outer wall is now characterized:\ of the
+four corners only $(s,t)\to(0,0)$ is fractionally singular ($\rho^{3/2}$, absorbed by the
+$\rho=\sigma^{2}$ Duffy)---the three oscillatory corners ($b=s+t\ne0$) are integer-leading (leading
+order $\rho^{2}$) and carry no fractional-power subtraction \textbf{[MEASURED;
+\texttt{test\_paper59\_resurgence\_corner.py}]}---so the cap is a weak \emph{complex off-axis}
+singularity of $J$ (its signature a non-monotone Gauss--Legendre rate), not a missing corner map;
+a third, coverage-corrected momentum-space evaluator independently reproduces the value to
+$\sim\!13$--$14$ digits and then plateaus, confirming the anchor's leading digits;\ no
+$(s,t)$-frame quadrature reached further, and the definitive digits were ultimately supplied by
+the $(k,w)$ refactorization (Eq.~\eqref{eq:kw}), not by the modular route.  \emph{Second}, the guarded searches above used a
+\emph{period-only} ring.  A length-two, weight-$\le3$ iterated integral of
+weight-two Eisenstein series over $X(2)$---the shape forced by the two Feynman
+integrations---generically produces also the Legendre \emph{quasiperiod}
+$1/K(\tfrac12)$ (the second-kind companion, $E(\tfrac12)=\pi/4K(\tfrac12)+
+K(\tfrac12)/2$) and the weight-two Eisenstein $L$-value $G=\beta(2)=L(2,\chi_{-4})$
+(Catalan's constant; native to this family because the fibre period \emph{is} the
+$\mathbb{Q}(i)$ theta series:\ $K(\lambda)=\tfrac{\pi}{2}\,\theta_{3}^{2}$ with
+$\theta_{3}^{2}=1+\sum_{n\ge1}r_{2}(n)\,q^{n}$, $r_{2}(n)=4\sum_{d\mid n}\chi_{-4}(d)$ by
+Jacobi's two-squares theorem---the weight-one, level-$4$ Eisenstein series of character
+$\chi_{-4}$, with $L(\theta_{3}^{2},s)=4\,\zeta(s)\beta(s)$.  The often-quoted
+$\int_{0}^{1}K(k)\,dk=2G$ holds in the \emph{modulus} convention only; in this paper's
+parameter convention---which is also the physical $d\rho$ measure of the co-area
+reduction below---$\int_{0}^{1}K\,dm=2$ and $\int_{0}^{1}E\,dm=\tfrac43$, both rational,
+so the convention-free reason $G$ enters is the $\chi_{-4}$ theta series, not those
+integrals \textbf{[MEASURED; \texttt{test\_paper59\_theta\_chi4.py}]}), neither of which
+lies in $\{1,\pi,K(\tfrac12),P_{8}\}$.  The conductor-$4$ arithmetic is thus carried by
+the fibre period at \emph{every} fibre---a property of the family, not of the $\tau=i$
+point---and the physical Bessel twist sharpens it:\ the decay rate
+$A=\sqrt{c_{1}}+\sqrt{c_{2}}=\sqrt{u}\,(1+\sqrt{\rho})$ makes
+$\sqrt{\rho}=\sqrt{1-\lambda}=\theta_{4}^{2}/\theta_{3}^{2}$---a $\Gamma(4)$-level
+modular function---physical, promoting the level from $\Gamma(2)$ to $\Gamma(4)$, whose
+field is $\mathbb{Q}(\mu_{4})=\mathbb{Q}(i)$, with $4=|\mathrm{disc}\,\mathbb{Q}(i)|
+=\mathrm{cond}\,\chi_{-4}$ \textbf{[MEASURED; \texttt{test\_paper59\_theta\_chi4.py}]}.
+In the corrected ring
+$\{\pi,\,K(\tfrac12),\,1/K(\tfrac12),\,G\}$ the weight-$\le2$ search is decisively
+negative, and the period-only weight-$\le3$ search is negative, so the finite closed
+form, should it exist, is \emph{weight-three and requires} $G$---and it is then the closed form of
+the $D\to0$ \emph{shadow}, the residual question being whether the physical $D=1$ value itself
+collapses onto that ring element (since answered in the negative at clean heights by the
+$64$-digit decoy-calibrated search above).  This
+sharpened target also recasts the earlier merely-``consistent-with'' negative as a
+ring-incompleteness artifact rather than, by itself, evidence of non-classicality:\ the
+non-classicality is carried separately, by the fibre's irregular twist---established
+symbolically at the operator level in Sec.~\ref{sec:obstruction}
+(Newton polygon, Poincar\'e rank one) and witnessed numerically below---not by the
+integer-relation search.
+
+\textbf{[OBSERVATION]} This places the three-center integral inside the
 elliptic (genus-one) layer of the cosmic-Galois / mixed-elliptic-motive structure
 that the Geometric Vacuum program's Tannakian substrate reaches
-for~\cite{loutey_paper56}---the concrete elliptic period the mixed-Tate substrate
-could not itself supply.  \textbf{[OPEN]} Its explicit realization in the
-$\Gamma(2)$ iterated-Eisenstein basis is the natural next step, of a piece with the
-finite closed form of Sec.~\ref{sec:obstruction}.  We note the level is
+for~\cite{brown_cosmic2017,loutey_paper56}---the concrete elliptic period the
+mixed-Tate substrate could not itself supply.  \textbf{[OPEN]} The natural next step is therefore to place it in the
+Bessel-moment period algebra---to test whether it obeys a Broadhurst--Mellit
+quadratic relation or reduces to a critical $L$-value of the associated modular
+form~\cite{fresansabbahyu2023,broadhurst2016,zhou_wronskian2018}---of which the
+explicit $\Gamma(2)$ iterated-Eisenstein
+realization~\cite{broedel_eisenstein2018,manin2006} captures only the regular
+$D\to0$ shadow, both of a piece with the finite closed form of
+Sec.~\ref{sec:obstruction}.  We note the level is
 $\Gamma(2)$---the classical \emph{universal} Legendre level, below the two-loop
 sunrise's $\Gamma_{1}(6)$; landing on the Legendre family is expected for a
 four-branch-point curve, so the content here is the rational modulus map and the
 in-domain complex-multiplication fibres, not an exotic level.
+
+\textbf{[OBSERVATION]} The route to that closed form is now specific.  The fibre period
+is the $\Gamma(2)$ modular quantity $K(m)=\tfrac{\pi}{2}\,\theta_{3}(0,q)^{2}$ at
+$\tau=iK'(m)/K(m)$ (with $\lambda(\tau)=m$, both validated to $40$ digits), so the modulus
+integration pulls back to the $\tau$-plane with the weight-two Jacobian in closed form,
+$d\lambda/d\tau=i\pi\,\theta_{2}^{4}\theta_{4}^{4}/\theta_{3}^{4}
+=i\pi\,\lambda(1-\lambda)\theta_{3}^{4}$ (the classical modular-lambda derivative; leading
+$q$-expansion $i\pi(16q-256q^{2}+2112q^{3}-\cdots)$) \textbf{[MEASURED, $\sim\!10^{-32}$
+finite-difference {\rm +} symbolic; \texttt{test\_paper59\_bd\_jacobian.py}]}.  The \emph{physical}
+fibre, however, carries the
+$D=1$ exponential (Bessel) twist the pure period lacks---it degenerates to $K_{0}(1)$, not a
+modular period, and this irregularity is measured directly at the level of the master period
+itself:\ its large-$D$ asymptotic series is Gevrey-one (the optimal-truncation order grows
+linearly with $D$ and the series then diverges) with Borel radius $2$, matching the dominant
+singularity of the connection~\eqref{eq:pf} \textbf{[MEASURED;
+\texttt{test\_paper59\_resurgence\_corner.py}, with the irregular-connection witness
+\texttt{test\_L4\_irregular\_at\_infinity}]}---so the integrated observable is a $\Gamma(2)$
+\emph{resurgent Lambert series}
+rather than a bare modular period, the pure $\Gamma(2)$ multiple modular value being its regular
+$D\to0$ shadow.  This is exactly the class for which Broadhurst and Dorigoni give the
+iterated-Eisenstein / Lambert-series machinery for sunrise and banana
+integrals~\cite{broadhurst_dorigoni2026}.  With the Jacobian above in closed form the
+length-two-to-length-one reduction is now explicit:\ a co-area change of variables (modulus
+$\rho=c_{2}/c_{1}$ outer, scale $u=c_{1}$ inner) collapses the observable to a single
+$X(2)$-locus integral $T2=(16/\pi)\int_{0}^{1}\Phi(\rho)\,d\rho$, folded by the exact symmetry
+$\Phi(\rho)=\Phi(1/\rho)/\rho^{2}$ \textbf{[MEASURED, reduction $2.2\times10^{-9}$ vs the anchor,
+symmetry $5\times10^{-29}$; \texttt{test\_paper59\_coarea\_reduction.py}]}.  The twist whose
+Eichler integral this is, is the \emph{scale-integrated two-mass} fibre $\Phi(\rho)$---the
+one-mass $N(D)=\int_{1}^{\infty}e^{-Dx}/\sqrt{Q}\,dx$ is only its $\rho\to0$ slice---and its cusp
+sits at the diagonal $c_{1}=c_{2}$, where the curve degenerates to genus zero, so the leading
+Fourier--Whittaker (log) coefficient is the genus-zero diagonal value
+$A=J(\tfrac14,\tfrac14,1)/4$ (with the exact relation $b_{1}=-A$), one transcendence level below
+the observable.  The cusp expansion $\Phi=\sum_{m}\!\big[b_{m}\lambda^{m}\ln\lambda
++e_{m}\lambda^{m}\big]$ is \emph{asymptotic}:\ its leading reliable terms overshoot
+($68\%\!\to\!51\%$ of $T2$, non-monotone), which excludes any convergent low-order closure and
+leaves the \emph{Borel--Lambert resummation} to the second cusp---the Stokes / median-summation
+data one level beyond the coefficients (the BD $\sum_{n}a(n)q^{n}/(1-q^{n})$ form)---as the single
+remaining specialist step.
+
+\textbf{[SYMBOLIC + MEASURED]} The fold is itself a modular statement, and it locates the
+observable's modular home one level lower than the family's.  With $c=s(1-s)$ invariant under
+$s\mapsto1-s$, the full symmetry group of the Feynman square acts on the modulus
+$\rho=c_{2}/c_{1}$ through exactly $\{\mathrm{id},\ \rho\mapsto1/\rho\}$;\ the physical
+$s\leftrightarrow t$ density exchange is $\rho\mapsto1/\rho$, i.e.\
+$\lambda\mapsto\lambda/(\lambda-1)$, the coset $T\Gamma(2)$, whose elliptic representative
+$M=\bigl[\begin{smallmatrix}1&-1\\2&-1\end{smallmatrix}\bigr]$ satisfies $M^{2}=-I$ and
+$M\equiv T\ (\mathrm{mod}\ 2)$, and $\langle\Gamma(2),M\rangle=\Gamma_{0}(2)$.  The folded
+co-area integral $\int_{0}^{1}\Phi\,d\rho$ is therefore an integral over a fundamental domain
+for the extended group:\ \emph{the observable lives on $X_{0}(2)=X(2)/\langle\iota\rangle$, not
+on $X(2)$} (\texttt{tests/test\_paper59\_gamma0\_2.py}).  Two consequences, one positive and
+one deflationary.  Positive:\ $\Gamma_{0}(2)$ has a unique elliptic point, of order two with
+$M^{2}=-I$---disc $-4$, $j=1728$, CM by $\mathbb{Z}[i]$---so the conductor-$4$ arithmetic attaches to
+the observable's modular home canonically, complementing the fibre-independent
+$\theta_{3}^{2}$ leg above.  Deflationary:\ that elliptic point sits at $\lambda=2$
+($\rho=-1$), the ramification point of $X(2)\to X_{0}(2)$, \emph{off} the physical contour
+$\rho>0$;\ the involution's physical fixed locus is the diagonal $\rho=1$, the pure-Tate cusp;\
+and $\rho\mapsto1-\rho$ is not induced by any physical symmetry, so the CM fibre
+$\rho=\tfrac12$ is one member of the $s\leftrightarrow t$ orbit $\{\tfrac12,2\}$---a visited
+fibre, not a pinned one.  (That a $\mathbb{Z}_{2}$ symmetry of a modular family pins a $\mathbb{Z}[i]$ point at
+its elliptic fixed locus is $\mathrm{PSL}_{2}(\mathbb{Z})\cong\mathbb{Z}_{2}\ast\mathbb{Z}_{3}$ torsion---order two
+forces disc $-4$, order three disc $-3$---so the arithmetic content of the involution is one
+bit, not a mechanism.)
+
+\textbf{[MEASURED]} Two literature templates fix that step precisely and, between them, locate the
+one genuinely-open corner.  A single-scale reduction of exactly this kind---a Bessel moment whose
+argument is a modular function, equated to a weight-two modular form and thence to an Eichler
+integral of a higher-weight form---is Zhou's~\cite{zhou_wick2018} (e.g.\ $\int_{0}^{\infty}\!
+J_{0}(\alpha(z)t)\,I_{0}(t)K_{0}(t)^{3}\,t\,dt=\tfrac{\pi^{2}}{16}Z_{6,3}(z)$ at level
+$\Gamma_{0}(6)$, and the weight-four Eichler representation of $\int I_{0}K_{0}^{4}$), whose special
+values close to complex-multiplication $\Gamma$-values or critical $L$-values.  The resummation of
+the resulting cusp series across the two Fricke-dual cusps is Broadhurst--Dorigoni's, both in the
+divisor-sum form they give for sunrise/banana integrals~\cite{broadhurst_dorigoni2026} and---closer
+to our setup---in the character-twisted precursor~\cite{broadhurst_dorigoni_characters2025}, whose
+transseries relates the value at one cusp to the same Lambert family at the Fricke-dual argument
+$\tau\to-1/(r_{1}r_{2}\tau)$, median-resummed with algebraic (character) Stokes data; the general
+engine---a Borel tower whose Stokes constants are $L$-function coefficients, resummed to a quantum
+modular form---is the modular-resurgence paradigm of Fantini--Rella~\cite{fantini_rella2024} and the
+Eichler-integral median resummation of McSpirit--Rolen~\cite{mcspirit_rolen2025}.  Our object sits
+one axis beyond each:\ the fibre~\eqref{eq:besselmoment} is a \emph{two-scale} ($a_{1}\neq a_{2}$)
+Bessel moment where Zhou's are single-scale, and its cusp coefficients are Bessel--Fourier--Whittaker
+coefficients rather than the Dirichlet divisor sums those resummations twist by.  The distinction is
+concrete already at the leading coefficient:\ the diagonal value
+$A=J(\tfrac14,\tfrac14,1)/4=0.0790540321168\ldots$ is itself a single-scale Bessel moment---by
+Eq.~\eqref{eq:K0} and its $t$-derivative $\int_{0}^{\infty}\!\cos(kb)\,e^{-t\sqrt{ck^{2}+1}}\,dk=
+2t\,K_{1}(\sqrt{t^{2}+4b^{2}})/\sqrt{t^{2}+4b^{2}}$, $A$ reduces (exactly) to a
+$\sigma$-integral of $K_{1}$ at argument $\sqrt{t^{2}+4\sigma^{2}}$---and a guarded, decoy-controlled
+integer-relation search finds \emph{no} low-height closure for it in the weight-one two-center ring
+$\{\pi,e^{-a},K_{0},K_{1},E_{1}\}$ at the natural arguments $a\in\{2,2\sqrt2\}$
+\textbf{[MEASURED; \texttt{test\_routeC\_momentum.py::test\_paper59\_diagonal\_A}]}.  So even the leading cusp datum is an
+irreducible Bessel moment, not an elementary or divisor-sum quantity---consistent with a resurgent
+Lambert series whose individual coefficients need not be elementary for the resummed value to be a
+clean $\Gamma(2)$ period.  \textbf{[OPEN]} The exact remaining object is therefore the weight-two
+Eisenstein Eichler integral over $X(2)$ against this two-scale Bessel twist---the two-scale
+generalization of the single-scale Bessel-moment theory of
+Fres\'an--Sabbah--Yu~\cite{fresansabbahyu2023}, itself open---covered by none of these templates
+individually but pinned by all of them jointly.
+
+\textbf{[MEASURED]} The second-cusp resurgence itself is now characterized in closed form.  The
+scale-integrated twist's one-mass expansion ($c_{2}\!\to\!0$, one scale collapsing) is Gevrey $(2n)!$-type, and
+its dominant Borel singularity---the Stokes-data \emph{location}---is
+$z^{*}=-(\sqrt{c_{1}}\mp ib)^{2}=(b^{2}-c_{1})\pm 2i\sqrt{c_{1}}\,b$, with $|z^{*}|=c_{1}+b^{2}$ and
+trans-series action $\sqrt{z^{*}}=b+i\sqrt{c_{1}}$ (the source separation $b$ and the scale
+$\sqrt{c_{1}}$ fused into one complex action).  It is a $(z^{*}-w)^{3/2}$ branch
+(exponent $p=-\tfrac52$, measured cleanly) with amplitude in \emph{closed form},
+$2|A|=(c_{1}+b^{2})^{3/2}/(4\sqrt{\pi}\,\sqrt{c_{1}}\,b)$ (algebraic $\times\,1/\sqrt\pi$, the
+$1/\sqrt\pi$ from the $(1+\varepsilon)^{-5/2}$ boundary branch)---derived from the moment tail rate
+$\sqrt{c_{1}}-ib$ and validated at three parameter points (fit-to-closed-form ratio
+$0.988$--$0.989$, a uniform finite-order deficit converging to $1$).  This is the two-scale analog of the algebraic-Stokes closure of $N(D)$ in
+Sec.~\ref{sec:obstruction}, and the median-Borel resummation across the (complex, off-contour)
+singularity pair is unambiguous.  \textbf{[OPEN]} The residual step to the finite value is the
+integration of this algebraic-Stokes trans-series over the Feynman family (the inner scale) and the
+modulus---the concrete form the two-scale Broadhurst--Dorigoni resummation takes here.  Brute
+high-precision quadrature is not a route \emph{in the $(s,t)$ or co-area frames}
+(complex-singularity- and fibre-cost-limited there);\ the $(k,w)$ refactorization
+Eq.~\eqref{eq:kw} removes exactly that obstruction and supplies the \emph{digits}, while the
+finite \emph{closed form} remains this resummation question.
+
+\textbf{[MEASURED]} \emph{The Stokes location is a complexified light cone.} In position
+space each packet is analytic in $b^{2}$ with branch points at the endpoint of its
+source-time superposition, where the Euclidean interval closes, $b^{2}+p_{i}^{2}=0$; the
+$j_{0}$ smearing moves the singularity to the endpoint pinch
+$\beta^{*}=\pm|\bm W|\pm i p_{1}$, so the Borel location above is the squared complexified
+interval, $z^{*}=(\beta^{*})^{2}$, $|z^{*}|=p_{1}^{2}+|\bm W|^{2}$, of which
+$-(\sqrt{c_{1}}\mp ib)^{2}$ is the $D=1$ specialisation $p_{1}=\sqrt{c_{1}}$; the trans-series
+action $a_{2}\sqrt{z^{*}}$ is the heavy mass times that interval. Moment growth of the
+position-space fibre confirms modulus and phase at eight $(c,|\bm W|,D)$ points, including
+$D\neq1$, where the interval form and the $D$-independent form differ by $35\%$
+\textbf{[MEASURED, $0.6$--$5\%$ from twelve coefficients]}. Two consequences. The median
+resummation is unambiguous because a Euclidean interval never vanishes at real separation:
+the absence of a Stokes ambiguity is Euclidean positivity. And the $(s,t)\to(0,0)$ corner is
+the coincidence (ultraviolet) point, where the interval closes and the Borel singularities
+collide at the origin---which is why that corner, and only that corner, obstructs the family
+integration. There the masses diverge at fixed ratio, so the modulus survives and the Duffy
+angle \emph{is} the modulus; the leading behaviour is the ultraviolet power count
+$J=\sigma^{3}A(a)+O(\sigma^{5})$, $\sigma^{3}=m_{1}^{-2}m_{2}^{-2}m$, so the $\rho^{3/2}$
+non-analyticity is an odd mass dimension and carries no $\pi$. At the three corners with
+$|\bm W|\neq0$ the oscillation survives, a Dirichlet limit supplies one further power and an
+explicit $\pi$, and the integer-leading behaviour is now closed:
+$J=\sigma^{4}\,\frac{\pi}{2}G(1)^{2}\alpha(1-\alpha)/|\bm W|+O(\sigma^{5})$ with $G(1)=7/e$
+\textbf{[MEASURED, $10^{-4}$ with $O(\sigma^{2})$ approach, four corner/angle combinations;\
+\texttt{test\_paper59\_euclidean\_dictionary.py}]}.
+
+\textbf{[OBSERVATION]} Read against the two-layer taxonomy, the object separates on two
+kinematic axes: the mass split turns on the elliptic (genus-one) level and the Euclidean-time
+displacement turns on the irregular level---the curve carries no $D$, and the large-$D$ series
+is Gevrey-one at every $\rho$, including the genus-zero slice $\rho=0$ where the fibre is
+$K_{0}(D)$---while the modulus then also grades the irregular data through the Borel radius
+$\min(2,\,a_{2}/a_{1})$, the smallest difference of the four exponential rates. Every $\pi$
+in the object comes from the momentum-space measure or from integration over the momentum
+half-line; the non-compact Euclidean-time direction contributes no $\pi$ but the exponential
+and its Stokes data, consistent with the compactification reading of
+Paper~35~\cite{loutey_paper35}.  (In Euclidean signature the labels are structural, not
+metric:\ $D$ is the shift each propagator carries, $b$ the shared coordinate that is
+integrated out;\ the temporal reading is offered as a reading.)
+
+\textbf{[OBSERVATION]} The algebraic-Stokes closures of this paper sit inside a pattern that now
+spans the corpus's two-electron integral classes.  Four objects have had their resurgent data
+computed:\ the Paper-18 exchange-class seed $e^{a}E_{1}(a)$ (Borel transform $1/(1+\zeta)$, one
+simple pole, Stokes constant $2\pi i\cdot1$);\ the Paper-58 hybrid two-center class
+$\{E_{1},\ln\}$ (all Borel singularities at $\pm a_{d}$, the far-center exponent;\ Stokes
+constants $2\pi i\times\mathbb{Q}(\sqrt d\,)$, extracted blind from large-order coefficients to
+$35$--$81$ digits and matched by exact integer relations;\ and the sector constants cancel
+pairwise, so the physical integral is \emph{cut-free} in $R$---the median resummation \emph{is}
+the closed form, \texttt{tests/test\_paper59\_resurgent\_skeleton.py});\ the one-mass fibre
+$N(D)$ of Sec.~\ref{sec:obstruction} (algebraic over $\mathbb{Q}(\rho)$);\ and the second-cusp
+triple above (algebraic $\times\,1/\sqrt\pi$).  In all four the connection data is algebraic
+over the parameter field up to a $\pi$-power that is itself fixed by the Borel singularity type
+(simple pole $\to2\pi i$;\ square-root branch $\to\pi^{0}$;\ three-halves branch
+$\to1/\sqrt\pi$)---nothing in the Stokes data is free.  What varies is the \emph{boundary
+period}:\ absent for the seed;\ $\ln\Lambda$ with $\Lambda\in\mathbb{Q}$ the multiplicative
+cross-ratio of the four Borel actions---i.e.\ \emph{forced by the skeleton}---for the hybrid
+class;\ the elliptic $K(1-\rho)$, \emph{not} determined by the Stokes data, for $N(D)$;\ and the
+open $\Gamma(2)$ object for $T2$.  The forced$\to$free transition of the boundary period thus
+sits between weight one and genus one---the same seam at which the closed-form program of this
+paper opened.  The named next test---the exchange class, whose $R$-dependent logarithm makes
+its Borel singularity logarithmic rather than polar---has since been run and the pattern stands
+at \textbf{five for five}:\ the exchange kernel collapses to a single-sector reduced normal
+form whose Borel transform is the closed-form, charge-neutral sum
+$\mathfrak{B}(\xi)=\tfrac{1}{2ab}\sum_{j}q_{j}(\xi-\xi_{j})\ln(\xi-\xi_{j})$ over the four
+rational positions, with \emph{integer} Stokes charges $q_{j}\in\{-1,+1,+1,-1\}$ (no radical
+needed, unlike the hybrid's $\sqrt d$);\ the boundary log is forced even more tightly than the
+hybrid's cross-ratio---its argument is $\kappa=\prod_{j}\lambda_{j}^{q_{j}}=2ab/(a{+}b)$, the
+exponents \emph{being} the Stokes charges;\ and Euler's $\gamma$ never exists in the Borel
+plane at all:\ the $R$-dependent log moves one Borel singularity onto the sector's own origin
+(pole $\to u\ln u$ branch), and $\gamma$ is exactly the bookkeeping cost of writing that origin
+singularity in the $R$ variable---which finally tags the $\gamma$ of the weight-one seed set as
+coordinate bookkeeping, not a projection transcendental.  The object is Borel-summable with no
+lateral ambiguity yet genuinely multivalued in complex $R$ (the price of the $R$-dependent log,
+costing no new transcendental), where the hybrid class was single-valued
+(\texttt{tests/test\_paper59\_resurgent\_skeleton.py}).  The $\pi$-power law refines
+accordingly:\ an \emph{integral} local Borel exponent (pole \emph{or} log branch) fixes $2\pi
+i$;\ a half-integral one fixes $\pi^{0}$ or $1/\sqrt\pi$.  (Read against the two-layer taxonomy
+this is a candidate refinement---a resurgent-skeleton grading \emph{within} the transcendental
+layer---recorded as an observation, now on five objects;\ the residual open leg is the
+heteronuclear infinite $\tau$-sum.)
+
+%% ========================================================================
+\section{The Bessel-moment period algebra: master family and quadratic
+relations}
+\label{sec:bessel_algebra}
+%% ========================================================================
+
+Section~\ref{sec:modular} places the integrated observable in the Bessel-moment
+class; we now make that placement quantitative by exhibiting the period algebra
+it inhabits.  The rank-four irregular connection~\eqref{eq:pf} has four master
+periods, the Laplace transforms
+%
+\begin{equation}
+s_{c}(D)=\int_{\gamma_{c}}\frac{e^{-Dx}\,dx}{\sqrt{Q(x)}},
+\qquad Q(x)=(x^{2}-1)(\rho x^{2}+1-\rho),
+\end{equation}
+%
+over the four independent cycles $\gamma_{c}$ joining the branch points
+$\{\pm1,\pm i\sqrt{(1-\rho)/\rho}\}$: the physical moment $s_{K}$ (the cut
+$[1,\infty)$, which is $N(D)$ itself, $\sim e^{-D}$), its companion $s_{I}$
+($[-1,1]$, $\sim e^{+D}$), the imaginary-axis period $s_{J}$
+($\sim\cos\omega D$), and the sector $s_{Y}$ carrying the $D\ln D$
+non-analyticity.  \textbf{[MEASURED]} The three regular masters satisfy
+Eq.~\eqref{eq:pf} to $\sim\!10^{-15}$ across $\rho$ and $D$ (each
+annihilated: $s_{K}\!\sim\!10^{-18}$, $s_{I}\!\sim\!10^{-17}$,
+$s_{J}\!\sim\!10^{-15}$).
+
+\emph{The Wronskian.}  \textbf{[SYMBOLIC]} The operator~\eqref{eq:pf} is formally
+self-adjoint (Sec.~\ref{sec:obstruction}), so its differential Galois group lies
+in $\mathrm{Sp}_{4}$, and Abel's identity---with the sub-leading coefficient
+ratio $p_{3}/p_{4}=2/D$---fixes the Wronskian of the master matrix exactly as a
+pure monomial,
+%
+\begin{equation}
+W(D)=W_{0}\,D^{-2}:
+\end{equation}
+%
+the transcendence of the individual masters cancels in their determinant, the
+elliptic analogue of the classical $W[K_{0},I_{0}](D)=1/D$.
+
+\emph{Quadratic period relations.}  \textbf{[MEASURED, 25 digits]}
+Self-adjointness makes the Lagrange bilinear concomitant $B[s_{a},s_{b}]$
+constant in $D$; evaluated on the masters it is moreover independent of the
+modulus $\rho$ and lands on rational multiples of $\pi$,
+%
+\begin{equation}
+B[s_{K},s_{I}]=-\pi,\qquad B[s_{K},s_{J}]=0,\qquad B[s_{I},s_{J}]=2\pi,
+\end{equation}
+%
+verified to $25$ digits at $D=1$ across the tested $\rho$, and $D$-independent
+by the self-adjoint Lagrange identity.
+These are the Broadhurst--Mellit / Fresán--Sabbah--Yu
+quadratic relations between Bessel
+moments~\cite{broadhurst2016,fresansabbahyu2023,zhou_wronskian2018}, here for the
+$\Gamma(2)$ (Legendre) family---the elliptic lift of $W[K_{0},I_{0}]=1/D$.
+Structurally the concomitant is the de~Rham--Betti intersection pairing of the
+thimble cycles times the branch-point half-residue $\pi$ (the square-root
+$(-1)$-monodromy of $1/\sqrt{Q}$ at each simple branch point, the elliptic lift of
+the $1/\pi$ normalizing $I_{0}$ and of $W[K_{0},I_{0}]=1/D$), so $B=\pi\,J$ with $J$
+an integer intersection form.
+
+\textbf{[SYMBOLIC]} \emph{The intersection form, identified.}  We close the
+identification of $J$ from the branch-point asymptotics---no numerics enter
+in this leg.  Near a
+simple branch point $Q\sim Q'(x_{c})(x-x_{c})$, so each master has the leading Laplace
+behaviour $s_{c}(D)\sim e^{-x_{c}D}\sqrt{\pi/(Q'(x_{c})\,D)}$ (the half-order integral
+$\int_{0}e^{-Dt}t^{-1/2}\,dt=\Gamma(\tfrac12)/\sqrt D$); since the concomitant is exactly
+constant in $D$, its value equals its $D\to\infty$ limit, which these leading terms
+capture (the subleading $O(1/D)$ corrections vanish in the limit).  In the
+Lefschetz-thimble basis $\{\gamma_{+1},\gamma_{-1},\gamma_{+i\omega},\gamma_{-i\omega}\}$
+---one thimble per branch point, the basis in which the monodromy $M_{0}$ of
+Sec.~\ref{sec:obstruction} is the exact integer matrix---two facts follow.
+\emph{Block-diagonality:} $s_{a}s_{b}\sim e^{-(x_{a}+x_{b})D}$, so a nonzero
+\emph{constant} forces $x_{a}+x_{b}=0$; the branch points pair as $\{+1,-1\}$ (the real
+$K_{0}/I_{0}$ sector) and $\{+i\omega,-i\omega\}$ (the imaginary $J_{0}/Y_{0}$ sector),
+and every cross-sector pairing ($x_{a}+x_{b}\neq0$) vanishes identically.
+\emph{Plane-equality and the unit $\pi$:} on a within-sector pair the leading concomitant
+is $B[s_{x},s_{-x}]=2x\,(-2\rho x^{2}+2\rho-1)\,A_{x}A_{-x}$ with
+$A_{x}A_{-x}=\pi/\sqrt{Q'(x)Q'(-x)}$, and the exact identity
+$Q'(x)Q'(-x)=-4x^{2}(2\rho x^{2}-2\rho+1)^{2}$ cancels the algebraic factor completely,
+leaving
+%
+\begin{equation}
+B[s_{x},s_{-x}]^{2}=-\pi^{2}\qquad\text{independently of }x\text{ and }\rho,
+\label{eq:planepi}
+\end{equation}
+%
+so \emph{both} symplectic planes carry the same pairing, of magnitude exactly $\pi$ (the
+$\pi=\Gamma(\tfrac12)^{2}$ of the two branch-point half-integrals).  Hence
+%
+\begin{equation}
+J=\Omega:=\begin{pmatrix}0&1\\-1&0\end{pmatrix}\oplus
+\begin{pmatrix}0&1\\-1&0\end{pmatrix},
+\qquad B=\pi\,\Omega ,
+\end{equation}
+%
+the canonical block symplectic form; in the period-cut basis this is the real
+$-\pi,0,2\pi$ measured above (a numerical thimble normalization instead reads
+$B=\pi(\rho i)\Omega$, the same $\Omega$).  This $\Omega$
+is \emph{forced}, not fitted: the antisymmetric forms preserved by the monodromy,
+$M_{0}^{\mathsf T}J M_{0}=J$, constitute a four-parameter family, and imposing the
+concomitant's vanishing cross-sector pairings selects \emph{exactly}
+$\mathbb{Z}\,\Omega$.  It is unimodular ($\det\Omega=1$, hence nondegenerate), and
+$M_{0}^{\mathsf T}\Omega\,M_{0}=\Omega$ holds identically over $\mathbb{Z}$, so the
+differential Galois group of Eq.~\eqref{eq:pf} lies in the \emph{integral} symplectic
+group $\mathrm{Sp}(\Omega,\mathbb{Z})=\mathrm{Sp}_{4}(\mathbb{Z})$---the concrete,
+integral sharpening of the self-adjointness that placed it in $\mathrm{Sp}_{4}$.
+\emph{Tier scope.}\ The asymptotic identification above is numerics-free, but
+every clause invoking $M_{0}$---the forcing argument and the $\mathrm{Sp}_{4}(\mathbb{Z})$
+containment---inherits that matrix's \textbf{[SYMBOLIC + MEASURED]} status:\ $M_{0}$
+is an exact integer certificate rather than a floating-point fit, but it was
+obtained by computation, not derived in closed form.  The
+three physical period cuts $\{[1,\infty),[-1,1],i[-\omega,\omega]\}$ realize only a
+rank-two sub-block of $\pi\Omega$ (the measured $-\pi,0,2\pi$); it is the fourth,
+$Y_{0}$-sector master---the one carrying the $D\ln D$---that completes the pairing to
+the full nondegenerate rank-four form.  The symbolic identification of the
+intersection form is thus complete: $B=\pi\,\Omega$, the Broadhurst--Mellit /
+Fresán--Sabbah--Yu quadratic relations realized for the $\Gamma(2)$ family, backed by
+\texttt{tests/test\_routeC\_momentum.py} (\texttt{test\_intersection\_form\_pi\_and\_planes\_are\_symbolic}
+for Eq.~\eqref{eq:planepi} and the block structure,
+\texttt{test\_intersection\_form\_is\_forced\_canonical\_symplectic} for the
+$M_{0}$-forcing, \texttt{test\_intersection\_form\_period\_cut\_values} for the
+$-\pi,0,2\pi$ values, and
+\texttt{test\_paper59\_bessel\_moment\_algebra.py::test\_paper59\_period\_pairing\_minus\_pi\_0\_2pi}
+witnessing them to the quoted $25$ digits).
+
+\emph{Not a cusp-form $L$-value.}  \textbf{[OBSERVATION]} Because
+$M_{\bullet}(\Gamma(2))=\mathbb{C}[\theta_{2}^{4},\theta_{4}^{4}]$ is free on two
+weight-two generators, $\dim S_{k}(\Gamma(2))$ vanishes for $k=2,4$ and first
+reaches $1$ at $k=6$ (the cusp form $\theta_{2}^{4}\theta_{3}^{4}\theta_{4}^{4}$).
+The observable's transcendental weight is at most three (length $\le2$ over
+$X(2)$, from the two Feynman integrations), whereas a weight-six cusp form's
+critical $L$-values sit at motivic weight five; and the period pairing just
+exhibited is Eisenstein-flavoured (pure $\pi$-rationals), not cuspidal.  The
+integrated three-center integral is therefore \emph{not} a critical $L$-value of
+a $\Gamma(2)$ cusp form: it is an Eisenstein / complex-multiplication period,
+built from $\pi$ and the CM-fibre $\Gamma$-values of Sec.~\ref{sec:modular}
+($K(\tfrac12)=\Gamma(\tfrac14)^{2}/4\sqrt\pi$, the discriminant-$8$ period, and
+their kin).  \textbf{[MEASURED]} A guarded integer-relation
+search (with a same-magnitude decoy control) confirms the value is not a
+low-height combination of the small weight-$\le2$ disc-$4$ Eisenstein/CM ring,
+nor of the small weight-$\le1$ disc-$8$ ring $\{1,\pi,\varpi,P_{8}\}$ ($P_{8}$
+the discriminant-$8$ period)---both \emph{decisive} at the conservatively
+cross-validated $\sim\!16$ digits: two structurally independent evaluators (the
+spectral corner of Sec.~\ref{sec:modular} and a decay-scaled-fibre quadrature)
+agree to $16$ digits, the corner evaluator extending single-method to
+$\sim\!19$; on the decisive rings the relation height is far above low and tracks
+the decoy at every tested precision.  The wider searches---through weight three
+in disc-$4$, and the disc-$8$ ring at weight two---remained only \emph{consistent}
+with the negative: those dimension-ten bases are over-determined at this
+precision (target and decoy both turn up small but precision-\emph{unstable}
+relations, changing from one precision to the next).  The decision has since
+been made at $64$ digits via the $(k,w)$ refactorization
+(Eq.~\eqref{eq:kw}):\ \emph{decisively negative} through weight three,
+including the Catalan-completed corrected ring, at height $\le10$---so the
+finite closed form, if it exists at all, either has height $>10$ in that ring
+or lives outside it.
+
+This narrows the open problem sharply: the finite closed form, should it exist,
+is a reduction of the observable to $\pi$, the CM-fibre $\Gamma$-values, their
+Legendre \emph{quasiperiods}, and the weight-two Eisenstein $L$-value
+$G=\beta(2)$ (Sec.~\ref{sec:modular}), within the Bessel-moment period
+algebra---a two-scale, shifted member of the Broadhurst--BBBG
+class~\cite{bbbg2008,broadhurst2008} evaluated over $X(2)$---and is neither an
+elliptic dilogarithm nor a cusp-form $L$-value.  \textbf{[OBSERVATION]} Because the corrected-ring searches are now decisively negative
+through weight three at clean heights ($64$ digits, height $\le10$), any such finite
+combination either belongs to the $D\to0$ \emph{shadow}---where the shadow reading of Sec.~4 places the
+weight-three $G$-requiring element---or sits at height $>10$ in that ring;\ the physical
+value itself carries no measured conductor-$4$ content at reachable heights.
+
+%% ========================================================================
+\section{Explicitly-correlated integrals are native to this representation}
+\label{sec:f12}
+%% ========================================================================
+
+The momentum reduction of Sec.~\ref{sec:momentum} is \emph{kernel-agnostic}.  A
+two-electron matrix element of \emph{any} operator $f(r_{12})$ between orbital products
+is, by the convolution theorem,
+%
+\begin{equation}
+\langle \phi_a\phi_b\,|\,f(r_{12})\,|\,\phi_c\phi_d\rangle
+=\frac{1}{(2\pi)^3}\!\int\! d^3k\;
+\widetilde{\rho}_{ac}(\bm k)^{*}\,\widetilde f(\bm k)\,\widetilde{\rho}_{bd}(\bm k),
+\qquad \rho_{ac}=\phi_a\phi_c,
+\label{eq:kernelswap}
+\end{equation}
+%
+the identical object as the electron-repulsion integral with the Coulomb kernel
+$\widetilde{(1/r_{12})}=4\pi/k^{2}$ replaced by $\widetilde f$, and the angular closure to
+the spherical Bessel kernel of Eq.~\eqref{eq:angular} applies unchanged.
+Explicitly-correlated (F12) methods take $f$ to be a correlation factor; the standard
+choice is the Slater geminal $f=e^{-\gamma r_{12}}$, whose transform
+$\widetilde f(k)=8\pi\gamma/(k^{2}+\gamma^{2})^{2}$ is exact, elementary, and---unlike the
+Coulomb kernel---\emph{regular} at $k=0$.  In this representation the geminal is therefore
+a native object: no expansion of $e^{-\gamma r_{12}}$ in Gaussians (the first workaround of
+Gaussian-basis F12) is required.  \textbf{[MEASURED]} The momentum
+form~\eqref{eq:kernelswap} reproduces a direct position-space quadrature to $10^{-14}$, and
+the Coulomb self-repulsion of a $1s$ density to its exact value $5a/8$
+(\texttt{test\_f12\_kernel\_swap\_and\_native\_geminal}).
+
+Whether the integral closes in elementary functions is governed \emph{not} by the operator
+but by the \emph{density topology}.  \textbf{[SYMBOLIC]} When both transition densities are
+single-center the radial integrand is rational and the pair integral is genus zero: e.g.\
+$\int_{0}^{\infty}[k^{2}/(k^{2}+\gamma^{2})^{2}]\,j_{0}(kR)\,dk=(\pi/4\gamma)\,e^{-\gamma R}$
+(\texttt{test\_f12\_geminal\_pair\_is\_elementary}).  A \emph{two}-center transition density,
+however, contributes a Fock dispersion factor $\sqrt{c\,k^{2}+1}$
+(Sec.~\ref{sec:reduction}), and two of them build the very curve of Eq.~\eqref{eq:curve},
+$y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$, whose period is a complete elliptic integral
+(\texttt{test\_f12\_multicenter\_shares\_eri\_elliptic\_genus}).  A rational kernel---Coulomb
+$4\pi/k^{2}$ or geminal $8\pi\gamma/(k^{2}+\gamma^{2})^{2}$ alike---is a rational function on
+this curve, so $\widetilde f\,dk/y$ is again an elliptic integral: the genus is
+\emph{unchanged}, the geminal merely trading an elliptic integral of the first kind (the
+Coulomb period) for one of the third kind (its poles at $k^{2}=-\gamma^{2}$).  The
+transcendence class is thus set by the number of two-center transition densities---zero or
+one gives genus zero, two gives genus one---exactly as for the repulsion integral.
+
+\textbf{[OBSERVATION]} The consequence is a \emph{unification}, not an escape.  Explicitly-correlated integrals are
+native to the Fock momentum representation and cost the same as the corresponding repulsion
+integrals, because here the difficulty of a two-electron integral lives entirely in the
+densities, never in the operator between them.  In particular the elliptic obstruction of
+this paper---the genuine three-center, two-two-center-density integral---gates
+explicitly-correlated \emph{evaluation} as well: the corresponding closed form (the
+kernel changes the kind of period, not the curve) that would evaluate the
+three-center repulsion integral would evaluate the multi-center F12 correction.  What
+correlation buys is not a cheaper integral but a far more compact basis---a single
+$r_{12}$ factor recovers the electron--electron cusp that orbital products approach only as
+$\ell\to\infty$---so the route trades many repulsion integrals for few correlated ones drawn
+from the same transcendence classes.  We do not here treat the many-electron
+(resolution-of-identity) machinery of a full F12 method, nor a resource comparison with tuned
+Gaussian F12; the statement is about the two-electron integrals, whose momentum-space
+transcendence we have mapped.
 
 %% ========================================================================
 \section{Scope, and the open frontier}
@@ -537,17 +1371,28 @@ simplest genuine instance.  It does not by itself deliver a polyatomic energy:
 a molecular Hamiltonian requires the full three-center tensor, and a value
 that is part closed-form and part numerical is neither more accurate (the
 Gaussian fits are already exact to fit quality) nor decidable.  What the
-reduction buys is an exact, fast, geometry-native evaluator for the
+reduction buys is an accurate, fast, geometry-native evaluator for the
 three-center integral and---the point of this paper---a precise diagnosis of
 why it is hard.
 
 \emph{The open problem.}  As shown in Sec.~\ref{sec:obstruction}, the
 elliptic-dilogarithm route is obstructed: $N(D)$ is not an elliptic
 dilogarithm of elementary or period-level data but a period of the rank-four
-irregular connection~\eqref{eq:pf}.  The remaining question is whether that
-connection admits \emph{any} closed form---equivalently, whether its
-fourth-order operator factors over the differential field generated by the
-periods $K(\rho),K(1-\rho)$---a differential-Galois problem we do not settle.
+irregular connection~\eqref{eq:pf}.  We settle the differential-Galois
+\emph{reducibility}: the fourth-order operator is irreducible over
+$\mathbb{C}(D)$---hence over $\mathbb{Q}(\rho)(D)$---because it is the
+Fourier--Laplace transform of an irreducible connection, confirmed concretely by
+its exact-integer monodromy (Sec.~\ref{sec:obstruction}), so $N(D)$ admits no
+closed form through any factorization of the operator.  The
+one remaining question is whether the irreducible connection nonetheless carries
+a \emph{transcendental} closed form, which we do not settle.
+Section~\ref{sec:bessel_algebra} localizes it: the object is an Eisenstein /
+complex-multiplication Bessel-moment period---not a cusp-form $L$-value and not an
+elliptic dilogarithm---whose master family obeys the quadratic period relations
+$B=\pi\,\Omega$, $\Omega$ the canonical symplectic intersection form now identified in
+closed form (Sec.~\ref{sec:bessel_algebra}), preserved by the integral monodromy; the
+open piece is the explicit finite reduction of the observable itself to $\pi$ and the
+CM-fibre $\Gamma$-values.
 (This tempers a literature-scout expectation that the object would sit at the
 tractable elliptic-dilogarithm level because it has only two propagator
 factors; that pattern-match from the sunrise is overridden by the in-module
@@ -572,9 +1417,13 @@ molecular integral turns out to be an instance of the modern theory of
 elliptic Feynman integrals---a bridge that, to our knowledge, had not been
 drawn.  The finite closed form remains open---and, we have shown, past the
 reach of the sunrise's elliptic-dilogarithm mechanism, whose inhomogeneity is
-absent here: the object is a period of a rank-four irregular connection, and
-whether it closes at all is a differential-Galois question, posed here as the
-frontier it deserves to be.
+absent here: the object is a period of a rank-four irregular connection which we
+prove irreducible---it is the Fourier--Laplace transform of an irreducible
+connection, and its monodromy admits no invariant coordinate subspace---so it does not
+close by any factorization.  Whether it closes at the irreducible level---as an Eisenstein/CM Bessel-moment
+period, a finite reduction to $\pi$ and the CM-fibre $\Gamma$-values
+(Sec.~\ref{sec:bessel_algebra})---is the one frontier that remains, posed here as
+it deserves to be.
 
 %% ========================================================================
 \begin{thebibliography}{99}
@@ -593,16 +1442,16 @@ Spectra} (World Scientific, Singapore, 2006).
 
 \bibitem{avery_avery_4center}
 J.~E.~Avery and J.~S.~Avery, ``4-Center STO interelectron repulsion
-integrals with Coulomb Sturmians,'' \textit{Adv.\ Quantum Chem.}\ (Elsevier),
-ScienceDirect S0065327617300710.
+integrals with Coulomb Sturmians,'' \textit{Adv.\ Quantum Chem.}\ \textbf{76},
+133--146 (2017).
 
 \bibitem{shibuya1965}
 T.~Shibuya and C.~E.~Wulfman, ``Molecular orbitals in momentum space,''
 \textit{Proc.\ R.\ Soc.\ Lond.\ A}\ \textbf{286}, 376 (1965).
 
 \bibitem{ozdogan2012}
-T.~\"Ozdo\u{g}an and E.~Ruiz, ``Evaluation of three-center two-electron
-repulsion integrals over Slater-type orbitals,'' arXiv:1209.3755 (2012).
+T.~\"Ozdo\u{g}an and M.~B.~Ruiz, ``Evaluation of three-center two-electron
+repulsion integrals over Slater orbitals,'' arXiv:1209.3755 (2012).
 
 \bibitem{barnett_coulson1951}
 M.~P.~Barnett and C.~A.~Coulson, ``The evaluation of integrals occurring
@@ -610,8 +1459,8 @@ in the theory of molecular structure.\ Parts I \& II,''
 \textit{Philos.\ Trans.\ R.\ Soc.\ Lond.\ A}\ \textbf{243}, 221--249 (1951).
 
 \bibitem{fromm_hill1987}
-D.~M.~Fromm and R.~N.~Hill, ``Analytic evaluation of the three-electron
-integral,'' \textit{Phys.\ Rev.\ A}\ \textbf{36}, 1013--1044 (1987).
+D.~M.~Fromm and R.~N.~Hill, ``Analytic evaluation of three-electron
+integrals,'' \textit{Phys.\ Rev.\ A}\ \textbf{36}, 1013--1044 (1987).
 
 \bibitem{bbbg2008}
 D.~H.~Bailey, J.~M.~Borwein, D.~Broadhurst, and M.~L.~Glasser, ``Elliptic
@@ -632,6 +1481,39 @@ space-time dimensions with arbitrary masses in terms of elliptic
 dilogarithms,'' \textit{J.\ Math.\ Phys.}\ \textbf{55}, 102301 (2014);
 arXiv:1405.5640.
 
+\bibitem{bognermsw2019}
+C.~Bogner, S.~M\"uller-Stach, and S.~Weinzierl, ``The unequal mass sunrise
+integral expressed through iterated integrals on $\overline{\mathcal M}_{1,3}$,''
+\textit{Nucl.\ Phys.\ B}\ \textbf{954}, 114991 (2020); arXiv:1907.01251.
+
+\bibitem{dingle1973}
+R.~B.~Dingle, \textit{Asymptotic Expansions:\ Their Derivation and
+Interpretation} (Academic Press, London, 1973).
+
+\bibitem{costin2008}
+O.~Costin, \textit{Asymptotics and Borel Summability}, Monographs and Surveys in
+Pure and Applied Mathematics \textbf{141} (Chapman \& Hall/CRC, Boca Raton, 2008).
+
+\bibitem{sabbah_stokes2013}
+C.~Sabbah, \textit{Introduction to Stokes Structures}, Lecture Notes in
+Mathematics \textbf{2060} (Springer, Berlin, 2013); arXiv:0912.2762.
+
+\bibitem{broadhurst_dorigoni2026}
+D.~Broadhurst and D.~Dorigoni, ``Resurgent Lambert series from Feynman and
+beyond,'' PoS \textbf{LL2026}, 020 (2026); arXiv:2607.14020.
+
+\bibitem{broadhurst_dorigoni_characters2025}
+D.~Broadhurst and D.~Dorigoni, ``Resurgent Lambert series with characters,''
+arXiv:2507.21352 (2025).
+
+\bibitem{fantini_rella2024}
+V.~Fantini and C.~Rella, ``Modular resurgent structures,'' arXiv:2404.11550
+(2024).
+
+\bibitem{mcspirit_rolen2025}
+E.~McSpirit and L.~Rolen, ``Quantum modular forms and resurgence,''
+arXiv:2505.00799 (2025).
+
 \bibitem{blochkerrvanhove2015}
 S.~Bloch, M.~Kerr, and P.~Vanhove, ``A Feynman integral via higher normal
 functions,'' \textit{Compos.\ Math.}\ \textbf{151}, 2329--2375 (2015);
@@ -639,12 +1521,114 @@ arXiv:1406.2664.
 
 \bibitem{broadhurst2016}
 D.~Broadhurst, ``Feynman integrals, $L$-series and Kloosterman moments,''
-arXiv:1604.03057 (2016).
+\textit{Commun.\ Number Theory Phys.}\ \textbf{10}, 527--569 (2016);
+arXiv:1604.03057.
 
 \bibitem{fresansabbahyu2023}
 J.~Fres\'an, C.~Sabbah, and J.-D.~Yu, ``Quadratic relations between Bessel
 moments,'' \textit{Algebra Number Theory}\ \textbf{17}, 541--602 (2023);
 arXiv:2006.02702.
+
+\bibitem{katz1990}
+N.~M.~Katz, \textit{Exponential Sums and Differential Equations}, Annals of
+Mathematics Studies \textbf{124} (Princeton University Press, Princeton, 1990).
+The Fourier--Laplace transform is an exact auto-equivalence of the category of
+holonomic $\mathcal{D}$-modules on the affine line, and so preserves simplicity
+(irreducibility).
+
+
+\bibitem{boys1950}
+S.~F.~Boys, ``Electronic wave functions.\ I.\ A general method of calculation
+for the stationary states of any molecular system,'' \textit{Proc.\ R.\ Soc.\
+Lond.\ A}\ \textbf{200}, 542--554 (1950).
+
+\bibitem{harris_michels1967}
+F.~E.~Harris and H.~H.~Michels, ``The evaluation of molecular integrals for
+Slater-type orbitals,'' \textit{Adv.\ Chem.\ Phys.}\ \textbf{13}, 205--265 (1967).
+
+\bibitem{trivedi_steinborn1983}
+H.~P.~Trivedi and E.~O.~Steinborn, ``Fourier transform of a two-center product
+of exponential-type orbitals.\ Application to one- and two-electron multicenter
+integrals,'' \textit{Phys.\ Rev.\ A}\ \textbf{27}, 670--679 (1983).
+
+\bibitem{niukkanen1984}
+A.~W.~Niukkanen, ``Fourier transforms of atomic orbitals.\ I.\ Reduction to
+four-dimensional harmonics and quadratic transformations,'' \textit{Int.\ J.\
+Quantum Chem.}\ \textbf{25}, 941--955 (1984).
+
+\bibitem{grotendorst_steinborn1988}
+J.~Grotendorst and E.~O.~Steinborn, ``Numerical evaluation of molecular one- and
+two-electron multicenter integrals with exponential-type orbitals via the
+Fourier-transform method,'' \textit{Phys.\ Rev.\ A}\ \textbf{38}, 3857--3876
+(1988).
+
+\bibitem{safouhi2001}
+H.~Safouhi, ``The properties of sine, spherical Bessel and reduced Bessel
+functions for improving convergence of semi-infinite very oscillatory integrals:\
+the evaluation of three-centre nuclear attraction integrals over $B$ functions,''
+\textit{J.\ Phys.\ A:\ Math.\ Gen.}\ \textbf{34}, 2801--2818 (2001).
+
+\bibitem{pachucki2009}
+K.~Pachucki, ``Two-center two-electron integrals with exponential functions,''
+\textit{Phys.\ Rev.\ A}\ \textbf{80}, 032520 (2009).
+
+\bibitem{avery2013}
+J.~E.~Avery, ``Fast electron repulsion integrals for molecular Coulomb
+Sturmians,'' \textit{Adv.\ Quantum Chem.}\ \textbf{67}, 129--151 (2013).
+
+\bibitem{avery_avery2015}
+J.~E.~Avery and J.~S.~Avery, ``Molecular integrals for exponential-type orbitals
+using hyperspherical harmonics,'' \textit{Adv.\ Quantum Chem.}\ \textbf{70},
+265--324 (2015).
+
+\bibitem{brown_mmv2014}
+F.~Brown, ``Multiple modular values and the relative completion of the
+fundamental group of $M_{1,1}$,'' arXiv:1407.5167 (2014).
+
+\bibitem{brown_cosmic2017}
+F.~Brown, ``Feynman amplitudes, coaction principle, and cosmic Galois group,''
+\textit{Commun.\ Number Theory Phys.}\ \textbf{11}, 453--556 (2017);
+arXiv:1512.06409.
+
+\bibitem{brown_levin2011}
+F.~Brown and A.~Levin, ``Multiple elliptic polylogarithms,'' arXiv:1110.6917
+(2011).
+
+\bibitem{beilinson_levin1994}
+A.~Beilinson and A.~Levin, ``The elliptic polylogarithm,'' in \textit{Motives}
+(Seattle, 1991), Proc.\ Symp.\ Pure Math.\ \textbf{55}, Part 2 (American
+Mathematical Society, Providence, 1994), pp.\ 123--190.
+
+\bibitem{manin2006}
+Yu.~I.~Manin, ``Iterated integrals of modular forms and noncommutative modular
+symbols,'' in \textit{Algebraic Geometry and Number Theory}, Progr.\ Math.\
+\textbf{253} (Birkh\"auser, Boston, 2006), pp.\ 565--597; arXiv:math/0502576.
+
+\bibitem{broedel_sunrise2018}
+J.~Broedel, C.~Duhr, F.~Dulat, and L.~Tancredi, ``Elliptic polylogarithms and
+iterated integrals on elliptic curves II:\ an application to the sunrise
+integral,'' \textit{Phys.\ Rev.\ D}\ \textbf{97}, 116009 (2018);
+arXiv:1712.07095.
+
+\bibitem{broedel_eisenstein2018}
+J.~Broedel, C.~Duhr, F.~Dulat, B.~Penante, and L.~Tancredi, ``Elliptic symbol
+calculus:\ from elliptic polylogarithms to iterated integrals of Eisenstein
+series,'' \textit{J.\ High Energy Phys.}\ \textbf{08}, 014 (2018); arXiv:1803.10256.
+
+\bibitem{bonisch2021}
+K.~B\"onisch, F.~Fischbach, A.~Klemm, C.~Nega, and R.~Safari, ``Analytic
+structure of all loop banana amplitudes,'' \textit{J.\ High Energy Phys.}\
+\textbf{05}, 066 (2021); arXiv:2008.10574.
+
+\bibitem{zhou_wick2018}
+Y.~Zhou, ``Wick rotations, Eichler integrals, and multiloop Feynman diagrams,''
+\textit{Commun.\ Number Theory Phys.}\ \textbf{12}, 127--192 (2018);
+arXiv:1706.08308.
+
+\bibitem{zhou_wronskian2018}
+Y.~Zhou, ``Wro\'nskian factorizations and Broadhurst--Mellit determinant
+formulae,'' \textit{Commun.\ Number Theory Phys.}\ \textbf{12}, 355--407 (2018);
+arXiv:1711.01829.
 
 \bibitem{loutey_paper18}
 J.~Loutey, ``Exchange Constants: A Transcendence Taxonomy for the Geometric
@@ -653,6 +1637,10 @@ Vacuum,'' Paper~18 in this series.
 \bibitem{loutey_paper34}
 J.~Loutey, ``A Projection Taxonomy for Physical Observables,'' Paper~34 in
 this series.
+
+\bibitem{loutey_paper35}
+J.~Loutey, ``Time as Projection: The Klein-Gordon Spectrum on $S^3\times\mathbb{R}$
+and the Algebraic\,/\,Observation Split,'' Paper~35 in this series.
 
 \bibitem{loutey_paper56}
 J.~Loutey, ``The Tannakian Substrate of the Geometric Vacuum: A Finite-Cutoff
@@ -666,7 +1654,15 @@ Residue of Multi-Center Bonding,'' Paper~58 in this series.
 \bibitem{test_routeC}
 \textsc{GeoVac} regression suite, \texttt{tests/test\_routeC\_momentum.py}
 (momentum reproduction of the three-center integral; the single-dispersion
-$K_{0}$ identity; the elliptic-curve period), and
+$K_{0}$ identity; the elliptic-curve period; the rank-four Picard--Fuchs
+annihilation and $\mathrm{L}_{4}$ irreducibility battery / integer monodromy),
+\texttt{tests/test\_paper59\_bessel\_moment\_algebra.py} (the master-period
+Wronskian $W_{0}D^{-2}$, the quadratic period relations $\{-\pi,0,2\pi\}$, and
+the $\Gamma(2)$ cusp-form-weight argument backing
+Sec.~\ref{sec:bessel_algebra}),
+\texttt{tests/test\_paper59\_corner\_sigma2.py} (the $\rho=\sigma^{2}$ spectral
+corner, the assembled collinear value, and the guarded PSLQ-negative backing
+Sec.~\ref{sec:modular}), and
 \texttt{tests/test\_two\_center\_eri\_aabb.py} (two-center weight-one census).
 
 \end{thebibliography}
