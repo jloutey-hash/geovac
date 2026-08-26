@@ -1,0 +1,428 @@
+{
+  "params": {
+    "gamma": 1.0,
+    "He": "s-only ns=3 k=1.7 Z=2 2e",
+    "Li": "s-only ns=3 k=1.5 Z=3 3e",
+    "C": "s+p max_n=2 k=2.0 Z=6 6e (C_3P Hund ref)"
+  },
+  "note": "Non-Hermiticity source: only the 2-body convective K (asym_K); D and the xTC-L3 contraction v2 are Hermitian. The p-block engine does not build K, so C is measured without K (its xTC operator is Hermitian).",
+  "He": {
+    "system": "He",
+    "basis": "s-only (1s,2s,3s)",
+    "ndet": 15,
+    "nso": 6,
+    "E_plain": -2.877399639620127,
+    "primary": "D+K (2body TC)",
+    "asymK_hdev": 0.2874566745552464,
+    "asymw_hdev": 3.3306690738754696e-16,
+    "variants": [
+      {
+        "label": "plain(Coulomb)",
+        "is_xTC": false,
+        "hdev_asym": 5.551115123125783e-16,
+        "n": 15,
+        "nonnormality": 6.410097298868827e-17,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -2.877399639620127,
+        "im0": 0.0,
+        "gap_raw": 0.9066648933860677,
+        "gap_merged": 0.9066648933860677,
+        "gs_split": 0.0,
+        "gs_degeneracy": 1,
+        "kV_full": 2.1156051405363265,
+        "kV_low": 2.1156051405363265,
+        "kappa_eig_low": [
+          0.9999999999999998,
+          1.2759892878175272,
+          1.2106558624439516,
+          1.1898437273529934
+        ],
+        "max_kappa_eig_low": 1.2759892878175272,
+        "lcu": {
+          "n_pauli": 117,
+          "lam": 16.260446669947008,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 16.293085384273876,
+        "l1_2body": 83.16230269220495,
+        "lam_ratio_vs_plain": 1.0
+      },
+      {
+        "label": "D only (Herm)",
+        "is_xTC": false,
+        "hdev_asym": 3.3306690738754696e-16,
+        "n": 15,
+        "nonnormality": 4.342173254663303e-17,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -3.2355750922888578,
+        "im0": 0.0,
+        "gap_raw": 1.2478553089014361,
+        "gap_merged": 1.2478553089014361,
+        "gs_split": 0.0,
+        "gs_degeneracy": 1,
+        "kV_full": 2.1089317257253577,
+        "kV_low": 1.255287033311751,
+        "kappa_eig_low": [
+          1.0,
+          1.0249613407497922,
+          1.0206434305029874,
+          1.0073679753513236
+        ],
+        "max_kappa_eig_low": 1.0249613407497922,
+        "lcu": {
+          "n_pauli": 117,
+          "lam": 12.111374548199368,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 16.293085384273876,
+        "l1_2body": 42.71032855494963,
+        "lam_ratio_vs_plain": 0.744836522269953
+      },
+      {
+        "label": "D+K (2body TC)",
+        "is_xTC": false,
+        "hdev_asym": 0.2874566745552465,
+        "n": 15,
+        "nonnormality": 0.06943186900544467,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -2.8971627187587563,
+        "im0": 0.0,
+        "gap_raw": 0.9228423735977107,
+        "gap_merged": 0.9228423735977107,
+        "gs_split": 0.0,
+        "gs_degeneracy": 1,
+        "kV_full": 1.987426438444117,
+        "kV_low": 1.9803019630896956,
+        "kappa_eig_low": [
+          1.0105524283787244,
+          1.214618697251209,
+          1.1986652543679963,
+          1.2167513207895095
+        ],
+        "max_kappa_eig_low": 1.2167513207895095,
+        "lcu": {
+          "n_pauli": 249,
+          "lam": 17.826796252834136,
+          "max_imag_coeff": 0.06690442551838499
+        },
+        "l1_1body": 16.293085384273876,
+        "l1_2body": 80.79785758062621,
+        "lam_ratio_vs_plain": 1.0963288164637013,
+        "E_sym": -2.9088183050489818,
+        "cusp_win_total_mHa": 19.76307913862918,
+        "cusp_win_sym_mHa": 31.41866542885463,
+        "sym_win_retained": 1.5897657044464941,
+        "fold": {
+          "cond": 148.3421314117092,
+          "gap": 1.0898928918502078,
+          "eval_min": 0.22543737684379853,
+          "eval_max": 33.44186098087377
+        }
+      },
+      {
+        "label": "sym(D+K) [Herm]",
+        "is_xTC": false,
+        "hdev_asym": 0.0,
+        "n": 15,
+        "nonnormality": 3.4978675856657727e-17,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -2.908818305048979,
+        "im0": 0.0,
+        "gap_raw": 0.9330161851900958,
+        "gap_merged": 0.9330161851900958,
+        "gs_split": 0.0,
+        "gs_degeneracy": 1,
+        "kV_full": 2.5908888212982575,
+        "kV_low": 1.577361128515517,
+        "kappa_eig_low": [
+          1.0,
+          1.0036315356933094,
+          1.1052867129054342,
+          1.1035770064433146
+        ],
+        "max_kappa_eig_low": 1.1052867129054342,
+        "lcu": {
+          "n_pauli": 117,
+          "lam": 15.888352898745662,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 16.293085384273876,
+        "l1_2body": 80.35048002039927,
+        "lam_ratio_vs_plain": 0.9771166328481579
+      }
+    ]
+  },
+  "Li": {
+    "system": "Li",
+    "basis": "s-only (1s,2s,3s)",
+    "ndet": 20,
+    "nso": 6,
+    "E_plain": -7.242381346884439,
+    "primary": "D+K+xTC-L3 (FULL)",
+    "v2_hdev": 3.469446951953614e-18,
+    "asymK_hdev": 0.2264085509416697,
+    "asymw_hdev": 4.440892098500626e-16,
+    "variants": [
+      {
+        "label": "plain(Coulomb)",
+        "is_xTC": false,
+        "hdev_asym": 4.440892098500626e-16,
+        "n": 20,
+        "nonnormality": 2.6813000374605953e-17,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -7.242381346884439,
+        "im0": 0.0,
+        "gap_raw": 1.509903313490213e-14,
+        "gap_merged": 1.472036822175446,
+        "gs_split": 1.509903313490213e-14,
+        "gs_degeneracy": 2,
+        "kV_full": 1.3027593293530275,
+        "kV_low": 1.3027593293530273,
+        "kappa_eig_low": [
+          1.0008873489103973,
+          1.0008873489103973,
+          1.035180408785027,
+          1.035180408785027
+        ],
+        "max_kappa_eig_low": 1.035180408785027,
+        "lcu": {
+          "n_pauli": 117,
+          "lam": 10.550502405355708,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 16.90286140909949,
+        "l1_2body": 73.37850237547494,
+        "lam_ratio_vs_plain": 1.0
+      },
+      {
+        "label": "D+K (2body TC)",
+        "is_xTC": false,
+        "hdev_asym": 0.22640855094166973,
+        "n": 20,
+        "nonnormality": 0.014665550954630178,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -7.2812407780245625,
+        "im0": 0.0,
+        "gap_raw": 1.509903313490213e-14,
+        "gap_merged": 1.4134649543061482,
+        "gs_split": 1.509903313490213e-14,
+        "gs_degeneracy": 2,
+        "kV_full": 1.4907074692106392,
+        "kV_low": 1.2506336689383326,
+        "kappa_eig_low": [
+          1.0324331335596695,
+          1.0324331335596695,
+          1.031860043441025,
+          1.0318600434410254
+        ],
+        "max_kappa_eig_low": 1.0324331335596695,
+        "lcu": {
+          "n_pauli": 249,
+          "lam": 11.934175212648839,
+          "max_imag_coeff": 0.04979368257795327
+        },
+        "l1_1body": 16.90286140909949,
+        "l1_2body": 71.1748993806861,
+        "lam_ratio_vs_plain": 1.1311475751705191
+      },
+      {
+        "label": "D+xTC-L3 (noK)",
+        "is_xTC": true,
+        "hdev_asym": 4.440892098500626e-16,
+        "n": 20,
+        "nonnormality": 2.214145558604998e-17,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -8.094856275302782,
+        "im0": 0.0,
+        "gap_raw": 0.00016326935290855715,
+        "gap_merged": 1.116424270531601,
+        "gs_split": 0.00016326935290855715,
+        "gs_degeneracy": 2,
+        "kV_full": 1.000000000004878,
+        "kV_low": 1.000000000004878,
+        "kappa_eig_low": [
+          0.9999999999999999,
+          0.9999999999999999,
+          1.0,
+          0.9999999999999998
+        ],
+        "max_kappa_eig_low": 1.0,
+        "lcu": {
+          "n_pauli": 117,
+          "lam": 8.99064018999597,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 16.853279435692517,
+        "l1_2body": 38.64512219580937,
+        "lam_ratio_vs_plain": 0.8521528022620125
+      },
+      {
+        "label": "D+K+xTC-L3 (FULL)",
+        "is_xTC": true,
+        "hdev_asym": 0.22640855094166973,
+        "n": 20,
+        "nonnormality": 0.014675634238679193,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -7.284844485773258,
+        "im0": 0.0,
+        "gap_raw": 0.00015116240318580054,
+        "gap_merged": 1.3971549716396936,
+        "gs_split": 0.00015116240318580054,
+        "gs_degeneracy": 2,
+        "kV_full": 1.4485758911924835,
+        "kV_low": 1.208257848063651,
+        "kappa_eig_low": [
+          1.03023890345404,
+          1.030239277683386,
+          1.0322473206673641,
+          1.0322510944367926
+        ],
+        "max_kappa_eig_low": 1.0322510944367926,
+        "lcu": {
+          "n_pauli": 249,
+          "lam": 11.84240047540714,
+          "max_imag_coeff": 0.049793682577953274
+        },
+        "l1_1body": 16.853279435692517,
+        "l1_2body": 69.64932774772771,
+        "lam_ratio_vs_plain": 1.122448962183605,
+        "E_sym": -7.317462418978809,
+        "cusp_win_total_mHa": 42.463138888818364,
+        "cusp_win_sym_mHa": 75.08107209436955,
+        "sym_win_retained": 1.768147010774569,
+        "fold": {
+          "cond": 4725.687944690338,
+          "gap": 0.0011373203128540715,
+          "eval_min": 0.01135559127201344,
+          "eval_max": 53.66298077898473
+        }
+      },
+      {
+        "label": "sym(FULL) [Herm]",
+        "is_xTC": true,
+        "hdev_asym": 0.0,
+        "n": 20,
+        "nonnormality": 1.9220290958906185e-17,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -7.317462418978809,
+        "im0": 0.0,
+        "gap_raw": 0.00014633536361774446,
+        "gap_merged": 1.423098058628824,
+        "gs_split": 0.00014633536361774446,
+        "gs_degeneracy": 2,
+        "kV_full": 1.0000000000016842,
+        "kV_low": 1.0000000000016842,
+        "kappa_eig_low": [
+          1.0,
+          1.0,
+          0.9999999999999997,
+          1.0
+        ],
+        "max_kappa_eig_low": 1.0,
+        "lcu": {
+          "n_pauli": 117,
+          "lam": 10.31390550237084,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 16.853279435692517,
+        "l1_2body": 69.42206817680224,
+        "lam_ratio_vs_plain": 0.9775748211891061
+      }
+    ]
+  },
+  "C": {
+    "system": "C",
+    "basis": "s+p (1s,2s,2p) [K omitted: not in validated engine]",
+    "ndet": 210,
+    "nso": 10,
+    "E_plain": -30.441970306974827,
+    "primary": "D+xTC-L3 (noK, s+p)",
+    "v2_hdev": 2.7755575615628914e-17,
+    "variants": [
+      {
+        "label": "plain(Coulomb)",
+        "is_xTC": false,
+        "hdev_asym": 7.771561172376096e-16,
+        "n": 210,
+        "nonnormality": 2.530205176776463e-18,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -30.441970306974827,
+        "im0": 0.0,
+        "gap_raw": 2.3447910280083306e-13,
+        "gap_merged": 0.0762970720114815,
+        "gs_split": 3.872457909892546e-13,
+        "gs_degeneracy": 9,
+        "kV_full": 4.301312559023263,
+        "kV_low": 1.1229225168350938,
+        "kappa_eig_low": [
+          1.0002333643902892,
+          1.0023809889931974,
+          1.009435593962267,
+          1.0487059240556453
+        ],
+        "max_kappa_eig_low": 1.0487059240556453,
+        "lcu": {
+          "n_pauli": 279,
+          "lam": 29.52379428277364,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 72.00000000000188,
+        "l1_2body": 173.0998554031397,
+        "lam_ratio_vs_plain": 1.0
+      },
+      {
+        "label": "D+xTC-L3 (noK, s+p)",
+        "is_xTC": true,
+        "hdev_asym": 3.3306690738754696e-16,
+        "n": 210,
+        "nonnormality": 2.872762359649253e-18,
+        "im_spread": 0.0,
+        "all_real": true,
+        "E0": -32.88705832191868,
+        "im0": 0.0,
+        "gap_raw": 0.0006189925000938956,
+        "gap_merged": 0.02165125633181475,
+        "gs_split": 0.001223271698918893,
+        "gs_degeneracy": 9,
+        "kV_full": 1.0000334153137593,
+        "kV_low": 1.0000000000259006,
+        "kappa_eig_low": [
+          0.9999999999999998,
+          1.0,
+          1.0,
+          0.9999999999999999
+        ],
+        "max_kappa_eig_low": 1.0,
+        "lcu": {
+          "n_pauli": 279,
+          "lam": 30.42423612289027,
+          "max_imag_coeff": 0.0
+        },
+        "l1_1body": 75.00914842720404,
+        "l1_2body": 145.51229005316458,
+        "lam_ratio_vs_plain": 1.0304988522644603,
+        "E_sym": -32.88705832191863,
+        "cusp_win_total_mHa": 2445.0880149438526,
+        "cusp_win_sym_mHa": 2445.0880149438026,
+        "sym_win_retained": 0.9999999999999797,
+        "fold": {
+          "cond": 4.865970741665323,
+          "gap": 4.701690735672827,
+          "eval_min": 222.26985374333012,
+          "eval_max": 1081.5586050692748
+        }
+      }
+    ]
+  },
+  "walltime_s": 33.92597460746765
+}

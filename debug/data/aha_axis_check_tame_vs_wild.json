@@ -1,0 +1,32 @@
+{
+  "SU(2) on l=0 + l=1 + l=2  (Gaunt-style menu)": {
+    "dim": 9,
+    "noncommutativity": 2.0,
+    "commutant": 3
+  },
+  "SU(2) on l=1 + l=1        (multiplicity 2)": {
+    "dim": 6,
+    "noncommutativity": 1.0000000000000002,
+    "commutant": 4
+  },
+  "SU(2) on l=1 + l=2 + l=2": {
+    "dim": 13,
+    "noncommutativity": 2.0,
+    "commutant": 5
+  },
+  "SU(2) on l=1 alone        (irreducible)": {
+    "dim": 3,
+    "noncommutativity": 1.0000000000000002,
+    "commutant": 1
+  },
+  "TWO centers   (Halmos tame)": {
+    "dim": 6,
+    "noncommutativity": 0.4868059857599487,
+    "commutant": 6
+  },
+  "THREE centers (*-wild point)": {
+    "dim": 6,
+    "noncommutativity": 0.4868059857599487,
+    "commutant": 1
+  }
+}

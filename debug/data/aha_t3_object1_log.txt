@@ -1,0 +1,59 @@
+==============================================================================
+OBJECT 1 -- e^a E_1(a), the Paper-18 Level-2 exchange-class seed
+mpmath dps = 60
+==============================================================================
+[1] Integral representation (exact, derived):
+    E_1(a) = int_a^inf e^{-u}/u du ; u = a(1+t) gives
+    e^a E_1(a) = int_0^inf e^{-a t}/(1+t) dt
+    term-by-term:  1/(1+t) = sum_n (-t)^n , int_0^inf e^{-at} t^n dt = n!/a^{n+1}
+    =>  c_n = (-1)^n n!   (Gevrey-1, factorially divergent)
+
+[2] Borel transform  B(zeta) = sum_n c_n zeta^n/n! = 1/(1+zeta)   [SYMBOLIC, exact]
+    series/closed-form agreement to O(zeta^14) : residual 0
+    singularities: ONE simple pole at zeta = -1 ; residue = 1
+    -> Poincare rank 1, single action A = 1 (in the variable a); the attached
+       one-instanton series is the CONSTANT 1, so the trans-series TERMINATES.
+
+[3] Borel-Laplace on the regular direction a>0:
+      L[B](a) = int_0^inf e^{-a z}/(1+z) dz   vs   e^a E_1(a)
+       a        |L[B](a) - e^a E_1(a)|
+       3                           0.0
+       7                           0.0
+      15                           0.0
+
+[4] Stokes ray. Phi(x) = sum n!/x^{n+1} (Borel pole at zeta=+1, ON the ray).
+    Lateral resummations by CONTOUR ROTATION (no closed form used):
+       x    theta       |(S_+ - S_-) - 2 pi i e^-x|      |S_+ - (PV + i pi e^-x)|
+       4   0.5236                        9.7235e-63                    4.8617e-63
+       4   1.0472                        9.7235e-63                    4.8617e-63
+       9   0.5236                               0.0                    1.9447e-62
+       9   1.0472                        3.0386e-64                    1.9448e-62
+      20   0.5236                        8.4327e-61                    4.4018e-61
+      20   1.0472                        1.9552e-65                    9.7761e-66
+
+[4c] Independent route -- branch cut of the corpus object f(a) = e^a E_1(a):
+     E_1(-x -+ i0) = -Ei(x) +- i pi  =>  Disc_a f|_{a=-x} = -2 pi i e^{a}
+        x      |Disc_a f + 2 pi i e^-x|
+        4                       5.0e-46
+        9                    2.2222e-46
+       20                       1.0e-46
+
+[5] Large-order / resurgence signature. Simple Borel pole at zeta = A with
+    residue r  =>  c_n = r n!/A^{n+1} and S = 2 pi i r.
+    Here A = 1, c_n = n!, so c_n A^{n+1}/n! = 1 for EVERY n (exact, not asymptotic):
+      n=  0   c_n A^(n+1)/n! = 1.0   dev 0.0
+      n=  1   c_n A^(n+1)/n! = 1.0   dev 0.0
+      n=  5   c_n A^(n+1)/n! = 1.0   dev 0.0
+      n= 10   c_n A^(n+1)/n! = 1.0   dev 0.0
+      n= 20   c_n A^(n+1)/n! = 1.0   dev 0.0
+      n= 39   c_n A^(n+1)/n! = 1.0   dev 0.0
+
+[6] Stokes constant and field classification
+    S := (S_+ - S_-)/e^{-A x} = 2 pi i   (exactly; all three routes agree)
+    S/(2 pi i) = 1 in QQ  --  ALGEBRAIC (rational, height 1).
+    Action A = 1 rational; for the corpus argument E_1(lambda R) the action is
+    A = lambda in QQ(Z_A, Z_B) (a sum of orbital exponents).
+    max verification residual across all routes: 5.0e-46
+
+VERDICT OBJECT 1: rank-1, single simple Borel pole, S/(2 pi i) = 1 in QQ.
+                  ALGEBRAIC UP TO 2 pi i.  max residual 5.0e-46

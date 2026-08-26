@@ -36,6 +36,84 @@ GROUP4_FILES = [
 
 REGISTRY = [
     {
+        "id": "p23-nuclear-resource-counts",
+        "scope": "group3 group4",
+        "severity": "fail",
+        "canonical_note": "Paper 23 nuclear qubit Hamiltonians, corrected "
+                          "2026-08-22 after the N_tot truncation was removed "
+                          "from geovac/nuclear/moshinsky.py (see the Paper 24 "
+                          "retraction). CANONICAL: deuteron 688 non-I Pauli "
+                          "(80 Z-only + 608 XY), 1-norm 383.7 MeV; He-4 828 "
+                          "non-I Pauli, 1-norm 511.8 MeV (no Coulomb) / 507.2 "
+                          "MeV (with). Qubit counts UNCHANGED at 16. The "
+                          "structural claim survives exactly: 828/688 = "
+                          "+20.3%, identical to the retired 712/592 = +20.3%. "
+                          "RETIRED and now WRONG: 592, 712, 512 XY, 614 "
+                          "(the composed nuclear-electronic total, now 710 = "
+                          "688+10+12, measured + pinned), 342.2, "
+                          "466.9, 462.4, and the HO ground-state energy "
+                          "22.185 MeV (corrected to 21.6538 / 21.6279 / "
+                          "21.5442 at N_max = 2 / 3 / 4). Backed by "
+                          "tests/test_paper23_resource_counts.py and "
+                          "tests/test_paper24_ho_entropy.py.",
+        "pattern": r"\b(592|712|614|466\.9|462\.4|342\.2|22\.185)\b",
+        "require_nearby": r"Pauli|1-norm|\$1\$-norm|deuteron|He-?4|"
+                          r"helium|MeV|non-I|qubit|E_?0|ground[- ]state",
+        "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|"
+                            r"previously published|artifact|retired|"
+                            r"superseded|N_tot|truncation|old guard",
+        "files": [
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/*.tex",
+            "docs/claim_test_matrix.md",
+            "docs/validation_benchmarks.md",
+        ],
+    },
+    {
+        "id": "p58-census-builder",
+        "scope": "group2",
+        "severity": "fail",
+        "canonical_note": "Paper 58 tab:census g row. Genuine 2,944 vs "
+                          "builder 214 at n_max=2 (13.8x); 114,280 vs 7,600 "
+                          "at n_max=3 (15.0x). BOTH columns use the same "
+                          "axial rule m_p+m_r=m_q+m_s; the builder column is "
+                          "the genuine column restricted to all-four-on-one-"
+                          "center quartets. Backed by "
+                          "tests/test_paper58_census.py. Earlier drafts of "
+                          "the ratio as 13.7x/15.04x are rounding variants; "
+                          "any OTHER builder count (e.g. 780 or 484, the "
+                          "same-center readings refuted 2026-08-22) is wrong.",
+        "pattern": r"\b(780|484)\b",
+        "require_nearby": r"builder|census|inflation|permitted",
+        "exempt_if_nearby": r"refuted|REFUTED|not the builder|wrong reading"
+                            r"|hypothes|superseded",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_58_abelian_residue.tex",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
+        "id": "t2-collinear-anchor",
+        "scope": "group2",
+        "severity": "fail",
+        "canonical_note": "T2 collinear = 0.395355765901713964325229296804847564... "
+                          "(66 digits certified v4.104.0 via the (k,w) refactorization, "
+                          "Paper 59 eq:kw; u1/u2 runs cross-validate 83). The pre-(k,w) "
+                          "anchor 0.3953557659017139641 is WRONG from digit 19 "
+                          "(...641 vs ...6432) and may appear only as an explicitly "
+                          "superseded historical value.",
+        "pattern": r"0\.3953557659017139641",
+        "require_nearby": r"T2|collinear|anchor|ANCHOR",
+        "exempt_if_nearby": r"superseded|18 digits|correct to 18|OLD|old anchor"
+                            r"|frozen anchor|regression lock|Regression lock",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+            "tests/test_paper59_t2_value.py",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
         "id": "dirac-casimir-s3-sign",
         "scope": "group6",
         "severity": "fail",
@@ -120,7 +198,14 @@ REGISTRY = [
         "pattern": r"\b33\.3\b\s*~?Ha|\\lambda\s*=\s*33\.3"
                    r"|1-norm[^.\n]{0,40}\b0\.97\b|\b0\.97\b\$?\\times\$?[^.\n]{0,25}1-norm",
         "exempt_if_nearby": r"historical|stale|rested\s+on|retired",
-        "files": GROUP4_FILES,
+        # widened beyond group4 2026-08-22: the full-run panel found a live 33.3 Ha
+        # locus in papers/group2 (Paper 19), the second-locus class this family exists
+        # to catch.  Any paper quoting the composed-LiH 1-norm is in scope.
+        "files": GROUP4_FILES + [
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+            "papers/group2_quantum_chemistry/paper_58_abelian_residue.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+        ],
     },
     {
         "id": "beh2-h2o-qpe-onenorm-vintage",
@@ -132,9 +217,38 @@ REGISTRY = [
                           "deprecated legacy-builder vintage), H2O balanced 1,511. "
                           "Retired variants: 354.9, 304.7, 1{,}509 (as the balanced "
                           "H2O 1-norm).",
-        "pattern": r"354\.9|304\.7|1\{,\}509~?Ha",
+        "pattern": r"\b354\.9\b|\b304\.7\b|1\{,\}509~?Ha",
         "exempt_if_nearby": r"legacy|previously\s+printed|vintage|historical|stale",
         "files": GROUP4_FILES,
+    },
+    {
+        "id": "paper60-atomic-sublinear-exponent",
+        "scope": "group2",
+        "severity": "fail",
+        "canonical_note": "Atomic isoenergetic 1-norm sublinear exponent, HEADLINE form "
+                          "\\|M\\|_1 ~ K^{0.84} (full s+p+d+f basis, eq:sublinear). 0.78 is the "
+                          "legitimate s-only exponent (bare, in prose) and is NOT captured by "
+                          "this family, which anchors on the \\|M\\|_1~K^{...} headline form. "
+                          "W1 (2026-08-18 /qa paper 60) retired the abstract's headline K^{0.78}.",
+        "capture": r"\\\|M\\\|_1\\sim\s*K\^\{(0\.\d+)\}",
+        "canonical": "0.84",
+        "require_nearby": r"sublinear|block-encoding|configuration|secular",
+        "exempt_if_nearby": r"historical|stale|previously|s-only|retired|was|naive",
+        "files": ["papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex"],
+    },
+    {
+        "id": "paper60-molecular-lambda-exponent",
+        "scope": "group2",
+        "severity": "fail",
+        "canonical_note": "Molecular N-electron STANDARD block-encoding 1-norm exponent = "
+                          "n_{\\rm orb}^{2.2} (polynomial, NOT sublinear; sec:manyelectron). "
+                          "The point is polynomial-not-sublinear, so a wrong exponent here would "
+                          "misstate the paper's honest molecular negative.",
+        "capture": r"n_\{\\rm\s+orb\}\^\{(\d\.\d+)\}",
+        "canonical": "2.2",
+        "require_nearby": r"block-encoding|polynomial|1-norm|\\lambda|sublinear",
+        "exempt_if_nearby": r"historical|stale|previously|retired|was",
+        "files": ["papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex"],
     },
 ]
 

@@ -1,0 +1,24 @@
+==============================================================================
+SCOPING NOTE -- Euler gamma in the exchange-class ordered-xi kernel
+  ordered_xi_closed(p1, p2) with p_i = (rate_i) * R  (Increment 3c kernel)
+==============================================================================
+     (p1,p2)/R  terms w/ gamma*E1               coeff(gamma)   coeff(gamma)-coeff(ln R)
+       (3/2,1)                  0       exp(-5*R/2)/(3*R**2)                          0
+       (2,5/2)                  0      exp(-9*R/2)/(10*R**2)                          0
+     (1/2,7/2)                  0       2*exp(-4*R)/(7*R**2)                          0
+         (1,1)                  0         exp(-2*R)/(2*R**2)                          0
+     (5/2,3/2)                  0      2*exp(-4*R)/(15*R**2)                          0
+
+  Q1 ANSWER: gamma NEVER multiplies an E_1 (0/5 cases) and its coefficient
+     carries no E_1 -> gamma cannot enter a Stokes constant of this kernel.
+  Q2 ANSWER: coeff(gamma) = coeff(ln R) IDENTICALLY (5/5, exact) -> gamma and
+     ln R appear only in the single bundle (gamma + ln R), i.e. as Ein-boundary
+     data attached to ONE elementary (exponential) sector.
+
+  Caveat/scope: the exchange class DOES carry an R-DEPENDENT logarithm (ln R),
+  unlike the hybrid class whose logs are R-free constants.  ln R turns the
+  associated Borel singularity into a logarithmic branch point rather than a
+  pole, so the exchange class is a genuinely separate resurgence computation
+  and is NOT classified here.  What IS established: its gamma is boundary data.
+
+  ALL CHECKS PASS: True

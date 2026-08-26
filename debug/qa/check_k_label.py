@@ -217,10 +217,24 @@ def main() -> int:
             return True
         if gate_substr:
             return gate_substr in str(p).replace("\\", "/")
-        return p.name in TRUNK                   # default gated scope = the trunk target
+        # SCOPE FIX (2026-08-22, FULL cert #2). Previously this returned
+        # `p.name in TRUNK`, so a K-tier violation in any non-trunk PAPER was
+        # downgraded to advisory and the gate still reported PASS. A planted
+        # violation in Paper 24 proved it: both claims reviewers caught it, the
+        # deterministic backstop did not.
+        #
+        # CLAUDE.md Sec 13.5 makes the prohibition corpus-wide ("regardless of
+        # Paper 2's folder") and Sec 1 makes the papers authoritative, so ANY
+        # paper is gated. docs/*.md remain advisory: they are the historical
+        # chronicle discussing the prohibition (all 49 current advisory hits
+        # live there, incl. the memo that recorded the conjecture->observation
+        # downgrade itself).
+        if p.suffix == ".tex":
+            return True
+        return p.name in TRUNK
 
     scope = ("the whole corpus" if gate_corpus else
-             f"papers matching '{gate_substr}'" if gate_substr else "the trunk target")
+             f"papers matching '{gate_substr}'" if gate_substr else "all papers")
 
     gated_suspect, audit_suspect, compliant = [], [], 0
     for p in files:

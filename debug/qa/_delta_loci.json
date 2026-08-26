@@ -1,0 +1,294 @@
+{
+ "paper_58": {
+  "path": "papers/group2_quantum_chemistry/paper_58_abelian_residue.tex",
+  "loci": [
+   {
+    "name": "M1-abstract",
+    "FOUND": true,
+    "line": 46,
+    "text": "for overlaps; a hydrogenic eigen-trick for cross-center one-body terms,\ncertified by an exact bra/ket identity holding entrywise), we census the\n\\emph{genuine} bare tensor $(S, h, g)$ for a real fragment pair and find:\n\\textbf{[MEASURED]} the Gaunt $l$-selection rule does not survive\ncross-center evaluation, while the axial $m$-rule does; cross-center\none-body entries reach $0.80$~Ha---bond scale, not perturbative.\n\\textbf{[COUNTED]} the symmetry-\\emph{permitted} electron-repulsion density\ninflates $13.8\\times$ over the builder at $n_{\\max} = 2$ and $15.0\\times$\nat $n_{\\max} = 3$; the $n_{\\max} = 2$ figure is independently corroborated\nnumerically ($29.8\\%$ measured against $29.4\\%$ counted), the\n$n_{\\max} = 3$ figure is counted only.\n\nWe give the mechanism \\textbf{[INTERNAL THEOREM]}: $m$ labels the\n\\emph{abelian} symmetry shared by both centers (rotation about the\ninternuclear axis is one global one-parameter group, so $m$ is a common\nlabel), while $l$ labels irreducible representations of a rotation group\nattached to a single center.  The intersection of the two centers'\nrotation groups is exactly the axial $U(1)$, whose character group is"
+   },
+   {
+    "name": "M1-body",
+    "FOUND": true,
+    "line": 571,
+    "text": "$6.3\\%$ at $n_{\\max} = 3$, beyond what the $m$-rule already removes, and the three cross classes\n$(AA|AB) + (AB|AB) + (AB|BB)$ account for $79.5\\%$ of the genuine tensor.\nThe residual $l$-selection is therefore confined to the classes carrying a\nsame-center distribution on each side---$(AA|AA)$, $(BB|BB)$ and\n$(AA|BB)$---together $20.5\\%$ of the genuine tensor; the three genuinely\ncross classes carry none.  Second, cross-center magnitudes reach bond\nscale:\\ the largest overlap is $0.52$ and the largest one-body entry is\n$0.80$~Ha.  These are \\emph{maxima}, not a range---the census block also\ncontains much smaller entries (the smallest overlap is $0.011$, on the\n$(2p_{0}, 2p_{0})$ pair).  An earlier statement of them as intervals\n$0.08$--$0.52$ and $0.19$--$0.80$ took its lower ends from an inconsistent\nsubset of the census pairs and was incorrect.  For\nscale, the entire NaH bond is under $2$~eV, so individual entries in the\ndense part of the tensor exceed the binding energy being computed.  They\nare not droppable as small corrections---an independent quantification of\nthe W1d/W1e diagnosis.\n\n%% ========================================================================"
+   },
+   {
+    "name": "M2-backing-label",
+    "FOUND": true,
+    "line": 1114,
+    "text": "NaH atom-only $\\zeta$ & MEAS. & \\textsc{live} \\\\\nObs.~\\ref{obs:truncation} & MEASURED & \\textsc{live} \\\\\nfit quality, span id. & MEASURED & \\textsc{live} \\\\\nQFD 1e closed forms (Sec.~\\ref{sec:qfd}) & SYMBOLIC & \\textsc{live} \\\\\nQFD H$_2$ 60-digit energy & MEASURED & \\textsc{live} (fast legs) + certified tables \\\\\nQFD LiH 30-digit ($\\tau$-tail net) & MEASURED & \\textsc{owed} (campaign value; fast legs pin one exchange quartet only) \\\\\n\\end{tabular}\n\\end{ruledtabular}\n\\end{table}\n\n%% ========================================================================\n\\begin{thebibliography}{99}\n\n\\bibitem{sugiura1927}\nY.~Sugiura, ``\\\"Uber die Eigenschaften des Wasserstoffmolek\\\"uls im\nGrundzustande,'' Z.~Phys.\\ \\textbf{45}, 484--492 (1927).\n\n\\bibitem{loutey_paper11}"
+   },
+   {
+    "name": "sixth-currency",
+    "FOUND": true,
+    "line": 825,
+    "text": "do not attempt to adjudicate whether the documentation was always\nincorrect or the behavior regressed.\n\nObservation~\\ref{obs:cost_conservation} is labeled an observation, not a\ntheorem: it is a pattern across five instances with a plausible cause,\nnot a proof that no sixth currency exists.  The underlying obstruction\nhas been characterized in the framework as non-commuting center\nprojections, with $\\|[P_A, P_B]\\| = 0.50$ at LiH equilibrium and\nprincipal angles $7.6^\\circ$/$44.7^\\circ$/$67.3^\\circ$.\n\n%% ========================================================================\n\\section{Demonstration: NaH binds with genuine integrals}\n\\label{sec:nah}\n%% ========================================================================\n\nIf the wall is the Hamiltonian specification, then supplying genuine\nend-to-end integrals should bind NaH \\emph{without needing more}\ncorrelation than the failing runs used.  It does---with considerably less."
+   },
+   {
+    "name": "residual-range",
+    "FOUND": true,
+    "line": 639,
+    "text": "$B$ are distinct subgroups of the Euclidean group whose intersection is\nprecisely the axial subgroup.  A function that is an $l$-eigenfunction\nabout $B$, re-expanded about $A$, has support on all $l$: the two-center\nre-expansion does not terminate.  Hence no $l$-selection between cross-center\npairs.  (The same-center blocks retain Gaunt selection, consistent with\nthe $5.6\\%$--$6.3\\%$ residual measured in Sec.~\\ref{sec:census}.)\n\nFor (iii): the intersection in (ii) is $SO(2) \\cong U(1)$, abelian.\nAbelian compact groups have one-dimensional irreducibles labeled by\ncharacters, and by Pontryagin duality the character group of $U(1)$ is\n$\\mathbb{Z}$---which is the integer label $m$.  Selection rules from\nabelian symmetry are additive conservation laws on integer charges, and\nare preserved by any operation respecting the axis.  Non-abelian\nselection rules are Clebsch--Gordan couplings requiring the full group;\nreducing the group destroys them.\n\\end{proof}\n\nThe theorem is independently corroborated by the framework's own"
+   },
+   {
+    "name": "counted-not-countable",
+    "FOUND": true,
+    "line": 392,
+    "text": "\\emph{Consequence for this paper's own sector.}  The classes carrying\nresidual $l$-selection---$(AA|AA)$, $(BB|BB)$, $(AA|BB)$---are precisely\nthe ones that are now zero-\\emph{decidable}: the one-centre classes\ntrivially---they are exact rationals---and $(AA|BB)$ by the argument\nabove.  So the sector that Theorem~\\ref{thm:abelian_residue} makes a\npositive prediction about is no longer merely counted but decidable.\n\n\\emph{And the decision has now been run on $(AA|BB)$.}  On the census\nconfiguration, that block holds $625$ entries of which the counting rules\npermit $195$.  Deciding each one by the separation above---grouping the\nclosed form by exponential rate and asking whether every rational\ncoefficient vanishes---gives\n\n\\begin{center}\n\\begin{tabular}{lr}\n\\hline\\hline\noutcome & count \\\\\n\\hline"
+   },
+   {
+    "name": "abstract-qfd",
+    "FOUND": true,
+    "line": 93,
+    "text": "freedom than the runs that failed, which is what makes the inference go\nthrough.  This localizes W1e to the Hamiltonian specification rather than\nthe correlation treatment on this system.  The demonstration deliberately\nforfeits the sparsity: it makes no sparsity claim.\n\n\\textbf{[SYMBOLIC + MEASURED]} Separately, the diatomic integrals are made\n\\emph{quadrature-free}:\\ the minimal-basis H$_2$ FCI energy is certified to\n$60$ digits with symbolic $\\tau$-series termination, its entire potential\ncurve $E(R)$ is a single closed-form expression in $\\{\\exp, E_{1}, \\log, \\gamma\\}$\nwith certified $R_{\\rm eq}$, $D_{e}$ and $k$, and the heteronuclear LiH case\nreaches $30$ digits net of an explicit tail bound.\n\nA by-product bears on the continuous theory the census borrows from:\\ the\nradial integral at the core of the two-center direct-Coulomb $(AA|BB)$\nrepulsion closes in elementary form (weight one, $\\pi$-free, no\ndilogarithm), so that block is not merely counted but \\emph{decided}---all $195$\npermitted entries proven nonzero by Lindemann--Weierstrass separation.\n\\end{abstract}"
+   },
+   {
+    "name": "census-provenance",
+    "FOUND": true,
+    "line": 306,
+    "text": "electron-repulsion integral was numerically evaluated.  The $g$ figures\nare therefore claims about how many entries the selection rules\n\\emph{permit}, not verifications that each permitted entry is nonzero.\nSupplying that engine is the natural follow-on to this paper.\n\nEvery count in Table~\\ref{tab:census} is re-derived from the selection\nrules alone in \\texttt{tests/test\\_paper58\\_census.py}.  Both columns\napply the \\emph{same} axial rule $m_p + m_r = m_q + m_s$; the builder\ncolumn is the genuine column restricted to quartets whose four\norbitals share one center, with the single-center shared-$L$ Gaunt\ncondition imposed identically in both (the same $176$ removals at\n$n_{\\max}=2$).  The inflation factor therefore measures the\ntwo-center span and nothing else---it is not an artifact of\ncomparing a pair-diagonal $m$-convention against a global one,\nsince neither column uses the pair-diagonal rule.\n\n\\emph{Status of that follow-on.}  It is now partially supplied, and the\nper-class outcome bears directly on what the $g$ row could become.  Three"
+   },
+   {
+    "name": "sugiura",
+    "FOUND": true,
+    "line": 1124,
+    "text": "%% ========================================================================\n\\begin{thebibliography}{99}\n\n\\bibitem{sugiura1927}\nY.~Sugiura, ``\\\"Uber die Eigenschaften des Wasserstoffmolek\\\"uls im\nGrundzustande,'' Z.~Phys.\\ \\textbf{45}, 484--492 (1927).\n\n\\bibitem{loutey_paper11}\nJ.~Loutey, ``The Molecular Fock Projection:\\ Diatomic Molecules as\nProlate Spheroidal Lattices,'' GeoVac Paper~11 (2026).\n\n\\bibitem{loutey_paper14}\nJ.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Spectral Graph\nTheory,'' GeoVac Paper~14 (2026).\n\n\\bibitem{loutey_paper17}\nJ.~Loutey, ``Composed Natural Geometries for Core-Valence Diatomics:\\\nLiH and BeH$^{+}$ from Discrete Graph Topology,'' GeoVac Paper~17 (2026)."
+   }
+  ]
+ },
+ "paper_59": {
+  "path": "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+  "loci": [
+   {
+    "name": "K0-condition",
+    "FOUND": true,
+    "line": 50,
+    "text": "(verified to 31 digits), living on the genus-one curve\n$y^{2}=(c_{1}k^{2}+1)(c_{2}k^{2}+1)$; it degenerates to the genus-zero\ntwo-center case exactly on the diagonal $c_{1}=c_{2}$.  \\textbf{[SYMBOLIC +\nMEASURED]} The one-mass slice is the Laplace transform of the elliptic\ndifferential---an elliptic deformation of the Bessel $K_{0}$, reducing to\n$K_{0}(D)$ when one scale decouples ($\\rho\\to0$) and to the complete elliptic\nintegral $K$ at zero separation---and satisfies an explicit fourth-order\nPicard--Fuchs equation with polynomial coefficients (residual\n$\\sim\\!10^{-24}$), whose characteristic exponents are the four branch points\nof the curve.  \\textbf{[OBSERVATION]} This places a molecular integral inside\nthe modern theory of Bessel moments and two-mass elliptic Feynman integrals;\na targeted literature search finds that connection unmade in either field.\n\\textbf{[OPEN]} We do \\emph{not} give the finite closed form, and we show the\nnatural route to it is obstructed: the elliptic-dilogarithm (unequal-mass\nsunrise) mechanism does not engage, because the modulus Picard--Fuchs source\nis not an elementary subtopology but lies in the integral's own Gauss--Manin\n$D$-module---the branch-point boundary that would supply the sunrise's tadpole\nvanishes identically.  \\textbf{[OBSERVATION]} The object is therefore a"
+   },
+   {
+    "name": "repaired-ref",
+    "FOUND": true,
+    "line": 891,
+    "text": "collapses onto that ring element (since answered in the negative at clean heights by the\n$64$-digit decoy-calibrated search above).  This\nsharpened target also recasts the earlier merely-``consistent-with'' negative as a\nring-incompleteness artifact rather than, by itself, evidence of non-classicality:\\ the\nnon-classicality is carried separately, by the fibre's irregular twist---established\nsymbolically at the operator level in Sec.~\\ref{sec:obstruction}\n(Newton polygon, Poincar\\'e rank one) and witnessed numerically below---not by the\ninteger-relation search.\n\n\\textbf{[OBSERVATION]} This places the three-center integral inside the\nelliptic (genus-one) layer of the cosmic-Galois / mixed-elliptic-motive structure\nthat the Geometric Vacuum program's Tannakian substrate reaches\nfor~\\cite{brown_cosmic2017,loutey_paper56}---the concrete elliptic period the\nmixed-Tate substrate could not itself supply.  \\textbf{[OPEN]} The natural next step is therefore to place it in the\nBessel-moment period algebra---to test whether it obeys a Broadhurst--Mellit\nquadratic relation or reduces to a critical $L$-value of the associated modular\nform~\\cite{fresansabbahyu2023,broadhurst2016,zhou_wronskian2018}---of which the\nexplicit $\\Gamma(2)$ iterated-Eisenstein"
+   },
+   {
+    "name": "tier-scope",
+    "FOUND": true,
+    "line": 1213,
+    "text": "$\\mathbb{Z}\\,\\Omega$.  It is unimodular ($\\det\\Omega=1$, hence nondegenerate), and\n$M_{0}^{\\mathsf T}\\Omega\\,M_{0}=\\Omega$ holds identically over $\\mathbb{Z}$, so the\ndifferential Galois group of Eq.~\\eqref{eq:pf} lies in the \\emph{integral} symplectic\ngroup $\\mathrm{Sp}(\\Omega,\\mathbb{Z})=\\mathrm{Sp}_{4}(\\mathbb{Z})$---the concrete,\nintegral sharpening of the self-adjointness that placed it in $\\mathrm{Sp}_{4}$.\n\\emph{Tier scope.}\\ The asymptotic identification above is numerics-free, but\nevery clause invoking $M_{0}$---the forcing argument and the $\\mathrm{Sp}_{4}(\\mathbb{Z})$\ncontainment---inherits that matrix's \\textbf{[SYMBOLIC + MEASURED]} status:\\ $M_{0}$\nis an exact integer certificate rather than a floating-point fit, but it was\nobtained by computation, not derived in closed form.  The\nthree physical period cuts $\\{[1,\\infty),[-1,1],i[-\\omega,\\omega]\\}$ realize only a\nrank-two sub-block of $\\pi\\Omega$ (the measured $-\\pi,0,2\\pi$); it is the fourth,\n$Y_{0}$-sector master---the one carrying the $D\\ln D$---that completes the pairing to\nthe full nondegenerate rank-four form.  The symbolic identification of the\nintersection form is thus complete: $B=\\pi\\,\\Omega$, the Broadhurst--Mellit /\nFres\u00e1n--Sabbah--Yu quadratic relations realized for the $\\Gamma(2)$ family, backed by\n\\texttt{tests/test\\_routeC\\_momentum.py} (\\texttt{test\\_intersection\\_form\\_pi\\_and\\_planes\\_are\\_symbolic}\nfor Eq.~\\eqref{eq:planepi} and the block structure,"
+   },
+   {
+    "name": "no-numerics-scope",
+    "FOUND": true,
+    "line": 1168,
+    "text": "$(-1)$-monodromy of $1/\\sqrt{Q}$ at each simple branch point, the elliptic lift of\nthe $1/\\pi$ normalizing $I_{0}$ and of $W[K_{0},I_{0}]=1/D$), so $B=\\pi\\,J$ with $J$\nan integer intersection form.\n\n\\textbf{[SYMBOLIC]} \\emph{The intersection form, identified.}  We close the\nidentification of $J$ from the branch-point asymptotics---no numerics enter\nin this leg.  Near a\nsimple branch point $Q\\sim Q'(x_{c})(x-x_{c})$, so each master has the leading Laplace\nbehaviour $s_{c}(D)\\sim e^{-x_{c}D}\\sqrt{\\pi/(Q'(x_{c})\\,D)}$ (the half-order integral\n$\\int_{0}e^{-Dt}t^{-1/2}\\,dt=\\Gamma(\\tfrac12)/\\sqrt D$); since the concomitant is exactly\nconstant in $D$, its value equals its $D\\to\\infty$ limit, which these leading terms\ncapture (the subleading $O(1/D)$ corrections vanish in the limit).  In the\nLefschetz-thimble basis $\\{\\gamma_{+1},\\gamma_{-1},\\gamma_{+i\\omega},\\gamma_{-i\\omega}\\}$\n---one thimble per branch point, the basis in which the monodromy $M_{0}$ of\nSec.~\\ref{sec:obstruction} is the exact integer matrix---two facts follow.\n\\emph{Block-diagonality:} $s_{a}s_{b}\\sim e^{-(x_{a}+x_{b})D}$, so a nonzero\n\\emph{constant} forces $x_{a}+x_{b}=0$; the branch points pair as $\\{+1,-1\\}$ (the real\n$K_{0}/I_{0}$ sector) and $\\{+i\\omega,-i\\omega\\}$ (the imaginary $J_{0}/Y_{0}$ sector),"
+   }
+  ]
+ },
+ "paper_60": {
+  "path": "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+  "loci": [
+   {
+    "name": "compound-tier",
+    "FOUND": true,
+    "line": 513,
+    "text": "the identity, not a metric (Avery's general form~\\cite{averyphd}); only the atomic conveniences\n``$T^0$ diagonal'' and ``$T'$ pure numbers'' are lost.  The resource-relevant question is whether the\nShibuya--Wulfman metric penalty of Sec.~\\ref{sec:molecular} \\emph{compounds} with electron number.\nIt need not.\n\n\\textbf{[SYMBOLIC + MEASURED]} A $k$-electron configuration is a Slater determinant of one-electron molecular\norbitals, so its configuration-space overlap is the $k$-th compound matrix of the one-electron\noverlap, with condition number $(\\lambda_1\\cdots\\lambda_k)/(\\lambda_{N-k+1}\\cdots\\lambda_N)$ in the\none-electron overlap spectrum $\\{\\lambda_i\\}$.  Built from the \\emph{raw} $L^2$-normalized\nmany-center Coulomb--Sturmians this \\emph{grows} with electron number---on the H$_2$-geometry\ntwo-center basis ($N=6$), $1\\times,8\\times,9\\times\\,\\mathrm{cond}(S_{L^2})$ at $k=1,2,3$ (worst at\nhalf-filling), bounded by $\\mathrm{cond}(S_{L^2})^{\\min(k,N-k)}$ and driven by the\nnear-linear-dependence eigenvalue.  Built instead from the \\emph{molecular Sturmians}---the\nShibuya--Wulfman eigenvectors, $S_{\\rm SW}$-orthonormal by construction---the configuration overlap\nis the \\emph{identity at every electron number}---an algebraic consequence of the\ncompound-matrix identity, not a numerical finding;\\ only the $1\\times,8\\times,9\\times$\n$L^2$ figures above are measured.  The metric is therefore paid once, at the\none-electron molecular-orbital construction ($\\mathrm{cond}(S_{\\rm SW})$ above, with the gerade"
+   },
+   {
+    "name": "compound-scope",
+    "FOUND": true,
+    "line": 522,
+    "text": "many-center Coulomb--Sturmians this \\emph{grows} with electron number---on the H$_2$-geometry\ntwo-center basis ($N=6$), $1\\times,8\\times,9\\times\\,\\mathrm{cond}(S_{L^2})$ at $k=1,2,3$ (worst at\nhalf-filling), bounded by $\\mathrm{cond}(S_{L^2})^{\\min(k,N-k)}$ and driven by the\nnear-linear-dependence eigenvalue.  Built instead from the \\emph{molecular Sturmians}---the\nShibuya--Wulfman eigenvectors, $S_{\\rm SW}$-orthonormal by construction---the configuration overlap\nis the \\emph{identity at every electron number}---an algebraic consequence of the\ncompound-matrix identity, not a numerical finding;\\ only the $1\\times,8\\times,9\\times$\n$L^2$ figures above are measured.  The metric is therefore paid once, at the\none-electron molecular-orbital construction ($\\mathrm{cond}(S_{\\rm SW})$ above, with the gerade\nlever), and the $N$-electron secular equation inherits an identity metric:\n\\textbf{the molecular metric penalty is one-electron, not $N$-electron}.  It is the on-device analogue\nof the once-executed classical mean-field step that lets production Gaussian simulation carry no\nmetric into the many-body Hamiltonian.\n\n\\textbf{[MEASURED]} The interelectron matrix $T'$ is assembled from two-center electron-repulsion\nintegrals, and these are in hand.  We evaluate the shared-scale Coulomb--Sturmian two-center ERIs\n$(pq|rs)$ numerically (a single multipole route about one nucleus, so every center class is uniform)\nand validate them against the framework's \\emph{exact} closed form: the one-center"
+   },
+   {
+    "name": "abstract-gerade",
+    "FOUND": true,
+    "line": 68,
+    "text": "\\textbf{[MEASURED]} The same\ncross-center singular spectrum carries the composition-wall commutator, whose\nnorm saturates at $\\tfrac12$.  \\textbf{[RESOURCE MODEL]} Turning this into a\nblock-encoding count for $\\mathrm{H}_2^+$ (validated to bind, $1.3\\%$ $s$-only), the\npayoff is the gerade/ungerade lever: the $\\sigma_g$ ground state lives in the gerade\nsector, whose conditioning is \\emph{flat}---and flat at an exact constant of the\nsinc symbol, $2/(1+\\min_x j_0(x))=2.555041\\ldots$, independent of $R$ and of basis\nsize---so the ground-state metric\npenalty does \\emph{not} grow with basis size---a ${\\sim}60\\times$ reduction versus the full\nmetric and $10^3$--$10^4\\times$ smaller than a standard (ratio-dependent) Gaussian metric for the same problem,\nat ${\\sim}30$ qubits.  \\textbf{[MEASURED]} The penalty also does not compound with electron\nnumber: the metric is discharged once at the one-electron molecular-orbital construction, after\nwhich the many-electron secular equation carries an identity metric---the metric cost is\none-electron, not $N$-electron.  \\textbf{[OPEN]} The atomic case is a clean, apparently novel,\nmetric-free quantum secular equation; the molecular case is a genuine\nfrontier in which the metric cost is mitigated for excited/ungerade states, essentially removed\nfor the ground state of \\emph{equivalent-center} systems (a water probe shows a symmetry-inequivalent heavy center reinstates it), and confined to one electron.  \\textbf{[MEASURED]} Its remaining\nquestion---whether the $N$-electron $1$-norm stays sublinear as it does for atoms---we answer in the"
+   },
+   {
+    "name": "only-posing",
+    "FOUND": true,
+    "line": 174,
+    "text": "choice of orthogonalization: re-solving the converged $s\\!+\\!p\\!+\\!d\\!+\\!f$ helium\nproblem of Sec.~\\ref{sec:atomic} as the generalized eigenproblem $MB=pSB$ with the\n$L^2$ overlap $S$ restored \\emph{diverges}, the metric condition number climbing\n$4\\to3673$ over the basis while the energy runs to $-3\\times10^6$~Ha---the\nmetric-free standard eigenproblem of Sec.~\\ref{sec:iso} is not merely convenient,\nit is the only well-conditioned posing we have found.  The rest of the paper shows this\nobstruction is an artifact of the $L^2$ framing, not of the Sturmians.\n\n\\section{The isoenergetic reformulation is metric-free for atoms}\n\\label{sec:iso}\n\nThe Coulomb--Sturmians obey a \\emph{potential-weighted} orthonormality\nrelation~\\cite{averyphd,calderini2012,herbst2019},\n\\begin{equation}\n\\int d^3x\\;\\varphi^*_{n'\\ell'm'}(x)\\,\\frac{1}{r}\\,\\varphi_{n\\ell m}(x)\n=\\frac{k}{n}\\,\\delta_{n'n}\\delta_{\\ell'\\ell}\\delta_{m'm},\n\\label{eq:pw}\n\\end{equation}"
+   },
+   {
+    "name": "unclosed-paren",
+    "FOUND": true,
+    "line": 487,
+    "text": "approximation for $S^{-1/2}$ by constrained interpolation on the \\emph{known} spectrum\n$\\{1\\pm\\sigma_k\\}$ (classically computable by an $O(N^3)$ values-only SVD that touches no\nintegral sparsity;\\ the asymptotic law alone is $11$--$21\\%$ off at $\\lambda_{\\min}$ and does\nnot suffice)---buys a constant factor $\\approx8$--$10\\times$ at the \\emph{same} $\\kappa$\nexponent, and the Bernstein $\\Theta(\\kappa)$ floor for \\emph{both} problems\nbounds it there (an argument, not a measurement:\\ the floors hold for the\ninterpolation and interval families alike,\nbecause the small eigenvalues are spaced at exactly the scale on which $x^{-1/2}$ varies).  At\nthis table's $N=16$ point the honest chain is model $1050\\to$ same-convention minimax\n$209\\to$ aware $27$.  An \\emph{exponent-changing} variant exists---a PSD shift of\n$[\\lambda_{\\min},\\lambda_{\\max}]$ onto $[-1,1]$, needing only Eq.~\\eqref{eq:sigma_law}'s\nclosed-form endpoints, gives degree $\\approx2.8\\sqrt\\kappa$---but is gated by its LCU\nsubnormalization (the naive $1$-norm $\\approx3$ squeezes the spectrum back to\nlinear-in-$\\kappa$, \\emph{worse} than baseline;\\ with $\\sim\\!3\\times$ amplification the net at\n$\\kappa=864$ is $\\approx5\\times10^2$ effective queries vs $\\approx1.9\\times10^3$)---scoped, not\npriced beyond this.  Separately, an \\emph{analytic momentum-space factorization} of the ERI\ntensor (the closed-form momentum densities as a continuous factorization index) matches but\ndoes not beat plain density fitting:\\ eigen-Cholesky DF on the same tensor reaches within"
+   }
+  ]
+ },
+ "paper_19": {
+  "path": "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+  "loci": [
+   {
+    "name": "reproducibility",
+    "FOUND": true,
+    "line": 740,
+    "text": "\\emph{Reproducibility note.}  In the course of building the engine, a global\nsign error was found (and fixed) in the shipped assembled-matrix path's\nsame-spin double-excitation phase:\\ it contributed a nearly\n$n_{\\max}$-independent spurious over-binding of ${\\sim}+4$~mHa on balanced\nLiH while leaving the geometry observables essentially unchanged\n($<0.2$~pp).  \\emph{Scope of the correction, stated precisely because the two conventions\nare easy to conflate.}\\ The energies tabulated in this paper are on the\n\\emph{faithful} (pre-fix) convention:\\ at the fixed geometry $R=3.015$ the\nbanked values are $-7.9297$, $-8.0548$, $-8.1020$~Ha at $n_{\\max}=2,3,4$,\nwhile the corrected phase gives $-7.9256$, $-8.0509$, $-8.0982$~Ha---a shift\nof $+4.13$, $+3.85$, $+3.79$~mHa.  So the $n_{\\max}=3$ energy error reads\n$0.19\\%$ on the faithful convention and $0.24\\%$ on the corrected one.  The\nearlier statement that ``no number in this paper changes'' was \\emph{wrong}:\\ it\ncompared the corrected energy at the well's own minimum ($R_{\\rm eq}=3.2776$,\na different offset) against the faithful energy at $R=3.015$, and the two\nagreed only by cancellation.  What genuinely does not move is the geometry:\\\n$R_{\\rm eq}$ shifts by $\\le0.13$~pp and the qualitative conclusions---binding,\nthe stiffness excess, and the $n_{\\max}=4$ crossing---are unchanged under"
+   },
+   {
+    "name": "sub-quadratic",
+    "FOUND": true,
+    "line": 887,
+    "text": "\nThe Pauli ratio (balanced/composed) grows with block count:\n$2.63\\times$ (2-block LiH) $\\to$ $4.77\\times$ (3-block BeH$_2$)\n$\\to$ $7.45\\times$ (5-block H$_2$O), because each block pair adds\ncross-block ERIs and cross-center $V_{ne}$ terms.  The growth is\nsub-\\emph{quadratic} in the block count over these three systems\n($\\sim B^{1.14}$---slightly super-linear;\\ the per-block increment\n\\emph{decelerates}, $2.14$ then $1.34$ per block), so an $O(B^2)$ envelope\nis an upper bound rather than the measured trend.\n\nThe 1-norm advantage is regime-dependent.  For VQE/NISQ applications\nwhere Pauli count and QWC groups dominate circuit cost, the composed\narchitecture with PK remains cheaper.  For fault-tolerant QPE where\nthe 1-norm determines the number of Trotter steps, the balanced\nframework eliminates PK entirely.  This is decisive for molecules\nwith large nuclear charges: H$_2$O's PK contributed 98.7\\% of the\ntotal composed 1-norm (28,053~Ha), and the balanced 1-norm\n(1,509.3~Ha) is $18.6\\times$ cheaper.  Even compared to the"
+   },
+   {
+    "name": "w1e-aggregate",
+    "FOUND": true,
+    "line": 1580,
+    "text": "Phillips--Kleinman extension (F4), (2) explicit frozen-core electrons\nin FCI (F5 priority), (3) valence basis enlargement (F6 priority).\nThree diagnostic sprints in immediate succession (F4, F5, F6) tested all three\ncandidates and refined the W1e mechanism into a structurally distinct\nmulti-sub-mechanism reading. \\textbf{None of the three candidates\ncloses W1e on its own;\\ individually they account for at most\n${\\sim}10$--$25\\%$ of the wall and jointly for ${\\sim}35$--$45\\%$, leaving\n${\\sim}65$--$90\\%$ as\ngenuinely-deep correlation requiring architectural lifts beyond\nsprint scale.}\n\n\\textbf{F4 --- bonding-orbital PK extension RULED OUT\n(rank-1 PK saturation $\\to 43\\%$ closure ceiling).} The Step~1\nalgebraic diagnostic at NaH $R_\\text{eq}=3.566$~bohr computes the\nbonding-orbital--core overlap from the full F3 h1 diagonalization\n($\\max |S| = 17.5\\%$ on the Na 2s core, well above the $5\\%$\nstrong-gate threshold) and the corresponding Phillips--Kleinman\nbarrier at strict absolute reference $E_v = 0$ as $+0.194$~Ha"
+   },
+   {
+    "name": "ref-removed-1",
+    "FOUND": true,
+    "line": 947,
+    "text": "\n\\paragraph{The Phillips--Kleinman cross-center engineering closure\n(negative result).}\nThe named engineering closure for the W1c-residual is the\ncross-center analog of the same-center Phillips--Kleinman\nprojection;\\ Paper~17 gives the same-center case. The implementation\n(\\texttt{geovac/phillips\\_kleinman\\_cross\\_center.py}, May~2026)\nadds the standard PK barrier\n$\\Delta H_{pq}^{\\rm PK} = \\sum_c (E_v - E_c) S_{pc} S_{cq}$ to the\nH-block one-body Hamiltonian, with cross-center overlaps $S_{pc}$\ncomputed by 2D Gauss--Legendre $\\times$ radial-grid quadrature\nin the H-orbital frame, real-SH azimuthal selection\n($m_p^{\\rm signed} = m_c^{\\rm signed}$) enforced exactly,\nand Clementi--Roetti HF eigenvalues $E_c$ for the [Ne]-core\norbitals (Na: $E_{1s} = -40.479$~Ha, $E_{2s} = -2.797$~Ha,\n$E_{2p} = -1.518$~Ha).\n\nThe result is HONEST NEGATIVE: PK cross-center reduces the"
+   },
+   {
+    "name": "ref-removed-2",
+    "FOUND": true,
+    "line": 1784,
+    "text": "for second-row binding energetics.\n\n\\textbf{Cross-domain pattern crystallization.} The W1e wall is the\n\\textbf{sixth structurally-independent instance of the\nmulti-focal-composition wall pattern} documented across the\nframework (CLAUDE.md \\S1.7; Paper~34's projection catalogue). The five previous\ninstances are all in physics observables: Sprint H1 Yukawa (no\nautonomous $Y_F$ selection); LS-8a $Z_2/\\delta m$ (no autonomous\nrenormalization counterterms despite faithful reproduction of\ntwo-loop UV-divergent integrand); HF-3 recoil (no cross-register\n$V_{ne}(\\hat r_e, \\hat R_n)$ coordinate operator); HF-4 Zemach\n(no magnetization-density operator at the proton coordinate);\nHF-5 multi-loop $a_e$ (same renormalization wall as LS-8a, vertex\nsector). W1e adds a chemistry-domain instance: the framework\nconstructs the correct bonding orbital at the FCI level (W1d\nclosure in F3) but does not autonomously generate the energetic\npreference for that orbital at the correct $R_\\text{eq}$.\n\\textbf{The structural-skeleton scope statement extends from"
+   },
+   {
+    "name": "note1-inlined",
+    "FOUND": true,
+    "line": 99,
+    "text": "optimal operating point), LiH achieves 5.3\\% $R_{\\rm eq}$ error;\nBeH$_2$ gives 11.7\\%; H$_2$O gives 19.4\\%.  These errors are\nstructural, not numerical: the $l_{\\max}$ divergence\n(+0.15--0.22~bohr per additional angular channel) is confirmed to\noriginate in PK overcounting, not in the adiabatic approximation\n(Track~BQ, v2.0.32;\\ sprint and track designations are anchors into the project's internal chronicle, \\texttt{CHANGELOG.md} in the repository).  Six attempts to modify PK have failed\n(projector, spectral, self-consistent, $R$-dependent, $l$-dependent,\n$l$-dependent on 2D solver), and the ab initio $R_{\\rm ref}$\nderivation failed because the relevant scale (${\\sim}3$~bohr) is\nmolecular, not atomic (Track~AD, v2.0.18).\n\nAt the same time, PK is essential for the composed framework's\nsparsity: it makes the electron repulsion integral (ERI) tensor\nblock-diagonal, yielding $O(Q^{2.5})$ Pauli scaling\n(Paper~14)~\\cite{loutey_paper14}.  Without PK, the block\ndecomposition has no coupling at all.\n\nThe question motivating this paper is: \\emph{can PK be replaced by"
+   },
+   {
+    "name": "latremoliere-1",
+    "FOUND": true,
+    "line": 2088,
+    "text": "M.~F.~Herbst, J.~E.~Avery, and A.~Dreuw, ``Quantum chemistry with\n  Coulomb Sturmians: Construction and convergence of Coulomb Sturmian\n  basis sets at Hartree--Fock level,'' arXiv:1811.05777 (2018).\n\n\\bibitem{latremoliere2019modular}\nF.~Latr\\'emoli\\`ere, ``The Modular Gromov--Hausdorff Propinquity,''\n  Dissertationes Math.\\ \\textbf{544}, 1 (2019).\n  arXiv:1608.04881.\n\n\\bibitem{latremoliere2021dual}\nF.~Latr\\'emoli\\`ere, ``The Dual Modular Gromov--Hausdorff Propinquity and Completeness,''\n  J.~Noncommut.\\ Geom.\\ \\textbf{15}, 347 (2021).\n  arXiv:1811.04534.\n\n\\bibitem{bunge1993}\nC.~F.~Bunge, J.~A.~Barrientos, and A.~V.~Bunge, ``Roothaan--Hartree--Fock\n  ground-state atomic wave functions: Slater-type orbital expansions and\n  expectation values for $Z = 2$--$54$,''"
+   },
+   {
+    "name": "latremoliere-2",
+    "FOUND": true,
+    "line": 2093,
+    "text": "F.~Latr\\'emoli\\`ere, ``The Modular Gromov--Hausdorff Propinquity,''\n  Dissertationes Math.\\ \\textbf{544}, 1 (2019).\n  arXiv:1608.04881.\n\n\\bibitem{latremoliere2021dual}\nF.~Latr\\'emoli\\`ere, ``The Dual Modular Gromov--Hausdorff Propinquity and Completeness,''\n  J.~Noncommut.\\ Geom.\\ \\textbf{15}, 347 (2021).\n  arXiv:1811.04534.\n\n\\bibitem{bunge1993}\nC.~F.~Bunge, J.~A.~Barrientos, and A.~V.~Bunge, ``Roothaan--Hartree--Fock\n  ground-state atomic wave functions: Slater-type orbital expansions and\n  expectation values for $Z = 2$--$54$,''\n  At.\\ Data Nucl.\\ Data Tables \\textbf{53}, 113 (1993).\n\n\\end{thebibliography}\n\n\\end{document}"
+   }
+  ]
+ },
+ "paper_56": {
+  "path": "papers/group3_foundations/paper_56_tannakian_substrate.tex",
+  "loci": [
+   {
+    "name": "emn-1",
+    "FOUND": true,
+    "line": 314,
+    "text": "Paper~55~\\cite{paper55} for the cyclotomic-mixed-Tate classification.\nThe natural cosmic-Galois comparison target for $U^*_{GV}$ is\ntherefore $\\mathcal{G}_{MT(\\Z[i, 1/2])} = \\mathcal{G}_4$, the level-4\nmotivic Galois group (Deligne 2010), \\emph{not} Brown's smaller\n$\\mathcal{G}_{MT(\\Z)}$ (Eskandari--Murty--Nemoto\n2025~\\cite{eskandari_murty_nemoto2025} place Catalan $G$ at level~4;\\ that\n$G$ is \\emph{not} a period of MT($\\Z$) is expected but not proven, so the\nrefinement is motivated by where $G$ is known to live, not compelled by a\nproven exclusion).\nBost--Connes / Greenfield--Marcolli--Teh QSM lineage is \\emph{ruled\nout} as a transport target on four structural grounds (see Paper~55\n\u00a7subsec:open\\_m2\\_m3 honest-scope paragraph and the\nGreenfield--Marcolli--Teh transport memo);\\ the substrate built here\nis neutral Tannakian on a finite-dimensional symmetric algebra, not\nQSM.\n\n% =====================================================================\n\\section{The pro-system half}\\label{sec:pro_system}"
+   },
+   {
+    "name": "emn-2",
+    "FOUND": true,
+    "line": 316,
+    "text": "therefore $\\mathcal{G}_{MT(\\Z[i, 1/2])} = \\mathcal{G}_4$, the level-4\nmotivic Galois group (Deligne 2010), \\emph{not} Brown's smaller\n$\\mathcal{G}_{MT(\\Z)}$ (Eskandari--Murty--Nemoto\n2025~\\cite{eskandari_murty_nemoto2025} place Catalan $G$ at level~4;\\ that\n$G$ is \\emph{not} a period of MT($\\Z$) is expected but not proven, so the\nrefinement is motivated by where $G$ is known to live, not compelled by a\nproven exclusion).\nBost--Connes / Greenfield--Marcolli--Teh QSM lineage is \\emph{ruled\nout} as a transport target on four structural grounds (see Paper~55\n\u00a7subsec:open\\_m2\\_m3 honest-scope paragraph and the\nGreenfield--Marcolli--Teh transport memo);\\ the substrate built here\nis neutral Tannakian on a finite-dimensional symmetric algebra, not\nQSM.\n\n% =====================================================================\n\\section{The pro-system half}\\label{sec:pro_system}\n% =====================================================================\n"
+   },
+   {
+    "name": "emn-4",
+    "FOUND": true,
+    "line": 2008,
+    "text": "\\[\n\\mathcal{G}_4 = \\mathcal{G}_{MT(\\Z[i, 1/2])} = \\Gm \\ltimes \\mathcal{U}_4,\n\\]\nof Deligne 2010~\\cite{deligne2010} and Glanois\n2015~\\cite{glanois2015}, \\emph{not} Brown's smaller\n$\\mathcal{G}_{MT(\\Z)}$. Three published results motivate this\nrefinement:\\ Paper~55~\\cite{paper55} classifies \\textsc{GeoVac}'s\nperiod ring inside MT($\\Z[i, 1/2]$) at level $\\le 4$;\\\nEskandari--Murty--Nemoto 2025~\\cite{eskandari_murty_nemoto2025}\nplace Catalan $G = \\beta(2)$ as mixed Tate over $\\Q(i)$, which puts the\nlevel at $\\ge 4$ specifically because GeoVac's M3 vertex-parity sector\nproduces $G$ in QED vertex sums (the converse, that $G$ is not a period\nof mixed Tate motives over $\\Q$, is expected but open, so this motivates\nrather than forces the level);\\ and the Goncharov--Deligne 2005 faithfulness\nof $\\mathcal{G}_N$-action on $\\pi_1^{\\mathrm{mot}}(\\Gm - \\mu_N)$\ngives the injective comparison at level 4.\n\n\\begin{quote}"
+   },
+   {
+    "name": "rank-clause",
+    "FOUND": true,
+    "line": 1065,
+    "text": "gives $\\mathrm{rank}(A)=(12N+1)-3N$). This matches the structural picture:\\\nnaturality forces $p_{g} = 1$, $r_{g} = 0$, $s_{g} = 1$ for each\n$g$ (three linear constraints per generator) plus the unit\nnormalisation $\\eta_{T} = 1$, totalling $3 \\cdot 3 N(\\nmax) + 1$\n\\emph{symbol fixings} on the $12 N(\\nmax) + 1$ indeterminates, of\nwhich $9 N(\\nmax) + 1$ are independent over the morphism panel\ndata, leaving a $3 N(\\nmax)$-dimensional solution space (yielding the\nrank pattern above, consistent with rank--nullity on the\n$12 N(\\nmax) + 1$ indeterminates). The closed-form\ngeneralisation across all $\\nmax \\ge 1$ is conjectured and likely\nsprint-scale to verify symbolically;\\ TC-2c does not pursue this\nsharpening.\n\\end{remark}\n\n% =====================================================================\n\\subsection{Pro-system cofiltered coherence (TC-2d)}\\label{sec:tc2d_cofiltered_coherence}\n% =====================================================================\n"
+   },
+   {
+    "name": "closed-form",
+    "FOUND": true,
+    "line": 453,
+    "text": "subalgebra of $\\End_{\\Q}(\\Oh_{\\nmax})$ with respect to the natural\nsector grading, of closed-form dimension\n\\[\n   \\dim_{\\Q} \\End_{\\mathrm{compat}}(\\Oh_{\\nmax})\n   \\;=\\; \\sum_{1 \\le j \\le i \\le \\nmax} (i + 1)(j + 1)\n   \\;=\\; \\frac{\\nmax(\\nmax + 1)(\\nmax + 2)(3 \\nmax + 13)}{24}\n   \\;\\;\\bigl(= 19, 55, 125, 245 \\text{ for } \\nmax = 2, 3, 4, 5\\bigr).\n\\]\nThe closed form is verified against the sum at every cutoff $\\nmax \\le 12$ in\n\\texttt{tests/test\\_paper56\\_endo\\_rigidity.py}.\n\\end{theorem}\n\n\\begin{remark}\\label{rem:endo_surprise}\nThe Tannakian-naive expectation would be that\n$\\End_{\\mathrm{compat}}(\\Oh_{\\nmax}) = \\Q \\cdot \\mathrm{id}$ (rigid\nscalar diagonal). The block-lower-triangular structure --- with each\n$(i, j)$ block of size $(i + 1) \\times (j + 1)$ contributing --- is a\nstructural surprise of the sprint and is the operational expression"
+   },
+   {
+    "name": "closed-form-cite",
+    "FOUND": true,
+    "line": 456,
+    "text": "   \\dim_{\\Q} \\End_{\\mathrm{compat}}(\\Oh_{\\nmax})\n   \\;=\\; \\sum_{1 \\le j \\le i \\le \\nmax} (i + 1)(j + 1)\n   \\;=\\; \\frac{\\nmax(\\nmax + 1)(\\nmax + 2)(3 \\nmax + 13)}{24}\n   \\;\\;\\bigl(= 19, 55, 125, 245 \\text{ for } \\nmax = 2, 3, 4, 5\\bigr).\n\\]\nThe closed form is verified against the sum at every cutoff $\\nmax \\le 12$ in\n\\texttt{tests/test\\_paper56\\_endo\\_rigidity.py}.\n\\end{theorem}\n\n\\begin{remark}\\label{rem:endo_surprise}\nThe Tannakian-naive expectation would be that\n$\\End_{\\mathrm{compat}}(\\Oh_{\\nmax}) = \\Q \\cdot \\mathrm{id}$ (rigid\nscalar diagonal). The block-lower-triangular structure --- with each\n$(i, j)$ block of size $(i + 1) \\times (j + 1)$ contributing --- is a\nstructural surprise of the sprint and is the operational expression\nof the $\\SL_{2}$ factor's compatibility constraint. The closed-form\ndimension is $872$ bit-exact zero residuals on the PS-4\nendomorphism-rigidity panel."
+   },
+   {
+    "name": "arrow-1",
+    "FOUND": true,
+    "line": 152,
+    "text": "certify a closed immersion (Theorem~\\ref{thm:injection_g4}).\nThe fourteenth math.OA standalone in the \\textsc{GeoVac} series.\n\n\\medskip\n\\noindent\\emph{Cosmic-Galois injection.} We close the\n\\emph{injection direction} $\\Ustar_{GV} \\to\n\\mathcal{U}_{4} \\rtimes SL_{2}$ into the (abelianization of the)\nunipotent radical of the level-4 motivic Galois group\n$\\mathcal{G}_{4} = \\mathcal{G}_{\\mathrm{MT}(\\Z[i, 1/2])}$ of\nDeligne 2010 + Glanois 2015, with four structural compatibilities\n(multiplicativity, depth-1 coproduct, $SL_{2}$-to-Levi via\ncyclotomic $\\chi_{4}$, abelianized image via Glanois basis;\\\nSection~\\ref{sec:injection_g4},\nTheorem~\\ref{thm:injection_g4}). The proof uses the\nEskandari--Murty--Nemoto 2025 forcing-of-level-4 result + the\nGoncharov--Deligne 2005 faithful action on\n$\\pi_{1}^{\\mathrm{mot}}(\\Gm - \\mu_{4})$. Equality / surjectivity\non the depth-$\\ge 2$ content is the named long-range forward"
+   },
+   {
+    "name": "brown-undated",
+    "FOUND": true,
+    "line": 299,
+    "text": "top of the gauge-network scaffolding as additional structure, not\nas an MvS corollary.\n\nThe neutral-Tannakian backbone we transport is Deligne--Milne\n1982~\\cite{deligne_milne1982}, the modern motivic-Galois treatment is\nAndr\\'e 2004~\\cite{andre2004} and Brown~\\cite{brown2017}, the\ncyclotomic mixed-Tate package is Deligne 2010~\\cite{deligne2010} +\nGlanois 2015~\\cite{glanois2015}, and the Connes--Marcolli cosmic\nGalois group $U^*_{CM}$ is~\\cite{connes_marcolli2004}. We flag one\ncommon framing slip:\\ Brown~\\cite{brown2017} establishes a\n\\emph{surjection} $U^*_{CM} \\twoheadrightarrow \\mathcal{G}_{MT(\\Z)}$,\nnot an identification --- $U^*_{CM}$ has one generator in every\npositive degree (free non-abelian) while $\\mathcal{G}_{MT(\\Z)}$ has\ngenerators only in odd degrees $\\ge 3$. The period ring of\n\\textsc{GeoVac} sits inside MT($\\Z[i, 1/2]$) at level $\\le 4$;\\ see\nPaper~55~\\cite{paper55} for the cyclotomic-mixed-Tate classification.\nThe natural cosmic-Galois comparison target for $U^*_{GV}$ is\ntherefore $\\mathcal{G}_{MT(\\Z[i, 1/2])} = \\mathcal{G}_4$, the level-4"
+   }
+  ]
+ },
+ "paper_24": {
+  "path": "papers/group3_foundations/paper_24_bargmann_segal.tex",
+  "loci": [
+   {
+    "name": "edge-weight-3j",
+    "FOUND": true,
+    "line": 302,
+    "text": "\\begin{equation}\n  w_{(N,l,m_l) \\to (N+1,l',m_l')}\n  \\;=\\;\n  R^{2}_{n_r,\\, l \\to l'}\n  \\;\\times\\;\n  \\begin{pmatrix}\n    l & 1 & l' \\\\\n    m_l & q & -m_l'\n  \\end{pmatrix}^{2},\n  \\label{eq:edge-weight}\n\\end{equation}\nwhere the radial reduced matrix elements (in HO units $\\hbar = m =\n\\omega = 1$) are\n\\begin{align}\n  \\bigl|\\langle n_r, l + 1 \\,|\\, r \\,|\\, n_r, l \\rangle\\bigr|^2\n  &= n_r + l + \\tfrac{3}{2}\n  = \\tfrac{2 n_r + 2 l + 3}{2},\n  \\\\[2pt]"
+   },
+   {
+    "name": "note-inlined",
+    "FOUND": true,
+    "line": 446,
+    "text": "discretizations of central-potential quantum mechanics, but they\ndiffer in every structural feature except the use of angular\nmomentum as a labeling system.  Table~\\ref{tab:asymmetry}\nsummarizes the comparison.\n\n\\emph{Note on the layer count.}\\ The Coulomb/HO asymmetry has been\nrefined to seven layers (enumerated in \\S\\ref{sec:asymmetry_layer4}) across Sprint~5 Track~S5 (gauge-content),\nPaper~30 (SU(2) Wilson on $S^3$), Sprint~ST-SU3 (SU(3) Wilson on\n$S^5$), Sprints~L2-E/L2-F.1 (modular wedge), Paper~51 (gravity termination),\nSprint~Q5$'$-S5 (Mellin parity), and the Hodge-circle\narithmetic computation (August~2026).  The first three Coulomb-specific\nlayers are: (i)~spectrum-computing role of $L_0$;\n(ii)~calibration~$\\pi$; (iii)~Wilson gauge with natural matter\ncoupling --- with the universal Wilson--Hodge combinatorial vocabulary\nas the shared (\\textbf{universal}) residue, not itself one of the seven.  Sprint~ST-SU3 split\nthe Wilson layer into ``gauge alone'' (universal) versus ``gauge\nwith natural matter coupling'' (Coulomb-specific): on $S^3$,\n$S^3 = \\mathrm{SU}(2)$ means the matter spinor lives in the same"
+   }
+  ]
+ },
+ "g2_synth": {
+  "path": "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+  "loci": [
+   {
+    "name": "cross-classes",
+    "FOUND": true,
+    "line": 650,
+    "text": "four integral classes in exact form (at transcendence weight one,\n$\\pi$-free over $\\{E_1, \\ln, \\gamma\\}$), which upgrades the $(AA|BB)$\nblock of the census from \\emph{counted} to \\emph{decided}:\\ all $195$\nsymmetry-permitted entries are proven genuinely nonzero by\nLindemann--Weierstrass separation, with no accidental zeros and none\nmissed by the counting.  The three genuinely cross classes---$79.5\\%$ of\nthe tensor---remain \\emph{counted}, and are blocked from \\emph{decided} not\nby missing labour but by open transcendence:\\ $E_1$-value independence at\nalgebraic points is an open problem, and $\\gamma$ is not known even to be\nirrational~\\cite{loutey_paper58}.  Weight one is not the same as decidable.\n\n\\subsection{The transcendence frontier at the third center (Paper~59)}\n\nPaper~58 closes the two-center tensor in closed form;\\ Paper~59 asks what\nhappens at the third.  Read in momentum space, the three-center\nelectron-repulsion integral is a two-scale Bessel moment whose two Fock\nscales define a quartic curve:\\ the two-center case is genus zero\n(elementary, weight-one $\\{E_1,\\ln,\\gamma\\}$), and the third center"
+   }
+  ]
+ },
+ "g3_synth": {
+  "path": "papers/synthesis/group3_foundations_synthesis.tex",
+  "loci": [
+   {
+    "name": "conventions",
+    "FOUND": true,
+    "line": 659,
+    "text": "Laplacian on $S^3$, $\\tfrac{1}{2} m \\omega^2 r^2$ to the first-order\nEuler operator on $H^2(S^5)$.\n\n\\subsection*{The Coulomb/HO asymmetry: a seven-layer stratification}\n\n\\emph{Conventions.}\\ Sprint and track designations below are anchors into the\nproject's internal chronicle (\\texttt{CHANGELOG.md} in the repository); ``wall''\nis project shorthand for a structural obstruction established by multiple\nindependent negative results.\n\nA central structural finding of Paper~24, sharpened progressively by\nthe $S^5$ gauge-structure analysis (Paper~25, QED/gauge group), a\nsprint on the wedge KMS state of the framework's Lorentzian extension,\nthe spectral-action gravity arc (Paper~51), and the master Mellin\nengine, is that the Coulomb and HO discretizations differ along\n\\emph{seven} independent layers, identified in stages across 2025--2026.\nThe asymmetry as currently catalogued reads:\n"
+   },
+   {
+    "name": "theorem-grade",
+    "FOUND": true,
+    "line": 1162,
+    "text": "the two-family decomposition below.  The free side splits into two structurally\ndistinct families:\\ a multi-focal composition family (the framework can\nbuild it but cannot autonomously pick a number) and an inner-factor\ninput-data family (categorical to the outer-factor mechanism; lives\nelsewhere by structure).  This is the foundational reconvergence:\\ the\nperiod classification (Paper~55) and the Tannakian injection (Paper~56)\nplace theorem-grade boundaries around the empirical forced/free\nobservation---with the $\\mathcal{A}/D$ partition (Paper~31) supplying the\nspectral-triple language rather than a further theorem---\nthough Paper~57 holds the forcing-iff-property principle itself open as\na preliminary observation (it is an observations paper, not a theorem\npaper).  The\nframework's identity is precisely this seam---it maps the structural\nskeleton of quantum mechanics (the compact, Peter--Weyl, discrete\nregime) and consumes, rather than generates, the continuum calibration\ndata the skeleton does not reach.\n\n%% ========================================================================"
+   },
+   {
+    "name": "propinquity-1",
+    "FOUND": true,
+    "line": 851,
+    "text": "\n\\begin{itemize}\n\\item \\textbf{M1 ($k = 0$).}  Trivial heat kernel collapses to the\nHopf-base measure $\\text{Vol}(S^2)/\\pi^2 = 4/\\pi$.  This is the\nsignature of all calibration-$\\pi$ content in the Coulomb sector and\nappears as the leading constant in the GeoVac state-space Gromov--Hausdorff convergence\nrate.\n\n\\item \\textbf{M2 ($k = 2$).}  Standard Seeley--DeWitt expansion of\n$\\mathrm{Tr}\\,e^{-t D^2}$.  Produces $\\sqrt{\\pi}\\,\\mathbb{Q} \\oplus\n\\pi^2 \\,\\mathbb{Q}$ at every integer $s$ via Jacobi $\\theta$-inversion\non the half-integer-shifted Dirac spectrum.\n\n\\item \\textbf{M3 ($k = 1$).}  Mellin transform of\n$\\mathrm{Tr}(D \\cdot e^{-t D^2})$.  Produces the quarter-integer\nHurwitz / vertex-parity content (Catalan's $G$, Dirichlet $\\beta(2k)$)\nthat appears in two-loop QED vertex corrections on $S^3$.\n\\end{itemize}"
+   },
+   {
+    "name": "propinquity-2",
+    "FOUND": true,
+    "line": 869,
+    "text": "\nThe master Mellin engine reading is that M1, M2, M3 are not three\nindependent mechanisms but three sub-cases of the same Mellin\ntransform on the GeoVac spectral triple, indexed by which power of the\nDirac operator appears in the trace.  Each sub-mechanism has a\ncharacteristic domain of observable: M1 governs state-space Gromov--Hausdorff\nconvergence rates and Hopf-measure normalizations, M2 governs\nheat-kernel and spectral-action coefficients, and M3 governs\nvertex-restricted parity-character observables.  Mixing the operator\norder of the question with the operator order of the answer produces\nthe structural degeneracies catalogued in the project's sprint\nrecord.\n\n\\subsection*{The Layer-1 / Layer-2 split}\n\nA particularly clean operational consequence of the taxonomy is the\ntwo-layer architecture made explicit by Paper~34 (catalogue paper,\napplications group): the bare combinatorial graph (Layer~1, $\\pi$-free"
+   },
+   {
+    "name": "emn-synth",
+    "FOUND": true,
+    "line": 1076,
+    "text": "\\rtimes SL_2$ of the framework's finite-cutoff Galois group into the\nabelianization of the unipotent radical of the level-4 motivic Galois\ngroup $\\mathcal{G}_4 = \\mathcal{G}_{\\mathrm{MT}(\\mathbb{Z}[i, 1/2])}$\n(Deligne 2010, Glanois 2015).  The comparison target is the\n\\emph{level-4} group, not Brown's $\\mathcal{G}_{\\mathrm{MT}(\\mathbb{Z})}$:\\\nEskandari--Murty--Nemoto 2025 place Catalan $G$ at level~4 (mixed Tate\nover $\\mathbb{Q}(i)$).  That $G$ is \\emph{not} a period of $\\mathrm{MT}(\\mathbb{Z})$\nis expected but not proven, so this motivates the refinement rather than\nforcing it.\nTwo scope qualifiers are essential and stated honestly:\\ (i) GeoVac\n\\emph{realizes the abelianization} of the level-4 cosmic Galois group\n(Reading~A)---its primitive Hopf substrate is cocommutative, confirmed\nbit-exact at the JLO entire-cyclic-cocycle level at depth~2, so the\nimage lands in $\\mathcal{U}_4^{\\mathrm{ab}} \\cong \\mathbb{G}_a^\\infty$\nrather than the full free non-abelian unipotent; (ii) \\emph{infinite-cutoff\nequality is not claimed}---the injection direction is closed at theorem\ngrade at finite cutoff, while the converse equality on depth-$\\ge 2$\ncontent is the named deep forward question."
+   }
+  ]
+ }
+}

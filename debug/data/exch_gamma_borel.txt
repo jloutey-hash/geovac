@@ -1,0 +1,206 @@
+====================================================================================================
+EXCHANGE CLASS -- STEPS 2-5: Borel / Stokes / classification   (mp.dps = 90)
+====================================================================================================
+
+STEP 2 -- the LOCAL Borel transform in closed form, verified by Laplace
+  phi(R) = e^{AR} F(R) = int_0^oo e^{-xi R} Bor(xi) d xi  ;  digits agreed:
+
+         (a,b)        R          phi (closed form)             Laplace of Bor   digits
+       (3/2,1)      1.0     0.40417580085143212196     0.40417580085143212196      inf
+       (3/2,1)      2.5     0.10084479476656057801     0.10084479476656057801     90.5
+       (3/2,1)      7.0    0.018980429242291106307    0.018980429242291106307      inf
+       (2,5/2)      1.0     0.16516292317244515771     0.16516292317244515771     90.7
+       (2,5/2)      2.5    0.038646207483967426458    0.038646207483967426458      inf
+       (2,5/2)      7.0   0.0068741311614274137906   0.0068741311614274137906      inf
+     (1/2,7/2)      1.0     0.30125516897809650419     0.30125516897809650419     90.7
+     (1/2,7/2)      2.5    0.076341967078329954592    0.076341967078329954592     90.7
+     (1/2,7/2)      7.0    0.014686263206645813895    0.014686263206645813895     90.9
+         (1,1)      1.0     0.54676362438846109845     0.54676362438846109845      inf
+         (1,1)      2.5      0.1394229932324291398      0.1394229932324291398     90.7
+         (1,1)      7.0    0.026759893266192633299    0.026759893266192633299      inf
+     (5/2,3/2)      1.0     0.20347341354806111794     0.20347341354806111794     90.8
+     (5/2,3/2)      2.5    0.048380945772806131377    0.048380945772806131377     90.8
+     (5/2,3/2)      7.0   0.0087279589204198350256   0.0087279589204198350256     90.7
+     (7/3,4/5)      1.0     0.32706041634773548452     0.32706041634773548452     90.4
+     (7/3,4/5)      2.5     0.08118182482723563378     0.08118182482723563378      inf
+     (7/3,4/5)      7.0    0.015241676452393730523    0.015241676452393730523     90.9
+
+  L8  closed-form Borel transform verified by Laplace, worst agreement 90.4 digits : PASS
+
+====================================================================================================
+STEP 3 -- Borel singularity table + generalized Stokes data
+====================================================================================================
+
+  local xi_j = global zeta_j - A.  Local form q_j (xi-xi_j) ln(xi-xi_j):
+  monodromy xi-xi_j -> e^{2 pi i}(xi-xi_j) gives Disc Bor = 2 pi i q_j (xi-xi_j)/(2ab),
+  i.e. the alien derivative attaches the SINGLE term 2 pi i q_j /(2ab R^2).
+
+         (a,b)       xi_j       zeta_j      q_j                   type S/(2 pi i)
+       (3/2,1)          0          5/2       -1 log branch (u ln u) [AT ORIGIN]       -1/3
+       (3/2,1)         -3         -1/2        1    log branch (u ln u)        1/3
+       (3/2,1)         -2          1/2        1    log branch (u ln u)        1/3
+       (3/2,1)         -5         -5/2       -1    log branch (u ln u)       -1/3
+       (2,5/2)          0          9/2       -1 log branch (u ln u) [AT ORIGIN]      -1/10
+       (2,5/2)         -4          1/2        1    log branch (u ln u)       1/10
+       (2,5/2)         -5         -1/2        1    log branch (u ln u)       1/10
+       (2,5/2)         -9         -9/2       -1    log branch (u ln u)      -1/10
+     (1/2,7/2)          0            4       -1 log branch (u ln u) [AT ORIGIN]       -2/7
+     (1/2,7/2)         -1            3        1    log branch (u ln u)        2/7
+     (1/2,7/2)         -7           -3        1    log branch (u ln u)        2/7
+     (1/2,7/2)         -8           -4       -1    log branch (u ln u)       -2/7
+         (1,1)          0            2       -1 log branch (u ln u) [AT ORIGIN]       -1/2
+         (1,1)         -2            0        1    log branch (u ln u)        1/2
+         (1,1)         -2            0        1    log branch (u ln u)        1/2
+         (1,1)         -4           -2       -1    log branch (u ln u)       -1/2
+     (5/2,3/2)          0            4       -1 log branch (u ln u) [AT ORIGIN]      -2/15
+     (5/2,3/2)         -5           -1        1    log branch (u ln u)       2/15
+     (5/2,3/2)         -3            1        1    log branch (u ln u)       2/15
+     (5/2,3/2)         -8           -4       -1    log branch (u ln u)      -2/15
+     (7/3,4/5)          0        47/15       -1 log branch (u ln u) [AT ORIGIN]     -15/56
+     (7/3,4/5)      -14/3       -23/15        1    log branch (u ln u)      15/56
+     (7/3,4/5)       -8/5        23/15        1    log branch (u ln u)      15/56
+     (7/3,4/5)     -94/15       -47/15       -1    log branch (u ln u)     -15/56
+
+  ROUTE (ii) BLIND large-order extraction from the coefficient sequence only.
+  SYNTHETIC VALIDATION FIRST (known log-Borel data, incl. irrational charges):
+
+  synthetic model                                 s (blind)    lam_min recovered (lam_j, q_j)
+  q(xi+L)ln(xi+L): L={2,5,9}, q={1,-3/7,sqrt(2)}        3.0        2.0 [('2', '1'), ('5', '-3/7'), ('9', 'sqrt(2)')]  -> OK
+  q ln(xi+L): L={3,8}, q={2,-5}  [pure log, s=2]        2.0        3.0 [('3', '-2'), ('8', '5')]  -> OK
+  q/(xi+L): L={4,11}, q={1,7/5}  [simple pole, s=1]        1.0        4.0 [('4', '1'), ('11', '7/5')]  -> OK
+
+  L9  blind extractor validated on synthetic log-Borel data (type s AND
+      charges recovered exactly, including irrational q)               : PASS
+
+  Now BLIND on the real object (coefficients taken from the PARSED closed form):
+
+         (a,b)  s (blind)    lam_min        blind (lambda_j, q_j)   Prony residual
+       (3/2,1)   3.000272  1.9999845 [('2', '1/3'), ('3', '1/3'), ('5', '-1/3')]                0  OK
+       (2,5/2)  3.0333887  3.9964592 [('4', '1/10'), ('5', '1/10'), ('9', '-1/10')]                0  OK
+     (1/2,7/2)        3.0        1.0 [('1', '2/7'), ('7', '2/7'), ('8', '-2/7')]                0  OK
+         (1,1)        3.0        2.0  [('2', '1'), ('4', '-1/2')]                0  OK
+     (5/2,3/2)  3.0000134  2.9999988 [('3', '2/15'), ('5', '2/15'), ('8', '-2/15')]                0  OK
+     (7/3,4/5)        3.0        1.6 [('8/5', '15/56'), ('14/3', '15/56'), ('94/15', '-15/56')]                0  OK
+
+  L10 blind large-order route reproduces route (i) EXACTLY (residual 0)  : PASS 6/6
+      type shift s = 3 blind  =>  singularity is (xi-xi_j) ln(xi-xi_j),
+      NOT a pole (s=1) and NOT a bare log (s=2).
+
+  ROUTE (iii) exact discontinuity across arg R = pi (the E_1 and ln R cuts).
+  Prediction:  Disc F = -(2 pi i)/(2ab R^2) * sum_j q_j e^{-zeta_j R}.
+
+         (a,b)        x              Disc F  (numeric)                     prediction  rel resid
+       (3/2,1)      1.3       (0.0 + 28.988816966753j)       (0.0 + 28.988816966753j)  5.429e-61
+       (3/2,1)      2.7       (0.0 + 244.18614773714j)       (0.0 + 244.18614773714j)  9.793e-61
+       (2,5/2)      1.3       (0.0 + 128.19173042398j)       (0.0 + 128.19173042398j)  1.583e-60
+       (2,5/2)      2.7       (0.0 + 16297.494392431j)       (0.0 + 16297.494392431j)  2.803e-60
+     (1/2,7/2)      1.3       (0.0 + 140.06252279067j)       (0.0 + 140.06252279067j)  2.752e-61
+     (1/2,7/2)      2.7       (0.0 + 11260.318332811j)       (0.0 + 11260.318332811j)  1.171e-60
+         (1,1)      1.3       (0.0 + 21.448362438529j)       (0.0 + 21.448362438529j)   4.49e-61
+         (1,1)      2.7        (0.0 + 94.55415288821j)        (0.0 + 94.55415288821j)  6.605e-61
+     (5/2,3/2)      1.3       (0.0 + 87.908048100873j)       (0.0 + 87.908048100873j)  1.205e-60
+     (5/2,3/2)      2.7        (0.0 + 5631.693885652j)        (0.0 + 5631.693885652j)  2.241e-60
+     (7/3,4/5)      1.3       (0.0 + 51.080721710757j)       (0.0 + 51.080721710757j)  5.805e-61
+     (7/3,4/5)      2.7       (0.0 + 1075.6490648803j)       (0.0 + 1075.6490648803j)  1.249e-60
+
+  L11 branch-cut route matches the charge/position table, worst rel resid 2.80e-60 : PASS
+
+====================================================================================================
+STEP 4 -- classification
+====================================================================================================
+
+  (a) FIELD OF THE STOKES DATA
+      S_j = 2 pi i * q_j / (2ab),  q_j in {-1,+1,+1,-1} (INTEGERS).
+      => S_j in 2 pi i * Q(rates).  ALGEBRAIC up to a single power of pi.
+      No radical is needed at all here (the hybrid class needed Q(sqrt d)).
+
+  (b) IS THE BOUNDARY DATUM FORCED BY THE SKELETON?
+      Boundary datum = the single number (gamma + ln kappa) multiplying
+      e^{-AR}/(2ab R^2) alongside ln R.  Forcing law:
+           ln kappa = sum_{j != 0} q_j ln lambda_j      (charge-weighted)
+      and charge neutrality sum_j q_j = 0 is what removes the regular
+      xi-linear remainder from Bor.  Test as an exact identity + decoys:
+
+         (a,b)        kappa     prod lam^q     equal?        Bor xi-linear remainder
+       (3/2,1)          6/5            6/5       True d/dxi|_{xi=1/3} = 0.0 ; xi-flat(exact) = True
+       (2,5/2)         20/9           20/9       True d/dxi|_{xi=1/3} = 0.0 ; xi-flat(exact) = True
+     (1/2,7/2)          7/8            7/8       True d/dxi|_{xi=1/3} = 0.0 ; xi-flat(exact) = True
+         (1,1)            1              1       True d/dxi|_{xi=1/3} = 0.0 ; xi-flat(exact) = True
+     (5/2,3/2)         15/8           15/8       True d/dxi|_{xi=1/3} = 0.0 ; xi-flat(exact) = True
+     (7/3,4/5)        56/47          56/47       True d/dxi|_{xi=1/3} = 0.0 ; xi-flat(exact) = True
+
+  L12 kappa = prod lambda_j^{q_j} AND Bor - (pure charge sum) is xi-CONSTANT
+      (=> no free regular linear term; gamma+ln kappa is forced)        : PASS 6/6
+
+  (c) CUT-FREENESS / BOREL SUMMABILITY
+      Bor(xi) is analytic on the whole Laplace ray (0, oo): the three
+      non-trivial singularities sit at xi = -2a, -2b, -2A < 0 and the
+      fourth is the ENDPOINT xi = 0.  So the object is Borel summable
+      along R > 0 with NO lateral ambiguity -- unlike the hybrid class,
+      whose sector constants had to cancel pairwise to achieve this.
+      BUT: Disc_{arg R = pi} F != 0 (L11), so F is genuinely MULTIVALUED
+      in complex R -- the hybrid ERI was single-valued.  That is exactly
+      the price of the R-dependent log, and the discontinuity it creates
+      is 2 pi i x (rational) x elementary -- no new transcendental.
+
+  DECOY CONTROLS on the charge table (each MUST fail):
+    decoy charge vector    cases matching kappa (must be < 6/6)
+    all +1                 0/6 
+    swap sign on 2a        1/6   accidental at (1/2,7/2)
+    swap sign on 2b        0/6 
+    charge 2 on 2A         0/6 
+    charges (2,1,-1)       1/6   accidental at (1/2,7/2)
+    charges (0,1,-1)       1/6   accidental at (1/2,7/2)
+
+    L12c every decoy charge vector FAILS somewhere                       : PASS
+    NOTE (honest): the 'swap sign on 2a' decoy accidentally matches at
+    (a,b) = (1/2,7/2) because there 2a = 1 and 1^{+-1} = 1 -- a degenerate
+    rate, not a law.  It fails on the other five, which is why the sweep
+    is run over six rate pairs rather than one.
+
+  Lateral-Laplace check (numerical proof of no ambiguity on the ray R > 0):
+         (a,b)        R          theta    |L_+ - L_-|          rel
+       (3/2,1)      2.0       0.523599      1.191e-95    8.344e-95
+       (3/2,1)      2.0       0.785398      1.858e-95    1.301e-94
+       (3/2,1)      5.0       0.523599      3.569e-96    1.077e-94
+       (3/2,1)      5.0       0.785398      5.705e-96    1.722e-94
+       (2,5/2)      2.0       0.523599      3.831e-96    6.902e-95
+       (2,5/2)      2.0       0.785398      5.464e-96    9.846e-95
+       (2,5/2)      5.0       0.523599      1.438e-96    1.179e-94
+       (2,5/2)      5.0       0.785398      2.434e-96    1.995e-94
+     (1/2,7/2)      2.0       0.523599      4.028e-92    3.744e-91
+     (1/2,7/2)      2.0       0.785398      1.346e-95    1.251e-94
+     (1/2,7/2)      5.0       0.523599      1.173e-90    4.608e-89
+     (1/2,7/2)      5.0       0.785398      4.142e-96    1.628e-94
+
+  L12b lateral resummations agree (no Stokes ambiguity on R > 0), worst
+       relative gap 4.61e-89                                             : PASS
+
+  (d) WHERE THE ln R SITS IN THE EXPANSION (which orders R^-m carry it)
+         (a,b)         orders m with ln R  orders m with a_m (power)
+       (3/2,1)                        [2] [2, 3, 4, 5, 6, 7, 8, 9, 10]
+       (2,5/2)                        [2] [2, 3, 4, 5, 6, 7, 8, 9, 10]
+     (1/2,7/2)                        [2] [2, 3, 4, 5, 6, 7, 8, 9, 10]
+         (1,1)                        [2] [2, 3, 4, 5, 6, 7, 8, 9, 10]
+     (5/2,3/2)                        [2] [2, 3, 4, 5, 6, 7, 8, 9, 10]
+     (7/3,4/5)                        [2] [2, 3, 4, 5, 6, 7, 8, 9, 10]
+      => the log-monomial appears at EXACTLY ONE order (m = 2, the leading
+         one): a single weight-1 log trans-monomial, no (ln R)^2 anywhere.
+
+====================================================================================================
+STEP 4b -- genericity: the general (tau, sigma, H, j) exchange kernel
+====================================================================================================
+
+   (tau,sig,H1,H2,j1,j2)            E1 rates lambda     R powers on E1    R powers on lnR
+      (0, 0, 0, 0, 0, 0)            ['2', '3', '5']               [-2]               [-2]
+      (1, 0, 0, 0, 0, 0)            ['2', '3', '5']       [-4, -3, -2]       [-4, -3, -2]
+      (1, 1, 1, 1, 0, 0)            ['2', '3', '5']       [-6, -5, -4]       [-6, -5, -4]
+      (2, 0, 1, 0, 1, 0)            ['2', '3', '5'] [-9, -8, -7, -6, -5, -4, -3] [-9, -8, -7, -6, -5, -4, -3]
+      (2, 2, 2, 2, 0, 1)            ['2', '3', '5'] [-11, -10, -9, -8, -7, -6] [-11, -10, -9, -8, -7, -6]
+      (3, 1, 1, 2, 1, 1)            ['2', '3', '5'] [-14, -13, -12, -11, -10, -9, -8, -7, -6, -5] [-14, -13, -12, -11, -10, -9, -8, -7, -6, -5]
+
+  L13 general kernel's Borel singularity POSITIONS stay in {2a, 2b, 2A}
+      (i.e. global zeta in {+-A, +-(a-b)}) for every tested (tau,sigma,H,j) : PASS
+      R powers k <= -2 on the E_1 terms => (xi+lam)^{|k|-1} ln(xi+lam)
+      higher log-branch orders; k = -1 would be a simple pole.  Both are
+      2 pi i x rational monodromy, so the classification is unchanged.

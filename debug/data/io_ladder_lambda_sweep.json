@@ -1,0 +1,147 @@
+{
+  "geovac": [
+    {
+      "system": "He",
+      "max_n": 1,
+      "Q": 2,
+      "M_spatial": 1,
+      "terms": 4,
+      "lam_incl": 3.3749,
+      "lam_excl": 1.6875,
+      "sec": 0.0
+    },
+    {
+      "system": "He",
+      "max_n": 2,
+      "Q": 10,
+      "M_spatial": 5,
+      "terms": 120,
+      "lam_incl": 11.2943,
+      "lam_excl": 10.7738,
+      "sec": 0.0
+    },
+    {
+      "system": "He",
+      "max_n": 3,
+      "Q": 28,
+      "M_spatial": 14,
+      "terms": 2659,
+      "lam_incl": 78.3608,
+      "lam_excl": 64.9238,
+      "sec": 0.9
+    },
+    {
+      "system": "He",
+      "max_n": 4,
+      "Q": 60,
+      "M_spatial": 30,
+      "terms": 31039,
+      "lam_incl": 261.571,
+      "lam_excl": 214.3233,
+      "sec": 19.8
+    },
+    {
+      "system": "H2",
+      "max_n": 2,
+      "Q": 10,
+      "M_spatial": 5,
+      "terms": 112,
+      "lam_incl": 8.1736,
+      "lam_excl": 6.1992,
+      "sec": 0.0
+    },
+    {
+      "system": "H2",
+      "max_n": 3,
+      "Q": 28,
+      "M_spatial": 14,
+      "terms": 2627,
+      "lam_incl": 42.0816,
+      "lam_excl": 33.149,
+      "sec": 0.9
+    },
+    {
+      "system": "H2",
+      "max_n": 4,
+      "Q": 60,
+      "M_spatial": 30,
+      "terms": 30951,
+      "lam_incl": 133.374,
+      "lam_excl": 107.0361,
+      "sec": 20.4
+    },
+    {
+      "system": "LiH",
+      "max_n": 2,
+      "Q": 30,
+      "M_spatial": 15,
+      "terms": 334,
+      "lam_incl": 32.5923,
+      "lam_excl": 26.6082,
+      "sec": 0.1
+    },
+    {
+      "system": "LiH",
+      "max_n": 3,
+      "Q": 84,
+      "M_spatial": 42,
+      "terms": 7879,
+      "lam_incl": 182.5519,
+      "lam_excl": 156.7452,
+      "sec": 6.8
+    }
+  ],
+  "gaussian": [
+    {
+      "label": "He STO-3G",
+      "Q": 2,
+      "M_spatial": 1,
+      "terms": 4,
+      "lam_incl": 3.375,
+      "lam_excl": 1.6875
+    },
+    {
+      "label": "He cc-pVDZ",
+      "Q": 10,
+      "M_spatial": 5,
+      "terms": 156,
+      "lam_incl": 42.9541,
+      "lam_excl": 33.1231
+    },
+    {
+      "label": "H2 STO-3G (hc)",
+      "Q": 4,
+      "M_spatial": 2,
+      "terms": 15,
+      "lam_incl": 1.9841,
+      "lam_excl": 1.8855
+    },
+    {
+      "label": "H2 STO-3G (cache)",
+      "Q": 4,
+      "M_spatial": 2,
+      "terms": 15,
+      "lam_incl": 1.7447,
+      "lam_excl": 1.2709,
+      "source": "H2_sto-3g_singlet_1.4.hdf5"
+    },
+    {
+      "label": "H2 6-31G",
+      "Q": 8,
+      "M_spatial": 4,
+      "terms": 185,
+      "lam_incl": 13.6789,
+      "lam_excl": 11.4489,
+      "source": "H2_6-31g_singlet_0.75.hdf5"
+    },
+    {
+      "label": "LiH STO-3G",
+      "Q": 12,
+      "M_spatial": 6,
+      "terms": 631,
+      "lam_incl": 16.4563,
+      "lam_excl": 12.3692,
+      "source": "H1-Li1_sto-3g_singlet_1.45.hdf5"
+    }
+  ]
+}

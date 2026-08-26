@@ -1,0 +1,6 @@
+Probe B -- identity-shift (small-k) audit at grid g5
+system n_orb n_el  M nodes     lam_std   lam_spec  lam_shift_pess  lam_shift    spec/std shift/std
+     H2    2    2    25134     4.71647     5.20949       3.18961      3.01231     1.105     0.639   [lam1 2.3713 -> 2.4118; lam2_tl 0.6005; absorbed const 2.2652]
+    LiH    3    4    42600    15.81261    14.81571      18.91537     12.96119     0.937     0.820   [lam1 8.2386 -> 9.6174; lam2_tl 3.3437; absorbed const 9.7278]
+  H2_4o    4    2    25134    11.65376     8.88261       7.78693      6.32307     0.762     0.543   [lam1 3.4752 -> 3.8325; lam2_tl 2.4905; absorbed const 1.0590]
+ LiH_5o    5    4    42600    27.12126    21.32334      25.51480     19.01489     0.786     0.701   [lam1 10.8477 -> 12.4664; lam2_tl 6.5485; absorbed const 5.4504]

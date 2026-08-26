@@ -1,0 +1,28 @@
+{
+  "dimA": 36,
+  "dimAp": 1,
+  "Hdim": 6,
+  "census": {
+    "trivial": 0,
+    "pairwise": 0,
+    "three_way": 6
+  },
+  "blocks": [
+    {
+      "dim": 6,
+      "ranks": [
+        2,
+        2,
+        2
+      ],
+      "active": [
+        "Be",
+        "H1",
+        "H2"
+      ],
+      "three_way_norm": 0.32041260914216013,
+      "kind": "three_way"
+    }
+  ],
+  "tol": 1e-06
+}

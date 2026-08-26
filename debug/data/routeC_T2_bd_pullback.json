@@ -1,0 +1,44 @@
+{
+  "1_jacobian": {
+    "dps50": "1.45e-30",
+    "dps70": "9.26e-41",
+    "identity_lam_th4_4": "2.67e-51"
+  },
+  "2a_qseries": {
+    "theta3_4_lambert_q0.01": "2.3e-41",
+    "theta3_4_lambert_q0.037": "0.0",
+    "theta4_4_lambert": "1.15e-41",
+    "jacobian_qseries": "1.33e-11"
+  },
+  "2b_measure": {
+    "dps30": {
+      "direct": "2.0",
+      "pull": "2.0",
+      "diff": "0.0"
+    },
+    "dps45": {
+      "direct": "2.0",
+      "pull": "2.0",
+      "diff": "0.0"
+    }
+  },
+  "2c_ring": {
+    "dps30": {
+      "int_0^1 K(k^2)dk = 2G": "0.0",
+      "int_0^1 E(k^2)dk = G+1/2": "1.97e-31",
+      "E(1/2)=pi/4varpi+varpi/2 (=> 1/varpi native)": "0.0"
+    },
+    "dps45": {
+      "int_0^1 K(k^2)dk = 2G": "0.0",
+      "int_0^1 E(k^2)dk = G+1/2": "0.0",
+      "E(1/2)=pi/4varpi+varpi/2 (=> 1/varpi native)": "1.75e-46"
+    }
+  },
+  "3_twist_wall": {
+    "N0_err": "3.68e-28",
+    "N1_over_N0": "0.170637831697",
+    "borel_ratio": "0.482434"
+  },
+  "T2_frozen_anchor": "0.3953557659017139641",
+  "object_anchor_float64_absdiff": "4.69e-08"
+}

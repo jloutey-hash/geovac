@@ -1,0 +1,412 @@
+==============================================================================
+OBJECT 2 -- the HYBRID two-centre ERI class {E_1, ln} (Paper 58)
+mpmath dps = 80
+==============================================================================
+
+------------------------------------------------------------------------------
+QUARTET (2p0 2p0|1s   1s_B)  ZA=3 ZB=1
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 3   a_c = 3   mu = b_A + a_c = 6   a_d(far) = 1
+  41 closed-form terms; common algebraic factor g = sqrt(3); minpoly degrees over Q = [2]
+  exponential actions present: [1, 3, 6]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -1  lam=     4  action A=c+lam=     3   P = {0: 96, -1: -600, -2: 1512, -3: -1512}
+      c=    -1  lam=     7  action A=c+lam=     6   P = {0: -96, -1: 600, -2: -1512, -3: 1512}
+      c=     1  lam=     2  action A=c+lam=     3   P = {0: 96, -1: 600, -2: 1512, -3: 1512}
+      c=     1  lam=     5  action A=c+lam=     6   P = {0: -96, -1: -600, -2: -1512, -3: -1512}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     1  arg=2   {0: -96, -1: -600, -2: -1512, -3: -1512}
+      c=     1  arg=5   {0: -96, -1: -600, -2: -1512, -3: -1512}
+      c=     1  arg=7   {0: 96, -1: 600, -2: 1512, -3: 1512}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     1   {0: 104918607/3001250, -1: 89802127431/420175000, -2: 28324036584/52521875, -3: 28324036584/52521875}
+      c=     3   {-1: -573/8, -2: -120, -3: -1048}
+      c=     6   {2: -81/1225, 1: -11502/42875, 0: -713322/1500625, -1: 1706235648/52521875, -2: 1487180496/52521875, -3: 26718888416/52521875}
+
+------------------------------------------------------------------------------
+QUARTET (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 3   a_c = 3/2   mu = b_A + a_c = 9/2   a_d(far) = 1
+  53 closed-form terms; common algebraic factor g = sqrt(6); minpoly degrees over Q = [2]
+  exponential actions present: [1, 3/2, 9/2]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -1  lam=   5/2  action A=c+lam=   3/2   P = {0: 207/16, -1: -999/8, -2: 8883/16, -3: -20655/16, -4: 20655/16}
+      c=    -1  lam=  11/2  action A=c+lam=   9/2   P = {0: -207/16, -1: 999/8, -2: -8883/16, -3: 20655/16, -4: -20655/16}
+      c=     1  lam=   1/2  action A=c+lam=   3/2   P = {0: -207/16, -1: -999/8, -2: -8883/16, -3: -20655/16, -4: -20655/16}
+      c=     1  lam=   7/2  action A=c+lam=   9/2   P = {0: 207/16, -1: 999/8, -2: 8883/16, -3: 20655/16, -4: 20655/16}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     1  arg=5   {0: 207/16, -1: 999/8, -2: 8883/16, -3: 20655/16, -4: 20655/16}
+      c=     1  arg=7   {0: 207/16, -1: 999/8, -2: 8883/16, -3: 20655/16, -4: 20655/16}
+      c=     1  arg=11   {0: -207/16, -1: -999/8, -2: -8883/16, -3: -20655/16, -4: -20655/16}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     1   {0: -1235606327559/135339207850, -1: -4251334136604831/26052797511125, -2: -34483862576234187/52105595022250, -3: -3117743316362943/2084223800890, -4: -3117743316362943/2084223800890}
+      c=   3/2   {0: 144/25, -1: 12087/250, -2: 69033/250, -3: 5373/10, -4: 41589/20}
+      c=   9/2   {3: -486/5929, 2: -214812/456533, 1: -44088516/35153041, 0: -5203218672/2706784157, -1: -1293620907123/416844760178, -2: -24486323901351/416844760178, -3: -18425214573417/416844760178, -4: -486518346559107/833689520356}
+
+------------------------------------------------------------------------------
+QUARTET (2p1 2p1|1s   1s_B)  ZA=3 ZB=1
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 3   a_c = 3   mu = b_A + a_c = 6   a_d(far) = 1
+  39 closed-form terms; common algebraic factor g = sqrt(3); minpoly degrees over Q = [2]
+  exponential actions present: [1, 3, 6]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -1  lam=     4  action A=c+lam=     3   P = {0: -48, -1: 300, -2: -756, -3: 756}
+      c=    -1  lam=     7  action A=c+lam=     6   P = {0: 48, -1: -300, -2: 756, -3: -756}
+      c=     1  lam=     2  action A=c+lam=     3   P = {0: -48, -1: -300, -2: -756, -3: -756}
+      c=     1  lam=     5  action A=c+lam=     6   P = {0: 48, -1: 300, -2: 756, -3: 756}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     1  arg=2   {0: 48, -1: 300, -2: 756, -3: 756}
+      c=     1  arg=5   {0: 48, -1: 300, -2: 756, -3: 756}
+      c=     1  arg=7   {0: -48, -1: -300, -2: -756, -3: -756}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     1   {0: -1407843/85750, -1: -1288030131/12005000, -2: -14162018292/52521875, -3: -14162018292/52521875}
+      c=     3   {-1: 291/8, -2: 60, -3: 524}
+      c=     6   {0: 954/42875, -1: -24576072/1500625, -2: -743590248/52521875, -3: -13359444208/52521875}
+
+------------------------------------------------------------------------------
+QUARTET (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 3   a_c = 3/2   mu = b_A + a_c = 9/2   a_d(far) = 1
+  59 closed-form terms; common algebraic factor g = sqrt(6); minpoly degrees over Q = [2]
+  exponential actions present: [1, 3/2, 9/2]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -1  lam=   5/2  action A=c+lam=   3/2   P = {0: 171/16, -1: -2889/16, -2: 21195/16, -3: -5400, -4: 195615/16, -5: -195615/16}
+      c=    -1  lam=  11/2  action A=c+lam=   9/2   P = {0: -171/16, -1: 2889/16, -2: -21195/16, -3: 5400, -4: -195615/16, -5: 195615/16}
+      c=     1  lam=   1/2  action A=c+lam=   3/2   P = {0: 171/16, -1: 2889/16, -2: 21195/16, -3: 5400, -4: 195615/16, -5: 195615/16}
+      c=     1  lam=   7/2  action A=c+lam=   9/2   P = {0: -171/16, -1: -2889/16, -2: -21195/16, -3: -5400, -4: -195615/16, -5: -195615/16}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     1  arg=5   {0: -171/16, -1: -2889/16, -2: -21195/16, -3: -5400, -4: -195615/16, -5: -195615/16}
+      c=     1  arg=7   {0: -171/16, -1: -2889/16, -2: -21195/16, -3: -5400, -4: -195615/16, -5: -195615/16}
+      c=     1  arg=11   {0: 171/16, -1: 2889/16, -2: 21195/16, -3: 5400, -4: 195615/16, -5: 195615/16}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     1   {0: 31538808783/1757652050, -1: 116569581254613/676696039250, -2: 422645225241250863/260527975111250, -3: 63568285557536657088/10030327041783125, -4: 11351146652579639727/802426163342650, -5: 11351146652579639727/802426163342650}
+      c=   3/2   {-1: -22041/500, -2: -235719/625, -3: -6836109/2500, -4: -252801/50, -5: -1967193/100}
+      c=   9/2   {0: -506304/35153041, -1: 53001393075/10827136628, -2: 3595871988999/208422380089, -3: 39211614877872027/64194093067412, -4: 13309469604434277/32097046533706, -5: 354729973029242967/64194093067412}
+
+------------------------------------------------------------------------------
+QUARTET (3d0 3d0|1s   1s_B)  ZA=3 ZB=1
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 2   a_c = 3   mu = b_A + a_c = 5   a_d(far) = 1
+  57 closed-form terms; common algebraic factor g = sqrt(3); minpoly degrees over Q = [2]
+  exponential actions present: [1, 3, 5]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -1  lam=     4  action A=c+lam=     3   P = {0: 17568, -1: -273960, -2: 1948536, -3: -7845336, -4: 17690400, -5: -17690400}
+      c=    -1  lam=     6  action A=c+lam=     5   P = {0: -17568, -1: 273960, -2: -1948536, -3: 7845336, -4: -17690400, -5: 17690400}
+      c=     1  lam=     2  action A=c+lam=     3   P = {0: 17568, -1: 273960, -2: 1948536, -3: 7845336, -4: 17690400, -5: 17690400}
+      c=     1  lam=     4  action A=c+lam=     5   P = {0: -17568, -1: -273960, -2: -1948536, -3: -7845336, -4: -17690400, -5: -17690400}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     1  arg=2   {0: -52704, -1: -821880, -2: -5845608, -3: -23536008, -4: -53071200, -5: -53071200}
+      c=     1  arg=6   {0: 17568, -1: 273960, -2: 1948536, -3: 7845336, -4: 17690400, -5: 17690400}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     1   {0: 471633335/93312, -1: 14708435983/186624, -2: 5811874357/10368, -3: 1462511707/648, -4: 1954256995/384, -5: 1954256995/384}
+      c=     3   {-1: -105405/8, -2: -63000, -3: -1414974, -4: -1405350, -5: -12262050}
+      c=     5   {4: -1/108, 3: -55/648, 2: -533/1296, 1: -5269/3888, 0: -308893/93312, -1: 1364930345/186624, -2: 220166179/10368, -3: 2081584385/2592, -4: 185623825/384, -5: 2754370205/384}
+
+------------------------------------------------------------------------------
+QUARTET (2p0 2p0|1s   2s_B)  ZA=4 ZB=3
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 4   a_c = 4   mu = b_A + a_c = 8   a_d(far) = 3/2
+  55 closed-form terms; common algebraic factor g = sqrt(6); minpoly degrees over Q = [2]
+  exponential actions present: [3/2, 4, 8]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=  -3/2  lam=  11/2  action A=c+lam=     4   P = {1: 110, 0: -1904/3, -1: 5320/3, -2: -24304/9, -3: 48608/27}
+      c=  -3/2  lam=  19/2  action A=c+lam=     8   P = {1: -110, 0: 1904/3, -1: -5320/3, -2: 24304/9, -3: -48608/27}
+      c=   3/2  lam=   5/2  action A=c+lam=     4   P = {1: -110, 0: -1904/3, -1: -5320/3, -2: -24304/9, -3: -48608/27}
+      c=   3/2  lam=  13/2  action A=c+lam=     8   P = {1: 110, 0: 1904/3, -1: 5320/3, -2: 24304/9, -3: 48608/27}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=   3/2  arg=5   {1: -110, 0: -1904/3, -1: -5320/3, -2: -24304/9, -3: -48608/27}
+      c=   3/2  arg=11   {1: 110, 0: 1904/3, -1: 5320/3, -2: 24304/9, -3: 48608/27}
+      c=   3/2  arg=13   {1: 110, 0: 1904/3, -1: 5320/3, -2: 24304/9, -3: 48608/27}
+      c=   3/2  arg=19   {1: -110, 0: -1904/3, -1: -5320/3, -2: -24304/9, -3: -48608/27}
+  [A] elementary groups  c -> coefficients in units of g
+      c=   3/2   {1: -9472085210784/204715394455, 0: -716933760620155648/2781058633671175, -1: -27430035998909481200768/37780681538422912375, -2: -41380949356366921472/37468444500915285, -3: -82761898712733842944/112405333502745855}
+      c=     4   {0: 24, -1: 177842176/499125, -2: 45728/165, -3: 702656/495}
+      c=     8   {2: -4884480/15069223, 1: -3749041152/3722098081, 0: -6166558044456/919358226007, -1: -111720019170740480/681244445471187, -2: -44226782242255712/681244445471187, -3: -1396332126901823296/2043733336413561}
+
+------------------------------------------------------------------------------
+QUARTET (2p0 2p0|1s   1s_B)  ZA=2 ZB=1
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 2   a_c = 2   mu = b_A + a_c = 4   a_d(far) = 1
+  37 closed-form terms; common algebraic factor g = sqrt(2); minpoly degrees over Q = [2]
+  exponential actions present: [1, 2, 4]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -1  lam=     3  action A=c+lam=     2   P = {0: 36, -1: -240, -2: 612, -3: -612}
+      c=    -1  lam=     5  action A=c+lam=     4   P = {0: -36, -1: 240, -2: -612, -3: 612}
+      c=     1  lam=     1  action A=c+lam=     2   P = {0: 36, -1: 240, -2: 612, -3: 612}
+      c=     1  lam=     3  action A=c+lam=     4   P = {0: -36, -1: -240, -2: -612, -3: -612}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     1  arg=3   {0: -72, -1: -480, -2: -1224, -3: -1224}
+      c=     1  arg=5   {0: 36, -1: 240, -2: 612, -3: 612}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     1   {0: 381248/16875, -1: 35345536/253125, -2: 91024112/253125, -3: 91024112/253125}
+      c=     2   {-1: -416/9, -2: -120, -3: -672}
+      c=     4   {2: -16/225, 1: -496/1125, 0: -20104/16875, -1: 4448624/253125, -2: 6478552/253125, -3: 79075888/253125}
+
+------------------------------------------------------------------------------
+QUARTET (2p0 2p0|2s   1s_B)  ZA=5 ZB=2
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 5   a_c = 5/2   mu = b_A + a_c = 15/2   a_d(far) = 2
+  43 closed-form terms; common algebraic factor g = sqrt(5); minpoly degrees over Q = [2]
+  exponential actions present: [2, 5/2, 15/2]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -2  lam=   9/2  action A=c+lam=   5/2   P = {0: 51/4, -1: -177/4, -2: 909/16, -3: -909/32}
+      c=    -2  lam=  19/2  action A=c+lam=  15/2   P = {0: -51/4, -1: 177/4, -2: -909/16, -3: 909/32}
+      c=     2  lam=   1/2  action A=c+lam=   5/2   P = {0: 51/4, -1: 177/4, -2: 909/16, -3: 909/32}
+      c=     2  lam=  11/2  action A=c+lam=  15/2   P = {0: -51/4, -1: -177/4, -2: -909/16, -3: -909/32}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     2  arg=3   {0: -51/2, -1: -177/2, -2: -909/8, -3: -909/16}
+      c=     2  arg=11   {0: -51/4, -1: -177/4, -2: -909/16, -3: -909/32}
+      c=     2  arg=19   {0: 51/4, -1: 177/4, -2: 909/16, -3: 909/32}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     2   {0: -653985035219180/32301035823969, -1: 14211169979474101340/60758248384885689, -2: 8045312508967955/83344647990241, -3: 8045312508967955/166689295980482}
+      c=   5/2   {0: -3200/81, -1: -137135/729, -2: -46, -3: -1277/20}
+      c=  15/2   {3: 50000/43681, 2: 32360000/9129329, 1: 9694420000/1908029761, 0: 1623485739200/398778220049, -1: 456133301139405/83344647990241, -2: 271710769805694/83344647990241, -3: 25977990393858207/1666892959804820}
+
+------------------------------------------------------------------------------
+QUARTET (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1
+------------------------------------------------------------------------------
+  orbital rates:  b_A(pair) = 2   a_c = 3/2   mu = b_A + a_c = 7/2   a_d(far) = 1
+  66 closed-form terms; common algebraic factor g = sqrt(6); minpoly degrees over Q = [2]
+  exponential actions present: [1, 3/2, 7/2]
+
+  [A] E_1 groups   (c, lam) -> prefactor P_(c,lam)(R) coefficients in units of g
+      c=    -1  lam=   5/2  action A=c+lam=   3/2   P = {0: -125631/2048, -1: 3267459/2048, -2: -17329707/1024, -3: 53187435/512, -4: -805619115/2048, -5: 1778608125/2048, -6: -1778608125/2048}
+      c=    -1  lam=   9/2  action A=c+lam=   7/2   P = {0: 125631/2048, -1: -3267459/2048, -2: 17329707/1024, -3: -53187435/512, -4: 805619115/2048, -5: -1778608125/2048, -6: 1778608125/2048}
+      c=     1  lam=   1/2  action A=c+lam=   3/2   P = {0: 125631/2048, -1: 3267459/2048, -2: 17329707/1024, -3: 53187435/512, -4: 805619115/2048, -5: 1778608125/2048, -6: 1778608125/2048}
+      c=     1  lam=   5/2  action A=c+lam=   7/2   P = {0: -125631/2048, -1: -3267459/2048, -2: -17329707/1024, -3: -53187435/512, -4: -805619115/2048, -5: -1778608125/2048, -6: -1778608125/2048}
+  [A] log groups   (c, arg) -> coefficients in units of g
+      c=     1  arg=3   {0: 125631/1024, -1: 3267459/1024, -2: 17329707/512, -3: 53187435/256, -4: 805619115/1024, -5: 1778608125/1024, -6: 1778608125/1024}
+      c=     1  arg=5   {0: -125631/1024, -1: -3267459/1024, -2: -17329707/512, -3: -53187435/256, -4: -805619115/1024, -5: -1778608125/1024, -6: -1778608125/1024}
+  [A] elementary groups  c -> coefficients in units of g
+      c=     1   {0: 1600798879187/23619600000, -1: 571078804573481/354294000000, -2: 137681558020685261/7971615000000, -3: 423015907144522381/3985807500000, -4: 26367955654053823/65610000000, -5: 943069919071397893/1062882000000, -6: 943069919071397893/1062882000000}
+      c=   3/2   {0: 144/25, -1: -2256039/32000, -2: -228066777/64000, -3: -27481059/1280, -4: -130571703/640, -5: -92086875/256, -6: -715651875/512}
+      c=   7/2   {3: 1232/30375, 2: 50048/91125, 1: 14585104/4100625, 0: 104186864/7381125, -1: 6789949115917/141717600000, -2: 67065898256836247/63772920000000, -3: 88056069622575257/31886460000000, -4: 37239922331219443/590490000000, -5: 105783832730683499/2125764000000, -6: 2170325762806205303/4251528000000}
+
+==============================================================================
+[B/E] STRUCTURAL CHECKS (exact, symbolic) across the quartet sweep
+==============================================================================
+quartet                            S1  S2  S3  S4  S5  S6  S7  S8  S9  S10
+(2p0 2p0|1s   1s_B)  ZA=3 ZB=1      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(2p0 2p0|2p0  1s_B)  ZA=3 ZB=1      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(2p1 2p1|1s   1s_B)  ZA=3 ZB=1      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(3d0 3d0|1s   1s_B)  ZA=3 ZB=1      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(2p0 2p0|1s   2s_B)  ZA=4 ZB=3      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(2p0 2p0|1s   1s_B)  ZA=2 ZB=1      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(2p0 2p0|2s   1s_B)  ZA=5 ZB=2      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+(3d1 3d1|2p0  1s_B)  ZA=3 ZB=1      OK   OK   OK   OK   OK   OK   OK   OK   OK   OK
+
+   S1: S1 no term has log*E1
+   S2: S2 log args rational, R-free
+   S3: S3 rates rational
+   S4: S4 exp rate of E1 terms = +- a_d
+   S5: S5 E1 sector actions = {a_c, mu}
+   S6: S6 sum_lam P_(c,lam) = 0 (cut cancellation)
+   S7: S7 coeffs in Q(g)
+   S8: S8 E1 rates = {a_c-+a_d, mu-+a_d}
+   S9: S9 leading sector E_1-free (terminates)
+   S10: S10 all logs in leading sector
+
+==============================================================================
+[C] BOREL SINGULARITY TABLE
+==============================================================================
+  For a sector at action A, the divergent piece is P(R) e^{-cR} E_1(lam R) with
+  c + lam = A, so phi_A ~ P(R) sum_n (-1)^n n!/(lam R)^{n+1}: local Borel transform
+  singular at xi = -lam, i.e. GLOBAL position zeta = A - lam = c.
+
+  quartet                                   A      lam   xi_sing  zeta_glob   = a_d?               type
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1            3        2        -2          1      yes pole/log, R-powers -3..0
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1            3        4        -4         -1      yes pole/log, R-powers -3..0
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1            6        5        -5          1      yes pole/log, R-powers -3..0
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1            6        7        -7         -1      yes pole/log, R-powers -3..0
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1          3/2      1/2      -1/2          1      yes pole/log, R-powers -4..0
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1          3/2      5/2      -5/2         -1      yes pole/log, R-powers -4..0
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1          9/2      7/2      -7/2          1      yes pole/log, R-powers -4..0
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1          9/2     11/2     -11/2         -1      yes pole/log, R-powers -4..0
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1            3        2        -2          1      yes pole/log, R-powers -3..0
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1            3        4        -4         -1      yes pole/log, R-powers -3..0
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1            6        5        -5          1      yes pole/log, R-powers -3..0
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1            6        7        -7         -1      yes pole/log, R-powers -3..0
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2          3/2      1/2      -1/2          1      yes pole/log, R-powers -5..0
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2          3/2      5/2      -5/2         -1      yes pole/log, R-powers -5..0
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2          9/2      7/2      -7/2          1      yes pole/log, R-powers -5..0
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2          9/2     11/2     -11/2         -1      yes pole/log, R-powers -5..0
+  (3d0 3d0|1s   1s_B)  ZA=3 ZB=1            3        2        -2          1      yes pole/log, R-powers -5..0
+  (3d0 3d0|1s   1s_B)  ZA=3 ZB=1            3        4        -4         -1      yes pole/log, R-powers -5..0
+  (3d0 3d0|1s   1s_B)  ZA=3 ZB=1            5        4        -4          1      yes pole/log, R-powers -5..0
+  (3d0 3d0|1s   1s_B)  ZA=3 ZB=1            5        6        -6         -1      yes pole/log, R-powers -5..0
+  (2p0 2p0|1s   2s_B)  ZA=4 ZB=3            4      5/2      -5/2        3/2      yes pole/log, R-powers -3..1
+  (2p0 2p0|1s   2s_B)  ZA=4 ZB=3            4     11/2     -11/2       -3/2      yes pole/log, R-powers -3..1
+  (2p0 2p0|1s   2s_B)  ZA=4 ZB=3            8     13/2     -13/2        3/2      yes pole/log, R-powers -3..1
+  (2p0 2p0|1s   2s_B)  ZA=4 ZB=3            8     19/2     -19/2       -3/2      yes pole/log, R-powers -3..1
+  (2p0 2p0|1s   1s_B)  ZA=2 ZB=1            2        1        -1          1      yes pole/log, R-powers -3..0
+  (2p0 2p0|1s   1s_B)  ZA=2 ZB=1            2        3        -3         -1      yes pole/log, R-powers -3..0
+  (2p0 2p0|1s   1s_B)  ZA=2 ZB=1            4        3        -3          1      yes pole/log, R-powers -3..0
+  (2p0 2p0|1s   1s_B)  ZA=2 ZB=1            4        5        -5         -1      yes pole/log, R-powers -3..0
+  (2p0 2p0|2s   1s_B)  ZA=5 ZB=2          5/2      1/2      -1/2          2      yes pole/log, R-powers -3..0
+  (2p0 2p0|2s   1s_B)  ZA=5 ZB=2          5/2      9/2      -9/2         -2      yes pole/log, R-powers -3..0
+  (2p0 2p0|2s   1s_B)  ZA=5 ZB=2         15/2     11/2     -11/2          2      yes pole/log, R-powers -3..0
+  (2p0 2p0|2s   1s_B)  ZA=5 ZB=2         15/2     19/2     -19/2         -2      yes pole/log, R-powers -3..0
+  (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1          3/2      1/2      -1/2          1      yes pole/log, R-powers -6..0
+  (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1          3/2      5/2      -5/2         -1      yes pole/log, R-powers -6..0
+  (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1          7/2      5/2      -5/2          1      yes pole/log, R-powers -6..0
+  (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1          7/2      9/2      -9/2         -1      yes pole/log, R-powers -6..0
+
+==============================================================================
+[D] STOKES CONSTANTS -- two independent numeric routes + PSLQ
+==============================================================================
+  Convention: S_A := 2 pi i * p0 , p0 = lim_N a_N lam_min^N /((-1)^{N-1}(N-1)!)
+  where a_N are the coefficients of phi_A and lam_min = A - a_d is the
+  smallest Borel action in that sector.
+
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1   sector A=3, lam_min=2
+     D1 blind large-order p0 = 166.27687752661222017863484878456
+     D0 exact from closed form = 96*sqrt(3) = 166.27687752661222017863484878456
+     agreement (relative)      = 6.4923e-81   [un-extrapolated u_N = 159.574484988]
+     PSLQ [p0, 1, g=sqrt(3)] -> [1, 0, -96]
+     => S_A = 2 pi i * (96) * sqrt(3)   ALGEBRAIC
+
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1   sector A=6, lam_min=5
+     D1 blind large-order p0 = -166.27687752661222017863484878456
+     D0 exact from closed form = -96*sqrt(3) = -166.27687752661222017863484878456
+     agreement (relative)      = 6.2856e-36   [un-extrapolated u_N = -149.934780847]
+     PSLQ [p0, 1, g=sqrt(3)] -> [1, 0, 96]
+     => S_A = 2 pi i * (-96) * sqrt(3)   ALGEBRAIC
+
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1   sector A=3/2, lam_min=1/2
+     D1 blind large-order p0 = -31.690273547257366645427362716507
+     D0 exact from closed form = -207*sqrt(6)/16 = -31.690273547257366645427362716507
+     agreement (relative)      = 0.0   [un-extrapolated u_N = -31.1924835814]
+     PSLQ [p0, 1, g=sqrt(6)] -> [16, 0, 207]
+     => S_A = 2 pi i * (-207/16) * sqrt(6)   ALGEBRAIC
+
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1   sector A=9/2, lam_min=7/2
+     D1 blind large-order p0 = 31.690273547257366645427362716507
+     D0 exact from closed form = 207*sqrt(6)/16 = 31.690273547257366645427362716507
+     agreement (relative)      = 2.7135e-50   [un-extrapolated u_N = 28.3550759501]
+     PSLQ [p0, 1, g=sqrt(6)] -> [16, 0, -207]
+     => S_A = 2 pi i * (207/16) * sqrt(6)   ALGEBRAIC
+
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1   sector A=3, lam_min=2
+     D1 blind large-order p0 = -83.138438763306110089317424392282
+     D0 exact from closed form = -48*sqrt(3) = -83.138438763306110089317424392282
+     agreement (relative)      = 6.4923e-81   [un-extrapolated u_N = -79.7872424941]
+     PSLQ [p0, 1, g=sqrt(3)] -> [1, 0, 48]
+     => S_A = 2 pi i * (-48) * sqrt(3)   ALGEBRAIC
+
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1   sector A=6, lam_min=5
+     D1 blind large-order p0 = 83.138438763306110089317424392282
+     D0 exact from closed form = 48*sqrt(3) = 83.138438763306110089317424392282
+     agreement (relative)      = 6.2856e-36   [un-extrapolated u_N = 74.9673904237]
+     PSLQ [p0, 1, g=sqrt(3)] -> [1, 0, -48]
+     => S_A = 2 pi i * (48) * sqrt(3)   ALGEBRAIC
+
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2   sector A=3/2, lam_min=1/2
+     D1 blind large-order p0 = 26.178921625995215924483473548419
+     D0 exact from closed form = 171*sqrt(6)/16 = 26.178921625995215924483473548419
+     agreement (relative)      = 0.0   [un-extrapolated u_N = 25.4625529354]
+     PSLQ [p0, 1, g=sqrt(6)] -> [-16, 0, 171]
+     => S_A = 2 pi i * (171/16) * sqrt(6)   ALGEBRAIC
+
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2   sector A=9/2, lam_min=7/2
+     D1 blind large-order p0 = -26.178921625995215924483473548419
+     D0 exact from closed form = -171*sqrt(6)/16 = -26.178921625995215924483473548419
+     agreement (relative)      = 3.0999e-50   [un-extrapolated u_N = -21.5125440534]
+     PSLQ [p0, 1, g=sqrt(6)] -> [16, 0, 171]
+     => S_A = 2 pi i * (-171/16) * sqrt(6)   ALGEBRAIC
+
+==============================================================================
+[D2] LATERAL DISCONTINUITY of each sector function across arg R = pi
+==============================================================================
+  Disc f_A = -2 pi i * sum_{c+lam=A} P_(c,lam)(R) e^{-cR}   (E_1 cut = -2 pi i, exact)
+  quartet                                 A     x    rel. residual
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1          3   1.3      9.11441e-50
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1          3   2.7      4.53649e-50
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1          6   1.3      8.85344e-49
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1          6   2.7      2.33462e-46
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1        3/2   1.3       6.1025e-49
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1        3/2   2.7      3.73016e-50
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1        9/2   1.3      1.12233e-49
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1        9/2   2.7      8.83057e-47
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1          3   1.3      9.34181e-49
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1          3   2.7      6.35686e-50
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1          6   1.3      1.15824e-48
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1          6   2.7      1.70228e-47
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2        3/2   1.3      3.44173e-48
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2        3/2   2.7      3.68812e-49
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2        9/2   1.3      2.20041e-50
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2        9/2   2.7      8.67334e-49
+  worst relative residual: 2.3346e-46
+
+==============================================================================
+[E] IS THE PHYSICAL ERI ITSELF CUT-FREE?  (do the algebraic Stokes constants cancel)
+==============================================================================
+  quartet                                x     |Disc F| / |F|
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1       1.3        2.35073e-49
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1       2.7        1.47066e-49
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1       1.3        2.62165e-49
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1       2.7        1.28053e-49
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1       1.3        1.14843e-49
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1       2.7        1.35796e-49
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2       1.3        2.32989e-50
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2       2.7        1.17735e-49
+
+==============================================================================
+[E2] WHERE DOES THE ln HALF OF THE SEED SET LIVE?
+==============================================================================
+  Claim under test: the whole logarithmic content is
+     L(R) = s * P_(a_d, mu-a_d)(R) * log(Lambda),
+     Lambda = (a_c-a_d)(mu+a_d) / [(a_c+a_d)(mu-a_d)]
+  = log of the multiplicative cross-ratio of the FOUR Borel actions,
+    carried by an E_1 prefactor polynomial. If true, the ln is not an
+    independent transcendental: it is a function of the Stokes data.
+
+  quartet                                  Lambda  sign  uniform   logs in leading sector   VERDICT
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1             7/10    -1     True                     True      PASS
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1            11/35    -1     True                     True      PASS
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1             7/10    -1     True                     True      PASS
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2            11/35    -1     True                     True      PASS
+  (3d0 3d0|1s   1s_B)  ZA=3 ZB=1              3/4    -1     True                     True      PASS
+  (2p0 2p0|1s   2s_B)  ZA=4 ZB=3           95/143    -1     True                     True      PASS
+  (2p0 2p0|1s   1s_B)  ZA=2 ZB=1              5/9    -1     True                     True      PASS
+  (2p0 2p0|2s   1s_B)  ZA=5 ZB=2            19/99    -1     True                     True      PASS
+  (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1             9/25    -1     True                     True      PASS
+
+  DECOY CONTROL -- the same test with the two 'minus' rates swapped for the
+  'plus' ones, Lambda_decoy = (a_c+a_d)(mu+a_d)/[(a_c-a_d)(mu-a_d)].  A test that
+  passes for a wrong Lambda would be vacuous.
+  quartet                              Lambda_decoy   VERDICT
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1               14/5 FAIL (good)
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1               55/7 FAIL (good)
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1               14/5 FAIL (good)
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2               55/7 FAIL (good)
+  (3d0 3d0|1s   1s_B)  ZA=3 ZB=1                  3 FAIL (good)
+  (2p0 2p0|1s   2s_B)  ZA=4 ZB=3             209/65 FAIL (good)
+  (2p0 2p0|1s   1s_B)  ZA=2 ZB=1                  5 FAIL (good)
+  (2p0 2p0|2s   1s_B)  ZA=5 ZB=2             171/11 FAIL (good)
+  (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1                  9 FAIL (good)
+
+  (a_c = third A-orbital rate, mu = a_c + b_A, a_d = far-centre rate;
+   the four E_1 rates are lam = a_c -+ a_d and mu -+ a_d.)
+
+==============================================================================
+[F] VALIDATION -- parsed closed form vs the independent quadrature route
+==============================================================================
+  quartet                                R            closed form             quadrature       |diff|
+  (2p0 2p0|1s   1s_B)  ZA=3 ZB=1       2.5   8.59038136299069e-02   8.59038136298874e-02     1.96e-14
+  (2p0 2p0|2p0  1s_B)  ZA=3 ZB=1       2.5   2.12476313642458e-01   2.12476313642436e-01     2.20e-14
+  (2p1 2p1|1s   1s_B)  ZA=3 ZB=1       2.5   8.37721283252980e-02   8.37721283252741e-02     2.40e-14
+  (2p1 2p1|2p1 2p1_B)  ZA=3 ZB=2       2.5   1.78898117340680e-01   1.78898117340679e-01     1.39e-15
+  (3d0 3d0|1s   1s_B)  ZA=3 ZB=1       2.5   4.28032235683338e-02   4.28032235683686e-02     3.48e-14
+  (2p0 2p0|1s   2s_B)  ZA=4 ZB=3       2.5  -1.01656010171029e-01  -1.01656010170962e-01     6.70e-14
+  (2p0 2p0|1s   1s_B)  ZA=2 ZB=1       2.5   1.04206972143216e-01   1.04206972143151e-01     6.43e-14
+  (2p0 2p0|2s   1s_B)  ZA=5 ZB=2       2.5  -9.74662664758028e-02  -9.74662664758105e-02     7.73e-15
+  (3d1 3d1|2p0  1s_B)  ZA=3 ZB=1       2.5   1.36485833664189e-01   1.36485833664660e-01     4.71e-13

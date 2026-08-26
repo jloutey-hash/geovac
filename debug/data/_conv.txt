@@ -1,0 +1,25 @@
+GATE 2/3 REVISITED -- reference engines use x-quadrature for 1/r12 (~1/nx).
+If this engine is the more accurate one, the references must CONVERGE TO it
+as their nx grows.  If they converge somewhere else, this engine is wrong.
+
+He no geminal, ns=3, gamma=0.7:   this engine = -2.877359033
+      nx    ctf12 engine   diff vs mine
+     128    -2.877398424      -3.94e-05
+     400    -2.877371166      -1.21e-05
+    1200    -2.877363081      -4.05e-06
+    3600    -2.877360383      -1.35e-06
+
+He with geminal, ns=3, gamma=0.4:   this engine = -2.903386736
+      nx    ctf12 engine   diff vs mine
+     128    -2.903409466      -2.27e-05
+     400    -2.903393792      -7.06e-06
+    1200    -2.903389090      -2.35e-06
+    3600    -2.903387521      -7.85e-07
+
+GATE 2b REVISITED -- N=3 Li vs geovac module (same x-quadrature convention)
+  this engine = -6.868094682
+      nx   geovac module   diff vs mine
+     128    -6.868163454      -6.88e-05
+     400    -6.868113096      -1.84e-05
+    1200    -6.868099121      -4.44e-06
+    3600    -6.868094459       2.23e-07

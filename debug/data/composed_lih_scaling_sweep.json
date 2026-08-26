@@ -9,7 +9,7 @@
       "N_pauli_eri": 2,
       "ERI_density_total": 0.037037037037037035,
       "n_pk_nonzero": 1,
-      "wall_time_s": 0.0013560000224970281
+      "wall_time_s": 0.003323999932035804
     },
     {
       "max_n": 2,
@@ -20,7 +20,7 @@
       "N_pauli_eri": 298,
       "ERI_density_total": 0.003851851851851852,
       "n_pk_nonzero": 7,
-      "wall_time_s": 0.11607839999487624
+      "wall_time_s": 0.11674349987879395
     },
     {
       "max_n": 3,
@@ -31,25 +31,14 @@
       "N_pauli_eri": 7769,
       "ERI_density_total": 0.0014384438582689312,
       "n_pk_nonzero": 26,
-      "wall_time_s": 7.40887450001901
-    },
-    {
-      "max_n": 4,
-      "M": 90,
-      "Q": 180,
-      "N_pauli": 92890,
-      "N_pauli_h1": 261,
-      "N_pauli_eri": 92629,
-      "ERI_density_total": 0.0007784179240969364,
-      "n_pk_nonzero": 70,
-      "wall_time_s": 174.80953039997257
+      "wall_time_s": 7.188283399911597
     }
   ],
   "fit": {
-    "alpha": 2.708475121177212,
-    "a": 0.05347213709407901,
-    "R_squared": 0.9916288896809984,
-    "formula": "N_pauli = 0.05 * Q^2.71"
+    "alpha": 2.5386185099920713,
+    "a": 0.08335629307965292,
+    "R_squared": 0.9922622975172282,
+    "formula": "N_pauli = 0.08 * Q^2.54"
   },
   "he_single_geometry": {
     "2": {

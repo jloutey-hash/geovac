@@ -1,0 +1,43 @@
+{
+  "R": 3.015,
+  "max_n": 2,
+  "M": 15,
+  "eri_sym": {
+    "pq_swap  (pq|rs)=(qp|rs)": 0.0,
+    "rs_swap  (pq|rs)=(pq|sr)": 0.0,
+    "bra-ket  (pq|rs)=(rs|pq)": 0.0,
+    "max|eri|": 1.875
+  },
+  "results": {
+    "faithful(lib-sign)": {
+      "E": -15.209580361565452,
+      "residual": 4.29578256012685e-09,
+      "n_iter": 16,
+      "n_sigma": 20,
+      "t_sigma_total": 0.022359000402502716,
+      "t_sigma_avg": 0.0011179500201251359,
+      "n_det": 11025,
+      "wall_s": 0.03334389999508858,
+      "converged": true,
+      "t_total": 0.03617660002782941
+    },
+    "corrected": {
+      "E": -15.205449637949624,
+      "residual": 4.433300633968501e-09,
+      "n_iter": 16,
+      "n_sigma": 20,
+      "t_sigma_total": 0.023936300072818995,
+      "t_sigma_avg": 0.0011968150036409497,
+      "n_det": 11025,
+      "wall_s": 0.03518410003744066,
+      "converged": true,
+      "t_total": 0.03791579999960959
+    },
+    "library": {
+      "E": -15.209580361565454,
+      "n_det": 11025,
+      "wall_s": 12.579270799993537,
+      "delta_vs_faithful": 1.7763568394002505e-15
+    }
+  }
+}

@@ -1,0 +1,81 @@
+  ok   paper_29_ramanujan_hopf
+  ok   paper_32_spectral_triple  [2 font warn]
+  ok   paper_38_su2_propinquity_convergence
+  ok   paper_39_tensor_propinquity_convergence
+  ok   paper_40_unified_propinquity_convergence
+  ok   paper_42_modular_hamiltonian_four_witness  [6 font warn]
+  ok   paper_43_lorentzian_extension
+  ok   paper_44_lorentzian_operator_system
+  ok   paper_45_lorentzian_propinquity
+  ok   paper_46_strong_form_lorentzian_propinquity
+  ok   paper_47_two_rate_hybrid_convergence
+  ok   paper_48_krein_ms_bridge
+  ok   paper_49_oslpls_strong_form_bridge
+  ok   paper_50_cft3_partition_function
+  ok   paper_52_category_iii_correspondence
+  ok   paper_53_disk_propinquity
+  ok   Paper_8_Bond_Sphere_Sturmian
+  FAIL paper_11_prolate_spheroidal
+       - undefined ref(s): fig:pes
+  ok   paper_12_algebraic_vee
+  FAIL paper_13_hyperspherical
+       - undefined ref(s): sec:coupled_channel, sec:dboc, sec:liouville
+       - undefined citation(s): paper15
+  FAIL paper_15_level4_geometry
+       - undefined citation(s): loutey_paper11, loutey_paper13
+  FAIL paper_17_composed_geometries
+       - undefined ref(s): sec:conv_w1e_cross_domain_wall, sec:conv_w1e_f4_f6_refinement, sec:w1c_residual, sec:w1e_refinement_f4_f6, sec:w1e_schmidt_core_correlation
+       - undefined citation(s): Note1
+  FAIL paper_19_coupled_composition
+       - undefined citation(s): Note1
+  ok   paper_58_abelian_residue
+  ok   paper_59_elliptic_bessel_moment
+  ok   paper_60_sturmian_secular_quantum
+  ok   paper_fci_atoms
+  ok   paper_fci_molecules
+  ok   Paper_0_Geometric_Packing
+  ok   Paper_7_Dimensionless_Vacuum
+  FAIL paper_18_exchange_constants  [2 font warn]
+       - undefined ref(s): sec:tensor_product_verification, thm:T9
+       - undefined citation(s): paper7
+  ok   paper_1_spectrum
+  FAIL paper_22_angular_sparsity
+       - undefined ref(s): sec:ell_parity_tapering, sec:gaunt_parity_protection, sec:spinor_composed, sec:taxonomy, sec:theorem, sec:universal_partition, tab:spinor_resource
+  FAIL paper_24_bargmann_segal
+       - undefined citation(s): Note1
+  ok   paper_31_universal_coulomb_partition  [2 font warn]
+  ok   paper_54_tensor_product_two_body
+  ok   paper_55_periods_of_geovac
+  ok   paper_56_tannakian_substrate  [3 font warn]
+  ok   paper_57_forced_free_seam
+  ok   paper_14_qubit_encoding
+  ok   paper_16_periodicity
+  ok   paper_20_resource_benchmarks
+  ok   paper_23_nuclear_shell
+  FAIL paper_25_hopf_gauge_structure
+       - undefined citation(s): Paper16
+  ok   paper_28_qed_s3
+  ok   paper_2_alpha
+  ok   paper_30_su2_wilson
+  FAIL paper_33_qed_selection_rules
+       - undefined ref(s): prop:reality
+  ok   paper_36_bound_state_qed  [2 font warn]
+  ok   paper_41_rule_b_wilson_u1
+  ok   paper_51_gravity_arc
+  ok   paper_26_entanglement
+  FAIL paper_27_entropy_projection  [2 font warn]
+       - undefined citation(s): GeoVac_Paper19
+  FAIL paper_34_projection_taxonomy  [3 font warn]
+       - undefined ref(s): sec:curvature_coefficients, sec:layer2_d, sec:matches, sec:proj_fock_conformal, sec:proj_pk, sec:proj_spinor_lift, sec:proj_wigner3j, sec:w1c_residual, sec:w1e_refinement_f4_f6, tab:catalog_off
+  FAIL paper_35_time_as_projection
+       - undefined ref(s): sec:projection_inventory
+  ok   geovac_field_guide
+  ok   group1_operator_algebras_synthesis
+  ok   group2_quantum_chemistry_synthesis
+  ok   group3_foundations_synthesis
+  ok   group4_quantum_computing_synthesis
+  ok   group5_qed_gauge_synthesis
+  FAIL group6_precision_observations_synthesis
+       - undefined citation(s): Note1
+
+RESULT: FAIL (14 document(s) with compile/reference defects)

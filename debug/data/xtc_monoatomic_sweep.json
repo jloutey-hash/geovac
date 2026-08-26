@@ -1,0 +1,707 @@
+{
+  "prediction": {
+    "spherical_classes_zero_fillin": true,
+    "p_open_pattern_lmax_1_2_3": [
+      0,
+      4,
+      96
+    ],
+    "d_open_has_L4_multipole": true,
+    "m_filling_independent": true,
+    "core_support_invariant": true
+  },
+  "classes": {
+    "SPHERICAL(s2)": {
+      "label": "SPHERICAL(s2)",
+      "refmult": [
+        [
+          0,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 559,
+          "n_fill": 0,
+          "l3_density": 0.0852,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 3972,
+          "n_fill": 0,
+          "l3_density": 0.0606,
+          "coul_density": 0.0606
+        }
+      }
+    },
+    "SPHERICAL(p3hs)": {
+      "label": "SPHERICAL(p3hs)",
+      "refmult": [
+        [
+          0,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 559,
+          "n_fill": 0,
+          "l3_density": 0.0852,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 3972,
+          "n_fill": 0,
+          "l3_density": 0.0606,
+          "coul_density": 0.0606
+        }
+      }
+    },
+    "SPHERICAL(d5hs)": {
+      "label": "SPHERICAL(d5hs)",
+      "refmult": [
+        [
+          0,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 559,
+          "n_fill": 0,
+          "l3_density": 0.0852,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 3972,
+          "n_fill": 0,
+          "l3_density": 0.0606,
+          "coul_density": 0.0606
+        }
+      }
+    },
+    "P-OPEN(p2)": {
+      "label": "P-OPEN(p2)",
+      "refmult": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 563,
+          "n_fill": 4,
+          "l3_density": 0.0858,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 4068,
+          "n_fill": 96,
+          "l3_density": 0.0621,
+          "coul_density": 0.0606
+        }
+      }
+    },
+    "P-OPEN(p4)": {
+      "label": "P-OPEN(p4)",
+      "refmult": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 563,
+          "n_fill": 4,
+          "l3_density": 0.0858,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 4068,
+          "n_fill": 96,
+          "l3_density": 0.0621,
+          "coul_density": 0.0606
+        }
+      }
+    },
+    "D-OPEN(d2)": {
+      "label": "D-OPEN(d2)",
+      "refmult": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 563,
+          "n_fill": 4,
+          "l3_density": 0.0858,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 4068,
+          "n_fill": 96,
+          "l3_density": 0.0621,
+          "coul_density": 0.0606
+        }
+      }
+    },
+    "D-OPEN(d1)": {
+      "label": "D-OPEN(d1)",
+      "refmult": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 563,
+          "n_fill": 4,
+          "l3_density": 0.0858,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 4068,
+          "n_fill": 96,
+          "l3_density": 0.0621,
+          "coul_density": 0.0606
+        }
+      }
+    },
+    "D-OPEN(d8)": {
+      "label": "D-OPEN(d8)",
+      "refmult": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "rows": {
+        "1": {
+          "n_coulomb": 38,
+          "n_l3": 38,
+          "n_fill": 0,
+          "l3_density": 0.1484,
+          "coul_density": 0.1484
+        },
+        "2": {
+          "n_coulomb": 559,
+          "n_l3": 563,
+          "n_fill": 4,
+          "l3_density": 0.0858,
+          "coul_density": 0.0852
+        },
+        "3": {
+          "n_coulomb": 3972,
+          "n_l3": 4068,
+          "n_fill": 96,
+          "l3_density": 0.0621,
+          "coul_density": 0.0606
+        }
+      }
+    }
+  },
+  "per_atom": {
+    "1": {
+      "sym": "H",
+      "l": 0,
+      "k": 1,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "2": {
+      "sym": "He",
+      "l": 0,
+      "k": 2,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "3": {
+      "sym": "Li",
+      "l": 0,
+      "k": 1,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "4": {
+      "sym": "Be",
+      "l": 0,
+      "k": 2,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "5": {
+      "sym": "B",
+      "l": 1,
+      "k": 1,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "6": {
+      "sym": "C",
+      "l": 1,
+      "k": 2,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "7": {
+      "sym": "N",
+      "l": 1,
+      "k": 3,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "8": {
+      "sym": "O",
+      "l": 1,
+      "k": 4,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "9": {
+      "sym": "F",
+      "l": 1,
+      "k": 5,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "10": {
+      "sym": "Ne",
+      "l": 1,
+      "k": 6,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "11": {
+      "sym": "Na",
+      "l": 0,
+      "k": 1,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "12": {
+      "sym": "Mg",
+      "l": 0,
+      "k": 2,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "13": {
+      "sym": "Al",
+      "l": 1,
+      "k": 1,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "14": {
+      "sym": "Si",
+      "l": 1,
+      "k": 2,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "15": {
+      "sym": "P",
+      "l": 1,
+      "k": 3,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "16": {
+      "sym": "S",
+      "l": 1,
+      "k": 4,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "17": {
+      "sym": "Cl",
+      "l": 1,
+      "k": 5,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "18": {
+      "sym": "Ar",
+      "l": 1,
+      "k": 6,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "19": {
+      "sym": "K",
+      "l": 0,
+      "k": 1,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "20": {
+      "sym": "Ca",
+      "l": 0,
+      "k": 2,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "21": {
+      "sym": "Sc",
+      "l": 2,
+      "k": 1,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "22": {
+      "sym": "Ti",
+      "l": 2,
+      "k": 2,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "23": {
+      "sym": "V",
+      "l": 2,
+      "k": 3,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "24": {
+      "sym": "Cr",
+      "l": 2,
+      "k": 5,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "25": {
+      "sym": "Mn",
+      "l": 2,
+      "k": 5,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "26": {
+      "sym": "Fe",
+      "l": 2,
+      "k": 6,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "27": {
+      "sym": "Co",
+      "l": 2,
+      "k": 7,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "28": {
+      "sym": "Ni",
+      "l": 2,
+      "k": 8,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "29": {
+      "sym": "Cu",
+      "l": 2,
+      "k": 10,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "30": {
+      "sym": "Zn",
+      "l": 2,
+      "k": 10,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "31": {
+      "sym": "Ga",
+      "l": 1,
+      "k": 1,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "32": {
+      "sym": "Ge",
+      "l": 1,
+      "k": 2,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "33": {
+      "sym": "As",
+      "l": 1,
+      "k": 3,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "34": {
+      "sym": "Se",
+      "l": 1,
+      "k": 4,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "35": {
+      "sym": "Br",
+      "l": 1,
+      "k": 5,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "36": {
+      "sym": "Kr",
+      "l": 1,
+      "k": 6,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "37": {
+      "sym": "Rb",
+      "l": 0,
+      "k": 1,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "38": {
+      "sym": "Sr",
+      "l": 0,
+      "k": 2,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "39": {
+      "sym": "Y",
+      "l": 2,
+      "k": 1,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "40": {
+      "sym": "Zr",
+      "l": 2,
+      "k": 2,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "41": {
+      "sym": "Nb",
+      "l": 2,
+      "k": 4,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "42": {
+      "sym": "Mo",
+      "l": 2,
+      "k": 5,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "43": {
+      "sym": "Tc",
+      "l": 2,
+      "k": 5,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "44": {
+      "sym": "Ru",
+      "l": 2,
+      "k": 7,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "45": {
+      "sym": "Rh",
+      "l": 2,
+      "k": 8,
+      "cls": "D-OPEN",
+      "fill_spdf": 96
+    },
+    "46": {
+      "sym": "Pd",
+      "l": 2,
+      "k": 10,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "47": {
+      "sym": "Ag",
+      "l": 2,
+      "k": 10,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "48": {
+      "sym": "Cd",
+      "l": 2,
+      "k": 10,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "49": {
+      "sym": "In",
+      "l": 1,
+      "k": 1,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "50": {
+      "sym": "Sn",
+      "l": 1,
+      "k": 2,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "51": {
+      "sym": "Sb",
+      "l": 1,
+      "k": 3,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "52": {
+      "sym": "Te",
+      "l": 1,
+      "k": 4,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "53": {
+      "sym": "I",
+      "l": 1,
+      "k": 5,
+      "cls": "P-OPEN",
+      "fill_spdf": 96
+    },
+    "54": {
+      "sym": "Xe",
+      "l": 1,
+      "k": 6,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "55": {
+      "sym": "Cs",
+      "l": 0,
+      "k": 1,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    },
+    "56": {
+      "sym": "Ba",
+      "l": 0,
+      "k": 2,
+      "cls": "SPHERICAL",
+      "fill_spdf": 0
+    }
+  },
+  "fill_by_class": {
+    "SPHERICAL": 0,
+    "P-OPEN": 96,
+    "D-OPEN": 96
+  },
+  "class_counts": {
+    "SPHERICAL": 29,
+    "P-OPEN": 16,
+    "D-OPEN": 11
+  }
+}

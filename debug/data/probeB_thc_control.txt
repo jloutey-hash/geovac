@@ -1,0 +1,6 @@
+Probe B control -- momentum grid vs finite-rank DF, at grid g5
+system n_orb  M nodes  DF rank   lam2_std   lam2_DF   lam2_momentum   DF/std  mom/std   mom/DF
+     H2     2    25134        3    2.34521   2.86549       2.83823    1.222    1.210    0.990
+    LiH     3    42600        6    7.57402   6.99754       6.57712    0.924    0.868    0.940
+  H2_4o     4    25134       10    8.17858   5.58591       5.40743    0.683    0.661    0.968
+ LiH_5o     5    42600       15   16.27354  12.07350      10.47562    0.742    0.644    0.868

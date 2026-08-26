@@ -1,0 +1,234 @@
+{
+  "system": "H2",
+  "basis": "1s on each nucleus, hydrogenic a = zeta",
+  "geometries": [
+    {
+      "R": "7/5",
+      "zeta": "1",
+      "tau_terminates_at": 2,
+      "E_total_90": "-1.10655660609135850801940122475993772281832890689690719549979",
+      "E_electronic_90": "-1.82084232037707279373368693904565200853261462118262148121407",
+      "V_NN_90": "0.714285714285714285714285714285714285714285714285714285714286",
+      "E_total_60": "-1.106556606091358508019401224759937722818328906896907195",
+      "two_precision_gap": "5.96e-85",
+      "digits_certified": 84,
+      "one_electron": [
+        {
+          "name": "S_AA",
+          "tag": "elementary {exp}",
+          "value_50": "1.0000000000000000000000000000000000000000000000000",
+          "dev_literature": null,
+          "note": "overlap, one-center"
+        },
+        {
+          "name": "S_AB",
+          "tag": "elementary {exp}",
+          "value_50": "0.75294272990170510958970965229243717295627979068390",
+          "dev_literature": "2.85e-61",
+          "note": "overlap, two-center"
+        },
+        {
+          "name": "T_AA",
+          "tag": "elementary {exp}",
+          "value_50": "0.50000000000000000000000000000000000000000000000000",
+          "dev_literature": "0.0",
+          "note": "kinetic, one-center"
+        },
+        {
+          "name": "T_AB",
+          "tag": "elementary {exp}",
+          "value_50": "0.21536134850900298986081214945482373287614116283753",
+          "dev_literature": "3.02e-61",
+          "note": "kinetic, two-center"
+        },
+        {
+          "name": "V^A_AA",
+          "tag": "elementary {exp}",
+          "value_50": "1.0000000000000000000000000000000000000000000000000",
+          "dev_literature": "0.0",
+          "note": "<A|1/r_A|A>"
+        },
+        {
+          "name": "V^B_AA",
+          "tag": "elementary {exp}",
+          "value_50": "0.61003989264248348857893476311324420032496535654317",
+          "dev_literature": "5.23e-61",
+          "note": "<A|1/r_B|A>"
+        },
+        {
+          "name": "V^A_AB",
+          "tag": "elementary {exp}",
+          "value_50": "0.59183271345985554465566697560104231935428105817948",
+          "dev_literature": "5.55e-62",
+          "note": "<A|1/r_A|B>"
+        },
+        {
+          "name": "V^B_AB",
+          "tag": "elementary {exp}",
+          "value_50": "0.59183271345985554465566697560104231935428105817948",
+          "dev_literature": "5.55e-62",
+          "note": "<A|1/r_B|B> (= V^A_AB by symmetry)"
+        }
+      ],
+      "two_electron": [
+        {
+          "quartet": "(00|00)",
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "0.62500000000000000000000000000000000000000000000000",
+          "dev_literature": "0.0",
+          "literature": "one-center 5 zeta/8"
+        },
+        {
+          "quartet": "(00|01)",
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.42588266110507069323712000634402930462764757094534",
+          "dev_literature": "4.27e-61",
+          "literature": "hybrid, classical"
+        },
+        {
+          "quartet": "(00|11)",
+          "class": "(AA|BB)",
+          "tag": "elementary {exp}",
+          "value_50": "0.50352093294397668656160463147770775335146120766652",
+          "dev_literature": "1.76e-61",
+          "literature": "Coulomb J(R), classical"
+        },
+        {
+          "quartet": "(01|01)",
+          "class": "exchange",
+          "tag": "{exp, E_1, ln, gamma}",
+          "value_50": "0.32329114155307318238571155893367021034417091683953",
+          "dev_literature": "3.08e-61",
+          "literature": "exchange, Sugiura 1927"
+        },
+        {
+          "quartet": "(01|11)",
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.42588266110507069323712000634402930462764757094534",
+          "dev_literature": null,
+          "literature": null
+        },
+        {
+          "quartet": "(11|11)",
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "0.62500000000000000000000000000000000000000000000000",
+          "dev_literature": null,
+          "literature": null
+        }
+      ],
+      "tau_terms": [
+        [
+          0,
+          "0.322614711087814192583428590362"
+        ],
+        [
+          1,
+          "0.0"
+        ],
+        [
+          2,
+          "0.000676430465258989802282968571785"
+        ],
+        [
+          3,
+          "0.0"
+        ],
+        [
+          4,
+          "0.0"
+        ],
+        [
+          5,
+          "0.0"
+        ],
+        [
+          6,
+          "0.0"
+        ],
+        [
+          7,
+          "0.0"
+        ],
+        [
+          8,
+          "0.0"
+        ]
+      ],
+      "quadrature_residuals": [
+        {
+          "name": "S_AB",
+          "dev": "1.02e-21"
+        },
+        {
+          "name": "T_AB",
+          "dev": "9.65e-23"
+        },
+        {
+          "name": "V^B_AA",
+          "dev": "5.32e-23"
+        },
+        {
+          "name": "V^A_AB",
+          "dev": "1.03e-21"
+        },
+        {
+          "name": "V^B_AB",
+          "dev": "1.03e-21"
+        },
+        {
+          "name": "V^B_AA (Newton 1D)",
+          "dev": "5.32e-23"
+        },
+        {
+          "name": "(00|00) one-center",
+          "dev": "4.24e-21"
+        },
+        {
+          "name": "(00|11) (AA|BB)",
+          "dev": "3.36e-22"
+        },
+        {
+          "name": "(00|01) hybrid",
+          "dev": "3.43e-22"
+        },
+        {
+          "name": "(01|01) exchange (numeric Neumann)",
+          "dev": "1.12e-21"
+        }
+      ],
+      "h_route_symbolic_difference": "0"
+    },
+    {
+      "R": "8/5",
+      "zeta": "1",
+      "E_total_90": "-1.11801988007084264710802265784369208029302279502368696263590",
+      "E_electronic_90": "-1.74301988007084264710802265784369208029302279502368696263590",
+      "V_NN_90": "0.625000000000000000000000000000000000000000000000000000000000",
+      "two_precision_gap": "2.04e-85",
+      "digits_certified": 84,
+      "max_dev_literature": "4.52e-51"
+    },
+    {
+      "R": "2",
+      "zeta": "1",
+      "E_total_90": "-1.10839501208297143808711011425682943832721041282994040717852",
+      "E_electronic_90": "-1.60839501208297143808711011425682943832721041282994040717852",
+      "V_NN_90": "0.500000000000000000000000000000000000000000000000000000000000",
+      "two_precision_gap": "1.17e-85",
+      "digits_certified": 84,
+      "max_dev_literature": "3.86e-51"
+    },
+    {
+      "R": "7/5",
+      "zeta": "1197/1000",
+      "E_total_60": "-1.147764477104024919239386097295537648208217612982273137",
+      "two_precision_gap": "3.64e-65",
+      "digits_certified": 64,
+      "max_dev_literature": "4.69e-41"
+    }
+  ]
+}

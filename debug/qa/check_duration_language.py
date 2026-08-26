@@ -44,10 +44,16 @@ UNIT = r"(?:year|month|week|day)"
 # ADVISORY tier is promoted per the standing plan; the C14 debug/-refs
 # precedent). ADVISORY_PATTERNS kept as an (empty) hook for future staging.
 FAIL_PATTERNS: List[Tuple[str, str]] = [
+    ("same-day-project-events",
+     r"\bsame-day\s+(?:diagnostic\s+)?(?:sprints?|arcs?|tracks?|passes?)\b"),
     ("duration-ago",
      rf"\b{NUM}\s+{UNIT}s?\s+ago\b"),
+    # allow up to two intervening adjectives ("weeks of FOCUSED work",
+    # "months of INTENSIVE effort") -- the bare "of work" form missed the
+    # 2026-08-24 group4 completeness-critic find ("one to several weeks of
+    # focused work" in Paper 23)
     ("units-of-project-work",
-     rf"\b{UNIT}s?\s+of\s+(?:work|effort|development|iteration|iterations|"
+     rf"\b{UNIT}s?\s+of\s+(?:\w+\s+){{0,2}}(?:work|effort|development|iteration|iterations|"
      rf"research|sprints|refinement|investigation)\b"),
     ("over-the-past-unit",
      rf"\bover\s+the\s+(?:past|last)\s+(?:{NUM}\s+)?{UNIT}s?\b"),
@@ -162,8 +168,10 @@ def selftest() -> int:
         "commitment ($\\sim 6$--$12$ months estimated)",
         "NotImplementedError ($\\sim 2$-$3$ days, bundled)",
         "multi-week+ architectural lifts",
+        "Three same-day diagnostic sprints tested the wall",
     ]
     negatives = [
+        "Three diagnostic sprints in immediate succession tested the wall",
         "closed POSITIVE-THIN in May 2026",
         "corrected 2026-06-18 per the register",
         "an earlier draft reported a non-match",

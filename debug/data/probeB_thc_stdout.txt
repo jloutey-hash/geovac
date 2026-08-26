@@ -1,0 +1,146 @@
+Probe B -- analytic-momentum (SF/THC-style) vs standard block-encoding 1-norm
+Feynman t-grid: 2076 nodes (two-centre pairs only; one-centre densities use the closed-form rational FT)
+
+### H2   n_orb = 2   centres [0.7, -0.7]   dP_max = 1.4000
+    S eigenvalues [0.247057 1.752943]   cond(S) = 7.095
+    lambda_1body = sum_pq|h_pq| (Loewdin) = 2.371263
+
+    grid convergence of the reconstructed ERI tensor and of the 1-norms
+    grid  Kmax  pad   M nodes  log2 M   max|d(pq|rs)|    lam2_std    lam2_spec   lam2_shift   lam2_absCS    lam2_abs   secs
+      g0     8    1       360    8.49       2.637e-05      2.34505     2.83812     0.82161      3.08671     3.22348    0.1
+      g1    14    2       628    9.29       6.069e-07      2.34520     2.83817     0.82175      3.08691     3.22369    0.1
+      g2    22    3      1580   10.63       2.567e-08      2.34521     2.83824     0.82166      3.08682     3.22369    0.3
+      g3    34    5      3262   11.67       1.279e-09      2.34521     2.83834     0.82139      3.08655     3.22329    0.5
+      g4    55    8     10484   13.36       4.448e-11      2.34521     2.83823     0.81882      3.08398     3.21982    1.7
+      g5    90   10     25134   14.62       1.411e-12      2.34521     2.83823     0.81834      3.08350     3.21920    4.2
+     ref   220   14    128644   16.97       0.000e+00      2.34521     2.83823     0.81789      3.08305     3.21865   21.4
+
+    M(eps): smallest tested grid whose max ERI deviation <= eps
+      eps=1e-04: grid g0  M = 360  (log2 M = 8.49 -> 9 k/mu ancillas, +1 C/S bit)   lam2_spec = 2.83812   lam2_std = 2.34505
+      eps=1e-06: grid g1  M = 628  (log2 M = 9.29 -> 10 k/mu ancillas, +1 C/S bit)   lam2_spec = 2.83817   lam2_std = 2.34520
+      eps=1e-08: grid g3  M = 3262  (log2 M = 11.67 -> 12 k/mu ancillas, +1 C/S bit)   lam2_spec = 2.83834   lam2_std = 2.34521
+
+    ordering check: spec 2.83823 <= absCS 3.08305 <= abs 3.21865;  absCS >= std 2.34521  -> OK
+
+    small-k audit -- where the factorized 1-norm mass sits, and how much
+    ERI value the k < k_c band carries (i.e. what a classical handling
+    of that band would have to reproduce)
+    k_c    frac lam2_spec   frac lam2_absCS   lam2_spec(k>k_c)   max|(pq|rs)| from k<k_c
+     0.25          0.2228            0.2059            2.20580           1.5811e-01
+     0.50          0.4257            0.3970            1.63012           3.0203e-01
+     1.00          0.7100            0.6787            0.82322           5.0375e-01
+     2.00          0.9407            0.9244            0.16842           6.6597e-01
+     4.00          0.9971            0.9948            0.00811           7.0452e-01
+     8.00          1.0000            0.9999            0.00011           7.0651e-01
+    16.00          1.0000            1.0000            0.00000           7.0654e-01
+
+### LiH   n_orb = 3   centres [0.0, 0.0, 3.015]   dP_max = 3.0150
+    S eigenvalues [0.594445 1.       1.405555]   cond(S) = 2.364
+    lambda_1body = sum_pq|h_pq| (Loewdin) = 8.238590
+
+    grid convergence of the reconstructed ERI tensor and of the 1-norms
+    grid  Kmax  pad   M nodes  log2 M   max|d(pq|rs)|    lam2_std    lam2_spec   lam2_shift   lam2_absCS    lam2_abs   secs
+      g0     8    1       394    8.62       1.786e-02      7.49815     6.55099    10.55670      8.98017    10.18588    0.2
+      g1    14    2       854    9.74       8.483e-04      7.57055     6.57484    10.67715      9.05634    10.26010    0.4
+      g2    22    3      2438   11.25       4.852e-05      7.57383     6.57829    10.68304      9.06301    10.26324    1.1
+      g3    34    5      5266   12.36       2.619e-06      7.57401     6.57803    10.68268      9.06067    10.26290    2.0
+      g4    55    8     17014   14.05       9.582e-08      7.57402     6.57659    10.67753      9.05914    10.26137    5.8
+      g5    90   10     42600   15.38       3.115e-09      7.57402     6.57712    10.67678      9.05998    10.26201   13.9
+     ref   220   14    236792   17.85       0.000e+00      7.57402     6.57714    10.67602      9.06001    10.26202   71.9
+
+    M(eps): smallest tested grid whose max ERI deviation <= eps
+      eps=1e-04: grid g2  M = 2438  (log2 M = 11.25 -> 12 k/mu ancillas, +1 C/S bit)   lam2_spec = 6.57829   lam2_std = 7.57383
+      eps=1e-06: grid g4  M = 17014  (log2 M = 14.05 -> 15 k/mu ancillas, +1 C/S bit)   lam2_spec = 6.57659   lam2_std = 7.57402
+      eps=1e-08: grid g5  M = 42600  (log2 M = 15.38 -> 16 k/mu ancillas, +1 C/S bit)   lam2_spec = 6.57712   lam2_std = 7.57402
+
+    ordering check: spec 6.57714 <= absCS 9.06001 <= abs 10.26202;  absCS >= std 7.57402  -> OK
+
+    small-k audit -- where the factorized 1-norm mass sits, and how much
+    ERI value the k < k_c band carries (i.e. what a classical handling
+    of that band would have to reproduce)
+    k_c    frac lam2_spec   frac lam2_absCS   lam2_spec(k>k_c)   max|(pq|rs)| from k<k_c
+     0.25          0.2131            0.1561            5.17527           1.6046e-01
+     0.50          0.3909            0.2925            4.00613           3.1985e-01
+     1.00          0.6171            0.4859            2.51828           6.1077e-01
+     2.00          0.8231            0.7081            1.16359           1.1099e+00
+     4.00          0.9514            0.8967            0.31984           1.6390e+00
+     8.00          0.9962            0.9914            0.02470           1.8469e+00
+    16.00          0.9999            0.9998            0.00050           1.8645e+00
+
+### H2_4o   n_orb = 4   centres [0.7, 0.7, -0.7, -0.7]   dP_max = 1.4000
+    S eigenvalues [0.020053 0.293751 1.706249 1.979947]   cond(S) = 98.73
+    lambda_1body = sum_pq|h_pq| (Loewdin) = 3.475180
+
+    grid convergence of the reconstructed ERI tensor and of the 1-norms
+    grid  Kmax  pad   M nodes  log2 M   max|d(pq|rs)|    lam2_std    lam2_spec   lam2_shift   lam2_absCS    lam2_abs   secs
+      g0     8    1       360    8.49       2.575e-05      8.17847     5.40657     4.31191     11.30520    12.25261    0.6
+      g1    14    2       628    9.29       5.998e-07      8.17858     5.40679     4.31050     11.30416    12.25379    1.1
+      g2    22    3      1580   10.63       2.566e-08      8.17858     5.40575     4.31170     11.30589    12.25375    2.3
+      g3    34    5      3262   11.67       1.272e-09      8.17858     5.40744     4.31116     11.30661    12.25402    3.9
+      g4    55    8     10484   13.36       4.427e-11      8.17858     5.40734     4.31165     11.30426    12.25233   10.4
+      g5    90   10     25134   14.62       1.406e-12      8.17858     5.40743     4.31175     11.30486    12.25347   21.8
+     ref   220   14    128644   16.97       0.000e+00      8.17858     5.40737     4.31170     11.30569    12.25396   98.3
+
+    M(eps): smallest tested grid whose max ERI deviation <= eps
+      eps=1e-04: grid g0  M = 360  (log2 M = 8.49 -> 9 k/mu ancillas, +1 C/S bit)   lam2_spec = 5.40657   lam2_std = 8.17847
+      eps=1e-06: grid g1  M = 628  (log2 M = 9.29 -> 10 k/mu ancillas, +1 C/S bit)   lam2_spec = 5.40679   lam2_std = 8.17858
+      eps=1e-08: grid g3  M = 3262  (log2 M = 11.67 -> 12 k/mu ancillas, +1 C/S bit)   lam2_spec = 5.40744   lam2_std = 8.17858
+
+    ordering check: spec 5.40737 <= absCS 11.30569 <= abs 12.25396;  absCS >= std 8.17858  -> OK
+
+    small-k audit -- where the factorized 1-norm mass sits, and how much
+    ERI value the k < k_c band carries (i.e. what a classical handling
+    of that band would have to reproduce)
+    k_c    frac lam2_spec   frac lam2_absCS   lam2_spec(k>k_c)   max|(pq|rs)| from k<k_c
+     0.25          0.4145            0.2366            3.16591           1.5503e-01
+     0.50          0.6340            0.4571            1.97889           2.8606e-01
+     1.00          0.8220            0.7181            0.96227           4.6040e-01
+     2.00          0.9642            0.9377            0.19332           6.0020e-01
+     4.00          0.9983            0.9965            0.00902           6.3440e-01
+     8.00          1.0000            1.0000            0.00012           6.3625e-01
+    16.00          1.0000            1.0000            0.00000           6.3628e-01
+
+### LiH_5o   n_orb = 5   centres [0.0, 0.0, 0.0, 3.015, 3.015]   dP_max = 3.0150
+    S eigenvalues [0.183517 0.774911 1.       1.225089 1.816483]   cond(S) = 9.898
+    lambda_1body = sum_pq|h_pq| (Loewdin) = 10.847723
+
+    grid convergence of the reconstructed ERI tensor and of the 1-norms
+    grid  Kmax  pad   M nodes  log2 M   max|d(pq|rs)|    lam2_std    lam2_spec   lam2_shift   lam2_absCS    lam2_abs   secs
+      g0     8    1       394    8.62       1.828e-02     16.14754    10.44895    14.53535     20.81316    24.10986    1.9
+      g1    14    2       854    9.74       8.683e-04     16.26781    10.47487    14.65912     20.95892    24.24735    3.3
+      g2    22    3      2438   11.25       4.966e-05     16.27322    10.47777    14.66634     20.97180    24.25330    6.9
+      g3    34    5      5266   12.36       2.681e-06     16.27352    10.47659    14.66374     20.96684    24.25412   11.2
+      g4    55    8     17014   14.05       9.806e-08     16.27354    10.47539    14.66713     20.96457    24.25386   27.7
+      g5    90   10     42600   15.38       3.188e-09     16.27354    10.47562    14.66707     20.96584    24.25380   58.7
+     ref   220   14    236792   17.85       0.000e+00     16.27354    10.47561    14.66737     20.96572    24.25380  257.3
+
+    M(eps): smallest tested grid whose max ERI deviation <= eps
+      eps=1e-04: grid g2  M = 2438  (log2 M = 11.25 -> 12 k/mu ancillas, +1 C/S bit)   lam2_spec = 10.47777   lam2_std = 16.27322
+      eps=1e-06: grid g4  M = 17014  (log2 M = 14.05 -> 15 k/mu ancillas, +1 C/S bit)   lam2_spec = 10.47539   lam2_std = 16.27354
+      eps=1e-08: grid g5  M = 42600  (log2 M = 15.38 -> 16 k/mu ancillas, +1 C/S bit)   lam2_spec = 10.47562   lam2_std = 16.27354
+
+    ordering check: spec 10.47561 <= absCS 20.96572 <= abs 24.25380;  absCS >= std 16.27354  -> OK
+
+    small-k audit -- where the factorized 1-norm mass sits, and how much
+    ERI value the k < k_c band carries (i.e. what a classical handling
+    of that band would have to reproduce)
+    k_c    frac lam2_spec   frac lam2_absCS   lam2_spec(k>k_c)   max|(pq|rs)| from k<k_c
+     0.25          0.3394            0.1953            6.92044           1.6035e-01
+     0.50          0.5363            0.3687            4.85799           3.1930e-01
+     1.00          0.7179            0.5899            2.95483           6.0968e-01
+     2.00          0.8792            0.7996            1.26559           1.1099e+00
+     4.00          0.9669            0.9237            0.34725           1.6448e+00
+     8.00          0.9974            0.9932            0.02692           1.8568e+00
+    16.00          0.9999            0.9999            0.00054           1.8748e+00
+
+========================================================================================================
+HEAD-TO-HEAD (converged 'ref' grid, Loewdin-orthonormal basis; lambda = lambda_1body + lambda_2body)
+system   n_orb   lam_std      lam_THC(spec)  lam_THC(absCS)  lam_THC(abs)  lam_THC(shift)   spec/std  shift/std
+     H2      2      4.71647        5.20949        5.45431       5.58991         3.18915     1.105      0.676
+    LiH      3     15.81261       14.81573       17.29861      18.50061        18.91461     0.937      1.196
+  H2_4o      4     11.65376        8.88255       14.78087      15.72914         7.78689     0.762      0.668
+ LiH_5o      5     27.12126       21.32334       31.81344      35.10153        25.51509     0.786      0.941
+
+n_orb trend (3 points at n_orb = [2, 3, 4, 5], INDICATIVE ONLY): lam_std ~ n^1.65,  lam_THC(spec) ~ n^1.23
+
+[written] debug/data/probeB_thc_run.txt

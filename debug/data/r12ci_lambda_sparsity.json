@@ -1,0 +1,17 @@
+{
+  "B1": {
+    "max_diff_lm": 5.990522625044736e-15,
+    "max_same_lm": 0.4947334182591865,
+    "block_diagonal": true
+  },
+  "B2": {
+    "max_cross_diff_l": 0.47955973680053104,
+    "ratio_to_single_centre": 80053071629447.33
+  },
+  "B3": {
+    "max_offblock_X": 3.4255072606121865e-15,
+    "nz_gaunt": 334,
+    "nz_after_single_centre": 334,
+    "nz_after_mixing_control": 1296
+  }
+}

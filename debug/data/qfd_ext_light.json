@@ -1,0 +1,1038 @@
+{
+  "systems": {
+    "h2plus_R2.0": {
+      "key": "h2plus_R2.0",
+      "system": "H2+",
+      "R": "2",
+      "R_bohr": "2.00000000000",
+      "basis": "1s on each proton, hydrogenic a = 1",
+      "n_electrons": 1,
+      "n_orbitals": 2,
+      "homonuclear": true,
+      "note": "one electron: the 2x2 generalized secular problem (h, S); the two-electron tensor is assembled but cannot contribute.",
+      "h_two_routes_symbolically_identical": true,
+      "one_electron": [
+        {
+          "i": "H_A 1s",
+          "j": "H_A 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-0.97252654166689872955942296809013813668213189866979",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "H_A 1s",
+          "j": "H_B 1s",
+          "S_50": "0.58645289402532166487399781154743241476640336560816",
+          "h_50": "-0.69923229672249890811899739069116941760609632053281",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "H_B 1s",
+          "j": "H_B 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-0.97252654166689872955942296809013813668213189866979",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        }
+      ],
+      "one_electron_quadrature": [
+        {
+          "name": "S[H_A 1s,H_B 1s]",
+          "abs_dev": "5.78e-21"
+        },
+        {
+          "name": "T[H_A 1s,H_B 1s]",
+          "abs_dev": "1.25e-23"
+        },
+        {
+          "name": "V^A[H_A 1s,H_B 1s]",
+          "abs_dev": "1.67e-22"
+        },
+        {
+          "name": "S[H_B 1s,H_A 1s]",
+          "abs_dev": "5.78e-21"
+        },
+        {
+          "name": "T[H_B 1s,H_A 1s]",
+          "abs_dev": "1.25e-23"
+        },
+        {
+          "name": "V^A[H_B 1s,H_A 1s]",
+          "abs_dev": "1.67e-22"
+        },
+        {
+          "name": "V^B[H_A 1s,H_A 1s]",
+          "abs_dev": "1.57e-22"
+        },
+        {
+          "name": "V^A[H_B 1s,H_B 1s]",
+          "abs_dev": "1.57e-22"
+        }
+      ],
+      "literature_checks": [
+        {
+          "name": "S_AB",
+          "abs_dev": "4.79e-42"
+        },
+        {
+          "name": "T_AB",
+          "abs_dev": "1.58e-42"
+        },
+        {
+          "name": "V^B_AA",
+          "abs_dev": "4.53e-43"
+        },
+        {
+          "name": "V^A_AB",
+          "abs_dev": "6.85e-42"
+        }
+      ],
+      "two_electron": [
+        {
+          "quartet": "(H_A 1s H_A 1s|H_A 1s H_A 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "0.62500000000000000000000000000000000000000000000000"
+        },
+        {
+          "quartet": "(H_A 1s H_A 1s|H_A 1s H_B 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.30803646583383529007670489456606285742917326672279"
+        },
+        {
+          "quartet": "(H_A 1s H_A 1s|H_B 1s H_B 1s)",
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "tag": "elementary {exp}",
+          "value_50": "0.42597429282469935464622299735398331272685539363804"
+        },
+        {
+          "quartet": "(H_A 1s H_B 1s|H_A 1s H_B 1s)",
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "tag": "{exp, E_1, ln, gamma}",
+          "value_50": "0.18415645713222624873836248915987208566058612712284"
+        },
+        {
+          "quartet": "(H_A 1s H_B 1s|H_B 1s H_B 1s)",
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.30803646583383529007670489456606285742917326672279"
+        },
+        {
+          "quartet": "(H_B 1s H_B 1s|H_B 1s H_B 1s)",
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "0.62500000000000000000000000000000000000000000000000"
+        }
+      ],
+      "g_build_seconds": 1,
+      "exchange_termination": [
+        {
+          "quartet": "(H_A 1s H_B 1s|H_A 1s H_B 1s)",
+          "last_nonzero_tau": 2,
+          "verified_zero_through_tau": 8,
+          "terminates": true,
+          "per_tau": [
+            "0.183354",
+            "0.0",
+            "0.000802638",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0"
+          ]
+        }
+      ],
+      "tau_truncation_error": "0 (finite sum -- no truncation)",
+      "two_electron_quadrature": [
+        {
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "abs_dev": "4.24e-21"
+        },
+        {
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "1.68e-22"
+        },
+        {
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "abs_dev": "1.89e-22"
+        },
+        {
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "abs_dev": "1.89e-22",
+          "note": "tau-matched at tau <= 3"
+        },
+        {
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "1.68e-22"
+        },
+        {
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "abs_dev": "4.24e-21"
+        }
+      ],
+      "two_precision_gap": "1.86e-66",
+      "digits_from_linear_algebra": 40,
+      "lambda_min_S": "0.413547105975",
+      "amplification_raw": "0.0",
+      "digits_from_tau_truncation": null,
+      "digits_certified": 40,
+      "E_total": "-0.5537714953184827365067633613319649091848",
+      "E_electronic": "-1.053771495318482736506763361331964909185",
+      "V_NN": "0.5000000000000000000000000000000000000000",
+      "E_total_full": "-0.553771495318482736506763361331964909184796710992689434381012",
+      "anchor_generalized_eigenvalue_digits": 40,
+      "anchor_lcao_formula_digits": 40,
+      "anchor_note": "the one-electron FCI reproduces both the lowest generalized eigenvalue of (h, S) and the closed LCAO sigma_g expression (h_AA + h_AB)/(1 + S_AB).  Textbook minimal-basis context: the zeta = 1 LCAO H2+ curve minimizes at R = 2.49 bohr, E = -0.5648 Ha.",
+      "seconds": 461
+    },
+    "h2plus_R1.4": {
+      "key": "h2plus_R1.4",
+      "system": "H2+",
+      "R": "7/5",
+      "R_bohr": "1.40000000000",
+      "basis": "1s on each proton, hydrogenic a = 1",
+      "n_electrons": 1,
+      "n_orbitals": 2,
+      "homonuclear": true,
+      "note": "one electron: the 2x2 generalized secular problem (h, S); the two-electron tensor is assembled but cannot contribute.",
+      "h_two_routes_symbolically_identical": true,
+      "one_electron": [
+        {
+          "i": "H_A 1s",
+          "j": "H_A 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-1.1100398926424834885789347631132442003249653565432",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "H_A 1s",
+          "j": "H_B 1s",
+          "S_50": "0.75294272990170510958970965229243717295627979068390",
+          "h_50": "-0.96830407841070809945052180174726090583242095352143",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "H_B 1s",
+          "j": "H_B 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-1.1100398926424834885789347631132442003249653565432",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        }
+      ],
+      "one_electron_quadrature": [
+        {
+          "name": "S[H_A 1s,H_B 1s]",
+          "abs_dev": "1.02e-21"
+        },
+        {
+          "name": "T[H_A 1s,H_B 1s]",
+          "abs_dev": "9.65e-23"
+        },
+        {
+          "name": "V^A[H_A 1s,H_B 1s]",
+          "abs_dev": "1.03e-21"
+        },
+        {
+          "name": "S[H_B 1s,H_A 1s]",
+          "abs_dev": "1.02e-21"
+        },
+        {
+          "name": "T[H_B 1s,H_A 1s]",
+          "abs_dev": "9.65e-23"
+        },
+        {
+          "name": "V^A[H_B 1s,H_A 1s]",
+          "abs_dev": "1.03e-21"
+        },
+        {
+          "name": "V^B[H_A 1s,H_A 1s]",
+          "abs_dev": "5.32e-23"
+        },
+        {
+          "name": "V^A[H_B 1s,H_B 1s]",
+          "abs_dev": "5.32e-23"
+        }
+      ],
+      "literature_checks": [
+        {
+          "name": "S_AB",
+          "abs_dev": "3.22e-42"
+        },
+        {
+          "name": "T_AB",
+          "abs_dev": "1.35e-42"
+        },
+        {
+          "name": "V^B_AA",
+          "abs_dev": "9.13e-43"
+        },
+        {
+          "name": "V^A_AB",
+          "abs_dev": "3.14e-42"
+        }
+      ],
+      "two_electron": [
+        {
+          "quartet": "(H_A 1s H_A 1s|H_A 1s H_A 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "0.62500000000000000000000000000000000000000000000000"
+        },
+        {
+          "quartet": "(H_A 1s H_A 1s|H_A 1s H_B 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.42588266110507069323712000634402930462764757094534"
+        },
+        {
+          "quartet": "(H_A 1s H_A 1s|H_B 1s H_B 1s)",
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "tag": "elementary {exp}",
+          "value_50": "0.50352093294397668656160463147770775335146120766652"
+        },
+        {
+          "quartet": "(H_A 1s H_B 1s|H_A 1s H_B 1s)",
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "tag": "{exp, E_1, ln, gamma}",
+          "value_50": "0.32329114155307318238571155893367021034417091683953"
+        },
+        {
+          "quartet": "(H_A 1s H_B 1s|H_B 1s H_B 1s)",
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.42588266110507069323712000634402930462764757094534"
+        },
+        {
+          "quartet": "(H_B 1s H_B 1s|H_B 1s H_B 1s)",
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "0.62500000000000000000000000000000000000000000000000"
+        }
+      ],
+      "g_build_seconds": 1,
+      "exchange_termination": [
+        {
+          "quartet": "(H_A 1s H_B 1s|H_A 1s H_B 1s)",
+          "last_nonzero_tau": 2,
+          "verified_zero_through_tau": 8,
+          "terminates": true,
+          "per_tau": [
+            "0.322615",
+            "0.0",
+            "0.000676430",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0"
+          ]
+        }
+      ],
+      "tau_truncation_error": "0 (finite sum -- no truncation)",
+      "two_electron_quadrature": [
+        {
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "abs_dev": "4.24e-21"
+        },
+        {
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "3.43e-22"
+        },
+        {
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "abs_dev": "3.36e-22"
+        },
+        {
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "abs_dev": "1.12e-21",
+          "note": "tau-matched at tau <= 3"
+        },
+        {
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "3.43e-22"
+        },
+        {
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "abs_dev": "4.24e-21"
+        }
+      ],
+      "two_precision_gap": "1.70e-65",
+      "digits_from_linear_algebra": 40,
+      "lambda_min_S": "0.247057270098",
+      "amplification_raw": "0.0",
+      "digits_from_tau_truncation": null,
+      "digits_certified": 40,
+      "E_total": "-0.4713457017330697952317131946245614997863",
+      "E_electronic": "-1.185631416018784080945998908910275785501",
+      "V_NN": "0.7142857142857142857142857142857142857143",
+      "E_total_full": "-0.471345701733069795231713194624561499786334646520543715535408",
+      "anchor_generalized_eigenvalue_digits": 40,
+      "anchor_lcao_formula_digits": 40,
+      "anchor_note": "the one-electron FCI reproduces both the lowest generalized eigenvalue of (h, S) and the closed LCAO sigma_g expression (h_AA + h_AB)/(1 + S_AB).  Textbook minimal-basis context: the zeta = 1 LCAO H2+ curve minimizes at R = 2.49 bohr, E = -0.5648 Ha.",
+      "seconds": 510
+    },
+    "hehplus": {
+      "key": "hehplus",
+      "system": "HeH+",
+      "R": "73/50",
+      "R_bohr": "1.46000000000",
+      "basis": "He 1s a=2, H 1s a=1 (hydrogenic)",
+      "n_electrons": 2,
+      "n_orbitals": 2,
+      "homonuclear": false,
+      "note": "heteronuclear: the exchange tau series does not terminate.",
+      "h_two_routes_symbolically_identical": true,
+      "one_electron": [
+        {
+          "i": "He 1s",
+          "j": "He 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-2.6771214636348045696530989619918220682871382255441",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "He 1s",
+          "j": "H 1s",
+          "S_50": "0.48457722346357732722524076186749831590222714686873",
+          "h_50": "-1.3798410316584116476387876200561806860920624724965",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "H 1s",
+          "j": "H 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-1.6881138756727728791380787438819185545798922324917",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        }
+      ],
+      "one_electron_quadrature": [
+        {
+          "name": "S[He 1s,H 1s]",
+          "abs_dev": "1.74e-22"
+        },
+        {
+          "name": "T[He 1s,H 1s]",
+          "abs_dev": "3.90e-22"
+        },
+        {
+          "name": "V^A[He 1s,H 1s]",
+          "abs_dev": "5.81e-22"
+        },
+        {
+          "name": "S[H 1s,He 1s]",
+          "abs_dev": "1.74e-22"
+        },
+        {
+          "name": "T[H 1s,He 1s]",
+          "abs_dev": "3.90e-22"
+        },
+        {
+          "name": "V^A[H 1s,He 1s]",
+          "abs_dev": "5.81e-22"
+        },
+        {
+          "name": "V^B[He 1s,He 1s]",
+          "abs_dev": "6.49e-22"
+        },
+        {
+          "name": "V^A[H 1s,H 1s]",
+          "abs_dev": "9.86e-23"
+        }
+      ],
+      "two_electron": [
+        {
+          "quartet": "(He 1s He 1s|He 1s He 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "1.2500000000000000000000000000000000000000000000000"
+        },
+        {
+          "quartet": "(He 1s He 1s|He 1s H 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.44918661357891248616645756959926008269065312604185"
+        },
+        {
+          "quartet": "(He 1s He 1s|H 1s H 1s)",
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "tag": "elementary {exp}",
+          "value_50": "0.56570039236172748674165592456866381530011259555484"
+        },
+        {
+          "quartet": "(He 1s H 1s|He 1s H 1s)",
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "tag": "{exp, E_1, ln, gamma}",
+          "value_50": "0.18991515146996734100830073259496786791254636664075"
+        },
+        {
+          "quartet": "(He 1s H 1s|H 1s H 1s)",
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.29408724384123134477448151545307380603741547980678"
+        },
+        {
+          "quartet": "(H 1s H 1s|H 1s H 1s)",
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "0.62500000000000000000000000000000000000000000000000"
+        }
+      ],
+      "g_build_seconds": 195,
+      "exchange_tau_tails": [
+        {
+          "n_quartet": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "tau_max": 16,
+          "value_40": "0.1899151514699673410083007325949678679125",
+          "last_term_abs": "1.97e-39",
+          "last_ratio": "0.000601",
+          "tail_bound": "1.19e-42",
+          "tail_terms_monotone": true,
+          "per_tau_rel": [
+            "0.964",
+            "0.0326",
+            "0.00265",
+            "0.000306",
+            "7.15e-6",
+            "7.57e-8",
+            "4.68e-10",
+            "1.91e-12",
+            "5.59e-15",
+            "1.23e-17",
+            "2.11e-20",
+            "2.91e-23",
+            "3.29e-26",
+            "3.11e-29",
+            "2.50e-32",
+            "1.73e-35",
+            "1.04e-38"
+          ]
+        }
+      ],
+      "two_electron_quadrature": [
+        {
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "abs_dev": "1.69e-21"
+        },
+        {
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "6.32e-22"
+        },
+        {
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "abs_dev": "4.70e-22"
+        },
+        {
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "abs_dev": "3.39e-21",
+          "note": "tau-matched at tau <= 3"
+        },
+        {
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "7.89e-23"
+        },
+        {
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "abs_dev": "4.24e-21"
+        }
+      ],
+      "two_precision_gap": "2.53e-65",
+      "digits_from_linear_algebra": 40,
+      "lambda_min_S": "0.515422776536",
+      "amplification_raw": "3.76420",
+      "amplification_used": 16,
+      "energy_tau_tail_bound_Ha": "1.90e-41",
+      "digits_from_tau_truncation": 41,
+      "exchange_two_precision": "1.23e-44",
+      "digits_from_exchange_arithmetic": 43,
+      "digits_certified": 40,
+      "E_total": "-2.895950902302325174310463610145323586925",
+      "E_electronic": "-4.265813916000955311296764980008337285555",
+      "V_NN": "1.369863013698630136986301369863013698630",
+      "E_total_full": "-2.89595090230232517431046361014532358692520535117779038437993",
+      "seconds": 882
+    },
+    "he2_2plus": {
+      "key": "he2_2plus",
+      "system": "He2^2+",
+      "R": "13/10",
+      "R_bohr": "1.30000000000",
+      "basis": "1s on each He, hydrogenic a = 2",
+      "n_electrons": 2,
+      "n_orbitals": 2,
+      "homonuclear": true,
+      "note": "homonuclear at equal exponent: the exchange tau series TERMINATES.",
+      "h_two_routes_symbolically_identical": true,
+      "one_electron": [
+        {
+          "i": "He_A 1s",
+          "j": "He_A 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-3.5079082585927095681464961279964769695416461719801",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "He_A 1s",
+          "j": "He_B 1s",
+          "S_50": "0.43474801114790098010645920406159016967765795201087",
+          "h_50": "-1.9390355485822098383791506185708281371955678132968",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        },
+        {
+          "i": "He_B 1s",
+          "j": "He_B 1s",
+          "S_50": "1.0000000000000000000000000000000000000000000000000",
+          "h_50": "-3.5079082585927095681464961279964769695416461719801",
+          "S_tag": "elementary {exp}",
+          "h_tag": "elementary {exp}"
+        }
+      ],
+      "one_electron_quadrature": [
+        {
+          "name": "S[He_A 1s,He_B 1s]",
+          "abs_dev": "4.91e-22"
+        },
+        {
+          "name": "T[He_A 1s,He_B 1s]",
+          "abs_dev": "6.31e-22"
+        },
+        {
+          "name": "V^A[He_A 1s,He_B 1s]",
+          "abs_dev": "7.01e-22"
+        },
+        {
+          "name": "S[He_B 1s,He_A 1s]",
+          "abs_dev": "4.91e-22"
+        },
+        {
+          "name": "T[He_B 1s,He_A 1s]",
+          "abs_dev": "6.31e-22"
+        },
+        {
+          "name": "V^A[He_B 1s,He_A 1s]",
+          "abs_dev": "7.01e-22"
+        },
+        {
+          "name": "V^B[He_A 1s,He_A 1s]",
+          "abs_dev": "1.01e-21"
+        },
+        {
+          "name": "V^A[He_B 1s,He_B 1s]",
+          "abs_dev": "1.01e-21"
+        }
+      ],
+      "two_electron": [
+        {
+          "quartet": "(He_A 1s He_A 1s|He_A 1s He_A 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "1.2500000000000000000000000000000000000000000000000"
+        },
+        {
+          "quartet": "(He_A 1s He_A 1s|He_A 1s He_B 1s)",
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.42244429907033482033926399102599908846893576870714"
+        },
+        {
+          "quartet": "(He_A 1s He_A 1s|He_B 1s He_B 1s)",
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "tag": "elementary {exp}",
+          "value_50": "0.71587144624503625181436451094495836676016289562987"
+        },
+        {
+          "quartet": "(He_A 1s He_B 1s|He_A 1s He_B 1s)",
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "tag": "{exp, E_1, ln, gamma}",
+          "value_50": "0.18986151722041994863888153759718374120272295180795"
+        },
+        {
+          "quartet": "(He_A 1s He_B 1s|He_B 1s He_B 1s)",
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "tag": "elementary {exp}",
+          "value_50": "0.42244429907033482033926399102599908846893576870714"
+        },
+        {
+          "quartet": "(He_B 1s He_B 1s|He_B 1s He_B 1s)",
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "tag": "elementary {exp}",
+          "value_50": "1.2500000000000000000000000000000000000000000000000"
+        }
+      ],
+      "g_build_seconds": 1,
+      "exchange_termination": [
+        {
+          "quartet": "(He_A 1s He_B 1s|He_A 1s He_B 1s)",
+          "last_nonzero_tau": 2,
+          "verified_zero_through_tau": 8,
+          "terminates": true,
+          "per_tau": [
+            "0.188547",
+            "0.0",
+            "0.00131413",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0"
+          ]
+        }
+      ],
+      "tau_truncation_error": "0 (finite sum -- no truncation)",
+      "two_electron_quadrature": [
+        {
+          "index": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "class": "one-center",
+          "abs_dev": "1.69e-21"
+        },
+        {
+          "index": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "2.77e-22"
+        },
+        {
+          "index": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "class": "(AA|BB)",
+          "abs_dev": "7.83e-22"
+        },
+        {
+          "index": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "class": "exchange",
+          "abs_dev": "1.66e-22",
+          "note": "tau-matched at tau <= 3"
+        },
+        {
+          "index": [
+            0,
+            1,
+            1,
+            1
+          ],
+          "class": "hybrid",
+          "abs_dev": "2.77e-22"
+        },
+        {
+          "index": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "class": "one-center",
+          "abs_dev": "1.69e-21"
+        }
+      ],
+      "two_precision_gap": "2.63e-65",
+      "digits_from_linear_algebra": 40,
+      "lambda_min_S": "0.565251988852",
+      "amplification_raw": "3.12979",
+      "digits_from_tau_truncation": null,
+      "digits_certified": 40,
+      "E_total": "-3.586503080128554308997786255254462141274",
+      "E_electronic": "-6.663426157051631232074709332177539064351",
+      "V_NN": "3.076923076923076923076923076923076923077",
+      "E_total_full": "-3.58650308012855430899778625525446214127365038259813111614041",
+      "seconds": 403
+    }
+  },
+  "meta": {
+    "dps_pair": [
+      40,
+      60
+    ],
+    "exchange_dps": 50,
+    "basis_convention": "hydrogenic, rate a = Z_orbital / n; s-type (l = 0) only",
+    "generator": "debug/qfd_table_ext.py"
+  }
+}

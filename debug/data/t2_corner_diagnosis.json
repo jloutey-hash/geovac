@@ -1,0 +1,70 @@
+{
+  "object": "T2 = (8/pi) int int_[0,1]^2 J(s,t) ds dt ; J=int_0^inf j0(k(s+t)) P(s,k)P(t,k) dk",
+  "frozen_anchor_19dig": "0.3953557659017139641",
+  "corner_orders": {
+    "(0,0)": {
+      "b_limit": 0,
+      "oscillatory": false,
+      "leading_exponent": 1.5,
+      "subleading_exponent": 2.5,
+      "log": false,
+      "singular": true,
+      "note": "measured alpha->1.4999997, d(alpha) halves geometrically => rho^{3/2}+rho^{5/2}, no log; Duffy rho=sigma^2 handles it"
+    },
+    "(1,1)": {
+      "b_limit": 2,
+      "oscillatory": true,
+      "leading_exponent": 2.0,
+      "subleading_exponent": 3.0,
+      "log": false,
+      "singular": false,
+      "note": "measured beta=3.000000 (integer powers) => ANALYTIC; leading (pi/2b*)(7/e)^2 c_s c_t"
+    },
+    "(0,1)": {
+      "b_limit": 1,
+      "oscillatory": true,
+      "leading_exponent": 2.0,
+      "subleading_exponent": 3.0,
+      "log": false,
+      "singular": false,
+      "note": "measured beta=3.000000 => ANALYTIC"
+    },
+    "(1,0)": {
+      "b_limit": 1,
+      "oscillatory": true,
+      "note": "= (0,1) by J(s,t)=J(t,s)"
+    }
+  },
+  "reframing": "The reported outer corner-convergence wall is really (a) FIBRE degradation at the 3 oscillatory corners (memo fibres ~12-19 dig there) + (b) a triangle-vs-square coverage bug in the prior split. The 3 oscillatory corners are analytic (no fractional subtraction); only (0,0) is rho^{3/2}-singular.",
+  "fibre_fix": "Jsmart: osc=b/(sqrt cs+sqrt ct); osc<=3.5 -> decay-map GL Nk=round100(600+250osc); osc>3.5 -> mpmath.quadosc. Validated >=45 dig at 18 probe points vs 3 independent fibres.",
+  "cross_validated_T2": [
+    {
+      "method": "direct GL N=24 (no split)",
+      "T2": "0.3953557694",
+      "err_vs_anchor": "3.52e-9"
+    },
+    {
+      "method": "direct GL N=40 (no split)",
+      "T2": "0.39535576600318",
+      "err_vs_anchor": "1.01e-10"
+    },
+    {
+      "method": "L-shape d=0.1 N00=28 Nrect=30",
+      "T2": "0.3953557659143649555",
+      "err_vs_anchor": "1.27e-11"
+    },
+    {
+      "method": "L-shape d=0.28 N00=44 Nrect=42",
+      "T2": "0.395355765901699240426",
+      "err_vs_anchor": "1.47e-14"
+    },
+    {
+      "method": "L-shape d=0.28 N00=32 Nrect=72",
+      "T2": "0.39535576590165026989",
+      "err_vs_anchor": "6.37e-14 (WORSE than Nrect=42 -> plateau)"
+    }
+  ],
+  "best_confirmed_digits": 13,
+  "gate": "STOP/diagnostic-win. Corners fully characterized; memo misdiagnosis corrected; coverage bug fixed; fibre solved+validated 45 dig. Anchor confirmed to ~13 digits by independent methods, then quadrature plateaus. >=40 digits needs the modular/q-series route (Paper 59 sec:modular), not more (s,t) quadrature.",
+  "plateau": "Outer product-GL plateaus ~1e-14 (non-monotone: N42 err 1.5e-14, N72 err 6.4e-14). Fibre validated to ~30 dig at contributing nodes (quadosc vs Jdecay3200), so the plateau is the OUTER quadrature (complex off-axis singularity of J near the oscillatory corners), NOT the fibre."
+}

@@ -1,0 +1,51 @@
+================================================================================================
+EXCHANGE CLASS -- STEP 1: exact term census (ordered_xi_closed, tau=0)
+================================================================================================
+         (a,b)  #terms                  sectors                   kinds@action  gam==lnR
+       (3/2,1)       8                  ['5/2']              E1,gamma,lnR,logq      True
+       (2,5/2)       8                  ['9/2']              E1,gamma,lnR,logq      True
+     (1/2,7/2)       7                    ['4']              E1,gamma,lnR,logq      True
+         (1,1)       4                    ['2']                   E1,gamma,lnR      True
+     (5/2,3/2)       8                    ['4']              E1,gamma,lnR,logq      True
+     (7/3,4/5)      10                ['47/15']              E1,gamma,lnR,logq      True
+
+  L1  every term parses as coeff*R^k*e^(-cR)*X, X in {1,E1,lnR,log q,gamma}   : PASS 6/6
+  L2  the WHOLE object sits in ONE trans-series sector (single action A=a+b)  : PASS 6/6
+  L3  coeff(gamma) == coeff(ln R) identically (the Ein bundle)                : PASS 6/6
+
+  Reduced normal form (checked as an EXACT symbolic identity, per case):
+      F = 1/(2ab R^2) * [ e^{-(a+b)R}(gamma + ln(kappa R))
+                          + e^{(a-b)R}E1(2aR) + e^{(b-a)R}E1(2bR)
+                          - e^{(a+b)R}E1(2(a+b)R) ],   kappa = 2ab/(a+b)
+
+         (a,b)      kappa  (2a)(2b)/(2A)    NF residual                   E1 rates
+       (3/2,1)        6/5            6/5              0            ['2', '3', '5']
+       (2,5/2)       20/9           20/9              0            ['4', '5', '9']
+     (1/2,7/2)        7/8            7/8              0            ['1', '7', '8']
+         (1,1)          1              1              0                 ['2', '4']
+     (5/2,3/2)       15/8           15/8              0            ['3', '5', '8']
+     (7/3,4/5)      56/47          56/47              0   ['8/5', '14/3', '94/15']
+
+  L4  reduced normal form EXACT (residual identically 0)                       : PASS 6/6
+  L5  kappa = (2a)(2b)/(2A): charge-weighted product of the other three        : PASS 6/6
+
+  DECOY CONTROLS on L5 (a wrong charge assignment MUST fail):
+    D1  (2a)(2b)(2A)          [charge +1 on 2A]    matches 0/6  -> FAIL(as required)
+    D2  (2a)(2A)/(2b)         [charges permuted]   matches 0/6  -> FAIL(as required)
+    D3  (2a+2b)/2             [additive, not multiplicative] matches 0/6  -> FAIL(as required)
+    D4  (2a)(2b)/(2A)^2       [wrong charge weight] matches 0/6  -> FAIL(as required)
+    D5  sqrt((2a)(2b))        [geometric mean]     matches 0/6  -> FAIL(as required)
+
+================================================================================================
+STEP 1b -- ordered_xi_general: does the general kernel stay inside the census?
+================================================================================================
+   (tau,sig,H1,H2,j1,j2)  #terms                    sectors   lnR?  gam==lnR    logq?
+      (0, 0, 0, 0, 0, 0)       8                    ['5/2']   True      True     True
+      (1, 0, 0, 0, 0, 0)      25                    ['5/2']   True      True     True
+      (1, 1, 1, 1, 0, 0)      26                    ['5/2']   True      True     True
+      (2, 0, 1, 0, 1, 0)      61                    ['5/2']   True      True     True
+      (2, 2, 2, 2, 0, 1)      54                    ['5/2']   True      True     True
+      (3, 1, 1, 2, 1, 1)      89                    ['5/2']   True      True     True
+
+  L6  general kernel parses inside the same census                              : PASS
+  L7  gamma/lnR bundle survives general (tau,sigma,H,j)                        : PASS

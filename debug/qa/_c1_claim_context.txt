@@ -1,0 +1,10 @@
+
+        # GENUINE C1 (v4.20.7): pi maps each generator to its REAL per-sector
+        # period scalar eta_(n,l); multiplicativity pi(x_a * x_b) = pi(x_a) *
+        # pi(x_b) is checked by evaluating the product ELEMENT x_a*x_b of
+        # Sym_Q(V) under the multiplicative extension and cross-checking it
+        # against the independently-formed product of evaluations. The two
+        # sides are distinct computations (NOT s_a*s_b - s_a*s_b), so a
+        # non-multiplicative pi would fail. Mirrors the genuine C1 in
+        # tests/test_paper56_injection_g4_periodmap.py.
+        def eta(g: 

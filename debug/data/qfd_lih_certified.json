@@ -1,0 +1,711 @@
+{
+  "system": "LiH",
+  "R": "603/200 (3.015 bohr)",
+  "basis": "s-only minimal, hydrogenic: Li1s a=3, Li2s a=1.5, H1s a=1",
+  "n_electrons": 4,
+  "fci_dim": 15,
+  "one_electron": [
+    {
+      "i": "Li1s",
+      "j": "Li1s",
+      "S_50": "1.0000000000000000000000000000000000000000000000000",
+      "h_50": "-4.8316749121665352231480967645872413187650469793302",
+      "S_tag": "elementary {exp}",
+      "h_tag": "elementary {exp}"
+    },
+    {
+      "i": "Li1s",
+      "j": "Li2s",
+      "S_50": "0.0",
+      "h_50": "-0.000011733487723040007687658740200619847399679392365771",
+      "S_tag": "elementary {exp}",
+      "h_tag": "elementary {exp}"
+    },
+    {
+      "i": "Li1s",
+      "j": "H1s",
+      "S_50": "0.079834510058954843797969148499678228216502276170525",
+      "h_50": "-0.39057024299778900989549771794800875378822049407368",
+      "S_tag": "elementary {exp}",
+      "h_tag": "elementary {exp}"
+    },
+    {
+      "i": "Li2s",
+      "j": "Li2s",
+      "S_50": "1.0000000000000000000000000000000000000000000000000",
+      "h_50": "-1.4519504787345211351676166857833284039250519289225",
+      "S_tag": "elementary {exp}",
+      "h_tag": "elementary {exp}"
+    },
+    {
+      "i": "Li2s",
+      "j": "H1s",
+      "S_50": "-0.39761977661980907642570377622904266215584864103300",
+      "h_50": "0.69181545396732252525367006859998524040535818058424",
+      "S_tag": "elementary {exp}",
+      "h_tag": "elementary {exp}"
+    },
+    {
+      "i": "H1s",
+      "j": "H1s",
+      "S_50": "1.0000000000000000000000000000000000000000000000000",
+      "h_50": "-1.4854148673391469318855171050916363591255564631959",
+      "S_tag": "elementary {exp}",
+      "h_tag": "elementary {exp}"
+    }
+  ],
+  "h_two_route_max_dev": "0.0",
+  "one_electron_quadrature": [
+    {
+      "name": "S[Li1s,H1s]",
+      "dev": "8.25e-23"
+    },
+    {
+      "name": "S[Li2s,H1s]",
+      "dev": "8.67e-23"
+    },
+    {
+      "name": "T[Li1s,H1s]",
+      "dev": "1.83e-23"
+    },
+    {
+      "name": "T[Li2s,H1s]",
+      "dev": "4.70e-23"
+    },
+    {
+      "name": "V^B[Li1s,Li1s]",
+      "dev": "7.81e-23"
+    },
+    {
+      "name": "V^B[Li1s,Li2s]",
+      "dev": "8.57e-23"
+    },
+    {
+      "name": "V^A[Li1s,H1s]",
+      "dev": "5.15e-23"
+    },
+    {
+      "name": "V^B[Li2s,H1s]",
+      "dev": "6.84e-23"
+    }
+  ],
+  "two_electron": [
+    {
+      "quartet": "(Li1s Li1s|Li1s Li1s)",
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "class": "one-center",
+      "tag": "elementary {exp}",
+      "value_50": "1.8750000000000000000000000000000000000000000000000"
+    },
+    {
+      "quartet": "(Li1s Li1s|Li1s Li2s)",
+      "index": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "class": "one-center",
+      "tag": "elementary {exp}",
+      "value_50": "0.26806510025823487065073427804909636400672756728881"
+    },
+    {
+      "quartet": "(Li1s Li1s|Li1s H1s)",
+      "index": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "0.095788971008808287493932648237249781018153572707064"
+    },
+    {
+      "quartet": "(Li1s Li1s|Li2s Li2s)",
+      "index": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "class": "one-center",
+      "tag": "elementary {exp}",
+      "value_50": "0.62962962962962962962962962962962962962962962962963"
+    },
+    {
+      "quartet": "(Li1s Li1s|Li2s H1s)",
+      "index": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "-0.17023847983496626105517568508920740528426982627252"
+    },
+    {
+      "quartet": "(Li1s Li1s|H1s H1s)",
+      "index": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "class": "(AA|BB)",
+      "tag": "elementary {exp}",
+      "value_50": "0.32787317764134696066580055870486086820859431003679"
+    },
+    {
+      "quartet": "(Li1s Li2s|Li1s Li2s)",
+      "index": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "class": "one-center",
+      "tag": "elementary {exp}",
+      "value_50": "0.065843621399176954732510288065843621399176954732510"
+    },
+    {
+      "quartet": "(Li1s Li2s|Li1s H1s)",
+      "index": [
+        0,
+        1,
+        0,
+        2
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "0.0086452154829257341270996382600141489750479936434656"
+    },
+    {
+      "quartet": "(Li1s Li2s|Li2s Li2s)",
+      "index": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "class": "one-center",
+      "tag": "elementary {exp}",
+      "value_50": "0.025744972228800876977296520063835214799206115562418"
+    },
+    {
+      "quartet": "(Li1s Li2s|Li2s H1s)",
+      "index": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "0.00045275314428051016442450937013742276109356703062060"
+    },
+    {
+      "quartet": "(Li1s Li2s|H1s H1s)",
+      "index": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "class": "(AA|BB)",
+      "tag": "elementary {exp}",
+      "value_50": "0.00077713526545940116598749189022673185760940993625631"
+    },
+    {
+      "quartet": "(Li1s H1s|Li1s H1s)",
+      "index": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "class": "exchange",
+      "tag": "{exp, E_1, ln, gamma}",
+      "value_50": "0.0061256278579598528985083662184610045155148443589039"
+    },
+    {
+      "quartet": "(Li1s H1s|Li2s Li2s)",
+      "index": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "0.044695465297618172823470148735452108100856093098004"
+    },
+    {
+      "quartet": "(Li1s H1s|Li2s H1s)",
+      "index": [
+        0,
+        2,
+        1,
+        2
+      ],
+      "class": "exchange",
+      "tag": "{exp, E_1, ln, gamma}",
+      "value_50": "-0.015064672101591093469238829491779712513833834487664"
+    },
+    {
+      "quartet": "(Li1s H1s|H1s H1s)",
+      "index": [
+        0,
+        2,
+        2,
+        2
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "0.029783469496934523407599702280953290041963086632614"
+    },
+    {
+      "quartet": "(Li2s Li2s|Li2s Li2s)",
+      "index": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "class": "one-center",
+      "tag": "elementary {exp}",
+      "value_50": "0.45117187500000000000000000000000000000000000000000"
+    },
+    {
+      "quartet": "(Li2s Li2s|Li2s H1s)",
+      "index": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "-0.15362700364422420583975049317895747922015720155087"
+    },
+    {
+      "quartet": "(Li2s Li2s|H1s H1s)",
+      "index": [
+        1,
+        1,
+        2,
+        2
+      ],
+      "class": "(AA|BB)",
+      "tag": "elementary {exp}",
+      "value_50": "0.31211896385009211829548801050366459491376819007068"
+    },
+    {
+      "quartet": "(Li2s H1s|Li2s H1s)",
+      "index": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "class": "exchange",
+      "tag": "{exp, E_1, ln, gamma}",
+      "value_50": "0.075270679094280121842020592990500421312855374079884"
+    },
+    {
+      "quartet": "(Li2s H1s|H1s H1s)",
+      "index": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "class": "hybrid",
+      "tag": "elementary {exp}",
+      "value_50": "-0.19179308299989006034299769513288406003990895940096"
+    },
+    {
+      "quartet": "(H1s H1s|H1s H1s)",
+      "index": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "class": "one-center",
+      "tag": "elementary {exp}",
+      "value_50": "0.62500000000000000000000000000000000000000000000000"
+    }
+  ],
+  "exchange_tau_tails": [
+    {
+      "n_quartet": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "tau_max": 20,
+      "value": "0.006125627857959852898508366218461004515515",
+      "last_term": "2.86e-32",
+      "relative_tail": "4.67e-30",
+      "per_tau_rel": [
+        "0.721",
+        "0.261",
+        "0.0148",
+        "0.00151",
+        "0.00143",
+        "0.000318",
+        "3.55e-5",
+        "2.51e-6",
+        "1.24e-7",
+        "4.61e-9",
+        "1.33e-10",
+        "3.08e-12",
+        "5.88e-14",
+        "9.37e-16",
+        "1.27e-17",
+        "1.48e-19",
+        "1.50e-21",
+        "1.34e-23",
+        "1.05e-25",
+        "7.40e-28",
+        "4.67e-30"
+      ]
+    },
+    {
+      "n_quartet": [
+        1,
+        1,
+        2,
+        1
+      ],
+      "tau_max": 16,
+      "value": "-0.01506467210159109346923882949177971251383",
+      "last_term": "5.20e-30",
+      "relative_tail": "3.45e-28",
+      "per_tau_rel": [
+        "1.13",
+        "0.108",
+        "0.0250",
+        "0.00115",
+        "0.000639",
+        "5.47e-5",
+        "2.09e-6",
+        "4.74e-8",
+        "7.22e-10",
+        "7.97e-12",
+        "6.69e-14",
+        "4.43e-16",
+        "2.37e-18",
+        "1.05e-20",
+        "3.93e-23",
+        "1.25e-25",
+        "3.45e-28"
+      ]
+    },
+    {
+      "n_quartet": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "tau_max": 14,
+      "value": "0.07527067909428012184202059299050042131286",
+      "last_term": "4.75e-30",
+      "relative_tail": "6.31e-29",
+      "per_tau_rel": [
+        "0.956",
+        "0.0221",
+        "0.0211",
+        "0.000544",
+        "0.000153",
+        "4.93e-6",
+        "6.43e-8",
+        "4.66e-10",
+        "2.18e-12",
+        "7.14e-15",
+        "1.74e-17",
+        "3.29e-20",
+        "4.97e-23",
+        "6.14e-26",
+        "6.31e-29"
+      ]
+    }
+  ],
+  "exchange_two_precision": "4.12e-45",
+  "E_total_45": "-7.87261979241561217317558085835659691730258908",
+  "E_electronic_45": "-8.86764466803750272043926245039639791232746470",
+  "V_NN_45": "0.995024875621890547263681592039800995024875622",
+  "E_total_30": "-7.87261979241561217317558085836",
+  "two_precision_gap": "5.65e-55",
+  "digits_from_linear_algebra": 55,
+  "digits_from_tau_truncation": 30,
+  "digits_certified": 30,
+  "g_build_seconds": 1477,
+  "two_electron_quadrature": [
+    {
+      "index": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "class": "one-center",
+      "dev": "5.08e-21"
+    },
+    {
+      "index": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "class": "one-center",
+      "dev": "1.81e-22"
+    },
+    {
+      "index": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "class": "hybrid",
+      "dev": "3.34e-23"
+    },
+    {
+      "index": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "class": "one-center",
+      "dev": "5.02e-22"
+    },
+    {
+      "index": [
+        0,
+        0,
+        1,
+        2
+      ],
+      "class": "hybrid",
+      "dev": "3.92e-23"
+    },
+    {
+      "index": [
+        0,
+        0,
+        2,
+        2
+      ],
+      "class": "(AA|BB)",
+      "dev": "3.29e-23"
+    },
+    {
+      "index": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "class": "one-center",
+      "dev": "7.28e-23"
+    },
+    {
+      "index": [
+        0,
+        1,
+        0,
+        2
+      ],
+      "class": "hybrid",
+      "dev": "3.32e-23"
+    },
+    {
+      "index": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "class": "one-center",
+      "dev": "1.70e-22"
+    },
+    {
+      "index": [
+        0,
+        1,
+        1,
+        2
+      ],
+      "class": "hybrid",
+      "dev": "7.07e-23"
+    },
+    {
+      "index": [
+        0,
+        1,
+        2,
+        2
+      ],
+      "class": "(AA|BB)",
+      "dev": "1.29e-22"
+    },
+    {
+      "index": [
+        0,
+        2,
+        0,
+        2
+      ],
+      "class": "exchange",
+      "dev": "2.18e-6"
+    },
+    {
+      "index": [
+        0,
+        2,
+        1,
+        1
+      ],
+      "class": "hybrid",
+      "dev": "2.58e-23"
+    },
+    {
+      "index": [
+        0,
+        2,
+        1,
+        2
+      ],
+      "class": "exchange",
+      "dev": "8.56e-7"
+    },
+    {
+      "index": [
+        0,
+        2,
+        2,
+        2
+      ],
+      "class": "hybrid",
+      "dev": "1.87e-23"
+    },
+    {
+      "index": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "class": "one-center",
+      "dev": "0.0"
+    },
+    {
+      "index": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "class": "hybrid",
+      "dev": "1.35e-22"
+    },
+    {
+      "index": [
+        1,
+        1,
+        2,
+        2
+      ],
+      "class": "(AA|BB)",
+      "dev": "2.16e-22"
+    },
+    {
+      "index": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "class": "exchange",
+      "dev": "3.76e-7"
+    },
+    {
+      "index": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "class": "hybrid",
+      "dev": "1.24e-22"
+    },
+    {
+      "index": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "class": "one-center",
+      "dev": "4.24e-21"
+    }
+  ],
+  "tau_tail_bound": {
+    "method": "geometric bound with the last observed ratio; ratios are measured to be monotonically decreasing (factorial convergence), so the geometric series dominates the tail",
+    "per_quartet": [
+      {
+        "n_quartet": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "tau_max": 20,
+        "last_term_abs": "2.86e-32",
+        "last_ratio": "0.00631",
+        "tail_bound": "1.82e-34"
+      },
+      {
+        "n_quartet": [
+          1,
+          1,
+          2,
+          1
+        ],
+        "tau_max": 16,
+        "last_term_abs": "5.2e-30",
+        "last_ratio": "0.00276",
+        "tail_bound": "1.44e-32"
+      },
+      {
+        "n_quartet": [
+          2,
+          1,
+          2,
+          1
+        ],
+        "tau_max": 14,
+        "last_term_abs": "4.75e-30",
+        "last_ratio": "0.00103",
+        "tail_bound": "4.89e-33"
+      }
+    ],
+    "sum_of_quartet_bounds": "1.95e-32",
+    "amplification_factor": 64,
+    "amplification_justification": "2-RDM total weight N(N-1)/2 = 6 times ||S^{-1/2}||^4 = lambda_min(S)^-2 = 2.830 -> 16.98, rounded up to 64",
+    "energy_tail_bound_Ha": "1.24e-30",
+    "digits_supported_by_tau_bound": 30
+  }
+}

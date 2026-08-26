@@ -67,8 +67,164 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "p24-entanglement-rigidity",
+        # spans group3 (P24), group4 (P23 resource counts + nuclear code) AND
+        # group6 (P27 EP-2b retraction + the group6 synthesis) -- the 2026-08-24
+        # retraction re-review found a LIVE zombie of this claim in the group6
+        # synthesis that the original group3+group4 scope never checked.
+        "scope": "group3 group4 group6",
+        "severity": "fail",
+        "retired": "2026-08-22 (FULL cert #2, code dimension): Paper 24's "
+                   "two-fermion entanglement-rigidity corollary claimed the "
+                   "closed-shell HO ground state has IDENTICALLY ZERO spatial "
+                   "1-RDM entropy for any central V(r_12), on the mechanism "
+                   "that a central potential preserves the total HO quantum "
+                   "number N_tot. Both claim and mechanism are false. The "
+                   "Moshinsky-Talmi BRACKET conserves N; the potential MATRIX "
+                   "ELEMENT does not -- a central V(r_rel) is diagonal in the "
+                   "CM quantum numbers and in l_rel but COUPLES different "
+                   "relative-n, and n - n' = (N_bra - N_ket)/2 makes the "
+                   "N-changing elements exactly the n != n' ones. They are "
+                   "large: +17.2 MeV against a -0.81 MeV diagonal for the "
+                   "Minnesota singlet. The published S = 0 came from an "
+                   "undocumented `if N_bra != N_ket: return 0.0` guard in "
+                   "geovac/nuclear/moshinsky.py. Corrected values: S = "
+                   "0.0671 / 0.0716 / 0.0833 (spatial trace-1 1-RDM, "
+                   "nats) and commutator ratio 0.74 / 0.63 / 0.67 "
+                   "at N_max = 2 / 3 / 4. The paper's own text should have "
+                   "exposed it -- it argued the Coulomb case is nontrivial "
+                   "because 1/r_12 preserves no HO-like total-quanta number, "
+                   "but 1/r_12 IS central. Retraction: Paper 24 "
+                   "sec:entanglement-rigidity.",
+        # The last two alternatives (added 2026-08-24) match the SYNTHESIS
+        # phrasing the original pattern missed. They are written to fire on the
+        # retracted TWO-BODY claim WITHOUT firing on the legitimate ONE-BODY
+        # statement ("a non-degenerate ground state of a purely one-body
+        # Hamiltonian has identically zero entropy"): "identically zero for"
+        # (two-body: "... for any central two-body potential") never appears in
+        # the one-body sentence ("... is identically zero (the ground state ...)"),
+        # and "total-quanta conservation" is the withdrawn mechanism specifically.
+        # `= 0(?![.\d])` = a BARE zero, so "S_full = 0.902" (a real nonzero value)
+        # is not a hit; "entropy is identically zero for" is the two-body-entropy
+        # claim specifically (does not match "identically zero for the diagonal
+        # kinetic term" in P23, nor the one-body "is identically zero (the ...").
+        "pattern": (r"zero\s+(von\s+Neumann\s+)?entanglement\s+entropy"
+                    r"|entanglement\s+rigidity\s+(corollary|theorem)"
+                    r"|S_?\{?\\?mathrm\{?full\}?\}?\s*=\s*0(?![.\d])"
+                    r"|preserves\s+the\s+total\s+HO\s+quantum\s+number"
+                    r"|entropy\s+is\s+identically\s+zero\s+for"
+                    r"|total-quanta\s+conservation"
+                    # the "zero-entropy rigidity"/"entropy-side rigidity/dual"
+                    # phrasing the 2026-08-24 group6 FULL cert found live in the
+                    # synthesis's "What is robust" list (does NOT match the VALID
+                    # spectral "HO rigidity theorem" -- that phrase has no
+                    # "zero-entropy"/"entropy-side" qualifier)
+                    r"|zero-entropy\s+rigidity"
+                    r"|entropy[-\s]side\s+(?:rigidity|dual)"),
+        # NB: bare "artifact" removed 2026-08-24 -- it is too broad ("projection
+        # artifact" is common non-retraction prose and false-exempted a live
+        # zombie 4 lines away in the group6 synthesis); "guard" covers the real
+        # P27 "undocumented-guard artifact" retraction discussion.
+        "exempt_if_nearby": r"RETRACTED|retracted|withdrawn|guard|"
+                            r"is false|do NOT commute|does not conserve",
+        "files": [
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex",
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+            "geovac/nuclear/*.py",
+            "tests/test_paper24_ho_entropy.py",
+        ],
+    },
+    {
+        "id": "brown-surjection-attribution",
+        "scope": "group3",
+        "severity": "fail",
+        "retired": "2026-08-22 (DELTA run, citation dimension): Paper 56 "
+                   "asserted at two loci that Brown ESTABLISHES the "
+                   "surjection U*_CM ->> G_MT(Z), and used it to flag a "
+                   "'common framing slip' in other people's work. The "
+                   "claim is in NEITHER candidate Brown paper: the cited "
+                   "ICM survey (arXiv:1407.5165) contains no mention of "
+                   "Connes, Marcolli, cosmic Galois, surjection or "
+                   "renormalisation; and Brown's actual cosmic-Galois "
+                   "paper (arXiv:1512.06409, section 0.5 Relation to "
+                   "other work) explicitly declines the connection: 'It "
+                   "is not clear if it is at all related to the groups "
+                   "defined here.' The surjection is an elementary "
+                   "comparison of two free pro-unipotent groups; the "
+                   "paper now states it as its own observation, with the "
+                   "two structural inputs sourced separately "
+                   "(Connes-Marcolli 2004; Brown 2012 Ann. Math. 175).",
+        "pattern": (r"Brown[^.\n]{0,60}establishes\s+a\s*"
+                    r"(\\emph\{)?surjection"
+                    r"|establishes\s+a\s*\n?\s*\\emph\{surjection\}"),
+        "exempt_if_nearby": r"declines|not a theorem|elementary "
+                            r"comparison|own observation|does \\emph\{not\}",
+        "files": [
+            "papers/group3_foundations/paper_56_tannakian_substrate.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "propinquity-as-achieved-metric-group3",
+        "scope": "group3",
+        "severity": "fail",
+        "retired": "2026-08-22 (FULL certifying run, synthesis "
+                   "dimension): the group3 synthesis carried 'the GeoVac "
+                   "propinquity convergence rate' and 'M1 governs "
+                   "propinquity convergence rates', the label retired for "
+                   "this result. What is established is van Suijlekom "
+                   "STATE-SPACE Gromov-Hausdorff convergence (Paper 38, "
+                   "unconditional via the translation-seminorm "
+                   "metrization); Latremoliere propinquity is a different, "
+                   "strictly stronger metric that is NOT achieved. The "
+                   "same document already used the correct label "
+                   "elsewhere. The existing propinquity entries were "
+                   "scoped group1/group5 only, so no file list covered "
+                   "group3 -- this entry closes that gap.",
+        "pattern": r"(GeoVac|governs|the)\s+propinquity\s+convergence",
+        "exempt_if_nearby": r"named\s+gap|state-space|strictly\s+stronger"
+                            r"|NOT\s+the|historical|retract|not\s+achieved",
+        "files": [
+            "papers/group3_foundations/*.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "emn-catalan-negative-attribution",
+        "scope": "group3",
+        "severity": "fail",
+        "retired": "2026-08-22 (FULL certifying run, citation dimension): "
+                   "Paper 56 asserted in four places that "
+                   "Eskandari-Murty-Nemoto 2025 (arXiv:2510.20648) PROVE "
+                   "Catalan G is NOT a period of mixed Tate motives over Q "
+                   "(or MT(Z)), and used that negative as the FORCING "
+                   "argument for adopting G_4 over Brown's G_MT(Z). The "
+                   "source establishes only the POSITIVE half. Its abstract "
+                   "reads in full: 'We first give a geometric construction "
+                   "of a 2-dimensional mixed motive over Q with the Catalan "
+                   "constant G as a period. We then use this motive to "
+                   "obtain a supply of linear forms in 1 and G. We also "
+                   "explicitly compute the coefficients of 1 and G in these "
+                   "linear forms.' No negative result is claimed; "
+                   "non-membership in MT(Q) is expected but open. The paper "
+                   "now says the level-4 choice is MOTIVATED by where G is "
+                   "known to live, not FORCED by a proven exclusion.",
+        "pattern": r"(prove[sd]?|provabl[ey])[^.]{0,80}not a period of "
+                   r"mixed Tate|prove[sd]? Catalan \$?G\$?[^.]{0,40}is not "
+                   r"a\s*\n?\s*period",
+        "exempt_if_nearby": r"expected but|open|conjectur|not proven"
+                            r"|to our knowledge",
+        "files": [
+            "papers/group3_foundations/paper_56_tannakian_substrate.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
         "id": "lorentzian-literal-identification-krein",
-        "scope": "group6",
+        "scope": "group3 group6",
         "severity": "fail",
         "retired": "2026-07-04 (group6 first-cert run): P34 III.29's pre-descope "
                    "Lorentzian claims -- 'literal identification at the Krein "
@@ -80,16 +236,25 @@ REGISTRY = [
                    "compact KMS beta=2pi circle and the Lorentzian signature is "
                    "metrically invisible at finite cutoff (Euclidean/convention). "
                    "NOTE: the Riemannian operator-system-level closure is NOT retired. "
-                   "Completeness-critic catch.",
+                   "Completeness-critic catch. SCOPE WIDENED 2026-08-24 (group3 "
+                   "re-cert): the SAME withdrawn reading survived in Paper 31 §9 "
+                   "(sec:sig_l2_verification) -- 'as literal identification ... not "
+                   "just structural correspondence' and 'the Lorentzian closure is "
+                   "complete' -- because the entry was group6-scoped and P31 (group3) "
+                   "was never gated. Added group3 scope + P31 file + two single-line "
+                   "tells of the strong reading.",
         "pattern": r"genuine\s+Lorentzian\s+(?:\\emph\{)?extension"
                    r"|literal\s+identification\s+at\s+the\s+Krein"
-                   r"|Krein-level\s+four-witness\s+Wick-rotation\s+theorem\s+closes",
+                   r"|Krein-level\s+four-witness\s+Wick-rotation\s+theorem\s+closes"
+                   r"|not\s+just\s+structural\s+correspondence"
+                   r"|Lorentzian\s+closure\s+is\s+complete",
         "exempt_if_nearby": r"withdrawn|WITHDRAWN|signature-blind|compact[- ]boost"
                             r"|compact\s+KMS|K\^?\+|descope|convention|period[- ]closure"
                             r"|Euclidean|not\s+constitute",
         "files": [
             "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
             "papers/synthesis/group6_precision_observations_synthesis.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
         ],
     },
     {

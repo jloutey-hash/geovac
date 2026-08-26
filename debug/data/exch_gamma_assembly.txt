@@ -1,0 +1,43 @@
+====================================================================================================
+EXCHANGE CLASS -- representative check: the eta half and the assembled product
+====================================================================================================
+
+A1 -- the eta half  int_{-1}^{1} eta^k P_tau(eta) e^{-qR eta} d eta,  q/R = 3/4
+
+         k      tau    elementary?        exponential rates c       R powers
+         0        0           True            ['-3/4', '3/4']           [-1]
+         0        1           True            ['-3/4', '3/4']       [-2, -1]
+         0        2           True            ['-3/4', '3/4']   [-3, -2, -1]
+         1        0           True            ['-3/4', '3/4']       [-2, -1]
+         1        1           True            ['-3/4', '3/4']   [-3, -2, -1]
+         1        2           True            ['-3/4', '3/4'] [-4, -3, -2, -1]
+         2        0           True            ['-3/4', '3/4']   [-3, -2, -1]
+         2        1           True            ['-3/4', '3/4'] [-4, -3, -2, -1]
+         2        2           True            ['-3/4', '3/4'] [-5, -4, -3, -2, -1]
+
+  A1  the eta half is ELEMENTARY (exp x rational R powers only)         : PASS
+      => it carries NO transcendental: no E_1, no log, no gamma.
+      Its only effect is to split the single xi-half sector into
+      sectors at A -+ q and to rescale coefficients by rationals.
+
+A2 -- one assembled tau term:  (eta half) x (ordered-xi half)
+
+  xi half rates (a,b) = (3/2,1); xi-half action A = 5/2; eta rate q/R = 3/4
+
+         k      tau   #sectors Borel singularity positions (global) Stokes rational?
+         0        0          2 ['-13/4', '-7/4', '-5/4', '-1/4', '1/4', '5/4', '7/4', '13/4']           True
+         0        1          2 ['-13/4', '-7/4', '-5/4', '-1/4', '1/4', '5/4', '7/4', '13/4']           True
+         0        2          2 ['-13/4', '-7/4', '-5/4', '-1/4', '1/4', '5/4', '7/4', '13/4']           True
+         1        0          2 ['-13/4', '-7/4', '-5/4', '-1/4', '1/4', '5/4', '7/4', '13/4']           True
+         1        1          2 ['-13/4', '-7/4', '-5/4', '-1/4', '1/4', '5/4', '7/4', '13/4']           True
+         1        2          2 ['-13/4', '-7/4', '-5/4', '-1/4', '1/4', '5/4', '7/4', '13/4']           True
+
+  A2  every assembled tau term keeps gamma-free Borel data and
+      Stokes polynomials with coefficients in Q(rates)                  : PASS
+      Positions are the xi-half positions {+-A, +-(a-b)} rigidly shifted
+      by the eta exponents +-q -- a rational translation, no new type.
+
+  SCOPE (honest): for heteronuclear centres the tau sum is INFINITE
+  (build plan EQ1: it terminates iff the two centres share an exponent).
+  Every term is classified above; the resurgent structure of the infinite
+  SUM is a separate question this track does not settle.

@@ -1,0 +1,204 @@
+{
+  "validation": {
+    "cases": [
+      [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        2,
+        1,
+        1,
+        0,
+        1,
+        1,
+        2,
+        0
+      ],
+      [
+        1,
+        1,
+        2,
+        -1,
+        1,
+        0,
+        2,
+        0
+      ],
+      [
+        2,
+        -2,
+        2,
+        1,
+        2,
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        -1,
+        2,
+        2,
+        1,
+        -1,
+        2,
+        0
+      ]
+    ],
+    "quad_vs_exact": [
+      [
+        0.14323944878270772,
+        0.0,
+        0.14323944878270578
+      ],
+      [
+        0.019690317693635398,
+        -2.843053218989344e-20,
+        0.019690317693635433
+      ],
+      [
+        2.710505431213761e-20,
+        -3.049318610115481e-19,
+        0.0
+      ],
+      [
+        2.507217523872729e-19,
+        1.0164395367051604e-19,
+        0.0
+      ],
+      [
+        0.07957747154594821,
+        0.0,
+        0.07957747154594766
+      ],
+      [
+        -4.0318768289304696e-19,
+        9.24959978401696e-19,
+        0.0
+      ]
+    ],
+    "max_abs_err": 1.942890293094024e-15,
+    "max_abs_imag": 9.24959978401696e-19
+  },
+  "shared_vertex_lext1_lcorr1": {
+    "n_external_pairs_nonzero": 16,
+    "rank_hist": {
+      "1": 2,
+      "2": 10,
+      "4": 4
+    },
+    "max_nLambda_hist": {
+      "1": 13,
+      "2": 3
+    },
+    "nLambda_perW_hist": {
+      "1": 29,
+      "2": 9
+    },
+    "frac_external_rank_ge2": 0.875,
+    "frac_external_nLambda_ge2": 0.1875,
+    "max_rank": 4
+  },
+  "shared_vertex_lext2_lcorr2": {
+    "n_external_pairs_nonzero": 81,
+    "rank_hist": {
+      "1": 2,
+      "2": 8,
+      "3": 4,
+      "4": 20,
+      "6": 36,
+      "9": 11
+    },
+    "max_nLambda_hist": {
+      "1": 41,
+      "2": 35,
+      "3": 5
+    },
+    "nLambda_perW_hist": {
+      "1": 337,
+      "2": 197,
+      "3": 25
+    },
+    "frac_external_rank_ge2": 0.9753086419753086,
+    "frac_external_nLambda_ge2": 0.49382716049382713,
+    "max_rank": 9
+  },
+  "shared_vertex_lext2_lcorr3": {
+    "n_external_pairs_nonzero": 81,
+    "rank_hist": {
+      "4": 2,
+      "6": 8,
+      "8": 14,
+      "9": 8,
+      "10": 8,
+      "12": 30,
+      "14": 2,
+      "16": 9
+    },
+    "max_nLambda_hist": {
+      "1": 41,
+      "2": 35,
+      "3": 5
+    },
+    "nLambda_perW_hist": {
+      "1": 924,
+      "2": 594,
+      "3": 50
+    },
+    "frac_external_rank_ge2": 1.0,
+    "frac_external_nLambda_ge2": 0.49382716049382713,
+    "max_rank": 16
+  },
+  "full3body_lmax1_lcorr1": {
+    "n_total": 4096,
+    "n_nonzero": 248,
+    "density": 0.060546875,
+    "schmidt_rank_i_vs_jk": 9,
+    "dim_i": 16
+  },
+  "full3body_lmax1_lcorr2": {
+    "n_total": 4096,
+    "n_nonzero": 472,
+    "density": 0.115234375,
+    "schmidt_rank_i_vs_jk": 9,
+    "dim_i": 16
+  },
+  "full3body_lmax2_lcorr2": {
+    "n_total": 531441,
+    "n_nonzero": 26629,
+    "density": 0.0501071614722989,
+    "schmidt_rank_i_vs_jk": 25,
+    "dim_i": 81
+  },
+  "single_resultant_control_lmax1_lcorr2": {
+    "fro_full": 0.12556120262807333,
+    "fro_residual_after_single_channel": 0.01816529661314191,
+    "frac_norm_in_higher_channels": 0.1446728466511236,
+    "nnz_full": 472,
+    "nnz_entries_missed_by_single_channel": 0
+  },
+  "single_resultant_control_lmax2_lcorr2": {
+    "fro_full": 0.6914903886404653,
+    "fro_residual_after_single_channel": 0.19656555861776473,
+    "frac_norm_in_higher_channels": 0.2842636164534853,
+    "nnz_full": 26629,
+    "nnz_entries_missed_by_single_channel": 16
+  }
+}

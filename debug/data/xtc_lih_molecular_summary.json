@@ -1,0 +1,50 @@
+{
+  "system": "LiH, 4 electrons (Li 1s2 2s + H 1s), 2-center minimal STO basis",
+  "basis": "Li@A: s(2.7), s(0.65), p{-1,0,+1}(0.65); H@B: s(1.0) = 6 spatial / 12 spin-orb / C(12,4)=495 dets",
+  "engine": "TwoCenterLM (validated ~1e-6), complex Ylm (definite m about z-axis)",
+  "verdict": "GO (qualified): 0 fill-in, 1-norm <= plain; but the atomic l-sparsity is a single-center property absent from the two-center Coulomb baseline itself",
+  "gates": {
+    "geminal_ERI_vs_direct_quad": "PASS: cross-density 6e-7..4e-6; localized direct-grid-limited ~1e-3 (multipole matches native Coulomb 1e-6)",
+    "geminal_to_zero": "PASS: shift(E_xTC-E_plain) -1.33(g=.6)->-0.0011(g=20); l1_ratio 0.914->1.000",
+    "GS_real": "PASS: imag(E_xTC)=0 at every gamma/R",
+    "m_conservation": "PASS: 0 violations in contracted-L3"
+  },
+  "headline_at_R3_g1": {
+    "spatial_2body": {
+      "coulomb_density": "454/1296=0.350",
+      "fill_in": 0,
+      "l1_ratio": 0.893
+    },
+    "spinorbital_asym_qubit": {
+      "base_nnz": 2368,
+      "fill_in": 0,
+      "l1_ratio": 0.936
+    },
+    "AO_diagonal_ref_control_l1_ratio": 0.94
+  },
+  "the_key_contrast": {
+    "atom_pinclusive": "Coulomb support 107/625=17.1% = 55% of its m-limit(195) -> REAL l-sparsity (45% of m-blocks Gaunt-zeroed); xTC preserved it (0 fill-in)",
+    "molecule_LiH": "Coulomb support 454/1296=35.0% = 100% of its m-limit(454) -> NO l-sparsity; two-center geometry fills every m-allowed block BEFORE xTC",
+    "raw_vs_lowdin": "raw 2-center Coulomb=80.6% of m-limit; Loewdin orthonormalization (required for qubit H) -> 100%"
+  },
+  "mechanism_reference_multipoles_about_A": {
+    "core_MO_frac_L0": 1.0,
+    "bond_MO_frac_L0": 0.128,
+    "total_ref_frac_L0": 0.977,
+    "reading": "core (Li 1s2) is a PURE single-center s (collapse survives exactly); bond 2-sigma MO fully breaks the s-collapse (12.8% monopole); total is core-POWER-dominated so ref stays ~98% monopole"
+  },
+  "v2_contracted_L3": {
+    "nnz": 454,
+    "l1": 0.3316,
+    "max": 0.0217,
+    "note": "substantial nonzero op, co-supports EXACTLY with Coulomb (fill-in=0 is real, not v2~0)"
+  },
+  "robustness": "fill_in=0 and l1_ratio<=1 across gamma in [0.6,20], R in [2.5,4.0], and with +H p_z added",
+  "caveats": [
+    "minimal mixed-exponent STO basis (not converged accuracy)",
+    "model-level L3 radial magnitudes (angular selection exact, same model as atomic run)",
+    "single spin-independent geminal",
+    "classical non-Hermitian PoC",
+    "LiH-specific: collapse-survival driven by heavy Li core monopole dominance; a coreless molecule would stress it more, but even the fully-collapse-broken bond MO causes 0 fill-in because the two-center Coulomb baseline is already m-complete"
+  ]
+}

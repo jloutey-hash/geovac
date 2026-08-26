@@ -1,0 +1,219 @@
+{
+  "system": "He singlet",
+  "exact": -2.903724377,
+  "s_limit": -2.879028767,
+  "validation": {
+    "geminal_1111_grid_vs_directquad_absdiff": 3.81e-06,
+    "coulomb_multipole_GL_vs_analytic": "<1e-13",
+    "geminal_multipole_GL_vs_scipyquad": "<5e-06",
+    "single_1s_He_grid_vs_analytic_uHa": 16,
+    "1s_kinetic_grid_vs_k2over2": "exact",
+    "R12CI_variational_all_above_exact": true
+  },
+  "route_A_naive_dressing_H_plus_D_dropK": {
+    "note": "w=(1-e^{-g r})/r + (g/2)e^{-g r} - (1/4)e^{-2g r}; drop convective K",
+    "verdict": "COLLAPSE (non-isospectral; worsens with basis)",
+    "E_maxn1": {
+      "g1.0": -3.1923,
+      "g1.5": -3.0509,
+      "g2.0": -2.9748
+    },
+    "E_maxn2": {
+      "g1.0": -3.2308,
+      "g1.5": -3.0711,
+      "g2.0": -2.9881
+    },
+    "E_maxn3": {
+      "g1.0": -3.2363,
+      "g1.5": -3.08,
+      "g2.0": -3.0
+    }
+  },
+  "route_A2_symmetrized_dressing": {
+    "note": "w=1/r - (1/4)e^{-2g r} (Hermitian part of H~; bounded)",
+    "verdict": "NON-VARIATIONAL: improves but overshoots exact (untrustworthy)",
+    "maxn1": -2.882444,
+    "maxn2": -2.89823,
+    "maxn3": -2.916174
+  },
+  "plain_FCI_sturmian_spdfg": [
+    {
+      "max_n": 1,
+      "l_max": 0,
+      "n_orb": 1,
+      "q": 2,
+      "E": -2.847476,
+      "err_mHa": 56.25
+    },
+    {
+      "max_n": 2,
+      "l_max": 1,
+      "n_orb": 5,
+      "q": 10,
+      "E": -2.865315,
+      "err_mHa": 38.41
+    },
+    {
+      "max_n": 3,
+      "l_max": 2,
+      "n_orb": 14,
+      "q": 28,
+      "E": -2.885277,
+      "err_mHa": 18.45
+    },
+    {
+      "max_n": 4,
+      "l_max": 3,
+      "n_orb": 30,
+      "q": 60,
+      "E": -2.886115,
+      "err_mHa": 17.61
+    },
+    {
+      "max_n": 5,
+      "l_max": 4,
+      "n_orb": 55,
+      "q": 110,
+      "E": -2.886637,
+      "err_mHa": 17.09
+    }
+  ],
+  "plain_s_only_FCI_plateau": "s-limit -2.87903; ns=7 (q=14) still 24.7 mHa from exact",
+  "R12CI_variational": [
+    {
+      "ns": 1,
+      "n_gem": 1,
+      "nbf": 2,
+      "qubit_proxy": 2,
+      "E": -2.8867550099623194,
+      "k": 1.8,
+      "gamma": 0.7,
+      "err_exact_mHa": 16.969367037680705
+    },
+    {
+      "ns": 2,
+      "n_gem": 1,
+      "nbf": 4,
+      "qubit_proxy": 4,
+      "E": -2.890707378168835,
+      "k": 1.7,
+      "gamma": 0.7,
+      "err_exact_mHa": 13.01699883116525
+    },
+    {
+      "ns": 2,
+      "n_gem": 2,
+      "nbf": 5,
+      "qubit_proxy": 4,
+      "E": -2.891271926529114,
+      "k": 1.7,
+      "gamma": 0.7,
+      "err_exact_mHa": 12.452450470886056
+    },
+    {
+      "ns": 3,
+      "n_gem": 1,
+      "nbf": 7,
+      "qubit_proxy": 6,
+      "E": -2.902926068005629,
+      "k": 1.7,
+      "gamma": 0.7,
+      "err_exact_mHa": 0.7983089943710553
+    },
+    {
+      "ns": 3,
+      "n_gem": 2,
+      "nbf": 8,
+      "qubit_proxy": 6,
+      "E": -2.9030842020201826,
+      "k": 1.7,
+      "gamma": 0.7,
+      "err_exact_mHa": 0.6401749798174983
+    },
+    {
+      "ns": 4,
+      "n_gem": 1,
+      "nbf": 11,
+      "qubit_proxy": 8,
+      "E": -2.9032504371675545,
+      "k": 1.6,
+      "gamma": 0.7,
+      "err_exact_mHa": 0.47393983244559124
+    },
+    {
+      "ns": 4,
+      "n_gem": 2,
+      "nbf": 12,
+      "qubit_proxy": 8,
+      "E": -2.903275470561731,
+      "k": 1.6,
+      "gamma": 0.7,
+      "err_exact_mHa": 0.4489064382688923
+    }
+  ],
+  "R12CI_s_only_orbital": [
+    {
+      "ns": 1,
+      "nbf": 1,
+      "qubit_proxy": 2,
+      "E": -2.847520455929235,
+      "k": 1.7,
+      "err_slimit_mHa": 31.508311070764794,
+      "err_exact_mHa": 56.20392107076499
+    },
+    {
+      "ns": 2,
+      "nbf": 3,
+      "qubit_proxy": 4,
+      "E": -2.860486852344879,
+      "k": 1.7,
+      "err_slimit_mHa": 18.541914655120895,
+      "err_exact_mHa": 43.23752465512109
+    },
+    {
+      "ns": 3,
+      "nbf": 6,
+      "qubit_proxy": 6,
+      "E": -2.8783201019575047,
+      "k": 1.9,
+      "err_slimit_mHa": 0.7086650424952268,
+      "err_exact_mHa": 25.404275042495428
+    },
+    {
+      "ns": 4,
+      "nbf": 10,
+      "qubit_proxy": 8,
+      "E": -2.8786145424333887,
+      "k": 2.0,
+      "err_slimit_mHa": 0.414224566611221,
+      "err_exact_mHa": 25.109834566611422
+    },
+    {
+      "ns": 5,
+      "nbf": 15,
+      "qubit_proxy": 10,
+      "E": -2.8789006985437946,
+      "k": 2.2,
+      "err_slimit_mHa": 0.12806845620527696,
+      "err_exact_mHa": 24.823678456205478
+    },
+    {
+      "ns": 6,
+      "nbf": 21,
+      "qubit_proxy": 12,
+      "E": -2.8789855782182494,
+      "k": 2.3,
+      "err_slimit_mHa": 0.043188781750469474,
+      "err_exact_mHa": 24.73879878175067
+    },
+    {
+      "ns": 7,
+      "nbf": 28,
+      "qubit_proxy": 14,
+      "E": -2.8790092633834736,
+      "k": 2.3,
+      "err_slimit_mHa": 0.019503616526250767,
+      "err_exact_mHa": 24.715113616526452
+    }
+  ]
+}
