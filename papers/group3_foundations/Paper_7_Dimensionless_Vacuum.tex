@@ -12,7 +12,7 @@
 \date{March 10, 2026}
 
 \begin{abstract}
-Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. We demonstrate that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, establishing a precise mathematical bridge between the discrete graph formulation and the known continuous structure. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The dimensionless topology produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through a suite of 18 symbolic checks (an algebraic audit of the transformation chain, several of them limiting-case or definitional) confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
+Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. We demonstrate that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, establishing a precise mathematical bridge between the discrete graph formulation and the known continuous structure. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The continuum $S^3$ topology (the limit of the positive-semidefinite graph Laplacian) has pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through a suite of 18 symbolic checks (an algebraic audit of the transformation chain, several of them limiting-case or definitional) confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
 \end{abstract}
 
 \maketitle
@@ -636,7 +636,7 @@ $S^3$ eigenvalues into dimensionful energies for the single-electron
 case.
 
 The 18 symbolic proofs of Appendix~\ref{app:tests} verify the
-$N = 1$ case.  The generalization to $N > 1$ follows from the same
+$N = 1$ case.  The generalization to $N > 1$ is expected by the same
 algebraic structure: the Laplace--Beltrami operator on $S^{3N-1}$
 is the continuum limit of a discrete graph Laplacian on the
 $N$-electron angular lattice, and its spectrum is determined by

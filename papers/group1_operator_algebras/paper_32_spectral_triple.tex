@@ -1424,6 +1424,40 @@ $= \mathbb{C}\,\mathbb{1}$), welding the whole space into a single
 indecomposable block that admits no decomposition; every pair remains
 reducible.
 
+Tameness is not composability, and conflating the two misreads the
+obstruction.  The diatomic pair is completely classified, but it
+emphatically does not commute---$\lVert [P_A, P_B] \rVert = \tfrac12$ is
+the maximal possible value---and it is that \emph{two}-projection
+non-commutativity, not the three-projection wildness, which constitutes
+the multi-focal composition wall recorded above.  The obstruction
+accordingly has two distinct rungs.  At two centers the projections fail
+to commute while remaining completely classified by their principal
+angles: the obstruction is quantitative, and the cost of removing it is
+known in closed form.  At three centers the classification itself fails,
+and no complete list of invariants exists.  Forcing commutation at the
+first rung---L\"owdin orthogonalization---is the framework's
+sparsity-destroying move; at the second rung there is no corresponding
+normal form available to force.
+
+The wildness is specific to the subspace configuration and is \emph{not}
+a generic consequence of non-commutativity.  The framework's other
+non-commutative angular structure---$SO(3)/SU(2)$ coupling, the Gaunt and
+$6j$ machinery---is the representation theory of a \emph{compact} group,
+hence type~I by Peter--Weyl, hence tame however non-abelian it may be.
+The contrast is quantitative: on the menu $l = 0, 1, 2$ the $\mathfrak{su}(2)$
+generators satisfy $\lVert [J_a, J_b] \rVert = 2$ yet their commutant is
+three-dimensional (one dimension per irreducible constituent, and
+$\sum_\lambda m_\lambda^2$ in general---four for $l\!=\!1$ at multiplicity
+two, five for $l\!=\!1 \oplus l\!=\!2 \oplus l\!=\!2$), whereas the three
+center-projections, at the \emph{smaller} non-commutativity
+$\lVert [P_A, P_B] \rVert \approx 0.49$, have commutant
+$\mathbb{C}\mathbb{1}$.  Non-abelianness and wildness are independent
+properties.  This is the structural reason the framework's angular
+sparsity is graded, finite and potential-independent (Paper~22), and the
+reason no Gaunt-style graded reduction should be expected to rescue
+multi-center composition: arbitrary configurations of subspaces are not
+group representations and escape Peter--Weyl.
+
 Two invariants must be kept separate.  (i)~The \emph{categorical}
 statement---pairs reducible, triple irreducible---is robust: it survives
 enriching the per-center $\sigma$ menu
@@ -1538,6 +1572,68 @@ nuclear shape---distinct from the density-axis cross-ratio of the
 three-center integral in Paper~59.  (Regression-pinned in
 \texttt{tests/test\_paper32\_four\_center\_modulus.py}; chronicle in
 CHANGELOG v5.1.0.)
+\end{remark}
+
+\begin{remark}[The configuration operator is the composed basis's overlap metric]
+\label{rem:config_operator_is_metric}
+The three preceding remarks treat $F = \sum_i P_i$ as an abstract
+configuration operator.  It is not abstract.  Let $G$ be the Gram matrix
+of the union of the per-center bases, with blocks
+$G_{ij} = \langle \chi_i | \chi_j \rangle$, and suppose each
+\emph{intra}-center block is the identity---automatic when each center's
+own functions are orthonormal, and exact for the Shibuya--Wulfman metric
+of Paper~60~\cite{paper60}.  Put $X = \operatorname{chol}(G)^{\mathsf T}$,
+so that $X^{\mathsf T} X = G$ and the columns of $X$ are the basis vectors
+expressed in an orthonormal ambient frame; let $W_k$ collect the columns
+belonging to center $k$.  Then $W_k^{\mathsf T} W_k = G_{kk} = I$, so
+$W_k$ has orthonormal columns, the pseudoinverse in $P_k = W_k W_k^{+}$
+collapses to $W_k^{\mathsf T}$, and
+\[
+   F \;=\; \sum_k W_k W_k^{\mathsf T} \;=\; X X^{\mathsf T}
+     \;=\; X\,(X^{\mathsf T} X)\,X^{-1} \;=\; X\,G\,X^{-1}.
+\]
+Hence $F \simeq G$---\emph{similar}, not merely cospectral.  Every
+spectral statement in the preceding remarks (the conical intersections,
+the band gaps, the $\mathbb{Z}_2$ holonomy of the eigenvectors) is
+therefore a statement about the \emph{overlap metric of the composed
+basis} over nuclear geometry.  Verified across the whole construction:
+linear $\mathrm{BeH_2}$, bent $\mathrm{BeH_2}$ (including the
+$\mathrm{H_2O}$ angle $104.5^\circ$), and the four-center configuration,
+with $\max|\operatorname{spec} F - \operatorname{spec} G| \le
+3\times10^{-15}$ and $\lVert FX - XG \rVert_{\max} \le 9\times10^{-16}$.
+The intra-center hypothesis is load-bearing rather than decorative:
+perturbing one intra-center block off the identity by $0.3$ breaks the
+identity outright (spectral discrepancy $6.7\times10^{-2}$).  The
+four-center holonomy of Remark~\ref{rem:four_center_modulus} is the same
+statement read blockwise,
+$\operatorname{Tr}(P_1P_2P_3P_4) =
+\operatorname{Tr}(G_{12}G_{23}G_{34}G_{41})$ (residual
+$3\times10^{-16}$).
+
+Two consequences follow, one positive and one negative.  \emph{(i)~An
+orthogonalization criterion.}  Since the intersections are degeneracies
+of the metric, the eigenvectors of $G$ are double-valued around one:
+parallel transport of the near-degenerate eigenvector around a small loop
+enclosing the central intersection returns it with overlap $-1.0000$,
+against $+1.0000$ on a CI-free control.  Any orthogonalization that
+\emph{selects} metric eigenvectors---canonical orthogonalization with a
+drop threshold, the standard remedy for near-linear-dependence---is
+therefore path-dependent along a geometry scan through such a point,
+whereas symmetric (L\"owdin) orthogonalization $G^{-1/2}$, being a
+function of the matrix rather than of its eigenvectors, returns
+bit-exactly.  \emph{(ii)~It is not a conditioning statement.}  The
+intersections are \emph{mid}-spectrum degeneracies (crossing eigenvalue
+$\approx 0.71$ against $\lambda_{\min} \approx 0.13$), and
+$\operatorname{cond}(G)$ passes through $d^*$ monotonically
+($19.9 \to 16.2 \to 15.0$); the metric-conditioning growth of Paper~60 is
+a different functional of the same object, and no kink at $d^*$ should be
+expected or claimed.  The distinction drawn in the preceding remarks
+between $F$ and the molecule's \emph{physical electronic} conical
+intersection is unchanged; what changes is that $F$ is an invariant of the
+framework's own encoding rather than a generic operator introduced for the
+analysis.  (Regression-pinned in
+\texttt{tests/test\_paper32\_config\_operator\_metric.py}; chronicle in
+CHANGELOG v5.1.2.)
 \end{remark}
 
 % ===================================================================
@@ -7334,6 +7430,10 @@ from the metric} (Paper~54 of the GeoVac series, Zenodo, 2026).
 \bibitem{paper57}
 J.~Loutey, \emph{Forced and Free Content in the GeoVac Framework:
 An Observations Paper} (Paper~57 of the GeoVac series, Zenodo, 2026).
+
+\bibitem{paper60}
+J.~Loutey, \emph{The isoenergetic Sturmian secular equation as a quantum
+algorithm} (Paper~60 of the GeoVac series, Zenodo, 2026).
 
 \bibitem{latremoliere2021dual}
 F.~Latr\'emoli\`ere, ``The Dual Modular Gromov--Hausdorff Propinquity and Completeness,''

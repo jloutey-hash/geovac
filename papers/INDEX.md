@@ -41,7 +41,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 7 `Paper_7_Dimensionless_Vacuum.tex` | **KEYSTONE** | S³ conformal equivalence, 18 symbolic proofs — most-cited paper in the corpus |
 | 18 `paper_18_exchange_constants.tex` | ACTIVE | Transcendental taxonomy; master Mellin engine M1/M2/M3 |
 | 22 `paper_22_angular_sparsity.tex` | **KEYSTONE** | Potential-independent angular sparsity theorem (underwrites the Pauli scaling) |
-| 24 `paper_24_bargmann_segal.tex` | **KEYSTONE** | π-free HO lattice on S⁵; HO rigidity; Coulomb/HO asymmetry (6 layers) |
+| 24 `paper_24_bargmann_segal.tex` | **KEYSTONE** | π-free HO lattice on S⁵; HO rigidity; Coulomb/HO asymmetry (7 layers) |
 | 31 `paper_31_universal_coulomb_partition.tex` | **KEYSTONE** | Universal vs Coulomb-specific (A/D) split of the spectral triple |
 | 54 `paper_54_tensor_product_two_body.tex` | ACTIVE | Two-body selection rules from the tensor-product triple; radial coupling NOT forced |
 | 55 `paper_55_periods_of_geovac.tex` | ACTIVE | Periods of the Mellin sectors: pure-Tate / level-4 cyclotomic mixed-Tate |
@@ -83,7 +83,8 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | `paper_fci_atoms.tex` | ACTIVE | He/Li/Be FCI benchmarks |
 | `paper_fci_molecules.tex` | **GUARDRAIL** | LCAO graph-concatenation fails (R-independent kinetic energy) — why natural geometry was necessary |
 | 58 `paper_58_abelian_residue.tex` | ACTIVE | Angular sparsity is an atomic-sector property (abelian residue); exact two-center ERI census + NaH NOCI binding |
-| 59 `paper_59_elliptic_bessel_moment.tex` | ACTIVE | Three-center ERI = an elliptic Bessel moment (momentum space); genus-0→genus-1 at the third center; finite closed form open |
+| 59 `paper_59_elliptic_bessel_moment.tex` | ACTIVE | Three-center ERI = an elliptic Bessel moment (momentum space); genus-0→genus-1 at the third center; PF operator **proved irreducible** (Fourier–Laplace of an irreducible connection, exact-integer monodromy); period on the Legendre/Γ(2) modular family with CM Γ-value fibres (cosmic-Galois bridge, ↔ Paper 56); transcendental closed form open |
+| 60 `paper_60_sturmian_secular_quantum.tex` | ACTIVE | The isoenergetic generalized-Sturmian secular equation read as a quantum algorithm: **metric-free standard eigenproblem for atoms** (eigenvalues = energies, pure-number matrix, block-encoding 1-norm **sublinear** ~K^0.78, validated on He single-config −2.847 = textbook variational), novel vs prior QC (both documented cost risks absent); Shibuya–Wulfman metric returns for molecules = the conditioning frontier (better than L², intra-center = I, but grows with basis) |
 
 ## Group 4 — Quantum computing (`group4_quantum_computing/`)
 

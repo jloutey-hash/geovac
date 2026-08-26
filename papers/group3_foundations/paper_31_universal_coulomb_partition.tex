@@ -95,8 +95,10 @@ fermion bases, regardless of the radial potential.
 The same machinery, however, does \emph{not} produce identical
 transcendental content.  The Coulomb framework on $S^3$ is honestly
 $\pi$-laden at every level above the bare graph: the kinetic
-calibration $\kappa = -1/16$ ratio is set by the Fock projection
-Jacobian, the $\alpha$-combination $K = \pi(B + F -
+calibration $\kappa = -1/16$ is itself rational (the $\pi$-free bridge
+to the $\pi$-laden continuum), its value \emph{coinciding} with the
+$1/16$ of the Fock projection Jacobian as an Observation, not a
+derivation (Paper~7); the $\alpha$-combination $K = \pi(B + F -
 \Delta)$~\cite{paper2_alpha} carries an explicit factor of $\pi$ as
 the Hopf-bundle measure $\mathrm{Vol}(S^2)/4 = \pi$, and the spectral
 zeta values appear at even integer arguments via the Jacobi-theta
@@ -153,7 +155,7 @@ asymmetry to the operator-order distinction and the projection type
 (nonlinear vs.\ linear-affine).
 Section~\ref{sec:five-layers} reports the Sprint~5 result that the
 Coulomb/HO asymmetry has three independent discriminators, not two
-(within the six-layer catalogue of Paper~24~\cite{paper24}), and gives
+(within the seven-layer catalogue of Paper~24~\cite{paper24}), and gives
 the predictive checklist that follows.
 Section~\ref{sec:implications} states what features of GeoVac
 transfer to non-Coulomb systems for free and what does not.
@@ -638,7 +640,7 @@ Composed Pauli scaling~\cite{paper14} & no \\
 Wigner $3j$ algebra & no \\
 \hline
 \multicolumn{2}{l}{\emph{Coulomb-specific (2nd-order, nonlinear proj.):}} \\
-$\kappa = -1/16$~\cite{paper7} & yes \\
+$\kappa = -1/16$~\cite{paper7} & no ($-1/16$ rational; $\pi$ enters at the energy map) \\
 Spectral zeta $\zeta_{D^2}(s)$~\cite{paper28} & yes ($\pi^{2k}$) \\
 Hopf-bundle measure $\mathrm{Vol}(S^2)/4$~\cite{paper2_alpha} & yes \\
 $\alpha$-combination Observation $K$~\cite{paper2_alpha} & yes \\
@@ -676,7 +678,7 @@ sharpened the Coulomb/HO asymmetry from two layers
 discriminators, the third being the Wilson physical content of the
 gauge sector.  We summarize the potential-specific layers here as the
 predictive checklist for extending the framework to any new central
-potential (the full asymmetry is catalogued as six layers in
+potential (the full asymmetry is catalogued as seven layers in
 Paper~24~\cite{paper24}).
 
 \subsection{The structural layers}
@@ -718,7 +720,7 @@ Paper~24~\cite{paper24}).
 three independent discriminators established here (Sprint~5
 sharpening~\cite{paper25}); rows~4--5 are further potential-specific
 layers from Papers~24 and~51~\cite{paper24,paper51}, part of the
-six-layer asymmetry catalogued in Paper~24~\cite{paper24}.
+seven-layer asymmetry catalogued in Paper~24~\cite{paper24}.
 $\checkmark$~means the feature is present; ``--'' means it is absent or
 not natural.}
 \label{tab:five_layers}
@@ -1176,23 +1178,32 @@ Section~\ref{sec:universal}'s universal $\mathcal{A}$-side sector
 verbatim;\ they involve no Riemannian volume form, no Mellin transform
 of $\mathrm{Tr}\,e^{-tD^2}$, and no Latr\'emoli\`ere propinquity, so
 they are signature-blind by construction.
-\item Four \textsc{wick-map free} projections are now closed at the
-operator-system level on both sides (Sprint L1 Riemannian closure
-+ Sprint L2-E Lorentzian closure; Paper~42 \S\S~5--8 and Paper~32
-\S~VIII.E.E):\ the M1 sub-mechanism of the master Mellin engine
+\item Four \textsc{wick-map free} projections close at the
+operator-system level on the \emph{Riemannian} side (Sprint L1;
+Paper~42 \S\S~5--8):\ the M1 sub-mechanism of the master Mellin engine
 realizes the four-witness Wick-rotation theorem (Hartle--Hawking
 $+$ Sewell $+$ Bisognano--Wichmann $+$ Unruh) as literal identification
-at finite cutoff, not just structural correspondence at the
-metric-functional level.
-\item Five \textsc{euclidean specific} projections are now lifted
-to the Krein operator-system level at finite cutoff via Sprint L2-B/C/D/E
+at the operator-system level in Riemannian signature.  The
+\emph{Lorentzian} side is structural correspondence, \emph{not}
+literal identification:\ the Sprint L2-E Krein period closure
+(Paper~32 \S~VIII.E.E) is signature-blind at finite cutoff --- the
+truncated Bisognano--Wichmann boost is compact ($e^{2\pi i K}=I$ on
+the integer modular spectrum), so the closed period is the Euclidean
+KMS $\beta = 2\pi$ circle and the Lorentzian signature is metrically
+invisible (Euclidean/convention).  The strong ``literal
+identification'' reading of Sprint L2-E (2026-05-17) was withdrawn
+2026-06 (see Paper~34~\S~III.29 and Paper~45).
+\item Five \textsc{euclidean specific} projections were carried to the
+Krein operator-system level at finite cutoff via Sprint L2-B/C/D/E
 (Paper~32 \S~VIII.E.B/C/D/E):\ the Krein space, Lorentzian Dirac
 $D_L = i^t \, \not{\!\!D}_{g_r}$ per van~den~Dungen 2016 Prop~4.1, and
-Connes axiom audit at BBB $(m, n) = (4, 6)$ all pass bit-exactly at
-every tested $(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$.
-The Sprint L0 ``Krein-space machinery (blocker B2)'' is therefore
-\emph{verified to apply} at finite cutoff;\ the continuum / Lorentzian
-propinquity extension (blocker B1) remains open at Sprint L3 scope.
+Connes axiom audit at BBB $(m, n) = (4, 6)$ are constructed, and the
+Krein period-closure identities close bit-exactly at every tested
+$(n_{\max}, N_t) \in \{1, 2, 3\} \times \{1, 11, 21\}$.  These
+identities are \emph{signature-blind}, however (the same compact-boost
+mechanism as above), so they do \emph{not} constitute a Lorentzian
+literal identification;\ the genuine Lorentzian propinquity extension
+(blocker B1) remains open at Sprint L3 scope.
 \item Two \textsc{mixed} projections (Wilson plaquette \#10, Breit
 retardation \#16) preserve their per-case structural distinctions:\
 combinatorial Wilson vocabulary transfers freely but the
@@ -1203,13 +1214,20 @@ $\mathbb{Q}(\alpha)$.
 \end{itemize}
 
 The empirical verification of the a priori partition at $28/28$ is the
-direct operational payoff of the Sig/Op framing introduced here.
+direct operational payoff of the Sig/Op framing introduced here:\ the
+$28/28$ figure certifies the \emph{bucket classification} (which
+projections transfer freely, which require system-specific
+re-derivation), not a Lorentzian closure.
 The signature partition, like the central-potential partition that is
 the main topic of this paper, is now an empirically-verified
-classification of GeoVac's projection inventory.  Sprint L3
-(Lorentzian propinquity construction, blocker B1) is the remaining
-open work item;\ at the operator-system / finite-cutoff level the
-Lorentzian closure is complete.  The headline structural finding of
+classification of GeoVac's projection inventory.  At the
+operator-system / finite-cutoff level the \emph{Riemannian} closure is
+complete;\ the \emph{Lorentzian} closure is \emph{not} --- the
+truncated modular flow is the compact KMS $\beta = 2\pi$ circle, so
+Lorentzian signature is metrically invisible at any finite cutoff
+(Euclidean/convention), and the genuine Lorentzian extension (Sprint
+L3, blocker B1) remains open as major NCG-mathematics work (see
+Paper~34~\S~III.29, Paper~45).  The headline structural finding of
 the verification chain:\ Paper~42 \S~7.2 ``$H_{\mathrm{local}} \neq D_W$''
 (spectral-action vs.\ modular-Hamiltonian generator distinction) is
 \emph{signature-INDEPENDENT} at the Riemannian limit;\ this is the
@@ -1410,7 +1428,7 @@ isolates three independent discriminators, not two: spectrum-computing
 role of $L_0$, calibration $\pi$, and Wilson physical content of the
 non-abelian gauge sector, all stratifying along the same
 operator-order divide; Paper~24~\cite{paper24} catalogues the full
-asymmetry as six structural layers.
+asymmetry as seven structural layers.
 
 The framing offered by this paper has no new theoretical content; it
 is a structural reorganization of existing results in

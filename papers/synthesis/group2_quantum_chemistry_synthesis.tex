@@ -36,10 +36,12 @@ quantum system there is a coordinate system in which the Coulomb
 singularities become boundary conditions and the Laplace--Beltrami
 operator discretizes on a sparse graph with quantum-number labels for
 nodes.  This synthesis assembles the framework's quantum-chemistry
-arc---the ten Group~2 papers spanning one-electron atoms, the
+arc---the twelve Group~2 papers spanning one-electron atoms, the
 two-center one-electron ion, the two-electron atom, the two-center
 two-electron molecule, the core--valence and polyatomic
-extensions, and the genuine two-center tensor census---into a single
+extensions, the genuine two-center tensor census, the transcendence
+frontier at the third center, and the isoenergetic Sturmian secular
+equation---into a single
 coherent narrative organized by the
 \emph{natural geometry hierarchy}.  The hierarchy is a grid indexed by
 the number of nuclear centers and the number of electrons:\ $S^3$
@@ -59,14 +61,20 @@ inequality~\cite{loutey_paper15}; what currently survives as quadrature
 ($Z_{\mathrm{eff}}$ screening, the adiabatic potential curves, the
 hyperradial coupling) is named explicitly, and finding algebraic
 replacements is an ongoing goal rather than a deficiency.
-\emph{Second}, two proven structural negative theorems delimit the
-design space:\ in a single-center molecular Sturmian basis with a
-shared momentum scale the one-electron Hamiltonian and overlap obey the
+\emph{Second}, two structural negative theorems delimit the
+design space:\ in the single-$n$ $D$-matrix \emph{approximation} to a
+single-center molecular Sturmian basis with a shared momentum scale, the
+one-electron Hamiltonian and overlap obey the
 two-term identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$
 and share a single orthogonal $SO(4)$ Wigner-$D$ congruence, so the
 generalized eigenvalues are independent of the internuclear distance and
 cannot bind unless the Sturmian scale $\beta_k(R)$ itself becomes
-$R$-dependent~\cite{loutey_paper8}; and a graph
+$R$-dependent~\cite{loutey_paper8}.  (Paper~8's own scope remark is
+explicit that this delimits that approximation and is \emph{not} a no-go
+for Sturmian molecular binding:\ the genuine cross-$n$ Coulomb--Sturmian
+overlap breaks the shared congruence and supplies the $R$-dependence
+algebraically---see the Paper~60 entry below, where the method binds.)
+And a graph
 built by concatenating atom-centered lattices has an $R$-independent
 intra-atomic kinetic energy, producing a monotonically attractive
 potential-energy surface with no equilibrium~\cite{loutey_fci_mol}.  A
@@ -222,7 +230,8 @@ $-p_0^2/2$ only in the degenerate case $\beta_k=1$) are independent of
 the bond angle $\gamma$, hence independent of the internuclear
 distance~$R$~\cite{loutey_paper8}.  A basis that produces
 $R$-independent eigenvalues cannot describe binding, which is by
-definition an $R$-dependent lowering of the energy.  Paper~8 sharpens
+definition an $R$-dependent lowering of the energy---so \emph{within this
+approximation} binding is excluded.  Paper~8 sharpens
 this further:\ for a heteronuclear diatomic with charge ratio
 $Z_A/Z_B > 1$ there is no atom-centered shared-$p_0$ Sturmian basis
 that binds both centers simultaneously, and the dual-scale repair drives
@@ -231,10 +240,25 @@ separation~\cite{loutey_paper8}.
 
 This theorem is a guardrail in the project's sense:\ it rules out an
 entire class of single-center, shared-exponent molecular encodings
-(nested hyperspherical, unified-basis, single-$p_0$ Sturmian CI), and
-the resolution it forces---reintroduce the $R$-dependent spectrum by
+\emph{built on the single-$n$ $D$-matrix approximation} (nested
+hyperspherical, unified-basis, single-$p_0$ Sturmian CI), and one
+resolution---reintroduce the $R$-dependent spectrum by
 moving to the prolate spheroidal coordinates where the diatomic
 actually separates---is the natural-geometry principle in action.
+
+\paragraph{Scope correction (Paper~8 \texttt{rem:overlap\_imposed}).}
+The theorem's backing test \emph{imposes} $S_{AB}=f\,D^{(n)}$ by
+construction, so what it verifies is a property of the bond-sphere
+$D$-matrix model, not of the genuine cross-$n$ Coulomb--Sturmian basis
+(where, e.g., $\langle\chi^A_{1s}|\chi^B_{2s}\rangle=-0.47$ exceeds the
+within-$n$ diagonal $+0.35$ at $R=3.015$).  A cross-$n$ overlap breaks the
+shared congruence, so binding is \emph{not} excluded for the genuine
+basis:\ Paper~8's \texttt{cor:binding} records that the $R$-dependence is
+then supplied \emph{algebraically} by the Shibuya--Wulfman overlap
+(a function of $s=p_0R$), needing no continuous two-center PDE, and
+Paper~60 exhibits the binding directly.  Prolate spheroidal geometry
+remains the route this arc took; it is not the only one the theorem
+permits.
 
 \subsection{The prolate spheroidal lattice for $\mathrm{H}_2^+$}
 
@@ -469,7 +493,8 @@ $\mathrm{H}_2\mathrm{O}$:\ with full one-reduced-density-matrix
 inter-fiber exchange, $\mathrm{BeH}_2$ reaches $11.7\%$
 bond-length error (matching a single-parameter fitted exchange model at
 zero free parameters), and the uncoupled $\mathrm{H}_2\mathrm{O}$
-construction reaches $19.4\%$ (improved from $26\%$ by the v3.x PK-consistency fix) with a correct qualitative
+construction reaches $19.4\%$ (improved from $26\%$ by general solver evolution---\emph{not}
+by the PK-consistency fix, which the uncoupled PES does not invoke) with a correct qualitative
 surface~\cite{loutey_paper17}.
 
 Two findings establish that the PK pseudopotential is the
@@ -543,10 +568,13 @@ rather than energetic:\ the equilibrium bond length still drifts to
 $R_{\mathrm{eq}} = 3.28$~bohr ($\approx 8.8\%$ error), though the drift
 per $n_{\max}$ step is about three times smaller than the PK
 $l_{\max}$ drift~\cite{loutey_paper19}.  The honest reading is that
-energy converges excellently while geometry drifts, making the balanced
-coupled Hamiltonian optimal for single-point quantum simulation at
-fixed geometries rather than for full potential-energy
-surfaces~\cite{loutey_paper19}.  Paper~19 also records a clean
+the energy axis converges through $n_{\max}=3$ while the geometry drifts---but
+not that the energy axis is simply the good one:\ at $n_{\max}=4$ the model
+crosses \emph{past} exact (over-binding), so the fixed-geometry error is not
+monotonically improvable either~\cite{loutey_paper19}.  The balanced coupled
+Hamiltonian is therefore suited to single-point quantum simulation at fixed
+geometries rather than to full potential-energy surfaces, with that
+non-monotonicity disclosed.  Paper~19 also records a clean
 negative:\ cross-block electron--electron integrals \emph{without} the
 matching cross-center $V_{ne}$ are energetically unbalanced ($29\%$
 error, worse than PK), and a harmonic-driven orthogonalization wall
@@ -623,9 +651,68 @@ $\pi$-free over $\{E_1, \ln, \gamma\}$), which upgrades the $(AA|BB)$
 block of the census from \emph{counted} to \emph{decided}:\ all $195$
 symmetry-permitted entries are proven genuinely nonzero by
 Lindemann--Weierstrass separation, with no accidental zeros and none
-missed by the counting.  The three genuinely cross classes---$80\%$ of
-the tensor---remain \emph{counted} pending an independence argument over
-their $\{E_1, \ln, \gamma\}$ seeds~\cite{loutey_paper58}.
+missed by the counting.  For the three genuinely cross classes---$79.5\%$ of the tensor---Paper~58
+states a three-rung position that is \emph{materially better than counted}:\
+the seed functions $\{1, e^{-\lambda R}, E_1(\mu R), \ln R\}$ are linearly
+independent over $\mathbb{Q}(R)$ by Liouville--Rosenlicht, so every permitted
+entry is \emph{functionally} nonvanishing (unconditional) and generically
+nonzero (measured);\ but it is pointwise \emph{decidable} only conditional on
+a Schanuel-type independence hypothesis for the $E_1$ and $\gamma$ values.
+The block is therefore blocked from \textsc{decided} by open transcendence,
+\emph{not} by missing labour---$E_1$-value independence at algebraic points is
+an open problem and $\gamma$ is not known even to be irrational~\cite{loutey_paper58}.
+Weight one is not the same as decidable.
+
+\subsection{The transcendence frontier at the third center (Paper~59)}
+
+Paper~58 closes the two-center tensor in closed form;\ Paper~59 asks what
+happens at the third.  Read in momentum space, the three-center
+electron-repulsion integral is a two-scale Bessel moment whose two Fock
+scales define a quartic curve:\ the two-center case is genus zero
+(elementary, weight-one $\{E_1,\ln,\gamma\}$), and the third center
+raises the genus to one.  Its period is a complete elliptic integral, it
+satisfies an explicit fourth-order Picard--Fuchs equation, and the
+connection is \emph{irreducible} (a Fourier--Laplace transform of an
+irreducible rank-one connection), so no closed form arises through
+factorization~\cite{loutey_paper59}.  The collinear observable is
+certified to $66$ digits and guarded integer-relation searches are
+decisively negative through weight three at clean heights;\ the finite
+closed form remains open, and the paper says so.
+
+Two consequences for this arc.  The polyatomic question below is thereby
+sharpened from ``can the genuine-integral route be extended?'' to a
+statement about transcendence class:\ the extension is not blocked by
+missing algebra but by a genus jump, and any closed-form polyatomic
+tensor is all-or-nothing (a part-closed-form, part-fitted tensor is not
+decidable at all).  And the same obstruction gates explicitly-correlated
+(F12) evaluation, because the difficulty of a two-electron integral lives
+in the densities, not in the operator between them.
+
+\subsection{The isoenergetic secular equation as a quantum algorithm (Paper~60)}
+
+Paper~60 carries the Sturmian thread into the quantum-algorithm setting
+and, in doing so, exhibits the binding the scoped guardrail above does
+not forbid.  Naively encoding shared-scale Coulomb--Sturmians in $L^2$
+inflates the block-encoding $1$-norm (the ill-conditioned overlap must be
+L\"owdin-inverted);\ the \emph{isoenergetic} reformulation removes the
+metric \emph{for atoms} entirely---a metric-free standard eigenproblem
+whose eigenvalues are the energies, with a sublinear
+$1$-norm~\cite{loutey_paper60}.  For molecules the Shibuya--Wulfman
+metric returns, and the paper measures rather than assumes its cost:\ the
+conditioning grows polynomially, with a derived band-limited law, and the
+one genuine lever (the gerade sector's basis-independent conditioning) is
+an \emph{equivalent-center} property that a symmetry-unique heavy atom
+reinstates.  The $N$-electron $1$-norm question is answered in the
+negative:\ the atomic sublinearity is a property of the isoenergetic
+secular matrix, not of the basis.
+
+For the guardrail above this is the operative datum:\ the method
+\emph{binds}---$\mathrm{H}_2^+$ at $1.3\%$ $s$-only underbinding and a
+minimal-basis $\mathrm{H}_2$ at $E_{\rm tot}\approx-1.09$~Ha, in a
+common-scale basis---because the genuine overlap supplies the
+$R$-dependence the single-$n$ approximation lacked.  What it does not do
+is recover GeoVac's angular sparsity, which is the trade Paper~58 states
+as a conservation law.
 
 \subsection{Graph-native FCI for atoms}
 
@@ -667,8 +754,9 @@ $R=1.5$~bohr to $0.042$~Ha at $R=5.0$~bohr, with a virial ratio far
 from unity~\cite{loutey_fci_mol}.  The paper documents a $29$-version
 diagnostic arc that falsifies basis-set superposition error as the
 geometric driver, rules out orbital-exponent relaxation, and---citing
-the Sturmian structural theorem of Paper~8---disproves every
-single-center Sturmian and bond-sphere alternative as a repair; a
+the Sturmian structural theorem of Paper~8---rules out every
+single-center Sturmian and bond-sphere alternative \emph{of the
+single-$n$ $D$-matrix form} as a repair; a
 single-parameter Fock-weighted kinetic correction partially restores an
 equilibrium ($R_{\mathrm{eq}} \approx 3.8$~bohr) but cannot fit
 $R_{\mathrm{eq}}$ and $D_e$ simultaneously~\cite{loutey_fci_mol,
@@ -683,8 +771,11 @@ equilibrium, the molecular FCI paper)---are guardrails:\ they explain
 must be discretized in coordinates where the separation introduces
 $R$-dependence (prolate spheroidal, molecule-frame hyperspherical, or
 composed), because the two obvious shortcuts (one shared-exponent
-single-center basis; one concatenated graph) are provably incapable of
-binding.
+single-center basis in the single-$n$ $D$-matrix approximation; one
+concatenated graph) cannot bind in the forms analysed.  The
+shared-exponent leg is the scoped one:\ the genuine cross-$n$ basis
+escapes it algebraically (Paper~8 \texttt{cor:binding}; Paper~60), at the
+cost of the qubit-encoding sparsity that motivated the restriction.
 
 %% ========================================================================
 \section{The Algebraic-First Thread}
@@ -847,7 +938,10 @@ sparsity~\cite{loutey_paper58}.  The polyatomic $\mathrm{H}_2\mathrm{O}$
 construction validates only bond--bond coupling, with bond--lone and
 lone--lone couplings unphysical at the composed
 level~\cite{loutey_paper17}; extending the genuine-integral route past
-two centers is the open polyatomic question.  Both remain named
+two centers is the open polyatomic question---now sharpened by Paper~59
+from an algebra question to a transcendence one:\ the third center raises
+the genus from zero to one, the resulting connection is irreducible, and
+the finite closed form is open~\cite{loutey_paper59}.  Both remain named
 boundaries of the current encoding rather than refutations of the
 hierarchy.
 
@@ -879,10 +973,14 @@ $\mathrm{H}_2\mathrm{O}$)~\cite{loutey_paper17}.  The arc is held
 together by an algebraic-first discipline---exact angular coupling,
 algebraic Neumann $V_{ee}$~\cite{loutey_paper12}, Laguerre recurrences,
 and $3j$-terminating Legendre expansions~\cite{loutey_paper15}---and is
-bounded by two proven negative theorems:\ a single-center shared-$p_0$
-Sturmian basis cannot bind a molecule~\cite{loutey_paper8}, and a
+bounded by two structural negative theorems:\ a single-center
+shared-$p_0$ Sturmian basis cannot bind a molecule \emph{in the single-$n$
+$D$-matrix approximation}~\cite{loutey_paper8} (the genuine cross-$n$
+basis does bind, algebraically, at the cost of the
+sparsity---\cite{loutey_paper60}), and a
 concatenated atom-centered graph has no equilibrium~\cite{loutey_fci_mol}.
-Those theorems are why the hierarchy is necessary, not optional.
+Those theorems are why the hierarchy is the route this arc took;\ the
+first is a scoped guardrail rather than an unconditional no-go.
 
 The framework is a zero-parameter, structurally sparse research
 instrument whose accuracy ceilings are now characterized and whose
@@ -926,8 +1024,8 @@ C.~Flammer,
 
 \bibitem{neumann1878}
 C.~Neumann,
-\textit{\"Uber die Entwicklung einer Function nach den Kugelfunctionen}
-(Teubner, Leipzig, 1878).
+\textit{Theorie der Elektricit\"ats- und W\"arme-Vertheilung in einem Ringe}
+(Halle, 1864).
 
 \bibitem{james1933}
 H.~M.~James and A.~S.~Coolidge,
@@ -1060,6 +1158,16 @@ GeoVac Paper~19 (2026).
 J.~Loutey,
 ``Angular Sparsity Is an Atomic-Sector Property: The Abelian Residue of Multi-Center Bonding,''
 GeoVac Paper~58 (2026).
+
+\bibitem{loutey_paper59}
+J.~Loutey,
+``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel Moment:\ Genus One at the Third Center in Momentum-Space Slater Theory,''
+GeoVac Paper~59 (2026).
+
+\bibitem{loutey_paper60}
+J.~Loutey,
+``The Generalized-Sturmian Secular Equation Block-Encodes Without a Metric:\ A Quantum-Algorithm Analysis, Metric-Free for Atoms and a Conditioning Frontier for Molecules,''
+GeoVac Paper~60 (2026).
 
 \bibitem{loutey_fci_atoms}
 J.~Loutey,

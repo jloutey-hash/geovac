@@ -306,7 +306,12 @@ c, d]$ extracted from the positive-chirality sector at $n_{\max} = 2$
 nonzero elements). The $m$-conservation is enforced by the $M^\dagger
 \cdot [D, M]$ conjugate pairing, which ensures the total $M$ quantum
 number of the gauge field is zero. The Gaunt compatibility follows
-from the $3$-$Y$ selection rules of the multiplier algebra.
+from the $3$-$Y$ selection rules of the multiplier algebra. All four
+items (m-conservation, Gaunt compatibility, $100\%$ $k=0$ monopole, and
+the connected-fraction proposition above) are regression-pinned in
+\texttt{tests/test\_paper31\_two\_body.py} (\texttt{test\_spectral\_action\_two\_body\_nmax2}
+and \texttt{...\_nmax3\_decreasing}), which also verifies the
+radial-vs-Coulomb Pearson decreasing with $n_{\max}$.
 \end{proof}
 
 \begin{remark}
@@ -463,8 +468,11 @@ analytic multipole count is therefore not a new algebraic structure
 but a numerical realization of the same spectral content, exposed
 through SVD ordering. Operationally: double factorization on a
 GeoVac Hamiltonian is the multipole expansion accessed by SVD rather
-than by closed form. Detailed verification in
-\texttt{debug/sprint\_df\_multipole\_lift\_memo.md}.
+than by closed form. This is a numerical observation about how DF
+orders an already-established spectral content (the analytic multipole
+count, whose $k=0$ monopole dominance is pinned in
+\texttt{tests/test\_paper31\_two\_body.py}), not a separate algebraic
+claim.
 
 \subsection{For nuclear structure}
 

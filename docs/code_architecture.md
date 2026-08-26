@@ -57,6 +57,14 @@
 | TC integrals | `geovac/tc_integrals.py` | `compute_tc_integrals_block()`, `build_tc_composed_hamiltonian()` |
 | Coupled composition | `geovac/coupled_composition.py` | `build_coupled_hamiltonian()`, `coupled_fci_energy()`, `run_coupled_scoping()` (Track CB, negative result) |
 | Shibuya-Wulfman V_ne | `geovac/shibuya_wulfman.py` | `compute_cross_center_vne()`, `compute_cross_center_vne_element()` |
+| Sturmian 2-center integral engine (Paper 60) | `geovac/sturmian_integrals.py` | `GoscinskianIntegrals(R,...)` `.overlap/.nuclear/.kinetic/.eri`, `validate()` |
+| Sturmian atomic L² encoding λ (Paper 60 eq:blowup) | `geovac/sturmian_l2_encoding.py` | `atomic_l2_lambda(N, family)`, `fit_lambda_exponent()` (openfermion JW LCU 1-norm; Q^3.33/Q^1.19) |
+| Sturmian metric-free isoenergetic secular (Paper 60 eq:secular) | `geovac/sturmian_secular.py` | `build_M`, `build_Tprime`, `build_S`, `solve`, `solve_with_metric`, `gen_configs` (K^0.84, L²-divergence) |
+| Sturmian molecular block-encoding λ (Paper 60 sec:manyelectron) | `geovac/sturmian_molecular_lambda.py` | `h2_lambda(nmax)`, `lambda_scaling()` (n_orb^2.2; imports the integral engine) |
+| Sturmian SW sigma-spectrum law (Paper 60 eq:sigma_law) | `geovac/sturmian_sigma_law.py` | `sw_cross_block(s,nmax)`, `sigma_spectrum`, `cond_from_sigma`, `commutator_from_sigma/direct`, `gerade_constant()` (derived N^2 law; collapse pi^2/24) |
+| Balanced 4e matrix-free direct CI (Paper 19 n_max=4 decider) | `geovac/balanced_direct_ci.py` | `DirectCI4e(h1,eri,ecore).ground_state()` (string-sigma + Davidson; ~1600x vs assembled matrix; `faithful=` historical pre-fix phase) |
+| Quadrature-free diatomic (Paper 58 sec:qfd) | `geovac/qfd_core.py` + `geovac/qfd_assemble.py` | `build_S_h`, `build_g`, `total_energy(...,dps)` (closed-form S/h/g -> Loewdin -> FCI at any precision; H2 84 digits, LiH 30) |
+| Certified reference values (Paper 58/59 artifact) | `benchmarks/certified_reference/generate_table.py` | 51-entry table + `--check`; human doc `docs/certified_reference_values.md` |
 | Balanced coupled builder | `geovac/balanced_coupled.py` | `build_balanced_hamiltonian(spec, nuclei)` |
 | Frozen core (Ne-like) | `geovac/neon_core.py` | `FrozenCore(Z)` |
 | NaH spec | `geovac/composed_qubit.py` | `nah_spec()` |

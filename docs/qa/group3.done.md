@@ -166,3 +166,103 @@ claim restates them (C7).
   (same pattern as the 2026-07-05 P57 reconciliation) — not a mid-review goalpost
   move; bite-2 cert stands. Surfaced by the v4.74.1 (M3 rank-1→2 flip) delta-QA,
   which ran CLEAN-DELTA (calibrated) against the corrected framing.
+
+---
+
+## Re-review OWED (2026-08-22, v5.0.0) — group3
+
+**Papers in this target changed after certification.** Logged here, at the
+owning source, so the certified status is not read as covering text that
+post-dates it.
+
+- **Paper 24** (`paper_24_bargmann_segal.tex`): the two-fermion
+  entanglement-rigidity corollary is **RETRACTED** — claim, mechanism and its
+  INTERNAL THEOREM tier all withdrawn. Section rewritten with the corrected
+  measurements (S = 0.0671/0.0716/0.0833; commutator 0.74/0.63/0.67;
+  E₀ = 21.6538/21.6279/21.5442). The π-freeness results are untouched.
+- C16 registry entry `p24-entanglement-rigidity` added (scope group3 + group4).
+- Backing tests rewritten (`test_paper24_ho_entropy.py`), plus a new tripwire
+  `test_paper24_n_tot_guard_stays_removed`.
+
+**Discharge condition:** a CLEAN DELTA over the changed loci (diff-scoped, per
+the qa.md run-shape rule), which is also the standing precondition for the next
+FULL certifying pass. The delta must re-test *these specific defects* rather
+than trust this entry (qa.md hard rule, added the same day).
+
+**Deterministic layer already re-run and GREEN on this target:** C10 (compiles,
+with the aux-clean fix), C13, C14, C16, C17, C18, C19, C5/C12 (now corpus-wide
+after the scope fix). What is owed is the LLM-judgment layer: claims, and
+synthesis where the target has one.
+
+**DISCHARGED — CLEAN-DELTA, 2026-08-24 (v5.0.9).** Delta scope = the changed loci
+(P24 `sec:entanglement-rigidity` retraction + the group3 synthesis's rigidity
+passages). Pasted-hunks delta (seeds only in prompts). Two dimensions dispatched, both
+**exercised + calibrated**: claims on P24 (opus, 1/1 seed — an inverted "negligibly
+small" clause, caught) and synthesis on the group3 HO-rigidity passage (opus, 1/1 seed
+— an H²(S⁵)→H²(S³) manifold slip, caught); specificity clean. **Zero verified
+MATERIAL** — the P24 retraction is honest and internally consistent, and the group3
+synthesis carries only the *valid parent* HO rigidity theorem (unique central potential
+from the Euler operator on H²(S⁵)), NOT the retracted entropy corollary. Seed key
+`debug/qa/group36_delta_seed_key.json`.
+
+**Honest correction to the note above:** the v5.0.0 "deterministic layer GREEN" claim was
+NOT accurate for this target — C10 (run correctly) had **pre-existing broken/cross-document
+`\ref`s** in paper_18 and paper_22 (`sec:theorem`, `sec:universal_partition`, +cross-doc to
+p14/p18/p28) and a bad `\cite{paper7}`, all fixed on sight this run. Deterministic layer is
+green **now**. Branch stays CERTIFIED; a clean delta is the precondition for the next FULL
+certifying pass.
+
+---
+
+## FULL certifying pass — CERTIFIED ✅ (2026-08-24, v5.0.9)
+
+Fired after the clean delta above (qa.md run-shape rule: only a FULL run emits PASS).
+Completes the directed group4 → group6 → **group3** retraction re-cert sequence.
+
+**Panel:** 9 dispatched reviewers (4 claims chunks, 1 citation, 1 synthesis, 3 code)
++ 1 completeness-critic. **All 9 calibrated** — every planted seed caught (P18
+Observation→Theorem, P56 injection-flip, P7 discrete/continuum, P24 single-Slater,
+2× P55 arXiv transpositions, synthesis Fock-rigidity uniqueness-flip, 3× code
+b1/b2 tautologies); zero false-positives on the known-good controls. The critic
+independently re-caught the P24 seed (blind) and confirmed the P31 §9 remediation scope.
+Seed key `debug/qa/group3_fullcert_seed_key.json` (scratch deleted; seed-leak check clean).
+
+**One cert-blocking defect — found & remediated (analog of the group6 synthesis zombie):**
+- **P31 §9 (`sec:sig_l2_verification`) descope-zombie** — the withdrawn Lorentzian
+  "literal identification at finite cutoff / Lorentzian closure complete" reading
+  survived because the C16 entry `lorentzian-literal-identification-krein` was
+  scoped **group6-only** (files = P34 + group6 synth); the group6 §III.29 correction
+  never propagated to P31 (group3). Remediated to the corrected structural-
+  correspondence / signature-blind / compact-boost verdict (Riemannian closure kept);
+  **C16 widened to `group3 group6` + P31 file + two single-line tells, discrimination
+  proven** (fires on old wording, exempt on corrected).
+
+**Fix-on-sight (all remediated):** κ tier-visibility (P31 "set by Jacobian"→coincides/
+Observation; P31 π-table yes→no; P18 §kappa +Observation caveat); P22 O(Q^2.5)/51×–1712×
+universality→hedged to Corollary 1; P24 Minnesota −0.81→−0.55 MeV (paper+test); P57
+"magic numbers"→HO-closures; P22 ~4×→~3×; P7 abstract + P0 cross-ref + P7 N>1
+discrete/continuum precision; 2 citation titles; synth date; a pre-existing C18
+duration ("year of internal work").
+
+**Backing gaps — PI directed "write the tests first" (all CLOSED with genuine tests):**
+- P55 M1 (`test_paper55_m1_pure_tate.py`): rewrote the tautological F-theorem sub-test
+  to call production `qed_two_loop.{scalar,dirac}_F_theorem()` (retires the resurrected
+  Paper-50 typed-in-F false-positive) + added a discrimination guard (rejects ζ(3),
+  ζ(3)/π, Catalan, ζ(5)).
+- P55 M3-on-S⁵ (`test_paper55_m3_s5.py`, NEW): direct spectral sum vs Hurwitz closed
+  form + χ₋₄ parity discriminant, ~40-digit, + wrong-degeneracy guard.
+- P55 M2 Grothendieck (`test_paper55_grothendieck.py`, NEW): derives the explicit
+  L-polynomial class from the defining equation, general-n symbolic identity + guard.
+- P22 Breit rank-2 (`test_paper22_breit_angular.py`, NEW): reproduces the Z=4
+  Coulomb/SS/SOO density table (l_max 0–3) from Wigner-3j + potential-independence + guard.
+- P54 (zero tests/ cites → cited): added inline `test_paper31_two_body.py` citations to
+  `thm:angular_structure` + connected-fraction; removed the `debug/` DF↔multipole citation.
+- Papers now cite the tracked tests (S⁵/Grothendieck/Breit debug/ citations removed);
+  `docs/claim_test_matrix.md` rows synced (54/55/56/22-Breit/24-count).
+
+**Deterministic layer GREEN (whole-target):** C5, C10 (12 docs compile), C11, C13, C14,
+C16, C17, C18, C19. **Regression:** 139 passed / 9 slow-skipped over the touched +
+baseline suite (incl. the 18 symbolic S³ proofs).
+
+**Verdict: group3 CERTIFIED (FULL pass PASS).** The v5.0.0 retraction re-review OWED is
+fully discharged across group3/group4/group6.

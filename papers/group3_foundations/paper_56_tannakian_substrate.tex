@@ -149,7 +149,7 @@ The fourteenth math.OA standalone in the \textsc{GeoVac} series.
 
 \medskip
 \noindent\emph{Cosmic-Galois injection.} We close the
-\emph{injection direction} $\Ustar_{GV} \hookrightarrow
+\emph{injection direction} $\Ustar_{GV} \to
 \mathcal{U}_{4} \rtimes SL_{2}$ into the (abelianization of the)
 unipotent radical of the level-4 motivic Galois group
 $\mathcal{G}_{4} = \mathcal{G}_{\mathrm{MT}(\Z[i, 1/2])}$ of
@@ -158,7 +158,7 @@ Deligne 2010 + Glanois 2015, with four structural compatibilities
 cyclotomic $\chi_{4}$, abelianized image via Glanois basis;\
 Section~\ref{sec:injection_g4},
 Theorem~\ref{thm:injection_g4}). The proof uses the
-Eskandari--Murty--Nemoto 2025 forcing-of-level-4 result + the
+Eskandari--Murty--Nemoto 2025 level-4 placement of $G$ + the
 Goncharov--Deligne 2005 faithful action on
 $\pi_{1}^{\mathrm{mot}}(\Gm - \mu_{4})$. Equality / surjectivity
 on the depth-$\ge 2$ content is the named long-range forward
@@ -263,7 +263,7 @@ finite-cutoff reconstruction in Sections~\ref{sec:tc2a_equality}
 \ref{sec:tc2c_higher_cutoff} (higher cutoffs), and
 \ref{sec:tc2d_cofiltered_coherence} (cofiltered coherence).
 Section~\ref{sec:injection_g4} closes the cosmic-Galois injection
-direction $\Ustar_{GV} \hookrightarrow \mathcal{U}_{4} \rtimes
+direction $\Ustar_{GV} \to \mathcal{U}_{4} \rtimes
 SL_{2}$ into the (abelianization of the) unipotent radical of the
 level-4 motivic Galois group $\mathcal{G}_{4}$
 (Theorem~\ref{thm:injection_g4}).
@@ -296,23 +296,29 @@ as an MvS corollary.
 
 The neutral-Tannakian backbone we transport is Deligne--Milne
 1982~\cite{deligne_milne1982}, the modern motivic-Galois treatment is
-Andr\'e 2004~\cite{andre2004} and Brown 2017~\cite{brown2017}, the
+Andr\'e 2004~\cite{andre2004} and Brown~\cite{brown2017}, the
 cyclotomic mixed-Tate package is Deligne 2010~\cite{deligne2010} +
 Glanois 2015~\cite{glanois2015}, and the Connes--Marcolli cosmic
 Galois group $U^*_{CM}$ is~\cite{connes_marcolli2004}. We flag one
-common framing slip:\ Brown 2017~\cite{brown2017} establishes a
-\emph{surjection} $U^*_{CM} \twoheadrightarrow \mathcal{G}_{MT(\Z)}$,
-not an identification --- $U^*_{CM}$ has one generator in every
-positive degree (free non-abelian) while $\mathcal{G}_{MT(\Z)}$ has
-generators only in odd degrees $\ge 3$. The period ring of
+common framing slip:\ the two groups are related by a \emph{surjection}
+$U^*_{CM} \twoheadrightarrow \mathcal{G}_{MT(\Z)}$, not an identification.
+This is an elementary comparison of two free pro-unipotent groups, not a
+theorem we are importing:\ $U^*_{CM}$ has one generator in every positive
+degree (free non-abelian, Connes--Marcolli~\cite{connes_marcolli2004}) while
+$\mathcal{G}_{MT(\Z)}$ has generators only in odd degrees $\ge 3$ (Brown
+2012~\cite{brown2017}).  Brown does \emph{not} assert the comparison;\ his
+cosmic-Galois paper explicitly leaves open whether his groups are related
+to the Connes--Marcolli ones at all. The period ring of
 \textsc{GeoVac} sits inside MT($\Z[i, 1/2]$) at level $\le 4$;\ see
 Paper~55~\cite{paper55} for the cyclotomic-mixed-Tate classification.
 The natural cosmic-Galois comparison target for $U^*_{GV}$ is
 therefore $\mathcal{G}_{MT(\Z[i, 1/2])} = \mathcal{G}_4$, the level-4
 motivic Galois group (Deligne 2010), \emph{not} Brown's smaller
 $\mathcal{G}_{MT(\Z)}$ (Eskandari--Murty--Nemoto
-2025~\cite{eskandari_murty_nemoto2025} prove Catalan $G$ is not a
-period of MT($\Z$), but is at level 4, forcing this refinement).
+2025~\cite{eskandari_murty_nemoto2025} place Catalan $G$ at level~4;\ that
+$G$ is \emph{not} a period of MT($\Z$) is expected but not proven, so the
+refinement is motivated by where $G$ is known to live, not compelled by a
+proven exclusion).
 Bost--Connes / Greenfield--Marcolli--Teh QSM lineage is \emph{ruled
 out} as a transport target on four structural grounds (see Paper~55
 §subsec:open\_m2\_m3 honest-scope paragraph and the
@@ -420,7 +426,10 @@ restricts to a sector-truncation $\Oh_{m} \to \Oh_{k}$. Set
 \begin{theorem}[Inverse limit, PS-3]\label{thm:inverse_limit}
 $\Ginf \cong \Q^{\N_{\mathrm{sec}}}$, the $\Q$-vector space of
 finitely-supported sequences over the natural-number-indexed sector
-set $\N_{\mathrm{sec}} = \{(n, l) :\ n \ge 1, 0 \le l < n\}$. The
+set $\N_{\mathrm{sec}} = \{(n, l) :\ n \ge 1, 0 \le l \le n\}$
+(shell $n$ therefore has dimension $n + 1$, giving $N(\nmax) = \nmax(\nmax + 3)/2$;\
+this is the convention \texttt{geovac/pro\_system.py} enumerates, and the one
+Theorem~\ref{thm:endo_rigidity}'s $(i+1) \times (j+1)$ blocks require). The
 continuum cochains $\chi_{\infty}, \eta_{\infty}$ of v3.59.0 (Mellin
 M2-residue $\sqrt{\pi}/2$ + sector-LOCAL closed forms) project
 coherently to $\Ginf$:\ for every $\nmax$, the projection
@@ -448,9 +457,11 @@ sector grading, of closed-form dimension
 \[
    \dim_{\Q} \End_{\mathrm{compat}}(\Oh_{\nmax})
    \;=\; \sum_{1 \le j \le i \le \nmax} (i + 1)(j + 1)
-   \;=\; \frac{\nmax(\nmax + 1)(\nmax + 2)(3 \nmax + 5)}{24}
+   \;=\; \frac{\nmax(\nmax + 1)(\nmax + 2)(3 \nmax + 13)}{24}
    \;\;\bigl(= 19, 55, 125, 245 \text{ for } \nmax = 2, 3, 4, 5\bigr).
 \]
+The closed form is a symbolic identity---proved, and regression-pinned, in
+\texttt{tests/test\_paper56\_endo\_rigidity.py}.
 \end{theorem}
 
 \begin{remark}\label{rem:endo_surprise}
@@ -983,7 +994,7 @@ $\dim \Aut^{\otimes}(\fibfun)\big|_{\mathrm{combined}} = 15 + 3
 
 \begin{proof}
 By the exterior-tensor-product theorem for neutral Tannakian
-categories \cite[\S5]{deligne1990}, for two neutral
+categories \cite{deligne1990}, for two neutral
 Tannakian categories $C_{1}, C_{2}$ over $\Q$ with fiber functors
 $\omega_{1}, \omega_{2}$,
 $\Aut^{\otimes}(\omega_{1} \boxtimes \omega_{2}) = \Aut^{\otimes}(\omega_{1})
@@ -995,6 +1006,15 @@ $\omega_{2}$ the analogous forgetful, the per-factor dims of
 Theorems~\ref{thm:tc2a_equality} and \ref{thm:tc2b_sl2_equality}
 give $\dim(15) + \dim(3) = 18 = \dim \Ulev$.
 $\square$
+
+\emph{Provenance caveat.}\ This corollary's only external warrant is the
+exterior-tensor-product theorem for neutral Tannakian categories.  We cite
+Deligne's \emph{Cat\'egories tannakiennes} for it, but have not been able to
+verify a specific numbered statement against the primary text;\ the section
+pointer previously given here is withdrawn as unverified.  The factorization
+$\mathrm{Aut}^{\otimes}(\omega_{1} \boxtimes \omega_{2}) = \mathrm{Aut}^{\otimes}(\omega_{1}) \times \mathrm{Aut}^{\otimes}(\omega_{2})$
+is standard, but a reader wanting the citable form should consult the
+primary source directly.
 \end{proof}
 
 % =====================================================================
@@ -1048,16 +1068,19 @@ bit-exact at every cutoff. $\square$
 \end{proof}
 
 \begin{remark}[Rank-nullity closed form]\label{rem:tc2c_closed_form}
-Empirically across $\nmax \in \{1, 2, 3, 4\}$, the rank of the
+The rank of the
 naturality $+$ unit constraint matrix is
-$\mathrm{rank}(A) = 2 \cdot 3 N(\nmax) + 1$ exactly (verified
-values:\ $19, 31, 55, 85$). This matches the structural picture:\
+$\mathrm{rank}(A) = 3 \cdot 3 N(\nmax) + 1 = 9N(\nmax)+1$ exactly (verified
+values:\ $19, 46, 82, 127$;\ equivalently forced by rank--nullity from the
+$3N$ nullity recorded in Theorem~\ref{thm:tc2a_equality}'s proof, which
+gives $\mathrm{rank}(A)=(12N+1)-3N$). This matches the structural picture:\
 naturality forces $p_{g} = 1$, $r_{g} = 0$, $s_{g} = 1$ for each
 $g$ (three linear constraints per generator) plus the unit
-normalisation $\eta_{T} = 1$, totalling $3 \cdot 3 N(\nmax) + 1$
-\emph{symbol fixings} on the $12 N(\nmax) + 1$ indeterminates, of
-which $3 N(\nmax) + 1$ are independent over the morphism panel
-data (yielding the rank pattern above). The closed-form
+normalisation $\eta_{T} = 1$, totalling $9 N(\nmax) + 1$
+\emph{symbol fixings} on the $12 N(\nmax) + 1$ indeterminates.  All of them
+are independent over the morphism panel data, so the solution space has
+dimension $(12N+1)-(9N+1) = 3N$---which is the rank pattern above, by
+rank--nullity. The closed-form
 generalisation across all $\nmax \ge 1$ is conjectured and likely
 sprint-scale to verify symbolically;\ TC-2c does not pursue this
 sharpening.
@@ -1167,8 +1190,13 @@ generated by depth-graded motivic MZVs $\{\zeta^{\mathfrak{m}}(s_{1},
 \ldots, s_{k})\}$ at level $N = 4$ (Deligne 2010
 \cite{deligne2010};\ Glanois 2015 explicit basis $\mathcal{B}^{4}$
 \cite{glanois2015}). The natural action of $\mathcal{G}_{4}$ on
-periods is faithful at every level $N \ge 1$
-(Goncharov--Deligne 2005~\cite{goncharov_deligne2005}), so a
+periods is faithful at level~4.  This is not a general fact and we do not
+state it as one:\ faithfulness holds only in the exceptional cases
+$N \in \{2,3,4,6,8\}$ (Deligne 2010~\cite{deligne2010}, \S4 \emph{Fidelit\'e}), together
+with $N=1$ (Brown 2012), and it \emph{fails} for prime $N \ge 5$, where
+Goncharov showed the action is already unfaithful on $\wedge^{2}\mathfrak{u}^{1}_{\omega}$.
+Level~4 is one of the exceptional cases, which is all this paper needs;\ the
+underlying mixed-Tate package is Deligne--Goncharov~\cite{goncharov_deligne2005}.  So a
 \emph{period-content map} $\HGV \to \mathrm{Periods}(\mathcal{G}_{4})$
 that respects the GeoVac Hopf-algebra structure dualises to a
 homomorphism $\Ustar_{GV} \to \mathcal{G}_{4}$ of pro-algebraic
@@ -1366,11 +1394,13 @@ for $N > 2$ (Remark~\ref{rem:m3_parity_rank}).\qed
 
 \begin{remark}[Why level 4 and not level 1]\label{rem:why_level_4}
 The refinement to $\mathcal{G}_{4}$ (rather than Brown's
-$\mathcal{G}_{\mathrm{MT}(\Z)}$ at level 1) is forced by
+$\mathcal{G}_{\mathrm{MT}(\Z)}$ at level 1) is motivated by
 Eskandari--Murty--Nemoto 2025~\cite{eskandari_murty_nemoto2025}:\
-Catalan $G = \beta(2)$ is provably not a period of mixed Tate over
-$\Q$, but is mixed Tate over $\Q(i) = \Q[i, 1/2]^{\times \otimes \Q}$
-at level 4. Since \textsc{GeoVac}'s M3 vertex-parity sector
+Catalan $G = \beta(2)$ \emph{is} mixed Tate over
+$\Q(i) = \Q[i, 1/2]^{\times \otimes \Q}$ at level 4.  \emph{Honest scope:}\
+the converse---that $G$ is not a period of mixed Tate motives over $\Q$---is
+expected but, to our knowledge, open;\ the level-4 choice therefore rests on
+where $G$ is \emph{known} to live, not on a proven exclusion at level 1. Since \textsc{GeoVac}'s M3 vertex-parity sector
 produces $G$ in QED vertex sums (Paper~28 Theorem~3, Sub-sector 2),
 the natural cosmic-Galois target must contain at least level 4. No
 level $\ge 5$ is needed:\ Paper~55 \S 5 shows that every M3 output
@@ -1540,7 +1570,7 @@ panel asserted a unimodular ``standard basis'' Gram with $\det = 1$;\
 that was the hardcoded $\mathrm{eye}(N)$ the genuine computation
 refutes.) The depth-1 realisation of each generator in the Glanois
 basis $\mathcal{B}^{4}$ via the three quarter-integer Hurwitz blocks,
-with the Eskandari--Murty--Nemoto level-4 forcing, remains valid as the
+with the Eskandari--Murty--Nemoto level-4 placement, remains valid as the
 description of the (collapsed) abelianized image.
 \end{itemize}
 
@@ -1601,10 +1631,11 @@ cofiltered coherence of TC-2d
 \subsection{The natural realisation is Hodge / Hodge-de-Rham}\label{sec:open_g4_hodge}
 
 The injection $\Phi^{\mathrm{inj}}$ of Theorem~\ref{thm:injection_g4}
-identifies the \emph{abelianization} $(U^*_{GV})^{\mathrm{ab}}$ as a
-closed sub-pro-algebraic group of $\mathcal{U}_4^{\mathrm{ab}} \rtimes
-SL_2$ (it is \emph{not} a closed immersion of $U^*_{GV}$ itself --- the
-M3 column is rank~$2$, $\ll N$).  The motivic Galois
+realises the \emph{image} of the abelianization
+$(U^*_{GV})^{\mathrm{ab}}$ inside $\mathcal{U}_4^{\mathrm{ab}} \rtimes
+SL_2$ (it is \emph{not} a closed immersion of $U^*_{GV}$ itself, and the
+abelianization is not identified with a subgroup --- the
+M3 column is rank~$2$, $\ll N$, so the map has a large kernel there).  The motivic Galois
 group $\mathcal{G}_4$ admits multiple realisations --- Betti,
 algebraic de Rham, Hodge / Hodge-de-Rham, étale, $\ell$-adic,
 crystalline --- and the comparison map at the period-ring level is
@@ -1640,7 +1671,7 @@ input;\ GeoVac supplies none of it.  Categorically, those
 realisations are unreachable from GeoVac's data.
 \end{enumerate}
 
-The level-$4$ injection $\Phi^{\mathrm{inj}}: U^*_{GV} \hookrightarrow
+The level-$4$ injection $\Phi^{\mathrm{inj}}: U^*_{GV} \to
 \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ of
 Theorem~\ref{thm:injection_g4} is therefore to be read as an
 \emph{abelianized} Hodge / Hodge-de-Rham homomorphism (Reading~A; not a
@@ -1672,10 +1703,12 @@ J, Q)$ is a genuine polarised weight-$1$ Hodge structure.
 
 \begin{proposition}[GeoVac realises the CM point;\ CM field $\Q(i)$]
 \label{prop:hodge_cm_point}
-The Mumford--Tate group of GeoVac's canonical polarised weight-$1$ Hodge
-structure $(V_{\mathrm{fund}}, J, Q)$ is the norm-$1$ torus of $\Q(i)$
+The Hodge group (the special Mumford--Tate group, $\MT \cap SL_2$) of
+GeoVac's canonical polarised weight-$1$ Hodge structure
+$(V_{\mathrm{fund}}, J, Q)$ is the norm-$1$ torus of $\Q(i)$
 --- a $1$-dimensional CM torus inside $SL_2$ --- \emph{not} the full
-$SL_2$.
+$SL_2$.  (The full Mumford--Tate group adds only the weight scalars,
+$\mathrm{Res}_{\Q(i)/\Q}\mathbb{G}_m$;\ the CM conclusion is unchanged.)
 \end{proposition}
 
 \begin{proof}
@@ -1686,7 +1719,7 @@ torus $T_J = \{aI + bJ : a^2 + b^2 = 1\}$, with $\det(aI + bJ) = a^2 + b^2
 circle (a $1$-dimensional $\Q$-torus in which the real circle is dense)
 and preserves the definite Riemann form $QJ = I$, hence $T_J = SO(2)$ as
 a $\Q$-group, a proper $1$-dimensional subgroup of $SL_2$ ($\dim T_J = 1
-< 3 = \dim SL_2$).  Equality $\mathrm{MT} = SL_2$ would require a
+< 3 = \dim SL_2$).  Equality of the Hodge group with $SL_2$ would require a
 non-algebraic (transcendental) complex structure, which the algebraic
 GeoVac substrate cannot produce.  Verified bit-exact in
 \texttt{tests/test\_paper56\_hodge\_sl2.py}.
@@ -1727,23 +1760,141 @@ Deligne 2010~\cite{deligne2010};\ the audit verifies the common spin
 cause and the same-field identity, not the motivic result.
 \end{remark}
 
-\begin{remark}[An independent chemistry realisation of the $\Q(i)$ CM point (Paper~59)]
+\begin{remark}[Thermal time realises the Hodge circle;\ $\mu_4$ at the
+quarter-periods]
+\label{rem:kms_hodge_circle}
+The Hodge circle of Proposition~\ref{prop:hodge_cm_point} is not only abstractly
+present in the substrate --- it is the compact thermal-time flow.  On the
+$j=\tfrac12$ doublet the modular generator of the truncated Bisognano--Wichmann
+wedge analysis is $K=\mathrm{diag}(2m_j)$, with integer spectrum, so
+$e^{2\pi iK}=\mathbf 1$ exactly (the KMS $\beta=2\pi$ circle).  Transported to
+the Kramers frame $U$ (the eigenframe of $J$), the flow \emph{is} the Hodge
+circle, $U\,e^{itK}\,U^{\dagger} = \cos t\,\mathbf 1 + \sin t\,J$;\ in
+particular $J$ is the flow's $\beta/4$ quarter-period point, the four
+quarter-periods are $\{\mathbf 1, J, -\mathbf 1, -J\}\cong\mu_4$ --- the
+conductor $4=|\mathrm{disc}\,\Q(i)|$ is the order of the flow's torsion point
+--- and the half-period separates the sectors:\ $e^{i\pi K}=-\mathbf 1$ on the
+spinor doublet (half-integer $m_j$;\ the spin double cover, visible inside the
+thermal circle) versus $+\mathbf 1$ on any integer-$l$ scalar sector, which
+factors through $\mu_2$ and stays pure-Tate
+(Remark~\ref{rem:qi_triangulation}).  All statements are exact
+(\texttt{tests/test\_paper56\_kms\_hodge\_circle.py}).  Three qualifications
+keep this an Observation.  First, any two maximal tori of $SU(2)$ are
+conjugate, and both halves of the statement are separately classical (the Hodge
+circle of a CM elliptic curve generates the norm-$1$ torus;\ the
+Bisognano--Wichmann flow is KMS at $\beta=2\pi$);\ the content is the
+identification of the program's two \emph{specific}, independently derived
+operators, and the location of the arithmetic data ($\mu_4$ torsion, spinor
+sign) at canonical points of the flow.  Second, compactness alone does not
+produce $\Q(i)$:\ the scalar sector also generates a compact circle yet its
+periods are pure-Tate over $\Q$.  The discriminating datum is, however,
+\emph{not} merely whether the $\mu_4$ point acts faithfully (spinor) or through
+$\mu_2$ (scalar):\ the Bargmann--Segal Hardy phase circle of the harmonic
+oscillator (Paper~24) carries a \emph{faithful} $\mu_4$---the metaplectic
+zero-point $\tfrac32$ lifts the substrate's bipartition parity to order
+four---yet admits no CM Hodge structure, because its generator $N+\tfrac32$ is
+strictly positive (no $\pm$-paired spectrum, hence no traceless
+$2$-plane for a $\Q$-rational $J$ to rotate).  The discriminant separating the two carriers examined is a
+faithful $\mu_4$ acting as a real rotation of a $\Q$-rational $2$-plane, i.e.\
+a $\pm$-symmetric generator spectrum---which the quaternionic spinor
+doublet supplies (Paper~24 reaches the same negative by three independent
+exact obstructions, of which this is one facet;\ no completeness or
+uniqueness claim is made).  The conductor-$4$ \emph{period} content, by
+contrast, does transfer:\ the Hardy tower's parity-graded spectral zeta is
+$2^{s-3}(\beta(s)-\beta(s-2))$, exactly one quarter of the Dirac value, with
+the $\chi_{-4}$ produced by the half-integer index shift times the parity
+grading (spin on $S^3$,
+metaplectic on $S^5$)---so an order-$2$ datum lifted to order $4$ suffices for
+conductor-$4$ periods, while the CM \emph{Hodge structure} additionally needs
+the $\pm$-paired rational carrier
+(\texttt{tests/test\_paper24\_hardy\_circle\_arithmetic.py}).  Third,
+the $2\pi$-closure re-reads an already-registered structural fact (the
+compactness of the truncated boost);\ it is a consistency statement, not
+independent evidence.  We have not found this flow-level identification in the
+literature:\ the closest structures are the labelling of extremal
+$\mathrm{KMS}_\infty$ states by complex-multiplication points in the
+quantum-statistical-mechanics program of
+Connes--Marcolli--Ramachandran~\cite{connes_marcolli_ramachandran2005} (a
+labelling of states, not an identification of the flow) and a recent physical
+$U(1)\times U(1)$ R-symmetry flow realising a Hodge decomposition with complex
+multiplication at special loci~\cite{angius_volpato2026} (an R-symmetry, not a
+thermal/modular flow).
+\end{remark}
+
+\begin{remark}[An independent chemistry realisation of the $\Q(i)$ arithmetic
+(Paper~59):\ convergent, not common-cause]
 \label{rem:paper59_cm}
-A concrete elliptic period from a wholly different corner of the program lands at
-the same CM point.  The three-center electron-repulsion integral of
-Paper~59~\cite{loutey_paper59} reduces, in momentum space, to a two-scale Bessel
-moment whose curve is the Legendre family over
-$X(2)=\Gamma(2)\backslash\mathfrak{H}^{\ast}$ (modulus $\lambda = 1-\rho$, with
-$\rho$ the ratio of the two densities' Fock scales), and its parameter integral
-sweeps every complex-multiplication fibre.  The central fibre $\rho=\tfrac12$ is
-exactly $\tau=i$, CM by $\Q(i)$, where the period is the $\Q(i)$-pure
-$\Gamma$-value $K(\tfrac12)=\Gamma(1/4)^{2}/(4\sqrt\pi)$ (verified against
-Chowla--Selberg to $\sim\!10^{-51}$).  A molecular integral and the Dirac Kramers
-doublet of Proposition~\ref{prop:hodge_cm_point} thus reach the \emph{same} CM
-field $\Q(i)$ from independent directions, corroborating
-Remark~\ref{rem:cm_explains_hb}.  The full integrated three-center integral is a
-$\Gamma(2)$ multiple modular value; whether it, or its non-CM fibres, reaches the
-generic Hain--Brown locus is open.
+A concrete elliptic period from a wholly different corner of the program carries
+the same conductor-$4$ arithmetic --- by a different forcing.  The three-center
+electron-repulsion integral of Paper~59~\cite{loutey_paper59} reduces, in
+momentum space, to a two-scale Bessel moment whose curve is the Legendre family
+over $X(2)=\Gamma(2)\backslash\mathfrak{H}^{\ast}$ (modulus $\lambda = 1-\rho$,
+with $\rho$ the ratio of the two densities' Fock scales).  The load-bearing
+arithmetic statement is fibre-independent:\ the fibre period is
+$K(\lambda)=\tfrac{\pi}{2}\,\theta_{3}^{2}$, and $\theta_{3}^{2}$ \emph{is} the
+theta series of $\Z[i]$ --- by Jacobi's two-squares theorem
+$r_{2}(n)=4\sum_{d\mid n}\chi_{-4}(d)$, the weight-one, level-$4$ Eisenstein
+series of character $\chi_{-4}$, with $L(\theta_{3}^{2},s)=4\,\zeta(s)\beta(s)$
+--- and the physical Bessel twist promotes the level from $\Gamma(2)$ to
+$\Gamma(4)$ (its decay rate makes
+$\sqrt{\rho}=\theta_{4}^{2}/\theta_{3}^{2}$ physical), whose field is
+$\Q(\mu_4)=\Q(i)$ (verified in
+\texttt{tests/test\_paper59\_theta\_chi4.py}).  The $\tau=i$ fibre at
+$\rho=\tfrac12$, where the period is the $\Q(i)$-pure $\Gamma$-value
+$K(\tfrac12)=\Gamma(1/4)^{2}/(4\sqrt\pi)$ (Chowla--Selberg, verified
+$\sim\!10^{-51}$), remains a clean instance but is not load-bearing:\ any family
+sweeping its full real modulus locus passes through every CM fibre, the
+physically distinguished fibre is the coincident-scale cusp $\rho=1$ rather than
+$\rho=\tfrac12$, and landing on the Legendre family is itself expected for a
+four-branch-point curve (Paper~59's own deflation).  The group side sharpens
+this:\ the only involution the physics induces on the modulus is
+$\rho\mapsto1/\rho$ (the density exchange;\ the observable descends to
+$X_0(2)$, Paper~59), whose physical fixed locus is the pure-Tate cusp
+$\rho=1$---so $\rho=\tfrac12$ is one member of the exchange orbit
+$\{\tfrac12,2\}$, a visited fibre, not a fixed one.  The two routes to $\Q(i)$
+are therefore \emph{convergent, not common-cause}:\ the Dirac route is
+spin-forced (half-integer shift $\times$ parity split $\to$ quarter-integer
+Hurwitz arguments $\to \chi_{-4}$, Remark~\ref{rem:qi_triangulation}) and
+mixed-Tate over $\Q(i)$, while the chemistry route is level-forced (the
+$\Z[i]$ theta series;\ $\Gamma(2)\to\Gamma(4)$) and mixed-elliptic with an
+irregular twist.  They share the arithmetic pattern $4=2\times2$ --- a
+double-cover datum combined with a second $\Z_2$ --- but the two double covers
+belong to different groups, and no comparison map between the two underlying
+$\Q^2$-carriers has been exhibited (the weight-$\tfrac12$/spin analogy has a
+classical anchor:\ theta characteristics \emph{are} spin structures,
+Atiyah~1971~\cite{atiyah1971}).  The convergence is now quantified both ways:\
+across the corpus's period-identification record, \emph{blind} searches land on
+disc~$-4$ in $0$ of $30$ independent campaigns (including two that targeted it),
+while \emph{forced} constructions that exit the pure-Tate ring at all land on it
+in $3$ of $3$ --- $\Q(i)$ is the first CM field the substrate's rational
+arithmetic can reach, a constrained-landscape statement rather than a
+coincidence (CHANGELOG v4.103.0);\ and on the modular side the arithmetic
+content of any single $\Z_2$ realisation is provably one bit
+($\mathrm{PSL}_2(\Z)\cong\Z_2\ast\Z_3$ torsion:\ order two forces disc $-4$,
+order three disc $-3$).  Two concrete upgrades would convert convergence
+into mechanism:\ a comparison map \emph{natural in the GeoVac data} --- e.g.\
+presenting the fundamental doublet as $H_1$ of a GeoVac-constructed abelian
+variety;\ note the polarisation-matching clause is void as a discriminator,
+since $h(\Q(i))=1$ makes the principally polarised rank-$2$ $\Q(i)$-CM Hodge
+structure unique up to isomorphism, so even a tautological identification
+carries $QJ=I$ to the Riemann form and only \emph{functoriality} can
+discriminate --- or a measured $\beta(2)$ in the physical integrated observable
+itself.  The second test has now been \emph{run}:\ an exact refactorization of
+the observable (Paper~59, the $(k,w)$ frame) certified its value to $66$
+cross-validated digits, and the guarded, decoy-calibrated search is
+\textbf{decisively negative} for $\beta(2)$/Catalan content at height $\le10$
+through weight three ($64$ working digits) --- no measured conductor-$4$
+content exists in the integrated observable at clean heights, so, at reachable
+heights, the conductor-$4$ arithmetic remains a demonstrated property of the
+\emph{family} ($\theta_3^2$) and of the $D\to0$ shadow, not of the physical
+value.  (Calibration rider,
+correcting the earlier ``decidable at $\ge32$ digits'':\ height budgets scale
+as $10^{D/n}$ in the ring dimension $n$, so the dimension-twenty ring needed
+$\sim\!64$ digits for even a height-$10$ verdict;\ the negative excludes clean
+closed forms, not large-height ones.)  With T-1 tautology-blocked and T-2
+negative at its reachable height, the seam stands as \emph{convergent} on all
+tested legs.  Whether the integrated observable, or its non-CM fibres, reaches
+the generic Hain--Brown locus remains open.
 \end{remark}
 
 \subsection{The equality direction is long-range}\label{sec:equality_multi_year}
@@ -1874,16 +2025,21 @@ the level-4 motivic Galois group
 \]
 of Deligne 2010~\cite{deligne2010} and Glanois
 2015~\cite{glanois2015}, \emph{not} Brown's smaller
-$\mathcal{G}_{MT(\Z)}$. Three published theorems force this
+$\mathcal{G}_{MT(\Z)}$. Three published results motivate this
 refinement:\ Paper~55~\cite{paper55} classifies \textsc{GeoVac}'s
 period ring inside MT($\Z[i, 1/2]$) at level $\le 4$;\
 Eskandari--Murty--Nemoto 2025~\cite{eskandari_murty_nemoto2025}
-prove Catalan $G = \beta(2)$ is not a period of mixed Tate over
-$\Q$ but is mixed Tate over $\Q(i)$ (forcing level $\ge 4$
-specifically because GeoVac's M3 vertex-parity sector produces $G$
-in QED vertex sums);\ and the Goncharov--Deligne 2005 faithfulness
+construct a two-dimensional motive carrying Catalan $G = \beta(2)$, prove
+that \emph{this motive} is not mixed Tate over $\Q$, and show it becomes
+mixed Tate after base change to $\Q(i)$---which is where $G$ is known to
+live, and matters here because GeoVac's M3 vertex-parity sector produces $G$
+in QED vertex sums.  (The stronger statement, that $G$ is not a period of
+\emph{any} mixed Tate motive over $\Q$, is expected but open, so this
+motivates rather than forces the level.)\ And the Goncharov--Deligne 2005 faithfulness
 of $\mathcal{G}_N$-action on $\pi_1^{\mathrm{mot}}(\Gm - \mu_N)$
-gives the injective comparison at level 4.
+supplies the faithful action underlying the level-4 comparison.  (Injectivity
+of that comparison would require a rank-$N$ M3 period map, which Theorem~\ref{thm:injection_g4}
+refutes;\ the $\chi_{-4}$ vertex parity caps the rank at $2$.)
 
 \begin{quote}
 \textbf{Theorem (cosmic-Galois injection, this paper).}\ The
@@ -1920,10 +2076,11 @@ sub-pro-algebraic group of $\mathcal{U}_{4}^{\mathrm{ab}}$, is the
 named open content past injection (Remark
 \ref{rem:injection_honest_scope} delimits scope).
 
-A common framing slip worth flagging:\ Brown 2017~\cite{brown2017}
-establishes a \emph{surjection}
-$\Ustar_{CM} \twoheadrightarrow \mathcal{G}_{MT(\Z)}$, not an
-identification. Connes--Marcolli's $\Ustar_{CM}$ has one generator
+A common framing slip worth flagging:\ the two groups are related by a
+\emph{surjection} $\Ustar_{CM} \twoheadrightarrow \mathcal{G}_{MT(\Z)}$, not an
+identification --- an elementary comparison of two free pro-unipotent
+groups rather than an imported theorem, and one Brown himself declines to
+assert. Connes--Marcolli's $\Ustar_{CM}$ has one generator
 in every positive integer degree (free non-abelian) while
 $\mathcal{G}_{MT(\Z)}$ has generators only in odd degrees $\ge 3$;
 the surplus is the cancellation of even-zeta values $\zeta(2k) \in
@@ -2012,12 +2169,16 @@ $\|[[D, e_0], [D, e_1]]\| = 3/64$ at $n_{\max} = 2$), so the bit-exact
 $S_3$-cocommutativity is strictly stronger than what those weaker
 arguments give.
 
-\textbf{Strategic implication.}  GeoVac IS the abelianisation-by-Cartier--Milnor--Moore
-of the cosmic-Galois universe at the JLO cocycle level on the
-natural substrate.  The injection theorem~\ref{thm:injection_g4}
-$U^*_{\mathrm{GV}} \hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$
-is the \emph{structurally correct} statement, not a partial
-achievement.  Reading B (shuffle Hopf $T(V)$ enrichment) is
+\textbf{Strategic implication.}  On the natural substrate, GeoVac's
+JLO-cocycle-level content maps onto the
+abelianisation-by-Cartier--Milnor--Moore of the cosmic-Galois universe.
+The map of Theorem~\ref{thm:injection_g4},
+$U^*_{\mathrm{GV}} \to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$, is the
+\emph{structurally correct} statement of what is available---not a
+partial version of a closed immersion.  It is emphatically \emph{not}
+injective on the sector-indexed generators (the M3 column is rank~$2$,
+$\ll N$), so what is realised is the abelianized \emph{image}, not an
+embedding of $U^*_{\mathrm{GV}}$.  Reading B (shuffle Hopf $T(V)$ enrichment) is
 \emph{ruled out empirically at depth 2} on the natural substrate;\
 no sprint-scale follow-on to a substantial free non-abelian
 Tannakian closure is empirically demanded.  Two open questions
@@ -2190,7 +2351,7 @@ spectral action of Robertson--Walker spacetimes}, Comm.\ Math.\
 Phys.\ \textbf{356} (2017) 641--671;\ arXiv:1611.01815.
 
 \bibitem{eskandari_murty_nemoto2025}
-P.~Eskandari, M.~R.~Murty, and Y.~Nemoto, \emph{Mixed motives and
+P.~Eskandari, V.~K.~Murty, and Y.~Nemoto, \emph{Mixed motives and
 linear forms in the Catalan constant}, arXiv:2510.20648 (2025).
 
 \bibitem{goncharov_deligne2005}
@@ -2218,6 +2379,22 @@ dual is forced to be abelian unipotent (NA-1 structural finding).
 \bibitem{loutey_paper28}
 J.~Loutey, \emph{QED on $S^3$:\ Spectral Geometry of Perturbative
 Transcendentals}, GeoVac Paper~28 (2026).
+
+\bibitem{atiyah1971}
+M.~F.~Atiyah,
+\newblock {\em Riemann surfaces and spin structures},
+\newblock Ann. Sci. \'Ec. Norm. Sup\'er. (4) {\bf 4} (1971) 47--62.
+
+\bibitem{connes_marcolli_ramachandran2005}
+A.~Connes, M.~Marcolli, and N.~Ramachandran,
+\newblock {\em KMS states and complex multiplication},
+\newblock Selecta Math. (N.S.) {\bf 11} (2005) 325--347;\ arXiv:math/0501424.
+
+\bibitem{angius_volpato2026}
+R.~Angius and R.~Volpato,
+\newblock {\em Hodge loci and complex multiplication via generalized symmetries
+in Calabi--Yau sigma models},
+\newblock arXiv:2605.30418.
 
 \bibitem{loutey_paper59}
 J.~Loutey, \emph{The Three-Center Electron-Repulsion Integral Is an Elliptic

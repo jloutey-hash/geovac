@@ -29,7 +29,7 @@ blocks and coupling them via Phillips--Kleinman (PK) pseudopotentials.
 This produces structurally sparse qubit Hamiltonians---$O(Q^{2.5})$
 Pauli scaling, 51--1{,}712$\times$ fewer terms than Gaussian
 baselines (Paper~14)---but PK limits accuracy to 5.3--19.4\%
-equilibrium bond length error.  PK cannot be improved: six
+equilibrium bond length error.  PK has resisted improvement:\ six
 modification attempts have failed (v2.0.6--23), and the overcounting
 diverges at higher angular momentum.
 
@@ -43,7 +43,7 @@ orbital on center~$A$ feels the nuclear potential of center~$B$, are
 required for energy balance but absent from the single-center
 framework.
 
-We observe that these missing integrals are precisely the
+We observe that these missing integrals are closely related to the
 Shibuya--Wulfman integrals of the Coulomb Sturmian
 literature~\cite{shibuya1965,avery2004,avery2012}, which are computed
 via Fock's momentum-space projection onto $S^3$---the same conformal
@@ -69,8 +69,11 @@ coupling schemes tested (Conjecture~2 not confirmed in strict sense,
 but the comparison crosses FCI regimes).  At $n_{\max} = 3$ ($Q = 84$),
 single-point FCI gives 0.20\% energy error (down from 1.8\%) with
 analytical integrals (incomplete gamma functions, machine precision),
-confirming convergence.  The $R_{\rm eq}$ drift is structural to the
-block decomposition ($+0.053$~bohr per $n_{\max}$ step, $3\times$
+confirming convergence through $n_{\max}=3$;\ at $n_{\max}=4$ the
+model crosses \emph{past} exact (over-binding), so the fixed-geometry
+error is not monotonically improvable either.  The $R_{\rm eq}$ drift is structural to the
+block decomposition ($+0.057$ then $+0.023$~bohr at the two available steps---
+decelerating, not a constant rate; $3\times$
 smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$), not numerical.
 \end{abstract}
 
@@ -94,7 +97,7 @@ BeH$_2$ gives 11.7\%; H$_2$O gives 19.4\%.  These errors are
 structural, not numerical: the $l_{\max}$ divergence
 (+0.15--0.22~bohr per additional angular channel) is confirmed to
 originate in PK overcounting, not in the adiabatic approximation
-(Track~BQ, v2.0.32).\footnote{Sprint/track designations are anchors into the project's internal chronicle (\texttt{CHANGELOG.md} in the repository).}  Six attempts to modify PK have failed
+(Track~BQ, v2.0.32;\ sprint and track designations are anchors into the project's internal chronicle, \texttt{CHANGELOG.md} in the repository).  Six attempts to modify PK have failed
 (projector, spectral, self-consistent, $R$-dependent, $l$-dependent,
 $l$-dependent on 2D solver), and the ab initio $R_{\rm ref}$
 derivation failed because the relevant scale (${\sim}3$~bohr) is
@@ -681,11 +684,16 @@ shape residual is localized to the one-particle orbital basis: the tilt
 $\varepsilon'$ and curvature (both evaluated at the true minimum) are
 \emph{bit-invariant} to the cross-center $V_{\rm ne}$ angular multipole order
 (identical across $L=2$--$8$, the multipole series Gaunt-terminating at $L=2$
-for the $l\le 1$ orbitals) and to the radial quadrature
-($n_{\rm grid}=2000$--$16000$).  Equivalently, at the true minimum the computed
-electronic energy gradient is $9.0\%$ weaker than the
-$+Z_A Z_B/R^2$ required to balance nuclear repulsion, a deficit that does not
-move under angular or quadrature refinement---so the well-shape error is an
+for the $l\le 1$ orbitals) and---separately---insensitive to the
+radial quadrature.  We state that second leg precisely, because the two
+quadrature knobs are not alike:\ the cross-center $V_{\rm ne}$ is evaluated
+analytically (incomplete gamma), so it carries no quadrature to converge at
+all;\ the one live radial quadrature is the cross-block electron-repulsion
+trapezoid, and refining it moves the tilt by $0.15\%$ over $n_{\rm grid}=2000$--$8000$
+and $0.87\%$ over $1000$--$8000$.  Equivalently, at the true minimum the computed
+electronic energy gradient is $8.8\%$ weaker than the
+$+Z_A Z_B/R^2$ required to balance nuclear repulsion---a deficit an order of
+magnitude larger than the largest quadrature movement, so the well-shape error is an
 orbital-basis-completeness effect, not an integral-evaluation or angular-%
 truncation effect (LiH $n_{\max}=2$; a measured result).  This
 mirrors the composed/PK result (Paper~17), where the \emph{parameter-free}
@@ -698,6 +706,60 @@ quoted here is the $n_{\max}=2$ fine-grid value for LiH).  For single-geometry a
 the balanced construction remains well matched to that use despite its
 well-shape errors.
 
+\textbf{[MEASURED]} The banked $n_{\max}=4$ decider has now been run---a
+matrix-free (Davidson) direct-CI engine
+(\texttt{geovac/balanced\_direct\_ci.py};\ ${\sim}1600\times$ faster than the
+assembled-matrix path at $n_{\max}=3$, validated to $\le 7\times10^{-15}$~Ha
+against a brute-force Fock-space FCI and to $1.8\times10^{-15}$~Ha against the
+live library at $n_{\max}=2$) solved the $16{,}040{,}025$-determinant
+$n_{\max}=4$ sector at six $R$ points.  The verdict is decisive for the
+\emph{irreducible-wall} reading:\ the \emph{per-shell increments} of energy,
+curvature and tilt at the true minimum all shrink geometrically at a common
+ratio ($\approx 0.36$--$0.38$)---the basis is converging---but every
+observable, the energy included, converges to a \emph{wrong} limit.
+$E_{\rm tot}(R_{\rm true})$ runs $-7.9297\to-8.0548\to-8.1020$~Ha at
+$n_{\max}=2/3/4$ (shipped convention, frozen-core offset $-7.2799$~Ha;\ the
+corrected sign shifts each value by $\approx+4$~mHa), \emph{crossing} the exact
+$-8.0705$ between $n_{\max}=3$ and $4$ and extrapolating to $\approx-8.13$:\ the
+balanced model over-binds
+past exact, so its excellent energy convergence is an approach-from-above
+statement valid through $n_{\max}=3$ only.  The curvature ratio at the true minimum runs
+$2.245\times\to2.219\times\to2.210\times$ the true force constant at
+$n_{\max}=2/3/4$, extrapolating to $2.204\times$ ($99.5\%$ of the gap
+surviving, robust across geometric, power-law and deliberately-slow $1/n$
+extrapolation models);\ the tilt worsens toward $-0.0399$;\ $R_{\rm eq}$
+extrapolates to $+10.1\%$ and worsening;\ $\omega_e$ at the well's own minimum
+falls $2040\to1946\to1901$~cm$^{-1}$ ($+45.1\to+38.4\to+35.3\%$, extrapolating
+to $\approx+32\%$---the earlier ``stays $\sim+45\%$'' reading was an
+$n_{\max}=2$-only fit), still far from $1406$.  Model-free statement:\ closing
+the curvature gap at the observed per-shell step would need over a hundred
+further shells with no decay in step size.  The well-shape residual is
+therefore an \emph{irreducible} property of the balanced architecture's
+orbital-basis limit, not slow basis healing
+(\texttt{tests/test\_balanced\_direct\_ci.py}).
+
+\emph{Reproducibility note.}  In the course of building the engine, a global
+sign error was found (and fixed) in the shipped assembled-matrix path's
+same-spin double-excitation phase:\ it contributed a nearly
+$n_{\max}$-independent spurious over-binding of ${\sim}+4$~mHa on balanced
+LiH while leaving the geometry observables essentially unchanged
+($<0.2$~pp).  \emph{Scope of the correction, stated precisely because the two conventions
+are easy to conflate.}\ The energies tabulated in this paper are on the
+\emph{faithful} (pre-fix) convention:\ at the fixed geometry $R=3.015$ the
+banked values are $-7.9297$, $-8.0548$, $-8.1020$~Ha at $n_{\max}=2,3,4$,
+while the corrected phase gives $-7.9256$, $-8.0509$, $-8.0982$~Ha---a shift
+of $+4.13$, $+3.85$, $+3.79$~mHa.  So the $n_{\max}=3$ energy error reads
+$0.20\%$ on the faithful convention---the figure quoted throughout this paper---
+and $0.24\%$ on the corrected one (both against the exact $-8.0705$~Ha).  The
+earlier statement that ``no number in this paper changes'' was \emph{wrong}:\ it
+compared the corrected energy at the well's own minimum ($R_{\rm eq}=3.2776$,
+a different offset) against the faithful energy at $R=3.015$, and the two
+agreed only by cancellation.  What genuinely does not move is the geometry:\
+$R_{\rm eq}$ shifts by $\le0.13$~pp and the qualitative conclusions---binding,
+the stiffness excess, and the $n_{\max}=4$ crossing---are unchanged under
+either convention.  The corrected phase is pinned element-by-element against
+a brute-force Fock-space FCI in the same test file.
+
 \subsection{Summary of conjecture status}
 
 Conjecture~\ref{conj:sparsity} (Pauli count): \textbf{confirmed}.
@@ -708,13 +770,21 @@ Conjecture~\ref{conj:accuracy} (accuracy): \textbf{MIXED}.  Analytical
 integrals (machine precision via incomplete gamma functions) confirm that
 the $R_{\rm eq}$ drift is structural to the block decomposition, not
 numerical: grid error contributed only 0.007~bohr to $R_{\rm eq}$ at
-$n_{\max} = 3$.  The drift is $+0.053$~bohr per $n_{\max}$ step
+$n_{\max} = 3$.  The drift is $+0.057$~bohr from $n_{\max}=2$ to 3 and $+0.023$~bohr
+from 3 to 4---decelerating, consistent with the extrapolated limit below
 ($3\times$ smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$) but in
-the same outward direction.  Energy converges excellently:
-$1.8\% \to 0.20\%$ ($9\times$ improvement) from $n_{\max} = 2$ to 3.
+the same outward direction.  Energy converges excellently through
+$n_{\max}=3$: $1.8\% \to 0.20\%$ ($9\times$ improvement) from $n_{\max} = 2$
+to 3---and then crosses \emph{past} exact at $n_{\max}=4$ (over-binding;\ the
+well-shape subsection), so the fixed-geometry error is not monotonically
+improvable either.
 The balanced approach is optimal for single-point quantum simulation at
 fixed geometries (0.20\% energy error), but not for PES-based equilibrium
-geometry determination.
+geometry determination---indicated at $n_{\max}=4$ (a three-point,
+model-robust extrapolation;\ and, model-free, closing the curvature gap would
+need well over a hundred further shells at an undecaying step) to be an
+irreducible limit of the architecture, not slow basis healing (the well-shape
+subsection above).
 
 
 %% ========================================================================
@@ -762,7 +832,8 @@ Sec.~\ref{sec:architecture}:
   of $+0.053$~bohr per $n_{\max}$ step ($3\times$ smaller than PK's
   $+0.15$--$0.22$~bohr/$l_{\max}$).  Grid error contributes only
   0.007~bohr to $R_{\rm eq}$ (negligible).  Classification: MIXED---energy
-  converges excellently, $R_{\rm eq}$ drifts structurally.
+  converges excellently through $n_{\max}=3$ (then crosses past exact;\ the
+  well-shape subsection), $R_{\rm eq}$ drifts structurally.
   Extension to BeH$_2$ and H$_2$O: COMPLETE (v2.0.41--42).
 \end{enumerate}
 
@@ -821,7 +892,10 @@ The Pauli ratio (balanced/composed) grows with block count:
 $2.63\times$ (2-block LiH) $\to$ $4.77\times$ (3-block BeH$_2$)
 $\to$ $7.45\times$ (5-block H$_2$O), because each block pair adds
 cross-block ERIs and cross-center $V_{ne}$ terms.  The growth is
-consistent with an $O(B^2)$ scaling in the number of blocks $B$.
+sub-\emph{quadratic} in the block count over these three systems
+($\sim B^{1.14}$---slightly super-linear;\ the per-block increment
+\emph{decelerates}, $2.14$ then $1.34$ per block), so an $O(B^2)$ envelope
+is an upper bound rather than the measured trend.
 
 The 1-norm advantage is regime-dependent.  For VQE/NISQ applications
 where Pauli count and QWC groups dominate circuit cost, the composed
@@ -878,8 +952,7 @@ beyond what Hartree screening captures.
 (negative result).}
 The named engineering closure for the W1c-residual is the
 cross-center analog of the same-center Phillips--Kleinman
-projection (Sec.~\ref{sec:relationship}; Paper~17,
-Eq.~(\ref{eq:Vpk}) for the same-center case). The implementation
+projection;\ Paper~17 gives the same-center case. The implementation
 (\texttt{geovac/phillips\_kleinman\_cross\_center.py}, May~2026)
 adds the standard PK barrier
 $\Delta H_{pq}^{\rm PK} = \sum_c (E_v - E_c) S_{pc} S_{cq}$ to the
@@ -1458,7 +1531,7 @@ F1$\to$F2$\to$F3 arc).}
   $2\times$ experimental binding energy. Extends existing PK infrastructure
   rather than requiring new architecture.
 \item \textbf{F3-extend: $l>0$ cross-block h1 + non-axial geometry
-  (a major structural extension).} Current F3 cross-block h1 is s-s only; mixed angular
+  (beyond sprint scale).} Current F3 cross-block h1 is s-s only; mixed angular
   momentum requires spherical harmonic decomposition at both centers with
   their own quantization axes, bipolar harmonic algebra or full 3D
   Lebedev quadrature, and non-collinear geometry handling. Necessary to
@@ -1509,11 +1582,13 @@ Pauli repulsion against the [Ne] frozen core,'' with three candidate
 closure mechanisms ranked by priority: (1) bonding-orbital
 Phillips--Kleinman extension (F4), (2) explicit frozen-core electrons
 in FCI (F5 priority), (3) valence basis enlargement (F6 priority).
-Three same-day diagnostic sprints (F4, F5, F6) tested all three
+Three diagnostic sprints in immediate succession (F4, F5, F6) tested all three
 candidates and refined the W1e mechanism into a structurally distinct
 multi-sub-mechanism reading. \textbf{None of the three candidates
-closes W1e on its own; together they account for at most
-${\sim}10$--$25\%$ of the wall, leaving ${\sim}65$--$90\%$ as
+closes W1e on its own;\ individually they account for at most
+${\sim}10\%$ and ${\sim}26\%$ of the wall and jointly for ${\sim}36\%$, leaving the
+${\sim}65$--$90\%$ itemized below---the spread reflecting whether one or both
+closable mechanisms are counted---as
 genuinely-deep correlation requiring architectural lifts beyond
 sprint scale.}
 
@@ -1715,8 +1790,7 @@ for second-row binding energetics.
 \textbf{Cross-domain pattern crystallization.} The W1e wall is the
 \textbf{sixth structurally-independent instance of the
 multi-focal-composition wall pattern} documented across the
-framework (CLAUDE.md \S1.7; Paper~34
-\S\ref{sec:conv_w1e_cross_domain_wall}). The five previous
+framework (CLAUDE.md \S1.7; Paper~34's projection catalogue). The five previous
 instances are all in physics observables: Sprint H1 Yukawa (no
 autonomous $Y_F$ selection); LS-8a $Z_2/\delta m$ (no autonomous
 renormalization counterterms despite faithful reproduction of
@@ -1778,7 +1852,8 @@ UV completion outside the framework.
 \textbf{Closure-prospect classification: (a-with-caveat)
 sprint-scale exhausted but tractable for components as a
 substantial open program, with a calibration-external residual
-whose magnitude depends on the Reading A vs Reading B verdict.} The three sub-sub-mechanisms
+whose magnitude depends on the Reading A vs Reading B verdict (since
+resolved: Reading B;\ Sprint B.1 note below).} The three sub-sub-mechanisms
 identified at F4-F6 (basis-truncation $\sim 10.2\%$ / Hartree-pressure
 $\sim 25.7\%$ / deep-correlation-residual $65$--$90\%$) stack to
 $\sim 35$--$45\%$ combined ceiling at sprint scale; the question is
@@ -1797,7 +1872,9 @@ internal minimum at $R_\text{eq} \in [3.0, 4.5]$~bohr with
 $D_e \in [0.04, 0.12]$~Ha $\rightarrow$ \textbf{Reading A confirmed}
 (W1e is active-space deficit; a well-defined CCSD-class post-HF closure
 path exists beyond sprint scale). If HF still gives monotone-descending PES
-$\rightarrow$ \textbf{Reading B confirmed} (W1e is structurally tied
+$\rightarrow$ \textbf{Reading B confirmed}.  \emph{(Since run:\ Sprint B.1,
+2026-06-07---the 12-electron explicit-core RHF still descends monotonically;\
+Reading B is the confirmed outcome.)} (W1e is structurally tied
 to the composed-architecture choice; chemistry-domain
 architectural-scope boundary established, structurally analogous to
 H1's Yukawa-undetermined verdict in the physics domain).
@@ -1874,7 +1951,7 @@ increases the 1-norm from 37.3 to 85.7~Ha.  Even if PK is
 eliminated, the net quantum resource cost could increase if the
 balanced coupled Hamiltonian has higher 1-norm than the composed
 Hamiltonian with PK classically partitioned (Track~BF: electronic-only
-1-norm 33.3~Ha).  The sparsity advantage in Pauli count may be
+1-norm 32.6~Ha).  The sparsity advantage in Pauli count may be
 partially offset by a 1-norm disadvantage.  This tradeoff must be
 quantified for the balanced Hamiltonian.
 
@@ -1901,9 +1978,10 @@ research frontier.
 
 The $n_{\max} = 3$ results with analytical integrals definitively
 resolve the key open questions from Phase~3.  The energy convergence
-is excellent: 1.8\% $\to$ 0.20\% ($9\times$ improvement) as the
+is excellent through $n_{\max}=3$: 1.8\% $\to$ 0.20\% ($9\times$ improvement) as the
 basis grows from $Q = 30$ to $Q = 84$, with the variational bound
-respected.  This rules out the PK-like divergence scenario (where
+respected at these basis sizes (at $n_{\max}=4$ the model crosses past
+exact;\ the well-shape subsection).  This rules out the PK-like divergence scenario (where
 higher angular momentum channels systematically overcounted
 correlation).
 
@@ -1995,11 +2073,11 @@ J.~Avery, ``Many-center Coulomb Sturmians and Shibuya--Wulfman
   integrals,'' Int.\ J.\ Quantum Chem.\ \textbf{100}, 121 (2004).
 
 \bibitem{hoggan2011}
-P.~E.~Hoggan, ``How Exponential Type Orbitals Recently Became a Viable
-  Basis Set Choice in Molecular Electronic Structure Work,'' in
-  \emph{Solving the Schr\"odinger Equation: Has Everything Been
-  Tried?}, edited by P.~Popelier (Imperial College Press, 2011),
-  Chap.~7.
+P.~E.~Hoggan, ``Slater-type Orbital Basis Sets:\ Reliable and Rapid
+  Solution of the Schr\"odinger Equation for Accurate Molecular
+  Properties,'' in \emph{Solving the Schr\"odinger Equation: Has
+  Everything Been Tried?}, edited by P.~Popelier (Imperial College
+  Press, 2011).
 
 \bibitem{avery2012}
 J.~S.~Avery and J.~E.~Avery, ``Coulomb Sturmians as a basis for
@@ -2016,12 +2094,12 @@ M.~F.~Herbst, J.~E.~Avery, and A.~Dreuw, ``Quantum chemistry with
   basis sets at Hartree--Fock level,'' arXiv:1811.05777 (2018).
 
 \bibitem{latremoliere2019modular}
-F.~Latr\'emoli\`ere, ``The Modular Propinquity,''
+F.~Latr\'emoli\`ere, ``The Modular Gromov--Hausdorff Propinquity,''
   Dissertationes Math.\ \textbf{544}, 1 (2019).
   arXiv:1608.04881.
 
 \bibitem{latremoliere2021dual}
-F.~Latr\'emoli\`ere, ``The Dual Modular Propinquity and Completeness,''
+F.~Latr\'emoli\`ere, ``The Dual Modular Gromov--Hausdorff Propinquity and Completeness,''
   J.~Noncommut.\ Geom.\ \textbf{15}, 347 (2021).
   arXiv:1811.04534.
 

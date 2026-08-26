@@ -172,11 +172,17 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   R-independent, core/bond entropy ratio **50×**; ties to **O(Q^2.5)** Pauli
   scaling. Tier = MEASURED (computational).
 - **P27:** one-body non-degenerate GS single-particle entropy ≡ **0**
-  (**S_kin/S_full ~ 10⁻¹⁴**, He n_max=2,3); area law **A_n = g_n² = (2n²)²**,
-  factor-4 = two-body; cusp = single hot node on **(1s,1s)**; HO closed-shell
-  any-central-potential entropy ≡ **0** (Moshinsky–Talmi); block entropy
-  **S_B = A(w̃_B/δ_B)^γ**, **γ_∞ ≈ 1.96** (Richardson n_max=2–5, below RS 2).
-  Tier = INTERNAL THEOREM (rigidity) + MEASURED (scaling).
+  (**S_kin/S_full ~ 10⁻¹⁴**, He n_max=2,3 — the VALID one-body theorem); area law
+  **A_n = g_n² = (2n²)²**, factor-4 = two-body; cusp = single hot node on **(1s,1s)**;
+  **EP-2b RETRACTED (v5.0.0, moshinsky N_tot guard):** the "HO closed-shell
+  any-central-potential entropy ≡ 0 (Moshinsky–Talmi)" claim + its mechanism + its
+  INTERNAL THEOREM tier are **WITHDRAWN** — corrected S_full = **0.0671/0.0716/0.0833
+  nats** (N_max=2/3/4), grows with basis, ground state NOT a single Slater determinant,
+  ‖[H_HO,V]‖ = O(1) (0.74/0.63/0.67); block entropy **S_B = A(w̃_B/δ_B)^γ**, **γ_∞ ≈ 1.96**
+  (Richardson n_max=2–5, below RS 2). Tier = INTERNAL THEOREM (one-body inertness — valid)
+  + MEASURED (scaling); the two-fermion HO rigidity corollary is retracted.
+  *(Criteria-currency correction 2026-08-24 to the PI-approved retraction — a live
+  re-assertion of the ≡0 claim is now MATERIAL, not a headline to protect.)*
 - **P34:** two-layer decomposition; **28** named projections × three-axis
   tagging; **Layer-2-presence bound** |ε| ≤ max(ε_basis, max|L₂ input|)
   (replaces the FALSIFIED depth-linear form: depth-3 at 0 & +286 ppm, depth-4
@@ -323,3 +329,120 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   numbered C18) per the group5 single-source pattern. Matrix rows and the seed
   plan follow in the first cert per the group4/group5 pattern. FULL first-cert
   run proceeding.
+
+---
+
+## Re-review OWED (2026-08-22, v5.0.0) — group6
+
+**Papers in this target changed after certification.** Logged here, at the
+owning source, so the certified status is not read as covering text that
+post-dates it.
+
+- **Paper 27** (`paper_27_entropy_projection.tex`): EP-2b, one of the
+  paper's **two headline "Rigidity Results"** and carried at **INTERNAL THEOREM**
+  tier, is **RETRACTED**. Abstract, introduction, provenance-tier paragraph,
+  taxonomy cross-reference, section lead-in, §sec:pred1 (full rewrite with the
+  corrected `tab:ep2b`), and the conclusion all brought into line. Only ONE of
+  the paper's two original predictions now survives.
+- Pre-existing C10 defect fixed: missing `GeoVac_Paper19` bibitem.
+- Backing tests rewritten (`test_paper27_entropy.py`, both EP-2b tests).
+- **Note for the re-review:** the provenance-tier paragraph changed, so C3 is
+  directly in scope for this target.
+
+**Discharge condition:** a CLEAN DELTA over the changed loci (diff-scoped, per
+the qa.md run-shape rule), which is also the standing precondition for the next
+FULL certifying pass. The delta must re-test *these specific defects* rather
+than trust this entry (qa.md hard rule, added the same day).
+
+**Deterministic layer already re-run and GREEN on this target:** C10 (compiles,
+with the aux-clean fix), C13, C14, C16, C17, C18, C19, C5/C12 (now corpus-wide
+after the scope fix). What is owed is the LLM-judgment layer: claims, and
+synthesis where the target has one.
+
+**DISCHARGED — DEFECTS found + REMEDIATED, 2026-08-24 (v5.0.9).** Delta scope = the
+changed loci (P27 `sec:pred1` EP-2b retraction + the group6 synthesis). Two dimensions
+dispatched, both **exercised + calibrated**: claims on P27 (opus, 1/1 seed — a "stays
+pinned near zero" re-assertion contradicting the growing 0.0671→0.0716→0.0833 table,
+caught) and synthesis on group6 (opus, 1/1 seed — a factor-8 vs (2n²)²=4n⁴ slip, caught).
+
+**Genuine MATERIAL found (the retraction re-review working as intended):** the group6
+synthesis §"A second rigidity statement" was a **LIVE ZOMBIE** — it carried the *retracted*
+claim forward in full at INTERNAL THEOREM tier ("entropy identically zero for any central
+two-body potential", Moshinsky–Talmi N_tot conservation, single determinant |(0s)²⟩,
+commutator ~10⁻¹⁶). The v5.0.0 retraction fixed P24/P27/P23/group4-synth but never
+propagated to the group6 synthesis, and C16 `p24-entanglement-rigidity` was scoped
+group3+group4 (+its file list omitted group6), so the deterministic gate never checked it —
+the "deterministic GREEN" note above was NOT accurate for this target.
+
+**Remediation (all verified):** (1) the synthesis paragraph rewritten as a retraction
+(corrected 0.0671/0.0716/0.0833 nats, commutator O(1) 0.74/0.63/0.67, not a single Slater
+determinant, tier withdrawn, no rigidity dual — parent HO rigidity theorem preserved);
+(2) the minor P27 "S_HO ≪ S_Coulomb" wording tightened; (3) **C16 gate fixed** — scope +
+file list widened to group6, two patterns added to match the synthesis phrasing, two
+pre-existing false-positive patterns tightened (`= 0\b` matched "= 0.902"; `identically zero
+for` matched an unrelated P23 kinetic-term line), discrimination proven BOTH directions
+(fired on the live zombie: 2 hits; silent after remediation: PASS); (4) pre-existing C10
+broken `\ref`s in paper_34 (×7) and paper_35 fixed on sight. Deterministic layer green
+**now** (C10/C16/C19 PASS). A remediation-delta re-scan of the changed loci is CLEAN. Seed
+key `debug/qa/group36_delta_seed_key.json`. Branch stays CERTIFIED; the standing precondition
+for the next FULL certifying pass (a clean delta) is met after this remediation.
+
+**FULL certifying pass = FAIL → REMEDIATED, 2026-08-24 (v5.0.9).** Fired after the clean delta
+(PI-directed re-cert sequence group4→group6→group3). Seeded scratch copy of all 5 group6 papers
+(synced from the working tree). Panel: 7 reviewers (claims-A P34 opus, claims-B P26+P27+P35 opus,
+citations all-4 OPUS, synthesis opus, code-P27 + code-P34 sonnet, completeness-critic opus).
+**Calibration: 100% sensitivity** — every planted seed caught (K "derivation" S5, P27 "does commute"
+S8, synthesis "single determinant" S8, two same-cite-two-arXiv S1, code b1/b2 ×2); specificity clean.
+Criteria-currency fix applied pre-freeze (§C8 P27 headline still asserted the retracted ≡0 at
+INTERNAL THEOREM tier → corrected to the v5.0.0 values).
+
+**The FULL pass FAILED — it found genuine material the delta + deterministic layer + the v5.0.0
+retraction itself all missed (the retraction was INCOMPLETE):**
+- **Three un-propagated retraction zombies** (v5.0.0 fixed §sec:pred1 but not these): synthesis
+  §"What is robust" L465 ("the HO zero-entropy rigidity are INTERNAL THEOREMS"); Paper 27 L1069–77
+  Equation-Verification bullet (marked the retracted S_HO=0 / (2,0,0,0) / noise-floor commutator
+  "Verified" by now-nonexistent `..._is_single_determinant` tests); Paper 27 L1013–16 conclusion
+  ("sharp contrast between Coulomb and HO … falsifiable"). All rewritten to the corrected facts.
+- **Two genuine citation defects:** Krauth muonic-He-4 `arXiv:2102.05728` (both loci) → an unrelated
+  football-biomechanics paper (dropped the wrong eprint, kept Nature 589,527); `arXiv:2508.18776`
+  misattributed to "Patkos–Pachucki–Yerokhin" → resolves to Bonilla et al. 2025 (corrected).
+- **Stale `claim_test_matrix.md` P27 row** (retracted claim as BACKED-SOUND/INTERNAL THEOREM, dead
+  test name) → rewritten to the retraction + live tests.
+- SMALLs fixed: P34 abstract Lamb sign (+0.534→−0.534), P34 conclusion stale −3.10% (LS-6a supersedes
+  with −0.534%), P26 abstract "unique basis" overclaim (→ "essentially unique, up to (l,m)-preserving
+  rotations"). P34 Layer-2-presence bound NO-TEST → logged in the matrix + **raised to PI** (hedged
+  Prediction, not an overclaim). **CLOSED 2026-08-24 (PI-directed):** new
+  `tests/test_paper34_l2_presence_bound.py` (6 tests) — the three exact L2-count=0 anchors COMPUTED
+  (S³ Casimir 1/240, Stefan–Boltzmann π²/90, H 1S polarizability 9/2 a₀³ via a Dalgarno–Lewis
+  symbolic solve → residual 0), the depth-linear form FALSIFIED, the bound checked on every catalogue
+  row, L2-count-separates-where-depth-cannot, + a violation guard; cited inline in P34 §prediction;
+  matrix row 118 NO-TEST → BACKED-SOUND. C10/C13/C19 green.
+
+**Gate hardening this pass:** C16 gained a `zero-entropy rigidity` / `entropy-side rigidity|dual`
+pattern; the too-broad bare `artifact` exempt marker was removed (a "projection artifact" 4 lines
+away had false-exempted the L465 zombie under WINDOW=5); an `S_HO=0` generalization was tried and
+REVERTED after it false-positived on a legit "…small but nonzero rather than S_HO=0…" comparison.
+Discrimination re-proven; C16 group3/group6 + selftest PASS.
+
+**Post-remediation state:** deterministic layer green (C10/C16/C18/C19 PASS); every confirmed
+genuine defect remediated; completeness-critic's exhaustive zombie re-sweep found NO further live
+zombie (only the L465 it re-saw in the pre-remediation scratch). **Honest ceilings (logged, not
+blockers):** P34 §V.C autopsy region (~24 subsections, L3376–7293) spot-checked not line-by-line;
+P34 C3 inline register tiers near-absent (adjective-tiering; 1 bracketed tag in ~10k lines);
+Paper 27 §pred2's four (A,γ) framings to confirm mutually consistent; trunk restatements
+(28-count, M1/M2/M3 map) out-of-path. **VERDICT: FAIL(genuine)→REMEDIATED.** Per the run-shapes
+rule, a clean delta-verification over the remediated loci is the precondition for the FULL
+certifying PASS; that re-verify is OWED (PI-gated). Seed key `debug/qa/group6_fullcert_seed_key.json`.
+
+**RE-VERIFY DELTA = CLEAN → FULL certifying PASS EARNED → group6 RE-CERTIFIED ✅ (2026-08-24, v5.0.9).**
+PI-directed immediately after the remediation. Diff-scoped pasted-hunks delta over the remediated loci,
+2 Opus reviewers, both **calibrated**: claims-delta caught a planted re-introduced-zombie seed
+(HUNK A "...is an INTERNAL THEOREM alongside it") and verified the real hunks B–E CLEAN (P27 Verified
+bullet, P27 conclusion, P26 "unique", P34 Lamb ceiling all state the post-retraction facts);
+citation-delta caught a planted wrong-arXiv seed (`2058.18776`) and CONFIRMED the real Krauth Nature
+589,527 fix + the `2508.18776`/Bonilla attribution. Seed-leak clean (real corpus carries the correct
+text). Deterministic layer green whole-target (C10/C16/C17/C18/C19/C11). Per the run-shapes rule a clean
+delta over the remediated surface unlocks the PASS — **group6 is re-certified** (its retraction cleanup
+is now complete: the v5.0.0 retraction's three missed loci are closed and C16 is hardened to catch the
+class). Re-verify seed key `debug/qa/group6_reverify_seed_key.json`. Standing honest ceilings (P34 §V.C
+autopsy line-by-line, P34 C3 tiers, Layer-2-bound NO-TEST → PI) carry forward, non-blocking.

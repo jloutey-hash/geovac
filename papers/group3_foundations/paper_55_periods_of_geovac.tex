@@ -590,8 +590,8 @@ the standard mixed-Tate Grothendieck sub-ring.  At $n = 1$ the two middle
 terms collapse ($2n + 1 = n + 2 = 3$), giving
 $\mathbb{L}^5 - 3 \mathbb{L}^4 + \mathbb{L}^3 + 3 \mathbb{L}^2 - 2 \mathbb{L}$,
 matching the explicit calculation in Fathizadeh--Marcolli Theorem~7.2
-(sprint memo \texttt{debug/sprint\_a8\_grothendieck\_class\_memo.md}, June 2026;
-verified symbolically at $n = 1, \ldots, 5$).
+(verified symbolically at $n = 1, \ldots, 8$, and via the general-$n$
+symbolic identity, in \texttt{tests/test\_paper55\_grothendieck.py}).
 
 \textit{Distinction from the M3 cyclotomic-level-4 ring (\S\ref{sec:m3}).}
 The $\Q(\sqrt{-1})$ appearing here is the \emph{Witt-splitting field} of the
@@ -1068,11 +1068,12 @@ $\zeta(s, 5/4) = \zeta(s, 1/4) - 4^s$,
 $\zeta(s, 7/4) = \zeta(s, 3/4) - (4/3)^s$, and the Dirichlet beta
 definition $\zeta(s, 1/4) - \zeta(s, 3/4) = 4^s\,\beta(s)$, the
 difference reduces to $f_5(s)$.  Inserting into~\eqref{eq:DS5} yields
-the claimed three-term combination.  Bit-exact verification at
-$s \in \{6, 7, 8, 9, 10\}$ in
-\texttt{debug/sprint\_a6\_m3\_s5\_derivation.py}, residuals
-$\le 10^{-12}$ at $s = 6$ falling to $10^{-33}$ at $s = 10$ (matching
-the $N^{-s}/s$ truncation rate at $N = 2 \times 10^5$).
+the claimed three-term combination.  The direct spectral sum, the
+Hurwitz closed form, and the $\chi_{-4}$ parity discriminant are
+cross-checked at $s \in \{7, 8, 9, 10\}$ in
+\texttt{tests/test\_paper55\_m3\_s5.py} (direct-vs-closed and
+parity-vs-$\beta$ agreement to $\sim 40$ digits, plus a
+wrong-degeneracy non-tautology guard).
 \end{proof}
 
 \begin{corollary}[Cyclotomic mixed-Tate classification on $\sfive$]
@@ -3242,7 +3243,9 @@ preprint arXiv:2511.22755 (2025).
 
 \bibitem{greenfield_marcolli_teh2014}
 M.~Greenfield, M.~Marcolli, and K.~Teh, ``Twisted spectral triples
-and quantum statistical mechanical systems,'' \textit{p-Adic
+and quantum statistical mechanical systems'' (arXiv title:\ ``Type III
+$\sigma$-spectral triples and quantum statistical mechanical
+systems''), \textit{p-Adic
 Numbers, Ultrametric Analysis, and Applications}~\textbf{6},
 81--104 (2014);\ preprint arXiv:1305.5492 (2013).
 

@@ -36,13 +36,17 @@ statement: $A_n=g_n^{2}$, where $g_n=2n^{2}$ is the shell
 degeneracy.  The factor of four is the two-body signature.
 Third, in the Coulomb lattice the cusp concentrates as a single
 ``hot node'' on the $(1s,1s)$ pair-state of the $V_{ee}$ graph;
-entanglement is co-located with cusp mass.  Fourth, on the
-Bargmann--Segal harmonic oscillator lattice the ground-state
-entropy of any two-fermion closed-shell state interacting via
-\emph{any} central two-body potential is identically zero, a
-consequence of Moshinsky--Talmi total-quanta conservation; this
-is a rigidity statement structurally parallel to the Fock and
-Bargmann--Segal theorems of Paper~24.  Fifth, Coulomb-lattice
+entanglement is co-located with cusp mass.  Fourth, a
+previously claimed rigidity statement --- that the ground-state
+entropy of any two-fermion closed-shell state on the
+Bargmann--Segal harmonic oscillator lattice interacting via
+\emph{any} central two-body potential is identically zero, by
+Moshinsky--Talmi total-quanta conservation --- is
+\textsc{retracted} here (\S\ref{sec:pred1}):\ the
+Moshinsky--Talmi \emph{bracket} conserves total quanta, the
+potential \emph{matrix element} does not, and the published
+zero was a code artifact.  The corrected entropy is small but
+nonzero and \emph{grows} with basis size.  Fifth, Coulomb-lattice
 block entropy obeys a universal scaling
 $S_B = A\,(\tilde{w}_B/\delta_B)^{\gamma}$, where
 $\tilde{w}_B$ is the dimensionless $V_{ee}$ mass off-diagonal
@@ -106,12 +110,15 @@ co-located.  Section~\ref{sec:taxonomy} places entropy in the
 exchange-constant taxonomy of Paper~18~\cite{GeoVac_Paper18} as
 a projection-class observable.  Section~\ref{sec:predictions}
 states two falsifiable predictions, one for the Bargmann--Segal
-harmonic oscillator lattice~\cite{GeoVac_Paper24} and one
-across the GeoVac molecular library.
+harmonic oscillator lattice~\cite{GeoVac_Paper24} --- which the
+present version \textsc{retracts} --- and one across the GeoVac
+molecular library, which stands.
 
 \emph{Provenance (register tiers).}  The entanglement-inertness of the
-one-body operator (\S~\ref{sec:operator}) and the harmonic-oscillator
-zero-entropy rigidity (\S~\ref{sec:predictions}) are INTERNAL THEOREMS;
+one-body operator (\S~\ref{sec:operator}) is an INTERNAL THEOREM.  The
+harmonic-oscillator zero-entropy rigidity, previously carried at the same
+tier, is \textsc{retracted} (\S~\ref{sec:pred1}) --- it was
+\emph{measured} against a restricted evaluation object, not proved;
 the $S_{\mathrm{kin}}/S_{\mathrm{full}}\sim10^{-14}$ numerical
 confirmation and the block-entropy exponent $\gamma_\infty\approx1.96$
 (a Richardson extrapolation, \emph{not} an exact value) are MEASURED;
@@ -496,124 +503,160 @@ theorem~\cite{GeoVac_Paper24}: the Bargmann--Segal harmonic
 oscillator lattice is bit-exactly $\pi$-free in rational
 arithmetic, and its one-body Hamiltonian has the same
 entanglement-inert character as $H_1$ here (it is one-body by
-construction).  Whether two-fermion entanglement on the HO
-lattice carries the same area-law scaling as the Coulomb case
-is the subject of Section~\ref{sec:predictions}.
+construction).  That $\pi$-freeness concerns the graph's
+eigenvalues and adjacency weights and is unaffected by the
+retraction in Section~\ref{sec:pred1}; what does \emph{not}
+follow from it --- and what this paper previously asserted --- is
+a corresponding rigidity of the interacting two-fermion
+\emph{state}.
 
 %=================================================================
 \section{Two Rigidity Results}
 \label{sec:predictions}
 %=================================================================
 
-This section states the two main entropy results beyond
-Section~\ref{sec:operator}'s operator-theoretic floor.
-Section~\ref{sec:pred1} establishes a rigidity theorem for the
-Bargmann--Segal harmonic-oscillator lattice: two-fermion
-closed-shell ground-state entropy is zero for any central
-two-body potential.  Section~\ref{sec:pred2} characterizes a
-universal two-variable scaling for Coulomb-lattice block
-entropy, asymptotic to second-order Rayleigh--Schr\"odinger
-perturbation theory.  Both were originally phrased as
-speculative predictions; both are now established
-numerically, with Section~\ref{sec:pred1} strengthened to a
-structural statement by Moshinsky--Talmi total-quanta
-conservation.
+This section reports the outcome of the paper's two original
+predictions.  Section~\ref{sec:pred1} \textsc{retracts} the
+first:\ the claimed rigidity theorem for the Bargmann--Segal
+harmonic-oscillator lattice --- zero two-fermion closed-shell
+ground-state entropy for any central two-body potential --- is
+false, and its supporting mechanism was a misreading of the
+Moshinsky--Talmi decomposition.  Section~\ref{sec:pred2}
+stands:\ it characterizes a universal two-variable scaling for
+Coulomb-lattice block entropy, asymptotic to second-order
+Rayleigh--Schr\"odinger perturbation theory.  Only one of the
+two predictions therefore survives, and the surviving one is
+the Coulomb-side scaling, not the HO-side rigidity.
 
 \subsection{HO zero-entropy theorem for closed-shell
-            two-fermion ground states}
+            two-fermion ground states --- \textsc{retracted}}
 \label{sec:pred1}
 
-\textbf{Outcome (EP-2b, this work).}  The prediction resolves
-cleanly: $S_{\mathrm{HO}} = 0$ \emph{identically} at the ground
-state, not merely $\ll S_{\mathrm{Coulomb}}$.  The mechanism is
-stronger than the ``short-range kernel suppresses cusp
-concentration'' heuristic originally stated: on the
-Bargmann--Segal HO basis, the one-body operator $H_{HO}$
-commutes exactly with \emph{any} central two-body interaction
-$V(r_{12})$ because the Moshinsky--Talmi transformation makes
-total HO quanta $N_1+N_2=N_{\mathrm{rel}}+N_{CM}$ a conserved
-quantum number.  Consequently the ground state lies in the
-lowest-$N_{\mathrm{tot}}$ sector of $H_{HO}$; for a
-closed-shell system (two fermions in $M_L=0$, $M_S=0$), that
-sector is one-dimensional, and the ground state is a single
-Slater determinant $|(0s)^{2}\rangle$.
+\textbf{[RETRACTED 2026-08-22.]}  This section previously reported
+prediction EP-2b as resolved in the strong form
+$S_{\mathrm{HO}} = 0$ \emph{identically}, with the mechanism that on
+the Bargmann--Segal HO basis the one-body operator $H_{HO}$ commutes
+exactly with \emph{any} central two-body interaction $V(r_{12})$,
+because the Moshinsky--Talmi transformation makes the total HO quanta
+$N_{\mathrm{tot}} = N_{\mathrm{rel}} + N_{CM}$ a conserved quantum
+number of $V$.  \textbf{The claim, the mechanism, and the INTERNAL
+THEOREM tier are all withdrawn.}
 
-\paragraph*{Numerical confirmation (EP-2b).}  With the
-Minnesota NN singlet-channel kernel at $\hbar\omega=10\,\mathrm{MeV}$:
+\paragraph*{Why the mechanism is false.}  The Moshinsky--Talmi
+\emph{bracket} conserves total quanta --- that is a property of the
+harmonic-oscillator coordinate transformation, and it is the standard
+nuclear-structure fact the section cited.  The potential \emph{matrix
+element} does not inherit it.  A central $V(r_{\mathrm{rel}})$ is
+diagonal in the centre-of-mass quantum numbers and in
+$l_{\mathrm{rel}}$, but it \emph{couples different relative-$n$}.
+Writing the element out, the bra bracket forces
+$2n + l + 2N_{CM} + \Lambda = N_{\mathrm{bra}}$ and the ket bracket
+forces $2n' + l + 2N_{CM} + \Lambda = N_{\mathrm{ket}}$, so
+\begin{equation}
+  n - n' \;=\; \tfrac{1}{2}\,(N_{\mathrm{bra}} - N_{\mathrm{ket}}).
+  \label{eq:n_shift}
+\end{equation}
+The $N_{\mathrm{tot}}$-changing elements are therefore exactly the
+$n \neq n'$ ones --- the radial off-diagonal of $V$ in the relative
+coordinate --- and they are not small.  For the Minnesota singlet at
+$b=1$,
+$\langle n_{\mathrm{rel}}{=}0, l{=}0 \lvert V \rvert
+ n_{\mathrm{rel}}{=}1, l{=}0 \rangle = +17.2$~MeV against a diagonal
+$\langle 0,0 \lvert V \rvert 0,0 \rangle = -0.81$~MeV.
+
+The paper's own contrast should have caught this.  The Interpretation
+paragraph argued that the Coulomb kernel is different because it ``does
+not conserve any HO-like $N_{\mathrm{tot}}$ quantum number'' --- but
+$1/r_{12}$ \emph{is} a central potential, so it falls under the same
+``any central $V(r_{12})$'' the theorem quantified over.  The two
+statements cannot both hold, and the contradiction was visible in the
+text.
+
+\paragraph*{Where the zero came from.}  The reported
+$S_{\mathrm{full}} = 0$ and
+$\lVert[H_{HO},V]\rVert_F/\lVert H_{HO}\rVert_F \sim 10^{-16}$ were
+produced by an undocumented guard in the two-body matrix-element
+routine, which returned zero whenever the bra and ket total quantum
+numbers differed --- that is, it discarded precisely the couplings
+identified by~\eqref{eq:n_shift}.  With the guard removed, the same
+driver on the same basis gives Table~\ref{tab:ep2b}.
 
 \begin{table}[h]
-\caption{EP-2b: two-fermion HO on the Bargmann--Segal lattice,
-Minnesota $S=0$ interaction.  $E_{\mathrm{full}}$ is the FCI
-ground-state energy; $E_{\mathrm{kin}}$ is the noninteracting
-(HO-only) ground-state; $S_{\mathrm{full}}$ is the spatial
-1-RDM von Neumann entropy of the interacting ground state.
-Data from \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.}
+\caption{EP-2b \textsc{corrected}: two-fermion HO on the
+Bargmann--Segal lattice, Minnesota $S=0$ interaction at
+$\hbar\omega=10$~MeV.  $E_{\mathrm{full}}$ is the FCI ground-state
+energy, $E_{\mathrm{kin}}$ the noninteracting HO ground state,
+$S_{\mathrm{full}}$ the von Neumann entropy of the normalized (trace-one)
+spatial 1-RDM in nats, and $n_0$ the leading natural-orbital occupation
+(of a possible $2$).  Compare the retracted values: $E_{\mathrm{full}}$
+was reported as $22.185$ at every $N_{\max}$, $S_{\mathrm{full}}$ as
+$0.0$, and the commutator ratio as $\sim\!10^{-16}$.}
 \label{tab:ep2b}
 \begin{ruledtabular}
-\begin{tabular}{cdddd}
+\begin{tabular}{cddddd}
 $N_{\max}$ & \multicolumn{1}{c}{$E_{\mathrm{full}}$ (MeV)}
             & \multicolumn{1}{c}{$E_{\mathrm{kin}}$ (MeV)}
             & \multicolumn{1}{c}{$S_{\mathrm{full}}$ (nats)}
-            & \multicolumn{1}{c}{$\lVert[H_{HO},V]\rVert_F/\lVert H_{HO}\rVert_F$} \\
+            & \multicolumn{1}{c}{$\lVert[H_{HO},V]\rVert_F/\lVert H_{HO}\rVert_F$}
+            & \multicolumn{1}{c}{$n_0$} \\
 \hline
-2 &  22.185 & 30.000 & 0.0 & 7.9\times 10^{-16} \\
-3 &  22.185 & 30.000 & 0.0 & 4.4\times 10^{-16} \\
+2 &  21.6538 & 30.000 & 0.0671 & 0.74 & 1.9800 \\
+3 &  21.6279 & 30.000 & 0.0716 & 0.63 & 1.9791 \\
+4 &  21.5442 & 30.000 & 0.0833 & 0.67 & 1.9764 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The FCI ground state at both basis sizes is bit-identical to
-the single Slater determinant $|(0s)^{2}\rangle$; top-$4$
-natural-orbital occupations are $(2.0, 0, 0, 0)$ exactly.  The
-$N_{\max}=2\to 3$ comparison shows that enlarging the single-
-particle basis does \emph{not} mix higher shells into the
-ground state: the commutator $[H_{HO}, V]$ is at the
-floating-point noise floor, so all eigenvectors of $H_{\mathrm{full}}$
-are eigenvectors of $H_{HO}$, and the ground state is locked
-to the lowest-$N_{\mathrm{tot}}$ irreducible block.
+\paragraph*{What is true instead.}  The HO two-fermion closed-shell
+ground state is \emph{not} a single Slater determinant for a central
+two-body interaction, and $H_{HO}$ does \emph{not} commute with $V$ ---
+the commutator is $O(1)$ relative to $\lVert H_{HO}\rVert_F$, not at
+the noise floor.  The entropy is small (a few hundredths of a nat,
+comparable in magnitude to the $S \sim 4\times10^{-2}$ nats of the
+Coulomb EP-1 measurement) and it \emph{grows} with basis size rather
+than staying pinned at zero.  So the original heuristic that the
+section explicitly rejected as too weak --- ``a short-range kernel
+suppresses cusp concentration,'' giving
+$S_{\mathrm{HO}}$ small but nonzero rather than
+$S_{\mathrm{HO}} = 0$ --- is closer to the truth than the structural
+statement that replaced it, though even that is not established here:\
+at these basis sizes the HO and Coulomb entropies are the same order of
+magnitude.
 
-\paragraph*{Interpretation.}  The operator-theoretic statement
-of Section~\ref{sec:operator} should be read in its sharp form:
-entanglement is generated by the component of the two-body
-operator \emph{off-diagonal in the $H_1$ eigenbasis restricted
-to the ground-state sector}, not merely by $V$'s total Frobenius
-mass.  On the HO lattice, $V$ has nonzero total Frobenius mass
-(and even a $\sim 93\%$ diagonality ratio in the $H_{HO}$
-eigenbasis that parallels the Coulomb number), but its
-off-diagonal component between $N_{\mathrm{tot}}$ eigenspaces is
-\emph{exactly zero}, so the ground state does not mix, and
-$S=0$ exactly.  The Coulomb kernel, in contrast, does not
-conserve any HO-like $N_{\mathrm{tot}}$ quantum number; it
-couples across shells (the $6$--$8\%$ off-diagonal residue
-documented in Section~\ref{sec:cusp}) and generates the
-$S\sim 4\times 10^{-2}$ nats observed in EP-1.
+\paragraph*{What survives.}  The operator-theoretic result of
+Section~\ref{sec:operator} is untouched:\ it concerns the
+entanglement-inertness of the one-body operator and makes no claim
+about $N_{\mathrm{tot}}$.  The Paper~24 $\pi$-freeness certificate is
+untouched:\ it concerns the graph's eigenvalues and adjacency weights,
+not the interacting two-fermion state.  What is withdrawn is the bridge
+between them --- the claim that a $\pi$-free graph certificate extends
+to a $\pi$-free (indeed vanishing) ground entropy --- together with the
+asserted structural duality between this section and the nonzero
+Coulomb scaling of Section~\ref{sec:pred2}.  The two lattices are not
+opposites on this axis; on present evidence they behave similarly.
 
-\paragraph*{Structural content.}  The result generalizes beyond
-Minnesota to \emph{any} central two-body $V(r_{12})$ on the 3D
-isotropic HO basis: total-quanta conservation is a property of
-the Moshinsky--Talmi decomposition, not of the specific kernel.
-This is a discrete quantum-information reading of a standard
-nuclear-structure fact~\cite{Moshinsky1996}.  It provides a
-zero-entropy baseline for the Paper~18 exchange-constant
-taxonomy: on the HO graph, entropy is not merely
-``embedding-class with small amplitude'' but vanishes
-identically at closed-shell ground states, consistent with the
-HO rigidity theorem of Paper~24~\cite{GeoVac_Paper24}
-($\pi$-free graph certificate extends to $\pi$-free ground
-entropy).
+\paragraph*{Methodological note.}  The corroborating evidence was itself
+a symptom.  The result read as robust partly because $E_{\mathrm{full}}$
+came out independent of $N_{\max}$ (both entries of the retracted table
+read $22.185$), and the text presented that invariance as confirmation
+that ``enlarging the single-particle basis does not mix higher shells
+into the ground state.''  That invariance was the guard, freezing the
+ground state inside a single $N_{\mathrm{tot}}$ block.  Under the
+corrected computation $E_{\mathrm{full}}$ decreases monotonically with
+basis size, as a variational calculation must.  A quantity that comes
+out \emph{exactly} zero, or \emph{exactly} invariant, where the physics
+predicts only ``small'' or ``weakly dependent,'' is a reason to ask what
+has been restricted.
 
-\paragraph*{Implementation.}  The experiment is driven by
-\texttt{debug/ep2b\_ho\_two\_fermion.py} using the new
-\texttt{geovac.nuclear.ho\_two\_fermion} module (which
-composes the existing
-\texttt{geovac.nuclear.bargmann\_graph},
-\texttt{geovac.nuclear.moshinsky}, and
-\texttt{geovac.nuclear.minnesota} infrastructure from
-Paper~23~\cite{GeoVac_Paper23}).  The numerical claims above
-are pinned by
-\texttt{tests/test\_paper27\_entropy.py::test\_paper27\_ep2b\_ho\_gs\_is\_single\_determinant}
-and
-\texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_commute}.
+\paragraph*{Implementation.}  The corrected measurements come from the
+production module \texttt{geovac.nuclear.ho\_two\_fermion} composed with
+\texttt{geovac.nuclear.moshinsky} and
+\texttt{geovac.nuclear.minnesota} from
+Paper~23~\cite{GeoVac_Paper23}.  The retraction is pinned by
+\texttt{tests/test\_paper27\_entropy.py} and, on the Paper~24 side, by
+\texttt{tests/test\_paper24\_ho\_entropy.py}, which additionally
+carries a tripwire reproducing the retired guard on demand so that a
+silent reinstatement fails the suite.
 
 \subsection{Universal scaling of Coulomb block entropy
             (\textbf{verified, reframed})}
@@ -944,11 +987,17 @@ pair-counting statement $A_n = g_n^{2}\propto n^{4}$, with the
 factor of four as the two-body signature.  Third, the cusp
 localizes as a single hot node on the $V_{ee}$ pair graph,
 making the loci of energy correlation, entropy generation, and
-cusp mass coincident.  Fourth, on the Bargmann--Segal harmonic
-oscillator lattice, two-fermion closed-shell ground-state
-entropy is identically zero for \emph{any} central two-body
-potential, a rigidity statement structurally parallel to the
-Fock and Bargmann--Segal theorems of Paper~24.  Fifth, on the
+cusp mass coincident.  Fourth --- and negatively --- the
+claim that two-fermion closed-shell ground-state entropy on the
+Bargmann--Segal harmonic oscillator lattice is identically zero
+for \emph{any} central two-body potential is \textsc{retracted}
+(\S\ref{sec:pred1}).  The Moshinsky--Talmi \emph{bracket}
+conserves total oscillator quanta; the potential \emph{matrix
+element} does not, and the published zero was an artifact of a
+code guard that discarded exactly the couplings which change
+them.  Corrected, the entropy is nonzero, comparable in
+magnitude to the Coulomb value, and increasing with basis
+size.  Fifth, on the
 Coulomb lattice, block entropy obeys a universal two-variable
 scaling
 $S_B = A\,(\tilde{w}_B/\delta_B)^{\gamma}$ in the dimensionless
@@ -963,8 +1012,8 @@ taxonomy of Paper~18~\cite{GeoVac_Paper18} as a
 projection-class observable: zero on the combinatorial graph,
 finite only after the metric embedding of $1/r_{12}$.  The
 two-body character of the area-law scaling is structural, not
-incidental; the predicted contrast between Coulomb and harmonic
-oscillator two-fermion lattices is sharp and falsifiable.
+incidental; on present evidence the Coulomb and harmonic
+oscillator two-fermion lattices behave similarly on this axis (the sharp-contrast reading is retracted, v5.0.0).
 
 %=================================================================
 \section*{Equation Verification}
@@ -1017,15 +1066,7 @@ test in the codebase.
     \texttt{tests/test\_paper27\_entropy.py::\allowbreak
     test\_paper27\_ep2c\_dimensionless\_power\_law},
     data in \texttt{debug/data/ep2c\_entropy\_vs\_vee\_offdiag.json}.
-  \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1}
-    numerical claims ($S_{\mathrm{HO}}=0$, occupation
-    $(2.0,0,0,0)$, commutator at floating-point noise):
-    \textbf{Verified} by
-    \texttt{tests/test\_paper27\_entropy.py::\allowbreak
-    test\_paper27\_ep2b\_ho\_gs\_is\_single\_determinant}
-    and
-    \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_commute},
-    data in \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
+  \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1} corrected numerical claims (EP-2b \textsc{retracted} v5.0.0: $S_{\mathrm{HO}}$ small but nonzero, $0.0671/0.0716/0.0833$ nats, natural-orbital occupation $\approx(1.98,\ldots)$, commutator $O(1)$): \textbf{Verified} by \texttt{tests/test\_paper27\_entropy.py::\allowbreak test\_paper27\_ep2b\_ho\_gs\_is\_not\_a\_single\_determinant} and \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_does\_not\_commute}, data in \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
   \item Section~\ref{sec:taxonomy} embedding-class placement:
     diagonal pair-state $V_{ii}$ rationality and spectral
     irrationality verified in EP-3 / energy-graph
@@ -1099,6 +1140,12 @@ GeoVac Technical Report (2025).
 \bibitem{GeoVac_Paper18}
 J.~Loutey,
 ``Spectral-Geometric Exchange Constants: Projecting Discrete Spectra onto Continuous Manifolds,''
+GeoVac Technical Report (2026).
+
+\bibitem{GeoVac_Paper19}
+J.~Loutey,
+``Toward PK-Free Molecular Hamiltonians:\ Two-Center Sturmian
+Integrals and Coupled Composition,''
 GeoVac Technical Report (2026).
 
 \bibitem{GeoVac_Paper23}

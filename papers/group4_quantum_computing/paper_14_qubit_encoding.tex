@@ -1250,7 +1250,9 @@ selection rules---which determine \emph{which} index quadruplets are
 nonzero---are preserved, because $J = \tfrac{1}{2}r_{12}$ is
 rotationally invariant.  The TC transformation densifies the radial
 integrals within each allowed angular channel but does not create
-new angular channels.
+new angular channels.  The quantum-algorithm cost of this
+non-Hermiticity---and whether it is worth avoiding---is analysed in
+Sec.~\ref{sec:tc_nonhermitian_cost}.
 
 Table~\ref{tab:tc_composed} compares standard and TC composed
 Hamiltonians at the production operating point ($n_{\max} = 2$).
@@ -1315,6 +1317,161 @@ pipeline.
 A PES scan for LiH confirms that both the standard and TC Pauli
 counts are $R$-independent (334 and 562 at all sampled bond lengths),
 consistent with the selection-rule origin of the sparsity.
+
+\subsubsection{Quantum-algorithm cost of the non-Hermitian form}
+\label{sec:tc_nonhermitian_cost}
+
+The similarity transformation makes $H_{\mathrm{TC}}$ non-Hermitian,
+placing it outside the Hermitian resource model used above
+(Rayleigh-quotient VQE, real-time Trotter, and textbook QPE all assume a
+Hermitian generator).  We characterise this cost on an atomic
+Coulomb--Sturmian realisation and reach two conclusions: the
+non-Hermitian form is cheap to run, and the naive Hermitisation that
+would avoid it sacrifices accuracy.
+
+\emph{The non-Hermiticity is localised and benign.}  For a
+three-electron reference (Li~$1s^2 2s$) the electron--electron cusp
+activates a genuine three-body operator, which we contract to an
+effective two-body operator using the reference one-particle density
+matrix (the xTC scheme~\cite{christlmaier2023xtc}).  This contracted
+operator is Hermitian to machine precision
+($\lVert A - A^\dagger\rVert \le 3\times10^{-18}$ for an $s$ reference,
+$3\times10^{-17}$ for an open-$p$ reference); the only non-Hermitian
+term is the generic convective operator $G$, present in any
+transcorrelated Hamiltonian.  For the full operator the spectrum is
+entirely real, the ground state real, and the departure from normality
+small ($0.015$ for Li, $0.069$ for He).  The cost of eigenvalue
+estimation for a non-normal block-encoded operator is governed by the
+eigenvector condition number $\kappa_V$ (the Bauer--Fike factor), which
+enters \emph{linearly} in the optimal quantum eigenvalue-processing
+route~\cite{lowsu2024qeve}.  We measure $\kappa_V = 1.21$ for Li
+(grid-stable) and $\kappa_V = O(1)$, $\lesssim 2$, for He, so the penalty
+is a small constant factor rather than a change of scaling; the Pauli
+1-norm is barely affected
+($\lambda_{\mathrm{TC}}/\lambda_{\mathrm{std}} \le 1.13$).  Independent
+work on transcorrelated electronic Hamiltonians in Gaussian bases
+reaches the same conclusion ($\kappa_V \approx 1$--$3$, reduced further
+by xTC)~\cite{uvarov2025qeve_tc}.  The one genuine overhead is the Pauli
+\emph{count}: the non-symmetric $G$ tensor roughly doubles it
+($117 \to 249$ on the atomic $s$-only engine).
+
+\emph{Hermitisation by symmetrisation is a false economy.}  The
+symmetrised operator
+$\tfrac12(H_{\mathrm{TC}} + H_{\mathrm{TC}}^\dagger)$ is attractive on
+cost---it restores the plain Pauli count, lowers the 1-norm slightly
+below plain ($0.98\times$), and is Hermitian ($\kappa_V = 1$)---but it is
+a different, less accurate operator.  Discarding the anti-Hermitian part
+of $G$ shifts the energy downward past the exact value, and the
+overshoot \emph{worsens} as the basis improves: at the largest basis
+tested the genuine transcorrelated energy lies $+5.4$~mHa (He) and
+$+7.7$~mHa (Li) above the exact non-relativistic energy and approaches it
+from the variationally correct side, whereas the symmetrised energy lies
+$-6.6$ and $-21.4$~mHa \emph{below} exact.  No stationary Jastrow range
+anchors the symmetrised operator ($E_{\mathrm{TC}}$ is monotone in the
+geminal exponent).  We therefore run the operator in its native
+non-Hermitian form---affordable by the $\kappa_V = O(1)$ result
+above---rather than symmetrising.  Deleting $G$ altogether is not an
+alternative (the remaining two-body term then over-binds by
+$\sim0.6$~Ha), and folding to
+$H_{\mathrm{TC}}^\dagger H_{\mathrm{TC}}$ is excluded because it returns
+the smallest singular value, not the ground eigenvalue, and squares the
+conditioning.  These measurements use the atomic $s$-only
+Coulomb--Sturmian engine (He, Li) with a single spin-independent
+geminal; the robust content is the \emph{ordering} (native non-Hermitian
+more accurate than symmetrised, both correcting the cusp relative to
+plain), not an absolute accuracy figure for this minimal basis.
+
+\subsubsection{Angular sparsity survives the cusp correction (atomic xTC)}
+\label{sec:tc_atomic_sparsity}
+
+The cost analysis above establishes that the non-Hermitian TC operator is
+affordable.  The complementary question is whether it is still \emph{sparse}:
+when the electron--electron cusp activates a genuine three-body operator and we
+contract it to an effective two-body operator against the reference density (the
+xTC scheme~\cite{christlmaier2023xtc}), does the contracted operator inherit the
+angular Gaunt sparsity of the plain Coulomb operator (Paper~22), or does the
+three-body $\to$ two-body contraction fill in the zero angular blocks?  The
+question is sharp because the transcorrelated vertex is \emph{non-abelian}: a leg
+harmonic and a correlator harmonic Clebsch--Gordan couple to a \emph{multiplet}
+of resultants, not a single one, which is exactly why the three-body operator does
+not collapse to two-body the way the abelian plane-wave TC does.
+
+The answer is settled at the level of angular \emph{support}---which orbital
+quadruplets are nonzero---which is radial-independent and therefore exact (integer
+block counts, no quadrature).  Table~\ref{tab:xtc_fillin} gives the fill-in (blocks
+xTC makes nonzero where Coulomb was zero) for spherical, open-$p$, and open-$d$
+references across increasingly rich bases, swept over the whole monoatomic library
+$Z=1$--$56$.
+
+\begin{table}[t]
+\caption{Exact angular fill-in of the xTC-contracted two-body operator relative to
+the plain Coulomb operator, swept across the monoatomic library.  ``Fill-in'' counts
+blocks nonzero under xTC but zero under Coulomb; fill-out is zero in every case, so
+zero fill-in means the support (hence the Jordan--Wigner Pauli term set) is preserved
+exactly.  Spherical reference: any closed, half-filled high-spin, or $s$-open shell
+(Unsold; e.g.\ Be $1s^2 2s^2$, N $2p^3$, Mn $3d^5$); open-$p$: C/O ($2p^2$/$2p^4$);
+open-$d$: Sc/Ti-type ($3d^1$/$3d^2$).  Counts are exact integers (angular support is
+radial-independent).}
+\label{tab:xtc_fillin}
+\begin{ruledtabular}
+\begin{tabular}{lrrrr}
+Basis & {spherical} & {open-$p$} & {open-$d$} & {Coulomb density} \\
+\hline
+$s+p$       & 0 & 0   & 0   & 14.8\% \\
+$s+p+d$     & 0 & 4   & 4   & 8.5\%  \\
+$s+p+d+f$   & 0 & 96  & 96  & 6.1\%  \\
+$s+p+d+f+g$ & 0 & 264 & 268 & 4.8\%  \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+The fill-in is governed by a single exact rule: it is \emph{zero at every basis},
+bit-exactly, precisely when the reference density is spherical.  By Uns\"old's theorem
+the spherical shells are the closed subshells, the half-filled high-spin subshells,
+and the $s$-open shells---so the zero-fill-in guarantee covers not only the framework's
+headline molecules H$_2$, LiH, BeH$_2$ (all $s$-referenced, Be is $1s^2 2s^2$) but
+also, e.g., nitrogen ($2p^3$) and chromium/manganese ($3d^5$).  Across the
+$Z=1$--$56$ library this is 29 of the 56 atoms; the remaining 27 split into 16
+open-$p$ and 11 open-$d$ references.  The mechanism is the same monopole collapse in
+every spherical case: a spherical reference density carries only the $L'=0$ multipole
+(Uns\"old), so contracting a correlator leg against it forces the leg to the monopole
+and collapses the non-abelian vertex to a single Coulomb-like multipole with identical
+angular support.  Because the support is unchanged (and no block is removed either),
+the Jordan--Wigner Pauli term count is preserved exactly; on the $s+p$ radial engine
+(Li reference) the plain and xTC operators both carry 279 Pauli terms, and the
+two-body 1-norm is \emph{lowered} to $0.76$--$0.91\times$ plain across geminal widths
+$\gamma \in [0.6, 1.5]$.  So xTC handles the cusp without inflating the qubit cost.
+
+A non-spherical open-$p$ reference (partially filled $2p$ that is not half-filled:
+C, O, F, and the oxygen of H$_2$O---but \emph{not} N, whose $2p^3$ is half-filled and
+therefore spherical) carries the additional $L'=2$ density multipole, which lets the
+vertex bridge an even-multipole gap between external pairs.  The fill-in is still zero
+through $s+p$ (at $l \le 1$ every same-parity pair already contains the monopole, so
+Coulomb misses nothing), and only a small, structured fill-in appears once $d$
+orbitals enter---4 blocks at $s+p+d$, 96 at $s+p+d+f$, 264 at $s+p+d+f+g$.  An
+open-$d$ reference (the transition metals whose $d$-shell is neither empty, half, nor
+full) additionally carries the $L'=4$ multipole; this makes \emph{no} difference
+through $s+p+d+f$ (identical $0/4/96$) and first bites at $s+p+d+f+g$, where the
+open-$d$ fill-in is 268 against the open-$p$ 264---a genuine but tiny $L'=4$ effect
+($+4$ blocks out of $390{,}625$).  In every case the xTC density stays within $2.5\%$
+relative of the Coulomb density (both fall from $14.8\%$ at $s+p$ to $4.8\%$ at
+$s+p+d+f+g$), so the operator does not densify across the physical range; the honest
+difference from the spherical case is that the preservation is no longer bit-exact and
+the fill-in fraction rises slowly with $l_{\max}$.  The whole pattern is a periodicity
+statement (Paper~16): the fill-in class is fixed by the open shell's angular momentum,
+so it repeats down each group of the periodic table.
+
+\emph{This is an atomic property.}  The angular sparsity that xTC preserves is the
+single-center $l$-selection of Paper~22, and that sparsity does not survive to two
+centers: a two-center Coulomb operator already sits at $100\%$ of its
+$m$-conservation limit (LiH) against the atom's $55\%$, so a molecule has lost the
+rich $l$-sparsity \emph{before} xTC is applied.  For a molecule xTC therefore
+preserves only the $m$-conservation sparsity plus a modest 1-norm reduction; the
+combined ``cusp corrected and angular sparsity preserved'' result is strongest for
+atoms.  As throughout this section, these are single-common-$k$ Coulomb--Sturmian
+measurements with a single spin-independent geminal on a classical non-Hermitian
+proof of concept---structural (support and resource) results, not absolute accuracy
+claims for the minimal basis.
 
 \subsection{Balanced coupled variant}
 \label{sec:balanced_coupled}
@@ -3285,6 +3442,20 @@ trapped ion quantum hardware,'' Phys.\ Rev.\ A \textbf{111}, 022817 (2025);
 arXiv:2406.04992.
 [RaH 18-qubit active space: 12{,}556 relativistic / 2{,}740
 non-relativistic Pauli terms (47{,}099 / 4{,}249 two-electron integrals).]
+
+\bibitem{christlmaier2023xtc}
+E.~M.~Christlmaier, T.~Schraivogel, P.~L\'opez R\'ios, A.~Alavi, and
+D.~Kats, ``xTC: An efficient treatment of three-body interactions in
+transcorrelated methods,'' J.\ Chem.\ Phys.\ \textbf{159}, 014113 (2023).
+
+\bibitem{lowsu2024qeve}
+G.~H.~Low and Y.~Su, ``Quantum eigenvalue processing,'' SIAM
+J.\ Comput.\ \textbf{55}, 135 (2026); arXiv:2401.06240 (2024).
+
+\bibitem{uvarov2025qeve_tc}
+A.~Uvarov and A.~F.~Izmaylov, ``Accuracy and resource advantages of
+quantum eigenvalue estimation with non-Hermitian transcorrelated
+electronic Hamiltonians,'' arXiv:2511.21867 (2025).
 
 \end{thebibliography}
 

@@ -1,5 +1,5 @@
 ---
-description: Divergent-then-convergent generative pass — reach laterally (cross-domain Outlier + Inversion, judgment OFF), THEN filter hard (ground / verify / hedge / defend). The wall between the two phases is the point.
+description: Divergent-then-convergent generative pass — reach laterally (Outlier: weighted cross-corpus + distant-field, plus Inversion; judgment OFF), THEN filter hard (verify / falsify-and-run / hedge-audit / bank the kills). The wall between the two phases is the point.
 ---
 
 Pause. This is a two-phase pass with a **hard wall** between them: **PHASE A generates wild (judgment suspended); PHASE B filters hard (the guardrails).** The failure mode this fixes: when verification leaks into generation, you only ever reach for *defensible* connections — the in-neighborhood ones a veteran already sees. Genuine "aha" connections look indefensible on first contact, by definition. So suspend judgment while reaching, and quarantine every ounce of skepticism to Phase B.

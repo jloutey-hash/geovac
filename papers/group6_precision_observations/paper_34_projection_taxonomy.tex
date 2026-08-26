@@ -78,7 +78,7 @@ This replaces an earlier naive form that scaled residual linearly
 with chain depth; the May~2026 synthesis pass falsified the depth
 form on the catalogue itself (depth-3 chains exist at residual~$0$
 and at $+286$~ppm; depth-4 chains exist at $+2$~ppm and at
-$+0.534\%$).  The Lamb shift example (depth-4 chain, $-0.534\%$
+$-0.534\%$).  The Lamb shift example (depth-4 chain, $-0.534\%$
 residual at converged basis) is consistent with the framework's
 one-loop QED basis-quality limit; the H~1S polarizability example
 (depth-3 chain, residual $0$) is consistent with the
@@ -3836,7 +3836,7 @@ spinor lift $\circ$ Wigner $3j$ ($6j$-coupled, Drake) $\circ$ Wigner $3j$
 $-2.62\%$ vs NIST $+2{,}291.176(15)$~MHz & A & Partial-cancellation
 amplification: absolute residual $-60$~MHz on a $2.3$~GHz interval.
 The dominant intervals (P$_0$-P$_1$ at $-0.014\%$, P$_0$-P$_2$ span at
-$-0.20\%$) are in \S~\ref{sec:matches}; this small interval has the
+$-0.20\%$) are in \S~\ref{sec:catalog}; this small interval has the
 same absolute residual but $\sim$10$\times$ larger fractional residual
 because of the structural cancellation SO ($-58$~GHz) $+$ SS ($-9.5$~GHz)
 $+$ SOO ($+70$~GHz) $\approx +2.2$~GHz.  Residual is below the LS-8a
@@ -3863,7 +3863,7 @@ $g_p$) & HF-1 chain $+$ graph-native $F_2$ on Dirac-$S^3$ & $+58$ ppm & A
 asymptote $a_e = \alpha/(2\pi)$ derived structurally on Dirac graph;
 \textbf{Parker--Toms first-order curvature correction $c_1 = R/12 = 1/2$
 verified at $0.5\%$ precision against the spectral sum}, no fits.  See
-Paper~28 \S\ref{sec:curvature_coefficients}.  Residual $+58$ ppm is
+Paper~28 (curvature coefficients).  Residual $+58$ ppm is
 recoil + Zemach + multi-loop. \\
 21~cm $A_\text{HF} = 1420.432$ MHz (HF-4, $+r_Z$ external) & HF-2 chain
 $+$ Zemach Layer-2 input ($r_Z = 1.045$ fm) & $+18$ ppm & A + S(Zemach)
@@ -4446,7 +4446,7 @@ $\circ$ \S\ref{sec:proj_sturmian} $\circ$ \S\ref{sec:proj_restmass}
 $\circ$ \S\ref{sec:proj_charge_density}; \emph{no}
 \S\ref{sec:proj_magnetization_density} ($^4$He has $I=0$) &
 $-1.44\%$ vs CREMA 2021 $1378.521(48)$ meV (Krauth 2021,
-arXiv:2102.05728) &
+\emph{Nature} \textbf{589}, 527) &
 C (Diepold conventions: Friar HO absorbed into leading
 $\sim +11.4$ meV, $r_\alpha$ extraction $\sim +7$ meV) +
 A (Eides SE recoil-mixing $\sim +1$ meV, same gap as $\mu$H/$\mu$d) &
@@ -5665,7 +5665,7 @@ ab initio path uses
 \texttt{geovac.neon\_core.screened\_psi\_origin\_squared} on a
 no-frozen-core Z=2 system; that is the named follow-on closure target.
 
-\textbf{Convention finding (new \S\ref{sec:layer2_d}-class candidate).}
+\textbf{Convention finding (new \S\ref{sec:convention_exposures}-class candidate).}
 The Bohr--Fermi formula's mass slot uses $m_e/m_p$ \emph{always},
 because the nuclear magneton $\mu_N = e\hbar/(2 m_p)$ is referenced
 to the proton mass regardless of the actual nucleus. Track 5 (D HFS,
@@ -5680,7 +5680,7 @@ multi-electron factor) matches experiment at \textbf{$+0.05\%$}
 (framework $-8661.25$ MHz vs experimental $-8665.65$ MHz). The Track 5
 convention transferred naively to He-3 is off by $3/2$; the standard
 convention generalizes correctly across all I-values. This is a
-candidate \S\ref{sec:layer2_d} class-(i) inter-track itemization
+candidate \S\ref{sec:convention_exposures} class-(i) inter-track itemization
 convention exposure.
 
 \textbf{Framework-native subtotal:} $\nu_\text{HFS}^\text{native}
@@ -5790,7 +5790,7 @@ follow-on track per Sprint Calc-He recommendation).
 The $+61\%$ residual at $n_{\max} = 7$ does not improve at higher $n_{\max}$
 within the single-exponent architecture and is therefore tagged error code
 \texttt{B} (basis architecture) in
-Table~\ref{tab:catalog_off}.  This entry is a \emph{structural} negative
+Table~\ref{tab:offprecision}.  This entry is a \emph{structural} negative
 result that complements the He $2{}^1\!S - 2{}^3\!S$ off-precision row:
 both expose the small-$Z$ graph-validity-boundary at He as the dominant
 limitation for excited-state precision, separable from the framework's
@@ -5896,7 +5896,7 @@ Component & $A$ (MHz) & Residual & Status \\
 C1: Bohr--Fermi strict ($g_e = 2$, point nucleus)
   & $783.0$ & $-65.9\%$ & FN \\
 C2: Screened $|\psi_{6s}(0)|^2$ via [Xe] \texttt{FrozenCore}
-  $Z_\text{eff}(r)$ (\S\ref{sec:proj_fock} $+$ \S\ref{sec:proj_pk})
+  $Z_\text{eff}(r)$ (\S\ref{sec:proj_fock} $+$ \S\ref{sec:proj_phillips_kleinman})
   & \multicolumn{2}{c}{$1.328~\text{bohr}^{-3}$ (Richardson extrap.)} & FN \\
 C3: Schwinger $a_e$ (\S\ref{sec:proj_vector_photon})
   & $783.9$ & $-65.9\%$ & FN \\
@@ -6443,7 +6443,7 @@ attribution of the remaining Layer-2 budget.
 \label{sec:autopsy_muhe4_lamb}
 
 \textbf{Reference.} $\Delta E = 1378.521(48)$ meV (CREMA 2021, Krauth
-et al., \emph{Nature} \textbf{589}, 527; arXiv:2102.05728; muonic
+et al., \emph{Nature} \textbf{589}, 527; muonic
 convention $E(2P_{1/2}) - E(2S_{1/2})$).
 
 The CREMA 2021 muonic helium-4 ion Lamb shift completes the muonic-Z=2
@@ -6668,9 +6668,9 @@ closes the remaining $+75$~ppm to NIST.}
 \toprule
 \# & Component & Value & Layer & Projection \\
 \midrule
-1 & Bohr energy gap $E_2 - E_1$ & $3/8\, E_h$ exact & 1 & \S\ref{sec:proj_fock_conformal} \\
+1 & Bohr energy gap $E_2 - E_1$ & $3/8\, E_h$ exact & 1 & \S\ref{sec:proj_fock} \\
 2 & Radial dipole $\langle R_{2p}|r|R_{1s}\rangle$ & $128\sqrt{6}/243\,a_0$ & 1 & Algebraic Hydrogenic integration \\
-3 & Angular factor $\langle Y_{10}|\cos\theta|Y_{00}\rangle$, $\sum_{m_f}$ & $1/\sqrt{3} \times 3$ & 1 & \S\ref{sec:proj_wigner3j} \\
+3 & Angular factor $\langle Y_{10}|\cos\theta|Y_{00}\rangle$, $\sum_{m_f}$ & $1/\sqrt{3} \times 3$ & 1 & \S\ref{sec:proj_3j} \\
 4 & Oscillator-strength prefactor $(2/3) \times (1/g_i)$ & $2/3$ & 2 & \S\ref{sec:proj_vector_photon} \\
 5 & Reduced mass $\mu/m_e$ in $m_e \cdot \omega \cdot |\langle r \rangle|^2$ scaling & $+545$ ppm & 2 & \S\ref{sec:proj_restmass} \\
 6 & Relativistic Dirac + radiative QED & $\sim +75$ ppm & 2 & LS-8a class \\
@@ -6737,8 +6737,8 @@ $+25.7$ MHz to NIST.}
 \toprule
 \# & Component & Value & Layer & Projection \\
 \midrule
-1 & Camporesi--Higuchi spinor Dirac on $S^3$, $|\lambda_n^D| = n + 3/2$ & Spectrum exact & 1 & \S\ref{sec:proj_spinor_lift} \\
-2 & Fock projection $p_0 = Z/n$, maps to H bound states & Exact & 1 & \S\ref{sec:proj_fock_conformal} \\
+1 & Camporesi--Higuchi spinor Dirac on $S^3$, $|\lambda_n^D| = n + 3/2$ & Spectrum exact & 1 & \S\ref{sec:proj_spinor} \\
+2 & Fock projection $p_0 = Z/n$, maps to H bound states & Exact & 1 & \S\ref{sec:proj_fock} \\
 3 & Sommerfeld/Dirac expansion (T8 sympy-verified) & Closed form & 1 & Algebraic Tier-3 \\
 4 & Coefficient $1/32 \in \mathbb{Q}$ from $j$-dependent bracket & $1/32$ & 1 & $j$-angular structure \\
 5 & $\alpha^2$ factor (CODATA) & $5.32514 \times 10^{-5}$ & 2 & External Class-1 calibration \\
@@ -7365,7 +7365,7 @@ that closes the framework's $+285.6$~ppm chain residual
 Pachucki--Yerokhin~2010 (the modern itemization framework adopted in
 Kalinowski--Pachucki--Yerokhin~2018 PRA \textbf{98}, 062513 for
 muonic D and applied analogously for electronic D), and the recent
-Patkos--Pachucki--Yerokhin~2024/2025 chiral-EFT update
+Bonilla et al.~2025 chiral-EFT deuteron nuclear-structure update
 (arXiv:2508.18776).
 
 \textbf{Convention difference.}  Friar--Payne~2005 aggregates the
@@ -7380,7 +7380,7 @@ nuclear-structure operators rather than Friar--Payne effective
 Friar moments.  Both compilations close to similar bottom-line
 totals at the experimental precision (Wineland--Ramsey~1972 $\sim$few
 ppb), but per-component itemization differs structurally.  The
-disagreement reaches operational consequences: Patkos--Pachucki--Yerokhin
+disagreement reaches operational consequences: Bonilla et al.
 2024/2025 documents a $5\sigma$ disagreement with previous
 calculations on muonic D HFS, while the underlying convention
 difference applies to electronic D HFS as well.
@@ -7675,7 +7675,7 @@ literature-convention mismatch in the strict sense.
 \textbf{Magnitude.}  Qualitative structural finding at this level.
 Quantitative tests live in the constituent sprints: LS-8a yields the
 two-loop QED renormalization gap (Paper~35 \S~VII.3 Refined Prediction~1);
-the W1c Layer~3 finding (Paper~19 \S~\ref{sec:w1c_residual}, 2026-05-23
+the W1c Layer~3 finding (Paper~19 (W1c-residual), 2026-05-23
 $\alpha$-PES test) is the most recent concrete demonstration that the
 module-endomorphism piece can be invisible at finite basis size when
 the FCI variational state does not occupy the affected subspace.
@@ -7798,7 +7798,7 @@ h1 closure
 (\texttt{debug/sprint\_f3\_cross\_block\_h1\_memo.md}); comprehensive
 full-arc synthesis
 (\texttt{debug/sprint\_w1c\_full\_arc\_synthesis\_memo.md}). Cross-references
-Paper~19 \S\ref{sec:w1c_residual} (W1c-residual wall + F1-F2-F3 arc
+Paper~19 (W1c-residual wall + F1-F2-F3 arc
 extension), CLAUDE.md~\S1.7 (multi-focal-composition wall taxonomy),
 CLAUDE.md~\S3 (dead-ends rows for the three-bucket hypothesis and
 kernel-shape substitution as W1c-residual closure mechanism), and
@@ -7893,7 +7893,7 @@ cross-block h1 architectural extension
 (\texttt{debug/sprint\_f3\_cross\_block\_h1\_memo.md}); comprehensive
 full-arc synthesis
 (\texttt{debug/sprint\_w1c\_full\_arc\_synthesis\_memo.md}). Cross-references
-Paper~19 \S\ref{sec:w1c_residual} (W1c-residual wall + F1-F2-F3 arc
+Paper~19 (W1c-residual wall + F1-F2-F3 arc
 extension with revised five-sub-layer hierarchy), Paper~17 \S6.10
 (composed-architecture cross-reference, updated to F3 maturity),
 Paper~32 \S VIII Sprint M-Z addendum (updated with W1d/W1e
@@ -8023,7 +8023,7 @@ NaH PARTIAL\_IMPROVEMENT
 (\texttt{debug/sprint\_f6\_maxn4\_nah\_memo.md}); Sprint
 $\beta$-update F4-F6-APPENDED-TO-F3-BASELINE synthesis
 (\texttt{debug/sprint\_beta\_update\_f4f6\_memo.md}).
-Cross-references Paper~19 \S\ref{sec:w1e_refinement_f4_f6}
+Cross-references Paper~19 (W1e refinement, F4--F6)
 (refined six-sub-layer hierarchy with the three W1e
 sub-sub-mechanisms), Paper~17 \S6.10 (composed-architecture
 cross-reference, updated to $\beta$-update F4--F6 maturity),
@@ -8394,7 +8394,7 @@ calibration data remains open at the same level it was on
 % -------------------------------------------------------------------
 
 This subsection is a structural partition table, not an empirical
-match.  It is placed in \S~\ref{sec:matches} because it accumulates
+match.  It is placed in \S~\ref{sec:catalog} because it accumulates
 sprint-by-sprint refinements parallel to \S~\ref{sec:offprecision}
 (off-precision matches), \S~\ref{sec:autopsies} (Roothaan autopsies),
 and \S~\ref{sec:convention_exposures} (literature convention
@@ -8902,7 +8902,14 @@ exact, shallow multi-L2 chains can have large residuals).
 
 This is a falsifiable structural claim about the framework, not a
 phenomenological fit.  The catalogue rows above are consistent
-with it.  Tests for the prediction:
+with it.  The bound, the depth-linear falsification below, and the
+three exact L2-count~$=0$ anchors (the spatial $S^3$ Casimir
+$\tfrac{1}{240} = \tfrac12\zeta_R(-3)$, the Stefan--Boltzmann
+$\pi^2/90$, and the H~$1S$ polarizability $\tfrac{9}{2}a_0^3$ via a
+Dalgarno--Lewis symbolic solve, each landing at residual~$0$) are
+regression-pinned in
+\texttt{tests/test\_paper34\_l2\_presence\_bound.py}.  Tests for the
+prediction:
 \begin{itemize}\setlength\itemsep{0pt}
 \item Any new framework-native chain (L2-count $= 0$) producing a
 rational-analytic answer should land at residual~$0$ at converged
@@ -9167,8 +9174,8 @@ The LS-4 Lamb shift datapoint adds historical context.  The LS-4
 chained projection (Fock + spectral action + Sturmian +
 Drake--Swainson) achieves $-0.39\%$ residual at the sweet-spot
 $N=40$.  At converged $N$, the LS-4 result reverts to the LS-1
-ceiling $-3.10\%$.  Under
-Prediction~\ref{pred:l2_presence} this is the
+ceiling $-3.10\%$ (LS-4, pre-LS-6a convention); the LS-6a fix supersedes this with $-0.534\%$.  Under
+Prediction~\ref{pred:l2_presence} the $-0.534\%$ is the
 $\epsilon_\text{basis}(\text{H one-loop QED Lamb})$ value and is
 the framework's converged-basis quality limit at zero Layer-2
 inputs; the $-0.39\%$ at $N=40$ is a transient finite-basis

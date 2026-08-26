@@ -632,9 +632,18 @@ production (`Q_tau_sigma_split`): never hand sympy the log at all -- carry Q_0 a
 an opaque coefficient and differentiate the PAIR by hand using
 Q_0' = -1/(xi^2-1).
 
-**TAGGING OWED.** E_1 is tagged (Paper 18 "Level 2"). **ln and gamma are NOT** --
-new to this build, flagged and still owed. No exchange result should reach a paper
-before that is done.
+**TAGGING: DISCHARGED at the resurgent level (v4.104.0-v4.105.0).** E_1 is tagged
+(Paper 18 "Level 2"). The ln and gamma are now placed by the exchange-class
+resurgence result (Paper 59 resurgent-skeleton [OBSERVATION];
+tests/test_paper59_resurgent_skeleton.py): **gamma never exists in the Borel
+plane** -- it is the coordinate-bookkeeping cost of writing the sector-origin
+Borel singularity (pole -> u ln u) in the R variable, i.e. NOT a projection
+transcendental; the **logs are skeleton-forced boundary data**, their arguments
+rational monomials in the Borel positions (kappa = prod lambda_j^{q_j} = 2ab/A
+for the exchange class; the cross-ratio Lambda for the hybrid class). Paper-34
+placement: connection-data boundary terms of Layer-2 objects, not
+observation-side injections. Sugiura (1927) independently corroborates the
+{E_1, ln, gamma} seed set (Paper 58 sec:qfd).
 
 **Does NOT revive the QC case.** QC-1 (2026-08-12) tested the compactness claim
 negative for independent reasons. Closing this integral buys speed and

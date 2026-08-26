@@ -188,3 +188,28 @@ Sonnet) get 2 seeds each. Answer key → `debug/qa/paper_58_seed_key.json`.
   `debug/qa/paper_58_seed_key.json`; worktree removed, no seed leaked. **Path to
   cert:** PI resolves the polyatomic finding → delta-verification re-run → FULL
   certifying run.
+- 2026-08-17 — **RE-CERT FULL run (PI: "paper 58 full") = PASS ✅** over the CURRENT post-cert state.
+  Paper 58 was modified after its 2026-08-15 full cert (v4.81.0 `3f579dd` g-row-decidability correction +
+  `51f2eef` nit-cleanup pins), so this fresh full run re-certifies the current text. All four dimensions +
+  completeness-critic. **Calibration required a recovery cycle (the run's lesson):** first claims pass was
+  **1/2** — it caught the W1 seed (line 465 "correspondingly more accurate") but MISSED the W3 seed (line 290
+  "The g row is *decided*"), a low-salience tier-word flip it read past (it discussed the same paragraph's
+  S/h blocks but reported "g-row COUNTED, W3-OK"). Per protocol a missed plant = de-calibrated → **re-dispatched
+  a tier-word-exhaustive claims reviewer**, which caught BOTH seeds (W3 at 290 + W1 at 466); the completeness-critic
+  independently flagged the same line-290 slip. **Final calibration: sensitivity 7/7** (code 2/2 census-tautology +
+  H2-tolerance-loosen; claims 2/2 after recovery W3+W1; citation 2/2 mulliken/lowdin vols; synthesis 1/1
+  "restores qubit-sparsity advantage"), **specificity 0 FP**. Deterministic C5/C10–C18 GREEN. **Zero genuine
+  non-seed MATERIAL** — every reviewer MATERIAL mapped to a seed (verified: real corpus has `==(195,0,0)`,
+  `abs=1e-9`, g-row "counted", no "more accurate", no "restores advantage", mulliken 17 / lowdin 97). **Fix-on-sight
+  NIT applied:** abstract mislabeled the elementary (AA|BB) *Coulomb* class as "the two-center **exchange** coupling"
+  (the body reserves "exchange" for (AB|AB), which carries {E₁,ln,γ} and is NOT decidable) → corrected to
+  "direct-Coulomb (AA|BB) repulsion", which also fixes the "so"-link. **Logged NITs (non-blocking, several already
+  in the 2026-08-15 record):** L143 "standard Coulomb-Sturmian practice" loose label (defensible — about the
+  borrowed classical tradition, not the builder); tab:backing S/h MEASURED slightly under-states (S/h are decided
+  → two-way upgrade); D_e=1.961 eV + Clementi −161.12 provisional/uncited; the polyatomic + elliptic scope blocks
+  un-tabled (self-disclosed scope). Paper compiles clean (9 pp, 0 undefined); no headline VALUE changed (no C16/C17
+  edit). Seed key `debug/qa/paper_58_full2_seed_key.json`; worktree removed, all 7 seeds verified absent.
+  **HONEST CEILING:** the calibration-recovery shows a single judgment-mode claims pass can walk past a low-salience
+  tier-word flip; the tier-word-exhaustive re-dispatch + completeness-critic are what earned the clean. Un-exercised:
+  the g-row 80% cross-bulk decidability stays transcendence-BLOCKED (E₁-value + γ open, v4.81 correction) — a proven
+  wall, not a coverage gap. Paper 58 remains CERTIFIED; this run re-affirms it over the post-correction text.

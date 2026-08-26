@@ -1,6 +1,6 @@
 % group3_foundations_synthesis.tex
 % GeoVac Group 3 Synthesis: Foundations / Spectral Graph Theory Arc
-% Status: Project archive synthesis, May 2026
+% Status: Project archive synthesis (living document; corrected in place -- version record in git/CHANGELOG)
 % Audience: mathematical physicists, spectral graph theorists, foundations community
 
 \documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
@@ -152,14 +152,14 @@ Paper~18~\cite{loutey_paper18} classifies transcendental content via a
 six-tier exchange-constant taxonomy and the master Mellin engine;
 Paper~22~\cite{loutey_paper22} states the potential-independent angular
 sparsity theorem; Paper~24~\cite{loutey_paper24} constructs the
-Bargmann--Segal lattice and the six-layer Coulomb/HO asymmetry;
+Bargmann--Segal lattice and the seven-layer Coulomb/HO asymmetry;
 Paper~31~\cite{loutey_paper31} states the $\mathcal{A}/D$
 universal/Coulomb partition in spectral-triple language.  \emph{The
 reconvergence} (where the branches loop back to a unified foundational
 statement, \S\ref{sec:reconvergence}):\ Paper~54 derives two-body
 selection rules from the tensor-product triple, Paper~55 classifies
 every GeoVac period as cyclotomic mixed-Tate at level $\le 4$,
-Paper~56 closes the cosmic-Galois injection $U^*_{\mathrm{GV}}
+Paper~56 closes the cosmic-Galois comparison $U^*_{\mathrm{GV}}
 \hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$, and Paper~57
 catalogues the forced/free seam.  An $O(V)$ time-evolution engine
 (Paper~6~\cite{loutey_paper6}, now an archived standalone tool)
@@ -557,8 +557,8 @@ Hamiltonians competitive for VQE/NISQ resource estimation.  The
 quantum-computing applications papers (Group~4) report Pauli-term
 counts that scale as $O(Q^{2.5})$ for the composed-geometry
 architecture across LiH, BeH$_2$, and H$_2$O---a $51\times$ to
-$1712\times$ advantage over published Gaussian baselines at matched
-qubit count.  The structural reason for this advantage is the
+$1712\times$ advantage in Pauli-term count over published Gaussian
+baselines.  The structural reason for this advantage is the
 Gaunt-selection-rule sparsity quantified in Table~\ref{tab:eri_density};
 the foundations-paper statement is the theorem itself, not the
 specific molecular benchmarks.
@@ -654,18 +654,19 @@ choice of natural manifold: $-Z/r$ to the second-order Riemannian
 Laplacian on $S^3$, $\tfrac{1}{2} m \omega^2 r^2$ to the first-order
 Euler operator on $H^2(S^5)$.
 
-\subsection*{The Coulomb/HO asymmetry: a six-layer stratification}
+\subsection*{The Coulomb/HO asymmetry: a seven-layer stratification}
+
+\emph{Conventions.}\ Sprint and track designations below are anchors into the
+project's internal chronicle (\texttt{CHANGELOG.md} in the repository); ``wall''
+is project shorthand for a structural obstruction established by multiple
+independent negative results.
 
 A central structural finding of Paper~24, sharpened progressively by
 the $S^5$ gauge-structure analysis (Paper~25, QED/gauge group), a
-sprint\footnote{Sprint/track designations are anchors into the
-project's internal chronicle (\texttt{CHANGELOG.md} in the
-repository); ``wall'' is project shorthand for a structural
-obstruction established by multiple independent negative results.}
-on the wedge KMS state of the framework's Lorentzian extension,
+sprint on the wedge KMS state of the framework's Lorentzian extension,
 the spectral-action gravity arc (Paper~51), and the master Mellin
 engine, is that the Coulomb and HO discretizations differ along
-\emph{six} independent layers, identified in stages across 2025--2026.
+\emph{seven} independent layers, identified in stages across 2025--2026.
 The asymmetry as currently catalogued reads:
 
 \begin{enumerate}
@@ -723,13 +724,27 @@ Bargmann--Segal Hardy sector this fails on both structural conditions:\
 the spectrum is strictly positive (no $\pm$-partner) and no
 half-integer-weight chirality grading exists on the $(N, 0)$
 tower---propagating the asymmetry to the master-Mellin level.
+\item \emph{CM / Hodge-circle arithmetic of the compact flow.}  On
+$S^3$ the compact KMS/Bisognano--Wichmann circle has $\pm$-symmetric
+integer generator spectrum, so its quarter-period point \emph{is} a
+$\mathbb{Q}$-rational complex structure $J$, $J^2=-1$, making the
+fundamental doublet a polarized weight-one $\mathbb{Q}$-Hodge structure
+with complex multiplication by $\mathbb{Q}(i)$ (Paper~56).  The $S^5$
+Hardy phase circle is equally compact and even carries a faithful
+$\mu_4$ (the metaplectic zero-point $\tfrac32$), yet admits no CM Hodge
+structure---its generator is strictly positive, the quarter point is
+$\mathbb{Q}$-rational only where it squares to $+1$, and the conjugate
+half a weight-one structure needs is exactly what the holomorphic-sector
+restriction discards.  Conductor-four \emph{period} content, by
+contrast, does transfer (Paper~24's companion non-layer).
 \end{enumerate}
 
 The first three layers were established in Paper~24 and Paper~25
 (QED/gauge group, $S^5$ gauge-structure paper); the fourth (wedge KMS)
 was identified in a 2026 sprint and folded into Paper~24's \S{}V; the
-fifth (spectral-action gravity) comes from Paper~51; and the sixth
-(master Mellin chirality-parity) from a June~2026 sprint.  All six
+fifth (spectral-action gravity) comes from Paper~51; the sixth
+(master Mellin chirality-parity) from a June~2026 sprint; and the seventh
+(CM/Hodge-circle arithmetic) from the August~2026 seam arc.  The first six
 layers stratify along the same operator-order divide:\ the Coulomb side
 uses a second-order Riemannian Laplacian with a nonlinear stereographic
 projection, and the HO side uses a first-order complex-analytic Euler
@@ -833,7 +848,7 @@ $k \in \{0, 1, 2\}$:
 \item \textbf{M1 ($k = 0$).}  Trivial heat kernel collapses to the
 Hopf-base measure $\text{Vol}(S^2)/\pi^2 = 4/\pi$.  This is the
 signature of all calibration-$\pi$ content in the Coulomb sector and
-appears as the leading constant in the GeoVac propinquity convergence
+appears as the leading constant in the GeoVac state-space Gromov--Hausdorff convergence
 rate.
 
 \item \textbf{M2 ($k = 2$).}  Standard Seeley--DeWitt expansion of
@@ -851,7 +866,7 @@ The master Mellin engine reading is that M1, M2, M3 are not three
 independent mechanisms but three sub-cases of the same Mellin
 transform on the GeoVac spectral triple, indexed by which power of the
 Dirac operator appears in the trace.  Each sub-mechanism has a
-characteristic domain of observable: M1 governs propinquity
+characteristic domain of observable: M1 governs state-space Gromov--Hausdorff
 convergence rates and Hopf-measure normalizations, M2 governs
 heat-kernel and spectral-action coefficients, and M3 governs
 vertex-restricted parity-character observables.  Mixing the operator
@@ -996,7 +1011,8 @@ so the free spectral action factorizes and contains no
 interaction---the correct statement that free particles do not interact.
 Gauging via the inner fluctuation of the truncated operator-system
 algebra produces a genuine, non-factorizable two-body interaction
-(connected fraction $77\%$ at $n_{\max} = 2$).  Its angular structure is
+(connected fraction $77\%$ at $n_{\max} = 2$, falling to $32\%$ at $n_{\max} = 3$---
+cutoff-sensitive, like the radial Pearson coefficient below).  Its angular structure is
 exactly what the universal sector predicts:\ $100\%$ $m$-conserving,
 $100\%$ Gaunt-compatible, pure $k = 0$ monopole at both tested cutoffs.
 Its radial weights, however, are \emph{not} proportional to the Coulomb
@@ -1050,16 +1066,18 @@ and an explicit inclusion of the candidate cosmic-Galois group
 $U^*_{\mathrm{Levi}} = \mathbb{G}_a^{3N} \rtimes SL_2$ into
 $\mathrm{Aut}^{\otimes}(\omega)$.  The load-bearing result is the
 \emph{cosmic-Galois injection}:\ a homomorphism (not a closed
-immersion --- the M3 column collapses to rank~1 under the
-construction's per-sector period content, Reading~A; Paper~56)
+immersion --- the M3 column is rank~2, its parity-blind per-sector restriction
+rank~1, both $\ll N$, under Reading~A; Paper~56)
 $U^*_{\mathrm{GV}} \rightarrow \mathcal{U}_4^{\mathrm{ab}}
 \rtimes SL_2$ of the framework's finite-cutoff Galois group into the
 abelianization of the unipotent radical of the level-4 motivic Galois
 group $\mathcal{G}_4 = \mathcal{G}_{\mathrm{MT}(\mathbb{Z}[i, 1/2])}$
 (Deligne 2010, Glanois 2015).  The comparison target is the
 \emph{level-4} group, not Brown's $\mathcal{G}_{\mathrm{MT}(\mathbb{Z})}$:\
-Eskandari--Murty--Nemoto 2025 prove Catalan $G$ is not a period of
-$\mathrm{MT}(\mathbb{Z})$ but is at level~4, forcing the refinement.
+Eskandari--Murty--Nemoto 2025 place Catalan $G$ at level~4 (mixed Tate
+over $\mathbb{Q}(i)$).  That $G$ is \emph{not} a period of $\mathrm{MT}(\mathbb{Z})$
+is expected but not proven, so this motivates the refinement rather than
+forcing it.
 Two scope qualifiers are essential and stated honestly:\ (i) GeoVac
 \emph{realizes the abelianization} of the level-4 cosmic Galois group
 (Reading~A)---its primitive Hopf substrate is cocommutative, confirmed
@@ -1069,6 +1087,55 @@ rather than the full free non-abelian unipotent; (ii) \emph{infinite-cutoff
 equality is not claimed}---the injection direction is closed at theorem
 grade at finite cutoff, while the converse equality on depth-$\ge 2$
 content is the named deep forward question.
+
+\emph{The elliptic layer (Paper~59).}  The injection above lands in the
+\emph{mixed-Tate} (genus-zero) cosmic Galois;\ the elliptic (genus-one) layer
+that Paper~56 reaches for---a Hain--Brown mixed-elliptic-motive target---came
+back negative on the abstract $\mathrm{Sym}^2$ panel, structurally because
+GeoVac's periods are $\mathbb{Q}(i)$-CM-pure rather than generically modular.
+Paper~59 supplies a concrete elliptic period from the chemistry side:\ the
+three-center electron-repulsion integral, read in momentum space, is a two-scale
+Bessel moment on the Legendre / $\Gamma(2)$ family.  The load-bearing arithmetic
+is \emph{fibre-independent}:\ the fibre period is $K=\tfrac{\pi}{2}\theta_3^2$
+and $\theta_3^2$ is the theta series of $\mathbb{Z}[i]$, so the family carries
+conductor-$4$ arithmetic at every fibre---the same $\mathbb{Q}(i)$ the Dirac
+Kramers doublet of Paper~56 realizes, by a \emph{different} forcing (level
+rather than spin):\ the two routes are convergent, not common-cause, and no
+comparison map between them has been exhibited.  The physical density exchange
+acts on the modulus as $\rho\mapsto1/\rho$, so the observable descends to
+$X_0(2)=X(2)/\langle\iota\rangle$;\ its physically distinguished fibre is the
+coincident-scale \emph{pure-Tate cusp} $\rho=1$, while the $\tau=i$ CM fibre is
+a visited member of the exchange orbit $\{\tfrac12,2\}$, not a pinned one.  The
+integrated observable is an Eisenstein / complex-multiplication \emph{Bessel
+moment}---an irregular (exponential) period, \emph{not} a cusp-form $L$-value,
+of which a $\Gamma(2)$ multiple modular value is only the regular $D\to0$
+shadow.  Its value is now certified to $66$ digits, and the guarded searches
+are decisive:\ no low-height classical combination through weight three,
+including the Catalan-completed ring at height $\le10$---so no measured
+conductor-$4$ content exists in the physical value at reachable heights (the
+arithmetic lives in the family and the shadow), and its explicit finite
+realisation remains open.
+Two honest bounds keep
+this in proportion.  First, the level is $\Gamma(2)$, the classical
+\emph{universal} Legendre level (below the two-loop sunrise's $\Gamma_1(6)$):\
+landing on the Legendre family is expected of any four-branch-point curve, so the
+informative content is the rational modulus map $\lambda = 1-\rho$, the
+$X_0(2)$ descent, and the physical Bessel twist's level promotion
+$\Gamma(2)\to\Gamma(4)$, not an exotic level.  Second, whether the observable
+reaches the \emph{generic} (non-CM, full-$SL_2$, $E_4/E_6/\Delta$) Hain--Brown
+locus is open.  What the irreducibility \emph{does} certify is structural:\
+because the rank-four connection is the Fourier--Laplace transform of an
+irreducible rank-one connection---hence simple, with no invariant
+\emph{coordinate} subspace in its monodromy frame---no closed form arises
+through any factorization, so the period is not reducible to the mixed-Tate
+layer by factorization (the genus-one label itself is set by the curve's two
+distinct Fock scales).  On the physical contour the two layers demonstrably
+touch at the pure-Tate diagonal cusp;\ the seam's two upgrade tests---a natural
+comparison map, and a measured $\beta(2)$ in the physical value---are
+respectively tautology-blocked and answered negative at clean heights.  The
+elliptic layer is thus a concrete, irreducible genus-one \emph{instance} that
+corroborates rather than lifts the Hain--Brown negative---not filled to the
+generic modular locus.
 
 \subsection{The forced/free seam (Paper~57)}
 The reconvergence closes with an observations paper that consolidates,
@@ -1093,9 +1160,10 @@ distinct families:\ a multi-focal composition family (the framework can
 build it but cannot autonomously pick a number) and an inner-factor
 input-data family (categorical to the outer-factor mechanism; lives
 elsewhere by structure).  This is the foundational reconvergence:\ the
-$\mathcal{A}/D$ partition (Paper~31), the period classification
-(Paper~55), and the Tannakian injection (Paper~56) together place
-theorem-grade boundaries around the empirical forced/free observation,
+period classification (Paper~55) and the Tannakian injection (Paper~56)
+place theorem-grade boundaries around the empirical forced/free
+observation---with the $\mathcal{A}/D$ partition (Paper~31) supplying the
+spectral-triple language rather than a further theorem---
 though Paper~57 holds the forcing-iff-property principle itself open as
 a preliminary observation (it is an observations paper, not a theorem
 paper).  The
@@ -1109,7 +1177,7 @@ data the skeleton does not reach.
 \label{sec:open}
 %% ========================================================================
 
-The foundations arc as catalogued here leaves four named structural
+The foundations arc as catalogued here leaves five named structural
 questions open.
 
 \subsection*{The $\alpha$ combination rule}
@@ -1158,7 +1226,7 @@ of $S^5$ respectively.  A natural question is whether a coupled system
 (electronic plus nuclear, or two distinct potential regimes within one
 molecule) admits a tensor-product spectral triple of the form
 $\mathcal{T}_{S^3} \otimes \mathcal{T}_{\mathrm{Hardy}(S^5)}$.  Within
-the foundations arc, Paper~24's six-layer Coulomb/HO asymmetry
+the foundations arc, Paper~24's seven-layer Coulomb/HO asymmetry
 documents structural obstructions to such a construction at the
 NCG-framework level.  The operator-algebra arc (Group~1) has formally
 named this as a frontier-of-field open problem; no published framework
@@ -1178,6 +1246,25 @@ group; W2a (multi-loop renormalization) remains open at the
 field-theory frontier of the operator-algebra arc.  None of these
 walls falsify the foundations as presented in this synthesis; they
 sharpen the open-question boundary of the framework.
+
+\subsection*{The elliptic layer of the cosmic Galois}
+
+Paper~56's cosmic-Galois injection lands in the mixed-Tate (genus-zero) group
+$\mathcal{G}_4$;\ the elliptic (genus-one) layer it reaches for---the
+Hain--Brown mixed-elliptic-motive target over $M_{1,1}$---came back negative,
+because GeoVac's periods are $\mathbb{Q}(i)$-CM-pure rather than generically
+modular.  Paper~59 now instantiates that layer with a concrete, irreducible
+genus-one period (the three-center integral's elliptic Bessel moment on the
+Legendre/$\Gamma(2)$ family, descending to $X_0(2)$), carrying the same
+$\mathbb{Q}(i)$ arithmetic at the \emph{family} level ($\theta_3^2$, the
+$\mathbb{Z}[i]$ theta series) by level-forcing rather than spin-forcing---%
+convergent with the Dirac route, not common-cause.  The open question is whether
+any GeoVac observable reaches the \emph{generic} (non-CM, full-$SL_2$)
+Hain--Brown locus---a lift that would unify the genus-zero and genus-one layers
+(the Hain--Brown mixed-elliptic completion).  On the physical contour the two
+layers demonstrably meet at the pure-Tate cusp;\ no natural comparison map has
+been exhibited, and the measured seam test ($\beta(2)$ in the physical value)
+is negative at clean heights---a lift beyond convergence is unestablished.
 
 %% ========================================================================
 \section{Conclusion}
@@ -1221,7 +1308,9 @@ substantive but do not destabilize the structural results of the
 foundations arc.  The $\alpha$ combination rule remains an Observation;
 the second-packing-axiom question is open; cross-manifold extensions
 are blocked at the NCG-framework level; the multi-focal composition
-wall is an active research frontier.  Each of these is a frontier-of-field
+wall is an active research frontier; and the elliptic (genus-one) layer of the
+cosmic Galois is instantiated but not lifted---the generic Hain--Brown locus
+stays open.  Each of these is a frontier-of-field
 question rather than a foundational concern, and the synthesis
 treats them as such.
 

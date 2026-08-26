@@ -181,7 +181,7 @@ Messiah1962}.  The key observation for quantum computing applications
 is the following:
 
 \medskip
-\noindent\textbf{Theorem 2} (Potential-Independent Sparsity).
+\noindent\textbf{Theorem 2} (Potential-Independent Sparsity).\label{sec:theorem}
 \textit{A two-body matrix element
 $\langle n_1 l_1 m_1, n_2 l_2 m_2 | \hat{V}_{12} | n_3 l_3 m_3, n_4 l_4 m_4 \rangle$
 vanishes identically for every central potential whenever
@@ -347,7 +347,7 @@ factorization applies.)
 Gaunt selection rules; radial zeros count additional vanishings from
 radial integral structure.  The ERI-density column is the pair-diagonal
 $D_{\mathrm{pd}}$ (the density the composed pipeline realizes); the
-global-$M_L$ Coulomb density $D$ is $\sim\!4\times$ larger (Theorem~3).}
+global-$M_L$ Coulomb density $D$ is $\sim\!3\times$ larger (Theorem~3).}
 \label{tab:sparsity}
 \begin{ruledtabular}
 \begin{tabular}{lccc}
@@ -456,14 +456,17 @@ have nonzero coefficient, the count is potential-independent; the
 Pauli 1-norm $\lambda$ and the QWC group count may differ, but the
 number of terms and the scaling exponent match.  \hfill$\square$
 
-This corollary means that the quantum resource advantages of the
-GeoVac composed architecture---$51\times$ to $1{,}712\times$ fewer
-Pauli terms than published Gaussian baselines for electronic
-structure---apply equally to nuclear shell model Hamiltonians,
-quantum dot Hamiltonians, and any other composed block architecture
-built from spherical harmonic bases.  The angular selection rule
-structure is a computational resource that belongs to the geometry
-of angular momentum, not to the Coulomb potential.
+This corollary means that the angular selection-rule sparsity
+\emph{pattern} of the GeoVac composed architecture---the density that
+yields the $51\times$ to $1{,}712\times$ fewer Pauli terms measured
+against published Gaussian baselines for electronic structure---is
+present for nuclear shell model Hamiltonians, quantum dot
+Hamiltonians, and any other composed block architecture built from
+spherical harmonic bases.  The specific $51\times$--$1{,}712\times$
+ratios are measured Coulomb-hydride-vs-Gaussian numbers, expected but
+not here proven to carry over quantitatively.  The angular selection
+rule structure is a computational resource that belongs to the
+geometry of angular momentum, not to the Coulomb potential.
 
 \subsection{Z$_2$ tapering from Gaunt parity}
 \label{sec:ell_parity_consequence}
@@ -487,8 +490,8 @@ the relativistic Tier 2 chemistry construction admits no direct
 $m_j$-parity $\mathbb{Z}_2$ tapering analog.  Production:\
 \texttt{geovac/extended\_tapering.py} (v3.89.0,
 \texttt{tapered='extended'}); detailed analysis and panel data in
-Paper~14~\S\ref{sec:ell_parity_tapering} and
-\S\ref{sec:gaunt_parity_protection}.
+Paper~14 (the $\ell$-parity-tapering and
+Gaunt-parity-protection sections).
 
 \subsection{Non-central interactions}
 
@@ -592,10 +595,12 @@ confirms the theorem to machine precision: the angular zero patterns
 are bit-identical and radial zeros contribute no additional
 sparsity.
 
-The universal--specific partition is sharp.  Angular sparsity,
-radial--angular factorization, and the $O(Q^{2.5})$ Pauli scaling of
-composed block architectures are universal across spherical fermion
-systems.  The $S^3$ Fock projection, the $\pi$-free graph Laplacian,
+The universal--specific partition is sharp.  Angular sparsity and
+radial--angular factorization are universal across spherical fermion
+systems;\ the measured $O(Q^{2.5})$ Pauli scaling of composed block
+architectures is expected, but not here proven, to carry over beyond
+the Coulomb hydride library (Corollary~1).  The
+$S^3$ Fock projection, the $\pi$-free graph Laplacian,
 and the integer spectrum of the unperturbed hydrogen problem are
 Coulomb-specific and break under any modification of the radial
 potential~\cite{GeoVac_Paper23}.  Sparsity-aware quantum simulation
@@ -722,8 +727,8 @@ quadrupling of index ranges; times the density ratio
 $d_{\mathrm{spinor}}/d_{\mathrm{scalar}} \approx 0.86$ at $l_{\max}=3$,
 the absolute nonzero count is $\sim 14\times$ larger. At matched
 \emph{qubit count} $Q$ --- the regime relevant to
-Paper~14~\S\ref{sec:spinor_composed}'s
-Table~\ref{tab:spinor_resource} --- the multiplier is milder:
+Paper~14's spinor-composed
+resource table --- the multiplier is milder:
 $\sim 2.4\times$ at $n_{\max}=2$, $\sim 5.9\times$ at $n_{\max}=3$.
 The distinction between matched-$l_{\max}$ and matched-$Q$
 multipliers is structurally important and should be stated
@@ -731,7 +736,7 @@ alongside any sparsity-exponent comparison.
 
 \subsection{Sharpened universal/Coulomb-specific partition}
 
-Paper~22 \S\ref{sec:universal_partition} identified angular sparsity
+Paper~22 \S\ref{sec:universal} identified angular sparsity
 as a \emph{universal} property of the $S^3$ angular basis, in contrast
 to the $S^3$ Fock projection and the Hopf bundle which are
 \emph{Coulomb-specific} structures. Tier 2's verification tightens
@@ -826,8 +831,7 @@ interaction operator, not on the radial kernel $V(r)$}. The rank-0
 Coulomb (\S\ref{sec:theorem}), rank-0 spinor (\S\ref{sec:paper22_spinor}),
 rank-1 dipole (implicit in Tier~2 SOO), and rank-2 Breit cases all
 verify this form. A proof by Wigner-Eckart reduction on the $jj$-coupled
-basis is sketched in Track~BR-A's memo
-(\texttt{debug/br\_a\_breit\_memo.md}) and deferred to a formal write-up.
+basis is deferred to a formal write-up.
 
 \textbf{Caveat on the radial kernel.} The $1/r_{12}^3$ kernel is
 \emph{distributional} --- its bare partial-wave expansion has a
@@ -836,15 +840,19 @@ defined as ordinary integrals. The Breit-Pauli tensor projection
 (transverse component of $\sigma_1 \otimes \sigma_2$) regularizes this
 into a smooth kernel $K_l^{BP} = r_<^l / r_>^{l+3}$ with exact rational
 matrix elements for same-$n$ orbitals and $\log$-transcendental
-content for cross-$n$ (see Paper~18 \S\ref{sec:taxonomy} for the
+content for cross-$n$ (see Paper~18 for the
 taxonomy classification). Paper~22's angular sparsity statement
 concerns the zero/nonzero \emph{pattern} of the matrix, which is
 determined by the angular selection rules and is insensitive to the
 radial-kernel regularization---this is precisely why the theorem is
 potential-independent.
 
-Implementation lives in \texttt{debug/br\_a\_breit\_angular.py};
-density data in \texttt{debug/data/br\_a\_density.json}.
+The $Z=4$ rank-0/rank-1/rank-2 density table above (rows $l_{\max} \le 3$)
+is regression-pinned in \texttt{tests/test\_paper22\_breit\_angular.py},
+which recomputes the Coulomb, spin-other-orbit, and spin-spin angular
+densities from the Wigner-$3j$ selection rules and checks the
+potential-independence (kernel-truncation invariance) of the rank-0
+pattern.
 
 %=================================================================
 \begin{thebibliography}{20}

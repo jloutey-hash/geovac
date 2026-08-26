@@ -43,7 +43,7 @@ certified by an exact bra/ket identity holding entrywise), we census the
 \emph{genuine} bare tensor $(S, h, g)$ for a real fragment pair and find:
 \textbf{[MEASURED]} the Gaunt $l$-selection rule does not survive
 cross-center evaluation, while the axial $m$-rule does; cross-center
-one-body entries measure $0.19$--$0.80$~Ha---bond scale, not perturbative.
+one-body entries reach $0.80$~Ha---bond scale, not perturbative.
 \textbf{[COUNTED]} the symmetry-\emph{permitted} electron-repulsion density
 inflates $13.8\times$ over the builder at $n_{\max} = 2$ and $15.0\times$
 at $n_{\max} = 3$; the $n_{\max} = 2$ figure is independently corroborated
@@ -90,10 +90,17 @@ through.  This localizes W1e to the Hamiltonian specification rather than
 the correlation treatment on this system.  The demonstration deliberately
 forfeits the sparsity: it makes no sparsity claim.
 
+\textbf{[SYMBOLIC + MEASURED]} Separately, the diatomic integrals are made
+\emph{quadrature-free}:\ the minimal-basis H$_2$ FCI energy is certified to
+$60$ digits with symbolic $\tau$-series termination, its entire potential
+curve $E(R)$ is a single closed-form expression in $\{\exp, E_{1}, \log, \gamma\}$
+with certified $R_{\rm eq}$, $D_{e}$ and $k$, and the heteronuclear LiH case
+reaches $30$ digits net of an explicit tail bound.
+
 A by-product bears on the continuous theory the census borrows from:\ the
-radial integral at the core of the two-center exchange coupling closes in
-elementary form (weight one, $\pi$-free, no dilogarithm), so the
-$(AA|BB)$ block is not merely counted but \emph{decided}---all $195$
+radial integral at the core of the two-center direct-Coulomb $(AA|BB)$
+repulsion closes in elementary form (weight one, $\pi$-free, no
+dilogarithm), so that block is not merely counted but \emph{decided}---all $195$
 permitted entries proven nonzero by Lindemann--Weierstrass separation.
 \end{abstract}
 
@@ -296,6 +303,17 @@ are therefore claims about how many entries the selection rules
 \emph{permit}, not verifications that each permitted entry is nonzero.
 Supplying that engine is the natural follow-on to this paper.
 
+Every count in Table~\ref{tab:census} is re-derived from the selection
+rules alone in \texttt{tests/test\_paper58\_census.py}.  Both columns
+apply the \emph{same} axial rule $m_p + m_r = m_q + m_s$; the builder
+column is the genuine column restricted to quartets whose four
+orbitals share one center, with the single-center shared-$L$ Gaunt
+condition imposed identically in both (the same $176$ removals at
+$n_{\max}=2$).  The inflation factor therefore measures the
+two-center span and nothing else---it is not an artifact of
+comparing a pair-diagonal $m$-convention against a global one,
+since neither column uses the pair-diagonal rule.
+
 \emph{Status of that follow-on.}  It is now partially supplied, and the
 per-class outcome bears directly on what the $g$ row could become.  Three
 of the four classes are closed in exact form and validated against
@@ -371,7 +389,7 @@ residual $l$-selection---$(AA|AA)$, $(BB|BB)$, $(AA|BB)$---are precisely
 the ones that are now zero-\emph{decidable}: the one-centre classes
 trivially---they are exact rationals---and $(AA|BB)$ by the argument
 above.  So the sector that Theorem~\ref{thm:abelian_residue} makes a
-positive prediction about is no longer merely countable but decidable.
+positive prediction about is no longer merely counted but decidable.
 
 \emph{And the decision has now been run on $(AA|BB)$.}  On the census
 configuration, that block holds $625$ entries of which the counting rules
@@ -401,7 +419,7 @@ $5\times 7$ grid of charge pairs and internuclear distances---including the
 equal-charge and rate-coincidence configurations, where degenerate
 exponential rates are the likeliest source of an accidental cancellation,
 and a node-bearing $n_{\max}=3$ sample---returns $195/195$ nonzero at every
-point, so the verdict is a property of the class rather than of the census
+point, so the verdict is not an artifact of the census
 configuration.
 
 It also settles, for this block, the reading the Gaussian corroboration
@@ -412,7 +430,7 @@ confirms there is no over-permissiveness here to find.
 
 The $g$ row's overall tier is nonetheless unchanged, because $(AA|BB)$ and
 the one-centre classes together are only the $20.5\%$ that carries
-residual $l$-selection.  The three genuinely cross classes---$80\%$ of the
+residual $l$-selection.  The three genuinely cross classes---$79.5\%$ of the
 tensor---remain counted, and will until an independence argument over
 $\{E_1, \ln, \gamma\}$ is available.
 
@@ -436,7 +454,8 @@ not---rather than the gradient the weight-one filtration alone suggests.
 
 What \emph{is} available now is one rung weaker and unconditional.  The seed
 \emph{functions} $\{1, e^{-\lambda R}, E_1(\mu R), \ln R\}$ are linearly
-independent over $\mathbb{Q}(R)$---a theorem (Liouville--Rosenlicht: $E_1$ is
+independent over $\mathbb{Q}(R)$---\textbf{[SYMBOLIC (proof-by-argument)]} a
+theorem (Liouville--Rosenlicht: $E_1$ is
 the standard non-elementary integral, transcendental over the exponential
 field)---so every cross-class entry is nonzero \emph{as a function of $R$}
 unless its grouped coefficients vanish, and any zero is therefore isolated at
@@ -458,8 +477,10 @@ and each centre is a phase rather than a focus.  There the two densities
 Fock-project onto spheres of \emph{different} radii $\sqrt{c_1}\neq\sqrt{c_2}$,
 and the product of their stereographic weights is the quartic
 $y^2=(c_1 k^2+1)(c_2 k^2+1)$---an elliptic curve.  Its $D=0$ period is exactly a
-complete elliptic integral, and the full integral is an elliptic-polylogarithm
-object on the same family, degenerating to the genus-zero two-centre case only
+complete elliptic integral, and the full integral is a genus-one object on the
+same family---by Paper~59's final characterization an irreducible $\Gamma(2)$
+period (the elementary elliptic-polylogarithm target is excluded there)---%
+degenerating to the genus-zero two-centre case only
 on the measure-zero locus $c_1=c_2$ of a shared sphere.  The two negatives that
 make the two-centre engine weight-one and $(AA|BB)$ decidable---no $\pi$, no
 dilogarithm---are therefore \emph{two-centre} properties: the third centre
@@ -543,12 +564,17 @@ corroborated below.
 Two further measurements matter for interpretation.  First, per-side
 Gaunt feasibility removes $5.6\%$ of entries at $n_{\max} = 2$ and
 $6.3\%$ at $n_{\max} = 3$, beyond what the $m$-rule already removes, and the three cross classes
-$(AA|AB) + (AB|AB) + (AB|BB)$ account for $80\%$ of the genuine tensor.
+$(AA|AB) + (AB|AB) + (AB|BB)$ account for $79.5\%$ of the genuine tensor at $n_{\max}=2$ ($80.0\%$ at $n_{\max}=3$).
 The residual $l$-selection is therefore confined to the classes carrying a
 same-center distribution on each side---$(AA|AA)$, $(BB|BB)$ and
 $(AA|BB)$---together $20.5\%$ of the genuine tensor; the three genuinely
-cross classes carry none.  Second, cross-center magnitudes are
-large: overlaps $0.08$--$0.52$, one-body entries $0.19$--$0.80$~Ha.  For
+cross classes carry none.  Second, cross-center magnitudes reach bond
+scale:\ the largest overlap is $0.52$ and the largest one-body entry is
+$0.80$~Ha.  These are \emph{maxima}, not a range---the census block also
+contains much smaller entries (the smallest overlap is $0.011$, on the
+$(2p_{0}, 2p_{0})$ pair).  An earlier statement of them as intervals
+$0.08$--$0.52$ and $0.19$--$0.80$ took its lower ends from an inconsistent
+subset of the census pairs and was incorrect.  For
 scale, the entire NaH bond is under $2$~eV, so individual entries in the
 dense part of the tensor exceed the binding energy being computed.  They
 are not droppable as small corrections---an independent quantification of
@@ -610,7 +636,7 @@ precisely the axial subgroup.  A function that is an $l$-eigenfunction
 about $B$, re-expanded about $A$, has support on all $l$: the two-center
 re-expansion does not terminate.  Hence no $l$-selection between cross-center
 pairs.  (The same-center blocks retain Gaunt selection, consistent with
-the $<6\%$ residual measured in Sec.~\ref{sec:census}.)
+the $5.6\%$--$6.3\%$ residual measured in Sec.~\ref{sec:census}.)
 
 For (iii): the intersection in (ii) is $SO(2) \cong U(1)$, abelian.
 Abelian compact groups have one-dimensional irreducibles labeled by
@@ -785,8 +811,8 @@ identifying blocks destroys the per-block labels that generated the
 sparsity.  The abelian residue is not merely what survives---it is what
 can be exploited without collapsing the structure that carries it.
 
-\emph{Documentation discrepancy.} The docstring of
-\texttt{extended\_tapered\_from\_spec} states that atom-swap ``saves
+\emph{Documentation discrepancy, since corrected.} The docstring of
+\texttt{extended\_tapered\_from\_spec} previously stated that atom-swap ``saves
 additional qubits on polyatomics ($\mathrm{BeH_2}$ +1, $\mathrm{H_2O}$ +1,
 $\mathrm{NH_3}$ +1, $\mathrm{CH_4}$ +2).''  The measured $\mathrm{BeH_2}$
 value is $-1$ against the Hopf-only baseline and $-3$ against Hopf
@@ -796,7 +822,7 @@ incorrect or the behavior regressed.
 
 Observation~\ref{obs:cost_conservation} is labeled an observation, not a
 theorem: it is a pattern across five instances with a plausible cause,
-not a proof that no fifth currency exists.  The underlying obstruction
+not a proof that no sixth currency exists.  The underlying obstruction
 has been characterized in the framework as non-commuting center
 projections, with $\|[P_A, P_B]\| = 0.50$ at LiH equilibrium and
 principal angles $7.6^\circ$/$44.7^\circ$/$67.3^\circ$.
@@ -916,6 +942,113 @@ damage is attributable to truncation and not to the orthogonalization
 corrupting the integrals.
 
 %% ========================================================================
+\section{The quadrature-free diatomic}
+\label{sec:qfd}
+%% ========================================================================
+
+\textbf{[MEASURED + SYMBOLIC]} The engine's classes have now been used
+\emph{end-to-end}:\ complete diatomic FCI energies in which every one- and
+two-electron integral is a closed-form expression---rationals, $\sqrt{\phantom.}$,
+$\pi$, $\exp$, $E_1$, $\log$, $\gamma_E$ (the $\pi$'s are angular-measure and
+normalization prefactors of the \emph{assembled} integrals;\ the radial seed content of
+each class is the $\{\exp,E_1,\ln,\gamma_E\}$ set of the preceding sections, and
+(AA$|$BB) is where even the prefactor $\pi$ cancels)---evaluated to arbitrary precision,
+with no quadrature routine anywhere in the production path
+(\texttt{geovac/qfd\_core.py}, \texttt{geovac/qfd\_assemble.py};\
+\texttt{tests/test\_paper58\_qfd.py}).
+
+Two pieces had to be added.  \emph{First}, the one-electron two-center closed
+forms (overlap, kinetic, both nuclear-attraction kernels) did not previously
+exist in the engine;\ they are derived from the Mulliken auxiliary integrals
+$A_m(p)=\int_1^\infty \xi^m e^{-p\xi}d\xi$, $B_n(q)=\int_{-1}^{1}\eta^n
+e^{-q\eta}d\eta$ in prolate spheroidal coordinates, where the Jacobian
+factorization $(\xi^2-\eta^2)=(\xi+\eta)(\xi-\eta)$ renders both $1/r_A$ and
+$1/r_B$ kernels polynomial;\ the kinetic energy uses the exact $s$-state radial
+Laplacian, whose lowest surviving power is the $r^{-1}$ floor the auxiliary
+form supports.  Two independent routes (explicit Laplacian vs the hydrogenic
+eigen-trick) agree \emph{symbolically---difference exactly~$0$}---on
+homonuclear and heteronuclear sets.  \emph{Second}, the exchange assembly is
+re-run keeping every factor symbolic (the library entry point casts to float,
+capping certification at $\sim\!16$ digits).
+
+\textbf{[MEASURED]} H$_2$ ($1s$ per center, $\zeta=1$, $R=1.4$):\ the
+homonuclear exchange Neumann $\tau$-series \emph{terminates symbolically} \textbf{[SYMBOLIC]}
+($\tau=1$ and all $\tau>2$ are exact zeros), so the pipeline contains no
+truncation of any kind, and the FCI total energy is certified to \textbf{60
+digits} (under the reference artifact's capping convention---a claim never exceeds the
+weaker run's requested precision;\ the dps~$60$ vs $90$ evaluations in fact agree to
+$6\times10^{-85}$, so the recorded value is conservative):
+\[
+E(1.4,\ \zeta{=}1)=-1.10655660609135850801940122475993772281832890689690719549979\ldots
+\]
+with $R=1.6$, $2.0$ and the variational $\zeta=1.197$ point certified
+alongside.  Every integral matches an \emph{independent} literature closed
+form to $\sim\!10^{-61}$---the exchange integral against
+Sugiura~\cite{sugiura1927}, whose expression independently carries $\ln$,
+Euler's $\gamma$ and $\mathrm{Ei}$, corroborating this paper's
+$\{E_1,\ln,\gamma\}$ seed set for that class from a route nearly a century
+removed---and matches direct quadrature at $10^{-21}$--$10^{-23}$.
+
+\textbf{[MEASURED]} LiH ($s$-only minimal:\ Li~$1s,2s$ + H~$1s$, $R=3.015$):\
+the heteronuclear $\tau$-series does \emph{not} terminate, so the assembly is
+zero-quadrature but not truncation-free;\ the certified count is taken
+\emph{net of an explicit tail bound} (measured monotone $\tau$-ratios give
+$|{\rm tail}|\le 1.95\times10^{-32}$ summed over quartets, propagated through
+the 2-RDM weights and $\|S^{-1/2}\|^4$ to $1.2\times10^{-30}$~Ha):\
+$E_{\rm tot}=-7.87261979241561217317558085835\ldots$~Ha,
+\textbf{30 digits}.  Honest scope, per the framework's own doctrine:\ these
+are \emph{minimal-basis} numbers---the certified $\zeta{=}1$ H$_2$ value sits
+$0.068$~Ha above exact ($0.027$~Ha at the variational $\zeta=1.197$ point) and
+the $s$-only LiH far above $-8.0705$---and what is certified is the assembly
+and its precision, not accuracy;\ the accuracy axis remains basis size.
+Certified values, with per-integral transcendence tags, are collected in the
+reference artifact (\texttt{docs/certified\_reference\_values.md},
+\texttt{benchmarks/certified\_reference/}).
+
+\textbf{[SYMBOLIC + MEASURED]} The closed forms compose one level further:\ the
+\emph{entire minimal-basis H$_2$ potential curve is a single explicit
+expression}.  In the $1s/1s$ basis the singlet-$\Sigma_g^+$ CI space is
+$\{\,|g^2\rangle,\,|u^2\rangle\,\}$, so the FCI ground state is the
+quadratic-formula root of a $2\times2$ matrix whose entries are the closed-form
+molecular-orbital integrals,
+\begin{equation}
+E(R)=\tfrac12\!\left(H_{11}+H_{22}\right)
+-\sqrt{\tfrac14\!\left(H_{11}-H_{22}\right)^{2}+K_{gu}^{2}}+\frac1R,
+\label{eq:h2_pes}
+\end{equation}
+with $H_{11}=2h_{gg}+J_{gg}$, $H_{22}=2h_{uu}+J_{uu}$, and every ingredient an
+explicit closed form in $R$---the assembled expression contains exactly the
+atoms $\{\exp,\,E_{1},\,\ln,\,\gamma_{E}\}$ and nothing else beyond the rational and normalization prefactors of the opening list.  A potential
+curve as a formula, not a point table:\ its exact $R$-derivatives certify the
+equilibrium constants by closed-form Newton iteration
+(\texttt{geovac/qfd\_assemble.py::h2\_closed\_form\_E};\
+\texttt{tests/test\_paper58\_qfd.py}),
+\begin{align*}
+R_{\rm eq}&=1.66799996697274872492704641030726451334980414\ldots\ \text{bohr},\\
+D_e&=0.118650362098295311853497764333884671691909683\ldots\ \text{Ha},\\
+k=E''(R_{\rm eq})&=0.254703934307969981152727935724355672678251789\ldots\ \text{Ha/bohr}^2,
+\end{align*}
+(Newton at dps $45$ vs $60$ agreeing to $9.5\times10^{-46}$;\ the curve
+dissociates to exactly $-1$~Ha---two $\zeta{=}1$ hydrogen atoms---verified at
+$3\times10^{-49}$, so $D_e=-1-E(R_{\rm eq})$ is itself closed-form).  Honest
+frame:\ these are the minimal-basis constants ($R_{\rm eq}$ exact is $1.401$,
+$k$ maps to $\omega_e\approx3.7\times10^{3}$~cm$^{-1}$ vs the measured
+$4401$---the conversion importing the reduced mass is Layer-2;\ and the
+minimal-basis H$_2$ CI itself is as old as Sugiura's integral);\ what is new is
+their \emph{status}:\ equilibrium geometry and force constant of a two-electron
+molecule as certified roots of one closed-form expression.
+
+Two engine findings from the build.  (i)~\emph{Domain restriction}
+(measured):\ the shell-route hybrid evaluator with $l_a,l_b>0$ requires
+$Z_B<Z_A$ strictly---at $Z_B=Z_A$ a removable rate coincidence produces
+NaN (the limit exists and matches quadrature), and $Z_B>Z_A$ reaches an
+unimplemented $\mathrm{Ei}$ branch;\ a coverage gap, not a wrong value.
+(ii)~A pre-existing exploratory driver's ``DISAGREE beyond the fit
+floor---investigate'' verdict against a Gaussian reference is resolved
+\emph{against the reference}:\ the $8\times10^{-6}$ gap sits in the Gaussian
+one-electron block (the cusp), while the native block matches literature
+closed forms to $60$ digits.
+
 \section{Scope}
 \label{sec:scope}
 %% ========================================================================
@@ -947,7 +1080,8 @@ cross-center classes grow with the number of center pairs.
 
 \begin{table}[b]
 \caption{Claim $\to$ backing.  \textsc{live} $=$ passing test in the
-\texttt{tests/test\_paper58\_*} suite (four files; per-claim mapping in
+\texttt{tests/test\_paper58\_*} suite (six files, plus
+\texttt{tests/test\_two\_center\_eri\_aabb.py} for the $(AA|BB)$ rows; per-claim mapping in
 \texttt{docs/claim\_test\_matrix.md}).  \textsc{owed} $=$
 result stands on an exploratory driver and must be migrated
 self-contained into \texttt{tests/} before this paper is a finished
@@ -975,12 +1109,19 @@ Tab.~\ref{tab:nah}, minima & PANEL & \textsc{owed} \\
 NaH atom-only $\zeta$ & MEAS. & \textsc{live} \\
 Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
+QFD 1e closed forms (Sec.~\ref{sec:qfd}) & SYMBOLIC & \textsc{live} \\
+QFD H$_2$ 60-digit energy & MEASURED & \textsc{live} (fast legs) + certified tables \\
+QFD LiH 30-digit ($\tau$-tail net) & MEASURED & \textsc{owed} (campaign value; fast legs pin one exchange quartet only) \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
 %% ========================================================================
 \begin{thebibliography}{99}
+
+\bibitem{sugiura1927}
+Y.~Sugiura, ``\"Uber die Eigenschaften des Wasserstoffmolek\"uls im
+Grundzustande,'' Z.~Phys.\ \textbf{45}, 484--492 (1927).
 
 \bibitem{loutey_paper11}
 J.~Loutey, ``The Molecular Fock Projection:\ Diatomic Molecules as

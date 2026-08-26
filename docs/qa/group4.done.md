@@ -120,11 +120,16 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     identity only.
   - **Paper 23:** HO closures **2,8,20,40,70,112** from graph state counting; magic
     **2,8,20,28,50,82,126** at $v_{ls}/\hbar\omega\approx0.17$, $d_{\ell\ell}/\hbar\omega
-    \approx0.02$; deuteron **16q / 592 Pauli / 1-norm 342 MeV** (FIXED 2026-06-28 from a stale
-    227.3, pinned); He-4 **16q / 712 Pauli / 1-norm 467/462 MeV** (FIXED from stale 557/552, pinned)
-    (12.25× Hilbert, 1.20× Pauli); composed nuc-electronic deuterium **26q**, ~$10^{13}$
-    scale ratio; **Fock rigidity theorem**; binding energies = encoding-validation
+    \approx0.02$; deuteron **16q / 688 Pauli (80 Z-only + 608 XY) / 1-norm 383.7 MeV**;
+    He-4 **16q / 828 Pauli / 1-norm 511.8/507.2 MeV** (no-Coulomb/Coulomb)
+    (12.25× Hilbert, 1.20× Pauli); composed nuc-electronic deuterium **26q / 710 Pauli**,
+    ~$10^{13}$ scale ratio; **Fock rigidity theorem**; binding energies = encoding-validation
     benchmarks (far from experiment, stated as such).
+    *(Numbers corrected 2026-08-24 to the v5.0.0 retraction values — the moshinsky N_tot
+    guard removal moved deuteron 592→688 / He-4 712→828 / 1-norms 342→383.7, 467/462→511.8/507.2,
+    composed 614→710. This is a criteria-currency correction to a PI-approved retraction, NOT a
+    relaxation; the +20.3% structural claim survives, 828/688 = 712/592. The stale pre-retraction
+    numbers were the ones this DoD had frozen at the v4.63 cert.)*
 - **C4 (citations) — QC-resource + nuclear surface.** Verify the comparators say what is
   attributed: `trenev2025` ($Q^{4.25}$ LiH / $Q^{3.92}$ H$_2$O Gaussian exponents), Szabo–
   Ostlund (H$_2$ integrals), the STO-3G/cc-pVDZ/cc-pVTZ Pauli/1-norm comparators, the
@@ -177,6 +182,14 @@ inconsistency pass done 2026-06-28** (PI-directed "address the backfill/inconsis
    direction). All edited papers + synthesis compile clean. *(Pre-existing, NOT from this pass:
    Paper 20 has 4 broken section-`\ref`s — sec:spinor\_composed/composed, subsec:spinor\_scope —
    and a missing `Childs2021` bibitem; surfaced incidentally, flag for the cert run.)*
+   *(**RESOLVED 2026-08-24**, retraction re-review delta — it was a **C10-gate procedure artifact,
+   not a paper defect.** `Childs2021` IS in `paper_20_refs.bib` (l.181); paper_20 is the only active
+   paper using an external `\bibliography{}`, and `check_compiles.py` ran pdflatex-only, so every
+   citation came back undefined. Under the correct revtex build paper_20 compiles with **zero**
+   undefined refs/cites — but it needs a **double** bibtex cycle because `\cite{Childs2021}` sits
+   inside a `\bibnote`. Fixed the gate to run bibtex when the `.aux` carries `\bibdata`;
+   discrimination re-proven (still catches a bogus cite AND a bogus ref). C10 `--gate group4` now
+   PASSES all 5 documents.)*
 3. ✅ **Paper 16 structure-type count** — **FIXED**: synced to **5 types (A/B/C/D/E)**
    consistently (abstract + §IV intro + new Type E subsection now match the Table + conclusion +
    code + CLAUDE.md §1.5); code's E/F split noted as an implementation refinement. P16 compiles.
@@ -388,3 +401,98 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
   across dimensions; citation delta (Navratil title) = the calibrated run-7 reviewer's own verified correction,
   PM-applied, disclosed. **Cost: ~334k subagent tokens (~7.5x below a full run), including one recalibration
   re-dispatch.** Seed key `debug/qa/group4_delta1_seed_key.json`.
+
+---
+
+## Re-review OWED (2026-08-22, v5.0.0) — group4
+
+**Papers in this target changed after certification.** Logged here, at the
+owning source, so the certified status is not read as covering text that
+post-dates it.
+
+- **Paper 23** (`paper_23_nuclear_shell.tex`): every nuclear resource
+  number changed after the `moshinsky.py` N_tot guard was removed — deuteron
+  592→**688** non-I Pauli (XY 512→**608**), He-4 712→**828**, 1-norms
+  342.2→**383.7**, 466.9→**511.8**, 462.4→**507.2** MeV, composed
+  nuclear-electronic total 614→**710** (measured, and now pinned). Qubit counts
+  unchanged. **The +20.3% structural claim survives exactly** (828/688 =
+  712/592).
+- **group4 synthesis**: the same two counts.
+- C17 registry entry `p23-nuclear-resource-counts` added; it caught synthesis
+  propagation that manual sweeping had missed.
+- New backing test `test_paper23_composed_nuclear_electronic_counts` — the
+  composed decomposition had **no test at all**, which is how a blanket
+  substitution was able to leave a component (688) larger than the stated
+  total (614).
+
+**Discharge condition:** a CLEAN DELTA over the changed loci (diff-scoped, per
+the qa.md run-shape rule), which is also the standing precondition for the next
+FULL certifying pass. The delta must re-test *these specific defects* rather
+than trust this entry (qa.md hard rule, added the same day).
+
+**Deterministic layer already re-run and GREEN on this target:** C10 (compiles,
+with the aux-clean fix), C13, C14, C16, C17, C18, C19, C5/C12 (now corpus-wide
+after the scope fix). What is owed is the LLM-judgment layer: claims, and
+synthesis where the target has one.
+
+**DISCHARGED — CLEAN-DELTA, 2026-08-24 (v5.0.9).** Delta scope = the changed loci
+(P23 retraction counts + the group4 synthesis's two counts) **plus** the newly-banked
+Paper 14 `sec:tc_atomic_sparsity` (v5.0.9). Pasted-hunks delta (HEAD=v4.85.0 with the
+whole arc uncommitted, so no worktree; seeds lived only in the reviewer prompts, never
+the corpus). Three dimensions dispatched, all **exercised + calibrated**: claims (opus,
+2/2 seeds — inverted-honest-scope + a 712≠710 component-sum, both caught), synthesis
+(opus, 1/1 — a 1.45× ratio contradicting 828/688=1.20, caught), code (sonnet, 2/2 — a
+`n_l3==n_l3` tautology + a `n_nonid>0` weak guard, both caught); specificity clean.
+**Zero verified MATERIAL** once seeds removed (real corpus carries `12`/710 and the
+honest "not absolute accuracy claims"). Genuine NITs found + fixed on sight: P14 prose
+"density stays single-digit" (s+p is 14.8%) -> stated range; the P23 test module
+docstring's pre-retraction 592/512/712 "already correct" -> corrected to 688/608/828 +
+history; the P14 non-tautology guard extended to lmax=3. Also this run: **C10 gate fixed**
+(it ran pdflatex-only, spuriously failing paper_20 — the only external-`\bibliography{}`
+paper; now runs bibtex + a double cycle for note-nested `\cite`; discrimination re-proven).
+Seed key `debug/qa/group4_delta2_seed_key.json`. The branch stays CERTIFIED; a clean
+delta is the standing precondition for the next FULL certifying pass.
+
+**RE-CERTIFIED — FULL certifying pass = PASS, 2026-08-24 (v5.0.9).** Fired after the clean
+delta (PI-directed). Seeded isolated copy of all 5 group4 papers (synced from the working
+tree, not HEAD=v4.85.0); code dimension = real repo + pasted seeds. Panel: 7 reviewers over
+3 waves — claims-A (P14+P16, opus), claims-B (P20+P23, opus), citations (all 4, sonnet→**opus
+recovery**), synthesis (opus), code-P14 + code-P23 (sonnet), completeness-critic (opus).
+**Calibration: 100% sensitivity** — every planted seed caught (P16 maps→predicts, P23 far→within-few-percent,
+McArdle↔Bauer arXiv swap, synthesis cross-block-h₁ dead-end flip, code b1/b2 ×2); **specificity
+clean** (zero controls flagged). **Zero verified MATERIAL in the real corpus** — every reviewer
+MATERIAL was its planted seed (scratch/prompt-only; real text confirmed: P16 "maps onto not
+predicts", P23 "far from experiment", synthesis "16× over-binding", bib IDs correct).
+
+- **Citation recovery (run-6 pattern):** the Sonnet citation reviewer MISSED the McArdle↔Bauer
+  swap (didn't fetch + didn't cross-check doi↔eprint) → de-calibrated → re-dispatched on Opus,
+  which caught it via the internal-consistency pass. Citation dimension calibrated via recovery.
+- **Criteria-currency fix (pre-freeze):** §C8 P23 headline updated 592/712/342/467-462 → the
+  v5.0.0 retraction values 688/828/383.7/511.8-507.2 (+ composed 710). Correction, not relaxation.
+- **Suspiciously-clean audit:** the completeness-critic's #1 flag — "exactly 21 QWC groups for
+  ALL composed molecules" (LiH Q30 … F₂ Q100) — VERIFIED real, not a bug: reproduced live
+  (21 for LiH/H₂O/BeH₂/N₂/F₂/CH₄) and structurally explained (block-diagonal composed ⇒
+  different-block terms are qubitwise-commuting ⇒ QWC count is per-block-*type*, size-independent).
+- **Remediation applied this pass:** `claim_test_matrix.md` P23 rows synced to 688/828/383.7/
+  511.8/507.2 + composed-710 (code-P23 finding); **C18 gate-miss fixed** — it returned green while
+  "one to several weeks of focused work" (P23) was live, because the `units-of-project-work`
+  pattern required "of" *immediately* before "work"; pattern widened to allow an intervening
+  adjective, discrimination proven both ways (fires on the live phrase, silent after the text
+  → "a scoped follow-up sprint"), selftest 17/12; lowsu2024 SIAM venue-year 2024→2026;
+  `eq:dirac_fs` = Z⁴α² confirmed (former error site intact).
+
+**Honest ceilings + NIT log (non-cert-blocking, fix-on-sight-deferred):** C3 inline provenance
+tiers are conveyed by adjectives ("measured"/"exact"/"observation"), not bracketed [MEASURED]/
+[SYMBOLIC] tags — the *substance* (prose ≤ backing) was verified but the FORM is thin (standing
+characteristic accepted at the v4.63 cert; report as thin-surface). P14 `M = n_{\max}^2` is
+wrong (correct: M = Σ_{n=1}^{n_max} n² = 5/14/30/55, which the tables use) and cascades into the
+ρ_ERI order-of-magnitude estimate — deferred to a careful focused edit (headline exponents are
+fit from data, unaffected). Wording NITs: P20 O(Q^2.5)-headline vs table-2.2 band, "exactly
+linear" vs affine 11.10Q+1, 37-systems vs 33-tabulated, He 0.55%→0.544%, H₂O 1-norm 359 vs 361,
+LiH 1-norm convention variants, cross-paper 1-norm/Pauli convention consistency; citation:
+Chawla/rocca truncated author lists, PachuckiYerokhin2010 key label, NIST version drift; the
+flat-21 QWC deserves a one-line structural note in the paper. **PI-scoped process finding:** the
+`/regression` workflow never passes `--slow`, so ALL of Paper 14's headline claims (3.15/1.69/
+3.36/2.5/2.51×/MPO/TC — all `@pytest.mark.slow`) have no day-to-day CI protection; they pass at
+cert time (via `/qa` + a manual `--slow` run, 35/35) but a Gaunt-sparsity regression would slip
+`/regression full`. Seed key `debug/qa/group4_fullcert_seed_key.json`; run notes in this record.

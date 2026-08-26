@@ -4,7 +4,7 @@
 >
 > **Vocabulary.** Status: STANDING / SOFTENED / BREACHED / MIS-SCOPED / SUPERSEDED. Kind: HARD (proven structural impossibility) / SOFT (engineering·convention·precision·basis-limited, revisit-candidate) / OPEN-LEANING (tested-negative, a named better attempt exists). Cluster maturity: CRYSTALLIZED / FORMING / SINGLETON.
 
-**Last run:** 2026-08-25 (bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked).
+**Last run:** 2026-08-25 (+ `/aha` v5.1.2 kill-banking; bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked).
 
 ---
 
@@ -20,6 +20,22 @@
 | PERIODS-TRANSCENDENCE | *forming (unworked)* | ~5 | Two-electron/3-centre transcendence is set by *density topology* (elliptic, irregular), not the operator; no factorization closes it. |
 | NUCLEAR-CONTINUUM-RESPONSE | *singleton-ish (unworked)* | ~3 | Sum-over-states / IR-extrapolation fragile for continuum response; the error is the interaction (Minnesota), not the solver. |
 | MOLECULAR-BINDING-W1e | *forming (unworked)* | ~10 | Second-row over-binding lives at the integral-**specification** step, not correlation (DMRG=FCI); cheap engineering exhausted. |
+
+### Banked kills awaiting clustering (`/aha` v5.1.2, 2026-08-25)
+
+Candidates killed for a *decisive, stated* reason during the `/aha` pass on the v5.1.0
+polyatomic arc. Filed here per the skill's B4 step; not yet clustered. Memo
+`debug/sprint_config_operator_is_metric_memo.md` §4.
+
+| Killed candidate | Decisive reason | Kind |
+|:--|:--|:--|
+| Commutant of the center-projections = the tapering-symmetry budget (would explain the M-vS gauge Pauli negative structurally) | The M-vS negative was measured on **LiH — two centers**, where the commutant is dim 6, not 1; and Hopf Z₂ tapering **works on BeH₂** (verified) where that commutant *is* trivial. `commutant(A) ⊆ commutant(H)` bounds in the useless direction — different objects. | HARD |
+| The configuration operator's conical intersections mark a metric-**conditioning** blow-up (would unify with Paper 60's wall) | `cond(G)` is monotone through `d*` (19.87→16.19→15.04); the crossing is mid-spectrum (≈0.714 vs `λ_min`≈0.129). Conditioning and holonomy are different functionals of the same metric. Pinned as a test. | HARD |
+| The multi-focal composition wall's threshold is 2→3 focal lengths | It fires at **two** (Paper 57 §614: `c_ab ≠ c_a·c_b`; every `multi_focal_wall_pattern` instance is 2-focal). Superseded by the two-rung scoping. | HARD |
+| Chemistry error tracks three-body irreducible content (‖[[P,P],P]‖) rather than `max_n` | LiH has 5.3% `R_eq` error with **no three-body term at all** (2 centers), and CHEM-ACCURACY localizes the defect at 100% `max_n`, angular-invariant. Angular-operator axis vs radial-basis axis. | HARD |
+| Paper 2's `K = π(B+F−Δ)` is a tame/wild (2-reducible, 3-wild) statement | Paper 2 §sec:rigidity_connection already states the 2+1 *sector* split (B, F on scalar S³; Δ on spinor); and it is an axis error regardless — B, F, Δ are numbers, not projections, so nothing generates an algebra. | HARD |
+| The TC three-body non-collapse is the same obstruction as ≥3-projection wildness | Two independent kills. (i) The `/aha` reading misread the TC table: rank 4→9→16 runs over **l=1 / l=2(L_corr=2) / l=2(L_corr=3)** — growth in angular momentum, not leg count — and 87.5% of pairs already have rank ≥2 at l=1, so the TC obstruction fires at **two** legs. (ii) **Peter–Weyl**: SO(3)/SU(2) coupling is compact-group rep theory ⇒ type I ⇒ **tame** however non-abelian. Measured: SU(2) on l=0⊕1⊕2 has ‖[J,J]‖=2.0 yet commutant 3; three center-projections at ‖[P,P]‖=0.49 have commutant 1. Non-abelian and wild are independent. | HARD |
+| WH7's compact modular-circle Z₂ is the T-symmetric equator of a Berry monopole, with Wick rotation as the U(1) lift | The falsifier had **already fired** in the corpus: a genuine temporal Wick involution `J_t = sign(D_t)` leaves the seminorm **bit-exactly `ω_q`**, unchanged from Euclidean (`tests/test_lorentzian_toeplitz_kplus.py`, 11 passed) — whereas the BeH₂ U(1) lift opens a gap ∝ φ. A lift that changes nothing is not a lift. **Z₂ pun**: Berry holonomy from a codimension-2 degeneracy vs the SU(2) double cover; `K = diag(2m_j)` has fixed integer spectrum, no parameter family, no degeneracy. Fifth member of the ℚ(i)-seam CONVERGENT family. | HARD |
 
 > Only **CHEM-ACCURACY** is worked below. The rest are named from the §3 table so the next `/walls <cluster>` runs have targets; member counts are approximate first reads, not verified crystallizations.
 

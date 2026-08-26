@@ -150,6 +150,22 @@ verdict is the **AND across all review dimensions** (below).
   within its provenance tier (no overclaim), and the tier is stated *inline in
   the paper*. "Derived / SYMBOLIC PROOF" requires a derivation test, never a
   matching/convergence test. (`claims-reviewer`.)
+
+  **C3-boundary (added 2026-08-22; ADOPTED PENDING PI RATIFICATION).** Where a
+  claim's *argument* is symbolic but its *certificate* is numerical, the tier is
+  **[SYMBOLIC + MEASURED]**. A bare **[SYMBOLIC PROOF]** requires that no
+  numerical input appears anywhere in the chain the claim rests on — including
+  a numerically-obtained monodromy matrix, a residual, or a fitted exponent,
+  even when those merely *confirm* a symbolic argument. Proof verbs ("we derive",
+  "we prove", "provably", "exactly") are licensed only under a symbolic tier;
+  under [MEASURED] they are an overclaim regardless of how strong the underlying
+  argument is. *Rationale:* in the 2026-08-21 full run two independent
+  Opus-tier reviewers, one using a mechanical per-tag protocol, both cleared a
+  planted `[SYMBOLIC PROOF] We therefore derive…` on a claim the corpus itself
+  tags `[SYMBOLIC + MEASURED]` — each reasoning that the symbolic leg licensed
+  the verb. That is a goalpost gap, not a reviewer failure: the boundary was
+  under-specified for the mixed argument-plus-witness class, which is the most
+  common shape in the period/resurgence papers.
 - **C4 — Citations grounded.** Every external citation on a load-bearing claim
   resolves to a real work that says what we attribute (no fabricated IDs, wrong
   venues, nonexistent theorem/def numbers). (`citation-reviewer`.) *A branch
@@ -173,12 +189,26 @@ verdict is the **AND across all review dimensions** (below).
 - **C8 — Branch headline results honest.** Each branch headline asserts no more
   than its tier. *The branch profile enumerates the per-paper headlines and their
   tier-appropriate statements.*
-- **C9 — Synthesis faithful (the synthesis-layer readiness gate).** The branch's
-  group synthesis traces every claim to a paper that supports it, carries **no
-  descoped/withdrawn (zombie) result**, does not overstate convergence between
-  papers or misstate a paper's status, and faithfully reflects the in-scope
-  papers. (`claims-reviewer`, **separate dispatch** from the per-paper claims
-  review.)
+- **C9 — Synthesis faithful AND current (the synthesis-layer readiness gate).**
+  The branch's group synthesis traces every claim to a paper that supports it,
+  carries **no descoped/withdrawn (zombie) result**, does not overstate
+  convergence between papers or misstate a paper's status, and faithfully
+  reflects the in-scope papers. (`claims-reviewer`, **separate dispatch** from
+  the per-paper claims review.)
+
+  **C9-currency (added 2026-08-22, PI-ratified).** Certification additionally
+  requires the synthesis to be *current with its own group*: every paper in the
+  group must appear in the synthesis, and any synthesis claim that a later
+  in-group paper has since answered, scoped, or refuted must reflect that.
+  *Rationale:* C9 as originally written hunts only **commission** errors
+  (overclaim, zombies). The 2026-08-21 full run found the group2 synthesis
+  asserting a guardrail theorem as an unqualified no-go that its own Paper 8
+  scope remark had since scoped and Paper 60 empirically contradicts, while
+  omitting Papers 59 and 60 entirely and still calling the group "ten papers."
+  A synthesis one arc behind its group was invisible to every criterion — an
+  **omission** error. Reviewers must check the paper list against the group
+  directory and grep the synthesis for each in-group paper number.
+  *Verification is mechanical:* `ls papers/<group>/*.tex` vs `grep -c "Paper~N"`.
 - **C10 — Compiles.** Each in-scope paper compiles with ERRORS=0 (pre-existing
   non-blocking undefined-citation warnings noted, not MATERIAL unless they break
   a load-bearing reference). **Run pdflatex with `-halt-on-error`** — without it,
@@ -274,6 +304,28 @@ verdict is the **AND across all review dimensions** (below).
   replacements: "sprint-scale", "beyond sprint scale", "bounded",
   "a substantial program", "long-range", "deep frontier". Sequence language,
   real dates, version anchors are fine; external-world history is exempt.
+
+- **C19 — Eaten-escape corruption (deterministic; added 2026-08-22).** No
+  paper contains a LaTeX control sequence destroyed by a Python string
+  escape — certified by `debug/qa/check_latex_escapes.py` (exit 0;
+  `--selftest` built in; `papers/archive/` excluded). The failure mode: an
+  edit applied through a replacement string written without a raw-string
+  prefix, so Python consumes the backslash before the text reaches the
+  file — `\ref` becomes CR + `ef`, `\textbf` becomes BS + `extbf`,
+  `\times` becomes TAB + `imes`, `\'e` becomes `'e`.
+  *Why this cannot ride on C10 (compiles):* the corruption **compiles
+  clean**. LaTeX renders the literal text `ef{sec:obstruction}` with no
+  error, no warning, and no undefined reference — the cross-reference
+  simply vanishes from the document. *Rationale:* three instances have
+  reached the corpus this way (two TAB corruptions in Paper 59 during the
+  v4.107.0 remediation, one destroying an `[OBSERVATION]` tag; a backspace
+  pair that silently dead-lettered a C17 registry regex; and the CR
+  corruption in Paper 59's non-classicality attribution pointer, found by
+  the 2026-08-22 claims re-run). Every one was caught by a human or an LLM
+  noticing odd rendering — precisely the low-salience, zero-variance class
+  a grep should own. The standing cure is upstream (write the edit script
+  to a file with raw strings; never inline a LaTeX-bearing replacement in
+  a bash heredoc); this gate is the backstop for when that slips.
   **Added 2026-07-04 (PI direction; the incident: the field guide claimed
   "Three years ago the project…" when the whole project is far younger —
   LLM drafting is unreliable about elapsed project time, so this is a
