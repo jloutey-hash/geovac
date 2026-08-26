@@ -1,0 +1,700 @@
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,dcolumn,booktabs}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{observation}{Observation}
+
+\begin{document}
+
+\title{The Generalized-Sturmian Secular Equation Block-Encodes Without a
+Metric:\\
+A Quantum-Algorithm Analysis, Metric-Free for Atoms and a
+Conditioning Frontier for Molecules}
+\thanks{Paper 60 in the Geometric Vacuum series}
+
+\author{J.~Loutey}
+\affiliation{Independent Researcher, Kent, Washington}
+
+\date{August 18, 2026}
+
+\begin{abstract}
+A recurring intuition in quantum simulation is that a Coulomb--Sturmian /
+hyperspherical basis is well suited to a quantum computer, because its angular
+matrix elements are exact rationals generated on the device from
+quantum-number labels rather than loaded as a classically-computed tensor;
+only the one-dimensional radial content need be shipped in.  We test the load-bearing
+obstruction to that idea---the cost of \emph{encoding} the basis---and find it
+turns sharply on how the basis is posed.  \textbf{[MEASURED]} Encoded naively,
+in the ordinary $L^2$ Schr\"odinger framework, the genuine shared-scale
+Coulomb--Sturmian basis is $L^2$-non-orthogonal; a second-quantized (Jordan--Wigner)
+encoding must L\"owdin-orthogonalize it, and the LCU $1$-norm $\lambda$ then
+\emph{inflates} as $\lambda\sim Q^{3.3}$ (versus $Q^{1.2}$ for an orthonormal
+hydrogenic basis), driven by the growing ill-conditioning of the overlap.
+\textbf{[ESTABLISHED, from Avery's formulation]} The generalized-Sturmian
+\emph{isoenergetic} reformulation removes this obstruction for atoms: posed in
+the potential-weighted metric in which the Coulomb--Sturmians are orthonormal,
+the atomic secular equation is a \emph{standard} (metric-free) eigenproblem
+$[\,\mathrm{diag}(Z R_\nu)+T'-p_\kappa\mathbb{1}\,]B=0$ whose eigenvalues are the
+scaling parameters $p_\kappa=\sqrt{-2E}$ directly and whose interelectron matrix
+$T'$ is a matrix of pure numbers, independent of $p_\kappa$, of energy, and of
+$Z$.  \textbf{[MEASURED]} We implement it, validate it against helium (a single
+Goscinskian configuration reproduces the textbook variational value
+$-2.847$~Ha; adding configurations lowers the energy monotonically through
+the $s$, $+p$ and $spdf$ sectors---past the $s$-sector limit $-2.873$~Ha to
+$-2.897$~Ha, toward the exact non-relativistic $-2.90372$~Ha), and measure the decisive quantity: the block-encoding $1$-norm of the
+secular matrix grows \emph{sublinearly}, $\|M\|_1\sim K^{0.84}$ (full $s\!+\!p\!+\!d\!+\!f$
+basis; $K^{0.78}$ $s$-only) in the number of
+configurations---the opposite of the naive inflation.  \textbf{[OBSERVATION]} A
+targeted prior-art search finds no existing quantum algorithm combining a
+Sturmian basis, a quantum eigenvalue routine, and the isoenergetic inversion;
+the two documented cost risks for such an algorithm---metric conditioning and an
+outer energy search---are both \emph{absent} in the atomic case (no metric; the
+eigenvalues are the energies).  \textbf{[MEASURED]} For molecules the
+Shibuya--Wulfman metric returns and the problem is again generalized; we measure
+its conditioning and find it uniformly better than the $L^2$ overlap---its
+intra-center block is exactly the identity---and markedly better at larger
+internuclear separation, but still growing with basis size through the
+inter-center coupling.  \textbf{[SYMBOLIC + MEASURED]} The growth law is
+derived (a band-limited concentration rate,
+$1-\sigma_{\max}\propto(kR)^2/n^2$, giving asymptotic exponent $2$---the
+leading order is derived, the remainder measured rather than bounded;\ the
+fitted window exponents $1.85$/$1.97$ are pre-asymptotic readings).
+\textbf{[MEASURED]} The same
+cross-center singular spectrum carries the composition-wall commutator, whose
+norm saturates at $\tfrac12$.  \textbf{[RESOURCE MODEL]} Turning this into a
+block-encoding count for $\mathrm{H}_2^+$ (validated to bind, $1.3\%$ $s$-only), the
+payoff is the gerade/ungerade lever: the $\sigma_g$ ground state lives in the gerade
+sector, whose conditioning is \emph{flat}---and flat at an exact constant of the
+sinc symbol, $2/(1+\min_x j_0(x))=2.555041\ldots$, independent of $R$ and of basis
+size---so the ground-state metric
+penalty does \emph{not} grow with basis size---a ${\sim}60\times$ reduction versus the full
+metric and $10^3$--$10^4\times$ smaller than a standard (ratio-dependent) Gaussian metric for the same problem,
+at ${\sim}30$ qubits.  \textbf{[MEASURED]} The penalty also does not compound with electron
+number: the metric is discharged once at the one-electron molecular-orbital construction, after
+which the many-electron secular equation carries an identity metric---the metric cost is
+one-electron, not $N$-electron.  \textbf{[OPEN]} The atomic case is a clean, apparently novel,
+metric-free quantum secular equation; the molecular case is a genuine
+frontier in which the metric cost is mitigated for excited/ungerade states, essentially removed
+for the ground state of \emph{equivalent-center} systems (a water probe shows a symmetry-inequivalent heavy center reinstates it), and confined to one electron.  \textbf{[MEASURED]} Its remaining
+question---whether the $N$-electron $1$-norm stays sublinear as it does for atoms---we answer in the
+negative: the atomic sublinearity rides on a diagonal nuclear matrix $T^0=Z R_\nu$ that is
+single-center-specific, and a validated two-center CI (dissociating $\mathrm{H}_2$ correctly) has a
+\emph{standard} block-encoding $1$-norm growing polynomially ($\sim n_{\rm orb}^{2.2}$), with no
+sublinear behavior.  The real molecular savings are the metric levers (gerade sector, large
+separation, one-electron-only metric), not a sublinear matrix.  We do not
+demonstrate the algorithm on hardware; this is a structural and resource
+analysis.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The generalized-Sturmian method of Avery and
+Avery~\cite{avery1989,avery2006,averyphd,averymsc}, built on Goscinski's
+weighted wave equation and the momentum-space Fock projection, is one of the most
+elegant classical frameworks for atomic and molecular electronic structure.  Its
+angular content is closed-form---Gaunt integrals, Wigner $3j$/$6j$ symbols,
+Shibuya--Wulfman integrals---generated from the quantum numbers $(n,\ell,m)$ with
+no spatial quadrature.  This is the same discrete angular skeleton that the
+Geometric Vacuum program reads as a graph
+(Papers~\cite{loutey_paper58,loutey_paper59}); the two frameworks meet exactly at
+those closed-form angular integrals.
+
+The angular cleanness suggests a quantum-computing use, articulated
+independently in the Sturmian and Geometric-Vacuum settings: the bottleneck in
+quantum simulation is often not the term count of the Hamiltonian but the
+\emph{input/output}---classically computing a two-electron integral tensor and
+loading it onto the device.  If the angular structure can be generated on the
+device from labels, and only the one-dimensional radial factors loaded, the
+loading cost is dominated by a small radial-seed count rather than an
+$O(M^4)$ tensor.  This is a known-good lever in fault-tolerant simulation:
+plane-wave quantum-simulation methods compute their coefficients rather than
+loading them and win decisively for large basis
+sets~\cite{babbush2018,su2021} (first quantization, with $O(\eta\log N)$ qubits,
+at the \cite{su2021} end).
+
+The lever has a well-documented Achilles heel, however.  Its payoff is governed
+not by the loading count alone but by the \emph{LCU $1$-norm}
+$\lambda=\sum_i|c_i|$ of the encoded Hamiltonian, which sets the query and
+$T$-gate cost of qubitization and
+block-encoding~\cite{lowchuang2019,liang2022}; plane waves win the I/O yet pay a
+large $\lambda$.  The question this paper addresses is whether a
+Coulomb--Sturmian encoding keeps $\lambda$ bounded.  We find that the answer
+depends entirely on \emph{how the basis is posed}, and that the isoenergetic
+reformulation---the defining move of the generalized-Sturmian method---is
+precisely what makes the atomic problem cheap.
+
+The paper is organized as the argument runs.  Section~\ref{sec:obstruction}
+measures the naive obstruction.  Section~\ref{sec:iso} states the isoenergetic
+reformulation and why it is metric-free for atoms.  Section~\ref{sec:atomic}
+implements and validates it on helium and measures the sublinear $1$-norm.
+Section~\ref{sec:quantum} states the quantum algorithm and its novelty.
+Section~\ref{sec:molecular} measures the molecular Shibuya--Wulfman conditioning.
+Section~\ref{sec:conclusion} states the honest boundary.
+
+\section{The naive obstruction: $1$-norm inflation from $L^2$ orthogonalization}
+\label{sec:obstruction}
+
+A second-quantized (Jordan--Wigner) encoding requires an $L^2$-orthonormal set of
+single-particle spin-orbitals.  The genuine shared-scale Coulomb--Sturmians are
+\emph{not} $L^2$-orthonormal: at a common scale $k$ their higher members grow
+linearly dependent, so a qubit encoding must first orthogonalize them (L\"owdin,
+$S^{-1/2}$), and the coefficient distribution---hence
+$\lambda=\sum_i|c_i|$---spreads.
+
+\textbf{[MEASURED]} In a controlled $s$-sector helium construction in which only
+the radial convention is changed and the ground shell is anchored so the two
+families coincide at $Q=2$ qubits, the LCU $1$-norm scales as
+\begin{equation}
+\lambda_{\text{hydrogenic}}\sim Q^{1.19},
+\qquad
+\lambda_{\text{Sturmian}}\sim Q^{3.33},
+\label{eq:blowup}
+\end{equation}
+a factor of $\sim\!18$ larger by ten qubits (a measured ratio from the
+$\lambda(Q)$ data; like Eq.~\eqref{eq:sublinear} these exponents are numerical
+fits, and the tracked claim is the sublinear-vs-superlinear contrast, not the
+precise value).  The mechanism is the
+$L^2$ overlap $S$: with helium Coulomb--Sturmians its condition number climbs
+($3.0,5.8,13.9,32.2$ for $N=2,3,5,8$), and the dense $S^{-1/2}$ built from an
+ill-conditioned Gram inflates $\lambda$.  This is a currency-change of the
+familiar cost-conservation phenomenon in non-orthogonal quantum chemistry (the
+overlap metric never disappears; moving it densifies operators, states, or
+coefficients~\cite{loutey_paper58}).  Encoded this way, the Sturmian basis is the
+\emph{worst}, not the best, choice.
+
+\textbf{[MEASURED]} The obstruction is intrinsic to the $L^2$ posing, not to a
+choice of orthogonalization: re-solving the converged $s\!+\!p\!+\!d\!+\!f$ helium
+problem of Sec.~\ref{sec:atomic} as the generalized eigenproblem $MB=pSB$ with the
+$L^2$ overlap $S$ restored \emph{diverges}, the metric condition number climbing
+$4\to3673$ over the basis while the energy runs to $-3\times10^6$~Ha---the
+metric-free standard eigenproblem of Sec.~\ref{sec:iso} is not merely convenient,
+it is the only well-conditioned posing we have found.  The rest of the paper shows this
+obstruction is an artifact of the $L^2$ framing, not of the Sturmians.
+
+\section{The isoenergetic reformulation is metric-free for atoms}
+\label{sec:iso}
+
+The Coulomb--Sturmians obey a \emph{potential-weighted} orthonormality
+relation~\cite{averyphd,calderini2012,herbst2019},
+\begin{equation}
+\int d^3x\;\varphi^*_{n'\ell'm'}(x)\,\frac{1}{r}\,\varphi_{n\ell m}(x)
+=\frac{k}{n}\,\delta_{n'n}\delta_{\ell'\ell}\delta_{m'm},
+\label{eq:pw}
+\end{equation}
+orthonormal in the $1/r$ weight, \emph{not} in $L^2$.  \textbf{[MEASURED]} We
+confirm Eq.~\eqref{eq:pw} numerically: the potential-weighted overlap is diagonal
+to $\sim\!10^{-6}$ off-diagonal, whereas the $L^2$ overlap of the same basis is
+the ill-conditioned matrix of Sec.~\ref{sec:obstruction}.
+
+Building the electronic-structure problem in this native metric is the
+generalized-Sturmian method.  With the basis potential taken to be the bare
+nuclear attraction $V_0=-\sum_j Z/r_j$, the Goscinskian configurations $\Phi_\nu$
+are Slater determinants of hydrogenlike orbitals sharing one weighted charge
+$Q_\nu=p_\kappa/R_\nu$, with configuration root
+$R_\nu=\sqrt{\sum_j 1/n_j^2}$, all isoenergetic at $E=-\tfrac12 p_\kappa^2$.  The
+kinetic term cancels against $V_0$ by construction, the nuclear-attraction matrix
+is diagonal, $T^0_{\nu'\nu}=Z R_\nu\,\delta_{\nu'\nu}$, and the atomic secular
+equation is~\cite{averyphd,averymsc}
+\begin{equation}
+\sum_\nu\Big[\,Z R_\nu\,\delta_{\nu'\nu}+T'_{\nu'\nu}-p_\kappa\,\delta_{\nu'\nu}\,\Big]B_\nu=0,
+\qquad E=-\tfrac12 p_\kappa^2.
+\label{eq:secular}
+\end{equation}
+Three features of Eq.~\eqref{eq:secular} are load-bearing for a quantum
+algorithm, and all are consequences of the potential-weighting:
+\begin{enumerate}
+\item It is a \emph{standard} eigenproblem, $M B=p_\kappa B$ with
+$M=\mathrm{diag}(Z R_\nu)+T'$.  There is \emph{no overlap metric} $S$: the
+potential-weighting has absorbed it into the diagonal nuclear term.  The
+ill-conditioning of Sec.~\ref{sec:obstruction} is not repaired, it is
+\emph{never present}.
+\item Its eigenvalues are the scaling parameters $p_\kappa$ \emph{directly};
+one diagonalization yields the whole spectrum via $E=-\tfrac12 p_\kappa^2$.
+There is no self-consistency and no outer search over the energy.
+\item The interelectron matrix $T'_{\nu'\nu}=-p_\kappa^{-1}\!\int
+\Phi^*_{\nu'}V'\Phi_\nu$ is a matrix of \emph{pure numbers}, independent of
+$p_\kappa$, of $E$, and of $Z$: the two-electron integrals scale as
+$Q_\nu=p_\kappa/R_\nu$, and the $-p_\kappa^{-1}$ prefactor cancels the
+$p_\kappa$.  A single $T'$ serves an entire isoelectronic series.
+\end{enumerate}
+$T'$ is assembled by Slater--Condon reduction of the two-electron operator,
+with the $1/r_{12}$ Laplace expansion giving a finite multipole sum
+(the angular factors are products of Gaunt integrals / Wigner $3j$, recoupling to
+$6j$ for coupled configurations) times a radial Slater integral~\cite{averymsc}.
+
+\section{Atomic implementation, validation, and the sublinear $1$-norm}
+\label{sec:atomic}
+
+We implement Eq.~\eqref{eq:secular} for helium ($Z=2$).  For the leading
+configuration $1s^2$ the matrix is $1\times1$: $R_{1s^2}=\sqrt2$, the
+unit-charge integral is $\langle 1s^2|r_{12}^{-1}|1s^2\rangle=\tfrac58$, so
+\begin{equation}
+T'_{1s^2,1s^2}=-\tfrac{5}{8}/\sqrt2\approx-0.442,\quad
+p_\kappa=Z\sqrt2+T'=2.386,
+\end{equation}
+giving $E=-p_\kappa^2/2=-2.847$~Ha.  \textbf{[MEASURED]} Computed on a radial
+grid this reproduces the textbook variational helium value
+($-2.84766$~Ha; the pure number $\tfrac58/\sqrt2$ is confirmed to grid
+precision), and the ``bare'' matrix (no $V'$) returns $-4.0$~Ha, i.e.\ two
+$\mathrm{He}^+$ $1s$ orbitals---the exact non-interacting limit.  \textbf{[MEASURED]}
+Adding configurations coupled to total $^1S$ lowers the energy monotonically,
+\[
+-2.847\ (1s^2)\;\to\;-2.873\ (s)\;\to\;-2.894\ (+p)\;\to\;-2.897\ (spdf,\,K{=}164),
+\]
+converging toward the exact non-relativistic $-2.90372$~Ha.  \textbf{[MEASURED]}
+The residual $\sim\!7$~mHa is genuine basis incompleteness, not a missing metric:
+the Goscinskian basis is deliberately poor for the helium ground state---Avery and
+Avery reach $-2.90250$ with $102$ optimized Coulomb--Sturmian
+configurations~\cite{avery2006}, still $1.2$~mHa short---and every point stays
+above the exact value (no variational overshoot).  The machinery is correct,
+including the higher-$\ell$ angular correlation (Gaunt / Wigner-$3j$ multipole
+coupling).
+
+The decisive quantity is the block-encoding cost.  \textbf{[MEASURED]} The
+entrywise $1$-norm of the secular matrix, $\|M\|_1=\sum_{\nu'\nu}|M_{\nu'\nu}|$
+(an upper bound on the achievable LCU $\lambda$), grows \emph{sublinearly} in the
+number of configurations $K$,
+\begin{equation}
+\|M\|_1\sim K^{0.84}\quad(\text{full }s\!+\!p\!+\!d\!+\!f\text{ basis}),
+\label{eq:sublinear}
+\end{equation}
+the opposite of the naive inflation Eq.~\eqref{eq:blowup}.  The mechanism is the
+one Avery notes for Coulomb potentials: the pure-number matrix elements decrease
+with quantum number (higher configurations have small root $R_\nu$ and rapidly
+decaying couplings), so the sum grows more slowly than the matrix dimension.
+Crucially, angular correlation does \emph{not} break it: the $s$-only exponent
+$0.78$ rises only to $0.84$ with $p,d,f$ configurations present, so the contrast
+with the naive superlinear inflation holds for the full basis, not merely the
+$s$-sector.  Two caveats remain: the construction uses $L^2$-normalized
+configurations rather than the exact potential-weighted normalization (the
+single-configuration value is exact and the convergence is correct, so the
+constant may shift but not, we expect, the sublinear exponent); and $K$ is the
+matrix dimension, not the qubit count, so the robust statement is the
+\emph{qualitative} contrast, sublinear versus the $L^2$ superlinear blow-up.
+The quoted exponents are numerical fits at the computed basis sizes; the
+load-bearing claim is that regime and ordering, not the precise fitted value.
+
+\section{The quantum algorithm and its novelty}
+\label{sec:quantum}
+
+Equations~\eqref{eq:secular}--\eqref{eq:sublinear} describe an unusually clean
+target for quantum eigenvalue estimation: block-encode the fixed, bounded,
+pure-number matrix $M$; estimate its eigenvalues $p_\kappa$ by qubitization or
+phase estimation~\cite{lowchuang2019}; return the energies $E=-\tfrac12
+p_\kappa^2$.  \textbf{[OBSERVATION]} A targeted prior-art search finds no existing
+quantum algorithm combining (i) a Sturmian/hyperspherical basis, (ii) a quantum
+eigenvalue routine, and (iii) the isoenergetic inversion (fix $E$, solve for a
+scale).  Coulomb--Sturmian bases are classical in the
+literature~\cite{herbst2019}; quantum electronic structure uses Gaussian and
+plane-wave bases; and quantum generalized-eigenvalue
+solvers~\cite{liang2022,rajchel2025} run the forward direction.  The closest
+relative~\cite{rajchel2025} scans a candidate eigenvalue as a singularity test,
+which is not the isoenergetic advantage.  The atomic algorithm therefore appears
+novel.
+
+The two documented cost risks for such a scheme are, moreover, \emph{absent in
+the atomic case}.  The metric-conditioning multiplier of block-encoded
+generalized eigenproblems~\cite{liang2022,baek2023} does not apply, because
+Eq.~\eqref{eq:secular} carries no metric.  The outer energy search that would
+otherwise multiply the cost does not arise, because the eigenvalues are the
+energies.  What remains is a single figure of merit, the $1$-norm of $M$, which
+Eq.~\eqref{eq:sublinear} measures to be sublinear.  We stress that this is a
+resource analysis, not a hardware demonstration.
+
+\section{The molecular frontier: Shibuya--Wulfman conditioning}
+\label{sec:molecular}
+
+The clean atomic result does not fully transfer to molecules.  The multi-center
+one-electron isoenergetic problem is again \emph{generalized},
+\begin{equation}
+\sum_\mu\big[\,W_{\mu'\mu}-k\,S_{\mu'\mu}\,\big]C_\mu=0,
+\label{eq:sw}
+\end{equation}
+with $S$ the Shibuya--Wulfman matrix~\cite{averyphd}, whose condition number
+multiplies the block-encoding cost:\ inverting or square-rooting $S$ by quantum
+singular-value transformation costs a polynomial degree growing with $\kappa$
+(Sec.~\ref{sec:resource})~\cite{gslw2019,cks2017}.  In Hermitian form
+$S_{\mu'\mu}=(2k^2)^{-1}\langle\nabla\varphi_{\mu'}|\nabla\varphi_\mu\rangle
++\tfrac12\langle\varphi_{\mu'}|\varphi_\mu\rangle$.
+
+\textbf{[MEASURED]} On a two-center $s$-orbital Coulomb--Sturmian basis we find:
+(i) the intra-center block of $S$ is \emph{exactly} the identity---in the
+momentum-space evaluation, diagonal $\{1,1,1\}$ with off-diagonal
+$\sim\!10^{-16}$ (the $2$D-grid values $\{1,0.999,0.998\}$ are discretization
+error)---where the $L^2$ overlap's intra-center block is ill-conditioned (cond
+$5.8$, itself growing with basis), so the within-center disaster of
+Sec.~\ref{sec:obstruction} is genuinely absent from $S$; (ii) across two centers
+$S$ is uniformly better-conditioned than the $L^2$ overlap and markedly better at
+larger separation:
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+$R$ (bohr) & basis & $\mathrm{cond}(L^2)$ & $\mathrm{cond}(S)$ \\
+\midrule
+$1.4$ & $6$ & $39.1$ & $30.1$ \\
+$2.0$ & $6$ & $20.9$ & $15.4$ \\
+$4.0$ & $6$ & $11.1$ & $\mathbf{4.4}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+but (iii) $\mathrm{cond}(S)$ still grows with basis size---\emph{polynomially},
+$\mathrm{cond}(S)\sim N^{1.85}$, essentially the same rate as the $L^2$ overlap's
+$N^{1.70}$ (decisively power-law, not exponential), with the largest eigenvalue
+bounded, $\lambda_{\max}<2$, and all the growth in $\lambda_{\min}\to0$ as the
+basis approaches linear dependence---driven by the inter-center coupling
+(off-block magnitude $\sim0.4$--$0.6$), so the improvement over $L^2$ is only
+modest at bonding distance.  All three cross-check across a $2$D position-space
+grid, the closed-form momentum-space quadrature, and a direct three-dimensional
+momentum integral (agreement to $\sim\!10^{-10}$).
+
+\textbf{[SYMBOLIC + MEASURED]} The conditioning law is in fact \emph{derived},
+and the fitted exponent is a window reading.  Because the intra-center block is
+exactly the identity, $S=\bigl[\begin{smallmatrix}I&C\\C^{\mathsf T}&I
+\end{smallmatrix}\bigr]$ has spectrum $\{1\pm\sigma_k\}$ with $\sigma_k$ the
+singular values of the cross block (the cosines of the principal angles between
+the two center subspaces), so
+$\mathrm{cond}(S)=(1+\sigma_{\max})/(1-\sigma_{\max})$ \emph{exactly}.  In the
+sine basis the cross block is the finite section of a multiplication operator
+with symbol $j_0\!\left(kR\cot(\chi/2)\right)$, whose supremum $1$ is attained
+at $\chi=\pi$;\ the band-limited concentration rate at a quadratic symbol
+maximum gives
+\begin{equation}
+1-\sigma_{\max}\;=\;\frac{(kR)^2}{24}\,\frac{\pi^2}{n^2}+o(n^{-2}),
+\label{eq:sigma_law}
+\end{equation}
+($n$ orbitals per center), i.e.\ the conditioning exponent is exactly $2$
+asymptotically, with the single-parameter collapse
+$(1-\sigma_{\max})\,(n/kR)^2\to\pi^2/24$ (confirmed to $\sim\!1\%$ at $n=160$;\
+the leading-order derivation is asymptotic, the remainder is measured, not
+bounded).  The fitted $N^{1.85}$ above---and the $N^{1.81}$ of the same
+quantity at $R=2$ in the sprint record---are pre-asymptotic slopes of this one
+law read on different windows.  The same singular spectrum carries the
+composition wall of the balanced-basis arc:\ the center-projection commutator
+is $\|[P_A,P_B]\|=\max_k\sigma_k\sqrt{1-\sigma_k^{2}}$, which \emph{saturates}
+at its algebraic ceiling $\tfrac12$ (some $\sigma_k$ lands near $1/\sqrt2$) as
+the spectrum densifies---the previously reported $0.50$ is the saturation
+value---so the two walls are functionals of one object, with all of the
+severity information in $1-\sigma_{\max}$
+(\texttt{tests/test\_paper60\_sigma\_law.py}).
+
+The molecular metric cost is therefore \emph{mitigated, not dissolved}:
+Eq.~\eqref{eq:sw} retains a polynomial conditioning multiplier that is worst where
+the chemistry lives, and it cannot simply be transformed away---conditioning is
+orthogonal-invariant, so the momentum-space form (which cancels the Fock Jacobian
+to a clean one-dimensional quadrature) yields the \emph{identical} matrix and is
+an exact, grid-free \emph{evaluation} win, not a conditioning improvement.  Two
+genuine conditioning levers do exist: at larger separation $\mathrm{cond}(S)\to1$
+rapidly while the $L^2$ overlap cannot follow (its intra-center conditioning grows
+with basis regardless); and gerade/ungerade symmetry adaptation exactly
+block-diagonalizes $S$, isolating a perfectly-conditioned gerade sector
+($\mathrm{cond}\approx2$, flat in basis and $R$) and confining all
+ill-conditioning to the ungerade sector---a free ${\sim}2\times$ effective-cost
+reduction in the homonuclear case.  The gerade flatness is itself derived:\ for
+equivalent centers the blocks are exactly $I\pm C$, and the near-dependent
+direction has symbol value $+1$, so it lives entirely in $I-C$ (ungerade) while
+$\mathrm{cond}(I+C)\to 2/(1+\min_x j_0(x))=2.555041\ldots$, an exact constant of
+the sinc symbol independent of $R$ and of basis size
+(\texttt{tests/test\_paper60\_sigma\_law.py});\ the ``$\kappa\approx2$'' rows
+below are this constant read at small $n$.
+
+\textbf{[MEASURED]} This lever is a property of \emph{equivalent} centers, not of symmetry as such, and a probe on water ($\mathrm{H}_2\mathrm{O}$, $C_{2v}$: O${}+{}$2H) makes the distinction sharp. For an $s$-only shared-scale basis the only symmetry action is the H${}\leftrightarrow{}$H swap (O sits on the $C_2$ axis, fixed), so the totally-symmetric $A_1$ block---which holds the ground state---contains \emph{both} the O functions and the symmetric H combinations, and with them the O${}\leftrightarrow{}$H coupling between symmetry-\emph{inequivalent} centers that the group cannot remove. Building water's three-center SW metric exactly (every $s$--$s$ block depends only on inter-center distance) and adapting to $C_{2v}$, the $A_1$ ground-state block's conditioning \emph{grows}, $\mathrm{cond}(A_1)\sim N^{1.97}$ ($R^2=1.000$), essentially the raw metric ($19.9\to698$ over $N=6\to36$)---\emph{not} flat like the $\mathrm{H}_2^+$ gerade sector ($\mathrm{cond}\approx2$ throughout). Zeroing only the O${}\leftrightarrow{}$H block collapses it back to $\mathrm{cond}\approx2$, pinning that inequivalent-center coupling as the sole driver. The lever therefore does not transfer to a polyatomic with a symmetry-unique heavy center; it is confined to homonuclear-diatomic (equivalent-center) systems and their close analogs.
+The water block obeys the same derived law:\ the O${}\leftrightarrow{}$(H${}+{}$H) canonical correlations follow Eq.~\eqref{eq:sigma_law} with symbol curvature $c_{\rm sym}=R_{\rm OH}^2/24-R_{\rm HH}^2/96$ (exponent again exactly $2$;\ the fitted $1.97$ is the same pre-asymptotic reading), and $\mathrm{cond}(A_1)\approx1.12\times(1+\sigma_{\max})/(1-\sigma_{\max})$ with a constant prefactor---the canonical correlation is the whole story.  The structural reason the symmetry cannot help is now exact:\ O and H are not exchanged by any group element, so both $1\pm\sigma$ eigenvector families remain inside $A_1$ and no block absorbs the divergent factor.  A low-rank escape is also closed \emph{structurally}:\ the coupling's singular spectrum discretizes the range of the symbol (its effective rank grows linearly with basis size, participation ratio $\approx7$ at $N=36$), and since $1-\sigma_k\approx c_{\rm sym}(k\pi)^2/n^2$, an exact rank-$r$ (Woodbury) treatment of the top correlations divides the residual $\kappa$ by $(r+1)^2$ only---a useful constant factor ($\approx40$--$75\times$ in $d_{\rm inv}$ terms at $N=12$--$36$) but never a change of exponent;\ flattening would need $r\propto n$, i.e.\ classically diagonalizing the whole coupling, the sparsity-destroying orthogonalization already excluded.
+
+\subsection{Resource estimate: the gerade lever is the molecular payoff}
+\label{sec:resource}
+
+We convert the measured conditioning into a block-encoding resource count for the
+one-electron $\mathrm{H}_2^+$ secular equation Eq.~\eqref{eq:sw}, at chemical accuracy
+($\epsilon_E=1.6$~mHa) and $R=2$~bohr.  We whiten the generalized problem to a
+\emph{standard} eigenproblem $\tilde M=S^{-1/2}WS^{-1/2}$ whose eigenvalues are the scales
+$k$; the metric enters only through $S^{-1/2}$, applied by quantum
+singular-value transformation with a polynomial approximating $x^{-1/2}$ on $[\kappa^{-1},1]$
+of degree $d_{\rm inv}\sim\kappa\ln(\kappa/\epsilon)$~\cite{gslw2019,cks2017},
+$\kappa=\mathrm{cond}(S)$.  This $d_{\rm inv}$ \emph{is} the metric penalty---the quantitative
+content of the statement that the conditioning multiplies the block-encoding
+cost~\cite{gslw2019,cks2017}.
+Eigenvalue estimation to precision $\epsilon_k=\epsilon_E/k$ costs
+$Q\sim(\pi/2)\lambda_{\rm eff}/\epsilon_k$ qubitization queries~\cite{lowchuang2019}, with
+subnormalization $\lambda_{\rm eff}=k_{\max}$; each query calls one block-encoding of $W$ and
+$d_{\rm inv}$ of $S$, so the metric multiplies the query count by $(1+d_{\rm inv})$.
+
+\textbf{[MEASURED]} The algorithm binds: solving Eq.~\eqref{eq:sw} for $\mathrm{H}_2^+$ by
+isoenergetic self-consistency (build the basis at scale $k$, solve $[W-k'S]C=0$, locate
+$k'=k$) gives the $\sigma_g$ ground root $k=1.475$, i.e.\ $E_{\rm elec}=-1.088$~Ha against the
+reference $-1.103$~Ha---a $1.3\%$ $s$-only underbinding (no $p$-polarization, the expected
+basis limitation, above the exact value)---and pins $\lambda_{\rm eff}=k_{\max}\approx1.7$.
+
+\textbf{[RESOURCE MODEL, on the measured $\kappa$]} Table~\ref{tab:resource} gives the counts.
+Three readings: (i) the metric-free atomic case ($\kappa=1$, $d_{\rm inv}=0$) is recovered as
+the zero-penalty limit; (ii) the full SW metric costs $d_{\rm inv}\sim10^3$ by $N=16$; but
+(iii) the $\mathrm{H}_2^+$ ground state $\sigma_g$ is \emph{gerade}, and the gerade sector's
+conditioning is flat ($\kappa_g\approx2$ across $N=4$--$20$), so the ground-state $S^{-1/2}$
+costs $d_{\rm inv}\approx16$--$18$ \emph{independent of basis size}---a ${\sim}60\times$
+reduction versus the full metric at $N=16$, on a register halved to
+$\lceil\log_2(N/2)\rceil$ qubits.  The gerade lever is thus not merely the $2\times$ symmetry
+factor of the previous paragraph: it delivers the chemically relevant state at a metric penalty
+that \emph{does not grow with basis size}.  This is the molecular payoff.
+
+\begin{table}
+\caption{Block-encoding resource for the one-electron $\mathrm{H}_2^+$ isoenergetic secular
+equation Eq.~\eqref{eq:sw} at chemical accuracy ($\epsilon_E=1.6$~mHa, $R=2$~bohr),
+$N=16$ ($n_{\max}=8$ per center).  $d_{\rm inv}$ is the QSVT degree for $S^{-1/2}$ (the metric
+penalty); qubits $=\lceil\log_2 N_{\rm dim}\rceil+n_{\rm phase}+n_{\rm anc}$ with
+$n_{\rm phase}=10$.  The qubitization query count $Q\approx2.5\times10^3$ is common to every
+row (it depends on $\lambda_{\rm eff}$ and $\epsilon_k$, not the metric).  A resource model on
+the measured $\kappa$; the $O(1)$ constant in $d_{\rm inv}$ cancels in the cross-metric ratios
+but not in the absolute counts.}
+\label{tab:resource}
+\begin{ruledtabular}
+\begin{tabular}{lrrr}
+metric & $\kappa$ & $d_{\rm inv}$ & qubits \\
+\colrule
+atomic (no metric, Sec.~\ref{sec:iso}) & $1$ & $0$ & $23$\\
+SW gerade ($\sigma_g$ ground) & $2.3$ & $18$ & $26$\\
+SW full & $91.8$ & $1050$ & $31$\\
+Gaussian LCAO (ratio $2$) & $1.99\times10^4$ & $3.3\times10^5$ & $31$\\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[RESOURCE MODEL]} Against the same $\mathrm{H}_2^+$ problem in a standard even-tempered
+$s$-Gaussian LCAO metric (ratio $2$), the SW inverse-degree is $10^2$--$3\times10^2$ times
+smaller (full metric) and $10^3$--$10^4$ smaller (gerade).  This is a metric-versus-metric
+comparison and carries an honest caveat: the Gaussian conditioning is ratio-dependent---a denser
+ratio-$1.6$ set (approaching completeness) blows up as $\mathrm{cond}\sim N^{6}$
+($\kappa\!\sim\!10^5$ at $N=16$), a sparser ratio-$3$ set grows only as $N^{1.4}$ but leaves
+coverage gaps and still carries ${\sim}10\times$ the SW prefactor.  This is the classic Gaussian
+coverage-versus-linear-dependence trade-off; the Coulomb--Sturmians evade it because they are a
+\emph{complete} set at one scale whose metric is polynomially conditioned ($\mathrm{cond}(S)\sim
+N^{1.85}$ on this window;\ derived asymptote $N^2$, Eq.~\eqref{eq:sigma_law}) with a small
+prefactor.  Production Gaussian simulation of course absorbs the overlap
+classically in a prior mean-field step; the metric penalty priced here is precisely the cost of
+the on-device angular generation that motivated the Sturmian encoding in the first place.
+
+\textbf{[MEASURED]} The large-$R$ lever is quantified alongside: $\mathrm{cond}(S)$ falls to
+$2.2$ at $R=10$~bohr (at the sweep's $N=12$, $d_{\rm inv}$: $862\to17$ over
+$R=1.4\to10$;\ at Table~\ref{tab:resource}'s $N=16$ the $R=1.4$ figure is
+larger still, so the lever is stronger than these numbers suggest), while the Gaussian metric
+stays $\sim\!2\times10^3$---its intra-center linear dependence does not relax with separation.
+
+\textbf{[MEASURED]} Two probes price the derived law's exploitability (resource-model tier;
+CHANGELOG v4.105.0).  \emph{Spectrum-aware inversion}---replacing the worst-case interval
+approximation for $S^{-1/2}$ by constrained interpolation on the \emph{known} spectrum
+$\{1\pm\sigma_k\}$ (classically computable by an $O(N^3)$ values-only SVD that touches no
+integral sparsity;\ the asymptotic law alone is $11$--$21\%$ off at $\lambda_{\min}$ and does
+not suffice)---buys a constant factor $\approx8$--$10\times$ at the \emph{same} $\kappa$
+exponent, and the Bernstein $\Theta(\kappa)$ floor for \emph{both} problems
+bounds it there (an argument, not a measurement:\ the floors hold for the
+interpolation and interval families alike,
+because the small eigenvalues are spaced at exactly the scale on which $x^{-1/2}$ varies).  At
+this table's $N=16$ point the honest chain is model $1050\to$ same-convention minimax
+$209\to$ aware $27$.  An \emph{exponent-changing} variant exists---a PSD shift of
+$[\lambda_{\min},\lambda_{\max}]$ onto $[-1,1]$, needing only Eq.~\eqref{eq:sigma_law}'s
+closed-form endpoints, gives degree $\approx2.8\sqrt\kappa$---but is gated by its LCU
+subnormalization (the naive $1$-norm $\approx3$ squeezes the spectrum back to
+linear-in-$\kappa$, \emph{worse} than baseline;\ with $\sim\!3\times$ amplification the net at
+$\kappa=864$ is $\approx5\times10^2$ effective queries vs $\approx1.9\times10^3$)---scoped, not
+priced beyond this.  Separately, an \emph{analytic momentum-space factorization} of the ERI
+tensor (the closed-form momentum densities as a continuous factorization index) matches but
+does not beat plain density fitting:\ eigen-Cholesky DF on the same tensor reaches within
+$13\%$ of its $1$-norm at rank $\le n_{\rm orb}^2$, versus $2.5$--$4.3\times10^4$ momentum
+leaves---the observed gains are DF's, not the momentum representation's.
+
+\subsection{Many-electron molecules: the metric does not compound}
+\label{sec:manyelectron}
+
+For a many-electron molecule the generalized-Sturmian secular equation is still
+$[\,T^0+T'-p_\kappa\mathbb{1}\,]B=0$---a \emph{standard} eigenproblem, the $-p_\kappa\mathbb{1}$ being
+the identity, not a metric (Avery's general form~\cite{averyphd}); only the atomic conveniences
+``$T^0$ diagonal'' and ``$T'$ pure numbers'' are lost.  The resource-relevant question is whether the
+Shibuya--Wulfman metric penalty of Sec.~\ref{sec:molecular} \emph{compounds} with electron number.
+It need not.
+
+\textbf{[SYMBOLIC + MEASURED]} A $k$-electron configuration is a Slater determinant of one-electron molecular
+orbitals, so its configuration-space overlap is the $k$-th compound matrix of the one-electron
+overlap, with condition number $(\lambda_1\cdots\lambda_k)/(\lambda_{N-k+1}\cdots\lambda_N)$ in the
+one-electron overlap spectrum $\{\lambda_i\}$.  Built from the \emph{raw} $L^2$-normalized
+many-center Coulomb--Sturmians this \emph{grows} with electron number---on the H$_2$-geometry
+two-center basis ($N=6$), $1\times,8\times,9\times\,\mathrm{cond}(S_{L^2})$ at $k=1,2,3$ (worst at
+half-filling), bounded by $\mathrm{cond}(S_{L^2})^{\min(k,N-k)}$ and driven by the
+near-linear-dependence eigenvalue.  Built instead from the \emph{molecular Sturmians}---the
+Shibuya--Wulfman eigenvectors, $S_{\rm SW}$-orthonormal by construction---the configuration overlap
+is the \emph{identity at every electron number}---an algebraic consequence of the
+compound-matrix identity, not a numerical finding;\ only the $1\times,8\times,9\times$
+$L^2$ figures above are measured.  The metric is therefore paid once, at the
+one-electron molecular-orbital construction ($\mathrm{cond}(S_{\rm SW})$ above, with the gerade
+lever), and the $N$-electron secular equation inherits an identity metric:
+\textbf{the molecular metric penalty is one-electron, not $N$-electron}.  It is the on-device analogue
+of the once-executed classical mean-field step that lets production Gaussian simulation carry no
+metric into the many-body Hamiltonian.
+
+\textbf{[MEASURED]} The interelectron matrix $T'$ is assembled from two-center electron-repulsion
+integrals, and these are in hand.  We evaluate the shared-scale Coulomb--Sturmian two-center ERIs
+$(pq|rs)$ numerically (a single multipole route about one nucleus, so every center class is uniform)
+and validate them against the framework's \emph{exact} closed form: the one-center
+$(1s\,1s|1s\,1s)=\tfrac58$ to $4\times10^{-6}$, and the two-center $(AA|BB)$ to $\sim\!10^{-4}$
+against $\texttt{aabb\_value}$ at $R\in\{1.4,2.0,3.0\}$ (the closed forms themselves are weight-one,
+$\pi$-free $\{E_1,\ln,\gamma\}$~\cite{loutey_paper58,loutey_paper59}).  With these, the interacting
+method binds a molecule: minimal-basis ($1s$ on each center, common scale) $\mathrm{H}_2$ in the
+metric-free molecular-Sturmian basis has an interior minimum at $R\approx1.6$~bohr with
+$E_{\rm tot}\approx-1.09$~Ha---the single-$\zeta$ minimal-basis value, underbinding the exact $-1.174$~Ha as
+$s$-only single-$\zeta$ must, above the exact energy throughout.
+
+\textbf{[OPEN, with the obstruction identified]} What remains is the block-encoding $1$-norm of the
+full $N$-electron secular matrix $T^0+T'$, and here the molecular case parts from the atomic one at a
+structural level, not merely a computational one.  The atomic sublinearity of Eq.~\eqref{eq:sublinear}
+rides on the \emph{clean diagonal} $T^0=Z R_\nu$, which exists only because (i) the Goscinskian
+orbitals scale \emph{with} $p_\kappa$ (charge $Q_\nu=p_\kappa/R_\nu$), so the $p_\kappa$ in
+$\langle 1/r\rangle$ cancels the $-p_\kappa^{-1}$ prefactor and $M$ is a $p_\kappa$-independent linear
+matrix, and (ii) on a \emph{single} center $\langle 1/r\rangle=Q/n^2$ collapses the collective scale
+to the root-sum-of-squares $T^0_{\rm bare}=\sqrt{\textstyle\sum_p k_p^2}=Z R_\nu$ (we verify: for He
+$1s^2$, $\sqrt{k^2+k^2}=2\sqrt2=Z R_\nu$ gives the exact bare $-4$~Ha; a naive sum of scales gives
+$-8$).  On \emph{two} centers the nuclear attraction $\langle 1/r_A\rangle+\langle 1/r_B\rangle$
+acquires off-center terms depending on $Q_\nu R$, so $T^0$ is neither diagonal nor $p_\kappa$-independent,
+and a fixed-scale molecular-Sturmian shortcut is not the isoenergetic matrix at all---it fails the
+non-interacting limit (returning $p_\kappa=2k_{\sigma_g}$ where the correct value is
+$\sqrt2\,k_{\sigma_g}$).  A faithful molecular $1$-norm therefore requires the $p_\kappa$-scaled
+molecular Goscinskian (config charge $Q_\nu=p_\kappa/R_\nu$, two-center nuclear $T^0$ and two-center
+ERIs at the config scale, solved self-consistently; validated at $R\!\to\!\infty=2$ H atoms and
+$R\!\to\!0=$ He).  The obstruction is thus not that the integrals are hard---they close
+(Papers~\cite{loutey_paper58,loutey_paper59})---but that the single-center diagonal-$T^0$ structure
+that \emph{produced} the sublinearity does not transfer.
+
+\textbf{[MEASURED]} We can nonetheless price the practical alternative.  Building the two-center
+mixed-charge integrals (overlap, nuclear attraction, and ERIs, validated against the exact closed
+forms and against $\langle 1s|1/r_B|1s\rangle$ to $\sim\!10^{-4}$) and a full two-electron CI in the
+Loewdin-orthonormalized Sturmian basis yields a \emph{validated} molecular solver---$\mathrm{H}_2$
+dissociates correctly to two H atoms ($E_{\rm tot}\!\to\!-1.0$~Ha at $R=6$) and binds above the exact
+$-1.174$~Ha at $R_{\rm eq}$.  Its \emph{standard} block-encoding $1$-norm
+$\lambda=\sum_{pq}|h_{pq}|+\sum_{pqrs}|(pq|rs)|$ grows polynomially, $\lambda\sim n_{\rm orb}^{2.2}$, with
+no sublinear behavior---the atomic advantage of Eq.~\eqref{eq:sublinear} is a property of the
+isoenergetic secular matrix, not of the basis, and it does not survive the loss of the diagonal
+$T^0$.  For molecules the resource question therefore answers in the ordinary way: the block-encoding
+cost scales polynomially, and the metric levers of Secs.~\ref{sec:resource}--\ref{sec:manyelectron}
+(the gerade sector, large-$R$, one-electron-only metric) are the real savings, not a sublinear
+matrix.
+
+\section{Conclusion and scope}
+\label{sec:conclusion}
+
+The message is a sharp split.  \emph{For atoms}, the isoenergetic
+generalized-Sturmian reformulation converts electronic structure into a standard,
+metric-free eigenproblem with a bounded pure-number matrix whose block-encoding
+$1$-norm grows sublinearly---a clean, apparently novel quantum secular equation
+in which the two feared cost risks of the genre are structurally absent.  The
+$L^2$-encoding obstruction that makes the same basis the worst possible choice is
+revealed as an artifact of the wrong framing.  \emph{For molecules}, the
+Shibuya--Wulfman metric returns; it is genuinely better-conditioned than the
+$L^2$ overlap---its intra-center block is the identity---and much better at large
+separation, but its inter-center coupling still costs conditioning that grows
+with basis size.  The one qualification that lifts this from a caveat to a payoff
+is symmetry: because the $\mathrm{H}_2^+$ ground state is gerade and the gerade sector
+is perfectly conditioned and flat in basis size, the ground-state block-encoding pays a
+metric penalty that does not grow (Table~\ref{tab:resource})---the growth is confined to
+the excited/ungerade states---though this is an \emph{equivalent}-center property: a probe on water ($C_{2v}$) shows a symmetry-unique heavy center reinstates the growth in the ground-state ($A_1$) block (Sec.~\ref{sec:molecular}), confining the lever to homonuclear-diatomic-like systems.  And the penalty does not compound with electron number: the
+Shibuya--Wulfman metric is discharged once, at the one-electron molecular-orbital construction,
+after which the many-electron secular equation carries an identity metric
+(Sec.~\ref{sec:manyelectron})---the metric cost is one-electron, not $N$-electron.  The atomic
+case is a result; the molecular case is a frontier with a well-conditioned ground-state corner.
+
+We have not run the algorithm on hardware, and we do not claim a resource
+advantage over production quantum chemistry: the systems where the encoding is
+demonstrably cheap are small.  What we claim is structural and measured---that the
+generalized-Sturmian method's classical elegance (no self-consistency, energies
+direct, pure-number matrices) is also, for atoms, a near-ideal quantum
+encoding---and that this reframes the on-device-generation intuition from a hope
+into a characterized boundary, clean on one side and open on the other.
+
+\begin{acknowledgments}
+The generalized-Sturmian formulation used here is that of J.~E.~Avery and
+J.~S.~Avery; this paper adds only its reading as a quantum-encoding target and
+the resource measurements.  Developed with an AI-augmented workflow under
+principal-investigator direction, with the headline numerical claims validated against
+analytical benchmarks and a regression test suite.
+\end{acknowledgments}
+
+\begin{thebibliography}{99}
+
+\bibitem{avery1989}
+J.~Avery, \textit{Hyperspherical Harmonics: Applications in Quantum Theory}
+(Kluwer Academic, Dordrecht, 1989).
+
+\bibitem{avery2006}
+J.~E.~Avery and J.~S.~Avery, \textit{Generalized Sturmians and Atomic Spectra}
+(World Scientific, Singapore, 2006).
+
+\bibitem{averyphd}
+J.~E.~Avery, \textit{New Computational Methods in the Quantum Theory of
+Nano-structures}, Ph.D.\ thesis, University of Copenhagen (DIKU), 2011.
+
+\bibitem{averymsc}
+J.~E.~Avery, \textit{The Generalized Sturmian Method: Development,
+Implementation and Applications in Atomic Physics}, M.Sc.\ thesis, University of
+Copenhagen, 2008.
+
+\bibitem{herbst2019}
+M.~F.~Herbst, J.~E.~Avery, and A.~Dreuw,
+``Quantum chemistry with Coulomb Sturmians: Construction and convergence of
+Coulomb Sturmian basis sets at Hartree--Fock level,''
+Phys.\ Rev.\ A \textbf{99}, 012512 (2019); arXiv:1811.05777.
+
+\bibitem{calderini2012}
+D.~Calderini, S.~Cavalli, C.~Coletti, G.~Grossi, and V.~Aquilanti,
+``Hydrogenoid orbitals revisited: From Slater orbitals to Coulomb Sturmians,''
+J.\ Chem.\ Sci.\ \textbf{124}, 187 (2012).
+
+\bibitem{babbush2018}
+R.~Babbush, N.~Wiebe, J.~McClean, J.~McClain, H.~Neven, and G.~K.-L.~Chan,
+``Low-depth quantum simulation of materials,''
+Phys.\ Rev.\ X \textbf{8}, 011044 (2018); arXiv:1706.00023.
+
+\bibitem{su2021}
+Y.~Su, D.~W.~Berry, N.~Wiebe, N.~Rubin, and R.~Babbush,
+``Fault-tolerant quantum simulations of chemistry in first quantization,''
+PRX Quantum \textbf{2}, 040332 (2021); arXiv:2105.12767.
+
+\bibitem{lowchuang2019}
+G.~H.~Low and I.~L.~Chuang,
+``Hamiltonian simulation by qubitization,''
+Quantum \textbf{3}, 163 (2019); arXiv:1610.06546.
+
+\bibitem{liang2022}
+J.-M.~Liang, S.-Q.~Shen, M.~Li, and S.-M.~Fei,
+``Quantum algorithms for the generalized eigenvalue problem,''
+Quantum Inf.\ Process.\ \textbf{21}, 23 (2022); arXiv:2112.02554.
+
+\bibitem{rajchel2025}
+G.~Rajchel-Mieldzio\'c, S.~Pli\'s, and E.~Zak,
+``Quantum algorithm for solving generalized eigenvalue problems with
+application to the Schr\"odinger equation,'' arXiv:2506.13534 (2025).
+
+\bibitem{baek2023}
+U.~Baek \textit{et al.},
+``Say NO to optimization: A non-orthogonal quantum eigensolver,''
+PRX Quantum \textbf{4}, 030307 (2023); arXiv:2205.09039.
+
+\bibitem{gslw2019}
+A.~Gily\'en, Y.~Su, G.~H.~Low, and N.~Wiebe,
+``Quantum singular value transformation and beyond: exponential improvements for quantum matrix
+arithmetics,'' in \textit{Proc.\ 51st ACM STOC} (2019), p.~193; arXiv:1806.01838.
+
+\bibitem{cks2017}
+A.~M.~Childs, R.~Kothari, and R.~D.~Somma,
+``Quantum algorithm for systems of linear equations with exponentially improved dependence on
+precision,'' SIAM J.\ Comput.\ \textbf{46}, 1920 (2017); arXiv:1511.02306.
+
+\bibitem{loutey_paper58}
+J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property: The Abelian
+Residue'' (Paper 58, Geometric Vacuum series).
+
+\bibitem{loutey_paper59}
+J.~Loutey, ``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel
+Moment'' (Paper 59, Geometric Vacuum series).
+
+\end{thebibliography}
+
+\end{document}
