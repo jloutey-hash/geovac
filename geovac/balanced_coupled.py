@@ -413,7 +413,7 @@ def build_balanced_hamiltonian(
     nuclei: Optional[List[Dict[str, Any]]] = None,
     n_grid: int = 2000,
     n_grid_vne: int = 8000,
-    L_max: int = 2,
+    L_max: int | None = None,
     verbose: bool = False,
     screened_cross_center: bool = False,
     pk_cross_center: bool = False,
@@ -547,6 +547,16 @@ def build_balanced_hamiltonian(
     -------
     dict with h1, eri, qubit_op, resource metrics, and comparison data.
     """
+    # Multipole cutoff. Paper 19: the cross-centre V_ne expansion
+    # terminates exactly at L_max = 2*l_max (Gaunt triangle rule), so a
+    # fixed default is wrong for any basis with l_max > 1. Derive it.
+    # (Was hardcoded 2, which silently truncated at max_n >= 3 and cost
+    # 18.6 mHa on LiH; found by the 2026-08-22 cert. L_max=4 and L_max=10
+    # are bit-identical at max_n=3, confirming the termination.)
+    if L_max is None:
+        _max_n = max(b.max_n for b in spec.blocks)
+        L_max = 2 * max(1, _max_n - 1)
+
     t0 = time.perf_counter()
 
     # ------------------------------------------------------------------

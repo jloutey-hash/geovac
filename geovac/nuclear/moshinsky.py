@@ -453,12 +453,15 @@ def lab_to_relative_matrix_element(
     L: int, S: int,
     V_rel_func,
     b: float = 1.0,
+    conserve_N: bool = False,
 ) -> float:
     """
     Compute <n1 l1, n2 l2; LS | V | n3 l3, n4 l4; LS> by Moshinsky transformation.
 
     1. Transform bra and ket to CM+rel coordinates via Moshinsky brackets.
-    2. V acts only on relative coordinate -> diagonal in CM quantum numbers.
+    2. V acts only on relative coordinate -> diagonal in the CM quantum
+       numbers and in l_rel, but NOT diagonal in n_rel. It therefore does
+       not conserve N_tot; bra and ket are decomposed at their own N.
     3. Sum over intermediate CM+rel states.
 
     Parameters
@@ -484,30 +487,45 @@ def lab_to_relative_matrix_element(
     N_bra = 2*n1 + l1 + 2*n2 + l2
     N_ket = 2*n3 + l3 + 2*n4 + l4
 
-    if N_bra != N_ket:
+    # A central V(r_rel) is diagonal in the CM quantum numbers and in
+    # l_rel, but it COUPLES different relative-n -- so it does NOT
+    # conserve N_tot = 2n_rel + l_rel + 2n_cm + l_cm. (The Moshinsky
+    # BRACKET conserves N; the potential matrix element does not.)
+    # Corrected 2026-08-22: this previously short-circuited to 0.0 on
+    # N_bra != N_ket, discarding couplings ~20x larger than the diagonal
+    # terms it kept. Set conserve_N=True to reproduce that behaviour.
+    if conserve_N and N_bra != N_ket:
         return 0.0
 
-    N = N_bra
+    # Parity: with l_rel and the CM state shared, N_bra - N_ket = 2(n-n'),
+    # so an odd difference has no support and can be skipped outright.
+    if (N_bra - N_ket) % 2 != 0:
+        return 0.0
 
-    # Enumerate all CM+rel states for this N and L
-    cm_rel_states = []
-    for N_cm in range(N + 1):
-        N_rel = N - N_cm
-        for l_cm in range(N_cm, -1, -2):
-            n_cm = (N_cm - l_cm) // 2
-            for l_rel in range(N_rel, -1, -2):
-                n_rel = (N_rel - l_rel) // 2
-                if abs(l_cm - l_rel) <= L <= l_cm + l_rel:
-                    cm_rel_states.append((n_cm, l_cm, n_rel, l_rel))
+    def _cm_rel_states(N_tot):
+        """CM+rel decompositions of a given total HO quantum number."""
+        out = []
+        for N_cm in range(N_tot + 1):
+            N_rel = N_tot - N_cm
+            for l_cm in range(N_cm, -1, -2):
+                n_cm = (N_cm - l_cm) // 2
+                for l_rel in range(N_rel, -1, -2):
+                    n_rel = (N_rel - l_rel) // 2
+                    if abs(l_cm - l_rel) <= L <= l_cm + l_rel:
+                        out.append((n_cm, l_cm, n_rel, l_rel))
+        return out
+
+    bra_states = _cm_rel_states(N_bra)
+    ket_states = _cm_rel_states(N_ket)
 
     result = 0.0
-    for n_cm_a, l_cm_a, n_rel_a, l_rel_a in cm_rel_states:
+    for n_cm_a, l_cm_a, n_rel_a, l_rel_a in bra_states:
         bra_bracket = moshinsky_bracket(n1, l1, n2, l2,
                                          n_cm_a, l_cm_a, n_rel_a, l_rel_a, L)
         if abs(bra_bracket) < 1e-15:
             continue
 
-        for n_cm_b, l_cm_b, n_rel_b, l_rel_b in cm_rel_states:
+        for n_cm_b, l_cm_b, n_rel_b, l_rel_b in ket_states:
             if n_cm_a != n_cm_b or l_cm_a != l_cm_b:
                 continue
 

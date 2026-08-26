@@ -49,10 +49,19 @@ def _balanced_energy_knobs(R: float, n_grid_vne: int, L_max: int) -> float:
 @pytest.mark.slow
 def test_paper19_well_shape_localized_to_orbital_basis():
     """The well-SHAPE residual (tilt, curvature) is bit-invariant to the cross-V_ne
-    angular multipole order L_max and the radial quadrature n_grid_vne, and the
-    electronic gradient at R_true is ~9% too weak.  => the shape defect lives in the
-    max_n orbital basis, not in integral evaluation or angular truncation
-    (debug/sprint_abc_connections_test_memo.md)."""
+    angular multipole order L_max, and the electronic gradient at R_true is ~8.8%
+    too weak -- two orders of magnitude larger than any quadrature movement, so
+    the shape defect lives in the max_n orbital basis rather than in integral
+    evaluation or angular truncation.
+
+    NOTE (2026-08-22, delta review): the n_grid_vne leg below is a NO-OP
+    guard, NOT evidence of quadrature convergence -- the cross-centre
+    V_ne is analytic (incomplete gamma) and ignores that argument. The
+    framework's one live radial quadrature is the cross-block ERI
+    trapezoid in geovac/cross_block_mp2.py, which this test does NOT
+    cover and which is NOT invariant (~0.15% tilt movement over n_grid
+    2000-8000). Do not cite this test for a quadrature-invariance claim.
+    """
     R_TRUE = 3.015
     h = 0.05
     Rs = [R_TRUE - h, R_TRUE, R_TRUE + h]
@@ -70,8 +79,27 @@ def test_paper19_well_shape_localized_to_orbital_basis():
 
     # (1) angular multipole order is bit-irrelevant (Gaunt-terminated at L=2)
     assert abs(tilt_L2 - tilt_L6) < 1e-9, f"L_max moved the tilt: {tilt_L2} vs {tilt_L6}"
-    # (2) radial quadrature is bit-irrelevant (converged by n_grid=2000)
-    assert abs(base_tilt - tilt_g2k) < 1e-9, f"n_grid moved the tilt: {base_tilt} vs {tilt_g2k}"
+    # (2) The cross-centre V_ne carries NO quadrature to converge:
+    #     compute_cross_center_vne is analytic (incomplete gamma) and
+    #     its n_grid argument is explicitly ignored -- see the
+    #     docstring of geovac/shibuya_wulfman.py::_radial_split_integral.
+    #     So varying n_grid_vne is a NO-OP and asserting invariance
+    #     under it proves nothing.  (Found 2026-08-22, FULL cert run:
+    #     this leg previously asserted `abs(base_tilt - tilt_g2k) <
+    #     1e-9` across n_grid_vne=2000 vs 8000, which cannot fail.)
+    #     Measured 2026-08-22: the two calls differ by 4.1e-13 in the
+    #     tilt -- residual float-path noise, not quadrature error.  So
+    #     this leg is kept, but ONLY as a no-op regression guard; it is
+    #     NOT evidence that a radial quadrature has converged, and the
+    #     paper must not cite it as such.  The framework's one live
+    #     radial quadrature is the cross-block ERI trapezoid in
+    #     geovac/cross_block_mp2.py, which this test does not vary and
+    #     which is NOT invariant (~0.87% tilt spread over n_grid
+    #     1000..8000, ~0.15% over 2000..8000) and is not covered by this
+    #     test at all.
+    assert abs(base_tilt - tilt_g2k) < 1e-9, (
+        f"n_grid_vne is ignored; the tilt should not move: "
+        f"{base_tilt} vs {tilt_g2k}")
     # (3) the defect is real and outward (negative tilt ~ -0.030 Ha/bohr)
     assert -0.045 < base_tilt < -0.020, f"tilt={base_tilt:.4f}"
     # (4) electronic gradient 9% too weak: dE/dR = dV_NN/dR + d<el>/dR, V_NN=3/R exact,
@@ -79,7 +107,11 @@ def test_paper19_well_shape_localized_to_orbital_basis():
     req = 3.0 / R_TRUE ** 2
     elec_grad = base_tilt + req                       # = base_tilt - dV_NN/dR
     deficit = (req - elec_grad) / req
-    assert 0.05 < deficit < 0.13, f"electronic-gradient deficit={deficit:.3f}"
+    # Measured 8.80-8.81% across the quadrature band. Pinned tightly
+    # enough to discriminate the paper's one-decimal headline; the old
+    # 0.05-0.13 band was +-44% and could not.
+    assert 0.084 < deficit < 0.093, (
+        f"electronic-gradient deficit={deficit:.4f}")
 
 
 def _omega_e(curv_ha_bohr2: float) -> float:

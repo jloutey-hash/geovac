@@ -555,7 +555,11 @@ def _double_excitation_phase(
     phase_add_s = sum(1 for o in remaining_plus_r if o < s)
 
     total_phase = phase_remove_p + phase_remove_q + phase_add_r + phase_add_s
-    return (-1) ** total_phase
+    # The sequential phases above are those of a_s^dag a_r^dag a_q a_p, but the
+    # caller contracts against the coefficient of a_r^dag a_s^dag a_q a_p --
+    # one extra anticommutation, hence the global -1 (pinned element-by-element
+    # against a brute-force Fock-space FCI in tests/test_balanced_direct_ci.py).
+    return -((-1) ** total_phase)
 
 
 def run_coupled_scoping(

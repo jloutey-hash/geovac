@@ -43,6 +43,12 @@ import sympy as sp
 import mpmath as mp
 import pytest
 
+# Production F-theorem values: computed from the S^3 spectral zeta (Hurwitz
+# form), INDEPENDENT of the pi^2 closed form they are checked against.  Using
+# these instead of hand-typed F_s/F_D is the group3 re-cert fix (2026-08-24) for
+# the resurrected Paper-50 "typed-in F-values" false positive.
+from geovac.qed_two_loop import scalar_F_theorem, dirac_F_theorem
+
 
 # ---------------------------------------------------------------------------
 # Test parameters
@@ -235,10 +241,10 @@ class TestM1Paper50FTheoremCrossProductHasPi2Prefactor:
         mp.mp.dps = WORKING_PRECISION_DPS
         pi = mp.pi
         z3 = mp.zeta(3)
-        l2 = mp.log(2)
 
-        F_s = l2 / mp.mpf(8) - 3 * z3 / (16 * pi**2)
-        F_D = l2 / mp.mpf(4) + 3 * z3 / (8 * pi**2)
+        # GENUINE: F_s, F_D computed from the S^3 spectral zeta (not typed in).
+        F_s = scalar_F_theorem()
+        F_D = dirac_F_theorem()
 
         cross = F_D - 2 * F_s
         expected = 3 * z3 / (4 * pi**2)
@@ -255,10 +261,10 @@ class TestM1Paper50FTheoremCrossProductHasPi2Prefactor:
         mp.mp.dps = WORKING_PRECISION_DPS
         pi = mp.pi
         z3 = mp.zeta(3)
-        l2 = mp.log(2)
 
-        F_s = l2 / mp.mpf(8) - 3 * z3 / (16 * pi**2)
-        F_D = l2 / mp.mpf(4) + 3 * z3 / (8 * pi**2)
+        # GENUINE: F_s, F_D computed from the S^3 spectral zeta (not typed in).
+        F_s = scalar_F_theorem()
+        F_D = dirac_F_theorem()
         cross = F_D - 2 * F_s
 
         # Strip the M3 component (3 zeta(3)/4) to isolate the M1 factor.
@@ -310,6 +316,42 @@ class TestM1AggregateClosure:
                     f"{label}: Paper 55 line 393 states |n| <= 2 on empirical "
                     f"witnesses, but found pi^{n}"
                 )
+
+
+class TestM1ClassifierIsDiscriminating:
+    """Guard against vacuity: the M1 pi-power classifier must REJECT non-Tate
+    values, not merely accept the (constructed) pure-pi witnesses.  Without this,
+    the PSLQ-against-pi-powers machinery could be trivially satisfiable.
+    """
+
+    @pytest.mark.parametrize("label,value", [
+        ("zeta(3)", None),          # filled below (mpf needs the dps set first)
+        ("zeta(3)/pi", None),
+        ("Catalan_G", None),
+        ("zeta(5)", None),
+    ])
+    def test_non_tate_values_are_rejected(self, label, value):
+        """A genuine non-Tate constant must NOT PSLQ-identify as a pi-power."""
+        mp.mp.dps = WORKING_PRECISION_DPS
+        pi = mp.pi
+        vals = {
+            "zeta(3)": mp.zeta(3),
+            "zeta(3)/pi": mp.zeta(3) / pi,
+            "Catalan_G": mp.catalan,
+            "zeta(5)": mp.zeta(5),
+        }
+        rel = _pslq_against_pi_powers(vals[label], WORKING_PRECISION_DPS)
+        assert rel is None, (
+            f"{label} was spuriously identified as a rational pi-power "
+            f"combination (relation {rel}); the M1 classifier is not "
+            f"discriminating"
+        )
+
+    def test_genuine_M1_value_is_accepted(self):
+        """Sanity companion: a true M1 value (1/pi^2) IS identified as pi^-2."""
+        mp.mp.dps = WORKING_PRECISION_DPS
+        rel = _pslq_against_pi_powers(mp.mpf(1) / mp.pi**2, WORKING_PRECISION_DPS)
+        assert _interpret_pslq_relation(rel) == {-2: sp.Integer(1)}
 
 
 if __name__ == "__main__":

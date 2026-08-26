@@ -217,3 +217,51 @@ def test_two_invariants_coupling_vs_category():
     Ps_off = _beh2_triple_scaled(1e-9)
     assert commutant_dim(Ps_full) == 1 and _nested_max(Ps_full) > 0.2     # irreducible + strong 3-body
     assert commutant_dim(Ps_off) > 1 and _nested_max(Ps_off) < 1e-6       # reducible + no 3-body
+
+
+# ------------- non-abelian != wild: compact-group coupling is tame (Peter-Weyl) -------------
+def _su2_generators(js):
+    """Block-diagonal J_x, J_y, J_z for the direct sum of spin-j irreps listed in `js`."""
+    from scipy.linalg import block_diag
+    bx, by, bz = [], [], []
+    for j in js:
+        d = int(round(2 * j)) + 1
+        m = np.array([j - k for k in range(d)])
+        Jp = np.zeros((d, d), complex)
+        off = np.sqrt(j * (j + 1) - m[1:] * (m[1:] + 1))
+        for k in range(d - 1):
+            Jp[k, k + 1] = off[k]
+        Jm = Jp.conj().T
+        bx.append((Jp + Jm) / 2); by.append((Jp - Jm) / (2j)); bz.append(np.diag(m).astype(complex))
+    return [block_diag(*b) for b in (bx, by, bz)]
+
+
+def _max_noncommutativity(As):
+    return max(cn(As[i] @ As[j] - As[j] @ As[i])
+               for i in range(len(As)) for j in range(i + 1, len(As)))
+
+
+@pytest.mark.parametrize("js,expected", [([0, 1, 2], 3),      # three irreps, mult 1 each -> 1+1+1
+                                         ([1, 1], 4),          # one irrep at mult 2 -> 2^2
+                                         ([1, 2, 2], 5),       # 1^2 + 2^2
+                                         ([1], 1)])            # single irrep -> irreducible
+def test_compact_group_coupling_is_tame(js, expected):
+    """SU(2)/Gaunt coupling is compact-group rep theory => type I (Peter-Weyl) => REDUCIBLE
+    whenever more than one irrep is present, however non-abelian. Commutant dim = sum m_lambda^2,
+    which is a self-validating prediction (Schur)."""
+    As = _su2_generators(js)
+    assert _max_noncommutativity(As) > 0.9, "generators must genuinely not commute"
+    assert commutant_dim(As) == expected
+
+
+def test_nonabelian_and_wild_are_independent():
+    """The discriminator: SU(2) coupling is MORE non-abelian than the molecular projections yet
+    REDUCIBLE, while the three center-projections are IRREDUCIBLE at smaller non-commutativity.
+    So the TC/Gaunt non-abelianness is not the multi-center wildness (different axes)."""
+    As = _su2_generators([0, 1, 2])
+    Ps = _beh2_triple()
+    na_group, na_proj = _max_noncommutativity(As), _max_noncommutativity(Ps)
+
+    assert na_group > na_proj, "group case should be the MORE non-abelian one"
+    assert commutant_dim(As) > 1, "compact-group algebra must stay reducible"
+    assert commutant_dim(Ps) == 1, "three center-projections must be irreducible"

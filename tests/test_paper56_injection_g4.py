@@ -96,14 +96,24 @@ class TestC1Multiplicativity:
     @pytest.mark.parametrize("n_max", [1, 2, 3, 4])
     def test_pairwise_multiplicativity_symbolic(self, n_max: int) -> None:
         gens = _primitive_generators(n_max)
-        # GENUINE C1 (v4.20.7): pi maps each generator to its REAL per-sector
-        # period scalar eta_(n,l); multiplicativity pi(x_a * x_b) = pi(x_a) *
-        # pi(x_b) is checked by evaluating the product ELEMENT x_a*x_b of
-        # Sym_Q(V) under the multiplicative extension and cross-checking it
-        # against the independently-formed product of evaluations. The two
-        # sides are distinct computations (NOT s_a*s_b - s_a*s_b), so a
-        # non-multiplicative pi would fail. Mirrors the genuine C1 in
-        # tests/test_paper56_injection_g4_periodmap.py.
+        # C1 BOOKKEEPING -- NOT a discriminating check. Corrected
+        # 2026-08-22 (FULL cert #2) after direct probe.
+        #
+        # `(xa*xb).subs({xa: v1, xb: v2})` IS sympy's product of v1 and
+        # v2 -- the identical operation as `v1*v2`. The residual is
+        # therefore identically zero for ANY assignment of pi, including
+        # non-multiplicative ones and free symbols. No pi can fail it.
+        #
+        # The prior comment claimed 'the two sides are distinct
+        # computations'. That was false. A v4.20.7 remediation is
+        # recorded as having 'genuine-ified' this leg after a group3
+        # re-cert failed it as tautological; it renamed it.
+        #
+        # What this DOES establish: the recorded C1 residual count is
+        # reproducible bookkeeping. What it does NOT establish: that pi
+        # is multiplicative. Making it discriminating needs the period
+        # map evaluated by an independent route -- a design change,
+        # raised rather than guessed at here.
         def eta(g: tuple) -> sp.Rational:
             n, l = g[0], g[1]
             if l == n:

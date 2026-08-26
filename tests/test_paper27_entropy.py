@@ -231,62 +231,81 @@ def _ep2b_nmax2():
     return build_decomposed_ho_hamiltonians(N_max=2, hw=10.0)
 
 
-def test_paper27_ep2b_ho_kinetic_interaction_commute():
-    """[H_HO, V_NN] is at the floating-point noise floor.
+def test_paper27_ep2b_ho_kinetic_interaction_does_not_commute():
+    """[H_HO, V_NN] is O(1) -- the claimed commutativity is RETRACTED.
 
-    Total-HO-quanta conservation: any central two-body interaction on
-    the HO basis commutes with the one-body HO Hamiltonian because the
-    Moshinsky–Talmi transformation makes N_tot = N_rel + N_CM a good
-    quantum number of V.
+    Was test_paper27_ep2b_ho_kinetic_interaction_commute, asserting
+    rel_norm < 1e-12 on the mechanism that the Moshinsky-Talmi
+    transformation makes N_tot = N_rel + N_CM a good quantum number of
+    any central V. That is false: the BRACKET conserves N_tot, the
+    potential MATRIX ELEMENT does not (a central V(r_rel) couples
+    different relative-n). The published ~1e-16 came from an
+    undocumented `if N_bra != N_ket: return 0.0` guard in
+    geovac/nuclear/moshinsky.py, removed 2026-08-22.
+
+    Paper 27 sec:pred1 (RETRACTED); Paper 24 sec:entanglement-rigidity.
     """
     data = _ep2b_nmax2()
     H_kin = data['H_h1_diag'] + data['H_h1_offdiag']
     H_vee = data['H_vee_full']
     C = H_kin @ H_vee - H_vee @ H_kin
     rel_norm = np.linalg.norm(C) / np.linalg.norm(H_kin)
-    # Floor is ~1e-15; give generous headroom.
-    assert rel_norm < 1e-12, \
-        f'[H_HO, V_NN] / ||H_HO|| = {rel_norm:.3e} exceeds noise floor'
+    # Corrected Paper 27 tab:ep2b: 0.74 / 0.63 / 0.67 at N_max = 2 / 3 / 4.
+    assert 0.3 < rel_norm < 1.2, \
+        f'[H_HO, V_NN] / ||H_HO|| = {rel_norm:.4f} outside corrected band'
 
 
-def test_paper27_ep2b_ho_gs_is_single_determinant():
-    """S_HO = 0 and the GS is pure (0s)^2 at N_max ∈ {2, 3}."""
+def test_paper27_ep2b_ho_gs_is_not_a_single_determinant():
+    """S_HO is NONZERO and the GS is not pure (0s)^2 -- RETRACTED claim.
+
+    Was test_paper27_ep2b_ho_gs_is_single_determinant. Pins the
+    corrected Paper 27 tab:ep2b row-by-row: the entropy is a few
+    hundredths of a nat and GROWS with basis size, the leading natural
+    occupation is below 2, and E_full DECREASES with N_max (the old
+    "basis-independent 22.185 at both N_max" was the guard's signature,
+    not a projection property).
+    """
     from geovac.nuclear.ho_two_fermion import build_decomposed_ho_hamiltonians
     from debug.archive.misc.entanglement_geometry import (
         build_1rdm_from_singlet_ci,
         compute_entanglement_measures,
     )
-    # N_max=2 from the cached call; N_max=3 built fresh.
+    # Corrected Paper 27 tab:ep2b (E_full MeV, S_full nats, occ0).
+    expected = {2: (21.6538, 0.0671, 1.9800),
+                3: (21.6279, 0.0716, 1.9791)}
+
+    energies, entropies = [], []
     for N_max in (2, 3):
         data = (_ep2b_nmax2() if N_max == 2
                 else build_decomposed_ho_hamiltonians(N_max=3, hw=10.0))
-        H_full = data['H_full']
-        configs = data['configs']
-        n_spatial = data['n_spatial']
-        eigs, vecs = np.linalg.eigh(H_full)
-        ci = vecs[:, 0]
-        rho = build_1rdm_from_singlet_ci(ci, configs, n_spatial)
+        eigs, vecs = np.linalg.eigh(data['H_full'])
+        rho = build_1rdm_from_singlet_ci(
+            vecs[:, 0], data['configs'], data['n_spatial'])
         ent = compute_entanglement_measures(rho)
         occ = ent['occupation_numbers']
-        # Paper 27 Table EP-2b: top-4 occupations are (2, 0, 0, 0).
-        assert occ[0] == pytest.approx(2.0, abs=1e-10), \
-            f'top occupation = {occ[0]} at N_max={N_max}'
-        for k in (1, 2, 3):
-            assert abs(occ[k]) < 1e-10, \
-                f'occupation {k} = {occ[k]:.3e} at N_max={N_max}'
-        # von Neumann entropy identically zero (below log(1+1e-10)).
-        assert ent['von_neumann_entropy'] < 1e-10, \
-            f'S_HO = {ent["von_neumann_entropy"]:.3e} at N_max={N_max}'
-        # Ground-state energy is 3 hw + V_00,00: a single Slater
-        # determinant in the N_tot=0 sector.  Must be the same
-        # at N_max=2 and N_max=3 (basis-independent projection).
-        # 2026-06-04: expected value updated 14.898 MeV → 22.185 MeV after
-        # v3.38.0 Minnesota V_S/V_T sign/spin-projector fix (CLAUDE.md §2
-        # tensor-product spectral action sprint). The "basis-independent
-        # projection" property still holds — both N_max=2 and N_max=3
-        # produce the same energy (post-fix value).
-        assert eigs[0] == pytest.approx(22.185, abs=5e-2), \
-            f'GS energy drift at N_max={N_max}: {eigs[0]:.4f} MeV'
+        S = ent['von_neumann_entropy']
+
+        e_ref, s_ref, o_ref = expected[N_max]
+        assert eigs[0] == pytest.approx(e_ref, abs=5e-3), \
+            f'E_full = {eigs[0]:.4f} MeV (expected {e_ref}) at N_max={N_max}'
+        assert S == pytest.approx(s_ref, abs=2e-3), \
+            f'S_full = {S:.4f} (expected {s_ref}) at N_max={N_max}'
+        assert occ[0] == pytest.approx(o_ref, abs=2e-3), \
+            f'occ0 = {occ[0]:.4f} (expected {o_ref}) at N_max={N_max}'
+        # The state has genuine correlation: the next occupations are
+        # nonzero, which the retracted claim denied.
+        assert occ[1] > 1e-4, \
+            f'occ1 = {occ[1]:.3e} should be nonzero at N_max={N_max}'
+
+        energies.append(eigs[0])
+        entropies.append(S)
+
+    # Variational: enlarging the basis LOWERS the energy.
+    assert energies[1] < energies[0], \
+        f'E_full must decrease with basis: {energies}'
+    # And raises the entropy -- the opposite of "locked to one block".
+    assert entropies[1] > entropies[0], \
+        f'S_full must increase with basis: {entropies}'
 
 
 # ---------------------------------------------------------------------------

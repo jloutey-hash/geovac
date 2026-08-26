@@ -308,7 +308,9 @@ def _wigner3j(j1: int, j2: int, j3: int, m1: int, m2: int, m3: int) -> float:
         )
         s += (-1) ** t / denom
 
-    phase = (-1) ** (j1 - j2 - m3)
+    phase = (-1) ** ((j1 - j2 - m3) % 2)   # % 2 keeps the phase an int (a negative
+    # integer exponent makes Python return a float +-1.0, which silently poisons
+    # exact-Fraction accumulators downstream)
     return phase * sqrt(prefactor_sq) * s
 
 
@@ -319,7 +321,7 @@ def _gaunt_ck(l1: int, m1: int, l2: int, m2: int, k: int) -> float:
     where q = m1 - m2.
     """
     q = m1 - m2
-    return ((-1) ** m1
+    return ((-1) ** (m1 % 2)
             * np.sqrt((2 * l1 + 1) * (2 * l2 + 1))
             * _wigner3j(l1, k, l2, 0, 0, 0)
             * _wigner3j(l1, k, l2, -m1, q, m2))
