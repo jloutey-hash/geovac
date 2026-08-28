@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [5.1.7] - 2026-08-28
+
+**The deciding resource measurement: the e-e split's 1-norm lever is real, exact, and decays with basis size.** Closes the one unmeasured lead left by the minimal-presentation arc, with a calibrated verdict rather than a headline. Canonical memo `debug/sprint_minimal_presentation_memo.md` section 11.
+
+### Measured
+- **The exact one-body fold IS a 1-norm lever.** Because `g_sep` is exactly a one-body operator on the N-electron space (bit-exact, v5.1.5), folding it into `h1` shrinks the two-body block with no approximation: JW LCU 1-norm drops **15-17%** at **bit-identical** energy (dE ~1e-15) across ns=3..6.
+- **It beats plain density fitting at matched accuracy.** Against the corpus's own comparison standard (eigen-truncation of `g` itself at the same rank): ns=4 rank 4 gives lambda 50.0 vs 60.1 at 0.019 vs 0.009 mHa; ns=6 rank 4 gives 171.7 vs 197.7 at 0.19 vs 0.16 mHa -- **13-17% lower lambda at matched accuracy**, clearing the pre-registered "beyond DF" bar.
+- **THE HEADLINE CAVEAT: the advantage degrades monotonically with basis size** -- `lambda_split/lambda_full` = 0.83, 0.85, 0.89, 0.92, **0.94** at ns = 4, 6, 8, 10, 12, heading to unity (extrapolating, gone near ns ~ 20-30). **A constant factor that shrinks, not a scaling change**, consistent with the corpus's standing demotion of constant factors (cf. v4.59.0 demoting the 2.7x raw-vs-raw Pauli claim).
+
+### Calibrated verdict (PI asked directly: breakthrough or minor aha?)
+**Minor aha with a measured resource footnote.** For ACCURACY: nothing, provably -- the split is an exact rewriting, and the wall remains basis completeness (59% of Li's error is the shared exponent, v5.1.3). For QUANTUM RESOURCES: an exact ~15% constant-factor saving in the small-basis regime only. **Neither CHEM-ACCURACY wall is touched.** That GeoVac's honest lane (small-basis atoms) is where this helps is a coincidence of scope, not evidence of a powerful lever -- scaled up, this is the first advantage that would disappear. Also recorded: the compressibility itself is classical (Beebe-Linderberg 1977), and the 2n-1 rank law is plausibly a re-derivation of the structure that gives shared-k Sturmians their closed forms (literature check not done).
+
+### Two wrong priors of mine, corrected by measuring (recorded -- the reasons are reusable)
+- Predicted NO win from `||W||_F = 1.08 ||g||_F`. **Wrong norm**: lambda is a 1-norm, where W is initially smaller (0.783 at ns=3).
+- Then assumed the raw tensor 1-norm tracks lambda. Also wrong: at ns=12 `sum|W|/sum|g| = 1.112` (W is bigger) yet lambda_B still wins, because lambda counts antisymmetrized JW/Pauli coefficients, not raw entries -- B's two-body share falls to 0.61x while the raw ratio exceeds 1.
+
+### Added
+- `tests/test_paper34_ee_split.py::test_1norm_fold_and_degradation` (13 legs in the file) -- pins the exactness of the fold, the win at ns=4, AND `ratio(8) > ratio(4)`, so **the degradation is a regression alongside the win** and the claim cannot drift into an unqualified "15% lever".
+- Paper 34 `rem:ee_partial_split` resource clause: the measurement, the DF comparison, the degrading ratios, and an explicit "changes no exponent and is not claimed as a scaling result".
+
+### Scope
+One paper edited (P34, one clause; compounds its standing re-review-OWED -- now five edits since its last certification). No production `geovac/` code touched; lambda computed via the tracked `transcorrelated_sturmian.lcu_lambda`. `docs/claim_test_matrix.md` +1 row. 36 tests green incl. the 18 topological proofs. Health gate: WARN CLAUDE.md 208 KB + debug/ 1366 files (standing debts, third consecutive checkpoint).
+
+---
+
 ## [5.1.6] - 2026-08-28
 
 **The l>0 payoff curve: the e-e split's rank compression SURVIVES angular coupling.** Closes the second of the two follow-ons opened by rem:ee_partial_split (the first, the eigenvector closed-form question, closed negative in v5.1.5). Canonical memo `debug/sprint_minimal_presentation_memo.md` section 10.

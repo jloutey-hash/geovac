@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.1.6 (August 28, 2026)
+**Version:** v5.1.7 (August 28, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Authoritative source rule:** The papers in `papers/group1_operator_algebras/`, `papers/group2_quantum_chemistry/`, `papers/group3_foundations/`, `papers/group4_quantum_computing/`, `papers/group5_qed_gauge/`, `papers/group6_precision_observations/`, and `papers/synthesis/` are the authoritative source for all physics. If any documentation (README, CHANGELOG, code comments) conflicts with the papers, the papers win. Flag the conflict to the user rather than silently resolving it. (Papers were reorganized from the previous `core/`, `methods/`, `applications/`, `synthesis/`, `standalone/`, `observations/`, `conjectures/` layout into six audience-targeted groups on 2026-05-22.)
@@ -138,6 +138,7 @@ These five targets together exercise §III.17, §III.18, §III.19, spinor lift (
 
 > **⚠ ORIENTATION — read before answering anything about polyatomics, accuracy, or which basis GeoVac uses.** Two facts a fresh session otherwise re-derives at the PI as a corrective lecture (PI direction 2026-08-14, after three derailed sessions): **(1) exact ≠ accurate.** The closed-form ERI arc (v4.77–79) bought *decidability*, not accuracy — the whole integral-exactness axis is worth ~0.003 Ha on H₂ and then flatlines, while basis size is worth 0.050 Ha and rising; v4.73.0 localized the chemistry defect to **100% max_n**, bit-invariant to angular and quadrature refinement. **(2) three bases are in play** — theory = Coulomb-Sturmian (shared p₀), `composed_qubit`/`two_center_eri` = **hydrogenic** (a = Z/n), `noci_engine` = STO shapes fitted by Gaussians (an *evaluator*, not a basis). Full map + the three-centre wall + "Paper 58 is not Avery and not Sturmian": `memory/polyatomic_state_of_play.md`.
 
+- **Sprint EE-SPLIT-1NORM (2026-08-28, v5.1.7):** The split's one-body fold cuts the LCU 1-norm 15-17% exactly and beats DF, but DEGRADES with basis (0.83->0.94, ns=4..12): constant factor, not scaling. See debug/sprint_minimal_presentation_memo.md.
 - **Sprint EE-SPLIT-L>0 (2026-08-28, v5.1.6):** Gaunt-coupled s+p FCI: the e-e split's W-rank payoff survives angular coupling -- rank 3-4 to <1 mHa, flat as radial pairs grow 10->28. See debug/sprint_minimal_presentation_memo.md.
 - **Sprint MINIMAL-PRESENTATION (2026-08-28, v5.1.5):** Two-primitive remark + exact e-e split (rank-2 head, all correlation in W); 2n-1 rank law; eigen closed forms NEGATIVE (irreducible, pinned). See debug/sprint_minimal_presentation_memo.md.
 - **Tooling v5.1.4 (2026-08-27):** /release renamed /checkpoint (push opt-in, never main); accessibility-plan freeze killed; correspondence scrub; tags v5.1.1/v5.1.3 backfilled, v5.1.2 absent by design. See CHANGELOG.

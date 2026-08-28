@@ -412,3 +412,30 @@ def test_sp_split_exact_and_rank_payoff():
         RLt[L] = (V[:, o] * lam[o]) @ V[:, o].T
     gwt, _ = asm(RLt)
     assert abs(_fci_sp(S, h1, gs - gwt) - E_full) < 1e-3
+
+
+def test_1norm_fold_and_degradation():
+    """The exact one-body fold lowers the JW LCU 1-norm at bit-identical energy --
+    AND the advantage degrades with basis size.  Both pinned: the degradation is
+    part of the claim, so it cannot drift into an unqualified '15% lever'."""
+    ratios = {}
+    for ns in (4, 8):
+        S, h1, Vr, g, gs, gw = _build(ns, 2.0, Z=2.0, Ng=500)
+        X = TC.lowdin(S)
+        nso = 2 * ns
+        dets, didx = TC.make_dets(nso, 2)
+
+        def run(hx, gx):
+            hso = TC.h_spin(TC.transform_1(hx, X), nso)
+            asym = TC.asym_from_phys(TC.transform_2(gx, X), nso)
+            E = float(eigh(TC.build_H(dets, didx, hso, asym, nso), eigvals_only=True)[0])
+            return TC.lcu_lambda(hso, asym, nso)["lam"], E
+
+        lamA, EA = run(h1, g)
+        lamB, EB = run(h1 + 0.5 * Vr, -gw)          # N = 2  =>  (N-1)/2 = 1/2
+        assert abs(EA - EB) < 1e-9, "the fold must be exact"
+        ratios[ns] = lamB / lamA
+        assert ratios[ns] < 1.0, f"ns={ns}: no 1-norm win ({ratios[ns]:.3f})"
+    # the win exists at small basis and is WORSE at larger basis (monotone toward 1)
+    assert ratios[4] < 0.90, f"small-basis win too weak: {ratios[4]:.3f}"
+    assert ratios[8] > ratios[4], "degradation with basis size not reproduced"

@@ -370,3 +370,65 @@ safe from rank >= 2-3. Any practical use of this compression must respect that f
 `tests/test_paper34_ee_split.py` +2 legs (12 total, self-contained s+p system incl. the
 G1/G2 reproduction and symmetry checks that caught the transpose). P34 compiles three-pass
 clean, zero undefined refs, zero control characters. 35 tests green incl. 18 topo.
+
+
+---
+
+## 11. The deciding measurement: does the split lower the LCU 1-norm? (PI-directed)
+
+The arc's one unmeasured resource lead, run to a verdict. Drivers
+`debug/ee_split_1norm.py` (A/B/C/D with a pre-registered decision rule) and
+`debug/ee_split_1norm_scaling.py` (the basis-growth caveat); data in `debug/data/`.
+
+**Why it was worth measuring.** The split has one property generic low-rank factorization
+does not: `g_sep` is EXACTLY a one-body operator on the N-electron space (bit-exact,
+section 8), so folding it into `h1` moves weight from the expensive two-body block to the
+cheap one-body block BY CONSTRUCTION, not by approximation.
+
+**Result 1 -- the exact fold IS a real lever (15-17%), energy bit-identical.**
+
+| ns | lam_A (h1, g) | lam_B (h_eff, W) | B/A | dE |
+|--:|--:|--:|--:|--:|
+| 3 | 24.231 | 20.606 | 0.850 | 0.0e+00 |
+| 4 | 60.644 | 50.200 | 0.828 | 1.8e-15 |
+| 5 | 119.534 | 99.306 | 0.831 | 5.3e-15 |
+| 6 | 205.838 | 175.392 | 0.852 | 1.8e-15 |
+
+**Result 2 -- it beats plain density fitting at matched accuracy** (control D = eigen
+truncation of `g` itself at the same rank, the corpus's own 2026-08-21 comparison
+standard): at ns=4 rank 4, lam 50.0 vs 60.1 with errors 0.019 vs 0.009 mHa; at ns=6
+rank 4, 171.7 vs 197.7 with 0.19 vs 0.16 mHa -- **~13-17% lower lambda at matched
+accuracy**. Per the pre-registered rule this clears "adds something beyond DF".
+
+**Result 3 (THE CAVEAT, and it is the headline) -- the advantage DEGRADES with basis size.**
+
+| ns | 3 | 4 | 5 | 6 | 8 | 10 | 12 |
+|:--|--:|--:|--:|--:|--:|--:|--:|
+| lam_B/lam_A | 0.850 | 0.828 | 0.831 | 0.852 | 0.890 | 0.915 | **0.937** |
+| sum abs W / sum abs g | 0.783 | 0.861 | 0.917 | 0.960 | 1.025 | 1.073 | 1.112 |
+
+Monotone from ns=4 onward and heading to 1; linear extrapolation puts the advantage at
+zero near ns ~ 20-30. **It is a constant factor that shrinks, not a scaling change.**
+
+**Two wrong priors of mine, both corrected by measuring (recorded, they are instructive):**
+1. I predicted NO win from `||W||_F = 1.08 ||g||_F`. Wrong norm -- **lambda is a 1-norm**,
+   and in the 1-norm W is initially SMALLER (0.783 at ns=3).
+2. I then assumed the raw tensor 1-norm would track lambda. Also wrong: at ns=12,
+   sum|W|/sum|g| = 1.112 (W is bigger) yet lam_B still beats lam_A, because lambda counts
+   antisymmetrized JW/Pauli coefficients, not raw entries -- B's two-body share falls to
+   0.61x even as the raw ratio exceeds 1.
+
+**Calibrated verdict (the answer to "breakthrough or minor aha?").** Minor aha with a
+measured resource footnote. For ACCURACY: nothing, provably (exact rewriting; the wall
+remains basis completeness, 59% of Li's error being the shared exponent, v5.1.3). For
+QUANTUM RESOURCES: an exact 15-17% constant-factor saving in the small-basis regime,
+decaying to nothing -- real, beats DF, changes no exponent. Consistent with the corpus's
+standing position that scaling is the product and constant factors are demoted (cf. the
+v4.59.0 demotion of the 2.7x raw-vs-raw Pauli claim). Touches NEITHER CHEM-ACCURACY wall.
+That GeoVac's honest lane (small-basis atoms) is where this helps is a coincidence of
+scope, not evidence of a powerful lever: if the framework were scaled up, this is the
+first advantage that would disappear.
+
+**Scope of the C-vs-D comparison:** run only at ns=4 and 6, where the effect is near its
+maximum. Since the whole advantage degrades, the beyond-DF margin should be expected to
+degrade too; not measured at larger ns.
