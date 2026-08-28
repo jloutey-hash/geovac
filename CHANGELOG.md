@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [5.1.5] - 2026-08-28
+
+**The minimal-presentation arc: two primitives, the exact e-e split, and the coalescence object characterized (PI-driven).** Started from the PI's "what are the simplest mathematical representations?" and ran three sprints deep. Canonical memo `debug/sprint_minimal_presentation_memo.md` (9 sections).
+
+### Added
+- **Paper 34 `rem:minimal_presentation`** — the two-primitive packaging of the framework (rational skeleton + projection family), with the four-instance operator-collapse table (chemistry Dirac = h1; Paper 60 pure-number secular; F = XGX^-1; **new: atomic h1 = k^2(I - S/2) - Zk diag(1/n)**, verified vs independent quadrature at 6e-10) and the geometry-dynamics split as framing (PI direction): geometric content in (labels, metric), dynamics only through the projection scale k = p0, p0^2 = -2E. Minimality labeled an Observation with stated falsifier. Backing `tests/test_paper34_minimal_presentation.py` (5 legs incl. a discriminating teeth check and a control-validated ERI non-reducibility leg).
+- **Paper 34 `rem:ee_partial_split`** — the e-e tensor splits EXACTLY (min/max identity per multipole kernel): rank-2 one-body x one-body head (pure labels x metric at L=0; A = <r^L> bandwidth L+1; B dense at L>=1) minus a remainder W >= 0 carrying ALL the coalescence kink. Verified: the head supports NO correlation (bit-exact = dressed one-body h1 + (N-1)/2 V, N=2,3); g(k) = k g(1) total scale-out with g(1) rational ((11|11) = 5k/8 exact); W is 3/8 of the (1s,1s) repulsion exactly yet compressible at basis-independent rank (1 mHa @ rank 3-4, 0.01 mHa @ rank 5-7 across ns=3-6), improving with L. Lineage disclaimer in-remark: ERI low-rank is classical (Beebe-Linderberg 1977 Cholesky; citation verified vs primary records incl. DOI). Backing `tests/test_paper34_ee_split.py` (10 legs).
+- **The 2n-1 exact-rank law** (found chasing a surprise extra zero mode): s-wave pair densities span EXACTLY 2n-1 dimensions, so every radial-kernel two-electron matricization has rank <= 2n-1 — LINEAR in basis size, kernel-independent (g/W/kinked control saturate the ceiling, ns=2..6; smooth kernels may sit below; separable head stays 2), with exact integer dependencies (-rho11 + 2 rho12 - 3 rho13 + 2 rho22 = 0 at n=3, symbolic residual zero) and total nullity (n-1)^2. The measured flat accuracy-rank ~4-8 sits under this exact ceiling.
+
+### Closed (the follow-on question, decided negative with the negative pinned)
+- **W's eigenvectors have NO closed skeleton forms at the matrix level.** W(1) is exactly rational (W[1s^2,1s^2] = 3/8) but the active characteristic polynomials are IRREDUCIBLE over Q (cubic at ns=2 — 131072 l^3 - 50688 l^2 - 25200 l - 675, pinned as a regression test — quintic at ns=3), and the Lowdin-compressed spectrum GROWS with ns (1.03 -> 7.81, ns=2..8: unbounded operator, finite eigenvectors converge to nothing). **The surviving skeleton form is differential:** in reciprocal radius u = 1/r, Coulomb = min(u1,u2) = the Green's function of -d^2/du^2 (Dirichlet at 0; equivalently the manifestly-PSD resolution 1/r_> = INT dR/R^2 1[r1<R]1[r2<R] — the structural root of Coulomb positivity), and W's kernel |u1-u2|/2 gives eigenfunctions of any weighted compression solving lam f'' = w f (grid-verified 1e-5). The closed form of the coalescence object is an ODE, not an eigendecomposition.
+
+### Corrections and process notes (recorded so they are not re-made)
+- A pre-existing dangling cross-paper `ef` (P34 -> Paper 19 section label, unresolvable by construction) found and converted to prose; the paper now compiles with ZERO undefined references.
+- The heredoc-backslash gremlin produced a literal U+0008 in the .tex once — caught by the halt-on-error compile gate, repaired, remark verified intact line-by-line. Paper-editing scripts now go through files, not heredocs.
+- Two test-design fixes: the L>=1 split identity must be checked at the INTEGRAL level (kernel terms reach ~1e19 near the r = 1e-9 grid floor; pointwise float cancellation impossible; the r^2 measure makes the region irrelevant); the rank law is a CEILING (a smooth control kernel correctly sits below it — assertion fixed to ceiling semantics).
+- The follow-up driver's dependency count was inflated by a truncated coefficient basis (r^0..r^4 for functions on the r^2 floor); fixed to r^2..r^6, count = 1 as the dimension argument predicts; the printed relation had been verified genuine by full symbolic residual regardless.
+
+### Scope
+One paper edited (P34, two remarks + extension; compounds its standing re-review-OWED). Two new test files (15 legs total; 33 green incl. the 18 topological proofs). No production geovac/ code touched. `docs/claim_test_matrix.md` +3 rows. Health gate: WARN CLAUDE.md 207 KB + debug/ 1362 files (unchanged debts, surfaced per protocol).
+
+---
+
 ## [5.1.4] - 2026-08-27
 
 **Tooling + record hygiene (PI-directed).** Three PI decisions executed: the release tooling restructured, the June accessibility-plan freeze killed, and private-correspondence references scrubbed from the repo.
