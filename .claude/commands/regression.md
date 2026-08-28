@@ -52,7 +52,7 @@ If the file is missing, do NOT silently fall back to a broader scope — surface
 
 **What this does NOT do.**
 
-- Does not gate any other command. `/release` continues to ship even if `/regression` would have shown failures — by PI policy, paper-progress sprints should not be blocked by chemistry-test rot. `/regression` is a cheap voluntary check, not enforcement.
+- Does not gate any other command. `/checkpoint` continues to ship even if `/regression` would have shown failures — by PI policy, paper-progress sprints should not be blocked by chemistry-test rot. `/regression` is a cheap voluntary check, not enforcement.
 - Does not auto-archive failing tests. If `/regression` surfaces a regression, the PM triages per CLAUDE.md §14 (fix-in-place / redirect / archive). The skill reports the failure; the response is human-decided.
 - Does not refresh the durations baseline automatically. Stale-baseline drift is a real risk; the quarterly refresh cadence is the protection.
 

@@ -1,37 +1,22 @@
 ---
-description: Version bump + commit + tag + push (mechanical release wrapper)
+description: DEPRECATED — renamed to /checkpoint. Use /checkpoint (or /checkpoint push).
 ---
 
-Run the release protocol. Stop and ask if any precondition is unmet.
+**This command was renamed to `/checkpoint` on 2026-08-26. Run `/checkpoint` instead.**
 
-**Preconditions (check before any git action).**
+Do not follow this file's former protocol. Two things were wrong with it:
 
-1. `git status` is meaningful — what's staged, what's modified, what's untracked. Quote it back to the PI.
-2. CLAUDE.md §1 version string has been bumped to the new version.
-3. CLAUDE.md §2 has at least one one-liner entry for the change being released (per `/sprint-close`).
-4. CHANGELOG.md has an entry under the new version heading.
-5. If papers were edited:\ they compile three-pass clean. Confirm.
-6. If production code was edited:\ relevant tests pass (`pytest tests/<paths>`). Confirm.
-7. Hard-prohibition check (§13.5):\ nothing in the staged diff violates the prohibitions.
-8. Repo health gate:\ run `python debug/repo_health_check.py`. On WARN (CLAUDE.md > 150 KB, debug/ top-level > 600 files, MEMORY.md > 24 KB), report the warning to the PI alongside the release — it doesn't block, but it must be surfaced so bloat never silently regrows.
+1. **The name was a misnomer.** It never created a GitHub Release. Releases are made manually
+   on GitHub and mint a Zenodo DOI via the webhook — a PI action. This command only ever did
+   bump + commit + tag + push.
+2. **It bundled push into the same atomic step**, so any sprint the PI didn't want pushed got
+   skipped entirely — and lost its tag too. v5.1.1, v5.1.2 and v5.1.3 were all committed with
+   no tag for exactly that reason.
+3. **Its push step targeted the wrong ref.** It said `git push origin main`, which contradicts
+   the standing policy that merge-to-main is PI-only (CLAUDE.md §2), and would have pushed a
+   stale local `main` from a working branch.
 
-**Version-bump policy.**
-- Patch (x.y.Z) for documentation / paper edits / dead-end recordings.
-- Minor (x.Y.0) for new features, completed diagnostic arcs, new paper additions, operational policy changes.
-- Major (X.0.0) for architectural changes.
+`/checkpoint` fixes all three: push is opt-in and off by default, it pushes the *current
+branch* and never `main`, and it refuses to tag without a successful commit on a clean tree.
 
-A diagnostic arc that tests 10 hypotheses and finds 9 negative results is **one** minor version, not 10 patches (per §9 Changelog Protocol).
-
-**Release steps.**
-
-1. Stage the right files. **Prefer explicit `git add` of named files.** Avoid `git add -A` or `git add .` — they pick up secrets, large debug data, untracked stray files.
-2. `git commit` with a HEREDOC message following the project commit convention (multi-line, leading title in `vX.Y.Z: short description` form, body with Added / Changed / Closed sections, trailing `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>` (updated v4.0.0; keep in sync with the active model)).
-3. `git tag -a vX.Y.Z -m "vX.Y.Z: short description"`.
-4. `git push origin main` then `git push origin vX.Y.Z`.
-5. Quote the commit SHA and tag back to the PI as confirmation.
-
-**Hard prohibitions.**
-- NEVER `git push --force` (especially to main).
-- NEVER skip hooks (`--no-verify`).
-- NEVER `git reset --hard` without explicit PI direction.
-- NEVER stage `.env`, `credentials.json`, secret files. If something looks sensitive, flag and stop.
+If the PI typed `/release`, treat it as `/checkpoint` (no push) and say so.

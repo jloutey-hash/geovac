@@ -1,6 +1,6 @@
 # GeoVac Close-Out & Distribution Plan
 
-**Date:** 2026-07-09 · **Status:** §A dispositions **PI-APPROVED** (2026-07-09; item 1 pro-finite = FREEZE). §B executed same day: 59 per-paper DOIs published, paper pages live-on-push, metadata + pip-install fixed. §A item 6 refs sweep executed (443→0 by resurrection). Remaining: PI publishes the GitHub Release at the v4.76.0 tag; B6 re-test after ~2–6 weeks.
+**Date:** 2026-07-09 · **Status:** §A dispositions **PI-APPROVED** (2026-07-09; item 1 pro-finite = FREEZE). §B executed same day: 59 per-paper DOIs published, paper pages live-on-push, metadata + pip-install fixed. §A item 6 refs sweep executed (443→0 by resurrection). **[STATUS SUPERSEDED 2026-08-26.** The close-out freeze was lifted 2026-08-13 (PI direction, CLAUDE.md §2) and development resumed; `main` has since advanced 58 commits past v4.76.0. The v4.76.0 GitHub Release was never published and is no longer the live plan — Releases remain manual and PI-only. This document is retained as the record of the 2026-07-09 close-out, not as an active plan.**]**
 
 **Context.** PI judgment (2026-07-09): the project is largely done — the equivalence program succeeded, the walls are named, the whole-corpus QA sweep is complete. Two workstreams follow: (A) give every open item an explicit disposition instead of a scattered implicit backlog, and (B) fix the distribution problem. The PI's acceptance criterion for (B): *the corpus should be readily discoverable by an AI searching for related work.*
 

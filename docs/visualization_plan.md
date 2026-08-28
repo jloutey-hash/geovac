@@ -194,7 +194,7 @@ tests/test_viz_export.py
   `geovac-viz` repo later, following the `geovac-hamiltonians` precedent. PI decision at
   Phase 1 close.
 - Versioning: site footer shows `geovac_version` from the data files. Site deploys are not
-  project releases; they do not bump the package version. A `/release` that changes exported
+  project releases; they do not bump the package version. A `/checkpoint` that changes exported
   quantities triggers data regeneration (the §3 CI check enforces this).
 
 ---

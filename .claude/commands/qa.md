@@ -6,7 +6,7 @@ description: The /qa gate — adversarial, calibration-tested QA review of a tar
 
 This is a deliberate, PI-timed certification gate, **not** a routine pass.
 
-> **PI-INVOKED ONLY.** The PM must never self-trigger this, run it proactively, or nudge toward it each sprint. It fires only when the PI types `/qa`. Certifying a branch "done" is a timing judgment that belongs to the PI; auto-firing would defeat that. (It is a genuine-trigger command like `/release` and `/sprint-close`, with **no** corresponding memory rule — CLAUDE.md §13.9a.)
+> **PI-INVOKED ONLY.** The PM must never self-trigger this, run it proactively, or nudge toward it each sprint. It fires only when the PI types `/qa`. Certifying a branch "done" is a timing judgment that belongs to the PI; auto-firing would defeat that. (It is a genuine-trigger command like `/checkpoint` and `/sprint-close`, with **no** corresponding memory rule — CLAUDE.md §13.9a.)
 
 **Why this exists.** A reviewer tasked with "find problems" always finds problems, so a "clean" can never be *earned* and a "dirty" can never be *trusted* — it is an activity, not a test. This gate converts the fault-hunt into a test with discriminating power, using four mechanisms (pre-registered criteria, materiality grading, per-run calibration controls, convergence) and returns a **three-way verdict** that distinguishes *"target not done"* from *"reviewer not trustworthy."*
 

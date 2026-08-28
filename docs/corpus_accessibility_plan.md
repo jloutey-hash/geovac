@@ -1,3 +1,16 @@
+> # SUPERSEDED — 2026-08-26 (PI direction)
+>
+> **This plan is dead. Do not treat any part of it as a live constraint.**
+>
+> Phases 1-3 completed. Phase 4 (outreach) was executed. Phase 5's rule -- *no new
+> research arcs while Phases 1-4 run* -- is **formally lifted**: it had not been applied
+> since roughly v4.82 (2026-08-16), through ~40 research sprints up to v5.1.3, and the PI
+> has now retired it explicitly. New research arcs are unrestricted.
+>
+> Retained as the record of the June 2026 accessibility arc, not as a plan.
+
+---
+
 # Corpus Accessibility & External Validation Plan
 
 **Created:** 2026-06-09. **Approved:** 2026-06-09 (PI, all four gates; Option C on the Phase-1 finding).
@@ -87,6 +100,8 @@ Email shape: ≤ 5 sentences + N1 attached + one paper PDF. The ask: "Is Theorem
 ---
 
 ## 5. Phase 5 — Freeze discipline
+
+> **[LIFTED 2026-08-26 by PI direction — see the SUPERSEDED banner at the top.]** This research freeze has not been in force since roughly v4.82 (2026-08-16): ~40 research sprints have run through v5.1.3. Phase 4 (outreach) is on PI hold (the Avery email), so by the letter of the sequencing below the freeze is still "ongoing" — but it is not being applied and has not been for months. It should be either formally lifted or the whole plan marked superseded. **Do not treat this section as a live constraint without checking with the PI.**
 
 No new research arcs while Phases 1–4 run. Exceptions: gaps named by Phase 1b, requests from external repliers, and mechanical maintenance. Rationale: each additional internally-verified paper currently subtracts external credibility by growing the surface a reviewer must distrust.
 

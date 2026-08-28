@@ -6,7 +6,7 @@
 
 ## Why this run
 The LG-3 λ result was measured on GeoVac's **hydrogenic** builder. To put the headline
-"on James's basis" I rebuilt λ in the **genuine shared-k Coulomb-Sturmian** basis. Controlled
+"on the Coulomb-Sturmian basis" I rebuilt λ in the **genuine shared-k Coulomb-Sturmian** basis. Controlled
 s-sector atomic build (He, Z=2): only the radial convention is flipped —
 hydrogenic R_n0 (a=Z/n, L²-orthonormal) vs Coulomb-Sturmian S_n0 (shared scale k, L²-NON-
 orthogonal). Anchored k=Z so n=1 is identical (fair). Same code both families: L² overlap S →
@@ -40,14 +40,14 @@ in λ. The 17.9× echo is a striking (if numerically coincidental) confirmation,
   L²-orthonormal ⇒ no Löwdin penalty ⇒ the earlier **LG-3-favorable λ result HOLDS for GeoVac's
   real qubit Hamiltonians** (Paper 14 / ecosystem). This run explains *why* hydrogenic is the
   right radial encoding: not only dual-p₀, but λ-health.
-- **The genuine shared-k Coulomb-Sturmian basis — James's basis — does NOT preserve λ** under
+- **The genuine shared-k Coulomb-Sturmian basis does NOT preserve λ** under
   standard second-quantized Löwdin encoding. The cleanest angular-generation basis is the one
   whose non-orthogonality costs λ.
 
 ## Scope / what stays open (do not overclaim)
 - s-only, He, k=Z anchor, 5 shells. l>0 / other k / molecular could shift magnitudes (not the
   qualitative direction — cond(S) growth is intrinsic to the shared-k basis).
-- Measured for **second-quantized JW + Löwdin**. James's actual lever (Rung 3) is
+- Measured for **second-quantized JW + Löwdin**. The actual lever (Rung 3) is
   **first-quantized** simulation, which does not second-quantize into orthonormal spin-orbitals
   and so may not pay the Löwdin λ penalty at all. **The 2Q negative may not transfer to 1Q** —
   untested, and the precise open question for the call.

@@ -273,7 +273,7 @@ Restated because this is the way the idea could come back mis-sold
 
 ## 6. Prerequisites before Phase 1
 
-- Un-freeze the repo (`remote.origin.pushurl` is `PUSH-DISABLED--…`, plus a
+- ~~Un-freeze the repo~~ **[SUPERSEDED 2026-08-26 — the repo is NOT push-disabled. `remote.origin.pushurl` is unset; push works normally. The close-out freeze was lifted 2026-08-13 (CLAUDE.md §2). Retained for the record only.]** (`remote.origin.pushurl` was `PUSH-DISABLED--…`, plus a
   `pre-push` hook). PI decision, not technical.
 - ~~Verify Shavitt and Harris & Michels~~ — **done 2026-08-11**: Shavitt was
   misattributed and is removed; Harris & Michels is 1967. See §1.

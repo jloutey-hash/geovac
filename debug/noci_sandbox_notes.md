@@ -304,9 +304,5 @@ per-center exponents), but reload it before any basis unification idea.
    W1e localization confirmed by construction). N5/N6 remain not-run (QC-product
    steps, moot under the N3b STOP). Nothing queued as a sprint; one named deferred
    build identified 2026-08-09 (general-m two-center ERI engine — see its section
-   above; accuracy-per-qubit only, NOT a sparsity fix). Open: Avery call prep owed when
-   a date lands — N4 is the centerpiece demo. Drivers: `debug/noci_n3b_census.py`,
+   above; accuracy-per-qubit only, NOT a sparsity fix). Drivers: `debug/noci_n3b_census.py`,
    `debug/noci_md_engine.py` (+ its validation suite), `debug/noci_nah_probe.py`.
-5. Avery thread (separate but converging): availability email sent 2026-07-19; when a
-   call date lands, build the one-page call prep. Primer for the PI:
-   `debug/avery_framework_primer.md` (copied here from the temp scratchpad).

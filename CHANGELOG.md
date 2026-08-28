@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [5.1.4] - 2026-08-27
+
+**Tooling + record hygiene (PI-directed).** Three PI decisions executed: the release tooling restructured, the June accessibility-plan freeze killed, and private-correspondence references scrubbed from the repo.
+
+### Changed
+- **`/release` renamed `/checkpoint`** (`.claude/commands/checkpoint.md`; old name left as a deprecation stub). Three defects fixed: the name was a misnomer (it never created a GitHub Release — Releases are manual, mint a Zenodo DOI, PI-only, now stated as an explicit non-goal); push was bundled into the atomic step (so sprints the PI didn't want pushed lost their tags too — v5.1.1/2/3 all went untagged this way); and its push step targeted `main`, contradicting the PI-only merge policy. `/checkpoint` = bump→commit→tag→stop; `/checkpoint push` pushes the CURRENT branch, never `main`; tagging requires a clean tree + a commit in the same invocation ("a commit every time we tag", enforced structurally). Cross-references updated (qa/regression/sprint-close/CLAUDE.md §9 + §13.9b row (PI-applied) + visualization plan).
+- **Stale freeze records corrected:** `docs/neumann_general_m_build_plan.md` PUSH-DISABLED claim marked superseded (pushurl is unset; push works); `docs/project_closeout_plan.md` header stamped superseded; CLAUDE.md §2 false premise fixed (`main` is at 51f2eef, 58 commits past v4.76.0 — the PI-only merge/Release policy itself unchanged).
+- **`docs/corpus_accessibility_plan.md` marked SUPERSEDED (PI direction):** Phase 4 outreach was executed; Phase 5's no-new-research freeze — unenforced since ~v4.82 across ~40 sprints — is formally lifted. Retained as the record of the June 2026 arc.
+- **Private-correspondence scrub (PI direction):** conversational/outreach references to the Avery correspondence removed from CHANGELOG (3 loci), the I/O-ladder memos (10), noci sandbox notes (2), the census memo (1); `debug/avery_framework_primer.md` (call-prep with quoted private conversation) deleted. All published-literature Avery citations retained. Caveats flagged to the PI: git history retains the removed text; `docs/outreach/phase4_send_kit.md` (third-party personal data, non-Avery) untouched pending PI call.
+
+### Added
+- **Tags backfilled:** `v5.1.1` → f79a011, `v5.1.3` → 65b5c09 (both annotated as retroactive). **`v5.1.2` deliberately absent** — its files sat uncommitted until the 2026-08-26 cleanup, so no commit represents that tree; a note above the v5.1.2 entry records this.
+
+### Scope
+Markdown/tooling only; no papers, no production code, no physics. Health gate at checkpoint: WARN CLAUDE.md 207 KB (budget 150) + debug/ top-level 1355 files (budget 600) — compaction round + archive sweep overdue, surfaced per protocol.
+
+---
+
 ## [5.1.3] - 2026-08-26
 
 **The geminal-width transfer arc, and the constraint that was actually costing the accuracy (PI-driven question chain).** Started from a re-scoping question about the R12-CI conditioning wall, and ended by measuring that GeoVac's *shared exponent* — not its cusp treatment — carries 59% of the lithium error, and that both standing objections to lifting it fail for atoms. Canonical memo `debug/sprint_r12ci_gamma_transfer_memo.md`.
@@ -51,6 +69,12 @@ One production fix (applied on PI direction); everything else is `debug/`. No pa
 ---
 
 ## [5.1.2] - 2026-08-25
+
+> **No `v5.1.2` git tag exists, deliberately.** This sprint's files sat uncommitted until
+> 2026-08-26, when they were swept into the untracked-file cleanup commits — so no commit
+> represents the tree as it stood at v5.1.2. `v5.1.1` and `v5.1.3` were tagged retroactively
+> on 2026-08-26 because their commits do exist; this one is left absent rather than pointed
+> at a snapshot that never existed.
 
 **The configuration operator is the composed basis's overlap metric (`/aha` follow-up; one identity, two corrections, five banked kills).** An `/aha` pass run on the v5.1.0 arc produced 13 candidates; one had a falsifier cheap enough to run inside the pass, and it fired. Canonical memo `debug/sprint_config_operator_is_metric_memo.md`.
 
@@ -1102,7 +1126,7 @@ One-electron molecular only (matches the paper's SW §). Resource counts are a M
 
 ## [4.89.0] - 2026-08-18
 
-**New Paper 60 — the isoenergetic generalized-Sturmian secular equation, read as a quantum algorithm.** The capstone of the Avery/Sturmian arc (Papers 58→59→60), motivated by the on-device-generation / I/O question raised in the Avery correspondence and the earlier I/O-ladder diagnostics. The core result is a sharp atoms-vs-molecules split, validated numerically and grounded in Avery's primary sources (theses + book chapter 6, fetched and read).
+**New Paper 60 — the isoenergetic generalized-Sturmian secular equation, read as a quantum algorithm.** The capstone of the Avery/Sturmian arc (Papers 58→59→60), motivated by the on-device-generation / I/O question and the earlier I/O-ladder diagnostics. The core result is a sharp atoms-vs-molecules split, validated numerically and grounded in Avery's primary sources (theses + book chapter 6, fetched and read).
 
 ### Added
 - `papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex` (+ tracked PDF, 3-pass clean, 4 pp). Sections: the naive L²-encoding obstruction; the metric-free isoenergetic reformulation (atoms); atomic validation + the sublinear 1-norm; the quantum algorithm + novelty; the molecular Shibuya–Wulfman conditioning frontier.
@@ -1116,7 +1140,7 @@ One-electron molecular only (matches the paper's SW §). Resource counts are a M
 - **Molecules [MEASURED]:** the multi-center problem is again generalized (Shibuya–Wulfman metric S). S is better-conditioned than the L² overlap — its intra-center block is *exactly* the identity (momentum-space; the 2D-grid 0.998 was discretization) — and much better at large separation (R=4: cond 4.4 vs 11.1), but grows with basis through the inter-center coupling and is only modestly better at bonding distance. Growth is **polynomial** (cond(S)~N^1.85, same rate as L²'s N^1.70; λ_max<2, all growth in λ_min→0), cross-checked 3 ways to ~1e-10. **Momentum-space evaluation is conditioning-*neutral*** (identical matrix — an exact grid-free evaluation win, not a conditioning lever). Two genuine levers: large-R (cond→1, L² can't follow) and gerade/ungerade splitting (free perfectly-conditioned gerade sector, ~2× homonuclear). The molecular metric cost is mitigated and quantified, not dissolved.
 
 ### Scope / honesty
-Resource + structural analysis, not a hardware demonstration; no claimed advantage over production quantum chemistry (cheap-encoding systems are small). The Avery correspondence remains PI-gated (HOLDING) — this is internal characterization, not outreach. Repo on `work/sparsity-boundary`; `main` unchanged; no Release (a Release mints a Zenodo DOI, PI-only).
+Resource + structural analysis, not a hardware demonstration; no claimed advantage over production quantum chemistry (cheap-encoding systems are small). This is internal characterization, not outreach. Repo on `work/sparsity-boundary`; `main` unchanged; no Release (a Release mints a Zenodo DOI, PI-only).
 
 ## [4.88.0] - 2026-08-17
 
@@ -1270,7 +1294,7 @@ Resource + structural analysis, not a hardware demonstration; no claimed advanta
 ### Added
 
 - **`/qa paper 58` certification (first single-paper target).** Frozen DoD `docs/qa/paper_58.done.md` (Path A). First-cert FULL run (4 calibrated dimensions, sensitivity 6/6, specificity clean) + a calibrated delta-verification pass on the later additions; all-green deterministic layer (C10–C18). Certified **by PI direction** on the clean delta; the final FULL certifying run on the combined text was **waived by PI judgment** — honest cap recorded in the DoD STATUS (not a machine-emitted full-run PASS).
-- **Avery audience-scoping of Paper 58** (per PI review of its fit for James Avery as reader): a lineage paragraph situating GeoVac as the *discrete/combinatorial skeleton* of the Averys' continuous Coulomb-Sturmian / hyperspherical-harmonic framework ("GeoVac adds nothing to that continuous apparatus"); the radial-closed-form by-product (weight-one, π-free, no dilogarithm) surfaced into the abstract as the Avery-relevant hook; machinery-vs-insight recalibrated so the borrowed two-center machinery reads as standard and the novelty is the discrete/sparsity reading.
+- **Audience-scoping of Paper 58 for the Coulomb-Sturmian readership** (per PI review): a lineage paragraph situating GeoVac as the *discrete/combinatorial skeleton* of the Averys' continuous Coulomb-Sturmian / hyperspherical-harmonic framework ("GeoVac adds nothing to that continuous apparatus"); the radial-closed-form by-product (weight-one, π-free, no dilogarithm) surfaced into the abstract as the Avery-relevant hook; machinery-vs-insight recalibrated so the borrowed two-center machinery reads as standard and the novelty is the discrete/sparsity reading.
 - **Five citations added to Paper 58, each PM-verified vs primary sources before insertion:** Löwdin 1955 (Phys. Rev. **97**, 1474 — the non-orthogonal cofactor method behind the NaH NOCI result; the already-cited `lowdin1950` is a *different* Löwdin paper), Thom–Head-Gordon 2009 (JCP **131**, 124113) + Sundstrom–Head-Gordon 2014 (JCP **140**, 114103) [NOCI methodology], Barnett–Coulson 1951 (Phil. Trans. R. Soc. A **243**, 221) and Filter–Steinborn 1978 (Phys. Rev. A **18**, 1) [two-center Slater-integral literature].
 
 ### Changed / Fixed
