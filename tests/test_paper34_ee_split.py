@@ -266,3 +266,149 @@ def test_w_rational_anchor_and_irreducible_charpoly():
     factored = sp.factor_list(target.as_expr())
     degs = sorted(sp.Poly(f, lam).degree() for f, _ in factored[1])
     assert degs == [3], f"cubic unexpectedly factored: {degs}"
+
+
+# ---------------------------------------------------------------------------
+# l > 0: the Gaunt-coupled s+p payoff (rem:ee_partial_split, third paragraph;
+# provenance debug/ee_split_sp_fci.py + debug/ee_split_sp_sweep.py)
+# ---------------------------------------------------------------------------
+def _sp_system(ns, npp, k=2.0, Z=2.0, Ng=500, Lmax=2):
+    """Self-contained Gaunt-coupled s+p one-centre system in REAL harmonics."""
+    from geovac.xtc_angular_sparsity import gA, gB
+    r, wr = TC.make_grid(k, Ng=Ng)
+    W2 = r * r * wr
+    orbs = [(n, 0, 0) for n in range(1, ns + 1)]
+    orbs += [(n, 1, m) for n in range(2, 2 + npp) for m in (-1, 0, 1)]
+    nb = len(orbs)
+
+    def Rf(n, l):
+        x = 2 * k * r
+        nrm = np.sqrt((2 * k) ** 3 * factorial(n - l - 1) / (2 * n * factorial(n + l)))
+        return nrm * x ** l * np.exp(-x / 2) * eval_genlaguerre(n - l - 1, 2 * l + 1, x)
+
+    def dRf(n, l):
+        x = 2 * k * r
+        nrm = np.sqrt((2 * k) ** 3 * factorial(n - l - 1) / (2 * n * factorial(n + l)))
+        m = n - l - 1
+        L = eval_genlaguerre(m, 2 * l + 1, x)
+        dL = -eval_genlaguerre(m - 1, 2 * l + 2, x) if m >= 1 else np.zeros_like(x)
+        e = np.exp(-x / 2)
+        xlm1 = x ** (l - 1) if l >= 1 else np.zeros_like(x)
+        return 2 * k * nrm * e * (l * xlm1 * L - 0.5 * x ** l * L + x ** l * dL)
+
+    rad = {(n, l): Rf(n, l) for (n, l, _) in orbs}
+    drad = {(n, l): dRf(n, l) for (n, l, _) in orbs}
+    S = np.zeros((nb, nb))
+    h1 = np.zeros((nb, nb))
+    for a, (na, la, ma) in enumerate(orbs):
+        for b, (nbb, lb, mb) in enumerate(orbs):
+            if (la, ma) != (lb, mb):
+                continue
+            Ra, Rb = rad[(na, la)], rad[(nbb, lb)]
+            S[a, b] = np.sum(Ra * Rb * W2)
+            h1[a, b] = (0.5 * np.sum(drad[(na, la)] * drad[(nbb, lb)] * W2)
+                        + 0.5 * la * (la + 1) * np.sum(Ra * Rb * wr)
+                        - Z * np.sum(Ra * Rb * r * wr))
+    R1g, R2g = np.meshgrid(r, r, indexing="ij")
+    lo, hi = np.minimum(R1g, R2g), np.maximum(R1g, R2g)
+    rps = sorted({(min((na, la), (nbb, lb)), max((na, la), (nbb, lb)))
+                  for (na, la, _) in orbs for (nbb, lb, _) in orbs})
+    rpi = {p: i for i, p in enumerate(rps)}
+    P = np.array([rad[p0] * rad[p1] * W2 for (p0, p1) in rps])
+    RL, RLs, RLw = {}, {}, {}
+    for L in range(Lmax + 1):
+        t1, t2 = R1g ** L / R2g ** (L + 1), R2g ** L / R1g ** (L + 1)
+        RL[L] = P @ (lo ** L / hi ** (L + 1)) @ P.T
+        RLs[L] = P @ (0.5 * (t1 + t2)) @ P.T
+        RLw[L] = P @ (0.5 * np.abs(t1 - t2)) @ P.T
+    idx = np.zeros((nb, nb), dtype=int)
+    for a, (na, la, _) in enumerate(orbs):
+        for c, (nc, lc, _) in enumerate(orbs):
+            idx[a, c] = rpi[(min((na, la), (nc, lc)), max((na, la), (nc, lc)))]
+    U = np.zeros((nb, nb), dtype=complex)
+    for a, (na, la, ma) in enumerate(orbs):
+        for b, (nbb, lb, mb) in enumerate(orbs):
+            if (na, la) != (nbb, lb):
+                continue
+            if ma == 0 and mb == 0:
+                U[a, b] = 1.0
+            elif ma > 0:
+                U[a, b] = (((-1) ** ma) / np.sqrt(2) if mb == ma
+                           else (1 / np.sqrt(2) if mb == -ma else 0))
+            elif ma < 0:
+                mm = -ma
+                U[a, b] = (-1j * ((-1) ** mm) / np.sqrt(2) if mb == mm
+                           else (1j / np.sqrt(2) if mb == -mm else 0))
+
+    def asm(RLd):
+        g = np.zeros((nb,) * 4, dtype=complex)
+        for L in range(Lmax + 1):
+            RLf = RLd[L][idx[:, :, None, None], idx[None, None, :, :]]
+            for M in range(-L, L + 1):
+                A = np.array([[gA(la, ma, L, M, lc, mc) for (_, lc, mc) in orbs]
+                              for (_, la, ma) in orbs])
+                B = np.array([[gB(lb, mb, L, M, ld, md) for (_, ld, md) in orbs]
+                              for (_, lb, mb) in orbs])
+                if np.abs(A).max() < 1e-14 or np.abs(B).max() < 1e-14:
+                    continue
+                g += (4 * np.pi / (2 * L + 1)) * np.einsum(
+                    "ac,bd,acbd->abcd", A, B, RLf, optimize=True)
+        gr = np.einsum("ap,bq,cr,ds,pqrs->abcd", U.conj(), U.conj(), U, U, g,
+                       optimize=True)
+        return np.real(gr), float(np.abs(gr.imag).max())
+
+    Sr = np.real(np.einsum("ap,bq,pq->ab", U.conj(), U, S, optimize=True))
+    hr = np.real(np.einsum("ap,bq,pq->ab", U.conj(), U, h1, optimize=True))
+    return orbs, Sr, hr, asm, RL, RLs, RLw, len(rps)
+
+
+def _fci_sp(S, h1, g, n_elec=2):
+    X = TC.lowdin(S)
+    nso = 2 * S.shape[0]
+    dets, didx = TC.make_dets(nso, n_elec)
+    H = TC.build_H(dets, didx, TC.h_spin(TC.transform_1(h1, X), nso),
+                   TC.asym_from_phys(TC.transform_2(g, X), nso), nso)
+    return float(eigh(H, eigvals_only=True)[0])
+
+
+def test_sp_engine_reproduces_s_only_and_is_real_symmetric():
+    """s-only sector == the independent engine; s+p tensor real + 8-fold symmetric."""
+    ns = 3
+    orbs, S, h1, asm, RL, RLs, RLw, nrp = _sp_system(ns, 0, Lmax=0)
+    g, im = asm(RL)
+    r, wr = TC.make_grid(2.0, Ng=500)
+    Sref, href, Rtab, W2 = TC.build_one_body(ns, r, wr, 2.0, 2.0)
+    gref, _, _ = TC.two_body(ns, Rtab, W2, TC.build_kernels(r, 0.7, nx=64))
+    assert np.abs(S - Sref).max() < 1e-12
+    assert np.abs(h1 - href).max() < 1e-12          # analytic dR/dr required
+    assert np.abs(g - gref).max() < 1e-12
+    assert abs(_fci_sp(S, h1, g) - _fci_sp(Sref, href, gref)) < 1e-12
+    # s+p: reality and permutational symmetry (catches a transposed real-Y transform)
+    orbs, S, h1, asm, RL, RLs, RLw, nrp = _sp_system(3, 1, Lmax=2)
+    g, im = asm(RL)
+    assert im < 1e-12, f"tensor not real: {im:.1e}"
+    for perm in ((2, 1, 0, 3), (0, 3, 2, 1), (1, 0, 3, 2)):
+        assert np.abs(g - g.transpose(perm)).max() < 1e-10
+
+
+def test_sp_split_exact_and_rank_payoff():
+    """Split exact per channel; W-rank 4 reaches sub-mHa with L=0,1,2 all active;
+    rank 0 (separable only) is off by >100 mHa."""
+    orbs, S, h1, asm, RL, RLs, RLw, nrp = _sp_system(3, 1, Lmax=2)
+    g, _ = asm(RL)
+    gs, _ = asm(RLs)
+    gw, _ = asm(RLw)
+    assert np.abs(g - (gs - gw)).max() / np.abs(g).max() < 1e-12
+    E_full = _fci_sp(S, h1, g)
+    assert E_full < _fci_sp(*_sp_system(3, 0, Lmax=0)[1:3],
+                            _sp_system(3, 0, Lmax=0)[3](
+                                _sp_system(3, 0, Lmax=0)[4])[0])   # below s-only
+    assert E_full > -2.9037243770                                   # above exact
+    assert abs(_fci_sp(S, h1, gs) - E_full) > 0.1                   # teeth
+    RLt = {}
+    for L in range(3):
+        lam, V = np.linalg.eigh(RLw[L])
+        o = np.argsort(-np.abs(lam))[:4]
+        RLt[L] = (V[:, o] * lam[o]) @ V[:, o].T
+    gwt, _ = asm(RLt)
+    assert abs(_fci_sp(S, h1, gs - gwt) - E_full) < 1e-3

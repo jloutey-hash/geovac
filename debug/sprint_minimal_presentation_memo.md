@@ -304,5 +304,69 @@ verified over Q for the rank law, rationality, dependencies, irreducibility; MEA
 the spectral growth). +3 test legs (10 total in the file). Compiles three-pass clean, zero
 undefined refs. Matrix +1 row.
 
-**Still open (the other follow-on, untouched):** the l>0 FCI payoff curve (Gaunt-coupled
-s+p FCI build).
+**Follow-on 1 now also done -- see section 10.**
+
+
+---
+
+## 10. Follow-on 1 (PI-directed): the l>0 FCI payoff curve -- the split SURVIVES angular coupling
+
+Built a Gaunt-coupled s+p one-centre FCI on shared-k Coulomb-Sturmians, split EVERY
+multipole channel, truncated each W_L by rank, measured the FCI error.
+Drivers `debug/ee_split_sp_fci.py` (engine + 4-gate ladder), `debug/ee_split_sp_sweep.py`
+(flatness); data in `debug/data/`.
+
+**Engine.** <ab|1/r12|cd> = sum_LM (4pi/(2L+1)) gA(a,LM,c) gB(b,LM,d) R^L(ac|bd), angular
+factors from the TRACKED `geovac.xtc_angular_sparsity` (exact wigner3j). Complex harmonics
+rotated to REAL harmonics so the tensor is real -- and the discarded imaginary part is
+itself a gate.
+
+**Validation ladder (all four green before any payoff number was quoted):**
+- G1 s-only sector vs the independent `transcorrelated_sturmian` engine: S 1.1e-16,
+  h1 1.1e-16, ERI 1.3e-15, He FCI 4.4e-16.
+- G2 s+p tensor reality 6.6e-17 and 8-fold permutational symmetry 6.7e-16.
+- G3 variational sanity: s+p (-2.89573) BELOW s-only (-2.87810) and ABOVE exact (-2.90372).
+- G4 split exactness at tensor level 1.2e-15.
+
+**Two bugs caught by the ladder, both mine, both silent otherwise:**
+1. **Transposed real-harmonic transform.** `einsum("pa,...")` instead of `("ap,...")` --
+   the transform contracted on the wrong index. It CANCELS for the one-body (block-diagonal
+   in m, imag came out 0) and corrupts only the four-index tensor: G2 caught it as
+   imag = symmetry residual = **1.46e-01**. Without the symmetry gate this would have
+   produced a plausible-looking but wrong payoff curve.
+2. **Finite-difference dR/dr** cost 3.8e-4 in h1 and 5.4e-4 in the FCI; replaced with the
+   analytic derivative (dL^a_m/dx = -L^{a+1}_{m-1}). G1 went 5.4e-4 -> 4.4e-16.
+
+**THE RESULT -- the payoff survives, at the same flat rank.** He, k=2, L=0,1,2 all active:
+
+| W-rank m | E(s+p) | E - E_full |
+|--:|--:|--:|
+| 0 (separable only) | -2.5374500687 | +358.28 mHa |
+| 2 | -2.8871567982 | +8.57 mHa |
+| 3 | -2.8959705931 | -0.24 mHa |
+| 4 | -2.8958447933 | -0.12 mHa |
+| 6 | -2.8957271832 | -0.0000 mHa |
+
+and it is FLAT in basis size (rank needed for 1 mHa / 0.01 mHa):
+
+| basis | n_orb | n_radpairs | E_full | r@1mHa | r@0.01mHa |
+|:--|--:|--:|--:|--:|--:|
+| 3s+1p | 6 | 10 | -2.89572718 | 3 | 5 |
+| 4s+1p | 7 | 15 | -2.89610139 | 3 | 3 |
+| 3s+2p | 9 | 15 | -2.89842357 | 3 | 5 |
+| 4s+2p | 10 | 21 | -2.89879242 | 4 | 7 |
+| 5s+2p | 11 | 28 | -2.89904837 | 4 | 7 |
+
+So the s-only finding (rank 3-4 @ 1 mHa, flat) is NOT an artifact of having a single
+multipole channel: with three channels coupled by Gaunt algebra the same flat rank 3-4 holds
+while the radial-pair space grows 10 -> 28.
+
+**Honest caveat (kept in view, not in the paper):** rank-1 truncation is CATASTROPHIC
+(-80223 Ha, wildly non-variational) -- the same pathology seen at s-only (rank 1 -> -3.37).
+Truncating an indefinite remainder can destroy boundedness-below; the truncation is only
+safe from rank >= 2-3. Any practical use of this compression must respect that floor.
+
+**Applied:** rem:ee_partial_split gains one sentence (the s+p payoff, flat 10->28);
+`tests/test_paper34_ee_split.py` +2 legs (12 total, self-contained s+p system incl. the
+G1/G2 reproduction and symmetry checks that caught the transpose). P34 compiles three-pass
+clean, zero undefined refs, zero control characters. 35 tests green incl. 18 topo.

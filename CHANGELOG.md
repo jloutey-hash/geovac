@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [5.1.6] - 2026-08-28
+
+**The l>0 payoff curve: the e-e split's rank compression SURVIVES angular coupling.** Closes the second of the two follow-ons opened by rem:ee_partial_split (the first, the eigenvector closed-form question, closed negative in v5.1.5). Canonical memo `debug/sprint_minimal_presentation_memo.md` section 10.
+
+### Added
+- **Gaunt-coupled s+p one-centre FCI engine** (`debug/ee_split_sp_fci.py`): `<ab|1/r12|cd> = sum_LM (4pi/(2L+1)) gA(a,LM,c) gB(b,LM,d) R^L(ac|bd)`, angular factors from the **tracked** `geovac.xtc_angular_sparsity` (exact wigner3j), complex harmonics rotated to real harmonics so the tensor is real. Every multipole channel split by the min/max identity; each `W_L` rank-truncated independently.
+- **The measurement.** With L = 0, 1, 2 all active: W-rank 0 (separable head alone) is +358 mHa off; rank 2 → +8.57; **rank 3 → −0.24 mHa; rank 4 → −0.12; rank 6 → exact.** And FLAT in basis size — rank needed for 1 mHa is **3, 3, 3, 4, 4** across 3s+1p … 5s+2p while the radial-pair space grows **10 → 28**. The s-only result was therefore not an artifact of a single multipole channel.
+- **Backing:** `tests/test_paper34_ee_split.py` +2 legs (12 total) — a self-contained s+p system whose s-only sector reproduces the independent `transcorrelated_sturmian` engine at 1e-12, plus reality/8-fold-symmetry checks, split exactness, the rank-4 payoff and a rank-0 teeth check.
+- Paper 34 `rem:ee_partial_split` gains one sentence recording the s+p payoff and its flatness.
+
+### Two silent bugs caught by the validation ladder (recorded; both mine)
+- **Transposed real-harmonic transform** — `einsum("pa,...")` where the transform needs `("ap,...")`. It **cancels for the one-body** (block-diagonal in m, so the imaginary part came out exactly 0 and looked correct) and corrupts only the four-index tensor; the permutational-symmetry gate caught it as imag = symmetry residual = **1.46e-01**. Without that gate the run would have produced a plausible-looking, entirely wrong payoff curve.
+- **Finite-difference dR/dr** (`np.gradient`) cost 3.8e-4 in h1 and 5.4e-4 in the FCI; replaced by the analytic derivative (`dL^a_m/dx = -L^{a+1}_{m-1}`). Gate G1 went 5.4e-4 → **4.4e-16**.
+- Both were fixed before any payoff number was quoted; the four gates (s-only reproduction; reality + 8-fold symmetry; variational sanity s+p below s-only and above exact; split exactness) were all green first.
+
+### Honest caveat (memo-only, deliberately not a paper claim)
+Rank-1 truncation is **catastrophic** (−80223 Ha, wildly non-variational) — the same pathology as s-only rank 1 (−3.37). Truncating an indefinite remainder can destroy boundedness-below; the compression is only safe from rank >= 2–3. Any practical use must respect that floor.
+
+### Scope
+One paper edited (P34, one sentence; compounds its standing re-review-OWED). No production `geovac/` code touched — the new engine is a `debug/` driver that consumes the tracked angular module. `docs/claim_test_matrix.md` +1 row. 35 tests green incl. the 18 topological proofs. Health gate: WARN CLAUDE.md 208 KB + debug/ 1364 files (standing debts, surfaced per protocol).
+
+---
+
 ## [5.1.5] - 2026-08-28
 
 **The minimal-presentation arc: two primitives, the exact e-e split, and the coalescence object characterized (PI-driven).** Started from the PI's "what are the simplest mathematical representations?" and ran three sprints deep. Canonical memo `debug/sprint_minimal_presentation_memo.md` (9 sections).
@@ -20,7 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **W's eigenvectors have NO closed skeleton forms at the matrix level.** W(1) is exactly rational (W[1s^2,1s^2] = 3/8) but the active characteristic polynomials are IRREDUCIBLE over Q (cubic at ns=2 — 131072 l^3 - 50688 l^2 - 25200 l - 675, pinned as a regression test — quintic at ns=3), and the Lowdin-compressed spectrum GROWS with ns (1.03 -> 7.81, ns=2..8: unbounded operator, finite eigenvectors converge to nothing). **The surviving skeleton form is differential:** in reciprocal radius u = 1/r, Coulomb = min(u1,u2) = the Green's function of -d^2/du^2 (Dirichlet at 0; equivalently the manifestly-PSD resolution 1/r_> = INT dR/R^2 1[r1<R]1[r2<R] — the structural root of Coulomb positivity), and W's kernel |u1-u2|/2 gives eigenfunctions of any weighted compression solving lam f'' = w f (grid-verified 1e-5). The closed form of the coalescence object is an ODE, not an eigendecomposition.
 
 ### Corrections and process notes (recorded so they are not re-made)
-- A pre-existing dangling cross-paper `ef` (P34 -> Paper 19 section label, unresolvable by construction) found and converted to prose; the paper now compiles with ZERO undefined references.
+- A pre-existing dangling cross-paper `
+ef` (P34 -> Paper 19 section label, unresolvable by construction) found and converted to prose; the paper now compiles with ZERO undefined references.
 - The heredoc-backslash gremlin produced a literal U+0008 in the .tex once — caught by the halt-on-error compile gate, repaired, remark verified intact line-by-line. Paper-editing scripts now go through files, not heredocs.
 - Two test-design fixes: the L>=1 split identity must be checked at the INTEGRAL level (kernel terms reach ~1e19 near the r = 1e-9 grid floor; pointwise float cancellation impossible; the r^2 measure makes the region irrelevant); the rank law is a CEILING (a smooth control kernel correctly sits below it — assertion fixed to ceiling semantics).
 - The follow-up driver's dependency count was inflated by a truncated coefficient basis (r^0..r^4 for functions on the r^2 floor); fixed to r^2..r^6, count = 1 as the dimension argument predicts; the printed relation had been verified genuine by full symbolic residual regardless.
