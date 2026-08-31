@@ -15,8 +15,29 @@ Run pytest on a slice of `tests/`. The slice depends on the `scope` argument.
   - Target wall: 30s–2min.
 
 - `fast` — read `tests/_durations.json` and select every test whose last-recorded duration is `< 0.5s`. Run those. For "I just want a smoke check across the suite." Target wall: <1 min.
+  **CURRENTLY UNAVAILABLE (2026-08-31): `tests/_durations.json` is an empty
+  2-byte file**, dated 2026-06-07. It selects nothing, and the `touched`
+  scope's random tail-risk sample is dead for the same reason. Nothing failed
+  when it emptied because its only consumer is *this prompt* rather than code
+  — the same shape as any derived artifact with no consumer, no refresh
+  trigger, and no failure mode when stale. Do **not** silently fall back;
+  surface it (see the bootstrap block below).
 
-- `full` — `pytest tests/ --ignore=tests/_archive --tb=line`. Everything except the archive. Slow but comprehensive. Target wall: 10–15 min. Use at sprint close or after broad refactors.
+- `full` — `pytest tests/ --ignore=tests/_archive --tb=line -n auto`. Everything except the archive.
+  **MEASURED 2026-08-31: ~6.7 h serial, ~2.4 h with `-n auto`.** This scope is
+  **NOT a sprint-close gate** — it is a *scheduled baseline*. Use `touched` at
+  sprint close and run `full` on its own schedule.
+  *(The previous "target wall: 10–15 min" was wrong by roughly two orders of
+  magnitude and is the reason this scope kept being invoked at close, where it
+  was then killed by a timeout or — worse — reported green off a piped exit
+  code. See `debug/qa/test_suite_cost_memo.md`.)*
+  **Always pass `-n auto`**: 2.77× on the heavy slice, 1.94× on a light one,
+  with pass/skip/xfail counts **bit-identical** to serial in every arm, so the
+  parallelism is free of ordering or shared-state effects. Thread-pinning
+  (`OMP_NUM_THREADS=1` etc.) was tested and does **nothing** (4%, noise) — the
+  ceiling is not BLAS oversubscription. Untested lead: `--dist loadfile`, since
+  the default `--dist load` re-runs module/session fixtures once *per worker*
+  and this suite's fixtures build Hamiltonians (one measured at 71 s).
 
 - `topo` — just the 18 symbolic S³ proofs (`tests/test_fock_projection.py tests/test_fock_laplacian.py`). 5–10s. Use when you've only touched papers.
 

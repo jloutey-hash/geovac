@@ -7,6 +7,100 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.2.1] - 2026-08-31
+
+### Changed — the test suite's cost and purpose, both measured for the first time
+
+A `/sprint-close` full regression could not be made to finish, which turned
+into a measurement pass. Two independent problems were bundled under
+"runtimes are out of control" and had to be separated, because bundling them
+produces the wrong remedy for both: **cost** is fixed by parallelism plus
+cadence policy; **relevance** is fixed by a reverse index. Full record:
+`debug/qa/test_suite_cost_memo.md`.
+
+**Cost.** 9,156 tests across 361 files. A per-file sweep at a 12 s budget
+(the §14 bar plus startup) found **98 files over — 27%, not a heavy tail**.
+An earlier 15-file stratified sample had concluded "two files carry 80%,
+marking fixes it"; the full sweep overturned it, and the error was sampling
+density (stride-25 puts ~2 points in the first 50 files, which is exactly
+where the cost lives). The 98 are the Hamiltonian builders and eigensolvers —
+`test_composed_*`, `test_balanced_*`, `test_prolate_*`, `test_dirac_*`,
+`test_level3/4_*` — so the cost is inherent to what they test.
+
+| | |
+|---:|:---|
+| **≈6.7 h** | full suite, serial (the skill claimed 10–15 min) |
+| **≈2.4 h** | full suite, `-n auto` |
+
+- **`pytest-xdist` adopted and declared** in `setup.py` dev extras: **2.77×**
+  on the heavy slice, **1.94×** on a light one, pass/skip/xfail counts
+  **bit-identical** to serial in every arm.
+- **Two hypotheses tested and falsified**: thread-pinning
+  (`OMP/MKL/OPENBLAS_NUM_THREADS=1`) gives **4%, i.e. noise** — BLAS
+  oversubscription is not the ceiling; and per-file process isolation is
+  **0.85×, slower** — no state or memory accumulation, the 3.7 GB working set
+  was not thrash. Untested lead recorded: `--dist loadfile`, since the default
+  `--dist load` re-runs module/session fixtures once *per worker*.
+- **Mark-slow rejected at this scale.** Marking 98 files would remove the
+  chemistry and encoding core from the default suite — a fast gate that no
+  longer tests what matters, i.e. the same pathology as a gate that cannot
+  fail.
+- **The load-bearing fix is cadence.** `/regression touched` at sprint close;
+  `full` is a scheduled baseline, never a close gate. Corrected in
+  `.claude/commands/regression.md` **and** in CLAUDE.md §9, which had been
+  instructing every PM to prefer the full scope for multi-module diffs.
+- Standing debt recorded: `tests/_durations.json` is an **empty 2-byte file**
+  since 2026-06-07, so the `fast` scope selects nothing and `touched`'s random
+  tail-risk sample is dead. It died because its only consumer is a prompt, its
+  refresh is a sentence, and nothing failed when it emptied.
+
+### Added — `debug/qa/test_purpose_index.py`, the test → claim reverse index
+
+`claim_test_matrix.md` maps claim → test (330 rows); nothing mapped the
+reverse, and that is where relevance decays. Infers purpose from four sources
+(claim matrix, `test_paperNN_*` convention, inline paper→test refs read
+backwards from C13, imported `geovac` modules by **AST parse** — never by
+importing 361 test modules for a lint).
+
+| purpose | files | |
+|:--|--:|:--|
+| paper-backing | 176 | 49% |
+| module-guard | 155 | 43% |
+| wh-register | 8 | 2% |
+| infrastructure | 8 | 2% |
+| **unknown** | **14** | **4% — decay candidates** |
+
+Increment 1 **asserts nothing and requires nothing** — deliberately, so it
+earns its keep by reporting before anything is demanded of anybody. A first
+cut reported 29 candidates; 9 were gate self-tests and 7 were WH-register work
+that no paper-side inference can see, so classifying by *purpose* rather than
+by paper link cut it to 14. Reporting 29 would have sent someone archiving
+live QA infrastructure.
+
+Three open items found on its first run:
+
+1. **8 test files import from `debug/`** (13 modules, all currently present) —
+   but §9 defines `debug/` as pruned over time, and three of the eight are
+   **paper-backing** (P26, P27 ×2). The §9 sweep would break paper backing
+   silently.
+2. **2 dangling `claim_test_matrix.md` rows** — `test_harmonic_phase_lock.py`,
+   `test_lih.py`. C13 misses them because C13 gates papers, not the matrix.
+3. **14 unknown-purpose files**, mostly RH-arc and prolate-era residue.
+
+No `expires` field was built. Expiry is **computed** instead — a paper-backing
+test whose claim has vanished or been retracted *is* expired. Increment 2, not
+built, would gate exactly that: **C22 is C13 run backwards**, and C16 already
+supplies the retraction list.
+
+### Fixed — method
+
+Three times in this pass the *instrument* was wrong rather than the corpus,
+each caught only by re-measuring: `pytest … | tail` reports **tail's** exit
+code (two runs reported "exit 0" whose clean re-run returned **124, timeout**
+— standing rule now at `memory/feedback_never_pipe_verification.md`); a regex
+truncating module names at digits reported 3 missing `debug/` modules where
+the true count is **0**; and the 15-file sample overturned above.
+
 ## [v5.2.0] - 2026-08-30
 
 ### Changed — Stage-4 cross-document ledger: the defects that live *between* documents

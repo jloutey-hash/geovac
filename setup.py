@@ -33,6 +33,10 @@ setup(
     extras_require={
         'dev': [
             'pytest>=6.0',
+            # Measured 2026-08-31: 2.77x on the heavy slice, 1.94x on a
+            # light one, results bit-identical in both arms.  Not optional
+            # in practice -- without it the full scope is ~6.7 h.
+            'pytest-xdist>=3.0',
             'matplotlib>=3.3.0',
         ],
         'visualization': [
