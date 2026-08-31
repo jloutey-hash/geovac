@@ -55,7 +55,16 @@ TESTS = ROOT / "tests"
 MATRIX = ROOT / "docs" / "claim_test_matrix.md"
 PAPERS = ROOT / "papers"
 
-TESTFILE = re.compile(r"test_[a-z0-9_]+\.py")
+# Left boundary is load-bearing: without it this matches the substring
+# `test_lih.py` inside `chemistry_solver_retest_lih.py` and reports a
+# dangling row that does not exist.
+TESTFILE = re.compile(r"(?<![A-Za-z0-9_])test_[a-z0-9_]+\.py")
+
+# A row may NAME a test in order to disown it ("Replaces stale ... cite").
+# Such a name is a historical note, not a backing claim, and must not be
+# read as one.  The marker is always on the same line as the name, so no
+# context window is involved.
+DISOWNED = re.compile(r"stale|retired|replaced|superseded|archived|no longer|withdrawn", re.I)
 PAPER_NAMED = re.compile(r"^test_paper(\d+)[_.]")
 # A matrix row opens with | <paper id> | ; the id is a bare number or "FCI-A".
 ROW_PAPER = re.compile(r"^\|\s*([0-9]{1,2}|FCI-[AM])\s*\|")
@@ -73,6 +82,8 @@ def from_matrix() -> tuple[dict[str, set[str]], set[str]]:
         return links, set()
     for line in MATRIX.read_text(encoding="utf-8", errors="replace").splitlines():
         names = set(TESTFILE.findall(line))
+        if names and DISOWNED.search(line):
+            names = {x for x in names if (TESTS / x).exists()}
         cited |= names
         m = ROW_PAPER.match(line)
         paper = m.group(1) if m else None

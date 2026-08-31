@@ -361,7 +361,7 @@ Reviewer count per dimension follows the **granularity & scaling rule** in `qa.m
 | Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` · **chunk ~3–4 papers/agent** | prose ≤ tier; hard prohibitions intact |
 | External citations | C4 | `citation-reviewer` · **chunk ~5–6 papers/agent** | cites resolve and say what we attribute |
 | Synthesis faithfulness | C9 | `claims-reviewer` (one on the branch synthesis) | **separate dispatch** from per-paper claims |
-| Deterministic | C10, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py`, `check_headline_numbers.py`, `check_duration_language.py`, `check_latex_escapes.py`, `check_inline_attributions.py`, `check_numeric_consistency.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
+| Deterministic | C10, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py`, `check_headline_numbers.py`, `check_duration_language.py`, `check_latex_escapes.py`, `check_inline_attributions.py`, `check_numeric_consistency.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
 | Arithmetic audit | (cross-cuts C8) | dedicated reviewer or in-panel instruction: re-derive every stated total/ratio/percentage from its own components | registered 2026-08-29 (cert-3: two of the run's LARGEs were sums that did not equal their own parts); fires on FULL runs |
 
 **Enumeration mandate (the 2026-06-23 lesson).** Every LLM-reviewer prompt
@@ -658,3 +658,57 @@ owned by Paper 22 and the group3 synthesis. Note the failure mode it
 exposed: `--gate group3` did not report "unscoped", it **crashed** with a
 `TypeError` from `_files(None)`, which reads as a broken checker rather than
 a missing scope. An unknown gate now exits with the list of known scopes.
+
+## C22 — test-claim backing integrity (added 2026-08-31, PI direction)
+
+**C13 run backwards.** C13 asserts every test a paper cites exists. C22
+asserts the reverse: every claim a test backs still exists, and is not
+retracted.
+
+The reverse direction is where **relevance** decays, as distinct from
+correctness. A test pinned to a withdrawn claim keeps passing, keeps costing
+wall time, and nothing can tell it is dead. The 2026-08-30 pass hit exactly
+this: `tests/test_paper22_density.py` carried a `NOTE (FLAG, do not "fix"
+here)` pointing at a test name that no longer existed and calling a dissolved
+carry-forward open. A "do not fix" flag aimed at a deleted test is worse than
+no flag — it tells the next reader the discrepancy is known and deliberate.
+
+Four checks:
+
+| | |
+|:--|:--|
+| **A** | claim-matrix rows cite tests that exist — the direction C13 cannot see, since C13 gates *papers*, not the matrix |
+| **B** | `test_paperNN_*` names a paper with a real `.tex`, under **both** conventions (`paper_14_*.tex`, `Paper_7_*.tex`) |
+| **C** | no matrix row backs a claim whose wording is in the **C16** registry without a withdrawal flag |
+| **D** | paper-backing tests do not import from `debug/`, which §9 prunes over time |
+
+**C reuses C16's patterns rather than copying them.** Duplicated registries
+drift, and a claim retired in one and live in the other is precisely the
+class both exist to prevent.
+
+**A and D ratchet** against `debug/qa/test_claim_backing_baseline.json`
+(the C20 pattern), and **print the baseline size on every run**. A ratchet
+that hides its own size is how debt becomes permanent. Current baseline:
+**0 dangling rows, 3 paper-backing tests importing `debug/`** (P26, P27 ×2).
+Clearing those means relocating the imported modules into `geovac/` or
+`tests/` — a real refactor, so the ratchet holds the line meanwhile.
+
+### The regex lesson, worth keeping
+
+C22's first run reported **two** dangling matrix rows. Both were the gate,
+not the corpus:
+
+- `test_[a-z0-9_]+\.py` with **no left boundary** matched the substring
+  `test_lih.py` inside `chemistry_solver_retest_lih.py`;
+- a row that **names a test in order to disown it** ("Replaces stale
+  `debug/test_harmonic_phase_lock.py` cite") was read as a backing claim,
+  when its real backing exists and passes.
+
+Both were relayed as findings before being caught. The fixes — a left word
+boundary, and a `DISOWNED` marker check on the same line — are pinned by
+`tests/test_claim_backing_check.py`.
+
+The selftest was also rebuilt: check A originally proved it could fire by
+pointing at those two real defects, which would have made the selftest stop
+working the moment they were fixed. **A selftest that needs the corpus to be
+broken is backwards**; it now fires against a synthetic probe.

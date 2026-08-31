@@ -1,0 +1,9 @@
+{
+  "_note": "Known debt at the time C22 was introduced. The gate FAILS on anything outside these lists. Shrink them; do not grow them.",
+  "dangling_matrix_rows": [],
+  "paper_backing_debug_imports": [
+    "test_paper26_entanglement.py",
+    "test_paper27_entropy.py",
+    "test_paper27_entropy_locus.py"
+  ]
+}

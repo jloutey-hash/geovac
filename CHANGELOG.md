@@ -7,6 +7,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.2.2] - 2026-08-31
+
+### Added — C22, the test → claim backing gate (Stage 2 Increment 2)
+
+**C13 run backwards.** C13 asserts every test a paper cites exists; C22
+asserts every claim a test backs still exists and is not retracted. The
+reverse direction is where *relevance* decays, as distinct from correctness:
+a test pinned to a withdrawn claim keeps passing, keeps costing wall time,
+and nothing can tell it is dead.
+
+`debug/qa/check_test_claim_backing.py`, four checks:
+
+| | |
+|:--|:--|
+| **A** | claim-matrix rows cite tests that exist — the direction C13 cannot see, since C13 gates *papers*, not the matrix |
+| **B** | `test_paperNN_*` names a paper with a real `.tex`, under **both** conventions (`paper_14_*.tex`, `Paper_7_*.tex`) |
+| **C** | no matrix row backs a claim in the **C16** retracted registry |
+| **D** | paper-backing tests do not import from `debug/`, which §9 prunes |
+
+**Check C reuses C16's patterns rather than copying them** — duplicated
+registries drift, and a claim retired in one but live in the other is exactly
+what both exist to prevent.
+
+**A and D ratchet** against `test_claim_backing_baseline.json` (the C20
+pattern) and **print the baseline size every run**; a ratchet that hides its
+own size is how debt becomes permanent. Baseline: **0 dangling rows, 3
+paper-backing tests importing `debug/`** (P26, P27 ×2). Clearing those means
+relocating the imported modules into `geovac/` or `tests/` — a real refactor,
+so the ratchet holds the line meanwhile.
+
+Wired into `.claude/commands/qa.md` and `docs/qa/criteria.md`. A gate that is
+not enumerated is a gate a cert run does not invoke — the reason C15 and C20
+sat unrun until 2026-08-30. Mirror test `tests/test_claim_backing_check.py`
+(9 tests) exists because the gate lives in `debug/`, which pytest does not
+collect, so nothing in an ordinary run would notice if it broke.
+
+### Fixed — the gate's first two findings were the gate, not the corpus
+
+C22's first run reported **two dangling matrix rows**. Both were false:
+
+- `test_[a-z0-9_]+\.py` with **no left boundary** matched the substring
+  `test_lih.py` inside `chemistry_solver_retest_lih.py`;
+- a row that **names a test in order to disown it** ("Replaces stale
+  `debug/test_harmonic_phase_lock.py` cite") was read as a backing claim,
+  while its real backing exists and passes.
+
+Both had been relayed as findings before being caught. Fixed with a left word
+boundary and a same-line `DISOWNED` check, in **both** consumers — the
+`test_purpose_index.py` from v5.2.1 carried the same regex and the same two
+phantoms. Pinned by the mirror test.
+
+**The selftest was also rebuilt.** Check A originally proved it could fire by
+pointing at those two real defects — so it would have stopped working the
+moment they were fixed. A selftest that needs the corpus to be broken is
+backwards; it now fires against a synthetic probe and additionally asserts
+the live corpus is clean.
+
 ## [v5.2.1] - 2026-08-31
 
 ### Changed — the test suite's cost and purpose, both measured for the first time

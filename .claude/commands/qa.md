@@ -43,6 +43,23 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
      is mechanical. `--selftest` built in.
      *(Both C15 and C20 were defined in `criteria.md` but never listed here,
      so cert runs were not invoking them — added 2026-08-30.)*
+   - **C22 test-claim backing** — `debug/qa/check_test_claim_backing.py`
+     (**C13 run backwards**: C13 asserts every test a paper cites exists;
+     C22 asserts every claim a test backs still exists and is not retracted).
+     Four checks: (A) claim-matrix rows cite live tests — the direction C13
+     cannot see, since C13 gates papers rather than the matrix; (B)
+     `test_paperNN_*` names a paper with a real `.tex`, honouring **both**
+     filename conventions (`paper_14_*` and `Paper_7_*`); (C) no matrix row
+     backs a claim whose wording sits in the **C16** retracted registry —
+     patterns are *reused* from C16, not duplicated, so a claim retired in
+     one place cannot stay live in the other; (D) paper-backing tests do not
+     depend on `debug/`, which §9 prunes over time (three currently do, and
+     are baselined). A and D **ratchet** against
+     `debug/qa/test_claim_backing_baseline.json`, printing the baseline size
+     every run — a ratchet that hides its own size is how debt becomes
+     permanent. `--selftest` proves all four checks *fire*, against synthetic
+     probes rather than real debt, so it keeps working once the debt is
+     fixed. Mirror: `tests/test_claim_backing_check.py`.
    - **C21 numeric consistency** — `debug/qa/check_numeric_consistency.py`
      (recomputes every DERIVED quantity from its registry inputs; checks every
      `\gvq{key}{literal}` annotation against `debug/qa/numeric_registry.py`,
