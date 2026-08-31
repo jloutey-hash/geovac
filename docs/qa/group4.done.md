@@ -1,3 +1,13 @@
+<!-- CERT-STALENESS-BANNER -->
+> ### ⚠ RE-CERTIFICATION OWED
+> This record certifies the state as of **2026-08-30**. Since then **4 `.tex` changed**: group4_quantum_computing_synthesis.tex, paper_14_qubit_encoding.tex, paper_20_resource_benchmarks.tex, paper_23_nuclear_shell.tex.
+>
+> **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
+>
+> Re-measure rather than trusting this banner — it is itself a snapshot and will go stale the same way:
+> `python debug/qa/check_cert_staleness.py --detail`
+<!-- /CERT-STALENESS-BANNER -->
+
 # Group 4 (Quantum computing) — `/qa` profile
 
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This

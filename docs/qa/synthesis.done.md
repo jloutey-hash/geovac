@@ -1,3 +1,13 @@
+<!-- CERT-STALENESS-BANNER -->
+> ### ⚠ RE-CERTIFICATION OWED
+> This record certifies the state as of **2026-07-05**. Since then **4 `.tex` changed** (plus 3 same-day, ambiguous): geovac_field_guide.tex, group1_operator_algebras_synthesis.tex, group2_quantum_chemistry_synthesis.tex, group3_foundations_synthesis.tex, group4_quantum_computing_synthesis.tex, group5_qed_gauge_synthesis.tex, ….
+>
+> **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
+>
+> Re-measure rather than trusting this banner — it is itself a snapshot and will go stale the same way:
+> `python debug/qa/check_cert_staleness.py --detail`
+<!-- /CERT-STALENESS-BANNER -->
+
 # Synthesis layer (the field guide + cross-group narrative) — `/qa` profile
 
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This

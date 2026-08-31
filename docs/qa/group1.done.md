@@ -1,3 +1,13 @@
+<!-- CERT-STALENESS-BANNER -->
+> ### ⚠ RE-CERTIFICATION OWED
+> This record certifies the state as of **2026-06-24**. Since then **13 `.tex` changed**: group1_operator_algebras_synthesis.tex, paper_32_spectral_triple.tex, paper_40_unified_propinquity_convergence.tex, paper_42_modular_hamiltonian_four_witness.tex, paper_43_lorentzian_extension.tex, paper_44_lorentzian_operator_system.tex, ….
+>
+> **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
+>
+> Re-measure rather than trusting this banner — it is itself a snapshot and will go stale the same way:
+> `python debug/qa/check_cert_staleness.py --detail`
+<!-- /CERT-STALENESS-BANNER -->
+
 # Group 1 (Operator algebras / NCG) — `/qa` profile
 
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This

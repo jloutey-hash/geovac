@@ -1,3 +1,13 @@
+<!-- CERT-STALENESS-BANNER -->
+> ### ⚠ RE-CERTIFICATION OWED
+> This record certifies the state as of **2026-08-30**. Since then **5 `.tex` changed**: group6_precision_observations_synthesis.tex, paper_26_entanglement.tex, paper_27_entropy_projection.tex, paper_34_projection_taxonomy.tex, paper_35_time_as_projection.tex.
+>
+> **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
+>
+> Re-measure rather than trusting this banner — it is itself a snapshot and will go stale the same way:
+> `python debug/qa/check_cert_staleness.py --detail`
+<!-- /CERT-STALENESS-BANNER -->
+
 # Group 6 (precision / observations — the projection arc) — `/qa` profile
 
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This

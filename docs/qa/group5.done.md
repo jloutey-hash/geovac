@@ -1,3 +1,13 @@
+<!-- CERT-STALENESS-BANNER -->
+> ### ⚠ RE-CERTIFICATION OWED
+> This record certifies the state as of **2026-07-04**. Since then **4 `.tex` changed** (plus 5 same-day, ambiguous): group5_qed_gauge_synthesis.tex, paper_25_hopf_gauge_structure.tex, paper_28_qed_s3.tex, paper_2_alpha.tex, paper_30_su2_wilson.tex, paper_33_qed_selection_rules.tex, ….
+>
+> **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
+>
+> Re-measure rather than trusting this banner — it is itself a snapshot and will go stale the same way:
+> `python debug/qa/check_cert_staleness.py --detail`
+<!-- /CERT-STALENESS-BANNER -->
+
 # Group 5 (QED / gauge) — `/qa` profile
 
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This

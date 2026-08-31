@@ -1,3 +1,13 @@
+<!-- CERT-STALENESS-BANNER -->
+> ### ⚠ RE-CERTIFICATION OWED
+> This record certifies the state as of **2026-06-28**. Since then **7 `.tex` changed** (plus 3 same-day, ambiguous): Paper_8_Bond_Sphere_Sturmian.tex, group2_quantum_chemistry_synthesis.tex, paper_11_prolate_spheroidal.tex, paper_12_algebraic_vee.tex, paper_17_composed_geometries.tex, paper_19_coupled_composition.tex, ….
+>
+> **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
+>
+> Re-measure rather than trusting this banner — it is itself a snapshot and will go stale the same way:
+> `python debug/qa/check_cert_staleness.py --detail`
+<!-- /CERT-STALENESS-BANNER -->
+
 # Group 2 (Quantum chemistry) — `/qa` profile
 
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
