@@ -27,6 +27,20 @@ WHY THIS EXISTS (the 2026-06-23 lesson):
   /drifting fact -> single-source / deterministic check).
 
 HOW IT WORKS:
+  KNOWN LIMIT (measured 2026-08-31, /qa trunk). Patterns are matched
+  LINE BY LINE and typically use `[^.\n]{0,45}` spans, so a targeted phrase
+  straddling a LaTeX line wrap cannot match. Real: Paper 38 line 534 ends
+  "stated the main theorem in the" and 535 begins "Latr\'emoli\`ere
+  propinquity", so that alternative never fires there.
+  BUT MEASURED IMPACT IS ZERO: joining adjacent line pairs across every
+  entry and every gated file surfaces 0 additional live hits, 0 on
+  fail-severity entries. The Paper 38 straddle sits inside a
+  \begin{remark}[history] describing an EARLIER DRAFT -- disclosed history,
+  which the exemption exists for. So this is latent fragility, not a live
+  blind spot; do not re-derive it as a corpus alarm. (Scope of that
+  measurement: single-wrap straddles. Spans are <=45 chars so that
+  dominates; a two-wrap straddle was not tested.)
+
   THE REGISTRY (below) lists each retracted claim as {pattern, exempt_if_nearby,
   files, severity, scope}. For every pattern hit the screen checks whether a
   withdrawal marker (WITHDRAWN / retracted / "false" / Erratum / "state-space GH"
@@ -590,6 +604,11 @@ REGISTRY = [
                             r"|state-space|strictly\s+stronger|open|target|annihilat"
                             r"|historical|retract|weak-form|NOT\s+a",
         "files": [
+            # 38 and 32 added 2026-08-31: the /qa trunk run found Paper 38
+            # carried NO C16 entry at all, while its trunk C7 criterion names
+            # this exact overclaim. 32 is the other group1 trunk root.
+            "papers/group1_operator_algebras/paper_38_*.tex",
+            "papers/group1_operator_algebras/paper_32_*.tex",
             "papers/group1_operator_algebras/paper_39_*.tex",
             "papers/group1_operator_algebras/paper_40_*.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",

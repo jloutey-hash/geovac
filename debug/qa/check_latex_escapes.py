@@ -185,7 +185,35 @@ def main() -> int:
     files = [f for f in files
              if "/archive/" not in f.replace("\\", "/")]
     if args.gate:
-        files = [f for f in files if args.gate in f.replace("\\", "/")]
+        # Named scopes resolve to an explicit file list; anything else keeps
+        # the historical substring behaviour.  `trunk` NEEDS a named scope:
+        # no trunk paper's path contains "trunk", so the substring filter
+        # matched nothing and this gate reported PASS on 0 papers -- it had
+        # never examined a trunk document.  Scope per docs/qa/trunk.done.md.
+        NAMED = {
+            "trunk": [
+                "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+                "papers/group3_foundations/paper_1_spectrum.tex",
+                "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+                "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+                "papers/group1_operator_algebras/"
+                "paper_38_su2_propinquity_convergence.tex",
+                "papers/synthesis/group3_foundations_synthesis.tex",
+            ],
+        }
+        if args.gate in NAMED:
+            want = set(NAMED[args.gate])
+            # glob yields ABSOLUTE paths; the scope list is repo-relative, so
+            # match by suffix. Comparing them directly matched nothing.
+            files = [f for f in files
+                     if any(f.replace("\\", "/").endswith(w) for w in want)]
+            hit = {w for w in want
+                   if any(f.replace("\\", "/").endswith(w) for f in files)}
+            if hit != want:
+                print(f"   [scope] WARNING: {len(want - hit)} file(s) in the "
+                      f"'{args.gate}' scope were not found: {sorted(want - hit)}")
+        else:
+            files = [f for f in files if args.gate in f.replace("\\", "/")]
 
     total = 0
     for f in files:

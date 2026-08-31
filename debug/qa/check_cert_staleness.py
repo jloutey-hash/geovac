@@ -63,7 +63,9 @@ def paths_for(target: str) -> list[str]:
     if target == "trunk":
         # Scope per docs/qa/trunk.done.md: Papers 0, 1, 7 (group3) + 32, 38
         # (group1) -- the roots SS9 says to review before any branch.
-        out = []
+        # The DoD scope includes the group3 synthesis, not just the five
+        # papers; omitting it was the same scope gap as C19's, one level up.
+        out = ["papers/synthesis/group3_foundations_synthesis.tex"]
         for n in (0, 1, 7, 32, 38):
             out += [str(p.relative_to(ROOT)).replace("\\", "/")
                     for p in ROOT.glob(f"papers/*/[Pp]aper_{n}_*.tex")]
