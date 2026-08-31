@@ -153,13 +153,81 @@ C13 asserts every test cited in a paper exists; C22 would assert every paper
 claim cited by a test still exists and is not retracted — and C16's registry
 already supplies the retraction list.
 
-**Honest gap:** the `exploration` category has **no mechanical expiry test**.
-Nothing computable distinguishes "still guarding something" from "residue."
-That needs a human sweep, and §14's `tests/_archive/` has absorbed 29 files
-in the project's whole history, so the sweep has not been happening on its
-own.
+**Superseded by §2b (2026-08-31):** this section originally closed with
+"no mechanical expiry test ... needs a human sweep." PI direction retired
+that -- there is no human sweep; the project is agentic, and the rule is
+whether a test backs something in the **papers**. Applying it took `unknown`
+from 14 to 0. Retained here only as the reasoning §2b replaced.
 
 ---
+
+## 2b. Increment 3 — resolving the unknowns (2026-08-31)
+
+The "14 unknown-purpose files" were carried as needing a **human sweep**.
+PI direction closed that: *"we have no human sweep, this project is
+agentic; the stuff we really need working is in the papers."* That is a
+decision rule, and applying it dissolved most of the bucket.
+
+**Most were not residue — they name their paper in their own docstring.**
+
+| file | its own words |
+|:--|:--|
+| `test_galois_ihara` | "closed forms from **Paper 29**" |
+| `test_h2_rovib_morse` | "Backing test for **Paper 13** Section IX" |
+| `test_topos4_vanishing_lemma` | "**Paper 57** sec:open_bohr" |
+| `test_spectral_zero_stats` | "known values from **Paper 28**" |
+
+So a **fifth inference source** was added — the module docstring, read by
+`ast.get_docstring` rather than by regex over the file, so a paper number in
+a comment or an unrelated literal cannot mint a link. Recorded as source
+`docstring` and kept **distinguishable** from the matrix and filename
+sources, because it is weaker: a docstring may mention a paper in passing
+rather than back a claim in it. Labelling the weaker source is the
+difference between inferring provenance and manufacturing it.
+
+**Two more purposes the corpus already had:**
+
+- **falsifier** — `test_s3_w10_identification` and `test_s4_stage2_depth`
+  open with "Frozen falsifier" / "Falsifier for the … verdict". §1's mission
+  statement makes a frozen falsifier *the thing that renders a verdict
+  FORCED*, so these are load-bearing. Calling them decay candidates was the
+  classifier's failure, not theirs.
+- **guard** — smoke tests over generated data, demo guards, regressions for
+  `debug/` drivers. Real purposes, none a paper claim.
+- **negative-result** — a floor, not a census. Six tests freeze a NEGATIVE
+  outcome; five already carry a stronger purpose, so the tier reports **1**.
+  Promoting the other five to make the number look better would make the
+  taxonomy read well and mean less.
+
+| | before | after |
+|:--|--:|--:|
+| paper-backing | 176 (49%) | **198 (55%)** |
+| unknown | 14 (4%) | **0** |
+
+### The one genuine archive: three superseded prolate tests
+
+`test_prolate_scf`, `test_prolate_heh_plus`, `test_prolate_h2_4sigma` →
+`tests/_archive/superseded/` under §14. They imported archived **duplicates**
+of functionality now live in `geovac/` (`prolate_scf.py`,
+`prolate_heteronuclear_scf.py`) and tested claims **Paper 11 does not make** —
+HeH⁺, the 4σ orbital and SCF/Z_eff are all absent from its text, so linking
+them to Paper 11 would have been manufacturing provenance.
+
+The §14 redirect-before-archive check passed before the move: the live
+modules are covered by `test_prolate_grid_scf`, `test_prolate_relaxed_ci`,
+`test_prolate_heteronuclear_scf` and the `test_paper11_*` family; nothing
+imports or cites the three; and the archived code they exercise is referenced
+by no `geovac/` module. **No production coverage lost**, and three of the 98
+over-budget files leave the default suite for a reason other than speed.
+
+### Two coverage findings, logged not fixed
+
+- **`geovac/prolate_active_space.py` has no test at all.**
+- **The archive has rotted**: 4 files in `tests/_archive/superseded/` cannot
+  import (`MolecularLatticeIndex`, `compute_vee_s3_overlap`,
+  `compute_nuclear_coupling_screened` — all removed from `geovac/`).
+  Pre-existing, none of them the three just moved. §14 treats archived tests
+  as institutional memory runnable on demand; four of them are unreadable.
 
 ## 3. Method notes
 

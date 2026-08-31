@@ -7,6 +7,80 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.2.3] - 2026-08-31
+
+### Changed — the 14 unknown-purpose tests resolved to zero (Increment 3)
+
+The purpose index's residual bucket was carried as needing a **human
+sweep**. PI direction retired that: *"we have no human sweep, this project
+is agentic; the stuff we really need working is in the papers."* That is a
+decision procedure, and applying it dissolved the bucket.
+
+**Most were not residue — they name their paper in their own docstring**, and
+nothing was harvesting it (`test_galois_ihara` → "closed forms from Paper
+29"; `test_h2_rovib_morse` → "Backing test for Paper 13 Section IX";
+`test_topos4_vanishing_lemma` → "Paper 57 sec:open_bohr";
+`test_spectral_zero_stats` → "known values from Paper 28"). A **fifth
+inference source** was added — the module docstring, read via
+`ast.get_docstring` rather than a regex over the file, so a paper number in a
+comment or an unrelated literal cannot mint a link. Recorded as source
+`docstring` and kept **distinguishable** from the matrix and filename
+sources, because it is weaker: a docstring may mention a paper in passing
+rather than back a claim in it. Labelling the weaker source is the difference
+between inferring provenance and manufacturing it.
+
+Two further purposes the corpus already had, both detected from text the
+authors already wrote — no declaration format, again:
+
+- **falsifier** — `test_s3_w10_identification`, `test_s4_stage2_depth` open
+  with "Frozen falsifier" / "Falsifier for the … verdict". §1's mission
+  statement makes a frozen falsifier *the thing that renders a verdict
+  FORCED*, so these are load-bearing; calling them decay candidates was the
+  classifier's failure, not theirs.
+- **guard** — smoke tests over generated data, demo guards, regressions for
+  `debug/` drivers.
+- **negative-result** — a **floor, not a census**. Six tests freeze a NEGATIVE
+  outcome; five already carry a stronger purpose, so the tier reports **1**.
+  Promoting the other five would make the taxonomy read better and mean less.
+
+| | before | after |
+|:--|--:|--:|
+| paper-backing | 176 (49%) | **198 (55%)** |
+| unknown | 14 (4%) | **0** |
+
+### Changed — three superseded prolate tests archived (§14)
+
+`test_prolate_scf`, `test_prolate_heh_plus`, `test_prolate_h2_4sigma` →
+`tests/_archive/superseded/`. They imported archived **duplicates** of
+functionality now live in `geovac/` (`prolate_scf.py`,
+`prolate_heteronuclear_scf.py`) and tested claims **Paper 11 does not make** —
+HeH⁺, the 4σ orbital and SCF/Z_eff are all absent from its text, so linking
+them to Paper 11 would have manufactured the provenance this pass otherwise
+refused to invent.
+
+The §14 redirect-before-archive check ran **before** the move: the live
+modules are covered by `test_prolate_grid_scf`, `test_prolate_relaxed_ci`,
+`test_prolate_heteronuclear_scf` and the `test_paper11_*` family; nothing
+imports or cites the three; and the archived code they exercise is referenced
+by no `geovac/` module. **No production coverage lost.** Three of the 98
+over-budget files leave the default suite for a reason other than speed.
+
+### Added — two coverage findings, logged not fixed
+
+- **`geovac/prolate_active_space.py` has no test at all.**
+- **The archive has rotted**: four files in `tests/_archive/superseded/`
+  cannot import (`MolecularLatticeIndex`, `compute_vee_s3_overlap`,
+  `compute_nuclear_coupling_screened`, all since removed from `geovac/`).
+  Pre-existing, none of them the three just moved. §14 treats archived tests
+  as institutional memory runnable on demand; four of them are unreadable.
+
+### Fixed — a superseded verdict replaced, not appended
+
+The memo's §2 still closed with "no mechanical expiry test … needs a human
+sweep", which §2b supersedes. Replaced per §13.11 rule 9 rather than left
+standing: two contradictory verdicts with the stale one first is the exact
+failure this arc has spent three versions removing.
+
 ## [v5.2.2] - 2026-08-31
 
 ### Added — C22, the test → claim backing gate (Stage 2 Increment 2)

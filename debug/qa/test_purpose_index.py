@@ -131,6 +131,35 @@ GATE_SELFTEST = re.compile(r"^test_(.*_check|numeric_registry|"
 # paper-side inference is structurally blind to it.
 WH_NAMED = re.compile(r"^test_(wh\d+)_")
 
+# A frozen falsifier backs a register or sprint VERDICT rather than a paper
+# section.  SS1's mission statement makes it the thing that renders a verdict
+# FORCED, so it is load-bearing -- reporting one as a decay candidate is the
+# classifier failing, not the test.
+FALSIFIER = re.compile(r"frozen falsifier|falsifier for|freezes the "
+                       r"(theorem-grade )?result|pins the (lemma|verdict)",
+                       re.I)
+
+# Smoke tests over generated data, demo guards, and regressions for debug/
+# drivers.  Real purposes, none of them a paper claim.
+GUARD = re.compile(r"smoke test|regression tests? for|demo\b", re.I)
+
+# A test freezing a NEGATIVE outcome is institutional memory (SS3 keeps 40+
+# documented negatives; SS14 forbids deleting dead-end tests).  Six tests
+# carry this marker; five already have a stronger purpose, so the tier sits
+# just above `unknown` and reports only the residue -- a floor, not a census.
+NEGATIVE_RESULT = re.compile(
+    r"outcome:?\s*NEGATIVE|NEGATIVE\s*(--|—)|DECISIVE-NEG"
+    r"|negative result", re.I)
+
+
+def _docstring(name: str) -> str:
+    p = TESTS / name
+    try:
+        return ast.get_docstring(
+            ast.parse(p.read_text(encoding="utf-8", errors="replace"))) or ""
+    except (SyntaxError, OSError):
+        return ""
+
 
 def classify(name: str, papers: list[str], modules: list[str]) -> str:
     """Purpose, with the paper link as ONE kind among several.
@@ -145,9 +174,43 @@ def classify(name: str, papers: list[str], modules: list[str]) -> str:
         return "paper-backing"
     if WH_NAMED.match(name):
         return "wh-register"
+    doc = _docstring(name)
+    if FALSIFIER.search(doc):
+        return "falsifier"
     if modules:
         return "module-guard"
+    if GUARD.search(doc):
+        return "guard"
+    if NEGATIVE_RESULT.search(doc):
+        return "negative-result"
     return "unknown"
+
+
+# "Paper 29", "Paper~13", "paper_57" -- but NOT "papers" or a bare number.
+# Require the word so that a stray "13" in prose cannot mint a link.
+DOCSTRING_PAPER = re.compile(r"\b[Pp]aper[s_~ ]{1,2}(\d{1,2})\b")
+
+
+def from_docstrings() -> dict[str, set[str]]:
+    """Papers a test names in its own module docstring.
+
+    The weakest source, and deliberately kept separate in `sources`: a
+    docstring may mention a paper in passing rather than back a claim in
+    it.  Read via ast.get_docstring, not a regex over the file, so a paper
+    number in a comment or an unrelated string cannot mint a link.
+    """
+    out: dict[str, set[str]] = defaultdict(set)
+    for p in test_files():
+        try:
+            doc = ast.get_docstring(
+                ast.parse(p.read_text(encoding="utf-8", errors="replace")))
+        except SyntaxError:
+            continue
+        if not doc:
+            continue
+        for num in set(DOCSTRING_PAPER.findall(doc)):
+            out[p.name].add(str(int(num)))
+    return out
 
 
 def imported_modules(path: Path) -> set[str]:
@@ -171,10 +234,11 @@ def build() -> dict:
     matrix, rot = from_matrix()
     fname = from_filename()
     inpaper = from_papers()
+    docs = from_docstrings()
     index = {}
     for p in test_files():
         papers = set(matrix.get(p.name, set())) | fname.get(p.name, set()) \
-            | inpaper.get(p.name, set())
+            | inpaper.get(p.name, set()) | docs.get(p.name, set())
         srcs = []
         if p.name in matrix:
             srcs.append("matrix")
@@ -182,6 +246,8 @@ def build() -> dict:
             srcs.append("filename")
         if p.name in inpaper:
             srcs.append("paper-inline")
+        if p.name in docs:
+            srcs.append("docstring")
         mods = sorted(imported_modules(p))
         index[p.name] = {
             "papers": sorted(papers),
@@ -239,8 +305,8 @@ def main() -> int:
 
     n = len(idx)
     print(f"test files                     {n}")
-    order = ["paper-backing", "wh-register", "infrastructure",
-             "module-guard", "unknown"]
+    order = ["paper-backing", "falsifier", "wh-register", "infrastructure",
+             "guard", "module-guard", "negative-result", "unknown"]
     note = {"module-guard": "<- exercises code, backs no stated claim",
             "unknown": "<- decay candidates"}
     for k in order:
