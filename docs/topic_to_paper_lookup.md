@@ -247,7 +247,7 @@
 | R-dependent spectral sums on S³ | 18 | §IV | Core |
 | Petermann two-loop coefficient (structural match) | 18 | §IV | Core |
 | Energy-entanglement decoupling | 26 | All | Observation |
-| Basis-intrinsic ERI sparsity (step-function transition) | 26 | Sec III | Observation |
+| Basis-intrinsic ERI sparsity (sparsity transition at the identity) | 26 | Sec III | Observation |
 | Entanglement network topology (hub migration) | 26 | Sec IV | Observation |
 | Core-valence entanglement decoupling | 26 | Sec V | Observation |
 | S ~ Z^{-2.56} entanglement scaling | 26 | Sec II | Observation |

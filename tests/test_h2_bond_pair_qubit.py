@@ -102,12 +102,12 @@ class TestH2BondPairStructure:
         # the production path may take advantage of additional cancellations
         # via the spec-driven builder, but require >= 100 to catch regressions
         # in the selection-rule structure.
-        assert 100 <= h2_maxn2['N_pauli'] <= 112
+        assert 270 <= h2_maxn2['N_pauli'] <= 280  # exact-rule 2026-08-29 (measured 279 non-id/280; rule-A was 111/112)
 
     def test_pauli_count_maxn3(self, h2_maxn3: dict) -> None:
         """Pauli term count at max_n=3 is around the historical 2627."""
         # Relaxed to a tight window for the same reason as max_n=2.
-        assert 2500 <= h2_maxn3['N_pauli'] <= 2700
+        assert 14000 <= h2_maxn3['N_pauli'] <= 14300  # exact-rule 2026-08-29 (measured 14178/14179; rule-A was 2627)
 
     def test_states_list(self, h2_maxn2: dict) -> None:
         """States should be (n,l,m) tuples in canonical order."""
@@ -229,8 +229,9 @@ class TestEcosystemExportH2:
         meta = h.metadata
         assert meta.get('encoding') == 'bond-pair'
         assert meta['Q'] == 10
-        # Pauli count window matches the relaxed structural test above.
-        assert 100 <= h.n_terms <= 112
+        # Pauli count window matches the relaxed structural test above
+        # (exact-rule 2026-08-29: 280 with identity; was 112).
+        assert 270 <= h.n_terms <= 280
 
     def test_r_parameter_passed(self) -> None:
         """R parameter should be passed through to bond-pair builder."""

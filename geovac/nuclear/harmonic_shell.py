@@ -351,8 +351,11 @@ def _ck_coefficient(la: int, ma: int, lc: int, mc: int, k: int) -> float:
     Gaunt angular coupling: c^k(l,m; l',m').
 
     c^k = (-1)^m sqrt((2l+1)(2l'+1)) * (l k l'; 0 0 0) * (l k l'; -m q m')
+
+    q = ma - mc: the 3j bottom row must sum to zero.  (Corrected 2026-08-29;
+    see debug/sprint_eri_evaluator_defects_memo.md.)
     """
-    q = mc - ma
+    q = ma - mc
     pre = (-1) ** ma * msqrt((2 * la + 1) * (2 * lc + 1))
     w1 = wigner3j(la, k, lc, 0, 0, 0)
     if abs(w1) < 1e-15:
@@ -407,7 +410,9 @@ def _build_eri_block_ho(
     for (a, c), ck_ac_list in ac_k_map.items():
         na, la, ma = states_nlm[a]
         nc, lc, mc = states_nlm[c]
-        for (b, d), ck_bd_list in ac_k_map.items():
+        # Condon-Shortley: second factor is c^k(d,b), not c^k(b,d)
+        # (corrected 2026-08-29, delta-4).
+        for (d, b), ck_bd_list in ac_k_map.items():
             nb, lb, mb = states_nlm[b]
             nd, ld, md = states_nlm[d]
             if ma + mb != mc + md:

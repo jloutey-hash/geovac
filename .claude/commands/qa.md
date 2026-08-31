@@ -29,6 +29,41 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
    - **C19 eaten-escape corruption** — `debug/qa/check_latex_escapes.py` (FAILs on any LaTeX control sequence destroyed by a Python string escape: `\ref` -> CR + `ef`, `\textbf` -> BS + `extbf`, `\times` -> TAB + `imes`, `\'e` -> `'e`; plus bare control characters. `papers/archive/` excluded; indentation TABs ignored; `--selftest` built in). **This CANNOT ride on C10 (compiles) — the corruption compiles clean:** LaTeX renders the literal text `ef{sec:obstruction}` with no error, no warning and no undefined reference, so the cross-reference silently vanishes from the document. **The deterministic answer to a class that reached the corpus three times** (two TAB corruptions in Paper 59 during the v4.107.0 remediation, one destroying an `[OBSERVATION]` tag; a backspace pair that silently dead-lettered a C17 registry regex; and the CR corruption in Paper 59's non-classicality pointer, found by the 2026-08-22 claims re-run) — every instance caught only because a human or an LLM noticed odd rendering. **HARD RULE: never apply a LaTeX-bearing edit through a bash-heredoc Python replacement string** — write the script to a file with raw strings and execute it; this gate is the backstop for when that slips. `--gate <branch>` per sweep.
    - **REGISTRY DISCRIMINATION RULE (hard, added 2026-08-22).** Whenever you ADD or EDIT an entry in the C16 or C17 registry, you MUST prove it discriminates before moving on: run the pattern against (a) the retired/wrong wording — it must FIRE — and (b) the corrected wording — it must stay SILENT. Report both results. **An entry that fires on nothing is worse than no entry at all**, because the gate reports PASS and the class is now believed guarded. This has bitten twice: a pre-existing backspace-corrupted `pauli-advantage-floor` regex in C17 sat dead for an unknown period, and on 2026-08-22 a newly-added `brown-surjection-attribution` pattern was written with doubled escapes (`\\\\emph` matches two literal backslashes; LaTeX has one) and fired on neither the retired nor the corrected form. Both were found only because someone tested them. Escaping LaTeX inside a Python raw string inside a regex is three nested escape layers — assume you got it wrong until the test says otherwise.
    - **GATE SELF-AUDIT RULE (hard, added 2026-08-22).** A gate's `RESULT: PASS` is a *claim*, and claims get tested. Before recording any deterministic gate as green, confirm two things: **(a) it fires** — the discrimination test above — and **(b) its scope covers what the criterion covers**. (b) is the one that hides. This bit **four times in one session, in three distinct ways**: two registry patterns that fired on nothing (above); **C10 certified by exit code**, when `pdflatex -halt-on-error` exits 0 on undefined references — so "C10 green" was reported indefinitely for a class the check never measured, and three dangling cross-document `\ref`s (plus 12 further affected documents corpus-wide) surfaced the moment a real check was written; and **C5/C12, which DETECTED a planted K-rule violation in Paper 24 and then discarded its own verdict**, because the gate hard-coded a TRUNK set of six documents, downgraded everything else to advisory, and printed PASS — while §13.5 makes that prohibition corpus-wide. **A gate that fires correctly and scopes its verdict away is indistinguishable, from the outside, from a working one.** When you touch a gate, state its scope in the run notes; when a gate reports PASS, say *what scope* it passed.
+   - **C15 inline arXiv-ID resolvability** — `debug/qa/check_inline_arxiv.py`
+     (flags inline arXiv identifiers that do not resolve to a real preprint;
+     the deterministic half of the fabricated-ID class, whose LLM half is the
+     `citation-reviewer`). `--gate <branch>` per sweep.
+   - **C20 inline-attribution resolvability** —
+     `debug/qa/check_inline_attributions.py` (enumerates inline
+     `Author~Year` attributions and flags those with no resolvable
+     `\bibitem`; ratchet semantics against
+     `debug/qa/inline_attribution_baseline.json`, so it FAILs only on an
+     attribution outside the baseline). Rationale: every external-citation
+     defect of the 2026-08 arc lived in the bibitem-free layer, and the class
+     is mechanical. `--selftest` built in.
+     *(Both C15 and C20 were defined in `criteria.md` but never listed here,
+     so cert runs were not invoking them — added 2026-08-30.)*
+   - **C21 numeric consistency** — `debug/qa/check_numeric_consistency.py`
+     (recomputes every DERIVED quantity from its registry inputs; checks every
+     `\gvq{key}{literal}` annotation against `debug/qa/numeric_registry.py`,
+     accepting correct display rounding; blocks retired values *naming the key
+     that replaces them*; enforces one identity convention per kind within a
+     table; reports unregistered multi-document numerals as advisory debt).
+     **The deterministic answer to the 2026-08-30 lesson:** a census found
+     **352 numerals at more than one locus and 201 across more than one
+     document**, and successive delta passes were each finding 15–20 genuine
+     defects — about 5% of that coupled surface — because manual review
+     *samples* the dependency graph rather than traversing it. The classes
+     that kept surviving were relational, not value-level: **twins** (the same
+     quantity tabulated in two papers), **derivations** (λ/Q, ratios,
+     exponents fitted from printed columns), and **conventions**
+     (identity-in vs identity-out, where both values are right and only the
+     pairing is wrong). It found a third relativistic table on its first run.
+     **MAINTENANCE RULE:** when a measured value moves, edit the registry
+     FIRST, run C21, and then **re-read the prose at every locus it names** —
+     a sentence around a number is a claim keyed to that number's magnitude
+     and does not update itself. `--index <key>` lists those loci.
+     `--gate <branch>` per sweep; self-test `tests/test_numeric_registry.py`.
 
    **Run shapes (2026-07-02, PI direction — the cost protocol).** A `/qa` invocation is one of two shapes; choose FIRST, before any dispatch:
    - **FULL run** — everything below, all dimensions, whole-paper enumeration, completeness-critic. Fired at exactly two moments: the **first cert** of a fresh target, and the **final certifying pass**. Only a full run can produce PASS.

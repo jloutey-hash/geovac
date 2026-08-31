@@ -255,9 +255,9 @@ class TestBackwardCompatibility:
 
     @pytest.mark.parametrize("spec_fn,expected_pauli", [
         # Identity-tapering sprint: counts dropped by 1 in 2026-06 build
-        ('lih_spec', 333),
-        ('beh2_spec', 555),
-        ('h2o_spec', 777),
+        ('lih_spec', 837),
+        ('beh2_spec', 1395),
+        ('h2o_spec', 1953),
     ])
     def test_existing_composed_pauli_unchanged(self, spec_fn, expected_pauli):
         """First-row composed molecules produce exact same Pauli counts."""

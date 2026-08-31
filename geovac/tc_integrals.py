@@ -245,8 +245,13 @@ def _wigner3j(j1: int, j2: int, j3: int,
 
 
 def _ck_coefficient(la: int, ma: int, lc: int, mc: int, k: int) -> float:
-    """Gaunt angular coupling coefficient c^k(l,m,l',m')."""
-    q = mc - ma
+    """Gaunt angular coupling coefficient c^k(l,m,l',m').
+
+    q = ma - mc (corrected 2026-08-29; the tracked xtc_angular_sparsity
+    engine was independently correct all along and measured 107/625 -- the
+    third in-corpus corroboration of the exact count).
+    """
+    q = ma - mc
     pre = ((-1) ** ma * np.sqrt((2 * la + 1) * (2 * lc + 1)))
     w1 = _wigner3j(la, k, lc, 0, 0, 0)
     if abs(w1) < 1e-15:
@@ -490,9 +495,19 @@ def compute_tc_integrals_block(
         for (a, c), ck_ac in ac_K_map.items():
             na, la, ma = states[a]
             nc, lc, mc = states[c]
-            for (b, d), ck_bd in ac_K_map.items():
+            # Condon-Shortley c^k(d,b) (corrected 2026-08-29, delta-4)
+            for (d, b), ck_bd in ac_K_map.items():
                 nb, lb, mb = states[b]
                 nd, ld, md = states[d]
+
+                # Coulomb m-selection rule (L_z conservation).  The two
+                # Gaunt factors share one multipole index q, so the term
+                # vanishes unless m_a + m_b = m_c + m_d.  Added 2026-08-30
+                # (delta-4 post-sweep): without it the tensor kept
+                # mismatched-q products -- 265 nonzeros at He n_max=2
+                # against the physical 107.
+                if ma + mb != mc + md:
+                    continue
 
                 # Term 1: electron 1 radial gradient
                 yk1_key = (nb, lb, nd, ld)

@@ -79,14 +79,24 @@ class TestTCRadialOnly:
         assert len(tc_eri) == 1
 
     def test_he_max_n2_radial_matches_bx3(self):
-        """He max_n=2: radial-only gives 65 integrals (BX-3 reference)."""
+        """He max_n=2 radial-only: 107 integrals.
+
+        Corrected 2026-08-30: the retired 65 came from the
+        pair-diagonal sign error; the 265 seen mid-arc came from
+        this module never imposing the Coulomb M_L rule. With both
+        fixed the count matches the physical ERI support exactly.
+        """
         states = []
         for n in range(1, 3):
             for l in range(n):
                 for m in range(-l, l + 1):
                     states.append((n, l, m))
         tc_eri = compute_tc_integrals_block(2.0, states, 2000, include_angular=False)
-        assert len(tc_eri) == 65
+        assert len(tc_eri) == 107
+        viol = [k for k in tc_eri
+                if states[k[0]][2] + states[k[1]][2]
+                != states[k[2]][2] + states[k[3]][2]]
+        assert not viol, f'{len(viol)} M_L-violating TC entries'
 
     def test_he_max_n1_angular_same_as_radial(self):
         """At max_n=1, no l>0 orbitals exist, so angular=radial."""
@@ -105,8 +115,21 @@ class TestTCRadialOnly:
 class TestTCAngularGradient:
     """Test that angular gradient produces additional integrals for l>0."""
 
-    def test_he_max_n2_angular_adds_integrals(self):
-        """He max_n=2: angular gradient should add integrals beyond radial-only."""
+    def test_he_max_n2_angular_adds_only_unphysical_integrals(self):
+        """He max_n=2: every integral the angular gradient adds is spurious.
+
+        The TC angular-gradient assembly contributes 26 entries beyond
+        radial-only, and all 26 violate L_z conservation
+        (m_a + m_b != m_c + m_d).  That is impossible for a
+        rotationally-invariant correlator u(r12) -- the transcorrelated
+        Hamiltonian must commute with total L_z -- so the angular term's
+        entire contribution on this basis is a bookkeeping artifact.
+
+        Recorded 2026-08-30, not masked with a filter: dropping the
+        violating entries would hide the error and leave the survivors
+        unverified.  Sharpens the CLAUDE.md SS3 dead-end (angular gradient
+        buys 0.01 pp for 2.66x the Pauli terms) -- here it buys nothing.
+        """
         states = []
         for n in range(1, 3):
             for l in range(n):
@@ -114,8 +137,19 @@ class TestTCAngularGradient:
                     states.append((n, l, m))
         eri_rad = compute_tc_integrals_block(2.0, states, 2000, include_angular=False)
         eri_full = compute_tc_integrals_block(2.0, states, 2000, include_angular=True)
-        assert len(eri_full) > len(eri_rad), (
-            f"Angular should add integrals: {len(eri_full)} vs {len(eri_rad)}"
+
+        def ml_ok(k):
+            return (states[k[0]][2] + states[k[1]][2]
+                    == states[k[2]][2] + states[k[3]][2])
+
+        added = set(eri_full) - set(eri_rad)
+        assert len(added) == 26, f"angular added {len(added)}, expected 26"
+        assert all(not ml_ok(k) for k in added), (
+            "some angular-added integrals conserve M_L -- the physical "
+            "content of the angular term has changed; re-derive"
+        )
+        assert all(ml_ok(k) for k in eri_rad), (
+            f"radial-only must conserve M_L: {len(eri_rad)} entries"
         )
 
     def test_angular_integrals_are_real(self):
@@ -145,8 +179,65 @@ class TestTCComposedAngular:
         from geovac.molecular_spec import lih_spec
         spec = lih_spec()
         result = build_tc_composed_hamiltonian(spec, include_angular=False)
-        assert result['N_pauli'] == 562, (
-            f"LiH radial-only: expected 562 Pauli, got {result['N_pauli']}"
+        assert result['N_pauli'] == 1354, (
+            f"LiH radial-only: expected 1354 Pauli, got {result['N_pauli']}"
+        )
+
+    def test_composed_angular_adds_only_lz_violating_entries(self):
+        """LiH composed: all 78 entries the angular gradient adds break L_z.
+
+        The block-level companion above pins this for a single He block (26
+        entries).  This is the same defect at the level Paper 14 quoted its
+        angular-gradient resource multipliers -- 562 -> 1,498 and a 4.49x
+        total, now withdrawn -- so the claim is backed where it is made.
+
+        Convention control is load-bearing, not decoration.  The composed
+        ERI is stored in CHEMIST order, so L_z reads m_a + m_c == m_b + m_d;
+        applying the block-level (physicist) rule here reports 126
+        violations on the plain composed tensor, i.e. a confidently wrong
+        answer.  Asserting zero violations on both clean tensors is what
+        makes the 78 mean something.
+        """
+        import numpy as np
+        from geovac.composed_qubit import (
+            build_composed_hamiltonian, _enumerate_states,
+        )
+        from geovac.tc_integrals import build_tc_composed_hamiltonian
+        from geovac.molecular_spec import lih_spec
+
+        spec = lih_spec()
+        comp = build_composed_hamiltonian(spec)
+        labels = []
+        for b in comp["blocks"]:
+            labels.extend(_enumerate_states(2)[: b["n_orbitals"]])
+        m = [st[2] for st in labels]
+
+        e_plain = np.asarray(comp["eri"])
+        e_rad = np.asarray(
+            build_tc_composed_hamiltonian(spec, include_angular=False)["eri"])
+        e_ang = np.asarray(
+            build_tc_composed_hamiltonian(spec, include_angular=True)["eri"])
+        assert len(labels) == e_plain.shape[0]
+
+        def violates(x):
+            a, b_, c, d = x
+            return m[a] + m[c] != m[b_] + m[d]
+
+        for name, tensor in (("plain composed", e_plain), ("TC radial", e_rad)):
+            bad = [x for x in np.argwhere(np.abs(tensor) > 1e-12)
+                   if violates(x)]
+            assert not bad, (
+                f"CONTROL FAILED: {name} has {len(bad)} L_z violations; the "
+                f"index convention is wrong, so the angular count below is "
+                f"meaningless"
+            )
+
+        added = np.argwhere((np.abs(e_ang) > 1e-12) & (np.abs(e_rad) <= 1e-12))
+        assert len(added) == 78, f"angular added {len(added)}, expected 78"
+        assert all(violates(x) for x in added), (
+            "some angular-added composed entries conserve L_z -- the physical "
+            "content of the angular term has changed; re-derive before "
+            "quoting any angular-gradient resource number"
         )
 
     def test_angular_increases_pauli_count(self):

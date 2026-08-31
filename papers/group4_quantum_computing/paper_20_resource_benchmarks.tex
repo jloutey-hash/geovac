@@ -19,6 +19,16 @@
   xrightmargin=0.5em,
 }
 
+
+% ---------------------------------------------------------------
+% \gvq{registry-key}{value} -- a load-bearing quantity, carrying a
+% foreign key into debug/qa/numeric_registry.py alongside its literal
+% value.  Renders as the value alone, so this file and the archived
+% PDF stay self-contained; the key gives the QA gate (C20) referential
+% integrity, and `--index <key>` names every locus citing the
+% quantity when it moves.  See CLAUDE.md SS15.
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{Structurally Sparse Molecular Hamiltonians for Near-Term Quantum Simulation}
@@ -31,18 +41,27 @@
 \begin{abstract}
 We present a library of qubit Hamiltonians for molecular quantum simulation
 that are structurally sparser than conventional Gaussian-basis alternatives
-by one to three orders of magnitude. The Hamiltonians are constructed from
+across a range that depends strongly on the comparison:\ from
+$0.28\times$ (H$_2$O against minimal-basis STO-3G, i.e.\ \emph{denser})
+through $55$--$76\times$ against cc-pVDZ, to $317\times$ at the most
+favourable equal-qubit point.  (Corrected 2026-08-30:\ the retired
+pair-diagonal rule supported a blanket ``one to three orders of
+magnitude''; it does not survive at either end.)
+The Hamiltonians are constructed from
 a spectral graph theory framework (GeoVac) that exploits natural coordinate
 separations in molecular electronic structure, producing block-diagonal
 electron repulsion integrals and Gaunt-enforced selection rules that persist
 through Jordan-Wigner encoding. For the composed architecture (PK-partitioned),
 the composed LiH Hamiltonian is near parity with minimal-basis STO-3G on
-Pauli count (334 vs.\ STO-3G's 276 reduced / 907 raw) while using more
-qubits; the decisive resource advantages are the $O(Q^{2.5})$ Pauli scaling
-and a 190$\times$ reduction versus cc-pVDZ.
+Pauli count (\gvq{lih_composed_pauli}{838} vs.\ STO-3G's \gvq{lih_sto3g_raw}{907} raw; $3.0\times$ more than the 276
+reduced) while using more qubits; the decisive resource advantages are the
+exact linearity of the Pauli count in~$Q$ across molecules at fixed basis
+and a 76$\times$ reduction versus cc-pVDZ.  (All counts corrected
+2026-08-29 to the exact global-$M_L$ ERI rule; see
+Sec.~\ref{sec:eri_rule}.)
 The balanced coupled architecture (PK-free) binds LiH with an FCI minimum
 at a computed $R_{\mathrm{eq}} = 3.227$~bohr (7.0\% above the experimental
-3.015~bohr) at $n_{\max}=2$ (878 Pauli terms, 30 qubits); a single-point
+3.015~bohr) at $n_{\max}=2$ (\gvq{lih_balanced_pauli}{2{,}726} Pauli terms, 30 qubits); a single-point
 evaluation at the experimental geometry reaches 0.20\% energy error at
 $n_{\max}=3$ (84 qubits) when solved exactly.  Chemistry-accuracy scope at $n_{\max}=2$ is
 \emph{row-conditional}: first-row hydrides (LiH, BeH$_2$, H$_2$O, $\ldots$)
@@ -60,13 +79,16 @@ $Z=1$--56, H through Ba, plus the He and H$_2$ reference atoms),
 including multi-center systems
 (CO, N$_2$, F$_2$), mixed
 frozen-core molecules (NaCl), and the full first transition series as hydrides (ScH through ZnH),
-with Pauli scaling $O(Q^{2.5})$
-confirmed universal across all three rows, compared to
+with the within-molecule basis exponent $3.17$ identical across all
+three rows (small-basis fit, $n_{\max} \le 3$; local slope rising
+toward $\sim 3.8$)---and, on the two-point $n_{\max}=1,2$ fit, an exponent
+of $2.8163$ identical across all six molecules to the digits shown,
+\emph{forced} by the exact $Q$-linearity at each basis rather than
+fitted---compared to
 $O(Q^{3.9\text{--}4.3})$ for Gaussian baselines.  The composed Pauli
-count is exactly linear in qubit count (coefficient $11.10$, exact,
-for main-group molecules; $9.23$ for $d$-orbital blocks under the
-pair-diagonal ERI approximation (Sec.~\ref{sec:eri_rule})---the exact
-global-$M_L$ rule makes the $d$-block coefficient higher, not lower),
+count is exactly linear in qubit count (coefficient $\gvq{composed_coeff}{27.90}$, exact,
+for main-group molecules; $30.03$ for $d$-orbital blocks --- both under
+the exact global-$M_L$ ERI rule, Sec.~\ref{sec:eri_rule}),
 so adding atoms to a molecule increases quantum cost linearly.
 Second- and third-row molecules use analytical frozen cores
 ([Ne], [Ar], [Ar]3$d^{10}$); the frozen-core energy enters only
@@ -109,9 +131,11 @@ cross-block Coulomb integrals.  The angular matrix elements are computed
 from Gaunt integrals (Wigner 3$j$ symbols), which impose exact selection
 rules that translate directly into structural zeros in the qubit Hamiltonian.
 
-The result is Pauli scaling of $O(Q^{2.2\text{--}2.5})$ across first-row
-molecules, with 51--1{,}712$\times$ fewer terms than Gaussian raw
-Jordan-Wigner baselines at comparable qubit counts~\cite{GeoVac_Paper14}.
+The result is a Pauli count exactly linear in~$Q$ across molecules at
+fixed basis (within-molecule basis exponent $3.17$), with
+$54$--$317\times$ fewer terms than Gaussian raw
+Jordan-Wigner baselines at comparable qubit counts~\cite{GeoVac_Paper14}
+(exact-rule numbers, 2026-08-29).
 This structural sparsity is compatible with all downstream optimizations
 (tapering, grouping, tensor factorization) and is basis-intrinsic rather
 than compression-dependent.
@@ -154,11 +178,11 @@ Pauli strings---delivered as a \texttt{SparsePauliOp} (Qiskit),
 \begin{lstlisting}
 from geovac.ecosystem_export import hamiltonian
 h = hamiltonian('LiH', R=3.015, max_n=2)
-op = h.to_qiskit()    # 334 Pauli terms
+op = h.to_qiskit()    # \gvq{lih_composed_pauli}{838} Pauli terms
 op_of = h.to_openfermion()
 op_pl = h.to_pennylane()
 print(h.n_qubits)     # 30
-print(h.one_norm)      # 32.6 Ha
+print(h.one_norm)      # 34.0 Ha
 \end{lstlisting}
 
 The operator is ready for use in any VQE, ADAPT-VQE, QPE, or other
@@ -177,14 +201,14 @@ reduced density matrix (1-RDM)~\cite{GeoVac_Paper17}:
   E_{\text{total}} = \langle\psi|H_{\text{elec}}|\psi\rangle
     + \mathrm{Tr}(h^{\text{PK}}\,\gamma)\,.
 \end{equation}
-This produces the sparsest qubit operator (334 Pauli terms for LiH)
+This produces the sparsest qubit operator (\gvq{lih_composed_pauli}{838} Pauli terms for LiH)
 at the cost of requiring a classical post-processing step.
 
 \paragraph{Balanced coupled (PK-free).}
 Cross-center nuclear attraction integrals, computed via a multipole
 expansion that terminates exactly at $L = 2\ell_{\max}$ by Gaunt
 selection rules~\cite{GeoVac_Paper19}, replace the PK pseudopotential.
-This produces a larger operator (878 Pauli terms for LiH at
+This produces a larger operator (\gvq{lih_balanced_pauli}{2{,}726} Pauli terms for LiH at
 $n_{\max}=2$) but one that is variationally complete within the
 composed partition---FCI on this Hamiltonian gives physical energies
 without any classical correction.
@@ -217,7 +241,7 @@ for $n_{\max}=2$ ($Q=30$ qubits, 15 spatial orbitals, FCI dimension
 
 \begin{table}[h]
 \caption{LiH balanced coupled FCI energies at $n_{\max}=2$
-  ($Q=30$, 878 Pauli terms, analytical V$_{ne}$ integrals).
+  ($Q=30$, \gvq{lih_balanced_pauli}{2{,}726} Pauli terms, analytical V$_{ne}$ integrals).
   $E_{\text{exact}}$ is the non-relativistic Born-Oppenheimer
   energy~\cite{Tung2011}.}
 \label{tab:pes_nmax2}
@@ -288,20 +312,24 @@ is solved exactly via FCI:
 
 For BeH$_2$ ($Q=50$), the balanced coupled 4-electron FCI gives
 $E=-14.146$~Ha (10.7\% error), compared to $-11.497$~Ha (27.4\%)
-for composed with PK.  The balanced 1-norm (306.4~Ha) is 18\% lower
-than composed with PK in-Hamiltonian (373.4~Ha; the previously printed
-354.9 came from the deprecated legacy BeH$_2$ builder path---the live
-values are pinned by \texttt{tests/test\_paper20\_library.py}),
+for composed with PK.  The balanced 1-norm ($328.1$~Ha) is 12\% lower
+than composed with PK in-Hamiltonian ($374.9$~Ha; re-measured 2026-08-30
+under the exact global-$M_L$ rule --- the retired figures were $306.4$ /
+$373.4$ / ``18\%'', and an earlier $354.9$ came from the deprecated legacy
+BeH$_2$ builder path; the live values are pinned by
+\texttt{tests/test\_paper20\_library.py}),
 demonstrating that the PK-free architecture is cheaper in the QPE
 regime, where PK must be encoded; with PK partitioned classically (the
-VQE default), the composed electronic-only 1-norm (66.0~Ha,
+VQE default), the composed electronic-only 1-norm ($68.8$~Ha,
 Table~\ref{tab:resources}) is far lower.
 
 For H$_2$O ($Q=70$), FCI is infeasible (10 electrons), but the
-Hamiltonian metrics are available: 5{,}798 Pauli terms, 1{,}511~Ha
-1-norm, 168 QWC groups.  The balanced 1-norm is $0.054\times$ the
+Hamiltonian metrics are available: $19{,}742$ Pauli terms,
+$1{,}612.0$~Ha 1-norm, $1{,}494$ QWC groups (re-measured 2026-08-30; the
+retired pre-exact-rule figures were $5{,}798$ / $1{,}511$ / $168$, the
+Pauli count low by $3.4\times$).  The balanced 1-norm is $0.057\times$ the
 composed total (which is dominated by the PK barrier at $Z_{\text{eff}}=6$),
-and $4.2\times$ the composed electronic-only 1-norm.
+and $4.3\times$ the composed electronic-only 1-norm.
 
 \subsection{Applicability: single-point vs.\ dissociation}
 \label{sec:applicability}
@@ -424,19 +452,20 @@ Gaussian raw Jordan-Wigner baselines.
   (electronic-only 1-norm); the GeoVac--Gaussian Pauli/QWC multipliers
   (e.g.\ $2.7\times$) use the pair-diagonal ERI rule (Sec.~\ref{sec:eri_rule})
   and re-price toward parity under the exact rule.  \textbf{Qubit-reduction
-  convention:} the LiH STO-3G count (907, $Q=12$) is the \emph{raw} JW
+  convention:} the LiH STO-3G count (\gvq{lih_sto3g_raw}{907}, $Q=12$) is the \emph{raw} JW
   Hamiltonian, matched against the raw (un-tapered) GeoVac composed count
-  (334, $Q=30$); the larger-basis LiH counts and all H$_2$O Gaussian counts
+  (838, $Q=30$); the larger-basis LiH counts and all H$_2$O Gaussian counts
   apply the standard 2-qubit reduction (the $Q=20,36,12,46$ sizes are the
   reduced sizes, matching \texttt{GAUSSIAN\_LIH\_PUBLISHED}).  Under a
   uniform 2-qubit-reduced convention the headline LiH multiplier narrows
-  toward parity (qubit-reduced STO-3G LiH is 276 at $Q=10$ vs.\ GeoVac
-  composed 334); the raw-vs-raw and reduced-vs-reduced comparisons bracket
-  the genuine advantage.  The \emph{2-qubit-reduced} Gaussian Pauli counts
+  (qubit-reduced STO-3G LiH is 276 at $Q=10$ vs.\ GeoVac
+  composed 838, i.e.\ $3.0\times$ \emph{more}); the raw-vs-raw and
+  reduced-vs-reduced comparisons bracket
+  the genuine position: near parity raw, unfavorable reduced.  The \emph{2-qubit-reduced} Gaussian Pauli counts
   (LiH 6-31G/cc-pVDZ and all H$_2$O entries) are the published values of
   Trenev et al.~\cite{Trenev2025} (Table~5, Appendix~B; Jordan--Wigner with
   2-qubit reduction; their reduced STO-3G LiH value is 276 at $Q=10$); the
-  raw STO-3G LiH count (907, $Q=12$) used as the matched-raw market-test
+  raw STO-3G LiH count (\gvq{lih_sto3g_raw}{907}, $Q=12$) used as the matched-raw market-test
   baseline is the raw-JW value, not a Trenev-reduced count.  The
   $Q^{3.9\text{--}4.3}$ Gaussian-scaling exponents are GeoVac's own log-log
   fit of the published reduced counts.
@@ -448,49 +477,66 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
   & QWC groups & Advantage$^a$ \\
 \colrule
 \multirow{5}{*}{LiH}
- & GeoVac composed & 30 & 334 & 32.6 & 21 & --- \\
- & GeoVac balanced & 30 & 878 & 74.1 & 87 & --- \\
- & Gaussian STO-3G & 12 & 907 & 34.3 & 273 & $2.7\times$ Pauli, $13\times$ QWC \\
- & Gaussian 6-31G  & 20 & 5{,}851 & --- & --- & $17.5\times$ Pauli \\
- & Gaussian cc-pVDZ & 36 & 63{,}519 & --- & --- & $190\times$ Pauli \\
+ & GeoVac composed & 30 & 838 & 34.0 & 64 & --- \\
+ & GeoVac balanced & 30 & \gvq{lih_balanced_pauli}{2{,}726} & 78.2 & 629 & --- \\
+ & Gaussian STO-3G & 12 & \gvq{lih_sto3g_raw}{907} & 34.3 & 273 & $1.08\times$ Pauli, $4.3\times$ QWC \\
+ & Gaussian 6-31G  & 20 & 5{,}851 & --- & --- & $7.0\times$ Pauli \\
+ & Gaussian cc-pVDZ & 36 & \gvq{lih_ccpvdz_pauli}{63{,}519} & --- & --- & $76\times$ Pauli \\
 \colrule
 \multirow{4}{*}{H$_2$O}
- & GeoVac composed & 70 & 778 & 361 & 21 & --- \\
- & GeoVac balanced & 70 & 5{,}798 & 1{,}511 & 168 & --- \\
- & Gaussian STO-3G & 12 & 551 & --- & --- & $0.71\times$ Pauli \\
- & Gaussian cc-pVDZ & 46 & 107{,}382 & --- & --- & $138\times$ Pauli \\
+ & GeoVac composed & 70 & 1{,}954 & 372 & 64 & --- \\
+ & GeoVac balanced & 70 & 19{,}742 & 1{,}612 & 1{,}494 & --- \\
+ & Gaussian STO-3G & 12 & 551 & --- & --- & $0.28\times$ Pauli \\
+ & Gaussian cc-pVDZ & 46 & \gvq{h2o_ccpvdz_pauli}{107{,}382} & --- & --- & $55\times$ Pauli \\
 \colrule
 \multirow{2}{*}{BeH$_2$}
- & GeoVac composed & 50 & 556 & 66.0 & 21 & --- \\
- & GeoVac balanced & 50 & 2{,}652 & 306.4 & 138 & --- \\
+ & GeoVac composed & 50 & 1{,}396 & 68.8 & 64 & --- \\
+ & GeoVac balanced & 50 & 8{,}868 & 328.1 & 1{,}220 & --- \\
 \end{tabular}
 \end{ruledtabular}
 \raggedright\footnotesize{$^a$Ratio of Gaussian to GeoVac composed Pauli terms.
-Values $> 1$ favor GeoVac; values $< 1$ favor Gaussian.}
+Values $> 1$ favor GeoVac; values $< 1$ favor Gaussian.
+\emph{Convention (declared 2026-08-30):} the GeoVac Pauli counts and
+1-norms in this table \emph{include} the identity term, matching the raw
+JW totals the Gaussian baselines are quoted at --- which is what makes the
+LiH $34.0$ vs.\ $34.3$~Ha comparison like-for-like.  The balanced 1-norms
+were previously printed non-identity in this same column ($75.2$ / $289.6$
+/ $1{,}440$), mixing two conventions in one column; they are now
+identity-included ($78.2$ / $328.1$ / $1{,}612$).  For the
+simulation-relevant non-identity $\lambda_{\mathrm{ni}}$ see
+Table~\ref{tab:molecules}.}
 \end{table*}
 
 For the small-molecule minimal-basis case, the composed LiH Hamiltonian is
-near parity with Gaussian STO-3G on Pauli count---334 terms vs.\ STO-3G's
-276 (qubit-reduced) or 907 (raw JW), with a nearly identical electronic
-1-norm (32.6 vs.\ 34.3~Ha)---while using more qubits (30 vs.\ 10--12).  The
+near parity with Gaussian STO-3G on Pauli count---\gvq{lih_composed_pauli}{838} terms vs.\ STO-3G's
+\gvq{lih_sto3g_raw}{907} (raw JW), $3.0\times$ more than the 276 (qubit-reduced), with a nearly
+identical electronic
+1-norm (34.0 vs.\ 34.3~Ha)---while using more qubits (30 vs.\ 10--12).  The
 favorable $2.7\times$/$13\times$ multipliers hold only against the
-un-reduced raw-907 baseline and under the pair-diagonal ERI rule
+un-reduced raw-\gvq{lih_sto3g_raw}{907} baseline and under the pair-diagonal ERI rule
 (Sec.~\ref{sec:eri_rule}); they are not the framework's load-bearing
 advantage.  That advantage appears against larger Gaussian bases, where the
-gap widens decisively: $190\times$ fewer Pauli terms than cc-pVDZ.
+gap widens decisively: $76\times$ fewer Pauli terms than cc-pVDZ
+(exact rule; the retired pair-diagonal figure was $190\times$).
 
 For H$_2$O, the composed Hamiltonian has \emph{more} Pauli terms than
-STO-3G (778 vs.\ 551, advantage $0.71\times$) because the GeoVac
-encoding uses 70 qubits (15 spatial orbitals per block $\times$ 5 blocks
-$\times$ 2 spins) while STO-3G uses only 12 qubits (7 spatial orbitals
+STO-3G (1{,}954 vs.\ 551, advantage $0.28\times$) because the GeoVac
+encoding uses 70 qubits (35 spatial orbitals $\times$ 2 spins) while
+STO-3G uses only 12 qubits (7 spatial orbitals
 with frozen core).  Against cc-pVDZ (46 qubits vs.\ GeoVac's 70---GeoVac
 uses $1.5\times$ more; not matched accuracy either, as the composed
-H$_2$O carries a 26\% $R_{\rm eq}$ error), GeoVac has $138\times$
-fewer Pauli terms.
-The measured $O(Q^{2.2})$ vs.\ $O(Q^4)$ scaling implies that the GeoVac
-advantage increases with basis size.
+H$_2$O carries a 26\% $R_{\rm eq}$ error), GeoVac has $55\times$
+fewer Pauli terms (corrected 2026-08-30: the retired $138\times$ was
+$107{,}382/778$, i.e.\ computed against the retired pair-diagonal count).
+The measured GeoVac exponent over this range is $2.816$ against the
+Gaussian $3.9$--$4.3$, but that gap should \emph{not} be read as a
+basis-size trend:\ $2.816$ is a two-point $n_{\max} = 1, 2$ fit and the
+local slope steepens toward $\sim\!3.8$ by $n_{\max} = 4$, which closes
+most of the gap.  See Sec.~\ref{sec:scaling_exponents}, where the
+extrapolation this comparison used to license is withdrawn.
 
 \subsection{Scaling exponents}
+\label{sec:scaling_exponents}
 
 Table~\ref{tab:scaling} shows the within-molecule Pauli scaling exponents,
 obtained from two-point fits at $n_{\max}=1$ and $n_{\max}=2$.
@@ -499,30 +545,61 @@ obtained from two-point fits at $n_{\max}=1$ and $n_{\max}=2$.
 \caption{Within-molecule Pauli scaling: $N_{\text{Pauli}} \propto Q^{\alpha}$.
   GeoVac exponents from composed architecture (2-point fit,
   $n_{\max}=1,2$).  Gaussian exponent from STO-3G/6-31G/cc-pVDZ
-  progression.}
+  progression.  Corrected 2026-08-29 under the exact Coulomb rule
+  (Paper~\cite{GeoVac_Paper14}, exact ERI selection rule); the retired pair-diagonal rule
+  gave $2.18$--$2.24$, mean $2.21 \pm 0.02$.  The exact-rule exponent is
+  \emph{identical} across all six molecules, not merely close:\ see the
+  text.}
 \label{tab:scaling}
 \begin{ruledtabular}
 \begin{tabular}{lcc}
 System & GeoVac $\alpha$ & Gaussian $\alpha$ \\
 \colrule
-LiH    & 2.24 & 3.9--4.3 \\
-BeH$_2$ & 2.18 & --- \\
-H$_2$O  & 2.22 & 3.9--4.3 \\
-HF     & 2.21 & --- \\
-NH$_3$  & 2.20 & --- \\
-CH$_4$  & 2.19 & --- \\
+LiH    & 2.816 & 3.9--4.3 \\
+BeH$_2$ & 2.816 & --- \\
+H$_2$O  & 2.816 & 3.9--4.3 \\
+HF     & 2.816 & --- \\
+NH$_3$  & 2.816 & --- \\
+CH$_4$  & 2.816 & --- \\
 \colrule
-Mean   & 2.21 $\pm$ 0.02 & 3.9--4.3 \\
+Mean   & 2.816 $\pm$ 0.000 & 3.9--4.3 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The GeoVac composed scaling exponent of $\sim 2.2$ is nearly constant
-across all six molecules, reflecting the universal Gaunt selection rule
-structure.  The Gaussian scaling exponent of $\sim 4$ reflects the
-dense four-index ERI tensor.  This difference means the GeoVac
-advantage grows polynomially with system size: at $Q=100$, the
-expected Pauli ratio is $(100)^{4.1}/(100)^{2.2} \approx 6{,}000\times$.
+The GeoVac composed scaling exponent is $2.816$ for every one of the
+six molecules---identically, to the digits shown, not merely nearly
+constant.  This is forced rather than empirical.  The composed Pauli
+count is exactly linear in~$Q$ at each fixed basis
+(Paper~\cite{GeoVac_Paper14}, universal composed linearity):\ $N_{\mathrm{Pauli}} = 1.5\,Q$ at
+$n_{\max}=1$ and $27.90\,Q$ at $n_{\max}=2$, while $Q$ itself grows by
+the same factor of~5 for every molecule.  The two-point exponent is
+therefore
+\begin{equation}
+  \alpha = 1 + \log_5\!\left(\frac{27.90}{1.5}\right)
+         = 1 + \log_5 18.6 = 2.8163\ldots,
+  \label{eq:alpha_exact}
+\end{equation}
+independent of the molecule.  This two-point value is not comparable with
+the wider-range within-molecule exponent of $3.17$ quoted in
+Paper~\cite{GeoVac_Paper14}:\ the exponent is not constant in $n_{\max}$
+(the local slope steepens toward $\sim\!3.8$ by $n_{\max}=4$), so a
+$n_{\max}=1,2$ fit and a small-basis fit over a longer range measure
+different things and legitimately differ.  The Gaussian scaling exponent of
+$\sim 4$ reflects the dense four-index ERI tensor.  The GeoVac advantage still
+grows with system size---but the within-molecule exponent is the wrong
+instrument for saying by how much, and the retired
+$(100)^{4.1}/(100)^{2.21} \approx 6{,}000\times$ extrapolation is
+withdrawn rather than re-priced.  Two reasons.  First, this exponent is
+not constant in $n_{\max}$ (above), so substituting the local
+$\sim\!3.8$ instead of $2.816$ moves the same formula from
+$\approx 370\times$ to $\approx 4\times$---two orders of magnitude, which
+is the signature of an extrapolation outside its range.  Second, and more
+basic:\ $Q = 100$ is reached in this library by \emph{adding blocks}, not
+by enlarging the basis, and along that axis the composed count is exactly
+linear in~$Q$ (Eq.~\ref{eq:linear})---exponent~1, measured, not
+extrapolated.  The linearity is the claim; the ratio at a hypothetical
+$Q$ is not.
 
 \subsection{Regime dependence}
 
@@ -589,28 +666,34 @@ Breit--Pauli diagonal. No numerical quadrature enters the spinor path.
 T3 output). $N_{\mathrm{Pauli}}^{\mathrm{rel}}$: non-identity Pauli
 string count in the $(\kappa, m_j)$-labeled JW encoding. $\lambda_{\mathrm{ni}}$:
 non-identity Hamiltonian 1-norm. QWC: greedy qubit-wise-commuting
-group count. ``scalar'' repeats the spinless benchmark at the same
-molecular spec topology. Chawla ratio = $N_{\mathrm{Pauli}}^{\mathrm{rel}} / 12\,556$,
-the single calibrated Chawla RaH-18q cell~\cite{Chawla2024}.}
+group count. Chawla ratio = $N_{\mathrm{Pauli}}^{\mathrm{rel}} / \gvq{chawla_rah}{12\,556}$,
+the single calibrated Chawla RaH-18q cell~\cite{Chawla2024}.
+\emph{Re-measured 2026-08-30} under the corrected Condon--Shortley angular
+factor order (retired values: $1{,}413$ / $942$ / $89{,}226$ / $59{,}484$
+and $\lambda = 40.59$ / $143.96$ / $18.68$ / $218.78$ / $413.90$ /
+$125.36$).  The former ``scalar'' column is \emph{removed}, not re-priced:\
+it evaluated the relativistic spec with the spinless builder, which returns
+the same count as the relativistic builder, so it was never a scalar
+comparator and the ratios drawn from it measured nothing.}
 \label{tab:paper20_tier2}
 \begin{ruledtabular}
-\begin{tabular}{cccccccc}
-Molecule & $n_{\max}$ & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & $N_{\mathrm{Pauli}}^{\mathrm{sc}}$ & $\lambda_{\mathrm{ni}}$ (Ha) & QWC & Chawla ratio \\
+\begin{tabular}{ccccccc}
+Molecule & $n_{\max}$ & $Q$ & $N_{\mathrm{Pauli}}^{\mathrm{rel}}$ & $\lambda_{\mathrm{ni}}$ (Ha) & QWC & Chawla ratio \\
 \hline
-LiH & 2 & 30 &  1\,413 & 333    &  40.59 &  121 & 0.113$\times$ \\
-LiH & 3 & 84 & 89\,226 & 7\,878 & 218.78 & 11\,865 & 7.106$\times$ \\
-BeH & 2 & 30 &  1\,413 & 333    & 143.96 &  111 & 0.113$\times$ \\
-BeH & 3 & 84 & 89\,226 & 7\,878 & 413.90 & 11\,843 & 7.106$\times$ \\
-CaH & 2 & 20 &    942  & 222    &  18.68 &  111 & 0.075$\times$ \\
-CaH & 3 & 56 & 59\,484 & 5\,252 & 125.36 & 11\,843 & 4.738$\times$ \\
-SrH & 2 & 20 &    942  & 223    &  18.68 &  111 & 0.075$\times$ \\
-BaH & 2 & 20 &    942  & 223    &  18.68 &  111 & 0.075$\times$ \\
+LiH & 2 & 30 &  1\,501 &  39.53 &     142 & 0.120$\times$ \\
+LiH & 3 & 84 & 90\,114 & 208.79 & 11\,938 & 7.177$\times$ \\
+BeH & 2 & 30 &  1\,501 & 142.52 &     142 & 0.120$\times$ \\
+BeH & 3 & 84 & 90\,114 & 400.01 & 11\,948 & 7.177$\times$ \\
+CaH & 2 & 20 &     998 &  17.91 &     142 & 0.079$\times$ \\
+CaH & 3 & 56 & 60\,060 & 119.35 & 11\,925 & 4.783$\times$ \\
+SrH & 2 & 20 &     998 &  17.91 &     142 & 0.079$\times$ \\
+BaH & 2 & 20 &     998 &  17.91 &     142 & 0.079$\times$ \\
 \hline\hline
-\multicolumn{8}{l}{\footnotesize Chawla RaH-18q~\cite{Chawla2024}: 12\,556 Pauli (rel), 2\,740 Pauli (non-rel) (47\,099 / 4\,249 two-electron integrals), $Q = 18$.} \\
-\multicolumn{8}{l}{\footnotesize SrH, BaH added Sprint 3 (v2.14.0) via [Kr] and [Xe] frozen cores (\texttt{geovac/neon\_core.py}).} \\
-\multicolumn{8}{l}{\footnotesize CaH/SrH/BaH at $Q=20$ bit-identical ($N_{\mathrm{Pauli}}^{\mathrm{rel}} = 942$, $\lambda_{\mathrm{ni}} = 18.68$, QWC $= 111$): isostructural invariance.} \\
-\multicolumn{8}{l}{\footnotesize Sprint 4 Track TR (v2.15.0): rel Pauli counts corrected 1.76$\times$ (n=2) / 1.92$\times$ (n=3) upward via missing jj reduced-matrix-element phase fix.} \\
-\multicolumn{8}{l}{\footnotesize Chawla et al.\ SI Tables S1--S3 (per-molecule matched-$Q$ data): accessibility \textbf{deferred}.} \\
+\multicolumn{7}{l}{\footnotesize Chawla RaH-18q~\cite{Chawla2024}: 12\,556 Pauli (rel), 2\,740 Pauli (non-rel) (47\,099 / 4\,249 two-electron integrals), $Q = 18$.} \\
+\multicolumn{7}{l}{\footnotesize SrH, BaH added Sprint 3 (v2.14.0) via [Kr] and [Xe] frozen cores (\texttt{geovac/neon\_core.py}).} \\
+\multicolumn{7}{l}{\footnotesize CaH/SrH/BaH at $Q=20$ bit-identical ($N_{\mathrm{Pauli}}^{\mathrm{rel}} = \gvq{cah_rel_n2_pauli}{998}$, $\lambda_{\mathrm{ni}} = 17.91$, QWC $= 142$): isostructural invariance.} \\
+\multicolumn{7}{l}{\footnotesize Sprint 4 Track TR (v2.15.0): rel Pauli counts corrected 1.76$\times$ (n=2) / 1.92$\times$ (n=3) upward via missing jj reduced-matrix-element phase fix.  A second correction (2026-08-30) fixed the Condon--Shortley factor order; the values above are post-both.} \\
+\multicolumn{7}{l}{\footnotesize Chawla et al.\ SI Tables S1--S3 (per-molecule matched-$Q$ data): accessibility \textbf{deferred}.} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
@@ -620,24 +703,34 @@ Reading Table~\ref{tab:paper20_tier2}:
 \begin{itemize}
   \item At $n_{\max}=2$, all GeoVac molecules sit at
     $0.075$--$0.11\times$ the Chawla RaH-18q Pauli count at native
-    $Q \in \{20, 30\}$. Projected to matched $Q = 18$ via the
-    O($Q^{2.5}$) scaling law of Paper~14 and the
-    Tier 2 $\sim 4.2\times$ rel/scalar multiplier (post-TR), the advantage is
-    $17\times$--$32\times$ (CaH at $Q=20$ barely shrinks to $Q=18$, setting
-    the low end; LiH/BeH at $Q=30$ set the high end). This is not
+    $Q \in \{20, 30\}$, an $8.4$--$12.6\times$ advantage.
+    \emph{The former matched-$Q$ projection to $17\times$--$32\times$ is
+    withdrawn} (2026-08-30), in step with Paper~14: it combined the retired
+    O($Q^{2.5}$) composed scaling law with a $\sim 4.2\times$ rel/scalar
+    multiplier drawn from the ``scalar'' column this table's caption
+    removes as never having been a scalar comparator.  Both inputs are
+    gone and neither has a corrected replacement, so no projection is
+    reported.  The surviving comparison is at native $Q$, and it is not
     species-matched---RaH ($Z=88$) differs from LiH/BeH/CaH, and the
     per-species Chawla cells are deferred (cf.\ Paper~14).
   \item At $n_{\max}=3$, the absolute GeoVac Pauli count overtakes
     Chawla et al.\ at matched $Q$ (LiH/BeH reach 7.1$\times$ of the RaH-18q
-    number at $Q = 84$; CaH sits at $4.74\times$ at $Q = 56$). This
+    number at $Q = 84$; CaH sits at $4.783\times$ at $Q = 56$). This
     is the expected sparsity-exponent regime: as $l_{\max}$ grows,
     the composed architecture's per-block sparsity advantage narrows.
     The native-$Q$ sweet spot is $n_{\max}=2$.
-  \item The $\lambda_{\mathrm{ni}}$ column is non-inflated by
-    relativistic coupling. For LiH $n_{\max}=3$, scalar gives
-    170.59 Ha and rel gives 218.78 Ha ($+28\%$); for CaH,
-    96.45 Ha $\to$ 125.36 Ha ($+30\%$). The modest ($\sim 20$--$30\%$)
-    increase carries no order-of-magnitude inflation.
+  \item \emph{The scalar-vs-relativistic $\lambda_{\mathrm{ni}}$
+    comparison is withdrawn} (2026-08-30).  It read
+    ``$170.59 \to 218.78$~Ha ($+28\%$) for LiH, $96.45 \to 125.36$~Ha
+    ($+30\%$) for CaH,'' but all four figures are gone: the scalar side
+    came from the removed column that evaluated the relativistic spec
+    with the spinless builder (so it was never a scalar comparator), and
+    the relativistic side is in this caption's retired list.  Producing
+    an honest version needs a genuinely spinless comparator at matched
+    basis and geometry, which the Tier~2 path does not currently build;
+    until it does, the $\lambda_{\mathrm{ni}}$ column should be read as
+    an absolute relativistic 1-norm and not as a relativistic
+    \emph{inflation} factor.
   \item The QWC column is inflated ($\sim 15\times$ in the worst case).
     The richer $jj$-coupled Pauli structure distributes the
     Hamiltonian across more distinct Pauli words; VQE measurement
@@ -667,8 +760,9 @@ is therefore \emph{native-$Q$ competitive resource counts}, not
 matched-$Q$ per-molecule comparison. This is a structural difference
 from Gaussian-basis approaches where $Q$ is tunable by choice of
 basis set (STO-3G vs cc-pVDZ vs cc-pVTZ). At native $Q=20$,
-CaH/SrH/BaH relativistic Hamiltonians give $942$ Pauli terms (post-TR,
-Sprint 4 v2.15.0), which is $0.075\times$ Chawla et al.'s RaH-18q ($13\times$
+CaH/SrH/BaH relativistic Hamiltonians give $\gvq{cah_rel_n2_pauli}{998}$ Pauli terms
+(re-measured 2026-08-30 under the corrected factor order; retired: $942$),
+which is $0.079\times$ Chawla et al.'s RaH-18q ($12.6\times$
 fewer) and preserves a sparsity win under any pessimistic $Q=20 \to Q=18$
 correction.
 
@@ -712,39 +806,53 @@ $d$-orbital valence blocks spanning $Z = 21$--30.
   molecules use composed encoding (PK classically partitioned);
   second- and third-row molecules use balanced coupled encoding
   with frozen cores and cross-center $V_{ne}$.
-  $\lambda_{\text{ni}}$ is the non-identity 1-norm (simulation-relevant).
-  Isostructural pairs (rows 2--3) produce identical Pauli counts.
+  $\lambda_{\text{ni}}$ is the non-identity 1-norm (simulation-relevant);
+  the Pauli column, by contrast, \emph{includes} the identity term.
+  Isostructural pairs (rows 2--3) produce identical Pauli counts --- but
+  \emph{not} identical QWC group counts (MgH$_2$ $903$ vs.\ CaH$_2$ $898$;
+  SiH$_4$ $1{,}551$ vs.\ GeH$_4$ $1{,}562$; only NaH/KH tie).  The greedy
+  grouper sorts terms by descending $|$coefficient$|$ before insertion
+  (\texttt{geovac/measurement\_grouping.py}), so partners with identical
+  Pauli \emph{support} but different coefficients are visited in different
+  orders.  The invariance is a property of the support, and QWC grouping
+  is not a function of the support alone.
   The \texttt{hamiltonian()} API currently returns composed encoding
   for all rows; balanced data shown here are from Paper~19's
   \texttt{build\_balanced\_hamiltonian()} (every cell pinned by
   \texttt{tests/test\_paper20\_balanced\_lambda.py}; the
   $\lambda_{\text{ni}}$ column was re-synced to the live builder
-  2026-07-02).}
+  2026-07-02; all cells re-measured under the exact global-$M_L$ rule
+  2026-08-29, Sec.~\ref{sec:eri_rule} --- Pauli-count isostructural
+  invariance survives exactly (NaH $=$ KH, HCl $=$ HBr, \dots).  The
+  balanced QWC column was measured 2026-08-30, closing a standing
+  ``pending'' note; the same pass corrected two $\lambda_{\text{ni}}$
+  cells the 2026-08-29 re-sync had missed, NaH $19.6 \to 20.6$ and
+  HCl $866.1 \to 869.7$.)}
 \label{tab:molecules}
 \begin{ruledtabular}
 \begin{tabular}{llrrrr}
 Molecule & Core & $Q$ & Pauli & $\lambda_{\text{ni}}$ (Ha) & QWC \\
 \colrule
-LiH      & He   & 30 &    334 &  26.6 & 21 \\
-BeH$_2$  & He   & 50 &    556 &  52.1 & 21 \\
-H$_2$O   & He   & 70 &    778 & 175.6 & 21 \\
-HF       & He   & 60 &    667 & 215.1 & 21 \\
-NH$_3$   & He   & 80 &    889 & 149.4 & 21 \\
-CH$_4$   & He   & 90 & 1{,}000 & 129.1 & 21 \\
+LiH      & He   & 30 &    838 &  27.7 & 64 \\
+BeH$_2$  & He   & 50 & 1{,}396 &  54.3 & 64 \\
+H$_2$O   & He   & 70 & 1{,}954 & 186.8 & 64 \\
+HF       & He   & 60 & 1{,}675 & 232.7 & 64 \\
+NH$_3$   & He   & 80 & 2{,}233 & 158.0 & 64 \\
+CH$_4$   & He   & 90 & 2{,}512 & 135.4 & 64 \\
 \colrule
-NaH      & Ne   & 20 &    239 &  18.9 &  29 \\
-MgH$_2$  & Ne   & 40 & 1{,}501 & 101.9 & 109 \\
-HCl      & Ne   & 50 & 2{,}936 & 798.8 & 133 \\
-H$_2$S   & Ne   & 60 & 4{,}119 & 816.9 & 141 \\
-PH$_3$   & Ne   & 70 & 5{,}582 & 834.9 & 159 \\
-SiH$_4$  & Ne   & 80 & 7{,}273 & 853.6 & 169 \\
+NaH      & Ne   & 20 &    575 &  20.6 &    69 \\
+MgH$_2$  & Ne   & 40 & 4{,}861 & 110.5 &   903 \\
+HCl      & Ne   & 50 & 9{,}824 & 869.7 & 1{,}173 \\
+H$_2$S   & Ne   & 60 & 13{,}863 & 879.6 & 1{,}282 \\
+PH$_3$   & Ne   & 70 & 18{,}854 & 895.3 & 1{,}477 \\
+SiH$_4$  & Ne   & 80 & 24{,}745 & 914.1 & 1{,}551 \\
 \colrule
-KH       & Ar   & 20 &    239 &  31.6 &  29 \\
-CaH$_2$  & Ar   & 40 & 1{,}501 & 118.9 & 114 \\
-HBr      & Ar$d$ & 50 & 2{,}936 & 809.4 & 132 \\
-H$_2$Se  & Ar$d$ & 60 & 4{,}119 & 820.2 & 142 \\
-AsH$_3$  & Ar$d$ & 70 & 5{,}582 & 824.2 & 159 \\
-GeH$_4$  & Ar$d$ & 80 & 7{,}273 & 815.8 & 167 \\
+KH       & Ar   & 20 &    575 &  32.2 &    69 \\
+CaH$_2$  & Ar   & 40 & 4{,}861 & 128.0 &   898 \\
+HBr      & Ar$d$ & 50 & 9{,}824 & 877.0 & 1{,}175 \\
+H$_2$Se  & Ar$d$ & 60 & 13{,}863 & 883.4 & 1{,}264 \\
+AsH$_3$  & Ar$d$ & 70 & 18{,}854 & 885.2 & 1{,}468 \\
+GeH$_4$  & Ar$d$ & 80 & 24{,}745 & 877.3 & 1{,}562 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -752,17 +860,20 @@ GeH$_4$  & Ar$d$ & 80 & 7{,}273 & 815.8 & 167 \\
 \begin{table}[h]
 \caption{Multi-center molecules added in v2.2 at $n_{\max}=2$.
   LiF, CO, N$_2$, and F$_2$ use He frozen cores; NaCl uses mixed
-  frozen cores (Na [Ne] + Cl [Ne]).}
+  frozen cores (Na [Ne] + Cl [Ne]).  Pauli counts are non-identity terms
+  and QWC groups are greedy; both re-measured 2026-08-29 under the exact
+  Coulomb rule (the retired pair-diagonal rule gave $778$/$1{,}111$/$556$
+  terms and 21 groups).  Every row is $\gvq{composed_coeff}{27.90} \times Q$ exactly.}
 \label{tab:multicenter}
 \begin{ruledtabular}
 \begin{tabular}{llcrrrr}
 Molecule & Core & $N_e$ & Blocks & $Q$ & Pauli & QWC \\
 \colrule
-LiF      & He   & 12 & 6 &  70 &    778 & 21 \\
-CO       & He   & 14 & 7 & 100 & 1{,}111 & 21 \\
-N$_2$    & He   & 14 & 7 & 100 & 1{,}111 & 21 \\
-F$_2$    & He   & 18 & 9 & 100 & 1{,}111 & 21 \\
-NaCl     & Ne+Ne & 8 & 4 &  50 &    556 & 21 \\
+LiF      & He   & 12 & 6 &  70 & 1{,}953 & 64 \\
+CO       & He   & 14 & 7 & 100 & 2{,}790 & 64 \\
+N$_2$    & He   & 14 & 7 & 100 & 2{,}790 & 64 \\
+F$_2$    & He   & 18 & 9 & 100 & 2{,}790 & 64 \\
+NaCl     & Ne+Ne & 8 & 4 &  50 & 1{,}395 & 64 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -771,12 +882,11 @@ NaCl     & Ne+Ne & 8 & 4 &  50 &    556 & 21 \\
 \caption{First-row transition metal hydrides ($Z = 21$--30) at $n_{\max}=2$
   (bond) / $n_{\max}=3$ (d-block).
   All use [Ar] frozen cores (18 electrons) with $d$-orbital valence
-  blocks ($l_{\min} = 2$).  The Pauli/$Q$ ratio of~9.23
-  falls below the main-group coefficient of~11.10 \emph{under the
-  pair-diagonal ERI approximation} (Sec.~\ref{sec:eri_rule}); this is an
-  artifact of dropping more $m$-swap integrals at higher angular momentum,
-  not a sparser exact selection rule---under the exact global-$M_L$ rule the
-  $d$-block ratio is \emph{higher} (30.0 vs.\ 27.9).
+  blocks ($l_{\min} = 2$).  Under the exact global-$M_L$ rule the
+  Pauli/$Q$ ratio is \gvq{composed_coeff_d}{30.03}, slightly above the main-group coefficient
+  of~27.90 (the retired pair-diagonal rule inverted this, giving 9.23
+  vs.\ 11.10 --- an artifact of dropping more $m$-swap integrals at higher
+  angular momentum; Sec.~\ref{sec:eri_rule}).
   Isostructural invariance holds: all ten hydrides share the same
   block topology and produce identical Pauli counts.
   Cr and Cu have anomalous configurations ($3d^5 4s^1$ and $3d^{10} 4s^1$).}
@@ -785,16 +895,16 @@ NaCl     & Ne+Ne & 8 & 4 &  50 &    556 & 21 \\
 \begin{tabular}{llcrrr}
 Molecule & Config.\ & Core & $Q$ & Pauli & Pauli/$Q$ \\
 \colrule
-ScH & $3d^1 4s^2$ & Ar & 30 & 277 & 9.23 \\
-TiH & $3d^2 4s^2$ & Ar & 30 & 277 & 9.23 \\
-VH  & $3d^3 4s^2$ & Ar & 30 & 277 & 9.23 \\
-CrH & $3d^5 4s^1$ & Ar & 30 & 277 & 9.23 \\
-MnH & $3d^5 4s^2$ & Ar & 30 & 277 & 9.23 \\
-FeH & $3d^6 4s^2$ & Ar & 30 & 277 & 9.23 \\
-CoH & $3d^7 4s^2$ & Ar & 30 & 277 & 9.23 \\
-NiH & $3d^8 4s^2$ & Ar & 30 & 277 & 9.23 \\
-CuH & $3d^{10} 4s^1$ & Ar & 30 & 277 & 9.23 \\
-ZnH & $3d^{10} 4s^2$ & Ar & 30 & 277 & 9.23 \\
+ScH & $3d^1 4s^2$ & Ar & 30 & 901 & 30.03 \\
+TiH & $3d^2 4s^2$ & Ar & 30 & 901 & 30.03 \\
+VH  & $3d^3 4s^2$ & Ar & 30 & 901 & 30.03 \\
+CrH & $3d^5 4s^1$ & Ar & 30 & 901 & 30.03 \\
+MnH & $3d^5 4s^2$ & Ar & 30 & 901 & 30.03 \\
+FeH & $3d^6 4s^2$ & Ar & 30 & 901 & 30.03 \\
+CoH & $3d^7 4s^2$ & Ar & 30 & 901 & 30.03 \\
+NiH & $3d^8 4s^2$ & Ar & 30 & 901 & 30.03 \\
+CuH & $3d^{10} 4s^1$ & Ar & 30 & 901 & 30.03 \\
+ZnH & $3d^{10} 4s^2$ & Ar & 30 & 901 & 30.03 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -805,9 +915,15 @@ A key practical result visible in Tables~\ref{tab:molecules}
 and~\ref{tab:multicenter} is that the composed Pauli term count is
 \emph{exactly linear} in the qubit count $Q$ across the composed molecular library:
 \begin{equation}
-  N_{\text{Pauli}} = 11.10 \times Q\,.
+  N_{\text{Pauli}} = \gvq{composed_coeff}{27.90} \times Q\,.
   \label{eq:linear}
 \end{equation}
+Here $N_{\text{Pauli}}$ counts \emph{non-identity} terms.  Table
+\ref{tab:multicenter} is quoted in that convention and matches
+Eq.~\eqref{eq:linear} exactly; Table~\ref{tab:molecules} includes the
+identity and therefore reads $27.90\,Q + 1$.  The relation is exact in
+both---the two differ by the one constant term---but the tables are not
+directly comparable cell-by-cell.
 This linearity arises because the composed architecture constructs
 each electron-pair block independently with the same internal structure
 (same angular basis, same Gaunt selection rules), so adding an atom
@@ -815,55 +931,68 @@ to a molecule adds a fixed number of blocks and a proportional number
 of qubits and Pauli terms.  The practical consequence is that the
 quantum measurement cost of a GeoVac Hamiltonian grows linearly with
 system size---adding a CH$_3$ group to a molecule adds exactly 30
-qubits and $\sim$333 Pauli terms, regardless of molecular context.
+qubits and $\sim$\gvq{lih_composed_pauli}{837} Pauli terms, regardless of molecular context.
 This linear nuclear scaling is a stronger result than the
-$O(Q^{2.5})$ within-molecule basis scaling (Table~\ref{tab:scaling}),
-which describes how cost grows when expanding the angular basis on a
-\emph{fixed} molecule.
+within-molecule basis scaling, which describes how cost grows when
+expanding the angular basis on a \emph{fixed} molecule.  That
+within-molecule exponent is $3.17$ over the small-basis range; note it is
+\emph{not} the $2.816$ of Table~\ref{tab:scaling}, which is the two-point
+$n_{\max}=1,2$ value---the two measure different ranges and legitimately
+differ (Sec.~\ref{sec:scaling_exponents}).
 
-\subsection{The pair-diagonal ERI approximation: sparsity vs.\ accuracy}
+\subsection{The retired pair-diagonal ERI rule: a sign error, not an approximation}
 \label{sec:eri_rule}
 
-The absolute Pauli counts and multipliers in this library are realized under a
-\emph{pair-diagonal} angular selection rule ($m_a = m_c$, $m_b = m_d$), a
-deliberate sparsifying approximation:\ the production builders drop the
-genuinely-nonzero \emph{$m$-swap} two-electron integrals that the exact
-global-$M_L$ Coulomb rule ($m_a + m_b = m_c + m_d$) keeps.  Its energy effect is
-sub-chemical ($\sim$\,mHa), and it is the right choice when sparsity---not energy
-accuracy---is the purpose.  The approximation re-prices the absolute counts by a
-constant factor per valence class---$2.51\times$ (main group), $3.25\times$
-($d$-block)---and \emph{not} the $O(Q^{2.5})$ / linear scaling (a constant
-prefactor leaves the slope unchanged).  Under the exact rule the LiH
-small-molecule market test is near parity with STO-3G (838 vs.\ 907) and the
-$d$-block coefficient is \emph{higher} (30.0), not lower; the scaling advantage
-and the large-system multipliers are unaffected.  The exact rule is the one the
-framework uses for precision physics; adopting it in the QC product
-(``option~B'') was considered and deliberately left on the table, because the
-pair-diagonal approximation is the quality quantum-simulation approximation that
-serves this library's purpose.  The realized rule is pinned by
-\texttt{tests/test\_paper14\_eri\_rule.py}.
+All Pauli counts and multipliers in this library are realized under the
+\emph{exact} global-$M_L$ Coulomb selection rule
+($m_a + m_b = m_c + m_d$), including the \emph{$m$-swap} two-electron
+integrals.
+
+\emph{Correction (2026-08-29).}  Earlier versions of this library were
+built under a \emph{pair-diagonal} restriction ($m_a = m_c$,
+$m_b = m_d$) described as a deliberate sparsifying approximation.  An
+independent re-derivation traced it to a sign error in the production
+Gaunt coefficient ($q = m_c - m_a$ where the Wigner-3j bottom row
+requires $m_a - m_c$), which silently zeroed every $m$-changing
+multipole; the error was arbitrated against direct quadrature of the
+angular factor from its definition.  The earlier ``constant factor,
+scaling unchanged'' re-pricing claim was a single-point artifact: the
+ratio is $2.51\times$ uniformly across main-group molecules at
+$n_{\max} = 2$ but grows along the basis axis
+($1.00\times/2.51\times/5.40\times$ at $n_{\max} = 1/2/3$), moving the
+within-molecule exponent from the retired $2.5$ to $3.17$.  What
+survives exactly is the cross-molecule linearity
+$N_{\mathrm{Pauli}} = c\,Q$ at fixed basis, with $c = \gvq{composed_coeff}{27.90}$
+(main-group) and $30.03$ ($d$-block); the retired pair-diagonal
+coefficients were $11.10$ and $9.23$, and the apparent $d$-block
+sparsity advantage inverts (higher angular momentum has \emph{more}
+$m$-swap integrals for the buggy rule to drop).  The realized rule is
+pinned by \texttt{tests/test\_paper14\_eri\_rule.py}; Paper~14 carries
+the full correction record.
 
 Second-row molecules are accessed identically to first-row:
 \begin{lstlisting}
 from geovac.ecosystem_export import hamiltonian
 H = hamiltonian('NaH', R=3.566)
 print(H.n_terms, H.one_norm)
-# 223, 171.46  (composed API: 222 non-identity + identity; FULL 1-norm
-#  incl. the identity coefficient -- cf. the BALANCED Table row
-#  (239 terms, lambda_ni = 18.9), a different builder and convention)
+# 559, 171.99  (composed API: 558 non-identity + identity; FULL 1-norm
+#  incl. the identity coefficient -- a different builder and convention
+#  from the BALANCED Table rows)
 \end{lstlisting}
 
-\noindent The Pauli scaling exponent $Q^{2.50}$ is confirmed across both
-rows.  Second-row molecules use fewer qubits than their first-row
+\noindent The within-molecule basis exponent $3.17$ is confirmed across both
+rows (identical to all reported digits --- a consequence of the exact
+factorization $N_{\mathrm{Pauli}} = c(n_{\max})\,Q$).  Second-row molecules use fewer qubits than their first-row
 analogues (NaH: $Q=20$ vs.\ LiH: $Q=30$) because frozen cores are
 not encoded; the universal scaling exponent confirms that structural
 sparsity is a property of the Gaunt selection rules, not the core
 treatment.
 
-Transition metal hydrides (Table~\ref{tab:transition_metals}) fall
-\emph{below} the 11.10 coefficient: all ten first-row hydrides have
-Pauli/$Q = 9.23$ under the pair-diagonal ERI approximation
-(Sec.~\ref{sec:eri_rule}).  This lower ratio is an \emph{artifact} of the
+Transition metal hydrides (Table~\ref{tab:transition_metals}) sit
+slightly \emph{above} the \gvq{composed_coeff}{27.90} coefficient: all ten first-row hydrides have
+Pauli/$Q = \gvq{composed_coeff_d}{30.03}$ under the exact rule (the retired pair-diagonal rule
+inverted this ordering, giving 9.23; see Sec.~\ref{sec:eri_rule}).
+That lower ratio is an \emph{artifact} of the
 pair-diagonal rule dropping more $m$-swap integrals at higher angular
 momentum: under the exact global-$M_L$ rule the $d$-block ratio is
 \emph{higher} (30.0 vs.\ 27.9), not lower---so $d$-orbital blocks are not
@@ -1033,9 +1162,9 @@ enters only through the identity operator and does not affect
 quantum measurement cost.
 The full first transition series ($Z = 21$--30) is implemented as
 hydrides with [Ar] frozen cores and isolated $d$-orbital valence blocks.
-$d$-Orbital blocks have a lower Pauli-per-qubit ratio (9.23 vs.\ 11.10)
-\emph{under the pair-diagonal ERI approximation} (Sec.~\ref{sec:eri_rule});
-under the exact global-$M_L$ rule this reverses ($d$-block denser).
+$d$-Orbital blocks have a slightly higher Pauli-per-qubit ratio
+(30.03 vs.\ 27.90) under the exact global-$M_L$ rule
+(Sec.~\ref{sec:eri_rule}; the retired pair-diagonal rule inverted this).
 The atomic classifier handles all ten elements automatically,
 including the anomalous configurations of Cr ($3d^5 4s^1$) and Cu ($3d^{10} 4s^1$).
 Main-group third-row atoms
@@ -1060,20 +1189,22 @@ Hamiltonians for molecular quantum simulation across three rows
 of the periodic table (37 systems---35 composed molecules plus He and
 H$_2$---$Z = 1$--56), including multi-center systems with multiple heavy
 atoms and the full first transition series as hydrides (ScH through ZnH;
-their lower $d$-block Pauli/$Q$ ratio is a pair-diagonal-rule artifact,
-Sec.~\ref{sec:eri_rule}, not a sparser exact selection rule).  The
-structural sparsity---$O(Q^{2.5})$ Pauli scaling from Gaunt selection
-rules---is confirmed universal across all three rows and all molecular
+the $d$-block Pauli/$Q$ ratio is slightly higher than main-group,
+Sec.~\ref{sec:eri_rule}).  The
+structural sparsity---Gaunt selection
+rules with a universal within-molecule exponent of 3.17---is confirmed
+across all three rows and all molecular
 topologies, independent of the core treatment (Level~3-solved or frozen).
 The composed Pauli count is exactly linear in $Q$ (coefficient
-$\approx 11.10$), meaning that adding atoms to a molecule increases
+$27.90$), meaning that adding atoms to a molecule increases
 quantum cost linearly.
-For LiH, this yields 2.7$\times$ fewer Pauli terms
-and 13$\times$ fewer measurement groups than Gaussian STO-3G, growing
-to 190$\times$ fewer terms against cc-pVDZ.  These \emph{absolute} multipliers
-are realized under the pair-diagonal ERI approximation
-(Sec.~\ref{sec:eri_rule}); under the exact global-$M_L$ rule the LiH
-small-molecule count is near parity with STO-3G (838 vs.\ 907), while the
+For LiH, this yields near parity on Pauli terms
+($1.08\times$ fewer, raw-vs-raw) and 4.3$\times$ fewer measurement
+groups than Gaussian STO-3G (QWC 64 vs.\ 273), growing
+to 76$\times$ fewer terms against cc-pVDZ.  All multipliers
+are realized under the exact global-$M_L$ rule
+(Sec.~\ref{sec:eri_rule}); the LiH
+small-molecule count is near parity with STO-3G (838 vs.\ \gvq{lih_sto3g_raw}{907}), while the
 \emph{scaling} advantage (linear vs.\ $O(Q^{4})$) and the large-system
 multipliers are unaffected.  For first-row hydrides
 at fixed equilibrium geometries, the balanced coupled architecture
@@ -1093,8 +1224,8 @@ simulation-relevant quantity---scales comparably to first-row
 molecules.  A strong isostructural invariance is observed:
 frozen-core molecules with the same block topology produce
 identical Pauli counts across periodic table rows (e.g.,
-NaH $=$ KH $= 239$ at $Q = 20$).
-The Pauli scaling exponent $Q^{2.5}$ is universal across all three
+NaH $=$ KH at $Q = 20$).
+The within-molecule scaling exponent (3.17) is universal across all three
 rows, confirming that the structural sparsity advantage is driven by
 Gaunt selection rules rather than any specific core treatment.
 

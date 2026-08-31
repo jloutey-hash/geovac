@@ -67,6 +67,141 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "pairdiag-density-pipeline-realizes",
+        "note": "CF-1 zombie, retired 2026-08-30.  The pair-diagonal density "
+                "D_pd was described as 'the density the composed pipeline "
+                "realizes' in P22 tab:sparsity, the P22 Theorem-3 note, and "
+                "the group3 synthesis.  It was never an intent: the "
+                "production enumerator returned D_pd only because the "
+                "wrong-sign-q ck_coefficient zeroed every m-changing "
+                "multipole (fixed 2026-08-29).  The pipeline realizes the "
+                "global-M_L D.",
+        "pattern": r"density the composed pipeline realizes"
+                   r"|D_\{\\mathrm\{pd\}\} realized by",
+        "exempt_if_nearby": r"RETIRED|retired|withdrawn|WITHDRAWN"
+                            r"|corrected 2026-08-30|Erratum",
+        "severity": "fail",
+        "scope": "group3",
+        "files": [
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "pairdiag-density-as-the-angular-density",
+        "note": "Retired 2026-08-30 (M9).  2.76% / 97.24% at l_max=2 is the "
+                "stricter pair-diagonal D_pd, valid only for "
+                "axially-symmetric or m-decoupled bases; the Coulomb "
+                "(global-M_L) figures are 8.52% / 91.48%.  P26 quoted the "
+                "former as 'the angular ERI density', overstating the "
+                "symmetry-enforced sparsity 3.1x.",
+        "pattern": r"angular ERI density is \$2\.76",
+        "exempt_if_nearby": r"pair-diagonal|D_\{\\mathrm\{pd\}\}|stricter",
+        "severity": "fail",
+        "scope": "group6",
+        "files": [
+            "papers/group6_precision_observations/paper_26_entanglement.tex",
+            "papers/group4_quantum_computing/paper_14_qubit_encoding.tex",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
+        ],
+    },
+    {
+        "id": "bare-graph-n2-minus-1-attribution",
+        "note": "Standing corpus tripwire (kappa_observation_not_derived; "
+                "cert-3 item 10): -(n^2-1) is the CONTINUUM S^3 "
+                "Laplace-Beltrami spectrum, which the graph encodes as "
+                "labels; the bare graph Laplacian is a different, "
+                "positive-semidefinite operator.  Text attributing the "
+                "n^2-1 eigenvalues to the graph Laplacian itself may not "
+                "re-surface without the continuum qualifier.",
+        "pattern": r"eigenvalues are integers \(\$n\^2 ?- ?1\$"
+                   r"|graph Laplacian are integers",
+        "exempt_if_nearby": r"continuum|Laplace--?Beltrami|encodes as labels"
+                            r"|positive-semidefinite|converge",
+        "severity": "fail",
+        "scope": "group6",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p27-ho-zero-entropy-rigidity",
+        "note": "EP-2b RETRACTED v5.0.0: 'HO zero-entropy rigidity' may not appear "
+                "as a live headline (the INDEX.md one-liner carried it un-flagged "
+                "through three cert runs; cert-2 G11).",
+        "pattern": r"HO zero-entropy rigidity|zero-entropy rigidity",
+        "exempt_if_nearby": r"RETRACTED|retracted|withdrawn|WITHDRAWN|Erratum",
+        "severity": "fail",
+        "scope": "group6",
+        "files": [
+            "papers/INDEX.md",
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p34-lamb-near-cancellation",
+        "note": "Withdrawn 2026-08-28/29: the H Lamb Layer-2 inputs net to -1.06 MHz "
+                "and do NOT cancel; 'netting to $-0.02$' and 'near-cancellation' "
+                "may not re-surface un-flagged (cert-2 M3).",
+        "pattern": r"netting to \$-0\.02|empirical near-cancellation",
+        "exempt_if_nearby": r"withdrawn|WITHDRAWN|retired|corrected|Until 2026-08-28",
+        "severity": "fail",
+        "scope": "group6",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p34-alkali-uniformity",
+        "note": "Refuted 2026-08-28/29: the alkali undershoot is NOT a common factor "
+                "('scales similarly for Na, K, Rb, Cs'); it grows monotonically "
+                "-64.0% -> -98.4% (cert-2 M4).",
+        "pattern": r"scales similarly for Na",
+        "exempt_if_nearby": r"refuted|REFUTED|withdrawn|corrected|retired",
+        "severity": "fail",
+        "scope": "group6",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+        ],
+    },
+    {
+        "id": "p34-ee-eigen-closed-form",
+        # A NEGATIVE result, added 2026-08-28 while extending the group6 C8
+        # enumeration for the post-cert P34 remarks.  Negatives are the class most
+        # prone to zombie back into positives (cf. the P24 rigidity corollary and
+        # the Lorentzian "literal identification"), and this one is attractive:
+        # "the coalescence object has a closed skeleton form" is a nicer sentence
+        # than the truth.  Guarded pre-emptively rather than after the drift.
+        "scope": "group6",
+        "severity": "fail",
+        "retired": "2026-08-27 (v5.1.5, rem:ee_partial_split sharpening): the "
+                   "question 'do W's leading eigenvectors have closed skeleton "
+                   "forms?' was answered NO, decisively and three ways. W(1) is "
+                   "exactly rational but the active characteristic polynomials are "
+                   "IRREDUCIBLE over Q (n_s=2 cubic 131072 l^3 - 50688 l^2 - 25200 l "
+                   "- 675; quintic at n_s=3), so the finite eigenpairs are algebraic "
+                   "numbers of full degree 2n-1 with no low-degree closed form; and "
+                   "the Loewdin-compressed spectrum GROWS with n_s (1.03 -> 7.81 over "
+                   "n_s = 2..8), so the finite eigenvectors do not converge to any "
+                   "fixed continuum eigenfunctions. The ONLY surviving closed form is "
+                   "DIFFERENTIAL: in u = 1/r the Coulomb kernel is min(u1,u2) (Green's "
+                   "function of -d^2/du^2) and eigenfunctions of any weighted "
+                   "compression solve lambda f'' = w f. A sentence asserting closed "
+                   "FORMS for the eigenvectors/eigenvalues themselves is the zombie. "
+                   "Pinned by tests/test_paper34_ee_split.py::"
+                   "test_w_rational_anchor_and_irreducible_charpoly.",
+        "pattern": "(?i)(?!.*\\b(?:no|not|without|irreducible|lacks|lacking)\\b[^.\\n]{0,50}closed)(?!.*closed[- ]form is differential)(?:eigen(?:vector|pair|value)s?[^.\\n]{0,140}?(?:closed[- ]form|closed skeleton form)|(?:closed[- ]form|closed skeleton form)[^.\\n]{0,140}?eigen(?:vector|pair|value)s?)",
+        "exempt_if_nearby": "irreducible|no low-degree|no closed|differential|grows with|RETRACTED|withdrawn",
+        "files": ["papers/group6_precision_observations/"
+                  "paper_34_projection_taxonomy.tex"],
+    },
+    {
         "id": "p24-entanglement-rigidity",
         # spans group3 (P24), group4 (P23 resource counts + nuclear code) AND
         # group6 (P27 EP-2b retraction + the group6 synthesis) -- the 2026-08-24
@@ -85,7 +220,7 @@ REGISTRY = [
                    "CM quantum numbers and in l_rel but COUPLES different "
                    "relative-n, and n - n' = (N_bra - N_ket)/2 makes the "
                    "N-changing elements exactly the n != n' ones. They are "
-                   "large: +17.2 MeV against a -0.81 MeV diagonal for the "
+                   "large: +17.3 MeV against a -0.55 MeV diagonal for the "
                    "Minnesota singlet. The published S = 0 came from an "
                    "undocumented `if N_bra != N_ket: return 0.0` guard in "
                    "geovac/nuclear/moshinsky.py. Corrected values: S = "

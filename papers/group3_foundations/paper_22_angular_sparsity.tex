@@ -274,11 +274,13 @@ axially-symmetric or $m$-decoupled bases.  These values are obtained
 by exact enumeration of the $N_{\mathrm{orb}}^4$ four-index
 combinations, applying the conditions of the definition above.  Both
 conventions are verified by exact enumeration in
-\texttt{tests/test\_paper22\_density.py}: the global-$M_L$ $D$ via the
-production Gaunt routine \texttt{casimir\_ci.\_gaunt\_ck}, and the
-pair-diagonal $D_{\mathrm{pd}}$ realized by
+\texttt{tests/test\_paper22\_density.py}, both via the production Gaunt
+routine \texttt{casimir\_ci.\_gaunt\_ck}.  The production enumerator
 \texttt{angular\_zero\_count} in
-\texttt{geovac/nuclear/potential\_sparsity.py}.}
+\texttt{geovac/nuclear/potential\_sparsity.py} computes the global-$M_L$
+$D$; until the 2026-08-29 wrong-sign-$q$ fix it silently returned
+$D_{\mathrm{pd}}$ instead, because the buggy coefficient zeroed every
+$m$-changing multipole and made the global constraint redundant.}
 
 The density decreases monotonically with $l_{\max}$: the number of
 orbitals grows as $(l_{\max}+1)^2$ and the number of four-index
@@ -345,21 +347,31 @@ factorization applies.)
 \caption{ERI sparsity decomposition at $n_{\max}=2$, $l_{\max}=2$
 ($N_{\mathrm{spatial}} = 18$).  Angular zeros are determined by
 Gaunt selection rules; radial zeros count additional vanishings from
-radial integral structure.  The ERI-density column is the pair-diagonal
-$D_{\mathrm{pd}}$ (the density the composed pipeline realizes); the
-global-$M_L$ Coulomb density $D$ is $\sim\!3\times$ larger (Theorem~3).}
+radial integral structure.  The ERI-density column is the physical
+global-$M_L$ Coulomb density $D$, which is what the composed pipeline
+realizes.  \emph{Re-measured 2026-08-30}:\ this table previously read
+$97.24 / 0.00 / 2.76$, the stricter pair-diagonal $D_{\mathrm{pd}}$,
+because the production enumerator collapsed to it before the
+2026-08-29 wrong-sign-$q$ fix (Theorem~3 note).}
 \label{tab:sparsity}
 \begin{ruledtabular}
 \begin{tabular}{lccc}
 Potential & Angular & Radial & ERI \\
           & zeros (\%) & zeros (\%) & density (\%) \\
 \midrule
-Coulomb        & 97.24 & 0.00 & 2.76 \\
-Harmonic osc.  & 97.24 & 0.00 & 2.76 \\
-Woods--Saxon   & 97.24 & 0.00 & 2.76 \\
-Square well    & 97.24 & 0.00 & 2.76 \\
-Yukawa         & 97.24 & 0.00 & 2.76 \\
+Coulomb        & 91.48 & 0.00 & 8.52 \\
+Harmonic osc.  & 91.48 & 0.00 & 8.52 \\
+Woods--Saxon   & 91.48 & 0.00 & 8.52 \\
+Square well    & 91.48 & 0.00 & 8.52 \\
+Yukawa\footnotemark[1] & 91.76 & 0.00 & 8.24 \\
 \end{tabular}
+\footnotetext[1]{Yukawa binds only $17$ of the $18$ states at the tested
+screening parameters, so its row is not a matched-orbital-count
+comparison; the density shown is its own-count value.  The angular
+\emph{pattern} is still bit-identical on the shared orbitals --- this is
+why the invariance test groups by orbital count
+(\texttt{tests/test\_nuclear\_sparsity.py}).  The previous table
+silently listed Yukawa at $18$.}
 \end{ruledtabular}
 \end{table}
 
@@ -374,9 +386,11 @@ precision:
 \item Radial zeros contribute exactly $0.00\%$ additional sparsity.
   No Slater integral $R^k$ accidentally vanishes for any of the five
   potentials tested.
-\item The ERI density is $2.76\%$ for all potentials, matching the
-  pair-diagonal $D_{\mathrm{pd}}$ column of Theorem~3 at $l_{\max}=2$
-  (the global-$M_L$ density there is $D = 8.52\%$).
+\item The ERI density is $8.52\%$ for the four potentials that bind
+  all $18$ states, matching the global-$M_L$ $D$ column of Theorem~3 at
+  $l_{\max}=2$ exactly.  (The stricter pair-diagonal $D_{\mathrm{pd}}$
+  there is $2.76\%$; the table reported that value until 2026-08-30, for
+  the reason given in its caption.)
 \end{itemize}
 
 \noindent The bit-identical angular patterns are not a numerical

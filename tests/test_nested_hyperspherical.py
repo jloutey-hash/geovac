@@ -76,12 +76,11 @@ class TestNestedBeConstruction:
         assert res['Q'] == 28
 
     def test_nested_be_n2_pauli_count(self):
-        """Nested Be at max_n=2: Pauli count should be 111 or 112.
-
-        Identity-tapering sprint: was 112 pre-tapering, 111 post-tapering.
+        """Nested Be at max_n=2: Pauli count 279 (exact-rule 2026-08-29;
+        the retired rule-A counts were 111 post- / 112 pre-identity-tapering).
         """
         res = _build_nested_be(max_n=2)
-        assert res['N_pauli'] in (111, 112)
+        assert res['N_pauli'] in (279, 280)
 
     def test_nested_be_no_pk(self):
         """Nested Be should have zero PK matrix elements.
@@ -110,7 +109,7 @@ class TestNestedBeConstruction:
         M = res['M']
         n_eri = int(np.count_nonzero(np.abs(res['eri']) > 1e-15))
         density = n_eri / M**4
-        assert density < 0.15, f"ERI density {density:.1%} exceeds 15%"
+        assert density < 0.25, f"ERI density {density:.1%} exceeds 25%"  # exact-rule 2026-08-29 (measured 17.1%; rule-A gate was 15% on 10.4%)
 
     def test_nested_be_eri_symmetry(self):
         """ERI tensor should be symmetric: (pq|rs) = (rs|pq)."""
@@ -280,9 +279,9 @@ class TestNestedLiHConstruction:
         assert res['Q'] == 10
 
     def test_nested_lih_n2_pauli_count(self):
-        """Nested LiH at max_n=2 should have 120 Pauli terms."""
+        """Nested LiH at max_n=2: 288 Pauli (exact-rule 2026-08-29; was 120)."""
         res = _build_nested_lih(max_n=2)
-        assert res['N_pauli'] == 120
+        assert res['N_pauli'] == 288
 
     def test_nested_lih_h1_has_offdiagonal(self):
         """h1 should have off-diagonal elements from cross-center V_ne."""
@@ -297,7 +296,7 @@ class TestNestedLiHConstruction:
         M = res['M']
         n_eri = int(np.count_nonzero(np.abs(res['eri']) > 1e-15))
         density = n_eri / M**4
-        assert density < 0.15
+        assert density < 0.25  # exact-rule 2026-08-29 (measured 17.1%)
 
     def test_nested_lih_eri_symmetry(self):
         """ERI tensor should satisfy (pq|rs) = (rs|pq)."""
@@ -381,7 +380,7 @@ class TestNestedLiH1Norm:
         """Nested Pauli/Q should be within the 15 gate."""
         res = _build_nested_lih(max_n=2)
         pq = res['N_pauli'] / res['Q']
-        assert pq <= 15, f"Pauli/Q = {pq:.1f} exceeds gate"
+        assert pq <= 32, f"Pauli/Q = {pq:.1f} exceeds gate"  # exact-rule 2026-08-29 (linearity coefficient now 27.9, was 11.1)
 
 
 # ============================================================================
@@ -481,7 +480,7 @@ class TestTwoCenterLiHConstruction:
     def test_twocenter_lih_n2_pauli_within_gate(self):
         """Pauli terms should be ≤ 150 (Sprint 4B gate)."""
         res = _build_nested_lih_twocenter(max_n=2)
-        assert res['N_pauli'] <= 150, f"Pauli={res['N_pauli']} exceeds 150"
+        assert res['N_pauli'] <= 360, f"Pauli={res['N_pauli']} exceeds 360"  # exact-rule 2026-08-29 (measured 288; rule-A gate was 150 on ~120)
 
     def test_twocenter_lih_kinetic_positive_diagonal(self):
         """Kinetic energy diagonal should be positive."""
@@ -523,7 +522,7 @@ class TestTwoCenterLiHConstruction:
         M = res['M']
         n_eri = int(np.count_nonzero(np.abs(res['eri']) > 1e-15))
         density = n_eri / M**4
-        assert density < 0.15
+        assert density < 0.25  # exact-rule 2026-08-29 (measured 17.1%)
 
 
 # ============================================================================
@@ -567,7 +566,7 @@ class TestTwoCenterLiHFCI:
         """Two-center Pauli/Q should be within 15."""
         res = _build_nested_lih_twocenter(max_n=2)
         pq = res['N_pauli'] / res['Q']
-        assert pq <= 15, f"Pauli/Q = {pq:.1f} exceeds gate"
+        assert pq <= 32, f"Pauli/Q = {pq:.1f} exceeds gate"  # exact-rule 2026-08-29 (linearity coefficient now 27.9, was 11.1)
 
 
 # ============================================================================
@@ -881,7 +880,7 @@ class TestHeterogeneousConstruction:
         M = res['M']
         n_eri = int(np.count_nonzero(np.abs(res['eri']) > 1e-15))
         density = n_eri / M**4
-        assert density < 0.15, f"ERI density {density:.1%} exceeds 15%"
+        assert density < 0.25, f"ERI density {density:.1%} exceeds 25%"  # exact-rule 2026-08-29 (measured 17.1%; rule-A gate was 15% on 10.4%)
 
     def test_hetero_core_h1_diagonal(self):
         """Core block of h1_raw should have -Z_core^2/(2n^2) on diagonal."""
@@ -908,9 +907,13 @@ class TestHeterogeneousConstruction:
         """Pauli terms should be below composed+balanced (878)."""
         res = _build_nested_lih_heterogeneous(max_n=2)
         # Lowdin inflates Pauli count; check it's below balanced coupled
-        assert res['N_pauli'] < 2000, (
-            f"N_pauli = {res['N_pauli']} exceeds 2000"
+        # exact-rule 2026-08-29: measured 4743 vs uncoupled 288 -- the
+        # Loewdin-inflation claim SURVIVES (16.5x, was 14.3x = 1711/120).
+        assert res['N_pauli'] < 6000, (
+            f"N_pauli = {res['N_pauli']} exceeds 6000"
         )
+        assert res['N_pauli'] / 288 > 10, "Loewdin inflation vanished?"
+
 
 
 # ============================================================================
@@ -967,6 +970,8 @@ class TestHeterogeneousVsUniform:
         M = res['M']
         n_eri = int(np.count_nonzero(np.abs(res['eri']) > 1e-15))
         density = n_eri / M**4
-        assert density < 0.12, (
-            f"ERI density {density:.1%} exceeds Sprint 2 prediction of 12%"
+        # exact-rule 2026-08-29: the 12% Sprint-2 prediction was
+        # rule-A-scoped; measured 17.1% under the exact rule.
+        assert density < 0.25, (
+            f"ERI density {density:.1%} exceeds 25%"
         )

@@ -27,35 +27,38 @@ from geovac.ecosystem_export import hamiltonian
 # ---------------------------------------------------------------------------
 # Expected Pauli counts (non-identity terms) at max_n=2
 # ---------------------------------------------------------------------------
+# Corrected 2026-08-29 to the exact global-M_L rule (main-group composed
+# = 27.90 x Q exactly; TM = 30.03 x Q; the retired rule-A counts were
+# 11.10 x Q / 9.23 x Q).  See debug/sprint_eri_evaluator_defects_memo.md.
 EXPECTED_PAULI = {
     # Atomic / diatomic
-    'He':   119,
-    'H2':   111,
+    'He':   287,
+    'H2':   279,
     # First-row main-group
-    'LiH':  333,
-    'BeH2': 555,
-    'CH4':  999,
-    'NH3':  888,
-    'H2O':  777,
-    'HF':   666,
+    'LiH':  837,
+    'BeH2': 1395,
+    'CH4':  2511,
+    'NH3':  2232,
+    'H2O':  1953,
+    'HF':   1674,
     # Second-row
-    'NaH':  222,
-    'MgH2': 444,
-    'SiH4': 888,
-    'PH3':  777,
-    'H2S':  666,
-    'HCl':  555,
+    'NaH':  558,
+    'MgH2': 1116,
+    'SiH4': 2232,
+    'PH3':  1953,
+    'H2S':  1674,
+    'HCl':  1395,
     # Third-row s-block
-    'KH':   222,
-    'CaH2': 444,
+    'KH':   558,
+    'CaH2': 1116,
     # Third-row p-block
-    'GeH4': 888,
-    'AsH3': 777,
-    'H2Se': 666,
-    'HBr':  555,
+    'GeH4': 2232,
+    'AsH3': 1953,
+    'H2Se': 1674,
+    'HBr':  1395,
     # TM hydrides (all identical)
-    'ScH':  277, 'TiH':  277, 'VH':   277, 'CrH':  277, 'MnH':  277,
-    'FeH':  277, 'CoH':  277, 'NiH':  277, 'CuH':  277, 'ZnH':  277,
+    'ScH':  901, 'TiH':  901, 'VH':   901, 'CrH':  901, 'MnH':  901,
+    'FeH':  901, 'CoH':  901, 'NiH':  901, 'CuH':  901, 'ZnH':  901,
 }
 
 
@@ -78,17 +81,18 @@ EXPECTED_PAULI = {
 #   ScH  — TM frozen-core (Ar core), d-orbital block
 #
 # Full 40-system sweep is the @pytest.mark.slow tests below; run with --slow.
+# Corrected 2026-08-29 (exact global-M_L rule; see EXPECTED_PAULI note).
 REPRESENTATIVE_PAULI = {
-    'He':   119,
-    'H2':   111,
-    'LiH':  333,
-    'BeH2': 555,
-    'H2O':  777,
-    'HF':   666,
-    'NaH':  222,
-    'HCl':  555,
-    'KH':   222,
-    'ScH':  277,
+    'He':   287,
+    'H2':   279,
+    'LiH':  837,
+    'BeH2': 1395,
+    'H2O':  1953,
+    'HF':   1674,
+    'NaH':  558,
+    'HCl':  1395,
+    'KH':   558,
+    'ScH':  901,
 }
 
 
@@ -242,7 +246,7 @@ def test_isostructural_invariance_representative(hamiltonian_cache) -> None:
     catch a regression that breaks the Pauli/Q invariance for frozen-core
     main-group specs.
     """
-    expected_pauli = 222
+    expected_pauli = 558  # exact-rule 2026-08-29 (was 222)
     expected_Q = 20
     for system in ['NaH', 'KH']:
         H = hamiltonian_cache(system)
@@ -269,7 +273,7 @@ def test_tm_isostructural(hamiltonian_cache) -> None:
         H = hamiltonian_cache(system)
         n_pauli = H.n_terms - 1
         assert H.n_qubits == 30, f"{system}: Q={H.n_qubits}"
-        assert n_pauli == 277, f"{system}: N_pauli={n_pauli}"
+        assert n_pauli == 901, f"{system}: N_pauli={n_pauli}"  # exact-rule
 
 
 def test_tm_isostructural_representative(hamiltonian_cache) -> None:
@@ -282,7 +286,7 @@ def test_tm_isostructural_representative(hamiltonian_cache) -> None:
         H = hamiltonian_cache(system)
         n_pauli = H.n_terms - 1
         assert H.n_qubits == 30, f"{system}: Q={H.n_qubits}"
-        assert n_pauli == 277, f"{system}: N_pauli={n_pauli}"
+        assert n_pauli == 901, f"{system}: N_pauli={n_pauli}"  # exact-rule
 
 
 # ---------------------------------------------------------------------------
@@ -299,6 +303,15 @@ def test_propinquity_bound_finite_and_positive(hamiltonian_cache) -> None:
     assert bound > 0.0, f"propinquity_bound = {bound} is not positive"
 
 
+@pytest.mark.slow  # LiH max_n=4 (Q=180): MEASURED 830.8s / 750,774 terms
+# (build times 0.3s / 25.3s / 830.8s at max_n=2/3/4).  Slow, not hung:
+# the 2026-08-29 exact-rule correction grew LiH max_n=3 from 7,878 to
+# 42,138 terms, and the growth compounds (local slope 3.78).
+# NOT parametrized: this test asserts bounds[0] > bounds[1] > bounds[2]
+# across all three points, so it is irreducibly a three-point test.  The
+# max_n=2 VALUE checks against the closed form remain in the default run via
+# the two parametrized tests below.
+# See debug/qa/delta4_run_notes.md.
 def test_propinquity_bound_monotone_decreasing_lih(hamiltonian_cache) -> None:
     """gamma_{max_n} is strictly monotone-decreasing in max_n.
 
@@ -327,7 +340,20 @@ def test_propinquity_bound_monotone_decreasing_lih(hamiltonian_cache) -> None:
         )
 
 
-def test_propinquity_bound_matches_closed_form_sum_rule(hamiltonian_cache) -> None:
+# Only max_n>=3 is expensive: MEASURED build times 0.3s / 25.3s / 830.8s at
+# max_n=2/3/4 (the 2026-08-29 exact-rule correction grew LiH max_n=3 from
+# 7,878 to 42,138 terms; local slope 3.78).  max_n=2 stays in the default run
+# so the closed-form VALUE check keeps regression-catching coverage -- marking
+# the whole sweep slow left only a finite-and-positive check behind.
+# See debug/qa/delta4_run_notes.md.
+@pytest.mark.parametrize("max_n", [
+    2,
+    pytest.param(3, marks=pytest.mark.slow),
+    pytest.param(4, marks=pytest.mark.slow),
+])
+def test_propinquity_bound_matches_closed_form_sum_rule(
+    hamiltonian_cache, max_n: int,
+) -> None:
     """The wired bound equals C_3 * gamma_{max_n} bit-identically.
 
     C_3 = 1 (Paper 38 Lemma L3, sharp at all cutoffs). Direct check
@@ -335,26 +361,31 @@ def test_propinquity_bound_matches_closed_form_sum_rule(hamiltonian_cache) -> No
     """
     from geovac.central_fejer_su2 import gamma_n_via_sum_rule
 
-    for max_n in [2, 3, 4]:
-        H = hamiltonian_cache('LiH', max_n=max_n)
-        gamma_ref = float(gamma_n_via_sum_rule(max_n, prec=50))
-        assert math.isclose(H.propinquity_bound, gamma_ref, rel_tol=1e-12), (
-            f"max_n={max_n}: bound {H.propinquity_bound} != gamma_n "
-            f"closed form {gamma_ref}"
-        )
+    H = hamiltonian_cache('LiH', max_n=max_n)
+    gamma_ref = float(gamma_n_via_sum_rule(max_n, prec=50))
+    assert math.isclose(H.propinquity_bound, gamma_ref, rel_tol=1e-12), (
+        f"max_n={max_n}: bound {H.propinquity_bound} != gamma_n "
+        f"closed form {gamma_ref}"
+    )
 
 
-def test_propinquity_bound_known_values_lih(hamiltonian_cache) -> None:
+@pytest.mark.parametrize("max_n,gamma_ref", [
+    (2, 2.074551),
+    pytest.param(3, 1.610060, marks=pytest.mark.slow),
+    pytest.param(4, 1.322333, marks=pytest.mark.slow),
+])
+def test_propinquity_bound_known_values_lih(
+    hamiltonian_cache, max_n: int, gamma_ref: float,
+) -> None:
     """Check known closed-form values at max_n in {2, 3, 4}.
 
     From CLAUDE.md and Paper 38 Thm.~1 / memory file
     l2_quantitative_rate_4_over_pi.md: gamma_2 ~ 2.0746, gamma_3 ~
-    1.6101, gamma_4 ~ 1.3223.
+    1.6101, gamma_4 ~ 1.3223.  Only max_n>=3 is marked slow; see the note
+    on the sum-rule test above.
     """
-    expected = {2: 2.074551, 3: 1.610060, 4: 1.322333}
-    for max_n, gamma_ref in expected.items():
-        H = hamiltonian_cache('LiH', max_n=max_n)
-        assert math.isclose(H.propinquity_bound, gamma_ref, abs_tol=1e-5), (
+    H = hamiltonian_cache('LiH', max_n=max_n)
+    assert math.isclose(H.propinquity_bound, gamma_ref, abs_tol=1e-5), (
             f"max_n={max_n}: bound {H.propinquity_bound:.6f} != "
             f"expected {gamma_ref:.6f}"
         )
@@ -477,9 +508,44 @@ def test_lih_fcidump_write_and_parse(hamiltonian_cache, tmp_path) -> None:
     parsed = read_fcidump(path)
     assert parsed['n_orbitals'] == H.n_orbitals
     assert parsed['n_electrons'] == H.n_electrons
-    # Bit-exact for h1 (Hermitian symmetry round-trips) and eri (8-fold).
+    # h1 round-trips bit-exactly (Hermitian symmetry is genuine).
     assert np.max(np.abs(H.h1 - parsed['h1'])) < 1e-12
-    assert np.max(np.abs(H.eri - parsed['eri'])) < 1e-12
+    # ------------------------------------------------------------------
+    # KNOWN LOSSINESS (2026-08-29, exact-rule correction): the FCIDUMP
+    # format stores only 8-fold-unique entries, which assumes REAL
+    # orbitals.  The exact-rule complex-spherical-harmonic ERIs have only
+    # the 4-fold group (<ab|cd> = <ba|dc> = <cd|ab>, verified bit-exact;
+    # the single-swap symmetries are genuinely broken, max dev 8.8e-2).
+    # The round-trip therefore reproduces the 8-FOLD PROJECTION of the
+    # tensor, not the tensor.  Named follow-on: transform to real
+    # spherical harmonics before export (restores genuine 8-fold).
+    # See debug/sprint_eri_evaluator_defects_memo.md.
+    # ------------------------------------------------------------------
+    # (a) the loss is bounded by the tensor's own measured asymmetry: the
+    # writer keeps ONE canonical representative per 8-fold orbit, so any
+    # entry can differ from parsed by at most the max spread within its
+    # orbit (measured 8.8e-2 for LiH at max_n=2).
+    asym = max(
+        np.max(np.abs(H.eri - H.eri.transpose(1, 0, 2, 3))),
+        np.max(np.abs(H.eri - H.eri.transpose(0, 1, 3, 2))),
+    )
+    loss = np.max(np.abs(H.eri - parsed['eri']))
+    assert loss <= asym + 1e-12, (
+        f"FCIDUMP round-trip loss {loss:.3e} exceeds the tensor's own "
+        f"4-fold-vs-8-fold asymmetry {asym:.3e}"
+    )
+    # (b) the parsed tensor is internally 8-fold consistent (the format's
+    # invariant; the writer's own consistency is separately covered by
+    # test_fcidump_eri_eight_fold_symmetry).
+    p = parsed['eri']
+    assert np.max(np.abs(p - p.transpose(1, 0, 2, 3))) < 1e-12
+    assert np.max(np.abs(p - p.transpose(2, 3, 0, 1))) < 1e-12
+    # (c) discrimination: the raw tensor must NOT round-trip (if it does,
+    # the wrong-sign-q bug has returned and restored the accidental 8-fold)
+    assert loss > 1e-3, (
+        "raw ERI round-trips exactly -- accidental 8-fold symmetry is back "
+        "(wrong-sign-q regression?)"
+    )
     assert abs(H.ecore - parsed['ecore']) < 1e-12
 
 
@@ -570,9 +636,18 @@ def test_fcidump_works_for_multiple_systems(hamiltonian_cache, tmp_path) -> None
         assert parsed['n_orbitals'] == info['n_orbitals'], (
             f"{system}: NORB mismatch on round-trip"
         )
-        # eri max diff under 1e-10 (we write 16 digits)
-        assert np.max(np.abs(H.eri - parsed['eri'])) < 1e-10, (
-            f"{system}: eri round-trip exceeded 1e-10"
+        # KNOWN LOSSINESS (2026-08-29): FCIDUMP stores 8-fold-unique
+        # entries; the exact-rule complex-harmonic ERIs are only 4-fold,
+        # so the round-trip reproduces the 8-fold PROJECTION (see the
+        # single-system test above for the full note + discrimination).
+        asym = max(
+            np.max(np.abs(H.eri - H.eri.transpose(1, 0, 2, 3))),
+            np.max(np.abs(H.eri - H.eri.transpose(0, 1, 3, 2))),
+        )
+        loss = np.max(np.abs(H.eri - parsed['eri']))
+        assert loss <= asym + 1e-10, (
+            f"{system}: FCIDUMP round-trip loss {loss:.3e} exceeds the "
+            f"tensor's own asymmetry {asym:.3e}"
         )
         assert np.max(np.abs(H.h1 - parsed['h1'])) < 1e-10, (
             f"{system}: h1 round-trip exceeded 1e-10"

@@ -36,11 +36,17 @@ from geovac.angular_integrals import wigner3j
 def ck_coefficient(la: int, ma: int, lc: int, mc: int, k: int) -> float:
     """
     c^k(l,m; l',m') = (-1)^m sqrt((2l+1)(2l'+1)) * (l k l'; 0 0 0) * (l k l'; -m q m')
-    where q = mc - ma.
+    where q = ma - mc (the 3j bottom row must sum to zero).
 
     Potential-INDEPENDENT angular coupling coefficient.
+
+    Corrected 2026-08-29: the shipped q = mc - ma restricted this to the
+    pair-diagonal (m-conserving-per-pair) subset -- the mechanism behind the
+    D_pd-vs-D convention split (CF-1).  With the exact rule the production
+    enumerator, the composed pipeline, and Paper 22's headline global-M_L
+    density are one convention; CF-1 dissolves.
     """
-    q = mc - ma
+    q = ma - mc
     pre = ((-1) ** ma) * np.sqrt((2 * la + 1) * (2 * lc + 1))
     w1 = wigner3j(la, k, lc, 0, 0, 0)
     if abs(w1) < 1e-15:
@@ -516,7 +522,14 @@ def compute_eri_tensor(
 
                     # Get angular (a,c) and (b,d) couplings
                     ck_ac_list = ac_k_map.get((a_idx, c_idx), [])
-                    ck_bd_list = ac_k_map.get((b_idx, d_idx), [])
+                    # Condon-Shortley second factor is c^k(d,b), NOT c^k(b,d)
+                    # (corrected 2026-08-29, delta-4: this was the EIGHTH
+                    # instance of the same order bug.  Invisible to
+                    # test_paper22_density's potential-independence test,
+                    # which compares only the nonzero MASK and the density --
+                    # both invariant under a sign flip, since
+                    # |c^k(b,d)| == |c^k(d,b)|.)
+                    ck_bd_list = ac_k_map.get((d_idx, b_idx), [])
 
                     if not ck_ac_list or not ck_bd_list:
                         angular_zero += 1
@@ -573,19 +586,19 @@ def compute_eri_tensor(
 
 def angular_zero_count(n_max: int, l_max: int) -> Tuple[int, int]:
     """
-    Count angular zeros under the PAIR-DIAGONAL angular selection rule (rule A).
+    Count angular zeros under the EXACT global-M_L Coulomb selection rule.
 
     Enumerates all (n_r, l, m) states with n_r = 0..n_max, l = 0..l_max,
     m = -l..+l and counts how many ERI elements vanish by angular selection
-    (triangle, parity, and the m rule).  NOTE (CF-1 / criteria.md "Dual-rule ERI
-    framing"): this realizes the PAIR-DIAGONAL approximation -- ``ck_coefficient``
-    has q = mc - ma, so it is nonzero only when m_a = m_c (and m_b = m_d), which
-    is the sparsity/QC-product rule A, NOT the exact global-M_L Coulomb rule B
-    (m_a + m_b = m_c + m_d).  It therefore returns the realized density D_pd
-    (e.g. 1.44% at l_max=3), not the universal selection-rule density D (6.06%).
-    The ``m_a + m_b == m_c + m_d`` guard below is redundant given the
-    pair-diagonal ``ck_coefficient``.  Pinned by
-    tests/test_paper22_density.py + tests/test_paper14_eri_rule.py.
+    (triangle, parity, and global m-conservation m_a + m_b = m_c + m_d).
+    Returns the headline global density D of Paper 22 (6.0608% at l_max=3).
+
+    History (CF-1, RESOLVED 2026-08-29): until the wrong-sign-q fix in
+    ``ck_coefficient`` this routine silently collapsed to the pair-diagonal
+    density D_pd (1.4404% at l_max=3) despite enforcing the global rule
+    textually -- the buggy coefficient zeroed every m-changing multipole, so
+    the global delta below was redundant.  Pinned by
+    tests/test_paper22_density.py::test_angular_zero_count_computes_global_headline_density.
 
     Returns (angular_zeros, total_elements).
     """

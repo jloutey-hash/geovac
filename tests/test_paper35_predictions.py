@@ -51,8 +51,11 @@ def test_observable_1_high_T_limit_ratio_approaches_unity():
     V3 = 2 * mp.pi**2
     F_SB_total = -mp.pi**2 / 90 / beta**4 * V3
     ratio = F_thermal / F_SB_total
-    # ratio should be close to -1 (sign convention) with magnitude near 1
-    assert abs(abs(ratio) - 1) < 1e-3
+    # The ratio is -1 under this file's sign conventions (verified by
+    # running both branches; pinning +1 fails).  The former
+    # abs(abs(ratio)-1) wrapper was sign-blind (cert-2 finding): it
+    # passed for EITHER sign, so a sign error in either side slipped.
+    assert abs(ratio + 1) < 1e-3, f"thermal/SB free-energy ratio {ratio}"
 
 
 # ---------------------------------------------------------------------------

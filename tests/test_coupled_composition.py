@@ -75,8 +75,8 @@ class TestGauntSelectionRules:
     def test_cross_block_eri_count(self, lih_data):
         """Cross-block ERI count should match BX-3b result (2/3 ratio)."""
         coupled = lih_data['coupled']
-        assert coupled['cross_block_eri_count'] == 130
-        assert coupled['within_block_eri_count'] == 195
+        assert coupled['cross_block_eri_count'] == 214  # exact-rule 2026-08-29 (was 130)
+        assert coupled['within_block_eri_count'] == 321  # exact-rule 2026-08-29 (was 195)
         ratio = coupled['cross_block_eri_count'] / coupled['within_block_eri_count']
         assert abs(ratio - 2.0 / 3.0) < 1e-10
 
@@ -160,26 +160,31 @@ class TestPauliRegression:
     """Regression tests for Pauli count and 1-norm."""
 
     def test_composed_pauli_count(self, lih_data):
-        """Composed LiH at Q=30 should have exactly 333 Pauli terms.
+        """Composed LiH at Q=30 should have exactly 837 Pauli terms.
 
-        Was 334 before the global Z-tapering sprint; identity-tapering shed
-        one redundant identity term (2026-06-04 cleanup).
+        Exact-rule 2026-08-29 (was 333 under the retired rule A; before that
+        334 pre-identity-tapering).
         """
-        assert lih_data['composed']['N_pauli'] == 333
+        assert lih_data['composed']['N_pauli'] == 837
 
     def test_coupled_pauli_count(self, lih_data):
-        """Coupled LiH at Q=30 should have exactly 854 Pauli terms."""
-        assert lih_data['coupled']['N_pauli'] == 854
+        """Coupled LiH at Q=30 should have exactly 2,702 Pauli terms
+        (exact-rule 2026-08-29; was 854 under the retired rule A)."""
+        assert lih_data['coupled']['N_pauli'] == 2702
 
     def test_pauli_ratio(self, lih_data):
-        """Pauli ratio should be ~2.56x."""
+        """Pauli ratio should be ~3.23x (exact-rule 2026-08-29; the retired
+        rule-A ratio was 2.56x -- Track CB's structural verdict, cross-block
+        ERIs inflate the count severalfold, is unchanged)."""
         ratio = lih_data['coupled']['N_pauli'] / lih_data['composed']['N_pauli']
-        assert abs(ratio - 2.56) < 0.1
+        assert abs(ratio - 3.23) < 0.1
 
     def test_coupled_one_norm(self, lih_data):
-        """Coupled 1-norm should be ~85.69 Ha."""
+        """Coupled 1-norm (all terms incl. identity) ~ 89.0 Ha
+        (exact-rule 2026-08-29; was ~85.69 under the retired rule A).
+        Non-identity part measured 81.77; identity adds ~9.9."""
         one_norm = sum(abs(c) for c in lih_data['coupled']['qubit_op'].terms.values())
-        assert abs(one_norm - 85.69) < 1.0
+        assert abs(one_norm - 91.65) < 1.0
 
 
 class TestFCISolver:

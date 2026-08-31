@@ -332,6 +332,12 @@ verdict is the **AND across all review dimensions** (below).
   grep-class check, not a judgment call). Promoted to all-FAIL 2026-07-05
   at the corpus sweep.** Convention: `docs/authoring_conventions.md` rule 12.
 
+- **C20 inline-attribution resolvability (added 2026-08-29).** `debug/qa/check_inline_attributions.py` — enumerates inline `Author~Year` attributions and flags those with no resolvable `\bibitem`. Ratchet semantics: the baseline set lives in `debug/qa/inline_attribution_baseline.json`, and the gate FAILS only on an attribution outside that set, naming it. Rationale: every external-citation defect of the 2026-08 arc (phantom edition, wrong section anchor ×8, numbers credited to the wrong paper) lived in the bibitem-free layer, and the class is mechanical. Re-baseline with `--update-baseline` when attributions are resolved; `--selftest` built in. Discrimination proven 2026-08-29 (fires on a new unresolved attribution, silent when the same attribution has a bibitem).
+  *(Re-attached 2026-08-29: first registered as a block spliced into the
+  middle of the C19 sentence — the same mid-sentence-splice class the delta
+  run caught. The C18 provenance sentence above was displaced by that splice
+  and is flagged for re-homing.)*
+
 ## Branch-specific criteria (C14+)
 
 A branch may add criteria numbered **C14+** *in its profile* when it carries a
@@ -355,7 +361,8 @@ Reviewer count per dimension follows the **granularity & scaling rule** in `qa.m
 | Paper claims / prose | C3, C5, C6, C7, C8 (+ branch C14+) | `claims-reviewer` · **chunk ~3–4 papers/agent** | prose ≤ tier; hard prohibitions intact |
 | External citations | C4 | `citation-reviewer` · **chunk ~5–6 papers/agent** | cites resolve and say what we attribute |
 | Synthesis faithfulness | C9 | `claims-reviewer` (one on the branch synthesis) | **separate dispatch** from per-paper claims |
-| Deterministic | C10, C11, C12, C13, C14, C15, C16, C17 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py`, `check_headline_numbers.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
+| Deterministic | C10, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21 | scripts (`check_internal_titles.py`, `check_k_label.py`, `check_paper_test_refs.py`, `check_file_refs.py`, `check_inline_arxiv.py`, `check_retracted_terms.py`, `check_headline_numbers.py`, `check_duration_language.py`, `check_latex_escapes.py`, `check_inline_attributions.py`, `check_numeric_consistency.py` — each `--gate <branch>`; + compile) · **whole group, first** | not an LLM reviewer |
+| Arithmetic audit | (cross-cuts C8) | dedicated reviewer or in-panel instruction: re-derive every stated total/ratio/percentage from its own components | registered 2026-08-29 (cert-3: two of the run's LARGEs were sums that did not equal their own parts); fires on FULL runs |
 
 **Enumeration mandate (the 2026-06-23 lesson).** Every LLM-reviewer prompt
 demands *exhaustive enumeration*, not sampling, of the low-salience structured
@@ -494,3 +501,160 @@ quietly rises.
   is correct; anything touching a headline stays MATERIAL. Motivated by the group2 run-#4/#5
   thin-residual asymptote (perfect 11/11+6/6 calibration both runs, ~2 thin secondary/provenance
   items each, never a headline). Refines (does not relax) the counterfactual.
+
+---
+
+## C21 — numeric consistency gate (added 2026-08-30, PI direction)
+
+**Artifact:** `debug/qa/numeric_registry.py` — the corpus's declared numeric
+dependency graph.
+**Gate:** `debug/qa/check_numeric_consistency.py`.
+**Self-test:** `tests/test_numeric_registry.py`.
+
+### Why it exists
+
+C16 and C17 are blocklists: they name known-wrong values and stop them
+re-surfacing. They work, but they can only guard a class *after* it has
+produced a defect, and they say nothing about relationships between numbers.
+
+Deltas 5-7 showed the surviving defect classes are relational. A census of
+the group4 + group6 numeric surface:
+
+    2,815 numeral occurrences   825 distinct
+      352 at more than one LOCUS       (twins)
+      201 in more than one DOCUMENT    (cross-paper coupling)
+
+Each delta found 15-20 genuine defects -- about **5% of that coupled surface
+per pass**. Manual review samples the graph; it does not traverse it. Three
+edge types kept surviving:
+
+- **twins** -- the same quantity tabulated in two papers. A reviewer scoped
+  to one cannot see the other.
+- **derivations** -- lambda/Q, N^2, a ratio against a fixed baseline, an
+  exponent fitted from a printed column. When a base value moves its
+  derivatives silently do not. Catching these needs recomputation, not
+  reading, which is why they survived seven passes.
+- **conventions** -- identity-included vs non-identity; a fit's point range.
+  Both numbers are right; only the pairing is wrong, so value-checking is
+  blind to it by construction.
+
+### What the gate checks
+
+**A. Derivations recompute** from their registry inputs. Load-bearing; this
+is what makes C21 more than a second C17.
+**B. Retired values are not live**, reported *with the registry key that
+replaces them* -- the message says what the locus should read.
+**C. Salience report (advisory)** -- unregistered multi-document numerals.
+This is the maintenance mechanism: it is how the registry learns what it is
+missing, and why the artifact cannot quietly fall behind the corpus.
+
+### MAINTENANCE RULE (hard)
+
+1. **When a measured value moves, edit the registry FIRST**, then run C21.
+   The gate reports every stale locus, including in other papers. Do not
+   hand-sweep for loci -- that is the process this artifact replaces.
+2. **Register new load-bearing numbers.** An unregistered multi-document
+   numeral is a visible debt, not a defect.
+3. **Never register a value you have not measured or cited.** `provenance`
+   is not decoration; a registry of guesses launders them into authority.
+4. **Declare conventions, don't infer them.** Aliases tie the two renderings
+   of one quantity together so the gate can tell "other convention" from
+   "wrong".
+5. **Every RETIRED entry needs a required context.** A bare-value entry
+   fires on Z-ranges, qubit counts and reference numbers. The first C21 run
+   reported 31 hits, 29 of them noise, for exactly this reason.
+
+### First-run result
+
+Found `tab:sunaga` -- a **third** relativistic table in Paper 14, entirely
+pre-correction, that neither the delta-6 nor the delta-7 reviewer had in
+scope because each was scoped to a single document. Also caught its derived
+ratio columns, which no reviewer had recomputed. This is the twin class the
+artifact was built for, found on the first run.
+
+A second finding was against the gate itself: the corpus uses both LaTeX
+thin-space conventions (`1{,}413` and `1\,413`) and the initial matcher read
+only one, leaving it blind to roughly half the corpus's large numbers. The
+self-test now pins both forms as a regression guard.
+
+### C21 check E — convention consistency within a table (added 2026-08-30)
+
+Closes the one class that pure value-checking is structurally blind to: a
+table quoting the same kind of quantity in two conventions, where every
+individual value is correct and only the *pairing* is wrong. The live
+example was `tab:pauli`, whose Q=10 row included the identity term while its
+Q=28/60 rows excluded it -- 288 alongside 14,078 and 250,402. Both
+conventions are legitimate; mixing them is not, and no value check can see
+it.
+
+Mechanism: the human-readable `convention` string stays the single source,
+and `numeric_registry.family()` parses it into `(kind, identity)`. Within one
+table environment, all cited quantities of the same kind must share an
+identity convention. `tests/test_numeric_registry.py` asserts that **every**
+registered convention parses, so a new entry phrased some other way fails
+loudly instead of quietly leaving the check.
+
+**Check E's first run found an epistemic gap rather than an arithmetic one.**
+It flagged `tab:paper20_tier2` for mixing our non-identity counts with
+Chawla's RaH-18q baseline -- but the basis for calling that baseline
+identity-included was nothing: the parser assigns "included" whenever
+"non-identity" is absent, so an *unstated* convention had silently become an
+*asserted* one, in violation of registry rule 3. External baselines now
+carry `identity=None` (unknown), check E skips unknowns rather than assuming,
+and a test forbids any cited entry from asserting a convention its source
+does not state. Numeric residual: one term in 12,556, i.e. 0.008% on the
+Chawla ratio -- below display precision, so no paper edit was warranted. The
+point was that the registry should not claim to know what it does not.
+
+### C21 check C -- the exemption window is separate, and tighter (2026-08-30)
+
+`WINDOW = 8` was doing two jobs: finding a numeral's **require-context**,
+and deciding whether a nearby **disclosure marker** ("retired", "vintage",
+"previously printed") should exempt it. The second job is where it failed.
+At +-8 lines a single retirement note blankets its whole neighbourhood:
+
+* a vintage note five lines *below* Paper 14's `tab:tc_composed` exempted
+  that table's three retired cells (334 / 556 / 778) outright, so a fully
+  pre-exact-rule table was reported clean;
+* Paper 20's sentence "the *previously printed* 354.9 came from the
+  deprecated legacy builder path" exempted 306.4, 373.4 **and** 66.0 in the
+  same paragraph -- none of which that sentence was about.
+
+**A disclosure about one number is not a disclosure about its neighbours.**
+
+So `EXEMPT_WINDOW = 3` is now separate from `WINDOW = 8`. The wide window is
+**kept for require-context**, where a table caption legitimately sits many
+rows above its cell -- that is why 8 was chosen and it is still right for
+that job.
+
+Swept in both directions before changing anything (does it fire on the
+pre-fix text; does it stay silent on the corrected corpus):
+
+| window | fires on pre-fix `66.0` | false positives, corrected corpus |
+|-------:|:------------------------|----------------------------------:|
+| +-8    | no                      | 0 |
+| +-4    | **yes**                 | 0 |
+| +-3    | **yes**                 | 0 |
+| +-2    | yes                     | 1 (a `\rightarrow` disclosure) |
+| +-1    | yes                     | 6 |
+
+`+-3` is the widest setting that gains sensitivity at zero cost. `\rightarrow`
+joined `\to` in `EXEMPT` so the tighter setting does not depend on which
+arrow macro an author happened to use. Pinned by
+`test_exemption_window_is_tighter_than_the_context_window`, which asserts
+**both** directions on synthetic text: a retired value far from a marker
+must fire; the same value on the marker's own line must stay silent.
+
+The general lesson is the discrimination rule applied to a *tuning
+constant* rather than to a regex: the +-8 setting was never tested for
+whether it could still fire, only for whether it stayed quiet -- and a
+setting that is only ever tested for silence will drift toward silence.
+
+### C21 scope map (2026-08-30)
+
+Scopes are `group3`, `group4`, `group6`. `group3` was added when the
+angular-ERI-density family (global-$M_L$ vs pair-diagonal) turned out to be
+owned by Paper 22 and the group3 synthesis. Note the failure mode it
+exposed: `--gate group3` did not report "unscoped", it **crashed** with a
+`TypeError` from `_files(None)`, which reads as a broken checker rather than
+a missing scope. An unknown gate now exits with the list of known scopes.

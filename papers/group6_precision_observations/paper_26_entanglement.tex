@@ -1,3 +1,7 @@
+% Reconstructed 2026-08-29 after a truncation incident; see
+% debug/recovery_p26_2026_08_29/INCIDENT.md for the full record.
+% Source of truth for the reconstruction: the preserved pre-truncation PDF
+% in that directory; acceptance spec: tests/test_paper26_entanglement.py.
 \documentclass[twocolumn,pra,amsmath,amssymb,superscriptaddress]{revtex4-2}
 
 \usepackage{graphicx}
@@ -5,6 +9,16 @@
 \usepackage{booktabs}
 \usepackage{dcolumn}
 \usepackage{xcolor}
+
+
+% ---------------------------------------------------------------
+% \gvq{registry-key}{value} -- a load-bearing quantity, carrying a
+% foreign key into debug/qa/numeric_registry.py alongside its literal
+% value.  Renders as the value alone, so this file and the archived
+% PDF stay self-contained; the key gives the QA gate (C20) referential
+% integrity, and `--index <key>` names every locus citing the
+% quantity when it moves.  See CLAUDE.md SS15.
+\newcommand{\gvq}[2]{#2}
 
 \begin{document}
 
@@ -26,32 +40,37 @@ First, energy-entanglement decoupling: the off-diagonal one-body
 Hamiltonian (graph Laplacian topology, coupling constant
 $\kappa = -1/16$) contributes $10$--$39\%$ of the correlation
 energy but less than $0.2\%$ of the entanglement entropy; the
-off-diagonal electron repulsion contributes $100\%$ of the
+off-diagonal electron repulsion contributes effectively $100\%$ of the
 entanglement.  Entanglement entropy scales as $S \sim Z^{-2.56}$
 across He-like ions.
 Second, basis-intrinsic sparsity: among orbital bases for systems
 with spherical symmetry, the angular momentum eigenbasis is the
 essentially unique basis producing sparse electron repulsion integrals (ERIs) (up to $(l,m)$-label-preserving rotations; generic angular-mixing rotations fill them).
-Any unitary rotation of orbital indices, no matter how small, fills
-the ERI tensor from $42\%$ to $99\%$ density in a step-function
-transition at the identity.  The nonzero ERI count
+Any generic (angular-mixing) unitary rotation of orbital indices, no
+matter how small, fills the ERI tensor from $17\%$ to $100\%$ density
+in a rapid but graded transition at the identity.  The nonzero ERI count
 is $Z$-independent, confirming that sparsity is purely geometric.
 Third, entanglement network topology: orbital mutual information
 maps reveal a hub migration pattern---$1s \to 2s \to 2p$---that
 tracks the partially filled shell across the first row of the
-periodic table.
+periodic table (for $Z = 7$--$9$ both the values and the presence of a
+nonzero valence network are multiplet-member-dependent).
 Fourth, core-valence decoupling: the core-valence mutual
-information falls to $\approx 2\times10^{-3}$ by $Z = 4$ and below
-$10^{-3}$ for $Z \geq 5$, quantitatively
-justifying the composed fiber bundle factorization used in the
-GeoVac molecular framework.
+information falls to $\approx 4\times10^{-3}$ by $Z = 4$, decays
+monotonically through $Z = 6$, and reaches the
+$\approx 10^{-15}$ floating-point noise floor for $Z \geq 7$ --- an
+exact core-closure property of this basis (the $1s$ occupation is
+exactly $2$), so it constrains the basis rather than justifying the
+composed fiber bundle factorization used in the GeoVac molecular
+framework.
 In the composed molecular architecture, per-block entanglement is
-$R$-independent, with core/bond entropy ratios of $50\times$ at
+$R$-independent, with core/bond entropy ratios of $40\times$ at
 matched qubit count.
 These results establish that the angular momentum eigenbasis
 decouples one-body energy transport from two-body entanglement,
-and that the $O(Q^{2.5})$ Pauli scaling of the GeoVac qubit
-Hamiltonians is a direct consequence of this basis choice.
+and that the Gaunt sparsity of the GeoVac qubit Hamiltonians ---
+whose Pauli count is exactly linear in the qubit count at fixed basis
+--- is a direct consequence of this basis choice.
 This is Paper~26 in the GeoVac series.
 \end{abstract}
 
@@ -79,10 +98,14 @@ of hydrogenic radial functions and spherical harmonics labeled by
 $(n, l, m)$.  In this basis, the Gaunt selection rules from angular
 momentum conservation zero out the majority of electron repulsion
 integrals (ERIs)~\cite{GeoVac_Paper22}: at $l_{\max} = 2$, the
-angular ERI density is $2.76\%$, meaning $97.24\%$ of all possible
+angular ERI density is $8.52\%$, meaning $91.48\%$ of all possible
 two-body matrix elements vanish by symmetry before any property of
-the potential is invoked.  This sparsity produces qubit
-Hamiltonians with $O(Q^{2.5})$ Pauli terms for composed molecular
+the potential is invoked.  (Corrected 2026-08-30:\ this read $2.76\%$
+/ $97.24\%$, which is Paper~22's stricter \emph{pair-diagonal}
+$D_{\mathrm{pd}}$---valid only for axially-symmetric or $m$-decoupled
+bases, not for the Coulomb rule quoted here.)  This sparsity produces qubit
+Hamiltonians whose Pauli count is exactly linear in the qubit count at
+fixed basis, for composed molecular
 systems~\cite{GeoVac_Paper14}, compared to $O(Q^{3.9\text{--}4.3})$
 for Gaussian orbital bases.
 
@@ -102,13 +125,18 @@ The results establish four structural properties of the angular
 momentum eigenbasis that are relevant to quantum simulation
 resource estimation.
 
-\emph{Provenance (register tiers).}  All four properties---the
-energy--entanglement decoupling, the $S\sim Z^{-2.56}$ scaling, the
-$42.4\%\!\to\!99.2\%$ basis-intrinsic sparsity step (with a
-$Z$-independent nonzero ERI count), and the core--valence factorization
-thresholds---are MEASURED (computed) results.  The reported entropy is
-the von Neumann entropy of the normalized one-body reduced density
-matrix throughout.
+\emph{Provenance (register tiers).}  The energy--entanglement
+decoupling, the $S\sim Z^{-2.56}$ scaling, the
+$17.1\%\!\to\!100\%$ basis-intrinsic sparsity transition (with a
+$Z$-independent nonzero ERI count), the hub-migration pattern, the
+core--valence factorization thresholds, the $Z^{-0.85}$ decay of the
+off-diagonal energy fraction (\S\ref{sec:threelayer}), and the
+composed per-block $R$-independence with its $\approx 40\times$
+core/bond ratio are MEASURED (computed) results; the $Z \geq 7$
+core--valence vanishing at $n_{\max} = 2$ is stronger --- a derivation
+from a machine-verified premise (exact core closure).  The reported
+entropy is the von Neumann entropy of the normalized one-body reduced
+density matrix throughout.
 
 %=================================================================
 \section{The Three-Layer Decomposition}
@@ -238,27 +266,34 @@ within $0.6\%$.
 
 \subsection{Connection to graph validity}
 
-The fractional energy contribution of $H_{\text{h1,off}}$ scales
-as $\sim 1/(8Z^2)$, consistent with the graph validity scaling
-identified in Paper~7.  The graph off-diagonal coupling
-$\kappa = -1/16$ is $Z$-independent, while the diagonal energies
-scale as $Z^2$.  The relative importance of the graph topology
-is therefore
+The graph off-diagonal coupling $\kappa = -1/16$ is
+$Z$-independent, while the diagonal energies scale as $Z^2$, so a
+naive estimate of the relative importance of the graph topology is
 \begin{equation}
   \frac{|\kappa|}{Z^2/n^2} = \frac{1}{16 Z^2/n^2},
 \end{equation}
-which is $12.5\%$ at $Z = 1$, $3.1\%$ at $Z = 2$, and $0.13\%$
-at $Z = 10$.  This scaling matches the $f_E^{\text{h1}}$ column
-in Table~\ref{tab:decoupling}.
+which predicts a $Z^{-2}$ decay ($3.1\%$ at $Z = 2$ for $n = 1$).
+The measured $f_E^{\text{h1}}$ column of
+Table~\ref{tab:decoupling} decays only as $\sim Z^{-0.85}$
+(log--log fit over $Z = 2$--$10$) and sits $12\times$--$79\times$
+\emph{above} the naive estimate across the table.
+
+\emph{Corrected 2026-08-29:}\ an earlier version of this subsection
+asserted that the naive scaling ``matches'' the $f_E^{\text{h1}}$
+column; it does not, in either magnitude or exponent.  The
+discrepancy is structural:\ $f_E^{\text{h1}}$ aggregates
+off-diagonal coupling over the full spectrum, not a single gap, and
+no quantitative bridge from $\kappa$ to this column is currently
+established.
 
 Below the graph validity boundary at $Z_c \approx 1.84$
 (Paper~7), the graph off-diagonal coupling is no longer
 perturbative: $|\kappa|$ exceeds the diagonal energy gap, and
 the graph-native CI over-binds (violating the variational bound).
-The energy-entanglement decoupling sharpens this picture: at
-$Z < Z_c$, the graph topology not only overcounts the energy but
-may also distort the entanglement structure by mixing shells
-beyond what the exact $V_{ee}$ interaction warrants.
+Whether the slow $Z^{-0.85}$ decay measured here connects
+quantitatively to that boundary is open:\
+Table~\ref{tab:decoupling} starts at $Z = 2$ and does not probe the
+sub-$Z_c$ regime.
 
 %=================================================================
 \section{Basis-Intrinsic Sparsity}
@@ -283,33 +318,85 @@ of nonzero ERIs as a function of the rotation angle $\theta$.
 \subsection{Step-function sparsity transition}
 
 At $n_{\max} = 2$ (five spatial orbitals: $1s, 2s, 2p_{-1}, 2p_0,
-2p_1$), the graph basis produces 265 nonzero ERIs out of
+2p_1$), the graph basis produces \gvq{block_sp_n2_eri}{107} nonzero ERIs out of
 $5^4 = 625$ possible four-index combinations, corresponding to an
-ERI density of $42.4\%$.  Rotating the basis by any angle
-$\theta > 10^{-6}$ fills the ERI tensor to $\sim 620/625$ nonzero
-entries ($99.2\%$ density).
+ERI density of $17.1\%$.  Rotating the basis by any nonzero angle
+fills the ERI tensor: the density rises to $42.7\%$ at
+$\theta = 10^{-8}$, $70.2\%$ at $10^{-6}$, $83.0\%$ at $10^{-4}$,
+and saturates at $100\%$ ($625/625$) for $\theta \gtrsim 10^{-2}$.
 
-The transition is effectively a step function at the identity:
+\emph{Corrected 2026-08-29.}  This subsection previously reported
+$265/625 = 42.4\%$.  That count came from an evaluator that omitted
+the Coulomb selection rule $m_a + m_b = m_c + m_d$, so $158$ of the
+$265$ entries ($59.6\%$) were physically zero.  The correction
+\emph{strengthens} the sparsity claim and reverses the basis-size
+trend reported below; the qualitative content --- that the sparse
+point is isolated and any angular-mixing departure is dense --- is
+unchanged.
+
+The discontinuity is at the identity itself; the approach to
+saturation is rapid but graded, not a step at a finite $\theta$:
 \begin{equation}
   D(\theta) =
   \begin{cases}
-    0.424, & \theta = 0 \\
-    0.992, & \theta > 10^{-6}.
+    0.171,  & \theta = 0 \\
+    0.427,  & \theta = 10^{-8} \\
+    0.702,  & \theta = 10^{-6} \\
+    0.830,  & \theta = 10^{-4} \\
+    1.000,  & \theta \gtrsim 10^{-2}.
   \end{cases}
   \label{eq:step}
 \end{equation}
+(Corrected 2026-08-28: this equation previously reported a
+two-branch form with $D = 0.992$ for $\theta > 10^{-6}$.  Neither
+value reproduces --- saturation is complete at $625/625$, not
+$620/625$.  The qualitative content is unchanged and if anything
+stronger.)
+
+\textbf{Generator dependence.}  The two endpoints --- $0.171$ at the
+identity and $1.000$ saturation for $\theta \gtrsim 10^{-2}$ --- are
+properties of the basis and are reproduced by every random
+antisymmetric generator tested.  The three intermediate densities
+are \emph{not}:\ across five seeds of the same construction the
+$\theta = 10^{-8}$ value spans $0.38$--$0.46$ and the
+$\theta = 10^{-4}$ value spans $0.76$--$0.83$ (the quoted spans are
+sampling-dependent, not generator-variation limits).  The values
+tabulated above are for one representative generator (seed 42) at
+the $10^{-10}$ nonzero-entry cutoff used throughout; they should be
+read as a profile shape, not as basis constants.  The two endpoints
+are cutoff-robust:\ the identity-point zeros are \emph{exactly}
+$0.0$ and the smallest nonzero entry is $0.0172$, so the $\gvq{block_sp_n2_eri}{107}/625$
+count is independent of any cutoff below that value; saturation is
+complete ($625/625$) at every $(\theta, \text{seed})$ tested.
 
 This result is not an artifact of the small basis.  At
 $n_{\max} = 4$ (30 spatial orbitals), the graph basis produces
-79,465 nonzero ERIs, and any rotation beyond $\theta \sim 10^{-6}$
-fills the tensor to near-complete density.
+$57{,}700$ nonzero entries out of $30^4 = 810{,}000$, a full-tensor
+density of $7.12\%$.  The density therefore \emph{improves} with
+basis size, from $17.1\%$ at $n_{\max} = 2$ to $7.12\%$ at
+$n_{\max} = 4$.  Counting instead over canonical unique tuples
+($p \le q$, $r \le s$) gives $15{,}293$ of $216{,}225$, a density of
+$7.07\%$ --- and the same improvement is visible within that
+convention alone ($18.2\%$ at $n_{\max} = 2$), so the trend is not
+an artifact of mixing the two counts.  Any rotation again fills the
+tensor to near-complete density.
+
+\emph{Corrected 2026-08-29.}  The retired text reported $318{,}720$
+($39.3\%$) and $79{,}465$ ($36.8\%$) and concluded that the density
+was ``essentially flat \dots\ does not degrade with basis size.''
+Those counts carried the same missing selection rule as the
+$n_{\max} = 2$ figure, and at $n_{\max} = 4$ it inflated them by a
+factor of $5.5$.  With the rule imposed the conclusion is not merely
+restored but reversed in the framework's favour:\ the density falls
+with basis size (empirically $\sim\!M^{-0.49}$ over $M = 5, 14, 30$).
 
 \subsection{$Z$-independence of ERI count}
 
 The nonzero ERI count is identical across all $Z$ at fixed
-$n_{\max}$: 79,465 nonzero ERIs at $n_{\max} = 4$ for
-$Z = 2, 3, 4, 5, 10$.  This confirms that the sparsity pattern
-is purely geometric---determined entirely by angular momentum
+$n_{\max}$: $15{,}293$ canonical-unique nonzero ERIs at
+$n_{\max} = 4$ for $Z = 2, 3, 10$ (and $107$ full-tensor at
+$n_{\max} = 2$ for $Z = 2, 6, 10$).  This confirms that the sparsity
+pattern is purely geometric---determined entirely by angular momentum
 conservation (Gaunt selection rules)---and independent of the
 radial wavefunctions.  Changing $Z$ rescales the radial functions
 $R_{nl}(r) \to Z^{3/2} R_{nl}(Zr)$ but does not alter which
@@ -317,16 +404,17 @@ angular integrals vanish.
 
 \subsection{Implications for Pauli scaling}
 
-The $O(Q^{2.5})$ Pauli scaling of the GeoVac composed qubit
+The Gaunt-driven Pauli sparsity of the GeoVac composed qubit
 Hamiltonians~\cite{GeoVac_Paper14} is a direct consequence of
-the Gaunt sparsity.  The step-function transition
+the Gaunt sparsity.  The rapid but graded transition
 (Eq.~\ref{eq:step}) shows that this scaling is not continuously
 connected to the $O(Q^{3.9\text{--}4.3})$ scaling of Gaussian
-bases.  The angular momentum eigenbasis sits at a singular point
-in the space of orbital bases: the unique point where angular
-momentum conservation is exactly respected and the ERI tensor
-is sparse.  Any departure from this point, no matter how small,
-immediately incurs the dense-ERI penalty.
+bases.  The angular momentum eigenbasis sits at a distinguished point
+in the space of orbital bases: an \emph{essentially} unique point where
+angular momentum conservation is exactly respected and the ERI tensor
+is sparse---unique up to $(l,m)$-label-preserving rotations, which
+leave the sparsity intact.  Any \emph{generic} (angular-mixing)
+departure from it, however small, incurs the dense-ERI penalty.
 
 %=================================================================
 \section{Entanglement Network Topology}
@@ -349,7 +437,13 @@ $I(i, j)$ quantifies the total (classical and quantum) correlation
 between orbitals $i$ and $j$.
 
 We compute $I(i, j)$ from the FCI ground state for first-row atoms
-in the graph eigenbasis at $n_{\max} = 2$.
+in the graph eigenbasis at $n_{\max} = 2$.  (Corrected 2026-08-28:\
+the values reported in this section previously came from
+$n_{\max} = 3$ and $n_{\max} = 4$ runs while the text stated
+$n_{\max} = 2$ --- one of them, $I(2s, 3s)$, referenced an orbital
+absent from the $n_{\max} = 2$ basis.  Every number below is now the
+$n_{\max} = 2$ value.  The migration pattern itself is unchanged, and
+is cleaner in the corrected data.)
 
 \subsection{Hub migration across the periodic table}
 
@@ -358,36 +452,77 @@ that tracks the partially filled shell:
 
 \medskip\noindent\textbf{Helium ($\mathbf{Z = 2}$, 2 electrons):}
 Star topology centered on $1s$.  The dominant correlation is
-$I(1s, 2s) = 0.877$, with all other orbitals connecting through
-$1s$.  The $1s$ orbital is the sole entanglement hub.
+$I(1s, 2s) = 0.748$, with all other orbitals connecting through
+$1s$, which carries $99.0\%$ of the total mutual information.  The
+$1s$ orbital is the sole entanglement hub.
 
 \medskip\noindent\textbf{Lithium ($\mathbf{Z = 3}$, 3 electrons):}
-Hub shifts to $2s$.  The dominant correlation is
-$I(2s, 3s) = 1.324$.  The $1s$ orbital drops to $9\%$ of the
-total mutual information, reflecting the onset of core-valence
-decoupling.
+No clean hub shift.  The dominant correlation is again
+$I(1s, 2s) = 0.218$, and $1s$ and $2s$ are \emph{co-hubs} of that
+single pair, carrying $89.8\%$ and $91.2\%$ of the total mutual
+information respectively.  Lithium is the transition case, not a
+$2s$-hub system.  (Corrected 2026-08-30: this bullet previously
+reported $I(2s, 3s) = 1.324$ and ``the $1s$ orbital drops to $9\%$''.
+Both were $n_{\max} = 3$ artifacts --- $3s$ does not exist in the
+$n_{\max} = 2$ basis this section uses, as the note above already
+flagged --- and at $n_{\max} = 2$ the $1s$ share is $89.8\%$, not
+$9\%$.  The hub migration begins at beryllium, not lithium.)
 
 \medskip\noindent\textbf{Beryllium ($\mathbf{Z = 4}$, 4 electrons):}
-Multi-hub topology.  The $2s$ orbital remains the primary hub
-($43\%$ of total MI), but $p$-orbitals begin developing secondary
-cross-links.
+Multi-hub topology, and the first genuine hub shift:\ $1s$ collapses
+to $0.5\%$ of the total mutual information while $2s$ becomes the
+primary hub ($65.1\%$), with the strongest single pair already a
+$p$--$p$ link, $I(2p_{-1}, 2p_{+1}) = 0.202$.
 
 \medskip\noindent\textbf{Nitrogen--Fluorine ($\mathbf{Z = 7}$--$\mathbf{9}$, 7--9 electrons):}
-Hub transitions to $2p(\pm 1)$.  P-shell correlation dominates
-the mutual information network.
+The hub transitions to the $2p(\pm 1)$ pair, which carries the
+mutual information:\ $I(2p_{-1}, 2p_{+1}) = 0.148$ (N), $1.063$ (O),
+$0.311$ (F) \emph{for the multiplet member the eigensolver returns}.
+These ground states are $4$-, $7$- and $6$-fold degenerate, and the
+value is \emph{member-dependent}:\ it ranges from $0$ on
+single-determinant members up to a sampled maximum of $0.69$ (N),
+$1.34$ (O), $1.32$ (F).  The quoted values are therefore
+eigensolver-dependent, not basis constants, and even the qualitative
+reading ``the valence network is alive'' is member-dependent.
+
+\emph{Retracted 2026-08-29.}  Earlier versions reported
+$1.837/1.785/1.644$ here and an information-theoretic ceiling of
+$\ln 8 \approx 2.08$ (N/F) and $\ln 16 \approx 2.77$ (O), ``attained
+exactly by explicit members''.  Both the values and the ceilings were
+artifacts of a single-orbital entropy routine that built $\rho_i$
+diagonal-only, discarding the spin coherence
+$\langle{\uparrow}\rvert\rho_i\lvert{\downarrow}\rangle$ --- nonzero
+for precisely these sector-mixed multiplet members.  Because a diagonal
+Shannon entropy majorizes the true von Neumann entropy, the routine
+over-reported $s_i$ (e.g.\ $0.798$ against a true $0.313$) and the
+derived ``mutual information'' violated subadditivity on half the
+orbital pairs.  No analytic ceiling is asserted in its place; the
+maxima above are MEASURED.
+
+What \emph{is} degeneracy-robust is the core-valence statement, and it
+holds as a theorem for all three:\ every determinant in each ground
+multiplet carries $1s^2$, so $\rho_{1s}$ is pure for any member and
+$I_{\text{cv}} = 0$ exactly.
 
 \medskip
 The pattern is:
 \begin{equation}
-  \text{hub: } 1s \xrightarrow{Z=3} 2s \xrightarrow{Z=4}
-  \text{frozen} \xrightarrow{Z=5} 2p \xrightarrow{Z=10}
-  \text{frozen},
+  \text{hub: } 1s \xrightarrow{Z=3} \{1s, 2s\} \xrightarrow{Z=4}
+  2s \xrightarrow{Z=5} 2p,
   \label{eq:hub}
 \end{equation}
-following the shell-filling sequence.  At each transition, the
-previously active shell freezes (its mutual information with other
-orbitals drops to near zero) and the newly filling shell becomes
-the entanglement hub.
+following the shell-filling sequence.  \emph{Corrected 2026-08-30:} this
+equation previously read $1s \to 2s$ at $Z=3$ and $2s \to$ frozen at
+$Z=4$, both of which the $n_{\max}=2$ measurements contradict.
+
+The freezing statement holds at every transition \emph{except the first}.
+Measured shares of the total mutual information:\ $1s$ carries $99.0\%$ at
+$Z=2$ and is still at $89.8\%$ at $Z=3$ (alongside $2s$ at $91.2\%$)---at
+lithium the two are co-hubs of a single dominant pair, and $1s$ is not
+frozen.  It collapses only at $Z=4$ ($0.5\%$), where $2s$ becomes the hub
+at $65.1\%$; thereafter $2s$ itself freezes progressively ($19.0\%$ at
+$Z=5$, $3.7\%$ at $Z=6$) as the strongest correlation moves to the
+$2p$--$2p$ pair ($I = 0.537$ at $Z=5$, $1.393$ at $Z=6$).
 
 \subsection{Physical interpretation}
 
@@ -441,22 +576,36 @@ orbitals: $1s$.  Valence orbitals: $2s, 2p$.
 Atom & $Z$ & $I_{\text{cv}}$ \\
 \hline
 He & 2 & $0.751$ \\
-Li & 3 & $0.213$ \\
-Be & 4 & $0.002$ \\
-B--Ne & 5--10 & $< 10^{-3}$ \\
+Li & 3 & $0.228$ \\
+Be & 4 & $3.7\times10^{-3}$ \\
+B  & 5 & $1.7\times10^{-3}$ \\
+C  & 6 & $6.6\times10^{-4}$ \\
+N--F & 7--9 & $< 10^{-14}$ (exact) \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The core-valence mutual information drops sharply with $Z$.  By
-$Z = 4$ (beryllium), $I_{\text{cv}} \approx 0.002$, and for $Z \geq 5$
-it is below $10^{-3}$.  The composed factorization's assumption
-of negligible core-valence entanglement is quantitatively justified
-for all atoms from boron onward.
+The core-valence mutual information drops sharply with $Z$, decaying
+monotonically from $3.7\times10^{-3}$ at beryllium through
+$1.7\times10^{-3}$ (B) to $6.6\times10^{-4}$ (C), and then reaching
+the floating-point floor from nitrogen onward.  The vanishing at
+$Z \geq 7$ is not a small number but an \emph{exact} property of this
+basis:\ every determinant in the ground multiplet carries $1s^2$, so
+$\rho_{1s}$ is pure and $I_{\text{cv}} = 0$ identically (measured
+$\le 3\times10^{-15}$; the $1s$ occupation is exactly $2$).
+
+This constrains the basis rather than justifying the composed
+factorization.  Exact closure says the $1s$ orbital is
+\emph{unentangled in this basis at this truncation}, which is a
+statement about the angular momentum eigenbasis at $n_{\max} = 2$; it
+is consistent with the composed fiber-bundle ansatz but does not
+establish it, since the ansatz's content is about the molecular
+setting where the core and valence blocks carry different effective
+charges.
 
 Helium ($I_{\text{cv}} = 0.751$) is the exception: with only two
 electrons, there is no core-valence separation, and the entire
-system is entangled.  Lithium ($I_{\text{cv}} = 0.213$) is
+system is entangled.  Lithium ($I_{\text{cv}} = 0.228$) is
 intermediate: the $1s$ core is partially decoupled from the $2s$
 valence electron, but the separation is not yet clean.  This is
 consistent with the known difficulty of treating lithium in the
@@ -477,7 +626,7 @@ This structural feature implies that the per-block entanglement
 entropy is $R$-independent.  We verify this for the H$_2$ bond
 pair in the composed encoding:
 \begin{equation}
-  S_{\text{bond}}(R) = 0.303 \text{ nats}
+  S_{\text{bond}}(R) = 0.330 \text{ nats}
   \quad \forall\, R \in [0.5, 10.0] \text{ bohr}.
   \label{eq:rindep}
 \end{equation}
@@ -495,11 +644,11 @@ evaluation at fixed geometries, not for dissociation curves.
 \subsection{Core/bond entropy ratio}
 
 For LiH in the composed encoding, the core block
-($Z_{\text{eff}} = 3$) has $S_{\text{core}} = 0.006$ nats, while
+($Z_{\text{eff}} = 3$) has $S_{\text{core}} = 0.008$ nats, while
 the bond block ($Z_{\text{eff}} = 1$) has
-$S_{\text{bond}} = 0.303$ nats.  The ratio is
+$S_{\text{bond}} = 0.330$ nats.  The ratio is
 \begin{equation}
-  \frac{S_{\text{bond}}}{S_{\text{core}}} \approx 50,
+  \frac{S_{\text{bond}}}{S_{\text{core}}} \approx 40,
   \label{eq:ratio}
 \end{equation}
 consistent with the $S \sim Z^{-2.56}$ scaling law: the core
@@ -560,9 +709,10 @@ that dominate near-term quantum algorithm cost.
 The composed qubit Hamiltonians~\cite{GeoVac_Paper14} exploit this
 directly: by staying in the angular momentum eigenbasis and
 respecting the block structure of the composed geometry, the
-GeoVac Hamiltonians achieve $O(Q^{2.5})$ Pauli scaling with
-$51\times$--$1712\times$ fewer Pauli terms than published Gaussian
-baselines at matched qubit counts.
+GeoVac Hamiltonians achieve Gaunt-driven Pauli sparsity with
+$54\times$--$317\times$ fewer Pauli terms than published Gaussian
+baselines at matched qubit counts (corrected 2026-08-29; the retired
+pair-diagonal rule gave $51\times$--$1712\times$).
 
 \subsection{Limitations}
 
@@ -609,20 +759,25 @@ ground state originates from the off-diagonal electron repulsion.
 The entanglement entropy scales as $S \sim Z^{-2.56}$.
 
 Second, among orbital bases for spherically symmetric systems,
-the angular momentum eigenbasis is an isolated point of ERI
-sparsity.  Any unitary rotation of the orbital indices, no matter
-how small, fills the ERI tensor from $42\%$ to $99\%$ density in
-a step-function transition.
+the angular momentum eigenbasis is an essentially isolated point of
+ERI sparsity---isolated up to $(l,m)$-label-preserving rotations.  Any
+\emph{generic} (angular-mixing) unitary rotation of the orbital indices,
+no matter how small, fills the ERI tensor from $17.1\%$ to $100\%$
+density in a rapid but graded transition at the identity.
 
 Third, the orbital mutual information network exhibits a hub
 migration pattern---$1s \to 2s \to 2p$---that tracks the
-partially filled shell across the first row.
+partially filled shell across the first row.  The migration begins at
+beryllium:\ helium and lithium are both $1s$-anchored, and lithium is
+a $1s$/$2s$ co-hub rather than a $2s$-hub system.
 
-Fourth, core-valence mutual information falls to $\approx 2\times10^{-3}$
-by $Z = 4$ and below $10^{-3}$ for $Z \geq 5$, quantitatively justifying
-the composed fiber bundle factorization.
+Fourth, core-valence mutual information falls to
+$\approx 4\times10^{-3}$ by $Z = 4$, decays monotonically through
+$Z = 6$, and vanishes exactly for $Z \geq 7$ --- a property of the
+basis, consistent with but not establishing the composed fiber bundle
+factorization.
 
-These results establish that the $O(Q^{2.5})$ Pauli scaling of
+These results establish that the Gaunt sparsity of
 the GeoVac qubit Hamiltonians is a direct consequence of the
 angular momentum eigenbasis choice: the basis that decouples
 one-body energy from two-body entanglement is the same basis

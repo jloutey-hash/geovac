@@ -24,7 +24,7 @@ COUPLES different relative-n: the bra bracket forces
 2n + l + 2N_CM + Lam = N_bra and the ket bracket forces
 2n' + l + 2N_CM + Lam = N_ket, so n - n' = (N_bra - N_ket)/2.  The
 N-changing elements are exactly the n != n' ones, and they are large --
-<0,0|V|1,0> = +17.2 MeV against a -0.55 MeV diagonal for the Minnesota
+<0,0|V|1,0> = +17.3 MeV against a -0.55 MeV diagonal for the Minnesota
 singlet at b=1.
 
 Paper 24's own text should have exposed this: it argued the Coulomb
@@ -164,7 +164,7 @@ def test_paper24_ho_entanglement_is_nonzero(N_max):
     undocumented N_tot guard in geovac/nuclear/moshinsky.py, not by
     physics. A central V(r_rel) is diagonal in the CM quantum numbers
     but couples different relative-n, and those couplings are large
-    (+17.2 MeV off-diagonal against a -0.55 MeV diagonal).
+    (+17.3 MeV off-diagonal against a -0.55 MeV diagonal).
     """
     data = _build(N_max)
     ref = _REFERENCE[N_max]
@@ -191,9 +191,13 @@ def test_paper24_ho_entanglement_is_nonzero(N_max):
     # leading occupation is close to but not exactly 2.
     assert occ[0] == pytest.approx(2.0, abs=5e-2), \
         f'top occupation = {occ[0]:.6f} at N_max={N_max}'
+    # small but NONZERO: occ[1] > 0 is the not-a-single-determinant
+    # signature (cert-2 N4: the old abs() < 5e-2 also admitted the
+    # retracted occ = 0 exactly).
+    assert occ[1] > 1e-4, f'occ[1] = {occ[1]:.3e} vanishes at N_max={N_max}'
     for k in range(1, min(4, len(occ))):
         assert abs(occ[k]) < 5e-2, \
-            f'occupation[{k}] = {occ[k]:.3e} nonzero at N_max={N_max}'
+            f'occupation[{k}] = {occ[k]:.3e} too large at N_max={N_max}'
 
     # CORRECTED 2026-08-22. The published S = 0 was an artifact of an
     # undocumented N_tot truncation in moshinsky.py (Paper 24 retraction).
@@ -201,8 +205,9 @@ def test_paper24_ho_entanglement_is_nonzero(N_max):
     # 0.0716 (3), 0.0833 (4) -- nonzero and slowly INCREASING with
     # basis. Band pinned tight enough to fail on the retracted zero
     # AND on a drift of more than ~40%.
-    assert 0.04 < S < 0.11, \
-        f'S_full = {S:.4f} outside the corrected band at N_max={N_max}'
+    expected_S = {2: 0.0671, 3: 0.0716, 4: 0.0833}
+    assert S == pytest.approx(expected_S[N_max], abs=2e-3), \
+        f'S_full = {S:.4f} != {expected_S[N_max]} at N_max={N_max}'
 
     # Ground-state energy against the corrected reference.
     assert eigs[0] == pytest.approx(ref['E0_MeV'], abs=5e-2), \
@@ -231,8 +236,10 @@ def test_paper24_ho_kinetic_interaction_do_not_commute(N_max):
     C = H_kin @ H_vee - H_vee @ H_kin
     rel_norm = np.linalg.norm(C) / np.linalg.norm(H_kin)
     # CORRECTED 2026-08-22: H_HO and V do NOT commute. Measured ratio
-    # 0.74 / 0.63 / 0.67 at N_max = 2 / 3 / 4.
-    assert 0.3 < rel_norm < 1.2, \
+    # 0.74 / 0.63 / 0.67 at N_max = 2 / 3 / 4; pinned per-N_max
+    # (cert-2: the 0.3-1.2 band admitted the 0.47 transposition).
+    expected_comm = {2: 0.7387, 3: 0.6302, 4: 0.6725}
+    assert rel_norm == pytest.approx(expected_comm[N_max], abs=0.01), \
         f'|| [H_HO, V] ||_F / || H_HO ||_F = {rel_norm:.3e} ' \
         f'exceeds noise floor at N_max={N_max}'
 

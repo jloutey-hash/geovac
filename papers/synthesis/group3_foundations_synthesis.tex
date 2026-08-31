@@ -501,10 +501,14 @@ ERI densities reproduced in Table~\ref{tab:eri_density}.
 \begin{table}[t]
 \centering
 \caption{Pair-diagonal angular ERI density $D_{\mathrm{pd}}(l_{\max})$
-from Paper~22 --- the density the composed pipeline realizes (per-pair
-$m_a=m_c$, $m_b=m_d$).  The physically-correct global-$M_L$ Coulomb
-density $D(l_{\max})$ is $\sim\!4\times$ larger ($6.06\%$ at
-$l_{\max}=3$; Paper~22 Table).  Both are universal across Coulomb,
+from Paper~22 (per-pair $m_a=m_c$, $m_b=m_d$), which holds only for
+axially-symmetric or $m$-decoupled bases.  \emph{The composed pipeline
+realizes the physically-correct global-$M_L$ Coulomb density
+$D(l_{\max})$, not this one} --- $\sim\!4\times$ larger ($8.52\%$ at
+$l_{\max}=2$, $6.06\%$ at $l_{\max}=3$; Paper~22 Table).  The
+``realizes'' attribution was corrected 2026-08-30:\ the production
+enumerator returned $D_{\mathrm{pd}}$ only because of the wrong-sign-$q$
+coefficient bug fixed on 2026-08-29.  Both are universal across Coulomb,
 harmonic oscillator, Woods--Saxon, square well, and Yukawa
 potentials.}
 \label{tab:eri_density}

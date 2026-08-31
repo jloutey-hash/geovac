@@ -73,7 +73,12 @@ FAIL_PATTERNS: List[Tuple[str, str]] = [
     # -- added 2026-07-05: numeric/adjectival forms the sweep found by
     #    judgment ("1-week sprint", "$\sim 6$--$12$ months", "2--3 days") --
     ("numeric-duration",
-     rf"\b\d+\$?(?:\s*--?\s*\$?\d+\$?)?[-\s]+{UNIT}s?\b"),
+     rf"\b\d+\$?(?:\s*--?\s*\$?\d+\$?)?[-\s~]+{UNIT}s?\b"),
+    # 4b. symbolic math-mode counts attached to a unit ("$N$-month effort",
+    #     "$k$-week"): a variable standing in for a duration is still a
+    #     duration (cert-3 owed fix, 2026-08-29)
+    ("symbolic-math-duration",
+     rf"\$[A-Za-z]\$[-~\s]+{UNIT}s?\b"),
     # -- added 2026-07-05 (sweep-delta finding): word-number adjectivals
     #    ("a focused two-day session") escape the digit-based pattern --
     ("wordnum-duration",
@@ -81,6 +86,14 @@ FAIL_PATTERNS: List[Tuple[str, str]] = [
 ]
 
 ADVISORY_PATTERNS: List[Tuple[str, str]] = []
+
+# Lines matching this are EXEMPT from all duration patterns: wall-clock
+# figures describing COMPUTATIONAL RUNTIME are legitimate technical
+# measurements, not project-course chronology (rule 12 targets the latter).
+# Added 2026-08-29 when the LaTeX-tie extension started catching
+# "$\sim 3.3$~days per PES point" (Paper 17).
+EXEMPT_CONTEXT = (r"per\s+(PES\s+)?point|per\s+iteration|runtime|wall[- ]?clock"
+                  r"|wall\s+time|CPU|compute\s+time|solver|diagonaliz")
 
 # Per-occurrence exemptions: (filename-substring, regex) pairs whose matches
 # are allowed (add sparingly; each entry needs a comment saying why).
@@ -138,6 +151,15 @@ def scan_file(path: Path, patterns: List[Tuple[str, str]]) -> List[Tuple[str, in
         for m in re.finditer(pat, joined, re.IGNORECASE):
             lineno = bisect_right(starts, m.start())          # 1-indexed line
             context = lines[lineno - 1].strip()[:120]
+            # exemption window spans the hit line and its neighbour (LaTeX
+            # wraps mid-phrase: '...$~days per' / 'PES point...')
+            window = lines[lineno - 1]
+            if lineno < len(lines):
+                window += " " + lines[lineno]
+            if lineno >= 2:
+                window = lines[lineno - 2] + " " + window
+            if re.search(EXEMPT_CONTEXT, window, re.IGNORECASE):
+                continue
             allowed = any(
                 sub in str(path).replace("\\", "/") and re.search(apat, context, re.IGNORECASE)
                 for sub, apat in ALLOWLIST
@@ -166,6 +188,8 @@ def selftest() -> int:
         "completed in a focused two-day session",
         "a 1-week sprint at highest priority",
         "commitment ($\\sim 6$--$12$ months estimated)",
+        "spanning $12$~months of effort",       # LaTeX tie escape (2026-08-29)
+        "an $N$-month effort",                  # symbolic math count (2026-08-29)
         "NotImplementedError ($\\sim 2$-$3$ days, bundled)",
         "multi-week+ architectural lifts",
         "Three same-day diagnostic sprints tested the wall",
@@ -197,6 +221,25 @@ def selftest() -> int:
         if matched:
             print(f"  [selftest FAIL] should NOT match but did ({matched}): {s!r}")
             ok = False
+    # exemption leg (2026-08-29): computational-runtime durations match the
+    # raw patterns but must be EXEMPT at scan level via EXEMPT_CONTEXT.
+    exempt_cases = [
+        r"the resulting ${\sim}3.3$~days per PES point",
+        "a wall-clock time of 2 days for the full sweep",
+        "solver needs 3 hours per iteration",
+    ]
+    nonexempt_cases = [
+        "the arc took $6$--$12$~months of work",
+    ]
+    for c in exempt_cases:
+        if not re.search(EXEMPT_CONTEXT, c, re.IGNORECASE):
+            ok = False
+            print(f"  [selftest FAIL] runtime case NOT exempt: {c!r}")
+    for c in nonexempt_cases:
+        if re.search(EXEMPT_CONTEXT, c, re.IGNORECASE):
+            ok = False
+            print(f"  [selftest FAIL] project-course case wrongly exempt: {c!r}")
+
     print(f"selftest: {'PASS' if ok else 'FAIL'} "
           f"({len(positives)} positives, {len(negatives)} negatives)")
     return 0 if ok else 1

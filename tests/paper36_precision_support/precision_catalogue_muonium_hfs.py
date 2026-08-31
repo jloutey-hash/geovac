@@ -14,7 +14,9 @@ cleanest possible test of the LS-8a wall isolated from QCD competing budgets.
 Compare to:
   Sprint HF (H 21cm): +18 ppm, residual is QCD Zemach + multi-loop QED
   Sprint MH-B (muH HFS): +2 ppm BF, +1.5 meV residual is electron-VP in muonic potential
-  Track D HFS: +40 ppm BF, +286 ppm cumulative, residual is QCD polarizability + multi-loop
+  Track D HFS: -456 ppm BF, -211 ppm cumulative (corrected 2026-08-28; the retired
+  +40/+286 pair came from a baseline high by 496.5 ppm), residual is QCD
+  polarizability + multi-loop
   Mu 1S HFS (this): residual is PURE QED multi-loop + recoil
 
 Experimental input

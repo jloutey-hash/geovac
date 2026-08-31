@@ -7,6 +7,652 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.2.0] - 2026-08-30
+
+### Changed — Stage-4 cross-document ledger: the defects that live *between* documents
+
+The pass the delta-1..7 cycle kept deferring.  A reviewer scoped to one
+paper cannot see a claim that is only wrong relative to another paper, and
+the ledger accumulated across delta-4..7 was entirely of that shape:
+twins (one quantity tabulated in two places), derivations (ratios and
+exponents fitted from printed columns), and conventions (both values right,
+only the pairing wrong).  Run against that ledger plus the new C21 numeric
+gate.  Every value below is **measured**, not inferred from a sibling cell;
+where a claim could not be re-derived it was **withdrawn rather than
+re-priced**.  Full record: `debug/qa/stage4_ledger_notes.md`.
+
+**Withdrawn (no valid inputs survive to rebuild them):**
+
+- `tab:sunaga`'s matched-$Q$ projection and its **17–32×** headline, in
+  *both* Papers 14 and 20.  It multiplied the retired $O(Q^{2.5})$ composed
+  law by a 4.2× rel/scalar multiplier that Paper 14 withdraws 150 lines
+  earlier as having compared a quantity with itself, then re-used with no
+  hedge.  The projected column is struck; only the native-$Q$ ratios
+  (8.4–12.6×) survive.
+- Paper 20's scalar-vs-relativistic λ comparator ("170.59 → 218.78 Ha,
+  +28%").  All four figures are gone: the scalar side came from the column
+  that same caption removes as *never having been a scalar comparator*, and
+  the relativistic side is in its own retired list.
+- Paper 14's angular-gradient resource multipliers (2.66×, 2.31×, 2.67×,
+  total 4.49×) — see the L_z defect below.
+
+**The pair-diagonal density was a four-document zombie.**  What looked like
+Paper 26 mis-citing one number was the fossil of a bug.  Until the
+2026-08-29 wrong-sign-$q$ fix, `angular_zero_count` silently returned the
+*pair-diagonal* density $D_{pd}$ while enforcing the global-$M_L$ rule
+textually — the buggy coefficient zeroed every $m$-changing multipole, so
+the global constraint was redundant.  The corpus recorded that artifact as
+a fact about the pipeline:
+
+- `P22 tab:sparsity` printed 97.24 / 0.00 / **2.76** for five potentials;
+  re-running the **same production routine** gives 91.48 / 0.00 / **8.52**.
+- `P22` Theorem-3 note and the group3 synthesis caption called $D_{pd}$
+  "the density the composed pipeline realizes" — false since the fix.
+- `P26` quoted $D_{pd}$ as *the* angular ERI density, overstating
+  symmetry-enforced sparsity **3.1×**.
+- `tests/test_paper22_density.py` carried a `NOTE (FLAG, do not "fix"
+  here)` pointing at a test name that no longer exists, calling CF-1 open.
+
+Regenerating also exposed what the fossil concealed: **Yukawa binds only 17
+of the 18 states** at the tested screening parameters, so its row was never
+a matched-orbital-count comparison (footnoted; the invariance test already
+grouped by orbital count).  Both retired phrasings are now C16 entries with
+two-way discrimination proven against the pre-fix text recovered from git.
+
+**Two 1-norm columns were interleaving two correct conventions.**  Not one
+stale number — a systematic mix.  `P14 tab:balanced` *declared* "Pauli
+counts exclude the identity term" while printing its balanced column
+identity-included and its composed λ column identity-included too;
+`P20 tab:resources` mixed the same way in a single "1-norm" column.  Every
+individual number was correct.  Measured ground truth (LiH / BeH₂ / H₂O):
+composed 838/837, 1396/1395, 1954/1953 and λ 34.036/27.715, 68.812/54.286,
+372.464/186.761; balanced 2726/2725, 8868/8867, 19742/19741 and λ
+78.156/75.231, 328.110/289.581, 1612.010/1439.751.  Both tables now declare
+their convention and the cells carry `\gvq` annotations, so C21 check E can
+see them.
+
+**Two standing hedges discharged rather than re-hedged.**  A hedge nobody
+discharges is how a wrong number keeps getting quoted.
+
+- `tab:composed_onenorm` said its λ column "awaits a convention-matched
+  re-measurement" while the prose beneath spent those cells as live facts —
+  including a 78× PK-partitioning headline and a `λ = 355 at Q = 50` that
+  Paper 20 separately identifies as a *deprecated legacy builder value*.
+  Re-measured across H₂/LiH/BeH₂/H₂O; Trotter columns **regenerated, not
+  re-derived** (the printed table already obeyed `r = λt/√(2ε)` at every
+  cell to the digit).  H₂O partitioning **78× → 75.3×**, LiH PK share
+  **10.9% → 11.7%**, λ_elec **33/66/359 → 34.0/68.8/372.5**.
+- The balanced QWC columns were not pending on anything — nobody had run
+  them.  All twelve second/third-row molecules measured.
+
+**Two claims survived re-measurement unchanged** and are recorded as such,
+because a pass that only ever cuts is miscalibrated: the H₂O PK share
+(98.7%) and the ~2,387 Ha PK diagonal (measured 2386.769, exactly four
+times, on the O-side valence blocks).  The TC/standard Pauli-ratio
+*uniformity* also survived — identical to three decimals across all three
+molecules — with only the constant moving 1.68× → **1.616×**.  Its
+fixed-basis scope caveat was **retained**, not retired along with its
+numbers.
+
+**Isostructural invariance has a boundary.**  Pauli counts are invariant
+(NaH = KH = 559 composed / 575 balanced, measured, not inferred from the
+partner); **QWC group counts are not** (MgH₂ 903 vs CaH₂ 898; SiH₄ 1551 vs
+GeH₄ 1562).  Mechanism verified in source, not inferred: `qwc_groups` sorts
+by descending |coefficient| before greedy insertion, so identical support
+with different coefficients gives different group counts.
+
+### Added — the angular gradient's added support is entirely unphysical
+
+Paper 14 quoted the angular-gradient multipliers as plain measurements.
+**Every entry that operator adds violates $L_z$** — measured 78/78 for
+composed LiH, verified here rather than inherited from the CLAUDE.md note.
+
+The convention control is load-bearing: the composed ERI is stored in
+**chemist** order, so the rule is $m_a + m_c = m_b + m_d$; the block-level
+(physicist) reading reports **126 violations on the clean plain-composed
+tensor** — a confidently wrong answer.  Asserting zero violations on both
+clean tensors is what makes the 78 mean anything.  A two-body Coulomb-type
+operator cannot add $L_z$-violating support, so those entries are spurious
+and the multipliers measure the defect as much as the operator.  They are
+withdrawn rather than re-measured, because re-measuring a broken operator
+yields a number you must disclaim in the same sentence.  The paper's
+*verdict* (angular gradient = a negative result for quantum efficiency)
+stands and is now over-determined.
+
+Backed at the level the claim is made:
+`tests/test_tc_angular.py::test_composed_angular_adds_only_lz_violating_entries`.
+The pre-existing companion pins the block level (26 entries, He) under a
+*different index convention* — a gap where a claim looked backed and was
+not.
+
+### Changed — C21 gate hardening
+
+- **`group3` scope added.**  The eri-density family is owned there, and
+  `--gate group3` did not report "unscoped" — it **crashed** with a
+  `TypeError` from `_files(None)`.  An unknown gate now fails loudly, so a
+  typo'd scope reads as a missing scope rather than a broken checker.
+- **The exemption window is now separate from the context window.**  One
+  ±8-line window did double duty: finding require-context *and* accepting
+  disclosure markers.  The second use let a single retirement note blanket
+  its neighbourhood — a vintage note five lines below `tab:tc_composed`
+  exempted that table's three retired cells outright, and a "the previously
+  printed 354.9" sentence exempted 306.4, 373.4 and 66.0 alongside it.  *A
+  disclosure about one number is not a disclosure about its neighbours.*
+  Swept 8/4/3/2/1 in both directions before changing anything; `±3` is the
+  widest setting that gains sensitivity at zero false-positive cost.
+  `WINDOW = 8` is **kept** for require-context, where a caption legitimately
+  sits many rows above its cell.  `\rightarrow` joins `\to` in EXEMPT so
+  the tighter setting does not depend on which arrow macro an author picked.
+  Pinned by `test_exemption_window_is_tighter_than_the_context_window`.
+- **`density` kind added to `_KINDS`** — angular ERI density carries a
+  *selection-rule* convention (global-$M_L$ vs pair-diagonal), not an
+  identity convention, so check E compares rules there instead of identity
+  terms.
+- **`test_every_convention_string_parses` caught three of my own entries.**
+  That guard exists because `convention` is free text: an unrecognised
+  phrasing drops silently out of check E, so the entry *looks* guarded and
+  is not.
+- Registry grew by ~20 measured entries and ~14 retired values (composed /
+  balanced 1-norms, TC composed, second/third-row λ and QWC, angular ERI
+  density).  Three stale `C20` references to the numeric gate corrected to
+  `C21` in CLAUDE.md — `C20` is `check_inline_attributions.py`, and the
+  collision is what the renumber was meant to prevent.
+
+### Fixed — remaining ledger items
+
+- P14 Conclusion printed the retired 6.8× where **7.1×** is measured (an
+  *under*claim), and the discussion sentence self-contradicted (530.5/78.4
+  = 6.8, not the 7.1 it stated, because 78.4 was the retired λ).  Three loci.
+- P20 prose "CaH sits at 4.74×" against its own table's **4.783×**.
+- P14's isostructural example quoted 223/239 where the table gives
+  **559/575** — corrected *and measured*, including KH, rather than copied
+  from its twin; the invariance holds on all six pairs.
+- P20 asserted a basis-axis trend that P20 itself retracts fifty lines
+  later; it now points forward to that retraction instead.
+- `tab:pauli` footnote read "Pending re-measurement … and was completed" in
+  one sentence, with the value in the footnote and `---` in the cell; the
+  cell is filled (2,434,442, identity-included to match its column) and the
+  column's convention declared.
+- NaH λ_ni **19.6 → 20.6** and HCl **866.1 → 869.7**, stale in *both*
+  P14 `tab:second_row` and P20 `tab:molecules` — the twin class exactly.
+- A garbled fit-range sentence at P14 §scaling (mine, from the delta-6 pass).
+- `NIT 7` (dangling `sec:block_pauli_count`) verified a **false positive**.
+
+**Green:** C10–C21, all 10 deterministic gates PASS on group3 / group4 /
+group6; corpus-wide C21 PASS; 93 tests pass across the registry,
+TC-angular, P22-density, headline-number, spinor-ordering, scaling and
+topological sets.  Papers 14, 20, 22, 26 and the group3 synthesis compile
+three-pass clean with zero undefined references.
+
+## [v5.1.12] - 2026-08-29
+
+### Changed — ERI evaluators corrected to the exact global-M_L rule, corpus re-priced (PI direction)
+
+The wrong-sign Gaunt argument (`q = mc - ma` where the Wigner-3j bottom row
+requires `q = ma - mc`) — the entire mechanical content of the "pair-diagonal
+rule A" convention (CF-1) — was found in **seven production modules** while
+remediating cert-3 item 20, and removed. One module (`sturmian_secular.py`)
+was correct all along (its `q` is negated at the call site; guard comment
+added so a mechanical sweep can never "fix" it into a bug). `casimir_ci`
+carried two additional distinct defects (missing M_L delta; wrong
+Condon-Shortley factor order = a sign error on m_b+m_d-odd integrals).
+
+**Arbitration (fourfold):** 4-D quadrature of the angular factor from its
+definition (Condon-Shortley 4, shipped order 0); the two shipped evaluators
+bracketed the truth (65 < 107 < 265 at n_max=2) and agree on the nonzero
+COUNT once fixed (they still disagree on m-changing VALUES -- see the
+follow-on note below);
+He variational energies improved toward exact while staying bounded
+(grid-hybrid 0.349% -> 0.255%, now agreeing with the independent graph-native
+h1 to 1.6e-4 Ha); and the tracked `xtc_angular_sparsity` engine (v5.0.9) was
+independently correct all along and had already measured 107/625.
+
+**Re-priced numbers (all measured, not scaled):**
+
+- Composed linearity SURVIVES exactly: N_Pauli = 27.90 x Q (main-group,
+  10 systems, 3 rows), 30.03 x Q (all ten d-block hydrides — the apparent
+  d-block sparsity advantage INVERTS; 9.23 was an artifact). QWC groups 69
+  (main) / 109 (d) uniformly.
+- Composed within-molecule exponent 2.5 -> 3.17, IDENTICAL across all eight
+  molecules tested (the retired rule's H2 anomaly 3.13-vs-2.5 dissolves);
+  underlying structure N = c(n_max) x Q with rational c(1)=3/2, c(2)=279/10,
+  c(3)=7089/14, exact through n_max=3; local slope rises to ~3.8 by n_max=4.
+  The "constant factor 2.51x, scaling unchanged" mitigation was a
+  single-point artifact (ratio grows 1.00/2.51/5.40 along the basis axis).
+- Equal-qubit H2O vs Gaussian interpolation: 54x/297x/317x (was 51/746/1712).
+- LiH market test: 838 Pauli @ Q30 vs STO-3G 907 raw (1.08x fewer) / 276
+  reduced (3.0x more); 1-norm 34.5 vs 34.3 (1.007x); cc-pVDZ 76x (was 190x).
+- Atomic path: He densities 17.1/9.9/7.1% (M=5/14/30), exponent ~Q^3.8; the
+  equal-qubit advantage INVERTS at Q=10 (288 vs 156 = 0.54x), recovers to
+  1.5x at Q=28 — disclosed per the benchmarking rule.
+- Paper 26 SecIII: density 42.4% -> 17.1% (n_max=2), trend REVERSES in the
+  framework's favour (improves with basis, ~M^-0.49); Z-independence holds
+  (107 / 15,293). Core-closure threshold moves B -> O (monotone I_cv decay
+  3.65e-3 .. 3.7e-4 across Be..N, floor at O); Z=8 degeneracy 6 -> 3;
+  "all 4/6/4 determinants exact eigenstates" survives only at F.
+- Paper 22: the production enumerator now computes the GLOBAL headline
+  density (6.06% at l_max=3) — CF-1 dissolved; the pair-diagonal 1.44%
+  is the retired realized value.
+
+**Two PRE-EXISTING defects exposed** (reproduce on random CI vectors) in
+`debug/archive/misc/entanglement_first_row.py`: the "I_cv = 0" assertion was
+tautological (a >1e-8 filter excluded zero-entropy orbitals from the MI loop),
+and the entropy routines are mutually inconsistent (0.7978 vs 0.3125 for the
+same single-orbital entropy; subadditivity violated on 5/10 pairs). The
+dependent test legs are QUARANTINED, not re-pinned.
+
+**Papers:** 14 + 20 re-priced in place with correction notes (abstracts,
+disclosure/eri_rule sections rewritten, 6 tables regenerated from live
+builds); 26 SecIII corrected; 22 test flipped to the resolved state.
+**Tests:** 10 + 12 + 3 re-pinned/rewritten; `test_paper14_eri_rule.py`
+rewritten around the exact rule with anti-regression discrimination guards.
+**Registry:** C17 family `p26-eri-sparsity-density` added with two-way
+discrimination proof. **Data:** `debug/data/library_census_exact_rule.json`,
+`composed_ab_sweep.json`, `p14_reprice.json`.
+
+### Added
+
+- **Mission statement adopted** (CLAUDE.md SS1, PI direction): GeoVac charts
+  the forced/free boundary of quantum physics — FORCED / FREE / WALL verdicts;
+  the deliverable is the atlas of that boundary. Papers stay under SS1.5.
+- **Standing rule** `memory/feedback_independent_route_crosscheck.md`: every
+  load-bearing MEASURED number needs a second, algorithmically independent
+  route; suspicious exactness in float code triggers a bug check. (The 2026
+  retraction pattern: every retraction was a bug manufacturing cleanliness.)
+
+### Closed
+
+- CF-1 (pair-diagonal vs global-M_L convention axis): DISSOLVED — the
+  "convention" was the sign error. A/B framing memory retired.
+- The v5.0.4 `_ck_coefficient` "needs verification" flag: verified, real,
+  fixed in six modules.
+
+**Late-session structural discoveries (same arc):** (1) the ERI tensors'
+**8-fold permutational symmetry was itself a bug artifact** -- complex
+spherical harmonics carry only the 4-fold group (particle exchange +
+hermiticity, verified bit-exact; single swaps broken at 8.8e-2). Named
+follow-ons: `DirectCI4e`'s same-spin closed form assumes 8-fold (quarantined);
+FCIDUMP export is lossy for 4-fold tensors (round-trip = the 8-fold
+projection; documented + discrimination-guarded; fix = real-spherical-harmonic
+transform). (2) Track CB's cross/within ERI ratio is **exactly 2/3 under both
+rules** (Gaunt-structural). (3) The Track DF Loewdin-inflation verdict
+survives re-priced (16.5x, was 14.3x). (4) P26 molecular S_bond is still
+exactly R-independent at the new value 0.3298895. (5) C18 extended (LaTeX-tie
++ symbolic escapes + runtime exemption) -- found 6 genuine loci corpus-wide,
+all fixed; the cert-3 C18 owed item is closed. (6) A pre-existing
+algebraic-vs-numerical BeH2 overlap mismatch (5.18%) surfaced and was
+attributed as independent of this arc (xfail-quarantined; own follow-up).
+
+**Follow-ons (same day).** (A) The single-orbital entropy routine backing
+Paper 26/27 was building rho_i DIAGONAL-ONLY, discarding the spin coherence
+<up|rho|dn> (nonzero for any member of a degenerate open-shell multiplet).
+Fixed: subadditivity violations 5/10 -> 0, two quarantined test legs restored,
+and Paper 26's "ceiling attained exactly at ln 8 / ln 16" RETRACTED.
+(B) Chasing the residual 4-fold/8-fold symmetry gap exposed that
+composed_qubit + lattice_index still used the reversed Condon-Shortley factor
+order c^k(b,d); the correct c^k(d,b) reproduces the twice-fixed casimir_ci
+EXACTLY, and the apparent factor of 2 was the k_orb/Z convention, not a bug.
+Applied: whole-tensor agreement (107/107 nonzeros, 107/107 signs, max dev
+1.9e-4 = grid residual). COUNTS unchanged (support is order-independent) so
+all Pauli/density/exponent re-pricing stands; QWC universality survives at
+64 (main) / 111 (d-block); 1-norms moved 2-4% and were re-priced across both
+papers and 12 balanced cells; He energies stable (0.2558%).
+
+**Incident.** `paper_26_entanglement.tex` was truncated to 0 bytes by an
+`open(P,"w").write(open(P).read())` line, then over-reverted by a
+`git checkout` that also discarded uncommitted prior-session edits. Content
+was fully preserved (built PDF + pdftotext + edit scripts) and the paper was
+reconstructed in one deliberate pass; compiles clean, 12 tests pass, all
+group6 gates PASS. Record: debug/recovery_p26_2026_08_29/INCIDENT.md.
+Standing rule added: memory/feedback_never_truncate_on_read.md.
+
+See debug/sprint_eri_evaluator_defects_memo.md for the full record.
+
+### Changed — dependent-loci re-pricing (P14/P20/P26) and a seventeenth site
+
+The delta-4 ledger's remaining loci, worked to measured values rather than
+patched numerals.
+
+**Paper 14 `sec:111` rewritten** (relabelled `sec:block_pauli_count`; zero
+inbound refs). Every number there was *derived* from the retired rule, so a
+numeral swap would have left a false derivation carrying true values. The
+replacement is measured and closes: 107 ERIs = 25 direct + 82 non-direct;
+279 non-identity Pauli = 55 + 224, where the **55 direct survive verbatim**
+(the monopole argument involves no sign convention) and are exactly the
+all-Z strings. A closed derivation replaces the retired `7^2 + 4^2`: with
+`P_k` the k-allowed orbital pairs (7 / 12 / 9), the union over k of the
+M_L-constrained products is **107 exactly** — the naive sum of squares, 274,
+over-counts by ignoring the M_L coupling and double-counting multi-k
+quartets. The **pure-l-shell collapse is withdrawn**: the exact rule
+constrains only `m_a + m_b = m_c + m_d`, which ordinary exchange satisfies
+identically, so a pure-d shell carries **85 nonzero ERIs, not 25**.
+
+Also in P14: `tab:multi_center` re-priced from the shipping library (every
+row exactly 27.90 x Q); three live `1,111` and seven live `Q^3.15` zombies
+(the QWC comparison *reverses* — 3.36 now sits below the term exponent); and
+a prose passage asserting 778 Pauli for H2O while the table four lines above
+already read 1,954.
+
+**Paper 20 `tab:scaling` re-measured** by the paper's own two-point method.
+The correction **strengthens the structural claim while cutting the headline
+extrapolation**: all six molecules give alpha = **2.816 identically**, not
+"nearly constant" at 2.21 +- 0.02 — and it is forced, not empirical, since
+the Pauli count is exactly linear in Q at each basis and Q grows by the same
+factor 5 for every molecule, giving alpha = 1 + log_5(18.6) = 2.8163...
+The Q=100 extrapolated Gaussian ratio falls from ~6,000x to **~370x**.
+A second multi-center table in P20 was caught by the new C17 entry, not by
+the manual sweep, and re-priced (Pauli + greedy QWC 21 -> 64).
+
+**Paper 26**, all measured at n_max=2 (the basis the section states it
+uses): the **Lithium bullet was wrong in every particular** — it quoted
+I(2s,3s)=1.324, an n_max=3 value for an orbital absent at n_max=2 (which the
+section's own correction note flags before leaving the bullet unchanged),
+and claimed the 1s share "drops to 9%" when it measures **89.8%**. Lithium
+has no hub shift; 1s and 2s are co-hubs. He I(1s,2s) 0.877 -> 0.748; Be is
+the first genuine shift (1s to 0.5%, 2s hub 65.1%, not 43%). Li I_cv
+0.213 -> 0.228 (Table II and the backing test already said so). Pauli
+advantage 51x-1712x -> ~50x-320x; conclusion densities 42%->99% ->
+17.1%->100%.
+
+**Seventeenth site — found, quantified, and RESOLVED (2026-08-30).**
+`composed_qubit_relativistic._build_spinor_eri_block` carries the same
+Condon-Shortley order defect: it multiplies `X_k(a,c) * X_k(b,d)` where the
+rule requires `X_k(d,b)`. Measured on LiH_rel at n_max=2, the ERI support
+and every |ERI| are unchanged while **40.4% of entries flip sign**, moving
+N_Pauli 1413 -> 1501 and lambda 40.59 -> 39.53; the n_max=1 rows are
+bit-identical, the correct control (all-s spinors make the orderings
+coincide). It was held back at first because both orderings satisfy the required
+permutational symmetries — particle exchange and hermiticity hold either
+way — so no *internal* discriminator exists. An **external** one was then
+constructed and settled it. The jj-coupled 2p shell spans the same space as
+the scalar 2p spin-orbitals, related by a Clebsch–Gordan unitary; rotating
+the *already-verified* scalar Condon–Shortley tensor into the jj basis gives
+the object the module must reproduce. At k=2 the corrected ordering matches
+it to machine precision (**168/168 signs, scale 1.0000, residual 1.7e-16**)
+while the shipped ordering agrees on 57% of signs and admits no repairing
+rescale (residual 0.90); k=0 is an exact control for both, since a scalar
+monopole makes the orderings coincide. The correction is applied, with the
+proof written into `tests/test_paper14_spinor_eri_ordering.py` *before* the
+change it justifies. Re-pinned: LiH_rel 1413→**1501**, λ 40.59→**39.53**,
+QWC 121→**142**; CaH/SrH/BaH_rel 942→**998**.
+Per PI direction both orderings are **recorded** rather than left to memory:
+`tests/test_paper14_spinor_eri_ordering.py` pins what they share (identical
+support and |ERI|; signs only), the size of the question (40.4% flips), the
+all-s control (bit-identical, as it must be), the resource numbers each
+would give, and — most usefully — the discriminators that do *not*
+discriminate, with the reason, so a future attempt does not re-derive that
+negative. It carries a tested tripwire: applying the correction makes the
+file fail with the obligation named.
+
+**Transcorrelated integrals.** The M_L rule was added to the radial-gradient
+assembly, which now lands exactly (107 nonzeros, 0 violations). The
+*angular*-gradient assembly is a distinct bug: it contributes 26 entries and
+**all 26 violate L_z conservation**, impossible for a rotationally invariant
+correlator. No filter was added — that would mask the error and leave the
+survivors unverified — and the test now asserts the finding, which sharpens
+the existing dead-end: the angular gradient buys not 0.01 pp but nothing.
+
+**Gate.** C17 gained `composed-retired-scaling-and-counts` for second-locus
+forms the existing entry misses (bare `1712\times`, `1,111`, `Q^3.15`,
+`2.21 +- 0.02`, `6,000x`). Discrimination proven both ways per the hard
+rule: fires on all six retired wordings, silent on all six corrected ones.
+It earned its place immediately by catching the P20 table above.
+
+Record: debug/qa/delta4_run_notes.md (remediation pass 2).
+
+## [v5.1.11] - 2026-08-29
+
+### Added
+- Re-cert DELTA run (PI-invoked): 11 seeds in the remediation diff + 5 controls,
+  6/6 dimensions calibrated (11/11 caught, 5 cross-catches), controls held under
+  direct attack (Minnesota reversal, 3pi/8, K-cubic independently re-solved).
+  Verdict DEFECTS -> remediated same day. Record:
+  debug/qa/group6_full_run_2026_08_28_notes.md.
+
+### Changed
+- Delta-ledger remediation (~50 edits): the tautological D-HFS counterexample
+  test rewritten to pin the actual CATALOGUE row; 13 one-locus-away survivors
+  of the cert-2 sweep closed (4th 4/pi + 4th 1e-9 loci, pm-5ppm bullet,
+  "fully attributable", "reproduced exactly", 56-kHz operand mismatch, etc.);
+  -(11/48) provenance reworded (the fraction is NOT printed in Karshenboim
+  SS9 -- primary-PDF verified; framework's own reduction, 0.57% consistency);
+  HD J=1 sign convention scoped to magnitudes; P26/P27/synthesis qualifier and
+  binding fixes; cross-paper LS-6a consistency check added to P35 (the check
+  that would have caught the seeded inversion); test upgrades (supremum leg,
+  S_kin/S pins, ODE 5e-5, honest test rename -- caught by the new C13
+  ::function resolver on its first day).
+
+## [v5.1.10] - 2026-08-29
+
+### Added
+- /qa group6 FULL certifying run #2: 15 seeds + 8 controls, 9 dimensions all
+  Opus-calibrated (14/15 first-pass catches + all recovered on re-dispatch;
+  8/8 controls unflagged; 5 cross-catches). Verdict FAIL on a large
+  verified-genuine ledger; completeness-critic triaged (record:
+  debug/qa/group6_full_run_2026_08_28_notes.md).
+- New tests: test_paper26_molecular_entanglement.py (the 50x / R-independence
+  headline, unbacked for three runs, now pinned WITH its architectural
+  mechanism); P35 seventh-ordinal + 136-census tests; P34 D-HFS
+  counterexample pin; exact MI-ceiling attainment members (N/F uniform = ln 8,
+  O structured = ln 16, optimizer-confirmed).
+- Gate hardening with plant->fire->restore discrimination proofs: C13
+  ::function resolver (catches tests renamed out of collection), C16 +3
+  entries (incl. papers/INDEX.md scope), C17 +2 families (ep2b commutator
+  column, Minnesota contrast).
+
+### Changed
+- Full remediation of the cert-2 ledger across P26/P27/P34/P35/synthesis/P24
+  (~130 edits): Karshenboim S4->S9 x8; King et al. arXiv:2606.11153 credited
+  for the GFMC/VMC Zemach radii; Friar profile constant corrected 4/pi ->
+  3pi/8 (the measured 1.1766 matches to 0.1% -- an error concealing an exact
+  identification); the withdrawn -0.02 MHz near-cancellation and ~8x/~10x
+  alkali zombies cleared (5+2 loci); P35 LS-7 sums recomputed (+2.74/+3.94,
+  70% closure, aligned with Paper 34); P26 sec II.C false graph-validity
+  bridge replaced with the measured Z^-0.85 negative; synthesis Mellin tier
+  map corrected (M1 = Hopf pi-signatures, M2 = pure-Tate pi^2k) + nofootinbib.
+- Two PM adjudications against primary sources: the 8.8e-8 K residual belongs
+  to Paper 2's self-consistency root (plain sum 4.8e-7; Paper 2 correct,
+  3 restatement loci fixed; CLAUDE.md 13.5 measured value removed per PI);
+  the Minnesota contrast is -0.55/+17.3 (~31x) -- P24 was right and the
+  "concordant" P27/synthesis/CLAUDE -0.81/+17.2 copies were wrong.
+- Retracted-bound test fixes: P26's 1e-3 core-valence bound -> 2e-14 with
+  occupation-mechanism legs; ep2b commutator pinned per-N_max (0.74/0.63/0.67);
+  P34 lambda ratios pinned two-sided at all five basis sizes; l2 catalogue
+  made paper-faithful (D row = declared L2=1 open-case exception).
+- debug/data/ep2b_ho_two_fermion.json REGENERATED with post-retraction
+  physics (the paper's Equation-Verification pointer is now true).
+
+## [5.1.9] - 2026-08-28
+
+**The deuterium convention error was one instance of three, and the paper had
+already diagnosed the class.** Follow-through on the v5.1.8 `/qa group6` FAIL:
+three parallel audits against the six open items. Run notes:
+`debug/qa/group6_full_run_2026_08_28_notes.md`.
+
+### One formula, three defects
+
+The Track-5 Bohr-Fermi convention error is a single expression, PM-verified to
+six digits: **buggy = correct x 2(m_p/m_N)**.
+
+| | 2(m_p/m_N) | effect | |
+|---|---|---|---|
+| D | 1.000496 | +496.5 ppm high | fixed in v5.1.8 |
+| He-3 | 0.668192 | 1.4966x low | the "off by 3/2" its own autopsy reports |
+| **Li-7** | **0.287204** | **3.4818x low** | **was still live** |
+| T | — | — | escaped; standard convention |
+
+Li-7's deficit `82.977/288.913 = 0.287204` matches `2(m_p/m_Li7)` to six digits —
+a pure mass-and-convention ratio with **zero Z_eff content**, so screening cannot
+account for it.
+
+**Paper 34's He-3 autopsy states the mass-slot rule correctly and then concludes
+the deuterium case "happens to give the correct splitting by a factor
+cancellation specific to I=1."** It does not — `m_d/m_p = 1.999` is merely close
+enough to 2 that D looked right to three digits. That clause is corrected and the
+passage promoted from "candidate convention exposure" to the identified root
+cause of a defect class that produced one retraction and two live errors.
+
+### Corrected
+
+- **Li-7 autopsy**: baseline 82.977 → **288.913** MHz; residual −89.7% →
+  **−64.0%**; cliff 9.7× → **2.78×**; Z_eff^eff 2.73 → **1.80**; the "~8× SCF
+  enhancement" → ~2.8× (8× is *excluded by experiment*, which caps it at 2.78×).
+- **Alkali cliff table** — the mass-slot half, live in a second driver using
+  `m_e/m_N` where the nuclear magneton requires `m_e/m_p`. The tell was three
+  identical "0.3 MHz" entries for K/Rb/Cs. **"8,306× at Cs" → 63×; "~Z^2.5" →
+  Z^1.2** (the prose overstated even its own table, which fits 2.18); and the
+  **"scales inversely with Z" reading is REVERSED** — it compared a
+  bare-hydrogenic Li against a FrozenCore Cs. Like-for-like the cliff deepens
+  monotonically. Corrected Li-7 now reads −64.0% in *both* loci, by independent
+  routes; before the fix they disagreed.
+- **H Lamb FNS row**: an **n=1 quantity in an n=2 table** (+1.18 vs +0.13823 MHz),
+  contradicted 8.5× by the He⁺ autopsy's own internal H reference. **Kills the
+  "Layer-2 inputs cancel in this observable" headline** (net −1.06, not −0.02).
+  The framework-native subtotal is unaffected — FNS is a Layer-2 row.
+- **Breit label collision**: `R⁰_BP(1s,2s;1s,2s)` carried two different values in
+  one paper. Production code settles it — §III.16 is right, the appendix labels
+  were swapped, both *numbers* correct. Convention now stated inline.
+- **Citations**: Penin–Pivovarov → Pachucki–Karshenboim (PRL 80, 2101, three
+  loci); Kennedy–Critchley–Dowker → Altaie–Dowker 1978 (KCD is
+  scalar-fields-with-boundaries, neither spinorial nor boundaryless-S³).
+
+### Resolved in the paper's favour
+
+The **L-set question**: a test comment asserted "parity rules out L=1" and
+hand-waved its disagreement with the paper. The comment was wrong — parity forces
+L odd for the mixed pair (l₁,l₂)=(0,1) and the triangle inequality then forces
+L=1 exactly. The allowed set is {0,1,2}, as the paper states.
+
+### Test coverage
+
+- `test_paper34_autopsy_baselines.py` widened from H/D/T (3 of 19 autopsies) to
+  the whole Fermi-contact family — including the root-cause formula itself and a
+  guard that no two alkali entries may coincide to one decimal. **16 of 19
+  autopsies had no test, and both convention defects sat in that gap.**
+- The three projection spot-check *batch* files rewritten: a literal null test,
+  **three always-true π guards** (`sp.pi in expr.free_symbols` is never True),
+  hardcoded S_N dimensions asserted with `isinstance(int)`, an "exactly 33" anchor
+  never computed, and `III4` verifying its identity on **S¹** not S³ — all replaced
+  by computations (hook lengths + independent SYT recursion + a Murnaghan–Nakayama
+  table certified by both orthogonality relations). **64 → 81 tests**; a PM
+  fire-test sample all fires on mutation.
+- `claim_test_matrix` row 116 re-tiered → **BACKED-PARTIAL**, audit scope stated.
+
+### Flagged, not applied (PI research calls)
+
+The 23 `Eides Tab. 7.3/7.4/7.6` pointers (chapter 7 is the *muonic* chapter, so
+neither 7.3 nor the LS-7 "fix" to 7.4 can be the electronic-H reference);
+`Pachucki–Yerokhin 2010` on D HFS (not locatable — and it is the cited source of
+the −286 ppm budget); "Eides 2024" (no such compilation); **T and He-3 Zemach
+radii that are actually charge radii** (flagged in-paper, changes two residuals);
+and 14 SMALL transcription/unit findings.
+
+### Verification
+
+131 pages, 0 undefined references; gates C11/C13/C14/C16/C17/C18/C19 PASS on
+group6 and group4; 221 tests pass across the Paper 34 surface plus the 18
+topological S³ proofs.
+
+## [5.1.8] - 2026-08-28
+
+**`/qa group6` FULL certifying run = FAIL, then fully remediated.** The certifying
+pass owed since the v5.0.0 retraction arc. Panel calibration was the best this gate
+has produced -- **7/7 valid seeds caught, 7/7 controls clean**, four of them
+fire-tested by the reviewers that found them -- and the decisive defect was still
+found by the completeness-critic, in a region the panel's coverage shape cannot see.
+Run notes: `debug/qa/group6_full_run_2026_08_28_notes.md`.
+
+### The cert-blocker (corrects a published number, and reaches certified group4)
+
+The **D 1S HFS Bohr-Fermi baseline was high by 496.5 ppm**. Root cause isolated:
+`g_atomic = 2 mu_I/mu_N` needs division by **2I**, and the driver divided by
+**m_d/m_p = 1.99900750** instead, while also using `m_e/m_d` where the Fermi-contact
+mass factor is `m_e/m_p` for every nucleus (mu_N is defined with the proton mass).
+Two errors that nearly cancel. For I=1/2 both 2I and m_p/m_p are unity, so H and T
+were unaffected -- the H sanity check passed and hid it through three certifications.
+
+Found by cross-anchoring the H/D/T baselines against each other, a check no
+dimension had run because Paper 34 SecV.C has **no test file** (so no code reviewer
+enters it) and its defects are **column arithmetic** (so prose reviewers walk past).
+Tritium is the control that makes it decisive: it reproduces to **0.02 ppm**.
+
+Corrected 327.397464 -> **327.234993** (BF strict) and 327.477853 -> **327.315305**
+(full chain); residual **+285.6 -> -210.9 ppm**, a sign flip. Propagated to 26 loci
+including `paper_23_nuclear_shell.tex` in **certified group4**. The closure claim
+that "+285.6 ppm matches the -286 ppm PY 2010 Layer-2 budget" is **withdrawn**; no
+replacement was invented -- the itemization is now an open item.
+
+### Paper 26: two LARGE, both corrected
+
+Sec IV quoted n_max=3 and n_max=4 values while stating n_max=2 -- including
+`I(2s,3s)`, an orbital absent from that basis, and `I(1s,2s)=0.877`, impossible
+against the paper's own Table II (I_cv(He)=0.751 bounds it). Recomputed throughout;
+`eq:hub` transition charges Z=4,5 -> **Z=5,7**; B/C single-determinant freezing
+disclosed. The sparsity step's "99.2% for theta > 1e-6" reproduces as **neither**
+value: 91.4% at that threshold, saturating at **100%** (625/625). n_max=4's 79,465
+disclosed as canonical-unique (36.8%) alongside the full-tensor 318,720 (39.4%).
+
+### Upgrades earned (two-way verdict)
+
+Core-valence MI for Z>=5 is **at the 1e-15 noise floor**, not "< 1e-3" -- the
+factorization is exact in this basis. The Z-scaling exponent is **-2.563**, agreeing
+to **0.11%**, not the quoted -2.546/0.6%.
+
+### The run's dominant pattern: incomplete propagation
+
+Prior remediations applied at one locus and left live at others -- the non-loop
+itemization (three items sum to **+3.78**, not the printed +4.98, which is the
+*four*-item total), "5.8x vs LS-3" (the baseline is **LS-1**), two -3.10% loci, two
+depth-prediction zombies, the synthesis depth-4 Lamb **sign**, and that same sign
+stale **inside the DoD**. Also P27's gamma-surface, where the caption and body had
+the **global and local columns swapped**; gamma_infinity restated as **1.93-1.96**
+with its extrapolation-order dependence stated (the sub-2 conclusion is
+method-independent and stands).
+
+### Dead guards found and repaired
+
+- `sp.pi in expr.free_symbols` is **always False** (pi is a NumberSymbol) -- three
+  sites where the "no pi enters here" check never fired.
+- One **null test** (`assert val == val_again` on a verbatim copy) rewritten with
+  real content and a non-tautology guard.
+- Both S^3 Casimirs now **derived** (Bernoulli/Hurwitz) rather than hardcoded
+  constants checked against hardcoded targets -- at the exact locus where a
+  2026-07-04 remediation once flipped the sign across paper + code + tests at once.
+- **C17 registry gap closed** (P27 EP-2b entropies): the v5.0.0 retraction corrected
+  those numbers without adding the family the maintenance rule requires, so the
+  planted drift tripped no deterministic gate. Three capture-anchored families,
+  proven to discriminate on both the P27 and P24 table layouts.
+- `claim_test_matrix` row 118 **BACKED-SOUND -> BACKED-PARTIAL**: the
+  Layer-2-presence bound's "holds on every row" leg checks per-class envelopes
+  fitted just above the catalogue's own maxima, so it cannot fail by construction.
+  Written and certified by the PM during the same day's delta run; the delta was
+  wrong to accept it.
+
+### Process failure (PM)
+
+**Two of nine seeds were planted on LaTeX comment lines** and were therefore void.
+The **synthesis dimension ran uncalibrated** and could not be certified regardless
+of its findings; citations fell to one valid seed where its tier requires two. A
+seed-placement rule is now recorded in `docs/qa/seed_defects.md`: never plant on a
+`%` line, and assert placement after planting.
+
+### Verification
+
+C11/C13/C14/C16/C17/C18/C19 PASS on **group6 and group4**; 6/6 touched papers
+compile three-pass clean with **0 undefined references** (log-scanned, not
+exit-code-trusted); **219 tests pass, 2 skipped**. No `geovac/` production code
+touched.
+
+### Still open (PI calls)
+
+Li-7 HFS baseline (flagged by the critic, **not** PM-verified -- it depends on an
+assumed Z_eff, so it is not a clean ratio test); the Kennedy-Critchley-Dowker
+attribution in P35; ~50 informal "Author Year" attributions in P34 SecV; the fact
+that the corrected D itemization no longer closes; the remaining 17 SecV.C
+autopsies, which have never been cross-anchored; and the P34 spot-check batches,
+where the critic estimates 11-13 of ~35 functions lack discriminating power (4
+fixed here).
+
 ## [5.1.7] - 2026-08-28
 
 **The deciding resource measurement: the e-e split's 1-norm lever is real, exact, and decays with basis size.** Closes the one unmeasured lead left by the minimal-presentation arc, with a calibrated verdict rather than a headline. Canonical memo `debug/sprint_minimal_presentation_memo.md` section 11.
@@ -87,7 +733,7 @@ One paper edited (P34, two remarks + extension; compounds its standing re-review
 - **`/release` renamed `/checkpoint`** (`.claude/commands/checkpoint.md`; old name left as a deprecation stub). Three defects fixed: the name was a misnomer (it never created a GitHub Release — Releases are manual, mint a Zenodo DOI, PI-only, now stated as an explicit non-goal); push was bundled into the atomic step (so sprints the PI didn't want pushed lost their tags too — v5.1.1/2/3 all went untagged this way); and its push step targeted `main`, contradicting the PI-only merge policy. `/checkpoint` = bump→commit→tag→stop; `/checkpoint push` pushes the CURRENT branch, never `main`; tagging requires a clean tree + a commit in the same invocation ("a commit every time we tag", enforced structurally). Cross-references updated (qa/regression/sprint-close/CLAUDE.md §9 + §13.9b row (PI-applied) + visualization plan).
 - **Stale freeze records corrected:** `docs/neumann_general_m_build_plan.md` PUSH-DISABLED claim marked superseded (pushurl is unset; push works); `docs/project_closeout_plan.md` header stamped superseded; CLAUDE.md §2 false premise fixed (`main` is at 51f2eef, 58 commits past v4.76.0 — the PI-only merge/Release policy itself unchanged).
 - **`docs/corpus_accessibility_plan.md` marked SUPERSEDED (PI direction):** Phase 4 outreach was executed; Phase 5's no-new-research freeze — unenforced since ~v4.82 across ~40 sprints — is formally lifted. Retained as the record of the June 2026 arc.
-- **Private-correspondence scrub (PI direction):** conversational/outreach references to the Avery correspondence removed from CHANGELOG (3 loci), the I/O-ladder memos (10), noci sandbox notes (2), the census memo (1); `debug/avery_framework_primer.md` (call-prep with quoted private conversation) deleted. All published-literature Avery citations retained. Caveats flagged to the PI: git history retains the removed text; `docs/outreach/phase4_send_kit.md` (third-party personal data, non-Avery) untouched pending PI call.
+- **Private-correspondence scrub (PI direction):** conversational/outreach references to the Avery correspondence removed from CHANGELOG (3 loci), the I/O-ladder memos (10), noci sandbox notes (2), the census memo (1); `debug/avery_framework_primer.md` (call-prep with quoted private conversation) deleted. All published-literature Avery citations retained. Caveats flagged to the PI: git history retains the removed text; `docs/outreach/phase4_send_kit.md` (third-party personal data, non-Avery) flagged and REMOVED in v5.1.8 on PI direction.
 
 ### Added
 - **Tags backfilled:** `v5.1.1` → f79a011, `v5.1.3` → 65b5c09 (both annotated as retroactive). **`v5.1.2` deliberately absent** — its files sat uncommitted until the 2026-08-26 cleanup, so no commit represents that tree; a note above the v5.1.2 entry records this.

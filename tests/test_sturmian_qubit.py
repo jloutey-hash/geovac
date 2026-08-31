@@ -106,7 +106,9 @@ class TestStandardEncodingPaper14:
     def test_pauli_count_maxn2(self):
         from geovac.vqe_benchmark import build_geovac_he
         _, of_op, n_q, _ = build_geovac_he(max_n=2)
-        assert len(of_op.terms) == 120
+        # exact-rule 2026-08-29 (was 120 under the retired
+        # pair-diagonal rule; 288 = 287 non-identity + identity)
+        assert len(of_op.terms) == 288
 
     @pytest.mark.slow
     def test_pauli_count_maxn3(self):

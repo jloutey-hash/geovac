@@ -54,12 +54,11 @@ class TestLiHGeneralBuilder:
 
     def test_pauli_count(self, results):
         old, new = results
-        # Old builder: 334 (pre-tapering); new builder: 333 (post-tapering).
-        # The 1-term gap is the identity-tapering sprint (CLAUDE.md global Z
-        # tapering); both builders track the same physics, the new builder
-        # sheds one redundant identity term.
-        assert new['N_pauli'] == 333
-        assert old['N_pauli'] in (333, 334)
+        # exact-rule 2026-08-29 (was 333/334 under rule A).  The 1-term
+        # gap is the identity-tapering sprint; both builders track the same
+        # physics, the new builder sheds one redundant identity term.
+        assert new['N_pauli'] == 837
+        assert old['N_pauli'] in (837, 838)
 
     def test_h1_match(self, results):
         old, new = results
@@ -110,7 +109,7 @@ class TestBeH2GeneralBuilder:
     def test_pauli_count(self, results):
         old, new = results
         # Identity-tapering: new builder is one term smaller than legacy
-        assert new['N_pauli'] in (555, 556)
+        assert new['N_pauli'] in (1395, 1396)
 
     @pytest.mark.skip(
         reason="Intentional PK convention difference: legacy "
@@ -169,7 +168,7 @@ class TestH2OGeneralBuilder:
 
     def test_pauli_count(self, results):
         old, new = results
-        assert new['N_pauli'] in (777, 778)
+        assert new['N_pauli'] in (1953, 1954)
 
     def test_h1_match(self, results):
         old, new = results

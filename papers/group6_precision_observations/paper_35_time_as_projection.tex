@@ -86,8 +86,12 @@ QED) are confirmatory; the canonical $\pi$-bearing observables
 $2\alpha^2/(3\pi)$, Stefan-Boltzmann) are all evaluated through
 continuous integrations of the temporal kind.
 
-This paper introduces no new computation beyond the verification sprint
-$\mathrm{KG}\text{-}1$, $\mathrm{KG}\text{-}2$, $\mathrm{KG}\text{-}3$.
+Beyond the verification sprints $\mathrm{KG}\text{-}1$,
+$\mathrm{KG}\text{-}2$, $\mathrm{KG}\text{-}3$ and the closed forms
+reported in Sections~\ref{sec:casimir} and~\ref{sec:tx_b}
+(among them the $S^5$ conformal $-31/60480$ and the Bargmann--Segal
+harmonic-oscillator $-17/3840$, both computed here), this paper
+introduces no new computation.
 Its contribution is the structural observation that \emph{time, not
 mass}, is the projection axis along which $\pi$ enters the framework,
 and that the observer's finite-time measurement window is the formal
@@ -236,8 +240,11 @@ the spectral zeta of the conformally coupled scalar reduce to the
 ordinary Riemann zeta (Section~\ref{sec:casimir}).
 
 For $m^2 \in \{0, 1/4, 2\}$, the union of square-free generators that
-appear in $n \in [1, 50]$ contains 134 distinct integers ranging from
-$1$ to $10401$, all in $\mathbb{Q}[\sqrt{d}]$ for some $d$.
+appear in $n \in [1, 50]$ contains 136 distinct integers ranging from
+$2$ to $10401$, all in $\mathbb{Q}[\sqrt{d}]$ for some $d$.
+(Recounted 2026-08-28; the previously quoted ``134\ldots from $1$''
+was wrong in both the count and the lower endpoint --- $1$ is not a
+generator in this set.)
 
 \paragraph{Negative controls.}  For $m^2 = 1/\pi$ and $m^2 = \sqrt{2}$
 (both irrational), the ring is broken at $n = 1$ and the corresponding
@@ -311,10 +318,15 @@ $\boldsymbol{2\pi}$ \emph{appears here} \\
 \label{obs:where_pi}
 The first eigenvalue of \eqref{eq:kg_compactified} that contains $\pi$
 is the $(n {=} 0, k {=} 1)$ Matsubara mode at $\omega^2 = 4\pi^2 / \beta^2$.
-At $\beta = 1$, $m = 0$, the first five eigenvalues sorted by ascending
-$\omega^2$ are: $0$, $\sqrt{3}$, $2\sqrt{2}$, $\sqrt{15}$, $2\pi$.
-The first four are in $\mathbb{Q}[\sqrt{d}]$; the fifth is the first
-$\pi$-bearing one.  No earlier step in the construction injects $\pi$.
+At $\beta = 1$, $m = 0$, the first seven eigenvalues sorted by
+ascending $\omega^2$ are (listing $\omega$): $0$, $\sqrt{3}$, $2\sqrt{2}$, $\sqrt{15}$,
+$2\sqrt{6}$, $\sqrt{35}$, $2\pi$.  The first six are in
+$\mathbb{Q}[\sqrt{d}]$; the seventh is the first $\pi$-bearing one.
+(Corrected 2026-08-28: an earlier version listed five and placed
+$2\pi$ fifth, omitting the $n=4,5$ spatial modes $2\sqrt{6} \approx
+4.899$ and $\sqrt{35} \approx 5.916$, both below $2\pi \approx 6.283$.
+The load-bearing claim --- that $2\pi$ is the \emph{first}
+$\pi$-bearing eigenvalue --- is unaffected.)  No earlier step in the construction injects $\pi$.
 \end{observation}
 
 The ``injection'' is structurally the same statement as the
@@ -1184,8 +1196,24 @@ hence
 \end{equation}
 Exact rational, no $\pi$, matches the textbook value of
 Camporesi--Higuchi 1996 (Eq.~5.27),
-Bytsenko et al.~\cite{bytsenko}~\S~4.6, and
-Kennedy--Critchley--Dowker (1980).  Verified to 40 dps numerically.
+Bytsenko et al.~\cite{bytsenko}~\S~4.5, and
+Dowker--Altaie~1978 (Phys.\ Rev.\ D \textbf{17}, 417), the
+vacuum-averaged stress-energy tensor for spinor fields in the Einstein
+universe, which gives $\langle T_{00}\rangle = 17/(1920\pi^2 a^4)$
+(a value that paper attributes to Ford); integrated over
+$\mathrm{Vol}(S^3) = 2\pi^2 a^3$ this is $E = 17/(960a)$, matching the
+$17/960$ single-Weyl-chirality convention line quoted below --- the
+density numeral $1920$ and the energy numeral $960$ differ by the
+volume factor and should not be identified.  (Its
+finite-temperature companion, Altaie--Dowker, Phys.\ Rev.\ D
+\textbf{18}, 3557, was cited here between 2026-08-28 and this correction;
+the zero-temperature member of the pair is the right one for a Casimir
+energy, and the author order differs between them.)  Verified to 40 dps numerically.
+(Attribution corrected 2026-08-28: this sentence previously cited
+Kennedy--Critchley--Dowker~1980, which is Ann.\ Phys.\ \textbf{125}, 346
+--- finite-temperature \emph{scalar} field theory \emph{with boundaries},
+neither spinorial nor on the boundaryless $S^3$.  The section number was
+also inconsistent with this paper's own bibliography entry.)
 Convention translations (single Weyl chirality with both signs:
 $17/960$; single Majorana real d.o.f.: $17/960$; single chirality,
 single sign: $17/1920$) are catalogued in
@@ -1237,8 +1265,10 @@ candidates, plus critical-point analysis) returned only tautological
 ``hits'' (Gaussian trace at $\Lambda_\infty$ literally equals $K/\pi$
 by construction).  The cleanest non-tautological near-miss --- the
 Gaussian trace equating to $B + F$ --- gives $\Lambda$ at relative
-distance $1.86\times 10^{-4}$ from $\Lambda_\infty$, four orders of
-magnitude looser than the K residual itself ($8.8\times 10^{-8}$),
+distance $1.86\times 10^{-4}$ from $\Lambda_\infty$, $\sim$three orders of
+magnitude looser than the K residual itself ($4.8\times 10^{-7}$ for
+the plain sum; $8.8\times 10^{-8}$ via Paper~2's self-consistency root
+$1/\alpha + \alpha^2 = K$),
 and so cannot explain the K precision even if elevated.
 \item The unified heat-kernel approach is blocked by
 \textbf{Theorem T9} (Paper~28): $\zeta_{D^2}(s)$ at integer $s$ is
@@ -1289,7 +1319,8 @@ $+27.13$~MHz at $n=2$, $Z=1$, structurally identifiable as $(4/15)
 \cdot \alpha^3 Z^4 / (\pi n^3) \cdot \text{(Ha-to-MHz)}$.  LS-6a
 predicts $1052.19$~MHz, with residual $-5.65$~MHz~$/-0.534\%$
 against experimental $1057.85$~MHz --- a $5.8\times$ reduction in
-absolute error vs LS-3.  Sprint LS-7 (May 2026) made a first pass at
+absolute error vs the LS-1 one-loop ceiling ($-32.78$~MHz); vs LS-3
+($-28.85$~MHz) the reduction is $5.1\times$.  Sprint LS-7 (May 2026) made a first pass at
 the two-loop SE on Dirac-$S^3$ via iterated CC spectral action and
 returned two findings.  \emph{Structural confirmation}: the two-loop
 SE prefactor $(\alpha/\pi)^2 (Z\alpha)^4 / n^3$ emerges with the
@@ -1300,10 +1331,21 @@ because the same prefactor appears in flat-space two-loop QED.
 is \emph{not primarily multi-loop QED}.  The
 Eides--Grotch--Shelyuto 2001 Table~7.3 ($\alpha^5$ multi-loop QED
 proper) totals only $\sim +1.20$~MHz; the remaining
-$\sim +4.4$~MHz of the residual is non-loop physics: recoil
-$-2.40$~MHz, finite nuclear size $+1.18$~MHz, hyperfine averaging
-$\sim +5.0$~MHz, summing to $\sim +4.98$~MHz which matches the
-residual to within the precision of the literature decomposition.
+$\sim +4.4$~MHz of the residual must be non-loop physics; the itemized
+non-loop entries are recoil
+$-2.40$~MHz, finite nuclear size $+0.138$~MHz (the 2S value; the
+retired $+1.18$ is the 1S shift), hyperfine averaging
+$\sim +5.0$~MHz.  These three sum to $\sim +2.74$~MHz; adding the
+$\sim +1.20$~MHz multi-loop term gives $\sim +3.94$~MHz for the four
+itemized contributions against the $-5.65$~MHz residual --- $\sim
+70\%$ closure, not a match to within the literature precision.
+(Corrected 2026-08-29: an earlier correction note printed
+$+3.78$/$+4.98$ --- sums still computed with the retired $+1.18$~MHz
+finite-size entry; the $+0.138$~MHz 2S value gives $+2.74$/$+3.94$,
+in agreement with Paper~34's Lamb autopsy.  Cross-check: $5.65 -
+3.94 = 1.71$~MHz reproduces Paper~34's tabulated $+1.72$~MHz
+Lamb-autopsy residual --- the unattributed remainder IS the autopsy
+residual.)
 The earlier LS-5 / LS-6a memos had used Eides Table~7.4 (cumulative
 $\alpha^5$ contributions of all kinds) as the multi-loop reference;
 this was a misreading.  Implications: (i) the framework's one-loop
@@ -1417,9 +1459,16 @@ $K = \pi(B + F - \Delta) \approx 1/\alpha$ coincidence: the explicit
 $\pi$ on the right-hand side is a candidate counter-example to the
 prediction, but only if the projections that produce $K$ are genuinely
 discrete-graph quantities and not single-projection
-spectral-action-type statements in disguise.  Identifying which is the
-case is the natural next step and a structural follow-on to Sprint~A
-(2026-04-18) and the WH1 Marcolli--van~Suijlekom upgrade.
+spectral-action-type statements in disguise.  Sprint~K-CC has since
+\emph{ruled out} the single-projection reading at the framework's
+current resolution (no single Chamseddine--Connes heat-kernel
+expansion contains $B$, $F$ and $\Delta$ as terms); the live readings
+are the revised multi-projection one and the coincidence one, per
+WH5.  The open step is therefore to discriminate \emph{those two},
+a structural follow-on to Sprint~A (2026-04-18) and the WH1
+Marcolli--van~Suijlekom upgrade.  (Updated 2026-08-28: the earlier
+wording proposed as a next step a question this paper's own
+Section~\ref{sec:open} reports closed.)
 
 % ===================================================================
 \begin{thebibliography}{99}

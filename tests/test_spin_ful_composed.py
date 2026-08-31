@@ -29,9 +29,11 @@ import pytest
 
 
 @pytest.mark.parametrize("spec_fn,name,expected_terms", [
-    ("lih_spec", "LiH", 334),     # CLAUDE.md §10: "LiH composed Pauli terms (Q=30) == 334"
-    ("beh2_spec", "BeH2", 556),   # CLAUDE.md §10: "BeH2 composed Pauli terms (Q=50) == 556"
-    ("h2o_spec", "H2O", 778),     # CLAUDE.md §10: "H2O composed Pauli terms (Q=70) == 778"
+    # Corrected 2026-08-29 (exact global-M_L rule; retired rule-A counts
+    # were 334/556/778): see debug/sprint_eri_evaluator_defects_memo.md.
+    ("lih_spec", "LiH", 838),
+    ("beh2_spec", "BeH2", 1396),
+    ("h2o_spec", "H2O", 1954),
 ])
 def test_scalar_pauli_counts_unchanged(spec_fn, name, expected_terms):
     """Scalar LiH/BeH₂/H₂O Pauli counts must match the CLAUDE.md benchmark."""
@@ -195,7 +197,11 @@ def test_relativistic_pauli_ratio_lih_nmax2():
     r_rel = build_composed_hamiltonian(lih_spec_relativistic(max_n=2))
     ratio = r_rel['N_pauli'] / r_scalar['N_pauli']
     # Observed 1413 / 333 ≈ 4.24 (post-TR fix, April 2026).  Pin ±15%.
-    assert 3.7 < ratio < 4.9, (
+    # Corrected 2026-08-29: the old 4.24x compared a rule-A scalar
+    # denominator against a full-Gaunt (rule-B) relativistic numerator.
+    # With the scalar path fixed both sides use the exact rule and the
+    # like-with-like ratio is 1.69 (= 4.24/2.51 exactly).
+    assert 1.5 < ratio < 1.9, (
         f"LiH n_max=2 rel/scalar Pauli ratio {ratio:.2f} outside [3.7, 4.9]")
 
 

@@ -266,3 +266,44 @@ baseline suite (incl. the 18 symbolic S³ proofs).
 
 **Verdict: group3 CERTIFIED (FULL pass PASS).** The v5.0.0 retraction re-review OWED is
 fully discharged across group3/group4/group6.
+
+---
+
+## Post-certification touch: the group6 arc (2026-08-29)
+
+**Status: certification stands; one number re-verified.**
+
+Paper 24's copy of the EP-2b retraction contrast was corrected from `+17.2` to
+**`+17.3` MeV**.  Adjudicated against the production code
+(`geovac/nuclear/minnesota.py`, S=0, b=1 relative-frame convention): the
+off-diagonal is `+17.30 MeV` and the diagonal `-0.5517 MeV`, so **Paper 24's
+`-0.55` was correct all along** -- it was Paper 27, the group6 synthesis and
+CLAUDE.md S3 that carried a `-0.81` reproducing under no convention of the
+production code.  Those were corrected to match Paper 24, not the reverse.
+
+**Re-verification performed 2026-08-29:** Paper 24 compiles three-pass clean, zero
+undefined references; the RETRACTED banner and the surviving pi-freeness rigidity
+theorem are both intact and correctly separated; C13/C16/C19 + inline-arXiv PASS at
+`--gate group3`; `test_paper24_ho_entropy.py` and
+`test_paper24_hardy_circle_arithmetic.py` pass (the `conserve_N` guard-removal
+tripwire included).  A C17 family (`p27-minnesota-contrast`) now pins the canonical
+`-0.55 / +17.3 / ~31x` triple across all three papers so the retired values cannot
+return.
+
+## Post-certification touch — 2026-08-29 (ERI evaluator correction, PI-directed)
+
+Paper 22 (group3): the production enumerator
+`geovac/nuclear/potential_sparsity.py::angular_zero_count` carried the
+wrong-sign `q = mc - ma`, which silently collapsed it to the pair-diagonal
+density D_pd despite enforcing global m-conservation textually (the
+documented CF-1 mismatch).  Fixed: the enumerator now returns the paper's
+GLOBAL headline density exactly (6.0608% at l_max=3 = 3,972/65,536) — the
+production enumerator, the composed pipeline, and the abstract number are
+now ONE convention.  The regression test that pinned the old mismatch
+(`test_angular_zero_count_computes_pair_diagonal_not_global`) is flipped to
+`..._computes_global_headline_density` with a strictly-above discrimination
+guard.  Paper 22's headline densities were computed by the test's own
+independent enumeration and are UNCHANGED.  The `nuclear/harmonic_shell.py`
+copy of the same bug is also fixed (its HO ERI-block consumers should be
+re-verified at next group3 touch).  See
+debug/sprint_eri_evaluator_defects_memo.md.

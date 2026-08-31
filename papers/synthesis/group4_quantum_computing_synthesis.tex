@@ -14,6 +14,16 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{observation}{Observation}
 
+
+% ---------------------------------------------------------------
+% \gvq{registry-key}{value} -- a load-bearing quantity, carrying a
+% foreign key into debug/qa/numeric_registry.py alongside its literal
+% value.  Renders as the value alone, so this file and the archived
+% PDF stay self-contained; the key gives the QA gate (C20) referential
+% integrity, and `--index <key>` names every locus citing the
+% quantity when it moves.  See CLAUDE.md SS15.
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{Structural Sparsity for Quantum Simulation:\\
@@ -43,15 +53,28 @@ blocks~\cite{loutey_paper16}; and the nuclear shell-model extension that
 delineates exactly which part of the framework
 transfers~\cite{loutey_paper23}.  The unifying value proposition is
 \emph{structural}, not accuracy-based:\ after the Jordan--Wigner
-transformation the GeoVac lattice Hamiltonian yields $O(Q^{3.15})$ Pauli
-terms for atoms and $O(Q^{2.5})$ for composed multi-center molecules
+transformation the GeoVac lattice Hamiltonian yields $\sim Q^{3.8}$ Pauli
+terms for atoms (corrected 2026-08-29; the retired pair-diagonal encoding
+gave $O(Q^{3.15})$) and a Pauli count exactly linear in qubit count for
+composed multi-center molecules at fixed basis (within-molecule basis
+exponent $3.17$; corrected 2026-08-29 from the retired $O(Q^{2.5})$)
 (versus $O(Q^{3.9\text{--}4.3})$ for Gaussian baselines), with a
-sub-quadratic Pauli $1$-norm $\lambda = O(Q^{1.69})$ ($R^2=0.997$) that
+sub-quadratic Pauli $1$-norm $\lambda = O(Q^{1.77})$ ($R^2=0.9997$;
+re-measured 2026-08-30, retired: $O(Q^{1.69})$) that
 controls Trotter depth and qubitization query cost.  Two disciplines run
-through the arc.  \emph{First}, we separate the robust \emph{scaling}
-exponents---unchanged under the choice of electron-repulsion selection
-rule---from the \emph{absolute multipliers}, which depend on a stated
-pair-diagonal angular approximation and are disclosed as such.
+through the arc.  \emph{First}, we separate what survived the
+2026-08-29 selection-rule correction from what did not.  \emph{Surviving:}
+the exact linearity $N_{\mathrm{Pauli}} = c\,Q$ across molecules at fixed
+basis, the isostructural invariance, the $Z$-independence, and the
+equal-qubit 1-norm advantage ($3.8\times$ at $Q=10$, $7.1\times$ at
+$Q=28$) --- each re-measured under the exact rule and re-confirmed, not
+inherited.  \emph{Not surviving:} the within-molecule and
+atomic exponents (which moved $2.5 \to 3.17$ and $3.15 \to 3.8$), the QWC
+exponent (which moved $3.36 \to 4.01$, above the term exponent, withdrawing
+the measurement-group advantage entirely), and every absolute multiplier.  The earlier framing of this discipline --- ``scaling
+exponents unchanged, only multipliers re-price'' --- was itself retracted
+with the correction:\ the re-pricing is not a constant factor, it grows
+along the basis axis.
 \emph{Second}, every comparison is made at \emph{matched qubit count},
 not matched accuracy:\ the composed basis carries classical
 equilibrium-geometry errors of $5$--$26\%$, so the framework is
@@ -116,41 +139,65 @@ of Gaunt coefficients, and a Gaunt coefficient vanishes unless its three
 angular momenta satisfy the $3j$ triangle inequality and the magnetic
 selection rule.  As the number of spatial orbitals $M$ grows, the
 fraction of nonzero ERIs therefore \emph{decays}---empirically as
-$\sim 1/M$ ($M^{-0.85}$)---whereas a Gaussian ERI tensor remains near-dense at
+$\approx M^{-0.49}$ (corrected 2026-08-29; the retired rule's
+$M^{-0.85}$ overstated the decay)---whereas a Gaussian ERI tensor remains near-dense at
 $O(1)$ occupancy.  This is the potential-independent angular-sparsity
 theorem of Paper~22 (Group~3):\ the ERI density depends only on
 $\ell_{\max}$, not on the radial potential $V(r)$.  The sparsity
 survives the Jordan--Wigner transformation because it is carried by the
 angular labels, which JW does not mix.
 
-\paragraph{The selection rule actually realised, and its disclosure.}
-A precise statement of the sparsity requires naming \emph{which} angular
-selection rule the production composed pipeline realises.  The exact
-Coulomb rule is the global-$M_L$ rule, $m_a+m_b=m_c+m_d$.  The
-production composed builder realises instead the \emph{pair-diagonal}
-rule $m_a=m_c \wedge m_b=m_d$:\ a legitimate sparsifying approximation
-that retains the diagonal magnetic channels and drops the genuinely
-nonzero ``m-swap'' integrals (e.g.\ $\braket{p_{+1}p_{-1}|p_{-1}p_{+1}}$,
-angular factor $\approx 0.49$).  This distinction matters for the
-\emph{magnitude} of the sparsity advantage but not for its \emph{scaling}.
-A library-wide build-only sweep shows that switching to the exact
-global-$M_L$ rule multiplies the composed Pauli count by a
-\emph{constant factor within each valence class}---$2.51\times$ for
-main-group ($s,p$) molecules and $3.25\times$ for $d$-block transition-metal
-hydrides---because the dropped m-swaps are a property of the valence
-angular content, not of the molecular geometry.  Consequently:
+\paragraph{The selection rule, and a correction to it.}
+The exact Coulomb angular selection rule is the global-$M_L$ rule,
+$m_a+m_b=m_c+m_d$, and every number in this synthesis is now computed
+under it.
+
+Until 2026-08-29 the production composed and atomic builders realised
+instead a \emph{pair-diagonal} restriction $m_a=m_c \wedge m_b=m_d$,
+described in earlier versions of this document as a deliberate sparsifying
+approximation.  An independent re-derivation traced it to a \emph{sign
+error}:\ the Gaunt coefficient set the Wigner-3j magnetic argument to
+$q = m_c-m_a$ where the bottom row requires $q = m_a-m_c$, so the
+coefficient vanished identically unless $m_a=m_c$, silently deleting every
+$m$-changing multipole (88 of the 126 nonzero $c^k$ at $l\le2$) --- among
+them the genuinely nonzero ``m-swap'' integrals
+(e.g.\ $\braket{p_{+1}p_{-1}|p_{-1}p_{+1}}$, angular factor
+$\sqrt{6}/5 \approx 0.49$).  The error was arbitrated against direct
+quadrature of the angular factor from its definition.
+
+Two consequences, both of which retract earlier statements here:
 \begin{itemize}
-\item the \emph{scaling} exponents and the exact linearity
-$N_{\mathrm{Pauli}} = c\,Q$ are unchanged (a constant prefactor leaves the
-log-log slope invariant);
-\item the \emph{absolute multipliers} and any absolute market-test line
-re-price by the constant factor, and are reported below with the rule
-they assume stated explicitly.
+\item The re-pricing is \emph{not} a constant factor.  It is
+$2.51\times$ uniformly across main-group molecules at $n_{\max}=2$, but
+grows along the basis axis ($1.00\times/2.51\times/5.40\times$ at
+$n_{\max}=1/2/3$), so the within-molecule exponent moves $2.54 \to 3.17$.
+The earlier ``constant factor, scaling unchanged'' claim was a
+single-point artifact.
+\item Two defects were corrected together and they behave oppositely,
+which is worth separating because the distinction was previously
+collapsed.  The wrong-sign Gaunt argument ($q = m_c - m_a$) deleted every
+$m$-changing multipole and so changed the ERI \emph{support}:\ 65
+$\rightarrow$ \gvq{block_sp_n2_eri}{107} nonzero entries per block, which is why every count,
+density and exponent moved.  The Condon--Shortley factor-order error, by
+contrast, leaves the ERI support exactly invariant and flips signs only
+--- measured on the relativistic block as identical support (2{,}676
+entries) and identical $\sum|{\rm ERI}|$ with $40.4\%$ of signs reversed.
+It is not resource-neutral even so:\ the sign flips change which
+Jordan--Wigner terms cancel, moving LiH$_{\rm rel}$ from $1{,}413$ to
+$\gvq{lih_rel_n2_pauli}{1{,}501}$ Pauli terms.  The distinction is between the ERI level, where
+only the sign error moved the support, and the resource level, where both
+defects moved counts.  ``Values,
+not entries'' is true of the second and false of the first; an earlier
+version of this synthesis generalised it to the whole correction and
+thereby claimed the counts were invariant when they were not.  What
+survives is the \emph{form} $N_{\mathrm{Pauli}} = c\,Q$, with its
+coefficient re-measured ($11.10 \rightarrow \gvq{composed_coeff}{27.90}$).
 \end{itemize}
-We adopt the convention of \emph{disclosing} the pair-diagonal rule and
-reporting both the pair-diagonal multiplier and its global-$M_L$
-re-pricing, rather than presenting the pair-diagonal count as exact
-angular-selection-rule sparsity.
+Every resource number reported here is the exact global-$M_L$ value;
+retired pair-diagonal figures appear only where explicitly marked as
+retired history.  There is no dual-rule convention to adopt:\ the
+pair-diagonal rule was a wrong-sign Gaunt argument, not an alternative to
+the exact one.
 
 %% ========================================================================
 \section{The encoding and its scaling laws (Paper~14)}
@@ -161,45 +208,56 @@ Jordan--Wigner and characterises the resulting Pauli decomposition by
 several operationally distinct metrics.
 
 \paragraph{Term count.}
-For single-center atoms the Pauli term count scales as $O(Q^{3.15})$ in
-the qubit number $Q$, compared with Gaussian molecular Pauli-scaling
-exponents in the $Q^{3.9}$--$Q^{4.3}$ range; the
+For single-center atoms the Pauli term count scales as $\sim Q^{3.8}$ in
+the qubit number $Q$ (fit $3.78$; corrected 2026-08-29 from the retired
+$O(Q^{3.15})$), which sits at the lower edge of --- not below --- the
+Gaussian molecular Pauli-scaling exponents in the $Q^{3.9}$--$Q^{4.3}$
+range; the
 specific electronic-structure values $Q^{4.25}$ (LiH) and $Q^{3.92}$
 (H$_2$O), and the range they bracket, are GeoVac's own log-log fit of
 the published Gaussian Pauli counts of Trenev et al.~\cite{trenev2025}
 (Table~5, Appendix~B; Jordan--Wigner with 2-qubit reduction).
 For composed multi-center molecules the pseudopotential-partitioned
-architecture produces block-diagonal ERIs and a \emph{universal}
-$O(Q^{2.5})$ scaling, with an exponent spread of only $0.02$ across the
+architecture produces block-diagonal ERIs and a \emph{universal} within-molecule exponent of $3.17$ (identical to all
+reported digits --- corrected 2026-08-29 from the retired $O(Q^{2.5})$,
+whose apparent $0.02$ spread was an artifact of the sign error), across the
 benchmarked molecules---independent of molecular topology.  Across the
 library the composed count is, remarkably, \emph{exactly linear} in the
 qubit count,
 \begin{equation}
 N_{\mathrm{Pauli}} = c\,Q,\qquad
-c = 11.10~(\text{main group}),\quad 9.23~(d\text{-block}),
+c = 27.90~(\text{main group}),\quad 30.03~(d\text{-block}),
 \label{eq:linearity}
 \end{equation}
-under the production pair-diagonal rule.  (Under the exact global-$M_L$
-rule the coefficients become $27.9$ and $30.0$; note that the ordering
-reverses---the $d$-block, which is \emph{sparser} under the pair-diagonal
-rule, is in fact \emph{denser} under the exact rule, because higher
-angular momentum carries more m-swap channels to drop.  The
-pair-diagonal $d$-block sparsity is thus an artifact of the
-approximation, not a selection-rule property, and is labeled as such.)
+under the exact global-$M_L$ rule at $n_{\max}=2$.  (The retired
+pair-diagonal rule gave $11.10$ and $9.23$; note that the ordering
+\emph{reverses} --- the $d$-block, which appeared \emph{sparser} under the
+retired rule, is in fact \emph{denser}, because higher angular momentum
+carries more $m$-swap channels for the sign error to drop.  The
+pair-diagonal $d$-block sparsity was an artifact, not a selection-rule
+property.)
 
 \paragraph{Measurement and Trotter cost.}
-Two further metrics govern practical cost.  The number of QWC
-measurement groups---the dominant factor in the measurement overhead of
-variational algorithms---scales as $O(Q^{3.36})$.  The Pauli $1$-norm
-$\lambda = \sum_i |c_i|$, which bounds both Trotter step counts and
-qubitization query complexity, scales as $O(Q^{1.69})$ with
-$R^2 = 0.997$.  This sub-quadratic $1$-norm scaling is the key
+Two further metrics govern practical cost, and the 2026-08-30
+re-measurement separates them sharply.  The number of QWC measurement
+groups---the dominant factor in the measurement overhead of variational
+algorithms---scales as $O(Q^{4.01})$, which is \emph{steeper} than the
+Pauli term exponent ($3.77$) and lies inside the Gaussian
+$O(Q^{4\text{--}5})$ band.  No measurement-group scaling advantage is
+therefore claimed; under the retired pair-diagonal rule this exponent read
+$O(Q^{3.36})$, below the term count, and that reading is withdrawn.  The
+Pauli $1$-norm $\lambda = \sum_i |c_i|$, which bounds both Trotter step
+counts and qubitization query complexity, scales as $O(Q^{1.77})$ with
+$R^2 = 0.9997$ (retired: $O(Q^{1.69})$).  This sub-quadratic $1$-norm
+scaling survives the correction and remains the key
 fault-tolerant-relevant result:\ Trotter circuit depth grows far more
 slowly with system size than the raw term count alone would suggest.
-All Gaussian baselines are the published Pauli
-counts of Trenev et al.~\cite{trenev2025} (Table 5, Appendix B), cross-checked
-against analytic references (Szabo and
-Ostlund for H$_2$; analytical Slater-type orbitals for He).
+The \emph{molecular} Gaussian baselines (LiH, H$_2$O) are the published
+Pauli counts of Trenev et al.~\cite{trenev2025} (Table 5, Appendix B),
+cross-checked against analytic references (Szabo and Ostlund for H$_2$;
+analytical Slater-type orbitals for He).  The 6-31G and cc-pVDZ entries of
+Paper~14's Table~I use synthetically generated integrals and are retained
+for scaling-fit purposes only.
 
 \paragraph{Tier discipline.}
 The scaling exponents are \emph{measured} quantities (log-log fits with
@@ -224,20 +282,24 @@ Qiskit, OpenFermion, and PennyLane.
 \paragraph{Two architectures.}
 The library exposes two composed-molecular architectures with
 complementary strengths.  The \emph{composed} (pseudopotential, PK)
-architecture is the sparser of the two:\ LiH requires $334$ Pauli terms
-at $30$ qubits, with $13\times$ fewer QWC groups than the Gaussian STO-3G
-reference at $12$ qubits (raw baseline, pair-diagonal rule --- the same
-conventions as the Pauli comparison next).  The small-system market-test comparison ``$334$ versus $907$ STO-3G Pauli
-terms'' is near parity once conventions are matched:\ STO-3G's qubit-reduced
-count is $276$ (vs.\ the composed $334$), and under the exact global-$M_L$
-rule LiH re-prices to $838$ ($0.92\times$ the raw $907$).  The broad
-``one-to-three-orders-of-magnitude sparser'' advantage therefore rests on
-the scaling gap and the multi-center block structure, \emph{not} on the
-small-molecule minimal-basis count---which is convention-sensitive and near
-parity.  The \emph{balanced coupled} (PK-free)
+architecture is the sparser of the two:\ LiH requires $\gvq{lih_composed_pauli}{838}$ Pauli terms
+at $30$ qubits, with $4.3\times$ fewer QWC groups ($64$ vs.\ $273$) than the
+Gaussian STO-3G reference at $12$ qubits (raw baseline).  The small-system
+market test is near parity on the raw-vs-raw comparison --- $838$ versus
+STO-3G's $\gvq{lih_sto3g_raw}{907}$ ($1.08\times$ fewer) --- and \emph{unfavourable} against the
+qubit-reduced count ($276$, i.e.\ GeoVac is $3.0\times$ larger).
+(Corrected 2026-08-29; the retired pair-diagonal figures were $334$ Pauli
+and $13\times$ QWC.)  The sparsity advantage spans $0.28\times$ (H$_2$O against minimal-basis
+STO-3G, where GeoVac is \emph{denser}) through $55$--$76\times$ against
+cc-pVDZ to $317\times$ at the most favourable equal-qubit point; the retired
+pair-diagonal rule supported a blanket ``one to three orders of magnitude''
+that survives at neither end.  What advantage there is rests on the scaling
+gap and the multi-center block structure, \emph{not} on the small-molecule
+minimal-basis count---which is near parity.  The \emph{balanced coupled} (PK-free)
 architecture trades sparsity for chemistry:\ it binds LiH with an FCI
 minimum at a computed $R_{\mathrm{eq}}=3.227$~bohr (7.0\% above the
-experimental 3.015~bohr) at $n_{\max}=2$ ($878$ Pauli terms, $30$ qubits);
+experimental 3.015~bohr) at $n_{\max}=2$ ($\gvq{lih_balanced_pauli}{2{,}726}$ Pauli terms, $30$
+qubits; corrected 2026-08-29 from the retired $878$);
 a single-point evaluation at the experimental geometry reaches a $0.20\%$
 energy error at $n_{\max}=3$ when solved exactly (number-projected FCI).
 
@@ -250,9 +312,11 @@ configuration---frozen-core balanced, multi-zeta valence, screened
 cross-center, explicit-core Hartree--Fock---with no interior PES minimum
 at the qubit-Hamiltonian level.  This scope boundary is documented
 empirically, not papered over:\ the framework's value proposition is
-structural sparsity with quantitative truncation-convergence rates
-(Paper~38 state-space GH convergence), not energy-accuracy parity with CCSD(T) on
-second-row systems.
+structural sparsity with a proven state-space Gromov--Hausdorff
+truncation rate (Paper~38) --- a \emph{metric-space} rate, explicitly
+\emph{not} a direct energy-error bound (the operator-to-energy lift
+overshoots by 3--4 orders of magnitude) --- not energy-accuracy parity with
+CCSD(T) on second-row systems.
 
 \paragraph{Frozen cores.}
 Second- and third-row molecules use analytical frozen cores ([Ne], [Ar],
@@ -350,19 +414,32 @@ sparse qubit architecture works, not as a nuclear-structure calculation.
 %% ========================================================================
 
 \paragraph{What is robust.}
-The scaling laws are the load-bearing results and are robust:\ atomic
-$O(Q^{3.15})$, composed $O(Q^{2.5})$ universal, $1$-norm $O(Q^{1.69})$,
-QWC $O(Q^{3.36})$, and the exact linearity
-$N_{\mathrm{Pauli}}=c\,Q$ \eqref{eq:linearity}.  These are unaffected by
-the ERI-rule choice (constant prefactor) and rest on the
-potential-independent angular-sparsity theorem (Paper~22).  The qubit
+What survives the correction is \emph{structure}, not numbers.  The
+exact linearity $N_{\mathrm{Pauli}} = c\,Q$ across molecules at fixed
+basis \eqref{eq:linearity}, the isostructural invariance, the
+$Z$-independence of the ERI count, and the block-diagonal
+selection-rule sparsity all hold under the exact rule, and rest on the
+potential-independent angular-sparsity theorem (Paper~22).  Indeed the
+linearity is \emph{cleaner} after the correction:\ the two-point
+within-molecule exponent is now identical across all six molecules and
+forced rather than fitted.
+
+Every \emph{exponent}, by contrast, moved:\ atomic $3.15 \to 3.8$,
+within-molecule $2.5 \to 3.17$, $1$-norm $1.69 \to 1.774$, QWC
+$3.36 \to \gvq{exp_qwc_3pt}{4.013}$ --- and the QWC exponent moved far enough to overturn its
+own conclusion, since $\gvq{exp_qwc_3pt}{4.013}$ exceeds the Pauli exponent and lies inside
+the Gaussian $O(Q^{4\text{--}5})$ band.  An earlier version of this
+paragraph listed those exponents under ``robust'' while stating two
+sentences later that they had moved.  The qubit
 library is a concrete, exported, reproducible artifact.
 
 \paragraph{What is conditional.}
 The \emph{absolute} sparsity multipliers and small-system market-test
-lines depend on the disclosed pair-diagonal ERI rule and re-price by a
-constant factor under the exact global-$M_L$ rule (LiH to near parity
-with STO-3G).  All Pauli comparisons are at matched qubit count, not
+lines were re-priced on 2026-08-29 when the pair-diagonal ERI restriction
+was found to be a sign error; the re-pricing is basis-dependent, not a
+constant factor, and it leaves composed LiH at near parity with raw
+STO-3G ($838$ vs.\ $\gvq{lih_sto3g_raw}{907}$) and $3.0\times$ larger than the qubit-reduced
+count.  All Pauli comparisons are at matched qubit count, not
 matched accuracy:\ the composed basis carries $5$--$26\%$ classical
 $R_{\mathrm{eq}}$ errors, the chemistry-accuracy scope is row-conditional
 (first-row binds; second-row overattracts), and the nuclear binding
@@ -395,7 +472,8 @@ encodings relevant to qubitization as well, but the framework is not
 positioned as a fault-tolerant-QPE or geometry-optimisation tool, and it
 is not a replacement for production quantum chemistry.  It is a
 structurally sparse, zero-parameter, ecosystem-exported library of qubit
-Hamiltonians with quantitative truncation-convergence rates---a research
+Hamiltonians with a proven state-space Gromov--Hausdorff truncation rate
+(a metric-space rate, not an energy-error bound)---a research
 instrument for the resource-estimation and algorithm-development side of
 quantum simulation.
 

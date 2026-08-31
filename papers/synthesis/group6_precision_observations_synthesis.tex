@@ -6,7 +6,7 @@
 %        -> entropy as projection (27) -> entanglement (26)
 %        -> multi-observable focal-length program (34 SS V.C/V.D)
 
-\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography]{revtex4-2}
+\documentclass[aps,pra,twocolumn,superscriptaddress,longbibliography,nofootinbib]{revtex4-2}
 
 \usepackage{amsmath,amssymb,amsthm,graphicx,xcolor,bm,braket,booktabs}
 \usepackage{hyperref}
@@ -89,9 +89,12 @@ arc collected here is the arc that names the layers and the bridge between
 them.
 
 Layer~1 is the bare combinatorial graph.  Its nodes are
-representation-theoretic labels of compact Lie groups; its Laplacian
-eigenvalues are integers ($n^2-1$ on the Coulomb $S^3$ graph, $N$ on the
-Bargmann--Segal $S^5$ graph); its matrix elements are rational or
+representation-theoretic labels of compact Lie groups; its spectral data
+are integers --- the Casimir eigenvalue $n^2-1$ that labels the Coulomb
+$S^3$ shells (the \emph{continuum} Laplace--Beltrami spectrum the graph
+encodes as labels; the graph Laplacian itself is a different,
+positive-semidefinite operator) and the total quanta $N$ on the
+Bargmann--Segal $S^5$ graph; its matrix elements are rational or
 algebraic over $\mathbb{Q}[\sqrt{2},\sqrt{3},\sqrt{6},\ldots]$ from
 Wigner~$3j$ algebra.  That no $\pi$ appears in Layer~1 is not an
 aspiration but a verified certificate:\ on both the Coulomb $S^3$ Fock
@@ -189,17 +192,19 @@ promotes to odd~$\zeta$, Catalan's~$G$, and $\beta(4)$ at the
 Camporesi--Higuchi spinor lift's vertex selection; and $2\pi\cdot\mathbb{Q}$
 at temporal compactification (Sec.~\ref{sec:time}).  None of these is an
 anonymous transcendental:\ each is pinned to a projection row, which is
-the discipline this group exists to model.  The fine-structure
-combination $1/(4\pi)$ per loop is tagged to the vector-photon promotion;
-the Paper~2 fine-structure combination rule that consumes it remains an
-\textbf{Observation}, never a derivation, and the taxonomy is consistent
+the discipline this group exists to model.  The per-loop
+Hopf-base constant $1/(4\pi)$ is tagged to the vector-photon
+promotion; the Paper~2~\cite{loutey_paper2} combination rule
+$K = \pi(B+F-\Delta)$ is a separate object (it does not consume the per-loop $1/(4\pi)$) and
+remains an \textbf{Observation}, never a derivation, and the taxonomy is consistent
 with that tiering rather than strengthening it.
 
 \paragraph{The engine versus the catalogue.}
 The computational engine behind the transcendental tags is the master
 Mellin engine---the Mellin transform of $\mathrm{Tr}\,(D^k e^{-tD^2})$ at
-$k\in\{0,1,2\}$, whose three domains $M_1/M_2/M_3$ generate the $\pi^{2k}$,
-even-zeta, and odd-zeta/Catalan tiers respectively.  That engine is
+$k\in\{0,1,2\}$, whose three domains $M_1/M_2/M_3$ generate the
+Hopf-measure $\pi$-signatures (e.g.\ $4/\pi$, $1/\pi^2$), the even-zeta/pure-Tate $\pi^{2k}$ tier, and the
+odd-zeta/Catalan tier respectively.  That engine is
 developed in Paper~18~\S III.7 (Group~3, the foundations trunk); Paper~34
 is the \emph{catalogue} that consumes its output and assigns each tier to
 a projection.  The synthesis-level reading is that the transcendental
@@ -308,8 +313,8 @@ claim, its mechanism, and its tier are withdrawn} (Papers~24 and~27,
 retracted 2026-08-22).  The Moshinsky--Talmi \emph{bracket} conserves
 total quanta, but the \emph{matrix element} of a central $V(r_{12})$
 does not:\ it couples different relative-$n$ (for the Minnesota singlet
-the off-diagonal $\langle n{=}0|V|n{=}1\rangle = +17.2$~MeV is
-$\sim\!20\times$ the $-0.81$~MeV diagonal).  Corrected, the entropy is
+the off-diagonal $\langle n{=}0|V|n{=}1\rangle = +17.3$~MeV is
+$\sim\!31\times$ the $-0.55$~MeV diagonal).  Corrected, the entropy is
 small but \emph{nonzero} and \emph{grows} with basis size
 ($0.0671/0.0716/0.0833$ nats at $N_{\max}=2/3/4$), the ground state is
 \emph{not} a single Slater determinant, and
@@ -329,7 +334,8 @@ combinatorial graph is entropy-blind; entropy is the price of projecting
 onto the metric continuum.  A measured refinement accompanies the
 placement:\ Coulomb-lattice block entropy obeys a universal two-variable
 scaling $S_B = A\,(\tilde w_B/\delta_B)^\gamma$ whose local exponent
-Richardson-extrapolates to $\gamma_\infty\approx1.96$, slightly below the
+extrapolates to $\gamma_\infty\approx1.93$--$1.96$ (the precise value is
+extrapolation-order dependent), in every case below the
 non-degenerate second-order Rayleigh--Schr\"odinger value of~$2$---a
 MEASURED extrapolation, reported with its residual gap attributed to
 multi-shell aggregation, not claimed as exactly~$2$.
@@ -358,25 +364,25 @@ isolates the entanglement in $V_{ee}$ alone.
 \paragraph{Basis-intrinsic sparsity.}
 Among orbital bases for spherically symmetric systems, the
 angular-momentum eigenbasis is an \emph{isolated} point of ERI sparsity:\
-any unitary rotation of orbital indices, however small, fills the ERI
-tensor from $42\%$ to $99\%$ density in a step-function transition at the
+Any generic (angular-mixing) unitary rotation of orbital indices, however small, fills the ERI
+tensor from $42\%$ to $100\%$ density in a rapid transition at the
 identity, and the nonzero ERI count is $Z$-independent (sparsity is
-purely geometric).  This MEASURED step-function is the entanglement-side
+purely geometric).  This MEASURED transition is the entanglement-side
 counterpart of the potential-independent angular-sparsity theorem
 (Paper~22, Group~3) and the structural root of the $O(Q^{2.5})$ composed
 Pauli scaling reported in the quantum-computing arc (Group~4):\ the same
 basis that decouples one-body energy from two-body entanglement is the
 one that produces sparse ERIs.
 
-\paragraph{Network topology and the factorization it justifies.}
+\paragraph{Network topology and core--valence decoupling.}
 Orbital mutual-information maps exhibit a hub-migration pattern
 ($1s\to2s\to2p$) tracking the partially filled shell across the first
 row, and core--valence mutual information falls to $\approx 2\times10^{-3}$
-by $Z=4$ and below $10^{-3}$ for $Z\geq5$.
-The latter is the quantitative justification for the composed
-fiber-bundle factorization used in the molecular framework:\ per-block
-entanglement is $R$-independent, with core/bond entropy ratios of
-$\sim50\times$ at matched qubit count.  Paper~26 states its limitations
+by $Z=4$ and at the $\sim\!10^{-15}$ noise floor for $Z\geq5$ (basis saturation at $n_{\max}=2$).
+The latter is consistent with the composed fiber-bundle factorization
+used in the molecular framework, but does not establish it: at
+$n_{\max}=2$ the core is exactly closed, so the core-valence mutual
+information vanishes by construction (Paper~26 \S V scope note).  Paper~26 states its limitations
 plainly---$n_{\max}=2$ for the first-row network maps, $R$-independence
 is a property of the composed architecture (not of the true molecular
 ground state, whose entanglement diverges at dissociation), and the
@@ -398,14 +404,16 @@ muonic-deuterium Lamb shift---Paper~34 hosts \emph{Roothaan autopsies}:\
 decomposition tables that present each measured observable as a sum of
 focal-length-tagged components, each carrying its explicit projection
 chain and a framework-native (FN) versus Layer-2-input (L2) status.  The
-hydrogen $1S$ Lamb-shift autopsy is representative:\ the framework-native
+hydrogen $2S_{1/2}$--$2P_{1/2}$ Lamb-shift autopsy is representative:\ the framework-native
 components (self-energy via Fock\,$\circ$\,Sturmian\,$\circ$\,spectral
 action\,$\circ$\,Drake--Swainson, Uehling vacuum polarization via
 Fock\,$\circ$\,spectral action, $\ldots$) sum to $+1057.19$~MHz, $99.9\%$
 of the $1057.845(9)$~MHz measurement, with the Layer-2 inputs
-(multi-loop QED, finite-size, recoil~NLO) summing to a near-cancellation
-specific to this observable.  These are MEASURED decompositions whose
-residuals sit within the cited compilation precision; the autopsy makes
+(multi-loop QED, finite-size, recoil~NLO) netting to $-1.06$~MHz ---
+they do not cancel; an earlier near-cancellation reading rested on a
+retired finite-size entry and is withdrawn in Paper~34.  These are MEASURED decompositions (the H Lamb autopsy closes to
+$+1.72$~MHz of the measurement; the LS-6a one-loop residual of
+$-5.65$~MHz is $\sim 70\%$ itemized); the autopsy makes
 the projection-chain dictionary's reach visible at the observable level.
 
 \paragraph{Convention exposures versus kernel gaps.}
@@ -413,13 +421,15 @@ The program's signature finding-type is the \emph{literature convention
 exposure}:\ a multi-observable global fit surfaces itemization
 differences between independent precision compilations
 (Eides, Karshenboim, Krauth, Pachucki--Yerokhin, Antognini,
-Friar--Payne) at the sub-percent level the framework operates at.  Six
-are catalogued, including:\ the $\sim0.01\%$-of-$\nu_F$ recoil/multi-loop
+Friar--Payne) at the sub-percent level the framework operates at.  Nine
+exposures are catalogued (the later entries include architecture-class
+exposures beyond the convention class), including:\ the $\sim0.01\%$-of-$\nu_F$ recoil/multi-loop
 itemization difference that propagates to $\sim25$~mfm in an extracted
 Zemach radius; the Friar-moment convention difference between an RMS
 radius $\langle r^2\rangle^{1/2}$ and a first moment $\langle r\rangle$
-(a Gaussian-profile factor $\langle r^2\rangle/\langle r\rangle^2=4/\pi
-\approx1.27$, i.e.\ $+12.7\%$ on the Friar moment); and the resolution of
+(a three-dimensional Gaussian-profile factor
+$\langle r^2\rangle/\langle r\rangle^2=3\pi/8 \approx 1.178$, i.e.\
+$+17.7\%$ on the Friar moment vs the Eides closed form); and the resolution of
 a $3\sigma$ helium fine-structure disagreement traced to a numerically
 incorrect relativistic Bethe-log itemization in an older compilation.
 The complementary finding-type is the \emph{framework kernel gap}:\
@@ -434,8 +444,8 @@ A falsifiable structural PREDICTION emerges from re-tagging the matches
 catalogue by the number of Layer-2 inputs a chain consumes.  An earlier
 form scaled the residual with projection \emph{depth}; the May~2026
 synthesis pass falsified that form on the catalogue itself (depth-3
-chains exist at residual~$0$ and at $+286$~ppm; depth-4 chains at
-$+2$~ppm and at $+0.534\%$).  The replacement is the \emph{Layer-2-presence
+chains exist at residual~$0$ and at $-211$~ppm; depth-4 chains at
+$+2$~ppm and at $-0.534\%$).  The replacement is the \emph{Layer-2-presence
 bound}:\ the residual of a catalogue row is bounded above by the larger
 of the framework's basis-quality residual at zero Layer-2 inputs and the
 largest single Layer-2 input consumed,
@@ -448,7 +458,10 @@ hydrogen static polarizability $\tfrac92 a_0^3$, $S^3$ Casimir $1/240$) to
 basis-quality ceilings ($-0.534\%$ for the one-loop Lamb-shift closure);
 one-input chains tighten to tens of ppm or below; multi-input chains sit
 in the multi-focal-wall regime, dominated by the largest single input.
-This is a PREDICTION, consistent with the present catalogue and
+This is a PREDICTION, consistent with the present catalogue with one
+known exception --- the corrected D 1S HFS row, whose $-210.9$~ppm
+residual against a single $r_Z(D)$ Layer-2 input is an open case rather
+than support (Paper~34 \S V.C) --- and
 falsifiable by future calculation, not a phenomenological fit.
 
 %% ========================================================================
@@ -475,7 +488,7 @@ conventions, and the program's value is precisely that it surfaces
 where those conventions and the framework's leading-order kernels are too
 coarse---a diagnostic instrument for precision systematics, not a
 replacement for the precision compilations.  The block-entropy exponent
-$\gamma_\infty\approx1.96$ is a MEASURED extrapolation, not the exact
+$\gamma_\infty\approx1.93$--$1.96$ is a MEASURED extrapolation, not the exact
 second-order value~$2$.  The entropy area-law and the $R$-independence of
 composed block entanglement are properties of the construction, stated
 with their limitations, not physical statements about molecular
@@ -514,6 +527,11 @@ J.~Loutey,
 ``Angular Momentum as Information Geometry:\ Isotropic Packing and the
 Universal Angular Cross-Section,''
 GeoVac Paper~0 (2026).
+
+\bibitem{loutey_paper2}
+J.~Loutey, \emph{The Fine-Structure Constant as a Spectral
+Coincidence on $S^3$} (GeoVac Paper~2, observation status), Zenodo
+(2026).
 
 \bibitem{loutey_paper7}
 J.~Loutey,

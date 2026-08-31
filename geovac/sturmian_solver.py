@@ -212,8 +212,13 @@ def _wigner3j(j1: int, j2: int, j3: int,
 
 
 def _ck_coefficient(la: int, ma: int, lc: int, mc: int, k: int) -> float:
-    """Gaunt angular coupling coefficient c^k(l,m,l',m')."""
-    q = mc - ma
+    """Gaunt angular coupling coefficient c^k(l,m,l',m').
+
+    q = ma - mc: the 3j bottom row must sum to zero, (-ma) + q + mc = 0.
+    (Corrected 2026-08-29; the shipped q = mc - ma dropped every m-changing
+    multipole.  See debug/sprint_eri_evaluator_defects_memo.md.)
+    """
+    q = ma - mc
     pre = ((-1) ** ma * np.sqrt((2 * la + 1) * (2 * lc + 1)))
     w1 = _wigner3j(la, k, lc, 0, 0, 0)
     if abs(w1) < 1e-15:
@@ -358,7 +363,8 @@ class SturmianCI:
         for (a, c), ck_ac_list in ac_k_map.items():
             na, la, ma = states[a]
             nc, lc, mc = states[c]
-            for (b, d), ck_bd_list in ac_k_map.items():
+            # Condon-Shortley c^k(d,b) (corrected 2026-08-29)
+            for (d, b), ck_bd_list in ac_k_map.items():
                 nb, lb, mb = states[b]
                 nd, ld, md = states[d]
 
@@ -767,7 +773,8 @@ class StandardFCI:
         for (a, c), ck_ac_list in ac_k_map.items():
             na, la, ma = states[a]
             nc, lc, mc = states[c]
-            for (b, d), ck_bd_list in ac_k_map.items():
+            # Condon-Shortley c^k(d,b) (corrected 2026-08-29)
+            for (d, b), ck_bd_list in ac_k_map.items():
                 nb, lb, mb = states[b]
                 nd, ld, md = states[d]
                 if ma + mb != mc + md:
@@ -919,7 +926,8 @@ class GeneralizedSturmianCI:
         # Count angular ERI nonzeros (for sparsity comparison with BU-1)
         eri_nonzero: set = set()
         for (a, c), ck_ac in self._ac_k_map.items():
-            for (b, d), ck_bd in self._ac_k_map.items():
+            # Condon-Shortley c^k(d,b) (corrected 2026-08-29)
+            for (d, b), ck_bd in self._ac_k_map.items():
                 if states[a][2] + states[b][2] != states[c][2] + states[d][2]:
                     continue
                 for k1, _ in ck_ac:

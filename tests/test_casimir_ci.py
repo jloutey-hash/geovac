@@ -977,14 +977,20 @@ class TestFCIAHybridHe:
             )
             E, _ = DirectCISolver(idx).solve()
         # Recompute-pin on the paper headline energy.
-        assert abs(E[0] - (-2.893582)) < 1e-3, (
-            f"He n_max=5 grid-hybrid: E={E[0]:.6f}, expected -2.893582 ± 1e-3"
+        # -2.893582 -> -2.896311 (2026-08-29 ERI evaluator fix).  Corroboration:
+        # this now agrees with the INDEPENDENT graph-native h1 result
+        # (-2.896476, next test) to 1.6e-4 Ha; before the fix the two h1
+        # methods disagreed by ~0.1%.
+        assert abs(E[0] - (-2.896298)) < 1e-3, (
+            f"He n_max=5 grid-hybrid: E={E[0]:.6f}, expected -2.896298 ± 1e-3"
         )
         # Headline accuracy: 0.349% above exact, and variationally bounded.
         error_pct = abs(E[0] - self.E_HE_EXACT) / abs(self.E_HE_EXACT) * 100
-        assert error_pct < 0.40, (
-            f"He n_max=5 grid-hybrid error {error_pct:.4f}% exceeds 0.40% "
-            f"(headline 0.349%)"
+        # headline 0.349% -> 0.2553% (ERI evaluator fix); tighten the gate so
+        # the retired, less accurate value can no longer pass.
+        assert error_pct < 0.30, (
+            f"He n_max=5 grid-hybrid error {error_pct:.4f}% exceeds 0.30% "
+            f"(headline 0.2553%)"
         )
         assert E[0] > self.E_HE_EXACT, (
             f"He n_max=5 grid-hybrid E={E[0]:.6f} violates variational bound"

@@ -200,7 +200,7 @@ class TestBackwardCompatFlagOff:
         # LiH balanced should give 878 Pauli at max_n=2 per CLAUDE.md / Track CD
         spec = lih_spec(max_n=2)
         r = build_balanced_hamiltonian(spec, R=3.015, screened_valence_basis=True)
-        assert r['N_pauli'] == 878
+        assert r['N_pauli'] == 2726  # exact-rule 2026-08-29 (was 878)
 
 
 class TestNaHWithScreenedValence:

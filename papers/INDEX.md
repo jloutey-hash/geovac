@@ -113,7 +113,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
 | 26 `paper_26_entanglement.tex` | ACTIVE | Energy–entanglement decoupling; basis-intrinsic sparsity |
-| 27 `paper_27_entropy_projection.tex` | **KEYSTONE** | Entropy as projection artifact; HO zero-entropy rigidity |
+| 27 `paper_27_entropy_projection.tex` | **KEYSTONE** | Entropy as projection artifact; EP-2b HO zero-entropy rigidity RETRACTED v5.0.0; block-entropy scaling |
 | 34 `paper_34_projection_taxonomy.tex` | ACTIVE | **Living catalogue**: 28 named projections — where physics enters the graph |
 | 35 `paper_35_time_as_projection.tex` | ACTIVE | π enters exactly at temporal compactification (Matsubara); falsifiable prediction |
 

@@ -36,6 +36,277 @@ GROUP4_FILES = [
 
 REGISTRY = [
     {
+        "id": "composed-lih-market-test-retired",
+        "scope": "all",
+        "severity": "fail",
+        "canonical_note": "Retired composed-LiH market-test figures and the "
+                          "retired 'constant factor' framing.  CANONICAL "
+                          "(exact rule): LiH composed 838 Pauli @ Q30 = near "
+                          "parity with raw STO-3G 907, and 3.0x MORE than the "
+                          "qubit-reduced 276; 1-norm 1.007x (34.5 vs 34.3 Ha). "
+                          "RETIRED and now WRONG as live values: '334 Pauli' "
+                          "(or 333) as the LiH composed count, the '13x fewer "
+                          "QWC' market test, and the 'constant 2.51x "
+                          "main-group / 3.25x d-block, scaling robust' "
+                          "quantification -- the latter was a SINGLE-POINT "
+                          "ARTIFACT: the re-pricing is not a constant factor "
+                          "and every exponent moved.  See "
+                          "debug/sprint_eri_evaluator_defects_memo.md + "
+                          "debug/qa/delta4_run_notes.md.",
+        "pattern": r"33[34]\s*~?\\?(Pauli|terms)|"
+                   r"(constant|factor of)\s*\$?2\.51|"
+                   r"2\.51\s*\\?times[^.]{0,40}(scaling robust|3\.25)|"
+                   r"13\s*\\?times\s*fewer\s*QWC",
+        "require_nearby": r"Pauli|LiH|composed|market|re-pric|scaling|QWC",
+        "exempt_if_nearby": r"retired|corrected|Corrected 20|vintage|artifact|"
+                            r"rule gave|previously|earlier|withdrawn|"
+                            r"superseded|dissolve|DISSOLVED|former",
+        "files": [
+            "papers/group4_quantum_computing/paper_14_qubit_encoding.tex",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "docs/qa/group4.done.md",
+        ],
+    },
+    {
+        "id": "composed-retired-scaling-and-counts",
+        "scope": "all",
+        "severity": "fail",
+        "canonical_note": "Second-locus forms of the retired pair-diagonal "
+                          "rule that the composed-rule-a entry does not "
+                          "match.  CANONICAL (exact rule, measured "
+                          "2026-08-29/30): s+p block at n_max=2 = 279 "
+                          "non-identity Pauli from 107 ERIs, 27.90 per qubit; "
+                          "multi-center rows 1,953 (Q=70) / 2,790 (Q=100) / "
+                          "1,395 (Q=50); term exponent Q^3.8; P20 "
+                          "within-molecule two-point exponent 2.816 EXACTLY "
+                          "for all six molecules (= 1 + log_5(18.6), forced by "
+                          "exact linearity in Q), Q=100 Gaussian ratio ~370x.  "
+                          "RETIRED and now WRONG as live values: 1,111 "
+                          "multi-center rows, 111 Pauli per block, 65 ERIs "
+                          "per block, 11.1 per qubit, Q^3.15, 51x-1712x "
+                          "(any spacing), per-molecule 2.18-2.24, mean "
+                          "2.21 +- 0.02, and the 6,000x extrapolation.  See "
+                          "debug/qa/delta4_run_notes.md.",
+        "pattern": r"1\{,\}111|1712\s*\\?times|Q\^\{?3\.15\}?|"
+                   r"2\.21\s*\$?\\pm\$?\s*0\.02|6\{,\}000\s*\\?times|"
+                   r"exponent\s+of\s*~?\$?\\sim\s*2\.2\$?",
+        "require_nearby": r"Pauli|scaling|exponent|composed|GeoVac|term|ratio",
+        "exempt_if_nearby": r"retired|corrected|Corrected 20|vintage|artifact|"
+                            r"rule gave|previously|earlier|withdrawn|"
+                            r"pair-diagonal",
+        "files": [
+            "papers/group4_quantum_computing/paper_14_qubit_encoding.tex",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
+            "papers/group6_precision_observations/paper_26_entanglement.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "docs/qa/group4.done.md",
+        ],
+    },
+    {
+        "id": "composed-rule-a-retired-figures",
+        "scope": "group4",
+        "severity": "fail",
+        "canonical_note": "Composed/atomic QC resource figures, CORRECTED "
+                          "2026-08-29 (exact global-M_L rule; the pair-diagonal "
+                          "'rule A' was a wrong-sign-q bug, CF-1 DISSOLVED).  "
+                          "CANONICAL: N_Pauli = 27.90 x Q main-group / 30.03 x Q "
+                          "d-block; within-molecule exponent 3.17 universal "
+                          "(c(1)=3/2, c(2)=279/10, c(3)=7089/14; local slope "
+                          "~3.8 at n_max=4); LiH composed 838 @ Q30, 1-norm "
+                          "34.5 Ha; equal-qubit H2O 54x/297x/317x; cc-pVDZ "
+                          "76x.  RETIRED and now WRONG as live values: "
+                          "11.10 x Q, 9.23 d-block, O(Q^2.5) / Q^2.50-2.52 "
+                          "exponents, 334/333 LiH, 51x-1712x, 190x cc-pVDZ, "
+                          "32.6 Ha 1-norm, and the 'constant factor 2.51x/"
+                          "3.25x scaling-unchanged' A->B claim.  See "
+                          "debug/sprint_eri_evaluator_defects_memo.md; backed "
+                          "by tests/test_paper14_eri_rule.py + "
+                          "tests/test_paper20_balanced_lambda.py.",
+        "pattern": r"11\.10\s*\\?times\s*Q|N_\{?\\?mathrm\{Pauli\}\}?\s*=\s*11\.10|"
+                   r"O\(Q\^\{?2\.5\}?\)|Q\^\{2\.50\}|1\{,\}712\\?\$?\\times|"
+                   r"190\$?\\times|coefficient\s+(of\s+)?11\.10|Pauli/\$?Q\$?\s*=\s*9\.23",
+        "require_nearby": r"Pauli|scaling|coefficient|linear|composed|exponent",
+        "exempt_if_nearby": r"retired|corrected|was measured|vintage|inverted|"
+                            r"artifact|dissolve|earlier|Corrected 2026-08-29|"
+                            r"pair-diagonal rule gave|rule gave|gave 11\.10|"
+                            r"whose apparent",
+        "files": [
+            "papers/group4_quantum_computing/paper_14_qubit_encoding.tex",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "docs/qa/group4.done.md",
+        ],
+    },
+    {
+        "id": "p26-eri-sparsity-density",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 26 Sec III basis-intrinsic ERI sparsity, "
+                          "CORRECTED 2026-08-29.  The retired counts were taken "
+                          "from an evaluator that omitted the Coulomb selection "
+                          "rule m_a + m_b = m_c + m_d, so 59.6% of them were "
+                          "physically zero.  CANONICAL: n_max=2 full-tensor "
+                          "107/625 = 17.1%; canonical-unique 41/225 = 18.2%; "
+                          "n_max=4 full-tensor 57,700/810,000 = 7.12%; "
+                          "canonical-unique 15,293/216,225 = 7.07% "
+                          "(Z-independent at Z = 2, 3, 10).  The density "
+                          "IMPROVES with basis size (~M^-0.49).  RETIRED and now "
+                          "WRONG: 265/625, 42.4%, 318,720, 39.3%, 79,465, 36.8%, "
+                          "and the 'essentially flat / does not degrade with "
+                          "basis size' sub-claim, which REVERSES.  See "
+                          "debug/sprint_eri_evaluator_defects_memo.md; backed by "
+                          "tests/test_paper26_entanglement.py.",
+        "pattern": r"42\.4\\?%|265\s*/\s*625|265 nonzero|318\{,\}720|318720|"
+                   r"79\{,\}465|79465|39\.3\\?%|36\.8\\?%",
+        "require_nearby": r"ERI|sparsit|densit|nonzero|tensor",
+        "exempt_if_nearby": r"retired|corrected|withdrawn|previously|earlier version|"
+                            r"now wrong|Corrected 2026-08-29",
+        "files": [
+            "papers/group6_precision_observations/paper_26_entanglement.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+            "docs/qa/group6.done.md",
+        ],
+    },
+    {
+        "id": "p34-d-polarizability-sourced",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Deuteron 1S HFS nuclear structure, re-sourced 2026-08-29 "
+                          "against Bonilla et al. arXiv:2508.18776 (electronic-D TPE). "
+                          "CANONICAL: total TPE 44.5(1.1) kHz = +135.9 ppm of the "
+                          "splitting; polarizability channel +110.16 kHz = +336.5 ppm; "
+                          "all elastic-class pieces -200.6 ppm; a chain consuming the "
+                          "total lands at +23.0 ppm (cf. H 21cm +18.4). RETIRED and now "
+                          "WRONG: '+44 ppm deuteron polarizability' (a kHz-read-as-ppm "
+                          "unit slip of the TOTAL) and the '~+200 ppm' polarizability "
+                          "entry of the withdrawn PY-style budget. Backed by "
+                          "tests/test_paper34_autopsy_baselines.py "
+                          "(test_paper34_d_hfs_tpe_decomposition_and_sign_flip, "
+                          "..._channel_target_and_h_parallel, ..._unit_slip_guard).",
+        "pattern": r"\$\+44\$~?\s?ppm|\+44~ppm",
+        "require_nearby": r"polariz|deuteron|QCD-internal",
+        "exempt_if_nearby": r"retired|corrected|withdrawn|unit slip|previously|earlier version",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p27-ep2b-commutator-column",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 27 tab:ep2b commutator column (and Paper 24 copy): "
+                          "CANONICAL 0.74 / 0.63 / 0.67 at N_max = 2/3/4.  RETIRED/WRONG: "
+                          "0.47 (a cert-2 digit transposition that the S-column-only family "
+                          "missed).  Backed by the per-N_max pins in "
+                          "tests/test_paper24_ho_entropy.py + tests/test_paper27_entropy.py.",
+        "pattern": r"\b0\.47\b",
+        "require_nearby": r"commutator|N_\{?\\?max|H_\{?HO|rel_norm|ep2b",
+        "exempt_if_nearby": r"retired|corrected|transposition|previously|withdrawn",
+        "files": [
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p27-minnesota-contrast",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Minnesota relative-frame contrast (retraction record): CANONICAL "
+                          "<00|V|10> = +17.3 MeV vs diagonal <00|V|00> = -0.55 MeV at S=0, b=1 "
+                          "(ratio ~31x).  RETIRED/WRONG: +17.2 / -0.81 / ~20x (reproduced under "
+                          "no convention of the production code; PM-adjudicated 2026-08-29).",
+        "pattern": r"(-0\.81\$?~?MeV|\+17\.2\$?~?MeV|0,0 \\lvert V \\rvert 0,0 \\rangle = -0\.81)",
+        "require_nearby": r"MeV|Minnesota|diagonal|n_\{?\\?mathrm\{rel",
+        "exempt_if_nearby": r"corrected|earlier version|retired|withdrawn",
+        "files": [
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p34-li7-hfs-corrected",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 34 Li-7 2S HFS autopsy, corrected 2026-08-28. The Track-5 Bohr-Fermi convention gives correct x 2*(m_p/m_N); at Li-7 that is 0.287204, so the baseline was low by 3.4818x. CANONICAL: baseline 288.913 MHz, final 289.13, residual -514.4 MHz = -64.0%, cliff factor 2.78x, Z_eff^effective 1.80, SCF enhancement ~2.8x. RETIRED and now WRONG: 82.977, 83.04, -720.5, -89.7%, 9.7x cliff, Z_eff 2.73, ~8x enhancement (8x is excluded by experiment, which caps it at 2.78x), and the Z_eff-scan values 82.98 / 97.58 / 1070.80 (now 288.91 / 339.75 / 3728.37). Backed by tests/test_paper34_autopsy_baselines.py.",
+        "pattern": r"\b(82\.977|83\.04|720\.5|89\.7\\?%|9\.7\\times|1070\.80|97\.58)\b",
+        "require_nearby": r"Li-?7|lithium|\\^7|cliff|Z_\\text\{eff\}|hyperfine|HFS",
+        "exempt_if_nearby": r"retired|RETIRED|corrected|previously|withdrawn|superseded|was\\b|Track-5 convention",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p34-alkali-cliff-corrected",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 34 alkali cliff sequence (tab:alkali_cliff_sequence), corrected 2026-08-28. The driver used m_e/m_N where the nuclear magneton requires m_e/m_p, suppressing every entry by m_N/m_p. CANONICAL A_fw: 144.6 / 219.8 / 10.5 / 23.5 / 36.5 MHz for Li/Na/K/Rb/Cs; cliffs -64.0 / -75.2 / -95.5 / -97.7 / -98.4%; density ratios 2.8 / 4.0 / 22.0 / 43.1 / 63.0.  The growth is NOT a power law in Z (2026-08-29 diagnosis): the closed form is (Z/Z_eff^3)(n/nu)^3 F_rel, reproducing all five to <=10%, while a fitted ~Z^1.2 misses Na by 126%; the fitted slope 1.16 survives only as a data pin discriminating the retired ~Z^2.5. RETIRED and now WRONG: 21.0 / 9.6 / 0.3 (x3) MHz, the -94.8 / -98.9 / -99.9 / -100.0% cliffs, the 19 / 92 / 851 / 3635 / 8306 ratios, the ~Z^2.5 growth, and the 'scales inversely with Z' reading (that compared bare-hydrogenic Li against FrozenCore Cs; like-for-like the cliff deepens monotonically).",
+        "pattern": r"(8\{?,?\}?306|3\{?,?\}?635|851\\times|Z\^\{2\.5\}|41\.5|0\.665)",
+        "require_nearby": r"alkali|cliff|Cs|Rb|contact|enhancement|Z_\\text\{eff\}",
+        "exempt_if_nearby": r"retired|RETIRED|corrected|previously|withdrawn|superseded",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+        ],
+    },
+    {
+        "id": "p34-lamb-fns-2s",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 34 H 2S-2P Lamb autopsy FNS row, corrected 2026-08-28. The printed +1.18 MHz is the 1S finite-size shift (r_p ~ 0.868 fm) in an n=2 table; the 2S value is +0.138 MHz at r_p = 0.8409 fm (n^3 = 8 smaller). Confirmed by the paper's own He+ autopsy, whose Lamb_FNS ratio 63.599 implies 8.7913/63.599 = 0.13823. CANONICAL: FNS +0.138, sum 1056.13, residual +1.72, Layer-2 net -1.06 MHz. RETIRED and now WRONG: +1.18, 1057.17, +0.68, and the -0.02 MHz 'empirical near-cancellation' reading, which is WITHDRAWN.",
+        "pattern": r"(1057\.17|near-cancellation)",
+        "require_nearby": r"Lamb|FNS|Layer-2 net|autopsy|sum",
+        "exempt_if_nearby": r"retired|RETIRED|corrected|previously|withdrawn|superseded|was\\b|no longer",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+        ],
+    },
+    {
+        "id": "p27-ep2b-entropy-nmax2",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL S_full = 0.0671 / 0.0716 / 0.0833 nats at N_max = 2 / 3 / 4, with E_full = 21.6538 / 21.6279 / 21.5442 MeV and commutator 0.74 / 0.63 / 0.67. RETIRED and now WRONG: S = 0 (identically zero) and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
+        "capture": r"21.6538\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
+        "canonical": "0.0671",
+        "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|previously|retired|superseded|artifact|N_tot",
+        "files": [
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p27-ep2b-entropy-nmax3",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL S_full = 0.0671 / 0.0716 / 0.0833 nats at N_max = 2 / 3 / 4, with E_full = 21.6538 / 21.6279 / 21.5442 MeV and commutator 0.74 / 0.63 / 0.67. RETIRED and now WRONG: S = 0 (identically zero) and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
+        "capture": r"21.6279\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
+        "canonical": "0.0716",
+        "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|previously|retired|superseded|artifact|N_tot",
+        "files": [
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p27-ep2b-entropy-nmax4",
+        "scope": "group6",
+        "severity": "fail",
+        "canonical_note": "Paper 27 tab:ep2b corrected entropies, canonical after the v5.0.0 retraction (the moshinsky N_tot guard). CANONICAL S_full = 0.0671 / 0.0716 / 0.0833 nats at N_max = 2 / 3 / 4, with E_full = 21.6538 / 21.6279 / 21.5442 MeV and commutator 0.74 / 0.63 / 0.67. RETIRED and now WRONG: S = 0 (identically zero) and any other value in these rows. Backed by tests/test_paper27_entropy.py (expected dict) and tests/test_paper24_ho_entropy.py. Added 2026-08-28 after the group6 FULL run found the family MISSING despite the maintenance rule: the retraction corrected these numbers and C16 guards only the retraction phrases, so a numeric drift in the tab:ep2b row passed both gates.",
+        "capture": r"21.5442\s*&(?:\s*[\d.]+\s*&)*?\s*(0\.0\d+)",
+        "canonical": "0.0833",
+        "exempt_if_nearby": r"retracted|RETRACTED|withdrawn|corrected|previously|retired|superseded|artifact|N_tot",
+        "files": [
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+    },
+    {
         "id": "p23-nuclear-resource-counts",
         "scope": "group3 group4",
         "severity": "fail",

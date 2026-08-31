@@ -184,9 +184,19 @@ def _wigner3j(j1: int, j2: int, j3: int,
 def _ck_coefficient(la: int, ma: int, lc: int, mc: int, k: int) -> float:
     """
     c^k(l,m,l',m') = (-1)^m sqrt((2l+1)(2l'+1)) * (l k l'; 0 0 0) * (l k l'; -m q m')
-    where q = mc - ma.
+    where q = ma - mc.
+
+    The sign of q matters: the 3j bottom row must sum to zero,
+    (-ma) + q + mc = 0.  Until 2026-08-29 this used q = mc - ma, which makes
+    the 3j vanish identically unless ma == mc -- silently dropping every
+    m-changing multipole (88 of 126 nonzero c^k at l<=2).  That sign error
+    was the entire content of the "pair-diagonal rule A" convention (CF-1).
+    Corrected to the exact global-M_L Gaunt rule by PI direction; re-pricing:
+    within-molecule Pauli exponent 2.54 -> 3.17, cross-molecule linearity in
+    Q survives with coefficient 11.1 -> 27.9.  See
+    debug/sprint_eri_evaluator_defects_memo.md.
     """
-    q = mc - ma
+    q = ma - mc
     pre = ((-1) ** ma * np.sqrt((2 * la + 1) * (2 * lc + 1)))
     w1 = _wigner3j(la, k, lc, 0, 0, 0)
     if abs(w1) < 1e-15:
@@ -370,12 +380,17 @@ def _build_eri_block(
     for (a, c), ck_ac_list in ac_k_map.items():
         na, la, ma = states[a]
         nc, lc, mc = states[c]
-        for (b, d), ck_bd_list in ac_k_map.items():
+        for (d, b), ck_db_list in ac_k_map.items():
             nb, lb, mb = states[b]
             nd, ld, md = states[d]
 
             if ma + mb != mc + md:
                 continue
+
+            # Condon-Shortley second factor is c^k(d,b), NOT c^k(b,d)
+            # (corrected 2026-08-29; the reversed order is a sign error on
+            # the m-changing terms -- same support, different values).
+            ck_bd_list = ck_db_list
 
             val = 0.0
             for k_ac, c_ac in ck_ac_list:
@@ -1551,9 +1566,9 @@ def estimate_cross_center_eri_count(
             for k in range(abs(la - lc), la + lc + 1):
                 if (la + lc + k) % 2 != 0:
                     continue
-                # Check 3j m-selection: -ma + q + mc = 0 where q = mc - ma
-                # This is always satisfied by definition of q
-                # But need |q| <= k
+                # Only |q| <= k matters here (the sign of q is irrelevant
+                # to the |q| <= k test, so this line was NOT part of the
+                # 2026-08-29 wrong-sign-q fix)
                 q_ac = mc - ma
                 if abs(q_ac) <= k:
                     k_values_ac.append(k)

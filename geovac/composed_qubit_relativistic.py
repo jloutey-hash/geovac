@@ -294,7 +294,12 @@ def _build_spinor_eri_block(
     for (a, c), acs in ac_Xk.items():
         la = spinor_labels[a]
         lc = spinor_labels[c]
-        for (b, d), bds in ac_Xk.items():
+        # Condon-Shortley / Dyall: the second angular factor is
+        # X_k(d,b), NOT X_k(b,d).  The dict is keyed (bra, ket), so
+        # binding it as (d, b) selects the right factor.  Corrected
+        # 2026-08-30 against a Clebsch-Gordan rotation of the verified
+        # scalar tensor; see tests/test_paper14_spinor_eri_ordering.py.
+        for (d, b), bds in ac_Xk.items():
             lb = spinor_labels[b]
             ld = spinor_labels[d]
             # Global m-conservation

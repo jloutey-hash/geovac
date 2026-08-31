@@ -1,0 +1,28 @@
+
+=== Bargmann-Segal HO, N_max=2 ===
+  n_spatial = 10, n_configs = 15
+  E_full = 21.6538 MeV   E_kin = 30.0000 MeV
+  S_full = 6.7125e-02 nats  S_kin  = 0.0000e+00 nats
+  V_diag_fraction (H_kin eigenbasis) = 0.8571
+  rel [H_kin,V]/H_kin = 7.3871e-01
+  hottest diag : {'pair': '((0, 0, 0),(0, 0, 0))', 'Vii': -7.814640167713634}
+  concentration: 0.1157
+  wall = 1.9 s
+
+=== Bargmann-Segal HO, N_max=3 ===
+  n_spatial = 20, n_configs = 42
+  E_full = 21.6279 MeV   E_kin = 30.0000 MeV
+  S_full = 7.1590e-02 nats  S_kin  = 0.0000e+00 nats
+  V_diag_fraction (H_kin eigenbasis) = 0.7776
+  rel [H_kin,V]/H_kin = 6.3016e-01
+  hottest diag : {'pair': '((0, 0, 0),(0, 0, 0))', 'Vii': -7.814640167713634}
+  concentration: 0.0545
+  wall = 7.6 s
+
+  [verdict N_max=2] S_HO / S_He = 1.697
+    REFUTES Paper 27 §VII.A (S_HO >= S_He)
+
+  [verdict N_max=3] S_HO / S_He = 1.754
+    REFUTES Paper 27 §VII.A (S_HO >= S_He)
+
+Saved -> C:\Users\jlout\Desktop\Project_Geometric\debug\data\ep2b_ho_two_fermion.json

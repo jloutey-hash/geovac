@@ -25,3 +25,31 @@ The defect classes `/qa` plants — blind, on a throwaway worktree, never on the
 - **Innocuous seed-commit message (2026-07-03 lesson, group5 delta-2):** seeds are committed onto the worktree branch (run-8 hardening), so a code reviewer running `git log` SEES the commit subject. A message like "delta calibration controls" reveals the top commit is the seed layer; use a plausible work message instead (e.g. "Tier-2 polish follow-ups"). The delta-2 code agents quoted the revealing message yet still analyzed each seed as a genuine defect, so calibration held — but don't rely on that.
 - Seeds and the answer key live **only** in the worktree + `debug/qa/`. They are never committed to the real corpus; the worktree is removed at the end of every run.
 - This catalog **grows**: when a genuinely new defect class slips past `/qa` and is caught some other way, add it here (and the relevant criterion to the target's `.done.md`).
+
+## Seed-placement rule (hard, added 2026-08-28 after a two-seed failure)
+
+**Never plant a seed on a LaTeX comment line, and assert it after planting.**
+
+In the group6 FULL run, 2 of 9 seeds (S3 synthesis tier-promotion, S4 author-name
+corruption) landed on `%`-prefixed lines — S3 on line 2 of the synthesis file
+header. Neither is visible in the rendered document, so a reviewer that does not
+flag them is behaving *correctly*. Consequences that run:
+
+- the **synthesis dimension ran uncalibrated** (its only seed was void) and could
+  not be certified regardless of what it found;
+- the **citation dimension** fell to 1 valid seed where its Sonnet tier requires 2.
+
+Root cause: the seeding helper selected "the first line containing X" with no
+comment-line filter, and nothing checked the result.
+
+**Required of any seeding helper:**
+
+1. Skip lines whose stripped form starts with `%` when choosing a target line.
+2. After planting, **assert** the seeded line is not a comment and, for prose
+   seeds, that the changed text appears in the compiled PDF's text layer (or at
+   minimum outside any `%`-comment and outside `\begin{comment}` blocks).
+3. Report a per-seed placement check in the answer key, so a void seed is caught
+   at planting time rather than discovered while scoring calibration.
+
+A void seed is worse than no seed: it silently converts a calibrated dimension
+into an uncalibrated one while the run still *looks* fully seeded.

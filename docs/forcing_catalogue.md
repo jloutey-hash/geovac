@@ -451,7 +451,7 @@ rows are the priority re-read (see meta-finding 2).
 - sector-wise Mellin map: tip↔φ(0), EH↔φ(1), Λ_cc↔φ(2) — proven — prediction
 
 ### QED / gauge (30 found)
-- α³−Kα+1=0, K=π(42+π²/6−1/40) — exact-rational — prediction *(combination rule stays conjectural — §13.5)*
+- α³−Kα+1=0, K=π(42+π²/6−1/40) — exact-rational — OBSERVATION *(the combination rule is an Observation, never conjecture/prediction/derived — §13.5 hard prohibition; this row previously carried both prohibited tiers, fixed 2026-08-28)*
 - B=42 / F=π²/6 / Δ=1/40 three spectral homes; no common generator (12 mechanisms) — proven — negative-with-structure
 - Σ(n_ext=0)=0 self-energy structural zero — proven — check
 - ζ_{D²}(s)=2^{2s−1}[λ(2s−2)−λ(2s)] (π^even only, T9) — proven — check
@@ -476,7 +476,7 @@ rows are the priority re-read (see meta-finding 2).
 - KO-dim 3 mod 8; order-zero fails 5–8% (finite-res artifact); offdiag breaks JD=+DJ (resid 2) — proven — negative-with-structure
 
 ### Foundations / exchange constants (31 found)
-- κ=−1/16 = 1/Ω⁴(0) from Fock projection — exact-rational — prediction
+- κ=−1/16 coincides with 1/Ω⁴(0) of the Fock projection (OBSERVATION — matched, never derived; see memory/kappa_observation_not_derived.md) — exact-rational — check
 - g_n=n² shell degeneracy; SO(6) Casimir ν(ν+4)/2 — exact-rational — prediction
 - Fock coupling c²(n,l)=(1/16)[1−l(l+1)/(n(n+1))]; c²(4,3)=1/40=Δ — closed-form — prediction
 - Bargmann π-free at N_max=5 (56 nodes, 165 edges, 0 irrationals) — π-free — prediction
@@ -494,7 +494,7 @@ rows are the priority re-read (see meta-finding 2).
 - split-region Legendre terminates exactly at L_max=2·l_max — proven — prediction
 - Sturmian structural theorem H∝S → R-independent eigenvalues — proven — (guardrail)
 - Fock projection rigidity (S³ unique to −Z/r; HO/Woods-Saxon excluded) — proven — prediction
-- deuteron 592 Pauli/16q; He-4 712 Pauli/16q (12.25× Hilbert, 1.2× Pauli) — exact-integer — prediction
+- deuteron 688 Pauli/16q; He-4 828 Pauli/16q (corrected 2026-08-28 to the v5.0.0 post-retraction canonical counts; the retired 592/712 carried the moshinsky N_tot guard) — exact-integer — check
 - HO shell closures 2,8,20,40,70,112 exact from graph counting — proven — check
 - E*(He, n_max=1) = −729/256 Ha exact rational — exact-rational — prediction
 - FCI basis invariance < 3×10⁻¹⁵ Ha — bit-exact — check
@@ -503,8 +503,10 @@ rows are the priority re-read (see meta-finding 2).
 ### Precision / entropy (17 found)
 - energy–entanglement decoupling (off-diag h1 <0.2% of S; all S from V_ee) — proven — structural
 - S~Z^{−2.56} (n_max=4), Z^{−2.613} (n_max=3) — exact-rational — prediction
-- ERI-density step function {0.424, 0.992} at θ=0 vs θ>0 — proven — structural
-- core–valence I_cv<10⁻³ by Z=4 — integer-spectrum — check
+- ERI-density transition {0.424 at θ=0, 1.000 saturation for θ ≳ 1e-2} — MEASURED — structural
+  (corrected 2026-08-28: the retired 0.992 does not reproduce; the approach is graded,
+  and the intermediate densities are generator-dependent — only the endpoints are not)
+- core–valence I_cv ≈ 2×10⁻³ at Z=4 (Be, genuine small-but-nonzero; 1s occ 1.99987) and at the ~10⁻¹⁵ noise floor for Z≥5 via exact core closure — MEASURED — check (corrected 2026-08-28: the old '<10⁻³ by Z=4' was false on the data, Be = 2.2×10⁻³)
 - composed block entropy S_bond=0.303 nats R-independent — proven — structural
 - one-body entanglement-inert S_kin/S_full~10⁻¹⁴ — proven — structural
 - (1s,1s) Slater F⁰=5/8 exact (cusp hot-node) — exact-rational — check

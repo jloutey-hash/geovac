@@ -334,7 +334,12 @@ def two_electron_integral(
     nd: int, ld: int, md: int,
     k_orb: float = 1.0,
 ) -> float:
-    """Compute <ab|cd> = sum_k c_k(a,c) * c_k(b,d) * R^k(ac,bd).
+    """Compute <ab|cd> = sum_k c_k(a,c) * c_k(d,b) * R^k(ac,bd).
+
+    Note the (d,b) order of the second Gaunt factor: that is the
+    Condon-Shortley/Slater-Condon form.  This docstring read (b,d)
+    until 2026-08-30, contradicting the corrected code below and the
+    tests that build a reference tensor from this function.
 
     The two-electron integral in the physics (Dirac) convention:
     <ab|cd> = int int phi_a*(r1) phi_b*(r2) (1/r12) phi_c(r1) phi_d(r2) dr1 dr2
@@ -356,6 +361,14 @@ def two_electron_integral(
     -------
     float : the two-electron integral value
     """
+    # Coulomb m-selection rule (L_z conservation).  The multipole expansion
+    # of 1/r12 carries a SHARED index q between the two Gaunt factors, so the
+    # integral vanishes identically unless ma + mb == mc + md.  Without this
+    # the two factors pick independent q and mismatched-q products survive as
+    # spurious nonzeros (59.6% of the counted tensor at n_max=2).
+    if ma + mb != mc + md:
+        return 0.0
+
     result = 0.0
     # Sum over multipole order k
     # Triangle inequality: |la-lc| <= k <= la+lc AND |lb-ld| <= k <= lb+ld
@@ -369,8 +382,12 @@ def two_electron_integral(
         if (lb + ld + k) % 2 != 0:
             continue
 
+        # Condon-Shortley order: c^k(a,c) * c^k(d,b), NOT c^k(b,d).
+        # c^k(1,2) = (-1)^(m1-m2) c^k(2,1), so the (b,d) order differs by
+        # (-1)^(mb+md) -- a sign error on every integral with mb+md odd, and
+        # one that no orbital phase redefinition can absorb.
         ck_ac = _gaunt_ck(la, ma, lc, mc, k)
-        ck_bd = _gaunt_ck(lb, mb, ld, md, k)
+        ck_bd = _gaunt_ck(ld, md, lb, mb, k)
 
         if abs(ck_ac) < 1e-15 or abs(ck_bd) < 1e-15:
             continue

@@ -277,8 +277,8 @@ class TestLiHBalancedRegression:
         # lih_spec wraps hydride_spec; max_n controls both core and valence.
         spec = lih_spec(max_n=2, R=3.015)
         result = build_balanced_hamiltonian(spec, R=3.015)
-        assert result['N_pauli'] == 878, (
-            f"LiH balanced at max_n=2 should give 878 Pauli terms, got {result['N_pauli']}"
+        assert result['N_pauli'] == 2726, (
+            f"LiH balanced at max_n=2 should give 2726 Pauli terms, got {result['N_pauli']}"
         )
 
 

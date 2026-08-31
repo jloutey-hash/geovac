@@ -21,6 +21,7 @@ Per CLAUDE.md §13.4a verification protocol.
 
 from __future__ import annotations
 
+import functools
 import math
 import numpy as np
 import pytest
@@ -58,37 +59,82 @@ def test_paper34_III9_wigner_d_unitarity(l):
         )
 
 
-def test_paper34_III9_wigner_d_sqrt2_at_pi_over_4():
-    """Paper 34 §III.9 'Q[sqrt(2), sqrt(3), sqrt(6)] algebraic content
-    from the Wigner d-matrix at non-collinear angles.'
+def _in_Q_sqrt2_sqrt3(expr):
+    """True iff expr lies in the field Q(sqrt2, sqrt3) = Q-span{1,V2,V3,V6}.
 
-    At beta = pi/4: cos(pi/8) and sin(pi/8) introduce sqrt(2 +/- sqrt 2)
-    nesting (NOT a clean Q[sqrt 2, sqrt 3, sqrt 6] entry). At beta = pi/2:
-    cos(pi/4) = sin(pi/4) = sqrt(2)/2 are clean Q[sqrt 2] entries.
+    Membership is decided by an integer relation against the explicit
+    Q-basis and then VERIFIED SYMBOLICALLY, so a spurious PSLQ relation
+    cannot make a non-member pass (the S_min basis-coverage failure mode).
+    """
+    import mpmath as mp
+    e = sp.nsimplify(sp.simplify(expr))
+    if e == 0:
+        return True
+    basis = [sp.Integer(1), sp.sqrt(2), sp.sqrt(3), sp.sqrt(6)]
+    with mp.workdps(60):
+        try:
+            vec = [mp.mpf(str(sp.N(e, 55)))] + [mp.mpf(str(sp.N(b, 55))) for b in basis]
+        except (TypeError, ValueError):
+            return False                      # not even real-algebraic-looking
+        rel = mp.pslq(vec, tol=mp.mpf(10) ** -45, maxcoeff=10 ** 8, maxsteps=20000)
+    if not rel or rel[0] == 0:
+        return False
+    combo = sum(-sp.Rational(int(rel[i + 1]), int(rel[0])) * basis[i] for i in range(4))
+    return sp.simplify(e - combo) == 0
 
-    Tested: d^1(pi/2) has explicit sqrt(2) entries in Q[sqrt 2].
+
+@pytest.mark.parametrize("beta_name,beta", [
+    ("pi/2", sp.pi / 2), ("pi/3", sp.pi / 3), ("pi/4", sp.pi / 4),
+])
+def test_paper34_III9_wigner_d_algebraic_ring(beta_name, beta):
+    """Paper 34 §III.9: 'preserves rationality with Q[sqrt 2, sqrt 3,
+    sqrt 6] algebraic content from the Wigner d-matrix at non-collinear
+    angles.'
+
+    REWRITTEN 2026-08-28 (adversarial audit).  The previous test never
+    tested the ring claim at all: it only checked that no log/exp/pi atom
+    appears in d^1(pi/2), a matrix whose entries are visibly {0, +-1/2,
+    +-sqrt2/2}.  Its docstring also asserted -- incorrectly -- that
+    beta = pi/4 produces nested radicals sqrt(2 +- sqrt 2); it does not,
+    because every d-matrix entry is a polynomial of EVEN total degree 2l in
+    (cos(beta/2), sin(beta/2)), and cos^2, sin^2, cos.sin at pi/8 are all in
+    Q(sqrt 2).
+
+    This version decides genuine field membership in Q(sqrt2, sqrt3) for
+    every entry, at three non-collinear angles, for l = 1 and l = 2.
+
+    SCOPE FINDING (reported to the PI, not fixed here): the paper's ring
+    statement is an l <= 2 statement.  At l = 3 the d-matrix picks up
+    sqrt(5), sqrt(10), sqrt(15) -- e.g. d^3_{...}(pi/2) contains sqrt(5)/4
+    and sqrt(15)/8 -- which are NOT in Q(sqrt2, sqrt3, sqrt6).  The general
+    ring is Q adjoined the square roots of the binomial ratios, which grows
+    with l; {sqrt2, sqrt3, sqrt6} is exactly what l <= 2 needs.  The l = 3
+    escape is asserted below so the boundary is pinned by a test.
     """
     from sympy.physics.wigner import wigner_d_small
 
-    d = sp.Matrix(wigner_d_small(1, sp.pi / 2))
-    # d^1(pi/2) has entries in {1/2, -1/2, 1/sqrt(2), -1/sqrt(2), 0}
-    # which is Q[sqrt(2)]
-    entries = list(d)
-    for entry in entries:
-        simpl = sp.simplify(entry)
-        # Each entry should be either rational or rational * sqrt(2)
-        # Check by squaring: e^2 must be rational (in Q[sqrt 2], (a + b sqrt 2)^2
-        # = a^2 + 2 b^2 + 2 a b sqrt 2 -- not always rational; but
-        # the specific d^1(pi/2) entries factor cleanly).
-        # We test only that no transcendental (pi, e, log) lives in any entry.
-        for atom in simpl.atoms(sp.Function):
-            assert not isinstance(atom, (sp.log, sp.exp)), (
-                f"d^1(pi/2) entry {simpl} contains transcendental {atom}"
+    for l in (1, 2):
+        d = sp.Matrix(wigner_d_small(l, beta))
+        for entry in d:
+            assert _in_Q_sqrt2_sqrt3(entry), (
+                f"d^{l}({beta_name}) entry {sp.simplify(entry)} is not in "
+                "Q(sqrt2, sqrt3, sqrt6)"
             )
-        # And that pi does not appear (we passed pi/2 as input, but the
-        # output should be algebraic over Q in this case).
-        assert sp.pi not in simpl.atoms(sp.Symbol) | set(simpl.atoms()), (
-            f"d^1(pi/2) entry {simpl} unexpectedly contains pi"
+
+    # Guard: the membership predicate must be able to say NO.
+    assert not _in_Q_sqrt2_sqrt3(sp.sqrt(5))
+    assert not _in_Q_sqrt2_sqrt3(sp.pi)
+
+    # Pinned scope boundary: l = 3 leaves the field (only checked once).
+    if beta_name == "pi/2":
+        d3 = sp.Matrix(wigner_d_small(3, sp.pi / 2))
+        escapers = [sp.simplify(e) for e in d3 if not _in_Q_sqrt2_sqrt3(e)]
+        assert escapers, (
+            "expected d^3(pi/2) to leave Q(sqrt2,sqrt3,sqrt6); if this now "
+            "holds, Paper 34 §III.9 can drop its l <= 2 scope"
+        )
+        assert any(sp.simplify(e - sp.sqrt(5) / 4) == 0 for e in escapers), (
+            f"expected sqrt(5)/4 among the l=3 escapers, got {escapers}"
         )
 
 
@@ -146,39 +192,76 @@ def test_paper34_III10_wilson_su2_maximal_torus_to_u1():
 # §III.20 Phillips-Kleinman: projector idempotent, ring-preserving
 # ----------------------------------------------------------------------------
 
-def test_paper34_III20_pk_projector_idempotent():
-    """Paper 34 §III.20 (sec:proj_phillips_kleinman): the core
-    projector P_c = sum_c |phi_c><phi_c| is an orthogonal projector
-    (P_c^2 = P_c, P_c^dagger = P_c).
+def test_paper34_III20_pk_barrier_production_structure():
+    """Paper 34 §III.20 (sec:proj_phillips_kleinman):
 
-    Tested with a synthetic orthonormal core basis: build P_c, verify
-    idempotency P_c^2 = P_c (bit-exact for orthonormal basis).
+        Delta H_pq^PK = sum_c (E_v - E_c) S_pc S_cq,
+
+    'purely repulsive whenever E_c < 0' with the default E_v = 0, built
+    from the core orbital set {phi_c, E_c}.
+
+    REWRITTEN 2026-08-28 (adversarial audit).  The previous body built an
+    orthonormal basis with numpy's QR and checked that Q Q^T is idempotent,
+    Hermitian and has trace n_core.  Those are properties of the QR
+    construction (they hold for ANY random matrix), not of the framework's
+    PK projection -- the test never touched geovac and could not fail.
+
+    This version exercises the PRODUCTION cross-center PK barrier
+    (geovac.phillips_kleinman_cross_center.compute_pk_cross_center_barrier)
+    and checks the three structural claims that follow from the rank-n_core
+    form above, with a sign-flip control:
+
+      (a) Delta H is symmetric (it is S diag(w) S^T),
+      (b) rank(Delta H) <= n_core   (the projector-rank statement),
+      (c) Delta H is positive-semidefinite at E_v = 0 with all E_c < 0
+          -- 'purely repulsive' -- and NEGATIVE eigenvalues appear as soon
+          as E_v is pushed below the core energies (the control that shows
+          (c) is a real consequence of the weights, not automatic).
     """
-    rng = np.random.default_rng(seed=42)
-    dim = 10
-    n_core = 3
-
-    # Build an orthonormal core basis via QR
-    A = rng.standard_normal((dim, n_core))
-    Q, _ = np.linalg.qr(A)
-    # Q columns are an orthonormal basis for the core subspace
-    P_c = Q @ Q.T
-
-    # Idempotency: P_c^2 = P_c
-    P_c_sq = P_c @ P_c
-    assert np.allclose(P_c_sq, P_c, atol=1e-12), (
-        "PK projector failed idempotency P_c^2 = P_c"
+    from geovac.phillips_kleinman_cross_center import (
+        _core_orbitals_for_Z, _detect_core_type, compute_pk_cross_center_barrier,
     )
 
-    # Hermiticity: P_c = P_c^dagger
-    assert np.allclose(P_c, P_c.T, atol=1e-14), (
-        "PK projector failed Hermiticity P_c = P_c^T"
+    Z_nuc = 11.0                       # Na: [Ne] frozen core (Paper 19 §6)
+    core_type = _detect_core_type(Z_nuc)
+    assert core_type == "Ne", f"expected a [Ne] core for Z=11, got {core_type}"
+    core = _core_orbitals_for_Z(int(Z_nuc), core_type)
+    n_core = len(core)
+    assert n_core == 5 and all(c['energy'] < 0 for c in core), (
+        f"expected 5 bound core orbitals, got {[(c['n'], c['l'], c['energy']) for c in core]}"
     )
 
-    # Rank: tr P_c = n_core (counts dimension of core subspace)
-    trace = np.trace(P_c)
-    assert math.isclose(trace, n_core, abs_tol=1e-12), (
-        f"tr P_c = {trace} != n_core = {n_core}"
+    valence = [(1, 0, 0), (2, 0, 0), (2, 1, -1), (2, 1, 0), (2, 1, 1)]
+    dH = compute_pk_cross_center_barrier(
+        1.0, valence, Z_nuc, 3.5, n_grid_r=800, n_grid_u=32,
+    )
+
+    # (a) symmetry, to the last bit
+    assert np.max(np.abs(dH - dH.T)) < 1e-15, (
+        f"PK barrier not symmetric: max asymmetry {np.max(np.abs(dH - dH.T))}"
+    )
+
+    # (b) rank bounded by the core-orbital count
+    rank = int(np.linalg.matrix_rank(dH, tol=1e-10))
+    assert rank <= n_core, f"rank(Delta H) = {rank} > n_core = {n_core}"
+
+    # (c) purely repulsive at E_v = 0
+    w = np.linalg.eigvalsh(dH)
+    assert np.min(w) > -1e-12, (
+        f"PK barrier is not positive-semidefinite at E_v = 0: eigenvalues {w}"
+    )
+    assert np.max(w) > 1e-6, f"PK barrier is trivially zero: eigenvalues {w}"
+
+    # control: pushing E_v below every E_c flips the sign of the weights,
+    # so the PSD property above is a genuine consequence of (E_v - E_c) > 0
+    # and not an artifact of the S diag(w) S^T form.
+    E_below = min(c['energy'] for c in core) - 1.0
+    dH_neg = compute_pk_cross_center_barrier(
+        1.0, valence, Z_nuc, 3.5, E_valence_ref=E_below,
+        n_grid_r=800, n_grid_u=32,
+    )
+    assert np.min(np.linalg.eigvalsh(dH_neg)) < -1e-9, (
+        "control failed: PK barrier stayed PSD even with E_v below the core"
     )
 
 
@@ -207,16 +290,39 @@ def test_paper34_III20_pk_no_transcendental_introduced():
             for q in range(3):
                 deltaH[p, q] += (E_v - E_c) * S[c, p] * S[c, q]
 
-    # No pi or other transcendental should appear
-    free = deltaH.free_symbols
-    assert sp.pi not in free, (
-        f"PK Delta H unexpectedly contains pi: free symbols {free}"
+    # No pi or other transcendental should appear.
+    # NOTE: `sp.pi in expr.free_symbols` is ALWAYS False (pi is a NumberSymbol),
+    # so the previous form of this guard never fired.  Use .has().
+    assert not deltaH.has(sp.pi), (
+        f"PK Delta H unexpectedly contains pi: {deltaH}"
     )
     # All entries should be rational
     for entry in deltaH:
         assert entry.is_rational, (
             f"PK Delta H entry {entry} is not rational; expected Q-ring"
         )
+
+    # 2026-08-28 audit: NON-TAUTOLOGY GUARD.  Rational inputs give rational
+    # outputs trivially, so the assertions above are only informative if the
+    # same predicates DO fire when the source spectrum carries a
+    # transcendental.  Paper 34's claim is precisely conditional -- 'no
+    # transcendental is injected BEYOND what the source spectrum already
+    # carries' -- so the correct control is to put pi into a core energy and
+    # confirm it propagates (i.e. PK transmits but does not create).
+    E_c_transcendental = -sp.pi / 4
+    deltaH_pi = sp.zeros(3, 3)
+    for p in range(3):
+        for q in range(3):
+            deltaH_pi[p, q] = (
+                (E_v - E_c1) * S[0, p] * S[0, q]
+                + (E_v - E_c_transcendental) * S[1, p] * S[1, q]
+            )
+    assert deltaH_pi.has(sp.pi), (
+        "guard failed: .has(sp.pi) does not detect a pi carried in by E_c"
+    )
+    assert not any(e.is_rational for e in deltaH_pi if e != 0), (
+        "guard failed: .is_rational does not reject a transcendental entry"
+    )
 
 
 # ----------------------------------------------------------------------------
@@ -258,34 +364,118 @@ def test_paper34_III21_multipole_termination_exact(l1, l2):
         )
 
 
-def test_paper34_III21_LiH_multipole_count_exact():
-    """Paper 34 §III.21 empirical anchor: 'cross-center V_ne for LiH at
-    n_max = 2 contributes exactly 33 nonzero one-body matrix elements
-    (multipole sum runs L = 0, 1, 2, terminates at L_max = 2)'.
+def test_paper34_III21_allowed_multipole_orders_include_L1():
+    """Paper 34 §III.21: 'the multipole sum runs L = 0, 1, 2, terminates at
+    L_max = 2' for the LiH n_max = 2 (l_max = 1) cross-center V_ne block.
 
-    Indirect test: count the non-vanishing 3j symbols for l_max = 1
-    (the s+p shells at n_max=2). The multipole orders L = 0, 1, 2
-    are precisely those allowed by parity + triangle inequality on
-    (l1, l2) in {(0,0), (0,1), (1,0), (1,1)}.
+    L-SET QUESTION RESOLVED 2026-08-28 (adversarial audit).  The previous
+    version of this test carried a comment asserting "At l_max = 1: L in
+    {0, 2} (parity rules out L=1)" and then hand-waved the disagreement with
+    the paper, while only ever asserting max(L) <= 2 and 0 in L -- so the
+    stale comment was never checked against the computation.
+
+    The comment was WRONG and the paper is RIGHT.  Parity requires
+    l1 + L + l2 even, which for the MIXED pair (l1, l2) = (0, 1) forces L
+    ODD, and the triangle inequality then forces L = 1 exactly:
+
+        3j(0, 1, 1; 0,0,0) = -1/sqrt(3)  != 0.
+
+    L = 1 is the s-p cross term.  It vanishes only for the same-l pairs.
+    The full allowed set at l_max = 1 is therefore exactly {0, 1, 2}, as the
+    paper states.  This test now asserts set EQUALITY, not a bound.
     """
     from sympy.physics.wigner import wigner_3j
 
     l_max = 1
     allowed_L = set()
+    per_pair = {}
     for l1 in range(l_max + 1):
         for l2 in range(l_max + 1):
+            Ls = set()
             for L in range(abs(l1 - l2), l1 + l2 + 1):
                 if (l1 + L + l2) % 2 != 0:
                     continue
                 if wigner_3j(l1, L, l2, 0, 0, 0) != 0:
-                    allowed_L.add(L)
-    # At l_max = 1: L in {0, 2} (parity rules out L=1)
-    # Paper 34 says L_max = 2 l_max = 2; the {0, 1, 2} statement in the
-    # paper includes the parity-allowed subset within that range.
-    assert max(allowed_L) <= 2 * l_max, (
-        f"L_max = {max(allowed_L)} > 2 l_max = {2*l_max}"
+                    Ls.add(L)
+            per_pair[(l1, l2)] = Ls
+            allowed_L |= Ls
+
+    assert allowed_L == {0, 1, 2}, (
+        f"allowed multipole orders at l_max=1 are {sorted(allowed_L)}, "
+        "the paper states L = 0, 1, 2"
     )
-    assert 0 in allowed_L, "L=0 monopole should always be allowed"
+    # The L = 1 term is carried by the s-p cross pairs and only those.
+    assert per_pair[(0, 1)] == {1} and per_pair[(1, 0)] == {1}
+    assert per_pair[(0, 0)] == {0} and per_pair[(1, 1)] == {0, 2}
+    assert max(allowed_L) == 2 * l_max, (
+        f"L_max = {max(allowed_L)} != 2 l_max = {2 * l_max}"
+    )
+
+
+def test_paper34_III21_LiH_cross_center_vne_census_33_and_168():
+    """Paper 34 §III.21 empirical anchor (Sprint CD, Paper 19 §III.C
+    Tab. 'Cross-center V_ne census'): 'cross-center V_ne for LiH at
+    n_max = 2 contributes exactly 33 nonzero one-body matrix elements
+    (multipole sum runs L = 0, 1, 2, terminates at L_max = 2); at
+    n_max = 3, 168 nonzero elements (L_max = 4).'
+
+    NEW 2026-08-28 (adversarial audit).  The old test was NAMED and
+    docstringed for the "exactly 33" anchor but never computed it -- it
+    counted 3j symbols instead.  This version calls the PRODUCTION builder
+    geovac.shibuya_wulfman.compute_cross_center_vne on the three LiH blocks
+    of Paper 19's census table and counts the nonzeros, and separately
+    verifies that the multipole sum really does terminate (raising L_max
+    past 2 changes the matrix by BIT-EXACT zero).
+    """
+    from geovac.shibuya_wulfman import compute_cross_center_vne
+
+    R = 3.015  # bohr, the census geometry in Paper 19 Tab. IV
+    # Paper 19's three blocks: (Z_orb of the orbital set, Z of the OTHER nucleus)
+    blocks = [(3.0, 1.0), (1.0, 1.0), (1.0, 3.0)]
+
+    # ---- n_max = 2 : 33 nonzero, 11 per block -----------------------------
+    states2 = [(1, 0, 0), (2, 0, 0), (2, 1, -1), (2, 1, 0), (2, 1, 1)]
+    total2 = 0
+    for Z_orb, Z_nuc in blocks:
+        V = compute_cross_center_vne(Z_orb, states2, Z_nuc, R, L_max=2)
+        nz = int(np.count_nonzero(np.abs(V) > 1e-12))
+        assert nz == 11, (
+            f"block (Z_orb={Z_orb}, Z_nuc={Z_nuc}) at n_max=2 has {nz} "
+            "nonzero elements, expected 11"
+        )
+        total2 += nz
+    assert total2 == 33, f"LiH n_max=2 cross-center V_ne census = {total2}, expected 33"
+
+    # ---- exact termination at L_max = 2 -----------------------------------
+    # Paper 34 'Honest scope': the truncation is EXACT, not asymptotic.
+    V2 = compute_cross_center_vne(1.0, states2, 3.0, R, L_max=2)
+    for L_extra in (3, 4, 5):
+        V_hi = compute_cross_center_vne(1.0, states2, 3.0, R, L_max=L_extra)
+        assert np.array_equal(V_hi, V2), (
+            f"raising L_max from 2 to {L_extra} changed the matrix by "
+            f"{np.abs(V_hi - V2).max()} -- termination is not exact"
+        )
+
+    # ...and L = 1 genuinely CONTRIBUTES (see the companion test): dropping
+    # to L_max = 0 must change both the values and the sparsity pattern.
+    V0 = compute_cross_center_vne(1.0, states2, 3.0, R, L_max=0)
+    assert int(np.count_nonzero(np.abs(V0) > 1e-12)) == 7
+    V1 = compute_cross_center_vne(1.0, states2, 3.0, R, L_max=1)
+    assert int(np.count_nonzero(np.abs(V1) > 1e-12)) == 11
+    assert np.abs(V1 - V0).max() > 1e-3, "L = 1 contributes nothing?"
+    assert np.abs(V2 - V1).max() > 1e-3, "L = 2 contributes nothing?"
+
+    # ---- n_max = 3 : 168 nonzero, 56 per block ----------------------------
+    states3 = [(n, l, m) for n in range(1, 4) for l in range(n)
+               for m in range(-l, l + 1)]
+    assert len(states3) == 14
+    total3 = 0
+    for Z_orb, Z_nuc in blocks:
+        V = compute_cross_center_vne(Z_orb, states3, Z_nuc, R, L_max=4)
+        total3 += int(np.count_nonzero(np.abs(V) > 1e-12))
+    assert total3 == 168, (
+        f"LiH n_max=3 cross-center V_ne census = {total3}, expected 168"
+    )
 
 
 # ----------------------------------------------------------------------------
@@ -342,86 +532,189 @@ def test_paper34_III22_bipolar_triangle_constraint(k1, k2):
 # §III.23 Symmetry / Young tableau: integer characters of S_N
 # ----------------------------------------------------------------------------
 
-def test_paper34_III23_SN_character_table_integer_valued():
-    """Paper 34 §III.23 (sec:proj_symmetry_tableau): 'The character
-    table of S_N is integer-valued (Frobenius character formula); the
-    projector P_lambda has rational matrix entries (denominators
-    dividing |S_N| = N!, numerators integer); the dimension d_lambda
-    is integer (hook-length formula). No pi, no zeta, no Hurwitz
-    content enters at this step.'
+def _partitions(n, maxp=None):
+    """All partitions of n as weakly decreasing tuples."""
+    if maxp is None:
+        maxp = n
+    if n == 0:
+        yield ()
+        return
+    for k in range(min(n, maxp), 0, -1):
+        for rest in _partitions(n - k, k):
+            yield (k,) + rest
 
-    Test: compute S_4 character table via sympy and verify all entries
-    are integers, and dimensions match hook-length formula.
+
+def _conjugate(lam):
+    if not lam:
+        return ()
+    return tuple(sum(1 for p in lam if p > j) for j in range(lam[0]))
+
+
+def _hook_length_dimension(lam):
+    """d_lambda by the hook-length formula d = n! / prod(hooks).
+
+    Hooks are COMPUTED from the Young diagram (arm + leg + 1), not quoted.
+    Returns (dimension, product_of_hooks).
     """
-    from sympy.combinatorics import SymmetricGroup
-    from sympy.combinatorics.partitions import IntegerPartition
+    n = sum(lam)
+    lc = _conjugate(lam)
+    prod = 1
+    for i, li in enumerate(lam):
+        for j in range(li):
+            prod *= (li - j) + (lc[j] - i) - 1
+    return math.factorial(n) // prod, prod
 
-    # S_4 partitions: [4], [3,1], [2,2], [2,1,1], [1,1,1,1]
-    # Their dimensions by hook length: 1, 3, 2, 3, 1 -- summing to 1+9+4+9+1=24 = 4!
-    expected_dims = {
-        (4,): 1,
-        (3, 1): 3,
-        (2, 2): 2,
-        (2, 1, 1): 3,
-        (1, 1, 1, 1): 1,
-    }
 
-    # Verify hook-length dimensions sum to N! (Burnside identity)
-    sum_d_sq = sum(d * d for d in expected_dims.values())
-    assert sum_d_sq == math.factorial(4), (
-        f"sum d_lambda^2 = {sum_d_sq} != 4! = {math.factorial(4)}"
+@functools.lru_cache(maxsize=None)
+def _syt_count(lam):
+    """Number of standard Young tableaux of shape lam, by corner recursion.
+
+    Completely independent of the hook-length formula -- which is what makes
+    the agreement between the two a real check rather than a restatement.
+    """
+    lam = tuple(p for p in lam if p > 0)
+    if sum(lam) == 0:
+        return 1
+    total = 0
+    for i in range(len(lam)):
+        if i == len(lam) - 1 or lam[i] > lam[i + 1]:
+            new = list(lam)
+            new[i] -= 1
+            total += _syt_count(tuple(p for p in new if p > 0))
+    return total
+
+
+def _conjugacy_class_size(mu):
+    from collections import Counter
+    n = sum(mu)
+    z = 1
+    for part, mult in Counter(mu).items():
+        z *= (part ** mult) * math.factorial(mult)
+    return math.factorial(n) // z
+
+
+def _border_strips(lam, r):
+    """(lam minus a size-r border strip, height) for every removable strip.
+
+    Uses the beta-number (first-column hook length) formulation.
+    """
+    k = len(lam)
+    beta = [lam[i] + (k - 1 - i) for i in range(k)]
+    bset = set(beta)
+    out = []
+    for b in beta:
+        nb = b - r
+        if nb >= 0 and nb not in bset:
+            newbeta = sorted([x for x in beta if x != b] + [nb], reverse=True)
+            height = sum(1 for x in beta if nb < x < b)
+            m = len(newbeta)
+            newlam = tuple(newbeta[i] - (m - 1 - i) for i in range(m))
+            out.append((tuple(p for p in newlam if p > 0), height))
+    return out
+
+
+@functools.lru_cache(maxsize=None)
+def _murnaghan_nakayama(lam, mu):
+    """chi_lambda(mu) by the Murnaghan-Nakayama recursion."""
+    lam = tuple(p for p in lam if p > 0)
+    if sum(lam) == 0:
+        return 1
+    r, rest = mu[0], mu[1:]
+    return sum((-1) ** ht * _murnaghan_nakayama(sl, rest)
+               for sl, ht in _border_strips(lam, r))
+
+
+@pytest.mark.parametrize("N", [4, 5, 6])
+def test_paper34_III23_SN_character_table_integer_valued(N):
+    """Paper 34 §III.23 (sec:proj_symmetry_tableau): 'The character table of
+    S_N is integer-valued (Frobenius character formula); the projector
+    P_lambda has rational matrix entries (denominators dividing |S_N| = N!,
+    numerators integer); the dimension d_lambda is integer (hook-length
+    formula).  No pi, no zeta, no Hurwitz content enters at this step.'
+
+    REWRITTEN 2026-08-28 (adversarial audit).  The previous two tests
+    HARDCODED the S_4 and S_5 dimensions in a dict, asserted
+    isinstance(d, int) on values written as Python ints, and checked
+    sum d^2 == N! on those same hardcoded numbers.  The hook-length formula
+    was never evaluated and no character was ever computed; nothing in
+    either test could fail if the paper dimensions were wrong.
+
+    This version computes everything:
+
+      * hook lengths from the Young diagram -> d_lambda;
+      * an INDEPENDENT standard-Young-tableau count by corner recursion,
+        cross-checked against the hook-length value;
+      * sum_lambda d_lambda^2 == N! (Burnside);
+      * the full character table by Murnaghan-Nakayama, certified by BOTH
+        orthogonality relations (row and column) -- a wrong table fails
+        these -- and only then asserted to be integer-valued;
+      * the Young-symmetrizer normalization d_lambda/N!, whose denominator
+        divides N! (the projector-entry claim).
+    """
+    parts = sorted(_partitions(N), reverse=True)
+
+    dims = {}
+    for lam in parts:
+        d, prod_hooks = _hook_length_dimension(lam)
+        assert d * prod_hooks == math.factorial(N), (
+            f"hook product inconsistent for {lam}: {d} * {prod_hooks} != {N}!"
+        )
+        assert d == _syt_count(lam), (
+            f"lambda={lam}: hook-length d = {d} but SYT count = {_syt_count(lam)}"
+        )
+        assert isinstance(d, int) and d > 0
+        dims[lam] = d
+
+    assert sum(d * d for d in dims.values()) == math.factorial(N), (
+        f"sum d_lambda^2 = {sum(d * d for d in dims.values())} != {N} factorial"
     )
 
-    # Verify each dimension is a positive integer
-    for lam, d in expected_dims.items():
-        assert isinstance(d, int) and d > 0, (
-            f"d_lambda for lambda={lam} is {d}, not a positive integer"
+    # Paper 34 S_4 / S_5 anchors, now COMPARED against computed values.
+    if N == 4:
+        assert dims == {(4,): 1, (3, 1): 3, (2, 2): 2, (2, 1, 1): 3,
+                        (1, 1, 1, 1): 1}
+    if N == 5:
+        assert dims == {(5,): 1, (4, 1): 4, (3, 2): 5, (3, 1, 1): 6,
+                        (2, 2, 1): 5, (2, 1, 1, 1): 4, (1, 1, 1, 1, 1): 1}
+
+    table = {lam: {mu: _murnaghan_nakayama(lam, mu) for mu in parts}
+             for lam in parts}
+    identity = tuple([1] * N)
+    for lam in parts:
+        assert table[lam][identity] == dims[lam], (
+            f"chi_{lam}(1^N) = {table[lam][identity]} != d_lambda = {dims[lam]}"
         )
 
-    # Spot-check S_2 character table directly:
-    # S_2 has two classes (e, (12)) and two irreps ([2], [1,1])
-    # chi_[2](e) = 1, chi_[2]((12)) = +1   (trivial rep)
-    # chi_[1,1](e) = 1, chi_[1,1]((12)) = -1  (sign rep)
-    # All integer.
-    s2_chars = {
-        ((2,), 'e'): 1, ((2,), '(12)'): 1,
-        ((1, 1), 'e'): 1, ((1, 1), '(12)'): -1,
-    }
-    for entry in s2_chars.values():
-        assert isinstance(entry, int), (
-            f"S_2 character {entry} is not integer"
-        )
+    # Certify the table BEFORE asserting integrality, so integrality is a
+    # statement about a verified-correct table rather than about the output
+    # type of an integer-arithmetic recursion.
+    for lam in parts:
+        for nu in parts:
+            row = sum(_conjugacy_class_size(mu) * table[lam][mu] * table[nu][mu]
+                      for mu in parts)
+            assert row == (math.factorial(N) if lam == nu else 0), (
+                f"row orthogonality failed for ({lam}, {nu}): {row}"
+            )
+    for mu in parts:
+        for nu in parts:
+            col = sum(table[lam][mu] * table[lam][nu] for lam in parts)
+            expect = (math.factorial(N) // _conjugacy_class_size(mu)) if mu == nu else 0
+            assert col == expect, (
+                f"column orthogonality failed for ({mu}, {nu}): {col} != {expect}"
+            )
 
+    for lam in parts:
+        for mu in parts:
+            v = table[lam][mu]
+            assert isinstance(v, int), f"chi_{lam}({mu}) = {v} is not an integer"
 
-def test_paper34_III23_hook_length_S5():
-    """Paper 34 §III.23 cross-check at S_5: hook-length formula must
-    give integers for every partition of 5, with sum_d^2 = 5! = 120.
-    """
-    # S_5 partitions and hook-length dimensions:
-    # [5]: 1
-    # [4,1]: 4
-    # [3,2]: 5
-    # [3,1,1]: 6
-    # [2,2,1]: 5
-    # [2,1,1,1]: 4
-    # [1,1,1,1,1]: 1
-    s5_dims = {
-        (5,): 1,
-        (4, 1): 4,
-        (3, 2): 5,
-        (3, 1, 1): 6,
-        (2, 2, 1): 5,
-        (2, 1, 1, 1): 4,
-        (1, 1, 1, 1, 1): 1,
-    }
-    sum_sq = sum(d * d for d in s5_dims.values())
-    assert sum_sq == 120, (
-        f"sum d_lambda^2 for S_5 = {sum_sq} != 120 = 5!"
-    )
-    for lam, d in s5_dims.items():
-        assert isinstance(d, int) and d > 0, (
-            f"hook-length d for {lam} = {d} not positive int"
+    # Projector normalization d_lambda / N! : denominator divides N!.
+    for lam, d in dims.items():
+        coeff = sp.Rational(d, math.factorial(N))
+        assert math.factorial(N) % int(coeff.q) == 0, (
+            f"P_{lam} normalization {coeff} has denominator not dividing {N}!"
         )
+        assert not coeff.has(sp.pi) and coeff.is_rational
 
 
 # ----------------------------------------------------------------------------
@@ -475,12 +768,48 @@ def test_paper34_III26_gauge_choice_no_variable_introduced():
     # physical scale (no Z, no n, no Lambda, no t). This is the test of
     # "no variable introduced": the projection's output transcendental
     # signature is invariant under (Z, n) parametrization.
-    val = 1.0 / (4.0 * math.pi)
-    # It is the same number regardless of any physical scale
-    val_again = 1.0 / (4.0 * math.pi)
-    assert val == val_again
-    # And it does not depend on a hidden parameter
-    assert math.isclose(val, 0.07957747154594767, rel_tol=1e-15)
+    # REWRITTEN 2026-08-28: the previous body asserted `val == val_again` where
+    # val_again was a verbatim copy of val -- a null test (`assert x == x`) that
+    # could not fail.  Test the actual claim instead: the constant carries no
+    # free parameter, and its transcendental content is exactly pi^{-1} (M1).
+    # HONEST SCOPE (third revision, 2026-08-28 delta-2).  Rewritten twice and
+    # decoration both times, for a structural reason: Paper 34 SecIII.26's
+    # claim is 'Variables introduced: none' -- a TAXONOMY statement, not a
+    # computable quantity.  A predicate like `c.free_symbols == set()` is
+    # true for 1/(4pi), 1/(2pi), 4/pi and every parameter-free constant, so
+    # it cannot discriminate a right taxonomy entry from a wrong one.
+    # What IS checkable -- that the production constant equals 1/Vol(S^2) --
+    # is already checked at 1e-15 by III26_coulomb_gauge_per_loop_factor
+    # directly above.  This test keeps a tie to that constant and does NOT
+    # claim to verify the no-variable statement.
+    from geovac.hopf_bundle import VOL_S2
+
+    Z, nq, Lam, tt = sp.symbols('Z n Lambda t', positive=True)
+
+    # production leg: the per-loop factor IS 1/Vol(S^2).  VOL_S2 is a float,
+    # so compare numerically -- tightly enough that a corrupted constant
+    # (e.g. 2*pi instead of 4*pi) cannot pass.
+    assert math.isclose(1.0 / VOL_S2, 1.0 / (4.0 * math.pi), rel_tol=1e-12), (
+        f'production VOL_S2={VOL_S2} does not give the 1/(4pi) gauge factor'
+    )
+
+    # symbolic leg: the exact form carries no free parameter and exactly one
+    # inverse power of pi (M1 tier), with no other transcendental.
+    c = sp.Rational(1, 4) / sp.pi
+
+    # (i) no free parameter: independent of every physical scale
+    assert c.free_symbols == set(), f'gauge constant carries a parameter: {c}'
+
+    # (ii) transcendental content is exactly one inverse power of pi (M1 tier),
+    #      with no other transcendental riding along
+    assert sp.simplify(c * sp.pi) == sp.Rational(1, 4)
+    assert not c.has(sp.E, sp.EulerGamma, sp.Catalan)
+
+    # (iii) non-tautology guard: a constant that DID carry a scale must fail (i)
+    carries_a_scale = c * Z / (nq * Lam * tt)
+    assert carries_a_scale.free_symbols == {Z, nq, Lam, tt}
+
+    assert math.isclose(float(c), 0.07957747154594767, rel_tol=1e-15)
 
 
 if __name__ == "__main__":

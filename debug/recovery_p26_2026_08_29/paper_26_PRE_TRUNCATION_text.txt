@@ -1,0 +1,467 @@
+Entanglement Structure of the Angular Momentum Eigenbasis: Energy-Entanglement Decoupling and Basis-Intrinsic Sparsity
+J. Loutey1
+1Independent Researcher, Kent, Washington (Dated: April 13, 2026)
+We characterize the entanglement structure of multi-electron atoms in the angular momentum eigenbasis--the basis whose orbitals are products of hydrogenic radial functions and spherical harmonics, labeled by quantum numbers (n, l, m). Four computational results are presented. First, energy-entanglement decoupling: the off-diagonal one-body Hamiltonian (graph Laplacian topology, coupling constant  = -1/16) contributes 10­39% of the correlation energy but less than 0.2% of the entanglement entropy; the off-diagonal electron repulsion contributes effectively 100% of the entanglement. Entanglement entropy scales as S  Z-2.56 across He-like ions. Second, basisintrinsic sparsity: among orbital bases for systems with spherical symmetry, the angular momentum eigenbasis is the essentially unique basis producing sparse electron repulsion integrals (ERIs) (up to (l, m)-label-preserving rotations; generic angular-mixing rotations fill them). Any generic (angularmixing) unitary rotation of orbital indices, no matter how small, fills the ERI tensor from 42% to 100% density in a rapid but graded transition at the identity. The nonzero ERI count is Zindependent, confirming that sparsity is purely geometric. Third, entanglement network topology: orbital mutual information maps reveal a hub migration pattern--1s  2s  2p--that tracks the partially filled shell across the first row of the periodic table (for Z = 7­9 both the values and the presence of a nonzero valence network are multiplet-member-dependent; where the network is nonzero, the 2p±1 hub pattern is forced -- every other orbital's marginal is pure). Fourth, corevalence decoupling: the core-valence mutual information falls to  2 × 10-3 by Z = 4 and to the  10-15 floating-point noise floor for Z  5 -- an exact core-closure property of this basis (the 1s occupation is exactly 2), so it constrains the basis rather than justifying the composed fiber bundle factorization used in the GeoVac molecular framework. In the composed molecular architecture, per-block entanglement is R-independent, with core/bond entropy ratios of 40× at matched qubit count. These results establish that the angular momentum eigenbasis decouples one-body energy transport from two-body entanglement, and that the O(Q2.5) Pauli scaling of the GeoVac qubit Hamiltonians is a direct consequence of this basis choice. This is Paper 26 in the GeoVac series.
+
+I. INTRODUCTION
+Quantum simulation of fermionic systems encodes second-quantized Hamiltonians as weighted sums of Pauli operators. The number of nonzero Pauli terms, the number of qubitwise-commuting (QWC) measurement groups, and the Pauli 1-norm  are the dominant resource metrics for near-term variational [1] and faulttolerant [2] quantum algorithms. All three metrics depend on the choice of single-particle basis: a basis that produces sparse two-body matrix elements yields fewer Pauli terms and lower measurement overhead.
+The GeoVac framework [5, 6, 8] constructs qubit Hamiltonians in the angular momentum eigenbasis, where single-particle orbitals are products of hydrogenic radial functions and spherical harmonics labeled by (n, l, m). In this basis, the Gaunt selection rules from angular momentum conservation zero out the majority of electron repulsion integrals (ERIs) [10]: at lmax = 2, 91.48% of all possible two-body matrix elements vanish by the Wigner­Eckart selection rules alone; under the stricter pair-diagonal restriction realized by the composed pipeline the angular ERI density is 2.76% (97.24% zero) [10]. This sparsity produces qubit Hamiltonians with O(Q2.5) Pauli terms for composed molecular systems [8], compared to O(Q3.9­4.3) for Gaussian orbital
+
+bases.
+Two questions about this basis remain open. First, is the sparsity fragile or robust? Does an infinitesimal change of basis destroy it, or does it degrade smoothly? Second, what is the entanglement structure of the ground state in this basis? The angular momentum eigenbasis diagonalizes the one-body Hamiltonian (up to a known off-diagonal coupling  = -1/16 from the graph Laplacian [6]); does this one-body near-diagonality translate into a simple entanglement pattern?
+This paper answers both questions through systematic computation across He-like ions (Z = 2­10) and firstrow atoms (Z = 2­9) in the graph eigenbasis at nmax = 2­4. The results establish four structural properties of the angular momentum eigenbasis that are relevant to quantum simulation resource estimation.
+Provenance (register tiers). The energy­entanglement decoupling, the S  Z-2.56 scaling, the 17.1%  100% basis-intrinsic sparsity transition (with a Z-independent nonzero ERI count), the hub-migration pattern, the core­valence factorization thresholds, the Z-0.85 decay of the off-diagonal energy fraction (§II.C), and the composed per-block R-independence with its  40× core/bond ratio (§V.B­C) are MEASURED (computed) results; the Z  5 core­valence vanishing at nmax = 2 is stronger -- a derivation from a machine-verified premise (exact core closure, §V). The reported entropy is the von
+
+2
+
+Neumann entropy of the normalized one-body reduced density matrix throughout.
+
+II. THE THREE-LAYER DECOMPOSITION
+
+A. Hamiltonian structure in the graph basis
+
+The full Hamiltonian for an N -electron atom in the angular momentum eigenbasis decomposes as
+
+H = Hdiag + Hh1,off + HVee,off,
+
+(1)
+
+where Hdiag contains the diagonal one-body energies nlm and the diagonal (Hartree) electron repulsion, Hh1,off contains the off-diagonal one-body matrix elements from the graph Laplacian (with coupling constant  = -1/16), and HVee,off contains the off-diagonal electron repulsion integrals (exchange and correlation).
+These three layers correspond to three physically distinct contributions:
+
+1. Rational layer (Hdiag): diagonal energies and mean-field repulsion. Produces no orbital entanglement--the ground state is a single Slater determinant with zero entanglement entropy.
+
+2. Topological layer (Hdiag + Hh1,off): adds the graph Laplacian inter-shell couplings. These are one-body operators that redistribute amplitude among orbitals but, being separable, generate negligible entanglement.
+
+3. Correlation layer (Hdiag+Hh1,off+HVee,off): adds the off-diagonal electron repulsion. This is the irreducible two-body interaction that generates all entanglement in the ground state.
+
+The decomposition is specific to the angular momentum eigenbasis. In a generic orbital basis, the one-body Hamiltonian has dense off-diagonal elements, and the three layers are not separable.
+
+B. Energy-entanglement decoupling
+We compute the ground-state energy and the entanglement entropy S = - i(ni/N ) log(ni/N ) -- the von Neumann entropy of the normalized one-body reduced density matrix (equivalently the natural-orbital occupation entropy, with ni the 1-RDM eigenvalues and N the electron number) -- for each layer by exact diagonalization (full configuration interaction) of He-like ions at nmax = 4. This entropy is a genuine correlation measure for the two-electron systems studied here: it vanishes exactly when all N electrons occupy one doubly-occupied spatial orbital -- for N = 2, precisely the single closedshell-determinant case -- and for the He-like family of Table I it is nonzero only through the two-body interaction -- the property used in this section. (For N > 2
+
+TABLE I. Energy-entanglement decoupling in He-like ions at nmax = 4. fEh1 and fEVee: fractional contribution of each offdiagonal layer to the correlation energy (note: fractions sum
+to values exceeding 1.0 because the layers are not orthogo-
+nal projections of the correlation energy; cross-terms between the layers contribute positively). fSh1 and fSVee: fractional contribution to the entanglement entropy. Stotal: total entanglement entropy (von Neumann entropy of the normalized
+1-RDM) in nats.
+
+Z
+
+fEh1
+
+fEVee
+
+fSh1
+
+fSVee
+
+S (nats)
+
+2
+
+0.387
+
+1.290
+
+0.002
+
+0.998
+
+0.0419
+
+3
+
+0.289
+
+1.570
+
+0.000
+
+1.000
+
+0.0120
+
+4
+
+0.228
+
+1.690
+
+0.000
+
+1.000
+
+0.0054
+
+5
+
+0.187
+
+1.757
+
+0.000
+
+1.000
+
+0.0031
+
+10
+
+0.099
+
+1.881
+
+0.000
+
+1.000
+
+0.0007
+
+even a closed-shell single determinant gives S > 0 under this normalization -- a determinant with k doubly occupied spatial orbitals gives S = ln k; closed-shell Ne gives S = ln 5. The first-row results of §IV therefore rely on the orbital mutual information, not on this aggregate S.)
+Table I presents the fractional contribution of each offdiagonal layer to the total correlation energy Ecorr = EFCI - Ediag and to the total entanglement entropy.
+The central result is stark: the graph Laplacian topology (Hh1,off) contributes 10­39% of the correlation energy but less than 0.2% of the entanglement entropy. The off-diagonal electron repulsion contributes effectively 100% of the entanglement.
+The entanglement entropy scales as a power law across the isoelectronic series:
+
+S(Z)  Z-2.56,
+
+(2)
+
+obtained from a log-log fit across Z = 2­10. This is con-
+sistent with the known result that electron correlation
+becomes perturbatively small at large Z, where the nu-
+clear attraction dominates the electron repulsion and the
+ground state approaches a single Slater determinant. The operator-theoretic origin of both the fSh1  0
+decoupling and the Z-2.56 scaling is established in Pa-
+per 27 [12]. The decoupling follows from a free-fermion
+identity: any non-degenerate one-body ground state on
+a finite lattice has identically zero single-orbital entropy in its natural-orbital basis, so fSh1  0 up to the (exponentially small) projection defect that maps the
+natural- orbital basis to the angular-momentum eigen-
+basis. The Z-scaling follows from the Paper 27 universal curve SB = A(w~B/B): across He-like ions, w~B = Veoeff(H1)F /H1F  1/Z (because Vee  Z while H1  Z2) while B is nearly Z-independent, so S(Z)  Z- with   2.3 in the nmax = 4, Z  [2, 10] window. The measured exponent is -2.563 at nmax = 4 (least squares over Z = 2, 3, 4, 5, 6, 8, 10), of which the
+-2.56 in Eq. (2) is the rounded form. No agreement per-
+centage is quoted between the two: they are the same
+fit, so the comparison would be circular. (An earlier
+
+3
+
+version quoted -2.546 agreeing "to within 0.6%", and a 2026-08-28 revision replaced it with 0.11%; both were self-comparisons.) The single exponent should not be read as a power law holding pointwise across the window: the local log-log slope runs from  3.1 at Z = 2  3 to  2.2 at Z = 5  10, the same smooth-but-not-power-law behaviour Paper 27 reports for the corresponding block quantity [12].
+
+C. Connection to graph validity (open)
+
+The fractional energy contribution of Hh1,off decays with Z, but far more slowly than a single-gap perturba-
+tive estimate suggests. The graph off-diagonal coupling
+ = -1/16 is Z-independent while the diagonal energies scale as Z2, so the naive single-gap ratio
+
+||
+
+n2
+
+Z2/2n2 = 8Z2
+
+(3)
+
+predicts a Z-2 decay (3.1% at Z = 2 for n = 1). The measured fEh1 column of Table I decays only as  Z-0.85 (log­log fit over Z = 2­10) and sits 12×­79× above
+the naive estimate across the table. [Corrected 2026-
+08-29: an earlier version asserted that the naive scaling "matches" the fEh1 column; it does not, in either magnitude or exponent.] The discrepancy is structural: fEh1 aggregates off-diagonal coupling over the full spectrum,
+not a single gap, and no quantitative bridge from  to
+this column is currently established.
+Below the graph validity boundary at Zc  1.84 (Papers 13 and 34 [7, 11]), the graph-native CI over-binds
+(violating the variational bound). Whether the slow Z-0.85 decay measured here connects quantitatively to
+that boundary is open; Table I starts at Z = 2 and does
+not probe the sub-Zc regime.
+
+III. BASIS-INTRINSIC SPARSITY
+A. The angular momentum eigenbasis as a sparsity-isolated point
+Paper 22 established that the angular ERI density is determined solely by angular quantum numbers and is independent of the radial potential [10]. We now ask a sharper question: within the space of orbital bases for a spherically symmetric system, is the angular momentum eigenbasis an isolated point of sparsity, or is it surrounded by a family of bases with comparable ERI density?
+We test this by applying a unitary rotation U () = eiG to the spatial orbital basis, where G is a random anti-Hermitian generator, and computing the number of nonzero ERIs as a function of the rotation angle .
+
+B. Sparsity transition at the identity
+
+At nmax = 2 (five spatial orbitals: 1s, 2s, 2p-1, 2p0, 2p1), the graph basis produces 107 nonzero ERIs out of 54 = 625 possible four-index com-
+binations, corresponding to an ERI density of 17.1%.
+Rotating the basis by any nonzero angle fills the ERI tensor: the density rises to 42.7% at  = 10-8, 70.2% at 10-6, 83.0% at 10-4, and saturates at 100% (625/625) for   10-2.
+Corrected 2026-08-29. This subsection previously re-
+ported 265/625 = 42.4%. That count came from an eval-
+uator that omitted the Coulomb selection rule ma +mb = mc+md, so 158 of the 265 entries (59.6%) were physically zero. The correction strengthens the sparsity claim and
+reverses the basis-size trend reported below; the qualita-
+tive content -- that the sparse point is isolated and any
+angular-mixing departure is dense -- is unchanged.
+The discontinuity is at the identity itself; the approach
+to saturation is rapid but graded, not a step at a finite
+:
+
+0.171,  = 0
+
+
+
+ 0.427,
+
+ = 10-8
+
+
+
+D() = 0.702,  = 10-6
+
+(4)
+
+0.830,  = 10-4
+
+
+
+ 1.000,
+
+  10-2.
+
+(Corrected 2026-08-28: this equation previously reported a two-branch form with D = 0.992 for  > 10-6. Neither value reproduces -- at  = 10-6 the measured den-
+sity is 91.4%, and saturation is complete at 625/625, not
+620/625. The qualitative content, that the sparse point
+is isolated and any angular-mixing departure is dense, is
+unchanged and if anything stronger.) Generator dependence. The two endpoints --
+0.171 at the identity and 1.000 saturation for   10-2 -- are properties of the basis and are reproduced by ev-
+ery random antisymmetric generator tested. The three intermediate densities are not (the 10-6 value varies sim-
+ilarly): across five seeds of the same construction the  = 10-8 value spans 0.38­0.46 and the  = 10-4
+value spans 0.76­0.83 (the quoted spans are sampling-
+dependent, not generator-variation limits). The val-
+ues tabulated above are for one representative generator (seed 42) at the 10-10 nonzero-entry cutoff used through-
+out; they should be read as a profile shape, not as ba-
+sis constants -- the intermediate values also shift with the cutoff (at  = 10-8: 0.42 at a 10-8 cutoff, 0.72 at 10-10, 0.91 at 10-12). The two endpoints are cutoff-
+robust: the identity-point zeros are exactly 0.0 and the
+smallest nonzero entry is 0.0172, so the 107/625 count
+is independent of any cutoff below that value; satura-
+tion is complete (625/625) at every (, seed) tested, with the margin above the 10-10 cutoff ranging from  2 orders (at the  = 10-2 saturation threshold) to  10 (at
+ = 0.1; a previously quoted "5­9 orders" understated
+this spread). (Noted 2026-08-28: the corrected numbers
+
+4
+
+replaced a wrong value but initially inherited this unstated parameter.)
+This result is not an artifact of the small basis. At nmax = 4 (30 spatial orbitals), the graph basis produces 57,700 nonzero entries out of 304 = 810,000, a full-tensor density of 7.12%. The density therefore improves with basis size, from 17.1% at nmax = 2 to 7.12% at nmax = 4. Counting instead over canonical unique tuples (p  q, r  s) gives 15,293 of 216,225, a density of 7.07% -- and the same improvement is visible within that convention alone (18.2% at nmax = 2), so the trend is not an artifact of mixing the two counts. Any rotation again fills the tensor to near-complete density.
+Corrected 2026-08-29. The retired text reported 318,720 (39.3%) and 79,465 (36.8%) and concluded that the density was "essentially flat . . . does not degrade with basis size." Those counts carried the same missing selection rule as the nmax = 2 figure, and at nmax = 4 it inflated them by a factor of 5.5. With the rule imposed the conclusion is not merely restored but reversed in the framework's favour: the density falls with basis size (empirically  M -0.49 over M = 5, 14, 30).
+
+IV. ENTANGLEMENT NETWORK TOPOLOGY
+
+A. Orbital mutual information
+
+The entanglement network of an N -electron ground state can be characterized by the orbital mutual information [3, 4]
+
+I(i, j) = S(i) + S(j) - S(ij),
+
+(5)
+
+where S(i) is the von Neumann entropy of the reduced density matrix for spatial orbital i, and ij is the twoorbital reduced density matrix. The mutual information I(i, j) quantifies the total (classical and quantum) correlation between orbitals i and j.
+We compute I(i, j) from the FCI ground state for firstrow atoms in the graph eigenbasis at nmax = 2. (Corrected 2026-08-28: the values reported in this section previously came from nmax = 3 and nmax = 4 runs while the text stated nmax = 2 -- one of them, I(2s, 3s), referenced an orbital absent from the nmax = 2 basis. Every number below is now the nmax = 2 value. The migration pattern itself is unchanged, and is cleaner in the corrected data.)
+
+C. Z-independence of ERI count
+
+B. Hub migration across the periodic table
+
+The nonzero ERI count is identical across all Z at fixed nmax: 15,293 canonical-unique nonzero ERIs at nmax = 4 for Z = 2, 3, 10 (and 107 full-tensor at nmax = 2 for Z = 2, 6, 10). This confirms that the sparsity pattern is purely geometric--determined entirely by angular momentum conservation (Gaunt selection rules)--and independent of the radial wavefunctions. Changing Z rescales the radial functions Rnl(r)  Z3/2Rnl(Zr) but does not alter which angular integrals vanish.
+D. Implications for Pauli scaling
+The O(Q2.5) Pauli scaling of the GeoVac composed qubit Hamiltonians [8] is a direct consequence of the Gaunt sparsity. The sparsity transition (Eq. 4) shows that this scaling is not continuously connected to the O(Q3.9­4.3) scaling of Gaussian bases. The angular momentum eigenbasis sits at a singular point in the space of orbital bases: essentially the unique point where angular momentum conservation is exactly respected and the ERI tensor is sparse. Any generic departure from this point -- that is, any rotation that mixes different (l, m) labels -- immediately incurs the dense-ERI penalty, no matter how small. Rotations that preserve the (l, m) labelling cannot change which Gaunt integrals vanish and so leave the sparsity intact; this is the sense in which the point is essentially rather than strictly unique.
+
+The mutual information matrices reveal a hub migration pattern that tracks the partially filled shell:
+Helium (Z = 2, 2 electrons): Star topology centred on 1s. The dominant correlation is I(1s, 2s) = 0.745, carrying 99.1% of the total mutual information (0.752); all other orbitals connect through 1s, which is the sole entanglement hub.
+Lithium (Z = 3, 3 electrons): The hub shifts to 2s. The dominant pair is still I(1s, 2s) = 0.420 (65.6% of total MI), but a second channel I(2s, 2p0) = 0.212 (33.1%) opens, and the 1s share of the total mutual information falls from 50.0% in He to 33.5% -- the onset of corevalence decoupling.
+Beryllium (Z = 4, 4 electrons): The 2s orbital remains the primary hub, but the network has re-formed around the valence pair: the dominant correlation is now I(2s, 2p0) = 0.232 (99.1% of total MI), with 2s and 2p0 each carrying  49.8% of the total, while the 1s share collapses to 0.5%.
+Boron­Carbon (Z = 5­6): The total mutual information vanishes identically at nmax = 2: the ground state occupies a single spatial configuration in this basis (integer natural occupations 2, 2, 1, 0, 0 for B and 2, 2, 2, 0, 0 for C), so every spatial-orbital mutual information vanishes here (B: one singly-occupied orbital; C: all orbitals paired). (Carbon is additionally a single determinant; boron is not -- its expansion carries two determinants at weights 0.85 and 0.15 -- but they share one spatial
+
+5
+
+configuration, which is what the measure sees.) This is a basis-truncation artifact of the single valence p shell (three 2p orbitals) available at nmax = 2 (see §VI), not a physical decoupling.
+Nitrogen­Fluorine (Z = 7­9, 7­9 electrons): The hub transitions to the 2p(±1) pair, which carries the mutual information: I(2p-1, 2p+1) = 0.566 (N), 0.014 (O), 0.982 (F) for the multiplet member the eigensolver returns -- these ground states are 4-, 3- and 4-fold degenerate, and the value ranges from 0 (single-determinant members) up to a member-dependent maximum measured at 1.43 (N), 1.386 (O), 1.386 (F) (§V, degeneracy caveat). (Values corrected 2026-08-29: the retired 1.837/1.785/1.644, and a claimed ln 8/ln 16 ceiling, came from a single-orbital entropy routine that built i diagonal-only and so discarded the spin coherence |i| -- nonzero for exactly these sector-mixed multiplet members.) When the network is nonzero it is carried by the 2p(±1) pair.
+The pattern is:
+hub: 1s -Z-=-3 2s -Z-=-5 frozen -Z-=-7 2p -Z-=-10 frozen, (6)
+following the shell-filling sequence. At each transition, the previously active shell freezes (its mutual information with other orbitals drops to near zero) and the newly filling shell becomes the entanglement hub.
+C. Physical interpretation
+The hub migration has a simple physical origin: entanglement is generated by the off-diagonal Vee interaction, which is strongest between orbitals that share the same spatial region and are partially occupied. A closed shell (ni  2 for a spatial orbital) has S(i)  0 and contributes negligible mutual information. An open shell (0 < ni < 2) has maximal S(i) and dominates the entanglement network.
+This mechanism is basis-independent in principle, but the angular momentum eigenbasis makes it maximally transparent: the one-body Hamiltonian is nearly diagonal (the graph Laplacian couples only adjacent n-shells with strength  = -1/16), so the natural orbital occupations closely track the Aufbau filling order. In a Gaussian basis, where the one-body Hamiltonian has dense off-diagonal elements, the hub structure would be obscured by basis-induced orbital mixing.
+V. CORE-VALENCE DECOUPLING
+A. Core-valence mutual information
+The GeoVac composed geometry [9] factorizes the molecular electronic structure into separate fiber bundles for core and valence electrons, each in its own nat-
+
+TABLE II. Core-valence mutual information Icv for first-row atoms in the graph eigenbasis (nmax = 2). Core orbitals: 1s. Valence orbitals: 2s, 2p.
+
+Atom He Li Be
+B­Ne
+
+Z 2 3 4 5­10
+
+Icv 0.751 0.213 0.002  10-14 (noise floor)
+
+ural coordinate system. This factorization assumes that the cross-bundle entanglement is negligible. We test this assumption by computing the total core-valence mutual information
+
+Icv =
+
+I(i, j)
+
+(7)
+
+icore jvalence
+
+for first-row atoms in the graph eigenbasis. Table II presents the results. Convention note
+(2026-08-28): the tabulated Icv is the bipartite core/valence mutual information 2Score, which coincides with the pairwise sum of Eq. (7) for He and Be but not for Li, where the pairwise sum is 0.429 against the tabulated 0.213. The two quantities should be distinguished; reconciling the equation with the table is an open item.
+The core-valence mutual information drops sharply with Z. By Z = 4 (beryllium), Icv  0.002, and for Z  5 it is not merely small but identically zero to floatingpoint precision: the computed values span -8.4 × 10-15 to -8.9 × 10-16 and exactly 0 for Ne, i.e. they sit at the double-precision noise floor, with the negative signs themselves numerical noise. That is a sharper numerical statement than the < 10-3 bound this table carried before the 2026-08-28 revision (it now reads  10-14).
+Scope (2026-08-28, revised). It does not follow that the core-valence factorization is exact. The mechanism is exact core closure: at nmax = 2 the 1s natural occupation is 2.000000 for every Z  5, so S(1s) = 0 and with it every core-valence mutual information, identically. Since a closed core admits no core-valence excitation in this basis, the vanishing is a property of the basis and not yet a quantitative justification of the composed fiber-bundle factorization; establishing that requires a basis in which core-valence excitations are available.
+Three cases must be distinguished. Network-collapsed : boron and carbon, whose entire network reduces to a single spatial configuration (total mutual information 0, §IV), so their Icv carries no information. Small but nonzero: beryllium, whose 1s occupation is 1.99987 -- not exactly 2, so the core-closure mechanism does not apply -- and whose Icv = 0.0022 against a live network (0.235 nats total) is a genuine  10-3-level core-valence decoupling measurement. Identically zero via core closure: nitrogen­fluorine, whose valence networks are alive for the generic multiplet member the eigensolver returns (single-determinant members have no network) while every core-valence mutual information vanishes because the
+
+6
+
+1s occupation is exactly 2.
+
+Degeneracy caveat (2026-08-28, revised). The
+
+N/O/F ground states are degenerate at this basis, and
+
+the multiplet structure is exactly characterizable: every
+
+ground member has 2p0 doubly occupied, and the mul-
+
+tiplet is the span of all fillings of the four 2p±1 spin-
+
+orbitals with the remaining np - 2 valence electrons, of
+
+dimension
+
+4 np -2
+
+= 4, 6, 4 for N, O, F. (These are not
+
+LS-term dimensions -- 4S = 4 but 3P = 9 and 2P = 6;
+
+the model Hamiltonian at this basis energetically distin-
+
+guishes 2p0 from 2p±1, so the degeneracy is combinatorial, not rotational.) Any specific intra-valence mutual
+
+information is therefore a property of whichever multi-
+
+plet member the eigensolver returns. The spread is to-
+
+tal: the multiplet contains single-determinant members
+
+-- all 4/6/4 determinant basis states are themselves exact
+
+ground eigenstates with every orbital mutual information 0 (for O, |1s22s22p2-12p20 is the unique determinant in its (ML, MS) sector and hence an exact ground eigen-
+state), alongside strongly correlated members reaching a
+
+measured maximum of 1.43 (N), 1.386 (O), 1.386 (F) --
+
+the last two being ln 4 to all quoted digits. The member-
+
+representative values (0.566/0.014/0.982) are not basis
+
+constants, and even the qualitative "the valence network
+
+is alive" reading is member-dependent.
+
+Retracted 2026-08-29: ceiling attainment. This para-
+
+graph previously asserted an information-theoretic ceil-
+
+ing of ln 8  2.08 (N/F) and ln 16  2.77 (O), "attained exactly by explicit members . . . pinned to 10-9 by the
+
+backing test". Both the quoted ceilings and their attain-
+
+ment were artifacts of a single-orbital entropy routine
+
+that built i diagonal-only, discarding the spin coherence |i|; because a diagonal Shannon entropy majorizes the true von Neumann entropy, the routine over-reported
+
+si (e.g. 0.798 against a true 0.313) and the resulting "mutual information" violated subadditivity on half the or-
+
+bital pairs. With the corrected full reduced density ma-
+
+trix the explicit constructions reach 1.398/0/1.386, not
+
+the claimed ceilings. No analytic ceiling is asserted in
+
+its place: the measured maxima above are MEASURED,
+
+and the qualitative claim they support -- that the value
+
+is member-dependent and ranges from 0 up to an O(1)
+
+maximum -- is unaffected.
+
+What is degeneracy-robust is the core-valence state-
+
+ment, though it is now a bound rather than the exact
+
+theorem claimed previously. For O and F every determinant in the ground multiplet carries 1s2, so 1s is pure for any member and Icv = 0 exactly. For N this premise fails under the exact Coulomb selection rule: sixteen support determinants lack 1s2, because the restored
+
+m-changing multipoles include the core  valence double excitation 1s 1s|2p-1 2p+1. They carry 5.8 × 10-5
+of the multiplet weight (0.0014%), giving a measured Icv  4.3 × 10-4 over sampled members -- so core closure at N is approximate at the 10-4 level, not exact.
+
+(An earlier version of this caveat claimed the valence
+
+network exceeds 0.3 in every member; that was an arti-
+
+fact of sampling sector-mixed eigenvectors, which cannot
+
+reach the single-determinant members.) Tier: the multiplet structure is MEASURED; the Icv = 0 statement is a derivation from a machine-verified premise for O and F only, and a MEASURED bound at N; the degeneracies are MEASURED; the member-representative values are eigensolver-dependent by construction. Beryllium and nitrogen­fluorine are genuine, if basis-limited, measurements of core-valence decoupling; boron and carbon are not measurements of it at all. ("Network-collapsed" refers to the vanishing of the returned state's mutual information; B and N/O/F are additionally energydegenerate, which is the separate phenomenon treated in the degeneracy caveat above.)
+An earlier version of this paragraph read the noisefloor values as showing the factorization "exact in this basis, not approximate" (withdrawn); a subsequent revision over-corrected in the other direction, attributing the vanishing to a single spatial configuration at every Z  5, which is false for N, O and F. The composed factorization's assumption of negligible core-valence entanglement is consistent with these measurement at beryllium and the exact core closure from boron onward, but is not established by them at this basis (see the scope note above).
+Helium (Icv = 0.751) is the exception: with only two electrons, there is no core-valence separation, and the entire system is entangled. Lithium (Icv = 0.213) is intermediate: the 1s core is partially decoupled from the 2s valence electron, but the separation is not yet clean. This is consistent with the known difficulty of treating lithium in the composed framework (the PK pseudopotential is the accuracy bottleneck [9]).
+B. Molecular entanglement: R-independence
+In the composed architecture, each orbital block (core, bond pair, lone pair) has its own effective nuclear charge Zeff and its own set of hydrogenic orbitals. The onebody and two-body matrix elements within each block are computed from Zeff alone, with no dependence on the internuclear distance R. The nuclear geometry enters only through the nuclear repulsion energy, which is a classical constant.
+This structural feature implies that the per-block entanglement entropy is R-independent. We verify this for the H2 bond pair in the composed encoding:
+Sbond(R) = 0.330 nats  R  [0.5, 10.0] bohr. (8)
+(Value corrected 2026-08-29 with the exact global-ML ERI rule, from the retired 0.303; the R-independence itself is unchanged and exact -- the electronic blocks are bit-identical across R.)
+The entropy does not approach ln 2  0.693 nats at large R, which would correspond to the two electrons becoming maximally entangled across the two atomic centers at dissociation. This is a known limitation of the composed architecture: with fixed-exponent blocks,
+
+7
+
+the basis cannot describe bond breaking, where the true wavefunction transitions from a single-determinant bonding state to a multi-reference dissociated state. The composed architecture is designed for single-point energy evaluation at fixed geometries, not for dissociation curves.
+
+nearly diagonalizing the one-body physics, isolates the two-body entanglement in Vee alone.
+B. Connection to quantum simulation resources
+
+C. Core/bond entropy ratio
+
+For LiH in the composed encoding, the core block (Zeff = 3) has Score = 0.008 nats, while the bond block (Zeff = 1) has Sbond = 0.330 nats. The ratio is
+
+Sbond  40,
+
+(9)
+
+Score
+
+(both values corrected 2026-08-29 with the exact ERI rule; the retired figures were 0.006, 0.303 and  50) consistent with the S  Z-2.56 scaling law: the core electrons at Zeff = 3 are 32.56  17 times less entangled than the bond electrons at Zeff = 1 (the discrepancy from the scaling prediction reflects the different electron counts in core vs. bond blocks).
+This ratio quantifies the information-theoretic asymmetry between core and valence: the core contributes negligible entanglement to the total state and can be treated as a classical mean-field background with minimal loss of quantum information.
+
+VI. DISCUSSION
+A. Why the angular momentum eigenbasis decouples energy from entanglement
+The energy-entanglement decoupling (Table I) has a simple structural origin. The one-body Hamiltonian h1 is a separable operator: it acts independently on each electron. A separable operator cannot generate entanglement between orbitals. In the angular momentum eigenbasis, h1 is nearly diagonal (the off-diagonal elements are the graph Laplacian couplings with  = -1/16), so Hh1,off is a small perturbation that mixes single-particle states without introducing two-body correlations.
+The electron repulsion Vee is the irreducible two-body interaction. It generates entanglement by correlating the occupations of pairs of orbitals. In the angular momentum eigenbasis, the Gaunt selection rules restrict which orbital pairs can interact, producing the sparse entanglement networks observed in Sec. IV.
+The decoupling is basis-specific. In a Gaussian orbital basis, the one-body Hamiltonian has dense off-diagonal elements (from the kinetic energy and nuclear attraction integrals in the non-orthogonal basis). These dense onebody couplings mix orbital occupations in ways that blur the distinction between one-body redistribution and twobody correlation. The angular momentum eigenbasis, by
+
+The energy-entanglement decoupling has a direct implication for quantum simulation. The off-diagonal Vee elements that generate all the entanglement are precisely the elements constrained by the Gaunt selection rules. Fewer nonzero Vee elements means fewer Pauli terms in the Jordan­Wigner encoding, fewer QWC measurement groups, and lower 1-norm--the three resource metrics that dominate near-term quantum algorithm cost.
+The composed qubit Hamiltonians [8] exploit this directly: by staying in the angular momentum eigenbasis and respecting the block structure of the composed geometry, the GeoVac Hamiltonians achieve O(Q2.5) Pauli scaling with 51×­1712× fewer Pauli terms (H2O) than the Gaussian Q3.92 power-law interpolation of published counts at matched qubit counts (Paper 14; the largest ratio compares against the interpolation at Q = 196, beyond the published points).
+C. Limitations
+Several limitations should be noted.
+Basis truncation. The first-row entanglement network results (Sec. IV) use nmax = 2 (five spatial orbitals). For Z  5, this provides only one valence p shell beyond the 1s and 2s shells. The hub migration pattern is robust across the series, but quantitative mutual information values may shift at larger nmax. The He-like ion results (Table I) use nmax = 4 (30 spatial orbitals) and are wellconverged.
+Composed R-independence. The R-independent block entanglement (Eq. 8) is a structural property of the composed architecture, not a physical statement about molecular entanglement. The true molecular ground state has R-dependent entanglement that rises toward the ln 2 dissociation limit. The composed architecture captures the entanglement within each block accurately but does not describe inter-block entanglement or bond breaking.
+d-orbital systems. All results are for s- and p-orbital systems. Whether the energy-entanglement decoupling and the hub migration pattern extend to d-orbital systems (transition metals) is an open question. The Gaunt selection rules apply at all lmax [10], so the basis-intrinsic sparsity is guaranteed, but the entanglement structure may differ.
+
+8
+
+VII. CONCLUSIONS
+Four structural properties of the angular momentum eigenbasis have been established.
+First, the one-body Hamiltonian (graph Laplacian topology) contributes significant correlation energy (10­ 39%) but negligible entanglement (< 0.2%). All entanglement in the ground state originates from the offdiagonal electron repulsion. The entanglement entropy scales as S  Z-2.56.
+Second, among orbital bases for spherically symmetric systems, the angular momentum eigenbasis is an isolated point of ERI sparsity. Any generic angular-mixing rotation of the orbital indices, no matter how small, fills the ERI tensor from 42% to 100% density in a rapid but graded transition.
+Third, the orbital mutual information network exhibits a hub migration pattern--1s  2s  2p--that tracks the partially filled shell across the first row (quantitative Z = 7­9 values are multiplet-member-dependent, §V).
+Fourth, core-valence mutual information falls to  2 ×
+
+10-3 by Z = 4 and to the  10-15 noise floor for Z  5 (at nmax = 2, where that vanishing is exact core closure (the 1s occupation is exactly 2)) -- consistent with the composed fiber bundle factorization but, being an exact property of this basis, constraining the basis rather than establishing the factorization (§V).
+These results establish that the O(Q2.5) Pauli scaling of the GeoVac qubit Hamiltonians is a direct consequence of the angular momentum eigenbasis choice: the basis that decouples one-body energy from two-body entanglement is the same basis that produces sparse ERIs, and both properties arise from the underlying angular momentum conservation symmetry.
+ACKNOWLEDGMENTS
+This work was performed using an AI-augmented agentic workflow. The principal investigator provided scientific direction and quality control; implementation, computation, and documentation drafting were performed collaboratively with large language models (Anthropic Claude).
+
+[1] A. Peruzzo et al., "A variational eigenvalue solver on a photonic quantum processor," Nat. Commun. 5, 4213 (2014).
+[2] J. Lee et al., "Even more efficient quantum computations of chemistry through tensor hypercontraction," PRX Quantum 2, 030305 (2021).
+[3] J. Rissler, R. M. Noack, and S. R. White, "Measuring orbital interaction using quantum information theory," Chem. Phys. 323, 519 (2006).
+[4] K. Boguslawski et al., "Entanglement measures for single- and multireference correlation effects," J. Phys. Chem. Lett. 3, 3129 (2012).
+[5] J. Loutey, "Angular Momentum as Information Geometry: Isotropic Packing and the Universal Angular CrossSection," GeoVac Technical Report (2025).
+[6] J. Loutey, "The Dimensionless Vacuum: Recovering the Schr¨odinger Equation from Scale-Invariant Graph Topol-
+
+ogy," GeoVac Technical Report (2025). [7] J. Loutey, Hyperspherical Geometry for Two-Electron
+Atoms (GeoVac Paper 13), Zenodo (2026). [8] J. Loutey, "Structurally Sparse Qubit Hamiltonians
+from Spectral Graph Theory," GeoVac Technical Report (2025). [9] J. Loutey, "Composed Natural Geometries for CoreValence Diatomics: LiH and BeH+ from Discrete Graph Topology," GeoVac Technical Report (2025). [10] J. Loutey, "Potential-Independent Angular Sparsity for Qubit Hamiltonians in Spherical Fermion Systems," GeoVac Technical Report (2026). [11] J. Loutey, The Projection Taxonomy: Where Physics Enters the Graph (GeoVac Paper 34), Zenodo (2026). [12] J. Loutey, "Entropy as a Projection Artifact: One-Body Operators are Entanglement-Inert on Sparse Lattices," GeoVac Technical Report (2026).
+
+

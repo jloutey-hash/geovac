@@ -47,8 +47,8 @@ def test_scalar_pauli_counts_unchanged_with_breit_kwarg():
     spec = lih_spec(max_n=2)
     r = build_composed_hamiltonian(spec, include_breit=True)
     n_terms = len(r['qubit_op'].terms)
-    assert n_terms == 334, (
-        f"LiH scalar with include_breit=True: {n_terms} != 334")
+    assert n_terms == 838, (  # exact-rule 2026-08-29 (was 334)
+        f"LiH scalar with include_breit=True: {n_terms} != 838")
 
 
 # ---------------------------------------------------------------------------

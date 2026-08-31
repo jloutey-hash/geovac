@@ -36,7 +36,11 @@ statement: $A_n=g_n^{2}$, where $g_n=2n^{2}$ is the shell
 degeneracy.  The factor of four is the two-body signature.
 Third, in the Coulomb lattice the cusp concentrates as a single
 ``hot node'' on the $(1s,1s)$ pair-state of the $V_{ee}$ graph;
-entanglement is co-located with cusp mass.  Fourth, a
+since entropy is generated exclusively by $V_{ee}$, this is also the
+locus of entanglement mass: an edge-resolved decomposition puts
+$42.5\%$ of the correlation entropy on the single hottest $V_{ee}$
+edge, while an equally large edge away from the cusp vertex carries
+none.  Fourth, a
 previously claimed rigidity statement --- that the ground-state
 entropy of any two-fermion closed-shell state on the
 Bargmann--Segal harmonic oscillator lattice interacting via
@@ -52,13 +56,14 @@ $S_B = A\,(\tilde{w}_B/\delta_B)^{\gamma}$, where
 $\tilde{w}_B$ is the dimensionless $V_{ee}$ mass off-diagonal
 in the one-body eigenbasis and $\delta_B$ the dimensionless
 first $H_1$ gap; the local exponent extrapolates to
-$\gamma_{\infty} \approx 1.96$ in the joint $Z, n_{\max}\to\infty$
-limit (Richardson on $n_{\max}=2,3,4,5$), slightly below the
+$\gamma_{\infty} \approx 1.93$--$1.96$ in the $n_{\max}\to\infty$ limit
+at the large-$Z$ edge (extrapolated from $n_{\max}=2,3,4,5$;
+fixed-$n_{\max}$ local slopes reach $1.92$ by $Z=100$), slightly below the
 non-degenerate second-order Rayleigh--Schr\"odinger value of
 $2$, with the residual gap attributed to multi-shell
 aggregation in the basis-extension limit.  Entropy is slotted into the
 exchange-constant taxonomy as a projection-class observable:
-zero on the combinatorial graph, finite only after the metric
+zero on the combinatorial graph (non-degenerate case), finite only after the metric
 embedding of $1/r_{12}$.
 \end{abstract}
 
@@ -120,7 +125,7 @@ harmonic-oscillator zero-entropy rigidity, previously carried at the same
 tier, is \textsc{retracted} (\S~\ref{sec:pred1}) --- it was
 \emph{measured} against a restricted evaluation object, not proved;
 the $S_{\mathrm{kin}}/S_{\mathrm{full}}\sim10^{-14}$ numerical
-confirmation and the block-entropy exponent $\gamma_\infty\approx1.96$
+confirmation and the block-entropy exponent $\gamma_\infty\approx1.93$--$1.96$
 (a Richardson extrapolation, \emph{not} an exact value) are MEASURED;
 the area-law $A_n=g_n^2$ recovery is an exact combinatorial identity
 (SYMBOLIC).  Entropy is placed as an embedding-class OBSERVATION in the
@@ -337,7 +342,7 @@ $(2.000, 8.3\times 10^{-22}, 0, 0,\ldots)$, exactly the
 $\{0,1\}$ structure (here doubled by spin) predicted by the
 proposition.  The full Hamiltonian's occupations
 $(1.988, 0.00896, 0.00093, 0.00093,\ldots)$ exhibit the
-$O(10^{-3})$ deviations from $\{0,2\}$ characteristic of the
+$O(10^{-2})$ deviations from $\{0,2\}$ (largest $2 - 1.988 = 0.012$) characteristic of the
 two-body $V_{ee}$ correlation.
 
 The result is expected.  Its value lies in making it visible on
@@ -439,7 +444,7 @@ diagonal:
   \;\; 0.892 \text{ (}n_{\max}=4\text{)},
 \end{equation}
 using the unsquared Frobenius ratio (squared values are $0.847$
-and $0.795$).  The relative commutator
+and $0.796$).  The relative commutator
 $\lVert [H_1, V_{ee}]\rVert_F / \lVert H_1 \rVert_F = 6.1\%$ at
 $n_{\max}=3$, dropping only to $5.3\%$ at $n_{\max}=4$.  The
 commutator does not vanish with basis size; $H_1$ and $V_{ee}$
@@ -451,18 +456,47 @@ in graph-native CI.
 
 \paragraph*{Hot-node localization.}  On the same pair-state
 graph, the $(1s,1s)$ vertex is simultaneously the
-maximum-diagonal entry ($V_{(1s,1s),(1s,1s)} = 5/8$, $42\%$
-of the next-largest diagonal), the largest weighted hub, and
+maximum-diagonal entry ($V_{(1s,1s),(1s,1s)} = 5/8$, with the
+next-largest diagonal at $41.6\%$ of it), the largest weighted hub, and
 the head of the largest off-diagonal edge
 $(1s,1s)\leftrightarrow(1s,2s)$.  The cusp does not distribute
 across pair-states; it concentrates on the unique pair-state
 where both electrons can simultaneously occupy small-$r$
 regions.  Combined with Section~\ref{sec:operator}, this
 identifies the cusp not only as the energy-evaluation
-bottleneck~\cite{GeoVac_Paper18} but as the locus of
-entanglement mass: the pair-state with maximal $V_{ee}$
-contribution is also the pair-state on which the
-two-body-generated entropy concentrates.
+bottleneck~\cite{GeoVac_Paper18} but as the locus of entanglement
+mass: entropy is generated exclusively by $V_{ee}$
+(Section~\ref{sec:operator}) and $V_{ee}$'s mass concentrates here.
+
+\textbf{The decomposition (2026-08-29).}  This was carried as an
+inference until a decomposition existed; one does now.  In the singlet
+pair-state basis the $V_{ee}$ graph's \emph{nodes} and the CI
+\emph{configurations} are the same objects, so entropy can be
+attributed to graph edges without a perturbative step: zero a single
+coupling $V_{\text{ref},J}$ out of the dominant $(1s,1s)$ reference
+node, re-solve, and record the entropy lost.  For He at $Z=2$,
+$n_{\max}=3$ the single edge
+$(1s,1s)\leftrightarrow(1s,2s)$ carries $42.5\%$ of the total
+$S_{\text{full}} = 5.6\times10^{-3}$ nats, and it is exactly the
+hottest off-diagonal edge of the $V_{ee}$ graph identified above.  At
+$n_{\max}=4$ it is the same edge at $40.0\%$, so the co-location is
+not a small-basis artifact.
+
+Two features make this more than a restatement.  First, the control:
+the largest $V_{ee}$ edge that does \emph{not} touch the reference
+node ($|V| = 0.066$, half the hot edge) changes the entropy by
+$-1.7\times10^{-15}$ nats --- numerically nothing.  So what generates
+entropy is not $V_{ee}$ mass anywhere in the graph, but $V_{ee}$ mass
+\emph{at the cusp vertex}.  Second, the correspondence is graded, not
+merely top-ranked: across all edges out of the reference the entropy
+ordering tracks the $V_{ee}$ ordering at Spearman $\rho = +0.94$
+($+0.92$ at $n_{\max}=4$).  It is not proportionality --- the
+$(2s,2s)$ edge carries $29.8\%$ of the entropy on a coupling six times
+smaller than the top edge's, because the attribution weights
+$V/\Delta E$ rather than $V$ --- but the ranking and the maximum
+coincide.  \emph{Tier:} MEASURED, in the graph-native He-like system
+at $n_{\max} = 3, 4$; the attribution is leave-one-edge-out, which is
+well-defined but not the unique possible decomposition.
 
 %=================================================================
 \section{Exchange-Constant Taxonomy Placement}
@@ -484,8 +518,9 @@ Entropy fits the framework cleanly as a
 \begin{itemize}
   \item On the bare combinatorial graph (vertex set
     $\{\phi_{nlm}\}$, one-body operator $H_1$ alone), the
-    ground-state entropy is identically zero
-    (Section~\ref{sec:operator}).  No transcendental enters.
+    \emph{non-degenerate} ground-state entropy is identically zero
+    (Section~\ref{sec:operator}; degenerate open-shell cases escape,
+    Section~\ref{sec:scope}).  No transcendental enters.
   \item Under the metric embedding of $1/r_{12}$ onto the
     pair-state graph, entropy becomes finite.  Diagonal pair
     entries $V_{ii}$ remain rational
@@ -495,11 +530,13 @@ Entropy fits the framework cleanly as a
     in Paper~18.
 \end{itemize}
 Entropy is therefore an embedding-class observable in the
-Paper~18 taxonomy.  The combinatorial graph is entropy-blind;
+Paper~18 taxonomy.  The combinatorial graph is entropy-blind (in the
+non-degenerate case);
 entropy is the price of projecting onto the metric continuum.
 
-This placement is consistent with the Paper~24 HO rigidity
-theorem~\cite{GeoVac_Paper24}: the Bargmann--Segal harmonic
+This placement is consistent with Paper~24's HO $\pi$-freeness
+rigidity theorem (the surviving spectral statement, not the retracted
+entropy corollary)~\cite{GeoVac_Paper24}: the Bargmann--Segal harmonic
 oscillator lattice is bit-exactly $\pi$-free in rational
 arithmetic, and its one-body Hamiltonian has the same
 entanglement-inert character as $H_1$ here (it is one-body by
@@ -511,7 +548,7 @@ a corresponding rigidity of the interacting two-fermion
 \emph{state}.
 
 %=================================================================
-\section{Two Rigidity Results}
+\section{Rigidity Predictions: One Retracted, One Surviving}
 \label{sec:predictions}
 %=================================================================
 
@@ -558,11 +595,19 @@ forces $2n' + l + 2N_{CM} + \Lambda = N_{\mathrm{ket}}$, so
 \end{equation}
 The $N_{\mathrm{tot}}$-changing elements are therefore exactly the
 $n \neq n'$ ones --- the radial off-diagonal of $V$ in the relative
-coordinate --- and they are not small.  For the Minnesota singlet at
+coordinate --- and they are nonzero.  For the Minnesota singlet at
 $b=1$,
 $\langle n_{\mathrm{rel}}{=}0, l{=}0 \lvert V \rvert
- n_{\mathrm{rel}}{=}1, l{=}0 \rangle = +17.2$~MeV against a diagonal
-$\langle 0,0 \lvert V \rvert 0,0 \rangle = -0.81$~MeV.
+ n_{\mathrm{rel}}{=}1, l{=}0 \rangle = +17.3$~MeV against a diagonal
+$\langle 0,0 \lvert V \rvert 0,0 \rangle = -0.55$~MeV (both at the
+$b{=}1$ relative-frame convention of the backing test; corrected
+2026-08-29 --- an earlier version printed $-0.81$, which reproduces
+under no convention of the production Minnesota code).  A magnitude
+caveat, same date:\ the $b{=}1$ contrast is convention-sensitive (the
+diagonal sits near a zero crossing); at the production convention
+($b = 2.0364$, $\hbar\omega = 10$~MeV) the coupling is $0.48\times$ the
+diagonal.  The load-bearing evidence is the convention-independent
+commutator ($0.74$) and the nonzero corrected entropies, not the ratio.
 
 The paper's own contrast should have caught this.  The Interpretation
 paragraph argued that the Coulomb kernel is different because it ``does
@@ -673,16 +718,24 @@ $\delta_B \equiv \Delta E_1 / \lVert H_1 \rVert_F$:
   \label{eq:pred2_universal}
 \end{equation}
 The local exponent approaches a basis-extension limit
-$\gamma_{\infty} \approx 1.96$ as both $Z \to \infty$ and
-$n_{\max}\to\infty$ (Richardson extrapolation on $n_{\max}=2,3,4,5$
-local slopes at $Z=15\to 30$).  This is \emph{below} the
+$\gamma_{\infty} \approx 1.93$--$1.96$ as both $Z \to \infty$ and
+$n_{\max}\to\infty$, extrapolated from the $n_{\max}=2,3,4,5$ local
+slopes at $Z=15\to 30$ ($1.992, 1.976, 1.966, 1.959$).  The precise
+limit is extrapolation-order dependent: a first-order Richardson /
+linear-in-$1/n_{\max}$ fit gives $1.93$--$1.94$, Aitken $\Delta^2$
+gives $1.93$--$1.95$ (three-point-window dependent), and a
+linear-in-$1/n_{\max}^2$ fit gives $1.96$.
+(The earlier text quoted $1.96$ alone without stating the assumed
+order; corrected 2026-08-28.)  The conclusion below $2$ is
+method-independent --- every extrapolation tried lands under $2$,
+as does every tabulated slope.  This is \emph{below} the
 non-degenerate second-order Rayleigh--Schr\"odinger prediction
-$\gamma=2$.  The persistent gap of $\sim 0.04$ at the basis
+$\gamma=2$.  The persistent gap of $\sim 0.04$--$0.07$ at the basis
 limit is an aggregation effect: with more orbitals available,
 $S_B$ accumulates contributions from many small admixtures
 rather than being dominated by the lowest excitation, and the
 aggregate sum scales with a slightly smaller exponent.
-Finite-window fits give $\gamma \in [2.1, 2.4]$, depending
+Finite-window fits give $\gamma \in [2.1, 2.7]$, depending
 monotonically on both $Z$ and $n_{\max}$.  Across $22$ calibration points
 (He-like $Z\in[2,100]$ at $n_{\max}=3$, plus a LiH bond-block
 $R$-sweep from $1.5$ to $8$ bohr) Eq.~\eqref{eq:pred2_universal}
@@ -711,8 +764,12 @@ curve is smooth, not a pure power law; local linearization over
 any finite window picks up a slope that depends on the window.
 (iii) Fixing the Z-window $Z\in\{2,\ldots,30\}$ and sweeping
 $n_{\max}\in\{2,3,4\}$ gives local slopes at large Z of $1.992$,
-$1.976$, and $1.966$ respectively: both $Z$ and $n_{\max}$ drive
-$\gamma$ toward $2$ from above.
+$1.976$, and $1.966$ respectively: these lie \emph{below} $2$ and
+decrease further with both $Z$ and $n_{\max}$, i.e.\ they move away
+from $2$ from below.  (It is the \emph{global}-window exponents that approach $2$ from
+above: $2.373, 2.223, 2.182$ over this $Z\in[2,30]$ window
+(Table~\ref{tab:gamma_surface}); $2.63, 2.38, 2.32$ over the
+$\{2,3,4,6,10\}$ window of robustness item~(c).)
 
 \begin{table}[h]
 \caption{EP-2c pilot data: He-like isoelectronic sequence at
@@ -767,16 +824,20 @@ best single functional form.  (c) The $n_{\max}=2,3,4$ sequence of
 global-window exponents $(\gamma, A) = (2.63, 0.73),
 (2.38, 0.18), (2.32, 0.09)$ shows monotone approach to $\gamma=2$
 from above, at fixed Z-window $\{2,3,4,6,10\}$; the local slope
-at the large-Z edge ($Z=15\to 30$) approaches $\gamma=2$ more
-directly (Table~\ref{tab:gamma_surface}).
+at the large-Z edge ($Z=15\to 30$) instead sits below $2$ throughout
+and descends further (Table~\ref{tab:gamma_surface}).
 
 \begin{table}[h]
 \caption{$\gamma(Z, n_{\max})$ surface (EP-2i + EP-2L).  The
 local slope of $S_B$ vs.\ $\tilde{w}_B/\delta_B$ between $Z=15$
-and $Z=30$ decreases monotonically with $n_{\max}$, crossing
-$2$ between $n_{\max}=2$ and $3$.  Richardson extrapolation
+and $Z=30$ decreases monotonically with $n_{\max}$ and lies
+\emph{below} $2$ at every $n_{\max}$ tabulated.  (The
+global-window column in contrast sits above $2$ and descends
+toward it; the two columns move oppositely and should not be
+conflated.)  Richardson extrapolation
 on $n_{\max}=2,3,4,5$ gives an asymptotic slope
-$\gamma_{\infty} \approx 1.96$, \emph{below} the
+$\gamma_{\infty} \approx 1.93$--$1.96$ (extrapolation-order dependent),
+in every case \emph{below} the
 non-degenerate Rayleigh--Schr\"odinger value of $2$.  The
 global-window $\gamma$ over $Z\in\{2,3,4,6,10,15,30\}$ is
 dominated by small-$Z$ finite-basis residue and is consistently
@@ -793,7 +854,7 @@ $n_{\max}$
 4 & 2.182 & 1.966 \\
 5 & \multicolumn{1}{c}{--} & 1.959 \\
 \hline
-$\infty$ (extrapolated) & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{$\approx 1.96$} \\
+$\infty$ (extrapolated) & \multicolumn{1}{c}{---} & \multicolumn{1}{c}{$\approx 1.93$--$1.96$} \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -846,7 +907,7 @@ $0.204$ (within-block) to $0.027$ (balanced), an $8\times$
 reduction that crosses into the saturation regime.  By
 contrast, the H$_2$O bond block shows no measurable shift
 ($S_{\mathrm{balanced}}/S_{\mathrm{composed}} = 1.002$), and its
-factor-of-$2$ residual from the universal-curve prediction is
+$1.25\pm 0.01$ residual from the universal-curve prediction is
 intrinsic.  The operational statement is:
 Eq.~\eqref{eq:pred2_universal} applies when one chooses a
 specific $H_1$ (including its cross-block contributions) and
@@ -876,7 +937,7 @@ degenerate-PT diagonalization).  Data under
 \texttt{debug/data/ep2\{c,d,e,f,g,h,i\}\_*.json}; fits
 regression-locked by
 \texttt{tests/test\_paper27\_entropy.py::test\_paper27\_ep2c\_dimensionless\_power\_law},
-\texttt{::test\_paper27\_ep2c\_multi\_block\_universality},
+\texttt{::test\_paper27\_ep2c\_multi\_block\_z\_range\_control},
 \texttt{::test\_paper27\_ep2d\_z\_range\_artifact},
 \texttt{::test\_paper27\_ep2g\_universal\_w\_over\_delta},
 \texttt{::test\_paper27\_ep2h\_nmax\_residue\_persists},
@@ -916,7 +977,9 @@ $\rho_1(\beta) = \sum_n p_n(\beta)\,\rho_1^{(n)}$, is the
 ``decoded-temperature spatial residual'' --- what remains of the
 information content after the apparatus parameter $\beta$ is
 factored out.  At $T\to 0$ this residual equals
-$S_{\mathrm{full}}(\mathrm{GS})$ of \S\ref{sec:operator} bit-identically:
+$S_{\mathrm{full}}(\mathrm{GS})$ of \S\ref{sec:operator} to
+$\sim 3\times10^{-10}$ (not bit-exactly; the corpus reserves
+``bit-exact'' for machine-precision skeleton identities):
 \begin{table}[h]
 \caption{Sprint TD Track~2: $T\to 0$ residual matches
 $S_{\mathrm{full}}(\mathrm{GS})$ of \S\ref{sec:operator}.  Data
@@ -950,7 +1013,7 @@ $n_{\max}=4$ sit in the master Mellin engine ring (Paper~32~§VIII
 case-exhaustion theorem and Paper~18~§III.7); the test returned a
 clean negative against a 12{,}312-form mechanical basis at 150~dps
 across all three systems, with control-class baseline matching to
-$z = 0$.  Six orders of magnitude in coefficient relaxation
+$z = 0$.  Three orders of magnitude in coefficient relaxation
 (\(10^3 \to 10^6\)) does not change the verdict.  GeoVac
 correlation entropy is genuinely von~Neumann-only; it is not a
 master Mellin output.  This is structurally distinct from
@@ -986,8 +1049,9 @@ Paper~5~\cite{GeoVac_Paper5} is recovered as a two-body
 pair-counting statement $A_n = g_n^{2}\propto n^{4}$, with the
 factor of four as the two-body signature.  Third, the cusp
 localizes as a single hot node on the $V_{ee}$ pair graph,
-making the loci of energy correlation, entropy generation, and
-cusp mass coincident.  Fourth --- and negatively --- the
+making the loci of energy correlation, entropy generation and cusp
+mass coincident --- established by an edge-resolved entropy
+decomposition on the pair-state graph, not inferred.  Fourth --- and negatively --- the
 claim that two-fermion closed-shell ground-state entropy on the
 Bargmann--Segal harmonic oscillator lattice is identically zero
 for \emph{any} central two-body potential is \textsc{retracted}
@@ -1002,14 +1066,15 @@ Coulomb lattice, block entropy obeys a universal two-variable
 scaling
 $S_B = A\,(\tilde{w}_B/\delta_B)^{\gamma}$ in the dimensionless
 $V_{ee}$ off-diagonal mass and the first $H_1$ gap, with the
-local exponent extrapolating to $\gamma_{\infty} \approx 1.96$
+local exponent extrapolating to $\gamma_{\infty} \approx 1.93$--$1.96$
 as $Z, n_{\max} \to \infty$ -- below the naive second-order
 Rayleigh--Schr\"odinger value of $2$, by a residue attributed
 to multi-shell aggregation in the basis-extension limit.
 
 These results place entropy in the exchange-constant
 taxonomy of Paper~18~\cite{GeoVac_Paper18} as a
-projection-class observable: zero on the combinatorial graph,
+projection-class observable: zero on the combinatorial graph
+(non-degenerate case),
 finite only after the metric embedding of $1/r_{12}$.  The
 two-body character of the area-law scaling is structural, not
 incidental; on present evidence the Coulomb and harmonic
@@ -1067,6 +1132,11 @@ test in the codebase.
     test\_paper27\_ep2c\_dimensionless\_power\_law},
     data in \texttt{debug/data/ep2c\_entropy\_vs\_vee\_offdiag.json}.
   \item Table~\ref{tab:ep2b} and Section~\ref{sec:pred1} corrected numerical claims (EP-2b \textsc{retracted} v5.0.0: $S_{\mathrm{HO}}$ small but nonzero, $0.0671/0.0716/0.0833$ nats, natural-orbital occupation $\approx(1.98,\ldots)$, commutator $O(1)$): \textbf{Verified} by \texttt{tests/test\_paper27\_entropy.py::\allowbreak test\_paper27\_ep2b\_ho\_gs\_is\_not\_a\_single\_determinant} and \texttt{::test\_paper27\_ep2b\_ho\_kinetic\_interaction\_does\_not\_commute}, data in \texttt{debug/data/ep2b\_ho\_two\_fermion.json}.
+  \item Section~\ref{sec:cusp} entropy--cusp co-location
+    ($42.5\%$ of $S$ on the hottest $V_{ee}$ edge at $n_{\max}=3$,
+    $40.0\%$ at $n_{\max}=4$; zero from a comparably large
+    non-reference edge; Spearman $\rho = +0.94$): \textbf{Verified}
+    by \texttt{tests/test\_paper27\_entropy\_locus.py}.
   \item Section~\ref{sec:taxonomy} embedding-class placement:
     diagonal pair-state $V_{ii}$ rationality and spectral
     irrationality verified in EP-3 / energy-graph

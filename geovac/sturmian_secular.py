@@ -277,6 +277,11 @@ def pair_coulomb(oa: dict, ob: dict, oc: dict, od: dict) -> float:
     total = 0.0
     for k in range(kmin, kmax + 1):
         # parity from (l_a k l_c;000): needs la+k+lc even; gaunt handles the zeros
+        # NOTE (2026-08-29 wrong-sign-q audit): this q = mc - ma is CORRECT
+        # here -- it is NEGATED at the call site (gaunt(..., -ma, -q, mc), so
+        # the m-arguments sum to -ma - (mc-ma) + mc = 0).  Do NOT "fix" it in
+        # a mechanical sweep; flipping it would INTRODUCE the bug this audit
+        # removed elsewhere.  See debug/sprint_eri_evaluator_defects_memo.md.
         q = mc - ma
         g1 = gaunt(la, k, lc, -ma, -q, mc)
         if g1 == 0.0:

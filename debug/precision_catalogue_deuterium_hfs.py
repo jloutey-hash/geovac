@@ -46,8 +46,10 @@ Hyperfine splitting (F=I+1/2 vs F=I-1/2):
 
 So the framework-native prediction is
 
-    nu_HFS(D, BF) = (3/2) * (4/3) * (2 mu_d/mu_N) * alpha^2 * (m_e/m_d) Ha
-                  = 2 (2 mu_d/mu_N) alpha^2 (m_e/m_d) Ha
+    nu_HFS(D, BF) = (3/2) * (4/3) * (2 mu_d/mu_N)/(2I) * alpha^2 * (m_e/m_p) Ha
+                  = (3/2) * (4/3) * (mu_d/mu_N) * alpha^2 * (m_e/m_p) Ha
+    (2I = 2 for the deuteron; the mass factor is m_e/m_p for every nucleus
+    because mu_N is defined with the proton mass.  Corrected 2026-08-28.)
 
 Forbidden inputs (none used)
 ----------------------------
@@ -150,7 +152,19 @@ def bohr_fermi_results() -> Dict[str, Any]:
     nu_HFS_H_recoil_MHz = nu_HFS_H_strict_MHz * RECOIL_FACTOR_H
 
     # Deuterium target: I=1, multiplicity = 3/2
-    A_D_strict = bohr_fermi_A_hf_atomic_units(G_D_ATOMIC, ME_OVER_MD)  # Ha
+    #
+    # BUG FIX 2026-08-28 (/qa group6 FULL run, completeness critic + PM):
+    # this line previously read
+    #     bohr_fermi_A_hf_atomic_units(G_D_ATOMIC, ME_OVER_MD)
+    # which is wrong twice, in ways that nearly cancel:
+    #   (a) g_atomic = 2 mu_I/mu_N must be divided by 2I to recover the
+    #       A-constant's mu_I/I; for I=1 that divisor is 2.
+    #   (b) the mass factor is m_e/m_p for EVERY nucleus, because the nuclear
+    #       magneton mu_N = e.hbar/(2 m_p) is defined with the proton mass.
+    # The old line divided by m_d/m_p = 1.99900750 in place of 2I = 2, so it
+    # was high by 496.5 ppm.  H and T were unaffected (I=1/2 => 2I=1, and
+    # m_p/m_p = 1), which is why the H sanity check passed and hid this.
+    A_D_strict = bohr_fermi_A_hf_atomic_units(G_D_ATOMIC / 2.0, ME_OVER_MP)  # Ha
     A_D_strict_MHz = A_D_strict * HZ_PER_HARTREE / 1.0e6
     nu_HFS_D_strict_MHz = (3.0 / 2.0) * A_D_strict_MHz
     nu_HFS_D_recoil_MHz = nu_HFS_D_strict_MHz * RECOIL_FACTOR_D

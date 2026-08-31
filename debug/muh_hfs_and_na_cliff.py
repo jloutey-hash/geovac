@@ -167,6 +167,8 @@ print(f"\n{'Atom':<10} {'Z':>3} {'ns':>3} {'Z_eff':>7} {'I':>5} {'g_N':>9} "
       f"{'A_fw':>10} {'A_exp':>10} {'Cliff':>8}")
 print("-" * 80)
 
+M_P_ME = 1836.15267343  # proton mass in electron masses
+
 results_cliff = {}
 for name, Z, n_val, z_eff, I_nuc, g_nuc, m_amu, A_exp in alkalis:
     m_nuc_mev = m_amu * 931.494
@@ -187,7 +189,13 @@ for name, Z, n_val, z_eff, I_nuc, g_nuc, m_amu, A_exp in alkalis:
         * (2.00232/2)  # electron g-factor (with Schwinger)
         * (g_nuc/2)     # nuclear g-factor
         * ALPHA**2
-        * (1.0 / m_nuc_me)  # m_e/m_N (nuclear magneton)
+        # BUG FIX 2026-08-28 (/qa group6 follow-through): this read
+        #     (1.0 / m_nuc_me)   # m_e/m_N
+        # but the nuclear magneton is mu_N = e.hbar/(2 m_p), defined with the
+        # PROTON mass for every nucleus.  Using m_N suppressed every alkali by
+        # m_N/m_p (6.9x at Li-7 up to 131.9x at Cs-133) and produced the
+        # identical "0.3 MHz" entries for K/Rb/Cs in the published table.
+        * (1.0 / M_P_ME)  # m_e/m_p (nuclear magneton uses the proton mass)
         * psi0_sq
     )
     # Reduced mass correction (the BF formula above uses infinite-nucleus

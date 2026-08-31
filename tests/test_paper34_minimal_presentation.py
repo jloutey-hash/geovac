@@ -43,7 +43,9 @@ def test_h1_is_metric_labels_scale(ns, k, Z):
     _, _, S, h1, _, _ = _build(ns, k, Z)
     pred = _closed_form(S, k, Z, ns)
     rel = np.abs(h1 - pred).max() / np.abs(h1).max()
-    assert rel < 1e-6, f"identity broken: rel dev {rel:.2e}"
+    # measured 3.4-4.0e-9 at this file's Ng=500 grid (6e-10 at Ng=800);
+    # tolerance at 2.5x the measured scale (cert-2 N-10)
+    assert rel < 1e-8, f"identity broken: rel dev {rel:.2e}"
 
 
 def test_identity_has_teeth():

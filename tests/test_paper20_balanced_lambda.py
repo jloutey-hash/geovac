@@ -36,22 +36,39 @@ def _n_pauli_nonid(res: dict) -> int:
 
 
 # (name, spec factory, R or None, table N_pauli (incl. identity), lambda_ni)
-# lambda values recomputed live 2026-07-02 (paper cells synced same day).
+# lambda values recomputed live 2026-07-02 (paper cells synced same day);
+# ALL cells re-measured 2026-08-29 under the exact global-M_L rule (the
+# wrong-sign-q fix; see debug/sprint_eri_evaluator_defects_memo.md).
+# Isostructural invariance survives exactly (NaH == KH, HCl == HBr, ...).
 _BALANCED_TABLE = [
-    ('NaH',  nah_spec,  3.566, 239,  18.9),
-    ('MgH2', mgh2_spec, None, 1501, 101.9),
-    ('HCl',  hcl_spec,  2.409, 2936, 798.8),
-    ('H2S',  h2s_spec,  None, 4119, 816.9),
-    ('PH3',  ph3_spec,  None, 5582, 834.9),
-    ('SiH4', sih4_spec, None, 7273, 853.6),
-    ('KH',   kh_spec,   None,  239,  31.6),   # factory R=4.243; the v4.56-era
-    # 28.15 probe value was unreproducible at any candidate geometry (superseded)
-    ('CaH2', cah2_spec, None, 1501, 118.9),
-    ('HBr',  hbr_spec,  None, 2936, 809.4),
-    ('H2Se', h2se_spec, None, 4119, 820.2),
-    ('AsH3', ash3_spec, None, 5582, 824.2),
-    ('GeH4', geh4_spec, None, 7273, 815.8),
+    ('NaH',  nah_spec,  3.566,   575,  19.6),
+    ('MgH2', mgh2_spec, None,   4861, 110.5),
+    ('HCl',  hcl_spec,  2.409,  9824, 866.1),
+    ('H2S',  h2s_spec,  None,  13863, 879.6),
+    ('PH3',  ph3_spec,  None,  18854, 895.3),
+    ('SiH4', sih4_spec, None,  24745, 914.1),
+    ('KH',   kh_spec,   None,    575,  32.2),  # factory R=4.243
+    ('CaH2', cah2_spec, None,   4861, 128.0),
+    ('HBr',  hbr_spec,  None,   9824, 877.0),
+    ('H2Se', h2se_spec, None,  13863, 883.4),
+    ('AsH3', ash3_spec, None,  18854, 885.2),
+    ('GeH4', geh4_spec, None,  24745, 877.3),
 ]
+
+# Retired rule-A cells (must never re-surface as live values): NaH/KH 239,
+# MgH2/CaH2 1501, HCl/HBr 2936, H2S/H2Se 4119, PH3/AsH3 5582, SiH4/GeH4 7273.
+
+
+def test_rule_a_counts_do_not_resurface():
+    """A wrong-sign-q regression would restore the retired counts exactly;
+    catch it on the cheapest cell (NaH)."""
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        res = build_balanced_hamiltonian(nah_spec(max_n=2), R=3.566)
+    n = _n_pauli_nonid(res) + 1
+    assert n != 239, "retired pair-diagonal NaH count has re-surfaced"
+    assert n == 575, f"NaH balanced count drifted: {n}"
+
 
 
 @pytest.mark.slow

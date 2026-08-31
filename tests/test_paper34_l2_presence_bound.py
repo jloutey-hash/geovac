@@ -4,11 +4,17 @@ Layer-2-presence bound on catalogue residuals
     |eps(observable)| <= max( eps_basis(framework), max_i |L2^(i)| ),
 
 which REPLACED the falsified depth-linear form eps_k ~ k * eps_1 (rem:depth_falsification).
-Closes the NO-TEST coverage gap flagged by the group6 FULL cert (2026-08-24) and
-raised to the PI; written under the group3 re-cert follow-through.
+Written under the group3 re-cert follow-through for the NO-TEST coverage gap
+flagged by the group6 FULL cert (2026-08-24).  It narrows that gap; it does not
+close it (see SCOPE below).
 
-Three genuine legs (the prediction is honestly hedged as a falsifiable Prediction
-with 'outstanding quantification work', so this pins it, not overclaims it):
+SCOPE (sharpened 2026-08-28, /qa group6 FULL run).  Legs 1 and 2 are genuine and
+independent of any hand-set constant.  Leg 3 is a CONSISTENCY CHECK against
+descriptive per-class envelopes, NOT a verification of the per-row bound -- the
+envelopes are fitted to the catalogue they test (see the comment on L2_CLASS_SCALE).
+Paper 34's own 'Outstanding work' lists that quantification as open, and this file
+does not close it.  Earlier revisions of this docstring, and claim_test_matrix row
+118, said otherwise.
 
   1. The exact L2-count=0 rational-analytic anchors are COMPUTED (not asserted) and
      land at residual EXACTLY 0: S^3 Casimir 1/240 = (1/2) zeta_R(-3), Stefan-Boltzmann
@@ -23,15 +29,28 @@ with 'outstanding quantification work', so this pins it, not overclaims it):
      bound-violating row is rejected by the checker (non-tautology guard).
 
 Catalogue residuals / depths / L2-counts are the honest values stated in Paper 34
-sec:prediction + rem:depth_falsification.  The three anchors are computed here.
+sec:prediction + rem:depth_falsification, with two deliberate departures
+(cert-2): the D HFS row carries the paper's L2=1 open-case classification
+(excluded from the bound/class tests, pinned as a counterexample), and the
+depth-3 'Bohr-Fermi strict' row (-456 ppm) is excluded because a truncated
+chain's residual measures truncation, not Layer-2 uncertainty.  Anchors:
+the H 1S polarizability is COMPUTED here (Dalgarno-Lewis symbolic solve);
+the two zeta anchors are sympy identities whose from-scratch derivations
+live in tests/test_paper35_kg_panel.py (this file imports no geovac
+module -- cert-2 M-6).
 """
 from __future__ import annotations
 
-import mpmath as mp
 import pytest
 import sympy as sp
 
 PPM = 1e-6
+
+# The declared open-case exception rows (paper sec:prediction): excluded
+# from the bound/class tests by EXACT NAME (not substring -- a substring
+# escape hatch would silently drop any future row containing the phrase)
+# and pinned as the counterexample test below.
+EXCEPTION_ROWS = {"D HFS (r_Z only; open-case exception)"}
 
 
 # ---------------------------------------------------------------------------
@@ -96,7 +115,32 @@ CATALOGUE = [
     ("Mu HFS (LS-8a)", 2, 199 * PPM, 3),
     ("Ps 1S-2S (alpha^4 Breit)", 2, 64.75 * PPM, 3),
     ("muH Lamb (multi-loop QED + pol)", 3, 0.10e-2, 4),
-    ("D HFS Bohr-Fermi strict", 1, 40 * PPM, 3),
+    # CORRECTED 2026-08-28 (/qa group6 FULL run).  This row previously read
+    #     ("D HFS Bohr-Fermi strict", 1, 40 * PPM, 3)
+    # which consumed a Bohr-Fermi baseline high by 496.5 ppm (2I vs m_d/m_p; see
+    # geovac docs + debug/precision_catalogue_deuterium_hfs.py).  Corrected, the
+    # STRICT-BF residual is -456 ppm.
+    #
+    # It is replaced here by the FULL-CHAIN row, on a ground independent of that
+    # arithmetic: "Bohr-Fermi strict" compares a deliberately truncated chain (no
+    # recoil, no Schwinger a_e, no Zemach -- a net +246 ppm of omitted physics) to
+    # experiment, so its residual measures CHAIN TRUNCATION, not Layer-2 input
+    # uncertainty, and never belonged in a Layer-2-presence catalogue.  The old
+    # +40 ppm hid this by looking like a good match; a chain missing +246 ppm of
+    # corrections cannot legitimately land 40 ppm ABOVE experiment, and that
+    # implausibility was the tell.  Disclosure: the swap was triggered by the
+    # corrected value breaking test_L1_class_is_tight_ppm_scale.  The
+    # justification above does not depend on that failure, but a reader should
+    # weigh the change knowing it.
+    # PAPER-FAITHFUL (cert-2 M-2): sec:prediction keeps D at L2-count=1
+    # (r_Z(D) is the only Layer-2 scalar the chain consumes) as the
+    # DECLARED open-case exception -- the corrected -210.9 ppm residual
+    # is NOT bounded by max(eps_basis, |L2|).  The row is excluded from
+    # the bound/class tests below and pinned as a counterexample in
+    # test_d_hfs_is_the_declared_counterexample.  (The earlier full-chain
+    # L2=2 reclassification contradicted the paper's own open-case
+    # disclosure; sign also restored to match the paper's -210.9.)
+    ("D HFS (r_Z only; open-case exception)", 1, 210.9 * PPM, 4),
     ("He oscillator strength", 2, 3.4e-2, 3),
 ]
 
@@ -106,8 +150,20 @@ CATALOGUE = [
 ANALYTIC_ROWS = {"Stefan-Boltzmann pi^2/90", "H 1S polarizability 9/2 a0^3",
                  "S^3 Casimir 1/240"}
 
-# Per-class Layer-2 scale (Paper 34 structural claim): the residual of a row is
-# bounded by the framework basis ceiling (L2=0) or the class L2-input scale.
+# DESCRIPTIVE per-class envelopes -- NOT the per-row bound of pred:l2_presence.
+#
+# HONEST SCOPE (added 2026-08-28 after the group6 FULL run flagged this):
+# the paper's Prediction is per-row, |eps| <= max(eps_basis, max_i|L2^(i)|), where
+# max_i|L2^(i)| is the uncertainty on THAT row's own largest external input.  The
+# constants below are instead per-CLASS scales chosen just above the largest
+# residual already present in the catalogue (BASIS_CEILING 0.6% vs the catalogue's
+# own 0.534% max; L2_CLASS_SCALE[2] 4% vs its own 3.4% max).  They are therefore
+# an envelope FITTED to the data they test: test_l2_presence_bound_holds_on_every_row
+# cannot fail on this catalogue by construction, and it is a CONSISTENCY CHECK, not
+# a verification of the Prediction.  Paper 34 sec:prediction 'Outstanding work'
+# items (i) and (ii) are exactly this open quantification.  Legs 1 (exact L2=0
+# anchors) and 2 (depth-linear falsification) are independent of these constants
+# and are genuine.
 BASIS_CEILING = 0.6e-2          # framework basis-quality limit (~-0.534% H Lamb, dominant)
 L2_CLASS_SCALE = {1: 100 * PPM, 2: 4.0e-2, 3: 4.0e-2}  # 'tens of ppm' / dominant %-scale
 
@@ -129,7 +185,8 @@ def test_depth_does_not_bound_residual():
     depth3 = [abs(r) for (_, _, r, d) in CATALOGUE if d == 3]
     nonzero3 = [r for r in depth3 if r > 0]
     # (i) at fixed depth 3, nonzero residuals span > 3 orders of magnitude
-    assert max(nonzero3) / min(nonzero3) > 1e3, f"depth-3 spread too small: {sorted(nonzero3)}"
+    # paper says 'more than four orders of magnitude' (measured 3.1e5)
+    assert max(nonzero3) / min(nonzero3) > 1e4, f"depth-3 spread too small: {sorted(nonzero3)}"
     # (ii) at least two depth-3 rows are exactly 0 (a depth-linear ~3% form would
     #      badly mispredict these)
     assert sum(1 for r in depth3 if r == 0.0) >= 2
@@ -146,9 +203,34 @@ def test_depth_does_not_bound_residual():
 # Leg 3: the bound holds; L2-count is the ordering axis
 # ---------------------------------------------------------------------------
 def test_l2_presence_bound_holds_on_every_row():
-    """|eps| <= max(eps_basis, max_i|L2^(i)|) for every catalogue row."""
+    """|eps| <= max(eps_basis, max_i|L2^(i)|) for every catalogue row
+    EXCEPT the declared D open-case (paper sec:prediction; cert-2 M-2)."""
     for name, l2, resid, _ in CATALOGUE:
+        if name in EXCEPTION_ROWS:
+            continue
         assert _bound_holds(resid, l2), f"{name}: |{resid}| exceeds bound {_bound_term(l2)}"
+
+
+def test_d_hfs_is_the_declared_counterexample():
+    """The paper states the corrected D row is NOT bounded 'on the
+    ppm-class reading' (sec:autopsy_d_hfs): an HFS chain is algebraic,
+    not basis-limited, so the basis-ceiling floor of _bound_holds does
+    not apply to it and the operative bound is the L2=1 class scale.
+    Pin the CATALOGUE row itself (delta-review LARGE-2: an earlier
+    version asserted two file-local literals and left the row
+    unconstrained -- a tautology)."""
+    rows = [r for r in CATALOGUE if r[0] in EXCEPTION_ROWS]
+    assert len(rows) == 1, f"expected exactly one exception row: {rows}"
+    name, l2, resid, depth = rows[0]
+    assert l2 == 1, f"{name}: the paper classifies D at L2-count = 1"
+    assert abs(resid - 210.9 * PPM) < 0.5 * PPM, (
+        f"{name}: residual {resid} != the paper's -210.9 ppm")
+    # the violation the paper declares: outside the L2=1 class scale...
+    assert abs(resid) > L2_CLASS_SCALE[1], (
+        f"{name} now sits inside the L2=1 class scale -- update the"
+        " paper's open-case disclosure and this pin together")
+    # ...though numerically under the (inapplicable) basis ceiling
+    assert abs(resid) < 0.6e-2
 
 
 def test_l2_count_separates_where_depth_cannot():
@@ -166,9 +248,18 @@ def test_l2_count_separates_where_depth_cannot():
 
 
 def test_L1_class_is_tight_ppm_scale():
-    """L2-count=1 rows tighten to tens of ppm / sub-ppm (paper's class claim)."""
-    l2one = [abs(r) for (_, l2, r, _) in CATALOGUE if l2 == 1]
+    """L2-count=1 rows tighten to tens of ppm / sub-ppm (paper's class claim).
+
+    NOTE (2026-08-28): this class now rests on three rows (18, 0.11, 2 ppm) after
+    the D HFS strict-BF row was reclassified; it is a thin sample, and the paper
+    should not be read as having tested the class scale broadly.
+    """
+    l2one = [abs(r) for (name, l2, r, _) in CATALOGUE
+             if l2 == 1 and name not in EXCEPTION_ROWS]
     assert max(l2one) <= 100 * PPM, f"an L2=1 residual exceeds the ppm class scale: {l2one}"
+    # the declared exception sits far outside the class scale -- that is
+    # exactly why the paper carries it as an open case
+    assert 210.9 * PPM > 100 * PPM
 
 
 # ---------------------------------------------------------------------------

@@ -93,8 +93,11 @@ class TestDirectCIAccuracy:
                 vee_method='slater_full',  # fci_method='direct' → DirectCISolver
             )
             E, _ = _direct_solve(idx)
-        assert abs(E[0] - (-2.84483)) < 1e-3, (
-            f"He nmax=5 exact-h1: E={E[0]:.6f}, expected -2.84483 ± 1e-3"
+        # -2.84483 -> -2.847551 (2026-08-29 ERI evaluator fix: the restored
+        # m-changing multipoles add correlation, lowering the variational
+        # energy toward exact while staying above it).
+        assert abs(E[0] - (-2.847551)) < 1e-3, (
+            f"He nmax=5 exact-h1: E={E[0]:.6f}, expected -2.847551 ± 1e-3"
         )
         assert E[0] > E_HE_EXACT, (
             f"He nmax=5: E={E[0]:.6f} violates variational bound "

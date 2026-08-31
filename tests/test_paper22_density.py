@@ -42,13 +42,13 @@ Provenance: SYMBOLIC PROOF (exact integer nonzero counts via sympy 3j) for the
 density columns; PANEL-VERIFIED (five potentials, bit-identical) for
 potential-independence.
 
-NOTE (FLAG, do not "fix" here): the production enumerator
-geovac.nuclear.potential_sparsity.angular_zero_count computes D_pd, not the
-headline global-M_L D, despite its docstring describing global m-conservation.
-This is documented as a regression assertion in
-test_angular_zero_count_computes_pair_diagonal_not_global below and corresponds
-to the open group4 carry-forward CF-1.  The composed pipeline may intend the
-pair-diagonal density, so this is flagged, not changed.
+HISTORY (CF-1, RESOLVED 2026-08-29): the production enumerator
+geovac.nuclear.potential_sparsity.angular_zero_count used to return D_pd while
+enforcing the global rule textually -- the wrong-sign-q ck_coefficient zeroed
+every m-changing multipole, making the global delta redundant.  After the fix
+it computes the headline global-M_L D, pinned below by
+test_angular_zero_count_computes_global_headline_density.  CF-1 is dissolved:
+the pair-diagonal "convention" was a bug, not an intent.
 """
 from __future__ import annotations
 
@@ -328,22 +328,23 @@ def test_potential_independence_lmax2():
 
 
 # ---------------------------------------------------------------------------
-# FLAG (regression assertion, NOT a fix): the production enumerator
-# angular_zero_count computes D_pd, while its docstring + the Paper 22 footnote
-# describe the global-M_L D.  This is the open group4 carry-forward CF-1.
+# CF-1 RESOLVED (2026-08-29, PI direction "exact rule everywhere"): the
+# production enumerator now computes the GLOBAL headline density D.
 # ---------------------------------------------------------------------------
 
 @pytest.mark.parametrize("l_max", [1, 2, 3])
-def test_angular_zero_count_computes_pair_diagonal_not_global(l_max):
-    """FLAG/CF-1: angular_zero_count returns D_pd despite a global-m docstring.
+def test_angular_zero_count_computes_global_headline_density(l_max):
+    """angular_zero_count returns the GLOBAL-M_L headline density D.
 
-    geovac.nuclear.potential_sparsity.angular_zero_count enforces
-    m_a+m_b = m_c+m_d textually, but its (a,c)/(b,d) k-set intersection drops
-    the q-pairing that a true global-M_L sum requires, so the count collapses
-    to the pair-diagonal D_pd.  This test documents the CURRENT behavior (it
-    equals D_pd, NOT the headline global D) so any future change to that
-    routine is caught.  Do not "fix" angular_zero_count here: the composed
-    pipeline may intend the pair-diagonal density (CF-1 decision pending).
+    History: until 2026-08-29 this test pinned the OPPOSITE state (the
+    enumerator collapsed to the pair-diagonal D_pd), because its
+    ``ck_coefficient`` carried the wrong-sign ``q = mc - ma`` -- the sign
+    error behind the whole "rule A" convention (CF-1).  With the exact Gaunt
+    rule the enumerator's count equals the headline global D exactly, so the
+    production enumerator, the composed pipeline, and Paper 22's abstract
+    number are ONE convention.  The strictly-above guard discriminates
+    against a silent regression to the sign error (which would collapse the
+    count back to D_pd).  See debug/sprint_eri_evaluator_defects_memo.md.
     """
     from geovac.nuclear.potential_sparsity import angular_zero_count
 
@@ -353,10 +354,11 @@ def test_angular_zero_count_computes_pair_diagonal_not_global(l_max):
     total_g, nz_g, _ = GLOBAL_D[l_max]
 
     assert total == total_pd == total_g
-    # It matches the PAIR-DIAGONAL count ...
-    assert nz == nz_pd, (
+    # It now matches the GLOBAL headline count ...
+    assert nz == nz_g, (
         f"angular_zero_count l_max={l_max}: got {nz}, "
-        f"expected pair-diagonal {nz_pd}"
+        f"expected global {nz_g}"
     )
-    # ... and is strictly below the headline global-M_L count it documents.
-    assert nz < nz_g
+    # ... and sits strictly above the retired pair-diagonal count (a silent
+    # wrong-sign-q regression would restore nz == nz_pd and fail here).
+    assert nz > nz_pd

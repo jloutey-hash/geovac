@@ -51,35 +51,54 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
    every composed Pauli-advantage headline. A favorable multiplier stated without the
    matched-axis caveat, or measured only against the weakest baseline, is MATERIAL.
 
-2. **Scaling vs prefactor (the CF-1 partition).** The reviewers must distinguish two tiers
-   of claim and check each at its own tier:
-   - **Scaling exponents** (atomic $O(Q^{3.15})$, composed $O(Q^{2.5})$, 1-norm $O(Q^{1.69})$,
-     QWC $O(Q^{3.36})$, $N_{\rm Pauli}=11.10\,Q$ linearity) — ROBUST under CF-1 (the 2026-06-28
-     sweep: the pair-diagonal vs global-$M_L$ re-pricing is a constant factor within valence
-     class, so the log-log slope and the linearity are unchanged). These may be stated as MEASURED.
-   - **Absolute multipliers / market-test lines** (the "51×–1712× vs Gaussian", the
-     "LiH 334 vs STO-3G 907 ≈ 2.7× fewer" market test, the "$d$-orbital blocks are *sparser*
-     (9.23 < 11.10)" claim) — CF-1-SENSITIVE. Under the physical global-$M_L$ rule LiH
-     re-prices 333→837 (**2.51×**, parity vs STO-3G), and the $d$-block coefficient re-prices
-     9.23→**30.0**, becoming DENSER than main-group's 27.9 (the "$d$ sparser" claim REVERSES).
-     See `group4.carryforward.md` + `debug/qa/group4_cf1_library_sweep_memo.md`.
+2. **Everything is rule-sensitive (the CF-1 partition, INVERTED 2026-08-30).**
+   ⚠ **This item previously said the opposite and was wrong.** It classed scaling exponents as
+   *ROBUST* under CF-1 — on the premise that "the pair-diagonal vs global-$M_L$ re-pricing is a
+   constant factor within valence class, so the log-log slope and the linearity are unchanged" —
+   and licensed them as MEASURED. **That premise is falsified.** The "constant $2.51\times$" was a
+   single-point artifact, and *every* exponent in the exempted list moved. A reviewer following the
+   old text would have skipped exactly the class that turned out to be wrong. There is now **one
+   tier, not two**: both exponents and multipliers are rule-sensitive and both must be checked.
+   - **Scaling exponents — MOVED, all of them.** Canonical: atomic $O(Q^{3.8})$ (retired: $3.15$);
+     composed within-molecule $3.17$ small-basis fit, local slope $\sim\!3.8$ by $n_{\max}=4$
+     (retired: $O(Q^{2.5})$); Paper 20 two-point ($n_{\max}=1,2$) $\alpha = 2.816$ **identically across
+     all six molecules** (retired: $2.21 \pm 0.02$), forced by $1 + \log_5 18.6$; $N_{\rm Pauli} =
+     27.90\,Q$ main-group / $30.03\,Q$ $d$-block (retired: $11.10$ / $9.23$). The 1-norm $O(Q^{1.69})$
+     and QWC $O(Q^{3.36})$ exponents are the two that were **not** re-derived in the correction —
+     treat them as UNVERIFIED under the exact rule, not as robust.
+   - **Absolute multipliers / market-test lines** — sensitive as before. LiH re-prices 333→837;
+     equal-qubit H$_2$O $54\times$–$317\times$ (retired: $51\times$–$1712\times$); cc-pVDZ $76\times$
+     (retired: $190\times$); the $d$-block coefficient $9.23 \to 30.03$, becoming **denser** than
+     main-group's $27.90$ — the "$d$ sparser" claim REVERSES.
+   - **Reviewer instruction.** Any exponent or multiplier stated as MEASURED without being
+     traceable to a post-2026-08-29 measurement is MATERIAL. Do not treat a clean log-log fit as
+     evidence: this whole class read $O(Q^{2.5})$ for months *because* the fit was clean.
+     See `debug/qa/delta4_run_notes.md` + `debug/sprint_eri_evaluator_defects_memo.md`.
 
-3. **CF-1 disclosure — DECIDED A (disclose), applied 2026-06-28; now governed by the shared
-   [criteria.md "Dual-rule ERI framing"](criteria.md) rule.** The PI chose **option A**: keep
-   the pair-diagonal rule ($m_a=m_c \wedge m_b=m_d$) as the *quality QC sparsity approximation*
-   and **disclose** it; **B (global-$M_L$) was deliberately left on the table** (it is the
-   physics-accuracy rule, used in the precision-physics paths). Applied: Papers 14 + 20 each
-   carry a `\label{sec:eri_rule}` disclosure subsection (the rule, the constant 2.51×/3.25×
-   re-pricing, the STO-3G→parity and $d$-block-reversal consequences, B-left-on-table); the
-   abstract d-block claim + the 2.7×-market-test line + the TM-table caption now carry the
-   pair-diagonal qualifier. **The cert criterion** (now a *framing-zombie* check): every
-   sparsity/density/Pauli claim names its rule (A disclosed for sparsity, B for accuracy); an
-   **undisclosed pair-diagonal multiplier presented as the exact selection-rule value is
-   MATERIAL** — enforced by the `claims-reviewer` (enumerate every such claim) + the
-   deterministic **C16 entry `pair-diagonal-as-exact-sparsity`** + the characterization test
-   `tests/test_paper14_eri_rule.py` (pins that the product realizes A). The repo study
-   confirmed the QC product is **uniformly A** (atomic `lattice_index` + composed
-   `composed_qubit`); see `debug/sprint_group4_prework_memo.md`.
+3. **CF-1 is DISSOLVED (2026-08-29, PI direction) — supersedes the former "DECIDED A".**
+   ⚠ **This item previously recorded a decision that no longer holds.** It said the PI chose
+   **option A** — keep the pair-diagonal rule ($m_a=m_c \wedge m_b=m_d$) as a *quality QC
+   sparsity approximation*, disclose it, and leave **B (global-$M_L$) deliberately on the table**.
+   There was never a choice to make: **the pair-diagonal "convention" was a wrong-sign Gaunt
+   argument** (`q = m_c - m_a` where the Wigner-3j bottom row requires `q = m_a - m_c`), found in
+   seven production modules. It is a bug, not a rule. The PI's call is the **exact global-$M_L$
+   rule everywhere**, with the corpus re-priced honestly.
+   **The cert criterion, re-aimed.** What is MATERIAL is no longer "failing to name which of two
+   live rules is in use" — there is only one rule. It is now: **any pair-diagonal-era number
+   presented as a live value**, and **any surviving framing that treats the two as alternative
+   conventions** (a *framing zombie*: the arithmetic may be right while the framing implies a
+   choice that does not exist). Enforced by the `claims-reviewer` (enumerate every
+   sparsity/density/Pauli/exponent claim and trace it to a post-correction measurement), the
+   deterministic **C16 entry `pair-diagonal-as-exact-sparsity`** and **C17 entries
+   `composed-rule-a-retired-figures` + `composed-retired-scaling-and-counts`**, and the witness
+   test `tests/test_paper14_eri_rule.py` (sweeps all seven $c^k$ implementations against an
+   independent reference value). Historical mentions remain legitimate **when explicitly marked
+   retired/corrected** — that is what the C17 exemption windows are for.
+   **Known unremediated instance, disclosed not hidden:** `composed_qubit_relativistic` still
+   carries the factor-order half of the defect; both orderings are recorded in
+   `tests/test_paper14_spinor_eri_ordering.py` and `tab:spinor_resource` carries a vintage note.
+   Reviewers should confirm the note is present and honest, **not** flag the table's numbers as
+   defects. See `debug/qa/delta4_run_notes.md` ("SEVENTEENTH SITE").
 
 4. **Nuclear honesty (Paper 23).** The nuclear binding energies at $N_{\rm shells}=2$ are
    **encoding-validation benchmarks, far from experiment** — stated as such, never as a
@@ -99,23 +118,34 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
 ### Per-criterion watch-notes
 
 - **C8 (headline honesty), per-paper — the enumerated headlines + tiers.**
-  *(Numbers marked ⚑ are CF-1-sensitive and pending the FREEZE disposition.)*
-  - **Paper 14 (keystone):** atomic **$O(Q^{3.15})$** Pauli (vs Gaussian $Q^{4.25}$ LiH /
-    $Q^{3.92}$ H$_2$O, `trenev2025`); QWC groups **$O(Q^{3.36})$**; 1-norm $\lambda$
-    **$O(Q^{1.69})$**, $R^2=0.997$ (the key FT result); composed **$O(Q^{2.5})$** universal
-    (exponent spread 0.02); $N_{\rm Pauli}=11.10\,Q$ exact (9.23 $d$-block); ERI density
-    $\sim 1/M$ (corrected v4.54.0; this watch-note synced 2026-07-01). ⚑ "two-or-more orders of magnitude / 51×–1712× vs Gaussian" + "$d$-block
-    sparser"; matched-qubit-not-accuracy caveat MANDATORY.
+  *(⚑ marked the old CF-1 "pending FREEZE disposition" tier. CF-1 is DISSOLVED — see item 3 —
+  so ⚑ now means simply: re-priced 2026-08-29/30, verify against a post-correction measurement.)*
+  - **Paper 14 (keystone)** — ⚑ **entire list re-priced 2026-08-30**; the values below are the
+    canonical ones, and the retired figures are given so a reviewer can recognise a zombie on
+    sight. Atomic **$O(Q^{3.8})$** Pauli (retired: $O(Q^{3.15})$) vs Gaussian $Q^{4.25}$ LiH /
+    $Q^{3.92}$ H$_2$O (`trenev2025`); composed within-molecule **$3.17$** small-basis fit, local
+    slope $\sim\!3.8$ by $n_{\max}=4$ (retired: $O(Q^{2.5})$ "universal, exponent spread 0.02" —
+    the *spread* claim is also retired: the Paper 20 two-point exponent is now $2.816$
+    **identically**, spread $0.000$); $N_{\rm Pauli}=27.90\,Q$ exact, $30.03\,Q$ $d$-block
+    (retired: $11.10$ / $9.23$); per-block $279$ non-identity Pauli from $107$ ERIs
+    (retired: $111$ / $65$); ERI density $\sim 1/M$ (corrected v4.54.0).
+    **QWC groups $O(Q^{3.36})$ and 1-norm $\lambda\ O(Q^{1.69})$, $R^2=0.997$ were NOT re-derived
+    under the exact rule — treat as UNVERIFIED, not as canonical.** ⚑ equal-qubit advantage
+    $54\times$–$317\times$ (retired: "two-or-more orders of magnitude / 51×–1712×"); the
+    "$d$-block sparser" claim **REVERSES** ($30.03 > 27.90$); matched-qubit-not-accuracy caveat
+    MANDATORY.
   - **Paper 16:** $\mu_{\rm free}=\nu(\nu+3N-2)/2$ (SO(3N) Casimir); $\nu=N-2$ universal for
     $S<N/2$; **5 atom types A/B/C/D/E** (FIXED 2026-06-28 — abstract+§IV synced to the Table+
     conclusion+code; was a stale "4"); **"maps onto, rather than predicts"**; Dirac instability =
     metric (not topological) singularity, smooth through $Z=1/\alpha$.
-  - **Paper 20:** ⚑ LiH composed **334 Pauli @ 30q vs STO-3G 907 @ 12q, 13× fewer QWC**
-    (the market test — re-prices to parity under global-$M_L$); balanced coupled (PK-free)
+  - **Paper 20:** ⚑ LiH composed **838 Pauli @ 30q vs STO-3G 907 @ 12q** — near parity on raw
+    counts, and $3.0\times$ MORE than the qubit-reduced 276 (retired: "334 Pauli, 13× fewer QWC",
+    which read as a decisive win; under the exact rule the decisive wins are instead the exact
+    $Q$-linearity and the $76\times$ cc-pVDZ reduction); balanced coupled (PK-free)
     binds LiH at **$R_{\rm eq}=3.227$ bohr computed (7.0% above the experimental 3.015), 878 Pauli @ 30q, 0.20%** single-point energy at
     the minimum; **row-conditional** chemistry-accuracy (first-row binds; second-row NaH↓
     monotone overattraction — the honest §scope_boundary); library **37 systems** (35 composed
-    + He + H2, $Z=1$–56 H–Ba; decided 2026-06-28, this watch-note synced 2026-07-01); $O(Q^{2.5})$ universal vs
+    + He + H2, $Z=1$–56 H–Ba; decided 2026-06-28, this watch-note synced 2026-07-01); $O(Q^{2.5})$ (retired-rule vintage 2026-08-29) universal vs
     Gaussian $O(Q^{3.9-4.3})$; ⚑ $11.10\,Q$ / $9.23$ $d$-block; frozen cores enter via
     identity only.
   - **Paper 23:** HO closures **2,8,20,40,70,112** from graph state counting; magic
@@ -162,10 +192,12 @@ all cited tests RUN GREEN: 254 + 105 + 78 passed) surfaced four cross-corpus inc
 and a coverage profile the cert reviewers should treat as enumeration targets. **Backfill +
 inconsistency pass done 2026-06-28** (PI-directed "address the backfill/inconsistencies first"):
 
-1. ✅ **CF-1 pair-diagonal ERI** — **DECIDED A (disclose, PI direction 2026-06-28) + applied;
-   codified as a shared QA rule.** Quantified: constant 2.51× main-group / 3.25× $d$-block;
-   LiH→parity vs STO-3G; scaling robust. **The repo study confirmed the QC product is uniformly
-   A** (atomic + composed pair-diagonal; global-$M_L$ B lives only in the precision-physics paths).
+1. ✅ **CF-1 pair-diagonal ERI** — **DISSOLVED 2026-08-29 (PI direction); supersedes the former
+   "DECIDED A (disclose)".** The pair-diagonal rule was a wrong-sign Gaunt argument, not a
+   convention, so there was no disposition to choose (see item 3). Its quantification is retired
+   with it: the "constant 2.51× main-group / 3.25× $d$-block, scaling robust" line was a
+   **single-point artifact** — the re-pricing is not a constant factor and the exponents moved.
+   Canonical: exact global-$M_L$ everywhere; LiH 333→838 @ Q30 (near parity vs raw STO-3G 907).
    Applied: the `sec:eri_rule` disclosure subsections in Papers 14/20 + the qualified d-block/
    market-test/TM-caption loci; the **shared [criteria.md "Dual-rule ERI framing"](criteria.md)**
    rule + the **C16 `pair-diagonal-as-exact-sparsity`** deterministic backstop + the
@@ -204,7 +236,7 @@ inconsistency pass done 2026-06-28** (PI-directed "address the backfill/inconsis
 already BACKED-SOUND (JW=FCI, QWC correctness, antisymmetrisation, magic-number recovery, qubit
 counts, linear-in-Q ratios). **The four keystone scaling exponents are now PINNED from GeoVac
 data** (`test_paper14_scaling.py`, slow): atomic $O(Q^{3.15})$ (3-pt 3.10), 1-norm $O(Q^{1.69})$
-(3-pt 1.67, sub-quadratic), QWC $O(Q^{3.36})$ (3-pt 3.356), composed $O(Q^{2.5})$ (~2.5,
+(3-pt 1.67, sub-quadratic), QWC $O(Q^{3.36})$ (3-pt 3.356), composed $O(Q^{2.5})$ (retired-rule vintage 2026-08-29) (~2.5,
 CF-1-robust) — replacing the synthetic-only `test_fit_scaling`. The nuclear counts + 1-norms are
 pinned (`test_paper23_resource_counts.py`). **7 gaps remain OPEN** (none a §C8 headline blocker):
 ERI $1/M^2$ (decays slower — BACKED-WEAK, consider rewording to ~$1/M$); double-factorization
@@ -228,11 +260,13 @@ is a file-string sanity check, NOT physics backing — do not count it as covera
 
 ## Change log
 - 2026-06-28 — **DRAFTED** by PM for PI freeze (fifth pre-registered `/qa` target; first
-  QC branch). Inherits criteria.md C1–C16. Branch-defining risk = QC-resource-claim honesty
-  + CF-1 pair-diagonal-ERI disposition (C8/C3/C5/§1.5 sharpening, no new number). The CF-1
-  re-pricing is quantified (`debug/qa/group4_cf1_library_sweep_memo.md`: constant 2.51×
-  main-group / 3.25× $d$-block; scaling robust, prefactor + STO-3G market test + "$d$ sparser"
-  re-price). **FREEZE must resolve the CF-1 disposition (A disclose vs B switch) — the §C8
+  QC branch). Inherits criteria.md C1–C16. Branch-defining risk = QC-resource-claim honesty.
+  The CF-1 "disposition" question is CLOSED — dissolved 2026-08-29, the pair-diagonal rule being
+  a bug rather than an alternative convention. ⚠ The quantification once recorded here
+  (`debug/qa/group4_cf1_library_sweep_memo.md`: "constant 2.51× main-group / 3.25× $d$-block;
+  scaling robust") is **retired as a single-point artifact** — superseded by
+  `debug/sprint_eri_evaluator_defects_memo.md` + `debug/qa/delta4_run_notes.md`. **The former
+  FREEZE requirement to resolve A-vs-B is void — the §C8
   ⚑ numbers depend on it.** Also flagged: library-size inconsistency (14:"30" / 20:"38" /
   CLAUDE.md:"40" / 35 shipping). C9 = the new group4 synthesis (drafted this pre-work;
   `papers/synthesis/group4_quantum_computing_synthesis.tex`, 4pp, three-pass clean,
@@ -487,7 +521,7 @@ tiers are conveyed by adjectives ("measured"/"exact"/"observation"), not bracket
 characteristic accepted at the v4.63 cert; report as thin-surface). P14 `M = n_{\max}^2` is
 wrong (correct: M = Σ_{n=1}^{n_max} n² = 5/14/30/55, which the tables use) and cascades into the
 ρ_ERI order-of-magnitude estimate — deferred to a careful focused edit (headline exponents are
-fit from data, unaffected). Wording NITs: P20 O(Q^2.5)-headline vs table-2.2 band, "exactly
+fit from data, unaffected). Wording NITs (retired-rule vintage): P20 O(Q^2.5)-headline vs table-2.2 band, "exactly
 linear" vs affine 11.10Q+1, 37-systems vs 33-tabulated, He 0.55%→0.544%, H₂O 1-norm 359 vs 361,
 LiH 1-norm convention variants, cross-paper 1-norm/Pauli convention consistency; citation:
 Chawla/rocca truncated author lists, PachuckiYerokhin2010 key label, NIST version drift; the
@@ -496,3 +530,71 @@ flat-21 QWC deserves a one-line structural note in the paper. **PI-scoped proces
 3.36/2.5/2.51×/MPO/TC — all `@pytest.mark.slow`) have no day-to-day CI protection; they pass at
 cert time (via `/qa` + a manual `--slow` run, 35/35) but a Gaunt-sparsity regression would slip
 `/regression full`. Seed key `debug/qa/group4_fullcert_seed_key.json`; run notes in this record.
+
+---
+
+## Post-certification touch: the group6 D-HFS convention arc (2026-08-28/29)
+
+**Status: certification stands; the touched content is re-verified, not re-certified.**
+
+The `/qa group6` FULL runs corrected a Fermi-contact convention defect whose root
+cause (`buggy = correct x 2(m_p/m_N)`) also lived in **Paper 23**.  `eq:d-hfs-bf`
+and its four derived values were corrected here as a consequence:
+
+| quantity | was | now |
+|---|---|---|
+| the equation | `g_d^atomic * (m_e/m_d)` | `(g_d^atomic / 2) * (m_e/m_p)` |
+| D 1S BF baseline | 327.3975 MHz | **327.2350 MHz** |
+| BF-strict residual | +40 ppm | **-456 ppm** |
+| full-chain value | 327.4779 MHz | **327.3153 MHz** |
+| full-chain residual | +286 ppm | **-211 ppm** |
+
+Mechanism, in the paper's own correction note: the divisor restoring
+`mu_I/(I mu_N)` is **2, not 2I** (they coincide only at I=1), and the mass factor
+is `m_e/m_p` for **every** nucleus because `mu_N = e hbar / 2m_p` is defined with
+the proton mass.  The two errors nearly cancelled at I=1 (`m_d/m_p = 1.99900750`),
+leaving the baseline high by 496.5 ppm; I=1/2 nuclei were unaffected, which is why
+the H and T cross-checks never exposed it.
+
+**Re-verification performed 2026-08-29** (not a re-certification -- no seeded panel):
+Paper 23 compiles three-pass clean with zero undefined references; no
+pre-correction value survives anywhere in the paper (swept for 327.3975 / 327.4779
+/ +40 ppm / +286 ppm; the only `2I` occurrences are the legitimate CG factor and
+the correction note itself); the corrected values agree with Paper 34's
+independently corrected autopsy (-456 BF strict, -211 full chain); C13/C16/C19 and
+the inline-arXiv gate all PASS at `--gate group4`; `test_paper23_magic_gaps.py` and
+`test_paper23_resource_counts.py` pass; and no test in the suite pins a retired
+value (the five corpus-wide matches are correction notes describing the
+retirement).
+
+**Not re-opened:** the group4 headline claims (Pauli counts, scaling exponents,
+tapering) are untouched by this arc.  The standing `--slow` CI gap recorded above
+is unchanged.
+
+## Post-certification touch — 2026-08-29 (ERI evaluator correction, PI-directed)
+
+The wrong-sign Gaunt argument (`q = mc - ma`) behind the "pair-diagonal rule
+A" convention (CF-1) was identified as a sign error and removed from all
+production evaluators by PI direction ("exact rule everywhere, re-price
+everything honestly").  **CF-1 is DISSOLVED.**  Every certified group4
+resource number was re-measured, not scaled:
+
+- N_Pauli = 27.90 x Q (main-group) / 30.03 x Q (d-block), exact, replacing
+  11.10/9.23; the d-block sparsity-ordering claim REVERSES.
+- Within-molecule exponent 2.5 -> 3.17 universal (exact c(n_max) x Q
+  factorization; local slope ~3.8 by n_max=4); the "constant-factor A->B"
+  claim was a single-point artifact.
+- LiH 334 -> 838; 190x -> 76x (cc-pVDZ); 51-1712x -> 54-317x (H2O
+  equal-qubit); atomic He advantage INVERTS at Q=10 (288 vs 156).
+- Papers 14 + 20 + the group4 synthesis re-priced in place with correction
+  records; tables regenerated from live builds; figures regenerated.
+- C17 family `composed-rule-a-retired-figures` (discrimination proven both
+  ways) guards every retired figure.
+- Vintage-marked pending re-measurement: TC-composed table, VQE experiment
+  tables, O(Q^1.69) simulation-cost exponent, balanced QWC counts, He
+  n_max=5 atomic Pauli count, Chawla matched-Q projection.
+
+**Certification status: the 2026-07-02 certification predates these
+corrections; the branch is OWED a re-review** (the same status the v5.0.0
+retraction arc created for group3/4/6).  Full record:
+debug/sprint_eri_evaluator_defects_memo.md; CHANGELOG v5.1.12.

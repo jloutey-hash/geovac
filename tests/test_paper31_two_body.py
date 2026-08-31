@@ -319,21 +319,27 @@ def _m_conservation(V, basis):
 
 def test_resolvent_two_body_dirac_pearson():
     """Paper 31 §sec:two_body resolvent: Dirac weight w=1/(N+1/2)^2 gives
-    Pearson 0.81 (n_max=2), 0.75 (n_max=3), decreasing; 100% m-conservation."""
+    Pearson 0.846 (n_max=2), 0.796 (n_max=3), decreasing; 100% m-conservation.
+
+    Values updated 2026-08-29 (ERI evaluator fix: 0.81 -> 0.846, 0.75 -> 0.796).
+    The NEGATIVE RESULT IS UNCHANGED -- the correlation still DECREASES with
+    n_max, so the resolvent still fails to reproduce the Coulomb radial
+    weights, and the mechanism (the Fock conformal factor is a function, not a
+    constant) stands.  m-conservation remains exactly 1.0."""
     V2, basis2 = _resolvent_interaction(2, lambda Nq: 1.0 / (Nq + 0.5) ** 2)
     p2 = _resolvent_pearson(V2, _coulomb_tensor(basis2))
-    assert p2 == pytest.approx(0.81, abs=0.02), f"Dirac Pearson n=2 {p2}"
+    assert p2 == pytest.approx(0.846, abs=0.02), f"Dirac Pearson n=2 {p2}"
     assert _m_conservation(V2, basis2) == pytest.approx(1.0, abs=1e-9)
 
 
 @pytest.mark.slow
 def test_resolvent_two_body_dirac_pearson_nmax3_decreasing():
-    """n_max=3 Dirac-resolvent Pearson ~ 0.75, decreasing vs n_max=2."""
+    """n_max=3 Dirac-resolvent Pearson ~ 0.796, decreasing vs n_max=2."""
     V2, basis2 = _resolvent_interaction(2, lambda Nq: 1.0 / (Nq + 0.5) ** 2)
     p2 = _resolvent_pearson(V2, _coulomb_tensor(basis2))
     V3, basis3 = _resolvent_interaction(3, lambda Nq: 1.0 / (Nq + 0.5) ** 2)
     p3 = _resolvent_pearson(V3, _coulomb_tensor(basis3))
-    assert p3 == pytest.approx(0.75, abs=0.02), f"Dirac Pearson n=3 {p3}"
+    assert p3 == pytest.approx(0.796, abs=0.02), f"Dirac Pearson n=3 {p3}"
     assert p3 < p2  # decreasing with n_max
 
 

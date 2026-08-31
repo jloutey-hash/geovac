@@ -421,6 +421,7 @@ class LatticeIndex:
             for k, v in f0_cache.items():
                 all_keys.append(list(k))
                 all_vals.append(v)
+            os.makedirs(os.path.dirname(cache_path), exist_ok=True)
             np.savez(cache_path,
                      keys=np.array(all_keys, dtype=int),
                      values=np.array(all_vals))
@@ -677,6 +678,7 @@ class LatticeIndex:
         # Save to disk
         all_keys = [list(k) for k in rk_cache]
         all_vals = [rk_cache[k] for k in rk_cache]
+        os.makedirs(os.path.dirname(cache_path), exist_ok=True)
         np.savez(cache_path,
                  keys=np.array(all_keys, dtype=int),
                  values=np.array(all_vals))
@@ -730,13 +732,17 @@ class LatticeIndex:
         for (a, c), ck_ac_list in ac_k_map.items():
             na, la, ma = states[a]
             nc, lc, mc = states[c]
-            for (b, d), ck_bd_list in ac_k_map.items():
+            for (d, b), ck_db_list in ac_k_map.items():
                 nb, lb, mb = states[b]
                 nd, ld, md = states[d]
 
                 # m-selection rule: ma + mb = mc + md
                 if ma + mb != mc + md:
                     continue
+
+                # Condon-Shortley second factor is c^k(d,b), NOT c^k(b,d)
+                # (corrected 2026-08-29; see composed_qubit for the note).
+                ck_bd_list = ck_db_list
 
                 val = 0.0
                 for k_ac, c_ac in ck_ac_list:
@@ -762,9 +768,12 @@ class LatticeIndex:
 
         c^k(l,m,l',m') = (-1)^m √((2l+1)(2l'+1)) * (l k l'; 0 0 0) * (l k l'; -m q m')
 
-        where q = mc - ma (m-transfer).
+        where q = ma - mc (m-transfer).  The sign matters: the bottom row of
+        the 3j must sum to zero, (-ma) + q + mc = 0.  Shipped as q = mc - ma
+        the 3j vanished identically unless ma == mc, silently dropping every
+        m-changing multipole (88 of 126 nonzero c^k at l<=2).
         """
-        q = mc - ma
+        q = ma - mc
         pre = ((-1) ** ma
                * np.sqrt((2 * la + 1) * (2 * lc + 1)))
         w1 = self._wigner3j(la, k, lc, 0, 0, 0)

@@ -36,10 +36,14 @@ GAUSSIAN_POINTS = [
 
 GEOVAC_POINTS = [
     # (label, M, Q, Pauli, ERI_density_pct)
-    (r'$n_{\max}{=}2$',  5,  10,     120, 10.4),
-    (r'$n_{\max}{=}3$', 14,  28,    2659,  3.9),
-    (r'$n_{\max}{=}4$', 30,  60,   31039,  2.1),
-    (r'$n_{\max}{=}5$', 55, 110,  227338,  1.3),
+    # Corrected 2026-08-29 to the exact global-M_L rule (the retired
+    # pair-diagonal values were 120/2659/31039/227338 and 10.4/3.9/2.1/1.3).
+    # n_max=5 Pauli is PENDING re-measurement (JW on the 519,585 corrected
+    # ERIs); None excludes it from the Pauli plot, the density is measured.
+    (r'$n_{\max}{=}2$',  5,  10,     288, 17.1),
+    (r'$n_{\max}{=}3$', 14,  28,   14211,  9.9),
+    (r'$n_{\max}{=}4$', 30,  60,  252095,  7.1),
+    (r'$n_{\max}{=}5$', 55, 110,    None,  5.7),
 ]
 
 
@@ -50,13 +54,17 @@ def fit_power_law(x, y):
     return slope, np.exp(intercept)
 
 
+def _pauli_points():
+    return [p for p in GEOVAC_POINTS if p[3] is not None]
+
+
 def make_pauli_scaling(out_path):
     fig, ax = plt.subplots(1, 1, figsize=(8, 6))
 
     gauss_q = np.array([p[2] for p in GAUSSIAN_POINTS])
     gauss_p = np.array([p[3] for p in GAUSSIAN_POINTS])
-    geov_q  = np.array([p[2] for p in GEOVAC_POINTS])
-    geov_p  = np.array([p[3] for p in GEOVAC_POINTS])
+    geov_q  = np.array([p[2] for p in _pauli_points()], dtype=float)
+    geov_p  = np.array([p[3] for p in _pauli_points()], dtype=float)
 
     geov_alpha, geov_a = fit_power_law(geov_q, geov_p)
 
@@ -79,7 +87,7 @@ def make_pauli_scaling(out_path):
     for label, M, Q, P, _ in GAUSSIAN_POINTS:
         ax.annotate(label, (Q, P), textcoords='offset points',
                     xytext=(7, 5), fontsize=8, color='darkred')
-    for label, M, Q, P, _ in GEOVAC_POINTS:
+    for label, M, Q, P, _ in _pauli_points():
         ax.annotate(label, (Q, P), textcoords='offset points',
                     xytext=(7, -11), fontsize=8, color='navy')
 
@@ -112,8 +120,8 @@ def make_eri_density(out_path):
 
     # 1/M^2 reference normalized to the n_max=2 point (M=5, d=10.4%)
     M_ref = np.linspace(geov_M.min(), geov_M.max(), 100)
-    d_ref = 10.4 * (5.0 / M_ref) ** 2
-    ax.semilogy(M_ref, d_ref, 'k--', alpha=0.4, label=r'$\sim 1/M^2$ reference')
+    d_ref = 17.1 * (5.0 / M_ref) ** 0.49
+    ax.semilogy(M_ref, d_ref, 'k--', alpha=0.4, label=r'$\sim M^{-0.49}$ (fit)')
 
     # Annotate
     for label, M, _, _, d in GAUSSIAN_POINTS:

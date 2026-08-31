@@ -419,7 +419,7 @@ def test_1norm_fold_and_degradation():
     AND the advantage degrades with basis size.  Both pinned: the degradation is
     part of the claim, so it cannot drift into an unqualified '15% lever'."""
     ratios = {}
-    for ns in (4, 8):
+    for ns in (4, 6, 8, 10, 12):
         S, h1, Vr, g, gs, gw = _build(ns, 2.0, Z=2.0, Ng=500)
         X = TC.lowdin(S)
         nso = 2 * ns
@@ -436,6 +436,140 @@ def test_1norm_fold_and_degradation():
         assert abs(EA - EB) < 1e-9, "the fold must be exact"
         ratios[ns] = lamB / lamA
         assert ratios[ns] < 1.0, f"ns={ns}: no 1-norm win ({ratios[ns]:.3f})"
-    # the win exists at small basis and is WORSE at larger basis (monotone toward 1)
-    assert ratios[4] < 0.90, f"small-basis win too weak: {ratios[4]:.3f}"
-    assert ratios[8] > ratios[4], "degradation with basis size not reproduced"
+    # TWO-SIDED per-ns pins (cert-2 M-1: the paper prints all five values
+    # 0.83/0.85/0.89/0.91/0.94; the old one-sided ratios[4] < 0.90 +
+    # ratios[8] < 1.0 admitted a 10% win at ns=4 and a 0.1% win at ns=8).
+    expected_ratio = {4: 0.8278, 6: 0.8521, 8: 0.8897, 10: 0.9145, 12: 0.9367}
+    for ns, want in expected_ratio.items():
+        assert abs(ratios[ns] - want) < 5e-3, (
+            f"ns={ns}: ratio {ratios[ns]:.4f} != {want}")
+    # monotone degradation toward unity
+    seq = [ratios[ns] for ns in (4, 6, 8, 10, 12)]
+    assert all(b > a for a, b in zip(seq, seq[1:])), f"not monotone: {seq}"
+
+
+# ---------------------------------------------------------------------------
+# Coverage closure (2026-08-28 /qa delta, code dimension MATERIAL-3): these
+# sub-claims of rem:ee_partial_split were cited to THIS file but asserted only
+# in untracked debug/ drivers.  Paper claims must be regression-protected here.
+# ---------------------------------------------------------------------------
+def test_exact_rational_anchors_5k8_and_3_5():
+    """<1s^2|g|1s^2> = 5k/8 and <1s^2|W>/<1s^2|g> = 3/5, both exact."""
+    for k in (1.0, 2.0):
+        _, _, _, g, gs, gw = _build(4, k, Z=2.0, Ng=700)
+        # RELATIVE tolerance: the residual is grid quadrature and scales with k.
+        # 1e-4 still discriminates hugely -- the nearest wrong rationals (4k/8,
+        # 6k/8) are 20% away, i.e. 2000x outside this bound.
+        assert abs(g[0, 0, 0, 0] / (5 * k / 8) - 1) < 1e-4, "5k/8 anchor"
+        assert abs(gw[0, 0, 0, 0] / g[0, 0, 0, 0] - 0.6) < 1e-4, "3/5 ratio"
+        assert abs(gw[0, 0, 0, 0] / (3 * k / 8) - 1) < 1e-4, "3k/8 anchor"
+
+
+def test_W_frobenius_tail_improves_with_L():
+    """Compressibility improves with L: the Frobenius tail after four terms
+    falls monotonically across L = 0..3 (paper quotes 1.6/0.7/0.1/0.03%)."""
+    from math import factorial
+    k, Ng, nfun = 2.0, 700, 5
+    r, wr = TC.make_grid(k, Ng=Ng)
+    Wt = r * r * wr
+    R1, R2 = np.meshgrid(r, r, indexing="ij")
+    tails = []
+    for L in range(4):
+        ns_list = list(range(L + 1, L + 1 + nfun))
+        R = {n: _R_nl(n, L, r, k) for n in ns_list}
+        D = np.array([R[a] * R[b] * Wt for a in ns_list for b in ns_list])
+        t1, t2 = R1 ** L / R2 ** (L + 1), R2 ** L / R1 ** (L + 1)
+        M = D @ (0.5 * np.abs(t1 - t2)) @ D.T
+        lam = np.sort(np.abs(np.linalg.eigvalsh(M)))[::-1]
+        tails.append(float(np.sqrt(np.sum(lam[4:] ** 2) / np.sum(lam ** 2))))
+    # paper quotes 1.6%, 0.7%, 0.1%, 0.03% -- pin each (cert-2 N-12: the
+    # old tails[0] < 0.05 admitted [4.9, 4.0, 3.0, 2.0]%)
+    for t, want in zip(tails, (0.0163, 0.0065, 0.0014, 0.00031)):
+        assert abs(t - want) / want < 0.30, f"tails {tails} vs paper"
+    for a, b in zip(tails, tails[1:]):
+        assert b < a, f"tail not improving with L: {tails}"
+
+
+def test_ode_lambda_fpp_equals_w_f():
+    """In u = 1/r the W-kernel is |u1-u2|/2, so eigenfunctions of any weighted
+    compression solve lambda f'' = w f -- the surviving closed form."""
+    U, Nu = 12.0, 1500
+    u = np.linspace(0.0, U, Nu)
+    du = u[1] - u[0]
+    w = np.exp(-u)
+    T = (0.5 * np.abs(u[:, None] - u[None, :])) * (w[None, :] * du)
+    ev, V = np.linalg.eig(T)
+    order = np.argsort(-np.abs(ev))
+    for j in order[:2]:
+        lam_j = float(np.real(ev[j]))
+        f = np.real(V[:, j])
+        fpp = np.gradient(np.gradient(f, du), du)
+        lhs, rhs = lam_j * fpp[5:-5], (w * f)[5:-5]
+        res = np.linalg.norm(lhs - rhs) / np.linalg.norm(rhs)
+        assert res < 5e-5, f"ODE residual {res:.1e}"  # measured 3.0-4.6e-5
+
+
+def test_sp_rank_flatness_two_basis_sizes():
+    """'flat as the radial-pair space grows 10 -> 28': the pytest file tested
+    only the low end.  Check that the 1 mHa rank does not grow with basis."""
+    ranks = {}
+    for ns, npp in ((3, 1), (4, 2), (5, 2)):  # nrp = 10, 21, 28
+        orbs, S, h1, asm, RL, RLs, RLw, nrp = _sp_system(ns, npp, Lmax=2)
+        g, _ = asm(RL)
+        gs, _ = asm(RLs)
+        E_full = _fci_sp(S, h1, g)
+        got = None
+        for m in range(1, nrp + 1):
+            RLt = {}
+            for L in range(3):
+                lam, V = np.linalg.eigh(RLw[L])
+                o = np.argsort(-np.abs(lam))[:m]
+                RLt[L] = (V[:, o] * lam[o]) @ V[:, o].T
+            gwt, _ = asm(RLt)
+            if abs(_fci_sp(S, h1, gs - gwt) - E_full) * 1000 < 1.0:
+                got = m
+                break
+        ranks[nrp] = got
+        # paper claims rank 3-4; the old <= 6 admitted 5-6 (cert-2 M-5)
+        assert got is not None and got <= 4, f"nrp={nrp}: rank {got}"
+    ks = sorted(ranks)
+    assert ranks[ks[-1]] <= ranks[ks[0]] + 1, f"rank not flat: {ranks}"
+
+
+def test_split_beats_density_fitting_control():
+    """The 13-17% 'beyond DF' claim: at matched rank the split's lambda must be
+    below a plain eigen-truncation of g itself (the density-fitting control)."""
+    ns, k = 4, 2.0
+    S, h1, Vr, g, gs, gw = _build(ns, k, Z=2.0, Ng=600)
+    X = TC.lowdin(S)
+    nso = 2 * ns
+    dets, didx = TC.make_dets(nso, 2)
+
+    def lam_E(hx, gx):
+        hso = TC.h_spin(TC.transform_1(hx, X), nso)
+        asym = TC.asym_from_phys(TC.transform_2(gx, X), nso)
+        E = float(eigh(TC.build_H(dets, didx, hso, asym, nso), eigvals_only=True)[0])
+        return TC.lcu_lambda(hso, asym, nso)["lam"], E
+
+    def trunc(t, m):
+        M = t.transpose(0, 2, 1, 3).reshape(ns * ns, ns * ns)
+        lam, U = np.linalg.eigh(M)
+        o = np.argsort(-np.abs(lam))[:m]
+        r = ((U[:, o] * lam[o]) @ U[:, o].T).reshape(ns, ns, ns, ns).transpose(0, 2, 1, 3)
+        return 0.25 * (r + r.transpose(2, 1, 0, 3) + r.transpose(0, 3, 2, 1)
+                       + r.transpose(2, 3, 0, 1))
+
+    _, E_ex = lam_E(h1, g)
+    lamC, EC = lam_E(h1 + 0.5 * Vr, -trunc(gw, 4))     # split, W at rank 4
+    lamD, ED = lam_E(h1, trunc(g, 4))                  # DF control, g at rank 4
+    assert abs(EC - E_ex) < 5e-4 and abs(ED - E_ex) < 5e-4, "not matched accuracy"
+    assert lamC < lamD, f"split lambda {lamC:.2f} not below DF control {lamD:.2f}"
+    # tightened 2026-08-28: paper claims 13-17%, measured 16.9%; 0.95 was 3x loose
+    # TWO-SIDED 2026-08-28 (delta-2): the paper claims a 13-17% margin and the
+    # measured ratio is 0.8311 (16.9%), stable to 1e-4 over Ng=400..1200.  A
+    # one-sided `< 0.88` admitted a 12% margin -- BELOW the paper's own 13%
+    # floor -- and let an implausibly good ratio (a control-side bug) pass.
+    assert 0.82 < lamC / lamD < 0.87, (
+        f"DF margin {1 - lamC / lamD:.1%} outside the paper 13-17% band "
+        f"(ratio {lamC / lamD:.4f})"
+    )

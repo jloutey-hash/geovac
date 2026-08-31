@@ -26,9 +26,9 @@
 | He cc-pVDZ FCI energy | < 0.001 Ha vs published | Integral engine validation |
 | He cc-pVTZ FCI energy | < 0.0002 Ha vs published | Integral engine validation |
 | QWC grouping correctness | 0 violations | Measurement group integrity |
-| LiH composed Pauli terms (Q=30) | exactly 334 | Composed qubit validation |
-| BeH2 composed Pauli terms (Q=50) | exactly 556 | Composed qubit validation |
-| H2O composed Pauli terms (Q=70) | exactly 778 | Composed qubit validation |
+| LiH composed Pauli terms (Q=30) | exactly 838 | Composed qubit validation (exact rule 2026-08-29; retired rule-A: 334) |
+| BeH2 composed Pauli terms (Q=50) | exactly 1,396 | Composed qubit validation (retired: 556) |
+| H2O composed Pauli terms (Q=70) | exactly 1,954 | Composed qubit validation (retired: 778) |
 | H2 bond-pair Pauli terms (Q=10) | exactly 112 | Bond-pair qubit validation |
 | H2 bond-pair R-independence | 112 at all R | Selection rule sparsity |
 | Composed cross-block ERIs | exactly 0 | Block-diagonal integrity |
@@ -102,12 +102,12 @@
 | Block rotation l=0,1,2 | R^T R = I to 1e-12 | Mixed-l block validation |
 | NaH n_max=3 build | succeeds | l=2 rotation unblock |
 | NaH n_max=3 FCI bound | E(3) < E(2) at all R | Variational convergence |
-| LiF composed Pauli terms (Q=70) | exactly 778 | Multi-center qubit validation |
+| LiF composed Pauli terms (Q=70) | exactly 1,954 | Multi-center qubit validation (exact rule 2026-08-29) |
 | CO composed Pauli terms (Q=100) | exactly 1111 | Multi-center qubit validation |
 | N₂ composed Pauli terms (Q=100) | exactly 1111 | Multi-center isostructural invariance |
 | CO = N₂ Pauli count | identical | Isostructural invariance (multi-center) |
 | F₂ composed Pauli terms (Q=100) | exactly 1111 | Multi-center qubit validation |
-| NaCl composed Pauli terms (Q=50) | exactly 556 | Mixed frozen-core multi-center |
+| NaCl composed Pauli terms (Q=50) | exactly 1,396 | Mixed frozen-core multi-center (exact rule 2026-08-29) |
 | CH₂O composed Pauli terms (Q=120) | exactly 1333 | Multi-center polyatomic validation |
 | C₂H₂ composed Pauli terms (Q=120) | exactly 1333 | Multi-center polyatomic validation |
 | C₂H₆ composed Pauli terms (Q=160) | exactly 1777 | Multi-center polyatomic validation |
@@ -122,7 +122,7 @@
 | Nested Be Pauli terms (Q=10) | exactly 112 | Nested encoding qubit validation |
 | Nested Be 1-norm < composed | 18.95 < 121.35 Ha | PK elimination 1-norm advantage |
 | H-set ERI density < uncoupled | 9.2% < 12.5% (l_max=1) | 6j recoupling sparsity |
-| LiH/BeH₂/H₂O Pauli unchanged | 334/556/778 | Backward compatibility regression |
+| LiH/BeH₂/H₂O Pauli unchanged | 838/1,396/1,954 | Backward compatibility regression (exact rule 2026-08-29) |
 | He 2D variational bound | E > exact at all l_max | Variational principle |
 | He 2D l_max monotonic | E decreasing with l_max | Convergence validation |
 | He 2D breaks adiabatic floor | < 0.10% at l_max=5 | Non-adiabatic improvement |
@@ -185,7 +185,7 @@
 | SO Z⁴ scaling | (Z/Z_ref)⁴ symbolic | Verified at Z ∈ {1, 3, 4, 38} |
 | 2p doublet splitting (Z=1) | α²/32 exact | Breit-Pauli fine-structure benchmark |
 | `spin_ful_composed` module tests | 13 tests pass | Full composed-rel pipeline regression |
-| LiH/BeH₂/H₂O scalar regression | 334/556/778 Pauli preserved | Bit-exact scalar path unchanged when relativistic=False |
+| LiH/BeH₂/H₂O scalar regression | 838/1,396/1,954 Pauli preserved | Bit-exact scalar path unchanged when relativistic=False (exact rule 2026-08-29) |
 | LiH relativistic Pauli at n_max=1 | exactly 9 | Matches scalar (no spin-orbit at l=0) |
 | LiH rel/scalar Pauli ratio at n_max=2 | ∈ [3.7, 4.9] | Pinned at 4.24× in regression suite (post-TR, Sprint 4 v2.15.0) |
 | Spinor FCI at α=0 matches scalar FCI | \|ΔE\| < 1e-10 Ha | TR regression test (Sprint 4): jj reduced-matrix-element phase fix |

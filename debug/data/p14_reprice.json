@@ -1,0 +1,201 @@
+{
+  "sweeps": {
+    "H2": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 2,
+          "N_pauli": 3
+        },
+        {
+          "max_n": 2,
+          "Q": 10,
+          "N_pauli": 279
+        },
+        {
+          "max_n": 3,
+          "Q": 28,
+          "N_pauli": 14178
+        }
+      ],
+      "alpha": 3.171743391007659
+    },
+    "LiH": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 6,
+          "N_pauli": 9
+        },
+        {
+          "max_n": 2,
+          "Q": 30,
+          "N_pauli": 837
+        },
+        {
+          "max_n": 3,
+          "Q": 84,
+          "N_pauli": 42534
+        }
+      ],
+      "alpha": 3.1717433910076585
+    },
+    "BeH2": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 10,
+          "N_pauli": 15
+        },
+        {
+          "max_n": 2,
+          "Q": 50,
+          "N_pauli": 1395
+        },
+        {
+          "max_n": 3,
+          "Q": 140,
+          "N_pauli": 70890
+        }
+      ],
+      "alpha": 3.1717433910076562
+    },
+    "H2O": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 14,
+          "N_pauli": 21
+        },
+        {
+          "max_n": 2,
+          "Q": 70,
+          "N_pauli": 1953
+        },
+        {
+          "max_n": 3,
+          "Q": 196,
+          "N_pauli": 99246
+        }
+      ],
+      "alpha": 3.171743391007658
+    },
+    "NaH": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 4,
+          "N_pauli": 6
+        },
+        {
+          "max_n": 2,
+          "Q": 20,
+          "N_pauli": 558
+        },
+        {
+          "max_n": 3,
+          "Q": 56,
+          "N_pauli": 28356
+        }
+      ],
+      "alpha": 3.171743391007656
+    },
+    "MgH2": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 8,
+          "N_pauli": 12
+        },
+        {
+          "max_n": 2,
+          "Q": 40,
+          "N_pauli": 1116
+        },
+        {
+          "max_n": 3,
+          "Q": 112,
+          "N_pauli": 56712
+        }
+      ],
+      "alpha": 3.1717433910076585
+    },
+    "HCl": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 10,
+          "N_pauli": 15
+        },
+        {
+          "max_n": 2,
+          "Q": 50,
+          "N_pauli": 1395
+        },
+        {
+          "max_n": 3,
+          "Q": 140,
+          "N_pauli": 70890
+        }
+      ],
+      "alpha": 3.1717433910076562
+    },
+    "SiH4": {
+      "rows": [
+        {
+          "max_n": 1,
+          "Q": 16,
+          "N_pauli": 24
+        },
+        {
+          "max_n": 2,
+          "Q": 80,
+          "N_pauli": 2232
+        },
+        {
+          "max_n": 3,
+          "Q": 224,
+          "N_pauli": 113424
+        }
+      ],
+      "alpha": 3.171743391007656
+    }
+  },
+  "dblock": {
+    "ScH": {
+      "Q": 30,
+      "N_pauli": 901,
+      "per_Q": 30.033333333333335
+    },
+    "TiH": {
+      "Q": 30,
+      "N_pauli": 901,
+      "per_Q": 30.033333333333335
+    }
+  },
+  "one_norms": {
+    "LiH": {
+      "n_terms": 838,
+      "one_norm": 34.540552261862715
+    },
+    "BeH2": {
+      "n_terms": 1396,
+      "one_norm": 69.95724403778166
+    },
+    "H2O": {
+      "n_terms": 1954,
+      "one_norm": 370.3967872438897
+    }
+  },
+  "balanced": {
+    "LiH": {
+      "error": "AttributeError: module 'geovac.composed_qubit' has no attribute 'lih_spec'"
+    },
+    "BeH2": {
+      "error": "AttributeError: module 'geovac.composed_qubit' has no attribute 'beh2_spec'"
+    },
+    "H2O": {
+      "error": "AttributeError: module 'geovac.composed_qubit' has no attribute 'h2o_spec'"
+    }
+  }
+}

@@ -113,34 +113,33 @@ def compute_entanglement_from_1rdm(rho_spatial, n_electrons):
 
 
 def compute_single_orbital_entropies(ci_vector, sd_basis, n_spatial, n_spinorb):
-    """Compute single-orbital von Neumann entropy s_i for each spatial orbital."""
-    s_single = np.zeros(n_spatial)
-    for orb_i in range(n_spatial):
-        so_alpha = 2 * orb_i
-        so_beta = 2 * orb_i + 1
-        p_2 = 0.0
-        p_alpha = 0.0
-        p_beta = 0.0
-        p_0 = 0.0
-        for I, sd_I in enumerate(sd_basis):
-            c_sq = ci_vector[I] ** 2
-            has_alpha = so_alpha in sd_I
-            has_beta = so_beta in sd_I
-            if has_alpha and has_beta:
-                p_2 += c_sq
-            elif has_alpha:
-                p_alpha += c_sq
-            elif has_beta:
-                p_beta += c_sq
-            else:
-                p_0 += c_sq
-        probs = [p_0, p_alpha, p_beta, p_2]
-        s = 0.0
-        for p in probs:
-            if p > 1e-15:
-                s -= p * np.log(p)
-        s_single[orb_i] = s
-    return s_single
+    """Compute single-orbital von Neumann entropy s_i for each spatial orbital.
+
+    CORRECTED 2026-08-29.  The previous implementation built rho_i
+    DIAGONAL-ONLY -- it binned the occupation probabilities
+    (p_0, p_up, p_dn, p_2) and returned their Shannon entropy.  That
+    discards the spin coherence <up|rho_i|dn>, which is nonzero whenever
+    the state is not an M_S eigenstate: the two configurations it connects
+    have the same environment and opposite spin on orbital i, so they differ
+    by Delta M_S = 1 and cannot both appear in an M_S eigenstate -- but they
+    do appear in an arbitrary member of a degenerate open-shell multiplet,
+    which is precisely what an eigensolver returns.
+
+    Because a diagonal Shannon entropy majorizes the von Neumann entropy of
+    the full matrix (Schur concavity), the old routine OVERESTIMATED s_i and
+    the mutual information built from it violated subadditivity (5 of 10
+    pairs at Z=7; orbital (2,1,1): 0.797813 reported vs 0.312525 true, with
+    |<up|rho|dn>| = 0.38).
+
+    This now delegates to ``compute_subsystem_entropy``, which builds the
+    full reduced density matrix with fermionic phase bookkeeping and
+    diagonalizes it.  The two agree to machine precision wherever the
+    coherence vanishes.  See debug/sprint_eri_evaluator_defects_memo.md.
+    """
+    return np.array([
+        compute_subsystem_entropy(ci_vector, sd_basis, [orb_i], n_spinorb)
+        for orb_i in range(n_spatial)
+    ])
 
 
 def compute_two_orbital_entropy(ci_vector, sd_basis, orb_i, orb_j, n_spinorb):

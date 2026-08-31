@@ -3,7 +3,12 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only group6-specific scope + deltas + the branch watch-notes.
 
-> **STATUS: CERTIFIED ✅ 2026-07-04** (certifying FULL run PASS — 6th certified
+> **STATUS: NOT CERTIFIED — superseded 2026-08-22 (v5.0.0 retraction re-review)
+> and again by the FULL certifying runs of 2026-08-28 (FAIL) and 2026-08-29
+> (FAIL). See the change log and the run record before treating any part of
+> this profile as a passed gate.**
+>
+> *Historical:* **CERTIFIED 2026-07-04** (certifying FULL run PASS — 6th certified
 > branch, after group3/group1/group2/group4/group5; the LAST paper group before the
 > synthesis-layer cert. Run notes: this session + `debug/qa/group6_cert_seed_key.json`.)
 > Originally FROZEN 2026-07-04 (PI-confirmed; frozen as drafted, tagging kept as
@@ -62,8 +67,8 @@ projection.** The reviewers must hold the prose to what is actually verified:
    Bargmann–Segal, graph-QED) is *evidence for*, not *proof of*, the iff.
 3. **The Layer-2-presence bound (Paper 34) replaced a FALSIFIED depth-linear
    form.** The naive "residual scales linearly with chain depth" form was
-   falsified on the catalogue itself (depth-3 chains at residual 0 *and* +286
-   ppm; depth-4 at +2 ppm *and* +0.534%). The falsified form must appear only as
+   falsified on the catalogue itself (depth-3 chains at residual 0 *and* -211
+   ppm; depth-4 at +2 ppm *and* -0.534%). The falsified form must appear only as
    a *superseded / withdrawn* reading — any locus that still asserts depth-linear
    scaling as live is a **zombie (MATERIAL)**; add to C16 on discovery.
 4. **"Introduces no new computation"** (Papers 34 and 35 both say this): they are
@@ -125,11 +130,12 @@ content — strip it and the claim becomes false:
    potential → entropy ≡ 0 via Moshinsky–Talmi total-quanta conservation) is an
    INTERNAL THEOREM parallel to the Fock/BS rigidity of Paper 24 — symbolic
    backing required (C1/C2).
-5. **The block-entropy exponent is γ_∞ ≈ 1.96** (Richardson on n_max = 2,3,4,5),
+5. **The block-entropy exponent is γ_∞ ≈ 1.93–1.96** (extrapolated from n_max = 2,3,4,5;
+   the precise value is extrapolation-order dependent, the sub-2 conclusion is not),
    *below* the second-order RS value 2, with the gap attributed to multi-shell
    aggregation. Watch for a stale earlier exponent (the raw-w_B / EP-2c 2.383
    form used dimensional w_B and inverts sign; the paper's live form is the
-   **dimensionless** w̃_B/δ_B with γ_∞ ≈ 1.96) — a stale 2.383 or a "= 2"
+   **dimensionless** w̃_B/δ_B with γ_∞ ≈ 1.93–1.96) — a stale 2.383 or a "= 2"
    assertion is a number-drift defect.
 
 ### Branch-defining criterion 5: §1.5 interpretive-rhetoric discipline (Papers 35/27/34 — the most interpretive branch)
@@ -165,12 +171,34 @@ Named trunk/WH dependencies this branch restates, with their current tier:
 
 - **P26:** one-body off-diag H (κ=−1/16) = **10–39%** correlation energy but
   **<0.2%** entanglement entropy; V_ee off-diag = **100%** of entanglement;
-  **S ~ Z^{−2.56}** across He-like ions; angular-momentum eigenbasis = the
-  **unique** sparse-ERI basis (any rotation fills **42%→99%** step-function at
-  identity; nonzero ERI count **Z-independent**); hub migration **1s→2s→2p**;
-  core-valence MI **< 10⁻³ by Z=4**; composed per-block entanglement
-  R-independent, core/bond entropy ratio **50×**; ties to **O(Q^2.5)** Pauli
-  scaling. Tier = MEASURED (computational).
+  **S ~ Z^{−2.56}** (measured −2.563) across He-like ions; angular-momentum
+  eigenbasis = the **essentially unique** sparse-ERI basis (up to
+  (l,m)-label-preserving rotations; any generic rotation fills **42%→100%**
+  in a rapid but graded transition — intermediate densities are generator-
+  and cutoff-dependent, the endpoints are not; nonzero ERI count
+  **Z-independent**); hub migration **1s→2s→2p** (N/O/F values are
+  multiplet-member-dependent — ground states **4/7/6**-fold degenerate
+  for N/O/F (MEASURED; corrected 2026-08-30 from a stale "4/6/4 =
+  C(4, n_p−2)" — the combinatorial formula does not reproduce the
+  exact-rule degeneracies, and `tests/test_paper26_entanglement.py` pins
+  {7:4, 8:7, 9:6}); range 0 to the attained ceilings
+  no analytic ceiling — the former "ln 8 ≈ 2.08 N/F, ln 16 ≈ 2.77 O"
+  ceilings are **RETRACTED** (artifacts of a diagonal-only single-orbital
+  entropy routine that discarded spin coherence and so violated
+  subadditivity; the maxima are MEASURED, not bounded). Core-valence MI
+  **≈4×10⁻³ at Z=4** (Be, small-but-nonzero; `test_paper26_entanglement.py`
+  pins 0.00365), decaying through **1.7×10⁻³ at Z=5** and vanishing
+  **exactly for Z≥7** — NOT "exactly 0 for Z≥5", which the Z=5 measurement
+  contradicts. Composed per-block entanglement R-independent, core/bond
+  entropy ratio **40×**. Tier = MEASURED (computational); the core-closure
+  statement is a derivation from a measured premise.
+  *(Corrected 2026-08-30: this block previously carried the retracted
+  ceilings, ≈2×10⁻³, "exactly 0 for Z≥5", a 50× ratio, and a tie to the
+  retired O(Q^2.5) Pauli exponent. Criteria that assert withdrawn claims
+  actively mis-direct reviewers.)*
+  *(C8 block updated 2026-08-28; the pre-update block protected the
+  withdrawn 99.2%→"step-function" characterization, the unqualified
+  "unique", and a false <10⁻³ Be threshold.)*
 - **P27:** one-body non-degenerate GS single-particle entropy ≡ **0**
   (**S_kin/S_full ~ 10⁻¹⁴**, He n_max=2,3 — the VALID one-body theorem); area law
   **A_n = g_n² = (2n²)²**, factor-4 = two-body; cusp = single hot node on **(1s,1s)**;
@@ -178,23 +206,132 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   any-central-potential entropy ≡ 0 (Moshinsky–Talmi)" claim + its mechanism + its
   INTERNAL THEOREM tier are **WITHDRAWN** — corrected S_full = **0.0671/0.0716/0.0833
   nats** (N_max=2/3/4), grows with basis, ground state NOT a single Slater determinant,
-  ‖[H_HO,V]‖ = O(1) (0.74/0.63/0.67); block entropy **S_B = A(w̃_B/δ_B)^γ**, **γ_∞ ≈ 1.96**
+  ‖[H_HO,V]‖ = O(1) (0.74/0.63/0.67); block entropy **S_B = A(w̃_B/δ_B)^γ**, **γ_∞ ≈ 1.93–1.96**
   (Richardson n_max=2–5, below RS 2). Tier = INTERNAL THEOREM (one-body inertness — valid)
   + MEASURED (scaling); the two-fermion HO rigidity corollary is retracted.
   *(Criteria-currency correction 2026-08-24 to the PI-approved retraction — a live
   re-assertion of the ≡0 claim is now MATERIAL, not a headline to protect.)*
 - **P34:** two-layer decomposition; **28** named projections × three-axis
   tagging; **Layer-2-presence bound** |ε| ≤ max(ε_basis, max|L₂ input|)
-  (replaces the FALSIFIED depth-linear form: depth-3 at 0 & +286 ppm, depth-4
-  at +2 ppm & +0.534%); K = π(B+F−Δ) ≈ **137.036** catalogued as Observation;
+  (replaces the FALSIFIED depth-linear form: depth-3 at 0 & -211 ppm, depth-4
+  at +2 ppm & -0.534%); K = π(B+F−Δ) ≈ **137.036** catalogued as Observation;
   "introduces no new computation." Tier = framework consolidation +
   FALSIFIABLE PREDICTION (the bound).
+
+  **C8 EXTENSION — 2026-08-28 (PI-directed, BEFORE the freeze of this delta run).**
+  Five remarks added to P34 after the 2026-07-04 certification (v5.1.5–v5.1.7) carry
+  new headline numbers. They were unenumerated, and per the completeness-critic
+  doctrine an unenumerated headline is an *unmeasured* criterion, not a passed one.
+  Enumerated here so the delta can gate them:
+  - `rem:minimal_presentation` — the **two-primitive** packaging (rational skeleton +
+    projection family) with a **four-instance** operator-collapse table; the atomic
+    one-electron identity **h₁ = k²(𝟙 − S/2) − Zk·diag(1/n)**, verified against an
+    independent quadrature route at **6×10⁻¹⁰**; the boundary control — the
+    two-electron tensor is NOT metric-generated (**39%** residual vs ~10⁻¹² for a
+    metric-generated control). Tier: the four collapse instances individually
+    proven/measured at their citations; **minimality is an OBSERVATION** with a stated
+    falsifier. *Gate: the minimality claim must not read as proven.*
+  - `rem:ee_partial_split` (base) — exact min/max split per multipole channel;
+    **rank-two** head (labels×metric at L=0; A = ⟨r^L⟩ bandwidth **L+1**; B dense at
+    L≥1); head supports **no correlation** (bit-exact vs dressed one-body, N=2,3);
+    **g(k) = k·g(1)** with g(1) rational, **⟨1s²|g|1s²⟩ = 5k/8**;
+    **⟨1s²|W⟩/⟨1s²|g⟩ = 3/5** exact; W compressible at basis-independent rank
+    (**1 mHa @ rank 3–4**, **0.01 mHa @ rank 5–7**, n_s = 3–6); Frobenius tails after
+    four terms **1.6/0.7/0.1/0.03%** for L = 0–3. Tier: exact (machine-verified) for
+    the identities; MEASURED for the rank-flatness. *Gate: the lineage disclaimer
+    (Beebe–Linderberg 1977 Cholesky; low-rank ERI structure is CLASSICAL and not
+    claimed as new) must remain inline and unhedged.*
+  - `rem:ee_partial_split` (sharpenings) — the **2n−1 exact-rank law** (pair densities
+    span exactly 2n−1 dims ⇒ every radial-kernel matricization has rank ≤ 2n−1;
+    integer dependence **−ρ₁₁ + 2ρ₁₂ − 3ρ₁₃ + 2ρ₂₂ ≡ 0** at n=3; nullity **(n−1)²**);
+    the **closed-form NEGATIVE** — W(1) exactly rational (**⟨1s²|W|1s²⟩ = 3/8**) but
+    active characteristic polynomials **irreducible over ℚ** (n_s=2 cubic
+    **131072λ³ − 50688λ² − 25200λ − 675**), Löwdin spectrum **grows** with n_s;
+    surviving skeleton form is the ODE **λf″(u) = w(u)f(u)** in u = 1/r.
+    Tier: exact over ℚ; MEASURED for the spectral growth. *Gate: the negative must
+    stay a negative — no drift toward "the eigenvectors have closed forms".*
+  - `rem:ee_partial_split` (l>0 clause) — Gaunt-coupled s+p full-CI, L = 0,1,2 active:
+    W-rank **3–4 → <1 mHa**, flat as the radial-pair space grows **10 → 28**.
+    Tier: MEASURED.
+  - `rem:ee_partial_split` (resource clause) — JW LCU 1-norm down **15–17%** at
+    bit-identical energy; beats a density-fitting control by **13–17%** at matched
+    accuracy; **λ_split/λ_full = 0.83, 0.85, 0.89, 0.92, 0.94** at n_s = 4,6,8,10,12,
+    monotone toward unity. Tier: MEASURED. *Gate: the DEGRADATION is part of the
+    claim — a reading that keeps the 15% and drops the decay is MATERIAL, and the
+    clause must not read as a scaling result.*
+
+  Backing: `tests/test_paper34_minimal_presentation.py` (5 legs),
+  `tests/test_paper34_ee_split.py` (13 legs). Provenance:
+  `debug/sprint_minimal_presentation_memo.md` §§7–11.
 - **P35:** KG spectrum on S³×ℝ π-free in ℚ[√d_i] for rational m²
   (**200 cases**, n∈[1,50] × m²∈{0,1,1/4,2}); π enters at temporal
   compactification, first π-eigenvalue **(n=0,k=1), ω²=4π²**; Casimir
   **E_Cas = 1/240** (exact rational, no transcendental); Stefan–Boltzmann
   **π²/90** via Matsubara high-T; rest-mass vs observation/temporal-window
   split. Tier = SYMBOLIC (panel) + structural Observation (the iff reading).
+
+## C8 EXTENSION -- 2026-08-29 (follow-on sprint, BEFORE the freeze of the FULL certifying run)
+
+The 2026-08-29 follow-on sprint added new headline claims to P34, P27 and P26.
+They are enumerated here so the certifying run gates them.  **This extension adds
+criteria; it relaxes none.**  Disclosure: the criteria were edited by the PM
+between the delta run and this certifying run (the completeness-critic's G15
+class) -- the additions are listed in full so a reviewer can see exactly what
+was added and when.
+
+- **P34, deuteron polarizability channel (new, `sec:autopsy_d_hfs` +
+  `sec:conv_d_polarizability` + `sec:prediction`).** Sourced TPE decomposition
+  (Bonilla et al., arXiv:2508.18776): elastic **-41.50**, polarizability
+  **+110.16**, single-proton **-33.14**, single-neutron **+8.95** kHz, total
+  **+44.5(1.1) kHz = +135.9 ppm**; inelastic **+336.5 ppm** outweighs all
+  elastic-class pieces **-200.6 ppm**, flipping the total positive.  Framework
+  requires **+112.9 ppm**; difference **+23.0 ppm** attributed (as an
+  INFERENCE from the H parallel, not an itemization) to missing higher-order
+  QED; H 21cm comparator **+18.4 ppm**.  RETIRED: the "+44 ppm polarizability"
+  (a kHz-read-as-ppm unit slip of the TOTAL) and the "~+200 ppm" entry.
+  Prediction status: the D row is a *diagnosed missing-channel* exception, and
+  a chain consuming the TPE is predicted to land in the tens-of-ppm class.
+  Tier = MEASURED (framework side) against a cited Layer-2 evaluation.
+
+- **P34, alkali cliff closed form (new, `eq:alkali_cliff`).**
+  cliff = (Z/Z_eff^3)(n/nu)^3 F_rel(Z alpha), nu = sqrt(Ry/E_ion), F_rel =
+  [gamma(2gamma-1)]^-1.  Predicts **2.9 / 4.4 / 22.3 / 41.5 / 56.9** against
+  tabulated **2.8 / 4.0 / 22.0 / 43.1 / 63.0** (errors 2/10/1/4/10%).
+  RETIRED: the **~Z^1.2 growth law** (misses Na by 126%; the fitted slope 1.16
+  survives only as a data pin discriminating the retired ~Z^2.5).  Structural
+  claim: nu is near-constant (**1.59-1.87**) while n runs 2..6; the
+  quantum-defect factor spans 17x and is monotone while the charge factor
+  spans <3x and is NOT; the K "jump" is a CR67-denominator artifact (the
+  NEEDED density is smooth).  *Honest scope:* a diagnosis consuming nu from
+  experiment, not a framework prediction.
+
+- **P27, entropy-cusp co-location RESTORED to MEASURED (`sec:cusp`).**
+  Edge-resolved leave-one-out decomposition on the pair-state graph:
+  **42.5%** of S on the hottest V_ee edge (1s,1s)<->(1s,2s) at n_max=3,
+  **40.0%** at n_max=4 (same edge); a comparably large non-reference edge
+  costs **-1.7e-15** nats; edge ordering tracks V_ee ordering at Spearman
+  **rho = +0.94** (+0.92 at n_max=4).  Explicitly NOT proportionality (the
+  (2s,2s) edge carries 29.8% on a 6x smaller coupling).  Tier = MEASURED;
+  the attribution is leave-one-edge-out, well-defined but not unique.
+
+- **P26, molecular headline now BACKED (`eq:rindep`, `eq:ratio`).**
+  S_bond = **0.3033139** nats R-independent on [0.5, 10] bohr with the
+  mechanism pinned (composed electronic blocks **bit-identical** across R);
+  S_bond/S_core = **49.6** at LiH R_eq; dissociation does NOT reach ln 2.
+  (Previously a C8 headline with no test through three certifying runs.)
+
+- **P34, citation layer (new `sec:citation_status`).**  13 references verified
+  against primary text and added to the bibliography; "Eides 2024" corrected
+  to Eides--Grotch--Shelyuto 2007 at 9 loci (no 2024 edition exists);
+  two load-bearing attributions named as UNRESOLVED rather than fixed
+  (the "Pachucki--Yerokhin 2010" D-HFS itemization, and the -(11/48)
+  coefficient's textbook source).  A reviewer must check that these are
+  presented as open, not as resolved.
+
+**New deterministic gate in force for this run: C20** (inline-attribution
+resolvability, ratchet semantics, `debug/qa/check_inline_attributions.py`,
+baseline `debug/qa/inline_attribution_baseline.json`).  Registered in
+`docs/qa/criteria.md` 2026-08-29; discrimination proven the same day.
 
 ## Known logged gaps at freeze (not blockers; verify still-logged)
 
@@ -206,9 +343,53 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   `test_paper27_entropy`, `test_paper34_projection_spot_checks{,_batch1-3}`,
   `test_paper35_predictions`). The code reviewer must locate P26's backing
   (it may live in entanglement/ERI-density modules under other names) or flag
-  the headlines (Z^{−2.56}, 42%→99% fill, 50× ratio) as coverage gaps.
+  the headlines (Z^{−2.56}, 42%→100% fill, 50× ratio) as coverage gaps.
 - The corpus-wide dangling-`debug/`-refs debt (§9 standing) touches
   P34/P35-adjacent files — C14 reports advisory, not blocking.
+
+## FULL certifying run 2026-08-28 (v5.1.8) — **FAIL**, remediated same day
+
+Status: **NOT CERTIFIED.** Discharges the "Re-review OWED (2026-08-22, v5.0.0)"
+item below by *running* the pass; the pass failed, was remediated, and the branch
+now needs a fresh delta-verification run before any certifying attempt.
+
+**Calibration.** 9 seeds planted, **2 VOID by PM seeding error** (planted on LaTeX
+comment lines — see the new seed-placement rule in `docs/qa/seed_defects.md`). Of
+the 7 valid: **7/7 caught**, four fire-tested by their finders. **7/7 controls
+clean.** Per-dimension: code P26/P27/P34/P35, claims-A, claims-B **calibrated**;
+citation **thin** (1 valid seed where its tier requires 2); synthesis
+**UNCALIBRATED** — its only seed was void, so its clean verdict carries no measured
+discriminating power and that dimension cannot be certified from this run.
+
+**Cert-blocker.** D 1S HFS Bohr–Fermi baseline high by **496.5 ppm** (the
+`g_atomic = 2μ_I/μ_N` convention needs division by **2I**; the driver divided by
+**m_d/m_p = 1.99900750** and used `m_e/m_d` where the mass factor is `m_e/m_p` for
+every nucleus). Two errors that nearly cancel; H and T unaffected (I=1/2 ⇒ both
+factors unity), which is why the H sanity check hid it through three
+certifications. Found by the **completeness-critic**, not the panel — §V.C has no
+test file and its defects are column arithmetic, so no dimension reads it.
+Corrected to 327.234993 / 327.315305; residual **+285.6 → −210.9 ppm**; propagated
+to 26 loci including **certified group4**. The "+285.6 matches −286 ppm PY budget"
+closure is **withdrawn**, with no replacement invented.
+
+**Also fixed:** both Paper 26 LARGEs (§IV computed in the wrong basis; sparsity step
+reproducing as neither claimed value), the incomplete-propagation family across
+P27/P34/P35/synthesis/**this document**, three vacuous `sp.pi in free_symbols`
+guards, one null test, and the missing C17 EP-2b family. Two upgrades applied
+(core-valence at the 1e-15 noise floor; exponent agreement 0.11% not 0.6%).
+
+**Verification after remediation:** C11/C13/C14/C16/C17/C18/C19 PASS on group6 *and*
+group4; 6/6 papers compile three-pass clean with 0 undefined references; 219 tests
+pass, 2 skipped.
+
+**Open, not remediated (PI calls):** Li-7 HFS baseline (critic-flagged, **not**
+PM-verified — depends on an assumed Z_eff, not a clean ratio test); the
+Kennedy–Critchley–Dowker attribution in P35; ~50 informal "Author Year"
+attributions in P34 §V; the fact that the corrected D itemization no longer closes;
+the remaining 17 §V.C autopsies (never cross-anchored); P34 spot-check batches
+(critic estimates 11–13 of ~35 functions lack discriminating power; 4 fixed).
+
+Run notes: `debug/qa/group6_full_run_2026_08_28_notes.md`.
 
 ## Change log
 - 2026-07-04 — **Certifying FULL run (whole-group) = PASS → group6 CERTIFIED ✅ (6th branch).**
@@ -286,7 +467,7 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   §III.1–§III.15 domain (the theorem IS an iff but by-exhaustion over 15 projections;
   WH7 registered beyond scope); **two new backing files** —
   `tests/test_paper26_entanglement.py` (4 tests: decoupling 10–39%/<0.2%/~100%, S~Z^{−2.56}
-  =−2.563, 42.4%→99.2% + Z-independent 265) and `tests/test_paper35_kg_panel.py`
+  =−2.563, 42.4%→100% + Z-independent 265 — **both corrected 2026-08-29 to 17.1%→100% and 107**; the same exact-rule correction later moved the P26 molecular cells (S_bond 0.303→0.330, still exactly R-independent; S_core 0.006→0.008; the 50×/49.6 ratio → 40.1) and the Minnesota adjudication was OVERTURNED by cert-3 item 3 (the ~31× is a zero-crossing artifact; production convention 0.48×), see debug/sprint_eri_evaluator_defects_memo.md) and `tests/test_paper35_kg_panel.py`
   (4 tests: genuine 200-case π-freeness, first-π-mode-is-temporal, Casimir 1/240 &
   +17/480) — closing the P26-lead-headline and P35-200-case-panel NO-TEST gaps;
   `claim_test_matrix.md` populated with 15 group6 rows; inline provenance tiers added
@@ -308,7 +489,7 @@ Named trunk/WH dependencies this branch restates, with their current tier:
   Lorentzian "literal identification / genuine Lorentzian extension / Krein four-witness
   closes bit-exactly" (L590/2208/2244/2263/2288/2412/2426/2443, dated 2026-05-16/17),
   withdrawn by the 2026-06-09 P45 K⁺ descope; add phrases to the C16 registry. **C1/C2**
-  — P26 lead headline (energy-entanglement decoupling) + 42%→99% ERI-fill + core-valence
+  — P26 lead headline (energy-entanglement decoupling) + 42%→100% ERI-fill + core-valence
   MI + 50× + hub-migration have NO asserting test (P26 has no `test_paper26_*`);
   P35's 200-case π-free panel unbacked (only a float-cast false-positive stand-in);
   P35 Casimir 1/240 untested in-file (backed via P34 §III.14). **C3/C9** — P35 L386
@@ -446,3 +627,5 @@ delta over the remediated surface unlocks the PASS — **group6 is re-certified*
 is now complete: the v5.0.0 retraction's three missed loci are closed and C16 is hardened to catch the
 class). Re-verify seed key `debug/qa/group6_reverify_seed_key.json`. Standing honest ceilings (P34 §V.C
 autopsy line-by-line, P34 C3 tiers, Layer-2-bound NO-TEST → PI) carry forward, non-blocking.
+
+<!-- Change log: 2026-08-29 -- FULL certifying run #2 = FAIL (calibrated: 9/9 dims, 14/15 first-pass seed catches all recovered on re-dispatch, 8/8 controls); full remediation applied same day (record: debug/qa/group6_full_run_2026_08_28_notes.md). Canonical corrections rippling into C8-adjacent facts: Minnesota contrast -0.55/+17.3 (~31x; the -0.81/+17.2 reproduced under no convention), Friar profile factor 3pi/8 (not 4/pi), K residual 8.8e-8 = Paper 2's self-consistency-root residual (plain sum 4.8e-7). Re-cert DELTA owed; plant a transcendental-tag-class seed there (critic G6). -->

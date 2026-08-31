@@ -67,6 +67,10 @@ MATRIX_TEST = re.compile(r"\btest_[A-Za-z0-9_]+\b")
 # prefix (the group5 1st-cert P33 class: a paper citing a nonexistent test
 # FUNCTION, invisible to the file-level REF pattern). Hardened 2026-07-03.
 BARE_FN = re.compile(r"\\texttt\{(test(?:\\_[A-Za-z0-9]+)+)\}")
+# file.py::function citations (cert-2 hardening): the '::' suffix names a
+# collectable function; a test renamed out of collection (test_ -> notest_)
+# previously escaped because only file-level existence was checked.
+FILE_FN = re.compile(r"::(?:\\allowbreak\s*)?(test(?:\\_[A-Za-z0-9]+)+)")
 
 
 def stem(ref: str) -> str:
@@ -145,6 +149,27 @@ def main() -> int:
                 ln = raw.count("\n", 0, m.start()) + 1
                 (gated_missing if is_gated(p) else audit_missing).append(
                     (rel, ln, fn + " (function)"))
+        # '::function' suffixes after a file reference (cert-2 hardening)
+        for m in FILE_FN.finditer(raw):
+            fn = m.group(1).replace("\\_", "_")
+            back = raw[max(0, m.start() - 200):m.start()]
+            fm = None
+            for fm2 in REF.finditer(back):
+                fm = fm2
+            ok = False
+            if fm is not None:
+                target = ROOT / "tests" / (stem(fm.group(0)) + ".py")
+                if target.exists():
+                    ok = ("def " + fn + "(") in target.read_text(
+                        encoding="utf-8", errors="replace")
+            if not ok:
+                ok = any(("def " + fn + "(") in q.read_text(
+                    encoding="utf-8", errors="replace")
+                    for q in (ROOT / "tests").glob("*.py"))
+            if not ok:
+                ln = raw.count("\n", 0, m.start()) + 1
+                (gated_missing if is_gated(p) else audit_missing).append(
+                    (rel, ln, fn + " (::function)"))
 
     # matrix coverage (advisory): matrix tests never cited inline anywhere
     matrix_tests: set[str] = set()

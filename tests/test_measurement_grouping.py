@@ -302,10 +302,25 @@ class TestScaling:
               f"{a3.n_qwc_groups} groups, ratio={ratio3:.4f}")
 
         # Greedy QWC grouping is suboptimal, especially at small sizes
-        # where the ratio can increase before stabilizing.  Allow 50%
-        # tolerance — the important signal is that the ratio doesn't
-        # explode (which would indicate O(N) groups per N terms).
-        assert ratio3 <= ratio2 * 1.50, (
+        # where the ratio can increase before stabilizing.  The important
+        # signal is that the ratio doesn't EXPLODE (which would indicate
+        # O(N) groups per N terms).
+        #
+        # Re-measured 2026-08-29 after the ERI evaluator fix restored the
+        # m-changing multipoles: nmax=2 288 terms / 72 groups (0.2500),
+        # nmax=3 14,211 terms / 5,614 groups (0.3950).  The richer angular
+        # structure genuinely produces more QWC groups per term, so the
+        # growth factor moved 1.00x -> 1.58x and the old 1.50x guard no
+        # longer bounds it.  Widened to 1.75x, and backed by an ABSOLUTE
+        # anti-explosion bound so widening cannot hollow the test out.
+        assert ratio3 <= ratio2 * 1.75, (
             f"Groups/terms ratio increased too much: nmax=2 {ratio2:.4f} -> "
-            f"nmax=3 {ratio3:.4f} (>{ratio2 * 1.50:.4f} limit)"
+            f"nmax=3 {ratio3:.4f} (>{ratio2 * 1.75:.4f} limit)"
+        )
+        # The real claim: grouping still gives a substantial reduction, i.e.
+        # groups are a small FRACTION of terms and do not approach O(N).
+        assert ratio3 < 0.50, (
+            f"QWC grouping no longer reduces measurement cost meaningfully: "
+            f"{a3.n_qwc_groups} groups for {a3.n_pauli_terms} terms "
+            f"(ratio {ratio3:.4f})"
         )

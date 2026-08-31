@@ -13,8 +13,8 @@ Validates:
   - Relativistic ratio rel/scalar at n_max=2 (2.42× per Tier 2 T3 pin)
   - Ecosystem export: ``hamiltonian('SrH')``, ``hamiltonian('BaH')`` work
   - OpenFermion smoke test (Qiskit/PennyLane are optional deps)
-  - No regression in existing canonical Pauli counts (LiH=333, BeH2=555,
-    NaH=222, KH=222, CaH2=444, MgH2=444)
+  - No regression in existing canonical Pauli counts (LiH=837, BeH2=1395,
+    NaH=558, KH=558, CaH2=1116, MgH2=1116) [exact rule 2026-08-29]
 """
 
 from __future__ import annotations
@@ -51,14 +51,15 @@ from geovac.ecosystem_export import hamiltonian, GeoVacHamiltonian
 # ---------------------------------------------------------------------------
 
 SCALAR_EXPECTED = {
-    'SrH': {'Q': 20, 'N_pauli': 222},
-    'BaH': {'Q': 20, 'N_pauli': 222},
+    # Corrected 2026-08-29 (exact rule; retired rule-A: 222)
+    'SrH': {'Q': 20, 'N_pauli': 558},
+    'BaH': {'Q': 20, 'N_pauli': 558},
 }
 
 
 @pytest.mark.parametrize("name,expected", list(SCALAR_EXPECTED.items()))
 def test_scalar_pauli_count(name: str, expected: dict) -> None:
-    """Scalar SrH / BaH must give exactly Q=20, N_pauli=222 (isostructural
+    """Scalar SrH / BaH must give exactly Q=20, N_pauli=558 (isostructural
     with KH, NaH, CaH-monohydride-variant)."""
     spec = srh_spec() if name == 'SrH' else bah_spec()
     result = build_composed_hamiltonian(spec, pk_in_hamiltonian=False)
@@ -72,7 +73,7 @@ def test_scalar_pauli_count(name: str, expected: dict) -> None:
 
 def test_scalar_isostructural_alkali_alkaline_earth_monohydride() -> None:
     """Alkali monohydrides (NaH, KH) and alkaline-earth monohydrides
-    (SrH, BaH) share the same Q=20, N_pauli=222 topology — all have exactly
+    (SrH, BaH) share the same Q=20, N_pauli=558 topology — all have exactly
     one bond block + frozen core, no explicit core block in the Hamiltonian.
     """
     results = {}
@@ -92,19 +93,19 @@ def test_scalar_isostructural_alkali_alkaline_earth_monohydride() -> None:
             f"Isostructural violation: {name}={val}, reference (NaH)={ref}"
         )
     # Pin the exact reference for regression
-    assert ref == (20, 222), (
-        f"Isostructural invariant drift: all 4 = {ref}, pinned (20, 222)"
+    assert ref == (20, 558), (
+        f"Isostructural invariant drift: all 4 = {ref}, pinned (20, 558)"
     )
 
 
 def test_scalar_pauli_q_ratio() -> None:
-    """Main-group hydrides obey Pauli/Q = 11.10 (Track CU universal)."""
+    """Main-group hydrides obey Pauli/Q = 27.90 (Track CU universal)."""
     for name, spec_fn in [('SrH', srh_spec), ('BaH', bah_spec)]:
         spec = spec_fn()
         r = build_composed_hamiltonian(spec, pk_in_hamiltonian=False)
         ratio = r['N_pauli'] / r['Q']
-        assert abs(ratio - 11.10) < 0.01, (
-            f"{name}: Pauli/Q = {ratio:.3f}, expected 11.10"
+        assert abs(ratio - 27.90) < 0.01, (
+            f"{name}: Pauli/Q = {ratio:.3f}, expected 27.90"
         )
 
 
@@ -115,15 +116,15 @@ def test_scalar_pauli_q_ratio() -> None:
 RELATIVISTIC_EXPECTED = {
     # Post-TR fix (Sprint 4, April 2026): jj_angular_Xk received its
     # missing (-1)^{j+1/2} reduced-matrix-element phase; the corrupted
-    # cancellations that produced 534 went away, new physical count is 942.
-    'SrH_rel': {'Q': 20, 'N_pauli': 942},
-    'BaH_rel': {'Q': 20, 'N_pauli': 942},
+    # cancellations that produced 534 went away, new physical count is 998.
+    'SrH_rel': {'Q': 20, 'N_pauli': 998},
+    'BaH_rel': {'Q': 20, 'N_pauli': 998},
 }
 
 
 @pytest.mark.parametrize("name,expected", list(RELATIVISTIC_EXPECTED.items()))
 def test_relativistic_pauli_count(name: str, expected: dict) -> None:
-    """Relativistic SrH_rel / BaH_rel must give exactly Q=20, N_pauli=942.
+    """Relativistic SrH_rel / BaH_rel must give exactly Q=20, N_pauli=998.
     Isostructural with CaH_rel."""
     spec = (srh_spec_relativistic() if name == 'SrH_rel'
             else bah_spec_relativistic())
@@ -142,18 +143,19 @@ def test_relativistic_isostructural_CaH_SrH_BaH() -> None:
         spec = spec_fn()
         r = build_composed_hamiltonian(spec)
         assert r['Q'] == 20
-        assert r['N_pauli'] == 942, (
-            f"{spec.name}: N_pauli={r['N_pauli']}, expected 942"
+        assert r['N_pauli'] == 998, (
+            f"{spec.name}: N_pauli={r['N_pauli']}, expected 998"
         )
 
 
 def test_relativistic_scalar_ratio_n_max2() -> None:
-    """Relativistic / scalar Pauli ratio at max_n=2 is pinned to 4.24
-    for SrH and BaH (matches the LiH Tier 2 T3 regression range
-    post-TR fix, April 2026).
+    """Relativistic / scalar Pauli ratio at max_n=2 is ~1.69 for SrH and
+    BaH (exact-rule 2026-08-29: measured 998/558 = 1.688).
 
-    Before the TR fix this was 2.40; the corrupted X_k phase caused
-    accidental cancellations that are removed in the corrected builder.
+    History: the retired 4.24 compared a rule-A scalar denominator against
+    the full-Gaunt (rule-B-equivalent) relativistic numerator -- a
+    cross-rule comparison; 4.24/2.51 = 1.69 exactly.  (Deeper history:
+    before the April 2026 TR fix the corrupted X_k phase gave 2.40.)
     """
     for rel_fn, sc_fn in [
         (srh_spec_relativistic, srh_spec),
@@ -162,9 +164,9 @@ def test_relativistic_scalar_ratio_n_max2() -> None:
         rel = build_composed_hamiltonian(rel_fn())
         sc = build_composed_hamiltonian(sc_fn(), pk_in_hamiltonian=False)
         ratio = rel['N_pauli'] / sc['N_pauli']
-        assert 3.7 < ratio < 4.9, (
+        assert 1.5 < ratio < 1.9, (
             f"{rel_fn.__name__}/{sc_fn.__name__} ratio = {ratio:.2f} "
-            f"outside [3.7, 4.9]"
+            f"outside [1.5, 1.9]"
         )
 
 
@@ -178,8 +180,8 @@ def test_ecosystem_hamiltonian(system: str) -> None:
     H = hamiltonian(system)
     assert isinstance(H, GeoVacHamiltonian)
     assert H.n_qubits == 20
-    # n_terms includes identity; non-identity = 222
-    assert H.n_terms - 1 == 222
+    # n_terms includes identity; non-identity = 558 (exact-rule 2026-08-29)
+    assert H.n_terms - 1 == 558
     assert H.one_norm > 0
 
 
@@ -188,7 +190,7 @@ def test_ecosystem_openfermion(system: str) -> None:
     """SrH / BaH export as OpenFermion QubitOperator."""
     H = hamiltonian(system)
     of = H.to_openfermion()
-    assert len(of.terms) == 223  # 222 non-identity + 1 identity
+    assert len(of.terms) == 559  # 558 non-identity + 1 identity (exact-rule)
 
 
 @pytest.mark.parametrize("system", ['SrH', 'BaH'])
@@ -197,7 +199,7 @@ def test_ecosystem_qiskit(system: str) -> None:
     pytest.importorskip("qiskit")
     H = hamiltonian(system)
     op = H.to_qiskit()
-    assert len(op) == 223
+    assert len(op) == 559  # exact-rule 2026-08-29
 
 
 def test_ecosystem_case_insensitive() -> None:
@@ -215,11 +217,12 @@ def test_ecosystem_case_insensitive() -> None:
 # ---------------------------------------------------------------------------
 
 @pytest.mark.parametrize("name,spec_fn,n_pauli,Q", [
-    ('LiH',  lih_spec,  333, 30),
-    ('BeH2', beh2_spec, 555, 50),
-    ('NaH',  nah_spec,  222, 20),
-    ('KH',   kh_spec,   222, 20),
-    ('CaH2', cah2_spec, 444, 40),
+    # exact-rule 2026-08-29
+    ('LiH',  lih_spec,  837, 30),
+    ('BeH2', beh2_spec, 1395, 50),
+    ('NaH',  nah_spec,  558, 20),
+    ('KH',   kh_spec,   558, 20),
+    ('CaH2', cah2_spec, 1116, 40),
 ])
 def test_no_regression(name: str, spec_fn: Any, n_pauli: int, Q: int) -> None:
     """Adding SrH / BaH must not disturb existing molecule Pauli counts."""
@@ -236,7 +239,12 @@ def test_no_regression(name: str, spec_fn: Any, n_pauli: int, Q: int) -> None:
 # ---------------------------------------------------------------------------
 
 def test_relativistic_lih_regression() -> None:
-    """LiH_rel (n_max=2) has exactly 1413 Pauli terms (post-TR fix, 2026).
+    """LiH_rel (n_max=2) has exactly 1501 Pauli terms.
+
+    Corrected 2026-08-30: the retired 1413 came from the
+    Condon-Shortley factor-order defect (X_k(b,d) where the rule needs
+    X_k(d,b)).  See tests/test_paper14_spinor_eri_ordering.py for the
+    Clebsch-Gordan discriminator that settled it.
 
     Pre-TR-fix this was 805; Track TR (Sprint 4) restored the missing
     (-1)^{j+1/2} reduced-matrix-element phase in jj_angular_Xk, removing
@@ -246,8 +254,8 @@ def test_relativistic_lih_regression() -> None:
     spec = lih_spec_relativistic(max_n=2)
     r = build_composed_hamiltonian(spec)
     assert r['Q'] == 30
-    assert r['N_pauli'] == 1413, (
-        f"LiH_rel regression: N_pauli={r['N_pauli']}, expected 1413"
+    assert r['N_pauli'] == 1501, (
+        f"LiH_rel regression: N_pauli={r['N_pauli']}, expected 1501"
     )
 
 

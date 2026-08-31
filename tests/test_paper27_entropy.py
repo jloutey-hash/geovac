@@ -104,7 +104,9 @@ def test_paper27_table1_ep1_reproduction(n_max):
     assert occ_kin[1] < 1e-10, \
         'kinetic-only second occupation should be ~0'
     assert occ_full[0] == pytest.approx(ref['occ_full_0'], rel=1e-6)
-    # The O(10^-3) deviation from 2 is the V_ee correlation signature.
+    # The O(10^-2) deviation from 2 is the V_ee correlation signature
+    # (the rel=1e-6 pin above already enforces the value; this band is
+    # documentation).
     assert 1e-3 < 2.0 - occ_full[0] < 2e-2, \
         'full occupation deviation from 2 should be O(1e-2)'
 
@@ -160,10 +162,21 @@ def test_paper27_one_body_counts_differ_from_area_law():
     def exponent(f, n):
         return math.log(f(2 * n) / f(n)) / math.log(2)
 
+    # Anchor the formulas to the ACTUAL lattice at small n (cert-2 N2:
+    # the old version exercised only hand-written lambdas; note the
+    # paper's N(n) = n(n+1)(2n+1)/3 is the spin-inclusive count -- the
+    # spatial count is /6, both exponent 3).
+    from geovac.lattice import GeometricLattice
+    for k in (1, 2, 3, 4):
+        lat = GeometricLattice(k)
+        assert lat.num_states == k * (k + 1) * (2 * k + 1) // 6
+        g_k = sum(1 for (n_, l_, m_) in lat.states if n_ == k)
+        assert g_k == k * k  # spatial shell count; x2 spin = 2n^2
+
     for n in (100, 1000, 10000):
         # g_n = 2 n^2: exponent 2.
         assert abs(exponent(lambda k: 2 * k * k, n) - 2.0) < 1e-9
-        # N_n = n(n+1)(2n+1)/6: exponent 3 in the limit.
+        # N_n(spatial) = n(n+1)(2n+1)/6: exponent 3 in the limit.
         N = lambda k: k * (k + 1) * (2 * k + 1) // 6
         assert abs(exponent(N, n) - 3.0) < 0.05
         # A_n = 4 n^4: exponent 4.
@@ -219,6 +232,19 @@ def test_paper27_energy_graph_structural_invariants(n_max):
     V_1s1s = summary['cusp_signature']['diagonal_top'][0]['Vii']
     assert V_1s1s == pytest.approx(5.0 / 8.0, abs=1e-12)
     assert V_1s1s == pytest.approx(ref['V_1s1s_diagonal'], abs=1e-12)
+    # LOCALIZATION (cert-2 D5): the paper's claim is about WHICH
+    # pair-state carries the maximum -- pin the labels, not just the
+    # value.  (1s,1s) max diagonal; next diagonal at 41.6%; hottest
+    # off-diagonal edge (1s,1s)<->(1s,2s).
+    top = summary['cusp_signature']['diagonal_top']
+    _n = lambda lbl: lbl.replace(' ', '')
+    assert _n(top[0]['node']) == '((1,0,0),(1,0,0))', top[0]['node']
+    if n_max == 3:  # the paper's 41.6% next-diagonal figure is n_max=3
+        assert top[1]['Vii'] / top[0]['Vii'] == pytest.approx(0.4158, abs=2e-3)
+    ho = summary['cusp_signature']['hottest_offdiag']
+    assert {_n(ho['a']), _n(ho['b'])} == {'((1,0,0),(1,0,0))',
+                                          '((1,0,0),(2,0,0))'}, \
+        f"hottest edge {ho['a']} <-> {ho['b']}"
 
 
 # ---------------------------------------------------------------------------
@@ -250,9 +276,11 @@ def test_paper27_ep2b_ho_kinetic_interaction_does_not_commute():
     H_vee = data['H_vee_full']
     C = H_kin @ H_vee - H_vee @ H_kin
     rel_norm = np.linalg.norm(C) / np.linalg.norm(H_kin)
-    # Corrected Paper 27 tab:ep2b: 0.74 / 0.63 / 0.67 at N_max = 2 / 3 / 4.
-    assert 0.3 < rel_norm < 1.2, \
-        f'[H_HO, V_NN] / ||H_HO|| = {rel_norm:.4f} outside corrected band'
+    # Corrected Paper 27 tab:ep2b: 0.74 at N_max=2 (0.63/0.67 at 3/4).
+    # PINNED (cert-2: the old 0.3-1.2 band could not discriminate the
+    # 0.47 digit transposition from the true 0.74).
+    assert rel_norm == pytest.approx(0.7387, abs=0.01), \
+        f'[H_HO, V_NN] / ||H_HO|| = {rel_norm:.4f} != 0.74'
 
 
 def test_paper27_ep2b_ho_gs_is_not_a_single_determinant():
@@ -347,9 +375,12 @@ def test_paper27_ep2c_dimensionless_power_law():
     assert r2 > 0.99, f'R^2={r2:.4f} not tight enough'
 
 
-def test_paper27_ep2c_multi_block_universality():
-    """All single-center 2e blocks fall on the He-like dimensionless line
-    to within 10% relative deviation; combined-fit alpha in [2.3, 2.45].
+def test_paper27_ep2c_multi_block_z_range_control():
+    """Z-range control: He-like atoms at the Z values the composed specs
+    use fall on the dimensionless line to within 10%; combined-fit
+    alpha in [2.3, 2.45].  Does NOT build composed blocks -- _row
+    constructs a He-like atom from the block's Z_center scalar, so this
+    cannot discriminate composed-block structure (cert-2 finding D3).
     """
     from geovac.molecular_spec import lih_spec, h2o_spec, nh3_spec, hf_spec
 
@@ -374,14 +405,19 @@ def test_paper27_ep2c_multi_block_universality():
         S, w = _row(Z, 3)
         S_vals.append(S); w_vals.append(w)
 
-    # Composed 2e single-center blocks (skip has_h_partner bonds).
+    # Z values drawn from composed 2e single-center blocks, DEDUPED
+    # (cert-2 D3: repeated Z added exact-duplicate points inflating
+    # the fit) and excluding Z already in the reference set.
+    zs = set()
     for spec_fn in (lih_spec, hf_spec, h2o_spec, nh3_spec):
         spec = spec_fn()
         for blk in spec.blocks:
             if blk.n_electrons != 2 or blk.has_h_partner:
                 continue
-            S, w = _row(float(blk.Z_center), 3)
-            S_vals.append(S); w_vals.append(w)
+            zs.add(float(blk.Z_center))
+    for Zc in sorted(zs - {2.0, 3.0, 4.0, 6.0, 8.0, 10.0}):
+        S, w = _row(Zc, 3)
+        S_vals.append(S); w_vals.append(w)
 
     # Combined fit.
     lx = np.log(np.array(w_vals))
@@ -393,7 +429,9 @@ def test_paper27_ep2c_multi_block_universality():
     r2 = 1.0 - ss / st
     A = float(np.exp(intercept))
 
-    # Paper 27 Eq. (multi_fit): alpha=2.374, A=7.79, R²=0.998.
+    # Combined fit, consistent with the paper's He-like single-variable
+    # law (alpha=2.383, A=8.16).  No 'Eq. (multi_fit)' exists in the
+    # paper; a phantom citation was removed here (cert-2 D3).
     assert 2.30 < alpha < 2.45, f'alpha={alpha:.4f} out of range'
     assert 6.5 < A < 9.5, f'A={A:.4f} out of range'
     assert r2 > 0.99, f'R²={r2:.4f} too loose'
@@ -539,7 +577,9 @@ def test_paper27_ep2h_nmax_residue_persists():
 
 
 def test_paper27_ep2i_gamma_asymptote():
-    """Local slope gamma(Z=15->30) approaches 2 from above at every n_max.
+    """Local slope gamma(Z=15->30) sits BELOW 2 at every n_max and descends
+    (the GLOBAL-window exponents are the ones approaching 2 from above;
+    Paper 27 warns the two columns must not be conflated).
 
     The global-window fit gamma exceeds 2 (finite-basis residue); the
     LOCAL slope at large Z converges to 2 from above, with a mild
@@ -566,9 +606,11 @@ def test_paper27_ep2i_gamma_asymptote():
         S15, w15 = _row(15.0, n_max)
         S30, w30 = _row(30.0, n_max)
         local_slope = (np.log(S30) - np.log(S15)) / (np.log(w30) - np.log(w15))
-        # Must be within [1.9, 2.05], approaching 2 from above.
-        assert 1.9 < local_slope < 2.05, \
-            f'n_max={n_max} local slope = {local_slope:.4f} out of range'
+        # The paper's fifth headline is 'below RS 2': the upper bound
+        # sits AT 2.0 (cert-2 finding D2: the old 2.05 ceiling admitted
+        # a sign flip of the below-2 headline).
+        assert 1.9 < local_slope < 2.0, \
+            f'n_max={n_max} local slope = {local_slope:.4f} not below 2'
 
     # Verify monotonic n_max downshift.
     slopes = []
@@ -632,7 +674,11 @@ def test_paper27_ep2n_be_analytical_degenerate_pt():
     # Spatial 1-RDM diagonal occupations
     occ = np.array([2.0, 2 * gs[0]**2, gs[2]**2,
                     2 * gs[1]**2, gs[2]**2])
-    assert abs(occ.sum() - 4.0) < 1e-10
+    # Pin the analytical occupations (paper: 2.000, 1.924, 0.020,
+    # 0.037, 0.020).  The former occ.sum() == 4 assert was an algebraic
+    # tautology -- 2 + 2|gs|^2 = 4 for ANY normalized vector (cert-2).
+    assert occ[1] == pytest.approx(1.924, abs=2e-3)
+    assert occ[3] == pytest.approx(0.037, abs=5e-3)
     p = occ / occ.sum()
     p_pos = p[p > 1e-14]
     S_full = float(-np.sum(p_pos * np.log(p_pos)))
@@ -677,8 +723,8 @@ def test_paper27_commutator_saturates_not_vanishes():
     c4 = r4['relative_commutator_norm']
     assert c3 > 0.05 and c4 > 0.05, \
         'commutator should be > 5% at both n_max'
-    assert (c3 - c4) < 0.02, \
-        'commutator should saturate rather than decay fast'
+    assert abs(c3 - c4) < 0.02, \
+        'commutator should saturate (two-sided; cert-2 N6)'
 
 
 def test_paper27_proposition_nondegeneracy_qualifier():
@@ -701,15 +747,15 @@ def test_paper27_proposition_nondegeneracy_qualifier():
     # Both fail the EP-1 floor: S_kin is well above the 2e floating-point
     # noise floor (~1e-14 in EP-1) because the graph H_1 ground state is
     # not strictly non-degenerate at N >= 3.
-    assert li['S_kin'] > 0.1, (
+    assert abs(li['S_kin'] - 0.637) < 0.02, (  # paper: 0.637 nats
         f'Li S_kin={li["S_kin"]:.3e} unexpectedly small; '
         'open-shell quasi-degeneracy should give S_kin >> noise floor')
-    assert be['S_kin'] > 0.1, (
+    assert abs(be['S_kin'] - 1.23) < 0.02, (  # paper: 1.23 nats
         f'Be S_kin={be["S_kin"]:.3e} unexpectedly small; '
         'closed-shell n=2 hydrogenic shell degeneracy in graph H_1 '
         'should give S_kin >> noise floor')
 
     # And Be H_1 ground state is exactly degenerate (the 2s/2p shell).
-    assert be['gs_degeneracy_kin'] >= 2, (
-        f'Be H_1 gs_degeneracy={be["gs_degeneracy_kin"]} expected >= 2 '
+    assert be['gs_degeneracy_kin'] == 3, (
+        f'Be H_1 gs_degeneracy={be["gs_degeneracy_kin"]} expected == 3 '
         'from hydrogenic n=2 shell degeneracy')

@@ -28,10 +28,12 @@ def test_library_includes_he_and_h2_reference_atoms() -> None:
 
 def test_composed_lih_one_norm_headline_pinned() -> None:
     """P20 abstract + tab:resources: composed LiH electronic-only 1-norm
-    32.6 Ha (8th-cert backfill -- previously only one_norm > 0 was asserted)."""
+    34.0 Ha (corrected 2026-08-29: exact global-M_L rule + the
+    Condon-Shortley c^k(d,b) factor order; the retired rule-A value was
+    32.6, and the order-only-partial value 34.54)."""
     from geovac.ecosystem_export import hamiltonian
     H = hamiltonian('LiH')
-    assert abs(H.one_norm - 32.6) < 0.1, H.one_norm
+    assert abs(H.one_norm - 34.04) < 0.1, H.one_norm
 
 
 @pytest.mark.slow
