@@ -31,8 +31,9 @@ atom-centered hydrogenic blocks (screened $Z_{\mathrm{eff}}$ per block,
 \emph{not} shared-$p_{0}$ Coulomb--Sturmian, which Papers~8--9 rule out
 for heteronuclear pairs) whose angular matrix elements are
 generated from quantum-number labels by Gaunt selection, with no spatial
-quadrature.  This yields structurally sparse qubit Hamiltonians---334
-Pauli terms for LiH at $Q = 30$, $O(Q^{2.5})$ scaling (Paper~14)---at
+quadrature.  This yields structurally sparse qubit Hamiltonians---838
+Pauli terms for LiH at $Q = 30$, exactly linear in $Q$ across
+molecules at fixed basis (Paper~14)---at
 the cost of a documented binding failure for second-row diatomics
 (the W1e wall, Papers~19/20~\cite{loutey_paper19,loutey_paper20}).
 
@@ -117,9 +118,11 @@ labels $(n, l, m)$ by Gaunt selection rules and Wigner $3j$ symbols with
 no spatial integration, so the resulting second-quantized Hamiltonian is
 sparse by construction rather than by numerical thresholding.  The
 downstream consequence is the qubit-resource result of
-Paper~14~\cite{loutey_paper14}: composed LiH at 334 Pauli terms on
-$Q = 30$ qubits, $O(Q^{2.5})$ Pauli scaling against $O(Q^{3.9\text{--}4.3})$
-for Gaussian baselines, and a $190\times$ reduction against cc-pVDZ.
+Paper~14~\cite{loutey_paper14}: composed LiH at 838 Pauli terms on
+$Q = 30$ qubits, a within-molecule basis exponent of $O(Q^{3.17})$
+against $O(Q^{3.9\text{--}4.3})$ for Gaussian baselines --- a narrower
+margin than the retired pair-diagonal figures suggested --- and a
+$76\times$ reduction against cc-pVDZ.
 
 The framework's documented failure is chemical binding for second-row
 diatomics.  Named W1e, it has resisted an unusually thorough sequence of

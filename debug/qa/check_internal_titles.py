@@ -28,6 +28,14 @@ from __future__ import annotations
 import pathlib
 import re
 import sys
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 PAPERS = ROOT / "papers"
@@ -191,13 +199,17 @@ def main(argv=None) -> int:
     # the gate token (e.g. 'group3'); out-of-gate mismatches are advisory AUDIT
     # (mirrors check_k_label.py / check_paper_test_refs.py). No --gate => corpus-wide.
     if gate:
-        gated = [r for r in mismatches if gate in r["path"]]
-        audit = [r for r in mismatches if gate not in r["path"]]
+        _in_scope, _scope_files, _scope_warnings = qa_scopes.make_predicate(gate)
+        qa_scopes.emit_warnings(_scope_warnings)
+        gated = [r for r in mismatches if _in_scope(r["path"])]
+        audit = [r for r in mismatches if not _in_scope(r["path"])]
+        scope_desc = qa_scopes.describe(gate, _scope_files)
     else:
         gated, audit = mismatches, []
+        scope_desc = "ALL"
 
     print(f"title map: {len([k for k in tmap if isinstance(k,int)])} numbered papers + "
-          f"{[k for k in tmap if not isinstance(k,int)]}   [gated scope: {gate or 'ALL'}]")
+          f"{[k for k in tmap if not isinstance(k,int)]}   [gated scope: {scope_desc}]")
     if flagged:
         print(f"\nFLAGGED (propinquity cluster, descope-pending -- not a failure): {len(flagged)}")
         for r in flagged:
@@ -214,7 +226,7 @@ def main(argv=None) -> int:
             print(f"      real : \"{r['real']}\"")
         print(f"\nRESULT: FAIL (internal-title criterion{f', gated scope {gate}' if gate else ''})")
         return 1
-    print(f"\nRESULT: PASS -- every internal GeoVac citation in scope '{gate or 'ALL'}' "
+    print(f"\nRESULT: PASS -- every internal GeoVac citation in {scope_desc} "
           f"matches the cited paper's \\title.")
     return 0
 

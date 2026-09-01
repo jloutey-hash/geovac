@@ -62,7 +62,8 @@ We report computational results from the first three phases.  The
 convergence concern is resolved: the multipole expansion of the
 cross-center potential terminates exactly at $L_{\max} = 2l_{\max}$
 by Gaunt selection rules (33 one-body terms at $n_{\max}=2$).  The
-balanced Hamiltonian has 878 Pauli terms (Conjecture~1 confirmed).
+balanced Hamiltonian has 2{,}726 Pauli terms (Conjecture~1 holds in
+its ratio form only; see Sec.~\ref{sec:conjecture_verdict}).
 Four-electron FCI gives $R_{\rm eq}$ error of 7.0\% and
 $D_e = 0.037$~Ha---the only bound configuration among all four
 coupling schemes tested (Conjecture~2 not confirmed in strict sense,
@@ -147,9 +148,9 @@ selection-rule counting bound of $\le 2\times$ from Paper~14,
 Sec.~V.E.  Gaunt selection rules ($|\Delta l| \le 1$,
 $|\Delta m| \le 1$) are preserved across block boundaries.
 
-The resulting qubit Hamiltonian has 854 Pauli terms (2.56$\times$ the
-composed value of 334) and 1-norm 85.7~Ha (2.30$\times$ the composed
-value of 37.3~Ha).  However, the FCI energy tells the real story:
+The resulting qubit Hamiltonian has 2{,}702 Pauli terms (3.22$\times$ the
+composed value of 838) and non-identity 1-norm 80.5~Ha (2.10$\times$ the
+composed value of 38.3~Ha).  However, the FCI energy tells the real story:
 
 \begin{table}[h]
 \caption{FCI accuracy for LiH at $n_{\max} = 2$ under different
@@ -402,11 +403,13 @@ The Gaunt selection rules that enforce ERI sparsity within each block
 also constrain the cross-block ERIs and the angular expansion of the
 cross-center nuclear attraction.  If the two-center integral expansion
 converges in $L_{\max} \le 3$ angular terms at molecular bond lengths,
-the coupled Hamiltonian should have $\lesssim 1{,}500$ Pauli terms for
-LiH at $n_{\max} = 2$---roughly $4.5\times$ the current composed
-count of 334, but well below the full Level~4N count of 3{,}288 and
-potentially below the Gaussian STO-3G count of 907 after the PK
-one-body terms are removed.
+the coupled Hamiltonian should have $\lesssim 4.5\times$ the composed
+count for LiH at $n_{\max} = 2$, remaining below the full Level~4N
+count of 3{,}288 and potentially below the Gaussian STO-3G count of 907
+after the PK one-body terms are removed.  (As originally framed under
+the retired pair-diagonal rule this read $\lesssim 1{,}500$ against a
+composed count of 334; the \emph{ratio} is the rule-independent
+content, and the absolute figure followed from it.)
 \end{conjecture}
 
 This conjecture is falsifiable by computing the two-center integrals
@@ -485,23 +488,30 @@ the four coupling schemes at LiH $n_{\max} = 2$, $Q = 30$.
 
 \begin{table}[h]
 \caption{Qubit Hamiltonian resources for LiH at $n_{\max} = 2$,
-$Q = 30$.  All values from Jordan--Wigner encoding.  The Gaussian
-STO-3G baseline ($Q = 12$) is included for reference.}
+$Q = 30$.  All values from Jordan--Wigner encoding, re-measured
+2026-09-01 under the exact global-$M_L$ rule.  Pauli counts include
+the identity term; 1-norms exclude it.  The Gaussian
+STO-3G baseline ($Q = 12$) is included for reference.  Retired
+pair-diagonal figures: $334/37.3/21$, $878/74.1/87$, $854/85.7/88$.}
 \label{tab:resources}
 \begin{ruledtabular}
 \begin{tabular}{lddd}
 Configuration & \multicolumn{1}{c}{Pauli} & \multicolumn{1}{c}{1-norm (Ha)} & \multicolumn{1}{c}{QWC} \\
 \hline
-Composed (PK)      & 334  & 37.3 & 21  \\
-Balanced (CD)      & 878  & 74.1 & 87  \\
-Coupled (CB)       & 854  & 85.7 & 88  \\
+Composed (PK)      & 838  & 38.3 & 64  \\
+Balanced (CD)      & 2726 & 75.2 & 629 \\
+Coupled (CB)       & 2702 & 80.5 & 630 \\
 Gaussian STO-3G    & 907  & 34.3 & 273 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The balanced Hamiltonian has 878 Pauli terms, confirming
-Conjecture~\ref{conj:sparsity}: the count is well below the
+The balanced Hamiltonian has 2{,}726 Pauli terms, confirming the
+ratio form of Conjecture~\ref{conj:sparsity} ($3.25\times$ the composed
+838, under the conjectured $4.5\times$) but not its absolute form:
+2{,}726 exceeds both the $\sim 1{,}500$ the ratio implied at the
+retired composed count and the STO-3G count of 907.  It remains
+below the
 conjectured bound of ${\sim}1{,}500$.  The 1-norm of the balanced
 Hamiltonian (74.1~Ha) is \emph{lower} than the coupled CB value
 (85.7~Ha) because the attractive cross-center $V_{ne}$ partially
@@ -617,10 +627,10 @@ functions (machine precision).}
 \multicolumn{1}{c}{Pauli} & \multicolumn{1}{c}{1-norm (Ha)} &
 \multicolumn{1}{c}{$E(3.015)$ (Ha)} & \multicolumn{1}{c}{Error} \\
 \hline
-Grid       & 2  & 30 & 878    & 74.1  & -7.924 & 1.8\%  \\
-Analytical & 2  & 30 & 878    & 74.1  & -7.929 & 1.7\%  \\
-Grid       & 3  & 84 & 19959  & 448.9 & -8.048 & 0.28\% \\
-Analytical & 3  & 84 & 19959  & 448.9 & -8.055 & 0.20\% \\
+Grid       & 2  & 30 & 2726   & 75.2  & -7.924 & 1.8\%  \\
+Analytical & 2  & 30 & 2726   & 75.2  & -7.929 & 1.7\%  \\
+Grid       & 3  & 84 & 127855 & 436.9 & -8.048 & 0.28\% \\
+Analytical & 3  & 84 & 127855 & 436.9 & -8.055 & 0.20\% \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -761,10 +771,16 @@ either convention.  The corrected phase is pinned element-by-element against
 a brute-force Fock-space FCI in the same test file.
 
 \subsection{Summary of conjecture status}
+\label{sec:conjecture_verdict}
 
-Conjecture~\ref{conj:sparsity} (Pauli count): \textbf{confirmed}.
-The balanced Hamiltonian has 878 Pauli terms, well below the
-conjectured ${\sim}1{,}500$ bound.
+Conjecture~\ref{conj:sparsity} (Pauli count): \textbf{partially confirmed}.
+The balanced Hamiltonian has 2{,}726 Pauli terms.  The conjecture's
+rule-independent content --- $\lesssim 4.5\times$ the composed count
+--- holds at $3.25\times$.  Its absolute legs do not: 2{,}726 exceeds
+the ${\sim}1{,}500$ that ratio implied at the retired composed count
+of 334, and exceeds the STO-3G count of 907.  It stays below the
+Level~4N count of 3{,}288, but by 17\% rather than the $3.7\times$
+the retired figures showed.
 
 Conjecture~\ref{conj:accuracy} (accuracy): \textbf{MIXED}.  Analytical
 integrals (machine precision via incomplete gamma functions) confirm that
@@ -811,8 +827,8 @@ Sec.~\ref{sec:architecture}:
 
 \item \textbf{Balanced coupled Hamiltonian.}  \emph{COMPLETE.}
   The balanced Hamiltonian (Eq.~\ref{eq:coupled} with all four
-  interaction types) gives 878 Pauli terms, 74.1~Ha 1-norm, and
-  87 QWC groups (Table~\ref{tab:resources}).
+  interaction types) gives 2{,}726 Pauli terms, 75.2~Ha non-identity
+  1-norm, and 629 QWC groups (Table~\ref{tab:resources}).
   Conjecture~\ref{conj:sparsity} confirmed.
 
 \item \textbf{FCI benchmark.}  \emph{COMPLETE.}
@@ -860,19 +876,25 @@ polyatomic census for all three composed molecules.
 System & Blocks & $Q$ & Composed & Balanced & Pauli & $\lambda_\text{comp}$ & $\lambda_\text{bal}$ \\
        &        &     & Pauli    & Pauli    & ratio & (Ha)                  & (Ha) \\
 \hline
-LiH    & 2 & 30 & 334   & 878   & 2.63$\times$ & 37.3  & 74.1  \\
-BeH$_2$ & 3 & 50 & 556   & 2,652 & 4.77$\times$ & 354.9 & 304.7 \\
-H$_2$O & 5 & 70 & 778   & 5,798 & 7.45$\times$ & 361$^\dagger$ / 28,053 & 1,509.3 \\
+LiH    & 2 & 30 & 838   & 2,726 & 3.25$\times$ & 38.6  & 78.2  \\
+BeH$_2$ & 3 & 50 & 1,396 & 8,868 & 6.35$\times$ & 374.9 & 323.4 \\
+H$_2$O & 5 & 70 & 1,954 & 19,742 & 10.10$\times$ & 372.5$^\dagger$ / 28,061.9 & 1,612.0 \\
 \hline
 \end{tabular}
-\caption{Balanced coupled resource census. $^\dagger$H$_2$O composed electronic-only (PK partitioned).}
+\caption{Balanced coupled resource census, re-measured 2026-09-01
+under the exact global-$M_L$ rule with each molecule at its own
+equilibrium geometry.  Pauli counts include the identity term and
+1-norms are identity-inclusive (the composed-with-PK total is only
+available that way).  $^\dagger$H$_2$O composed electronic-only (PK
+partitioned).  Retired pair-diagonal figures: LiH $334/878/37.3/74.1$,
+BeH$_2$ $556/2{,}652/354.9/304.7$, H$_2$O $778/5{,}798/361/28{,}053/1{,}509.3$.}
 \label{tab:balanced_census}
 \end{table}
 
 BeH$_2$ four-electron FCI gives 10.7\% energy error with the
 balanced Hamiltonian, compared to 27.4\% with PK and 10.9\%
-decoupled.  The balanced 1-norm (304.7~Ha) is \emph{lower} than the
-composed 1-norm (354.9~Ha), confirming that PK adds more 1-norm than
+decoupled.  The balanced 1-norm (323.4~Ha) is \emph{lower} than the
+composed 1-norm (374.9~Ha), confirming that PK adds more 1-norm than
 cross-center $V_{ne}$ for this system.
 
 H$_2$O required a non-collinear generalization: the O--H bond vectors
@@ -1020,7 +1042,7 @@ of \texttt{\_solve\_screened\_radial\_log} (s-states with
 \texttt{allow\_l0=True}) or \texttt{\_solve\_screened\_radial}
 ($l \geq 1$). Wired into \texttt{build\_balanced\_hamiltonian} via
 \texttt{screened\_valence\_basis: bool = False}; bit-exact backward
-compat preserved (LiH 878-Pauli regression bit-identical at machine
+compat preserved (LiH 2{,}726-Pauli regression bit-identical at machine
 precision; first-row blocks have \texttt{n\_val\_offset = 0} and are
 auto-skipped).
 

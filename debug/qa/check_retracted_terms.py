@@ -47,8 +47,15 @@ HOW IT WORKS:
   / "named gap" / ...) appears within +-WINDOW lines. A hit WITHOUT a nearby marker
   is a live zombie:
     * severity "fail"     -> FAILS the gate (exit 1) when in --gate scope;
-    * severity "advisory" -> printed for review, does NOT fail (used for the noisier
-      classes, e.g. bare "propinquity", where legit mentions abound).
+    * severity "advisory" -> printed for review, does NOT fail (for classes too
+      noisy to gate on, where legitimate mentions abound).
+      NOTE: "propinquity" used to be the example here.  It was PROMOTED to
+      "fail" on 2026-08-31 (PI direction) -- the trunk criteria name that exact
+      overclaim, so advisory severity left the gate soft on the one claim it
+      most specifically guards.  The noise it was hedging against is now
+      handled by exempt_if_nearby (0 live vs 2 correctly-exempted at promotion
+      time), which is the general lesson: tighten the exemption, then gate --
+      do not leave a named class permanently advisory.
 
   It BACKS the claims/code/synthesis reviewers (guarantees exhaustive enumeration
   of the known zombie phrases) -- it does not replace adjudication of NEW classes.
@@ -64,9 +71,18 @@ Usage:
 """
 from __future__ import annotations
 
+import glob
 import pathlib
 import re
 import sys
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
@@ -593,7 +609,14 @@ REGISTRY = [
     {
         "id": "propinquity-as-achieved-metric",
         "scope": "group1",
-        "severity": "advisory",   # noisy: legit framework/named-gap/descope mentions abound
+        # PROMOTED advisory -> fail 2026-08-31 (PI direction).  The trunk
+        # criteria name this exact overclaim, but at advisory severity the
+        # gate could only print a note about it -- soft on the one claim it
+        # most specifically guards.  The old "noisy" rationale is stale:
+        # exempt_if_nearby now covers the legitimate framework / named-gap /
+        # descope / state-space mentions, and the corpus shows 0 live hits
+        # against 2 correctly-exempted ones -- a no-op today, a guard later.
+        "severity": "fail",
         "retired": "Papers 38/39/40 establish van Suijlekom STATE-SPACE GH, NOT the "
                    "strictly-stronger Latremoliere quantum-GH propinquity (a named gap). "
                    "Flag 'propinquity' asserted as the ACHIEVED convergence metric.",
@@ -786,14 +809,55 @@ def main() -> int:
     gate = _gate_substr(sys.argv)
     scope = f"scope '{gate}'" if gate else "ALL entries"
 
+    # Entry selection is LOCUS-DERIVED as well as tag-based (2026-08-31
+    # gate-scope audit).  The hand-maintained `scope` tag had drifted from
+    # the `files` loci it is supposed to summarise, and the drift was
+    # invisible: NO entry carried the tag "trunk", "synthesis", "paper_58",
+    # "paper_59" or "paper_60", so `--gate trunk` selected 0 of 27 entries
+    # and printed PASS having checked nothing -- the C19 failure shape, in
+    # the gate the protocol leans on hardest.  The sharpest instance: the
+    # `propinquity-as-achieved-metric` entry lists paper_38 and paper_32 --
+    # both TRUNK papers, added by the 2026-08-31 trunk run itself -- under
+    # the tag "group1", so the trunk gate could never see its own fix.
+    #
+    # An entry now runs whenever ANY of its declared loci lies in the gated
+    # scope.  The tag is kept as a widening fallback so a locus pattern that
+    # matches nothing on disk cannot silently narrow an entry out.
+    _in_scope, _scope_files, _scope_warnings = (
+        qa_scopes.make_predicate(gate) if gate else (None, [], []))
+    qa_scopes.emit_warnings(_scope_warnings)
+
+    def _locus_gated(pattern: str) -> bool:
+        if _in_scope is None:
+            return True
+        hits = glob.glob(str(ROOT / pattern))
+        return any(_in_scope(h) for h in hits)
+
     def selected(e: dict) -> bool:
-        return gate is None or e["scope"] == "all" or gate in e["scope"]
+        if gate is None or e["scope"] == "all" or gate in e["scope"]:
+            return True
+        return any(_locus_gated(f) for f in e.get("files", []))
+
+    # Coverage accounting (2026-08-31 gate-scope audit).  This gate selects
+    # REGISTRY ENTRIES by their own `scope` field, not files -- so a --gate
+    # value matching no entry would run zero checks and still print PASS,
+    # the same shape as the C19 bug.  Count what actually ran and say so.
+    _selected = [e for e in REGISTRY if selected(e)]
+    _files_seen: set = set()
+    if not _selected:
+        print(f"   [scope] WARNING: --gate '{gate}' selected 0 of "
+              f"{len(REGISTRY)} registry entries -- this run checks "
+              f"NOTHING. Add a '{gate}' entry scope, or use a scope "
+              f"name that exists.")
 
     fail_hits, advisory_hits, exempt_total = [], [], 0
-    print(f"retracted-claims / zombie-drift screen   [{scope}]\n")
+    print(f"retracted-claims / zombie-drift screen   [{scope}: "
+          f"{len(_selected)}/{len(REGISTRY)} entries]\n")
     for e in REGISTRY:
         if not selected(e):
             continue
+        for _pat in e.get("files", []):
+            _files_seen.add(_pat)
         live, ok = scan_entry(e)
         exempt_total += len(ok)
         tag = "FAIL" if e["severity"] == "fail" else "ADVISORY"
@@ -818,10 +882,15 @@ def main() -> int:
             print(f"  [{cid}] {rel}:{ln}\n      {snip}")
 
     if fail_hits:
-        print(f"\nRESULT: FAIL ({len(fail_hits)} live retracted claim(s) in {scope})")
+        print(f"\nRESULT: FAIL ({len(fail_hits)} live retracted "
+              f"claim(s) in {scope}; {len(_selected)}/{len(REGISTRY)} "
+              f"entries over {len(_files_seen)} declared locus "
+              f"pattern(s))")
         return 1
-    print(f"\nRESULT: PASS (no live fail-severity retracted claim in {scope}; "
-          f"{exempt_total} occurrence(s) correctly carry a withdrawal flag)")
+    print(f"\nRESULT: PASS (no live fail-severity retracted claim in "
+          f"{scope}; {len(_selected)}/{len(REGISTRY)} entries over "
+          f"{len(_files_seen)} declared locus pattern(s); {exempt_total} "
+          f"occurrence(s) correctly carry a withdrawal flag)")
     return 0
 
 

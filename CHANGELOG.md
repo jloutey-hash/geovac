@@ -7,6 +7,102 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.2.4] - 2026-09-01
+
+Re-certification sweep pre-flight. Both blockers cleared; the sweep can start
+at trunk.
+
+### Fixed — four gates were mis-scoped, and two were examining nothing
+
+The 2026-08-31 trunk run found C19 reporting PASS having examined **zero**
+trunk papers, and noted that seven of ten gates print no file count at all.
+Testing that generalised the finding:
+
+- **C10** compiled 0 documents under `--gate trunk`; **C18** was
+  directory-based, so `--gate trunk` scanned 27 papers instead of 6 and group
+  runs silently dropped their synthesis; **C5** let `--gate` *narrow a
+  corpus-wide prohibition*, downgrading a §13.5 violation in every non-target
+  paper to advisory; **C15/C13/C14/C20** carried the same substring bug.
+- **C16, the zombie gate, selected 0 of 27 registry entries** for `trunk`,
+  `synthesis`, `paper_58`, `paper_59` and `paper_60` — so those five certs
+  recorded it green having checked nothing. Root cause: the hand-maintained
+  `scope` tag had drifted from the `files` loci. The
+  `propinquity-as-achieved-metric` entry listed Papers 38 and 32 — both trunk
+  papers, added by the trunk run itself — under the tag `group1`, so the trunk
+  gate could not see its own fix. Selection is now **locus-derived**;
+  trunk 0→7 entries, synthesis 0→23. Same fix for **C17** (synthesis 2→19).
+- New `debug/qa/qa_scopes.py` declares all 11 target scopes once, keyed by
+  paper number so a rename fails loudly; `debug/qa/gate_coverage_matrix.py`
+  runs every gate × every target and fails on any zero-coverage cell,
+  distinguishing a bug from a legitimately unexercised criterion.
+
+### Fixed — the balanced λ column was computed at LiH's bond length
+
+`build_balanced_hamiltonian` defaulted `R = 3.015` and never read the spec, so
+every caller omitting `R` computed its molecule at **LiH's geometry**. All
+twelve published second/third-row λ values were affected (KH worst at
+−12.7%), plus BeH₂ in a separate table. Corrected end to end: builder now
+resolves from `spec.R`; Papers 14 and 20 carry the corrected columns **and an
+explicit `R (bohr)` column**, so the free-side input is named rather than
+inherited. The registry had to be **inverted** — populated from the same bad
+pass, it held the wrong-geometry values as canonical.
+
+The backing test held the *correct* values and could not fire: 12 of its 13
+cases sat behind `@pytest.mark.slow`. **Four separate instances of this
+pattern were found and fixed this sprint.**
+
+### Added — the forced/free seam runs through the resource tables
+
+Varying the geometry sorts three columns printed side by side into three
+categories: **N_Pauli is bit-identical (forced** — fixed by the angular
+selection rules, the molecular analogue of Paper 22's potential-independence
+theorem); **N_QWC moves (heuristic** — greedy grouping); **λ moves (free** — a
+projection through calibration data). Pinned in
+`tests/test_paper20_geometry_independence.py`, with a non-tautology control
+and the QWC leg asserted in the **negative**: a first version claimed QWC was
+invariant too, passed on three insensitive molecules, and was falsified by
+widening the sample.
+
+### Changed — C21 widened corpus-wide, and 30 retired values remediated
+
+C21 previously accepted only group3/4/6 and hard-exited elsewhere, so five
+targets had **no numeric guarding at all**. Widened via the shared resolver;
+it immediately found 30 genuine live retired values, all now fixed across
+Papers 8, 13, 17, 19, 23, 57, 58 and the field guide. **C21 now passes on all
+eleven targets.** Re-reading the prose at each locus (§15 rule 2) found
+content the flag itself never showed — including a `190×` cc-pVDZ ratio with
+no registry entry (canonical 76×), which exposed that `resolve()` could not
+reach DERIVED quantities, making every retired *ratio* unregisterable.
+
+**Conjecture 1 (Paper 19) no longer holds as stated.** Framed as "≲1,500
+Pauli terms, roughly 4.5× the composed count of 334", its content is a ratio
+whose absolute figure came from a retired count. The **ratio leg survives**
+(3.25× against 4.5×); **both absolute legs fail** (2,726 exceeds 1,500 and the
+STO-3G 907). Three "confirmed" verdicts now carry the split.
+
+### Changed — `propinquity-as-achieved-metric` promoted advisory → fail
+
+PI direction. The trunk criteria name that exact overclaim, so advisory
+severity left the gate soft on the one claim it most specifically guards.
+No-op today (0 live hits); proven to block a planted violation.
+
+### Diagnosed, not fixed — TC angular-gradient assembly
+
+Located precisely: the assembly mixes a complex-convention `_gaunt_integral`
+with real-harmonic reasoning that drops conjugates on both electrons, and —
+structurally worse — delta-selects the bra orbital from an assumption its own
+comments later disprove, forcing `Q ≡ 0` and truncating the Neumann sum. A
+second electron-2 block repeats it. An attempted conjugate-restoring patch is
+recorded as a **dead end** (26 → 46 added entries, all still violating). Not a
+certification blocker: the only live claim depending on it is withdrawn.
+See `debug/qa/tc_angular_gradient_diagnosis.md`.
+
+### Also fixed (pre-existing)
+
+Eight unresolvable cross-document `\ref`s in Paper 17; three dangling `\ref`s
+and two bad `\cite`s in Paper 13 (two subsections existed but carried no
+label — labels added rather than references repointed).
+
 ## [v5.2.3] - 2026-08-31
 
 ### Changed — the 14 unknown-purpose tests resolved to zero (Increment 3)

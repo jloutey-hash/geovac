@@ -60,6 +60,14 @@ from collections import defaultdict
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import numeric_registry as REG  # noqa: E402
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
@@ -112,14 +120,29 @@ GVQ = re.compile(
 
 
 def _files(gate):
-    if gate and gate not in SCOPES:
-        # Previously this fell through to `_files(None)` and died with a
-        # TypeError, which reads as a broken checker rather than a gate the
-        # scope map does not cover yet.
+    """Files this gate examines for a target.
+
+    SCOPE WIDENED 2026-08-31 (pre-flight for the re-certification sweep).
+    C21 used to accept only the three hand-curated targets above -- the
+    papers that happened to own registry entries -- and to hard-exit on
+    every other target name.  Two consequences, both bad for a sweep:
+    group1/2/5/synthesis/trunk and the single-paper targets had NO numeric
+    guarding at all (the Stage-4 memo's open follow-on 3), and the
+    unregistered-multi-document-numeral census could only ever count the
+    corner of the corpus already being watched.
+
+    Scope now resolves through debug/qa/qa_scopes.py, so C21 examines the
+    target's full pre-registered document set.  SCOPES is retained below as
+    the record of which papers OWN registry entries; it no longer bounds
+    what gets checked.
+    """
+    files, warnings = qa_scopes.resolve(gate or "")
+    qa_scopes.emit_warnings(warnings)
+    if gate and not files:
         raise SystemExit(
-            f"unknown gate {gate!r}; known scopes: {', '.join(sorted(SCOPES))}")
-    pats = SCOPES[gate] if gate else [p for v in SCOPES.values() for p in v]
-    return [ROOT / p for p in pats if (ROOT / p).exists()]
+            f"unknown gate {gate!r}; known scopes: "
+            f"{', '.join(sorted(qa_scopes.SCOPES))}")
+    return [pathlib.Path(f) for f in files]
 
 
 def _norm(tok):
@@ -239,6 +262,18 @@ def check_salience(gate, show=False):
     for path in _files(gate):
         txt = re.sub(r"%.*", "", path.read_text(encoding="utf-8",
                                                 errors="ignore"))
+        # arXiv IDs (YYMM.NNNNN) and DOIs parse as decimals -- arXiv:
+        # 2401.03705 was reported as the quantity "2401.04" living in three
+        # documents.  MEASURED effect: 27 of 728 entries (3.7%).  The corpus
+        # holds 388 arXiv IDs, but one only reaches this list if it appears
+        # in TWO OR MORE documents, so most never enter it; the leak is the
+        # small set of IDs shared across papers.  Cheap to strip, so kept --
+        # but it is a minor cleanup, not a structural finding.  (An earlier
+        # version of this comment claimed "every bibliography was feeding the
+        # worklist"; that was one instance generalised without measurement.)
+        txt = re.sub(r"arXiv:\s*\d{4}\.\d{4,5}(v\d+)?", " ", txt,
+                     flags=re.I)
+        txt = re.sub(r"10\.\d{4,9}/[^\s{}]+", " ", txt)
         for m in NUM.finditer(txt):
             v = _norm(m.group(1))
             if v is None or v < 10:
@@ -246,18 +281,49 @@ def check_salience(gate, show=False):
             occ[v][path.name] += 1
     unreg = {v: d for v, d in occ.items()
              if round(v, 6) not in canon and v not in retired and len(d) > 1}
+
+    # The raw count is not a worklist.  Its only filters are value >= 10
+    # and "appears in more than one document", which across 62 papers
+    # admits every year (2026 leads with ~1,460 occurrences), every paper
+    # and section number, and every qubit count.  Registering those would
+    # violate registry rule 3 -- never register a value you have not
+    # measured or cited.  So report the raw count, then the subset that is
+    # actually MEASUREMENT-SHAPED, which is the part worth registering.
+    shaped = {v: d for v, d in unreg.items() if _measurement_shaped(v)}
+
     print(f"\nD. salience report (advisory): "
-          f"{len(unreg)} unregistered multi-document numerals")
+          f"{len(unreg)} unregistered multi-document numerals, "
+          f"of which {len(shaped)} are measurement-shaped")
     if show:
-        for v, d in sorted(unreg.items(),
-                           key=lambda kv: -sum(kv[1].values()))[:25]:
+        print("   -- measurement-shaped (the actionable worklist) --")
+        for v, d in sorted(shaped.items(),
+                           key=lambda kv: -sum(kv[1].values()))[:40]:
             where = " ".join(f"{k[:9]}x{n}" for k, n in sorted(d.items()))
             print(f"   {v:>12g}  {sum(d.values()):3d}  [{where}]")
     else:
-        print("   (run with --salience to list; registering these is the "
-              "maintenance path, not a defect)")
+        print("   (run with --salience to list the measurement-shaped "
+              "subset; registering those is the maintenance path, not a "
+              "defect)")
     return len(unreg)
 
+
+# Years, paper/section numbers and round counts are not quantities.  A numeral
+# is treated as measurement-shaped only if it carries the fingerprints of a
+# measured value: a decimal part, or a magnitude large enough that it is not a
+# structural label.  Deliberately conservative -- a false negative here costs
+# one unregistered value, a false positive costs a junk registry entry.
+def _measurement_shaped(v: float) -> bool:
+    if v != v or v in (float("inf"), float("-inf")):
+        return False
+    # Years and the project's own version-adjacent integers.
+    if 1900 <= v <= 2100 and float(v).is_integer():
+        return False
+    # A decimal part means somebody measured it.
+    if not float(v).is_integer():
+        return True
+    # Bare integers below 100 are overwhelmingly labels (paper numbers,
+    # section numbers, qubit counts, quantum numbers) in this corpus.
+    return v >= 100
 
 def check_table_conventions(gate, verbose=True):
     """E. One identity convention per kind, within a table.

@@ -708,7 +708,8 @@ the only bound LiH in 4-electron FCI (1.8\% energy error vs
 PK's 15.0\%) and achieves 0.20\% energy error at $n_{\max} = 3$.
 For BeH$_2$, PK overcorrects: 27.4\% error in 4-electron FCI vs
 10.7\% balanced.  The balanced 1-norm is lower than composed for
-BeH$_2$ (304.7 vs 354.9~Ha).  See Paper~19 for the full resource
+BeH$_2$ (323.4 vs 374.9~Ha, both identity-included).  See Paper~19
+for the full resource
 census and convergence analysis.
 
 \subsection{Architectural note: two solvers, two drift signatures}
@@ -741,7 +742,7 @@ These are different solvers in different code paths with different
 working bases ($l_{\max}$-truncated hyperspherical channels vs.\
 $n_{\max}$-truncated single-center hydrogenic orbitals on each block).
 Phase~C ``W1c-aware'' multi-focal-composition closures (Paper~19,
-Sec.~\ref{sec:w1c_residual}) for $Z \geq 11$ frozen-core hydrides apply
+Sec.~``The W1c-residual orthogonality wall'') for $Z \geq 11$ frozen-core hydrides apply
 to the balanced-coupled path only; the PK-composed path is unaffected
 by them. Empirically, for first-row LiH at $n_{\max} = 2$, the W1c
 screening machinery is bit-exactly equivalent to the bare path
@@ -760,11 +761,11 @@ barrier, Sprint 2026-05-08) and
 2026-05-09; replaces hydrogenic Z\_orb=1 valence h$_1$ diagonal with
 the actual screened Schr\"odinger eigenvalue, e.g.\ Na 3s = $-0.170$~Ha).
 Both modules are bit-exact backward-compatible with the existing path
-(LiH 878-Pauli regression preserved at machine precision) and are
+(LiH 2{,}726-Pauli regression preserved at machine precision) and are
 correct as architectural infrastructure. The negative result is on
 the binding outcome: NaH PES remains monotonically descending under
 all 8 combinations of \{bare, W1c, PK, SV\}. See Paper~19
-Sec.~\ref{sec:w1c_residual} for the per-track diagnostics. The
+Sec.~``The W1c-residual orthogonality wall'' for the per-track diagnostics. The
 Track-3 diagnostic localizes the genuine residual to wavefunction
 shape (not eigenvalue), with the actual Na 3s screened wavefunction
 having mean radius $\langle r \rangle = 4.47$~bohr versus the
@@ -777,7 +778,7 @@ orthogonalization).
 \paragraph{Update post-Sprint $\alpha$ arc (2026-05-23): a third layer
 beneath the wavefunction-shape correction.}
 The modular propinquity reframing (Sprint M-Y, see Paper~19
-Sec.~\ref{sec:w1c_residual}) sharpened the wavefunction-shape
+Sec.~``The W1c-residual orthogonality wall'') sharpened the wavefunction-shape
 correction into a two-axis $L/R$ bimodule decomposition with predicted
 right-action dominance $d_R / d_L \gg 1$.  The $\alpha$-Diagnostic
 confirmed this empirically ($d_R/d_L = 3.23$ at canonical probe
@@ -805,7 +806,7 @@ on-site $h_1$ or on-site basis correction; it lives in the FCI
 variational state itself.
 
 Three named follow-on directions surface from the $\alpha$ arc, ranked
-in Paper~19 Sec.~\ref{sec:w1c_residual}: (i) NaH $n_{\max}=3$ test
+in Paper~19 Sec.~``The W1c-residual orthogonality wall'': (i) NaH $n_{\max}=3$ test
 bundled with W1c+multi-zeta unified architecture
 (sprint-scale; falsifies/confirms Layer~3 as a basis-size artifact);
 (ii) cross-$V_{ne}$ kernel-shape substitution
@@ -917,8 +918,8 @@ load-bearing metric. Sources:
 \texttt{debug/sprint\_f5\_explicit\_core\_memo.md},
 \texttt{debug/sprint\_f6\_maxn4\_nah\_memo.md},
 \texttt{debug/sprint\_beta\_update\_f4f6\_memo.md}; refined Paper~19
-\S\ref{sec:w1e_refinement_f4_f6}; Paper~34
-\S\ref{sec:conv_w1e_f4_f6_refinement}; Paper~32 \S VIII Sprint M-Z
+\S~``Refinement of the W1e mechanism after F4--F6''; Paper~34
+\S~``W1e three-sub-sub-mechanism refinement after F4--F6''; Paper~32 \S VIII Sprint M-Z
 addendum F4--F6 extension.
 
 \paragraph{Closure of the W1e sprint-scale candidate space (Schmidt +
@@ -946,8 +947,8 @@ HF-4 Zemach, HF-5 multi-loop $a_e$). The structural-skeleton scope
 statement extends from physics-only to physics+chemistry. Sources:
 \texttt{debug/sprint\_w1e\_schmidt\_diagnostic\_memo.md},
 \texttt{debug/sprint\_w1e\_core\_correlation\_estimate\_memo.md};
-refined Paper~19 \S\ref{sec:w1e_schmidt_core_correlation};
-Paper~34 \S\ref{sec:conv_w1e_cross_domain_wall}; Paper~32
+refined Paper~19 \S~``Closure of the W1e sprint-scale candidate space'';
+Paper~34 \S~``Cross-domain instance of the multi-focal-composition wall''; Paper~32
 \S VIII Sprint M-Z addendum Schmidt + core correlation extension.
 
 \subsection{Outlook: the composition pattern for larger molecules}
@@ -1667,7 +1668,8 @@ too compact on the hydrogen side;
 1$s^2$ core density off-center;
 (iii)~heterogeneous (per-pair $Z_{\rm eff}$): $R_{\rm eq}$ improved to
 17.1\% error, but L\"owdin orthogonalization destroyed Gaunt sparsity
-(1{,}711 vs.\ 120~Pauli terms) and introduced BSSE-like overbinding.
+(4{,}743 vs.\ 288~Pauli terms, a $16.5\times$ inflation) and
+introduced BSSE-like overbinding.
 The composed architecture's block-diagonal factorization is therefore
 not merely a computational convenience---it is the structurally optimal
 decomposition for multi-scale electronic systems.  Each block maintains
@@ -1737,7 +1739,8 @@ geometry's $144{\times}$ angular compression is essential: Level~5 at
 the same $l_{\max} = 2$ achieves 5.3\% $R_{\rm eq}$ error vs
 63.5\%.  Track~AS (v2.0.23) further confirms that the composed
 qubit encoding is categorically sparser than full $N$-electron
-encoding (334 vs 3{,}288 Pauli terms, $20{\times}$ lower 1-norm),
+encoding (838 Pauli terms at $Q = 30$ vs 3{,}288 at $Q = 10$,
+$20{\times}$ lower 1-norm),
 validating the composed architecture for both classical and quantum
 computation.  The classical solver investigation is now complete
 (v2.0.24); the quantum simulation cost advantage is the primary

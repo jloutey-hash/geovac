@@ -40,6 +40,14 @@ import json
 import pathlib
 import re
 import sys
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 PAPERS = ROOT / "papers"
@@ -170,11 +178,16 @@ def main() -> int:
     base = json.loads(BASELINE.read_text(encoding="utf-8")) if BASELINE.exists() else {}
 
     files = sorted(p for p in PAPERS.rglob("*.tex") if "archive" not in p.parts)
-    if gate:
-        files = [p for p in files if gate in str(p).replace("\\", "/")]
+    # Named-scope resolution (debug/qa/qa_scopes.py).  The substring filter
+    # this replaces is the mechanism behind the C19 bug: a --gate value that
+    # appears in no path silently selected nothing and still printed PASS.
+    _resolved, _scope_warnings = qa_scopes.resolve(
+        gate or "", [str(f) for f in files])
+    qa_scopes.emit_warnings(_scope_warnings)
+    files = [pathlib.Path(f) for f in _resolved]
 
-    print(f"\ninline attribution check over {len(files)} paper(s)"
-          f"   [scope: {gate or 'ALL'}]")
+    print(f"\ninline attribution check over "
+          f"{qa_scopes.describe(gate or '', files)}")
     failed, new_base = [], dict(base)
     for p in files:
         rel = str(p.relative_to(ROOT)).replace("\\", "/")

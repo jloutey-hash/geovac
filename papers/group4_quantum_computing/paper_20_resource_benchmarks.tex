@@ -312,8 +312,10 @@ is solved exactly via FCI:
 
 For BeH$_2$ ($Q=50$), the balanced coupled 4-electron FCI gives
 $E=-14.146$~Ha (10.7\% error), compared to $-11.497$~Ha (27.4\%)
-for composed with PK.  The balanced 1-norm ($328.1$~Ha) is 12\% lower
-than composed with PK in-Hamiltonian ($374.9$~Ha; re-measured 2026-08-30
+for composed with PK.  The balanced 1-norm ($323.4$~Ha) is 14\% lower
+than composed with PK in-Hamiltonian ($374.9$~Ha; re-measured 2026-09-01
+at BeH$_2$'s own $R = 2.502$~bohr --- the 2026-08-30 pass had evaluated
+it at LiH's $3.015$, giving $328.1$ and ``12\%''
 under the exact global-$M_L$ rule --- the retired figures were $306.4$ /
 $373.4$ / ``18\%'', and an earlier $354.9$ came from the deprecated legacy
 BeH$_2$ builder path; the live values are pinned by
@@ -491,7 +493,7 @@ System & Method/Basis & $Q$ & Pauli terms & 1-norm (Ha)
 \colrule
 \multirow{2}{*}{BeH$_2$}
  & GeoVac composed & 50 & 1{,}396 & 68.8 & 64 & --- \\
- & GeoVac balanced & 50 & 8{,}868 & 328.1 & 1{,}220 & --- \\
+ & GeoVac balanced & 50 & 8{,}868 & 323.4 & 1{,}220 & --- \\
 \end{tabular}
 \end{ruledtabular}
 \raggedright\footnotesize{$^a$Ratio of Gaussian to GeoVac composed Pauli terms.
@@ -500,9 +502,9 @@ Values $> 1$ favor GeoVac; values $< 1$ favor Gaussian.
 1-norms in this table \emph{include} the identity term, matching the raw
 JW totals the Gaussian baselines are quoted at --- which is what makes the
 LiH $34.0$ vs.\ $34.3$~Ha comparison like-for-like.  The balanced 1-norms
-were previously printed non-identity in this same column ($75.2$ / $289.6$
+were previously printed non-identity in this same column ($75.2$ / $286.9$
 / $1{,}440$), mixing two conventions in one column; they are now
-identity-included ($78.2$ / $328.1$ / $1{,}612$).  For the
+identity-included ($78.2$ / $323.4$ / $1{,}612$).  For the
 simulation-relevant non-identity $\lambda_{\mathrm{ni}}$ see
 Table~\ref{tab:molecules}.}
 \end{table*}
@@ -810,7 +812,7 @@ $d$-orbital valence blocks spanning $Z = 21$--30.
   the Pauli column, by contrast, \emph{includes} the identity term.
   Isostructural pairs (rows 2--3) produce identical Pauli counts --- but
   \emph{not} identical QWC group counts (MgH$_2$ $903$ vs.\ CaH$_2$ $898$;
-  SiH$_4$ $1{,}551$ vs.\ GeH$_4$ $1{,}562$; only NaH/KH tie).  The greedy
+  SiH$_4$ $1{,}566$ vs.\ GeH$_4$ $1{,}562$; only NaH/KH tie).  The greedy
   grouper sorts terms by descending $|$coefficient$|$ before insertion
   (\texttt{geovac/measurement\_grouping.py}), so partners with identical
   Pauli \emph{support} but different coefficients are visited in different
@@ -823,36 +825,47 @@ $d$-orbital valence blocks spanning $Z = 21$--30.
   $\lambda_{\text{ni}}$ column was re-synced to the live builder
   2026-07-02; all cells re-measured under the exact global-$M_L$ rule
   2026-08-29, Sec.~\ref{sec:eri_rule} --- Pauli-count isostructural
-  invariance survives exactly (NaH $=$ KH, HCl $=$ HBr, \dots).  The
-  balanced QWC column was measured 2026-08-30, closing a standing
-  ``pending'' note; the same pass corrected two $\lambda_{\text{ni}}$
-  cells the 2026-08-29 re-sync had missed, NaH $19.6 \to 20.6$ and
-  HCl $866.1 \to 869.7$.)}
+  invariance survives exactly (NaH $=$ KH, HCl $=$ HBr, \dots).
+  \emph{Each row is evaluated at its own equilibrium bond length $R$,
+  now stated in the table.}  Corrected 2026-08-31: the balanced
+  $\lambda_{\text{ni}}$ and QWC columns had been computed at
+  $R = 3.015$~bohr --- LiH's bond length --- for \emph{every} molecule,
+  because the balanced builder defaulted to that value and ignored the
+  spec's geometry.  The largest error was KH at $-12.7\%$
+  ($32.2 \to 28.1$), its bond length being furthest from the substituted
+  one.  The Pauli column was unaffected, and that is not luck: the count
+  is fixed by the angular selection rules and is bit-identical across
+  geometries, whereas $\lambda_{\text{ni}}$ and the greedy QWC count are
+  both projections through the geometry
+  (\texttt{tests/test\_paper20\_geometry\_independence.py}).  This also
+  reverses the 2026-08-30 note that had ``corrected'' NaH
+  $19.6 \to 20.6$ and HCl $866.1 \to 869.7$: those two cells were right
+  before that pass, which had re-measured them at the wrong geometry.)}
 \label{tab:molecules}
 \begin{ruledtabular}
-\begin{tabular}{llrrrr}
-Molecule & Core & $Q$ & Pauli & $\lambda_{\text{ni}}$ (Ha) & QWC \\
+\begin{tabular}{llrrrrr}
+Molecule & Core & $Q$ & $R$ (bohr) & Pauli & $\lambda_{\text{ni}}$ (Ha) & QWC \\
 \colrule
-LiH      & He   & 30 &    838 &  27.7 & 64 \\
-BeH$_2$  & He   & 50 & 1{,}396 &  54.3 & 64 \\
-H$_2$O   & He   & 70 & 1{,}954 & 186.8 & 64 \\
-HF       & He   & 60 & 1{,}675 & 232.7 & 64 \\
-NH$_3$   & He   & 80 & 2{,}233 & 158.0 & 64 \\
-CH$_4$   & He   & 90 & 2{,}512 & 135.4 & 64 \\
+LiH      & He   & 30 & 3.015 &    838 &  27.7 & 64 \\
+BeH$_2$  & He   & 50 & 2.502 & 1{,}396 &  54.3 & 64 \\
+H$_2$O   & He   & 70 & 1.809 & 1{,}954 & 186.8 & 64 \\
+HF       & He   & 60 & 1.733 & 1{,}675 & 232.7 & 64 \\
+NH$_3$   & He   & 80 & 1.912 & 2{,}233 & 158.0 & 64 \\
+CH$_4$   & He   & 90 & 2.050 & 2{,}512 & 135.4 & 64 \\
 \colrule
-NaH      & Ne   & 20 &    575 &  20.6 &    69 \\
-MgH$_2$  & Ne   & 40 & 4{,}861 & 110.5 &   903 \\
-HCl      & Ne   & 50 & 9{,}824 & 869.7 & 1{,}173 \\
-H$_2$S   & Ne   & 60 & 13{,}863 & 879.6 & 1{,}282 \\
-PH$_3$   & Ne   & 70 & 18{,}854 & 895.3 & 1{,}477 \\
-SiH$_4$  & Ne   & 80 & 24{,}745 & 914.1 & 1{,}551 \\
+NaH      & Ne   & 20 & 3.566 &    575 &  19.6 &    69 \\
+MgH$_2$  & Ne   & 40 & 3.261 & 4{,}861 & 111.8 &   903 \\
+HCl      & Ne   & 50 & 2.409 & 9{,}824 & 866.1 & 1{,}173 \\
+H$_2$S   & Ne   & 60 & 2.534 & 13{,}863 & 873.6 & 1{,}264 \\
+PH$_3$   & Ne   & 70 & 2.680 & 18{,}854 & 889.3 & 1{,}427 \\
+SiH$_4$  & Ne   & 80 & 2.800 & 24{,}745 & 909.2 & 1{,}566 \\
 \colrule
-KH       & Ar   & 20 &    575 &  32.2 &    69 \\
-CaH$_2$  & Ar   & 40 & 4{,}861 & 128.0 &   898 \\
-HBr      & Ar$d$ & 50 & 9{,}824 & 877.0 & 1{,}175 \\
-H$_2$Se  & Ar$d$ & 60 & 13{,}863 & 883.4 & 1{,}264 \\
-AsH$_3$  & Ar$d$ & 70 & 18{,}854 & 885.2 & 1{,}468 \\
-GeH$_4$  & Ar$d$ & 80 & 24{,}745 & 877.3 & 1{,}562 \\
+KH       & Ar   & 20 & 4.243 &    575 &  28.1 &    69 \\
+CaH$_2$  & Ar   & 40 & 3.807 & 4{,}861 & 123.8 &   898 \\
+HBr      & Ar$d$ & 50 & 2.670 & 9{,}824 & 875.3 & 1{,}176 \\
+H$_2$Se  & Ar$d$ & 60 & 2.760 & 13{,}863 & 883.4 & 1{,}264 \\
+AsH$_3$  & Ar$d$ & 70 & 2.820 & 18{,}854 & 885.2 & 1{,}468 \\
+GeH$_4$  & Ar$d$ & 80 & 2.870 & 24{,}745 & 874.8 & 1{,}562 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}

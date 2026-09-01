@@ -22,9 +22,18 @@ Exit 0 = PASS. Mirror test: tests/test_headline_numbers_check.py.
 """
 from __future__ import annotations
 
+import glob
 import pathlib
 import re
 import sys
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 WINDOW = 3  # +/- lines for the exemption window
@@ -595,11 +604,36 @@ def main() -> int:
     gate = _gate_substr(sys.argv)
     scope = f"scope '{gate}'" if gate else "ALL entries"
 
+    # Entry selection is LOCUS-DERIVED as well as tag-based (2026-08-31
+    # gate-scope audit; same fix as C16).  The hand-maintained `scope` tag
+    # drifts from the loci it summarises, and the drift is invisible: a
+    # --gate value matching no tag selects ZERO families and still prints
+    # PASS -- the C19 failure shape.  An entry now runs whenever any of its
+    # declared loci lies in the gated scope; the tag is kept as a widening
+    # fallback.
+    _in_scope, _scope_files, _scope_warnings = (
+        qa_scopes.make_predicate(gate) if gate else (None, [], []))
+    qa_scopes.emit_warnings(_scope_warnings)
+
+    def _locus_gated(pattern: str) -> bool:
+        if _in_scope is None:
+            return True
+        return any(_in_scope(h) for h in glob.glob(str(ROOT / pattern)))
+
     def selected(e: dict) -> bool:
-        return gate is None or e["scope"] == "all" or gate in e["scope"]
+        if gate is None or e["scope"] == "all" or gate in e["scope"]:
+            return True
+        return any(_locus_gated(f) for f in e.get("files", []))
+
+    _selected = [e for e in REGISTRY if selected(e)]
+    if not _selected:
+        print(f"   [scope] WARNING: --gate '{gate}' selected 0 of "
+              f"{len(REGISTRY)} number families -- this run checks "
+              f"NOTHING.")
 
     n_live, n_exempt = 0, 0
-    print(f"headline-number registry gate (C17)   [{scope}]\n")
+    print(f"headline-number registry gate (C17)   [{scope}: "
+          f"{len(_selected)}/{len(REGISTRY)} families]\n")
     for e in REGISTRY:
         if not selected(e):
             continue
@@ -613,9 +647,12 @@ def main() -> int:
             print(f"      {rel}:{ln}  {snip}")
 
     if n_live:
-        print(f"\nRESULT: FAIL ({n_live} live wrong-headline occurrence(s) in {scope})")
+        print(f"\nRESULT: FAIL ({n_live} live wrong-headline "
+              f"occurrence(s) in {scope}; {len(_selected)}/"
+              f"{len(REGISTRY)} families)")
         return 1
     print(f"\nRESULT: PASS (no live wrong headline value in {scope}"
+          f"; {len(_selected)}/{len(REGISTRY)} families"
           + (f"; {n_exempt} exempt/historical mention(s))" if n_exempt else ")"))
     return 0
 

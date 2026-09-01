@@ -51,6 +51,13 @@ import re
 import subprocess
 import sys
 
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
+
 # NB "Notes.bib" has NO leading dot: revtex4-2 writes <base>Notes.bib,
 # so the dotted form never matched and left strays behind (found
 # 2026-08-22 by the delta code review).
@@ -136,8 +143,11 @@ def main() -> int:
     files = sorted(glob.glob(os.path.join(root, "papers", "**", "*.tex"),
                              recursive=True))
     files = [f for f in files if "/archive/" not in f.replace("\\", "/")]
-    if args.gate:
-        files = [f for f in files if args.gate in f.replace("\\", "/")]
+    # Named scopes (docs/qa/<target>.done.md) resolve to an explicit file list;
+    # see debug/qa/qa_scopes.py for why the historical substring filter is not
+    # trusted on its own.
+    files, _scope_warnings = qa_scopes.resolve(args.gate, files, root)
+    qa_scopes.emit_warnings(_scope_warnings)
 
     bad = 0
     for f in files:
@@ -158,13 +168,13 @@ def main() -> int:
         else:
             print(f"  ok   {r['base']}{note}")
 
-    scope = f" in scope '{args.gate}'" if args.gate else ""
+    scope = qa_scopes.describe(args.gate, files)
     if bad:
-        print(f"\nRESULT: FAIL ({bad} document(s) with compile/reference "
-              f"defects{scope})")
+        print(f"\nRESULT: FAIL ({bad} of {scope} with compile/reference "
+              f"defects)")
         return 1
-    print(f"\nRESULT: PASS ({len(files)} document(s) compile with zero "
-          f"undefined references or citations{scope})")
+    print(f"\nRESULT: PASS ({scope}; all compile with zero "
+          f"undefined references or citations)")
     return 0
 
 

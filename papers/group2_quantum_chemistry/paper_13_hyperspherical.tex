@@ -256,6 +256,7 @@ momentum for channel $l$, and $W_{ll'}$ encodes the electron-electron
 multipole coupling.
 
 \subsection{Liouville substitution}
+\label{sec:liouville}
 
 The natural inner product on $S^5$ involves the weight function
 $w(\alpha) = \sin^2\!\alpha\cos^2\!\alpha$.  Following standard
@@ -316,7 +317,7 @@ enforce sparsity.
 
 These same Gaunt integrals also govern the nuclear coupling
 in the molecule-frame hyperspherical expansion
-(Paper~15~\cite{paper15}, Sec.~V.A), where a split-region
+(Paper~15~\cite{loutey_paper15}, Sec.~V.A), where a split-region
 Legendre expansion reduces the nuclear attraction to finite sums
 terminated by the Wigner $3j$ triangle inequality.
 
@@ -558,6 +559,7 @@ extrapolation that lies below the exact value.}
 \end{table}
 
 \subsection{The diagonal Born--Oppenheimer correction}
+\label{sec:dboc}
 
 The converged energy $E = -2.9052$~Ha lies slightly \emph{below} the
 exact value $-2.9037$~Ha, which may appear to violate the
@@ -1324,10 +1326,12 @@ has implications for quantum simulation.  In a companion study, we
 compared the number of Pauli string terms after Jordan--Wigner
 transformation for GeoVac lattice Hamiltonians versus conventional
 Gaussian-basis Hamiltonians.  The GeoVac encoding scales as
-$O(Q^{3.15})$ in the number of qubits $Q$, compared to
-$O(Q^{4.60})$ for Gaussian bases, reflecting the structural sparsity
-of the two-electron integral tensor (ERI density $\sim 1/M^2$
-for the lattice versus $\sim O(1)$ for Gaussians).
+$O(Q^{3.77})$ in the number of qubits $Q$, against a measured
+Gaussian band of $Q^{3.9}$--$Q^{4.3}$~\cite{loutey_paper14}.  The
+structural sparsity of the two-electron integral tensor (ERI density
+$\sim 1/M^2$ for the lattice versus $\sim O(1)$ for Gaussians) is
+therefore worth $0.1$--$0.5$ in exponent, not the far larger margin
+the retired pair-diagonal counts suggested.
 
 \subsection{Open questions}
 
@@ -1495,7 +1499,7 @@ production use.
 \label{sec:coupled_channel_convergence}
 
 The algebraic angular solver's exact coupling matrices feed into
-the coupled-channel radial solver of Sec.~\ref{sec:coupled_channel}.
+the coupled-channel radial solver of Sec.~\ref{sec:radial}.
 The coupled radial equations are
 \begin{equation}
   \left[-\tfrac{1}{2}\frac{d^2}{dR^2}\delta_{\mu\nu}
@@ -1561,7 +1565,7 @@ characterization of this convergence ceiling:
   \item The $0.19$--$0.20\%$ floor is set by the adiabatic
     channel truncation inherent to the coupled-channel $P{+}Q$
     formalism.  Sub-$0.1\%$ accuracy requires the variational
-    2D solver (Paper~15~\cite{paper15}) to bypass the adiabatic
+    2D solver (Paper~15~\cite{loutey_paper15}) to bypass the adiabatic
     approximation entirely.
 \end{itemize}
 
@@ -1925,6 +1929,16 @@ J.~Loutey,
 ``Algebraic Two-Electron Integrals on the Prolate Spheroidal
 Lattice,''
 GeoVac Paper~12 (2026).
+
+\bibitem{loutey_paper14}
+J.~Loutey,
+``Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory,''
+GeoVac Paper~14 (2026).
+
+\bibitem{loutey_paper15}
+J.~Loutey,
+``The Level~4 Natural Geometry: Two-Center Two-Electron Molecules in Molecule-Frame Hyperspherical Coordinates,''
+GeoVac Paper~15 (2026).
 
 \bibitem{Fock1935}
 V.~Fock,

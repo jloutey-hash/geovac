@@ -4,7 +4,19 @@ Findings surfaced while QA-ing another branch that **land on group4 papers** and
 
 ## CF-1 — The composed Pauli-count advantage rests partly on the pair-diagonal ERI approximation (from `/qa group3`, 2026-06-16)
 
-**What.** The production composed pipeline (`geovac/composed_qubit.py::_ck_coefficient`, `q = mc - ma`) realizes the **pair-diagonal** ERI selection rule (m_a=m_c AND m_b=m_d), not the physically-correct global-M_L Coulomb rule (m_a+m_b=m_c+m_d). It silently drops genuinely-nonzero m-swap ERIs (e.g. ⟨p₊₁p₋₁|p₋₁p₊₁⟩, angular factor ≈ 0.49). This is a legitimate *sparsifying approximation*, but the group4 headline numbers were computed under it and are currently presented as if they were exact angular-selection-rule sparsity.
+> **RESOLVED / DISSOLVED — 2026-08-29. Do not reopen this as a live decision.**
+> CF-1 framed the pair-diagonal rule as a *legitimate sparsifying approximation*
+> needing a keep-or-switch decision. It was not an approximation: `q = mc - ma`
+> is a **wrong-sign-q bug**, found in seven modules by the ERI-evaluator sweep,
+> and the whole "convention A vs B" framing was an artifact of it. PI call: the
+> exact global-M_L rule everywhere, re-price honestly. Everything below is
+> retained as the historical record of how the defect was first sized — but
+> every figure in it (2.51×, 3.25×, 11.10·Q, O(Q^2.5), 51×–1712×, 334) is
+> **retired** and C17-registered. Live values: N_Pauli = 27.90·Q main-group,
+> 30.03·Q d-block, within-molecule exponent 3.17, LiH 838 @ Q30.
+> See `debug/sprint_eri_evaluator_defects_memo.md` and CLAUDE.md §2.
+
+**What (as originally written, 2026-06-16 — superseded).** The production composed pipeline (`geovac/composed_qubit.py::_ck_coefficient`, `q = mc - ma`) realizes the **pair-diagonal** ERI selection rule (m_a=m_c AND m_b=m_d), not the physically-correct global-M_L Coulomb rule (m_a+m_b=m_c+m_d). It silently drops genuinely-nonzero m-swap ERIs (e.g. ⟨p₊₁p₋₁|p₋₁p₊₁⟩, angular factor ≈ 0.49). This is a legitimate *sparsifying approximation*, but the group4 headline numbers were computed under it and are currently presented as if they were exact angular-selection-rule sparsity.
 
 **Measured impact (LiH, the one tractable full-FCI case):**
 - N_Pauli 333 → **837 (2.51× denser)** under the physical rule.
@@ -15,7 +27,7 @@ Findings surfaced while QA-ing another branch that **land on group4 papers** and
 **Lands on:** Paper 14 (qubit encoding — 51×–1712× vs Gaussian, LiH-vs-STO-3G market test, O(Q^2.5)); Paper 20 (resource benchmarks).
 
 **Disposition for group4 QA:**
-1. Decide: keep the pair-diagonal approximation (then **disclose** it and re-state the multipliers honestly) or switch production to the global rule (denser, re-prices the headline). *(Pending PI decision; the sweep below shows option A — disclose — is well-supported.)*
+1. ~~Decide: keep the pair-diagonal approximation (then **disclose** it and re-state the multipliers honestly) or switch production to the global rule (denser, re-prices the headline).~~ **CLOSED 2026-08-29 — neither option: it was a bug, not a convention. Exact global-M_L rule everywhere.** (The sweep below argued for "disclose", on the premise that the pair-diagonal rule was a defensible choice. That premise was false.)
 2. ~~Quantify the re-pricing across the library~~ **DONE 2026-06-28** — see below + `debug/qa/group4_cf1_library_sweep_memo.md`.
 3. The *energy* deltas for BeH₂/H₂O need a tractable correlated method (full number-projected FCI is intractable at the composed active space — that was the 2 h hang in the diagnostic), but the energy axis is a chemistry footnote, not the group4 concern.
 

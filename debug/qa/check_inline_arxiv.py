@@ -35,6 +35,14 @@ from __future__ import annotations
 import pathlib
 import re
 import sys
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 PAPERS = ROOT / "papers"
@@ -99,18 +107,27 @@ def main() -> int:
     gate_substr = _gate_substr(sys.argv)
     files = sorted(p for p in PAPERS.rglob("*.tex") if "archive" not in p.parts)
 
-    def is_gated(p: pathlib.Path) -> bool:
-        if gate_corpus:
-            return True
-        if gate_substr:
-            return gate_substr in str(p).replace("\\", "/")
-        return p.name in TRUNK
+    # Scope resolution via the shared resolver (debug/qa/qa_scopes.py): the
+    # old substring test is what let C19 examine zero trunk papers while
+    # reporting PASS, and the local TRUNK name-set here was a second copy of
+    # a declaration that now lives once, keyed to docs/qa/<target>.done.md.
+    if gate_corpus:
+        gated_files = list(files)
+        _scope_warnings = []
+        scope_label = "whole corpus"
+    else:
+        gate_value = gate_substr or "trunk"
+        resolved, _scope_warnings = qa_scopes.resolve(
+            gate_value, [str(f) for f in files])
+        gated_files = [pathlib.Path(f) for f in resolved]
+        scope_label = qa_scopes.canonical(gate_value)
+    qa_scopes.emit_warnings(_scope_warnings)
+    gated_set = {str(f) for f in gated_files}
 
-    scope = (
-        "the whole corpus" if gate_corpus
-        else f"scope '{gate_substr}'" if gate_substr
-        else "the trunk"
-    )
+    def is_gated(p: pathlib.Path) -> bool:
+        return str(p) in gated_set
+
+    scope = f"{len(gated_files)} paper(s) in scope '{scope_label}'"
 
     failures: list[str] = []
     n_checked = 0

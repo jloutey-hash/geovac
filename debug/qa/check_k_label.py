@@ -42,6 +42,14 @@ from __future__ import annotations
 import pathlib
 import re
 import sys
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 PAPERS = ROOT / "papers"
@@ -215,8 +223,16 @@ def main() -> int:
     def is_gated(p: pathlib.Path) -> bool:
         if gate_corpus:
             return True
-        if gate_substr:
-            return gate_substr in str(p).replace("\\", "/")
+        # SCOPE FIX 2 (2026-08-31, the C19 gate-scope audit).  `--gate <target>`
+        # used to return a substring match here, which NARROWED a corpus-wide
+        # prohibition to one branch: running `--gate group5` downgraded a
+        # K-tier violation in every other paper to advisory and still printed
+        # PASS.  That is the SAME defect the 2026-08-22 fix below repaired for
+        # the default path, reintroduced through the gate flag.  The Sec 13.5
+        # prohibition does not have a branch scope, so `--gate` now affects
+        # REPORTING ONLY (which hits are highlighted as in-target) and never
+        # what fails.
+        #
         # SCOPE FIX (2026-08-22, FULL cert #2). Previously this returned
         # `p.name in TRUNK`, so a K-tier violation in any non-trunk PAPER was
         # downgraded to advisory and the gate still reported PASS. A planted
@@ -233,8 +249,19 @@ def main() -> int:
             return True
         return p.name in TRUNK
 
-    scope = ("the whole corpus" if gate_corpus else
-             f"papers matching '{gate_substr}'" if gate_substr else "all papers")
+    # The gate is a REPORTING lens here, not a filter (see is_gated above).
+    _target_files, _scope_warnings = qa_scopes.resolve(
+        gate_substr or "", [str(f) for f in files if str(f).endswith(".tex")])
+    qa_scopes.emit_warnings(_scope_warnings)
+    _n_tex = len([f for f in files if str(f).endswith(".tex")])
+    if gate_corpus:
+        scope = f"the whole corpus ({len(files)} file(s))"
+    elif gate_substr:
+        scope = (f"all {_n_tex} paper(s) [Sec 13.5 is corpus-wide]; "
+                 f"target '{qa_scopes.canonical(gate_substr)}' = "
+                 f"{len(_target_files)} of them")
+    else:
+        scope = f"all {_n_tex} paper(s)"
 
     gated_suspect, audit_suspect, compliant = [], [], 0
     for p in files:

@@ -409,7 +409,7 @@ def _get_sub_block_positions(
 
 def build_balanced_hamiltonian(
     spec: MolecularSpec,
-    R: float = 3.015,
+    R: Optional[float] = None,
     nuclei: Optional[List[Dict[str, Any]]] = None,
     n_grid: int = 2000,
     n_grid_vne: int = 8000,
@@ -436,9 +436,21 @@ def build_balanced_hamiltonian(
     ----------
     spec : MolecularSpec
         Molecular specification. PK parameters are ignored.
-    R : float
-        Bond length (bohr). Used for LiH backward compatibility if
-        ``nuclei`` is not provided.
+    R : float, optional
+        Bond length (bohr).  DEFAULT None = use the spec's own geometry
+        (``spec.R``).  Pass a value only to override it, e.g. to sweep a
+        PES.
+
+        This used to default to 3.015 -- LiH's bond length -- and ignore
+        the spec, so any caller that omitted R silently computed its
+        molecule at LiH's geometry.  That put the published balanced
+        lambda column of Papers 14/20 at the wrong R for all six
+        second-row molecules (2026-08-31; see
+        debug/qa/balanced_lambda_geometry_finding.md).  The bond length is
+        free-side calibration data, so a fictitious one makes the
+        projected quantity unfalsifiable -- it describes no physical
+        system.  Structural columns (Pauli count, QWC groups) are
+        R-independent and were unaffected.
     nuclei : list of dict, optional
         Explicit nuclear positions: ``[{'Z': float, 'position': float, 'label': str}, ...]``.
         Positions are 1D (collinear molecules on z-axis). If None, defaults
@@ -558,6 +570,22 @@ def build_balanced_hamiltonian(
         L_max = 2 * max(1, _max_n - 1)
 
     t0 = time.perf_counter()
+
+    # Resolve the geometry from the spec unless the caller overrode it.
+    # See the R parameter docs: defaulting to a fixed molecule's bond
+    # length is how six published lambda values ended up at LiH's R.
+    if R is None:
+        R = getattr(spec, 'R', None)
+        if R is None:
+            from geovac.molecular_spec import _HYDRIDE_REQ as _HR0
+            R = _HR0.get(spec.name)
+        if R is None:
+            raise ValueError(
+                f"{spec.name!r} records no bond length (spec.R is None and "
+                f"it is not in _HYDRIDE_REQ), so the geometry is "
+                f"undetermined. Pass R= explicitly. Silently substituting "
+                f"a default here is what put six published lambda values "
+                f"at the wrong molecule's bond length.")
 
     # ------------------------------------------------------------------
     # 1. Build standard composed Hamiltonian WITHOUT PK

@@ -102,17 +102,74 @@ MEASURED = {
     # different coefficients gives different group counts.  Do not "correct"
     # one partner's QWC to match the other's.
     "nah_balanced_lambda": dict(
-        value=20.607, convention="non-identity 1-norm (Ha)", q=20,
-        provenance="MEASURED 2026-08-30, build_balanced_hamiltonian(nah_spec()); "
-                   "reproducible across two builds. The 2026-08-29 re-sync "
-                   "left 19.6 live in BOTH P14 tab:second_row and P20 "
-                   "tab:molecules.",
-        aliases={193.440: "including identity"}),
+        value=19.582, convention="non-identity 1-norm (Ha), at NaH's own R = 3.566 bohr",
+        q=20,
+        provenance="MEASURED 2026-08-31, build_balanced_hamiltonian(nah_spec()) "
+                   "after the R-default fix. The prior 20.607 was this molecule "
+                   "evaluated at R = 3.015 (LiH's bond length), which the builder "
+                   "substituted silently; see debug/qa/balanced_lambda_geometry_finding.md.",
+        aliases={}),
     "hcl_balanced_lambda": dict(
-        value=869.720, convention="non-identity 1-norm (Ha)", q=50,
-        provenance="MEASURED 2026-08-30, same route; retired 866.1 was live "
-                   "in the same two tables",
-        aliases={1239.441: "including identity"}),
+        value=866.133, convention="non-identity 1-norm (Ha), at HCl's own R = 2.409 bohr",
+        q=50,
+        provenance="MEASURED 2026-08-31, same route. The prior 869.72 was HCl "
+                   "evaluated at R = 3.015 (LiH's bond length).",
+        aliases={}),
+
+    # Balanced lambda_ni, the remaining ten rows of the Papers 14/20
+    # column.  Registered 2026-08-31: they had no keys, which is why a
+    # systematic wrong-geometry error in twelve published cells was
+    # invisible to this gate.  Each at its OWN equilibrium bond length.
+    "mgh2_balanced_lambda": dict(
+        value=111.800, convention="non-identity 1-norm (Ha), at R = 3.261 bohr",
+        q=40,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "h2s_balanced_lambda": dict(
+        value=873.632, convention="non-identity 1-norm (Ha), at R = 2.534 bohr",
+        q=60,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "ph3_balanced_lambda": dict(
+        value=889.349, convention="non-identity 1-norm (Ha), at R = 2.680 bohr",
+        q=70,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "sih4_balanced_lambda": dict(
+        value=909.154, convention="non-identity 1-norm (Ha), at R = 2.800 bohr",
+        q=80,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "kh_balanced_lambda": dict(
+        value=28.124, convention="non-identity 1-norm (Ha), at R = 4.243 bohr",
+        q=20,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "cah2_balanced_lambda": dict(
+        value=123.773, convention="non-identity 1-norm (Ha), at R = 3.807 bohr",
+        q=40,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "hbr_balanced_lambda": dict(
+        value=875.313, convention="non-identity 1-norm (Ha), at R = 2.670 bohr",
+        q=50,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "h2se_balanced_lambda": dict(
+        value=883.443, convention="non-identity 1-norm (Ha), at R = 2.760 bohr",
+        q=60,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "ash3_balanced_lambda": dict(
+        value=885.248, convention="non-identity 1-norm (Ha), at R = 2.820 bohr",
+        q=70,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
+    "geh4_balanced_lambda": dict(
+        value=874.833, convention="non-identity 1-norm (Ha), at R = 2.870 bohr",
+        q=80,
+        provenance="MEASURED 2026-08-31, debug/qa/remeasure_balanced_lambda.py",
+        aliases={}),
     "nah_balanced_qwc": dict(
         value=69, convention="QWC groups, balanced", q=20,
         provenance="MEASURED 2026-08-30; KH ties at 69 (the only "
@@ -150,9 +207,13 @@ MEASURED = {
         provenance="MEASURED 2026-08-30, build_balanced_hamiltonian(lih_spec())",
         aliases={78.156: "including identity", 78.2: "including identity"}),
     "beh2_balanced_lambda": dict(
-        value=289.581, convention="non-identity 1-norm (Ha)", q=50,
-        provenance="MEASURED 2026-08-30, same route",
-        aliases={328.110: "including identity", 328.1: "including identity"}),
+        value=286.893,
+        convention="non-identity 1-norm (Ha), at BeH2's own R = 2.502 bohr",
+        q=50,
+        provenance="MEASURED 2026-09-01 after the R-default fix. The prior "
+                   "289.581 / 328.11 pair was BeH2 evaluated at R = 3.015 "
+                   "(LiH's bond length); see debug/qa/balanced_lambda_geometry_finding.md.",
+        aliases={323.427: 'including identity', 323.4: 'including identity'}),
     "h2o_balanced_lambda": dict(
         value=1439.751, convention="non-identity 1-norm (Ha)", q=70,
         provenance="MEASURED 2026-08-30, same route",
@@ -419,7 +480,7 @@ RETIRED = {
     # roles (Z ranges, qubit counts, page and reference numbers), and a
     # bare-value match reports them all.  The forbidden column exists for
     # the genuinely ambiguous ones.
-    120:     ("he_n2_pauli",        r"Pauli|terms",            r"page|Rev\.|\\textbf"),
+    120:     ("he_n2_pauli",        r"Pauli|terms",            r"page|Rev\.|\\textbf|N *= *120"),
     2659:    ("he_n3_pauli",        r"Pauli|terms",            None),
     31039:   ("he_n4_pauli",        r"Pauli|terms",            None),
     227338:  ("he_n5_pauli",        r"Pauli|terms",            None),
@@ -432,8 +493,22 @@ RETIRED = {
     354.9:   ("beh2_composed_pk_lambda", r"1-norm|lambda|\\lambda", None),
     66.0:    ("beh2_composed_lambda", r"electronic-only|1-norm",  None),
     28055:   ("h2o_composed_pk_lambda", r"1-norm|composed",       None),
-    19.6:    ("nah_balanced_lambda",  r"lambda|1-norm|NaH",      r"page|Rev\."),
-    866.1:   ("hcl_balanced_lambda",  r"lambda|1-norm|HCl",      None),
+    # Balanced lambda at the WRONG geometry: these are the values the
+    # 2026-08-31 correction retired, produced by evaluating every
+    # molecule at R = 3.015 (LiH's bond length).  The pre-2026-08-30
+    # values 19.6 / 866.1 were RIGHT and are canonical again -- they used
+    # to sit in this map, which is how a correct value came to be
+    # flagged as retired.
+    20.6:    ("nah_balanced_lambda",  r"lambda|1-norm|NaH",  r"page|Rev\.|retired|LiH's"),
+    328.11:  ("beh2_balanced_lambda", r"lambda|1-norm|BeH",  r"page|Rev\.|retired"),
+    328.1:   ("beh2_balanced_lambda", r"lambda|1-norm|BeH",  r"page|Rev\.|retired"),
+    289.581: ("beh2_balanced_lambda", r"lambda|1-norm|BeH",  r"page|Rev\.|retired"),
+    289.6:   ("beh2_balanced_lambda", r"lambda|1-norm|BeH",  r"page|Rev\.|retired"),
+    869.7:   ("hcl_balanced_lambda",  r"lambda|1-norm|HCl",  r"page|Rev\.|retired|LiH's"),
+    110.5:   ("mgh2_balanced_lambda", r"lambda|1-norm|MgH",  r"page|Rev\.|retired"),
+    879.6:   ("h2s_balanced_lambda",  r"lambda|1-norm|H\$_2\$S",  r"page|Rev\.|retired"),
+    895.3:   ("ph3_balanced_lambda",  r"lambda|1-norm|PH",   r"page|Rev\.|retired"),
+    914.1:   ("sih4_balanced_lambda", r"lambda|1-norm|SiH",  r"page|Rev\.|retired"),
     # tab:tc_composed, pre-exact-rule (exempted for passes by a marker 5
     # lines below the table -- see stage4_ledger_notes.md).
     334:     ("lih_composed_pauli",  r"Pauli|TC|standard",      r"page|Rev\."),
@@ -452,21 +527,36 @@ RETIRED = {
     10199:   ("he_n4_qwc",          r"QWC|measurement group",  None),
 
     3.15:    ("exp_pauli_4pt",      r"Q\^|exponent|scaling|alpha", r"Table~3\.15|Table 3\.15"),
-    1.69:    ("exp_lambda_4pt",     r"Q\^|exponent|scaling|alpha|lambda", None),
+    1.69:    ("exp_lambda_4pt",     r"Q\^|exponent|scaling|alpha|lambda",
+                                    r"meV|polarizability"),
     3.36:    ("exp_qwc_3pt",        r"Q\^|exponent|scaling|QWC",   None),
     3.147:   ("exp_pauli_4pt",      r"exponent|alpha|scaling",  None),
+    1.690:   ("exp_lambda_4pt",     r"Q\^|exponent|scaling",
+                                    r"meV|polarizability"),
     1.694:   ("exp_lambda_4pt",     r"exponent|alpha|scaling",  None),
     3.355:   ("exp_qwc_3pt",        r"exponent|alpha|scaling",  None),
 
     111:     ("block_sp_n2_pauli",  r"Pauli per|per \$s\$\+\$p\$|block.*Pauli", r"Rev\.|\\textbf|page"),
-    65:      ("block_sp_n2_eri",    r"ERI|nonzero quartet",     None),
+    # \b required: the context search is case-insensitive, so a bare
+    # "ERI" matched inside charactERIzes / inhERIt and admitted any
+    # 65 in the corpus (4 false positives, 2026-08-31).
+    65:      ("block_sp_n2_eri",    r"\bERI\b|nonzero quartet", None),
     56:      ("block_d_pauli",      r"d-only|pure \$d\$.*Pauli", r"Z\s*=|Q\s*=|--56|through Ba"),
     976:     ("block_sp_m9_pauli",  r"Pauli",                   None),
 
+    # The retired LiH-vs-cc-pVDZ Pauli ratio.  Canonical is 76x
+    # (lih_ccpvdz_pauli / lih_composed_pauli = 63,519 / 837).  Added
+    # 2026-08-31 after the Phase-0 sweep found it live in the field
+    # guide (x2) and Paper 58 with NO registry entry to catch it --
+    # it surfaced only via the S15 re-read-the-prose rule.  Context is
+    # narrow on purpose: 190 is otherwise an unremarkable integer.
+    190:     ("ratio_ccpvdz_lih",   r"cc-pVDZ|cc-pVTZ|Gaussian",
+                                    r"page|Rev\.|Q = 190|qubits"),
     11.10:   ("composed_coeff",     r"coefficient|per qubit|\\times Q|Pauli/", None),
     9.23:    ("composed_coeff_d",   r"coefficient|per qubit|Pauli/", None),
     333:     ("lih_composed_pauli", r"Pauli",                   None),
-    334:     ("lih_composed_pauli", r"Pauli",                   None),
+    # (334 is defined once, above, with its forbidden context: a second
+    #  334 entry here used to overwrite it and drop that guard.)
     778:     ("h2o_composed_pauli", r"Pauli",                   None),
 
     1413:    ("lih_rel_n2_pauli",   r"Pauli|N_\{\\mathrm\{Pauli|rel",  None),
@@ -537,23 +627,38 @@ def parses(key: str) -> bool:
     return family(key)[0] is not None
 
 
-def resolve(key: str) -> float:
-    """Value of a measured or cited quantity."""
+def resolve(key: str, _seen=None) -> float:
+    """Value of a measured, cited, or DERIVED quantity.
+
+    DERIVED was added to this lookup 2026-08-31.  Without it a RETIRED
+    entry could not name a derived replacement, so retired RATIOS,
+    exponents and per-qubit figures had nowhere to point -- and a ratio
+    is inherently derived.  The 190x LiH-vs-cc-pVDZ figure sat live in
+    three loci with no registry entry able to catch it for exactly this
+    reason.
+    """
     if key in MEASURED:
         return float(MEASURED[key]["value"])
     if key in CITED:
         return float(CITED[key]["value"])
+    if key in DERIVED:
+        # Guard against a cyclic expression rather than blowing the stack.
+        _seen = set(_seen or ())
+        if key in _seen:
+            raise KeyError(f"cyclic derivation through {key!r}")
+        _seen.add(key)
+        return evaluate(DERIVED[key][0], _seen)
     raise KeyError(f"unregistered quantity: {key}")
 
 
-def evaluate(expr: str) -> float:
+def evaluate(expr: str, _seen=None) -> float:
     """Evaluate a DERIVED expression over registry keys."""
     import re as _re
     names = sorted(set(_re.findall(r"[A-Za-z_][A-Za-z0-9_]*", expr)),
                    key=len, reverse=True)
     out = expr
     for nm in names:
-        out = out.replace(nm, repr(resolve(nm)))
+        out = out.replace(nm, repr(resolve(nm, _seen)))
     return float(eval(out, {"__builtins__": {}}, {}))
 
 

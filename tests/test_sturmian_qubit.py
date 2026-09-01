@@ -110,8 +110,14 @@ class TestStandardEncodingPaper14:
         # pair-diagonal rule; 288 = 287 non-identity + identity)
         assert len(of_op.terms) == 288
 
-    @pytest.mark.slow
     def test_pauli_count_maxn3(self):
+        # Un-marked slow 2026-09-01: the build is ~2 s, and while it sat
+        # behind --slow it skipped on every default run -- still asserting
+        # 2659, the retired pair-diagonal count, long after the n_max=2
+        # case beside it had been corrected to 288.  A guard that does not
+        # run cannot notice that it is stale.
         from geovac.vqe_benchmark import build_geovac_he
         _, of_op, n_q, _ = build_geovac_he(max_n=3)
-        assert len(of_op.terms) == 2659
+        # exact-rule 2026-08-29: 14079 = 14078 non-identity + identity
+        # (was 2659 under the retired pair-diagonal rule)
+        assert len(of_op.terms) == 14079

@@ -242,12 +242,13 @@ framework's accuracy targets through identifiable channels (the
 structural obstruction established by multiple independent negative
 results --- documented across six independent diagnostic
 investigations).  The framework's most natural quantum-simulation
-application --- Pauli-operator counts scaling as $O(Q^{2.5})$ in the
-qubit count $Q$ for the core--valence ``composed'' encoding, with a
-sub-quadratic $O(Q^{1.69})$ $1$-norm, benchmarked across a $37$-system
+application --- Pauli-operator counts exactly linear in the qubit
+count $Q$ at fixed basis ($N_{\mathrm{Pauli}} = 27.90 \times Q$) for
+the core--valence ``composed'' encoding, with a
+sub-quadratic $O(Q^{1.77})$ $1$-norm, benchmarked across a $37$-system
 library~\cite{loutey_paper14} --- shipped at the end of Phase~2.  The
 absolute Pauli multipliers are convention-sensitive (near parity with
-minimal-basis STO-3G, $\sim 190\times$ sparser than cc-pVDZ);\ the
+minimal-basis STO-3G, $76\times$ sparser than cc-pVDZ);\ the
 load-bearing advantage is the scaling, not any single market-test
 ratio.
 
@@ -581,11 +582,13 @@ section gives one-line summaries.
     sparsity), Paper~24 (Bargmann--Segal $\sfive$ lattice), Paper~31
     (universal/Coulomb partition), Paper~55 (periods classification).
   \item \textbf{Group~4 --- Quantum computing} ($4$ papers).
-    Qubit-encoding resource estimates.  Headline:\ $O(Q^{2.5})$
-    composed Pauli scaling and a sub-quadratic $O(Q^{1.69})$ $1$-norm
-    across a $37$-system library (Papers~14/20);\ absolute Pauli
+    Qubit-encoding resource estimates.  Headline:\ exactly linear
+    composed Pauli scaling in $Q$ at fixed basis
+    ($N_{\mathrm{Pauli}} = 27.90 \times Q$) and a sub-quadratic
+    $O(Q^{1.77})$ $1$-norm across a $37$-system library
+    (Papers~14/20);\ absolute Pauli
     multipliers are convention-sensitive (near parity with STO-3G,
-    $\sim 190\times$ vs cc-pVDZ).
+    $76\times$ vs cc-pVDZ).
   \item \textbf{Group~5 --- QED / gauge / SM} ($8$ papers).
     Headline:\ hydrogen Lamb shift at $-0.534\%$ one-loop closure
     (Paper~36);\ SU(2) Wilson lattice gauge structure with

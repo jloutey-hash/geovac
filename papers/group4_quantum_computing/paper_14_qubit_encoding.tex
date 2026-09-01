@@ -1684,16 +1684,17 @@ System & $Q$ & \multicolumn{2}{c}{Pauli terms}
   & & Comp. & Bal. & Comp. & Bal. \\
 \hline
 LiH     &  30 &    837 & 2{,}725 &  27.7 &   75.2 \\
-BeH$_2$ &  50 &  1{,}395 & 8{,}867 &  54.3 &  289.6 \\
+BeH$_2$ &  50 &  1{,}395 & 8{,}867 &  54.3 &  286.9 \\
 H$_2$O  &  70 &  1{,}953 & 19{,}741 & 186.8 & 1{,}439.8 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
 The Pauli ratio grows with block count ($3.26\times$ to $10.1\times$),
-but the 1-norm ratio favors balanced for BeH$_2$ ($0.88\times$
+but the 1-norm ratio favors balanced for BeH$_2$ ($0.86\times$
 composed with PK in-Hamiltonian, the QPE-relevant convention; live
-builders, re-measured 2026-08-30 --- $328.1$ vs.\ $374.9$~Ha, both
+builders, re-measured 2026-09-01 at BeH$_2$'s own bond length
+$R = 2.502$~bohr --- $323.4$ vs.\ $374.9$~Ha, both
 identity-included, since the composed-with-PK total is only available
 that way) where PK's $Z^2$-scaled barrier is costly.  For H$_2$O,
 the balanced 1-norm ($1{,}612.0$~Ha) is $17.4\times$ lower than the
@@ -1758,24 +1759,35 @@ for six second-row molecules at $n_{\max} = 2$.
 \caption{Balanced coupled resource metrics for second-row molecules
   at $n_{\max} = 2$, with composed metrics for comparison.
   All molecules use [Ne] frozen cores with Clementi--Raimondi
-  orbital exponents.  Re-measured 2026-08-29 under the exact
-  global-$M_L$ rule; the balanced QWC column and two $\lambda_{\text{ni}}$
-  cells (NaH $19.6 \to 20.6$, HCl $866.1 \to 869.7$) were measured
-  2026-08-30, closing a standing ``pending'' note.  Pauli counts include
-  the identity term; $\lambda_{\text{ni}}$ excludes it.}
+  orbital exponents.  Pauli counts include
+  the identity term; $\lambda_{\text{ni}}$ excludes it.
+  \emph{Each row is evaluated at its own equilibrium bond length $R$,
+  stated in the table.}  The geometry is free-side calibration input, so
+  the two columns that depend on it are only meaningful once it is named:
+  $\lambda_{\text{ni}}$ sums coefficient magnitudes, and the QWC count
+  comes from a greedy grouper whose path depends on those magnitudes.
+  The Pauli count does \emph{not} depend on $R$ --- it is fixed by the
+  angular selection rules alone, and is bit-identical across geometries
+  (\texttt{tests/test\_paper20\_geometry\_independence.py}).
+  (Corrected 2026-08-31: the $\lambda_{\text{ni}}$ and QWC columns had
+  been computed at $R = 3.015$~bohr --- LiH's bond length --- for every
+  molecule, because the balanced builder defaulted to that value and
+  ignored the spec's geometry.  Retired cells: $\lambda_{\text{ni}}$
+  $20.6/110.5/869.7/879.6/895.3/914.1$ and QWC $1{,}282/1{,}477/1{,}551$
+  for H$_2$S/PH$_3$/SiH$_4$.)}
 \label{tab:second_row}
 \begin{ruledtabular}
-\begin{tabular}{lrrrrr}
-Molecule & $Q$ & \multicolumn{2}{c}{Pauli terms}
+\begin{tabular}{lrrrrrr}
+Molecule & $Q$ & $R$ (bohr) & \multicolumn{2}{c}{Pauli terms}
   & $\lambda_{\text{ni}}$ (Ha) & QWC \\
-  & & Comp. & Bal. & Bal. & Bal. \\
+  & & & Comp. & Bal. & Bal. & Bal. \\
 \hline
-NaH      &  20 &    559 &    575 &  20.6 &    69 \\
-MgH$_2$  &  40 & 1{,}117 & 4{,}861 & 110.5 &   903 \\
-HCl      &  50 & 1{,}396 & 9{,}824 & 869.7 & 1{,}173 \\
-H$_2$S   &  60 & 1{,}675 & 13{,}863 & 879.6 & 1{,}282 \\
-PH$_3$   &  70 & 1{,}954 & 18{,}854 & 895.3 & 1{,}477 \\
-SiH$_4$  &  80 & 2{,}233 & 24{,}745 & 914.1 & 1{,}551 \\
+NaH      &  20 & 3.566 &    559 &    575 &  19.6 &    69 \\
+MgH$_2$  &  40 & 3.261 & 1{,}117 & 4{,}861 & 111.8 &   903 \\
+HCl      &  50 & 2.409 & 1{,}396 & 9{,}824 & 866.1 & 1{,}173 \\
+H$_2$S   &  60 & 2.534 & 1{,}675 & 13{,}863 & 873.6 & 1{,}264 \\
+PH$_3$   &  70 & 2.680 & 1{,}954 & 18{,}854 & 889.3 & 1{,}427 \\
+SiH$_4$  &  80 & 2.800 & 2{,}233 & 24{,}745 & 909.2 & 1{,}566 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -1801,11 +1813,13 @@ For 1-norm comparisons, we report
 $\lambda_{\text{ni}}$---the non-identity component of the Pauli
 1-norm---which excludes the frozen-core energy offset and nuclear
 repulsion (classical constants that do not contribute to quantum
-measurement cost or Trotter error).  For NaH, the identity term
-accounts for the bulk of the total 1-norm ($193.4$~Ha total vs.\
-$20.6$~Ha non-identity); the simulation-relevant
-$\lambda_{\text{ni}} = 20.6$~Ha is comparable
-to first-row LiH ($\lambda_{\text{ni}} = 27.7$~Ha).
+measurement cost or Trotter error).  For NaH at its equilibrium
+$R = 3.566$~bohr, the identity term
+accounts for the bulk of the total 1-norm ($191.9$~Ha total vs.\
+$19.6$~Ha non-identity); the simulation-relevant
+$\lambda_{\text{ni}} = 19.6$~Ha is comparable
+to first-row LiH ($\lambda_{\text{ni}} = 27.7$~Ha at its own
+$R = 3.015$~bohr).
 
 The framework extends further to third-row main-group atoms
 ($Z = 19$--20 and $Z = 31$--36) via [Ar] (18-electron) and

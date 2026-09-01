@@ -16,8 +16,8 @@ project's course, and the FAIL patterns below are written narrowly enough
 that ordinary physics usage (log "decades" of a ratio, "light-year",
 per-year clock-drift specs) does not trip them.
 
-Scope: all .tex in papers/group*/ and papers/synthesis/ (papers/archive/
-is historical and exempt).  Exit 0 = PASS, 1 = FAIL.
+Scope: resolved by debug/qa/qa_scopes.py from the pre-registered DoD
+(papers/archive/ is historical and exempt).  Exit 0 = PASS, 1 = FAIL.
 
 Convention home: docs/authoring_conventions.md project-wide rule 12;
 severity: fix-on-sight NIT unless it distorts a result's provenance
@@ -33,6 +33,14 @@ import re
 import sys
 from pathlib import Path
 from typing import List, Tuple
+import os
+
+# Shared --gate scope resolution (see debug/qa/qa_scopes.py): named
+# scopes resolve to an explicit file list and every RESULT line carries
+# the file count, so a gate can never report PASS on an empty scope.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qa_scopes  # noqa: E402
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -102,26 +110,12 @@ ALLOWLIST: List[Tuple[str, str]] = [
     #  do not trip the narrow patterns above)
 ]
 
-GATED_DIRS = [
-    "papers/synthesis",
-    "papers/group1_operator_algebras",
-    "papers/group2_quantum_chemistry",
-    "papers/group3_foundations",
-    "papers/group4_quantum_computing",
-    "papers/group5_qed_gauge",
-    "papers/group6_precision_observations",
-]
-
-BRANCH_DIRS = {
-    "trunk": ["papers/group1_operator_algebras", "papers/group3_foundations"],
-    "group1": ["papers/group1_operator_algebras"],
-    "group2": ["papers/group2_quantum_chemistry"],
-    "group3": ["papers/group3_foundations"],
-    "group4": ["papers/group4_quantum_computing"],
-    "group5": ["papers/group5_qed_gauge"],
-    "group6": ["papers/group6_precision_observations"],
-    "synthesis": ["papers/synthesis"],
-}
+# Scope tables RETIRED 2026-08-31.  GATED_DIRS/BRANCH_DIRS were
+# directory-based, which made `--gate trunk` scan all 27 papers of
+# group1+group3 instead of trunk's 6, dropped each group's synthesis
+# (a different directory), and silently widened any single-paper target
+# to the whole corpus.  The scope declarations now live once in
+# debug/qa/qa_scopes.py, keyed to docs/qa/<target>.done.md.
 
 
 def strip_comments(text: str) -> str:
@@ -249,27 +243,30 @@ def main(argv: List[str]) -> int:
     if "--selftest" in argv:
         return selftest()
 
-    dirs = GATED_DIRS
+    # Scope resolution moved to the shared resolver (debug/qa/qa_scopes.py).
+    # The old BRANCH_DIRS was DIRECTORY-based, so `--gate trunk` scanned all 27
+    # papers of group1+group3 rather than trunk's 6, group runs silently
+    # omitted their synthesis (a different directory), and any single-paper
+    # target fell through to the whole corpus while still printing its name.
+    gate = ""
     if "--gate" in argv:
-        branch = argv[argv.index("--gate") + 1]
-        dirs = BRANCH_DIRS.get(branch, GATED_DIRS)
+        gate = argv[argv.index("--gate") + 1]
+    tex_files, _scope_warnings = qa_scopes.resolve(gate)
+    qa_scopes.emit_warnings(_scope_warnings)
 
     fail_total = 0
     advisory_by_file: dict = {}
     files = 0
-    for d in dirs:
-        base = ROOT / d
-        if not base.is_dir():
-            continue
-        for tex in sorted(base.glob("*.tex")):
-            files += 1
-            rel = tex.relative_to(ROOT)
-            for name, lineno, frag, line in scan_file(tex, FAIL_PATTERNS):
-                fail_total += 1
-                print(f"  [FAIL:{name}] {rel}:{lineno}  '{frag}'  in: {line}")
-            adv = scan_file(tex, ADVISORY_PATTERNS)
-            if adv:
-                advisory_by_file[str(rel)] = len(adv)
+    for tex_path in tex_files:
+        tex = Path(tex_path)
+        files += 1
+        rel = tex.relative_to(ROOT)
+        for name, lineno, frag, line in scan_file(tex, FAIL_PATTERNS):
+            fail_total += 1
+            print(f"  [FAIL:{name}] {rel}:{lineno}  '{frag}'  in: {line}")
+        adv = scan_file(tex, ADVISORY_PATTERNS)
+        if adv:
+            advisory_by_file[str(rel)] = len(adv)
 
     adv_total = sum(advisory_by_file.values())
     if advisory_by_file:
@@ -278,7 +275,8 @@ def main(argv: List[str]) -> int:
         for rel, n in sorted(advisory_by_file.items(), key=lambda kv: -kv[1]):
             print(f"    {n:4d}  {rel}")
 
-    print(f"\nduration-language check over {files} papers  [dirs: {', '.join(dirs)}]")
+    print(f"\nduration-language check over "
+          f"{qa_scopes.describe(gate, tex_files)}")
     print(f"  fail-tier hits: {fail_total};  advisory hits: {adv_total}")
     if fail_total:
         print(f"RESULT: FAIL ({fail_total} historical wall-clock duration(s) "
