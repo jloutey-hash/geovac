@@ -12,7 +12,7 @@
 \date{March 10, 2026}
 
 \begin{abstract}
-Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. We demonstrate that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, establishing a precise mathematical bridge between the discrete graph formulation and the known continuous structure. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. The continuum $S^3$ topology (the limit of the positive-semidefinite graph Laplacian) has pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. We verify these claims through a suite of 18 symbolic checks (an algebraic audit of the transformation chain, several of them limiting-case or definitional) confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
+Fock showed in 1935 that the hydrogen Schr\"odinger equation is mathematically equivalent to the Laplace-Beltrami operator on the unit three-sphere $S^3$ via stereographic projection. \textbf{[MEASURED]} We demonstrate numerically---through $n_{\max} = 30$, with no rate of convergence proven here---that the GeoVac discrete graph Laplacian converges to this same operator in the continuum limit, and we verify the conformal chain from that limit onward by symbolic computation. The discrete paraboloid lattice---whose nodes encode quantum numbers $(n, l, m)$ and whose edges encode transition amplitudes---possesses a continuum limit that is conformally equivalent to the unit $S^3$. \textbf{[SYMBOLIC PROOF]} The continuum $S^3$ topology (the limit of the positive-semidefinite graph Laplacian) has pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ with no intrinsic physical scale. \textbf{[SYMBOLIC PROOF]} The familiar Rydberg energy levels $E_n = -1/(2n^2)$ emerge only upon imposing an energy-shell constraint $p_0^2 = -2E$ that acts as a ``stereographic focal length,'' projecting the curved topological information into flat $\mathbb{R}^3$ observational coordinates. \textbf{[SYMBOLIC PROOF]} We verify these claims through a suite of 18 symbolic checks (an algebraic audit of the transformation chain, several of them limiting-case or definitional) confirming the algebraic geometry of the projection, the operator equivalence under conformal rescaling, and the eigenvalue-to-energy mapping.
 \end{abstract}
 
 \maketitle
@@ -36,11 +36,11 @@ This observation was developed further by Bargmann \cite{bargmann1936}, who conn
 
 In this paper, we take the opposite stance. We argue that the $S^3$ representation is not merely a convenient mathematical trick, but reveals deep structural content that can be exploited computationally. Our starting point is the GeoVac framework \cite{loutey_paper0,loutey_paper1}, which models the hydrogen atom as a discrete graph: nodes represent quantum states $|n, l, m\rangle$, edges represent physical transitions, and the Hamiltonian is a sparse matrix encoding connectivity. This discrete lattice is \textit{intrinsically dimensionless}---it is a pure combinatorial topology with no inherent length, time, or energy scales.
 
-The central result of this paper is a rigorous demonstration that:
+The central results of this paper are one empirical convergence statement and two symbolic ones:
 \begin{enumerate}
-\item The continuum limit of this discrete graph is conformally equivalent to the \textit{unit} $S^3$, regardless of any physical parameters.
-\item The Laplace-Beltrami operator on this unit sphere produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$, carrying no physical dimensions.
-\item The dimensionful Rydberg spectrum $E_n = -1/(2n^2)$ is introduced exclusively through the energy-shell constraint $p_0^2 = -2E$, which serves as a projection parameter mapping $S^3$ coordinates to flat $\mathbb{R}^3$ coordinates.
+\item \textbf{[MEASURED]} The discrete graph converges---numerically, through $n_{\max} = 30$---to a continuum limit, and that limit is conformally equivalent to the \textit{unit} $S^3$, regardless of any physical parameters.
+\item \textbf{[SYMBOLIC PROOF]} The Laplace-Beltrami operator on this unit sphere produces pure integer eigenvalues $\lambda_n = -(n^2 - 1)$, carrying no physical dimensions.
+\item \textbf{[SYMBOLIC PROOF]} The dimensionful Rydberg spectrum $E_n = -1/(2n^2)$ is introduced exclusively through the energy-shell constraint $p_0^2 = -2E$, which serves as a projection parameter mapping $S^3$ coordinates to flat $\mathbb{R}^3$ coordinates.
 \end{enumerate}
 
 These claims are supported by a suite of 18 symbolic checks, implemented in \texttt{sympy} and verified computationally, that confirm every algebraic step of the conformal transformation chain (several are limiting-case or definitional substitutions rather than logically independent theorems).
@@ -74,11 +74,11 @@ The stereographic projection formulas (Eqs.~\ref{eq:stereo_spatial}--\ref{eq:ste
 The following are the specific new contributions:
 
 \begin{enumerate}
-\item \textbf{Discrete graph convergence.} We demonstrate that the GeoVac discrete paraboloid lattice---with nodes $(n, l, m)$ and edges generated by $L_\pm, T_\pm$ operators---converges in the continuum limit to the Laplace-Beltrami operator on unit $S^3$. This connects a concrete computational framework (sparse graph eigenvalue problems) to the known continuous structure.
+\item \textbf{Discrete graph convergence.} \textbf{[MEASURED]} We demonstrate numerically, through $n_{\max} = 30$ and with no rate proven here, that the GeoVac discrete paraboloid lattice---with nodes $(n, l, m)$ and edges generated by $L_\pm, T_\pm$ operators---converges in the continuum limit to the Laplace-Beltrami operator on unit $S^3$. This connects a concrete computational framework (sparse graph eigenvalue problems) to the known continuous structure.
 
-\item \textbf{Explicit symbolic verification.} The 18 symbolic proofs (Appendix~\ref{app:tests}) provide a complete, machine-verified algebraic audit of the conformal transformation chain. While the underlying identities are known, this systematic verification in \texttt{sympy} is new and provides a reproducible computational check.
+\item \textbf{Explicit symbolic verification.} \textbf{[SYMBOLIC PROOF]} The 18 symbolic proofs (Appendix~\ref{app:tests}) provide a complete, machine-verified algebraic audit of the conformal transformation chain. While the underlying identities are known, this systematic verification in \texttt{sympy} is new and provides a reproducible computational check.
 
-\item \textbf{Scale-invariance framing.} We articulate the ``dimensionless vacuum'' perspective: the observation that the conformal factor $\Omega$ always produces the \textit{unit} $S^3$ regardless of $p_0$, and that all physical dimensions enter exclusively through the energy-shell constraint. While implicit in Fock's original treatment, this framing---and its implications for the GeoVac computational approach---has not been stated explicitly in the literature.
+\item \textbf{Scale-invariance framing.} We articulate the ``dimensionless vacuum'' perspective: the observation that the conformal factor $\Omega$ always produces the \textit{unit} $S^3$ regardless of $p_0$, and that all physical dimensions enter exclusively through the energy-shell constraint. \textbf{[OBSERVATION]} While implicit in Fock's original treatment, this framing---and its implications for the GeoVac computational approach---has not, to our knowledge, been stated explicitly in the literature.
 
 \item \textbf{Computational methodology.} The practical consequence: replacing continuous integration with sparse graph Laplacian eigenvalue problems that achieve $O(V)$ scaling, justified by the mathematical equivalence established here.
 \end{enumerate}
@@ -108,7 +108,7 @@ where $A_{ij}$ is the weighted adjacency matrix constructed from the transition 
 H = \kappa\, L = \kappa(D - A),
 \label{eq:hamiltonian}
 \end{equation}
-where $\kappa = -1/16$ is the kinetic scale factor---the constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum (the scale matching the binary graph's $\lambda_{\max} \to 8$ to the ground-state energy $-\tfrac12$).  This matching value \emph{coincides} with two independent conformal-geometry quantities at $1/16$ (Section~\ref{sec:discussion}): the universal $s$-wave Fock coupling $c^2(n,0) = (1/4)^2$ and the inverse Fock Jacobian $1/\Omega^4(0)$ with $\Omega(0) = 2$.  We record this as an \emph{observation}: the matching $\kappa$ and the geometric $1/16$ agree numerically, but are computed from disjoint inputs and no mechanism is known that derives one from the other.
+where $\kappa = -1/16$ is the kinetic scale factor---the constant that maps the dimensionless graph eigenvalues to the physical hydrogen spectrum (the scale matching the binary graph's $\lambda_{\max} \to 8$ to the ground-state energy $-\tfrac12$).  \textbf{[OBSERVATION]} This matching value \emph{coincides} with a single conformal-geometry value, $1/16$, which admits three equivalent readings (Section~\ref{sec:discussion}): the universal $s$-wave Fock coupling $c^2(n,0) = (1/4)^2$, equivalently the inverse Fock Jacobian $1/\Omega^4(0)$ with $\Omega(0) = 2$ in the dimensionless $p_0 = 1$ convention used throughout this section (dimensionfully $\Omega(0) = 2/p_0$).  We record this as an \emph{observation}: the matching $\kappa$ and the geometric $1/16$ agree numerically, but are computed from disjoint inputs and no mechanism is known that derives one from the other.
 
 \subsection{Intrinsic Dimensionlessness}
 
@@ -124,7 +124,7 @@ At finite $n_{\max}$, the graph Laplacian exhibits discretization artifacts: the
 \begin{equation}
 \Delta E_{2s\text{-}2p}(n_{\max}) \to 0 \quad \text{as} \quad n_{\max} \to \infty,
 \end{equation}
-recovering the exact Coulomb degeneracy at a rate consistent with spectral aliasing on a compact manifold. At $n_{\max} = 30$, the splitting has decayed to well under 1\%, continuing toward the exact Coulomb degeneracy.
+recovering the exact Coulomb degeneracy at a rate consistent with spectral aliasing on a compact manifold. \textbf{[MEASURED]} At $n_{\max} = 30$, the splitting has decayed to well under 1\%, continuing toward the exact Coulomb degeneracy.
 
 The recovered degeneracy is the hallmark of $SO(4)$ symmetry---the isometry group of $S^3$. The graph, in its continuum limit, therefore converges to a manifold with $SO(4)$ isometry, which uniquely identifies it as $S^3$ (up to discrete quotients).
 
@@ -152,7 +152,7 @@ A direct algebraic computation confirms that the image lies on the unit sphere:
 \sum_{i=1}^{4} n_i^2 = \frac{4p_0^2 p^2 + (p^2 - p_0^2)^2}{(p^2 + p_0^2)^2} = 1.
 \label{eq:unit_sphere}
 \end{equation}
-This identity holds for \textit{all} values of $p_0 > 0$. The parameter $p_0$ does not change the target manifold; it only changes which point in $\mathbb{R}^3$ maps to the south pole. This is our first key result:
+This identity holds for \textit{all} values of $p_0 > 0$. The parameter $p_0$ does not change the target manifold; it only changes which point in $\mathbb{R}^3$ maps to the south pole. \textbf{[SYMBOLIC PROOF]} This is our first key result:
 
 \medskip
 \noindent\textit{The stereographic projection always produces the unit $S^3$, regardless of $p_0$. The intrinsic geometry of the target manifold has no physical scale.}
@@ -177,7 +177,7 @@ and the induced metric on $S^3$, expressed in flat stereographic coordinates, ta
 \mathrm{d}s^2_{S^3} = \Omega^2\, \mathrm{d}p^2 = \frac{4}{(1 + u^2)^2}\, \mathrm{d}u^2.
 \label{eq:unit_metric}
 \end{equation}
-This is the standard round metric on the unit $S^3$ in stereographic coordinates. The factors of $p_0$ cancel identically, confirming that the intrinsic geometry is scale-invariant.
+This is the standard round metric on the unit $S^3$ in stereographic coordinates. \textbf{[SYMBOLIC PROOF]} The factors of $p_0$ cancel identically, confirming that the intrinsic geometry is scale-invariant.
 
 \subsection{The Chordal Distance Identity}
 
@@ -270,7 +270,7 @@ with eigenvalues
 \Delta_{S^3}\, C^1_{n-1}(\cos\chi) = -(n^2 - 1)\, C^1_{n-1}(\cos\chi).
 \label{eq:eigenvalues}
 \end{equation}
-We have verified Eq.~\eqref{eq:eigenvalues} symbolically for $n = 1, 2, 3$ using the conformal Laplacian formula, confirming exact agreement.
+\textbf{[SYMBOLIC PROOF]} We have verified Eq.~\eqref{eq:eigenvalues} symbolically for $n = 1, 2, 3$ using the conformal Laplacian formula, confirming exact agreement.
 
 \subsection{The Dimensionless Spectrum}
 
@@ -395,7 +395,7 @@ Under this substitution, Eq.~\eqref{eq:f0_momentum} becomes
   }
   \label{eq:f0_s3}
 \end{equation}
-This is the master formula: $F^0$ is a \emph{single} integral over one
+\textbf{[SYMBOLIC PROOF]} This is the master formula: $F^0$ is a \emph{single} integral over one
 $S^3$ coordinate, not a double integral over two points.
 
 \subsubsection{$1s$--$1s$ verification}
@@ -444,7 +444,7 @@ wavefunction. The integral evaluates to
   = \frac{77Z}{512} \,. \quad\checkmark
 \end{align}
 
-All three Slater integrals are reproduced exactly by the $S^3$
+\textbf{[SYMBOLIC PROOF]} All three Slater integrals are reproduced exactly by the $S^3$
 density-overlap formula~\eqref{eq:f0_s3} (verified symbolically in
 \texttt{tests/test\_paper7\_vee\_s3.py}: the three integrals evaluate to
 $5\pi/32$, $17\pi/324$, $77\pi/2048$ in exact arithmetic, reproducing
@@ -636,7 +636,7 @@ $S^3$ eigenvalues into dimensionful energies for the single-electron
 case.
 
 The 18 symbolic proofs of Appendix~\ref{app:tests} verify the
-$N = 1$ case.  The generalization to $N > 1$ is expected by the same
+$N = 1$ case.  \textbf{[CONJECTURE]} The generalization to $N > 1$ is expected by the same
 algebraic structure: the Laplace--Beltrami operator on $S^{3N-1}$
 is the continuum limit of a discrete graph Laplacian on the
 $N$-electron angular lattice, and its spectrum is determined by
@@ -650,7 +650,7 @@ the topology of the sphere alone.
 
 \subsection{Summary of Results}
 
-We have established a rigorous mathematical chain connecting the discrete GeoVac lattice to the continuous Schr\"odinger equation through three exact algebraic stages:
+We have established a mathematical chain connecting the discrete GeoVac lattice to the continuous Schr\"odinger equation through three stages---the first empirical, the second and third exact and algebraic:
 
 \textit{Stage 1: Discrete $\to$ Continuous.} The paraboloid lattice, with $n^2$-dimensional shells connected by $SU(2) \otimes SU(1,1)$ transition operators, converges in the continuum limit to the Laplace-Beltrami operator on a compact manifold with $SO(4)$ isometry.
 
@@ -658,7 +658,7 @@ We have established a rigorous mathematical chain connecting the discrete GeoVac
 
 \textit{Stage 3: Dimensionless $\to$ Dimensionful.} The energy-shell constraint $p_0^2 = -2E$ converts pure integer eigenvalues $\lambda_n = -(n^2 - 1)$ into the Rydberg energy levels $E_n = -1/(2n^2)$.
 
-Each stage has been verified by independent symbolic computation. The 18 passing tests constitute a complete algebraic audit of the conformal transformation chain, covering: the unit sphere constraint, the conformal factor identities, the projection limits, the chordal distance identity, the dot-product form, the volume Jacobian, the inverse projection, the connection term, the conformal Laplacian of $\Omega^2$, the zero-mode annihilation, the eigenvalue equation for $n = 2$ and $n = 3$, the conformal decomposition, and the eigenvalue-to-energy mapping.
+Stages 2 and 3 are verified by independent symbolic computation: the 18 passing tests constitute a complete algebraic audit of the conformal transformation chain, covering the unit sphere constraint, the conformal factor identities, the projection limits, the chordal distance identity, the dot-product form, the volume Jacobian, the inverse projection, the connection term, the conformal Laplacian of $\Omega^2$, the zero-mode annihilation, the eigenvalue equation for $n = 2$ and $n = 3$, the conformal decomposition, and the eigenvalue-to-energy mapping.  Stage 1---the graph-to-continuum convergence itself---is demonstrated empirically through $n_{\max} = 30$ with no rate proven here (see Limitations; the operator-system rate results of Paper~38~\cite{loutey_paper38} concern the truncated spectral triple, whose identification with this graph Laplacian is not established in this paper).
 
 \subsection{The Scale-Invariance Property}
 
@@ -686,9 +686,9 @@ which, when Fourier transformed to position space, yields the $1/r$ Coulomb pote
 
 The results of this paper provide a formal justification for the GeoVac framework's computational approach. The fact that the continuum limit of the graph Laplacian is conformally equivalent to the unit $S^3$ explains several empirical observations:
 
-\textit{Spectral exactness:} The algebraic operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum because they encode the $SO(4)$ Casimir structure of $S^3$.
+\textbf{[PANEL-VERIFIED]} \textit{Spectral exactness:} The algebraic operators $T_\pm, L_\pm$ reproduce the exact Rydberg \emph{quantum numbers} $n$ and $\ell(\ell+1)$ because they encode the $SO(4)$ Casimir structure of $S^3$; the energies follow only after the matched scale $\kappa$ is applied, which is an observation and not a derivation (Section~\ref{sec:discussion}).
 
-\textit{Discretization artifacts:} The $s/p$ splitting at finite $n_{\max}$ is spectral aliasing on a compact manifold---it arises from boundary effects in the finite graph and decays as $n_{\max} \to \infty$.
+\textbf{[OBSERVATION]} \textit{Discretization artifacts:} The $s/p$ splitting at finite $n_{\max}$ is spectral aliasing on a compact manifold---it arises from boundary effects in the finite graph and decays as $n_{\max} \to \infty$.
 
 \textit{Kinetic scale factor:} The constant $\kappa = -1/16$ is the
 kinetic scale factor that bridges the dimensionless graph and
@@ -710,11 +710,13 @@ This value admits three equivalent readings:
   \item The squared Chebyshev transition amplitude $(1/4)^2$;
   \item The inverse Fock Jacobian $1/\Omega^4(0)$, where $\Omega(0) = 2$
         is the stereographic conformal factor at the projection center
-        ($p = 0$);
+        ($p = 0$) in the dimensionless $p_0 = 1$ convention
+        (dimensionfully $\Omega(0) = 2/p_0$; the $\kappa$
+        observation is stated in the dimensionless convention);
   \item The $l = 0$ base rate of the Casimir decomposition in
         Eq.~\eqref{eq:fock_coupling}.
 \end{enumerate}
-We record this as an \emph{observation}, not a derivation:\ the
+\textbf{[OBSERVATION]} We record this as an \emph{observation}, not a derivation:\ the
 energy-matching $\kappa = -1/16$ (the scale mapping the graph's
 $\lambda_{\max} \to 8$ onto $-\tfrac12$) coincides numerically with the
 geometric $1/16$ above, but the two are computed from disjoint
@@ -728,30 +730,36 @@ that the graph topology correctly encodes the \textit{relative}
 spectral structure.
 
 A notable special value: $c^2(4,3) = 1/40 = \Delta$, the boundary
-term in Paper~2's fine-structure-constant formula
-$K = \pi(B + F - \Delta)$~\cite{loutey_paper2}.  This connects the
-highest-$l$ Fock coupling at the Paper~2 cutoff to the Dirac
-degeneracy $g_3^{\mathrm{Dirac}} = 40$ identified in Phase~4H
-(verified by \texttt{tests/test\_trunk\_qa\_c2\_delta.py}, which reaches
-$1/40$ by two independent routes).
+term in Paper~2's Observation-tier combination rule
+$K = \pi(B + F - \Delta)$~\cite{loutey_paper2}.  The value $\Delta =
+1/40$ is independently derived from the Dirac degeneracy
+$g_3^{\mathrm{Dirac}} = 40$ identified in Phase~4H; the coupling
+formula $c^2(n,l)$ itself is asserted here without derivation (its
+$l = 0$ slice is cross-checked via $1/\Omega^4(0)$, but the
+$l$-dependent content is not), \textbf{[OBSERVATION]} so the coincidence
+$c^2(4,3) = \Delta$ is a numerical observation about an asserted
+formula, not a two-route confirmation
+(\texttt{tests/test\_trunk\_qa\_c2\_delta.py} records exactly this
+status).  Deriving $c^2(n,l)$ from the Gegenbauer inter-shell
+coupling is the named upgrade path.
 
 \subsection{Limitations}
 
-Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence here---only demonstrated it empirically through $n_{\max} = 30$.  The rigorous state-space Gromov--Hausdorff convergence of the scalar truncations for compact groups (including $\mathrm{SU}(2) = S^3$) is established by Gaudillot-Estrada and van Suijlekom (arXiv:2310.14733); the Dirac/spinor analog, with explicit rate $(4/\pi)\log n/n$, is proved in Paper~38 of this series.
+Several caveats apply. First, the single-electron framework of Sections~\ref{sec:graph}--\ref{sec:operator} addresses hydrogen only. Section~\ref{sec:vee_s3} extends the framework to two-electron repulsion for $s$-orbital pairs; the general case with angular momentum requires the full three-dimensional Fourier convolution. Second, the conformal projection presented here recovers only the non-relativistic Schr\"odinger equation. Relativistic corrections (fine structure, spin-orbit coupling) presumably require additional geometric structure, such as the fiber bundle construction explored in companion papers \cite{loutey_paper0,loutey_paper1}. \textbf{[MEASURED]} Third, while the discretization artifacts of the graph Laplacian decay systematically, we have not proven a rate of convergence here---only demonstrated it empirically through $n_{\max} = 30$.  The rigorous state-space Gromov--Hausdorff convergence of the scalar truncations for compact groups (including $\mathrm{SU}(2) = S^3$) is established by Gaudillot-Estrada and van Suijlekom (arXiv:2310.14733); the Dirac/spinor analog, with explicit rate $(4/\pi)\log n/n$, is proved in Paper~38 of this series.
 
 \subsection{Concluding Remarks}
 
-Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. The scale invariance of this sphere---the fact that it is intrinsically the \textit{unit} $S^3$ regardless of the energy-shell parameter---was implicit in Fock's treatment but has not, to our knowledge, been stated as an explicit organizing principle. We have articulated this scale-invariance property and, more importantly, demonstrated that the GeoVac discrete graph Laplacian converges to the same $S^3$ structure in the continuum limit, establishing a rigorous mathematical foundation for the sparse graph computational approach.
+Vladimir Fock discovered in 1935 that the hydrogen atom, when viewed in momentum space, lives naturally on a three-sphere. The scale invariance of this sphere---the fact that it is intrinsically the \textit{unit} $S^3$ regardless of the energy-shell parameter---was implicit in Fock's treatment but has not, to our knowledge, been stated as an explicit organizing principle. We have articulated this scale-invariance property and, more importantly, \textbf{[MEASURED]} demonstrated numerically, through $n_{\max} = 30$, that the GeoVac discrete graph Laplacian converges to the same $S^3$ structure in the continuum limit.  That convergence is the empirical foundation of the sparse graph computational approach; the conformal chain from the limit onward is what is proven symbolically.
 
 Within this mathematical equivalence, the wave equation can be viewed as a continuous, dimensionful projection of a discrete, dimensionless topology. The Coulomb potential emerges as the coordinate distortion created by the stereographic flattening, and the energy levels emerge from the energy-shell constraint that parameterizes the projection.
 
-We emphasize that these are statements of mathematical equivalence, not claims about which formulation is physically prior. Whether the topological perspective points toward a deeper theory of quantum mechanics, or provides a computationally useful reformulation, is a question we leave to future investigation. What is established here is the precise mathematical chain connecting the discrete graph to the continuous equation, verified step by step through symbolic computation.
+We emphasize that these are statements of mathematical equivalence, not claims about which formulation is physically prior. Whether the topological perspective points toward a deeper theory of quantum mechanics, or provides a computationally useful reformulation, is a question we leave to future investigation. \textbf{[SYMBOLIC PROOF]} What is established here is the precise mathematical chain connecting the graph's \emph{continuum limit} to the continuous equation, verified step by step through symbolic computation; the convergence of the graph to that limit is demonstrated numerically, not proven.
 
 The $S^3$ conformal equivalence established here is one instance of a broader pattern: the discrete graph topology defined by the quantum number node structure $\{(n, l, m)\}$ admits multiple conformally distinct continuum embeddings, of which $S^3$ is the natural one for the single-center Coulomb problem.  The same combinatorial skeleton reappears in prolate spheroidal coordinates for one-electron diatomics~\cite{loutey_paper11}, hyperspherical coordinates for two-electron atoms~\cite{loutey_paper13}, molecule-frame hyperspherical coordinates for two-electron molecules, and composed fiber bundles for core--valence systems.  The full hierarchy of these embeddings, and the sense in which the discrete node structure serves as a combinatorial invariant across them, is catalogued in Paper~0~\cite{loutey_paper0}.
 
 \subsection{Extension to Molecules}
 
-The principle that the graph Laplacian should discretize the Laplace-Beltrami operator on the natural conformal manifold extends beyond single-center systems.  For diatomic molecules, the two-center Coulomb problem separates in prolate spheroidal coordinates $(\xi, \eta, \varphi)$, just as the single-center problem separates in spherical coordinates (leading to $S^3$ via Fock's projection).  Discretizing the Laplace-Beltrami operator on the prolate spheroid yields a molecular lattice with $R$-dependence built into the metric---no fitted parameters are required.  For H$_2^+$, this approach achieves $R_{\mathrm{eq}} = 2.001$~bohr (0.21\% error) and $E_{\min} = -0.598$~Ha (0.70\% error) with zero free parameters~\cite{loutey_paper11}.  This suggests a general principle: every separable quantum system has a natural lattice defined by the coordinate system in which separation occurs.
+The principle that the graph Laplacian should discretize the Laplace-Beltrami operator on the natural conformal manifold extends beyond single-center systems.  For diatomic molecules, the two-center Coulomb problem separates in prolate spheroidal coordinates $(\xi, \eta, \varphi)$, just as the single-center problem separates in spherical coordinates (leading to $S^3$ via Fock's projection).  Discretizing the Laplace-Beltrami operator on the prolate spheroid yields a molecular lattice with $R$-dependence built into the metric---no fitted parameters are required.  \textbf{[MEASURED]} For H$_2^+$, this approach achieves $R_{\mathrm{eq}} = 2.001$~bohr (0.21\% error) and $E_{\min} = -0.598$~Ha (0.70\% error) with zero free parameters~\cite{loutey_paper11}.  \textbf{[CONJECTURE]} This suggests a general principle: every separable quantum system has a natural lattice defined by the coordinate system in which separation occurs.
 
 
 %% ========================================================================
@@ -819,6 +827,14 @@ J. Loutey,
 Graphs,''
 GeoVac Paper 13 (2026).
 
+\bibitem{loutey_paper18}
+J.~Loutey,
+``Spectral-Geometric Exchange Constants: Projecting Discrete Spectra onto Continuous Manifolds,''
+GeoVac Paper~18 (2026).
+\bibitem{loutey_paper38}
+J.~Loutey,
+``State-space Gromov--Hausdorff convergence of truncated Camporesi--Higuchi spectral triples on $S^3$,''
+GeoVac Paper~38 (2026).
 \end{thebibliography}
 
 
@@ -885,23 +901,25 @@ $n_{\max}$ is a rational matrix whose ground-state eigenvalue is an
 algebraic number.
 
 At $n_{\max} = 7$ (1,218 singlet configurations), the graph-native
-energy is $-2.8983$~Ha (0.19\% error vs.\ exact $-2.903724$~Ha),
-with a convergence floor estimated at $\sim$0.14\%.
+\textbf{[MEASURED]} energy is $-2.8983$~Ha (0.19\% error vs.\ exact $-2.903724$~Ha),
+\textbf{[OBSERVATION]} with a convergence floor estimated at $\sim$0.14\%.
 The graph's off-diagonal one-body structure (inter-shell $T_\pm$
 couplings) is the dominant ingredient: replacing the graph Laplacian
-with the diagonal hydrogenic operator degrades the result to 1.41\%
+\textbf{[MEASURED]} with the diagonal hydrogenic operator degrades the result to 1.41\%
 (variational exponent) or 1.85\% (fixed $k = Z$).
 
 FCI basis invariance was verified computationally (Sprint~3D):
 transforming $V_{ee}$ to the graph eigenbasis yields energies
 identical to the graph-native result (to machine precision,
-$< 3 \times 10^{-15}$~Ha), confirming that the convergence floor
+$< 3 \times 10^{-15}$~Ha), \textbf{[OBSERVATION]} confirming that the convergence floor
 is not from basis mismatch but from the electron-electron cusp
 (embedding exchange constant, Paper~18).
 
 At $n_{\max} = 1$, the graph-native energy reduces to
-$E = -Z^2/2 + 5Z/8 = -11/8$~Ha for $Z = 2$, an exact rational.
-The variationally optimized single-exponent result $k^* = 27/16$,
+\textbf{[SYMBOLIC PROOF]} $E = -Z^2 + 5Z/8 = -11/4$~Ha for $Z = 2$, an exact rational
+(two one-body terms $-Z^2/2$ plus the repulsion $F^0(1s,1s) = 5Z/8$;
+an earlier printing halved the one-body sum and gave $-11/8$).
+\textbf{[SYMBOLIC PROOF]} The variationally optimized single-exponent result $k^* = 27/16$,
 $E^* = -729/256$~Ha is also an exact rational.
 A 2D variational solver treating hyperradius and hyperangle
 simultaneously (Paper~13, Note added v2.6.0) achieves 0.004\% with

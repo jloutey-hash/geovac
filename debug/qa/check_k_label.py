@@ -73,10 +73,21 @@ K_ANCHOR = re.compile(
     re.IGNORECASE,
 )
 
+# The 2026-09-01 trunk-FULL gap: Paper 32 called the rule "the alpha
+# prediction at $8.8 \times 10^{-8}$" -- naming it by its RESIDUAL VALUE,
+# which no K_ANCHOR pattern recognized, so the clause was never evaluated.
+# The residual uniquely identifies the K-rule match in this corpus (it is
+# the Paper 2 alpha^2-corrected match figure), so it is a safe anchor.
+K_ANCHOR_RESIDUAL = re.compile(
+    r"8\.8\s*\\times\s*10\^\{?-8\}?"
+    r"|8\.8e-0?8",
+    re.IGNORECASE,
+)
+
 # prohibited tier words (positive assertion that K is more than an Observation)
 TIER = re.compile(
     r"\b(deriv(?:e|ed|es|ation|able)|conjectur(?:e|ed|es|al)|theorem|"
-    r"proven|proof|proves?|predict(?:s|ed|ion)?)\b",
+    r"proven|proof|proves?|predict(?:s|ed|ions?|ive)?)\b",
     re.IGNORECASE,
 )
 
@@ -154,13 +165,30 @@ def scan_file(path: pathlib.Path) -> "list[tuple[int,str,str,str]]":
     hits = []
     for m in TIER.finditer(text):
         clause = clause_of(text, m.start(), m.end())
-        if not K_ANCHOR.search(clause):          # tier word must share a clause
-            continue                              # with a K-rule reference
+        if not (K_ANCHOR.search(clause)
+                or K_ANCHOR_RESIDUAL.search(clause)):
+            continue          # tier word must share a clause with a K-ref
         low = clause.lower()
         # local "before the tier word" inside the clause, for direction
         rel = m.start() - text.rindex(clause) if clause in text else 0
         before = low[max(0, rel - 60):rel]
         neg_ok = NEG.search(before) and "no longer" not in before
+        # 2026-09-01 (trunk-FULL A1): a negation only excuses the tier
+        # word if nothing indicates it binds elsewhere.  If a DEFINITE
+        # determiner (the/its/this/that) intervenes between the last
+        # negation and the tier word, the negation binds an earlier
+        # predicate and the tier word is being asserted as a definite
+        # label: "what is NOT duplicated is THE alpha prediction" still
+        # calls K a prediction.  Genuine denials are indefinite or
+        # verbal -- "not a prediction", "never predicted", "not derived"
+        # -- and keep neg_ok.
+        if neg_ok:
+            _last = None
+            for _nm in NEG.finditer(before):
+                _last = _nm
+            _between = before[_last.end():] if _last else ""
+            if re.search(r"\b(?:the|its|this|that)\b", _between):
+                neg_ok = False
         verdict = "SUSPECT"
         if neg_ok or HYP.search(low) or NONSEL.search(low) or IMPERATIVE.search(clause):
             verdict = "COMPLIANT"

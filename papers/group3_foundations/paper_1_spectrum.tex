@@ -12,7 +12,7 @@
 \date{February 22, 2026}
 
 \begin{abstract}
-We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum $E_n = -1/(2n^2)$ from operator eigenvalues. \textbf{(ii) Geometric artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff (peaking near $n_{\max}=8$ at $\sim$16\% and falling to $\sim$1.7\% by $n_{\max}=10$; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
+We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum $E_n = -1/(2n^2)$ from operator eigenvalues. \textbf{(ii) Geometric artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff (peaking near $n_{\max}=8$ at $\sim$16\% and falling to $\sim$1.7\% by $n_{\max}=10$; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
 \end{abstract}
 
 \maketitle
@@ -51,14 +51,14 @@ The operator weights are determined by the Biedenharn-Louck calculus \cite{biede
 
 \subsection{Spectral Reproduction}
 
-The critical test of this algebra is spectroscopic: do the operators reproduce the Rydberg formula? We construct the Hamiltonian operator from the Casimir invariants of the algebra. The energy eigenvalues are
+The critical test of this algebra is spectroscopic: do the operators reproduce the Rydberg formula? We construct the Hamiltonian operator from the Casimir invariants of the algebra. \textbf{[PANEL-VERIFIED]} The energy eigenvalues are
 \begin{equation}
 E_n = -\frac{1}{2n^2} \quad (\text{Hartree atomic units}),
 \label{eq:rydberg}
 \end{equation}
 in exact agreement with the hydrogen spectrum. No fitting parameters are required; the algebra determines the spectrum uniquely.
 
-This result validates the lattice as a faithful discrete representation of the hydrogen Hilbert space. The nodes are not a coarse-graining---they \textit{are} the quantum states. The edges encode physically allowed transitions. The spectrum emerges from operator eigenvalues, not from solving differential equations. (Verified in \texttt{tests/test\_paper1\_rydberg.py}: the $SU(1,1)$ number operator $N = -2[T_+, T_-]$, assembled purely from the ladder generators, has integer spectrum $\{n\}$ and the $SU(2)$ Casimir $L^2$ gives $l(l+1)$, both bit-exact, so $E_n = -1/(2n^2)$ follows from the algebra. This is the dynamical-symmetry construction; the discrete graph Laplacian $L = D - A$ is separately positive-semidefinite and reproduces the spectrum only in the continuum limit, Paper~7.)
+This result validates the lattice as a faithful discrete representation of the hydrogen Hilbert space. The nodes are not a coarse-graining---they \textit{are} the quantum states. The edges encode physically allowed transitions. The spectrum emerges from operator eigenvalues, not from solving differential equations. (Verified in \texttt{tests/test\_paper1\_rydberg.py}: the $SU(1,1)$ number operator $N = -2[T_+, T_-]$, assembled purely from the ladder generators, has integer spectrum $\{n\}$ and the $SU(2)$ Casimir $L^2$ gives $l(l+1)$, both bit-exact, so $E_n = -1/(2n^2)$ follows from the algebra. This is the dynamical-symmetry construction; the discrete graph Laplacian $L = D - A$ is separately positive-semidefinite and reproduces the spectrum only in the continuum limit, Paper~7~\cite{loutey_paper7}.)
 
 
 \section{The Geometric Flesh: Topological Artifacts of Finite Truncation}
@@ -93,7 +93,7 @@ The crucial observation is that the degree matrix $D$ is \textit{not rotationall
 \text{Pole (2s):} \quad & D_{(2,0,0)} = 0.854, \\
 \text{Equator (2p):} \quad & D_{(2,1,0)} = 3.416.
 \end{align}
-States with higher angular momentum $l$ have \textit{more connections}---more available transitions to neighboring states. This higher connectivity translates to higher on-site energy in the Laplacian formulation.
+\textbf{[PANEL-VERIFIED]} States with higher angular momentum $l$ have \textit{more connections}---more available transitions to neighboring states. This higher connectivity translates to higher on-site energy in the Laplacian formulation.
 
 \subsection{The Splitting as Discretization Artifact}
 
@@ -115,7 +115,7 @@ convergence analysis reveals it is a \textbf{discretization artifact}
 of finite lattice truncation---the graph-theoretic analog of spectral
 aliasing in finite-element methods.
 
-\paragraph{QA correction (2026-06-14).}  The specific quantitative
+\paragraph{QA correction (2026-06-14).}  \textbf{[MEASURED]} The specific quantitative
 values in this section---the degrees $D_{2s} = 0.854$, $D_{2p} = 3.416$,
 the eigenvalues $\lambda_{2s} = 0.0202$, $\lambda_{2p} = 0.0238$, and the
 $16\%$ splitting quoted at $n_{\max} = 10$---are \emph{not} reproduced by
@@ -130,13 +130,14 @@ content:\ higher-$l$ states have higher connectivity ($D_{2p} > D_{2s}$),
 and the $s/p$ splitting decays (oscillatorily) to zero as
 $n_{\max} \to \infty$.  The specific figures are retained as illustrative
 pending a reconstruction of the CG-weighted construction. \emph{This
-caveat applies wherever these figures recur---the abstract, Table~I, the
-convergence list below, and the figure captions.}
+caveat applies wherever these figures recur---the abstract, Table~I, and
+the convergence list below.  (The placeholder figure environments that
+also restated them were removed 2026-09-01.)}
 
 \subsection{Convergence Analysis}
 
 The key diagnostic is the behavior of $\Delta E_{\mathrm{rel}}$ as
-$n_{\max} \to \infty$. We swept the lattice cutoff from $n_{\max} = 5$
+$n_{\max} \to \infty$. \textbf{[MEASURED]} We swept the lattice cutoff from $n_{\max} = 5$
 (55 vertices) through $n_{\max} = 30$ (9{,}455 vertices) and tracked
 the 2s/2p splitting at each resolution:
 
@@ -160,8 +161,10 @@ of the continuum Coulomb problem is recovered.
 
 \subsection{Physical Interpretation}
 
-The 2p state, with its higher weighted degree
-($D_{2p} \approx 4 \times D_{2s}$), is more sensitive to the
+\textbf{[PANEL-VERIFIED]} The 2p state, with its higher weighted degree
+($D_{2p} > D_{2s}$; the ``$4 \times$'' ratio came from the
+non-reproducing Table~\ref{tab:degrees} figures --- see the \S III QA
+note), is more sensitive to the
 lattice boundary than the 2s state. At finite $n_{\max}$, the
 truncation acts as an absorbing wall that differentially perturbs
 high-connectivity nodes. This is a \emph{geometric boundary effect},
@@ -172,10 +175,10 @@ Hamiltonian. The transient splitting arises entirely from the finite
 extent of the graph, not from any force encoded in the topology.
 The graph Laplacian does not spontaneously generate the Lamb shift
 or replace electromagnetic interactions; it faithfully reproduces
-the Coulomb degeneracy in the limit of large lattices. We understand
-exactly how our discrete mesh maps onto the continuous spectrum and
-where the aliasing boundaries lie---a hallmark of mathematical rigor
-rather than a physical limitation.
+the Coulomb degeneracy in the limit of large lattices.  \textbf{[MEASURED]} The $s/p$
+splitting is a characterisable discretization artifact whose aliasing
+boundaries are mapped empirically through $n_{\max} = 30$ (no
+convergence rate is proven; see the \S III QA note).
 
 
 \section{Geometric Phase Structure of the Lattice}
@@ -213,7 +216,7 @@ $SU(2)$ angular-momentum operators,
 $\langle l,m\!+\!1|L_+|l,m\rangle = \sqrt{(l-m)(l+m+1)}$,
 and for the $SU(1,1)$ radial operators,
 $\langle n\!+\!1,l|T_+|n,l\rangle = \sqrt{(n-l)(n+l+1)/4}$.
-All four factors are \textbf{real and positive}.  Therefore
+\textbf{[SYMBOLIC PROOF]} All four factors are \textbf{real and positive}.  Therefore
 \begin{equation}
 \theta = \arg(\text{positive real number}) = 0
 \qquad\text{for every plaquette at every $(n,l,m)$.}
@@ -239,17 +242,23 @@ plaquette:
 \Theta(n) = \ln w_{12} + \ln w_{23} - \ln w_{34} - \ln w_{41},
 \label{eq:log_holonomy}
 \end{equation}
-where $w_{ij}$ are the adjacency-matrix weights along each edge.  For the
+where $w_{ij}$ are the adjacency-matrix weights along each edge.  \textbf{[SYMBOLIC PROOF]} For the
 topological weights $w = 1/(n_1 n_2)$, the $T_\pm$ edges share the factor
 $1/\bigl(n(n+1)\bigr)$ and cancel, leaving
 \begin{equation}
 \Theta(n) = \ln\!\frac{1}{(n+1)^2} - \ln\!\frac{1}{n^2}
            = -2\ln\!\frac{n+1}{n}
-           \;\sim\; \frac{2}{n}
+           \;\sim\; -\frac{2}{n}
            \qquad (n \gg 1).
 \label{eq:log_holonomy_exact}
 \end{equation}
-The per-plaquette log-holonomy decays as $n^{-1}$ exactly ($k = 1.0$,
+Both results---$\theta = 0$ on every plaquette (with a phased-plaquette
+control confirming the detector is not vacuous) and the exact
+$\Theta(n)$ closed form with its $n^{-1}$ decay---are pinned by
+\texttt{tests/test\_paper1\_geometric\_phase.py} (added 2026-09-01,
+closing a coverage gap: the prior Berry-phase artifact was archived
+with the retracted $k = 2.113$ claim).
+\textbf{[MEASURED]} The per-plaquette log-holonomy decays as $n^{-1}$ exactly ($k = 1.0$,
 $R^2 = 1.0$).  This measures the \textbf{curvature of the weight function}
 ---how edge weights vary across the lattice---not a genuine geometric phase
 in the Berry sense.
@@ -268,7 +277,7 @@ Possible extensions include:
   parameter-dependent Hamiltonian (as in the hyperspherical $P_{\mu\nu}(R)$
   connection of Ref.~\cite{paper13}).
 \end{enumerate}
-Whether any such extension recovers a scaling exponent near $k \approx 2$
+\textbf{[OPEN]} Whether any such extension recovers a scaling exponent near $k \approx 2$
 (the velocity-dependent kinematic factor $v^2 \propto n^{-2}$) remains an
 open question for future work.
 
@@ -296,11 +305,18 @@ This is not a failure---it is a fundamental feature of the duality. The Laplacia
 
 \subsection{The Absence of Fine Structure}
 
-A comprehensive computational search for the fine structure constant $\alpha \approx 1/137$ within the lattice geometry yields a null result. We examined:
+\textbf{[MEASURED]} A comprehensive computational search for the fine structure constant $\alpha \approx 1/137$ within the lattice geometry yields a null result. We examined:
 \begin{enumerate}
-\item \textbf{Operator ratios:} The gearing ratio $\|L_+\|/\|T_+\|$ does \emph{not} converge to a fixed value (the spectral-norm ratio is exactly $2.0$; the Frobenius-norm ratio drifts through $\approx 1.77$ without converging---\texttt{tests/test\_trunk\_qa\_gearing.py}), so it encodes no physical constant such as $137$ or $1/\alpha$.  The commutator $[T_+, L_+] = 0$, however, \emph{is} bit-exact.
-\item \textbf{Commutator defects:} The operators commute exactly, $[T_+, L_+] = 0$, indicating perfect integrability rather than non-commutative geometry.
-\item \textbf{Holonomy defects:} The Berry phase is identically zero for real operators (Section~\ref{sec:relativity}); the log-holonomy decays as $n^{-1}$, reflecting the asymptotic flatness of the weight function.
+\item \textbf{Operator ratios:} \textbf{[PANEL-VERIFIED]} The spectral-norm gearing ratio
+$\|L_+\|/\|T_+\| = 2.0$ \emph{exactly}---at every lattice cutoff
+tested, not proved for all $n_{\max}$---while the Frobenius-norm ratio drifts through
+$\approx 1.77$ without converging
+(\texttt{tests/test\_trunk\_qa\_gearing.py}).  Neither encodes a
+physical constant such as $137$ or $1/\alpha$: the spectral value is $2$,
+and the drifting one is not a constant.  The commutator
+$[T_+, L_+] = 0$, however, \emph{is} bit-exact.
+\item \textbf{Commutator defects:} \textbf{[PANEL-VERIFIED]} The operators commute exactly, $[T_+, L_+] = 0$, indicating perfect integrability rather than non-commutative geometry.
+\item \textbf{Holonomy defects:} \textbf{[SYMBOLIC PROOF]} The Berry phase is identically zero for real operators (Section~\ref{sec:relativity}); the log-holonomy decays as $n^{-1}$, reflecting the asymptotic flatness of the weight function.
 \end{enumerate}
 
 This null result is \textit{physically correct}. The fine structure constant $\alpha = e^2/(4\pi\epsilon_0 \hbar c)$ measures the strength of electromagnetic interactions---specifically, the coupling between electron and photon fields. Our lattice describes the \textit{kinematic} structure of the electron state space without electromagnetic interactions. The hydrogen spectrum $E_n = -1/(2n^2)$ is independent of $\alpha$; fine structure appears only through:
@@ -343,10 +359,10 @@ If quantum states are discrete nodes, what is the wavefunction $\psi(r)$? One po
 
 We have demonstrated that quantum mechanics, when formulated on a discrete paraboloid lattice, exhibits a dual structure:
 \begin{itemize}
-\item \textbf{Algebraic exactness:} Transition operators reproduce the hydrogen spectrum without corrections.
-\item \textbf{Understood discretization artifacts:} The graph Laplacian lifts $s/p$ degeneracy at finite $n_{\max}$ (up to $\sim$16\% at intermediate $n_{\max}$, near $n_{\max}=8$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates and decays below 1\% by $n_{\max}=30$, recovering the exact Coulomb degeneracy.
-\item \textbf{Geometric phase structure:} The Berry phase vanishes identically for the real-valued $SU(2)/SU(1,1)$ operators; the edge-weight log-holonomy decays as $\Theta \propto n^{-1}$, measuring the curvature of the weight function. Whether a $U(1)$ gauge extension can produce a genuine geometric phase with relativistic scaling remains an open question.
-\item \textbf{Kinematic completeness:} The lattice encodes all $\alpha$-independent physics---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
+\item \textbf{Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators reproduce the hydrogen spectrum without corrections.
+\item \textbf{Understood discretization artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite $n_{\max}$ (up to $\sim$16\% at intermediate $n_{\max}$, near $n_{\max}=8$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates and decays below 1\% by $n_{\max}=30$, recovering the exact Coulomb degeneracy.
+\item \textbf{Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued $SU(2)/SU(1,1)$ operators; the edge-weight log-holonomy decays as $\Theta \propto n^{-1}$, measuring the curvature of the weight function. Whether a $U(1)$ gauge extension can produce a genuine geometric phase with relativistic scaling remains an open question.
+\item \textbf{Kinematic completeness:} \textbf{[OBSERVATION]} The lattice encodes all $\alpha$-independent physics---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
 \end{itemize}
 
 These results support a graph-theoretic reformulation of the hydrogen state space in which the algebraic operators encode the exact spectrum and the graph Laplacian introduces controlled, quantitatively understood finite-size artifacts. The algebra-geometry duality is suggestive of a connection to wave-particle complementarity, though we do not claim it establishes one. Critically, the graph Laplacian does not replace electromagnetic interactions or generate the Lamb shift; it encodes the kinematic manifold of the electron.
@@ -373,7 +389,12 @@ To incorporate electromagnetic interactions, one must construct a second geometr
 \item \textbf{Symplectic impedance:} If both manifolds carry action (units of $\hbar$), their ratio may define a dimensionless coupling constant.
 \end{itemize}
 
-We conjecture that the fine structure constant $\alpha$ emerges as the \textit{geometric impedance}---the ratio of action densities between the electron paraboloid and the photon fiber. This hypothesis is explored in a companion paper \cite{companion_alpha}, which introduces a helical photon gauge fiber and computes the symplectic coupling ratio.
+\textbf{[CONJECTURE]} We conjecture that the fine structure constant $\alpha$ emerges as the \textit{geometric impedance}---the ratio of action densities between the electron paraboloid and the photon fiber. A companion paper \cite{companion_alpha} records the related
+observation that $\alpha$ satisfies the cubic
+$\alpha^3 - K\alpha + 1 = 0$ with $K = \pi(B + F - \Delta)$ on the
+Hopf fibration.  It concludes that $\alpha$ behaves as a projection
+constant, not derivable from any single principle; the impedance
+picture above thus remains unexplored.
 
 \textbf{Outlook:}
 
@@ -383,45 +404,6 @@ This framework invites generalization. If hydrogen is a paraboloid, what geometr
 \begin{acknowledgments}
 We thank the developers of \texttt{scipy.sparse} for enabling efficient eigenvalue computations on large lattice Hamiltonians. We acknowledge the foundational work on hydrogen dynamical symmetry by Fock, Barut, and the Biedenharn-Louck formulation of angular momentum coupling.
 \end{acknowledgments}
-
-\begin{thebibliography}{99}
-
-\bibitem{barut1967}
-A.~O. Barut and H. Kleinert,
-``Transition probabilities of the hydrogen atom from noncompact dynamical groups,''
-Phys. Rev. \textbf{156}, 1541 (1967).
-
-\bibitem{fock1935}
-V. Fock,
-``Zur Theorie des Wasserstoffatoms,''
-Z. Phys. \textbf{98}, 145 (1935).
-
-\bibitem{biedenharn1981}
-L.~C. Biedenharn and J.~D. Louck,
-\textit{Angular Momentum in Quantum Physics},
-Encyclopedia of Mathematics and its Applications, Vol. 8 (Addison-Wesley, Reading, MA, 1981).
-
-\bibitem{berry1984}
-M.~V. Berry,
-``Quantal phase factors accompanying adiabatic changes,''
-Proc. R. Soc. Lond. A \textbf{392}, 45 (1984).
-
-\bibitem{chung1997}
-F.~R.~K. Chung,
-\textit{Spectral Graph Theory},
-CBMS Regional Conference Series in Mathematics, Vol. 92 (American Mathematical Society, Providence, RI, 1997).
-
-\bibitem{companion_alpha}
-J. Loutey,
-``The Fine Structure Constant as a Spectral Coincidence on the Hopf Fibration,''
-(companion paper, 2026).
-
-\bibitem{paper13}
-J. Loutey,
-``The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel Graphs,''
-(companion paper, 2026).
-
-\end{thebibliography}
 
 \appendix
 
@@ -463,7 +445,7 @@ A = |T_+| + |T_-| + |L_+| + |L_-|.
 \end{equation}
 The graph Laplacian $L = D - A$ was stored in compressed sparse row (CSR) format. The weighted degree matrix $D$ had diagonal elements ranging from 0.854 to 20.624, with mean degree 12.42.
 
-Eigenvalue computation used the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}) with $\sigma = -1.0$, computing the lowest 20 eigenvalues. Diagonalization required 0.15 seconds on a standard workstation; the $O(V)$ sparse-eigenvalue scaling is verified by \texttt{tests/test\_ov\_scaling\_rigorous.py} (multi-point log--log fit).
+Eigenvalue computation used the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}) with $\sigma = -1.0$, computing the lowest 20 eigenvalues. Diagonalization required 0.15 seconds on a standard workstation; \textbf{[MEASURED]} the $O(V)$ sparse-eigenvalue scaling is verified by \texttt{tests/test\_ov\_scaling\_rigorous.py} (multi-point log--log fit).
 
 State identification was performed by computing overlap probabilities $|\langle n,l,m | \psi_k \rangle|^2$ for each eigenvector $|\psi_k\rangle$, selecting the eigenvector with maximal overlap for each target state.
 
@@ -498,25 +480,53 @@ $(3,2,0)$ & 6.124 & 3d & --- \\
 \label{tab:degrees}
 \end{table}
 
-\begin{figure}[h]
-\centering
-\fbox{\parbox{0.9\columnwidth}{\centering [Placeholder: 3D visualization of paraboloid lattice showing nodes $(n,l,m)$ and edges from $T_\pm, L_\pm$ operators. Highlight color-coded shells for $n=1,2,3$ and pole vs. equator connectivity.]}}
-\caption{The paraboloid lattice structure for $n \leq 5$. Nodes represent quantum states $|n, l, m\rangle$, and edges represent transitions via $L_{\pm}$ and $T_{\pm}$ operators. The pole ($l=0$) has systematically lower weighted connectivity than the equator ($l > 0$), producing differential degree values that contribute to finite-size splitting.}
-\label{fig:lattice}
-\end{figure}
+% Three [Placeholder] figure environments (fig:lattice, fig:killswitch,
+% fig:relativity) were removed 2026-09-01 (trunk-FULL remediation B10):
+% never generated, unreferenced in text, and this paper's own Erratum
+% retracted a claim precisely because its figure remained a placeholder.
 
-\begin{figure}[h]
-\centering
-\fbox{\parbox{0.9\columnwidth}{\centering [Placeholder: Bar chart showing eigenvalues $\lambda_0, \lambda_1, \ldots, \lambda_{19}$ from Laplacian diagonalization. Highlight $\lambda_{2s} = 0.0202$ (red bar) and $\lambda_{2p} = 0.0238$ (blue bar) with splitting $\Delta E = 0.0035$ annotated.]}}
-\caption{Eigenvalue spectrum from exact diagonalization of the graph Laplacian Hamiltonian (Eq.~\ref{eq:ham_graph}) for $n_{\max} = 10$. The $2s$ state (red, $\lambda = 0.0202$) and $2p$ state (blue, $\lambda = 0.0238$) show a splitting of $\Delta E = 0.0035$ (16\% relative) at this truncation. This splitting is a discretization artifact that decays to $<$0.01\% by $n_{\max} = 30$.}
-\label{fig:killswitch}
-\end{figure}
 
-\begin{figure}[h]
-\centering
-\fbox{\parbox{0.9\columnwidth}{\centering [Placeholder: Log-log plot of log-holonomy $\Theta(n)$ vs. principal quantum number $n$. Data points shown as circles, exact curve $\Theta = -2\ln((n+1)/n)$ as solid line. Annotate power-law exponent $k = 1.0$ exactly.]}}
-\caption{Log-holonomy $\Theta(n) = -2\ln((n{+}1)/n)$ versus principal quantum number $n$ (log-log plot). The exact $n^{-1}$ decay ($k = 1.0$, $R^2 = 1.0$) measures the curvature of the edge-weight function across the lattice. The Berry phase is identically zero for all plaquettes (Section~\ref{sec:relativity}).}
-\label{fig:relativity}
-\end{figure}
+\begin{thebibliography}{99}
+
+\bibitem{barut1967}
+A.~O. Barut and H. Kleinert,
+``Transition probabilities of the hydrogen atom from noncompact dynamical groups,''
+Phys. Rev. \textbf{156}, 1541 (1967).
+
+\bibitem{fock1935}
+V. Fock,
+``Zur Theorie des Wasserstoffatoms,''
+Z. Phys. \textbf{98}, 145 (1935).
+
+\bibitem{biedenharn1981}
+L.~C. Biedenharn and J.~D. Louck,
+\textit{Angular Momentum in Quantum Physics},
+Encyclopedia of Mathematics and its Applications, Vol. 8 (Addison-Wesley, Reading, MA, 1981).
+
+\bibitem{berry1984}
+M.~V. Berry,
+``Quantal phase factors accompanying adiabatic changes,''
+Proc. R. Soc. Lond. A \textbf{392}, 45 (1984).
+
+\bibitem{chung1997}
+F.~R.~K. Chung,
+\textit{Spectral Graph Theory},
+CBMS Regional Conference Series in Mathematics, Vol. 92 (American Mathematical Society, Providence, RI, 1997).
+
+\bibitem{companion_alpha}
+J. Loutey,
+``The Fine Structure Constant as a Spectral Coincidence on the Hopf Fibration,''
+(companion paper, 2026).
+
+\bibitem{paper13}
+J. Loutey,
+``The Hyperspherical Lattice: Two-Electron Atoms as Coupled Channel Graphs,''
+(companion paper, 2026).
+
+\bibitem{loutey_paper7}
+J.~Loutey,
+``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation from Scale-Invariant Graph Topology,''
+GeoVac Paper~7 (2026).
+\end{thebibliography}
 
 \end{document}

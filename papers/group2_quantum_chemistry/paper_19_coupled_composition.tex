@@ -26,9 +26,12 @@ Two-Center Sturmian Integrals and Coupled Composition}
 The composed natural geometry framework (Paper~17) constructs
 molecular Hamiltonians by partitioning electrons into single-center
 blocks and coupling them via Phillips--Kleinman (PK) pseudopotentials.
-This produces structurally sparse qubit Hamiltonians---$O(Q^{2.5})$
-Pauli scaling, 51--1{,}712$\times$ fewer terms than Gaussian
-baselines (Paper~14)---but PK limits accuracy to 5.3--19.4\%
+This produces structurally sparse qubit Hamiltonians---a Pauli count
+exactly linear in the qubit count across molecules at fixed basis,
+$N_{\mathrm{Pauli}} = 27.90 \times Q$, with $54\times$--$317\times$
+fewer terms than equal-qubit Gaussian baselines (Paper~14; the
+retired pair-diagonal rule gave $O(Q^{2.5})$ and
+51--1{,}712$\times$)---but PK limits accuracy to 5.3--19.4\%
 equilibrium bond length error.  PK has resisted improvement:\ six
 modification attempts have failed (v2.0.6--23), and the overcounting
 diverges at higher angular momentum.
@@ -106,8 +109,10 @@ molecular, not atomic (Track~AD, v2.0.18).
 
 At the same time, PK is essential for the composed framework's
 sparsity: it makes the electron repulsion integral (ERI) tensor
-block-diagonal, yielding $O(Q^{2.5})$ Pauli scaling
-(Paper~14)~\cite{loutey_paper14}.  Without PK, the block
+block-diagonal, yielding a Pauli count exactly linear in the qubit
+count across molecules at fixed basis
+($N_{\mathrm{Pauli}} = 27.90 \times Q$,
+Paper~14)~\cite{loutey_paper14}.  Without PK, the block
 decomposition has no coupling at all.
 
 The question motivating this paper is: \emph{can PK be replaced by
@@ -510,13 +515,12 @@ The balanced Hamiltonian has 2{,}726 Pauli terms, confirming the
 ratio form of Conjecture~\ref{conj:sparsity} ($3.25\times$ the composed
 838, under the conjectured $4.5\times$) but not its absolute form:
 2{,}726 exceeds both the $\sim 1{,}500$ the ratio implied at the
-retired composed count and the STO-3G count of 907.  It remains
-below the
-conjectured bound of ${\sim}1{,}500$.  The 1-norm of the balanced
-Hamiltonian (74.1~Ha) is \emph{lower} than the coupled CB value
-(85.7~Ha) because the attractive cross-center $V_{ne}$ partially
+retired composed count and the STO-3G count of 907.  The 1-norm of the balanced
+Hamiltonian (75.2~Ha) is \emph{lower} than the coupled CB value
+(80.5~Ha) because the attractive cross-center $V_{ne}$ partially
 cancels the repulsive cross-block $V_{ee}$.  The QWC group count
-(87) remains far below the Gaussian baseline (273).
+(629; 87 under the retired pair-diagonal rule) no longer sits below
+the Gaussian baseline (273).
 
 \subsection{Cross-center $V_{ne}$ census}
 
@@ -1986,8 +1990,9 @@ computational advantage?
 
 If the answer is yes, the composed framework would be superseded by
 coupled composition: same block structure, same Gaunt selection
-rules, same $O(Q^{2.5})$ scaling class, but without PK and with
-significantly better accuracy.  Paper~17's composed architecture
+rules, the composed builder's structural sparsity retained (a Pauli
+count exactly linear in $Q$ across molecules at fixed basis,
+Paper~14), but without PK and with significantly better accuracy.  Paper~17's composed architecture
 would then move to the archive, replaced by the coupled composition
 as the production molecular Hamiltonian builder.
 

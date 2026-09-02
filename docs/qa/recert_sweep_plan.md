@@ -61,6 +61,21 @@ defect is found once, by the cheapest detector that can see it.
 >   examined nothing. Fixed; `debug/qa/gate_coverage_matrix.py` is now the
 >   standing proof.
 
+> **UPDATE 2026-09-01 — `/qa trunk` FULL run = FAIL.** Phase 1 is complete and
+> did not certify. Two consequences for this plan:
+>
+> - **group3's 2026-08-29 certification is compromised.** The retired
+>   `O(Q^2.5)` / `51x-1712x` figures are live at ~20 loci across 7 documents,
+>   including a Paper 22 Corollary *titled* with the retired exponent. That
+>   survived a certification issued the same day as the correction. group3
+>   needs a fresh cycle whatever the sweep order.
+> - **group2 is not finished either.** My v5.2.4 sprint cleared C21's list,
+>   but C21 was blind to these values, so Paper 19's abstract still carries
+>   them. Re-check group2 after the registry fix lands.
+>
+> Remediation scope: `docs/qa/trunk.carryforward.md`. Fix the gates (Part A)
+> before the content, or the content fixes cannot be verified.
+
 ## 2. The stability precondition (read before firing anything)
 
 A certification is a statement about a **frozen** surface. If Layer-2 work
@@ -218,6 +233,17 @@ after the six groups are. Four of its documents changed (985 lines), and three
 of those diffs are edits the group runs will already have reviewed — which is
 fine and expected: the synthesis question is not "is this number right" but
 "does this summary still faithfully represent that paper".
+
+**Standing obligation added 2026-09-01 (trunk carryforward D2).** The
+syntheses carry **zero** rows in `docs/claim_test_matrix.md`, so C1/C2 cannot
+see them *by construction* — which is the structural reason a withdrawn-
+theorem sentence was able to sit in the group3 synthesis's opening paragraph
+through prior certifications. The trunk sprint adds rows for
+`group3_foundations_synthesis.tex` only. **Each remaining group owes rows for
+its own synthesis as part of its re-cert** — group1, group2, group4, group5,
+group6, plus the field guide. Rule: a synthesis row carries the tier of the
+*source paper's* claim, never a fresh judgment, so a synthesis asserting more
+than its source becomes a defect by construction rather than a judgment call.
 
 ---
 

@@ -25,6 +25,15 @@ from geovac.dirac_s3 import delta_inverse_identity, dirac_degeneracy
 
 
 def c2_formula(n: int, l: int) -> sp.Rational:
+    # HONESTY NOTE (2026-09-02, trunk-FULL remediation): this formula is
+    # ASSERTED, not derived.  It appears in Paper 7's Discussion with no
+    # derivation and has no production implementation in geovac/ -- this
+    # test file is its only executable form.  Evaluating it here is a
+    # transcription of the paper's claim, NOT an independent route to
+    # 1/40.  The one genuinely independent route in this file is
+    # delta_inverse_identity() (the g_3^Dirac count from production
+    # code).  Deriving c^2(n,l) from the Gegenbauer coupling and
+    # implementing it in geovac/ is the named upgrade path.
     return Rational(1, 16) * (1 - Rational(l * (l + 1), n * (n + 1)))
 
 
@@ -34,12 +43,17 @@ def test_c2_4_3_is_one_fortieth_exact():
 
 
 def test_c2_4_3_matches_independent_delta():
-    """c^2(4,3) (Fock coupling route) == Delta (spinor degeneracy route)."""
+    """The ASSERTED c^2(n,l) formula at (4,3) coincides with Delta = 1/40
+    from the independent g_3^Dirac degeneracy count.
+
+    One-and-a-half routes, not two: Delta is derived in production code;
+    c^2(4,3) is the paper's asserted formula evaluated here (see the
+    c2_formula honesty note)."""
     c2 = c2_formula(4, 3)                     # 1/40 from (1/16)(1 - 12/20)
     g3, delta = delta_inverse_identity()      # (40, 1/40) from g_3^Dirac count
     assert g3 == 40
     assert delta == Rational(1, 40)
-    assert c2 == delta                        # two independent routes agree
+    assert c2 == delta          # asserted formula coincides with derived Delta
 
 
 def test_g3_dirac_is_genuinely_independent():

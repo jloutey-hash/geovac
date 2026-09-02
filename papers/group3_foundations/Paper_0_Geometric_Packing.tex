@@ -19,24 +19,27 @@
 \date{February 22, 2026}
 
 \begin{abstract}
-We show that the angular momentum quantum numbers $(\ell, m)$ emerge
+\textbf{[SYMBOLIC PROOF]} We show that the angular momentum quantum numbers $(\ell, m)$ emerge
 from a purely geometric construction: uniform-density packing of
 distinguishable states on concentric isotropic shells in two
 dimensions.  Starting from two axioms---discrete binary
 distinguishability and geometric indifference (maximum entropy)---the
-construction yields per-shell angular capacities $2k-1$ for shell~$k$, which is
+\textbf{[SYMBOLIC PROOF]} construction yields per-shell angular capacities $2k-1$ for shell~$k$, which is
 isomorphic to the spherical harmonic basis $Y_{\ell m}$ with
 $\ell = k - 1$ and $m = -\ell, \ldots, +\ell$.  The principal quantum
-number~$n$ corresponds to a cumulative grouping of the first~$n$
+\textbf{[OBSERVATION]} number~$n$ corresponds to a cumulative grouping of the first~$n$
 shells, producing the $n^2$ orbital count, but this grouping is not
-forced by the axioms alone.  Similarly, a factor of~2 arises from the
+\textbf{[OBSERVATION]} forced by the axioms alone.  Similarly, a factor of~2 arises from the
 orientability of the compactified packing manifold ($S^2$),
 corresponding to spin multiplicity.  When the packing is interpreted
 as a graph, its Laplacian decomposes into $(\ell, m)$ sectors whose
-ground-state eigenvalue spectrally converges to the hydrogen
-ground-state energy, as shown in subsequent papers; the full per-shell
+\textbf{[MEASURED]} ground-state eigenvalue reaches the hydrogen ground-state energy under
+a single matched scale $K_{\mathrm{vac}} = -1/16$, as shown in
+subsequent papers---matched, not derived: the content that could have
+failed is the spectral bound $\lambda_{\max} \to 8$, not the target the
+scale is matched to; the full per-shell
 spectrum $E_n = -Z^2/(2n^2)$ requires an additional node-weight term
-(Paper~18~\S\,\textsc{iii}).  This angular cross-section recurs as a universal
+(Paper~18~\cite{paper18}~\S\,\textsc{iii}).  \textbf{[PANEL-VERIFIED]} This angular cross-section recurs as a universal
 structural factor inside every natural geometry developed in the
 Geometric Vacuum series---from $S^3$ for atoms through composed fiber
 bundles for multi-electron molecules---making it a foundational
@@ -75,7 +78,7 @@ three distinct levels of strength.
 
 \medskip
 
-\noindent\textbf{Strong claim: angular quantum numbers.}  Shell~$k$
+\textbf{[SYMBOLIC PROOF]} \noindent\textbf{Strong claim: angular quantum numbers.}  Shell~$k$
 has capacity $2k - 1$, which is isomorphic to the spherical harmonic
 basis $Y_{\ell m}$ with $\ell = k - 1$.  The angular momentum labels
 $(\ell, m)$ and the per-shell degeneracy $2\ell + 1$ emerge directly
@@ -84,21 +87,21 @@ of the paper.
 
 \medskip
 
-\noindent\textbf{Structural correspondences.}  The principal quantum
+\textbf{[OBSERVATION]} \noindent\textbf{Structural correspondences.}  The principal quantum
 number~$n$ arises when one groups the first $n$ shells cumulatively,
 yielding the count $\sum_{k=1}^{n}(2k-1) = n^2$.  This grouping is
 natural but not uniquely forced by the axioms.  The factor of~2 (spin
 multiplicity) arises from the orientability of the compactified
 packing manifold: conformally compactifying the plane to $S^2$
 introduces two orientations, corresponding to a $\mathbb{Z}_2$
-doubling.  The identification of this doubling with
+\textbf{[OBSERVATION]} doubling.  The identification of this doubling with
 spin-$\tfrac{1}{2}$ is a structural correspondence, not a derivation
 from the axioms.
 
 \medskip
 
-\noindent\textbf{Series significance.}  The $(\ell, m)$ angular
-sector constructed here recurs as a universal structural factor inside
+\textbf{[PANEL-VERIFIED]} \noindent\textbf{Series significance.}  The $(\ell, m)$ angular
+\textbf{[PANEL-VERIFIED]} sector constructed here recurs as a universal structural factor inside
 every natural geometry developed in the Geometric Vacuum (GeoVac)
 series: $S^3$ for hydrogen~\cite{paper7}, prolate spheroidal
 coordinates for H$_2^+$~\cite{paper11}, hyperspherical coordinates for
@@ -280,7 +283,7 @@ Sec.~\ref{sec:correspondences}---and an angular capacity per shell:
   N_k^{\mathrm{angular}} = 2k - 1
   \label{eq:angular-capacity}
 \end{equation}
-distinct angular slots.  The annular-area derivation of this $2k-1$
+distinct angular slots.  \textbf{[SYMBOLIC PROOF]} The annular-area derivation of this $2k-1$
 angular capacity (equivalently $2\ell+1$ with $\ell = k-1$) is verified
 by \texttt{tests/test\_trunk\_qa\_annular.py}.
 
@@ -303,12 +306,12 @@ representation of SO(3).  The $2k-1$ angular positions on shell~$k$
 are in one-to-one correspondence with the magnetic quantum numbers
 $m = -\ell, \ldots, +\ell$.
 
-This is not a coincidence that must be checked case by case: it is an
+\textbf{[SYMBOLIC PROOF]} This is not a coincidence that must be checked case by case: it is an
 algebraic identity.  The area formula
 (Eq.~\ref{eq:annular-area}) forces the annular area of shell~$k$ to
 be proportional to $2k-1$, which is the dimension of the
 $(k{-}1)$-th irreducible representation of SO(3).  The packing
-construction therefore generates the complete angular momentum basis
+\textbf{[SYMBOLIC PROOF]} construction therefore generates the complete angular momentum basis
 $\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$ as a direct
 consequence of uniform density on isotropic shells.
 
@@ -388,7 +391,7 @@ traces back to two sources:
   symmetry group from SO(3) to its double cover SU(2).
 \end{enumerate}
 
-The identification of this $\mathbb{Z}_2$ doubling with the
+\textbf{[OBSERVATION]} The identification of this $\mathbb{Z}_2$ doubling with the
 spin-$\tfrac{1}{2}$ degree of freedom is consistent with the
 mathematical structure: orientability on $S^2$ and spinor
 representations of SU(2) both produce a factor of~2.  However, the
@@ -463,7 +466,7 @@ Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
 \bottomrule
 \end{tabular}
 \caption{The $(\ell, m)$ angular cross-section inside each natural
-  geometry of the GeoVac series.  In every case, the full coordinate
+  \textbf{[PANEL-VERIFIED]} geometry of the GeoVac series.  In every case, the full coordinate
   system separates into a system-specific radial part and the
   universal angular labeling constructed in this paper.}
 \label{tab:cross-section}
@@ -476,8 +479,10 @@ of the Laplace--Beltrami operator on $S^3$ are hyperspherical
 harmonics, which decompose as $Y_{n\ell m} = R_n(\chi) \,
 Y_{\ell m}(\theta, \phi)$.  The angular factor $Y_{\ell m}$ is
 precisely the per-shell structure of the packing, with $\ell = k - 1$.
-Paper~7~\cite{paper7} shows that the graph Laplacian on the $2n^2$
-packing is conformally equivalent to this $S^3$ operator.
+Paper~7~\cite{paper7} shows that the continuum limit of the graph
+Laplacian on the $2n^2$ packing is conformally equivalent to this
+$S^3$ operator (the convergence itself is demonstrated empirically
+through $n_{\max} = 30$).
 
 \textbf{Level~2: H$_2^+$ on prolate spheroids.}
 For one-electron diatomics, the natural geometry is the prolate
@@ -509,7 +514,7 @@ For two-electron diatomics, the geometry combines the molecular axis
 (internuclear separation~$R$) with the hyperspherical treatment of the
 two electrons.  The angular channels are labeled by $(\ell, m)$
 quantum numbers that determine the multichannel expansion.
-Paper~15~\cite{paper15} recovers 96.0\% of the H$_2$ dissociation
+\textbf{[MEASURED]} Paper~15~\cite{paper15} recovers 96.0\% of the H$_2$ dissociation
 energy using this geometry.
 
 \textbf{Level~5: LiH via composed geometries.}
@@ -522,17 +527,19 @@ LiH and BeH$^+$.
 
 \medskip
 
-The invariance of the $(\ell, m)$ angular sector across all five
-levels is not imposed by hand: it is a consequence of rotational
-symmetry, which is present in every geometry that admits separation of
-variables.  The packing construction provides the combinatorial
-substrate for this universal angular factor.
+\textbf{[PANEL-VERIFIED]} The invariance of the angular sector across all five levels is not
+imposed by hand: it follows from the symmetry each geometry retains
+($m$ exactly wherever axial symmetry survives; $\ell$ exactly
+wherever the full SO(3) does---the two-center problem breaks SO(3)
+to axial SO(2), replacing $\ell$ by a separation index, as \S V
+records).  The packing construction provides the combinatorial
+substrate for this angular factor.
 
 \subsection{The node structure as combinatorial invariant}
 \label{sec:combinatorial_invariant}
 
 The preceding survey reveals a structural feature that merits explicit
-comment.  The same discrete quantum number skeleton
+\textbf{[PANEL-VERIFIED]} comment.  The same discrete quantum number skeleton
 $\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$---with its
 degeneracy $2\ell + 1$ and selection rules---admits multiple conformally
 distinct continuum embeddings.  The five geometries catalogued in
@@ -557,10 +564,13 @@ realizations, none of which is privileged.  The lattice is the
 invariant; the continuum geometries are projections.
 
 We state this as a mathematical observation, not a metaphysical claim.
-The conformal equivalences between the graph Laplacian and each
-continuum operator are proven case by case: Paper~7~\cite{paper7}
-provides 18~symbolic proofs for the $S^3$ embedding, and the subsequent
-papers verify operator convergence for each geometry in the hierarchy.
+The conformal equivalences between the continuum limit of the graph
+Laplacian and each continuum operator are established case by case:
+\textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic proofs of the Fock
+projection chain for the $S^3$ embedding (the graph-to-continuum
+convergence itself is empirical, through $n_{\max} = 30$), and the
+subsequent papers verify operator convergence for each geometry in
+the hierarchy.
 The framework is demonstrably conformally equivalent to standard
 continuous quantum mechanics at every level where it has been tested.
 Whether one regards the discrete or continuum description as more
@@ -571,12 +581,15 @@ An analogy to isospectral manifolds is apt.  Kac's celebrated
 question---``Can one hear the shape of a drum?''---established that
 different Riemannian geometries can share spectral data (the answer, as
 Gordon, Webb, and Wolpert showed, is no: non-isometric manifolds can be
-isospectral).  The present result is stronger in a specific sense:
-the geometries in Table~\ref{tab:cross-section} share not merely a
-spectrum but an entire labeled node structure, complete with quantum
-number assignments, per-shell degeneracies, and angular momentum
-selection rules.  The combinatorial content that is shared across these
-embeddings is richer than a list of eigenvalues.
+\textbf{[PANEL-VERIFIED]} isospectral).  The present result is stronger in a specific sense:
+the geometries in Table~\ref{tab:cross-section} share a labeled node
+structure---quantum number assignments and per-shell degeneracies,
+with the $(\ell, m)$ selection rules shared exactly wherever the
+corresponding symmetry survives ($m$ in every row; $\ell$ in every
+row except the two-center Level~2, where SO(3) breaks to axial
+SO(2)).  The spectra themselves differ across rows; what is shared is
+combinatorial structure, which is richer than a list of eigenvalues
+and different in kind from isospectrality.
 
 
 %% ================================================================
@@ -601,7 +614,7 @@ $|V| = \sum_{n=1}^{n_{\max}} 2n^2
 for a lattice truncated at $n_{\max}$: each shell $n$ contributes its
 $2n^2$ spin-doubled capacity, summed over $1 \le n \le n_{\max}$. (The
 top shell alone holds $2n_{\max}^2$; the cumulative count is the sum.)
-This spin-doubled vertex count is verified by
+\textbf{[SYMBOLIC PROOF]} This spin-doubled vertex count is verified by
 \texttt{tests/test\_dirac\_lattice.py}.
 
 \subsection{Edge set}
@@ -638,7 +651,7 @@ The graph Laplacian $L = D - A$ defines a discrete Hamiltonian
 \end{equation}
 where $K_{\mathrm{vac}} = -1/16$ is the kinetic scale factor that
 maps dimensionless graph eigenvalues to physical energies in atomic
-units.  This constant's value $1/16$ \emph{coincides} with a conformal-geometry
+units.  \textbf{[OBSERVATION]} This constant's value $1/16$ \emph{coincides} with a conformal-geometry
 quantity of the Fock projection (Paper~7~\cite{paper7}): the squared
 coupling between adjacent $n$-shells in the Gegenbauer eigenbasis of the
 $S^3$ Laplacian is $c^2(n,l) = \tfrac{1}{16}[1 - l(l+1)/(n(n+1))]$, equal
@@ -651,15 +664,20 @@ mechanism connecting them.
 
 Within each $(\ell, m)$ sector, the radial edges form a
 one-dimensional path graph in $n = \ell+1, \ell+2, \ldots, n_{\max}$.
-As $n_{\max} \to \infty$, the ground-state eigenvalue of~$H$
-converges to $-0.5$~Ha, the exact hydrogen ground-state energy.  The
-$(\ell, m)$ angular structure is exact at every finite $n_{\max}$---it
+As $n_{\max} \to \infty$, the largest Laplacian eigenvalue converges
+to $\lambda_{\max} \to 8 = 2 d_{\max}$, twice the coordination number;
+with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
+$K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
+ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
+convergence of the spectral bound is the content; the reproduction of
+the target is not.  The
+\textbf{[SYMBOLIC PROOF]} $(\ell, m)$ angular structure is exact at every finite $n_{\max}$---it
 is encoded in the graph topology, not approximated by mesh refinement.
 
 The conformal equivalence between the continuum limit of this graph
 Laplacian and the Laplace--Beltrami operator on the unit~$S^3$ (via
 Fock's stereographic projection) is developed in Paper~7~\cite{paper7},
-where an audit of 18~symbolic checks validates the conformal geometry
+\textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks validates the conformal geometry
 (the convergence itself is demonstrated empirically through
 $n_{\max}=30$; the rate is a separate result).  The energy
 eigenvalues and dynamics built on this graph are developed in
@@ -699,7 +717,7 @@ Papers~1 and~6.
   produces the labels, not the functions.
 
 \item[$\times$] Time evolution and dynamics.  These require the
-  Hamiltonian as an operator, developed in Paper~6.
+  Hamiltonian as an operator, developed in Paper~6~\cite{paper6}.
 
 \item[$\times$] The fine structure constant or any coupling constants.
   The construction is purely kinematic.
@@ -711,7 +729,7 @@ As noted in Sec.~\ref{sec:correspondences}, the construction involves
 structural choices---concentric shells, linearly spaced radii
 ($r_k = k d_0$), area-proportional counting, and the fundamental area
 $\sigma_0 = \pi d_0^2 / 2$---that are natural and mutually consistent
-but not uniquely determined by the two axioms.  The robustness of the
+but not uniquely determined by the two axioms.  \textbf{[OBSERVATION]} The robustness of the
 $(\ell, m)$ result rests on the observation that any isotropic,
 uniform-density, concentric packing produces the same angular capacity
 $2k - 1$ per shell; the specific radial spacing affects only how
@@ -761,8 +779,10 @@ alone, independently of the specific force law or potential.
 In the GeoVac series, dynamics are recovered when the graph Laplacian
 is equipped with the kinetic scale $K_{\mathrm{vac}} = -1/16$ and
 node weights encoding the Coulomb potential.  Paper~7~\cite{paper7}
-proves that this graph Laplacian is conformally equivalent to the
-Laplace--Beltrami operator on~$S^3$, with the $1/r$ Coulomb potential
+shows that the continuum limit of this graph Laplacian is conformally
+equivalent to the
+Laplace--Beltrami operator on~$S^3$ (the convergence itself is
+demonstrated empirically through $n_{\max} = 30$), with the $1/r$ Coulomb potential
 emerging as the coordinate distortion from stereographic projection
 rather than an independent force law.
 
@@ -810,7 +830,7 @@ atoms~\cite{paper7} through composed fiber bundles for core--valence
 molecules~\cite{paper17}.  When equipped with a graph Laplacian and
 kinetic scale, this packing becomes the foundation for a computational
 framework that has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
-LiH, and BeH$^+$, with errors ranging from ${<}\,0.1\%$ for hydrogen
+\textbf{[MEASURED]} LiH, and BeH$^+$, with errors ranging from ${<}\,0.1\%$ for hydrogen
 to ${\sim}\,6\%$ for LiH equilibrium geometry, benchmarked against
 exact and experimental values.
 
@@ -881,6 +901,19 @@ J.~Loutey,
 BeH$^+$ from Discrete Graph Topology,''
 GeoVac Paper~17 (2026).
 
+\bibitem{paper1}
+J.~Loutey,
+``The Geometric Atom: Atomic Structure as a Packing Problem,''
+GeoVac Paper~1 (2026).
+\bibitem{paper6}
+J.~Loutey,
+``$O(N)$ Quantum Dynamics and Molecular Spectroscopy via Spectral Graph Theory,''
+GeoVac Paper~6 (2026).
+[Archived: superseded within the series; retained for provenance.]
+\bibitem{paper18}
+J.~Loutey,
+``Spectral-Geometric Exchange Constants: Projecting Discrete Spectra onto Continuous Manifolds,''
+GeoVac Paper~18 (2026).
 \end{thebibliography}
 
 \end{document}

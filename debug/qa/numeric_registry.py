@@ -526,6 +526,18 @@ RETIRED = {
     791:     ("he_n3_qwc",          r"QWC|measurement group",  None),
     10199:   ("he_n4_qwc",          r"QWC|measurement group",  None),
 
+    # --- the retired pair-diagonal composed-scaling family (trunk FULL
+    # 2026-09-01).  These three survived a certification because none was
+    # registered; C21 samples what it knows.  2.5 is a ubiquitous numeral,
+    # so its required context is the Pauli-scaling reading specifically;
+    # the replacement is not another exponent but the exact linearity
+    # N_Pauli = 27.90 x Q (composed_coeff).
+    2.5:     ("composed_coeff",     r"Q\^\{2\.5\}|O\(Q|Pauli[- ]?(?:term )?scal", 
+                                    r"retired|pair-diagonal (?:rule |count )?gave|superseded"),
+    51:      ("composed_coeff",     r"1712|1\{,\}712",
+                                    r"retired|pair-diagonal|gave"),
+    1712:    ("composed_coeff",     r"advantage|fewer|Gaussian|Pauli",
+                                    r"retired|pair-diagonal|gave|arXiv"),
     3.15:    ("exp_pauli_4pt",      r"Q\^|exponent|scaling|alpha", r"Table~3\.15|Table 3\.15"),
     1.69:    ("exp_lambda_4pt",     r"Q\^|exponent|scaling|alpha|lambda",
                                     r"meV|polarizability"),

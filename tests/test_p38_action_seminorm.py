@@ -29,7 +29,13 @@ import pytest
 from geovac.full_dirac_operator_system import FullDiracTruncatedOperatorSystem
 
 
-@pytest.mark.parametrize("n_max", [2, 3])
+# Widened [2, 3] -> [2, 3, 4] + slow [5] on 2026-09-02: the Paper 38 footnote
+# claims injectivity "verified ... for every band at n_max <= 5", but the
+# frozen falsifier only exercised {2, 3} -- so 4 and 5 rested on a one-off
+# driver run. 4 costs ~4 s (default suite); 5 costs ~23 s (behind --slow,
+# which the topo/regression baseline runs).
+@pytest.mark.parametrize("n_max", [2, 3, 4,
+                                   pytest.param(5, marks=pytest.mark.slow)])
 def test_per_band_injectivity(n_max):
     osys = FullDiracTruncatedOperatorSystem(n_max)
     bands = defaultdict(list)

@@ -374,11 +374,13 @@ without invoking the specific spectrum of $D$.  This includes:
 
 \begin{itemize}
 \item Angular sparsity bounds: Eq.~\eqref{eq:eri_density} above.
-\item The composed-block $O(Q^{2.5})$ Pauli scaling of
-  Paper~14~\cite{paper14}, which depends on the block-diagonal
+\item The composed-block Pauli count of Paper~14~\cite{paper14},
+  exactly linear in the qubit count across molecules at fixed basis
+  ($N_{\mathrm{Pauli}} = 27.90 \times Q$; the retired pair-diagonal
+  rule gave $O(Q^{2.5})$), which depends on the block-diagonal
   structure of two-body matrix elements in a composed orbital basis
-  and the Gaunt selection rules.  Verified across all 28 molecules
-  in the GeoVac library.
+  and the Gaunt selection rules.  Verified across the 35 composed
+  molecules in the GeoVac library.
 \item Selection rules for transitions, oscillator strengths, and
   multipole moments (the Wigner--Eckart content of any operator
   expanded in spherical tensor components).
@@ -792,10 +794,12 @@ sector without re-derivation:
   (Eq.~\eqref{eq:eri_density})~\cite{paper22}.  At $l_{\max} = 3$,
   the new system's two-body Hamiltonian is at least $98.56\%$
   sparse before any potential-specific feature is invoked.
-\item Composed-block $O(Q^{2.5})$ Pauli scaling~\cite{paper14}.  The
-  composed architecture's structural sparsity advantage over
-  Gaussian baselines (51$\times$ to 1712$\times$ across the GeoVac
-  molecule library) carries over to any spherical-fermion system.
+\item Composed-block exactly $Q$-linear Pauli
+  count~\cite{paper14} ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at
+  fixed basis).  The structural sparsity pattern behind the composed
+  architecture's advantage over Gaussian baselines ($54\times$ to
+  $317\times$ at equal qubit counts for the Coulomb library) carries
+  over to any spherical-fermion system.
 \item Selection rules for transitions, oscillator strengths,
   multipole moments, and the Wigner--Eckart content of any
   spherical tensor operator.
@@ -1091,8 +1095,8 @@ $\mathcal{A}/D$ partition} (Section~\ref{sec:universal}) and the
 \textsc{transfers freely} bucket of the signature partition
 (Section~\ref{sec:sig_buckets}) have substantial overlap.  Both
 contain the SU(2) angular sparsity theorem, the composed-block
-$O(Q^{2.5})$ Pauli scaling, the Wigner~$3j$ / $D$ algebra, and the
-selection rules.  Adding the signature axis to the partition
+exactly $Q$-linear Pauli count, the Wigner~$3j$ / $D$ algebra, and
+the selection rules.  Adding the signature axis to the partition
 framework reveals that these results transfer not only across central
 potentials at fixed signature but also across signatures themselves.
 The framework's structural-skeleton-scope reading (CLAUDE.md~\S2

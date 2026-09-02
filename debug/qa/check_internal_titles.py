@@ -104,6 +104,72 @@ def main_part(title: str) -> str:
     return t
 
 
+# Two in-corpus bibitem formats, and reading only one is how this class
+# stayed invisible: "GeoVac Paper~7 (2026)." (house style) and the older
+# "Paper~7 (2026)." without the "GeoVac" (Paper 32's early entries).
+# Restricted to the bibliography so an in-text "Paper 7 (2026)" cannot
+# false-positive.
+BIBYEAR = re.compile(r"(?:GeoVac )?Papers?~?\s?(\d{1,2})\s*\((20\d\d)\)")
+
+
+def build_year_map() -> dict:
+    """{paper_number: year} from each ACTIVE paper's own \\date{}."""
+    ymap = {}
+    for f in active_tex():
+        num = re.search(r"[Pp]aper[_ ](\d+)[_ ]", f.name)
+        if not num:
+            continue
+        txt = f.read_text(encoding="utf-8", errors="replace")
+        d = re.search(r"\\date\{([^}]*)\}", txt)
+        if not d:
+            continue
+        y = re.search(r"(20\d\d)", d.group(1))
+        if y:
+            ymap.setdefault(int(num.group(1)), y.group(1))
+    return ymap
+
+
+YEAR_BASELINE = pathlib.Path(__file__).with_name("internal_year_baseline.json")
+
+
+def load_year_baseline() -> set:
+    """Pre-existing year debt that PASSES; anything new FAILS.
+
+    Recorded 2026-09-01 when this criterion was added: 30 bibitems citing a
+    GeoVac paper with a year its own date contradicts, across five groups.
+    Papers are corrected in place, so the citing text kept the original
+    year.  Mass-editing them out of an unrelated sprint would be the
+    out-of-scope edit this apparatus exists to catch;  each group's
+    re-certification fixes and deletes its own entries.
+    """
+    if not YEAR_BASELINE.exists():
+        return set()
+    import json
+    data = json.loads(YEAR_BASELINE.read_text(encoding="utf-8"))
+    return {(e["path"], e["paper"], e["cited"])
+            for e in data.get("entries", [])}
+
+
+def scan_years(ymap: dict) -> list:
+    """Internal bibitem years that contradict the cited paper's own date."""
+    out = []
+    for f in active_tex():
+        txt = f.read_text(encoding="utf-8", errors="replace")
+        i = txt.rfind(r"\begin{thebibliography}")
+        if i < 0:
+            continue
+        self_num = re.search(r"[Pp]aper[_ ](\d+)[_ ]", f.name)
+        self_num = int(self_num.group(1)) if self_num else None
+        for m in BIBYEAR.finditer(txt, i):
+            n, y = int(m.group(1)), m.group(2)
+            if n == self_num or n not in ymap or ymap[n] == y:
+                continue
+            out.append({"file": f.name,
+                        "path": str(f.relative_to(ROOT)).replace(chr(92), '/'),
+                        "paper": n, "cited": y, "real": ymap[n]})
+    return out
+
+
 def active_tex():
     return sorted([*PAPERS.glob("group*/*.tex"), *PAPERS.glob("synthesis/*.tex")])
 
@@ -163,6 +229,15 @@ def check_one(fname, relpath, n, cited_title, tmap, mismatches, flagged):
     (flagged if n in PROPINQUITY else mismatches).append(rec)
 
 
+eol_hdr_yaudit = ("\n--- AUDIT (advisory, out-of-gate-scope) (%d) -- "
+                  "bibitem YEAR vs the cited paper's own date: ---")
+eol_hdr_ygated = ("\n*** YEAR MISMATCH (%d) -- an internal bibitem year "
+                  "contradicts the cited paper's own date: ***")
+yline = "  [P%s] %s: cited (%s) != that paper's date (%s)"
+ybase_msg = ("bibitem-year ratchet: %d pre-existing mismatch(es) forgiven from a %d-entry baseline (debug/qa/internal_year_baseline.json) -- shrink it, never grow it")
+ymsg = "\nRESULT: FAIL (internal-bibitem-year criterion%s)"
+
+
 def main(argv=None) -> int:
     argv = sys.argv[1:] if argv is None else argv
     gate = None
@@ -171,11 +246,21 @@ def main(argv=None) -> int:
         gate = argv[i + 1] if i + 1 < len(argv) else None
 
     tmap = build_title_map()
+    _year_all = scan_years(build_year_map())
+    _year_base = load_year_baseline()
+    year_known = [r for r in _year_all
+                  if (r["path"], r["paper"], r["cited"]) in _year_base]
+    year_bad = [r for r in _year_all
+                if (r["path"], r["paper"], r["cited"]) not in _year_base]
     mismatches, flagged = [], []
     for f in active_tex():
         if f.name in HOUSE_STYLE:
             continue
-        relpath = str(f.relative_to(PAPERS)).replace("\\", "/")
+        # Repo-relative: qa_scopes.make_predicate matches endswith()
+        # against repo-relative paths, so a papers/-relative key here
+        # makes the gate predicate False for EVERY finding and the gate
+        # can never fail in scope (proven by probe, 2026-09-01).
+        relpath = str(f.relative_to(ROOT)).replace("\\", "/")
         txt = f.read_text(encoding="utf-8", errors="replace")
         seen = set()  # (n, normalized cited) -> dedupe a bibitem matched by >1 pattern
 
@@ -203,9 +288,12 @@ def main(argv=None) -> int:
         qa_scopes.emit_warnings(_scope_warnings)
         gated = [r for r in mismatches if _in_scope(r["path"])]
         audit = [r for r in mismatches if not _in_scope(r["path"])]
+        ygated = [r for r in year_bad if _in_scope(r["path"])]
+        yaudit = [r for r in year_bad if not _in_scope(r["path"])]
         scope_desc = qa_scopes.describe(gate, _scope_files)
     else:
         gated, audit = mismatches, []
+        ygated, yaudit = year_bad, []
         scope_desc = "ALL"
 
     print(f"title map: {len([k for k in tmap if isinstance(k,int)])} numbered papers + "
@@ -218,6 +306,15 @@ def main(argv=None) -> int:
         print(f"\n--- AUDIT (advisory, out-of-gate-scope) ({len(audit)}) -- stale titles in other branches: ---")
         for r in audit:
             print(f"  [P{r['paper']}] {r['path']}: cited \"{r['cited']}\"  != \"{r['real']}\"")
+    print(ybase_msg % (len(year_known), len(_year_base)))
+    if yaudit:
+        print(eol_hdr_yaudit % len(yaudit))
+        for r in yaudit:
+            print(yline % (r['paper'], r['path'], r['cited'], r['real']))
+    if ygated:
+        print(eol_hdr_ygated % len(ygated))
+        for r in ygated:
+            print(yline % (r['paper'], r['file'], r['cited'], r['real']))
     if gated:
         print(f"\n*** MISMATCH ({len(gated)}) -- internal cite does not match the paper's \\title: ***")
         for r in gated:
@@ -226,8 +323,12 @@ def main(argv=None) -> int:
             print(f"      real : \"{r['real']}\"")
         print(f"\nRESULT: FAIL (internal-title criterion{f', gated scope {gate}' if gate else ''})")
         return 1
+    if ygated:
+        print(ymsg % ((', gated scope ' + gate) if gate else ''))
+        return 1
     print(f"\nRESULT: PASS -- every internal GeoVac citation in {scope_desc} "
-          f"matches the cited paper's \\title.")
+          f"matches the cited paper's \\title, and no bibitem year "
+          f"outside the recorded baseline contradicts that paper's own \\date.")
     return 0
 
 

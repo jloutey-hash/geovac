@@ -216,12 +216,35 @@ verdict is the **AND across all review dimensions** (below).
   lesson: P13/P15/FCI-A "passed" compile checks for weeks with three orphaned
   figure dirs the 2026-05-22 reorg left behind under `papers/core/`; a `pdftex.def
   Error` in the log is a FAIL).
-- **C11 — Internal-citation titles (deterministic).** Every internal GeoVac
-  citation in scope names the cited paper by its current `\title` — certified by
+- **C11 — Internal-citation titles AND years (deterministic).** Every internal
+  GeoVac citation in scope names the cited paper by its current `\title`,
+  **and its bibitem year matches that paper's own `\date`** — certified by
   `debug/qa/check_internal_titles.py` (exit 0; also
-  `tests/test_internal_title_consistency.py`), not an LLM reviewer. The
+  `tests/test_internal_title_consistency.py` and
+  `tests/test_internal_titles_check.py`), not an LLM reviewer. The
   descope-pending propinquity cluster (Papers 39/40/45–49) is *flagged*, not
   failed.
+
+  *Year criterion added 2026-09-01.* Six trunk bibitems cited a paper with a
+  year its own `\date` contradicts, **three of them pre-existing in Paper 32**
+  (Papers 0, 7 and 14 as 2025; all are 2026) while the same papers carried the
+  right year elsewhere. That is the twin class — one quantity, two loci, each
+  locally plausible — in a dimension no gate covered: C11 compared titles and
+  ignored the year three characters away, and C21 governs registry values, not
+  bibliography metadata. 30 further instances corpus-wide are reported as
+  per-group advisory debt rather than mass-edited from a trunk sprint. Scope
+  note: the year map is built from ACTIVE papers, so an archived paper's year
+  is not checkable here (the same exclusion C11 already applies to titles).
+
+  *Scope defect fixed the same day, and it is the load-bearing part of this
+  entry.* C11 keyed findings on a path relative to `papers/` while the scope
+  predicate matches repo-relative paths, so **every** finding was filed as
+  out-of-scope advisory and the gate printed PASS. A planted wrong title on a
+  trunk bibitem was detected, printed, and exited 0 — i.e. **C11 could not
+  fail in a gated run, and none of its prior gated PASSes carried
+  information.** Both criteria are now proven to fire in scope and stay silent
+  when clean, and `tests/test_internal_titles_check.py` pins both directions
+  plus the path convention itself.
 - **C12 — K-label cleanliness (deterministic).** No occurrence of K = π(B+F−Δ)
   is labeled conjectural / conjecture / derived / theorem / proven anywhere in
   scope. Certified by `debug/qa/check_k_label.py --gate <branch>` (exit 0; also

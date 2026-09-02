@@ -7,6 +7,148 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.2.5] - 2026-09-01
+
+Trunk FULL-run remediation, Parts A—D. The C3 inline-tier pass was executed
+rather than deferred, and running it as an audit — tier derived from the claim
+matrix and the backing test, never from the sentence's tone — surfaced ~25
+further defects and, indirectly, a gate that could not fail.
+
+### Fixed — C11 could not fail in a gated run (the headline)
+
+A newly added criterion had to prove it fires before being trusted (GATE
+SELF-AUDIT RULE). It did not: a planted in-scope error was **detected,
+printed, and exited 0**. Root cause: C11 keyed findings on a path relative to
+`papers/`, while `qa_scopes.make_predicate` matches `endswith()` against
+repo-relative paths, so the predicate was False for *every* finding and
+everything landed in the out-of-scope advisory bucket.
+
+The obvious next question — does the **existing** title criterion share the
+defect? — was answered by planting a completely wrong internal title on a trunk
+bibitem: `exit 0`, `MISMATCH: False`, `AUDIT: True`, `RESULT: PASS`. **C11 has
+never been able to fail under `--gate`; none of its gated PASSes carried
+information.** Fourth instance of this shape (after C10-by-exit-code and
+C5/C12's hard-coded document set).
+
+- Findings keyed repo-relative; both criteria re-proven to FIRE in scope and
+  stay SILENT when clean.
+- The three sibling predicate-based gates were **probed, not assumed**:
+  `check_paper_test_refs` and `check_file_refs` fire correctly (they pass a
+  full `Path`); `check_k_label` is a corpus-wide lens by design.
+- `tests/test_internal_titles_check.py` (4 tests) pins the SILENT direction,
+  the FIRE direction for **each** criterion separately, and the path
+  convention itself. A gate asserted only in the silent direction is what
+  broke.
+
+### Added — C11 bibitem-year criterion, with a printed ratchet
+
+Six trunk bibitems cited a paper with a year its own `\date` contradicts,
+**three pre-existing in Paper 32** (Papers 0, 7, 14 as 2025; all are 2026)
+while the same papers carried the right year elsewhere — the twin class, in a
+dimension no gate covered. 30 further instances corpus-wide (group5 16,
+group6 6, group3 5, group4 2, group2 1) are **baselined, not mass-edited**:
+`debug/qa/internal_year_baseline.json`, ratcheting like C22 and printing its
+own size every run. Each group's re-cert deletes its share. The PASS line was
+then corrected — it still claimed "every bibitem year matches" while forgiving
+30.
+
+### Added — C3 inline provenance tiers: 257 tags, six documents, 0 before
+
+| Document | Tags | | Document | Tags |
+|---|---:|---|---|---:|
+| Paper 0 | 27 | | Paper 32 | 74 |
+| Paper 1 | 23 | | Paper 38 | 46 |
+| Paper 7 | 33 | | group3 synthesis | 54 |
+
+Paper 32's mix is the informative one: **23 PANEL-VERIFIED, 17 OBSERVATION**
+against 7 SYMBOLIC PROOF and 6 INTERNAL THEOREM. The keystone synthesis paper
+is, by its own backing, mostly panel-verified and observational — always true,
+invisible while nothing carried a label.
+
+### Fixed — one repeated defect class: correct in the middle, overclaiming at
+both ends
+
+Paper 7 stated the honest "stage 1 is empirical, no rate proven" caveat at
+three interior loci and asserted proof-strength language over that same stage
+in its **abstract, claim list, contributions list and both closing
+paragraphs**. Same shape in Paper 0's abstract, Paper 32's abstract (which
+named as open a question its own Q2 calls resolved, backed bit-exactly), and
+the synthesis's abstract and conclusion. All corrected — weakening only.
+
+Two faces of the κ observation, one level up: Paper 7 claimed the operators
+"reproduce the exact Rydberg **spectrum**" where the backing proves the
+**labels**; Paper 0 claimed the ground state "converges to —0.5 Ha" when κ is
+*defined* as E_target/λ_max, so the target is reproduced by construction (the
+content that could have failed is λ_max → 8).
+
+**Two upgrades applied**, so the pass cut both ways: Paper 7's double—>single
+integral reduction is a genuine symbolic proof the prose called merely "the
+master formula"; Paper 0's five-geometry comparison hedged one tier below its
+evidence.
+
+### Fixed — 30 prose references with no bibliography entry (Part E item 6)
+
+Not broken `\cite` — pdflatex reports zero undefined citations, before and
+after. The quieter class: "Paper~N" named in prose with **no `\bibitem`
+anywhere in the document**, which renders as ordinary text. Papers 54—57 are
+the synthesis's entire Reconvergence section; Paper 32 names Paper 38 ten
+times and Paper 55 fourteen times with no entry, and Paper 38 is the keystone
+its central claim rests on; Paper 0 names the **archived** Paper 6 in the
+present tense.
+
+**+30 bibitems, +26 inline cites**, titles read from each paper's own `\title`
+(C11 passes on all 30). Two traps caught while building the title map, either
+of which writes a wrong entry: `papers/archive/` was overwriting live entries
+(Paper 18 resolved to the archived `_v1`), and `\title{...}` was truncated at
+the first `}` for titles containing a brace group.
+
+### Fixed — a benchmark that had never run under pytest
+
+The synthesis's §V dynamics section rests on a file that (a) pytest never
+collected (filename did not match `test_*.py`) **and** (b) could not run
+anyway — its cases were chained script-style through a `sys_info` dict, so
+pointing pytest at it directly ERRORed 2 of 3 and the third "passed" only
+because pytest does not check return values.
+
+Diagnosed before touching: run as the script it is, every cited number
+reproduces (norm dev 1.1e-13, transfer 0.9998, period 0.4106% BS / 0.4620%
+RWA, off-res 0.0037) in 19 s. Rewired minimally — the three bodies untouched,
+a module-scoped fixture and three thin wrappers added, renamed
+`tests/test_rabi_oscillation.py`. **3 passed in 20.3 s**, now collected by
+default; script mode still works. The synthesis now discloses that Paper 6 is
+archived and what the backing status was.
+
+### Added — first synthesis block in the claim matrix
+
+23 rows for the group3 synthesis, carrying the rule in its header: **a
+synthesis row's tier and test are the SOURCE PAPER's, never a fresh
+judgment.** Zero rows existed for any synthesis — structurally why a
+withdrawn-theorem sentence survived in an opening paragraph through prior
+certifications. The synthesis was found stronger than its sources in four
+places ("18 *independent* proofs"; conformal equivalence attributed to the
+discrete graph; Paper 24's rigidity theorem stated without its converse
+caveat; "generator of *all known* π-content" where the source is scoped to 15
+of 28 projections). Four for four in the same direction.
+
+### Two findings that inverted on inspection
+
+- A proposed Paper 38 "fix" would have installed **a retired constant**: the
+  corrected envelope is algebraically identical to a form Papers 45/46 retired
+  as false. The two differ only in the denominator (operator-norm vs
+  gradient). Numbers left alone, the collision recorded in-paper, and the C16
+  entry widened to cover Paper 38 — where it had never been in scope, i.e.
+  silent by construction.
+- A tier disagreement between Papers 1 and 7 resolved **against the PM's own
+  tag**: the backing is float-tolerance on a truncated window, so
+  PANEL-VERIFIED is honest and SYMBOLIC PROOF was not.
+
+### Verification
+
+All 12 trunk deterministic gates PASS with scopes stated; gate-coverage matrix
+PASS (11 gates × 11 targets, no empty cell); all six trunk documents compile
+with zero errors and zero undefined references; 33 tests green including the
+18 symbolic S³ proofs.
+
 ## [v5.2.4] - 2026-09-01
 
 Re-certification sweep pre-flight. Both blockers cleared; the sweep can start

@@ -1,6 +1,15 @@
 <!-- CERT-STALENESS-BANNER -->
 > ### ⚠ RE-CERTIFICATION OWED
-> This record certifies the state as of **2026-06-16**. Since then **4 `.tex` changed**: Paper_0_Geometric_Packing.tex, Paper_7_Dimensionless_Vacuum.tex, paper_32_spectral_triple.tex, paper_38_su2_propinquity_convergence.tex.
+> This record certifies the state as of **2026-06-16**. Since then **5 `.tex` changed**: Paper_0_Geometric_Packing.tex, Paper_7_Dimensionless_Vacuum.tex, paper_32_spectral_triple.tex, paper_38_su2_propinquity_convergence.tex, **group3_foundations_synthesis.tex**.
+>
+> *(Banner corrected 2026-09-01: it had omitted the synthesis — the same scope
+> gap `check_cert_staleness.py` itself carried until 2026-08-31, and the
+> document where the trunk FULL run's C9 zombie lived. A reviewer scoping from
+> this banner would have skipped it.)*
+>
+> **2026-09-01 `/qa trunk` FULL run = FAIL** (calibrated 13/13, 0 false
+> positives). Remediation scope: `docs/qa/trunk.carryforward.md`; run record:
+> `debug/qa/trunk_full_run_2026_09_01_notes.md`.
 >
 > **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
 >

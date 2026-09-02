@@ -97,6 +97,31 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "pairdiag-composed-scaling-livesd",
+        "note": "Trunk FULL 2026-09-01 (C9 finding).  The retired pair-diagonal composed-scaling claims -- O(Q^{2.5}) Pauli scaling and the 51x-1712x advantage range -- were live at ~20 loci across 7 documents, including a Paper 22 Corollary TITLED with the retired exponent, and survived the 2026-08-29 group3 certification.  Canonical: N_Pauli = 27.90 x Q exactly linear across molecules at fixed basis; equal-qubit advantage 54x-317x.",
+        "pattern": r"Q\^\{2\.5\}\)?\$?[^.\n]{0,45}(?:Pauli|scal)"
+                   r"|(?:Pauli|scal\w*)[^.\n]{0,45}Q\^\{2\.5\}"
+                   r"|51\\times\$?\s*(?:to|--|-)\s*\$?1\{?,?\}?712"
+                   r"|51\$?\s*(?:to|--|-)\s*\$?1\{?,?\}?712\s*\$?\\times",
+        "exempt_if_nearby": r"retired|RETIRED|pair-diagonal (?:rule |count[s]? )?gave|superseded|withdrawn|corrected 2026-08|wrong-sign|under the retired",
+        "severity": "fail",
+        "scope": "group2 group3 group4 synthesis trunk",
+        "files": [
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex",
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+            "papers/group2_quantum_chemistry/paper_58_abelian_residue.tex",
+            "papers/group4_quantum_computing/paper_14_qubit_encoding.tex",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+        ],
+    },
+    {
         "id": "pairdiag-density-pipeline-realizes",
         "note": "CF-1 zombie, retired 2026-08-30.  The pair-diagonal density "
                 "D_pd was described as 'the density the composed pipeline "
@@ -662,6 +687,16 @@ REGISTRY = [
         "exempt_if_nearby": r"withdrawn|WITHDRAWN|retract|operator-norm-false"
                             r"|\bfalse\b|earlier|historical|App\.?~?A\.3|do\s+NOT",
         "files": [
+            # Paper 38 added 2026-09-01: it is the home of the LEGITIMATE
+            # gradient-normalised cousin, so it was never in scope -- and
+            # that scope gap is exactly the class the GATE SELF-AUDIT RULE
+            # warns about (a gate silent by construction is indistinguishable
+            # from a gate that passes).  P38 now prints the envelope
+            # expression explicitly, to warn readers off substituting it for
+            # the sub-envelope values; two-way discrimination proven at the
+            # time of widening (fires on a bare occurrence, exempt on the
+            # disclosed one via the "false" trigger).
+            "papers/group1_operator_algebras/paper_38_*.tex",
             "papers/group1_operator_algebras/paper_44_*.tex",
             "papers/group1_operator_algebras/paper_45_*.tex",
             "papers/group1_operator_algebras/paper_46_*.tex",

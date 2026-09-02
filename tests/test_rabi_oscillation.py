@@ -57,6 +57,7 @@ if sys.stdout.encoding != 'utf-8':
 from scipy.linalg import eigh
 from geovac import AtomicSolver
 from geovac.dynamics import TimePropagator
+import pytest
 
 
 # ======================================================================
@@ -172,7 +173,7 @@ def build_rabi_system(max_n: int = 4):
 # ======================================================================
 # TEST 1: Norm Conservation (Unitarity) — max_n=10
 # ======================================================================
-def test_1_norm_conservation() -> dict:
+def run_norm_conservation() -> dict:
     """
     Verify that Crank-Nicolson preserves ||psi|| = 1.0 under static H.
 
@@ -230,7 +231,7 @@ def test_1_norm_conservation() -> dict:
 # ======================================================================
 # TEST 2: Weak-Field Rabi Oscillation (Precision Benchmark) — max_n=4
 # ======================================================================
-def test_2_rabi_oscillation(sys_info: dict) -> dict:
+def run_rabi_oscillation(sys_info: dict) -> dict:
     """
     Drive the gs -> target transition with a weak resonant field.
 
@@ -413,7 +414,7 @@ def test_2_rabi_oscillation(sys_info: dict) -> dict:
 # ======================================================================
 # TEST 3: Off-Resonance Check — max_n=4
 # ======================================================================
-def test_3_off_resonance(sys_info: dict) -> dict:
+def run_off_resonance(sys_info: dict) -> dict:
     """
     Drive at 2x resonant frequency. Population transfer should be
     strongly suppressed compared to the resonant case.
@@ -494,6 +495,36 @@ def test_3_off_resonance(sys_info: dict) -> dict:
 
 
 # ======================================================================
+# PYTEST ENTRY POINTS
+#
+# Added 2026-09-01.  Before this the three benchmarks above were chained
+# script-style through `sys_info`, so pytest read that parameter as a
+# fixture request and ERRORed;  and the module was not collected at all,
+# because the filename did not match pytest.ini's default `test_*.py`.
+# The assertions live in the run_* helpers;  these wrappers only supply
+# the shared system and let pytest see them.
+# ======================================================================
+
+
+@pytest.fixture(scope="module")
+def sys_info() -> dict:
+    """max_n=4 lattice: spectrally pure enough for 2-level Rabi."""
+    return build_rabi_system(max_n=4)
+
+
+def test_norm_conservation() -> None:
+    run_norm_conservation()
+
+
+def test_rabi_oscillation(sys_info: dict) -> None:
+    run_rabi_oscillation(sys_info)
+
+
+def test_off_resonance(sys_info: dict) -> None:
+    run_off_resonance(sys_info)
+
+
+# ======================================================================
 # MAIN
 # ======================================================================
 if __name__ == '__main__':
@@ -514,9 +545,9 @@ if __name__ == '__main__':
           f"mu = {sys_info['mu_12']:.4f} a.u., "
           f"isolation = {sys_info['isolation']:.1f}x")
 
-    r1 = test_1_norm_conservation()
-    r2 = test_2_rabi_oscillation(sys_info)
-    r3 = test_3_off_resonance(sys_info)
+    r1 = run_norm_conservation()
+    r2 = run_rabi_oscillation(sys_info)
+    r3 = run_off_resonance(sys_info)
 
     # ---- SUMMARY ----
     print(f"\n{'='*70}")

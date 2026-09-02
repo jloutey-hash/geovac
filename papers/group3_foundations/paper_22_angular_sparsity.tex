@@ -430,8 +430,8 @@ The bound means that qubit Hamiltonian sparsity estimates derived
 for one physical domain transfer directly to others at matched
 $l_{\max}$, without re-analysis of the interaction potential.
 
-\subsection{Composed architectures: O($Q^{2.5}$) Pauli scaling for
-arbitrary spherical potentials}
+\subsection{Composed architectures: exactly $Q$-linear Pauli counts
+for arbitrary spherical potentials}
 
 The angular sparsity of Theorem~2 applies to single-center orbital
 bases.  In the GeoVac composed architecture~\cite{GeoVac_Paper14,
@@ -441,24 +441,27 @@ centered on a specific nucleus and each carrying its own spherical
 harmonic basis.  Cross-block electron repulsion integrals are
 suppressed structurally by the spatial factorization, and
 within-block integrals are subject to the angular selection rules
-of Theorem~2.  The resulting Pauli scaling measured across the
-LiH/BeH$_2$/H$_2$O/HF/NH$_3$/CH$_4$ library is
-$O(Q^{2.5})$~\cite{GeoVac_Paper14}, with exponent spread less than
-$0.05$ across molecules.
+of Theorem~2.  The resulting Pauli count measured across the
+composed molecular library is exactly linear in the qubit count at
+fixed basis, $N_{\mathrm{Pauli}} = 27.90 \times Q$ (main group;
+$30.03$ for $d$-block systems)~\cite{GeoVac_Paper14}, with the
+coefficient exact rather than fitted (the retired pair-diagonal
+rule gave $O(Q^{2.5})$ with a fitted exponent; corrected 2026-08-29).
 
 \medskip
-\noindent\textbf{Corollary 1} (Potential-Independent $O(Q^{2.5})$
+\noindent\textbf{Corollary 1} (Potential-Independent
 Composed Sparsity). \textit{In any composed block architecture
 whose per-block single-particle bases are spherical harmonic
 products $R_{nl}(r) Y_l^m$ and whose inter-block couplings respect
-the block decomposition, the Pauli scaling $O(Q^{2.5})$ observed for
+the block decomposition, the exactly $Q$-linear Pauli count
+$N_{\mathrm{Pauli}} = 27.90 \times Q$ observed for
 the Coulomb interaction in
 Ref.~\cite{GeoVac_Paper14} reflects the set of surviving ERIs, which
 is potential-independent (Theorem~2): the radial potential affects
 only the magnitudes of the surviving ERIs, not which ERIs survive.
-The $2.5$ exponent itself is the measured value for the Coulomb hydride
-library and is expected, but not here proven, to carry over to other
-central interactions.}
+The coefficient $27.90$ ($= 279/10$, exact rather than fitted) is
+the value for the Coulomb composed library and is expected, but not
+here proven, to carry over to other central interactions.}
 
 \textit{Proof sketch.}  The composed Pauli scaling decomposes into a
 block-diagonal factor (same for all potentials, depending only on
@@ -468,16 +471,18 @@ integrals $R^k$ merely renormalize the coefficients of surviving
 Pauli strings.  Since the Pauli count is determined by which strings
 have nonzero coefficient, the count is potential-independent; the
 Pauli 1-norm $\lambda$ and the QWC group count may differ, but the
-number of terms and the scaling exponent match.  \hfill$\square$
+number of terms and the linear coefficient match.  \hfill$\square$
 
 This corollary means that the angular selection-rule sparsity
 \emph{pattern} of the GeoVac composed architecture---the density that
-yields the $51\times$ to $1{,}712\times$ fewer Pauli terms measured
-against published Gaussian baselines for electronic structure---is
+yields the $54\times$--$317\times$ fewer Pauli terms measured at
+equal qubit counts against published Gaussian baselines for
+electronic structure (H$_2$O, $n_{\max} = 1$--$3$; the retired
+pair-diagonal rule gave $51\times$--$1{,}712\times$)---is
 present for nuclear shell model Hamiltonians, quantum dot
 Hamiltonians, and any other composed block architecture built from
-spherical harmonic bases.  The specific $51\times$--$1{,}712\times$
-ratios are measured Coulomb-hydride-vs-Gaussian numbers, expected but
+spherical harmonic bases.  The specific $54\times$--$317\times$
+ratios are measured Coulomb-vs-Gaussian numbers, expected but
 not here proven to carry over quantitatively.  The angular selection
 rule structure is a computational resource that belongs to the
 geometry of angular momentum, not to the Coulomb potential.
@@ -543,8 +548,9 @@ content of the basis, not on the specific radial potential:
 \item Radial--angular factorization of two-body matrix elements
   (Theorem~1).
 \item Gaunt-selection-rule sparsity $D(l_{\max})$ (Theorem~3).
-\item $O(Q^4) \to O(Q^{2.5})$ reduction from single-center to
-  composed block architectures (Corollary~1).
+\item Reduction from the generic single-center $O(Q^4)$ two-body
+  term count to the exactly $Q$-linear composed Pauli count
+  (Corollary~1; the retired pair-diagonal rule gave $O(Q^{2.5})$).
 \item Bit-identical zero patterns across Coulomb, harmonic,
   Woods--Saxon, square well, and Yukawa potentials
   (Table~\ref{tab:sparsity}).
@@ -611,9 +617,10 @@ sparsity.
 
 The universal--specific partition is sharp.  Angular sparsity and
 radial--angular factorization are universal across spherical fermion
-systems;\ the measured $O(Q^{2.5})$ Pauli scaling of composed block
-architectures is expected, but not here proven, to carry over beyond
-the Coulomb hydride library (Corollary~1).  The
+systems;\ the exactly $Q$-linear Pauli count of composed block
+architectures ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis)
+is expected, but not here proven, to carry over beyond
+the Coulomb composed library (Corollary~1).  The
 $S^3$ Fock projection, the $\pi$-free graph Laplacian,
 and the integer spectrum of the unperturbed hydrogen problem are
 Coulomb-specific and break under any modification of the radial
