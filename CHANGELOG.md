@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.2.6] - 2026-09-01
+
+CLAUDE.md compaction: **219.8 KB → 99.97 KB (-55%)**, verified lossless.
+
+### Why
+
+CLAUDE.md is loaded into every session and every sub-agent dispatch, so its
+size is paid repeatedly. It had drifted to 220 KB against its own 150 KB
+budget. Two sections were **56% of the file**: §2 at 65 KB and §3 at 58 KB.
+
+The diagnosis was not age. **76 of §2's 100 bullets were dated to a single
+month**, and 85 of 100 exceeded the 30-word budget §13.11 rule 2 already sets;
+87 of §3's 122 rows exceeded its 2-sentence rule, the longest at 182 words. The
+file did not need new rules — it needed the rules it already had, applied in
+bulk. Its own policy explains the gap: it says to compact "when touched, not
+as a one-time pass", and nothing ever forced the pass.
+
+### Moved (verbatim, nothing rewritten or dropped)
+
+| Section | Before | After | New home |
+|---|---:|---:|---|
+| §2 Development Frontier | 65.2 | 10.3 | `docs/development_frontier_archive.md` (round 7, 84 bullets) |
+| §3 Approaches That Failed | 58.2 | 14.0 | `docs/failed_approaches_ledger.md` (all 123 rows) |
+| §1.7 WH7 status | 3.4 | 1.0 | `docs/wh_register_history.md` |
+| §1.8 Focal-Length Program | 6.5 | 0.4 | `docs/focal_length_program.md` |
+| §13 reference blocks (13.1/13.4a/13.9b/13.10) | 12.1 | 1.2 | `docs/multi_agent_protocol.md` |
+| §9 Branch QA Review Protocol | 3.5 | 1.5 | `docs/branch_qa_protocol.md` |
+
+### Vestigial content found
+
+- **§1.8 was dormant, not active.** It names five deliverables (Paper 34
+  §V.C.2–6); **none of the five exists** — measured by grep, not assumed. Its
+  successor shipped in v4.71.0. Retired to `docs/` with its status stated.
+- **The longest bullet in §2 was a description of the previous compaction
+  round** (345 words) — housekeeping outliving the housekeeping.
+- **§13.1 and §13.9b restated files that already exist** (`agents/*.md`,
+  `.claude/commands/*.md`).
+
+### What deliberately stayed
+
+§13.5 hard prohibitions, §13.11 content discipline, §13.9 session-summary
+format, §13.8 paper-update policy, §3.5 guardrails, the §2 ORIENTATION block and
+results tables, the claim→artifact rule, and every dead end's **name** in §3.
+An agent still sees each dead end while scanning; the reasoning is one pointer
+away.
+
+### Verified lossless
+
+A conservation check against git HEAD (not against the scripts that did the
+moving) — **27 checks, 0 failures**: all 123 §3 rows verbatim in the ledger,
+all 121 dead ends still named in §3, all 100 §2 bullets either kept or
+archived, each moved section verbatim in its destination, all 15 headings
+intact, hard prohibitions present.
+
+### Added — §13.11 rules 10 and 11
+
+**10.** Compaction is relocation, never deletion; run the conservation check on
+any future round. **11.** Apply rules 2–3 when writing the entry, not later.
+Plus the content-location table now names the four archive homes, so the next
+dead-end row goes to the ledger by default.
+
 ## [v5.2.5] - 2026-09-01
 
 Trunk FULL-run remediation, Parts A—D. The C3 inline-tier pass was executed
