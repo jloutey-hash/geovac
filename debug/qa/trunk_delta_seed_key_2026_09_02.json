@@ -1,0 +1,82 @@
+{
+  "run": "trunk DELTA after Part F remediation (F-seeding rule), dispatched 2026-09-02",
+  "worktree": "C:\\Users\\jlout\\Desktop\\geovac-qa-seed-trunk-delta",
+  "baseline_commit": "dbe7ae2",
+  "seeds": [
+    {
+      "id": "S-D1",
+      "class": "S3 manufactured convergence endpoint / false positive by construction",
+      "file": "tests/test_fock_laplacian.py",
+      "locus": "appended test_weyl_density_converges_to_s3_rate",
+      "expected_catcher": "CODE-A (Opus)",
+      "detail": "tolerance 0.5 on a quantity whose deviation is < 0.06; cannot fail; docstring claims to pin the rate"
+    },
+    {
+      "id": "S-D2",
+      "class": "S2 vacuous / self-referential assertion",
+      "file": "tests/test_trunk_qa_forced_count_moduli.py",
+      "locus": "appended test_order_one_constraint_rank_is_consistent_with_260",
+      "expected_catcher": "CODE-C (Opus)",
+      "detail": "compares the rank to itself; never touches 260"
+    },
+    {
+      "id": "S-D3",
+      "class": "C3 tier overclaim (physics inference tagged SYMBOLIC PROOF)",
+      "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+      "locus": "eta-trivialisation forbidden-candidates paragraph (~:4218)",
+      "expected_catcher": "CLAIMS-1 (Opus)"
+    },
+    {
+      "id": "S-D4",
+      "class": "C9/C7 contradiction (tori re-included at 4/pi vs rem:circle_fejer)",
+      "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+      "locus": "Update (2026-05-16) paragraph (~:1603)",
+      "expected_catcher": "CLAIMS-2 (Opus)"
+    },
+    {
+      "id": "S-D5",
+      "class": "C8 kappa derived (hard line)",
+      "file": "papers/group3_foundations/paper_1_spectrum.tex",
+      "locus": "Spectral Reproduction paragraph after eq:rydberg",
+      "expected_catcher": "CLAIMS-3 (Opus)"
+    },
+    {
+      "id": "S-D6",
+      "class": "C9 synthesis coverage overclaim",
+      "file": "papers/synthesis/group3_foundations_synthesis.tex",
+      "locus": "Paper 6 applications paragraph",
+      "expected_catcher": "SYNTH (Opus)"
+    },
+    {
+      "id": "S-D7",
+      "class": "C4 wrong volume (Hekkelman LMP 112 -> 121)",
+      "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+      "locus": "bibitem hekkelman2022",
+      "expected_catcher": "CITE (Sonnet)"
+    },
+    {
+      "id": "S-D8",
+      "class": "C4 wrong volume (Cacic LMP 103 -> 113)",
+      "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+      "locus": "bibitem cacic2013",
+      "expected_catcher": "CITE (Sonnet)"
+    },
+    {
+      "id": "S-D9",
+      "class": "C9 synthesis torus factor at 4/pi",
+      "file": "papers/synthesis/group1_operator_algebras_synthesis.tex",
+      "locus": "M1 signature paragraph (~:1319)",
+      "expected_catcher": "SYNTH (Opus)"
+    }
+  ],
+  "known_good_controls_must_not_be_flagged_material": [
+    "P32 ~:3290 dim_H = 40 numerically equal to g_3 = 40 but a different object (cumulative 4+12+24 vs single level k=3)",
+    "P32 thm:gh_convergence: rate (4/pi) log n/n + O(1/n) proven unconditionally in Paper 38",
+    "P38 bibitem hekkelman2022 -> Lett. Math. Phys. 112 (2022), 20 (unseeded copy is correct)",
+    "P38 bibitem gaudillot_vs2025 -> IMRN 2025, no. 13, rnaf197",
+    "P0 Bohr L = n hbar, de Broglie integer wavelengths",
+    "P1 log-holonomy Theta(n) = -2 ln((n+1)/n) closed form, no R^2",
+    "group3 synthesis: unitarity 1e-10 over 10^3 steps live; 10^4 in Paper 6's archived H2 run",
+    "P40 abstract/theorems scoped to compact connected semisimple G"
+  ]
+}

@@ -745,3 +745,548 @@ guarantee than exists.
 found because adding a *new* criterion triggered a rule that says: prove it
 fires before you trust it. The discipline paid for itself on the criterion
 next door.
+
+---
+
+## 5. FULL certifying run #2 (dispatched 2026-09-01, scored 2026-09-02)
+
+**VERDICT: FAIL.** Trustworthy on 9 of 11 chunk-agents; two code chunks
+carry an INCONCLUSIVE-on-class rider (SS5.1). Under the AND rule the target
+is FAIL, and the two riders are carryforward, not a softer verdict.
+
+**Why a FULL run and not the DELTA the carryforward asked for.** PI
+direction at invocation (`/qa full cert on trunk`, run shape confirmed FULL,
+criteria confirmed frozen as quoted: `criteria.md` @ `dbe7ae2` + the trunk
+profile, C3-boundary in force, citations Opus-tier). Recorded so the next
+reader does not take the SS"Sizing" rule as having been skipped by the PM.
+
+**Setup.** Worktree `qa-seed-trunk` @ base `dbe7ae2`, seed commit `6eff792`
+("Trunk: post-tagging normalisation follow-ups" -- an innocuous message so
+the reviewers could not infer the plant from `git log`). Answer key
+`debug/qa/trunk_seed_key_2026_09_01.json`: 22 loci = 21 distinct seeds
+(CLC + CLC2 are two loci of ONE seed in the same Paper 38 remark), 8
+known-good controls; the June key was left untouched. Every dimension x
+chunk-agent carries >= 1 seed in a NON-FIRST paper of its chunk; each
+Sonnet code agent carries 2. Seed classes: S1 wrong citation ID, S2
+vacuous / self-referential / asserted-in-place-of-computed, S3
+manufactured convergence endpoint / false-positive tolerance, S4
+overclaim, S5 hard-prohibition touch, S6 C6 conflation, S7 stale internal
+title, S8 zombie descoped claim, S9 wrong metric. Run-#1 seed loci were
+avoided (rank <=, arXiv 0409307, Camporesi-Higuchi 1994, the Leimbach-vS
+attribution).
+
+**Deterministic layer, pre-dispatch (scopes stated, per the self-audit
+rule).** All 13 gates PASS on main: C10 compiles (6 trunk documents);
+C11/C12/C13/C14/C15/C16/C17/C18/C19/C20/C21 `--gate trunk`; C22 corpus-wide
+(the script takes no `--gate`; the first invocation with one exited 2 and
+was re-run without -- recorded here because an rc=2 gate that gets written
+down as PASS is the C19 shape). Self-tests: C18/C19/C20/C22 `--selftest`
+all rc=0; the pytest mirrors for C11/C16/C17/C21/C22 green. Proof-of-fire
+on the worktree: **C11 FIRED** on DET1 (rc=1, MISMATCH(1)); **C5 FIRED** on
+CLB1a (rc=1, gated scope 62 papers); **C16 did NOT fire** on SYN1, SYN2 or
+CLB2 -- the propinquity entries anchor on words BEFORE "propinquity" and no
+entry guarded the P45 K+-compression theorem at all (closed in SS5.5);
+C15 silent on bibitem-only arXiv swaps (its scope is inline IDs, by
+design). The 8 seeded test files still PASS after planting (192 passed, 5
+skipped, rc=0) -- i.e. every code seed is a test that passes while proving
+nothing, the class the reviewers are for. Trunk test baseline on main:
+1149 passed, 17 skipped, 2 xfailed.
+
+**Incident.** An HTTP 429 killed 10 of the 11 wave-1 agents mid-review
+(only CLM-B2 returned). All 10 were re-dispatched fresh (wave 2). The
+wave-2 CODE prompts carried class-level hints that overlap the planted
+classes ("manufactured convergence point", "neutered control", "vacuous
+<= 0.5+eps", "count-by-division", "rank threshold vs the wrong singular
+value", "quadrature that calls the same closed form"). Consequence, and
+the reason the scorecard marks them: **every CODE seed catch in this run
+is a GUIDED catch** (weaker evidence than a blind one), and **a MISS
+despite the hint is the stronger signal.** Claims / synthesis / citation
+prompts pasted only the frozen criteria and profile text -- those catches
+are blind.
+
+### 5.1 Calibration scorecard
+
+CAUGHT = named the locus (file + line +-3) AND graded MATERIAL / WRONG-ID.
+(g) = guided.
+
+| agent (chunk) | tier | seeds | result | controls | calibration |
+|:--|:--|:--:|:--|:--|:--|
+| CODE-A (P0+P7 tests) | Sonnet | A1 S3, A2 S2 | **A1 MISSED**; A2 CAUGHT (g) | KG1 clean; KG2 clean-with-note | **PARTIAL (1/2)** -- trusted on S2, NOT on S3 |
+| CODE-B (P1 tests) | Sonnet | B1 S3, B2 S2 | both CAUGHT (g) | -- | CALIBRATED (guided) |
+| CODE-C (P32 tests) | Sonnet | C1 S2, C2 S3 | **C1 MISSED**; C2 CAUGHT (g) | -- | **PARTIAL (1/2)** -- trusted on S3, NOT on S2 |
+| CODE-D (P38 tests) | Sonnet | D1 S2, D2 S3 | both CAUGHT (g); also caught CLC cross-dimension | -- | CALIBRATED (guided) |
+| CLM-A (P0+P1+P7) | Opus | CLA1 S4, CLA2 S6 | both CAUGHT | KG3, KG4 clean | CALIBRATED |
+| CLM-B1 (P32 1-3800) | Opus | CLB1a S5, CLB1b S9 | both CAUGHT | KG5 clean | CALIBRATED |
+| CLM-B2 (P32 3800-end) | Opus | CLB2 S8 | CAUGHT | KG5 clean | CALIBRATED |
+| CLM-C (P38) | Opus | CLC S4 (2 loci) | CAUGHT | KG6 clean (proposed an upgrade, not a flag) | CALIBRATED |
+| SYN (group3 synthesis) | Opus | SYN1 S9, SYN2 S8 | both CAUGHT | KG8 clean | CALIBRATED |
+| CIT-1 (P0+P1+P7+SYN) | Opus | CIT1a S1, CIT1b S1 | both CAUGHT | -- | CALIBRATED |
+| CIT-2 (P32+P38) | Opus | CIT2a S1, CIT2b S1 | both CAUGHT | KG7 clean | CALIBRATED |
+| C11 (deterministic) | -- | DET1 S7 | FIRED rc=1 | -- | fires |
+
+**Sensitivity 19/21 seeds (LLM 18/20; deterministic 1/1). False positives
+0/8 controls** (KG2 is a clean-with-note, below). Both misses are Sonnet
+code agents, both were whole-file reads that ended BACKED-SOUND -- the
+reviewer trusted the docstring's account of what the assertion checks:
+
+- **A1** (`test_trunk_qa_kappa.py:158`, S3): read 1-242 in full, graded
+  BACKED-SOUND, never mentioned :158 -- while holding the hint
+  "manufactured convergence point".
+- **C1** (`test_trunk_qa_forced_count_moduli.py:176`, S2:
+  `_NULL32(_H32) // 2` in place of `_NULL32(_H32, _C32)`): read 1-253 in
+  full, graded BACKED-SOUND / INTERNAL-THEOREM and praised the file.
+
+Cross-pattern: CODE-A missed S3 / caught S2; CODE-C missed S2 / caught S3.
+Sonnet code reviewers 6/8 on GUIDED seeds. The calibration convention
+(1/2 = PARTIAL, trusted on the caught class only) makes the consequence
+mechanical: the P0+P7 code chunk is INCONCLUSIVE on S3-class defects and
+the P32 code chunk is INCONCLUSIVE on S2-class defects. Neither chunk's
+"clean elsewhere" is evidence for the missed class. Recommendation, same
+shape as run #1's citation-tier finding: **Opus for code review on trunk
+roots, or 3 seeds per Sonnet code agent in the delta run.**
+
+**KG2 clean-with-note.** CODE-A flagged `test_volume_element_jacobian`
+(`test_fock_projection.py:330-356`) SMALL/MATERIAL as tautological.
+Verified on main: the test IS (a/b)^3 = a^3/b^3, a restatement (its own
+docstring says "algebraically equivalent"). Not a false positive on
+substance -- the CONTROL description ("genuine sympy derivations", all 18)
+was too strong for this one, and Paper 7 :15/:328 already hedge "several
+are definitional substitutions". Scored clean-with-note; remediation
+listed (a genuine sqrt(det g) from the induced metric).
+
+**Set-aside findings (protocol step 6, applied this time).** CLM-B2 M1 =
+seed CLB2; CIT-1's SYN:348-vs-:879 inconsistency = seed SYN1
+(second-dimension catch); CODE-D F1 = seed CLC; CODE-A Finding 2 = seed
+CLA1. All four are the plants themselves and were kept OUT of the genuine
+union -- the SS1b lapse did not recur.
+
+### 5.2 Per-dimension scorecard
+
+| dimension | criteria | verdict | basis |
+|:--|:--|:--:|:--|
+| Code / test-backing | C1, C2 | **FAIL** + riders | Genuine MATERIAL: `prop:D_equiv` cites backing that does not exist (LARGE by class); axiom table (vi)/(vii) prints tolerances 5-7x tighter than the test asserts; `test_ov_scaling_rigorous` guards sub-quadratic while Paper 1 says O(V); order-zero axiom mis-pointed; 2 stale test counts; forced-count matter-sector step uncovered. Riders: P0+P7 INCONCLUSIVE on S3; P32 INCONCLUSIVE on S2. |
+| Paper claims | C3, C5, C6, C8 | **FAIL** | KO-dimension label (LARGE, PI); the "propinquity rate" naming of the paper's own state-space-GH rate at 7 loci (C7 residue the C16 group1 regex cannot see); C3-boundary retags at 3 loci; the kappa appositive at P32:3149 (C8 bridge); one theorem body stale against Paper 38; Paper 38:284 arithmetic (2/pi should be 2); two tier / scope items. |
+| External citations | C4 | **FAIL** | Circle Fejer constant wrong by 2x at two Paper-38 loci AND contradicted by the paper's own backing test; two Connes-Marcolli locators; one year (SYN:1410); duplicate / orphan / preprint-form bibitems. |
+| Synthesis | C9 | **FAIL** | "closes the cosmic-Galois comparison" with a hook-arrow where Paper 56 has a homomorphism that is not injective; group label; provenance note; two omissions of the unconditional theorem (upgrades). |
+| Deterministic | C10-C22 | PASS | scopes in the header; C16 widened + proven (SS5.5) |
+| Completeness-critic | all | see SS5.6 | |
+
+### 5.3 Verified MATERIAL findings (non-seed), by owning document
+
+Every item checked against primary text in MAIN (not the worktree) before
+acceptance. Full remediation table with fixes: `docs/qa/trunk.carryforward.md`
+Part F. Short form here.
+
+**Paper 32.**
+- `def:D_GV_graph` + `prop:D_equiv` (:766-811, :816): the "graph form"
+  is defined by isospectrality, the proposition is then a tautology, and
+  the cited backing (`geovac/dirac_matrix_elements.py` "edge set and
+  weights", `tests/test_dirac_matrix_elements.py` "108 tests") does not
+  contain it -- the module has zero occurrences of "graph"; no test names
+  D_equiv; no claim-matrix row. The only implemented graph-form Dirac,
+  `geovac/dirac_lattice.py::DiracLattice`, is NOT isospectral to CH at
+  nonzero hopping (t=1 spectrum -4.21 ... 5.93 vs diag +-1.5/+-2.5).
+  LARGE by class (false backing), SMALL by consequence (no target number
+  moves: every axiom verification uses the spectral form). Rescope to an
+  honest Remark + a test that documents what is true. **Raised to PI.**
+- KO-dimension label (:4049-4051, :4531-4534; `test_almost_commutative.py`
+  docstrings): the verified sign pair (eps, eps') = (-, +) is the KO-3 pair
+  in Connes' table, not KO-1; "3 + 6 = 9 == 1 hence ..." does not follow.
+  Tests verify the signs at 1e-12, not the label. **LARGE, raised to PI**
+  (Dabrowski-Dossena to be checked against the primary before citing).
+- "propinquity rate" for the state-space GH rate at :1986, :2132,
+  :2140-2141, :3198, :3569, :6874 -- C7 residue, invisible to the group1
+  C16 regex (needs "Latr" adjacent). Remediate as a class.
+- :3380-3382 inside `thm:gh_convergence` still says the O(log n/n) rate is
+  "not rigorously proved ... deferred" -- stale against Paper 38
+  (unconditional 2026-06-10).
+- :3149-3150 "kappa = -1/16 (the Fock Jacobian Omega^-4)" -- the
+  appositive asserts the derivation bridge C8 forbids.
+- C3-boundary retags: :6477 (Frobenius-residual certificate), :3758-3762
+  ("three rows verify ... to machine precision"), `thm:forced_count`
+  :5113-5201 (n_max=2 enumeration + symbolic N_gen^2). Plus :5418 "128 per
+  generation" vs the theorem's 128 N_gen^2 / 8 per generation.
+- :1386-1388 "[MEASURED] it is an explicit Connes-style ... spectral
+  triple, validated against the 21cm gap" -- the measurement backs the
+  gap, not spectral-triple-hood.
+- :878-882 order-zero axiom "verified in test_dirac_matrix_elements.py" --
+  mis-pointed (the only order-zero test is the Lorentzian U_L one).
+- :6518-6521 axiom-table (vi)/(vii) "<= 0.0675 / <= 0.101" vs
+  `test_connes_axiom_audit_31.py:291-313, :328` asserting `< 0.5`.
+- :4882 "provably non-overlapping" vs :5216 "seam theorem ... prove" for a
+  seam the C3 pass tiered OBSERVATION; :4207-4213 untiered "forbidden ...
+  vanish identically on ANY CC-compatible AC extension" (physics
+  inference, not shown).
+- Counts: :3715 "39/39" (49 collected: 47 + 2 skipped); :7028-7029 "67"
+  (70: 66 + 4 skipped); :4053/:4167 "38 tests passing" (53 collected, 53
+  pass -- found by the R2 read, 5.6). Locators: :2738-2739 "Connes-Marcolli 2008 Ch. 4"
+  (the book has four chapters; the cosmic-Galois material is Ch. 1 SS1.7,
+  Thm 1.100); :4032-4033 "Ch. 13" (SS1.13).
+- Coverage gap: `thm:forced_count` matter sector "512 -> 256 -> 128;
+  order-one / J-reality add nothing" (:5172-5176) is not computed by
+  `test_trunk_qa_forced_count_moduli.py`.
+
+**Paper 38.**
+- **Circle Fejer constant** (:941-950 remark, :1702-1708 paragraph): the
+  classical first absolute moment of the probability-normalised Fejer
+  kernel is (2/pi) log N/N, not (4/pi). Closed form: M_n = pi/2 - (4/pi)
+  sum_{k odd < N} 1/k^2 + (4/(pi N)) sum_{k odd < N} 1/k, N = n+1.
+  Quadrature check: n M_n / log n = 0.9895 (n=50) -> 0.8321 (n=1600),
+  doubling estimator -> 0.644 vs 2/pi = 0.6366 (4/pi = 1.273 is not in
+  play). No standard normalisation gives 4/pi (Zygmund's K_n gives 2;
+  integral 2 pi gives 4). **The paper's own backing test already says
+  this**: `tests/test_trunk_qa_fejer_4_over_pi.py:235-268` names 2/pi
+  "the circle-Fejer (unweighted) constant" and asserts the SU(2)
+  constant is TWICE it. So "the constant 4/pi is the same on both sides"
+  contradicts the test. Stein-Weiss 1971 SSI.1 is L^1 Fourier theory on
+  R^n -- not a locus for this moment; drop that locator, keep Zygmund
+  Vol. I Ch. III without "SS3.6". The SU(2) = 2 x circle relation
+  (2 Vol(S^2)/Vol(SU(2)) = 4/pi mirrors 2 Vol(S^0)/Vol(S^1) = 2/pi) is an
+  observation, to be stated as one. Propagates OUTSIDE trunk: Paper 40
+  :966-973, :977-989 (`rem:stein_weiss_general`), :1937, :1943-1944 and
+  the group1 synthesis :250, :597-599, :783, :1284 -- advisory here,
+  **raised to PI** as a group1 carryforward; memory
+  `l2_quantitative_rate_4_over_pi.md` to be re-read.
+- :283-284 "Vol(S^2)/Vol(SU(2)) . (2/pi) = 4/pi": 4 pi / 2 pi^2 = 2/pi, so
+  the factor must be 2, not 2/pi.
+- :934-935 "monotonically decreasing for n >= 3 (verified at n in
+  {2,...,1000})" -- no frozen test reaches 1000 (`test_central_fejer_su2.py:647-659`
+  stops at 100).
+- L3 (C_3 = 1, :980-1077) has no inline test citation though
+  `tests/test_r25_l3_lipschitz_bound.py` exists and the matrix names it;
+  Paper 40 SS3.3 may prove it at all ranks -> possible [INTERNAL THEOREM]
+  upgrade, to be verified in P40 first. :553-554 whole-file cite of
+  `test_p45_kplus_degeneracy.py` where one of five functions is relevant.
+- Bibliography: duplicate Paper 40 bibitems (:1881 `paper40_unified` /
+  :1935 `loutey_paper40`); no Paper 43 bibitem while :295 cites it inline;
+  `latremoliere2018` :1840 JFA -> Trans. AMS 368 (2016) 365-411 (the body
+  :591 has it right); orphans `chamseddine_connes2010`, `perez_sanchez2024`;
+  preprint forms `gaudillot_vs2023` (IMRN 2025 rnaf197), `hekkelman2022`
+  (LMP 112, 20); n-index clash :433 (n+1)(n+2) vs :625 n(n+1).
+
+**Papers 0, 1, 7 and their tests.**
+- `tests/test_ov_scaling_rigorous.py:169 < 1.8, :216 < 1.5` guard
+  "sub-quadratic"; Paper 1 :449 says "[MEASURED] the O(V) ... scaling is
+  verified by" it. Tighten the deterministic nnz exponent (:216) and state
+  the measured exponent (~1.05) at P1:449.
+- `test_volume_element_jacobian` restatement (KG2 note above).
+- P1:26 "dynamical symmetry group SO(4,2) [barut1967, fock1935]" -- Fock
+  1935 is SO(4); P1:271 Condon-Shortley phrasing; P0:749-750 Bohr vs de
+  Broglie; P1 :15/:54/:59/:363 "reproduce the exact Rydberg spectrum"
+  (-> quantum numbers, per P7:689); P1:393-398 K sentence inherits
+  [CONJECTURE] -> own [OBSERVATION]. NIT cluster in CLM-A (P0 duplicate
+  tags, "Paper 6" pointers to the archive, "~6%" vs 5.3%, "R^2 = 1.0"
+  not computed).
+- Orphan `loutey_paper18` in P7; inline Gaudillot-Estrada-van Suijlekom
+  (arXiv:2310.14733, ID verified correct) without a bibitem in P7 :748
+  and SYN :354 (add `gaudillot_vs2023` to both; re-run C20).
+
+**group3 synthesis.**
+- :164-165 "Paper 56 closes the cosmic-Galois comparison U*_GV
+  hookrightarrow ..." -- Paper 56 :151-152 / :1298-1302 says the injection
+  DIRECTION of the comparison, and that Phi^inj is not injective (factors
+  through the abelianisation); SYN :1096-1099 itself says "a homomorphism
+  (not a closed immersion)". Fix the arrow and the verb.
+- :988 "Paper 25 (synthesis group)" -- it lives in group5 (:692 has it
+  right). :589-594 provenance note omits the pre-rename test filename
+  (`git`: renamed in 6e6ce40) and, per the R1 read (5.6), overclaims its
+  scope -- the file backs unitarity + Rabi only, not applications
+  (a)/(c)/(d) (matrix row 133 open); :601-603 "$10^4$ time steps" vs the
+  live test's 1000 (10^4 is Paper 6's archived run). :1410 aquilanti_caligiana2003 CPL 366, 157
+  -- issue is 2002 (verify vs publisher before editing). Upgrades: :176 and
+  :1306-1309 omit Paper 38's unconditional state-space GH theorem (add with
+  the correct metric name). Inline attributions without bibitems (:546,
+  :867, :1073 Fathizadeh-Marcolli load-bearing, :1076, :1122/:1154, :1149)
+  -- C20-baselined class; orphan bibitems (7).
+
+### 5.4 What the run did NOT find (recorded so it is not mistaken for coverage)
+
+- No hard-prohibition touch on main (C5 + CLM-B1/B2 enumeration of every
+  K-sentence; KG5 clean twice).
+- No live retracted-claim zombie on main under the widened C16.
+- No fabricated external citation on main: the two WRONG-IDs were both
+  seeds; the genuine citation defects are locators, years and hygiene.
+- The kappa Observation loci (P0:652-662, P7:732-744) and the K-status
+  remark (P32:2097) were each passed clean by a calibrated Opus agent.
+
+### 5.5 Registry work done in this run (two-way proofs recorded)
+
+**C16, two new entries** (`debug/qa/check_retracted_terms.py`), each with
+the discrimination proof the 2026-08-22 rule requires, run by
+`scratchpad/c16_fire_test.py` pointing `ROOT` at the worktree and then at
+main:
+
+| entry | FIRE (seeded worktree) | SILENT (main) |
+|:--|:--|:--|
+| `latremoliere-propinquity-named-for-gh-rate` -- anchors on `Latr...propinquity convergence` and `propinquity convergence at rate`; exempts only on an explicit denial (`no published`, `not achieved`, `strictly stronger`, ...). Files: group3, group3 synthesis, P32, P38, group1 synthesis. | SYN:348 LIVE (1/1 expected) | 0 live; P32:6112 "has no / published Latremoliere-propinquity convergence theorem" correctly exempt |
+| `p45-kplus-compression-theorem-live` -- `K^+-compression theorem` (bare) or `Lorentzian quantum-metric convergence`; exempts on `degenerac / descope / withdrawn / retract / annihilat / intended to assert / open question / convergence question / open named / not a Lorentzian`. Files: P32, P38, P42-53, group1 + group3 syntheses, field guide. | SYN:693, P32 wt:6748, wt:6749 LIVE (3/3 expected) | 0 live; P46:1179, P48:452, P48:1953, P49:343 correctly exempt (all four are the descoped statement) |
+
+Why the existing entries missed the seeds, for the record: the group3
+entry exempts on `state-space` within +-5 lines, and the seeded sentence
+carried "state-space" in its own next clause (the scalar half, correctly
+labelled) -- so a wider pattern on that entry would have been silenced by
+its own exemption; hence a separate entry with a denial-only exemption.
+The first draft of the K+ entry fired on main at P49:343 ("convergence
+question is an / open named research target"); the exemption was widened
+and the proof re-run -- the live hit is what a registry test is for.
+
+After the edit: `--gate trunk` PASS (11/30 entries, 38 locus patterns, 44
+exempt), `--gate group1` PASS (7/30), `--gate group3` PASS (10/30);
+`tests/test_retracted_terms_check.py` 5 passed; C22 check C now runs 30
+retracted patterns (was 28), PASS.
+
+**Still LLM-tier (no registry entry can see them).** CLB1b (a tier
+overstatement: "established unconditionally by the Paper 35 verification"
+-- semantic); and any zombie phrase that straddles a LaTeX line wrap
+("Lorentzian / propinquity construction" on wt:6747-6748 was caught only
+via the `K^+-compression theorem` alternative on the same line), because
+`scan_entry` matches per line. Both stay with the claims reviewers.
+
+**C16 widening still owed at remediation** (not done in-run because it
+is a remediation of main, not a registry-coverage fix): a `propinquity
+rate` alternative for the group1 entry once the 7 P32 loci are renamed
+"state-space GH rate" -- two-way proof required then.
+
+### 5.6 Completeness-critic pass
+
+One fresh Opus critic (287k tokens, 45 tool uses) read the eleven
+reviewer reports against the six documents on MAIN and answered "what
+did nobody look at?" -- absence is not compliance. Its dispatch named
+`Paper_1_Spectral_Graph_Methods.tex`, which does not exist; every
+reviewer had used `paper_1_spectrum.tex`, so the slip is harmless and is
+noted only so the record matches the prompt.
+
+**Coverage gaps (regions no reviewer quoted), by document.**
+- P0: Table 1/2 cells; part of the conclusions; 6/8 internal bibitems.
+- P1: footnote :76; Appendix A :409-434; B.1, B.3; Table I caption.
+- P7: the chordal-ansatz negative-result paragraph + table :471-493; the
+  N-electron angular table :574-604; Appendix B :879-891; 5/7 internal
+  bibitems.
+- P32: single-reviewer coverage on :1670-3669; unquoted table cells at
+  :1098-1115, :1152-1200 (whole table), :1354-1367, :1753-1776,
+  :3738-3758, :4078-4092; paragraphs :176/:192/:207 and :624-713; a
+  `propinquity` at :2159; the H1 block :4056-4171 + :4216-4240 (R2 below);
+  ~17 unquoted `\paragraph` status strings; all 30 internal bibitems.
+- P38: the Section 1 prior-art propinquity paragraph :176-203 (C7 prose,
+  unquoted); footnotes :221/:603; Outline :304-319; Appendix A Steps 1-4
+  :1622-1690 (the 4/pi derivation chain -- the CLC/Stein-Weiss findings
+  reached it only through the body); the L3 backing test unreviewed; 7/9
+  internal bibitems.
+- Synthesis: abstract headlines (b)/(c) :54-60; Section I tags
+  :175/:180/:182; "Status of packing-vs-physics" :271-287; Section IV tags
+  :489/:569; Section V `[MEASURED]` :602/:606 (R1 below); Section VII
+  `[CONDITIONAL]` :865; 24/26 internal bibitems.
+
+**Backing tests no reviewer opened.** `tests/test_rabi_oscillation.py`
+(SYN :591; the synthesis had no CODE dimension); `tests/test_paper2_corrections.py`
+(matrix row 47 -- the only C5 artifact-side test for P32, audited by
+nobody); `tests/test_r25_l3_lipschitz_bound.py` (P38 L3, uncited in the
+paper); `debug/p38_g1g2_band_diagnostics.py`, `debug/p38_g1g2_scalar_prototype.py`;
+`geovac/standard_model_triple.py` "(45 tests)" at P32:5183 (matrix row 48
+already says mis-pointed); the 19 tests on synthesis matrix rows.
+Partially read: `test_qed_self_energy.py`, `test_modular_hamiltonian.py:261-1074`.
+Open NO-TEST rows: 133, 49, 88.
+
+**UNMEASURED this run (per criterion x document).**
+
+| criterion | unmeasured for |
+|:--|:--|
+| C7 (metric naming) | P0, P1, P7: 0 occurrences examined (the term does not occur -- vacuously fine, but no reviewer said so); synthesis sample size 1 (the seed) |
+| C5 (K-label) | prose side: P0, P38 0 occurrences; P1 sample 1; P7 sample 2. Artifact side (`tests/test_paper2_corrections.py`): corpus-wide, nobody |
+| C8 kappa | P1, P38, P32:3800-7527: zero occurrences examined |
+| C8 4/pi | P0, P1, P7 |
+| structural | footnotes, table cells, appendices, `\paragraph` strings as listed above; 83 internal bibitems had no mandated reviewer |
+
+**Cross-reviewer contradictions (10) and how each was adjudicated.**
+#1 gearing commutator (CODE-B vs CLM-A) = seed B2. #2 Berry control = seed
+B1. #3 the 4/pi value (CODE-D vs CLM-C) = seed CLC. #4 CODE-C "PASS" vs
+CLM-B1/B2 FAIL on the same paper -> recorded FAIL-by-content (5.2). #5
+per-band injectivity = seed D2. #6 L3 "upgrade to theorem" (CLM-C) vs
+"uncited backing" (CIT-2) -> both right; remediation adds the inline cite
+and the tier. #7 forced_count tier: CLM-B2 is correct (no tag on the
+paragraph); CODE-C's "INTERNAL-THEOREM" was the test's grade, not the
+paper's. #8 SYN:348 = seed SYN1. #9 P32:1386 -- claims side examined,
+backing side not; carried to remediation (the :1386-1388 item in 5.3).
+#10 P7:79 "complete, machine-verified algebraic audit" vs matrix row 42
+"~4 of 18 weak" -> soften P7:79 (already in 5.3 via KG2).
+
+**The critic's one "demonstrated hit" was the seed.** It reported
+P1:527 bibitem title "Deriving the Schrodinger Equation from Graph
+Topology" as a live internal-title defect. That locus is seed DET1
+(`trunk_seed_key_2026_09_01.json`, `deterministic_seeds`); on main
+:527-529 reads "The Dimensionless Vacuum: Recovering the Schrodinger
+Equation from Scale-Invariant Graph Topology," GeoVac Paper 7 (2026).
+The critic had read the worktree. Recorded as a correct catch of a
+planted defect by an agent that was not told about the seeds -- not as a
+coverage gap with a live target.
+
+**Recommended re-dispatches R1-R3, handled in the main session** (each was
+a bounded read, not a fresh-panel job):
+
+*R1 -- synthesis Section V `[MEASURED]` claims vs `tests/test_rabi_oscillation.py`.*
+Ran the file on main: 3 passed in 16.9 s, rc=0 (`gates/rabi_main.out`).
+Read all 593 lines. Findings, all genuine, none seed-adjacent:
+- SMALL/MATERIAL. SYN :601-603 "Unitarity is preserved to machine
+  precision over $10^4$ time steps" and :587-594 "re-run and reproduce ...
+  regression backing is live in tests/test_rabi_oscillation.py". The live
+  test (`run_norm_conservation`, :195) integrates **1000** steps at
+  `max_n=10`, `dt=0.1`, threshold `norm_max_dev < 1e-10` (:217). The 10^4
+  figure is Paper 6's original run (archive :31, :435, `<1e-14`), and
+  matrix row 132 repeats 10^4. Counterfactual: the sentence's stated
+  evidence base changes (10^3 in the live regression vs 10^4 archived);
+  no headline changes. Fix: state both, or raise `n_steps` to 10^4 and
+  re-measure.
+- SMALL/MATERIAL. The provenance note :589-594 says the Section's results
+  "were re-run and reproduce" with backing in that file, but the file
+  backs only unitarity and application (b) Rabi (`p_tgt_peak > 0.95`,
+  `period_error < 0.5`, :381-397). Applications (a) 20 H2 transitions
+  0.16 % / 33 s, (c) MD 0.0003 %, (d) Langevin 300 K have NO test
+  (matrix row 133, "COVERAGE GAP (still open)"). Counterfactual: three
+  `[MEASURED]` results are presented as regression-backed and are not.
+  Fix: scope the note to what the file backs; leave (a)/(c)/(d) tagged
+  as archived Paper 6 measurements with the row-133 gap named.
+- NIT. `run_off_resonance` asserts `p_tgt_max < 0.5` (:478) against a
+  measured 0.0037 (135x slack); the Rabi assertions bound (0.95 / 0.5 %)
+  rather than pin the quoted 99.98 % / 0.41 %; "machine precision" in the
+  prose vs a 1e-10 threshold in the test. Tighten at remediation.
+
+*R2 -- P32 H1 block :4013-4262 on main (Higgs falsifier; scope and
+limitations; modular-propinquity reformulation).* Direction of the
+scope-and-limitations paragraph (:4152-4163) is correct: no Higgs vev, no
+M_3(C), chiralities not identified, "no claim is made that GeoVac
+contains the Higgs" -- consistent with the positive-thin verdict. The
+modular-propinquity paragraph (:4215-4238) uses Latremoliere's *dual
+modular propinquity* as a tool on the Higgs falsifier and closes
+negatively ("NOT Morita equivalence"); it is a scoped negative result,
+not a C7 metric-naming zombie. Findings:
+- SMALL/MATERIAL (count drift, same class as :3715 and :7028). :4053 and
+  :4167 say `tests/test_almost_commutative.py` "38 tests passing"; on
+  main the file collects **53** and 53 pass (3.4 s, rc=0,
+  `gates/ac_collect.out`, `gates/ac_run.out`; the file grew at 23418fc,
+  Sprint G3). Fix both loci to 53.
+- Already in the ledger from CLM-B2: the Connes-Marcolli "Ch. 13" locator
+  (:4032-4033, H4) and the KO-dimension arithmetic (:4049-4051, M4).
+- NIT. The block cites CLAUDE.md by name (:4152; 15 such mentions in
+  P32) and the sprint codename "Track 1 R2.5 L4" (:4156) -- audience
+  register. Two `debug/` memo citations (:4235-4238) and
+  `debug/data/h1_falsifier.json` (:4090) -- C14 advisory under the
+  2026-06-17 policy. The reformulation paragraph and the thermal
+  extension (:4171-4213) carry no inline tier (the :4207-4213 item is
+  already in 5.3).
+
+*R3 -- the 83 internal bibitems.* Title drift is deterministically
+covered: C11 (`check_internal_titles.py --gate trunk`) checks every
+internal bibitem's title and year against the cited paper's own
+`\title`/`\date`, PASSES on main and was proven to FIRE on DET1 in this
+run -- exactly the class the critic's one hit belongs to. The residual
+class (a descriptor that mis-states a cited paper's *status*) was swept
+by hand on main: across the six documents the only references to the
+descoped Papers 45-49 are P38 :1551 ("proves this degeneracy theorem",
+tagged `[OPEN]` for the Lorentzian extension) and its bibitem :1869-1873
+("a degeneracy theorem", matching Paper 45's live title). Both state the
+surviving negative result, not the withdrawn positive one. SYN :693 on
+main carries no Paper 45 citation (the worktree's was seed SYN2). No
+finding; no dispatch.
+
+**Net effect on the verdict:** none on the FAIL (already FAIL on every
+LLM dimension); R1 adds two SMALL/MATERIALs to the synthesis remediation
+list and R2 adds one to P32's. The UNMEASURED table above is carried
+forward verbatim so the delta run can be scoped to it.
+
+### 5.7 Honest ceiling and what the delta run must carry
+
+- **Two INCONCLUSIVE classes.** The delta run needs a fresh S3 seed on the
+  P0/P7 backing tests and a fresh S2 seed on the P32 backing tests, blind
+  (no class hint), and either Opus code reviewers or 3 seeds per Sonnet
+  agent. Until then the trunk's code dimension is certified only on the
+  classes its reviewers demonstrably caught.
+- **Guided catches.** Six of the eight CODE seed catches were guided; the
+  next run's CODE prompts must paste the frozen criteria only.
+- **PI adjudications (nothing mechanical is blocked on them):** (1) the
+  KO-dimension label -- fix the label to the verified KO-3 pair, or change
+  the construction; (2) `prop:D_equiv` -- rescope to a Remark (recommended)
+  or build the graph-form operator the definition promises; (3) the circle
+  Fejer constant propagates into Paper 40 and the group1 synthesis --
+  out of trunk scope, logged as group1 carryforward.
+- **Remediated text is not clean text.** Run #1's delta found 4 of 11
+  genuine findings were introduced by its own remediation. The next FULL
+  run is gated on a clean DELTA, per the carryforward's standing rule.
+
+## 6. Part F remediation (2026-09-02, v5.3.1)
+
+The 30 Part F rows not covered by the v5.3.0 PI items were closed in one
+sprint; each row in `docs/qa/trunk.carryforward.md` now carries its DONE
+note, and the findings the remediation itself surfaced are recorded there
+as F7.10-F7.16 (Paper 40's main-theorem class silently included tori; the
+dim_H = 40 = g_3 = 1/Delta coincidence presented as structural at five
+loci across Papers 32 and 42; c^2(3,2) vs the test's c^2(4,3); catalogue
+entries vs instances in the wall count; two order-of-magnitude
+restatements from the memo's own numbers; a bibitem-key collision; the
+widened C16 entry finding eight more loci outside Paper 32).
+
+Method notes for the DELTA that follows:
+
+- **Everything measured, nothing remembered.** Every count, residual and
+  exponent written into a paper this sprint was re-measured (test counts
+  49/70/54/45; axiom residuals 0.0675/0.1013; nnz exponent 1.07; Rabi
+  0.999756 / 0.4106 % / 0.003725; Fejer certificate 2.3 s at n = 1000).
+- **Every registry change two-way proven.** The C16 widening fired on
+  5/5 retired phrasings and stayed silent on 7/7 corrected ones -- and then
+  fired on eight live loci the FULL run had not scoped, which is the
+  argument for widening rather than hand-sweeping.
+- **Gates run whole-target, scope stated:** C10 on Papers 0/1/7/18/32/38/
+  40/42 + both syntheses; C11/C13/C14/C16/C18/C19/C21 on `trunk`;
+  C11/C13/C14/C16/C19/C21 on `group1`; C5 corpus-wide; C15, C20, C22.
+  All PASS.
+- **Not done, carried:** F5 coverage debt (unchanged except App. A Step 3);
+  three F1.15/F3.6 NITs the run record did not locate precisely ("H10
+  sub-locators", the :1119/:1773 items, the `test_s3_eigenvalue_ground_state`
+  docstring) -- named in the carryforward rows rather than guessed at.
+
+## 7. DELTA run #1 (2026-09-02) = DEFECTS, remediated
+
+Calibrated 9/9 (0/8 false positives) across seven blind reviewers on a
+seeded worktree; verdict DEFECTS on 26 genuine items in the Part F
+remediation itself (table G1 in `docs/qa/trunk.carryforward.md` Part G),
+all fixed the same day. Both S3 and S2 code classes that the FULL run #2
+Sonnet chunks missed were caught by Opus on the trunk-root tests. The
+load-bearing non-seed catches: Paper 7's appendix still listing the
+retired Jacobian identity; a Dąbrowski–Dossena equation locator wrong
+(re-verified against the primary, Table 5 claim confirmed); an ε″ comment
+contradicting the code; two Paper 42 twins of the dim_H = g_3 fix; five
+[MEASURED] tags on bit-exact panels (register says PANEL-VERIFIED); a
+19 GB test matrix in the default run. DELTA #2 with fresh seeds is the
+next step; the FULL run stays gated on it.
+
+## 8. DELTA run #2 (2026-09-02, PI-invoked) = DEFECTS, remediated
+
+Scope = the DELTA #1 remediation (baseline reconstructed from the saved
+diffs and committed on the seed branch). Calibration 8/9 with one void seed
+(the CLAIMS-1 tier plant was defensible), 0/8 false positives. Fifteen
+genuine items (carryforward Part H, table H1), two of them regressions of
+DELTA #1's own fixes (the group1 master-theorem wording exceeding Paper 40;
+the oddness pin that could not fail and whose inference the production
+grading refutes). Two PI adjudications recorded (Paper 40's title; the KO
+label of the finite triple, measured (-, +, +) with the finite grading).
+Lesson: a delta that reviews only the remediation still finds defects in
+it; the next FULL run stays gated on a clean DELTA #3.
+
+### 8.1 PI adjudications applied (2026-09-02, v5.4.0)
+
+The DELTA #2 H2 items were decided by the PI the same day and applied before
+the FULL run: (1) Paper 40 retitled to the semisimple class, 23 loci
+cascaded; (2) the finite combined triple carries **no** KO-dimension label —
+the measured sign triple $(-,+,+)$ is printed (Paper 32 ×4, two modules, two
+test files, matrix, C16 notes; `test_J_combined_KO3_sign` renamed
+`test_J_combined_sign_pair`); (3) DELTA #3 skipped, FULL run unseeded by the
+new default. Two further items the PI delegated: the Paper 7 NO-TEST row is
+closed by `tests/test_paper7_graph_convergence.py` (measured 2026-09-02:
+E0 = -0.41363 / -0.46375 / -0.47571 / -0.48883 / -0.49364 / -0.49713 at
+n_max = 5 / 8 / 10 / 15 / 20 / 30, i.e. 17.27% -> 0.57% against -1/2,
+monotone and one-sided; the six lowest eigenvalues at n_max = 30 lie within
+0.06%, so the graph spectrum's bottom is dense and the claim is pinned at the
+spectrum's edge), and Paper 40's §L5 / "Propinquity convention" now define
+$\Lambda_{\mathrm{prop}}$ as van Suijlekom's state-space GH distance with
+Latrémolière's propinquity named as not claimed (18 loci; bibitem
+`vs2021_jgp` added — the compile gate caught the missing key on the first
+pass). Version bumped to v5.4.0 by PI direction (gate change: seeding opt-in).

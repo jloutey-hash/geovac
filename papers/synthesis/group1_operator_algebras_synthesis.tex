@@ -108,7 +108,7 @@ state-space Gromov--Hausdorff sense at quantitative rate
 $\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_3 \gamma_{\nmax}$
 with $C_3 = 1$ and asymptotic constant $4/\pi$ (Paper~38).
 Third, the rate constant $4/\pi$ is universal across the class of
-simple compact Lie groups with bi-invariant metric --- rigorous at
+compact connected semisimple Lie groups with bi-invariant metric --- rigorous at
 rank~1, numerically pinned at ranks~1--2 for general $G$ with the
 rank-uniform analytical proof a named gap --- via a Plancherel-weight
 $\times$ Vandermonde-Jacobian cancellation in the dual-Coxeter
@@ -127,7 +127,7 @@ de-compactification limit $T \to \infty$ survives at the
 norm-resolvent / spectral level.  A
 master-theorem \emph{sketch} (\S\ref{sec:closures_post_45}) subsumes
 Papers~38,~39, and~40 as special cases:\ for arbitrary $k \ge 1$ and
-arbitrary compact connected Lie groups $G_{1}, \ldots, G_{k}$, the
+compact connected semisimple Lie groups $G_{1}, \ldots, G_{k}$, the
 k-fold tensor product converges (state-space GH) at the universal
 $4/\pi$ rate with Lipschitz comparison constant $C_3^{(k)} \le
 \sqrt{k}$ (only the $k\le2$ cases are proved).  The constant
@@ -247,9 +247,9 @@ For any simple compact Lie group $G$ with bi-invariant metric (so
 $G \in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4}, E_{6},
 E_{7}, E_{8}\}$), the Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation theorem (Paper~40~\S 3.2~\cite{paper40_unified}) leaves
-exactly the rank-1 Stein--Weiss constant $4/\pi$ from each positive
-root direction's Euler--Catalan asymptote, in the dual-Coxeter
-normalisation.  The constant $C_{3} = 1$ remains asymptotically tight
+exactly the rank-1 ($\SU(2)$) constant $4/\pi$ of Paper~38 Appendix~A
+from each positive root direction's Euler--Catalan asymptote, in the
+dual-Coxeter normalisation.  The constant $C_{3} = 1$ remains asymptotically tight
 at all ranks via the PRV-summand bound of Kumar (1988) and Vinberg
 (1990), applied to the dominant image of the tensor product
 $V_{\lambda} \otimes V_{\lambda'}^{*}$.  \emph{Tier:}\ this universality
@@ -594,9 +594,11 @@ via the Bo\.zejko--Fendler central-multiplier equality
 
 \paragraph{The asymptotic constant $4/\pi$.}
 The mass-concentration moment $\gamma_{\nmax}$ of the kernel
-admits a closed-form decomposition via Stein--Weiss-type integration
-by parts \cite{stein_weiss1971}, leading to the
-\emph{Stein--Weiss sharpening} (Paper~38, Appendix~A):
+admits an exact closed-form sum rule whose asymptotics are fixed by
+an Euler--Maclaurin analysis of two logarithmic sub-coefficients
+(net $2 - 1 = 1$); the corpus names this the \emph{Stein--Weiss
+sharpening}, after the real-line approximate-identity estimates of
+\cite{stein_weiss1971} (Paper~38, Appendix~A):
 \begin{equation}
 \gamma_{\nmax}
 \;=\;
@@ -609,9 +611,14 @@ by parts \cite{stein_weiss1971}, leading to the
 The constant $4/\pi = \Vol(S^{2})/\pi^{2}$ is the
 \emph{Hopf-base measure factor} in the $\SU(2)/\Uone$ Haar
 normalisation.  Concretely, for the Hopf bundle
-$\sthree \to S^{2}$, $\Vol(S^{2}) = 4\pi$ and the right-hand side of
-\eqref{eq:gamma_asymptote} normalises by $\pi^{2}$ from the SU(2)
-character integration $\int_{0}^{2\pi} \sin^{2}(\theta/2)\,d\theta$.
+$\sthree \to S^{2}$, $\Vol(S^{2}) = 4\pi$ and
+$\pi^{2} = \Vol(\SU(2))/2$ is half the Haar volume of
+$\SU(2) \cong \sthree$, so that $4/\pi = 2\Vol(S^{2})/\Vol(\SU(2))$.
+The constant is that of the group $\SU(2)$, not of a circle:\ the
+classical Fej\'er kernel on $\T^{1}$ has probability-normalised
+first-moment constant $2/\pi$, half the $\SU(2)$ value (Paper~38,
+Remark ``Connection to the circle Fej\'er estimate''; an earlier
+statement that the two constants coincide is withdrawn, 2026-09-02).
 The expected one-log slowdown of the non-abelian SU(2) rate compared
 with the Leimbach--van~Suijlekom torus rate $O(1/\nmax)$
 \cite{leimbach_vs2024} is precisely the $\log n$ factor in
@@ -751,9 +758,9 @@ bi-invariant metric.
 
 \begin{theorem}[Paper~40, universal rate constant]
 \label{thm:universal_rate}
-Let $G$ be a simple compact connected Lie group of rank $r \ge 1$
-with bi-invariant metric (so
-$G \in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4},
+Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
+with bi-invariant metric (each simple factor
+$\in \{\SU(N), \mathrm{Spin}(n), \mathrm{Sp}(n), G_{2}, F_{4},
 E_{6}, E_{7}, E_{8}\}$).  The truncated Camporesi--Higuchi triples
 $\Tcal_{\nmax}(G)$ converge to $\Tcal_{G}$ in the van~Suijlekom
 state-space Gromov--Hausdorff sense with the same asymptotic rate constant as
@@ -780,8 +787,9 @@ amplitude (so the weight is $\dim V_{\lambda}$) and the Vandermonde
 Jacobian $|\Delta(t)|^{2}$ in the Weyl integration formula on $G$
 share the same $\prod_{\alpha > 0}$ product structure over positive
 roots.  In the dual-Coxeter normalisation these products cancel
-exactly, leaving only the rank-1 Stein--Weiss constant $4/\pi$ from
-each positive-root direction's Euler--Catalan asymptote
+exactly, leaving only the rank-1 ($\SU(2)$) constant $4/\pi$ of
+Paper~38 Appendix~A from each positive-root direction's Euler--Catalan
+asymptote
 $\sum_{d \mathrm{ odd}} 1/d^{2} = \pi^{2}/8$.  The universal constant
 $4/\pi$ is then \emph{independent} of rank, Weyl group order, and
 Lie type.
@@ -1249,8 +1257,8 @@ promoted from the discrete graph spectrum;
 spectral-triple mechanisms,
 \begin{itemize}\setlength\itemsep{0pt}
 \item[$M_{1}$] (\emph{Hopf-base measure}):\
-$\pi = \Vol(S^{2})/4$ via the Hopf bundle $\sthree \to S^{2} \times
-S^{1}$, equivalently $4/\pi = \Vol(S^{2})/\pi^{2}$;
+$\pi = \Vol(S^{2})/4$ via the Hopf bundle $S^{1} \to \sthree \to
+S^{2}$, equivalently $4/\pi = \Vol(S^{2})/\pi^{2}$;
 \item[$M_{2}$] (\emph{Seeley--DeWitt}):\
 $\sqrt{\pi}$ via heat-kernel coefficients on the Camporesi--Higuchi
 Dirac spectrum on $\sthree$ (Paper~28 Theorem~T9:
@@ -1281,7 +1289,7 @@ The rate constant $4/\pi$ in \eqref{eq:gh_rate_constant} is the
 $M_{1}$ Hopf-base measure signature.  This is not a derived
 observation; it is forced by the Plancherel-weight $\times$
 Vandermonde-Jacobian cancellation theorem (Paper~40~\S 3.2) which
-leaves only the rank-1 Stein--Weiss constant after the
+leaves only the rank-1 ($\SU(2)$) constant after the
 $\prod_{\alpha > 0}$ products cancel.  Equivalently, the
 single-positive-root Euler--Catalan sum
 \begin{equation*}
@@ -1308,11 +1316,11 @@ The case-exhaustion theorem (Theorem~\ref{thm:pi_source}) is a
 \emph{spectral-triple-level} statement about which transcendentals
 can appear in evaluations of GeoVac projection chains.  The constant
 $4/\pi$ of Paper~38 is a \emph{metric-geometry-level} statement about
-the propinquity rate.  The fact that these two abstractly-different
+the state-space GH rate.  The fact that these two abstractly-different
 levels agree on the same signature is non-trivial: it identifies the
 metric geometry of the GeoVac spectral triple as carrying the same
 M$_{1}$ signature that the abstract Mellin engine catalogues.
-Abstract taxonomy meets concrete propinquity rates.  Paper~43~\S 10.2
+Abstract taxonomy meets concrete state-space GH rates.  Paper~43~\S 10.2
 takes this further: the Lorentzian Pythagorean decomposition at the
 operator-system level carries the same M$_{1}$ signature again, this
 time on the operator algebra of the Krein wedge.
@@ -1532,24 +1540,30 @@ Paper~40~\cite{paper40_unified} gives the expected multi-factor form
 C_{3}^{(k)} \le \sqrt{k}\,\sup_{j} C_{3}^{G_{j}}(n_{j}) \nearrow \sqrt{k},
 \end{equation}
 
-for arbitrary $k \ge 1$ and arbitrary compact connected Lie groups
-$G_{1}, \ldots, G_{k}$ with bi-invariant metrics. \emph{Correction
+for arbitrary $k \ge 1$ and compact connected semisimple Lie groups
+$G_{1}, \ldots, G_{k}$ with bi-invariant metrics (Paper~40's class; a
+central torus factor is excluded --- Paper~40 asserts no value for
+$c(G_{\mathrm{ss}} \times T^{k})$). \emph{Correction
 (2026-06-18):} this was boxed as a closed ``master theorem'' with a
 $k$-\textbf{independent} constant $\sup_j C_3^{G_j}(n_j)$;\ with the
 corrected triangle bound the constant carries a genuine $\sqrt{k}$ and
-is not $k$-independent. The joint rate still inherits the universal
-$4/\pi$ asymptotic; but this multi-factor / general-$G$ form is a
+is not $k$-independent. The joint rate then inherits the $4/\pi$
+asymptotic; but this multi-factor / general-$G$ form is a
 \textbf{sketch} (only the $k=2$, $\SU(2)$ and $k=1$ cases are proved).
 
 The master theorem subsumes Papers~\cite{paper38}
 ($k = 1$, $G = \SU(2)$), \cite{paper40_unified}
 ($k = 1$, general $G$), and the two-factor case
 treated above (\S\ref{sec:tensor_extension}, $k = 2$,
-$G_{1} = G_{2} = \SU(2)$) as special cases.  Paper~45's compact-temporal
-Lorentzian extension at $\sthree \times \Sone_{T}$ is the
-$k = 2$, $G_{1} = \SU(2)$, $G_{2} = \Uone$ special case, providing
-independent justification of Paper~45's main theorem from the master
-construction.
+$G_{1} = G_{2} = \SU(2)$) as special cases.  Paper~45's product-carrier
+proposition at $\sthree \times \Sone_{T}$ (\texttt{prop:product\_action\_seminorm};
+signature-agnostic and not a Lorentzian claim --- its earlier
+compression-device convergence theorem is withdrawn) is a $k = 2$,
+$G_{1} = \SU(2)$, $G_{2} = \Uone$ product with per-factor cutoffs whose
+joint rate is the maximum of the factor rates, i.e.\ the $\SU(2)$ rate
+(\S\ref{sec:tensor_extension}); it lies outside Paper~40's semisimple
+class and is not an instance of the master theorem's universal
+constant.
 
 % =====================================================================
 \section{Further closures: Krein--Mondino--S\"amann bridge, OSLPLS,
@@ -2007,11 +2021,6 @@ V.~I.~Paulsen,
 \newblock Cambridge Studies in Advanced Mathematics 78,
 Cambridge University Press, 2002.
 
-\bibitem[Perez-Sanchez(2024)]{perez_sanchez2024}
-C.~I.~Perez-Sanchez,
-\newblock \emph{Bratteli networks and the Spectral Action on quivers},
-\newblock arXiv:2401.03705, 2024.
-
 \bibitem[Perez-Sanchez(2025)]{perez_sanchez2025}
 C.~I.~Perez-Sanchez,
 \newblock \emph{Comment on `Gauge networks in noncommutative geometry'},
@@ -2093,7 +2102,7 @@ on $\sthree$},
 \bibitem[Loutey, internal Paper~40]{paper40_unified}
 J.~Loutey,
 \newblock \emph{State-space Gromov--Hausdorff convergence of spectral
-truncations of compact Lie groups with bi-invariant metric},
+truncations of compact semisimple Lie groups with bi-invariant metric},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 
 \bibitem[Loutey, internal Paper~42]{paper42}

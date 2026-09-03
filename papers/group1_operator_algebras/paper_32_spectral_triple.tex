@@ -112,8 +112,8 @@ synthesizes existing GeoVac results into the axiomatic spectral-triple
 language.  The synthesis lifts each result from a free-standing
 observation to a sub-sector of a single named structure, and makes
 explicit which axioms hold rigorously, which hold up to the standard
-finite-truncation caveats, and which remain open.  The real-structure
-question---whether the GeoVac Dirac graph operator carries a real
+finite-truncation caveats, and which remain open.  \textbf{[PANEL-VERIFIED]}
+The real-structure question---whether the GeoVac Dirac operator $D_{\mathrm{GV}}$ (the diagonal spectral form) carries a real
 structure matching the topological $\mathrm{KO}$-dimension of $S^3$
 exactly at finite $n_{\max}$ or only in the continuum limit---is
 \emph{resolved} in favour of finite-$n_{\max}$ exactness;\ the
@@ -127,8 +127,8 @@ residual open items are catalogued in Sec.~\ref{sec:open}.
 
 \subsection{Why a spectral triple, and why now}
 
-Across thirty-one papers the GeoVac framework has carried four
-distinct strands.  Strand~1 is the Fock projection
+Across the thirty-two papers (0--31) preceding this one, the GeoVac framework
+has carried four distinct strands.  Strand~1 is the Fock projection
 $p_0 = \sqrt{-2E_n}$ that maps the hydrogenic Hamiltonian onto the
 free Laplacian on the unit three-sphere, with eigenvalues
 $\lambda_n = -(n^2 - 1)$ on graph nodes labeled by quantum-number
@@ -192,10 +192,10 @@ question is phrased without promoting it beyond that observation.
 \paragraph{What it is not, second.}  A claim of the
 Connes--Chamseddine Standard Model.  The GeoVac construction is a
 \emph{rank-1} non-abelian almost-commutative extension; the SM
-spectral triple of \cite{chamseddine_connes2010} is rank~$\ge 3$ with
+spectral triple of \cite{chamseddine_connes1997_2008} is rank~$\ge 3$ with
 specific finite-algebra content $\mathbb{C} \oplus \mathbb{H} \oplus
 M_3(\mathbb{C})$.  GeoVac is not the Standard Model.  It is a finite
-spectral triple that is an \emph{instance} of Marcolli--van Suijlekom 2014~\cite{marcolli_vs2014} (with Perez-Sanchez 2024/2025 correction~\cite{perez_sanchez2024,perez_sanchez2025}) at the data level and a GeoVac-original \emph{extension} at the structural level (forced graph from Bertrand $\times$ Fock projection, master Mellin engine, explicit Hopf algebra $\mathcal{H}_{\mathrm{GV}}$, Tannakian dual $U^*$), with the empirically interesting
+spectral triple that is an \emph{instance} of Marcolli--van Suijlekom 2014~\cite{marcolli_vs2014} (with Perez-Sanchez 2025 continuum-limit correction~\cite{perez_sanchez2025}) at the data level and a GeoVac-original \emph{extension} at the structural level (forced graph from Bertrand $\times$ Fock projection, master Mellin engine, explicit Hopf algebra $\mathcal{H}_{\mathrm{GV}}$, Tannakian dual $U^*$), \textbf{[OBSERVATION]} with the empirically interesting
 property that one of its spectral-action coefficient combinations
 $K = \pi(B + F - \Delta)$ satisfies, after subtraction of the leading
 Sprint-A correction~$\alpha^2$, a residual
@@ -206,7 +206,7 @@ $|K - 1/\alpha|/(1/\alpha)$ is $4.77 \times 10^{-7}$).
 
 \paragraph{Internal register.}  This paper makes explicit the
 spectral-triple framing already operating informally in the working
-hypothesis register (\texttt{CLAUDE.md}~\S 1.7, WH1 ``PROVEN'' --- unconditional as of 2026-06-10, Paper~38~\cite{loutey_paper38}).
+hypothesis register (kept as \S 1.7 of the repository's \texttt{CLAUDE.md}; the sprint, track and door codenames used throughout this paper are chronicle anchors into that file and the repository \texttt{CHANGELOG.md}; WH1 ``PROVEN'' --- unconditional as of 2026-06-10, Paper~38~\cite{loutey_paper38}).
 Papers continue under the rhetoric rule of \S 1.5: dual-description
 framing, no ontological priority claims, lead with computational
 results.
@@ -248,13 +248,13 @@ the right action induced by the real structure;
 For an \emph{almost-commutative} spectral triple
 $(\mathcal{A}_M \otimes \mathcal{A}_F, \mathcal{H}_M \otimes
 \mathcal{H}_F, D_M \otimes \mathbb{1} + \gamma_M \otimes
-D_F)$~\cite{vansuijlekom_book2015,chamseddine_connes2010}, the
+D_F)$~\cite{vansuijlekom_book2015,chamseddine_connes1997_2008}, the
 manifold sector $\mathcal{A}_M = C^{\infty}(M)$ is replaced in our
 finite setting by the algebra of complex-valued functions on a finite
 graph that converges to $C^{\infty}(M)$ in the continuum limit.  This
 is exactly the move made by Marcolli and van~Suijlekom in their gauge
 networks construction~\cite{marcolli_vs2014} and continued by
-Perez-Sanchez~\cite{perez_sanchez2024,perez_sanchez2025}: replace the
+Perez-Sanchez~\cite{perez_sanchez2025}: replace the
 manifold algebra by an algebra on a discrete vertex set, with edges
 carrying connection data.  The GeoVac construction sits in this
 lineage by design.
@@ -762,11 +762,11 @@ The continuum Camporesi--Higuchi Dirac operator on the unit
 three-sphere has spectrum $|\lambda_n^{\mathrm{D}}| = n + 3/2$ with
 degeneracy $g_n^{\mathrm{D}} = 2(n+1)(n+2)$~\cite{camporesi_higuchi1996}.
 We promote this to a finite operator on $\mathcal{H}_{\mathrm{GV}}$
-in two equivalent ways and verify their agreement in the truncation.
+by truncation of its spectral decomposition.
 
-\begin{definition}[Spectral form of $D_{\mathrm{GV}}$]
+\begin{definition}[$D_{\mathrm{GV}}$]
 \label{def:D_GV_spectral}
-$D_{\mathrm{GV}}^{\mathrm{spec}}$ is the diagonal operator on
+$D_{\mathrm{GV}}$ is the diagonal operator on
 $\mathcal{H}_{\mathrm{GV}}$ with eigenvalues
 $\lambda_n^{\mathrm{D},\pm} = \pm (n_{\mathrm{D}} + 3/2)$
 on the eigenstate $|n_{\mathrm{D}}, \kappa, m_j\rangle$ with sign
@@ -775,48 +775,41 @@ $+$ for $\kappa < 0$ and $-$ for $\kappa > 0$ (the standard
 Camporesi--Higuchi convention~\cite{camporesi_higuchi1996}).
 \end{definition}
 
-\begin{definition}[Graph form of $D_{\mathrm{GV}}$]
-\label{def:D_GV_graph}
-$D_{\mathrm{GV}}^{\mathrm{graph}}$ is the discrete first-order
-hopping operator on the Dirac graph defined by the Camporesi--Higuchi
-nearest-neighbor edge set with weights chosen so that the spectrum
-matches Definition~\ref{def:D_GV_spectral} in the truncation.  The
-edge set and weights are documented in
-\texttt{geovac/dirac\_matrix\_elements.py}; the explicit form, written
-in the $(n_{\mathrm{D}}, \kappa, m_j)$ basis, is the
-Lichnerowicz-derived first-order operator with $\kappa$-coupled
-adjacent-shell amplitudes.
-\end{definition}
+This is the operator used everywhere in the paper:\ every axiom
+verification below, the real structure $J_{\mathrm{GV}}$ of
+Proposition~\ref{prop:reality}, and every finite-truncation spectral-action
+computation are carried out on this diagonal $D_{\mathrm{GV}}$
+(\texttt{geovac/full\_dirac\_operator\_system.py},
+\texttt{geovac/real\_structure.py}; backing tests
+\texttt{tests/test\_full\_dirac\_operator\_system.py},
+\texttt{tests/test\_real\_structure.py}).  The $\pi$-free certificate
+of the Dirac sector (Paper~28~\S graph\_native\_qed.6) is a statement
+about this spectrum:\ every eigenvalue is a half-integer rational,
+every degeneracy is a positive integer.
 
-\begin{proposition}[Equivalence of spectral and graph forms]
-\label{prop:D_equiv}
-For all $n_{\max} \ge 1$, $D_{\mathrm{GV}}^{\mathrm{spec}}
-= U^{\dagger} D_{\mathrm{GV}}^{\mathrm{graph}} U$ for the unitary
-$U$ that diagonalizes $D_{\mathrm{GV}}^{\mathrm{graph}}$.  The
-agreement is exact in finite arithmetic at every truncation; in
-particular the spectrum, multiplicities, and trace invariants
-$\mathrm{Tr}\,(D_{\mathrm{GV}})^{2k}$ match the truncated
-Camporesi--Higuchi continuum values.
-\end{proposition}
-
-\begin{proof}[Proof sketch.]
-Both operators are constructed to have the truncated
-Camporesi--Higuchi spectrum by definition.  The equivalence is the
-statement that there exists an orthonormal basis of
-$\mathcal{H}_{\mathrm{GV}}$ in which both are diagonal, which holds
-because $D_{\mathrm{GV}}^{\mathrm{graph}}$ is self-adjoint by
-construction (Hermitian conjugate edge weights) and has the prescribed
-spectrum.  Numerical agreement at $n_{\max} \le 6$ is verified by
-existing tests in \texttt{tests/test\_dirac\_matrix\_elements.py} (108
-tests) and \texttt{tests/test\_qed\_self\_energy.py}.
-\end{proof}
-
-We use the spectral form $D_{\mathrm{GV}}^{\mathrm{spec}}$ (henceforth
-$D_{\mathrm{GV}}$) for axiom verification because it is closed-form;
-the graph form is what one uses for finite-truncation computations of
-the spectral action.  The $\pi$-free certificate of the Dirac sector
-(Paper~28~\S graph\_native\_qed.6) applies to both: every eigenvalue
-is a half-integer rational, every degeneracy is a positive integer.
+\begin{remark}[No separate ``graph form'' of $D_{\mathrm{GV}}$]
+\label{rem:D_GV_no_graph_form}
+Earlier drafts of this section defined a second, ``graph form''
+$D_{\mathrm{GV}}^{\mathrm{graph}}$ -- a first-order hopping operator
+on a Camporesi--Higuchi edge set ``with weights chosen so that the
+spectrum matches'' Definition~\ref{def:D_GV_spectral} -- and stated
+their unitary equivalence as a proposition.  That proposition was
+tautological (two Hermitian operators with the same spectrum and
+multiplicities are unitarily equivalent by the spectral theorem, and
+the weights had been chosen to make the spectra agree), and the module
+it cited, \texttt{geovac/dirac\_matrix\_elements.py}, holds closed-form
+angular (Szmytkowski) and radial (hydrogenic) matrix elements in the
+$(\kappa, m_j)$ basis, not a hopping operator.  The paper therefore
+carries one Dirac operator, the diagonal one above.  The
+Dirac-sector \emph{graph} that appears elsewhere in the corpus
+(\texttt{geovac/dirac\_lattice.py}, the E1-dipole adjacency of
+Paper~28's graph-native QED) is a different operator, $H = D + W$,
+whose adjacency encodes the photon-vertex selection rules rather than
+$D_{\mathrm{GV}}$ itself.  Withdrawn at the 2026-09-02 trunk
+certification run (\texttt{CHANGELOG.md}, v5.3.0); the module contents
+asserted here are pinned by
+\texttt{tests/test\_paper32\_dirac\_module\_contents.py}.
+\end{remark}
 
 \subsection{Bounded commutators}
 
@@ -878,9 +871,17 @@ limit.
 
 \subsection{Order zero (involutive faithful representation)}
 
-Holds rigorously by Definitions~\ref{def:A_GV}--\ref{def:H_GV} and
-Eq.~\eqref{eq:representation}.  Verified in
-\texttt{tests/test\_dirac\_matrix\_elements.py}.
+\textbf{[SYMBOLIC PROOF]} Holds by construction from
+Definitions~\ref{def:A_GV}--\ref{def:H_GV} and
+Eq.~\eqref{eq:representation}:\ $\pi(f)$ acts diagonally in the
+$(n_{\mathrm{D}}, \kappa, m_j)$ basis, so $\pi$ is multiplicative and
+$\pi(f^*) = \pi(f)^\dagger$, and it is faithful because the
+quantum-number bridges of Eq.~\eqref{eq:representation} map
+$V_{\mathrm{Dirac}}$ onto $V_{\mathrm{Fock}}$.  No numerical
+certificate is involved (an earlier citation of
+\texttt{tests/test\_dirac\_matrix\_elements.py} here covered the
+$\kappa \leftrightarrow (l, j)$ bridges, not the representation
+axiom, and is withdrawn).
 
 \subsection{Bounded commutators (regularity)}
 
@@ -1050,7 +1051,7 @@ $n_{\max} \to \infty$ limit, with quantitative scaling at $n_{\max}
 
 \paragraph{Net status of the real structure at finite
 $n_{\max}$.}  The introductory abstract flagged as open
-``whether the GeoVac Dirac graph operator carries a real structure
+``whether the GeoVac Dirac operator $D_{\mathrm{GV}}$ (the diagonal spectral form) carries a real structure
 matching the topological $\mathrm{KO}$-dimension of $S^3$ exactly
 at finite $n_{\max}$ or only in the continuum limit.''
 The Sprint WH1-Connes Step~2 audit closes this question
@@ -1118,7 +1119,9 @@ $(\mathcal{A}_{\mathrm{GV}}, \mathcal{H}_{\mathrm{GV}}, D_{\mathrm{GV}})$
 at signature $(3, 0)$ (Riemannian, KO-dimension~$3$).
 \textbf{[PANEL-VERIFIED]} All standard axioms are satisfied in the
 continuum limit, and every axiom except the two finite-truncation
-artifacts listed above holds at each $n_{\max}$ audited; the triple is
+artifacts listed above holds at each $n_{\max}$ audited (the rows
+marked $\forall\, n_{\max}$ additionally follow from the construction of
+Proposition~\ref{prop:reality}); the triple is
 real, odd, and of $\mathrm{KO}$-dimension~$3$ in the continuum limit.  The
 Lorentzian-extension audit at $(m, n) = (4, 6)$ via Sprint L2-D
 extends this picture; see Table~\ref{tab:axiom_audit_lorentzian}
@@ -1174,10 +1177,10 @@ $\chi D$
     (structural finding, see below) \\
 Order zero $[a, JbJ^{-1}]$
   & 5--20\% finite-resolution
-  & $\le 7\%$ finite-resolution (sample-of-3) \\
+  & $\le 6.8\%$ finite-resolution (sample-of-3) \\
 Order one $[[D,a], JbJ^{-1}]$
   & 5--20\% finite-resolution
-  & $\le 11\%$ finite-resolution (sample-of-3) \\
+  & $\le 10.2\%$ finite-resolution (sample-of-3) \\
 \bottomrule
 \end{tabular}
 \caption{Lorentzian-extension axiom audit at $(m, n) = (4, 6)$
@@ -1383,8 +1386,9 @@ is structurally distinct from both the SM almost-commutative geometry
 (which couples a Riemannian factor with a finite \emph{internal}
 factor) and from the standard spectral-truncation convergence
 machinery (which handles single triples or one-infinite-plus-one-finite
-products);\ \textbf{[MEASURED]} it is an explicit Connes-style real-space multi-particle
-spectral triple, validated against the analytic $21\,$cm
+products);\ \textbf{[MEASURED]} it is constructed as an explicit
+Connes-style real-space multi-particle spectral triple, and its
+Hamiltonian is validated against the analytic $21\,$cm
 singlet--triplet hyperfine gap at $1.62 \times 10^{-7}$ Ha.
 \textbf{[OBSERVATION]} The
 positioning observation (that the canonical NCG / spectral-triple
@@ -1549,7 +1553,7 @@ mode), with nonzero winding.  \textbf{[SYMBOLIC PROOF]} The $\mathbb{Z}_2$ (rath
 character is \emph{forced by time-reversal symmetry}---the reality of the
 Coulomb overlaps---not by planarity: real orbitals give real overlaps in any
 geometry, so a non-coplanar real center leaves $F$ real-symmetric and does not
-lift the phase.  Breaking time reversal does.  A magnetic (Peierls) phase
+lift the phase.  Breaking time reversal does.  \textbf{[PANEL-VERIFIED]} A magnetic (Peierls) phase
 $\phi$ threading the $\mathrm{H}$--$\mathrm{Be}$--$\mathrm{H}$ loop makes $F$
 complex-Hermitian, opens the empty $\sigma_y$ axis, and turns each intersection
 into a genuine $U(1)$ Berry monopole of integer charge: the first Chern number
@@ -1672,14 +1676,15 @@ $K = \pi(B + F - \Delta) = 1/\alpha$ at $8.8 \times 10^{-8}$, with
    B = 42, \quad F = \tfrac{\pi^2}{6}, \quad \Delta = \tfrac{1}{40},
 \]
 and the Phase~4B--4I sprint series identified three independent
-spectral homes for the three pieces (CLAUDE.md~\S 2):
+spectral homes for the three pieces (project development-frontier log):
 \begin{itemize}\setlength{\itemsep}{0pt}
 \item $B$ is the finite Casimir trace at $m=3$:
 $B = \sum_{n=1}^{3} (2l+1)l(l+1)|_{n,l} = 42$ (Paper~2 Eq.~17).
 \item $F = D_{n^2}(d_{\max} = 4) = \zeta_R(2)$, the Fock-degeneracy
 Dirichlet series at the packing exponent (Phase~4F $\alpha$-J).
-\item $\Delta^{-1} = g_3^{\mathrm{D}} = 40$, the third single-chirality
-Camporesi--Higuchi Dirac mode degeneracy (Phase~4H SM-D).
+\item $\Delta^{-1} = g_3^{\mathrm{D}} = 2(3+1)(3+2) = 40$, the total
+(both-sign) Camporesi--Higuchi Dirac degeneracy at level $k = 3$,
+$|\lambda| = k + 3/2 = 9/2$ (Paper~7's $g_3^{\mathrm{Dirac}}$; Phase~4H SM-D).
 \end{itemize}
 
 In spectral-triple language, $B$, $F$, $\Delta$ live in three different
@@ -1696,9 +1701,8 @@ $\Delta_{S^3}$ is the scalar Laplace--Beltrami operator on $S^3$
 (equivalently, the eigenvalue-weighted Dirichlet of the Fock
 degeneracy).
 \item $\Delta^{-1}$ is a \emph{single-level Dirac degeneracy}: it
-equals $g_3^{\mathrm{D}}$, the multiplicity of the third
-Camporesi--Higuchi single-chirality eigenvalue
-$|\lambda_3^{\mathrm{D}}| = 9/2$.
+equals $g_3^{\mathrm{D}}$, the total multiplicity (both signs) of the
+Camporesi--Higuchi level $k = 3$, $|\lambda_3^{\mathrm{D}}| = 9/2$.
 \end{itemize}
 
 These three are categorically different objects: a finite
@@ -1706,7 +1710,9 @@ combinatorial trace, an infinite analytic Dirichlet series, and a
 single-level multiplicity.  They sit in different sectors of the
 spectral triple (scalar/spinor; finite/infinite; trace/zeta/dimension)
 and \textbf{[PANEL-VERIFIED]} Phases 4B--4I exhausted nine attempts to find a common spectral
-generator that produces all three simultaneously, without success.
+generator that produces all three simultaneously, without success
+(twelve counting Sprint~A and Sprint~K-CC; see the E6
+no-single-mechanism theorem below).
 
 \begin{observation}[Three-sector composition]
 \label{obs:three_sector}
@@ -1723,7 +1729,7 @@ does not derive $\alpha$; it makes precise where the obstruction is.
 
 \begin{remark}[Sprint A, $\pi^3 \alpha^3$ residual]
 \label{rem:sprint_A}
-\textbf{[MEASURED]} Sprint~A (April~2026, CLAUDE.md~\S 1.7) verified at 80~dps that the
+\textbf{[MEASURED]} Sprint~A (April~2026, working-hypothesis register) verified at 80~dps that the
 post-cubic residual $K - 1/\alpha - \alpha^2 = 1.2079 \times 10^{-5}$
 matches $\pi^3 \alpha^3 = 1.2049 \times 10^{-5}$ to within 0.25\%.
 The structural reading is $\pi^3 = \mathrm{Vol}(S^5)$, hinting at a
@@ -1983,10 +1989,13 @@ produces period values in the localised pure-Tate sub-ring
 $\mathbb{Q}[\pi, \pi^{-1}]$ of mixed Tate periods over $\mathbb{Q}$,
 at depth $0$ and Tate weight $\in \mathbb{Z}$.  \textbf{[PANEL-VERIFIED]} Every M1 closed form
 witnessed across the corpus (Paper 25 Hopf base
-$\mathrm{Vol}(S^2)/4 = \pi$; Paper 38 §L2 asymptotic propinquity
-rate $4/\pi = \mathrm{Vol}(S^2)/\pi^2$; Paper 40 Thm 1 universal
-$4/\pi$ across compact Lie groups; Paper 43 §10.2 Pythagorean
-orthogonality $1/\pi^2$; Paper 50 §3 F-theorem $-3\zeta(3)/(16\pi^2)$
+$\mathrm{Vol}(S^2)/4 = \pi$; Paper 38 §L2 asymptotic state-space GH
+rate $4/\pi = \mathrm{Vol}(S^2)/\pi^2$; Paper 40~\cite{loutey_paper40} Thm 1 universal
+$4/\pi$ across compact connected semisimple Lie groups (rigorous at
+rank~1, with an analytical universality mechanism at proof-sketch tier
+and numerical support at rank~2 plus a noisier rank-3 datapoint; a
+circle factor carries $2/\pi$); Paper 43 §10.2 Pythagorean
+orthogonality $1/\pi^2$; Paper 50~\cite{loutey_paper50} §3 F-theorem $-3\zeta(3)/(16\pi^2)$
 as a M1$\times$M3 cross-product) is a $\mathbb{Q}$-linear combination
 of $\pi^n$ for $n \in \mathbb{Z}$, with $|n| \le 2$ on the empirical
 witnesses logged so far.  Higher integer powers of $\pi$ enter only
@@ -2096,7 +2105,7 @@ manifold, with $k \in \{0, 1, 2\}$ selecting the sub-mechanism.
 
 \begin{remark}[Status of $K = \pi(B + F - \Delta)$]
 \label{rem:K_under_theorem}
-Paper~2's combination $K = \pi(B+F-\Delta) \approx 1/\alpha$ matches
+\textbf{[OBSERVATION]} Paper~2's combination $K = \pi(B+F-\Delta) \approx 1/\alpha$ matches
 its target at $8.8 \times 10^{-8}$.  Under
 Theorem~\ref{thm:pi_source_case_exhaustion}, $K$'s chain
 (Fock~$\circ$~Hopf$\circ$~spinor) engages M1 (the explicit prefactor $\pi$,
@@ -2129,7 +2138,7 @@ unexpectedly, a fourth mechanism M4 would need to be named.
 
 \begin{remark}[Mechanism-as-domain sharpening (Sprint MR-A/B/C, May~2026)]
 \label{rem:master_mellin_domain}
-A three-track follow-up sprint (MR-A: Dirac propinquity rate;
+A three-track follow-up sprint (MR-A: Dirac state-space GH rate;
 MR-B: spectral-action modular residual; MR-C: L2 next-order
 constant) tested whether the master Mellin engine of
 Paper~18~\S~III.7 is also \emph{predictive} for convergence rates,
@@ -2138,7 +2147,7 @@ sharpens the case-exhaustion theorem into a mechanism-as-domain
 partition.
 \begin{itemize}
 \item M1 ($k = 0$) is the natural domain of state-space
-propinquity rates. The L2 sprint (2026-05-06) measured the
+GH rates. The L2 sprint (2026-05-06) measured the
 asymptotic constant of the SU(2) scalar central Fej{\'e}r kernel as
 $4/\pi = \mathrm{Vol}(S^2)/\pi^2$.
 \item M2 ($k = 2$) is the natural domain of heat-kernel and
@@ -2214,7 +2223,7 @@ Coulomb/HO asymmetry of Paper~24~\S~V.  Source:
 \begin{remark}[Stage-1 cochain-level witness of the master-Mellin
 partition (Sprint Q5'-Stage1-JLO-nmax2, 2026-06-05)]
 \label{rem:q5p_stage1_jlo_witness}
-On the truncated Camporesi--Higuchi spectral triple at $n_{\max}
+\textbf{[PANEL-VERIFIED]} On the truncated Camporesi--Higuchi spectral triple at $n_{\max}
 = 2$, the master-Mellin partition $(M_1, M_2, M_3)$ is bit-exactly
 visible at the cyclic-cochain level as the symbol
 $\omega^{\mathrm{tri}}(\mathcal{T}_2) = (16, 84, 36) \in \mathbb{Z}^3$.
@@ -2300,7 +2309,7 @@ spectral-data input.  The M2 continuum panel at integer
 $s \in \{1, 2, 3, 4, 5\}$ reproduces the Sprint~Q5'-CH-2
 Seeley--DeWitt panel bit-exactly (5/5 matches).  Tauberian rate
 uniformity in a neighborhood of $s = 3/2$ is the Stage-2-relevant
-open question, reachable from Karamata~\cite{karamata1962} and
+open question, reachable from Karamata~\cite{karamata1949} and
 Korevaar~\cite{korevaar2004}.  Source:
 \texttt{debug/sprint\_q5p\_continuum\_mellin\_memo.md}.
 \end{remark}
@@ -2507,7 +2516,7 @@ The pointwise rate of approach in
 Remark~\ref{rem:q5p_continuum_residue} is sharpened to a uniform rate
 on compact above-pole neighborhoods of the spectral-dimension pole
 $s = d/2 = 3/2$ via the standard uniform Tauberian theorem of
-Karamata~\cite{karamata1962} (foundational), Korevaar~\cite{korevaar2004}
+Karamata~\cite{karamata1949} (foundational), Korevaar~\cite{korevaar2004}
 \S~III.4 (modern treatment with boundary-saturation Remark~3), and
 Tenenbaum~\cite{tenenbaum2015} \S~II.7 Thm~II.7.7 (uniform rates of
 approach with explicit constants). The four hypotheses transport
@@ -2736,7 +2745,8 @@ semisimple $SL_2$ factor carries the Peter--Weyl non-abelian content
 (Remark~\ref{rem:q5p_j_star_substrate}). The Levi-decomposition shape is
 the published structural target for the cosmic-Galois $U^*$ in the
 Connes--Marcolli motivic Galois machinery (Connes--Marcolli 2004
-arXiv:math/0409306;\ Connes--Marcolli 2008 book Ch.~4):\ pro-unipotent
+arXiv:math/0409306;\ Connes--Marcolli 2008 book~\cite{connes_marcolli2008}
+Ch.~1~\S 7.3, ``Equivariant principal bundles and the group $G^* = G \rtimes \mathbb{G}_m$''):\ pro-unipotent
 times semisimple. The long-range Stage-2 Tannakian construction reduces
 to (a) full Tannakian closure of the pro-unipotent factor, and (b)
 verification that the cosmic-Galois $U^*$ of Connes--Marcolli 2004
@@ -3146,8 +3156,9 @@ derivative is forced, not free ---
 $\frac{d}{d\alpha}\big[\tfrac{1}{12}(\tfrac{1}{\alpha}-\alpha)\big]
 \big|_{\alpha=1} = -\tfrac{1}{6} = -B_2 = 2\zeta(-1)$, the
 $\alpha$-derivative of the tip's $B_2/2$.
-\item \emph{Controls behave}: $\kappa = -1/16$ (the Fock Jacobian
-$\Omega^{-4}$) has no clean $\zeta$ form; the Dirac Casimir
+\item \emph{Controls behave}: $\kappa = -1/16$ (numerically
+coincident with the Fock Jacobian factor $1/16$; an Observation,
+Paper~0~\cite{paper0}) has no clean $\zeta$ form; the Dirac Casimir
 $17/480$ misses the scalar $B_4$ rung by exactly $1/32$ and requires
 the half-integer Hurwitz shift $\zeta(-3,\tfrac{1}{2})$, i.e.\ the
 scalar/spinor distinction is the integer/half-integer (M2/M3) split.
@@ -3195,7 +3206,7 @@ temporal compactifications (Track D, May 2026)]
 The M1 sub-mechanism of the master Mellin engine,
 $\mathcal{M}[\mathrm{Tr}(D^0\, e^{-tD^2})]$, produces a
 $\mathrm{Vol}/\mathrm{Mellin\text{-}measure}$ factor on the spatial
-$S^3$ Hopf base ($\mathrm{Vol}(S^2)/\pi^2 = 4/\pi$, the L2 propinquity
+$S^3$ Hopf base ($\mathrm{Vol}(S^2)/\pi^2 = 4/\pi$, the L2 state-space GH
 rate constant; Sprint MR-A/B in Remark~\ref{rem:master_mellin_domain})
 and on a temporal $S^1_\beta$ factor (the bare circumference $\beta$
 itself; Sprint TD Track 1, $T_{S^3}\otimes T_{S^1_\beta}$).  Sprint TD
@@ -3209,7 +3220,8 @@ explicit the dual physical reading of M1 on temporal compactifications:
 under the standard Wick-rotation chain
 (Hartle--Hawking~\cite{hartle_hawking1976};
  Sewell~\cite{sewell1982};
- Bisognano--Wichmann~\cite{bisognano_wichmann1976}),
+ Bisognano--Wichmann~\cite{bisognano_wichmann1975,bisognano_wichmann1976};
+ reviewed in~\cite{witten2018_rmp}),
 the framework's M1 $2\pi$ on $S^1_\tau$ IS the period of the
 modular-flow / Lorentz-boost orbit of a stationary observer outside
 the Schwarzschild horizon.  Equivalently, the M1 sub-mechanism on
@@ -3270,8 +3282,8 @@ Unruh together.  Same scope (structural correspondence, not literal
 identification); same falsifier; same MEDIUM-HIGH priority and scale.
 
 \textbf{Sprint L1 closure (2026-05-16):\ literal identification at the
-operator-system level (Riemannian).}\ The principal falsifier named
-above is now closed positively at the strongest possible level.\ Sprint
+operator-system level (Riemannian).}\ \textbf{[SYMBOLIC + MEASURED]} The principal falsifier named
+above is now closed positively at the operator-system level.\ Sprint
 L1 (\texttt{debug/l1\_modular\_hamiltonian\_results\_memo.md}) constructs
 the modular Hamiltonian $K$ on $\mathcal{T}_{n_{\max}}$ for the
 hemispheric-wedge-restricted (W1 of L1-A) Camporesi--Higuchi state and
@@ -3281,8 +3293,10 @@ $\sigma_{2\pi}(O) = O$ for all four physical witnesses
 $n_{\max} \in \{2, 3, 4, 5\}$.  Maximum periodicity residual scales as
 $O(\sqrt{\dim \mathcal{H}_{n_{\max}}} \cdot \varepsilon_{\mathrm{machine}})$:
 $1.8 \times 10^{-16}$ at $n_{\max}=2$ ($\dim_H = 16$),
-$4.8 \times 10^{-16}$ at $n_{\max}=3$ ($\dim_H = 40 = g_3^{\mathrm{Dirac}}
-= \Delta^{-1}$),
+$4.8 \times 10^{-16}$ at $n_{\max}=3$ ($\dim_H = 40$; numerically equal
+to $g_3^{\mathrm{Dirac}} = \Delta^{-1} = 40$ but a different object ---
+the cumulative node count $4 + 12 + 24$ over levels $k \le 2$ versus the
+single-level degeneracy at $k = 3$),
 $9.3 \times 10^{-16}$ at $n_{\max}=4$ ($\dim_H = 80$),
 $1.6 \times 10^{-15}$ at $n_{\max}=5$ ($\dim_H = 140$).  Cross-witness
 collapse is bit-exact (residuals match across witnesses at machine
@@ -3376,10 +3390,11 @@ $$
 $$
 where $C_3 = 1$ is the Lipschitz comparison constant and
 $\gamma_{n_{\max}}$ is the L2 mass-concentration moment of the central
-spectral Fej{\'e}r kernel on SU(2).  The bound is qualitative-rate;
-the asymptotic rate $\gamma_{n_{\max}} = O(\log n / n)$ is consistent
-with but not rigorously proved by the small-$n$ closed forms (deferred
-to a quantitative-rate sub-track).
+spectral Fej{\'e}r kernel on SU(2).  The asymptotic rate
+$\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$
+is proven unconditionally in Paper~38~\cite{loutey_paper38}
+(main theorem, translation-seminorm metrization, 2026-06-10); the
+small-$n$ closed forms are consistent with it.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
@@ -3510,19 +3525,20 @@ at the L4(a) positivity + L4(b) contractivity level (Rieffel
 
 \begin{remark}[WH1 keystone closure]
 \label{rem:wh1_proven}
-Theorem~\ref{thm:gh_convergence} closes the WH1 keystone (CLAUDE.md~\S1.7).
+Theorem~\ref{thm:gh_convergence} closes the WH1 keystone (working-hypothesis register).
 \textbf{[INTERNAL THEOREM]} The structural claim of WH1 --- that GeoVac is an almost-commutative
 spectral triple with Connes--van Suijlekom truncations converging to
-the round-$S^3$ spectral triple --- is now \emph{proved} at the
-qualitative-rate level.  The ``torsion-and-curvature correction''
+the round-$S^3$ spectral triple --- is now \emph{proved} with the
+explicit rate $(4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$ (Paper~38).  The ``torsion-and-curvature correction''
 anticipated in the Track-A master memo is identified concretely as the
 spectral-gap quantization $|n - n'|$ of the truthful Camporesi--Higuchi
 Dirac, with per-multiplier ratio bounded by $N - 1$ from the SO(4)
 selection rule, and the corresponding asymptotic ratio
 $(N-1)/\sqrt{N^2-1} \nearrow 1$ giving the L3 constant $C_3 = 1$. The
 remaining open questions (Higgs-gap analysis on the four-way $S^3$
-coincidence; full real structure $J$ audit at finite $n_{\max}$, scoping
-memo \texttt{debug/real\_structure\_finite\_nmax\_memo.md}) are
+coincidence; the order-zero and order-one conditions of the real
+structure at finite $n_{\max}$ --- the KO sign pair itself is settled,
+Sec.~\ref{sec:axiom_audit}) are
 downstream of this theorem.  The proof chain was corrected in June 2026
 (Remark~\ref{rem:gh_status_caveat}):\ the theorem stands
 unconditionally in van~Suijlekom's state-space framework under the
@@ -3566,7 +3582,7 @@ M2 heat-kernel content and no M3 vertex-parity Hurwitz content.
 This sharpens the engine's predictive content along a complementary
 axis to Remark~\ref{rem:master_mellin_domain}.  Sprint MR-A/B/C
 established the mechanism-as-domain partition (M1 owns
-propinquity-rate observables, M2 owns heat-kernel residuals, M3 owns
+state-space GH-rate observables, M2 owns heat-kernel residuals, M3 owns
 vertex-restricted parity observables).  The L2-E result adds a
 fourth empirical instantiation:\ M1 owns the modular-Hamiltonian /
 spectral-action generator-orthogonality residual on the
@@ -3656,7 +3672,7 @@ The modular-flow period closure (M1 Hopf-base measure mechanism) and
 the Bekenstein--Hawking area-law are structurally distinct features
 of the gravitational thermodynamics chain;\ the GeoVac framework
 captures the former at finite cutoff and not the latter.  Consistent
-with the structural-skeleton-scope pattern (CLAUDE.md~\S 2, sprints
+with the structural-skeleton-scope pattern (project development-frontier log, sprints
 H1, LS-8a, HF-3/4/5, multi-focal-composition wall, W3):\ the
 framework determines the algebraic skeleton of modular flow but does
 not autonomously generate the calibration data (here:\ Newton's
@@ -3690,7 +3706,7 @@ construction is honest about what it is and is not: a unified
 \emph{catalogue} of three Wilson-Yang--Mills instances of the
 Marcolli--van~Suijlekom gauge-network framework, not a unified
 spectral triple in the Connes--Chamseddine
-sense~\cite{chamseddine_connes2010}.
+sense~\cite{chamseddine_connes1997_2008}.
 
 \subsubsection*{Three Wilson constructions, one kinetic coefficient}
 
@@ -3711,7 +3727,8 @@ and Haar measure $dU$.  Paper~30~\S 5.2 verifies the weak-coupling
 kinetic coefficient symbolically and numerically.
 \item \emph{Sprint~ST-SU3} (May~2026, modules
 \texttt{geovac/su3\_wilson\_s5.py},
-\texttt{tests/test\_su3\_wilson\_s5.py}, $39/39$ pass) constructs
+\texttt{tests/test\_su3\_wilson\_s5.py}, $47$ pass and $2$ skipped
+of $49$ as of 2026-09-02) constructs
 the non-abelian $\mathrm{SU}(3)$ Wilson lattice gauge theory on the
 Bargmann--Segal $S^5$ graph of Paper~24~\cite{paper24}, with link
 variables $U_e \in \mathrm{SU}(3)$ in the fundamental representation
@@ -3755,7 +3772,7 @@ $\tfrac{1}{4 N_c}$ in the rightmost column is the weak-coupling
 expansion coefficient of the Wilson action $S_W = \beta \sum_P \bigl(
 1 - \tfrac{1}{N_c} \mathrm{Re}\,\mathrm{tr}\,U_P \bigr)$ around the
 trivial vacuum, in the standard normalisation
-$\mathrm{tr}(T^a T^b) = \tfrac{1}{2} \delta^{ab}$.  \textbf{[SYMBOLIC PROOF]} The three rows
+$\mathrm{tr}(T^a T^b) = \tfrac{1}{2} \delta^{ab}$.  \textbf{[SYMBOLIC + MEASURED]} The three rows
 verify this coefficient independently:\ Paper~30~\S 5.2 and
 Sprint~ST-SU3~\S 4 to machine precision; the abelian Paper~25
 case is the trivial $N_c = 1$ limit of either non-abelian
@@ -3850,7 +3867,7 @@ gauge groups as siblings across GeoVac sub-manifolds.
 \subsubsection*{What this is not:\ structural distance to a Standard Model}
 
 Table~\ref{tab:unified_gauge} is a catalogue, not a unified theory,
-and the rhetoric rule of CLAUDE.md~\S 1.5 forbids treating it as the
+and the project's rhetoric rule forbids treating it as the
 latter.  The structural distance from this catalogue to Connes' SM
 construction lives in four named gaps.
 
@@ -4004,7 +4021,7 @@ subsection is:\ a recorded structural fact (the unified $1/(4
 N_c)$ coefficient and the lineage placement are real); a recorded
 honest gap analysis (G1--G4 are real); and a recorded open
 direction ($S^3$ electroweak co-location is the most concrete
-target).  Per CLAUDE.md~\S 1.5, no claim is made that GeoVac
+target).  Per the project's rhetoric rule, no claim is made that GeoVac
 contains the Standard Model; the claim is only that it contains
 the three SM gauge groups as separate Wilson lattice gauge
 theories on its own sub-manifolds, with a unified weak-coupling
@@ -4030,7 +4047,8 @@ than imposed.  This is the H1 sprint reported in
 here.
 
 \paragraph{Construction.}  Following Connes--Marcolli 2008
-Ch.~13~\cite{connes_marcolli2008}, the finite electroweak Hilbert
+Ch.~1~\S 13 (the finite noncommutative
+geometry)~\cite{connes_marcolli2008}, the finite electroweak Hilbert
 space is doubled into matter and antimatter sectors:\ $\mathcal{H}_F
 = \mathcal{H}_F^{\mathrm{matter}} \oplus
 \mathcal{H}_F^{\mathrm{antimatter}} = \mathbb{C}^4 \oplus \mathbb{C}^4$,
@@ -4043,14 +4061,54 @@ $Y = \mathrm{diag}(y_\nu, y_e)$.  The combined Dirac is $D =
 D_{\mathrm{GV}} \otimes \mathbb{1}_F + \gamma_{\mathrm{GV}} \otimes
 D_F$ with $\gamma_{\mathrm{GV}} = \mathrm{sign}(D_{\mathrm{GV}})$
 (Track~2 closure):\ this commutes with $D_{\mathrm{GV}}$ on the
-truthful CH Dirac.  The combined real structure is $J = J_{\mathrm{GV}}
+truthful CH Dirac.  \textbf{[SYMBOLIC + MEASURED]} The combined real structure is $J = J_{\mathrm{GV}}
 \otimes J_F$ with $J_F$ swapping matter and antimatter via complex
 conjugation; matter-antimatter doubling makes $J_F^2 = +\mathbb{1}$
-(KO-dim 6 of $\mathcal{A}_F$), which combined with KO-dim 3 of the
-GV factor gives KO-dim $3 + 6 = 9 \equiv 1 \pmod 8$ for the
-combined triple, hence $J^2 = -\mathbb{1}$ and $J D = +D J$.  Both
-are verified to machine precision at $n_{\max} \le 3$
-(\texttt{tests/test\_almost\_commutative.py}, 38 tests passing).
+and $J_F D_F = +D_F J_F$ (the KO-dim~6 signs of $\mathcal{A}_F$ in the
+Connes--Marcolli convention).  The signs of the combined $J$ follow
+factor by factor:\ $J^2 = J_{\mathrm{GV}}^2 \otimes J_F^2 =
+-\mathbb{1}$, and since $\gamma_{\mathrm{GV}} =
+\mathrm{sign}(D_{\mathrm{GV}})$ is a function of $D_{\mathrm{GV}}$,
+$J D J^{-1} = D$, i.e.\ $J D = +D J$.  The combined sign pair
+$(\varepsilon, \varepsilon') = (-, +)$ is the sign pair of the GV factor,
+which $J_F$ leaves unchanged; in Connes' table~\cite{connes1995} it is
+shared by the KO-2, KO-3 and KO-4 columns, KO-3 being the odd continuum
+factor's own label.  It is \emph{not} the KO-dimension $3 + 6
+\equiv 1 \pmod 8$ that the additive rule for products of real spectral
+triples would assign:\ KO-1 has $(\varepsilon, \varepsilon') = (+, -)$,
+and the additive rule is a theorem about the product whose Dirac
+operator carries the grading of the even factor, $D_{\mathrm{GV}}
+\otimes \gamma_F + \mathbb{1} \otimes D_F$
+(the $\widetilde{\mathcal{D}}$ of
+Dabrowski--Dossena~\cite{dabrowski_dossena2011}, eq.~(18), which their
+\S 4.2 prescribes when the first factor is odd; their eq.~(10) is the
+classical Cartesian-product analogue); for that product their Table~5
+(row $3_+$) shows that Connes' KO-6 real structure on the finite factor
+(column $6_+$) admits no consistent $\varepsilon'$ at all, and the
+alternative real structure $J_F \gamma_F$ (column $6_-$) gives KO-1
+(entry $1_-$) with $J^2 = +\mathbb{1}$, $J D = -D J$.  Our $D$ is the ungraded sum above, so the
+additive rule does not apply to it, and we label it by its signs
+(derived factor by factor above and confirmed numerically).  Both
+signs are verified to machine precision at $n_{\max} \le
+3$ (\texttt{tests/test\_almost\_commutative.py},
+\texttt{test\_J\_combined\_sign\_pair}).  \textbf{[PANEL-VERIFIED]} The
+pair $(-, +)$ alone does not fix a KO-dimension:\ the KO-2, KO-3 and
+KO-4 columns of Connes' table share it; KO-3 is the label of the odd
+continuum GV factor ($S^3$ carries no chirality).  At finite cutoff the chirality-doubling grading
+$\gamma_{\mathrm{GV}} = \sigma_x \otimes \mathbb{1}$
+(\texttt{geovac/chirality\_grading.py}), extended as
+$\gamma_{\mathrm{GV}} \otimes \mathbb{1}_F$, squares to one,
+anticommutes with the combined $D$ and commutes with $J$ bit-exactly
+at $n_{\max} \le 3$, so the finite combined triple is \emph{even} with
+$(\varepsilon, \varepsilon', \varepsilon'') = (-, +, +)$, the KO-4
+column (measured 2026-09-02; pinned in the same test).  We therefore
+attach \emph{no} KO-dimension label to the finite truncation and
+record the measured sign triple $(-, +, +)$ instead (PI direction,
+2026-09-02):\ the continuum factor is KO-3 and the finite grading reads
+as KO-4, so any single label at finite cutoff is a convention, not a
+result.  (An earlier version of this paragraph carried the label KO-3;
+before 2026-09-02 the paper carried KO-1, from the additive rule that
+does not apply here.)
 
 \paragraph{Inner fluctuations split cleanly into gauge and Higgs
 sectors.}  For $\omega = \sum_i a_i [D, b_i]$ with $a_i, b_i \in
@@ -4157,14 +4215,15 @@ spectral-action computation; deferred to Track~1 R2.5~L4
 closure for the rigorous interpretation), does \emph{not} include
 the SM color factor $M_3(\mathbb{C})$ (deferred per
 Sec.~\ref{sec:unified_gauge} G4), and does \emph{not} identify the
-GV and weak-isospin chiralities (G3 stays open).  Per CLAUDE.md
-\S 1.5, no claim is made that GeoVac contains the Higgs:\ the
+GV and weak-isospin chiralities (G3 stays open).  Per the project's
+rhetoric rule, no claim is made that GeoVac contains the Higgs:\ the
 claim is that it admits a Higgs given an imposed Yukawa, and that
 the Yukawa is not derived from GeoVac structure.
 
 \paragraph{Files.}  Implementation
 \texttt{geovac/almost\_commutative.py};\ tests
-\texttt{tests/test\_almost\_commutative.py} (38 passing);\ data
+\texttt{tests/test\_almost\_commutative.py} (54 passing as of
+2026-09-02);\ data
 \texttt{debug/data/h1\_falsifier.json};\ memo
 \texttt{debug/h1\_ac\_extension\_memo.md}.
 
@@ -4204,12 +4263,13 @@ verdict is now thinner --- five thermal observables (Sprint TD
 Track~3 catalogue) are individual probes of distinct inner-factor
 structures (Yukawas, color algebra, generation count, charge
 assignment, Higgs sector), and the inner factor is required to
-deliver a specific value at each.  Three further candidates are
-\emph{forbidden} by the $\eta$-trivialization theorem
-(Paper~18~\S~IV.6) on any
-Krajewski-class even spectral triple --- a positive structural
-prediction:\ axial chemical potential thermodynamics, parity-odd
-transport, and finite-$T$ EDMs vanish identically on the inner
+deliver a specific value at each.  \textbf{[CONDITIONAL]} Three
+further candidates are \emph{forbidden} by the $\eta$-trivialization
+theorem (Paper~18~\S~IV.6) on any Krajewski-class even spectral
+triple --- a positive structural prediction, conditional on the
+observable being carried by the $\eta$-trivialised inner factor:\
+axial chemical potential thermodynamics, parity-odd transport, and
+finite-$T$ EDMs vanish identically on the $\eta$-trivialised inner
 factor of any Connes--Chamseddine-compatible AC extension.
 
 \paragraph{Modular propinquity reformulation of the H1 falsifier
@@ -4277,7 +4337,9 @@ the sprint-cycle level. \textbf{F2} (cross-$V_{ne}$ kernel-shape
 substitution diagnostic, KERNEL-NOT-IT verdict): the multipole expansion
 at default $L_\text{max}=4$ is bit-faithful to converged 3D numerical
 quadrature within $\sim 2\times 10^{-5}$~Ha at NaH $R_\text{eq}=3.566$~bohr,
-six to ten orders of magnitude below wall depth. Ruled out kernel-shape
+three to four orders of magnitude below the bond-energy scale (maximum
+differential $2.7 \times 10^{-4}$ of $D_e = 0.075$~Ha in the sprint
+memo's own table). Ruled out kernel-shape
 substitution as a closure mechanism. Substantive new content: the
 framework's h1 in \texttt{composed\_qubit.build\_composed\_hamiltonian}
 is strictly block-diagonal --- the cross-block off-diagonal h1 slot is
@@ -4287,7 +4349,8 @@ distinct from a missing calibration input. \textbf{F3} (cross-block h1
 architectural extension): implemented the missing matrix slot via new
 production module \texttt{geovac/cross\_block\_h1.py}; FCI naturals at
 NaH max\_n=2 R=3.5 transform $[1.0000, 1.0000] \to [\mathbf{1.9991},
-\mathbf{0.0007}]$ --- four-orders-of-magnitude advance in dominant
+\mathbf{0.0007}]$ --- a three-order-of-magnitude change ($1.0000 \to
+0.0007$) in dominant
 natural-orbital occupation signature, with the bonding combination as a
 doubly-occupied FCI ground state. \textbf{W1d CLOSED at the FCI level.}
 But F3 mini-PES remains monotonically descending with $D_e^\text{F3} =
@@ -4390,7 +4453,7 @@ diagnostic-then-implementation cycles, and the chemistry arc's
 forward direction shifts from ``find the right closure mechanism''
 to ``characterize the framework's structural-skeleton scope limits
 empirically for second-row hydride binding'' --- consistent with
-the broader CLAUDE.md~§1.7 multi-focal-composition wall taxonomy
+the broader multi-focal-composition wall taxonomy of the working-hypothesis register
 finding (the framework's structural-skeleton scope does not
 autonomously deliver binding energetics at this precision).
 
@@ -4405,7 +4468,7 @@ at $R_\text{min}$ as the load-bearing closure metric rather than
 +4.37$~Ha is itself a 2-pt value; the corresponding F3 PES well
 depth at $R_\text{min} = 2.0$ is likely larger (untested but
 expected by analogy to F6). This is a methodological refinement
-of the diagnostic-before-engineering discipline (CLAUDE.md~§1.7)
+of the diagnostic-before-engineering discipline (working-hypothesis register)
 at the sprint-cycle level: not just ``run a diagnostic before
 production wiring,'' but also ``choose the diagnostic geometry
 that captures the load-bearing physical content rather than a
@@ -4528,10 +4591,17 @@ $\{J_F, D_F\}$ axiom suite.  All grading axioms
 Yukawa, $\gamma_F \pi_F(a) \gamma_F = \pi_F(a)$,
 $\gamma_F = \gamma_F^*$, $\{J_F, \gamma_F\} = 0$) hold to bit-exact
 zero residual; 15 new tests in \texttt{TestChiralityF}, all passing.
-The combined KO-dimension of
-$\mathcal{T}_{\mathrm{AC}} = \mathcal{T}_{\mathrm{GV}} \otimes
-\mathcal{T}_F$ is therefore $3 + 6 = 9 \equiv 1 \pmod 8$, consistent
-with H1's combined-Dirac construction.
+The finite factor therefore carries the KO-dim~6 signs
+$(\varepsilon_F, \varepsilon'_F, \varepsilon''_F) = (+, +, -)$;
+\textbf{[SYMBOLIC + MEASURED]} the
+combined real structure on H1's combined Dirac carries the sign pair
+$(\varepsilon, \varepsilon') = (-, +)$, the GV factor's pair --- with
+$\varepsilon'' = +1$ under the finite grading, and no finite-cutoff
+KO label attached (\S\ref{sec:higgs_h1}).  The additive rule $3 + 6 \equiv 1 \pmod 8$
+does not apply to H1's ungraded sum $D_{\mathrm{GV}} \otimes
+\mathbb{1}_F + \gamma_{\mathrm{GV}} \otimes D_F$; it governs the
+graded product of Dabrowski--Dossena~\cite{dabrowski_dossena2011},
+which the paper does not use.
 
 \paragraph{Tensor-product diagnostic.}  Track~G3-C computed $\Delta$
 at $n_{\max} \in \{1, 2, 3\}$ using the production
@@ -4783,7 +4853,7 @@ GeoVac does not autonomously generate the Standard Model;\ the
 construction admits SM gauge content given imposed Yukawa,
 hypercharge, and generation choices, and the GeoVac data is silent
 on each of those choices.  This is a clean structural verdict, in
-the sense of CLAUDE.md~\S 1.5:\ the framework is consistent with a
+the sense of the project's rhetoric rule:\ the framework is consistent with a
 GeoVac SM construction, but the framework does not select one.
 
 \paragraph{G4a closure (Sprint G4a, 2026-05-31).}
@@ -4875,11 +4945,11 @@ $\mathbb{Q}[y_i^{-2s}]$ generated by the Yukawa eigenvalues. The two
 rings share no generator: the $\eta$-trivialization
 ($\{\gamma_F, D_F\} = 0$ annihilates the odd-$k$ heat traces that
 would couple them), together with the G3 commuting-$\mathbb{Z}_2$
-result, makes the inner Yukawa ring \emph{disjoint} from every forced
+result, leaves the inner Yukawa ring sharing no generator with any forced
 outer ring. This is the precise content of the structural-skeleton
 scope (\S 1.5 of the project guidelines): the bone (the forced,
 integer/rational skeleton) and the calibration data (free) live in
-provably non-overlapping rings, and the Yukawa is free \emph{because}
+rings sharing no generator, and the Yukawa is free \emph{because}
 it generates its own ring --- a quantity cannot be derived from a ring
 it generates. The reading also explains, after the fact, why the H1,
 W3, and Koide attempts to select the Yukawa all returned clean
@@ -4919,8 +4989,8 @@ $\mathbb{C}^2$ antilinear involution
 ($J_{\mathrm{int}}^2 = -1 \Leftrightarrow \mathbb{H}$;
 $J_{\mathrm{int}}^2 = +1 \Leftrightarrow M_2(\mathbb{C})$), which lives
 on the algebra side and is invisible to the combined
-$J = J_{\mathrm{GV}} \otimes J_F$. The combined $J^2$, the combined
-$(\varepsilon, \varepsilon')$ signs, and the combined KO-dimension are
+$J = J_{\mathrm{GV}} \otimes J_F$. The combined $J^2$ and the combined
+$(\varepsilon, \varepsilon')$ signs are
 \emph{bit-identical} for both candidates at $n_{\max} \in \{1, 2, 3\}$,
 and the Chamseddine--Connes--Marcolli order-one-with-Yukawa selector
 is satisfied by both (matter/antimatter decoupling). The $\mathbb{H}$
@@ -5110,7 +5180,7 @@ multiplicity- and real-structure-valued data. Source:\
 The eight preceding paragraphs (Sprint H1 through Door 4f and the
 Direction 2 scoping) compose into a single Bertrand-shaped statement
 that crystallizes the structural content already proved across the
-sub-sprints.  \textbf{[PANEL-VERIFIED]} Stated as a theorem it makes explicit what the
+sub-sprints.  \textbf{[SYMBOLIC + MEASURED]} Stated as a theorem it makes explicit what the
 distributed prose shows in pieces:\ the framework forces the
 \emph{dimension} of the $D_F$ moduli space, but does not (and at the
 current packing primitive cannot) force the points within it.
@@ -5176,10 +5246,14 @@ original H1 sprint accounting:\ on the $16$-dimensional matter
 sector the lepton and quark off-chirality blocks each satisfy
 order-one without further reduction (because $\mathcal{A}_F$ acts
 block-diagonally in lepton/quark and $M_3(\mathbb{C})$ commutes with
-the Yukawa flavour structure).  Each constructed-triple
+the Yukawa flavour structure); it is pinned as a projection-rank
+check in the same test module (the matter blocks of the $272$- and
+$260$-dimensional solution spaces each span the full $128$-dimensional
+matter-sector space; 2026-09-02).  Each constructed-triple
 axiom-consistency check passes at
 $n_{\max} \in \{2, 3\}$ in module
-\texttt{geovac/standard\_model\_triple.py} (45 tests).  \emph{QA
+\texttt{geovac/standard\_model\_triple.py} (backed by
+\texttt{tests/test\_standard\_model\_triple.py}, 45 tests).  \emph{QA
 correction (2026-06-14):} those 45 tests verify the axiom consistency of
 one constructed $D_F$, \emph{not} the moduli-dimension counts of the
 chain; the counts above are the direct enumeration of
@@ -5217,12 +5291,13 @@ in it the realised system sits.
 The positive content of Theorem~\ref{thm:forced_count} sits beside two
 negative companions already recorded above:
 \begin{itemize}\setlength{\itemsep}{2pt}
-\item \textbf{Door 4 seam theorem (Yukawa-value wall):}\ the
+\item \textbf{Door 4 seam reading (Yukawa-value wall):}\ the
   $\eta$-trivialization plus tensor factorization plus the G3
-  commuting-$\mathbb{Z}_2$ result prove that the $D_F$-entries inside
-  $\mathcal{M}(D_F)$ are in a Dirichlet ring disjoint from every
-  forced outer ring, so the framework cannot derive them.  Sprint
-  \textbf{[PANEL-VERIFIED]} Yukawa-PSLQ (2026-06-03) added empirical confirmation:\ a
+  commuting-$\mathbb{Z}_2$ result place the $D_F$-entries inside
+  $\mathcal{M}(D_F)$ in a Dirichlet ring sharing no generator with any
+  forced outer ring, so the framework does not derive them from the
+  forced rings (an Observation-level reading).  \textbf{[PANEL-VERIFIED]}
+  Sprint Yukawa-PSLQ (2026-06-03) added empirical confirmation:\ a
   $162$-cell sweep of the nine measured Yukawa values against the
   forced inner-factor pure-Tate basis $\mathbb{Q}[\pi, \pi^{-1}]$
   (basis sharpened by the $\eta$-trivialization audit ruling out
@@ -5415,8 +5490,10 @@ free-side content of the inner-factor structural-skeleton boundary
 at the canonical-representation level:
 \begin{itemize}\setlength{\itemsep}{2pt}
 \item \textbf{Forced data:}  the moduli space $\mathcal{M}(D_F)$ and
-  its dimension (matter-sector count:\ $128$ per generation;
-  full-axiom:\ $260$ --- see Theorem~\ref{thm:forced_count}).
+  its dimension (matter-sector count:\ $128\,N_{\mathrm{gen}}^2$ with
+  generation mixing, $8$ per generation on the diagonal-Yukawa slice;
+  full-axiom:\ $260$ at $N_{\mathrm{gen}} = 1$ --- see
+  Theorem~\ref{thm:forced_count}).
 \item \textbf{Free data:}  (i) the point in $\mathcal{M}(D_F)$
   (Yukawa values --- H1 non-selection),
   (ii) the Hilbert-space multiplicity ($N_{\mathrm{gen}}$ ---
@@ -5631,7 +5708,8 @@ the tensor-product construction:
 
 \begin{enumerate}\setlength{\itemsep}{1pt}
 \item Paper~7's chordal-distance identity maps continuum $-Z/r$ on
-  $\mathbb{R}^3$ to the unit-$S^3$ graph Laplacian via a focal-length-
+  $\mathbb{R}^3$ to the Laplace--Beltrami operator on the unit $S^3$
+  (whose discretisation is the graph Laplacian) via a focal-length-
   dependent stereographic conformal factor $c(\lambda)$.  Two
   different focal lengths $\lambda_a, \lambda_b$ give two different
   conformal factors $c_a, c_b$.
@@ -5696,8 +5774,8 @@ Together with
 Theorem~\ref{thm:single_cutoff_spectral_action} +
 Corollary~\ref{cor:multi_loop_renormalization_wall} (E7, E8, G3, G4),
 Theorem~\ref{thm:spatial_composition_radial_wall} +
-Corollary~\ref{cor:spatial_composition_wall} (G1, G2, G5) close all
-six catalogue instances of the multi-focal-composition wall family
+Corollary~\ref{cor:spatial_composition_wall} (G1, G2, G5) close seven
+catalogue entries of the multi-focal-composition wall family
 (Paper~57~\S 4 cross-domain unity) at theorem-grade level under two
 structurally distinct theorems:
 
@@ -5711,11 +5789,13 @@ structurally distinct theorems:
   no relative-coordinate-reduction morphism in $\mathcal{A}$.
 \end{itemize}
 
-The seventh wall instance (G6) is the H1 Yukawa non-selection, closed
+An eighth catalogue entry (G6) is the H1 Yukawa non-selection, closed
 by Theorem~\ref{thm:n_gen_non_selection}'s companion result
-(\S~\ref{sec:open}).  All six unique multi-focal-composition wall
-instances (G6 $=$ F1 is not independent) are now characterised at
-theorem-grade level by one of the three theorems.
+(\S~\ref{sec:open}).  The entries are finer than the instances:\ all
+six independent multi-focal-composition wall instances of
+Paper~57~\S 4 (H1, LS-8a, HF-3/4/5, W1e; G6 $=$ F1 is not independent)
+are now characterised at theorem-grade level by one of the three
+theorems.
 
 The multi-focal-composition wall is theorem-bound at the canonical-
 representation level.  Together with the four inner-factor non-
@@ -5746,7 +5826,7 @@ for $\alpha^{-1}$ (Paper 2) live in two distinct Mellin sub-rings:
   $m = 3$;  $M_2$ sub-ring (heat-kernel period).
 \item $F = \pi^2/6$ — Fock-degeneracy Dirichlet at the packing exponent
   $d = 3$ (the $\zeta(2)$ value);  $M_2$ sub-ring.
-\item $\Delta = 1/40 = c^2(3,2)$ — Dirac mode degeneracy $g_3^{\rm Dirac}$;
+\item $\Delta = 1/40 = c^2(4,3)$ (Paper~7's $(n, l)$ convention) — Dirac mode degeneracy $g_3^{\rm Dirac}$;
   $M_1$ sub-ring (Hopf-base counting).
 \end{itemize}
 
@@ -5817,7 +5897,7 @@ It does not claim $K$ is mathematically impossible to generate from
 some extended axiom set; sibling axioms producing $K$ from a single
 mechanism remain logically possible but none is currently exhibited.
 
-Per CLAUDE.md \S 13.5, the Paper 2 combination
+Per the project's standing hard prohibition, the Paper 2 combination
 rule is labeled an \emph{Observation} (not a conjecture or derivation),
 a status protected at the rule level and preserved by this Theorem:\
 the structural impossibility result strengthens the empirical
@@ -6063,7 +6143,7 @@ input data, not GeoVac-internal.
 \texttt{FrozenCore} $Z_{\mathrm{eff}}(r)$ provides same-center
 screening only; cross-center screening of bare $V_{ne}$ from the
 opposite nucleus is not implemented (Sprint~7 NaH/MgH$_2$ balanced
-FCI; CLAUDE.md~\S2).  Sprint~7b made partial progress for the
+FCI; project development-frontier log).  Sprint~7b made partial progress for the
 spin-orbit splitting; the PES extension is mechanical once cross-center
 screening is wired through the multipole expansion.  Architectural
 gap.
@@ -6474,7 +6554,7 @@ These four primitive signs, combined with the four BBB defining
 relations $J^2 = \varepsilon$, $J\chi = \varepsilon''\chi J$,
 $J\eta = \varepsilon\kappa\,\eta J$, $\eta\chi = \varepsilon''\kappa''\,\chi\eta$,
 predict at $(4, 6)$:\ $J^2 = +I$, $\{J, \chi\} = 0$,
-$\{J, \eta\} = 0$, $\{\eta, \chi\} = 0$.  \textbf{[SYMBOLIC PROOF]} At the bare Cl$(3, 1)$
+$\{J, \eta\} = 0$, $\{\eta, \chi\} = 0$.  \textbf{[SYMBOLIC + MEASURED]} At the bare Cl$(3, 1)$
 4-spinor level with charge conjugation $U_4 = i\gamma^2$, all four
 relations hold bit-exact in the chiral basis (Frobenius residual
 $= 0.0$).  The translation $(s, t) = (3, 1) \leftrightarrow (m, n) =
@@ -6518,15 +6598,18 @@ Axiom & Predicted at $(4, 6)$ & Residual \\
 (vi) order-zero $[a, J_L b J_L^{-1}] = 0$ & $0$
   & $\le 0.0675$ finite-resolution (sample-of-3) \\
 (vii) order-one $[[D_L, a], J_L b J_L^{-1}] = 0$ & $0$
-  & $\le 0.101$ finite-resolution (sample-of-3) \\
+  & $\le 0.1014$ finite-resolution (sample-of-3) \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 Axioms (i)--(iv) hold bit-exactly at every cell.  Axioms (vi)--(vii)
-exhibit the same 5--10\% finite-resolution residuals as the
+exhibit the same 5--10.2\% finite-resolution residuals as the
 Riemannian-side audit (Table~\ref{tab:axiom_audit}, ``Order zero
-$[a, J b J^{-1}] = 0$''); the residuals are sample-of-3 estimates on
+$[a, J b J^{-1}] = 0$''); over the full $55$-element multiplier basis
+at $n_{\max} = 3$ the maxima are $0.0785$ and $0.2026$ (measured
+2026-09-02), i.e.\ the sample-of-3 figures understate the order-one
+residual by a factor of two; the residuals are sample-of-3 estimates on
 the canonical $\mathcal{A}_{\mathrm{GV}}$ multiplier basis and
 match the structural-artifact reading of Connes--van~Suijlekom
 operator-system multiplicative-closure failure.  Axiom (v) is the
@@ -6848,9 +6931,11 @@ $n_{\max}$ & $\dim_H$ & $\mathrm{wedge\,dim}$ & $\max\|\sigma_{2\pi}(O) - O\|_F$
 \end{tabular}
 \end{center}
 
-The $n_{\max} = 3$ cutoff is structurally distinguished:\ $\dim_H = 40
-= g_3^{\mathrm{Dirac}} = \Delta^{-1}$ (Paper~2's structurally
-distinguished selection-principle cutoff).  The L1 closure at this
+The $n_{\max} = 3$ cutoff is the one at which the cumulative node
+count $\dim_H = 4 + 12 + 24 = 40$ numerically coincides with Paper~2's
+$g_3^{\mathrm{Dirac}} = \Delta^{-1} = 40$, the single-level degeneracy at
+$k = 3$ (different objects:\ $N_{\mathrm{Dirac}}(n_{\max}) = n_{\max}\,
+g^{\mathrm{D}}_{n_{\max}}/3$, so they agree only at $n_{\max} = 3$).  The L1 closure at this
 cutoff is the operator-system-level confirmation that the M1 mechanism's
 $2\pi$ closure holds on the Paper-2-relevant truncation.
 
@@ -6871,9 +6956,9 @@ at the unit normalisation U-1.
 The period closure $\sigma_{2\pi}(O) = O$ is finite-cutoff exact, not
 a limit-statement.  It does not require the Gromov--Hausdorff machinery
 of Theorem~\ref{thm:gh_convergence} (although it is consistent with it
-via the propinquity rate cross-check: residual / $\gamma_{n_{\max}}$
+via the state-space GH-rate cross-check: residual / $\gamma_{n_{\max}}$
 ratio is $O(\varepsilon_{\mathrm{machine}})$, several orders below the
-qualitative-rate prediction).  The structural reason is the
+rate prediction).  The structural reason is the
 spectral-spectrum property:\ the BW-$\alpha$ geometric K has integer
 spectrum on the full-Dirac basis (odd integers $\mathrm{two\_m}_j$),
 inherited from the SO(4) Casimir grading of the Camporesi--Higuchi
@@ -7026,7 +7111,9 @@ and accessor methods (\verb|tomita_structure|, \verb|k_alpha_geometric|,
 \verb|k_tomita|, \verb|compare_alpha_vs_tomita|) on the
 \verb|ModularHamiltonian| class.  Test coverage:\
 \verb|tests/test_modular_hamiltonian.py| extended with 26 fast + 2 slow
-new tests (total 67 tests, 0 regressions of the 41 L1 tests).
+new tests at the time (the file now holds 70 tests as of 2026-09-02:\
+66 pass, 4 slow-marked and skipped by default; 0 regressions of the
+41 L1 tests).
 Computational driver:\ \verb|debug/l1_tighten_tomita_compute.py|.
 Machine-readable results:\
 \verb|debug/data/l1_tighten_tomita_results.json|.  Closure memo:\
@@ -7072,17 +7159,17 @@ spectral-action expansion in this limit.
 \label{obs:lineage}
 Each structural ingredient of the GeoVac spectral triple has published
 precedent: finite almost-commutative spectral triples
-(\cite{krajewski1998,paschke_sitarz2000,cacic2009}), graph spectral
+(\cite{krajewski1998,paschke_sitarz1998,cacic2013}), graph spectral
 triples (\cite{marcolli_vs2014,perez_sanchez2024}), spectral
 truncations (\cite{connes_vs2021,hekkelman2022,hekkelman_mcdonald2024}), and
-the Standard Model spectral action (\cite{chamseddine_connes2010}).
+the Standard Model spectral action (\cite{chamseddine_connes1997_2008}).
 What is not duplicated in the literature is the $\alpha$ observation at
 $8.8 \times 10^{-8}$ from a discrete spectral construction; that
 remains the original empirical claim of Paper~2.
 \end{observation}
 
 This is part of what the working hypothesis WH1 in the project register
-rests on (CLAUDE.md~\S 1.7, WH1 ``PROVEN'' as of 2026-06-10): the structural
+rests on (working-hypothesis register, WH1 ``PROVEN'' as of 2026-06-10): the structural
 framing is in the published lineage; the empirical claim is not
 duplicated.
 
@@ -7103,11 +7190,11 @@ rank~$\ge 2$ (e.g., $M_3(\mathbb{C})$ or sums of matrix algebras as in
 the Standard Model triple), order-one becomes a strong constraint and
 typically requires modification of the Dirac operator
 ($\textit{first-order condition} \Rightarrow$ Higgs sector
-in~\cite{chamseddine_connes2010}).  Whether GeoVac admits a natural
+in~\cite{chamseddine_connes1997_2008}).  Whether GeoVac admits a natural
 rank-$\ge 2$ extension---and what its spectral action would predict---is
 an open question.  The Bargmann--Segal $S^5$ HO triple of
 Paper~24 was probed for an $\mathrm{SU}(3)$ extension in
-Sprint~5 (CLAUDE.md~\S 2) with negative outcome; that is one negative
+Sprint~5 (project development-frontier log) with negative outcome; that is one negative
 data point, not the full picture.  The electroweak slice
 $\mathcal{A}_F = \mathbb{C} \oplus \mathbb{H}$ (rank up to 2 via
 $\mathbb{H} \cong M_2(\mathbb{C})$ over $\mathbb{C}$, a real
@@ -7209,7 +7296,12 @@ Fields and Motives}, AMS Colloquium Publications~\textbf{55} (2008).
 W.~D.~van~Suijlekom, \textit{Noncommutative Geometry and Particle
 Physics}, Mathematical Physics Studies, Springer (2015).
 
-\bibitem{chamseddine_connes2010}
+\bibitem{dabrowski_dossena2011}
+L.~Dabrowski and G.~Dossena, ``Product of real spectral triples,''
+\textit{Int.~J.~Geom.~Methods Mod.~Phys.}\ \textbf{8}, 1833--1848
+(2011), arXiv:1011.4456.
+
+\bibitem{chamseddine_connes1997_2008}
 A.~H.~Chamseddine and A.~Connes,
 ``Spectral action principle,''
 \textit{Commun.~Math.~Phys.}\ \textbf{186}, 731--750 (1997);
@@ -7295,12 +7387,12 @@ T.~Krajewski,
 ``Classification of finite spectral triples,''
 \textit{J.~Geom.~Phys.}\ \textbf{28}, 1--30 (1998).
 
-\bibitem{paschke_sitarz2000}
+\bibitem{paschke_sitarz1998}
 M.~Paschke and A.~Sitarz,
 ``Discrete spectral triples and their symmetries,''
 \textit{J.~Math.~Phys.}\ \textbf{39}, 6191--6205 (1998).
 
-\bibitem{cacic2009}
+\bibitem{cacic2013}
 B.~\'Ca\'ci\'c,
 ``Real structures on almost-commutative spectral triples,''
 \textit{Lett.~Math.~Phys.}\ \textbf{103}, 793--816 (2013), arXiv:1209.4832.
@@ -7321,7 +7413,7 @@ D.~V.~Vassilevich,
 ``Heat kernel expansion: user's manual,''
 \textit{Phys.~Rep.}\ \textbf{388}, 279--360 (2003), arXiv:hep-th/0306138.
 
-\bibitem{karamata1962}
+\bibitem{karamata1949}
 J.~Karamata,
 \textit{Theory and Applications of Stieltjes Integrals},
 SANU Posebna izdanja CLIV, Belgrade, 1949.
@@ -7504,7 +7596,7 @@ J.~Loutey,
 GeoVac Paper~38 (2026).
 \bibitem{loutey_paper40}
 J.~Loutey,
-``State-space Gromov--Hausdorff convergence of spectral truncations of compact Lie groups with bi-invariant metric,''
+``State-space Gromov--Hausdorff convergence of spectral truncations of compact semisimple Lie groups with bi-invariant metric,''
 GeoVac Paper~40 (2026).
 \bibitem{loutey_paper50}
 J.~Loutey,

@@ -56,7 +56,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 32 `paper_32_spectral_triple.tex` | **KEYSTONE** | The GeoVac spectral triple; Connes axiom audit; §VIII case-exhaustion + non-selection theorems |
 | 38 `paper_38_su2_propinquity_convergence.tex` | **KEYSTONE** | **Unconditional** state-space GH convergence at rate (4/π)·log n/n (2026-06-10) |
 | 39 `paper_39_tensor_propinquity_convergence.tex` | ACTIVE | Tensor-product convergence (two focal lengths) |
-| 40 `paper_40_unified_propinquity_convergence.tex` | ACTIVE | 4/π rate universal across compact Lie groups |
+| 40 `paper_40_unified_propinquity_convergence.tex` | ACTIVE | 4/π rate universal across compact connected semisimple Lie groups (retitled 2026-09-02; a circle factor carries 2/π) |
 | 42 `paper_42_modular_hamiltonian_four_witness.tex` | ACTIVE | Four-witness Wick-rotation theorem at finite cutoff (Riemannian) |
 | 43 `paper_43_lorentzian_extension.tex` | ACTIVE | Krein (3,1) extension at finite cutoff; Pythagorean orthogonality with 1/π² M1 signature |
 | 44 `paper_44_lorentzian_operator_system.tex` | ACTIVE | Lorentzian operator-system substrate; prop = 2 |

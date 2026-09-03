@@ -384,12 +384,19 @@ class StandardModelACTriple:
     def fluctuated_dirac(
         self,
         omega: np.ndarray,
-        epsilon_prime: int = -1,
+        epsilon_prime: int = +1,
     ) -> np.ndarray:
-        """D_omega = D + omega + epsilon' * J omega J^{-1}."""
+        """D_omega = D + omega + epsilon' * J omega J^{-1}.
+
+        epsilon' = +1 is the measured sign in J D = epsilon' D J for this
+        triple (as for the electroweak slice in
+        ``almost_commutative.py``); J = U K gives J op J^{-1} =
+        U conj(op) U^dagger.  Corrected 2026-09-02 from (-1, U.T): the two
+        errors cancelled because the combined U is purely imaginary.
+        """
         D = self.dirac_combined()
         U = self.real_structure_combined()
-        J_omega_Jinv = U @ np.conj(omega) @ U.T
+        J_omega_Jinv = U @ np.conj(omega) @ U.conj().T
         return D + omega + epsilon_prime * J_omega_Jinv
 
     # ------------------------------------------------------------------
@@ -535,25 +542,37 @@ class StandardModelACTriple:
         dim = self._dim_H
         I = np.eye(dim, dtype=np.complex128)
 
-        # J^2 = epsilon * I (KO-dim 1: epsilon = -1)
+        # J^2 = epsilon * I  (measured epsilon = -1: J_GV^2 = -I, J_F^2 = +I)
         J_sq = U_J @ np.conj(U_J)
         j_sq_residual = float(np.linalg.norm(J_sq - (-1) * I))
 
-        # JD = epsilon' * DJ (KO-dim 1: epsilon' = +1)
+        # JD = epsilon' * DJ  (measured epsilon' = +1; with epsilon = -1 this
+        # is the measured (-, +) pair -- NOT KO-1 = (+, -); no finite-cutoff KO
+        # label is attached, see almost_commutative.py)
         JD = U_J @ np.conj(D) @ np.linalg.inv(U_J)
         jd_residual = float(np.linalg.norm(JD - D))
 
-        # {gamma, D} = 0 (odd spectral triple)
+        # {gamma, D} for gamma = gamma_GV (x) gamma_F is NOT zero (measured
+        # 33.9 / 103.7 at n_max = 1 / 2): this gamma is not a grading of the
+        # combined D (gamma_GV here is sign(D_GV)).  The production grading
+        # build_gamma_GV (x) 1_F does anticommute with D (see the KO-label
+        # caveat in almost_commutative.py).  Reported, not asserted.
         gamma_d_anticomm = gamma @ D + D @ gamma
         gamma_d_residual = float(np.linalg.norm(gamma_d_anticomm))
 
         # gamma^2 = I
         gamma_sq_residual = float(np.linalg.norm(gamma @ gamma - I))
 
-        # J gamma = epsilon'' * gamma J (KO-dim 1: epsilon'' = +1)
+        # J gamma = epsilon'' * gamma J  (measured epsilon'' = -1: J ANTIcommutes
+        # with gamma = gamma_GV (x) gamma_F, ||J gamma + gamma J|| = 0; not a
+        # KO-table entry -- the GV factor is odd.  Corrected 2026-09-02, trunk
+        # DELTA CODE-C: an earlier comment here said +1.)
         J_gamma = U_J @ np.conj(gamma)
         gamma_J = gamma @ U_J
-        j_gamma_residual = float(np.linalg.norm(J_gamma - gamma_J))
+        # residual of J gamma = -gamma J (the measured sign), so the field is
+        # ~0 when the comment above holds; it used to measure the commutator
+        # and returned ~45 (2026-09-02, DELTA #2 CODE-C).
+        j_gamma_residual = float(np.linalg.norm(J_gamma + gamma_J))
 
         # D Hermitian
         d_herm_residual = float(np.linalg.norm(D - D.conj().T))
@@ -574,7 +593,7 @@ class StandardModelACTriple:
             k_b = rng.integers(0, self.n_gv_multipliers)
             a = self.algebra_element(self.gv_multiplier(k_a), lam_a, q_a, m_a)
             b = self.algebra_element(self.gv_multiplier(k_b), lam_b, q_b, m_b)
-            JbJinv = U_J @ np.conj(b) @ U_J.T
+            JbJinv = U_J @ np.conj(b) @ U_J.conj().T
             comm = a @ JbJinv - JbJinv @ a
             order_zero_max = max(order_zero_max, float(np.linalg.norm(comm)))
 
@@ -593,7 +612,7 @@ class StandardModelACTriple:
             a = self.algebra_element(self.gv_multiplier(k_a), lam_a, q_a, m_a)
             b = self.algebra_element(self.gv_multiplier(k_b), lam_b, q_b, m_b)
             Da_comm = D @ a - a @ D
-            JbJinv = U_J @ np.conj(b) @ U_J.T
+            JbJinv = U_J @ np.conj(b) @ U_J.conj().T
             order_one = Da_comm @ JbJinv - JbJinv @ Da_comm
             order_one_max = max(order_one_max, float(np.linalg.norm(order_one)))
 

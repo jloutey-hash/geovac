@@ -93,7 +93,7 @@ degenerates at finite cutoff;\ \textbf{[MEASURED]} a remark quantifies
 this on a finite panel of cutoffs). The proof
 is a compression/lifted-state argument in the pattern of the
 compact-metric-group theorem of
-Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023}, with
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}, with
 self-contained proofs:\ the dual map evaluates conjugated operators
 against the central spectral Fej\'er vector state, which embeds
 \emph{exactly} into the spinor window via the
@@ -126,7 +126,7 @@ non-abelian SU(2) rate relative to the
 Leimbach--van~Suijlekom~\cite{leimbach_vs2024} torus rate $O(1/\nmax)$.
 State-space Gromov--Hausdorff convergence of scalar truncations for
 \emph{all} compact metric groups — including $\SU(2)$ — is
-established by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023};\
+established by Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\
 the residual contribution here is the chirality-doubled
 Camporesi--Higuchi spinor substrate, the closed-form rate moment, and
 the explicit $4/\pi$ asymptotic constant. The construction supplies
@@ -163,7 +163,7 @@ Gromov--Hausdorff distance as an open question, deferring it to
 ``elsewhere.'' The convergence itself, at the state-space level, is
 established in van~Suijlekom~\cite{vs2021_jgp} for the circle and
 sphere, and for \emph{all compact metric groups} by
-Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023};\ the
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ the
 residual contribution of the present paper is therefore the spinor
 substrate, the closed-form rate moment, and the explicit $4/\pi$
 constant — not the existence of convergence for $\SU(2)$ scalars.
@@ -204,7 +204,7 @@ proved here.
 For the most natural physically motivated non-K\"ahler compact case
 --- the round $\sthree = \SU(2)$ --- the scalar state-space
 convergence is covered by the compact-metric-group theorem of
-Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023};\ what
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ what
 remains distinctive is the \emph{Dirac spectral triple} version on
 the Camporesi--Higuchi spinor substrate, with explicit closed-form
 rate.
@@ -280,8 +280,10 @@ geometric content. Writing
 $4/\pi = \Vol(S^2) / \pi^2$, where $\Vol(S^2) = 4\pi$ is the standard
 round volume of the Hopf base $S^2 = \SU(2)/U(1)$ and $\pi^2 =
 \Vol(\SU(2))/2$ is half the round volume of $\SU(2)$ in the bi-invariant
-metric, the constant identifies as a Haar-normalisation ratio
-$\Vol(S^2)/\Vol(\SU(2)) \cdot (2/\pi)$. This is precisely the
+metric, the constant identifies as twice the Haar-normalisation ratio
+$\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
+first-moment constant of the classical Fej\'er kernel on the circle
+(Remark~\ref{rem:circle_fejer}). This is precisely the
 \emph{Hopf base measure} factor that appears in the heat-kernel
 expansion of the round $\sthree$ via the Hopf fibration $S^1 \to
 \sthree \to S^2$, and which has been independently identified in the
@@ -292,7 +294,8 @@ $4/\pi$ in
 \eqref{eq:main_rate} identifies as the $k=0$ sub-case (M1, Hopf-base
 measure) of that classification; the same $1/\pi^2$ factor reappears
 in the Pythagorean Hilbert--Schmidt orthogonality corollary on the
-Krein wedge documented in the companion Lorentzian-extension paper. \textbf{[OBSERVATION]} The
+Krein wedge documented in the companion Lorentzian-extension paper
+(Paper~43~\cite{paper43}). \textbf{[OBSERVATION]} The
 appearance of this constant in
 the state-space GH rate is therefore not an isolated occurrence:\ the
 rate at which
@@ -428,12 +431,12 @@ L^2(\SU(2)) \otimes \C^2 \;=\; \bigoplus_{j} V_j \otimes
 \bigl(V_{j+1/2} \oplus V_{j-1/2}\bigr),
 \end{equation*}
 and these summands are precisely the Camporesi--Higuchi
-eigenspaces~\cite{camporesi_higuchi1996}:\ $V_j \otimes V_{j+1/2}$
-is the positive shell $n = 2j$ and $V_j \otimes V_{j-1/2}$ the
-negative shell $n = 2j-1$, with dimensions $(n+1)(n+2)$ matching
-shell by shell. Hence $h \otimes \chi$ lies in the union of the
-\emph{complete} shells $n \le 2J = \nmax - 1$ --- exact containment,
-no spillover.
+eigenspaces~\cite{camporesi_higuchi1996}:\ in the level index of
+\eqref{eq:CH_spectrum}, $V_j \otimes V_{j+1/2}$ is the positive shell
+$n = 2j + 1$ and $V_j \otimes V_{j-1/2}$ the negative shell $n = 2j$,
+with dimensions $n(n+1)$ matching shell by shell. Hence $h \otimes
+\chi$ lies in the union of the \emph{complete} shells $n \le 2J + 1 =
+\nmax$ --- exact containment, no spillover.
 \item[(b)] (\emph{Lifted state.}) For every $f \in C(\sthree)$,
 $\langle \xi, (P_{\nmax} M_f P_{\nmax})\,\xi\rangle =
 \int_{\sthree} f\, \KS_{\nmax}\, d\mu_{\mathrm{Haar}}$:\ the induced
@@ -469,7 +472,7 @@ $\KS_{\nmax}$;\ \textbf{[MEASURED]} verified to machine precision
 \texttt{debug/p38\_g1g2\_scalar\_prototype.py}).
 \end{proof}
 
-\begin{theorem}[Main theorem, unconditional]
+\begin{theorem}[Main theorem, unconditional;\ \textbf{[INTERNAL THEOREM]}]
 \label{thm:main_unconditional}
 For every $\nmax \ge 1$,
 \begin{equation}\label{eq:unconditional_bound}
@@ -530,7 +533,7 @@ as an explicit forward-reconstruction refinement;\ it is no longer
 load-bearing for the distance bound. The scalar $C(G)$ case of this
 compression/lifted-state pattern, for general compact metric groups
 with the same single-moment bound, is due to
-Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023};\ the
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025};\ the
 contribution here is the spinor-window transport (the exact-fit
 inclusion of Lemma~\ref{lem:lifted_state}(a)), per-band
 multiplicity-one injectivity on the chirality-doubled system, the
@@ -550,7 +553,7 @@ $\nmax = 2$ counts;\ the $\nmax = 3$ counts are measured but not
 frozen.) An engineered off-diagonal modification of
 $\DCH$ restores its kernel condition ($1/14$, $1/55$) but is no
 longer needed for the main theorem. Frozen falsifiers:\
-\texttt{tests/test\_p45\_kplus\_degeneracy.py},
+\texttt{tests/test\_p45\_kplus\_degeneracy.py::test\_spatial\_kernel\_condition\_truthful\_vs\_offdiag},
 \texttt{tests/test\_p38\_action\_seminorm.py}.
 \end{remark}
 
@@ -586,9 +589,9 @@ Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}
 (Adv.~Math. \textbf{404} (2022), Paper No.~108393, preprint
 \texttt{arXiv:1811.10843}, 2017) --- the spectral-triple-level
 extension of the dual Gromov--Hausdorff propinquity of
-\cite{latremoliere2016} (J.~Math.~Pures Appl. \textbf{103} (2015))
+\cite{latremoliere2015} (J.~Math.~Pures Appl. \textbf{103} (2015))
 and of the original Gromov--Hausdorff propinquity for quantum compact
-metric spaces of \cite{latremoliere2018} (Trans.~AMS \textbf{368}
+metric spaces of \cite{latremoliere2016} (Trans.~AMS \textbf{368}
 (2016)) --- is \emph{not} the distance established here:\
 \textbf{[OPEN]} its tunnel
 hypotheses are not verified for the truncated operator system
@@ -740,7 +743,8 @@ multiplier $\Mat_f$ is therefore block-diagonal in chirality:
    \quad\text{on}\quad \Hilb^+_{\nmax} \oplus \Hilb^-_{\nmax}.
 \end{equation}
 
-\begin{lemma}[L1$'$:\ chirality-doubled operator system substrate]
+\begin{lemma}[L1$'$:\ chirality-doubled operator system substrate;\
+\textbf{[SYMBOLIC + MEASURED]}]
 \label{lem:L1prime}
 The operator system $\Op_{\nmax}$ inherits from
 \eqref{eq:multiplier_block_diagonal} a chirality block-diagonal
@@ -920,9 +924,10 @@ $\sqrt{k_1 k_2} = \sqrt{a(a+d)} \approx a + d/2 + O(d^2/a)$ for
 $k_2 = k_1 + d$, $d$ odd, $a \gg d$. The leading-order sum is
 $\sum_{d\,\mathrm{odd}} 1/d^2 \cdot \sum_a a \to (\pi^2/8) \cdot
 n^2/2$, giving $T_n / Z_n \to \pi^2/4$ and $\gamma_n \to 0$. The
-sub-leading $\log n / n$ correction comes from the boundary
-$\sqrt{a(a+d)}$ asymmetry and is computed by a standard Abel--Plana /
-Stein--Weiss integration-by-parts:
+sub-leading $\log n / n$ correction is the net of two logarithmic
+pieces --- the triangle truncation of the odd-$d$ sum (coefficient
+$2$) and the $d/2$ term of $\sqrt{a(a+d)}$ (coefficient $-1$) ---
+computed in Appendix~\ref{app:stein_weiss}, Step~3:
 \begin{equation*}
    \frac{T_n}{Z_n}
    \;=\; \frac{\pi^2}{4} \;-\; \frac{\log n}{n} \;+\; O(1/n),
@@ -931,27 +936,61 @@ which gives $\gamma_n = (4/\pi) \log n / n + O(1/n)$.
 
 For (d.iii), \textbf{[PANEL-VERIFIED]} the function
 $n \mapsto n \gamma_n / \log n$ is
-monotonically decreasing for $n \ge 3$ (verified at $n \in \{2,
-\ldots, 1000\}$;\ no proof of monotonicity for all $n$ is given),
+monotonically decreasing for $n \ge 3$ (verified on the sample $n \in
+\{3, 4, 5, 7, 10, 15, 20, 30, 50, 100, 200, 500, 1000\}$ by the frozen
+test \texttt{tests/test\_central\_fejer\_su2.py};\ no proof of
+monotonicity for all $n$ is given),
 with maximum at $n = 2$ equal to
 $2 \gamma_2 / \log 2 = 2(\pi - 64\sqrt{2}/(27\pi)) / \log 2
 \approx 5.986$. The uniform bound follows.
 \end{proof}
 
-\begin{remark}[Connection to the Stein--Weiss circle estimate]
+\begin{remark}[Connection to the circle Fej\'er estimate]
+\label{rem:circle_fejer}
 The asymptotic rate $\gamma_n \sim (4/\pi) \log n / n$ is the
-non-abelian analog of the standard Fej\'er-on-the-circle estimate
-$\int_{\T^1} F_n(\theta)\, |\theta|\, d\theta \sim (4/\pi) \log n / n$
-(see Stein--Weiss~\cite{stein_weiss1971} \S I.1; Zygmund~\cite{zygmund2002}
-Vol.~I, Ch.~III \S 3.6). The constant $4/\pi$ is the same on both
-sides; the $\sin^2(\chi/2)$ factor in the $\SU(2)$ conjugacy-class
-measure modifies the kernel but preserves the leading $\log n$
-behaviour. The factor of $\sqrt{2j+1}$ in
-Definition~\ref{def:central_fejer} (vs.\ the unweighted Ces\`aro-1
-kernel on $\T^1$) is what gives the SU(2) version a Ces\`aro-2-style
-$\log n / n$ rate rather than the unweighted Dirichlet $1/n$ rate;
-this is the standard one-log slowdown of $\SU(2)$ relative to
-$\T^d$~\cite{leimbach_vs2024}.
+non-abelian analog of the classical Fej\'er-on-the-circle estimate
+\begin{equation}\label{eq:circle_fejer_moment}
+   \frac{1}{2\pi}\int_{\T^1} F_n(\theta)\, |\theta|\, d\theta
+   \;\sim\; \frac{2}{\pi}\,\frac{\log n}{n},
+   \qquad
+   F_n(\theta) = \frac{1}{n}\,\frac{\sin^2(n\theta/2)}{\sin^2(\theta/2)},
+\end{equation}
+for the probability-normalised Fej\'er kernel
+($\frac{1}{2\pi}\int_{\T^1} F_n = 1$; Zygmund~\cite{zygmund2002}
+Vol.~I, Ch.~III). The circle moment has the exact closed form
+$\frac{1}{2\pi}\int_{\T^1} F_n|\theta| = \frac{\pi}{2} -
+\frac{4}{\pi}\sum_{k\ \mathrm{odd},\,k<n}(1-k/n)/k^2$ (from
+$\int_0^\pi\theta\cos k\theta\,d\theta = ((-1)^k-1)/k^2$), whose
+$\log n/n$ coefficient is $2/\pi$ (the $\tfrac{1}{n}\sum_{k\ \mathrm{odd}}1/k
+\sim \tfrac{1}{2n}\log n$ term). \textbf{[SYMBOLIC + MEASURED]} The circle
+constant is $2/\pi$, not $4/\pi$:\ the doubling estimator
+$(2n\,m_{2n} - n\,m_n)/\log 2$ on the closed form gives $0.63662$ at
+$n = 400$ ($2/\pi = 0.63662$), the $\SU(2)$ doubling estimator of
+Lemma~\ref{lem:L2}(d.ii), $a_n = (2n\gamma_{2n} - n\gamma_n)/\log 2$,
+reads $1.2785$ at $n = 800$ and $1.2761$ at $n = 1600$ (i.e.\ using
+$\gamma_{1600}$ and $\gamma_{3200}$; three digits of $4/\pi = 1.2732$,
+approaching from above with the residual shrinking by ${\sim}1.85\times$
+per doubling; Appendix~\ref{app:stein_weiss}), and the ratio of the two
+estimators is $2.008$ at $n = 800$
+(\texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}:\
+\texttt{test\_circle\_fejer\_closed\_form\_matches\_quadrature},
+\texttt{test\_circle\_fejer\_constant\_is\_2\_over\_pi},
+\texttt{test\_su2\_constant\_is\_twice\_circle}). An earlier version of
+this remark stated the circle constant as $4/\pi$, ``the same on both
+sides''; that statement is withdrawn (2026-09-02 certification run).
+\textbf{[OBSERVATION]} The $\SU(2)$ constant is twice the
+circle constant, and both are of the form
+$2\Vol(\text{base})/\Vol(\text{group})$:\ $2\Vol(S^0)/\Vol(S^1) = 2/\pi$
+on the circle and $2\Vol(S^2)/\Vol(\SU(2)) = 4/\pi$ on $\SU(2)$. No
+derivation of the $\SU(2)$ constant from the circle constant is given
+here; the $\sin^2(\chi/2)$ conjugacy-class weight and the
+$\sqrt{2j+1}$ Plancherel weight of Definition~\ref{def:central_fejer}
+together change both the kernel and the constant, while preserving
+the leading $\log n / n$ behaviour that the Ces\`aro-1 (Fej\'er)
+first moment already has on the circle. The one-log slowdown quoted
+in the abstract is relative to the Leimbach--van~Suijlekom torus
+rate $O(1/\nmax)$~\cite{leimbach_vs2024}, not relative to the circle
+Fej\'er first moment.
 \end{remark}
 
 \begin{remark}[Hopf-base measure interpretation of $4/\pi$]
@@ -992,6 +1031,11 @@ $\norm{\nabla f}_{L^\infty}^2 = (\partial_\chi f)^2 + \sin^{-2}\chi\,
 (\partial_\theta f)^2 + \sin^{-2}\chi \sin^{-2}\theta\, (\partial_\phi f)^2$
 is taken in the standard polar parametrisation.
 \end{lemma}
+
+\noindent Frozen falsifier:\
+\texttt{tests/test\_r25\_l3\_lipschitz\_bound.py}
+(\texttt{test\_eq\_l3\_main\_inequality},
+\texttt{test\_l3\_C3\_uniform\_in\_n\_max}).
 
 \begin{proof}
 The truthful $\DCH$ is diagonal in the basis
@@ -1138,7 +1182,8 @@ operator norms, so $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty}$.
    \;\le\; \int_{\SU(2)} \KS_{\nmax}(g)\,|f(g \cdot x) - f(x)|\,dg
    \;\le\; \gamma_{\nmax}\,\norm{\nabla f}_{L^\infty},
 \end{equation*}
-which is the SU(2) version of Stein--Weiss \cite[\S I.1]{stein_weiss1971}.
+which is the SU(2) version of the standard approximate-identity
+estimate (Stein--Weiss~\cite{stein_weiss1971}, Ch.~I).
 Compression then gives
 $\opnorm{B_{\nmax}(f) - P_{\nmax} \Mat_f P_{\nmax}}
 \le \gamma_{\nmax}\norm{\nabla f}_{L^\infty}$.
@@ -1194,7 +1239,7 @@ with the present construction in the appropriate fibration limit.
 
 A remark on framework before assembling. In Latr\'emoli\`ere's
 quantum Gromov--Hausdorff propinquity for metric spectral
-triples~\cite{latremoliere2018, latremoliere_metric_st_2017}, the
+triples~\cite{latremoliere2016, latremoliere_metric_st_2017}, the
 distance is an infimum over tunnels carried by quantum metric spaces
 with quantum isometries, under hypotheses (Leibniz Lip-norms on
 C$^{*}$-algebras;\ kernel condition) not established for the
@@ -1285,8 +1330,9 @@ By L4(d), $\Lipnorm{B_{\nmax}(f)}^{\Op_{\nmax}} =
    \;=\; \Lipnorm{f} - \opnorm{[\DCH, \Mat_{\KS_{\nmax}*f}]}
    \;\le\; \Lipnorm{f} - \Lipnorm{\KS_{\nmax}*f}.
 \end{equation*}
-By the standard Lipschitz/good-kernel estimate (the same Stein--Weiss
-inequality used in L4(c)), the difference of Lipschitz norms is
+By the standard Lipschitz/good-kernel estimate (the same
+approximate-identity inequality used in L4(c)), the difference of
+Lipschitz norms is
 bounded by $\gamma_{\nmax}$:\ $\Lipnorm{f} - \Lipnorm{\KS_{\nmax}*f}
 \le \gamma_{\nmax}\Lipnorm{f}$. Hence
 \begin{equation*}
@@ -1315,7 +1361,7 @@ tunnel maps. The naive bound $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty}
 \le \pi$ (from L4(b) plus the $\sthree$ diameter) is not the relevant
 height for the spectral-triple propinquity:\ the operator norm of
 $B_{\nmax}(f)$ enters the height for the quantum compact metric
-space propinquity \cite{latremoliere2018} but not for the spectral
+space propinquity \cite{latremoliere2016} but not for the spectral
 triple version taken as the model here. The reduction of the height to
 $\gamma_{\nmax}$ via the Lipschitz-comparison form is what gives the
 $n$-rate-controlled state-space GH bound of Theorem~\ref{thm:main}.
@@ -1387,7 +1433,7 @@ $d_{\mathrm{Wass}}$ on $P(\sthree)$. The L4(c) approximate-identity
 property pins this to the actual limit (rather than an isometry
 class). This is the same limit identification as in
 van~Suijlekom~\cite{vs2021_jgp} and
-Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2023} for the
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025} for the
 scalar case.
 \end{proof}
 
@@ -1442,9 +1488,12 @@ The cumulative effect is that the SU(2) rate is one log factor slower
 than the torus rate ($\log n / n$ vs $1 / n$). This is the standard
 slowdown of non-abelian compact groups relative to flat tori in
 Cesaro/Fej\'er theory. \textbf{[OBSERVATION]} The asymptotic constant
-$4/\pi$ is identical
-on both sides, which we read as a common Hopf-base origin in the
-$\SU(2)/U(1)$ Haar normalisation.
+$4/\pi$ is twice the circle Fej\'er first-moment constant $2/\pi$
+(Remark~\ref{rem:circle_fejer}); we read the $\SU(2)$ value as the
+Hopf-base measure factor $2\Vol(S^2)/\Vol(\SU(2))$ in the
+$\SU(2)/U(1)$ Haar normalisation. (An earlier version of this
+sentence stated the constant as ``identical on both sides''; withdrawn
+2026-09-02.)
 
 \subsection{Marcolli--van~Suijlekom gauge-network framework}
 \label{sec:marcolli_vs}
@@ -1563,8 +1612,9 @@ Avery 3-Y integral and the corresponding selection rule.
 
 \emph{Update (2026-05-16):} this open question has been resolved by
 Paper~40~\cite{paper40_unified}, which generalises
-Theorem~\ref{thm:main} to all compact connected Lie groups with
-bi-invariant metric. The higher-rank analog of the Avery 3-Y selection
+Theorem~\ref{thm:main} to all compact connected semisimple Lie groups
+with bi-invariant metric (a circle factor carries the constant $2/\pi$
+of Remark~\ref{rem:circle_fejer}, so tori are excluded). The higher-rank analog of the Avery 3-Y selection
 rule is the \emph{Dirac-triangle inequality}
 $|D(\pi) - D(\pi')| \le \sqrt{C(\sigma)}$ for every
 $\sigma \subset \pi \otimes \pi'^*$, which generalises Paper~38's
@@ -1576,7 +1626,7 @@ rank-dependent as anticipated
 above:\ the rate constant $4/\pi$ is reported \emph{universal} across
 the
 class, by a Plancherel-weight $\times$ Vandermonde-Jacobian
-cancellation theorem (Paper~40~\cite{loutey_paper40} \S 3.2) --- rigorous at rank~$1$
+cancellation theorem (Paper~40~\cite{paper40_unified} \S 3.2) --- rigorous at rank~$1$
 ($\SU(2)$, the present paper), with the rank-$\ge 2$ leg corroborated
 on reduced panels and a fully rank-uniform analytical proof recorded
 as a named gap in Paper~40. \textbf{[INTERNAL THEOREM]}
@@ -1591,18 +1641,18 @@ Kumar (1988) and Vinberg (1990), as proved in Paper~40 \S 3.3.
 % =====================================================================
 
 \textbf{[INTERNAL THEOREM + MEASURED]} This appendix supplies the
-Stein--Weiss / Abel--Plana derivation
-of the asymptotic
+sum-rule / Euler--Maclaurin derivation (the ``Stein--Weiss
+sharpening'' in the corpus's naming, after the real-line kernel
+estimates of~\cite{stein_weiss1971}) of the asymptotic
 $\lim_{n\to\infty} n\gamma_n / \log n = 4/\pi$ that appears as a
-sketch in the proof of Lemma~\ref{lem:L2}.  Step~3(b) below is
-asserted by analogy with Step~3(a) rather than executed;\ the
-independent Euler--Maclaurin pinning of the two sub-coefficients, and
-the numerical corroboration of their net, are what close the
-constant. The argument here is a
-standard application of Abel--Plana to the closed-form sum-rule
-\eqref{eq:gamma_sum_rule}; we record it here in full because the
-referee may want to see the leading-order constant pinned without
-having to reconstruct it.
+sketch in the proof of Lemma~\ref{lem:L2}. Step~3 isolates the two
+sub-coefficients ($2$ and $-1$) whose net is the logarithm's
+coefficient; each sub-coefficient and the net are pinned by
+independent doubling estimators (test-backed), which is what closes
+the constant. The argument is a standard asymptotic analysis of the
+closed-form sum-rule \eqref{eq:gamma_sum_rule}; we record it here in
+full because the referee may want to see the leading-order constant
+pinned without having to reconstruct it.
 
 \paragraph{Setup.}
 Recall the closed form of Lemma~\ref{lem:L2}(d.i):
@@ -1652,33 +1702,48 @@ $\sum_{d\,\mathrm{odd}} 1/d^2 = \pi^2 / 8$
 Dividing by $Z_n = n(n+1)/2 \sim n^2/2$ gives the leading
 $T_n/Z_n \to \pi^2/4$, confirming $\gamma_n \to 0$.
 
-\paragraph{Step 3: Sub-leading $\log n$ via Abel--Plana.}
-The next correction comes from two sources:
+\paragraph{Step 3: Sub-leading $\log n$ (two sub-coefficients, $2 - 1 = 1$).}
+Write $\mathrm{defect}_n := \pi^2/4 - T_n/Z_n$, so that
+\eqref{eq:Tn_asymptotic} is the statement $\mathrm{defect}_n = \log n/n
++ O(1/n)$, i.e.\ that the $\log n / n$ coefficient of the defect is
+exactly $1$ (and $\gamma_n = (4/\pi)\,\mathrm{defect}_n$ identically by
+\eqref{eq:gamma_closed_form_repeat}). Reorganise the Step-1 double
+sum by $a$, with $d$ odd and $d \le n - a$, and expand
+$\sqrt{a(a+d)} = a + d/2 + r(a,d)$. Two pieces carry a logarithm:
 \begin{itemize}
-\item[(a)] The $-1/(2a+d)^2$ bracket, which removes a piece
-$\sum_a \sqrt{a(a+d)}/(2a+d)^2 \sim \sum_a 1/(4a) \to (\log n)/4$ at
-fixed $d$;
-\item[(b)] The boundary term in $\sqrt{a(a+d)}$ near $a = n - d$, where
-$\sqrt{a(a+d)} \approx n - d/2$ rather than the bulk asymptotic
-$a + d/2$.
+\item[(A)] \emph{Triangle truncation of the $d$-sum.} The
+$a\cdot(1/d^2)$ piece is $2\sum_{a=1}^{n-1} a\,S_2(n-a)$ with
+$S_2(D) = \sum_{d\,\mathrm{odd}\le D} d^{-2} = \pi^2/8 - 1/(2D) +
+O(D^{-2})$ (Euler--Maclaurin on the odd-$\zeta(2)$ tail). The tail
+contributes $-\sum_{a=1}^{n-1} a/(n-a) = -n H_{n-1} + O(n)$, so this
+piece alone gives defect log-coefficient $2$.
+\item[(B)] \emph{The $d/2$ correction.} The $(d/2)\cdot(1/d^2)$ piece is
+$\sum_{a=1}^{n-1} S_1(n-a)$ with $S_1(D) = \sum_{d\,\mathrm{odd}\le D}
+d^{-1} = \tfrac12\log D + O(1)$, which is $\tfrac12 n\log n + O(n)$; it
+\emph{adds} to $T_n/Z_n$ and so reduces the defect with log-coefficient
+$1$.
 \end{itemize}
-Both contribute at order $\log n$. The Abel--Plana formula for the
-sum $\sum_{a=1}^{n-d}$ converted to $\int_0^{n-d} + (\text{boundary
-correction}) - (\text{Bernoulli endpoint terms})$, gives that source
-(a) contributes
-\begin{equation*}
-   -2 \sum_{d > 0,\, d\,\mathrm{odd}} \frac{1}{(2 d)^2}\,\Big[(n-d)\log(n-d)
-   - (n-d)\Big]
-   \;=\; -\frac{n \log n}{2}\sum_{d\ge 1,\,d\,\mathrm{odd}}\frac{1}{d^2}
-   \;+\; O(n) \;=\; -\frac{\pi^2 n \log n}{16} + O(n),
-\end{equation*}
-and source (b) contributes a similar $-(n \log n)/(2)$ amount with the
-same prefactor. Combining and dividing by $Z_n = n^2/2 + O(n)$,
+The remaining pieces --- the $-1/(2a+d)^2$ bracket and the residual
+$r(a,d)$ --- carry no $\log n$ at leading order:\ the net coefficient
+on the exact $T_n$ is $2 - 1 = 1$. \textbf{[MEASURED]} All three
+statements are pinned independently by doubling (Richardson)
+estimators on the genuinely computed partial sums, none of which
+assumes the answer:\ the piece-(A) estimator converges to $2$, the
+piece-(B) estimator to $1$, and the estimator on the exact
+$\mathrm{defect}_n$ to $1$
+(\texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}:\
+\texttt{test\_subcoeff\_A\_triangle\_truncation\_is\_two},
+\texttt{test\_subcoeff\_B\_sqrt\_correction\_is\_one},
+\texttt{test\_net\_defect\_coefficient\_converges\_to\_one}). Hence
 \begin{equation*}
    \frac{T_n}{Z_n} \;=\; \frac{\pi^2}{4} \;-\; \frac{\log n}{n}
    \;+\; O\!\Bigl(\frac{1}{n}\Bigr),
 \end{equation*}
-which is \eqref{eq:Tn_asymptotic}.
+which is \eqref{eq:Tn_asymptotic}. (An earlier version of this step
+attributed the logarithm to the $-1/(2a+d)^2$ bracket and to a boundary
+term in $\sqrt{a(a+d)}$, each ``$-\pi^2 n\log n/16$''; that bookkeeping
+did not compose to the displayed result and is replaced by the
+test-backed decomposition above, 2026-09-02.)
 
 \paragraph{Step 4: Conversion to $\gamma_n$.}
 Substituting into \eqref{eq:gamma_closed_form_repeat},
@@ -1695,25 +1760,35 @@ $n \gamma_n = (4/\pi) \log n + b + O(1/n)$ with
 $b \approx 4.109$ has been verified to high precision against the
 sum-rule \eqref{eq:gamma_closed_form_repeat} at $n \in \{2, \ldots,
 1000\}$, with the doubling estimator $a_n := (2n \gamma_{2n} - n
-\gamma_n)/\log 2 \to 4/\pi$ converging to $4$ digits at $n = 1600$
-(see supporting note \texttt{r25\_l2\_quantitative\_rate\_memo.md} of
-the present author's working materials, available on request).
+\gamma_n)/\log 2 \to 4/\pi$ reaching $1.2785$ at $n = 800$ and
+$1.2761$ at $n = 1600$ (three digits of $4/\pi$; residual shrinking
+${\sim}1.85\times$ per doubling)
+(\texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}:\
+\texttt{test\_gamma\_doubling\_converges\_to\_4\_over\_pi},
+\texttt{test\_su2\_doubling\_estimator\_at\_n800} and the slow-marked
+\texttt{test\_su2\_doubling\_estimator\_at\_n1600}; the
+sum-rule itself is checked against Gaussian quadrature of the kernel
+moment in \texttt{tests/test\_central\_fejer\_su2.py}).
 
-\paragraph{Stein--Weiss interpretation.}
-The constant $4/\pi$ is the same constant that appears in the
-classical Stein--Weiss estimate
-$\int_{\T^1} F_n(\theta)\,|\theta|\,d\theta \sim (4/\pi) \log n / n$
-for the Fej\'er kernel on the circle (Stein--Weiss
-\cite{stein_weiss1971} \S I.1; Zygmund~\cite{zygmund2002} Vol.~I,
-Ch.~III \S 3.6). The $\sin^2(\chi/2)$ factor in the $\SU(2)$
-conjugacy-class measure modifies the kernel but preserves the leading
-$\log n$ behaviour. The $\sqrt{2j+1}$ Plancherel weighting in our
-Definition~\ref{def:central_fejer} replaces the unweighted Ces\`aro-1
-kernel of the abelian case with a Ces\`aro-2-style spectral kernel,
-which is what produces the $\log n / n$ rate (rather than the
-unweighted Dirichlet $1/n$ rate). The $4/\pi$ constant is preserved
-across this transition by the Hopf-base measure normalisation
-$\Vol(S^2)/\pi^2 = 4/\pi$ on the $\SU(2)/U(1)$ Haar quotient.
+\paragraph{Relation to the circle Fej\'er estimate.}
+The constant $4/\pi$ is \emph{twice} the constant of the classical
+estimate
+$\frac{1}{2\pi}\int_{\T^1} F_n(\theta)\,|\theta|\,d\theta \sim (2/\pi)
+\log n / n$ for the probability-normalised Fej\'er kernel on the
+circle (Zygmund~\cite{zygmund2002} Vol.~I, Ch.~III;
+Remark~\ref{rem:circle_fejer}, where the circle constant is computed
+in closed form and measured). The $\sin^2(\chi/2)$ factor in the
+$\SU(2)$ conjugacy-class measure and the $\sqrt{2j+1}$ Plancherel
+weighting of Definition~\ref{def:central_fejer} together change the
+kernel and the constant while preserving the leading $\log n / n$
+behaviour. \textbf{[OBSERVATION]} Both constants are of the form
+$2\Vol(\text{base})/\Vol(\text{group})$ --- $2\Vol(S^0)/\Vol(S^1) =
+2/\pi$ and $2\Vol(S^2)/\Vol(\SU(2)) = \Vol(S^2)/\pi^2 = 4/\pi$ on the
+$\SU(2)/U(1)$ Haar quotient --- but no derivation of the factor $2$
+from the circle constant is given. (An earlier version of this
+paragraph stated the circle constant as $4/\pi$ and the $\SU(2)$
+constant as ``preserved across this transition''; withdrawn
+2026-09-02.)
 
 % =====================================================================
 \section*{Acknowledgments}
@@ -1748,12 +1823,6 @@ R.~Camporesi and A.~Higuchi,
 spheres and real hyperbolic spaces},
 \newblock J.~Geom.~Phys. \textbf{20} (1996), 1--18.
 
-\bibitem[Chamseddine \& Connes(2010)]{chamseddine_connes2010}
-A.~H.~Chamseddine and A.~Connes,
-\newblock \emph{Noncommutative geometry as a framework for
-unification of all fundamental interactions including gravity. I},
-\newblock Fortsch.~Phys. \textbf{58} (2010), 553--600.
-
 \bibitem[Connes(1995)]{connes1995}
 A.~Connes,
 \newblock \emph{Noncommutative geometry and reality},
@@ -1776,14 +1845,17 @@ correspondence with deformation quantization},
 
 \bibitem[Hekkelman(2022)]{hekkelman2022}
 E.-M.~Hekkelman,
-\newblock \emph{Truncated Geometry on the Circle},
-\newblock arXiv:2111.13865, 2022.
+\newblock \emph{Truncated geometry on the circle},
+\newblock Lett.~Math.~Phys. \textbf{112} (2022), 20;
+\newblock arXiv:2111.13865.
 
-\bibitem[Gaudillot-Estrada \& van~Suijlekom(2023)]{gaudillot_vs2023}
+\bibitem[Gaudillot-Estrada \& van~Suijlekom(2025)]{gaudillot_vs2025}
 Y.~Gaudillot-Estrada and W.~D.~van~Suijlekom,
 \newblock \emph{Convergence of spectral truncations for compact
 metric groups},
-\newblock arXiv:2310.14733, 2023.
+\newblock Int.~Math.~Res.~Not.\ IMRN \textbf{2025}, no.~13 (2025),
+rnaf197;
+\newblock arXiv:2310.14733.
 
 \bibitem[van~Suijlekom(2021)]{vs2021_jgp}
 W.~D.~van~Suijlekom,
@@ -1824,7 +1896,7 @@ R.~Toyota,
 truncations for groups with polynomial growth},
 \newblock arXiv:2309.13469, 2023.
 
-\bibitem[Latr\'emoli\`ere(2015)]{latremoliere2016}
+\bibitem[Latr\'emoli\`ere(2015)]{latremoliere2015}
 F.~Latr\'emoli\`ere,
 \newblock \emph{The dual Gromov--Hausdorff propinquity},
 \newblock J.~Math.~Pures Appl. \textbf{103} (2015), 303--351.
@@ -1836,7 +1908,7 @@ triples},
 \newblock Adv.~Math. \textbf{404} (2022), Paper No.~108393, 56pp;
 \newblock preprint arXiv:1811.10843, 2017.
 
-\bibitem[Latr\'emoli\`ere(2016)]{latremoliere2018}
+\bibitem[Latr\'emoli\`ere(2016)]{latremoliere2016}
 F.~Latr\'emoli\`ere,
 \newblock \emph{The quantum Gromov--Hausdorff propinquity},
 \newblock Trans.~Amer.~Math.~Soc. \textbf{368} (2016), 365--411.
@@ -1881,7 +1953,7 @@ of the Harmonic Oscillator on $S^5$},
 \bibitem[Loutey, internal Paper~40]{paper40_unified}
 J.~Loutey,
 \newblock \emph{State-space Gromov--Hausdorff convergence of spectral
-truncations of compact Lie groups with bi-invariant metric},
+truncations of compact semisimple Lie groups with bi-invariant metric},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
 \newblock Generalizes the present paper from $\SU(2)$ to all compact
 connected Lie groups; rate constant $4/\pi$ universal across the class
@@ -1910,12 +1982,6 @@ Discrete Spectra onto Continuous Manifolds. Master Mellin engine
 \newblock GeoVac internal preprint, papers/group3\_foundations (2026),
 DOI via Zenodo.
 
-\bibitem[Perez-Sanchez(2024)]{perez_sanchez2024}
-C.~I.~Perez-Sanchez,
-\newblock \emph{Bratteli networks and the Spectral Action on
-quivers},
-\newblock arXiv:2401.03705, 2024.
-
 \bibitem[Perez-Sanchez(2025)]{perez_sanchez2025}
 C.~I.~Perez-Sanchez,
 \newblock \emph{Comment on `Gauge networks in noncommutative
@@ -1932,10 +1998,13 @@ A.~Zygmund,
 \newblock \emph{Trigonometric Series, Vol.~I and II},
 \newblock 3rd ed., Cambridge Univ.~Press, 2002.
 
-\bibitem{loutey_paper40}
+\bibitem[Loutey, internal Paper~43]{paper43}
 J.~Loutey,
-``State-space Gromov--Hausdorff convergence of spectral truncations of compact Lie groups with bi-invariant metric,''
-GeoVac Paper~40 (2026).
+\newblock \emph{Lorentzian extension of the four-witness Wick-rotation
+theorem on truncated $\sthree \times \R$ spectral triples at finite
+cutoff},
+\newblock GeoVac internal preprint (2026), DOI via Zenodo.
+
 \end{thebibliography}
 
 \end{document}

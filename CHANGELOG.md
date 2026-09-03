@@ -7,6 +7,417 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.4.0] - 2026-09-02
+
+**Minor bump, PI direction** (the QA gate changed; §9 rule: minor bumps mark
+gate/protocol changes and are PI calls). Bundles the gate change recorded
+under v5.3.1 with the PI's adjudication of the DELTA #2 open items.
+
+### Changed — QA gate
+
+- **Blind calibration seeding is opt-in** (`/qa <target> seeded`); default
+  DELTA and FULL runs are unseeded, reviewers read the real target read-only,
+  the PM verifies every MATERIAL finding against primary text/code, and the
+  verdict cites the standing calibration record (trunk FULL run #2 19/21
+  seeds, 0/8 false positives; DELTA #1 9/9, 0/8; DELTA #2 8/9 with one void
+  seed, 0/8). `.claude/commands/qa.md`, `docs/qa/criteria.md`,
+  `docs/qa/seed_defects.md` (now "opt-in instrument"). DELTA #3 skipped;
+  the trunk FULL run #3 is the first run under the new default.
+
+### Changed — PI adjudications (DELTA #2, Part H2)
+
+- **Paper 40 retitled now** to "…spectral truncations of compact
+  **semisimple** Lie groups with bi-invariant metric" (the torus factor
+  carries 2/π, not 4/π; the class the theorem covers). 23 loci cascaded:
+  P32, P38, P39, P41–P50, P52, P53, P55, the field guide, both syntheses,
+  two viz pages, `papers/INDEX.md`. The minted Zenodo record keeps the old
+  title until the next deposit.
+- **No KO-dimension label at finite cutoff.** The finite combined triple
+  prints its measured sign triple $(\varepsilon, \varepsilon',
+  \varepsilon'') = (-, +, +)$ (production grading $\gamma_{GV} \otimes
+  1_F$; the KO-4 column) with the continuum GV factor's KO-3 named as the
+  factor's own label; the paper no longer appears to derive a dimension it
+  cannot fix. Paper 32 (4 loci), `geovac/almost_commutative.py`,
+  `geovac/standard_model_triple.py`, `tests/test_almost_commutative.py`
+  (`test_J_combined_KO3_sign` → `test_J_combined_sign_pair`),
+  `tests/test_standard_model_triple.py`, matrix row 49, C16 entry notes.
+  History in one place: KO-1 (additive rule, wrong) → KO-3 (v5.3.0) →
+  no label (v5.4.0).
+
+### Added
+
+- **`tests/test_paper7_graph_convergence.py`** closes the Paper 7 NO-TEST
+  row (trunk DELTA #1 CODE-A): the production `AtomicSolver` Hamiltonian's
+  ground-state energy against $-1/2$ on $n_{\max} \in \{5, 8, 10, 15, 20,
+  30\}$ — pinned sequence $-0.41363 \to -0.49713$ (17.27% → 0.57%),
+  monotone, one-sided, a two-sided window at the endpoint, and a scope
+  guard recording that the six lowest eigenvalues at $n_{\max} = 30$ lie
+  within 0.06% (the graph spectrum's bottom is dense; this is an
+  edge-of-spectrum statement, not a level-by-level Rydberg match). Cited
+  inline at Paper 7's "New contributions" item 1; matrix row → MEASURED.
+
+### Changed — Paper 40 §L5 framing (H3 spill, PM discretion)
+
+- "Propinquity convention" → **"Distance convention"**:
+  $\Lambda_{\mathrm{prop}}$ is *defined* as van Suijlekom's state-space
+  Gromov–Hausdorff distance (bibitem `vs2021_jgp` added; the C10 compile
+  gate caught the missing key), Latrémolière's metric-spectral-triple
+  propinquity is named as the strictly stronger object that is **not**
+  claimed, with dual reach as the named gap. §L5 retitled "state-space GH
+  assembly via the approximation pair"; the tunnel length is kept for
+  orientation only; lemma statement, proof, keywords, roadmap and outlook
+  reworded (18 loci). Literature descriptions that use "propinquity" for
+  other authors' results are unchanged.
+
+### Gates
+
+- C10 trunk + Paper 40, C11/C13/C15/C16/C18/C19/C21 trunk + group1, C13
+  group3, C14/C17/C20 trunk, C22, C5: see the v5.4.0 commit; the C16
+  `combined-triple-ko1-additive` entry fired once on a docstring line-wrap
+  that separated the withdrawal flag from the phrase (fixed by rewrapping —
+  the exemption is line-local by design).
+
+## [v5.3.1] - 2026-09-02
+
+Trunk QA carryforward **Part F remediation** (the FULL run #2 findings the
+v5.3.0 PI items did not cover): 30 rows closed -- F1.3-F1.15 (Paper 32),
+F2.3-F2.7 (Paper 38), F3.1-F3.6 (Papers 0/1/7 + tests), F4.1-F4.6 (group3
+synthesis). Scope: `docs/qa/trunk.carryforward.md` Part F (every row now
+carries its DONE note); run record `debug/qa/trunk_full_run_2026_09_01_notes.md`
+section 6. Patch bump: remediation, no gate change.
+
+### Changed
+
+- **Paper 32.** Six "propinquity rate" loci renamed to the achieved
+  "state-space GH rate"; three C3-boundary retags to [SYMBOLIC + MEASURED];
+  seam wording ("provably non-overlapping" -> "rings sharing no generator",
+  "seam theorem" -> "seam reading"); [CONDITIONAL] on the eta-trivialised
+  inner-factor prediction; hyperfine wording (constructed as a triple, the
+  Hamiltonian is validated); kappa appositive made an Observation; the stale
+  "O(log n/n) not rigorously proved" clause inside `thm:gh_convergence`
+  replaced by the Paper 38 unconditional rate; order-zero axiom retagged
+  by construction (mis-pointed test cite withdrawn); Lorentzian axiom-table
+  residuals now pinned per cell in `tests/test_connes_axiom_audit_31.py`
+  (0 / 0.0507 / 0.0675 and 0 / 0.1013 / 0.1013, +-5 %) instead of `< 0.5`;
+  four test-count drifts measured and fixed (49 / 70 / 54 / 45);
+  Connes-Marcolli locators verified against the book's TOC (Ch. 1 s7.3 and
+  s13; the book has four chapters); the matter-sector "J-reality + order-one
+  add nothing" step is now a computed projection rank (272 -> 128,
+  260 -> 128) in `tests/test_trunk_qa_forced_count_moduli.py`; F1.15 NIT
+  sweep (bibitem key years, five orphans cited, seven untagged paragraphs
+  tagged, counts, c^2(4,3), g_3 wording, wall-entry arithmetic, 14 of 15
+  `CLAUDE.md` mentions reworded for the reader with a conventions note at
+  the first).
+- **Paper 38.** Monotonicity sample extended to n = 1000 in
+  `tests/test_central_fejer_su2.py` and the prose narrowed to the tested
+  sample; L3 test cite added; function-level cite for the P45 falsifier;
+  `paper43` bibitem added; duplicate Paper 40 keys merged; Latremoliere
+  keys re-yeared (2015 JMPA / 2016 TAMS); Gaudillot-Estrada-van Suijlekom
+  and Hekkelman bibitems updated to the published forms (publisher-verified);
+  main theorem tagged [INTERNAL THEOREM], L1' [SYMBOLIC + MEASURED]; shell
+  index unified to the 1-based convention of eq:CH_spectrum.
+- **Papers 0/1/7.** `test_volume_element_jacobian` rewritten as a genuine
+  induced-metric computation (g = J^T J = Omega^2 I, det g = Omega^6);
+  nnz-scaling bound tightened to < 1.15 (measured 1.07); SO(4) [Fock] vs
+  SO(4,2) [Barut] attribution; four "exact Rydberg spectrum" loci restated
+  as quantum numbers + matched-kappa Observation; Condon-Shortley phase
+  attached to Y_lm; Bohr/de Broglie attribution; duplicate tier tags,
+  archived-Paper-6 pointers, LiH 5.3 %, closed-form log-holonomy (no R^2);
+  `gaudillot_vs2025` bibitem added to Paper 7 and the group3 synthesis.
+- **group3 synthesis.** Paper 6 provenance note scoped to the two benchmarks
+  with live backing (unitarity, Rabi), pre-rename filename named, 10^3 vs
+  10^4 steps stated honestly, Rabi asserts pinned to the measured values
+  (peak > 0.999, period < 0.45 %, off-resonance < 0.01, norm < 1e-10);
+  Paper 56 comparison map stated as a homomorphism; Aquilanti-Caligiana
+  2002; Paper 25 = group 5; Paper 38's unconditional GH theorem added at
+  both loci; six inline attributions given bibitems; five orphan bibitems
+  removed; the graph-spectrum hedge rewritten (continuum spectrum reached
+  numerically).
+- **Findings surfaced by the remediation (F7.10-F7.16).** (i) Paper 40's
+  main-theorem class "compact connected Lie group" silently included tori
+  after the torus corollary was withdrawn; scoped to **semisimple** G in the
+  abstract, both theorem statements and the standing convention, with
+  Paper 38 and Paper 32 pointers to match. (ii) "dim_H = 40 = g_3^Dirac =
+  Delta^-1" was presented as structural at five loci (Papers 32 and 42):
+  dim_H(3) is the cumulative node count 4 + 12 + 24, g_3 the single-level
+  degeneracy at k = 3; N(n_max) = n_max g_{n_max}/3, so they agree only at
+  n_max = 3 -- rewritten as a numerical coincidence. (iii) Delta = 1/40 =
+  c^2(3,2) contradicted Paper 7 / the test (c^2(4,3)). (iv) "six catalogue
+  instances" followed by seven codes -- entries vs instances separated.
+  (v) "six to ten orders of magnitude below wall depth" vs the memo's own
+  table (2.7e-4 of D_e = 3.6 orders); "four orders" for 1.0000 -> 0.0007.
+  (vi) A key re-year collided with an existing wrong-year key in Paper 38
+  (resolved from `git show HEAD`). (vii) The widened C16 entry
+  (`propinquity rate(s)` alternative, two-way proven 5/5 fire, 7/7 silent)
+  found the same drift at six Paper 18 loci and two group1-synthesis loci;
+  fixed at source.
+- **Gates (all PASS, scope stated):** C10 for Papers 0/1/7/18/32/38/40/42
+  and both syntheses; C11/C13/C14/C16/C18/C19/C21 on `trunk`;
+  C11/C13/C14/C16/C19/C21 on `group1`; C5 corpus-wide; C15/C20/C22.
+  Tests touched this sprint all pass (axiom audit 6/6, forced-count 9 + 1
+  skipped, Fock projection + O(V) scaling 13/13, Rabi 3/3, Fejer sample).
+  The trunk FAIL stands until the DELTA run (F-seeding rule) comes back clean.
+- **DELTA run #1 (same day):** seven blind reviewers on a seeded worktree,
+  9/9 seeds caught (both S3 and S2 code classes, by Opus), 0/8 false
+  positives; verdict **DEFECTS** — 26 genuine items in the remediated text
+  (carryforward Part G table G1: Paper 7's appendix still listing the
+  retired Jacobian identity; a Dąbrowski–Dossena locator (eq. 18, not 10;
+  Table 5 claim re-verified against the primary); Paper 42 twins of the
+  dim_H = g_3 fix; five bit-exact panels mis-tiered [MEASURED]; an ε″
+  comment contradicting the code; test scopes narrower than the paper's
+  n_max ≤ 3 / 3×3 panel; a 19 GB matrix in the default run; the C16
+  circle entry missing a paraphrase) — all remediated the same day, gates
+  and compiles re-run green (366 passed, 5 skipped, exit 0 in 76 s across the six re-run files (axiom audit 3x3 panel, KO-3 over n_max = 1-3 with the oddness pin, Fejer n = 800 ratio, forced-count, central Fejer, SM triple)). DELTA #2 with fresh
+  seeds is owed before the FULL certifying run.
+- **DELTA run #2 (same day, PI-invoked `/qa delta #2`):** scope = the
+  DELTA #1 remediation; calibration 8/9 (one void seed: the planted abstract
+  tier upgrade was defensible), 0/8 false positives; verdict **DEFECTS** —
+  15 genuine items (carryforward Part H): the SU(2) doubling-estimator
+  value was $a_{800}$ mislabelled as n = 1600 ($a_{1600}$ = 1.2761, now
+  test-pinned); Paper 40's body proposition still claimed a Latrémolière
+  propinquity limit (fixed; Paper 40 added to the C16 scope); the group1
+  master-theorem wording exceeded Paper 40 and a withdrawn Paper 45 theorem
+  sat beside it (fixed); the DELTA #1 "oddness pin" could not fail and the
+  production grading makes the finite combined triple even with ε″ = +1
+  (the KO-4 column) — recorded in Paper 32 as a PI convention question;
+  full-basis Lorentzian residuals 0.0785 / 0.2026 stated beside the
+  sample-of-3 figures; plus docstring/threshold/citation items. All
+  remediated; gates and compiles green (tests: 367 passed + 6 skipped (exit 0, 69 s) across the six Paper 32/38 test files after the CODE-C fixes, and 40 passed + 1 skipped across the four Paper 0/1/7 files). PI items:
+  Paper 40's title; the KO label. DELTA #3 is owed before the FULL run.
+
+### Changed — QA gate (PI direction, 2026-09-02): seeded calibration is opt-in
+
+- Blind calibration seeds are no longer the default for DELTA or FULL `/qa`
+  runs. The instrument stays available as `/qa <target> seeded` (worktree,
+  answer key, per-agent scoring, INCONCLUSIVE-on-miss), recommended when a
+  reviewer model or tier changes, when a new target class is first certified,
+  or after a miss surfaces some other way. A default run reviews the real
+  target read-only, the PM verifies every MATERIAL finding against primary
+  text or code, and the verdict cites the **standing calibration record**:
+  trunk FULL run #2 19/21 seeds 0/8 FP; DELTA #1 9/9, 0/8; DELTA #2 8/9 (one
+  void seed), 0/8. Verdicts stay three-way; INCONCLUSIVE now means an
+  unexercised dimension (or, when seeded, an uncalibrated one). Model-tier
+  assignments (Opus for trunk-root code and for bibliographies over ~50
+  entries) stand as measured. Edited: `.claude/commands/qa.md`,
+  `docs/qa/criteria.md` (+ change-log line), `docs/qa/seed_defects.md`,
+  `docs/qa/trunk.carryforward.md` (F-seeding rule scoped to seeded runs).
+  *A gate change is a minor-bump class under the version rule; the bump is
+  the PI's call and has not been applied.*
+
+## [v5.3.0] - 2026-09-02
+
+Remediation of the five items the trunk FULL run #2 (v5.2.7) raised to the
+PI, taken "across the board" on the PM's recommendations. **Minor bump
+because item 4 changes the QA gate** (a PI-called minor, per the 2026-08-22
+version rule). Scope: `docs/qa/trunk.carryforward.md` Part F rows F1.1,
+F1.2, F2.1, F2.2, F6; the remaining Part F rows are untouched and still owed.
+
+### Paper 38 / 40 / group1 synthesis — the circle Fejér constant is 2/π
+
+- **Closed form (new, test-pinned).** The probability-normalised Fejér
+  first moment on the circle is exactly
+  m_n = π/2 − (4/π) Σ_{k odd < n} (1 − k/n)/k², hence m_n ~ (2/π) log n/n.
+  Quadrature of the kernel matches it to 1e-12; the doubling estimator gives
+  0.636631 (n=100), 0.636623 (200), 0.63662 (400, 800) against 2/π =
+  0.6366198. The SU(2) doubling estimator a_n = (2n γ_2n − n γ_n)/log 2 reads
+  1.30527, 1.29096, 1.28293, 1.27849 at n = 100, 200, 400, 800 (γ through
+  1600; a_1600 = 1.27607, corrected 2026-09-02 DELTA #2) and approaches 4/π = 1.2732395; the ratio (2.05028, 2.02783,
+  2.01522, 2.00825) approaches 2. **"The SU(2) constant is twice the circle
+  constant" is an [OBSERVATION]** — which of the sin²(χ/2) class weight and
+  the √(2j+1) Plancherel weight supplies the 2 is not isolated.
+- **Paper 38:** Remark `rem:circle_fejer` + `eq:circle_fejer_moment`
+  replace the 4/π-on-the-circle text; "Stein–Weiss §I.1" dropped (Rⁿ L¹
+  theory, not a circle moment); :283-284 arithmetic fixed (the displayed
+  product gave 4/π²); `sec:why_su2` carries the Observation tag. **App. A
+  Step 3 bookkeeping replaced:** the log n coefficient is the net of (A) the
+  triangle truncation of the odd-d sum (+2) and (B) the d/2 term of
+  √(a(a+d)) (−1), each test-pinned; the old "−π² n log n/16 × 2" text is
+  withdrawn. "Stein–Weiss sharpening" survives only as the *name* of App. A's
+  sum-rule method.
+- **Paper 40:** the torus-factor extension of `cor:general_compact_connected`
+  is **WITHDRAWN** — a circle factor carries 2/π, so the product constant
+  would be mix-dependent; the corollary is scoped to semisimple G.
+  `rem:stein_weiss_general`, `sec:why_universal`, :266 and :289 reworded.
+  Two loci (:289, `eq:su2_4_over_pi` ~:1892) carried the arithmetic slip
+  2Vol(S¹)/Vol(SU(2)) (= 2/π) for 4/π; correct is 2Vol(S²)/Vol(SU(2)) =
+  Vol(S²)/π². (`debug/review_paper38.md` had flagged this identity in Paper
+  38 as "A7"; Paper 40 retained it.)
+- **group1 synthesis** (:249-251, :595-622, ~:790, ~:1291) and
+  **`docs/outreach/note_n1_su2_truncations.tex`** (:86-91, "the same
+  constant" → "twice the constant 2/π") corrected at source.
+- **Tests:** `tests/test_trunk_qa_fejer_4_over_pi.py` +4
+  (`test_circle_fejer_closed_form_matches_quadrature`,
+  `test_circle_fejer_kernel_is_probability_normalised`,
+  `test_circle_fejer_constant_is_2_over_pi`,
+  `test_su2_constant_is_twice_circle`); 23 pass.
+
+### Paper 32 — `prop:D_equiv` → Remark; KO-3 relabel
+
+- **`def:D_GV_graph` + `prop:D_equiv` withdrawn** and replaced by Remark
+  `rem:D_GV_no_graph_form`: the paper carries one Dirac operator, the
+  spectral form `def:D_GV_spectral`; every axiom check and the π-free
+  certificate use it, and `geovac/dirac_lattice.py::DiracLattice` is a
+  different operator (not isospectral to CH at nonzero hopping). :816 and
+  every `\ref` retargeted. New `tests/test_paper32_dirac_module_contents.py`
+  (11 tests) pins that the cited backing modules contain no graph-form
+  operator and that `full_dirac_operator_system.py` builds the spectral form.
+- **KO label:** the verified sign pair (ε, ε′) = (−, +) is the **KO-3**
+  pair; "3 + 6 ≡ 1 (mod 8), hence …" dropped at :4049-4051 and :4531-4534.
+  **Finding (D–D):** the additive rule is a theorem about the *graded*
+  product D_GV ⊗ γ_F + 1 ⊗ D_F (Dąbrowski–Dossena, IJGMMP 8 (2011) 1833,
+  eq. 10 — verified against the primary; new bibitem
+  `dabrowski_dossena2011`), and their Table 5 gives no consistent ε′ for it
+  with Connes' KO-6 real structure on T_F; the module builds the *ungraded*
+  sum D_GV ⊗ 1 + γ_GV ⊗ D_F, for which the signs follow factor by factor.
+  The triple is labelled by its measured signs.
+- **Code (extra, found while relabelling):** `fluctuated_dirac` in
+  `geovac/almost_commutative.py` and `geovac/standard_model_triple.py`
+  defaulted to ε′ = −1 with `U.T` in place of `U†` — two errors that
+  cancelled because the combined U is purely imaginary, so no published
+  number moved; both now correct by construction, `J op J⁻¹ = U conj(op) U†`
+  everywhere, and `test_fluctuated_dirac_J_compatible` pins the J-invariance
+  of D_ω for nonzero ω. The `almost_commutative.py` docstring's KO-dim set
+  for J_F² = +1 corrected {0, 4, 6, 7} → {0, 1, 6, 7} (KO-4 has ε = −1).
+  `tests/test_almost_commutative.py` 99 pass;
+  `tests/test_standard_model_triple.py:5` and
+  `debug/archive/misc/h1_higgs_inner_fluctuation.py:99` docstrings aligned.
+
+### QA gate — code-tier exception (PI-authorized gate change)
+
+- `.claude/commands/qa.md` step 4 + `docs/qa/criteria.md`: the CODE
+  dimension goes to **Opus on the trunk roots (Papers 0, 1, 7, 32, 38) and
+  on any file whose tests assert a convergence endpoint**; Sonnet elsewhere
+  with **three seeds per agent**. Measured basis: run #2's four Sonnet code
+  chunks were 6/8 on guided seeds; both misses (S3 manufactured endpoint,
+  S2 vacuous assertion) were whole-file reads graded BACKED-SOUND while
+  holding the class hint. Mirrors the 2026-09-01 citation exception.
+- **C16 registry 30 → 33** (`debug/qa/check_retracted_terms.py`), each with
+  the two-way discrimination proof (FIRE on git-HEAD copies of the edited
+  files / SILENT on the working tree):
+  `circle-fejer-constant-4-over-pi` 23 fire / 0 live / 4 exempt;
+  `dgv-graph-form-tautology` 9 / 0 / 2; `combined-triple-ko1-additive`
+  13 / 0 / 4. Gates: C16 `--gate trunk` PASS (14/33 entries over 49 loci,
+  54 exempt), `--gate group1` PASS (10/33 over 34 loci, 55 exempt);
+  self-tests 14 pass; C22 PASS (baseline 3, unchanged).
+- **C21 deliberately not extended:** the numeric registry is keyed on
+  decimal numerals; 2/π and 4/π appear symbolically in the papers, so the C16
+  entry is the correct instrument.
+- `docs/claim_test_matrix.md`: row 52 note retired ("rejects 2/π decoy" —
+  2/π is the circle constant); +3 rows (P38 circle 2/π / SU(2) twice; P32 one
+  Dirac operator; P32 KO-3 sign pair), all BACKED-SOUND.
+- Memory `l2_quantitative_rate_4_over_pi.md` correction (2) marked
+  REMEDIATED with the closed form and the naming rule.
+
+### Still owed (Part F, not touched here)
+
+F1.3–F1.15, F2.3–F2.7, F3, F4, F5, and the DELTA run under the F-seeding
+rule (fresh blind S3 seed in the P0/P7 tests, S2 seed in the P32 tests).
+
+## [v5.2.7] - 2026-09-02
+
+`/qa trunk` FULL certifying run #2 (dispatched 2026-09-01, scored
+2026-09-02): **FAIL**, trustworthy on 9 of 11 chunk-agents. Run record:
+`debug/qa/trunk_full_run_2026_09_01_notes.md` §5. Remediation scope:
+`docs/qa/trunk.carryforward.md` Part F. Nothing in the papers was changed.
+
+### Shape
+
+PI-directed FULL run rather than the DELTA the carryforward asked for;
+criteria frozen as at `dbe7ae2` (criteria.md + trunk profile, C3-boundary in
+force, citations on the Opus tier). Worktree `qa-seed-trunk`, 21 distinct
+seeds over 22 loci + 8 known-good controls, ≥1 seed per dimension × chunk in
+a non-first paper, 2 per Sonnet code agent
+(`debug/qa/trunk_seed_key_2026_09_01.json`; the June key untouched). All 13
+deterministic gates PASS on main with their scopes stated; C11 proven to fire
+on the planted title (DET1), C5 on the planted K-tier sentence.
+
+### Calibration
+
+**19/21 seeds caught (LLM 18/20), 0/8 false positives.** Both misses are
+Sonnet code agents: CODE-A (P0+P7 tests) missed a manufactured convergence
+endpoint (S3) and CODE-C (P32 tests) missed a count-by-division in place of
+the computed null space (S2) — each a whole-file read graded BACKED-SOUND
+while holding a class-level hint. Under the 1/2 = PARTIAL convention those
+two chunks are INCONCLUSIVE on the missed class only; every other dimension
+is calibrated. An HTTP 429 killed 10 of 11 wave-1 agents; the wave-2 CODE
+prompts carried class hints, so every code catch is recorded as GUIDED and a
+miss-despite-hint as the stronger signal. Claims/synthesis/citation catches
+are blind.
+
+### Verified MATERIAL findings (each checked against the primary text on main)
+
+- **Paper 38 — the circle Fejér constant is 2/π, not 4/π** (:941-950,
+  :1141, :1288, :1702-1708): the probability-normalised Fejér first moment on
+  the circle is (2/π) log N/N; the paper's own backing test
+  `tests/test_trunk_qa_fejer_4_over_pi.py:235-268` names 2/π and asserts the
+  SU(2) constant is *twice* it. "Stein–Weiss §I.1" is Rⁿ L¹ theory, not a
+  circle moment. Propagates to Paper 40 (:966-989, :1937-1944) and the group1
+  synthesis — logged as group1 carryforward. Also :283-284: the displayed
+  product "Vol(S²)/Vol(SU(2)) · (2/π)" gives 4/π², not 4/π.
+- **Paper 32 `prop:D_equiv` (:766-811)** — the "graph form" Dirac is defined
+  by isospectrality and the Proposition is then a tautology; the cited
+  backing modules contain no graph-form operator, and the one implemented
+  (`geovac/dirac_lattice.py`) is not isospectral to CH at nonzero hopping.
+  LARGE by class; PI adjudication (Remark, or build the operator).
+- **Paper 32 KO-dimension label (:4049-4051, :4531-4534)** — the verified
+  sign pair (ε, ε′) = (−, +) is KO-3, not KO-1; the tests verify the signs,
+  not the label. PI adjudication.
+- **Paper 32 "propinquity rate"** for its own state-space GH rate at 6 loci
+  (:1986, :2132, :2140, :3198, :3569, :6874) — the C7 residue the C16 group1
+  regex cannot see. Fix first, then widen C16 with `propinquity\s+rate`.
+- **Paper 32 C3-boundary retags** (:6477, :3758-3762, :5113-5201) — symbolic
+  argument + numerical certificate tagged as pure symbolic proof; at least
+  four of the verified MATERIALs are tags the 2026-09-01 C3 pass placed at
+  the wrong tier, i.e. defects the previous remediation introduced.
+- **Paper 32 :3149** κ appositive "(the Fock Jacobian Ω⁻⁴)" asserts the
+  C8-forbidden bridge; **:3380-3382** theorem body still says the
+  O(log n/n) rate is "not rigorously proved … deferred" against Paper 38
+  (unconditional since 2026-06-10); **:6518-6521** axiom table prints
+  residuals ≤ 0.0675 / ≤ 0.101 where `test_connes_axiom_audit_31.py`
+  asserts < 0.5; order-zero axiom mis-pointed at the Lorentzian U_L check;
+  stale test counts (39→49, 67→70, 38→53 twice); Connes–Marcolli chapter
+  locators to a four-chapter book.
+- **Paper 1 :449 / `tests/test_ov_scaling_rigorous.py`** — prose says O(V)
+  verified; the test guards exponent < 1.8 (timing) / < 1.5 (nnz), i.e.
+  sub-quadratic. **P1:26** attributes SO(4,2) to Fock 1935 (SO(4)).
+  **`test_volume_element_jacobian`** (one of the 18 symbolic proofs) is the
+  restatement (a/b)³ = a³/b³, not a Jacobian computation.
+- **Synthesis :164-165** "closes the comparison ↪" where Paper 56 :1298-1302
+  says Φ is not injective; **:587-603** provenance note over-scopes
+  `tests/test_rabi_oscillation.py` (backs unitarity + Rabi only; rows (a)/(c)/
+  (d) have no test, matrix row 133) and says 10⁴ time steps where the live
+  test runs 10³; **:1410** year 2003 → 2002; **:988** group label.
+
+### What the run did NOT find
+
+Nothing at the 8 controls; no S5 hard-prohibition breach in the unseeded
+text; C16/C17 silent on main after the widening; the Paper 45 "degeneracy
+theorem" citation at Paper 38 :1551/:1869 verified NOT a zombie (matches
+Paper 45's live title). The completeness-critic's one demonstrated hit was
+seed DET1; its UNMEASURED table (C7 on P0/P1/P7, C5 artifact side, C8 κ on
+three documents, 83 internal bibitems with no mandated reviewer, five
+unopened backing tests) is carried as Part F5 for the delta run.
+
+### Gate work (registry discrimination rule applied)
+
+Two C16 entries added to `debug/qa/check_retracted_terms.py` with two-way
+proofs (fire on the seeded worktree, silent on main):
+`latremoliere-propinquity-named-for-gh-rate`,
+`p45-kplus-compression-theorem-live`. Registry 28 → 30. Recorded in the run
+record §5.5.
+
+### Records
+
+- `debug/qa/trunk_full_run_2026_09_01_notes.md` §5 (calibration, scorecard,
+  per-document findings, critic pass, honest ceiling).
+- `docs/qa/trunk.done.md` banner + change log.
+- `docs/qa/trunk.carryforward.md` STATUS block + **Part F** (remediation
+  tables F1–F4, coverage debt F5, PI adjudications F6, and the F-seeding
+  rule: the DELTA must plant a fresh S3 seed in the P0/P7 tests and a fresh
+  S2 seed in the P32 tests, blind, with Opus code reviewers or 3 seeds per
+  Sonnet agent).
+- Worktree removed; seed-leak greps on main: 0 hits.
+
 ## [v5.2.6] - 2026-09-01
 
 CLAUDE.md compaction: **219.8 KB → 99.97 KB (-55%)**, verified lossless.

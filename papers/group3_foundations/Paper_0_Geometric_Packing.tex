@@ -24,12 +24,12 @@ from a purely geometric construction: uniform-density packing of
 distinguishable states on concentric isotropic shells in two
 dimensions.  Starting from two axioms---discrete binary
 distinguishability and geometric indifference (maximum entropy)---the
-\textbf{[SYMBOLIC PROOF]} construction yields per-shell angular capacities $2k-1$ for shell~$k$, which is
+construction yields per-shell angular capacities $2k-1$ for shell~$k$, which is
 isomorphic to the spherical harmonic basis $Y_{\ell m}$ with
 $\ell = k - 1$ and $m = -\ell, \ldots, +\ell$.  The principal quantum
 \textbf{[OBSERVATION]} number~$n$ corresponds to a cumulative grouping of the first~$n$
 shells, producing the $n^2$ orbital count, but this grouping is not
-\textbf{[OBSERVATION]} forced by the axioms alone.  Similarly, a factor of~2 arises from the
+forced by the axioms alone.  Similarly, a factor of~2 arises from the
 orientability of the compactified packing manifold ($S^2$),
 corresponding to spin multiplicity.  When the packing is interpreted
 as a graph, its Laplacian decomposes into $(\ell, m)$ sectors whose
@@ -101,7 +101,7 @@ from the axioms.
 \medskip
 
 \textbf{[PANEL-VERIFIED]} \noindent\textbf{Series significance.}  The $(\ell, m)$ angular
-\textbf{[PANEL-VERIFIED]} sector constructed here recurs as a universal structural factor inside
+sector constructed here recurs as a universal structural factor inside
 every natural geometry developed in the Geometric Vacuum (GeoVac)
 series: $S^3$ for hydrogen~\cite{paper7}, prolate spheroidal
 coordinates for H$_2^+$~\cite{paper11}, hyperspherical coordinates for
@@ -528,7 +528,7 @@ LiH and BeH$^+$.
 \medskip
 
 \textbf{[PANEL-VERIFIED]} The invariance of the angular sector across all five levels is not
-imposed by hand: it follows from the symmetry each geometry retains
+imposed by hand: it tracks the symmetry each geometry retains
 ($m$ exactly wherever axial symmetry survives; $\ell$ exactly
 wherever the full SO(3) does---the two-center problem breaks SO(3)
 to axial SO(2), replacing $\ell$ by a separation index, as \S V
@@ -677,11 +677,11 @@ is encoded in the graph topology, not approximated by mesh refinement.
 The conformal equivalence between the continuum limit of this graph
 Laplacian and the Laplace--Beltrami operator on the unit~$S^3$ (via
 Fock's stereographic projection) is developed in Paper~7~\cite{paper7},
-\textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks validates the conformal geometry
+\textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (several limiting-case or definitional) validates the conformal geometry
 (the convergence itself is demonstrated empirically through
 $n_{\max}=30$; the rate is a separate result).  The energy
 eigenvalues and dynamics built on this graph are developed in
-Papers~1 and~6.
+Paper~1~\cite{paper1} and the archived Paper~6~\cite{paper6}.
 
 
 %% ================================================================
@@ -709,15 +709,16 @@ Papers~1 and~6.
 
 \begin{itemize}
 \item[$\times$] Energy eigenvalues $E_n = -1/(2n^2)$.  These require
-  the graph Laplacian with the kinetic scale $K_{\mathrm{vac}}$
-  (Papers~1, 7).
+  the graph Laplacian together with the matched kinetic scale
+  $K_{\mathrm{vac}}$, whose value is an Observation rather than a
+  derivation (Papers~1, 7).
 
 \item[$\times$] Wavefunctions $R_{n\ell}(r)$ or
   $Y_{\ell m}(\theta, \phi)$ in their functional form.  The packing
   produces the labels, not the functions.
 
 \item[$\times$] Time evolution and dynamics.  These require the
-  Hamiltonian as an operator, developed in Paper~6~\cite{paper6}.
+  Hamiltonian as an operator, developed in the archived Paper~6~\cite{paper6}.
 
 \item[$\times$] The fine structure constant or any coupling constants.
   The construction is purely kinematic.
@@ -747,7 +748,8 @@ shells are ordered, not their angular content.
 The connection between geometry and quantum mechanics has been
 recognized since the earliest days of quantum theory.
 Bohr~\cite{bohr1913} imposed quantization as a geometric constraint
-(integer wavelengths on circular orbits).
+(angular momentum $L = n\hbar$ on circular orbits, later reinterpreted
+by de~Broglie as an integer number of wavelengths around the orbit).
 Fock~\cite{fock1935} discovered that the hydrogen momentum-space
 problem maps onto $S^3$ via stereographic projection, revealing the
 SO(4) dynamical symmetry that explains the ``accidental''
@@ -831,7 +833,11 @@ molecules~\cite{paper17}.  When equipped with a graph Laplacian and
 kinetic scale, this packing becomes the foundation for a computational
 framework that has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
 \textbf{[MEASURED]} LiH, and BeH$^+$, with errors ranging from ${<}\,0.1\%$ for hydrogen
-to ${\sim}\,6\%$ for LiH equilibrium geometry, benchmarked against
+to $5.3\%$ for the LiH equilibrium geometry (BeH$^+$ is markedly
+worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
+pseudopotential; HeH$^+$ is treated at a fixed bond length and recovers
+93\% of $D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent
+2D-variational solver; Paper~17), benchmarked against
 exact and experimental values.
 
 

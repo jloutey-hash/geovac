@@ -1,11 +1,16 @@
 % =====================================================================
-% Paper 40 (standalone): Unified propinquity convergence on compact
-% Lie groups with bi-invariant metric.
+% Paper 40 (standalone): Unified state-space GH convergence on compact
+% semisimple Lie groups with bi-invariant metric (retitled 2026-09-02, PI
+% direction; the Zenodo record minted earlier carries the pre-retitle title).
 %
-% Generalizes Paper 38 (SU(2)) to all compact Lie groups.
+% Generalizes Paper 38 (SU(2)) to compact connected semisimple Lie groups
+% (tori excluded: a circle factor carries the constant 2/pi).
 % Companion to Gaudillot-Estrada & van Suijlekom 2025 (IMRN; arXiv:2310.14733):
-% upgrades their state-space GH convergence to Latremoliere propinquity
-% with explicit rate, identifies the universal rate constant 4/pi.
+% proves state-space GH convergence with explicit rate on the Dirac/spinor
+% substrate (unconditional for SU(2); for general G conditional on the
+% per-group spin-window lifted-state decomposition, rem:correction_L2;
+% NOT Latremoliere propinquity, which remains a named gap) and identifies
+% the universal rate constant 4/pi on the semisimple class.
 %
 % Status: first draft, May 2026, post-prerequisite-sprint closure (2026-05-15).
 % Built from internal supporting memos:
@@ -69,7 +74,7 @@
 \newcommand{\Khat}{\widehat{K}}
 
 \title{State-space Gromov--Hausdorff convergence of \\
-spectral truncations of compact Lie groups \\
+spectral truncations of compact semisimple Lie groups \\
 with bi-invariant metric}
 \author{J.~Loutey\thanks{Independent researcher. \texttt{jloutey@gmail.com}.
 This work was developed in an AI-augmented agentic workflow with
@@ -82,8 +87,8 @@ and editorial decisions are the author's responsibility.}}
 \maketitle
 
 \begin{abstract}
-Let $G$ be a compact connected Lie group of rank $r \ge 1$ equipped with
-a bi-invariant Riemannian metric, and let
+Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
+equipped with a bi-invariant Riemannian metric, and let
 $\Tcal_G = (C^\infty(G), L^2(G, \Sigma), \Dop_G)$ denote its canonical
 metric spectral triple, with $\Dop_G$ the Kostant cubic Dirac operator.
 For each cutoff $\Lammax > 0$, let
@@ -108,8 +113,8 @@ proceeds via the same five-lemma chain (L1$'$~chirality-doubled operator
 system, L2~central spectral Fej\'er kernel with closed-form quantitative
 rate, L3~Lipschitz comparison via the Dirac-triangle inequality on
 tensor products of irreducibles, L4~Berezin reconstruction via
-Peter--Weyl, L5~Latr\'emoli\`ere tunneling-pair assembly). The
-universality of $4/\pi$ identifies the propinquity rate with the
+Peter--Weyl, L5~state-space GH assembly via the approximation pair). The
+universality of $4/\pi$ identifies the state-space GH rate with the
 $k=0$ sub-mechanism of a master Mellin engine
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the spectral triple, sharpening the
 structural reading of Paper~38 from a single-group observation to a
@@ -139,8 +144,8 @@ content) are unaffected.
 43A77 (analysis on compact groups).
 
 \medskip\noindent
-\textbf{Keywords:}\ spectral triple, quantum Gromov--Hausdorff
-propinquity, compact Lie group, Kostant cubic Dirac operator, Peter--Weyl
+\textbf{Keywords:}\ spectral triple, state-space Gromov--Hausdorff
+distance, compact semisimple Lie group, Kostant cubic Dirac operator, Peter--Weyl
 decomposition, central spectral Fej\'er kernel, Berezin reconstruction,
 universal rate constant.
 
@@ -209,13 +214,16 @@ compact quantum groups including $\SU_q(N)$, again with no Dirac and
 no rate.}
 
 \paragraph{What this paper does.}
-We close the gap between Paper~38 and~\cite{gaudillot_estrada_vs2025} at
-full Class~1 generality.
+We close the gap between Paper~38 and~\cite{gaudillot_estrada_vs2025} on
+the semisimple sub-class of Class~1 (compact connected semisimple Lie
+groups; a central torus factor carries the circle constant $2/\pi$ and
+is excluded, see the Scope note inside
+Corollary~\ref{cor:general_compact_connected}).
 
 \begin{theorem}[Main theorem; cf.~\S\ref{sec:main_theorem}]
 \label{thm:main_intro}
-Let $G$ be a compact connected Lie group of rank $r \ge 1$ with
-bi-invariant Riemannian metric (dual-Coxeter normalised). The
+Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
+with bi-invariant Riemannian metric (dual-Coxeter normalised). The
 truncated metric spectral triples $\Tcal_\Lammax$ converge to $\Tcal_G$
 in van~Suijlekom's state-space Gromov--Hausdorff distance, with
 explicit rate
@@ -250,7 +258,10 @@ $G_2$ extracted $1.177$, within $7.6\%$ of $4/\pi$ versus $51.6\%$ of
 $24/\pi^2 \approx 2.432$. Cross-group ratios are convention-independent
 and confirm the same verdict; see~\S\ref{sec:universal} for details.}.
 The universality is therefore not an artifact of $\SU(2)$ but a
-class-wide property of compact Lie groups with bi-invariant metric.
+class-wide property of compact semisimple Lie groups with bi-invariant
+metric (a central $U(1)$ factor carries the circle constant $2/\pi$
+instead; see the scope note inside
+Corollary~\ref{cor:general_compact_connected}).
 
 The universality of $4/\pi$ is rigorous at rank~$1$ ($\SU(2)$:\
 Paper~38~\cite{paper38}, with the closed-form sum-rule of \S\ref{sec:L2}
@@ -263,8 +274,8 @@ numerically at ranks~$1$--$2$ by direct Weyl integration
 ($\SU(2), \SU(3), \Sp(2), G_2$; backing test
 \texttt{tests/test\_paper40\_universal\_rate.py}), with an additional
 rank-$3$ datapoint on $\SU(4)$. The numerical leading-constant
-extraction is \emph{fit-sensitive} --- the raw Stein--Weiss constant
-scatters with the fit order and the $\min L$ cut --- so what is
+extraction is \emph{fit-sensitive} --- the raw extracted leading
+constant scatters with the fit order and the $\min L$ cut --- so what is
 \emph{robust} is the discrimination of Reading~A ($c = 4/\pi$) from
 the Weyl-formula Reading~B ($c = 2|W|/\pi^r$), decisive at $G_2$
 (extracted $c$ near $4/\pi \approx 1.27$, far from
@@ -286,16 +297,21 @@ main theorem unchanged.
 \paragraph{Structural reading.}
 The constant $4/\pi$ identifies with the \emph{master Mellin M1
 sub-mechanism} on the spectral triple, in the sense that
-$4/\pi = 2\Vol(S^1)/\Vol(\SU(2)) = \Vol(S^2)/\pi^2$ is the Hopf-base
+$4/\pi = 2\Vol(S^2)/\Vol(\SU(2)) = \Vol(S^2)/\pi^2$ is the Hopf-base
 measure factor in the standard $\SU(2)/U(1)$ Haar normalisation, and
 this factor is exactly what enters the
 $k = 0$ slice of the spectral-action heat-kernel Mellin transform
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the canonical Riemannian spectral
 triple. The class-wide universality of $4/\pi$ established here says
-that this M1 signature is rank-invariant:\ whatever the group, the
-central spectral Fej\'er kernel sees its underlying real-line
-Stein--Weiss analysis through Peter--Weyl rather than through the
-global geometry of the maximal-torus quotient $G/T$.
+that this M1 signature is rank-invariant across the semisimple class:\
+whatever the group, the central spectral Fej\'er kernel sees the
+rank-$1$ ($\SU(2)$) asymptotic analysis of Paper~38 through
+Peter--Weyl rather than through the global geometry of the
+maximal-torus quotient $G/T$. (The constant is that of the rank-$1$
+\emph{group}, not of its maximal torus:\ the classical Fej\'er kernel
+on the circle has first-moment constant $2/\pi$, half the $\SU(2)$
+value --- Paper~38, Remark ``Connection to the circle Fej\'er
+estimate''; see Section~\ref{sec:why_universal}.)
 
 \paragraph{Outline.}
 Section~\ref{sec:setup} sets up the canonical compact-Lie-group
@@ -308,7 +324,7 @@ rate (Stein--Weiss type $\log \Lammax / \Lammax$ with universal
 constant $4/\pi$); \S\ref{sec:L3}~the Lipschitz comparison via the
 Dirac-triangle inequality on tensor products of irreducibles;
 \S\ref{sec:L4}~the Berezin reconstruction; and \S\ref{sec:L5}~the
-Latr\'emoli\`ere propinquity assembly. Section~\ref{sec:main_theorem}
+state-space GH assembly via the approximation pair. Section~\ref{sec:main_theorem}
 assembles the main theorem and states explicit corollaries for
 $\SU(N)$, $\Spin(n)$, $\Sp(n)$ and the exceptional groups.
 Section~\ref{sec:universal} discusses the structural significance of
@@ -324,9 +340,12 @@ coadjoint-orbit programme, and the Lorentzian / Wick-rotated analog.
 \subsection{Compact Lie group with bi-invariant metric}
 \label{sec:compact_lie}
 
-Throughout, $G$ denotes a compact connected Lie group of rank $r \ge 1$,
-with Lie algebra $\mathfrak g$ and chosen maximal torus $T \subset G$ of
-dimension $r$. We equip $G$ with a bi-invariant Riemannian metric
+Throughout, $G$ denotes a compact connected \emph{semisimple} Lie group
+of rank $r \ge 1$, with Lie algebra $\mathfrak g$ and chosen maximal
+torus $T \subset G$ of dimension $r$.  (Semisimplicity is where the
+dual-Coxeter normalisation below is defined; a central $U(1)$ factor
+would carry the circle constant $2/\pi$ rather than $4/\pi$, see the
+scope note inside Corollary~\ref{cor:general_compact_connected}.) We equip $G$ with a bi-invariant Riemannian metric
 arising from an $\mathrm{Ad}$-invariant inner product
 $\langle\,\cdot\,,\,\cdot\,\rangle$ on $\mathfrak g$. For a simple Lie
 algebra, this inner product is unique up to scale; we fix the
@@ -474,19 +493,22 @@ state our results below at the level of generality of arbitrary
 $G$, with Paper~38 recovered as the rank-$1$ case
 (Corollary~\ref{cor:paper38_recovery}).
 
-\subsection{Propinquity convention}\label{sec:propinquity_convention}
+\subsection{Distance convention}\label{sec:propinquity_convention}
 
-Throughout this paper, ``Latr\'emoli\`ere propinquity'' refers to the
-Gromov--Hausdorff propinquity for metric spectral triples introduced
-in Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017}. This is the
-spectral-triple-level extension of the dual propinquity
-\cite{latremoliere2016} and of the original quantum compact metric
-space propinquity~\cite{latremoliere2018}, and is computed via
-infimum over tunnelling pairs. When we write
-$\Lambda_{\mathrm{prop}}(\Tcal_1, \Tcal_2)$, we always mean the
-spectral-triple version of~\cite{latremoliere_metric_st_2017}, and
-the underlying tunneling-pair formalism is recalled in
-\S\ref{sec:L5}.
+Throughout this paper, $\Lambda_{\mathrm{prop}}(\Tcal_1, \Tcal_2)$
+denotes van~Suijlekom's \emph{state-space Gromov--Hausdorff distance}
+between metric spectral triples~\cite{vs2021_jgp} --- the object every
+bound in this paper controls; the symbol is retained from the drafting
+lineage of Paper~38 (2026-09-02 correction:\ an earlier version of this
+subsection defined the symbol as Latr\'emoli\`ere's propinquity). The
+strictly stronger Gromov--Hausdorff propinquity for metric spectral
+triples of Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017} --- the
+spectral-triple-level extension of the dual
+propinquity~\cite{latremoliere2016} and of the quantum compact metric
+space propinquity~\cite{latremoliere2018}, computed as an infimum over
+tunnels --- is \emph{not} claimed:\ the approximation pair of
+\S\ref{sec:L5} would be the data of such a tunnel, but its dual-reach
+hypothesis is a named gap (Remark~\ref{rem:correction_L2}).
 
 % =====================================================================
 \section{The five lemmas}\label{sec:lemmas}
@@ -546,7 +568,7 @@ $\opnorm{[\Dop_\Lammax, M]} \le 1$ is non-degenerate on the full
 operator system. The truthful $\Dop_\Lammax$ is what underlies the
 spectral-action structure of $\Tcal_G$ and is what we use in
 Lemmas~\ref{lem:L3}--\ref{lem:L4}. The two operators are related by a
-bounded compact perturbation, and the propinquity bound of
+bounded compact perturbation, and the state-space GH bound of
 Theorem~\ref{thm:main_intro} is robust under this choice.
 \end{proof}
 
@@ -559,7 +581,7 @@ Peter--Weyl levels in the natural representation (which always exists
 because the natural rep contains the trivial rep among its tensor
 powers with itself and any other rep). The construction is
 universal across compact Lie groups; we do not invoke it further in
-the rate-controlled propinquity proof, which uses the truthful
+the rate-controlled state-space GH proof, which uses the truthful
 $\Dop_\Lammax$ throughout.
 \end{remark}
 
@@ -700,7 +722,7 @@ cited in earlier statements concerns uniformly bounded representations of
 maximum $\sup_\pi \dim V_\pi / Z_\Lammax \le 2/(\Lammax + 1)$ follows
 from the Weyl dimension formula and the Casimir growth
 $\Cas(\pi) \sim |\lambda_\pi + \rho|^2$, consistent with the SU(2)
-value $2/(n_{\max} + 1)$; it plays no role in the tunnel bounds.
+value $2/(n_{\max} + 1)$; it plays no role in the L5 bounds.
 
 \textbf{(d)} \emph{(Universal rate.)} The mass-concentration moment
 $\gamma_\Lammax(G)$ admits a closed-form sum-rule via the Weyl
@@ -732,7 +754,7 @@ O(1/\Lammax)$ uniformly across $G$.
 The Plancherel mass distribution $\dim V_\pi / Z_\Lammax$ is distinct
 from the convolution-multiplier symbol of $\KS_\Lammax$; the smoothing
 map is unital completely positive with cb-norm exactly $1$, and the
-mass-distribution maximum $2/(\Lammax+1)$ enters none of the tunnel
+mass-distribution maximum $2/(\Lammax+1)$ enters none of the L5
 bounds. The quantities the convergence proof actually consumes ---
 positivity and unit mass (a), the mass-concentration moment
 $\gamma_\Lammax(G)$ (d), its closed-form sum-rule, and the universal
@@ -746,9 +768,10 @@ lemma in the style of Leimbach--van~Suijlekom~\cite{leimbach_vs2024},
 while for the scalar sector the conclusion is corroborated at the
 state-space Gromov--Hausdorff level for all compact metric groups by
 Gaudillot-Estrada and van~Suijlekom~\cite{gaudillot_estrada_vs2025};
-(ii) the tunneling-pair vocabulary of \S\ref{sec:L5} follows
-Paper~38~\cite{paper38}; the device actually used is
-van~Suijlekom's state-space Gromov--Hausdorff framework.
+(ii) the approximation-pair assembly of \S\ref{sec:L5} follows
+Paper~38~\cite{paper38}; the device is van~Suijlekom's state-space
+Gromov--Hausdorff framework, and the tunnel vocabulary there is
+orientation only (2026-09-02 reframing).
 
 \emph{Update (2026-06-10).} For $G = \SU(2)$ the gap is closed:\
 Paper~38~\cite{paper38} now proves its theorem unconditionally by
@@ -808,9 +831,13 @@ of $\langle w(\lambda_\pi + \rho), t\rangle$. Decomposing the
 Cartan-torus integration along the positive-root axes
 $\{t \mid \langle\alpha, t\rangle > 0\}$, the dominant contribution at
 each rank reduces by Pfaff--Watson partial integration to a sum of
-rank-$1$ integrals of the form $\int_{[0, 2\pi]} F_n(\theta)\,
-|\theta|\, d\theta$, where $F_n$ is the classical Ces\`aro-$2$ /
-Fej\'er kernel on $S^1$.
+rank-$1$ first-moment integrals of the $\SU(2)$ type of Paper~38 ---
+the $\sqrt{2j+1}$-weighted kernel against the $\sin^2(\chi/2)$
+conjugacy-class measure --- one per positive-root direction. (These
+are \emph{not} the classical circle Fej\'er integrals
+$\int_{\T^1}F_n|\theta|$, whose probability-normalised constant is
+$2/\pi$, half the $\SU(2)$ value; Paper~38, Remark ``Connection to
+the circle Fej\'er estimate''.)
 
 \textbf{Step 3 (Plancherel $\times$ Vandermonde cancellation).} The
 central spectral Fej\'er kernel is built with Plancherel weights
@@ -829,9 +856,9 @@ which has the same Vandermonde-style $\prod_{\alpha > 0}$ structure
 as $|\Delta(t)|^2$. In the dual-Coxeter normalisation, these two
 products exactly cancel at leading order, eliminating all
 rank-, $|W|$-, and $N_+$-dependence (where $N_+$ is the number of
-positive roots). What remains is the pure $1$D Stein--Weiss constant
-$4/\pi$ from each positive-root direction's Euler--Catalan asymptote
-$\sum_{d \text{ odd}} 1/d^2 = \pi^2/8$.
+positive roots). What remains is the rank-$1$ ($\SU(2)$) constant
+$4/\pi$ of Paper~38, Appendix~A, from each positive-root direction's
+Euler--Catalan asymptote $\sum_{d \text{ odd}} 1/d^2 = \pi^2/8$.
 
 The detailed Abel--Plana bookkeeping required to convert the
 leading-order asymptotic into a uniform $O(1/\Lammax)$ remainder is
@@ -943,14 +970,13 @@ panel grows, consistent with both groups landing at $4/\pi$ in the
 asymptotic limit.
 \end{remark}
 
-\begin{corollary}[Extension to general compact connected
+\begin{corollary}[Extension to compact connected semisimple
 $G$]\label{cor:general_compact_connected}
 The universal rate constant $c(G) = 4/\pi$ in
 Theorem~\ref{thm:universal_constant_analytical} extends from compact
-connected simple $G$ to general compact connected Lie groups
-$G = G_{\mathrm{ss}} \times T^k$ via factor-wise cancellation, where
-$G_{\mathrm{ss}}$ is semisimple (a finite quotient of a product of
-simple factors) and $T^k$ is a central torus factor.
+connected simple $G$ to compact connected semisimple $G$ (finite
+quotients of products of simple factors) via factor-wise
+cancellation.
 
 \begin{proof}[Sketch] On a product $G_1 \times G_2$ with bi-invariant
 metric, the central spectral Fej\'er kernel factors as
@@ -964,33 +990,50 @@ d^2_{G_2}(g_2, e)$. Each factor's contribution receives the
 Plancherel $\times$ Vandermonde cancellation independently, giving
 $c(G_1)/2 + c(G_2)/2 = (4/\pi)/2 + (4/\pi)/2 = 4/\pi$ for the
 combined factor (the factor of $2$ arises from the equal-weighting
-of factors in the additive distance squared). Iterating across simple
-and torus factors gives the universal rate constant on the full
-product. For a torus factor $T^k$, the central Fej\'er kernel
-reduces to the classical Fej\'er kernel on each circle, and the
-rank-$1$ Stein--Weiss constant is $4/\pi$ on each circle
-(Paper~38 \S A; Leimbach--van Suijlekom 2024
-\cite{leimbach_vs2024}).
+of factors in the additive distance squared). Iterating across the
+simple factors gives the universal rate constant on the full
+semisimple product.
 \end{proof}
+
+\emph{Scope (2026-09-02).} An earlier version of this corollary
+extended the statement to $G_{\mathrm{ss}} \times T^k$ with a central
+torus factor, on the ground that ``the rank-$1$ constant is $4/\pi$ on
+each circle''. That ground is false:\ on a circle factor the central
+Fej\'er kernel reduces to the classical Fej\'er kernel, whose
+probability-normalised first moment is $(2/\pi)\log n / n$ --- half the
+$\SU(2)$ value (Paper~38, Remark ``Connection to the circle Fej\'er
+estimate''; \texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}). Under
+the factor-wise argument above the product constant would then depend
+on the mix of simple and circle factors rather than being universal,
+so the torus-factor extension is withdrawn; no value is asserted here
+for $c(G_{\mathrm{ss}} \times T^k)$.
 \end{corollary}
 
-\begin{remark}[Stein--Weiss interpretation]
+\begin{remark}[Relation to the circle Fej\'er constant]
 \label{rem:stein_weiss_general}
-The constant $4/\pi$ in~\eqref{eq:universal_rate} is the same constant
-that appears in the classical Stein--Weiss estimate for the Fej\'er
-kernel on the circle~\cite{stein_weiss1971, zygmund2002}:
-$\int_{\T^1} F_n(\theta)\,|\theta|\,d\theta \sim (4/\pi)\,\log n / n$.
-The $\sqrt{\dim V_\pi}$ Plancherel weighting in
+The constant $4/\pi$ in~\eqref{eq:universal_rate} is \emph{twice} the
+constant of the classical estimate for the probability-normalised
+Fej\'er kernel on the circle~\cite{zygmund2002}:\
+$\frac{1}{2\pi}\int_{\T^1} F_n(\theta)\,|\theta|\,d\theta \sim
+(2/\pi)\,\log n / n$ (Paper~38, Remark ``Connection to the circle
+Fej\'er estimate'', where the circle constant is computed in closed
+form and measured against the $\SU(2)$ value:\
+\texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}). The
+$\sqrt{\dim V_\pi}$ Plancherel weighting in
 Definition~\ref{def:central_fejer_general} produces a Ces\`aro-$2$-style
 spectral kernel rather than the unweighted Ces\`aro-$1$ Dirichlet kernel
 of~\cite{leimbach_vs2024}, which is what gives the $\log \Lammax /
-\Lammax$ rate (rather than the unweighted $1/\Lammax$ rate of the
-abelian torus). The $4/\pi$ constant is preserved across this transition
-by the underlying real-line Stein--Weiss analysis, which sees the
-Cartan torus $T \subset G$ rather than the global geometry of $G$. This
-is the structural origin of the universality observed in
-Theorem~\ref{thm:universal_constant}, and is discussed further in
-\S\ref{sec:universal}.
+\Lammax$ rate (rather than the $1/\Lammax$ rate of the abelian torus
+in~\cite{leimbach_vs2024}). \textbf{[OBSERVATION]} Both constants are
+of the form $2\Vol(\text{base})/\Vol(\text{group})$
+($2\Vol(S^0)/\Vol(S^1) = 2/\pi$; $2\Vol(S^2)/\Vol(\SU(2)) = 4/\pi$);
+the universality across the semisimple class is the statement that
+every simple factor sees the rank-$1$ ($\SU(2)$) constant through the
+Plancherel $\times$ Vandermonde cancellation, discussed further in
+\S\ref{sec:universal}. (An earlier version of this remark stated the
+circle constant as $4/\pi$ and the $\SU(2)$ constant as ``preserved
+across this transition by the underlying real-line Stein--Weiss
+analysis''; withdrawn 2026-09-02.)
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -1008,7 +1051,7 @@ which we state, verify numerically, and reduce analytically below.
 
 \subsubsection{Statement and reduction to (INT)}\label{sec:L3_statement}
 
-\begin{lemma}[L3: Lipschitz comparison on compact Lie groups]\label{lem:L3}
+\begin{lemma}[L3: Lipschitz comparison on compact semisimple Lie groups]\label{lem:L3}
 Let $G$ be a compact connected Lie group of rank $r \ge 1$ with
 bi-invariant metric (dual-Coxeter normalised), and let $\Dop_G$ be the
 Kostant cubic Dirac operator on $G$. For every $f \in C^\infty(G)$ and
@@ -1547,7 +1590,7 @@ data is open. For finite-cutoff applications
 the per-isotypic structure of $C_3(G, \sigma)$ at
 $\Lammax \le \Lammax_*(G)$ is the load-bearing object rather than the
 asymptotic $C_3(G) = 1$ bound; this finer characterisation is open
-and not required for the propinquity convergence theorem.
+and not required for the state-space GH convergence theorem.
 \end{remark}
 
 \begin{remark}[Recovery of Paper~38]\label{rem:L3_paper38}
@@ -1659,30 +1702,34 @@ groups.
 \end{remark}
 
 % ---------------------------------------------------------------------
-\subsection{Lemma L5: Latr\'emoli\`ere propinquity assembly}\label{sec:L5}
+\subsection{Lemma L5: state-space GH assembly via the approximation pair}\label{sec:L5}
 % ---------------------------------------------------------------------
 
-We use the Gromov--Hausdorff propinquity for metric spectral triples
-introduced by Latr\'emoli\`ere~\cite{latremoliere_metric_st_2017},
-which assigns to a pair of metric spectral triples $(\Tcal_1, \Tcal_2)$
-the quantity
+We bound van~Suijlekom's state-space Gromov--Hausdorff distance
+$\Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)$
+(\S\ref{sec:propinquity_convention}) with an approximation pair
+$(B_\Lammax, P_\Lammax)$, $B_\Lammax: \Tcal_G \to \Tcal_\Lammax$ a
+unital completely positive (UCP) map and $P_\Lammax$ the spectral
+compression, exactly as Paper~38's Lemma~L5 does for $\SU(2)$. For
+orientation only:\ in Latr\'emoli\`ere's framework the same pair would
+be the data of a tunnel $\tau$ between the two triples, and the
+propinquity would be
 \begin{equation}\label{eq:propinquity_def_general}
-   \Lambda_{\mathrm{prop}}(\Tcal_1, \Tcal_2)
-   \;=\; \inf_\tau \mathrm{length}(\tau),
+   \inf_\tau \mathrm{length}(\tau), \qquad
+   \mathrm{length}(\tau) = \max(\mathrm{reach}(\tau),
+   \mathrm{height}(\tau));
 \end{equation}
-where the infimum is over tunnels $\tau$ connecting $\Tcal_1$ and
-$\Tcal_2$, with $\mathrm{length}(\tau) = \max(\mathrm{reach}(\tau),
-\mathrm{height}(\tau))$. A direct tunnel between $\Tcal_\Lammax$ and
-$\Tcal_G$ is a tunneling pair $(B_\Lammax, P_\Lammax)$ with
-$B_\Lammax: \Tcal_G \to \Tcal_\Lammax$ a unital completely positive
-(UCP) map and $P_\Lammax: \Tcal_G \to \Tcal_\Lammax$ the spectral
-compression.
+that quantity is \emph{not} what is proved here (the dual-reach
+hypothesis is the named gap), but the two forward estimates the
+state-space GH bound needs --- the good-kernel estimate and the
+Lipschitz distortion --- are the forward reach and forward height of
+that would-be tunnel, so we organise the proof by those four terms.
 
-\begin{lemma}[L5: propinquity bound from the tunneling pair]\label{lem:L5}
+\begin{lemma}[L5: state-space GH bound from the approximation pair]\label{lem:L5}
 The pair $(B_\Lammax, P_\Lammax)$ with $B_\Lammax$ from
 Definition~\ref{def:berezin_general} and $P_\Lammax$ the spectral
-projection of~\eqref{eq:casimir_cutoff} is a tunneling pair from
-$\Tcal_G$ to $\Tcal_\Lammax$, and yields the bound
+projection of~\eqref{eq:casimir_cutoff} is an approximation pair between
+$\Tcal_G$ and $\Tcal_\Lammax$, and yields the state-space GH bound
 \begin{equation}\label{eq:L5_bound_general}
    \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
    \;\le\; C_3(G) \cdot \gamma_\Lammax(G),
@@ -1692,8 +1739,10 @@ from Lemma~\ref{lem:L2}(d).
 \end{lemma}
 
 \begin{proof}
-The four constituents of a Latr\'emoli\`ere tunnel are reach (forward
-and dual) and height (forward and dual).
+We organise the estimate by the four quantities a Latr\'emoli\`ere
+tunnel would carry --- reach (forward and dual) and height (forward and
+dual) --- because the state-space GH assembly of Paper~38 (Lemma~L5
+there) uses exactly the two forward ones.
 
 \emph{Reach.} By Lemma~\ref{lem:L4}(c), the forward reach satisfies
 $\mathrm{reach}_B \le \gamma_\Lammax(G) \cdot \norm{\nabla f}_{L^\infty}
@@ -1709,9 +1758,10 @@ for the scalar sector the conclusion is corroborated at the
 state-space Gromov--Hausdorff level for all compact metric groups
 by~\cite{gaudillot_estrada_vs2025}.
 
-\emph{Height.} The relevant height for the spectral-triple propinquity
-\cite{latremoliere_metric_st_2017} measures the Lipschitz-distortion of
-the tunnel maps with respect to the Lipschitz seminorms,
+\emph{Height.} The height-type quantity (Latr\'emoli\`ere's height for
+metric spectral triples~\cite{latremoliere_metric_st_2017}) measures the
+Lipschitz-distortion of the pair's maps with respect to the Lipschitz
+seminorms,
 \begin{equation}\label{eq:height_B_general}
    \mathrm{height}_B
    \;:=\; \sup_{\Lipnorm{f} \le 1}
@@ -1725,7 +1775,9 @@ $\Lipnorm{f} - \Lipnorm{\KS_\Lammax * f} \le \gamma_\Lammax(G)
 height $\mathrm{height}_P = 0$ because $P_\Lammax$ is an orthogonal
 projection.
 
-Combining into~\eqref{eq:propinquity_def_general}:
+Combining the forward estimates (the state-space GH assembly of
+Paper~38, Lemma~L5; the max over the four terms is what the would-be
+tunnel length~\eqref{eq:propinquity_def_general} would also use):
 \begin{equation*}
    \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
    \;\le\; \max\bigl(\gamma_\Lammax(G), \gamma_\Lammax(G),
@@ -1742,9 +1794,9 @@ Remark~\ref{rem:correction_L2}; all other constituents are proved above.
 \section{Main theorem and corollaries}\label{sec:main_theorem}
 % =====================================================================
 
-\begin{theorem}[Unified GH-convergence on compact Lie groups]\label{thm:main}
-Let $G$ be a compact connected Lie group of rank $r \ge 1$ with
-bi-invariant Riemannian metric in the dual-Coxeter normalisation, and
+\begin{theorem}[Unified GH-convergence on compact semisimple Lie groups]\label{thm:main}
+Let $G$ be a compact connected semisimple Lie group of rank $r \ge 1$
+with bi-invariant Riemannian metric in the dual-Coxeter normalisation, and
 let $\Tcal_G$ be its canonical metric spectral triple. Let
 $\Tcal_\Lammax$ be its Connes--van~Suijlekom truncation at Casimir
 cutoff $\Lammax > 0$. Then $\Tcal_\Lammax$ converges to $\Tcal_G$ in
@@ -1782,15 +1834,17 @@ inequality on tensor products (Proposition~\ref{prop:dt_verification},
 class-wide $977/977$ numerical verification + rigorous low-rank /
 special-summand analytical proof + structural Brauer--Klimyk reduction
 at general rank); Lemma~\ref{lem:L4} the Berezin reconstruction with
-the four properties needed for a Latr\'emoli\`ere tunneling pair; and
-Lemma~\ref{lem:L5} the assembly into the propinquity bound. Combining
+the four properties the approximation pair of Lemma~\ref{lem:L5} needs; and
+Lemma~\ref{lem:L5} the assembly into the state-space GH bound. Combining
 the bound~\eqref{eq:L5_bound_general} with the asymptotic
 rate~\eqref{eq:universal_rate} gives~\eqref{eq:main_thm_general}.
 \end{proof}
 
 \begin{proposition}[Limit identification]\label{prop:limit_id_general}
-The propinquity limit of the sequence $(\Tcal_\Lammax)_{\Lammax > 0}$
-in the sense of Latr\'emoli\`ere is the round-$G$ canonical metric
+The state-space Gromov--Hausdorff limit of the sequence
+$(\Tcal_\Lammax)_{\Lammax > 0}$ (in van~Suijlekom's distance; the
+strictly stronger Latr\'emoli\`ere propinquity limit is not claimed) is
+the round-$G$ canonical metric
 spectral triple $\Tcal_G$, with the Connes distance on $\Tcal_G$
 coinciding (by Kantorovich--Rubinstein duality) with the
 Wasserstein--Kantorovich distance with respect to the bi-invariant
@@ -1799,7 +1853,7 @@ geodesic distance on $G$.
 
 \begin{proof}[Proof sketch]
 Theorem~\ref{thm:main} guarantees $\Lambda_{\mathrm{prop}}(\Tcal_\Lammax,
-\Tcal_G) \to 0$, so the limit object exists in the propinquity
+\Tcal_G) \to 0$, so the limit object exists in the state-space GH
 completion and equals $\Tcal_G$. The L4(c) approximate-identity
 property pins the limit to be the actual triple (rather than an
 isomorphism class).
@@ -1864,7 +1918,7 @@ Paper~38 identified the SU(2) constant as
 \begin{equation}\label{eq:su2_4_over_pi}
    c(\SU(2)) \;=\; 4/\pi
    \;=\; \Vol(S^2)/\pi^2
-   \;=\; 2\Vol(S^1)/\Vol(\SU(2)),
+   \;=\; 2\Vol(S^2)/\Vol(\SU(2)),
 \end{equation}
 reading the $4/\pi$ as the Hopf-base measure factor in the standard
 $\SU(2)/U(1)$ Haar normalisation. Two natural rank-$r$ generalisations
@@ -1872,8 +1926,9 @@ were proposed in the supporting scoping
 memo~\cite{unified_gh_scoping_memo}:
 
 \paragraph{Reading A (rank-invariant).}
-The constant is rank-invariant:\ $c(G) = 4/\pi$ for every compact Lie
-group $G$ in the dual-Coxeter normalisation, regardless of rank or
+The constant is rank-invariant:\ $c(G) = 4/\pi$ for every compact
+connected semisimple Lie group $G$ in the dual-Coxeter normalisation,
+regardless of rank or
 $|W|$.
 
 \paragraph{Reading B (Weyl-formula).}
@@ -1934,28 +1989,33 @@ these two products \emph{exactly cancel at leading order}, eliminating
 all rank-, $|W|$-, and $N_+$-dependence (where $N_+$ is the number of
 positive roots).
 
-What is left is the pure $1$D Stein--Weiss constant $4/\pi$ from each
+What is left is the rank-$1$ ($\SU(2)$) constant $4/\pi$ from each
 positive-root direction's Euler--Catalan asymptote
 \begin{equation*}
    \sum_{d \text{ odd}} \frac{1}{d^2} \;=\; \frac{\pi^2}{8},
 \end{equation*}
 which is the same identity that gives the $4/\pi$ constant in
-Paper~38's rank-$1$ Stein--Weiss calculation for $\SU(2)$
-\cite[App.~A]{paper38}. The universal real-line Stein--Weiss
-asymptotic
+Paper~38's rank-$1$ sum-rule calculation for $\SU(2)$
+\cite[App.~A]{paper38}. The rank-$1$ asymptotic
 \begin{equation*}
-   \int_{\T^1} F_n(\theta)\,|\theta|\,d\theta
+   \gamma_n^{\SU(2)}
    \;\sim\; \frac{4}{\pi} \cdot \frac{\log n}{n}
 \end{equation*}
-is then applied to each of the $r$ Cartan-torus directions, with the
+is then applied to each of the $N_+$ positive-root directions, with the
 Plancherel $\times$ Vandermonde cancellation ensuring that the
 proportionality constant aggregates to the universal $4/\pi$ rather
-than to a rank-dependent product.
+than to a rank-dependent product. (The constant is that of the
+rank-$1$ \emph{group} $\SU(2)$, not of a circle:\ the classical
+Fej\'er kernel on $\T^1$ has probability-normalised first moment
+$(2/\pi)\log n/n$, half the $\SU(2)$ value --- Paper~38, Remark
+``Connection to the circle Fej\'er estimate''. An earlier version of
+this paragraph displayed the circle asymptotic with constant $4/\pi$;
+withdrawn 2026-09-02.)
 
 \paragraph{Structural reading.} The central spectral Fej\'er kernel
-sees its underlying real-line Stein--Weiss analysis through
+sees the rank-$1$ ($\SU(2)$) asymptotic analysis through
 Peter--Weyl, \emph{not} through the global geometry of $G/T$.
-Whichever compact Lie group you build the kernel on, the Plancherel
+Whichever compact semisimple Lie group you build the kernel on, the Plancherel
 weight $\sqrt{\dim V_\pi}$ and the Vandermonde Jacobian
 $|\Delta(t)|^2$ both have $\prod_{\alpha > 0}$ structure tied to the
 same root system, and they cancel against each other at leading order
@@ -2074,7 +2134,7 @@ extraction analysis is in the supporting memo~\cite{su4_rate_memo}.
 
 The natural next-step generalisation is from compact Lie groups
 (Class~1 in the scoping memo) to compact Riemannian symmetric spaces
-$G/K$ (Class~2). The propinquity convergence theorem at full Class~2
+$G/K$ (Class~2). The state-space GH convergence theorem at full Class~2
 generality would subsume Theorem~\ref{thm:main} as the ``group case''
 $G \times G / G_{\mathrm{diag}}$ and would additionally cover spheres
 $S^n = \SO(n+1)/\SO(n)$ for $n \ge 2$, complex projective spaces
@@ -2119,7 +2179,7 @@ discussed in \S\ref{sec:symmetric}.
 The Kostant cubic Dirac spectral triple is Riemannian, with
 KO-dimension $\dim G \pmod 8$. The Lorentzian analog, via Wick rotation
 of $G$ to a non-compact form, carries different KO-dimension and sign
-convention, and may admit a different propinquity theory entirely. The
+convention, and may admit a different convergence theory entirely. The
 Bizi--Brouder--Besnard framework~\cite{bizi_brouder_besnard2018} for
 $(m, n) \in (\Z/8)^2$ Krein-class spectral triples provides the
 algebraic backbone for the Lorentzian extension, but the corresponding
@@ -2152,9 +2212,10 @@ Connes--van~Suijlekom paradigm common with the present paper. We expect
 that the non-commutative integral of \cite{hekkelman_mcdonald2024b}
 admits a class-wide compact-Lie-group extension under the same
 Peter--Weyl machinery used here, with the rate constant $4/\pi$
-appearing as the leading Szeg\"o-type asymptotic. The detailed
+appearing as the leading Szeg\"o-type asymptotic (on the semisimple
+class). The detailed
 generalisation is open and would constitute a Szeg\"o companion to
-the present propinquity theorem.
+the present convergence theorem.
 
 % =====================================================================
 \section*{Acknowledgments}
@@ -2220,6 +2281,13 @@ A.~Connes and W.~D.~van~Suijlekom,
 operator systems},
 \newblock Comm.~Math.~Phys. \textbf{383} (2021), 2021--2067;
 \newblock arXiv:2004.14115.
+
+\bibitem[van~Suijlekom(2021)]{vs2021_jgp}
+W.~D.~van~Suijlekom,
+\newblock \emph{Gromov--Hausdorff convergence of state spaces for
+spectral truncations},
+\newblock J.~Geom.~Phys. \textbf{162} (2021), 104075;
+\newblock arXiv:2005.08544.
 
 \bibitem[Fulton \& Harris(1991)]{fulton_harris1991}
 W.~Fulton and J.~Harris,

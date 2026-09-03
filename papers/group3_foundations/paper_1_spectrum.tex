@@ -12,7 +12,7 @@
 \date{February 22, 2026}
 
 \begin{abstract}
-We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg spectrum $E_n = -1/(2n^2)$ from operator eigenvalues. \textbf{(ii) Geometric artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff (peaking near $n_{\max}=8$ at $\sim$16\% and falling to $\sim$1.7\% by $n_{\max}=10$; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
+We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg quantum-number structure ($n$ and $\ell(\ell+1)$) from operator eigenvalues; the energies $E_n = -1/(2n^2)$ follow once the matched kinetic scale is applied (an Observation, Paper~7). \textbf{(ii) Geometric artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff (peaking near $n_{\max}=8$ at $\sim$16\% and falling to $\sim$1.7\% by $n_{\max}=10$; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
 \end{abstract}
 
 \maketitle
@@ -23,11 +23,11 @@ Physics traditionally assumes spacetime is a smooth continuum. Quantum mechanics
 
 We propose an alternative foundation: \textit{physical systems encode finite information}. A quantum state labeled by quantum numbers $(n, l, m)$ cannot store infinite positional precision. If information density is finite, then the state space itself must be \textit{discrete}---a lattice, not a continuum. The hydrogen atom becomes a \textbf{graph}: nodes represent quantum states, edges represent physical transitions, and the Hamiltonian becomes a matrix encoding connectivity.
 
-This discrete structure possesses a natural geometry. The hydrogen atom's dynamical symmetry group $SO(4,2)$ \cite{barut1967,fock1935} has a unique dual: the \textbf{paraboloid lattice}, where quantum numbers $(n, l, m)$ map to coordinates on a curved 3D surface. The radius grows parabolically as $r \sim n^2$, and the depth encodes energy: $z = -1/n^2$.
+This discrete structure possesses a natural geometry. The hydrogen atom's $SO(4)$ symmetry~\cite{fock1935}, extended to the $SO(4,2)$ dynamical group~\cite{barut1967}, has a unique dual: the \textbf{paraboloid lattice}, where quantum numbers $(n, l, m)$ map to coordinates on a curved 3D surface. The radius grows parabolically as $r \sim n^2$, and the depth encodes energy: $z = -1/n^2$.
 
 This lattice exhibits a profound duality between \textit{algebra} and \textit{geometry}:
 \begin{itemize}
-\item \textbf{The Algebraic Skeleton:} Transition operators $T_\pm$ (radial) and $L_\pm$ (angular) generate the spectrum. Their eigenvalues reproduce the exact Rydberg formula $E_n = -1/(2n^2)$ without correction.
+\item \textbf{The Algebraic Skeleton:} Transition operators $T_\pm$ (radial) and $L_\pm$ (angular) generate the spectrum. Their eigenvalues reproduce the exact Rydberg quantum-number structure without correction; the formula $E_n = -1/(2n^2)$ follows once the matched kinetic scale is applied (an Observation, Paper~7).
 \item \textbf{The Geometric Flesh:} The lattice \textit{topology}---the pattern of connections---generates physical corrections. High angular momentum states occupy high-connectivity nodes, creating differential weighted connectivity at finite truncation. The edge-weight log-holonomy provides a measure of lattice curvature that decays as $n^{-1}$.
 \end{itemize}
 
@@ -56,7 +56,7 @@ The critical test of this algebra is spectroscopic: do the operators reproduce t
 E_n = -\frac{1}{2n^2} \quad (\text{Hartree atomic units}),
 \label{eq:rydberg}
 \end{equation}
-in exact agreement with the hydrogen spectrum. No fitting parameters are required; the algebra determines the spectrum uniquely.
+in exact agreement with the hydrogen spectrum once the matched kinetic scale $\kappa = -1/16$ fixes the energy unit (matched, not fitted; its coincidence with the Fock Jacobian factor is an Observation, Paper~7). No fitting parameters are required; the algebra determines the quantum-number structure uniquely.
 
 This result validates the lattice as a faithful discrete representation of the hydrogen Hilbert space. The nodes are not a coarse-graining---they \textit{are} the quantum states. The edges encode physically allowed transitions. The spectrum emerges from operator eigenvalues, not from solving differential equations. (Verified in \texttt{tests/test\_paper1\_rydberg.py}: the $SU(1,1)$ number operator $N = -2[T_+, T_-]$, assembled purely from the ladder generators, has integer spectrum $\{n\}$ and the $SU(2)$ Casimir $L^2$ gives $l(l+1)$, both bit-exact, so $E_n = -1/(2n^2)$ follows from the algebra. This is the dynamical-symmetry construction; the discrete graph Laplacian $L = D - A$ is separately positive-semidefinite and reproduces the spectrum only in the continuum limit, Paper~7~\cite{loutey_paper7}.)
 
@@ -258,8 +258,9 @@ $\Theta(n)$ closed form with its $n^{-1}$ decay---are pinned by
 \texttt{tests/test\_paper1\_geometric\_phase.py} (added 2026-09-01,
 closing a coverage gap: the prior Berry-phase artifact was archived
 with the retracted $k = 2.113$ claim).
-\textbf{[MEASURED]} The per-plaquette log-holonomy decays as $n^{-1}$ exactly ($k = 1.0$,
-$R^2 = 1.0$).  This measures the \textbf{curvature of the weight function}
+The per-plaquette log-holonomy $\Theta(n) = -2\ln((n+1)/n)$
+decays as $n^{-1}$ asymptotically (a closed form, so no fitted exponent or
+$R^2$ is involved).  This measures the \textbf{curvature of the weight function}
 ---how edge weights vary across the lattice---not a genuine geometric phase
 in the Berry sense.
 
@@ -268,8 +269,9 @@ in the Berry sense.
 A nonzero Berry phase requires complex-valued transition amplitudes.
 Possible extensions include:
 \begin{enumerate}
-\item Condon--Shortley sign conventions, which multiply $L_+$ by $(-1)^m$
-  (convention-dependent, yielding discrete $\{0,\pi\}$ phases);
+\item the Condon--Shortley phase convention, which attaches $(-1)^m$ to
+  $Y_{\ell m}$ and hence flips the sign of alternate $L_\pm$ matrix
+  elements (convention-dependent, yielding discrete $\{0,\pi\}$ phases);
 \item A $U(1)$ gauge extension---attaching phase factors
   $e^{i f(n,l,m)}$ to the transition operators---which would produce
   continuously varying curvature;
@@ -359,13 +361,13 @@ If quantum states are discrete nodes, what is the wavefunction $\psi(r)$? One po
 
 We have demonstrated that quantum mechanics, when formulated on a discrete paraboloid lattice, exhibits a dual structure:
 \begin{itemize}
-\item \textbf{Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators reproduce the hydrogen spectrum without corrections.
+\item \textbf{Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators reproduce the hydrogen quantum-number structure without corrections; the energies follow with the matched kinetic scale (Paper~7).
 \item \textbf{Understood discretization artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite $n_{\max}$ (up to $\sim$16\% at intermediate $n_{\max}$, near $n_{\max}=8$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates and decays below 1\% by $n_{\max}=30$, recovering the exact Coulomb degeneracy.
 \item \textbf{Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued $SU(2)/SU(1,1)$ operators; the edge-weight log-holonomy decays as $\Theta \propto n^{-1}$, measuring the curvature of the weight function. Whether a $U(1)$ gauge extension can produce a genuine geometric phase with relativistic scaling remains an open question.
-\item \textbf{Kinematic completeness:} \textbf{[OBSERVATION]} The lattice encodes all $\alpha$-independent physics---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
+\item \textbf{Kinematic completeness:} \textbf{[OBSERVATION]} The lattice encodes the $\alpha$-independent single-electron structure---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
 \end{itemize}
 
-These results support a graph-theoretic reformulation of the hydrogen state space in which the algebraic operators encode the exact spectrum and the graph Laplacian introduces controlled, quantitatively understood finite-size artifacts. The algebra-geometry duality is suggestive of a connection to wave-particle complementarity, though we do not claim it establishes one. Critically, the graph Laplacian does not replace electromagnetic interactions or generate the Lamb shift; it encodes the kinematic manifold of the electron.
+These results support a graph-theoretic reformulation of the hydrogen state space in which the algebraic operators encode the exact quantum-number structure (the energies following with the matched kinetic scale) and the graph Laplacian introduces controlled, quantitatively understood finite-size artifacts. The algebra-geometry duality is suggestive of a connection to wave-particle complementarity, though we do not claim it establishes one. Critically, the graph Laplacian does not replace electromagnetic interactions or generate the Lamb shift; it encodes the kinematic manifold of the electron.
 
 
 \section{Limitations and Next Steps: Missing Photon Degrees of Freedom}
@@ -389,7 +391,7 @@ To incorporate electromagnetic interactions, one must construct a second geometr
 \item \textbf{Symplectic impedance:} If both manifolds carry action (units of $\hbar$), their ratio may define a dimensionless coupling constant.
 \end{itemize}
 
-\textbf{[CONJECTURE]} We conjecture that the fine structure constant $\alpha$ emerges as the \textit{geometric impedance}---the ratio of action densities between the electron paraboloid and the photon fiber. A companion paper \cite{companion_alpha} records the related
+\textbf{[CONJECTURE]} We conjecture that the fine structure constant $\alpha$ emerges as the \textit{geometric impedance}---the ratio of action densities between the electron paraboloid and the photon fiber. \textbf{[OBSERVATION]} A companion paper \cite{companion_alpha} records the related
 observation that $\alpha$ satisfies the cubic
 $\alpha^3 - K\alpha + 1 = 0$ with $K = \pi(B + F - \Delta)$ on the
 Hopf fibration.  It concludes that $\alpha$ behaves as a projection
@@ -445,7 +447,7 @@ A = |T_+| + |T_-| + |L_+| + |L_-|.
 \end{equation}
 The graph Laplacian $L = D - A$ was stored in compressed sparse row (CSR) format. The weighted degree matrix $D$ had diagonal elements ranging from 0.854 to 20.624, with mean degree 12.42.
 
-Eigenvalue computation used the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}) with $\sigma = -1.0$, computing the lowest 20 eigenvalues. Diagonalization required 0.15 seconds on a standard workstation; \textbf{[MEASURED]} the $O(V)$ sparse-eigenvalue scaling is verified by \texttt{tests/test\_ov\_scaling\_rigorous.py} (multi-point log--log fit).
+Eigenvalue computation used the shift-invert Lanczos method (\texttt{scipy.sparse.linalg.eigsh}) with $\sigma = -1.0$, computing the lowest 20 eigenvalues. Diagonalization required 0.15 seconds on a standard workstation; \textbf{[MEASURED]} the sparse-eigenvalue timing is guarded sub-quadratic and the adjacency nonzero count near-linear (measured exponent $1.07$ over $n_{\max} = 5$--$30$) by \texttt{tests/test\_ov\_scaling\_rigorous.py} (multi-point log--log fits; the frozen bounds are $< 1.8$ on timing and $< 1.15$ on the nonzero count).
 
 State identification was performed by computing overlap probabilities $|\langle n,l,m | \psi_k \rangle|^2$ for each eigenvector $|\psi_k\rangle$, selecting the eigenvector with maximal overlap for each target state.
 

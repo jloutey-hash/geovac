@@ -2,7 +2,9 @@
 
 Tests verify:
 1. Finite triple (A_F = C (+) H (+) M_3(C)) axioms at KO-dim 6
-2. Combined almost-commutative triple axioms at KO-dim 1
+2. Combined almost-commutative triple axioms with the measured
+   (epsilon, epsilon') = (-, +) signs -- not KO-1; no finite-cutoff KO
+   label is attached (2026-09-02; see geovac/almost_commutative.py)
 3. Inner fluctuation decomposition into U(1) x SU(2) x SU(3) + Higgs
 4. Falsifier: Higgs sector non-trivial when Yukawa imposed
 5. Consistency with H1 electroweak slice (lepton sector should match)

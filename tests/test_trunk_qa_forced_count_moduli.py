@@ -1,7 +1,18 @@
-"""Trunk QA — Claim B: the Forced-Count moduli chain 1024 -> 512 -> 128 -> 128.
+"""Trunk QA — Claim B: the Forced-Count moduli chain (Paper 32 thm:forced_count).
 
-CONTEXT
-=======
+STATUS (2026-09-02)
+===================
+Paper 32 eq:forced_count_chain now prints the genuine full-axiom chain
+2048 -> 1024 -> 512 -> 272 -> 260, with the matter-sector restriction
+512 -> 256 -> 128 -> 128 labelled explicitly, and its "(45 tests)" pointer now
+names tests/test_standard_model_triple.py.  The matter-sector "J-reality +
+order-one add nothing" step is pinned by the projection-rank tests at the
+bottom of this file.  The CONTEXT / RESULT sections below record the ORIGINAL
+diagnosis (they quote the PRE-correction paper text) and are kept as the
+audit trail; the assertions they describe remain the frozen truth.
+
+CONTEXT (historical)
+====================
 Paper 32 Theorem ``thm:forced_count`` states the reduction chain (eq.
 ``forced_count_chain``)
 
@@ -58,6 +69,8 @@ constraint counting changed), and they explicitly DOCUMENT the divergence from
 the paper's chain.  They are diagnostic, not a rubber stamp of the claim.
 """
 from __future__ import annotations
+
+import functools
 
 import numpy as np
 import pytest
@@ -139,6 +152,7 @@ def _a_f_basis():
 _A_BASIS = _a_f_basis()
 
 
+@functools.lru_cache(maxsize=None)
 def _order_one_matrix():
     JbJ = [J_U @ np.conj(b) @ J_U.conj().T for b in _A_BASIS]
     cols = []
@@ -150,6 +164,14 @@ def _order_one_matrix():
                 parts.append(_RV32(Da @ Jb - Jb @ Da))
         cols.append(np.concatenate(parts))
     return np.array(cols).T
+
+
+@pytest.fixture(scope="module", autouse=True)
+def _release_order_one_matrix():
+    """The cached order-one matrix is ~19 GB; drop it when this module's
+    tests are done so a full-suite run does not carry it (2026-09-02)."""
+    yield
+    _order_one_matrix.cache_clear()
 
 
 # Cache the heavy 32-dim constraint matrices once.
@@ -212,7 +234,6 @@ def test_paper_chain_intermediates_do_not_reproduce():
         _NULL32(_H32, _C32, _J32),     # 272
     ]
     assert chain == [2048, 1024, 512, 272]
-    paper_intermediates = {128}
     assert 128 not in set(chain[1:]), (
         "no genuine 32-dim intermediate equals the paper's 128"
     )
@@ -250,3 +271,50 @@ def test_128_is_matter_sector_hermitian_chirality_odd():
 def test_matter_chain_is_512_256_128():
     chain = [_RDIM16, _NULL16(_H16), _NULL16(_H16, _C16)]
     assert chain == [512, 256, 128]
+
+
+# ---------------------------------------------------------------------------
+# Paper 32 thm:forced_count, matter-sector restriction (trunk QA F1.14,
+# 2026-09-02): "512 -> 256 -> 128 -> (J-reality + order-one) 128", i.e. the
+# two remaining full-axiom constraints impose NO further matter-sector
+# constraint.  Tested as a projection rank: the matter (16x16) blocks of the
+# 272-dim (Herm + chirality + J-reality) and of the 260-dim (+ order-one)
+# solution spaces each still span the full 128-dim matter-sector space.
+# ---------------------------------------------------------------------------
+
+
+def _null_space_basis(*mats):
+    """Orthonormal basis (columns) of the joint null space of the real-linear
+    constraint maps `mats` on the 2048-dim real parameter space."""
+    G = np.zeros((_RDIM32, _RDIM32))
+    for A in mats:
+        G += A.T @ A
+    w, V = np.linalg.eigh(G)
+    return V[:, w < 1e-7]
+
+
+def _fromv32(v):
+    return v[: 32 * 32].reshape(32, 32) + 1j * v[32 * 32 :].reshape(32, 32)
+
+
+def _matter_block_rank(null_basis):
+    cols = []
+    for k in range(null_basis.shape[1]):
+        B = _fromv32(null_basis[:, k])[:16, :16]
+        cols.append(np.concatenate([np.real(B).ravel(), np.imag(B).ravel()]))
+    return int(np.linalg.matrix_rank(np.array(cols), tol=1e-7))
+
+
+def test_j_reality_adds_nothing_on_the_matter_sector():
+    basis_272 = _null_space_basis(_H32, _C32, _J32)
+    assert basis_272.shape[1] == 272
+    assert _matter_block_rank(basis_272) == 128
+
+
+@pytest.mark.slow
+def test_order_one_adds_nothing_on_the_matter_sector():
+    # slow-marked like test_full_axiom_moduli_is_260_not_128: the order-one
+    # constraint matrix is ~19 GB and takes ~50 s to build.
+    basis_260 = _null_space_basis(_H32, _C32, _J32, _order_one_matrix())
+    assert basis_260.shape[1] == 260
+    assert _matter_block_rank(basis_260) == 128

@@ -644,10 +644,11 @@ class TestQuantitativeRate:
             f"{4.0/math.pi:.6f} (asymptote should not be crossed)"
         )
 
-    def test_n_gamma_over_log_n_monotone_decreasing_for_n_ge_3(self):
-        """The ratio n*gamma_n/log(n) is monotonically decreasing for n >= 3."""
+    def test_n_gamma_over_log_n_decreasing_on_sample_3_to_1000(self):
+        """The ratio n*gamma_n/log(n) decreases along the sample n in {3,...,1000}
+        (a sampled check; no proof of monotonicity for all n is given)."""
         import math
-        ns = [3, 4, 5, 7, 10, 15, 20, 30, 50, 100]
+        ns = [3, 4, 5, 7, 10, 15, 20, 30, 50, 100, 200, 500, 1000]  # extended to 1000 (2026-09-02, trunk QA F2.3)
         ratios = []
         for n in ns:
             cert = quantitative_rate_certificate(n, C=6.0, prec=40)

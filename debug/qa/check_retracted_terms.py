@@ -97,6 +97,115 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "circle-fejer-constant-4-over-pi",
+        "note": "Trunk FULL run #2, 2026-09-02 (P38 finding, propagated to "
+                "P40 + group1 synthesis + outreach note N1).  The circle "
+                "(Fejer on T^1, probability-normalised) first-moment "
+                "constant is 2/pi, not 4/pi: m_n = pi/2 - (4/pi) "
+                "sum_{k odd<n}(1-k/n)/k^2 ~ (2/pi) log n / n (exact closed "
+                "form; tests/test_trunk_qa_fejer_4_over_pi.py).  The SU(2) "
+                "constant 4/pi is TWICE the circle constant -- an "
+                "Observation, not a derivation.  Retired: 'the same "
+                "constant on both sides', '4/pi on each circle', "
+                "'preserved across this transition', the 'Stein--Weiss "
+                "SS I.1' citation, the 'classical Stein--Weiss estimate' / "
+                "'real-line Stein--Weiss constant' naming for the circle "
+                "value, the P40 torus-factor corollary extension built on "
+                "it, and the arithmetic slip 2Vol(S^1)/Vol(SU(2)) (= 2/pi) "
+                "for 4/pi (correct: 2Vol(S^2)/Vol(SU(2)) = Vol(S^2)/pi^2). "
+                "'Stein--Weiss sharpening' as the name of App. A's "
+                "sum-rule method stays.",
+        "pattern": r"F_n\(\\theta\)[^\n]{0,40}\\sim[^\n]{0,12}(?:4\s*/\s*\\pi|\\frac\{4\}\{\\pi\})"
+                   r"|(?:same|identical)\s+on\s+both\s+sides"
+                   r"|on both sides,? which we read"
+                   r"|4/\\pi\$? on each circle"
+                   r"|(?:each|every)\s+circle\s+factor\s+carries\s+the\s+same"
+                   r"|tori\s+included"
+                   r"|preserved across this transition"
+                   r"|stein_weiss1971\}\s*\\S\s*I\.1"
+                   r"|classical Stein--Weiss estimate"
+                   r"|same constant that appears"
+                   r"|real-line Stein--Weiss"
+                   r"|1\$?D Stein--Weiss"
+                   r"|Stein--Weiss constant"
+                   r"|Stein--Weiss circle"
+                   r"|Fej\\'er--Stein--Weiss"
+                   r"|2\s*\\?(?:mathrm\{)?Vol\}?\(S\^1\)\s*/\s*\\?(?:mathrm\{)?Vol\}?\(\\?(?:mathrm\{)?SU\}?\(2\)\)",
+        "exempt_if_nearby": r"withdrawn|WITHDRAWN|corrected 2026-09|formerly|2/\\?pi|twice|half the",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        "files": [
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "docs/outreach/note_n1_su2_truncations.tex",
+            "tests/test_trunk_qa_fejer_4_over_pi.py",
+            "geovac/central_fejer_su2.py",
+        ],
+    },
+    {
+        "id": "dgv-graph-form-tautology",
+        "note": "Trunk FULL run #2, 2026-09-02 (P32 finding).  Paper 32's "
+                "Definition 'Graph form of D_GV' (def:D_GV_graph) and "
+                "Proposition 'Equivalence of spectral and graph forms' "
+                "(prop:D_equiv) were withdrawn: the proposition was "
+                "tautological (weights chosen so the spectra agree, then "
+                "unitary equivalence by the spectral theorem) and the "
+                "module it cited (geovac/dirac_matrix_elements.py) holds "
+                "closed-form matrix elements, not a hopping operator.  The "
+                "paper carries ONE Dirac operator (def:D_GV_spectral); "
+                "Remark rem:D_GV_no_graph_form records the withdrawal. "
+                "Pinned by tests/test_paper32_dirac_module_contents.py.",
+        "pattern": r"prop:D_equiv"
+                   r"|def:D_GV_graph"
+                   r"|Equivalence of spectral and graph forms"
+                   r"|Graph form of \$D_\{\\mathrm\{GV\}\}\$"
+                   r"|graph form is what one uses"
+                   r"|D_\{\\mathrm\{GV\}\}\^\{\\mathrm\{graph\}\}",
+        "exempt_if_nearby": r"No separate|Earlier drafts|the former|withdrawn|WITHDRAWN|retired|tautological",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "geovac/full_dirac_operator_system.py",
+            "geovac/dirac_matrix_elements.py",
+            "tests/test_paper32_dirac_module_contents.py",
+        ],
+    },
+    {
+        "id": "combined-triple-ko1-additive",
+        "note": "Trunk FULL run #2, 2026-09-02 (P32 + code finding).  The "
+                "H1 combined almost-commutative triple was labelled "
+                "'KO-dimension 3 + 6 = 9 = 1 (mod 8)' while the MEASURED "
+                "signs (J^2 = -I, JD = +DJ) are the (eps, eps') = (-, +) "
+                "KO-3 pair; KO-1 is (+, -).  The additive rule is a "
+                "theorem about the GRADED product D_GV (x) gamma_F + 1 (x) "
+                "D_F (Dabrowski-Dossena 2011); the module builds the "
+                "ungraded sum D_GV (x) 1 + gamma_GV (x) D_F, for which the "
+                "GV factor's own signs survive.  fluctuated_dirac default "
+                "epsilon_prime moved -1 -> +1 to match.  Relabelled KO-3, then "
+                "(PI direction, same day) the finite-cutoff KO label was dropped "
+                "in favour of the measured sign triple (-, +, +); "
+                "the additive statement may not re-surface as the label.",
+        "pattern": r"3\s*\+\s*6\s*(?:=\s*9\s*)?(?:\\equiv|=|\u2261)\s*1"
+                   r"|combined KO-dim(?:ension)?\s*=?\s*1\b"
+                   r"|KO-dim(?:ension)?~?\s*1\s*[:(]\s*\(?\\?(?:varepsilon|epsilon)"
+                   r"|at KO-dim(?:ension)?~?\s*1\b"
+                   r"|epsilon_prime:\s*int\s*=\s*-1",
+        "exempt_if_nearby": r"does not apply|NOT the additive|not KO-1|is \\emph\{not\} the KO-dimension|rather than|withdrawn|WITHDRAWN|relabel|graded product|GRADED product|KO-3",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "geovac/almost_commutative.py",
+            "geovac/standard_model_triple.py",
+            "tests/test_almost_commutative.py",
+            "tests/test_standard_model_triple.py",
+        ],
+    },
+    {
         "id": "pairdiag-composed-scaling-livesd",
         "note": "Trunk FULL 2026-09-01 (C9 finding).  The retired pair-diagonal composed-scaling claims -- O(Q^{2.5}) Pauli scaling and the 51x-1712x advantage range -- were live at ~20 loci across 7 documents, including a Paper 22 Corollary TITLED with the retired exponent, and survived the 2026-08-29 group3 certification.  Canonical: N_Pauli = 27.90 x Q exactly linear across molecules at fixed basis; equal-qubit advantage 54x-317x.",
         "pattern": r"Q\^\{2\.5\}\)?\$?[^.\n]{0,45}(?:Pauli|scal)"
@@ -380,6 +489,93 @@ REGISTRY = [
         "files": [
             "papers/group3_foundations/*.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "latremoliere-propinquity-named-for-gh-rate",
+        "scope": "trunk",
+        "severity": "fail",
+        "retired": "2026-09-01 (trunk FULL cert #2, registry-coverage "
+                   "note): a planted S9 wrong-metric seed -- 'an "
+                   "unconditional Latremoliere quantum-propinquity "
+                   "convergence at rate (4/pi) log n/n' in the group3 "
+                   "synthesis -- was caught by the LLM reviewer but NOT "
+                   "by C16, for two reasons: the two existing propinquity "
+                   "entries anchor on words BEFORE 'propinquity' "
+                   "('the/GeoVac/governs', 'converge/established/proves' "
+                   "+ Latr) and neither matches 'Latr...propinquity "
+                   "convergence' with the rate AFTER it; and the group3 "
+                   "entry exempts on 'state-space' within +-5 lines, which "
+                   "the seeded sentence carried in its own next clause "
+                   "(the scalar half correctly labelled). This entry "
+                   "anchors on the Latremoliere name / the 'at rate' "
+                   "clause and exempts only on an explicit denial. The "
+                   "achieved result is van Suijlekom STATE-SPACE GH "
+                   "convergence (Paper 38); Latremoliere propinquity is "
+                   "strictly stronger and NOT achieved. Widened 2026-09-02 "
+                   "(trunk Part F, F1.3): also fires on 'propinquity "
+                   "rate(s)' / 'propinquity-rate' used as a name for the "
+                   "paper's own state-space GH rate (six Paper 32 loci "
+                   "renamed to 'state-space GH rate'). Widened again the "
+                   "same day after the DELTA found 'propinquity asymptote' "
+                   "at Paper 18:1120: rate(s) / asymptote(s) / constant(s).",
+        "pattern": (r"Latr[^.\n]{0,30}(?:quantum-)?propinquity\s+"
+                    r"convergence"
+                    r"|(?:quantum-)?propinquity\s+convergence\s+at\s+rate"
+                    r"|\bpropinquity[\s-]+(?:rates?|asymptotes?|constants?)\b"),
+        "exempt_if_nearby": r"no\s+published|not\s+achieved|strictly\s+"
+                            r"stronger|NOT\s+the|named\s+gap|retract"
+                            r"|historical|different\s+metric|is\s+not\s+"
+                            r"Latr|not\s+a\s+Latr",
+        "files": [
+            "papers/group3_foundations/*.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group1_operator_algebras/"
+            "paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/"
+            "paper_40_unified_propinquity_convergence.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p45-kplus-compression-theorem-live",
+        "scope": "trunk",
+        "severity": "fail",
+        "retired": "2026-09-01 (trunk FULL cert #2, registry-coverage "
+                   "note): Paper 45's K^+-compression theorem was "
+                   "WITHDRAWN 2026-06-09 (falsifier "
+                   "tests/test_p45_kplus_degeneracy.py): the K^+ "
+                   "compression annihilates the Lipschitz seminorm, a "
+                   "degeneracy theorem, not a Lorentzian convergence; "
+                   "Lorentzian quantum-metric convergence is DESCOPED "
+                   "(Papers 45-49 Status notes). Two planted S8 zombie "
+                   "seeds citing the theorem as established (group3 "
+                   "synthesis; Paper 32 'Continuum scope' paragraph) "
+                   "were caught by the LLM reviewers but by NO registry "
+                   "entry -- the krein entry guards the literal Krein "
+                   "identification and exempts on 'K^+', the propinquity "
+                   "entries never mention the theorem. The legitimate "
+                   "wordings are 'K^+-compression DEGENERACY theorem' "
+                   "and 'descoped'; a bare 'K^+-compression theorem' or "
+                   "a live 'Lorentzian quantum-metric convergence' is "
+                   "the zombie.",
+        "pattern": (r"(?:K\^\{?\+\}?\$?|\\Kplus\$?)-?\s*compression\s+"
+                    r"theorem"
+                    r"|Lorentzian\s+quantum[- ]metric\s+convergence"),
+        "exempt_if_nearby": r"degenerac|descope|withdrawn|retract"
+                            r"|annihilat|intended\s+to\s+assert"
+                            r"|open\s+question|convergence\s+question"
+                            r"|open\s+named|not\s+a\s+Lorentzian",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group1_operator_algebras/"
+            "paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_4[2-9]_*.tex",
+            "papers/group1_operator_algebras/paper_5[0-3]_*.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
         ],
     },
     {

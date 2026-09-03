@@ -1,0 +1,293 @@
+{
+ "run": "trunk FULL cert #2, 2026-09-01",
+ "base_commit": "dbe7ae2",
+ "worktree": "C:/Users/jlout/Desktop/geovac-qa-seed-trunk (branch qa-seed-trunk, seed commit 6eff792 'Trunk: post-tagging normalisation follow-ups')",
+ "seed_count": 22,
+ "note": "22 loci = 21 distinct seeds (CLC + CLC2 are two loci of ONE seed in the same P38 remark). Every dimension x chunk-agent carries >=1 seed in a non-first paper of its chunk; each Sonnet code agent carries 2. Deterministic proof-of-fire on the worktree: C11 FIRED on DET1 (rc=1), C5 FIRED on CLB1a (rc=1, gated scope 62 papers); C16 did NOT fire on SYN1/SYN2/CLB2 (propinquity-as-achieved-metric pattern misses these phrasings -- LLM-tier seeds; log as registry-coverage note); C15 silent (bibitem-only arXiv swaps are outside its inline scope by design). All 8 seeded test files PASS after planting (192 passed, 5 skipped, rc=0).",
+ "seeds": [
+  {
+   "id": "A1",
+   "agent": "CODE-A",
+   "cls": "S3",
+   "file": "tests/test_trunk_qa_kappa.py",
+   "line": 158,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "convergence-to--1/16 test manufactures its n_max=40 point from 2*d_max (false positive)",
+   "expected_catcher": "code-reviewer (Sonnet) P0+P7"
+  },
+  {
+   "id": "A2",
+   "agent": "CODE-A",
+   "cls": "S2",
+   "file": "tests/test_trunk_qa_annular.py",
+   "line": 81,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "'independent SO(3) route' replaced by the formula: area==lattice check is tautological",
+   "expected_catcher": "code-reviewer (Sonnet) P0+P7"
+  },
+  {
+   "id": "B1",
+   "agent": "CODE-B",
+   "cls": "S3",
+   "file": "tests/test_paper1_geometric_phase.py",
+   "line": 88,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "non-tautology control neutered: 'detector actually detects' no longer applies a phase",
+   "expected_catcher": "code-reviewer (Sonnet) P1"
+  },
+  {
+   "id": "B2",
+   "agent": "CODE-B",
+   "cls": "S2",
+   "file": "tests/test_trunk_qa_gearing.py",
+   "line": 60,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "[T+,L+]=0 asserted on an identically-zero expression (circular)",
+   "expected_catcher": "code-reviewer (Sonnet) P1"
+  },
+  {
+   "id": "C1",
+   "agent": "CODE-C",
+   "cls": "S2",
+   "file": "tests/test_trunk_qa_forced_count_moduli.py",
+   "line": 176,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "512-not-128 downgrade no longer computes the chirality constraint; manufactured by halving",
+   "expected_catcher": "code-reviewer (Sonnet) P32"
+  },
+  {
+   "id": "C2",
+   "agent": "CODE-C",
+   "cls": "S3",
+   "file": "tests/test_paper32_composition.py",
+   "line": 111,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "'at the ceiling' degraded to an upper bound that holds for ANY pair of projections (vacuous)",
+   "expected_catcher": "code-reviewer (Sonnet) P32"
+  },
+  {
+   "id": "D1",
+   "agent": "CODE-D",
+   "cls": "S2",
+   "file": "tests/test_central_fejer_su2.py",
+   "line": 601,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "sum rule vs quadrature cross-check compares the sum rule to itself (circular)",
+   "expected_catcher": "code-reviewer (Sonnet) P38"
+  },
+  {
+   "id": "D2",
+   "agent": "CODE-D",
+   "cls": "S3",
+   "file": "tests/test_p38_action_seminorm.py",
+   "line": 47,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "rank threshold anchored to the SMALLEST singular value: injectivity falsifier can never fail",
+   "expected_catcher": "code-reviewer (Sonnet) P38"
+  },
+  {
+   "id": "CLA1",
+   "agent": "CLM-A",
+   "cls": "S4",
+   "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+   "line": 719,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "kappa Observation -> derived overclaim (C8 hard; the body still says no mechanism is known)",
+   "expected_catcher": "claims-reviewer (Opus) P0+P1+P7"
+  },
+  {
+   "id": "CLA2",
+   "agent": "CLM-A",
+   "cls": "S6",
+   "file": "papers/group3_foundations/paper_1_spectrum.tex",
+   "line": 340,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "discrete-vs-continuum imprecision: the graph is positive-semidefinite; -(n^2-1) is the S^3 continuum",
+   "expected_catcher": "claims-reviewer (Opus) P0+P1+P7"
+  },
+  {
+   "id": "CLB1a",
+   "agent": "CLM-B1",
+   "cls": "S5",
+   "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+   "line": 1716,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "K = pi(B+F-Delta) relabelled derived inside an observation env (Section 13.5 hard prohibition)",
+   "expected_catcher": "claims-reviewer (Opus) P32 lines 1-3800"
+  },
+  {
+   "id": "CLB1b",
+   "agent": "CLM-B1",
+   "cls": "S9",
+   "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+   "line": 1898,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "case-exhaustion status CONDITIONAL -> SYMBOLIC PROOF (tier overstatement; empirical leg)",
+   "expected_catcher": "claims-reviewer (Opus) P32 lines 1-3800"
+  },
+  {
+   "id": "CLB2",
+   "agent": "CLM-B2",
+   "cls": "S8",
+   "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+   "line": 6746,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "zombie: P45 K+ theorem was WITHDRAWN (descoped 2026-06-09); Lorentzian propinquity claimed achieved",
+   "expected_catcher": "claims-reviewer (Opus) P32 lines 3800-end"
+  },
+  {
+   "id": "CLC",
+   "agent": "CLM-C",
+   "cls": "S4",
+   "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+   "line": 957,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "4/pi Hopf-base identification promoted Observation -> derived (C8: 4/pi is numerics-pinned)",
+   "expected_catcher": "claims-reviewer (Opus) P38"
+  },
+  {
+   "id": "CLC2",
+   "agent": "CLM-C",
+   "cls": "S4",
+   "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+   "line": 966,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "(same seed as CLC, second locus of the same remark; counts as one seed)",
+   "expected_catcher": "claims-reviewer (Opus) P38"
+  },
+  {
+   "id": "SYN1",
+   "agent": "SYN",
+   "cls": "S9",
+   "file": "papers/synthesis/group3_foundations_synthesis.tex",
+   "line": 348,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "WH1 keystone overstated: vS state-space GH -> Latremoliere propinquity (C7 overclaim)",
+   "expected_catcher": "claims-reviewer (Opus) synthesis"
+  },
+  {
+   "id": "SYN2",
+   "agent": "SYN",
+   "cls": "S8",
+   "file": "papers/synthesis/group3_foundations_synthesis.tex",
+   "line": 693,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "zombie: descoped P45 K+ theorem cited as established in the synthesis",
+   "expected_catcher": "claims-reviewer (Opus) synthesis"
+  },
+  {
+   "id": "CIT1a",
+   "agent": "CIT-1",
+   "cls": "S1",
+   "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+   "line": 784,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "Barut-Kleinert 1967 is Phys. Rev. 156, 1541; PRL 19 (1967) has no such paper",
+   "expected_catcher": "citation-reviewer (Opus) P0+P1+P7+SYN"
+  },
+  {
+   "id": "CIT1b",
+   "agent": "CIT-1",
+   "cls": "S1",
+   "file": "papers/synthesis/group3_foundations_synthesis.tex",
+   "line": 1420,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "Marcolli-vS gauge networks is arXiv:1301.3480; 1301.3840 is a different preprint",
+   "expected_catcher": "citation-reviewer (Opus) P0+P1+P7+SYN"
+  },
+  {
+   "id": "CIT2a",
+   "agent": "CIT-2",
+   "cls": "S1",
+   "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+   "line": 7322,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "Vassilevich heat-kernel manual is hep-th/0306138; 0306183 is a different preprint",
+   "expected_catcher": "citation-reviewer (Opus) P32+P38"
+  },
+  {
+   "id": "CIT2b",
+   "agent": "CIT-2",
+   "cls": "S1",
+   "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+   "line": 1840,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "Latremoliere quantum GH propinquity is Trans. AMS 368 (2016) 365-411, not JFA",
+   "expected_catcher": "citation-reviewer (Opus) P32+P38"
+  },
+  {
+   "id": "DET1",
+   "agent": "C11",
+   "cls": "S7",
+   "file": "papers/group3_foundations/paper_1_spectrum.tex",
+   "line": 529,
+   "placement_check": "planted; new text present once, old absent, not a %-line",
+   "note": "stale internal title for Paper 7 in Paper 1's bibitem; C11 must FIRE",
+   "expected_catcher": "deterministic C11 check_internal_titles.py"
+  }
+ ],
+ "controls": [
+  {
+   "id": "KG1",
+   "dim": "code",
+   "file": "tests/test_paper7_vee_s3.py",
+   "what": "exact 1s2s / 2s2s Slater-Coulomb values on S^3 (P7); verified correct; must NOT be flagged MATERIAL"
+  },
+  {
+   "id": "KG2",
+   "dim": "code",
+   "file": "tests/test_fock_projection.py + tests/test_fock_laplacian.py",
+   "what": "the 18 symbolic S^3 proofs (P7); genuine sympy derivations; must NOT be flagged MATERIAL"
+  },
+  {
+   "id": "KG3",
+   "dim": "claims",
+   "file": "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+   "line": "652-662",
+   "what": "kappa = -1/16 [OBSERVATION] coincidence locus, correctly tiered; must NOT be flagged"
+  },
+  {
+   "id": "KG4",
+   "dim": "claims",
+   "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+   "line": "732-744",
+   "what": "c^2(4,3) = 1/40 = Delta [OBSERVATION], correctly tiered; must NOT be flagged"
+  },
+  {
+   "id": "KG5",
+   "dim": "claims",
+   "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+   "line": "2097-2110",
+   "what": "remark [Status of K = pi(B+F-Delta)] -- Observation label intact; must NOT be flagged"
+  },
+  {
+   "id": "KG6",
+   "dim": "claims",
+   "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+   "line": "981-989",
+   "what": "Lemma L3 C_3 = 1 [PANEL-VERIFIED]; correct; must NOT be flagged MATERIAL"
+  },
+  {
+   "id": "KG7",
+   "dim": "citations",
+   "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+   "line": "1745-1749, 1788-1793",
+   "what": "camporesi_higuchi1996 (JGP 20, 1-18) and vs2021_jgp (van Suijlekom, JGP 2021) -- both real and correctly attributed"
+  },
+  {
+   "id": "KG8",
+   "dim": "synthesis",
+   "file": "papers/synthesis/group3_foundations_synthesis.tex",
+   "what": "angular-sparsity potential-independence (P22) and Bargmann-Segal pi-free (P24) summaries -- faithful; must NOT be flagged"
+  }
+ ],
+ "deterministic_seeds": [
+  "DET1"
+ ],
+ "known_run1_seeds_avoided": [
+  "rank <= (S-D1)",
+  "arXiv 0409307 P32:2430 (S-F1)",
+  "Camporesi-Higuchi 1994 (S-F2)",
+  "Leimbach-vS attribution P38:164-166 (S-E2)"
+ ]
+}

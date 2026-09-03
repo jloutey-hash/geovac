@@ -448,8 +448,10 @@ def camporesi_higuchi_full_dirac_matrix(
         chirality = +1 -> +(n_fock + 1/2)  (positive Weyl chirality)
         chirality = -1 -> -(n_fock + 1/2)  (negative anti-Weyl chirality)
 
-    This is the standard Paper 32 §3.3 spectral form
-    D_GV^spec = sign(kappa)-style chirality grading.
+    This is Paper 32's D_GV (Definition ``def:D_GV_spectral``, stated there
+    as +-(n_D + 3/2) with n_D = n_fock - 1: same spectrum, shifted index)
+    -- the one Dirac operator the paper carries; the former "graph form" was
+    withdrawn 2026-09-02 (Remark ``rem:D_GV_no_graph_form``).
 
     The result is a Hermitian, traceless (per chirality pair)
     diagonal matrix with absolute spectrum given by the Camporesi-Higuchi
@@ -484,8 +486,8 @@ def camporesi_higuchi_offdiag_dirac_matrix(
     full Dirac on S^3. In the standard 4-component spinor
     decomposition, the Dirac operator has shape
     [[+|lambda|, off], [off^T, -|lambda|]] with the off-diagonal
-    blocks containing the angular gradient on S^3 (Paper 32 Def. 3.3
-    "graph form"). A faithful realization in this scalar-Hilbert-
+    blocks containing the angular gradient on S^3. A faithful
+    realization in this scalar-Hilbert-
     space-doubled picture uses a uniform off-diagonal coupling alpha
     on the SO(4) E1 selection rule.
 

@@ -1,4 +1,8 @@
-# Seed-defect catalog (`/qa` per-run calibration controls)
+# Seed-defect catalog (`/qa` calibration controls — opt-in `seeded` mode)
+
+> **Status (2026-09-02, PI direction):** planting is no longer the default for
+> DELTA or FULL runs. This catalog is the instrument `/qa <target> seeded`
+> uses; the standing calibration record lives in `.claude/commands/qa.md`.
 
 The defect classes `/qa` plants — blind, on a throwaway worktree, never on the real corpus — to **measure whether this run's reviewer panel can actually detect dirt** before its verdict is trusted. Each class is drawn from GeoVac's *real* §3 error history, so catching it is genuinely informative about catching the real thing. Every class is **MATERIAL** by construction (these are exactly the things that must be caught).
 

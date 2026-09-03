@@ -148,7 +148,7 @@ class TestOVScaling:
         """
         The total solve time should scale as O(V^a) where a is close to 1.
 
-        We accept a < 1.5 as confirming sub-quadratic (better than O(V^2)).
+        The frozen guard is a < 1.8 (sub-quadratic; measured ~1.0 on this machine).
         True O(V) would give a ~ 1.0.
         """
         target_states = [100, 500, 1000, 3000]
@@ -212,8 +212,10 @@ class TestOVScaling:
 
         fit = fit_scaling_exponent(V_arr, nnz_arr)
 
-        # nnz should scale as V^a where a ~ 1.0 (linear)
-        assert fit['exponent'] < 1.5, (
+        # nnz should scale as V^a where a ~ 1.0 (linear).  Measured 1.07
+        # over max_n = 5..30 (2026-09-02, trunk QA F3.2); the bound is
+        # deterministic (no timing noise) so it is pinned near the value.
+        assert fit['exponent'] < 1.15, (
             f"NNZ scaling exponent {fit['exponent']:.2f} is too high. "
             f"Expected ~1.0 for sparse graphs, got {fit['exponent']:.2f}"
         )

@@ -66,8 +66,8 @@ the framework's substrate-level scale-freedom---the packing diameter
 $d_{0}$ cancelling out of every spectral quantity, and physical
 scales entering only through the Fock-projection focal length
 $p_{0}$---is the geometric expression of the same principle that
-conformal field theory~\cite{klebanov_pufu_safdi2011} embodies at
-the physics level.  GeoVac provides a scale-free mathematical
+conformal field theory embodies at
+the physics level (cf.\ the F-theorem of~\cite{klebanov_pufu_safdi2011}).  GeoVac provides a scale-free mathematical
 substrate; CFT is a scale-free physics theory living on such a
 substrate.  This is not a claim that GeoVac is a CFT; it is a
 structural reflection that explains why the framework reproduces
@@ -102,7 +102,7 @@ maps by stereographic projection onto the free Laplacian on the unit
 three-sphere $S^3$.  This observation has been developed extensively
 by Bargmann~\cite{bargmann1936}, Bander and Itzykson~\cite{bander_itzykson1966},
 Avery~\cite{avery_book1989}, Aquilanti and
-co-workers~\cite{aquilanti_caligiana2003}, and others working in the
+co-workers~\cite{aquilanti_caligiana2002}, and others working in the
 hyperspherical-momentum-space tradition.  In each case, the $S^3$
 structure is treated as an elegant reformulation of a known continuum
 problem: a useful change of variables for analytic work, not a
@@ -161,8 +161,8 @@ reconvergence} (where the branches loop back to a unified foundational
 statement, \S\ref{sec:reconvergence}):\ Paper~54~\cite{loutey_paper54} derives two-body
 selection rules from the tensor-product triple, Paper~55~\cite{loutey_paper55} classifies
 every GeoVac period as cyclotomic mixed-Tate at level $\le 4$,
-Paper~56~\cite{loutey_paper56} closes the cosmic-Galois comparison $U^*_{\mathrm{GV}}
-\hookrightarrow \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$, and Paper~57~\cite{loutey_paper57}
+Paper~56~\cite{loutey_paper56} constructs the cosmic-Galois comparison map $U^*_{\mathrm{GV}}
+\to \mathcal{U}_4^{\mathrm{ab}} \rtimes SL_2$ (a homomorphism, not a closed immersion), and Paper~57~\cite{loutey_paper57}
 catalogues the forced/free seam.  An $O(V)$ time-evolution engine
 (Paper~6~\cite{loutey_paper6}, now an archived standalone tool)
 supplies the dynamical demonstration; this synthesis supersedes the
@@ -173,7 +173,11 @@ Four headline structural results organize the rest of this synthesis.
 limit is conformally equivalent to the unit $S^3$ at the level of the
 Laplace--Beltrami operator (Paper~7~\cite{loutey_paper7});
 \textbf{[MEASURED]} the graph's convergence to that limit is numerical
-(through $n_{\max} = 30$, no rate proven).  \textbf{(H2)} \textbf{[INTERNAL THEOREM]} The angular sparsity
+(through $n_{\max} = 30$, no rate proven), while
+\textbf{[INTERNAL THEOREM]} the state-space Gromov--Hausdorff
+convergence of the spinor spectral truncations is proved
+unconditionally with rate $(4/\pi)\log n_{\max}/n_{\max}$
+(Paper~38~\cite{loutey_paper38}).  \textbf{(H2)} \textbf{[INTERNAL THEOREM]} The angular sparsity
 density of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}): a structural theorem of
 spherical-fermion bases, not a Coulomb-specific accident.
@@ -233,7 +237,7 @@ other identifications are framed as structural correspondences.
 
 The packed lattice acquires a graph structure when the
 $SU(2) \otimes SU(1,1)$ ladder operators of the hydrogen dynamical
-algebra~\cite{barut1967} are imposed as edges:
+algebra~\cite{barut1967,biedenharn1981} are imposed as edges:
 \begin{align}
 L_\pm |n, l, m\rangle &\propto |n, l, m \pm 1\rangle, \\
 T_\pm |n, l, m\rangle &\propto |n \pm 1, l, m\rangle.
@@ -343,15 +347,23 @@ guarantee that the discrete-to-continuum bridge has no hidden steps.
 \textbf{[MEASURED]} The graph Laplacian on the GeoVac lattice converges, in the continuum
 limit $n_{\max} \to \infty$ with appropriate rescaling, to the round
 $S^3$ Laplace--Beltrami operator.  This convergence, stated empirically
-in Paper~7 (verified to $n_{\max} = 30$, without a rate), is now a
-theorem:\ \textbf{[INTERNAL THEOREM]} for the spinor (Dirac) triple it is an unconditional
+in Paper~7 (verified to $n_{\max} = 30$, without a rate), remains
+numerical for the graph Laplacian itself; what is now a theorem is the
+companion statement:\ \textbf{[INTERNAL THEOREM]} for the spinor (Dirac)
+spectral truncations it is an unconditional
 van~Suijlekom state-space Gromov--Hausdorff convergence at rate
 $(4/\pi)\log n_{\max}/n_{\max}$ under the translation-seminorm
 metrization (Paper~38~\cite{loutey_paper38}, operator-algebra arc), with the $4/\pi$ constant
-universal across compact Lie groups (Paper~40~\cite{loutey_paper40}); the scalar
-Laplace--Beltrami convergence that Paper~7's 18 proofs target is the
-prior-art state-space GH result of
-Gaudillot-Estrada--van~Suijlekom (arXiv:2310.14733).  Imposing the energy-shell
+universal across compact connected semisimple Lie groups
+(Paper~40~\cite{loutey_paper40}: rigorous at rank~1, a rank-uniform
+analytical proof a named gap; a circle factor carries $2/\pi$); the
+scalar analogue of that theorem, for the Peter--Weyl spectral
+truncations of $L^2(S^3)$, is the prior-art state-space GH result of
+Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}.  Paper~7's
+18 symbolic checks (several limiting-case or definitional) target the
+conformal-transformation chain, not a convergence statement, and the
+graph-side convergence itself has no theorem or frozen test behind it.
+Imposing the energy-shell
 constraint $p_0 = Z/n$ then maps the unit-sphere eigenvalues
 $\lambda_n = -(n^2 - 1)$ to the hydrogenic Rydberg series
 $E_n = -Z^2 / (2 n^2)$.  The dimensionless graph carries no scale; the
@@ -544,7 +556,7 @@ bit-identical sparsity patterns at matched orbital counts.  The
 universality is structural: the radial-angular factorization of
 $1/r_{12}$ in spherical harmonics (used in quantum chemistry) and the
 Talmi--Moshinsky bracket factorization of central NN potentials in
-oscillator bases (used in nuclear shell models) impose the same
+oscillator bases (used in nuclear shell models~\cite{Suhonen2007}) impose the same
 angular selection rules.  GeoVac's contribution is to state the
 explicit quantitative density at each $l_{\max}$ and to frame it as a
 universal resource guarantee independent of the radial physics.
@@ -586,12 +598,15 @@ specific molecular benchmarks.
 
 Paper~6~\cite{loutey_paper6} extends the framework from spectroscopy
 to time evolution.  \emph{Provenance note:}\ Paper~6 is archived
-within the series;\ the results quoted in this section were re-run
-and reproduce, and their regression backing is live in
-\texttt{tests/test\_rabi\_oscillation.py}.  Until 2026-09-01 that
-backing existed but was never executed by any test run---the file
-was named so that collection skipped it, and its cases were wired
-as a script rather than as tests.  The graph Hamiltonian $H$ is
+within the series.  Of the results quoted in this section, the
+unitarity benchmark and the resonant Rabi oscillation (item (b)
+below) were re-run and reproduce, with regression backing live in
+\texttt{tests/test\_rabi\_oscillation.py};\ until 2026-09-01 that file
+was \texttt{tests/rabi\_oscillation.py}, named so that collection
+skipped it, with its cases wired as a script rather than as tests.
+Items (a), (c) and (d) below are Paper~6's archived measurements with
+no live regression test (a named coverage gap in the claim matrix).
+The graph Hamiltonian $H$ is
 sparse with $O(V)$
 nonzero entries, so the Crank--Nicolson propagator
 \begin{equation}
@@ -600,18 +615,22 @@ nonzero entries, so the Crank--Nicolson propagator
 \end{equation}
 admits implementation at $O(V)$ cost per step using sparse
 matrix-vector products plus iterative linear solves.  \textbf{[MEASURED]} Unitarity is
-preserved to machine precision over $10^4$ time steps in the
-$\mathrm{H}_2$ benchmark reported by Paper~6.
+preserved to $10^{-10}$ (measured $1.1 \times 10^{-13}$) over $10^3$
+time steps in the live hydrogen regression ($n_{\max} = 10$, 385 states);\ Paper~6's original
+$\mathrm{H}_2$ benchmark reported machine precision over $10^4$ steps
+(archived measurement).
 
 \textbf{[MEASURED]} The applications demonstrated in Paper~6 are: (a) broadband molecular
 spectroscopy from a single delta-kick propagation, recovering 20
 dipole-active electronic transitions of H$_2$ with $0.16\%$ mean
 error in 33~seconds; (b) resonant Rabi oscillations matching the
 analytic Bloch--Siegert-corrected period to $0.41\%$ with $99.98\%$
-coherent population transfer; (c) ab initio molecular dynamics with
+coherent population transfer (live hydrogen run, $n_{\max} = 4$,
+30 states); (c) ab initio molecular dynamics with
 nuclei coupled to graph forces via Velocity Verlet, conserving total
 energy to $0.0003\%$; (d) NVT-ensemble Langevin dynamics with stable
-thermal vibrations at 300~K.
+thermal vibrations at 300~K.  Only (b) and the unitarity benchmark
+carry live regression backing (see the provenance note above).
 
 Paper~6 is not a foundational claim in the same sense as Papers 7, 18,
 22, 24, or 31---it is an operational demonstration that the
@@ -699,9 +718,10 @@ The asymmetry as currently catalogued reads:
 \begin{enumerate}
 \item \textbf{Spectrum-computing role of $L_0$.}  On the Coulomb $S^3$
 graph, the graph Laplacian $L_0$ is the spectrum-generating
-operator: $(D - A)$ carries the hydrogenic spectrum $n^2 - 1$ through
-its conformal identification with the continuum $S^3$ Laplace--Beltrami
-operator.  On
+operator: the spectrum of $(D - A)$ approaches the continuum $S^3$
+Laplace--Beltrami spectrum $n^2 - 1$ as $n_{\max} \to \infty$
+(numerically, Paper~7), and the hydrogenic energies follow with the
+matched kinetic scale.  On
 the Bargmann--Segal lattice, $L_0$ is the matter-propagator operator,
 not the Hamiltonian: the spectrum comes from the diagonal Euler
 operator $\hbar \omega(\hat{N} + 3/2)$, and the graph adjacency
@@ -985,7 +1005,7 @@ analysis of the Dirac sector.  Paper~24's HO rigidity and the
 $\pi$-free certificate live in the potential-specific sector and
 explicitly do \emph{not} transfer to the Coulomb side---the
 Bargmann-style first-order operator has no analog on $S^3$.  Paper~25
-(synthesis group) on the SU(2) Wilson lattice gauge structure of the
+(group~5, QED/gauge) on the SU(2) Wilson lattice gauge structure of the
 Hopf graph also lives in the potential-specific sector: it depends on
 the parallelizability of $S^3 = SU(2)$, which has no analog on $S^5$.
 
@@ -1069,10 +1089,10 @@ cyclotomic mixed-Tate periods at level $\le 4$ over $\mathbb{Z}[i, 1/2]$,
 stratified by Mellin slot:\ $M_1 \subset \mathbb{Q}[\pi, \pi^{-1}]$
 (pure-Tate, depth~0), $M_2 \subset \bigoplus_k \pi^{2k}\mathbb{Q}$
 (pure-Tate even-weight, depth~0, a strict refinement of the
-Fathizadeh--Marcolli classification specialized to the static $S^3$
-sub-case), and $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
+Fathizadeh--Marcolli classification~\cite{fathizadeh_marcolli2016}
+specialized to the static $S^3$ sub-case), and $M_3 \subset \mathcal{MT}(\mathbb{Z}[i, 1/2])$ at level
 $\le 4$ (cyclotomic mixed-Tate, via Hurwitz zeta at quarter-integer
-shifts and the Deligne--Glanois descent; the vertex-parity-as-$\chi_{-4}$
+shifts and the Deligne--Glanois descent~\cite{glanois2015}; the vertex-parity-as-$\chi_{-4}$
 correspondence of Paper~28~\cite{loutey_paper28}).  This is the period-theoretic completion of
 the $\mathcal{A}/D$ partition:\ the universal sector's transcendentals
 are pinned to named cyclotomic mixed-Tate rings rather than chased
@@ -1118,7 +1138,8 @@ content is the named deep forward question.
 
 \emph{The elliptic layer (Paper~59~\cite{loutey_paper59}).}  The injection above lands in the
 \emph{mixed-Tate} (genus-zero) cosmic Galois;\ the elliptic (genus-one) layer
-that Paper~56 reaches for---a Hain--Brown mixed-elliptic-motive target---came
+that Paper~56 reaches for---a Hain--Brown mixed-elliptic-motive
+target~\cite{hain2014,brown2014_mmv}---came
 back negative on the abstract $\mathrm{Sym}^2$ panel, structurally because
 GeoVac's periods are $\mathbb{Q}(i)$-CM-pure rather than generically modular.
 \textbf{[MEASURED]} Paper~59 supplies a concrete elliptic period from the chemistry side:\ the
@@ -1305,7 +1326,9 @@ non-relativistic quantum mechanics on natural geometries.
 \textbf{[SYMBOLIC PROOF]} The discrete Fock graph's continuum limit is conformally equivalent to the
 unit $S^3$ Laplace--Beltrami operator (Paper~7~\cite{loutey_paper7}),
 the graph's convergence to that limit being numerical rather than
-proved; \textbf{[INTERNAL THEOREM]} the
+proved, while the state-space GH convergence of the spinor spectral
+truncations is proved with explicit rate in
+Paper~38~\cite{loutey_paper38}; \textbf{[INTERNAL THEOREM]} the
 angular sparsity of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}); the 3D harmonic oscillator admits a
 bit-exactly $\pi$-free discrete encoding on $H^2(S^5)$
@@ -1403,10 +1426,10 @@ J.~Avery,
 \textit{Hyperspherical Harmonics: Applications in Quantum Theory}
 (Kluwer Academic, Dordrecht, 1989).
 
-\bibitem{aquilanti_caligiana2003}
+\bibitem{aquilanti_caligiana2002}
 V.~Aquilanti and A.~Caligiana,
 ``Sturmian approach to one-electron many-center systems: integrals and iteration schemes,''
-Chem.\ Phys.\ Lett.\ \textbf{366}, 157 (2003).
+Chem.\ Phys.\ Lett.\ \textbf{366}, 157 (2002).
 
 \bibitem{connes_book1994}
 A.~Connes,
@@ -1423,11 +1446,6 @@ C.~I.~P\'erez-S\'anchez,
 ``Bratteli networks and the Spectral Action on quivers,''
 arXiv:2401.03705 (2024).
 
-\bibitem{chamseddine_connes1997}
-A.~H.~Chamseddine and A.~Connes,
-``The Spectral Action Principle,''
-Commun.\ Math.\ Phys.\ \textbf{186}, 731 (1997).
-
 \bibitem{CondonShortley1935}
 E.~U.~Condon and G.~H.~Shortley,
 \textit{The Theory of Atomic Spectra}
@@ -1438,30 +1456,10 @@ J.~C.~Slater,
 \textit{Quantum Theory of Atomic Structure}, Vols.~I and~II
 (McGraw-Hill, New York, 1960).
 
-\bibitem{Whitten1973}
-J.~L.~Whitten,
-``Coulombic potential energy integrals and approximations,''
-J.\ Chem.\ Phys.\ \textbf{58}, 4496 (1973).
-
-\bibitem{Dunlap2000}
-B.~I.~Dunlap,
-``Robust and variational fitting,''
-Phys.\ Chem.\ Chem.\ Phys.\ \textbf{2}, 2113 (2000).
-
 \bibitem{Suhonen2007}
 J.~Suhonen,
 \textit{From Nucleons to Nucleus: Concepts of Microscopic Nuclear Theory}
 (Springer, Berlin, 2007).
-
-\bibitem{Peruzzo2014}
-A.~Peruzzo et al.,
-``A variational eigenvalue solver on a photonic quantum processor,''
-Nat.\ Commun.\ \textbf{5}, 4213 (2014).
-
-\bibitem{Lee2021}
-J.~Lee et al.,
-``Even more efficient quantum computations of chemistry through tensor hypercontraction,''
-PRX Quantum \textbf{2}, 030305 (2021).
 
 \bibitem{biedenharn1981}
 L.~C.~Biedenharn and J.~D.~Louck,
@@ -1566,7 +1564,7 @@ J.~Loutey,
 GeoVac Paper~38 (2026).
 \bibitem{loutey_paper40}
 J.~Loutey,
-``State-space Gromov--Hausdorff convergence of spectral truncations of compact Lie groups with bi-invariant metric,''
+``State-space Gromov--Hausdorff convergence of spectral truncations of compact semisimple Lie groups with bi-invariant metric,''
 GeoVac Paper~40 (2026).
 \bibitem{loutey_paper51}
 J.~Loutey,
@@ -1592,6 +1590,32 @@ GeoVac Paper~57 (2026).
 J.~Loutey,
 ``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel Moment: Genus One at the Third Center in Momentum-Space Slater Theory,''
 GeoVac Paper~59 (2026).
+
+\bibitem{gaudillot_vs2025}
+Y.~Gaudillot-Estrada and W.~D.~van~Suijlekom,
+``Convergence of spectral truncations for compact metric groups,''
+Int.\ Math.\ Res.\ Not.\ IMRN \textbf{2025}, no.~13, rnaf197 (2025); arXiv:2310.14733.
+
+\bibitem{fathizadeh_marcolli2016}
+F.~Fathizadeh and M.~Marcolli,
+``Periods and motives in the spectral action of Robertson--Walker spacetimes,''
+Comm.\ Math.\ Phys.\ \textbf{356}, 641--671 (2017); arXiv:1611.01815.
+
+\bibitem{glanois2015}
+C.~Glanois,
+``Motivic unipotent fundamental groupoid of $\mathbb{G}_m \setminus \mu_N$ for $N = 2, 3, 4, 6, 8$ and Galois descents,''
+J.\ Number Theory \textbf{160}, 334--384 (2016); arXiv:1411.4947.
+
+\bibitem{hain2014}
+R.~Hain,
+``The Hodge-de Rham theory of modular groups,''
+in \emph{Recent advances in Hodge theory} (LMS Lecture Notes 427, Cambridge Univ.\ Press, 2016) 422--514; arXiv:1403.6443.
+
+\bibitem{brown2014_mmv}
+F.~Brown,
+``Multiple modular values and the relative completion of the fundamental group of $M_{1,1}$,''
+arXiv:1407.5167 (2014; v4, 2017).
+
 \end{thebibliography}
 
 \end{document}

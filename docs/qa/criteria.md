@@ -131,10 +131,13 @@ primary; group3 Papers 22/31 already carry the D-vs-D_pd disclosure).
 
 ## Verdict rule
 
-A branch **PASSES** only when a *calibrated* reviewer panel returns **zero
-MATERIAL defects** against every criterion, across every gating dimension, and
-independent reviewers converge. Any verified MATERIAL defect ⇒ **FAIL**. Any
-gating dimension unexercised or uncalibrated ⇒ **INCONCLUSIVE** (not PASS). The
+A branch **PASSES** only when the reviewer panel (calibrated, if the run is
+`seeded`) returns **zero MATERIAL defects** against every criterion, across
+every gating dimension, and independent reviewers converge. Any verified
+MATERIAL defect ⇒ **FAIL**. Any gating dimension unexercised (or, in `seeded`
+mode, uncalibrated) ⇒ **INCONCLUSIVE** (not PASS). *Seeded calibration is an
+opt-in instrument since 2026-09-02 (PI direction); a default run cites the
+standing calibration record in `.claude/commands/qa.md`.* The
 verdict is the **AND across all review dimensions** (below).
 
 ## Criteria (C1–C14; each binary — holds / does not)
@@ -413,11 +416,12 @@ is probably the certifying run" four times. Run shapes are therefore:
   full run can produce **PASS** (an unexercised dimension still forces
   INCONCLUSIVE — unchanged).
 - **Delta-verification run** — after any FAIL→remediation. Scope = the git
-  diff since the last calibrated run: one reviewer per **affected** dimension;
+  diff since the last reviewed run: one reviewer per **affected** dimension;
   the changed loci **pasted into the prompt** with surrounding context
   (paste-don't-point — the reviewer does not re-read 3,000-line papers to see
-  20 lines); **≥1 seed planted in the diff** per dispatched agent (calibration
-  still per-agent); deterministic gates still run **whole-target** (they are
+  20 lines); in `seeded` mode **≥1 seed planted in the diff** per dispatched
+  agent (calibration still per-agent); deterministic gates still run
+  **whole-target** (they are
   free and guard the unchanged surface). Verdict: **CLEAN-DELTA / DEFECTS** —
   a delta run can never produce PASS; **a clean delta is the precondition for
   firing the full certifying run.** Skip the completeness-critic on deltas.
@@ -434,7 +438,17 @@ Opus shows severity variance). The seeded-calibration design converts model
 adequacy from a prior into a per-run *measurement*: a tiered agent that
 misses its seed is de-calibrated and its dimension is re-dispatched on the
 Opus tier (the run-6 P16 recovery pattern). When a dimension runs below the
-Opus tier, plant **two seeds** for that agent (calibration resolution).
+Opus tier in a `seeded` run, plant **two seeds** for that agent (calibration
+resolution). In default (unseeded) runs the tier assignments stand as
+measured.
+*Measured exceptions (PI direction; full measurements in
+`.claude/commands/qa.md` step 4):* **citations** go to Opus for any target
+with more than ~50 bibitems (2026-09-01, trunk FULL run: Sonnet 0/2 seeds
+vs Opus 2/2 on identical files); **code** goes to Opus on the trunk roots
+(Papers 0, 1, 7, 32, 38) and on any file whose tests assert a convergence
+endpoint, and carries **three seeds** per Sonnet agent elsewhere
+(2026-09-02, trunk FULL run #2: Sonnet code 6/8 on guided seeds, both misses
+whole-file reads graded BACKED-SOUND while holding the class hint).
 
 **Terser reporting contract (2026-07-02).** The enumeration mandate governs
 the *reading*; the *report* is: defects + two-way upgrades + a compact
@@ -444,9 +458,10 @@ by the coverage checklist, the seeds, and PM spot-checks, not by report prose.
 
 ## Coverage honesty
 
-"PASS" means the branch **survived the calibrated detectors for the defect
-classes in `docs/qa/seed_defects.md` and the criteria above, across all review
-dimensions** — not that it is provably perfect. A run names any criterion or
+"PASS" means the branch **survived the criteria above across all review
+dimensions, with reviewers whose discrimination was last measured in the
+standing seeded runs** (or in this run, if `seeded`) — not that it is provably
+perfect. A run names any criterion or
 defect-class it could not exercise; an unexercised gating dimension is
 INCONCLUSIVE, not a footnoted PASS. When a new defect class is discovered (the
 way §3 dead-ends grow), it is added here and to the seed catalog, and the bar
@@ -458,11 +473,13 @@ quietly rises.
   suggests it each sprint.
 - Pre-registered criteria (this file + the branch profile) are **frozen before**
   the review — no goalpost-moving in either direction.
-- Seeds live only in the throwaway worktree; never commit/leak them; always
-  remove the worktree.
-- A reviewer's verdict is trusted only **after** it passes calibration (caught
-  the plants, passed the controls). An uncalibrated panel ⇒ INCONCLUSIVE, never
-  PASS.
+- In `seeded` mode seeds live only in the throwaway worktree; never commit/leak
+  them; always remove the worktree.
+- In `seeded` mode a reviewer's verdict is trusted only **after** it passes
+  calibration (caught the plants, passed the controls); an uncalibrated panel
+  ⇒ INCONCLUSIVE, never PASS. In default mode trust rests on the standing
+  calibration record plus PM verification of every MATERIAL finding against
+  primary text or code (2026-09-02, PI direction).
 - **All dimensions every run.** The verdict is the AND across all dimensions; an
   unexercised gating dimension forces INCONCLUSIVE, not PASS.
 
@@ -735,3 +752,5 @@ The selftest was also rebuilt: check A originally proved it could fire by
 pointing at those two real defects, which would have made the selftest stop
 working the moment they were fixed. **A selftest that needs the corpus to be
 broken is backwards**; it now fires against a synthetic probe.
+
+- 2026-09-02 (PI direction) — **seeded calibration made opt-in** (`/qa <target> seeded`); default DELTA/FULL runs are unseeded and cite the standing calibration record; INCONCLUSIVE = unexercised dimension (or uncalibrated, when seeded). Model-tier assignments stand as measured.

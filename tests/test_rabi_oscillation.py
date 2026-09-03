@@ -36,8 +36,8 @@ Beyond-RWA correction:
     the period error from 0.46% (RWA) to 0.41% (BS-corrected).
 
 Validation:
-    1. Norm conservation:  ||psi(t)|| = 1 to machine precision  (max_n=10)
-    2. Rabi accuracy:      Peak P_target > 0.95, period error < 0.5%  (max_n=4)
+    1. Norm conservation:  ||psi(t)|| = 1 to 1e-10 (measured 1.1e-13)  (max_n=10)
+    2. Rabi accuracy:      Peak P_target > 0.999, period error < 0.45%  (max_n=4)
     3. Off-resonance:      Detuned drive produces suppressed transfer  (max_n=4)
 
 Date: February 23, 2026
@@ -242,8 +242,8 @@ def run_rabi_oscillation(sys_info: dict) -> dict:
     interpolation for sub-step peak detection.
 
     Validates:
-      - Peak P_target > 0.95   (clean population transfer)
-      - Period error < 0.5%    (beyond-RWA precision)
+      - Peak P_target > 0.999  (clean population transfer)
+      - Period error < 0.45%   (beyond-RWA precision)
     """
     print("\n" + "#" * 70)
     print("TEST 2: WEAK-FIELD RABI OSCILLATION (max_n=4, 30 states)")
@@ -355,7 +355,7 @@ def run_rabi_oscillation(sys_info: dict) -> dict:
 
     print(f"\n  --- Results ---")
     print(f"  Peak P_target:      {p_tgt_peak:.6f}  "
-          f"(target: > 0.95)")
+          f"(target: > 0.999)")
     print(f"  P_gs at peak:       {p_gs_at_peak:.6f}")
     print(f"  Leakage (1-Pgs-Pt): {leakage:.6f}")
     print(f"  t_sim(peak):        {t_sim_peak:.2f} a.u. "
@@ -363,7 +363,7 @@ def run_rabi_oscillation(sys_info: dict) -> dict:
     print(f"  T_half(BS):         {T_half:.2f} a.u. "
           f"(RWA: {T_half_rwa:.2f})")
     print(f"  Period error (BS):  {period_error:.4f}%  "
-          f"(target: < 0.5%)")
+          f"(target: < 0.45%)")
     print(f"  Period error (RWA): {period_error_rwa:.4f}%")
     print(f"  Norm max deviation: {norm_max_dev:.2e}")
     print(f"  Wall time:          {wall_time:.1f}s")
@@ -378,23 +378,23 @@ def run_rabi_oscillation(sys_info: dict) -> dict:
         print(f"    {t_i:10.2f}  {p1:8.5f}  {p2:8.5f}  {p1+p2:8.5f}")
 
     # Validation
-    pass_population = p_tgt_peak > 0.95
-    pass_period = period_error < 0.5
-    pass_norm = norm_max_dev < 1e-6
+    pass_population = p_tgt_peak > 0.999   # measured 0.999756 (2026-09-02)
+    pass_period = period_error < 0.45      # measured 0.4106% (2026-09-02)
+    pass_norm = norm_max_dev < 1e-10       # measured 2.9e-13 (2026-09-02)
     passed = pass_population and pass_period and pass_norm
 
     print(f"\n  --- Validation ---")
     print(f"  [{'PASS' if pass_population else 'FAIL'}] "
-          f"Peak P_target = {p_tgt_peak:.4f} > 0.95")
+          f"Peak P_target = {p_tgt_peak:.4f} > 0.999")
     print(f"  [{'PASS' if pass_period else 'FAIL'}] "
-          f"Period error (BS) = {period_error:.4f}% < 0.5%")
+          f"Period error (BS) = {period_error:.4f}% < 0.45%")
     print(f"  [{'PASS' if pass_norm else 'FAIL'}] "
-          f"Norm deviation = {norm_max_dev:.2e} < 1e-6")
+          f"Norm deviation = {norm_max_dev:.2e} < 1e-10")
     print(f"\n  Status: {'OK PASS' if passed else 'FAIL'}")
 
-    assert pass_population, f"Rabi peak P_target={p_tgt_peak:.4f} < 0.95"
-    assert pass_period, f"Rabi period error {period_error:.4f}% >= 0.5%"
-    assert pass_norm, f"Rabi norm deviation {norm_max_dev:.2e} >= 1e-6"
+    assert pass_population, f"Rabi peak P_target={p_tgt_peak:.4f} <= 0.999"
+    assert pass_period, f"Rabi period error {period_error:.4f}% >= 0.45%"
+    assert pass_norm, f"Rabi norm deviation {norm_max_dev:.2e} >= 1e-10"
 
     return {
         'test': 'rabi_oscillation',
@@ -475,16 +475,16 @@ def run_off_resonance(sys_info: dict) -> dict:
     t1 = time.time()
 
     p_tgt_max = state['p_tgt_max']
-    pass_suppressed = p_tgt_max < 0.5
+    pass_suppressed = p_tgt_max < 0.01     # measured 0.003725, RWA 0.0041 (2026-09-02)
     passed = pass_suppressed
 
     print(f"\n  Peak P_target (off-res): {p_tgt_max:.6f}")
     print(f"  Wall time: {(t1-t0)*1000:.0f} ms")
     print(f"\n  [{'PASS' if pass_suppressed else 'FAIL'}] "
-          f"P_target = {p_tgt_max:.4f} < 0.50 (suppressed vs resonant)")
+          f"P_target = {p_tgt_max:.4f} < 0.01 (suppressed vs resonant)")
     print(f"\n  Status: {'OK PASS' if passed else 'FAIL'}")
 
-    assert passed, f"Off-resonance P_target={p_tgt_max:.4f} >= 0.50 (not suppressed)"
+    assert passed, f"Off-resonance P_target={p_tgt_max:.4f} >= 0.01 (not suppressed)"
 
     return {
         'test': 'off_resonance',

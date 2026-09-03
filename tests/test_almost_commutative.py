@@ -8,7 +8,12 @@ Architecture (PI directive 2026-05-06):
 - Use TRUTHFUL CH only.
 - H_F is doubled into matter/antimatter following Connes-Marcolli 2008 Ch. 13.
 - J_F swaps matter <-> antimatter; J_F^2 = +I (KO-dim 6 of A_F).
-- KO(combined) = 3 + 6 = 9 ≡ 1 (mod 8); J^2 = -I, JD = +DJ.
+- Combined signs J^2 = -I, JD = +DJ: the (epsilon, epsilon') = (-, +)
+  sign pair (2026-09-02: no finite-cutoff KO label is attached -- the pair
+  is shared by KO-2/3/4 and the finite grading reads as KO-4; the
+  additive 3 + 6 ≡ 1 (mod 8) does not apply to the ungraded sum
+  D_GV ⊗ 1 + gamma_GV ⊗ D_F -- see the
+  module docstring and Paper 32 Sec. Sprint H1).
 
 Test plan
 =========
@@ -399,17 +404,28 @@ class TestCombinedRealStructure:
         assert np.allclose(U @ U.conj().T, I, atol=1e-12)
 
     def test_J_combined_squared_minus_I(self):
-        # J^2 = J_GV^2 (x) J_F^2 = (-I)(+I) = -I
-        # Combined KO-dim = 3 + 6 = 9 ≡ 1 (mod 8) -> J^2 = -I
+        # J^2 = J_GV^2 (x) J_F^2 = (-I)(+I) = -I  (epsilon = -1)
         T = minimal_electroweak_triple(2)
         U = T.real_structure_combined()
         J2 = U @ np.conj(U)
         I = np.eye(T.dim_H, dtype=np.complex128)
         assert np.allclose(J2, -I, atol=1e-12)
 
-    def test_J_combined_KO1_sign(self):
-        """Combined KO-dim 1 should give (epsilon, eps')=(-, +)."""
-        T = minimal_electroweak_triple(2, yukawa_e=0.1, yukawa_nu=0.05)
+    @pytest.mark.parametrize("n_max", [1, 2, 3])
+    def test_J_combined_sign_pair(self, n_max):
+        """Combined signs are (epsilon, eps') = (-, +): the GV factor's pair.
+
+        Parametrised over n_max in {1, 2, 3} (2026-09-02, trunk DELTA
+        CODE-C): Paper 32 states the signs are verified at n_max <= 3.
+
+        The GV factor's own signs survive the tensor product with J_F
+        (J_F^2 = +I, J_F D_F = +D_F J_F) because gamma_GV = sign(D_GV) is a
+        function of D_GV.  This is NOT KO-1 = (+, -), which the additive
+        rule 3 + 6 ≡ 1 (mod 8) would assign to the GRADED product
+        D_GV ⊗ gamma_F + 1 ⊗ D_F (Dabrowski-Dossena 2011); the module
+        builds the ungraded sum.  Paper 32 Sec. Sprint H1.
+        """
+        T = minimal_electroweak_triple(n_max, yukawa_e=0.1, yukawa_nu=0.05)
         D = T.dirac_combined()
         U = T.real_structure_combined()
         # JD as antilinear: U conj(D) = sign * D U
@@ -418,13 +434,33 @@ class TestCombinedRealStructure:
         RHS_minus = -D @ U
         err_plus = float(np.max(np.abs(LHS - RHS_plus)))
         err_minus = float(np.max(np.abs(LHS - RHS_minus)))
-        # We expect (+) sign to fit (KO-1)
+        # The (+) sign fits: epsilon' = +1
         assert err_plus < err_minus, (
             f"err_plus={err_plus:.3e}, err_minus={err_minus:.3e}; "
-            f"expected JD = +DJ for KO-1"
+            f"expected JD = +DJ (measured sign pair)"
         )
         # And it should hold to high precision
         assert err_plus < 1e-12, f"JD = +DJ residual: {err_plus:.3e}"
+        # KO-1 would be (+, -).  (-, +) alone does NOT fix a KO-dimension:
+        # KO-2, KO-3 and KO-4 share it; KO-3 is the odd continuum GV factor's
+        # own label.
+        # Measured fact (2026-09-02, trunk DELTA #2, CODE-C): with the
+        # production chirality grading build_gamma_GV(n_max) (x) 1_F the
+        # FINITE combined triple is even -- gamma^2 = I, {gamma, D} = 0 and
+        # J gamma = +gamma J bit-exactly -- i.e. (eps, eps', eps'') = (-, +, +),
+        # the KO-4 column.  (T.gamma_GV() is sign(D_GV) and is not a grading
+        # of D; an earlier version of this test asserted "oddness" with it,
+        # which could not fail.)  Per PI direction (2026-09-02) no KO label is
+        # attached to the finite truncation; the signs below are the recorded
+        # content.
+        from geovac.chirality_grading import build_gamma_GV
+        g_gv = build_gamma_GV(n_max).matrix
+        gamma = np.kron(g_gv, np.eye(D.shape[0] // g_gv.shape[0]))
+        assert np.linalg.norm(gamma @ gamma - np.eye(D.shape[0])) < 1e-12
+        assert np.linalg.norm(gamma @ D + D @ gamma) < 1e-12, "grading must anticommute with D"
+        assert np.linalg.norm(U @ np.conj(gamma) - gamma @ U) < 1e-12, "eps'' = +1 with this grading"
+        J2 = U @ np.conj(U)
+        assert np.allclose(J2, -np.eye(T.dim_H), atol=1e-12)
 
 
 # ===========================================================================
@@ -489,6 +525,44 @@ class TestInnerFluctuations:
         D_omega = T.fluctuated_dirac(omega, epsilon_prime=+1)
         D = T.dirac_combined()
         assert np.allclose(D_omega, D, atol=1e-12)
+
+    def test_fluctuated_dirac_J_compatible(self):
+        """D_omega = D + omega + eps' J omega J^{-1} must satisfy
+        J D_omega J^{-1} = eps' D_omega for a NONZERO Hermitian omega.
+
+        This is what the real structure is for: the fluctuated Dirac keeps
+        the sign relation of the bare one.  With eps' = +1 (the measured
+        sign, now the default) and J^{-1} = K U^dagger the residual is
+        zero; the fire direction below shows that eps' = -1 with the
+        correct U^dagger is NOT J-compatible.  (Until 2026-09-02 the
+        default was eps' = -1 with U.T, two errors that cancel because the
+        combined U is purely imaginary -- so this test could not have
+        distinguished them; it pins the corrected form.)
+        """
+        T = minimal_electroweak_triple(2, yukawa_e=0.5, yukawa_nu=0.3)
+        I_GV = np.eye(T.dim_GV, dtype=np.complex128)
+        M = T.gv_multiplier(1)
+        gens = [(M, 0.7 + 0.3j, (0.4, 0.2, 0.1, 0.05),
+                 I_GV, 0.5, (0.6, 0.3, 0.2, 0.1))]
+        omega = T.inner_fluctuation_one_form(gens)
+        omega = omega + omega.conj().T      # Hermitian one-form
+        assert np.linalg.norm(omega) > 1e-6
+        U = T.real_structure_combined()
+        Udag = U.conj().T
+
+        def J_conj(X):
+            return U @ np.conj(X) @ Udag
+
+        D_A = T.fluctuated_dirac(omega)          # default eps' = +1
+        assert np.allclose(J_conj(D_A), D_A, atol=1e-10)
+        # Silent on the explicit +1 as well.
+        assert np.allclose(D_A, T.fluctuated_dirac(omega, epsilon_prime=+1))
+        # Fire direction: eps' = -1 breaks J-compatibility for this omega.
+        D_wrong = T.fluctuated_dirac(omega, epsilon_prime=-1)
+        assert not np.allclose(J_conj(D_wrong), D_wrong, atol=1e-10)
+        # And the combined U is purely imaginary (U.T = -U^dagger), which
+        # is why the old (-1, U.T) pair was numerically indistinguishable.
+        assert np.allclose(U.T, -Udag, atol=1e-12)
 
 
 # ===========================================================================

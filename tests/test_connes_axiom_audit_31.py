@@ -288,14 +288,18 @@ def test_axiom_v_chi_D_anticomm_fails_at_Nt1_on_truthful_DGV(n_max, N_t):
 # ---------------------------------------------------------------------------
 
 
-@pytest.mark.parametrize("n_max,N_t", [(1, 1), (2, 1), (3, 1)])
+@pytest.mark.parametrize("n_max,N_t", [(n, t) for t in (1, 11, 21) for n in (1, 2, 3)])
 def test_axiom_vi_order_zero_small_at_finite_resolution(n_max, N_t):
-    """[a, J_L b J_L^{-1}] residual is bounded (Paper 32 §IV scope).
+    """[a, J_L b J_L^{-1}] residual matches the Paper 32 axiom table.
 
-    Paper 32 §IV reports 5-20% residual on Riemannian side as finite-
-    resolution artifact analogous to multiplicative-closure failure of
-    the Connes-vS truncated operator system.  Lorentzian side should
-    preserve this scope (residual <= 0.5 max as a generous bound).
+    Paper 32's Lorentzian axiom table prints "<= 0.0675 finite-resolution
+    (sample-of-3)" for axiom (vi).  The residual is pinned per cell to the
+    measured value with a 5% margin (2026-09-02, trunk QA F1.11; the
+    previous `< 0.5` guard could not distinguish the printed value from
+    a 7x larger one):
+        n_max = 1 : 0        (exact; the n_max=1 block is a scalar)
+        n_max = 2 : 0.050661
+        n_max = 3 : 0.067547   <- the table's 0.0675
     """
     krein = KreinSpace(n_max=n_max, N_t=N_t)
     U_L = lorentzian_real_structure_matrix(krein)
@@ -306,15 +310,27 @@ def test_axiom_vi_order_zero_small_at_finite_resolution(n_max, N_t):
         for m in op_sys.multiplier_matrices[:3]
     ]
     _, n_failures, max_res = verify_order_zero(U_L, A_basis, tol=1e-10)
-    # Allow finite-resolution residual up to 0.5 (paper 32 §IV scope says ~5-20%)
-    assert max_res < 0.5, (
-        f"Order-zero residual {max_res} > 0.5 at (n_max={n_max}, N_t={N_t})"
+    expected = {1: 0.0, 2: 0.050661, 3: 0.067547}[n_max]
+    assert max_res <= expected * 1.05 + 1e-9, (
+        f"Order-zero residual {max_res} exceeds the pinned {expected} "
+        f"at (n_max={n_max}, N_t={N_t})"
+    )
+    assert max_res >= expected * 0.95 - 1e-9, (
+        f"Order-zero residual {max_res} is below the pinned {expected}; "
+        "re-measure and update the Paper 32 table"
     )
 
 
-@pytest.mark.parametrize("n_max,N_t", [(1, 1), (2, 1), (3, 1)])
+@pytest.mark.parametrize("n_max,N_t", [(n, t) for t in (1, 11, 21) for n in (1, 2, 3)])
 def test_axiom_vii_order_one_small_at_finite_resolution(n_max, N_t):
-    """[[D_L, a], J_L b J_L^{-1}] residual is bounded (Paper 32 §IV scope)."""
+    """[[D_L, a], J_L b J_L^{-1}] residual matches the Paper 32 axiom table.
+
+    Paper 32's Lorentzian axiom table prints "<= 0.101 finite-resolution
+    (sample-of-3)" for axiom (vii).  Pinned per cell (2026-09-02, F1.11):
+        n_max = 1 : 0
+        n_max = 2 : 0.101321
+        n_max = 3 : 0.101321   <- the table's 0.101
+    """
     krein = KreinSpace(n_max=n_max, N_t=N_t)
     U_L = lorentzian_real_structure_matrix(krein)
     D_L = lorentzian_dirac_matrix(krein)
@@ -325,8 +341,14 @@ def test_axiom_vii_order_one_small_at_finite_resolution(n_max, N_t):
         for m in op_sys.multiplier_matrices[:3]
     ]
     _, n_failures, max_res = verify_order_one(U_L, A_basis, D_L, tol=1e-10)
-    assert max_res < 0.5, (
-        f"Order-one residual {max_res} > 0.5 at (n_max={n_max}, N_t={N_t})"
+    expected = {1: 0.0, 2: 0.101321, 3: 0.101321}[n_max]
+    assert max_res <= expected * 1.05 + 1e-9, (
+        f"Order-one residual {max_res} exceeds the pinned {expected} "
+        f"at (n_max={n_max}, N_t={N_t})"
+    )
+    assert max_res >= expected * 0.95 - 1e-9, (
+        f"Order-one residual {max_res} is below the pinned {expected}; "
+        "re-measure and update the Paper 32 table"
     )
 
 
@@ -456,9 +478,10 @@ def test_audit_at_4_6_n_max_1_load_bearing_pass():
 
 
 def test_audit_at_4_6_four_bbb_axioms_pass_at_all_panel_cells():
-    """The four BBB-predicted-sign axioms pass at every (n_max, N_t)."""
+    """The four BBB-predicted-sign axioms pass at every (n_max, N_t) of the
+    paper's panel {1,2,3} x {1,11,21} (N_t = 21 added 2026-09-02, DELTA #2)."""
     for n_max in [1, 2, 3]:
-        for N_t in [1, 11]:
+        for N_t in [1, 11, 21]:
             r = audit_at_4_6(n_max=n_max, N_t=N_t, sample_size=2)
             for ax in ['(i)_J_L_squared_plus_I',
                        '(ii)_J_L_anticomm_chi',

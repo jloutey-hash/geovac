@@ -92,26 +92,39 @@ where sigma_x is the swap matrix.
 
 Verification: J_F^2 = sigma_x conj(sigma_x) = sigma_x sigma_x = +I.
 
-So J_F^2 = +I, giving KO-dim of T_F in {0, 4, 6, 7}. The standard
+So J_F^2 = +I, giving KO-dim of T_F in {0, 1, 6, 7} (epsilon = +1 in
+Connes' table; KO-4 has epsilon = -1). The standard
 Connes-Marcolli SM convention places T_F at KO-dim 6 (Connes-Marcolli
 Table 13.1), with J_F D_F = +D_F J_F.
 
 For our electroweak slice C ⊕ H this convention gives KO-dim 6
 matching the Standard Model spectral triple's KO-dim.
 
-Combined KO-dim
----------------
+Combined signs (relabelled 2026-09-02; Paper 32 Sec. Sprint H1)
+-----------------------------------------------------------------
 
-For T_combined = T_GV ⊗ T_F with KO(GV) = 3, KO(F) = 6:
-    KO(combined) = 3 + 6 = 9 ≡ 1 (mod 8)
-    epsilon_combined = epsilon_GV * epsilon_F = (-1)(+1) = -1
+For the combined operator D = D_GV ⊗ 1_F + gamma_GV ⊗ D_F with
+gamma_GV = sign(D_GV) (a function of D_GV, so it commutes with it) and
+J = J_GV ⊗ J_F, the signs follow factor by factor:
+    epsilon_combined  = epsilon_GV  * epsilon_F  = (-1)(+1) = -1
     epsilon'_combined = epsilon'_GV * epsilon'_F = (+1)(+1) = +1
+So J^2 = -I and JD = +DJ: the (epsilon, epsilon') = (-, +) pair -- the GV
+factor's own signs, which J_F leaves unchanged; in Connes' sign table the
+pair is shared by the KO-2, KO-3 and KO-4 columns.
 
-KO-dim 1: (epsilon, epsilon') = (-, +) per the standard sign table.
-So J^2 = -I and JD = +DJ.
-
-This is consistent with the multiplication rules for tensor products of
-real spectral triples (Connes-Marcolli 2008 Sec. 13.4).
+This is NOT the additive KO(GV) + KO(F) = 3 + 6 ≡ 1 (mod 8) that an
+earlier version of this docstring claimed -- KO-1 has (epsilon, epsilon')
+= (+, -), the opposite of what is measured.  The additive rule is a
+theorem about the graded product D_GV ⊗ gamma_F + 1 ⊗ D_F (Dabrowski &
+Dossena 2011, IJGMMP 8, 1833, eq. 10), and for that product with Connes'
+KO-6 real structure on T_F their Table 5 gives no consistent epsilon'
+at all.  This module builds the ungraded sum, so the additive rule does
+not apply; the triple is labelled by its measured signs.
+(2026-09-02, PI direction: NO KO-dimension label is attached to the finite
+triple.  With the production grading build_gamma_GV (x) 1_F the finite
+combined triple is even with epsilon'' = +1 -- the KO-4 column -- while the
+continuum GV factor is KO-3; the recorded content is the measured sign
+triple (-, +, +).  See Paper 32, Sec. Sprint H1.)
 
 CRUCIAL STRUCTURAL CONSEQUENCE OF MATTER/ANTIMATTER DOUBLING:
 
@@ -529,7 +542,9 @@ class AlmostCommutativeTriple:
     def real_structure_combined(self) -> np.ndarray:
         """J = J_GV ⊗ J_F as a unitary U so that J(psi) = U @ conj(psi).
 
-        Combined J^2 = (-1)*(-1) = +1 (KO-dim shifts 3+2 = 5).
+        Combined J^2 = J_GV^2 ⊗ J_F^2 = (-1)(+1) = -I and JD = +DJ: the
+        (epsilon, epsilon') = (-, +) sign pair (module docstring; no
+        finite-cutoff KO label is attached).
         """
         return np.kron(self._J_GV.U, self._J_F_U)
 
@@ -587,16 +602,26 @@ class AlmostCommutativeTriple:
     def fluctuated_dirac(
         self,
         omega: np.ndarray,
-        epsilon_prime: int = -1,
+        epsilon_prime: int = +1,
     ) -> np.ndarray:
         """D_omega = D + omega + epsilon' * J omega J^{-1}.
 
-        For combined KO-dim 5, epsilon' = -1.
-        For an antilinear J = U K, J op J^{-1} = U conj(op) U^T.
+        epsilon' is the measured sign in J D = epsilon' D J, which is +1
+        for this triple (see the module docstring), so the
+        default reproduces Paper 32's D_A = D + A + J A J^{-1}.
+        For an antilinear J = U K, J^{-1} = K U^dagger and hence
+        J op J^{-1} = U conj(op) U^dagger.
+
+        History (2026-09-02): the previous default was epsilon' = -1 with
+        U.T in place of U^dagger.  Because the combined U is purely
+        imaginary here (U.T = -U^dagger), the two errors cancelled
+        numerically and no published number moved; both are now correct
+        by construction, and ``test_fluctuated_dirac_J_compatible``
+        pins the J-invariance of D_omega for a nonzero omega.
         """
         D = self.dirac_combined()
         U = self.real_structure_combined()
-        J_omega_Jinv = U @ np.conj(omega) @ U.T
+        J_omega_Jinv = U @ np.conj(omega) @ U.conj().T
         return D + omega + epsilon_prime * J_omega_Jinv
 
     # ------------------------------------------------------------------

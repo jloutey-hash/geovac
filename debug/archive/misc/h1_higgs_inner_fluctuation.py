@@ -96,7 +96,10 @@ def build_fluctuated_dirac(
         ))
 
     omega = T.inner_fluctuation_one_form(generators)
-    D_A = T.fluctuated_dirac(omega, epsilon_prime=-1)
+    # 2026-09-02: was epsilon_prime=-1 against the old U.T implementation;
+    # fluctuated_dirac now uses U^dagger, so +1 reproduces the identical
+    # D + omega + J omega J^{-1} this script always computed.
+    D_A = T.fluctuated_dirac(omega, epsilon_prime=+1)
 
     # Hermiticity check of D_A
     D_A_herm_res = float(np.linalg.norm(D_A - D_A.conj().T))

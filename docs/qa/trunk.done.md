@@ -7,9 +7,13 @@
 > document where the trunk FULL run's C9 zombie lived. A reviewer scoping from
 > this banner would have skipped it.)*
 >
-> **2026-09-01 `/qa trunk` FULL run = FAIL** (calibrated 13/13, 0 false
-> positives). Remediation scope: `docs/qa/trunk.carryforward.md`; run record:
-> `debug/qa/trunk_full_run_2026_09_01_notes.md`.
+> **2026-09-01 `/qa trunk` FULL run #1 = FAIL** (calibrated 13/13, 0 false
+> positives). **2026-09-01/02 FULL run #2 = FAIL** (19/21 seeds, 0/8 false
+> positives; two Sonnet code chunks PARTIAL 1/2 → the P0/P7 tests are
+> INCONCLUSIVE on the S3 class and the P32 tests on the S2 class; every LLM
+> dimension FAIL on content; 13/13 deterministic gates PASS). Remediation
+> scope: `docs/qa/trunk.carryforward.md` (run-#2 section + Part F); run
+> record: `debug/qa/trunk_full_run_2026_09_01_notes.md` §5.
 >
 > **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
 >
@@ -55,3 +59,46 @@ re-prices everything above it.
   (κ "derivable", K "conjectural"). Run #4 = **PASS** (8/8 seeds).
 - 2026-06-16 — **slimmed to a profile**; C1–C13 + rules moved verbatim to
   `docs/qa/criteria.md` (no criterion changed). PASS status unaffected.
+- 2026-09-01 — FULL run #1 = **FAIL** (see banner). C3 inline-tier pass,
+  reverse-citation pass, and the C11 could-not-fail fix followed the same day
+  (run record §§1c–1g).
+- 2026-09-02 — FULL run #2 (dispatched 2026-09-01, PI-directed FULL rather
+  than the DELTA the carryforward asked for) = **FAIL**. Criteria frozen as at
+  `dbe7ae2`; nothing added or relaxed. Two C16 registry entries added with
+  two-way discrimination proofs (`latremoliere-propinquity-named-for-gh-rate`,
+  `p45-kplus-compression-theorem-live`). Code dimension certified only on the
+  seed classes each Sonnet agent demonstrably caught; delta-run seeding
+  requirements in the carryforward.
+- 2026-09-02 (v5.3.0) — the five PI items from run #2 executed (Part F
+  F1.1/F1.2/F2.1/F2.2/F6). **Gate change (PI-authorized, criteria.md +
+  qa.md):** CODE dimension → Opus on the trunk roots and on any file whose
+  tests assert a convergence endpoint; three seeds per Sonnet code agent
+  elsewhere. Three more C16 entries, two-way proven (registry 30 → 33). The
+  FAIL stands; the rest of Part F and the DELTA are still owed.
+- 2026-09-02 (v5.3.1) — Part F remediation complete (F1.3–F4.6, 30 rows,
+  each with its DONE note) plus seven findings the remediation surfaced
+  (F7.10–F7.16: Paper 40 semisimple scope, the dim_H = g₃ coincidence at
+  five loci, c²(4,3), wall-entry arithmetic, two order-of-magnitude
+  restatements, a bibitem-key collision, and the widened C16 entry finding
+  eight more loci in Paper 18 + the group1 synthesis). All deterministic
+  gates PASS on `trunk` and the `group1` subset. The FAIL stands until the
+  DELTA run under the F-seeding rule returns CLEAN-DELTA.
+- 2026-09-02 (v5.3.1, later) — DELTA run #1 under the F-seeding rule:
+  calibrated 9/9 (0/8 FP), verdict **DEFECTS** (26 genuine items in the
+  Part F remediation; carryforward Part G), remediated the same day; all
+  gates green again. DELTA #2 (fresh seeds) is the precondition for the
+  FULL certifying run. The FAIL stands.
+- 2026-09-02 (v5.3.1, DELTA #2, PI-invoked) — scope = DELTA #1's
+  remediation; calibrated 8/9 (one void seed, CLAIMS-1 INCONCLUSIVE), 0/8
+  FP; verdict **DEFECTS** (15 items, carryforward Part H), remediated the
+  same day; two PI adjudications (Paper 40 title; finite-triple KO label,
+  measured (−,+,+) with the production grading). DELTA #3 owed. FAIL stands.
+- 2026-09-02 (v5.4.0, PI minor bump) — gate change: blind seeding is
+  OPT-IN (`/qa <target> seeded`); default runs are unseeded and cite the
+  standing calibration record. PI adjudications applied: Paper 40 retitled
+  (semisimple), finite-triple KO label dropped for the measured sign triple
+  (−,+,+), Paper 7 NO-TEST row closed by `tests/test_paper7_graph_convergence.py`,
+  Paper 40 §L5 reframed as state-space GH. All deterministic gates green on
+  trunk + group1 (C10 trunk + P40, C11, C13, C14, C15, C16, C17, C18, C19,
+  C20, C21, C22, C5). DELTA #3 skipped by PI direction; FULL run #3
+  (unseeded) is next. FAIL stands until it reports.

@@ -256,13 +256,148 @@ def test_gamma_doubling_converges_to_4_over_pi():
 def test_constant_is_not_circle_fejer_2_over_pi():
     """Sanity guard: the SU(2) constant is 4/pi, NOT the circle-Fejer 2/pi.
 
-    The sqrt(2j+1) (Cesaro-2-style) weighting doubles the constant relative to
-    the unweighted circle Fejer kernel.  This test documents that the derivation
-    discriminates between the two candidate constants — i.e. it COULD have
-    failed had the weighting analysis been wrong.
+    The SU(2) constant is twice the circle constant (an OBSERVATION -- which
+    of the sin^2(chi/2) conjugacy-class weight and the sqrt(2j+1) Plancherel
+    weight supplies the factor 2 is not isolated here).  This test documents
+    that the derivation discriminates between the two candidate constants --
+    i.e. it COULD have failed had the analysis been wrong.
     """
     mpmath.mp.dps = PREC
     a200 = float((2 * 200 * _gamma(400) - 200 * _gamma(200)) / mpmath.log(2))
     four_over_pi = 4.0 / math.pi
     two_over_pi = 2.0 / math.pi
     assert abs(a200 - four_over_pi) < abs(a200 - two_over_pi)
+
+
+# ---------------------------------------------------------------------------
+# The CIRCLE constant, computed (Paper 38 Remark "Connection to the circle
+# Fejer estimate", eq. circle_fejer_moment; added at the 2026-09-02 trunk
+# certification run).  Paper 38 formerly stated the circle Fejer first-moment
+# constant as 4/pi, "the same on both sides"; the probability-normalised
+# circle constant is 2/pi.  Two independent routes:
+#   (i)  quadrature of the kernel moment  m_n = (1/pi) int_0^pi theta F_n dtheta,
+#        F_n = (1/n) sin^2(n theta/2)/sin^2(theta/2);
+#   (ii) the exact closed form  m_n = pi/2 - (4/pi) sum_{k odd < n} (1 - k/n)/k^2
+#        (from int_0^pi theta cos(k theta) dtheta = ((-1)^k - 1)/k^2).
+# The doubling estimator (2n m_{2n} - n m_n)/log 2 -> 2/pi on both, and the
+# ratio to the SU(2) estimator -> 2.
+# ---------------------------------------------------------------------------
+
+
+def _circle_moment_closed_form(n: int) -> mpmath.mpf:
+    mpmath.mp.dps = PREC
+    s = sum((1 - mpmath.mpf(k) / n) / k ** 2 for k in range(1, n, 2))
+    return mpmath.pi / 2 - (4 / mpmath.pi) * s
+
+
+def _circle_moment_quadrature(n: int) -> mpmath.mpf:
+    mpmath.mp.dps = 30
+
+    def F(theta):
+        if theta == 0:
+            return mpmath.mpf(n)
+        return mpmath.sin(n * theta / 2) ** 2 / (n * mpmath.sin(theta / 2) ** 2)
+
+    # Subdivide at the kernel's zeros (theta = 2 pi m / n) so the oscillatory
+    # integrand is resolved; the integrand is smooth on each panel.
+    pts = [2 * mpmath.pi * m / n for m in range(0, n // 2 + 1)]
+    if pts[-1] < mpmath.pi:
+        pts.append(mpmath.pi)
+    return mpmath.quad(lambda t: t * F(t), pts) / mpmath.pi
+
+
+@pytest.mark.parametrize("n", [2, 3, 8, 25, 64])
+def test_circle_fejer_closed_form_matches_quadrature(n):
+    """Route (ii) closed form == route (i) quadrature of the actual kernel."""
+    cf = _circle_moment_closed_form(n)
+    q = _circle_moment_quadrature(n)
+    assert abs(cf - q) < mpmath.mpf("1e-18"), f"n={n}: closed {cf} vs quad {q}"
+
+
+def test_circle_fejer_kernel_is_probability_normalised():
+    """(1/2pi) int F_n = 1 -- the normalisation under which the constant is 2/pi."""
+    mpmath.mp.dps = 30
+    for n in [3, 10, 40]:
+        pts = [2 * mpmath.pi * m / n for m in range(0, n // 2 + 1)]
+        if pts[-1] < mpmath.pi:
+            pts.append(mpmath.pi)
+        F = lambda t: (mpmath.mpf(n) if t == 0 else
+                       mpmath.sin(n * t / 2) ** 2 / (n * mpmath.sin(t / 2) ** 2))
+        total = 2 * mpmath.quad(F, pts) / (2 * mpmath.pi)
+        assert abs(total - 1) < mpmath.mpf("1e-18"), f"n={n}: mass {total}"
+
+
+def test_circle_fejer_constant_is_2_over_pi():
+    """Doubling estimator on the circle moment -> 2/pi (and NOT 4/pi).
+
+    n m_n = c log n + b + O(1/n); (2n m_{2n} - n m_n)/log 2 -> c.  Computed
+    on the exact closed form; the value must land on 2/pi and be decisively
+    closer to it than to the SU(2) 4/pi.
+    """
+    mpmath.mp.dps = PREC
+    target = 2.0 / math.pi
+    decoy = 4.0 / math.pi
+
+    def a(n):
+        return float((2 * n * _circle_moment_closed_form(2 * n)
+                      - n * _circle_moment_closed_form(n)) / mpmath.log(2))
+
+    a100, a200, a400 = a(100), a(200), a(400)
+    assert abs(a400 - target) < abs(a200 - target) < abs(a100 - target)
+    # Measured |a_400 - 2/pi| = 7.2e-7 (2026-09-02); pinned to 1e-5 so the
+    # printed "0.63662 at n = 400" (Paper 38 rem:circle_fejer) is backed to
+    # all five digits (3e-6 keeps the rounding at 0.63662; 1e-5 did not).
+    assert abs(a400 - target) < 3e-6, f"a_400 = {a400}, target 2/pi = {target}"
+    assert abs(a400 - target) < 0.05 * abs(a400 - decoy)
+
+
+def test_su2_constant_is_twice_circle():
+    """SU(2) doubling estimator / circle doubling estimator -> 2 (OBSERVATION).
+
+    Both estimators are computed on their exact closed forms; neither 4/pi
+    nor 2/pi is assumed.
+    """
+    mpmath.mp.dps = PREC
+
+    def a_su2(n):
+        return (2 * n * _gamma(2 * n) - n * _gamma(n)) / mpmath.log(2)
+
+    def a_circle(n):
+        return (2 * n * _circle_moment_closed_form(2 * n)
+                - n * _circle_moment_closed_form(n)) / mpmath.log(2)
+
+    r100 = float(a_su2(100) / a_circle(100))
+    r200 = float(a_su2(200) / a_circle(200))
+    r800 = float(a_su2(800) / a_circle(800))
+    assert abs(r200 - 2.0) < abs(r100 - 2.0), "ratio not converging toward 2"
+    assert abs(r200 - 2.0) < 0.03, f"SU(2)/circle estimator ratio = {r200}"
+    # Paper 38 rem:circle_fejer prints "2.008 at n = 800" (measured 2.008248,
+    # 2026-09-02); pin it here so the printed value has a frozen backing.
+    assert abs(r800 - 2.008248) < 5e-4, f"SU(2)/circle estimator ratio at n=800 = {r800} (printed 2.008)"
+    assert abs(r800 - 2.0) < abs(r200 - 2.0), "ratio not converging toward 2 at n=800"
+
+
+def test_su2_doubling_estimator_at_n800():
+    """Pin the printed SU(2) doubling-estimator value (Paper 38 rem:circle_fejer
+    and App. A): a_800 = (1600 gamma_1600 - 800 gamma_800)/log 2 = 1.278491,
+    three digits of 4/pi = 1.273240, approached from above (residual 5.25e-3,
+    shrinking ~1.85x per doubling).  Added 2026-09-02 (trunk DELTA #2): the
+    value had been printed as "a_1600" under an index-convention slip.
+    """
+    mpmath.mp.dps = PREC
+    a800 = float((2 * 800 * _gamma(1600) - 800 * _gamma(800)) / mpmath.log(2))
+    assert abs(a800 - 1.278491) < 2e-4, f"a_800 = {a800}"
+    assert 0.0 < a800 - 4.0 / math.pi < 6e-3, f"a_800 residual {a800 - 4/math.pi}"
+
+
+@pytest.mark.slow
+def test_su2_doubling_estimator_at_n1600():
+    """a_1600 = (3200 gamma_3200 - 1600 gamma_1600)/log 2 = 1.276067 (residual
+    2.83e-3; ratio to the a_800 residual ~1.86).  Slow: gamma_3200 ~25 s."""
+    mpmath.mp.dps = PREC
+    g1600, g3200 = _gamma(1600), _gamma(3200)
+    a800 = float((2 * 800 * g1600 - 800 * _gamma(800)) / mpmath.log(2))
+    a1600 = float((2 * 1600 * g3200 - 1600 * g1600) / mpmath.log(2))
+    assert abs(a1600 - 1.276067) < 2e-4, f"a_1600 = {a1600}"
+    shrink = (a800 - 4.0 / math.pi) / (a1600 - 4.0 / math.pi)
+    assert 1.7 < shrink < 2.0, f"residual shrink per doubling {shrink}"

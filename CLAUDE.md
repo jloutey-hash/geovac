@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.2.6 (September 1, 2026)
+**Version:** v5.4.0 (September 2, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,11 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **v5.4.0 PI adjudications (2026-09-02):** P40 retitled (semisimple); finite triple prints sign triple (−,+,+), no KO label; Paper 7 convergence test added; P40 §L5 = state-space GH. See CHANGELOG v5.4.0.
+- **QA gate: seeding opt-in (2026-09-02, PI direction):** blind calibration seeds are no longer default for DELTA/FULL runs; `/qa <target> seeded` invokes them. See .claude/commands/qa.md.
+- **Trunk Part F + DELTA #1/#2 (2026-09-02, v5.3.1):** 30 rows closed; DELTA #1 9/9 DEFECTS (26), DELTA #2 8/9 DEFECTS (15), both remediated; PI items: P40 title, finite KO label. See trunk.carryforward.md Parts G/H.
+- **Trunk run-#2 PI items (2026-09-02, v5.3.0):** circle Fejér 2/π (SU(2) = twice, Observation); P32 `prop:D_equiv` → Remark, KO-3 relabel; qa.md code-tier exception (gate change). See CHANGELOG v5.3.0.
+- **/qa trunk FULL run #2 (2026-09-02, v5.2.7):** FAIL (19/21 seeds, 0/8 FP). P38's circle Fejér constant is 2/π (SU(2) 4/π stands); P32 `prop:D_equiv` unbacked; KO-dim label. Scope: `docs/qa/trunk.carryforward.md` Part F.
 - **CLAUDE.md compaction (2026-09-01, v5.2.6):** 220 → 100 KB, verified lossless (27/27 conservation checks). §2 and §3 were 56% of the file; full text now in `docs/failed_approaches_ledger.md` + the frontier archive.
 - **C11 could not fail (2026-09-01, v5.2.5):** proving a NEW gate criterion fires exposed that the existing one never could -- findings keyed papers-relative, predicate matches repo-relative, so a planted wrong title was detected, printed, and exited 0. Fixed + pinned. ...
 - **Trunk C3 tier pass (2026-09-01, v5.2.5):** 257 inline tiers across 6 documents (0 before); run as an audit it found ~25 defects, one class dominating -- correct in the middle, overclaiming at both ends. +30 bibitems closed 30 unreachable prose ...

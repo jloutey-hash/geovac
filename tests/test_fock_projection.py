@@ -325,34 +325,43 @@ def test_volume_element_jacobian(fock_projection):
     """
     Verify the volume element transformation under stereographic projection:
 
-        dΩ_S³ = Ω³ · d³p / p₀³
+        dΩ_S³ = Ω³ · d³p        (so ∫ Ω³ d³p = 2π² = Vol(S³) exactly)
 
     where dΩ_S³ is the round volume element on the unit S³ and d³p is
     the flat Lebesgue measure on R³. The Ω³ factor is the Jacobian
     determinant of the stereographic map.
 
-    We verify this by checking Ω³/p₀³ = (2p₀)³/(p²+p₀²)³ / p₀³
-                                       = 8/(p²+p₀²)³
+    Computed from the embedding, not restated (trunk QA F3.1, 2026-09-02;
+    the previous form of this test checked the algebraic identity
+    Ω³ = 8p₀³/(p²+p₀²)³, which is (a/b)³ = a³/b³ and proves nothing about
+    the map).  Here the 4x3 Jacobian J = ∂(n₁,n₂,n₃,n₄)/∂(p₁,p₂,p₃) of the
+    stereographic embedding is differentiated symbolically, the induced
+    metric g = JᵀJ is formed, and two facts are asserted:
 
-    This is validated numerically at specific points since the full
-    Jacobian calculation from the implicit map is algebraically
-    equivalent to this conformal scaling in 3D.
+        (i)  conformality:  g = Ω² · I₃   (all nine entries, symbolically);
+        (ii) volume factor: det g = Ω⁶, i.e. sqrt(det g) = Ω³.
+
+    (i) is the content of "stereographic projection is conformal";
+    (ii) is the volume-element identity the docstring states.
     """
     omega = fock_projection['omega']
-    p0 = fock_projection['p0']
+    p = fock_projection['p']
+    n = fock_projection['n']
 
-    # The volume Jacobian factor is Ω³ (in 3D, stereographic projection
-    # scales volumes by the conformal factor cubed)
-    jacobian_factor = omega**3
+    # Jacobian of the embedding R^3 -> S^3 subset R^4.
+    J = sp.Matrix([[sp.diff(n_i, p_j) for p_j in p] for n_i in n])   # 4 x 3
+    g = (J.T * J).applyfunc(sp.simplify)                                # 3 x 3
 
-    # Expected: 8 * p0³ / (p² + p0²)³
-    p_sq = fock_projection['p_sq']
-    expected = 8 * p0**3 / (p_sq + p0**2)**3
+    # (i) conformality: induced metric is Omega^2 times the identity.
+    off = sp.simplify(g - omega**2 * sp.eye(3))
+    assert off == sp.zeros(3, 3), (
+        f"Induced metric is not conformal to the flat metric: g - Omega^2 I = {off}"
+    )
 
-    diff = sp.simplify(jacobian_factor - expected)
-
-    assert diff == 0, (
-        f"Volume element Jacobian identity failed: diff = {diff}"
+    # (ii) volume factor: det g = Omega^6  <=>  sqrt(det g) = Omega^3.
+    det_g = sp.simplify(g.det())
+    assert sp.simplify(det_g - omega**6) == 0, (
+        f"Volume Jacobian identity failed: det g = {det_g}, Omega^6 = {sp.simplify(omega**6)}"
     )
 
 
