@@ -238,7 +238,12 @@ def test_hopf_base_ratio_is_not_the_rate_constant():
     2/pi.  The printed identity 4/pi = Vol(S^2)/pi^2 mixes normalisations."""
     for r, expected_ratio in ((1.0, 1 / (2 * np.pi)), (2.0, 1 / (4 * np.pi))):
         vol_s3 = 2 * np.pi ** 2 * r ** 3
-        vol_base = 4 * np.pi * (r / 2) ** 2          # Hopf base S^2(r/2)
+        # the base radius is DERIVED, not assumed: the Hopf map is a
+        # Riemannian submersion with fibre length 2 pi r, so
+        # Vol(S^3(r)) = Vol(S^2(rho)) * 2 pi r forces rho = r/2.
+        rho = np.sqrt(vol_s3 / (2 * np.pi * r) / (4 * np.pi))
+        assert abs(rho - r / 2) < 1e-12
+        vol_base = 4 * np.pi * rho ** 2              # Hopf base S^2(r/2)
         assert abs(vol_base / vol_s3 - expected_ratio) < 1e-12
         assert abs(vol_base / vol_s3 - 4 / np.pi) > 1.0
         assert abs(vol_base / vol_s3 - 2 / np.pi) > 0.4
