@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.4.3] - 2026-09-03
+
+**Self-caught: the L5 panel check added in v5.4.1 was itself wrong.** The
+fifth DELTA #3 reviewer flagged "the L5 panel inequality is violated at
+n_max = 7" before three server errors ended it; checked directly rather than
+retried. The module's Lipschitz-normalised panel height is 0.667 / 0.808 /
+0.878 / 0.913 at n_max = 2 / 3 / 4 / 5 — it **rises** toward 1 (fitting
+1.08 − 0.83/n_max) while γ falls like log n / n, so the margin crosses zero
+near n_max = 6. The v5.4.1 assertion therefore verified a small-cutoff
+coincidence, not Lemma L5: the panel is a fixed set of low-degree harmonics,
+not the unit-Lipschitz ball the lemma quantifies over, so the panel numbers
+neither confirm nor contradict it (the proof does not use them).
+
+### Changed
+
+- `tests/test_gh_convergence.py` now *measures* the rise and the shrinking
+  margin and states what they show, instead of asserting the inequality;
+  `geovac/gh_convergence.py`'s `l5_inequality_holds` carries the same caveat;
+  Paper 32's L5 sentence and a new panel note before Paper 38's Lemma L5
+  record it. Identifying the panel-side quantity is a named open check.
+- Repaired three bash-heredoc corruptions of LaTeX-bearing edits made during
+  this arc (a TAB for `\times` in Paper 7, `\nmax` → newline in the Paper 38
+  note, halved backslashes in a repair script). C19 caught two, pdflatex one.
+
+### Lessons
+
+When replacing a tautological guard, check the replacement's *asymptotics* —
+both self-inflicted defects of this arc were guards chosen from the same
+material as the claim and true only in the regime already measured. And
+LaTeX-bearing edits go through the Write tool with raw strings; the heredoc
+rule was violated three times under time pressure and cost three repairs.
+
 ## [v5.4.2] - 2026-09-03
 
 **DELTA #3 (unseeded) on the v5.4.1 remediation = DEFECTS, remediated.** Five

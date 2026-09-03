@@ -302,24 +302,44 @@ class TestPropinquityBound:
         assert "height_B_bound" in d
         assert "height_B_op_norm_panel" in d
 
-    def test_l5_inequality_holds_on_lipschitz_normalised_panel(self):
-        """THE check that can fail (2026-09-03): the Lipschitz-normalised
-        panel reach and height both lie below C_3 * gamma_{n_max}.  Measured
-        2026-09-02: height/Lip = 0.667, 0.808, 0.878 vs gamma = 2.075, 1.610,
-        1.322 at n_max = 2, 3, 4 (margin halving per step)."""
-        # SCOPE (2026-09-03): verified on the DEFAULT PANEL at n_max <= 4 only.
-        # The margin halves per step (1.41 / 0.80 / 0.45) and is on track to
-        # close near n_max ~ 7; that would indicate the panel's un-normalised
-        # reach/height are not the quantities L5 bounds (the theorem's proof
-        # does not use the panel), and is a named check -- do NOT widen this
-        # loop without settling it.
-        for n_max in [2, 3, 4]:
-            b = compute_propinquity_bound(n_max)
-            assert b.l5_inequality_holds, b.to_dict()
-            assert 0.0 < b.height_B_panel_lip < b.propinquity_bound
-            assert 0.0 < b.reach_B_panel_lip < b.propinquity_bound
-        b2, b4 = compute_propinquity_bound(2), compute_propinquity_bound(4)
-        assert b4.propinquity_bound - b4.height_B_panel_lip < b2.propinquity_bound - b2.height_B_panel_lip
+    def test_panel_height_is_not_the_l5_height(self):
+        """MEASURED (2026-09-03, DELTA #3): the Lipschitz-normalised PANEL
+        height is NOT bounded by gamma_{n_max}, so it is not the quantity
+        Lemma L5 bounds.
+
+        Measured on the default panel:
+
+            n_max        2        3        4        5
+            gamma     2.07455  1.61006  1.32235  1.13022
+            height/Lip 0.66667  0.80756  0.87750  0.91334
+            margin    +1.40788 +0.80250 +0.44485 +0.21688
+
+        height/Lip fits 1.082 - 0.83/n_max (rising toward ~1) while gamma
+        falls like log n/n, so the margin crosses zero near n_max = 6 and is
+        negative thereafter.  An earlier version of this test (v5.4.1)
+        asserted `l5_inequality_holds` at n_max <= 4 as if that verified L5;
+        it verified a small-cutoff coincidence.  What the panel data actually
+        show is that height_B as computed here measures a distortion that
+        does NOT vanish with the cutoff -- the panel is a fixed set of
+        low-degree harmonics, not the unit-Lipschitz ball the lemma quantifies
+        over -- so the lemma is neither confirmed nor contradicted by it.
+        The theorem's own proof does not use the panel.  Identifying the
+        panel-side quantity is a named open check (Paper 38 L5 scope note).
+        """
+        rows = {n: compute_propinquity_bound(n) for n in (2, 3, 4)}
+        for n, b in rows.items():
+            assert 0.0 < b.height_B_panel_lip < 1.0
+            assert 0.0 < b.reach_B_panel_lip < 1.0
+        # the panel height RISES with the cutoff while gamma falls
+        hs = [rows[n].height_B_panel_lip for n in (2, 3, 4)]
+        gs = [float(rows[n].gamma_n_max) for n in (2, 3, 4)]
+        assert hs[0] < hs[1] < hs[2], hs
+        assert gs[0] > gs[1] > gs[2], gs
+        # so the margin shrinks monotonically -- the small-n_max positivity is
+        # not evidence for the inequality
+        margins = [g - h for g, h in zip(gs, hs)]
+        assert margins[0] > margins[1] > margins[2] > 0.0, margins
+        assert margins[2] < 0.5 * margins[0]
 
     def test_propinquity_bound_vanishes_with_n_max(self):
         """REGRESSION (Paper 38 §3.5 erratum): Lambda -> 0 as n_max -> oo.

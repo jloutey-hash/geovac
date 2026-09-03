@@ -3497,10 +3497,15 @@ theorem statement, not the Latr{\'e}moli{\`e}re propinquity $\Lambda$,
 whose label remains an open named gap.
 \end{itemize}
 
-The L5 inequality (Lipschitz-normalised panel reach and height both
-below $C_3\gamma_{n_{\max}}$) is verified numerically at $n_{\max} \in
-\{2, 3, 4\}$ only --- the margin roughly halves per step and is not
-claimed beyond those cutoffs (Paper~38, panel-scope note); the bound itself is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
+The module's test panel does \emph{not} verify Lemma~L5 (measured
+2026-09-03):\ the Lipschitz-normalised panel height rises with the
+cutoff ($0.667$, $0.808$, $0.878$, $0.913$ at $n_{\max} = 2, 3, 4, 5$,
+fitting $1.08 - 0.83/n_{\max}$) while $\gamma_{n_{\max}}$ falls, so it
+exceeds the bound from $n_{\max} \approx 6$.  The panel is a fixed set
+of low-degree harmonics rather than the unit-Lipschitz ball the lemma
+quantifies over, so this neither confirms nor contradicts L5 (whose
+proof does not use the panel);\ identifying the panel-side quantity is
+an open check.  What the module reports is therefore the bound itself is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
 1.322$ (these are the L2 moments $\gamma_2, \gamma_3, \gamma_4$, not
 independent measurements; ratio $0.637$).  Module
 \texttt{geovac/gh\_convergence.py} packages the assembly (48 unit

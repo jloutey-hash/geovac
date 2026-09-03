@@ -1272,6 +1272,16 @@ with the present construction in the appropriate fibration limit.
 \end{remark}
 
 % ---------------------------------------------------------------------
+\emph{Panel note (2026-09-03).}  The reference implementation
+(\texttt{geovac/gh\_convergence.py}) reports reach and height on a fixed
+test panel of low-degree harmonics.  Those panel numbers do \emph{not}
+verify this lemma:\ the Lipschitz-normalised panel height rises with the
+cutoff ($0.667$, $0.808$, $0.878$, $0.913$ at $\nmax = 2, 3, 4, 5$) while
+$\gamma_{\nmax}$ falls, so it crosses the bound near $\nmax \approx 6$ ---
+the panel is not the unit-Lipschitz ball quantified over here.  The proof
+below does not use the panel;\ identifying the panel-side quantity is an
+open check.
+
 \subsection{Lemma L5:\ state-space Gromov--Hausdorff assembly}
 \label{sec:L5}
 % ---------------------------------------------------------------------

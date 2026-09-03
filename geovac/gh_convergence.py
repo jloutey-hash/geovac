@@ -665,10 +665,11 @@ def compute_propinquity_bound(
 
     # State-space GH bound: max of the THEORETICAL reach/height bounds,
     # both gamma_{n_max} (modulo C_3 = 1 from L3); reach_P = height_P = 0.
-    # This value is gamma by construction -- the content that can fail is
-    # the Lipschitz-normalised panel inequality recorded in
-    # `l5_inequality_holds` (2026-09-03; the earlier version reported the
-    # bound with the panel quantities discarded).
+    # This value is gamma by construction.  The panel quantities below are
+    # reported (they used to be discarded) but they do NOT verify Lemma L5:
+    # the panel height/Lip rises toward ~1 while gamma falls, so it exceeds
+    # gamma from n_max ~ 6 (2026-09-03, DELTA #3).  The lemma's proof does
+    # not use the panel; identifying the panel-side quantity is open.
     propinquity = max(
         reach_B_theoretical,    # <= C_3 * gamma_{n_max} = gamma_{n_max}
         height_B_theoretical,   # <= gamma_{n_max} (Stein-Weiss)
@@ -691,6 +692,11 @@ def compute_propinquity_bound(
         track_c_constant=track_c_constant,
         reach_B_panel_lip=reach_B_lip_max,
         height_B_panel_lip=height_B_lip_max,
+        # NOT a verification of Lemma L5 (2026-09-03, DELTA #3): the panel
+        # height/Lip rises toward ~1 while gamma falls, so this flag is True
+        # only for n_max <= 5.  The panel is a fixed set of low-degree
+        # harmonics, not the unit-Lipschitz ball the lemma quantifies over.
+        # Retained as a measurement; see tests/test_gh_convergence.py.
         l5_inequality_holds=bool(reach_B_lip_max <= propinquity + 1e-12
                                  and height_B_lip_max <= propinquity + 1e-12),
     )

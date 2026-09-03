@@ -878,6 +878,39 @@ The κ / c² / Δ re-pricing (an exact-rational route independent of both the cl
 
 An unseeded DELTA #4 on this remediation before FULL run #4; Paper 40's normalisation cross-check (PI); CLAUDE.md §5 "H < 0.1%" (PI-only section); the NITs listed in the reviewer reports (bibkey years, `\Lambda_{prop}` symbol, Hawkins 2000 at P32:4845, matrix note fields).
 
+### J.4 — the L5 panel check was itself wrong (self-caught, 2026-09-03)
+
+The fifth DELTA reviewer (Paper 32/38 code) reported "the L5 panel inequality is
+violated at n_max = 7" before three server errors ended it. Checked directly
+rather than retried: the module's Lipschitz-normalised panel height is
+0.667 / 0.808 / 0.878 / 0.913 at n_max = 2 / 3 / 4 / 5, fitting
+1.08 − 0.83/n_max — it **rises toward 1** while gamma falls like log n / n, so
+the margin (+1.41, +0.80, +0.44, +0.22) crosses zero near n_max = 6 and is
+negative thereafter.
+
+So the "check that can fail" I added in v5.4.1 — asserting the panel inequality
+at n_max ≤ 4 — verified a small-cutoff coincidence, not Lemma L5. The panel is a
+fixed set of low-degree harmonics, not the unit-Lipschitz ball the lemma
+quantifies over, so the panel numbers neither confirm nor contradict L5 (whose
+proof does not use them). Corrected: the test now *measures* the rise and the
+shrinking margin and says what they show; `gh_convergence.py`'s flag carries the
+same caveat; Paper 32's L5 sentence and a new panel note before Paper 38's
+Lemma L5 state it. Identifying the panel-side quantity is a named open check.
+
+**This is the second time in two days that a remediation of mine introduced the
+next defect** (the first: the Paper 7 convergence test of 2026-09-02). Both were
+"add a check that can fail" fixes where the check was chosen from the same
+material as the claim. The lesson for the next remediation: when replacing a
+tautological guard, verify the new guard's *asymptotics*, not just its value at
+the cutoffs already in hand.
+
+Also this session: **three separate bash-heredoc corruptions** of LaTeX-bearing
+edits (a TAB for `\times` in Paper 7, `\nmax` → newline in the Paper 38 note,
+and halved backslashes in a repair script). Two were caught by C19, one by
+pdflatex. The standing rule (`memory/feedback_no_heredoc_backslashes.md`) is
+correct and was violated three times under time pressure; the Write tool with
+raw strings is the only safe route for this text.
+
 ---
 
 ## Sizing

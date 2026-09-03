@@ -122,3 +122,8 @@ re-prices everything above it.
   not a spectral gap (disconnected l-blocks, near-tie mode selection); and
   the block spectrum is closed form with a proven O(n_max^-2) saturation rate
   (upgrade). Citations CLEAN-DELTA. FAIL stands; DELTA #4 owed before FULL #4.
+- 2026-09-03 (v5.4.3) — self-caught: the L5 panel check added in v5.4.1 was
+  itself wrong (the panel height rises toward 1 while gamma falls, so the
+  inequality holds only for n_max <= 5). Reframed as a measurement in the
+  test, the module, Paper 32 and a new panel note in Paper 38; the panel-side
+  quantity is a named open check. C10 trunk PASS, C19 clean.

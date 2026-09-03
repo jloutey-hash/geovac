@@ -1372,3 +1372,22 @@ that is where the survivors were every time.
 Lesson (8): reproducibility is not robustness. Twelve percentages that
 reproduce to five digits can still be an artifact of an arbitrary
 tie-break; ask what selects the object before trusting the number.
+
+### 10.1 L5 panel correction (2026-09-03, v5.4.3)
+
+The fifth DELTA reviewer's last line before three server errors -- "the L5
+panel inequality is violated at n_max = 7" -- was checked directly instead of
+retried, and is right in substance: the panel height/Lip rises toward 1
+(0.667/0.808/0.878/0.913 at n_max = 2..5, fitting 1.08 - 0.83/n_max) while
+gamma falls, so the margin crosses zero near n_max = 6. The v5.4.1
+"inequality holds" assertion therefore verified a small-cutoff coincidence.
+Reframed as a measurement in the test, the module and both papers; the
+panel-side quantity is a named open check.
+
+Lesson (9): when replacing a tautological guard, check the replacement's
+ASYMPTOTICS. Both self-inflicted defects of this arc (the Paper 7 convergence
+test, the L5 panel check) were guards chosen from the same material as the
+claim and true only in the regime already measured.
+Lesson (10): three heredoc corruptions in one session (TAB for \times,
+\nmax -> newline, halved backslashes). C19 caught two, pdflatex one. Use the
+Write tool with raw strings for LaTeX-bearing edits -- no exceptions.
