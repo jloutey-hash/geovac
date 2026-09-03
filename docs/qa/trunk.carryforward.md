@@ -882,11 +882,21 @@ An unseeded DELTA #4 on this remediation before FULL run #4; Paper 40's normalis
 
 The fifth DELTA reviewer (Paper 32/38 code) reported "the L5 panel inequality is
 violated at n_max = 7" before three server errors ended it. Checked directly
-rather than retried: the module's Lipschitz-normalised panel height is
-0.667 / 0.808 / 0.878 / 0.913 at n_max = 2 / 3 / 4 / 5, fitting
-1.08 − 0.83/n_max — it **rises toward 1** while gamma falls like log n / n, so
-the margin (+1.41, +0.80, +0.44, +0.22) crosses zero near n_max = 6 and is
-negative thereafter.
+rather than retried: the module's Lipschitz-normalised panel height
+**rises toward 1** while gamma falls like log n / n. Measured (2026-09-03,
+n_max = 2…7):
+
+| n_max | 2 | 3 | 4 | 5 | 6 | 7 |
+|:--|--:|--:|--:|--:|--:|--:|
+| gamma | 2.07455 | 1.61006 | 1.32235 | 1.13022 | 0.98958 | 0.88277 |
+| height/Lip | 0.66667 | 0.80756 | 0.87750 | 0.91334 | 0.93656 | 0.95178 |
+| margin | +1.40788 | +0.80250 | +0.44485 | +0.21688 | +0.05302 | **−0.06901** |
+
+So the crossing is **between n_max = 6 and 7** — the reviewer's "violated at
+n_max = 7" was exact. (An extrapolation I ran first reached the same
+conclusion with wrong margins, because it used the asymptotic form of gamma,
+which badly underestimates gamma at small n; the papers now carry the
+measured table, not the estimate.)
 
 So the "check that can fail" I added in v5.4.1 — asserting the panel inequality
 at n_max ≤ 4 — verified a small-cutoff coincidence, not Lemma L5. The panel is a

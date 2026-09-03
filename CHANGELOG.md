@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.4.4] - 2026-09-03
+
+**The L5 panel crossing, measured.** The n_max = 6 and 7 panels finished
+building after v5.4.3 shipped an extrapolated threshold. Measured margins
+(gamma − height/‖f‖_Lip): +1.408, +0.803, +0.445, +0.217, **+0.053**,
+**−0.069** at n_max = 2…7 — so the panel height crosses the bound between
+n_max = 6 and 7, and the reviewer's original "violated at n_max = 7" was
+exact. The extrapolation in v5.4.3 reached the same conclusion with wrong
+margins (it used the asymptotic form of gamma, which underestimates gamma
+by 2.6× at n = 6).
+
+### Changed
+
+- Papers 32 and 38 carry the measured table in place of "near n_max ≈ 6";
+  `tests/test_gh_convergence.py` records all six measured rows and gains a
+  slow test pinning the crossing (holds at 6, fails at 7).
+
+### Lessons
+
+An extrapolation that reaches the right verdict can still put wrong numbers
+in a paper. Measure the threshold a claim needs, and say "extrapolated"
+until the measurement lands.
+
 ## [v5.4.3] - 2026-09-03
 
 **Self-caught: the L5 panel check added in v5.4.1 was itself wrong.** The

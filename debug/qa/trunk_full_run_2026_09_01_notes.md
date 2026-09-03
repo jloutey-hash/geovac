@@ -1391,3 +1391,16 @@ claim and true only in the regime already measured.
 Lesson (10): three heredoc corruptions in one session (TAB for \times,
 \nmax -> newline, halved backslashes). C19 caught two, pdflatex one. Use the
 Write tool with raw strings for LaTeX-bearing edits -- no exceptions.
+
+### 10.2 L5 crossing measured (2026-09-03, v5.4.4)
+
+The n_max = 6 and 7 panels finished building: margin +0.05302 at 6,
+-0.06901 at 7, so the crossing is between 6 and 7 and the reviewer's
+"violated at n_max = 7" was exact. My first pass had extrapolated the
+crossing to n_max ~ 6 using the ASYMPTOTIC gamma (0.38 at n = 6 against the
+true 0.99) -- right conclusion, wrong margins. Papers 32/38 and the test now
+carry the measured table, and a slow test pins the crossing itself.
+
+Lesson (11): an extrapolation that reaches the right verdict can still put
+wrong numbers in a paper. If a claim needs a threshold, measure the
+threshold; if the measurement is running, say "extrapolated" until it lands.

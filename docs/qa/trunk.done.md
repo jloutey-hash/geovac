@@ -127,3 +127,7 @@ re-prices everything above it.
   inequality holds only for n_max <= 5). Reframed as a measurement in the
   test, the module, Paper 32 and a new panel note in Paper 38; the panel-side
   quantity is a named open check. C10 trunk PASS, C19 clean.
+- 2026-09-03 (v5.4.4) — the L5 panel crossing is now MEASURED (margin +0.053
+  at n_max = 6, −0.069 at 7, so the crossing is between 6 and 7); Papers 32/38
+  and the test carry the measured table in place of the extrapolated
+  "near n_max ≈ 6", and a slow test pins the crossing.

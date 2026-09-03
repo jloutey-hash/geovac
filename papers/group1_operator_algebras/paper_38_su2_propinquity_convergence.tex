@@ -1276,9 +1276,17 @@ with the present construction in the appropriate fibration limit.
 (\texttt{geovac/gh\_convergence.py}) reports reach and height on a fixed
 test panel of low-degree harmonics.  Those panel numbers do \emph{not}
 verify this lemma:\ the Lipschitz-normalised panel height rises with the
-cutoff ($0.667$, $0.808$, $0.878$, $0.913$ at $\nmax = 2, 3, 4, 5$) while
-$\gamma_{\nmax}$ falls, so it crosses the bound near $\nmax \approx 6$ ---
-the panel is not the unit-Lipschitz ball quantified over here.  The proof
+cutoff while $\gamma_{\nmax}$ falls, and the two cross between
+$\nmax = 6$ and $\nmax = 7$ (measured 2026-09-03):
+\[
+  \begin{array}{c|cccccc}
+    \nmax & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+    \gamma_{\nmax} & 2.075 & 1.610 & 1.322 & 1.130 & 0.990 & 0.883 \\
+    \text{height}/\|f\|_{\mathrm{Lip}} & 0.667 & 0.808 & 0.878 & 0.913 & 0.937 & 0.952 \\
+    \text{margin} & +1.408 & +0.803 & +0.445 & +0.217 & +0.053 & -0.069
+  \end{array}
+\]
+The panel is not the unit-Lipschitz ball quantified over here.  The proof
 below does not use the panel;\ identifying the panel-side quantity is an
 open check.
 

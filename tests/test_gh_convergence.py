@@ -309,14 +309,14 @@ class TestPropinquityBound:
 
         Measured on the default panel:
 
-            n_max        2        3        4        5
-            gamma     2.07455  1.61006  1.32235  1.13022
-            height/Lip 0.66667  0.80756  0.87750  0.91334
-            margin    +1.40788 +0.80250 +0.44485 +0.21688
+            n_max        2        3        4        5        6        7
+            gamma     2.07455  1.61006  1.32235  1.13022  0.98958  0.88277
+            height/Lip 0.66667  0.80756  0.87750  0.91334  0.93656  0.95178
+            margin    +1.40788 +0.80250 +0.44485 +0.21688 +0.05302 -0.06901
 
-        height/Lip fits 1.082 - 0.83/n_max (rising toward ~1) while gamma
-        falls like log n/n, so the margin crosses zero near n_max = 6 and is
-        negative thereafter.  An earlier version of this test (v5.4.1)
+        height/Lip rises toward 1 while gamma falls like log n/n, so the
+        margin crosses zero BETWEEN n_max = 6 and n_max = 7 (measured; an
+        extrapolation had put the crossing at 6).  An earlier version of this test (v5.4.1)
         asserted `l5_inequality_holds` at n_max <= 4 as if that verified L5;
         it verified a small-cutoff coincidence.  What the panel data actually
         show is that height_B as computed here measures a distortion that
@@ -340,6 +340,17 @@ class TestPropinquityBound:
         margins = [g - h for g, h in zip(gs, hs)]
         assert margins[0] > margins[1] > margins[2] > 0.0, margins
         assert margins[2] < 0.5 * margins[0]
+
+
+    @pytest.mark.slow
+    def test_panel_height_crosses_gamma_at_nmax_7(self):
+        """The crossing itself (slow: builds the n_max = 6 and 7 panels).
+        Measured 2026-09-03: margin +0.05302 at n_max = 6, -0.06901 at 7."""
+        b6 = compute_propinquity_bound(6)
+        b7 = compute_propinquity_bound(7)
+        assert b6.l5_inequality_holds and not b7.l5_inequality_holds
+        assert 0.04 < float(b6.gamma_n_max) - b6.height_B_panel_lip < 0.07
+        assert -0.08 < float(b7.gamma_n_max) - b7.height_B_panel_lip < -0.05
 
     def test_propinquity_bound_vanishes_with_n_max(self):
         """REGRESSION (Paper 38 §3.5 erratum): Lambda -> 0 as n_max -> oo.
