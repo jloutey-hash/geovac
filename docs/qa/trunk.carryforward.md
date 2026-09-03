@@ -790,7 +790,8 @@ standing calibration record (run #2 19/21 seeds, DELTA #1 9/9, DELTA #2 8/9,
 | I.4.1 | `circle-fejer-constant-4-over-pi` alternative `2\s*Vol\(S\^1\)\s*/\s*Vol\(SU\(2\)\)` cannot fire on its own declared locus `central_fejer_su2.py:893-894` (line-wrapped; the checker scans line by line). | Whitespace-normalised multi-line scanning + discrimination proof + pin test. |
 | I.4.2 | `latremoliere-propinquity-named-for-gh-rate` lists papers only, so `gh_convergence.py:34` "propinquity constant" passes. | Add the modules; two-way proof. |
 | I.4.3 | Rename-pass residue class (P32 "graph Dirac operator", "provably disjoint", "Peter–Weyl propinquity"; P38 "all compact connected Lie groups"): each evades the pattern written for its retired twin. | Add variants with two-way proofs. |
-| I.4.4 | **C19 could not see a laundered escape (found 2026-09-03 during remediation).** A swallowed `` (from a bash-heredoc edit) that a later text-mode read/write round trip converted to a line break leaves `ef{...}` at the start of the next line with no control character left to detect; pdflatex found it (P32:434 `(Theorem~` + newline + `ef{thm:gh_convergence})`). | C19 gains a laundered-escape check (CR-tails at a line start followed by a brace/bracket/paren/sub/superscript), proven to fire on the live instance before the fix; the P38 prose line beginning with the word `angle` is the negative control. |
+| I.4.4 | **C19 could not see a laundered escape (found 2026-09-03 during remediation).** A swallowed `
+` (from a bash-heredoc edit) that a later text-mode read/write round trip converted to a line break leaves `ef{...}` at the start of the next line with no control character left to detect; pdflatex found it (P32:434 `(Theorem~` + newline + `ef{thm:gh_convergence})`). | C19 gains a laundered-escape check (CR-tails at a line start followed by a brace/bracket/paren/sub/superscript), proven to fire on the live instance before the fix; the P38 prose line beginning with the word `angle` is the negative control. |
 
 ### I.5 — Synthesis (group3)
 
@@ -841,6 +842,41 @@ recoverable from the paper itself.
 - **I.7.x** — P32 :6789-6803 (signature-blind closure), :6828-6835 (DESCOPED), :6855-6856 (Paper 43 drafted), layer counts :1750/:3615/:3838/:3963 (seven), :1769 left (borderline; noted).
 
 **Still owed (PI or next sprint):** Paper 40's normalisation cross-check (does the dual-Coxeter normalisation coincide with the rotation-angle one?); CLAUDE.md §5 "H < 0.1 %" (PI-only section); the remaining NITs above; an unseeded DELTA on this remediation before FULL run #4.
+
+---
+
+## Part J — DELTA run #3 (2026-09-03, unseeded, on v5.4.0..v5.4.1 = `8184aca`) = **DEFECTS**, remediated
+
+Five reviewers on the diff only: code (Opus) ×2 — {P0,P1,P7 + synthesis tests}, {P32,P38 modules + gates}; claims (Opus) ×2 — {P0,P1,P7,synthesis}, {P32,P38,spill}; citations (Sonnet) ×1 — the nine citation edits. Verdicts: **CLEAN-DELTA** (citations), **DEFECTS** (the other four). The dominant class was the one the delta shape exists to catch: **the remediation was applied locus-by-locus, so the descoped readings survived wherever the sweep had not looked.**
+
+### J.0 — the three findings that re-priced again (PM-verified by independent computation)
+
+| id | finding | evidence | fix |
+|:--|:--|:--|:--|
+| J.0.1 | **The s/p "splitting" is not a spectral gap.** No edge changes ℓ, so the ℓ = 0 and ℓ = 1 blocks are *disconnected components* — the graph has no 2s/2p degeneracy to lift. The reported quantity selects, per node, the eigenvector of maximal amplitude there, and that selection is a near-tie: at n_max = 30 the top-two overlaps at (2,0,0) are 0.2582 / 0.2550 (1.2% margin) with eigenvalues 3.0 and 0.011. The twelve percentages reproduce exactly but are not robust. | CODE-DELTA-A D1/D2; **PM-recomputed** (overlap table, component labels) | Conditioning caveat in Paper 1 §III; every locus in P1/P7/synthesis reworded to "node-amplitude proxy, not a spectral gap"; pinned by `tests/test_paper1_block_spectrum.py`. |
+| J.0.2 | **The CG-construction non-decay had no test** — and it is the sentence that *scopes* Paper 1's headline artifact-decay claim. | CODE-DELTA-A D3 | `test_cg_construction_splitting_does_not_decay` pins 129/68/84/139% at n_max = 8/10/15/20. |
+| J.0.3 | **UPGRADE: the spectrum is closed form and the rate is provable.** Each ℓ-block is the grid graph P_{n_max−ℓ} × P_{2ℓ+1}, so spec(L) = {2−2cos(jπ/(n_max−ℓ)) + 2−2cos(kπ/(2ℓ+1))} (verified against dense eigh, max diff 1e-13), and 2d_max − λ_max = (42.6 + o(1))/n_max² (log–log slope −1.984 over n_max = 20…320). The papers said "no rate proven here". | CODE-DELTA-A U1; **PM-recomputed** | Eq. `block_spectrum` + [INTERNAL THEOREM] in Paper 0 §VI; cited in Paper 7 item 1; new test file; matrix row. |
+
+### J.1 — claim-wide sweep (the locus-by-locus lesson)
+
+Both claims reviewers found the same shape: the corrected theorem, the uncorrected abstract. Fixed claim-wide, not locus-wise:
+
+- **Graph→S³ convergence asserted as established** at 5 loci in Paper 7 (abstract, §VIII summary, Concluding Remarks ×2, §VII lead-in), 3 in Paper 0, 4 in the group3 synthesis (including headline H1 and "the framework's central claim") — all reworded to the Observation with its numerical indications named.
+- **"reproduces the Rydberg spectrum"** at synthesis :152, :283, :650 → quantum-number structure. **"Laplacian spectrum converges to n²−1"** (synthesis :408) → the labels statement (the delta's own measurement falsifies the spectral reading).
+- **Retired c²(n,0) = (1/4)² = 1/16** survived at Paper 7 §III.A → corrected.
+- **Lorentzian zombies in Paper 42** (4 loci: the headline reading, "genuine Lorentzian extension", the L3 target ×2) → signature-blind closure + DESCOPED.
+- **Forced-count 128/260** at the field guide, Paper 57's displayed equation, and Paper 32's own theorem statement (the N_gen count) → 32 / rank 16 / withdrawn.
+- **Metric-convention residues**: Paper 38's abstract, its Hopf-base remark, its Appendix A "both constants are 2Vol(base)/Vol(group)" (false as written), the group1 synthesis "the constant is that of the group, not of a circle", the field guide "the substrate's Vol(S²)/π² signature", and Paper 32's eight unannotated 4/π loci.
+- **Arithmetic**: Paper 18's "$2 d_max = \Omega(0)^4 = 2^4/2 = 8$" (Ω(0)⁴ = 16, not 8); Paper 38's "hmm ---" drafting artifact and its empty inline-math group; the γ₁ "diameter" gloss (it is twice the Haar-mean distance); Paper 38's §L2 class-angle definition (χ ∈ [0,π] with the wrong measure) reconciled with eq:gamma_def.
+- **Layer counts** (four "fourth layer" loci in Paper 32), `\Lambda_{prop}` framing, "all compact simple", the C*-envelope remark title, the axiom-table cross-reference (1.49/1.26 pointed at a table with no residual figure → the Lorentzian table), and the stale xfail/docstring in `test_trunk_qa_splitting.py`.
+
+### J.2 — what DELTA #3 confirmed as sound
+
+The κ / c² / Δ re-pricing (an exact-rational route independent of both the closed form and the file's quadrature reproduced the coupling at every pair tried); the convergence re-scope (no matched target smuggled into any assertion); 9/9 planted defects fired; all nine citation edits CONFIRMED against primary sources (two arXiv PDFs and one book manuscript read directly); the L5 disclosure ("these are the L2 moments, not independent measurements") verified bit-for-bit; the K-tripwire clean across 26 + 12 + 14 + 2 enumerated loci.
+
+### J.3 — still owed
+
+An unseeded DELTA #4 on this remediation before FULL run #4; Paper 40's normalisation cross-check (PI); CLAUDE.md §5 "H < 0.1%" (PI-only section); the NITs listed in the reviewer reports (bibkey years, `\Lambda_{prop}` symbol, Hawkins 2000 at P32:4845, matrix note fields).
 
 ---
 

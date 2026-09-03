@@ -293,7 +293,7 @@ of Paper~7 rather than a generic graph.  It is finite-dimensional
 ($\dim_{\mathbb{C}} \mathcal{A}_{\mathrm{GV}} = N_{\mathrm{Fock}}$),
 unital ($1$~is the constant function~$1$), and abelian.
 
-\begin{remark}[$\mathcal{A}_{\mathrm{GV}}$ as $C^*$-envelope of an operator system]
+\begin{remark}[$\mathcal{A}_{\mathrm{GV}}$ as the diagonal representative of an operator system]
 \label{rem:operator_system}
 \textbf{[OBSERVATION]} In the parallel reading of GeoVac through the spectral-truncation
 framework of Connes and van~Suijlekom~\cite{connes_vs2021},
@@ -344,7 +344,8 @@ because (a) it matches the Marcolli--van~Suijlekom gauge-network
 convention used throughout Papers~25 and~30, and (b) the spectral
 triple's axiom-level verifications (the finite-triple axioms of
 Theorem~\ref{thm:GV_triple}; KO-dimension audit; Hodge structure) are
-unaffected by which representative of the equivalence class is taken;
+unaffected by which representative (the diagonal algebra or the operator
+system) is taken;
 the continuum-limit clause is \emph{not} representative-blind and is
 stated for $\mathcal{O}_{n_{\max}}$ (2026-09-03).
 \end{remark}
@@ -2179,7 +2180,9 @@ partition.
 \item M1 ($k = 0$) is the natural domain of state-space
 GH rates. The L2 sprint (2026-05-06) measured the
 asymptotic constant of the SU(2) scalar central Fej{\'e}r kernel as
-$4/\pi = \mathrm{Vol}(S^2)/\pi^2$.
+$4/\pi = \mathrm{Vol}(S^2)/\pi^2$ (rotation-angle normalisation; $2/\pi
+= \mathrm{Vol}(S^2)/\mathrm{Vol}(\mathrm{SU}(2))$ on the unit $S^3$,
+Paper~38, 2026-09-03).
 \item M2 ($k = 2$) is the natural domain of heat-kernel and
 spectral-action convergence. Sprint MR-B derived a closed form for
 the Camporesi--Higuchi modular residual:
@@ -3496,7 +3499,8 @@ whose label remains an open named gap.
 
 The L5 inequality (Lipschitz-normalised panel reach and height both
 below $C_3\gamma_{n_{\max}}$) is verified numerically at $n_{\max} \in
-\{2, 3, 4\}$; the bound itself is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
+\{2, 3, 4\}$ only --- the margin roughly halves per step and is not
+claimed beyond those cutoffs (Paper~38, panel-scope note); the bound itself is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
 1.322$ (these are the L2 moments $\gamma_2, \gamma_3, \gamma_4$, not
 independent measurements; ratio $0.637$).  Module
 \texttt{geovac/gh\_convergence.py} packages the assembly (48 unit
@@ -3544,7 +3548,8 @@ Fej\'er smoothings at the common moment $\gamma_{n_{\max}}$ --- no
 partial inverse or transference estimate remains.
 \textbf{[INTERNAL THEOREM]} The convergence
 theorem is unconditional in van~Suijlekom's state-space framework at
-rate $(4/\pi + o(1))\log n_{\max}/n_{\max}$.
+rate $(4/\pi + o(1))\log n_{\max}/n_{\max}$ in the rotation-angle
+normalisation of $\gamma_{n_{\max}}$ ($2/\pi$ on the unit $S^3$).
 \end{remark}
 
 \begin{remark}[Limit identification]
@@ -3648,10 +3653,10 @@ Cor.~cor:pythagorean\_orthogonality (closed form and
 witness-universality);\ Paper~42~\S 8
 Rem.~rem:pythagorean\_underlies\_collapse (the
 six-witness-collapse statement at the inner-product level);\
-Paper~24~\S 5.3 Coulomb/HO asymmetry (seven layers in the current count) (the structural
+Paper~24~\S 5.3 Coulomb/HO asymmetry (seven layers in the current count; the structural
 finding that the Pythagorean orthogonality is $S^3$-specific to
 the construction --- the $S^5$ Hardy sector has no clean analog,
-joining the modular-Hamiltonian level as a fourth Coulomb/HO
+joining the modular-Hamiltonian level as a further Coulomb/HO
 asymmetry layer alongside spectrum-computing $L_0$, calibration
 $\pi$, and Wilson matter coupling).
 \end{remark}
@@ -3873,7 +3878,7 @@ Dirac fermions on the Coulomb graph.
 The two-step picture is consistent with Paper~24's Coulomb/HO
 asymmetry and adds to it (the current count is seven layers, Paper~31):\ to the prior
 asymmetries (spectrum-computing role of $L_0$; calibration~$\pi$;
-Wilson gauge-with-natural-matter) one now adds a fourth layer at
+Wilson gauge-with-natural-matter) one adds a further layer at
 which the $S^3$ Coulomb side is special:\ the gauge group acts in
 the same representation as the matter, and matter--gauge coupling
 is structurally available.  On the $S^5$ Bargmann side the
@@ -4850,15 +4855,15 @@ Riemannian on a single manifold, never crossing.
 
 The structural reading is that G4b is the Coulomb/HO
 asymmetry of Paper~24~\S V resurfacing at the spectral-triple level.
-Paper~24~\S 5.3 now records four layers of this asymmetry, all
-Coulomb-specific:\ (i)~spectrum-computing role of $L_0$;\
+Paper~24~\S 5.3 records these layers of this asymmetry (seven in the
+current count, Paper~31), all Coulomb-specific; the first four:\ (i)~spectrum-computing role of $L_0$;\
 (ii)~calibration~$\pi$;\ (iii)~Wilson gauge with natural matter
 coupling, Sec.~\ref{sec:unified_gauge};\ and (iv)~modular-Hamiltonian
 Pythagorean orthogonality on the hemispheric wedge, the structural
 mechanism behind the L2-E signature-independence finding
 (Paper~43~\S 10.2~\cite{paper43};
 Remark~\ref{rem:pythagorean_m1_closure} above).  G4b is a
-\emph{sibling} of these four layers, not the lone fourth layer:\ the
+\emph{sibling} of these layers, not a lone additional layer:\ the
 Coulomb $S^3$ side carries a Riemannian spectral triple in the
 standard NCG sense and supports the BW-aligned wedge-modular
 construction at signatures $(3, 0)$ and $(3, 1)$, while the Bargmann
@@ -4918,9 +4923,10 @@ $*$-representation of the direct sum; corrected in
 \texttt{geovac/standard\_model\_triple.py}).  With the corrected
 representation the finite-algebra order-zero and order-one residuals are
 exactly zero, while the combined-triple residuals ($1.49$ and $1.26$ at
-$n_{\max} = 2$) are the GV factor's finite-resolution residual of
-Table~\ref{tab:axiom_audit}, factorising through the operator-system
-commutator with residual $0$ (\texttt{tests/test\_standard\_model\_triple.py});
+$n_{\max} = 2$) are the GV factor's finite-resolution residual (the operator-system
+multipliers do not commute; cf.\ the order-zero/one rows of
+Table~\ref{tab:axiom_audit_lorentzian}), factorising through the
+operator-system commutator with residual $0$ (\texttt{tests/test\_standard\_model\_triple.py});
 the gauge census still returns $\mathrm{U}(1) \times \mathrm{SU}(2)
 \times \mathrm{SU}(3)$ at $n_{\max} = 2$ (colour now read from the
 antiquark block); and the combined grading
@@ -5304,9 +5310,10 @@ $m = 0$ --- so the order-one condition added almost no constraint; every
 ``$128$'' quoted earlier in this paper as a matter-sector moduli count
 refers to that degenerate sample.  The physical-slice dimension under
 restriction to diagonal Yukawa
-$Y = \mathrm{diag}(y_\nu, y_e, y_u, y_d)$ is $8$ per generation.  For
-$N_{\mathrm{gen}}$ generations with full generation-mixing Yukawa
-matrices the matter-sector count is $128 \cdot N_{\mathrm{gen}}^2$.
+$Y = \mathrm{diag}(y_\nu, y_e, y_u, y_d)$ is $8$ per generation.  The
+$N_{\mathrm{gen}}$-generation count with full generation-mixing Yukawa
+matrices is not re-derived here (the $128 \cdot N_{\mathrm{gen}}^2$
+stated before 2026-09-03 was the degenerate-sample figure).
 \end{theorem}
 
 \begin{proof}[Proof sketch]

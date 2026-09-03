@@ -41,7 +41,7 @@ $K_{\mathrm{vac}} = -1/16$ the extremal eigenvalue reaches the hydrogen
 ground-state energy---matched, not derived: the content that could have
 failed is the spectral bound, not the target the scale is matched to; the full per-shell
 spectrum $E_n = -Z^2/(2n^2)$ requires an additional node-weight term
-(Paper~18~\cite{paper18}~\S\,\textsc{iii}).  \textbf{[PANEL-VERIFIED]} This angular cross-section recurs as a universal
+(Paper~18~\cite{paper18}~\S\,\textsc{iii}).  \textbf{[OBSERVATION]} This angular cross-section recurs as a universal
 structural factor inside every natural geometry developed in the
 Geometric Vacuum series---from $S^3$ for atoms through composed fiber
 bundles for multi-electron molecules---making it a foundational
@@ -483,7 +483,7 @@ Y_{\ell m}(\theta, \phi)$.  The angular factor $Y_{\ell m}$ is
 precisely the per-shell structure of the packing, with $\ell = k - 1$.
 Paper~7~\cite{paper7} shows that the continuum limit of the graph
 Laplacian on the $2n^2$ packing is conformally equivalent to this
-$S^3$ operator (the convergence itself is demonstrated empirically
+$S^3$ operator (the convergence itself is only indicated numerically, not established,
 through $n_{\max} = 30$).
 
 \textbf{Level~2: H$_2^+$ on prolate spheroids.}
@@ -570,7 +570,8 @@ The conformal equivalences between the continuum limit of the graph
 Laplacian and each continuum operator are established case by case:
 \textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic proofs of the Fock
 projection chain for the $S^3$ embedding (the graph-to-continuum
-convergence itself is empirical, through $n_{\max} = 30$), and the
+convergence itself is only indicated numerically, through $n_{\max} = 30$,
+and is not established), and the
 subsequent papers verify the angular-sector recurrences and benchmark
 each geometry in the hierarchy numerically.
 The framework is demonstrably conformally equivalent to standard
@@ -583,7 +584,7 @@ An analogy to isospectral manifolds is apt.  Kac's celebrated
 question---``Can one hear the shape of a drum?''---established that
 different Riemannian geometries can share spectral data (the answer, as
 Gordon, Webb, and Wolpert showed, is no: non-isometric manifolds can be
-\textbf{[OBSERVATION]} isospectral).  The present result is stronger in a specific sense:
+isospectral).  \textbf{[OBSERVATION]} The present result is stronger in a specific sense:
 the geometries in Table~\ref{tab:cross-section} share a labeled node
 structure---quantum number assignments and per-shell degeneracies,
 with the $(\ell, m)$ selection rules shared exactly wherever the
@@ -642,8 +643,9 @@ different~$\ell$ (e.g., $\ell$-changing transitions driven by
 non-spherical perturbations).  However, for the spherically symmetric
 Coulomb problem, the Hamiltonian is block-diagonal in~$\ell$: the
 spherical symmetry decouples the $\ell$~sectors, so that the graph
-Laplacian decomposes into independent $(\ell, m)$ blocks even if the
-underlying graph contains $\ell$-changing edges.  This
+Laplacian decomposes into independent $\ell$-blocks ($m$ is mixed within a
+block by the azimuthal edges; the production graph has no $\ell$-changing
+edges --- corrected 2026-09-03 from ``$(\ell, m)$ blocks'').  This
 block-diagonality is a consequence of the potential's symmetry, not a
 topological constraint on the graph itself.
 
@@ -673,10 +675,18 @@ mechanism connecting them.
 $\ell$-blocks; the $\ell = 0$ block is a path graph in $n$ whose top
 eigenvalue tends to 4, while the full graph's largest Laplacian
 eigenvalue converges to $\lambda_{\max} \to 8 = 2 d_{\max}$, twice the
-coordination number, attained in a mid-$\ell$ block
+coordination number, attained in a mid-$\ell$ block ($\ell = 11$ at
+$n_{\max} = 30$)
 (\texttt{tests/test\_trunk\_qa\_kappa.py},
 \texttt{tests/test\_paper7\_graph\_convergence.py}; 2026-09-03
-correction of an earlier ``within each $(\ell,m)$ sector'' statement);
+correction of an earlier ``within each $(\ell,m)$ sector'' statement).
+\textbf{[INTERNAL THEOREM]} The saturation has a closed-form rate.  Because no edge changes $\ell$, the Laplacian is block diagonal in $\ell$ and each block is the grid graph $P_{n_{\max} - \ell} \times P_{2\ell+1}$ (radial $\times$ azimuthal paths), so the whole spectrum is
+\begin{equation}
+  \operatorname{spec}(L) = \Bigl\{\, 2 - 2\cos\frac{j\pi}{n_{\max}-\ell}
+  \;+\; 2 - 2\cos\frac{k\pi}{2\ell+1} \,\Bigr\},
+  \label{eq:block_spectrum}
+\end{equation}
+and the deficit obeys $2 d_{\max} - \lambda_{\max} = (42.6 + o(1))/n_{\max}^2$ (log--log slope $-1.984$ over $n_{\max} = 20$--$320$; \texttt{tests/test\_paper1\_block\_spectrum.py}, added 2026-09-03).  
 with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
 $K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
 ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
@@ -689,7 +699,7 @@ The conformal equivalence between the continuum limit of this graph
 Laplacian and the Laplace--Beltrami operator on the unit~$S^3$ (via
 Fock's stereographic projection) is developed in Paper~7~\cite{paper7},
 \textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (several limiting-case or definitional) validates the conformal geometry
-(the convergence itself is demonstrated empirically through
+(the convergence itself is only indicated numerically, not established, through
 $n_{\max}=30$; the rate is a separate result).  The energy
 eigenvalues and dynamics built on this graph are developed in
 Paper~1~\cite{paper1} and the archived Paper~6~\cite{paper6}.
@@ -843,9 +853,11 @@ atoms~\cite{paper7} through composed fiber bundles for core--valence
 molecules~\cite{paper17}.  When equipped with a graph Laplacian and
 kinetic scale, this packing becomes the foundation for a computational
 framework that has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
-\textbf{[MEASURED]} LiH, and BeH$^+$, with errors of $0.57\%$ for the hydrogen ground state on the
-production graph at $n_{\max} = 30$ ($0.11\%$ at $n_{\max} = 70$; the
-continuum chain itself is exact) and $5.3\%$ for the LiH equilibrium
+\textbf{[MEASURED]} LiH, and BeH$^+$, with a saturation deficit of $0.57\%$ for the hydrogen ground-state
+bound on the production graph at $n_{\max} = 30$ (a by-construction
+quantity, \S VI; $0.11\%$ at $n_{\max} = 70$,
+\texttt{tests/test\_paper7\_graph\_convergence.py}; the continuum chain
+itself is exact) and $5.3\%$ for the LiH equilibrium
 geometry (BeH$^+$ is markedly worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
 pseudopotential; HeH$^+$ is treated at a fixed bond length and recovers
 93\% of $D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent

@@ -84,9 +84,7 @@ distance~\cite{vs2021_jgp}, with explicit rate
 d_{\mathrm{GH}} \le \gamma_{\nmax}
 = (4/\pi + o(1)) \log \nmax / \nmax
 \)
-in the rotation-angle normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note)
-\(
-\)
+in the rotation-angle normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note).
 \textbf{[INTERNAL THEOREM]} The truncated state spaces are metrized
 by the left-translation
 Lipschitz seminorm, which equals the Dirac/metric Lipschitz constant
@@ -122,9 +120,9 @@ Berezin map (convolution form) that is positive,
 contractive, an approximate identity, and L3-compatible;\ (L5)
 assembly of the distance bound via an approximation pair.
 \textbf{[OBSERVATION]} The
-asymptotic constant $4/\pi = \Vol(S^2)/\pi^2$ identifies as the
-Hopf-base measure factor in the standard $\SU(2)/U(1)$ Haar
-normalisation, exhibiting the expected one-log slowdown of the
+asymptotic constant identifies as the Hopf-base measure factor ---
+$4/\pi = \Vol(S^2)/\pi^2$ in the rotation-angle normalisation, $2/\pi =
+\Vol(S^2)/\Vol(\SU(2))$ on the unit $\sthree$ --- exhibiting the expected one-log slowdown of the
 non-abelian SU(2) rate relative to the
 Leimbach--van~Suijlekom~\cite{leimbach_vs2024} torus rate $O(1/\nmax)$.
 State-space Gromov--Hausdorff convergence of scalar truncations for
@@ -842,9 +840,12 @@ half-integer with $2j_{\max}+1 \le \nmax$.
 The kernel is positive on $\SU(2)$ (manifestly), central (depends only
 on the conjugacy class of $g$), and unit-mass under the standard
 $\SU(2)$ Haar measure $dg$. Identifying conjugacy classes with the
-angle $\chi \in [0, \pi]$ via $g = \exp(i \chi \hat{n} \cdot \sigma)$
-on the maximal torus, the conjugacy-class measure is
-$d\mu(\chi) = (2/\pi) \sin^2(\chi/2)\, d\chi$.
+rotation angle $\chi \in [0, 2\pi]$ via $g = \exp(i (\chi/2)\, \hat{n}
+\cdot \sigma)$ on the maximal torus (eigenphases $\pm\chi/2$;
+unit-$\sthree$ geodesic distance $\chi/2$; corrected 2026-09-03 from
+$\chi \in [0, \pi]$ with $g = \exp(i\chi \hat n \cdot \sigma)$, which
+is the geodesic angle and does not match the characters below), the
+conjugacy-class measure is $d\mu(\chi) = (1/\pi) \sin^2(\chi/2)\, d\chi$.
 
 \begin{lemma}[L2: kernel construction and quantitative rate]\label{lem:L2}
 The central spectral Fej\'er kernel $\KS_{\nmax}$ has the following
@@ -891,8 +892,8 @@ $e$; the characters below are $\sin((2j{+}1)\chi/2)/\sin(\chi/2)$).
 wrote $d_{\mathrm{round}}(e, g)$ in place of $\chi(g)$ while every
 computation (the sum rule, the module, the estimators) used $\chi$; the
 moment against the unit-$\sthree$ distance is exactly $\gamma_{\nmax}/2$
-at every $\nmax$ ($\KS_1 \equiv 1$ makes $\gamma_1 = \pi$, the diameter,
-while the Haar-mean distance is $\pi/2$;
+at every $\nmax$ ($\KS_1 \equiv 1$ makes $\gamma_1 = \pi$, exactly twice the
+unit-$\sthree$ Haar-mean distance $\pi/2$ --- a mean, not a diameter;
 \texttt{tests/test\_p38\_metric\_convention.py}).  All constants below
 are stated in the $\chi$ (rotation-angle) normalisation; halve them for
 the unit $\sthree$.
@@ -1009,9 +1010,11 @@ sides''; that statement is withdrawn (2026-09-02 certification run).
 \textbf{[OBSERVATION]} In the rotation-angle normalisation the $\SU(2)$
 constant is twice the circle constant; in the unit-$\sthree$
 normalisation (geodesic distance, the circle's own convention) the two
-coincide at $2/\pi = \Vol(\text{base})/\Vol(\text{group})$ on both
-($\Vol(S^0)/\Vol(S^1) = 2/(2\pi)\cdot 2$, hmm --- $2\Vol(S^0)/\Vol(S^1)
-= 4/(2\pi) = 2/\pi$; $\Vol(S^2)/\Vol(\SU(2)) = 4\pi/(2\pi^2) = 2/\pi$), the
+coincide at $2/\pi$ (circle:\ $2\Vol(S^0)/\Vol(S^1) = 4/(2\pi) = 2/\pi$;
+$\SU(2)$:\ $\Vol(S^2)/\Vol(\SU(2)) = 4\pi/(2\pi^2) = 2/\pi$ --- the same
+number, reached with a factor $2$ on the circle side and without it on
+the $\SU(2)$ side, so no common ``$2\Vol(\text{base})/\Vol(\text{group})$''
+form is claimed), the
 ratio of the unit-metric $\SU(2)$ estimator to the circle's being
 $1.004$ at $n = 800$ (2026-09-03 correction:\ the factor $2$ reported
 before is the metric scale, not a group-theoretic signature). No
@@ -1026,16 +1029,19 @@ rate $O(1/\nmax)$~\cite{leimbach_vs2024}, not relative to the circle
 Fej\'er first moment.
 \end{remark}
 
-\begin{remark}[Hopf-base measure interpretation of $4/\pi$]
-\textbf{[OBSERVATION]} The asymptotic constant identifies as
+\begin{remark}[Hopf-base measure interpretation of the constant]
+\textbf{[OBSERVATION]} In the rotation-angle normalisation the asymptotic
+constant identifies as
 \begin{equation*}
    \frac{4}{\pi}
    \;=\; \frac{\Vol(S^2)}{\pi^2}
-   \;=\; \frac{4\pi}{\pi^2}.
+   \;=\; \frac{4\pi}{\pi^2},
 \end{equation*}
+and on the unit $\sthree$ as $2/\pi = \Vol(S^2)/\Vol(\SU(2))$.
 The numerator $4\pi$ is the round volume of the Hopf base
 $S^2 = \SU(2)/U(1)$. The denominator $\pi^2$ is half the round volume
-of $\SU(2)$ in the bi-invariant metric. The constant therefore lives
+of $\SU(2)$ in the bi-invariant metric (the factor of two being the
+metric scale, 2026-09-03). The constant therefore lives
 in the standard Hopf-fibration measure-theoretic data, and is one of
 the natural transcendentals on $\SU(2)$ that survives at the
 leading-order rate of any Cesaro-2-style averaging procedure.
@@ -1520,11 +1526,13 @@ $\sqrt{(N-1)/(N+1)}$ form.
 The cumulative effect is that the SU(2) rate is one log factor slower
 than the torus rate ($\log n / n$ vs $1 / n$). This is the standard
 slowdown of non-abelian compact groups relative to flat tori in
-Cesaro/Fej\'er theory. \textbf{[OBSERVATION]} The asymptotic constant
-$4/\pi$ is twice the circle Fej\'er first-moment constant $2/\pi$
-(Remark~\ref{rem:circle_fejer}); we read the $\SU(2)$ value as the
-Hopf-base measure factor $2\Vol(S^2)/\Vol(\SU(2))$ in the
-$\SU(2)/U(1)$ Haar normalisation. (An earlier version of this
+Cesaro/Fej\'er theory. \textbf{[OBSERVATION]} In the rotation-angle normalisation the
+asymptotic constant $4/\pi$ is twice the circle Fej\'er first-moment
+constant $2/\pi$; on the unit $\sthree$ the two coincide, the factor
+$2$ being the metric scale (Remark~\ref{rem:circle_fejer},
+2026-09-03); we read the $\SU(2)$ value as the Hopf-base measure
+factor $\Vol(S^2)/\Vol(\SU(2))$ (unit $\sthree$), i.e.\
+$2\Vol(S^2)/\Vol(\SU(2))$ in the rotation-angle normalisation. (An earlier version of this
 sentence stated the constant as ``identical on both sides''; withdrawn
 2026-09-02.)
 
@@ -1818,11 +1826,12 @@ in closed form and measured). The $\sin^2(\chi/2)$ factor in the
 $\SU(2)$ conjugacy-class measure and the $\sqrt{2j+1}$ Plancherel
 weighting of Definition~\ref{def:central_fejer} together change the
 kernel and the constant while preserving the leading $\log n / n$
-behaviour. \textbf{[OBSERVATION]} Both constants are of the form
-$2\Vol(\text{base})/\Vol(\text{group})$ --- $2\Vol(S^0)/\Vol(S^1) =
-2/\pi$ and $2\Vol(S^2)/\Vol(\SU(2)) = \Vol(S^2)/\pi^2 = 4/\pi$ on the
-$\SU(2)/U(1)$ Haar quotient --- but no derivation of the factor $2$
-from the circle constant is given. (An earlier version of this
+behaviour. \textbf{[OBSERVATION]} On the circle the constant is $2\Vol(S^0)/\Vol(S^1)
+= 2/\pi$; on $\SU(2)$ it is $\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$ on the unit
+$\sthree$ and $2\Vol(S^2)/\Vol(\SU(2)) = \Vol(S^2)/\pi^2 = 4/\pi$ in the
+rotation-angle normalisation; no common ``$2\Vol(\text{base})/\Vol(\text{group})$''
+form is claimed (2026-09-03), and no derivation of one constant from
+the other is given. (An earlier version of this
 paragraph stated the circle constant as $4/\pi$ and the $\SU(2)$
 constant as ``preserved across this transition''; withdrawn
 2026-09-02.)

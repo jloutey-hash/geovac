@@ -12,7 +12,9 @@
 \date{February 22, 2026}
 
 \begin{abstract}
-We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg quantum-number structure ($n$ and $\ell(\ell+1)$) from operator eigenvalues; the energies $E_n = -1/(2n^2)$ follow once the matched kinetic scale is applied (an Observation, Paper~7). \textbf{(ii) Geometric artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff ($37\%$ at $n_{\max}=5$, oscillating through $16\%$ at $8$ and $1.7\%$ at $10$ to $0.39\%$ at $30$ on the binary production lattice; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit. \textbf{(iii) Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
+We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg quantum-number structure ($n$ and $\ell(\ell+1)$) from operator eigenvalues; the energies $E_n = -1/(2n^2)$ follow once the matched kinetic scale is applied (an Observation, Paper~7). \textbf{(ii) Geometric artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff ($37\%$ at $n_{\max}=5$, oscillating through $15.6\%$ at $8$ and $1.7\%$ at $10$ to $0.39\%$ at $30$ on the binary production lattice; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit (which is a
+statement about the continuum operator:\ the graph's $l$-blocks are
+disconnected, so the graph has no $s/p$ degeneracy of its own). \textbf{(iii) Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
 \end{abstract}
 
 \maketitle
@@ -137,10 +139,12 @@ construction, and on the binary lattice the $s/p$ splitting decays,
 strongly oscillating, to below $1\%$ by $n_{\max} = 30$.  The specific
 CG-construction figures are retained as illustrative of that
 construction only. \emph{This caveat applies wherever these figures
-recur---the abstract, Table~I, Appendix~B, and the convergence list
-below, which now prints the binary-lattice measurements.  (The
+recur---Table~I (the abstract, Appendix~B and the convergence list
+below now print the binary-lattice measurements).  (The
 placeholder figure environments that also restated them were removed
 2026-09-01.)}
+
+\emph{Conditioning caveat (2026-09-03).}  The $l$-blocks of the graph Laplacian are \emph{disconnected} components (no edge changes $l$), so there is no $2s/2p$ degeneracy in the graph spectrum to lift:\ the quantity reported here selects, for each of the nodes $|2,0,0\rangle$ and $|2,1,0\rangle$, the eigenvector of maximal amplitude at that node, and that selection is a near-tie (top-two overlaps within $1.2\%$ at $n_{\max} = 30$, with selected eigenvalues $3.0$ and $0.011$).  The percentages below reproduce exactly but are \emph{not robust} to the mode-selection rule;\ they are a node-amplitude proxy, not a spectral gap (\texttt{tests/test\_paper1\_block\_spectrum.py}).
 
 \subsection{Convergence Analysis}
 
@@ -153,15 +157,19 @@ the 2s/2p splitting at each resolution:
   \item At $n_{\max} = 5$: $\Delta E_{\mathrm{rel}} \approx 37\%$ (the
     maximum on the grid)
   \item At $n_{\max} = 6, 7$: $12.7\%$, $0.65\%$
-  \item At $n_{\max} = 8$: $\approx 16\%$ (a secondary peak); by
+  \item At $n_{\max} = 8$: $15.6\%$ (a secondary peak); by
     $n_{\max} = 10$ it has fallen to $\approx 1.7\%$
   \item At $n_{\max} = 15, 18$: $1.7\%$, $1.1\%$
   \item At $n_{\max} = 20$: $\Delta E_{\mathrm{rel}} \approx 4.1\%$ (a
     third excursion)
   \item At $n_{\max} = 25, 30$: $1.8\%$, $0.39\%$
 \end{itemize}
-(binary production lattice, full-spectrum maximum-overlap identification,
-\texttt{tests/test\_trunk\_qa\_splitting.py}; the list printed before
+(binary production lattice, full-spectrum maximum-overlap identification ---
+see the conditioning caveat above;
+\texttt{tests/test\_trunk\_qa\_splitting.py} pins the qualitative content
+(bounded, non-monotone, downward trend, sub-percent at $n_{\max} = 30$),
+\texttt{tests/test\_paper1\_block\_spectrum.py} the conditioning and the
+CG-construction non-decay; the list printed before
 2026-09-03---$13\%$, $16\%$, $0.3\%$, $0.005\%$---did not reproduce at
 $n_{\max} = 5$, $20$ or $30$.)
 
@@ -355,7 +363,8 @@ This clarifies the role of geometry: the lattice encodes \textit{kinematic} cons
 Our convergence analysis establishes a clear separation between
 discretization artifacts and genuine physical content of the graph
 Laplacian. The $s/p$ splitting is firmly in the artifact category:
-it vanishes as $n_{\max} \to \infty$ and exhibits the oscillatory
+on the binary lattice it decays as $n_{\max} \to \infty$ (not on the
+CG-weighted construction of \S III) and exhibits the oscillatory
 decay characteristic of finite-size aliasing.
 
 By contrast, the spectral bound $\lambda_{\max} \to 2 d_{\max} = 8$
@@ -383,9 +392,9 @@ If quantum states are discrete nodes, what is the wavefunction $\psi(r)$? One po
 We have demonstrated that quantum mechanics, when formulated on a discrete paraboloid lattice, exhibits a dual structure:
 \begin{itemize}
 \item \textbf{Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators reproduce the hydrogen quantum-number structure without corrections; the energies follow with the matched kinetic scale (Paper~7).
-\item \textbf{Understood discretization artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite $n_{\max}$ (up to $37\%$ at $n_{\max}=5$ on the binary production lattice, $16\%$ at $8$, $1.7\%$ at $10$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates ($4.1\%$ at $n_{\max}=20$) and decays below 1\% by $n_{\max}=30$ ($0.39\%$), recovering the exact Coulomb degeneracy; on the CG-weighted construction of \S III the lift does \emph{not} decay (measured 2026-09-03), so the artifact-decay claim is scoped to the binary lattice.
+\item \textbf{Understood discretization artifacts:} \textbf{[MEASURED]} The graph Laplacian's node-amplitude proxy for the $s/p$ gap is large at finite $n_{\max}$ (up to $37\%$ at $n_{\max}=5$ on the binary production lattice, $15.6\%$ at $8$, $1.7\%$ at $10$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates ($4.1\%$ at $n_{\max}=20$) and decays below 1\% by $n_{\max}=30$ ($0.39\%$), recovering the exact Coulomb degeneracy; on the CG-weighted construction of \S III the lift does \emph{not} decay ($129$, $68$, $84$ and $139\%$ at $n_{\max} = 8, 10, 15, 20$; \texttt{tests/test\_paper1\_block\_spectrum.py}), so the artifact-decay claim is scoped to the binary lattice, and both figures carry the conditioning caveat of \S III.
 \item \textbf{Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued $SU(2)/SU(1,1)$ operators; the edge-weight log-holonomy decays as $\Theta \propto n^{-1}$, measuring the curvature of the weight function. Whether a $U(1)$ gauge extension can produce a genuine geometric phase with relativistic scaling remains an open question.
-\item \textbf{Kinematic completeness:} \textbf{[OBSERVATION]} The lattice encodes the $\alpha$-independent single-electron structure---the Coulomb spectrum, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
+\item \textbf{Kinematic completeness:} \textbf{[OBSERVATION]} The lattice encodes the $\alpha$-independent single-electron structure---the Coulomb quantum-number structure, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
 \end{itemize}
 
 These results support a graph-theoretic reformulation of the hydrogen state space in which the algebraic operators encode the exact quantum-number structure (the energies following with the matched kinetic scale) and the graph Laplacian introduces controlled, quantitatively understood finite-size artifacts. The algebra-geometry duality is suggestive of a connection to wave-particle complementarity, though we do not claim it establishes one. Critically, the graph Laplacian does not replace electromagnetic interactions or generate the Lamb shift; it encodes the kinematic manifold of the electron.

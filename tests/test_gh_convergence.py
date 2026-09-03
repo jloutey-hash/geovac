@@ -307,6 +307,12 @@ class TestPropinquityBound:
         panel reach and height both lie below C_3 * gamma_{n_max}.  Measured
         2026-09-02: height/Lip = 0.667, 0.808, 0.878 vs gamma = 2.075, 1.610,
         1.322 at n_max = 2, 3, 4 (margin halving per step)."""
+        # SCOPE (2026-09-03): verified on the DEFAULT PANEL at n_max <= 4 only.
+        # The margin halves per step (1.41 / 0.80 / 0.45) and is on track to
+        # close near n_max ~ 7; that would indicate the panel's un-normalised
+        # reach/height are not the quantities L5 bounds (the theorem's proof
+        # does not use the panel), and is a named check -- do NOT widen this
+        # loop without settling it.
         for n_max in [2, 3, 4]:
             b = compute_propinquity_bound(n_max)
             assert b.l5_inequality_holds, b.to_dict()

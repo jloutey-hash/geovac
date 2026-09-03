@@ -136,3 +136,13 @@ def test_spectrum_confined_and_bottom_dense_at_nmax_30():
     hi = float(eigsh(H, k=1, which="LA")[0][0])
     assert lo[0] > -0.5 and hi <= 1e-9
     assert (lo[-1] - lo[0]) / abs(lo[0]) < 1e-3
+
+
+@pytest.mark.slow
+def test_lambda_max_deficit_at_nmax_70_slow():
+    """Paper 0 conclusion: 0.11% saturation deficit at n_max = 70 (116,795
+    nodes; ~3 min).  Measured 2026-09-03: E0 = -0.499463."""
+    _, _, L, dmax = _laplacian(70)
+    lm = float(eigsh(L, k=1, which="LA")[0][0])
+    assert dmax == 4
+    assert 0.0009 < (8 - lm) / 8 < 0.0013

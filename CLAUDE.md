@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.4.1 (September 3, 2026)
+**Version:** v5.4.2 (September 3, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **DELTA #3 (2026-09-03, v5.4.2):** DEFECTS — the v5.4.1 remediation was locus-by-locus, so the descoped readings survived at 12 loci; swept claim-wide. New: s/p splitting is a node-amplitude proxy (disconnected l-blocks), and the block spectrum is closed form with a proven O(n^-2) rate. See carryforward Part J.
 - **/qa trunk FULL run #3 (2026-09-03, v5.4.1):** FAIL (55 MATERIAL, unseeded), remediated same day. Five re-pricings: graph→S³ convergence was κ·λ_max by construction; P38 constant 2/π on the unit S³ (4/π = rotation angle); Forced count 260 → 32 (representation bug); P32 Thm 1 scope; prop = 2 generic. See carryforward Part I.
 - **v5.4.0 PI adjudications (2026-09-02):** P40 retitled (semisimple); finite triple prints sign triple (−,+,+), no KO label; Paper 7 convergence test added; P40 §L5 = state-space GH. See CHANGELOG v5.4.0.
 - **QA gate: seeding opt-in (2026-09-02, PI direction):** blind calibration seeds are no longer default for DELTA/FULL runs; `/qa <target> seeded` invokes them. See .claude/commands/qa.md.

@@ -115,3 +115,10 @@ re-prices everything above it.
   re-pricings applied with dated correction notes, one production bug fixed
   (SM representation), three new tests + six rewritten, C16 widened. FAIL
   stands until an unseeded DELTA and FULL run #4.
+- 2026-09-03 (v5.4.2) — **DELTA #3 (unseeded) = DEFECTS**, remediated same day
+  (carryforward Part J): the FULL-run-#3 remediation had been applied
+  locus-by-locus, so the descoped readings survived at twelve loci; swept
+  claim-wide. Two new findings: the s/p splitting is a node-amplitude proxy,
+  not a spectral gap (disconnected l-blocks, near-tie mode selection); and
+  the block spectrum is closed form with a proven O(n_max^-2) saturation rate
+  (upgrade). Citations CLEAN-DELTA. FAIL stands; DELTA #4 owed before FULL #4.

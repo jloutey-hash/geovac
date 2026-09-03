@@ -1342,3 +1342,33 @@ L5 panel inequality holds at n_max 2-4 with decreasing margin. Full list:
 carryforward Part I.8.
 
 Lesson (6), added during remediation: a bash heredoc halves backslashes, so a LaTeX-bearing replacement string written through one turns `\ref` into a carriage return + `ef`; a subsequent text-mode round trip launders the CR into a newline, leaving corruption that no control-character scan can see. Both instances this session were caught only by pdflatex; C19 now checks for CR-tails at a line start. Rule reaffirmed: LaTeX-bearing edits go through script FILES, never heredocs.
+
+## 10. DELTA #3 (2026-09-03, unseeded, on v5.4.0..v5.4.1) = DEFECTS, remediated (v5.4.2)
+
+Five reviewers on the diff. Citations CLEAN (9/9 confirmed against primary
+sources). The other four returned DEFECTS, all of one shape: the remediation
+had been applied locus-by-locus, so every descoped reading survived wherever
+the sweep had not looked -- the graph->S^3 convergence still asserted as
+established at twelve loci across three documents, the Lorentzian "literal
+identification" at four loci in Paper 42, the Forced-count 128/260 in the
+field guide, Paper 57's displayed equation and Paper 32's own theorem
+statement. Fixed claim-wide.
+
+Two genuinely new findings, both PM-recomputed:
+ (1) the s/p "splitting" is not a spectral gap at all -- no edge changes l,
+     so the l = 0 and l = 1 blocks are disconnected components and the
+     maximum-overlap mode selection is a near-tie (top-two within 1.2% at
+     n_max = 30, selected eigenvalues 3.0 vs 0.011). The twelve percentages
+     reproduce exactly and are not robust; they are a node-amplitude proxy.
+ (2) UPGRADE: each l-block is the grid graph P_{n_max-l} x P_{2l+1}, so the
+     whole spectrum is closed form and the saturation deficit is
+     (42.6 + o(1))/n_max^2 -- a proven rate where the papers said none was.
+
+Lesson (7): a locus-by-locus remediation of a claim-level defect is not a
+remediation. When a run re-prices a CLAIM, sweep the claim (every assertion
+of it, in every document), not the loci the reviewer happened to quote --
+and check the abstract, the summary and the sibling paper first, because
+that is where the survivors were every time.
+Lesson (8): reproducibility is not robustness. Twelve percentages that
+reproduce to five digits can still be an artifact of an arbitrary
+tie-break; ask what selects the object before trusting the number.

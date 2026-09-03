@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.4.2] - 2026-09-03
+
+**DELTA #3 (unseeded) on the v5.4.1 remediation = DEFECTS, remediated.** Five
+reviewers on the diff; citations CLEAN (9/9 verified against primary sources),
+the other four DEFECTS. Ledger: `docs/qa/trunk.carryforward.md` Part J; run
+record §10.
+
+### Changed — the claim-wide sweep
+
+The v5.4.1 remediation had been applied locus-by-locus, so every descoped
+reading survived where the sweep had not looked: the graph→S³ convergence was
+still asserted as *established* at five loci in Paper 7 (its own abstract two
+sentences after the retraction, and its Concluding Remarks), three in Paper 0
+and four in the group3 synthesis (headline H1 and "the framework's central
+claim"); the withdrawn Lorentzian "literal identification" at four loci in
+Paper 42 including an un-remediated "Honest scope" section; the Forced-count
+128/260 in the field guide, Paper 57's displayed equation and Paper 32's own
+theorem statement; and metric-convention residues in Paper 38's abstract and
+Appendix A, the group1 synthesis, the field guide and Paper 32's eight
+unannotated 4/π loci. All sweept claim-wide, with arithmetic fixes (Paper 18's
+Ω(0)⁴ = 2⁴/2, Paper 38's "hmm" drafting artifact and empty math group, the γ₁
+"diameter" gloss, the §L2 class-angle definition) and the layer counts.
+
+### Changed — two new findings
+
+- **The s/p "splitting" is a node-amplitude proxy, not a spectral gap.** No
+  edge changes ℓ, so the ℓ = 0 and ℓ = 1 blocks are disconnected components;
+  the maximum-overlap mode selection is a near-tie (top-two within 1.2% at
+  n_max = 30, selected eigenvalues 3.0 vs 0.011). The twelve percentages
+  reproduce exactly but are not robust. Conditioning caveat added to Paper 1
+  §III and propagated; the CG-construction non-decay (129/68/84/139%), which
+  *scopes* Paper 1's headline, now has a test.
+
+### Added
+
+- **`tests/test_paper1_block_spectrum.py`** — the spectrum is CLOSED FORM:
+  each ℓ-block is the grid graph P_{n_max−ℓ} × P_{2ℓ+1}, so spec(L) =
+  {2−2cos(jπ/(n_max−ℓ)) + 2−2cos(kπ/(2ℓ+1))} (verified against dense eigh),
+  and the saturation deficit is (42.6 + o(1))/n_max² — **a proven rate where
+  the papers said none was**. Also pins the disconnected ℓ-blocks, the
+  ill-conditioned identification, and the CG non-decay. Paper 0 §VI gains
+  Eq. `block_spectrum` at [INTERNAL THEOREM]; the stale xfail in
+  `test_trunk_qa_splitting.py` becomes a live guard.
+
+### Lessons
+
+A locus-by-locus remediation of a claim-level defect is not a remediation:
+sweep the claim, and check the abstract, the summary and the sibling paper
+first. And reproducibility is not robustness — twelve percentages that
+reproduce to five digits can still be an arbitrary tie-break.
+
 ## [v5.4.1] - 2026-09-03
 
 **Trunk `/qa` FULL run #3 (unseeded) = FAIL, remediated.** First run under
