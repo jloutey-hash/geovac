@@ -10,7 +10,10 @@ Tests verify:
 5. Consistency with H1 electroweak slice (lepton sector should match)
 """
 
+import os
+import sys
 import numpy as np
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pytest
 
 from geovac.standard_model_triple import (
@@ -115,11 +118,37 @@ class TestFiniteTriple:
         JDJinv = J @ np.conj(D) @ J.T
         assert np.allclose(JDJinv, D), "J_F D_F J_F^{-1} should equal D_F (KO-dim 6)"
 
-    def test_algebra_action_on_matter_only(self, ft):
-        I3 = np.eye(3, dtype=np.complex128)
-        pi = ft.algebra_action(1.0 + 0.5j, (1.0, 0.2, 0.3, 0.1), I3)
+    def test_algebra_action_ccm_blocks(self, ft):
+        """Corrected 2026-09-03: the representation acts on both sectors
+        (antileptons lam * 1_4, antiquarks 1_4 (x) m); the old matter-only
+        action made order-zero/one empty checks."""
+        m = np.diag([1.0, 2.0, 3.0]).astype(np.complex128)
+        lam = 1.0 + 0.5j
+        pi = ft.algebra_action(lam, (1.0, 0.2, 0.3, 0.1), m)
         assert pi.shape == (32, 32)
-        assert np.allclose(pi[16:32, :], 0), "pi_F should act on matter only"
+        assert np.allclose(pi[16:20, 16:20], lam * np.eye(4))
+        assert np.allclose(pi[20:32, 20:32], np.kron(np.eye(4), m))
+        assert np.allclose(pi[0:16, 16:32], 0) and np.allclose(pi[16:32, 0:16], 0)
+
+    def test_algebra_action_is_linear_star_representation(self, ft):
+        rng = np.random.default_rng(3)
+        for _ in range(4):
+            l1, l2 = rng.normal(size=2) + 1j * rng.normal(size=2)
+            q1 = tuple(rng.normal(size=4) + 1j * rng.normal(size=4)); q2 = tuple(rng.normal(size=4) + 1j * rng.normal(size=4))
+            m1 = rng.normal(size=(3, 3)) + 1j * rng.normal(size=(3, 3)); m2 = rng.normal(size=(3, 3)) + 1j * rng.normal(size=(3, 3))
+            add = (ft.algebra_action(l1, q1, m1) + ft.algebra_action(l2, q2, m2)
+                   - ft.algebra_action(l1 + l2, tuple(a + b for a, b in zip(q1, q2)), m1 + m2))
+            assert np.linalg.norm(add) < 1e-12
+        assert np.linalg.norm(ft.algebra_action(0.0, (0, 0, 0, 0), np.eye(3))) > 1.0
+
+    def test_algebra_action_matches_independent_ccm_construction(self, ft):
+        from test_trunk_qa_forced_count_moduli import pi_ccm
+        rng = np.random.default_rng(11)
+        for _ in range(3):
+            lam = rng.normal() + 1j * rng.normal()
+            q = tuple(rng.normal(size=4) + 1j * rng.normal(size=4))
+            m = rng.normal(size=(3, 3)) + 1j * rng.normal(size=(3, 3))
+            assert np.allclose(ft.algebra_action(lam, q, m), pi_ccm(lam, q, m))
 
     def test_algebra_action_block_structure(self, ft):
         I3 = np.eye(3, dtype=np.complex128)
@@ -138,15 +167,16 @@ class TestFiniteTriple:
         assert np.allclose(matter[4:16, 0:4], 0)
 
     def test_color_action(self, ft):
+        """Colour acts on the ANTIQUARK sector (corrected 2026-09-03); the
+        particle quark block is colour-blind."""
         m = np.diag([1.0, 2.0, 3.0]).astype(np.complex128)
         pi = ft.algebra_action(1.0, (1.0, 0.0, 0.0, 0.0), m)
-        matter = pi[0:16, 0:16]
-        quark = matter[4:16, 4:16]
-        # u_L colors at (0,3), (1,4), (2,5) within quark block
-        # With flavor=I, quark = I_4 ⊗ m, so quark[0,0] = m[0,0] = 1
-        assert abs(quark[0, 0] - 1.0) < 1e-14
-        assert abs(quark[1, 1] - 2.0) < 1e-14
-        assert abs(quark[2, 2] - 3.0) < 1e-14
+        quark = pi[4:16, 4:16]
+        assert np.allclose(quark, np.eye(12))
+        antiquark = pi[20:32, 20:32]
+        assert abs(antiquark[0, 0] - 1.0) < 1e-14
+        assert abs(antiquark[1, 1] - 2.0) < 1e-14
+        assert abs(antiquark[2, 2] - 3.0) < 1e-14
 
 
 # ======================================================================
@@ -192,21 +222,32 @@ class TestSMACTripleAxioms:
         axioms = T2.verify_axioms()
         assert axioms["JD_relation_residual"] < 1e-12
 
-    def test_order_zero_nmax1(self, T1):
-        axioms = T1.verify_axioms()
-        assert axioms["order_zero_max_residual"] < 1e-10
+    # 2026-09-03 (trunk FULL run #3, I.2.9): with the corrected CCM
+    # representation the combined order-zero/one residuals are NO LONGER
+    # machine zero -- they inherit the GV factor's finite-resolution residual
+    # (the operator-system multipliers do not commute; Paper 32
+    # tab:axiom_audit).  The finite-algebra content is checked on A_F alone,
+    # and the combined order-zero residual is shown to factorise through the
+    # GV commutator, so it is attributable to the GV factor, not to A_F.
+    def test_order_zero_finite_algebra_exact(self, T1, T2):
+        for T in (T1, T2):
+            axioms = T.verify_axioms()
+            assert axioms["order_zero_finite_max_residual"] < 1e-10
 
-    def test_order_zero_nmax2(self, T2):
+    def test_order_one_finite_algebra_exact(self, T1, T2):
+        for T in (T1, T2):
+            axioms = T.verify_axioms()
+            assert axioms["order_one_finite_max_residual"] < 1e-10
+
+    def test_combined_order_zero_is_the_gv_residual(self, T2):
         axioms = T2.verify_axioms()
-        assert axioms["order_zero_max_residual"] < 1e-10
+        assert axioms["order_zero_max_residual"] > 1e-3          # not an empty check any more
+        assert axioms["order_zero_gv_factorization_residual"] < 1e-8
 
-    def test_order_one_nmax1(self, T1):
-        axioms = T1.verify_axioms()
-        assert axioms["order_one_max_residual"] < 1e-10
-
-    def test_order_one_nmax2(self, T2):
-        axioms = T2.verify_axioms()
-        assert axioms["order_one_max_residual"] < 1e-10
+    def test_combined_order_one_reported(self, T1, T2):
+        for T in (T1, T2):
+            axioms = T.verify_axioms()
+            assert np.isfinite(axioms["order_one_max_residual"])
 
 
 # ======================================================================
@@ -313,7 +354,10 @@ class TestColorContent:
         )]
         omega = T.inner_fluctuation_one_form(generators)
         color = T.extract_color_content(omega)
-        su3_norm = np.linalg.norm(color["su3_coeffs_L"])
+        # 2026-09-03: colour acts on the antiquark sector in the corrected
+        # representation, so the SU(3) content of the fluctuation lives there.
+        su3_norm = max(np.linalg.norm(color["su3_coeffs_L"]),
+                       np.linalg.norm(color["su3_coeffs_anti"]))
         assert su3_norm > 1e-6, "SU(3) content should be non-zero with non-trivial m"
 
 

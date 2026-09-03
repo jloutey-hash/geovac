@@ -528,6 +528,8 @@ REGISTRY = [
                             r"|historical|different\s+metric|is\s+not\s+"
                             r"Latr|not\s+a\s+Latr",
         "files": [
+            "geovac/gh_convergence.py",
+            "tests/test_gh_convergence.py",
             "papers/group3_foundations/*.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
@@ -610,7 +612,7 @@ REGISTRY = [
     },
     {
         "id": "lorentzian-literal-identification-krein",
-        "scope": "group3 group6",
+        "scope": "group3 group6 trunk group1",
         "severity": "fail",
         "retired": "2026-07-04 (group6 first-cert run): P34 III.29's pre-descope "
                    "Lorentzian claims -- 'literal identification at the Krein "
@@ -633,14 +635,123 @@ REGISTRY = [
                    r"|literal\s+identification\s+at\s+the\s+Krein"
                    r"|Krein-level\s+four-witness\s+Wick-rotation\s+theorem\s+closes"
                    r"|not\s+just\s+structural\s+correspondence"
-                   r"|Lorentzian\s+closure\s+is\s+complete",
+                   r"|Lorentzian\s+closure\s+is\s+complete"
+                   r"|literal\s+identification\s+at\s+the\s+operator-system\s+level\s*\(Lorentzian"
+                   r"|the\s+Lorentzian\s+\\emph\{extension\}\s+of\s+Paper",
         "exempt_if_nearby": r"withdrawn|WITHDRAWN|signature-blind|compact[- ]boost"
                             r"|compact\s+KMS|K\^?\+|descope|convention|period[- ]closure"
                             r"|Euclidean|not\s+constitute",
         "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
             "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
             "papers/synthesis/group6_precision_observations_synthesis.tex",
             "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+        ],
+    },
+    {
+        "id": "fock-coupling-one-sixteenth-prefactor",
+        "scope": "trunk group3 group5 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-03 (trunk FULL run #3, I.1.1): the inter-shell coupling "
+                   "c^2(n,l) = |<n+1,l|cos chi|n,l>|^2 is (1/4)[1 - l(l+1)/(n(n+1))] "
+                   "(Chebyshev amplitude 1/2), not (1/16)[...]; the 1/16 is the inverse "
+                   "Fock Jacobian, a different quantity.  c^2(4,3) = 1/10; Delta = 1/40 "
+                   "is the composite (2/5)/Omega^4(0).",
+        "pattern": r"c\^2\(n,\s*l\)\s*(?:\\;\s*)?(?::)?=\s*(?:\\;\s*)?\\t?frac\{1\}\{16\}"
+                   r"|\(1/16\)\[1\s*-\s*l\(l\+1\)"
+                   r"|c\^2\(n,\s*0\)\s*=\s*1/16"
+                   r"|c\^2\(4,\s*3\)\s*=\s*(?:\\t?frac\{1\}\{16\}|1/40)"
+                   r"|squared\s+Chebyshev\s+transition\s+amplitude\s+\$?\(1/4\)\^2",
+        "exempt_if_nearby": r"corrected 2026-09-03|retired|withdrawn|different quantity|printed before|earlier version|before 2026-09-03",
+        "files": [
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group5_qed_gauge/paper_2_alpha.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "tests/test_trunk_qa_kappa.py",
+            "tests/test_trunk_qa_c2_delta.py",
+        ],
+    },
+    {
+        "id": "forced-count-260-endpoint",
+        "scope": "trunk group1 group3",
+        "severity": "fail",
+        "retired": "2026-09-03 (trunk FULL run #3, I.0.3): the Forced-count endpoint 260 "
+                   "and the matter-sector 128 came from a degenerate algebra sample "
+                   "(18/24 zero elements; non-linear quark action kron(ew, m)).  With a "
+                   "linear *-representation the chain ends at 32 (matter projection rank 16).",
+        "pattern": r"272\s*(?:\\to|\\rightarrow|->|→|\\xrightarrow\{(?:[^{}]|\{[^{}]*\})*\})\s*260"
+                   r"|full-axiom\s+(?:\$?D_F\$?\s+)?moduli\s+dimension\s+(?:at\s+\$n_\{\\max\}\s*=\s*2\$\s+)?is\s+\$?260"
+                   r"|512\s*(?:\\to|→|->)\s*256\s*(?:\\to|→|->)\s*128\s*(?:\\to|→|->)\s*128"
+                   r"|\\mathrm\{matter\}\}\s*(?:\\;)?=\s*(?:\\;)?128"
+                   r"|128\s*per\s+generation\s+is\s+forced",
+        "exempt_if_nearby": r"artefact|artifact|degenerate|corrected 2026-09-03|retired|printed before|before 2026-09-03|reproduces the retired",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex",
+            "papers/synthesis/*.tex",
+            "docs/claim_test_matrix.md",
+            "tests/test_trunk_qa_forced_count_moduli.py",
+        ],
+    },
+    {
+        "id": "all-compact-lie-groups-universality",
+        "scope": "trunk group1 group3 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-02/03 (v5.3.0 + trunk FULL run #3, I.3.1): Paper 40's class is "
+                   "compact connected SEMISIMPLE; a circle/torus factor carries the circle "
+                   "constant, so '4/pi universal across all compact (connected) Lie groups' "
+                   "is retired.  The constant is also metric-normalisation dependent.",
+        "pattern": r"(?:to|across|over|for)\s+all\s+compact\s+(?:connected\s+)?Lie\s+groups"
+                   r"|rank-invariant\s+across\s+all\s+compact\s+Lie\s+groups"
+                   r"|universal\s+across\s+the\s+class\s+via\s+a\s+Plancherel",
+        "exempt_if_nearby": r"semisimple|torus|tori|circle factor|2/\\?pi|withdrawn|excluded|retired|corrected",
+        "files": [
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/synthesis/*.tex",
+        ],
+    },
+    {
+        "id": "rename-pass-residue-p32",
+        "scope": "trunk group1",
+        "severity": "fail",
+        "retired": "2026-09-03 (trunk FULL run #3, I.2.1-3): variants that evaded the "
+                   "patterns written for their retired twins -- 'graph Dirac operator' "
+                   "(rem:D_GV_no_graph_form withdrew the graph form), 'provably disjoint' "
+                   "(F1.5 retired 'provably non-overlapping'), 'Peter--Weyl propinquity' "
+                   "(the paper's own object is the state-space GH truncation).",
+        "pattern": r"\bgraph\s+Dirac\s+operator\b|\bDirac\s+graph\s+operator\b"
+                   r"|provably\s+(?:disjoint|non-overlapping)"
+                   r"|Peter--Weyl\s+propinquity",
+        "exempt_if_nearby": r"withdrawn|retired|different operator|no graph form|is not a graph|Observation-level|sharing no generator|corrected",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+        ],
+    },
+    {
+        "id": "s-p-splitting-retired-waypoints",
+        "scope": "trunk group3 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-03 (trunk FULL run #3, I.1.3/I.1.4): the binary production "
+                   "lattice gives 37% at n_max=5 (the maximum), 4.1% at 20 and 0.39% at 30; "
+                   "'peaking near n_max = 8', '13% at 5', '0.3% at 20', '0.005% at 30' are retired.",
+        "pattern": r"peaking\s+near\s+\$?n_\{\\max\}\s*=\s*8"
+                   r"|n_\{\\max\}\s*=\s*30\}?\$?:?\s*\$?\\Delta\s*E_\{\\mathrm\{rel\}\}\s*\\approx\s*0\.005"
+                   r"|n_\{\\max\}\s*=\s*20\}?\$?:?\s*\$?\\Delta\s*E_\{\\mathrm\{rel\}\}\s*\\approx\s*0\.3\\%"
+                   r"|n_\{\\max\}\s*=\s*5\}?\$?:?\s*\$?\\Delta\s*E_\{\\mathrm\{rel\}\}\s*\\approx\s*13",
+        "exempt_if_nearby": r"did not reproduce|retired|withdrawn|corrected|measured 2026-09-03|printed before",
+        "files": [
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
         ],
     },
     {
@@ -1016,10 +1127,22 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
     exempt = re.compile(entry["exempt_if_nearby"], re.IGNORECASE)
     live, ok = [], []
     for path in _resolve(entry["files"]):
-        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        text = path.read_text(encoding="utf-8", errors="replace")
+        lines = text.splitlines()
+        hit_lines = set()
         for i, line in enumerate(lines):
-            if not pat.search(line):
-                continue
+            if pat.search(line):
+                hit_lines.add(i)
+        # 2026-09-03 (trunk FULL run #3, I.4.1): a phrase wrapped across a
+        # line break was invisible to the per-line scan -- the entry written
+        # for `2 Vol(S^1) / Vol(SU(2))` could not fire on its own declared
+        # locus.  Scan the newline-joined text too (offsets preserved, so a
+        # match maps back to the line where it starts).
+        joined = text.replace("\n", " ")
+        for m in pat.finditer(joined):
+            hit_lines.add(text.count("\n", 0, m.start()))
+        for i in sorted(hit_lines):
+            line = lines[i]
             lo, hi = max(0, i - WINDOW), min(len(lines), i + WINDOW + 1)
             window_txt = "\n".join(lines[lo:hi])
             rel = path.relative_to(ROOT)

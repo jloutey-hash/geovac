@@ -685,6 +685,165 @@ syntheses. Seed worktree removed.
 
 ---
 
+## Part I — FULL run #3 (2026-09-02/03, unseeded, at `fc41ec3` v5.4.0) = **FAIL**
+
+First run under the opt-in seeding default (v5.4.0). Twelve reviewers, all
+reading the committed corpus read-only: code (Opus) ×6 — P0, P1, P7, P32-A
+(core), P32-B (AC/SM/axiom audit), P38; claims (Opus) ×3 — {P0,P1,P7}, P32,
+P38; citations — {P0,P1,P7} Sonnet, P38 Sonnet, P32 Opus; synthesis (Opus)
+×1; plus one completeness critic (Part I.5). Every MATERIAL finding below
+was verified by the PM against primary text, or recomputed by the PM's own
+route where numerical (marked **PM-recomputed**). Verdict rests on the
+standing calibration record (run #2 19/21 seeds, DELTA #1 9/9, DELTA #2 8/9,
+0/8 false positives each). Deterministic gates: 13/13 PASS at `fc41ec3`
+(C10 trunk + P40, C11, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C5)
+— two gate-integrity defects were nonetheless found inside C16 (I.4).
+
+### Scorecard
+
+| dimension | exercised | verified MATERIAL | verdict |
+|:--|:--|:--|:--|
+| code / test-backing (P0, P1, P7, P32-A, P32-B, P38) | yes ×6 | 4 + 5 + 3 + 8 + 9 + 2 | FAIL ×6 |
+| claims / prose ({P0,P1,P7}, P32, P38) | yes ×3 | 10 + 5 + 2 | FAIL ×3 |
+| citations ({P0,P1,P7}, P38, P32) | yes ×3 | 0 + 0 + 2 | CLEAN, CLEAN, FAIL |
+| synthesis (group3) | yes | 5 | FAIL |
+| deterministic C5, C10–C22 | yes | 0 (two C16 instrument defects logged as I.4) | PASS |
+| **roll-up** | all | **55 MATERIAL + ~60 NIT** | **FAIL** |
+
+### I.0 — the five re-pricings (raise to PI; PM applies the honest correction and flags)
+
+| id | finding | evidence | disposition |
+|:--|:--|:--|:--|
+| I.0.1 | **Paper 7 item 1 / P0 abstract / P1 / synthesis: the graph→S³ Laplace–Beltrami convergence is not what is measured.** The new `tests/test_paper7_graph_convergence.py` measures λ_max(L) → 2·d_max = 8 rescaled by κ := −0.5/8 (E0 = −λ_max/16 identically); the lattice's edges never change l, so L splits into n_max blocks (one per l), the l=0 block converges to −0.25 Ha, λ_max is attained in a mid-l block (l = 11 at n_max = 30) whose mode has ~1e-33 weight on the 1s node, the constant vector (discrete n = 1 harmonic) has E = 0, and H's spectrum is confined to [−1/2, 0]. The "S³ identification via SO(4)" (P7:129) is untested. | CLAIMS-1 F1; CODE-P0 P0-3; CODE-P7 C1–C3; **PM-recomputed** (edge multiset, components = n_max, per-block λ_max, top-mode weight) | Retier: what is MEASURED is (a) the s/p lift decays on the binary lattice (0.39 % at 30) and (b) λ_max → 2 d_max = 8 (full graph); operator convergence + S³ identification → OBSERVATION / coverage gap. Rewrite P7:15/:77/:121/:129/:655, P0:35-41/:665-673, P1:342-345, synthesis :247-252/:341-343/:363-365; re-scope the test to the λ_max statement + record the kernel/1s-weight facts. |
+| I.0.2 | **Paper 38's rate constant is 2/π, not 4/π, in the paper's own metric.** `central_fejer_su2.gamma_rate` integrates against the rotation angle χ ∈ [0, 2π] as "d_round", but the characters make χ = 2θ with θ the unit-S³ geodesic distance; γ_n(module) = 2 × ∫K·d_round at every n (K_1 ≡ 1 gives γ_1 = π = diameter vs the Haar-mean distance π/2). Under the stated unit round S³ (Vol 2π², CH ±(n+½), lem:continuum_lip) the constant is 2/π; 4/π is the radius-2 (rotation-angle) value. Theorem survives as a bound; (d.i)/(d.iii)/b/"SU(2) = twice the circle"/Vol(S²)/π² re-price; the semisimple-vs-torus distinction behind TODAY's Paper 40 retitle rests on 4/π ≠ 2/π. | CODE-P38 C1 (three routes); **PM-recomputed** ratio 2.000 at n = 1, 2, 3, 5 | State the metric convention at every γ locus; print both constants with the convention; retier "twice the circle" as a metric artefact (unit-metric ratio → 1.004); add the missing metric-pin test (γ_n vs geodesic quadrature); flag P40 universality + WH1 status to the PI. |
+| I.0.3 | **Forced-count endpoint 260 is an artefact; the correct count is 32.** `_a_f_basis()` has 18/24 identically-zero elements and 6 with zero quark block because `standard_model_triple.matter_action` uses `kron(ew, m)` (bilinear, not a *-representation: π(a+b) ≠ π(a)+π(b), π(0,0,I₃) = 0). With a correct linear CCM representation the chain is 2048 → 1024 → 512 → 272 → **32** (matter-block rank 16, Majorana-block rank 16); the degenerate basis reproduces 260 exactly. | CODE-P32B B1/B2; **PM-recomputed by three routes** (basis Gram; SVD-reduce + 10 random elements; reduced Gram) | Fix the representation (particles colour-blind, M₃ on antiquarks); rewrite the test with the correct rep + a random-element control; replace every 260/128 locus (P32 ×6, P57 ×3, matrix rows 51/105, trunk.done C8 delta wording); re-run gauge census / G4a axioms. |
+| I.0.4 | **Paper 32 Theorem 1's continuum-limit clause names the wrong algebra.** thm:GV_triple asserts the limit for (A_GV = C^{V_Fock}, H, D_GV) and :858-861 adds an unproved "Cauchy sequence" sentence; the proved convergence (thm:gh_convergence) is for the operator system O_{n_max}; cor:structural_specificity places the diagonal algebra on the circulant-comparator side; rem:operator_system extends "unaffected by which representative" to Theorem 1; §II :252-255 and :1242-1245 repeat the diagonal-algebra claim. | CLAIMS-2 P32-1 | Scope clause: the convergent representative is O_{n_max}; A_GV is the gauge-network convention for the axiom audit; drop the Cauchy sentence. |
+| I.0.5 | **prop = 2 is generic, not "structurally specific".** The only comparator is the abelian diagonal algebra (never spans M_N); random *-closed unital subspaces of matched complex dimension all have prop = 2. Also the L5 "numerical verification" (2.075, 1.610, 1.322) in thm:gh_convergence's proof is γ_2..4 restated — `gh_convergence.compute_propinquity_bound` sets the bound to γ by construction and discards the measured panel. | CODE-P32A A1/A2; **PM-recomputed** null model 16/16 prop = 2 | Reword cor:structural_specificity + the "strongest alignment" superlatives; make the module assert the L5 inequality on the panel; fix the ~9 tautological tests. |
+
+### I.1 — Papers 0, 1, 7 (claims + code)
+
+| id | locus | finding (verified) | disposition |
+|:--|:--|:--|:--|
+| I.1.1 | P0:656-658, P7:700-718, P18:3165, P2:364-366, P32:5829, synthesis :264, `test_trunk_qa_kappa.py` T1, `test_trunk_qa_c2_delta.py` | c²(n,l) prefactor: the squared Gegenbauer matrix element ⟨n+1,l|cos χ|n,l⟩² is (1/4)[1 − l(l+1)/(n(n+1))] (**PM-recomputed**, ratio 4.000 at six (n,l)); the Chebyshev amplitude is 1/2 not 1/4; T1 reaches 1/16 through an injected `/2`; c²(4,3) = 1/10; the printed 1/40 = (2/5)·(1/16) with 1/16 = 1/Ω⁴(0). | Print the derived coupling with a new test; withdraw reading (1); keep 1/Ω⁴(0) = 1/16 as the geometric quantity; restate Δ = (2/5)/Ω⁴(0) as an Observation about a composite; remove the fudge. |
+| I.1.2 | P0:835, CLAUDE.md §5 table, docs/validation_benchmarks.md:6 | "< 0.1 % for hydrogen": production graph gives 0.57 % (30), 0.325 % (40), 0.209 % (50), 0.107 % (70, 116,795 nodes); no test asserts < 0.1 %. **PM-recomputed.** | State the measured figure; flag CLAUDE.md §5 (PI-only). |
+| I.1.3 | P1:15, :365, P7:123 | "up to ~16 %, peaking near n_max = 8": production lattice 36.96/12.73/0.65/15.65/5.07/1.73/2.70/1.67/1.14/4.10/1.78/0.39 % at n_max 5/6/7/8/9/10/12/15/18/20/25/30 (**PM-recomputed**); maximum is at 5; strongly oscillatory. | Rewrite with the measured sequence. |
+| I.1.4 | P1:145-150 | Convergence-list waypoints 13 % (5) / 0.3 % (20) / 0.005 % (30) are wrong (37 / 4.10 / 0.39) and outside the QA-caveat enumeration; no test. | Replace with measured values + inline test cite; sub-percent by 30 holds. |
+| I.1.5 | P1:124-126, §III construction (:80) | "Faithful rebuild" mixes two lattices: degrees from the CG-magnitude adjacency, 1.7 % from the binary lattice; on the CG construction the lift does NOT decay (129 %/68 %/84 %/139 % at 8/10/15/20, **PM-recomputed**). | Name the lattice at each number; scope the artifact-decay claim to the binary lattice; record the CG non-decay. |
+| I.1.6 | `tests/test_paper1_geometric_phase.py:47-58,82-89` | Berry-phase guard cannot fail: c = a, d = b makes the product (ab)² for any phase built into t_plus/l_plus; the control tests cmath.phase. | Rebuild the holonomy from operator matrices with true adjoints + a state-dependent-phase control. |
+| I.1.7 | P1:245 | Θ(n) = −2 ln((n+1)/n) holds only on GeometricLattice(topological_weights=True); on the binary and CG adjacencies Θ ≡ 0 (T-edge weight m-independent, L-edge weight n-independent). | Name the lattice; note Θ ≡ 0 on the other two. |
+| I.1.8 | P1:61, :295, :300 | Energies attributed to the algebra ("spectrum emerges from operator eigenvalues", "reproduce … exactly", "exact spectral content") vs :59 matched-κ account; N's integer spectrum holds on interior states only (test :79). | Reword to quantum-number structure + interior-state scope; "exact in ℚ" for the −n/2 commutator identity, not "bit-exact". |
+| I.1.9 | P1:342-345 | "overall eigenvalue spectrum (E_n → −1/(2n²)) … convergent" vs dense bottom of spectrum. | Reword to the spectral-bound statement. |
+| I.1.10 | P1:462 | "k = 1.0 exactly" (fitted −0.9875); contradicts :262-263. | Closed form, no fitted exponent. |
+| I.1.11 | P1:448 | Appendix B "0.854 to 20.624, mean 12.42" un-caveated (CG rebuild: 0.707–19.88, mean 12.03). | Add the caveat pointer / measured values. |
+| I.1.12 | P1:26 | "has a unique dual" — unbacked uniqueness. | "a discrete dual". |
+| I.1.13 | P1:271-275 | Condon–Shortley → {0, π} phases: no test and false (adjoint leg cancels the sign). | Delete or correct. |
+| I.1.14 | P7:209 | dΩ_{S³} = Ω³ d³p / p₀³ — wrong by p₀³ (test docstring already corrected). | Remove /p₀³. |
+| I.1.15 | P7:129 | "therefore … uniquely identifies it as S³" — proof verbs, untested, disconnected-graph tension (I.0.1). | Soften + tier. |
+| I.1.16 | P7 Appendix items 12/13/14/15/18 (`test_fock_laplacian.py`) | Item 18 tautological (passes under E_n = −1/(3n²)); item 14 never asserts −3; 12/13/15 cannot detect a wrong operator; "several" understates 10/18 non-independent. | Make 14 assert −3; label 18 definitional; state the 10/18 count. |
+| I.1.17 | NITs | P7:661 "complete"; P7:930 "bracketing" (both methods sit above exact); P7:902 "zero free parameters" (add "beyond the matched κ"); P7:762 0.70 % → 0.77 %; P7:909 He 0.19 % deliberate NO-TEST; P0:835 lead range clause; P0:564 priority sentence; P0:569-573 "subsequent papers verify operator convergence" (verify); PANEL-VERIFIED misuse P0:103/:469/:530/:542/:584; P0:604-618 test_dirac_lattice is (n,κ,m_j); P0:617 |V| [SYMBOLIC PROOF] backed by n ≤ 6 (add a sympy test); P1:106-112 arithmetic (0.0036, 17.8 %); P1:131 "illustrative"; P0/P1 fock1935/bargmann1936 page ranges; P0 "Biedenharn provided"; P0 biedenharn1981 series detail. | Fix in the sweep. |
+| I.1.18 | Upgrades | P0:665-673 λ_max → 8 → [MEASURED] + cite test_trunk_qa_kappa.py; P1 ‖L₊‖/‖T₊‖ = 2 provable for all n_max ≥ 2 (weighted shifts) → [SYMBOLIC PROOF]; N = −2[T₊,T₋] = −n/2 exact in ℚ → [SYMBOLIC PROOF] with interior scope; nnz ≤ 4V forced by degree ≤ 4; P7:689 spectral exactness → [SYMBOLIC PROOF] + cite test_paper1_rydberg.py; P7 §V chain earns [SYMBOLIC PROOF] end-to-end (widen test); proof #8 fire-tested; P1 §IV cite the warped-weight control. | Apply. |
+| I.1.19 | Coverage gaps | P7:121 operator convergence; P7:129 S³ identification; P7:180 p₀-cancellation (reviewer verified); P1 eq:ham_graph H = β(D−A)+V never built; P1 §V.C item 1; P1 App B.2 figures; P0 [PANEL-VERIFIED] survey claims (:103-115, :530-536, Table 2, :584-592) no matrix row. | Log; close the cheap ones. |
+
+### I.2 — Paper 32
+
+| id | locus | finding (verified) | disposition |
+|:--|:--|:--|:--|
+| I.2.1 | :61-62 | Abstract "a graph Dirac operator" — withdrawn graph form (rem:D_GV_no_graph_form); evades C16. | Reword; add C16 pattern. |
+| I.2.2 | :5143 | "provably disjoint" — F1.5 class; the seam is Observation-level (:5298). | "sharing no generator". |
+| I.2.3 | :2167 | "half-integer-only Peter–Weyl propinquity" — own object; C7 residual. | "state-space GH truncation". |
+| I.2.4 | :1178-1183 vs :6606-6613 | tab:axiom_audit_lorentzian mixes sample-of-3 (≤ 6.8 / ≤ 10.2 %) and full-basis conventions; full-basis Lorentzian = Riemannian bit-identical 0.078524 / 0.202642 (closed forms 31/(40π²), 2/π²; sample-of-3 2/(3π²), 1/π²). | State full-basis maxima in the table; one convention. |
+| I.2.5 | :294-299 | A_GV = C^{V_Fock} described as the C*-envelope of O; prop = 2 ⇒ C*(O) = M_N. | Reword. |
+| I.2.6 | :1386-1392 | Hyperfine "validated against the 21 cm gap": HF_HYDROGEN_HA is the input A_hf; the test checks the (−3A/4, +A/4) pattern within 2×. | Structural check, not [MEASURED] vs external. |
+| I.2.7 | :340-712 | Zero inline tier tags on the operator-system block (prop:propagation_number, cor:structural_specificity, rem:connes_distance, rem:r31_r32_update, rem:two_sided_alignment). | Tag. |
+| I.2.8 | :134 | "eigenvalues λ_n = −(n²−1) on graph nodes" — C6 shape. | Attribute to the continuum operator. |
+| I.2.9 | :4866-4869 | G4a "all six Connes axioms … no finite-resolution degradation": order-zero/one identically 0 by disjoint matter/antimatter support (restricted object); the grading axiom that fails ({γ, D} = 34/104/220) is omitted. | Rewrite honestly; re-run under the corrected representation. |
+| I.2.10 | :4939-4941 | "D² = D_GV² ⊗ 1 + 1 ⊗ D_F² (cross term vanishes)": false for the module's D (γ_GV = sign(D_GV) commutes; cross term 4.3/13.2/28.0). | Scope to the σ_x-graded product or withdraw. |
+| I.2.11 | :4671-4679 | γ₅ := γ_GV ⊗ γ_F "well-defined as the combined grading": {γ₅, D} ≠ 0 with either γ_GV; no test; two operators share the name γ_GV (:4061 vs :4098/:4563). | Disambiguate names; state the anticommutator values; add a test. |
+| I.2.12 | `test_connes_axiom_audit_31.py` N_t ∈ {1,11,21} | 6 of 9 cells carry no information (U_L, γ⁵_K, η_K, lifted multipliers, [D_L,a] all X ⊗ I_{N_t}); only axiom (iv) is N_t-sensitive. My DELTA-era "N_t-independence" record was an artefact. | Restrict the parametrisation to (iv); docstring. |
+| I.2.13 | `test_real_structure.py:246-282`; `test_trunk_qa_forced_count_moduli.py` @slow | Assertion-free "status" test is the sole backing of :1007-1008; the chain endpoint tests are default-skipped. | Assert; un-slow the endpoint (the corrected count is cheap). |
+| I.2.14 | `geovac/gh_convergence.py:34-40`, `tests/test_gh_convergence.py:465-468`, C16 entry `latremoliere-propinquity-named-for-gh-rate` (papers-only files) | Retired "propinquity constant … not rigorously proved" framing regression-protected by a test; the C16 entry cannot see modules. | Fix docstrings + test; add module files to the entry (two-way proof). |
+| I.2.15 | :6440-6447 + `geovac/lorentzian_dirac.py` docstring | van den Dungen Prop 4.1 misstated: its operator is i^t × the pseudo-Riemannian Dirac of (M,g); L2-C builds i·D̸_{g_r} and proves Krein-self-adjointness directly. | Cite Prop 4.1 for the pattern only; state the direct proof; record the unestablished identification. |
+| I.2.16 | :3893 | Inline "Per Perez-Sanchez 2024 … YM without a Higgs" credits the YM-Higgs paper; 2025 is the no-Higgs one. | 2024 → 2025. |
+| I.2.17 | NITs | "strongest quantitative alignment" ×2 (:419-423, :706-711); :198-201 "spectral-action coefficient combinations"; :3467 Λ collision; :5829 Δ appositive; :2183 "22 digits"; :2831 "half the product 40"; :73-75/:7166 8.8e-8 "post-correction"; 8 untagged theorems; :3529 AC "now proved" bundling; :4094 "the KO-4 column" appositive; :975 "43 tests" (44); :3468 "39 tests" (48); :4225/:4713 (56/56); :6671 (87); test_reach_B positivity-only; verify_convergence_to_zero ratio; PropinquityBound API naming; m-reflection one pair; Door-4b..4f + tab:g3c_residual + H1 falsifier table debug-only; n_max = 3 / dim 1280 untested; combined γ² = I untested; J O J⁻¹ at n_max 1–2 only; thm:forced_count states D = D_GV ⊗ 1 + 1 ⊗ D_F vs the built D_GV ⊗ 1 + γ_GV ⊗ D_F; citation NITs (connes1995 notation; C(Z)^{(n)}; Deligne N = 6; Glanois any N′|N; karamata1949 locus; "§3 Fejér" anchor; hekkelman_mcdonald published; BBB title; latremoliere2026 "explicitly"; G* "semisimple"; Hawkins year; 12 bibitem-free attributions; paper2 bibitem year 2025 vs \date 2026 — inside C11's forgiven baseline). | Sweep. |
+| I.2.18 | Upgrades | abstract :115-120 + tab caption :1120 real structure → [SYMBOLIC + MEASURED]; ε = −1 forced by half-integer m_j → [SYMBOLIC PROOF] (control: integer m_j → +1); dim(O) = (2n−1)(2n)(4n−1)/6 → [SYMBOLIC + MEASURED]; χD scaling exact 2‖D_GV‖_F √N_t → [SYMBOLIC PROOF]; tab:g3c_residual → [INTERNAL THEOREM]; prop:propagation_number + cor → [PANEL-VERIFIED]; L5 inequality holds on the normalised panel (assert it). | Apply. |
+| I.2.19 | Coverage gaps | rem:r31_r32_update Avery distances / Pearson sign flip (LARGE, debug-only); kernel dims 10/14, 26/55 not pinned here; π-source (ii)⇒(iii) enumeration debug-only; prop:reality items 3/5 at n_max ≤ 2; Door-4 paragraphs; γ₅; G4a n_max = 3. | Log; close the cheap ones. |
+
+### I.3 — Paper 38 and its spill
+
+| id | locus | finding (verified) | disposition |
+|:--|:--|:--|:--|
+| I.3.1 | :1958-1962 (+ P39:1241, P42:491/:1791/:2254-2258, P57:143/:170) | paper40_unified bibitem annotation (and six spill loci) still say "all compact connected Lie groups … 4/π universal across the class"; title cascaded, annotation not. | Fix all seven; C16 pattern. |
+| I.3.2 | :110-113 | Abstract tags L2 bare [INTERNAL THEOREM]; body/App A/matrix say + MEASURED. | "+ MEASURED". |
+| I.3.3 | :840-841 | "rejects the 2/π decoy" — matrix row 55 retired the phrase; under I.0.2 the decoy is the unit-metric value. | Remove. |
+| I.3.4 | :91-93, :470, :544-545, :773 | [MEASURED] on panels → [PANEL-VERIFIED] (G1.22 class). | Retag. |
+| I.3.5 | :555-557 | Frozen falsifier mis-pointed (kernel counts live in test_p45_kplus_degeneracy.py:103). | Repoint. |
+| I.3.6 | `geovac/gh_convergence.py:1-10, 48-56` | Propinquity framing + Latrémolière venue/title conflation. | Fix (with I.2.14). |
+| I.3.7 | :1562-1565; :1520-1526 | b = 4.1093… (22 digits) untested; AC inner fluctuation [MEASURED] with no artifact (test_almost_commutative.py exists). | Cite / retier. |
+| I.3.8 | :1634-1635 | "Vinberg (1990)" unsourced (UNVERIFIABLE); :1242 joint cite label; bibkey years avery_wen_avery1986 (1985) / ucp_maps_2024 (2004). | Source or drop; split the label. |
+| I.3.9 | NITs | :1632-1635 C₃ = 1 mechanism understated (PRV + Brauer–Klimyk interior closure, twin of H1.14); :789-792/:781-782 untagged robustness; :1366-1367 attribute to the L5 route; abstract L5 clause untagged; :1760-1765 range {2..1000} understates; :969-971 parenthetical binds to one value; :1073 "derived"; :1968 Paper 2 folder stale; :1629 P40 §3.2 anchor (verify vs §5.2); label fossil sec:named_gaps. | Sweep. |
+| I.3.10 | Upgrades | lem:band_injectivity :375/:390-395 → [SYMBOLIC + MEASURED] / INTERNAL THEOREM + PANEL (all-N proof, full N² rank, guard fires); the 4/π derivation route is non-circular ([SYMBOLIC + MEASURED] method); circle 2/π BACKED-SOUND. | Apply. |
+
+### I.4 — Gate integrity (C16)
+
+| id | finding | disposition |
+|:--|:--|:--|
+| I.4.1 | `circle-fejer-constant-4-over-pi` alternative `2\s*Vol\(S\^1\)\s*/\s*Vol\(SU\(2\)\)` cannot fire on its own declared locus `central_fejer_su2.py:893-894` (line-wrapped; the checker scans line by line). | Whitespace-normalised multi-line scanning + discrimination proof + pin test. |
+| I.4.2 | `latremoliere-propinquity-named-for-gh-rate` lists papers only, so `gh_convergence.py:34` "propinquity constant" passes. | Add the modules; two-way proof. |
+| I.4.3 | Rename-pass residue class (P32 "graph Dirac operator", "provably disjoint", "Peter–Weyl propinquity"; P38 "all compact connected Lie groups"): each evades the pattern written for its retired twin. | Add variants with two-way proofs. |
+| I.4.4 | **C19 could not see a laundered escape (found 2026-09-03 during remediation).** A swallowed `` (from a bash-heredoc edit) that a later text-mode read/write round trip converted to a line break leaves `ef{...}` at the start of the next line with no control character left to detect; pdflatex found it (P32:434 `(Theorem~` + newline + `ef{thm:gh_convergence})`). | C19 gains a laundered-escape check (CR-tails at a line start followed by a brace/bracket/paren/sub/superscript), proven to fire on the live instance before the fix; the P38 prose line beginning with the word `angle` is the negative control. |
+
+### I.5 — Synthesis (group3)
+
+| id | locus | finding (verified) | disposition |
+|:--|:--|:--|:--|
+| I.5.1 | :247-252 | "[PANEL-VERIFIED] Paper 1 … reproduces the Rydberg formula exactly, with no fitting parameters … already agree on the spectrum" vs P1:54-59 (post-F3.4) and P7:689; the s/p caveat is absent. | Rewrite to the quantum-number statement + matched κ Observation + the lift caveat. |
+| I.5.2 | :363-365 | "no theorem or frozen test behind" the graph-side convergence — stale since today's test (my H1.5 remediation collided with the test addition); must also carry I.0.1. | Rewrite. |
+| I.5.3 | :341-343 | "structural guarantee that the discrete-to-continuum bridge has no hidden steps" reverses P7:70/:79/:756. | Rewrite. |
+| I.5.4 | :459-466 | "[SYMBOLIC PROOF] … F⁰(1s,1s) = 5/8 … all single-center F^k … closed in rational arithmetic" attributed to Paper 7 (s-pairs only; 5Z/8; the general F^k rationality is geovac/hypergeometric_slater.py). | Re-source; restore Z. |
+| I.5.5 | :70-76, :433-444 | "explains why / because" for the CFT reflection (analogy given explanatory force; matrix row 146 NO-SOURCE). | "is consistent with". |
+| I.5.6 | :57-60, :184-186, :730-733 (+ matrix :127) | π-freeness at every finite N_max is P24 Theorem thm:pi-free with a proof → [SYMBOLIC PROOF] (upgrade). | Retag. |
+| I.5.7 | NITs | :529-533 table caption "Yukawa" universal (P22: 17 of 18 states); :217-224 "2k−1" is the angular factor (N_k = 2(2k−1)); :1245 twelve mechanisms mis-cited to Paper 18; duplicate Paper 2 bibitems; K = (π/2)θ₃² notation collision; HeH⁺ ~5 % figure is Paper 15:1314. | Sweep. |
+
+### I.6 — Clean surfaces (recorded so absence is not mistaken for omission)
+
+Citations P0/P1/P7: 18 CONFIRMED / 0 WRONG / 2 UNVERIFIABLE (uncited asides). Citations P38: 22 / 0 / 1 (Vinberg). Citations P32: 44 / 2 / 12 (paywalled books); Dąbrowski–Dossena 5/5 locators, BBB, Connes–vS ×6, Connes–Marcolli TOC, Camporesi–Higuchi all exact against primary PDFs. K = π(B+F−Δ): every locus in scope (P1 ×1, P7 ×1, P32 ×18, P38 ×2, synthesis ×4) Observation-tier — C5 intact. κ = −1/16: coincidence-not-bridge form everywhere except I.0.1's indirect reversal. No KO-dimension label on the finite combined triple anywhere in P32 (today's adjudication holds; the sign-triple guard fires). Forced-count printing was consistent (it was the number that was wrong). Paper 40's semisimple retitle propagated to every bibitem (annotations excepted, I.3.1). No Paper 45/46 pre-descope citation anywhere in scope. The 2026-09-02 estimator-index correction left no residue. Retired Pauli figures appear only as "retired".
+
+### I.7 — Completeness critic (Opus)
+
+Coverage: Papers 0, 1, 7, 38 and the synthesis were read whole by ≥ 2 dimensions; ~36 % of Paper 32 (≈ 2,750 lines) was seen by exactly one reviewer, including the whole Sprint L2-E / L1 Lorentzian–modular block (:6691-6969, :7001-7114) with three unverified numeric tables, the Q5′ arc (:2141-3204), and :5521-6159. Twenty inline-cited modules/tests were opened by no reviewer (so4_three_y_integral, fock_graph_hodge, dirac_matrix_elements, circulant_s3, connes_distance, spinor_operator_system, dirac_lattice, krein_space_construction, su3_wilson_s5, cross_block_h1, modular_hamiltonian, modular_hamiltonian_lorentzian; tests test_full_dirac_operator_system, test_dirac_matrix_elements, test_su3_wilson_s5, test_krein_space_construction, test_lorentzian_dirac, test_modular_hamiltonian, test_modular_hamiltonian_lorentzian, test_rabi_oscillation header-only). Matrix rows 136–145 (synthesis; row 137 Paper 6 NO-TEST still open) and 217–231 (Lorentzian cluster, load-bearing for P32 §L2-E) uncited.
+
+| id | locus | finding (PM-verified) | disposition |
+|:--|:--|:--|:--|
+| I.7.1 | P32:6789-6793, :6801-6803 | The WITHDRAWN readings (C16 `lorentzian-literal-identification-krein`, retired 2026-07-04 / widened 2026-08-24): "lifts … to literal identification at the operator-system level (Lorentzian, finite cutoff)" and "Sprint L2-E is the Lorentzian \emph{extension} of Paper 42". The entry is scoped `group3 group6` and lists P34/P31/group6 synthesis only — it never runs on the trunk and cannot see P32, and its patterns miss P32's wording. **MATERIAL / LARGE** (C16 + C7 + §1.5). | Rewrite as signature-blind closure (compact boost, KMS β = 2π circle; the (3,1) label is a carrier choice); widen the entry (scope trunk + group1; P32 file; two new patterns; two-way proof). |
+| I.7.2 | P32:6828-6835, :6855-6856 | "Constructing a Lorentzian propinquity is the named Sprint L3 target" / "when drafted, Paper 43 …" — stale: the route was DESCOPED (P45 K⁺ theorem 2026-06-09; WH7 structurally closed) and Paper 43 exists. **MATERIAL / SMALL** (C7). | Rewrite the Honest-scope paragraph. |
+| I.7.3 | P32:1750 ("three-layer"), :3615/:3838/:3963 ("four-layer") | Paper 31/24/synthesis say **seven** layers; internal inconsistency. **MATERIAL / SMALL** (understatement). | Correct to seven, citing P31. |
+| I.7.4 | synthesis :535-546 tab:eri_density | Table body prints the retired pair-diagonal column (1.44 %); only the caption corrects. NIT (matrix row 125 BACKED-SOUND with C16 gating). | Add the global-M_L column to the body. |
+| I.7.5 | C16 | C16's trunk PASS on the L2-E block is an empty scope (I.7.1); C14 advisory has 130 debug/ cites in scope (P32 127) that nothing binds; C22's reverse direction (test_modular_hamiltonian_lorentzian backs claims whose strong reading is withdrawn) unexercised; C20 PASS confirmed (baseline ratchet, 0 new). | Log; C16 fix in I.4. |
+| I.7.6 | P32 tab:coulomb_ho :1769 | "Spectrum: Quadratic |λ_n| = n²−1" in a row labelled "Functions on S³ Fock graph" — C6 shape (borderline). | Attribute to the continuum operator. |
+| I.7.7 | Clean | KO relabel propagated to :1790/:1119/:1245; K-formula section :1668-1743 exemplary; C12 enumerated corpus-wide in scope — zero prohibited tier words. | — |
+
+### I.8 — Remediation log (2026-09-03, v5.4.1)
+
+All Part I items above were remediated the same day, in three batches; every
+edited locus carries a dated correction note so the pre-correction text is
+recoverable from the paper itself.
+
+- **I.0.1 (convergence claim)** — P7 abstract/item 1/§continuum limit/§SO(4)/Stage 1/appendix item 18, P0 abstract + §VI.C, P1 §VII.D, synthesis :247-252/:341-343/:363-365 rewritten to the measured facts (λ_max → 2 d_max = 8 on the full graph, l-block structure, kernel of block constants, extremal mode with no 1s weight, s/p lift decay on the binary lattice); `tests/test_paper7_graph_convergence.py` re-scoped (pins λ_max, the l-block split, the s-wave block bound 4, the zero 1s weight, the confined dense spectrum); operator convergence and the S³ identification are recorded as OBSERVATION / coverage gap. Matrix row 43 updated.
+- **I.0.2 (rate constant)** — P38 eq:gamma_def now defines γ_n against the rotation angle χ(g) = 2 d_round with a convention-correction paragraph; the abstract, intro rate, main theorem, Hopf-base observation, circle remark ("twice the circle" retiered as the metric scale; unit-metric ratio 1.004), b, universality and bibitem annotation carry the normalisation; `tests/test_p38_metric_convention.py` pins γ_n(module) = 2× the unit-S³ moment at n = 1, 2, 3, 5 and γ_1 = π vs π/2. P40 abstract carries a normalisation note + named check; P18, P32, P39, P42, P57, both syntheses, the field guide, `docs/claims_register.md` rows 8/9, CLAUDE.md §1.7 WH1 status (old text archived in `docs/wh_register_history.md`) and the memory file updated.
+- **I.0.3 (Forced count)** — `geovac/standard_model_triple.py`: quark action colour-blind, M₃(ℂ) on antiquarks (linear *-representation; census reads antiquark colour; `verify_axioms` adds finite-only order-zero/one residuals and a GV-factorisation residual). `tests/test_trunk_qa_forced_count_moduli.py` rewritten with an in-test CCM representation: 2048 → 1024 → 512 → 272 → 32, matter rank 16, Majorana rank 16, random-element control, and a regression guard that re-installs the degenerate sample and reproduces 260. P32 thm:forced_count + proof + :4903-4910 + :5491-5498 + P57 ×3 + matrix rows 51/105 corrected. Measured post-fix: finite-algebra order-zero/one = 0 exactly; combined residuals 1.49/1.26 at n_max = 2 = the GV finite-resolution residual (factorisation residual 0); census unchanged.
+- **I.0.4** — thm:GV_triple scope clause (operator-system representative; Cauchy sentence withdrawn); §II :252-255, :1242-1245, rem:operator_system narrowed.
+- **I.0.5** — cor:structural_specificity retitled and rewritten (separates from abelian comparators; prop = 2 generic, 16/16 random subspaces); both "strongest alignment" superlatives redirected to thm:gh_convergence; thm:gh_convergence proof text names γ_2..4 as the bound; `geovac/gh_convergence.py` computes Lipschitz-normalised panel reach/height and an `l5_inequality_holds` flag (docstrings de-propinquitised; Latrémolière venues split; retired "not rigorously proved" removed; `gh_theorem_statement` carries the unconditional rate with the convention); `tests/test_gh_convergence.py`: the three bound-equals-γ tests and the default-asserting status tests replaced by the panel inequality (n_max 2–4, margin decreasing) and a statement guard.
+- **I.1.x** — c² formula corrected at P7/P0/P18/P2/P32/synthesis (+ `tests/test_paper7_gegenbauer_coupling.py`, `test_trunk_qa_kappa.py` T1/T2 without the /2 fudge, `test_trunk_qa_c2_delta.py` as the composite Observation); P0:835 hydrogen figure; P1 abstract/§III QA paragraph (two lattices named; CG non-decay recorded)/convergence list (measured binary values)/:26/:61/:245/:295/:300/:342/:448/:462; P7:123/:129/:209/:661/:903/:930-932 + "ten of the eighteen"; PANEL-VERIFIED → OBSERVATION ×5 in P0; P0:569-573; P0:617 + `tests/test_paper0_vertex_count.py`; Berry-phase test rebuilt from operator matrices with a state-dependent-phase control; `test_fock_laplacian` item 14 asserts −3. Open NITs: P1:271-275 Condon–Shortley sentence (left; flagged), P1:106-112 arithmetic (inside the caveated block).
+- **I.2.x** — :61-62, :134, :294-299, :1178-1183 (full-basis maxima), :1386-1392, :2167, :4094, :4669-4681, :4864-4869, :4937-4941, :5143, :5188-5195, citations (:2046, :2075, :2749, :3447-3448, :3893, :4074/:4095 co-cite, :6440-6447, :7439), counts (:975, :3468, :4225, :4713, :6671), six tier tags in :340-712; C16 entries `latremoliere-propinquity-named-for-gh-rate` (module files) and new `rename-pass-residue-p32`. Open: B7 (N_t parametrisation left as is; noted), B8 (assertion-free status test left; noted), Door-4/H1-table/g3c debug-only backing (coverage gaps logged).
+- **I.3.x** — P38 :110-113 (+ MEASURED), :840-841 (decoy phrase), MEASURED → PANEL ×3, :555-557 (falsifier pointer), :1520-1526 (cite test_almost_commutative), :1562-1565 (b untested note), :1632-1635 (PRV + Brauer–Klimyk; Vinberg withdrawn), bibitem annotation; spill P39/P42/P57 + C16 entry `all-compact-lie-groups-universality`. Open: :1242 joint-cite label; bibkey years (cosmetic).
+- **I.4** — `check_retracted_terms.py` scans the newline-joined text as well as line by line (the line-wrapped `2 Vol(S^1)/Vol(SU(2))` locus now fires); entries widened/added with two-way proofs: `fock-coupling-one-sixteenth-prefactor`, `forced-count-260-endpoint`, `all-compact-lie-groups-universality`, `rename-pass-residue-p32`, `s-p-splitting-retired-waypoints`, `lorentzian-literal-identification-krein` (scope trunk + group1, P32 file, two P32 patterns).
+- **I.5.x** — synthesis :247-252, :341-343, :363-365, :459-466 (5Z/8, s-pairs, hypergeometric engine), :70-76, :433-444, :264-268. Open: I.5.6 π-free upgrade (left at PANEL-VERIFIED; noted), NITs I.5.7.
+- **I.7.x** — P32 :6789-6803 (signature-blind closure), :6828-6835 (DESCOPED), :6855-6856 (Paper 43 drafted), layer counts :1750/:3615/:3838/:3963 (seven), :1769 left (borderline; noted).
+
+**Still owed (PI or next sprint):** Paper 40's normalisation cross-check (does the dual-Coxeter normalisation coincide with the rotation-angle one?); CLAUDE.md §5 "H < 0.1 %" (PI-only section); the remaining NITs above; an unseeded DELTA on this remediation before FULL run #4.
+
+---
+
 ## Sizing
 
 - **Part A** — small, high leverage, do first. Three registry/screen edits with

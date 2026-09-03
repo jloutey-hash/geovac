@@ -82,14 +82,17 @@ van~Suijlekom's state-space Gromov--Hausdorff
 distance~\cite{vs2021_jgp}, with explicit rate
 \(
 d_{\mathrm{GH}} \le \gamma_{\nmax}
-= (4/\pi + o(1)) \log \nmax / \nmax .
+= (4/\pi + o(1)) \log \nmax / \nmax
+\)
+in the rotation-angle normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note)
+\(
 \)
 \textbf{[INTERNAL THEOREM]} The truncated state spaces are metrized
 by the left-translation
 Lipschitz seminorm, which equals the Dirac/metric Lipschitz constant
 on the continuum and whose kernel at every finite cutoff is exactly
 the scalars (the truthful Dirac-commutator seminorm itself
-degenerates at finite cutoff;\ \textbf{[MEASURED]} a remark quantifies
+degenerates at finite cutoff;\ \textbf{[PANEL-VERIFIED]} a remark quantifies
 this on a finite panel of cutoffs). The proof
 is a compression/lifted-state argument in the pattern of the
 compact-metric-group theorem of
@@ -107,10 +110,10 @@ injectivity on the chirality-doubled multiplier system, the
 closed-form rate moment, and the $4/\pi$ asymptotic constant.
 Supporting structure is organized in five lemmas:\ (L1$'$) a truncated operator
 system on the full chirality-doubled spinor bundle;\ (L2)
-\textbf{[INTERNAL THEOREM]} a positive
+\textbf{[INTERNAL THEOREM + MEASURED]} a positive
 central spectral Fej\'er kernel on $\SU(2)$ with closed-form
 mass-concentration moment and Stein--Weiss-type quantitative rate
-$\gamma_n \sim (4/\pi)\log n / n$;\ (L3) \textbf{[PANEL-VERIFIED]} a
+$\gamma_n \sim (4/\pi)\log n / n$ (rotation-angle normalisation; $2/\pi$ on the unit $\sthree$);\ (L3) \textbf{[PANEL-VERIFIED]} a
 Lipschitz comparison bound
 $\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
 $C_3 = 1$ (verified on a finite harmonic panel rather than proved in
@@ -241,7 +244,8 @@ metrization of \S~\ref{sec:named_gaps}, with explicit rate
 \begin{equation}\label{eq:main_rate}
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
    \;\le\; C_3 \cdot \gamma_{\nmax}, \qquad
-   \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax} + O\!\bigl(1/\nmax\bigr),
+   \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax} + O\!\bigl(1/\nmax\bigr)
+   \quad\text{(rotation-angle normalisation; $2/\pi$ on the unit $\sthree$)},
 \end{equation}
 where \textbf{[PANEL-VERIFIED]} $C_3 = 1$ is the Lipschitz comparison
 constant of
@@ -252,9 +256,10 @@ Theorem~\ref{thm:main_unconditional}, whose bound is
 $\le \gamma_{\nmax}$ outright and does not invoke $C_3$;\ the $C_3$
 factor displayed here belongs to the Lemma~\ref{lem:L5} assembly route
 and carries that lemma's panel scope.
-\textbf{[OBSERVATION]} The asymptotic constant
-$4/\pi = \Vol(S^2)/\pi^2$ is the natural $\SU(2)/U(1)$ Haar ratio
-in the Hopf-base normalisation.
+\textbf{[OBSERVATION]} The asymptotic constant reads
+$4/\pi = \Vol(S^2)/\pi^2$ in the rotation-angle normalisation and
+$2/\pi = \Vol(S^2)/\Vol(\SU(2))$, the plain $\SU(2)/U(1)$ Haar ratio,
+on the unit $\sthree$ (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that rotation-angle normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ of \S\ref{sec:setup}, the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
 \end{theorem}
 
 The proof structure parallels the abelian Leimbach--van~Suijlekom
@@ -275,13 +280,15 @@ almost-complex structure), so we use the central-Fej\'er-kernel
 spectral form directly, which is the natural non-K\"ahler analog of
 the Connes--van~Suijlekom $S^1$ Fej\'er reconstruction.
 
-The asymptotic constant $4/\pi$ in \eqref{eq:main_rate} carries
-geometric content. Writing
-$4/\pi = \Vol(S^2) / \pi^2$, where $\Vol(S^2) = 4\pi$ is the standard
-round volume of the Hopf base $S^2 = \SU(2)/U(1)$ and $\pi^2 =
-\Vol(\SU(2))/2$ is half the round volume of $\SU(2)$ in the bi-invariant
-metric, the constant identifies as twice the Haar-normalisation ratio
-$\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
+The asymptotic constant in \eqref{eq:main_rate} carries
+geometric content, and its value is normalisation-dependent (2026-09-03):\
+in the rotation-angle normalisation the constant is $4/\pi = \Vol(S^2) /
+\pi^2$, where $\Vol(S^2) = 4\pi$ is the standard round volume of the Hopf
+base $S^2 = \SU(2)/U(1)$ and $\pi^2 = \Vol(\SU(2))/2$; on the unit
+$\sthree$ the constant is exactly the Haar-normalisation ratio
+$\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$ --- the factor $2$ between the two is the
+metric scale (rotation angle $= 2 \times$ geodesic distance), not a
+geometric signature; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
 first-moment constant of the classical Fej\'er kernel on the circle
 (Remark~\ref{rem:circle_fejer}). This is precisely the
 \emph{Hopf base measure} factor that appears in the heat-kernel
@@ -289,10 +296,10 @@ expansion of the round $\sthree$ via the Hopf fibration $S^1 \to
 \sthree \to S^2$, and which has been independently identified in the
 internal supporting analysis as one of the three sub-mechanisms of a
 master Mellin-engine $\Tr (D^k e^{-tD^2})$ with operator order
-$k \in \{0, 1, 2\}$~\cite{paper18}. \textbf{[OBSERVATION]} The constant
-$4/\pi$ in
-\eqref{eq:main_rate} identifies as the $k=0$ sub-case (M1, Hopf-base
-measure) of that classification; the same $1/\pi^2$ factor reappears
+$k \in \{0, 1, 2\}$~\cite{paper18}. \textbf{[OBSERVATION]} The constant in
+\eqref{eq:main_rate} ($2/\pi$ on the unit $\sthree$; $4/\pi$ in the
+rotation-angle normalisation) identifies as the $k=0$ sub-case (M1,
+Hopf-base measure) of that classification; the same $1/\pi^2$ factor reappears
 in the Pythagorean Hilbert--Schmidt orthogonality corollary on the
 Krein wedge documented in the companion Lorentzian-extension paper
 (Paper~43~\cite{paper43}). \textbf{[OBSERVATION]} The
@@ -480,8 +487,12 @@ d_{\mathrm{GH}}\Bigl( \bigl(S(\Op_{\nmax}),
 \mathrm{MK}_{L_{\nmax}}\bigr),\;
 \bigl(S(C(\sthree)), \mathrm{MK}_{L}\bigr) \Bigr)
 \;\le\; \gamma_{\nmax}
-\;=\; \frac{4}{\pi}\,\frac{\log \nmax}{\nmax} + O(1/\nmax).
+\;=\; \frac{4}{\pi}\,\frac{\log \nmax}{\nmax} + O(1/\nmax)
 \end{equation}
+in the rotation-angle normalisation of Lemma~\ref{lem:L2}, i.e.\
+$\gamma_{\nmax} = 2\int \KS_{\nmax}\, d_{\mathrm{round}}\, dg$ on the
+unit $\sthree$, where the same bound reads $(2/\pi)\log\nmax/\nmax$
+(2026-09-03 convention note; the theorem holds in either normalisation).
 \end{theorem}
 
 \begin{proof}
@@ -552,15 +563,17 @@ truncated state space.  (The frozen falsifier exercises the
 $\nmax = 2$ counts;\ the $\nmax = 3$ counts are measured but not
 frozen.) An engineered off-diagonal modification of
 $\DCH$ restores its kernel condition ($1/14$, $1/55$) but is no
-longer needed for the main theorem. Frozen falsifiers:\
-\texttt{tests/test\_p45\_kplus\_degeneracy.py::test\_spatial\_kernel\_condition\_truthful\_vs\_offdiag},
-\texttt{tests/test\_p38\_action\_seminorm.py}.
+longer needed for the main theorem. Frozen falsifier for the kernel
+counts:\
+\texttt{tests/test\_p45\_kplus\_degeneracy.py::test\_spatial\_kernel\_condition\_truthful\_vs\_offdiag}
+(\texttt{tests/test\_p38\_action\_seminorm.py} backs the injectivity and
+smoothing premises, not these counts; pointer corrected 2026-09-03).
 \end{remark}
 
 \begin{remark}[history]\label{rem:history38}
 An earlier draft of this paper (May 2026;\ repository history and the
 corresponding Zenodo deposit) stated the main theorem in the
-Latr\'emoli\`ere propinquity, with a Lemma~L2 that conflated the
+Latr\'emoli\`ere propinquity (a formulation since withdrawn), with a Lemma~L2 that conflated the
 kernel's Plancherel mass distribution with its multiplier symbol and
 a dual-reach argument resting on that conflation. A verification
 pass (2026-06-09;\ repository \texttt{CHANGELOG}, v3.106.0) produced
@@ -770,7 +783,7 @@ observe that a state pair $(\varphi_{n, l, m_j}, \psi_{n', l', m'_j})$
 with $n \ne n'$ has finite truncated Connes distance under the offdiag
 extension because the $E1$ coupling supplies a non-trivial structural
 multiplier that bounds the supremum in
-\eqref{eq:connes_distance_def}. \textbf{[MEASURED]} Numerical
+\eqref{eq:connes_distance_def}. \textbf{[PANEL-VERIFIED]} Numerical
 verification at
 $\nmax \in \{2, 3\}$ shows every cross-shell pair has finite distance,
 with the four-point Pearson correlation between distance and Fock-graph
@@ -837,8 +850,9 @@ $d\mu(\chi) = (2/\pi) \sin^2(\chi/2)\, d\chi$.
 The central spectral Fej\'er kernel $\KS_{\nmax}$ has the following
 properties (the closed-form $\gamma_{\nmax}$ rate moment is verified by
 \texttt{tests/test\_central\_fejer\_su2.py}, and the $4/\pi$ asymptotic
-constant by \texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py}, which
-also rejects the $2/\pi$ decoy):
+constant by \texttt{tests/test\_trunk\_qa\_fejer\_4\_over\_pi.py};\ $2/\pi$
+is the same constant on the unit $\sthree$ and the circle's constant,
+not a decoy):
 \begin{enumerate}\setlength{\itemsep}{2pt}
 \item[(a)] $\KS_{\nmax}(g) \ge 0$ for all $g$, and $\int_{\SU(2)}
 \KS_{\nmax}(g) \, dg = 1$.
@@ -866,8 +880,22 @@ cb-norm of any map used in this paper.)
 \item[(d)] (Mass-concentration moment.) Define
 \begin{equation}\label{eq:gamma_def}
    \gamma_{\nmax}
-   \;:=\; \int_{\SU(2)} \KS_{\nmax}(g)\, d_{\mathrm{round}}(e, g)\, dg.
+   \;:=\; \int_{\SU(2)} \KS_{\nmax}(g)\, \chi(g)\, dg,
 \end{equation}
+where $\chi(g) \in [0, 2\pi]$ is the class (rotation) angle of
+$g$, i.e.\ $\chi(g) = 2\, d_{\mathrm{round}}(e, g)$ on the unit
+$\sthree$ ($g = \cos\theta + i \sin\theta\, \hat n \cdot \sigma$ has
+eigenphases $\pm\theta$ and geodesic distance $\theta = \chi/2$ from
+$e$; the characters below are $\sin((2j{+}1)\chi/2)/\sin(\chi/2)$).
+\emph{Convention correction (2026-09-03):} the definition previously
+wrote $d_{\mathrm{round}}(e, g)$ in place of $\chi(g)$ while every
+computation (the sum rule, the module, the estimators) used $\chi$; the
+moment against the unit-$\sthree$ distance is exactly $\gamma_{\nmax}/2$
+at every $\nmax$ ($\KS_1 \equiv 1$ makes $\gamma_1 = \pi$, the diameter,
+while the Haar-mean distance is $\pi/2$;
+\texttt{tests/test\_p38\_metric\_convention.py}).  All constants below
+are stated in the $\chi$ (rotation-angle) normalisation; halve them for
+the unit $\sthree$.
 Then:
 \begin{enumerate}\setlength{\itemsep}{1pt}
 \item[(d.i)] \textbf{[INTERNAL THEOREM]} $\gamma_{\nmax}$ admits the
@@ -978,10 +1006,15 @@ estimators is $2.008$ at $n = 800$
 \texttt{test\_su2\_constant\_is\_twice\_circle}). An earlier version of
 this remark stated the circle constant as $4/\pi$, ``the same on both
 sides''; that statement is withdrawn (2026-09-02 certification run).
-\textbf{[OBSERVATION]} The $\SU(2)$ constant is twice the
-circle constant, and both are of the form
-$2\Vol(\text{base})/\Vol(\text{group})$:\ $2\Vol(S^0)/\Vol(S^1) = 2/\pi$
-on the circle and $2\Vol(S^2)/\Vol(\SU(2)) = 4/\pi$ on $\SU(2)$. No
+\textbf{[OBSERVATION]} In the rotation-angle normalisation the $\SU(2)$
+constant is twice the circle constant; in the unit-$\sthree$
+normalisation (geodesic distance, the circle's own convention) the two
+coincide at $2/\pi = \Vol(\text{base})/\Vol(\text{group})$ on both
+($\Vol(S^0)/\Vol(S^1) = 2/(2\pi)\cdot 2$, hmm --- $2\Vol(S^0)/\Vol(S^1)
+= 4/(2\pi) = 2/\pi$; $\Vol(S^2)/\Vol(\SU(2)) = 4\pi/(2\pi^2) = 2/\pi$), the
+ratio of the unit-metric $\SU(2)$ estimator to the circle's being
+$1.004$ at $n = 800$ (2026-09-03 correction:\ the factor $2$ reported
+before is the metric scale, not a group-theoretic signature). No
 derivation of the $\SU(2)$ constant from the circle constant is given
 here; the $\sin^2(\chi/2)$ conjugacy-class weight and the
 $\sqrt{2j+1}$ Plancherel weight of Definition~\ref{def:central_fejer}
@@ -1521,8 +1554,8 @@ $\Tcal_F$ admits an analogous convergence statement --- is open.
 extension at finite
 $\nmax$ has been carried out in supporting work by the present
 author and reproduces the expected gauge content under the
-Marcolli--van~Suijlekom mechanism (unpublished supporting computation;\
-no backing artifact is cited here), but the present paper restricts
+Marcolli--van~Suijlekom mechanism (\texttt{tests/test\_almost\_commutative.py},
+Sprint H1; Paper~32 \S\,Sprint H1), but the present paper restricts
 attention to the geometric (single-factor) state-space GH statement.
 
 \subsection{Obstruction to a Riemannian--Hardy tensor product}
@@ -1559,9 +1592,10 @@ $\nmax \gamma_{\nmax} = (4/\pi) \log \nmax + b + O(1/\nmax)$ with
 $b \approx 4.10$, whose closed form is undetermined at the level of
 the present analysis.
 
-\emph{Update (2026-05-16):} \textbf{[MEASURED]} the value $b$ has been
-refined to $22$
-verified decimal digits as
+\emph{Update (2026-05-16):} \textbf{[MEASURED]} the value $b$ (rotation-angle
+normalisation) has been refined to $22$ decimal digits (no frozen test
+in this repository computes $b$ beyond six digits; the figure is a
+Paper~40 cross-reference) as
 $b = 4.1093214674898756204229\ldots$
 (the original $80$-digit string circulated in working memos prior to
 this paper was contaminated from digit $12$ onward by float-precision
@@ -1623,7 +1657,7 @@ triangle inequality" $|C(\pi) - C(\pi')| \le C(\sigma)$ is false in
 general; the Dirac eigenvalue, not the Casimir, is the right
 ingredient). \textbf{[PANEL-VERIFIED]} The rate is \emph{not}
 rank-dependent as anticipated
-above:\ the rate constant $4/\pi$ is reported \emph{universal} across
+above:\ the rate constant $4/\pi$ (rotation-angle normalisation) is reported \emph{universal} across
 the
 class, by a Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation theorem (Paper~40~\cite{paper40_unified} \S 3.2) --- rigorous at rank~$1$
@@ -1631,8 +1665,11 @@ cancellation theorem (Paper~40~\cite{paper40_unified} \S 3.2) --- rigorous at ra
 on reduced panels and a fully rank-uniform analytical proof recorded
 as a named gap in Paper~40. \textbf{[INTERNAL THEOREM]}
 Asymptotic-tight
-$C_3(G) = 1$ at all ranks follows from the PRV-summand bound of
-Kumar (1988) and Vinberg (1990), as proved in Paper~40 \S 3.3.
+$C_3(G) = 1$ at all ranks follows from the PRV-summand bound (Kumar
+1988, Invent.\ Math.\ 93) together with a Brauer--Klimyk signed-sum
+closure for the interior summands, as proved in Paper~40 \S 3.3
+(Lemma~L3 there; the attribution to a 1990 Vinberg paper carried no
+locator and is withdrawn, 2026-09-03).
 
 % =====================================================================
 \appendix
@@ -1955,11 +1992,13 @@ J.~Loutey,
 \newblock \emph{State-space Gromov--Hausdorff convergence of spectral
 truncations of compact semisimple Lie groups with bi-invariant metric},
 \newblock GeoVac internal preprint (2026), DOI via Zenodo.
-\newblock Generalizes the present paper from $\SU(2)$ to all compact
-connected Lie groups; rate constant $4/\pi$ universal across the class
-via a Plancherel-weight $\times$ Vandermonde-Jacobian cancellation
-theorem; asymptotic-tight $C_3 = 1$ at all ranks via the PRV-summand
-bound of Kumar (1988) and Vinberg (1990).
+\newblock Generalizes the present paper from $\SU(2)$ to compact
+connected \emph{semisimple} Lie groups (a circle factor carries the circle
+constant); rate constant $4/\pi$ reported universal across that class
+(rotation-angle normalisation; rigorous at rank~1, rank-uniform proof a
+named gap) via a Plancherel-weight $\times$ Vandermonde-Jacobian
+cancellation; asymptotic-tight $C_3 = 1$ at all ranks via the PRV-summand
+bound (Kumar 1988) with a Brauer--Klimyk interior closure.
 
 \bibitem[Loutey, internal Paper~2]{paper2}
 J.~Loutey,

@@ -70,7 +70,7 @@ conformal field theory embodies at
 the physics level (cf.\ the F-theorem of~\cite{klebanov_pufu_safdi2011}).  GeoVac provides a scale-free mathematical
 substrate; CFT is a scale-free physics theory living on such a
 substrate.  This is not a claim that GeoVac is a CFT; it is a
-structural reflection that explains why the framework reproduces
+structural reflection consistent with the framework's reproduction of
 continuum CFT-on-sphere observables bit-exactly (documented in the
 operator-algebra arc, outside the foundations scope of this
 synthesis).  We present
@@ -245,11 +245,14 @@ T_\pm |n, l, m\rangle &\propto |n \pm 1, l, m\rangle.
 The angular operators $L_\pm$ connect states within an $n$-shell along
 $m$; the radial operators $T_\pm$ connect states between adjacent
 $n$-shells at fixed $l$.  \textbf{[PANEL-VERIFIED]} Paper~1~\cite{loutey_paper1} demonstrates
-that the spectrum of the resulting graph Hamiltonian, constructed from
-the Casimir invariants of the algebra, reproduces the Rydberg formula
-$E_n = -1/(2n^2)$ exactly, with no fitting parameters.  At the
-algebraic level the discrete and continuous descriptions therefore
-already agree on the spectrum.
+that the Casimir invariants built from the ladder operators reproduce
+the Rydberg quantum-number structure ($n$ and $l(l+1)$) exactly; the
+energies $E_n = -1/(2n^2)$ follow only once the matched kinetic scale
+$\kappa = -1/16$ is applied, which the corpus records as an Observation
+(Paper~7).  At the algebraic level the discrete and continuous
+descriptions therefore agree on the quantum-number skeleton, while the
+graph Laplacian lifts the $s/p$ degeneracy at finite cutoff (up to $37\%$
+at $n_{\max} = 5$ on the binary lattice, below $1\%$ by $n_{\max} = 30$).
 
 \subsection*{The universal kinetic constant $\kappa = -1/16$}
 
@@ -261,11 +264,11 @@ $p_0 = Z/n$.  Recent analysis~\cite{loutey_paper18, loutey_paper7} has
 clarified its status:\ the value $\kappa = -1/16$ \emph{coincides} with
 a geometric quantity computed independently of any energy calibration.
 The squared coupling between adjacent $n$-shells in the Gegenbauer
-eigenbasis is $c^2(n, l) = (1/16)[1 - l(l+1)/(n(n+1))]$, giving
-$c^2(n, 0) = 1/16$ universally for $l = 0$, with equivalent readings
-identifying $1/16$ as the squared Chebyshev transition amplitude, as
-the inverse Fock Jacobian $1/\Omega^4(0)$, and as the $l = 0$ base rate
-of the Casimir decomposition.  That the energy-calibration constant
+eigenbasis is $c^2(n, l) = (1/4)[1 - l(l+1)/(n(n+1))]$ (corrected
+2026-09-03 from a printed $1/16$ prefactor; the Chebyshev amplitude is
+$1/2$), giving $c^2(n, 0) = 1/4$ for $l = 0$; the quantity that
+coincides with $1/16$ is the inverse Fock Jacobian $1/\Omega^4(0)$,
+equivalently $c^2(n,0)/4$.  That the energy-calibration constant
 $\kappa$ \emph{equals} this geometric $1/16$ is recorded as an
 \emph{Observation}, not a derivation:\ the geometric value is rigid,
 but no mechanism is known that derives $\kappa$'s calibration role from
@@ -339,8 +342,9 @@ $\mathbb{R}^3$.  These tests live in
 \texttt{tests/test\_fock\_projection.py} and
 \texttt{tests/test\_fock\_laplacian.py} in the GeoVac repository and
 are run as topological integrity checks before any release.  Their
-status as machine-verified algebraic identities is a structural
-guarantee that the discrete-to-continuum bridge has no hidden steps.
+status as machine-verified algebraic identities pins the
+continuum-side conformal chain; the discrete-to-continuum step itself
+lies outside their scope (Paper~7 states this explicitly).
 
 \subsection*{Schr\"odinger recovery in the continuum limit}
 
@@ -362,7 +366,11 @@ truncations of $L^2(S^3)$, is the prior-art state-space GH result of
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}.  Paper~7's
 18 symbolic checks (several limiting-case or definitional) target the
 conformal-transformation chain, not a convergence statement, and the
-graph-side convergence itself has no theorem or frozen test behind it.
+graph-side convergence itself has no theorem behind it: what the frozen
+test \texttt{tests/test\_paper7\_graph\_convergence.py} pins is the
+saturation of the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$ and
+the block structure of the lattice Laplacian, not operator convergence
+(re-scoped 2026-09-03).
 Imposing the energy-shell
 constraint $p_0 = Z/n$ then maps the unit-sphere eigenvalues
 $\lambda_n = -(n^2 - 1)$ to the hydrogenic Rydberg series
@@ -438,10 +446,11 @@ ability to reproduce continuum CFT-on-sphere partition functions
 bit-exactly (recently demonstrated for the conformally coupled scalar
 and Camporesi--Higuchi Dirac on $S^3$ and $S^5$ in the operator-algebra
 arc, outside the foundations scope of this synthesis but cross-referenced
-in the open-questions section below) is structurally explained by the
-substrate-side scale-freedom established here.  The framework reproduces
-what it does because the substrate is the right kind of mathematical
-object to host scale-free physics.
+in the open-questions section below) is consistent with the
+substrate-side scale-freedom established here; no mechanism is claimed.
+The substrate is the right kind of mathematical object to host
+scale-free physics, which is a reading of the parallel, not an
+explanation of it.
 
 \subsection*{Multi-electron extension to $S^{3N-1}$}
 
@@ -458,10 +467,12 @@ outside the foundations scope of this synthesis).
 
 \textbf{[SYMBOLIC PROOF]} A particular consequence of the $S^3$ projection is the closed-form
 single-center two-electron repulsion integral
-$F^0(\text{1s}, \text{1s}) = 5/8$, derived from the node-overlap
-formula for $V_{ee}$ on $S^3$ in Paper~7.  More generally, all
-single-center Slater $F^k$ integrals reduce to exact rationals in
-arithmetic over $\mathbb{Q}$.  The single-center two-electron problem
+$F^0(\text{1s}, \text{1s}) = 5Z/8$, derived from the node-overlap
+formula for $V_{ee}$ on $S^3$ in Paper~7 for $s$-orbital pairs.  More
+generally, all single-center Slater $F^k$ integrals reduce to exact
+rationals in arithmetic over $\mathbb{Q}$ (the hypergeometric Slater
+engine, \texttt{geovac/hypergeometric\_slater.py}, which is not part
+of Paper~7's derivation).  The single-center two-electron problem
 is thus closed in rational arithmetic; transcendentals appear only at
 the projection-to-energy step (see Section~\ref{sec:exchange}).
 

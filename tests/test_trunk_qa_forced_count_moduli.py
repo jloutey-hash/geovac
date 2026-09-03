@@ -1,320 +1,195 @@
-"""Trunk QA — Claim B: the Forced-Count moduli chain (Paper 32 thm:forced_count).
+"""
+TRUNK QA -- Paper 32 thm:forced_count: the D_F moduli chain on the 32-dim
+finite Hilbert space, with a LINEAR *-representation of A_F.
 
-STATUS (2026-09-02)
-===================
-Paper 32 eq:forced_count_chain now prints the genuine full-axiom chain
-2048 -> 1024 -> 512 -> 272 -> 260, with the matter-sector restriction
-512 -> 256 -> 128 -> 128 labelled explicitly, and its "(45 tests)" pointer now
-names tests/test_standard_model_triple.py.  The matter-sector "J-reality +
-order-one add nothing" step is pinned by the projection-rank tests at the
-bottom of this file.  The CONTEXT / RESULT sections below record the ORIGINAL
-diagnosis (they quote the PRE-correction paper text) and are kept as the
-audit trail; the assertions they describe remain the frozen truth.
+STATUS (2026-09-03, trunk FULL run #3 remediation).  The previous version of
+this file printed the chain 2048 -> 1024 -> 512 -> 272 -> 260 and a
+matter-sector chain 512 -> 256 -> 128 -> 128.  Both endpoints were artefacts
+of the algebra SAMPLE: `_a_f_basis()` took its 24 elements from the module's
+`algebra_action`, whose quark block was kron(ew, m) -- bilinear, so 18 of the
+24 elements were identically zero and the other 6 had no quark block -- and
+the order-one condition therefore added almost nothing.  With a linear
+*-representation of C (+) H (+) M_3(C) on C^32 (Connes-Chamseddine-Marcolli /
+van Suijlekom Ch. 11: particles colour-blind, antileptons lambda, antiquarks
+1_4 (x) m) the chain is
 
-CONTEXT (historical)
-====================
-Paper 32 Theorem ``thm:forced_count`` states the reduction chain (eq.
-``forced_count_chain``)
+    2048 -> 1024 -> 512 -> 272 -> 32,
 
-    dim_R M(D_F) :  1024 --Herm.--> 512 --{gamma_F,D_F}=0--> 128
-                                        --[J_F,D_F]=0 + order-one--> 128
+with matter-sector projection rank 16 and Majorana-block rank 16.  Three
+independent routes (basis Gram; SVD-reduce then 10 random generic elements;
+reduced Gram) agree; singular-value gap ~12 vs 1e-13.  The representation is
+built HERE, independently of geovac/standard_model_triple.py, so the test
+does not inherit that module's conventions; the module's own representation
+is checked against this one in tests/test_standard_model_triple.py.
 
-and the proof sketch cites it as "verified bit-exactly at n_max in {2,3} in
-module geovac/standard_model_triple.py (45 tests passing)".
-
-But those 45 tests verify the AXIOM CONSISTENCY of ONE constructed D_F (J^2,
-{gamma,D}=0, order-zero/order-one residuals, the Higgs/gauge census, ...).
-They do NOT parameter-count the moduli space, and so do NOT verify the chain
-1024 -> 512 -> 128 -> 128.
-
-This file ATTEMPTS the genuine, falsifiable thing the citation implies: it
-COMPUTES dim_R M(D_F) at each reduction step by counting the real dimension of
-the solution space of the corresponding LINEAR constraints, on the SAME
-H_F = C^32 / gamma_F / J_F that StandardModelFiniteTriple uses.  Each constraint
-(Hermiticity, chirality-anticommutation {gamma_F, D_F}=0, J-reality
-[J_F, D_F]=0, Connes order-one) is a real-linear operator on the 2048-real-dim
-space of 32x32 complex matrices; moduli dim = 2048 - rank(stacked operator).
-
-RESULT (this is the load-bearing finding)
-==========================================
-The genuine constraint-counting on the module's own H_F/gamma_F/J_F gives
-
-    general 32x32          : 2048
-    + Hermitian            : 1024
-    + {gamma_F,D_F}=0      :  512    (paper chain claims 128 here)
-    + [J_F,D_F]=0          :  272    (paper chain claims 128 here)
-    + order-one            :  260    (paper chain claims 128 here)
-
-The paper's chain 1024 -> 512 -> 128 -> 128 DOES NOT reproduce on the 32-dim
-space: the {gamma,D}=0 step gives 512 (not 128), and the full-axiom moduli is
-260 (not 128).
-
-The final number 128 IS reproducible, but only under a DIFFERENT convention than
-the chain describes: it is the real dimension of Hermitian, chirality-odd Dirac
-operators on the 16-dim MATTER sector (before the J-doubling to C^32):
-
-    matter 16x16 general   : 512
-    + Hermitian            : 256
-    + chirality-odd        : 128
-
-So "128 per generation" is a defensible matter-sector count, but the chain
-1024 -> 512 -> 128 -> 128 with the stated arrow labels (J-reality / order-one
-doing the 128 -> 128 step on the 32-dim space) is NOT what the constraints
-produce.  The "verified bit-exactly ... (45 tests)" citation is therefore
-mis-pointed: no test parameter-counts the chain, and the chain as written does
-not reproduce.
-
-These tests PASS by asserting the TRUE genuine counts (they would fail if the
-constraint counting changed), and they explicitly DOCUMENT the divergence from
-the paper's chain.  They are diagnostic, not a rubber stamp of the claim.
+Regression guards: (i) the degenerate sample is re-installed in a scratch
+routine and must reproduce 260 (proves the old number was the sample's);
+(ii) random generic elements must give the same 32 as the basis.
 """
 from __future__ import annotations
-
-import functools
 
 import numpy as np
 import pytest
 
+from geovac.almost_commutative import quaternion_to_matrix
 from geovac.standard_model_triple import StandardModelFiniteTriple
 
-
-F = StandardModelFiniteTriple()
-GAMMA32 = np.real(F.chirality_F())          # 32x32 real diag +-1
-J_U = F.real_structure_F()                  # unitary part U of J = U K
-
-
-# ---------------------------------------------------------------------------
-# Generic real-linear constraint counting machinery.
-# ---------------------------------------------------------------------------
-
-
-def _make_counter(N, gamma_block=None):
-    rdim = 2 * N * N
-    eye = np.eye(rdim)
-
-    def fromv(v):
-        return v[: N * N].reshape(N, N) + 1j * v[N * N :].reshape(N, N)
-
-    def rv(M):
-        return np.concatenate([np.real(M).ravel(), np.imag(M).ravel()])
-
-    inputs = [fromv(eye[:, k]) for k in range(rdim)]
-
-    def cmat(func):
-        return np.array([rv(func(M)) for M in inputs]).T
-
-    def nulldim(*mats):
-        G = np.zeros((rdim, rdim))
-        for A in mats:
-            G += A.T @ A
-        return rdim - np.linalg.matrix_rank(G, tol=1e-7)
-
-    return rdim, cmat, nulldim, inputs, rv
+F = StandardModelFiniteTriple(yukawa_nu=0.2, yukawa_e=0.3, yukawa_u=0.4, yukawa_d=0.5)
+GAMMA32 = F.chirality_F()
+J_U = F.real_structure_F()
+N = 32
+RDIM = 2 * N * N
 
 
 # ---------------------------------------------------------------------------
-# 32-dim full-Hilbert-space constraints (the space the paper's chain lives on).
+# CCM representation of A_F = C (+) H (+) M_3(C) on H_F = C^16 (+) C^16
 # ---------------------------------------------------------------------------
 
-_RDIM32, _CMAT32, _NULL32, _INPUTS32, _RV32 = _make_counter(32)
+def pi_ccm(lam: complex, qc, m: np.ndarray) -> np.ndarray:
+    q = quaternion_to_matrix(*qc)
+    ew = np.zeros((4, 4), complex); ew[0:2, 0:2] = q; ew[2, 2] = lam; ew[3, 3] = np.conj(lam)
+    P = np.zeros((N, N), complex)
+    P[0:4, 0:4] = ew                                   # leptons
+    P[4:16, 4:16] = np.kron(ew, np.eye(3))             # quarks (colour-blind)
+    P[16:20, 16:20] = lam * np.eye(4)                  # antileptons
+    P[20:32, 20:32] = np.kron(np.eye(4), np.asarray(m, complex))   # antiquarks: colour
+    return P
 
 
-def _herm(M):
-    return M - M.conj().T
-
-
-def _chir32(M):
-    return GAMMA32 @ M + M @ GAMMA32
-
-
-def _jreal32(M):
-    return J_U @ np.conj(M) @ J_U.conj().T - M
-
-
-# A_F real basis (for order-one)
-def _a_f_basis():
+def ccm_basis() -> list[np.ndarray]:
     out = []
     for lam in (1.0, 1j):
-        out.append(F.algebra_action(lam, (0, 0, 0, 0), np.zeros((3, 3), complex)))
+        out.append(pi_ccm(lam, (0, 0, 0, 0), np.zeros((3, 3), complex)))
     for k in range(4):
-        q = [0, 0, 0, 0]
-        q[k] = 1
-        out.append(F.algebra_action(0, tuple(q), np.zeros((3, 3), complex)))
+        qc = [0, 0, 0, 0]; qc[k] = 1
+        out.append(pi_ccm(0, tuple(qc), np.zeros((3, 3), complex)))
     for i in range(3):
         for j in range(3):
             for val in (1.0, 1j):
-                m = np.zeros((3, 3), complex)
-                m[i, j] = val
-                out.append(F.algebra_action(0, (0, 0, 0, 0), m))
+                m = np.zeros((3, 3), complex); m[i, j] = val
+                out.append(pi_ccm(0, (0, 0, 0, 0), m))
     return out
 
 
-_A_BASIS = _a_f_basis()
+def _rv(M): return np.concatenate([M.real.ravel(), M.imag.ravel()])
+def _fv(v): return v[:N * N].reshape(N, N) + 1j * v[N * N:].reshape(N, N)
 
 
-@functools.lru_cache(maxsize=None)
-def _order_one_matrix():
-    JbJ = [J_U @ np.conj(b) @ J_U.conj().T for b in _A_BASIS]
-    cols = []
-    for M in _INPUTS32:
-        parts = []
-        for a in _A_BASIS:
-            Da = M @ a - a @ M
-            for Jb in JbJ:
-                parts.append(_RV32(Da @ Jb - Jb @ Da))
-        cols.append(np.concatenate(parts))
-    return np.array(cols).T
+def _reduced_space():
+    """Orthonormal basis (as matrices) of the Hermitian, gamma-anticommuting,
+    J-real subspace of M_32(C), computed by SVD of the stacked constraints."""
+    E = np.eye(RDIM)
+    rows = []
+    for k in range(RDIM):
+        M = _fv(E[:, k])
+        rows.append(np.concatenate([_rv(M - M.conj().T),
+                                    _rv(GAMMA32 @ M + M @ GAMMA32),
+                                    _rv(J_U @ np.conj(M) @ J_U.conj().T - M)]))
+    A = np.array(rows).T
+    _, s, vt = np.linalg.svd(A, full_matrices=True)
+    r = int((s > 1e-9).sum())
+    Q = vt[r:].T
+    return [_fv(Q[:, k]) for k in range(Q.shape[1])]
 
 
-@pytest.fixture(scope="module", autouse=True)
-def _release_order_one_matrix():
-    """The cached order-one matrix is ~19 GB; drop it when this module's
-    tests are done so a full-suite run does not carry it (2026-09-02)."""
-    yield
-    _order_one_matrix.cache_clear()
+def _order_one_null(basisD, algebra):
+    """Null space of the order-one map on span(basisD) for the given algebra
+    elements; returns (dimension, solution matrices, singular gap)."""
+    JbJ = [J_U @ np.conj(b) @ J_U.conj().T for b in algebra]
+    G = np.zeros((len(basisD), len(basisD)))
+    for a in algebra:
+        for Jb in JbJ:
+            cols = np.array([_rv((D @ a - a @ D) @ Jb - Jb @ (D @ a - a @ D)) for D in basisD]).T
+            G += cols.T @ cols
+    w, V = np.linalg.eigh(G)
+    null = V[:, w < 1e-9]
+    gap = (w[(w < 1e-9).sum()] if (w < 1e-9).sum() < len(w) else np.inf, w[(w < 1e-9).sum() - 1])
+    sols = [sum(null[k, j] * basisD[k] for k in range(null.shape[0])) for j in range(null.shape[1])]
+    return null.shape[1], sols, gap
 
 
-# Cache the heavy 32-dim constraint matrices once.
-_H32 = _CMAT32(_herm)
-_C32 = _CMAT32(_chir32)
-_J32 = _CMAT32(_jreal32)
+@pytest.fixture(scope="module")
+def reduced():
+    return _reduced_space()
 
 
 # ---------------------------------------------------------------------------
-# The genuine counts on the 32-dim space (fast steps).
+# The representation is a linear *-representation (the old one was not)
 # ---------------------------------------------------------------------------
 
+def test_ccm_representation_is_linear_and_star():
+    rng = np.random.default_rng(1)
+    for _ in range(5):
+        l1, l2 = rng.normal(size=2) + 1j * rng.normal(size=2)
+        q1 = tuple(rng.normal(size=4) + 1j * rng.normal(size=4)); q2 = tuple(rng.normal(size=4) + 1j * rng.normal(size=4))
+        m1 = rng.normal(size=(3, 3)) + 1j * rng.normal(size=(3, 3)); m2 = rng.normal(size=(3, 3)) + 1j * rng.normal(size=(3, 3))
+        add = pi_ccm(l1, q1, m1) + pi_ccm(l2, q2, m2) - pi_ccm(l1 + l2, tuple(a + b for a, b in zip(q1, q2)), m1 + m2)
+        assert np.linalg.norm(add) < 1e-12
+        # M_3(C) summand has a nonzero image on its own
+        assert np.linalg.norm(pi_ccm(0, (0, 0, 0, 0), np.eye(3))) > 1
+    B = ccm_basis()
+    assert len(B) == 24 and all(np.linalg.norm(b) > 0 for b in B)
+    # order-zero holds for the CCM representation
+    assert max(np.linalg.norm(a @ (J_U @ np.conj(b) @ J_U.conj().T) - (J_U @ np.conj(b) @ J_U.conj().T) @ a)
+               for a in B for b in B) < 1e-12
+
+
+# ---------------------------------------------------------------------------
+# The chain
+# ---------------------------------------------------------------------------
 
 def test_general_complex_dim_is_2048():
-    assert _RDIM32 == 2048
+    assert RDIM == 2048
 
 
-def test_hermitian_count_is_1024():
-    assert _NULL32(_H32) == 1024
+def test_chain_to_272(reduced):
+    """Hermitian 1024 -> chirality 512 -> J-reality 272 (basis-independent)."""
+    assert len(reduced) == 272
+    E = np.eye(RDIM)
+    herm = np.array([_rv(_fv(E[:, k]) - _fv(E[:, k]).conj().T) for k in range(RDIM)]).T
+    chir = np.array([_rv(GAMMA32 @ _fv(E[:, k]) + _fv(E[:, k]) @ GAMMA32) for k in range(RDIM)]).T
+    assert RDIM - np.linalg.matrix_rank(herm, tol=1e-9) == 1024
+    assert RDIM - np.linalg.matrix_rank(np.concatenate([herm, chir]), tol=1e-9) == 512
 
 
-def test_herm_plus_chirality_is_512_not_128():
-    """{gamma_F,D_F}=0 on Hermitian 32x32 gives 512, NOT the paper's claimed 128."""
-    got = _NULL32(_H32, _C32)
-    assert got == 512, f"got {got}"
-    assert got != 128, "paper chain claims this step reaches 128; genuine count is 512"
+def test_full_axiom_moduli_is_32(reduced):
+    dim, sols, gap = _order_one_null(reduced, ccm_basis())
+    assert dim == 32, dim
+    assert gap[0] > 1.0 and gap[1] < 1e-9
+    matter = np.array([_rv(D[0:16, 0:16]) for D in sols]).T
+    majorana = np.array([_rv(D[0:16, 16:32]) for D in sols]).T
+    assert np.linalg.matrix_rank(matter, tol=1e-9) == 16
+    assert np.linalg.matrix_rank(majorana, tol=1e-9) == 16
+    assert dim != 260 and dim != 128
 
 
-def test_herm_chir_jreal_is_272_not_128():
-    """Adding J-reality gives 272 on the 32-dim space, NOT 128."""
-    got = _NULL32(_H32, _C32, _J32)
-    assert got == 272, f"got {got}"
-    assert got != 128
+def test_random_generic_elements_give_the_same_32(reduced):
+    """Sample-independence: 10 random generic elements reproduce the basis count."""
+    rng = np.random.default_rng(7)
+    els = [pi_ccm(rng.normal() + 1j * rng.normal(),
+                  tuple(rng.normal(size=4) + 1j * rng.normal(size=4)),
+                  rng.normal(size=(3, 3)) + 1j * rng.normal(size=(3, 3))) for _ in range(10)]
+    dim, _, _ = _order_one_null(reduced, els)
+    assert dim == 32
 
 
-@pytest.mark.slow
-def test_full_axiom_moduli_is_260_not_128():
-    """Hermitian + chirality + J-reality + order-one gives 260, NOT 128.
-
-    This is the full real-spectral-triple axiom set the theorem lists.  The
-    genuine moduli dimension is 260; the paper's chain terminates at 128.
-    (Marked slow: builds a 1.18M-row order-one constraint operator.)
-    """
-    O32 = _order_one_matrix()
-    got = _NULL32(_H32, _C32, _J32, O32)
-    assert got == 260, f"got {got}"
-    assert got != 128
-
-
-def test_paper_chain_intermediates_do_not_reproduce():
-    """The stated chain 1024 -> 512 -> 128 -> 128 fails at the 128 steps.
-
-    Genuine 32-dim chain: 2048 -> 1024 (Herm) -> 512 ({g,D}=0) -> 272 (J-real).
-    The paper writes 1024 -> 512 -> 128 -> 128.  The two 128's do not appear.
-    """
-    chain = [
-        _RDIM32,                       # 2048
-        _NULL32(_H32),                 # 1024
-        _NULL32(_H32, _C32),           # 512
-        _NULL32(_H32, _C32, _J32),     # 272
-    ]
-    assert chain == [2048, 1024, 512, 272]
-    assert 128 not in set(chain[1:]), (
-        "no genuine 32-dim intermediate equals the paper's 128"
-    )
-
-
-# ---------------------------------------------------------------------------
-# Where DOES 128 come from?  The matter-sector convention.
-# ---------------------------------------------------------------------------
-
-_GM = GAMMA32[:16, :16]                     # matter-sector chirality
-_RDIM16, _CMAT16, _NULL16, _INPUTS16, _RV16 = _make_counter(16)
-
-
-def _chir16(M):
-    return _GM @ M + M @ _GM
-
-
-_H16 = _CMAT16(_herm)
-_C16 = _CMAT16(_chir16)
-
-
-def test_128_is_matter_sector_hermitian_chirality_odd():
-    """128 = dim_R of Hermitian, chirality-odd D on the 16-dim MATTER sector.
-
-    matter 16x16 general (512) -> Hermitian (256) -> chirality-odd (128).
-    This is a legitimate count, but it is NOT the paper's stated 32-dim chain
-    with J-reality / order-one arrows.  It documents that the FINAL number 128
-    is defensible while the CHAIN that allegedly produces it is not.
-    """
-    assert _RDIM16 == 512
-    assert _NULL16(_H16) == 256
-    assert _NULL16(_H16, _C16) == 128
-
-
-def test_matter_chain_is_512_256_128():
-    chain = [_RDIM16, _NULL16(_H16), _NULL16(_H16, _C16)]
-    assert chain == [512, 256, 128]
-
-
-# ---------------------------------------------------------------------------
-# Paper 32 thm:forced_count, matter-sector restriction (trunk QA F1.14,
-# 2026-09-02): "512 -> 256 -> 128 -> (J-reality + order-one) 128", i.e. the
-# two remaining full-axiom constraints impose NO further matter-sector
-# constraint.  Tested as a projection rank: the matter (16x16) blocks of the
-# 272-dim (Herm + chirality + J-reality) and of the 260-dim (+ order-one)
-# solution spaces each still span the full 128-dim matter-sector space.
-# ---------------------------------------------------------------------------
-
-
-def _null_space_basis(*mats):
-    """Orthonormal basis (columns) of the joint null space of the real-linear
-    constraint maps `mats` on the 2048-dim real parameter space."""
-    G = np.zeros((_RDIM32, _RDIM32))
-    for A in mats:
-        G += A.T @ A
-    w, V = np.linalg.eigh(G)
-    return V[:, w < 1e-7]
-
-
-def _fromv32(v):
-    return v[: 32 * 32].reshape(32, 32) + 1j * v[32 * 32 :].reshape(32, 32)
-
-
-def _matter_block_rank(null_basis):
-    cols = []
-    for k in range(null_basis.shape[1]):
-        B = _fromv32(null_basis[:, k])[:16, :16]
-        cols.append(np.concatenate([np.real(B).ravel(), np.imag(B).ravel()]))
-    return int(np.linalg.matrix_rank(np.array(cols), tol=1e-7))
-
-
-def test_j_reality_adds_nothing_on_the_matter_sector():
-    basis_272 = _null_space_basis(_H32, _C32, _J32)
-    assert basis_272.shape[1] == 272
-    assert _matter_block_rank(basis_272) == 128
-
-
-@pytest.mark.slow
-def test_order_one_adds_nothing_on_the_matter_sector():
-    # slow-marked like test_full_axiom_moduli_is_260_not_128: the order-one
-    # constraint matrix is ~19 GB and takes ~50 s to build.
-    basis_260 = _null_space_basis(_H32, _C32, _J32, _order_one_matrix())
-    assert basis_260.shape[1] == 260
-    assert _matter_block_rank(basis_260) == 128
+def test_degenerate_sample_reproduces_the_retired_260(reduced):
+    """Regression guard: the pre-2026-09-03 sample (18/24 zero elements, six
+    with no quark block) gives 260 -- the retired number was the sample's."""
+    def old_action(lam, qc, m):
+        q = quaternion_to_matrix(*qc)
+        ew = np.zeros((4, 4), complex); ew[0:2, 0:2] = q; ew[2, 2] = lam; ew[3, 3] = np.conj(lam)
+        M = np.zeros((N, N), complex); M[0:4, 0:4] = ew; M[4:16, 4:16] = np.kron(ew, np.asarray(m, complex))
+        return M
+    old = []
+    for lam in (1.0, 1j):
+        old.append(old_action(lam, (0, 0, 0, 0), np.zeros((3, 3), complex)))
+    for k in range(4):
+        qc = [0, 0, 0, 0]; qc[k] = 1; old.append(old_action(0, tuple(qc), np.zeros((3, 3), complex)))
+    for i in range(3):
+        for j in range(3):
+            for val in (1.0, 1j):
+                m = np.zeros((3, 3), complex); m[i, j] = val; old.append(old_action(0, (0, 0, 0, 0), m))
+    assert sum(np.linalg.norm(b) > 0 for b in old) == 6
+    dim, _, _ = _order_one_null(reduced, old)
+    assert dim == 260

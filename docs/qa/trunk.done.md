@@ -102,3 +102,16 @@ re-prices everything above it.
   trunk + group1 (C10 trunk + P40, C11, C13, C14, C15, C16, C17, C18, C19,
   C20, C21, C22, C5). DELTA #3 skipped by PI direction; FULL run #3
   (unseeded) is next. FAIL stands until it reports.
+- 2026-09-03 (v5.4.0 -> remediation) — **FULL run #3 (unseeded) = FAIL**: 55
+  verified MATERIAL findings across all LLM dimensions (code x6, claims x3,
+  citations P32, synthesis); deterministic 13/13 PASS but two C16 instrument
+  defects found. Five re-pricings raised to the PI (carryforward Part I.0):
+  the graph->S^3 convergence claim measures lambda_max -> 2 d_max; Paper 38's
+  rate constant is 2/pi in the paper's own unit-S^3 metric (4/pi = rotation-
+  angle metric); the Forced-count endpoint 260 is a degenerate-sample artefact
+  (correct: 32); Paper 32 Theorem 1 names the wrong algebra for the limit;
+  prop = 2 is generic. Remediation in progress; FAIL stands.
+- 2026-09-03 (v5.4.1) — FULL run #3 remediated (carryforward Part I.8): five
+  re-pricings applied with dated correction notes, one production bug fixed
+  (SM representation), three new tests + six rewritten, C16 widened. FAIL
+  stands until an unseeded DELTA and FULL run #4.

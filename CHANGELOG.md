@@ -7,6 +7,74 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.4.1] - 2026-09-03
+
+**Trunk `/qa` FULL run #3 (unseeded) = FAIL, remediated.** First run under
+the opt-in seeding default. Twelve reviewers + a completeness critic; 55
+verified MATERIAL findings; every one verified by the PM against primary
+text or recomputed by an independent route before acceptance. Ledger:
+`docs/qa/trunk.carryforward.md` Part I; run record
+`debug/qa/trunk_full_run_2026_09_01_notes.md` §9. Patch bump: remediation
+plus one production bug fix; no gate change.
+
+### Five re-pricings (PI items)
+
+- **The graph→S³ convergence claim was a false positive.** The 2026-09-02
+  Paper 7 test pinned κ·λ_max against the target κ was matched to; the
+  lattice's edges never change l (n_max blocks, kernel of block constants),
+  the l = 0 block converges to −1/4 Ha, and the mode at −1/2 has no 1s
+  weight. Retiered to OBSERVATION with the measured facts stated (λ_max →
+  2 d_max = 8; s/p lift 37 % → 0.39 % on the binary lattice); test re-scoped.
+- **Paper 38's rate constant is 2/π in the paper's own metric.** The
+  mass-concentration moment was integrated against the rotation angle, twice
+  the unit-S³ geodesic distance (γ_1 = π = the diameter). 4/π is the
+  rotation-angle value; theorem unaffected; "SU(2) = twice the circle" was the
+  metric scale. Convention pinned by `tests/test_p38_metric_convention.py`;
+  Paper 40's universality (dual-Coxeter normalisation) owes a cross-check.
+- **Forced-count endpoint 260 → 32.** The algebra sample had 18/24 zero
+  elements because `standard_model_triple.matter_action` used `kron(ew, m)`
+  (not a *-representation). Module fixed (CCM: colour-blind particles, M₃ on
+  antiquarks); three independent routes give 32 (matter rank 16); the
+  degenerate sample reproduces 260 as a regression guard.
+- **Paper 32 Theorem 1** named the diagonal algebra for the continuum limit
+  the paper proves for the operator system; scope clause added.
+- **prop = 2 is generic** (random *-closed subspaces 16/16); the corollary
+  now separates the truncation from abelian comparators only; the L5
+  "numerical verification" was γ restated — `gh_convergence` now checks the
+  Lipschitz-normalised panel inequality.
+
+### Changed
+
+- Papers 0, 1, 7, 32, 38, 40 and the group3 synthesis corrected at every
+  Part I locus; c²(n,l) = (1/4)[1 − l(l+1)/(n(n+1))] (was 1/16; Δ = 1/40 is
+  the composite (2/5)/Ω⁴(0)) propagated to Papers 2, 18, 32; universality
+  phrasing fixed in Papers 39, 42, 57, both syntheses, the field guide;
+  withdrawn Lorentzian "literal identification" readings, the stale L3
+  target and the layer counts fixed in Paper 32; citations (van den Dungen
+  Prop. 4.1, Perez-Sanchez 2024→2025, Deligne N = 6, Glanois, G*, Hawkins,
+  Connes–vS §4.2, Paper 2 year).
+- `geovac/standard_model_triple.py` (representation bug; antiquark colour
+  census; finite-only axiom residuals), `geovac/gh_convergence.py` (panel
+  inequality; retired framing removed), `debug/qa/check_retracted_terms.py`
+  (newline-joined scanning; six entries widened/added with two-way proofs).
+- Tests: new `test_paper7_gegenbauer_coupling.py`, `test_paper0_vertex_count.py`,
+  `test_p38_metric_convention.py`; rewritten `test_paper7_graph_convergence.py`,
+  `test_trunk_qa_forced_count_moduli.py`; `test_trunk_qa_kappa.py` /
+  `test_trunk_qa_c2_delta.py` (fudge removed), `test_paper1_geometric_phase.py`
+  (holonomy from operator matrices + state-dependent-phase control),
+  `test_fock_laplacian.py` (item 14 asserts −3), `test_gh_convergence.py`
+  (tautologies replaced), `test_standard_model_triple.py` (CCM checks).
+- CLAUDE.md §1.7 WH1 status replaced (old text in `docs/wh_register_history.md`);
+  `docs/claims_register.md` rows 8/9; claim matrix rows 43/44/51/105 + 3 new.
+
+### Lessons (run record §9)
+
+A remediation that adds a test can create the next defect; three reviewers
+converged on the same false positive from three dimensions; a convention
+shared by every artifact is invisible to every artifact; a degenerate sample
+passes a sound rank routine; C16 could not see a wrapped phrase or a module
+outside an entry's files list.
+
 ## [v5.4.0] - 2026-09-02
 
 **Minor bump, PI direction** (the QA gate changed; §9 rule: minor bumps mark

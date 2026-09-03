@@ -44,18 +44,37 @@ def l_plus(l: int, m: int) -> float:
     return math.sqrt((l - m) * (l + m + 1))
 
 
-def plaquette_holonomy(n: int, l: int, m: int) -> complex:
-    """The eq:berry_arg product around |n,l,m> -> T+ -> L+ -> T- -> L-.
+def _states(n_max: int):
+    return [(n, l, m) for n in range(1, n_max + 1) for l in range(n) for m in range(-l, l + 1)]
 
-    For real operators T- and L- elements are the same real coefficients
-    (the adjoint of a real matrix element), so the product is a product of
-    four real positives whenever the plaquette is non-degenerate.
-    """
-    a = t_plus(n, l)              # (n,l,m)     -> (n+1,l,m)
-    b = l_plus(l, m)              # (n+1,l,m)   -> (n+1,l,m+1)
-    c = t_plus(n, l)              # (n+1,l,m+1) -> (n,l,m+1)   (T- adjoint)
-    d = l_plus(l, m)              # (n,l,m+1)   -> (n,l,m)     (L- adjoint)
-    return complex(a * b * c * d)
+
+def build_operators(n_max: int, phase=None):
+    """T+ and L+ as matrices from the paper's printed elements.  `phase`, if
+    given, is a function (n, l, m) -> complex unit multiplying the L+ element
+    that LEAVES state (n, l, m) -- a state-dependent U(1) dressing (Paper 1
+    Sec. V.C item 2), used by the non-tautology control below."""
+    st = _states(n_max); idx = {s: i for i, s in enumerate(st)}; N = len(st)
+    T = np.zeros((N, N), dtype=complex); L = np.zeros((N, N), dtype=complex)
+    for (n, l, m) in st:
+        i = idx[(n, l, m)]
+        if (n + 1, l, m) in idx:
+            T[idx[(n + 1, l, m)], i] = t_plus(n, l)
+        if m < l:
+            ph = 1.0 if phase is None else phase(n, l, m)
+            L[idx[(n, l, m + 1)], i] = l_plus(l, m) * ph
+    return st, idx, T, L
+
+
+def plaquette_holonomy(n: int, l: int, m: int, ops=None) -> complex:
+    """The eq:berry_arg product around |n,l,m> -> T+ -> L+ -> T- -> L-, read
+    off the OPERATOR MATRICES with true adjoints (T- = T+^dagger,
+    L- = L+^dagger).  Rebuilt 2026-09-03: the earlier version re-used the
+    same two scalars for the return legs, making the product a perfect
+    square for ANY phase assignment -- a guard that could not fail."""
+    st, idx, T, L = ops if ops is not None else build_operators(max(n + 1, 3))
+    i0 = idx[(n, l, m)]; i1 = idx[(n + 1, l, m)]; i2 = idx[(n + 1, l, m + 1)]; i3 = idx[(n, l, m + 1)]
+    Tm = T.conj().T; Lm = L.conj().T
+    return complex(Lm[i0, i3] * Tm[i3, i2] * L[i2, i1] * T[i1, i0])
 
 
 def valid_plaquettes(n_max: int):
@@ -71,8 +90,9 @@ def valid_plaquettes(n_max: int):
 
 def test_berry_phase_vanishes_on_every_plaquette():
     checked = 0
+    ops = build_operators(13)
     for n, l, m in valid_plaquettes(12):
-        h = plaquette_holonomy(n, l, m)
+        h = plaquette_holonomy(n, l, m, ops)
         assert h.real > 0.0, (n, l, m, h)          # nondegenerate
         assert abs(cmath.phase(h)) == 0.0, (n, l, m, h)
         checked += 1
@@ -80,13 +100,18 @@ def test_berry_phase_vanishes_on_every_plaquette():
 
 
 def test_berry_phase_detector_actually_detects():
-    """NON-TAUTOLOGY CONTROL: a complex-weighted plaquette must show a phase.
-
-    theta = 0 is exactly the suspiciously-clean shape; this proves the zero
-    above is a property of the REAL coefficients, not of the detector.
-    """
-    h = plaquette_holonomy(3, 1, 0) * cmath.exp(1j * 0.7)
-    assert abs(cmath.phase(h) - 0.7) < 1e-12
+    """NON-TAUTOLOGY CONTROL (rebuilt 2026-09-03): dress the L+ elements with
+    a STATE-DEPENDENT U(1) phase exp(i alpha n) (Paper 1 Sec. V.C item 2).
+    Around the plaquette the two L legs sit at shells n+1 and n, so the
+    holonomy picks up exp(i alpha) -- a genuine nonzero Berry phase that the
+    matrix-built detector must see.  A sign-only convention (Condon-Shortley
+    (-1)^m) cancels on the adjoint leg and gives 0, as the paper says."""
+    alpha = 0.7
+    ops = build_operators(5, phase=lambda n, l, m: cmath.exp(1j * alpha * n))
+    h = plaquette_holonomy(3, 1, 0, ops)
+    assert abs(cmath.phase(h) - alpha) < 1e-12
+    ops_cs = build_operators(5, phase=lambda n, l, m: (-1.0) ** m)
+    assert abs(cmath.phase(plaquette_holonomy(3, 1, 0, ops_cs))) < 1e-12
 
 
 def test_berry_zero_traces_to_realness_not_magnitude():
@@ -95,8 +120,9 @@ def test_berry_zero_traces_to_realness_not_magnitude():
     small, unit, or mutually cancelling.  Verify the factors genuinely vary
     (no hidden normalisation) while the phase stays pinned at zero."""
     mags = set()
+    ops = build_operators(9)
     for n, l, m in valid_plaquettes(8):
-        h = plaquette_holonomy(n, l, m)
+        h = plaquette_holonomy(n, l, m, ops)
         mags.add(round(abs(h), 9))
         assert cmath.phase(h) == 0.0
     assert len(mags) > 20     # magnitudes spread; only the phase is rigid

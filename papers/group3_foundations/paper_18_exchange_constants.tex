@@ -1038,9 +1038,12 @@ Sprint MR-A computed the natural Dirac analog of the SU(2) scalar
 central Fej{\'e}r state-space GH rate. The scalar baseline (L2 sprint,
 2026-05-06) had pinned the asymptote rigorously to
 $\lim_{n \to \infty} n \gamma_n / \log n = 4/\pi$ with explicit uniform
-bound $\gamma_n \le 6\,(\log n)/n$ for $n \ge 2$; the constant
-$4/\pi = \mathrm{Vol}(S^2)/\pi^2 = 2\,\mathrm{Vol}(S^1)/\mathrm{Vol}(\mathrm{SU}(2))$
-is the Hopf-base measure factor in the natural Haar normalization, the
+bound $\gamma_n \le 6\,(\log n)/n$ for $n \ge 2$ (rotation-angle
+normalisation of the $\mathrm{SU}(2)$ metric; on the unit $S^3$ the constant is
+$2/\pi = \mathrm{Vol}(S^2)/\mathrm{Vol}(\mathrm{SU}(2))$, Paper~38,
+2026-09-03); the constant
+$4/\pi = \mathrm{Vol}(S^2)/\pi^2 = 2\,\mathrm{Vol}(S^2)/\mathrm{Vol}(\mathrm{SU}(2))$
+is the Hopf-base measure factor in that normalization, the
 M1 signature in closed form. The Dirac analog instead obtained the
 structural identity $\gamma_n^{\rm Dirac} = \pi$ for every $n_{\max} \ge 1$:
 the half-integer-only Peter--Weyl truncation cannot span the constant
@@ -1328,8 +1331,8 @@ selects which period ring element is accessed.
 \paragraph{Compact / non-compact partition of the $4/\pi$ rate
 (Sprint M-Z, May 2026).}
 The master Mellin engine's $M_1$ Hopf-base measure mechanism produces
-the universal $4/\pi$ rate constant in the state-space
-Gromov--Hausdorff convergence of Paper~38 (compact $SU(2)$ truncation) and in the universal rate
+the $4/\pi$ rate constant (rotation-angle normalisation; $2/\pi$ on the
+unit $S^3$) in the state-space Gromov--Hausdorff convergence of Paper~38 (compact $SU(2)$ truncation) and in the universal rate
 theorem of Paper~40 (compact connected semisimple Lie groups with
 bi-invariant metric; a circle factor carries $2/\pi$).  Sub-sprint M-Z (modular propinquity
 investigation, 2026-05-23) flagged a structural reason why this rate
@@ -3159,15 +3162,16 @@ is derivable independently from the Fock projection itself, without
 reference to graph vertex degree.  The $l = 0$ eigenfunctions on $S^3$
 are Gegenbauer polynomials $C^1_{n-1}(\cos\chi)$ (equivalently,
 Chebyshev polynomials of the second kind $U_{n-1}(\cos\chi)$).  Their
-three-term recurrence gives transition amplitudes of $1/4$ between
-adjacent shells, so the squared Fock coupling is
+three-term recurrence gives transition amplitudes of $1/2$ between
+adjacent shells, so the squared inter-shell coupling is
 \begin{equation}
-  c^2(n,l) = \tfrac{1}{16}\bigl[1 - l(l{+}1)/(n(n{+}1))\bigr],
+  c^2(n,l) = \tfrac{1}{4}\bigl[1 - l(l{+}1)/(n(n{+}1))\bigr],
   \label{eq:fock_coupling_p18}
 \end{equation}
-with $c^2(n,0) = 1/16$ universally for all $n$.  Equivalently,
-$1/16 = 1/\Omega^4(0)$ where $\Omega(0) = 2$ is the stereographic
-conformal factor at $p = 0$.  The graph-degree derivation
+with $c^2(n,0) = 1/4$ for all $n$ (Paper~7, corrected 2026-09-03 from a
+printed $1/16$ prefactor).  The quantity that coincides with $1/16$ is
+the inverse Fock Jacobian $1/\Omega^4(0)$, where $\Omega(0) = 2$ is the
+stereographic conformal factor at $p = 0$ (equivalently $c^2(n,0)/4$).  The graph-degree derivation
 (Eq.~\ref{eq:kappa_derived}) and the Fock weight route yield the same
 value:\ the graph's maximum vertex degree $d_{\max} = 4$ and the
 conformal factor $\Omega(0) = 2$ are both fixed by the unit-$S^3$
@@ -3175,9 +3179,11 @@ geometry the graph discretizes ($2 d_{\max} = \Omega(0)^4 = 2^4/2 = 8$).
 That the calibration scale $\kappa$ equals this geometric value is the
 Observation;\ no derivation links the two.
 
-A notable special case: $c^2(4,3) = 1/40 = \Delta$ (Paper~2), linking
-the highest-$l$ Fock coupling at the Paper~2 cutoff to the Dirac
-degeneracy $g_3^{\mathrm{Dirac}} = 40$.
+A notable special case: at $(n,l) = (4,3)$ the Casimir factor $2/5$
+times $1/\Omega^4(0)$ gives $1/40 = \Delta$ (Paper~2), an Observation
+about a composite of two geometric quantities (the coupling itself is
+$c^2(4,3) = 1/10$), linking the Paper~2 cutoff to the Dirac degeneracy
+$g_3^{\mathrm{Dirac}} = 40$.
 
 \textit{Classification.}  In Table~\ref{tab:taxonomy} $\kappa$ sits in
 the ``conformal'' tier:\ its numerical value $1/16$ \emph{coincides}

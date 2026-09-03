@@ -1,4 +1,9 @@
-"""Gromov-Hausdorff propinquity assembly for the GeoVac S^3 spectral triple.
+"""State-space Gromov-Hausdorff assembly (Lemma L5) for the GeoVac S^3 spectral triple.
+
+CONVENTION (2026-09-03): the distance controlled here is van Suijlekom's
+state-space Gromov-Hausdorff distance (Paper 38); Latremoliere's propinquity
+for metric spectral triples is NOT claimed (dual reach = named gap).  The
+vocabulary "tunneling pair" below is orientation only.
 
 This module realizes Lemma L5 of the WH1 / R2.5 GH-convergence proof shape
 (see ``debug/track_ts_a_gh_convergence_memo.md`` Section 5). It is the
@@ -31,12 +36,14 @@ converge to the round-S^3 triple as n_max -> infinity:*
     Lambda(T_{n_max}, T_S3)  <=  C_L5  *  gamma_{n_max}  ->  0,
 
 *with C_L5 = max(C_3, ||K||_cb_central) = max(1, 2/(n_max+1)) = 1 the
-explicit propinquity constant assembled from L3 (C_3 = 1, the Lipschitz
+explicit state-space GH constant assembled from L3 (C_3 = 1, the Lipschitz
 comparison) and L2 (||K||_cb = 2/(n_max+1) on the central subalgebra,
 the Bozejko-Fendler symbol-side estimate), and gamma_{n_max} the L2
-mass-concentration rate (qualitatively gamma -> 0; quantitatively
-gamma_{n_max} = O(log n / n) consistent with but not rigorously proved
-for n_max <= 10).*
+mass-concentration moment, whose rate gamma_{n_max} = (c + o(1)) log n / n
+is proven unconditionally in Paper 38 (translation-seminorm metrization,
+2026-06-10); the constant c is metric-convention dependent -- 4/pi in the
+rotation-angle normalisation used by `central_fejer_su2.gamma_rate`, 2/pi
+on the unit round S^3 (tests/test_p38_metric_convention.py, 2026-09-03).*
 
 The tunneling pair is
 
@@ -52,12 +59,12 @@ propinquity bound follows.
 Mathematical structure
 ======================
 
-Following Latremoliere (Trans. AMS 368 (2016) 365-411; arXiv:1811.10843
-"The GH propinquity for metric spectral triples") and the more recent
-formulation in Hekkelman-McDonald 2024 (J. Funct. Anal. 286,
-arXiv:2401.04779 for spectral truncations on the circle), the
-quantum-GH propinquity Lambda(T1, T2) between two metric spectral
-triples is bounded above by the *length* of any *tunnel* connecting
+For orientation only: in Latremoliere's framework (quantum GH propinquity,
+Trans. AMS 368 (2016) 365-411; GH propinquity for metric spectral triples,
+Adv. Math. 404 (2022) 108393, arXiv:1811.10843) and in Hekkelman-McDonald
+(spectral truncations on the circle, J. Funct. Anal., arXiv:2412.00628),
+the propinquity Lambda(T1, T2) between two metric spectral triples is
+bounded above by the *length* of any *tunnel* connecting
 them.  A tunnel is a quintuple
 
     (T_3, pi_1, pi_2, L_1, L_2)
@@ -147,17 +154,13 @@ Honest scope of the bound
      gamma_2, gamma_3, gamma_4 are explicit algebraic numbers, monotone
      decreasing).  The QUANTITATIVE rate O(log n / n) is consistent with
      but not rigorously proved by the small-n closed forms; this is L2's
-     open quantitative item, deferred to Track C (parallel sprint on
-     L2 Stein-Weiss quantitative rate).  The L5 bound inherits this
-     limitation: it is qualitative-rate, with the quantitative refinement
-     awaiting Track C.
+     quantitative item was CLOSED by Paper 38 (unconditional rate,
+     2026-06-10).  The L5 bound carries that rate; the constant depends
+     on the metric normalisation (see the module docstring).
 
-(iii) The Latremoliere propinquity (Trans. AMS 368) is one of several
-      quantum-GH metrics; alternative formulations (Rieffel's quantum
-      GH distance, Wu's spectral-triple propinquity) give comparable
-      bounds.  We work with Latremoliere because it is the framework
-      Leimbach-van Suijlekom 2024 use for the torus, and the SU(2)
-      transcription is mechanical.
+(iii) The distance actually established is van Suijlekom's state-space
+      GH distance; Latremoliere's propinquity is a strictly stronger
+      target not claimed here (its dual-reach hypothesis is unverified).
 
 (iv) The L5 theorem proves convergence in the propinquity, NOT
      identification of the limit with the round-S^3 Wasserstein-
@@ -470,7 +473,9 @@ class TunnelingPair:
             height_B  <=  gamma_{n_max}.
 
         This is the rate-controlling height contribution to the
-        Latremoliere metric-spectral-triple propinquity bound.
+        state-space GH bound.  It is a THEORETICAL bound (equal to gamma
+        by definition); the measured panel quantity is `height_B`, and
+        `compute_propinquity_bound` checks the inequality on the panel.
         """
         return float(self.gamma_rate_value)
 
@@ -563,6 +568,9 @@ class PropinquityBound:
     propinquity_bound: float
     qualitative_rate_only: bool
     track_c_constant: Optional[float] = None
+    reach_B_panel_lip: float = 0.0
+    height_B_panel_lip: float = 0.0
+    l5_inequality_holds: bool = False
 
     def to_dict(self) -> dict:
         """JSON-serializable dict."""
@@ -577,6 +585,9 @@ class PropinquityBound:
             "height_B_bound": self.height_B_bound,
             "height_B_op_norm_panel": self.height_B_op_norm_panel,
             "propinquity_bound": self.propinquity_bound,
+            "reach_B_panel_lip": self.reach_B_panel_lip,
+            "height_B_panel_lip": self.height_B_panel_lip,
+            "l5_inequality_holds": self.l5_inequality_holds,
             "qualitative_rate_only": self.qualitative_rate_only,
             "track_c_constant": self.track_c_constant,
         }
@@ -608,22 +619,31 @@ def compute_propinquity_bound(
         PropinquityBound object.
 
     Notes:
-        The bound is qualitative-rate by default (Track C quantitative
-        rate not yet incorporated).  When Track C lands, this function
-        gains the quantitative rate constant.
+        The rate is Paper 38's unconditional (c + o(1)) log n / n with the
+        convention-dependent constant c (4/pi rotation-angle, 2/pi unit
+        S^3); `track_c_constant` is retained for callers that pass a
+        constant explicitly.
     """
     pair = TunnelingPair.build(n_max, gamma_prec=gamma_prec)
 
     if panel is None:
         panel = default_test_panel(n_max)
 
+    from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_test_function
+
     reach_B_max = 0.0
     height_B_max = 0.0
     height_B_op_norm_max = 0.0
+    reach_B_lip_max = 0.0     # Lipschitz-normalised (the quantity L5 bounds)
+    height_B_lip_max = 0.0
     for f in panel:
         rB = pair.reach_B(f)
         hB = pair.height_B(f)             # Lipschitz-distortion form (corrected)
         hB_op = pair.height_B_op_norm(f)  # legacy operator-norm bound (sanity)
+        f_lip = float(lipschitz_norm_inf_test_function(f, prec=30))
+        if f_lip > 1e-12:
+            reach_B_lip_max = max(reach_B_lip_max, rB / f_lip)
+            height_B_lip_max = max(height_B_lip_max, hB / f_lip)
         if rB > reach_B_max:
             reach_B_max = rB
         if hB > height_B_max:
@@ -643,9 +663,12 @@ def compute_propinquity_bound(
     # height_B <= gamma_{n_max} on the unit Lipschitz ball.
     height_B_theoretical = pair.height_B_theoretical()
 
-    # Propinquity bound: max of constituent reaches/heights, all of
-    # which are bounded by gamma_{n_max} (modulo C_3 = 1 from L3).
-    # reach_P = 0 (compression by projection); height_P = 0.
+    # State-space GH bound: max of the THEORETICAL reach/height bounds,
+    # both gamma_{n_max} (modulo C_3 = 1 from L3); reach_P = height_P = 0.
+    # This value is gamma by construction -- the content that can fail is
+    # the Lipschitz-normalised panel inequality recorded in
+    # `l5_inequality_holds` (2026-09-03; the earlier version reported the
+    # bound with the panel quantities discarded).
     propinquity = max(
         reach_B_theoretical,    # <= C_3 * gamma_{n_max} = gamma_{n_max}
         height_B_theoretical,   # <= gamma_{n_max} (Stein-Weiss)
@@ -664,8 +687,12 @@ def compute_propinquity_bound(
         height_B_bound=height_B_theoretical,
         height_B_op_norm_panel=height_B_op_norm_max,
         propinquity_bound=propinquity,
-        qualitative_rate_only=(track_c_constant is None),
+        qualitative_rate_only=False,
         track_c_constant=track_c_constant,
+        reach_B_panel_lip=reach_B_lip_max,
+        height_B_panel_lip=height_B_lip_max,
+        l5_inequality_holds=bool(reach_B_lip_max <= propinquity + 1e-12
+                                 and height_B_lip_max <= propinquity + 1e-12),
     )
     return bound
 
@@ -813,7 +840,9 @@ class LimitIdentification:
     statement : str
         The mathematical statement.
     is_proved : bool
-        Whether the proof is complete in this codebase.
+        Bookkeeping flag (a dataclass default, not a computed result):
+        the identification is a proof-by-argument in Paper 38
+        prop:limit_identification, not something this module verifies.
     proof_sketch_ref : str
         Reference to the proof memo Section.
     """
@@ -835,7 +864,8 @@ class LimitIdentification:
 class FiveLemmaStatus:
     """The status of the five-lemma GH-convergence roadmap.
 
-    Per debug/track_ts_a_gh_convergence_memo.md Section 8.
+    Per debug/track_ts_a_gh_convergence_memo.md Section 8.  Bookkeeping
+    record (string defaults), not a computed verification.
     """
 
     L1_prime: str = "DONE (R3.5, 2026-05-04)"
@@ -882,8 +912,8 @@ def gh_theorem_statement() -> str:
         "moment of the central spectral Fejer kernel K_{n_max} on SU(2). "
         "The tunneling pair (B_{n_max}, P_{n_max}) is the L4 Berezin "
         "reconstruction map paired with the truncation projection. "
-        "The bound is qualitative-rate; the quantitative rate "
-        "gamma_{n_max} = O(log n / n) is consistent with but not "
-        "rigorously proved by the small-n closed forms (L2 open "
-        "quantitative item, deferred to Track C)."
+        "The rate gamma_{n_max} = (c + o(1)) log n / n is proven "
+        "unconditionally (Paper 38, translation-seminorm metrization); "
+        "the constant c is metric-convention dependent: 4/pi in the "
+        "rotation-angle normalisation, 2/pi on the unit round S^3."
     )

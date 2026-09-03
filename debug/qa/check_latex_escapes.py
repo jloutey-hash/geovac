@@ -66,6 +66,16 @@ ESCAPE_ARTIFACTS = [
     ("\t", "ag",     r"\tag"),
     ("\n", "ewcommand", r"\newcommand"),
     ("\n", "onumber",   r"\nonumber"),
+    # 2026-09-03 (trunk FULL run #3 remediation): a swallowed \r that a
+    # text-mode read/write round trip then LAUNDERED into \n -- the CR is
+    # gone, and the tail sits at the start of the next line, where the
+    # bare-control check cannot see it (it was found by pdflatex).
+    ("\n", "ef",     r"\ref (CR laundered to LF)"),
+    ("\n", "enewcommand", r"\renewcommand (CR laundered to LF)"),
+    ("\n", "ule",    r"\rule (CR laundered to LF)"),
+    ("\n", "ight",   r"\right (CR laundered to LF)"),
+    ("\n", "ho",     r"\rho (CR laundered to LF)"),
+    ("\n", "angle",  r"\rangle (CR laundered to LF)"),
     ("\f", "rac",    r"\frac"),
     ("\v", "space",  r"\vspace"),
     ("\a", "lpha",   r"\alpha"),
@@ -93,7 +103,9 @@ def scan_text(text: str):
         if ctrl == "\n":
             # A swallowed newline leaves the tail at the START of a line.
             for i, line in enumerate(lines, 1):
-                if line.startswith(tail + "{") or line.startswith(tail + "["):
+                if re.match(re.escape(tail) + r"[{\[()\]_^]", line) and (
+                        i == 1 or lines[i - 2].rstrip() == lines[i - 2]
+                        or tail in ("ewcommand", "onumber")):
                     findings.append((i, "eaten-escape",
                                      f"line begins with '{tail}' -- looks like "
                                      f"a swallowed '{macro}'", line[:90]))
@@ -154,6 +166,7 @@ def selftest() -> int:
         "a " + "\r" + "ule{1pt}{1pt}",         # \rule
         "angle " + "\t" + "heta_{12}",         # \theta, mid-line
         "\\begin{center}" + "\r" + "aggedright",  # \raggedright
+        "See Theorem~" + "\n" + "ef{thm:x}), not this",   # CR laundered to LF (2026-09-03)
     ]
     negatives = [
         r"See Sec.~\ref{sec:x}",
@@ -161,6 +174,7 @@ def selftest() -> int:
         r"\textbf{bold}",
         r"Th\'eor\`eme relatif au mouvement d'un point attir\'e",
         r"\begin{equation}\nonumber x \end{equation}",
+        "the value\nefficiency of the scheme",           # a real word at a line start
     ]
     bad = 0
     for t in positives:

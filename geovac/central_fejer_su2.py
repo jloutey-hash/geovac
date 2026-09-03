@@ -890,8 +890,9 @@ def asymptotic_rate_constant() -> sp.Expr:
     Theorem 1(i) of the quantitative-rate memo:
         lim_{n->infty} n * gamma_n / log(n) = 4/pi.
 
-    Structural meaning (memo S2): 4/pi = Vol(S^2) / pi^2 = 2 Vol(S^1) /
-    Vol(SU(2)) under the Haar normalization, the M1 Hopf-base measure
+    Structural meaning (memo S2): 4/pi = Vol(S^2) / pi^2 = 2 Vol(S^2) / Vol(SU(2)) in the
+    rotation-angle normalisation (2/pi = Vol(S^2)/Vol(SU(2)) on the unit S^3;
+    corrected 2026-09-03, an earlier line wrote Vol(S^1)) under the Haar normalization, the M1 Hopf-base measure
     factor of Sprint TS-E1 / Paper 32 SVIII / Paper 18 SIII.7.
     """
     return Rational(4) / sp.pi

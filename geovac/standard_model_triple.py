@@ -165,15 +165,24 @@ class StandardModelFiniteTriple:
         q_components: Tuple[complex, complex, complex, complex],
         m: np.ndarray,
     ) -> np.ndarray:
-        """16x16 representation of A_F on the matter sector.
+        """16x16 representation of A_F on the matter (particle) sector.
 
         Leptons (0:4):   block_diag(q, diag(lam, conj(lam)))
-        Quarks (4:16):   block_diag(q, diag(lam, conj(lam))) (x) m
+        Quarks (4:16):   block_diag(q, diag(lam, conj(lam))) (x) 1_3   (colour-blind)
+
+        CORRECTED 2026-09-03 (trunk FULL run #3, carryforward I.0.3): the
+        quark block was kron(ew, m), which is bilinear in (lam, q) x m and
+        therefore NOT a *-representation of the direct sum C (+) H (+) M_3(C)
+        (pi(a + b) != pi(a) + pi(b); pi(0, 0, 1_3) = 0).  In the
+        Connes-Chamseddine-Marcolli representation the particle sector is
+        colour-blind and M_3(C) acts on the ANTIQUARK sector (see
+        `algebra_action`).  The degenerate old action produced the retired
+        Forced-count endpoint 260.
         """
         ew = self._electroweak_block(lam, q_components)
         M = np.zeros((16, 16), dtype=np.complex128)
         M[0:4, 0:4] = ew
-        M[4:16, 4:16] = np.kron(ew, m)
+        M[4:16, 4:16] = np.kron(ew, np.eye(3, dtype=np.complex128))
         return M
 
     def algebra_action(
@@ -182,13 +191,25 @@ class StandardModelFiniteTriple:
         q_components: Tuple[complex, complex, complex, complex],
         m: np.ndarray,
     ) -> np.ndarray:
-        """32x32 representation pi_F: A_F -> B(H_F).
+        """32x32 representation pi_F: A_F -> B(H_F) (CCM / van Suijlekom Ch. 11).
 
-        Acts on matter sector only; antimatter is via J_F pi J_F^{-1}.
+        Particles (0:16):    `matter_action` (electroweak, colour-blind).
+        Antileptons (16:20): lam * 1_4.
+        Antiquarks (20:32):  1_4 (x) m   (M_3(C) acts on the colour index).
+
+        The right action is J_F pi(b) J_F^{-1}.  CORRECTED 2026-09-03: the
+        previous version acted on the particle sector only, so order-zero /
+        order-one held by disjoint support (an empty check) and the
+        M_3(C) summand had no image of its own.  This is a linear
+        *-representation (tests/test_standard_model_triple.py checks it
+        against an independent construction).
         """
         M_matter = self.matter_action(lam, q_components, m)
         action = np.zeros((32, 32), dtype=np.complex128)
         action[0:16, 0:16] = M_matter
+        action[16:20, 16:20] = lam * np.eye(4, dtype=np.complex128)
+        action[20:32, 20:32] = np.kron(np.eye(4, dtype=np.complex128),
+                                       np.asarray(m, dtype=np.complex128))
         return action
 
     def _yukawa_block_lepton(self) -> np.ndarray:
@@ -443,9 +464,14 @@ class StandardModelACTriple:
         lepton_quark_off = matter[:, :, 0:4, 4:16]
         quark_lepton_off = matter[:, :, 4:16, 0:4]
 
+        # Antiquark block (indices 4:16 within antimatter) = (4 flavour) x (3 colour);
+        # this is where M_3(C) acts in the corrected representation (2026-09-03)
+        antiquark = antimatter[:, :, 4:16, 4:16]
+
         return {
             "matter": matter,
             "antimatter": antimatter,
+            "antiquark": antiquark,
             "mat_anti_off": mat_anti_off,
             "anti_mat_off": anti_mat_off,
             "lepton": lepton,
@@ -517,11 +543,24 @@ class StandardModelACTriple:
         u1_L = np.einsum('ijff->ij', color_L) / 3.0
         u1_R = np.einsum('ijff->ij', color_R) / 3.0
 
+        # Antiquark colour content (2026-09-03): with the CCM representation the
+        # colour gauge field lives on the antiquark block of the fluctuation
+        # (and reaches the quarks through the J-conjugated right action).
+        aq = dc["antiquark"].reshape(d, d, 4, 3, 4, 3)
+        color_anti = np.einsum('ijafbg,ab->ijfg', aq, np.eye(4)) / 4.0
+        su3_coeffs_anti = np.zeros((d, d, 8), dtype=np.complex128)
+        for k in range(8):
+            su3_coeffs_anti[:, :, k] = np.einsum(
+                'ijfg,gf->ij', color_anti, GELL_MANN[k]
+            ) / 2.0
+
         return {
             "color_L": color_L,
             "color_R": color_R,
+            "color_anti": color_anti,
             "su3_coeffs_L": su3_coeffs_L,
             "su3_coeffs_R": su3_coeffs_R,
+            "su3_coeffs_anti": su3_coeffs_anti,
             "u1_color_L": u1_L,
             "u1_color_R": u1_R,
         }
@@ -616,7 +655,62 @@ class StandardModelACTriple:
             order_one = Da_comm @ JbJinv - JbJinv @ Da_comm
             order_one_max = max(order_one_max, float(np.linalg.norm(order_one)))
 
+        # Finite-algebra-only order-zero / order-one (2026-09-03).  With the
+        # corrected (CCM) representation the combined residuals above are no
+        # longer empty checks: they inherit the GV factor's finite-resolution
+        # residual (the operator-system multipliers do not commute; Paper 32
+        # tab:axiom_audit), exactly factorised as
+        #     [M (x) a_F, M' (x) b'_F] = [M, M'] (x) (a_F b'_F)
+        # when a_F and b'_F commute.  The finite-algebra content of the axioms
+        # is therefore checked on A_F alone, and the factorisation residual is
+        # reported so the combined number is attributable.
+        D_F = self.finite.dirac_F()
+        U_F = self.finite.real_structure_F()
+        order_zero_finite_max = 0.0
+        order_one_finite_max = 0.0
+        factorization_max = 0.0
+        rng2 = np.random.default_rng(321)
+        for _ in range(20):
+            lam_a = rng2.standard_normal() + 1j * rng2.standard_normal()
+            q_a = tuple(rng2.standard_normal() for _ in range(4))
+            m_a = rng2.standard_normal((3, 3)) + 1j * rng2.standard_normal((3, 3))
+            lam_b = rng2.standard_normal() + 1j * rng2.standard_normal()
+            q_b = tuple(rng2.standard_normal() for _ in range(4))
+            m_b = rng2.standard_normal((3, 3)) + 1j * rng2.standard_normal((3, 3))
+            a_F = self.finite.algebra_action(lam_a, q_a, m_a)
+            b_F = self.finite.algebra_action(lam_b, q_b, m_b)
+            JbJ_F = U_F @ np.conj(b_F) @ U_F.conj().T
+            oz = a_F @ JbJ_F - JbJ_F @ a_F
+            order_zero_finite_max = max(order_zero_finite_max, float(np.linalg.norm(oz)))
+            DFa = D_F @ a_F - a_F @ D_F
+            oo = DFa @ JbJ_F - JbJ_F @ DFa
+            order_one_finite_max = max(order_one_finite_max, float(np.linalg.norm(oo)))
+            # combined order-zero factorises through the GV commutator
+            k_a = rng2.integers(0, self.n_gv_multipliers)
+            k_b = rng2.integers(0, self.n_gv_multipliers)
+            M_a, M_b = self.gv_multiplier(k_a), self.gv_multiplier(k_b)
+            a = np.kron(M_a, a_F)
+            b = np.kron(M_b, b_F)
+            JbJinv = U_J @ np.conj(b) @ U_J.conj().T
+            comm = a @ JbJinv - JbJinv @ a
+            # GV-side conjugate multiplier: J = J_GV (x) J_F, so J b J^-1 =
+            # (J_GV conj(M_b) J_GV^-1) (x) (J_F conj(b_F) J_F^-1)
+            d_gv = self._dim_GV
+            # factorisation check via the finite part: comm = [M_a, M_b~] (x) (a_F JbJ_F)
+            # with M_b~ the GV-conjugate; recover it from the tensor structure.
+            comm4 = comm.reshape(d_gv, 32, d_gv, 32)
+            # project onto the finite operator a_F JbJ_F to extract the GV block
+            fin = a_F @ JbJ_F
+            fn = float(np.vdot(fin, fin).real)
+            if fn > 1e-14:
+                gv_block = np.einsum('iajb,ab->ij', comm4, np.conj(fin)) / fn
+                recon = np.kron(gv_block, fin)
+                factorization_max = max(factorization_max, float(np.linalg.norm(comm - recon)))
+
         return {
+            "order_zero_finite_max_residual": order_zero_finite_max,
+            "order_one_finite_max_residual": order_one_finite_max,
+            "order_zero_gv_factorization_residual": factorization_max,
             "J_squared_residual": j_sq_residual,
             "JD_relation_residual": jd_residual,
             "gamma_D_anticommutator_residual": gamma_d_residual,
@@ -758,7 +852,8 @@ class StandardModelACTriple:
 
             color = self.extract_color_content(omega)
             for k in range(8):
-                if np.linalg.norm(color["su3_coeffs_L"][:, :, k]) > eps:
+                if (np.linalg.norm(color["su3_coeffs_L"][:, :, k]) > eps
+                        or np.linalg.norm(color["su3_coeffs_anti"][:, :, k]) > eps):
                     has_su3 = True
                     break
 

@@ -2,9 +2,12 @@
 TRUNK QA — Claim 1 (HEADLINE): kappa = -1/16 "derived from the Fock projection".
 
 Paper 7 sec:VII.D / Paper 0 sec:VI claim kappa is *derived* via
-  (a) the universal s-wave Fock coupling c^2(n,0) = 1/16 = (1/4)^2
-      (squared Chebyshev/Gegenbauer recurrence amplitude), and
-  (b) the inverse Fock Jacobian 1/Omega^4(0) with Omega(0) = 2.
+  (a) [RETIRED 2026-09-03] a "universal s-wave Fock coupling c^2(n,0) = 1/16
+      = (1/4)^2" -- the Chebyshev amplitude is 1/2, so c^2(n,0) = 1/4 (see
+      tests/test_paper7_gegenbauer_coupling.py); the old T1 reached 1/16 only
+      through an unexplained `/2`, found by trunk FULL run #3; and
+  (b) the inverse Fock Jacobian 1/Omega^4(0) with Omega(0) = 2 -- the ONLY
+      geometric 1/16, equal to c^2(n,0)/4.
 
 The empirical *matching* kappa is what tests/test_universal_constant_origin.py
 computes: it sets H = kappa * (D - A) on the BINARY graph Laplacian and finds
@@ -28,7 +31,7 @@ Strategy (each piece derived from INDEPENDENT inputs, could-have-failed):
       Laplacian bound), with d_max = 4 the coordination number. The geometric
       16 = (Omega(0)^2)^2 = 4^2 = (2*p-space-amplitude)^2. These are different
       integers (8 vs 16) produced by different constructions; the agreement
-      of kappa is -E_target/(2 d_max) == (1/4)^2 == 1/16 only because
+      of kappa is -E_target/(2 d_max) == 1/Omega^4(0) == 1/16 only because
       E_target = -1/2 and d_max = 4 happen to make 0.5/8 = 1/16. There is no
       derivation carrying the Fock Omega^4 weighting into the binary-graph
       lambda_max. => NON-CIRCULAR BRIDGE DOES NOT EXIST.
@@ -54,16 +57,11 @@ def chebyshev_u_offdiag_amplitude() -> sp.Rational:
     U_{n+1}(x) = 2 x U_n(x) - U_{n-1}(x).  Writing x as the multiplication
     operator in the U-basis, the recurrence
         x U_n = (1/2) U_{n+1} + (1/2) U_{n-1}
-    gives nearest-shell amplitude 1/2 ... but the s-wave Fock coupling that
-    Paper 7 quotes is the *Gegenbauer C^1_{n-1}* normalized transition, whose
-    amplitude between adjacent shells is 1/4 (half of the symmetric-Jacobi
-    1/2, after the n-> n+1 single-sided normalization). We reproduce the
-    1/4 the paper claims directly from the symmetric tridiagonal Jacobi
-    matrix of U (entries 1/2) by taking the *one-sided* normalized amplitude.
-
-    We compute the Jacobi off-diagonal of the U-recurrence symbolically and
-    return its square after the 1/2 one-sided reduction => (1/4)^2 is checked
-    in the test, not asserted here. Returns the raw Jacobi off-diagonal 1/2.
+    gives nearest-shell amplitude 1/2.  That IS the normalized Gegenbauer
+    C^1_{n-1} transition amplitude (equal norms, sin(n chi)/sin(chi) basis);
+    the "one-sided normalization halving it to 1/4" that an earlier version
+    of this file asserted corresponds to nothing (trunk FULL run #3,
+    2026-09-03).  Returns the Jacobi off-diagonal 1/2.
     """
     # x * U_n = a_n U_{n+1} + b_n U_{n-1}, with a_n = b_n = 1/2 for n>=1.
     # Build the Jacobi matrix for U_0..U_4 and read the off-diagonal.
@@ -92,8 +90,10 @@ def inverse_fock_jacobian_at_origin() -> sp.Rational:
 
 
 def c2_formula(n: int, l: int) -> sp.Rational:
-    """Paper 7 Eq fock_coupling: c^2(n,l) = (1/16)[1 - l(l+1)/(n(n+1))]."""
-    return sp.Rational(1, 16) * (1 - sp.Rational(l * (l + 1), n * (n + 1)))
+    """Paper 7 Eq fock_coupling (corrected 2026-09-03):
+    c^2(n,l) = (1/4)[1 - l(l+1)/(n(n+1))]  (derived; see
+    tests/test_paper7_gegenbauer_coupling.py for the quadrature route)."""
+    return sp.Rational(1, 4) * (1 - sp.Rational(l * (l + 1), n * (n + 1)))
 
 
 # ---------------------------------------------------------------------------
@@ -118,18 +118,19 @@ def max_coordination(max_n: int) -> int:
 
 
 # ===========================================================================
-# T1 — geometric c^2(n,0) = 1/16 (independent of energy matching)
+# T1 — geometric quantities: c^2(n,0) = 1/4 (coupling) vs 1/Omega^4(0) = 1/16
 # ===========================================================================
 
-def test_geometric_c2_swave_is_one_sixteenth():
+def test_geometric_c2_swave_is_one_quarter_not_one_sixteenth():
+    """The s-wave coupling is (1/2)^2 = 1/4; the geometric 1/16 is the
+    inverse Fock Jacobian, a DIFFERENT quantity equal to c^2(n,0)/4.  This
+    replaces a test that reached 1/16 through an injected `/2`."""
     for n in range(1, 8):
-        assert c2_formula(n, 0) == sp.Rational(1, 16)
-    # and the (1/4)^2 reading: the one-sided normalized amplitude squared.
-    # Jacobi off-diagonal of U is 1/2; the one-sided Gegenbauer normalization
-    # halves it to 1/4; (1/4)^2 = 1/16.
-    jacobi_offdiag = chebyshev_u_offdiag_amplitude()        # 1/2
-    one_sided = jacobi_offdiag / 2                            # 1/4
-    assert one_sided**2 == sp.Rational(1, 16)
+        assert c2_formula(n, 0) == sp.Rational(1, 4)
+    amplitude = chebyshev_u_offdiag_amplitude()             # 1/2
+    assert amplitude**2 == sp.Rational(1, 4)
+    assert amplitude**2 != sp.Rational(1, 16)
+    assert amplitude**2 / 4 == inverse_fock_jacobian_at_origin()
 
 
 def test_inverse_fock_jacobian_is_one_sixteenth():
@@ -137,14 +138,16 @@ def test_inverse_fock_jacobian_is_one_sixteenth():
 
 
 # ===========================================================================
-# T2 — c^2(4,3) = 1/40 (cross-check the formula is non-trivial, Paper 2 Delta)
+# T2 — c^2(4,3) = 1/10; Delta = 1/40 is the composite (2/5) * 1/Omega^4(0)
 # ===========================================================================
 
 def test_c2_formula_is_nontrivial_at_4_3():
-    # If c^2 were trivially 1/16 always, the formula would be circular.
-    # c^2(4,3) = (1/16)(1 - 12/20) = (1/16)(2/5) = 1/40 != 1/16.
-    assert c2_formula(4, 3) == sp.Rational(1, 40)
-    assert c2_formula(4, 3) != sp.Rational(1, 16)
+    # c^2(4,3) = (1/4)(1 - 12/20) = (1/4)(2/5) = 1/10 != 1/4.
+    assert c2_formula(4, 3) == sp.Rational(1, 10)
+    assert c2_formula(4, 3) != sp.Rational(1, 4)
+    # The Paper 2 boundary term 1/40 is the Casimir factor times 1/Omega^4(0),
+    # NOT the coupling (Observation about a composite).
+    assert sp.Rational(2, 5) * inverse_fock_jacobian_at_origin() == sp.Rational(1, 40)
 
 
 # ===========================================================================
@@ -184,7 +187,7 @@ def test_bridge_matching_eight_is_two_times_coordination_not_fock_jacobian():
     assert np.allclose(edge_vals, 1.0)   # binary graph: every coupling = 1
 
     # 3) The matching kappa is -E_target / (2 d_max) = -0.5 / 8 = -1/16.
-    #    The geometric kappa is -(1/4)^2 = -1/Omega^4(0) = -1/16.
+    #    The geometric kappa is -1/Omega^4(0) = -1/16 (= -c^2(n,0)/4).
     matching_kappa = -0.5 / (2 * dmax)            # = -1/16
     geometric_kappa = -float(inverse_fock_jacobian_at_origin())  # = -1/16
     assert abs(matching_kappa - geometric_kappa) < 1e-12
@@ -212,10 +215,10 @@ def test_bridge_matching_eight_is_two_times_coordination_not_fock_jacobian():
     # (c) matching side is also coordination-dependent: the geometric c^2
     #     formula has NO coordination number in it. If the graph connectivity
     #     changed (different d_max), lambda_max -> 2 d_max would change while
-    #     c^2(n,0) = 1/16 would not. No mechanism links them.
+    #     1/Omega^4(0) = 1/16 (and c^2(n,0) = 1/4) would not. No mechanism links them.
     #     (We assert the structural fact: c^2 formula contains no graph degree.)
     n, l = sp.symbols("n l", positive=True)
-    c2_sym = sp.Rational(1, 16) * (1 - (l * (l + 1)) / (n * (n + 1)))
+    c2_sym = sp.Rational(1, 4) * (1 - (l * (l + 1)) / (n * (n + 1)))
     assert c2_sym.free_symbols == {n, l}   # depends only on (n,l), not on d_max
 
 

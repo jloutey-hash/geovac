@@ -32,12 +32,14 @@ shells, producing the $n^2$ orbital count, but this grouping is not
 forced by the axioms alone.  Similarly, a factor of~2 arises from the
 orientability of the compactified packing manifold ($S^2$),
 corresponding to spin multiplicity.  When the packing is interpreted
-as a graph, its Laplacian decomposes into $(\ell, m)$ sectors whose
-\textbf{[MEASURED]} ground-state eigenvalue reaches the hydrogen ground-state energy under
-a single matched scale $K_{\mathrm{vac}} = -1/16$, as shown in
-subsequent papers---matched, not derived: the content that could have
-failed is the spectral bound $\lambda_{\max} \to 8$, not the target the
-scale is matched to; the full per-shell
+as a graph, its Laplacian splits into $\ell$-blocks (the edges change
+$n$ or $m$, never $\ell$), and \textbf{[MEASURED]} its top eigenvalue
+saturates the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
+(attained in a mid-$\ell$ block, not in the $s$-wave block, whose own
+bound is 4; corrected 2026-09-03), so that under a single matched scale
+$K_{\mathrm{vac}} = -1/16$ the extremal eigenvalue reaches the hydrogen
+ground-state energy---matched, not derived: the content that could have
+failed is the spectral bound, not the target the scale is matched to; the full per-shell
 spectrum $E_n = -Z^2/(2n^2)$ requires an additional node-weight term
 (Paper~18~\cite{paper18}~\S\,\textsc{iii}).  \textbf{[PANEL-VERIFIED]} This angular cross-section recurs as a universal
 structural factor inside every natural geometry developed in the
@@ -100,7 +102,7 @@ from the axioms.
 
 \medskip
 
-\textbf{[PANEL-VERIFIED]} \noindent\textbf{Series significance.}  The $(\ell, m)$ angular
+\textbf{[OBSERVATION]} \noindent\textbf{Series significance.}  The $(\ell, m)$ angular
 sector constructed here recurs as a universal structural factor inside
 every natural geometry developed in the Geometric Vacuum (GeoVac)
 series: $S^3$ for hydrogen~\cite{paper7}, prolate spheroidal
@@ -466,7 +468,7 @@ Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
 \bottomrule
 \end{tabular}
 \caption{The $(\ell, m)$ angular cross-section inside each natural
-  \textbf{[PANEL-VERIFIED]} geometry of the GeoVac series.  In every case, the full coordinate
+  \textbf{[OBSERVATION]} geometry of the GeoVac series.  In every case, the full coordinate
   system separates into a system-specific radial part and the
   universal angular labeling constructed in this paper.}
 \label{tab:cross-section}
@@ -527,7 +529,7 @@ LiH and BeH$^+$.
 
 \medskip
 
-\textbf{[PANEL-VERIFIED]} The invariance of the angular sector across all five levels is not
+\textbf{[OBSERVATION]} The invariance of the angular sector across all five levels is not
 imposed by hand: it tracks the symmetry each geometry retains
 ($m$ exactly wherever axial symmetry survives; $\ell$ exactly
 wherever the full SO(3) does---the two-center problem breaks SO(3)
@@ -539,7 +541,7 @@ substrate for this angular factor.
 \label{sec:combinatorial_invariant}
 
 The preceding survey reveals a structural feature that merits explicit
-\textbf{[PANEL-VERIFIED]} comment.  The same discrete quantum number skeleton
+\textbf{[OBSERVATION]} comment.  The same discrete quantum number skeleton
 $\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$---with its
 degeneracy $2\ell + 1$ and selection rules---admits multiple conformally
 distinct continuum embeddings.  The five geometries catalogued in
@@ -569,8 +571,8 @@ Laplacian and each continuum operator are established case by case:
 \textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic proofs of the Fock
 projection chain for the $S^3$ embedding (the graph-to-continuum
 convergence itself is empirical, through $n_{\max} = 30$), and the
-subsequent papers verify operator convergence for each geometry in
-the hierarchy.
+subsequent papers verify the angular-sector recurrences and benchmark
+each geometry in the hierarchy numerically.
 The framework is demonstrably conformally equivalent to standard
 continuous quantum mechanics at every level where it has been tested.
 Whether one regards the discrete or continuum description as more
@@ -581,7 +583,7 @@ An analogy to isospectral manifolds is apt.  Kac's celebrated
 question---``Can one hear the shape of a drum?''---established that
 different Riemannian geometries can share spectral data (the answer, as
 Gordon, Webb, and Wolpert showed, is no: non-isometric manifolds can be
-\textbf{[PANEL-VERIFIED]} isospectral).  The present result is stronger in a specific sense:
+\textbf{[OBSERVATION]} isospectral).  The present result is stronger in a specific sense:
 the geometries in Table~\ref{tab:cross-section} share a labeled node
 structure---quantum number assignments and per-shell degeneracies,
 with the $(\ell, m)$ selection rules shared exactly wherever the
@@ -614,8 +616,11 @@ $|V| = \sum_{n=1}^{n_{\max}} 2n^2
 for a lattice truncated at $n_{\max}$: each shell $n$ contributes its
 $2n^2$ spin-doubled capacity, summed over $1 \le n \le n_{\max}$. (The
 top shell alone holds $2n_{\max}^2$; the cumulative count is the sum.)
-\textbf{[SYMBOLIC PROOF]} This spin-doubled vertex count is verified by
-\texttt{tests/test\_dirac\_lattice.py}.
+\textbf{[SYMBOLIC PROOF]} This spin-doubled vertex count is verified for
+all $n_{\max}$ symbolically (\texttt{tests/test\_paper0\_vertex\_count.py})
+and by enumeration (\texttt{tests/test\_dirac\_lattice.py}, which works
+in the $(n, \kappa, m_j)$ labelling; the spinless production lattice
+holds $\sum n^2$ nodes).
 
 \subsection{Edge set}
 
@@ -654,18 +659,24 @@ maps dimensionless graph eigenvalues to physical energies in atomic
 units.  \textbf{[OBSERVATION]} This constant's value $1/16$ \emph{coincides} with a conformal-geometry
 quantity of the Fock projection (Paper~7~\cite{paper7}): the squared
 coupling between adjacent $n$-shells in the Gegenbauer eigenbasis of the
-$S^3$ Laplacian is $c^2(n,l) = \tfrac{1}{16}[1 - l(l+1)/(n(n+1))]$, equal
-to $1/16$ for all $l = 0$ (s-wave) transitions, equivalently
-$1/16 = 1/\Omega^4(0)$ with $\Omega(0) = 2$.  This numerical coincidence
+$S^3$ Laplacian is $c^2(n,l) = \tfrac{1}{4}[1 - l(l+1)/(n(n+1))]$ (Paper~7,
+corrected 2026-09-03 from a printed $1/16$ prefactor), and the quantity
+that coincides with $1/16$ is the inverse Fock Jacobian $1/\Omega^4(0)$
+with $\Omega(0) = 2$, equivalently $c^2(n,0)/4$.  This numerical coincidence
 between the energy-matching scale and the geometric $1/16$ is an
 observation, not a derivation (Paper~7): the matching scale and the
 conformal quantity are computed from disjoint inputs, with no known
 mechanism connecting them.
 
-Within each $(\ell, m)$ sector, the radial edges form a
-one-dimensional path graph in $n = \ell+1, \ell+2, \ldots, n_{\max}$.
-As $n_{\max} \to \infty$, the largest Laplacian eigenvalue converges
-to $\lambda_{\max} \to 8 = 2 d_{\max}$, twice the coordination number;
+\textbf{[MEASURED]} The edges change $n$ (radial, $T_\pm$) or $m$
+(azimuthal, $L_\pm$) but never $\ell$, so the Laplacian splits into
+$\ell$-blocks; the $\ell = 0$ block is a path graph in $n$ whose top
+eigenvalue tends to 4, while the full graph's largest Laplacian
+eigenvalue converges to $\lambda_{\max} \to 8 = 2 d_{\max}$, twice the
+coordination number, attained in a mid-$\ell$ block
+(\texttt{tests/test\_trunk\_qa\_kappa.py},
+\texttt{tests/test\_paper7\_graph\_convergence.py}; 2026-09-03
+correction of an earlier ``within each $(\ell,m)$ sector'' statement);
 with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
 $K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
 ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
@@ -832,9 +843,10 @@ atoms~\cite{paper7} through composed fiber bundles for core--valence
 molecules~\cite{paper17}.  When equipped with a graph Laplacian and
 kinetic scale, this packing becomes the foundation for a computational
 framework that has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
-\textbf{[MEASURED]} LiH, and BeH$^+$, with errors ranging from ${<}\,0.1\%$ for hydrogen
-to $5.3\%$ for the LiH equilibrium geometry (BeH$^+$ is markedly
-worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
+\textbf{[MEASURED]} LiH, and BeH$^+$, with errors of $0.57\%$ for the hydrogen ground state on the
+production graph at $n_{\max} = 30$ ($0.11\%$ at $n_{\max} = 70$; the
+continuum chain itself is exact) and $5.3\%$ for the LiH equilibrium
+geometry (BeH$^+$ is markedly worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
 pseudopotential; HeH$^+$ is treated at a fixed bond length and recovers
 93\% of $D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent
 2D-variational solver; Paper~17), benchmarked against

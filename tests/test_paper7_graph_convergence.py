@@ -1,102 +1,138 @@
-"""Paper 7, "New contributions" item 1 -- discrete graph convergence [MEASURED].
+"""Paper 7, "New contributions" item 1 -- what the discrete graph Laplacian is
+MEASURED to do through n_max = 30 (re-scoped 2026-09-03).
 
-Paper 7 states that the GeoVac paraboloid lattice (nodes (n, l, m), edges
-from L+- and T+-) converges numerically, through n_max = 30 and with no
-rate proven, to the Laplace-Beltrami operator on unit S^3.  Until
-2026-09-02 no test in tests/ built the n_max = 30 spectrum for that claim
-(claim_test_matrix row "NO-TEST", trunk DELTA #1 CODE-A).  The s/p-splitting
-half of the convergence story is covered by tests/test_trunk_qa_splitting.py
-(Paper 1); this file covers the other half -- the energy the production
-Hamiltonian actually converges to.
+HISTORY.  The 2026-09-02 version of this file pinned "the ground-state energy
+of the production Hamiltonian against -1/2".  Trunk FULL run #3 showed
+(three reviewers independently, PM-recomputed) that this was a false
+positive for the paper's convergence claim:  H = kappa (D - A) with
+kappa := -0.5/8, so E_0 = -lambda_max(L)/16 IDENTICALLY and "E_0 -> -1/2" is
+the same statement as "lambda_max -> 8 = 2 d_max" -- a graph-combinatorial
+saturation (bipartite Laplacian bound), rescaled by the constant that was
+matched to the target.  Paper 0's abstract had said exactly this ("the
+content that could have failed is the spectral bound lambda_max -> 8, not
+the target the scale is matched to").  This file now pins the spectral
+bound and records the structural facts that limit the reading:
 
-What is measured (production objects only: AtomicSolver builds
-H = kappa Z^2 (D - A) on GeometricLattice with kappa = -1/16):
+  * the lattice's edges change n (T+-) or m (L+-) but never l, so L splits
+    into n_max connected components, one per l, with an n_max-dimensional
+    kernel (one constant per block);
+  * the l = 0 block is a path graph in n whose top eigenvalue tends to 4
+    (3.989 at n_max = 30), i.e. the s-wave block alone gives kappa * 4 = -1/4;
+  * lambda_max of the full graph is attained in a mid-l block (l = 11 at
+    n_max = 30) whose mode has ~1e-33 weight on the (1,0,0) node;
+  * H's spectrum is confined to [-1/2, 0] (L <= 2 d_max), so no level-by-
+    level Rydberg ladder is reproduced (six lowest eigenvalues within 0.06%
+    of each other at n_max = 30).
 
-    n_max :   5        8        10       15       20       30
-    E_0   : -0.41363 -0.46375 -0.47571 -0.48883 -0.49364 -0.49713
-    error :  17.27%    7.25%    4.86%    2.23%    1.27%    0.57%
+Measured sequence (production objects only; kappa = -1/16, Z = 1):
 
-against the S^3 n = 1 harmonic's Fock image E = -1/2 (the hydrogen ground
-state).  Measured 2026-09-02; the sequence is monotone, one-sided (never
-below -1/2), and sub-percent by n_max = 30.  NO rate is asserted, matching
-the paper's wording.
+    n_max      :   5        8        10       15       20       30
+    lambda_max : 6.618034 7.419972 7.611436 7.821269 7.898179 7.954094
+    E_0 = k*lm : -0.41363 -0.46375 -0.47571 -0.48883 -0.49364 -0.49713
+    |E_0+1/2|  :  17.27%    7.25%    4.86%    2.23%    1.27%    0.57%
 
-Honest scope note (recorded, not asserted): the bottom of the graph
-spectrum is DENSE -- at n_max = 30 the six lowest eigenvalues lie within
-0.06% of each other -- so the graph spectrum is not the Rydberg ladder
-level by level (the -(n^2 - 1) ladder is the continuum S^3 object, not the
-graph's; see Paper 1 and the kappa memory note).  The convergence this
-file pins is the ground-state energy, which is what "converges to the
-Laplace-Beltrami operator" is measured by at the level of the spectrum's
-edge.  Tiers: [MEASURED] against the exact -1/2.
+NO rate is asserted (Paper 7 proves none).  The operator convergence
+L -> Delta_{S^3} and the S^3 identification of the limit are NOT tested by
+anything in tests/ (coverage gap, carryforward I.0.1).  Tier: [MEASURED] for
+the bound; the convergence reading is [OBSERVATION].
 """
 from __future__ import annotations
 
 import numpy as np
 import pytest
+from scipy.sparse import diags
+from scipy.sparse.csgraph import connected_components
 from scipy.sparse.linalg import eigsh
 
 from geovac.atomic_solver import AtomicSolver
+from geovac.lattice import GeometricLattice
 
-E_EXACT = -0.5
+KAPPA = -1.0 / 16.0
 GRID = [5, 8, 10, 15, 20, 30]
-
-# Measured 2026-09-02 (this file's docstring); used as pins with margin.
-MEASURED_E0 = {5: -0.41363, 8: -0.46375, 10: -0.47571,
-               15: -0.48883, 20: -0.49364, 30: -0.49713}
+MEASURED_LMAX = {5: 6.618034, 8: 7.419972, 10: 7.611436,
+                 15: 7.821269, 20: 7.898179, 30: 7.954094}
 
 
-def _ground_energy(max_n: int) -> float:
-    solver = AtomicSolver(max_n, Z=1)
-    E, _ = eigsh(solver.H, k=1, which="SA")
-    return float(E[0])
+def _laplacian(max_n: int):
+    lat = GeometricLattice(max_n)
+    A = lat.adjacency.tocsr()
+    deg = np.array(A.sum(axis=1)).ravel()
+    return lat, A, diags(deg) - A, int(deg.max())
 
 
 @pytest.fixture(scope="module")
-def ground_energies() -> dict:
-    return {n: _ground_energy(n) for n in GRID}
-
-
-def test_ground_energy_reproduces_measured_values(ground_energies):
-    """Pins the measured sequence (5e-4 absolute) so a lattice or kappa
-    change is visible here, not only in the endpoint."""
+def lmax() -> dict:
+    out = {}
     for n in GRID:
-        assert abs(ground_energies[n] - MEASURED_E0[n]) < 5e-4, (
-            f"n_max={n}: E0={ground_energies[n]:.5f}, "
-            f"measured 2026-09-02 {MEASURED_E0[n]:.5f}")
+        _, _, L, _ = _laplacian(n)
+        out[n] = float(eigsh(L, k=1, which="LA")[0][0])
+    return out
 
 
-def test_ground_energy_error_decreases_monotonically(ground_energies):
-    """The error against -1/2 shrinks at every step of the grid (no rate
-    asserted -- Paper 7 proves none)."""
-    errs = [abs(ground_energies[n] - E_EXACT) for n in GRID]
-    for (n_a, e_a), (n_b, e_b) in zip(zip(GRID, errs), zip(GRID[1:], errs[1:])):
-        assert e_b < e_a, (
-            f"error grew from n_max={n_a} ({e_a:.5f}) to n_max={n_b} ({e_b:.5f})")
-
-
-def test_ground_energy_never_overshoots(ground_energies):
-    """One-sided approach: E0 > -1/2 at every n_max on the grid."""
+def test_lambda_max_reproduces_measured_values(lmax):
     for n in GRID:
-        assert ground_energies[n] > E_EXACT, (
-            f"n_max={n}: E0={ground_energies[n]:.5f} below -1/2")
+        assert abs(lmax[n] - MEASURED_LMAX[n]) < 5e-5, (n, lmax[n])
 
 
-def test_ground_energy_subpercent_at_nmax_30(ground_energies):
-    """The n_max = 30 endpoint Paper 7 names: sub-percent, and a two-sided
-    window around the measured 0.57% so the assertion can fail in both
-    directions (a one-sided '< 1%' could not detect a silent improvement
-    that would make the paper's wording stale)."""
-    err30 = abs(ground_energies[30] - E_EXACT) / abs(E_EXACT)
-    assert 0.004 < err30 < 0.0075, f"n_max=30 relative error {err30*100:.3f}%"
+def test_lambda_max_saturates_bipartite_bound_monotonically(lmax):
+    """lambda_max increases toward 2 d_max = 8 at every step and never exceeds it."""
+    for n in GRID:
+        _, _, _, dmax = _laplacian(n)
+        assert dmax == 4
+        assert lmax[n] <= 2 * dmax + 1e-9
+    for a, b in zip(GRID, GRID[1:]):
+        assert lmax[b] > lmax[a]
+    assert 0.004 < (8 - lmax[30]) / 8 < 0.0075          # 0.57%, two-sided window
 
 
-def test_bottom_of_spectrum_is_dense_at_nmax_30():
-    """Scope guard for the docstring's honest note: the six lowest
-    eigenvalues at n_max = 30 lie within 0.1% of each other, so no test in
-    this file may be read as a level-by-level Rydberg match."""
-    solver = AtomicSolver(30, Z=1)
-    E, _ = eigsh(solver.H, k=6, which="SA")
-    E = np.sort(E)
-    spread = (E[-1] - E[0]) / abs(E[0])
-    assert spread < 1e-3, f"lowest-six spread {spread*100:.4f}%"
+def test_ground_energy_is_kappa_times_lambda_max_by_construction(lmax):
+    """E_0 -> -1/2 carries no information beyond lambda_max -> 8."""
+    for n in GRID:
+        E0 = float(eigsh(AtomicSolver(n, Z=1).H, k=1, which="SA")[0][0])
+        assert abs(E0 - KAPPA * lmax[n]) < 1e-9, (n, E0, KAPPA * lmax[n])
+
+
+def test_laplacian_splits_into_one_block_per_l():
+    """Edges change n or m, never l: n_max components, n_max-dim kernel."""
+    for n in (6, 12, 30):
+        lat, A, L, _ = _laplacian(n)
+        st = np.array(lat.states)
+        rows, cols = A.nonzero()
+        assert np.all(st[rows, 1] == st[cols, 1])           # dl = 0 on every edge
+        ncomp, _ = connected_components(A, directed=False)
+        assert ncomp == n
+        zeros = np.sum(np.abs(np.linalg.eigvalsh(L.toarray())) < 1e-9) if n <= 12 else None
+        if zeros is not None:
+            assert zeros == n
+
+
+def test_s_wave_block_saturates_four_not_eight():
+    lat, A, L, _ = _laplacian(30)
+    st = np.array(lat.states)
+    m = st[:, 1] == 0
+    L0 = L[m][:, m]
+    top0 = float(eigsh(L0, k=1, which="LA")[0][0])
+    assert 3.98 < top0 < 4.0
+    assert abs(KAPPA * top0 - (-0.25)) < 1e-3
+
+
+def test_extremal_mode_has_no_1s_weight():
+    lat, A, L, _ = _laplacian(30)
+    st = np.array(lat.states)
+    w, v = eigsh(L, k=1, which="LA")
+    vec = v[:, 0] ** 2
+    idx_1s = lat.states.index((1, 0, 0))
+    assert vec[idx_1s] < 1e-20
+    per_l = {l: float(vec[st[:, 1] == l].sum()) for l in range(30)}
+    best = max(per_l, key=per_l.get)
+    assert best == 11 and per_l[best] > 0.999
+
+
+def test_spectrum_confined_and_bottom_dense_at_nmax_30():
+    """H's spectrum lies in [-1/2, 0]; its six lowest eigenvalues sit within
+    0.1% of each other -- not a Rydberg ladder."""
+    H = AtomicSolver(30, Z=1).H
+    lo = np.sort(eigsh(H, k=6, which="SA")[0])
+    hi = float(eigsh(H, k=1, which="LA")[0][0])
+    assert lo[0] > -0.5 and hi <= 1e-9
+    assert (lo[-1] - lo[0]) / abs(lo[0]) < 1e-3

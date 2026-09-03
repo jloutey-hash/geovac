@@ -1290,3 +1290,55 @@ $\Lambda_{\mathrm{prop}}$ as van Suijlekom's state-space GH distance with
 Latrémolière's propinquity named as not claimed (18 loci; bibitem
 `vs2021_jgp` added — the compile gate caught the missing key on the first
 pass). Version bumped to v5.4.0 by PI direction (gate change: seeding opt-in).
+
+## 9. FULL run #3 (2026-09-02/03, unseeded, at fc41ec3 / v5.4.0) = FAIL
+
+First run under the opt-in seeding default. 12 reviewers (6 code Opus, 3
+claims Opus, 3 citations — P32 Opus, others Sonnet — 1 synthesis Opus) read
+the committed corpus read-only; one completeness critic followed. All 12
+were killed once by a session rate limit and resumed from their transcripts.
+Every MATERIAL finding was verified by the PM against primary text or
+recomputed by the PM's own route (the c^2 prefactor by quadrature at six
+(n,l); the s/p splitting at twelve cutoffs on both lattices; the l-block
+structure and top-mode weights; the Forced-count moduli by three independent
+linear-algebra routes; the propagation-number null model; the Fejer moment
+against the unit-S^3 geodesic distance at four cutoffs). Full ledger:
+docs/qa/trunk.carryforward.md Part I (I.0 five re-pricings; I.1 P0/P1/P7;
+I.2 P32; I.3 P38 + spill; I.4 gate integrity; I.5 synthesis; I.6 clean
+surfaces). Scorecard: code FAIL x6, claims FAIL x3, citations CLEAN/CLEAN/FAIL,
+synthesis FAIL, deterministic 13/13 PASS; roll-up FAIL with 55 verified
+MATERIAL findings. Verdict rests on the standing calibration record (run #2
+19/21, DELTA #1 9/9, DELTA #2 8/9; 0/8 false positives each).
+
+Lessons (new): (1) a remediation that adds a test can CREATE the next
+defect — the Paper 7 convergence test I wrote on 2026-09-02 pins kappa *
+lambda_max against the target kappa was matched to, and the synthesis line I
+rewrote the same day declared "no frozen test" an hour before the test
+existed; (2) three reviewers converged independently on the same
+false-positive from three dimensions (claims, P0 code, P7 code) — dimension
+redundancy is what caught it; (3) the convention class strikes again at the
+keystone: the Fejer moment's distance variable was the rotation angle, twice
+the geodesic distance, and every artifact agreed because all shared the
+convention — only a test against an independently defined distance can see
+it; (4) a degenerate SAMPLE (18/24 zero elements) passed a genuine rank
+computation for three runs — "the rank routine is sound" and "the sample
+spans the algebra" are different claims; (5) C16 cannot see a line-wrapped
+phrase or a module outside an entry's files list.
+
+### 9.1 Remediation (2026-09-03, v5.4.1)
+
+Applied in three batches (R1 Papers 0/1/7 + synthesis + coupling tests; R2
+Paper 32 + gh_convergence + forced count + SM representation; R3 Paper 38 +
+spill + C16). Measured facts recorded in the papers: production-lattice s/p
+splitting at twelve cutoffs (37 -> 0.39 %); CG-construction non-decay
+(129/68/84/139 %); lambda_max 6.618 -> 7.954; l-block structure (30
+components, l = 11 block attains lambda_max, l = 0 block -> 4); c^2 prefactor
+1/4 by quadrature at seven (n,l); gamma_n(module) = 2 x unit-S^3 moment at
+n = 1, 2, 3, 5; Forced count 32 by three routes (matter rank 16, Majorana
+16; degenerate sample -> 260); finite-algebra order-zero/one exactly 0 with
+the CCM representation, combined 1.49/1.26 at n_max = 2 = GV residual
+(factorisation residual 0); prop = 2 for 16/16 random *-closed subspaces;
+L5 panel inequality holds at n_max 2-4 with decreasing margin. Full list:
+carryforward Part I.8.
+
+Lesson (6), added during remediation: a bash heredoc halves backslashes, so a LaTeX-bearing replacement string written through one turns `\ref` into a carriage return + `ef`; a subsequent text-mode round trip launders the CR into a newline, leaving corruption that no control-character scan can see. Both instances this session were caught only by pdflatex; C19 now checks for CR-tails at a line start. Rule reaffirmed: LaTeX-bearing edits go through script FILES, never heredocs.

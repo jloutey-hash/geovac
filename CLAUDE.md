@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.4.0 (September 2, 2026)
+**Version:** v5.4.1 (September 3, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -60,7 +60,7 @@ This section is a **bold-claim register**, distinct from the rhetoric of the pap
 
 **WH1 — GeoVac is an almost-commutative spectral triple.** A = functions on the Fock-projected S³ graph; H = scalar/spinor state space; D = Camporesi–Higuchi Dirac; non-abelian gauge structure enters as inner derivations of the almost-commutative extension A ⊗ M_n(ℂ) (Marcolli–van Suijlekom lineage; Papers 25/30/32).
 *Falsifier:* a GeoVac observable demonstrably inconsistent with any spectral-action expansion, or a violated structural axiom (order-one, reality).
-*Status:* **PROVEN — unconditional (2026-06-10).** Paper 38: the discrete truncations converge to the round-S³ spectral triple in van Suijlekom's state-space GH distance at rate (4/π + o(1))·log n_max/n_max, on the truthful CH substrate (translation-seminorm metrization; frozen falsifier `tests/test_p38_action_seminorm.py`). The Lorentzian extension (Papers 45–49) is DESCOPED (P45 annihilation theorem); repair path = Toeplitz temporal compressions (see WH7).
+*Status:* **PROVEN — unconditional (2026-06-10; constant re-priced 2026-09-03).** Paper 38: the discrete truncations converge to the round-S³ spectral triple in van Suijlekom's state-space GH distance at rate (c + o(1))·log n_max/n_max, on the truthful CH substrate (translation-seminorm metrization; frozen falsifier `tests/test_p38_action_seminorm.py`). The constant is metric-convention dependent: c = 4/π in the rotation-angle normalisation the module computes γ_n in, c = 2/π on the unit S³ the paper states (`tests/test_p38_metric_convention.py`); the "SU(2) = twice the circle" reading was the metric scale, and Paper 40's universality claim (semisimple class, dual-Coxeter normalisation) is owed a normalisation cross-check (trunk FULL run #3, PI item). The Lorentzian extension (Papers 45–49) is DESCOPED (P45 annihilation theorem); repair path = Toeplitz temporal compressions (see WH7).
 
 **WH2 — Paper 18 is the Seeley-DeWitt + ζ-invariant decomposition of this spectral triple.** The transcendental taxonomy is the structured output of spectral-action geometry, organized by operator order × bundle type.
 *Falsifier:* a transcendental in a GeoVac observable that cannot be placed in the grid.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk FULL run #3 (2026-09-03, v5.4.1):** FAIL (55 MATERIAL, unseeded), remediated same day. Five re-pricings: graph→S³ convergence was κ·λ_max by construction; P38 constant 2/π on the unit S³ (4/π = rotation angle); Forced count 260 → 32 (representation bug); P32 Thm 1 scope; prop = 2 generic. See carryforward Part I.
 - **v5.4.0 PI adjudications (2026-09-02):** P40 retitled (semisimple); finite triple prints sign triple (−,+,+), no KO label; Paper 7 convergence test added; P40 §L5 = state-space GH. See CHANGELOG v5.4.0.
 - **QA gate: seeding opt-in (2026-09-02, PI direction):** blind calibration seeds are no longer default for DELTA/FULL runs; `/qa <target> seeded` invokes them. See .claude/commands/qa.md.
 - **Trunk Part F + DELTA #1/#2 (2026-09-02, v5.3.1):** 30 rows closed; DELTA #1 9/9 DEFECTS (26), DELTA #2 8/9 DEFECTS (15), both remediated; PI items: P40 title, finite KO label. See trunk.carryforward.md Parts G/H.

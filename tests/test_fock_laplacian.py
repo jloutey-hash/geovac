@@ -209,6 +209,10 @@ def test_s3_eigenvalue_ground_state(radial_symbols):
     assert sp.diff(eigenvalue, p) == 0, (
         f"Eigenvalue depends on p: {eigenvalue}"
     )
+    # and it must be the n = 2 value -3 on the unit sphere (2026-09-03: the
+    # test previously asserted only p-independence, which a wrongly scaled
+    # operator also satisfies).
+    assert sp.simplify(eigenvalue.subs(p0, 1) + 3) == 0, eigenvalue
 
 
 # ============================================================================

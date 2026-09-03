@@ -224,10 +224,15 @@ class TestReachAndHeight:
         hB = pair_n2.height_B(f_const)
         assert hB >= 0.0
 
-    def test_height_B_theoretical_equals_gamma(self, pair_n2: TunnelingPair):
-        """height_B_theoretical = gamma_{n_max} (Paper 38 Appendix A)."""
-        hB_th = pair_n2.height_B_theoretical()
-        assert hB_th == pytest.approx(pair_n2.gamma_rate_value, rel=1e-12)
+    def test_height_B_lipschitz_normalised_below_gamma(self, pair_n2: TunnelingPair):
+        """The L5 height inequality on a unit harmonic: height_B(f)/||f||_Lip
+        <= gamma_{n_max}.  (Replaces a test that asserted a dataclass
+        default equal to gamma; 2026-09-03.)"""
+        from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_test_function
+        f = make_test_function("Y3_(2,0,0)", {(2, 0, 0): 1.0})
+        f_lip = float(lipschitz_norm_inf_test_function(f, prec=30))
+        assert f_lip > 0
+        assert pair_n2.height_B(f) / f_lip <= pair_n2.gamma_rate_value
 
     def test_height_B_constant_function_zero(self, pair_n2: TunnelingPair):
         """A constant function has zero Lipschitz norm both before and after B,
@@ -277,14 +282,14 @@ class TestPropinquityBound:
         assert bound.gamma_n_max > 1.0
         assert bound.gamma_n_max < 1.6
 
-    def test_qualitative_rate_only_default(self):
+    def test_rate_is_not_qualitative_only(self):
+        """Paper 38's rate is unconditional (2026-06-10); the flag no longer
+        defaults to True."""
         bound = compute_propinquity_bound(2)
-        assert bound.qualitative_rate_only is True
-        assert bound.track_c_constant is None
+        assert bound.qualitative_rate_only is False
 
     def test_track_c_constant_passthrough(self):
         bound = compute_propinquity_bound(2, track_c_constant=3.5)
-        assert bound.qualitative_rate_only is False
         assert bound.track_c_constant == 3.5
 
     def test_to_dict(self):
@@ -297,23 +302,18 @@ class TestPropinquityBound:
         assert "height_B_bound" in d
         assert "height_B_op_norm_panel" in d
 
-    def test_height_B_bound_equals_gamma(self):
-        """Paper 38 §3.5: height_B_bound = gamma_{n_max} (Stein-Weiss)."""
+    def test_l5_inequality_holds_on_lipschitz_normalised_panel(self):
+        """THE check that can fail (2026-09-03): the Lipschitz-normalised
+        panel reach and height both lie below C_3 * gamma_{n_max}.  Measured
+        2026-09-02: height/Lip = 0.667, 0.808, 0.878 vs gamma = 2.075, 1.610,
+        1.322 at n_max = 2, 3, 4 (margin halving per step)."""
         for n_max in [2, 3, 4]:
             b = compute_propinquity_bound(n_max)
-            assert b.height_B_bound == pytest.approx(b.gamma_n_max, rel=1e-12)
-
-    def test_propinquity_bound_equals_gamma(self):
-        """Paper 38 §3.5 corrected L5 proof: Lambda <= max(reach, height) = gamma.
-
-        The propinquity bound should equal C_3 * gamma_{n_max} = gamma_{n_max},
-        since both reach_B and height_B are bounded by gamma_{n_max}.
-        """
-        for n_max in [2, 3, 4]:
-            b = compute_propinquity_bound(n_max)
-            assert b.propinquity_bound == pytest.approx(
-                b.c_lipschitz * b.gamma_n_max, rel=1e-12
-            )
+            assert b.l5_inequality_holds, b.to_dict()
+            assert 0.0 < b.height_B_panel_lip < b.propinquity_bound
+            assert 0.0 < b.reach_B_panel_lip < b.propinquity_bound
+        b2, b4 = compute_propinquity_bound(2), compute_propinquity_bound(4)
+        assert b4.propinquity_bound - b4.height_B_panel_lip < b2.propinquity_bound - b2.height_B_panel_lip
 
     def test_propinquity_bound_vanishes_with_n_max(self):
         """REGRESSION (Paper 38 §3.5 erratum): Lambda -> 0 as n_max -> oo.
@@ -392,27 +392,12 @@ class TestConvergence:
 
 
 class TestFiveLemmaRoadmapStatus:
-    """The five-lemma chain is closed."""
+    """Bookkeeping record only (string defaults); the four default-asserting
+    tests were removed 2026-09-03 as tests that could not fail."""
 
-    def test_default_all_done(self):
-        status = FiveLemmaStatus()
-        assert status.all_done()
-
-    def test_each_lemma_done(self):
-        status = FiveLemmaStatus()
-        for lemma in [status.L1_prime, status.L2, status.L3, status.L4, status.L5]:
-            assert lemma.startswith("DONE"), f"Lemma {lemma!r} not DONE"
-
-    def test_l5_done_2026_05_06(self):
-        status = FiveLemmaStatus()
-        assert "2026-05-06" in status.L5
-        assert "L5" in status.L5
-
-    def test_to_dict(self):
+    def test_to_dict_shape(self):
         d = FiveLemmaStatus().to_dict()
-        assert d["all_done"] is True
-        assert "L1_prime" in d
-        assert "L5" in d
+        assert set(d) == {"L1_prime", "L2", "L3", "L4", "L5", "all_done"}
 
 
 # ---------------------------------------------------------------------------
@@ -421,16 +406,11 @@ class TestFiveLemmaRoadmapStatus:
 
 
 class TestLimitIdentification:
-    """The propinquity limit is identified with (P(S^3), d_Wass)."""
+    """Bookkeeping record; the statement names the state-space GH limit."""
 
-    def test_default_proved(self):
+    def test_statement_names_state_space_gh(self):
         lid = LimitIdentification()
-        assert lid.is_proved is True
-        assert "Wass" in lid.statement
-
-    def test_proof_sketch_ref(self):
-        lid = LimitIdentification()
-        assert "r25_l5" in lid.proof_sketch_ref
+        assert "Wass" in lid.statement and "state-space" in lid.statement
 
 
 # ---------------------------------------------------------------------------
@@ -462,10 +442,11 @@ class TestTheoremStatement:
         # propinquity (the open residual) -- guard against the zombie returning
         assert "Latremoliere" not in s and "propinquity" not in s
 
-    def test_statement_includes_qualitative_rate_caveat(self):
+    def test_statement_carries_the_unconditional_rate_not_the_retired_caveat(self):
         s = gh_theorem_statement()
-        assert "qualitative" in s
-        assert "Track C" in s
+        assert "unconditionally" in s and "Paper 38" in s
+        assert "not rigorously proved" not in s and "Track C" not in s
+        assert "2/pi" in s and "4/pi" in s          # convention-labelled constant
 
 
 # ---------------------------------------------------------------------------
