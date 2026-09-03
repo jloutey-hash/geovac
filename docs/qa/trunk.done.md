@@ -131,3 +131,10 @@ re-prices everything above it.
   at n_max = 6, −0.069 at 7, so the crossing is between 6 and 7); Papers 32/38
   and the test carry the measured table in place of the extrapolated
   "near n_max ≈ 6", and a slow test pins the crossing.
+- 2026-09-03 (v5.5.0, PI direction) — the Paper 40 normalisation cross-check
+  is SETTLED: the dual-Coxeter rule Cas(ad) = h∨ on su(2) gives the rotation
+  angle as its geodesic distance, so Paper 38's moment is a dual-Coxeter
+  moment and 4/π is the canonical value. Paper 38 restated on that sphere
+  (Option 1); Paper 40's named check closed at rank 1. Consequence: the
+  Hopf-base volume-ratio reading of the constant does not survive a single
+  normalisation and is now recorded as numerology (PI review item).

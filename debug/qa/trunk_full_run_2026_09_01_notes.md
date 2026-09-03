@@ -1404,3 +1404,26 @@ carry the measured table, and a slow test pins the crossing itself.
 Lesson (11): an extrapolation that reaches the right verdict can still put
 wrong numbers in a paper. If a claim needs a threshold, measure the
 threshold; if the measurement is running, say "extrapolated" until it lands.
+
+## 11. Normalisation cross-check settled (2026-09-03, PI Option 1, v5.5.0)
+
+Cas(ad) = h^v = 2 on su(2) fixes <X,Y> = -2 tr(XY), whose geodesic distance
+from e is 2 theta = the rotation angle. So Paper 38's moment was always the
+dual-Coxeter moment and 4/pi is the canonical-normalisation value; the
+conflict was internal to Paper 38 (unit-sphere setup vs dual-Coxeter moment).
+PI chose Option 1: restate Paper 38 on the dual-Coxeter sphere. Applied to
+the setup, the seminorm relation, the translation seminorm, the continuum
+lemma and the gamma definition; Paper 40's named check closed at rank 1.
+
+Consequence found while carrying it out: the Hopf-base VOLUME-RATIO reading
+does not survive a single normalisation (ratio 1/(4 pi) dual-Coxeter,
+1/(2 pi) unit; neither is 4/pi). The printed 4/pi = Vol(S^2)/pi^2 pairs a
+dual-Coxeter base volume with half a unit-metric group volume. Corrected in
+Papers 38/18/32 and pinned by a test; it demotes Paper 18's M1 Hopf-base
+mechanism to numerology -- flagged to the PI.
+
+Lesson (12): a "universal constant" claim is only content-bearing if the
+normalisation is fixed by a rule chosen independently of the answer. Naming
+the rule (dual-Coxeter) turned an apparent convention artifact into a
+canonical value AND exposed that a downstream geometric reading of the same
+number had been assembled from two different normalisations.

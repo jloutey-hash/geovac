@@ -84,7 +84,7 @@ distance~\cite{vs2021_jgp}, with explicit rate
 d_{\mathrm{GH}} \le \gamma_{\nmax}
 = (4/\pi + o(1)) \log \nmax / \nmax
 \)
-in the rotation-angle normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note).
+in the dual-Coxeter normalisation of the $\SU(2)$ metric (equivalently $2/\pi$ on the unit round $\sthree$; the constant scales with the metric, 2026-09-03 convention note).
 \textbf{[INTERNAL THEOREM]} The truncated state spaces are metrized
 by the left-translation
 Lipschitz seminorm, which equals the Dirac/metric Lipschitz constant
@@ -111,7 +111,7 @@ system on the full chirality-doubled spinor bundle;\ (L2)
 \textbf{[INTERNAL THEOREM + MEASURED]} a positive
 central spectral Fej\'er kernel on $\SU(2)$ with closed-form
 mass-concentration moment and Stein--Weiss-type quantitative rate
-$\gamma_n \sim (4/\pi)\log n / n$ (rotation-angle normalisation; $2/\pi$ on the unit $\sthree$);\ (L3) \textbf{[PANEL-VERIFIED]} a
+$\gamma_n \sim (4/\pi)\log n / n$ (dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$);\ (L3) \textbf{[PANEL-VERIFIED]} a
 Lipschitz comparison bound
 $\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
 $C_3 = 1$ (verified on a finite harmonic panel rather than proved in
@@ -121,8 +121,8 @@ contractive, an approximate identity, and L3-compatible;\ (L5)
 assembly of the distance bound via an approximation pair.
 \textbf{[OBSERVATION]} The
 asymptotic constant identifies as the Hopf-base measure factor ---
-$4/\pi = \Vol(S^2)/\pi^2$ in the rotation-angle normalisation, $2/\pi =
-\Vol(S^2)/\Vol(\SU(2))$ on the unit $\sthree$ --- exhibiting the expected one-log slowdown of the
+$4/\pi$ in the dual-Coxeter normalisation of \S\ref{sec:ch_triple}
+($2/\pi$ on the unit $\sthree$) --- exhibiting the expected one-log slowdown of the
 non-abelian SU(2) rate relative to the
 Leimbach--van~Suijlekom~\cite{leimbach_vs2024} torus rate $O(1/\nmax)$.
 State-space Gromov--Hausdorff convergence of scalar truncations for
@@ -243,7 +243,7 @@ metrization of \S~\ref{sec:named_gaps}, with explicit rate
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
    \;\le\; C_3 \cdot \gamma_{\nmax}, \qquad
    \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax} + O\!\bigl(1/\nmax\bigr)
-   \quad\text{(rotation-angle normalisation; $2/\pi$ on the unit $\sthree$)},
+   \quad\text{(dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$)},
 \end{equation}
 where \textbf{[PANEL-VERIFIED]} $C_3 = 1$ is the Lipschitz comparison
 constant of
@@ -254,10 +254,11 @@ Theorem~\ref{thm:main_unconditional}, whose bound is
 $\le \gamma_{\nmax}$ outright and does not invoke $C_3$;\ the $C_3$
 factor displayed here belongs to the Lemma~\ref{lem:L5} assembly route
 and carries that lemma's panel scope.
-\textbf{[OBSERVATION]} The asymptotic constant reads
-$4/\pi = \Vol(S^2)/\pi^2$ in the rotation-angle normalisation and
-$2/\pi = \Vol(S^2)/\Vol(\SU(2))$, the plain $\SU(2)/U(1)$ Haar ratio,
-on the unit $\sthree$ (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that rotation-angle normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ of \S\ref{sec:setup}, the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
+\textbf{[OBSERVATION]} The asymptotic constant is $4/\pi$ in the
+dual-Coxeter normalisation of \S\ref{sec:ch_triple} and $2/\pi$ on the
+unit $\sthree$;\ it coincides numerically with $\Vol(S^2)/\pi^2$, which
+is not a base-to-group Haar ratio in either normalisation (see the
+normalisation caveat in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that dual-Coxeter normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ of \S\ref{sec:setup}, the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
 \end{theorem}
 
 The proof structure parallels the abelian Leimbach--van~Suijlekom
@@ -280,13 +281,10 @@ the Connes--van~Suijlekom $S^1$ Fej\'er reconstruction.
 
 The asymptotic constant in \eqref{eq:main_rate} carries
 geometric content, and its value is normalisation-dependent (2026-09-03):\
-in the rotation-angle normalisation the constant is $4/\pi = \Vol(S^2) /
-\pi^2$, where $\Vol(S^2) = 4\pi$ is the standard round volume of the Hopf
-base $S^2 = \SU(2)/U(1)$ and $\pi^2 = \Vol(\SU(2))/2$; on the unit
-$\sthree$ the constant is exactly the Haar-normalisation ratio
-$\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$ --- the factor $2$ between the two is the
-metric scale (rotation angle $= 2 \times$ geodesic distance), not a
-geometric signature; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
+in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} the constant
+is $4/\pi$, which coincides numerically with $\Vol(S^2)/\pi^2$ for
+$\Vol(S^2) = 4\pi$;\ on the unit $\sthree$ it is $2/\pi$, the factor $2$
+being the metric scale rather than a geometric signature.  \emph{Normalisation caveat (2026-09-03).}  This identity is not a base-to-group Haar ratio in either normalisation:\ with the metric declared uniformly, $\Vol(\text{Hopf base})/\Vol(\SU(2))$ is $1/(4\pi)$ in the dual-Coxeter metric and $1/(2\pi)$ on the unit $\sthree$ (the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so the base radius scales with the total space).  The printed form pairs $\Vol(S^2) = 4\pi$, which is the base of the \emph{dual-Coxeter} sphere, with $\pi^2 = \Vol_1(\SU(2))/2$, a \emph{unit}-metric quantity.  It is therefore a numerical coincidence across two normalisations, not a geometric ratio, and the Hopf-base reading of the constant is correspondingly weaker than earlier drafts recorded.  Accordingly; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
 first-moment constant of the classical Fej\'er kernel on the circle
 (Remark~\ref{rem:circle_fejer}). This is precisely the
 \emph{Hopf base measure} factor that appears in the heat-kernel
@@ -296,7 +294,7 @@ internal supporting analysis as one of the three sub-mechanisms of a
 master Mellin-engine $\Tr (D^k e^{-tD^2})$ with operator order
 $k \in \{0, 1, 2\}$~\cite{paper18}. \textbf{[OBSERVATION]} The constant in
 \eqref{eq:main_rate} ($2/\pi$ on the unit $\sthree$; $4/\pi$ in the
-rotation-angle normalisation) identifies as the $k=0$ sub-case (M1,
+dual-Coxeter normalisation) identifies as the $k=0$ sub-case (M1,
 Hopf-base measure) of that classification; the same $1/\pi^2$ factor reappears
 in the Pythagorean Hilbert--Schmidt orthogonality corollary on the
 Krein wedge documented in the companion Lorentzian-extension paper
@@ -357,24 +355,32 @@ L_{\nmax}(T) := \sup_{g \ne e}
 L(f) := \sup_{g \ne e}
 \frac{\norm{\lambda_g f - f}_{L^\infty}}{d(e, g)},
 \end{equation}
-with $d$ the round geodesic distance (bi-invariant).
+with $d$ the dual-Coxeter geodesic distance of
+\S\ref{sec:ch_triple} --- equivalently the rotation angle,
+$d(e, g) = \chi(g)$ --- which is bi-invariant.
 \end{definition}
 
 \begin{lemma}[continuum identification]\label{lem:continuum_lip}
 For $f \in C^\infty(\sthree)$,
-$L(f) = \mathrm{Lip}(f) = \norm{\nabla f}_{L^\infty}
-= \opnorm{[\DCH, M_f]}$.
+$L(f) = \mathrm{Lip}_d(f) = \norm{\nabla_d f}_{L^\infty}
+= \tfrac{1}{2}\opnorm{[\DCH, M_f]}$, all four quantities taken in the
+dual-Coxeter metric $d$ of \S\ref{sec:ch_triple} except the last, in
+which $\DCH$ is the unit-metric operator
+(Eq.~\eqref{eq:seminorm_normalisation}).
 \end{lemma}
 
 \begin{proof}
 $\norm{\lambda_g f - f}_\infty = \sup_x |f(g^{-1}x) - f(x)| \le
 \mathrm{Lip}(f)\, d(g^{-1}x, x) = \mathrm{Lip}(f)\, d(e, g)$ by
-bi-invariance, so $L(f) \le \mathrm{Lip}(f)$;\ conversely left
+bi-invariance, so $L(f) \le \mathrm{Lip}_d(f)$;\ conversely left
 translations act transitively and realize every short geodesic
 ($d(g^{-1}x, x) = d(e, g)$ along the orbit), so the supremum
-recovers $\mathrm{Lip}(f)$. The identities $\mathrm{Lip}(f) =
-\norm{\nabla f}_\infty = \opnorm{[\DCH, M_f]}$ on the continuum are
-standard (Connes' distance formula on a closed spin manifold).
+recovers $\mathrm{Lip}_d(f)$. The identity $\mathrm{Lip}_d(f) =
+\norm{\nabla_d f}_\infty$ on the continuum is standard, as is
+$\mathrm{Lip}_{d_1}(f) = \opnorm{[\DCH, M_f]}$ for the unit metric
+(Connes' distance formula on a closed spin manifold);\ since
+$d = 2 d_1$, Lipschitz seminorms scale inversely and the factor
+$\tfrac12$ of \eqref{eq:seminorm_normalisation} follows.
 \end{proof}
 
 \begin{lemma}[per-band injectivity]\label{lem:band_injectivity}
@@ -487,7 +493,7 @@ d_{\mathrm{GH}}\Bigl( \bigl(S(\Op_{\nmax}),
 \;\le\; \gamma_{\nmax}
 \;=\; \frac{4}{\pi}\,\frac{\log \nmax}{\nmax} + O(1/\nmax)
 \end{equation}
-in the rotation-angle normalisation of Lemma~\ref{lem:L2}, i.e.\
+in the dual-Coxeter normalisation of Lemma~\ref{lem:L2}, i.e.\
 $\gamma_{\nmax} = 2\int \KS_{\nmax}\, d_{\mathrm{round}}\, dg$ on the
 unit $\sthree$, where the same bound reads $(2/\pi)\log\nmax/\nmax$
 (2026-09-03 convention note; the theorem holds in either normalisation).
@@ -612,8 +618,33 @@ strictly stronger open target.
 \subsection{The round $\sthree$ Camporesi--Higuchi spectral triple}
 \label{sec:ch_triple}
 
-Take $\sthree$ as the unit round 3-sphere in $\R^4$ with bi-invariant
-metric of total volume $\Vol(\sthree) = 2\pi^2$. Identify $\sthree$
+Take $G = \SU(2)$ with the bi-invariant metric in the
+\emph{dual-Coxeter normalisation}:\ the $\mathrm{Ad}$-invariant inner
+product on $\mathfrak{su}(2)$ fixed by $\mathrm{Cas}(\mathrm{ad}) =
+h^\vee = 2$, namely $\langle X, Y\rangle = -2\,\mathrm{tr}(XY)$ in the
+defining representation.  On $\SU(2)$ this normalisation makes the
+geodesic distance from the identity equal to the \emph{rotation angle}:
+for $g = \exp(i\theta\,\hat n \cdot \sigma)$, which has eigenphases
+$\pm\theta$, one computes $\lVert i\theta\,\hat n \cdot \sigma\rVert =
+2\theta = \chi(g)$.  The underlying manifold is thus the round 3-sphere
+of radius~$2$, with diameter $2\pi$ and total volume
+$\Vol(\sthree) = 16\pi^2$;\ the \emph{unit} round $\sthree$ is the same
+manifold with every distance halved, and we write $d_1 = d/2$ and
+$\Vol_1(\sthree) = 2\pi^2$ when that comparison is needed.
+
+We fix the metric by this representation-theoretic rule, rather than by
+a choice of radius, because it is the rule under which the rate
+constant of Theorem~\ref{thm:main} is comparable across groups:\
+Paper~40~\cite{paper40_unified} uses the same normalisation for the
+whole compact connected semisimple class, so the present paper is
+exactly its rank-1 case.  (Until 2026-09-03 this subsection declared
+the unit sphere while the moment $\gamma_{\nmax}$ of
+Lemma~\ref{lem:L2} was computed against $\chi$;\ the two differ by the
+factor $2$ above, and the bound was correspondingly stated with a
+unit-metric seminorm against a dual-Coxeter moment.  Declaring the
+metric uniformly removes that seam;\ since every quantity in the bound
+is homogeneous of degree one in the metric, the inequality itself is
+unchanged.)  Identify $\sthree$
 with the Lie group $\SU(2)$ via the standard double cover\footnote{We
 use this identification implicitly throughout. It is convenient
 because (i)~the Peter--Weyl decomposition of $L^2(\SU(2))$ provides a
@@ -627,8 +658,11 @@ $L^2(\sthree, \Sigma)$ the spinor Hilbert space.
 
 The Camporesi--Higuchi Dirac operator
 $\DCH: \mathrm{Dom}(\DCH) \subset L^2(\sthree, \Sigma) \to L^2(\sthree,
-\Sigma)$ is the Dirac operator of the unit round metric, acting on
-the spinor harmonics
+\Sigma)$ is the Dirac operator of the \emph{unit} round metric --- we
+keep that normalisation of the operator throughout, so that
+\eqref{eq:CH_spectrum} below is the familiar Camporesi--Higuchi
+spectrum;\ the Dirac operator of the dual-Coxeter metric declared above
+is $\tfrac{1}{2}\DCH$.  It acts on the spinor harmonics
 \begin{equation}\label{eq:CH_spectrum}
    \DCH \, \psi_{n, l, m_j, \chi}
    \;=\; \chi\,(n + \tfrac{1}{2})\, \psi_{n, l, m_j, \chi},
@@ -648,9 +682,15 @@ This is a unital, even, real spectral triple of metric dimension
 $3$ in the sense of Connes~\cite{connes1995}, with KO-dimension $3 \pmod
 8$. The chirality grading $\gamma_5 = \mathrm{diag}(+1, -1)$ on the
 spinor bundle, the unitary real structure $J$ given by charge
-conjugation, and the standard Lipschitz seminorm
-$\Lipnorm{f} := \opnorm{[\DCH, \Mat_f]}$ on the algebra
-$C^\infty(\sthree)$ all enter as expected.
+conjugation, and the Lipschitz seminorm all enter as expected.  Because
+$\DCH$ is the unit-metric Dirac operator while $d$ is the dual-Coxeter
+distance, the two differ by the same factor $2$:
+\begin{equation}\label{eq:seminorm_normalisation}
+   L(f) \;=\; \mathrm{Lip}_d(f) \;=\; \tfrac{1}{2}\,\opnorm{[\DCH, \Mat_f]},
+\end{equation}
+and it is $L$ --- the dual-Coxeter Lipschitz seminorm, equivalently the
+translation seminorm of Definition~\ref{def:translation_seminorm} ---
+that metrizes every state space in this paper.
 
 \subsection{Truncations}\label{sec:truncations}
 
@@ -883,20 +923,20 @@ cb-norm of any map used in this paper.)
    \gamma_{\nmax}
    \;:=\; \int_{\SU(2)} \KS_{\nmax}(g)\, \chi(g)\, dg,
 \end{equation}
-where $\chi(g) \in [0, 2\pi]$ is the class (rotation) angle of
-$g$, i.e.\ $\chi(g) = 2\, d_{\mathrm{round}}(e, g)$ on the unit
-$\sthree$ ($g = \cos\theta + i \sin\theta\, \hat n \cdot \sigma$ has
-eigenphases $\pm\theta$ and geodesic distance $\theta = \chi/2$ from
-$e$; the characters below are $\sin((2j{+}1)\chi/2)/\sin(\chi/2)$).
-\emph{Convention correction (2026-09-03):} the definition previously
-wrote $d_{\mathrm{round}}(e, g)$ in place of $\chi(g)$ while every
-computation (the sum rule, the module, the estimators) used $\chi$; the
-moment against the unit-$\sthree$ distance is exactly $\gamma_{\nmax}/2$
-at every $\nmax$ ($\KS_1 \equiv 1$ makes $\gamma_1 = \pi$, exactly twice the
-unit-$\sthree$ Haar-mean distance $\pi/2$ --- a mean, not a diameter;
-\texttt{tests/test\_p38\_metric\_convention.py}).  All constants below
-are stated in the $\chi$ (rotation-angle) normalisation; halve them for
-the unit $\sthree$.
+where $\chi(g) \in [0, 2\pi]$ is the class (rotation) angle of $g$,
+which by \S\ref{sec:ch_triple} \emph{is} the dual-Coxeter geodesic
+distance $d(e, g)$ ($g = \cos\theta + i \sin\theta\, \hat n \cdot
+\sigma$ has eigenphases $\pm\theta$ and $d(e,g) = 2\theta = \chi$;\ the
+characters below are $\sin((2j{+}1)\chi/2)/\sin(\chi/2)$).  So
+$\gamma_{\nmax}$ is the mass-concentration moment against the paper's
+own metric, and every constant below is a dual-Coxeter constant;\ the
+corresponding unit-$\sthree$ moment is exactly $\gamma_{\nmax}/2$ at
+every $\nmax$ (\texttt{tests/test\_p38\_metric\_convention.py};\
+$\KS_1 \equiv 1$ makes $\gamma_1 = \pi$, exactly twice the unit-$\sthree$
+Haar-mean distance $\pi/2$).  \emph{Correction (2026-09-03):} this
+definition previously wrote ``$d_{\mathrm{round}}$'' while
+\S\ref{sec:ch_triple} declared the unit sphere, so the moment and the
+seminorm were stated in different metrics;\ both are now dual-Coxeter.
 Then:
 \begin{enumerate}\setlength{\itemsep}{1pt}
 \item[(d.i)] \textbf{[INTERNAL THEOREM]} $\gamma_{\nmax}$ admits the
@@ -1007,7 +1047,7 @@ estimators is $2.008$ at $n = 800$
 \texttt{test\_su2\_constant\_is\_twice\_circle}). An earlier version of
 this remark stated the circle constant as $4/\pi$, ``the same on both
 sides''; that statement is withdrawn (2026-09-02 certification run).
-\textbf{[OBSERVATION]} In the rotation-angle normalisation the $\SU(2)$
+\textbf{[OBSERVATION]} In the dual-Coxeter normalisation the $\SU(2)$
 constant is twice the circle constant; in the unit-$\sthree$
 normalisation (geodesic distance, the circle's own convention) the two
 coincide at $2/\pi$ (circle:\ $2\Vol(S^0)/\Vol(S^1) = 4/(2\pi) = 2/\pi$;
@@ -1029,20 +1069,17 @@ rate $O(1/\nmax)$~\cite{leimbach_vs2024}, not relative to the circle
 Fej\'er first moment.
 \end{remark}
 
-\begin{remark}[Hopf-base measure interpretation of the constant]
-\textbf{[OBSERVATION]} In the rotation-angle normalisation the asymptotic
-constant identifies as
+\begin{remark}[Hopf-base numerology of the constant]
+\textbf{[OBSERVATION]} In the dual-Coxeter normalisation the asymptotic
+constant coincides numerically with
 \begin{equation*}
    \frac{4}{\pi}
    \;=\; \frac{\Vol(S^2)}{\pi^2}
-   \;=\; \frac{4\pi}{\pi^2},
+   \;=\; \frac{4\pi}{\pi^2}.
 \end{equation*}
-and on the unit $\sthree$ as $2/\pi = \Vol(S^2)/\Vol(\SU(2))$.
-The numerator $4\pi$ is the round volume of the Hopf base
-$S^2 = \SU(2)/U(1)$. The denominator $\pi^2$ is half the round volume
-of $\SU(2)$ in the bi-invariant metric (the factor of two being the
-metric scale, 2026-09-03). The constant therefore lives
-in the standard Hopf-fibration measure-theoretic data, and is one of
+\emph{Normalisation caveat (2026-09-03).}  This identity is not a base-to-group Haar ratio in either normalisation:\ with the metric declared uniformly, $\Vol(\text{Hopf base})/\Vol(\SU(2))$ is $1/(4\pi)$ in the dual-Coxeter metric and $1/(2\pi)$ on the unit $\sthree$ (the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so the base radius scales with the total space).  The printed form pairs $\Vol(S^2) = 4\pi$, which is the base of the \emph{dual-Coxeter} sphere, with $\pi^2 = \Vol_1(\SU(2))/2$, a \emph{unit}-metric quantity.  It is therefore a numerical coincidence across two normalisations, not a geometric ratio, and the Hopf-base reading of the constant is correspondingly weaker than earlier drafts recorded.
+Read as numerology rather than as a ratio, the constant still points
+at the Hopf-fibration data, and is one of
 the natural transcendentals on $\SU(2)$ that survives at the
 leading-order rate of any Cesaro-2-style averaging procedure.
 \end{remark}
@@ -1544,13 +1581,13 @@ $\sqrt{(N-1)/(N+1)}$ form.
 The cumulative effect is that the SU(2) rate is one log factor slower
 than the torus rate ($\log n / n$ vs $1 / n$). This is the standard
 slowdown of non-abelian compact groups relative to flat tori in
-Cesaro/Fej\'er theory. \textbf{[OBSERVATION]} In the rotation-angle normalisation the
+Cesaro/Fej\'er theory. \textbf{[OBSERVATION]} In the dual-Coxeter normalisation the
 asymptotic constant $4/\pi$ is twice the circle Fej\'er first-moment
 constant $2/\pi$; on the unit $\sthree$ the two coincide, the factor
 $2$ being the metric scale (Remark~\ref{rem:circle_fejer},
 2026-09-03); we read the $\SU(2)$ value as the Hopf-base measure
 factor $\Vol(S^2)/\Vol(\SU(2))$ (unit $\sthree$), i.e.\
-$2\Vol(S^2)/\Vol(\SU(2))$ in the rotation-angle normalisation. (An earlier version of this
+$2\Vol(S^2)/\Vol(\SU(2))$ in the dual-Coxeter normalisation. (An earlier version of this
 sentence stated the constant as ``identical on both sides''; withdrawn
 2026-09-02.)
 
@@ -1683,7 +1720,7 @@ triangle inequality" $|C(\pi) - C(\pi')| \le C(\sigma)$ is false in
 general; the Dirac eigenvalue, not the Casimir, is the right
 ingredient). \textbf{[PANEL-VERIFIED]} The rate is \emph{not}
 rank-dependent as anticipated
-above:\ the rate constant $4/\pi$ (rotation-angle normalisation) is reported \emph{universal} across
+above:\ the rate constant $4/\pi$ (dual-Coxeter normalisation) is reported \emph{universal} across
 the
 class, by a Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation theorem (Paper~40~\cite{paper40_unified} \S 3.2) --- rigorous at rank~$1$
@@ -1847,7 +1884,7 @@ kernel and the constant while preserving the leading $\log n / n$
 behaviour. \textbf{[OBSERVATION]} On the circle the constant is $2\Vol(S^0)/\Vol(S^1)
 = 2/\pi$; on $\SU(2)$ it is $\Vol(S^2)/\Vol(\SU(2)) = 2/\pi$ on the unit
 $\sthree$ and $2\Vol(S^2)/\Vol(\SU(2)) = \Vol(S^2)/\pi^2 = 4/\pi$ in the
-rotation-angle normalisation; no common ``$2\Vol(\text{base})/\Vol(\text{group})$''
+dual-Coxeter normalisation; no common ``$2\Vol(\text{base})/\Vol(\text{group})$''
 form is claimed (2026-09-03), and no derivation of one constant from
 the other is given. (An earlier version of this
 paragraph stated the circle constant as $4/\pi$ and the $\SU(2)$
@@ -2022,7 +2059,7 @@ truncations of compact semisimple Lie groups with bi-invariant metric},
 \newblock Generalizes the present paper from $\SU(2)$ to compact
 connected \emph{semisimple} Lie groups (a circle factor carries the circle
 constant); rate constant $4/\pi$ reported universal across that class
-(rotation-angle normalisation; rigorous at rank~1, rank-uniform proof a
+(dual-Coxeter normalisation; rigorous at rank~1, rank-uniform proof a
 named gap) via a Plancherel-weight $\times$ Vandermonde-Jacobian
 cancellation; asymptotic-tight $C_3 = 1$ at all ranks via the PRV-summand
 bound (Kumar 1988) with a Brauer--Klimyk interior closure.

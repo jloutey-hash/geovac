@@ -7,6 +7,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.5.0] - 2026-09-03
+
+**Minor bump, PI direction.** The Paper 40 normalisation cross-check — the last
+open item from FULL run #3 — is settled, and Paper 38 is restated on the
+dual-Coxeter sphere accordingly.
+
+### The computation
+
+On su(2) the dual-Coxeter rule Cas(ad) = h∨ = 2 fixes the Ad-invariant inner
+product to ⟨X, Y⟩ = −2 tr(XY) in the defining representation, and in that
+product the geodesic distance from the identity to exp(iθ n̂·σ) is **2θ, the
+rotation angle**. So the metric Paper 38's moment integrates against *is* Paper
+40's dual-Coxeter metric: 4/π is not a convention artifact but the value under
+the rule that makes "universal across the class" well-posed, and Paper 38 is
+exactly the rank-1 case.
+
+The conflict was therefore **internal to Paper 38**: its setup declared the unit
+round S³ while its moment was dual-Coxeter, so the bound paired a unit-metric
+seminorm with a doubled-metric moment.
+
+### Changed (PI Option 1)
+
+- Paper 38 §ch_triple declares the dual-Coxeter rule and its consequences (round
+  S³ of radius 2, diameter 2π, volume 16π²); D_CH is kept as the unit-metric
+  operator with L(f) = ½‖[D_CH, M_f]‖ stated as an equation; the translation
+  seminorm, the continuum lemma and the γ definition all name the metric. Every
+  quantity in the bound is homogeneous of degree one in the metric, so the
+  inequality is unchanged in content — both sides are now in one metric.
+- Paper 40's named check is closed with the rank-1 reconciliation in its
+  abstract note; "rotation-angle normalisation" is renamed to "dual-Coxeter
+  normalisation" corpus-wide (Papers 32, 38, 39, 40, 42, 18, 57, both syntheses,
+  the field guide).
+- `tests/test_p38_metric_convention.py` pins the derivation itself: the rule
+  fixes the inner product, the distance is the rotation angle, the sphere has
+  radius 2.
+
+### Found while carrying it out
+
+**The Hopf-base volume-ratio reading of the constant does not survive.** With
+the metric declared uniformly, Vol(Hopf base)/Vol(SU(2)) is 1/(4π) in the
+dual-Coxeter metric and 1/(2π) on the unit sphere — the Hopf map is a Riemannian
+submersion S³(r) → S²(r/2). Neither is 4/π or 2/π. The printed identity
+4/π = Vol(S²)/π² pairs Vol(S²) = 4π, the base of the *dual-Coxeter* sphere, with
+π² = half the *unit*-metric group volume: numerology across two normalisations,
+not a geometric ratio. Recorded in Papers 38, 18 and 32 and pinned by a test.
+**This demotes Paper 18's M1 Hopf-base mechanism from a geometric
+identification to a numerical one — a claim-level change flagged for PI review.**
+
+### Lesson
+
+A "universal constant" claim is content-bearing only if the normalisation is
+fixed by a rule chosen independently of the answer. Naming the rule turned an
+apparent convention artifact into a canonical value, and exposed that a
+downstream geometric reading of the same number had been assembled from two
+different normalisations.
+
 ## [v5.4.4] - 2026-09-03
 
 **The L5 panel crossing, measured.** The n_max = 6 and 7 panels finished

@@ -1,20 +1,31 @@
-"""Paper 38 Lemma L2 -- the metric convention of the mass-concentration moment.
+"""Paper 38 sec:ch_triple + Lemma L2 -- the metric is the DUAL-COXETER one,
+and its geodesic distance is the rotation angle.
 
-WHY THIS FILE EXISTS (trunk FULL run #3, 2026-09-03, carryforward I.0.2).
-`geovac.central_fejer_su2.gamma_rate` integrates K_n(chi) * chi over the
-class angle chi in [0, 2 pi] with weight sin^2(chi/2)/pi and calls chi the
-"round-S^3 geodesic distance".  The characters sin((2j+1)chi/2)/sin(chi/2)
-make chi the SO(3) ROTATION angle, chi = 2 theta, where theta in [0, pi] is
-the geodesic distance from e on the UNIT S^3 (g = cos theta + i sin theta
-n.sigma has eigenphases +-theta).  Hence
+PI direction 2026-09-03 (Option 1): Paper 38 is restated on the dual-Coxeter
+sphere throughout, so that its moment and its Lipschitz seminorm live in one
+metric and the paper is exactly the rank-1 case of Paper 40.
 
-    gamma_n(module) = 2 * integral K_n d_round^{unit S^3}   for every n,
+The derivation pinned here.  On su(2) the dual-Coxeter rule Cas(ad) = h^v = 2
+fixes the Ad-invariant inner product to <X,Y> = -2 tr(XY) in the defining
+representation.  In that inner product the geodesic distance from the identity
+to exp(i theta n.sigma) -- a group element with eigenphases +-theta, i.e. at
+unit-S^3 distance theta -- is 2 theta, the SO(3) rotation angle chi.  So:
 
-and the rate constant is 4/pi in the rotation-angle normalisation (round
-S^3 of radius 2) but 2/pi on the unit S^3 that Paper 38 Sec. 2 states.  The
-unconditional theorem is unaffected (a distance moment scales linearly with
-the metric); the printed constant is convention-labelled from 2026-09-03.
-This test pins the convention so it can never again be silent.
+  * the dual-Coxeter metric on SU(2) is the round 3-sphere of RADIUS 2
+    (diameter 2 pi, volume 16 pi^2), not the unit sphere;
+  * `central_fejer_su2.gamma_rate`, which integrates against chi, computes the
+    dual-Coxeter moment -- it was right all along, and what was inconsistent
+    was the setup section it was paired with;
+  * the rate constant is 4/pi in that metric and 2/pi on the unit sphere,
+    the two differing by the metric scale (a distance moment is homogeneous
+    of degree one in the metric).
+
+Also pinned: the Hopf-base VOLUME-RATIO reading of the constant does NOT
+survive in a single normalisation.  Vol(base)/Vol(group) is 1/(4 pi) in the
+dual-Coxeter metric and 1/(2 pi) on the unit sphere (the Hopf map is a
+Riemannian submersion S^3(r) -> S^2(r/2)); the printed identity
+4/pi = Vol(S^2)/pi^2 pairs the dual-Coxeter base volume 4 pi with half the
+unit-metric group volume, so it is numerology across two normalisations.
 """
 from __future__ import annotations
 
@@ -70,3 +81,73 @@ def test_rate_constant_by_convention():
     assert abs(a_rot / a_unit - 2) < 1e-10
     # the estimators sit above their limits 4/pi and 2/pi at this n (approach from above)
     assert a_rot > 4 / mpmath.pi and a_unit > 2 / mpmath.pi
+
+
+# ---------------------------------------------------------------------------
+# The dual-Coxeter derivation (added 2026-09-03, PI Option 1)
+# ---------------------------------------------------------------------------
+
+SIGMA = [np.array([[0, 1], [1, 0]], complex),
+         np.array([[0, -1j], [1j, 0]]),
+         np.array([[1, 0], [0, -1]], complex)]
+
+
+def _adjoint_matrices():
+    """ad(X_a) on su(2) in the basis X_a = -i sigma_a / 2, which satisfies
+    [X_a, X_b] = eps_abc X_c."""
+    X = [-1j * s / 2 for s in SIGMA]
+    ad = np.zeros((3, 3, 3))
+    for a in range(3):
+        for b in range(3):
+            C = X[a] @ X[b] - X[b] @ X[a]
+            for c in range(3):
+                ad[a][c][b] = np.real(np.trace(C @ np.conj(X[c]).T)
+                                      / np.trace(X[c] @ np.conj(X[c]).T))
+    return X, ad
+
+
+def test_dual_coxeter_rule_fixes_the_inner_product():
+    """Cas(ad) = h^v = 2 on su(2) forces <X,Y> = -2 tr(XY)."""
+    X, ad = _adjoint_matrices()
+    S = sum(ad[a] @ ad[a] for a in range(3))
+    assert np.allclose(S, -2 * np.eye(3))          # sum_a ad(X_a)^2 = -2 I
+    # with <X,Y> = -lam tr(XY) the dual basis is (2/lam) X_a, so |Cas| = 4/lam
+    for lam, expected in ((1.0, 4.0), (2.0, 2.0), (4.0, 1.0)):
+        assert abs(-(2 / lam) * S[0][0] - expected) < 1e-12
+    lam_dual_coxeter = 4.0 / 2.0                    # |Cas(ad)| = h^v = 2
+    assert lam_dual_coxeter == 2.0
+
+
+@pytest.mark.parametrize("theta", [0.3, 1.0, np.pi / 2, np.pi - 0.1])
+def test_dual_coxeter_distance_is_the_rotation_angle(theta):
+    """d(e, exp(i theta n.sigma)) = 2 theta = chi in the dual-Coxeter metric,
+    while the unit-S^3 distance is theta."""
+    g_gen = 1j * theta * SIGMA[2]                   # in su(2)
+    d_dc = np.sqrt(-2.0 * np.trace(g_gen @ g_gen).real)
+    assert abs(d_dc - 2 * theta) < 1e-12
+    eigphases = np.sort(np.angle(np.linalg.eigvals(
+        np.cos(theta) * np.eye(2) + 1j * np.sin(theta) * SIGMA[2])))
+    assert np.allclose(eigphases, [-theta, theta])  # unit-S^3 distance is theta
+
+
+def test_dual_coxeter_sphere_has_radius_two():
+    """Diameter 2 pi and volume 16 pi^2 -- the round S^3 of radius 2."""
+    theta_max = np.pi                                # antipode on the unit sphere
+    assert abs(2 * theta_max - 2 * np.pi) < 1e-12
+    vol_unit = 2 * np.pi ** 2
+    assert abs(vol_unit * 2 ** 3 - 16 * np.pi ** 2) < 1e-9
+
+
+def test_hopf_base_ratio_is_not_the_rate_constant():
+    """Guard on the retired reading: Vol(base)/Vol(group) is 1/(4 pi) in the
+    dual-Coxeter metric and 1/(2 pi) on the unit sphere -- neither is 4/pi or
+    2/pi.  The printed identity 4/pi = Vol(S^2)/pi^2 mixes normalisations."""
+    for r, expected_ratio in ((1.0, 1 / (2 * np.pi)), (2.0, 1 / (4 * np.pi))):
+        vol_s3 = 2 * np.pi ** 2 * r ** 3
+        vol_base = 4 * np.pi * (r / 2) ** 2          # Hopf base S^2(r/2)
+        assert abs(vol_base / vol_s3 - expected_ratio) < 1e-12
+        assert abs(vol_base / vol_s3 - 4 / np.pi) > 1.0
+        assert abs(vol_base / vol_s3 - 2 / np.pi) > 0.4
+    # the identity as printed: dual-Coxeter base volume over half the UNIT
+    # group volume
+    assert abs(4 * np.pi / np.pi ** 2 - 4 / np.pi) < 1e-12

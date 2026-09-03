@@ -923,6 +923,56 @@ raw strings is the only safe route for this text.
 
 ---
 
+## Part K — the normalisation cross-check, settled (2026-09-03, PI direction, v5.5.0)
+
+The FULL-run #3 re-pricing left one PI item open: does Paper 40's dual-Coxeter
+normalisation coincide with the metric Paper 38 computes in? **It does, and the
+check resolves positively at rank 1.**
+
+**The computation.** On su(2) the dual-Coxeter rule Cas(ad) = h∨ = 2 fixes the
+Ad-invariant inner product to ⟨X, Y⟩ = −2 tr(XY) in the defining representation
+(from Σ_a ad(X_a)² = −2I, so |Cas(ad)| = 4/λ for ⟨X,Y⟩ = −λ tr(XY)). In that
+inner product the geodesic distance from the identity to exp(iθ n̂·σ) — an
+element at unit-S³ distance θ — is **2θ, the rotation angle χ**. So the metric
+Paper 38's moment integrates against *is* the dual-Coxeter metric, and 4/π is
+not a convention artifact but the value under the rule that makes "universal
+across the class" well-posed.
+
+**The conflict was therefore internal to Paper 38**, not between the papers: its
+setup section declared the unit round S³ (volume 2π², CH spectrum ±(n+½), a
+Lipschitz seminorm from the unit-metric Dirac) while its moment was dual-Coxeter.
+The bound paired a unit-metric seminorm with a doubled-metric moment.
+
+**PI decision: Option 1** — restate Paper 38 on the dual-Coxeter sphere
+throughout. Applied: §ch_triple declares the rule and its consequences (round S³
+of radius 2, diameter 2π, volume 16π²); D_CH is kept as the unit-metric operator
+with the relation L(f) = ½‖[D_CH, M_f]‖ stated as Eq. `seminorm_normalisation`;
+`def:translation_seminorm` and `lem:continuum_lip` name the metric and carry the
+factor; the γ definition records that χ *is* the paper's own distance. Since
+every quantity in the bound is homogeneous of degree one in the metric, the
+inequality is unchanged in content — what changes is that both sides are now
+stated in one metric. Paper 40's named check is closed with the rank-1
+reconciliation written into its abstract note.
+
+### K.1 — a consequence: the Hopf-base *ratio* reading does not survive
+
+Carrying the decision out surfaced this. With the metric declared uniformly,
+Vol(Hopf base)/Vol(SU(2)) is 1/(4π) in the dual-Coxeter metric and 1/(2π) on the
+unit sphere — the Hopf map is a Riemannian submersion S³(r) → S²(r/2), so the
+base radius scales with the total space. **Neither is 4/π or 2/π.** The printed
+identity 4/π = Vol(S²)/π² works only by pairing Vol(S²) = 4π — the base of the
+*dual-Coxeter* sphere — with π² = half the *unit*-metric group volume. It is a
+numerical coincidence across two normalisations, not a base-to-group Haar ratio.
+
+Recorded as such in Paper 38 (the interpretation remark is retitled "Hopf-base
+numerology"), Paper 18 (the M1 signature), and Paper 32 (the Mellin bullet), and
+pinned by `tests/test_p38_metric_convention.py`. **This weakens the M1
+Hopf-base mechanism** of Paper 18's taxonomy from a geometric identification to
+a numerical one — a claim-level change the PI should review, since the M1
+signature is cited across the corpus.
+
+---
+
 ## Sizing
 
 - **Part A** — small, high leverage, do first. Three registry/screen edits with
