@@ -120,9 +120,10 @@ Berezin map (convolution form) that is positive,
 contractive, an approximate identity, and L3-compatible;\ (L5)
 assembly of the distance bound via an approximation pair.
 \textbf{[OBSERVATION]} The
-asymptotic constant identifies as the Hopf-base measure factor ---
-$4/\pi$ in the dual-Coxeter normalisation of \S\ref{sec:ch_triple}
-($2/\pi$ on the unit $\sthree$) --- exhibiting the expected one-log slowdown of the
+asymptotic constant is a quotient of sphere volumes ---
+$4/\pi$ in the dual-Coxeter normalisation of \S\ref{sec:ch_triple},
+$2/\pi = \Vol(S^2)/\Vol(\sthree)$ at unit radius, and \emph{not} the Hopf
+fibration's base-to-total ratio (\S\ref{sec:L2}) --- exhibiting the expected one-log slowdown of the
 non-abelian SU(2) rate relative to the
 Leimbach--van~Suijlekom~\cite{leimbach_vs2024} torus rate $O(1/\nmax)$.
 State-space Gromov--Hausdorff convergence of scalar truncations for
@@ -258,7 +259,7 @@ and carries that lemma's panel scope.
 dual-Coxeter normalisation of \S\ref{sec:ch_triple} and $2/\pi$ on the
 unit $\sthree$;\ it is the sphere-volume quotient $2\Vol(S^2)/\Vol(\sthree)$ for
 unit-radius spheres --- though not the Hopf base-to-total ratio (see the
-volume-ratio note in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that dual-Coxeter normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ of \S\ref{sec:setup}, the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
+volume-ratio note in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that dual-Coxeter normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ (the $d_1 = d/2$ metric of \S\ref{sec:ch_triple}), the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
 \end{theorem}
 
 The proof structure parallels the abelian Leimbach--van~Suijlekom
@@ -284,18 +285,19 @@ geometric content, and its value is normalisation-dependent (2026-09-03):\
 in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} the constant
 is $4/\pi$, which coincides numerically with $\Vol(S^2)/\pi^2$ for
 $\Vol(S^2) = 4\pi$;\ on the unit $\sthree$ it is $2/\pi$, the factor $2$
-being the metric scale rather than a geometric signature.  \emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- what places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.  Accordingly; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
+being the metric scale rather than a geometric signature.  \emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- what places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.  Separately, \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
 first-moment constant of the classical Fej\'er kernel on the circle
-(Remark~\ref{rem:circle_fejer}). This is precisely the
-\emph{Hopf base measure} factor that appears in the heat-kernel
-expansion of the round $\sthree$ via the Hopf fibration $S^1 \to
-\sthree \to S^2$, and which has been independently identified in the
+(Remark~\ref{rem:circle_fejer}). This is the volume factor that the $k = 0$ (trivial)
+heat kernel on the round $\sthree$ leaves behind --- historically called
+the ``Hopf-base measure'', though it is a quotient of unit-sphere volumes
+rather than the Hopf fibration's base-to-total ratio (\S\ref{sec:L2}) ---
+and which has been independently identified in the
 internal supporting analysis as one of the three sub-mechanisms of a
 master Mellin-engine $\Tr (D^k e^{-tD^2})$ with operator order
 $k \in \{0, 1, 2\}$~\cite{paper18}. \textbf{[OBSERVATION]} The constant in
 \eqref{eq:main_rate} ($2/\pi$ on the unit $\sthree$; $4/\pi$ in the
-dual-Coxeter normalisation) identifies as the $k=0$ sub-case (M1,
-Hopf-base measure) of that classification; the same $1/\pi^2$ factor reappears
+dual-Coxeter normalisation) sits in the $k=0$ sub-case (M1, the
+volume slot) of that classification; the same $1/\pi^2$ factor reappears
 in the Pythagorean Hilbert--Schmidt orthogonality corollary on the
 Krein wedge documented in the companion Lorentzian-extension paper
 (Paper~43~\cite{paper43}). \textbf{[OBSERVATION]} The
@@ -642,9 +644,20 @@ the unit sphere while the moment $\gamma_{\nmax}$ of
 Lemma~\ref{lem:L2} was computed against $\chi$;\ the two differ by the
 factor $2$ above, and the bound was correspondingly stated with a
 unit-metric seminorm against a dual-Coxeter moment.  Declaring the
-metric uniformly removes that seam;\ since every quantity in the bound
-is homogeneous of degree one in the metric, the inequality itself is
-unchanged.)  Identify $\sthree$
+metric uniformly repairs the pairing in the main theorem:\ the distance
+$d$, the seminorms $L$ and $L_{\nmax}$, the moment $\gamma_{\nmax}$ and the
+Monge--Kantorovich distances all scale together (a seminorm inversely, a
+distance moment directly), so the inequality is unchanged in content ---
+and, since what was printed before paired a \emph{unit}-metric seminorm
+with a dual-Coxeter moment, the uniform statement is a factor-$2$
+\emph{strengthening} of the printed bound rather than a restatement of
+equal force.  Two scope limits:\ Lemmas~\ref{lem:L3}--\ref{lem:L5} remain
+stated in the unit metric (Eq.~\eqref{eq:seminorm_normalisation}
+converts), and the panel \emph{height} of \S\ref{sec:L5} is
+scale-\emph{invariant} rather than degree one --- a difference of
+seminorms measured on that seminorm's own unit ball --- so the panel
+comparison there is normalisation-dependent and is not part of the
+theorem.)  Identify $\sthree$
 with the Lie group $\SU(2)$ via the standard double cover\footnote{We
 use this identification implicitly throughout. It is convenient
 because (i)~the Peter--Weyl decomposition of $L^2(\SU(2))$ provides a
@@ -686,11 +699,22 @@ conjugation, and the Lipschitz seminorm all enter as expected.  Because
 $\DCH$ is the unit-metric Dirac operator while $d$ is the dual-Coxeter
 distance, the two differ by the same factor $2$:
 \begin{equation}\label{eq:seminorm_normalisation}
-   L(f) \;=\; \mathrm{Lip}_d(f) \;=\; \tfrac{1}{2}\,\opnorm{[\DCH, \Mat_f]},
+   \Lipnorm{f} \;:=\; \opnorm{[\DCH, \Mat_f]} \;=\; \norm{\nabla_1 f}_{L^\infty},
+   \qquad
+   L(f) \;=\; \mathrm{Lip}_d(f) \;=\; \tfrac{1}{2}\,\Lipnorm{f},
 \end{equation}
-and it is $L$ --- the dual-Coxeter Lipschitz seminorm, equivalently the
-translation seminorm of Definition~\ref{def:translation_seminorm} ---
-that metrizes every state space in this paper.
+so $\Lipnorm{\cdot}$ denotes throughout the \emph{unit}-metric Dirac
+seminorm, while $L$ --- the dual-Coxeter Lipschitz seminorm, equivalently
+the translation seminorm of Definition~\ref{def:translation_seminorm} ---
+is what metrizes every state space in the main theorem.  Lemmas
+\ref{lem:L3}--\ref{lem:L5} below are stated in the unit metric (their
+gradients are the unit-metric $\nabla_1$, as their polar-coordinate form
+shows), and the conversion between the two is
+Eq.~\eqref{eq:seminorm_normalisation};\ note that the good-kernel product
+$\mathrm{Lip}_d(f)\,\gamma_d$ is invariant under the metric scale, since a
+Lipschitz seminorm and a distance moment scale inversely, so an estimate
+of that shape is normalisation-independent \emph{provided both factors are
+taken in the same metric}.
 
 \subsection{Truncations}\label{sec:truncations}
 
@@ -1452,7 +1476,8 @@ spectral-triple-level analog of the height in
 Latr\'emoli\`ere~\cite[\S 4]{latremoliere_metric_st_2017}, which
 measures the Lipschitz-seminorm-comparison error introduced by the
 tunnel maps. The naive bound $\opnorm{B_{\nmax}(f)} \le \norm{f}_{L^\infty}
-\le \pi$ (from L4(b) plus the $\sthree$ diameter) is not the relevant
+\le 2\pi$ (from L4(b) plus the $\sthree$ diameter in the dual-Coxeter
+metric) is not the relevant
 height for the spectral-triple propinquity:\ the operator norm of
 $B_{\nmax}(f)$ enters the height for the quantum compact metric
 space propinquity \cite{latremoliere2016} but not for the spectral
@@ -1480,10 +1505,11 @@ metrization of \S~\ref{sec:named_gaps}:
    \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax}
    + O\!\bigl(1/\nmax\bigr).
 \end{equation}
-\textbf{[OBSERVATION]} The asymptotic constant
-$4/\pi = \Vol(S^2)/\pi^2$ is the
-Hopf-base measure factor in the standard $\SU(2)/U(1)$ Haar
-normalisation. \textbf{[PANEL-VERIFIED]} A uniform bound
+\textbf{[OBSERVATION]} The asymptotic constant is the sphere-volume
+quotient $2\Vol(S^2)/\Vol(\sthree)$ at unit radius (numerically
+$\Vol(S^2)/\pi^2$);\ it is \emph{not} the Hopf fibration's base-to-total
+ratio, whose base carries half the radius (\S\ref{sec:L2}, volume-ratio
+note). \textbf{[PANEL-VERIFIED]} A uniform bound
 $\gamma_{\nmax} \le 6 \log \nmax / \nmax$
 holds for all $\nmax \ge 2$.
 \end{theorem}
@@ -1585,9 +1611,10 @@ Cesaro/Fej\'er theory. \textbf{[OBSERVATION]} In the dual-Coxeter normalisation 
 asymptotic constant $4/\pi$ is twice the circle Fej\'er first-moment
 constant $2/\pi$; on the unit $\sthree$ the two coincide, the factor
 $2$ being the metric scale (Remark~\ref{rem:circle_fejer},
-2026-09-03); we read the $\SU(2)$ value as the Hopf-base measure
-factor $\Vol(S^2)/\Vol(\SU(2))$ (unit $\sthree$), i.e.\
-$2\Vol(S^2)/\Vol(\SU(2))$ in the dual-Coxeter normalisation. (An earlier version of this
+2026-09-03); we read the $\SU(2)$ value as the sphere-volume
+quotient $\Vol(S^2)/\Vol(\sthree)$ at unit radius, i.e.\
+$2\Vol(S^2)/\Vol(\sthree)$ in the dual-Coxeter normalisation --- both
+spheres of radius~$1$, so this is not the Hopf base-to-total ratio. (An earlier version of this
 sentence stated the constant as ``identical on both sides''; withdrawn
 2026-09-02.)
 

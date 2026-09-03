@@ -1427,3 +1427,64 @@ normalisation is fixed by a rule chosen independently of the answer. Naming
 the rule (dual-Coxeter) turned an apparent convention artifact into a
 canonical value AND exposed that a downstream geometric reading of the same
 number had been assembled from two different normalisations.
+
+
+---
+
+## 12. DELTA #4 (2026-09-03) — v5.4.4..e649414
+
+**Shape:** DELTA. Unseeded (seeding is opt-in since 2026-09-02); the standing
+calibration record is run #2 19/21 seeds, DELTA #1 9/9, DELTA #2 8/9, 0/8 false
+positives each. Two reviewers dispatched blind on the diff, one per affected
+dimension: claims/prose, and code/test-backing.
+
+**Verdict: DEFECTS.** Remediated same day; see `docs/qa/trunk.carryforward.md`
+Part L for the item-by-item record.
+
+### What made this run worth its cost
+
+Both reviewers independently produced the same two LARGE findings. Neither saw
+the other's report, and the two dimensions reach the finding by different
+routes — the claims reviewer by reading Paper 40's attribution against Kac, the
+code reviewer by computing the adjoint Casimir. Convergence across independent
+routes is the strongest signal this gate produces, and it is the reason the
+"canonical" claim was retracted within hours of being made rather than
+propagating.
+
+### The finding I would not have found alone
+
+`4/π is canonical, not a convention artifact` was **my own sentence**, written
+one commit earlier, and I had verified the arithmetic behind it. What I had not
+done was check the *attribution* — whether the rule Cas(ad) = h∨ is the one the
+field uses. It is not; Kac's basic form gives 2h∨. The lesson is narrow and
+worth keeping: **verifying a number does not verify the claim built on it.**
+The number 4/π is right in the declared rule. The word "canonical" is a claim
+about the rest of the field, and nothing I computed touched it.
+
+### The guard lesson, third instance
+
+Three of the new tests could not fail (h∨ literal; radius-two identity;
+kernel-blind ratio). All three were written in the same session as the claims
+they back, and all three restate their claim rather than deriving it. The
+pattern is now well enough evidenced to state as a working rule: **a test
+written alongside its claim tends to restate it, and the fix is to make the
+route come from somewhere the claim does not** — h∨ from the Killing form
+rather than from memory, the radius from a geodesic's length rather than from
+the number 2.
+
+### Gate self-audit, fourth payout
+
+Proving the new C16 entries discriminate surfaced a defect in the *exemption*
+logic rather than in the entries: `convention-dependent` in the exempt list
+sits inside the phrase `metric-convention dependent`, which appears throughout
+this material, so a genuine re-surfacing next to it would have been silently
+exempted. Found only because the discrimination proof was run. Narrowed and
+re-proved.
+
+### Deterministic layer
+
+Twelve gates, all PASS on trunk after remediation (C5, C10, C11, C13, C14,
+C15, C16, C17, C18, C19, C20, C21, C22). C16 found one live locus on its first
+run with the new entries (Paper 40 §two-readings) — the registry catching a
+locus the manual sweep had missed, which is what it is for. All 22 touched
+papers compile.

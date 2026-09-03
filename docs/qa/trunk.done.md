@@ -139,3 +139,21 @@ re-prices everything above it.
   investigation: the constant is the unit-sphere quotient Vol(S²)/Vol(S³) =
   2/π, so M1's volume content and period ring stand; only the "Hopf base"
   label is a misnomer (that base carries half the radius). No sweeping change.
+  **The word "canonical" in this entry was itself wrong — see the v5.5.2 line.**
+- 2026-09-03 (v5.5.2) — **DELTA #4 (unseeded) = DEFECTS**, remediated same day
+  (carryforward Part L). Two reviewers, dispatched blind on the same diff,
+  independently produced the same two LARGE findings. (i) "4/π is canonical"
+  is an over-claim: Cas(ad) = h∨ is the corpus's declared rule, not the
+  field-standard one — Kac's basic form (θ|θ) = 2 gives Cas(ad) = 2h∨, radius
+  √2 and 2√2/π. What survives is that P38 and P40 use the *same* rule, so
+  the rank-1 cross-check is genuinely settled; what fails is the word
+  "canonical" and Paper 40's attribution of its rule to the literature.
+  (ii) The Hopf-base retraction had again been applied locus-by-locus and
+  missed ~10 loci, including a theorem body; swept claim-wide and registered
+  in C16 so the class is now mechanical. Three new guards could not fail
+  (h∨ a literal; the radius test an identity on its own literals; the γ ratio
+  pin kernel-blind) — all three rebuilt with routes the claim does not supply,
+  and each re-planted to prove it fires. Also closed: the §13.4 equation gate
+  on eq:seminorm_normalisation, and the He⁺ benchmark row that asserted a
+  check its own constructor imposes. Twelve deterministic gates PASS.
+  FAIL stands; the DELTA is now clean, so FULL run #4 is unlocked.

@@ -97,6 +97,80 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "hopf-base-label-for-4-over-pi",
+        "note": "Trunk DELTA #4, 2026-09-03.  Paper 38's asymptotic constant "
+                "is a quotient of UNIT-RADIUS sphere volumes, "
+                "2 Vol(S^2)/Vol(S^3) = 4/pi (numerically Vol(S^2)/pi^2).  It "
+                "is NOT the Hopf fibration's base-to-total ratio:\u00a0the Hopf "
+                "map is a Riemannian submersion S^3(r) -> S^2(r/2), so that "
+                "ratio is 1/(2 pi) at unit radius and 1/(4 pi) in the "
+                "dual-Coxeter metric -- neither is 4/pi or 2/pi.  The M1 "
+                "MECHANISM (the k = 0 volume slot of the master Mellin "
+                "engine) and its period ring Q[pi, 1/pi] are UNAFFECTED; "
+                "only the name is a misnomer, and the name may still be used "
+                "for the k = 0 slot or for Paper 25's Vol(S^2)/4 = pi.  What "
+                "is retired is reading 4/pi ITSELF as a base-to-total ratio "
+                "or as a Haar quotient SU(2)/U(1).  "
+                "tests/test_p38_metric_convention.py.",
+        "pattern": r"Hopf[- ]base measure factor in the standard"
+                   r"|Hopf[- ]base measure (?:factor )?of \$?\\?(?:s)?three"
+                   r"|Hopf[- ]base measure of \$\\sthree"
+                   r"|(?:as|is) the\s+Hopf[- ]base measure[^.]{0,60}"
+                   r"(?:4\s*/\s*\\pi|\\Vol\(S\^\{?2\}?\)\s*/\s*\\?pi\^\{?2\}?)"
+                   r"|(?:4\s*/\s*\\pi|\\Vol\(S\^\{?2\}?\)\s*/\s*\\?pi\^\{?2\}?)"
+                   r"[^.]{0,80}(?:is|as) the\s+Hopf[- ]base measure"
+                   r"|Hopf[- ]base measure of \$?\\SU\(2\)"
+                   r"|\\SU\(2\)\s*/\s*\\?U?one?\(1\)\s+Haar\s+normalisation",
+        "exempt_if_nearby": r"misnomer|corrected 2026-09-03|withdrawn|not the Hopf"
+                            r"|historically|k = 0 volume|volume-ratio note",
+        "severity": "fail",
+        "scope": "group1 group3 trunk",
+        "files": [
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+        ],
+    },
+    {
+        "id": "four-over-pi-canonical",
+        "note": "Trunk DELTA #4, 2026-09-03.  The rule Cas(ad) = h^v that "
+                "Papers 38 and 40 declare is the CORPUS's rule, not the "
+                "field-standard one.  Kac's basic form (theta|theta) = 2 "
+                "gives Cas(ad) = (theta|theta+2 rho) = 2 h^v, hence the "
+                "SU(2) sphere of radius sqrt(2) and the constant "
+                "2 sqrt(2)/pi;\u00a0the unit sphere gives 2/pi.  So 4/pi is the "
+                "value in one consistently applied convention -- 'canonical' "
+                "and the attribution of the rule to 'the standard "
+                "normalisation used in representation theory and conformal "
+                "field theory' are both retired.  The UNIVERSALITY statement "
+                "is unaffected:\u00a0what makes it well-posed is that the rule is "
+                "fixed independently of the answer, not which rule it is.  "
+                "tests/test_p38_metric_convention.py.",
+        "pattern": r"4\s*/\s*\\?pi is canonical"
+                   r"|canonical,? not a convention artifact"
+                   r"|standard \\emph\{dual-Coxeter normalisation\} used in\s*\n?\s*representation theory"
+                   r"|the standard dual-Coxeter normalisation used in",
+        # NOTE (gate self-audit, 2026-09-03): "convention-dependent" was in
+        # this list and SWALLOWED the plant during the two-way
+        # discrimination test -- the retired sentence sits next to the
+        # phrase "metric-convention dependent".  Narrowed, then re-proved.
+        "exempt_if_nearby": r"not\s+canonical|is retired|withdrawn|corrected 2026-09-03"
+                            r"|Attribution note|Earlier drafts called",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        "files": [
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "geovac/gh_convergence.py",
+            "geovac/central_fejer_su2.py",
+        ],
+    },
+    {
         "id": "circle-fejer-constant-4-over-pi",
         "note": "Trunk FULL run #2, 2026-09-02 (P38 finding, propagated to "
                 "P40 + group1 synthesis + outreach note N1).  The circle "

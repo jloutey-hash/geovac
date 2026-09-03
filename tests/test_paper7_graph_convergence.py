@@ -146,3 +146,24 @@ def test_lambda_max_deficit_at_nmax_70_slow():
     lm = float(eigsh(L, k=1, which="LA")[0][0])
     assert dmax == 4
     assert 0.0009 < (8 - lm) / 8 < 0.0013
+
+
+def test_energy_scales_as_z_squared():
+    """The He+ row of docs/validation_benchmarks.md.
+
+    DELTA #4 flagged that row as tautological: `AtomicSolver` sets
+    `kinetic_scale *= Z**2`, so the RELATIVE saturation deficit is Z-independent
+    by construction and no test built the solver at Z != 1 at all.  What is
+    genuinely checkable is that the implemented scaling is exactly Z^2 and that
+    the graph itself does not depend on Z -- which is what this pins.  It cannot
+    detect a spectral error; the H row does that."""
+    from geovac.atomic_solver import AtomicSolver
+    base = AtomicSolver(max_n=10, Z=1)
+    e0_base = float(base.compute_ground_state()[0][0])
+    for Z in (2, 3, 7):
+        sol = AtomicSolver(max_n=10, Z=Z)
+        e0 = float(sol.compute_ground_state()[0][0])
+        assert abs(e0 - Z ** 2 * e0_base) < 1e-9
+        # and the graph itself carries no Z: same adjacency, same degrees
+        assert (sol.lattice.adjacency
+                != base.lattice.adjacency).nnz == 0

@@ -106,7 +106,7 @@ Connes--van~Suijlekom truncations $\Tcal_{\nmax}$ converge to the
 continuum spectral triple $\Tcal_{\sthree}$ in the van~Suijlekom
 state-space Gromov--Hausdorff sense at quantitative rate
 $\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree}) \le C_3 \gamma_{\nmax}$
-with $C_3 = 1$ and asymptotic constant $4/\pi$ (Paper~38; rotation-angle
+with $C_3 = 1$ and asymptotic constant $4/\pi$ (Paper~38; dual-Coxeter
 normalisation of the $\SU(2)$ metric --- $2/\pi$ on the unit $S^3$,
 the constant scaling with the metric, 2026-09-03).
 Third, the rate constant $4/\pi$ is universal across the class of
@@ -238,8 +238,11 @@ C_3 = 1, \qquad
 \quad (\nmax \to \infty).
 \label{eq:headline_2}
 \end{equation}
-The asymptotic constant $4/\pi = \Vol(S^{2})/\pi^{2}$ identifies as
-the Hopf-base measure of $\sthree \to S^{2}\times S^{1}$ and is
+The asymptotic constant is the sphere-volume quotient
+$2\Vol(S^{2})/\Vol(\sthree)$ at unit radius (numerically $\Vol(S^{2})/\pi^{2}$)
+--- the $k = 0$ volume factor of the master Mellin engine, not the Hopf
+fibration's base-to-total ratio (Paper~38, volume-ratio note;\ the fibration is
+$S^{1} \to \sthree \to S^{2}$, corrected 2026-09-03) --- and is
 discussed in detail in \S\ref{sec:gh}--\S\ref{sec:mellin} below
 (Paper~38~\cite{paper38}, Theorems~3.4 and 4.1).
 
@@ -610,12 +613,13 @@ sharpening}, after the real-line approximate-identity estimates of
 \;\text{ as } n \to \infty.
 \label{eq:gamma_asymptote}
 \end{equation}
-The constant $4/\pi = \Vol(S^{2})/\pi^{2}$ is the
-\emph{Hopf-base measure factor} in the $\SU(2)/\Uone$ Haar
-normalisation.  Concretely, for the Hopf bundle
-$\sthree \to S^{2}$, $\Vol(S^{2}) = 4\pi$ and
-$\pi^{2} = \Vol(\SU(2))/2$ is half the Haar volume of
-$\SU(2) \cong \sthree$, so that $4/\pi = 2\Vol(S^{2})/\Vol(\SU(2))$ in
+The constant is the sphere-volume quotient
+$\Vol(S^{2})/\Vol(\sthree) = 2/\pi$ at unit radius, twice that in
+the dual-Coxeter normalisation.  Both spheres have radius~$1$, so this is
+\emph{not} the Hopf fibration's base-to-total ratio (that base is
+$S^{2}(1/2)$ and the ratio is $1/(2\pi)$;\ Paper~38, volume-ratio note,
+2026-09-03).  Concretely $\Vol(S^{2}) = 4\pi$ and
+$\pi^{2} = \Vol_1(\SU(2))/2$, so that $4/\pi = 2\Vol(S^{2})/\Vol_1(\SU(2))$ in
 the dual-Coxeter normalisation; on the unit $\sthree$ the constant is
 the plain Haar ratio $\Vol(S^{2})/\Vol(\SU(2)) = 2/\pi$, the factor $2$
 being the metric scale (Paper~38, 2026-09-03).
@@ -1242,8 +1246,8 @@ The most striking structural observation that emerges from reading
 the arc is that the same transcendental signatures appear in
 \emph{different} settings.  The constant $4/\pi$ of Paper~38 and the
 constant $1/\pi^{2}$ of Paper~43~\S 10.2 are not numerical
-coincidences: they are two appearances of the same Hopf-base measure
-mechanism, the $M_{1}$ sub-case of the master Mellin engine
+coincidences: they are two appearances of the same $k = 0$ volume
+mechanism (historically named ``Hopf-base measure''), the $M_{1}$ sub-case of the master Mellin engine
 catalogued in Paper~32~\S 8.
 
 \subsection{The $\pi$-source case-exhaustion theorem (Paper~32~\S 8)}
@@ -1291,8 +1295,8 @@ selects $M_{2}$.
 
 \subsection{$M_{1}$ in the Riemannian GH rate}
 
-The rate constant $4/\pi$ in \eqref{eq:gh_rate_constant} is the
-$M_{1}$ Hopf-base measure signature.  This is not a derived
+The rate constant $4/\pi$ in \eqref{eq:gh_rate_constant} carries the
+$M_{1}$ ($k = 0$ volume) signature.  This is not a derived
 observation; it is forced by the Plancherel-weight $\times$
 Vandermonde-Jacobian cancellation theorem (Paper~40~\S 3.2) which
 leaves only the rank-1 ($\SU(2)$) constant after the
@@ -1312,7 +1316,7 @@ $M_{1}$ signature \emph{at the operator-system level}: the
 Krein wedge BW choice $H_{\mathrm{local}} = K_{\alpha}^{W}/(2\pi)$
 introduces a factor of $1/(2\pi)$ from the modular-circle
 circumference, which squared gives $1/(4\pi^{2})$ in
-$\|H_{\mathrm{local}}\|^{2}$.  The Hopf-base measure factor $4/\pi$
+$\|H_{\mathrm{local}}\|^{2}$.  The volume factor $4/\pi$
 of Paper~38 and the $1/\pi^{2}$ of Paper~43 are two manifestations
 of the same $\Vol(S^{2}) = 4\pi$ identity in the master Mellin
 engine.

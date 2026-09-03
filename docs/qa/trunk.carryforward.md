@@ -1000,3 +1000,71 @@ mechanism was never in question, only which sphere the volume belongs to.
 **Do not** re-run the FULL certifying pass until a DELTA comes back clean.
 Remediated text is not clean text: one prior delta found 4 of its 11 genuine
 findings were defects introduced by the previous run's own remediation.
+
+
+---
+
+## Part L — DELTA #4 (2026-09-03), v5.4.4..e649414
+
+**Verdict: DEFECTS.** Two reviewers (claims; code/test-backing), both Opus,
+both dispatched blind on the diff. They converged on the same two LARGE
+findings independently, which is the strongest signal this gate produces.
+
+### L.1 — "4/π is canonical" (LARGE, my own over-claim, VERIFIED)
+
+Stated in the v5.5.0/v5.5.1 records and in CLAUDE.md §1.7. The rule Papers 38
+and 40 declare is Cas(ad) = h∨; the field-standard rule is Kac's basic form
+(θ|θ) = 2, which gives Cas(ad) = (θ|θ + 2ρ) = 2h∨. Verified by computing the
+adjoint Casimir directly for su(2) and su(3) (Killing form over basic form).
+Consequences: radius √2 and constant 2√2/π under the standard rule, radius 2
+and 4/π under the corpus's, 2/π on the unit sphere.
+
+**What survives:** P38 and P40 use the *same* declared rule, so the
+cross-check the PI asked about is settled — P38 is P40's rank-1 case, and the
+universality statement is well-posed because the rule is fixed independently
+of the answer.
+
+**What fails:** the word "canonical", and Paper 40's attribution of its rule to
+"the standard normalisation used in representation theory and conformal field
+theory". Paper 40 now carries an explicit attribution note.
+
+### L.2 — the Hopf-base retraction missed ~10 loci (LARGE)
+
+Third instance in this arc of a claim-level correction applied where it was
+found instead of claim-wide. Survivors included a theorem body tagged
+[OBSERVATION] and a sentence in the retraction's own paragraph. All corrected;
+the durable fix is the C16 registry entry, which makes the class mechanical.
+
+### L.3 — three new guards could not fail
+
+`h∨` was a literal; the radius-two test was an identity on its own literals;
+the γ ratio pin is a change of variables true for any kernel. Fixed and each
+re-planted to prove it now fires. The general lesson repeats: **a test written
+alongside the claim it backs tends to restate the claim.** The route has to
+come from somewhere the claim does not.
+
+### L.4 — smaller items closed
+
+`eq:seminorm_normalisation` now has a test (§13.4); the He⁺ benchmark row no
+longer asserts a check its own constructor imposes; Paper 7's λ_max saturation
+is re-tiered to INTERNAL THEOREM (closed-form ℓ-block spectrum); seven
+claim-matrix rows added; the retired "rotation-angle normalisation" name is
+gone from the code.
+
+### L.5 — a gate exemption that would have swallowed a real defect
+
+While proving the new C16 entries discriminate, the "canonical" plant was
+exempted — correctly, as it sat inside the ±5-line window of a real withdrawal
+marker. Re-planting away from markers showed the entry fires. But the exercise
+surfaced a genuine defect next door: the exemption list contained
+"convention-dependent", which appears in the phrase "metric-convention
+dependent" throughout this material and would have exempted a true
+re-surfacing. Narrowed and re-proved. This is the fourth time the
+gate-self-audit rule has paid out on code that was not under review.
+
+### Open (not blocking)
+
+1. Twenty inline-cited modules that no reviewer has opened in any run.
+2. Reviewer NITs carried from earlier runs: bibkey years, the Λ_prop symbol,
+   the Hawkins 2000 attribution at P32:4845, matrix note fields.
+3. Identification of the L5 panel-side quantity (Part J).

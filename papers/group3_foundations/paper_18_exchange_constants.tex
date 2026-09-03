@@ -995,8 +995,11 @@ of a single master mechanism} parameterized by operator order:
 \quad\text{with}\quad k \in \{0, 1, 2\}.
 \end{equation}
 The three sub-cases correspond to:\ $k = 0$ (trivial heat kernel on a
-sphere collapses to the Hopf-base measure $\mathrm{Vol}(S^d)$, recovering
-M1); $k = 2$ (standard spectral action $\mathrm{Tr}\,f(D^2/\Lambda^2)$
+sphere collapses to a volume factor $\mathrm{Vol}(S^d)$, recovering
+M1 --- the historical name ``Hopf-base measure'' denotes this $k = 0$ volume
+slot and \emph{not} a base-to-total ratio of the Hopf fibration, a
+distinction that matters wherever the name is read as a ratio
+(2026-09-03; Paper~38, volume-ratio note)); $k = 2$ (standard spectral action $\mathrm{Tr}\,f(D^2/\Lambda^2)$
 generates Seeley--DeWitt coefficients, recovering M2); and $k = 1$
 (Mellin transform of $\mathrm{Tr}(D \cdot e^{-tD^2})$ produces the
 $\eta$-invariant series whose vertex-parity decomposition gives the
@@ -1044,12 +1047,16 @@ $\mathrm{Cas}(\mathrm{ad}) = h^\vee$ under which the geodesic distance is the
 rotation angle;\ $2/\pi$ on the unit $S^3$, Paper~38, 2026-09-03).  The
 constant is the sphere-volume quotient
 $\mathrm{Vol}(S^2)/\mathrm{Vol}(S^3) = 2/\pi$ for unit-radius spheres
-(twice that in the dual-Coxeter normalisation), so its M1 volume content and
-its place in $\mathbb{Q}[\pi, \pi^{-1}]$ are exactly as classified.  The
-label ``Hopf-base measure'' is nonetheless a misnomer:\ the Hopf map is a
-Riemannian submersion $S^3(r) \to S^2(r/2)$, so the fibration's
-base-to-total ratio is $1/(2\pi)$, not $2/\pi$ (Paper~38, volume-ratio
-note).  Read it as a quotient of unit-sphere volumes --- the
+(twice that in the dual-Coxeter normalisation), which is consistent with
+the $k = 0$ slot's volume content and with $\mathbb{Q}[\pi, \pi^{-1}]$
+membership --- though an arithmetic identity between the Fej\'er first moment
+and a pair of sphere volumes corroborates the \emph{classification}, not the
+mechanism, and $\mathbb{Q}[\pi,\pi^{-1}]$ membership follows from $4/\pi$
+being a rational multiple of $\pi^{-1}$ whatever its origin.  What the name
+gets wrong is narrower:\ read as the Hopf fibration's \emph{base-to-total
+ratio} it is a misnomer, since the Hopf map is a Riemannian submersion
+$S^3(r) \to S^2(r/2)$ and that ratio is $1/(2\pi)$, not $2/\pi$ (Paper~38,
+volume-ratio note).  Read instead as the $k = 0$ volume factor --- the
 M1 signature in closed form. The Dirac analog instead obtained the
 structural identity $\gamma_n^{\rm Dirac} = \pi$ for every $n_{\max} \ge 1$:
 the half-integer-only Peter--Weyl truncation cannot span the constant

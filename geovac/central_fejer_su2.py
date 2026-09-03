@@ -891,7 +891,7 @@ def asymptotic_rate_constant() -> sp.Expr:
         lim_{n->infty} n * gamma_n / log(n) = 4/pi.
 
     Structural meaning (memo S2): 4/pi = Vol(S^2) / pi^2 = 2 Vol(S^2) / Vol(SU(2)) in the
-    rotation-angle normalisation (2/pi = Vol(S^2)/Vol(SU(2)) on the unit S^3;
+    dual-Coxeter normalisation, Cas(ad) = h^v (2/pi at unit radius;
     corrected 2026-09-03, an earlier line wrote Vol(S^1)) under the Haar normalization, the M1 Hopf-base measure
     factor of Sprint TS-E1 / Paper 32 SVIII / Paper 18 SIII.7.
     """

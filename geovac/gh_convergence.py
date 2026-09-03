@@ -42,8 +42,11 @@ the Bozejko-Fendler symbol-side estimate), and gamma_{n_max} the L2
 mass-concentration moment, whose rate gamma_{n_max} = (c + o(1)) log n / n
 is proven unconditionally in Paper 38 (translation-seminorm metrization,
 2026-06-10); the constant c is metric-convention dependent -- 4/pi in the
-rotation-angle normalisation used by `central_fejer_su2.gamma_rate`, 2/pi
-on the unit round S^3 (tests/test_p38_metric_convention.py, 2026-09-03).*
+dual-Coxeter normalisation Cas(ad) = h^v used by
+`central_fejer_su2.gamma_rate`, 2/pi on the unit round S^3, and 2 sqrt(2)/pi
+under the field-standard rule (theta|theta) = 2, which gives Cas(ad) = 2 h^v.
+That rule is the corpus's declared one, so 4/pi is not canonical
+(tests/test_p38_metric_convention.py, 2026-09-03).*
 
 The tunneling pair is
 
@@ -921,5 +924,7 @@ def gh_theorem_statement() -> str:
         "The rate gamma_{n_max} = (c + o(1)) log n / n is proven "
         "unconditionally (Paper 38, translation-seminorm metrization); "
         "the constant c is metric-convention dependent: 4/pi in the "
-        "rotation-angle normalisation, 2/pi on the unit round S^3."
+        "dual-Coxeter normalisation Cas(ad) = h^v (the corpus's declared "
+        "rule), 2/pi on the unit round S^3, 2 sqrt(2)/pi under the "
+        "field-standard (theta|theta) = 2."
     )

@@ -7,6 +7,75 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.5.2] - 2026-09-03
+
+**/qa trunk DELTA #4 — DEFECTS, remediated same day.** Two independent
+reviewers (claims + code/test-backing) were dispatched on the v5.4.4..e649414
+diff. Both landed on the same two LARGE findings, and both were right.
+
+### The two findings
+
+**1. "4/π is canonical" was an over-claim of my own, made one commit earlier.**
+The rule Papers 38 and 40 declare is Cas(ad) = h∨. That is *not* the
+normalisation standard in representation theory: Kac's basic form
+(θ|θ) = 2 gives Cas(ad) = (θ|θ+2ρ) = 2h∨, hence radius √2 and constant
+2√2/π, while the unit sphere gives 2/π. I verified this by computing the
+adjoint Casimir explicitly for su(2) and su(3). So 4/π is the value in one
+consistently applied convention, not a canonical number — which is still
+enough for the cross-check the PI asked about (P38 *is* P40's rank-1 case),
+but not enough for the word I used. Paper 40 now carries an attribution note
+saying so, and CLAUDE.md §1.7 WH1 is corrected.
+
+**2. The Hopf-base retraction was applied locus-by-locus and missed ~10 loci**,
+including one theorem body and its own paragraph. This is the third time in
+this arc that a claim-level correction was applied where it was found rather
+than claim-wide. The remaining loci in Papers 38, 40, 32, 18, both syntheses
+and the field guide are now corrected, and — the actual fix — the class is
+registered in the C16 deterministic gate so it cannot silently return.
+
+### Guards that could not fail
+
+The code reviewer planted nine defects in the new tests. Three passed:
+
+| Plant | Why it passed |
+|:--|:--|
+| h∨ = 3 for su(2) | h∨ was a hard-coded literal; the "forces λ = 2" step was 4/2 with the 2 written in by hand |
+| "radius three" | the radius test was an identity on its own literals, referencing neither the metric nor the group |
+| Cesàro kernel on both sides of the γ ratio pin | the ratio is 2 for *any* kernel — it is a change of variables, so the pin is kernel-blind |
+
+All three are fixed: h∨ is now computed from the Killing form for su(2) **and**
+su(3); the radius comes from the closed geodesic's length (speed 2 × period 2π
+= 4π = 2πr); and the ratio pin is re-tiered SYMBOLIC with a new
+kernel-*sensitive* companion pinning measured γ values. Each fix was re-planted
+and shown to fire.
+
+### Also
+
+- `eq:seminorm_normalisation` was a new load-bearing equation with no test
+  (§13.4 equation gate). Now backed.
+- The He⁺ benchmark row asserted a Z-scaling check that `AtomicSolver`'s
+  constructor imposes (`kinetic_scale *= Z**2`) and that no test ran at all.
+  The row now says what it can and cannot detect, and a test pins the
+  implemented scaling and the Z-freeness of the graph.
+- Paper 7's λ_max → 2d_max saturation is re-tiered MEASURED → **INTERNAL
+  THEOREM**: the ℓ-block grid structure makes the spectrum closed form, so it
+  is proved, not sampled at six points.
+- Seven new rows in `docs/claim_test_matrix.md`; the "rotation-angle
+  normalisation" name is gone from the code docstrings.
+
+### Gate self-audit
+
+The two new C16 entries were proven to fire *and* to stay silent on the
+corrected wording, per the registry discrimination rule. The first attempt at
+the second proof looked like a failure and was not: the plant sat four lines
+from a legitimate withdrawal marker, inside the ±5-line exemption window. The
+real defect the exercise found was a *different* one — the exemption list
+contained "convention-dependent", which sits next to the phrase
+"metric-convention dependent" and would have swallowed a genuine re-surfacing.
+Narrowed, then re-proved on a plant with no marker nearby.
+
+Twelve deterministic gates PASS on trunk; all 22 papers touched compile.
+
 ## [v5.5.0] - 2026-09-03
 
 **Minor bump, PI direction.** The Paper 40 normalisation cross-check — the last

@@ -3,8 +3,8 @@
 | Test | Max Error | Purpose |
 |:-----|:---------:|:--------|
 | Symbolic proofs (18 tests) | 0 failures | Topological foundation |
-| H (hydrogen), graph | 0.574% at n_max = 30 | Saturation deficit of the spectral bound, NOT an accuracy: E_0 = kappa*lambda_max by construction with kappa = -1/16, so this measures lambda_max -> 2 d_max = 8 (0.325% at 40, 0.107% at 70; `test_paper7_graph_convergence.py`; corrected 2026-09-03 from "< 0.1%") |
-| He+ (helium ion), graph | 0.574% at n_max = 30 | Z-scaling check: the relative deficit is Z-independent (H = kappa Z^2 (D - A)), so this row tests the Z^2 scaling, not an accuracy (corrected 2026-09-03) |
+| H (hydrogen), graph | 0.574% at n_max = 30 | Saturation deficit of the spectral bound, NOT an accuracy: E_0 = kappa*lambda_max by construction with kappa = -1/16, so this measures lambda_max -> 2 d_max = 8 (0.107% at 70, pinned in `test_paper7_graph_convergence.py`; 0.325% at 40 is a PM measurement, not pinned; corrected 2026-09-03 from "< 0.1%") |
+| He+ (helium ion), graph | 0.574% at n_max = 30 | Implementation check ONLY, and it cannot detect a spectral error: `AtomicSolver` sets `kinetic_scale *= Z**2`, so E_0(Z) = Z^2 E_0(1) and the relative deficit is Z-independent by construction. What is genuinely pinned is that the implemented scaling is exactly Z^2 and the graph is Z-free (`test_paper7_graph_convergence.py::test_energy_scales_as_z_squared`, added 2026-09-03 after a QA pass found the row asserted a check no test ran). |
 | H2+ (ionized H2, FD) | < 0.1% | Topological control |
 | H2+ (prolate spheroidal, spectral) | < 0.001% | Spectral Laguerre accuracy control |
 | He (hyperspherical) | < 0.1% | Multi-electron control |
