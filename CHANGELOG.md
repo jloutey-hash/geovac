@@ -52,8 +52,15 @@ submersion S³(r) → S²(r/2). Neither is 4/π or 2/π. The printed identity
 4/π = Vol(S²)/π² pairs Vol(S²) = 4π, the base of the *dual-Coxeter* sphere, with
 π² = half the *unit*-metric group volume: numerology across two normalisations,
 not a geometric ratio. Recorded in Papers 38, 18 and 32 and pinned by a test.
-**This demotes Paper 18's M1 Hopf-base mechanism from a geometric
-identification to a numerical one — a claim-level change flagged for PI review.**
+**Narrowed after investigation** (PI direction: accuracy first, but be certain
+before sweeping). Paper 18 defines M1 as the *k* = 0 slot where the trivial heat
+kernel collapses to a volume factor, with period ring ℚ[π, π⁻¹]; and for
+unit-radius spheres Vol(S²)/Vol(S³) = 2/π **exactly**, the dual-Coxeter constant
+being twice that. So the constant genuinely is a sphere-volume quotient: M1's
+mechanism and period ring are intact and **no sweeping change is warranted**.
+Only the *label* is wrong — the Hopf base is S²(r/2), so the fibration's
+base-to-total ratio is 1/(2π), not 2/π. The name attached the right kind of
+object to the wrong sphere, and that is what Papers 38, 18 and 32 now say.
 
 ### Lesson
 

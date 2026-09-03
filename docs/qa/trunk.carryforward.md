@@ -964,12 +964,22 @@ identity 4/π = Vol(S²)/π² works only by pairing Vol(S²) = 4π — the base 
 *dual-Coxeter* sphere — with π² = half the *unit*-metric group volume. It is a
 numerical coincidence across two normalisations, not a base-to-group Haar ratio.
 
-Recorded as such in Paper 38 (the interpretation remark is retitled "Hopf-base
-numerology"), Paper 18 (the M1 signature), and Paper 32 (the Mellin bullet), and
-pinned by `tests/test_p38_metric_convention.py`. **This weakens the M1
-Hopf-base mechanism** of Paper 18's taxonomy from a geometric identification to
-a numerical one — a claim-level change the PI should review, since the M1
-signature is cited across the corpus.
+**Narrowed after investigation (2026-09-03, PI direction "be certain before
+sweeping").** Paper 18 defines M1 as the *k* = 0 slot of the master Mellin
+engine, where the trivial heat kernel collapses to a **volume** factor, with
+period ring ℚ[π, π⁻¹]. Measured: for unit-radius spheres
+Vol(S²)/Vol(S³) = 4π/2π² = **2/π exactly**, and the dual-Coxeter constant is
+twice that. So the constant genuinely *is* a sphere-volume quotient — **M1's
+mechanism and its period ring are intact, and no sweeping change is warranted.**
+
+What is wrong is only the *label*: the Hopf fibration's base is S²(r/2), so its
+base-to-total ratio is 1/(2π), not 2/π. The name attached the right kind of
+object (a sphere-volume quotient) to the wrong sphere. Corrected on those terms
+in Papers 38, 18 and 32 and pinned by `tests/test_p38_metric_convention.py`.
+
+*Self-correction:* the first version of this subsection called the finding a
+demotion of the M1 mechanism "to numerology". That over-stated it — the
+mechanism was never in question, only which sphere the volume belongs to.
 
 ---
 

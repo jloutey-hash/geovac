@@ -256,9 +256,9 @@ factor displayed here belongs to the Lemma~\ref{lem:L5} assembly route
 and carries that lemma's panel scope.
 \textbf{[OBSERVATION]} The asymptotic constant is $4/\pi$ in the
 dual-Coxeter normalisation of \S\ref{sec:ch_triple} and $2/\pi$ on the
-unit $\sthree$;\ it coincides numerically with $\Vol(S^2)/\pi^2$, which
-is not a base-to-group Haar ratio in either normalisation (see the
-normalisation caveat in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that dual-Coxeter normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ of \S\ref{sec:setup}, the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
+unit $\sthree$;\ it is the sphere-volume quotient $2\Vol(S^2)/\Vol(\sthree)$ for
+unit-radius spheres --- though not the Hopf base-to-total ratio (see the
+volume-ratio note in \S\ref{sec:L2}) (\emph{metric convention, 2026-09-03:} $\gamma_{\nmax}$ as computed in Lemma~\ref{lem:L2} weights the kernel by the $\SO(3)$ rotation angle $\chi \in [0, 2\pi]$, which is \emph{twice} the geodesic distance $\theta = \chi/2$ on the unit round $\sthree$; the constant is $4/\pi$ in that dual-Coxeter normalisation --- the round $\sthree$ of radius~2 --- and $2/\pi$ on the unit $\sthree$ of \S\ref{sec:setup}, the two differing by the metric scale, which enters a distance moment linearly; the theorem holds in either normalisation, \texttt{tests/test\_p38\_metric\_convention.py}).
 \end{theorem}
 
 The proof structure parallels the abelian Leimbach--van~Suijlekom
@@ -284,7 +284,7 @@ geometric content, and its value is normalisation-dependent (2026-09-03):\
 in the dual-Coxeter normalisation of \S\ref{sec:ch_triple} the constant
 is $4/\pi$, which coincides numerically with $\Vol(S^2)/\pi^2$ for
 $\Vol(S^2) = 4\pi$;\ on the unit $\sthree$ it is $2/\pi$, the factor $2$
-being the metric scale rather than a geometric signature.  \emph{Normalisation caveat (2026-09-03).}  This identity is not a base-to-group Haar ratio in either normalisation:\ with the metric declared uniformly, $\Vol(\text{Hopf base})/\Vol(\SU(2))$ is $1/(4\pi)$ in the dual-Coxeter metric and $1/(2\pi)$ on the unit $\sthree$ (the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so the base radius scales with the total space).  The printed form pairs $\Vol(S^2) = 4\pi$, which is the base of the \emph{dual-Coxeter} sphere, with $\pi^2 = \Vol_1(\SU(2))/2$, a \emph{unit}-metric quantity.  It is therefore a numerical coincidence across two normalisations, not a geometric ratio, and the Hopf-base reading of the constant is correspondingly weaker than earlier drafts recorded.  Accordingly; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
+being the metric scale rather than a geometric signature.  \emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- what places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.  Accordingly; \textbf{[OBSERVATION]} the same ratio $2/\pi$ is the
 first-moment constant of the classical Fej\'er kernel on the circle
 (Remark~\ref{rem:circle_fejer}). This is precisely the
 \emph{Hopf base measure} factor that appears in the heat-kernel
@@ -1069,7 +1069,7 @@ rate $O(1/\nmax)$~\cite{leimbach_vs2024}, not relative to the circle
 Fej\'er first moment.
 \end{remark}
 
-\begin{remark}[Hopf-base numerology of the constant]
+\begin{remark}[The volume ratio behind the constant]
 \textbf{[OBSERVATION]} In the dual-Coxeter normalisation the asymptotic
 constant coincides numerically with
 \begin{equation*}
@@ -1077,9 +1077,9 @@ constant coincides numerically with
    \;=\; \frac{\Vol(S^2)}{\pi^2}
    \;=\; \frac{4\pi}{\pi^2}.
 \end{equation*}
-\emph{Normalisation caveat (2026-09-03).}  This identity is not a base-to-group Haar ratio in either normalisation:\ with the metric declared uniformly, $\Vol(\text{Hopf base})/\Vol(\SU(2))$ is $1/(4\pi)$ in the dual-Coxeter metric and $1/(2\pi)$ on the unit $\sthree$ (the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so the base radius scales with the total space).  The printed form pairs $\Vol(S^2) = 4\pi$, which is the base of the \emph{dual-Coxeter} sphere, with $\pi^2 = \Vol_1(\SU(2))/2$, a \emph{unit}-metric quantity.  It is therefore a numerical coincidence across two normalisations, not a geometric ratio, and the Hopf-base reading of the constant is correspondingly weaker than earlier drafts recorded.
-Read as numerology rather than as a ratio, the constant still points
-at the Hopf-fibration data, and is one of
+\emph{Which volume ratio (2026-09-03).}  The constant is a genuine quotient of sphere volumes --- but not the one its usual name suggests.  For unit-radius spheres $\Vol(S^2)/\Vol(\sthree) = 4\pi/2\pi^2 = 2/\pi$ exactly, and the dual-Coxeter constant is twice that.  It is \emph{not} the Hopf fibration's base-to-total ratio:\ the Hopf map is a Riemannian submersion $\sthree(r) \to S^2(r/2)$, so that ratio is $1/(2\pi)$ on the unit sphere and $1/(4\pi)$ in the dual-Coxeter metric.  The \emph{volume content} of the constant --- what places it in the $k = 0$ (M1) slot of the master Mellin engine and in $\mathbb{Q}[\pi, \pi^{-1}]$ --- is therefore intact;\ only the ``Hopf base'' label is a misnomer, that base carrying half the radius of the sphere whose volume appears.
+Read as the unit-sphere quotient $\Vol(S^2)/\Vol(\sthree)$ rather than as a
+Hopf base-to-total ratio, the constant still carries pure volume content, and is one of
 the natural transcendentals on $\SU(2)$ that survives at the
 leading-order rate of any Cesaro-2-style averaging procedure.
 \end{remark}

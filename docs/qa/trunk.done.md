@@ -135,6 +135,7 @@ re-prices everything above it.
   is SETTLED: the dual-Coxeter rule Cas(ad) = h∨ on su(2) gives the rotation
   angle as its geodesic distance, so Paper 38's moment is a dual-Coxeter
   moment and 4/π is the canonical value. Paper 38 restated on that sphere
-  (Option 1); Paper 40's named check closed at rank 1. Consequence: the
-  Hopf-base volume-ratio reading of the constant does not survive a single
-  normalisation and is now recorded as numerology (PI review item).
+  (Option 1); Paper 40's named check closed at rank 1. Consequence, after
+  investigation: the constant is the unit-sphere quotient Vol(S²)/Vol(S³) =
+  2/π, so M1's volume content and period ring stand; only the "Hopf base"
+  label is a misnomer (that base carries half the radius). No sweeping change.

@@ -112,7 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
-- **Normalisation cross-check settled (2026-09-03, v5.5.0, PI direction):** Cas(ad) = h∨ on su(2) gives the rotation angle as the dual-Coxeter geodesic distance, so P38's moment is dual-Coxeter and 4/π is canonical; P38 restated on that sphere. Consequence: the Hopf-base volume-ratio reading is numerology (M1 demotion, PI review). See carryforward Part K.
+- **Normalisation cross-check settled (2026-09-03, v5.5.0, PI direction):** Cas(ad) = h∨ on su(2) gives the rotation angle as the dual-Coxeter geodesic distance, so P38's moment is dual-Coxeter and 4/π is canonical; P38 restated on that sphere. Consequence: the constant is the unit-sphere quotient Vol(S2)/Vol(S3) = 2/pi, so M1's volume content stands; only the "Hopf base" label is a misnomer (that base has half the radius). See carryforward Part K.
 - **L5 crossing measured (2026-09-03, v5.4.4):** margin +0.053 at n_max = 6, −0.069 at 7 — the crossing is between 6 and 7; the papers now carry the measured table, not the extrapolated threshold.
 - **L5 panel check corrected (2026-09-03, v5.4.3):** the guard added in v5.4.1 verified a small-cutoff coincidence — the panel height rises toward 1 while gamma falls, crossing near n_max = 6. Reframed as a measurement; panel-side quantity = open check. See carryforward J.4.
 - **DELTA #3 (2026-09-03, v5.4.2):** DEFECTS — the v5.4.1 remediation was locus-by-locus, so the descoped readings survived at 12 loci; swept claim-wide. New: s/p splitting is a node-amplitude proxy (disconnected l-blocks), and the block spectrum is closed form with a proven O(n^-2) rate. See carryforward Part J.
@@ -376,7 +376,7 @@ The core organizational principle of the project. Each electron configuration ha
 
 | Level | System | Natural Geometry | Best Result | Paper |
 |:-----:|:-------|:-----------------|:------------|:-----:|
-| 1 | H (1-center, 1e) | S3 (Fock) | < 0.1% | 7 |
+| 1 | H (1-center, 1e) | S3 (Fock) | lambda_max -> 2 d_max = 8; deficit 0.57% at n_max = 30 (a spectral *bound*, not an accuracy: E_0 = kappa*lambda_max by construction) | 7 |
 | 2 | H2+ (2-center, 1e) | Prolate spheroid | 0.0002% (spectral) | 11 |
 | 3 | He (1-center, 2e) | Hyperspherical | 0.004% (2D var, cusp l_max=4); 0.022% (raw l_max=7); 0.19% (graph-native CI n_max=7, 0 params, exact algebraic integrals) | 13 |
 

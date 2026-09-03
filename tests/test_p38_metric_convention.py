@@ -138,6 +138,17 @@ def test_dual_coxeter_sphere_has_radius_two():
     assert abs(vol_unit * 2 ** 3 - 16 * np.pi ** 2) < 1e-9
 
 
+def test_constant_is_the_unit_sphere_volume_quotient():
+    """The POSITIVE half (2026-09-03): Vol(S^2)/Vol(S^3) = 2/pi exactly for
+    unit-radius spheres, and the dual-Coxeter constant is twice that -- so the
+    constant carries genuine volume content (Paper 18's M1 slot, period ring
+    Q[pi, 1/pi]).  Only the 'Hopf base' label is wrong."""
+    vol_s2 = 4 * np.pi
+    vol_s3 = 2 * np.pi ** 2
+    assert abs(vol_s2 / vol_s3 - 2 / np.pi) < 1e-12
+    assert abs(2 * vol_s2 / vol_s3 - 4 / np.pi) < 1e-12
+
+
 def test_hopf_base_ratio_is_not_the_rate_constant():
     """Guard on the retired reading: Vol(base)/Vol(group) is 1/(4 pi) in the
     dual-Coxeter metric and 1/(2 pi) on the unit sphere -- neither is 4/pi or
