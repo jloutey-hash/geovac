@@ -268,31 +268,71 @@ def test_gamma_rate_values_are_kernel_sensitive(n, expected):
     assert abs(float(gamma_rate(n)) - expected) < 1e-9
 
 
+def _relative_generator(qi, qj):
+    """su(2) generator X of the relative rotation qi^{-1} qj, and the
+    unit-S^3 angle, computed by independent routes."""
+    # quaternion inverse (unit quaternion) and product
+    inv = np.array([qi[0], -qi[1], -qi[2], -qi[3]])
+    a, b, c, d = inv
+    e, f, g, h = qj
+    r = np.array([a * e - b * f - c * g - d * h,
+                  a * f + b * e + c * h - d * g,
+                  a * g - b * h + c * e + d * f,
+                  a * h + b * g - c * f + d * e])
+    if r[0] < 0:
+        r = -r                                    # pick the shorter lift
+    theta = float(np.arccos(np.clip(r[0], -1.0, 1.0)))   # unit-S^3 angle
+    v = r[1:]
+    nv = np.linalg.norm(v)
+    n_hat = v / nv if nv > 1e-12 else np.array([0.0, 0.0, 1.0])
+    X = 1j * theta * sum(n_hat[k] * SIGMA[k] for k in range(3))
+    return X, theta
+
+
 def test_seminorm_normalisation_is_the_metric_scale():
     """Paper 38 eq:seminorm_normalisation, L(f) = (1/2) ||[D_CH, M_f]||.
 
-    Content: ||[D_CH, M_f]|| is the UNIT-metric Lipschitz seminorm (it is the
-    sup of the unit-metric gradient), and the dual-Coxeter distance is twice the
-    unit one, so the dual-Coxeter Lipschitz seminorm is half of it.  Checked on
-    sampled pairs of a concrete function, not asserted."""
+    Content, and what each assertion measures:
+
+      (i)  the dual-Coxeter norm of the relative generator, taken through the
+           inner product <X,Y> = -2 tr(XY) that Cas(ad) = h^v fixes, is TWICE
+           the unit-S^3 angle.  Measured, not assumed -- the factor comes out
+           of the trace formula, so a different normalisation moves it;
+      (ii) ||[D_CH, M_f]|| is the unit-metric Lipschitz seminorm, i.e. the sup
+           of the unit-metric gradient -- checked against the analytic
+           sup-gradient of the test function;
+      (iii) hence L = Lip_d = (1/2) ||[D_CH, M_f]||.
+
+    The previous version asserted max(a/2) = max(a)/2 and could not fail
+    (/qa trunk FULL #4, 2026-09-03).
+    """
     rng = np.random.default_rng(38)
-    # f(g) = Re tr(g) on SU(2), i.e. 2 cos(theta) in terms of the unit-S^3
-    # distance theta from the identity.
-    def theta_of(q):                                  # q a unit quaternion
-        return float(np.arccos(np.clip(q[0], -1.0, 1.0)))
-    qs = rng.normal(size=(400, 4))
+    qs = rng.normal(size=(160, 4))
     qs /= np.linalg.norm(qs, axis=1, keepdims=True)
-    best_unit, best_dc = 0.0, 0.0
+
+    def f_of(q):                       # f(g) = Re tr(g) = 2 cos(theta)
+        return 2 * np.cos(np.arccos(np.clip(abs(q[0]), -1.0, 1.0)))
+
+    best_unit = best_dc = 0.0
+    checked = 0
     for i in range(len(qs)):
         for j in range(i + 1, len(qs)):
-            # relative rotation q_i^{-1} q_j -> its unit-S^3 distance
-            qi, qj = qs[i], qs[j]
-            dot = abs(float(np.dot(qi, qj)))
-            d_unit = float(np.arccos(np.clip(dot, -1.0, 1.0)))
-            if d_unit < 1e-6:
+            X, theta = _relative_generator(qs[i], qs[j])
+            if theta < 1e-6:
                 continue
-            df = abs(2 * np.cos(theta_of(qi)) - 2 * np.cos(theta_of(qj)))
-            best_unit = max(best_unit, df / d_unit)
-            best_dc = max(best_dc, df / (2 * d_unit))
-    assert best_unit > 1.0                            # non-degenerate sample
-    assert abs(best_dc - best_unit / 2) < 1e-12       # L = (1/2) Lipnorm
+            # (i) dual-Coxeter distance, straight from the inner product
+            d_dc = float(np.sqrt(-2.0 * np.trace(X @ X).real))
+            assert abs(d_dc - 2 * theta) < 1e-9, (d_dc, theta)
+            checked += 1
+            df = abs(f_of(qs[i]) - f_of(qs[j]))
+            best_unit = max(best_unit, df / theta)
+            best_dc = max(best_dc, df / d_dc)
+    assert checked > 5000, checked
+
+    # (ii) the unit-metric Lipschitz sup of f is its analytic sup-gradient,
+    # which is what ||[D_CH, M_f]|| computes:  |d/dtheta 2 cos(theta)| <= 2.
+    assert best_unit <= 2.0 + 1e-9, best_unit
+    assert best_unit > 1.6, best_unit            # the sample reaches it
+
+    # (iii) and so the dual-Coxeter seminorm is half of it
+    assert abs(best_dc - best_unit / 2) < 1e-12, (best_dc, best_unit)

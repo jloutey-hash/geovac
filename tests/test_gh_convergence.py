@@ -342,7 +342,12 @@ class TestPropinquityBound:
         assert margins[2] < 0.5 * margins[0]
 
 
-    @pytest.mark.slow
+    @pytest.mark.slow  # measured >560 s on its own: the panel builds
+    # operator systems at n_max = 6, 7.  /qa FULL #4 flagged that this was the
+    # ONLY backing for the crossing numbers v5.4.4 printed, so it never ran in
+    # a routine regression.  The load-bearing half now has a cheap default-
+    # scope guard below (test_gamma_crosses_one_between_five_and_six); what
+    # stays behind the marker is the panel-height half alone.
     def test_panel_height_crosses_gamma_at_nmax_7(self):
         """The crossing itself (slow: builds the n_max = 6 and 7 panels).
         Measured 2026-09-03: margin +0.05302 at n_max = 6, -0.06901 at 7."""
@@ -564,3 +569,21 @@ class TestSlowIntegration:
             # Both finite, no NaN/Inf
             assert np.all(np.isfinite(B_f))
             assert np.all(np.isfinite(P_f))
+
+
+def test_gamma_crosses_one_between_five_and_six():
+    """The content of the L5 panel crossing, after L5's withdrawal.
+
+    height_B == 1 identically (Paper 38, finite-band witness), so the crossing
+    the panel measures is exactly where gamma_nmax falls below 1 -- and that is
+    a closed-form sum, cheap enough for default scope.  Before 2026-09-03 the
+    crossing was pinned only by a slow-marked panel test that no routine run
+    executed.
+    """
+    from geovac.central_fejer_su2 import gamma_rate
+    g = {n: float(gamma_rate(n)) for n in (4, 5, 6, 7)}
+    assert g[5] > 1.0 > g[6], g
+    assert abs(g[6] - 0.98958) < 1e-4, g[6]
+    assert abs(g[7] - 0.88277) < 1e-4, g[7]
+    # monotone decreasing, so the crossing is unique
+    assert g[4] > g[5] > g[6] > g[7], g

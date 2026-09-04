@@ -74,7 +74,25 @@ def test_closed_form_wrong_product_is_rejected():
         b = np.array([2 - 2 * np.cos(k * np.pi / (2 * l + 1)) for k in range(2 * l + 1)])
         wrong.append((a[:, None] + b[None, :]).ravel())
     wrong = np.sort(np.concatenate(wrong))
-    assert wrong.shape != direct.shape or np.abs(direct - wrong).max() > 1e-3
+    # The naive wrong factorisation has n_max^3 eigenvalues against sum n^2,
+    # so a `shape != shape or values differ` assertion short-circuits and never
+    # compares a single eigenvalue (found by /qa FULL #4: a decorative negative
+    # control).  Compare on a SAME-SHAPE wrong factorisation instead, so the
+    # value branch actually runs.
+    assert wrong.shape != direct.shape                      # still true, recorded
+    same_shape_wrong = []
+    for l in range(n_max):
+        # radial extent off by one: P_{n_max-l+1} x P_{2l+1} truncated back to
+        # the right dimension -- same eigenvalue count, wrong grid
+        a = np.array([2 - 2 * np.cos(j * np.pi / (n_max - l + 1))
+                      for j in range(n_max - l)])
+        b = np.array([2 - 2 * np.cos(k * np.pi / (2 * l + 1))
+                      for k in range(2 * l + 1)])
+        same_shape_wrong.append((a[:, None] + b[None, :]).ravel())
+    same_shape_wrong = np.sort(np.concatenate(same_shape_wrong))
+    assert same_shape_wrong.shape == direct.shape, (
+        same_shape_wrong.shape, direct.shape)
+    assert np.abs(direct - same_shape_wrong).max() > 1e-3
 
 
 SATURATION_C = np.pi ** 2 * (2 + 2 ** (1 / 3)) ** 2 * (1 + 2 ** (-2 / 3)) / 4

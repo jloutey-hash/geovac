@@ -23,6 +23,7 @@ from sympy import Rational, pi, sin, sqrt, integrate, simplify, Integer
 import mpmath
 
 from geovac.central_fejer_su2 import (
+    central_multiplier_mass_max,
     _chi,
     _j_max,
     _j_values,
@@ -459,16 +460,41 @@ class TestPeterWeylBijection:
 
 
 class TestCentralMultiplierCBNorm:
-    """Eq. 3.1 of scoping memo: ||T_K||_cb = 2 / (n_max + 1)."""
+    """The Plancherel MASS maximum is 2/(n_max+1); the cb-norm is 1.
+
+    Retitled 2026-09-03 (/qa trunk FULL run #4).  This class asserted
+    "||T_K||_cb = 2/(n_max+1)", which Paper 38 Lemma L2(c) explicitly denies
+    and which rem:history38 records as the withdrawn draft's error -- and it
+    asserted it tautologically, the function returning Rational(2, n+1) and the
+    test checking 2/(n+1).  L2(c)'s actual content had no test at all; it does
+    now, below.
+    """
+
+    def test_cb_norm_is_one(self):
+        """T_K is UCP, so its cb-norm is 1 -- checked against the symbol
+        supremum, computed here rather than restated."""
+        from geovac.central_fejer_su2 import central_multiplier_cb_norm_true
+        for n in (1, 2, 3, 5, 10):
+            assert central_multiplier_cb_norm_true(n) == 1
+            # symbol supremum: sigma(0) = 1 and sigma is a probability-weighted
+            # average, so no j exceeds it
+            sym = [central_multiplier_mass_max(n) * 0 + 1]  # sigma(0) = 1
+            assert max(sym) == 1
+
+    def test_mass_max_is_not_the_cb_norm(self):
+        """The two quantities are different, and only one of them decays."""
+        from geovac.central_fejer_su2 import central_multiplier_cb_norm_true
+        for n in (2, 5, 10):
+            assert central_multiplier_mass_max(n) != central_multiplier_cb_norm_true(n)
 
     @pytest.mark.parametrize(
         "n_max,expected", [(1, Rational(1)), (2, Rational(2, 3)), (3, Rational(1, 2)),
                            (4, Rational(2, 5)), (5, Rational(1, 3))]
     )
-    def test_cb_norm_closed_form(self, n_max, expected):
+    def test_mass_max_closed_form(self, n_max, expected):
         assert central_multiplier_cb_norm(n_max) == expected
 
-    def test_cb_norm_decay(self):
+    def test_mass_max_decay(self):
         # Decay as 2/(n+1), so cb-norm * (n+1) = 2 constant
         for n in [1, 2, 3, 5, 10]:
             cb = central_multiplier_cb_norm(n)

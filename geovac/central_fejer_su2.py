@@ -627,28 +627,51 @@ def kernel_l2_norm_squared(n_max: int) -> sp.Rational:
 # ---------------------------------------------------------------------------
 
 
-def central_multiplier_cb_norm(n_max: int) -> sp.Rational:
-    """The cb-norm of the central Fourier multiplier S_{K_{n_max}}.
+def central_multiplier_mass_max(n_max: int) -> sp.Rational:
+    """Maximum of the Plancherel MASS distribution of K_{n_max}.
 
-    On the central subalgebra Z(C(SU(2))) ~= L^infty(half-integers,
-    Plancherel), the cb-norm of the convolution operator T_K f = K * f
-    equals the L^infty norm of the Plancherel symbol:
+        max_{j <= j_max} (2j + 1) / Z_{n_max}
+            = n_max / (n_max (n_max + 1) / 2)
+            = 2 / (n_max + 1).
 
-        ||T_K||_cb = ||hat{K}||_infty = max_{j <= j_max} hat{K}(j)
-                   = hat{K}(j_max)    (since hat{K} is increasing in j on the support)
-                   = (2 j_max + 1) / Z_{n_max}
-                   = n_max / (n_max (n_max + 1) / 2)
-                   = 2 / (n_max + 1).
+    NOT a cb-norm (renamed and corrected 2026-09-03, /qa trunk FULL run #4).
+    This function was called `central_multiplier_cb_norm` and its docstring
+    claimed "the abelianized Bozejko-Fendler cb-norm equality".  Paper 38
+    Lemma L2(c) says the opposite, and is right:  T_K is convolution by a
+    probability density, hence unital and positive on a commutative domain,
+    hence completely positive, so
 
-    This is the abelianized Bozejko-Fendler cb-norm equality: on a
-    central multiplier on an amenable compact group (every compact group
-    is amenable), the cb-norm equals the ordinary supremum norm of the
-    symbol (Pisier 2001 Ch. 8 transcription of Bozejko-Fendler 1984).
-    The value O(1/n_max) is the symbol-side estimate that drives Lemma
-    3.4's antiderivative trick in the Leimbach-vS proof.
+        ||T_K||_cb = ||T_K(1)|| = 1   exactly, at every n_max,
+
+    and the symbol supremum is sup_j sigma(j) = sigma(0) = 1 as well.  The
+    quantity 2/(n_max + 1) is the mass-distribution maximum and the
+    symbol-side estimate that drives the antiderivative trick;  it is not the
+    cb-norm of any map used in Paper 38, and rem:history38 records the
+    conflation as the withdrawn draft's error.  `central_multiplier_cb_norm`
+    remains as a deprecated alias.
     """
     n = int(n_max)
     return Rational(2, n + 1)
+
+
+def central_multiplier_cb_norm(n_max: int) -> sp.Rational:
+    """DEPRECATED alias for `central_multiplier_mass_max` (2026-09-03).
+
+    Kept so existing call sites keep working; the returned quantity is the
+    Plancherel mass maximum, NOT a cb-norm.  For the cb-norm of the central
+    multiplier see `central_multiplier_cb_norm_true`, which is 1.
+    """
+    return central_multiplier_mass_max(n_max)
+
+
+def central_multiplier_cb_norm_true(n_max: int) -> sp.Rational:
+    """||T_K||_cb = 1 at every cutoff (Paper 38 Lemma L2(c)).
+
+    T_K is convolution by a probability density: unital, positive, on a
+    commutative domain, hence completely positive, so its cb-norm is the norm
+    of the image of the unit.
+    """
+    return sp.Integer(1)
 
 
 def central_multiplier_cb_norm_cesaro(n_max: int) -> sp.Rational:

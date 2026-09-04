@@ -907,11 +907,20 @@ Setting $n = 3$ and $g = g_{\text{flat}}$ gives Eq.~\eqref{eq:conformal_laplacia
 \paragraph{Note added v2.6.0.}
 The $S^3$ density overlap formula (Sec.~V) provides exact rational
 Slater integrals for all hydrogenic orbital pairs, enabling a fully
-graph-native FCI calculation for helium.  Using the graph Laplacian
-$\kappa \mathcal{L}$ as the one-body operator and rational Slater
-integrals as the two-body operator, the He ground state is computed
-with \emph{zero free parameters} beyond the universal matched scale $\kappa$: no orbital exponent, no variational
-optimization, no numerical quadrature.  The FCI matrix at each
+graph-native FCI calculation for helium.  Using a \emph{hybrid} one-body operator --- the exact hydrogenic
+eigenvalues $-Z^2/2n^2$ on the diagonal and the graph Laplacian's
+off-diagonal entries scaled by $\kappa$, the degree term dropped
+(\texttt{geovac/casimir\_ci.py}) --- together with rational Slater integrals as
+the two-body operator, the He ground state is computed with \emph{no fitted
+parameters}: no orbital exponent, no variational optimization, no numerical
+quadrature.  \emph{Corrected 2026-09-03:} this passage read ``using the graph
+Laplacian $\kappa\mathcal{L}$ as the one-body operator \ldots\ with zero free
+parameters beyond the universal matched scale $\kappa$'', which overstates what
+is computed.  The exact one-electron spectrum is an \emph{input} here rather
+than a graph output --- $\kappa\mathcal{L}$ alone has $\lambda_{\max} = 0$ at
+$n_{\max} = 1$ and would give $E = +5Z/8$, not the value below --- so this
+calculation is not a demonstration that the graph supplies the one-body
+physics.  The FCI matrix at each
 $n_{\max}$ is a rational matrix whose ground-state eigenvalue is an
 algebraic number.
 

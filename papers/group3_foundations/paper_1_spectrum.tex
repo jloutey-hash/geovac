@@ -86,7 +86,15 @@ where $|\cdot|$ denotes element-wise absolute value (undirected edges). The Hami
 H = \beta L + V = \beta (D - A) + V,
 \label{eq:ham_graph}
 \end{equation}
-where $V_{ii} = -1/n_i^2$ is the diagonal Coulomb potential and $\beta$ is a scaling factor.
+where $V_{ii} = -1/n_i^2$ is a diagonal Coulomb node weight and $\beta$
+a scaling factor.  \textbf{Eq.~\eqref{eq:ham_graph} is a general form, not the
+object measured below and not the production object} (clarified 2026-09-03):\
+the splitting measurements of \S\ref{sec:geometry} are taken on the bare
+graph Laplacian $L = D - A$, and \texttt{AtomicSolver} builds
+$H = K_{\mathrm{vac}} L$ with node weights never applied.  Under
+Eq.~\eqref{eq:ham_graph} with $V_{ii} = -1/n_i^2$ the same twelve cutoffs give
+$44.7$, $2.2$, $27.5$, $10.6$, $31.5$, $620.9\%$ and above --- a different
+quantity entirely.
 
 \subsection{Differential Connectivity by Angular Momentum}
 
@@ -99,9 +107,11 @@ The crucial observation is that the degree matrix $D$ is \textit{not rotationall
 
 \subsection{The Splitting as Discretization Artifact}
 
-We performed exact diagonalization of $H$ (Eq.~\ref{eq:ham_graph})
-for lattices with $n_{\max}$ ranging from 5 to 30. Using the Lanczos
-algorithm, we identified the eigenstates with maximal overlap with
+We performed exact diagonalization of the bare graph Laplacian
+$L = D - A$ for lattices with $n_{\max}$ ranging from 5 to 30 (corrected
+2026-09-03:\ this paragraph read ``of $H$ (Eq.~\ref{eq:ham_graph})'', which is
+not the operator measured --- see the note there).  Using a full dense
+eigendecomposition, we identified the eigenstates with maximal overlap with
 $|2,0,0\rangle$ (2s) and $|2,1,0\rangle$ (2p) and computed the
 relative splitting $\Delta E_{\mathrm{rel}} = |E_{2p} - E_{2s}|/|E_{2s}|$.
 
@@ -370,8 +380,12 @@ This is not a failure---it is a fundamental feature of the duality. The Laplacia
 \begin{enumerate}
 \item \textbf{Operator ratios:} \textbf{[PANEL-VERIFIED]} The spectral-norm gearing ratio
 $\|L_+\|/\|T_+\| = 2.0$ \emph{exactly}---at every lattice cutoff
-tested, not proved for all $n_{\max}$---while the Frobenius-norm ratio drifts through
-$\approx 1.77$ without converging
+tested, not proved for all $n_{\max}$---while the Frobenius-norm ratio
+converges to $2\sqrt{6}/3 = 1.632993\ldots$, its exact limit from
+$\|L_+\|_F^2/\|T_+\|_F^2 = 4(N+2)(2N+1)/(3N^2-2) \to 8/3$ (corrected
+2026-09-03 from ``drifts through $\approx 1.77$ without converging'':\ the
+sequence is monotone decreasing and $1.77$ is a finite-$n_{\max}$ value, not a
+non-limit)
 (\texttt{tests/test\_trunk\_qa\_gearing.py}).  Neither encodes a
 physical constant such as $137$ or $1/\alpha$: the spectral value is $2$,
 and the drifting one is not a constant.  The commutator

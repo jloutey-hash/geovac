@@ -155,7 +155,13 @@ def test_chain_to_272(reduced):
 def test_full_axiom_moduli_is_32(reduced):
     dim, sols, gap = _order_one_null(reduced, ccm_basis())
     assert dim == 32, dim
-    assert gap[0] > 1.0 and gap[1] < 1e-9
+    # gap[1] < 1e-9 holds BY CONSTRUCTION (gap[1] = w[k-1] with
+    # k = (w < 1e-9).sum(), so it is under tolerance whenever k > 0, which
+    # `dim == 32` already guarantees).  /qa FULL #4 flagged it as tautological.
+    # The real content is the SEPARATION: the null space is cleanly detached
+    # from the rest of the spectrum, so the count is not tolerance-dependent.
+    assert gap[0] > 1.0, gap[0]
+    assert gap[0] / max(gap[1], 1e-15) > 1e6, (gap[0], gap[1])
     matter = np.array([_rv(D[0:16, 0:16]) for D in sols]).T
     majorana = np.array([_rv(D[0:16, 16:32]) for D in sols]).T
     assert np.linalg.matrix_rank(matter, tol=1e-9) == 16
