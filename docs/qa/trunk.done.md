@@ -166,8 +166,8 @@ re-prices everything above it.
   withdrawn, both PI-approved: the s/p evidence leg is an artifact of cutoff
   divisibility (λ₂ₛ = 3 exactly iff n_max ≡ 0 mod 3; the 0.39% endpoint sits on
   the favourable branch), and Paper 38's L5 height bound is FALSE by a
-  finite-band witness (height_B ≡ 1, so it fails for every n_max ≥ 6 — exactly
-  the v5.4.4 crossing, misread then as an open panel question). **WH1 and
+  finite-band witness (height_B ≡ 1, so it fails for every n_max ≥ 6).
+  *Corrected 2026-09-04:* this line said “exactly the v5.4.4 crossing”, conflating two different events — γ falls below 1 between n_max 5 and 6, while the PANEL rises past γ between 6 and 7. **WH1 and
   `thm:main` are untouched**; the unconditional theorem uses no height
   constituent. Both withdrawals are also upgrades — each replaced an asserted
   trend with a proved closed form. Three papers named operators they do not

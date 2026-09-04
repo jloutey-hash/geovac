@@ -111,7 +111,17 @@ def test_saturation_rate_is_order_n_squared():
     gaps = [8 - max(block_spectrum(n, l).max() for l in range(n)) for n in ns]
     slope = np.polyfit(np.log(ns), np.log(gaps), 1)[0]
     assert -2.02 < slope < -1.95, slope
-    assert abs(SATURATION_C - 42.739654) < 1e-5, SATURATION_C
+    # Derive the constant independently instead of comparing the printed
+    # expression to the printed number (both authored together -- /qa DELTA #5
+    # planted C + 0.05 with the literal updated and this stayed green).
+    # Route: minimise the leading deficit form pi^2[(1-x)^-2 + (2x)^-2] over
+    # x = l/n_max numerically, with no reference to the closed form.
+    from scipy.optimize import minimize_scalar
+    g = lambda x: np.pi ** 2 * (1.0 / (1 - x) ** 2 + 1.0 / (2 * x) ** 2)
+    opt = minimize_scalar(g, bounds=(0.05, 0.95), method="bounded",
+                          options={"xatol": 1e-12})
+    assert abs(opt.x - 0.386488) < 1e-5, opt.x
+    assert abs(opt.fun - SATURATION_C) < 1e-6, (opt.fun, SATURATION_C)
     # the sequence rises TOWARD C and stays below it -- so no finite sample may
     # be printed as the constant (the defect this replaces)
     scaled = [g * n ** 2 for g, n in zip(gaps, ns)]
@@ -218,11 +228,20 @@ def _sp_proxy_dense(n_max: int) -> tuple:
 def _sp_proxy(n_max: int) -> tuple:
     """Same quantity, computed per block.
 
-    Legitimate because the l-blocks are disconnected components (pinned by
-    `test_l_zero_and_l_one_blocks_are_disconnected`): every eigenvector is
-    supported in one block, so the full-spectrum argmax equals the argmax
-    within the containing block.  `test_block_route_matches_dense` asserts the
-    equivalence rather than leaving it assumed.
+    CORRECTED 2026-09-04 (/qa DELTA #5).  The justification printed here was
+    wrong: disconnectedness gives block-DIAGONALITY, not block-supported
+    eigenvectors.  lambda_2s = 3 is degenerate ACROSS blocks (multiplicity 25
+    at n_max = 30, 15 at 18, 14 at 12), so `eigh` returns an arbitrary basis of
+    that eigenspace and a full-spectrum argmax over eigenVECTORS is
+    basis-dependent -- permuting the node labelling, a mathematical no-op,
+    turns 2.70% into 4421%.
+
+    The well-defined quantity is the basis-free one: argmax over eigenvalue
+    PROJECTIONS, lambda -> ||P_lambda e_node||.  That is what the block route
+    computes (each block is an invariant subspace, so the projection restricted
+    to it is exactly the block's own), and it is what the published numbers
+    are.  `test_block_route_matches_projection` checks against that rather than
+    against a particular LAPACK ordering.
     """
     from geovac.lattice import GeometricLattice
     from scipy.sparse import diags
@@ -245,15 +264,56 @@ def _sp_proxy(n_max: int) -> tuple:
     return abs(lam_2p - lam_2s) / abs(lam_2s), lam_2s
 
 
+def _sp_proxy_projection(n_max: int) -> tuple:
+    """Basis-free reference: argmax over eigenvalue PROJECTIONS.
+
+    For each distinct eigenvalue lambda, ||P_lambda e_node|| is independent of
+    which eigenbasis LAPACK returns, so this is well defined even where the
+    eigenvalue is degenerate across blocks -- which lambda_2s = 3 is.
+    """
+    from geovac.lattice import GeometricLattice
+    from scipy.sparse import diags
+    lat = GeometricLattice(max_n=n_max)
+    A = lat.adjacency
+    deg = np.array(A.sum(axis=1)).flatten()
+    L = (diags(deg, 0, shape=A.shape, format="csr") - A).toarray()
+    idx = {st: i for i, st in enumerate(lat.states)}
+    w, v = np.linalg.eigh(L)
+
+    def best(node):
+        e = idx[node]
+        # group columns by eigenvalue, then take the projection norm
+        order = np.argsort(w)
+        lam_groups, cur, out = [], [order[0]], []
+        for k in order[1:]:
+            if abs(w[k] - w[cur[-1]]) < 1e-9:
+                cur.append(k)
+            else:
+                lam_groups.append(cur)
+                cur = [k]
+        lam_groups.append(cur)
+        for grp in lam_groups:
+            amp = float(np.linalg.norm(v[e, grp]))
+            out.append((amp, float(w[grp[0]])))
+        return max(out)[1]
+
+    lam_2s = best((2, 0, 0))
+    lam_2p = best((2, 1, 0))
+    return abs(lam_2p - lam_2s) / abs(lam_2s), lam_2s
+
+
 @pytest.mark.parametrize("n_max", [12, 15])
-def test_block_route_matches_dense(n_max):
-    """The per-block route is exactly the full-spectrum one -- asserted, not
-    assumed, since the fast route rests on the disconnectedness the paper
-    claims."""
+def test_block_route_matches_projection(n_max):
+    """The per-block route equals the BASIS-FREE full-spectrum quantity.
+
+    Replaces a check against `eigh`'s raw eigenvector argmax, which passed only
+    because LAPACK happens to return block-supported vectors in the production
+    node ordering (/qa DELTA #5: permuting the labelling broke it).
+    """
     fast, lam_f = _sp_proxy(n_max)
-    slow, lam_s = _sp_proxy_dense(n_max)
-    assert abs(fast - slow) < 1e-12, (n_max, fast, slow)
-    assert abs(lam_f - lam_s) < 1e-12, (n_max, lam_f, lam_s)
+    ref, lam_r = _sp_proxy_projection(n_max)
+    assert abs(fast - ref) < 1e-9, (n_max, fast, ref)
+    assert abs(lam_f - lam_r) < 1e-9, (n_max, lam_f, lam_r)
 
 
 @pytest.mark.parametrize("n_max", [12, 15, 18, 21, 24, 27, 30])

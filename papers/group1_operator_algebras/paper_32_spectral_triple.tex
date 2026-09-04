@@ -101,7 +101,7 @@ mod~$8$ of~$S^3$~\cite{connes1995}; a $\mathbb{Z}_2$-grading
 $\gamma_{\mathrm{GV}}$ is absent at the Dirac level (correctly:
 $S^3$ is odd-dimensional, the spectral triple is \emph{odd}).
 \textbf{[OBSERVATION]} The four-way $S^3$ coincidence---Fock projection image,
-Hopf bundle base, Camporesi--Higuchi spin carrier,
+Hopf fibration base $S^2$ (the graph carries the total space $\sthree$), Camporesi--Higuchi spin carrier,
 $\mathrm{SU}(2)$ gauge manifold---is the statement that the manifold
 of $\mathcal{A}_{\mathrm{GV}}$ in the continuum limit, the spinor
 bundle of $D_{\mathrm{GV}}$, and the gauge group of natural
@@ -766,8 +766,11 @@ $f \in \mathcal{A}_{\mathrm{GV}}$ and $\psi \in \mathcal{H}_{\mathrm{GV}}$,
 where the maps $n_{\mathrm{Fock}}, l, m_l$ are the standard Dirac-to-Fock
 quantum-number bridges:
 $n_{\mathrm{Fock}}(n_{\mathrm{D}}) = n_{\mathrm{D}} + 1$,
-$l(\kappa) = -1 - \kappa$ if $\kappa < 0$ and $l(\kappa) = \kappa$ if
-$\kappa > 0$, and $m_l$ via the standard
+$l(\kappa) = |\kappa| - 1$ for both signs (corrected 2026-09-04 together
+with the label set:\ the earlier ``$-1-\kappa$ if $\kappa<0$,
+$\kappa$ if $\kappa>0$'' returns $l+1$ for $\kappa = +(l+1)$, which maps
+top-shell nodes outside $V_{\mathrm{Fock}}$ and breaks the order-zero
+argument as printed), and $m_l$ via the standard
 $|j, m_j\rangle = \langle l, m_l; \tfrac{1}{2}, m_s | j, m_j \rangle
 |l, m_l\rangle |s, m_s\rangle$ Clebsch--Gordan decomposition.
 Each $\pi(f)$ acts diagonally; in the spinor basis it is the diagonal
@@ -4080,8 +4083,12 @@ coincidences.
 
 Of the four gaps, G4 (cross-manifold) is the most consequential and --- noting that G3 is \emph{not} among the live ones, Sprint~G3
 having closed it in the negative (\S\ref{sec:g3}:\ identification is
-structurally impossible by tensor-product factorisation) ---
-G3 (electroweak unification) is the most reachable.  Paper~25's
+structurally impossible by tensor-product factorisation) --- the most
+reachable of the three that remain is G1 (\S\ref{sec:unified_gauge}).
+\emph{Corrected 2026-09-04:} this sentence inserted the G3 hedge and left the
+predicate ``G3 (electroweak unification) is the most reachable'' standing, so
+it announced a proven negative as the nearest-term target in the same breath as
+recording it closed.  Paper~25's
 $U(1)$ and Paper~30's $\mathrm{SU}(2)$ already live on the same
 underlying graph (the Fock-projected $S^3$ Coulomb graph) and
 share the same Camporesi--Higuchi Dirac operator, the same
@@ -5348,9 +5355,12 @@ $*$-representation of $\mathcal{A}_F$ on $\mathbb{C}^{32}$ (particles
 colour-blind, $M_3(\mathbb{C})$ acting on antiquarks; three independent
 linear-algebra routes agree, singular-value gap $12.4$ vs $10^{-13}$;
 \texttt{tests/test\_trunk\_qa\_forced\_count\_moduli.py}).  Its projection
-onto the $16$-dimensional matter sector has rank $16$ (the colour-diagonal
-Yukawa entries $y_\nu, y_e, y_u, y_d$ with their $L \leftrightarrow R$
-placements) and onto the matter--antimatter (Majorana) block rank $16$.
+onto the $16$-dimensional matter sector has rank $16$ --- the \emph{full}
+lepton $2\times2$ and quark-flavour $2\times2 \otimes \mathbb{1}_3$ blocks, of
+which the four colour-diagonal Yukawas $y_\nu, y_e, y_u, y_d$ with their
+$L \leftrightarrow R$ placements are $4$ complex, i.e.\ \emph{half}
+(corrected 2026-09-04:\ the statement named only those four, which the proof
+below already calls false and which is $8$ real, not $16$) and onto the matter--antimatter (Majorana) block rank $16$.
 \emph{Correction (2026-09-03):} the endpoint printed before, $260$ (with a
 matter-sector chain $512 \to 256 \to 128 \to 128$), was an artefact of a
 degenerate algebra sample --- eighteen of the twenty-four basis elements

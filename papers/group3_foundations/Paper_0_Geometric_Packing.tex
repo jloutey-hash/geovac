@@ -696,7 +696,14 @@ $\min_\ell\bigl[4\sin^2\frac{\pi}{2(n_{\max}-\ell)} + 4\sin^2\frac{\pi}{2(2\ell+
   \;=\; 42.7397\ldots,
   \label{eq:saturation_rate}
 \end{equation}
-attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  The approach is monotone from below --- $C_{n} = 42.61$ at $n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so every finite sample understates $C$, and the value printed here before 2026-09-03, $42.6$, was the $n_{\max} = 320$ sample rather than the limit (\texttt{tests/test\_paper1\_block\_spectrum.py}).  
+attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  Every finite sample lies \emph{below} $C$ (verified at all $591$
+integer cutoffs $10 \le n_{\max} \le 600$) --- $C_{n} = 42.61$ at
+$n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so a finite sample
+always understates $C$.  The approach is \emph{not} monotone, however:\ there
+are $195$ decreasing steps in that range, e.g.\ $C_{20} = 40.7285 >
+C_{21} = 40.6470$ (corrected 2026-09-04;\ ``monotone from below'' was asserted
+from a doubling grid that happens to be monotone).  It is the one-sided bound,
+not monotonicity, that makes every sample an understatement, and the value printed here before 2026-09-03, $42.6$, was the $n_{\max} = 320$ sample rather than the limit (\texttt{tests/test\_paper1\_block\_spectrum.py}).  
 Finally, with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
 $K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
 ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The

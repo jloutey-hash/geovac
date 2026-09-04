@@ -338,6 +338,24 @@ def cesaro_2_normalization(n_max: int) -> sp.Rational:
 
 
 def plancherel_symbol(n_max: int, j: Rational) -> sp.Rational:
+    # NAMING CORRECTION 2026-09-04 (/qa DELTA #5).  This returns the Plancherel
+    # MASS distribution (2j+1)/Z_{n_max}, not the multiplier symbol of T_K, and
+    # the docstring below calling it "the j-th Fourier coefficient of K" is
+    # wrong.  The true symbol, verified on two independent routes (exact
+    # Clebsch-Gordan, and quadrature against the conjugacy-class measure), has
+    #     sigma(0) = 1        -- not 1/Z, so T_K is unital, as it must be
+    #     band 2*j_max        -- not j_max, so this function returns 0 at
+    #                            values where K is demonstrably nonzero
+    # (n_max = 4: true c_J = 1.000, 1.466, 1.812, 1.583, 1.266, 0.693, 0.400
+    #  against this function's 0.1, 0.2, 0.3, 0.4, 0, 0, 0).
+    #
+    # The band-doubling is the same envelope Paper 38 uses to refute Lemma L5,
+    # so the corpus currently proves N <= 2 n_max - 1 in one place and denies it
+    # here.  The VALUES are load-bearing in berezin_reconstruction,
+    # gh_convergence_tensor, central_fejer_compact_temporal and many pinned
+    # tests, so re-valuing the function is a scoped sprint of its own and is
+    # NOT done here;  this note exists so the next reader is not misled by the
+    # name.
     """Plancherel symbol hat{K}_{n_max}(j) of the natural-coefficient kernel.
 
     hat{K}_{n_max}(j) = (2j + 1) / Z_{n_max}  for j <= j_max

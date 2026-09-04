@@ -306,6 +306,15 @@ def test_seminorm_normalisation_is_the_metric_scale():
     The previous version asserted max(a/2) = max(a)/2 and could not fail
     (/qa trunk FULL #4, 2026-09-03).
     """
+    # |Cas(ad)| = 4/lam, and the corpus rule fixes Cas(ad) = h^v, so
+    # lam = 4/h^v with h^v computed from the Killing form above.  Under Kac's
+    # (theta|theta) = 2 the rule is Cas(ad) = 2 h^v and lam would be 2/h^v,
+    # giving radius sqrt(2) and the constant 2 sqrt(2)/pi -- a different number
+    # here, which is what makes this test convention-DETERMINING.
+    h_vee = _dual_coxeter_number([-1j * sg / 2 for sg in SIGMA])
+    lam_dc = 4.0 / h_vee
+    assert abs(lam_dc - 2.0) < 1e-10, lam_dc
+
     rng = np.random.default_rng(38)
     qs = rng.normal(size=(160, 4))
     qs /= np.linalg.norm(qs, axis=1, keepdims=True)
@@ -320,8 +329,12 @@ def test_seminorm_normalisation_is_the_metric_scale():
             X, theta = _relative_generator(qs[i], qs[j])
             if theta < 1e-6:
                 continue
-            # (i) dual-Coxeter distance, straight from the inner product
-            d_dc = float(np.sqrt(-2.0 * np.trace(X @ X).real))
+            # (i) dual-Coxeter distance from the inner product <X,Y> = -lam
+            # tr(XY), with lam DERIVED from the computed dual Coxeter number
+            # rather than hard-coded.  /qa DELTA #5 showed the previous version
+            # was convention-blind: applying Kac's normalisation consistently
+            # left it green, because the 2 came only from a literal -2.
+            d_dc = float(np.sqrt(-lam_dc * np.trace(X @ X).real))
             assert abs(d_dc - 2 * theta) < 1e-9, (d_dc, theta)
             checked += 1
             df = abs(f_of(qs[i]) - f_of(qs[j]))

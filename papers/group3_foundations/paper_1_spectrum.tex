@@ -115,13 +115,21 @@ eigendecomposition, we identified the eigenstates with maximal overlap with
 $|2,0,0\rangle$ (2s) and $|2,1,0\rangle$ (2p) and computed the
 relative splitting $\Delta E_{\mathrm{rel}} = |E_{2p} - E_{2s}|/|E_{2s}|$.
 
-At $n_{\max} = 10$ (385 nodes), the splitting is:
+At $n_{\max} = 10$ (385 nodes), the \emph{originally reported} splitting was:
 \begin{align}
 \lambda_{2s} &= 0.0202, \\
 \lambda_{2p} &= 0.0238, \\
 \Delta E &= \lambda_{2p} - \lambda_{2s} = 0.0035,
 \end{align}
-corresponding to a 16\% relative splitting. However, this degeneracy
+quoted as a $16\%$ relative splitting (arithmetically $17.3\%$).
+\textbf{[MEASURED]} \emph{These are not the bare Laplacian's values} and are
+retained only as the historical record:\ on the operator named above,
+$L = D - A$ at $n_{\max} = 10$ gives $\lambda_{2s} = 3.1756$,
+$\lambda_{2p} = 3.2306$ and a $1.73\%$ ratio (see the QA correction below,
+and the twelve-cutoff list in \S\ref{sec:geometry}).  Flagged inline
+2026-09-04:\ the method sentence above was corrected to name $L = D - A$ while
+this display still carried the legacy figures, so the corrected sentence
+appeared to vouch for them. However, this degeneracy
 breaking is \emph{not} an emergent physical force. Systematic
 convergence analysis reveals it is a \textbf{discretization artifact}
 of finite lattice truncation---the graph-theoretic analog of spectral
@@ -204,7 +212,8 @@ and on that branch the reported ratio is exactly
 $\bigl(2 - 2\cos\frac{\pi}{n_{\max}-1}\bigr)/3$ --- $2.7005$, $1.6715$,
 $1.1351$, $0.8208$, $0.6209$, $0.4861$ and $0.3908\%$ at
 $n_{\max} = 12, 15, 18, 21, 24, 27, 30$, matching the measured values to every
-digit printed.  Off that residue class the value is three to six times larger
+digit printed.  \emph{At neighbouring cutoffs} the off-branch value is
+three to six times larger
 ($1.65\%$ at $28$, $2.58\%$ at $29$).  \textbf{The endpoint quoted throughout
 this paper, $0.39\%$ at $n_{\max} = 30$, therefore lies on the favourable
 branch}, a selection this paper did not disclose before 2026-09-03.
@@ -548,7 +557,7 @@ verified numerically; its closed form decays as $n^{-1}$ asymptotically (no fitt
 
 \begin{table}[h]
 \centering
-\caption{\textbf{Historical values --- not reproduced by any current construction} (flagged 2026-09-03).  These figures are retained to document the original calculation;\ the production binary lattice gives $D_{2s} \approx 1.9$, $D_{2p} \approx 3.8$ (\S\ref{sec:geometry} QA note), and the CG construction gives $0.7071$, $1.9319$, $3.8284$, $2.9568$, $5.4096$, $6.1237$ --- of which only the $3d$ row here reproduces.  What survives is the \emph{qualitative} ordering $D_{2p} > D_{2s}$, which both constructions share.  Weighted node degrees for select quantum states. The non-integer values arise from weighted sums of transition matrix elements (see Appendix~\ref{app:berry}).}
+\caption{\textbf{Historical values --- not reproduced by any current construction} (flagged 2026-09-03).  These figures are retained to document the original calculation;\ the production binary lattice gives \emph{integer} degrees --- $D_{2s} = 2$ and $D_{2p} = 3$ exactly, every edge weight being $1$ --- while the CG construction gives $0.7071$, $1.9319$, $3.8284$, $2.9568$, $5.4096$, $6.1237$, of which only the $3d$ row here reproduces.  (Corrected 2026-09-04:\ this caption assigned the CG values $1.9$ and $3.8$ to the binary lattice, inverting the separation it was written to enforce.)  What survives is the \emph{qualitative} ordering $D_{2p} > D_{2s}$, which both constructions share.  Weighted node degrees for select quantum states. The non-integer values arise from weighted sums of transition matrix elements (see Appendix~\ref{app:berry}).}
 \begin{tabular}{cccc}
 \hline
 State $(n,l,m)$ & Weighted Degree $D_{ii}$ & Type & Energy (Laplacian) \\

@@ -92,9 +92,14 @@ def _reduced_space():
     return [_fv(Q[:, k]) for k in range(Q.shape[1])]
 
 
-def _order_one_null(basisD, algebra):
+def _order_one_null(basisD, algebra, tol: float = 1e-9):
     """Null space of the order-one map on span(basisD) for the given algebra
-    elements; returns (dimension, solution matrices, singular gap)."""
+    elements; returns (dimension, solution matrices, singular gap).
+
+    `tol` is exposed so the count can be shown independent of where the cut is
+    drawn (/qa DELTA #5: the assertion that used to stand for this was
+    `gap[0]/gap[1] > 1e6`, which the two assertions above it already imply).
+    """
     JbJ = [J_U @ np.conj(b) @ J_U.conj().T for b in algebra]
     G = np.zeros((len(basisD), len(basisD)))
     for a in algebra:
@@ -102,8 +107,8 @@ def _order_one_null(basisD, algebra):
             cols = np.array([_rv((D @ a - a @ D) @ Jb - Jb @ (D @ a - a @ D)) for D in basisD]).T
             G += cols.T @ cols
     w, V = np.linalg.eigh(G)
-    null = V[:, w < 1e-9]
-    gap = (w[(w < 1e-9).sum()] if (w < 1e-9).sum() < len(w) else np.inf, w[(w < 1e-9).sum() - 1])
+    null = V[:, w < tol]
+    gap = (w[(w < tol).sum()] if (w < tol).sum() < len(w) else np.inf, w[(w < tol).sum() - 1])
     sols = [sum(null[k, j] * basisD[k] for k in range(null.shape[0])) for j in range(null.shape[1])]
     return null.shape[1], sols, gap
 
@@ -161,7 +166,11 @@ def test_full_axiom_moduli_is_32(reduced):
     # The real content is the SEPARATION: the null space is cleanly detached
     # from the rest of the spectrum, so the count is not tolerance-dependent.
     assert gap[0] > 1.0, gap[0]
-    assert gap[0] / max(gap[1], 1e-15) > 1e6, (gap[0], gap[1])
+    # The ratio assertion that used to sit here was ALSO tautological
+    # (gap[0] > 1 and gap[1] < 1e-9 imply it).  The real content is that the
+    # count does not depend on where the tolerance is drawn: /qa DELTA #5.
+    for tol in (1e-6, 1e-8, 1e-10, 1e-12):
+        assert _order_one_null(reduced, ccm_basis(), tol=tol)[0] == 32, tol
     matter = np.array([_rv(D[0:16, 0:16]) for D in sols]).T
     majorana = np.array([_rv(D[0:16, 16:32]) for D in sols]).T
     assert np.linalg.matrix_rank(matter, tol=1e-9) == 16

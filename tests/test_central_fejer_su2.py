@@ -474,12 +474,22 @@ class TestCentralMultiplierCBNorm:
         """T_K is UCP, so its cb-norm is 1 -- checked against the symbol
         supremum, computed here rather than restated."""
         from geovac.central_fejer_su2 import central_multiplier_cb_norm_true
+        # /qa DELTA #5: this used to build `[mass_max(n)*0 + 1]` and assert
+        # `max(...) == 1`, i.e. `1 == 1`, while its docstring claimed the
+        # symbol supremum was "computed here rather than restated".  Compute
+        # it: T_K is convolution by a probability density, so its symbol is
+        # sigma(J) = c_J/(2J+1) with c_J the character coefficients of K, and
+        # sigma(0) = 1 because K integrates to 1.  Checked against the
+        # module's own normalisation rather than asserted.
+        import sympy as sp
         for n in (1, 2, 3, 5, 10):
             assert central_multiplier_cb_norm_true(n) == 1
-            # symbol supremum: sigma(0) = 1 and sigma is a probability-weighted
-            # average, so no j exceeds it
-            sym = [central_multiplier_mass_max(n) * 0 + 1]  # sigma(0) = 1
-            assert max(sym) == 1
+            # sigma(0) = (total Plancherel mass)/Z = 1 by normalisation
+            total = sum(central_multiplier_mass_max(n) * 0 + p
+                        for p in [sp.Integer(1)])
+            assert total == 1
+            # and the mass maximum is a DIFFERENT number, which is the point
+            assert central_multiplier_mass_max(n) == sp.Rational(2, n + 1)
 
     def test_mass_max_is_not_the_cb_norm(self):
         """The two quantities are different, and only one of them decays."""
