@@ -670,6 +670,15 @@ PMs may edit papers in any of the six group folders (`papers/group1_operator_alg
 - Reframing results based on new findings (e.g., reclassifying transcendental → algebraic when proven)
 - Updating abstracts and conclusions to reflect current best results
 
+**Record cross-paper dependencies WHEN YOU WRITE THEM (hard, added 2026-09-04, PI direction).** When a paper claim you write or edit *rests on* a claim owned by another document, record that dependency in the same edit:
+
+- if the owner claim already has a `check_retracted_terms.py` entry, add your document to its `cited_by` (see §9, retraction → dependents rule);
+- if it does not — the common case, since most owner claims have never been retracted — note it in your claim's `docs/claim_test_matrix.md` row as `rests on: Paper N's <claim>`. Whoever later retracts that claim greps for it when building the entry.
+
+*The operational test, because not every citation is a dependency:* **if the cited claim were withdrawn tomorrow, would this sentence have to change?** If yes, it is a dependency and gets recorded. If the citation is context, provenance, or courtesy, it is not.
+
+*Why this sits at authoring time rather than retraction time:* at retraction time the dependency set has to be **reconstructed from memory**, and reconstruction is what failed — eight of the ten recurring defect classes in the v5.4.4..v5.7.3 arc were a claim corrected in its owner and left standing in its citers, including one corrected in Paper 0 and left false in Paper 7 *in the same commit*. When you are writing the dependent sentence you are looking straight at the thing you are relying on — that is the only moment the set is free to obtain. Patterns cannot substitute: a citing document restates the claim in its own words, which is why four successive pattern rebuilds each missed loci and one sweep reported clean while five loci survived a spelling difference.
+
 **PMs must still NOT:**
 - Introduce fitted or empirical parameters without PI direction
 - Change the natural geometry hierarchy (new levels, changed coordinates)
