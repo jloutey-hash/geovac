@@ -169,6 +169,286 @@ separately-reviewed activity and is **not** done here:
 - C22's check-C selftest proves the pattern fires; it does not prove the new
   marker-exemption branch behaves. That branch is currently untested.
 
+## [v5.8.2] - 2026-09-04
+
+**§13.8 — record cross-paper dependencies WHEN YOU WRITE THEM** (PI-directed;
+§13 is normally PM-may-NOT-edit).
+
+This closes the half `cited_by` cannot reach on its own. Recording a dependency
+at *retraction* time means reconstructing, from memory, which documents rest on
+a claim — and reconstruction is precisely what failed. At authoring time the
+dependency is free to obtain, because the author is looking straight at the
+thing being relied on.
+
+**The rule.** When a paper claim you write or edit rests on a claim owned by
+another document, record it in the same edit: if the owner already has a C16
+entry, add your document to its `cited_by`; if it does not (the common case,
+since most owner claims have never been retracted), note it in your claim's
+`docs/claim_test_matrix.md` row as `rests on: Paper N's <claim>`. Deliberately
+uses the two artifacts that already exist rather than adding a third.
+
+**The operational test**, which is what makes it usable, since not every
+citation is a dependency: *if the cited claim were withdrawn tomorrow, would
+this sentence have to change?* If yes, record it. Context, provenance and
+courtesy citations are not dependencies.
+
+### Fixed (same day, `5ca0fb3`)
+
+**The bare-prefix exemption was reintroduced by the commit that removed it.**
+The two entries added by v5.8.0 — the commit that replaced the bare withdrawal
+marker with the entry-id form, *precisely because* a bare token silenced every
+entry in its window — were themselves written with `exempt_if_nearby:
+r"\[retracted"`, a bare prefix matching any marker. Verified before the fix: a
+foreign marker naming an unrelated entry exempted both. So the over-exemption
+was diagnosed, the fix designed, proven three ways, and then two new entries
+written in the defective style **inside the same commit**. Both now use
+`r"(?!)"`, since `withdrawal_marker(id)` is OR'd in automatically.
+
+---
+
+## [v5.8.1] - 2026-09-04
+
+**Bake `cited_by` into the processes — the field existed, almost nothing
+invoked it.** The PI asked whether the dependency field was actually wired in.
+It was barely wired, with four gaps, one of them the exact shape this corpus
+has a hard rule against:
+
+- the normal gate printed a notice and **exited 0** — reporting PASS with seven
+  live gaps, i.e. a gate scoping its own verdict away;
+- `qa.md` carried it only under Hard rules, not in the step-1 deterministic
+  checklist, so a `/qa` run never invoked it;
+- CLAUDE.md — what a PM reads *while writing papers*, the moment a claim
+  actually gets retracted — mentioned it **zero** times;
+- 37 of 44 entries declared nothing, and an entry with no `cited_by` key is
+  indistinguishable from one with genuinely no dependents. That is precisely
+  how C17 came to examine nothing while printing PASS.
+
+### Changed
+
+1. Unrevisited dependents now **FAIL** the gate (exit 1, each named). A PASS
+   coexisting with seven live gaps is worse than no check.
+2. A missing `cited_by` key FAILs, so silence becomes an explicit assertion:
+   declare the dependents, or `cited_by: {}` if genuinely none. Ratcheted
+   against a baseline of the 37 pre-existing entries, matching C20/C22.
+   Proven: a NEW entry declaring nothing is named and fails.
+3. `qa.md` step 1 — folded into the C16 HARD RULE, so retiring a claim and
+   declaring its dependents are one action.
+4. CLAUDE.md §9 — the retraction → dependents rule, with the measured "eight of
+   ten" justification.
+
+---
+
+## [v5.8.0] - 2026-09-04
+
+**`cited_by` — register a retracted claim's DEPENDENTS, not just its wording**
+(PI-directed).
+
+The PI's diagnosis, and the data confirms it as the *dominant* failure mode
+rather than one among several. **Eight of the ten** recurring defect classes in
+the v5.4.4..v5.7.3 arc have a single shape: a claim owned by one document,
+cited by several, corrected in the owner, left standing in the citers.
+
+| claim | owner | left stale in |
+|---|---|---|
+| Hopf-base label | P38 | P32, P40, 2 syntheses, guide |
+| 4/π convention | P38 | P32 (9 loci), synthesis |
+| KO-3 parity | P32 | P38 |
+| L5 height bound | P38 | P40, P39, `gh_convergence.py` |
+| graph→S³ convergence | P7 | P0, synthesis |
+| s/p as evidence | P1 | P7, synthesis |
+| Forced count 260→32 | P32 | P57, claim matrix |
+| "monotone from below" | P0 | P7, **in the same commit** |
+
+**Why no pattern can catch this.** The existing `files` field is a *textual*
+scope — where a regex might match. A citing document restates the claim in its
+own words, so the pattern layer is structurally the wrong instrument. Four
+successive pattern rebuilds each missed loci, and one sweep reported **clean
+while five loci survived**, because the corpus writes `$s/p$-lift decay` and
+the pattern expected `s/p-lift decay` — the LaTeX `$` broke it. A gate-shaped
+sweep is worse than an unaided one: *it looks verified.* A dependency list is
+enumerated once, from the argument rather than the prose, and cannot be
+defeated by spelling.
+
+### Added
+
+`cited_by` on each C16 entry: the documents whose **argument** rests on the
+claim, each with a review stamp or `None`. Ratchet semantics matching C20/C22 —
+unstamped dependents FAIL, stamping quiets permanently, and a new retraction
+starts with all dependents unstamped so the debt cannot silently regrow.
+`--dependencies` reports the matrix. Proven two-way.
+
+*(The first attempt at that proof used an anchor that did not match, so the
+plant never applied and the entry stayed clean — a no-op plant reading as "did
+not fire", precisely the trap `fire_test.py` now errors on.)*
+
+---
+
+## [v5.7.3] - 2026-09-03
+
+**DELTA #5 remediation 3/n — the remaining verified defects, four of them
+introduced by the FULL #4 remediation.**
+
+### Papers
+
+- **"Monotone from below" was FALSE**: 195 decreasing steps over n = 10..600
+  (C₂₀ = 40.7285 > C₂₁ = 40.6470). "From below" *is* true at all 591 integer
+  cutoffs and is the load-bearing half — it is the **one-sided bound**, not
+  monotonicity, that makes every finite sample an understatement. The backing
+  test asserted monotonicity on the doubling grid [20,40,80,160,320], which
+  happens to be monotone: the guard-asymptotics failure again, on a fresh edit.
+- **"Three to six times larger off it"** inverts below n ≈ 14 (n = 7 gives
+  0.646% against 12.73% and 5.08% on neighbouring multiples of three — 8–20×
+  *smaller*) and diverges above n ≈ 33 (52.9× at 298). It holds only in the
+  n = 20–30 window the backing test samples.
+- A new Appendix C caption assigned D₂ₛ ≈ 1.9 / D₂ₚ ≈ 3.8 to the **binary**
+  lattice. Binary gives exactly 2 and 3 — integers, every edge weight is 1.
+  1.9319/3.8284 are the CG values, which the same sentence then attributes to
+  CG. The caption inverted the separation it was written to enforce.
+- Paper 1's method sentence was corrected to name `L = D − A` while the display
+  two lines below kept the legacy 0.0202/0.0238/16%; the bare Laplacian gives
+  3.1756/3.2306/1.73%. The QA paragraph did say so — but *after* the display,
+  so the corrected sentence appeared to vouch for them.
+- **P32**: the Forced-Count theorem *statement* still carried the parenthetical
+  its own proof calls false (and four complex Yukawas with L↔R placement is 8
+  real, not 16). The ℓ(κ) bridge was not updated with the label set — for
+  κ = +(ℓ+1) it returned ℓ+1, mapping top-shell nodes outside V_Fock and
+  breaking the printed order-zero argument. And the G3 "fix" left the predicate
+  standing: *"noting that G3 is not among the live ones … G3 is the most
+  reachable"* — one sentence, both claims. **Inserting a hedge without removing
+  the promotion effaces the negative in practice.**
+
+### Tests — the clean before/after for the fire-testing rule
+
+- The saturation guard asserted the printed *expression* against the printed
+  *number*, both authored together; planting C + 0.05 with the literal updated
+  left it green. Now derives the minimiser by independent numerical
+  optimisation. Fire-tested with that same plant: **FIRES**.
+- The fast-route justification was mathematically wrong. Disconnected blocks
+  give block-*diagonality*, not block-supported eigenvectors, and λ₂ₛ = 3 is
+  degenerate **across** blocks — multiplicity 25 at n_max = 30 — so `eigh`
+  returns an arbitrary basis and a full-spectrum argmax over eigen*vectors* is
+  basis-dependent (permuting the node labelling, a no-op, turns 2.70% into
+  4421%). The published numbers are right under the basis-free reading
+  `argmax ‖P_λ e‖`. Fire-tested: **FIRES**.
+- `gap[0]/gap[1] > 1e6` — a replacement for a tautology — was itself implied by
+  the two assertions above it. Replaced by a tolerance sweep across six orders
+  of magnitude.
+- `test_cb_norm_is_one` computed `[mass_max(n)*0 + 1]` and asserted
+  `max(...) == 1`, i.e. **1 == 1**, while its docstring claimed the symbol
+  supremum was "computed here rather than restated".
+- The seminorm guard was convention-**blind**: X is constructed from θ, so
+  ‖X‖ = 2θ is an identity and the 2 came only from a hard-coded −2. Applying
+  Kac's normalisation consistently left it green. Now derives the
+  inner-product scale from the dual Coxeter number the same file computes from
+  the Killing form. Fire-tested with the exact plant that used to pass:
+  **FIRES**.
+
+Thirteen deterministic gates PASS on trunk; 209 tests pass across touched files.
+
+---
+
+## [v5.7.2] - 2026-09-03
+
+**DELTA #5 remediation 2/n — gate-first sweep of the s/p and convergence
+withdrawals (15 loci, one pass).** The first proper use of the gate-first rule,
+and the difference between this tranche and the three preceding it.
+
+**The patterns were the problem, not the sweeping.** The s/p entry registered
+on 2026-09-03 matched **one** locus per paper; reviewers found the withdrawn
+mechanism at 11 and the withdrawn evidential reading at 8. It caught the exact
+phrase in front of its author — "spectral aliasing on a compact manifold" — and
+none of the variants the corpus actually uses: "spectral aliasing from lattice
+truncation", "finite-size aliasing", "absorbing wall", "recovering the exact
+Coulomb degeneracy", "s/p-lift decay".
+
+Widened to the class and split into two entries, because they are two claims:
+`sp-splitting-aliasing-mechanism` (the withdrawn **cause**) and
+`sp-splitting-as-convergence-evidence` (the withdrawn **evidential reading**),
+plus `graph-s3-convergence-established` for the operator convergence stated as
+established. The gate then enumerated 15 live loci, swept in one pass. Three of
+the fifteen were anchor misses in the sweep script — the phrase wraps across
+lines, so a one-line anchor cannot reach it — and the gate found them.
+
+---
+
+## [v5.7.1] - 2026-09-03
+
+**DELTA #5 remediation 1/n — the tool was corrupting the repo, the marker
+over-exempted, and the L5 withdrawal never reached the code.** Three of DELTA
+#5's findings were about instruments built in the previous commit.
+
+1. **`fire_test.py` was poisoning `__pycache__` — and a poisoned entry was
+   live.** `shutil.copy` made the backup without metadata, the plant landed in
+   the same wall-clock second, and `shutil.move` restored the backup's mtime —
+   so for a **length-preserving** plant the `.pyc` header `(int(mtime), size)`
+   still validated and the interpreter kept serving bytecode compiled from the
+   **mutated** source against pristine source. Reproduced in four lines: file
+   reads `VALUE = 2`, Python imports `VALUE = 3`. A reviewer caught a trunk
+   test failing on a clean `git status` because of it; a `--plant-in
+   geovac/*.py` run would have done the same to production physics. Fixed in
+   **both** directions — the reverse bug is worse: a stale cache can also mask
+   the plant, so the tool would report a **sound** guard as asleep, a false
+   accusation with nothing to notice. The docstring also claimed plants go to
+   "a scratch copy"; they never did.
+2. **The withdrawal marker over-exempted.** The bare `[retracted YYYY-MM-DD]`
+   was OR'd into every entry's exemption, so one token silenced all 42 C16
+   entries in its window — a comment withdrawing the Hopf-base label silenced a
+   live volume-quotient defect **in the very next sentence**. Reverting to
+   per-entry vocabulary was the measured failure mode (three false-clean
+   entries in one session). The entry-id form keeps both properties: nothing is
+   invented, and the token exempts only the entry it names. Proven three ways,
+   including the case the bare token failed (other-entry marker still fires).
+3. **The L5 withdrawal never reached the code, and its C16 guard was inert** —
+   four of five alternatives matched **zero** lines corpus-wide.
+
+---
+
+## [v5.7.0] - 2026-09-03
+
+**Three process changes aimed at the re-catch rate, each justified by measured
+cost.** The PI asked why the same things keep getting touched twice. Counted
+across v5.4.4..v5.6.0: **21 re-touches** where the same claim or artifact was
+corrected more than once, ~17 of them avoidable. Two root causes cover ~70%.
+
+**Cause A — fixing at the locus instead of the class** (5 claims, 12 extra
+passes). The Hopf-base label took 3 passes, the 4/π convention 3, Paper 7's
+convergence re-pricing 3, the s/p descope 2, the KO relabel 2. Every one: a
+reviewer reports "file X line N says this", the line gets fixed, the class is
+never enumerated, the next run finds the siblings.
+*Fix (rule 1, gate-first sweeps):* register the C16/C17 entry for the **class**
+first, prove it discriminates, sweep the locus list the gate produces, re-run to
+zero. A locus list from a grep is exhaustive; a locus list from memory is a
+sample.
+
+**Cause B — guards written alongside the claim they back** (10 instances).
+DELTA #4 and FULL #4 found **eight guards that could not fail**, two written
+the day before they were caught: an identity `max(a/2) == max(a)/2`; a control
+that short-circuited on an array shape before comparing anything; a
+`gap[1] < 1e-9` true whenever the preceding assertion held; a hard-coded
+literal standing in for the quantity under test. **None was found by
+inspection. Every one was found by breaking the subject.**
+*Fix (rule 2):* `debug/qa/fire_test.py` — applies a mutation, runs the selected
+tests, reports FIRED / DID NOT FIRE, restores in a `finally`, and treats a
+non-matching anchor as an **ERROR**, since a no-op plant reads exactly like a
+guard that did not fire.
+
+**Cause C — authored exemption vocabulary** (3 instances, one session). Three
+registry entries exempted on words drawn from the surrounding **corrected**
+text — "misnomer", "corrected 2026-09-03", "bound|deficit|saturat" — and
+correct text is exactly what surrounds a defect, so each reported clean on a
+live locus.
+*Fix (rule 3):* a standardized withdrawal marker accepted globally by both
+registries, with no per-entry vocabulary. Migration deliberately incremental
+(85+ loci depend on the legacy lists); both gates now **report** how many
+entries still rely on them — visible debt rather than silent.
+
+**What was not changed.** Four of the 21 re-touches were legitimate: the L5
+sequence (extrapolated → measured → refuted) needed information each earlier
+step lacked, and the M1 narrowing was the PI's own "be certain before sweeping"
+working correctly. **Re-touching on new information is not waste.**
+
+---
+
 ## [v5.6.0] - 2026-09-03
 
 **/qa trunk FULL run #4 = FAIL, remediated across four tranches.** Eleven
