@@ -337,7 +337,7 @@ def cesaro_2_normalization(n_max: int) -> sp.Rational:
 # ---------------------------------------------------------------------------
 
 
-def plancherel_symbol(n_max: int, j: Rational) -> sp.Rational:
+def plancherel_mass(n_max: int, j: Rational) -> sp.Rational:
     # NAMING CORRECTION 2026-09-04 (/qa DELTA #5).  This returns the Plancherel
     # MASS distribution (2j+1)/Z_{n_max}, not the multiplier symbol of T_K, and
     # the docstring below calling it "the j-th Fourier coefficient of K" is
@@ -349,13 +349,20 @@ def plancherel_symbol(n_max: int, j: Rational) -> sp.Rational:
     # (n_max = 4: true c_J = 1.000, 1.466, 1.812, 1.583, 1.266, 0.693, 0.400
     #  against this function's 0.1, 0.2, 0.3, 0.4, 0, 0, 0).
     #
-    # The band-doubling is the same envelope Paper 38 uses to refute Lemma L5,
-    # so the corpus currently proves N <= 2 n_max - 1 in one place and denies it
-    # here.  The VALUES are load-bearing in berezin_reconstruction,
-    # gh_convergence_tensor, central_fejer_compact_temporal and many pinned
-    # tests, so re-valuing the function is a scoped sprint of its own and is
-    # NOT done here;  this note exists so the next reader is not misled by the
-    # name.
+    # CORRECTED 2026-09-04 (/qa DELTA #6).  An earlier version of this note
+    # read the band-doubling as a corpus contradiction with Paper 38's L5
+    # refutation envelope and booked a sprint to resolve it.  There is no
+    # contradiction:  P keeps j <= j_max = (n_max - 1)/2, so the Berezin map
+    # B has band N <= n_max, while K = |D|^2 has character support up to
+    # 2 j_max, i.e. N <= 2 n_max - 1.  Two different objects.  The sprint
+    # booking is withdrawn.
+    #
+    # The DEFECT above is real and is not withdrawn -- it was measured on two
+    # independent routes.  The VALUES are load-bearing in
+    # berezin_reconstruction, gh_convergence_tensor,
+    # central_fejer_compact_temporal and many pinned tests, so re-valuing the
+    # function is out of scope here;  this note and the rename below exist so
+    # the next reader is not misled by the name.
     """Plancherel symbol hat{K}_{n_max}(j) of the natural-coefficient kernel.
 
     hat{K}_{n_max}(j) = (2j + 1) / Z_{n_max}  for j <= j_max
@@ -375,6 +382,12 @@ def plancherel_symbol(n_max: int, j: Rational) -> sp.Rational:
         raise ValueError(f"j = {j} not a non-negative half-integer")
     return Rational(2 * j + 1, normalization_constant(n_max))
 
+
+
+# Deprecated alias (renamed 2026-09-04).  "symbol" asserted that this is
+# the multiplier symbol of T_K, which the note above shows it is not;  86
+# call sites keep working under the old name.
+plancherel_symbol = plancherel_mass
 
 def plancherel_symbol_cesaro(n_max: int, j: Rational) -> sp.Rational:
     """Plancherel symbol of the Cesaro-2 kernel.

@@ -388,7 +388,15 @@ class LorentzianTunnelingPair:
         return float(np.linalg.norm(comm, ord=2))
 
     def height_P(self) -> float:
-        """Joint height_P = 0 exactly (P^joint is an orthogonal projection)."""
+        """WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved].
+
+        Was: "joint height_P = 0 exactly (P^joint is an orthogonal
+        projection)".  False by the finite-band witness (see
+        gh_convergence.height_B_witness), which gives height_P != 0 on the
+        full unit-Lipschitz ball.  Retained for the pinned diagnostics; it
+        does not enter the state-space GH bound, which is assembled from
+        the reach constituents alone at an unchanged value.
+        """
         return 0.0
 
     # -----------------------------------------------------------------
@@ -473,7 +481,11 @@ class LorentzianPropinquityBound:
 
     Historical (withdrawn) form:
     Lambda^L(T_L_truncated, T_L_continuum)
-        <= max(reach_B, reach_P, height_B, height_P)
+        <= max(reach_B, reach_P)
+        (WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: the
+         two height constituents were part of this max and are refuted --
+         height_B == 1, height_P != 0.  Value unchanged: reach and height
+         carried the same estimate.)
         <= C_3^joint * gamma^joint
         -> 0   as (n_max, N_t) -> (oo, oo).
 
@@ -584,7 +596,11 @@ def compute_lorentzian_propinquity_bound(
             height_B_max = hB
 
     # Theoretical bounds: reach_B <= C_3 * gamma^joint on unit Lipschitz ball;
-    # height_B <= gamma^joint via Stein-Weiss (Paper 38 Appendix A,
+    # WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]:
+    # height_B <= gamma^joint is FALSE (height_B == 1 identically).  The
+    # quantity below is the Stein-Weiss estimate, retained under this name
+    # for the pinned diagnostics, and no longer read as a height bound.
+    # Original note: height_B <= gamma^joint via Stein-Weiss (Paper 38 App. A,
     # inherited factor-wise to the joint setting per Sub-sprint C §5).
     #
     # For the K^+-restricted weak-form bound, we take the dominant

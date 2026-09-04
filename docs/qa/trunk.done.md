@@ -1,23 +1,38 @@
 <!-- CERT-STALENESS-BANNER -->
-> ### ⚠ RE-CERTIFICATION OWED
-> This record certifies the state as of **2026-06-16**. Since then **5 `.tex` changed**: Paper_0_Geometric_Packing.tex, Paper_7_Dimensionless_Vacuum.tex, paper_32_spectral_triple.tex, paper_38_su2_propinquity_convergence.tex, **group3_foundations_synthesis.tex**.
+> ### ⚠ RE-CERTIFICATION OWED — AND NOT CLOSE
+> The CERTIFIED verdict below is **historical**. Do not cite it as
+> present-tense status.
 >
-> *(Banner corrected 2026-09-01: it had omitted the synthesis — the same scope
-> gap `check_cert_staleness.py` itself carried until 2026-08-31, and the
-> document where the trunk FULL run's C9 zombie lived. A reviewer scoping from
-> this banner would have skipped it.)*
+> **Run record (all adverse, all remediated):**
 >
-> **2026-09-01 `/qa trunk` FULL run #1 = FAIL** (calibrated 13/13, 0 false
-> positives). **2026-09-01/02 FULL run #2 = FAIL** (19/21 seeds, 0/8 false
-> positives; two Sonnet code chunks PARTIAL 1/2 → the P0/P7 tests are
-> INCONCLUSIVE on the S3 class and the P32 tests on the S2 class; every LLM
-> dimension FAIL on content; 13/13 deterministic gates PASS). Remediation
-> scope: `docs/qa/trunk.carryforward.md` (run-#2 section + Part F); run
-> record: `debug/qa/trunk_full_run_2026_09_01_notes.md` §5.
+> | run | date | verdict |
+> |---|---|---|
+> | FULL #1 | 2026-09-01 | FAIL (calibrated 13/13, 0 FP) |
+> | FULL #2 | 2026-09-01/02 | FAIL (19/21 seeds, 0/8 FP) |
+> | DELTA #1 | 2026-09-02 | DEFECTS (9/9 seeds, 0/8 FP) |
+> | DELTA #2 | 2026-09-02 | DEFECTS (8/9, one void seed) |
+> | FULL #3 | 2026-09-02/03 | FAIL (unseeded; 55 MATERIAL) |
+> | DELTA #3 | 2026-09-03 | DEFECTS |
+> | DELTA #4 | 2026-09-03 | DEFECTS |
+> | FULL #4 | 2026-09-03 | FAIL (4 dimensions, 13 gates) |
+> | DELTA #5 | 2026-09-03/04 | DEFECTS |
+> | DELTA #6 | 2026-09-04 | DEFECTS |
 >
-> **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
+> **No run has produced PASS.** Only a FULL run can, and the last four FULL
+> runs each found material defects — several *introduced by the previous
+> run's own remediation*, which is why a clean DELTA is the precondition for
+> firing another FULL.
 >
-> Re-measure rather than trusting this banner — it is itself a snapshot and will go stale the same way:
+> Remediation scope: [`trunk.carryforward.md`](trunk.carryforward.md),
+> Parts F–N. Open at Part N.5: **the guard pass**, deliberately deferred as
+> its own separately-reviewed unit (CLAUDE.md §9) with six carried items.
+>
+> Spill outside trunk: group1 (Papers 38/39/40) and group3 were both edited
+> by trunk remediation, so their own records are staler than their banners say.
+>
+> *Re-measure rather than trusting this banner — it is a snapshot and has
+> already gone stale once, stopping at FULL #2 while eight further runs
+> landed:*
 > `python debug/qa/check_cert_staleness.py --detail`
 <!-- /CERT-STALENESS-BANNER -->
 

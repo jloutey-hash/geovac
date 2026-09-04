@@ -7,6 +7,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.8.4] - 2026-09-04
+
+**DELTA #6 remediation, non-guard half.** The guard half is deliberately
+excluded and carried as its own reviewed unit (CLAUDE.md §9).
+
+### Changed
+
+- **The false band envelope, and the sprint booked on it.** A docstring said
+  the Berezin map `B` has multiplier envelope `N ≤ 2 n_max − 1`. That is the
+  band of `K`'s character support and of `P M_f P`, not of `B`: `P` keeps
+  `j ≤ j_max = (n_max−1)/2`, so `B`'s image has `N = 2j+1 ≤ n_max`, while
+  `K = |D|²` reaches `2 j_max`, i.e. `N ≤ 2 n_max − 1`. Two different objects.
+  Only finiteness is load-bearing for the witness, so the conclusion is
+  unchanged — but on the strength of the wrong envelope a "scoped sprint" had
+  been booked in `central_fejer_su2.py` to resolve a corpus contradiction that
+  **does not exist**. That booking is withdrawn. The genuine measured defect
+  in the same note (the function returns 0 where `K` is demonstrably nonzero;
+  `σ(0)` should be 1, not `1/Z`; two independent routes) is NOT withdrawn, and
+  the function is renamed `plancherel_symbol` → **`plancherel_mass`** to say
+  what it returns (86 call sites keep working via a deprecated alias).
+- **Five unmarked L5 restatements** in `gh_convergence.py` (the assembly
+  `max(reach, reach, height, height)`, `height_P = 0`, the "driving rate"
+  paragraph, and two dataclass field docs) now carry the withdrawal. Every
+  reported **value is unchanged**: reach and height carried the same estimate,
+  so removing the refuted leg does not move the bound.
+- **The withdrawal reached the last two modules.**
+  `lorentzian_propinquity_compact_temporal.py` still had `height_P = 0
+  "exactly"`, `height_B ≤ γ^joint`, and the four-term assembly.
+  `ecosystem_export.py`'s **public** property called its return value "the
+  Latrémolière quantum Gromov–Hausdorff propinquity upper bound" — the corpus
+  claims van Suijlekom's **state-space GH** distance; Latrémolière propinquity
+  is strictly stronger and its dual-reach step is a named gap. That was the
+  most exposed surface in the corpus for a claim the corpus does not make.
+- **Paper 38: `thm:main`'s proof combined `eq:L5_bound`**, which the same
+  paper says twenty lines earlier is "not established by this route", and
+  hedged only that the route "inherits the panel scope of Lemma L3" — naming
+  L3's limitation while the actual problem was L5's refuted height leg.
+  Rerouted through `thm:main_unconditional`, which is established and which
+  the withdrawal remark already names as what survives.
+- **Paper 32, the 4th G3 locus.** The 2026-09-03 remediation corrected the
+  sentence calling G3 open by *inserting* the closure sentence, leaving the
+  follow-on "This is a clean S³-only target … that would, if successful, …"
+  pointing at the proven negative. A dangling demonstrative created by a
+  correction — the argument for re-reading the paragraph, not just the locus.
+- **Paper 0's abstract tagged the λ_max saturation [MEASURED]**; it is proved
+  (each ℓ-block is the grid graph `P_{n_max−ℓ} × P_{2ℓ+1}`, so the spectrum is
+  closed form), and Paper 7's body already carried [INTERNAL THEOREM] for the
+  same fact — the two documents disagreed about one claim's tier. Upgraded.
+- Paper 7's "with no rate proven here" is **correctly** scoped to the operator
+  convergence and was **not** deleted (the pending note to delete it would
+  have been an over-correction); its scope is now explicit rather than
+  inferred, since it sits beside a saturation whose rate *is* proven.
+
+### Added
+
+- `docs/qa/trunk.carryforward.md` **Part N** — DELTA #5/#6 and this
+  remediation, including the six carried guard items and the measurement
+  behind the dependency-staleness finding (8 of 10 recurring classes).
+
+### Verified
+
+- 13/13 deterministic gates PASS on trunk; trunk compiles with zero undefined
+  references; Papers 39 and 40 compile clean.
+
 ## [v5.8.3] - 2026-09-04
 
 **The `cited_by` dependency review, worked for the first time.** The scheme

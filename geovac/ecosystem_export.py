@@ -216,8 +216,11 @@ class GeoVacHamiltonian:
     def propinquity_bound(self) -> float:
         """Paper 38 basis-truncation error estimate (qualitative-rate).
 
-        Returns the Latrémolière quantum Gromov--Hausdorff propinquity
-        upper bound
+        Returns van Suijlekom's STATE-SPACE Gromov--Hausdorff upper bound
+        (corrected 2026-09-04: this said "the Latrémolière quantum
+        Gromov--Hausdorff propinquity", which the corpus does not claim --
+        that distance is strictly stronger and its dual-reach step is a
+        named gap, Paper 38 / Paper 40 Remark on L2)
 
             Lambda(T_{max_n}, T_{S^3}) <= C_3 * gamma_{max_n}
 

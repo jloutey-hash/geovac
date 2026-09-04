@@ -90,6 +90,11 @@ metric structure").  The propinquity bound then reads
 
     Lambda(T_{n_max}, T_S3) <= max( reach_B, reach_P, height_B, height_P ).
 
+    WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: the two
+    height constituents are refuted (height_B == 1, height_P != 0; see
+    height_B_witness).  The state-space GH bound below is assembled from
+    the reach constituents alone, and its VALUE is unchanged.
+
 L1'--L4 supply each piece:
 
   - reach_B  (L4(c) approximate-identity rate):
@@ -127,6 +132,8 @@ L1'--L4 supply each piece:
 
   - height_P  (truncation is UCP of operator norm 1 onto its image):
       0 (P is a projection, exact UCP).
+      WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: false by the
+      same finite-band witness that refutes height_B <= gamma.
 
 ERRATUM (2026-05-07): The original L5 implementation in this module
 used the operator-norm bound ||B(f)||_op as height_B, giving
@@ -139,7 +146,10 @@ See `height_B_op_norm` accessor for the legacy bound (kept for L4(b)
 sanity checks but no longer used in the propinquity computation).
 
 The *driving rate* of the propinquity is therefore the maximum of
-reach_B and height_B, both bounded by gamma_{n_max}.  The composite
+reach_B and height_B, both bounded by gamma_{n_max}.
+WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: height_B is not
+bounded by gamma_{n_max} -- it is identically 1.  The rate is driven by
+the reach constituents alone, at the same value.  The composite
 propinquity bound is
 
     Lambda(T_{n_max}, T_S3)  <=  C_3 * gamma_{n_max}
@@ -491,9 +501,14 @@ class TunnelingPair:
         """What height_B actually is: 1, at every cutoff.
 
         height_B is a supremum over the unit-Lipschitz ball of
-        |Lip(f) - Lip(B(f))|.  B is a finite-band reconstruction (multiplier
-        envelope N <= 2 n_max - 1), so at every finite cutoff the ball
-        contains f with B(f) = 0, for which the quantity is exactly Lip(f) = 1.
+        |Lip(f) - Lip(B(f))|.  B is a finite-band reconstruction: P keeps
+        j <= j_max = (n_max - 1)/2, so B's image has N = 2j + 1 <= n_max.
+        (CORRECTED 2026-09-04: this docstring said the envelope was
+        N <= 2 n_max - 1, which is the band of K's character support and of
+        P M_f P, not of B.  Only finiteness is load-bearing for the witness,
+        so the conclusion below is unchanged.)  At every finite cutoff the
+        ball therefore contains f with B(f) = 0, for which the quantity is
+        exactly Lip(f) = 1.
         Hence height_B == 1 identically, and the withdrawn estimate above
         fails whenever gamma < 1 -- i.e. for every n_max >= 6.
         """
@@ -566,13 +581,21 @@ class PropinquityBound:
         (computed via the corrected definition |||f||_Lip -
         ||B(f)||_Lip^{O_n_max}|, Paper 38 §3.5).
     height_B_bound : float
-        Theoretical Stein-Weiss upper bound on height_B = gamma_{n_max}.
+        WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved].
+        Was: "theoretical Stein-Weiss upper bound on height_B".  It is not
+        an upper bound on height_B, which is identically 1;  it is the
+        Stein-Weiss estimate gamma_{n_max}, retained under this name for
+        the pinned diagnostics that consume it.
     height_B_op_norm_panel : float
         Legacy operator-norm bound max ||B(f)||_op (L4(b) sanity).
         NOT used in propinquity_bound; retained for diagnostics.
     propinquity_bound : float
-        The propinquity bound Lambda(T_{n_max}, T_S3) <= this value.
-        Equal to max(reach_B_bound, height_B_bound) = gamma_{n_max}.
+        The state-space GH bound Lambda(T_{n_max}, T_S3) <= this value.
+        Assembled from the REACH constituent alone and equal to
+        reach_B_bound = gamma_{n_max};  the height constituents were
+        withdrawn 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]
+        and the value is unchanged, since reach and height carried the
+        same estimate.
     qualitative_rate_only : bool
         True if the rate is the qualitative gamma -> 0 (Track C
         quantitative rate not yet incorporated).

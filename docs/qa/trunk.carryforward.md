@@ -1170,3 +1170,115 @@ Opt-in `exempt_same_line` added.
 A DELTA on this remediation. Four tranches touched six papers, four modules and
 six test files; remediated text is not clean text, and one prior delta found 4
 of its 11 genuine findings were introduced by the previous run's own fixes.
+
+---
+
+## Part N — DELTA #5 and #6 (2026-09-03/04) and their remediation, v5.7.0..v5.8.3
+
+**Verdicts: DEFECTS, both.** Delta scope on the FULL #4 remediation
+(v5.6.0..), unseeded, standing calibration record cited. Both remediated;
+the guard half is deliberately **not** remediated here (see N.5).
+
+### N.1 — the finding that reorganised the cycle: dependency staleness
+
+The PI named it before the gate could: *"the failure mode we're still missing
+on seems to be in cross paper searches — resting on established ideas from
+other papers, then cutting the legs out from under that early paper's
+assertion."* Measured against the v5.4.4..v5.7.3 arc, **eight of the ten
+recurring defect classes** were exactly that: a claim corrected in the
+document that owns it and left standing in the documents that cite it. The
+sharpest instance is *"monotone from below"* — retired in Paper 0 and left
+false in Paper 7 **in the same commit**, and still false a day later.
+
+Why no pattern reaches this class: **a citing document restates the claim in
+its own words.** Paper 39 rested on Paper 38's height bound while saying "by
+Paper 38 §3.5 corrected definition"; Paper 7 restated the retired aliasing
+mechanism as "differential connectivity between pole and equatorial nodes".
+Neither shares a token with the retired phrase.
+
+The answer built for it (v5.8.0–v5.8.2) is the `cited_by` field: per retracted
+claim, the documents whose **argument** rests on it, distinct from `files`
+(where its wording may appear), with ratchet semantics matching C20/C22, plus
+the §13.8 rule that records a dependency **when the claim is written**, since
+reconstructing it at retraction time is the step that had been failing.
+
+### N.2 — first worked run of that field (v5.8.3)
+
+Five dependents were open. **All five carried a defect and none was reachable
+by a pattern.** Detail in CHANGELOG v5.8.3; the load-bearing one:
+
+**Paper 39's L5-T height leg is refuted and the constant improves.** The
+finite-band witness transports to the product verbatim
+(`B = B_a ⊗ B_b` annihilates `h = f ⊗ 1` for `f` above cutoff `n_a`), so
+`height_B ≡ 1` and `height_P ≠ 0`. Assembling from reach alone drops the rate
+constant from `1 + 2√2 ≈ 3.828` to **2** — the refuted leg was the larger —
+and exposes an arithmetic slip beside it: the withdrawn assembly bounded a
+`max` by a *sum*, and used `max(γ)` for the reach where its own reach
+paragraph derived `γ_a + γ_b`. The `Λ^full` column had been printing 1.914×
+too large. Corroborated twice independently: by the paper's own reach
+paragraph, and by the module's `propinquity_bound_full` field, which already
+tracked "a looser conservative 2γ estimate" — this bound.
+
+### N.3 — the small-cutoff generalisation
+
+*"Three to six times larger"* carried an **[INTERNAL THEOREM]** tag in two
+papers and is false. From the closed forms, the off-branch/on-branch ratio
+**grows without bound**, tracking `n_max/(√3 π)` to within 1%:
+
+| n_max | 30 | 120 | 300 | 3000 |
+|---|---|---|---|---|
+| ratio | 6.6× | 23× | 56× | 552× |
+
+"Three to six" is what the ratio looks like at the three cutoffs the papers
+sampled (28, 29, 30) — the `feedback_guard_asymptotics` failure mode, one
+cutoff past the data, promoted to a theorem tag. The unbounded ratio makes the
+s/p withdrawal **sharper**: the disparity diverges, so the decay is entirely
+residue-controlled.
+
+### N.4 — gates that could not do their job
+
+- **C22 could not accept a correctly-marked row.** It reuses C16's *patterns*
+  but honoured only `exempt_if_nearby`, not the standardized
+  `[retracted YYYY-MM-DD: <entry-id>]` marker — so an entry whose exemption is
+  deliberately `(?!)` ("only the marker exempts") was unsatisfiable in the
+  claim matrix: a properly withdrawn row failed forever. Now reads the marker
+  from C16's own `withdrawal_marker()`.
+- **The bare-prefix exemption was reintroduced by the commit that fixed it**
+  (`5ca0fb3`): v5.8.0 replaced the bare marker precisely because a bare token
+  silenced every entry in its window, then wrote two new entries in the
+  defective style inside the same commit.
+- **`_strip_markup`** (v5.8.x): four successive pattern rebuilds missed loci
+  for one reason — the pattern is written in prose and the corpus is typeset.
+  `$s/p$-lift` vs `s/p-lift` let a sweep report **clean with five loci live**.
+  Matching now runs on a markup-stripped copy; reporting still quotes the
+  original. On its first run it surfaced exactly the five loci the reviewer
+  had found by reading.
+
+### N.5 — deliberately NOT done here: the guard pass
+
+Per the rule adopted this cycle (CLAUDE.md §9), **guard-writing is a separate,
+separately-reviewed activity, not a step in the remediation** — because nearly
+every guard written in the same pass as its fix this cycle was defective, while
+nearly every substantive mathematical claim survived independent re-derivation.
+Operational test: *name the wrong answer this guard rejects.*
+
+Open guard items, carried:
+
+1. `fire_test.py --selftest`'s `import_ok` probe looks for
+   `<stem>.cpython-314.pyc` while pytest caches
+   `<stem>.cpython-314-pytest-9.0.2.pyc`, so with `_invalidate_bytecode`
+   neutered the selftest still passes. Correct probe = a second pytest run.
+2. `test_cb_norm_is_one` still asserts `1 == 1` after two rebuilds.
+3. `assert b.propinquity_bound == b.reach_B_bound` cannot detect reversion:
+   `C₃ = 1` makes both legs `γ`.
+4. The `height_B_witness` test uses `N = 6`, which cannot distinguish the
+   corrected band `N ≤ n_max` from the withdrawn `N ≤ 2n_max − 1`.
+5. **No test asserted the retired `1 + 2√2` constant** — the whole Paper 39
+   rate survived a rename and a constant change with 87 tests green.
+6. C22's check-C selftest proves the pattern fires; the new
+   marker-exemption branch is untested.
+
+### N.6 — next
+
+A DELTA on this remediation, then the guard pass as its own reviewed unit.
+`v5.4.1..v5.4.4` remains never-delta-reviewed (carried from M.6).
