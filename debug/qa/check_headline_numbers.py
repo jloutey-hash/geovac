@@ -45,6 +45,156 @@ GROUP4_FILES = [
 
 REGISTRY = [
     {
+        "id": "trunk-saturation-rate-constant",
+        "scope": "trunk group3",
+        "severity": "fail",
+        "canonical_note": "FULL run #4, 2026-09-03.  The l-block grid "
+                          "structure makes the Laplacian spectrum closed "
+                          "form, so the saturation deficit 2 d_max - "
+                          "lambda_max has an EXACT asymptotic constant: "
+                          "C = pi^2 (2 + 2^(1/3))^2 (1 + 2^(-2/3)) / 4 = "
+                          "42.7397...  The printed 42.6 is the n_max = 320 "
+                          "SAMPLE, not the limit (the sequence rises: 42.606 "
+                          "at 320, 42.731 at 5000, 42.739 at 40000).  42.6 "
+                          "stays legal as an explicitly-labelled finite-n "
+                          "value; it is wrong as 'the rate' or with o(1).",
+        "pattern": r"42\.6\s*\+\s*o\(1\)"
+                   r"|\(\s*42\.6\s*\+\s*o\(1\)\s*\)"
+                   r"|rate\s*\$?\(?42\.6"
+                   r"|42\.6\s*(?:\+\s*o\(1\)\s*)?/\s*n",
+        "require_nearby": r"n_\{?\\?max\}?|saturation|deficit|lambda_\{?\\?max|rate",
+        "exempt_if_nearby": r"sample|finite-n|at 320|n_\{\\max\} = 320|"
+                            r"corrected 2026-09|retired|superseded|42\.74",
+        "files": [
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "tests/test_paper1_block_spectrum.py",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
+        "id": "trunk-hydrogen-bound-not-accuracy",
+        "scope": "trunk group3",
+        "severity": "fail",
+        "canonical_note": "The hydrogen graph number is a SATURATION DEFICIT "
+                          "of a spectral bound, not an accuracy: E_0 = "
+                          "kappa*lambda_max by construction, so the quantity "
+                          "measured is lambda_max -> 2 d_max = 8.  CANONICAL: "
+                          "0.574% at n_max = 30, 0.325% at 40, 0.107% at 70.  "
+                          "RETIRED: '< 0.1%' as a hydrogen accuracy figure "
+                          "(corrected 2026-09-03).",
+        "pattern": r"H\s*\(hydrogen\)[^|\n]{0,40}\|\s*<\s*0\.1\\?%"
+                   r"|hydrogen[^.\n]{0,60}accuracy[^.\n]{0,30}0\.1\\?%"
+                   r"|\\?%\s*error[^.\n]{0,30}hydrogen graph",
+        "require_nearby": r"hydrogen|graph|lambda|deficit|S\^?3",
+        # NOTE (discrimination proof, 2026-09-03, third instance of
+        # this error): this list held "bound|deficit|saturat|by
+        # construction" -- the ordinary vocabulary of every
+        # neighbouring benchmark row -- so a planted "< 0.1%" was
+        # exempted by its own corrected siblings.  An exemption must
+        # name the SPECIFIC retraction (a date, a retirement word, or
+        # the replacement value), never the topic's vocabulary.
+        "exempt_if_nearby": r"corrected 2026-09-03|retired|formerly|"
+                            r"no longer|superseded",
+        # benchmark TABLE: see the exempt_same_line note in scan_entry
+        "exempt_same_line": True,
+        "files": [
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "docs/validation_benchmarks.md",
+            "CLAUDE.md",
+        ],
+    },
+    {
+        "id": "trunk-four-over-pi-normalisation",
+        "scope": "trunk group1 group3 synthesis",
+        "severity": "fail",
+        "canonical_note": "DELTA #4 + FULL #4, 2026-09-03.  The state-space GH "
+                          "rate constant is CONVENTION-DEPENDENT: 4/pi in the "
+                          "corpus's declared dual-Coxeter rule Cas(ad) = h^v, "
+                          "2/pi on the unit round S^3, 2 sqrt(2)/pi under the "
+                          "field-standard Kac basic form (theta|theta) = 2.  "
+                          "The unit-radius sphere-volume quotient is "
+                          "Vol(S^2)/Vol(S^3) = 2/pi; 4/pi is TWICE that.  So "
+                          "'4/pi is a quotient of unit-radius sphere volumes' "
+                          "is FALSE as printed (Paper 32 cor:m1_pure_tate), "
+                          "and any locus stating the constant must name its "
+                          "normalisation.",
+        # LaTeX markup may sit anywhere inside the phrase, so the words
+        # are matched with markup-tolerant gaps rather than literally.
+        "pattern": r"4\s*/\s*\\?pi[^.\n]{0,90}quotient\W{0,20}of\W{0,20}(?:\\emph\{)?unit-radius"
+                   r"|quotient\W{0,20}of\W{0,20}(?:\\emph\{)?unit-radius[^.\n]{0,60}4\s*/\s*\\?pi"
+                   r"|4\s*/\s*\\?pi\s*=\s*\\?(?:mathrm\{)?Vol\}?\(S\^\{?2\}?\)\s*/\s*\\?(?:mathrm\{)?Vol\}?\(\\?(?:s?three|S\^\{?3\}?)\)",
+        "require_nearby": r"Vol|volume|sphere|quotient|normalis|rate",
+        # NOTE (discrimination proof, 2026-09-03): "misnomer" and
+        # "corrected 2026-09-03" were in this list and swallowed the
+        # very locus the family exists for -- both appear in the
+        # defective sentence, flagging the Hopf-label fix it carries
+        # rather than the volume-quotient error it makes.  The only
+        # honest exemption is evidence of THIS correction: the factor 2.
+        "exempt_if_nearby": r"twice that|2\s*\\?(?:mathrm\{)?Vol|"
+                            r"is\s+2\s*/\s*\\?pi|not a quotient",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "docs/qa/trunk.done.md",
+            "docs/claims_register.md",
+        ],
+    },
+    {
+        "id": "trunk-forced-count-full-axiom",
+        "scope": "trunk group1",
+        "severity": "fail",
+        "canonical_note": "The Forced-Count moduli chain endpoint is 32 "
+                          "(2048 -> 1024 -> 512 -> 272 -> 32), stated at the "
+                          "FULL-AXIOM count per the trunk C8 delta.  RETIRED: "
+                          "260 (a representation bug, v5.4.1) and 128 (the "
+                          "matter-sector subcount presented as the endpoint).",
+        "pattern": r"full-axiom[^.\n]{0,60}\b(?:260|128)\b"
+                   r"|\b(?:260|128)\b[^.\n]{0,40}full-axiom"
+                   r"|forced[- ]count[^.\n]{0,40}\b(?:260|128)\b",
+        "require_nearby": r"moduli|forced|axiom|chain|order-one",
+        "exempt_if_nearby": r"retired|corrected|superseded|was |formerly|"
+                            r"matter-sector subcount|no longer|2026-09",
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex",
+            "docs/claim_test_matrix.md",
+            "docs/qa/trunk.done.md",
+        ],
+    },
+    {
+        "id": "trunk-sp-splitting-residue-disclosure",
+        "scope": "trunk group3 synthesis",
+        "severity": "fail",
+        "canonical_note": "FULL run #4, 2026-09-03.  The s/p splitting "
+                          "endpoint 0.39% at n_max = 30 is SELECTION-BIASED: "
+                          "lambda_2s = 3 EXACTLY whenever n_max = 0 (mod 3) "
+                          "and only there, so the multiples of three lie on a "
+                          "favourable branch (0.82/0.62/0.49/0.39% at "
+                          "21/24/27/30) while their neighbours are 3-6x "
+                          "larger (1.65% at 28, 2.58% at 29).  Any locus "
+                          "quoting the endpoint must disclose the residue "
+                          "class; quoting it as a convergence endpoint "
+                          "without that disclosure is the defect.",
+        "pattern": r"0\.39\d?\s*\\?%|0\.39\d?\\?%",
+        "require_nearby": r"s/p|2s|2p|splitting|degenerac|n_\{?\\?max\}?\s*=\s*30",
+        "exempt_if_nearby": r"mod 3|mod\\,3|residue|divisib|multiple of three|"
+                            r"branch|selection-bias|favourable|2026-09-03",
+        "files": [
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
         "id": "composed-lih-market-test-retired",
         "scope": "all",
         "severity": "fail",
@@ -560,6 +710,10 @@ def scan_entry(entry: dict, text_override: "str | None" = None):
     text_override: scan the given text as a single pseudo-file (self-test hook).
     """
     exempt = re.compile(entry["exempt_if_nearby"], re.IGNORECASE)
+    # Table surfaces: every row lies inside every other row's +-WINDOW, so a
+    # corrected sibling row exempts a defective one.  Opt in to same-line
+    # exemption where the gated surface is a table (2026-09-03).
+    exempt_same_line = entry.get("exempt_same_line", False)
     require = (re.compile(entry["require_nearby"], re.IGNORECASE)
                if "require_nearby" in entry else None)
     if "pattern" in entry:
@@ -581,7 +735,8 @@ def scan_entry(entry: dict, text_override: "str | None" = None):
             if require is not None and not require.search(window_txt):
                 continue  # outside this family's context (different quantity)
             snip = re.sub(r"\s+", " ", line.strip())[:160]
-            (ok if exempt.search(window_txt) else live).append((rel, i + 1, snip))
+            exempt_txt = line if exempt_same_line else window_txt
+            (ok if exempt.search(exempt_txt) else live).append((rel, i + 1, snip))
         return live, ok
 
     if text_override is not None:
@@ -626,14 +781,35 @@ def main() -> int:
         return any(_locus_gated(f) for f in e.get("files", []))
 
     _selected = [e for e in REGISTRY if selected(e)]
+
+    # GATE SELF-AUDIT (FULL run #4, 2026-09-03).  Family COUNT was not the
+    # honest measure.  On `--gate trunk` this printed "3/25 families" and
+    # PASS -- but all three were `scope: "all"` group4 families whose every
+    # declared locus lies outside the trunk, so the gate examined nothing
+    # while looking as though it had.  What matters is how many selected
+    # families have a declared locus INSIDE the gated scope.
+    def _has_gated_locus(e: dict) -> bool:
+        if _in_scope is None:
+            return True
+        return any(_locus_gated(f) for f in e.get("files", []))
+
+    _grounded = [e for e in _selected if _has_gated_locus(e)]
     if not _selected:
         print(f"   [scope] WARNING: --gate '{gate}' selected 0 of "
               f"{len(REGISTRY)} number families -- this run checks "
               f"NOTHING.")
+    if gate is not None and not _grounded:
+        print(f"   [scope] ERROR: --gate '{gate}' selected "
+              f"{len(_selected)} family/families, but NONE of them declares "
+              f"a locus inside this scope. The gate would examine nothing "
+              f"and print PASS. Add a family for this branch (C17 "
+              f"maintenance rule) rather than trusting this run.")
+        return 1
 
     n_live, n_exempt = 0, 0
     print(f"headline-number registry gate (C17)   [{scope}: "
-          f"{len(_selected)}/{len(REGISTRY)} families]\n")
+          f"{len(_selected)}/{len(REGISTRY)} families, "
+          f"{len(_grounded)} with a locus in scope]\n")
     for e in REGISTRY:
         if not selected(e):
             continue
@@ -648,11 +824,12 @@ def main() -> int:
 
     if n_live:
         print(f"\nRESULT: FAIL ({n_live} live wrong-headline "
-              f"occurrence(s) in {scope}; {len(_selected)}/"
-              f"{len(REGISTRY)} families)")
+              f"occurrence(s) in {scope}; {len(_grounded)}/"
+              f"{len(REGISTRY)} grounded families)")
         return 1
     print(f"\nRESULT: PASS (no live wrong headline value in {scope}"
-          f"; {len(_selected)}/{len(REGISTRY)} families"
+          f"; {len(_grounded)} grounded of {len(_selected)} selected "
+          f"of {len(REGISTRY)} families"
           + (f"; {n_exempt} exempt/historical mention(s))" if n_exempt else ")"))
     return 0
 

@@ -112,7 +112,15 @@ REGISTRY = [
                 "is retired is reading 4/pi ITSELF as a base-to-total ratio "
                 "or as a Haar quotient SU(2)/U(1).  "
                 "tests/test_p38_metric_convention.py.",
-        "pattern": r"Hopf[- ]base measure factor in the standard"
+        # Widened 2026-09-03 (FULL #4): the pattern required the literal
+        # "Hopf-base measure" adjacent to the constant, so Paper 32's
+        # "a Vol/Mellin-measure factor on the spatial $S^3$ Hopf base
+        # ($\Vol(S^2)/\pi^2 = 4/\pi$ ...)" -- the same retracted reading in
+        # different words -- was invisible.  I had written the pattern around
+        # the wording in front of me rather than around the class.
+        "pattern": r"on the spatial \$?S\^?\{?3\}?\$? Hopf base"
+                   r"|factor on the[^.\n]{0,30}Hopf base"
+                   r"|Hopf[- ]base measure factor in the standard"
                    r"|Hopf[- ]base measure (?:factor )?of \$?\\?(?:s)?three"
                    r"|Hopf[- ]base measure of \$\\sthree"
                    r"|(?:as|is) the\s+Hopf[- ]base measure[^.]{0,60}"
@@ -164,6 +172,8 @@ REGISTRY = [
         "scope": "group1 trunk",
         "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
             "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
             "geovac/gh_convergence.py",
@@ -210,6 +220,8 @@ REGISTRY = [
         "scope": "group1 trunk",
         "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
             "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
             "docs/outreach/note_n1_su2_truncations.tex",
@@ -645,6 +657,7 @@ REGISTRY = [
                             r"|open\s+named|not\s+a\s+Lorentzian",
         "files": [
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
             "papers/group1_operator_algebras/"
             "paper_38_su2_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_4[2-9]_*.tex",
@@ -739,6 +752,7 @@ REGISTRY = [
         "exempt_if_nearby": r"corrected 2026-09-03|retired|withdrawn|different quantity|printed before|earlier version|before 2026-09-03",
         "files": [
             "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
             "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
             "papers/group3_foundations/paper_18_exchange_constants.tex",
             "papers/group5_qed_gauge/paper_2_alpha.tex",
@@ -788,6 +802,7 @@ REGISTRY = [
             "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
             "papers/group3_foundations/paper_57_forced_free_seam.tex",
             "papers/group3_foundations/paper_18_exchange_constants.tex",
             "papers/synthesis/*.tex",
@@ -1228,6 +1243,36 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
     return live, ok
 
 
+def _coverage_report(gate: str) -> int:
+    """Which gated documents does each in-scope entry NOT declare?
+
+    A `files` list that omits a gated document is a silent scope hole: the
+    entry runs, reports clean, and never looked there.  The FULL #4 critic
+    found four of these by hand; this makes the question a command.
+    """
+    _in_scope, scope_files, _w = qa_scopes.make_predicate(gate)
+    gated = sorted({p.replace("\\", "/") for p in scope_files})
+    print(f"C16 scope coverage   [--gate {gate}: {len(gated)} document(s)]\n")
+    holes = 0
+    for e in REGISTRY:
+        if gate not in str(e.get("scope", "")):
+            continue
+        declared = set(e.get("files", []))
+        missing = [g for g in gated
+                   if not any(g.endswith(d) or d.endswith(g.split("/")[-1])
+                              for d in declared)]
+        mark = "ok " if not missing else "GAP"
+        print(f"  [{mark}] {e['id']}"
+              + (f"\n        not declared: "
+                 + ", ".join(m.split("/")[-1] for m in missing) if missing else ""))
+        holes += bool(missing)
+    print(f"\nRESULT: {holes} entry/entries do not declare every gated "
+          f"document. That is advisory -- a claim that cannot surface in a "
+          f"document need not name it -- but each GAP is a place the entry "
+          f"reports clean without looking.")
+    return 0
+
+
 def main() -> int:
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -1235,6 +1280,8 @@ def main() -> int:
         pass
     show_all = "--all" in sys.argv
     gate = _gate_substr(sys.argv)
+    if "--coverage" in sys.argv:
+        return _coverage_report(gate or "trunk")
     scope = f"scope '{gate}'" if gate else "ALL entries"
 
     # Entry selection is LOCUS-DERIVED as well as tag-based (2026-08-31
