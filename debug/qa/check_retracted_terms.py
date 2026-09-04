@@ -95,6 +95,26 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # lines.  Patterns are case-insensitive raw regex.  `files` are ROOT-relative
 # globs.  `severity`: "fail" (gates) | "advisory" (reports only).
 # ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# STANDARDIZED WITHDRAWAL MARKER (2026-09-03, /qa trunk FULL run #4 follow-up)
+#
+# `[retracted YYYY-MM-DD]` is accepted as a withdrawal flag for EVERY entry,
+# globally, in addition to that entry's own `exempt_if_nearby`.
+#
+# Rationale, from measured defects rather than taste: three registry entries
+# written this session exempted on vocabulary drawn from the surrounding
+# CORRECTED text -- "misnomer", "corrected 2026-09-03",
+# "bound|deficit|saturat" -- and correct text is exactly what surrounds a
+# defect, so each reported clean on a live locus.  Authored exemption
+# vocabulary is the failure mode; a fixed token removes the authoring step.
+#
+# New entries should set `exempt_if_nearby` to WITHDRAWAL_MARKER and nothing
+# else.  Existing entries keep their lists (85+ loci depend on them) and the
+# gate reports how many still do, so the debt shrinks instead of hiding.
+# ---------------------------------------------------------------------------
+WITHDRAWAL_MARKER = r"\[retracted \d{4}-\d{2}-\d{2}\]"
+
 REGISTRY = [
     {
         "id": "l5-height-bound-achieved",
@@ -1284,7 +1304,10 @@ def _resolve(globs: "list[str]") -> "list[pathlib.Path]":
 def scan_entry(entry: dict) -> "tuple[list, list]":
     """Return (live_hits, exempt_hits); each item = (relpath, line_no, snippet)."""
     pat = re.compile(entry["pattern"], re.IGNORECASE)
-    exempt = re.compile(entry["exempt_if_nearby"], re.IGNORECASE)
+    # The standardized marker is always accepted, on top of whatever this
+    # entry declares (see WITHDRAWAL_MARKER above).
+    exempt = re.compile(
+        WITHDRAWAL_MARKER + "|" + entry["exempt_if_nearby"], re.IGNORECASE)
     live, ok = [], []
     for path in _resolve(entry["files"]):
         text = path.read_text(encoding="utf-8", errors="replace")
@@ -1396,6 +1419,8 @@ def main() -> int:
               f"NOTHING. Add a '{gate}' entry scope, or use a scope "
               f"name that exists.")
 
+    _authored = [e["id"] for e in REGISTRY
+                 if e.get("exempt_if_nearby", "").strip() != WITHDRAWAL_MARKER]
     fail_hits, advisory_hits, exempt_total = [], [], 0
     print(f"retracted-claims / zombie-drift screen   [{scope}: "
           f"{len(_selected)}/{len(REGISTRY)} entries]\n")
@@ -1433,6 +1458,10 @@ def main() -> int:
               f"entries over {len(_files_seen)} declared locus "
               f"pattern(s))")
         return 1
+    print(f"   [marker] {len(_authored)} of {len(REGISTRY)} entries still rely "
+          f"on hand-authored exemption vocabulary rather than the standardized "
+          f"`[retracted YYYY-MM-DD]` token -- the class that produced three "
+          f"false-clean entries on 2026-09-03.  New entries use the token only.")
     print(f"\nRESULT: PASS (no live fail-severity retracted claim in "
           f"{scope}; {len(_selected)}/{len(REGISTRY)} entries over "
           f"{len(_files_seen)} declared locus pattern(s); {exempt_total} "

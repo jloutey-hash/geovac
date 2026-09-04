@@ -43,6 +43,26 @@ GROUP4_FILES = [
     "papers/synthesis/group4_quantum_computing_synthesis.tex",
 ]
 
+
+# ---------------------------------------------------------------------------
+# STANDARDIZED WITHDRAWAL MARKER (2026-09-03, /qa trunk FULL run #4 follow-up)
+#
+# `[retracted YYYY-MM-DD]` is accepted as a withdrawal flag for EVERY entry,
+# globally, in addition to that entry's own `exempt_if_nearby`.
+#
+# Rationale, from measured defects rather than taste: three registry entries
+# written this session exempted on vocabulary drawn from the surrounding
+# CORRECTED text -- "misnomer", "corrected 2026-09-03",
+# "bound|deficit|saturat" -- and correct text is exactly what surrounds a
+# defect, so each reported clean on a live locus.  Authored exemption
+# vocabulary is the failure mode; a fixed token removes the authoring step.
+#
+# New entries should set `exempt_if_nearby` to WITHDRAWAL_MARKER and nothing
+# else.  Existing entries keep their lists (85+ loci depend on them) and the
+# gate reports how many still do, so the debt shrinks instead of hiding.
+# ---------------------------------------------------------------------------
+WITHDRAWAL_MARKER = r"\[retracted \d{4}-\d{2}-\d{2}\]"
+
 REGISTRY = [
     {
         "id": "trunk-saturation-rate-constant",
@@ -709,7 +729,8 @@ def scan_entry(entry: dict, text_override: "str | None" = None):
 
     text_override: scan the given text as a single pseudo-file (self-test hook).
     """
-    exempt = re.compile(entry["exempt_if_nearby"], re.IGNORECASE)
+    exempt = re.compile(
+        WITHDRAWAL_MARKER + "|" + entry["exempt_if_nearby"], re.IGNORECASE)
     # Table surfaces: every row lies inside every other row's +-WINDOW, so a
     # corrected sibling row exempts a defective one.  Opt in to same-line
     # exemption where the gated surface is a table (2026-09-03).
@@ -806,7 +827,12 @@ def main() -> int:
               f"maintenance rule) rather than trusting this run.")
         return 1
 
+    _authored = [e["id"] for e in REGISTRY
+                 if e.get("exempt_if_nearby", "").strip() != WITHDRAWAL_MARKER]
     n_live, n_exempt = 0, 0
+    print(f"   [marker] {len(_authored)} of {len(REGISTRY)} families still "
+          f"rely on hand-authored exemption vocabulary rather than "
+          f"`[retracted YYYY-MM-DD]`.")
     print(f"headline-number registry gate (C17)   [{scope}: "
           f"{len(_selected)}/{len(REGISTRY)} families, "
           f"{len(_grounded)} with a locus in scope]\n")
