@@ -12,7 +12,7 @@
 \date{February 22, 2026}
 
 \begin{abstract}
-We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg quantum-number structure ($n$ and $\ell(\ell+1)$) from operator eigenvalues; the energies $E_n = -1/(2n^2)$ follow once the matched kinetic scale is applied (an Observation, Paper~7). \textbf{(ii) Geometric artifacts:} \textbf{[MEASURED]} The graph Laplacian lifts $s/p$ degeneracy at finite lattice cutoff ($37\%$ at $n_{\max}=5$, oscillating through $15.6\%$ at $8$ and $1.7\%$ at $10$ to $0.39\%$ at $30$ on the binary production lattice; see the \S III QA note) through differential weighted connectivity. Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit (which is a
+We present a discrete geometric framework for the hydrogen atom based on finite information capacity. The hydrogen state space is modeled as a paraboloid lattice dual to the SO(4,2) conformal algebra. This single-particle model exhibits a fundamental algebra-geometry duality: \textbf{(i) Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators $T_\pm, L_\pm$ reproduce the exact Rydberg quantum-number structure ($n$ and $\ell(\ell+1)$) from operator eigenvalues; the energies $E_n = -1/(2n^2)$ follow once the matched kinetic scale is applied (an Observation, Paper~7). \textbf{(ii) Geometric artifacts:} \textbf{[MEASURED]} A node-amplitude proxy for the $s/p$ gap is nonzero at finite lattice cutoff ($37\%$ at $n_{\max}=5$, oscillating through $15.6\%$ at $8$ and $1.7\%$ at $10$ to $0.39\%$ at $30$ on the binary production lattice; see the \S III QA note).  \textbf{[INTERNAL THEOREM]} Its size tracks the residue of $n_{\max}$ modulo $3$ --- exactly closed form on $n_{\max} \equiv 0$, and three to six times larger off it --- so the quoted endpoint sits on a favourable branch and the sequence is not evidence of convergence (2026-09-03;\ the earlier wording, ``the graph Laplacian lifts $s/p$ degeneracy \ldots\ through differential weighted connectivity'', both contradicted the clause below and named the weighted construction's mechanism for binary-lattice numbers, where every edge weight is~$1$). Systematic convergence analysis from $n_{\max}=5$ to 30 demonstrates this is a discretization artifact---spectral aliasing from lattice truncation---that oscillates and decays below 1\%, recovering the exact Coulomb degeneracy in the continuum limit (which is a
 statement about the continuum operator:\ the graph's $l$-blocks are
 disconnected, so the graph has no $s/p$ degeneracy of its own). \textbf{(iii) Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued transition operators; the edge-weight log-holonomy $\Theta(n) = -2\ln((n{+}1)/n) \sim n^{-1}$ measures the curvature of the weight function across the lattice. \textbf{Crucially, this model describes only the electron manifold}---electromagnetic interactions and the fine structure constant $\alpha$ cannot emerge from a single-particle lattice and require coupling to photon degrees of freedom, which we address in a companion paper.
 \end{abstract}
@@ -131,7 +131,11 @@ $n_{\max} = 8, 10, 15, 20$---whereas on the \emph{binary} production
 lattice (\texttt{GeometricLattice}, all edge weights 1, the object
 \texttt{AtomicSolver} uses) it is $37\%$, $12.7\%$, $0.65\%$, $15.6\%$,
 $5.1\%$, $1.7\%$, $2.7\%$, $1.7\%$, $1.1\%$, $4.1\%$, $1.8\%$ and $0.39\%$
-at $n_{\max} = 5, 6, 7, 8, 9, 10, 12, 15, 18, 20, 25, 30$.  What \emph{is}
+at $n_{\max} = 5, 6, 7, 8, 9, 10, 12, 15, 18, 20, 25, 30$.  Six of those twelve
+cutoffs are multiples of~$3$, including the endpoint, and on that residue class
+the value is exactly $\bigl(2-2\cos\frac{\pi}{n_{\max}-1}\bigr)/3$
+(Eq.~\eqref{eq:lambda2s_residue});\ the neighbouring cutoffs $28$ and $29$ give
+$1.65\%$ and $2.58\%$.  What \emph{is}
 verified (\texttt{tests/test\_trunk\_qa\_splitting.py},
 \texttt{test\_trunk\_qa\_degree\_table.py}) is therefore:\ higher-$l$
 states have higher connectivity ($D_{2p} > D_{2s}$) on the CG
@@ -174,12 +178,36 @@ CG-construction non-decay; the list printed before
 $n_{\max} = 5$, $20$ or $30$.)
 
 The splitting does not decay monotonically; it \emph{oscillates} at
-intermediate resolutions before collapsing to negligible values. This
-oscillatory decay is the hallmark of spectral aliasing: at low
-$n_{\max}$, the truncated boundary of the graph Laplacian introduces
-standing-wave reflections that differentially shift eigenvalues in
-distinct angular momentum sectors. As the boundary recedes (larger
-$n_{\max}$), these reflections weaken and the exact $s/p$ degeneracy
+intermediate resolutions.  \textbf{[INTERNAL THEOREM]} \emph{The oscillation
+is the residue of $n_{\max}$ modulo $3$, and the sequence is closed form}
+(2026-09-03).  The $\ell = 0$ block is the path $P_{n_{\max}}$, whose
+eigenvalues are $2 - 2\cos(j\pi/n_{\max})$;\ the mode selected by maximal
+overlap with the $2s$ node has $j = \operatorname{round}(2n_{\max}/3)$, so
+\begin{equation}
+  \lambda_{2s} = 3 \ \text{\emph{exactly}} \quad\Longleftrightarrow\quad
+  n_{\max} \equiv 0 \ (\mathrm{mod}\ 3),
+  \label{eq:lambda2s_residue}
+\end{equation}
+and on that branch the reported ratio is exactly
+$\bigl(2 - 2\cos\frac{\pi}{n_{\max}-1}\bigr)/3$ --- $2.7005$, $1.6715$,
+$1.1351$, $0.8208$, $0.6209$, $0.4861$ and $0.3908\%$ at
+$n_{\max} = 12, 15, 18, 21, 24, 27, 30$, matching the measured values to every
+digit printed.  Off that residue class the value is three to six times larger
+($1.65\%$ at $28$, $2.58\%$ at $29$).  \textbf{The endpoint quoted throughout
+this paper, $0.39\%$ at $n_{\max} = 30$, therefore lies on the favourable
+branch}, a selection this paper did not disclose before 2026-09-03.
+
+The decay is consequently $O(n_{\max}^{-2})$ along $n_{\max} \equiv 0$ and
+$O(n_{\max}^{-1})$ generically --- a proved rate, replacing the earlier
+statement that none was proven.  \emph{The mechanism previously printed here
+--- ``spectral aliasing\ldots\ standing-wave reflections that differentially
+shift eigenvalues in distinct angular momentum sectors'' --- is withdrawn:}
+the $\ell$-blocks are disconnected components
+(\texttt{tests/test\_paper1\_block\_spectrum.py}), so there is no $s/p$
+degeneracy present to alias and no cross-sector reflection to shift it.  Both
+selected eigenvalues approach $3 = 2 - 2\cos(2\pi/3)$ because the target node
+is vertex~$2$ of a path in each block.  As $n_{\max}$ grows the exact $s/p$
+degeneracy
 of the continuum Coulomb problem is recovered.
 
 \subsection{Physical Interpretation}
@@ -198,10 +226,14 @@ Hamiltonian. The transient splitting arises entirely from the finite
 extent of the graph, not from any force encoded in the topology.
 The graph Laplacian does not spontaneously generate the Lamb shift
 or replace electromagnetic interactions; it faithfully reproduces
-the Coulomb degeneracy in the limit of large lattices.  \textbf{[MEASURED]} The $s/p$
-splitting is a characterisable discretization artifact whose aliasing
-boundaries are mapped empirically through $n_{\max} = 30$ (no
-convergence rate is proven; see the \S III QA note).
+the Coulomb degeneracy in the limit of large lattices.  \textbf{[INTERNAL THEOREM]} The $s/p$
+node-amplitude proxy is a characterisable discretization artifact with a
+closed-form value on $n_{\max} \equiv 0 \ (\mathrm{mod}\ 3)$ and a proved
+rate --- $O(n_{\max}^{-2})$ there, $O(n_{\max}^{-1})$ generically
+(Eq.~\eqref{eq:lambda2s_residue};\ the earlier ``no convergence rate is
+proven'' is superseded).  Its magnitude depends on the residue of $n_{\max}$
+modulo $3$ rather than on proximity to a continuum limit, so it does not
+function as evidence of convergence;\ see the \S III QA note.
 
 
 \section{Geometric Phase Structure of the Lattice}
@@ -392,7 +424,7 @@ If quantum states are discrete nodes, what is the wavefunction $\psi(r)$? One po
 We have demonstrated that quantum mechanics, when formulated on a discrete paraboloid lattice, exhibits a dual structure:
 \begin{itemize}
 \item \textbf{Algebraic exactness:} \textbf{[PANEL-VERIFIED]} Transition operators reproduce the hydrogen quantum-number structure without corrections; the energies follow with the matched kinetic scale (Paper~7).
-\item \textbf{Understood discretization artifacts:} \textbf{[MEASURED]} The graph Laplacian's node-amplitude proxy for the $s/p$ gap is large at finite $n_{\max}$ (up to $37\%$ at $n_{\max}=5$ on the binary production lattice, $15.6\%$ at $8$, $1.7\%$ at $10$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates ($4.1\%$ at $n_{\max}=20$) and decays below 1\% by $n_{\max}=30$ ($0.39\%$), recovering the exact Coulomb degeneracy; on the CG-weighted construction of \S III the lift does \emph{not} decay ($129$, $68$, $84$ and $139\%$ at $n_{\max} = 8, 10, 15, 20$; \texttt{tests/test\_paper1\_block\_spectrum.py}), so the artifact-decay claim is scoped to the binary lattice, and both figures carry the conditioning caveat of \S III.
+\item \textbf{Understood discretization artifacts:} \textbf{[INTERNAL THEOREM]} The graph Laplacian's node-amplitude proxy for the $s/p$ gap is closed form on $n_{\max} \equiv 0 \ (\mathrm{mod}\ 3)$ and is set by that residue rather than by proximity to a continuum limit (2026-09-03), and is large at finite $n_{\max}$ (up to $37\%$ at $n_{\max}=5$ on the binary production lattice, $15.6\%$ at $8$, $1.7\%$ at $10$), but systematic convergence analysis confirms this is spectral aliasing from lattice truncation---not an emergent physical force. The splitting oscillates ($4.1\%$ at $n_{\max}=20$) and decays below 1\% by $n_{\max}=30$ ($0.39\%$), recovering the exact Coulomb degeneracy; on the CG-weighted construction of \S III the lift does \emph{not} decay ($129$, $68$, $84$ and $139\%$ at $n_{\max} = 8, 10, 15, 20$; \texttt{tests/test\_paper1\_block\_spectrum.py}), so the artifact-decay claim is scoped to the binary lattice, and both figures carry the conditioning caveat of \S III.
 \item \textbf{Geometric phase structure:} \textbf{[SYMBOLIC PROOF]} The Berry phase vanishes identically for the real-valued $SU(2)/SU(1,1)$ operators; the edge-weight log-holonomy decays as $\Theta \propto n^{-1}$, measuring the curvature of the weight function. Whether a $U(1)$ gauge extension can produce a genuine geometric phase with relativistic scaling remains an open question.
 \item \textbf{Kinematic completeness:} \textbf{[OBSERVATION]} The lattice encodes the $\alpha$-independent single-electron structure---the Coulomb quantum-number structure, angular momentum structure, and geometric phase effects---while cleanly separating boundary artifacts from physical content.
 \end{itemize}

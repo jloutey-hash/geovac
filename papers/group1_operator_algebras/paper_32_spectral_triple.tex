@@ -3503,9 +3503,11 @@ Math.\ Phys.\ 202).
 $(B_{n_{\max}}, P_{n_{\max}})$ between $\mathcal{T}_{S^3}$ and
 $\mathcal{T}_{n_{\max}}$ has reach $\le \gamma_{n_{\max}}$ in both
 directions (L4(c) approximate identity + the dual estimate via L2(g)
-Bo{\.z}ejko--Fendler), height contributions bounded constants
-(L4(b) contractivity + $\mathrm{height}_P = 0$ as $P$ is a projection),
-giving
+Bo{\.z}ejko--Fendler; \emph{the dual estimate is a withdrawn named
+gap}), height contributions bounded constants (L4(b) contractivity +
+$\mathrm{height}_P = 0$ --- \emph{both withdrawn 2026-09-03: L4(b) is not the
+relevant height, and $\mathrm{height}_P = 0$ is false by the same finite-band
+witness as $\mathrm{height}_B$}), giving
 $d_{\mathrm{GH}}(\mathcal{T}_{n_{\max}}, \mathcal{T}_{S^3}) \le
 C_3 \cdot \gamma_{n_{\max}} \to 0$ --- the state-space distance of the
 theorem statement, not the Latr{\'e}moli{\`e}re propinquity $\Lambda$,
@@ -3517,11 +3519,18 @@ The module's test panel does \emph{not} verify Lemma~L5 (measured
 cutoff ($0.667$, $0.808$, $0.878$, $0.913$, $0.937$, $0.952$ at
 $n_{\max} = 2, \ldots, 7$) while $\gamma_{n_{\max}}$ falls, so the margin
 shrinks from $+1.41$ to $+0.05$ and turns negative at $n_{\max} = 7$
-($-0.07$; measured 2026-09-03).  The panel is a fixed set
-of low-degree harmonics rather than the unit-Lipschitz ball the lemma
-quantifies over, so this neither confirms nor contradicts L5 (whose
-proof does not use the panel);\ identifying the panel-side quantity is
-an open check.  What the module reports is therefore the bound itself is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
+($-0.07$; measured 2026-09-03).  Normalised as printed (height over $\|f\|_{\mathrm{Lip}}$) the panel
+entries rescale into the unit-Lipschitz ball, so they are a \emph{subset} of
+the set L5's supremum ranges over and therefore a lower bound on it:\ an entry
+exceeding $\gamma_{n_{\max}}$ \emph{contradicts} the bound rather than leaving
+it open.  \textbf{Lemma~L5 is accordingly withdrawn as stated}
+(2026-09-03):\ Paper~38 gives a one-line witness --- $B_{n_{\max}}$ is
+finite-band, so the unit-Lipschitz ball contains $f$ with $B_{n_{\max}}(f) =
+0$ and $\mathrm{height}_B \equiv 1$ at every cutoff --- and the crossing is
+simply where $\gamma_{n_{\max}}$ falls below~$1$.  This paragraph read ``this
+neither confirms nor contradicts L5\ldots\ an open check'' until then.
+\textbf{Scope:} Paper~38's unconditional theorem uses no height constituent
+and is untouched, so the convergence statement and the WH1 keystone stand.  What the module reports is therefore the bound itself is $C_3\gamma_{n_{\max}} = 2.075, 1.610,
 1.322$ (these are the L2 moments $\gamma_2, \gamma_3, \gamma_4$, not
 independent measurements; ratio $0.637$).  Module
 \texttt{geovac/gh\_convergence.py} packages the assembly (48 unit

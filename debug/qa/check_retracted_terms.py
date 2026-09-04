@@ -97,6 +97,77 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # ---------------------------------------------------------------------------
 REGISTRY = [
     {
+        "id": "l5-height-bound-achieved",
+        "note": "FULL run #4, 2026-09-03.  Paper 38's Lemma L5 concluded "
+                "height_B <= gamma_nmax and height_P = 0.  Both are FALSE by "
+                "a one-line witness:\u00a0B_nmax is a finite-band reconstruction "
+                "(envelope N <= 2 n_max - 1), so the unit-Lipschitz ball "
+                "contains f with B(f) = 0, for which the height quantity is "
+                "exactly 1 -- hence height_B == 1 at every cutoff, and the "
+                "bound fails wherever gamma < 1 (every n_max >= 6).  The "
+                "v5.4.3/v5.4.4 reading of the measured crossing as 'an open "
+                "check on the panel-side quantity' is retired with it:\u00a0the "
+                "panel entries normalise INTO the ball, so they lower-bound "
+                "the supremum and an entry above gamma contradicts the bound. "
+                "Two printed steps are separately invalid (the compressed-"
+                "multiplier inequality runs the wrong way;\u00a0the good-kernel "
+                "estimate bounds a sup-norm, not a Lipschitz-seminorm "
+                "difference).  WHAT SURVIVES:\u00a0thm:main_unconditional uses "
+                "only reach-type estimates and is untouched, so the "
+                "convergence statement and WH1 stand -- do not read this as a "
+                "retraction of the keystone.",
+        "pattern": r"height_B\s*\\?le\s*\\gamma"
+                   r"|\\mathrm\{height\}_B\s*\\;?\\le\\;?\s*\\gamma"
+                   r"|\\mathrm\{height\}_P\s*\\;?=\\;?\s*0"
+                   r"|neither confirms nor contradicts L5"
+                   r"|identifying the panel-side quantity is\s*\n?\s*an open check",
+        "exempt_if_nearby": r"withdrawn|REFUTED|refuted|false by|retired|"
+                            r"until then|read \\`\\`this|printed here until",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        "files": [
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "geovac/gh_convergence.py",
+            "tests/test_gh_convergence.py",
+            "docs/qa/trunk.done.md",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
+        "id": "sp-splitting-aliasing-mechanism",
+        "note": "FULL run #4, 2026-09-03.  The s/p node-amplitude proxy was "
+                "attributed to 'spectral aliasing on a compact manifold' -- "
+                "boundary reflections differentially shifting eigenvalues "
+                "across angular-momentum sectors -- and its decay read as "
+                "'recovering the exact Coulomb degeneracy', a hallmark of "
+                "SO(4).  Both are refuted by the corpus's own result that the "
+                "l-blocks are DISCONNECTED components:\u00a0there is no s/p "
+                "degeneracy present to alias and no cross-sector reflection "
+                "to shift it.  Measured: lambda_2s = 3 exactly iff n_max = 0 "
+                "(mod 3), so the reported series tracks cutoff divisibility, "
+                "and the 0.39% endpoint sits on a favourable branch (1.65% at "
+                "28, 2.58% at 29).  The quantity IS closed form on that "
+                "branch -- (2 - 2cos(pi/(n_max-1)))/3 -- which is an upgrade; "
+                "what is retired is its use as evidence of convergence.",
+        "pattern": r"spectral aliasing on a compact manifold"
+                   r"|standing-wave reflections that differentially"
+                   r"|recovered degeneracy is the hallmark"
+                   r"|hallmark of spectral aliasing",
+        "exempt_if_nearby": r"withdrawn|retired|refuted|mod\s*3|residue|"
+                            r"disconnected|until 2026-09-03|no degeneracy",
+        "severity": "fail",
+        "scope": "group3 trunk synthesis",
+        "files": [
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
         "id": "hopf-base-label-for-4-over-pi",
         "note": "Trunk DELTA #4, 2026-09-03.  Paper 38's asymptotic constant "
                 "is a quotient of UNIT-RADIUS sphere volumes, "

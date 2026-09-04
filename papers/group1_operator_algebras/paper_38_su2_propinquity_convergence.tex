@@ -1354,7 +1354,12 @@ $\nmax = 6$ and $\nmax = 7$ (measured 2026-09-03):
     \text{margin} & +1.408 & +0.803 & +0.445 & +0.217 & +0.053 & -0.069
   \end{array}
 \]
-The panel is not the unit-Lipschitz ball quantified over here.  The proof
+Normalised as printed, the panel entries rescale into the
+unit-Lipschitz ball, so they are a subset of the set quantified over and a
+lower bound on the supremum:\ an entry exceeding $\gamma_{\nmax}$ contradicts
+the withdrawn bound.  The analytic witness of
+\eqref{eq:height_identically_one} settles the question independently of the
+panel.  The proof
 below does not use the panel;\ identifying the panel-side quantity is an
 open check.
 
@@ -1446,24 +1451,32 @@ themselves. Specifically,
    \;:=\; \sup_{\Lipnorm{f} \le 1}
    \bigl|\,\Lipnorm{f} - \Lipnorm{B_{\nmax}(f)}^{\Op_{\nmax}}\bigr|.
 \end{equation}
-By L4(d), $\Lipnorm{B_{\nmax}(f)}^{\Op_{\nmax}} =
-\opnorm{[\DCH, B_{\nmax}(f)]} \le \norm{\nabla f}_{L^\infty}
-\le \Lipnorm{f}$, so the absolute difference in
-\eqref{eq:height_B_definition} is bounded above by
-\begin{equation*}
-   \Lipnorm{f} - \Lipnorm{B_{\nmax}(f)}^{\Op_{\nmax}}
-   \;=\; \Lipnorm{f} - \opnorm{[\DCH, \Mat_{\KS_{\nmax}*f}]}
-   \;\le\; \Lipnorm{f} - \Lipnorm{\KS_{\nmax}*f}.
-\end{equation*}
-By the standard Lipschitz/good-kernel estimate (the same
-approximate-identity inequality used in L4(c)), the difference of
-Lipschitz norms is
-bounded by $\gamma_{\nmax}$:\ $\Lipnorm{f} - \Lipnorm{\KS_{\nmax}*f}
-\le \gamma_{\nmax}\Lipnorm{f}$. Hence
-\begin{equation*}
-   \mathrm{height}_B \;\le\; \gamma_{\nmax}, \qquad
-   \mathrm{height}_P \;=\; 0.
-\end{equation*}
+\textbf{[REFUTED AS STATED --- withdrawn 2026-09-03.]}  The argument
+printed here until that date concluded $\mathrm{height}_B \le
+\gamma_{\nmax}$ and $\mathrm{height}_P = 0$.  Both are false, by a
+one-line witness.  $B_{\nmax}$ is a finite-band reconstruction --- its
+multiplier envelope is $N \le 2\nmax - 1$ --- so at every finite cutoff the
+unit-Lipschitz ball contains $f$ with $B_{\nmax}(f) = 0$, and for any such $f$
+the quantity in \eqref{eq:height_B_definition} equals $\Lipnorm{f} = 1$.
+Hence
+\begin{equation}\label{eq:height_identically_one}
+   \mathrm{height}_B \;\equiv\; 1 \quad\text{at every } \nmax,
+\end{equation}
+and $\mathrm{height}_B \le \gamma_{\nmax}$ fails whenever $\gamma_{\nmax} < 1$,
+i.e.\ for every $\nmax \ge 6$ ($\gamma_6 = 0.98958$, $\gamma_7 = 0.88277$).
+The same witness gives $\mathrm{height}_P \ne 0$.  Two steps of the withdrawn
+chain are independently invalid:\ the inequality
+$\Lipnorm{f} - \opnorm{[\DCH, \Mat_{\KS_{\nmax}*f}]} \le \Lipnorm{f} -
+\Lipnorm{\KS_{\nmax}*f}$ runs the wrong way, $\Mat$ being the \emph{compressed}
+multiplier of \S\ref{sec:peter_weyl} and compression contracting;\ and the
+good-kernel estimate bounds $\norm{\KS_{\nmax}*f - f}_\infty$, not a difference
+of Lipschitz seminorms, which would require a second-order modulus.
+
+\emph{Scope of the withdrawal.}  What falls is this lemma and the L5 route to
+Theorem~\ref{thm:main}.  Theorem~\ref{thm:main_unconditional} is untouched:\ it
+uses only reach-type estimates and no height constituent, so the convergence
+statement --- and with it the WH1 keystone --- stands on that route.  A
+height-controlled assembly for this pair is an open problem.
 
 Inserting into \eqref{eq:propinquity_def}:
 \begin{equation*}

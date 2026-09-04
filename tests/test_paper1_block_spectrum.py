@@ -175,3 +175,100 @@ def test_cg_construction_splitting_does_not_decay():
     assert vals[20] > vals[10]                          # not monotone downward
     for n_max, expected in ((8, 1.2931), (10, 0.6817), (15, 0.8371), (20, 1.3878)):
         assert abs(vals[n_max] - expected) < 5e-3, (n_max, vals[n_max])
+
+
+# --- the s/p proxy is a residue artifact, and closed form on one branch -----
+# Paper 1 Eq. (lambda2s_residue), added by /qa trunk FULL run #4 (2026-09-03).
+
+def _sp_proxy_dense(n_max: int) -> tuple:
+    """(relative s/p splitting, lambda_2s) by full dense eigendecomposition of
+    the production lattice.  Reference route; O(N^3) in Sum n^2, so it is used
+    only for the equivalence cross-check."""
+    from geovac.lattice import GeometricLattice
+    from scipy.sparse import diags
+    lat = GeometricLattice(max_n=n_max)
+    A = lat.adjacency
+    deg = np.array(A.sum(axis=1)).flatten()
+    L = (diags(deg, 0, shape=A.shape, format="csr") - A).toarray()
+    idx = {st: i for i, st in enumerate(lat.states)}
+    w, v = np.linalg.eigh(L)
+    j2s = int(np.argmax(np.abs(v[idx[(2, 0, 0)], :])))
+    j2p = int(np.argmax(np.abs(v[idx[(2, 1, 0)], :])))
+    return abs(w[j2p] - w[j2s]) / abs(w[j2s]), w[j2s]
+
+
+def _sp_proxy(n_max: int) -> tuple:
+    """Same quantity, computed per block.
+
+    Legitimate because the l-blocks are disconnected components (pinned by
+    `test_l_zero_and_l_one_blocks_are_disconnected`): every eigenvector is
+    supported in one block, so the full-spectrum argmax equals the argmax
+    within the containing block.  `test_block_route_matches_dense` asserts the
+    equivalence rather than leaving it assumed.
+    """
+    from geovac.lattice import GeometricLattice
+    from scipy.sparse import diags
+    lat = GeometricLattice(max_n=n_max)
+    A = lat.adjacency
+    deg = np.array(A.sum(axis=1)).flatten()
+    idx = {st: i for i, st in enumerate(lat.states)}
+
+    def block_lambda(node, l):
+        rows = [i for st, i in idx.items() if st[1] == l]
+        pos = {i: k for k, i in enumerate(rows)}
+        sub = A[rows, :][:, rows].toarray()
+        Lb = np.diag(deg[rows]) - sub
+        w, v = np.linalg.eigh(Lb)
+        j = int(np.argmax(np.abs(v[pos[idx[node]], :])))
+        return w[j]
+
+    lam_2s = block_lambda((2, 0, 0), 0)
+    lam_2p = block_lambda((2, 1, 0), 1)
+    return abs(lam_2p - lam_2s) / abs(lam_2s), lam_2s
+
+
+@pytest.mark.parametrize("n_max", [12, 15])
+def test_block_route_matches_dense(n_max):
+    """The per-block route is exactly the full-spectrum one -- asserted, not
+    assumed, since the fast route rests on the disconnectedness the paper
+    claims."""
+    fast, lam_f = _sp_proxy(n_max)
+    slow, lam_s = _sp_proxy_dense(n_max)
+    assert abs(fast - slow) < 1e-12, (n_max, fast, slow)
+    assert abs(lam_f - lam_s) < 1e-12, (n_max, lam_f, lam_s)
+
+
+@pytest.mark.parametrize("n_max", [12, 15, 18, 21, 24, 27, 30])
+def test_lambda_2s_is_exactly_three_on_multiples_of_three(n_max):
+    """lambda_2s = 3 EXACTLY iff n_max = 0 (mod 3).  Measured against a dense
+    eigendecomposition, not against the closed form."""
+    _, lam = _sp_proxy(n_max)
+    assert abs(lam - 3.0) < 1e-9, (n_max, lam)
+
+
+@pytest.mark.parametrize("n_max", [22, 23, 25, 26, 28, 29])
+def test_lambda_2s_is_not_three_off_that_branch(n_max):
+    """The contrast that makes the residue structure a finding rather than a
+    coincidence: off the branch, lambda_2s is measurably away from 3."""
+    _, lam = _sp_proxy(n_max)
+    assert abs(lam - 3.0) > 0.05, (n_max, lam)
+
+
+@pytest.mark.parametrize("n_max", [12, 15, 18, 21, 24, 27, 30])
+def test_sp_proxy_closed_form_on_the_branch(n_max):
+    """On n_max = 0 (mod 3) the proxy is exactly (2 - 2cos(pi/(n_max-1)))/3."""
+    ratio, _ = _sp_proxy(n_max)
+    closed = (2 - 2 * np.cos(np.pi / (n_max - 1))) / 3
+    assert abs(ratio - closed) < 1e-9, (n_max, ratio, closed)
+
+
+def test_sp_endpoint_is_selection_biased():
+    """The reported endpoint sits on the favourable branch: 0.39% at n_max=30,
+    against 1.65% at 28 and 2.58% at 29.  This is what retires the series as
+    evidence of convergence -- it tracks cutoff divisibility."""
+    at30 = _sp_proxy(30)[0] * 100
+    at28 = _sp_proxy(28)[0] * 100
+    at29 = _sp_proxy(29)[0] * 100
+    assert abs(at30 - 0.391) < 0.01, at30
+    assert at28 > 3 * at30, (at28, at30)
+    assert at29 > 5 * at30, (at29, at30)
