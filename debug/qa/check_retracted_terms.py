@@ -113,7 +113,26 @@ WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
 # else.  Existing entries keep their lists (85+ loci depend on them) and the
 # gate reports how many still do, so the debt shrinks instead of hiding.
 # ---------------------------------------------------------------------------
-WITHDRAWAL_MARKER = r"\[retracted \d{4}-\d{2}-\d{2}\]"
+# REDESIGNED 2026-09-04 (/qa DELTA #5).  The first version was a BARE
+# token, OR'd into every entry's exemption -- so one
+# `[retracted YYYY-MM-DD]` silenced ALL entries in its window, including
+# entries written for unrelated claims.  A probe confirmed it: a comment
+# withdrawing the Hopf-base label silenced a live volume-quotient defect
+# in the next sentence.  A fixed token names nothing, which is exactly
+# what the discrimination rule above forbids.
+#
+# The marker now carries the entry id it withdraws, so it exempts THAT
+# entry and no other, while still requiring nothing to be invented --
+# the id is looked up from the registry:
+#
+#     [retracted 2026-09-04: hopf-base-label-for-4-over-pi]
+def withdrawal_marker(entry_id: str) -> str:
+    """Regex matching the standardized marker FOR THIS ENTRY only."""
+    return (r"\[retracted \d{4}-\d{2}-\d{2}:\s*"
+            + re.escape(entry_id) + r"\]")
+
+
+WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
 REGISTRY = [
     {
@@ -136,11 +155,19 @@ REGISTRY = [
                 "only reach-type estimates and is untouched, so the "
                 "convergence statement and WH1 stand -- do not read this as a "
                 "retraction of the keystone.",
-        "pattern": r"height_B\s*\\?le\s*\\gamma"
-                   r"|\\mathrm\{height\}_B\s*\\;?\\le\\;?\s*\\gamma"
-                   r"|\\mathrm\{height\}_P\s*\\;?=\\;?\s*0"
+        # REBUILT 2026-09-04 (/qa DELTA #5): four of the five original
+        # alternatives matched ZERO lines corpus-wide -- one required a
+        # literal \gamma so no plain-text locus could match, two
+        # required a thin-space \;\le spelling that occurs nowhere,
+        # and one embedded \n under a line-by-line scanner.  The entry
+        # guarding the run's biggest withdrawal caught nothing.
+        # These are wording-tolerant and cover LaTeX, code and prose.
+        "pattern": r"height\}?[_ ]?B[^\n]{0,40}?(?:<=|\\le|\\leq)[^\n]{0,25}?gamma"
+                   r"|height\}?[_ ]?P[^\n]{0,30}?(?:=|==|is)\s*(?:0|0\.0|zero)\b"
                    r"|neither confirms nor contradicts L5"
-                   r"|identifying the panel-side quantity is\s*\n?\s*an open check",
+                   r"|panel-side quantity is"
+                   r"|exceeds gamma from n_max"
+                   r"|height_B_theoretical\(\)[^\n]{0,40}upper bound",
         "exempt_if_nearby": r"withdrawn|REFUTED|refuted|false by|retired|"
                             r"until then|read \\`\\`this|printed here until",
         "severity": "fail",
@@ -151,6 +178,8 @@ REGISTRY = [
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
             "geovac/gh_convergence.py",
             "tests/test_gh_convergence.py",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
             "docs/qa/trunk.done.md",
             "docs/claim_test_matrix.md",
         ],
@@ -1307,7 +1336,8 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
     # The standardized marker is always accepted, on top of whatever this
     # entry declares (see WITHDRAWAL_MARKER above).
     exempt = re.compile(
-        WITHDRAWAL_MARKER + "|" + entry["exempt_if_nearby"], re.IGNORECASE)
+        withdrawal_marker(entry["id"]) + "|" + entry["exempt_if_nearby"],
+        re.IGNORECASE)
     live, ok = [], []
     for path in _resolve(entry["files"]):
         text = path.read_text(encoding="utf-8", errors="replace")
@@ -1420,7 +1450,7 @@ def main() -> int:
               f"name that exists.")
 
     _authored = [e["id"] for e in REGISTRY
-                 if e.get("exempt_if_nearby", "").strip() != WITHDRAWAL_MARKER]
+                 if not e.get("exempt_if_nearby", "").strip().startswith("[retracted")]
     fail_hits, advisory_hits, exempt_total = [], [], 0
     print(f"retracted-claims / zombie-drift screen   [{scope}: "
           f"{len(_selected)}/{len(REGISTRY)} entries]\n")

@@ -116,7 +116,10 @@ L1'--L4 supply each piece:
       gradient inequality, and the Stein-Weiss closed-form bound
       (Paper 38 Appendix A),
 
-          height_B  <=  gamma_{n_max}   (vanishes with n_max).
+          height_B  <=  gamma_{n_max}   -- WITHDRAWN 2026-09-04.
+          height_B == 1 identically (finite-band witness), so this
+          estimate fails for every n_max >= 6; the bound rests on the
+          reach leg alone.
 
       *NOT* the operator-norm bound ||B(f)||_op <= ||f||_inf <= pi
       (which would be the height for the quantum-compact-metric-space
@@ -426,7 +429,9 @@ class TunnelingPair:
         The Stein-Weiss closed-form bound (Paper 38 Appendix A) gives
         the structural upper bound
 
-            height_B  <=  gamma_{n_max}     (vanishes with n_max).
+            height_B  <=  gamma_{n_max}     -- WITHDRAWN 2026-09-04.
+            height_B == 1 identically (finite-band witness); the bound
+            rests on the reach leg alone.
 
         See also `height_B_op_norm` for the legacy operator-norm bound,
         which is the height of the *quantum-compact-metric-space*
@@ -467,28 +472,40 @@ class TunnelingPair:
         """
         return self.berezin.operator_norm(f)
 
-    def height_B_theoretical(self) -> float:
-        """Structural Stein-Weiss upper bound on height_B.
+    def height_B_l5_estimate(self) -> float:
+        """The WITHDRAWN L5 height estimate.  Retained for provenance only.
 
-        Per Paper 38 Appendix A, the Lipschitz-distortion height of
-        the Berezin map admits the closed-form upper bound
-
-            height_B  <=  gamma_{n_max}.
-
-        This is the rate-controlling height contribution to the
-        state-space GH bound.  It is a THEORETICAL bound (equal to gamma
-        by definition); the measured panel quantity is `height_B`, and
-        `compute_propinquity_bound` checks the inequality on the panel.
+        Paper 38 Lemma L5 concluded `height_B <= gamma_{n_max}` and this
+        returned gamma accordingly.  That bound is REFUTED (withdrawn
+        2026-09-03; see `height_B_witness`), so this value must not be fed
+        into any assembly.  It is kept because the printed record cites it
+        and removing it silently would make the retraction unauditable.
         """
         return float(self.gamma_rate_value)
 
-    def height_P(self) -> float:
-        """L4 truncation P is a projection: height_P = 0 exactly.
+    # Deprecated alias: the old name asserted the withdrawn bound in its
+    # very spelling ("theoretical" upper bound on height_B).
+    height_B_theoretical = height_B_l5_estimate
 
-        Compression by an orthogonal projection is UCP of operator norm
-        1 (Stinespring), so the height contribution from P is the trivial
-        zero (P does not introduce any new positivity / Lipschitz
-        distortion beyond the inherent UCP-ness).
+    def height_B_witness(self) -> float:
+        """What height_B actually is: 1, at every cutoff.
+
+        height_B is a supremum over the unit-Lipschitz ball of
+        |Lip(f) - Lip(B(f))|.  B is a finite-band reconstruction (multiplier
+        envelope N <= 2 n_max - 1), so at every finite cutoff the ball
+        contains f with B(f) = 0, for which the quantity is exactly Lip(f) = 1.
+        Hence height_B == 1 identically, and the withdrawn estimate above
+        fails whenever gamma < 1 -- i.e. for every n_max >= 6.
+        """
+        return 1.0
+
+    def height_P(self) -> float:
+        """WITHDRAWN: L5 claimed height_P = 0 because P is a projection.
+
+        The same finite-band witness that refutes `height_B <= gamma` gives
+        height_P != 0, so this return value is not the L5 height constituent
+        it was documented as.  Retained at 0.0 for provenance; not used in
+        any assembly (2026-09-03 withdrawal, carried into code 2026-09-04).
         """
         return 0.0
 
@@ -506,17 +523,21 @@ class PropinquityBound:
     Latremoliere quantum-GH propinquity: the dual-reach step reach_P below is a
     named gap, so propinquity is not claimed -- see Paper 38/40.)
 
-    Lambda(T_{n_max}, T_S3) <= bound = max(reach_B, reach_P, height_B, height_P)
+    d_GH(T_{n_max}, T_S3) <= gamma_{n_max} -> 0.
 
-    For our tunneling pair (per Paper 38 §3.5 corrected L5 proof):
-      - reach_B  <= gamma_{n_max} (L2 mass-concentration rate) * C_3 = 1
-      - reach_P  <= gamma_{n_max} (dual reach, L2(c) cb-norm symmetry; NAMED GAP)
-      - height_B <= gamma_{n_max} (Lipschitz-distortion of B; L4(d) +
-                                   Stein-Weiss, Paper 38 Appendix A)
-      - height_P  = 0             (P is a projection)
+    PROVENANCE, corrected 2026-09-04.  This used to be assembled as the
+    four-constituent maximum of Paper 38 Lemma L5:
 
-    All four constituents are therefore bounded by gamma_{n_max}, so
-    Lambda(T_{n_max}, T_S3) <= C_3 * gamma_{n_max} = gamma_{n_max} -> 0.
+        max(reach_B, reach_P, height_B, height_P)
+
+    with `height_B <= gamma` and `height_P = 0`.  BOTH height claims are
+    REFUTED (height_B == 1 identically, by the finite-band witness), so L5 is
+    withdrawn and that assembly is not available.
+
+    The VALUE is unchanged, because it never depended on the height leg:
+    reach_B <= C_3 * gamma = gamma, and Paper 38's *unconditional* theorem
+    bounds the state-space GH distance by gamma using reach-type estimates
+    ALONE.  What changed is which theorem this number comes from.
 
     NOTE on the height correction.  Earlier versions of this module
     used the operator-norm bound height_B <= ||B(f)||_op <= ||f||_inf
@@ -661,24 +682,23 @@ def compute_propinquity_bound(
     # tabulated in r25_l3_lipschitz_bound).
     reach_B_theoretical = pair.c_lipschitz * pair.gamma_rate_value
 
-    # Theoretical bound on the Lipschitz-distortion height: by L4(d)
-    # + Young's gradient inequality + Stein-Weiss (Paper 38 Appendix A),
-    # height_B <= gamma_{n_max} on the unit Lipschitz ball.
-    height_B_theoretical = pair.height_B_theoretical()
+    # Retained for provenance; NOT an input to the bound below.  Lemma L5's
+    # `height_B <= gamma` is refuted (height_B == 1 identically), so the
+    # four-constituent assembly this module used until 2026-09-04 is gone.
+    height_B_l5_estimate = pair.height_B_l5_estimate()
 
-    # State-space GH bound: max of the THEORETICAL reach/height bounds,
-    # both gamma_{n_max} (modulo C_3 = 1 from L3); reach_P = height_P = 0.
-    # This value is gamma by construction.  The panel quantities below are
-    # reported (they used to be discarded) but they do NOT verify Lemma L5:
-    # the panel height/Lip rises toward ~1 while gamma falls, so it exceeds
-    # gamma from n_max ~ 6 (2026-09-03, DELTA #3).  The lemma's proof does
-    # not use the panel; identifying the panel-side quantity is open.
-    propinquity = max(
-        reach_B_theoretical,    # <= C_3 * gamma_{n_max} = gamma_{n_max}
-        height_B_theoretical,   # <= gamma_{n_max} (Stein-Weiss)
-        0.0,                    # reach_P = 0
-        0.0,                    # height_P = 0
-    )
+    # State-space GH bound from the REACH leg alone, which is what Paper 38's
+    # unconditional theorem uses.  The value is unchanged (reach_B = C_3 *
+    # gamma = gamma); only its justification is, since the height constituents
+    # it used to be maxed against are withdrawn.
+    propinquity = reach_B_theoretical  # <= C_3 * gamma_{n_max} = gamma_{n_max}
+
+    # Panel note.  The panel quantities are reported, not used.  Two DIFFERENT
+    # crossings were conflated here until 2026-09-04:  gamma falls below 1
+    # between n_max 5 and 6, whereas the PANEL height/Lip rises past gamma
+    # between n_max 6 and 7 (margins +0.053 at 6, -0.069 at 7).  Neither
+    # verifies L5 -- the lemma is refuted analytically, independently of the
+    # panel -- and identifying the panel-side quantity remains open.
 
     bound = PropinquityBound(
         n_max=n_max,
@@ -688,7 +708,7 @@ def compute_propinquity_bound(
         reach_B_panel=reach_B_max,
         reach_B_bound=reach_B_theoretical,
         height_B_panel=height_B_max,
-        height_B_bound=height_B_theoretical,
+        height_B_bound=height_B_l5_estimate,   # withdrawn L5 estimate, reported not used
         height_B_op_norm_panel=height_B_op_norm_max,
         propinquity_bound=propinquity,
         qualitative_rate_only=False,

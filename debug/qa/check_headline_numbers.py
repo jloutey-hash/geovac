@@ -61,7 +61,26 @@ GROUP4_FILES = [
 # else.  Existing entries keep their lists (85+ loci depend on them) and the
 # gate reports how many still do, so the debt shrinks instead of hiding.
 # ---------------------------------------------------------------------------
-WITHDRAWAL_MARKER = r"\[retracted \d{4}-\d{2}-\d{2}\]"
+# REDESIGNED 2026-09-04 (/qa DELTA #5).  The first version was a BARE
+# token, OR'd into every entry's exemption -- so one
+# `[retracted YYYY-MM-DD]` silenced ALL entries in its window, including
+# entries written for unrelated claims.  A probe confirmed it: a comment
+# withdrawing the Hopf-base label silenced a live volume-quotient defect
+# in the next sentence.  A fixed token names nothing, which is exactly
+# what the discrimination rule above forbids.
+#
+# The marker now carries the entry id it withdraws, so it exempts THAT
+# entry and no other, while still requiring nothing to be invented --
+# the id is looked up from the registry:
+#
+#     [retracted 2026-09-04: hopf-base-label-for-4-over-pi]
+def withdrawal_marker(entry_id: str) -> str:
+    """Regex matching the standardized marker FOR THIS ENTRY only."""
+    return (r"\[retracted \d{4}-\d{2}-\d{2}:\s*"
+            + re.escape(entry_id) + r"\]")
+
+
+WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
 REGISTRY = [
     {
@@ -730,7 +749,8 @@ def scan_entry(entry: dict, text_override: "str | None" = None):
     text_override: scan the given text as a single pseudo-file (self-test hook).
     """
     exempt = re.compile(
-        WITHDRAWAL_MARKER + "|" + entry["exempt_if_nearby"], re.IGNORECASE)
+        withdrawal_marker(entry["id"]) + "|" + entry["exempt_if_nearby"],
+        re.IGNORECASE)
     # Table surfaces: every row lies inside every other row's +-WINDOW, so a
     # corrected sibling row exempts a defective one.  Opt in to same-line
     # exemption where the gated surface is a table (2026-09-03).
@@ -828,7 +848,7 @@ def main() -> int:
         return 1
 
     _authored = [e["id"] for e in REGISTRY
-                 if e.get("exempt_if_nearby", "").strip() != WITHDRAWAL_MARKER]
+                 if not e.get("exempt_if_nearby", "").strip().startswith("[retracted")]
     n_live, n_exempt = 0, 0
     print(f"   [marker] {len(_authored)} of {len(REGISTRY)} families still "
           f"rely on hand-authored exemption vocabulary rather than "

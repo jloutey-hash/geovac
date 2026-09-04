@@ -1792,9 +1792,22 @@ By Lemma~\ref{lem:L4}(d), $\Lipnorm{B_\Lammax(f)}^{\Op_\Lammax} =
 \opnorm{[\Dop_G, B_\Lammax(f)]} \le \norm{\nabla f}_{L^\infty} \le
 \Lipnorm{f}$. The standard Lipschitz/good-kernel estimate gives
 $\Lipnorm{f} - \Lipnorm{\KS_\Lammax * f} \le \gamma_\Lammax(G)
-\Lipnorm{f}$, so $\mathrm{height}_B \le \gamma_\Lammax(G)$. The dual
+\Lipnorm{f}$, so $\mathrm{height}_B \le \gamma_\Lammax(G)$;\ and the dual
 height $\mathrm{height}_P = 0$ because $P_\Lammax$ is an orthogonal
 projection.
+
+\textbf{[WITHDRAWN 2026-09-04.]}  Both height statements in the paragraph
+above are false, by the witness Paper~38 gives for the rank-one case:\
+$B_\Lammax$ is a finite-band reconstruction, so the unit-Lipschitz ball
+contains $f$ with $B_\Lammax(f) = 0$, for which
+$|\Lipnorm{f} - \Lipnorm{B_\Lammax(f)}| = \Lipnorm{f}$ --- hence
+$\mathrm{height}_B \equiv 1$ and $\mathrm{height}_P \ne 0$, at every cutoff
+and \emph{at every rank}, the argument being independent of $G$.  The
+estimate therefore fails whenever $\gamma_\Lammax(G) < 1$.
+\emph{Open check:} Paper~38's unconditional theorem survives because it uses
+only reach-type estimates;\ whether the assembly here can be re-derived on
+the same footing at general rank is not settled, and Theorem~\ref{thm:main}
+of this paper should not be cited as height-controlled until it is.
 
 Combining the forward estimates (the state-space GH assembly of
 Paper~38, Lemma~L5; the max over the four terms is what the would-be

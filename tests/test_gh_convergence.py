@@ -195,9 +195,25 @@ class TestReachAndHeight:
         assert rB_2 > 0
         assert rB_3 > 0
 
-    def test_height_P_zero(self, pair_n2: TunnelingPair):
-        """P is a projection: height_P = 0."""
-        assert pair_n2.height_P() == 0.0
+    def test_height_P_zero_is_withdrawn_provenance_only(self, pair_n2: TunnelingPair):
+        """`height_P() == 0.0` is provenance, not a fact about the L5 height.
+
+        L5 claimed height_P = 0 "because P is a projection".  The same
+        finite-band witness that refutes `height_B <= gamma` gives
+        height_P != 0, so this return value is not the L5 constituent it was
+        documented as, and it is no longer an input to any assembly
+        (withdrawn 2026-09-03, carried into code 2026-09-04).
+
+        The previous version of this test asserted the same equality as a
+        property of the tunneling pair, against a function whose body is
+        `return 0.0` -- tautological as well as refuted.
+        """
+        assert pair_n2.height_P() == 0.0          # provenance value, unchanged
+        from geovac.gh_convergence import compute_propinquity_bound
+        b = compute_propinquity_bound(2)
+        # the assembly must no longer depend on it: the bound equals the reach
+        # leg exactly, not a max involving the height constituents
+        assert b.propinquity_bound == b.reach_B_bound
 
     def test_height_B_op_norm_l4b_contractivity(self, pair_n2: TunnelingPair):
         """L4(b) contractivity sanity (legacy bound): ||B(f)||_op <= ||f||_inf.
@@ -224,15 +240,32 @@ class TestReachAndHeight:
         hB = pair_n2.height_B(f_const)
         assert hB >= 0.0
 
-    def test_height_B_lipschitz_normalised_below_gamma(self, pair_n2: TunnelingPair):
-        """The L5 height inequality on a unit harmonic: height_B(f)/||f||_Lip
-        <= gamma_{n_max}.  (Replaces a test that asserted a dataclass
-        default equal to gamma; 2026-09-03.)"""
+    def test_height_B_witness_annihilates_out_of_band(self, pair_n2: TunnelingPair):
+        """The witness that refutes L5: B kills something in the unit ball.
+
+        B is a finite-band reconstruction (envelope N <= 2 n_max - 1), so the
+        unit-Lipschitz ball contains f with B(f) = 0, for which
+        |Lip(f) - Lip(B(f))| = Lip(f).  Normalised, that is 1 -- hence
+        height_B == 1 identically and `height_B <= gamma` fails wherever
+        gamma < 1, i.e. every n_max >= 6.
+
+        This replaces a test that asserted the withdrawn inequality itself,
+        which was green only because its fixture is n_max = 2, where
+        gamma = 2.075 > 1.  Measured here rather than restated: the harmonic
+        is built out of band and B's action on it is computed.
+        """
         from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_test_function
-        f = make_test_function("Y3_(2,0,0)", {(2, 0, 0): 1.0})
+        # degree well beyond the n_max = 2 envelope (N <= 3)
+        f = make_test_function("Y3_(6,0,0)", {(6, 0, 0): 1.0})
         f_lip = float(lipschitz_norm_inf_test_function(f, prec=30))
         assert f_lip > 0
-        assert pair_n2.height_B(f) / f_lip <= pair_n2.gamma_rate_value
+        h = pair_n2.height_B(f)
+        # B annihilates it, so the distortion is the whole Lipschitz norm
+        assert abs(h / f_lip - 1.0) < 1e-6, h / f_lip
+        assert pair_n2.height_B_witness() == 1.0
+        # and that is what makes the withdrawn bound false at large cutoff
+        from geovac.central_fejer_su2 import gamma_rate
+        assert float(gamma_rate(6)) < pair_n2.height_B_witness()   # 0.9896 < 1
 
     def test_height_B_constant_function_zero(self, pair_n2: TunnelingPair):
         """A constant function has zero Lipschitz norm both before and after B,
@@ -323,8 +356,12 @@ class TestPropinquityBound:
         does NOT vanish with the cutoff -- the panel is a fixed set of
         low-degree harmonics, not the unit-Lipschitz ball the lemma quantifies
         over -- so the lemma is neither confirmed nor contradicted by it.
-        The theorem's own proof does not use the panel.  Identifying the
-        panel-side quantity is a named open check (Paper 38 L5 scope note).
+        Lemma L5 is REFUTED analytically (2026-09-03), independently of this
+        panel: height_B == 1 identically by the finite-band witness.  Two
+        different crossings were conflated before 2026-09-04 -- gamma falls
+        below 1 between n_max 5 and 6, while the PANEL rises past gamma
+        between 6 and 7.  Identifying the panel-side quantity remains open,
+        but nothing now rests on it.
         """
         rows = {n: compute_propinquity_bound(n) for n in (2, 3, 4)}
         for n, b in rows.items():

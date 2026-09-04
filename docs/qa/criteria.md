@@ -470,7 +470,7 @@ quietly rises.
 ## Hard rules
 - **Gate-first sweeps.** A claim-level correction is registered in C16/C17 *before* it is applied, and the gate's locus list is what gets swept — not memory. Twelve avoidable re-passes in the v5.4.4..v5.6.0 arc came from the other order.
 - **A guard is not finished until it has failed.** `debug/qa/fire_test.py` — eight guards that could not fail were found in one certification cycle, none by inspection.
-- **Withdrawal flags use `[retracted YYYY-MM-DD]`.** Authored exemption vocabulary produced three false-clean registry entries in one session.
+- **Withdrawal flags use `[retracted YYYY-MM-DD: <entry-id>]`.** Authored exemption vocabulary produced three false-clean registry entries in one session; a *bare* token then over-exempted every entry in its window (DELTA #5). The id is looked up, not invented, and exempts only the entry it names.
 
 - **PI-invoked only.** The PM never self-triggers `/qa`, runs it proactively, or
   suggests it each sprint.

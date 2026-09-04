@@ -1394,7 +1394,7 @@ is Theorem~\ref{thm:main_unconditional}, and the pair below supplies
 the explicit forward-reconstruction refinement.
 
 \begin{lemma}[L5:\ Berezin-pair refinement of the forward
-direction;\ \textbf{[PANEL-VERIFIED]}]\label{lem:L5}
+direction;\ \textbf{[REFUTED AS STATED --- withdrawn 2026-09-03]}]\label{lem:L5}
 Within the framework of \S~\ref{sec:named_gaps} (kernel condition
 Proposition~\ref{prop:kernel_condition};\ distance bound
 Theorem~\ref{thm:main_unconditional}), the pair
@@ -1418,7 +1418,9 @@ The four constituents a Latr\'emoli\`ere tunnel would require are:
 \item $\mathrm{reach}_P$, the dual reach via the partial inverse,
 \item $\mathrm{height}_B$, the Lipschitz-distortion envelope of
 $B_{\nmax}$ (defined precisely below),
-\item $\mathrm{height}_P = 0$ for the orthogonal projection.
+\item $\mathrm{height}_P = 0$ for the orthogonal projection
+\emph{(withdrawn:\ false by the same finite-band witness as
+$\mathrm{height}_B$, see below)}.
 \end{enumerate}
 
 \emph{Reach.} By L4(c), $\mathrm{reach}_B \le
@@ -1478,16 +1480,21 @@ uses only reach-type estimates and no height constituent, so the convergence
 statement --- and with it the WH1 keystone --- stands on that route.  A
 height-controlled assembly for this pair is an open problem.
 
-Inserting into \eqref{eq:propinquity_def}:
+\emph{The assembly this proof used to close with is withdrawn with the
+height constituents.}  It read
 \begin{equation*}
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
    \;\le\; \max\bigl(\gamma_{\nmax}, \gamma_{\nmax},
    \gamma_{\nmax}, 0\bigr)
-   \;=\; \gamma_{\nmax}
-   \;=\; C_3 \cdot \gamma_{\nmax}
-   \;\to\; 0 \;\;\text{as}\;\; \nmax \to \infty,
+   \;=\; C_3 \cdot \gamma_{\nmax},
 \end{equation*}
-which gives \eqref{eq:L5_bound}.
+whose third and fourth arguments are the refuted $\mathrm{height}_B \le
+\gamma_{\nmax}$ and $\mathrm{height}_P = 0$.  \textbf{The conclusion
+\eqref{eq:L5_bound} is therefore not established by this route.}  What
+survives is Theorem~\ref{thm:main_unconditional}, which bounds the same
+state-space GH distance by $\gamma_{\nmax}$ using reach-type estimates alone
+and no height constituent --- so the \emph{statement} of
+Theorem~\ref{thm:main} stands, by that route, and the WH1 keystone with it.
 \end{proof}
 
 \begin{remark}[On the height term]\label{rem:height_definition}

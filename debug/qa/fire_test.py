@@ -30,10 +30,17 @@ Each --plant is "OLD=>NEW".  Multiple --plant flags apply in order.  Exit code
 is 0 when every plant made the selected tests FAIL (the guard discriminates)
 and 1 when any plant left them green (the guard is asleep).
 
-The repo is never modified: plants are applied to a scratch copy, the original
-is restored from a byte copy in a finally block, and the scratch file is
-removed.  A plant that does not match its anchor is an error, not a silent
-pass -- a no-op plant would otherwise read as "guard did not fire".
+The target is mutated IN PLACE and restored from a byte copy in a finally
+block, then its cached bytecode is dropped and its mtime freshened.  That last
+step is not decoration: without it a length-preserving plant leaves the
+interpreter serving bytecode compiled from the MUTATED source against pristine
+source, because a .pyc validates on (int(mtime), size).  The tool did exactly
+that until 2026-09-04, and /qa DELTA #5 caught a trunk test failing on a clean
+working tree as a result.  An earlier version of this docstring claimed plants
+went to "a scratch copy"; they never did.
+
+A plant that does not match its anchor is an error, and so is a no-op plant --
+either would otherwise read as "guard did not fire", accusing a working guard.
 """
 from __future__ import annotations
 
@@ -48,14 +55,45 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
+def _invalidate_bytecode(target: str) -> None:
+    """Drop the target's cached bytecode and freshen its mtime.
+
+    Without this the tool poisons __pycache__ (found by /qa DELTA #5): the
+    backup/restore cycle can leave the interpreter serving bytecode compiled
+    from the MUTATED source against pristine source on disk, because a .pyc is
+    validated on (int(mtime), size) and a length-preserving plant changes
+    neither once shutil.move restores the backup's timestamp.  The failure is
+    silent and delayed -- a later regression run reports on code that is not in
+    the repo -- so both defences are applied.
+    """
+    os.utime(target, None)
+    d, base = os.path.split(os.path.abspath(target))
+    stem = os.path.splitext(base)[0]
+    cache = os.path.join(d, "__pycache__")
+    if os.path.isdir(cache):
+        for name in os.listdir(cache):
+            if name.startswith(stem + "."):
+                try:
+                    os.remove(os.path.join(cache, name))
+                except OSError:
+                    pass
+
+
 def _apply(text: str, plants: list[tuple[str, str]], where: str) -> str:
     for old, new in plants:
+        if old == new:
+            raise SystemExit(
+                f"ERROR: no-op plant in {where} (OLD == NEW).\n"
+                f"It would be reported as 'DID NOT FIRE', which accuses a "
+                f"working guard of being asleep.  Give a real mutation.")
         n = text.count(old)
         if n == 0:
             raise SystemExit(
                 f"ERROR: plant anchor not found in {where}:\n  {old!r}\n"
                 f"A plant that matches nothing looks exactly like a guard that "
                 f"did not fire.  Fix the anchor.")
+        if n > 1:
+            print(f"  note: anchor occurs {n}x in {where}; mutating the first.")
         text = text.replace(old, new, 1)
     return text
 
@@ -75,9 +113,16 @@ def run(test_path: str, plants: list[tuple[str, str]],
         src = io.open(target, encoding="utf-8").read()
         io.open(target, "w", encoding="utf-8", newline="\n").write(
             _apply(src, plants, plant_in or test_path))
+        # Invalidate BEFORE the run as well.  A length-preserving plant written
+        # in the same wall-clock second as the last compile leaves the .pyc
+        # header valid, so the interpreter would run the ORIGINAL bytecode and
+        # the tool would report a sound guard as asleep -- a false accusation,
+        # and the more dangerous direction of this bug, since nothing surfaces.
+        _invalidate_bytecode(target)
         proc = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     finally:
         shutil.move(backup, target)
+        _invalidate_bytecode(target)
 
     fired = proc.returncode != 0
     if not quiet:
@@ -109,9 +154,26 @@ def _selftest() -> int:
                    selector="test_real_guard")
         taut = run(rel, [("VALUE = 2.0", "VALUE = 3.0")],
                    selector="test_tautological_guard")
-        ok = real and not taut
+        # Restoration fidelity: content AND what the interpreter actually
+        # imports.  The tool poisoned __pycache__ until 2026-09-04 and the
+        # selftest could not see it, because it only ever checked the source
+        # bytes.  A length-preserving plant is used deliberately.
+        after = io.open(path, encoding="utf-8").read()
+        content_ok = "VALUE = 2.0" in after and "VALUE = 3.0" not in after
+        probe = subprocess.run(
+            [sys.executable, "-c",
+             "import importlib.util,sys;"
+             f"spec=importlib.util.spec_from_file_location('p',r'{path}');"
+             "m=importlib.util.module_from_spec(spec);"
+             "spec.loader.exec_module(m);print(m.VALUE)"],
+            cwd=ROOT, capture_output=True, text=True)
+        import_ok = probe.stdout.strip() == "2.0"
+        ok = real and not taut and content_ok and import_ok
         print(f"  real guard fired: {real}   (expected True)")
         print(f"  tautological guard fired: {taut}   (expected False)")
+        print(f"  source restored byte-exactly: {content_ok}   (expected True)")
+        print(f"  interpreter imports the RESTORED value: {import_ok}   "
+              f"(expected True -- catches __pycache__ poisoning)")
         print(f"\nRESULT: {'PASS' if ok else 'FAIL'} "
               f"(the helper separates a guard that tests something from one "
               f"that restates itself)")
