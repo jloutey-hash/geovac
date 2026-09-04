@@ -196,7 +196,14 @@ REGISTRY = [
                    r"|a degeneracy that is recovered"
                    r"|degeneracy lift[^.\n]{0,60}decays"
                    r"|saturation[^.\n]{0,40}and the (?:decay of the )?s/p",
-        "exempt_if_nearby": r"\[retracted",
+        # Only this entry's own standardized marker exempts it:
+        # `withdrawal_marker(id)` is OR'd in automatically, so the
+        # per-entry pattern must never match.  A bare r"\[retracted"
+        # here matches ANY marker, including one naming an unrelated
+        # entry -- the exact over-exemption the entry-id redesign was
+        # written to kill, reintroduced in that same commit and caught
+        # by DELTA #6.
+        "exempt_if_nearby": r"(?!)",
         "severity": "fail",
         "scope": "group3 trunk synthesis",
                 # Documents whose ARGUMENT rests on this claim (distinct
@@ -229,7 +236,14 @@ REGISTRY = [
                    r"|discrete graph converges[^.\n]{0,80}and that limit is"
                    r"|conformal equivalence between the discrete[^.\n]{0,60}established"
                    r"|discrete Fock graph's continuum limit is\s*\n?\s*conformally equivalent",
-        "exempt_if_nearby": r"\[retracted",
+        # Only this entry's own standardized marker exempts it:
+        # `withdrawal_marker(id)` is OR'd in automatically, so the
+        # per-entry pattern must never match.  A bare r"\[retracted"
+        # here matches ANY marker, including one naming an unrelated
+        # entry -- the exact over-exemption the entry-id redesign was
+        # written to kill, reintroduced in that same commit and caught
+        # by DELTA #6.
+        "exempt_if_nearby": r"(?!)",
         "severity": "fail",
         "scope": "group3 trunk synthesis",
                 # Documents whose ARGUMENT rests on this claim (distinct
