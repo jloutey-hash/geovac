@@ -7,6 +7,122 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.6.0] - 2026-09-03
+
+**/qa trunk FULL run #4 = FAIL, remediated across four tranches.** Eleven
+reviewers (five code, two claims, two citations, one synthesis, one
+completeness-critic), all four gating dimensions exercised, thirteen
+deterministic gates. Verdict FAIL on ~20 LARGE and ~40 SMALL verified findings.
+Minor bump: the gate apparatus changed and two published readings were
+withdrawn.
+
+### The finding that reframes the others
+
+**Two gates were examining nothing.** C17 had 25 headline-number families and
+**zero scoped to trunk**; the three the trunk gate selected were group4
+composed-LiH families with no locus in any trunk document. `\gvq` appears **zero
+times** in all six trunk papers, so C21's annotation and convention checks had
+no surface either. Every "13/13 deterministic gates PASS" on trunk since those
+gates existed was two-thirteenths hollow.
+
+That is not a bookkeeping error. This cycle produced seven trunk headline
+re-pricings and **every one went into C16** — a blocklist, which catches a
+retired *wording* coming back and by construction cannot catch a **correct**
+value drifting to a second locus. That second class is what dominated this run.
+
+### Two published readings withdrawn
+
+**The s/p evidence leg is an artifact of cutoff divisibility.** λ₂ₛ = 3 exactly
+when n_max ≡ 0 (mod 3) and only there, so the reported series samples a
+favourable branch at its endpoint: 0.39% at n_max = 30 against 1.65% at 28 and
+2.58% at 29. Found by three independent routes. The mechanism the papers gave
+it — "spectral aliasing on a compact manifold", "the recovered degeneracy is
+the hallmark of SO(4)" — is refuted by the corpus's own result that the
+ℓ-blocks are disconnected: there is no degeneracy present to alias. **Paper 7's
+continuum reading now rests on the λ_max saturation alone.**
+
+*Simultaneously an upgrade:* on that branch the quantity is closed form,
+(2 − 2cos(π/(n_max−1)))/3, exact at every multiple of three from 12 to 30 — so
+the limit is proved, O(1/n²) there and O(1/n) generically, retiring the papers'
+own "no convergence rate is proven".
+
+**Paper 38's Lemma L5 height bound is false, not open.** height_B is a supremum
+over the unit-Lipschitz ball; B is finite-band, so the ball contains f with
+B(f) = 0, for which the quantity is exactly 1. Hence height_B ≡ 1 identically,
+and the bound fails wherever γ < 1 — every n_max ≥ 6. **That is exactly the
+crossing v5.4.4 measured and read as an open question about the panel-side
+quantity.** Both papers' panel notes said the data "neither confirms nor
+contradicts"; normalised as printed, the entries rescale *into* the ball, so
+they lower-bound the supremum and an entry above γ contradicts it.
+*Scope:* `thm:main_unconditional` uses only reach-type estimates and is
+untouched — **WH1 stands**, and `thm:main`'s statement survives through the
+unconditional route. One proof path falls, not a theorem.
+
+### Wrong objects
+
+Three papers described operators they do not use.
+
+- **Paper 1** stated "exact diagonalization of H" with H = β(D−A) + V; the
+  printed percentages are the bare Laplacian's. Under the stated operator they
+  run to 621% and the "decays below 1%" conclusion fails. β was never valued,
+  and no production module builds that operator.
+- **Paper 32's Dirac label set** gives dimensions 2/10/28 against its own
+  formula's 4/16/40. The set that works is κ = ±(l+1), which the code
+  implements and whose docstring rejects the paper's reading. It propagated
+  into `prop:reality`, whose proof would have given ε′ = −1.
+- **Paper 7's helium appendix** claimed the graph Laplacian as its one-body
+  operator; the module builds a hybrid with exact hydrogenic eigenvalues on the
+  diagonal. That is the one place the paper's thesis is cashed out numerically.
+
+### Also corrected
+
+The saturation constant 42.6 was the n_max = 320 **sample**; the limit is
+C = (π²/4)(2+2^{1/3})²(1+2^{−2/3}) = 42.7397, in closed form — which earns the
+[INTERNAL THEOREM] tag the sentence already carried on a fit. Paper 32 claimed
+4/π "is a quotient of unit-radius sphere volumes" (that quotient is 2/π; 4/π is
+twice it), wrote the Hopf bundle as S³ → S² × S¹, printed 1/π² = 1/Vol(S¹)²
+(false: Vol(S¹) = 2π), and presented G3 as "the most reachable" gap fifty lines
+after recording it CLOSED NEGATIVE. Paper 38 credited Connes 1995 with an
+"even, KO-3" triple his table forbids. Paper 1 said the Frobenius ratio "drifts
+through ≈1.77 without converging"; it converges to 2√6/3. The Forced-Count
+proof sketch said the order-one condition "kills every lepton–quark entry" while
+12 of the 16 real Majorana moduli **are** those entries.
+
+### Five guards that could not fail
+
+Including two I wrote the day before: the seminorm test asserted
+max(a/2) = max(a)/2 (an identity — the Dirac operator appeared only in its
+docstring), and the wrong-product control short-circuited on an array shape
+before comparing a single eigenvalue. Also a `gap[1] < 1e-9` true by
+construction, a cb-norm test asserting a retracted value against itself, and
+the L5 crossing test, whose `@pytest.mark.slow` meant the only backing for the
+numbers v5.4.4 printed never ran. All five rebuilt and fire-tested.
+
+**Live in production code:** `central_multiplier_cb_norm` returned the
+Plancherel mass maximum while its docstring called it a cb-norm — which Paper 38
+L2(c) explicitly denies and `rem:history38` records as the withdrawn draft's
+error. T_K is UCP, so its cb-norm is 1 exactly. Renamed with a deprecated
+alias; L2(c)'s actual content, which had no test at all, now has one.
+
+### Instrument work
+
+Five trunk families added to C17, each proven two-way; three fired on live
+defects the moment they existed. The gate now reports how many families have a
+locus **inside** the gated scope and refuses to print PASS when that is zero.
+C16 gained the four scope holes the critic found, a widened Hopf pattern (mine
+required a literal string and missed the class), an opt-in `exempt_same_line`
+for table surfaces (a ±3-line window lets a corrected row exempt a defective
+one), and a `--coverage` audit. Both withdrawals are registered.
+
+*Three of my own registry errors, all one mistake:* an HTML-escaped `&lt;` in a
+regex, and twice an exemption list built from the surrounding corrected text
+rather than from the class — so a family reported clean on the very locus it
+existed for. Recorded in the file as a rule.
+
+### Run record
+
+`docs/qa/trunk.carryforward.md` Part M; `debug/qa/trunk_full_run_2026_09_01_notes.md` §13.
+
 ## [v5.5.2] - 2026-09-03
 
 **/qa trunk DELTA #4 — DEFECTS, remediated same day.** Two independent

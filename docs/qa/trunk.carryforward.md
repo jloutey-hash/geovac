@@ -1068,3 +1068,105 @@ gate-self-audit rule has paid out on code that was not under review.
 2. Reviewer NITs carried from earlier runs: bibkey years, the Λ_prop symbol,
    the Hawkins 2000 attribution at P32:4845, matrix note fields.
 3. Identification of the L5 panel-side quantity (Part J).
+
+
+---
+
+## Part M — FULL run #4 (2026-09-03), v5.6.0
+
+**Verdict: FAIL.** All four gating dimensions exercised (5 code, 2 claims,
+2 citations, 1 synthesis) plus 13 deterministic gates and a completeness-critic.
+Unseeded; standing calibration record cited. Every MATERIAL finding was
+verified against primary text or by independent computation before acceptance.
+Remediated in four commits the same day.
+
+### M.1 — the finding that reframes the run: two gates examined nothing
+
+C17: 25 families, **zero scoped to trunk**; the three selected were `scope:
+"all"` group4 families with no locus in any trunk document. C21: `\gvq` appears
+**zero times** in all six trunk papers, so its annotation and convention checks
+had no inputs. Both had been reporting PASS.
+
+Why it mattered rather than being bookkeeping: this cycle produced seven trunk
+headline re-pricings and all seven went to **C16**, a blocklist. C16 catches a
+retired *wording* returning. It cannot catch a **correct** value drifting to a
+second locus — and that is the class that dominated this run (the 42.6 constant,
+the bare 4/π loci, the retired counts in the claim matrix).
+
+Fixed: five trunk families, each proven two-way; scope-honesty in the RESULT
+line; refusal to print PASS on an empty grounded set.
+
+### M.2 — two published readings withdrawn (both PI-approved before landing)
+
+**s/p evidence leg → artifact.** λ₂ₛ = 3 exactly iff n_max ≡ 0 (mod 3). The
+0.39% endpoint is on the favourable branch; neighbours give 1.65% and 2.58%.
+The stated mechanism is refuted by the corpus's own disconnected-block result.
+Paper 7's continuum reading now rests on the λ_max saturation alone.
+*Upgrade:* closed form on that branch, so the rate is proved.
+
+**P38 Lemma L5 → refuted as stated.** height_B ≡ 1 by a finite-band witness;
+the bound fails for every n_max ≥ 6. This is the v5.4.4 crossing, which I had
+recorded as an open panel-side question — the panel was converging to the true
+value while the lemma claimed a bound below it. **WH1 and `thm:main` survive**
+through the unconditional route.
+
+### M.3 — three papers named operators they do not use
+
+Paper 1 (H = β(D−A) + V vs the bare Laplacian; 621% under the stated operator),
+Paper 32 (κ label set giving 2/10/28 against its own 4/16/40, propagating into
+`prop:reality`), Paper 7 (helium's "graph Laplacian" one-body operator is a
+hybrid with exact hydrogenic eigenvalues). Pattern worth naming: **the code was
+right in all three cases and said so in a docstring.** The papers drifted from
+the modules, not the reverse.
+
+### M.4 — five guards that could not fail
+
+Two of them mine, written the previous day: the seminorm test asserted
+max(a/2) = max(a)/2, and the wrong-product control short-circuited on an array
+shape. Plus a by-construction `gap[1]`, a cb-norm test asserting a retracted
+value against itself, and the L5 crossing test hidden behind `@pytest.mark.slow`.
+All rebuilt with routes the claim does not supply, and fire-tested.
+
+Running total across DELTA #4 and FULL #4: **eight** guards of mine that could
+not fail, found by adversarial review rather than by writing them. The standing
+lesson holds — a test written in the same session as its claim tends to restate
+it — and the countermeasure that works is fire-testing every guard, not
+inspecting it.
+
+### M.5 — my own registry errors, one mistake three times
+
+An HTML-escaped `&lt;` in a regex; and twice an exemption list built from the
+surrounding **corrected** text rather than from the class, so a family reported
+clean on the very locus it existed for. Recorded in `check_headline_numbers.py`
+as a rule: an exemption must name the *specific* retraction — a date, a
+retirement word, or the replacement value — never the topic's vocabulary,
+because correct text nearby is exactly what surrounds a defect.
+
+A fourth was structural: a ±3-line exemption window is right for prose and
+wrong for **tables**, where every row sits inside every other row's window.
+Opt-in `exempt_same_line` added.
+
+### M.6 — open, carried forward
+
+1. **Paper 32's eight §VIII non-selection *arguments*.** `claim_test_matrix.md`
+   assigns them to paper review ("PROOF-BY-ARGUMENT — verify the argument");
+   no reviewer in any run has picked up that hand-off.
+2. **C3 surface holes.** Paper 32 has tag-free bands at 2173–3413 (~40 remarks,
+   one tag), 3414–3700 (the WH1 keystone band — the trunk's keystone theorem
+   carries no inline tier) and 5266–6207. C3 cannot bite there.
+3. **C14/C15 vacuity.** C14 has no surface in five of six trunk documents
+   (only Paper 32 cites `geovac/` paths); C15 none in Papers 0 and 1.
+4. **C21 annotation.** The trunk numeric surface is unregistered; the
+   derivation-recompute check — C21's load-bearing half — still has no inputs
+   on trunk. Registering it is the natural successor to M.1.
+5. **v5.4.1..v5.4.4 was never delta-reviewed** (the DELTA #3 remediation, the
+   v5.4.3 self-caught correction, and the v5.4.4 crossing table all entered
+   without adversarial review).
+6. Remaining upgrades: Krein bit-exactness → [SYMBOLIC + MEASURED]; the γ sum
+   rule and multiplier symbol → SYMBOLIC PROOF; `lem:band_injectivity` tag.
+
+### M.7 — next
+
+A DELTA on this remediation. Four tranches touched six papers, four modules and
+six test files; remediated text is not clean text, and one prior delta found 4
+of its 11 genuine findings were introduced by the previous run's own fixes.

@@ -199,3 +199,65 @@ def test_degenerate_sample_reproduces_the_retired_260(reduced):
     assert sum(np.linalg.norm(b) > 0 for b in old) == 6
     dim, _, _ = _order_one_null(reduced, old)
     assert dim == 260
+
+
+def _support(sols, rows, cols, tol=1e-9):
+    """Positions in the given block hit by at least one basis solution."""
+    hit = set()
+    for D in sols:
+        for i in rows:
+            for j in cols:
+                if abs(D[i, j]) > tol:
+                    hit.add((i, j))
+    return hit
+
+
+def test_surviving_support_is_not_the_diagonal_yukawas(reduced):
+    """The theorem's prose claim, pinned (added /qa trunk FULL run #4).
+
+    The proof sketch said the order-one condition "kills every lepton-quark and
+    off-flavour entry" and described the rank-16 matter projection as the four
+    colour-diagonal Yukawas.  Measured, both are false: the matter block is
+    full on the lepton and quark 2x2s, and the Majorana block is mostly
+    lepton-quark.  This test is the falsifier for the retired wording.
+    """
+    dim, sols, _ = _order_one_null(reduced, ccm_basis())
+    assert dim == 32, dim
+
+    matter = _support(sols, range(0, 16), range(0, 16))
+    majorana = _support(sols, range(0, 16), range(16, 32))
+
+    # the matter block carries strictly more than four independent Yukawas:
+    # 16 real moduli = 8 complex, so the four named ones are half of it
+    m_cols = np.array([_rv(D[0:16, 0:16]) for D in sols]).T
+    assert np.linalg.matrix_rank(m_cols, tol=1e-9) == 16
+
+    # the load-bearing contrast: lepton-quark entries SURVIVE in the Majorana
+    # block.  Leptons occupy the first 4 indices of each 16-block, quarks the
+    # remaining 12; a mixed (lepton, antiquark) position is exactly the class
+    # the retired sentence said was annihilated.
+    # mixing runs BOTH ways: lepton row x antiquark column, and quark row x
+    # antilepton column.  Leptons occupy indices 0-3 of each 16-block.
+    def is_lepton(k):
+        return (k % 16) < 4
+
+    assert [(i, j) for (i, j) in majorana if is_lepton(i) != is_lepton(j)], \
+        "no lepton-quark Majorana entry survived -- the retired sentence " \
+        "would then have been right"
+
+    # The paper's claim is about MODULI, not support positions (both happen to
+    # come to 12 here, which is a coincidence of two different measures).
+    # Assert the ranks: of the 16 real Majorana moduli, 12 are lepton-quark
+    # and only 4 are same-species.
+    def rank_on(positions):
+        M = np.array([np.concatenate([[D[i, j].real for i, j in positions],
+                                      [D[i, j].imag for i, j in positions]])
+                      for D in sols]).T
+        return np.linalg.matrix_rank(M, tol=1e-9)
+
+    mixed_pos = [(i, j) for i in range(16) for j in range(16, 32)
+                 if is_lepton(i) != is_lepton(j)]
+    same_pos = [(i, j) for i in range(16) for j in range(16, 32)
+                if is_lepton(i) == is_lepton(j)]
+    assert rank_on(mixed_pos) == 12, rank_on(mixed_pos)
+    assert rank_on(same_pos) == 4, rank_on(same_pos)

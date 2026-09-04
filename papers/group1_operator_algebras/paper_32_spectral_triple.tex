@@ -1910,7 +1910,7 @@ mathematics.
 Bertrand exhausts the potentials;\ the two rigidity theorems fix
 the projection type for each.  The category mismatch is a
 structural feature of central-force quantum mechanics, not an
-artifact of the GeoVac construction.  The five asymmetry layers
+artifact of the GeoVac construction.  The seven asymmetry layers (corrected 2026-09-03 from ``five'')
 of Paper~24~\S~V (spectrum-computing role of $L_0$; calibration
 $\pi$; Wilson gauge matter coupling; modular-Hamiltonian
 Pythagorean orthogonality; spectral-action gravity termination)
@@ -4996,7 +4996,7 @@ the construction admits the full SM gauge content with imposed
 Yukawa, hypercharge, and generation choices, and the GeoVac data is
 silent on each of those choices.
 Module \texttt{geovac/standard\_model\_triple.py} ($\sim 530$ lines),
-45 tests passing.
+47 tests passing.
 
 \paragraph{H1 Higgs inner fluctuation (Sprint H1, May 2026).}
 The full fluctuated Dirac $D_A = D + A + JAJ^{-1}$ has been
@@ -5378,17 +5378,29 @@ $J$-reality identifies the matter and antimatter sectors
 $*$-representation of $\mathcal{A}_F$, removes $240$ further
 parameters ($272 \to 32$): with $M_3(\mathbb{C})$ acting on the
 antiquark colour index, $[[D_F, a], J b J^{-1}] = 0$ forces the quark
-Yukawa blocks to be colour-diagonal and colour-independent and kills
-every lepton--quark and off-flavour entry.  The matter-sector projection
-of the solution space has rank $16$ (pinned as a projection-rank check in
-the same test module, 2026-09-03; the earlier statement that it spanned
-the full $128$-dimensional matter space was the degenerate-sample
-artefact recorded above).  Each constructed-triple
+Yukawa blocks to be colour-diagonal and colour-independent, and annihilates
+the matter$\to$antimatter block $P$ entirely.
+
+\emph{What survives, measured (corrected 2026-09-03).}  The sketch printed
+here previously said the condition ``kills every lepton--quark and off-flavour
+entry'' and described the rank-$16$ matter projection as the four
+colour-diagonal Yukawas with their $L \leftrightarrow R$ placements.  Both
+descriptions are false, and the support pattern of the solution space is the
+theorem's actual content.  The matter block (rank $16$ real $=8$ complex) is
+\emph{full} on the lepton $2\times2$ --- including $\nu_L \to e_R$ and
+$e_L \to \nu_R$ --- and full on the quark flavour $2\times2 \otimes \mathbb{1}_3$,
+including $u_L^c \leftrightarrow d_R^c$;\ the four named Yukawas are $4$
+complex, i.e.\ \emph{half} of it.  The Majorana block (rank $16$ real) carries
+$2$ complex $\nu_R$ entries and \emph{six} complex
+$\text{lepton}_R \leftrightarrow \text{antiquark-}u_R$ entries --- so twelve of
+its sixteen real moduli are precisely the lepton--quark operators the old
+sentence said were killed.  The endpoint $32$ and the two rank-$16$ projections
+are unchanged.  Each constructed-triple
 axiom-consistency check passes at
 $n_{\max} \in \{2, 3\}$ in module
 \texttt{geovac/standard\_model\_triple.py} (backed by
-\texttt{tests/test\_standard\_model\_triple.py}, 45 tests).  \emph{QA
-correction (2026-06-14):} those 45 tests verify the axiom consistency of
+\texttt{tests/test\_standard\_model\_triple.py}, 47 tests).  \emph{QA
+correction (2026-06-14):} those 47 tests verify the axiom consistency of
 one constructed $D_F$, \emph{not} the moduli-dimension counts of the
 chain; the counts above are the direct enumeration of
 \texttt{tests/test\_trunk\_qa\_forced\_count\_moduli.py}.

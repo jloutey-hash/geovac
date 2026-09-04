@@ -157,3 +157,20 @@ re-prices everything above it.
   on eq:seminorm_normalisation, and the He⁺ benchmark row that asserted a
   check its own constructor imposes. Twelve deterministic gates PASS.
   FAIL stands; the DELTA is now clean, so FULL run #4 is unlocked.
+- 2026-09-03 (v5.6.0) — **FULL run #4 = FAIL**, remediated same day in four
+  tranches (carryforward Part M). Eleven reviewers, all four dimensions, 13
+  deterministic gates. Headline: **two gates were examining nothing on trunk**
+  — C17 had zero trunk families and C21 zero `\gvq` annotations — so seven
+  headline re-pricings this cycle all went to C16, a blocklist that cannot
+  catch a correct value drifting to a second locus. Two published readings
+  withdrawn, both PI-approved: the s/p evidence leg is an artifact of cutoff
+  divisibility (λ₂ₛ = 3 exactly iff n_max ≡ 0 mod 3; the 0.39% endpoint sits on
+  the favourable branch), and Paper 38's L5 height bound is FALSE by a
+  finite-band witness (height_B ≡ 1, so it fails for every n_max ≥ 6 — exactly
+  the v5.4.4 crossing, misread then as an open panel question). **WH1 and
+  `thm:main` are untouched**; the unconditional theorem uses no height
+  constituent. Both withdrawals are also upgrades — each replaced an asserted
+  trend with a proved closed form. Three papers named operators they do not
+  use, and in all three the code was right and said so in a docstring. Five
+  guards that could not fail, two of them written the previous day. FAIL
+  stands; a DELTA on the remediation is owed before FULL #5.
