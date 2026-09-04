@@ -248,6 +248,15 @@ Lemma~\ref{lem:L3} (asymptotic-tight as $\Lammax \to \infty$) and
 $\gamma_\Lammax(G)$ is the mass-concentration moment of the central
 spectral Fej\'er kernel on $G$ given by Lemma~\ref{lem:L2}. The
 asymptotic rate constant $4/\pi$ is \emph{universal} across the class.
+\emph{Scope of the hypothesis:} the statement is unconditional for
+$G = \SU(2)$;\ for general $G$ it is conditional on the per-group
+spin-window decomposition underlying the lifted-state construction
+(Remark~\ref{rem:correction_L2}), verified only in the rank-one case.
+The
+closed-form rate and the universality of $4/\pi$ --- the new content
+here --- do not depend on that hypothesis. The stronger
+Latr\'emoli\`ere propinquity is not claimed at any rank
+(Remark~\ref{rem:correction_L2}).
 \end{theorem}
 
 The universality of the constant $4/\pi$ is the structural headline of
@@ -1788,26 +1797,32 @@ seminorms,
    \;:=\; \sup_{\Lipnorm{f} \le 1}
    \bigl|\,\Lipnorm{f} - \Lipnorm{B_\Lammax(f)}^{\Op_\Lammax}\bigr|.
 \end{equation}
-By Lemma~\ref{lem:L4}(d), $\Lipnorm{B_\Lammax(f)}^{\Op_\Lammax} =
-\opnorm{[\Dop_G, B_\Lammax(f)]} \le \norm{\nabla f}_{L^\infty} \le
-\Lipnorm{f}$. The standard Lipschitz/good-kernel estimate gives
-$\Lipnorm{f} - \Lipnorm{\KS_\Lammax * f} \le \gamma_\Lammax(G)
-\Lipnorm{f}$, so $\mathrm{height}_B \le \gamma_\Lammax(G)$;\ and the dual
-height $\mathrm{height}_P = 0$ because $P_\Lammax$ is an orthogonal
-projection.
+\textbf{Withdrawn 2026-09-04}
+[retracted 2026-09-04: l5-height-bound-achieved].\ The text printed here
+until that date concluded $\mathrm{height}_B \le \gamma_\Lammax(G)$ (from
+the good-kernel estimate) and $\mathrm{height}_P = 0$ (from orthogonality
+of $P_\Lammax$). Both are false, at \emph{every} rank, by the witness
+Paper~38~\cite{paper38} records for the rank-one case, whose argument is
+independent of $G$:\ $B_\Lammax$ is a finite-band reconstruction, so the
+unit-Lipschitz ball contains an $f$ with $B_\Lammax(f) = 0$, for which the
+quantity in \eqref{eq:height_B_general} equals $\Lipnorm{f} = 1$. Hence
+\begin{equation}\label{eq:height_one_general}
+   \mathrm{height}_B \;\equiv\; 1
+   \quad\text{at every cutoff and every rank,}
+\end{equation}
+and $\mathrm{height}_B \le \gamma_\Lammax(G)$
+[retracted 2026-09-04: l5-height-bound-achieved] fails whenever
+$\gamma_\Lammax(G) < 1$;\ the same witness gives
+$\mathrm{height}_P \ne 0$.
 
-\textbf{[WITHDRAWN 2026-09-04.]}  Both height statements in the paragraph
-above are false, by the witness Paper~38 gives for the rank-one case:\
-$B_\Lammax$ is a finite-band reconstruction, so the unit-Lipschitz ball
-contains $f$ with $B_\Lammax(f) = 0$, for which
-$|\Lipnorm{f} - \Lipnorm{B_\Lammax(f)}| = \Lipnorm{f}$ --- hence
-$\mathrm{height}_B \equiv 1$ and $\mathrm{height}_P \ne 0$, at every cutoff
-and \emph{at every rank}, the argument being independent of $G$.  The
-estimate therefore fails whenever $\gamma_\Lammax(G) < 1$.
-\emph{Open check:} Paper~38's unconditional theorem survives because it uses
-only reach-type estimates;\ whether the assembly here can be re-derived on
-the same footing at general rank is not settled, and Theorem~\ref{thm:main}
-of this paper should not be cited as height-controlled until it is.
+\emph{The conclusion \eqref{eq:L5_bound_general} is unaffected}, for the
+reason it is unaffected in Paper~38:\ the state-space GH assembly bounds
+$\Lambda_{\mathrm{prop}}$ using reach-type estimates alone, with no height
+constituent. What is withdrawn is the height leg of the four-term
+organisation above --- retained because it names what a Latr\'emoli\`ere
+tunnel would additionally require --- and not the bound. Whether a
+\emph{height-controlled} assembly exists for this pair at general rank is
+open, and Theorem~\ref{thm:main} must not be cited as height-controlled.
 
 Combining the forward estimates (the state-space GH assembly of
 Paper~38, Lemma~L5; the max over the four terms is what the would-be

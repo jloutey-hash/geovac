@@ -90,7 +90,7 @@ with explicit qualitative-rate bound
 \(
    \Lambda(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
             \Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b})
-   \le C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
+   \le C_3^{(2)} \cdot 2 \cdot
         \max(\gamma_{\nmaxa}/\lambda_a,\, \gamma_{\nmaxb}/\lambda_b),
 \)
 where $C_3^{(2)} \le \sqrt{2}$ is a closed-form Lipschitz comparison
@@ -102,8 +102,13 @@ single-factor lemmas (operator system, central spectral Fej\'er kernel,
 Lipschitz comparison, Berezin reconstruction, propinquity assembly).
 The two technical risks specific to the tensor product --- a
 closed-form Lipschitz comparison constant on the full operator system,
-and a rigorous bound on the cross-Stein--Weiss height term --- both
-close via the triangle bound on the joint Leibniz rule. (An earlier
+and a rigorous bound on the cross-Stein--Weiss panel term --- both
+close via the triangle bound on the joint Leibniz rule.
+(The panel term was previously assembled into the rate as a
+Lipschitz-distortion \emph{height};\ that step is withdrawn
+2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved], and the
+rate is now assembled from reach-type estimates alone, which
+\emph{improves} the constant from $1 + 2\sqrt{2}$ to $2$.) (An earlier
 Pythagorean refinement claiming $C_3^{(2)} < 1$ has been
 \emph{withdrawn}:\ the graded anticommutation does \emph{not} make the
 two Leibniz terms operator-norm orthogonal --- on the actual
@@ -215,7 +220,7 @@ Gromov--Hausdorff distance, with bound
    \Lambda\bigl(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
-   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot (1 + 2\sqrt{2}) \cdot
+   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot 2 \cdot
    \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
                 \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr),
 \end{equation}
@@ -243,8 +248,11 @@ operator-norm triangle bound $\norm{A + B}_{\mathrm{op}} \le \norm{A}
 + \norm{B}$ on the two Connes--Marcolli Leibniz terms
 (Lemma~\ref{lem:L3-T}); and
 \item an explicit Stein--Weiss-type bound on the joint
-Lipschitz-distortion height of the tunnel map, again via the triangle
-bound applied to the joint commutator (Lemma~\ref{lem:L5-T}).
+cross-Stein--Weiss \emph{panel} term, again via the triangle bound
+applied to the joint commutator (Lemma~\ref{lem:L5-T}). This term was
+formerly assembled into the rate as a Lipschitz-distortion height;\ that
+step is withdrawn (2026-09-04) and the rate now rests on reach-type
+estimates alone.
 \end{itemize}
 (An earlier draft used a \emph{Pythagorean} refinement of these two
 bounds, claiming $C_3^{(2)} < 1$; that refinement is withdrawn --- the
@@ -254,8 +262,8 @@ $C_3^{(2)} \le \sqrt 2$; see Remark~\ref{rem:no_pythagorean}.)
 
 The mechanism is unified: the same KO-dim-6 graded structure
 that defines the Connes--Marcolli composed Dirac splits both
-the joint Lipschitz constant (R1) and the joint height-distortion
-bound (R2) into Leibniz terms controlled by the triangle bound. Each
+the joint Lipschitz constant (R1) and the joint cross-Stein--Weiss
+panel bound (R2) into Leibniz terms controlled by the triangle bound. Each
 of the five single-factor lemmas of \cite{loutey_paper38} extends
 factor-by-factor with no novel analytical machinery.
 
@@ -403,7 +411,7 @@ convention below):
                 \Tcal_{\nmaxb}^{\lambda_b},\;
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
-   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot (1 + 2\sqrt{2}) \cdot
+   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot 2 \cdot
             \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
                         \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr),
 \end{equation}
@@ -439,15 +447,18 @@ spectral Fej\'er kernel with closed-form Plancherel symbol; Lemma
 \ref{lem:L3-T} the joint Lipschitz comparison constant via the
 (tight) triangle bound on the Connes--Marcolli graded Leibniz rule;
 Lemma~\ref{lem:L4-T} the
-joint Berezin reconstruction with the four properties needed for a
-Latr\'emoli\`ere tunneling pair; and Lemma~\ref{lem:L5-T} the
-state-space-GH assembly with explicit cross-Stein--Weiss height bound
+joint Berezin reconstruction with the properties needed for an
+approximation pair; and Lemma~\ref{lem:L5-T} the
+state-space-GH assembly with explicit cross-Stein--Weiss panel bound
 (modulo the inherited $\mathrm{reach}_P$ named gap; see the convergence
 convention).
-The factor $1 + 2\sqrt{2}$ in \eqref{eq:main_thm} is the sum of the
-joint reach contribution (bounded by $\max(\gamma)$, contributing $1$)
-and the joint height contribution (bounded by $2\sqrt{2}\max(\gamma)$
-on the unit-norm panel, contributing $2\sqrt{2}$). The
+The factor $2$ in \eqref{eq:main_thm} is the joint reach
+contribution alone, $\mathrm{reach} \le \gamma_{\nmaxa} + \gamma_{\nmaxb}
+\le 2\max(\gamma)$;\ the joint \emph{height} contribution that formerly
+added $2\sqrt{2}$ was withdrawn on 2026-09-04
+[retracted 2026-09-04: l5-height-bound-achieved], the quantity it bounded
+being a unit-norm panel supremum rather than the Lipschitz-distortion
+height (Lemma~\ref{lem:L5-T}). The
 $\lambda^{-1}$-rescalings of the single-factor Diracs propagate
 linearly through the bound and produce the
 $\max(\gamma/\lambda)$-form of \eqref{eq:main_thm}.
@@ -834,10 +845,10 @@ operator-norm reduction.
 
 \begin{lemma}[L5-T: joint state-space-GH bound from the joint tunneling
 pair]\label{lem:L5-T}
-The joint tunneling pair $(B_{\nmaxa, \nmaxb}, P_{\nmaxa} \otimes
+The joint approximation pair $(B_{\nmaxa, \nmaxb}, P_{\nmaxa} \otimes
 P_{\nmaxb})$ with $B_{\nmaxa, \nmaxb}$ from
 Definition~\ref{def:joint_berezin} and $P_{\nmaxa} \otimes P_{\nmaxb}$
-the joint spectral compression is a Latr\'emoli\`ere tunneling pair
+the joint spectral compression is an approximation pair
 between $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$
 and $\Tcal_{\nmaxa}^{\lambda_a} \otimes \Tcal_{\nmaxb}^{\lambda_b}$, and
 yields the bound
@@ -846,7 +857,7 @@ yields the bound
                 \Tcal_{\nmaxb}^{\lambda_b},\;
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
-   \;\le\; C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
+   \;\le\; C_3^{(2)} \cdot 2 \cdot
             \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
                         \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr).
 \end{equation}
@@ -863,9 +874,12 @@ on the joint pair are:
 \item[(iii)] $\mathrm{height}_{B_{\nmaxa, \nmaxb}}$, the
 Lipschitz-distortion height (Lipschitz-seminorm-comparison form
 \cite[Remark~3.8]{loutey_paper38});
-\item[(iv)] $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}} = 0$ for
-the orthogonal projection.
+\item[(iv)] $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}}$.
 \end{enumerate}
+Only (i) and (ii) enter the state-space GH bound proved here;\ (iii)
+and (iv) are listed because they are what a Latr\'emoli\`ere tunnel
+would additionally require, and both are shown below to be
+uncontrolled --- see \eqref{eq:height_one_T}.
 
 \emph{Reach.} By Lemma~\ref{lem:L4-T}(c) on the unit-Lipschitz panel,
 \begin{equation*}
@@ -907,26 +921,50 @@ explicit bound
 \end{equation}
 On the unit-norm panel ($L_f = L_g = M_f = M_g = 1$), this collapses to
 \begin{equation}\label{eq:height_unit_panel}
-   \mathrm{height}_{B_{\nmaxa, \nmaxb}}
+   \mathrm{panel}_{B_{\nmaxa, \nmaxb}}
    \;\le\; \sqrt{2}\,(\gamma_{\nmaxa} + \gamma_{\nmaxb})
    \;\le\; 2\sqrt{2}\,\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
 \end{equation}
-The dual height $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}} = 0$
-since the joint projection is exact on its image.
 
-\emph{Assembly.} Combining the reach and height bounds with the
-$C_3^{(2)}$ Lipschitz comparison constant of Lemma~\ref{lem:L3-T}
-(which controls the conversion between
-$\norm{\cdot}_{\mathrm{Lip}}^{\Op}$ in the truncated triple and the
-classical $\norm{\nabla \cdot}_\infty$ on $\sthree \times \sthree$),
+\textbf{Withdrawn 2026-09-04}
+[retracted 2026-09-04: l5-height-bound-achieved].\ Until that date the
+two displays above were labelled $\mathrm{height}_{B}$ and were followed
+by $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}} = 0$, and both were
+assembled into the rate. They are \emph{panel} quantities --- suprema over
+unit-norm simple tensors --- and not the Lipschitz-distortion height,
+which is a supremum over the whole unit-Lipschitz ball. The witness
+Paper~38~\cite{loutey_paper38} gives for the rank-one case transports
+verbatim:\ $B_{\nmaxa, \nmaxb} = B_{\nmaxa} \otimes B_{\nmaxb}$ is a
+finite-band reconstruction, so taking $h = f \otimes \mathbf{1}$ with $f$
+spectrally supported above cutoff $\nmaxa$ and $\Lipnorm{h} = 1$ gives
+$B_{\nmaxa, \nmaxb}(h) = 0$ and hence
+\begin{equation}\label{eq:height_one_T}
+   \mathrm{height}_{B_{\nmaxa, \nmaxb}} \;\equiv\; 1
+   \qquad\text{at every } (\nmaxa, \nmaxb),
+\end{equation}
+with $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}} \ne 0$ by the same
+witness. The cross-Stein--Weiss computation
+\eqref{eq:height_explicit_T} is unaffected and is retained as the panel
+statement it is;\ what is withdrawn is its use as a height constituent.
+
+\emph{Assembly.} The state-space GH bound is assembled from reach-type
+estimates alone, with no height constituent --- the footing on which
+Papers~38 and~40 stand after the same withdrawal. With the $C_3^{(2)}$
+Lipschitz comparison constant of Lemma~\ref{lem:L3-T} (which controls the
+conversion between $\norm{\cdot}_{\mathrm{Lip}}^{\Op}$ in the truncated
+triple and the classical $\norm{\nabla \cdot}_\infty$ on
+$\sthree \times \sthree$), the reach paragraph above gives
 \begin{align*}
-\Lambda \;\le\; \max\bigl(\mathrm{reach}_B,\, \mathrm{reach}_P,\,
-\mathrm{height}_B,\, \mathrm{height}_P\bigr)
-&\;\le\; C_3^{(2)} \cdot \bigl(\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})
-+ 2\sqrt{2}\,\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})\bigr) \\
-&\;=\; C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
+\Lambda \;\le\; \max\bigl(\mathrm{reach}_B,\, \mathrm{reach}_P\bigr)
+&\;\le\; C_3^{(2)} \cdot (\gamma_{\nmaxa} + \gamma_{\nmaxb}) \\
+&\;\le\; C_3^{(2)} \cdot 2 \cdot
 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
 \end{align*}
+The constant improves from the withdrawn $1 + 2\sqrt{2} \approx 3.828$ to
+$2$, the refuted leg having been the larger of the two;\ it also corrects
+an arithmetic slip in the withdrawn assembly, which bounded
+$\mathrm{reach}$ by $\max(\gamma)$ where this paragraph derives
+$\gamma_{\nmaxa} + \gamma_{\nmaxb}$.
 The $\lambda^{-1}$-rescalings of \eqref{eq:CM_dirac_recall} propagate
 linearly through the bound and produce the
 $\max(\gamma/\lambda)$-form of \eqref{eq:L5_bound_T}.
@@ -985,7 +1023,7 @@ $C_3^{(2),\mathrm{fact}} = 1$ on the unit-Lipschitz simple-tensor panel
 \texttt{propinquity\_bound}), and the \emph{full-operator-system} bound
 \eqref{eq:L5_bound_T} obtained by inserting the triangle-bound
 $C_3^{(2)} \le \sqrt 2$ of Lemma~\ref{lem:L3-T} together with the
-$1 + 2\sqrt{2}$ reach-plus-height factor of Lemma~\ref{lem:L5-T}.
+factor $2$ reach contribution of Lemma~\ref{lem:L5-T}.
 
 \begin{center}
 \begin{tabular}{ccccccc}
@@ -994,11 +1032,11 @@ $(\nmaxa, \nmaxb)$ & $\gamma_{\nmaxa}$ & $\gamma_{\nmaxb}$ &
 $\cbnorm{T^{(a,b)}}$ & $\Lambda^{\mathrm{fact}}$ &
 $C_3^{(2)}$ & $\Lambda^{\mathrm{full}}$ \\
 \midrule
-$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $1.000$ & $7.942$ \\
-$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $2.0746$ & $1.043$ & $8.281$ \\
-$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $1.6101$ & $1.095$ & $6.752$ \\
-$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $1.6101$ & $1.121$ & $6.909$ \\
-$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $1.3223$ & $1.155$ & $5.845$ \\
+$(2, 2)$ & $2.0746$ & $2.0746$ & $4/9$ & $2.0746$ & $1.000$ & $4.149$ \\
+$(2, 3)$ & $2.0746$ & $1.6101$ & $1/3$ & $2.0746$ & $1.043$ & $4.326$ \\
+$(3, 3)$ & $1.6101$ & $1.6101$ & $1/4$ & $1.6101$ & $1.095$ & $3.528$ \\
+$(3, 4)$ & $1.6101$ & $1.3223$ & $1/5$ & $1.6101$ & $1.121$ & $3.610$ \\
+$(4, 4)$ & $1.3223$ & $1.3223$ & $4/25$ & $1.3223$ & $1.155$ & $3.054$ \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1008,11 +1046,13 @@ $\Lambda^{\mathrm{fact}} \le \max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$,
 the value tracked in the supporting computational module as the
 factorised-panel propinquity bound. The full-operator-system column
 $\Lambda^{\mathrm{full}}$ uses
-$\Lambda \le C_3^{(2)} \cdot (1 + 2\sqrt{2}) \cdot
-\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$ with $1 + 2\sqrt{2} \approx
-3.828$ (computed from this closed form; the supporting module's
-\texttt{propinquity\_bound\_full} field tracks a looser conservative
-$2\gamma$ estimate, not this assembled bound). Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
+$\Lambda \le C_3^{(2)} \cdot 2 \cdot
+\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$, the reach-only assembly of
+Lemma~\ref{lem:L5-T}. The withdrawn assembly carried the factor
+$1 + 2\sqrt{2} \approx 3.828$ instead and printed this column
+$1.914\times$ larger;\ the corrected factor $2$ coincides with the
+supporting module's \texttt{propinquity\_bound\_full} field, which
+already tracked a conservative $2\gamma$ estimate. Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
 exhibit monotone decrease across the diagonal panel.
 
 \paragraph{Three structural observations.}
@@ -1094,7 +1134,7 @@ produce the clean two-term graded Leibniz rule, whose joint commutator
 is then controlled --- with constant $C_3^{(2)} \le \sqrt 2$ --- by the
 (tight) operator-norm triangle bound; this controls both the joint
 Lipschitz constant (Lemma~\ref{lem:L3-T}) and the joint
-height-distortion term (Lemma~\ref{lem:L5-T}).
+cross-Stein--Weiss panel term (Lemma~\ref{lem:L5-T}).
 
 \subsection{Obstructions to the cross-manifold extensions}
 \label{sec:obstructions}
@@ -1297,8 +1337,8 @@ the convergence convention of \S\ref{sec:setup}), with explicit
 qualitative-rate bound \eqref{eq:main_rate_intro}, closed-form
 joint Lipschitz comparison constant \eqref{eq:C3_2_full} bounded by
 $\sqrt 2$ at every finite cutoff, and explicit Stein--Weiss-type bound
-on the Lipschitz-distortion height. The mechanism that controls both
-the Lipschitz constant and the height term is the same: the
+on the cross-Stein--Weiss panel term. The mechanism that controls both
+the Lipschitz constant and the panel term is the same: the
 Connes--Marcolli graded anticommutation
 $\{\DCH^{(a)} \otimes I, \gamma_a \otimes \DCH^{(b)}\} = 0$ on the
 KO-dimension-6 graded module produces a clean two-term graded Leibniz

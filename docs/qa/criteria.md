@@ -468,6 +468,7 @@ way §3 dead-ends grow), it is added here and to the seed catalog, and the bar
 quietly rises.
 
 ## Hard rules
+- **Guard-writing is a separate, separately-reviewed activity.** Never write a regression guard in the same pass as the fix it protects; review it by asking *what wrong answer would this accept?* and fire-test it against that answer. A guard whose rejected answer cannot be named is not a guard. ~10 guards in this corpus could not fail, several of them replacements for guards that could not fail.
 - **`cited_by`: register a retracted claim's DEPENDENTS, not just its wording.** Eight of ten recurring defect classes in the v5.4.4..v5.7.3 arc were a claim corrected in its owner and left standing in the documents that cite it. Patterns cannot catch that class — a citer restates the claim in its own words — so the dependents are enumerated once, from the argument. Ratchet: unstamped dependents fail; `--dependencies` reports them.
 - **Gate-first sweeps.** A claim-level correction is registered in C16/C17 *before* it is applied, and the gate's locus list is what gets swept — not memory. Twelve avoidable re-passes in the v5.4.4..v5.6.0 arc came from the other order.
 - **A guard is not finished until it has failed.** `debug/qa/fire_test.py` — eight guards that could not fail were found in one certification cycle, none by inspection.

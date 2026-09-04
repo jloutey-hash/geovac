@@ -131,16 +131,24 @@ L5 (joint propinquity assembly).  The joint tunneling pair is
 a tunneling pair between T_a (X) T_b and T_S3^a (X) T_S3^b.
 Joint reach: from L4(c) joint approximate-identity rate,
     reach_{B_{joint}} <= gamma_{n_a} + gamma_{n_b} <= 2 max(...).
-Joint height: by Paper 38 §3.5 corrected definition (Lipschitz
-distortion), height_{B_{joint}} <= max(gamma_{n_a}, gamma_{n_b})
-+ epsilon_cross, where epsilon_cross is a Stein-Weiss cross term
-that vanishes in the rate. Joint height_P = 0 (joint truncation
-P_a (X) P_b is a projection).
-Net:
+Joint height: WITHDRAWN 2026-09-04
+[retracted 2026-09-04: l5-height-bound-achieved].  This module stated
+height_{B_{joint}} <= max(gamma_{n_a}, gamma_{n_b}) + epsilon_cross and
+height_P = 0, resting on Paper 38 S3.5 -- the line that was retracted.
+Both are false, by the finite-band witness transported to the product:
+B_{joint} = B_a (X) B_b annihilates h = f (X) 1 for f above cutoff n_a,
+so at ||h||_Lip = 1 the distortion is 1 and
+    height_{B_{joint}} == 1   at every (n_a, n_b),
+with height_P != 0 by the same witness.  What epsilon_cross bounds is a
+unit-norm PANEL quantity, which is real and is retained under that name.
+Net (reach-only assembly, the footing Papers 38/40 stand on):
     Lambda(T_a (X) T_b, T_S3 (X) T_S3)
-        <= max(reach_{joint}, height_{joint}, 0, 0)
-        <= C_3^{(2)} * max(gamma_{n_a}, gamma_{n_b})
+        <= max(reach_B, reach_P)
+        <= C_3^{(2)} * (gamma_{n_a} + gamma_{n_b})
+        <= C_3^{(2)} * 2 * max(gamma_{n_a}, gamma_{n_b})
         ->  0.
+The constant improves from the withdrawn 1 + 2*sqrt(2) ~ 3.828 to 2:
+the refuted leg was the larger one.
 
 Honest scope of this run
 ========================
@@ -170,12 +178,11 @@ What remains for follow-up:
     bound C_3 >= 1 -> sqrt(2). (An earlier "tighten to C_3 = 1 + o(1)"
     Pythagorean plan was WITHDRAWN 2026-06-18 as operator-norm-false,
     Paper 39.)
-  - Joint L5 height bookkeeping at the Latremoliere 2017/2023 level
-    is sketched (cross-term epsilon_cross flagged as Stein-Weiss
-    contribution); the rigorous height computation requires reading
-    of Latremoliere 2017 §4 against the joint tunneling pair
-    structure. The qualitative rate -> 0 is robust; the quantitative
-    constant in front needs the Latremoliere 2017 §4 computation.
+  - Joint L5 height bookkeeping is WITHDRAWN (2026-09-04, above):
+    height_{B_joint} == 1 identically, so no height constituent enters
+    the state-space GH rate, which is assembled from reach alone.
+    epsilon_cross survives as the unit-norm panel quantity it computes.
+    Whether a height-CONTROLLED assembly exists for this pair is open.
 
 The keystone tensor-product propinquity bound
     Lambda(T_a (X) T_b, T_S3 (X) T_S3) -> 0
@@ -791,6 +798,7 @@ def joint_reach_simple_tensor(
     return float(np.linalg.norm(diff, ord=2))
 
 
+
 def epsilon_cross_bound(
     n_max_a: int, n_max_b: int,
     lambda_a: float, lambda_b: float,
@@ -890,8 +898,12 @@ def epsilon_cross_bound(
 
     The qualitative rate ε_cross → 0 as n_max_a, n_max_b → ∞ is robust;
     only the constant in front shifts (from "1 + o(1)" wishful to
-    "<= 2*sqrt(2) leading", which propagates into the joint propinquity
-    bound: Λ <= max(reach + height) <= (1 + 2*sqrt(2)) max(γ_a, γ_b).
+    "<= 2*sqrt(2) leading").  NOTE 2026-09-04: this quantity no longer
+    propagates into the joint propinquity bound.  It was assembled there
+    as a Lipschitz-distortion height; that step is withdrawn (see the
+    module docstring), the rate is assembled from reach alone, and the
+    constant is 2 rather than 1 + 2*sqrt(2).  epsilon_cross remains a
+    valid unit-norm panel quantity and is reported as one.
 
     Args:
         n_max_a, n_max_b: cutoffs (each >= 1).
@@ -958,26 +970,30 @@ def epsilon_cross_bound(
     }
 
 
-def joint_height_simple_tensor(
+def joint_panel_distortion_simple_tensor(
     f: TestFunction, g: TestFunction,
     pair_a: TunnelingPair, pair_b: TunnelingPair,
 ) -> float:
-    """Joint Lipschitz-distortion height for simple tensor (Paper 38 §3.5).
+    """Joint Lipschitz distortion of ONE simple tensor f (X) g.
 
-    height_{B_joint}(f (X) g)
-        := | ||f (X) g||_Lip  -  ||B_joint(f (X) g)||_Lip^{O_joint} |
-        =  | ||grad f||_inf + ||grad g||_inf
-              -  ||[D_{a,b}, B_a(f) (X) B_b(g)]||_op |.
+        distortion(f (X) g)
+            := | ||f (X) g||_Lip  -  ||B_joint(f (X) g)||_Lip^{O_joint} |
+            =  | ||grad f||_inf + ||grad g||_inf
+                  -  ||[D_{a,b}, B_a(f) (X) B_b(g)]||_op |.
 
-    By Stein-Weiss applied to each factor + L4(d) compatibility +
-    the Connes-Marcolli graded triangle (sub-additive) operator-norm
-    bound (R2 closure, sprint W2b-easy-tighten, see ``epsilon_cross_bound``;
-    the earlier "Pythagorean" operator-norm identity was WITHDRAWN
-    2026-06-18 as false, Paper 39):
-        height_{B_joint}  <=  (1 + 2*sqrt(2)) max(γ_a, γ_b)
-                          =  O(max(γ_a, γ_b)),
-    with the cross-Stein-Weiss term ε_cross = O(max(γ_a, γ_b)) — NOT
-    O(γ_a · γ_b) as the original C-W2b-easy memo §2.5 sketch claimed.
+    RENAMED 2026-09-04 (was ``joint_height_simple_tensor``)
+    [retracted 2026-09-04: l5-height-bound-achieved].  This is a
+    per-simple-tensor PANEL quantity, not the Lipschitz-distortion
+    height, which is a supremum over the whole unit-Lipschitz ball and
+    equals 1 identically (module docstring).  The old name asserted the
+    retracted identification; it survives as a deprecated alias.
+
+    On the unit-norm panel this is bounded by 2*sqrt(2) max(γ_a, γ_b)
+    via Stein-Weiss on each factor + L4(d) + the Connes-Marcolli graded
+    triangle bound (see ``epsilon_cross_bound``; the earlier
+    "Pythagorean" operator-norm identity was WITHDRAWN 2026-06-18 as
+    false, Paper 39).  That panel bound is NOT a height bound and does
+    not enter the propinquity rate.
     """
     from geovac.r25_l3_lipschitz_bound import lipschitz_norm_inf_test_function
 
@@ -1205,6 +1221,10 @@ class TensorPropinquityBound:
         }
 
 
+# Deprecated alias (renamed 2026-09-04; the old name asserted the retracted
+# identification of this panel quantity with the Lipschitz-distortion height).
+joint_height_simple_tensor = joint_panel_distortion_simple_tensor
+
 def compute_tensor_propinquity_bound(
     n_max_a: int,
     n_max_b: int,
@@ -1239,8 +1259,10 @@ def compute_tensor_propinquity_bound(
     "tighten to 1" follow-up was the *withdrawn* Pythagorean direction;
     the correct comparison constant is the triangle bound
     C_3^{(2)} <= sqrt(2) (see c3_full_triangle_bound).  The paper's
-    assembled Lambda^full column uses C_3^{(2)} * (1 + 2 sqrt 2) * max(gamma),
-    a tighter assembled bound than this conservative 2*gamma field.
+    assembled Lambda^full column uses C_3^{(2)} * 2 * max(gamma)
+    (corrected 2026-09-04 from 1 + 2 sqrt 2 ~ 3.828, which was the
+    withdrawn reach-plus-height assembly -- and was LOOSER than this
+    conservative field, not tighter as this note previously said).
 
     Both bounds vanish as n_a, n_b -> infinity.
     """
@@ -1270,7 +1292,8 @@ def compute_tensor_propinquity_bound(
     for f in panel_a_cap:
         for g in panel_b_cap:
             r = joint_reach_simple_tensor(f, g, pair.pair_a, pair.pair_b)
-            h = joint_height_simple_tensor(f, g, pair.pair_a, pair.pair_b)
+            h = joint_panel_distortion_simple_tensor(
+                f, g, pair.pair_a, pair.pair_b)
             if r > reach_max:
                 reach_max = r
             if h > height_max:
@@ -1861,7 +1884,7 @@ def gh_tensor_theorem_statement() -> str:
         "T_S3^a (X) T_S3^b in van Suijlekom's state-space Gromov-Hausdorff "
         "distance Lambda:\n\n"
         "  Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)\n"
-        "      <=  C_3^{(2)} * (1 + 2*sqrt(2)) "
+        "      <=  C_3^{(2)} * 2 "
         "* max(gamma_{n_a}/lambda_a, gamma_{n_b}/lambda_b)\n"
         "      ->  0  as  n_a, n_b -> infinity,\n\n"
         "where the joint Lipschitz comparison constant is the closed-form "
@@ -1872,11 +1895,15 @@ def gh_tensor_theorem_statement() -> str:
         ">= 1 at every finite cutoff and -> sqrt(2) as cutoffs -> infinity "
         "(the earlier 'Pythagorean' C_3 < 1 -> 1 refinement was withdrawn "
         "2026-06-18 as false). "
-        "The constant 1 + 2*sqrt(2) ~ 3.828 in front of max(gamma) "
-        "comes from combining the joint reach bound (<= max(gamma) "
-        "via factor-by-factor L4(c)) with the joint Lipschitz-distortion "
-        "height bound (<= 2*sqrt(2) * max(gamma) via the Connes-Marcolli "
-        "graded Leibniz on the unit-norm panel; cross-Stein-Weiss term). "
+        "The constant 2 in front of max(gamma) is the joint reach bound "
+        "alone, reach <= gamma_a + gamma_b <= 2 max(gamma) by "
+        "factor-by-factor L4(c). CORRECTED 2026-09-04 from 1 + 2*sqrt(2) "
+        "~ 3.828 [retracted 2026-09-04: l5-height-bound-achieved]: that "
+        "value added a Lipschitz-distortion height leg (2*sqrt(2)) which "
+        "is refuted -- the joint height is identically 1 -- and used "
+        "max(gamma) for the reach where L4(c) gives gamma_a + gamma_b. "
+        "The cross-Stein-Weiss term survives as a unit-norm panel "
+        "quantity and no longer enters the rate. "
         "The asymptotic constant on each "
         "factor is 4/pi (the M1 Hopf-base measure signature; Paper 38 + "
         "Sprint MR-A/B/C)."

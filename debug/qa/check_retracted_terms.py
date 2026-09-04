@@ -138,6 +138,40 @@ WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 # Entries predating the 2026-09-04 `cited_by` requirement.  Ratcheted so
 # historical debt is visible without blocking;  every NEW entry must
 # declare its dependents (or `cited_by: {}` if genuinely none).
+# ---------------------------------------------------------------------------
+# LaTeX-tolerant matching (2026-09-04, /qa DELTA #6).
+#
+# Four successive pattern rebuilds missed loci for one reason: the pattern is
+# written in prose and the corpus is typeset.  `height_B <= gamma` matched
+# while `\mathrm{height}_B \le \gamma` did not; `s/p-lift decay` matched while
+# `$s/p$-lift decay` did not -- and THAT sweep reported clean with five loci
+# live.  Stripping markup before matching removes the class, not the instance.
+#
+# Matching only: the snippet reported to the user is the original line, so
+# quoted evidence and line numbers are unchanged.  Deliberately conservative --
+# it removes inline math delimiters and the wrappers that split a word, and
+# normalises the LaTeX comparison operators.  It does not render LaTeX.
+_MARKUP_WRAPPER = re.compile(
+    r"\\(?:emph|textbf|textit|texttt|mathrm|mathbf|text|mathit)\s*\{([^{}]*)\}")
+_MARKUP_OPS = ((r"\\leq", "<="), (r"\\le\b", "<="), (r"\\geq", ">="),
+               (r"\\ge\b", ">="), (r"\\neq", "!="), (r"\\to\b", "->"))
+
+
+def _strip_markup(line: str) -> str:
+    """Prose-ify a LaTeX line for pattern matching."""
+    out = line
+    for _ in range(3):                        # nested \emph{\textbf{...}}
+        new = _MARKUP_WRAPPER.sub(r"\1", out)
+        if new == out:
+            break
+        out = new
+    for pat, rep in _MARKUP_OPS:
+        out = re.sub(pat, rep, out)
+    out = out.replace("$", "")                # inline math delimiters
+    out = re.sub(r"\\[,;!]|\\ ", " ", out)     # thin spaces
+    return out
+
+
 CITED_BY_BASELINE = {
     "all-compact-lie-groups-universality",
     "bare-graph-n2-minus-1-attribution",
@@ -209,8 +243,8 @@ REGISTRY = [
                 # Documents whose ARGUMENT rests on this claim (distinct
         # from `files`, which is where its wording may appear).
         "cited_by": {
-            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": None,
-            "papers/synthesis/group3_foundations_synthesis.tex": None,
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "reviewed 2026-09-04",
+            "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-04",
             "docs/claim_test_matrix.md": "reviewed 2026-09-04",
         },
 "files": [
@@ -301,8 +335,8 @@ REGISTRY = [
         "cited_by": {
             "geovac/gh_convergence.py": "reviewed 2026-09-04",
             "tests/test_gh_convergence.py": "reviewed 2026-09-04",
-            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": None,
-            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": None,
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": "reviewed 2026-09-04",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": "reviewed 2026-09-04",
         },
 "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
@@ -352,7 +386,7 @@ REGISTRY = [
                 # Documents whose ARGUMENT rests on this claim (distinct
         # from `files`, which is where its wording may appear).
         "cited_by": {
-            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": None,
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "reviewed 2026-09-04",
             "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-04",
         },
 "files": [
@@ -453,7 +487,7 @@ REGISTRY = [
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "reviewed 2026-09-04",
             "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-04",
             "papers/synthesis/group1_operator_algebras_synthesis.tex": "reviewed 2026-09-03",
-            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": None,
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "reviewed 2026-09-04",
         },
 "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
@@ -1048,6 +1082,34 @@ REGISTRY = [
         ],
     },
     {
+        "id": "saturation-approach-monotone",
+        "scope": "trunk group3",
+        "severity": "fail",
+        "retired": "2026-09-04 (trunk DELTA #6 remediation): the approach of the "
+                   "l-block saturation constant to C = 42.7397... is NOT monotone -- "
+                   "195 decreasing steps over n = 10..600, e.g. C_20 = 40.7285 > "
+                   "C_21 = 40.6470.  Every finite sample understates C because the "
+                   "estimate is a ONE-SIDED BOUND, not because the sequence rises. "
+                   "Paper 0 corrected this 2026-09-04;  Paper 7 was still arguing "
+                   "from monotonicity a day later, which is what put it here.",
+        "pattern": r"approach\s+is\s+monotone"
+                   r"|monotone\s+from\s+below"
+                   r"|monotonically\s+approach(?:es|ing)?\s+\$?C\$?\b"
+                   r"|rises\s+monotonically\s+to(?:ward)?s?\s+\$?C\$?\b",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}: saturation-approach-monotone\]"
+                            r"|not monotone|NOT monotone|is \\emph\{not\} monotone",
+        # Documents whose ARGUMENT rests on this claim.
+        "cited_by": {
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex": "reviewed 2026-09-04",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "reviewed 2026-09-04",
+        },
+        "files": [
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
         "id": "forced-count-260-endpoint",
         "scope": "trunk group1 group3",
         "severity": "fail",
@@ -1065,7 +1127,7 @@ REGISTRY = [
         # from `files`, which is where its wording may appear).
         "cited_by": {
             "docs/claim_test_matrix.md": "reviewed 2026-09-04",
-            "papers/group3_foundations/paper_57_forced_free_seam.tex": None,
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "reviewed 2026-09-04",
         },
 "files": [
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
@@ -1514,7 +1576,9 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
         text = path.read_text(encoding="utf-8", errors="replace")
         lines = text.splitlines()
         hit_lines = set()
-        for i, line in enumerate(lines):
+        # Match on a markup-stripped copy; report the original (2026-09-04).
+        stripped = [_strip_markup(l) for l in lines]
+        for i, line in enumerate(stripped):
             if pat.search(line):
                 hit_lines.add(i)
         # 2026-09-03 (trunk FULL run #3, I.4.1): a phrase wrapped across a
@@ -1528,7 +1592,7 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
         for i in sorted(hit_lines):
             line = lines[i]
             lo, hi = max(0, i - WINDOW), min(len(lines), i + WINDOW + 1)
-            window_txt = "\n".join(lines[lo:hi])
+            window_txt = "\n".join(stripped[lo:hi])
             rel = path.relative_to(ROOT)
             snip = re.sub(r"\s+", " ", line.strip())[:160]
             if exempt.search(window_txt):

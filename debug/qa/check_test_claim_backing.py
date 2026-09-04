@@ -174,6 +174,12 @@ def check_c(verbose=True):
             ex = e.get("exempt_if_nearby")
             if ex and re.search(ex, text, re.I):
                 continue
+            # The standardized withdrawal marker exempts here exactly as it
+            # does in C16 -- taken from C16 so the two cannot drift apart.
+            # Entries whose exempt_if_nearby is deliberately "(?!)" (only the
+            # marker exempts) are otherwise unsatisfiable in the matrix.
+            if re.search(C16.withdrawal_marker(e["id"]), text, re.I):
+                continue
             hits.append((ln, e["id"], sorted(names)))
     if verbose:
         print("\nC. no matrix row backs a retracted claim")

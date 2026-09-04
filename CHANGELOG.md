@@ -7,6 +7,104 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.8.3] - 2026-09-04
+
+**The `cited_by` dependency review, worked for the first time.** The scheme
+registered in v5.8.0 lists, per retracted claim, the documents whose
+*argument* rests on it -- as distinct from the documents where its wording
+appears. Five dependents were open. All five carried a defect, and **not one
+was reachable by a phrase pattern**: each restated the retracted claim in its
+own words. This is the failure mode the PI named ("resting on established
+ideas from other papers, then cutting the legs out from under that early
+paper's assertion"), and it is now the class the gate is best at.
+
+### Changed
+
+- **Paper 39: the L5-T height leg is refuted; the constant improves.** The
+  joint height bound rested on the retracted Paper 38 line, and the module
+  said so in its own words ("by Paper 38 S3.5 corrected definition"). The
+  finite-band witness transports verbatim: `B = B_a (X) B_b` annihilates
+  `h = f (X) 1` for `f` above cutoff `n_a`, so `height_B == 1` at every pair
+  of cutoffs and `height_P != 0`. What Eq. (height_explicit_T) bounds is a
+  unit-norm **panel** quantity -- real content, retained under that name.
+  The state-space GH rate assembles from reach alone (the footing Papers 38
+  and 40 stand on), giving `Lambda <= C_3^(2) (gamma_a + gamma_b)`, so the
+  constant falls from `1 + 2 sqrt 2 ~ 3.828` to **2**: the refuted leg was
+  the larger one. This also corrected an arithmetic slip beside it -- the
+  withdrawn assembly bounded a `max` by a *sum* and used `max(gamma)` for
+  the reach where its own reach paragraph derived `gamma_a + gamma_b`. The
+  `Lambda^full` table column had been printing 1.914x too large and is
+  recomputed. Two independent corroborations: the paper's own reach
+  paragraph, and the supporting module's `propinquity_bound_full` field,
+  which already tracked a "conservative 2 gamma estimate" -- this bound.
+  Registered as C17 `p39-tensor-assembly-constant`.
+- **`geovac/gh_convergence_tensor.py`** carries the same correction;
+  `joint_height_simple_tensor` -> `joint_panel_distortion_simple_tensor`
+  (deprecated alias kept), since the old name asserted the retracted
+  identification. Its note claiming the paper's bound was "tighter" than
+  the conservative field was wrong in direction too: 3.828 > 2.
+- **Paper 40:** the L5 height withdrawal was printed *after* the derivation
+  it kills, so a reader met a false proof paragraph first; reordered to
+  Paper 38's shape. Separately, `thm:main_intro` stated the convergence
+  with **no** conditionality clause while `thm:main` and the abstract both
+  carry it -- the theorem environment is the quotable surface, and its
+  hypothesis was ninety lines away. Fixed. A dangling `\ref{sec:L1}` (no
+  such label) was caught before it shipped; it would have compiled clean.
+- **Papers 1 and 7: "three to six times larger" was tagged
+  [INTERNAL THEOREM] and is false.** Measured from the closed forms, the
+  off-branch / on-branch ratio **grows without bound**, tracking
+  `n_max / (sqrt3 pi)` to within 1%: 6.6x at `n_max = 30`, 23x at 120,
+  552x at 3000. "Three to six" is what the ratio looks like at the three
+  cutoffs the papers sampled (28, 29, 30) -- a small-cutoff artifact
+  generalised into a theorem, one cutoff past the data. The unbounded
+  ratio makes the withdrawal of the s/p leg *sharper*: the disparity
+  diverges, so the decay is entirely residue-controlled.
+- **The retired aliasing mechanism was alive in two costumes.** Paper 1's
+  abstract still read "spectral aliasing from lattice truncation" (the
+  retired phrase verbatim, sitting inside the exemption window the residue
+  disclosure opens); Paper 7 attributed the splitting to "differential
+  connectivity between pole and equatorial nodes" -- a *new* wording for
+  the same mechanism, false for the same reason: the l-blocks are
+  disconnected, so there is no connectivity between them to be
+  differential. Both withdrawn.
+- **Paper 7 still argued from "monotone from below"**, which Paper 0
+  retired one day earlier (195 decreasing steps over n = 10..600;
+  C_20 = 40.7285 > C_21 = 40.6470). The conclusion survives -- every finite
+  sample understates C -- but the reason is the one-sided bound, not
+  monotonicity. Registered as C16 `saturation-approach-monotone`; it had
+  been unregistered, so nothing could have caught it.
+
+### Fixed
+
+- **C22 could not accept a correctly-marked row.** Check C reuses C16's
+  patterns but honoured only `exempt_if_nearby`, not the standardized
+  `[retracted YYYY-MM-DD: <entry-id>]` marker. An entry whose exemption is
+  deliberately `(?!)` -- meaning "only the marker exempts" -- was therefore
+  unsatisfiable in the claim matrix: a properly withdrawn row failed
+  forever. Now reads the marker from C16's own `withdrawal_marker()`, so
+  the two gates cannot drift apart.
+- CLAUDE.md's version cursor read v5.6.0 while commits had reached v5.8.2;
+  the bumps had been going into commit subjects only.
+
+### Verified
+
+- Both new registry entries discrimination-tested in **both** directions
+  (fires on the retired wording, silent on the corrected one), including
+  through the markup stripper. C22's four checks still fire.
+- All 13 deterministic gates PASS on trunk. Paper 39/40 compile with zero
+  undefined references. `tests/test_gh_convergence_tensor.py` +
+  `test_paper39_triangle_tight.py`: 87 passed, 8 skipped.
+
+### Known gaps (deferred to the separate guard pass)
+
+Per the CLAUDE.md S9 rule adopted this session, guard-writing is a separate,
+separately-reviewed activity and is **not** done here:
+
+- No test asserted the retired `1 + 2 sqrt 2` constant -- the whole Paper 39
+  rate survived a rename and a constant change with 87 tests green.
+- C22's check-C selftest proves the pattern fires; it does not prove the new
+  marker-exemption branch behaves. That branch is currently untested.
+
 ## [v5.6.0] - 2026-09-03
 
 **/qa trunk FULL run #4 = FAIL, remediated across four tranches.** Eleven

@@ -234,6 +234,35 @@ REGISTRY = [
         ],
     },
     {
+        "id": "p39-tensor-assembly-constant",
+        "scope": "trunk group1",
+        "severity": "fail",
+        "canonical_note": "Trunk DELTA #6 remediation, 2026-09-04.  The "
+                          "assembled tensor state-space GH constant is 2 "
+                          "(reach-only: reach <= gamma_a + gamma_b <= 2 "
+                          "max(gamma)), NOT 1 + 2 sqrt 2 ~ 3.828.  The "
+                          "retired value added a Lipschitz-distortion height "
+                          "leg (2 sqrt 2) that is refuted -- the joint height "
+                          "is identically 1 by the finite-band witness "
+                          "transported from Paper 38 -- and used max(gamma) "
+                          "for the reach where L4(c) gives gamma_a + gamma_b. "
+                          "The Lambda^full column printed 1.914x too large. "
+                          "The cross-Stein-Weiss 2 sqrt 2 survives as a "
+                          "unit-norm PANEL bound and is legal in that role.",
+        "pattern": r"\(\s*1\s*\+\s*2\\sqrt\{2\}\s*\)\s*\\cdot"
+                   r"|1\s*\+\s*2\s*\*?\s*sqrt\(2\)\s*\)?\s*(?:\*|max)"
+                   r"|reach-plus-height"
+                   r"|1\s*\+\s*2\\sqrt\{2\}\s*\\approx\s*3\.828",
+        "require_nearby": r"max\(?\\?gamma|C_3|propinquity|Lambda|assembl|tensor",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}: l5-height-bound-achieved\]"
+                            r"|withdrawn|retired|corrected 2026-09-04|formerly"
+                            r"|panel|before 2026-09-04",
+        "files": [
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "geovac/gh_convergence_tensor.py",
+        ],
+    },
+    {
         "id": "composed-lih-market-test-retired",
         "scope": "all",
         "severity": "fail",
