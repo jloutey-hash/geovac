@@ -155,7 +155,14 @@ REGISTRY = [
         "exempt_if_nearby": r"\[retracted",
         "severity": "fail",
         "scope": "group3 trunk synthesis",
-        "files": [
+                # Documents whose ARGUMENT rests on this claim (distinct
+        # from `files`, which is where its wording may appear).
+        "cited_by": {
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": None,
+            "papers/synthesis/group3_foundations_synthesis.tex": None,
+            "docs/claim_test_matrix.md": "reviewed 2026-09-04",
+        },
+"files": [
             "papers/group3_foundations/paper_1_spectrum.tex",
             "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
             "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
@@ -181,7 +188,13 @@ REGISTRY = [
         "exempt_if_nearby": r"\[retracted",
         "severity": "fail",
         "scope": "group3 trunk synthesis",
-        "files": [
+                # Documents whose ARGUMENT rests on this claim (distinct
+        # from `files`, which is where its wording may appear).
+        "cited_by": {
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex": "reviewed 2026-09-04",
+            "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-04",
+        },
+"files": [
             "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
             "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
             "papers/group3_foundations/paper_1_spectrum.tex",
@@ -225,7 +238,15 @@ REGISTRY = [
                             r"until then|read \\`\\`this|printed here until",
         "severity": "fail",
         "scope": "group1 trunk",
-        "files": [
+                # Documents whose ARGUMENT rests on this claim (distinct
+        # from `files`, which is where its wording may appear).
+        "cited_by": {
+            "geovac/gh_convergence.py": "reviewed 2026-09-04",
+            "tests/test_gh_convergence.py": "reviewed 2026-09-04",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": None,
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": None,
+        },
+"files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
@@ -270,7 +291,13 @@ REGISTRY = [
                             r"disconnected|until 2026-09-03|no degeneracy",
         "severity": "fail",
         "scope": "group3 trunk synthesis",
-        "files": [
+                # Documents whose ARGUMENT rests on this claim (distinct
+        # from `files`, which is where its wording may appear).
+        "cited_by": {
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": None,
+            "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-04",
+        },
+"files": [
             "papers/group3_foundations/paper_1_spectrum.tex",
             "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
             "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
@@ -315,7 +342,17 @@ REGISTRY = [
                             r"|historically|k = 0 volume|volume-ratio note",
         "severity": "fail",
         "scope": "group1 group3 trunk",
-        "files": [
+                # Documents whose ARGUMENT rests on this claim (distinct
+        # from `files`, which is where its wording may appear).
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "reviewed 2026-09-04",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": "reviewed 2026-09-04",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "reviewed 2026-09-03",
+            "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-03",
+            "papers/synthesis/geovac_field_guide.tex": "reviewed 2026-09-03",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "reviewed 2026-09-03",
+        },
+"files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
@@ -352,7 +389,15 @@ REGISTRY = [
                             r"|Attribution note|Earlier drafts called",
         "severity": "fail",
         "scope": "group1 trunk",
-        "files": [
+                # Documents whose ARGUMENT rests on this claim (distinct
+        # from `files`, which is where its wording may appear).
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "reviewed 2026-09-04",
+            "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-04",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex": "reviewed 2026-09-03",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": None,
+        },
+"files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
@@ -958,7 +1003,13 @@ REGISTRY = [
                    r"|\\mathrm\{matter\}\}\s*(?:\\;)?=\s*(?:\\;)?128"
                    r"|128\s*per\s+generation\s+is\s+forced",
         "exempt_if_nearby": r"artefact|artifact|degenerate|corrected 2026-09-03|retired|printed before|before 2026-09-03|reproduces the retired",
-        "files": [
+                # Documents whose ARGUMENT rests on this claim (distinct
+        # from `files`, which is where its wording may appear).
+        "cited_by": {
+            "docs/claim_test_matrix.md": "reviewed 2026-09-04",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": None,
+        },
+"files": [
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
             "papers/group3_foundations/paper_57_forced_free_seam.tex",
             "papers/synthesis/*.tex",
@@ -1429,6 +1480,45 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
     return live, ok
 
 
+def _dependency_report(gate: str | None) -> int:
+    """Which documents DEPEND on each retracted claim, and were they revisited?
+
+    See the `cited_by` note at the top of the REGISTRY.  A dependent is a
+    document whose argument rests on the claim -- not merely one where the
+    claim's wording might appear (that is `files`).  Dependents are listed
+    once, from the argument, so this report cannot be defeated by spelling,
+    which is what defeated four successive pattern rebuilds.
+    """
+    rows, unreviewed = [], 0
+    for e in REGISTRY:
+        dep = e.get("cited_by")
+        if not dep:
+            continue
+        if gate and gate not in str(e.get("scope", "")):
+            continue
+        pending = [d for d, stamp in dep.items() if not stamp]
+        rows.append((e["id"], dep, pending))
+        unreviewed += len(pending)
+
+    scope = f"scope '{gate}'" if gate else "ALL entries"
+    print(f"claim-dependency report (C16 cited_by)   [{scope}: "
+          f"{len(rows)} entr(y/ies) with declared dependents]\n")
+    for eid, dep, pending in rows:
+        mark = "ok " if not pending else "GAP"
+        print(f"  [{mark}] {eid}")
+        for d, stamp in dep.items():
+            print(f"        {'REVISITED  ' if stamp else 'NOT REVISITED'}  "
+                  f"{d}" + (f"   ({stamp})" if stamp else ""))
+    if unreviewed:
+        print(f"\nRESULT: FAIL ({unreviewed} dependent document(s) rest on a "
+              f"retracted claim and have not been revisited since it was "
+              f"retracted). Review each, then stamp it in `cited_by`.")
+        return 1
+    print(f"\nRESULT: PASS (every declared dependent of a retracted claim has "
+          f"been revisited)")
+    return 0
+
+
 def _coverage_report(gate: str) -> int:
     """Which gated documents does each in-scope entry NOT declare?
 
@@ -1468,6 +1558,8 @@ def main() -> int:
     gate = _gate_substr(sys.argv)
     if "--coverage" in sys.argv:
         return _coverage_report(gate or "trunk")
+    if "--dependencies" in sys.argv:
+        return _dependency_report(gate)
     scope = f"scope '{gate}'" if gate else "ALL entries"
 
     # Entry selection is LOCUS-DERIVED as well as tag-based (2026-08-31
@@ -1550,6 +1642,15 @@ def main() -> int:
               f"entries over {len(_files_seen)} declared locus "
               f"pattern(s))")
         return 1
+    _pending = sum(len([d for d, v in e.get("cited_by", {}).items() if not v])
+                   for e in REGISTRY
+                   if not gate or gate in str(e.get("scope", "")))
+    if _pending:
+        print(f"   [cited_by] {_pending} dependent document(s) rest on a "
+              f"retracted claim in this scope and are not yet marked "
+              f"revisited -- run --dependencies. This is the class a pattern "
+              f"cannot catch:\u00a0a citer usually restates the claim in its own "
+              f"words.")
     print(f"   [marker] {len(_authored)} of {len(REGISTRY)} entries still rely "
           f"on hand-authored exemption vocabulary rather than the standardized "
           f"`[retracted YYYY-MM-DD]` token -- the class that produced three "
