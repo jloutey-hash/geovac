@@ -136,6 +136,59 @@ WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
 REGISTRY = [
     {
+        "id": "sp-splitting-as-convergence-evidence",
+        "note": "FULL run #4 + DELTA #5.  Distinct from the MECHANISM entry: "
+                "this one guards the EVIDENTIAL reading -- the s/p decay "
+                "listed as one of the two numerical indications supporting "
+                "the graph -> S^3 continuum reading.  Paper 7 now states "
+                "that the leg 'carries no evidential weight ... which now "
+                "rests on the lambda_max saturation alone', and the synthesis "
+                "that 'the saturation of the spectral bound is the only leg "
+                "that carries weight'.  Any locus still pairing the two as "
+                "joint support contradicts that.  The quantity itself is "
+                "fine to report;\u00a0what is retired is citing it as evidence.",
+        "pattern": r"s/p[- ]lift decay"
+                   r"|degeneracy recovery"
+                   r"|a degeneracy that is recovered"
+                   r"|degeneracy lift[^.\n]{0,60}decays"
+                   r"|saturation[^.\n]{0,40}and the (?:decay of the )?s/p",
+        "exempt_if_nearby": r"\[retracted",
+        "severity": "fail",
+        "scope": "group3 trunk synthesis",
+        "files": [
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
+        "id": "graph-s3-convergence-established",
+        "note": "Trunk FULL #3/#4 re-pricing, still live at DELTA #5.  The "
+                "operator convergence L -> Delta_{S^3} and the identification "
+                "of the limit manifold are NOT established:\u00a0Paper 7 says so "
+                "at four loci ('not established here', 'no test in the "
+                "repository establishes the limit manifold', 'neither proven "
+                "nor established numerically').  What is measured is the "
+                "lambda_max saturation.  Retired:\u00a0stating the convergence or "
+                "the manifold identification as established/demonstrated/"
+                "proven, and tagging it [SYMBOLIC PROOF] or [MEASURED].",
+        "pattern": r"convergence[^.\n]{0,40}(?:is|was) demonstrated empirically"
+                   r"|discrete graph converges[^.\n]{0,80}and that limit is"
+                   r"|conformal equivalence between the discrete[^.\n]{0,60}established"
+                   r"|discrete Fock graph's continuum limit is\s*\n?\s*conformally equivalent",
+        "exempt_if_nearby": r"\[retracted",
+        "severity": "fail",
+        "scope": "group3 trunk synthesis",
+        "files": [
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
         "id": "l5-height-bound-achieved",
         "note": "FULL run #4, 2026-09-03.  Paper 38's Lemma L5 concluded "
                 "height_B <= gamma_nmax and height_P = 0.  Both are FALSE by "
@@ -200,10 +253,19 @@ REGISTRY = [
                 "28, 2.58% at 29).  The quantity IS closed form on that "
                 "branch -- (2 - 2cos(pi/(n_max-1)))/3 -- which is an upgrade; "
                 "what is retired is its use as evidence of convergence.",
-        "pattern": r"spectral aliasing on a compact manifold"
-                   r"|standing-wave reflections that differentially"
+        # WIDENED 2026-09-04 (/qa DELTA #5): matched one locus per paper
+        # where the reviewers found eleven.  It caught the exact phrase
+        # in front of me when I wrote it and none of the variants the
+        # corpus actually uses.
+        "pattern": r"spectral aliasing"
+                   r"|finite-size aliasing"
+                   r"|standing-wave reflection"
+                   r"|absorbing wall that differentially"
+                   r"|differential(?:ly)?[- ]weighted connectivity"
+                   r"|differential connectivity between angular"
                    r"|recovered degeneracy is the hallmark"
-                   r"|hallmark of spectral aliasing",
+                   r"|recovering the exact Coulomb degeneracy"
+                   r"|continuing toward the exact Coulomb degeneracy",
         "exempt_if_nearby": r"withdrawn|retired|refuted|mod\s*3|residue|"
                             r"disconnected|until 2026-09-03|no degeneracy",
         "severity": "fail",

@@ -30,7 +30,7 @@ This discrete structure possesses a natural geometry. The hydrogen atom's $SO(4)
 This lattice exhibits a profound duality between \textit{algebra} and \textit{geometry}:
 \begin{itemize}
 \item \textbf{The Algebraic Skeleton:} Transition operators $T_\pm$ (radial) and $L_\pm$ (angular) generate the spectrum. Their eigenvalues reproduce the exact Rydberg quantum-number structure without correction; the formula $E_n = -1/(2n^2)$ follows once the matched kinetic scale is applied (an Observation, Paper~7).
-\item \textbf{The Geometric Flesh:} The lattice \textit{topology}---the pattern of connections---generates physical corrections. High angular momentum states occupy high-connectivity nodes, creating differential weighted connectivity at finite truncation. The edge-weight log-holonomy provides a measure of lattice curvature that decays as $n^{-1}$.
+\item \textbf{The Geometric Flesh:} The lattice \textit{topology}---the pattern of connections---generates physical corrections. High angular momentum states occupy high-connectivity nodes, creating differential weighted connectivity [retracted 2026-09-04: sp-splitting-aliasing-mechanism] at finite truncation. The edge-weight log-holonomy provides a measure of lattice curvature that decays as $n^{-1}$.
 \end{itemize}
 
 In this paper, we present computational evidence for this dual framework. Section~\ref{sec:algebra} demonstrates spectral exactness. Section~\ref{sec:geometry} analyzes the $s/p$ degeneracy breaking by the graph Laplacian, demonstrating it is a discretization artifact that vanishes in the continuum limit. Section~\ref{sec:relativity} analyzes the geometric phase structure, showing that the Berry phase vanishes while the log-holonomy decays as $n^{-1}$. Section~\ref{sec:discussion} discusses the algebra-geometry duality and its connection to wave-particle complementarity. Section~\ref{sec:conclusion} summarizes our findings.
@@ -125,7 +125,9 @@ corresponding to a 16\% relative splitting. However, this degeneracy
 breaking is \emph{not} an emergent physical force. Systematic
 convergence analysis reveals it is a \textbf{discretization artifact}
 of finite lattice truncation---the graph-theoretic analog of spectral
-aliasing in finite-element methods.
+aliasing [retracted 2026-09-04: sp-splitting-aliasing-mechanism] in finite-element methods, an analogy retired
+for the $s/p$ proxy on 2026-09-03 (the $\ell$-blocks are disconnected,
+so nothing is aliased).
 
 \paragraph{QA correction (2026-06-14).}  \textbf{[MEASURED]} The specific quantitative
 values in this section---the degrees $D_{2s} = 0.854$, $D_{2p} = 3.416$,
@@ -228,7 +230,10 @@ non-reproducing Table~\ref{tab:degrees} figures --- see the \S III QA
 note), is more sensitive to the
 lattice boundary than the 2s state. At finite $n_{\max}$, the
 truncation acts as an absorbing wall that differentially perturbs
-high-connectivity nodes. This is a \emph{geometric boundary effect},
+high-connectivity nodes [retracted 2026-09-04: sp-splitting-aliasing-mechanism]. \emph{Withdrawn for the $s/p$
+proxy (2026-09-03):} its size is set by the residue of $n_{\max}$ modulo
+$3$, not by a boundary effect. This is a \emph{geometric boundary
+effect},
 not an emergent centrifugal barrier.
 
 Crucially, \textit{no explicit} $l(l+1)/r^2$ term appears in the
@@ -363,7 +368,7 @@ Our results reveal a profound duality in the structure of the paraboloid lattice
 \begin{enumerate}
 \item \textbf{Algebraic Structure (Wave-like):} The operators $T_\pm, L_\pm$ and their eigenvalues reproduce the \textit{unperturbed} hydrogen quantum-number structure exactly; the energies (Eq.~\ref{eq:rydberg}) follow once the matched scale $\kappa$ is applied. This represents the continuous, exact aspect---analogous to the wave description in quantum mechanics.
 
-\item \textbf{Geometric Structure (Particle-like):} The graph Laplacian $L = D - A$ encodes \textit{perturbations}---corrections arising from discrete connectivity. The weighted degree matrix $D$ introduces differential connectivity between angular momentum sectors at finite truncation. The edge-weight log-holonomy decays as $n^{-1}$ (Section~\ref{sec:relativity}), measuring the curvature of the weight function. This represents the discrete aspect of the lattice formulation.
+\item \textbf{Geometric Structure (Particle-like):} The graph Laplacian $L = D - A$ encodes \textit{perturbations}---corrections arising from discrete connectivity. The weighted degree matrix $D$ introduces differential connectivity [retracted 2026-09-04: sp-splitting-aliasing-mechanism] between angular momentum sectors at finite truncation. The edge-weight log-holonomy decays as $n^{-1}$ (Section~\ref{sec:relativity}), measuring the curvature of the weight function. This represents the discrete aspect of the lattice formulation.
 \end{enumerate}
 
 This duality is suggestive: the algebraic operators provide the exact quantum-number structure, while the graph topology introduces finite-size corrections that must be controlled.
@@ -411,7 +416,8 @@ discretization artifacts and genuine physical content of the graph
 Laplacian. The $s/p$ splitting is firmly in the artifact category:
 on the binary lattice it decays as $n_{\max} \to \infty$ (not on the
 CG-weighted construction of \S III) and exhibits the oscillatory
-decay characteristic of finite-size aliasing.
+decay characteristic of finite-size aliasing [retracted 2026-09-04: sp-splitting-aliasing-mechanism] ---
+a characterisation withdrawn for this quantity on 2026-09-03.
 
 By contrast, the spectral bound $\lambda_{\max} \to 2 d_{\max} = 8$
 (hence the extremal eigenvalue $\kappa\lambda_{\max} \to -1/2$; the graph
