@@ -134,6 +134,50 @@ def withdrawal_marker(entry_id: str) -> str:
 
 WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
+
+# Entries predating the 2026-09-04 `cited_by` requirement.  Ratcheted so
+# historical debt is visible without blocking;  every NEW entry must
+# declare its dependents (or `cited_by: {}` if genuinely none).
+CITED_BY_BASELINE = {
+    "all-compact-lie-groups-universality",
+    "bare-graph-n2-minus-1-attribution",
+    "batch2-false-closure",
+    "brown-surjection-attribution",
+    "cheeger-simons-cone-attribution",
+    "circle-fejer-constant-4-over-pi",
+    "combined-triple-ko1-additive",
+    "cp2-50pct-vs-fit-floor",
+    "dgv-graph-form-tautology",
+    "drake-swainson-3d-mistranscription",
+    "emn-catalan-negative-attribution",
+    "fock-coupling-one-sixteenth-prefactor",
+    "latremoliere-propinquity-named-for-gh-rate",
+    "lorentzian-literal-identification-krein",
+    "organics-in-library",
+    "p24-entanglement-rigidity",
+    "p27-ho-zero-entropy-rigidity",
+    "p34-alkali-uniformity",
+    "p34-ee-eigen-closed-form",
+    "p34-lamb-near-cancellation",
+    "p45-kplus-compression-theorem-live",
+    "pair-diagonal-as-exact-sparsity",
+    "pairdiag-composed-scaling-livesd",
+    "pairdiag-density-as-the-angular-density",
+    "pairdiag-density-pipeline-realizes",
+    "propinquity-as-achieved-metric",
+    "propinquity-as-achieved-metric-group3",
+    "propinquity-as-achieved-metric-group5",
+    "rename-pass-residue-p32",
+    "s-p-splitting-retired-waypoints",
+    "s7-structural-negative",
+    "sbh-phi2-prefactor",
+    "su2-kinetic-equals-L1",
+    "tc-qubit-validated-success",
+    "wald-factor2-cone-coefficient",
+    "withdrawn-c3op-envelope-sqrt",
+    "withdrawn-pythagorean-mechanism",
+}
+
 REGISTRY = [
     {
         "id": "sp-splitting-as-convergence-evidence",
@@ -1642,19 +1686,39 @@ def main() -> int:
               f"entries over {len(_files_seen)} declared locus "
               f"pattern(s))")
         return 1
-    _pending = sum(len([d for d, v in e.get("cited_by", {}).items() if not v])
-                   for e in REGISTRY
-                   if not gate or gate in str(e.get("scope", "")))
+    # cited_by enforcement (2026-09-04).  Two failure modes, both of which
+    # previously printed PASS:  dependents declared but never revisited, and
+    # entries declaring nothing at all -- the latter indistinguishable from
+    # "no dependents", which is how C17 came to examine nothing.
+    _in = lambda e: not gate or gate in str(e.get("scope", ""))
+    _pending = [(e["id"], d) for e in REGISTRY if _in(e)
+                for d, v in e.get("cited_by", {}).items() if not v]
+    _undeclared = [e["id"] for e in REGISTRY if _in(e) and "cited_by" not in e
+                   and e["id"] not in CITED_BY_BASELINE]
     if _pending:
-        print(f"   [cited_by] {_pending} dependent document(s) rest on a "
-              f"retracted claim in this scope and are not yet marked "
-              f"revisited -- run --dependencies. This is the class a pattern "
-              f"cannot catch:\u00a0a citer usually restates the claim in its own "
-              f"words.")
+        print(f"\n*** UNREVISITED DEPENDENTS ({len(_pending)}) -- documents whose "
+              f"argument rests on a retracted claim, not yet revisited: ***")
+        for eid, d in _pending:
+            print(f"  [{eid}] {d}")
+        print("  A pattern cannot catch this class:\u00a0a citing document restates "
+              "the claim in its own words.  Review each, then stamp it in "
+              "`cited_by`.")
+    if _undeclared:
+        print(f"\n*** ENTRIES NOT DECLARING DEPENDENTS ({len(_undeclared)}) -- "
+              f"silence here is indistinguishable from 'nothing depends on "
+              f"this'. Declare them, or `cited_by: {{}}` if genuinely none: ***")
+        for eid in _undeclared:
+            print(f"  [{eid}]")
     print(f"   [marker] {len(_authored)} of {len(REGISTRY)} entries still rely "
           f"on hand-authored exemption vocabulary rather than the standardized "
           f"`[retracted YYYY-MM-DD]` token -- the class that produced three "
           f"false-clean entries on 2026-09-03.  New entries use the token only.")
+    if _pending or _undeclared:
+        print(f"\nRESULT: FAIL ({len(_pending)} unrevisited dependent(s), "
+              f"{len(_undeclared)} entry/entries not declaring dependents, in "
+              f"{scope}). No live retracted wording -- but the dependency "
+              f"class is what patterns cannot see.")
+        return 1
     print(f"\nRESULT: PASS (no live fail-severity retracted claim in "
           f"{scope}; {len(_selected)}/{len(REGISTRY)} entries over "
           f"{len(_files_seen)} declared locus pattern(s); {exempt_total} "
