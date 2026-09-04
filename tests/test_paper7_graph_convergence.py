@@ -46,6 +46,7 @@ from scipy.sparse.linalg import eigsh
 
 from geovac.atomic_solver import AtomicSolver
 from geovac.lattice import GeometricLattice
+from geovac import lattice_spectrum
 
 KAPPA = -1.0 / 16.0
 GRID = [5, 8, 10, 15, 20, 30]
@@ -138,12 +139,20 @@ def test_spectrum_confined_and_bottom_dense_at_nmax_30():
     assert (lo[-1] - lo[0]) / abs(lo[0]) < 1e-3
 
 
-@pytest.mark.slow
-def test_lambda_max_deficit_at_nmax_70_slow():
+def test_lambda_max_deficit_at_nmax_70():
     """Paper 0 conclusion: 0.11% saturation deficit at n_max = 70 (116,795
-    nodes; ~3 min).  Measured 2026-09-03: E0 = -0.499463."""
-    _, _, L, dmax = _laplacian(70)
-    lm = float(eigsh(L, k=1, which="LA")[0][0])
+    nodes).  Measured 2026-09-03: E0 = -0.499463.
+
+    Computed BLOCKWISE on the constructed lattice (2026-09-04): L is block
+    diagonal in l, so the top eigenvalue is the largest of the per-block
+    tops, and the largest block here is 2485 of 116,795 rows.  Global
+    eigsh took 70.07 s and this takes 0.93 s -- 75x, agreeing to 2.1e-14 --
+    so the test no longer needs a slow marker.  It still diagonalises the
+    graph that was actually built, and therefore remains an independent
+    check ON the closed form rather than a consumer of it.
+    """
+    lat, _, L, dmax = _laplacian(70)
+    lm = lattice_spectrum.lambda_max_from_operator(L, lat.states)
     assert dmax == 4
     assert 0.0009 < (8 - lm) / 8 < 0.0013
 

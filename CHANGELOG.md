@@ -7,6 +7,81 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.8.5] - 2026-09-04
+
+**Slow-test audit: the lattice spectrum is closed form, and the tests were
+still diagonalising.** PI-directed. Patch bump per §9 (the PM does not choose minor bumps);
+**flagged to the PI as a possible minor** — a new production module plus a
+suite-wide capability change is arguably corpus-significant.
+
+The 2026-08-31 cost memo measured the suite (6.7 h serial, 2.4 h with
+`-n auto`, 98/361 files over budget) and concluded the cost is *inherent*. It
+had tested parallelism, thread-pinning and process isolation — but never
+whether the **computation** could be replaced. That is the algebraic-first
+question (§4) applied to the test suite, and it has an answer.
+
+### Added
+
+- **`geovac/lattice_spectrum.py`.** The closed form proved in Paper 0 §VI /
+  Paper 1 §III had been living as a private helper *inside the test that
+  proves it*, so nothing else could use it — while fourteen other test files
+  called `numpy.linalg.eigh` on the dense operator. Measured at n_max = 30
+  (9455 × 9455): dense `eigh` **69.2 s**; blockwise `eigh` **1.05 s** (66×,
+  agreement 1.4e-14); closed form **1.0 ms** (43,800×, agreement 1.4e-13).
+  Both exact, not approximations. Eigenvectors are the tensor products of path
+  eigenvectors (residual 3e-15), with the degenerate-basis caveat documented
+  and `eigenspace_overlap` provided for the basis-free case.
+- `debug/qa/slow_test_closed_form_audit.md` — the audit.
+
+### Changed
+
+| test | before | after |
+|:--|--:|--:|
+| `test_sp_splitting_identification_is_ill_conditioned` | 69.70 s | **0.94 s** |
+| `test_lambda_max_deficit_at_nmax_70` | ~180 s, `@slow` | **3.17 s** |
+
+Both keep their assertions verbatim and both still diagonalise the operator
+that was actually built, so neither now *rests on* the closed form — they
+remain independent checks **on** it. The second loses its slow marker and now
+runs by default: coverage gained, not traded. Fire-tested: both FIRE.
+
+The first also becomes **basis-free**. Its previous form took an argmax over
+individual eigenvector components inside a degenerate eigenspace (λ₂ₛ = 3 has
+multiplicity 25 at n_max = 30) — the pathology /qa DELTA #5 measured, where a
+no-op relabelling turned 2.70% into 4421%.
+
+**A capability, not only a speedup.** `lambda_max` is O(n_max): n_max = 70 in
+0.03 ms, 5,000 in 1.9 ms, 40,000 (2.1e13 nodes) in 16 ms. Claims at cutoffs
+the dense route could never reach are now testable. (Its first version
+materialised every block and could not finish at n_max = 5000; the profile
+caught it.)
+
+### Found
+
+- **The `slow` marker does not track cost.** Of the six costliest tests
+  measured, **zero** carry `@pytest.mark.slow`; the one marked test in scope
+  was the only one with a closed-form escape and is now 3.2 s. In this sample
+  the marker is *anti-correlated* with cost. 307 markers across 139 files are
+  not a cost map and should not be read as one.
+- **`tests/test_paper27_entropy.py` has been red since at least 2026-08-30**
+  and no gate noticed. Every input last changed on or before that date, so
+  this session did not cause it. The underlying cause is structural: the
+  2026-08-31 cadence decision made the full suite a "scheduled baseline"
+  rather than a close gate — correct on cost — but **there is no scheduler**,
+  and `/regression touched` never selects a file whose inputs have not
+  changed, which is exactly the file that can rot unobserved.
+- Two of the failing assertions pin basis-dependent quantities (a diagonal
+  fraction in an eigenbasis, to nine significant figures) to tolerances the
+  quantities do not support. Logged, not fixed.
+
+### Owed (guard pass, §9)
+
+`tests/test_lattice_spectrum.py` does not exist. And the degeneracy-pooling
+property is **unverified**: planting `while False:` into `eigenspace_overlap`'s
+pooling loop — disabling the very thing that makes the result basis-free —
+leaves the converted test green. That guard must name pooled-vs-unpooled as
+the wrong answer it rejects.
+
 ## [v5.8.4] - 2026-09-04
 
 **DELTA #6 remediation, non-guard half.** The guard half is deliberately

@@ -148,14 +148,27 @@ def test_sp_splitting_identification_is_ill_conditioned():
     n_max = 30 the runner-up eigenvector at the (2,0,0) node is within 1.5% of
     the winner in overlap while its eigenvalue differs by more than 2.  The
     reported splitting is therefore reproducible but not robust."""
-    lat, L = _dense_laplacian(30)
+    # Computed blockwise and BASIS-FREE (2026-09-04).  The previous form
+    # took an argmax over individual eigenvector components, which is not
+    # well defined inside a degenerate eigenspace -- lambda_2s = 3 has
+    # multiplicity 25 here, and /qa DELTA #5 measured a no-op relabelling
+    # of the nodes turning a reported 2.70% into 4421%.  Pooling each
+    # eigenspace first makes the overlap invariant, and diagonalising the
+    # 30 l-blocks instead of the 9455 x 9455 whole takes 1 s rather than 70.
+    from geovac import lattice_spectrum as _ls
+    from scipy.sparse import diags as _diags
+
+    lat = GeometricLattice(max_n=30)
+    A = lat.adjacency.tocsr()
+    deg = np.asarray(A.sum(axis=1)).ravel()
+    L = _diags(deg, 0, shape=A.shape, format="csr") - A
     idx = {s: i for i, s in enumerate(lat.states)}
-    w, v = np.linalg.eigh(L)
-    ov = np.abs(v[idx[(2, 0, 0)], :])
-    order = np.argsort(-ov)[:2]
-    margin = (ov[order[0]] - ov[order[1]]) / ov[order[0]]
+    _, blocks = _ls.block_eigh(L, lat.states)
+    ov = _ls.eigenspace_overlap(blocks, idx[(2, 0, 0)])
+    (w0, o0), (w1, o1) = ov[0], ov[1]
+    margin = (o0 - o1) / o0
     assert margin < 0.02, margin                       # near-tie
-    assert abs(w[order[0]] - w[order[1]]) > 1.0        # wildly different eigenvalues
+    assert abs(w0 - w1) > 1.0                          # wildly different eigenvalues
 
 
 def test_l_zero_and_l_one_blocks_are_disconnected():
