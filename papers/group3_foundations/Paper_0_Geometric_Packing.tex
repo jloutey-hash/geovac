@@ -686,8 +686,18 @@ correction of an earlier ``within each $(\ell,m)$ sector'' statement).
   \;+\; 2 - 2\cos\frac{k\pi}{2\ell+1} \,\Bigr\},
   \label{eq:block_spectrum}
 \end{equation}
-and the deficit obeys $2 d_{\max} - \lambda_{\max} = (42.6 + o(1))/n_{\max}^2$ (log--log slope $-1.984$ over $n_{\max} = 20$--$320$; \texttt{tests/test\_paper1\_block\_spectrum.py}, added 2026-09-03).  
-with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
+Each block's top eigenvalue is $4 + 2\cos\frac{\pi}{n_{\max}-\ell} + 2\cos\frac{\pi}{2\ell+1}$, so the deficit is
+$\min_\ell\bigl[4\sin^2\frac{\pi}{2(n_{\max}-\ell)} + 4\sin^2\frac{\pi}{2(2\ell+1)}\bigr]$;\ minimising its leading form $\pi^2[(n_{\max}-\ell)^{-2} + (2\ell+1)^{-2}]$ under the block constraint gives the constant in closed form,
+\begin{equation}
+  2 d_{\max} - \lambda_{\max}
+  \;=\; \frac{C}{n_{\max}^{2}} + o\bigl(n_{\max}^{-2}\bigr),
+  \qquad
+  C \;=\; \frac{\pi^{2}}{4}\bigl(2 + 2^{1/3}\bigr)^{2}\bigl(1 + 2^{-2/3}\bigr)
+  \;=\; 42.7397\ldots,
+  \label{eq:saturation_rate}
+\end{equation}
+attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  The approach is monotone from below --- $C_{n} = 42.61$ at $n_{\max} = 320$, $42.70$ at $1000$, $42.73$ at $4000$ --- so every finite sample understates $C$, and the value printed here before 2026-09-03, $42.6$, was the $n_{\max} = 320$ sample rather than the limit (\texttt{tests/test\_paper1\_block\_spectrum.py}).  
+Finally, with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
 $K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
 ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
 convergence of the spectral bound is the content; the reproduction of

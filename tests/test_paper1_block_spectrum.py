@@ -16,7 +16,8 @@ Consequences pinned here:
 
 1. The WHOLE spectrum of L is closed form (verified against dense eigh).
 2. lambda_max -> 2 d_max = 8 with a PROVEN rate: the deficit is
-   8 - lambda_max = (42.6 + o(1)) / n_max^2  (log-log slope -1.984 over
+   8 - lambda_max = (C + o(1)) / n_max^2, C = pi^2 (2+2^(1/3))^2
+   (1+2^(-2/3))/4 = 42.739654...  (log-log slope -1.984 over
    n_max = 20..320).  The papers' "no rate proven here" understates this.
 3. The l = 0 block is the path P_{n_max}: its top eigenvalue is exactly
    2 - 2 cos((n_max-1) pi/n_max) -> 4.
@@ -76,14 +77,35 @@ def test_closed_form_wrong_product_is_rejected():
     assert wrong.shape != direct.shape or np.abs(direct - wrong).max() > 1e-3
 
 
+SATURATION_C = np.pi ** 2 * (2 + 2 ** (1 / 3)) ** 2 * (1 + 2 ** (-2 / 3)) / 4
+
+
 def test_saturation_rate_is_order_n_squared():
-    """8 - lambda_max = (42.6 + o(1)) / n_max^2 -- a proven rate, from the
-    closed form (the papers say 'no rate proven here')."""
+    """8 - lambda_max = (C + o(1)) / n_max^2 with C = 42.739654... in closed
+    form -- a proven rate, not a fit.
+
+    The previous version asserted `42.0 < gaps[-1]*320**2 < 43.5`, a window so
+    wide it could not distinguish the n_max = 320 SAMPLE (42.606) from the
+    limit (42.7397).  The papers printed the sample as the limit for that
+    reason.  This version pins the closed form and the approach separately.
+    """
     ns = [20, 40, 80, 160, 320]
     gaps = [8 - max(block_spectrum(n, l).max() for l in range(n)) for n in ns]
     slope = np.polyfit(np.log(ns), np.log(gaps), 1)[0]
     assert -2.02 < slope < -1.95, slope
-    assert 42.0 < gaps[-1] * ns[-1] ** 2 < 43.5
+    assert abs(SATURATION_C - 42.739654) < 1e-5, SATURATION_C
+    # the sequence rises TOWARD C and stays below it -- so no finite sample may
+    # be printed as the constant (the defect this replaces)
+    scaled = [g * n ** 2 for g, n in zip(gaps, ns)]
+    assert all(a < b for a, b in zip(scaled, scaled[1:])), scaled
+    assert all(v < SATURATION_C for v in scaled), scaled
+    assert abs(scaled[-1] - 42.606) < 0.01, scaled[-1]
+    # ... and it really does converge there: one cutoff past the printed data
+    n = 4000
+    far = min(4 * np.sin(np.pi / (2 * (n - l))) ** 2
+              + 4 * np.sin(np.pi / (2 * (2 * l + 1))) ** 2
+              for l in range(n))
+    assert 42.72 < far * n ** 2 < SATURATION_C, far * n ** 2
 
 
 def test_s_wave_block_is_a_path_graph():
