@@ -1065,13 +1065,31 @@ $J_{a,b}\gamma_{a,b}$:\ $\sigma_1 K\cdot\sigma_3 = \sigma_1\sigma_3 K =
 -\sigma_3\sigma_1 K = -\sigma_3\cdot\sigma_1 K$, so
 $J_{a,b}\gamma_{a,b} = -\gamma_{a,b}J_{a,b}$. The three signs $(+,+,-)$ are
 the KO-$6$ row (van~Suijlekom, and the $3+3=6$ additivity of the KO
-dimension). Order-zero and order-one reduce factor-by-factor to the
-single-factor spin-manifold facts in the continuum limit (Paper~38 and the
-classical Dirac operator);\ at finite cutoff they fail only by the
-single-factor amount (the operator-system-is-not-an-algebra artifact of
-Paper~38 \texttt{rem:dirac\_degeneracy}), with no cross-factor obstruction.
-Full sign table and numerical verification against the Camporesi--Higuchi
-Dirac at $(\nmaxa,\nmaxb) \in \{1,2\}^2$:\ backing test
+dimension). \emph{Order-zero and order-one.} These reduce factor-by-factor:\ for
+$a = \Mat_f \otimes 1_2 \otimes \Mat_g$ and $b = \Mat_{f'} \otimes 1_2
+\otimes \Mat_{g'}$ in $\Acal_{a,b}$, the middle $1_2$ conjugates to $1_2$
+under $J_{a,b}$, so $[a, J_{a,b}\,b\,J_{a,b}^{-1}] = 0$ holds iff each leg's
+order-zero holds, and $[[D_{a,b}, a], J_{a,b}\,b\,J_{a,b}^{-1}] = 0$ reduces
+on each leg to the factor's order-zero and order-one (proved). In the
+continuum the limit algebra $C^\infty(\sthree) \otimes 1_2 \otimes
+C^\infty(\sthree)$ is \emph{commutative}, for which both conditions are
+automatic ($J b J^{-1}$ is right multiplication, which commutes with left
+multiplication and with $[D,a]$;\ Paper~32~\S VIII, the standard commutative
+fact) --- so the continuum tensor triple satisfies them. \textbf{At finite
+cutoff they do not hold, and the residual \emph{grows} with the cutoff}
+(measured max residual $5.5\times10^{-2}, 7.9\times10^{-2}, 9.6\times10^{-2}$
+for order-zero and $1.0\times10^{-1}, 2.0\times10^{-1}, 4.1\times10^{-1}$ for
+order-one at $\nmax = 2, 3, 4$):\ the truncated operator system is not an
+algebra, the same phenomenon Paper~38~\texttt{rem:dirac\_degeneracy} records
+for the single factor. The product introduces \emph{no cross-factor
+obstruction} --- every cross-factor pair satisfies both conditions to machine
+precision, so the finite-cutoff defect is exactly the inherited single-factor
+one. The order conditions are \emph{not} required for the distance bound of
+Theorem~\ref{thm:main} (which uses only the state-space assembly);\ they bear
+only on the identification of the \emph{limit} as a real spectral triple, and
+there the commutative-limit argument settles them. Full sign table, the
+factor-reduction, the cross-factor check and the growing single-factor
+residual are verified in the backing test
 \texttt{tests/test\_paper39\_real\_structure.py}.
 \end{proof}
 

@@ -165,3 +165,84 @@ def test_dirac_squares_block_diagonal() -> None:
     assert np.allclose(A @ B + B @ A, np.zeros_like(A), atol=1e-9)
     expected = _kron3(D_a @ D_a, np.eye(2), Ib) + _kron3(Ia, np.eye(2), D_b @ D_b)
     assert np.allclose((A + B) @ (A + B), expected, atol=1e-9)
+
+
+# --------------------------------------------------------------------------
+# Order-zero / order-one for the tensor triple (the reviewer's soft spot).
+# Added 2026-09-05 after measuring that the finite-cutoff residual GROWS, not
+# vanishes -- so the continuum claim rests on commutativity of the limit
+# algebra (Paper 32), and these tests guard the corrected facts.
+
+from geovac.full_dirac_operator_system import FullDiracTruncatedOperatorSystem
+from geovac.connes_axiom_audit_31 import verify_order_zero, verify_order_one
+
+
+def test_order01_residual_grows_not_vanishes() -> None:
+    """REJECTS: the claim that the finite-cutoff order-0/1 residual vanishes.
+
+    The truncated operator system is NOT an algebra, and the max order-0/1
+    residual GROWS with n_max (measured 0.055->0.078 order-0, 0.101->0.203
+    order-1 from n=2 to n=3).  The continuum object satisfies order-0/1 for a
+    different reason (its limit algebra is commutative, Paper 32), NOT because
+    this residual shrinks.  A future edit asserting the residual vanishes would
+    fail here.
+    """
+    def resid(n):
+        ops = FullDiracTruncatedOperatorSystem(n)
+        A = ops.multiplier_matrices
+        U = np.asarray(build_J_full_dirac(n).U, dtype=complex)
+        D, _ = _single_factor(n)
+        _, _, m0 = verify_order_zero(U, A, tol=1e-9)
+        _, _, m1 = verify_order_one(U, A, D, tol=1e-9)
+        return m0, m1
+    m0_2, m1_2 = resid(2)
+    m0_3, m1_3 = resid(3)
+    assert m0_2 > 1e-3 and m1_2 > 1e-3          # genuinely nonzero at finite cutoff
+    assert m0_3 > m0_2 and m1_3 > m1_2          # GROWS, does not vanish
+
+
+def test_cross_factor_order_conditions_vanish() -> None:
+    """REJECTS: a cross-factor order-0/1 obstruction in the product.
+
+    The proved factor-reduction (memo 4.1) says a cross pair -- a on factor a,
+    b on factor b -- satisfies both conditions exactly, because the middle 1_2
+    conjugates to 1_2 and the legs decouple.  A wrong J_ab middle factor or a
+    Dirac cross term would break this.  Control: a same-factor pair is NOT
+    forced to vanish (so the test is not vacuously zero).
+    """
+    na = nb = 2
+    D_a, U_a = _single_factor(na)
+    D_b, U_b = _single_factor(nb)
+    Ma = FullDiracTruncatedOperatorSystem(na).multiplier_matrices
+    Mb = FullDiracTruncatedOperatorSystem(nb).multiplier_matrices
+    Ia, Ib = np.eye(D_a.shape[0]), np.eye(D_b.shape[0])
+    s1, s2 = SIGMA["x"], SIGMA["y"]
+    U_ab = _kron3(U_a, s1, U_b)
+    D_ab = _kron3(D_a, s1, Ib) + _kron3(Ia, s2, D_b)
+
+    def order_res(a, b):
+        JbJ = U_ab @ b.conj() @ U_ab.T            # verifier's convention U conj(b) U^T
+        o0 = np.max(np.abs(a @ JbJ - JbJ @ a))
+        Da = D_ab @ a - a @ D_ab
+        o1 = np.max(np.abs(Da @ JbJ - JbJ @ Da))
+        return o0, o1
+
+    # cross pairs: a on factor a, b on factor b -- must vanish
+    worst0 = worst1 = 0.0
+    for A in Ma[:4]:
+        for B in Mb[:4]:
+            a = _kron3(A, np.eye(2), Ib)
+            b = _kron3(Ia, np.eye(2), B)
+            o0, o1 = order_res(a, b)
+            worst0, worst1 = max(worst0, o0), max(worst1, o1)
+    assert worst0 < 1e-9, worst0
+    assert worst1 < 1e-9, worst1
+
+    # control: same-factor (both on a) is allowed to be nonzero for some pair
+    same = 0.0
+    for A in Ma[:6]:
+        for B in Ma[:6]:
+            a = _kron3(A, np.eye(2), Ib)
+            b = _kron3(B, np.eye(2), Ib)
+            same = max(same, order_res(a, b)[0])
+    assert same > 1e-3, "same-factor order-0 never fails; cross-test may be vacuous"

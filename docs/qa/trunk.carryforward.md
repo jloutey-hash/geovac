@@ -1592,9 +1592,18 @@ A fresh claims-critic on the rewritten Paper 39 returned DEFECTS: thm:main and t
 
 Swept all as one class (12 loci): abstract + intro restated to the lifted-state route / constant 1 / [INTERNAL THEOREM]; conclusion to the discharged tier; setup note and related-work reattributed to the lifted-state route with C_3^(2) demoted to the abandoned route's constant; the numerical panel retitled "abandoned (B,P)-pair route" and scoped as not the theorem's bound; gamma/lambda -> lambda*gamma; the Dabrowski-Dossena name dropped (claim rests on in-lemma forcedness, no bibitem); three new lemmas tagged [INTERNAL THEOREM]; "five tensor lemmas" -> "tensor lemmas". Class check: no C_3^(2)*2*max survives as a live theorem bound.
 
-**Two self-inflicted, both caught by the machinery:** the theorem rewrite (O.5f) had dropped eq:C3_2_full (six dangling refs, caught by compile); and this sweep used a heredoc for one backslash edit — violating my own widened no-heredoc rule — turning ef into CR+ef (caught by C19 + compile). Both fixed via file-based raw-string scripts.
+**Two self-inflicted, both caught by the machinery:** the theorem rewrite (O.5f) had dropped eq:C3_2_full (six dangling refs, caught by compile); and this sweep used a heredoc for one backslash edit — violating my own widened no-heredoc rule — turning 
+ef into CR+ef (caught by C19 + compile). Both fixed via file-based raw-string scripts.
 
 All gates PASS on trunk + group1; Paper 39 compiles clean.
+
+### O.5h — the order-0/1 soft spot, handled (2026-09-05, pre-DELTA #8)
+
+The reviewers' one honestly-soft claim: order-0/1 for the tensor triple, continuum-only and checked at a single cutoff. Measuring it turned up a **correction**: the finite-cutoff residual GROWS with n_max (order-0 0.055/0.078/0.096, order-1 0.101/0.203/0.405 at n=2,3,4), it does not vanish. So the memo's "in the continuum limit the failures vanish" was mis-argued.
+
+The continuum claim survives for the correct reason: the limit algebra $C^\infty(S^3)\otimes 1_2\otimes C^\infty(S^3)$ is COMMUTATIVE, for which order-0/1 are automatic (Paper 32 — the standard fact), and the memo's proved 4.1 factor-reduction carries that to the product. The finite truncation is simply not an algebra and need not satisfy them; the distance bound never uses order-0/1 at all. lem:real_structure-T rewritten to state exactly this: reduction PROVED, continuum via commutativity (cited), finite residual GROWS (measured), no cross-factor obstruction (structural — cross pairs act on different factors, so commute). Two backing tests added (residual-grows; cross-factor-vanishes with a same-factor vacuity control), both fire-tested.
+
+Net: the soft spot is no longer soft — it is a precisely-scoped claim, PROVED where provable (reduction, commutative limit), MEASURED where measurable (the growing residual), and honestly disclaimed where it never mattered (finite cutoff, and the distance bound's independence from it). DELTA #8 can now run on a settled Paper 39.
 
 ### O.6 — Next
 

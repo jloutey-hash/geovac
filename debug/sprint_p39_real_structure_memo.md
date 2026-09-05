@@ -231,8 +231,9 @@ more. Breakdown at `(n_a,n_b)=(2,2)`, 28 generators = 14 (factor a) + 14
 The `AA`/`BB` numbers are **identical** to the single-factor `n_max=2` counts
 (124 / 43, §2). Every cross-factor pair commutes to machine zero. This is the
 numerical signature of the §4.1 factorization: the product introduces no new
-order-0/order-1 defect, so in the continuum limit — where `AA`/`BB` failures
-vanish — the product conditions hold.
+order-0/order-1 defect, so the product adds nothing beyond the inherited single-factor (non-)satisfaction.
+
+> **CORRECTION 2026-09-05 (parent session, order-0/1 hardening).** The finite-cutoff residual does NOT vanish as n grows -- measured max order-0 residual 0.055/0.078/0.096 and order-1 0.101/0.203/0.405 at n=2,3,4, i.e. GROWING.  The continuum tensor triple satisfies order-0/1 because its limit algebra is COMMUTATIVE (Paper 32, the standard automatic-order fact) and the 4.1 reduction carries that to the product -- NOT because the truncation residual shrinks.  The earlier phrase 'where AA/BB failures vanish' was mis-argued and is withdrawn.
 
 **Honest statement of what is exact vs limiting:**
 - KO-6 sign relations (`J²`, `JD`, `Jγ`): **exact at every finite cutoff**
