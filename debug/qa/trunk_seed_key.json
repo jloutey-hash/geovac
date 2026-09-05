@@ -1,30 +1,100 @@
 {
   "target": "trunk",
-  "run": 4,
-  "date": "2026-06-15",
-  "worktree": "C:/Users/jlout/Desktop/geovac-qa-seed-trunk",
-  "worktree_branch": "qa-seed-trunk-4",
-  "base_commit": "cea711f",
-  "purpose": "First FULL all-dimensions /qa run under the hardened skill (v4.16.2): code + paper-claims + external-citations + synthesis + deterministic, all in one invocation. Re-certifies the trunk after the run-#3 synthesis fixes (kappa->Observation, K->Observation).",
-  "note": "BLIND ANSWER KEY. Reviewers must NOT see this. Seeds live only in the worktree, removed at run end. 8 planted defects (>=1 per gating dimension) + controls. The genuine kappa/K synthesis content is now FIXED at cea711f and must come back CLEAN (only S8/S9 should be flagged in the synthesis).",
-  "planted_defects": [
-    {"id": "S1", "dimension": "citation", "class": "wrong external arXiv ID", "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex", "loc": "~1687", "expected_catcher": "citation-reviewer(P38)", "criterion": "C4"},
-    {"id": "S2", "dimension": "code", "class": "tautological test", "file": "tests/test_paper7_vee_s3.py", "loc": "test_f0_1s1s_exact (I hardcoded to 5pi/32, _integral never called)", "expected_catcher": "code-reviewer(P7)", "criterion": "C2"},
-    {"id": "S3", "dimension": "code", "class": "false-positive test", "file": "tests/test_paper1_rydberg.py", "loc": "test_su11_number_operator (N built by hand on diagonal, commutator never formed)", "expected_catcher": "code-reviewer(P1)", "criterion": "C2"},
-    {"id": "S4", "dimension": "claims-prose", "class": "kappa overclaim", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~695 (coincides -> rigorously derived)", "expected_catcher": "claims-reviewer(P7)", "criterion": "C8"},
-    {"id": "S5", "dimension": "claims-prose", "class": "K hard-prohibition", "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex", "loc": "~5532 (Observation -> derived as a theorem)", "expected_catcher": "claims-reviewer(P32)", "criterion": "C5"},
-    {"id": "S7", "dimension": "deterministic", "class": "stale internal title", "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex", "loc": "~793 (Paper 0 cited by stale title)", "expected_catcher": "check_internal_titles.py", "criterion": "C11"},
-    {"id": "S8", "dimension": "synthesis", "class": "zombie/descoped (withdrawn Paper 45 K+ theorem)", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~693 wedge-KMS", "expected_catcher": "claims-reviewer(synthesis)", "criterion": "C9"},
-    {"id": "S9", "dimension": "synthesis", "class": "status overstatement (cosmic-Galois conditional -> unconditional)", "file": "papers/synthesis/group3_foundations_synthesis.tex", "loc": "~1053", "expected_catcher": "claims-reviewer(synthesis)", "criterion": "C9/C3"}
+  "run": "FULL seeded (re-measure)",
+  "date": "2026-09-05",
+  "worktree": "C:\\Users\\jlout\\Desktop\\geovac-qa-seed-trunk",
+  "seeds": [
+    {
+      "id": "S2",
+      "class": "S2 circular/tautological test",
+      "file": "tests/test_lattice_spectrum.py",
+      "where": "test_kappa_universal_topological_constant (asserts literal against itself)",
+      "catcher": "code:CODE-A(P0/P1)"
+    },
+    {
+      "id": "S3",
+      "class": "S3 false-positive test",
+      "file": "tests/test_paper7_graph_convergence.py",
+      "where": "test_lambda_max_saturation_converges (deficit<5.0 loose threshold, tests nothing)",
+      "catcher": "code:CODE-B(P7)"
+    },
+    {
+      "id": "S11",
+      "class": "S11 restricted-evaluation (PRIORITY)",
+      "file": "tests/test_connes_axiom_audit_31.py",
+      "where": "test_order_one_condition_verified (diagonal-only -> trivially 0)",
+      "catcher": "code:CODE-C(P32)"
+    },
+    {
+      "id": "S3p",
+      "class": "S3 false-positive/tautology",
+      "file": "tests/test_p38_action_seminorm.py",
+      "where": "test_asymptotic_rate_constant (4/pi asserted against itself)",
+      "catcher": "code:CODE-D(P38)"
+    },
+    {
+      "id": "S6",
+      "class": "S6 discrete-vs-continuum",
+      "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+      "where": "line ~42: discrete graph Laplacian 'produces' -(n^2-1)",
+      "catcher": "claims:CLAIMS-A(P7)"
+    },
+    {
+      "id": "S9",
+      "class": "S9 status overstatement of a keystone",
+      "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+      "where": "~L1160: PANEL-VERIFIED axioms -> SYMBOLIC PROOF unconditional, caveats dropped",
+      "catcher": "claims:CLAIMS-B(P32)"
+    },
+    {
+      "id": "S4",
+      "class": "S4 kappa-style overclaim (also touches C8 4/pi)",
+      "file": "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+      "where": "~L108/L114: 4/pi MEASURED -> SYMBOLIC PROOF, convention hedge dropped",
+      "catcher": "claims:CLAIMS-C(P38)"
+    },
+    {
+      "id": "S1",
+      "class": "S1 fabricated external arXiv ID",
+      "file": "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+      "where": "~L853: arXiv:2310.14733 -> 2310.14799",
+      "catcher": "citation:CITE-A(P7) + C15 backstop"
+    },
+    {
+      "id": "S1p",
+      "class": "S1 wrong inline attribution year",
+      "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+      "where": "~L199: Marcolli--van Suijlekom 2014 -> 2016 (key still _vs2014)",
+      "catcher": "citation:CITE-B(P32)"
+    },
+    {
+      "id": "S10",
+      "class": "S10 mirror-staleness -- synthesis UNDERSTATES owner (PRIORITY)",
+      "file": "papers/synthesis/group3_foundations_synthesis.tex",
+      "where": "~L1388: P38 thm:main INTERNAL THEOREM -> PANEL-VERIFIED 'no full proof yet'",
+      "catcher": "synthesis(owner-moved)"
+    },
+    {
+      "id": "S8",
+      "class": "S8 descoped claim asserted standing",
+      "file": "papers/synthesis/group3_foundations_synthesis.tex",
+      "where": "~L764: Lorentzian extension (Papers 45-49 DESCOPED) asserted 'established, proved'",
+      "catcher": "synthesis"
+    },
+    {
+      "id": "S7",
+      "class": "S7 stale internal-title drift",
+      "file": "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+      "where": "~L7776: bibitem loutey_paper38 title -> stale 'SU(2) propinquity' form",
+      "catcher": "deterministic:C11"
+    }
   ],
-  "known_good_controls": [
-    {"id": "KG1", "dimension": "code", "claim": "P7 1s2s/2s2s genuine integrals + 18 Fock proofs; P1 test_rydberg_levels_from_algebra genuine commutator -- must NOT flag", "must_not_flag_material": true},
-    {"id": "KG2", "dimension": "claims-prose", "claim": "P7 Delta=1/40 two-route genuine bridge; P32 WH1 PROVEN scoped to vS state-space GH; P0 prose clean -- must NOT flag", "must_not_flag_material": true},
-    {"id": "KG3", "dimension": "citation", "claim": "P38 Camporesi-Higuchi 1996 + vS + Wen-Avery cites correct -- must NOT flag", "must_not_flag_material": true},
-    {"id": "KG4", "dimension": "synthesis", "claim": "angular sparsity potential-independent; Bargmann-Segal pi-free; dual-description; AND the now-FIXED kappa=Observation + K=Observation -- must NOT flag", "must_not_flag_material": true}
-  ],
-  "panel": ["code-reviewer(P7)", "code-reviewer(P1)", "claims-reviewer(P7)", "claims-reviewer(P32)", "claims-reviewer(P0)", "citation-reviewer(P38)", "claims-reviewer(group3_synthesis)"],
-  "deterministic_layer": "check_internal_titles.py (C11, caught S7) + synthesis compile (C10).",
-  "code_coverage_note": "P32/P38 code-backing (forced-count 260/128, action-seminorm) verified clean in run #3 today on identical test files (unchanged at cea711f); not re-dispatched to bound budget.",
-  "scope_note": "Expect PASS: all dimensions calibrated + genuine content clean (kappa/K fixed, titles fixed, H1 Yukawa fixed, tests sound, citations grounded)."
+  "controls_must_not_flag_MATERIAL": [
+    "CTRL1 P7: the [OBSERVATION] hedge 'operator convergence itself is not established here' (correctly cautious)",
+    "CTRL2 P38: thm:main as [INTERNAL THEOREM] in state-space GH (genuine keystone tier)",
+    "CTRL3 P32: [PANEL-VERIFIED] axiom rows that DO carry the finite-truncation caveat (other than S9 line)",
+    "CTRL4 P38: van Suijlekom vs2021_jgp citation (correct external cite)",
+    "CTRL5 P0/P7: kappa = -1/16 labelled Observation (correct per C8)",
+    "CTRL6 P7: the 18 symbolic proofs claim (genuinely backed by test_fock_projection/laplacian)"
+  ]
 }

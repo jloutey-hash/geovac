@@ -117,8 +117,8 @@ $\opnorm{[\DCH, \Mat_f]} \leq C_3\,\norm{\nabla f}_{L^\infty}$ with
 $C_3 = 1$ (verified on a finite harmonic panel rather than proved in
 general, and \emph{not} used by the unconditional theorem);\ (L4) a
 Berezin map (convolution form) that is positive,
-contractive, an approximate identity, and L3-compatible;\ (L5)
-assembly of the distance bound via an approximation pair.
+contractive, an approximate identity, and L3-compatible;\ (L5, since \emph{withdrawn} 2026-09-03: the bound is established by the
+unconditional lifted-state theorem, not this approximation-pair assembly).
 \textbf{[OBSERVATION]} The
 asymptotic constant is a quotient of sphere volumes ---
 $4/\pi$ in the dual-Coxeter normalisation of \S\ref{sec:ch_triple},
@@ -242,13 +242,11 @@ distance~\cite{vs2021_jgp}, under the translation-seminorm
 metrization of \S~\ref{sec:named_gaps}, with explicit rate
 \begin{equation}\label{eq:main_rate}
    \Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
-   \;\le\; C_3 \cdot \gamma_{\nmax}, \qquad
+   \;\le\; \gamma_{\nmax}, \qquad
    \gamma_{\nmax} = \frac{4 \log \nmax}{\pi\,\nmax} + O\!\bigl(1/\nmax\bigr)
    \quad\text{(dual-Coxeter normalisation; $2/\pi$ on the unit $\sthree$)},
 \end{equation}
-where \textbf{[PANEL-VERIFIED]} $C_3 = 1$ is the Lipschitz comparison
-constant of
-Lemma~\ref{lem:L3} and $\gamma_{\nmax}$ is the mass-concentration
+where $\gamma_{\nmax}$ is the mass-concentration
 moment of the central spectral Fej\'er kernel on $\SU(2)$ given by
 Lemma~\ref{lem:L2}. The unconditional statement is
 Theorem~\ref{thm:main_unconditional}, whose bound is
@@ -481,8 +479,9 @@ $\upsilon(P M_f P)(g) = \int f(x)\, \KS_{\nmax}(g^{-1}x)\, dx =
 (\KS_{\nmax} * f)(g)$, using centrality and inversion-invariance of
 $\KS_{\nmax}$;\ \textbf{[MEASURED]} verified to machine precision
 ($\le 3 \times
-10^{-16}$ across bands and random group elements,
-\texttt{debug/p38\_g1g2\_scalar\_prototype.py}).
+10^{-16}$;\ the $\nmax=2$ scalar window is frozen in
+\texttt{tests/test\_p38\_action\_seminorm.py}, the across-bands sprint check
+recorded in the CHANGELOG).
 \end{proof}
 
 \begin{theorem}[Main theorem, unconditional;\ \textbf{[INTERNAL THEOREM]}]
@@ -1550,7 +1549,7 @@ Lemma~\ref{lem:L2} the central spectral Fej\'er kernel with closed-form
 $\gamma_{\nmax}$ and asymptotic rate; Lemma~\ref{lem:L3} the Lipschitz
 comparison constant $C_3 = 1$; Lemma~\ref{lem:L4} the Berezin
 reconstruction with the four properties a Latr\'emoli\`ere
-tunneling pair would require; and Lemma~\ref{lem:L5} the assembly into the
+tunneling pair would require; and---in the \emph{withdrawn} route only---Lemma~\ref{lem:L5} the assembly into the
 state-space GH bound.
 
 \emph{Which route establishes this.}  Not the L5 assembly:\ its two height

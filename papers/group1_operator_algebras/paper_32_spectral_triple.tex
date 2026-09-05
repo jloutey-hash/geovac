@@ -1716,7 +1716,7 @@ Language}
 % ===================================================================
 
 Paper~2~\cite{paper2} observed the numerical coincidence
-$K = \pi(B + F - \Delta) = 1/\alpha$ at $8.8 \times 10^{-8}$, with
+$K = \pi(B + F - \Delta) = 1/\alpha$ at $4.77 \times 10^{-7}$ (raw;\ $8.8 \times 10^{-8}$ after the Sprint-A $\alpha^2$ correction), with
 \[
    B = 42, \quad F = \tfrac{\pi^2}{6}, \quad \Delta = \tfrac{1}{40},
 \]
@@ -2162,7 +2162,7 @@ manifold, with $k \in \{0, 1, 2\}$ selecting the sub-mechanism.
 \begin{remark}[Status of $K = \pi(B + F - \Delta)$]
 \label{rem:K_under_theorem}
 \textbf{[OBSERVATION]} Paper~2's combination $K = \pi(B+F-\Delta) \approx 1/\alpha$ matches
-its target at $8.8 \times 10^{-8}$.  Under
+its target at $8.8 \times 10^{-8}$ (post-correction;\ $4.77\times10^{-7}$ raw).  Under
 Theorem~\ref{thm:pi_source_case_exhaustion}, $K$'s chain
 (Fock~$\circ$~Hopf$\circ$~spinor) engages M1 (the explicit prefactor $\pi$,
 identified by Sprint~A as $\mathrm{Vol}(S^2)/4$~\cite{paper2}) and M2
@@ -3450,10 +3450,11 @@ strengthening to the Latr{\'e}moli{\`e}re quantum propinquity remains an
 open named gap; see Remark~\ref{rem:gh_status_caveat}):
 $$
    d_{\mathrm{GH}}(\mathcal{T}_{n_{\max}}, \mathcal{T}_{S^3})
-   \;\le\; C_3 \cdot \gamma_{n_{\max}}
+   \;\le\; \gamma_{n_{\max}}
    \;\xrightarrow[n_{\max}\to\infty]{}\; 0,
 $$
-where $C_3 = 1$ is the Lipschitz comparison constant and
+where (matching Paper~38's corrected unconditional display, whose bound is
+$\le \gamma$ outright; the abandoned-route Lipschitz constant was $C_3 = 1$)
 $\gamma_{n_{\max}}$ is the L2 mass-concentration moment of the central
 spectral Fej{\'e}r kernel on SU(2).  The asymptotic rate
 $\gamma_{n_{\max}} = (4/\pi)\log n_{\max}/n_{\max} + O(1/n_{\max})$ (dual-Coxeter normalisation, $\mathrm{Cas}(\mathrm{ad}) = h^\vee$;\ equivalently $2/\pi$ on the unit $S^3$ this paper declares, and $2\sqrt2/\pi$ under the field-standard Kac form --- the constant scales with the metric)
@@ -6856,7 +6857,7 @@ tested in parallel.  WH1 PROVEN
 (Theorem~\ref{thm:gh_convergence}) is not re-opened by these results.
 
 % -------------------------------------------------------------------
-\subsection{Krein-level unified-strong four-witness theorem at finite
+\subsection{Krein-level four-witness compact-period closure (signature-blind) at finite
 cutoff (Sprint L2-E, 2026-05-17)}
 \label{sec:l2e_krein_modular_hamiltonian}
 % -------------------------------------------------------------------
@@ -6916,7 +6917,7 @@ $(3, 21)$ & 840 & 220 & $\le 7 \times 10^{-15}$ & $\le 7 \times 10^{-15}$ \\
 \end{tabular}
 \end{center}
 
-Verdict at every cell:\ \textsc{strong\_identification\_lorentzian}.
+Verdict at every cell:\ \textsc{compact\_period\_closure} (signature-blind;\ the closure cannot distinguish the $(3,1)$ carrier from the Euclidean one --- see the retraction note below).
 Residuals scale as $O(\sqrt{\dim} \cdot \varepsilon_{\mathrm{machine}})$
 — pure round-off, no structural drift.  Flow conjugacy
 $\sigma_t^{L, \mathrm{TT}}(O) = \sigma_{-t}^{L, \alpha}(O)$ at general

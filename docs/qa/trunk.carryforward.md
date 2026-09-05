@@ -1663,3 +1663,107 @@ The one guard-logic change (the epsilon_cross test) was done as a **separate pas
 ### P.5 — Next
 
 DELTA #8 is DEFECTS-remediated; per the run-shapes rule a **clean delta** is the precondition for a FULL certifying run. A DELTA #9 on this remediation would confirm convergence (the 40 -> 5 trend suggests one more clean-ish cycle). The trunk profile itself (Papers 0/1/7/32/38 + group3 synthesis) has been unchanged since FULL #4's remediation and its last delta was DELTA #7 — a trunk FULL certifying run is the eventual target once the deltas come back clean.
+
+---
+
+## Part Q — /qa trunk FULL run #5 (2026-09-05), SEEDED (re-measure), PI-invoked
+
+**Verdict: FAIL — calibrated, trustworthy, healthy.** The first seeded FULL run since the
+2026-09-02 opt-in switch; fired as the PI-directed re-measure. 11 reviewers (4 code, 3 claims,
+2 citation, 1 synthesis) + 1 completeness-critic, all Opus, all pinned to an isolated seeded
+worktree, blind. 12 seeds planted (S1–S11 incl. the two live-distribution classes S10/S11);
+6 known-good controls. Real corpus confirmed seed-free at close; worktree deregistered
+(directory orphaned by a Windows lock, outside the repo, harmless).
+
+### Q.1 — Calibration (the re-measure result)
+- **Sensitivity 10/12 seeds caught; specificity 0 false positives across all 11 reviewers.**
+- Clean catches: S1 (fabricated arXiv, CITE-A), S1' (inline year drift, CITE-B), S2 (tautological
+  test, CODE-A), S3 (could-not-fail guard, CODE-B), S3' (tautology, CODE-D), S4 (4/pi
+  SYMBOLIC-PROOF overclaim — TWO-ROUTE: CLAIMS-C + CODE-D), S6 (discrete-vs-continuum, CLAIMS-A),
+  S7 (stale internal title, deterministic C11), S8 (descoped Lorentzian, synthesis), S10
+  (mirror-staleness, synthesis owner-moved mandate).
+- **Both PRIORITY classes addressed.** S10 (mirror-staleness) — the class DELTA #8 caught only by
+  luck — was planted and **caught by design** via the v5.9.3 owner-moved synthesis dispatch,
+  corroborated independently by the completeness-critic (G4). The restricted-evaluation class
+  (S11) is **covered organically**: all three code reviewers executed the v5.9.3 step-4a mandate,
+  and CODE-C independently rediscovered the *real* Paper-24-archetype restriction in P32 (SM
+  matter/antimatter disjoint-support zero) and confirmed it is now guarded NONZERO.
+- **2 void seeds — my construction errors, not panel misses.** S9 (status overstatement, P32):
+  as worded the sentence was about the continuum limit, where SYMBOLIC PROOF + "no artifacts" is
+  defensible — CLAIMS-B's SOUND call was correct. S11 (P32): a self-contained fake test computing
+  trivial scalars, not a hidden production restriction — read as an orphan, correctly not
+  scrutinised. Both classes are demonstrably covered anyway (tier-overclaim via S4/S6; restricted-
+  evaluation via the three organic §4a audits). Seed-catalog S11 archetype fixed; lesson recorded.
+
+### Q.2 — Per-dimension scorecard
+| dimension | exercised | calibrated | genuine material |
+|:--|:--|:--|:--|
+| deterministic (12 gates) | yes | S7 caught (C11) | — (12/12 green on real corpus) |
+| code P0/P1 | yes | S2 caught; §4a applied | 2 (F1 Frobenius gap; F2 √3π zombie) |
+| code P7 | yes | S3 caught | 0 (all headlines re-derived) |
+| code P32 | yes | S11 void; class organic | 0 (3 NITs) |
+| code P38 | yes | S3'+S4 caught; 4/pi re-derived | 1 (debug/ citation, C14) |
+| claims P0/1/7 | yes | S6 caught | 1 (√3π abstract zombie) |
+| claims P32 | yes | S9 void; class covered | 2 (Lorentzian zombie; α-match) |
+| claims P38 | yes | S4 caught | 3 (L5 abstract; L5 thm proof; C₃ display) |
+| citation P0/1/7 | yes | S1 caught | 0 |
+| citation P32/38 | yes | S1' caught | 0 WRONG (1 UNVERIFIABLE) |
+| synthesis | yes | S10+S8 caught | 0 (1 NIT) |
+| completeness-critic | yes | — | surfaced G2/G3/G5 coverage gaps |
+
+### Q.3 — Genuine material defects (all SMALL, one recurring class): the remediation ledger
+The class: a withdrawn/retracted/corrected claim left LIVE in an abstract, summary, or a
+second paper after a locus-by-locus remediation (the mirror the cited_by blocklist cannot reach).
+1. **P1 abstract √3π zombie** (L15): the retracted `n_max/(√3π)` off-branch ratio stated as a live
+   [INTERNAL THEOREM]; body L213 carries it `[retracted: sp-ratio-false-precision]`. TWO-ROUTE
+   (CLAIMS-A + CODE-A F2).
+2. **P1 Frobenius coverage gap** (L392): "→ 2√6/3" [PANEL-VERIFIED] cites test_trunk_qa_gearing.py,
+   which only checks monotonicity to n=30 (1.701, 4% above the limit) — the limit is not exercised.
+   Math is true.
+3. **P38 abstract L5 zombie** (L121): the refuted Lemma L5 listed as a live contribution with no
+   withdrawal marker (while L3, a weaker negative, gets its caveat).
+4. **P38 thm:main proof L5 clause** (~L1553): "Lemma L5 the assembly into the state-space GH bound"
+   live, though the next paragraph corrects it.
+5. **P38 eq:main_rate stale C₃** (L243): displays `C₃·γ` while L253–257 says the unconditional
+   bound is `≤ γ` outright; the described fix was not applied to the display.
+6. **P38 debug/ citations as backing** (L407/485/1007): [MEASURED] smoothing identity cites
+   debug/p38_g1g2_scalar_prototype.py — §9/C14 (papers cite permanent records, never debug/).
+7. **P32 Lorentzian STRONG_IDENTIFICATION zombie** (L6859/6919): "unified-strong four-witness
+   theorem" / "STRONG_IDENTIFICATION_LORENTZIAN" verdict live, contradicting its own
+   signature-blind retraction two paragraphs below.
+8. **P32 α-match magnitude** (L1718/L2164 vs abstract L201): "8.8×10⁻⁸" is the post-correction
+   residual; the bare 3-term formula matches at 4.77×10⁻⁷ (~5× overstated).
+9. **(G5) P32 thm:gh_convergence stale C₃** (L3453): the same stale `C₃·γ` as #5, in P32's copy —
+   a two-paper mirror; reconcile to the corrected `≤ γ`.
+
+Open (not defects): **H2 UNVERIFIABLE** — Dabrowski–Dossena eq/table numbers (18, 10, Table 5)
+the KO-dim sign argument leans on could not be confirmed from the abstract; PM to check the
+primary PDF. **Coverage gaps G2/G3** — Paper 32's untiered, debug/-backed middle body (Q5'
+remarks 2195–3265, forcing/SM 5318–6260, Lorentzian 6398–7189): the claims criterion is
+*unmeasured* there, and P32's own GH proof chain is backed only by debug/ memos — route to the
+next full run's scope.
+
+Two-way UPGRADE candidates (backing proves MORE than the tier): P1 Rydberg algebra
+[PANEL-VERIFIED]→[INTERNAL THEOREM] (N=−2[T₊,T₋]=n is exact); P0/P1 block-spectrum constant C
+[INTERNAL THEOREM]→[SYMBOLIC PROOF] (closed form + independent-route test).
+
+### Q.4 — What held (the load-bearing conclusion)
+Every keystone verified SOUND under INDEPENDENT re-derivation: WH1/thm:main unconditional
+(reach-only route, translation-seminorm kernel = scalars); the 4/pi rate constant (CODE-D pushed
+the doubling estimator to n=12800, Richardson → 1.273234 vs 4/pi = 1.2732395, decoy 2/pi
+excluded); the spectral triple; the Forced-count chain at full-axiom count (three routes,
+retired-260 guarded); the block spectrum. K = π(B+F−Δ) is an Observation at all 12+2 loci.
+C7 (state-space GH, not propinquity) and C8 (κ Observation, 4/pi numerics-pinned, full-axiom
+Forced-count) both clean. **No LARGE genuine defect; no hard-prohibition touch; no false positive.**
+This is a healthy FAIL: sound mathematics, SMALL cleanup of the recurring class.
+
+### Q.5 — Next
+Remediate the 9 SMALL defects (gate-first: register the new zombie phrasings in C16, then sweep;
+the C₃ and √3π are two-paper/abstract-vs-body mirrors — sweep claim-wide, not locus-by-locus).
+Then a DELTA on the remediation; a clean DELTA unlocks the certifying FULL #6.
+
+### Q.6 — Remediation (2026-09-05, same day), gate-first
+
+All 9 genuine SMALL defects fixed. **P38 (4):** L5 abstract contribution marked withdrawn; thm:main proof L5 clause marked "withdrawn route only"; eq:main_rate C₃ dropped from the display (C₃=1, matching the unconditional bound ≤ γ); the debug/ [MEASURED] citation replaced by the frozen test + CHANGELOG. **P32 (3):** Lorentzian "unified-strong"/STRONG_IDENTIFICATION_LORENTZIAN relabelled "compact-period closure (signature-blind)"; α-match stated raw 4.77×10⁻⁷ (8.8×10⁻⁸ post-correction) at both loci; thm:gh_convergence C₃ dropped (mirror of the P38 fix). **P1 (2):** abstract √3π asymptotic marked [retracted: sp-ratio-false-precision] (mirroring the body); Frobenius limit clarified (closed form exact; the frozen panel verifies only the monotone approach to n_max=30). Two **C16 entries added gate-first** (lorentzian-strong-identification-live; l5-assembly-listed-as-live-contribution), each **fire-tested two-way** (ALL DISCRIMINATE) as a separate pass. **Compile PASS** (6 papers, zero undefined refs); **12 deterministic gates PASS** on trunk.
+
+**Not remediated (owed):** H2 UNVERIFIABLE (Dabrowski–Dossena eq/table numbers — needs the primary PDF); coverage gaps G2/G3 (P32's untiered debug/-backed middle body — routed to FULL #6 scope); 2 two-way UPGRADE candidates (P1 Rydberg algebra → [INTERNAL THEOREM]; block-spectrum constant C → [SYMBOLIC PROOF]) — flagged for PI (tier upgrades on keystone-adjacent claims). **Next:** a DELTA on this remediation; a clean DELTA unlocks the certifying FULL #6.

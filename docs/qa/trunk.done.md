@@ -18,6 +18,8 @@
 > | DELTA #5 | 2026-09-03/04 | DEFECTS |
 > | DELTA #6 | 2026-09-04 | DEFECTS |
 > | DELTA #7 | 2026-09-04 | DEFECTS (40 MATERIAL, 10 LARGE; P39 re-priced CONDITIONAL) |
+> | DELTA #8 | 2026-09-05 | DEFECTS (5 MATERIAL, 1 LARGE; mirror-staleness) |
+> | FULL #5 | 2026-09-05 | FAIL (seeded re-measure; 10/12 seeds, 0 FP; 9 MATERIAL-SMALL) |
 >
 > **No run has produced PASS.** Only a FULL run can, and the last four FULL
 > runs each found material defects — several *introduced by the previous

@@ -71,6 +71,49 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.9.5] - 2026-09-05
+
+**/qa trunk FULL run #5 (seeded re-measure) = FAIL, CALIBRATED.** PI-invoked; the
+re-measure the meta-critique said we were due. 11 reviewers + completeness-critic,
+isolated seeded worktree, blind. Record: carryforward Part Q.
+
+### The re-measure result
+- **10/12 seeds caught, 0 false positives** across all 11 reviewers. Both priority
+  live-distribution classes addressed: **S10 (mirror-staleness) caught by design** via the
+  v5.9.3 owner-moved synthesis mandate (the class DELTA #8 caught only by luck); the
+  **restricted-evaluation class covered organically** (three code reviewers ran the step-4a
+  mandate; CODE-C rediscovered the real Paper-24 SM disjoint-support restriction).
+- **2 void seeds were my construction errors**, not panel misses (S9 defensible as worded;
+  S11 a fake self-contained test, not a hidden production restriction). Seed-catalog S11
+  archetype corrected.
+- **Every keystone SOUND under independent re-derivation** (WH1/thm:main, 4/pi to n=12800,
+  spectral triple, full-axiom Forced-count, block spectrum). No LARGE, no hard-prohibition
+  touch, C7/C8 clean.
+
+### Findings (9 genuine MATERIAL-SMALL, one recurring class)
+A withdrawn/corrected claim left live in an abstract/summary/second paper after a
+locus-by-locus remediation: P1 abstract sqrt3pi zombie (two-route); P1 Frobenius coverage
+gap; P38 x3 (L5 abstract + thm-proof clauses, stale C3 display); P38 debug/ citations
+(C14); P32 Lorentzian STRONG_IDENTIFICATION zombie; P32 alpha-match magnitude; P32
+thm:gh_convergence stale C3 (mirror of the P38 one). Plus 1 UNVERIFIABLE (Dabrowski-Dossena
+eq numbers) and coverage gaps G2/G3 (P32's untiered debug/-backed middle body). Two-way
+upgrade candidates: P1 Rydberg algebra and the block-spectrum constant C.
+
+### Remediation (same day, gate-first)
+
+All 9 genuine SMALL defects fixed: P38 ×4 (L5 abstract + proof markers, eq:main_rate
+C₃ display dropped, debug/ citation → frozen test), P32 ×3 (Lorentzian STRONG_IDENTIFICATION
+→ signature-blind, α-match raw vs post-correction, thm:gh_convergence C₃ dropped), P1 ×2
+(abstract √3π retraction marker, Frobenius panel-scope clarified). Two C16 entries added
+gate-first and fire-tested two-way. Compile PASS (6 papers, 0 undefined refs); 12
+deterministic gates PASS on trunk. Owed: 1 UNVERIFIABLE (primary-PDF check), coverage
+gaps G2/G3, 2 upgrade candidates (flagged for PI).
+
+### Changed
+- `docs/qa/seed_defects.md`: S11 archetype corrected (hide the restriction in production code
+  a real test exercises, not a self-contained fake test).
+- `docs/qa/trunk.done.md`: FULL #5 run-record row.
+
 ## [v5.9.4] - 2026-09-05
 
 **Trunk FULL-cert re-measure prep (PI direction: next `/qa` round is a FULL

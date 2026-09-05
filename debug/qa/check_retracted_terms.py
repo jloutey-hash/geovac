@@ -294,6 +294,42 @@ REGISTRY = [
         ],
     },
     {
+        "id": "lorentzian-strong-identification-live",
+        "note": "FULL run #5, 2026-09-05.  Paper 32's Lorentzian section L2-E "
+                "printed a live verdict STRONG_IDENTIFICATION_LORENTZIAN and a "
+                "subsection title 'unified-strong four-witness theorem', reading "
+                "as an achieved strong *Lorentzian* identification -- while the "
+                "closure is signature-blind (the truncated BW boost is compact; "
+                "WH7 de-compactification = convention), retracted two paragraphs "
+                "below.  Relabelled 'compact_period_closure (signature-blind)'.",
+        "pattern": r"strong[\\_ ]{0,2}identification[\\_ ]{0,2}lorentzian"
+                   r"|unified-strong four-witness",
+        "exempt_if_nearby": r"(?!)",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        "cited_by": {},
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+        ],
+    },
+    {
+        "id": "l5-assembly-listed-as-live-contribution",
+        "note": "FULL run #5, 2026-09-05.  Paper 38's abstract listed Lemma L5 "
+                "('assembly of the distance bound via an approximation pair') as "
+                "a live contribution with no withdrawal marker, while L5 is "
+                "withdrawn 2026-09-03 (the bound comes from the unconditional "
+                "lifted-state theorem, not the approximation-pair assembly).  "
+                "Marked withdrawn in the abstract.",
+        "pattern": r"assembly of the distance bound via an approximation pair",
+        "exempt_if_nearby": r"(?!)",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        "cited_by": {},
+        "files": [
+            "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+        ],
+    },
+    {
         "id": "l5-height-bound-achieved",
         "note": "FULL run #4, 2026-09-03.  Paper 38's Lemma L5 concluded "
                 "height_B <= gamma_nmax and height_P = 0.  Both are FALSE by "
