@@ -71,6 +71,30 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.9.1] - 2026-09-05
+
+**Paper 39 discharged: tensor-product convergence is now [INTERNAL THEOREM].** The follow-on to DELTA #7's critique-confirmed lifted-state result. Patch bump per S9 (PM default); **flagged to the PI as a possible minor** — discharging a paper's main theorem from conditional to a theorem tier is corpus-significant.
+
+### Changed
+
+- **thm:main: [CONDITIONAL] -> [INTERNAL THEOREM]**, in the translation-seminorm metrization (Paper 38's own footing, not unconditional simpliciter). The bound is the lifted-state assembly: d_GH <= gamma^(ab) <= gamma_a + gamma_b, **constant 1** (not the conditional 2), reach_P unnecessary. Proof rerouted through the new lifted-state lemma; the (B,P)-pair route (L5-T) retained as the record of the abandoned approach. Both prerequisites were green first: the distance bound was critique-confirmed SOUND, and the real structure was verified GO and independently re-derived.
+- **Three new lemmas** (continuum-Lip-T, lifted-state-T, real-structure-T) transcribed from the reviewed memos. **real-structure-T:** the limit is the Dabrowski-Dossena tensor product of two odd (KO-3) CH triples, real structure J_ab = J_a (x) sigma_1 K (x) J_b at KO-dimension 6, signs (+,+,-); sigma_1 is forced. The displayed D_a (x) I + gamma_a (x) D_b remains disclosed as unrealisable (gamma_a = 0 on S^3); the Clifford doubling is its adopted repair.
+- **L3-T:** C_3^(2) <= sqrt2 restored (eq:C3_2_full, which the theorem rewrite had dropped) and re-scoped as the abandoned Berezin route's constant, explicitly not a rate constant of thm:main.
+- **real_structure.py** KO-dim docstring table corrected (rows 1,2,5,6 mis-stated the even-row signs; the code uses only the correct KO-3 row, so nothing computed changed).
+
+### Added
+
+- `tests/test_paper39_real_structure.py` (9 tests): KO-6 signs and the sigma_1-forced property against the ACTUAL CH Dirac, plus a single-factor KO-3 sanity gate so the product check is not vacuous. Every load-bearing assertion fire-tested against the wrong answer it names.
+- `debug/sprint_p39_tensor_lifted_state_memo.md` (CRITIQUE-CONFIRMED SOUND) and `debug/sprint_p39_real_structure_memo.md` (GO).
+
+### Verified
+
+- group1 deterministic gates PASS; Paper 39 compiles with zero undefined references (three passes); the new test 9/9, real-structure surface 52 passed.
+
+### How it was done (the loop the PI asked for)
+
+Two subagents wrote the load-bearing mathematics (lifted-state lemma; real structure), each critiqued by a fresh adversary or re-derived independently in the parent session — the "solve it, then critique it" cycle. The critique caught a confident wrong sub-claim (C_3^(2) = 1 at finite cutoff, refuted) while confirming the load-bearing GO, and the two independent routes converged on the verdict. New load-bearing mathematics was NOT authored inside the DELTA #7 remediation; it is this separate pass.
+
 ## [v5.8.6] - 2026-09-04
 
 **`/qa trunk` DELTA #7 = DEFECTS (40 MATERIAL, 10 LARGE), remediated the same

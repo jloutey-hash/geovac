@@ -19,13 +19,18 @@ triple (A, H, D) of KO-dim 3 is
     epsilon''= n/a    (no chirality grading in odd dimension)
 
 Note carefully: KO-dim 3 has J D = +D J. The sign table for the four
-even / four odd KO-dimensions is (epsilon, epsilon') in the format
-(J^2, JD = sign DJ):
+(epsilon, epsilon') = (J^2 sign, JD = sign * DJ); even KO-dims also
+carry epsilon'' = (J gamma = sign * gamma J), shown in brackets:
 
-    KO 0:  (+, +)        KO 4:  (-, +)
-    KO 1:  (-, +)        KO 5:  (+, -)            (Lorentzian / Majorana)
-    KO 2:  (-, -)        KO 6:  (+, -)            (Standard Model)
-    KO 3:  (-, +)        KO 7:  (+, +)
+    KO 0:  (+, +)[+]     KO 4:  (-, +)[+]
+    KO 1:  (+, -)        KO 5:  (-, -)            (Lorentzian / Majorana)
+    KO 2:  (-, +)[-]     KO 6:  (+, +)[-]         (Standard Model)
+    KO 3:  (-, +)        KO 7:  (+, -)
+
+(Corrected 2026-09-05: rows 1,2,5,6 previously mis-stated epsilon'/the
+even-row signs; the code below uses only the KO-3 row, which was and is
+correct, so nothing computed was affected. Source: van Suijlekom,
+Noncommutative Geometry and Particle Physics, Table 3.1.)
 
 For S^3 (KO-dim 3) the conditions are J^2 = -1 AND J D = +D J. This is
 already the convention adopted in Paper 32 §IV.4 (Prop. reality),

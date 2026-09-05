@@ -1573,6 +1573,19 @@ The dispatch-then-critique loop closed. Author agent: GO. Critic agent (fresh, a
 
 **Named follow-on sprint (PI call): discharge Paper 39.** Scope: write the tensor lemma + facts (i)-(iv) into the body; restate thm:main with gamma^(ab)/constant 1; demote L3-T's sqrt(2) to a remark; change the tier to [INTERNAL THEOREM] scoped to the translation seminorm. **One open sub-task blocks the FULL claim** (not the distance bound): verify the Clifford-doubled product triple's real structure J_ab and the KO-6 axiom set — grading, anticommutation and D^2 are checked, J_ab is not. Memo: debug/sprint_p39_tensor_lifted_state_memo.md (verdict CRITIQUE-CONFIRMED SOUND).
 
+### O.5f — discharge APPLIED to Paper 39 (2026-09-05)
+
+The follow-on the PI called for. Paper 39's main theorem is discharged from **[CONDITIONAL]** to **[INTERNAL THEOREM]** (in the translation-seminorm metrization, Paper 38's tier). Applied only after both gates were green:
+
+- the distance bound (constant 1, reach_P unnecessary) was critique-confirmed SOUND (O.5e);
+- the real structure J_ab = J_a (x) sigma_1 K (x) J_b was verified GO by a subagent AND independently re-derived symbolically in the parent session (J^2=+1, JD=+DJ, Jgamma=-gamma J; sigma_1 forced — the other three antiunitaries fail against the actual CH Dirac).
+
+**Written into the paper:** three new lemmas (continuum-Lip-T, lifted-state-T with facts (i)-(iv), real-structure-T); thm:main restated with the gamma^(ab) <= gamma_a + gamma_b bound (constant 1) and rerouted through the lifted-state lemma; L5-T retained as the abandoned (B,P) route; C_3^(2)/sqrt2 restored in L3-T and re-scoped as that route's constant, not a rate constant. Backing test `tests/test_paper39_real_structure.py` (9 tests, all fire-tested; KO-6 signs + sigma_1-forced against the actual CH Dirac). Two claim-matrix rows added. The `real_structure.py` KO-dim docstring table (rows 1,2,5,6, flagged by the subagent) corrected — code uses only KO-3, which was correct.
+
+**Self-inflicted, caught by the compile gate (not by me):** my lemma preamble wrote `\nmax_\bullet` (double subscript, `\nmax` already carries `_{\max}`) and my theorem rewrite dropped `eq:C3_2_full`, dangling six refs. Both fixed; the compile gate surfaced both.
+
+**Still owed (does not block the discharge):** the finite-vs-continuum status of order-0/1 for the tensor triple is inherited from Paper 38, not re-proved — the reviewer's named attack point, and contested for Paper 38 too if at all. A fresh claims-critic is dispatched on the rewritten thm:main + three lemmas.
+
 ### O.6 — Next
 
 Guard pass in isolation (O.5), then **DELTA #8, narrow**: code-tier on the

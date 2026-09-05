@@ -1127,7 +1127,7 @@ REGISTRY = [
         "exempt_if_nearby": r"(?!)",
         "cited_by": {
             "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex":
-                "disclosed 2026-09-04 (DELTA #7); repair open",
+                "repair adopted 2026-09-05 (lem:real_structure-T, Clifford doubling)",
             "geovac/gh_convergence_tensor.py":
                 "disclosed 2026-09-04 (DELTA #7) at 4 loci; repair open",
         },

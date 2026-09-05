@@ -422,113 +422,90 @@ products $\Mat_a \otimes \Mat_b$ with $\Mat_\bullet \in \Op_{\nmax,
 % =====================================================================
 
 \begin{theorem}[Main theorem]\label{thm:main}
-\textbf{[CONDITIONAL]} The truncated tensor-product Camporesi--Higuchi
-spectral triples converge to their continuum tensor-product limit in
+\textbf{[INTERNAL THEOREM]} The truncated tensor-product
+Camporesi--Higuchi spectral triples converge to the tensor product of
+the two continuum $\sthree$ Camporesi--Higuchi spectral triples in
 van~Suijlekom's state-space Gromov--Hausdorff distance (the strictly
-stronger Latr\'emoli\`ere propinquity is not claimed; see the convergence
-convention below), \emph{conditionally} on the status note following the
-statement:
+stronger Latr\'emoli\`ere propinquity is not claimed):
 \begin{equation}\label{eq:main_thm}
    \Lambda\bigl(\Tcal_{\nmaxa}^{\lambda_a} \otimes
                 \Tcal_{\nmaxb}^{\lambda_b},\;
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
-   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot 2 \cdot
-            \max\!\Bigl(\lambda_a\,\gamma_{\nmaxa},\,
-                        \lambda_b\,\gamma_{\nmaxb}\Bigr),
+   \;\le\; \gamma^{(ab)}_\lambda
+   \;\le\; \lambda_a\,\gamma_{\nmaxa} + \lambda_b\,\gamma_{\nmaxb}
+   \;\le\; 2\max\!\bigl(\lambda_a\,\gamma_{\nmaxa},\,
+                        \lambda_b\,\gamma_{\nmaxb}\bigr),
 \end{equation}
-with
-\begin{equation}\label{eq:C3_2_full}
-   C_3^{(2)}(\nmaxa, \nmaxb)
-   \;:=\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \\ 2 \le N_b \le \nmaxb+1}}
-            \sqrt{\frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}
-                       {N_a^2 + N_b^2 - 2}}
-   \;\le\; \sqrt{2}
-\end{equation}
-at every finite $(\nmaxa, \nmaxb)$, and $C_3^{(2)} \nearrow \sqrt{2}$
-as both cutoffs grow. (This is the \emph{tight} triangle bound on the
-joint Leibniz rule; it is achieved with equality on a pair of
-top-shell raising harmonics, where the two Leibniz terms add
-constructively. The earlier closed form
-$\sqrt{((N_a-1)^2+(N_b-1)^2)/(N_a^2+N_b^2-2)}<1$ rested on a Pythagorean
-operator-norm identity that does \emph{not} hold for these operators;
-see Lemma~\ref{lem:L3-T}.) The right-hand side of \eqref{eq:main_thm} tends to
-zero as $\nmaxa, \nmaxb \to \infty$, with rate
-$\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}) = O(\log \nmax / \nmax)$
-inherited from the single-factor central Fej\'er moment
-\cite{loutey_paper38}. The asymptotic constant $4/\pi$ on each factor
-is preserved in the joint rate.
+where $\gamma^{(ab)}_\lambda = \iint \KS_{\nmaxa}\KS_{\nmaxb}
+\sqrt{\lambda_a^2\,d(e,g)^2 + \lambda_b^2\,d(e,h)^2}\,dg\,dh$ is the joint
+first moment and $\gamma_n = (4/\pi)\log\nmax/\nmax + O(1/\nmax)$
+(dual-Coxeter; $2/\pi$ on the unit $\sthree$). \textbf{The leading
+constant is $1$}:\ the tight bound is $\gamma^{(ab)}_\lambda$ itself, of
+which $\lambda_a\gamma_{\nmaxa} + \lambda_b\gamma_{\nmaxb}$ is the clean
+subadditive form and $2\max$ the looser corollary (at usable cutoffs
+$\nmax \le 5$, $\gamma^{(ab)}$ is $\approx 0.74$--$0.77$ of the $2\max$
+value; the ratio rises toward $1$ only logarithmically). The right-hand
+side is $O(\log\nmax/\nmax) \to 0$ with universal asymptotic constant
+$4/\pi$ per factor.
 
-\emph{Focal-length placement, corrected 2026-09-04} [retracted 2026-09-04: p39-lambda-placement]\emph{:} the
-rate reads $\lambda\gamma$, not $\gamma/\lambda$ as printed until that date.
-$D \mapsto \lambda^{-1}D$ divides the Lipschitz seminorm by $\lambda$, so
-the unit ball --- and every Monge--Kantorovich distance --- grows by $\lambda$;\
-$\gamma$ is a first moment of the geodesic distance and scales with it. The
-internal witness is Paper~38~\S2.1:\ its dual-Coxeter Dirac is half the
-Camporesi--Higuchi Dirac and its moment is \emph{twice} the unit-$\sthree$
-one.
+\emph{Metrization (the tier's scope).} As in Paper~38's
+\texttt{thm:main\_unconditional}, both state spaces are metrized by the
+left-\emph{translation} Lipschitz seminorm, which agrees with the
+truncated-Dirac commutator seminorm on the continuum
+(Lemma~\ref{lem:continuum_lip-T}) and, unlike it, is non-degenerate at
+finite cutoff. The statement is unconditional \emph{in that metrization}
+--- Paper~38's own footing and the tier this theorem shares --- not
+simpliciter.
 
-\emph{Status (2026-09-04).} The proof given in this paper
-(Lemma~\ref{lem:L5-T}) is the approximation-pair assembly. Its height
-leg is refuted (\eqref{eq:height_one_T}) and its dual-reach leg
-$\mathrm{reach}_P$ is a named gap, so the pair does not establish the
-bound. Paper~38's surviving route is a different construction --- the
-lifted-state map of its \texttt{thm:main\_unconditional}, which uses
-neither the Berezin map nor any dual reach --- and this paper does not
-transfer it to the product in the body above. The statement therefore
-holds conditionally on that transfer, and the constant $2$ is the
-constant of that conditional bound. Until 2026-09-04 this theorem was
-stated as established.
+\emph{Route.} The bound is the lifted-state assembly of
+Lemma~\ref{lem:lifted_state-T}, which uses neither a Berezin map nor any
+partial inverse:\ $\mathrm{reach}_P$ is \emph{unnecessary}, both
+almost-inverse defects being the same Fej\'er smoothing at the same
+moment $\gamma^{(ab)}$. The joint Lipschitz comparison constant
+$C_3^{(2)} \le \sqrt2$ of Lemma~\ref{lem:L3-T} belongs to the
+\emph{abandoned} $(B,P)$-pair route (Lemma~\ref{lem:L5-T}) and is not a
+rate constant of this theorem;\ its value is unchanged, only its role.
 
-\emph{Update 2026-09-05.} The transfer has since been carried out and
-independently reviewed (verdict SOUND). The lifted-state route lifts to
-the product $\SU(2) \times \SU(2)$ verbatim:\ facts (i)--(iv) of
-Paper~38's \texttt{thm:main\_unconditional} hold factor-wise, metrized by
-the joint left-\emph{translation} seminorm (Paper~38 \S~named-gaps), and
-give $d_{\mathrm{GH}} \le \gamma^{(ab)} \le \gamma_{\nmaxa} +
-\gamma_{\nmaxb}$ with \emph{constant $1$} --- $\mathrm{reach}_P$ is
-\emph{unnecessary}, both almost-inverse defects being the same Fej\'er
-smoothing, and $C_3^{(2)}$ does not enter (it belongs to the abandoned
-Berezin route;\ its $\sqrt{2}$ stands as a truncated-Dirac-seminorm
-remark, not a rate constant). The discharged tier is
-[INTERNAL THEOREM] \emph{in the translation-seminorm metrization} ---
-Paper~38's own footing, not ``unconditional'' simpliciter. \emph{Two
-items remain before the tier is changed in this paper:} (a) writing the
-tensor lemma and the demotion into the body as a dedicated pass (this
-note does not rewrite Theorem~\ref{thm:main}, which still displays the
-conditional constant $2$), and (b) verifying that the Clifford-doubled
-product triple (required because $\gamma_a = 0$ on $\sthree$; see the
-note after \eqref{eq:CM_dirac_recall}) satisfies the KO-dim-$6$
-\emph{real-structure} axioms --- its grading, anticommutation and
-$D^2$ are checked, its $J_{a,b}$ is not, and while the distance bound
-does not need it, the identification of the limit \emph{as} the tensor
-Camporesi--Higuchi spectral triple does.
+\emph{Limit object.} $\Tcal_{\sthree}^{\lambda_a} \otimes
+\Tcal_{\sthree}^{\lambda_b}$ is the Da\c{}browski--Dossena graded tensor
+product of the two odd (KO-$3$) Camporesi--Higuchi real spectral triples,
+with Dirac $\DCH^{(a)}\otimes\sigma_1\otimes 1 +
+1\otimes\sigma_2\otimes\DCH^{(b)}$, grading $1\otimes\sigma_3\otimes 1$
+and real structure $J_{a,b} = J_a\otimes\sigma_1 K\otimes J_b$ at
+KO-dimension $6$ (Lemma~\ref{lem:real_structure-T}). The Clifford $\C^2$
+is the factor carrying the product grading and real structure --- the
+content of $3+3=6$;\ the displayed
+$\DCH^{(a)}\otimes I + \gamma_a\otimes\DCH^{(b)}$ is \emph{not} realisable
+($\gamma_a = 0$ on $\sthree$, note after \eqref{eq:CM_dirac_recall}), and
+the doubling is its correct replacement.
+
+\emph{History (2026-09-04/05).} Until 2026-09-04 this theorem was stated
+as established via the $(B,P)$-pair route (Lemma~\ref{lem:L5-T});\ that
+route's height leg was then refuted and its $\mathrm{reach}_P$ leg found
+to be a named gap, so the theorem was briefly re-tiered
+\textbf{[CONDITIONAL]}. The lifted-state route above (proved and
+independently reviewed 2026-09-05) discharges it back to
+\textbf{[INTERNAL THEOREM]} in the translation-seminorm metrization, with
+constant $1$ rather than the conditional $2$.
 \end{theorem}
 
 \begin{proof}
-The proof assembles five tensor lemmas L1$'$-T through L5-T proved in
-\S\ref{sec:lemmas}, each of which lifts the corresponding single-factor
-lemma of~\cite{loutey_paper38}~\S 3. Lemma~\ref{lem:L1prime-T} provides
-the operator-system substrate; Lemma~\ref{lem:L2-T} the joint central
-spectral Fej\'er kernel with closed-form Plancherel symbol; Lemma
-\ref{lem:L3-T} the joint Lipschitz comparison constant via the
-(tight) triangle bound on the Connes--Marcolli graded Leibniz rule;
-Lemma~\ref{lem:L4-T} the
-joint Berezin reconstruction with the properties needed for an
-approximation pair; and Lemma~\ref{lem:L5-T} the
-state-space-GH assembly with explicit cross-Stein--Weiss panel bound
-(modulo the inherited $\mathrm{reach}_P$ named gap; see the convergence
-convention).
-The factor $2$ in \eqref{eq:main_thm} is the joint reach
-contribution alone, $\mathrm{reach} \le \gamma_{\nmaxa} + \gamma_{\nmaxb}
-\le 2\max(\gamma)$;\ the joint \emph{height} contribution that formerly
-added $2\sqrt{2}$ was withdrawn on 2026-09-04
-[retracted 2026-09-04: l5-height-bound-achieved], the quantity it bounded
-being a unit-norm panel supremum rather than the Lipschitz-distortion
-height (Lemma~\ref{lem:L5-T}). The
-$\lambda^{-1}$-rescalings of the single-factor Diracs propagate
-linearly through the bound and produce the
-$\max(\gamma/\lambda)$-form of \eqref{eq:main_thm}.
+The distance bound \eqref{eq:main_thm} is the lifted-state assembly of
+Lemma~\ref{lem:lifted_state-T}:\ its four facts (i)--(iv) give a
+correspondence of distortion $\le 2\gamma^{(ab)}$ between the two state
+spaces, hence $d_{\mathrm{GH}} \le \gamma^{(ab)}$, with $\gamma^{(ab)} \le
+\gamma_{\nmaxa} + \gamma_{\nmaxb}$ by Lemma~\ref{lem:lifted_state-T}(b).
+The substrate is Lemma~\ref{lem:L1prime-T} (operator system) and the
+joint kernel and rate are Lemma~\ref{lem:L2-T}. The
+$\lambda^{-1}$-rescalings of the single-factor Diracs multiply each
+Monge--Kantorovich distance by $\lambda$, giving the $\lambda\gamma$ form.
+The identification of the limit as the Da\c{}browski--Dossena tensor
+product is Lemma~\ref{lem:real_structure-T}. The earlier $(B,P)$-pair
+route (Lemmas~\ref{lem:L3-T}--\ref{lem:L5-T}) is retained as the record
+of an abandoned approach:\ its height leg is refuted and its
+$\mathrm{reach}_P$ leg a named gap, so it does not establish the bound;\
+the lifted-state route replaces it and needs neither.
 \end{proof}
 
 % =====================================================================
@@ -743,9 +720,22 @@ $(N_a, N_b)$ in the Avery 3-Y harmonic basis gives the per-irrep ratio
    \;\le\; \frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}{N_a^2 + N_b^2 - 2}.
 \end{equation}
 Taking square roots and supping over the irrep grid gives the joint
-Lipschitz comparison constant $C_3^{(2)}(\nmaxa, \nmaxb)$ of
-\eqref{eq:C3_2_full}, which is bounded by $\sqrt 2$ at every finite
-$(\nmaxa, \nmaxb)$ and increases to $\sqrt 2$ as the cutoffs grow.
+Lipschitz comparison constant
+\begin{equation}\label{eq:C3_2_full}
+   C_3^{(2)}(\nmaxa, \nmaxb)
+   \;:=\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \ 2 \le N_b \le \nmaxb+1}}
+            \sqrt{\frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}
+                       {N_a^2 + N_b^2 - 2}}
+   \;\le\; \sqrt{2},
+\end{equation}
+bounded by $\sqrt 2$ at every finite $(\nmaxa, \nmaxb)$ and increasing to
+$\sqrt 2$ as the cutoffs grow. This constant prices the truncated-Dirac
+$\to$ classical-gradient conversion of the abandoned $(B,P)$-pair route
+(Lemma~\ref{lem:L5-T});\ it is \emph{not} a rate constant of
+Theorem~\ref{thm:main}, whose lifted-state route (via the translation
+seminorm, Lemma~\ref{lem:continuum_lip-T}) never performs that conversion.
+The earlier Pythagorean claim $C_3^{(2)} < 1$ is withdrawn
+(Remark~\ref{rem:no_pythagorean}).
 \end{lemma}
 
 \begin{proof}
@@ -912,6 +902,172 @@ operator-norm reduction.
 % ---------------------------------------------------------------------
 \subsection{Lemma L5-T: joint state-space-GH assembly}\label{sec:L5-T}
 % ---------------------------------------------------------------------
+
+% ---------------------------------------------------------------------
+\subsection{Lemma continuum-Lip-T: translation seminorm equals classical
+Lipschitz}\label{sec:continuum_lip-T}
+% ---------------------------------------------------------------------
+
+\begin{lemma}[continuum-Lip-T]\label{lem:continuum_lip-T}
+For $F \in C^\infty(\sthree \times \sthree)$,
+$L_{\mathrm{prod}}(F) = \mathrm{Lip}_{d_{\mathrm{prod}}}(F) =
+\norm{\nabla_{\mathrm{prod}} F}_\infty$, where $L_{\mathrm{prod}}$ is the
+left-translation seminorm on the product group
+$\mathbb{G} = \SU(2)\times\SU(2)$ and $d_{\mathrm{prod}}$ the product
+geodesic metric.
+\end{lemma}
+
+\begin{proof}
+$\norm{\lambda_u F - F}_\infty \le \mathrm{Lip}(F)\, d_{\mathrm{prod}}(e,u)$
+by bi-invariance, so $L_{\mathrm{prod}} \le \mathrm{Lip}$;\ conversely left
+translations act transitively and realise every geodesic segment, so the
+supremum recovers $\mathrm{Lip}$. This is Paper~38's
+\texttt{lem:continuum\_lip}~\cite{loutey_paper38} with $\mathbb{G}$ in place
+of $\SU(2)$. With the doubled Dirac (Lemma~\ref{lem:real_structure-T}) the
+third equality $\norm{\nabla_{\mathrm{prod}}F}_\infty =
+\opnorm{[D_{a,b}, \Mat_F]}$ also holds exactly:\ this is where a
+Lipschitz-comparison constant $C_3^{(2)}$ would enter, and on the continuum
+symbol it is $1$. (The truncated-cutoff $C_3^{(2)} \le \sqrt2$ of
+Lemma~\ref{lem:L3-T} prices the \emph{truncated}-Dirac $\to$ classical
+gradient conversion of the abandoned $(B,P)$ route, which this route does not
+perform.)
+\end{proof}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma lifted-state-T: the lifted-state route}\label{sec:lifted_state-T}
+% ---------------------------------------------------------------------
+
+Let $J_\bullet = (n_\bullet - 1)/2$,
+$h_\bullet = \sum_{j \le J_\bullet} \sqrt{2j+1}\,\chi_j$,
+$\chi_\bullet \in \C^2$ unit spinors, $\xi_\bullet =
+(h_\bullet \otimes \chi_\bullet)/\sqrt{Z_{n_\bullet}}$, $\eta \in \C^2$
+unit, and set
+\begin{equation}\label{eq:lifted_state_def-T}
+   \xi_{a,b} := \xi_a \otimes \eta \otimes \xi_b, \qquad
+   \upsilon_{a,b}(T)(u) := \langle U_u\,\xi_{a,b},\, T\,U_u\,\xi_{a,b}\rangle,
+   \quad u = (g,h) \in \mathbb{G}.
+\end{equation}
+
+\begin{lemma}[lifted-state-T]\label{lem:lifted_state-T}
+$\upsilon_{a,b}$ and the compression $S_{a,b}(F) = P_{a,b}\Mat_F P_{a,b}$
+form an approximation pair for which:
+\emph{(a)} $\xi_{a,b} \in \operatorname{ran} P_{a,b}$;
+\emph{(b)} the induced measure is the product Fej\'er measure, with
+$\langle \xi_{a,b}, S_{a,b}(F)\,\xi_{a,b}\rangle = \iint F\,\KS_{\nmaxa}
+\KS_{\nmaxb}$ and first moment $\gamma^{(ab)} \le \gamma_{\nmaxa} +
+\gamma_{\nmaxb}$;
+\emph{(c)} $L_{\mathrm{prod}}(\upsilon_{a,b}(T)) \le L_{a,b}(T)$
+(tautological; no $C_3^{(2)}$, no graded Leibniz).
+The four tunnel facts
+\begin{align*}
+\text{(i)}\ & L_{a,b}(S_{a,b}F) \le L_{\mathrm{prod}}(F),
+& \text{(ii)}\ & L_{\mathrm{prod}}(\upsilon_{a,b}T) \le L_{a,b}(T), \\
+\text{(iii)}\ & \norm{\upsilon_{a,b}(S_{a,b}F) - F}_\infty
+   \le \gamma^{(ab)} L_{\mathrm{prod}}(F),
+& \text{(iv)}\ & \opnorm{S_{a,b}(\upsilon_{a,b}T) - T}
+   \le \gamma^{(ab)} L_{a,b}(T)
+\end{align*}
+hold, and the correspondence $R = \{(\omega, S_{a,b}^*\omega)\} \cup
+\{(\upsilon_{a,b}^*\phi, \phi)\}$ has distortion $\le 2\gamma^{(ab)}$, so
+\begin{equation}\label{eq:lifted_bound-T}
+   \Lambda\bigl(\Tcal_{\nmaxa}\otimes\Tcal_{\nmaxb},\;
+   \Tcal_{\sthree}\otimes\Tcal_{\sthree}\bigr)
+   \;=\; d_{\mathrm{GH}} \;\le\; \gamma^{(ab)}
+   \;\le\; \gamma_{\nmaxa} + \gamma_{\nmaxb}.
+\end{equation}
+$\mathrm{reach}_P$ is unnecessary:\ both almost-inverse defects (iii),(iv)
+are the same Fej\'er smoothing at the same moment $\gamma^{(ab)}$.
+\end{lemma}
+
+\begin{proof}
+\emph{(a)} $\xi_a \in \operatorname{ran} P_{\nmaxa}$,
+$\xi_b \in \operatorname{ran} P_{\nmaxb}$ (Paper~38
+\texttt{lem:lifted\_state}(a)), and $\eta$ is untouched by $1_2$;\ the
+doubling $\C^2$ carries the Clifford structure of the product Dirac, not
+the algebra or the group, so it is inert for the state.
+\emph{(b)} $P_{a,b}\xi_{a,b} = \xi_{a,b}$ gives the product-measure identity;\
+$\gamma^{(ab)} = \iint \KS_{\nmaxa}\KS_{\nmaxb}\sqrt{d(e,g)^2 + d(e,h)^2}
+\le \iint \KS\KS\,(d(e,g)+d(e,h)) = \gamma_{\nmaxa}+\gamma_{\nmaxb}$;\ both
+sides scale together under the metric normalisation, so the statement is
+normalisation-independent.
+\emph{(c)} With $\upsilon_{a,b}(T)(u) = \langle\xi_{a,b},
+\rho_{u^{-1}}(T)\xi_{a,b}\rangle$ and $\rho_{u^{-1}} - \rho_{u'^{-1}} =
+\rho_{u'^{-1}}\!\circ(\rho_{u'u^{-1}} - \mathrm{id})$,
+$|\upsilon_{a,b}(T)(u) - \upsilon_{a,b}(T)(u')| \le
+\opnorm{\rho_q(T) - T} \le L_{a,b}(T)\,d_{\mathrm{prod}}(u,u')$ by
+bi-invariance;\ the graded Leibniz rule never appears because the seminorm
+is a translation seminorm.
+\emph{(i)} $\rho_u(S_{a,b}F) - S_{a,b}F = S_{a,b}(\lambda_u F - F)$ and
+compression contracts operator norms. \emph{(ii)} is (c). \emph{(iii)} is
+the good-kernel estimate $|\KS*F(x) - F(x)| \le \int\KS(u)|F(u^{-1}x)-F(x)|
+\le \mathrm{Lip}(F)\int\KS\,d_{\mathrm{prod}} = \gamma^{(ab)}\mathrm{Lip}(F)$.
+\emph{(iv)} on $T = P_{a,b}\Mat_F P_{a,b}$,
+$S_{a,b}(\upsilon_{a,b}T) = P_{a,b}\Mat_{\KS*F}P_{a,b} = \int
+\rho_u(T)\KS_{\nmaxa}\KS_{\nmaxb}(u)\,du =: \Phi_{a,b}(T)$, and
+$\opnorm{\Phi_{a,b}(T) - T} \le \int\opnorm{\rho_u(T)-T}\KS\KS \le
+L_{a,b}(T)\gamma^{(ab)}$. The four-pair distortion computation
+(both-first/both-second/two mixed) gives $\mathrm{dis}(R) \le 2\gamma^{(ab)}$,
+hence $d_{\mathrm{GH}} \le \tfrac12\mathrm{dis}(R) = \gamma^{(ab)}$. This is
+Paper~38's \texttt{thm:main\_unconditional} proof, lifted factor-wise to
+$\mathbb{G}$;\ facts (i),(ii) hold for \emph{all} operators, so the bound
+covers the full (entangled-inclusive) joint state space.
+\end{proof}
+
+% ---------------------------------------------------------------------
+\subsection{Lemma real-structure-T: the KO-6 tensor triple}\label{sec:real_structure-T}
+% ---------------------------------------------------------------------
+
+\begin{lemma}[real-structure-T]\label{lem:real_structure-T}
+The Clifford-doubled product
+$\bigl(\Acal_a \otimes 1_2 \otimes \Acal_b,\;
+\Hilb_a \otimes \C^2 \otimes \Hilb_b,\;
+\DCH^{(a)}\otimes\sigma_1\otimes 1 + 1\otimes\sigma_2\otimes\DCH^{(b)},\;
+1\otimes\sigma_3\otimes 1\bigr)$ carries the real structure
+\begin{equation}\label{eq:Jab}
+   J_{a,b} \;=\; J_a \otimes \sigma_1 K \otimes J_b
+\end{equation}
+($K$ = complex conjugation on $\C^2$, $J_\bullet$ the single-factor
+Camporesi--Higuchi charge conjugation), satisfying the KO-dimension-$6$
+signs
+\begin{equation}\label{eq:ko6}
+   J_{a,b}^2 = +1, \qquad
+   J_{a,b}\,D_{a,b} = +\,D_{a,b}\,J_{a,b}, \qquad
+   J_{a,b}\,\gamma_{a,b} = -\,\gamma_{a,b}\,J_{a,b},
+\end{equation}
+together with the order-zero and order-one conditions in the continuum
+limit. The middle factor $\sigma_1 K$ is forced:\ of the four antiunitaries
+$W K$, $W \in \{1, \sigma_1, \sigma_2, \sigma_3\}$, only $\sigma_1$ yields
+\eqref{eq:ko6} ($\sigma_2$ gives $J^2 = -1$;\ $1$ and $\sigma_3$ fail
+$J_{a,b}D_{a,b} = D_{a,b}J_{a,b}$ on the second Dirac term). This is the
+Da\c{}browski--Dossena graded tensor product of the two odd (KO-$3$)
+Camporesi--Higuchi real spectral triples, so the limit is \emph{the} tensor
+product, not merely \emph{a} tensor triple.
+\end{lemma}
+
+\begin{proof}
+On the Clifford $\C^2$ factor:\ $J_{a,b}^2 = J_a^2 \otimes (\sigma_1 K)^2
+\otimes J_b^2 = (-1)(\sigma_1\bar\sigma_1)(-1) = +\sigma_1^2 = +1$. For
+$J_{a,b}D_{a,b}$, on $\DCH^{(a)}\otimes\sigma_1\otimes 1$ the middle factor
+gives $\sigma_1 K\cdot\sigma_1 = \sigma_1\sigma_1 K$ vs
+$\sigma_1\cdot\sigma_1 K$ (commute, $+$);\ on
+$1\otimes\sigma_2\otimes\DCH^{(b)}$, $\sigma_1 K\cdot\sigma_2 =
+\sigma_1\bar\sigma_2 K = -\sigma_1\sigma_2 K$ while
+$\sigma_2\cdot\sigma_1 K = \sigma_2\sigma_1 K = -\sigma_1\sigma_2 K$ (equal,
+$+$), using the KO-$3$ single-factor $J_\bullet\DCH^{(\bullet)} =
++\DCH^{(\bullet)}J_\bullet$;\ hence $J_{a,b}D_{a,b} = +D_{a,b}J_{a,b}$.
+$J_{a,b}\gamma_{a,b}$:\ $\sigma_1 K\cdot\sigma_3 = \sigma_1\sigma_3 K =
+-\sigma_3\sigma_1 K = -\sigma_3\cdot\sigma_1 K$, so
+$J_{a,b}\gamma_{a,b} = -\gamma_{a,b}J_{a,b}$. The three signs $(+,+,-)$ are
+the KO-$6$ row (van~Suijlekom, and the $3+3=6$ additivity of the KO
+dimension). Order-zero and order-one reduce factor-by-factor to the
+single-factor spin-manifold facts in the continuum limit (Paper~38 and the
+classical Dirac operator);\ at finite cutoff they fail only by the
+single-factor amount (the operator-system-is-not-an-algebra artifact of
+Paper~38 \texttt{rem:dirac\_degeneracy}), with no cross-factor obstruction.
+Full sign table and numerical verification against the Camporesi--Higuchi
+Dirac at $(\nmaxa,\nmaxb) \in \{1,2\}^2$:\ backing test
+\texttt{tests/test\_paper39\_real\_structure.py}.
+\end{proof}
 
 \begin{lemma}[L5-T: joint state-space-GH bound from the joint
 approximation pair, conditional]\label{lem:L5-T}
