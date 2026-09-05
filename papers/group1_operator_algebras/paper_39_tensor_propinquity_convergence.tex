@@ -86,41 +86,44 @@ $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$ on
 $\sthree \times \sthree$ at two (possibly distinct) focal lengths
 $\lambda_a, \lambda_b > 0$ converge to the continuum tensor-product
 triple in van~Suijlekom's state-space Gromov--Hausdorff distance,
-with explicit qualitative-rate bound
+with explicit rate
 \(
    \Lambda(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
             \Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b})
-   \le C_3^{(2)} \cdot 2 \cdot
-        \max(\lambda_a \gamma_{\nmaxa},\, \lambda_b \gamma_{\nmaxb}),
+   \le \gamma^{(ab)}_\lambda
+   \le \lambda_a \gamma_{\nmaxa} + \lambda_b \gamma_{\nmaxb},
 \)
-where $C_3^{(2)} \le \sqrt{2}$ is a closed-form Lipschitz comparison
-constant from the (tight) triangle bound on the Connes--Marcolli joint
-Leibniz rule, and $\gamma_n = (4/\pi)\log n / n + O(1/n)$ inherits
-from the single-factor result of~\cite{loutey_paper38}. The proof
-proceeds factor-by-factor through tensor extensions of the five
-single-factor lemmas (operator system, central spectral Fej\'er kernel,
-Lipschitz comparison, Berezin reconstruction, propinquity assembly).
-The two technical risks specific to the tensor product --- a
-closed-form Lipschitz comparison constant on the full operator system,
-and a rigorous bound on the cross-Stein--Weiss panel term --- both
-close via the triangle bound on the joint Leibniz rule.
-(The panel term was previously assembled into the rate as a
-Lipschitz-distortion \emph{height};\ that step is withdrawn
-2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved], and the
-rate is now assembled from reach-type estimates alone, which
-\emph{improves} the constant from $1 + 2\sqrt{2}$ to $2$.) (An earlier
-Pythagorean refinement claiming $C_3^{(2)} < 1$ has been
-\emph{withdrawn}:\ the graded anticommutation does \emph{not} make the
-two Leibniz terms operator-norm orthogonal --- on the actual
-Camporesi--Higuchi harmonics they add constructively, so the triangle
-bound is tight and $C_3^{(2)} \nearrow \sqrt{2}$, exceeding $1$ for
-cutoffs beyond $(3,3)$. The convergence theorem is unaffected, since
-$\sqrt{2}$ is a finite constant.) The strictly stronger
-Latr\'emoli\`ere propinquity is \emph{not} claimed:\ the dual-reach
-($\mathrm{reach}_P$) step of the joint assembly inherits the
-single-factor $\mathrm{reach}_P$ named gap of Papers~38/40 (the invalid
-cb-norm dual-reach), so the object established is van~Suijlekom
-state-space Gromov--Hausdorff convergence. The result extends
+of \emph{leading constant $1$}, where $\gamma^{(ab)}_\lambda$ is the joint
+first moment of the product Fej\'er measure and
+$\gamma_n = (4/\pi)\log n / n + O(1/n)$ inherits from the single-factor
+result of~\cite{loutey_paper38}. The proof is the lifted-state
+construction (Lemma~\ref{lem:lifted_state-T}), which uses neither a Berezin
+map nor any partial inverse:\ the dual reach $\mathrm{reach}_P$ is
+\emph{unnecessary}, both almost-inverse defects being the same Fej\'er
+smoothing at the same moment. The theorem is [INTERNAL THEOREM] \emph{in the
+translation-seminorm metrization} --- the footing of Paper~38's
+\texttt{thm:main\_unconditional}, with which both state spaces are metrized;
+that seminorm agrees with the truncated-Dirac commutator seminorm on the
+continuum and, unlike it, is non-degenerate at finite cutoff. The limit is
+the graded tensor product of the two odd (KO-$3$) Camporesi--Higuchi real
+spectral triples --- Hilbert space $\Hilb_a \otimes \C^2 \otimes \Hilb_b$,
+Dirac $\DCH^{(a)}\otimes\sigma_1\otimes 1 + 1\otimes\sigma_2\otimes\DCH^{(b)}$,
+grading $1\otimes\sigma_3\otimes 1$, real structure
+$J_{a,b} = J_a\otimes\sigma_1 K\otimes J_b$ at KO-dimension $6$
+(Lemma~\ref{lem:real_structure-T});\ the Clifford $\C^2$ is the doubling
+that carries the product grading and real structure, the naive
+$\DCH^{(a)}\otimes I + \gamma_a\otimes\DCH^{(b)}$ being unrealisable
+($\gamma_a = 0$ on $\sthree$). The strictly stronger Latr\'emoli\`ere
+propinquity is not claimed:\ it is not pursued here, and its dual-reach step
+would reintroduce the $\mathrm{reach}_P$ named gap of Papers~38/40 that the
+lifted-state route avoids;\ the object established is van~Suijlekom
+state-space Gromov--Hausdorff convergence.
+
+\emph{An earlier $(B,P)$-pair assembly (the retained
+Lemma~\ref{lem:L5-T}) gave a weaker conditional bound with constant $2$ via
+the joint Lipschitz comparison constant $C_3^{(2)} \le \sqrt2$;\ that route's
+height leg was refuted and its dual reach is a named gap, and it is
+superseded by the lifted-state route above.} The result extends
 \cite{connes_vs2021,leimbach_vs2024,loutey_paper38} to the simplest
 non-abelian tensor case, and closes a tensor-product state-space-GH
 case that the published literature on
@@ -237,28 +240,30 @@ Gromov--Hausdorff distance, with bound
    \Lambda\bigl(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
-   \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot 2 \cdot
-   \max\!\Bigl(\lambda_a\,\gamma_{\nmaxa},\,
-                \lambda_b\,\gamma_{\nmaxb}\Bigr),
+   \;\le\; \gamma^{(ab)}_\lambda
+   \;\le\; \lambda_a\,\gamma_{\nmaxa} + \lambda_b\,\gamma_{\nmaxb},
 \end{equation}
-where $\gamma_n$ is the central spectral Fej\'er moment of
-\cite{loutey_paper38} satisfying $\gamma_n = (4/\pi) \log n / n +
-O(1/n)$, and the joint Lipschitz comparison constant is
-\begin{equation}\label{eq:C3_2_intro}
-   C_3^{(2)}(\nmaxa, \nmaxb)
-   \;\le\; \sup_{\substack{2 \le N_a \le \nmaxa+1 \\ 2 \le N_b \le \nmaxb+1}}
-            \sqrt{\frac{\bigl((N_a - 1) + (N_b - 1)\bigr)^2}
-                       {N_a^2 + N_b^2 - 2}},
-\end{equation}
-bounded by $\sqrt 2$ at every finite $(\nmaxa, \nmaxb)$ and approaching
-$\sqrt 2$ from below as both cutoffs grow (this is the \emph{tight}
-triangle bound; the convergence is driven by $\gamma_n \to 0$, not by
-the constant).
+of leading constant $1$, where $\gamma^{(ab)}_\lambda$ is the joint first
+moment of the product Fej\'er measure and $\gamma_n = (4/\pi)\log n/n +
+O(1/n)$. The convergence is [INTERNAL THEOREM] in the translation-seminorm
+metrization (Paper~38's footing);\ it is proved by the lifted-state
+construction (Lemma~\ref{lem:lifted_state-T}), for which the dual reach
+$\mathrm{reach}_P$ is unnecessary. The joint Lipschitz comparison constant
+$C_3^{(2)} \le \sqrt2$ (\eqref{eq:C3_2_full}) belongs to the \emph{abandoned}
+$(B,P)$-pair route (Lemma~\ref{lem:L5-T}) and is not a rate constant of this
+theorem.
 \end{theorem}
 
-The proof is a factor-by-factor lift of the five single-factor lemmas
-of~\cite{loutey_paper38} to the tensor product, supplemented by two
-new ingredients specific to the product:
+The proof is the lifted-state assembly (Lemma~\ref{lem:lifted_state-T}):\
+the four facts (i)--(iv) of Paper~38's \texttt{thm:main\_unconditional},
+lifted factor-wise to $\SU(2)\times\SU(2)$ and metrized by the translation
+seminorm (Lemma~\ref{lem:continuum_lip-T}), give a correspondence of
+distortion $\le 2\gamma^{(ab)}$ and hence $d_{\mathrm{GH}} \le \gamma^{(ab)}
+\le \gamma_{\nmaxa}+\gamma_{\nmaxb}$;\ it uses neither a Berezin map nor a
+partial inverse, so $\mathrm{reach}_P$ never enters. The earlier
+$(B,P)$-pair route (Lemmas~\ref{lem:L3-T}--\ref{lem:L5-T}) is retained as the
+record of an abandoned approach, supplemented there by two ingredients
+specific to the product:
 \begin{itemize}\setlength{\itemsep}{2pt}
 \item a closed-form Lipschitz comparison estimate from the (tight)
 operator-norm triangle bound $\norm{A + B}_{\mathrm{op}} \le \norm{A}
@@ -277,12 +282,13 @@ graded anticommutation does not produce operator-norm orthogonality
 --- and replaced throughout by the rigorous triangle bound, giving
 $C_3^{(2)} \le \sqrt 2$; see Remark~\ref{rem:no_pythagorean}.)
 
-The mechanism is unified: the same KO-dim-6 graded structure
-that defines the Connes--Marcolli composed Dirac splits both
-the joint Lipschitz constant (R1) and the joint cross-Stein--Weiss
-panel bound (R2) into Leibniz terms controlled by the triangle bound. Each
-of the five single-factor lemmas of \cite{loutey_paper38} extends
-factor-by-factor with no novel analytical machinery.
+That abandoned route's mechanism was unified: the same KO-dim-6 graded
+structure that defines the Connes--Marcolli composed Dirac split both
+its joint Lipschitz constant (R1) and its joint cross-Stein--Weiss
+panel bound (R2) into Leibniz terms controlled by the triangle bound, each
+of the five single-factor lemmas of \cite{loutey_paper38} extending
+factor-by-factor. The live proof, by contrast, is the lifted-state
+assembly, which needs none of this (Lemma~\ref{lem:lifted_state-T}).
 
 \paragraph{Why this is the \emph{easy} case.}
 The same-manifold tensor product treated here is the most accessible
@@ -313,7 +319,7 @@ Section~\ref{sec:setup} sets up the rescaled Camporesi--Higuchi
 spectral triple at focal length $\lambda$, the truncations, and the
 tensor-product Connes--Marcolli graded structure.
 Section~\ref{sec:main_theorem} states the main theorem.
-Section~\ref{sec:lemmas} proves the five tensor lemmas.
+Section~\ref{sec:lemmas} proves the tensor lemmas.
 Section~\ref{sec:numerical} reports the numerical verification panel.
 Section~\ref{sec:related_work} places the result in the
 Connes--van~Suijlekom / Latr\'emoli\`ere / Farsi--Latr\'emoli\`ere /
@@ -333,16 +339,16 @@ Gromov--Hausdorff distance} (the convention of Paper~38
 Latr\'emoli\`ere propinquity \cite{latremoliere_metric_st_2017}
 (Adv.~Math.\ \textbf{404} (2022), Paper No.~108393, preprint
 \texttt{arXiv:1811.10843}). The bound symbol $\Lambda(\cdot, \cdot)$
-below denotes the state-space GH distance. The joint assembly
-(Lemma~\ref{lem:L5-T}) bounds the dual reach
-$\mathrm{reach}_{P_{\nmaxa} \otimes P_{\nmaxb}}$ by inheriting the
-single-factor $\mathrm{reach}_P$ estimate;\ that single-factor step is
-the invalid cb-norm dual-reach that descoped Papers~38/40 from
-Latr\'emoli\`ere propinquity to state-space GH, so the joint result
-inherits the same named gap and is stated at the state-space-GH level.
-The rate and the joint Lipschitz constant $C_3^{(2)} \le \sqrt 2$
-(Lemma~\ref{lem:L3-T}, triangle bound) are unaffected by this
-distinction.
+below denotes the state-space GH distance. The live route
+(the lifted-state assembly, Lemma~\ref{lem:lifted_state-T}) uses no dual
+reach, so $\mathrm{reach}_P$ does not enter it;\ the object is state-space
+GH rather than Latr\'emoli\`ere propinquity because the latter is not
+pursued here, and its dual-reach step would reintroduce the single-factor
+$\mathrm{reach}_P$ named gap (the invalid cb-norm dual-reach that descoped
+Papers~38/40). The abandoned $(B,P)$-pair assembly (Lemma~\ref{lem:L5-T})
+inherited that gap directly;\ its joint Lipschitz constant
+$C_3^{(2)} \le \sqrt 2$ (Lemma~\ref{lem:L3-T}) is that route's constant,
+not a rate constant of Theorem~\ref{thm:main}.
 
 \subsection{Single-factor recall: the rescaled $\sthree$ Camporesi--Higuchi triple}
 \label{sec:single_factor_recall}
@@ -468,7 +474,7 @@ $C_3^{(2)} \le \sqrt2$ of Lemma~\ref{lem:L3-T} belongs to the
 rate constant of this theorem;\ its value is unchanged, only its role.
 
 \emph{Limit object.} $\Tcal_{\sthree}^{\lambda_a} \otimes
-\Tcal_{\sthree}^{\lambda_b}$ is the Da\c{}browski--Dossena graded tensor
+\Tcal_{\sthree}^{\lambda_b}$ is the graded tensor
 product of the two odd (KO-$3$) Camporesi--Higuchi real spectral triples,
 with Dirac $\DCH^{(a)}\otimes\sigma_1\otimes 1 +
 1\otimes\sigma_2\otimes\DCH^{(b)}$, grading $1\otimes\sigma_3\otimes 1$
@@ -500,8 +506,8 @@ The substrate is Lemma~\ref{lem:L1prime-T} (operator system) and the
 joint kernel and rate are Lemma~\ref{lem:L2-T}. The
 $\lambda^{-1}$-rescalings of the single-factor Diracs multiply each
 Monge--Kantorovich distance by $\lambda$, giving the $\lambda\gamma$ form.
-The identification of the limit as the Da\c{}browski--Dossena tensor
-product is Lemma~\ref{lem:real_structure-T}. The earlier $(B,P)$-pair
+The identification of the limit as the tensor
+product (standard odd$\otimes$odd construction) is Lemma~\ref{lem:real_structure-T}. The earlier $(B,P)$-pair
 route (Lemmas~\ref{lem:L3-T}--\ref{lem:L5-T}) is retained as the record
 of an abandoned approach:\ its height leg is refuted and its
 $\mathrm{reach}_P$ leg a named gap, so it does not establish the bound;\
@@ -509,7 +515,7 @@ the lifted-state route replaces it and needs neither.
 \end{proof}
 
 % =====================================================================
-\section{The five tensor lemmas}\label{sec:lemmas}
+\section{The tensor lemmas}\label{sec:lemmas}
 % =====================================================================
 
 We work at unit focal length $\lambda_a = \lambda_b = 1$ throughout
@@ -909,7 +915,7 @@ Lipschitz}\label{sec:continuum_lip-T}
 % ---------------------------------------------------------------------
 
 \begin{lemma}[continuum-Lip-T]\label{lem:continuum_lip-T}
-For $F \in C^\infty(\sthree \times \sthree)$,
+\textbf{[INTERNAL THEOREM]} For $F \in C^\infty(\sthree \times \sthree)$,
 $L_{\mathrm{prod}}(F) = \mathrm{Lip}_{d_{\mathrm{prod}}}(F) =
 \norm{\nabla_{\mathrm{prod}} F}_\infty$, where $L_{\mathrm{prod}}$ is the
 left-translation seminorm on the product group
@@ -967,7 +973,7 @@ The four tunnel facts
 & \text{(iv)}\ & \opnorm{S_{a,b}(\upsilon_{a,b}T) - T}
    \le \gamma^{(ab)} L_{a,b}(T)
 \end{align*}
-hold, and the correspondence $R = \{(\omega, S_{a,b}^*\omega)\} \cup
+hold, and \textbf{[INTERNAL THEOREM]} the correspondence $R = \{(\omega, S_{a,b}^*\omega)\} \cup
 \{(\upsilon_{a,b}^*\phi, \phi)\}$ has distortion $\le 2\gamma^{(ab)}$, so
 \begin{equation}\label{eq:lifted_bound-T}
    \Lambda\bigl(\Tcal_{\nmaxa}\otimes\Tcal_{\nmaxb},\;
@@ -1026,7 +1032,7 @@ $\bigl(\Acal_a \otimes 1_2 \otimes \Acal_b,\;
 \begin{equation}\label{eq:Jab}
    J_{a,b} \;=\; J_a \otimes \sigma_1 K \otimes J_b
 \end{equation}
-($K$ = complex conjugation on $\C^2$, $J_\bullet$ the single-factor
+\textbf{[INTERNAL THEOREM]} ($K$ = complex conjugation on $\C^2$, $J_\bullet$ the single-factor
 Camporesi--Higuchi charge conjugation), satisfying the KO-dimension-$6$
 signs
 \begin{equation}\label{eq:ko6}
@@ -1039,7 +1045,7 @@ limit. The middle factor $\sigma_1 K$ is forced:\ of the four antiunitaries
 $W K$, $W \in \{1, \sigma_1, \sigma_2, \sigma_3\}$, only $\sigma_1$ yields
 \eqref{eq:ko6} ($\sigma_2$ gives $J^2 = -1$;\ $1$ and $\sigma_3$ fail
 $J_{a,b}D_{a,b} = D_{a,b}J_{a,b}$ on the second Dirac term). This is the
-Da\c{}browski--Dossena graded tensor product of the two odd (KO-$3$)
+graded tensor product of the two odd (KO-$3$)
 Camporesi--Higuchi real spectral triples, so the limit is \emph{the} tensor
 product, not merely \emph{a} tensor triple.
 \end{lemma}
@@ -1200,9 +1206,9 @@ The constant improves from the withdrawn $1 + 2\sqrt{2} \approx 3.828$
 an arithmetic slip in the withdrawn assembly, which bounded
 $\mathrm{reach}$ by $\max(\gamma)$ where this paragraph derives
 $\gamma_{\nmaxa} + \gamma_{\nmaxb}$.
-The $\lambda^{-1}$-rescalings of \eqref{eq:CM_dirac_recall} propagate
-linearly through the bound and produce the
-$\max(\gamma/\lambda)$-form of \eqref{eq:L5_bound_T}.
+The $\lambda^{-1}$-rescalings of \eqref{eq:CM_dirac_recall} multiply each
+Monge--Kantorovich distance by $\lambda$ (\S2.1), producing the
+$\max(\lambda\gamma)$-form of \eqref{eq:L5_bound_T}.
 \end{proof}
 
 \begin{remark}[Identification of the cross-Stein--Weiss term]
@@ -1250,7 +1256,15 @@ giving $C_3^{(2)}(2,2) = 1$,
 $C_3^{(2)}(3,3) = \sqrt{6/5} \approx 1.095$,
 $C_3^{(2)}(4,4) = \sqrt{8/6} \approx 1.155$.
 
-\paragraph{Joint state-space-GH bound (unit focal length).}
+\paragraph{Panel values for the abandoned $(B,P)$-pair route (unit focal
+length).}
+The columns below tabulate the \emph{abandoned} $(B,P)$-pair bound
+(Lemma~\ref{lem:L5-T}), retained for the record;\ they are \emph{not}
+Theorem~\ref{thm:main}'s bound, which is the tighter
+$\gamma^{(ab)} \le \gamma_{\nmaxa}+\gamma_{\nmaxb}$ of constant $1$
+(at $(3,3)$, $\gamma^{(ab)} \approx 0.76 \cdot 2\max(\gamma) < $ the
+$\Lambda^{\mathrm{full}}$ value here, which carries the extra
+$C_3^{(2)} \ge 1$ factor).
 We report two presentations of the bound at the panel: the
 \emph{factorised-panel} bound $\Lambda^{\mathrm{fact}} =
 C_3^{(2),\mathrm{fact}} \cdot \max(\gamma_a, \gamma_b)$ with
@@ -1370,13 +1384,13 @@ structure, and the joint Lipschitz constant is not $\max(C_3^a,
 C_3^b)$ in general. The Bo{\.z}ejko--Fendler product cb-norm formula
 covers each factor's central convolution but the propinquity-tunneling
 assembly for the product is not in print prior to this work. The
-present paper closes the case by explicitly using the Connes--Marcolli
-graded anticommutation \eqref{eq:anticomm} on the KO-dim-6 module to
-produce the clean two-term graded Leibniz rule, whose joint commutator
-is then controlled --- with constant $C_3^{(2)} \le \sqrt 2$ --- by the
-(tight) operator-norm triangle bound; this controls both the joint
-Lipschitz constant (Lemma~\ref{lem:L3-T}) and the joint
-cross-Stein--Weiss panel term (Lemma~\ref{lem:L5-T}).
+present paper closes the case via the lifted-state construction
+(Lemma~\ref{lem:lifted_state-T}), which metrizes both state spaces by the
+translation seminorm and needs no dual reach. The $(B,P)$-pair route ---
+using the Connes--Marcolli graded anticommutation \eqref{eq:anticomm} on
+the KO-dim-6 module, with joint commutator controlled by the triangle
+bound at constant $C_3^{(2)} \le \sqrt 2$ (Lemmas~\ref{lem:L3-T},
+\ref{lem:L5-T}) --- is retained as the abandoned approach.
 
 \subsection{Obstructions to the cross-manifold extensions}
 \label{sec:obstructions}
@@ -1571,18 +1585,19 @@ Riemannian product-carrier rate, not a Lorentzian convergence result.
 \section{Conclusion}\label{sec:conclusion}
 % =====================================================================
 
-We have stated, and proved \emph{conditionally} (status note to
-Theorem~\ref{thm:main}:\ the approximation-pair proof's height leg is
-refuted and its dual reach is a named gap), van~Suijlekom state-space
-Gromov--Hausdorff convergence for truncations of the tensor-product
-Camporesi--Higuchi spectral triple on $\sthree \times \sthree$ at
-distinct focal lengths
+We have proved --- unconditional in the translation-seminorm metrization,
+the tier of Paper~38's \texttt{thm:main\_unconditional} --- van~Suijlekom
+state-space Gromov--Hausdorff convergence for truncations of the
+tensor-product Camporesi--Higuchi spectral triple on
+$\sthree \times \sthree$ at distinct focal lengths
 (the strictly stronger Latr\'emoli\`ere propinquity is not claimed; see
-the convergence convention of \S\ref{sec:setup}), with explicit
-qualitative-rate bound \eqref{eq:main_rate_intro}, closed-form
-joint Lipschitz comparison constant \eqref{eq:C3_2_full} bounded by
-$\sqrt 2$ at every finite cutoff, and explicit Stein--Weiss-type bound
-on the cross-Stein--Weiss panel term. The mechanism that controls both
+the convergence convention of \S\ref{sec:setup}), with explicit rate
+$\gamma^{(ab)}_\lambda \le \lambda_a\gamma_{\nmaxa} + \lambda_b\gamma_{\nmaxb}$
+of leading constant $1$, via the lifted-state construction
+(Lemma~\ref{lem:lifted_state-T}), for which the dual reach is unnecessary.
+The earlier $(B,P)$-pair route (constant $2$, joint Lipschitz comparison
+constant $C_3^{(2)} \le \sqrt2$, dual-reach named gap) is retained as the
+record of an abandoned approach. The mechanism that controls both
 the Lipschitz constant and the panel term is the same: the
 Connes--Marcolli graded anticommutation
 $\{\DCH^{(a)} \otimes I, \gamma_a \otimes \DCH^{(b)}\} = 0$ on the

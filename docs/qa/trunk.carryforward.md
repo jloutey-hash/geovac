@@ -1586,6 +1586,16 @@ The follow-on the PI called for. Paper 39's main theorem is discharged from **[C
 
 **Still owed (does not block the discharge):** the finite-vs-continuum status of order-0/1 for the tensor triple is inherited from Paper 38, not re-proved — the reviewer's named attack point, and contested for Paper 38 too if at all. A fresh claims-critic is dispatched on the rewritten thm:main + three lemmas.
 
+### O.5g — front-matter reconciliation (2026-09-05), critic-driven
+
+A fresh claims-critic on the rewritten Paper 39 returned DEFECTS: thm:main and the three new lemmas SOUND, but the discharge had NOT propagated to the abstract, intro theorem, intro mechanism, setup note, conclusion, numerical panel, and related-work — all still on the abandoned (B,P) route (constant 2, C_3^(2), reach_P, Berezin five-lemma proof). The corrected-owner/stale-dependent class, inside one paper. I had already spotted the abstract + intro by eye; the critic added the conclusion ("proved conditionally"), the panel (tabulating the abandoned route as the theorem's bound), M6 (a gamma/lambda prose residue), M8 (a dangling Dabrowski-Dossena attribution), and tier-tag/lemma-count nits.
+
+Swept all as one class (12 loci): abstract + intro restated to the lifted-state route / constant 1 / [INTERNAL THEOREM]; conclusion to the discharged tier; setup note and related-work reattributed to the lifted-state route with C_3^(2) demoted to the abandoned route's constant; the numerical panel retitled "abandoned (B,P)-pair route" and scoped as not the theorem's bound; gamma/lambda -> lambda*gamma; the Dabrowski-Dossena name dropped (claim rests on in-lemma forcedness, no bibitem); three new lemmas tagged [INTERNAL THEOREM]; "five tensor lemmas" -> "tensor lemmas". Class check: no C_3^(2)*2*max survives as a live theorem bound.
+
+**Two self-inflicted, both caught by the machinery:** the theorem rewrite (O.5f) had dropped eq:C3_2_full (six dangling refs, caught by compile); and this sweep used a heredoc for one backslash edit — violating my own widened no-heredoc rule — turning ef into CR+ef (caught by C19 + compile). Both fixed via file-based raw-string scripts.
+
+All gates PASS on trunk + group1; Paper 39 compiles clean.
+
 ### O.6 — Next
 
 Guard pass in isolation (O.5), then **DELTA #8, narrow**: code-tier on the
