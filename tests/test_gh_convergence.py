@@ -209,11 +209,31 @@ class TestReachAndHeight:
         `return 0.0` -- tautological as well as refuted.
         """
         assert pair_n2.height_P() == 0.0          # provenance value, unchanged
-        from geovac.gh_convergence import compute_propinquity_bound
+        from geovac.gh_convergence import compute_propinquity_bound, TunnelingPair
         b = compute_propinquity_bound(2)
-        # the assembly must no longer depend on it: the bound equals the reach
-        # leg exactly, not a max involving the height constituents
         assert b.propinquity_bound == b.reach_B_bound
+
+        # THE WRONG ANSWER THIS REJECTS: restoring
+        #   propinquity = max(reach_B, height_B_l5_estimate, height_P)
+        # Equality with reach_B_bound cannot see that, because
+        # reach_B == height_B_l5_estimate == gamma numerically -- the exact
+        # coincidence the withdrawal note cites ("the value is unchanged,
+        # since reach and height carried the same estimate"), and the reason
+        # this guard could not fail until 2026-09-04 (DELTA #7, CODE-A M4).
+        # So perturb the height legs and require the bound not to move: that
+        # tests the STRUCTURE of the assembly rather than its value.
+        import geovac.gh_convergence as _ghc
+        _hB, _hP = TunnelingPair.height_B_l5_estimate, TunnelingPair.height_P
+        try:
+            TunnelingPair.height_B_l5_estimate = lambda self: 1.0e6
+            TunnelingPair.height_P = lambda self: 1.0e6
+            perturbed = _ghc.compute_propinquity_bound(2)
+        finally:
+            TunnelingPair.height_B_l5_estimate = _hB
+            TunnelingPair.height_P = _hP
+        assert perturbed.propinquity_bound == pytest.approx(
+            b.propinquity_bound, rel=1e-12), (
+            "the assembly still reads a height constituent")
 
     def test_height_B_op_norm_l4b_contractivity(self, pair_n2: TunnelingPair):
         """L4(b) contractivity sanity (legacy bound): ||B(f)||_op <= ||f||_inf.
@@ -266,6 +286,27 @@ class TestReachAndHeight:
         # and that is what makes the withdrawn bound false at large cutoff
         from geovac.central_fejer_su2 import gamma_rate
         assert float(gamma_rate(6)) < pair_n2.height_B_witness()   # 0.9896 < 1
+
+        # ENVELOPE PROBE (DELTA #7, CODE-A M7).  N = 6 at n_max = 2 sits above
+        # BOTH candidate envelopes (n_max = 2 and 2 n_max - 1 = 3), so it
+        # cannot tell them apart and a plant widening B's band left this test
+        # green.  Probe INSIDE the disputed window instead.  Paper 38
+        # def:berezin gives B = P M_{K*f} P the envelope N <= 2 n_max - 1;
+        # THIS MODULE's B annihilates everything above n_max, because
+        # plancherel_symbol truncates the kernel at j_max -- the documented
+        # symbol defect, whose re-valuing is a scoped sprint recorded as owed.
+        # Pin the module's actual behaviour so that sprint cannot land silently.
+        n0 = 5
+        pair5 = TunnelingPair.build(n0)
+        inside = make_test_function("Y3_(7,0,0)", {(7, 0, 0): 1.0})   # n0 < 7 <= 2*n0-1
+        assert float(np.linalg.norm(pair5.apply_berezin(inside))) == pytest.approx(
+            0.0, abs=1e-12), (
+            "B is nonzero inside the disputed window (n_max, 2 n_max - 1]: the "
+            "module now matches Paper 38's envelope, so the plancherel_symbol "
+            "re-valuing sprint has landed -- update this guard and the notes "
+            "in gh_convergence.height_B_witness / central_fejer_su2")
+        below = make_test_function("Y3_(3,0,0)", {(3, 0, 0): 1.0})    # 3 <= n0
+        assert float(np.linalg.norm(pair5.apply_berezin(below))) > 1e-9
 
     def test_height_B_constant_function_zero(self, pair_n2: TunnelingPair):
         """A constant function has zero Lipschitz norm both before and after B,

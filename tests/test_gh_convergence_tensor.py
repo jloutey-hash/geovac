@@ -495,6 +495,30 @@ class TestTheoremStatement:
         assert "C_3" in s
         assert "gamma" in s
 
+    def test_statement_prints_the_reach_only_constant_two(self):
+        """REJECTS: the printed constant reverting to (1 + 2*sqrt(2)).
+
+        The tests above check only that the substrings "C_3" and "gamma"
+        appear, so reverting the constant left them green (DELTA #7, CODE-A
+        M5) -- the diff's headline tensor correction had no guard at all.
+        Parse the constant out of the statement and cross-check it against
+        the value the module computes.
+        """
+        import re as _re
+        s = gh_tensor_theorem_statement()
+        assert "1 + 2*sqrt(2)" not in s.split("CORRECTED")[0], (
+            "the withdrawn reach-plus-height constant [retracted 2026-09-04: p39-tensor-assembly-constant] is back in the bound")
+        m = _re.search(r"C_3\^\{\(2\)\}\s*\*\s*([0-9.]+)", s)
+        assert m, "no constant found after C_3^{(2)} in the statement"
+        assert float(m.group(1)) == pytest.approx(2.0), m.group(1)
+        # cross-check against what the module actually computes
+        b = compute_tensor_propinquity_bound(3, 4, gamma_prec=15)
+        Na, Nb = 4, 5
+        c3 = (((Na - 1) + (Nb - 1)) ** 2 / (Na ** 2 + Nb ** 2 - 2)) ** 0.5
+        gmax = max(b.gamma_a, b.gamma_b)
+        assert b.propinquity_bound_theorem == pytest.approx(
+            float(m.group(1)) * c3 * gmax, rel=1e-9)
+
 
 # ---------------------------------------------------------------------------
 # §10. Convergence verification helpers
@@ -869,7 +893,7 @@ class TestR2EpsilonCrossBound:
         assert out["withdrawn_reach_plus_height_assembly"] > 0
 
     def test_withdrawn_reach_plus_height_assembly_is_the_historical_value(self):
-        """The WITHDRAWN reach-plus-height assembly, retained for the record.
+        """The WITHDRAWN reach-plus-height assembly [retracted 2026-09-04: p39-tensor-assembly-constant], retained for the record.
 
         Until 2026-09-04 this field was ``propinquity_bound_r1_r2`` and this
         test pinned it as a bound -- so the suite enforced the retracted

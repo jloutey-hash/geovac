@@ -481,13 +481,23 @@ class TestCentralMultiplierCBNorm:
         # sigma(J) = c_J/(2J+1) with c_J the character coefficients of K, and
         # sigma(0) = 1 because K integrates to 1.  Checked against the
         # module's own normalisation rather than asserted.
+        # DELTA #7 (CODE-A M6): the replacement above was ALSO 1 == 1 --
+        # `sum(mass_max(n)*0 + p for p in [Integer(1)])` is the literal 1, so
+        # breaking the kernel normalisation (D**2/Z -> D**2/(2Z)), which sends
+        # sigma(0) -> 1/2, left it green.  Third rebuild.  Compute sigma(0)
+        # from the kernel's OWN pieces:  K = |D|^2 / Z with D = sum_{j<=j_max}
+        # sqrt(2j+1) chi_j, so the J = 0 character coefficient of K is
+        # (sum_{j<=j_max} (2j+1)) / Z = Z / Z = 1 -- SYMBOLIC at every cutoff
+        # (CODE-A U1).  Any change to the normalisation moves it.
         import sympy as sp
+        from geovac.central_fejer_su2 import (normalization_constant, _j_values)
         for n in (1, 2, 3, 5, 10):
             assert central_multiplier_cb_norm_true(n) == 1
-            # sigma(0) = (total Plancherel mass)/Z = 1 by normalisation
-            total = sum(central_multiplier_mass_max(n) * 0 + p
-                        for p in [sp.Integer(1)])
-            assert total == 1
+            Z = sp.Integer(normalization_constant(n))
+            sigma0 = sp.Rational(sum(2 * j + 1 for j in _j_values(n)), 1) / Z
+            assert sp.simplify(sigma0 - 1) == 0, (n, sigma0)
+            # Z is the kernel's own normalisation, not an independent literal
+            assert Z == sum(2 * j + 1 for j in _j_values(n))
             # and the mass maximum is a DIFFERENT number, which is the point
             assert central_multiplier_mass_max(n) == sp.Rational(2, n + 1)
 

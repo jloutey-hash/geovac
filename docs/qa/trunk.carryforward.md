@@ -1405,8 +1405,94 @@ PASS; trunk + Papers 39/40 compile with zero undefined references. Consumer regr
    finite-dimensionality form of the height witness (CODE-A U2) into Papers
    38/39/40's prose, which still say "finite-band".
 
+### O.5a — guard pass, done (2026-09-04, same day, as its own reviewed activity)
+
+O.5 items 1-5 are closed;  6-9 remain.  Nineteen guards written or rebuilt,
+**every one fire-tested against the specific wrong answer its docstring
+names**, 19/19 firing (three only after being fixed -- see below).
+
+| guard | rejects | fires |
+|:--|:--|:--|
+| `tests/test_lattice_spectrum.py` (NEW, 33 tests) | 14 named plants | 14/14 |
+| `test_height_P_zero_is_withdrawn_provenance_only` | restoring `max(reach_B, height_B_l5_estimate, height_P)` | yes |
+| `test_statement_prints_the_reach_only_constant_two` (NEW) | the printed constant reverting to `1 + 2*sqrt(2)` | yes |
+| `test_cb_norm_is_one` | a normalisation sending sigma(0) -> 1/2 | yes |
+| `test_height_B_witness_annihilates_out_of_band` | B's band widening to the paper's envelope | yes |
+
+**Two findings the fire-testing itself produced**, both structural rather than
+careless, and both worth carrying:
+
+1. **`eigenspace_overlap`'s pooling branch never runs for row (2,0,0).** That
+   row is in the l = 0 block -- P_{n_max} x P_1, a bare path, simple spectrum
+   -- and the function reads only the block containing its row. So pooled and
+   unpooled agree trivially there. This is the real reason CODE-B's
+   `while False:` plant did not fire against the converted test in
+   `test_paper1_block_spectrum.py`, and why my first version of the new guard
+   did not either. The new guard runs on the l = 1 block instead
+   (P_{n_max-1} x P_3, five degenerate pairs). *The converted test is not
+   wrong* -- its assertions are about (2,0,0), which is the paper's claim --
+   but its basis-freeness is untested by construction, and the invariance is
+   now covered where it can actually fail.
+2. **B's band is enforced by TWO independent mechanisms**, so no single-line
+   plant can widen it: the explicit `if N > self.n_max: continue` in
+   `berezin_reconstruction.apply`, *and* the symbol weight being zero above
+   n_max (the documented `plancherel_symbol` truncation). Note the operator
+   system's `allowed_multiplier_labels` already carries N <= 2 n_max - 1,
+   matching Paper 38 -- so the label set is right and only the symbol is
+   short. **Whoever runs the re-valuing sprint must change both**, and the
+   guard fires exactly when they do (verified with a two-plant fire test).
+
+### O.5b — two Paper 39 defects found by the lemma sub-agent (2026-09-04)
+
+Dispatched to write the tensor lifted-state lemma (O.7);  returned GO, and two
+findings larger than the lemma. **Both independently verified in the parent
+session;  neither applied yet** -- a critic agent is attacking the memo, and
+the repairs touch Paper 39's construction, which is not something to author
+inside a remediation pass. Memo: `debug/sprint_p39_tensor_lifted_state_memo.md`.
+
+**F1 (LARGE, structural). Paper 39's displayed tensor Dirac cannot be
+realised.** It prints `D_{a,b} = D_a ⊗ I + γ_a ⊗ D_b`. On an odd-dimensional
+spin manifold there is no such γ_a: any γ anticommuting with every generator
+of Cl(3) also anticommutes with the volume element ω = σ₁σ₂σ₃, which in odd
+dimension is central, so γω = −ωγ and γω = ωγ, forcing γ = 0. *Verified
+symbolically in the parent session:* ω = iI exactly, and the linear system
+{γ, σᵢ} = 0 has the unique solution γ = 0.
+
+This is Paper 38's own 2026-09-03 KO-3 parity correction ("KO-3 carries no
+chirality;  `diag(+1,−1)` is `sign(D)`, which *commutes*") never propagating
+to Paper 39 — the `cited_by` class once more, and one the DELTA #7 claims
+reviewer could not have caught, since the Dirac definition was not in the diff.
+Paper 39's KO arithmetic 3 + 3 = 6 is the odd⊗odd rule while its displayed
+Dirac is the even⊗odd formula. Proposed repair: Clifford doubling,
+H_a ⊗ ℂ² ⊗ H_b with D = D_a⊗σ₁⊗1 + 1⊗σ₂⊗D_b. **Open question for the critic:**
+whether that repair leaves the seminorm L3-T and L4-T were proved for — if it
+does not, those lemmas are about a different operator.
+
+**F2 (SMALL, arithmetic). The λ placement is inverted**, in `eq:main_thm`,
+`eq:main_rate_intro`, `eq:L5_bound_T` and `gh_convergence_tensor.py`: they
+print `γ/λ` where it should be `λγ`. `D → λ⁻¹D` divides the Lipschitz
+seminorm by λ, so the unit ball grows by λ and every Monge–Kantorovich
+distance with it;  the moment is a distance. *Verified two ways in the parent
+session:* directly from the definition, and against Paper 38's own internal
+witness — §2.1's dual-Coxeter Dirac is half the CH Dirac and its moment is
+**twice** the unit-S³ one, which is the same scaling in the same direction.
+
 ### O.6 — Next
 
 Guard pass in isolation (O.5), then **DELTA #8, narrow**: code-tier on the
 five modules + `lattice_spectrum` + the rebuilt guards; claims-tier on
 P39/P40 and the synthesis. Thresholds carried forward unchanged.
+
+### O.7 — the Paper 39 gap, specified (added 2026-09-04 after the PI asked how wide it is)
+
+Not a doubt about the tensor convergence;  an unwritten lemma. Paper 38's
+surviving route is `lem:lifted_state` + the four facts of
+`thm:main_unconditional` (no Berezin map, no partial inverse — hence no dual
+reach). Paper 39 is on the (B, P) route throughout, so it **inherited the
+`reach_P` gap and not its dissolution**. The product analogue needs
+ξ_ab = ξ_a ⊗ ξ_b and properties (a)–(c);  (a) and (b) are immediate per factor
+(product Fejér measure, moment ≤ γ_a + γ_b), and (c) is Paper 39's own
+already-proved L3-T (C₃⁽²⁾ ≤ √2). Expected output `Λ ≤ C₃⁽²⁾(γ_a + γ_b)`,
+i.e. the printed conditional bound, discharging the CONDITIONAL **and** the
+`reach_P` gap together. Scheduled as its own sprint;  not written inside a
+remediation pass.

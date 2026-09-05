@@ -7,6 +7,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.9.0] - 2026-09-04
+
+**Minor bump, PI-adjudicated.** Marks the closed-form lattice spectrum work of
+v5.8.5 as corpus-significant: a new production module (`geovac/lattice_spectrum.py`)
+plus a suite-wide capability change (λ_max evaluable at cutoffs the dense route
+could never reach — n_max = 40,000 in 16 ms). Committed tags v5.8.5/v5.8.6 are
+the version record and are not rewritten; the cursor moves here so a reader can
+infer the significant change from the number, per §9.
+
+### Guard pass (DELTA #7 O.5 items 1-5), as its own reviewed activity
+
+Nineteen guards written or rebuilt, **every one fire-tested against the
+specific wrong answer its docstring names**, 19/19 firing. New file
+`tests/test_lattice_spectrum.py` (33 tests, 14 plants). The three guards
+DELTA #7 found could not fail now reject, respectively: restoring the
+four-constituent max (perturb the height legs and require the bound not to
+move -- structure, not value, since reach == height == gamma numerically);
+the printed tensor constant reverting to `1 + 2*sqrt(2)` (parsed out of the
+statement and cross-checked against the computed field); and a kernel
+normalisation sending sigma(0) -> 1/2 (computed from the kernel's own
+coefficients, after three rebuilds that each re-asserted `1 == 1`).
+
+**Two findings from the fire-testing itself.** (i) `eigenspace_overlap`'s
+pooling branch never executes for row (2,0,0): that row is in the l = 0
+block, a bare path with a simple spectrum, and the function reads only its
+own block -- so pooled and unpooled agree trivially. That is the real reason
+CODE-B's plant did not fire against the converted test, and why the first
+version of the new guard did not either; it now runs on the l = 1 block,
+where five eigenvalue pairs are genuinely degenerate. (ii) B's band is held
+by two independent mechanisms -- the explicit truncation *and* the symbol
+weight -- so the owed re-valuing sprint must change both; the guard fires
+exactly when they do. The operator system's label set already reaches
+N <= 2 n_max - 1, matching Paper 38, so only the symbol is short.
+
+### Named open sprint (from DELTA #7's Paper 39 re-pricing)
+
+**Write the tensor lifted-state lemma and discharge Paper 39's [CONDITIONAL].**
+Paper 38's surviving proof (`thm:main_unconditional`) rests on
+`lem:lifted_state`: ξ = (h ⊗ χ)/√Z, υ(T)(g) = ⟨U_g ξ, T U_g ξ⟩, and four facts
+— S and υ are 1-Lipschitz for the Monge–Kantorovich metrics, and γ-almost
+mutually inverse via the conjugation average Φ. It uses **no** Berezin map and
+**no** partial inverse, which is why it needs no dual reach.
+
+Paper 39 is on the older (B, P) route throughout, so it inherited Paper 38's
+`reach_P` named gap **and did not inherit Paper 38's dissolution of it**. That
+is the whole content of the CONDITIONAL.
+
+The transfer looks close to mechanical, and Paper 39 already holds every
+ingredient. With ξ_ab = ξ_a ⊗ ξ_b:
+
+- **(a) window inclusion** — immediate per factor; the graded tensor triple's
+  Hilbert space is H_a ⊗ H_b.
+- **(b) lifted state** — induced measure is the product Fejér measure, first
+  moment ≤ γ_a + γ_b (product metric √(d_a²+d_b²) ≤ d_a + d_b).
+- **(c) contraction** — tautological on one factor; on the product it needs the
+  joint-seminorm comparison, which is Paper 39's **already-proved** Lemma L3-T,
+  C₃⁽²⁾ ≤ √2.
+
+Expected result `Λ ≤ C₃⁽²⁾(γ_a + γ_b)` — exactly the bound Paper 39 now prints
+conditionally. Closing it discharges both the height refutation's consequence
+and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
+#7 remediation: new load-bearing mathematics does not get authored in the same
+pass as a remediation of it.
+
 ## [v5.8.6] - 2026-09-04
 
 **`/qa trunk` DELTA #7 = DEFECTS (40 MATERIAL, 10 LARGE), remediated the same
