@@ -844,12 +844,19 @@ class TestR2EpsilonCrossBound:
         assert eps_22 > eps_33 > eps_44 > eps_55
 
     def test_eps_cross_lambda_rescaling(self):
-        """At lambda > 1, gamma scales by 1/lambda, so eps_cross also scales by 1/lambda."""
-        eps_unit = epsilon_cross_bound(2, 2, 1.0, 1.0)
-        eps_two = epsilon_cross_bound(2, 2, 2.0, 2.0)
-        assert eps_two["epsilon_cross_bound"] == pytest.approx(
-            eps_unit["epsilon_cross_bound"] / 2.0, rel=1e-9,
-        )
+        """At lambda > 1, gamma scales by lambda, so eps_cross scales by lambda.
+
+        REJECTS: the retracted [p39-lambda-placement] direction gamma/lambda.
+        D -> lambda^-1 D scales MK distances (hence gamma, hence eps_cross) UP
+        by lambda.  Until 2026-09-05 this test asserted eps_two == eps_unit/2 --
+        defending the wrong pre-F2 code path (epsilon_cross_bound divided by
+        lambda); it was a false-positive guard.  Now asserts *lambda; a revert
+        of the code to /lambda fails here (fire-tested, DELTA #8).
+        """
+        eps_unit = epsilon_cross_bound(2, 2, 1.0, 1.0)["epsilon_cross_bound"]
+        eps_two = epsilon_cross_bound(2, 2, 2.0, 2.0)["epsilon_cross_bound"]
+        assert eps_two == pytest.approx(2.0 * eps_unit, rel=1e-9)
+        assert eps_two > eps_unit          # direction, not just magnitude
 
     def test_eps_cross_bound_panel_44(self):
         """At (4,4), eps_cross should be < single-factor gamma_2."""

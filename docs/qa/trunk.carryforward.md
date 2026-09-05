@@ -1624,3 +1624,42 @@ already-proved L3-T (C₃⁽²⁾ ≤ √2). Expected output `Λ ≤ C₃⁽²�
 i.e. the printed conditional bound, discharging the CONDITIONAL **and** the
 `reach_P` gap together. Scheduled as its own sprint;  not written inside a
 remediation pass.
+
+---
+
+## Part P — DELTA #8 (2026-09-05), unseeded, on b68c711..HEAD (the Paper 39 discharge arc)
+
+**Verdict: DEFECTS, remediated the same day.** Scope = the discharge diff (Paper 39 + its modules/tests + records); trunk-profile papers 0/1/7/32/38 unchanged, so the changed surface is group1 / Paper 39. Deterministic layer 13/13 PASS on trunk AND group1 before dispatch. Three Opus reviewers (CLAIMS on Paper 39, CODE on the modules+tests, SYNTHESIS on the group1 synthesis vs the discharged Paper 39); no citation reviewer (the discharge added no external cite and dropped the one dangling name; C15/C20 guard the unchanged bibliography). Standing calibration record cited.
+
+### P.1 — Scorecard
+
+| dimension | MATERIAL | verdict |
+|:--|--:|:--|
+| claims (Paper 39) | 1 (SMALL) + 6 NIT | DEFECTS |
+| code (modules+tests) | 2 + 2 NIT | DEFECTS |
+| synthesis (group1) | 2 (1 LARGE) | DEFECTS |
+| **roll-up** | **5 MATERIAL (1 LARGE)** | **DEFECTS** |
+
+### P.2 — Against the pre-registered thresholds, and the trend
+
+DELTA #7 returned **40** material with an owner re-pricing. DELTA #8 returned **5**, **none mathematical** — a 40 -> 5 drop, and every trunk-owner claim and the discharge mathematics held. What the 5 are:
+
+- **SYNTHESIS M1 (LARGE):** the group1 synthesis's "Tensor extension (Paper 39)" subsection — a file the diff never touched — still described the *abandoned* (B,P) route (constant sqrt2, Berezin tunneling) as Paper 39's proof, omitting the discharge. **The mirror-staleness class the `cited_by` field cannot reach** (different file, restated in its own words), caught only by the owner-moved synthesis review. Rewritten to the lifted-state route / constant 1 / [INTERNAL THEOREM] / KO-6 limit; sqrt2 relabelled the abandoned route's constant.
+- **SYNTHESIS M2 (SMALL):** "Both closed on 2026-05-23" contradicted its own next line calling the follow-ons "(sketch)".
+- **CLAIMS M1 (SMALL):** Paper 39 line 1210 "this paper has no tensor analogue" — a reconciliation leftover from the CONDITIONAL era, now false (lifted-state-T IS the analogue).
+- **CODE M1:** my KO-table docstring fix (v5.9.1) corrected rows 1,2,5,6 and **broke KO-7** ((+,+) -> (+,-)) — a regression the reviewer caught against van Suijlekom Table 3.1. Doc-only (code uses KO-3), reverted.
+- **CODE M2:** `epsilon_cross_bound` still divided gamma by lambda (the F2 sweep missed it, feeding only the withdrawn field), and `test_eps_cross_lambda_rescaling` **pinned that wrong direction** — a false-positive guard. Both corrected to lambda*gamma; the guard rewritten (separate pass) and fire-tested against the revert.
+
+NITs: stale build/file/module docstrings still naming the abandoned route or Latremoliere; the Dabrowski-Dossena name lingering in a test docstring; an over-stated cross-factor aside; the unbacked 0.74-0.77 tightness ratio (softened to "strictly below gamma_a+gamma_b"); the n=4 residual trimmed to the n=2,3 the fast test backs. All swept.
+
+### P.3 — The bet that paid
+
+I flagged the SYNTHESIS dimension as the likely find before dispatch: Paper 39's tier moved, so its synthesis summary was the owner-moved-out-from-under class. It was, and it was the run's only LARGE. This is the direction CLAUDE.md S9 records as **owed a registry** (an owner *strengthens* a claim, citers keep the weaker form) — a blocklist has nothing to say about it. DELTA #8 caught it by dispatching a cross-document reviewer keyed to the moved owner; the standing gap (a mirror registry) remains a PI call.
+
+### P.4 — Guard discipline
+
+The one guard-logic change (the epsilon_cross test) was done as a **separate pass** after the code fix (S9), reviewed by "what wrong answer does it reject?", and fire-tested against the reverted code (FIRED). Two test-docstring corrections rode with it (docstring-only, not guard logic).
+
+### P.5 — Next
+
+DELTA #8 is DEFECTS-remediated; per the run-shapes rule a **clean delta** is the precondition for a FULL certifying run. A DELTA #9 on this remediation would confirm convergence (the 40 -> 5 trend suggests one more clean-ish cycle). The trunk profile itself (Papers 0/1/7/32/38 + group3 synthesis) has been unchanged since FULL #4's remediation and its last delta was DELTA #7 — a trunk FULL certifying run is the eventual target once the deltas come back clean.

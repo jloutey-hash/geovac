@@ -961,8 +961,10 @@ def epsilon_cross_bound(
     """
     pair_a = TunnelingPair.build(n_max_a, gamma_prec=gamma_prec)
     pair_b = TunnelingPair.build(n_max_b, gamma_prec=gamma_prec)
-    g_a = float(pair_a.gamma_rate_value) / float(lambda_a)
-    g_b = float(pair_b.gamma_rate_value) / float(lambda_b)
+    # F2 (corrected 2026-09-05, DELTA #8): lambda*gamma, not gamma/lambda --
+    # D -> lambda^-1 D scales MK distances (hence the moment) UP by lambda.
+    g_a = float(lambda_a) * float(pair_a.gamma_rate_value)
+    g_b = float(lambda_b) * float(pair_b.gamma_rate_value)
 
     # Single-factor heights at the specified L_f, L_g
     h_a = L_f * g_a
@@ -1098,8 +1100,9 @@ class TensorTunnelingPair:
             lambda_a, lambda_b: focal-length parameters (each > 0).
                 The Camporesi-Higuchi Dirac on a unit S^3 is dimensionless;
                 the focal length enters as a uniform 1/lambda rescaling
-                of the spectrum, propagating into the propinquity bound
-                as a 1/lambda factor on the gamma rate of that factor.
+                of the Dirac (D -> lambda^-1 D), which scales the MK
+                distances -- hence the gamma rate -- UP by lambda
+                (corrected 2026-09-05, DELTA #8; not a 1/lambda factor).
             gamma_prec: mpmath precision for gamma_{n_max} (each factor).
 
         Returns:

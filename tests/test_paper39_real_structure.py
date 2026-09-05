@@ -1,7 +1,8 @@
 """Backing test for Paper 39 lem:real_structure-T (the KO-6 tensor triple).
 
 Written as its own pass (CLAUDE.md §9), after the discharge added the lemma
-identifying the limit as the Dąbrowski–Dossena tensor product of two odd
+identifying the limit as the graded tensor product (standard odd-tensor-odd
+construction) of two odd
 (KO-3) Camporesi–Higuchi real spectral triples, with real structure
 J_ab = J_a ⊗ σ₁K ⊗ J_b.
 
@@ -206,9 +207,11 @@ def test_cross_factor_order_conditions_vanish() -> None:
 
     The proved factor-reduction (memo 4.1) says a cross pair -- a on factor a,
     b on factor b -- satisfies both conditions exactly, because the middle 1_2
-    conjugates to 1_2 and the legs decouple.  A wrong J_ab middle factor or a
-    Dirac cross term would break this.  Control: a same-factor pair is NOT
-    forced to vanish (so the test is not vacuously zero).
+    conjugates to 1_2 and the legs decouple.  The vanishing is structural
+    leg-decoupling, independent of the middle factor (it holds for all four
+    W), so this rejects a construction where the factors do NOT decouple,
+    not a wrong middle factor.  Control: a same-factor pair is NOT forced to
+    vanish (so the test is not vacuously zero).
     """
     na = nb = 2
     D_a, U_a = _single_factor(na)

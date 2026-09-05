@@ -71,6 +71,29 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.9.2] - 2026-09-05
+
+**/qa trunk DELTA #8 = DEFECTS, remediated.** Unseeded, on the Paper 39 discharge arc (b68c711..HEAD). Three Opus reviewers (claims/code/synthesis); deterministic layer 13/13 PASS on trunk and group1 before dispatch. Record: carryforward Part P.
+
+### The trend
+
+DELTA #7 returned 40 material findings with an owner re-pricing; DELTA #8 returned **5, none mathematical** — every trunk-owner claim and the discharge mathematics held. The findings were staleness and reconciliation leftovers, one LARGE.
+
+### Changed
+
+- **group1 synthesis (LARGE):** the "Tensor extension (Paper 39)" subsection — untouched by the discharge diff — still described the abandoned (B,P) route (sqrt2, Berezin) as Paper 39's proof. Rewritten to the lifted-state route, constant 1, [INTERNAL THEOREM] in the translation-seminorm metrization, KO-6 real-structure limit; sqrt2 relabelled the abandoned route's constant. Plus a "Both closed" overclaim of two follow-ons the next line calls sketches. **The mirror-staleness class `cited_by` cannot reach** — caught by the owner-moved cross-document review.
+- **Paper 39:** line 1210's "this paper has no tensor analogue" (a CONDITIONAL-era leftover) corrected; the conclusion's vacuous gamma_a graded-anticommutation mechanism scoped to the abandoned route; a stale file comment ("Latremoliere propinquity") and the unbacked 0.74-0.77 tightness ratio fixed (softened to "strictly below gamma_a+gamma_b"); the n=4 order-0/1 residual trimmed to the n=2,3 the fast test backs.
+- **geovac/gh_convergence_tensor.py:** `epsilon_cross_bound` divided gamma by lambda (the F2 sweep missed it); corrected to lambda*gamma. Build docstring de-staled.
+- **geovac/real_structure.py:** the v5.9.1 KO-table fix had broken KO-7 ((+,+) -> (+,-)); reverted to (+,+). Doc-only; code uses only the KO-3 row.
+
+### Fixed (guard, separate pass, fire-tested)
+
+- `test_eps_cross_lambda_rescaling` asserted the retracted gamma/lambda direction — a false-positive guard defending the wrong code path. Rewritten to lambda*gamma and fire-tested against reverting the code (FIRED). Two stale test docstrings (the dropped Dabrowski-Dossena name; an over-stated cross-factor aside) corrected.
+
+### Verified
+
+- All deterministic gates PASS on trunk, group1, and synthesis; Paper 39 + group1 synthesis compile clean; the touched-consumer regression green (**350 passed, 13 skipped**, incl. the 18 symbolic S3 proofs).
+
 ## [v5.9.1] - 2026-09-05
 
 **Paper 39 discharged: tensor-product convergence is now [INTERNAL THEOREM].** The follow-on to DELTA #7's critique-confirmed lifted-state result. Patch bump per S9 (PM default); **flagged to the PI as a possible minor** — discharging a paper's main theorem from conditional to a theorem tier is corpus-significant.

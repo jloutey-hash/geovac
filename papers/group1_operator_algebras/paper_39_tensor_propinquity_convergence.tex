@@ -1,5 +1,5 @@
 % =====================================================================
-% Paper 39 (standalone): Latremoliere propinquity convergence on the
+% Paper 39 (standalone): van Suijlekom state-space GH convergence on the
 % tensor product of two truncated Camporesi-Higuchi spectral triples
 % on S^3 at distinct focal lengths.
 %
@@ -449,9 +449,10 @@ first moment and $\gamma_n = (4/\pi)\log\nmax/\nmax + O(1/\nmax)$
 (dual-Coxeter; $2/\pi$ on the unit $\sthree$). \textbf{The leading
 constant is $1$}:\ the tight bound is $\gamma^{(ab)}_\lambda$ itself, of
 which $\lambda_a\gamma_{\nmaxa} + \lambda_b\gamma_{\nmaxb}$ is the clean
-subadditive form and $2\max$ the looser corollary (at usable cutoffs
-$\nmax \le 5$, $\gamma^{(ab)}$ is $\approx 0.74$--$0.77$ of the $2\max$
-value; the ratio rises toward $1$ only logarithmically). The right-hand
+subadditive form and $2\max$ the looser corollary ($\gamma^{(ab)}$ is
+strictly below $\gamma_{\nmaxa}+\gamma_{\nmaxb}$ by
+$\sqrt{x^2+y^2} \le x+y$, and strictly below $2\max$ at every finite
+cutoff). The right-hand
 side is $O(\log\nmax/\nmax) \to 0$ with universal asymptotic constant
 $4/\pi$ per factor.
 
@@ -1077,9 +1078,9 @@ automatic ($J b J^{-1}$ is right multiplication, which commutes with left
 multiplication and with $[D,a]$;\ Paper~32~\S VIII, the standard commutative
 fact) --- so the continuum tensor triple satisfies them. \textbf{At finite
 cutoff they do not hold, and the residual \emph{grows} with the cutoff}
-(measured max residual $5.5\times10^{-2}, 7.9\times10^{-2}, 9.6\times10^{-2}$
-for order-zero and $1.0\times10^{-1}, 2.0\times10^{-1}, 4.1\times10^{-1}$ for
-order-one at $\nmax = 2, 3, 4$):\ the truncated operator system is not an
+(measured max residual $5.5\times10^{-2} \to 7.9\times10^{-2}$ for
+order-zero and $1.0\times10^{-1} \to 2.0\times10^{-1}$ for order-one from
+$\nmax = 2$ to $3$, and continuing to grow at higher cutoff):\ the truncated operator system is not an
 algebra, the same phenomenon Paper~38~\texttt{rem:dirac\_degeneracy} records
 for the single factor. The product introduces \emph{no cross-factor
 obstruction} --- every cross-factor pair satisfies both conditions to machine
@@ -1206,8 +1207,10 @@ is $\mathrm{reach}_B \le \gamma_{\nmaxa} + \gamma_{\nmaxb}$ (on the
 unit-Lipschitz panel, Lemma~\ref{lem:L4-T}(c)) and $\mathrm{reach}_P$, a
 named gap. (An earlier version of this paragraph called this ``the footing
 on which Papers~38 and~40 stand'';\ it is not:\ Paper~38's surviving route
-is its lifted-state construction, which uses neither $B$ nor a dual reach,
-and this paper has no tensor analogue of it.) Conditionally on the
+is its lifted-state construction, which uses neither $B$ nor a dual reach;
+this paper's tensor analogue of it is Lemma~\ref{lem:lifted_state-T}, the
+live proof of Theorem~\ref{thm:main}, which supersedes the conditional
+$(B,P)$ assembly recorded in this lemma.) Conditionally on the
 $\mathrm{reach}_P$ gap, with the $C_3^{(2)}$
 Lipschitz comparison constant of Lemma~\ref{lem:L3-T} (which controls the
 conversion between $\norm{\cdot}_{\mathrm{Lip}}^{\Op}$ in the truncated
@@ -1279,10 +1282,9 @@ length).}
 The columns below tabulate the \emph{abandoned} $(B,P)$-pair bound
 (Lemma~\ref{lem:L5-T}), retained for the record;\ they are \emph{not}
 Theorem~\ref{thm:main}'s bound, which is the tighter
-$\gamma^{(ab)} \le \gamma_{\nmaxa}+\gamma_{\nmaxb}$ of constant $1$
-(at $(3,3)$, $\gamma^{(ab)} \approx 0.76 \cdot 2\max(\gamma) < $ the
-$\Lambda^{\mathrm{full}}$ value here, which carries the extra
-$C_3^{(2)} \ge 1$ factor).
+$\gamma^{(ab)} \le \gamma_{\nmaxa}+\gamma_{\nmaxb}$ of constant $1$,
+which is strictly below the $\Lambda^{\mathrm{full}}$ values here (those
+carry the extra $C_3^{(2)} \ge 1$ factor of the abandoned route).
 We report two presentations of the bound at the panel: the
 \emph{factorised-panel} bound $\Lambda^{\mathrm{fact}} =
 C_3^{(2),\mathrm{fact}} \cdot \max(\gamma_a, \gamma_b)$ with
@@ -1615,12 +1617,14 @@ of leading constant $1$, via the lifted-state construction
 (Lemma~\ref{lem:lifted_state-T}), for which the dual reach is unnecessary.
 The earlier $(B,P)$-pair route (constant $2$, joint Lipschitz comparison
 constant $C_3^{(2)} \le \sqrt2$, dual-reach named gap) is retained as the
-record of an abandoned approach. The mechanism that controls both
-the Lipschitz constant and the panel term is the same: the
+record of an abandoned approach. In that abandoned route the mechanism
+controlling both the Lipschitz constant and the panel term was the
 Connes--Marcolli graded anticommutation
-$\{\DCH^{(a)} \otimes I, \gamma_a \otimes \DCH^{(b)}\} = 0$ on the
-KO-dimension-6 graded module produces a clean two-term graded Leibniz
-rule, whose joint commutator is controlled by the (tight) operator-norm
+$\{\DCH^{(a)} \otimes I, \gamma_a \otimes \DCH^{(b)}\} = 0$ --- which is
+\emph{vacuous as printed}, $\gamma_a$ being necessarily $0$ on $\sthree$
+(the note after \eqref{eq:CM_dirac_recall});\ on the KO-dimension-6 graded
+module (the Clifford-doubled operator, Lemma~\ref{lem:real_structure-T})
+it produces a clean two-term graded Leibniz rule, whose joint commutator is controlled by the (tight) operator-norm
 triangle bound $\norm{A + B} \le \norm{A} + \norm{B}$ (an earlier
 Pythagorean refinement is withdrawn --- see
 Remark~\ref{rem:no_pythagorean} --- and convergence is unaffected since

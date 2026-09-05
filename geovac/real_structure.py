@@ -25,7 +25,7 @@ carry epsilon'' = (J gamma = sign * gamma J), shown in brackets:
     KO 0:  (+, +)[+]     KO 4:  (-, +)[+]
     KO 1:  (+, -)        KO 5:  (-, -)            (Lorentzian / Majorana)
     KO 2:  (-, +)[-]     KO 6:  (+, +)[-]         (Standard Model)
-    KO 3:  (-, +)        KO 7:  (+, -)
+    KO 3:  (-, +)        KO 7:  (+, +)
 
 (Corrected 2026-09-05: rows 1,2,5,6 previously mis-stated epsilon'/the
 even-row signs; the code below uses only the KO-3 row, which was and is

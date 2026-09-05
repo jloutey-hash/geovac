@@ -729,33 +729,35 @@ and consistent with the $O(\log \nmax / \nmax)$ rate.
 Paper~39 extends Theorem~\ref{thm:gh_su2} to tensor products
 $\Tcal_{\sthree}^{\lambda_{a}} \otimes \Tcal_{\sthree}^{\lambda_{b}}$
 of two copies of the same manifold at distinct focal lengths
-$\lambda_{a} \ne \lambda_{b}$ \cite{paper39}.  The result is a
-proved-at-qualitative-rate theorem closing the published-open NCG
-question of convergence for the tensor of two infinite metric
-spectral triples.  Two technical points underwrite the closure:
-\begin{itemize}\setlength\itemsep{0pt}
-\item \textbf{R1: tensor Lipschitz constant via the tight triangle
-bound.}  The graded Leibniz rule (Connes--Marcolli form) splits the
-joint commutator into two terms; the operator-norm \emph{triangle}
-bound on that sum gives the full operator-system constant
-$C_{3}^{(2)} \le \sqrt{2}$ (increasing to $\sqrt 2$). \emph{Correction
-(2026-06-18):} an earlier draft claimed a \emph{Pythagorean} refinement
-$C_{3}^{(2)} < 1$;\ that identity is false (graded anticommutation does
-not give operator-norm orthogonality --- verified maximally violated on
-the actual harmonics), and the triangle bound is tight. Convergence is
-unaffected ($\sqrt 2$ is a finite constant); only the cosmetic
-``$<1$'' sharpness claim changed.
-\item \textbf{R2: Latr\'emoli\`ere 2017 explicit
-$\varepsilon_{\mathrm{cross}}$.}  The cross term in the tunneling
-pair is bounded explicitly by Latr\'emoli\`ere
-\cite{latremoliere_metric_st_2017}~\S 4, with rate $O(\max \gamma)$
-and constant $\le 2\sqrt{2}$.
-\end{itemize}
+$\lambda_{a} \ne \lambda_{b}$ \cite{paper39}.  The result is an
+\textbf{[INTERNAL THEOREM]} in the translation-seminorm metrization
+(Paper~38's footing):\ convergence in van~Suijlekom state-space
+Gromov--Hausdorff distance with bound
+$\Lambda \le \gamma^{(ab)} \le \lambda_a\gamma_{n_a} +
+\lambda_b\gamma_{n_b}$, \emph{leading constant $1$}, closing the
+published-open NCG question of convergence for the tensor of two infinite
+metric spectral triples.
 
-The bit-identical convergence ratio
-$\Lambda(\nmax,\nmax) / \Lambda(2,2)$ on the diagonal matches the
-single-factor Paper~38 ratio numerically, providing a load-bearing
-sanity check.
+The proof is the \emph{lifted-state} construction:\ Paper~38's
+\texttt{thm:main\_unconditional} facts (i)--(iv), lifted factor-wise to
+$\SU(2)\times\SU(2)$ and metrized by the translation seminorm, give a
+correspondence of distortion $\le 2\gamma^{(ab)}$;\ it uses neither a
+Berezin map nor any partial inverse, so $\mathrm{reach}_P$ is
+\emph{unnecessary}. The limit is identified (Paper~39 Lemma
+real-structure-T) as the graded (Clifford-doubled) tensor product of the
+two odd (KO-3) Camporesi--Higuchi real spectral triples, with real
+structure $J_{a,b} = J_a \otimes \sigma_1 K \otimes J_b$ at KO-dimension
+$6$;\ the naive $\DCH^{(a)}\otimes I + \gamma_a\otimes\DCH^{(b)}$ is
+unrealisable ($\gamma_a = 0$ on $\sthree$) and the doubling is its
+replacement.
+
+The joint Lipschitz comparison constant $C_3^{(2)} \le \sqrt2$ and the
+Berezin-tunneling cross-term (a triangle bound, rate $O(\max\gamma)$)
+belong to an \emph{abandoned} $(B,P)$-pair route, retained in Paper~39 as
+a record;\ they are \emph{not} rate constants of the theorem, whose
+constant is $1$. (That route's earlier Pythagorean refinement
+$C_3^{(2)}<1$ was withdrawn as false; the triangle bound is tight,
+$C_3^{(2)}\nearrow\sqrt2$.)
 
 % =====================================================================
 \section{The universality of the rate constant $4/\pi$}
@@ -1519,7 +1521,7 @@ Paper~39~\S 6 (iii) and (v) named two open follow-ons:\ (iii) the
 k-fold extension of the Paper~39 two-factor tensor-product propinquity
 to $\Tcal_{\sthree}^{\otimes k}$, and (v) the higher-rank tensor product
 $\Tcal_{G_{1}} \otimes \Tcal_{G_{2}}$ at arbitrary compact connected
-Lie group factors.  Both closed on 2026-05-23.
+Lie group factors.  Both were addressed on 2026-05-23 as \emph{sketches} (only the $k=2$ case is proved; see below).
 
 \textbf{(iii) k-fold extension --- $\sqrt{k}$ constant (sketch).}  The
 k-fold extension to SU(2) factors uses the graded Leibniz rule and the

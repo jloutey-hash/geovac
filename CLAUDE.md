@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.9.1 (September 5, 2026)
+**Version:** v5.9.2 (September 5, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk DELTA #8 (2026-09-05, v5.9.2):** DEFECTS, remediated (1 LARGE synthesis staleness + a few reconciliation leftovers; 40 -> ~5 material, none mathematical). Paper 39 discharge settled. See carryforward Part P.
 - **Paper 39 discharged CONDITIONAL -> [INTERNAL THEOREM] (2026-09-05, v5.9.1):** lifted-state route (constant 1, reach_P unnecessary) critique-confirmed SOUND; limit = Dabrowski-Dossena tensor CH triple, J_ab KO-6 verified. Possible minor (PI). See carryforward O.5e/f.
 - **/qa trunk DELTA #7 (2026-09-04, v5.8.6):** DEFECTS, 40 MATERIAL, remediated; P39 re-priced CONDITIONAL (PI to confirm). Below my own convergence threshold -> guard pass, then narrow DELTA #8. See carryforward Part O.
 - **Lattice spectrum is closed form, and the tests were still diagonalising (2026-09-04, v5.8.5):** 69.7s -> 0.94s, a ~3-min @slow test -> 3.2s. See debug/qa/slow_test_closed_form_audit.md.
