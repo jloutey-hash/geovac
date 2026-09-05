@@ -1767,3 +1767,22 @@ Then a DELTA on the remediation; a clean DELTA unlocks the certifying FULL #6.
 All 9 genuine SMALL defects fixed. **P38 (4):** L5 abstract contribution marked withdrawn; thm:main proof L5 clause marked "withdrawn route only"; eq:main_rate C₃ dropped from the display (C₃=1, matching the unconditional bound ≤ γ); the debug/ [MEASURED] citation replaced by the frozen test + CHANGELOG. **P32 (3):** Lorentzian "unified-strong"/STRONG_IDENTIFICATION_LORENTZIAN relabelled "compact-period closure (signature-blind)"; α-match stated raw 4.77×10⁻⁷ (8.8×10⁻⁸ post-correction) at both loci; thm:gh_convergence C₃ dropped (mirror of the P38 fix). **P1 (2):** abstract √3π asymptotic marked [retracted: sp-ratio-false-precision] (mirroring the body); Frobenius limit clarified (closed form exact; the frozen panel verifies only the monotone approach to n_max=30). Two **C16 entries added gate-first** (lorentzian-strong-identification-live; l5-assembly-listed-as-live-contribution), each **fire-tested two-way** (ALL DISCRIMINATE) as a separate pass. **Compile PASS** (6 papers, zero undefined refs); **12 deterministic gates PASS** on trunk.
 
 **Not remediated (owed):** H2 UNVERIFIABLE (Dabrowski–Dossena eq/table numbers — needs the primary PDF); coverage gaps G2/G3 (P32's untiered debug/-backed middle body — routed to FULL #6 scope); 2 two-way UPGRADE candidates (P1 Rydberg algebra → [INTERNAL THEOREM]; block-spectrum constant C → [SYMBOLIC PROOF]) — flagged for PI (tier upgrades on keystone-adjacent claims). **Next:** a DELTA on this remediation; a clean DELTA unlocks the certifying FULL #6.
+
+---
+
+## Part R — /qa trunk DELTA #9 (2026-09-05), unseeded, on the v5.9.5 remediation diff (7a1e362)
+
+**Verdict: CLEAN-DELTA (material).** The v5.9.5 remediation held. Scope = the 9-locus paper diff (P38 ×4, P32 ×3, P1 ×2). Two reviewers (claims on the 9 loci; owner-moved synthesis) + deterministic layer whole-target (12/12 PASS). Unseeded; standing calibration = FULL #5 (10/12, 0 FP).
+
+- **CLAIMS (9 loci): all CLEAN** — accurate, consistent P38↔P32, correctly scoped against the backing tests; K-tripwire (~13 loci) clean; no new defect introduced by the fixes.
+- **SYNTHESIS (owner-moved): CLEAN on all 4 owner-moves** (C₃ dropped, Lorentzian relabelled, L5 withdrawn, 4/pi convention) — no mirror-staleness created; synthesis:764 confirmed neutral.
+
+**The catch (and the meta-point).** The owner-moved reviewer's aside flagged residual STRONG_IDENTIFICATION/UNIFIED_STRONG cells in P32 §6.6/6.7 — and it was RIGHT (my first grep missed them: `.?` cannot span the LaTeX `\_`). My v5.9.5 §6.5 Lorentzian relabel was **locus-by-locus** — the exact churn class this whole arc is about — leaving the sibling $\sigma_{2\pi}$ verdicts (L3415, L7108–7111, L7211) inconsistent. **The DELTA caught ME committing the churn**, via the v5.9.3 owner-moved dispatch. Investigation: these are the $\sigma_{2\pi}=\mathrm{id}$ modular-periodicity verdicts (genuine bit-exact, Riemannian/framework-internal), NOT Lorentzian zombies (no `_LORENTZIAN`); CODE-C had graded the STRONG_IDENTIFICATION labeling a NIT in FULL #5. So **NIT-tier, not MATERIAL** — but my §6.5 fix made it inconsistent.
+
+**NITs remediated (v5.9.6, gate-first sweep this time):**
+1. Sibling $\sigma_{2\pi}$ verdicts (L3415, L7108–7111 table, L7211): added the compact-flow / signature-blind caveat consistent with §6.5 (addresses CODE-C's FULL#5 NIT + the inconsistency). **NOT a C16 widen** — these are genuine verdicts, not the retracted Lorentzian class; widening would false-flag legitimate results.
+2. P38 abstract "five lemmas" → "(the fifth since withdrawn)".
+3. P32 §6.5 theorem-block name "Wick-rotation theorem" → "compact-period closure (signature-blind)", harmonising with the retitled subsection.
+Compile PASS (group1); C19 clean; 12 deterministic gates PASS on trunk.
+
+**Next.** The v5.9.5 remediation is material-clean, so **FULL #6 (the certifying run) is unlocked** — the path to the first PASS of this arc. The v5.9.6 NIT caveats are fresh NIT-tier text; FULL #6 reviews them in the ordinary course. Standing lesson reinforced: **register the class and let the gate enumerate the loci** — a narrow pattern + a single-locus fix is how the churn regenerates, and it regenerated here in my own hand.

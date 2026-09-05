@@ -71,6 +71,24 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.9.6] - 2026-09-05
+
+**/qa trunk DELTA #9 = CLEAN-DELTA.** Unseeded, on the v5.9.5 remediation diff. Two reviewers (claims on the 9 remediation loci; owner-moved synthesis) + deterministic layer 12/12 PASS. Standing calibration = FULL #5 (10/12, 0 FP). Record: carryforward Part R.
+
+### Result
+
+- **The v5.9.5 remediation held:** all 9 loci CLEAN (accurate, consistent P38<->P32, correctly scoped, K-tripwire clean); owner-moved synthesis CLEAN on all 4 owner-moves. No new material defect introduced by the remediation.
+- **3 NITs surfaced + swept**, one a self-catch: my v5.9.5 Lorentzian relabel was locus-by-locus, leaving sibling sigma_2pi verdicts (P32 L3415/L7108-7111/L7211) inconsistent -- the v5.9.3 owner-moved dispatch caught the churn class *in my own fix*. These are genuine bit-exact modular-periodicity verdicts (CODE-C's FULL#5 NIT), not the retracted Lorentzian class, so the fix is a consistency caveat, not a C16 widen.
+
+### Changed
+
+- P32: sibling sigma_2pi STRONG_IDENTIFICATION/UNIFIED_STRONG verdicts given the compact-flow / signature-blind caveat consistent with the v5.9.5 §6.5 relabel; §6.5 theorem-block name harmonised to "compact-period closure".
+- P38: abstract "five lemmas" -> "(the fifth since withdrawn)".
+
+### Next
+
+- The v5.9.5 remediation is material-clean; **FULL #6 (certifying) is unlocked** -- the path to the first PASS of this arc.
+
 ## [v5.9.5] - 2026-09-05
 
 **/qa trunk FULL run #5 (seeded re-measure) = FAIL, CALIBRATED.** PI-invoked; the

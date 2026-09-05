@@ -3412,7 +3412,7 @@ extracts $K_{\mathrm{TT}} = -\log \Delta$ from the polar decomposition
 $S = J_{\mathrm{TT}} \Delta^{1/2}$, and verifies
 $\sigma_{2\pi}^{\mathrm{TT}}(O) = O$ at the operator-action level for
 all four physical witnesses at every tested $n_{\max} \in \{2, 3, 4,
-5\}$.  Result:\ \emph{UNIFIED\_STRONG closure} at all tested cutoffs
+5\}$.  Result:\ \emph{UNIFIED\_STRONG closure} (a bit-exact $\sigma_{2\pi}=\mathrm{id}$ compact-period closure --- a compact-flow feature of the integer modular spectrum, signature-blind, not a metric strengthening) at all tested cutoffs
 and witnesses.  Maximum periodicity residual at the Tomita-Takesaki
 level: $1.09\times 10^{-16}$ ($n_{\max}=2$), $1.07\times 10^{-15}$
 ($n_{\max}=3$), $3.03\times 10^{-15}$ ($n_{\max}=4$), $4.79\times
@@ -6925,8 +6925,8 @@ $t \in \{1, \pi, 2\pi\}$ holds bit-exactly with the same residual bound,
 and the six-witness cross-consistency residual is exactly $0.0$ at
 every cell.
 
-\paragraph{Theorem (Krein-level four-witness Wick-rotation theorem at
-finite cutoff).}\label{thm:krein_four_witness_paper32}
+\paragraph{Theorem (Krein-level four-witness compact-period closure
+(signature-blind) at finite cutoff).}\label{thm:krein_four_witness_paper32}
 \emph{On the Lorentzian Krein space
 $\mathcal{K}_{n_{\max}, N_t} = \mathcal{H}_{\mathrm{GV}}^{n_{\max}}
 \otimes \mathbb{C}^{N_t}$, with the wedge
@@ -7113,6 +7113,8 @@ $n_{\max}$ & $\dim_H$ & $\mathrm{wedge\,dim}$ & $\max\|\sigma_{2\pi}(O) - O\|_F$
 \end{tabular}
 \end{center}
 
+The \textsc{strong\_identification} verdict labels a bit-exact $\sigma_{2\pi}=\mathrm{id}$ compact-period closure --- a compact-flow feature of the integer modular spectrum (signature-blind, not a metric strengthening;\ cf.\ the retraction note in \S\ref{sec:l2e_krein_modular_hamiltonian}).
+
 The $n_{\max} = 3$ cutoff is the one at which the cumulative node
 count $\dim_H = 4 + 12 + 24 = 40$ numerically coincides with Paper~2's
 $g_3^{\mathrm{Dirac}} = \Delta^{-1} = 40$, the single-level degeneracy at
@@ -7208,7 +7210,7 @@ generator with integer spectrum $\mathrm{two\_m}_j$); this matches the
 operator-system analog of the Wightman BW vacuum $\rho_W \propto
 e^{-2\pi K_{\mathrm{boost}}}$ on the Rindler wedge.
 
-\emph{Result (UNIFIED\_STRONG):}\ at every tested $n_{\max} \in \{2, 3,
+\emph{Result (UNIFIED\_STRONG --- a bit-exact $\sigma_{2\pi}=\mathrm{id}$ compact-period closure, signature-blind, not a metric strengthening):}\ at every tested $n_{\max} \in \{2, 3,
 4, 5\}$ for all six witness instantiations (BW, HH$_{M=1}$, HH$_{M=2}$,
 Sewell$_{M=1}$, Unruh$_{a=1}$, Unruh$_{a=2}$):
 
