@@ -122,10 +122,12 @@ def test_saturation_rate_is_order_n_squared():
                           options={"xatol": 1e-12})
     assert abs(opt.x - 0.386488) < 1e-5, opt.x
     assert abs(opt.fun - SATURATION_C) < 1e-6, (opt.fun, SATURATION_C)
-    # the sequence rises TOWARD C and stays below it -- so no finite sample may
-    # be printed as the constant (the defect this replaces)
+    # Every finite sample understates C (one-sided bound).  The approach is NOT
+    # monotone -- C_20 = 40.7285 > C_21 = 40.6470 (Paper 0 S VI) -- so there is
+    # deliberately no monotone assertion here: the doubling grid below happens
+    # to be monotone, and a guard asserting that WAS the retired claim
+    # (DELTA #7, CODE-B M6; insert 21 into ns and the old assert failed).
     scaled = [g * n ** 2 for g, n in zip(gaps, ns)]
-    assert all(a < b for a, b in zip(scaled, scaled[1:])), scaled
     assert all(v < SATURATION_C for v in scaled), scaled
     assert abs(scaled[-1] - 42.606) < 0.01, scaled[-1]
     # ... and it really does converge there: one cutoff past the printed data
@@ -168,7 +170,13 @@ def test_sp_splitting_identification_is_ill_conditioned():
     (w0, o0), (w1, o1) = ov[0], ov[1]
     margin = (o0 - o1) / o0
     assert margin < 0.02, margin                       # near-tie
-    assert abs(w0 - w1) > 1.0                          # wildly different eigenvalues
+    # The runner-up overlap is itself an exact tie across several eigenspaces
+    # (0.25502003 at lambda = 0.0110, 2.8135, 3.1756 for n_max = 30), so "the"
+    # runner-up's eigenvalue is decided by sort stability -- 14 of 25 random
+    # relabellings flipped it (DELTA #7, CODE-B M1).  Assert on the SET of
+    # runners-up inside the tie, which is relabelling-invariant.
+    runners = [w for w, o in ov[1:] if abs(o - o1) <= 1e-9 * max(o1, 1.0)]
+    assert any(abs(w0 - w) > 1.0 for w in runners), (w0, runners)
 
 
 def test_l_zero_and_l_one_blocks_are_disconnected():

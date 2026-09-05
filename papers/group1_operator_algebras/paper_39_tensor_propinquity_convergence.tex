@@ -401,11 +401,12 @@ products $\Mat_a \otimes \Mat_b$ with $\Mat_\bullet \in \Op_{\nmax,
 % =====================================================================
 
 \begin{theorem}[Main theorem]\label{thm:main}
-The truncated tensor-product Camporesi--Higuchi spectral triples
-converge to their continuum tensor-product limit in van~Suijlekom's
-state-space Gromov--Hausdorff distance (the strictly stronger
-Latr\'emoli\`ere propinquity is not claimed; see the convergence
-convention below):
+\textbf{[CONDITIONAL]} The truncated tensor-product Camporesi--Higuchi
+spectral triples converge to their continuum tensor-product limit in
+van~Suijlekom's state-space Gromov--Hausdorff distance (the strictly
+stronger Latr\'emoli\`ere propinquity is not claimed; see the convergence
+convention below), \emph{conditionally} on the status note following the
+statement:
 \begin{equation}\label{eq:main_thm}
    \Lambda\bigl(\Tcal_{\nmaxa}^{\lambda_a} \otimes
                 \Tcal_{\nmaxb}^{\lambda_b},\;
@@ -436,6 +437,18 @@ $\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}) = O(\log \nmax / \nmax)$
 inherited from the single-factor central Fej\'er moment
 \cite{loutey_paper38}. The asymptotic constant $4/\pi$ on each factor
 is preserved in the joint rate.
+
+\emph{Status (2026-09-04).} The proof given in this paper
+(Lemma~\ref{lem:L5-T}) is the approximation-pair assembly. Its height
+leg is refuted (\eqref{eq:height_one_T}) and its dual-reach leg
+$\mathrm{reach}_P$ is a named gap, so the pair does not establish the
+bound. Paper~38's surviving route is a different construction --- the
+lifted-state map of its \texttt{thm:main\_unconditional}, which uses
+neither the Berezin map nor any dual reach --- and this paper does not
+transfer it to the product. The statement above therefore holds
+conditionally on that transfer (or on closing the $\mathrm{reach}_P$
+gap), and the constant $2$ is the constant of that conditional bound.
+Until 2026-09-04 this theorem was stated as established.
 \end{theorem}
 
 \begin{proof}
@@ -843,15 +856,16 @@ operator-norm reduction.
 \subsection{Lemma L5-T: joint state-space-GH assembly}\label{sec:L5-T}
 % ---------------------------------------------------------------------
 
-\begin{lemma}[L5-T: joint state-space-GH bound from the joint tunneling
-pair]\label{lem:L5-T}
+\begin{lemma}[L5-T: joint state-space-GH bound from the joint
+approximation pair, conditional]\label{lem:L5-T}
 The joint approximation pair $(B_{\nmaxa, \nmaxb}, P_{\nmaxa} \otimes
 P_{\nmaxb})$ with $B_{\nmaxa, \nmaxb}$ from
 Definition~\ref{def:joint_berezin} and $P_{\nmaxa} \otimes P_{\nmaxb}$
 the joint spectral compression is an approximation pair
 between $\Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b}$
 and $\Tcal_{\nmaxa}^{\lambda_a} \otimes \Tcal_{\nmaxb}^{\lambda_b}$, and
-yields the bound
+yields, \emph{conditionally on the $\mathrm{reach}_P$ named gap} (see the
+proof), the bound
 \begin{equation}\label{eq:L5_bound_T}
    \Lambda\bigl(\Tcal_{\nmaxa}^{\lambda_a} \otimes
                 \Tcal_{\nmaxb}^{\lambda_b},\;
@@ -876,10 +890,11 @@ Lipschitz-distortion height (Lipschitz-seminorm-comparison form
 \cite[Remark~3.8]{loutey_paper38});
 \item[(iv)] $\mathrm{height}_{P_{\nmaxa} \otimes P_{\nmaxb}}$.
 \end{enumerate}
-Only (i) and (ii) enter the state-space GH bound proved here;\ (iii)
-and (iv) are listed because they are what a Latr\'emoli\`ere tunnel
-would additionally require, and both are shown below to be
-uncontrolled --- see \eqref{eq:height_one_T}.
+Only (i) and (ii) survive below;\ (ii) is a named gap, so the pair
+yields the bound only conditionally on it. (iii) and (iv) are listed
+because they are what a Latr\'emoli\`ere tunnel would additionally
+require, and both are shown below to be uncontrolled --- see
+\eqref{eq:height_one_T}.
 
 \emph{Reach.} By Lemma~\ref{lem:L4-T}(c) on the unit-Lipschitz panel,
 \begin{equation*}
@@ -936,7 +951,9 @@ which is a supremum over the whole unit-Lipschitz ball. The witness
 Paper~38~\cite{loutey_paper38} gives for the rank-one case transports
 verbatim:\ $B_{\nmaxa, \nmaxb} = B_{\nmaxa} \otimes B_{\nmaxb}$ is a
 finite-band reconstruction, so taking $h = f \otimes \mathbf{1}$ with $f$
-spectrally supported above cutoff $\nmaxa$ and $\Lipnorm{h} = 1$ gives
+spectrally supported above the multiplier envelope $N \le 2\nmaxa - 1$ of
+$B_{\nmaxa}$ (Paper~38, Definition~\texttt{def:berezin}) and
+$\Lipnorm{h} = 1$ gives
 $B_{\nmaxa, \nmaxb}(h) = 0$ and hence
 \begin{equation}\label{eq:height_one_T}
    \mathrm{height}_{B_{\nmaxa, \nmaxb}} \;\equiv\; 1
@@ -947,9 +964,14 @@ witness. The cross-Stein--Weiss computation
 \eqref{eq:height_explicit_T} is unaffected and is retained as the panel
 statement it is;\ what is withdrawn is its use as a height constituent.
 
-\emph{Assembly.} The state-space GH bound is assembled from reach-type
-estimates alone, with no height constituent --- the footing on which
-Papers~38 and~40 stand after the same withdrawal. With the $C_3^{(2)}$
+\emph{Assembly.} With the height leg withdrawn, what remains of the pair
+is $\mathrm{reach}_B \le \gamma_{\nmaxa} + \gamma_{\nmaxb}$ (on the
+unit-Lipschitz panel, Lemma~\ref{lem:L4-T}(c)) and $\mathrm{reach}_P$, a
+named gap. (An earlier version of this paragraph called this ``the footing
+on which Papers~38 and~40 stand'';\ it is not:\ Paper~38's surviving route
+is its lifted-state construction, which uses neither $B$ nor a dual reach,
+and this paper has no tensor analogue of it.) Conditionally on the
+$\mathrm{reach}_P$ gap, with the $C_3^{(2)}$
 Lipschitz comparison constant of Lemma~\ref{lem:L3-T} (which controls the
 conversion between $\norm{\cdot}_{\mathrm{Lip}}^{\Op}$ in the truncated
 triple and the classical $\norm{\nabla \cdot}_\infty$ on
@@ -960,8 +982,8 @@ $\sthree \times \sthree$), the reach paragraph above gives
 &\;\le\; C_3^{(2)} \cdot 2 \cdot
 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb}).
 \end{align*}
-The constant improves from the withdrawn $1 + 2\sqrt{2} \approx 3.828$ to
-$2$, the refuted leg having been the larger of the two;\ it also corrects
+The constant improves from the withdrawn $1 + 2\sqrt{2} \approx 3.828$
+[retracted 2026-09-04: p39-tensor-assembly-constant] to $2$, the refuted leg having been the larger of the two;\ it also corrects
 an arithmetic slip in the withdrawn assembly, which bounded
 $\mathrm{reach}$ by $\max(\gamma)$ where this paragraph derives
 $\gamma_{\nmaxa} + \gamma_{\nmaxb}$.
@@ -977,8 +999,10 @@ contribution as $\varepsilon_{\mathrm{cross}} = O(\gamma_{\nmaxa}
 analysis above shows the actual rate is linear:
 $\varepsilon_{\mathrm{cross}} \le (2\sqrt{2} - 1)\max(\gamma_{\nmaxa},
 \gamma_{\nmaxb}) \approx 1.83\max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$
-on the unit-norm panel. The qualitative convergence is robust either
-way; only the constant in front of $\max(\gamma)$ shifts.
+on the unit-norm panel. Since the height leg is withdrawn (2026-09-04),
+$\varepsilon_{\mathrm{cross}}$ no longer enters the rate at all;\ it
+survives as a unit-norm panel quantity, and the remark above is retained
+only for the record of what the first pass got wrong about its order.
 \end{remark}
 
 % =====================================================================
@@ -1049,10 +1073,14 @@ $\Lambda^{\mathrm{full}}$ uses
 $\Lambda \le C_3^{(2)} \cdot 2 \cdot
 \max(\gamma_{\nmaxa}, \gamma_{\nmaxb})$, the reach-only assembly of
 Lemma~\ref{lem:L5-T}. The withdrawn assembly carried the factor
-$1 + 2\sqrt{2} \approx 3.828$ instead and printed this column
-$1.914\times$ larger;\ the corrected factor $2$ coincides with the
-supporting module's \texttt{propinquity\_bound\_full} field, which
-already tracked a conservative $2\gamma$ estimate. Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
+$1 + 2\sqrt{2} \approx 3.828$ [retracted 2026-09-04: p39-tensor-assembly-constant] instead and printed this
+column $1.914\times$ larger. The supporting module's
+\texttt{propinquity\_bound\_full} field tracks $2\max(\gamma)$
+\emph{without} the $C_3^{(2)}$ factor (its $2$ is documented there as a
+Lipschitz-comparison constant, a different quantity), so it agrees with
+this column only at $(2,2)$, where $C_3^{(2)} = 1$, and is not an
+independent corroboration of the factor $2$ (corrected 2026-09-04;\ an
+earlier caption said the two ``coincide''). Both columns vanish as $\nmaxa, \nmaxb \to \infty$;\ both
 exhibit monotone decrease across the diagonal panel.
 
 \paragraph{Three structural observations.}
@@ -1069,7 +1097,8 @@ $\Lambda^{(1)}(4)/\Lambda^{(1)}(2) \approx 0.637$
 dominated by the slower factor and inherits the single-factor cutoff
 scaling. On the full-operator-system column the analogous ratio is
 $\Lambda^{\mathrm{full}}(4,4)/\Lambda^{\mathrm{full}}(2,2) \approx
-5.845/7.942 \approx 0.736$, with the (now increasing) $C_3^{(2)}$
+3.054/4.149 \approx 0.736$ (unchanged from the withdrawn column's
+$5.845/7.942$, the factor cancelling), with the (now increasing) $C_3^{(2)}$
 factor partially offsetting the $\max(\gamma)$ decrease.
 
 \item \emph{Joint cb-norm decreases as $1/(\nmaxa \nmaxb)$.}
@@ -1329,9 +1358,12 @@ Riemannian product-carrier rate, not a Lorentzian convergence result.
 \section{Conclusion}\label{sec:conclusion}
 % =====================================================================
 
-We have established van~Suijlekom state-space Gromov--Hausdorff
-convergence for truncations of the tensor-product Camporesi--Higuchi
-spectral triple on $\sthree \times \sthree$ at distinct focal lengths
+We have stated, and proved \emph{conditionally} (status note to
+Theorem~\ref{thm:main}:\ the approximation-pair proof's height leg is
+refuted and its dual reach is a named gap), van~Suijlekom state-space
+Gromov--Hausdorff convergence for truncations of the tensor-product
+Camporesi--Higuchi spectral triple on $\sthree \times \sthree$ at
+distinct focal lengths
 (the strictly stronger Latr\'emoli\`ere propinquity is not claimed; see
 the convergence convention of \S\ref{sec:setup}), with explicit
 qualitative-rate bound \eqref{eq:main_rate_intro}, closed-form

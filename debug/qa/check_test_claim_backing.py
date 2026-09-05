@@ -169,10 +169,14 @@ def check_c(verbose=True):
     hits = []
     for ln, text, names in matrix_rows():
         for e in entries:
-            if not re.search(e["pattern"], text):
+            # Case-insensitive and on the markup-stripped copy too, matching
+            # C16 exactly (DELTA #7, CODE-B N5: "The S/P-Lift Decay" was missed).
+            stripped = C16._strip_markup(text)
+            if not (re.search(e["pattern"], text, re.I)
+                    or re.search(e["pattern"], stripped, re.I)):
                 continue
             ex = e.get("exempt_if_nearby")
-            if ex and re.search(ex, text, re.I):
+            if ex and (re.search(ex, text, re.I) or re.search(ex, stripped, re.I)):
                 continue
             # The standardized withdrawal marker exempts here exactly as it
             # does in C16 -- taken from C16 so the two cannot drift apart.
@@ -252,14 +256,32 @@ def selftest() -> int:
           f"   {'PASS' if fires_b and not silent_b else 'FAIL'}")
     ok &= bool(fires_b) and not silent_b
 
-    # C fires on a synthetic row carrying a retired phrase.
+    # C fires on a synthetic row carrying a retired phrase -- THROUGH check_c,
+    # not by matching raw patterns (DELTA #7, CODE-B M5: the previous form
+    # bypassed both exemption branches, so gutting check_c left it green).
+    # Three probes: retired phrase alone -> 1;  same phrase with a marker for a
+    # DIFFERENT entry -> still 1;  with its own entry's marker -> 0.
     entries = [e for e in C16.REGISTRY if e.get("severity") == "fail"]
     probe_row = "| 26 | angular ERI density is $2.76\\% | test_probe.py |"
-    hit = any(re.search(e["pattern"], probe_row) for e in entries)
-    print(f"  C  fires on a synthetic retired row={hit} (want True)   "
-          f"live rows={check_c(verbose=False)} (want 0)   "
-          f"{'PASS' if hit and not check_c(verbose=False) else 'FAIL'}")
-    ok &= hit and not check_c(verbose=False)
+    fired = [e["id"] for e in entries if re.search(e["pattern"], probe_row)]
+    _orig_rows = globals()["matrix_rows"]
+    try:
+        globals()["matrix_rows"] = lambda: [(1, probe_row, {"test_probe.py"})]
+        c_bare = check_c(verbose=False)
+        other = f"{probe_row} [retracted 2026-09-04: probe-other-entry]"
+        globals()["matrix_rows"] = lambda: [(1, other, {"test_probe.py"})]
+        c_other = check_c(verbose=False)
+        own = f"{probe_row} [retracted 2026-09-04: {fired[0]}]" if fired else probe_row
+        globals()["matrix_rows"] = lambda: [(1, own, {"test_probe.py"})]
+        c_own = check_c(verbose=False)
+    finally:
+        globals()["matrix_rows"] = _orig_rows
+    live_c = check_c(verbose=False)
+    c_ok = (c_bare == 1 and c_other == 1 and c_own == 0 and live_c == 0)
+    print(f"  C  through check_c: bare={c_bare} (want 1)  other-id marker={c_other} "
+          f"(want 1)  own marker={c_own} (want 0)  live rows={live_c} (want 0)   "
+          f"{'PASS' if c_ok else 'FAIL'}")
+    ok &= c_ok
 
     # D fires on the real debug/-importing paper tests when un-baselined.
     fires_d = check_d({"paper_backing_debug_imports": []}, verbose=False)

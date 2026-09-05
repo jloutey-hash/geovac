@@ -32,8 +32,12 @@ state-space Gromov-Hausdorff distance Lambda, the truncated tensor-product
 triples T_a (X) T_b converge to T_S3^a (X) T_S3^b as n_a, n_b -> infinity:*
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
-        <= C_3^{(2)} * max(lambda_a^{-1} gamma_{n_a}, lambda_b^{-1} gamma_{n_b})
-        ->  0.
+        <= C_3^{(2)} * 2 * max(lambda_a^{-1} gamma_{n_a}, lambda_b^{-1} gamma_{n_b})
+        ->  0,
+
+conditionally on the reach_P named gap (Paper 39 thm:main status note,
+2026-09-04; the factor 2 is the reach-only assembly's, corrected the same
+day from a bare C_3^{(2)} * max(...) that under-counted the reach).
 
 *The joint Lipschitz comparison constant on the factorized observable
 panel is C_3^{(2)} = 1 (inheriting the L3 single-factor C_3 = 1 via the
@@ -555,7 +559,15 @@ def joint_plancherel_symbol(
 
 
 def joint_cb_norm_central(n_a: int, n_b: int) -> sp.Rational:
-    """Joint central-multiplier cb-norm of the product kernel on SU(2)^2.
+    """Joint central-multiplier Plancherel MASS maximum of the product kernel.
+
+    RETIRED IDENTIFICATION (2026-09-03; noted here 2026-09-04, DELTA #7 M10):
+    the value returned, 2/(n_a+1) * 2/(n_b+1), is the product of the single-
+    factor mass maxima, not a cb-norm -- the true ||T_K||_cb is 1 on each
+    factor (central_fejer_su2.central_multiplier_cb_norm_true).  The name
+    and the "Bozejko-Fendler product cb-norm" wording below are kept only
+    for the pinned tests;  nothing downstream may read this as a norm.
+    Original docstring:  Joint central-multiplier cb-norm of the product kernel on SU(2)^2.
 
     On the central subalgebra Z(C(SU(2) x SU(2))) ~= L^infty(j_1, j_2;
     Plancherel), the cb-norm of the product convolution operator
@@ -601,9 +613,11 @@ def joint_gamma_subadditive_bound(
     triangle bound applies with the additional Cauchy-Schwarz factor
     sqrt(2) which we absorb into the C_3^{(2)} = 2 constant.
 
-    The natural max-bound following from this for the propinquity is:
-        Lambda <= C_3^{(2)} * max(gamma_{n_a}, gamma_{n_b}),
-    using gamma_a + gamma_b <= 2 max(gamma_a, gamma_b).
+    The natural max-bound following from this for the state-space GH
+    distance is (corrected 2026-09-04):
+        Lambda <= C_3^{(2)} * 2 * max(gamma_{n_a}, gamma_{n_b}),
+    using gamma_a + gamma_b <= 2 max(gamma_a, gamma_b) -- the factor 2 was
+    previously dropped here.
     """
     return float(gamma_a) + float(gamma_b)
 
@@ -619,9 +633,10 @@ def joint_gamma_max_bound(
     by the slower of the two factors, with a factor-of-2 absorbed into
     the joint Lipschitz comparison constant C_3^{(2)} <= 2.
 
-    The keystone propinquity statement of this module reads
+    The keystone state-space GH statement of this module reads
+    (corrected 2026-09-04; conditional on the reach_P named gap)
         Lambda(T_a (X) T_b, T_S3 (X) T_S3)
-            <= C_3^{(2)} * max(gamma_{n_a}, gamma_{n_b})
+            <= C_3^{(2)} * 2 * max(gamma_{n_a}, gamma_{n_b})
             ->  0.
     """
     return 2.0 * max(float(gamma_a), float(gamma_b))
@@ -1131,8 +1146,9 @@ class TensorPropinquityBound:
     propinquity -- the dual-reach step is a named gap; see the module header.)
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
-        <= C_3^{(2)} * max(gamma_a/lambda_a, gamma_b/lambda_b)
-        ->  0  as n_a, n_b -> infinity.
+        <= C_3^{(2)} * 2 * max(gamma_a/lambda_a, gamma_b/lambda_b)
+        ->  0  as n_a, n_b -> infinity   (constant corrected 2026-09-04;
+                                            see propinquity_bound_theorem).
 
     Attributes
     ----------
@@ -1171,7 +1187,7 @@ class TensorPropinquityBound:
         The joint propinquity bound (factorized-panel constant).
     propinquity_bound_full : float
         The joint propinquity bound (legacy full-op-system constant <= 2).
-    propinquity_bound_r1_r2 : float
+    withdrawn_reach_plus_height_assembly : float
         The joint propinquity bound under R1+R2 closure (sprint
         W2b-easy-tighten): C_3_pyth * (max(gamma) + epsilon_cross).
     qualitative_rate_only : bool
@@ -1196,7 +1212,8 @@ class TensorPropinquityBound:
     # R1 + R2 closure additions (sprint W2b-easy-tighten, 2026-05-07)
     c_lipschitz_full_pythagorean: float = 0.0
     epsilon_cross_bound_value: float = 0.0
-    propinquity_bound_r1_r2: float = 0.0
+    withdrawn_reach_plus_height_assembly: float = 0.0
+    propinquity_bound_theorem: float = 0.0
 
     def to_dict(self) -> dict:
         """JSON-serializable dict."""
@@ -1216,7 +1233,8 @@ class TensorPropinquityBound:
             "height_joint_panel": self.height_joint_panel,
             "propinquity_bound": self.propinquity_bound,
             "propinquity_bound_full": self.propinquity_bound_full,
-            "propinquity_bound_r1_r2": self.propinquity_bound_r1_r2,
+            "withdrawn_reach_plus_height_assembly": self.withdrawn_reach_plus_height_assembly,
+            "propinquity_bound_theorem": self.propinquity_bound_theorem,
             "qualitative_rate_only": self.qualitative_rate_only,
         }
 
@@ -1261,7 +1279,7 @@ def compute_tensor_propinquity_bound(
     C_3^{(2)} <= sqrt(2) (see c3_full_triangle_bound).  The paper's
     assembled Lambda^full column uses C_3^{(2)} * 2 * max(gamma)
     (corrected 2026-09-04 from 1 + 2 sqrt 2 ~ 3.828, which was the
-    withdrawn reach-plus-height assembly -- and was LOOSER than this
+    withdrawn reach-plus-height assembly [retracted 2026-09-04: p39-tensor-assembly-constant] -- and was LOOSER than this
     conservative field, not tighter as this note previously said).
 
     Both bounds vanish as n_a, n_b -> infinity.
@@ -1318,10 +1336,20 @@ def compute_tensor_propinquity_bound(
     )
     eps_cross = eps_data["epsilon_cross_bound"]
 
-    # Joint propinquity bound under R1 + R2:
-    # Λ <= C_3^{(2),Pyth} · (max(γ_a, γ_b) + ε_cross)
-    # The R1+R2 tightened bound:
+    # WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]:
+    # the "R1 + R2" assembly  C_3 * (max(gamma) + eps_cross)  IS the retired
+    # reach-plus-height constant 1 + 2 sqrt 2 [retracted 2026-09-04: p39-tensor-assembly-constant] on the diagonal (measured:
+    # 7.9423 / 6.7523 / 5.8456 at (2,2)/(3,3)/(4,4)).  Retained under a name
+    # that says so, for the record the retraction notes cite;  it is not a
+    # propinquity bound and nothing downstream may read it as one.
     bound_r1_r2 = c3_pyth * (gamma_max + eps_cross)
+    # THE THEOREM'S constant (Paper 39 eq:main_thm, corrected 2026-09-04):
+    # Lambda <= C_3^{(2)} * 2 * max(gamma), with the TRIANGLE C_3^{(2)} =
+    # sqrt(((N_a-1)+(N_b-1))^2 / (N_a^2 + N_b^2 - 2)), N = n + 1.  Until this
+    # field existed no code path computed the printed constant (CODE-A M3).
+    _Na, _Nb = n_max_a + 1, n_max_b + 1
+    c3_tri = ((( _Na - 1) + (_Nb - 1)) ** 2 / (_Na ** 2 + _Nb ** 2 - 2)) ** 0.5
+    bound_theorem = c3_tri * 2.0 * gamma_max
 
     return TensorPropinquityBound(
         n_max_a=n_max_a,
@@ -1340,7 +1368,8 @@ def compute_tensor_propinquity_bound(
         qualitative_rate_only=True,
         c_lipschitz_full_pythagorean=float(c3_pyth),
         epsilon_cross_bound_value=float(eps_cross),
-        propinquity_bound_r1_r2=float(bound_r1_r2),
+        withdrawn_reach_plus_height_assembly=float(bound_r1_r2),
+        propinquity_bound_theorem=float(bound_theorem),
     )
 
 
@@ -1724,9 +1753,9 @@ def tensor_L5_assembly(
     """L5-T assembly: joint propinquity bound from L1'-L4 ingredients.
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
-        <= max(reach_joint, height_joint, 0, 0)
-        <= C_3^{(2)} * max(gamma_a, gamma_b)
-        ->  0.
+        <= max(reach_B, reach_P)              [heights WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]]
+        <= C_3^{(2)} * 2 * max(gamma_a, gamma_b)
+        ->  0   (conditional on the reach_P named gap).
 
     Two improvements over the C-W2b-easy first-pass version (sprint
     W2b-easy-tighten, 2026-05-07):
@@ -1794,8 +1823,9 @@ def tensor_L5_assembly(
     # The R1+R2 closure gives the tighter:
     # Λ <= max(γ_max, ε_cross) on factorized panel where C_3 = 1
     #    <= γ_max + ε_cross    (sum bound, very conservative)
-    # We report the latter (sum) for rigor; the empirical reach + height
-    # on a panel will show this is a comfortable upper bound.
+    # WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: the sum
+    # above is the retired reach-plus-height assembly [retracted 2026-09-04: p39-tensor-assembly-constant]; reported under a name
+    # that says so, for the record only.
     propinquity_r1_r2 = c3_choice * (g_max + eps_cross)
 
     return {
@@ -1815,7 +1845,7 @@ def tensor_L5_assembly(
         "height_panel": bound.height_joint_panel,
         "propinquity_bound_factorized": bound.propinquity_bound,
         "propinquity_bound_full": bound.propinquity_bound_full,
-        "propinquity_bound_r1_r2": float(propinquity_r1_r2),
+        "withdrawn_reach_plus_height_assembly": float(propinquity_r1_r2),
         "qualitative_rate_only": bound.qualitative_rate_only,
         "use_pythagorean_bound": bool(use_pythagorean_bound),
     }

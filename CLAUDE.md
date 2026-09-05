@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.8.5 (September 4, 2026)
+**Version:** v5.8.6 (September 4, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk DELTA #7 (2026-09-04, v5.8.6):** DEFECTS, 40 MATERIAL, remediated; P39 re-priced CONDITIONAL (PI to confirm). Below my own convergence threshold -> guard pass, then narrow DELTA #8. See carryforward Part O.
 - **Lattice spectrum is closed form, and the tests were still diagonalising (2026-09-04, v5.8.5):** 69.7s -> 0.94s, a ~3-min @slow test -> 3.2s. See debug/qa/slow_test_closed_form_audit.md.
 - **cited_by dependency review worked (2026-09-04, v5.8.3):** five dependents, five defects no pattern could reach. P39's height leg refuted; constant 3.828 -> 2. See CHANGELOG v5.8.3.
 - **Normalisation cross-check settled (2026-09-03, v5.5.0, PI direction):** Cas(ad) = h∨ on su(2) gives the rotation angle as the dual-Coxeter geodesic distance, so P38's moment is dual-Coxeter and 4/π is canonical; P38 restated on that sphere. The rule is the corpus's own, not the field-standard one (Kac: Cas(ad) = 2h∨), so 4/π is convention-dependent. The constant is the unit-sphere quotient Vol(S2)/Vol(S3) = 2/pi; M1's volume content stands, the "Hopf base" label is a misnomer. See carryforward Part K.

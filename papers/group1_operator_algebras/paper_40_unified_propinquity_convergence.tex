@@ -1750,29 +1750,36 @@ propinquity would be
    \mathrm{height}(\tau));
 \end{equation}
 that quantity is \emph{not} what is proved here (the dual-reach
-hypothesis is the named gap), but the two forward estimates the
-state-space GH bound needs --- the good-kernel estimate and the
-Lipschitz distortion --- are the forward reach and forward height of
-that would-be tunnel, so we organise the proof by those four terms.
+hypothesis is the named gap). The four tunnel terms are recorded below
+for what a Latr\'emoli\`ere tunnel would require;\ the state-space GH
+bound itself is \emph{not} obtained from this pair (see the proof), but
+from the lifted-state route of Remark~\ref{rem:correction_L2}.
 
 \begin{lemma}[L5: state-space GH bound from the approximation pair]\label{lem:L5}
 The pair $(B_\Lammax, P_\Lammax)$ with $B_\Lammax$ from
 Definition~\ref{def:berezin_general} and $P_\Lammax$ the spectral
 projection of~\eqref{eq:casimir_cutoff} is an approximation pair between
-$\Tcal_G$ and $\Tcal_\Lammax$, and yields the state-space GH bound
+$\Tcal_G$ and $\Tcal_\Lammax$. The state-space GH bound
 \begin{equation}\label{eq:L5_bound_general}
    \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
    \;\le\; C_3(G) \cdot \gamma_\Lammax(G),
 \end{equation}
 with $C_3(G) \le 1$ from Lemma~\ref{lem:L3} and $\gamma_\Lammax(G)$
-from Lemma~\ref{lem:L2}(d).
+from Lemma~\ref{lem:L2}(d), holds unconditionally for $G = \SU(2)$
+(Paper~38, \texttt{thm:main\_unconditional}) and, for general $G$,
+conditionally on the per-group lifted-state decomposition of
+Remark~\ref{rem:correction_L2}. \emph{The pair does not supply an
+independent proof} (corrected 2026-09-04):\ of its four tunnel
+constituents, $\mathrm{reach}_B \le \gamma_\Lammax(G)$ is proved
+(Lemma~\ref{lem:L4}(c)), $\mathrm{reach}_P$ is a named gap, and both
+height constituents are refuted (\eqref{eq:height_one_general}).
 \end{lemma}
 
 \begin{proof}
-We organise the estimate by the four quantities a Latr\'emoli\`ere
-tunnel would carry --- reach (forward and dual) and height (forward and
-dual) --- because the state-space GH assembly of Paper~38 (Lemma~L5
-there) uses exactly the two forward ones.
+We record the four quantities a Latr\'emoli\`ere tunnel would carry ---
+reach (forward and dual) and height (forward and dual). Paper~38's
+Lemma~L5 organised its assembly (since withdrawn) by the two forward ones;\
+what survives of that lemma is the record below, not a proof.
 
 \emph{Reach.} By Lemma~\ref{lem:L4}(c), the forward reach satisfies
 $\mathrm{reach}_B \le \gamma_\Lammax(G) \cdot \norm{\nabla f}_{L^\infty}
@@ -1824,19 +1831,20 @@ tunnel would additionally require --- and not the bound. Whether a
 \emph{height-controlled} assembly exists for this pair at general rank is
 open, and Theorem~\ref{thm:main} must not be cited as height-controlled.
 
-Combining the forward estimates (the state-space GH assembly of
-Paper~38, Lemma~L5; the max over the four terms is what the would-be
-tunnel length~\eqref{eq:propinquity_def_general} would also use):
-\begin{equation*}
-   \Lambda_{\mathrm{prop}}(\Tcal_\Lammax, \Tcal_G)
-   \;\le\; \max\bigl(\gamma_\Lammax(G), \gamma_\Lammax(G),
-   \gamma_\Lammax(G), 0\bigr)
-   \;=\; \gamma_\Lammax(G)
-   \;\le\; C_3(G)\cdot \gamma_\Lammax(G),
-\end{equation*}
-which is~\eqref{eq:L5_bound_general}, using $C_3(G) \le 1$. The
-combination is stated modulo the $\mathrm{reach}_P$ named gap of
-Remark~\ref{rem:correction_L2}; all other constituents are proved above.
+\emph{Assembly.} Until 2026-09-04 this proof closed with
+$\Lambda_{\mathrm{prop}} \le \max(\gamma, \gamma, \gamma, 0) = \gamma$
+[retracted 2026-09-04: l5-height-bound-achieved], whose third and fourth arguments are the two refuted
+height constituents, and declared ``all other constituents proved
+above''. Withdrawn:\ with the heights refuted and $\mathrm{reach}_P$ a
+named gap, the pair establishes nothing toward
+\eqref{eq:L5_bound_general} on its own. The bound holds by the
+lifted-state route --- Paper~38's \texttt{thm:main\_unconditional} at
+$G = \SU(2)$, which uses neither $B_\Lammax$ nor any dual reach, and its
+per-group extension of Remark~\ref{rem:correction_L2} at general $G$,
+conditional on the spin-window decomposition there --- which is
+precisely the scope Theorem~\ref{thm:main} states. Whether a
+height-controlled or dual-reach-controlled assembly of this pair exists
+is open.
 \end{proof}
 
 % =====================================================================

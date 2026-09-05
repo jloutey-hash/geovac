@@ -17,6 +17,7 @@
 > | FULL #4 | 2026-09-03 | FAIL (4 dimensions, 13 gates) |
 > | DELTA #5 | 2026-09-03/04 | DEFECTS |
 > | DELTA #6 | 2026-09-04 | DEFECTS |
+> | DELTA #7 | 2026-09-04 | DEFECTS (40 MATERIAL, 10 LARGE; P39 re-priced CONDITIONAL) |
 >
 > **No run has produced PASS.** Only a FULL run can, and the last four FULL
 > runs each found material defects — several *introduced by the previous
@@ -24,7 +25,7 @@
 > firing another FULL.
 >
 > Remediation scope: [`trunk.carryforward.md`](trunk.carryforward.md),
-> Parts F–N. Open at Part N.5: **the guard pass**, deliberately deferred as
+> Parts F–O. Open at Part N.5: **the guard pass**, deliberately deferred as
 > its own separately-reviewed unit (CLAUDE.md §9) with six carried items.
 >
 > Spill outside trunk: group1 (Papers 38/39/40) and group3 were both edited

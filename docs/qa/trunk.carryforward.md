@@ -1282,3 +1282,131 @@ Open guard items, carried:
 
 A DELTA on this remediation, then the guard pass as its own reviewed unit.
 `v5.4.1..v5.4.4` remains never-delta-reviewed (carried from M.6).
+
+---
+
+## Part O — DELTA #7 (2026-09-04), unseeded, on v5.7.3..v5.8.5 = `e72e87b`
+
+**Verdict: DEFECTS — 40 MATERIAL (10 LARGE), remediated the same day.**
+Five reviewers, one per affected dimension (citations not dispatched: no
+external `\cite` entered the diff; C15/C20 PASS on the unchanged surface).
+Deterministic layer 13/13 PASS before dispatch. Standing calibration record
+cited (FULL #2 19/21, DELTA #1 9/9, DELTA #2 8/9; 0 FP throughout). Every
+MATERIAL below was verified by the PM against primary text, by reproduction,
+or by independent computation before acceptance.
+
+### O.1 — Scorecard
+
+| dimension | reviewer | MATERIAL | LARGE | verdict |
+|:--|:--|--:|--:|:--|
+| code, five modules | CODE-A (Opus) | 10 | 3 | DEFECTS |
+| code, new module + tests + gates | CODE-B (Opus) | 6 | 0 | DEFECTS |
+| claims, Papers 38/39/40 | CLAIMS-A (Opus) | 10 | 2 | DEFECTS |
+| claims, Papers 0/1/7/32 | CLAIMS-B (Opus) | 10 | 3 | DEFECTS |
+| synthesis, group3 | SYNTH (Opus) | 4 | 2 | DEFECTS |
+| citations | — | not exercised (no diff surface) | | n/a |
+| **roll-up** | | **40** | **10** | **DEFECTS** |
+
+### O.2 — Against the pre-registered thresholds
+
+Before the run I wrote down what would count as converging: *≤ 6 findings,
+none mathematical, ≤ 1 introduced by the remediation.* And what would not:
+*≥ 12, or any owner-claim re-pricing.* The run returned 40, one headline
+re-pricing (Paper 39, below), and roughly eight defects in text written in
+the v5.8.3–v5.8.5 remediation. **By the threshold I set, this is not
+converging**, and the pre-registered response applies: stop editing trunk
+papers, run the guard pass in isolation, then a narrow DELTA #8.
+
+What the 40 are made of is the part worth reading:
+
+- **0** errors in trunk-owner mathematics (Papers 0, 1, 7, 32, 38 claims
+  all held under independent re-derivation).
+- **~20** cross-document staleness in *untouched* prose — the class the
+  `cited_by` field was built for, now being found (synthesis said the graph
+  spectrum → n²−1; Paper 1's Conclusion still said "spectral aliasing";
+  Paper 32's G3 promotion survived at its source two lines above its
+  closure; five code docstrings still stated the pre-correction constant).
+- **~12** guards and gates: three guards that cannot fail on the diff's own
+  headline corrections (`test_height_P_zero_is_withdrawn_provenance_only`
+  accepts the restored four-term max; `TestTheoremStatement` accepts the
+  reverted constant; `test_cb_norm_is_one` is `1 == 1` after a *fourth*
+  rebuild); the converted s/p test failed 14/25 random relabellings; the new
+  C17 family was exempted by the word "panel" beside the defective text; the
+  markup stripper silently disabled three declared alternatives; the C22
+  selftest bypassed the function it claimed to test; and a green test
+  (`test_propinquity_bound_r1_r2_formula`) **pinned the retracted
+  assembly**, so the suite blocked the withdrawal.
+- **~8** my own remediation: the "within 1%" sentence (false at two of its
+  three printed anchors — 19.7% and 4.6% high — with the larger neighbour
+  silently chosen: the guard-asymptotics failure in the sentence that
+  criticised it); the DELTA #6 band "correction" (I checked the state-space
+  band and called it B's; Paper 38's definition says 2n_max−1, and the code's
+  B annihilates above n_max only because `plancherel_symbol` truncates the
+  kernel — the documented defect showing through); Paper 40's withdrawal
+  printed nine lines *before* an unchanged four-term assembly citing the
+  withdrawn lemma; the false "footing on which Papers 38 and 40 stand";
+  premature `reviewed` stamps on P39/P40 — outcomes, not edits.
+
+### O.3 — The one headline re-pricing (PI to confirm or revert)
+
+**Paper 39: established → [CONDITIONAL].** Paper 38's surviving route is the
+lifted-state map (`thm:main_unconditional`), which uses neither the Berezin
+map nor any dual reach — P38 L1434–1444 says so explicitly. Paper 39 is the
+(B,P) tensor pair throughout and has no tensor analogue of that route. With
+the height leg refuted and `reach_P` a named gap, nothing in Paper 39
+establishes the convergence. Now stated as conditional on transferring the
+lifted-state construction to the product (or closing the gap); the constant
+2 stands as the constant of the conditional bound. Paper 40 is a
+proof-*attribution* correction only: `thm:main` already carried the
+conditionality; Lemma L5 stops claiming an independent proof.
+
+### O.4 — Remediation, gate-first
+
+Registry first (two new C16 entries `sp-ratio-false-precision`,
+`graph-spectrum-attribution`; `l5` widened to the anonymous four-term max
+and its dependents extended to the four modules the arc edited under that
+tag; the aliasing entry and the C17 family moved to marker-only exemption;
+`saturation-approach-monotone` gained the test that still asserted it; C16
+now matches raw **or** stripped; the `_authored` counter could never
+decrease and now can; C22's selftest goes through `check_c` and its check C
+uses `re.I` + strip). Then the gates enumerated 22 loci and every one was
+swept: Papers 0, 1, 7, 32, 38, 39, 40, the group3 synthesis, the claim
+matrix, two tests, five modules. `propinquity_bound_r1_r2` renamed out of
+the propinquity namespace and a `propinquity_bound_theorem` field added —
+until then no code path computed the printed constant. The Lorentzian
+assembly reduced to its two reach constituents (value unchanged). The
+DELTA #6 `central_fejer` note re-reversed: the original discrepancy claim
+was correct, its sprint booking is restored as owed, and the two headline
+facts (σ(0) = 1; band exactly 2j_max) are SYMBOLIC, not measured (CODE-A
+U1). The rebuilt runner-up assertion fire-tested and 0/25 relabellings fail
+(was 14/25). Final: 13/13 deterministic gates PASS on trunk; group1 C16/C17
+PASS; trunk + Papers 39/40 compile with zero undefined references. Consumer regression over the seventeen touched/consumer test files (five modules, `lattice_spectrum`, the two converted tests, three gate mirrors, the 18 symbolic S³ proofs): **583 passed, 101 skipped** in 2010.67s (0:33:30).
+
+### O.5 — Owed to the guard pass (§9), each with its rejected wrong answer named
+
+1. `test_height_P_zero_is_withdrawn_provenance_only` — must reject
+   `propinquity = max(reach_B, height_B_l5_estimate, height_P)`; today it
+   cannot, because `reach_B == height_B_l5_estimate == γ`.
+2. `TestTheoremStatement` — must reject the printed constant reverting to
+   `(1 + 2*sqrt(2))`.
+3. `test_cb_norm_is_one` — must reject a kernel normalisation that sends
+   σ(0) → ½; today it reads back the literal it asserts.
+4. `test_height_B_witness_annihilates_out_of_band` — must distinguish the
+   n_max and 2n_max−1 envelopes (probe N in (n_max, 2n_max−1]).
+5. `tests/test_lattice_spectrum.py` — does not exist; and the pooling
+   invariance of `eigenspace_overlap` (plant `while False:` in the pooling
+   loop) is still unguarded, though the rebuilt assertion is now invariant.
+6. No test pins σ(0) = 1 or the 2j_max band (the SYMBOLIC facts of O.4).
+7. Remaining cb-norm-identification loci in both GH modules (CODE-A M10;
+   value-neutral, `max(1, 2/(n+1)) = 1`).
+8. `plancherel_symbol` re-valuing — the scoped sprint, booking restored.
+9. Upgrades not applied: state Paper 39's bound as `C₃⁽²⁾(γ_a+γ_b)` (its own
+   derivation, tighter off-diagonal — CLAIMS-A U1); carry the
+   finite-dimensionality form of the height witness (CODE-A U2) into Papers
+   38/39/40's prose, which still say "finite-band".
+
+### O.6 — Next
+
+Guard pass in isolation (O.5), then **DELTA #8, narrow**: code-tier on the
+five modules + `lattice_spectrum` + the rebuilt guards; claims-tier on
+P39/P40 and the synthesis. Thresholds carried forward unchanged.

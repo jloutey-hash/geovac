@@ -7,6 +7,112 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.8.6] - 2026-09-04
+
+**`/qa trunk` DELTA #7 = DEFECTS (40 MATERIAL, 10 LARGE), remediated the same
+day.** PI-invoked, unseeded, on the v5.8.3–v5.8.5 remediation. Five Opus
+reviewers, one per affected dimension; citations not dispatched (no external
+citation entered the diff; C15/C20 guard the unchanged surface). Record:
+`docs/qa/trunk.carryforward.md` Part O.
+
+### The verdict against the pre-registered threshold
+
+I wrote the thresholds down before dispatch: ≤ 6 findings, none mathematical,
+≤ 1 remediation-introduced → converging; ≥ 12 or an owner-claim re-pricing →
+not. The run returned 40, one headline re-pricing, and about eight defects in
+text written in the previous remediation. **Not converging, by my own
+rule**, and the pre-registered response applies: stop editing trunk papers,
+run the guard pass in isolation, then a narrow DELTA #8.
+
+The composition is what matters. **Zero** errors in trunk-owner mathematics.
+About twenty were cross-document staleness in *untouched* prose — the class
+`cited_by` was built for and is now finding (the synthesis said the graph
+spectrum approaches n²−1, which is false, not merely unproved: the closed
+form is bounded in [0, 8]). About twelve were guards and gates, including
+three guards that cannot fail on the diff's own headline corrections and one
+green test that **pinned the retracted assembly**, so the suite was blocking
+the withdrawal. About eight were mine.
+
+### Changed — the ones that move a claim
+
+- **Paper 39 re-priced: established → [CONDITIONAL]** (PI to confirm or
+  revert). Paper 38's surviving route is the lifted-state map, which uses
+  neither the Berezin map nor any dual reach; Paper 39 is the (B,P) tensor
+  pair throughout and has no such route. With the height leg refuted and
+  `reach_P` a named gap, nothing in the paper establishes the convergence.
+  The "footing on which Papers 38 and 40 stand" I wrote yesterday was false.
+- **Paper 40:** the withdrawal paragraph was followed nine lines later by the
+  unchanged four-term assembly `max(γ,γ,γ,0)` citing Paper 38's withdrawn
+  Lemma L5 and closing "all other constituents are proved above". Lemma L5
+  now states that the pair proves nothing on its own and that the bound holds
+  by the lifted-state route — which is exactly the scope `thm:main` already
+  carried. Attribution, not tier.
+- **"Tracking n_max/(√3π) to within 1%" was false** at two of its three
+  printed anchors (19.7% and 4.6% high), chose the larger neighbour silently
+  (4.2× vs 6.6× at n_max = 30), and "off-branch is larger" inverts below
+  n_max ≈ 12. Written yesterday, in the sentence that criticised the previous
+  author for reading a theorem off three cutoffs. Replaced by the honest
+  asymptotic with its deviations; registered as `sp-ratio-false-precision`.
+- **The DELTA #6 band "correction" was wrong.** Paper 38's definition gives
+  B = P·M_{K∗f}·P the multiplier envelope N ≤ 2n_max−1; I had verified the
+  state-space band j ≤ j_max and called it B's. The code's B annihilates
+  above n_max only because `plancherel_symbol` truncates the kernel at j_max
+  — the documented defect showing through. Reverted; the `central_fejer`
+  note's original discrepancy claim was correct and its sprint booking is
+  restored as owed. The two headline facts (σ(0) = 1 identically; band
+  exactly 2j_max) are SYMBOLIC, not measured. The witness needs only
+  finite-dimensionality (ker B ≠ 0), which is why none of this moved it.
+- Synthesis: spec(D−A) → n²−1 withdrawn (false); "integer eigenvalues on the
+  unit S³" removed from the *discrete* advantages list in abstract and
+  conclusion; the λ_max saturation raised to [INTERNAL THEOREM] at four loci.
+- Paper 1's Conclusion still asserted "spectral aliasing" at [INTERNAL
+  THEOREM] tier — the C16 exemption word "residue" was letting it through.
+  Marker-only exemption now; six live loci swept. λ₂ₚ = 3.2306 was a
+  transposition of 3.1206 (its mirror about λ₂ₛ, which is why the ratio was
+  unaffected).
+- Paper 32: the G3 promotion survived at its *source* two lines above its
+  closure, in a section heading, and as the label `SU(2)_L` — the
+  weak-isospin identification G3 refuted. Aligned with the paper's own G4a
+  assessment.
+
+### Changed — code
+
+- `gh_convergence_tensor.py`: `propinquity_bound_r1_r2` →
+  `withdrawn_reach_plus_height_assembly` (it computes C₃(1+2√2)γ exactly:
+  7.9423 / 6.7523 / 5.8456); new `propinquity_bound_theorem` = C₃⁽²⁾·2·max γ —
+  until now **no code path computed the printed constant**. Five docstrings
+  stating the pre-correction constant corrected; the retired cb-norm
+  identification noted at its producer.
+- `lorentzian_propinquity_compact_temporal.py`: the assembly still maxed
+  four constituents with the refuted "P^joint is an orthogonal projection";
+  now the two reach constituents (value unchanged).
+- `gh_convergence.py`: C7 hit in the producer docstring ("Latrémolière
+  propinquity bound") corrected; band docstring reverted.
+- Gates: C16 matches raw **or** stripped (the stripper alone had disabled
+  three declared alternatives); `_authored` counter could never decrease;
+  C17 family exemption → marker-only (it was satisfiable by "panel" beside the
+  defective text — the class removed from C16 the day before, reintroduced);
+  C22 selftest now exercises `check_c` (gutting it left the selftest green)
+  and check C uses `re.I` + strip.
+- Tests: the converted s/p test's runner-up assertion was decided by sort
+  stability inside an exact three-way overlap tie (14/25 relabellings
+  failed); rebuilt on the pooled tie set, fire-tested, 0/25. The live
+  monotone assert on the doubling grid removed.
+
+### Verified
+
+13/13 deterministic gates PASS on trunk; group1 C16/C17 PASS; trunk + Papers
+39/40 compile with zero undefined references; gate mirror tests 36 passed. Consumer regression over the seventeen touched/consumer test files (five modules, `lattice_spectrum`, the two converted tests, three gate mirrors, the 18 symbolic S³ proofs): **583 passed, 101 skipped** in 2010.67s (0:33:30).
+
+### Owed — the guard pass (§9), each with its rejected wrong answer named
+
+See Part O.5: three guards that cannot fail (named plants), the n_max vs
+2n_max−1 envelope probe, `tests/test_lattice_spectrum.py`, the pooling
+invariance guard, a test for σ(0) = 1 / band 2j_max, the remaining cb-norm
+loci, the `plancherel_symbol` re-valuing sprint, and two upgrades (state
+P39's bound as C₃(γ_a+γ_b); carry the finite-dimensionality witness into the
+papers' prose).
+
 ## [v5.8.5] - 2026-09-04
 
 **Slow-test audit: the lattice spectrum is closed form, and the tests were

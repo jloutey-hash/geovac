@@ -85,11 +85,13 @@ not as a new foundation for quantum mechanics: the discrete graph and
 the continuous Laplace--Beltrami operator are dual descriptions
 connected by proven conformal maps, and the interpretive question of
 which description is more fundamental is left open.  The framework's
-concrete computational advantages---$O(V)$ sparsity, integer
-eigenvalues on the unit $S^3$, angular momentum selection rules baked
-into the basis, bit-exactly rational matrix elements on the
-Bargmann--Segal lattice, and the universal sparsity bound---are
-independent of that interpretive question.
+concrete computational advantages---$O(V)$ sparsity, angular momentum
+selection rules baked into the basis, bit-exactly rational matrix
+elements on the Bargmann--Segal lattice, and the universal sparsity
+bound---are independent of that interpretive question. (The integer
+spectrum $n^2 - 1$ is a property of the continuum operator, not of the
+graph, whose closed-form spectrum is bounded in $[0, 8]$;\ an earlier
+version of this sentence listed it among the discrete advantages.)
 \end{abstract}
 
 \maketitle
@@ -127,7 +129,7 @@ focal length.  The framework's central reading, recorded in Paper~7 as an
 Observation (re-priced 2026-09-03), is that this discrete construction
 converges to the unit $S^3$ Laplace--Beltrami operator in the continuum
 limit; what is measured is the spectral-bound saturation and the $s/p$
-degeneracy recovery [retracted 2026-09-04: sp-splitting-as-convergence-evidence], not the operator convergence --- and the
+proxy decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence], not the operator convergence --- and the
 degeneracy-recovery leg is itself an artifact of cutoff divisibility
 ($\lambda_{2s} = 3$ exactly iff $n_{\max} \equiv 0 \bmod 3$;\ Paper~1 \S III,
 2026-09-03), so the saturation of the spectral bound is the only leg that
@@ -186,8 +188,10 @@ Four headline structural results organize the rest of this synthesis.
 unit-$S^3$ Laplace--Beltrami operator to the Schr\"odinger equation is
 verified symbolically (Paper~7~\cite{loutey_paper7});
 \textbf{[OBSERVATION]} that the discrete Fock graph's continuum limit is
-that operator is a reading supported by numerical indications through
-$n_{\max} = 30$ (spectral-bound saturation alone;\ the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence]
+that operator is a reading supported by one proved spectral statement
+--- the saturation of the bipartite bound, \textbf{[INTERNAL THEOREM]}
+closed form with rate $C/n_{\max}^2$ (Paper~0~\S VI) --- and by nothing
+else (the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence]
 was withdrawn as evidence on 2026-09-03, its size tracking the residue of
 $n_{\max}$ modulo $3$), not an
 established convergence (re-priced 2026-09-03), while
@@ -269,9 +273,10 @@ $\kappa = -1/16$ is applied, which the corpus records as an Observation
 (Paper~7).  At the algebraic level the discrete and continuous
 descriptions therefore agree on the quantum-number skeleton, while the
 graph Laplacian's node-amplitude proxy for the $s/p$ gap is large at finite
-cutoff (up to $37\%$ at $n_{\max} = 5$ on the binary lattice, below $1\%$ by
-$n_{\max} = 30$; the $\ell$-blocks are disconnected, so this is a proxy and
-not a spectral gap --- Paper~1 \S III).
+cutoff (up to $37\%$ at $n_{\max} = 5$ on the binary lattice;\ $0.39\%$ at
+$n_{\max} = 30$, which sits on the $n_{\max} \equiv 0 \bmod 3$ branch, against
+$1.65\%$ and $2.58\%$ at $28$ and $29$; the $\ell$-blocks are disconnected,
+so this is a proxy and not a spectral gap --- Paper~1 \S III).
 
 \subsection*{The universal kinetic constant $\kappa = -1/16$}
 
@@ -374,8 +379,9 @@ lies outside their scope (Paper~7 states this explicitly).
 \textbf{[OBSERVATION]} The graph Laplacian on the GeoVac lattice is read as
 converging, in the continuum limit $n_{\max} \to \infty$ with appropriate
 rescaling, to the round $S^3$ Laplace--Beltrami operator.  This reading,
-recorded in Paper~7 with its numerical indications through $n_{\max} =
-30$ (spectral-bound saturation alone;\ the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence] was
+recorded in Paper~7 with one proved indication --- the closed-form
+saturation of the spectral bound, \textbf{[INTERNAL THEOREM]}
+(Paper~0~\S VI) --- (the $s/p$-lift decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence] was
 withdrawn as evidence on 2026-09-03; no operator-convergence
 statement), remains unestablished for the graph Laplacian itself; what is now a theorem is the
 companion statement:\ \textbf{[INTERNAL THEOREM]} for the spinor (Dirac)
@@ -392,11 +398,13 @@ truncations of $L^2(S^3)$, is the prior-art state-space GH result of
 Gaudillot-Estrada--van~Suijlekom~\cite{gaudillot_vs2025}.  Paper~7's
 18 symbolic checks (ten of the eighteen limiting-case or definitional) target the
 conformal-transformation chain, not a convergence statement, and the
-graph-side convergence itself has no theorem behind it: what the frozen
-test \texttt{tests/test\_paper7\_graph\_convergence.py} pins is the
-saturation of the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$ and
-the block structure of the lattice Laplacian, not operator convergence
-(re-scoped 2026-09-03).
+graph-side \emph{operator} convergence has no theorem behind it. The
+saturation of the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
+\emph{is} one --- \textbf{[INTERNAL THEOREM]} closed form with rate
+$C/n_{\max}^2$, $C = 42.7397\ldots$ (Paper~0~\S VI) --- and the frozen
+test \texttt{tests/test\_paper7\_graph\_convergence.py} pins it together
+with the block structure of the lattice Laplacian;\ neither is operator
+convergence (re-scoped 2026-09-03;\ tier corrected 2026-09-04).
 Imposing the energy-shell
 constraint $p_0 = Z/n$ then maps the unit-sphere eigenvalues
 $\lambda_n = -(n^2 - 1)$ to the hydrogenic Rydberg series
@@ -510,8 +518,9 @@ contribution.  The stereographic projection formulas, the unit sphere
 constraint, the chordal distance identity, the conformal Laplacian
 relation, and the integer eigenvalue spectrum are all known results
 from Fock, Bargmann, Bander--Itzykson, and Barut--Kleinert.  The new
-contributions are: (a) the numerical indications (spectral-bound saturation and
-degeneracy recovery [retracted 2026-09-04: sp-splitting-as-convergence-evidence] through $n_{\max} = 30$ --- the latter now known to
+contributions are: (a) the proved spectral-bound saturation
+(\textbf{[INTERNAL THEOREM]}, closed form, Paper~0~\S VI) and the
+$s/p$-proxy decay [retracted 2026-09-04: sp-splitting-as-convergence-evidence] through $n_{\max} = 30$ --- the latter now known to
 track the residue of $n_{\max}$ modulo $3$ rather than convergence, and so
 withdrawn as evidence, 2026-09-03) that the discrete GeoVac
 graph converges to the continuous $S^3$ Laplace--Beltrami operator,
@@ -678,7 +687,8 @@ Paper~6 is not a foundational claim in the same sense as Papers 7, 18,
 22, 24, or 31---it is an operational demonstration that the
 foundations support time evolution.  Its role in the synthesis is to
 close the gap between the spectral statement of Papers~1 and~7 (the
-graph reproduces the Rydberg quantum-number structure) and the dynamical statement
+ladder operators $T_\pm, L_\pm$ reproduce the Rydberg quantum-number
+structure, Paper~1) and the dynamical statement
 required for any quantum-chemistry application (the graph supports
 time evolution at the same $O(V)$ cost).  Without Paper~6's dynamics
 engine, GeoVac would be limited to eigenvalue problems; with it, the
@@ -758,12 +768,17 @@ engine, is that the Coulomb and HO discretizations differ along
 The asymmetry as currently catalogued reads:
 
 \begin{enumerate}
-\item \textbf{Spectrum-computing role of $L_0$.}  On the Coulomb $S^3$
-graph, the graph Laplacian $L_0$ is the spectrum-generating
-operator: the spectrum of $(D - A)$ approaches the continuum $S^3$
-Laplace--Beltrami spectrum $n^2 - 1$ as $n_{\max} \to \infty$
-(numerically, Paper~7), and the hydrogenic energies follow with the
-matched kinetic scale.  On
+\item \textbf{Spectral-bound role of $L_0$.}  On the Coulomb $S^3$
+graph, the graph Laplacian $L_0$ carries the bipartite bound whose
+saturation $\lambda_{\max} \to 2 d_{\max} = 8$ is the one convergence
+indication that survives scrutiny --- \textbf{[INTERNAL THEOREM]} closed
+form, at rate $(C + o(1))/n_{\max}^2$ (Paper~0~\S VI). Its spectrum is
+bounded in $[0, 8]$ and does \emph{not} approach the continuum
+$n^2 - 1$ [retracted 2026-09-04: graph-spectrum-attribution] (the sentence printed here until 2026-09-04
+said it did, ``numerically, Paper~7'';\ Paper~7 says the opposite:\ the
+spectrum of $\kappa L$ is confined to $[-1/2, 0]$ and no level-by-level
+Rydberg ladder is reproduced). The hydrogenic ground energy follows only
+under the matched kinetic scale $\kappa$, an Observation.  On
 the Bargmann--Segal lattice, $L_0$ is the matter-propagator operator,
 not the Hamiltonian: the spectrum comes from the diagonal Euler
 operator $\hbar \omega(\hat{N} + 3/2)$, and the graph adjacency
@@ -1368,9 +1383,10 @@ non-relativistic quantum mechanics on natural geometries.
 \textbf{[SYMBOLIC PROOF]} The conformal chain from the unit-$S^3$
 Laplace--Beltrami operator onward is verified symbolically
 (Paper~7~\cite{loutey_paper7}); \textbf{[OBSERVATION]} the discrete Fock
-graph's convergence to that operator is a reading with numerical
-indications, not an established result, while the state-space GH convergence of the spinor spectral
-truncations is proved with explicit rate in
+graph's convergence to that operator is a reading supported by the
+proved saturation of the spectral bound, not an established result, while
+\textbf{[INTERNAL THEOREM]} the state-space GH convergence of the spinor
+spectral truncations is proved with explicit rate in
 Paper~38~\cite{loutey_paper38}; \textbf{[INTERNAL THEOREM]} the
 angular sparsity of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}); the 3D harmonic oscillator admits a
@@ -1392,11 +1408,13 @@ computational machinery.
 
 The framework's concrete advantages are independent of the interpretive
 question of which description---discrete or continuous---is more
-fundamental.  $O(V)$ sparsity, integer eigenvalues on the unit $S^3$,
-angular momentum selection rules baked into the basis, bit-exactly
-rational matrix elements on the Bargmann--Segal lattice, and the
-universal sparsity bound at fixed $l_{\max}$ are statements about the
-discrete graph; their continuum counterparts are theorems about the
+fundamental.  $O(V)$ sparsity, angular momentum selection rules baked
+into the basis, bit-exactly rational matrix elements on the
+Bargmann--Segal lattice, and the universal sparsity bound at fixed
+$l_{\max}$ are statements about the discrete graph (the integer spectrum
+$n^2 - 1$ is \emph{not}:\ it belongs to the continuum operator, the
+graph's own spectrum being closed form and bounded in $[0, 8]$ ---
+Paper~0~\S VI, Paper~7); their continuum counterparts are theorems about the
 Laplace--Beltrami operator or the Euler operator on the corresponding
 natural manifold; the conformal equivalence guarantees consistency.
 The discrete and continuous readings are dual descriptions connected

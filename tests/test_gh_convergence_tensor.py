@@ -864,18 +864,25 @@ class TestR2EpsilonCrossBound:
         out = tensor_L5_assembly(2, 2)
         assert "epsilon_cross_bound" in out
         assert "C_3_full_pythagorean" in out
-        assert "propinquity_bound_r1_r2" in out
+        assert "withdrawn_reach_plus_height_assembly" in out
         assert out["epsilon_cross_bound"] > 0
-        assert out["propinquity_bound_r1_r2"] > 0
+        assert out["withdrawn_reach_plus_height_assembly"] > 0
 
-    def test_propinquity_bound_r1_r2_formula(self):
-        """propinquity_bound_r1_r2 = C_3^{(2),Pyth} * (max(γ) + ε_cross)."""
+    def test_withdrawn_reach_plus_height_assembly_is_the_historical_value(self):
+        """The WITHDRAWN reach-plus-height assembly, retained for the record.
+
+        Until 2026-09-04 this field was ``propinquity_bound_r1_r2`` and this
+        test pinned it as a bound -- so the suite enforced the retracted
+        C_3 (1 + 2 sqrt 2) gamma assembly (DELTA #7, CODE-A M1).  It now pins
+        the historical field only so the retraction notes' numerals
+        (7.942 / 5.845) stay reproducible;  it is not a propinquity bound.
+        """
         b = compute_tensor_propinquity_bound(2, 2, gamma_prec=15)
         c = b.c_lipschitz_full_pythagorean
         gm = max(b.gamma_a, b.gamma_b)
         eps = b.epsilon_cross_bound_value
         expected = c * (gm + eps)
-        assert b.propinquity_bound_r1_r2 == pytest.approx(expected, rel=1e-9)
+        assert b.withdrawn_reach_plus_height_assembly == pytest.approx(expected, rel=1e-9)
 
 
 class TestR2RateConvergence:
@@ -914,9 +921,10 @@ class TestR1R2KeystoneTheoremStatus:
     Net statement (sprint memo §6; Pythagorean form WITHDRAWN 2026-06-18 as
     false, replaced by the triangle bound):
         Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
-            <= C_3^{(2)} * (max(γ_a, γ_b) + ε_cross)
-            <= C_3^{(2)} * (1 + 2*sqrt(2)) * max(γ_a, γ_b)
+            <= C_3^{(2)} * 2 * max(γ_a, γ_b)      (reach-only, 2026-09-04)
             -> 0  as cutoffs -> infinity,
+        [the previous statement here, C_3 (max(γ) + ε_cross) <= C_3 (1+2√2) max(γ),
+         is the withdrawn reach-plus-height assembly [retracted 2026-09-04: p39-tensor-assembly-constant]]
     where C_3^{(2)} = sqrt(((N_a-1) + (N_b-1))^2 / (N_a^2 + N_b^2 - 2)) is the
     triangle bound, <= sqrt(2) (NOT < 1), exceeding 1 beyond (2,2) and -> sqrt(2);
     convergence survives because sqrt(2) is a finite constant and γ -> 0.
@@ -946,7 +954,7 @@ class TestR1R2KeystoneTheoremStatus:
         b_33 = compute_tensor_propinquity_bound(3, 3, gamma_prec=15)
         # Both R1+R2 and the legacy bound are strictly decreasing on the
         # symmetric (n, n) panel
-        assert b_33.propinquity_bound_r1_r2 < b_22.propinquity_bound_r1_r2
+        assert b_33.withdrawn_reach_plus_height_assembly < b_22.withdrawn_reach_plus_height_assembly
 
     def test_pyth_bound_propagates_to_dataclass(self):
         """TensorPropinquityBound exposes c_lipschitz_full_pythagorean."""

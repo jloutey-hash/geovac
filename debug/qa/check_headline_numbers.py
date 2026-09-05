@@ -254,12 +254,14 @@ REGISTRY = [
                    r"|reach-plus-height"
                    r"|1\s*\+\s*2\\sqrt\{2\}\s*\\approx\s*3\.828",
         "require_nearby": r"max\(?\\?gamma|C_3|propinquity|Lambda|assembl|tensor",
-        "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}: l5-height-bound-achieved\]"
-                            r"|withdrawn|retired|corrected 2026-09-04|formerly"
-                            r"|panel|before 2026-09-04",
+        # DELTA #7 (CODE-B M2): "panel"/"formerly"/a cross-entry marker each
+        # exempted the DEFECTIVE text -- the over-exemption class removed from
+        # C16 the day before, reintroduced here in named form.  Own marker only.
+        "exempt_if_nearby": r"(?!)",
         "files": [
             "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
             "geovac/gh_convergence_tensor.py",
+            "tests/test_gh_convergence_tensor.py",
         ],
     },
     {

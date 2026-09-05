@@ -35,7 +35,9 @@ converge to the round-S^3 triple as n_max -> infinity:*
 
     Lambda(T_{n_max}, T_S3)  <=  C_L5  *  gamma_{n_max}  ->  0,
 
-*with C_L5 = max(C_3, ||K||_cb_central) = max(1, 2/(n_max+1)) = 1 the
+*with C_L5 = max(C_3, mass_max_central) = max(1, 2/(n_max+1)) = 1 the
+[2/(n_max+1) is the Plancherel MASS maximum, not a cb-norm -- the true
+||T_K||_cb is 1, retired identification 2026-09-03] --
 explicit state-space GH constant assembled from L3 (C_3 = 1, the Lipschitz
 comparison) and L2 (||K||_cb = 2/(n_max+1) on the central subalgebra,
 the Bozejko-Fendler symbol-side estimate), and gamma_{n_max} the L2
@@ -501,14 +503,21 @@ class TunnelingPair:
         """What height_B actually is: 1, at every cutoff.
 
         height_B is a supremum over the unit-Lipschitz ball of
-        |Lip(f) - Lip(B(f))|.  B is a finite-band reconstruction: P keeps
-        j <= j_max = (n_max - 1)/2, so B's image has N = 2j + 1 <= n_max.
-        (CORRECTED 2026-09-04: this docstring said the envelope was
-        N <= 2 n_max - 1, which is the band of K's character support and of
-        P M_f P, not of B.  Only finiteness is load-bearing for the witness,
-        so the conclusion below is unchanged.)  At every finite cutoff the
-        ball therefore contains f with B(f) = 0, for which the quantity is
-        exactly Lip(f) = 1.
+        |Lip(f) - Lip(B(f))|.  B = P M_{K*f} P is a finite-band reconstruction
+        whose multiplier envelope is N <= 2 n_max - 1 (Paper 38, def:berezin:
+        "the image reaches multiplier labels up to the achievable envelope
+        N <= 2 n_max - 1").  A DELTA #6 edit of this docstring replaced that
+        with N <= n_max, having checked the STATE-space band j <= j_max and
+        called it B's band;  DELTA #7 measured the two apart (P M_f P is
+        nonzero up to N = 2 n_max - 1) and restored the paper's statement.
+        (This module's B annihilates every input above n_max, but only
+        because plancherel_symbol truncates the kernel at j_max -- the
+        documented symbol defect in central_fejer_su2, not a property of B.)
+        None of this touches the witness, which needs strictly less than a
+        band:  B is linear into the finite-dimensional O_{n_max}, so ker B
+        is nonzero in C^inf(S^3);  normalise any kernel element to Lip(f)=1
+        and the quantity is exactly 1.  [INTERNAL THEOREM] at every cutoff
+        and for every finite-rank reconstruction (CODE-A U2, 2026-09-04).
         Hence height_B == 1 identically, and the withdrawn estimate above
         fails whenever gamma < 1 -- i.e. for every n_max >= 6.
         """
@@ -650,7 +659,10 @@ def compute_propinquity_bound(
     """Compute the L5 propinquity bound at cutoff n_max.
 
     Assembles the L1'-L4 ingredients via the TunnelingPair and reads off
-    the Latremoliere propinquity bound.  Returns a PropinquityBound object
+    van Suijlekom's STATE-SPACE Gromov-Hausdorff bound (corrected 2026-09-04:
+    this line said "the Latremoliere propinquity bound", which the corpus
+    does not claim -- that distance is strictly stronger and its dual-reach
+    step is a named gap).  Returns a PropinquityBound object
     with all the constituent quantities for inspection.
 
     Args:

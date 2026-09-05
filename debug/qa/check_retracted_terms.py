@@ -325,7 +325,17 @@ REGISTRY = [
                    r"|neither confirms nor contradicts L5"
                    r"|panel-side quantity is"
                    r"|exceeds gamma from n_max"
-                   r"|height_B_theoretical\(\)[^\n]{0,40}upper bound",
+                   r"|height_B_theoretical\(\)[^\n]{0,40}upper bound"
+                   # DELTA #7 (CLAIMS-A M1/M5): the anonymous four-term max
+                   # whose last two arguments ARE the refuted heights, and the
+                   # remark that still credits the height reduction with the
+                   # main theorem.
+                   # The display wraps over three lines, so anchor on its LAST line:
+                   # a gamma-term followed by the trailing ", 0\bigr)".
+                   r"|\\gamma[^\n]{0,24},\s*0\s*\\bigr\)"
+                   r"|\\gamma[^\n]{0,24},\s*0\s*\)\s*(?:=|\\;=)"
+                   r"|reduction of the height to[^\n]{0,60}is what gives"
+                   r"|all other constituents are proved above",
         "exempt_if_nearby": r"withdrawn|REFUTED|refuted|false by|retired|"
                             r"until then|read \\`\\`this|printed here until",
         "severity": "fail",
@@ -335,8 +345,15 @@ REGISTRY = [
         "cited_by": {
             "geovac/gh_convergence.py": "reviewed 2026-09-04",
             "tests/test_gh_convergence.py": "reviewed 2026-09-04",
-            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": "reviewed 2026-09-04",
-            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": "reviewed 2026-09-04",
+            # Stamped after the v5.8.3 edit; DELTA #7 found the four-term assembly
+            # still live nine lines below (CLAIMS-A M1).  A stamp records a review
+            # OUTCOME, so it reverts to None until a review confirms.
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+                    "geovac/gh_convergence_tensor.py": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+            "geovac/central_fejer_su2.py": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+            "geovac/lorentzian_propinquity_compact_temporal.py": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+            "geovac/ecosystem_export.py": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
         },
 "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
@@ -348,6 +365,8 @@ REGISTRY = [
             "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
             "docs/qa/trunk.done.md",
             "docs/claim_test_matrix.md",
+            "tests/test_gh_convergence_tensor.py",
+            "geovac/lorentzian_propinquity_compact_temporal.py",
         ],
     },
     {
@@ -379,8 +398,11 @@ REGISTRY = [
                    r"|recovered degeneracy is the hallmark"
                    r"|recovering the exact Coulomb degeneracy"
                    r"|continuing toward the exact Coulomb degeneracy",
-        "exempt_if_nearby": r"withdrawn|retired|refuted|mod\s*3|residue|"
-                            r"disconnected|until 2026-09-03|no degeneracy",
+        # DELTA #7: exemption vocabulary REMOVED.  "residue" here let Paper 1's
+        # Conclusion keep "confirms this is spectral aliasing" live, because
+        # "set by that residue" sits in the same bullet (CLAIMS-B M1).  Only
+        # the entry's own withdrawal marker exempts now.
+        "exempt_if_nearby": r"(?!)",
         "severity": "fail",
         "scope": "group3 trunk synthesis",
                 # Documents whose ARGUMENT rests on this claim (distinct
@@ -1082,6 +1104,63 @@ REGISTRY = [
         ],
     },
     {
+        "id": "sp-ratio-false-precision",
+        "scope": "trunk group3",
+        "severity": "fail",
+        "retired": "2026-09-04 (trunk DELTA #7, CLAIMS-B headline).  Two successive "
+                   "statements of the off-branch/on-branch s/p ratio, both stated as "
+                   "theorems from three sampled cutoffs.  'Three to six times larger' "
+                   "(retired 2026-09-04 morning; ratio is unbounded, ~n/(sqrt3 pi)) and "
+                   "its replacement 'tracking n/(sqrt3 pi) to within 1%' -- false at two "
+                   "of its own three printed anchors (19.7% high at 30, 4.6% at 120), "
+                   "silently using the n-1 neighbour (the n-2 neighbour gives 4.2x at 30, "
+                   "not 6.6x), and 'off-branch is larger' inverts below n ~ 12 (0.65% at "
+                   "7 vs 12.7% at 6).  The guard-asymptotics failure, twice, in the same "
+                   "sentence.",
+        "pattern": r"three to six times"
+                   r"|to within 1\\%[^\n]{0,80}n_\{\\max\}/\(\\sqrt"
+                   r"|tracking n_\{\\max\}/\(\\sqrt\{3\}[^\n]{0,20}to within"
+                   r"|within \$?1\\%\$?:\\? *\$?6\.6",
+        "exempt_if_nearby": r"(?!)",
+        "cited_by": {
+            "papers/group3_foundations/paper_1_spectrum.tex": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+        },
+        "files": [
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "graph-spectrum-attribution",
+        "scope": "trunk group3 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-04 (trunk DELTA #7, SYNTH M1/M2).  The graph Laplacian's "
+                   "spectrum is closed form and bounded in [0, 8] (Paper 0 S VI); it "
+                   "does NOT approach n^2-1, and 'integer eigenvalues on the unit S^3' "
+                   "is a statement about the CONTINUUM operator, not the discrete graph "
+                   "(Paper 7:15, :77).  The group3 synthesis said both -- 'the spectrum "
+                   "of (D-A) approaches ... n^2-1' and listed integer eigenvalues under "
+                   "'statements about the discrete graph' in its abstract and "
+                   "conclusion -- contradicting its own S1.5-compliant sentence at :434.",
+        "pattern": r"spectrum of \$?\(D\s*-\s*A\)\$? approaches"
+                   r"|approaches the continuum \$?S\^3\$? Laplace--Beltrami spectrum"
+                   r"|spectrum-generating\s+operator"
+                   r"|integer\s+eigenvalues on the unit \$?S\^3\$?",
+        "exempt_if_nearby": r"(?!)",
+        "cited_by": {
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
+        },
+        "files": [
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+        ],
+    },
+    {
         "id": "saturation-approach-monotone",
         "scope": "trunk group3",
         "severity": "fail",
@@ -1095,18 +1174,23 @@ REGISTRY = [
         "pattern": r"approach\s+is\s+monotone"
                    r"|monotone\s+from\s+below"
                    r"|monotonically\s+approach(?:es|ing)?\s+\$?C\$?\b"
-                   r"|rises\s+monotonically\s+to(?:ward)?s?\s+\$?C\$?\b",
+                   r"|rises\s+monotonically\s+to(?:ward)?s?\s+\$?C\$?\b"
+                   r"|rises\s+TOWARD\s+C\b",
         "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}: saturation-approach-monotone\]"
                             r"|not monotone|NOT monotone|is \\emph\{not\} monotone",
         # Documents whose ARGUMENT rests on this claim.
         "cited_by": {
             "papers/group3_foundations/Paper_0_Geometric_Packing.tex": "reviewed 2026-09-04",
             "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "reviewed 2026-09-04",
+            # CODE-B M6: the test still ASSERTS monotonicity on the doubling
+            # grid Paper 0 names as the trap.  Insert 21 into ns and it fails.
+            "tests/test_paper1_block_spectrum.py": "remediated 2026-09-04 (DELTA #7); review owed (DELTA #8)",
         },
         "files": [
             "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
             "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
+            "tests/test_paper1_block_spectrum.py",
         ],
     },
     {
@@ -1578,8 +1662,12 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
         hit_lines = set()
         # Match on a markup-stripped copy; report the original (2026-09-04).
         stripped = [_strip_markup(l) for l in lines]
+        # Match on the markup-stripped copy OR the raw line (DELTA #7,
+        # CODE-B M4): stripping alone silently disabled three declared
+        # alternatives written in typeset form ($D_{\mathrm{GV}}^{\mathrm{graph}}$,
+        # $N_{\mathrm{matter}} = 128$).  Either spelling now fires.
         for i, line in enumerate(stripped):
-            if pat.search(line):
+            if pat.search(line) or pat.search(lines[i]):
                 hit_lines.add(i)
         # 2026-09-03 (trunk FULL run #3, I.4.1): a phrase wrapped across a
         # line break was invisible to the per-line scan -- the entry written
@@ -1592,7 +1680,7 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
         for i in sorted(hit_lines):
             line = lines[i]
             lo, hi = max(0, i - WINDOW), min(len(lines), i + WINDOW + 1)
-            window_txt = "\n".join(stripped[lo:hi])
+            window_txt = "\n".join(stripped[lo:hi]) + "\n" + "\n".join(lines[lo:hi])
             rel = path.relative_to(ROOT)
             snip = re.sub(r"\s+", " ", line.strip())[:160]
             if exempt.search(window_txt):
@@ -1725,8 +1813,14 @@ def main() -> int:
               f"NOTHING. Add a '{gate}' entry scope, or use a scope "
               f"name that exists.")
 
+    # An entry is marker-only if its exemption is the never-match "(?!)" or
+    # begins with the (escaped) standardized marker.  The previous test
+    # compared against a bare "[retracted", which no escaped string ever
+    # starts with, so this counter could never decrease (DELTA #7, N4).
     _authored = [e["id"] for e in REGISTRY
-                 if not e.get("exempt_if_nearby", "").strip().startswith("[retracted")]
+                 if not (e.get("exempt_if_nearby", "").strip() in ("(?!)", r"(?!)")
+                         or e.get("exempt_if_nearby", "").strip()
+                            .startswith(("\\[retracted", "[retracted")))]
     fail_hits, advisory_hits, exempt_total = [], [], 0
     print(f"retracted-claims / zombie-drift screen   [{scope}: "
           f"{len(_selected)}/{len(REGISTRY)} entries]\n")

@@ -611,14 +611,17 @@ def compute_lorentzian_propinquity_bound(
     reach_B_theoretical = pair.c_lipschitz_joint * pair.gamma_joint_su2
     height_B_theoretical = pair.gamma_joint_su2
 
-    # Propinquity bound: max over the four constituents.
-    # reach_P bounded by gamma^joint (Sub-sprint B dual roundtrip estimate)
-    # height_P = 0 (P^joint is an orthogonal projection).
+    # State-space GH bound: max over the two REACH constituents.
+    # reach_P bounded by gamma^joint (Sub-sprint B dual roundtrip estimate;
+    # the single-factor named gap is inherited).
+    # WITHDRAWN 2026-09-04 [retracted 2026-09-04: l5-height-bound-achieved]: this max
+    # previously included height_B_theoretical and 0.0 ("height_P = 0,
+    # P^joint is an orthogonal projection") -- both refuted (height_B == 1,
+    # height_P != 0).  Value unchanged: c_lipschitz_joint = 1 made every
+    # constituent equal gamma^joint.
     propinquity = max(
         reach_B_theoretical,
-        pair.gamma_joint_su2,   # reach_P bound
-        height_B_theoretical,
-        0.0,                    # height_P = 0
+        pair.gamma_joint_su2,   # reach_P bound (named gap)
     )
 
     # Optionally verify Riemannian-limit recovery at N_t = 1

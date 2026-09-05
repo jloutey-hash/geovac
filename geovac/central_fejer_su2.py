@@ -349,20 +349,31 @@ def plancherel_mass(n_max: int, j: Rational) -> sp.Rational:
     # (n_max = 4: true c_J = 1.000, 1.466, 1.812, 1.583, 1.266, 0.693, 0.400
     #  against this function's 0.1, 0.2, 0.3, 0.4, 0, 0, 0).
     #
-    # CORRECTED 2026-09-04 (/qa DELTA #6).  An earlier version of this note
-    # read the band-doubling as a corpus contradiction with Paper 38's L5
-    # refutation envelope and booked a sprint to resolve it.  There is no
-    # contradiction:  P keeps j <= j_max = (n_max - 1)/2, so the Berezin map
-    # B has band N <= n_max, while K = |D|^2 has character support up to
-    # 2 j_max, i.e. N <= 2 n_max - 1.  Two different objects.  The sprint
-    # booking is withdrawn.
+    # DELTA #7 (2026-09-04): the paragraph this replaces (written the same
+    # day, /qa DELTA #6) said there was NO paper/code discrepancy because "B
+    # has band N <= n_max".  That was wrong -- it checked the state-space band
+    # j <= j_max and called it B's band.  Paper 38 def:berezin gives B =
+    # P M_{K*f} P the multiplier envelope N <= 2 n_max - 1, and DELTA #7
+    # measured P M_f P nonzero up to exactly that N.  So the discrepancy the
+    # ORIGINAL note reported is real:  the paper's B has band 2 n_max - 1;
+    # this module's B (built from this function) has band n_max, because this
+    # function truncates the kernel at j_max.  The two are different
+    # operators on the (n_max, 2 n_max - 1] window.
     #
-    # The DEFECT above is real and is not withdrawn -- it was measured on two
-    # independent routes.  The VALUES are load-bearing in
+    # TIER (CODE-A U1): the two headline facts are not "measured", they are
+    # closed form at every cutoff --  sigma(0) = (1/Z) sum_{j<=j_max} (2j+1)
+    # = Z/Z = 1 identically, and supp K = |D|^2 is exactly J <= 2 j_max
+    # (attained: the (j_max, j_max) pair contributes n_max/Z > 0).  [SYMBOLIC
+    # PROOF];  the two independent routes (exact CG combinatorics; quadrature
+    # against the class measure) agree to 0.0 at n_max = 4.
+    #
+    # The VALUES this function returns are load-bearing in
     # berezin_reconstruction, gh_convergence_tensor,
-    # central_fejer_compact_temporal and many pinned tests, so re-valuing the
-    # function is out of scope here;  this note and the rename below exist so
-    # the next reader is not misled by the name.
+    # central_fejer_compact_temporal and many pinned tests, so re-valuing it
+    # is a scoped sprint and is RECORDED AS OWED (the DELTA #6 withdrawal of
+    # that booking is itself withdrawn).  Until then this module's Berezin
+    # map is the j_max-truncated one, and every test pinned to it pins THAT.
+    # This note and the rename below exist so the next reader is not misled by the name.
     """Plancherel symbol hat{K}_{n_max}(j) of the natural-coefficient kernel.
 
     hat{K}_{n_max}(j) = (2j + 1) / Z_{n_max}  for j <= j_max
@@ -385,7 +396,7 @@ def plancherel_mass(n_max: int, j: Rational) -> sp.Rational:
 
 
 # Deprecated alias (renamed 2026-09-04).  "symbol" asserted that this is
-# the multiplier symbol of T_K, which the note above shows it is not;  86
+# the multiplier symbol of T_K, which the note above shows it is not;  32
 # call sites keep working under the old name.
 plancherel_symbol = plancherel_mass
 

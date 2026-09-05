@@ -14,17 +14,20 @@ whose Laplacian eigenvalues add:
                 for j = 0 .. n_max-l-1,  k = 0 .. 2l.
 
 Until 2026-09-04 that closed form lived as a private helper *inside the test
-that proves it*, so no other test could use it -- and fourteen other test
-files were still calling ``numpy.linalg.eigh`` on the dense operator.  At
+that proves it*, so no other test could use it -- and other test files
+were still calling ``numpy.linalg.eigh`` on the dense operator (seven that
+both build ``GeometricLattice`` and call ``eigh``; sixteen by a looser
+count that includes ``adjacency``-based builds).  At
 n_max = 30 that is a 9455 x 9455 dense eigendecomposition, measured at 45-69 s,
 to obtain numbers this module returns in milliseconds.
 
-MEASURED (n_max = 30, 9455 x 9455)
+MEASURED (n_max = 30, 9455 x 9455;  dense eigh varied 44-69 s across runs
+on one machine, so ratios are ranges, not constants)
 
-    route                      time        agreement vs dense eigh
-    dense eigh                 69.2 s      --
-    block_eigh   (eigenpairs)   1.05 s     max|dlambda| = 1.4e-14   -> 66x
-    spectrum     (eigenvalues)  1.7 ms     max|dlambda| = 1.4e-13   -> ~27000x
+    route                      time         agreement vs dense eigh
+    dense eigh                 44-69 s      --
+    block_eigh   (eigenpairs)   1.05-1.1 s  max|dlambda| <= 1.4e-13  -> 41-66x
+    spectrum     (eigenvalues)  1.0-1.7 ms  max|dlambda| <= 1.4e-13  -> 4e4-7e4x
 
 Both routes are EXACT, not approximations:  ``block_eigh`` diagonalises the
 very same operator one block at a time, and ``spectrum`` evaluates the proved
@@ -163,8 +166,9 @@ def lambda_max_from_operator(L, states) -> float:
     each block is tiny compared with the whole.
 
     MEASURED at n_max = 70 (116,795 nodes, largest block 2485):
-        global  eigsh(k=1)   70.07 s
-        blockwise            0.93 s      -> 75x, agreement 2.1e-14
+        global  eigsh(k=1)   70-78 s
+        blockwise            0.9-1.2 s   -> 66-75x (ARPACK/machine-dependent),
+                                            agreement 2.1e-14 .. 1.5e-13
 
     Use this where a test should verify the constructed graph;  use
     :func:`lambda_max` where the closed form is the intended subject.
