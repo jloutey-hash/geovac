@@ -1563,6 +1563,16 @@ gap in my own guard: reverting the **b** factor did not fire, because every
 test used lambda_b = 1.0, where multiplying and dividing coincide. Fixed with
 lambda_b = 3.0; both directions now fire.
 
+### O.5e — the tensor lemma, critique-confirmed SOUND (2026-09-05)
+
+The dispatch-then-critique loop closed. Author agent: GO. Critic agent (fresh, after the first was killed by a rate limit): **SOUND**, one wording qualifier. **The critic and the parent session's own in-session checks converged independently** on the two load-bearing points — constant 1 survives the S3.2 refutation (the assembly uses translation seminorms, never C_3^(2)), and the substitution is the *same* one Paper 38 discloses in sec:named_gaps, not a wider one. Two-route agreement is the strongest signal the QA process produces.
+
+**The discharged theorem (reviewed):** d_GH <= gamma^(ab) <= gamma_a + gamma_b, **constant 1**, reach_P unnecessary, **[INTERNAL THEOREM] in the translation-seminorm metrization** — Paper 38's footing, not "unconditional" simpliciter. L3-T's sqrt(2) belongs to the abandoned Berezin route and demotes to a truncated-Dirac-seminorm remark. Findings in our favour: band_injectivity is *proved* for all n_max (the memo understated it); the honest tight quantity is gamma^(ab), with gamma_a+gamma_b ~25%% loose at panel scale.
+
+**NOT applied to Paper 39's theorem.** Discharging the tier is new load-bearing mathematics in a paper — a proof restructure, a lemma demotion, a conditional->theorem tier change — which by this session's own rule gets its own pass, not a bolt-on at the tail of DELTA #7. Paper 39's Status note is updated to record the route as verified SOUND (so [CONDITIONAL] no longer reads as "route unknown"); the theorem still displays the conditional constant 2.
+
+**Named follow-on sprint (PI call): discharge Paper 39.** Scope: write the tensor lemma + facts (i)-(iv) into the body; restate thm:main with gamma^(ab)/constant 1; demote L3-T's sqrt(2) to a remark; change the tier to [INTERNAL THEOREM] scoped to the translation seminorm. **One open sub-task blocks the FULL claim** (not the distance bound): verify the Clifford-doubled product triple's real structure J_ab and the KO-6 axiom set — grading, anticommutation and D^2 are checked, J_ab is not. Memo: debug/sprint_p39_tensor_lifted_state_memo.md (verdict CRITIQUE-CONFIRMED SOUND).
+
 ### O.6 — Next
 
 Guard pass in isolation (O.5), then **DELTA #8, narrow**: code-tier on the

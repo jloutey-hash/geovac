@@ -11,6 +11,9 @@ were added under `debug/` (listed in §7).
 
 ## 0. Verdict
 
+> **CRITIQUE-CONFIRMED SOUND (2026-09-05).** A fresh adversarial critic reproduced every number and confirmed the GO, with one wording qualifier: the discharge is unconditional **in the translation-seminorm metrization** (Paper 38's own footing), not simpliciter. It independently converged with the parent session's two checks (constant 1 survives the S3.2 refutation; the substitution is Paper 38's own), which is the strongest signal this process gives. Corrections it made, both in our favour: `lem:band_injectivity` is *proved* for all n_max (Schur + Wen-Avery), not merely panel-verified as this memo says; and the honest tight quantity is gamma^(ab), with gamma_a+gamma_b already ~25%% loose at panel scale and 2*max looser still. One piece stays genuinely open: the Clifford-doubled product triple's real structure J_ab / full KO-6 axioms are UNVERIFIED (S8.4) -- the distance bound does not need them, the identification of the limit as the tensor CH spectral triple does. S3.2's `C_3^(2)=1` sub-claim remains REFUTED and is not resurrected by this.
+
+
 **GO — with two corrections, one of them structural.**
 
 The lifted-state route transfers to the tensor product. Every step (a), (b),

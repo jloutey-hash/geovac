@@ -475,10 +475,34 @@ $\mathrm{reach}_P$ is a named gap, so the pair does not establish the
 bound. Paper~38's surviving route is a different construction --- the
 lifted-state map of its \texttt{thm:main\_unconditional}, which uses
 neither the Berezin map nor any dual reach --- and this paper does not
-transfer it to the product. The statement above therefore holds
-conditionally on that transfer (or on closing the $\mathrm{reach}_P$
-gap), and the constant $2$ is the constant of that conditional bound.
-Until 2026-09-04 this theorem was stated as established.
+transfer it to the product in the body above. The statement therefore
+holds conditionally on that transfer, and the constant $2$ is the
+constant of that conditional bound. Until 2026-09-04 this theorem was
+stated as established.
+
+\emph{Update 2026-09-05.} The transfer has since been carried out and
+independently reviewed (verdict SOUND). The lifted-state route lifts to
+the product $\SU(2) \times \SU(2)$ verbatim:\ facts (i)--(iv) of
+Paper~38's \texttt{thm:main\_unconditional} hold factor-wise, metrized by
+the joint left-\emph{translation} seminorm (Paper~38 \S~named-gaps), and
+give $d_{\mathrm{GH}} \le \gamma^{(ab)} \le \gamma_{\nmaxa} +
+\gamma_{\nmaxb}$ with \emph{constant $1$} --- $\mathrm{reach}_P$ is
+\emph{unnecessary}, both almost-inverse defects being the same Fej\'er
+smoothing, and $C_3^{(2)}$ does not enter (it belongs to the abandoned
+Berezin route;\ its $\sqrt{2}$ stands as a truncated-Dirac-seminorm
+remark, not a rate constant). The discharged tier is
+[INTERNAL THEOREM] \emph{in the translation-seminorm metrization} ---
+Paper~38's own footing, not ``unconditional'' simpliciter. \emph{Two
+items remain before the tier is changed in this paper:} (a) writing the
+tensor lemma and the demotion into the body as a dedicated pass (this
+note does not rewrite Theorem~\ref{thm:main}, which still displays the
+conditional constant $2$), and (b) verifying that the Clifford-doubled
+product triple (required because $\gamma_a = 0$ on $\sthree$; see the
+note after \eqref{eq:CM_dirac_recall}) satisfies the KO-dim-$6$
+\emph{real-structure} axioms --- its grading, anticommutation and
+$D^2$ are checked, its $J_{a,b}$ is not, and while the distance bound
+does not need it, the identification of the limit \emph{as} the tensor
+Camporesi--Higuchi spectral triple does.
 \end{theorem}
 
 \begin{proof}
