@@ -71,6 +71,47 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.9.4] - 2026-09-05
+
+**Trunk FULL-cert re-measure prep (PI direction: next `/qa` round is a FULL
+seeded trunk cert — "we're due for a re-measure").** No code or paper change;
+this readies the calibration instrument so the re-measure certifies the panel
+against today's defect distribution, not the historical one.
+
+### Changed
+
+- **`docs/qa/seed_defects.md`:** added the two **live-distribution** classes the
+  §3-historical catalog (S1–S9) never tested — **S10 mirror-staleness** (owner
+  strengthened, summary kept the weaker form; the DELTA #8 LARGE; catcher = the
+  new owner-moved synthesis dispatch) and **S11 restricted-evaluation /
+  suspiciously-clean** (a test passes because the evaluation object was
+  restricted; the Paper-24 `S=0` class; catcher = the new restricted-evaluation
+  mandate). Both are trunk-plantable and exercise exactly the two rules v5.9.3
+  added. Added a **re-measure-priority note**: a re-measure MUST include both
+  (not leave them to the random subset), because the standing calibration record
+  had been certifying sensitivity to S1–S9 while the live LARGEs were S10/S11.
+- **`qa.md`:** materiality/convergence step now says report findings **per
+  changed-locus per calibrated reviewer**, not raw counts — a raw drop across
+  runs of different scope (DELTA #7's 40 → #8's 5) is not convergence evidence.
+
+### Verified (trunk readiness — a standalone pre-check, not a `/qa` invocation)
+
+- **Deterministic layer 12/12 green on `--gate trunk`:** C5, C11, C13, C14, C15,
+  C16, C17, C18, C19, C20, C21 PASS scoped to trunk; C22 PASS corpus-wide (it is
+  baseline-global, does not take `--gate`). The trunk profile (Papers 0/1/7/32/38
+  + group3 synthesis) is unchanged since DELTA #7 — the recent churn was Paper 39
+  (group1, non-trunk) and gate tooling — so a FULL cert reviews a stable trunk.
+- `trunk.done.md` present and frozen (goalposts unchanged for the run).
+
+### Decisions (delegated by the PI, "do what you think is right")
+
+- **Version:** kept v5.9.3 as committed rather than re-numbering shipped history
+  to v5.10.0 for a label; the successful FULL cert is the natural moment to earn
+  the minor.
+- **C17 → front-matter extension: deferred** to its own fire-tested pass — a
+  gate-scope change right before a cert is the instability the GATE-SELF-AUDIT
+  rule warns against. Still owed.
+
 ## [v5.9.3] - 2026-09-05
 
 **QA-cycle meta-critique + process hardening.** After the DELTA #8 close, an
