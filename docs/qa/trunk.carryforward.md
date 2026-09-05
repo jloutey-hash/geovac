@@ -1477,6 +1477,52 @@ session:* directly from the definition, and against Paper 38's own internal
 witness — §2.1's dual-Coxeter Dirac is half the CH Dirac and its moment is
 **twice** the unit-S³ one, which is the same scaling in the same direction.
 
+### O.5c — the critique (2026-09-04): one sub-claim REFUTED, verdict still owed
+
+A critic agent was dispatched at the memo (fresh adversary, QA principle 2).
+**It was killed part-way by a session rate limit** and returned no verdict —
+only a fragment: *"the doubled-Dirac Pythagorean claim fails on truncated
+multipliers."* A fragment is not a verdict and is not recorded as one. But it
+is checkable, and the parent session checked it.
+
+**REFUTED: the memo's §3.2 claim that C₃⁽²⁾ = 1 and that Paper 39's √2 is a
+triangle-bound over-count.** The memo verified the Pythagorean identity
+‖A+B‖ = √(‖A‖²+‖B‖²) on 500 random pairs — but with *trivial outer factors*,
+`A = c(v)⊗σ₁⊗1`, `B = 1⊗σ₂⊗c(w)`. That is the shape of a **function's
+differential**, not of a truncated multiplier. The joint Leibniz terms for a
+genuine product element `T_a ⊗ 1₂ ⊗ T_b` are
+
+    A = [D_a, T_a] ⊗ σ₁ ⊗ T_b        B = T_a ⊗ σ₂ ⊗ [D_b, T_b]
+
+and the outer factors destroy the anticommutation the identity needs.
+Measured (parent session, 400 random self-adjoint quadruples per dimension):
+
+| shape | ‖AB+BA‖/(‖A‖‖B‖) | excess over Pythagorean | ratio to triangle |
+|:--|--:|--:|--:|
+| memo's (outer factors trivial) | 3e-16 | 0.00% | — |
+| true Leibniz, dim 2 | 1.532 | **+23.20%** | 1.4140 |
+| true Leibniz, dim 3 | 1.431 | **+20.96%** | 1.4139 |
+| true Leibniz, dim 4 | 1.475 | **+21.14%** | 1.3609 |
+
+The excess runs up to the triangle bound. **Paper 39's `rem:no_pythagorean`
+is right, its L3-T constant √2 is not loose, and the memo's "fatal for the
+√2" must not be applied.** Textbook case for the suspiciously-clean
+heuristic: a constant that came out exactly 1 did so because the test was
+restricted, not because the claim was strong.
+
+**Still standing, both independently verified in the parent session:** F1
+(the grading obstruction — γ = 0 on an odd-dimensional spin manifold, so
+Paper 39's displayed tensor Dirac is ill-formed) and F2 (the λ inversion).
+Note F1's repair is *not* thereby endorsed: whether Clifford doubling leaves
+the seminorm L3-T and L4-T were proved for is exactly what the killed critic
+was to answer, and the refutation above makes it sharper — if the doubled
+Dirac changes the seminorm, those lemmas are about a different operator.
+
+**Owed: re-dispatch the critic** (Opus resets 23:00 PT) on the memo's main
+verdict — the GO, the constant, and attack points 1, 3, 6, 7, which were
+never reached. Until then Paper 39's [CONDITIONAL] stands and nothing from
+the memo is applied.
+
 ### O.6 — Next
 
 Guard pass in isolation (O.5), then **DELTA #8, narrow**: code-tier on the

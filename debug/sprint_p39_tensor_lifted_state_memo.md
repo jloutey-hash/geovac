@@ -311,6 +311,19 @@ group action, the truncation, the state `ξ_ab` and the state spaces:
 `S(Op_a ⊗ 1₂ ⊗ Op_b) ≅ S(Op_a ⊗ Op_b)` affinely isometrically. The whole of
 §2 is unchanged.
 
+> **REFUTED 2026-09-04 (parent-session critique).** The claim in this
+> subsection that `C_3^(2) = 1` and that Paper 39's `sqrt2` is a triangle-bound
+> over-count is WRONG.  Its check used `A = c(v) (x) s1 (x) 1`,
+> `B = 1 (x) s2 (x) c(w)` -- trivial outer factors, i.e. the shape of a
+> FUNCTION'S DIFFERENTIAL, not of a truncated multiplier.  The true joint
+> Leibniz terms are `A = [D_a,T_a] (x) s1 (x) T_b` and
+> `B = T_a (x) s2 (x) [D_b,T_b]`;  the outer factors destroy the
+> anticommutation, and measured over 400 random quadruples per dimension the
+> terms fail to anticommute (ratio ~1.5) while `||A+B||` exceeds the
+> Pythagorean value by +21% to +23%, running up to the triangle bound
+> (ratio 1.414).  Paper 39's `rem:no_pythagorean` stands and L3-T's `sqrt2`
+> is not loose.  Nothing in this subsection is to be applied.
+
 **Impact on Paper 39's L3-T: fatal for the `√2`.** `C_3^(2) ↗ √2` came from
 applying the operator-norm *triangle* bound to the two Leibniz terms. On the
 true Clifford symbol the two terms **do** satisfy the Pythagorean identity —
