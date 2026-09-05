@@ -1104,6 +1104,68 @@ REGISTRY = [
         ],
     },
     {
+        "id": "p39-chirality-grading-on-s3",
+        "scope": "trunk group1",
+        "severity": "fail",
+        "retired": "2026-09-04 (DELTA #7, sub-agent finding F1, verified symbolically "
+                   "in the parent session).  Paper 39 described gamma_a as 'the "
+                   "chirality grading on L^2(S^3, Sigma)' and asserted "
+                   "{D_CH, gamma_a} = 0.  No such operator exists: a grading "
+                   "anticommuting with every generator of Cl(3) also anticommutes "
+                   "with the volume element omega = sigma1 sigma2 sigma3 = i I, which "
+                   "in odd dimension is CENTRAL, forcing gamma = 0.  Paper 38 ('KO-3 "
+                   "carries no chirality', 2026-09-03) and Paper 32 (2026-09-02) "
+                   "already said so;  the correction never reached Paper 39.  The "
+                   "displayed D_{a,b} is the even-x-odd product formula while the "
+                   "paper's KO arithmetic 3+3=6 is the odd-x-odd case.  Repair "
+                   "(Clifford doubling) is NAMED, NOT ADOPTED: whether L3-T and L4-T "
+                   "hold for it is open.",
+        "pattern": r"chirality grading on \$?L\^2\(\\?sthree"
+                   r"|gamma_a\$? is the chirality grading"
+                   r"|\\\{\\DCH\^\{\(a\)\}, \\gamma_a\\\} = 0[^\n]{0,40}$"
+                   r"|satisfies the KO-dim-6 chirality and real-structure axioms",
+        "exempt_if_nearby": r"(?!)",
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex":
+                "disclosed 2026-09-04 (DELTA #7); repair open",
+            "geovac/gh_convergence_tensor.py":
+                "disclosed 2026-09-04 (DELTA #7) at 4 loci; repair open",
+        },
+        "files": [
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "geovac/gh_convergence_tensor.py",
+        ],
+    },
+    {
+        "id": "p39-lambda-placement",
+        "scope": "trunk group1",
+        "severity": "fail",
+        "retired": "2026-09-04 (DELTA #7, sub-agent finding F2, verified two ways in "
+                   "the parent session).  The focal-length placement was inverted: "
+                   "gamma/lambda where it should be lambda*gamma.  D -> lambda^-1 D "
+                   "divides the Lipschitz seminorm by lambda, so the MK unit ball -- "
+                   "and every distance -- GROWS by lambda;  gamma is a first moment of "
+                   "the geodesic distance.  Internal witness: Paper 38 S2.1's "
+                   "dual-Coxeter Dirac is half the CH Dirac and its moment is TWICE "
+                   "the unit-S^3 one.  gh_convergence_tensor stated the error "
+                   "explicitly, conflating the seminorm's scaling with the moment's.",
+        "pattern": r"\\frac\{\\gamma_\{\\nmax[ab]\}\}\{\\lambda_[ab]\}"
+                   r"|gamma_\{\\nmax[ab]\}/\\lambda_[ab]"
+                   r"|gamma_\{n_[ab]\}\s*/\s*lambda_[ab]"
+                   r"|gamma_[ab]\s*/\s*lambda_[ab]"
+                   r"|lambda_[ab]\^\{-1\}\s*gamma",
+        "exempt_if_nearby": r"(?!)",
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex":
+                "corrected 2026-09-04 (DELTA #7)",
+            "geovac/gh_convergence_tensor.py": "corrected 2026-09-04 (DELTA #7)",
+        },
+        "files": [
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "geovac/gh_convergence_tensor.py",
+        ],
+    },
+    {
         "id": "sp-ratio-false-precision",
         "scope": "trunk group3",
         "severity": "fail",

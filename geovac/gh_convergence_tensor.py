@@ -24,6 +24,17 @@ Let
   - T_a (X) T_b denote the tensor-product spectral triple, with
         H_{a,b} = H_a (X) H_b
         D_{a,b} = D_a (X) I_b  +  gamma_a (X) D_b           (Connes-Marcolli)
+    NOTE 2026-09-04 [retracted 2026-09-04: p39-chirality-grading-on-s3]:
+    gamma_a does NOT EXIST.  S^3 is odd-dimensional and carries no chirality
+    grading:  a gamma anticommuting with every generator of Cl(3) also
+    anticommutes with the central volume element sigma1 sigma2 sigma3 = i I,
+    forcing gamma = 0 (verified symbolically; Paper 38 'KO-3 carries no
+    chirality', Paper 32 likewise).  The formula above is the even-x-odd
+    product;  the odd-x-odd case this module is in needs Clifford doubling.
+    That repair is NAMED, NOT ADOPTED -- whether the C_3^(2) and Berezin
+    estimates below survive it is OPEN, and they are what this module
+    computes.  Everything here is therefore reported for the operator as
+    printed, which is not a spectral triple.
         algebra = O_a (X) O_b  (operator-system tensor product)
     living at KO-dim 3 + 3 = 6 (Connes-Marcolli convention).
 
@@ -32,7 +43,7 @@ state-space Gromov-Hausdorff distance Lambda, the truncated tensor-product
 triples T_a (X) T_b converge to T_S3^a (X) T_S3^b as n_a, n_b -> infinity:*
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
-        <= C_3^{(2)} * 2 * max(lambda_a^{-1} gamma_{n_a}, lambda_b^{-1} gamma_{n_b})
+        <= C_3^{(2)} * 2 * max(lambda_a * gamma_{n_a}, lambda_b * gamma_{n_b})
         ->  0,
 
 conditionally on the reach_P named gap (Paper 39 thm:main status note,
@@ -654,7 +665,9 @@ def joint_lipschitz_constant(
 
     The Connes-Marcolli composed Dirac is
         D_{a,b} = D_a (X) I_b + gamma_a (X) D_b
-    (KO-dim 3 + 3 = 6).  For a simple tensor f (X) g, the commutator
+    (KO-dim 3 + 3 = 6;  gamma_a does not exist -- see the module header,
+    [retracted 2026-09-04: p39-chirality-grading-on-s3]).
+    For a simple tensor f (X) g, the commutator
     satisfies the Leibniz identity
         [D_{a,b}, M_{f (X) g}] = [D_a, M_f] (X) M_g + gamma_a M_f (X) [D_b, M_g].
 
@@ -702,7 +715,8 @@ def joint_lipschitz_seminorm_factorized(
     Uses shell-difference weighting on the joint Fock basis: in the
     truthful CH convention, [D, M]_{ab} = (n_a - n_b) M_{ab} on the
     scalar Fock basis (the chirality factor cancels in the difference).
-    The joint Dirac is D_{a,b} = D_a (X) I + gamma_a (X) D_b, so on
+    The joint Dirac is D_{a,b} = D_a (X) I + gamma_a (X) D_b (whose gamma_a
+    does not exist -- module header, [retracted 2026-09-04: p39-chirality-grading-on-s3]), so on
     simple tensor matrices the joint commutator splits.
 
     Args:
@@ -734,7 +748,13 @@ def joint_lipschitz_seminorm_factorized(
 
     # [I (X) D_b, B_a (X) B_b]_{(a,b),(a',b')}
     #     = (B_a)_{a,a'} * [D_b, B_b]_{b,b'}
-    # Note: gamma_a is +/- 1 chirality; its operator norm is 1 and it
+    # Note (2026-09-04 [retracted 2026-09-04: p39-chirality-grading-on-s3]):
+    # this reasons FROM gamma_a, which does not exist on S^3.  What the
+    # argument actually needs is only that the second-factor term carries a
+    # unitary of operator norm 1 -- true of the sigma_2 in the Clifford
+    # doubling too -- so the norm bookkeeping is expected to survive the
+    # repair;  that is an expectation, not a result.
+    # Original note: gamma_a is +/- 1 chirality; its operator norm is 1 and it
     # commutes with B_a (a multiplier on H_a).  The joint commutator
     # absorbing gamma_a is just the second tensor factor with a unit-norm
     # chirality factor in front, contributing the same operator norm
@@ -1116,19 +1136,28 @@ class TensorTunnelingPair:
         """Single-factor gamma rate for factor a (already lambda-rescaled)."""
         # The CH spectrum at focal length lambda_a is
         # |lambda_n| = (n + 1/2) / lambda_a (uniform rescaling).
-        # The Lipschitz seminorm scales as 1/lambda_a; the gamma rate
-        # propagates linearly.  So the lambda-aware rate is
-        # gamma_{n_a} / lambda_a.
-        return float(self.pair_a.gamma_rate_value) / float(self.lambda_a)
+        # CORRECTED 2026-09-04 [retracted 2026-09-04: p39-lambda-placement]: the
+        # Lipschitz seminorm scales as 1/lambda_a, so the MK unit ball and
+        # every distance scale as lambda_a -- and gamma is a first moment of
+        # the geodesic distance, hence lambda_a * gamma, not gamma / lambda_a.
+        # The two scalings are dual; the note below conflated them.  Internal
+        # witness: Paper 38 S2.1's dual-Coxeter Dirac is half the CH Dirac and
+        # its moment is TWICE the unit-S^3 one.  So the lambda-aware rate is
+        # lambda_a * gamma_{n_a}.
+        return float(self.lambda_a) * float(self.pair_a.gamma_rate_value)
 
     @property
     def gamma_b(self) -> float:
-        """Single-factor gamma rate for factor b (lambda-rescaled)."""
-        return float(self.pair_b.gamma_rate_value) / float(self.lambda_b)
+        """Single-factor gamma rate for factor b (lambda-rescaled).
+
+        lambda_b * gamma, not gamma / lambda_b -- see gamma_a
+        (corrected 2026-09-04, DELTA #7 F2).
+        """
+        return float(self.lambda_b) * float(self.pair_b.gamma_rate_value)
 
     def joint_gamma_bound(self) -> float:
         """Joint propinquity rate bound:
-            gamma_{joint} <= 2 * max(gamma_a/lambda_a, gamma_b/lambda_b).
+            gamma_{joint} <= 2 * max(lambda_a*gamma_a, lambda_b*gamma_b).
         """
         return joint_gamma_max_bound(self.gamma_a, self.gamma_b)
 
@@ -1146,7 +1175,7 @@ class TensorPropinquityBound:
     propinquity -- the dual-reach step is a named gap; see the module header.)
 
     Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)
-        <= C_3^{(2)} * 2 * max(gamma_a/lambda_a, gamma_b/lambda_b)
+        <= C_3^{(2)} * 2 * max(lambda_a*gamma_a, lambda_b*gamma_b)
         ->  0  as n_a, n_b -> infinity   (constant corrected 2026-09-04;
                                             see propinquity_bound_theorem).
 
@@ -1915,7 +1944,7 @@ def gh_tensor_theorem_statement() -> str:
         "distance Lambda:\n\n"
         "  Lambda(T_a (X) T_b, T_S3^a (X) T_S3^b)\n"
         "      <=  C_3^{(2)} * 2 "
-        "* max(gamma_{n_a}/lambda_a, gamma_{n_b}/lambda_b)\n"
+        "* max(lambda_a*gamma_{n_a}, lambda_b*gamma_{n_b})\n"
         "      ->  0  as  n_a, n_b -> infinity,\n\n"
         "where the joint Lipschitz comparison constant is the closed-form "
         "TRIANGLE bound\n\n"

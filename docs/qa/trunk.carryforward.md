@@ -1523,6 +1523,46 @@ verdict — the GO, the constant, and attack points 1, 3, 6, 7, which were
 never reached. Until then Paper 39's [CONDITIONAL] stands and nothing from
 the memo is applied.
 
+### O.5d — F1 disclosed, F2 corrected (2026-09-04, PM judgement)
+
+The PI left the disposition to me. Split by certainty:
+
+**F2 — CORRECTED.** Purely arithmetic, verified twice. `\gamma/\lambda`
+became `\lambda\gamma` at four Paper 39 displays (abstract,
+`eq:main_thm`, `eq:main_rate_intro`, `eq:L5_bound_T`) and five
+`gh_convergence_tensor` loci. **The gate then caught what the prose sweep
+missed:** `gamma_a` and `gamma_b` still *computed* `gamma_rate_value /
+lambda`, so the docstrings were right and the code was wrong — the
+corrected-the-owner-left-the-citer shape, inside a single file, found by the
+C16 entry registered minutes earlier. Now `lambda * gamma`; measured ratio
+2.000 at `lambda_a = 2` (was 0.5), and default-`lambda` values unchanged.
+
+**F1 — DISCLOSED, NOT REPAIRED.** A paper should not print an operator that
+provably does not exist, so the defect is stated at all four Paper 39 loci
+(the definition, `eq:anticomm` — whose identity is now noted as holding only
+*vacuously* — the `rem:offdiag-T` "truthful `D_{a,b}`" claim, and the
+theorem's status note) and at four more in `gh_convergence_tensor`, one of
+which reasons *from* `gamma_a`'s existence. Clifford doubling is **named and
+explicitly not adopted**; whether L3-T and L4-T survive it is recorded as
+open, since they were proved for the operator as printed. That question is
+what the killed critic was to settle.
+
+Both registered in C16 (`p39-chirality-grading-on-s3`,
+`p39-lambda-placement`), each proven two-way, marker-only exemptions.
+
+*One self-inflicted defect in this pass, caught by the gate:* my F1 text used
+`\Dop`, a Paper 38 macro undefined in Paper 39, and broke the build at two
+loci. Fixed to `\DCH`; the compile gate is what surfaced it.
+
+*Three tests pinned the inverted direction* and failed on the correction --
+they said so in their own words ("Joint bound at lambda > 1 is smaller").
+Rewritten to assert the direction, not just a magnitude;  at lambda = 2 the
+two conventions differ by a factor of 4, and in the distinct-focal-length
+case *which factor dominates the max* flips. Fire-testing them then exposed a
+gap in my own guard: reverting the **b** factor did not fire, because every
+test used lambda_b = 1.0, where multiplying and dividing coincide. Fixed with
+lambda_b = 3.0; both directions now fire.
+
 ### O.6 — Next
 
 Guard pass in isolation (O.5), then **DELTA #8, narrow**: code-tier on the

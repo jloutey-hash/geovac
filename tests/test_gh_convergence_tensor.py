@@ -392,29 +392,38 @@ class TestL5TPropinquity:
         assert v_full == pytest.approx(2 * v_fact, rel=1e-5)
 
     def test_lambda_rescaling(self):
-        """Joint bound at lambda > 1 is smaller (uniform 1/lambda factor)."""
+        """Joint bound at lambda > 1 is LARGER (uniform lambda factor).
+
+        REJECTS: the docstring this replaces, "Joint bound at lambda > 1 is
+        smaller (uniform 1/lambda factor)" [retracted 2026-09-04: p39-lambda-placement].  A sphere
+        of radius lambda has distances lambda times longer, so the
+        Gromov-Hausdorff bound between its state spaces scales up, not down.
+        """
         b_unit = compute_tensor_propinquity_bound(
             2, 2, lambda_a=1.0, lambda_b=1.0, gamma_prec=15,
         )
         b_two = compute_tensor_propinquity_bound(
             2, 2, lambda_a=2.0, lambda_b=2.0, gamma_prec=15,
         )
-        # gamma_a/2 < gamma_a, so propinquity_bound also halved.
         assert b_two.propinquity_bound == pytest.approx(
-            b_unit.propinquity_bound / 2, rel=1e-5,
+            2.0 * b_unit.propinquity_bound, rel=1e-5,
         )
+        assert b_two.propinquity_bound > b_unit.propinquity_bound
 
     def test_distinct_focal_lengths(self):
         """Joint bound with distinct lambda_a != lambda_b is well-defined."""
         b = compute_tensor_propinquity_bound(
             2, 3, lambda_a=2.0, lambda_b=1.0, gamma_prec=15,
         )
-        # gamma_a (lambda-rescaled) = gamma_2 / 2
-        # gamma_b (lambda-rescaled) = gamma_3 / 1
-        # max would be gamma_3 if gamma_3 > gamma_2/2; else gamma_2/2
-        # gamma_2 ~ 2.075, gamma_3 ~ 1.610.  gamma_2/2 = 1.0375 < gamma_3 = 1.610.
-        # So bound = C_3_fact * max(1.0375, 1.610) = 1.610.
-        assert b.propinquity_bound == pytest.approx(1.610, rel=0.01)
+        # gamma_a (lambda-rescaled) = 2 * gamma_2 ;  gamma_b = 1 * gamma_3
+        # gamma_2 ~ 2.0746, gamma_3 ~ 1.6101, so 2*gamma_2 = 4.1491 > 1.6101
+        # and the bound is C_3_fact * max(...) = 4.1491.
+        # REJECTS the inverted placement [retracted 2026-09-04: p39-lambda-placement], which gave
+        # max(gamma_2/2, gamma_3) = 1.610 -- and note WHICH FACTOR DOMINATES
+        # flips with the convention, so this is a direction test, not a
+        # magnitude one.
+        assert b.propinquity_bound == pytest.approx(4.1491, rel=0.01)
+        assert b.gamma_a > b.gamma_b
 
 
 # ---------------------------------------------------------------------------
@@ -438,10 +447,26 @@ class TestTensorTunnelingPair:
         assert pair.joint_dim == pair.pair_a.op_sys.dim_H * pair.pair_b.op_sys.dim_H
 
     def test_gamma_a_lambda_rescaling(self):
-        pair = TensorTunnelingPair.build(2, 2, lambda_a=2.0, lambda_b=1.0, gamma_prec=15)
-        # gamma_a should be the unit-lambda gamma divided by 2
-        expected_gamma_a_unit = pair.pair_a.gamma_rate_value
-        assert pair.gamma_a == pytest.approx(expected_gamma_a_unit / 2.0, rel=1e-9)
+        """REJECTS: gamma / lambda, the inverted placement.
+
+        Until 2026-09-04 this asserted "the unit-lambda gamma divided by 2"
+        [retracted 2026-09-04: p39-lambda-placement] -- the defect, pinned.  D -> lambda^-1 D
+        divides the Lipschitz seminorm by lambda, so the MK unit ball and
+        every distance GROW by lambda, and gamma is a first moment of the
+        geodesic distance.  At lambda = 2 the two conventions differ by a
+        factor of 4, so this equality excludes the old one outright.
+        """
+        # lambda_b is deliberately neither 1 nor equal to lambda_a: at
+        # lambda = 1 multiplying and dividing coincide, so a b-factor pinned at
+        # 1.0 leaves that factor's direction untested -- which is exactly what
+        # a fire-test of the b-side reversion exposed (DELTA #7 guard pass).
+        pair = TensorTunnelingPair.build(2, 2, lambda_a=2.0, lambda_b=3.0, gamma_prec=15)
+        unit_a = float(pair.pair_a.gamma_rate_value)
+        unit_b = float(pair.pair_b.gamma_rate_value)
+        assert pair.gamma_a == pytest.approx(2.0 * unit_a, rel=1e-9)
+        assert pair.gamma_b == pytest.approx(3.0 * unit_b, rel=1e-9)
+        assert pair.gamma_a > unit_a          # direction, not just magnitude
+        assert pair.gamma_b > unit_b
 
     def test_invalid_n_raises(self):
         with pytest.raises(ValueError):

@@ -91,7 +91,7 @@ with explicit qualitative-rate bound
    \Lambda(\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb},
             \Tcal_{\sthree}^{\lambda_a} \otimes \Tcal_{\sthree}^{\lambda_b})
    \le C_3^{(2)} \cdot 2 \cdot
-        \max(\gamma_{\nmaxa}/\lambda_a,\, \gamma_{\nmaxb}/\lambda_b),
+        \max(\lambda_a \gamma_{\nmaxa},\, \lambda_b \gamma_{\nmaxb}),
 \)
 where $C_3^{(2)} \le \sqrt{2}$ is a closed-form Lipschitz comparison
 constant from the (tight) triangle bound on the Connes--Marcolli joint
@@ -205,7 +205,24 @@ with Connes--Marcolli graded composed Dirac
    D_{a,b} \;=\; \lambda_a^{-1} \DCH^{(a)} \otimes I_b
                 \;+\; \gamma_a \otimes \lambda_b^{-1} \DCH^{(b)},
 \end{equation}
-where $\gamma_a$ is the chirality grading on $L^2(\sthree, \Sigma)$.
+where $\gamma_a$ was described until 2026-09-04 as ``the chirality grading
+on $L^2(\sthree, \Sigma)$''. \textbf{No such operator exists} [retracted 2026-09-04: p39-chirality-grading-on-s3]:\
+a grading anticommuting with every generator of $\mathrm{Cl}(3)$ also
+anticommutes with the volume element
+$\omega = \sigma_1\sigma_2\sigma_3 = i\,I$, which in odd dimension is
+\emph{central}, so $\gamma\omega = -\omega\gamma$ and $\gamma\omega =
+\omega\gamma$ together force $\gamma = 0$. Paper~38 states the same
+(``KO-$3$ carries no chirality'', 2026-09-03) and Paper~32 has carried it
+since 2026-09-02;\ the correction did not reach this paper. The displayed
+$D_{a,b}$ is the \emph{even}\,$\otimes$\,odd product formula, while this
+paper's KO arithmetic $3+3=6$ is the odd\,$\otimes$\,odd case, whose standard
+construction requires Clifford doubling
+($\Hilb_a \otimes \C^2 \otimes \Hilb_b$,
+$D = \DCH^{(a)}\otimes\sigma_1\otimes 1 + 1\otimes\sigma_2\otimes\DCH^{(b)}$).
+\textbf{That repair is named, not adopted}, and \emph{whether
+Lemmas~\ref{lem:L3-T} and~\ref{lem:L4-T} hold for it is open} --- they were
+proved for the operator displayed here. See the status note to
+Theorem~\ref{thm:main}.
 The combined object has KO-dimension $3 + 3 = 6 \pmod 8$. Truncate
 each factor independently at cutoffs $\nmaxa, \nmaxb$ and form the
 tensor-product truncated triple $\Tcal_{\nmaxa} \otimes \Tcal_{\nmaxb}$.
@@ -221,8 +238,8 @@ Gromov--Hausdorff distance, with bound
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
    \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot 2 \cdot
-   \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
-                \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr),
+   \max\!\Bigl(\lambda_a\,\gamma_{\nmaxa},\,
+                \lambda_b\,\gamma_{\nmaxb}\Bigr),
 \end{equation}
 where $\gamma_n$ is the central spectral Fej\'er moment of
 \cite{loutey_paper38} satisfying $\gamma_n = (4/\pi) \log n / n +
@@ -374,7 +391,11 @@ in the standard Connes--Marcolli graded tensor product convention
    \;=\; \bigl(\DCH^{(a)} \gamma_a + \gamma_a \DCH^{(a)}\bigr) \otimes
          \DCH^{(b)} \;=\; 0,
 \end{equation}
-since $\{\DCH^{(a)}, \gamma_a\} = 0$ on the unit-round $\sthree$ Dirac.
+since $\{\DCH^{(a)}, \gamma_a\} = 0$ on the unit-round $\sthree$ Dirac
+--- an identity that holds only \emph{vacuously}, $\gamma_a$ being
+necessarily $0$ [retracted 2026-09-04: p39-chirality-grading-on-s3] (see the note after
+\eqref{eq:CM_dirac_recall}), so this structural identity carries no content
+as printed.
 This anticommutation of the two \emph{Dirac} summands is what gives the
 clean two-term graded Leibniz rule \eqref{eq:joint_leibniz} (it does
 \emph{not}, however, make the two resulting \emph{commutator} terms
@@ -413,8 +434,8 @@ statement:
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
    \;\le\; C_3^{(2)}(\nmaxa, \nmaxb) \cdot 2 \cdot
-            \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
-                        \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr),
+            \max\!\Bigl(\lambda_a\,\gamma_{\nmaxa},\,
+                        \lambda_b\,\gamma_{\nmaxb}\Bigr),
 \end{equation}
 with
 \begin{equation}\label{eq:C3_2_full}
@@ -437,6 +458,15 @@ $\max(\gamma_{\nmaxa}, \gamma_{\nmaxb}) = O(\log \nmax / \nmax)$
 inherited from the single-factor central Fej\'er moment
 \cite{loutey_paper38}. The asymptotic constant $4/\pi$ on each factor
 is preserved in the joint rate.
+
+\emph{Focal-length placement, corrected 2026-09-04} [retracted 2026-09-04: p39-lambda-placement]\emph{:} the
+rate reads $\lambda\gamma$, not $\gamma/\lambda$ as printed until that date.
+$D \mapsto \lambda^{-1}D$ divides the Lipschitz seminorm by $\lambda$, so
+the unit ball --- and every Monge--Kantorovich distance --- grows by $\lambda$;\
+$\gamma$ is a first moment of the geodesic distance and scales with it. The
+internal witness is Paper~38~\S2.1:\ its dual-Coxeter Dirac is half the
+Camporesi--Higuchi Dirac and its moment is \emph{twice} the unit-$\sthree$
+one.
 
 \emph{Status (2026-09-04).} The proof given in this paper
 (Lemma~\ref{lem:L5-T}) is the approximation-pair assembly. Its height
@@ -545,10 +575,13 @@ in the SDP definition of the joint truncated Connes distance.
 
 \begin{remark}\label{rem:offdiag-T}
 As in~\cite[Remark~3.2]{loutey_paper38}, the offdiagonal extension is a
-metric-only device for finite-distance verification; the truthful
-$D_{a,b} = \DCH^{(a)} \otimes I + \gamma_a \otimes \DCH^{(b)}$ is what
-satisfies the KO-dim-6 chirality and real-structure axioms and is what
-underlies Lemmas~\ref{lem:L3-T}--\ref{lem:L4-T}.
+metric-only device for finite-distance verification; the
+$D_{a,b} = \DCH^{(a)} \otimes I + \gamma_a \otimes \DCH^{(b)}$ printed here
+is what Lemmas~\ref{lem:L3-T}--\ref{lem:L4-T} are proved for. It does
+\emph{not} satisfy the KO-dim-6 axioms, and indeed cannot be realised:\
+$\gamma_a = 0$ [retracted 2026-09-04: p39-chirality-grading-on-s3] (note after
+\eqref{eq:CM_dirac_recall}). What those two lemmas establish for the
+repaired operator is open.
 \end{remark}
 
 % ---------------------------------------------------------------------
@@ -872,8 +905,8 @@ proof), the bound
                 \Tcal_{\sthree}^{\lambda_a} \otimes
                 \Tcal_{\sthree}^{\lambda_b}\bigr)
    \;\le\; C_3^{(2)} \cdot 2 \cdot
-            \max\!\Bigl(\frac{\gamma_{\nmaxa}}{\lambda_a},\,
-                        \frac{\gamma_{\nmaxb}}{\lambda_b}\Bigr).
+            \max\!\Bigl(\lambda_a\,\gamma_{\nmaxa},\,
+                        \lambda_b\,\gamma_{\nmaxb}\Bigr).
 \end{equation}
 \end{lemma}
 
