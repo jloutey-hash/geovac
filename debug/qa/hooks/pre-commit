@@ -1,0 +1,64 @@
+#!/bin/sh
+# GeoVac pre-commit -- fast deterministic QA gates at the POINT OF INTRODUCTION.
+#
+# Why this exists (meta-critique of the /qa cycle, 2026-09-05): a large fraction
+# of each DELTA run's yield was defects the PREVIOUS remediation introduced --
+# eaten LaTeX escapes (\ref -> CR+ef, compiles clean, ref silently vanishes),
+# broken macros, unevaluated f-strings, syntax errors. A standing "no heredoc
+# backslashes" rule was violated ~4x under time pressure, so discipline alone is
+# not a control. These gates already exist and run in seconds; firing them at
+# commit time collapses the corruption-churn category to zero before it ever
+# costs a /qa reviewer. It is a FIRST line, not the certification -- the full
+# corpus-wide C16/C17 and the LLM panel still run in /qa.
+#
+# Blocking checks (all green corpus-wide as of install; a hook that starts red
+# just trains --no-verify):
+#   * C19  check_latex_escapes.py  -- eaten-escape corruption (papers, whole
+#          corpus; the class pdflatex CANNOT catch because it compiles clean).
+#   * C16  check_retracted_terms.py --gate <group>  -- resurrected retracted
+#          claim (scoped to the changed paper groups; whole-corpus C16 is slow).
+#   * C17  check_headline_numbers.py --gate <group>  -- wrong headline value.
+#   * py_compile on every staged .py -- the f-string / syntax / test-docstring
+#          corruption class C19 (papers only) does not cover.
+#
+# Source of record: debug/qa/hooks/pre-commit (tracked).
+# Install / re-install: cp debug/qa/hooks/pre-commit .git/hooks/pre-commit
+# Genuine emergency bypass: git commit --no-verify
+set -u
+
+FAIL=0
+
+# run LABEL CMD... -- run a check, capture combined output, report + flag on nonzero
+run() {
+	label=$1
+	shift
+	if ! out=$("$@" 2>&1); then
+		printf '\n--- PRE-COMMIT BLOCK [%s] ---\n%s\n' "$label" "$out" >&2
+		FAIL=1
+	fi
+}
+
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+tex=$(printf '%s\n' "$staged" | grep -E '^papers/.*\.tex$' | grep -v '^papers/archive/')
+py=$(printf '%s\n' "$staged" | grep -E '\.py$')
+
+if [ -n "$tex" ]; then
+	run "C19 eaten-escape" python debug/qa/check_latex_escapes.py
+	groups=$(printf '%s\n' "$tex" | sed -E 's#^papers/([^/]+)/.*#\1#' | sort -u)
+	for g in $groups; do
+		run "C16 retracted-term (scope $g)" python debug/qa/check_retracted_terms.py --gate "$g"
+		run "C17 headline-number (scope $g)" python debug/qa/check_headline_numbers.py --gate "$g"
+	done
+fi
+
+if [ -n "$py" ]; then
+	for f in $py; do
+		[ -f "$f" ] && run "py_compile $f" python -m py_compile "$f"
+	done
+fi
+
+if [ "$FAIL" -ne 0 ]; then
+	printf '\nCommit blocked by GeoVac pre-commit gates. Fix the above,\nor use --no-verify only for a genuine emergency.\n' >&2
+	exit 1
+fi
+exit 0

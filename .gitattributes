@@ -1,0 +1,5 @@
+# Keep executable shell hooks LF: a CRLF shebang (#!/bin/sh + CR) breaks the
+# interpreter when the tracked source is checked out on Windows autocrlf and
+# reinstalled into .git/hooks/. Source of record for the pre-commit hook is
+# debug/qa/hooks/pre-commit.
+debug/qa/hooks/* text eol=lf

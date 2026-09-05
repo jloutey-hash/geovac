@@ -71,6 +71,77 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.9.3] - 2026-09-05
+
+**QA-cycle meta-critique + process hardening.** After the DELTA #8 close, an
+independent Opus methodologist (fresh, not a fork) was dispatched to critique
+the QA-remediation *process* itself — the strengthening-staleness gap, the
+remediation churn, over/under-engineering, reviewer-trust decay, and any defect
+class the 22 criteria do not look at. PI accepted the validated recommendation
+set. Changes this entry:
+
+### Added
+
+- **`debug/qa/hooks/pre-commit` (tracked) + installed to `.git/hooks/`.** Runs
+  the fast deterministic gates at the POINT OF INTRODUCTION: C19 (eaten-escape,
+  whole corpus — the class that compiles clean so pdflatex cannot catch it),
+  C16/C17 scoped to the changed paper groups (whole-corpus C16 is slow), and
+  `py_compile` on every staged `.py` (the f-string/syntax class C19 does not
+  cover). All four are green corpus-wide at install, so the hook does not
+  false-block (a hook that starts red just trains `--no-verify`). Fire-tested
+  both directions: blocks planted corruption (exit 1, both classes), passes
+  clean files (exit 0) — and it caught a real CR-corruption introduced by
+  backslash-halving in the *demo command itself*, which is exactly the churn
+  class it exists to stop. **Rationale (measured):** a large fraction of each
+  DELTA's yield was defects the previous remediation introduced; the standing
+  no-heredoc-backslashes rule was violated ~4x under time pressure, so
+  discipline alone is not a control. Firing the existing seconds-long gates at
+  commit time collapses the corruption-churn category before it costs a `/qa`
+  reviewer.
+
+### Changed (QA gate + agent protocol)
+
+- **`qa.md`:** the "suspiciously-clean heuristic" is **promoted to the
+  restricted-evaluation mandate** — a *required, counterfactual* step for the
+  `code-reviewer` (for every exactly-0 / exactly-invariant / exactly-a-named-
+  constant result, enumerate what the evaluation object excludes and exhibit the
+  claim on the unrestricted object), because the meta-critique found this class —
+  the one that voids a keystone silently (Paper 24 `S=0` for four months) — was
+  owned by no gate and no dimension, i.e. caught only by luck.
+- **`qa.md` DELTA run shape:** added the **owner-moved dispatch rule** — a diff
+  that moves any paper's tier / theorem / registered headline MUST add a
+  synthesis-vs-moved-owner reviewer, even for an unchanged synthesis. This is
+  the near-term carry for the mirror-staleness class (DELTA #8's only LARGE);
+  the meta-critique correctly showed a `\cite`-graph enumerator would
+  reintroduce the parse-time, spelling-defeatable enumeration `cited_by` was
+  built to escape.
+- **`qa.md` C16 bullet:** documented the **mirror direction** (owner
+  *strengthens*, citer keeps the weaker form) as invisible to C16 + `cited_by`,
+  with the durable fix = **inverting the §13.8 `rests on:` edge** (declared at
+  authoring time, prose-blind, symmetric). Covers only dependencies authored
+  after the edge set fills — 0 `rests on:` rows exist today — so the dispatch
+  rule carries it for now.
+- **`.claude/agents/code-reviewer.md`:** added step 4a, the restriction-audit
+  mandate above, as an explicit required step.
+
+### Notes for the PI
+
+- **Versioning:** patch-bumped per the default, but this changes the QA gate and
+  the agent protocol, which the version rule lists as minor-worthy — flag it as
+  arguably **v5.10.0**, your call.
+- **Meta-critic as an instrument:** high value (it caught a real flaw in the
+  PM's own proposed fix and correctly deflated the "40 -> 5 = convergence"
+  read as a scope artifact), but it made two stale-snapshot errors — its
+  flagship "H < 0.1%" front-matter example was already corrected 2026-09-03, and
+  its `rests on:` near-term fix rests on an empty edge set. Lesson: treat a
+  meta-critic's specific factual claims as leads to verify, not findings.
+- **Deferred, still owed (PI calls):** re-seed with the two live classes
+  (mirror-staleness, restricted-evaluation) added to `docs/qa/seed_defects.md`
+  — our own "re-measure when a miss surfaces some other way" trigger has fired
+  every delta since #2; extend C17 scope to the front-matter docs (CLAUDE.md /
+  INDEX / validation_benchmarks); and report findings-per-changed-locus-per-
+  reviewer rather than raw counts.
+
 ## [v5.9.2] - 2026-09-05
 
 **/qa trunk DELTA #8 = DEFECTS, remediated.** Unseeded, on the Paper 39 discharge arc (b68c711..HEAD). Three Opus reviewers (claims/code/synthesis); deterministic layer 13/13 PASS on trunk and group1 before dispatch. Record: carryforward Part P.
