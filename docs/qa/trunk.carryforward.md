@@ -1786,3 +1786,37 @@ All 9 genuine SMALL defects fixed. **P38 (4):** L5 abstract contribution marked 
 Compile PASS (group1); C19 clean; 12 deterministic gates PASS on trunk.
 
 **Next.** The v5.9.5 remediation is material-clean, so **FULL #6 (the certifying run) is unlocked** — the path to the first PASS of this arc. The v5.9.6 NIT caveats are fresh NIT-tier text; FULL #6 reviews them in the ordinary course. Standing lesson reinforced: **register the class and let the gate enumerate the loci** — a narrow pattern + a single-locus fix is how the churn regenerates, and it regenerated here in my own hand.
+
+---
+
+## Part S -- /qa trunk FULL run #6 (2026-09-05), unseeded (certifying), PI-invoked
+
+**Verdict: FAIL.** The certifying run -- NOT a PASS. 11 reviewers (4 code, 3 claims, 2 citation, 1 synthesis) whole-target; deterministic 12/12 PASS; completeness-critic deferred to FULL #7 (pre-PASS insurance, moot for a definite FAIL). Unseeded; standing calibration = FULL #5 (10/12, 0 FP). C10 compile PASS.
+
+### S.1 -- Findings: 2 LARGE + 6 SMALL, ALL the retracted/refuted-claim-left-live class
+- **LARGE, P7 L127:** verbatim retracted 'recovering the exact Coulomb degeneracy' live in the body, contradicting its own next sentence. ESCAPED C16 on a +-5-line-window quirk: a [retracted: sp-splitting-aliasing-mechanism] marker 4 lines up (L123) shelters a DIFFERENT sub-claim within the window, and exempt_if_nearby=(?!) means the marker matches the *entry*, not the *claim instance*. Instrument defect. [CLAIMS-A]
+- **LARGE, P32 L1453:** describes Paper 39's *refuted* Pythagorean-height / five-lemma factor-by-factor route as the live proof of the tensor result -- the route Paper 39's discharge retired (height leg refuted; superseded by the lifted-state route, constant 1). A genuine **cited_by miss**: P32's argument rests on Paper 39's proof route; the discharge changed it; the dependent locus survived. Headline convergence (state-space GH) unaffected. [CLAIMS-B]
+- **SMALL:** P1 L228 'is recovered' (reworded withdrawn reading; escaped the pattern) [CLAIMS-A]; P38 Outline L313 L5 zombie ('proves the five lemmas ... Lemma L5 the assembly') [CLAIMS-C]; P32 section 6.6 L7152 Lorentzian structural-reading overstates the signature-blind closure as operator-level unification (verdict labels caveated in v5.9.6, prose paragraph missed) [CLAIMS-B]; P32 L5400 Forced-Count proof-sketch 'annihilates the Majorana block entirely' (false; contradicts its own correction 3 lines down + the rank-16 test) [CODE-C AF-1]; leimbach_vs2024 title drops 'Low-Dimensional' [CITE-B]; P32 Q5' middle body (~25 remarks) untiered + debug/-only backing -- the G2 provenance gap, two-route [CODE-C AF-2 + CLAIMS-B].
+
+### S.2 -- What HELD (the mathematics is sound)
+Every keystone independently re-derived: WH1/thm:main unconditional (state-space GH, C7 clean); 4/pi to 1e-31 + doubling (2/pi decoy excluded); Forced-Count 32 full-axiom (retired-260 guarded, C8 clean); spectral triple; block spectrum; the 18 symbolic proofs. **Restricted-evaluation mandate PASSED across all four code reviewers** -- every dangerous clean number (E_0=kappa*lambda, S=0/SM disjoint-support, sigma_2pi=id, lambda_max->8) is DISCLOSED as by-construction/compact-flow, not lurking. K-tripwire clean (all loci Observation). Citations 0 WRONG. No hard-prohibition touch.
+
+### S.3 -- The key process finding: delta-blindness to pre-existing zombies
+DELTA #9 returned CLEAN-DELTA; FULL #6 the same day found 2 LARGE. Not a contradiction: **a delta verifies only the diff.** The FULL #6 zombies (P7 L127, P32 L1453, P38 Outline, P32 L5400) were never in any recent diff -- they sat through FULL #5 (whose reviewers missed them) until FULL #6's whole-target enumeration + the middle-body mandate reached them. **'Clean delta' != certifiable corpus.** Only a FULL run reaches the pre-existing surface -- which is why the run-shapes rule says only a FULL run can PASS. Corollary for the arc: the long DELTA chain (#1..#9) verified each remediation but could never certify the whole; the FULL was always where the pre-existing tail would surface.
+
+### S.4 -- Two instrument defects the panel exposed (fix in remediation)
+1. **C16 +-5-window escape.** exempt_if_nearby matches the ENTRY, and the +-WINDOW lets a marker on one sub-claim shelter a verbatim live instance of the same entry nearby (P7 L123 marker vs L127 live phrase). Fix: require the marker on the matched span's own line (or narrow the window); re-fire-test.
+2. **Paper-39 -> Paper-32 cited_by miss.** The Paper 39 discharge retired the (B,P) Pythagorean route but never declared Paper 32 as a dependent; P32 L1453 kept the refuted mechanism. Fix: add P32 to the relevant C16 entry cited_by; register the refuted-route phrasing.
+
+### S.5 -- Also surfaced
+NITs: P7 abstract sign/convention (PSD graph Laplacian vs -(n^2-1) limit); code-docstring gearing stale; cited_by stamp lag ('review owed DELTA #8'); P32 test-count staleness; P38 code-fidelity (plancherel band alias, disclosed non-load-bearing). UNVERIFIABLE (PM primary-source, not blocking): Dabrowski-Dossena eq/table pointers (argument does not depend on them; ar5iv sec-4.1-vs-4.2 tension); Camporesi-Higuchi 1996 title (DOI resolves, physics matches, paywalled); P38 C_3-all-ranks vs Paper 40 sec 3.3. UPGRADE (two-way): P1 Rydberg N=-2[T+,T-]=n -> [INTERNAL THEOREM] (exact identity, prose understates).
+
+### S.6 -- Remediation plan (gate-first, per class)
+1. 'recover*-Coulomb-degeneracy' class (P7 L127, P1 L228): widen C16, fix both, **fix the +-5-window gate defect**.
+2. P32 L1453 Paper-39 refuted-mechanism: rewrite to the lifted-state route; register the refuted phrasing in C16; add P32 to Paper 39's cited_by.
+3. P38 Outline L313 L5 zombie: widen the C16 L5 pattern (was too narrow at v5.9.5), sweep all L5-assembly loci.
+4. P32 sec 6.6 L7152 Lorentzian prose: extend the signature-blind caveat to the paragraph.
+5. P32 L5400 Forced-Count proof-sketch: fix the false 'annihilates the Majorana block' clause.
+6. leimbach title: restore 'Low-Dimensional'.
+7. P32 Q5' untiered middle (~25 remarks): add inline tiers + repoint debug/ citations -- the substantial sub-task (G2); may warrant its own focused pass.
+Then DELTA on the remediation; a clean delta unlocks FULL #7. Owed to PI: the 3 UNVERIFIABLE primary-source checks, the Rydberg upgrade decision.

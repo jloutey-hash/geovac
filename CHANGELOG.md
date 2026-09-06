@@ -71,6 +71,23 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.9.7] - 2026-09-05
+
+**/qa trunk FULL run #6 (certifying) = FAIL.** PI-invoked, unseeded. 11 reviewers whole-target + 12/12 deterministic. NOT a PASS. Record: carryforward Part S.
+
+### Verdict: FAIL -- 2 LARGE + 6 SMALL, all the retracted/refuted-claim-left-live class
+
+- LARGE: P7 L127 verbatim 'recovering the exact Coulomb degeneracy' (escaped C16 on a +-5-window quirk); P32 L1453 describes Paper 39's REFUTED Pythagorean/five-lemma route as live (a genuine cited_by miss -- the discharge changed Paper 39's proof, the dependent survived).
+- SMALL: P1 L228 'is recovered'; P38 Outline L5 zombie; P32 section 6.6 Lorentzian overstatement; P32 L5400 Forced-Count 'annihilates the Majorana block' (false); leimbach title drift; P32 Q5' untiered middle body (G2 provenance gap, two-route).
+
+### What held
+
+The mathematics is SOUND: every keystone independently re-derived (WH1/thm:main, 4/pi to 1e-31, Forced-Count 32, block spectrum, 18 proofs); the restricted-evaluation mandate PASSED across all four code reviewers (every dangerous clean number disclosed, not lurking); K-tripwire clean; citations 0 WRONG; C7/C8 clean. The FAIL is entirely the prose-zombie class.
+
+### Key process finding
+
+DELTA #9 was CLEAN-DELTA but FULL #6 found 2 LARGE -- a delta verifies only the diff; the zombies were never in a recent diff and sat through FULL #5 until FULL #6's whole-target enumeration + middle-body mandate reached them. 'Clean delta' != certifiable corpus; only a FULL run reaches the pre-existing surface. Two instrument defects exposed: the C16 +-5-window escape and the Paper-39->32 cited_by miss (both fixed in remediation).
+
 ## [v5.9.6] - 2026-09-05
 
 **/qa trunk DELTA #9 = CLEAN-DELTA.** Unseeded, on the v5.9.5 remediation diff. Two reviewers (claims on the 9 remediation loci; owner-moved synthesis) + deterministic layer 12/12 PASS. Standing calibration = FULL #5 (10/12, 0 FP). Record: carryforward Part R.
