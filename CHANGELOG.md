@@ -71,6 +71,20 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.10.1] - 2026-09-05
+
+**/qa trunk DELTA #10 = DEFECTS (first claim-impact run).** The new semantic-diff discipline paid off immediately. Record: carryforward Part U.
+
+### Trunk items fixed
+
+- P1 L246-248 (LARGE, two-route): 'faithfully reproduces the Coulomb degeneracy' -- a 'reproduces' paraphrase (and hard-wrapped) that the v5.10.0 'recover'-keyed sweep missed; reworded to a denial. Lesson: topical sweeps must be conceptual + a READ, not a per-line keyword grep.
+- P32 L1459 (NIT): abandoned-route bound constant 2, not sqrt2 (sqrt2 = C_3^(2)); per Paper 39.
+Trunk clean after these.
+
+### GROUP1 impact-set cluster surfaced by the claim-impact reviewer (owed, its own pass)
+
+Reading the IMPACT SET (not the diff), the reviewer found the L5-withdrawal and Lorentzian-descope never reached their citers/abstracts: group1 synthesis SS L5 (refuted L5 as 'completing the proof' + false height_P=0); P42/P43 abstracts overstate the withdrawn finite-cutoff Lorentzian closure; five-lemma echoes across P44/P42/P47/P51/field-guide; P40 cross-manifold future-work cites the abandoned route. Almost all group1 (non-trunk) -- a focused group1 remediation. This is the proof-of-value for the semantic-diff protocol: no byte-diff would reach it.
+
 ## [v5.10.0] - 2026-09-05
 
 **Semantic-diff DELTA (protocol evolution) + FULL #6 remediation.** PI-directed minor bump. The FULL #6 FAIL exposed that a byte-scoped delta cannot certify a corpus; the DELTA is redefined as a claim-impact / semantic diff, and all FULL #6 findings + two instrument defects are remediated. Record: carryforward Part T.

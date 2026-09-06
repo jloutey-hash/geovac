@@ -22,6 +22,7 @@
 > | FULL #5 | 2026-09-05 | FAIL (seeded re-measure; 10/12 seeds, 0 FP; 9 MATERIAL-SMALL) |
 > | DELTA #9 | 2026-09-05 | CLEAN-DELTA (v5.9.5 remediation material-clean; 3 NITs swept) |
 > | FULL #6 | 2026-09-05 | FAIL (certifying; 2 LARGE + 6 SMALL) -> remediated v5.10.0 (claim-scope, gate-first) |
+> | DELTA #10 | 2026-09-05 | DEFECTS (first claim-impact run) -> trunk items fixed v5.10.1; group1 cluster owed |
 >
 > **No run has produced PASS.** Only a FULL run can, and the last four FULL
 > runs each found material defects — several *introduced by the previous

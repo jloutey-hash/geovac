@@ -1849,3 +1849,24 @@ Verification: C16 trunk + group1 PASS; 12 deterministic gates PASS on trunk; com
 
 ### T.6 -- Next
 A semantic-scope DELTA on this remediation; a clean claim-impact delta unlocks FULL #7 (the certifying run). This is the first remediation done under the new claim-impact discipline.
+
+---
+
+## Part U -- /qa trunk DELTA #10 (2026-09-05, v5.10.1): first run under the claim-impact discipline
+
+**Verdict: DEFECTS.** Unseeded, on the v5.10.0 remediation. Two reviewers: a claims reviewer on the 6 changed-loci groups, and -- new -- a **claim-impact reviewer** reading the IMPACT SET of the status changes (not the byte-diff). Deterministic layer whole-target green (cited). The claim-impact discipline **validated on run one**: it found a cross-citer stale-echo cluster no byte-diff or keyword grep would reach -- exactly the class the whole arc has fought.
+
+### U.1 -- Trunk items (FIXED, v5.10.1)
+- **P1 L246-248 (LARGE, two-route):** 'it faithfully reproduces the Coulomb degeneracy in the limit' -- a surviving recover-degeneracy overclaim contradicting the L228 denial 18 lines above, in the same subsection. My v5.10.0 topical sweep keyed on 'recover' and this says '**reproduces**'; it is also hard-wrapped, so even a conceptual grep missed it -- the LLM read caught it. Reworded to a denial. **Lesson: the topical sweep must be conceptual (recover|reproduce|...) AND a read, not a per-line grep.**
+- **P32 L1459 (NIT):** the abandoned (B,P) route's conditional bound constant is 2, not sqrt2 (sqrt2 = the internal comparison constant C_3^(2)); corrected per Paper 39.
+Trunk clean after these (C16 trunk PASS, C19 clean).
+
+### U.2 -- GROUP1 impact-set cluster (OWED -- its own focused pass)
+The claim-impact reviewer traced the L5-withdrawal and the Lorentzian-descope through their citers and found the owners were corrected but the citers/abstracts were not (the CLAUDE.md 'owner corrected, citers left standing' class, at branch scale):
+- **LARGE:** group1 synthesis SS L5 L695-710 -- credits the REFUTED L5 (B,P) assembly as 'completing the proof' and asserts the now-FALSE height_P=0; **P42 abstract L136-141** -- 'Lorentzian extension ... carried out at finite cutoff' with no signature-blind caveat (body L1957-66 says 'not a Lorentzian identification'); **P43 abstract L104-147 + STRONG_LORENTZ table L950-962** -- 'Paper 43 is the Lorentzian extension ... at operator-system level' (body L1900-37 descoped to Riemannian).
+- **SMALL (systematic five-lemma echo):** P44 L1283-88; P42 L492-96 & L2251-52; P47 L600-01; P51 L2524; geovac_field_guide.tex L292 -- all enumerate 'five lemmas ... L5 assembly' as live infrastructure. Plus P40 L2258-62 (cross-manifold future work cites the abandoned 'Pythagorean Leibniz constant' route) and paper_43_..._outline.md L45 (withdrawn 'literal identification').
+- **Upgrade:** synthesis k-fold L1526-40 attributes the proved k=2 case to the sqrt2 route; Paper 39 proves it at constant 1 (lifted-state).
+Almost all GROUP1 (non-trunk); a group1 remediation, best done as its own focused pass (3 LARGE + a systematic pattern across the Lorentzian arc P42-51). This IS the corpus-wide stale-echo cleanup the v5.10.0 note anticipated -- now enumerated concretely by the claim-impact reviewer.
+
+### U.3 -- The meta-result
+DELTA #10 is the proof-of-value for the semantic-diff protocol: a byte-scoped delta (or my keyword grep) saw none of U.2; the claim-impact reviewer, reading the cite-graph + topical neighborhood, surfaced it all. It also re-taught the lesson twice (P1 L246: 'reproduces' paraphrase + hard-wrap dodged the grep). **Next:** the group1 impact-set pass (U.2), then a claim-impact DELTA on trunk's v5.10.1, then FULL #7.
