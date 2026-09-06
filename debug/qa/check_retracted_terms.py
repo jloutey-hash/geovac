@@ -356,15 +356,31 @@ REGISTRY = [
                 "a live contribution with no withdrawal marker, while L5 is "
                 "withdrawn 2026-09-03 (the bound comes from the unconditional "
                 "lifted-state theorem, not the approximation-pair assembly).  "
-                "Marked withdrawn in the abstract.",
+                "Marked withdrawn in the abstract.  "
+                "WIDENED FULL run #7, 2026-09-06: Paper 32's thm:gh_convergence "
+                "proof-sketch (L3471) opened 'The proof is a Latremoliere "
+                "tunneling-pair assembly of five lemmas' -- the same L5-as-live "
+                "class, in a trunk paper, restated in Paper 32's own words so "
+                "the paper-38-only pattern missed it.  Reworded to the Paper 38 "
+                "lifted-state route; 'tunneling-pair assembly of five' added as "
+                "the discriminating pattern (fires on the retired wording, silent "
+                "on the corrected 'historical five-lemma UCP-pair assembly ... "
+                "recorded ... withdrawn').",
         "pattern": r"assembly of the distance bound via an approximation pair"
-                   r"|proves the five lemmas",
+                   r"|proves the five lemmas"
+                   r"|tunneling-pair assembly of five",
         "exempt_if_nearby": r"(?!)",
         "severity": "fail",
         "scope": "group1 trunk",
-        "cited_by": {},
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex":
+                "reviewed 2026-09-06 (FULL #7: proof-sketch reworded to the "
+                "Paper 38 lifted-state unconditional route; five-lemma list "
+                "reframed as historical/superseded, L5 withdrawn)",
+        },
         "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
         ],
     },
     {
@@ -471,7 +487,17 @@ REGISTRY = [
                    r"|differential connectivity between angular"
                    r"|recovered degeneracy is the hallmark"
                    r"|recovering the exact Coulomb degeneracy"
-                   r"|continuing toward the exact Coulomb degeneracy",
+                   r"|continuing toward the exact Coulomb degeneracy"
+                   # WIDENED FULL #8, 2026-09-06 (CLAIMS-A M1): Paper 1's intro
+                   # roadmap paraphrased the withdrawn mechanism as
+                   # "s/p degeneracy breaking by the graph Laplacian ...
+                   # vanishes in the continuum limit" -- LIVE, no marker; the
+                   # graph has NO s/p degeneracy (l-blocks disconnected).  A
+                   # pure paraphrase the panel caught, invisible to the older
+                   # patterns.  Discriminates: fires on the retired wording,
+                   # silent on the corrected "node-amplitude proxy ... not a
+                   # graph degeneracy".
+                   r"|degeneracy breaking by the graph",
         # DELTA #7: exemption vocabulary REMOVED.  "residue" here let Paper 1's
         # Conclusion keep "confirms this is spectral aliasing" live, because
         # "set by that residue" sits in the same bullet (CLAIMS-B M1).  Only

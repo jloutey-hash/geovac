@@ -1,8 +1,12 @@
 """
-TRUNK QA — Claim 5: gearing ratio ||L+||/||T+|| -> 1.77 and [T+,L+] = 0 (Paper 1).
+TRUNK QA — Claim 5: gearing ratios and [T+,L+] = 0 (Paper 1).
 
-Paper 1 sec:conclusions states:
-  - "The gearing ratio ||L+||/||T+|| converges to ~1.77, not 137 or 1/alpha."
+Paper 1 sec:conclusions states (corrected 2026-09-06 to match the paper):
+  - SPECTRAL-norm gearing ||L+||_2/||T+||_2 = 2.000 EXACTLY (not ~1.77).
+  - FROBENIUS-norm gearing ||L+||_F/||T+||_F converges to 2*sqrt(6)/3 ~ 1.633
+    (the transient finite-n_max values ~1.70-1.84 pass through the historical
+    "1.77", which was a finite-n_max Frobenius value, not the limit; and neither
+    ratio is 137 or 1/alpha).
   - "[T+, L+] = 0, indicating perfect integrability."
 
 We build T+ and L+ from the EXACT Biedenharn-Louck matrix elements Paper 1
@@ -15,9 +19,11 @@ assumed about the answer.
 FINDINGS (reported honestly):
   - [T+, L+] = 0 BIT-EXACT at every n_max -> COMMUTATOR CLAIM BACKED.
   - SPECTRAL-norm gearing ||L+||_2/||T+||_2 = 2.000 EXACTLY (not 1.77).
-  - FROBENIUS-norm gearing ~1.74-1.84, n_max-dependent, NOT converging to a
-    single 1.77 (1.84 at n_max=10, 1.74 at n_max=20). So the "1.77" is at best
-    a Frobenius-norm value at a particular n_max, not a convergent ratio.
+  - FROBENIUS-norm gearing CONVERGES to 2*sqrt(6)/3 ~ 1.633 (closed form
+    ||L+||_F^2/||T+||_F^2 = 4(N+2)(2N+1)/(3N^2-2) -> 8/3; Paper 1). The
+    transient 1.74-1.84 values (1.84 at n_max=10, 1.74 at n_max=20) approach
+    the limit from above, so the historical "1.77" was a finite-n_max
+    Frobenius value, not the (different) convergent ratio 1.633.
   => Commutator: BACKED. Gearing "1.77 convergence": NOT cleanly backed
      (spectral norm gives exactly 2; Frobenius drifts). DOWNGRADE the "1.77".
 """

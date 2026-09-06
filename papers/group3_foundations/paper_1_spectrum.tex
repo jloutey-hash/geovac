@@ -31,7 +31,7 @@ This lattice exhibits a profound duality between \textit{algebra} and \textit{ge
 \item \textbf{The Geometric Flesh:} The lattice \textit{topology}---the pattern of connections---generates physical corrections. High angular momentum states occupy higher-degree nodes at finite truncation (read before 2026-09-03 as differential weighted connectivity [retracted 2026-09-04: sp-splitting-aliasing-mechanism] lifting the $s/p$ degeneracy;\ withdrawn --- the $l$-blocks are disconnected components). The edge-weight log-holonomy provides a measure of lattice curvature that decays as $n^{-1}$.
 \end{itemize}
 
-In this paper, we present computational evidence for this dual framework. Section~\ref{sec:algebra} demonstrates spectral exactness. Section~\ref{sec:geometry} analyzes the $s/p$ degeneracy breaking by the graph Laplacian, demonstrating it is a discretization artifact that vanishes in the continuum limit. Section~\ref{sec:relativity} analyzes the geometric phase structure, showing that the Berry phase vanishes while the log-holonomy decays as $n^{-1}$. Section~\ref{sec:discussion} discusses the algebra-geometry duality and its connection to wave-particle complementarity. Section~\ref{sec:conclusion} summarizes our findings.
+In this paper, we present computational evidence for this dual framework. Section~\ref{sec:algebra} demonstrates spectral exactness. Section~\ref{sec:geometry} analyzes the $s/p$ node-amplitude proxy, showing it is a discretization artifact whose size tracks the residue of $n_{\max}$ modulo $3$ --- not a graph degeneracy (the $\ell$-blocks are disconnected) and not a continuum-convergence signal. Section~\ref{sec:relativity} analyzes the geometric phase structure, showing that the Berry phase vanishes while the log-holonomy decays as $n^{-1}$. Section~\ref{sec:discussion} discusses the algebra-geometry duality and its connection to wave-particle complementarity. Section~\ref{sec:conclusion} summarizes our findings.
 
 
 \section{The Algebraic Skeleton: Exact Spectroscopy}
@@ -230,12 +230,12 @@ disconnected, so the graph has no $s/p$ degeneracy of its own).
 
 \subsection{Physical Interpretation}
 
-\textbf{[PANEL-VERIFIED]} The 2p state, with its higher weighted degree
+\textbf{[PANEL-VERIFIED]} The 2p state has the higher weighted degree
 ($D_{2p} > D_{2s}$; the ``$4 \times$'' ratio came from the
 non-reproducing Table~\ref{tab:degrees} figures --- see the \S III QA
-note), is more sensitive to the
-lattice boundary than the 2s state. At finite $n_{\max}$, the
-truncation acts as an absorbing wall that differentially perturbs
+note). \emph{Read before 2026-09-03 as:} the higher-degree 2p node is
+more sensitive to the lattice boundary than the 2s state, the finite-$n_{\max}$
+truncation acting as an absorbing wall that differentially perturbs
 high-connectivity nodes [retracted 2026-09-04: sp-splitting-aliasing-mechanism]. \emph{Withdrawn for the $s/p$
 proxy (2026-09-03):} its size is set by the residue of $n_{\max}$ modulo
 $3$, not by a boundary effect;\ the ``geometric boundary effect'' reading printed here until 2026-09-04 is withdrawn with it, and it is not an emergent centrifugal barrier either.

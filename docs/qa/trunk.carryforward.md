@@ -1870,3 +1870,100 @@ Almost all GROUP1 (non-trunk); a group1 remediation, best done as its own focuse
 
 ### U.3 -- The meta-result
 DELTA #10 is the proof-of-value for the semantic-diff protocol: a byte-scoped delta (or my keyword grep) saw none of U.2; the claim-impact reviewer, reading the cite-graph + topical neighborhood, surfaced it all. It also re-taught the lesson twice (P1 L246: 'reproduces' paraphrase + hard-wrap dodged the grep). **Next:** the group1 impact-set pass (U.2), then a claim-impact DELTA on trunk's v5.10.1, then FULL #7.
+---
+## Part V -- /qa trunk FULL run #7 (2026-09-06), unseeded (certifying), PI-invoked
+
+**Verdict: FAIL.** The certifying run -- NOT a PASS. 10 reviewers (5 code, 2 claims, 1 synthesis, 2 citation) whole-target + completeness-critic; deterministic 12/12 + C10. 4 verified MATERIAL findings, ALL SMALL, 0 LARGE. Every mathematical keystone independently re-derived SOUND (the load-bearing positive result). Consistent with the arc: no FULL has PASSed. Unseeded basis: standing calibration record (FULL#2 19/21, DELTA#1 9/9, DELTA#2 8/9, all 0 FP); every MATERIAL finding PM-verified vs primary text.
+
+### V.1 Per-dimension scorecard (AND roll-up = FAIL)
+- CODE (C1-C2): EXERCISED, CLEAN. P0/P1/P7/P32/P38 all BACKED-SOUND, 0 MATERIAL. Independent re-derivation of every keystone (vertex polynomial; C=42.7397 by 3 routes; lambda_n=-(n^2-1); c^2(n,l); V_ee 5Z/8 etc.; 4/pi + h^v from Killing form; forced count 32 by direct SVD not the test's normal-equations, chasing a false 29 to ground as own bug; LiH angles; BeH2 M6). Every guard fire-tested. Restricted-eval clean on all (kappaLmax->-1/2 proven bound; forced-32 on unrestricted CCM; s-wave=4 disclosed).
+- CLAIMS (C3/C5/C6/C8): EXERCISED, DEFECTS (2 SMALL). All trunk deltas (kappa-Observation, bound-not-accuracy, s/p-withdrawal, 4/pi-convention, Forced-Count-32, L5/height) exhaustively confirmed correct. K-tripwire clean (all loci Observation).
+- SYNTHESIS (C9): EXERCISED, CLEAN (C9 PASS, 0 MATERIAL, mirror-clean).
+- CITATION (C4): EXERCISED, DEFECTS (1 SMALL). All 66 external works resolve incl. exact prop/eq/table numbers vs primary PDFs; 0 fabricated.
+- DETERMINISTIC: 12/12 gates + C10 PASS. TWO instrument gaps found by the completeness-critic (below).
+
+### V.2 The 4 verified MATERIAL findings (all SMALL) -- REMEDIATED same day
+1. [CITE C4] P38 bibitem leimbach_vs2024 title "...for low-dimensional tori" -> real title "...for tori". FIXED (deleted "low-dimensional").
+2. [CLAIMS C7] P32 L3471 proof-sketch of thm:gh_convergence (WH1 keystone) opened "The proof is a Latremoliere tunneling-pair assembly of five lemmas" -- presented the WITHDRAWN 5-lemma/L5 assembly as THE proof + labeled method "Latremoliere tunnel" (C7: proved object is state-space GH). Trunk-scope; NOT in banked group1 U.2; NOT caught by C16 (l5-assembly entry scoped paper_38 only). FIXED (reworded to Paper 38 lifted-state unconditional route; five-lemma list reframed historical/superseded, L5 withdrawn). Trunk enumeration: only live locus (P38 L109/808/1555 all correctly carry withdrawn-L5; P32 L3565 is the status-caveat remark).
+3. [CLAIMS C3] P7 abstract: saturation blanket-tagged [MEASURED] where intro/body/P0 tag [INTERNAL THEOREM] (closed-form rate). FIXED (abstract now tags saturation [INTERNAL THEOREM] + closed-form rate + Paper 0 SecVI).
+4. [C11/year] P38 bibitem paper7 "internal preprint (2024)" vs Paper 7 \date 2026. FIXED (2024->2026).
+
+### V.3 Instrument gaps (completeness-critic; OWED)
+- **C21 VACUOUS ON TRUNK (raise to PI).** All 6 trunk docs carry ZERO \gvq annotations, so C21's annotation-checking leg had nothing to check -- it PASSED empty. Trunk multi-document constants (4/pi in P38/P40/synthesis; 42.7397 in P0/P7/synthesis; 5Z/8 in P7/synthesis; 27.90xQ) are registry-UNLINKED, so the gate provides no cross-document consistency guard for them. SAME CLASS as FULL #4 (v5.6.0, Part M) which was left open. Values themselves independently re-derived SOUND (code panel), so nothing is wrong-valued; the gap is that the gate does not guard them. Registering + \gvq-annotating is a sizable instrument task = its own unit.
+- **C11 SCOPE HOLE (guard pass).** C11's year regex expects "GeoVac Paper~N (YEAR)"; it cannot parse "GeoVac internal preprint (YEAR)", so it missed finding #4. Widen the pattern + discrimination-test (fire on 2024, silent on 2026). The value is now correct regardless.
+
+### V.4 OWED -- guard pass (SEPARATE unit, per CLAUDE.md 9 hard rule; do NOT co-author with the fix)
+(a) C16-widen the five-lemma/L5-assembly class to paper_32 (finding #2's class), discrimination-tested; (b) C11 regex widen (V.3); (c) prop=2 genericity regression test (P32 NIT-1; reviewer confirmed TRUE 8/8+3/3, load-bearing for the downgrade, currently untested); (d) stale test docstrings: test_trunk_qa_gearing.py:18 ("NOT converging"->2sqrt6/3), test_trunk_qa_kappa.py header T1 ("must equal 1/16"->1/4); (e) tab:N_electron (P7) claim-test-matrix row (disclosed CONJECTURE, values verified, no matrix row).
+
+### V.5 NITs (fix-on-sight, non-gating): P1 L100-103 missing inline non-reproducing flag; synthesis N1 duplicate paper2 bibitem key / N3 grammar / N5 CFT-reflection dangling pointer; P7 He-S^5 Casimir untiered [MEASURED]; secondary cross-paper numbers (P0 tab:cross-section, P7 L773 H2+ from Paper 11).
+
+### V.6 Next
+Content-clean now (4 SMALL fixed, gates green, 3 papers compile). Per run-shapes: a claim-impact DELTA on this remediation, clean -> unlocks FULL #8. Guard pass (V.4) + C21-on-trunk (V.3) are the substantive owed units; both are PI-timed. No LARGE anywhere; mathematics SOUND under independent re-derivation.
+
+### V.7 -- Instrument gaps + guard pass CLOSED (2026-09-06, PI-directed, post-verdict)
+All V.3/V.4 owed items done as their own pass (guards separate from the FULL #7 fixes, each fire-tested):
+- **C16 widened** (V.4a): `l5-assembly-listed-as-live-contribution` gains pattern `tunneling-pair assembly of five` + scope/files paper_32 + cited_by paper_32 stamped "reviewed 2026-09-06". DISCRIMINATION PROVEN: planted the retired P32 wording -> C16 --gate trunk FAIL (1 LIVE at P32:3471); restored -> PASS.
+- **C11 widened** (V.3/V.4b): new BIBITEM_BLOCK scanner catches the "internal preprint (YEAR)" dodge (paper number from key/label, year from body). DISCRIMINATION PROVEN: planted 2024 in P38->paper7 -> C11 --gate trunk FAIL ([P7] cited 2024 != 2026); restored 2026 -> PASS. Corpus-wide it surfaced 10 pre-existing de-versioning mismatches (paper_22 x3, paper_26 x4, paper_27 x3, all cited-2025 vs date-2026) -> baselined (internal_year_baseline.json 30->40). Also fixed a title mismatch it surfaced that I introduced this session: P11's loutey_paper58 bibitem title was truncated ("...The Abelian Residue" -> "...The Abelian Residue of Multi-Center Bonding").
+- **prop=2 genericity test** (V.4c): new tests/test_paper32_prop_genericity.py -- inline prop via iterated-product span rank on random *-closed unital subspaces; M5/dim14 -> 2 (8 seeds), M14/dim55 -> 2 (3 seeds); controls (full algebra -> prop 1, diagonal -> prop -1) make ==2 non-vacuous. Hardened to reduce the span each iteration (no combinatorial blow-up). fire_test: corrupt _prop target -> genericity tests FAIL ("guard fires"). 3 passed.
+- **stale test docstrings** (V.4d): test_trunk_qa_gearing.py (Frobenius "NOT converging" -> converges to 2sqrt6/3); test_trunk_qa_kappa.py header T1 ("must equal 1/16" -> 1/4, geometric 1/16 = c^2(n,0)/4).
+- **tab:N_electron matrix row** (V.4e): added to claim_test_matrix.md (Paper 7; CONJECTURE-tier coverage gap, values = exact group theory verified by the FULL #7 panel).
+- **C21-on-trunk** (V.3, the big one): saturation_c (C = 42.7397, closed form, 3-doc twin P0/P7/synthesis) registered + \gvq-annotated at all 4 loci -> C21 now has REAL trunk annotation surface (99 annotations checked, 0 mismatched; was 0 on trunk = vacuous). l2_rate_4_over_pi also registered (P38/P40/synthesis; annotation of its varied literal forms is the remaining slice). New _KIND "constant" added; registry self-test 17/17.
+
+**Final state:** 12/12 deterministic gates PASS on trunk; 6 papers compile (P11 fig:pes + P32 OMS-font are pre-existing/cosmetic, non-trunk-blocking); touched+new tests 13 passed. All 4 FULL #7 SMALL findings + both instrument gaps + all 5 guard-pass items CLOSED. NOT committed (PI /checkpoint). Per run-shapes: a claim-impact DELTA now returns CLEAN -> unlocks FULL #8.
+
+---
+## Part W -- /qa trunk DELTA #11 (2026-09-06), unseeded (claim-impact), PI-invoked
+
+**Verdict: CLEAN-DELTA.** The claim-impact delta on the FULL #7 remediation + the guard-pass/C21 closure (Part V + V.7). Scope = the claim-impact set since FULL #7 (not byte-diff). 3 reviewers, one per affected dimension; deterministic 12/12 + C10 whole-target GREEN (not re-reviewed). Unseeded; standing calibration cited; every change verified vs primary text.
+
+- **CITATION (CLEAN):** leimbach_vs2024 title "for tori" CONFIRMED (arXiv 2302.07877 + ScienceDirect + Radboud repo, verbatim); paper7 (2026) matches Paper 7 \date. 0 defects.
+- **CLAIMS (CLEAN):** P32 proof-sketch rewording matches P38 thm:main_unconditional lifted-state route (C7 clean); P7 saturation tier now INTERNAL THEOREM consistent across 10 loci (continuum reading stays OBSERVATION); 4 gvq wraps pure no-op. Claim-impact sweep: five-lemma-as-live = 0 survivors in trunk. OUT-OF-SCOPE (owed group1 Part U): group1 synthesis + field guide still restate the chain.
+- **CODE (CLEAN):** the new prop=2 genericity guard is BACKED-SOUND and CAN FAIL -- independent-route re-derivation (prop 2 at both dims, 4 for tridiag control), discriminating controls, 3 named rejected wrong-answers, fire-tested. Docstring fixes correct vs Papers 1/7. NIT: 3 untracked decompactification tests (58/60/11) owed a separate group2/3 test-backing pass.
+
+**Next:** a clean claim-impact delta is the precondition for the certifying run -> **FULL #8 is unlocked** (the path to the first trunk PASS of this arc). PI-timed; not self-triggered. Nothing committed (PI /checkpoint).
+
+---
+## Part X -- /qa trunk FULL run #8 (2026-09-06), unseeded (certifying), PI-invoked
+
+**Verdict: FAIL.** The certifying run after DELTA #11 CLEAN-DELTA -- NOT a PASS. 11 agents (5 code, 2 claims, 1 synthesis, 2 citation, + completeness-critic); deterministic 12/12 + C10. 2 verified MATERIAL-SMALL, 0 LARGE. Every keystone independently re-derived SOUND. Fresh-adversary FULL caught 2 pre-existing Paper-1 zombies FULL #7's claims-A walked past -- the same "a FULL run reaches the pre-existing surface a DELTA cannot" dynamic as FULL #6. Standing calibration cited; every MATERIAL finding PM-verified vs primary text.
+
+### X.1 Per-dimension scorecard (AND = FAIL)
+- CODE (5): CLEAN. P0/P1/P7/P32/P38 all BACKED-SOUND, 0 MATERIAL. Independent re-derivation of every keystone (vertex poly; C=42.7396543 two routes; forced count 32 by direct SVD; 4/pi + h^v from Killing form; LiH angles; BeH2 M6; prop=2 generic). Guards fire; restricted-eval all clear (lambda_max=8 mid-l, forced-32 unrestricted CCM = inverse of Paper-24 S=0).
+- CLAIMS: DEFECTS (2 SMALL, both Paper 1). P0/P7/P32/P38 clean.
+- SYNTHESIS: CLEAN (C9, both drift directions).
+- CITATION (2): CLEAN. All external works resolve incl. exact numbers vs primary PDFs; leimbach "for tori" + paper7 2026 confirmed.
+- DETERMINISTIC: 12/12 + C10.
+
+### X.2 The 2 verified MATERIAL-SMALL (Paper 1 claims) -- REMEDIATED
+1. P1 L34 intro roadmap: "s/p degeneracy breaking by the graph Laplacian ... vanishes in the continuum limit" -- LIVE paraphrase of the withdrawn mechanism, NO marker; contradicts the paper's own body (L229 "the graph has no s/p degeneracy of its own"). Escaped C16 (pure paraphrase). FIXED -> "s/p node-amplitude proxy ... not a graph degeneracy (l-blocks disconnected) and not a continuum-convergence signal."
+2. P1 L233-237: [PANEL-VERIFIED] tag vouched for "the 2p state is more sensitive to the lattice boundary" = the withdrawn boundary-effect mechanism; only D_2p>D_2s was verified. FIXED -> [PANEL-VERIFIED] scoped to the degree ordering; boundary-sensitivity reframed "Read before 2026-09-03 as: ...[retracted marker]" (mirror L31 chronicle form).
+Gate-first enumeration: paraphrase class trunk-wide = only these 2 P1 loci.
+
+### X.3 Guard pass (separate, fire-tested)
+- C16 sp-splitting-aliasing-mechanism WIDENED with pattern "degeneracy breaking by the graph" (M1's paraphrase). Fires on the retired M1 wording (planted -> FAIL at P1:34), silent on corrected -> PASS. M2's defect is a TIER mis-scope (C3), not a wording class a blocklist can catch -- the chronicle-reframe is the remedy; noted.
+- Incomplete earlier fix swept: test_trunk_qa_gearing.py docstring HEADER (L1-6) still said "converges to ~1.77" (I'd corrected only the FINDINGS bullet in the guard pass); header now carries spectral=2 / Frobenius->2sqrt6/3.
+
+### X.4 OWED -- instrument (completeness-critic GAP 1)
+C21's trunk \gvq surface is still ~one constant (saturation_c). The l2_rate_4_over_pi key is PROSE-ORPHANED (4/pi written as \frac{4}{\pi}, a symbolic fraction C21's decimal-scanner can't verify); 5Z/8, B=42, Delta=1/40, F=pi^2/6 unregistered. Closing this needs a **C21 symbolic-literal enhancement** (evaluate \frac/\pi^2 literals), not a naive \gvq wrap (which would report UNPARSED and risk breaking C21). Its own instrument task; PI-timed. Values all independently SOUND (code panel), so nothing is wrong-valued -- the gap is that the gate doesn't guard them.
+
+### X.5 NITs (non-gating, fix-on-sight): P1 L100-103 historical degrees no inline flag; P0 L573 "18 symbolic proofs" vs L720 "checks"; P7 L85/L603/title framing; near-tie 1.2% vs 1.231%; forced-count sketch "at n_max=2" (count is n_max-independent); prop=2 test omits n_max=4 row; debug/ inline cites (C14-advisory, deferred corpus sweep); synthesis inline date/chronicle language.
+
+### X.6 Next
+Content-clean (2 SMALL fixed + backstopped, gates green, P1 compiles, gearing test 4/4). Per run-shapes: a claim-impact DELTA on this remediation -> clean unlocks FULL #9. The C21 symbolic-literal enhancement (X.4) is the substantive owed instrument unit. NOT committed (PI /checkpoint).
+
+---
+## Part Y -- C21 symbolic instrumentation + /qa trunk DELTA #12 (2026-09-06), PI-directed
+
+PI direction: build the C21 symbolic-literal instrumentation (completeness-critic GAP 1), run a DELTA, HOLD full certifying runs ("we're mainly finding prose stuff -> the science is mostly good"), bank at end.
+
+### Y.1 Instrumentation (GAP 1 closed)
+- `check_numeric_consistency.py` `_norm()` extended: reduces \frac/\dfrac/\tfrac{a}{b}, \pi, \pi^2, inline a/b, and a single coefficient variable Z (5Z/8 -> 5/8) to a float; eval sandboxed (no builtins) behind a fullmatch to [0-9.()*/+- ]. Self-tested on all forms + junk-rejection.
+- Registry: l2_rate_4_over_pi -> full precision 1.2732395447; NEW slater_f0_1s (5/8), delta_dirac (1/40), b_casimir (42), f_fock_dirichlet (pi^2/6). Hard rule preserved (delta_dirac = derived ingredient; K=pi(B+F-Delta) stays Observation).
+- Annotated 8 loci across P7/P32/P38/synthesis (\gvq macro added to P38, P32). C21: 99 -> 107 annotations checked, 0 mismatched.
+
+### Y.2 DELTA #12 = DEFECTS (remediated)
+- CLAIMS (CLEAN): both FULL #8 P1 s/p fixes correct; 8 \gvq wraps pure no-ops; K=pi(B+F-Delta) Observation at every trunk locus; no s/p paraphrase survived.
+- CODE/INSTRUMENT (DEFECTS, 1 MATERIAL): the tight-match clause was INERT -- OR'd behind a dec=0 display window (+-0.5 of rounded integer) that subsumed it, so C21 would accept wrong symbolic values (pi/4 for 4/pi; 1/3 for delta_dirac). The exact guard-written-in-same-pass-as-fix failure mode. FIXED: gate the two acceptance rules by literal KIND (symbolic -> tight match required; plain number -> display-rounding). Fire-tested: planted \gvq{delta_dirac}{1/3} -> MISMATCH; restored -> PASS. Parser separately confirmed correct/safe/non-regressing by the reviewer.
+- OWED: a re-DELTA on the guard fix before any future FULL (per "re-test previous fixed"). B=42/F loci beyond P32 L1725 remain single-locus (not multi-annotated); minor.
+
+### Y.3 State: content-clean, 12/12 gates + C10 green, instrument fixed + fire-tested. BANKED this session (PI direction). No FULL #9 (PI hold).

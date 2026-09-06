@@ -53,6 +53,7 @@ Exit 0 = PASS.  Self-test: tests/test_numeric_registry.py
 """
 from __future__ import annotations
 
+import math
 import pathlib
 import re
 import sys
@@ -146,10 +147,37 @@ def _files(gate):
 
 
 def _norm(tok):
+    """Parse a gvq literal to a float.
+
+    Plain decimals parse directly.  For the trunk's symbolic constants
+    (symbolic-literal support added 2026-09-06, FULL #8 follow-up) also
+    reduce the common LaTeX forms -- \\frac{a}{b}, \\pi, \\pi^2, inline a/b,
+    and a single coefficient variable Z (e.g. the Slater F^0 = 5Z/8, whose
+    registered quantity is the coefficient 5/8) -- to a number, so C21 can
+    verify symbolic-fraction annotations instead of reporting them UNPARSED.
+    Returns None if the token cannot be reduced to a pure-arithmetic
+    expression (then the caller reports UNPARSED, as before).
+    """
+    t = (tok.replace("{,}", "").replace("\\,", "")
+         .replace("$", "").replace("~", "").strip())
     try:
-        return float(tok.replace("{,}", "").replace("\\,", "")
-                     .replace("$", "").replace("~", "").strip())
+        return float(t)
     except ValueError:
+        pass
+    s = t
+    # \frac / \dfrac / \tfrac {A}{B} -> ((A)/(B))
+    s = re.sub(r"\\[dt]?frac\{([^{}]*)\}\{([^{}]*)\}", r"((\1)/(\2))", s)
+    s = (s.replace("\\pi^{2}", f"({math.pi ** 2})")
+         .replace("\\pi^2", f"({math.pi ** 2})")
+         .replace("\\pi", f"({math.pi})"))
+    s = s.replace("Z", "")          # coefficient variable: 5Z/8 -> 5/8
+    s = (s.replace("\\cdot", "*").replace("\\times", "*")
+         .replace("^", "**").replace("{", "(").replace("}", ")").strip())
+    if not re.fullmatch(r"[0-9.\s()*/+\-]+", s):
+        return None
+    try:
+        return float(eval(s, {"__builtins__": {}}, {}))
+    except Exception:
         return None
 
 
@@ -198,16 +226,27 @@ def check_annotations(gate, verbose=True):
                     bad += 1
                     continue
                 aliases = (REG.MEASURED.get(key, {}).get("aliases") or {})
-                # Compare at the precision the LITERAL is written to: a paper
-                # may quote a measured value at fewer digits than it was
-                # measured to, and that is correct rendering, not drift.  A
-                # retired value still fails, since it is not a rounding of
-                # the canonical one at any precision.
-                dec = len(literal.split(".")[1].rstrip("$~ ")) \
-                    if "." in literal else 0
                 cands = [canon] + [float(a) for a in aliases]
-                ok = any(abs(lit - round(c, dec)) <= 10 ** (-dec) / 2 + 1e-9
-                         for c in cands)
+                # Two disjoint acceptance rules, chosen by literal KIND:
+                #   * a SYMBOLIC literal (\frac, /, ^ ...) is EXACT -- it
+                #     evaluates to the value, not a rounded display of it, so
+                #     it must TIGHTLY equal a candidate.  (DELTA #12 fix: the
+                #     earlier version OR'd a loose dec=0 display window ahead
+                #     of this, which subsumed it -- \frac{4}{\pi} would have
+                #     passed on a 2/pi key.  Gating by kind makes the tight
+                #     match load-bearing for symbolic annotations.)
+                #   * a plain NUMBER (int or decimal) may be a rounded display
+                #     of a longer measured value; compare at its own precision.
+                literal_clean = literal.rstrip("$~ ")
+                is_symbolic = bool(re.search(r"[\\/^]", literal_clean))
+                if is_symbolic:
+                    ok = any(abs(lit - c) <= 1e-6 * max(1.0, abs(c))
+                             for c in cands)
+                else:
+                    dec = len(literal_clean.split(".")[1]) \
+                        if "." in literal_clean else 0
+                    ok = any(abs(lit - round(c, dec)) <= 10 ** (-dec) / 2 + 1e-9
+                             for c in cands)
                 if not ok:
                     print(f"   [MISMATCH] {path.name}:{i+1}  \\gvq{{{key}}} "
                           f"says {lit}, registry says {canon}")

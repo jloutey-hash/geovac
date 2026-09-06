@@ -72,6 +72,129 @@ from __future__ import annotations
 # ---------------------------------------------------------------------------
 
 MEASURED = {
+    # ---- two-center decompactification front (Papers 58 / 60, 2026-09-05/06) ----
+    # The front R*(n) is the distance at which <ns_A|ns_B> = 1/sqrt2 (projector
+    # principal angle 45 deg, ||[P_A,P_B]|| maximal).  It tracks the decay
+    # length n/Z, not the mean radius n^2/Z.  Independent quadrature route:
+    # tests/test_paper58_decompactification_front.py.
+    "decomp_front_ratio": dict(
+        value=2.14, convention="front ratio R*(n)/(n/Z): median over n = 2..8, Z = 1, "
+                               "hydrogenic ns-ns overlap = 1/sqrt2 (H2+)",
+        q=None,
+        provenance="MEASURED 2026-09-05, debug/decompactification_R_sweep.py; "
+                   "range 2.12-2.19 (n=2..8), n=1 gives 1.565",
+        aliases={2.15: "mean over n = 2..8"}),
+    "decomp_front_exponent": dict(
+        value=0.98, convention="exponent: log-log slope of R*(n) vs n, n = 2..8",
+        q=None,
+        provenance="MEASURED 2026-09-05, same driver; the rejected sqrt(ZR) "
+                   "window would give 2.0 here",
+        aliases={1.02: "inverse fit n*(R) vs R", 1.0: "rounded"}),
+    "tail_geometric_const": dict(
+        value=1.58, convention="R_rel / sqrt(l_A l_B): 1s-1s tail-reach front "
+                               "(|S| -> S(0)/sqrt2), charge pairs (1,1),(2,1),(3,1),(2,2)",
+        q=None,
+        provenance="MEASURED 2026-09-06, debug/decompactification_correlation_ladder.py "
+                   "rung0a; max dev 2.0 % (four pairs), 9.1 % (dense ratio scan t in [1,8])",
+        aliases={0.79: "as c in R_rel = c * 2 sqrt(l_A l_B)"}),
+    "tail_t_c": dict(
+        value=2.664, convention="1s exponent ratio above which no absolute |S| = 1/sqrt2 "
+                                "front exists; root of (2 sqrt t/(1+t))^3 = 1/sqrt2 "
+                                "(S(R) is monotone decreasing for every t, so the "
+                                "united-atom value is the maximum)",
+        q=None,
+        provenance="closed form, 2026-09-06; pinned in "
+                   "tests/test_paper58_decompactification_front.py. The ladder "
+                   "driver's 2.7456 was the first point of its discrete t-scan past "
+                   "the root, not the root -- caught by the independent test route.",
+        aliases={2.66: "rounded"}),
+    # Rungs 1-2 of the correlation ladder: percent residual of the occupation-
+    # weighted principal-angle front vs the 1s-1s law at the EMPIRICAL zeta_eff.
+    "front_resid_h2_hf": dict(
+        value=-0.7, convention="percent residual of the front vs the 1s-1s law at "
+                               "empirical zeta_eff, H2 Hartree-Fock, base 5-zeta basis", q=None,
+        provenance="MEASURED 2026-09-06, decompactification_correlation_ladder.py "
+                   "(R* 1.283 vs pred 1.292)", aliases={}),
+    "front_resid_h2_fci": dict(
+        value=-1.2, convention="percent residual of the front, H2 full CI, base basis", q=None,
+        provenance="MEASURED 2026-09-06, same driver (R* 1.270 vs pred 1.285)",
+        aliases={}),
+    "front_resid_heh_hf": dict(
+        value=0.0, convention="percent residual of the front, HeH+ Hartree-Fock, base basis", q=None,
+        provenance="MEASURED 2026-09-06, same driver (R* 0.757 vs pred 0.757)",
+        aliases={}),
+    "front_resid_heh_fci": dict(
+        value=-0.2, convention="percent residual of the front, HeH+ full CI, base basis", q=None,
+        provenance="MEASURED 2026-09-06, same driver (R* 0.757 vs pred 0.758)",
+        aliases={}),
+    # Signed cross-center coherence (M2) front: inward shift at FCI vs HF.
+    "coherence_shift_h2": dict(
+        value=23.1, convention="percent inward shift of the M2 front, H2 FCI vs HF "
+                               "(0.987 vs 1.285 bohr)", q=None,
+        provenance="MEASURED 2026-09-06, same driver", aliases={23: "rounded"}),
+    "coherence_shift_heh": dict(
+        value=9.0, convention="percent inward shift of the M2 front, HeH+ FCI vs HF "
+                              "(0.690 vs 0.758 bohr)", q=None,
+        provenance="MEASURED 2026-09-06, same driver", aliases={}),
+
+    # ---- trunk multi-document constants (registered FULL #7, 2026-09-06) ----
+    # C21 had ZERO \gvq surface on all six trunk docs (the completeness-critic's
+    # highest-value gap; same class as FULL #4).  saturation_c is the exemplar:
+    # the lambda_max saturation-rate constant appears as the identical literal
+    # "42.7397" in Papers 0, 7 and the group3 synthesis, so its cross-document
+    # consistency now has a gate.  Closed form (Paper 0 SecVI); independently
+    # re-derived by the FULL #7 code panel via two disjoint routes.
+    "saturation_c": dict(
+        value=42.7397,
+        convention="lambda_max saturation-rate constant C: deficit = (C+o(1))/n_max^2; "
+                   "closed form (pi^2/4)(2+2^{1/3})^2(1+2^{-2/3})",
+        q=None,
+        provenance="DERIVED closed form (Paper 0 SecVI), numerics-pinned over 591 "
+                   "cutoffs; loci P0 SecVI / P7 New-Contributions+caveats / group3 "
+                   "synthesis. FULL #7 code panel re-derived it two ways.",
+        aliases={42.74: "2 dp", 42.739654: "6 dp", 42.6: "n_max=320 finite sample (understates)"}),
+    "l2_rate_4_over_pi": dict(
+        value=1.2732395447351628,  # 4/pi at full precision (tight symbolic match)
+        convention="constant: asymptotic GH-convergence rate 4/pi (n_max*gamma_n/log n_max) "
+                   "in the dual-Coxeter (rotation-angle) metric; 2/pi on the unit S^3; "
+                   "2*sqrt2/pi under Kac's basic form -- CONVENTION-DEPENDENT, not canonical",
+        q=None,
+        provenance="DERIVED (Paper 38/40), numerics-pinned (doubling estimator from above); "
+                   "loci P38, P40, group3 synthesis. Annotated FULL #8 follow-up 2026-09-06.",
+        aliases={1.2732: "4 dp", 1.27324: "5 dp", 0.63662: "2/pi unit-S^3 half"}),
+    # Slater F^0(1s,1s) coefficient and the three alpha-decomposition
+    # ingredients: multi-document symbolic-fraction trunk constants that C21
+    # could not verify until the symbolic-literal parser (2026-09-06).
+    "slater_f0_1s": dict(
+        value=0.625,
+        convention="constant: Slater F^0(1s,1s) coefficient = 5/8 (F^0 = 5Z/8 on S^3); "
+                   "loci Paper 7 SecV, group3 synthesis",
+        q=None,
+        provenance="SYMBOLIC (Paper 7 eq:f0_s3), test_paper7_vee_s3.py; = 5/8 = 0.625",
+        aliases={}),
+    "delta_dirac": dict(
+        value=0.025,
+        convention="constant: Dirac boundary-degeneracy Delta = 1/40 = (g_3^Dirac)^-1 "
+                   "(alpha-decomposition ingredient, Paper 2); loci Paper 7, Paper 32",
+        q=None,
+        provenance="OBSERVATION-tier ingredient (Paper 2/32); = 1/40 = 0.025. "
+                   "The COMBINATION K=pi(B+F-Delta) stays an Observation (hard rule).",
+        aliases={}),
+    "b_casimir": dict(
+        value=42.0,
+        convention="constant: Casimir count B = 42 (alpha-decomposition ingredient, Paper 2); "
+                   "loci Paper 2, Paper 32",
+        q=None,
+        provenance="derived ingredient (Paper 2); integer 42.",
+        aliases={}),
+    "f_fock_dirichlet": dict(
+        value=1.6449340668482264,  # pi^2/6 at full precision
+        convention="constant: Fock Dirichlet F = pi^2/6 = zeta(2) at the packing exponent "
+                   "(alpha-decomposition ingredient, Paper 2); loci Paper 2, Paper 32",
+        q=None,
+        provenance="derived ingredient (Paper 2); = pi^2/6 = 1.6449340668.",
+        aliases={1.6449: "4 dp"}),
+
     # ---- TC composed (electronic-only, PK classically partitioned) ------
     # The TC/standard Pauli ratio is 1.616 to three decimals for all three
     # molecules -- the cross-molecule uniformity survived the exact-rule
@@ -593,6 +716,16 @@ RETIRED = {
 # ---------------------------------------------------------------------------
 
 _KINDS = (
+    # Two-center decompactification FRONT (Papers 58/60, 2026-09-06): the
+    # distance at which the two center projectors reach principal angle 45
+    # deg, and quantities stated relative to it (ratios to a decay length,
+    # percent residuals, coherence-front shifts).  Listed first so a front
+    # convention that also mentions a decay length is not read as an exponent.
+    ("front", ("front",)),
+    # Dimensionless constants (rate constants, saturation constants): no
+    # identity-in/out convention applies, like `density`.  Registered FULL #7
+    # for the trunk multi-document constants (saturation_c, l2_rate_4_over_pi).
+    ("constant", ("constant",)),
     ("pauli", ("pauli",)),
     ("lambda", ("1-norm",)),
     ("qwc", ("qwc",)),

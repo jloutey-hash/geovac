@@ -11,6 +11,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
 \newtheorem{proposition}{Proposition}
+\newcommand{\gvq}[2]{#2}
 
 \begin{document}
 
@@ -839,6 +840,28 @@ introduces a nonzero $b = R(Z_B - Z_A)$ parameter in the angular
 equation, breaking the $\eta \to -\eta$ parity symmetry, but the
 algorithm handles this without modification.
 
+\paragraph{How the $\eta$-label drifts with $R$.}
+\textbf{[MEASURED]} The separation parameter $A$ reduces to $l(l+1)$ in
+the united-atom limit, so the ground $\eta$-eigenvector's participation
+deficit $D = 1 - \max_l |v_l|^2$ in the Legendre basis measures how far
+the state has drifted from a pure united-atom $l$-label.  The two cases
+turn on at different orders.  For H$_2^+$ ($b = 0$) the $c^2\eta^2$ term
+couples $l \leftrightarrow l \pm 2$ and the deficit rises as $R^{4.0}$;\
+for HeH$^{2+}$ the $b\eta$ term couples $l \leftrightarrow l \pm 1$ and
+the deficit rises as $R^{2.1}$---first order in the coupling, the
+heteronuclear mixing being a factor $R$ earlier.  The large-$R$ behavior
+differs too:\ the homonuclear deficit saturates near $\tfrac12$ (gerade
+mixing of two Legendre components), whereas the heteronuclear deficit
+keeps rising ($0.44$ at $R = 2$, $0.71$ at $R = 8$, $0.75$ at $R = 12$)
+as $\langle\eta\rangle \to -1$:\ the label is lost to \emph{localization}
+on the He focus, not to mixing.  Both curves are smooth in $R$.  This is
+the one-electron, continuous face of the abelian residue of
+Paper~58~\cite{loutey_paper58}---$m$ exact at every $R$, $l$ replaced by
+a parameter that deforms rather than switches.  Backing:\
+\texttt{tests/test\_paper11\_eta\_mixing\_onset.py} (the two onset
+exponents, solver-free);\ the large-$R$ values are the solver's, chronicled
+in CHANGELOG v5.10.2.
+
 %% ========================================================================
 %% VIII. DISCUSSION
 %% ========================================================================
@@ -1184,6 +1207,10 @@ R.~P. Brent,
 L.~N. Trefethen,
 \textit{Spectral Methods in MATLAB}
 (SIAM, Philadelphia, 2000).
+
+\bibitem{loutey_paper58}
+J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property: The Abelian
+Residue of Multi-Center Bonding,'' GeoVac Paper~58 (2026).
 
 \end{thebibliography}
 

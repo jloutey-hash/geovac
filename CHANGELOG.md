@@ -71,6 +71,84 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.10.5] - 2026-09-06
+
+**C21 symbolic-literal instrumentation + /qa trunk DELTA #12 (PI-directed; hold full runs, bank this).** PI read: the QA arc is mostly finding prose issues, so the science is holding; build the owed instrument, run a delta, and bank progress without another certifying FULL. Record: docs/qa/trunk.carryforward.md Part Y.
+
+### Instrumentation (completeness-critic GAP 1 closed)
+- check_numeric_consistency.py _norm() now evaluates symbolic-fraction annotation literals (LaTeX frac/dfrac/tfrac, pi, pi^2, inline a/b, and a single Z coefficient e.g. 5Z/8 -> 5/8) to a float, eval sandboxed behind a digits-and-operators-only fullmatch. Self-tested on every form + junk rejection.
+- Registry: l2_rate_4_over_pi to full precision (4/pi); NEW slater_f0_1s (5/8), delta_dirac (1/40), b_casimir (42), f_fock_dirichlet (pi^2/6); new 'constant' KIND. Hard rule preserved: delta_dirac is a derived ingredient, the combination K=pi(B+F-Delta) stays an Observation.
+- 8 annotations across Papers 7/32/38 + group3 synthesis; C21 now checks 107 annotations (was 99), 0 mismatched. The completeness-critic's prose-orphaned 4/pi and the unregistered 5Z/8, B, Delta, F are now gate-guarded.
+
+### DELTA #12 = DEFECTS (remediated same pass)
+- CLAIMS CLEAN: FULL #8's two Paper-1 s/p fixes correct; the 8 gvq wraps are pure no-ops; K=pi(B+F-Delta) is an Observation at every trunk locus.
+- CODE/INSTRUMENT, 1 MATERIAL: the new tight-match clause was INERT -- OR'd behind a loose dec=0 display window (+-0.5 of the rounded integer) that subsumed it, so C21 would have accepted a wrong symbolic value (pi/4 for 4/pi; 1/3 for Delta=1/40). The exact guard-written-in-the-same-pass failure mode. FIXED by gating the two acceptance rules on literal KIND (symbolic -> tight numeric match required; plain number -> display-rounding); fire-tested (planted 1/3-for-1/40 -> MISMATCH; correct annotations unaffected; registry self-test 17/17).
+
+### Status
+Content-clean; 12/12 gates + C10 green; instrument fixed and fire-tested. No FULL #9 (PI hold). A re-DELTA on the guard fix is owed before any future certifying run. Banked this session per PI direction.
+
+## [v5.10.4] - 2026-09-06
+
+**/qa trunk FULL run #8 = FAIL (certifying), remediated same day.** PI-invoked unseeded FULL after DELTA #11 CLEAN-DELTA -- the run that could produce the first trunk PASS. 11 agents (5 code, 2 claims, 1 synthesis, 2 citation, + completeness-critic); deterministic 12/12 + C10. Verdict FAIL: 2 verified MATERIAL-SMALL, 0 LARGE. A fresh-adversary panel caught 2 pre-existing Paper-1 s/p paraphrase zombies that FULL #7 walked past -- the "a FULL run reaches the pre-existing surface a DELTA cannot" dynamic. Every keystone independently re-derived SOUND (code 5/5, synthesis, both citation clean). Record: docs/qa/trunk.carryforward.md Part X.
+
+### The 2 SMALL findings (Paper 1 claims, both fixed)
+- P1 L34 intro roadmap paraphrased the withdrawn mechanism as "s/p degeneracy breaking by the graph Laplacian ... vanishes in the continuum limit" (live, no marker; the graph has no s/p degeneracy) -> reworded to "node-amplitude proxy ... not a graph degeneracy". Escaped C16 as a pure paraphrase.
+- P1 L233-237: a [PANEL-VERIFIED] tag vouched for the withdrawn "more sensitive to the lattice boundary" boundary-effect reading -> tag scoped to D_2p>D_2s; boundary-sensitivity reframed as a "read before 2026-09-03" chronicle with the retraction marker.
+
+### Guard pass (separate, fire-tested)
+- C16 sp-splitting-aliasing-mechanism widened with "degeneracy breaking by the graph" (M1's paraphrase); fires on the retired wording (planted -> FAIL at P1:34), silent on corrected. M2 was a tier mis-scope (not a blocklist class); chronicle-reframe is the remedy.
+- Swept an incomplete earlier fix: the gearing test docstring HEADER still said "converges to ~1.77" (only the findings bullet had been corrected); now spectral=2 / Frobenius->2sqrt6/3.
+
+### Owed (completeness-critic GAP 1)
+C21's trunk annotation surface is still ~one constant (saturation_c). 4/pi is registered but prose-orphaned (written as a symbolic fraction the decimal-scanner can't verify); 5Z/8, B=42, Delta=1/40, F=pi^2/6 unregistered. Closing this needs a C21 symbolic-literal enhancement, its own instrument task -- not a naive wrap. Values all independently SOUND, so nothing is wrong-valued.
+
+### Status
+Content-clean; 12/12 gates PASS on trunk; Paper 1 compiles; gearing test 4/4. FAIL stands as the run verdict; a claim-impact DELTA now unlocks FULL #9. NOT committed (PI /checkpoint).
+
+## [v5.10.3] - 2026-09-06
+
+**/qa trunk FULL run #7 = FAIL (certifying), remediated + instrument gaps closed, same day.** PI-invoked unseeded FULL run -- the certifying shape. 10 reviewers (5 code, 2 claims, 1 synthesis, 2 citation) + completeness-critic; 12/12 deterministic gates + C10. Verdict FAIL: 4 verified MATERIAL findings, ALL SMALL, 0 LARGE. Every mathematical keystone independently re-derived SOUND (vertex polynomial; C=42.7397 three routes; lambda_n=-(n^2-1); 4/pi + h^v from Killing form; forced count 32 by direct SVD). Record: docs/qa/trunk.carryforward.md Part V.
+
+### The 4 SMALL findings (fixed)
+- P38 leimbach bibitem title "for low-dimensional tori" -> "for tori".
+- P32 L3471 thm:gh_convergence proof-sketch framed the WITHDRAWN five-lemma Latremoliere-tunnel assembly as THE proof -> reworded to Paper 38's lifted-state unconditional route (state-space GH, not propinquity); five-lemma list reframed historical.
+- P7 abstract underclaim: lambda_max saturation blanket-[MEASURED] -> [INTERNAL THEOREM] + closed-form rate (Paper 0 SecVI).
+- P38 paper7 bibitem "internal preprint (2024)" -> (2026).
+
+### Instrument gaps + guard pass (each fire-tested; separate from the fixes per the CLAUDE.md 9 hard rule)
+- **C16** widened to catch the P32 five-lemma class ("tunneling-pair assembly of five"), paper_32 added to cited_by (stamped). Fires on retired wording, silent on corrected.
+- **C11** gained a BIBITEM_BLOCK scanner for the "internal preprint (YEAR)" dodge its year regex missed. Fires on planted 2024, silent on 2026; surfaced 10 pre-existing de-versioning mismatches -> baselined (30->40); fixed a P11 bibitem title truncation it also surfaced.
+- **prop=2 genericity** now tested (tests/test_paper32_prop_genericity.py; inline prop, generic->2, controls full->1 / diagonal->-1; fire-tested).
+- **C21 vacuous-on-trunk CLOSED**: saturation_c (C=42.7397, 3-doc twin) registered + \gvq-annotated at 4 loci -> C21 now has real trunk annotation surface (99 checked, 0 mismatched; was 0). l2_rate_4_over_pi registered. New _KIND "constant".
+- Stale test docstrings (gearing, kappa T1) corrected; tab:N_electron claim-matrix coverage row added.
+
+### Status
+Content-clean; 12/12 gates PASS on trunk; 6 papers compile; touched+new tests 13 passed. FAIL stands as the run verdict (a FULL run reports what it found); a claim-impact DELTA (#11, same day) returned CLEAN-DELTA -- all 3 affected dimensions clean, deterministic 12/12 -- so FULL #8 (the certifying run) is unlocked. NOT committed (PI /checkpoint). The C11/C16 gate widenings are gate changes -- PI may elect a minor bump.
+
+## [v5.10.2] - 2026-09-06
+
+**Decompactification is continuous, and correlation touches it in exactly one place.** Two PI-directed diagnostics (2026-09-05/06) answering "the compact-to-non-compact transition feels Boolean; is there a continuous description?" Verdict: the LABEL is Boolean (axial m exact at every R; l not shared), the COUPLING is continuous, and every curve measured is smooth in R. Canonical memos: `debug/sprint_decompactification_R_sweep_memo.md`, `debug/sprint_decompactification_correlation_memo.md`. Captured into Papers 58, 60, 11.
+
+### Results
+
+- **The per-shell front is set by the exponential decay length, not the mean radius (H2+).** R at which the ns_A/ns_B overlap reaches 1/sqrt2 (projector principal angle 45 deg, max ||[P_A,P_B]||) is R*(n) = (2.12-2.19) x n/Z for n = 2..8 (median 2.14), flat within 3 %, while R*/(n^2/Z) drifts 1.10 -> 0.27. Fitted exponent R*(n) ~ n^0.98 (inverse n*(R) ~ R^1.02). The PM's sqrt(Z R) window hypothesis was WRONG (mean-radius criterion); the tail-reach criterion is the right one. Four aligned curves all continuous: Paper 8 bond-sphere angle gamma(R), projector principal angles (LiH anchor 7.6/44.7/67.3 deg reproduced exactly), aggregate l-mixing, closed-form seed argument a(R) = R.
+- **Unequal tails combine as a geometric mean (1s-1s, tail-reach front).** R_rel = 1.58 sqrt(l_A l_B) over the charge pairs (1,1),(2,1),(3,1),(2,2), max dev 2.0 % (free power p = q = 0.49); dense exponent-ratio scan t in [1,8]: geometric 9.1 % vs additive 23.5 %, max-tail 61.6 %, harmonic 47.0 %. The ABSOLUTE 45-degree front exists only for exponent ratio t < t_c = 2.664 (root of (2 sqrt t/(1+t))^3 = 1/sqrt2; S(R) is monotone decreasing for every t, so the united-atom value is the maximum). The ladder driver reported 2.7456 -- the first point of its discrete t-scan past the root, not the root; caught by the independent quadrature route in the backing test (the independent-route rule, working).
+- **Correlation moves the front only through Z -> Z_eff (occupied one-body space).** Occupation-weighted principal-angle front (the Paper 60 compound-matrix object) vs the one-electron 1s-1s law at the EMPIRICAL per-center decay length: H2 HF -0.7 %, H2 FCI -1.2 %, HeH+ HF 0.0 %, HeH+ FCI -0.2 %; pointwise |Delta cos| <= 0.006 wherever the second center holds > 1 % of an electron. Hard control passed: zeta_eff is a measured OUTPUT (H2 HF 1.46 -> 0.83 across R, the textbook 1.19 emerging at R = 1.4; HF vs FCI differ 12 % at R = 4), basis doubling moves R* by <= 0.8 %, two decay-length routes agree 0.3 % at the front, ERI grid and L_max controls <= 2e-5.
+- **Correlation DOES move the signed cross-center coherence front, through occupation numbers, not any length.** M2 = Tr(P_AB S_BA)/sqrt(Tr(P_AA S_AA) Tr(P_BB S_BB)) equals the angle front at HF but shifts inward at FCI by 23.1 % (H2: 0.987 vs 1.285) and 9.0 % (HeH+: 0.690 vs 0.758). Mechanism (two-orbital form, sympy-pinned): the antibonding NO's per-center weight w_u^2 = 1/(2(1-S)) is amplified (1+S)/(1-S) ~ 5x over the bonding one, so n_u = 0.025 already pulls M2 from S = 0.674 to 0.596 (formula 0.591). MO limit M2 = S; Heitler-London limit M2 = S^2. This is bond-order collapse -- the k-th compound of the same one-electron overlap -- exactly the object Paper 60 says does not compound AS A METRIC.
+- **Heteronuclear one-electron eta-label (HeH2+ vs H2+).** The b*eta term turns mixing on at FIRST order (participation deficit ~ R^2.1) where the homonuclear c^2 eta^2 term is second order (~ R^4.0), and the heteronuclear deficit does NOT saturate near 0.5: it rises to 0.75 at R = 12 as the electron localizes on the He focus (<eta> -> -0.96). The eta-label is lost to localization, not to gerade mixing. Both curves continuous.
+
+### Paper capture (no new tier above MEASURED / SYMBOLIC / OBSERVATION)
+
+- **Paper 58** new Sec. "The continuous side: the decompactification front" (after the correlation-diagram reading, before "Two re-readings"): decay-length front, linear scaling, geometric-mean tail law, t_c threshold, the Boolean-label / continuous-coupling framing; backing-table rows. Also the correlation-diagram remark of 2026-09-06 (m = the non-crossing rule's sorting label; Herzberg 1950, von Neumann-Wigner 1929).
+- **Paper 60** Sec. manyelectron: new paragraph -- the compound-matrix identity extended from the metric to the FRONT (screening-only, measured), and the one place correlation moves a front (coherence, via occupation).
+- **Paper 11** Sec. "Heteronuclear extension": eta-label continuity paragraph (first- vs second-order onset; localization, not saturation).
+- Tests (all fire-tested): `tests/test_paper58_decompactification_front.py`, `tests/test_paper60_coherence_front.py`, `tests/test_paper11_eta_mixing_onset.py`; slow ladder-driver tests in the first two. Registry: `decomp_front_ratio`, `decomp_front_exponent`, `tail_geometric_const`, `tail_t_c`, `front_resid_*`, `coherence_shift_*`. Matrix rows for 58/60/11.
+- Memory `geovac_axis_map.md` corrected (the sqrt(Z R) window sentence was the PM's wrong heuristic).
+
+### Where this sits
+
+The bridge the PI asked about: the operator-algebra de-compactification (Paper 47 T -> infinity, ruled "convention") and the chemistry decompactification (R) have the same two-dial shape (compact cutoff + a released axis). At the metric level both see only the compact part; the continuous parameter lives in the transcendental seed's argument (a(R) = R) -- Paper 18's compactness thesis as an integral. Not a theorem; a measured pattern now stated once in Paper 58. Track log: `debug/track_logs/decompactification_bridge.md`.
+
 ## [v5.10.1] - 2026-09-05
 
 **/qa trunk DELTA #10 = DEFECTS (first claim-impact run).** The new semantic-diff discipline paid off immediately. Record: carryforward Part U.

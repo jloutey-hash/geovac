@@ -7,6 +7,7 @@
 \newtheorem{corollary}{Corollary}
 \newtheorem{prediction}{Prediction}
 \newtheorem{observation}{Observation}
+\newcommand{\gvq}[2]{#2}
 
 \newcommand{\sthree}{S^{3}}
 
@@ -651,6 +652,29 @@ selection rules are Clebsch--Gordan couplings requiring the full group;
 reducing the group destroys them.
 \end{proof}
 
+\paragraph{The correlation-diagram reading.}
+\textbf{[OBSERVATION]} Theorem~\ref{thm:abelian_residue} is the
+group-theoretic content of a construction every chemist already uses.
+The Mulliken correlation diagram of a diatomic~\cite{herzberg1950}
+connects the united-atom labels at $R \to 0$---where the
+prolate-spheroidal $\eta$-equation's separation parameter reduces to
+$l$ (Paper~11~\cite{loutey_paper11})---to the separated-atom labels at
+$R \to \infty$, where each center carries its own $l$.  The one rule
+that organizes the connections is the non-crossing rule of von~Neumann
+and Wigner~\cite{neumann_wigner1929}:\ as $R$ varies, two levels of the
+same symmetry cannot cross.  For a linear molecule that symmetry is
+exactly the surviving axial character $m$ (the $\sigma/\pi/\delta$
+label), together with $g/u$ for a homonuclear pair and, for
+many-electron states, spin.  Read along $R$, part~(i)---$m$ conserved
+cross-center at every $R$---supplies the classification the non-crossing
+rule sorts by, and part~(ii)---$l$ not shared---is why there is a
+diagram to draw at all:\ were $l$ shared, united-atom and separated-atom
+labels would coincide and the diagram would be trivial.  So the sparsity
+that survives molecularization and the $\sigma/\pi/\delta$ bookkeeping
+that governs orbital crossings are the same axial $U(1)$ seen from two
+sides.  This is an identification with a standard result, not a new
+claim; the theorem's backing is unchanged.
+
 The theorem is independently corroborated by the framework's own
 production code, along a path that knows nothing of this analysis: the
 cross-center nuclear-attraction routine in
@@ -716,6 +740,92 @@ constant factor---not the exactly-linear-in-$Q$ Pauli-count story
 basis, Paper~14) the framework's qubit results rest on.
 
 %% ========================================================================
+%% ========================================================================
+\section{The continuous side: the decompactification front}
+\label{sec:continuous}
+%% ========================================================================
+
+Theorem~\ref{thm:abelian_residue} is a statement about \emph{labels}, and
+labels are all-or-nothing:\ $m$ is shared at every $R > 0$ and $l$ at
+none.  That leaves open what a chemist actually watches as two atoms
+approach---how the coupling that $l$ used to forbid turns on.  This section
+measures that, for the one-electron case, and finds it continuous in $R$
+with a length scale the reader can name.  (The many-electron extension,
+and the one place correlation enters, is in Paper~60~\cite{loutey_paper60},
+Sec.~``the metric does not compound''.)
+
+\paragraph{The per-shell front.}
+\textbf{[MEASURED]} Take hydrogenic $ns$ orbitals of charge $Z$ on both
+centers and let $S_n(R) = \langle ns_A | ns_B \rangle$.  The two
+single-center projectors onto these shells fail to commute by
+$\|[P_A, P_B]\| = S_n\sqrt{1 - S_n^2}$, maximal ($= \tfrac12$, principal
+angle $45^\circ$) at $S_n = 1/\sqrt2$.  Define the \emph{front}
+$R^{*}(n)$ as the distance at which that maximum is reached.  It tracks the
+orbital's exponential decay length $\ell_n = n/Z$, not its mean radius
+$r_n = n^2/Z$:
+\begin{center}
+\begin{tabular}{r@{\quad}r@{\quad}r@{\quad}r}
+$n$ & $R^{*}$ & $R^{*}/\ell_n$ & $R^{*}/r_n$ \\
+\hline
+1 & 1.565 & 1.565 & 1.565 \\
+2 & 4.39 & 2.19 & 1.10 \\
+3 & 6.57 & 2.19 & 0.73 \\
+4 & 8.52 & 2.13 & 0.53 \\
+6 & 12.82 & 2.14 & 0.36 \\
+8 & 17.15 & 2.14 & 0.27 \\
+\end{tabular}
+\end{center}
+($Z = 1$; bohr).  For $n \ge 2$ the decay-length ratio lies in
+$2.12$--$2.19$ (median $\gvq{decomp_front_ratio}{2.14}$, flat within
+$3\%$) while the mean-radius
+ratio falls by $4\times$; the fitted exponent is
+$R^{*}(n) \propto n^{\gvq{decomp_front_exponent}{0.98}}$, i.e.\ a front
+\emph{linear} in $R$, $n^{*}(R) \simeq Z R/2.14$.  The reason is that
+overlap across a gap is a tail phenomenon:\ it is governed by how far the
+exponential tail reaches, not by where the bulk of the density sits.  The
+naive criterion ``$r_n \approx R$'' (a window at $n \sim \sqrt{ZR}$)
+predicts exponent $\tfrac12$ and is rejected by the same data.  Backing:\
+\texttt{tests/test\_paper58\_decompactification\_front.py}, which
+recomputes every entry by an independent prolate-spheroidal quadrature
+route and also rejects the mean-radius scaling explicitly.  The
+companion curves---the bond-sphere angle $\gamma(R)$ of
+Paper~8~\cite{loutey_paper8}, the principal angles between the two
+center projectors (which reproduce the LiH values
+$7.6^\circ/44.7^\circ/67.3^\circ$ of Paper~32's composition remark at
+its bond length), the aggregate $l$-mixing, and the argument of the
+closed-form seed $e^{a}E_1(a)$ of Sec.~\ref{sec:qfd}, $a(R) = R$---are
+all smooth in $R$ (chronicle:\ CHANGELOG v5.10.2).  \textbf{[OBSERVATION]}
+So the picture is:\ the label is Boolean, the coupling is continuous, and
+the continuous knob is the decay length.  The abelian residue is the
+Boolean half of the two-center problem; this front is its continuous half;
+the correlation-diagram reading of Sec.~\ref{sec:mechanism} is where the
+two meet.
+
+\paragraph{Two unequal tails.}
+\textbf{[MEASURED]} For $1s$ tails of different decay lengths
+$\ell_A, \ell_B$ (charges $Z_A \ne Z_B$), the tail-reach front
+$R_{\rm rel}$---the distance at which $|S|$ falls to $|S|_{\max}/\sqrt2$---
+combines the two lengths as a \emph{geometric mean},
+\begin{equation}
+  R_{\rm rel} \simeq \gvq{tail_geometric_const}{1.58}\,\sqrt{\ell_A \ell_B},
+  \label{eq:tail_geometric}
+\end{equation}
+constant to $2\%$ over the charge pairs $(1,1),(2,1),(3,1),(2,2)$ and to
+$9\%$ over a dense exponent-ratio scan $t = \zeta_B/\zeta_A \in [1, 8]$,
+where the additive law $c(\ell_A + \ell_B)$ misses by $24\%$, the
+longer-tail law by $62\%$.  \textbf{[SYMBOLIC]} The \emph{absolute}
+$45^\circ$ front, by contrast, exists only when the united-atom overlap
+$S(0) = \bigl(2\sqrt t/(1+t)\bigr)^3$ exceeds $1/\sqrt2$, i.e.\ for
+$t < t_c = \gvq{tail_t_c}{2.664}$;\ beyond that ratio the two shapes are
+already more than $45^\circ$ apart at $R = 0$ and, $S(R)$ being monotone
+decreasing for every $t$, no distance brings them closer.  Mixed-$n$ pairs are near-orthogonal at every $R$ and carry no
+front.  Backing:\ the same test file
+(\texttt{test\_geometric\_mean\_tail\_law\_1s1s},
+\texttt{test\_absolute\_front\_threshold\_t\_c}).  Both facts are inputs
+to the many-electron test of Paper~60, whose prediction uses the exact
+$1s$--$1s$ overlap at the measured per-center exponents rather than either
+fitted constant.
+
 \section{Two re-readings}
 \label{sec:rereadings}
 %% ========================================================================
@@ -1107,6 +1217,9 @@ Thm.~\ref{thm:abelian_residue}(ii) & INT. & \textsc{live} \\
 Obs.~\ref{obs:no_angle} & MEASURED & \textsc{live} \\
 Pred.~\ref{pred:angular} & UNTESTABLE & (needs angular build) \\
 Obs.~\ref{obs:cost_conservation} & OBSERVATION & CHANGELOG v4.73.x \\
+Correlation-diagram reading & OBSERVATION & Thm.~\ref{thm:abelian_residue}(i) \\
+Sec.~\ref{sec:continuous} front, exponent & MEASURED & \textsc{live} \\
+Eq.~\eqref{eq:tail_geometric}, $t_c$ & MEASURED / SYMB. & \textsc{live} \\
 Obs.~\ref{obs:permutation_cost} & MEASURED & \textsc{live} \\
 Tab.~\ref{tab:nah}, fixed $R$ & MEAS. & \textsc{live} \\
 Tab.~\ref{tab:nah}, minima & PANEL & \textsc{owed} \\
@@ -1220,6 +1333,26 @@ in the theory of molecular structure.\ Parts I \& II,''
 E.~Filter and E.~O.~Steinborn, ``Extremely compact formulas for molecular
 two-center one-electron integrals and Coulomb integrals over Slater-type
 atomic orbitals,'' \textit{Phys.\ Rev.\ A}\ \textbf{18}, 1 (1978).
+
+\bibitem{neumann_wigner1929}
+J.~von~Neumann and E.~Wigner, ``\"Uber das Verhalten von Eigenwerten
+bei adiabatischen Prozessen,'' \textit{Phys.\ Z.}\ \textbf{30},
+467--470 (1929).
+
+\bibitem{herzberg1950}
+G.~Herzberg, \textit{Molecular Spectra and Molecular Structure.\ I.\
+Spectra of Diatomic Molecules}, 2nd ed.\ (Van Nostrand, New York, 1950),
+Ch.~VI (correlation of molecular and atomic states; the non-crossing
+rule).
+
+\bibitem{loutey_paper60}
+J.~Loutey, ``The Generalized-Sturmian Secular Equation Block-Encodes
+Without a Metric:\ A Quantum-Algorithm Analysis, Metric-Free for Atoms
+and a Conditioning Frontier for Molecules,'' GeoVac Paper~60 (2026).
+
+\bibitem{loutey_paper8}
+J.~Loutey, ``Bond Sphere:\ Diatomic Molecules as $S^3$ and their Natural
+Sturmian Basis,'' GeoVac Paper~8--9 (2026).
 
 \end{thebibliography}
 

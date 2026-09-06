@@ -5,6 +5,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{observation}{Observation}
+\newcommand{\gvq}[2]{#2}
 
 \begin{document}
 
@@ -531,6 +532,54 @@ lever), and the $N$-electron secular equation inherits an identity metric:
 \textbf{the molecular metric penalty is one-electron, not $N$-electron}.  It is the on-device analogue
 of the once-executed classical mean-field step that lets production Gaussian simulation carry no
 metric into the many-body Hamiltonian.
+
+\textbf{[MEASURED]} The compound-matrix identity governs more than the metric:\ it fixes
+\emph{where} the two centers decompactify.  Paper~58~\cite{loutey_paper58} (Sec.~``the continuous
+side'') defines the one-electron front $R^{*}$ as the distance at which the two single-center
+projectors reach their maximal non-commutativity (principal angle $45^\circ$) and finds it set by the
+orbital's exponential decay length, $R^{*} \approx 2.14\,n/Z$.  Since a $k$-electron configuration
+overlap is the $k$-th compound of the one-electron overlap, many-body physics can move that front
+\emph{only} by changing the decay length the electrons actually occupy.  We tested this on H$_2$ and
+HeH$^+$ at Hartree--Fock and full CI in a per-center multi-$\zeta$ $1s$ basis (five, ten, and eight
+exponents per center;\ the effective per-center exponent $\zeta_{\rm eff}(R)$ fitted from the
+one-body density's own tail, and verified to be an \emph{output}:\ it runs $1.46 \to 0.83$ across
+$R$ at HF, reaches the textbook $1.19$ at $R = 1.4$, differs between HF and FCI by $12\%$ at $R = 4$,
+equals no basis exponent, and moves the front by $\le 0.8\%$ under basis doubling).  The
+occupation-weighted principal-angle front of the occupied one-body space matches the exact
+$1s$--$1s$ law at the empirical $\zeta_{\rm eff}$ to
+$\gvq{front_resid_h2_hf}{-0.7}\%$ (H$_2$, HF), $\gvq{front_resid_h2_fci}{-1.2}\%$ (H$_2$, FCI),
+$\gvq{front_resid_heh_hf}{0.0}\%$ (HeH$^+$, HF) and $\gvq{front_resid_heh_fci}{-0.2}\%$
+(HeH$^+$, FCI), with $|\Delta\cos| \le 0.006$ pointwise wherever the second center holds more
+than $1\%$ of an electron.  \textbf{Screening moves the front;\ nothing else does, at the one-percent
+level.}  The sub-percent residual is a shape term (a contracted multi-$\zeta$ component is not one
+exponential), negative at every rung.
+
+\textbf{[SYMBOLIC + MEASURED]} Correlation does move a \emph{different} front, and through occupation
+numbers rather than any length.  Let $\gamma$ be the one-body density and $P_{XY}$ its
+center-blocks;\ the \emph{signed} cross-center coherence
+$M_2 = \mathrm{Tr}(P_{AB}S_{BA})/\sqrt{\mathrm{Tr}(P_{AA}S_{AA})\,\mathrm{Tr}(P_{BB}S_{BB})}$
+coincides with the principal-angle front at HF (one occupied orbital) but crosses $1/\sqrt2$ inward
+at FCI by $\gvq{coherence_shift_h2}{23}\%$ (H$_2$:\ $0.987$ vs $1.285$~bohr) and
+$\gvq{coherence_shift_heh}{9}\%$ (HeH$^+$:\ $0.690$ vs $0.758$).  In the two-orbital form the
+mechanism is explicit:\ with natural-orbital occupations $n_g, n_u$ and per-center weights
+$w_g^2 = 1/(2(1+S))$, $w_u^2 = 1/(2(1-S))$,
+\begin{equation}
+  M_2 = \frac{n_g w_g^2 - n_u w_u^2}{n_g w_g^2 + n_u w_u^2}\,S,
+  \qquad \frac{w_u^2}{w_g^2} = \frac{1+S}{1-S},
+  \label{eq:coherence_two_orbital}
+\end{equation}
+so the antibonding orbital enters the per-center density with a weight amplified about fivefold at
+$S = 0.67$, and $n_u = 0.025$ already pulls $M_2$ from $S = 0.674$ to $0.591$ (measured $0.596$).
+The limits are the molecular-orbital value $M_2 = S$ ($n_u = 0$) and the Heitler--London value
+$M_2 = S^2$ (at HL occupations $n_g = (1+S)^2/(1+S^2)$, $n_u = (1-S)^2/(1+S^2)$); H$_2$ runs from
+the first toward the second as $R$ grows.  This is bond-order collapse---the $k$-th compound of the
+same one-electron overlap---which is exactly the object the identity above says does not compound
+\emph{as a metric}:\ correlation touches decompactification in one place, and that place is
+occupation, not geometry.  Scope:\ $s$-only per-center basis, two electrons;\ whether the
+principal-angle statement survives at $N > 2$ with several strongly occupied natural orbitals is
+untested.  Backing:\ \texttt{tests/test\_paper60\_coherence\_front.py} (the limits of
+Eq.~\eqref{eq:coherence_two_orbital} symbolically, the measured H$_2$ point, and the rejected
+equal-weight alternative);\ chronicle CHANGELOG v5.10.2.
 
 \textbf{[MEASURED]} The interelectron matrix $T'$ is assembled from two-center electron-repulsion
 integrals, and these are in hand.  We evaluate the shared-scale Coulomb--Sturmian two-center ERIs

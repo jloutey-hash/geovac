@@ -19,8 +19,9 @@ This test asks the ONLY question that matters for the "derived" claim:
   or do they merely coincide numerically?
 
 Strategy (each piece derived from INDEPENDENT inputs, could-have-failed):
-  T1. Compute the geometric c^2(n,0) from the Chebyshev-U three-term
-      recurrence (independent of any energy matching). It must equal 1/16.
+  T1. Compute c^2(n,0) from the Chebyshev-U three-term recurrence
+      (independent of any energy matching). It must equal 1/4 (the Chebyshev
+      amplitude is 1/2); the geometric 1/16 = c^2(n,0)/4 = 1/Omega^4(0).
   T2. Compute 1/Omega^4(0) from the conformal factor Omega = 2p0/(p^2+p0^2)
       at p=0 (independent of the graph). It must equal 1/16.
   T3. Compute the matching kappa from the binary graph Laplacian spectrum.

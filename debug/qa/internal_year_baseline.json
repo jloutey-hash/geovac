@@ -1,185 +1,245 @@
 {
-  "_comment": "Pre-existing internal-bibitem year debt, baselined 2026-09-01 when the C11 year criterion was added. Each entry: a bibitem citing a GeoVac paper with a year that paper's own \\date contradicts. Papers are corrected in place, so the citing text kept the original year. These PASS; any NEW mismatch FAILS. Shrink this file, never grow it: fix a group's entries during its re-certification and delete them here.",
-  "entries": [
-    {
-      "path": "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
-      "paper": 12,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
-      "paper": 17,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group3_foundations/paper_56_tannakian_substrate.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group4_quantum_computing/paper_16_periodicity.tex",
-      "paper": 0,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group4_quantum_computing/paper_16_periodicity.tex",
-      "paper": 1,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
-      "paper": 0,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
-      "paper": 2,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_28_qed_s3.tex",
-      "paper": 2,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_28_qed_s3.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_28_qed_s3.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
-      "paper": 0,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
-      "paper": 2,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_33_qed_selection_rules.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_33_qed_selection_rules.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_36_bound_state_qed.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_36_bound_state_qed.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
-      "paper": 15,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
-      "paper": 17,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group6_precision_observations/paper_35_time_as_projection.tex",
-      "paper": 7,
-      "cited": "2025",
-      "date": "2026"
-    },
-    {
-      "path": "papers/group6_precision_observations/paper_35_time_as_projection.tex",
-      "paper": 14,
-      "cited": "2025",
-      "date": "2026"
-    }
-  ]
+ "_comment": "Pre-existing internal-bibitem year debt, baselined 2026-09-01 when the C11 year criterion was added. Each entry: a bibitem citing a GeoVac paper with a year that paper's own \\date contradicts. Papers are corrected in place, so the citing text kept the original year. These PASS; any NEW mismatch FAILS. Shrink this file, never grow it: fix a group's entries during its re-certification and delete them here.",
+ "entries": [
+  {
+   "path": "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
+   "paper": 12,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_54_tensor_product_two_body.tex",
+   "paper": 17,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_56_tannakian_substrate.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group4_quantum_computing/paper_16_periodicity.tex",
+   "paper": 0,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group4_quantum_computing/paper_16_periodicity.tex",
+   "paper": 1,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+   "paper": 0,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+   "paper": 2,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_28_qed_s3.tex",
+   "paper": 2,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_28_qed_s3.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_28_qed_s3.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
+   "paper": 0,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
+   "paper": 2,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_33_qed_selection_rules.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_33_qed_selection_rules.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_36_bound_state_qed.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_36_bound_state_qed.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "paper": 15,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+   "paper": 17,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_22_angular_sparsity.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_22_angular_sparsity.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group3_foundations/paper_22_angular_sparsity.tex",
+   "paper": 17,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_26_entanglement.tex",
+   "paper": 0,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_26_entanglement.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_26_entanglement.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_26_entanglement.tex",
+   "paper": 17,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+   "paper": 0,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+   "paper": 7,
+   "cited": "2025",
+   "date": "2026"
+  },
+  {
+   "path": "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+   "paper": 14,
+   "cited": "2025",
+   "date": "2026"
+  }
+ ]
 }

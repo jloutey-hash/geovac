@@ -39,6 +39,8 @@ Marcolli--van~Suijlekom Gauge-Network Lineage}
 \author{GeoVac Project}
 \date{May 2026}
 
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 \maketitle
 
@@ -1722,7 +1724,7 @@ Language}
 Paper~2~\cite{paper2} observed the numerical coincidence
 $K = \pi(B + F - \Delta) = 1/\alpha$ at $4.77 \times 10^{-7}$ (raw;\ $8.8 \times 10^{-8}$ after the Sprint-A $\alpha^2$ correction), with
 \[
-   B = 42, \quad F = \tfrac{\pi^2}{6}, \quad \Delta = \tfrac{1}{40},
+   B = \gvq{b_casimir}{42}, \quad F = \gvq{f_fock_dirichlet}{\tfrac{\pi^2}{6}}, \quad \Delta = \gvq{delta_dirac}{\tfrac{1}{40}},
 \]
 and the Phase~4B--4I sprint series identified three independent
 spectral homes for the three pieces (project development-frontier log):
@@ -3468,8 +3470,14 @@ small-$n$ closed forms are consistent with it.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
-The proof is a Latr{\'e}moli{\`e}re tunneling-pair assembly of five
-lemmas closed in WH1 sprint~R2.5 (April--May~2026):
+The theorem is established by Paper~38's~\cite{loutey_paper38}
+lifted-state unconditional route in the van~Suijlekom state-space
+Gromov--Hausdorff distance (\emph{not} a Latr{\'e}moli{\`e}re
+propinquity --- that strengthening is the open named gap of
+Remark~\ref{rem:gh_status_caveat}). The historical five-lemma UCP-pair
+assembly of WH1 sprint~R2.5 (April--May~2026) is recorded below for
+provenance; its lemma~L5 is withdrawn (2026-09-03,
+Remark~\ref{rem:gh_status_caveat}):
 
 \begin{itemize}
 \item[\textbf{L1${}'$}] (Sprint R3.5, 2026-05-04;

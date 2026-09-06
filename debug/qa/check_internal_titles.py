@@ -111,6 +111,20 @@ def main_part(title: str) -> str:
 # false-positive.
 BIBYEAR = re.compile(r"(?:GeoVac )?Papers?~?\s?(\d{1,2})\s*\((20\d\d)\)")
 
+# FULL run #7 (2026-09-06) scope fix.  BIBYEAR only sees "Paper~N (YEAR)".
+# A bibitem keyed {paperN}/{loutey_paperN} (or labelled "internal Paper~N")
+# whose year lives in "GeoVac internal preprint (YEAR)" -- with no "Paper~N"
+# adjacent to the year-paren -- escaped it entirely: Paper 38 cited Paper 7 as
+# a 2024 preprint against its 2026 date and C11 passed clean (the completeness
+# critic caught it, not the gate).  This block scanner reads each bibitem, takes
+# the paper number from the KEY or the label, and any "(YEAR)" from the body.
+BIBITEM_BLOCK = re.compile(
+    r"\\bibitem(?:\[[^\]]*\])?\{([^}]+)\}(.*?)"
+    r"(?=\\bibitem|\\end\{thebibliography\})", re.S)
+_INTERNAL_KEY = re.compile(r"(?:loutey_)?paper[_]?(\d{1,2})\b", re.I)
+_INTERNAL_LABEL = re.compile(r"internal Paper~?\s?(\d{1,2})", re.I)
+_ANYYEAR = re.compile(r"\((20\d\d)\)")
+
 
 def build_year_map() -> dict:
     """{paper_number: year} from each ACTIVE paper's own \\date{}."""
@@ -160,13 +174,29 @@ def scan_years(ymap: dict) -> list:
             continue
         self_num = re.search(r"[Pp]aper[_ ](\d+)[_ ]", f.name)
         self_num = int(self_num.group(1)) if self_num else None
+        path = str(f.relative_to(ROOT)).replace(chr(92), '/')
         for m in BIBYEAR.finditer(txt, i):
             n, y = int(m.group(1)), m.group(2)
             if n == self_num or n not in ymap or ymap[n] == y:
                 continue
-            out.append({"file": f.name,
-                        "path": str(f.relative_to(ROOT)).replace(chr(92), '/'),
+            out.append({"file": f.name, "path": path,
                         "paper": n, "cited": y, "real": ymap[n]})
+        # Second pass: the "internal preprint (YEAR)" dodge (see BIBITEM_BLOCK).
+        for bm in BIBITEM_BLOCK.finditer(txt, i):
+            key, body = bm.group(1), bm.group(2)
+            km = _INTERNAL_KEY.search(key) or _INTERNAL_LABEL.search(body)
+            if not km:
+                continue
+            n = int(km.group(1))
+            if n == self_num or n not in ymap:
+                continue
+            years = _ANYYEAR.findall(body)
+            if not years or ymap[n] in years:
+                continue
+            if any(o["path"] == path and o["paper"] == n for o in out):
+                continue  # already reported by BIBYEAR
+            out.append({"file": f.name, "path": path,
+                        "paper": n, "cited": years[0], "real": ymap[n]})
     return out
 
 

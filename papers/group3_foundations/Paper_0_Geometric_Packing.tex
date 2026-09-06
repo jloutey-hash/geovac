@@ -9,6 +9,8 @@
 \usepackage{braket}
 \usepackage{hyperref}
 
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{Angular Momentum as Information Geometry:\\Isotropic Packing and the Universal Angular Cross-Section}
@@ -693,7 +695,7 @@ $\min_\ell\bigl[4\sin^2\frac{\pi}{2(n_{\max}-\ell)} + 4\sin^2\frac{\pi}{2(2\ell+
   \;=\; \frac{C}{n_{\max}^{2}} + o\bigl(n_{\max}^{-2}\bigr),
   \qquad
   C \;=\; \frac{\pi^{2}}{4}\bigl(2 + 2^{1/3}\bigr)^{2}\bigl(1 + 2^{-2/3}\bigr)
-  \;=\; 42.7397\ldots,
+  \;=\; \gvq{saturation_c}{42.7397}\ldots,
   \label{eq:saturation_rate}
 \end{equation}
 attained at $\ell/n_{\max} \to 1 - 2/(2 + 2^{1/3}) = 0.386488$ (measured argmax $\ell = 11$ at $n_{\max} = 30$, $27$ at $70$).  Every finite sample lies \emph{below} $C$ (verified at all $591$

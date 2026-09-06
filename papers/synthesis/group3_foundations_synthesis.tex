@@ -14,6 +14,8 @@
 \newtheorem{observation}{Observation}
 \newtheorem{conjecture}{Conjecture}
 
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{Foundations of the Geometric Vacuum Framework:\\
@@ -197,7 +199,7 @@ $n_{\max}$ modulo $3$), not an
 established convergence (re-priced 2026-09-03), while
 \textbf{[INTERNAL THEOREM]} the state-space Gromov--Hausdorff
 convergence of the spinor spectral truncations is proved
-unconditionally with rate $(4/\pi)\log n_{\max}/n_{\max}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form)
+unconditionally with rate $(\gvq{l2_rate_4_over_pi}{4/\pi})\log n_{\max}/n_{\max}$ (dual-Coxeter normalisation; $2/\pi$ on the unit $S^3$, $2\sqrt2/\pi$ under the field-standard Kac form)
 (Paper~38~\cite{loutey_paper38}).  \textbf{(H2)} \textbf{[INTERNAL THEOREM]} The angular sparsity
 density of two-body matrix elements is potential-independent
 (Paper~22~\cite{loutey_paper22}): a structural theorem of
@@ -401,7 +403,7 @@ conformal-transformation chain, not a convergence statement, and the
 graph-side \emph{operator} convergence has no theorem behind it. The
 saturation of the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
 \emph{is} one --- \textbf{[INTERNAL THEOREM]} closed form with rate
-$C/n_{\max}^2$, $C = 42.7397\ldots$ (Paper~0~\S VI) --- and the frozen
+$C/n_{\max}^2$, $C = \gvq{saturation_c}{42.7397}\ldots$ (Paper~0~\S VI) --- and the frozen
 test \texttt{tests/test\_paper7\_graph\_convergence.py} pins it together
 with the block structure of the lattice Laplacian;\ neither is operator
 convergence (re-scoped 2026-09-03;\ tier corrected 2026-09-04).
@@ -502,7 +504,7 @@ outside the foundations scope of this synthesis).
 
 \textbf{[SYMBOLIC PROOF]} A particular consequence of the $S^3$ projection is the closed-form
 single-center two-electron repulsion integral
-$F^0(\text{1s}, \text{1s}) = 5Z/8$, derived from the node-overlap
+$F^0(\text{1s}, \text{1s}) = \gvq{slater_f0_1s}{5Z/8}$, derived from the node-overlap
 formula for $V_{ee}$ on $S^3$ in Paper~7 for $s$-orbital pairs.  More
 generally, all single-center Slater $F^k$ integrals reduce to exact
 rationals in arithmetic over $\mathbb{Q}$ (the hypergeometric Slater

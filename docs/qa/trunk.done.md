@@ -23,6 +23,10 @@
 > | DELTA #9 | 2026-09-05 | CLEAN-DELTA (v5.9.5 remediation material-clean; 3 NITs swept) |
 > | FULL #6 | 2026-09-05 | FAIL (certifying; 2 LARGE + 6 SMALL) -> remediated v5.10.0 (claim-scope, gate-first) |
 > | DELTA #10 | 2026-09-05 | DEFECTS (first claim-impact run) -> trunk items fixed v5.10.1; group1 cluster owed |
+> | FULL #7 | 2026-09-06 | FAIL (certifying; 4 SMALL, 0 LARGE; all keystones re-derived SOUND) -> content remediated same day; guard pass + C21-on-trunk owed |
+> | DELTA #11 | 2026-09-06 | CLEAN-DELTA (FULL #7 remediation + guard pass + C21 closure all verified; 3/3 dimensions clean) -> unlocks FULL #8 |
+> | FULL #8 | 2026-09-06 | FAIL (certifying; 2 SMALL, 0 LARGE; fresh adversary caught 2 pre-existing P1 s/p paraphrase zombies FULL #7 missed) -> remediated + C16-backstopped same day; C21 symbolic-fraction constants owed |
+> | DELTA #12 | 2026-09-06 | DEFECTS (claims CLEAN; C21 symbolic instrument built but its tight-match was inert -> guard fixed + fire-tested) -> FULL #8 remediation + C21-on-trunk verified |
 >
 > **No run has produced PASS.** Only a FULL run can, and the last four FULL
 > runs each found material defects — several *introduced by the previous
