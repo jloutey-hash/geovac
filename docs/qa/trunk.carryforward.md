@@ -1820,3 +1820,32 @@ NITs: P7 abstract sign/convention (PSD graph Laplacian vs -(n^2-1) limit); code-
 6. leimbach title: restore 'Low-Dimensional'.
 7. P32 Q5' untiered middle (~25 remarks): add inline tiers + repoint debug/ citations -- the substantial sub-task (G2); may warrant its own focused pass.
 Then DELTA on the remediation; a clean delta unlocks FULL #7. Owed to PI: the 3 UNVERIFIABLE primary-source checks, the Rydberg upgrade decision.
+
+---
+
+## Part T -- FULL #6 remediation + semantic-diff DELTA adoption (2026-09-05, v5.10.0, PI-directed minor)
+
+The FULL #6 FAIL (Part S) drove a protocol evolution the PI approved: the DELTA scope is redefined from a byte-diff to a **claim-impact / semantic diff**. All FULL #6 findings remediated gate-first at claim-scope, plus the two instrument defects the panel exposed.
+
+### T.1 -- Protocol change: semantic-diff DELTA (qa.md)
+The DELTA scope is now the **claim-impact set**, not the byte-diff. For every claim whose meaning/status a diff changes (discharge/retraction/re-tier/correction/strengthening), review every locus whose truth depends on it, wherever it lives. Nominated by three deterministic sources (\cite graph; topical-vocabulary grep; declared rests-on edges), swept by a **claim-impact reviewer** (topical read -- the paraphrase-catcher). Generalizes and retires the synthesis-only owner-moved dispatch. Measured rationale: DELTA #9 CLEAN-DELTA vs FULL #6's 2 LARGE -- a byte-delta cannot see zombies outside the diff; only a claim-impact delta (or the FULL run) can. **Clean byte-delta != certifiable corpus.** Does NOT replace the FULL run (the nomination net has holes; FULL is the only nomination-free scope, the only one that can PASS).
+
+### T.2 -- Instrument fix 1: C16 +-5-window escape -> two-tier +-2
+The +-5 window let a standardized marker shelter a DISTINCT same-entry occurrence lines away (P7 L127 sheltered by the L123 marker, 4 lines up, for a different sub-claim). Fixed: two-tier exemption -- the standardized per-entry marker exempts within +-2 (covers hard-wrap + equation blocks; measured: legit cases at distance 1-2, the genuine zombie at 4); the legacy exempt_if_nearby vocabulary keeps +-5. Validated two-way on real loci: the corrected gate surfaced the whole cross-shelter class (7 in trunk before triage; 6 legit wrap/equation, 1 genuine P7 L127 zombie). scan_entry in check_retracted_terms.py.
+
+### T.3 -- Instrument fix 2: Paper-39 -> Paper-32 cited_by miss
+P32 L1453 described Paper 39's REFUTED (B,P)/Pythagorean-height route as live (the discharge changed Paper 39's proof; the dependent survived). New C16 entry p39-pythagorean-height-route with cited_by declaring P32; fire-tested two-way (does not false-positive on Paper 39's own record of the abandoned route).
+
+### T.4 -- FULL #6 findings, all remediated (gate-first, claim-scope)
+- LARGE recover-degeneracy class (P7 L127, P1 L228): topical sweep found exactly 2 (no fourth surprise); reworded to denials; legit spectral-aliasing occurrence given its own inline marker.
+- LARGE P32 L1453: rewritten to the lifted-state route (constant 1, Clifford-doubled limit).
+- SMALL: P38 Outline L5 zombie (l5 pattern widened to 'proves the five lemmas'); P32 6.6 Lorentzian overstatement (signature-blind, Wick chain external); P32 L5400 Forced-Count 'annihilates the Majorana block' (false -- rank-16 slice survives); leimbach title restored ('low-dimensional tori').
+Verification: C16 trunk + group1 PASS; 12 deterministic gates PASS on trunk; compile PASS (6 papers, 0 undefined refs); C19 clean; two-way fire-tests ALL DISCRIMINATE.
+
+### T.5 -- Owed / deferred
+- Q5' provenance sweep (~25 untiered debug/-backed remarks, P32 L2196-3265): its own focused pass (the G2 gap; provenance-visibility, none exceeds backing).
+- The C16 +-2 fix will surface cross-sheltered zombies CORPUS-WIDE (non-trunk) on the next whole-corpus run -- a separate cleanup, like the debug-refs debt.
+- PI-owed: 3 UNVERIFIABLE primary-source checks (Dabrowski-Dossena eq numbers; Camporesi-Higuchi title; P38 C_3-all-ranks vs Paper 40 sec 3.3); the P1 Rydberg -> [INTERNAL THEOREM] upgrade.
+
+### T.6 -- Next
+A semantic-scope DELTA on this remediation; a clean claim-impact delta unlocks FULL #7 (the certifying run). This is the first remediation done under the new claim-impact discipline.

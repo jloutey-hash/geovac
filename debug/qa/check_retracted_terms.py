@@ -86,7 +86,15 @@ import qa_scopes  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
-WINDOW = 5  # +- lines within which a withdrawal marker exempts a hit
+WINDOW = 5  # +- lines within which a legacy exempt_if_nearby vocabulary exempts a hit
+MARKER_WINDOW = 2  # +- lines for the STANDARDIZED per-entry marker (FULL #6 fix,
+# 2026-09-05): tight enough to cover a hard-wrapped sentence or an equation block
+# whose marker lands 1-2 physical lines from the matched span, but NOT the +-5
+# that let a marker shelter a DISTINCT occurrence of the same entry lines away
+# (P7 L127 "recovering the exact Coulomb degeneracy" was sheltered by the L123
+# marker, 4 lines up, for a different sub-claim).  Measured separation on the
+# FULL #6 loci: every legitimate wrap/equation case sits at distance 1-2 from
+# its marker; the one genuine zombie (P7 L127) at distance 4.
 
 # ---------------------------------------------------------------------------
 # THE REGISTRY -- append an entry whenever a /qa run retires/withdraws a claim.
@@ -313,6 +321,35 @@ REGISTRY = [
         ],
     },
     {
+        "id": "p39-pythagorean-height-route",
+        "note": "FULL run #6, 2026-09-05.  Paper 32 (L1453) described Paper 39's "
+                "tensor result as proved by 'Paper 38's five-lemma machinery "
+                "factor-by-factor ... joint Lipschitz-distortion height term ... "
+                "via a Pythagorean refinement of the triangle inequality' -- the "
+                "(B,P)-pair route Paper 39's discharge RETIRED (height leg "
+                "refuted; superseded by the lifted-state route, constant 1).  A "
+                "cited_by miss: P32's argument rested on Paper 39's proof route, "
+                "the discharge changed it, and the dependent locus survived.  "
+                "Rewritten to the lifted-state route; this entry guards the "
+                "refuted-route phrasing.",
+        "pattern": r"five-lemma machinery factor-by-factor"
+                   r"|joint Lipschitz-distortion height",
+        "exempt_if_nearby": r"(?!)",
+        "severity": "fail",
+        "scope": "group1 trunk",
+        # Documents whose ARGUMENT rests on Paper 39's tensor proof route.
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex":
+                "reviewed 2026-09-05 (FULL #6 remediation: rewritten to lifted-state)",
+        },
+        "files": [
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
+    {
         "id": "l5-assembly-listed-as-live-contribution",
         "note": "FULL run #5, 2026-09-05.  Paper 38's abstract listed Lemma L5 "
                 "('assembly of the distance bound via an approximation pair') as "
@@ -320,7 +357,8 @@ REGISTRY = [
                 "withdrawn 2026-09-03 (the bound comes from the unconditional "
                 "lifted-state theorem, not the approximation-pair assembly).  "
                 "Marked withdrawn in the abstract.",
-        "pattern": r"assembly of the distance bound via an approximation pair",
+        "pattern": r"assembly of the distance bound via an approximation pair"
+                   r"|proves the five lemmas",
         "exempt_if_nearby": r"(?!)",
         "severity": "fail",
         "scope": "group1 trunk",
@@ -1748,11 +1786,16 @@ def _resolve(globs: "list[str]") -> "list[pathlib.Path]":
 def scan_entry(entry: dict) -> "tuple[list, list]":
     """Return (live_hits, exempt_hits); each item = (relpath, line_no, snippet)."""
     pat = re.compile(entry["pattern"], re.IGNORECASE)
-    # The standardized marker is always accepted, on top of whatever this
-    # entry declares (see WITHDRAWAL_MARKER above).
-    exempt = re.compile(
-        withdrawal_marker(entry["id"]) + "|" + entry["exempt_if_nearby"],
-        re.IGNORECASE)
+    # Two-tier exemption (FULL #6 fix, 2026-09-05).  The standardized per-entry
+    # marker exempts only the hit's OWN line -- a marker attaches to the
+    # specific withdrawn instance.  The legacy `exempt_if_nearby` vocabulary
+    # keeps the +-WINDOW window (85+ loci depend on it).  BEFORE this, a marker
+    # anywhere in +-WINDOW sheltered EVERY occurrence of the same entry, so a
+    # live verbatim zombie a few lines from a legitimately-withdrawn instance
+    # escaped -- P7 L127 "recovering the exact Coulomb degeneracy" was exempted
+    # by the DIFFERENT-sub-claim marker on L123, within the window.
+    marker_re = re.compile(withdrawal_marker(entry["id"]), re.IGNORECASE)
+    legacy_re = re.compile(entry["exempt_if_nearby"], re.IGNORECASE)
     live, ok = [], []
     for path in _resolve(entry["files"]):
         text = path.read_text(encoding="utf-8", errors="replace")
@@ -1777,11 +1820,20 @@ def scan_entry(entry: dict) -> "tuple[list, list]":
             hit_lines.add(text.count("\n", 0, m.start()))
         for i in sorted(hit_lines):
             line = lines[i]
-            lo, hi = max(0, i - WINDOW), min(len(lines), i + WINDOW + 1)
-            window_txt = "\n".join(stripped[lo:hi]) + "\n" + "\n".join(lines[lo:hi])
             rel = path.relative_to(ROOT)
             snip = re.sub(r"\s+", " ", line.strip())[:160]
-            if exempt.search(window_txt):
+            # (a) standardized marker: within +-MARKER_WINDOW (covers a
+            #     hard-wrapped sentence whose marker lands on the adjacent
+            #     physical line; does NOT shelter a distinct occurrence lines
+            #     away -- the +-5 cross-shelter bug).
+            mlo, mhi = max(0, i - MARKER_WINDOW), min(len(lines), i + MARKER_WINDOW + 1)
+            marker_txt = "\n".join(stripped[mlo:mhi]) + "\n" + "\n".join(lines[mlo:mhi])
+            same_line = bool(marker_re.search(marker_txt))
+            # (b) legacy exempt_if_nearby vocabulary: +-WINDOW window.
+            lo, hi = max(0, i - WINDOW), min(len(lines), i + WINDOW + 1)
+            window_txt = "\n".join(stripped[lo:hi]) + "\n" + "\n".join(lines[lo:hi])
+            legacy = bool(legacy_re.search(window_txt))
+            if same_line or legacy:
                 ok.append((rel, i + 1, snip))
             else:
                 live.append((rel, i + 1, snip))

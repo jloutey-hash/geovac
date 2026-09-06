@@ -71,6 +71,29 @@ and the inherited `reach_P` gap. Deliberately **not** written during the DELTA
 #7 remediation: new load-bearing mathematics does not get authored in the same
 pass as a remediation of it.
 
+## [v5.10.0] - 2026-09-05
+
+**Semantic-diff DELTA (protocol evolution) + FULL #6 remediation.** PI-directed minor bump. The FULL #6 FAIL exposed that a byte-scoped delta cannot certify a corpus; the DELTA is redefined as a claim-impact / semantic diff, and all FULL #6 findings + two instrument defects are remediated. Record: carryforward Part T.
+
+### Protocol (qa.md)
+
+- **DELTA scope = the claim-impact set, not the byte-diff.** For every claim whose meaning/status a diff changes, review every dependent locus wherever it lives -- nominated by the \cite graph + a topical-vocabulary grep + declared rests-on edges, swept by a claim-impact (topical-read) reviewer. Generalizes/retires the synthesis-only owner-moved dispatch. Driver (measured): DELTA #9 was CLEAN-DELTA but FULL #6 found 2 LARGE zombies outside the diff. 'Clean byte-delta != certifiable corpus'; the FULL run stays the only scope that can PASS.
+
+### Instrument fixes
+
+- **C16 +-5-window escape** (check_retracted_terms.py scan_entry): the standardized marker sheltered a distinct same-entry occurrence lines away (P7 L127 by the L123 marker). Two-tier exemption: the marker exempts within +-2 (hard-wrap/equation), legacy vocabulary keeps +-5. Validated two-way.
+- **Paper-39 -> Paper-32 cited_by miss**: new C16 entry p39-pythagorean-height-route, cited_by P32, fire-tested.
+
+### Remediation (FULL #6: 2 LARGE + 6 SMALL, all fixed gate-first at claim-scope)
+
+- LARGE: P7 L127 + P1 L228 recover-degeneracy (topical sweep, reworded to denials); P32 L1453 Paper-39 refuted route -> lifted-state.
+- SMALL: P38 Outline L5 zombie; P32 6.6 Lorentzian overstatement; P32 L5400 Forced-Count 'annihilates the Majorana block' (false); leimbach title.
+- Verified: C16 trunk+group1 PASS; 12 deterministic gates PASS on trunk; compile PASS (0 undefined refs); fire-tests ALL DISCRIMINATE.
+
+### Deferred / owed
+
+- Q5' provenance sweep (its own pass); the C16 +-2 fix surfaces corpus-wide cross-shelter zombies (separate cleanup); 3 PI-owed UNVERIFIABLE primary-source checks; the P1 Rydberg upgrade.
+
 ## [v5.9.7] - 2026-09-05
 
 **/qa trunk FULL run #6 (certifying) = FAIL.** PI-invoked, unseeded. 11 reviewers whole-target + 12/12 deterministic. NOT a PASS. Record: carryforward Part S.
