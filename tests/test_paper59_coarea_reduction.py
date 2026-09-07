@@ -1,4 +1,4 @@
-"""Backing test for Paper 59 sec:modular co-area reduction (v4.100.0, fourth T2 track).
+"""Backing test for Paper 61 (companion of Paper 59) sec:modular co-area reduction (v4.100.0, fourth T2 track).
 
 The genuinely 3D collinear observable T2 = (8/pi) int int J(s,t) reduces EXACTLY to a
 1D modular integral by a co-area change of variables (modulus rho=c_t/c_s outer, scale

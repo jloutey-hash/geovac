@@ -47,6 +47,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 55 `paper_55_periods_of_geovac.tex` | ACTIVE | Periods of the Mellin sectors: pure-Tate / level-4 cyclotomic mixed-Tate |
 | 56 `paper_56_tannakian_substrate.tex` | ACTIVE | Tannakian/cosmic-Galois reconstruction at finite cutoff (5,864 bit-exact residuals) |
 | 57 `paper_57_forced_free_seam.tex` | ACTIVE | 60-entry forced/free catalogue; P5 packing-reachability discriminator (98.3%) |
+| 61 `paper_61_bessel_moment_periods.tex` | ACTIVE | Number-theory tower of the three-center ERI (companion to Paper 59): Legendre/Γ(2) modular family + in-domain CM Γ-value fibres (Chowla–Selberg), X₀(2) home + conductor-4 (ℤ[i], G=β(2)) arithmetic, resurgent-Lambert reading; Bessel-moment period algebra — Wronskian W₀D⁻², quadratic relations B=πΩ forcing Sp₄(ℤ); cosmic-Galois bridge ↔ Paper 56; closed form open. Cert OWED (post-dates last /qa) |
 
 ## Group 1 — Operator algebras / NCG (`group1_operator_algebras/`)
 
@@ -83,7 +84,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | `paper_fci_atoms.tex` | ACTIVE | He/Li/Be FCI benchmarks |
 | `paper_fci_molecules.tex` | **GUARDRAIL** | LCAO graph-concatenation fails (R-independent kinetic energy) — why natural geometry was necessary |
 | 58 `paper_58_abelian_residue.tex` | ACTIVE | Angular sparsity is an atomic-sector property (abelian residue); exact two-center ERI census + NaH NOCI binding |
-| 59 `paper_59_elliptic_bessel_moment.tex` | ACTIVE | Three-center ERI = an elliptic Bessel moment (momentum space); genus-0→genus-1 at the third center; PF operator **proved irreducible** (Fourier–Laplace of an irreducible connection, exact-integer monodromy); period on the Legendre/Γ(2) modular family with CM Γ-value fibres (cosmic-Galois bridge, ↔ Paper 56); transcendental closed form open |
+| 59 `paper_59_elliptic_bessel_moment.tex` | ACTIVE | Three-center ERI = an elliptic Bessel moment (momentum space); genus-0→genus-1 at the third center; PF operator **proved irreducible** (Fourier–Laplace of an irreducible connection, exact-integer monodromy); transcendental closed form open. The modular/cosmic-Galois structure + the Bessel-moment period algebra are now in the companion Paper 61 |
 | 60 `paper_60_sturmian_secular_quantum.tex` | ACTIVE | The isoenergetic generalized-Sturmian secular equation read as a quantum algorithm: **metric-free standard eigenproblem for atoms** (eigenvalues = energies, pure-number matrix, block-encoding 1-norm **sublinear** ~K^0.78, validated on He single-config −2.847 = textbook variational), novel vs prior QC (both documented cost risks absent); Shibuya–Wulfman metric returns for molecules = the conditioning frontier (better than L², intra-center = I, but grows with basis) |
 
 ## Group 4 — Quantum computing (`group4_quantum_computing/`)

@@ -14,6 +14,11 @@ that). These two ``@slow`` tests close that gap:
 The census leg is geovac-only (stable regardless of debug/ pruning). The energy leg
 drives the native two-center pipeline through the N3b census helpers and skips
 gracefully if those exploratory modules are absent.
+
+The third OWED headline number -- the NaH Table II well minimum (R_eq = 3.736 a0,
+D_e = 1.071 eV) -- is pinned in
+test_paper58_nah_ladder.py::test_paper58_nah_well_minimum_reproduces, where the
+NaH scan machinery already lives.
 """
 
 from __future__ import annotations

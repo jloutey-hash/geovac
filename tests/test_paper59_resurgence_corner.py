@@ -1,4 +1,4 @@
-"""Backing tests for Paper 59 sec:modular reconciliation (v4.100.0).
+"""Backing tests for Paper 61 (companion of Paper 59) sec:modular reconciliation (v4.100.0).
 
 Two [MEASURED] facts the reconciled sec:modular asserts, both self-contained
 (no debug/ import, per the permanent-record policy):

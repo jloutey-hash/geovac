@@ -1,5 +1,6 @@
-"""Backing test for Paper 60 Sec. "Many-electron molecules: the metric does
-not compound" -- the coherence-front paragraph added 2026-09-06.
+"""Backing test for Paper 58 Sec. "The continuous side" (the many-electron
+front) -- the coherence-front paragraph, relocated here from Paper 60 on
+2026-09-06 (it is bonding physics, not encoding cost).
 
 Claim: correlation moves the SIGNED cross-center coherence front, and it does
 so through the occupation numbers of the antibonding natural orbital, whose

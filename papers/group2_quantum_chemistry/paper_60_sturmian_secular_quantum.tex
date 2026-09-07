@@ -21,6 +21,14 @@ Conditioning Frontier for Molecules}
 \date{August 18, 2026}
 
 \begin{abstract}
+\emph{Central result.}  In Avery's isoenergetic (potential-weighted) posing,
+the \emph{atomic} Coulomb--Sturmian secular equation is a standard,
+metric-free eigenproblem whose block-encoding $1$-norm grows \emph{sublinearly}
+in the configuration count---an apparently novel quantum-encoding target, with
+both documented cost-risks of the genre (metric conditioning; an outer energy
+search) structurally absent---whereas the naive $L^2$ posing of the same basis
+inflates that cost instead.  The development follows.
+
 A recurring intuition in quantum simulation is that a Coulomb--Sturmian /
 hyperspherical basis is well suited to a quantum computer, because its angular
 matrix elements are exact rationals generated on the device from
@@ -71,7 +79,7 @@ sector, whose conditioning is \emph{flat}---and flat at an exact constant of the
 sinc symbol, $2/(1+\min_x j_0(x))=2.555041\ldots$, independent of $R$ and of basis
 size---so the ground-state metric
 penalty does \emph{not} grow with basis size---a ${\sim}60\times$ reduction versus the full
-metric and $10^3$--$10^4\times$ smaller than a standard (ratio-dependent) Gaussian metric for the same problem,
+metric and $10^3$--$10^4\times$ smaller than a standard Gaussian metric for the same problem (a metric-versus-metric ratio that scales with the Gaussian exponent spread, hence illustrative rather than a fixed factor),
 at ${\sim}30$ qubits.  \textbf{[MEASURED]} The penalty also does not compound with electron
 number: the metric is discharged once at the one-electron molecular-orbital construction, after
 which the many-electron secular equation carries an identity metric---the metric cost is
@@ -263,7 +271,17 @@ number of configurations $K$,
 \|M\|_1\sim K^{0.84}\quad(\text{full }s\!+\!p\!+\!d\!+\!f\text{ basis}),
 \label{eq:sublinear}
 \end{equation}
-the opposite of the naive inflation Eq.~\eqref{eq:blowup}.  The mechanism is the
+the opposite of the naive inflation Eq.~\eqref{eq:blowup}.  (The
+``sublinear'' here is a property of the LCU $1$-norm $\|M\|_1$ of a
+\emph{fixed}-size atomic secular matrix as the configuration count $K$
+grows;\ it is a distinct quantity from the sublinear \emph{gate
+complexity in the number of plane-wave basis functions} of Babbush
+\emph{et al.}~\cite{babbush2019}.  Its exponent is in the configuration count
+$K$ at \emph{fixed} atomic size---a different axis from the system-size scaling
+of the electronic-structure $1$-norm literature, where the best documented
+basis-choice lever, localized orbitals~\cite{koridon2021}, reaches
+$\sim\!N^{1.34}$ in the orbital count and is still superlinear; the two are a
+regime contrast, not a like-for-like exponent comparison.)  The mechanism is the
 one Avery notes for Coulomb potentials: the pure-number matrix elements decrease
 with quantum number (higher configurations have small root $R_\nu$ and rapidly
 decaying couplings), so the sum grows more slowly than the matrix dimension.
@@ -356,7 +374,8 @@ momentum integral (agreement to $\sim\!10^{-10}$).
 and the fitted exponent is a window reading.  Because the intra-center block is
 exactly the identity, $S=\bigl[\begin{smallmatrix}I&C\\C^{\mathsf T}&I
 \end{smallmatrix}\bigr]$ has spectrum $\{1\pm\sigma_k\}$ with $\sigma_k$ the
-singular values of the cross block (the cosines of the principal angles between
+singular values of the cross block (the cosines of the principal
+angles~\cite{amos_hall1961,king1967,west_ruedenberg2013} between
 the two center subspaces), so
 $\mathrm{cond}(S)=(1+\sigma_{\max})/(1-\sigma_{\max})$ \emph{exactly}.  In the
 sine basis the cross block is the finite section of a multiplication operator
@@ -375,7 +394,7 @@ bounded).  The fitted $N^{1.85}$ above---and the $N^{1.81}$ of the same
 quantity at $R=2$ in the sprint record---are pre-asymptotic slopes of this one
 law read on different windows.  The same singular spectrum carries the
 composition wall of the balanced-basis arc:\ the center-projection commutator
-is $\|[P_A,P_B]\|=\max_k\sigma_k\sqrt{1-\sigma_k^{2}}$, which \emph{saturates}
+is $\|[P_A,P_B]\|=\max_k\sigma_k\sqrt{1-\sigma_k^{2}}$~\cite{halmos1969,bottcher_spitkovsky2010}, which \emph{saturates}
 at its algebraic ceiling $\tfrac12$ (some $\sigma_k$ lands near $1/\sqrt2$) as
 the spectrum densifies---the previously reported $0.50$ is the saturation
 value---so the two walls are functionals of one object, with all of the
@@ -405,7 +424,7 @@ below are this constant read at small $n$.
 \textbf{[MEASURED]} This lever is a property of \emph{equivalent} centers, not of symmetry as such, and a probe on water ($\mathrm{H}_2\mathrm{O}$, $C_{2v}$: O${}+{}$2H) makes the distinction sharp. For an $s$-only shared-scale basis the only symmetry action is the H${}\leftrightarrow{}$H swap (O sits on the $C_2$ axis, fixed), so the totally-symmetric $A_1$ block---which holds the ground state---contains \emph{both} the O functions and the symmetric H combinations, and with them the O${}\leftrightarrow{}$H coupling between symmetry-\emph{inequivalent} centers that the group cannot remove. Building water's three-center SW metric exactly (every $s$--$s$ block depends only on inter-center distance) and adapting to $C_{2v}$, the $A_1$ ground-state block's conditioning \emph{grows}, $\mathrm{cond}(A_1)\sim N^{1.97}$ ($R^2=1.000$), essentially the raw metric ($19.9\to698$ over $N=6\to36$)---\emph{not} flat like the $\mathrm{H}_2^+$ gerade sector ($\mathrm{cond}\approx2$ throughout). Zeroing only the O${}\leftrightarrow{}$H block collapses it back to $\mathrm{cond}\approx2$, pinning that inequivalent-center coupling as the sole driver. The lever therefore does not transfer to a polyatomic with a symmetry-unique heavy center; it is confined to homonuclear-diatomic (equivalent-center) systems and their close analogs.
 The water block obeys the same derived law:\ the O${}\leftrightarrow{}$(H${}+{}$H) canonical correlations follow Eq.~\eqref{eq:sigma_law} with symbol curvature $c_{\rm sym}=R_{\rm OH}^2/24-R_{\rm HH}^2/96$ (exponent again exactly $2$;\ the fitted $1.97$ is the same pre-asymptotic reading), and $\mathrm{cond}(A_1)\approx1.12\times(1+\sigma_{\max})/(1-\sigma_{\max})$ with a constant prefactor---the canonical correlation is the whole story.  The structural reason the symmetry cannot help is now exact:\ O and H are not exchanged by any group element, so both $1\pm\sigma$ eigenvector families remain inside $A_1$ and no block absorbs the divergent factor.  A low-rank escape is also closed \emph{structurally}:\ the coupling's singular spectrum discretizes the range of the symbol (its effective rank grows linearly with basis size, participation ratio $\approx7$ at $N=36$), and since $1-\sigma_k\approx c_{\rm sym}(k\pi)^2/n^2$, an exact rank-$r$ (Woodbury) treatment of the top correlations divides the residual $\kappa$ by $(r+1)^2$ only---a useful constant factor ($\approx40$--$75\times$ in $d_{\rm inv}$ terms at $N=12$--$36$) but never a change of exponent;\ flattening would need $r\propto n$, i.e.\ classically diagonalizing the whole coupling, the sparsity-destroying orthogonalization already excluded.
 
-\subsection{Resource estimate: the gerade lever is the molecular payoff}
+\subsection{Resource estimate: the gerade lever is the equivalent-center payoff}
 \label{sec:resource}
 
 We convert the measured conditioning into a block-encoding resource count for the
@@ -438,7 +457,7 @@ costs $d_{\rm inv}\approx16$--$18$ \emph{independent of basis size}---a ${\sim}6
 reduction versus the full metric at $N=16$, on a register halved to
 $\lceil\log_2(N/2)\rceil$ qubits.  The gerade lever is thus not merely the $2\times$ symmetry
 factor of the previous paragraph: it delivers the chemically relevant state at a metric penalty
-that \emph{does not grow with basis size}.  This is the molecular payoff.
+that \emph{does not grow with basis size}.  This is the equivalent-center payoff (the ground-state lever for homonuclear diatomics and their close analogs, not for a general polyatomic).
 
 \begin{table}
 \caption{Block-encoding resource for the one-electron $\mathrm{H}_2^+$ isoenergetic secular
@@ -516,7 +535,7 @@ Shibuya--Wulfman metric penalty of Sec.~\ref{sec:molecular} \emph{compounds} wit
 It need not.
 
 \textbf{[SYMBOLIC + MEASURED]} A $k$-electron configuration is a Slater determinant of one-electron molecular
-orbitals, so its configuration-space overlap is the $k$-th compound matrix of the one-electron
+orbitals, so its configuration-space overlap is the $k$-th compound matrix~\cite{lowdin1955,prosser_hagstrom1968,king1967,burton2021} of the one-electron
 overlap, with condition number $(\lambda_1\cdots\lambda_k)/(\lambda_{N-k+1}\cdots\lambda_N)$ in the
 one-electron overlap spectrum $\{\lambda_i\}$.  Built from the \emph{raw} $L^2$-normalized
 many-center Coulomb--Sturmians this \emph{grows} with electron number---on the H$_2$-geometry
@@ -533,53 +552,16 @@ lever), and the $N$-electron secular equation inherits an identity metric:
 of the once-executed classical mean-field step that lets production Gaussian simulation carry no
 metric into the many-body Hamiltonian.
 
-\textbf{[MEASURED]} The compound-matrix identity governs more than the metric:\ it fixes
-\emph{where} the two centers decompactify.  Paper~58~\cite{loutey_paper58} (Sec.~``the continuous
-side'') defines the one-electron front $R^{*}$ as the distance at which the two single-center
-projectors reach their maximal non-commutativity (principal angle $45^\circ$) and finds it set by the
-orbital's exponential decay length, $R^{*} \approx 2.14\,n/Z$.  Since a $k$-electron configuration
-overlap is the $k$-th compound of the one-electron overlap, many-body physics can move that front
-\emph{only} by changing the decay length the electrons actually occupy.  We tested this on H$_2$ and
-HeH$^+$ at Hartree--Fock and full CI in a per-center multi-$\zeta$ $1s$ basis (five, ten, and eight
-exponents per center;\ the effective per-center exponent $\zeta_{\rm eff}(R)$ fitted from the
-one-body density's own tail, and verified to be an \emph{output}:\ it runs $1.46 \to 0.83$ across
-$R$ at HF, reaches the textbook $1.19$ at $R = 1.4$, differs between HF and FCI by $12\%$ at $R = 4$,
-equals no basis exponent, and moves the front by $\le 0.8\%$ under basis doubling).  The
-occupation-weighted principal-angle front of the occupied one-body space matches the exact
-$1s$--$1s$ law at the empirical $\zeta_{\rm eff}$ to
-$\gvq{front_resid_h2_hf}{-0.7}\%$ (H$_2$, HF), $\gvq{front_resid_h2_fci}{-1.2}\%$ (H$_2$, FCI),
-$\gvq{front_resid_heh_hf}{0.0}\%$ (HeH$^+$, HF) and $\gvq{front_resid_heh_fci}{-0.2}\%$
-(HeH$^+$, FCI), with $|\Delta\cos| \le 0.006$ pointwise wherever the second center holds more
-than $1\%$ of an electron.  \textbf{Screening moves the front;\ nothing else does, at the one-percent
-level.}  The sub-percent residual is a shape term (a contracted multi-$\zeta$ component is not one
-exponential), negative at every rung.
-
-\textbf{[SYMBOLIC + MEASURED]} Correlation does move a \emph{different} front, and through occupation
-numbers rather than any length.  Let $\gamma$ be the one-body density and $P_{XY}$ its
-center-blocks;\ the \emph{signed} cross-center coherence
-$M_2 = \mathrm{Tr}(P_{AB}S_{BA})/\sqrt{\mathrm{Tr}(P_{AA}S_{AA})\,\mathrm{Tr}(P_{BB}S_{BB})}$
-coincides with the principal-angle front at HF (one occupied orbital) but crosses $1/\sqrt2$ inward
-at FCI by $\gvq{coherence_shift_h2}{23}\%$ (H$_2$:\ $0.987$ vs $1.285$~bohr) and
-$\gvq{coherence_shift_heh}{9}\%$ (HeH$^+$:\ $0.690$ vs $0.758$).  In the two-orbital form the
-mechanism is explicit:\ with natural-orbital occupations $n_g, n_u$ and per-center weights
-$w_g^2 = 1/(2(1+S))$, $w_u^2 = 1/(2(1-S))$,
-\begin{equation}
-  M_2 = \frac{n_g w_g^2 - n_u w_u^2}{n_g w_g^2 + n_u w_u^2}\,S,
-  \qquad \frac{w_u^2}{w_g^2} = \frac{1+S}{1-S},
-  \label{eq:coherence_two_orbital}
-\end{equation}
-so the antibonding orbital enters the per-center density with a weight amplified about fivefold at
-$S = 0.67$, and $n_u = 0.025$ already pulls $M_2$ from $S = 0.674$ to $0.591$ (measured $0.596$).
-The limits are the molecular-orbital value $M_2 = S$ ($n_u = 0$) and the Heitler--London value
-$M_2 = S^2$ (at HL occupations $n_g = (1+S)^2/(1+S^2)$, $n_u = (1-S)^2/(1+S^2)$); H$_2$ runs from
-the first toward the second as $R$ grows.  This is bond-order collapse---the $k$-th compound of the
-same one-electron overlap---which is exactly the object the identity above says does not compound
-\emph{as a metric}:\ correlation touches decompactification in one place, and that place is
-occupation, not geometry.  Scope:\ $s$-only per-center basis, two electrons;\ whether the
-principal-angle statement survives at $N > 2$ with several strongly occupied natural orbitals is
-untested.  Backing:\ \texttt{tests/test\_paper60\_coherence\_front.py} (the limits of
-Eq.~\eqref{eq:coherence_two_orbital} symbolically, the measured H$_2$ point, and the rejected
-equal-weight alternative);\ chronicle CHANGELOG v5.10.2.
+\textbf{[MEASURED]} The compound-matrix identity also fixes \emph{where} the
+two centers decompactify:\ because a $k$-electron configuration overlap is the
+$k$-th compound of the one-electron overlap, the many-electron
+decompactification front moves only through screening (the occupied decay
+length), while correlation moves a distinct signed cross-center coherence
+front through the antibonding occupation.  Both fronts, with their measured
+H$_2$ and HeH$^+$ tests, are developed in Paper~58~\cite{loutey_paper58}
+(Sec.~``the continuous side,'' the many-electron front); they are bonding
+physics, not encoding cost, and ride in here only on the shared
+compound-matrix identity.
 
 \textbf{[MEASURED]} The interelectron matrix $T'$ is assembled from two-center electron-repulsion
 integrals, and these are in hand.  We evaluate the shared-scale Coulomb--Sturmian two-center ERIs
@@ -743,6 +725,56 @@ Residue'' (Paper 58, Geometric Vacuum series).
 \bibitem{loutey_paper59}
 J.~Loutey, ``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel
 Moment'' (Paper 59, Geometric Vacuum series).
+
+\bibitem{amos_hall1961}
+A.~T.~Amos and G.~G.~Hall, ``Single determinant wave functions,''
+\textit{Proc.\ R.\ Soc.\ Lond.\ A}\ \textbf{263}, 483 (1961).
+
+\bibitem{king1967}
+H.~F.~King, R.~E.~Stanton, H.~Kim, R.~E.~Wyatt, and R.~G.~Parr,
+``Corresponding orbitals and the nonorthogonality problem in molecular
+quantum mechanics,'' \textit{J.\ Chem.\ Phys.}\ \textbf{47}, 1936 (1967).
+
+\bibitem{west_ruedenberg2013}
+A.~C.~West, M.~W.~Schmidt, M.~S.~Gordon, and K.~Ruedenberg, ``A
+comprehensive analysis of molecule-intrinsic quasi-atomic, bonding, and
+correlating orbitals.\ I.\ Hartree--Fock wave functions,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{139}, 234107 (2013).
+
+\bibitem{lowdin1955}
+P.-O.~L\"owdin, ``Quantum theory of many-particle systems.\ I.\ Physical
+interpretations by means of density matrices, natural spin-orbitals, and
+convergence problems in the method of configurational interaction,''
+\textit{Phys.\ Rev.}\ \textbf{97}, 1474 (1955).
+
+\bibitem{prosser_hagstrom1968}
+F.~Prosser and S.~Hagstrom, ``On the rapid computation of matrix
+elements,'' \textit{Int.\ J.\ Quantum Chem.}\ \textbf{2}, 89 (1968).
+
+\bibitem{burton2021}
+H.~G.~A.~Burton, ``Generalized nonorthogonal matrix elements:\ Unifying
+Wick's theorem and the Slater--Condon rules,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{154}, 144109 (2021).
+
+\bibitem{koridon2021}
+E.~Koridon, S.~Yalouz, B.~Senjean, F.~Buda, T.~E.~O'Brien, and
+L.~Visscher, ``Orbital transformations to reduce the 1-norm of the
+electronic structure Hamiltonian for quantum computing applications,''
+\textit{Phys.\ Rev.\ Research}\ \textbf{3}, 033127 (2021).
+
+\bibitem{babbush2019}
+R.~Babbush, D.~W.~Berry, J.~R.~McClean, and H.~Neven, ``Quantum
+simulation of chemistry with sublinear scaling in basis size,''
+\textit{npj Quantum Inf.}\ \textbf{5}, 92 (2019).
+
+\bibitem{halmos1969}
+P.~R.~Halmos, ``Two subspaces,''
+\textit{Trans.\ Amer.\ Math.\ Soc.}\ \textbf{144}, 381 (1969).
+
+\bibitem{bottcher_spitkovsky2010}
+A.~B\"ottcher and I.~M.~Spitkovsky, ``A gentle guide to the basics of two
+projections theory,'' \textit{Linear Algebra Appl.}\ \textbf{432}, 1412
+(2010).
 
 \end{thebibliography}
 

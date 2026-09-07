@@ -1,4 +1,4 @@
-"""Paper 59 -- the resurgent-skeleton pattern across the corpus's two-electron
+"""Paper 61 (companion of Paper 59) -- the resurgent-skeleton pattern across the corpus's two-electron
 integral classes (CHANGELOG v4.103.0; drivers debug/aha_t3_*.py).
 
 Pins the two cheap anchors of the 4/4 pattern (algebraic Stokes data up to a

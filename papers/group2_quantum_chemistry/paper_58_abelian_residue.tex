@@ -84,7 +84,9 @@ that generate the sparsity.
 
 We close with a demonstration \textbf{[PANEL-VERIFIED]}: all-electron
 12-electron NaH, the framework's hardest documented failure, binds at
-$R_{\rm eq} = 3.736\,a_0$ ($+4.8\%$ vs experiment) with $91.1\%$ of
+$R_{\rm eq} = 3.736\,a_0$ ($+4.8\%$ vs experiment; the coarse-grid
+dissociation-scan well minimum, now test-backed) with
+$91.1\%$ of
 in-basis FCI binding from three fragment-native determinants, once the
 integrals are genuine end-to-end---with \emph{fewer} correlation degrees of
 freedom than the runs that failed, which is what makes the inference go
@@ -748,18 +750,28 @@ basis, Paper~14) the framework's qubit results rest on.
 Theorem~\ref{thm:abelian_residue} is a statement about \emph{labels}, and
 labels are all-or-nothing:\ $m$ is shared at every $R > 0$ and $l$ at
 none.  That leaves open what a chemist actually watches as two atoms
-approach---how the coupling that $l$ used to forbid turns on.  This section
-measures that, for the one-electron case, and finds it continuous in $R$
-with a length scale the reader can name.  (The many-electron extension,
-and the one place correlation enters, is in Paper~60~\cite{loutey_paper60},
-Sec.~``the metric does not compound''.)
+approach---how the coupling that $l$ used to forbid turns on.  (As a
+symmetry statement this is the continuous breaking of the united-atom
+$O(4)$ degeneracy;\ the continuous adiabatic terms of the two-center
+Coulomb problem are the subject of Solov'ev's hidden-crossings
+program~\cite{solovev2005,grozdanov_solovev1991}, which connects the
+united- and separated-atom limits through that same $O(4)$ symmetry.
+What the front below adds to that program is a \emph{metric} for the
+transition---a projector-commutator criterion and a measured decay-length
+law---not the qualitative fact of a continuous connection.)  This section
+measures that---first for the one-electron case, then its many-electron
+extension---and finds it continuous in $R$ with a length scale the reader can
+name.  (The many-electron front, and the one place correlation enters, are
+developed below; the complementary statement that the Shibuya--Wulfman metric
+does not \emph{compound} with electron number is in
+Paper~60~\cite{loutey_paper60}, Sec.~``the metric does not compound''.)
 
 \paragraph{The per-shell front.}
 \textbf{[MEASURED]} Take hydrogenic $ns$ orbitals of charge $Z$ on both
 centers and let $S_n(R) = \langle ns_A | ns_B \rangle$.  The two
 single-center projectors onto these shells fail to commute by
 $\|[P_A, P_B]\| = S_n\sqrt{1 - S_n^2}$, maximal ($= \tfrac12$, principal
-angle $45^\circ$) at $S_n = 1/\sqrt2$.  Define the \emph{front}
+angle $45^\circ$) at $S_n = 1/\sqrt2$~\cite{halmos1969,bottcher_spitkovsky2010}.  Define the \emph{front}
 $R^{*}(n)$ as the distance at which that maximum is reached.  It tracks the
 orbital's exponential decay length $\ell_n = n/Z$, not its mean radius
 $r_n = n^2/Z$:
@@ -789,7 +801,8 @@ predicts exponent $\tfrac12$ and is rejected by the same data.  Backing:\
 recomputes every entry by an independent prolate-spheroidal quadrature
 route and also rejects the mean-radius scaling explicitly.  The
 companion curves---the bond-sphere angle $\gamma(R)$ of
-Paper~8~\cite{loutey_paper8}, the principal angles between the two
+Paper~8~\cite{loutey_paper8}, the principal
+angles~\cite{amos_hall1961,king1967,west_ruedenberg2013} between the two
 center projectors (which reproduce the LiH values
 $7.6^\circ/44.7^\circ/67.3^\circ$ of Paper~32's composition remark at
 its bond length), the aggregate $l$-mixing, and the argument of the
@@ -805,7 +818,7 @@ two meet.
 \textbf{[MEASURED]} For $1s$ tails of different decay lengths
 $\ell_A, \ell_B$ (charges $Z_A \ne Z_B$), the tail-reach front
 $R_{\rm rel}$---the distance at which $|S|$ falls to $|S|_{\max}/\sqrt2$---
-combines the two lengths as a \emph{geometric mean},
+combines the two lengths as a \emph{geometric mean}~\cite{smith1972},
 \begin{equation}
   R_{\rm rel} \simeq \gvq{tail_geometric_const}{1.58}\,\sqrt{\ell_A \ell_B},
   \label{eq:tail_geometric}
@@ -822,9 +835,67 @@ decreasing for every $t$, no distance brings them closer.  Mixed-$n$ pairs are n
 front.  Backing:\ the same test file
 (\texttt{test\_geometric\_mean\_tail\_law\_1s1s},
 \texttt{test\_absolute\_front\_threshold\_t\_c}).  Both facts are inputs
-to the many-electron test of Paper~60, whose prediction uses the exact
+to the many-electron front developed next, whose prediction uses the exact
 $1s$--$1s$ overlap at the measured per-center exponents rather than either
 fitted constant.
+
+\paragraph{The many-electron front.}
+\textbf{[MEASURED]} The front extends to many electrons through the
+compound-matrix identity:\ a $k$-electron configuration overlap is the
+$k$-th compound of the one-electron
+overlap~\cite{lowdin1955,prosser_hagstrom1968,king1967,burton2021}, so
+many-body physics can move the one-electron front $R^{*}$ above \emph{only}
+by changing the decay length the electrons actually occupy.  We tested this
+on H$_2$ and HeH$^+$ at Hartree--Fock and full CI in a per-center
+multi-$\zeta$ $1s$ basis (five, ten, and eight exponents per center;\ the
+effective per-center exponent $\zeta_{\rm eff}(R)$ fitted from the one-body
+density's own tail, and verified to be an \emph{output}:\ it runs
+$1.46 \to 0.83$ across $R$ at HF, reaches the textbook $1.19$ at $R = 1.4$,
+differs between HF and FCI by $12\%$ at $R = 4$, equals no basis exponent,
+and moves the front by $\le 0.8\%$ under basis doubling).  The
+occupation-weighted principal-angle front of the occupied one-body space
+matches the exact $1s$--$1s$ law at the empirical $\zeta_{\rm eff}$ to
+$\gvq{front_resid_h2_hf}{-0.7}\%$ (H$_2$, HF),
+$\gvq{front_resid_h2_fci}{-1.2}\%$ (H$_2$, FCI),
+$\gvq{front_resid_heh_hf}{0.0}\%$ (HeH$^+$, HF) and
+$\gvq{front_resid_heh_fci}{-0.2}\%$ (HeH$^+$, FCI), with
+$|\Delta\cos| \le 0.006$ pointwise wherever the second center holds more
+than $1\%$ of an electron.  \textbf{Screening moves the front;\ nothing
+else does, at the one-percent level.}  The sub-percent residual is a shape
+term (a contracted multi-$\zeta$ component is not one exponential),
+non-positive at every rung.
+
+\textbf{[SYMBOLIC + MEASURED]} Correlation does move a \emph{different}
+front, and through occupation numbers rather than any length.  Let $\gamma$
+be the one-body density and $P_{XY}$ its center-blocks;\ the \emph{signed}
+cross-center coherence
+$M_2 = \mathrm{Tr}(P_{AB}S_{BA})/\sqrt{\mathrm{Tr}(P_{AA}S_{AA})\,\mathrm{Tr}(P_{BB}S_{BB})}$
+coincides with the principal-angle front at HF (one occupied orbital) but
+crosses $1/\sqrt2$ inward at FCI by $\gvq{coherence_shift_h2}{23}\%$
+(H$_2$:\ $0.987$ vs $1.285$~bohr) and $\gvq{coherence_shift_heh}{9}\%$
+(HeH$^+$:\ $0.690$ vs $0.758$).  In the two-orbital form the mechanism is
+explicit:\ with natural-orbital occupations $n_g, n_u$ and per-center
+weights $w_g^2 = 1/(2(1+S))$, $w_u^2 = 1/(2(1-S))$,
+\begin{equation}
+  M_2 = \frac{n_g w_g^2 - n_u w_u^2}{n_g w_g^2 + n_u w_u^2}\,S,
+  \qquad \frac{w_u^2}{w_g^2} = \frac{1+S}{1-S},
+  \label{eq:coherence_two_orbital}
+\end{equation}
+so the antibonding orbital enters the per-center density with a weight
+amplified about fivefold at $S = 0.67$, and $n_u = 0.025$ already pulls
+$M_2$ from $S = 0.674$ to $0.591$ (measured $0.596$).  The limits are the
+molecular-orbital value $M_2 = S$ ($n_u = 0$) and the Heitler--London value
+$M_2 = S^2$ (at HL occupations $n_g = (1+S)^2/(1+S^2)$,
+$n_u = (1-S)^2/(1+S^2)$); H$_2$ runs from the first toward the second as $R$
+grows.  This is bond-order collapse---the $k$-th compound of the same
+one-electron overlap---so correlation touches decompactification in exactly
+one place, and that place is occupation, not geometry.  Scope:\ $s$-only
+per-center basis, two electrons;\ whether the principal-angle statement
+survives at $N > 2$ with several strongly occupied natural orbitals is
+untested.  Backing:\ \texttt{tests/test\_paper58\_coherence\_front.py} (the
+limits of Eq.~\eqref{eq:coherence_two_orbital} symbolically, the measured
+H$_2$ point, and the rejected equal-weight alternative);\ chronicle
+CHANGELOG v5.10.2.
 
 \section{Two re-readings}
 \label{sec:rereadings}
@@ -984,10 +1055,14 @@ $11/3.5 - 11/10 = 143/70$.)
 \caption{NaH, all-electron 12e, $M = 7$.  Percentages are of in-basis FCI
 binding.  Experiment: $R_{\rm eq} = 3.5667\,a_0$
 ($r_e = 1.8874$~\AA)~\cite{huberherzberg}.  The comparison value
-$D_e = 1.961$~eV is inherited from the framework's earlier compilation and
-its primary source is \emph{not yet verified}; it is not tabulated on the
-NIST pages carrying $r_e$, so every $D_e$ percentage below should be read as
-provisional pending that check.}
+$D_e = 1.961$~eV is the primary spectroscopic determination of Huang
+\emph{et al.}~\cite{huang2010} ($15815\pm5$~cm$^{-1}$; corroborated by the
+NaD isotope-shift analysis, and refined to $1.960$~eV by Chu \emph{et
+al.}~\cite{chu2018}).  Huber--Herzberg/NIST predate this measurement and
+carry no confident $D_e$, so the value is cited to its source rather than to
+the $r_e$ compilation.  The tabulated $R_{\rm eq}$ are the driver's
+coarse-grid ($0.25\,a_0$) parabolic minima;\ a finer grid shifts the 3-det
+value to $3.72\,a_0$, negligible within the minimal-basis error.}
 \label{tab:nah}
 \begin{ruledtabular}
 \begin{tabular}{lrrr}
@@ -1222,7 +1297,7 @@ Sec.~\ref{sec:continuous} front, exponent & MEASURED & \textsc{live} \\
 Eq.~\eqref{eq:tail_geometric}, $t_c$ & MEASURED / SYMB. & \textsc{live} \\
 Obs.~\ref{obs:permutation_cost} & MEASURED & \textsc{live} \\
 Tab.~\ref{tab:nah}, fixed $R$ & MEAS. & \textsc{live} \\
-Tab.~\ref{tab:nah}, minima & PANEL & \textsc{owed} \\
+Tab.~\ref{tab:nah}, minima & MEAS. & \textsc{live} \\
 NaH atom-only $\zeta$ & MEAS. & \textsc{live} \\
 Obs.~\ref{obs:truncation} & MEASURED & \textsc{live} \\
 fit quality, span id. & MEASURED & \textsc{live} \\
@@ -1353,6 +1428,64 @@ and a Conditioning Frontier for Molecules,'' GeoVac Paper~60 (2026).
 \bibitem{loutey_paper8}
 J.~Loutey, ``Bond Sphere:\ Diatomic Molecules as $S^3$ and their Natural
 Sturmian Basis,'' GeoVac Paper~8--9 (2026).
+
+\bibitem{amos_hall1961}
+A.~T.~Amos and G.~G.~Hall, ``Single determinant wave functions,''
+\textit{Proc.\ R.\ Soc.\ Lond.\ A}\ \textbf{263}, 483 (1961).
+
+\bibitem{king1967}
+H.~F.~King, R.~E.~Stanton, H.~Kim, R.~E.~Wyatt, and R.~G.~Parr,
+``Corresponding orbitals and the nonorthogonality problem in molecular
+quantum mechanics,'' \textit{J.\ Chem.\ Phys.}\ \textbf{47}, 1936 (1967).
+
+\bibitem{west_ruedenberg2013}
+A.~C.~West, M.~W.~Schmidt, M.~S.~Gordon, and K.~Ruedenberg, ``A
+comprehensive analysis of molecule-intrinsic quasi-atomic, bonding, and
+correlating orbitals.\ I.\ Hartree--Fock wave functions,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{139}, 234107 (2013).
+
+\bibitem{halmos1969}
+P.~R.~Halmos, ``Two subspaces,''
+\textit{Trans.\ Amer.\ Math.\ Soc.}\ \textbf{144}, 381 (1969).
+
+\bibitem{bottcher_spitkovsky2010}
+A.~B\"ottcher and I.~M.~Spitkovsky, ``A gentle guide to the basics of two
+projections theory,'' \textit{Linear Algebra Appl.}\ \textbf{432}, 1412
+(2010).
+
+\bibitem{grozdanov_solovev1991}
+T.~P.~Grozdanov and E.~A.~Solov'ev, ``Separated- and united-atom limits
+for dynamical adiabatic states,'' \textit{Phys.\ Rev.\ A}\ \textbf{44},
+5605 (1991).
+
+\bibitem{solovev2005}
+E.~A.~Solov'ev, ``The advanced adiabatic approach and inelastic
+transitions via hidden crossings,'' \textit{J.\ Phys.\ B:\ At.\ Mol.\
+Opt.\ Phys.}\ \textbf{38}, R153 (2005).
+
+\bibitem{smith1972}
+F.~T.~Smith, ``Atomic distortion and the combining rule for repulsive
+potentials,'' \textit{Phys.\ Rev.\ A}\ \textbf{5}, 1708 (1972).
+
+\bibitem{huang2010}
+H.-Y.~Huang, T.-L.~Lu, T.-J.~Whang, Y.-Y.~Chang, and C.-C.~Tsai,
+``Dissociation energy of the ground state of NaH,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{133}, 044301 (2010).
+
+\bibitem{chu2018}
+C.-C.~Chu, H.-Y.~Huang, T.-J.~Whang, and C.-C.~Tsai, ``Observation of
+double-well potential of NaH $C\,^1\Sigma^+$ state:\ deriving the
+dissociation energy of its ground state,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{148}, 114301 (2018).
+
+\bibitem{prosser_hagstrom1968}
+F.~Prosser and S.~Hagstrom, ``On the rapid computation of matrix
+elements,'' \textit{Int.\ J.\ Quantum Chem.}\ \textbf{2}, 89 (1968).
+
+\bibitem{burton2021}
+H.~G.~A.~Burton, ``Generalized nonorthogonal matrix elements:\ Unifying
+Wick's theorem and the Slater--Condon rules,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{154}, 144109 (2021).
 
 \end{thebibliography}
 

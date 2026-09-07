@@ -1,4 +1,4 @@
-"""Paper 59 sec:modular -- the s<->t exchange is a modular involution and T2's
+"""Paper 61 (companion of Paper 59) sec:modular -- the s<->t exchange is a modular involution and T2's
 modular home is X_0(2) (CHANGELOG v4.103.0; driver debug/aha_t2a_involution.py).
 
 Pins: (i) c = s(1-s) is s -> 1-s invariant, so the full Feynman-square symmetry

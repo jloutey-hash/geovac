@@ -1,4 +1,4 @@
-"""Paper 59 sec:modular -- the conductor-4 arithmetic of the Legendre fibre period.
+"""Paper 61 (companion of Paper 59) sec:modular -- the conductor-4 arithmetic of the Legendre fibre period.
 
 Backs the corrected justification for admitting G = beta(2) = L(2, chi_-4) into the
 PSLQ ring (v4.102 audit, debug/sprint_qi_seam_audit_memo.md):

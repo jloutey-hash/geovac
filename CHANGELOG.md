@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.10.6] - 2026-09-06
+
+**The /advisor pass and its group2/group3 surgery, closed by a /qa DELTA (DEFECTS → remediated).** A PI "where do we go" question became a new thesis-advisor skill, an advisor pass on Papers 58/59/60, four external-literature scans, and the paper surgery the pass drove — certified by an unseeded /qa DELTA on {32, 58, 59, 60, 61}. Canonical memo: `debug/sprint_advisor_qa_delta_memo.md`.
+
+### Added
+- **`/advisor` skill** (`.claude/commands/advisor.md`) — a thesis-committee-chair review of one specific paper (clear/defensible contribution? honestly positioned? the one hostile-examiner question it can't answer? where to push?). Advises, never edits (§13.10); distinct from `/qa` — no gates, no PASS verdict, catches framing in *both* directions (overclaim and undersell). Ran on 58/59/60 → all DEFENSIBLE AFTER NAMED FIXES (briefs in `debug/advisor/paper{58,59,60}_advisory.md`).
+- **Paper 61** (`papers/group3_foundations/paper_61_bessel_moment_periods.tex`) — the number-theory tower (modular structure + cosmic-Galois periods + Bessel-moment period algebra) split verbatim out of Paper 59 into a periods/amplitudes-facing companion (8 pp; group3, 11→12). **Cert OWED** (its content post-dates the last /qa; inherited the tower's owed status, not a regression).
+- **NaH well-minimum migration test** (`tests/test_paper58_nah_ladder.py::test_paper58_nah_well_minimum_reproduces`) — pins Table II's R_eq = 3.736 a₀ / D_e = 1.071 eV; fire-tested (planted 3.900 → FAIL) and independently re-derived by the /qa code reviewer (3.7364 / 1.0710).
+- Four adversarial external-lit scans (`debug/lit_scan/*.md`): the 3-center elliptic-ERI ↔ sunrise bridge = **OPEN** frontier (reaches the Brown/Kleinschmidt periods community); the atomic metric-free Sturmian encoding (‖M‖₁~K⁰·⁸⁴) = **OPEN**; projector-angle bonding = ADJACENT/COLLISION; SO(4)-breaking front = ADJACENT/OPEN.
+
+### Changed
+- **Citation hygiene (Papers 58/60/32):** ~14 mature prior-art references added where standard objects were presented without attribution — principal angles (Amos–Hall 1961, King 1967, West–Ruedenberg 2013), compound matrices (Löwdin 1955, Prosser–Hagstrom 1968, Burton 2021), two-projections theory (Halmos 1969, Böttcher–Spitkovsky 2010), SO(4)-breaking (Solov'ev 2005, Grozdanov–Solov'ev 1991), the combining rule (Smith 1972).
+- **P58 D_e re-cited:** 1.961 eV is *correct* — Huang et al. 2010 (15815 cm⁻¹, Crossref-verified) — re-cited off the anachronistic Huber–Herzberg attribution; the R_eq well-minimum is now test-backed (Table VII owed → live); Table II discloses the coarse-grid 3.736 vs the fine-grid 3.72 (a ~0.016 a₀ grid artifact, negligible vs the +4–5% minimal-basis error). LiH 30-digit found already backed.
+- **P60 → P58 coherence relocation:** the M2 signed-coherence-collapse result, its test (renamed `test_paper58_coherence_front.py`), and its registry keys moved to P58's decompactification arc; P60 points to it.
+- **P60 restructure:** abstract now leads with the atomic metric-free win; the Koridon clause's axis mismatch fixed (K = config count at fixed atom vs N = orbital count / growing molecule); Gaussian ratio softened; "molecular payoff" → "equivalent-center payoff".
+- **P59:** tower removed → single pointer to Paper 61; Avery 2013 named as the closest prior route with "stops at numerics" softened to a search-negative; abstract sunrise/transcendent claims hedged to mechanism-scope.
+- `papers/INDEX.md`, `CLAUDE.md §6`, `docs/claim_test_matrix.md`, `docs/topic_to_paper_lookup.md`, and the group2/group3 syntheses + Paper 56 updated for the split, the relocation, and the Huang re-cite.
+
+### Closed — /qa DELTA (unseeded) on {32, 58, 59, 60, 61}
+- **VERDICT: DEFECTS → REMEDIATED.** 12 deterministic gates CLEAN (C13/C14/C15/C20 re-run on group2+group3, since the trunk-scope default misses the changed papers); 5 LLM reviewers. **1 LARGE + 6 SMALL, every finding introduced by this session's changes** — none pre-existing corpus rot.
+- The LARGE was a `group3_foundations_synthesis.tex` misattribution of Paper 61's entire tower to Paper 59, **caught by the claim-impact reviewer** (invisible to every deterministic gate and byte-diff — the split swept the owner papers + central registries but not the *citer* documents). Textbook proof-of-value for the semantic-diff / claim-impact DELTA scope.
+- The SMALL: two Crossref-verified citation defects inherited from explorer memos (`kim_gordon1972` → actually F. T. Smith; `prosser_hagstrom1968` wrong title, in P58+P60), a relocation cross-ref, P61 cites owed in the group2 synthesis + Paper 56, and 6 stale `topic_to_paper_lookup.md` rows. All remediated gate-first and re-verified (Crossref + cite/ref consistency + C19). Two items left with documented disposition (a conservative `[PANEL-VERIFIED]` tag; two dated-chronicle refs to the pre-rename test filename).
+- **Owed:** Paper 61 full cert; a clean re-delta (the precondition for the full certifying run); the `test_paper59_* → test_paper61_*` file renames.
+
 ## [v5.9.0] - 2026-09-04
 
 **Minor bump, PI-adjudicated.** Marks the closed-form lattice spectrum work of

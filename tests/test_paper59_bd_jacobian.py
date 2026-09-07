@@ -1,4 +1,4 @@
-"""Backing test for Paper 59 sec:modular BD-pullback Jacobian (v4.100.0, third T2 track).
+"""Backing test for Paper 61 (companion of Paper 59) sec:modular BD-pullback Jacobian (v4.100.0, third T2 track).
 
 The tau-plane pullback of the modulus integration (lambda(tau)=1-rho) carries the
 weight-two Jacobian in closed form,

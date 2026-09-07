@@ -15,14 +15,14 @@ Two things this pins and one it does not:
   those exponents must reproduce -161.0845 Ha. If someone re-tunes the zetas
   against molecular data, this leg fails.
 
-  DOES NOT re-derive R_eq or D_e. Those come from a PES scan over ~20 geometries
-  plus a dissociated limit; the well-minimum values in Table II (R_eq = 3.736,
-  D_e = 1.071 eV, 91.1% of in-basis FCI binding) remain driver-backed. What is
-  asserted here is the fixed-geometry form, which is where the mechanism lives.
+  RE-DERIVES the Table II well minimum (test_paper58_nah_well_minimum_reproduces,
+  below): the three-determinant fragment-native PES minimizes at R_eq = 3.736 a0
+  with D_e = 1.071 eV, reproducing the driver on its coarse 0.25-a0 grid. The
+  fixed-geometry ladder here is where the binding mechanism lives.
 
-Note on the reference D_e: the experimental comparison value 1.961 eV could not
-be verified against a primary source (it is absent from the NIST pages carrying
-r_e), so no percentage-of-experiment figure is asserted in this file.
+Note on the reference D_e: the experimental comparison value 1.961 eV is the
+primary spectroscopic determination of Huang et al., J. Chem. Phys. 133, 044301
+(2010) (15815 cm^-1); Table II's percentage figures are quoted against it.
 """
 
 from __future__ import annotations
@@ -214,4 +214,59 @@ def test_paper58_nah_compactness_and_truncation_damage():
     assert frac_l2 < frac_l3, (
         f"Loewdin 2-det ({100 * frac_l2:.1f}%) should be worse than "
         f"Loewdin 3-det ({100 * frac_l3:.1f}%)"
+    )
+
+
+@pytest.mark.slow
+def test_paper58_nah_well_minimum_reproduces():
+    """Table II WELL MINIMUM: R_eq = 3.736 a0, D_e = 1.071 eV.
+
+    Closes the last OWED headline number of Paper 58 (previously backed only by
+    the exploratory driver debug/noci_nah_probe.py). Reproduces the driver's
+    documented method: the three-determinant fragment-native PES on a coarse
+    0.25-a0 grid, refined by a 3-point parabola through the grid minimum, which
+    is where the paper's 3.736 comes from (argmin at R = 3.75).
+
+    Grid resolution: a finer (0.02-a0) scan resolves the true minimum at
+    R_eq ~ 3.72 a0. The 0.016-a0 gap is a coarse-grid parabolic overestimate,
+    negligible against the +4-5% minimal-basis error, and D_e is grid-insensitive
+    (the well is flat: E_min moves by ~1e-5 Ha between the two grids). This test
+    pins the paper's reproducible 3.736; a corrupted energy near the minimum
+    (the failure mode this migration guards) would drift R_eq or D_e off it.
+    """
+    sh = _shapes()
+    e_diss = E_NA_REF + E_H_REF
+    dets3 = _ladders()["cov+ionH (3 dets)"]
+
+    grid = np.arange(2.0, 6.01, 0.25)
+    energies = []
+    for R in grid:
+        s, h, g, vnn = _nah_integrals(float(R), sh)
+        e3, _ = E.noci_ground_gensc(dets3, s, h, g)
+        energies.append(e3 + vnn)
+    energies = np.array(energies)
+
+    i = int(energies.argmin())
+    assert 0 < i < len(grid) - 1, "no interior minimum in the 3-det PES"
+    assert grid[i] == pytest.approx(3.75), (
+        f"coarse-grid argmin at R = {grid[i]:.2f}, not 3.75; the PES shape moved"
+    )
+
+    # 3-point parabola through the coarse-grid minimum (the driver's method)
+    x0, x1, x2 = grid[i - 1], grid[i], grid[i + 1]
+    y0, y1, y2 = energies[i - 1], energies[i], energies[i + 1]
+    den = (x0 - x1) * (x0 - x2) * (x1 - x2)
+    a = (x2 * (y1 - y0) + x1 * (y0 - y2) + x0 * (y2 - y1)) / den
+    b = (x2 * x2 * (y0 - y1) + x1 * x1 * (y2 - y0) + x0 * x0 * (y1 - y2)) / den
+    c = y1 - a * x1 * x1 - b * x1
+    R_eq = -b / (2 * a)
+    e_min = a * R_eq * R_eq + b * R_eq + c
+    d_e_eV = (e_diss - e_min) * 27.211386245988
+
+    assert R_eq == pytest.approx(3.736, abs=3e-3), (
+        f"NaH R_eq = {R_eq:.4f} a0 vs Table II 3.736; the well-minimum headline "
+        "number has drifted"
+    )
+    assert d_e_eV == pytest.approx(1.071, abs=5e-3), (
+        f"NaH D_e = {d_e_eV:.4f} eV vs Table II 1.071"
     )

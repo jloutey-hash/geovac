@@ -1,4 +1,4 @@
-"""Paper 59 -- the (KW) factorization of the collinear observable T2 and its
+"""Paper 61 (companion of Paper 59) -- the (KW) factorization of the collinear observable T2 and its
 high-precision value (CHANGELOG v4.104.0; drivers debug/beta2_t2_*.py).
 
 The exact reduction: j0(z) = int_0^1 cos(zw) dw decouples the b = s+t phase and

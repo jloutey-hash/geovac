@@ -1,4 +1,4 @@
-"""Backing test for Paper 59 (sec:modular): the (s,t)->(0,0) corner of the
+"""Backing test for Paper 61 (companion of Paper 59; sec:modular): the (s,t)->(0,0) corner of the
 collinear three-center Bessel-moment observable T2 is a rho^{3/2} (rho=s+t)
 non-analyticity, and the Duffy angular split + radial substitution rho=sigma^2
 renders the corner integrand ANALYTIC in sigma, restoring SPECTRAL
@@ -120,7 +120,7 @@ def test_paper59_corner_sigma2_is_spectral():
 
 @pytest.mark.slow
 def test_paper59_corner_value():
-    """Pin the corner-triangle value T1(delta=0.05) (Paper 59 sec:modular
+    """Pin the corner-triangle value T1(delta=0.05) (Paper 61 sec:modular
     intermediate), independent of the debug/ evaluator. The ~13-digit pin is
     stable across k-grid size (M>=192 agree there)."""
     mp.mp.dps = 30
@@ -133,7 +133,7 @@ def test_paper59_corner_value():
 
 # ---------------------------------------------------------------------------
 # The ASSEMBLED collinear value (corner + bulk), pinned against the paper's
-# canonical headline 0.3953557659017139641 (Paper 59 sec:modular).  The
+# canonical headline 0.3953557659017139641 (Paper 61 sec:modular).  The
 # spectral corner T1 (sigma^2 Duffy) is glued to the smooth bulk on a tiling
 # [0,1]^2 = T1{s+t<=d} + T2far{[0,d]^2, s+t>d} + 2*RectA + BigSquare; the
 # smooth pieces use cosine-clustered Gauss-Legendre.  This is an INDEPENDENT
@@ -187,7 +187,7 @@ def _rect(deg, slo, shi, tlo, thi, kn):
 def test_paper59_assembled_collinear_value():
     """[MEASURED] Assemble the FULL collinear T2 (corner triangle + smooth bulk)
     self-contained and check it reproduces the paper's canonical headline
-    0.3953557659017139641 (Paper 59 sec:modular) to ~12 digits.  This is the
+    0.3953557659017139641 (Paper 61 sec:modular) to ~12 digits.  This is the
     assembled witness beyond the corner sub-triangle: an independent tiling
     (vs debug/hp_final) that agrees with the headline, resolving the earlier
     ~6-digit-only backing.  deg=4 / M=384 gives |T2 - headline| ~ 1.5e-13; the
@@ -206,7 +206,7 @@ def test_paper59_assembled_collinear_value():
 
 
 # ---------------------------------------------------------------------------
-# The guarded PSLQ-NEGATIVE (Paper 59 sec:modular / sec:bessel_algebra).
+# The guarded PSLQ-NEGATIVE (Paper 61 sec:modular / sec:bessel_algebra).
 #
 # What is ROBUSTLY DECIDABLE at the reachable precision.  The collinear value is
 # known to only ~15-16 cross-confirmed / ~19 best-estimate digits (extending it
@@ -226,7 +226,7 @@ def test_paper59_assembled_collinear_value():
 # debug/routeC_pslq_v2.py) is a bounded, DRIVER-OBSERVED exclusion that is NOT
 # decidable at ~19 digits: that basis is over-determined at reachable precision
 # (the spurious low-height hits are a DIFFERENT vector at each precision), so a
-# decisive test needs ~40 digits.  It is deliberately NOT asserted here.  Paper 59
+# decisive test needs ~40 digits.  It is deliberately NOT asserted here.  Paper 61
 # sec:modular/sec:bessel_algebra tier those legs as bounded, "~40 digits for a
 # definitive decision" (the collaboration frontier).
 #

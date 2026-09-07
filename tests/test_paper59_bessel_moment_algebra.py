@@ -1,4 +1,4 @@
-"""Paper 59 sec:bessel_algebra -- the Bessel-moment period algebra of the
+"""Paper 61 (companion of Paper 59) sec:bessel_algebra -- the Bessel-moment period algebra of the
 integrated three-centre observable: master family, Wronskian determinant, the
 Broadhurst-Mellit / Fresan-Sabbah-Yu quadratic period relations, and the
 critical-L-value negative.
@@ -121,7 +121,7 @@ def test_paper59_period_pairing_minus_pi_0_2pi():
     rho-independent: B[K,I] = -pi, B[K,J] = 0, B[I,J] = 2pi.  Checked at rho=1/2
     (all three entries) and rho=1/4 (rho-independence of B[K,I]).
 
-    dps=55 so the test witnesses the paper's (sec:bessel_algebra) quoted 25-digit
+    dps=55 so the test witnesses the companion Paper 61's (sec:bessel_algebra) quoted 25-digit
     precision (worst residual ~2.3e-29 at dps=55; the earlier dps=30 floored the
     assertion at 1e-10 while the relations agree to ~1e-17 there and 25+ digits here)."""
     with mp.workdps(55):
@@ -144,7 +144,7 @@ def test_paper59_period_pairing_minus_pi_0_2pi():
 @pytest.mark.slow
 def test_paper59_all_three_regular_masters_satisfy_pf():
     """[MEASURED] All THREE regular thimble masters -- s_K (the physical N(D)),
-    s_I, and s_J -- satisfy the rank-4 Picard-Fuchs operator eq:pf (Paper 59
+    s_I, and s_J -- satisfy the rank-4 Picard-Fuchs operator eq:pf (Paper 61
     sec:bessel_algebra: "the three regular masters satisfy Eq.(pf)").  The
     companion test_paper59_L4_annihilates_the_physical_master_N pins only s_K;
     this witnesses the *plural* claim.  Worst residual across the (rho,D) grid:

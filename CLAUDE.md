@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.10.5 (September 6, 2026)
+**Version:** v5.10.6 (September 6, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/advisor + group2/3 surgery + /qa DELTA (2026-09-06, v5.10.6):** New /advisor thesis-advisor skill; P59->P61 split; P60->P58 coherence relocate; NaH R_eq test-backed; DELTA = DEFECTS->remediated, claim-impact reviewer caught the LARGE synthesis misattribution. See debug/sprint_advisor_qa_delta_memo.md.
 - **C21 symbolic-literal instrumentation + /qa trunk DELTA #12 (2026-09-06, v5.10.5, PI-directed):** closed completeness-critic GAP 1 -- C21 now evaluates symbolic-fraction annotations (frac / pi / pi^2 / inline a-over-b / Z-coefficient), and 4/pi, 5Z/8, Delta=1/40, B=42, F=pi^2/6 are registered + annotated across trunk docs (107 annotations checked). DELTA #12 = DEFECTS: the new tight-match clause was inert (subsumed by a loose dec=0 window) -> fixed by gating on literal kind + fire-tested. Claims CLEAN. PI: hold full runs, bank this. See carryforward Part Y.
 - **/qa trunk FULL run #8 = FAIL, remediated (2026-09-06, v5.10.4, PI-invoked, certifying):** the run that could PASS did not; a fresh 11-agent panel caught 2 pre-existing MATERIAL-SMALL Paper-1 s/p paraphrase zombies (intro roadmap + a mis-scoped [PANEL-VERIFIED] tag) that FULL #7 walked past -- the FULL-catches-what-DELTA-cannot dynamic. 0 LARGE; every keystone re-derived SOUND (5/5 code, synthesis, both citation clean). Fixed + C16-backstopped (fire-tested). Owed: C21 symbolic-fraction trunk constants (4/pi, 5Z/8, B, Delta, F). See carryforward Part X.
 - **/qa trunk FULL run #7 = FAIL, then CLOSED (2026-09-06, v5.10.3, PI-invoked):** certifying run; 4 SMALL (0 LARGE), every keystone re-derived SOUND; content fixed + both instrument gaps (C21 vacuous-on-trunk, C11 "internal preprint (YEAR)" hole) + 5-item guard pass all closed, each guard fire-tested. DELTA #11 (same day) = CLEAN-DELTA (3/3 dimensions) -> FULL #8 unlocked. See carryforward Parts V-W.
@@ -422,7 +423,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 **Always load** (framework identity): Paper 0 (packing axiom, K = −1/16) · 1 (spectral graph methods) · 7 (S³ proof, 18 symbolic proofs) · 14 (qubit encoding headline) · 16 (S_N periodicity) · 22 (angular sparsity theorem) · 23 (nuclear hub, Fock rigidity) · 24 (Bargmann-Segal S⁵, Coulomb/HO asymmetry) · 27 (entropy as projection) · 31 (universal/Coulomb partition) · 32 (the spectral triple; §VIII theorems).
 
-**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 25, 28, 30, 33, 36, 41, 51; math.OA arc → 29, 38, 39, 40, 42–50, 52, 53; foundations/periods → 18, 54, 55, 56, 57; precision → 26, 34, 35.
+**Load on topic** (full list and statuses in `papers/INDEX.md`): chemistry solvers → 8–9, 11, 12, 13, 15, 17, 19, FCI-A/M; QC resources → 20; QED/gauge/gravity → 2, 25, 28, 30, 33, 36, 41, 51; math.OA arc → 29, 38, 39, 40, 42–50, 52, 53; foundations/periods → 18, 54, 55, 56, 57, 61; precision → 26, 34, 35.
 
 **GUARDRAIL papers** — MUST load before any investigation in their domain (trigger words and protocol in §3.5): Papers 8–9 (single-center / unified-basis / shared-exponent molecular — Sturmian structural theorem), FCI-M (graph-concatenation molecular), Track DF record (nested hyperspherical).
 
@@ -432,7 +433,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 |:-------|:---------|:-------------:|
 | `papers/group1_operator_algebras/` | math.OA / NCG | 16 |
 | `papers/group2_quantum_chemistry/` | quantum chemists | 11 |
-| `papers/group3_foundations/` | mathematical physicists | 11 |
+| `papers/group3_foundations/` | mathematical physicists | 12 |
 | `papers/group4_quantum_computing/` | QC / NISQ / VQE | 4 |
 | `papers/group5_qed_gauge/` | HEP / gauge theory | 8 |
 | `papers/group6_precision_observations/` | precision AMO | 4 |
