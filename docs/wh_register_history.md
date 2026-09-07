@@ -91,3 +91,15 @@ verdict below in compact form; this is the full superseded text, verbatim.
 Replaced when trunk FULL run #3 found Paper 38's mass-concentration moment was computed against the rotation angle (twice the unit-S³ geodesic distance), so the rate constant is convention-dependent (4/π rotation-angle, 2/π unit S³). Verbatim:
 
 *Status:* **PROVEN — unconditional (2026-06-10).** Paper 38: the discrete truncations converge to the round-S³ spectral triple in van Suijlekom's state-space GH distance at rate (4/π + o(1))·log n_max/n_max, on the truthful CH substrate (translation-seminorm metrization; frozen falsifier `tests/test_p38_action_seminorm.py`).
+
+---
+
+## WH7 — superseded Status text (replaced 2026-09-06)
+
+Replaced after the compactness/discreteness external-literature scan
+(`debug/lit_scan/compactness_discreteness_memo.md`,
+`debug/lit_scan/info_theoretic_compactness_memo.md`) found (a) published prior
+art for compact time as a quantization condition and (b) a technical
+conflation inside the hypothesis itself. Verbatim:
+
+*Status:* REGISTERED (2026-06-10). Load-bearing leg is **(i)**: only compactification makes time discrete and injects π. The Toeplitz probes leave the primary falsifier leaning **weakens-to-convention** — time is metrically visible; the observer's window is what makes it discrete. The Lorentzian-propinquity chase is **structurally closed**: the truncated Bisognano–Wichmann boost is *compact* (integer modular spectrum), so every Lipschitz/boost seminorm is signature-blind and the Lorentzian leg is de-compactification = convention. Re-read 2026-08-21 as an **arithmetic (CM)** structure — the finite-cutoff modular circle is P56's ℚ(i) Hodge circle (μ₄, exact tests); the split-form "Wick = base change" mechanism was **REJECTED** (the scalar sector is compact but pure-Tate). Honest cap: input (iii) means discrete-vs-continuous may be empirically undecidable at every computable level; papers stay under §1.5. Full chronicle + superseded status text: `docs/wh_register_history.md`.

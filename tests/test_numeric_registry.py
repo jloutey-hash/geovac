@@ -311,3 +311,37 @@ def test_exemption_window_is_tighter_than_the_context_window():
         "a retired value on the disclosure marker's own line must stay "
         "silent -- otherwise every honest erratum becomes a defect"
     )
+
+
+def test_no_duplicate_literal_keys_in_retired():
+    """A retired-value dict literal must not name the same float twice.
+
+    Python collapses `1.69` and `1.690` to one key, so the later entry
+    silently overwrites the earlier one and its detection anchors vanish --
+    the gate keeps reporting PASS on a class it can no longer see. That is
+    the "guard that cannot fail" failure mode arriving through a dict
+    literal rather than through an assertion.
+
+    Found 2026-09-06: `exp_lambda_4pt` was written as both 1.69 and 1.690;
+    the surviving entry had lost its `alpha|lambda` anchors.
+
+    The check must read the SOURCE, not the parsed dict -- by the time the
+    module is imported the duplicate is already gone.
+    """
+    import pathlib
+    import re
+    from collections import Counter
+
+    src = pathlib.Path(__file__).resolve().parents[1] / "debug" / "qa" / "numeric_registry.py"
+    text = src.read_text(encoding="utf-8")
+    block = text[text.index("RETIRED"):]
+    keys = re.findall(r"^\s{4}([0-9][0-9_.eE+-]*):\s*\(", block, re.M)
+    assert keys, "could not locate any RETIRED literal keys -- parser drifted"
+
+    counts = Counter(float(k) for k in keys)
+    dupes = {v: [k for k in keys if float(k) == v]
+             for v, n in counts.items() if n > 1}
+    assert not dupes, (
+        f"duplicate float keys in RETIRED silently discard detection "
+        f"anchors: {dupes}"
+    )

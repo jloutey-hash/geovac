@@ -545,8 +545,14 @@ A uniform finite-cutoff bound $\gamma_{n} \le 6\,(\log n)/n$ holds
 for all $n \ge 2$.
 \end{theorem}
 
-The proof proceeds via five lemmas L1$'$, L2, L3, L4, L5 of
-Paper~38~\S 4--\S 6.  We sketch each.
+The proof rests on four supporting lemmas L1$'$, L2, L3, L4 of
+Paper~38~\S 4--\S 6 together with the \emph{lifted-state} construction,
+and we sketch each below.  A fifth lemma (L5, the Latr\'emoli\`ere
+propinquity assembly) was part of the original architecture and was
+\textbf{withdrawn on 2026-09-03} when its height bound was refuted;\ it
+is retained in Paper~38 as a record and is \emph{not} part of the proof
+of Theorem~\ref{thm:gh_su2}.  See \S\ref{sec:l5_withdrawn} below for what
+was refuted and what carries the theorem in its place.
 
 \subsection{Lemma L1$'$: chirality-doubled truncated operator system}
 
@@ -570,10 +576,15 @@ explicit construction.
 
 \subsection{Lemma L2: central spectral Fej\'er kernel on $\SU(2)$}
 
-The propinquity tunneling pair built in L5 below requires a positive,
+The proof of Theorem~\ref{thm:gh_su2} requires a positive,
 state-preserving, central good kernel on $\SU(2)$ whose
-mass-concentration moment vanishes at a known rate.  Paper~38~\S 4.2
-constructs the central spectral Fej\'er kernel
+mass-concentration moment vanishes at a known rate:\ it is this kernel
+that supplies both the function-level good-kernel estimate and the
+operator-side conjugation average $\Phi$ in the unconditional argument
+(\S\ref{sec:l5_withdrawn}).  (The withdrawn L5 tunneling pair also used
+it;\ the kernel is load-bearing either way, which is why L5's withdrawal
+leaves it untouched.)  Paper~38~\S 4.2 constructs the central spectral
+Fej\'er kernel
 \begin{equation}
 K_{\nmax}(g) \;=\; \frac{1}{Z_{\nmax}}
 \left|\sum_{j \le j_{\max}} \sqrt{2j+1}\,\chi_{j}(g)\right|^{2},
@@ -692,22 +703,46 @@ This is the operator-system analog of the Berezin--Toeplitz
 quantisation; see Connes--van~Suijlekom \cite{connes_vs2021}
 for the operator-system truncation of the closely related $\T^{d}$ case.
 
-\subsection{Lemma L5: Latr\'emoli\`ere propinquity assembly}
+\subsection{What carries the theorem, and the withdrawn Lemma~L5}
+\label{sec:l5_withdrawn}
 
-The tunneling pair $(B_{\nmax}, P_{\nmax})$ between
-$\Tcal_{\sthree}$ and $\Tcal_{\nmax}$ has reach
-$\le \gamma_{\nmax}$ (by L4(c) approximate identity and L2(g)
-Bo\.zejko--Fendler dual estimate), and height contributions are
-bounded by L4(b) contractivity and the fact that the projection $P$
-contributes $\mathrm{height}_{P} = 0$.  The assembly machinery is
-Latr\'emoli\`ere \cite{latremoliere_metric_st_2017}, applied
-verbatim.  This gives
-\begin{equation}
-\Lambda(\Tcal_{\nmax}, \Tcal_{\sthree})
-\;\le\; C_{3} \cdot \gamma_{\nmax} \;\to\; 0,
-\label{eq:gh_assembly}
-\end{equation}
-completing the proof of Theorem~\ref{thm:gh_su2}.
+\paragraph{The live argument:\ lifted states.}
+Theorem~\ref{thm:gh_su2} is Paper~38's
+\texttt{thm:main\_unconditional}, and its proof is the
+\emph{lifted-state} construction, not a propinquity assembly.  Let
+$S : C(\sthree) \to \Op_{\nmax}$, $S(f) = P_{\nmax} M_f P_{\nmax}$ be
+the unital completely positive compression and $\upsilon$ the dual map
+of Paper~38's lifted-state lemma.  Four facts close it:\ $S$ and
+$\upsilon$ are each $1$-Lipschitz for the Monge--Kantorovich metrics;\
+$\norm{\upsilon(S(f)) - f}_\infty \le \gamma_{\nmax} L(f)$ by the
+good-kernel estimate;\ and
+$\opnorm{S(\upsilon(T)) - T} \le \gamma_{\nmax} L_{\nmax}(T)$, because
+$S \circ \upsilon$ is exactly the operator-side conjugation average
+$\Phi(T) = \int \rho_g(T)\,K_{\nmax}(g)\,dg$ against the same Fej\'er
+kernel~\eqref{eq:fejer_kernel}.  The two maps are therefore $\gamma_{\nmax}$-almost mutually
+inverse, and the state-space pullbacks give the bound directly.
+\emph{The argument uses no Berezin map and no partial inverse, so it
+needs no dual reach and no height term at all}---which is why the
+refutation below leaves it untouched.
+
+\paragraph{Lemma~L5, withdrawn 2026-09-03.}
+The original architecture closed the forward direction differently, by
+assembling a Latr\'emoli\`ere tunneling pair $(B_{\nmax}, P_{\nmax})$
+\cite{latremoliere_metric_st_2017} and bounding its reach and height.
+That lemma is \textbf{[REFUTED AS STATED]} and withdrawn:\ its height
+leg asserted $\mathrm{height}_{B} \le \gamma_{\nmax}$ and
+$\mathrm{height}_{P} = 0$, and a finite-band witness exhibits an
+$f$ with $B(f) = 0$ for which the height quantity is exactly~$1$.  Hence
+$\mathrm{height}_{B} \equiv 1$ at every cutoff and the bound fails for
+every $\nmax \ge 6$.  Paper~38 retains the lemma as a record of the
+abandoned route;\ the $C_3 = 1$ factor quoted in the theorem is
+inherited from it, but the bound itself is not.
+
+\emph{Net effect:}\ one proof path fell and the keystone stands.  WH1 is
+unaffected, because the unconditional theorem never depended on the
+height estimate.  The same $(B, P)$-pair route is the one described as
+\emph{abandoned} in \S\ref{sec:tensor_extension} below;\ Paper~39's
+tensor extension likewise runs on the lifted-state construction.
 
 \subsection{Numerical verification}
 

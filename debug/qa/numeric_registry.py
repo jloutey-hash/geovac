@@ -662,12 +662,21 @@ RETIRED = {
     1712:    ("composed_coeff",     r"advantage|fewer|Gaussian|Pauli",
                                     r"retired|pair-diagonal|gave|arXiv"),
     3.15:    ("exp_pauli_4pt",      r"Q\^|exponent|scaling|alpha", r"Table~3\.15|Table 3\.15"),
+    # MERGED 2026-09-06.  This key was written TWICE -- as `1.69` and as
+    # `1.690` -- which are the same float, so the dict literal silently
+    # collapsed them and the second overwrote the first, discarding its
+    # `alpha|lambda` detection anchors.  A guard disarmed by a dict literal
+    # is exactly the "guard that cannot fail" class, so `test_numeric_registry`
+    # now scans the source for duplicate literal keys.
+    #
+    # `forbid` gains spheroidal|DLMF: Paper 58's DLMF section reports a
+    # log-gap local slope of -1.69, and the anchor `exponent` matches inside
+    # the word "exponential" in that prose.  A 1-norm scaling exponent and a
+    # spheroidal eigenvalue splitting are unrelated quantities.
     1.69:    ("exp_lambda_4pt",     r"Q\^|exponent|scaling|alpha|lambda",
-                                    r"meV|polarizability"),
+                                    r"meV|polarizability|spheroidal|DLMF"),
     3.36:    ("exp_qwc_3pt",        r"Q\^|exponent|scaling|QWC",   None),
     3.147:   ("exp_pauli_4pt",      r"exponent|alpha|scaling",  None),
-    1.690:   ("exp_lambda_4pt",     r"Q\^|exponent|scaling",
-                                    r"meV|polarizability"),
     1.694:   ("exp_lambda_4pt",     r"exponent|alpha|scaling",  None),
     3.355:   ("exp_qwc_3pt",        r"exponent|alpha|scaling",  None),
 

@@ -1283,9 +1283,12 @@ template — Paper~38~\cite{paper38}'s state-space Gromov--Hausdorff
 convergence on $\sthree = \SU(2)$, Paper~39~\cite{paper39}'s
 tensor-product extension, Paper~40~\cite{paper40_unified}'s
 universal $4/\pi$ rate constant on compact Lie groups — relies on
-five lemmas (L1$'$ chirality-doubled operator system, L2 central
+four lemmas (L1$'$ chirality-doubled operator system, L2 central
 spectral Fejér kernel, L3 Lipschitz spinor bound, L4 Berezin
-reconstruction, L5 Latrémolière propinquity assembly). The
+reconstruction) together with the lifted-state construction.  A fifth
+(L5, the Latrémolière propinquity assembly) belonged to the original
+architecture and was \emph{withdrawn} on 2026-09-03 when its height leg
+was refuted;\ it is not available as a template. The
 $\sthree \times \R$ analog requires the construction of a joint
 compact $\times$ non-compact Fejér kernel and a Krein-positive
 propinquity definition, both of which are mathematically open
@@ -1307,9 +1310,29 @@ spectral Fejér kernel then transports via a product construction with
 an explicit joint rate. This reduces L3b to a tractable bounded
 sprint (\texttt{debug/l3\_scoping\_memo.md}~\S~6). The
 compactified-temporal target is then the natural setting for a
-Lorentzian-propinquity assembly that inherits all five Paper~38 lemmas
-factor-by-factor, modulo Krein-positivity conventions at the
+Lorentzian-propinquity assembly that inherits the surviving Paper~38
+lemmas factor-by-factor, modulo Krein-positivity conventions at the
 Berezin reconstruction step.
+
+\emph{Status (2026-09-07).}\ This recommendation was written in May 2026
+and is \textbf{superseded} in two ways.  First, the fifth Paper~38 lemma
+it would have inherited is withdrawn, so an assembly route can no longer
+inherit a reach/height bookkeeping.  Second, and more decisively, the
+compactification it recommends is now understood to be the obstruction
+rather than the device:\ Paper~45's $K^{+}$ annihilation theorem shows
+the natural Krein-positive compression fails structurally, and the
+truncated Bisognano--Wichmann boost has \emph{integer} modular spectrum,
+so the finite-cutoff modular flow is a compact $\beta = 2\pi$ circle and
+every Lipschitz/boost seminorm built on it is signature-blind.  Replacing
+$\R_t$ by $S^1_T$ therefore buys tractability at the cost of the very
+structure being sought.  The general form of the obstruction:\ signature
+is a non-compact phenomenon, while quantum-metric convergence is a
+finite-dimensional-approximant phenomenon, and finite-dimensionality
+forces discrete spectrum --- so \emph{every} finite truncation
+compactifies the modular flow.  The remaining routes are not better
+seminorms:\ they are moving signature to the state/modular level, or
+adopting a genuinely Lorentzian distance notion (time-separation /
+Lorentzian length spaces) rather than a metric one.
 
 \subsection{Krein-positivity at the state level}\label{sec:open_state}
 

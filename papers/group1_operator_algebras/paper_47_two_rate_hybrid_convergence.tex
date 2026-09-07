@@ -597,8 +597,9 @@ the ``free upgrade'' reading.
 \begin{proof}
 At every cell $(\nmax, \Nt)$, the temporal radius $T(\Nt)$ is a positive
 real number, and the Paper~45/46 main theorem applies as a black-box
-bound at that cell. The five lemmas L1' / L2 / L3 / L4 / L5
-transport without modification:
+bound at that cell. Four of the five lemmas L1' / L2 / L3 / L4
+transport without modification;\ the fifth is no longer available (see
+the scope note at the end of this list):
 \begin{itemize}
 \item \textbf{L1' (Paper~44):} operator-system substrate, structurally
 independent of $T$ (the temporal multiplier algebra is the commutative
@@ -632,6 +633,22 @@ the admissibility condition $T(\Nt)/\Nt \to 0$.
 tunneling-pair construction $(\Bjoint, \Pjoint)$ and the
 reach/height bookkeeping produce~(\ref{eq:inner_bound}) verbatim at each
 cell.
+
+\textbf{[SCOPE NOTE, 2026-09-07 --- this item is not currently
+available.]}\ The L5 step above transports a \emph{height} bookkeeping,
+and Paper~38's Lemma~L5 was withdrawn on 2026-09-03 when precisely that
+leg was refuted:\ a finite-band witness gives $\mathrm{height}_B \equiv
+1$, so the bound fails for every $\nmax \ge 6$.  Paper~38's own
+convergence theorem is unaffected because its unconditional proof (the
+lifted-state construction) uses no Berezin map, no partial inverse and
+no height term --- but that means the repair here is not a
+substitution of constants:\ the cell-wise argument must be rebuilt on
+the lifted-state route, which has not been done.  Until it is, the
+transport claim for this item is \textbf{open}.  This is a
+\emph{second}, independent reason to read Theorem~\ref{thm:inner} as
+descoped, on top of the degenerate-seminorm reason already recorded in
+its statement:\ even granting $\Lprop$, this item's lemma is withdrawn.
+The other four items are unaffected.
 \end{itemize}
 \end{proof}
 

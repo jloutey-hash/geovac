@@ -256,6 +256,29 @@ def check_annotations(gate, verbose=True):
     return bad
 
 
+def _bibliography_lines(lines):
+    """Line indices inside a thebibliography environment.
+
+    Bibliography entries carry volume numbers, page ranges and years, none
+    of which are claims of this corpus -- they are metadata about someone
+    else's paper.  Scanning them for retired values is a category error and
+    produces false FAILs on the citation's arithmetic: adding Maz'ya &
+    Shubin, Ann. of Math. 162, 919--942 (2005) to Paper 18 tripped the
+    retired `cah_rel_n2_pauli` value 942 (2026-09-06).  A retired number can
+    only be "live" where the corpus asserts it.
+    """
+    inside = set()
+    depth = 0
+    for i, line in enumerate(lines):
+        if "\\begin{thebibliography}" in line:
+            depth += 1
+        if depth:
+            inside.add(i)
+        if "\\end{thebibliography}" in line:
+            depth = max(0, depth - 1)
+    return inside
+
+
 def check_retired(gate, verbose=True):
     """C. No retired value live in a gated document."""
     if verbose:
@@ -263,8 +286,11 @@ def check_retired(gate, verbose=True):
     live = 0
     for path in _files(gate):
         lines = path.read_text(encoding="utf-8", errors="ignore").split("\n")
+        bib = _bibliography_lines(lines)
         for i, line in enumerate(lines):
             if line.lstrip().startswith("%"):
+                continue
+            if i in bib:
                 continue
             ctx = "\n".join(lines[max(0, i - WINDOW):i + WINDOW + 1])
             ex_ctx = "\n".join(

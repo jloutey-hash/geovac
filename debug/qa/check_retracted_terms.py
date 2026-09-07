@@ -410,8 +410,18 @@ REGISTRY = [
         # and one embedded \n under a line-by-line scanner.  The entry
         # guarding the run's biggest withdrawal caught nothing.
         # These are wording-tolerant and cover LaTeX, code and prose.
-        "pattern": r"height\}?[_ ]?B[^\n]{0,40}?(?:<=|\\le|\\leq)[^\n]{0,25}?gamma"
-                   r"|height\}?[_ ]?P[^\n]{0,30}?(?:=|==|is)\s*(?:0|0\.0|zero)\b"
+        # REBUILT AGAIN 2026-09-07 (group1 impact-set pass): the subscript
+        # alternation `height\}?[_ ]?P` covered `height_P`, `height P` and
+        # `height}P` but NOT the BRACED subscript `\mathrm{height}_{P}`,
+        # which is how the corpus actually typesets it in prose.  The
+        # group1 synthesis carried `contributes $\mathrm{height}_{P} = 0$`
+        # -- the refuted claim, stated as live, in the document that
+        # summarises the paper it was refuted in -- and this entry reported
+        # `clean` on group1 for four days.  Exactly the spelling-defeats-the-
+        # pattern class already recorded in CLAUDE.md
+        # (`$s/p$-lift` vs `s/p-lift`).  `\{?` admits the braced form.
+        "pattern": r"height\}?[_ ]?\{?\s*B[^\n]{0,40}?(?:<=|\\le|\\leq)[^\n]{0,25}?gamma"
+                   r"|height\}?[_ ]?\{?\s*P[^\n]{0,30}?(?:=|==|is)\s*(?:0|0\.0|zero)\b"
                    r"|neither confirms nor contradicts L5"
                    r"|panel-side quantity is"
                    r"|exceeds gamma from n_max"
@@ -548,8 +558,13 @@ REGISTRY = [
                    r"|Hopf[- ]base measure of \$\\sthree"
                    r"|(?:as|is) the\s+Hopf[- ]base measure[^.]{0,60}"
                    r"(?:4\s*/\s*\\pi|\\Vol\(S\^\{?2\}?\)\s*/\s*\\?pi\^\{?2\}?)"
+                   # WIDENED 2026-09-07 (group1 impact-set pass): the trailing
+                   # form required "is the"/"as the" before the label, so the
+                   # parenthetical apposition -- "asymptotic rate $4/\pi$ (the
+                   # Hopf-base measure ...)", which is how Papers 20 and 42
+                   # actually write it -- did not match.  `\(` admits it.
                    r"|(?:4\s*/\s*\\pi|\\Vol\(S\^\{?2\}?\)\s*/\s*\\?pi\^\{?2\}?)"
-                   r"[^.]{0,80}(?:is|as) the\s+Hopf[- ]base measure"
+                   r"[^.]{0,80}(?:is|as|\()\s*the\s+Hopf[- ]base measure"
                    r"|Hopf[- ]base measure of \$?\\SU\(2\)"
                    r"|\\SU\(2\)\s*/\s*\\?U?one?\(1\)\s+Haar\s+normalisation",
         "exempt_if_nearby": r"misnomer|corrected 2026-09-03|withdrawn|not the Hopf"
@@ -565,6 +580,13 @@ REGISTRY = [
             "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-03",
             "papers/synthesis/geovac_field_guide.tex": "reviewed 2026-09-03",
             "papers/group3_foundations/paper_18_exchange_constants.tex": "reviewed 2026-09-03",
+            # Added 2026-09-07 (group1 impact-set pass).  These three cite
+            # the rate constant and their argument uses it, so they are
+            # dependents, not merely places the wording appears.  All three
+            # carried the retired reading and were fixed in that pass.
+            "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex": "reviewed 2026-09-07",
+            "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex": "reviewed 2026-09-07",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex": "reviewed 2026-09-07",
         },
 "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
@@ -574,6 +596,17 @@ REGISTRY = [
             "papers/synthesis/group1_operator_algebras_synthesis.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
             "papers/synthesis/geovac_field_guide.tex",
+            # ADDED 2026-09-07 (group1 impact-set pass).  These three carry
+            # the retired reading and were never scanned: the entry's file
+            # list was built from where the label was FIXED, not from where
+            # the constant is CITED.  P42 states "4/pi = Vol(S^2)/pi^2
+            # identifies as the same Hopf-base measure factor" in three
+            # places; P20 writes "asymptotic rate 4/pi (the Hopf-base
+            # measure)".  The gate reported this entry clean on group1 for
+            # four days as a result.
+            "papers/group1_operator_algebras/paper_42_modular_hamiltonian_four_witness.tex",
+            "papers/group1_operator_algebras/paper_43_lorentzian_extension.tex",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
         ],
     },
     {

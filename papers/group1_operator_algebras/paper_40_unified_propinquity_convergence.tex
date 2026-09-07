@@ -118,11 +118,14 @@ the identity is the rotation angle --- exactly the distance Paper~38
 integrates against --- so Paper~38 is the rank-1 case of this theorem in
 the same normalisation, and its constant $4/\pi$ is this one. Paper~38
 \cite{paper38} is recovered as the rank-$1$ case $G = \SU(2)$. The proof
-proceeds via the same five-lemma chain (L1$'$~chirality-doubled operator
+proceeds via the same lemma chain (L1$'$~chirality-doubled operator
 system, L2~central spectral Fej\'er kernel with closed-form quantitative
 rate, L3~Lipschitz comparison via the Dirac-triangle inequality on
 tensor products of irreducibles, L4~Berezin reconstruction via
-Peter--Weyl, L5~state-space GH assembly via the approximation pair). The
+Peter--Weyl), closed by the lifted-state route.  The approximation pair
+of \S\ref{sec:L5} is recorded but \emph{does not supply an independent
+proof}:\ its dual reach is a named gap and both height constituents are
+refuted (Lemma~\ref{lem:L5}, corrected 2026-09-04). The
 universality of $4/\pi$ identifies the state-space GH rate with the
 $k=0$ sub-mechanism of a master Mellin engine
 $\mathcal M[\Tr(D^k e^{-tD^2})]$ on the spectral triple, sharpening the
@@ -199,8 +202,10 @@ $S^3 = \SU(2)$ Camporesi--Higuchi spectral triple with explicit rate
 and asymptotic constant $4/\pi = \Vol(S^2)/\pi^2$, a quotient of
 unit-radius sphere volumes (not the Hopf fibration's base-to-total ratio;
 label corrected 2026-09-03, see Paper~38's volume-ratio note). The proof proceeded
-through a five-lemma chain L1$'$--L5 in which the principal new
-ingredients beyond the abelian case were (i)~a central spectral Fej\'er
+through a lemma chain L1$'$--L4 plus an assembly step (the fifth,
+\S\ref{sec:L5}, has since been reduced to a record rather than a proof
+--- dual reach a named gap, both heights refuted), in which the
+principal new ingredients beyond the abelian case were (i)~a central spectral Fej\'er
 kernel on $\SU(2)$ built from Peter--Weyl rather than Schur--Fourier
 multipliers, (ii)~a Lipschitz comparison estimate exploiting the
 $\SO(4)$ selection rule on Avery 3-Y integrals, and (iii)~a non-K\"ahler
@@ -336,7 +341,8 @@ estimate''; see Section~\ref{sec:why_universal}.)
 Section~\ref{sec:setup} sets up the canonical compact-Lie-group
 spectral triple, the Peter--Weyl decomposition, the Kostant cubic
 Dirac operator, and the Connes--van~Suijlekom truncation in
-Casimir-cutoff form. Section~\ref{sec:lemmas} proves the five lemmas:
+Casimir-cutoff form. Section~\ref{sec:lemmas} proves lemmas L1$'$--L4
+and records the fifth:
 \S\ref{sec:L1prime}~the chirality-doubled operator system substrate;
 \S\ref{sec:L2}~the central spectral Fej\'er kernel and its quantitative
 rate (Stein--Weiss type $\log \Lammax / \Lammax$ with universal
