@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.10.8 (September 7, 2026)
+**Version:** v5.10.9 (September 7, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **P20 bibliography + a withdrawn claim (2026-09-07, v5.10.9):** the '51 undefined refs' was my pdflatex-only loop, not a defect -- C10 already runs the full BibTeX cycle. Real fix: Bravyi2017 article->misc (13 bibtex errors -> 0). See CHANGELOG v5.10.9.
 - **group1 impact-set cluster closed (2026-09-07, v5.10.8):** L5-withdrawal + Lorentzian-descope reached their citers at last; 9 loci/7 docs. Two MORE C16 spelling holes (braced `height}_{P}`; files list built from where the label was fixed). See debug/sprint_group1_impact_set_memo.md.
 - **Prior-art credit + DLMF spheroidal identity (2026-09-06, v5.10.7):** Four lit scans -> Curie/Bethe/Herring/Liu-Noui/Rovelli credited, P18 slogan fixed to compact-resolvent; new result: eta-eq IS DLMF spheroidal, 0 < dA/dc^2 < 1. See debug/sprint_prior_art_credit_memo.md.
 - **/advisor + group2/3 surgery + /qa DELTA (2026-09-06, v5.10.6):** New /advisor thesis-advisor skill; P59->P61 split; P60->P58 coherence relocate; NaH R_eq test-backed; DELTA = DEFECTS->remediated, claim-impact reviewer caught the LARGE synthesis misattribution. See debug/sprint_advisor_qa_delta_memo.md.

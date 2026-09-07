@@ -136,9 +136,24 @@ gate entry's own note already drew this line correctly; the fix respects it.
 - One missing `\bibitem{paper45}` in P42, introduced by my own new citation,
   caught by the compile and added.
 
-**Pre-existing, not mine, not fixed:** Paper 20 carries 51 undefined references.
-Verified against a stashed baseline — identical count without this pass's edits.
-Out of scope (group4). Logged as owed.
+**CORRECTED 2026-09-07 (v5.10.9).** This section originally logged "Paper 20
+carries 51 undefined references, pre-existing, out of scope, owed". **That was
+wrong, and the error was in my verification method, not in the paper.** Paper 20
+is the corpus's only BibTeX paper (`\bibliography{paper_20_refs}`); the ad-hoc
+`pdflatex ×3` loop used here never ran `bibtex`, so every citation in that one
+paper reported undefined. The stashed-baseline comparison confirmed only that the
+artifact predated the edits — being a property of the loop, it necessarily did.
+
+The corpus's own **C10 gate was already correct**: `check_compiles.py` detects
+`\bibdata{` in the `.aux`, runs the full REVTeX cycle, and its docstring
+documents this exact trap — including why a *second* bibtex pass is needed (a
+REVTeX `\bibnote` may contain a `\cite`, as Paper 20's `Note1` does for
+`Childs2021`). C10 PASSes group4.
+
+One real defect surfaced while investigating: `Bravyi2017` was typed `@article`
+with no `journal` field, producing 13 bibtex errors; verified unpublished against
+arXiv:1701.08213 and retyped `@misc`. **Lesson: verify paper compiles with C10,
+not an ad-hoc loop.**
 
 ---
 
@@ -146,7 +161,7 @@ Out of scope (group4). Logged as owed.
 
 1. **P47's inner-arrow rebuild** on the lifted-state route — the only way to
    restore that item; currently flagged open.
-2. **Paper 20's 51 undefined references** (pre-existing, group4).
+2. ~~Paper 20's 51 undefined references~~ -- **withdrawn**, see §4; not a defect.
 3. A **`files`-list audit for every C16 entry**, on the lesson above: entries
    whose file list was built from the fix rather than from the citation graph
    will have the same blind spot. This pass fixed one entry; the class is

@@ -82,7 +82,13 @@
   archivePrefix = {arXiv},
 }
 
-@article{Bravyi2017,
+% Entry type is misc, not article: verified 2026-09-07 against
+% arXiv:1701.08213 -- this remains an unpublished preprint with no
+% journal-ref, so an article entry with no `journal' field made apsrev4-2
+% emit 13 errors trying to match a journal abbreviation that was never
+% there.  (No at-signs in this comment: BibTeX does not honour % as a
+% comment character, and an at-sign in free text starts a new entry.)
+@misc{Bravyi2017,
   author = {Bravyi, Sergey and Gambetta, Jay M. and Mezzacapo, Antonio and Temme, Kristan},
   title = {Tapering off qubits to simulate fermionic Hamiltonians},
   year = {2017},

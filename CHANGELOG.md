@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.10.9] - 2026-09-07
+
+**Paper 20's bibliography, and a correction to v5.10.8's record.** Canonical memo: none (folded into `debug/sprint_group1_impact_set_memo.md` §5).
+
+### Correction — the "51 undefined references" was not a defect
+
+v5.10.8 logged "Paper 20 carries 51 undefined references (verified identical against a stashed baseline)" as pre-existing and owed. **That claim is withdrawn.** The 51 were an artifact of the *verification method*, not of the paper: Paper 20 is the corpus's only paper using BibTeX (`\bibliography{paper_20_refs}`) rather than an inline `thebibliography`, and the ad-hoc `pdflatex ×3` loop used to check compiles never ran `bibtex`, so every citation in that one paper reported undefined. The stashed-baseline comparison confirmed only that the artifact predated the edits — which it did, being a property of the loop.
+
+**The corpus's own C10 gate was already correct.** `debug/qa/check_compiles.py` detects `\bibdata{` in the `.aux` and runs the full REVTeX cycle (pdflatex, bibtex, pdflatex, bibtex, pdflatex, pdflatex), and its docstring documents this exact trap — including *why* the second bibtex pass is required (a REVTeX `\bibnote` can contain a `\cite`, which only becomes a top-level citation after the first `.bbl` is processed; Paper 20's `Note1` cites `Childs2021` that way). C10 PASSes group4 including Paper 20, and would have before this change. **Lesson: verify paper compiles with C10, not an ad-hoc loop.**
+
+### Fixed — one real defect, found while investigating
+
+- **`Bravyi2017` was typed `@article` with no `journal` field**, which made `apsrev4-2` emit **13 errors** cycling through journal abbreviations looking for a match. Verified against arXiv:1701.08213: the paper is genuinely unpublished, no journal-ref. Retyped `@misc`. BibTeX now runs clean on both passes (0 error messages, previously 13).
+- **Self-inflicted, then fixed:** the first version of that fix carried a `%` comment containing the strings `@misc` and `@article`. BibTeX does not honour `%` as a comment character, and an at-sign in free text starts a new entry — so the comment produced 3 fresh parse errors. Rewritten without at-signs, and the comment now says so, since the next person to annotate a `.bib` will hit it too.
+
+### Verification
+
+Paper 20: full REVTeX cycle gives **0 LaTeX errors, 0 undefined citations, 0 undefined references**; BibTeX clean on both passes. C10 `--gate group4` PASS (5 papers).
+
 ## [v5.10.8] - 2026-09-07
 
 **The group1 impact-set cluster, owed since v5.10.1 — closed.** The L5 withdrawal (2026-09-03) and the Lorentzian descope (2026-06) had never reached their citers. Nine loci across seven documents, plus **two more gate holes of the spelling-defeats-the-pattern class**. Canonical memo: `debug/sprint_group1_impact_set_memo.md`.
