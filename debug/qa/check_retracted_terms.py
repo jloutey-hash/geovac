@@ -160,13 +160,33 @@ WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 # it removes inline math delimiters and the wrappers that split a word, and
 # normalises the LaTeX comparison operators.  It does not render LaTeX.
 _MARKUP_WRAPPER = re.compile(
-    r"\\(?:emph|textbf|textit|texttt|mathrm|mathbf|text|mathit)\s*\{([^{}]*)\}")
+    r"\\(?:emph|textbf|textit|texttt|mathrm|mathbf|mathbb|text|mathit)\s*\{([^{}]*)\}")
 _MARKUP_OPS = ((r"\\leq", "<="), (r"\\le\b", "<="), (r"\\geq", ">="),
                (r"\\ge\b", ">="), (r"\\neq", "!="), (r"\\to\b", "->"))
 
 
+# Unicode folding (2026-09-07, /qa paper_61 DELTA).  Same class as the LaTeX
+# gap above, one alphabet over:  the patterns are ASCII and the corpus is
+# typeset Unicode, so `Sp[_ ]?4 ... mathbb Z` could not see `Sp₄(ℤ)` and
+# `Broadhurst--?Mellit` could not see `Broadhurst–Mellit`.  MEASURED: both
+# Paper-61 entries written this session missed 4/4 of their live survivors,
+# every miss traceable to this.
+#
+# En/em dash folds to `--`, NOT to `-`:  three entries (circle-fejer-constant-
+# 4-over-pi, graph-spectrum-attribution, rename-pass-residue-p32) contain
+# strict `--` tokens, and `X--?Y` matches `X--Y` and `X-Y` both, so folding UP
+# is additive where folding DOWN would have broken them.
+_UNICODE_FOLD = {
+    "\u2013": "--", "\u2014": "--",           # en dash, em dash
+    "\u2010": "-", "\u2011": "-", "\u2212": "-",   # hyphen, nb-hyphen, minus
+    "\u2080": "0", "\u2081": "1", "\u2082": "2", "\u2083": "3", "\u2084": "4",
+    "\u2085": "5", "\u2086": "6", "\u2087": "7", "\u2088": "8", "\u2089": "9",
+    "\u2124": "Z", "\u2102": "C", "\u211a": "Q", "\u211d": "R", "\u2115": "N",
+}
+
+
 def _strip_markup(line: str) -> str:
-    """Prose-ify a LaTeX line for pattern matching."""
+    """Prose-ify a LaTeX/Markdown/Unicode line for pattern matching."""
     out = line
     for _ in range(3):                        # nested \emph{\textbf{...}}
         new = _MARKUP_WRAPPER.sub(r"\1", out)
@@ -177,6 +197,9 @@ def _strip_markup(line: str) -> str:
         out = re.sub(pat, rep, out)
     out = out.replace("$", "")                # inline math delimiters
     out = re.sub(r"\\[,;!]|\\ ", " ", out)     # thin spaces
+    for _k, _v in _UNICODE_FOLD.items():      # typeset Unicode -> ASCII
+        out = out.replace(_k, _v)
+    out = out.replace("**", "").replace("`", "")   # markdown bold/code split
     return out
 
 
@@ -366,9 +389,34 @@ REGISTRY = [
                 "the discriminating pattern (fires on the retired wording, silent "
                 "on the corrected 'historical five-lemma UCP-pair assembly ... "
                 "recorded ... withdrawn').",
+        # WIDENED 2026-09-07 (FULL cert of 58/59/60, group1 claim-impact pass).
+        # The three alternatives above are Paper-38/32 wordings.  The citers
+        # restate the same claim in their OWN words and were invisible:
+        # Paper 52 -- "The proof is the five-lemma chain L1'-L2-L3-L4-L5 of
+        # Paper 38" and "via Paper 38's five-lemma state-space Gromov--Hausdorff
+        # convergence proof" -- attributes the WH1 keystone to a chain whose
+        # fifth link is refuted; Paper 40's own main-theorem proof still reads
+        # "Lemma L5 the assembly into the state-space GH bound", four sections
+        # after its own L5 says the pair "does not supply an independent proof".
+        # `files` was the other half of the failure: it listed only 38 and 32,
+        # so the gate never opened 46/52/53/47/48/44 or the field guide.
         "pattern": r"assembly of the distance bound via an approximation pair"
                    r"|proves the five lemmas"
-                   r"|tunneling-pair assembly of five",
+                   r"|tunneling-pair assembly of five"
+                   r"|five-lemma chain"
+                   r"|five-lemma state-space"
+                   # NOT the bare phrase "the assembly into the state-space GH
+                   # bound": Paper 38 uses it correctly, marked "in the
+                   # *withdrawn* route only" and immediately followed by "Not
+                   # the L5 assembly: its two height constituents are refuted".
+                   # A first draft of this entry matched that mention and would
+                   # have had me "fix" the one document that had it right.
+                   # What is defective is the USE -- Paper 40's main-theorem
+                   # proof combining L5's bound to obtain the theorem.  Lines
+                   # 1831/1846 of the same file cite the same label correctly,
+                   # so the label alone does not discriminate;  this anchors on
+                   # the proof step.
+                   r"|the bound~\\eqref\{eq:L5_bound_general\} with the asymptotic",
         "exempt_if_nearby": r"(?!)",
         "severity": "fail",
         "scope": "group1 trunk",
@@ -381,6 +429,16 @@ REGISTRY = [
         "files": [
             "papers/group1_operator_algebras/paper_38_su2_propinquity_convergence.tex",
             "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            # Added 2026-09-07: the citer set the sweep never opened.
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+            "papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.tex",
+            "papers/group1_operator_algebras/paper_47_two_rate_hybrid_convergence.tex",
+            "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+            "papers/group1_operator_algebras/paper_52_category_iii_correspondence.tex",
+            "papers/group1_operator_algebras/paper_53_disk_propinquity.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
         ],
     },
     {
@@ -467,6 +525,20 @@ REGISTRY = [
             "docs/claim_test_matrix.md",
             "tests/test_gh_convergence_tensor.py",
             "geovac/lorentzian_propinquity_compact_temporal.py",
+            # Added 2026-09-07 (FULL cert of 58/59/60).  Paper 46 states
+            # `\mathrm{height}_{P} \;=\; 0.` as a PROPOSITION result and cites
+            # "Paper 38 S L5" as its proof; Papers 47/48/52/53 and the field
+            # guide carry the same claim in their own words.  None was in this
+            # list, which is why the gate reported group1 clean while the
+            # refuted heights stood in six documents.
+            "papers/group1_operator_algebras/paper_44_lorentzian_operator_system.tex",
+            "papers/group1_operator_algebras/paper_46_strong_form_lorentzian_propinquity.tex",
+            "papers/group1_operator_algebras/paper_47_two_rate_hybrid_convergence.tex",
+            "papers/group1_operator_algebras/paper_48_krein_ms_bridge.tex",
+            "papers/group1_operator_algebras/paper_52_category_iii_correspondence.tex",
+            "papers/group1_operator_algebras/paper_53_disk_propinquity.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+            "docs/claims_register.md",
         ],
     },
     {
@@ -920,7 +992,11 @@ REGISTRY = [
                    "FORMS for the eigenvectors/eigenvalues themselves is the zombie. "
                    "Pinned by tests/test_paper34_ee_split.py::"
                    "test_w_rational_anchor_and_irreducible_charpoly.",
-        "pattern": "(?i)(?!.*\\b(?:no|not|without|irreducible|lacks|lacking)\\b[^.\\n]{0,50}closed)(?!.*closed[- ]form is differential)(?:eigen(?:vector|pair|value)s?[^.\\n]{0,140}?(?:closed[- ]form|closed skeleton form)|(?:closed[- ]form|closed skeleton form)[^.\\n]{0,140}?eigen(?:vector|pair|value)s?)",
+        # 2026-09-07 (/qa paper_61 DELTA): both lookaheads were anchored
+        # on `.*`, which scan_entry re-scans from every position of the
+        # newline-joined file -- C16 did not terminate on Paper 34.
+        # Bounded to the clause; discrimination unchanged, fire-tested.
+        "pattern": "(?i)(?![^.\\n]{0,140}\\b(?:no|not|without|irreducible|lacks|lacking)\\b[^.\\n]{0,50}closed)(?![^.\\n]{0,140}closed[- ]form is differential)(?:eigen(?:vector|pair|value)s?[^.\\n]{0,140}?(?:closed[- ]form|closed skeleton form)|(?:closed[- ]form|closed skeleton form)[^.\\n]{0,140}?eigen(?:vector|pair|value)s?)",
         "exempt_if_nearby": "irreducible|no low-degree|no closed|differential|grows with|RETRACTED|withdrawn",
         "files": ["papers/group6_precision_observations/"
                   "paper_34_projection_taxonomy.tex"],
@@ -1325,6 +1401,382 @@ REGISTRY = [
             "papers/group3_foundations/paper_1_spectrum.tex",
             "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
             "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+    },
+    {
+        "id": "p53-gradient-non-expansive-height",
+        "scope": "group1",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa group1, PI-flagged height leg). Paper 53 "
+                   "step (iii) claimed the plane Bochner-Riesz Berezin is "
+                   "GRADIENT-NON-EXPANSIVE, ||grad B f|| <= ||grad f||, "
+                   "'verified numerically, ratio <= 1 at every Lambda, rising "
+                   "to 1 as Lambda -> infinity'. FALSE over the unit-Lipschitz "
+                   "ball: B is a radial convolution, so the sharp constant is "
+                   "the kernel L1 norm, which is > 1 at every finite Cesaro "
+                   "order (5.72 at s=0.6, 2.01 at s=1, 1.23 at s=2) and is "
+                   "LAMBDA-INDEPENDENT by scaling -- so the reported "
+                   "Lambda-dependence was a property of the test functions. "
+                   "NOT Paper 38 L5 transported (different quantity; the "
+                   "finite-band witness satisfies non-expansiveness rather "
+                   "than breaking it). Consequence for the assembly is OPEN "
+                   "(PI adjudication); the reach leg is untouched.",
+        "pattern": r"gradient-non-expansive"
+                   r"|ratio \$?\\le\s*1\$? at every \$?\\Lambda"
+                   r"|rising to \$?1\$? as \$?\\Lambda\\to\\infty",
+        "exempt_if_nearby": r"NOT|not\b|false|corrected 2026-09-07|Lebesgue"
+                            r"|rem:height_constant|>\s*1|exceeds",
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_53_disk_propinquity.tex":
+                "reviewed 2026-09-07 -- step (iii) restated, rem:height_constant added",
+            "tests/test_paper53_height_constant.py":
+                "reviewed 2026-09-07 -- new, fire-tested both directions",
+        },
+        "files": [
+            "papers/group1_operator_algebras/paper_53_disk_propinquity.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "tests/test_paper53_height_constant.py",
+        ],
+    },
+    {
+        "id": "p40-pythagorean-cross-manifold-future-work",
+        "scope": "group1 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa group1 DELTA, carryforward U.2). Paper 40 "
+                   "sec:cross_manifold proposed extending to G != H 'with the "
+                   "Pythagorean Leibniz constant generalising to a Cartan-"
+                   "product-type bound'. Paper 39 WITHDREW that refinement "
+                   "(graded anticommutation does not give operator-norm "
+                   "orthogonality; Remark rem:no_pythagorean) and proves its "
+                   "theorem by the lifted-state assembly instead. Future work "
+                   "aimed at an abandoned route. The C_3^(2) <= sqrt2 constant "
+                   "survives with its value unchanged but is NOT a rate "
+                   "constant of Paper 39's theorem.",
+        "pattern": r"Pythagorean Leibniz\s*\n?constant generalising"
+                   r"|extend mechanically from Paper~?39 with the Pythagorean",
+        "exempt_if_nearby": r"withdrawn|WITHDRAWN|abandoned|corrected 2026-09-07"
+                            r"|lifted-state",
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex":
+                "reviewed 2026-09-07 -- paragraph redirected to the lifted-state route",
+        },
+        "files": [
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+        ],
+    },
+    {
+        "id": "k2-proved-case-carries-sqrt2-constant",
+        "scope": "group1 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa group1 DELTA, carryforward U.2 'Upgrade'). "
+                   "The group1 synthesis presented the PROVED k=2 case as "
+                   "carrying the sqrt(k) triangle-bound constant. Paper 39 "
+                   "states that C_3^(2) <= sqrt2 'belongs to the ABANDONED "
+                   "(B,P)-pair route and is not a rate constant of this "
+                   "theorem; its value is unchanged, only its role'. NOTE THE "
+                   "DIRECTION: this is the MIRROR of ordinary staleness -- the "
+                   "owner STRENGTHENED its claim (lifted-state, no Berezin map, "
+                   "no partial inverse) and the summary kept the weaker form. "
+                   "C16 and cited_by cannot catch that class in general, "
+                   "because nothing is retracted and nothing is misspelt; this "
+                   "entry guards only THIS occurrence, now that its wording is "
+                   "known. The class stays open (CLAUDE.md S9, mirror "
+                   "direction).",
+        # `\$?` around k=2 and `\s*` across the wrap: the synthesis writes
+        # "Only the $k=2$ case is\nproved (Paper~39)", and the first draft of
+        # this pattern (no math delimiters) matched none of it.
+        # `[^.\n]` NOT `[^\n]`: C16 also scans text with newlines replaced by
+        # spaces, where `[^\n]{0,60}` stops bounding anything and can cross a
+        # paragraph break.  It did -- matching "$k=2$ case is proved; see
+        # below)." plus the next heading's "$\sqrt{k}$" 52 chars later.
+        "pattern": r"\$?k\s*=\s*2\$?\s+case\s+is\s+proved[^.\n]{0,60}sqrt"
+                   r"|proved \$?k\s*=\s*2\$? case[^.\n]{0,60}sqrt"
+                   r"|\$?k\s*=\s*2\$? case carries the[^.\n]{0,30}sqrt",
+        "exempt_if_nearby": r"abandoned|not a rate constant|Upgrade|only\s+its\s+role"
+                            r"|lifted-state|corrected 2026-09-07",
+        "cited_by": {
+            "papers/synthesis/group1_operator_algebras_synthesis.tex":
+                "reviewed 2026-09-07 -- k-fold paragraph now records the constant's ROLE",
+        },
+        "files": [
+            "papers/synthesis/group1_operator_algebras_synthesis.tex",
+            "papers/group1_operator_algebras/paper_39_tensor_propinquity_convergence.tex",
+            "papers/group1_operator_algebras/paper_40_unified_propinquity_convergence.tex",
+        ],
+    },
+    {
+        "id": "p61-w0-transcendence-cancels",
+        "scope": "paper_61 group3",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa paper_61 FULL). Paper 61 asserted that "
+                   "'the transcendence of the individual masters cancels in "
+                   "their determinant'. FALSE. Abel's identity fixes only the "
+                   "D-dependence; the constant W_0 was never computed in the "
+                   "paper or its backing test, which normalises it to 1 by "
+                   "construction -- so no artifact in the corpus could have "
+                   "seen the cancellation fail. It is now computed from the "
+                   "branch-point data: W_0 = pi^2/rho^2 (Paper 61 eq:W0, "
+                   "[SYMBOLIC]), verified symbolically in sympy step-by-step "
+                   "and numerically at rho = 0.3/0.5/0.71 to 40 digits. So "
+                   "pi^2 does not cancel -- it is SQUARED -- and W_0 is "
+                   "rho-dependent. The withdrawal is a net gain: an exact "
+                   "value replaced a false cancellation.",
+        "pattern": r"transcendence[^.\n]{0,70}(?:individual\s+)?masters?"
+                   r"[^.\n]{0,40}cancels"
+                   r"|cancels\s+in\s+their\s+determinant"
+                   r"|transcendence\s+cancels",
+        "exempt_if_nearby": r"(?!)",   # standardized marker only
+        "cited_by": {
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex":
+                "reviewed 2026-09-07 -- withdrawn in-paper and REPLACED by the "
+                "closed form eq:W0 = pi^2/rho^2, tier [SYMBOLIC]; the quoted "
+                "retired sentence in the correction note carries the marker",
+            "docs/qa/paper_61.done.md":
+                "reviewed 2026-09-07 -- W3 row records the withdrawal; carries "
+                "the marker where it quotes the retired sentence",
+        },
+        "files": [
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+            "docs/qa/paper_61.done.md",
+            "docs/claim_test_matrix.md",
+            "tests/test_paper59_bessel_moment_algebra.py",
+        ],
+    },
+    {
+        "id": "p61-every-cm-fibre-universal",
+        "scope": "paper_61 group3 group2",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa paper_61 FULL, claims dimension). The "
+                   "corpus repeatedly claimed that sweeping the physical base "
+                   "rho over (0, inf) makes the family pass through EVERY CM "
+                   "fibre. FALSE: lambda = 1 - rho, so the sweep covers only "
+                   "the REAL locus lambda < 1 of X(2). Fibres with non-real "
+                   "lambda -- discriminant -3 among them -- are off the "
+                   "contour, as is lambda = 2. Correct form: INFINITELY MANY "
+                   "CM fibres, not every one. This mattered because the "
+                   "universal was used deflationarily (to argue tau = i is not "
+                   "special), so it read as harmless while being false. "
+                   "SURVIVED THE FIRST REMEDIATION at Paper 56:1848, an ACTIVE "
+                   "paper citing Paper 61 fourteen lines above -- the measured "
+                   "reason this entry exists.",
+        "pattern": r"(?:every|all)\s+(?:of\s+)?(?:the\s+)?CM[\s_-]*fib"
+                   r"|CM[\s_-]*fib\w*\s+is\s+hit"
+                   r"|hits?\s+EVERY\s+CM",
+        "exempt_if_nearby": r"(?!)",   # standardized marker only
+        "cited_by": {
+            "papers/group3_foundations/paper_56_tannakian_substrate.tex":
+                "reviewed 2026-09-07 -- :1848 corrected to 'infinitely many "
+                "(not every one)'; its paragraph is deflationary so the "
+                "conclusion is unchanged",
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex":
+                "reviewed 2026-09-07 -- owner; states the exclusion explicitly "
+                "at L173-177 (non-real lambda, disc -3, lambda=2)",
+            "memory/cosmic_galois_elliptic_rung1.md":
+                "reviewed 2026-09-07 -- corrected; this file is loaded into "
+                "EVERY session, so a false universal here reseeds itself",
+            "debug/routeC_cosmic_galois_rung2.py":
+                "reviewed 2026-09-07 -- docstring and stdout both corrected "
+                "(live driver named by claim-matrix row 496)",
+        },
+        "files": [
+            "papers/group3_foundations/paper_56_tannakian_substrate.tex",
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "memory/cosmic_galois_elliptic_rung1.md",
+            "debug/routeC_cosmic_galois_rung2.py",
+            "docs/qa/paper_61.done.md",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
+        "id": "p61-galois-in-sp4-z",
+        "scope": "paper_61 group3",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa paper_61 FULL, TWO reviewers converging "
+                   "independently). Paper 61 said the DIFFERENTIAL GALOIS "
+                   "group of the rank-4 Picard-Fuchs operator lies in "
+                   "Sp_4(Z), in its abstract, introduction and body, plus the "
+                   "test docstring and claim-matrix row 499. FALSE: Sp_4(Z) is "
+                   "DISCRETE, so a Zariski-closed subgroup of GL_4(C) inside "
+                   "it is finite, forcing every solution algebraic -- "
+                   "contradicting the connection's irregularity and the "
+                   "exponential torus (C*)^2 that Paper 59 establishes in the "
+                   "local Galois group (Ramis density). The backing variable "
+                   "is literally `_L4_MONODROMY` and the test asserts "
+                   "M0^T Omega M0 = Omega, a MONODROMY statement. Paper 59:585 "
+                   "states the Galois containment correctly as Sp_4(C). "
+                   "CORRECT FORM: monodromy in Sp_4(Z), Galois in Sp_4(C). "
+                   "Nothing numeric changes -- B = pi*Omega and the integral "
+                   "structure stand.",
+        "pattern": r"differential Galois group[^.\n]{0,80}Sp[_ ]?\{?4\}?"
+                   r"[^.\n]{0,20}\\?mathbb\{?Z"
+                   r"|Galois group into \$?\\mathrm\{Sp\}_\{4\}\(\\mathbb\{Z\}\)"
+                   r"|forcing the differential Galois group into"
+                   # bare ASCII spelling used across docs/ and debug/, reachable
+                   # only after the 2026-09-07 Unicode folding (Sp4(Z) <- Sp_4(Z)).
+                   # The `\(\s*Z` is load-bearing: WITHOUT it this alternative
+                   # fired on test_routeC_momentum.py:492/:504, "self-adjoint =>
+                   # differential Galois group in Sp4", which is TRUE over C.
+                   # Only Sp4(Z) is the retired claim.
+                   r"|Galois[^.\n]{0,40}Sp[_ ]?\{?4\}?\s*\(\s*(?:\\?mathbb\{?)?Z",
+        "exempt_if_nearby": r"monodromy|FALSE|false|Correction|corrected 2026-09-07"
+                            r"|Sp_\{4\}\(\\mathbb\{C\}\)|discrete|withdrawn",
+        "cited_by": {
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex":
+                "reviewed 2026-09-07 -- all three loci corrected, with an "
+                "in-paper correction note giving the discreteness argument",
+            "docs/claim_test_matrix.md":
+                "reviewed 2026-09-07 -- row 499 scanned; Galois/monodromy "
+                "wording corrected where present",
+            "tests/test_routeC_momentum.py":
+                "reviewed 2026-09-07 -- :900 docstring and :907 inline comment "
+                "corrected to MONODROMY; :504 left as-is, self-adjointness "
+                "genuinely does put the Galois group in Sp4 over C",
+        },
+        "files": [
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/INDEX.md",
+            "docs/claim_test_matrix.md",
+            "docs/qa/paper_59.done.md",
+            "docs/qa/paper_61.done.md",
+            "tests/test_routeC_momentum.py",
+            "debug/routeC_intersection_form.py",
+        ],
+    },
+    {
+        "id": "p61-broadhurst-mellit-quadratic",
+        "scope": "paper_61 group3 group2",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa paper_61 FULL, citation dimension). The "
+                   "quadratic relations between Bessel moments are the "
+                   "Broadhurst-ROBERTS relations (proved by Fresan-Sabbah-Yu "
+                   "2023 and independently by Zhou, CNTP 15(4) 651-741 (2021), "
+                   "arXiv:2012.03523). Broadhurst-MELLIT names the DETERMINANT "
+                   "formulae -- Zhou's cited paper is literally titled "
+                   "'Wronskian factorizations and Broadhurst-Mellit determinant "
+                   "formulae', while Paper 61's body cited that same work for "
+                   "'Broadhurst-Mellit quadratic period relations' at four loci "
+                   "INCLUDING THE ABSTRACT. The bibliography contradicted the "
+                   "text. No literature usage of 'Broadhurst-Mellit quadratic "
+                   "relations' exists. "
+                   "REBUILT 2026-09-07 (same-day DELTA): v1 matched ASCII "
+                   "hyphens only and missed every en-dashed locus in docs/; it "
+                   "also exempted on the word 'determinant' within +-5 LINES, "
+                   "so claim_test_matrix row 498's legitimate determinant "
+                   "mention sheltered row 499's live defect one line below. "
+                   "The determinant sense is CORRECT usage, so it is now "
+                   "discriminated in the PATTERN (tempered: the match dies at "
+                   "'determinant'/'Wronskian') rather than by a line window.",
+        # Tempered on both sides: Broadhurst-Mellit is legitimate for the
+        # DETERMINANT formulae, so a span reaching `determinant`/`Wronskian`
+        # before it reaches `quadratic`/`relation` is correct usage and must
+        # not fire.  Corrective mentions carry the standardized marker.
+        # Linear-cost tempering (2026-09-07): the exclusion is asserted ONCE
+        # by a bounded lookahead instead of per-character, because the gate
+        # also scans the file newline-joined and the per-character form
+        # (?:(?!X)[^.\n]){0,200} backtracked without terminating there.
+        "pattern": r"(?<![-\w])Broadhurst--?Mellit"
+                   r"(?![^.\n]{0,90}(?:determinant|Wronskian|Wro\\?'?nskian))"
+                   r"[^.\n]{0,90}(?:quadratic|period relation|relations between)"
+                   r"|(?:quadratic(?:\s+period)?\s+(?:relation|pairing)"
+                   r"|period\s+relation)"
+                   r"(?![^.\n]{0,200}(?:determinant|Wronskian|Wro\\?'?nskian))"
+                   r"[^.\n]{0,200}(?<![-\w])Broadhurst--?Mellit",
+        "exempt_if_nearby": r"(?!)",   # standardized marker only, per the
+        # 2026-09-03 rationale: authored exemption vocabulary drawn from the
+        # surrounding correct text is the documented failure mode, and v1 of
+        # THIS entry is a measured instance of it.
+        "cited_by": {
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex":
+                "reviewed 2026-09-07 -- 4 loci renamed, zhou_quadratic2021 "
+                "bibitem added; the 3 remaining Mellit mentions are the "
+                "determinant sense and are correct",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex":
+                "reviewed 2026-09-07 -- only locus is bibitem :1017, Zhou's "
+                "actual title (determinant sense); correct, left as-is",
+            "docs/claim_test_matrix.md":
+                "reviewed 2026-09-07 -- row 499 renamed to Broadhurst-Roberts; "
+                "row 498 is the determinant sense and is correct",
+            "docs/qa/paper_59.done.md":
+                "reviewed 2026-09-07 -- :192/:252 renamed; :419 NIT marked "
+                "APPLIED (it had named this defect on 2026-08-21 and sat "
+                "unapplied at the 2026-09-07 run)",
+            "tests/test_paper59_bessel_moment_algebra.py":
+                "reviewed 2026-09-07 -- :3/:55/:120 renamed; :25 is the "
+                "determinant sense and is correct",
+            "debug/routeC_bessel_moment_algebra.py":
+                "reviewed 2026-09-07 -- :3/:111 renamed (live driver); "
+                ":16/:50 determinant sense, correct",
+        },
+        "files": [
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+            "papers/INDEX.md",
+            "docs/claim_test_matrix.md",
+            "docs/qa/paper_59.done.md",
+            "docs/qa/paper_61.done.md",
+            "tests/test_paper59_bessel_moment_algebra.py",
+            "debug/routeC_bessel_moment_algebra.py",
+        ],
+    },
+    {
+        "id": "p60-sublinear-as-regime",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa 58/59/60 FULL, code L1).  Paper 60 stated "
+                   "||M||_1 ~ K^0.84 as a REGIME ('grows sublinearly') and "
+                   "attributed the mechanism to T', 'the pure-number matrix "
+                   "elements decrease with quantum number'.  Re-measured with the "
+                   "paper's own gen_configs/solve past its largest fitted point: "
+                   "0.84 is a fit over the WINDOW K = 74..164 (0.8399), the local "
+                   "slope rises monotonically outside it (0.850, 0.868, 0.882, "
+                   "0.906 at K = 202, 244, 290, 340), and the split is the "
+                   "opposite of the printed mechanism -- nuclear diagonal T^0 = "
+                   "Z R_nu at K^0.70 (stable), pure-number block T' at K^1.05 "
+                   "(SUPERlinear).  The paper's own Sec. 7 already said the "
+                   "advantage 'rides on the clean diagonal T^0', so Sec. 4 "
+                   "contradicted Sec. 7 inside one document.  WHAT SURVIVES: the "
+                   "1-norm does grow more slowly than the matrix dimension over "
+                   "every computable basis, and the contrast with the L2 "
+                   "superlinear inflation is real -- the encoding claim stands, "
+                   "only its asymptotic reading and its mechanism were wrong.",
+        # (a) the regime reading; (b) the backwards mechanism.  Both are
+        # wording-tolerant: the synthesis restated each in its own words.
+        "pattern": r"grows \\emph\{sublinearly\}"
+                   r"|with a sublinear\s+\n?\$1\$-norm"
+                   r"|\$1\$-norm grows sublinearly"
+                   r"|1-norm grows sublinearly"
+                   r"|pure-number matrix elements decrease\s*\n?with quantum number"
+                   r"|large-K~?164 asymptote",
+        # The corrected text carries the window or the diagonal attribution.
+        "exempt_if_nearby": r"K\s*=\s*74|window|over the computed|more slowly than "
+                            r"the (?:matrix dimension|configuration count)|nuclear "
+                            r"diagonal|T\^0|NOT an asymptote|corrected 2026-09-07",
+        # Documents whose ARGUMENT rests on the sublinearity claim.
+        "cited_by": {
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex":
+                "reviewed 2026-09-07 -- block rewritten with window + T^0/T' split",
+            "tests/test_paper60_sturmian.py":
+                "reviewed 2026-09-07 -- 'asymptote' comment corrected; new "
+                "test_paper60_sublinearity_is_carried_by_the_nuclear_diagonal "
+                "fire-tested in both directions",
+            "docs/claim_test_matrix.md":
+                "reviewed 2026-09-07 -- row re-tiered to the windowed claim",
+        },
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/INDEX.md",
+            "docs/claim_test_matrix.md",
+            "tests/test_paper60_sturmian.py",
+            "geovac/sturmian_secular.py",
+            "geovac/sturmian_molecular_lambda.py",
         ],
     },
     {
@@ -2022,6 +2474,27 @@ def main() -> int:
               f"NOTHING. Add a '{gate}' entry scope, or use a scope "
               f"name that exists.")
 
+    # GATE SELF-AUDIT (ported from C17, 2026-09-07).  C17 grew this at FULL
+    # run #4; C16 -- the gate the protocol leans on hardest -- never got it.
+    # Measured on the 58/59/60 FULL run:  `--gate paper_59` and
+    # `--gate paper_60` selected ZERO entries, printed the WARNING above, and
+    # still returned 0, so the run reported "C16 PASS" for two papers the
+    # gate had not looked at.  Entry COUNT is not the honest measure; what
+    # matters is how many selected entries declare a locus INSIDE the scope.
+    def _has_gated_locus(e: dict) -> bool:
+        if _in_scope is None:
+            return True
+        return any(_locus_gated(f) for f in e.get("files", []))
+
+    _grounded = [e for e in _selected if _has_gated_locus(e)]
+    if gate is not None and not _grounded:
+        print(f"   [scope] ERROR: --gate '{gate}' selected "
+              f"{len(_selected)} entry/entries, but NONE of them declares a "
+              f"locus inside this scope. The gate would examine nothing and "
+              f"print PASS. Add an entry for this target (C16 maintenance "
+              f"rule) rather than trusting this run.")
+        return 1
+
     # An entry is marker-only if its exemption is the never-match "(?!)" or
     # begins with the (escaped) standardized marker.  The previous test
     # compared against a bare "[retracted", which no escaped string ever
@@ -2071,7 +2544,14 @@ def main() -> int:
     # previously printed PASS:  dependents declared but never revisited, and
     # entries declaring nothing at all -- the latter indistinguishable from
     # "no dependents", which is how C17 came to examine nothing.
-    _in = lambda e: not gate or gate in str(e.get("scope", ""))
+    # The ratchet must use the SAME selector as the scan.  It previously read
+    # the `scope` TAG only, while entry selection above is locus-derived -- so
+    # on any target whose name is not literally a scope tag (every single-paper
+    # target: paper_58/59/60) `_pending` and `_undeclared` were both empty and
+    # the two FAILs added 2026-09-04 could not fire.  Same class as the C11
+    # path-convention defect: a check proven to fire in one selection path,
+    # silently inert in another.  Found by the 58/59/60 FULL run.
+    _in = selected
     _pending = [(e["id"], d) for e in REGISTRY if _in(e)
                 for d, v in e.get("cited_by", {}).items() if not v]
     _undeclared = [e["id"] for e in REGISTRY if _in(e) and "cited_by" not in e

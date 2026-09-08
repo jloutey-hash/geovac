@@ -108,12 +108,70 @@ def test_paper58_aabb_decided_census_is_195_of_195():
     assert (n_nonzero, n_gaunt, n_accidental) == (195, 0, 0)
 
 
+def test_paper58_census_deciders_are_alive():
+    """Positive control for the census above -- WITHOUT this, that guard
+    cannot fail for the reason it exists.
+
+    The wrong answer this rejects: a `_decide_zero` that never decides a
+    zero.  Hard-wire it to `return False` and the census still reports
+    (195, 0, 0) and still passes -- fire-tested 2026-09-07, the plant DID
+    NOT FIRE.  "195 proven genuinely nonzero" means the decider looked;
+    the tuple alone cannot distinguish looking from being asleep.
+
+    Both directions are pinned on a REAL census expression, so the
+    exponential-rate grouping and the substitution are both exercised --
+    a decider reduced to `expr == 0` fails the (R-3) case.
+    """
+    a = _ORBS[0]
+    e = aabb_closed_form(_ZA, a, a, _ZB, a, a)
+    assert not _decide_zero(e, _RCEN), "genuine (1s1s|1s1s) declared zero"
+    assert _decide_zero(e - e, _RCEN), "identical cancellation not decided"
+    assert _decide_zero(sp.expand(e * (R_s - _RCEN)), _RCEN), \
+        "pointwise root at R=3 not decided (grouping or subs is dead)"
+    assert not _decide_zero(sp.expand(e * (R_s - _RCEN - 1)), _RCEN), \
+        "decider fires on a nonzero expression"
+
+    # The other decider, negative direction only -- see the note below.
+    assert not _gaunt_all_zero(a, a, a, a)
+
+
+@pytest.mark.slow
+def test_paper58_zero_gaunt_zeros_is_forced_not_measured():
+    """The headline's `0 Gaunt-zero` is a property of the BASIS, not a find.
+
+    No quartet of `_ORBS` is Gaunt-forbidden -- 0 of 625 -- so
+    `_gaunt_all_zero` cannot return True anywhere in the census and the 0
+    is forced.  This is why the control above pins that decider in the
+    negative direction only: on this configuration there is no positive
+    case to pin it against.  Recorded so the 0 is not read as evidence
+    that a search was run and came back empty.
+    """
+    n_forbidden = 0
+    for p, q, r, s in product(range(len(_ORBS)), repeat=4):
+        a, b, c, d = _ORBS[p], _ORBS[q], _ORBS[r], _ORBS[s]
+        if (b[2] - a[2]) + (d[2] - c[2]) != 0:
+            continue
+        if _gaunt_all_zero(a, b, c, d):
+            n_forbidden += 1
+    assert n_forbidden == 0
+
+
 # ---------------------------------------------- native H2 end-to-end FCI energy
 @pytest.mark.slow
 def test_paper58_native_h2_fci_energy():
     """Paper 58 Sec. II compose check: H2 at R=1.4, 1s-per-centre, native S+h+g
     -> FCI + V_NN = -1.106556606091 Ha (the value the Gaussian-fit path converges
-    onto). Skips if the exploratory native-engine drivers are absent."""
+    onto). Skips if the exploratory native-engine drivers are absent.
+
+    NOTE (2026-09-07, C22): the `sys.path` insertion below reaches the
+    PRUNABLE debug/ tree, so this route disappears -- silently, via
+    importorskip -- once debug/ is pruned.  It is a SECOND route to a
+    number whose permanent backing is
+    tests/test_paper58_qfd.py::test_h2_certified_energy_and_tau_termination,
+    which pins the same energy from geovac/qfd_assemble.py to 38 digits.
+    Baselined in debug/qa/test_claim_backing_baseline.json on that basis;
+    porting step1_native_molecule into geovac/ is the standing repair.
+    """
     sys.path.insert(0, str(REPO / "debug"))
     step1 = pytest.importorskip("step1_native_molecule")
     S, h = step1.build_S_h()

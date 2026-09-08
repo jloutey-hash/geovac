@@ -1,4 +1,7 @@
-"""Paper 59 -- the 2D-Euclidean-QFT kinematic dictionary (sec:reduction / sec:modular).
+"""Papers 59 + 61 -- the 2D-Euclidean-QFT kinematic dictionary.
+
+sec:reduction is Paper 59; sec:modular moved to Paper 61 in the 2026-09-06
+split, so this docstring named one paper for two owners (corrected 2026-09-07).
 
 Backs the kinematics paragraphs (2026-08-21, debug/sprint_t2_euclidean_kinematics_memo.md):
   (1) eq:K0 is the frequency representation of the 2D Euclidean propagator

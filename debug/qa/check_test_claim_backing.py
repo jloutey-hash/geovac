@@ -72,6 +72,18 @@ TESTFILE = re.compile(r"(?<![A-Za-z0-9_])test_[a-z0-9_]+\.py")
 DISOWNED = re.compile(r"stale|retired|replaced|superseded|archived|no longer|withdrawn", re.I)
 PAPER_NAMED = re.compile(r"^test_paper(\d+)[_.]")
 DEBUG_IMPORT = re.compile(r"(?:from|import)\s+(debug\.[A-Za-z0-9_.]+)")
+# The `debug.` prefix is only ONE of the two ways a test reaches the prunable
+# tree.  The other -- put debug/ on sys.path, then import a BARE module name --
+# carries no `debug.` token anywhere, so the regex above cannot see it.  Found
+# 2026-09-07: test_paper58_headline_numbers.py does exactly this
+# (`sys.path.insert(0, str(REPO / "debug"))` then
+# `importorskip("step1_native_molecule")`), and was the ONLY corpus instance --
+# so the check reported a clean 3-entry baseline while the real dependency it
+# was built to catch sat outside its alphabet.  Any insertion of debug/ onto
+# sys.path is itself the dependency: after it, an arbitrary bare import may
+# resolve into the pruned tree, and naming which one is not decidable by grep.
+DEBUG_SYSPATH = re.compile(
+    r"sys\.path\.(?:insert|append)\([^)]*[\"']debug[\"']")
 
 
 def existing_tests() -> set[str]:
@@ -114,7 +126,12 @@ def debug_imports(path: Path) -> set[str]:
         src = path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return set()
-    return set(DEBUG_IMPORT.findall(src))
+    found = set(DEBUG_IMPORT.findall(src))
+    if DEBUG_SYSPATH.search(src):
+        # Synthetic name: the dependency is the path insertion itself, not
+        # any one importable module (see the DEBUG_SYSPATH note above).
+        found.add("<sys.path:debug/>")
+    return found
 
 
 def load_baseline() -> dict:

@@ -84,6 +84,47 @@ WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
 REGISTRY = [
     {
+        "id": "p61-t2-superseded-19th-digit",
+        "scope": "paper_61 paper_59 group3 group2",
+        "severity": "fail",
+        "canonical_note": "Registered 2026-09-07 (/qa 58/59/60 FULL). C17 had "
+                          "NO family declaring a locus in paper_61, so the gate "
+                          "examined nothing there.  CANONICAL T2 = "
+                          "0.395355765901713964325229296804847564260563977867"
+                          "082108935234265469... (66 digits; six parameter-"
+                          "disjoint runs agreeing to 1.7e-67, cross-validated "
+                          "69-96 digits, pinned by tests/test_paper59_t2_value.py). "
+                          "The earlier quadrature anchor agreed only to 18 "
+                          "digits and its 19th digit (...96418) is SUPERSEDED "
+                          "by the certified ...964325.  The 18-digit display "
+                          "0.3953557659017139641 stays legal; any longer "
+                          "continuation of the old anchor is a wrong headline.",
+        # The retired 19th-digit continuation, and its ~16-digit predecessor
+        # continued past where it was ever correct.
+        # Constructed, not enumerated. The first version listed three
+        # specific wrong tails and therefore missed ...96412 and ...96419
+        # (fire-tested 2026-09-07). Certified value is
+        # 0.395355765901713964|3252..., so ANY 19th digit other than 3
+        # after the 18-digit prefix is a wrong continuation, and a wrong
+        # digit cannot be chosen to escape this.
+        "pattern": r"0\.395355765901713964[0-24-9]",
+        "require_nearby": r"T2|T_2|collinear|three-cent|Bessel moment|period",
+        # Must exempt the loci that quote the old anchor AS superseded --
+        # above all tests/test_paper59_t2_value.py, which exists to pin the
+        # digit-19 correction and therefore has to name the wrong value.
+        # The family's job is "presented as canonical" vs "quoted as wrong".
+        "exempt_if_nearby": r"superseded|retired|earlier anchor|18 digits|"
+                            r"corrected 2026-09|under-resolution|"
+                            r"OLD_ANCHOR|old anchor|corrects|correction|"
+                            r"previously frozen|v4\.97|->\s*\.\.\.",
+        "files": [
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+            "tests/test_paper59_t2_value.py",
+            "docs/claim_test_matrix.md",
+        ],
+    },
+    {
         "id": "trunk-saturation-rate-constant",
         "scope": "trunk group3",
         "severity": "fail",
@@ -726,12 +767,24 @@ REGISTRY = [
         "scope": "group2",
         "severity": "fail",
         "canonical_note": "Atomic isoenergetic 1-norm sublinear exponent, HEADLINE form "
-                          "\\|M\\|_1 ~ K^{0.84} (full s+p+d+f basis, eq:sublinear). 0.78 is the "
-                          "legitimate s-only exponent (bare, in prose) and is NOT captured by "
-                          "this family, which anchors on the \\|M\\|_1~K^{...} headline form. "
-                          "W1 (2026-08-18 /qa paper 60) retired the abstract's headline K^{0.78}.",
-        "capture": r"\\\|M\\\|_1\\sim\s*K\^\{(0\.\d+)\}",
-        "canonical": "0.84",
+                          "\\|M\\|_1 ~ K^{0.82} (full s+p+d+f, HELIUM, window K=74-164, "
+                          "CONVERGED radial domain; eq:sublinear). RETIRED 2026-09-07: 0.84 "
+                          "and 0.854, both measured on a fixed 60-bohr domain whose truncation "
+                          "error grew with K (x1.011 -> x1.205 across the fit range) and so "
+                          "inflated the slope and reversed its apparent drift. Two independent "
+                          "routes -- exact grid-free Slater algebra and converged quadrature "
+                          "under R_MAX >= 3*n_max^2 -- agree on 0.8193 to 4 dp. NOTE the "
+                          "exponent is NOT stable: local slope falls to 0.766 by K=514, so the "
+                          "canonical value is a WINDOW value and the family exists to stop the "
+                          "retired ones returning, not to certify 0.82 as asymptotic. 0.73 is "
+                          "the s-only exponent (bare, in prose) and is NOT captured here.",
+        # `(?:\\gvq\{[^{}]*\}\{)?` admits the numeric-registry wrapper.
+        # Without it this family went INERT the moment the literal was
+        # annotated: 2 matches -> 0, and the gate printed PASS while
+        # examining nothing (2026-09-07). Any C17 family whose capture
+        # anchors on a literal in a \gvq-annotated paper has this exposure.
+        "capture": r"\\\|M\\\|_1\\sim\s*K\^\{(?:\\gvq\{[^{}]*\}\{)?(0\.\d+)\}?",
+        "canonical": "0.82",
         "require_nearby": r"sublinear|block-encoding|configuration|secular",
         "exempt_if_nearby": r"historical|stale|previously|s-only|retired|was|naive",
         "files": ["papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex"],

@@ -4,6 +4,7 @@
   "paper_backing_debug_imports": [
     "test_paper26_entanglement.py",
     "test_paper27_entropy.py",
-    "test_paper27_entropy_locus.py"
+    "test_paper27_entropy_locus.py",
+    "test_paper58_headline_numbers.py"
   ]
 }

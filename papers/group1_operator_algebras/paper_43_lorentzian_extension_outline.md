@@ -1,3 +1,12 @@
+> **[WITHDRAWN 2026-09-07 --- read this first.]** The “literal identification
+> at the operator-system level (Lorentzian, finite cutoff)” claimed below is
+> **descoped**. Paper 45's $K^{+}$ compression theorem was withdrawn
+> (2026-06-09, falsifier `tests/test_p45_kplus_degeneracy.py`) and Paper 43's
+> body is now signature-blind / Riemannian; Papers 46–49 are DESCOPED or
+> PARTIAL. What survives is the norm-resolvent arrow and the TICI/cocycle
+> algebra. This file is a historical outline and is **not** a current claim;
+> the papers are the authoritative source (CLAUDE.md §1).
+
 # Paper 43 (outline) — Lorentzian extension of the four-witness Wick-rotation theorem at finite cutoff
 
 **Status:** OUTLINE ONLY (no .tex draft yet).
@@ -42,7 +51,7 @@ The signature classification of Bizi–Brouder–Besnard 2018 (arXiv:1611.07062)
 3. **Flow conjugacy at general $t$:** $\sigma_t^{L, \mathrm{TT}}(a) = \sigma_{-t}^{L, \alpha}(a)$, residual $\leq 4 \times 10^{-16}$.
 4. **Six-witness collapse:** all six instantiations (BW, $\mathrm{HH}_{M=1}$, $\mathrm{HH}_{M=2}$, $\mathrm{Sew}_{M=1}$, $\mathrm{Unruh}_{a=1}$, $\mathrm{Unruh}_{a=2}$) give bit-identical $\Delta_L$ and $K_L^{\mathrm{TT}}$.
 
-**This lifts the four-witness Wick-rotation theorem from structural correspondence at the metric-functional level to literal identification at the operator-system level (Lorentzian, finite cutoff).** Framework's first operator-system-level literal identification of a Lorentzian QFT theorem at finite cutoff.
+**[WITHDRAWN]** ~~This lifts the four-witness Wick-rotation theorem from structural correspondence at the metric-functional level to literal identification at the operator-system level (Lorentzian, finite cutoff).~~ Descoped 2026-06-09; see the banner. Framework's first operator-system-level literal identification of a Lorentzian QFT theorem at finite cutoff.
 
 ---
 
@@ -177,7 +186,7 @@ $$W_L := P_W^{\mathrm{spatial}} \otimes P_{t \geq 0}$$
 
 - The witness-specific physical content ($M$ for HH/Sew, $a$ for Unruh, $\kappa_g = 1$ for BW canonical) parameterises the correspondence to continuum physical observables but does NOT modify the underlying modular-Hamiltonian construction.
 - The $2\pi$ in the modular period is the M1 sub-mechanism of the master Mellin engine (Hopf-base measure $\mathrm{Vol}(S^1)$, Paper 32 §VIII case-exhaustion theorem).
-- **Lifts the four-witness Wick-rotation theorem from "structural correspondence at the metric-functional level" (Sprint TD Track 4, Unruh-pendant) to "literal identification at the operator-system level (Lorentzian, finite cutoff)"** at every finite Krein cutoff.
+- **[WITHDRAWN]** ~~Lifts the four-witness Wick-rotation theorem from "structural correspondence at the metric-functional level" (Sprint TD Track 4, Unruh-pendant) to "literal identification at the operator-system level (Lorentzian, finite cutoff)" at every finite Krein cutoff.~~ Descoped 2026-06-09; see the banner.
 
 ---
 

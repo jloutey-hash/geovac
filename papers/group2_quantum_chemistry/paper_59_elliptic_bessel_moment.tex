@@ -6,6 +6,10 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{observation}{Observation}
 
+% Numeric-registry citation macro (CLAUDE.md SS15): renders the literal
+% only; the key is a foreign key into debug/qa/numeric_registry.py.
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{The Three-Center Electron-Repulsion Integral Is an Elliptic
@@ -176,7 +180,7 @@ density Fourier transform $\tilde\rho$ and the $\bm k$ integral.
 We verify Eq.~\eqref{eq:momentum} two independent ways on the reference
 geometry $X=(0,0,0)$, $Y=(0,0,2)$, $Z=(1.5,0,0.5)$ (bohr), $\zeta=1$, for
 which a McMurchie--Davidson evaluation over $8$-Gaussian $1s$ fits gives the
-ground truth $(XY|XZ)=0.204941722$.  \textbf{[MEASURED]} Using the closed-form
+ground truth $(XY|XZ)=\gvq{three_center_eri_truth}{0.204941722}$.  \textbf{[MEASURED]} Using the closed-form
 Fourier transform of the Gaussian-fitted density (a product of Gaussians is a
 Gaussian) in Eq.~\eqref{eq:momentum} reproduces the McMurchie--Davidson value
 on the \emph{same} fits to $1.9\times10^{-14}$: the momentum formula, the
@@ -1015,12 +1019,12 @@ formulae,'' \textit{Commun.\ Number Theory Phys.}\ \textbf{12}, 355--407 (2018);
 arXiv:1711.01829.
 
 \bibitem{loutey_paper18}
-J.~Loutey, ``Exchange Constants: A Transcendence Taxonomy for the Geometric
-Vacuum,'' Paper~18 in this series.
+J.~Loutey, ``Spectral-Geometric Exchange Constants: Projecting Discrete
+Spectra onto Continuous Manifolds,'' Paper~18 in this series.
 
 \bibitem{loutey_paper34}
-J.~Loutey, ``A Projection Taxonomy for Physical Observables,'' Paper~34 in
-this series.
+J.~Loutey, ``GeoVac as a Two-Layer Framework: Projection Taxonomy and the
+Empirical Matches Catalog,'' Paper~34 in this series.
 
 \bibitem{loutey_paper58}
 J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property: The Abelian

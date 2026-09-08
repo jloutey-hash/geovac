@@ -1,6 +1,6 @@
 """Route C / Rung 3 -- the CORRECTLY-AIMED closure test: place the integrated 3-centre
 observable in the BESSEL-MOMENT period algebra (not the pure-MMV ring), via the master
-family of the L4 Picard-Fuchs operator and the PROVEN Broadhurst-Mellit / Fresan-Sabbah-Yu
+family of the L4 Picard-Fuchs operator and the PROVEN Broadhurst-Roberts / Fresan-Sabbah-Yu
 determinant + quadratic relations.  This route is PRECISION-INDEPENDENT: the structural
 identities are symbolic/ODE facts, not high-precision PSLQ hunts (the >=50-digit V is
 blocked by a log corner non-analyticity, so we do NOT hinge the verdict on numerics).
@@ -108,7 +108,7 @@ def part3_quadratic():
         print(f"    [dps45] B[K,I] = {mp.nstr(BKI,30)}   B[K,I]+pi = {mp.nstr(BKI+mp.pi,3)}")
     print("""  PROVEN period-pairing matrix (D- and rho-independent):
       B[K,I] = -pi ,  B[K,J] = 0 ,  B[I,J] = 2*pi   =  pi x (integer intersection form).
-  These are the Fresan-Sabbah-Yu / Broadhurst-Mellit QUADRATIC RELATIONS between Bessel
+  These are the Fresan-Sabbah-Yu / Broadhurst-Roberts QUADRATIC RELATIONS between Bessel
   moments, here for the Gamma(2) (Legendre) family -- the elliptic lift of the classical
   W[K0,I0]=1/D.  The pi's are the branch-point (-1)-monodromy periods.  The 4th master
   (Y0-sector) carries the D ln D log = the same corner non-analyticity that blocks V's

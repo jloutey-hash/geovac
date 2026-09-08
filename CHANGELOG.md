@@ -7,6 +7,174 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.10.11] - 2026-09-08
+
+**`/qa paper_61` FULL = FAIL (3 LARGE), remediated; same-day DELTA = DEFECTS (1 LARGE + 9 MATERIAL), also remediated. Paper 61 is NOT certified.** PI-invoked, unseeded. Record: `docs/qa/paper_61.done.md`.
+
+### The three LARGE, and why the DELTA still found more
+
+The FULL run's three LARGE were real and their fixes were sound under independent re-derivation — the differential Galois group is in **Sp₄(ℂ)**, not Sp₄(ℤ) (a discrete group cannot contain a positive-dimensional algebraic group; the exponential torus (ℂ*)² at infinity forces positive dimension, and the backing variable is literally `_L4_MONODROMY`); the abstract no longer credits the integer-relation search with the non-classicality; the PSLQ negative is scoped to its searched box.
+
+The DELTA nonetheless returned DEFECTS, and the reason is the recurring one:\ **the remediation ran locus-by-locus and stopped at the paper's own file boundary**, and four further defects were in prose the remediation itself had just written.
+
+- **LARGE — a `.done.md` ratifying the retired claim.** `docs/qa/paper_59.done.md:146` did not merely repeat "Galois in Sp4(Z)", it certified it: *"[SYMBOLIC] prose is now correct, not an inflation"*. A criteria file is the goalpost the next certifying run measures against, so the defect had a live mechanism for returning at the next `/qa paper_59` or `/qa group2`. **New class: the `.done.md` as re-infection vector.** The same file logged the Broadhurst–Mellit naming as a NIT on 2026-08-21 and left it unapplied until a citation reviewer re-found it — a NIT that names a real defect is debt, not noise.
+- **LARGE — two remediated claims had no `check_retracted_terms.py` entry at all** (§9 hard rule). The first consequence was the next item.
+- **The retired false universal alive in an ACTIVE paper.** `paper_56_tannakian_substrate.tex:1848` still said any full-modulus sweep "passes through **every** CM fibre" while citing Paper 61 fourteen lines above. λ = 1−ρ, so the sweep covers only the REAL locus λ < 1; fibres with non-real λ (disc −3) and λ = 2 are off the contour. Also alive in `memory/cosmic_galois_elliptic_rung1.md` — loaded into **every session**, so it reseeds itself — and in two live drivers. Swept to "infinitely many, not every one"; dated `debug/sprint_*` memos and CHANGELOG keep the old wording as historical record (§13.11).
+- **Four defects in the paragraph the FULL-run remediation had just written**, including a **new false universal** ("*Every* transcendental below is placed…") — the exact class that run had flagged twice. Also: it put this paper "one rung above its companion" when Paper 59's own title is *Genus One at the Third Center* (same rung); routed π through temporal compactification, contradicting the paper's own [OBSERVATION] that the non-compact Euclidean-time direction contributes no π; and named `K(½)` the lemniscate constant (they differ by exactly √2 — the *symbol* is the corpus convention, the *name* was wrong).
+
+### Two-way upgrades, both PM-verified before acceptance
+
+- **`W₀` [OPEN] → [SYMBOLIC].** The withdrawn sentence said "the transcendence of the individual masters cancels in their determinant". It does not — π² is **squared**. From the branch-point data of `Q(x) = (x²−1)(ρx²+1−ρ)`: Σx_c = 0 kills the exponentials, ∏Q′(x_c) = −16ω², Vandermonde = 4iω/ρ², giving **`W₀ = π²/ρ²`** (new `eq:W0`), up to the orientation sign — the branch √(1−ρ)/√(ρ−1) = −i on 0<ρ<1. Verified in sympy step-by-step and in mpmath at ρ = 0.3/0.5/0.71 to 40 digits. **The withdrawal is a net gain: an exact value replaced a false cancellation.**
+- **The λ identity is precision-limited, not `10⁻⁴¹`** — 2.7e-51 at 50 digits, 1.2e-91 at 90. It is an identity being confirmed, not a measurement.
+
+### Fixed — the C16 instrument (my two new entries missed 8 of 8 live survivors)
+
+Both Paper-61 entries written that morning were "proven to discriminate" against the `.tex` at git HEAD — **which is not the same as reaching the loci that actually survived**. Three independent causes, each fixed as a class:
+
+1. **Unicode blindness.** The file had already fixed this shape for LaTeX — *"the pattern is written in prose and the corpus is typeset"* — and the same is true one alphabet over: ASCII patterns cannot see `Sp₄(ℤ)` or `Broadhurst–Mellit`. Folding added to `_strip_markup` (plus `\mathbb` and markdown `**`/backticks). En/em dash folds to `--`, **not** `-`: three existing entries carry strict `--` tokens and folding down would have broken them.
+2. **Authored exemption vocabulary.** Both exempted on words from the surrounding *correct* text (`determinant`, `monodromy`). The file's own 2026-09-03 rationale forbids exactly this — *"correct text is exactly what surrounds a defect"* — and says new entries should use the standardized marker and nothing else. Now they do. Broadhurst–Mellit needs real discrimination rather than a marker (the name is **correct** for the determinant formulae — Zhou's paper is titled that), so the exclusion moved into the pattern, tempered.
+3. **`files` lists built from memory.** Rebuilt from a corpus grep, which surfaced two live drivers neither reviewer named.
+
+**Fire-tested 12/12**, including all three legitimate near-neighbours that must *not* fire: Broadhurst–Mellit *determinant*, *monodromy* in Sp₄(ℤ), and "infinitely many CM fibres". Two self-inflicted over-fires caught by that testing and fixed:\ the pattern matched **its own registry id**, and the widened Galois alternative fired on `test_routeC_momentum.py:492/:504`, "self-adjoint ⇒ Galois group in Sp4", which is TRUE over ℂ. Widening a pattern to reach a missed locus and thereby catching a true sentence is the same error as the miss, mirrored.
+
+### Fixed — C16 did not terminate (pre-existing)
+
+`p61-broadhurst-mellit-quadratic` and then the gate itself would not finish. Two separate causes:
+
+- **Mine:** per-character tempering `(?:(?!X)[^.\n]){0,200}` is 200 nested lookaheads and the gate also scans the whole file newline-joined. Replaced with a single bounded lookahead — 0.02 s.
+- **Pre-existing, and the more serious:** `p34-ee-eigen-closed-form` (group6) opens with two lookaheads anchored on `.*`, re-scanned from every one of ~500 000 positions of the joined text. It **did not finish on even the first 40 kB of Paper 34**, the corpus's largest paper at 586 kB — so C16 could not complete, and *a gate that cannot finish gates nothing*, the FULL-#4 "examined NOTHING" class arrived at from the other direction. Bounded to the clause it was written for: **586 kB → 2.41 s**, and proved **equivalent, not merely faster** — identical verdicts on all 166,174 lines of 206 papers/docs, 9 hits, 0 disagreements.
+
+### Added
+
+- `tests/test_paper59_bessel_moment_algebra.py::test_paper61_wronskian_constant_W0_is_pi_squared_over_rho_squared` — backing for `eq:W0` (§13.4a). Written as its own pass and **fire-tested against 5 named wrong answers**, chief among them `W₀ = 1`, which is what the *existing* Wronskian test normalises to and precisely why the false claim was invisible; also both wrong ρ-exponents and the rational (transcendence-cancelling) reading. It pins ρ-**dependence** and the **exponent**, not just a value at one ρ.
+- Two C16 entries: `p61-w0-transcendence-cancels`, `p61-every-cm-fibre-universal`, each with enumerated `cited_by`.
+
+### Fixed — records
+
+- `docs/claim_test_matrix.md` rows 87/497 read **BACKED-SOUND** flat while their own notes conceded the certification and PSLQ legs are driver-level. Split to `BACKED-SOUND (identity/tail/digit-19) + COVERAGE GAP (PSLQ leg)`, and the permanent artifact `benchmarks/certified_reference/entries_t2.py` named. *(One reviewer claim corrected: `debug/beta2_t2_*.py` is **not** pruned — all five drivers exist.)*
+- The DoD's W8 row was **wrong in the direction that causes a false sweep** — it said `paper_59:1046` contradicts the row-8 finding; it does not (`test_paper59_corner_sigma2.py` really does hold a guarded disc-4 negative with a planted positive control). Restated as the scope ambiguity it is. Tier-tag count recounted 35 → **41**.
+
+### Self-inflicted, and recorded
+
+- I wrote "left unapplied for **17 days**" in two places — the banned duration language (C18). C18 passed only because `paper_59.done.md` is not in the `paper_61` scope: a **scope-coverage escape, not a clean bill**.
+- The heredoc backslash-halving trap, three times in one session, each time on a documented rule of my own. Two profiling runs were also lost to buffered stdout killed by `timeout`, and one verification was piped into `grep`, whose exit code I then read — the exact "never pipe a verification" rule.
+
+### Verification
+
+Paper 61 scope: **C16 PASS** (and now *runs*), C21, C17, C14, C11, C13-titles, C18, C19, C20, K-label, compiles (0 undefined refs) — all PASS; C22 corpus-wide PASS; C16 also PASS on trunk / group2 / group3 / group6; `qa_scopes` selftest PASS. `pytest tests/test_paper59_bessel_moment_algebra.py tests/test_routeC_momentum.py tests/test_paper59_gamma0_2.py` — 40 passed, 7 skipped.
+
+### Still owed
+
+- ~~**PI ratification** of `docs/qa/paper_61.done.md`~~ — **RATIFIED 2026-09-08 (PI).** The reviewer-authored provenance stays on record as the reason the criteria read as they do, no longer as an open objection. **This settles the goalpost, not the paper:** Paper 61 is still NOT CERTIFIED.
+- A FULL certifying run on Paper 61 after a **clean** DELTA. This DELTA was not clean.
+- Claims-register rows for **Papers 54–57**, still deliberately absent — this session did not test their claims.
+- The `.done.md`-as-re-infection-vector class is registered for this occurrence only; **no sweep of the other eleven `.done.md` records has been run.**
+
+## [v5.10.10] - 2026-09-07
+
+**`/qa` 58/59/60 FULL + group1 DELTA = FAIL, remediated.** Canonical memo: `debug/sprint_qa_papers_58_59_60_memo.md`. PI-invoked, unseeded (default since 2026-09-02); standing calibration record cited per `.claude/commands/qa.md`.
+
+### The LARGE — Paper 60's `eq:sublinear` was a regime claim over a window, with the mechanism backwards
+
+The paper printed `‖M‖₁ ∼ K^0.84`, called it "grows **sublinearly**", and credited the mechanism to `T′` — "the pure-number matrix elements decrease with quantum number". Re-measured with the paper's own `gen_configs`/`solve`, pushed past its largest fitted point (K = 164) out to K = 340:
+
+| quantity | window K ≤ 164 | extended K ≤ 340 |
+|:---|:---|:---|
+| total `‖M‖₁` | **K^0.840** — reproduces the published 0.84 exactly | K^0.854 |
+| local slope | 0.838, 0.840, 0.841 | 0.850, 0.868, 0.882, **0.906** |
+| nuclear diagonal `T⁰ = Z·ΣR_ν` | — | **K^0.704**, local slope *falling* (0.708 → 0.697) |
+| off-diagonal `T′` | — | **K^1.049** — *superlinear* |
+
+Two defects, not one. **(1)** 0.84 is a window fit and the local slope rises monotonically outside it, so "sublinear" is not an established regime — the exponent trends toward 1. **(2)** The mechanism is inverted: the pure-number block `T′` — the part that is attractive on a quantum device, because it is generated on-chip from quantum-number labels — is the *superlinear* one. The sublinearity is carried entirely by the nuclear diagonal `T⁰`, and the total exponent drifts up precisely because `T′`'s share of the norm grows (diagonal 64.6% → 52.2%).
+
+**The paper already contained the correct statement.** §7 (molecular) says the advantage "rides on the *clean diagonal* `T⁰ = Z R_ν`" and "does not survive the loss of the diagonal `T⁰`" — so §4 contradicted §7 inside one document, and §7 was right. The fix aligns §4 to §7.
+
+**What survives, which is most of the claim:** `‖M‖₁` does grow more slowly than the matrix dimension over every basis that can be computed, and the contrast with the L² Löwdin superlinear inflation is real. The encoding claim stands; its asymptotic reading and its mechanism did not.
+
+Worth recording for future runs: the corpus carried **three different windows for this one exponent** — K = 9..100 (0.842, `test_sturmian_secular.py`), K ≤ 24 (0.77, the self-contained sweep), K = 74..164 (0.84, the paper) — each reported as "the" value, and the 2026-08-18 certification checked that they *reproduced* rather than that they agreed. That is why the window is now part of the registered object rather than prose around it.
+
+### Changed
+
+- **Paper 60**: abstract, intro, `eq:sublinear`, the mechanism paragraph, the §5 echo and the conclusion restated to the windowed claim; new **`eq:sublinear_split`** records the `T⁰`/`T′` split with its measurement.
+- **group2 synthesis**: the Paper-60 block carried the bare "sublinear 1-norm" with none of the qualification — the LARGE's second locus. Rewritten, closing two SMALLs in the same paragraph: "the one genuine lever" → the paper names **three** (gerade sector, large separation, one-electron-only metric), and the isoenergetic posing is **Avery's** and was credited to nobody.
+- **`docs/claim_test_matrix.md`**: row re-tiered; `eq:sublinear_split` row added; three separate uses of "asymptote" for the windowed 0.84 corrected.
+
+### Added
+
+- `tests/test_paper60_sturmian.py::test_paper60_sublinearity_is_carried_by_the_nuclear_diagonal` — written as a separate activity from the fix (§9 guard rule) and **fire-tested in both directions**: perturbing the diagonal's K-scaling → FIRED; making `T′` sublinear → FIRED.
+- `tests/test_paper58_headline_numbers.py::test_paper58_census_deciders_are_alive` and `::test_paper58_zero_gaunt_zeros_is_forced_not_measured` (below).
+- Numeric registry: `p60_onenorm_exponent`, `p60_onenorm_exponent_sonly`, `p60_T0_exponent`, `p60_Tprime_exponent`, `t2_collinear_period`, `three_center_eri_truth`; 8 `\gvq` annotations across Papers 59/60/61.
+- C16 entry `p60-sublinear-as-regime` with `cited_by`; C17 family `p61-t2-superseded-19th-digit`. Both proven to discriminate in **both** directions.
+
+### Fixed — Paper 58's tests
+
+- **A guard that could not fail.** `test_paper58_aabb_decided_census_is_195_of_195` asserts `(n_nonzero, n_gaunt, n_accidental) == (195, 0, 0)` — which is *exactly* what a decider that never decides a zero produces. **Fire-tested:** hard-wiring `_decide_zero → return False` left the test **green**. The headline's content is that the decider *looked*; the tuple alone cannot distinguish looking from being asleep. Closed by a positive control pinning the decider in both directions on a real census expression.
+- **A count that was forced, not measured.** While writing that control: **no quartet of `_ORBS` is Gaunt-forbidden at all — 0 of 625** — so the headline's `0` Gaunt-zeros is a property of the orbital set, not a search that came back empty. Recorded as its own test so it is not read as evidence.
+- **A tolerance 22 orders of magnitude too loose.** `test_paper58_qfd.py` claimed "the 84-digit certified value" (`H2_CERT` carries 60 digits) and asserted `1e-38` where the agreement is `4.4e-60`. Its "bit-identical" tau-termination check compared a dps=30 result against a dps=40 one — they differ at the 55th digit from the precision request alone, and matched only because both were *printed* at a global `mp.mp.dps`. Tightened to `1e-55` (fire-tested against a 1e-50 perturbation) and the termination now asserted at equal precision, where it is exactly `0.0`.
+
+### Fixed — instruments (five gates were examining nothing)
+
+- **C22 could not see the dependency it exists to find.** Check D matched only `import debug.x`; `test_paper58_headline_numbers.py` reaches the prunable tree by `sys.path.insert(REPO/"debug")` + a bare import, and was the corpus's **only** real instance. Widened (`DEBUG_SYSPATH`), discrimination-tested, baselined with the rationale that the same H₂ number has permanent backing in `test_paper58_qfd.py`.
+- **C21 examined ZERO annotations** on papers 59, 60 and 61 — PASS carrying no information. Now 1 / 8 / 2. The salience report could not help: it lists only *multi-document* numerals, and its four "measurement-shaped" candidates on Paper 59 were bibliography volume and page numbers (145, 151, 286, 376). The real quantities had to be read out of the papers.
+- **C17 declared no family for paper_61** — the `_grounded` self-audit correctly errored rather than printing a hollow PASS. Family added; now 1 grounded.
+- **C16** at `paper_46:1124`: the withdrawal marker sat 8 lines from the locus and the window is ±5, so the gate was right to keep calling `height_P = 0` live. Marker moved inside the window.
+- Done-records for 58/59/60 ran their gates under `--gate group2`, a scope that contains **none of those three papers**. Now `--gate paper_NN`.
+
+### Fixed — pre-existing, found while sweeping
+
+- `paper_11`: `Figure~\ref{fig:pes}` pointed at a figure that does not exist; the object is the table `tab:pes` on the following lines. Retargeted.
+- `paper_15`: cited `loutey_paper11` and `loutey_paper13` with no bibitems. Added, with titles taken from those papers' own `\title` commands (C11 confirms the match). group2 C10 now PASS (10 papers).
+- `\gvq` was undefined in Papers 59 and 61 — caught by C10 before it shipped, after I annotated them without it.
+
+### Self-inflicted, and recorded
+
+- The `paper_46` scope note added earlier in this arc had silently consumed `\end{proposition}`, so that paper did not compile. Restored.
+- I reported "12/12 gates PASS across all seven scopes" for scopes that *excluded the papers under certification*; caught when C10's group2 file list turned out not to contain 58/59/60.
+- **C21 failed on me within a minute of my making it non-vacuous** — I annotated the extended-range `0.854` with the windowed key (0.84), and the gate I had just un-vacuumed caught it. Two registry selftests then caught two more of my own errors: four unparseable `convention` strings (one of which parsed as the *wrong* family, `lambda` rather than `exponent`, because "1-norm" precedes "exponent" in `_KINDS`), and an "alias" that was the base value at double precision.
+
+### Verification
+
+Deterministic layer green on `paper_58`, `paper_59`, `paper_60`, `paper_61`, `group1`, `group2`, `synthesis` — C5/C10/C11/C13/C14/C15/C16/C17/C18/C19/C20/C21 PASS with exit 0, C22 PASS corpus-wide. Grounded counts stated rather than assumed (a gate that examines nothing also prints PASS): C21 checks 10/1/8/2 annotations on 58/59/60/61; C17 grounds 3/4/4/1 families. `tests/test_numeric_registry.py` 18 passed; `tests/test_headline_numbers_check.py` 6 passed; `check_test_claim_backing.py --selftest` PASS.
+
+### Follow-on pass (same day): Paper 61's definition of done, group1's residue, and Paper 53
+
+**Paper 61 had no definition of done, and was not in its own group.** It was split out of Paper 59 on 2026-09-06 and belonged to no scope at all until this arc; giving it a single-paper scope fixed the corpus-wide orphan check while `/qa group3` still walked past it. Paper 61 is a **group3** paper (the periods / Tannakian arc, siblings 55–57), now in the `group3` scope and in `docs/qa/group3.done.md`. `docs/qa/paper_61.done.md` written — scope, gating C9, dimensions, ten enumerated C8 headlines with tiers and backing, seven ranked watch-notes.
+
+New **group-membership assertion** in `qa_scopes.selftest()`: a paper in `papers/groupN_*/` must be in the `groupN` scope unless declared in `GROUP_SCOPE_EXEMPT` (trunk roots; Papers 58/59/60, which are their own targets). **Fire-tested** — removing 61 again makes the selftest FAIL *while the orphan check still reports clean*, which is exactly why the narrower assertion was needed.
+
+**Paper 53 — the PI-flagged height leg, measured.** It is **not** Paper 38's withdrawn L5 transported: L5's height was a reconstruction-*defect* quantity killed by a finite-band `f` with `B(f)=0`, and that same `f` gives `‖∇Bf‖ = 0` here, which *satisfies* non-expansiveness. Different quantity, different failure mode. But the leg has its own defect. Paper 53 claimed the plane Berezin is **gradient-non-expansive** ("verified numerically, ratio ≤ 1 at every Λ, rising to 1 as Λ→∞") and listed that among the established load-bearing ingredients. `B` is a radial convolution, so `∇(Bf) = B(∇f)` and the sharp constant is the kernel's L¹ norm:
+
+| Cesàro order s | 0.6 | 0.75 | 1 | 1.5 | 2 | 3 | 5 | 8 |
+|:--|:--|:--|:--|:--|:--|:--|:--|:--|
+| Lebesgue constant | 5.72 | 3.23 | **2.01** | 1.42 | 1.23 | 1.09 | 1.02 | 1.004 |
+
+Greater than 1 at every finite order — the Bochner–Riesz kernel `J_{s+1}(r)/r^{s+1}` oscillates, so it is negative somewhere and `‖K‖₁ > 1` strictly — and it approaches 1 only as `s → ∞`. Two further points: the constant is **Λ-independent** by scaling, so the reported "ratio rising to 1 as Λ→∞" cannot have been the operator's gradient gain at all (it was a property of the Gaussian test functions); and the numerical check used smooth Gaussians, which is not the supremum over the unit-Lipschitz ball. Corrected in the paper with `rem:height_constant`; backed by `tests/test_paper53_height_constant.py` (3 legs, fire-tested both directions). **[OPEN — PI adjudication]** whether a height controlled by a *constant* rather than by `γ_Λ` preserves `Λ_prop ≤ Cγ_Λ → 0`; the reach leg is untouched.
+
+**group1 residue (carryforward U.2) closed.** P40's cross-manifold future work was aiming at Paper 39's *withdrawn* Pythagorean route — redirected to the lifted-state route. `paper_43_..._outline.md` still asserted the descoped "literal identification at the operator-system level" at **both** loci (U.2 listed only one); struck, with a banner. P51 was never affected — it is `papers/group5_qed_gauge/`, **group5 not group1**; the U.2 enumeration mis-filed it.
+
+**The mirror case, fixed.** The group1 synthesis presented the proved `k=2` case as carrying the `√k` triangle-bound constant. Paper 39 says `C₃⁽²⁾ ≤ √2` "belongs to the **abandoned** (B,P)-pair route and is **not a rate constant of this theorem**; its value is unchanged, only its role." The owner *strengthened* its claim and the summary kept the weaker form — the direction CLAUDE.md records that C16 and `cited_by` structurally cannot catch, since nothing is retracted and nothing is misspelt. Registered for this occurrence only; the class stays open.
+
+**Paper 61's `rests on:` edges declared** — nine of them, corpus-wide count 5 → 14. The tenth Paper-61 row deliberately gets none (context, not dependency). Also found: the 59→61 split left `sec:modular`, `sec:bessel_algebra` and `eq:lambda_rho` attributed to *Paper 59* at **nine loci in two test files** — missed because the sweep keyed on the `test_paper59_*` **filename**, and `test_routeC_momentum.py` does not carry it. Fixed, with a header note on that file recording that it backs both.
+
+**A gate that read a non-certification as a certification.** `check_cert_staleness.py` took the **max date anywhere in a record**. So "STATUS: RE-RUN — NOT re-certified" made 58/59/60 read as `current`; "NEVER CERTIFIED" made Paper 61 the healthiest row (the decline regex knew "NOT certified", not "NEVER CERTIFIED" — the third spelling-defeats-the-pattern miss of the day); three group dates were **overstated** from post-certification notes (group3 08-29 → real 08-24; group4 and group6 08-30 → 08-24); and group6, whose STATUS says NOT CERTIFIED, showed as OWED.
+
+Landed after two wrong attempts — same-line-CERTIFIED-only lost trunk's date outright, and date-comparison alone still mislabelled group6. The rule is now: prefer the newest **CERTIFIED-asserting** dated line; fall back to max-date only where a record has none, **and report the fallback**; let the record's own **STATUS line** decide declines. Verified row by row against all twelve records. `--selftest` added (there was none), pinning each of the four failures, and fire-tested — reverting to max-date reproduces `max_date_overstates: cert_date '2026-08-29', want '2026-08-24'`. *This is the audit built to catch stale certifications, and it could be fooled by a date: an instrument one level up is not automatically more trustworthy than what it checks.*
+
+### Corrections to my own work in this pass
+
+- I wrote that Paper 61 had **no** claim-matrix rows. It has **ten** — I grepped the filename, not the row key. The same wrong-key mistake that made C11 unable to fail.
+- I logged a coverage gap for the disc−8 CM leg that `test_routeC_momentum.py::test_cosmic_galois_cm_periods_are_gamma_values` already backs to 1e-50 — again from searching only `test_paper59_*` filenames. A false coverage gap sends a reviewer to write a duplicate test and discredits the real gaps beside it.
+- The first `k=2` C16 pattern missed the corpus's own spelling `$k=2$` (math delimiters); its replacement then **false-positived**, because C16 also scans a newline-joined copy where `[^\n]{0,60}` stops bounding anything and reached into the next paragraph. Use `[^.\n]` in C16 patterns.
+- My Paper 53 fix was locus-by-locus — the abstract and contributions list kept the withdrawn claim. The C16 entry I had written minutes earlier caught it.
+
+### Still owed
+
+- **Paper 53's assembly consequence** — whether a constant height preserves `Λ_prop → 0`. **PI adjudication**, flagged `[OPEN]` in the paper.
+- C21 examines zero annotations on the `group1` and `group2` scopes.
+- No panel has ever run against Paper 61; its deterministic PASS is not a certification.
+- The second half of Paper 61's branch criterion: nobody has verified that the shared `test_paper59_*` tests prove the *Paper-61* claims rather than the Paper-59 ones they were written for.
+- `step1_native_molecule` should move from `debug/` into `geovac/` to retire the C22 baseline entry.
+
 ## [v5.10.9] - 2026-09-07
 
 **Paper 20's bibliography, and a correction to v5.10.8's record.** Canonical memo: none (folded into `debug/sprint_group1_impact_set_memo.md` §5).

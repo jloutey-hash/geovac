@@ -1,0 +1,1 @@
+nmax=17 lmax=3 K=514 rmax=867 N=24000 [1005s] -> debug/data/p60_Tp_l3_n17_c3_N24000.npz

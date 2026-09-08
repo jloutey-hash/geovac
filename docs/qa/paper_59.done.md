@@ -13,7 +13,20 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-59 scope + deltas + watch-notes.
 
-> **STATUS: CERTIFIED ✅ 2026-08-17 — FULL certifying run #4 = PASS** (calibrated 8/8 sens,
+> **STATUS: RE-RUN 2026-09-07 — clean on this paper; NOT re-certified.**
+> `/qa` (PI-invoked). Deterministic layer green on scope `paper_59`; no
+> content defect found in the paper itself. One **instrument** gap closed:
+> **C21 examined ZERO annotations here** — a PASS carrying no information.
+> The salience report was no help, since it lists only multi-document
+> numerals and its four "measurement-shaped" candidates on this paper were
+> bibliography volume/page numbers (145, 151, 286, 376). The real quantity
+> had to be read out of the text: the three-center ERI ground truth
+> $(XY|XZ) = 0.204941722$, now registered and annotated (C21: 1 annotation
+> checked). `\gvq` was undefined in this file and has been added — caught by
+> C10 before it shipped. Done-record gates were running under `--gate group2`,
+> which does not contain this paper; now `--gate paper_59`.
+>
+> *(superseded — historical)* **CERTIFIED ✅ 2026-08-17 — FULL certifying run #4 = PASS** (calibrated 8/8 sens,
 > 0 FP; four dimensions incl. C9; completeness-critic clean; zero genuine non-seed MATERIAL).
 > Cert arc: first-cert FULL = FAIL → DELTA #1 fallback = CLEAN-DELTA → FULL #2 = FAIL (PSLQ
 > under-witness) → remediated → FULL #3 = FAIL (thin: three-master eq:pf coverage) → remediated →
@@ -32,12 +45,18 @@
 - **Paper 59** — `papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex`
   ("The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel Moment:
   Genus One at the Third Center in Momentum-Space Slater Theory").
-- **C9 (synthesis) = N/A this run.** Paper 59 has **no footprint in the group2
-  synthesis** (verified: the only "59" hit there is an unrelated rotational constant
-  $B_e=59.5\,\mathrm{cm}^{-1}$). Its sole external reference is Paper 56's
-  `rem:paper59_cm` remark (group3; Paper 56 already certified). C9 is therefore not a
-  gating dimension for this cert; the Paper-56-remark ↔ Paper-59 consistency is checked
-  lightweight under **C7** instead.
+- **C9 (synthesis) = GATING (corrected 2026-09-07).** This record said until then:
+  *"N/A this run. Paper 59 has no footprint in the group2 synthesis (verified: the only
+  '59' hit there is an unrelated rotational constant $B_e=59.5\,\mathrm{cm}^{-1}$)."*
+  **That premise was true when frozen (2026-08-17) and is now false.** The group2
+  synthesis gained `\subsection{The transcendence frontier at the third center
+  (Paper~59)}` (L666–681) plus abstract, open-questions and bibitem loci on 2026-09-06
+  (v5.10.6). A scope exclusion inherited from a premise dies with the premise: C9 is a
+  **gating dimension** for Paper 59, it was **not exercised** in the FULL run of
+  2026-09-07, and that alone forced INCONCLUSIVE. The class is general — nothing in the
+  apparatus audits a frozen DoD against the paper it certifies, so a stale premise reads
+  from outside exactly like a passed criterion.
+  Paper 56's `rem:paper59_cm` remark stays a lightweight **C7** check as before.
   - **STANDING FOLLOW-UP (PI direction 2026-08-17, NOT part of this run):** fold Paper 59
     into the **group3-foundations synthesis** (its natural home via the Paper 56
     cosmic-Galois / Tannakian-substrate tie). To be done as a separate reviewed task
@@ -47,7 +66,8 @@
   Paper 56/58 (certified). Trunk papers (0/1/7/14/18/34) canonical; in scope only where
   Paper 59 restates them (C7).
 
-**Deterministic `--gate`:** `group2` (Paper 59 lives under `group2_quantum_chemistry/`).
+**Deterministic `--gate`:** `paper_59`.
+  Note the scope is the SINGLE-PAPER one, not `group2`: `qa_scopes.py` deliberately excludes 58/59/60 from `group2` (they are their own cert targets), so the `--gate group2` this record carried until 2026-09-07 examined NOTHING for the paper it certifies.
 
 ## Dimensions exercised (ALL, one invocation — FULL run, first cert of a fresh target)
 
@@ -71,9 +91,13 @@
   2 seeds). **HIGH-FABRICATION-RISK SURFACE** — the largest, most specialized citation
   surface in the corpus (frontier amplitudes + number theory the PM has not
   independently grounded). Prioritize the **load-bearing** cites (below).
-- **Synthesis faithfulness (C9)** — **N/A** (no synthesis carries Paper-59 claims;
-  see Scope).
-- **Deterministic (C10–C18)** — the step-1 scripts, `--gate group2`.
+- **Synthesis faithfulness (C9)** — **GATING (corrected 2026-09-07; this line
+  said N/A until then).** The v5.10.6 relocation gave the group2 synthesis a live
+  Paper-59 surface, so the premise the N/A rested on is gone. See the C9 entry in
+  the criteria block above for the full correction; the scope now carries
+  `synthesis/group2_quantum_chemistry_synthesis.tex` and `--gate paper_59`
+  resolves to 2 files.
+- **Deterministic (C10–C18)** — the step-1 scripts, `--gate paper_59`.
 - **Completeness-critic** ×1 (FULL run).
 
 ## Branch-defining criterion (SWAPPED, PI direction 2026-08-17): transcendence-tier + open-frontier honesty
@@ -119,9 +143,23 @@ a new number. The reviewers must verify ALL of:
    says so — verify the hedge survives). The cosmic-Galois / mixed-elliptic-motive
    *placement* is an OBSERVATION, not a theorem. *(Goalpost updated 2026-08-21,
    v4.106.x delta remediation, superseding the frozen framing:)* the quadratic-relation
-   intersection form was CLOSED SYMBOLICALLY in v4.97.0 (B = pi*Omega forced; Galois in
-   Sp4(Z); backed by `test_intersection_form_*` legs) — [SYMBOLIC] prose is now correct,
+   intersection form was CLOSED SYMBOLICALLY in v4.97.0 (B = pi*Omega forced; ~~Galois in
+   Sp4(Z)~~; backed by `test_intersection_form_*` legs) — [SYMBOLIC] prose is now correct,
    not an inflation; only the *placement* (Eisenstein/CM vs cusp-form) stays OBSERVATION.
+
+   > **CORRECTED 2026-09-07 (`/qa paper_61`, two reviewers converging independently).**
+   > The struck clause was FALSE, and this goalpost *ratified* it — which is why
+   > it is graded LARGE: a `.done.md` is what the next certifying run measures
+   > against, so a reviewer reading this line would have restored the defect on
+   > the file's own authority. Correct form: **monodromy in Sp4(Z), differential
+   > Galois in Sp4(C)**. Sp4(Z) is discrete, so a Zariski-closed subgroup of
+   > GL_4(C) inside it is finite, forcing every solution algebraic — contradicting
+   > the irregular singularity at infinity (Poincare rank 1) and the exponential
+   > torus (C*)^2 that Paper 59:607 establishes. The backing variable is literally
+   > `_L4_MONODROMY` and the test asserts `M0^T Omega M0 = Omega`, a monodromy
+   > statement. **Nothing numeric changes** — B = pi*Omega and the integral
+   > structure stand; only the group the containment is a statement ABOUT was
+   > wrong. Registry entry: `p61-galois-in-sp4-z`.
 6. **exact ≠ accurate (inherited from Paper 58 W1).** Closed-form / π-free / weight-one /
    momentum-native-evaluator content is a *decidability / diagnosis* result, NOT an
    accuracy improvement. §sec:scope must carry this; any "exact ⇒ better energy / more
@@ -165,8 +203,11 @@ a new number. The reviewers must verify ALL of:
   content is the rational modulus map + in-domain CM fibres, "not an exotic level."
 - **W6 — quadratic period relations [SYMBOLIC Wronskian + MEASURED relations].**
   $W(D)=W_0 D^{-2}$ is [SYMBOLIC] (Abel). $B[s_K,s_I]=-\pi$, $B[s_K,s_J]=0$,
-  $B[s_I,s_J]=2\pi$ are [MEASURED, 25 digits]. The Broadhurst–Mellit/FSY identification
-  is OBSERVATION. *(Updated 2026-08-21: the intersection-form structure itself was
+  $B[s_I,s_J]=2\pi$ are [MEASURED, 25 digits]. The Broadhurst–Roberts/FSY identification
+  is OBSERVATION. *(Renamed 2026-09-07: Broadhurst–**Mellit** names the
+  DETERMINANT formulae; the QUADRATIC relations are Broadhurst–**Roberts**,
+  proved by Fresán–Sabbah–Yu and independently by Zhou. Registry:
+  `p61-broadhurst-mellit-quadratic`.)* *(Updated 2026-08-21: the intersection-form structure itself was
   closed symbolically in v4.97.0 — B = pi*Omega forced, [SYMBOLIC] is the correct tier.)*
   Verify tiers not inflated beyond these.
 - **W7 — not-a-cusp-form-L-value argument [OBSERVATION].** The $\dim S_k(\Gamma(2))$
@@ -225,7 +266,7 @@ a new number. The reviewers must verify ALL of:
    periods (3 regular satisfy eq:pf; residual precision as stated in the paper,
    currently ~10⁻¹⁵ per-master); Wronskian $W(D)=W_0 D^{-2}$ [SYMBOLIC,
    Abel]; quadratic relations $B[s_K,s_I]=-\pi$, $B[s_K,s_J]=0$, $B[s_I,s_J]=2\pi$
-   [MEASURED 25 digits]; Broadhurst–Mellit/FSY type + intersection-form = OBSERVATION /
+   [MEASURED 25 digits]; Broadhurst–Roberts/FSY type + intersection-form = OBSERVATION /
    "one step short of a theorem"; NOT a cusp-form $L$-value (Eisenstein/CM period)
    [OBSERVATION].
 
@@ -376,7 +417,10 @@ the real corpus.
   (real fold says "open" + "corroborates rather than lifts … not filled") — every MATERIAL there was a seed.
   Two-way UPGRADE surfaced: `test_modulus_pf_annihilates_periods` achieves ~5e-32 vs the quoted 10⁻¹⁸ tag —
   could carry a tighter digit count. NITs: citation "Broadhurst–Mellit" vs the FSY-native "Broadhurst–Roberts"
-  quadratic-relations naming; the two `test_paper59_*` files well-cited. Completeness-critic DEFERRED (FAIL).
+  quadratic-relations naming **[APPLIED 2026-09-07 by `/qa paper_61` — logged here as a
+  NIT on 2026-08-21, still unapplied when a citation reviewer had to
+  re-find it and it was swept across 9 loci in 4 documents. A NIT that names a real defect
+  is debt, not noise]**; the two `test_paper59_*` files well-cited. Completeness-critic DEFERRED (FAIL).
   Seed key `debug/qa/paper_59_certrun2_seed_key.json`; worktree removed, all 8 seeds verified absent from the
   real corpus. **Path to cert:** remediate the backing under-witnessing — for each C8 `[MEASURED, N-digit]`
   headline, either witness N in a permanent test (run the momentum test at the finer grid asserting ~1e-14;

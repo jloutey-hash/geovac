@@ -1,0 +1,6 @@
+nmax=5 lmax=4 K=  35 Mtot=   45.38693 Moff=   13.58623 Tpfull=   18.56054 T0=  36.77501 [2s]  local: 
+nmax=6 lmax=5 K=  56 Mtot=   68.21795 Moff=   24.00428 Tpfull=   30.77301 T0=  50.98240 [8s]  local: M_total=0.8670 M_off=1.2110 Tp_full=1.0757 T0=0.6950
+nmax=7 lmax=6 K=  84 Mtot=   97.40627 Moff=   38.74505 Tpfull=   47.56638 T0=  67.48256 [35s]  local: M_total=0.8785 M_off=1.1808 Tp_full=1.0740 T0=0.6915
+nmax=8 lmax=7 K= 120 Mtot=  133.78546 Moff=   58.63955 Tpfull=   69.76986 T0=  86.27621 [56s]  local: M_total=0.8897 M_off=1.1619 Tp_full=1.0740 T0=0.6888
+nmax=9 lmax=8 K= 165 Mtot=  178.20600 Moff=   84.53640 Tpfull=   98.23061 T0= 107.36380 [128s]  local: M_total=0.9003 M_off=1.1486 Tp_full=1.0743 T0=0.6867
+nmax=10 lmax=9 K= 220 Mtot=  231.60360 Moff=  117.36979 Tpfull=  133.88166 T0= 130.74567 [268s]  local: M_total=0.9110 M_off=1.1407 Tp_full=1.0763 T0=0.6849

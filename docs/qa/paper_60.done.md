@@ -13,7 +13,116 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-60 scope + deltas + watch-notes.
 
-> **STATUS: CERTIFIED ✅ 2026-08-18 — final FULL certifying run = PASS.** Over the post-engine-sprint
+> **STATUS: 2026-09-07 — FAIL, TWICE; NOT re-certified.** Remediated on the
+> second pass. The paper's central claim CHANGED, it was not corrected.
+>
+> The morning run found `eq:sublinear` overclaimed (a window fit stated as a
+> regime, with the mechanism attributed to the wrong block) and remediated it.
+> **That remediation was then itself refuted the same day** — its replacement
+> numbers were measured on the same truncated radial domain as the claim they
+> replaced. `geovac/sturmian_secular.py` fixes `R_MAX = 60.0` while the
+> Goscinskian mixed pairs carry orbitals reaching 100–200 bohr, and
+> `hyd_radial` renormalises the truncated stub to unit norm — manufacturing a
+> compact pseudo-orbital whose coupling is O(1) where the true one decays as
+> `n^-2`. The error therefore GROWS with K, the fit variable (×1.011 → ×1.205
+> across the fitted range), which is what produced the apparent rising slope.
+>
+> **Settled by two independent routes agreeing to 4 decimal places** — exact
+> grid-free Slater algebra (dps 60–70) and converged quadrature under the derived
+> rule `R_MAX ≥ 3n_max²`. Both also reproduce the paper's published numbers when
+> run on the old domain, so this is not a pipeline difference.
+>
+> | leg | window | published | **converged** |
+> |---|---|---|---|
+> | `‖M‖₁` | 74–164 | 0.84 | **0.8193** |
+> | `‖M‖₁` | 74–340 | 0.854 | **0.8058** |
+> | `‖T′‖₁^off` | 74–340 | 1.05 | **0.9368** |
+> | `‖T′‖₁` full | 74–340 | (prose: superlinear) | **0.8750** |
+> | local slopes | 100–514 | rising to 0.906 | **falling to 0.766** |
+>
+> **What the paper now says.** The sublinearity belongs to the *basis-growth
+> rule* (fixed `l_max`), not to the isoenergetic construction — grown as full
+> hydrogenic shells the same construction gives `K^1.07` and a *rising* exponent.
+> And the cheap rule is the one that stops converging:\ it saturates at
+> **6.44 mHa, 4.0× chemical accuracy**, at any basis size. Cost growth and
+> attainable accuracy are one fact. `‖T⁰‖₁` is now `[SYMBOLIC]` and is not a
+> power law at all — `Z√(2K)·ln(K/2)`, asymptotic exponent 1/2.
+>
+> **Second LARGE, a different claim.** `cond(S)` “4 → 3673” is entirely a domain
+> artifact (converged: 4.07 → 16.0 → 23.5, growing ~0.12·K — an ordinary Gram
+> matrix). It switches on exactly where `n_max²` first exceeds `R_MAX`, and every
+> domain agrees to 4 digits below that point. **`test_sturmian_secular.py`
+> asserted `2000 < cond < 6000`** — it pinned the artifact and would have failed
+> on repair. Withdrawn from the paper; test replaced and fire-tested. The
+> SEPARATE `eq:blowup` cost result (L² Löwdin LCU 1-norm ~Q^3.33 vs Q^1.19,
+> through a faithful Jordan–Wigner LCU) is a different quantity on a different
+> route and is **untouched** — the paper still has its obstruction.
+>
+> **Two guards retired for defending withdrawn claims:** the `cond(S)` test
+> above, and `test_paper60_sublinearity_is_carried_by_the_nuclear_diagonal`,
+> written that same morning, which asserted `p_off > 1.0`.
+>
+> ---
+>
+> ### Branch-defining criterion (REPLACED 2026-09-07)
+>
+> It is no longer “does the exponent name its window.” It is:
+>
+> **Every quantity in this paper must name its evaluation domain, its nuclear
+> charge, and its basis-growth family — and a run must verify the domain
+> satisfies `R_MAX ≥ 3n_max²` (App. A) before accepting any exponent.**
+>
+> The three axes are not decoration. `p_total` moves 0.947 (Z=½) → 0.717 (Z=30),
+> so **“0.84” was a helium number**; it moves ±0.05 with `l_max`; and it reverses
+> its drift under a different growth rule. Any quoted exponent missing one of the
+> three is a defect.
+>
+> **Restricted-evaluation is the top watch-note for this paper**, not a general
+> mandate: two successive remediations were both defeated by the same undeclared
+> restriction, and `E(1s²) = −729/256` is bit-identical at every domain, so the
+> module's own calibration cannot see it.
+>
+> *(superseded — historical)* **RE-RUN 2026-09-07 — FAIL (one LARGE), remediated.**
+> `/qa` (PI-invoked).
+>
+> **LARGE — `eq:sublinear` was stated as a regime, and its mechanism was
+> backwards.** Re-measured with the paper's own `gen_configs`/`solve` past its
+> largest fitted point (K = 164) to K = 340:
+>
+> | | window K ≤ 164 | extended K ≤ 340 |
+> |---|---|---|
+> | total ‖M‖₁ | **K^0.840** (reproduces the published 0.84) | K^0.854 |
+> | local slope | 0.838, 0.840, 0.841 | 0.850, 0.868, 0.882, **0.906** |
+> | nuclear diagonal T⁰ = Z·ΣR_ν | — | **K^0.704**, local slope FALLING |
+> | off-diagonal T′ (the "pure numbers") | — | **K^1.049**, SUPERlinear |
+>
+> So (i) 0.84 is a **window fit**, not an asymptotic regime — the exponent
+> trends toward 1; and (ii) the sublinearity is carried **entirely by the
+> nuclear diagonal**, while the pure-number block the paper credited is the
+> superlinear one. §7 (molecular) already said this correctly ("rides on the
+> clean diagonal T⁰"), so §4 contradicted §7 inside one document.
+> *What survives:* ‖M‖₁ does grow more slowly than the matrix dimension over
+> every computable basis, and the contrast with the L² superlinear inflation is
+> real. The encoding claim stands; its asymptotic reading and mechanism did not.
+>
+> Note for future runs: the corpus carried **three different windows** for this
+> one exponent — K = 9..100 (0.842, `test_sturmian_secular.py`), K ≤ 24 (0.77,
+> the self-contained sweep), K = 74..164 (0.84, the paper) — each reported as
+> "the" value. That is why the window is now part of the registered object.
+>
+> **Remediated:** abstract / intro / `eq:sublinear` / mechanism / §5 / conclusion
+> restated; new `eq:sublinear_split` records the T⁰/T′ split; group2 synthesis
+> block rewritten (it carried the bare "sublinear 1-norm" — the LARGE's second
+> locus) together with two SMALLs there ("the one genuine lever" → the paper
+> names **three**; the isoenergetic posing is **Avery's** and was uncredited);
+> 4 numeric-registry entries + 5 `\gvq` annotations (C21 was examining ZERO
+> here, now 8); C16 entry `p60-sublinear-as-regime` with `cited_by`, proven to
+> discriminate both ways; claim-matrix row re-tiered, split row added, three
+> uses of "asymptote" corrected; backing test
+> `test_paper60_sublinearity_is_carried_by_the_nuclear_diagonal` written as a
+> separate activity and fire-tested in both directions.
+>
+> *(superseded — historical)* **CERTIFIED ✅ 2026-08-18 — final FULL certifying run = PASS.** Over the post-engine-sprint
 > text: panel **FULLY CALIBRATED** (sensitivity **6/6** fresh seeds — code FC1 gutted-band + FC2
 > gutted-tolerance; citation FT1 gslw2019-wrong-ID + FT2 lowchuang2019-vol/year; claims FP1
 > beats-DF/THC + FP2 novelty-tier-flip), **specificity clean** (every reviewer independently recomputed
@@ -71,14 +180,23 @@
   ("The Generalized-Sturmian Secular Equation Block-Encodes Without a Metric:
   A Quantum-Algorithm Analysis, Metric-Free for Atoms and a Conditioning Frontier
   for Molecules").
-- **C9 (synthesis): OUT OF SCOPE** — Paper 60 has no group2-synthesis footprint yet
-  (verified by grep). If the PI wants a synthesis promotion written first, that is a
-  separate task; it is NOT part of this cert.
+- **C9 (synthesis): GATING (corrected 2026-09-07).** This record said until then:
+  *"OUT OF SCOPE — Paper 60 has no group2-synthesis footprint yet (verified by grep)."*
+  **True when frozen (2026-08-18), false now.** The group2 synthesis gained
+  `\subsection{The isoenergetic secular equation as a quantum algorithm (Paper~60)}`
+  (L692–716) plus L43/L76/L259/L778/L942–945/L981–982 and bibitem L1168 on 2026-09-06
+  (v5.10.6) — and that un-certified block already carries a defect the FULL run caught
+  from the other side: L703–706 attaches "that a symmetry-unique heavy atom reinstates"
+  to the *lever* where Paper 60 says such a center reinstates the **metric cost**, i.e.
+  a documented negative inverted into a positive by a relative clause.
+  C9 is therefore a **gating dimension** for Paper 60 and was **not exercised** in the
+  FULL run of 2026-09-07. See the identical correction in `paper_59.done.md`.
 - **Out of scope:** the other group2 papers (unchanged since 2026-06-28 cert). Papers
   58/59 (`loutey_paper58`/`loutey_paper59`) are CERTIFIED; in scope only as cross-refs
   (C7). Trunk papers (0/1/7/14/18) canonical; in scope only where Paper 60 restates them.
 
-**Deterministic `--gate`:** `group2` (Paper 60 lives under `group2_quantum_chemistry/`).
+**Deterministic `--gate`:** `paper_60`.
+  Note the scope is the SINGLE-PAPER one, not `group2`: `qa_scopes.py` deliberately excludes 58/59/60 from `group2` (they are their own cert targets), so the `--gate group2` this record carried until 2026-09-07 examined NOTHING for the paper it certifies.
 **C17 note:** the headline-number registry currently has **NO Paper-60 families** — they
 must be ADDED on freeze (K^0.84 sublinear exponent, Q^3.33/Q^1.19 inflation, N^1.85/N^1.70
 SW/L² conditioning, N^1.97 water, n_orb^2.2 molecular 1-norm, the tab:resource d_inv/kappa
@@ -112,10 +230,15 @@ row family, He −2.847/−2.897/−2.90372).
   `cks2017`, `gslw2019`, `lowchuang2019` (QSVT / qubitization primitives); `calderini2012`;
   `herbst2019` (Herbst–Avery–Dreuw CS-HF). **Verify `rajchel2025` (W7 — known title/author
   drift).**
-- **Synthesis faithfulness (C9)** — **NOT EXERCISED (out of scope, no footprint).** Recorded
-  as a scope exclusion, NOT a skipped gating dimension: C9 does not gate this verdict
-  because Paper 60 makes no synthesis claim to audit.
-- **Deterministic (C10–C18)** — the step-1 scripts, `--gate group2`. **Add Paper-60 C17
+- **Synthesis faithfulness (C9)** — **GATING (corrected 2026-09-07; this line said
+  “NOT EXERCISED, out of scope, no footprint” until then).** The premise was false by
+  the time it was relied on: the group2 synthesis carries a Paper-60 block, and on
+  2026-09-07 that block held the LARGE's second locus — the bare “sublinear 1-norm”
+  with none of the paper's qualification — plus two SMALLs (“the one genuine lever”
+  where the paper names three; Avery uncredited). A dimension recorded as having no
+  footprint held three defects. See the C9 entry in the criteria block above; the
+  scope now carries `synthesis/group2_quantum_chemistry_synthesis.tex`.
+- **Deterministic (C10–C18)** — the step-1 scripts, `--gate paper_60`. **Add Paper-60 C17
   families first** (see C17 note).
 - **Completeness-critic** ×1 (FULL run).
 

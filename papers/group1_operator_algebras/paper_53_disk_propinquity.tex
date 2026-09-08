@@ -88,6 +88,9 @@ collaboratively; all theorems, design choices, and editorial decisions
 are the author's responsibility.}}
 \date{May 2026 (preprint)}
 
+\newcommand{\Lebesgue}{\mathcal{L}}
+\providecommand{\normone}[1]{\lVert #1 \rVert_{1}}
+
 \begin{document}
 \maketitle
 
@@ -139,8 +142,10 @@ de-compactified cone), the band-limited Bochner--Riesz Berezin
 reconstructs every Schwartz observable with all four properties at an
 algebraic rate. Assembling Latr\'emoli\`ere's pointed/proper propinquity
 from these ingredients --- properness by Arzel\`a--Ascoli, reach the
-reconstruction rate, height the gradient-non-expansive Bochner--Riesz
-distortion --- establishes plane (hence de-compactified
+reconstruction rate, height the Bochner--Riesz Lipschitz distortion (a
+finite Lebesgue constant $>1$, \emph{not} the non-expansive $1$ an earlier
+version claimed;\ Remark~\ref{rem:height_constant}, where the consequence for
+the assembly is left open) --- establishes plane (hence de-compactified
 disk-with-cone) convergence at the qualitative-rate level, in
 van~Suijlekom's state-space Gromov--Hausdorff sense; the strictly
 stronger \emph{Latr\'emoli\`ere} propinquity carries the same named
@@ -246,7 +251,9 @@ de-compactification.
 \item \textbf{(Plane propinquity, \S\ref{subsec:assembly}).} Assembling
 Latr\'emoli\`ere's pointed/proper propinquity from the plane reconstruction
 (properness by Arzel\`a--Ascoli, reach the reconstruction rate, height the
-gradient-non-expansive Bochner--Riesz distortion) establishes plane
+Bochner--Riesz Lipschitz distortion --- a finite Lebesgue constant $>1$, not
+the non-expansive $1$ claimed until 2026-09-07;\ see
+Remark~\ref{rem:height_constant}) establishes plane
 convergence $\Lprop(\Tcal_{\Lambda},\Tcal_{\infty})\le C\gamma
 _{\Lambda}\to0$ (Theorem~\ref{thm:plane_propinquity}) at the qualitative-rate
 level, in van~Suijlekom's state-space Gromov--Hausdorff sense, with the
@@ -663,10 +670,9 @@ Berezin~\eqref{eq:plane_berezin} and the band-limit projection. Then:
 (ii) the reach is the approximate identity of Theorem~\ref{thm:plane},
 $\supnorm{\Berez_{\Lambda}^{\R^{2}}(f)-f}\le\gamma_{\Lambda}\supnorm{\nabla f}$
 with $\gamma_{\Lambda}\to0$;
-(iii) the height is the Lipschitz distortion, bounded because the
-Bochner--Riesz mean is gradient-non-expansive, $\supnorm{\nabla
-(\Berez_{\Lambda}^{\R^{2}}f)}\le\supnorm{\nabla f}$ (verified numerically,
-ratio $\le1$ at every $\Lambda$, rising to $1$ as $\Lambda\to\infty$);
+(iii) the height is the Lipschitz distortion, bounded by the kernel's
+$L^{1}$ norm, $\supnorm{\nabla(\Berez_{\Lambda}^{\R^{2}}f)}\le
+\Lebesgue_{s}\,\supnorm{\nabla f}$;
 (iv) positivity, contractivity and unitality (Theorem~\ref{thm:plane}) make
 $\Berez_{\Lambda}^{\R^{2}}$ an admissible tunneling map. The pointed/proper
 assembly~\cite{latremoliere2016, latremoliere2025} then bounds
@@ -674,11 +680,85 @@ $\Lprop\le C\max(\text{reach},\text{height contribution})=C\gamma_{\Lambda}
 \to0$.
 \end{proof}
 
+\begin{remark}[The height constant is not $1$ --- corrected 2026-09-07]
+\label{rem:height_constant}
+\textbf{[MEASURED]} An earlier version of step~(iii) asserted that
+$\Berez_{\Lambda}^{\R^{2}}$ is \emph{gradient-non-expansive},
+$\supnorm{\nabla(\Berez_{\Lambda}^{\R^{2}}f)}\le\supnorm{\nabla f}$,
+``verified numerically, ratio $\le1$ at every $\Lambda$''. That is false over
+the unit-Lipschitz ball. $\Berez_{\Lambda}^{\R^{2}}$ is a radial convolution,
+so $\nabla(\Berez f)=\Berez(\nabla f)$ and Young's inequality makes the
+\emph{sharp} constant the kernel's $L^{1}$ norm
+$\Lebesgue_{s}:=\normone{K_{s}}$, which equals $1$ only if $K_{s}\ge0$ a.e.
+The two-dimensional Bochner--Riesz kernel
+$K_{s}(r)\propto J_{s+1}(r)/r^{s+1}$ oscillates, hence is negative somewhere,
+hence $\Lebesgue_{s}>1$ strictly at every finite $s$. Integrating over Bessel
+half-waves:
+\[
+\begin{array}{l|cccccccc}
+s & 0.6 & 0.75 & 1 & 1.5 & 2 & 3 & 5 & 8\\\hline
+\Lebesgue_{s} & 5.72 & 3.23 & 2.01 & 1.42 & 1.23 & 1.09 & 1.02 & 1.004
+\end{array}
+\]
+Just above the critical index the gain is large, and it decreases to $1$ only
+as $s\to\infty$. Two further points. First, $\Lebesgue_{s}$ is
+\emph{$\Lambda$-independent} by scaling, so the reported ratio ``rising to $1$
+as $\Lambda\to\infty$'' cannot have been the operator's gradient gain at all
+--- that quantity does not move with $\Lambda$; it was a property of the
+particular Gaussian test functions. Second, this is \emph{not} Paper~38's
+withdrawn Lemma~L5 transported here:\ L5's height was a
+reconstruction-\emph{defect} quantity, refuted by a finite-band $f$ with
+$B(f)=0$, and that same $f$ gives $\supnorm{\nabla(\Berez f)}=0$ here, which
+\emph{satisfies} non-expansiveness. Different quantity, different failure mode.
+
+\textbf{[OPEN --- the named constituents are not the framework's]} Checked
+against the primary sources (2026-09-07), the question ``what does a height
+constant $>1$ cost the bound?'' is not the right question, because the
+Lipschitz distortion of the reconstruction is not a constituent of the
+propinquity in \emph{any} version of the framework:
+\begin{itemize}
+\item The dual propinquity is an infimum, over tunnels, of the \emph{extent}
+  $\chi(\tau)=\max_{j}\mathrm{Haus}_{\mathrm{mk}_{L}}\bigl(\{\varphi\circ
+  \pi_{j}:\varphi\in\mathcal{S}(\mathcal{A}_{j})\},\ \mathcal{S}(\mathcal{D})
+  \bigr)$ --- a Hausdorff distance between \emph{state spaces}
+  \cite{latremoliere_metric_st}.
+\item In the earlier dual construction the two quantities are the reach and the
+  \emph{depth}, with length $\max\{\rho(\tau),\delta(\tau)\}$;\ both are again
+  state-space Hausdorff distances. ``Height'' belongs to the still earlier
+  \emph{bridge}-based quantum propinquity, where it too is a state-space
+  quantity. Latr\'emoli\`ere records that reach and height were the original
+  construction and that the extent ``has better properties''
+  \cite{latremoliere_metric_st}.
+\item The pointed/proper paper cited here for this transport,
+  \cite{latremoliere2025}, uses $M$-tunnels whose maps are \emph{topographic
+  quantum $M$-isometries}, measured by an extent that is the maximum of a
+  state-space condition, a base-point Monge--Kantorovich distance, and
+  conditions on the distinguished element. The words ``height'' and ``depth''
+  do not occur in it.
+\end{itemize}
+In every version the constituents are \emph{distances required to vanish}, so
+a statement of the form ``the height is $\le1$'' was never the right shape to
+discharge the requirement:\ a ratio of $1$ is not a distance of $0$. Where the
+Lipschitz behaviour of $\Berez_{\Lambda}^{\R^{2}}$ genuinely bears is on
+whether the tunnel's maps meet the isometry/quotient condition on the
+Lipschitz seminorm; normalising to meet it propagates $\Lebesgue_{s}$ into the
+extent, which would leave convergence intact at a rate
+$\Lebesgue_{s}\gamma_{\Lambda}$. \emph{That is a rebuild of step~(iii) around
+the extent, not a substitution of constants, and it has not been done here.}
+Until it is, Theorem~\ref{thm:plane_propinquity} should be read as carrying an
+unproved constituent. The reach leg (Theorem~\ref{thm:plane}) and the four
+reconstruction properties are untouched, and they are exactly the ingredients
+an extent estimate would be built from.
+\end{remark}
+
 \begin{remark}[Honest scope of the assembly]
 \label{rem:assembly_scope}
 The load-bearing ingredients --- properness (Lemma~\ref{lem:proper}), the four
-reconstruction properties with the reach rate (Theorem~\ref{thm:plane}), and the
-gradient-non-expansive height bound --- are established here. The detailed
+reconstruction properties with the reach rate (Theorem~\ref{thm:plane}) --- are
+established here. The height bound is \emph{not}:\ see
+Remark~\ref{rem:height_constant}, where the claimed non-expansiveness is
+corrected to a finite Lebesgue constant $\Lebesgue_{s}>1$ and its
+consequence for the assembly is left open. The detailed
 \emph{bookkeeping} of the pointed/proper propinquity (the base-point-compatible
 tunneling and the local-uniformity of its reach and height) is transported from
 Latr\'emoli\`ere's framework~\cite{latremoliere2016, latremoliere2025}, in the
@@ -756,6 +836,13 @@ F.~Latr\'emoli\`ere, ``The dual Gromov--Hausdorff propinquity,''
 \bibitem{latremoliere2016}
 F.~Latr\'emoli\`ere, ``Quantum metric spaces and the Gromov--Hausdorff
 propinquity,'' \textit{Contemp.~Math.}\ \textbf{676} (2016), 47--133.
+
+\bibitem{latremoliere_metric_st}
+F.~Latr\'emoli\`ere, ``The Gromov--Hausdorff propinquity for metric
+spectral triples,'' \textit{Adv.~Math.}\ \textbf{404} (2022), Paper
+No.~108393, 56\,pp.;\ preprint arXiv:1811.10843. \emph{Source for the
+extent-based definition of the dual propinquity, and for the statement that
+reach and height were the original construction which the extent supersedes.}
 
 \bibitem{latremoliere2025}
 F.~Latr\'emoli\`ere, ``The quantum Gromov--Hausdorff hypertopology on

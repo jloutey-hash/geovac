@@ -1,6 +1,6 @@
 """Paper 61 (companion of Paper 59) sec:bessel_algebra -- the Bessel-moment period algebra of the
 integrated three-centre observable: master family, Wronskian determinant, the
-Broadhurst-Mellit / Fresan-Sabbah-Yu quadratic period relations, and the
+Broadhurst-Roberts / Fresan-Sabbah-Yu quadratic period relations, and the
 critical-L-value negative.
 
 Self-contained (no debug/ import, per the transient-dir policy).  Ports the
@@ -52,7 +52,7 @@ def test_paper59_gamma2_first_cusp_form_is_weight_6():
     assert dim_S(8) == 2
 
 
-# --- master family + the {-pi, 0, 2pi} Broadhurst-Mellit / FSY period pairing ---
+# --- master family + the {-pi, 0, 2pi} Broadhurst-Roberts / FSY period pairing ---
 
 def _sK(D, rho, k):     # [1,inf): K0-sector, the physical N ~ e^{-D}
     def f(x):
@@ -117,7 +117,7 @@ def _concomitant(y, z, D, rho):
 @pytest.mark.slow
 def test_paper59_period_pairing_minus_pi_0_2pi():
     """[MEASURED, 25 digits] The Lagrange bilinear concomitant of the (self-adjoint)
-    L4 on the master periods is the Broadhurst-Mellit / FSY quadratic relation, D- and
+    L4 on the master periods is the Broadhurst-Roberts / FSY quadratic relation, D- and
     rho-independent: B[K,I] = -pi, B[K,J] = 0, B[I,J] = 2pi.  Checked at rho=1/2
     (all three entries) and rho=1/4 (rho-independence of B[K,I]).
 
@@ -160,3 +160,72 @@ def test_paper59_all_three_regular_masters_satisfy_pf():
                 r = mp.mpf(rho)
                 for D in [mp.mpf('0.7'), mp.mpf(1), mp.mpf('1.6')]:
                     assert L4res(master, D, r) < mp.mpf(10) ** -14, (master.__name__, rho, D)
+
+
+def test_paper61_wronskian_constant_W0_is_pi_squared_over_rho_squared():
+    """[SYMBOLIC] Paper 61 eq:W0 -- the Wronskian CONSTANT is W_0 = pi^2/rho^2.
+
+    Abel's identity fixes only the D-dependence (W(D) = W_0 D^-2, the companion
+    test above).  W_0 itself is fixed by the branch-point data of
+    Q(x) = (x^2-1)(rho x^2 + 1 - rho): with branch points {+-1, +-i w},
+    w^2 = (1-rho)/rho,
+
+        sum_c x_c = 0                      (exponentials cancel)
+        prod_c Q'(x_c) = -16 w^2           => prod_c A_c = pi^2 / (4 i w)
+        Vandermonde prod_{a<b}(x_b - x_a) = 4 i w / rho^2
+        =>  W_0 = pi^2 / rho^2
+
+    up to the thimble ordering/orientation sign -- the branch of
+    sqrt(1-rho)/sqrt(rho-1) = -i on 0 < rho < 1.
+
+    This RETIRES the claim that "the transcendence of the individual masters
+    cancels in their determinant"
+    [retracted 2026-09-07: p61-w0-transcendence-cancels].
+    It does not cancel:  pi^2 is SQUARED, and W_0 depends on rho.
+
+    Deliberately checks rho-DEPENDENCE and the EXPONENT, not just the value at
+    one rho:  the retired reading is exactly a constant W_0, and the existing
+    Wronskian test normalises W_0 to 1 by construction, so a single-point value
+    check would be satisfied by the very belief this test exists to exclude."""
+    import sympy as sp
+
+    x, rho = sp.symbols('x rho', positive=True)
+    w = sp.sqrt((1 - rho) / rho)
+    Q = (x ** 2 - 1) * (rho * x ** 2 + 1 - rho)
+    Qp = sp.diff(Q, x)
+    xs = [sp.Integer(1), sp.Integer(-1), sp.I * w, -sp.I * w]
+
+    # the four branch points really are the roots of Q
+    for c in xs:
+        assert sp.simplify(Q.subs(x, c)) == 0
+
+    # the three ingredients, each independently
+    assert sp.simplify(sum(xs)) == 0
+    assert sp.simplify(sp.prod([Qp.subs(x, c) for c in xs]) + 16 * w ** 2) == 0
+    vdm = sp.prod([xs[b] - xs[a] for a in range(4) for b in range(a + 1, 4)])
+    assert sp.simplify(vdm - 4 * sp.I * w / rho ** 2) == 0
+
+    W0 = sp.simplify(sp.pi ** 2 / sp.sqrt(sp.prod([Qp.subs(x, c) for c in xs])) * vdm)
+
+    sym, vals = {}, {}
+    for r in (sp.Rational(3, 10), sp.Rational(1, 2), sp.Rational(71, 100)):
+        got = sp.nsimplify(sp.simplify(W0.subs(rho, r)))
+        want = sp.pi ** 2 / r ** 2
+        assert sp.simplify(got - want) == 0, (r, got, want)
+        sym[r], vals[r] = got, sp.N(got, 30)
+
+    # (b) rho-DEPENDENCE: rejects W_0 = 1 and every other constant outright
+    r1, r2 = sp.Rational(3, 10), sp.Rational(71, 100)
+    ratio = vals[r1] / vals[r2]
+    assert abs(ratio - 1) > sp.Rational(1, 2), "W_0 must not be rho-independent"
+
+    # (c) the EXPONENT is -2, not -1 or -3: log-ratio of the two samples
+    expo = sp.log(ratio) / sp.log(r2 / r1)
+    assert abs(sp.N(expo) - 2) < 1e-25, ("rho-exponent", sp.N(expo))
+
+    # (d) pi^2 is present SYMBOLICALLY, i.e. the transcendence did NOT cancel.
+    # Checked on the symbolic value, not the Float: W_0/pi^2 must be the exact
+    # rational 1/rho^2, which is what "does not cancel" means here.
+    half = sp.Rational(1, 2)
+    assert sp.simplify(sym[half] / sp.pi ** 2 - 4) == 0
+    assert sp.simplify(sym[half] / sp.pi ** 2).is_rational is True

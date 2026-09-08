@@ -162,7 +162,9 @@ def test_paper60_single_config_helium_variational():
 
 
 # --------------------------------------------------------------------------
-# eq:sublinear — multi-config lowers E and the 1-norm grows SUBLINEARLY in K
+# eq:sublinear — multi-config lowers E and the 1-norm grows more slowly
+# than K over the computed window (0.84 fitted on K = 74..164; NOT an
+# asymptotic regime -- see the split test below for which block carries it)
 # --------------------------------------------------------------------------
 def _he_secular(r, dr, nmax, Z=2.0):
     def ov(a, b):
@@ -209,7 +211,9 @@ def test_paper60_multiconfig_lowers_and_sublinear_onenorm():
     assert Es[0] > Es[1] > Es[2]
     assert abs(Es[0] - (-2.84766)) < 3e-3           # single config = variational
     assert Es[-1] < -2.86 and Es[-1] > -2.90372     # heads toward s-limit, above exact
-    # 1-norm grows SUBLINEARLY in K (exponent < 1), the opposite of L2-Lowdin
+    # 1-norm grows more slowly than K (exponent < 1) over the computed range,
+    # the opposite of L2-Lowdin.  The exponent is NOT asymptotically stable
+    # (corrected 2026-09-07); the pinned claim is exponent < 1 here.
     p = np.polyfit(np.log(Ks[1:]), np.log(L1s[1:]), 1)[0]
     assert p < 1.0, f"1-norm exponent not sublinear: {p}"
 
@@ -395,11 +399,15 @@ def test_paper60_lgt0_angular_correlation_and_sublinear():
     Esp = _ground_E(_build_M_l(r, dr, sp_cfg))
     assert Esp < Es - 1e-3, f"p-channel did not lower E: {Es} -> {Esp}"
     assert Esp < -2.88            # heads toward exact -2.90372, past the s-limit
-    # the block-encoding 1-norm grows SUBLINEARLY through the full s+p+d+f basis (eq:sublinear).
-    # >=5 points; the fitted exponent sits in the paper's 0.78 (s-only) .. 0.84 (asymptotic) band
-    # and is robustly below 1.  (The exact full-basis 0.84 is a large-K~164 asymptote beyond the
-    # reach of this self-contained sweep, which reaches ~0.77 at K<=24; the pinned claim is the
-    # sublinear regime + band, not the asymptotic value.)
+    # the block-encoding 1-norm grows more slowly than K through the full s+p+d+f
+    # basis (eq:sublinear).  >=5 points; the fitted exponent sits in the paper's
+    # 0.78 (s-only) .. 0.84 (full basis) band and is robustly below 1.
+    # NOT an asymptote (corrected 2026-09-07, /qa): 0.84 is a fit over the WINDOW
+    # K = 74..164, and the local slope keeps rising past it -- 0.850 at K=202,
+    # 0.868 at 244, 0.882 at 290, 0.906 at 340.  This self-contained sweep reaches
+    # ~0.77 at K<=24; the pinned claim is the sublinear band over the computed
+    # range, and NOT any asymptotic value.  The mechanism is pinned separately by
+    # test_paper60_sublinearity_is_carried_by_the_nuclear_diagonal.
     sizes, norms = [], []
     for (lmax, span) in [(0, 2), (0, 3), (1, 3), (2, 3), (3, 3)]:
         cfg = _cfgs_upto(lmax, span)
@@ -407,6 +415,74 @@ def test_paper60_lgt0_angular_correlation_and_sublinear():
         sizes.append(len(cfg)); norms.append(np.abs(Mx).sum())
     p = np.polyfit(np.log(sizes), np.log(norms), 1)[0]
     assert 0.6 < p < 0.95, f"atomic 1-norm exponent outside the sublinear 0.78-0.84 band: {p}"
+
+
+@pytest.mark.slow
+def test_paper60_split_is_box_sensitive_and_ordering_is_not():
+    """eq:sublinear_split -- which block is slowest, and why the box matters.
+
+    REPLACES test_paper60_sublinearity_is_carried_by_the_nuclear_diagonal
+    (2026-09-07). That guard asserted `p_off > 1.0` ("T' is superlinear") on the
+    production 60-bohr grid. Two independent routes -- exact grid-free Slater
+    algebra and converged quadrature under R_MAX >= 3*n_max^2 -- agree that the
+    converged value is 0.977 (K<=164) and 0.937 (K<=340), i.e. SUBLINEAR. The
+    old assertion held only because the box inflated that leg by about +0.07,
+    and it would have blocked the paper's correction.
+
+    What survives box-independently is the ORDERING: the nuclear diagonal
+    T^0 = Z*sum(R_nu) is the slowest-growing block. That is checked here on the
+    exact combinatorial sum, which needs no ERI, no grid and no engine.
+
+    The wrong answers this rejects:
+      (a) T^0 not being the slowest block -- the paper's mechanism;
+      (b) the 60-bohr box NOT inflating the off-diagonal leg, which would mean
+          the withdrawn 1.05 was real after all;
+      (c) a drifting config family (the K ladder is pinned).
+
+    NOT claimed: the T^0 leg is computed from the configuration list alone, so a
+    perturbation to build_M's DIAGONAL correctly does not fire it -- that is the
+    point of computing it grid-free. What fires it is a change to the
+    off-diagonal, which is what the ordering is measured against.
+    (Fire-tested 2026-09-07: diagonal plant does NOT fire; scaling T' by
+    K^-0.4 DOES.)
+    """
+    from geovac.sturmian_secular import build_configs, build_M, gen_configs
+
+    Ks, diag, off, T0 = [], [], [], []
+    for n in (7, 8, 9, 10):                       # K = 74, 100, 130, 164
+        tup = gen_configs(3, {0: n, 1: n, 2: n, 3: n})
+        cfgs = build_configs(tup)
+        M = build_M(cfgs)
+        Ks.append(len(cfgs))
+        diag.append(float(np.abs(np.diag(M)).sum()))
+        off.append(float(np.abs(M - np.diag(np.diag(M))).sum()))
+        # exact, grid-free: needs only the configuration list
+        T0.append(2.0 * sum(math.sqrt(1.0 / a ** 2 + 1.0 / b ** 2)
+                            for (_l, a, b) in tup))
+    assert Ks == [74, 100, 130, 164], f"config family drifted: {Ks}"
+
+    lK = np.log(Ks)
+    p_T0 = np.polyfit(lK, np.log(T0), 1)[0]
+    p_off = np.polyfit(lK, np.log(off), 1)[0]
+
+    # (a) The exact, box-independent leg: T^0 is the slowest-growing block.
+    assert 0.68 < p_T0 < 0.73, f"exact T^0 exponent moved: {p_T0}"
+    assert p_T0 < p_off - 0.15, (
+        f"T^0 ({p_T0:.3f}) is no longer clearly the slowest block "
+        f"vs off-diagonal ({p_off:.3f})")
+
+    # (b) On THIS (production) grid the off-diagonal leg is inflated past its
+    #     converged value of 0.977. Asserted as a box artifact, not as physics.
+    assert p_off > 1.0, (
+        f"the 60-bohr box no longer inflates the off-diagonal leg "
+        f"({p_off:.4f}); converged is 0.977, so this test's premise is stale")
+
+    # (c) ...and the inflation is real: at least +0.03 over converged.
+    assert p_off - 0.977 > 0.03, (
+        f"box inflation of the off-diagonal exponent is only "
+        f"{p_off - 0.977:.4f}; the withdrawal of the 1.05 claim rested on it "
+        f"being ~+0.05")
+
 
 
 # ==========================================================================

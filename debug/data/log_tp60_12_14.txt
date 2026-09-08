@@ -1,0 +1,3 @@
+rmax=60 nmax=12 lmax=3 K=244 [239s]
+rmax=60 nmax=13 lmax=3 K=290 [318s]
+rmax=60 nmax=14 lmax=3 K=340 [409s]

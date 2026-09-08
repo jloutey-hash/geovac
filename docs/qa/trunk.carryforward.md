@@ -1861,7 +1861,42 @@ A semantic-scope DELTA on this remediation; a clean claim-impact delta unlocks F
 - **P32 L1459 (NIT):** the abandoned (B,P) route's conditional bound constant is 2, not sqrt2 (sqrt2 = the internal comparison constant C_3^(2)); corrected per Paper 39.
 Trunk clean after these (C16 trunk PASS, C19 clean).
 
-### U.2 -- GROUP1 impact-set cluster (OWED -- its own focused pass)
+### U.2 -- GROUP1 impact-set cluster (**CLOSED 2026-09-07**)
+
+> **Status 2026-09-07: closed.** The LARGE cluster went in v5.10.8 (the
+> group1 impact-set pass, `debug/sprint_group1_impact_set_memo.md`); the
+> residue below went in the /qa 58/59/60 pass the same week.
+>
+> - **five-lemma echoes** -- P44 ("four lemmas"), P47 ("Four of the five
+>   lemmas L1'/L2/L3/L4"), P42, field guide: all reworded. P51 was never
+>   affected -- it is `papers/group5_qed_gauge/paper_51_gravity_arc.tex`,
+>   **group5, not group1**, and carries no five-lemma text; the U.2
+>   enumeration mis-filed it.
+> - **P40 cross-manifold future work** -- redirected from the withdrawn
+>   Pythagorean Leibniz constant to Paper 39's lifted-state route. C16 entry
+>   `p40-pythagorean-cross-manifold-future-work`, discrimination-proven.
+> - **paper_43_..._outline.md** -- the withdrawn "literal identification at
+>   the operator-system level" struck at BOTH loci (L45 and L180; U.2 listed
+>   only L45) and a withdrawal banner added. Note this file is `.md`, which
+>   C16 does not gate -- it scans `.tex` only -- which is precisely why it had
+>   to be listed by hand and why nothing would have caught it recurring.
+> - **Upgrade (the mirror case)** -- the synthesis k-fold paragraph now
+>   records that `C_3^(2) <= sqrt2` belongs to Paper 39's *abandoned*
+>   (B,P)-pair route and is **not a rate constant of its theorem**; the proved
+>   k=2 case is the lifted-state assembly. C16 entry
+>   `k2-proved-case-carries-sqrt2-constant` guards **this occurrence only** --
+>   the mirror class (owner strengthens, summary keeps the weaker form) stays
+>   structurally invisible to C16 and `cited_by`, since nothing is retracted
+>   and nothing is misspelt.
+>
+> Two instrument lessons from the pass, both recorded because they generalise:
+> (i) the first `k=2` pattern missed the corpus's own spelling `$k=2$` (math
+> delimiters) -- the third spelling-defeats-the-pattern miss that day; caught
+> only because the discrimination test used the REAL pre-fix text rather than a
+> paraphrase. (ii) Its replacement then FALSE-POSITIVED, because C16 also
+> scans a newline-joined copy of each file, where `[^\n]{0,60}` stops bounding
+> anything and reached into the next paragraph. Use `[^.\n]` in C16 patterns.
+
 The claim-impact reviewer traced the L5-withdrawal and the Lorentzian-descope through their citers and found the owners were corrected but the citers/abstracts were not (the CLAUDE.md 'owner corrected, citers left standing' class, at branch scale):
 - **LARGE:** group1 synthesis SS L5 L695-710 -- credits the REFUTED L5 (B,P) assembly as 'completing the proof' and asserts the now-FALSE height_P=0; **P42 abstract L136-141** -- 'Lorentzian extension ... carried out at finite cutoff' with no signature-blind caveat (body L1957-66 says 'not a Lorentzian identification'); **P43 abstract L104-147 + STRONG_LORENTZ table L950-962** -- 'Paper 43 is the Lorentzian extension ... at operator-system level' (body L1900-37 descoped to Riemannian).
 - **SMALL (systematic five-lemma echo):** P44 L1283-88; P42 L492-96 & L2251-52; P47 L600-01; P51 L2524; geovac_field_guide.tex L292 -- all enumerate 'five lemmas ... L5 assembly' as live infrastructure. Plus P40 L2258-62 (cross-manifold future work cites the abandoned 'Pythagorean Leibniz constant' route) and paper_43_..._outline.md L45 (withdrawn 'literal identification').

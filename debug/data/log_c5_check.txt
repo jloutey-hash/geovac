@@ -1,0 +1,4 @@
+nmax=14 c=3.0 rmax=588 Mtot=290.752848 Moff=125.078375 Tpfull=142.956710 [417s]
+nmax=14 c=5.0 rmax=980 Mtot=290.752900 Moff=125.078428 Tpfull=142.956764 [400s]
+nmax=16 c=3.0 rmax=768 Mtot=362.378483 Moff=159.589193 Tpfull=180.356583 [625s]
+nmax=16 c=5.0 rmax=1280 Mtot=362.378573 Moff=159.589285 Tpfull=180.356677 [626s]

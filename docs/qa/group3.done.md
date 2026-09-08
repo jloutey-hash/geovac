@@ -13,10 +13,39 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only group3-specific scope + deltas + bite tracking.
 
-**Scope (non-trunk group3):** Papers **18, 22, 24, 31, 54, 55, 56, 57** + the
+**Scope (non-trunk group3):** Papers **18, 22, 24, 31, 54, 55, 56, 57, 61** + the
 **group3 foundations synthesis**. Trunk papers **0, 1, 7** are taken as
 already-certified (`/qa trunk` PASS) and not re-litigated except where a group3
 claim restates them (C7).
+
+> **Paper 61 added to this scope 2026-09-07.** Split out of Paper 59 on
+> 2026-09-06, it belonged to no scope at all for a day (invisible to every
+> deterministic gate under every `--gate`), and then to a single-paper scope
+> only — so `/qa group3` still walked past it while the corpus-wide
+> orphan check reported clean. It sits in `papers/group3_foundations/` and is
+> the periods / Tannakian arc, the same family as 55–57. It ALSO keeps its own
+> target, `docs/qa/paper_61.done.md`, which carries its watch-notes and its
+> branch-defining criterion (backing named for another paper). **A group3 run
+> must exercise it;** it has never been reached by a panel.
+>
+> The class is now closed mechanically: `qa_scopes.selftest()` asserts that
+> every paper in a `groupN` folder is in the `groupN` scope unless it is in the
+> declared `GROUP_SCOPE_EXEMPT` list (trunk roots; Papers 58/59/60, which are
+> their own targets). Fire-tested — removing 61 again makes the selftest FAIL
+> while the orphan check still reports clean, which is why the narrower
+> assertion was needed.
+>
+> **Paper 61 FULL run 2026-09-07 = FAIL (3 LARGE).** Its per-paper profile
+> [`paper_61.done.md`](paper_61.done.md) carries the criteria, the eleven
+> claim-matrix rows (incl. the `| 59/61 |` seam row), the C7 dependencies
+> (Paper 35/WH7, Paper 56) and ten watch-notes. **A `/qa group3` run must
+> exercise Paper 61 against that profile, not against this file's general
+> criteria** — in particular it must pass `--slow` (ten deep-precision
+> witnesses are slow-marked), and must treat C16/C20/C12/C6/C15/C18 as
+> UNMEASURED on Paper 61 rather than PASS, since they have zero surface
+> there. Paper 61 is NOT certifiable until the PI ratifies that profile:
+> it was written by the PM, and its first version was found defective in
+> five ways by the very run it was meant to govern.
 
 **Deterministic `--gate`:** `group3`.
 

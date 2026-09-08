@@ -6,6 +6,10 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{observation}{Observation}
 
+% Numeric-registry citation macro (CLAUDE.md SS15): renders the literal
+% only; the key is a foreign key into debug/qa/numeric_registry.py.
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{The Bessel-Moment Period Algebra of the Three-Center Coulomb
@@ -29,24 +33,29 @@ paper takes that object as its starting point and develops its number-theoretic
 structure.  \textbf{[MEASURED; classical]} The elliptic family is the Legendre
 family over the modular curve $X(2)=\Gamma(2)\backslash\mathfrak{H}^{\ast}$,
 pulled back along the exact linear map $\lambda(\tau(\rho))=1-\rho$; the
-parameter integral sweeps the entire real locus of $X(2)$ and passes through
-complex-multiplication fibres---at $\tau=i$ ($\rho=\tfrac12$, inside the
+parameter integral sweeps the physical arc $\lambda<1$ of the real locus of
+$X(2)$ and passes through complex-multiplication fibres---at $\tau=i$ ($\rho=\tfrac12$, inside the
 physical domain) and $\tau=i\sqrt2$---where the periods are Chowla--Selberg
 $\Gamma$-values, so a molecular integral carries classical $\Gamma$-value
 periods across distinct fundamental discriminants.  \textbf{[OBSERVATION]} The
 integrated observable lives on $X_{0}(2)$, is a $\Gamma(2)$ resurgent Lambert
 series (the pure multiple modular value being its regular $D\to0$ shadow), and
 carries conductor-$4$ ($\mathbb{Z}[i]$, $G=\beta(2)$) arithmetic through the
-fibre theta series $K=\tfrac{\pi}{2}\theta_{3}^{2}$; guarded, decoy-calibrated
-integer-relation searches place it inside the cosmic-Galois /
-mixed-elliptic-motive layer the program's Tannakian substrate reaches for, and
-are decisively negative for a clean low-height closed form through weight three.
+fibre theta series $K=\tfrac{\pi}{2}\theta_{3}^{2}$. That modular and
+complex-multiplication structure---not the integer-relation search---places it
+inside the cosmic-Galois / mixed-elliptic-motive layer the program's Tannakian
+substrate reaches for;\ the guarded, decoy-calibrated searches are separately
+and decisively negative for a clean low-height closed form through weight
+three.
 \textbf{[SYMBOLIC + MEASURED]} The connection has four master periods whose
 Wronskian is the pure monomial $W_{0}D^{-2}$ and whose Lagrange bilinear
-concomitant---the Broadhurst--Mellit / Fres\'an--Sabbah--Yu quadratic period
-relations for the $\Gamma(2)$ family---is identified in closed form as
+concomitant---the analogue, here for the $\Gamma(2)$ (Legendre) family, of the
+Broadhurst--Roberts / Fres\'an--Sabbah--Yu quadratic period relations, whose
+proved case is the Kloosterman connection---is identified in closed form as
 $B=\pi\,\Omega$, with $\Omega$ the canonical integer symplectic intersection
-form, forcing the differential Galois group into $\mathrm{Sp}_{4}(\mathbb{Z})$.
+form, so the \emph{monodromy} group lies in $\mathrm{Sp}_{4}(\mathbb{Z})$
+(the differential Galois group, being a positive-dimensional algebraic
+group here, lies in $\mathrm{Sp}_{4}(\mathbb{C})$).
 The object is an Eisenstein / complex-multiplication Bessel-moment period,
 neither a cusp-form $L$-value nor an elliptic dilogarithm; the explicit finite
 reduction remains the open frontier.
@@ -79,8 +88,9 @@ $\Gamma(2)$ resurgent Lambert series carrying conductor-$4$ arithmetic---its
 cosmic-Galois placement.  Section~\ref{sec:bessel_algebra} makes that placement
 quantitative through the period algebra of the master family: the Wronskian
 $W_{0}D^{-2}$, the quadratic period relations, and the intersection form
-$B=\pi\,\Omega$ that forces the differential Galois group into
-$\mathrm{Sp}_{4}(\mathbb{Z})$.
+$B=\pi\,\Omega$ that forces the \emph{monodromy} group into
+$\mathrm{Sp}_{4}(\mathbb{Z})$, and the differential Galois group into
+$\mathrm{Sp}_{4}(\mathbb{C})$.
 
 Throughout, ``Paper~59'' denotes the companion; the equations and sections of
 Paper~59 that this development rests on (the genus-one curve, the rank-four
@@ -89,6 +99,33 @@ moment, and the obstruction analysis) are pointed to in prose rather than by
 cross-reference.  The tier tags (\textbf{[SYMBOLIC]}, \textbf{[MEASURED]},
 \textbf{[OBSERVATION]}, \textbf{[OPEN]}) are carried over from the companion
 unchanged.
+
+\emph{Transcendence bookkeeping.}  \textbf{[OBSERVATION]} The transcendentals
+below are placed against the program's taxonomy
+(Papers~18,~34~\cite{loutey_paper18,loutey_paper34}), as the companion Paper~59
+places its own.  Paper~18's \emph{embedding} tier carries a \emph{genus} grading, and this
+object sits one rung above the \emph{two-centre} class:\ the two-center
+constants are the genus-zero set $\{E_{1},\ln,\gamma_{E}\}$, while the
+three-center fibre --- which this paper shares with its companion, whose own
+title places it at genus one --- leaves that tower for the elliptic one.  Concretely:\ $\pi$ enters at the measure
+tier of Paper~34 and appears here as the overall factor of the intersection form
+$B=\pi\Omega$ and in $K=\tfrac{\pi}{2}\theta_{3}^{2}$;\ the Jacobi theta
+constants $\theta_{2},\theta_{3},\theta_{4}$ and the constant
+$\varpi\equiv K(\tfrac12)$ (this corpus's symbol;\ the classical
+lemniscate constant is $\sqrt2\,\varpi$) are \emph{fibre} data of the Legendre family, not
+projection constants;\ the $\Gamma$-values $\Gamma(1/4)^{2}$ and
+$\Gamma(1/8)\Gamma(3/8)$ are Chowla--Selberg periods attached to the
+complex-multiplication fibres and are therefore \emph{arithmetic} rather than
+analytic in origin;\ $\zeta$ and $\beta$ appear only through the factorization
+$L(\theta_{3}^{2},s)=4\zeta(s)\beta(s)$ of the $\mathbb{Z}[i]$ theta series, so
+Catalan's constant $G=\beta(2)$ is conductor-$4$ \emph{family} data;\ and
+$\gamma_{E}$ appears only as coordinate bookkeeping in the weight-one seed set
+(\S\ref{sec:modular}), a reading this paper records as an observation
+rather than a re-tiering of Paper~18's ownership of that constant.  The
+load-bearing consequence is the one the searches measure:\ \emph{no} measured
+conductor-$4$ content ($\beta(2)$) survives in the integrated physical value at
+reachable heights, so the arithmetic lives in the family and in the $D\to0$
+shadow rather than in the observable.
 
 %% ========================================================================
 \section{The modular structure and its cosmic-Galois periods}
@@ -99,7 +136,8 @@ The genus-one curve of Paper~59 is not an arbitrary elliptic curve:
 the family over the scale-ratio base is a \emph{modular} family, and its periods
 are periods of a specific modular curve.  Forming the modular parameter from the
 two periods of Paper~59, $\tau(\rho)=iK(\rho)/K(1-\rho)$, the
-theta-series modular lambda satisfies \textbf{[MEASURED, $10^{-41}$; classical]}
+theta-series modular lambda satisfies \textbf{[MEASURED, precision-limited
+($2.7\times10^{-51}$ at 50 digits, $1.2\times10^{-91}$ at 90); classical]}
 %
 \begin{equation}
   \lambda\big(\tau(\rho)\big) = 1-\rho ,
@@ -134,8 +172,13 @@ of four scattering centers---the modulus counts the two densities, not the
 number of nuclei.
 
 Since $\rho=c_{2}/c_{1}$ ranges over all of $(0,\infty)$ as the Feynman
-parameters range over $(0,1)$, the parameter integral sweeps the entire real
-locus of $X(2)$ and passes through every complex-multiplication fibre.  There the
+parameters range over $(0,1)$, the parameter integral sweeps the arc
+$\lambda<1$ of the real locus of $X(2)$ --- the physical range
+$\rho\in(0,\infty)$ gives $\lambda=1-\rho<1$, so the arc $\lambda>1$ is not
+reached --- and passes through infinitely many of its
+complex-multiplication fibres (not every one:\ those with non-real $\lambda$,
+such as discriminant $-3$, are off the contour, as is $\lambda=2$;\ see
+below in this section).  There the
 periods are $\Gamma$-values by Chowla--Selberg \textbf{[MEASURED, $\sim\!10^{-51}$;
 classical]}: at $\tau=i$ (the fibre $\rho=\tfrac12$, \emph{inside} the physical
 domain), $K(\tfrac12)=\Gamma(1/4)^{2}/(4\sqrt\pi)$; at $\tau=i\sqrt2$
@@ -160,7 +203,7 @@ the smooth bulk and, at the $(s,t)\to(0,0)$ corner, a Duffy angular split follow
 by the radial substitution $\rho=\sigma^{2}$ ($\rho=s+t$) that renders the
 $\rho^{3/2}$ corner integrand \emph{analytic} in $\sigma$ and so restores spectral
 Gauss--Legendre convergence---gives the collinear value \textbf{[MEASURED,
-$18$ digits confirmed]} $0.3953557659017139641\ldots$ (correct to $18$ digits;\ the
+$18$ digits confirmed]} $\gvq{t2_collinear_period}{0.3953557659017139641}\ldots$ (correct to $18$ digits;\ the
 $19$th is superseded by the certified value below).  The earlier $\sim\!16$-digit
 figure was not an intrinsic wall but an under-resolution of the corner and of the
 one wide sub-domain flagged above (both closed here; the corner by $\rho=\sigma^{2}$,
@@ -210,7 +253,7 @@ parallel configurations agreeing to $1.7\times10^{-67}$, the identity itself
 verified against a fully independent two-dimensional evaluation to $69$--$96$
 digits---certify
 \[
-T2=0.395355765901713964325229296804847564260563977867082108935234265469\ldots
+T2=\gvq{t2_collinear_period}{0.395355765901713964325229296804847564260563977867082108935234265469}\ldots
 \]
 ($66$ digits;\ a \emph{decomposed} certification---identity, quadrature and tail legs
 each closed independently, at higher precision than any single end-to-end pipeline;\
@@ -302,9 +345,9 @@ elliptic (genus-one) layer of the cosmic-Galois / mixed-elliptic-motive structur
 that the Geometric Vacuum program's Tannakian substrate reaches
 for~\cite{brown_cosmic2017,loutey_paper56}---the concrete elliptic period the
 mixed-Tate substrate could not itself supply.  \textbf{[OPEN]} The natural next step is therefore to place it in the
-Bessel-moment period algebra---to test whether it obeys a Broadhurst--Mellit
+Bessel-moment period algebra---to test whether it obeys a Broadhurst--Roberts
 quadratic relation or reduces to a critical $L$-value of the associated modular
-form~\cite{fresansabbahyu2023,broadhurst2016,zhou_wronskian2018}---of which the
+form~\cite{fresansabbahyu2023,zhou_quadratic2021}---of which the
 explicit $\Gamma(2)$ iterated-Eisenstein
 realization~\cite{broedel_eisenstein2018,manin2006} captures only the regular
 $D\to0$ shadow, both of a piece with the finite closed form of
@@ -545,8 +588,38 @@ pure monomial,
 W(D)=W_{0}\,D^{-2}:
 \end{equation}
 %
-the transcendence of the individual masters cancels in their determinant, the
-elliptic analogue of the classical $W[K_{0},I_{0}](D)=1/D$.
+the $D$-dependence of the determinant is the pure monomial $D^{-2}$, the
+elliptic analogue of the classical $W[K_{0},I_{0}](D)\propto 1/D$ and the
+two-scale counterpart of the Wro\'nskian factorizations behind the
+Broadhurst--Mellit determinant formulae~\cite{zhou_wronskian2018}.
+%
+\emph{Correction, 2026-09-07}
+\texttt{[retracted 2026-09-07: p61-w0-transcendence-cancels]}.\ Earlier versions
+added that ``the transcendence of the individual masters cancels in their
+determinant''. That is \emph{false}, and the value below is what establishes
+it:\ Abel's identity fixes only the
+$D$-dependence, and the constant $W_{0}$ is \emph{never computed} in this paper
+or in its backing test, which normalises it to $1$ by construction. It is now
+computed, from the same branch-point data that fixes $B$ below. With
+$Q(x)=(x^{2}-1)(\rho x^{2}+1-\rho)$ and branch points $\{\pm1,\pm i\omega\}$,
+$\omega^{2}=(1-\rho)/\rho$:\ $\sum_{c}x_{c}=0$ cancels the exponentials;\
+$\prod_{c}D^{-1/2}=D^{-2}$ reproduces Abel's exponent by an independent route;\
+$\prod_{c}Q'(x_{c})=-16\omega^{2}$, so $\prod_{c}A_{c}=\pi^{2}/(4i\omega)$;\ and
+the Vandermonde $\prod_{a<b}(x_{b}-x_{a})=4i\omega/\rho^{2}$ cancels the
+$\omega$, leaving
+%
+\begin{equation}
+W_{0}\;=\;\frac{\pi^{2}}{\rho^{2}}
+\qquad \textbf{[SYMBOLIC]},
+\label{eq:W0}
+\end{equation}
+%
+up to the thimble ordering/orientation sign this paper already riders for $B$
+(the sign is the branch of $\sqrt{1-\rho}/\sqrt{\rho-1}=-i$ on $0<\rho<1$).
+So $\pi^{2}$ does \emph{not} cancel --- it is squared --- and $W_{0}$ is
+$\rho$-dependent, which is what makes the withdrawn sentence false rather than
+merely unsupported. The withdrawal is a net gain:\ an exact value replaced a
+false cancellation.
 
 \emph{Quadratic period relations.}  \textbf{[MEASURED, 25 digits]}
 Self-adjointness makes the Lagrange bilinear concomitant $B[s_{a},s_{b}]$
@@ -559,9 +632,9 @@ B[s_{K},s_{I}]=-\pi,\qquad B[s_{K},s_{J}]=0,\qquad B[s_{I},s_{J}]=2\pi,
 %
 verified to $25$ digits at $D=1$ across the tested $\rho$, and $D$-independent
 by the self-adjoint Lagrange identity.
-These are the Broadhurst--Mellit / Fresán--Sabbah--Yu
+These are the Broadhurst--Roberts / Fresán--Sabbah--Yu
 quadratic relations between Bessel
-moments~\cite{broadhurst2016,fresansabbahyu2023,zhou_wronskian2018}, here for the
+moments~\cite{fresansabbahyu2023,zhou_quadratic2021}, here for the
 $\Gamma(2)$ (Legendre) family---the elliptic lift of $W[K_{0},I_{0}]=1/D$.
 Structurally the concomitant is the de~Rham--Betti intersection pairing of the
 thimble cycles times the branch-point half-residue $\pi$ (the square-root
@@ -612,9 +685,23 @@ $M_{0}^{\mathsf T}J M_{0}=J$, constitute a four-parameter family, and imposing t
 concomitant's vanishing cross-sector pairings selects \emph{exactly}
 $\mathbb{Z}\,\Omega$.  It is unimodular ($\det\Omega=1$, hence nondegenerate), and
 $M_{0}^{\mathsf T}\Omega\,M_{0}=\Omega$ holds identically over $\mathbb{Z}$, so the
-differential Galois group of the Picard--Fuchs equation of Paper~59 lies in the \emph{integral} symplectic
-group $\mathrm{Sp}(\Omega,\mathbb{Z})=\mathrm{Sp}_{4}(\mathbb{Z})$---the concrete,
-integral sharpening of the self-adjointness that placed it in $\mathrm{Sp}_{4}$.
+\emph{monodromy} group of the Picard--Fuchs equation of Paper~59 lies in the
+\emph{integral} symplectic group
+$\mathrm{Sp}(\Omega,\mathbb{Z})=\mathrm{Sp}_{4}(\mathbb{Z})$---the concrete,
+integral sharpening of the self-adjointness that placed the Galois group in
+$\mathrm{Sp}_{4}(\mathbb{C})$.
+%
+\emph{Correction, 2026-09-07.}\ Earlier versions of this paper said the
+\emph{differential Galois group} lies in $\mathrm{Sp}_{4}(\mathbb{Z})$. That is
+false:\ $\mathrm{Sp}_{4}(\mathbb{Z})$ is discrete, so a Zariski-closed subgroup
+of $\mathrm{GL}_{4}(\mathbb{C})$ contained in it would be finite, forcing every
+solution to be algebraic---contradicting the irregularity of the connection and
+the exponential torus $(\mathbb{C}^{*})^{2}$ that Paper~59 establishes inside
+the local Galois group. The integrality is a statement about the Betti lattice,
+i.e.\ the monodromy representation, which is what $M_{0}$ is;\ Paper~59 states
+the Galois containment correctly as $\mathrm{Sp}_{4}(\mathbb{C})$. Nothing else
+changes:\ $B=\pi\,\Omega$, the forcing of $\Omega$, and the integral structure
+all stand.
 \emph{Tier scope.}\ The asymptotic identification above is numerics-free, but
 every clause invoking $M_{0}$---the forcing argument and the $\mathrm{Sp}_{4}(\mathbb{Z})$
 containment---inherits that matrix's \textbf{[SYMBOLIC + MEASURED]} status:\ $M_{0}$
@@ -624,7 +711,7 @@ three physical period cuts $\{[1,\infty),[-1,1],i[-\omega,\omega]\}$ realize onl
 rank-two sub-block of $\pi\Omega$ (the measured $-\pi,0,2\pi$); it is the fourth,
 $Y_{0}$-sector master---the one carrying the $D\ln D$---that completes the pairing to
 the full nondegenerate rank-four form.  The symbolic identification of the
-intersection form is thus complete: $B=\pi\,\Omega$, the Broadhurst--Mellit /
+intersection form is thus complete: $B=\pi\,\Omega$, the Broadhurst--Roberts /
 Fresán--Sabbah--Yu quadratic relations realized for the $\Gamma(2)$ family, backed by
 \texttt{tests/test\_routeC\_momentum.py} (\texttt{test\_intersection\_form\_pi\_and\_planes\_are\_symbolic}
 for Eq.~\eqref{eq:planepi} and the block structure,
@@ -705,6 +792,10 @@ V.~Fantini and C.~Rella, ``Modular resurgent structures,'' arXiv:2404.11550
 E.~McSpirit and L.~Rolen, ``Quantum modular forms and resurgence,''
 arXiv:2505.00799 (2025).
 
+% NOTE (2026-09-07): no longer cited. It was in the quadratic-relations
+% bundle, which was wrong -- this paper is L-series of Kloosterman moments
+% and determinants of Feynman integrals, not quadratic relations. Kept as
+% background rather than deleted silently; PI to keep or cut.
 \bibitem{broadhurst2016}
 D.~Broadhurst, ``Feynman integrals, $L$-series and Kloosterman moments,''
 \textit{Commun.\ Number Theory Phys.}\ \textbf{10}, 527--569 (2016);
@@ -748,18 +839,33 @@ Y.~Zhou, ``Wick rotations, Eichler integrals, and multiloop Feynman diagrams,''
 \textit{Commun.\ Number Theory Phys.}\ \textbf{12}, 127--192 (2018);
 arXiv:1706.08308.
 
+\bibitem{zhou_quadratic2021}
+Y.~Zhou, ``Wro\'nskian algebra and Broadhurst--Roberts quadratic
+relations,'' \textit{Commun.\ Number Theory Phys.}\ \textbf{15}(4),
+651--741 (2021); arXiv:2012.03523. \emph{The quadratic relations proper;
+distinct from the Broadhurst--Mellit \emph{determinant} formulae of
+\cite{zhou_wronskian2018}, with which they were conflated until
+2026-09-07.}
+
 \bibitem{zhou_wronskian2018}
 Y.~Zhou, ``Wro\'nskian factorizations and Broadhurst--Mellit determinant
 formulae,'' \textit{Commun.\ Number Theory Phys.}\ \textbf{12}, 355--407 (2018);
 arXiv:1711.01829.
+
+\bibitem{loutey_paper18}
+J.~Loutey, ``Spectral-Geometric Exchange Constants: Projecting Discrete
+Spectra onto Continuous Manifolds,'' Paper~18 in this series.
+
+\bibitem{loutey_paper34}
+J.~Loutey, ``GeoVac as a Two-Layer Framework: Projection Taxonomy and the
+Empirical Matches Catalog,'' Paper~34 in this series.
 
 \bibitem{loutey_paper35}
 J.~Loutey, ``Time as Projection: The Klein-Gordon Spectrum on $S^3\times\mathbb{R}$
 and the Algebraic\,/\,Observation Split,'' Paper~35 in this series.
 
 \bibitem{loutey_paper56}
-J.~Loutey, ``The Tannakian Substrate of the Geometric Vacuum: A Finite-Cutoff
-Pro-System, a Neutral Tannakian Category, and a Cosmic-Galois Injection,''
+J.~Loutey, ``The Tannakian substrate of \textsc{GeoVac},''
 Paper~56 in this series.
 
 \bibitem{loutey_paper59}

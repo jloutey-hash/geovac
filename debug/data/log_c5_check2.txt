@@ -1,0 +1,9 @@
+full-shell family box check (c=3 vs c=5) + c=5 spdf check
+fullshell nmax=7 K=84 c=3.0 Mtot=97.406274 Moff=38.745047 Tpfull=47.566383
+fullshell nmax=7 K=84 c=5.0 Mtot=97.406268 Moff=38.745039 Tpfull=47.566373
+fullshell nmax=8 K=120 c=3.0 Mtot=133.785456 Moff=58.639553 Tpfull=69.769857
+fullshell nmax=8 K=120 c=5.0 Mtot=133.785462 Moff=58.639558 Tpfull=69.769863
+spdf nmax=14 c=3.0 Mtot=290.752848 Moff=125.078375 Tpfull=142.956710 [373s]
+spdf nmax=14 c=5.0 Mtot=290.752900 Moff=125.078428 Tpfull=142.956764 [339s]
+spdf nmax=16 c=3.0 Mtot=362.378483 Moff=159.589193 Tpfull=180.356583 [615s]
+spdf nmax=16 c=5.0 Mtot=362.378573 Moff=159.589285 Tpfull=180.356677 [626s]

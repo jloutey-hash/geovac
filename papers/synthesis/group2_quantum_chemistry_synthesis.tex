@@ -695,17 +695,37 @@ Paper~60 carries the Sturmian thread into the quantum-algorithm setting
 and, in doing so, exhibits the binding the scoped guardrail above does
 not forbid.  Naively encoding shared-scale Coulomb--Sturmians in $L^2$
 inflates the block-encoding $1$-norm (the ill-conditioned overlap must be
-L\"owdin-inverted);\ the \emph{isoenergetic} reformulation removes the
-metric \emph{for atoms} entirely---a metric-free standard eigenproblem
-whose eigenvalues are the energies, with a sublinear
-$1$-norm~\cite{loutey_paper60}.  For molecules the Shibuya--Wulfman
-metric returns, and the paper measures rather than assumes its cost:\ the
-conditioning grows polynomially, with a derived band-limited law, and the
-one genuine lever (the gerade sector's basis-independent conditioning) is
-an \emph{equivalent-center} property that a symmetry-unique heavy atom
-reinstates.  The $N$-electron $1$-norm question is answered in the
+L\"owdin-inverted);\ Avery's \emph{isoenergetic} (potential-weighted)
+reformulation removes the metric \emph{for atoms} entirely---a metric-free
+standard eigenproblem whose eigenvalues are the
+energies~\cite{loutey_paper60}.  Its $1$-norm grows more slowly than the
+matrix dimension over every basis the paper can compute ($\|M\|_1\sim
+K^{0.82}$ fitted on $K=74$--$164$, helium), and \emph{increasingly} so:\ the
+local slope falls monotonically to $0.766$ by $K=514$, so no window fit is
+stable and the object is closer to $K^{p}\log K$ than to a power law.  The
+nuclear diagonal $T^0=Z\sum_\nu R_\nu$ is the slowest-growing block and the
+only one derived rather than measured --- $Z\sqrt{2K}\ln(K/2)$, asymptotic
+exponent $1/2$ --- while neither grouping of the pure-number block $T'$ is
+superlinear ($K^{0.88}$ full, $K^{0.94}$ off-diagonal).  \emph{The
+substantive finding is that the advantage belongs to the basis-growth rule,
+not to the construction}:\ it holds at fixed $l_{\max}$ and reverses to
+$K^{1.07}$ under full-shell growth, and the cheap rule is the one that stops
+converging --- it saturates $6.4$~mHa above exact, $4.0\times$ chemical
+accuracy, at any basis size.  Cost growth and attainable accuracy are the
+same fact seen twice.  (Superseded 2026-09-07:\ the earlier $K^{0.84}$,
+``drifts upward'', $T^0$-at-$K^{0.70}$ and $T'$-superlinear-at-$K^{1.05}$
+readings were measured on a truncated radial domain whose error grew with
+the fit variable.)  That split is what decides the molecular case.  For molecules the Shibuya--Wulfman metric returns, and the paper
+measures rather than assumes its cost:\ the conditioning grows
+polynomially, with a derived band-limited law, and of its three levers
+(the gerade sector, large separation, a metric confined to one electron)
+the sharpest---the gerade sector's basis-independent conditioning---is an
+\emph{equivalent-center} property, and a symmetry-unique heavy atom
+reinstates the \emph{growth}, confining that lever to
+homonuclear-diatomic-like systems.  The $N$-electron $1$-norm question is answered in the
 negative:\ the atomic sublinearity is a property of the isoenergetic
-secular matrix, not of the basis.
+secular matrix's single-center diagonal, not of the basis, and it does not
+survive two centers.
 
 For the guardrail above this is the operative datum:\ the method
 \emph{binds}---$\mathrm{H}_2^+$ at $1.3\%$ $s$-only underbinding and a

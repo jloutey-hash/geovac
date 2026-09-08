@@ -77,9 +77,91 @@ def paths_for(target: str) -> list[str]:
     return []
 
 
+# A date is only a CERTIFICATION date if it sits on a line that asserts one.
+# Before 2026-09-07 this was `max(every date in the file)`, so a record whose
+# newest line said "NOT re-certified" was reported as freshly certified -- the
+# audit against stale certifications, fooled by a date, which is the exact
+# failure it exists to prevent.
+# (A same-line "CERTIFIED" test was tried and removed -- see cert_date.)
+# An EXPLICIT decline, written by a run that chose not to certify.  Kept narrow
+# on purpose: the generated staleness banner says "historical" and
+# "RE-CERTIFICATION OWED" about every stale record, and reading those as
+# declines would relabel the whole table.
+DISCLAIM = re.compile(
+    r"NOT\s+(?:re-)?certified"
+    r"|NEVER\s+(?:been\s+)?CERTIFIED", re.I)
+
+
+def _dated_lines(record: Path):
+    text = record.read_text(encoding="utf-8", errors="replace")
+    for line in text.splitlines():
+        for d in DATE.findall(line):
+            yield d, line
+
+
+ASSERTS_CERT = re.compile(r"CERTIFIED|certifying pass|cert\s*#?\d*\s*=?\s*PASS",
+                          re.I)
+
+
 def cert_date(record: Path) -> str | None:
-    ds = DATE.findall(record.read_text(encoding="utf-8", errors="replace"))
+    """Newest date on a line that ASSERTS certification; else newest date at all.
+
+    Both simpler rules are wrong, in opposite directions, and both were tried
+    on 2026-09-07:
+
+      * max-date-anywhere reads ANY later date as the certification date.  It
+        overstated group3 by five days -- that record's certifying line says
+        2026-08-24 and its banner said 2026-08-29, picked up from
+        "Post-certification touch" notes -- and it read a scope note added the
+        same day as a fresh certification.
+      * same-line-only lost trunk completely, whose status line is
+        "FROZEN -- certified PASS" with the date on a different line.
+
+    So: prefer an asserting line, fall back only when the record has none.
+    `_used_fallback` records which records relied on the fallback, so that is
+    visible rather than silent.
+    """
+    text = record.read_text(encoding="utf-8", errors="replace")
+    good = []
+    for line in text.splitlines():
+        if ASSERTS_CERT.search(line) and not DISCLAIM.search(line):
+            good.extend(DATE.findall(line))
+    if good:
+        return max(good)
+    _used_fallback.add(record.stem.replace(".done", ""))
+    ds = DATE.findall(text)
     return max(ds) if ds else None
+
+
+_used_fallback: set[str] = set()
+
+
+STATUS_LINE = re.compile(r"STATUS\s*:", re.I)
+
+
+def status_declines(record: Path) -> "str | None":
+    """The record's own STATUS line, if it declines certification.
+
+    This is the record's current-state declaration and outranks any date
+    arithmetic.  Keying on dates alone got group6 wrong: its STATUS says
+    "NOT CERTIFIED -- superseded 2026-08-22" while an unrelated later line
+    dated 2026-08-24 mentions a certifying pass, so a `declined >= cert`
+    comparison read it as merely OWED.
+    """
+    for line in record.read_text(encoding="utf-8", errors="replace").splitlines():
+        if STATUS_LINE.search(line):
+            return line.strip() if DISCLAIM.search(line) else None
+    return None
+
+
+def declined_date(record: Path) -> "str | None":
+    """Newest date on a line that explicitly DECLINES certification.
+
+    Secondary trigger, for a record whose STATUS line has not been updated but
+    which carries a dated decline newer than its certification.
+    """
+    bad = [d for d, line in _dated_lines(record) if DISCLAIM.search(line)]
+    return max(bad) if bad else None
 
 
 def changed_since(paths: list[str], since: str) -> tuple[list[str], list[str]]:
@@ -103,10 +185,70 @@ def changed_since(paths: list[str], since: str) -> tuple[list[str], list[str]]:
     return sorted(after), sorted(same - after)
 
 
+def _selftest() -> int:
+    """Pin the four ways this gate has actually been wrong (2026-09-07)."""
+    import tempfile
+
+    cases = [
+        # (name, body, expect_cert_date, expect_declines)
+        ("max_date_overstates",
+         "> **STATUS: CERTIFIED 2026-08-24**\n\n"
+         "## Post-certification touch (2026-08-29)\nsome later note\n",
+         "2026-08-24", False),
+        ("no_asserting_line_falls_back",
+         "> **STATUS: FROZEN -- certified PASS** (run #4)\n\n"
+         "note dated 2026-09-06\n",
+         "2026-09-06", False),
+        ("status_declines_wins_over_later_cert_line",
+         "> **STATUS: NOT CERTIFIED -- superseded 2026-08-22**\n\n"
+         "**FULL certifying pass = PASS, 2026-08-24.**\n",
+         "2026-08-24", True),
+        ("never_certified_is_a_decline",
+         "> **STATUS: NEVER CERTIFIED -- first DoD, 2026-09-07**\n",
+         "2026-09-07", True),
+    ]
+
+    ok = True
+    for name, body, want_date, want_decline in cases:
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d) / f"{name}.done.md"
+            f.write_text(body, encoding="utf-8")
+            _used_fallback.clear()
+            got_date = cert_date(f)
+            got_decline = bool(status_declines(f))
+            if got_date != want_date:
+                ok = False
+                print(f"[FAIL] {name}: cert_date {got_date!r}, want {want_date!r}")
+            elif got_decline != want_decline:
+                ok = False
+                print(f"[FAIL] {name}: declines {got_decline}, want {want_decline}")
+            else:
+                print(f"[ok]   {name}")
+
+    # The fallback must be REPORTED, not silent -- a record with no asserting
+    # line is exactly where the date can be overstated.
+    with tempfile.TemporaryDirectory() as d:
+        f = Path(d) / "nofallbackflag.done.md"
+        f.write_text("no status line here, just 2026-01-02\n", encoding="utf-8")
+        _used_fallback.clear()
+        cert_date(f)
+        if "nofallbackflag" not in _used_fallback:
+            ok = False
+            print("[FAIL] fallback used but not recorded in _used_fallback")
+        else:
+            print("[ok]   fallback is recorded, not silent")
+
+    print("\nSELFTEST:", "PASS" if ok else "FAIL")
+    return 0 if ok else 1
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--detail", action="store_true")
+    ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
+    if a.selftest:
+        return _selftest()
 
     records = sorted(QA.glob("*.done.md"))
     if not records:
@@ -125,7 +267,14 @@ def main() -> int:
             continue
         after, same = changed_since(p, d)
         rows.append((t, d, after, same))
-        if after:
+        declined = declined_date(r)
+        if status_declines(r):
+            owed.append(t)
+            v = (f"NOT CERTIFIED (record says so{f'; {declined}' if declined else ''})")
+        elif declined and declined >= d:
+            owed.append(t)
+            v = f"NOT CERTIFIED (re-run {declined})"
+        elif after:
             owed.append(t)
             v = "OWED"
         elif same:
@@ -144,6 +293,10 @@ def main() -> int:
                 for f in same:
                     print(f"    [same-day] {Path(f).name}")
 
+    if _used_fallback:
+        print(f"\nNOTE: no CERTIFIED-asserting dated line in "
+              f"{', '.join(sorted(_used_fallback))} -- date taken as the "
+              f"newest in the record, which can overstate it.")
     print(f"\nOWED:      {', '.join(owed) if owed else 'none'}")
     print(f"AMBIGUOUS: {', '.join(ambiguous) if ambiguous else 'none'}")
     print("\nA date has no clock: same-day means the record may have been "

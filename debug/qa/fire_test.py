@@ -104,7 +104,15 @@ def run(test_path: str, plants: list[tuple[str, str]],
     """Return True when the planted defect makes the selected tests fail."""
     target = os.path.join(ROOT, plant_in or test_path)
     backup = target + ".firetest.bak"
-    cmd = [sys.executable, "-m", "pytest", test_path, "-q", "-x"]
+    # --slow is NOT optional here (added 2026-09-07).  The corpus skips
+    # @pytest.mark.slow by default, so without it every slow-marked guard was
+    # SKIPPED and this tool printed "DID NOT FIRE / the guard does not test its
+    # subject" -- a false accusation, and precisely inverted for the population
+    # that matters most: the expensive keystone guards (the (AA|BB) DECIDED
+    # census, the QFD certification, the sublinearity ladder) are all slow.
+    # §9 mandates fire-testing every new guard; for slow guards that mandate
+    # was unsatisfiable and anyone who tried was told a working guard was dead.
+    cmd = [sys.executable, "-m", "pytest", test_path, "-q", "-x", "--slow"]
     if selector:
         cmd += ["-k", selector]
 
@@ -125,10 +133,21 @@ def run(test_path: str, plants: list[tuple[str, str]],
         _invalidate_bytecode(target)
 
     fired = proc.returncode != 0
+    tail = [l for l in proc.stdout.splitlines() if l.strip()][-1:]
+    summary = tail[0].strip() if tail else ""
+    # A test that never RAN is not a guard that failed to fire.  pytest exits 0
+    # both when a guard correctly rejects nothing AND when every selected test
+    # was skipped or deselected; conflating the two is exactly how a slow-marked
+    # guard came to be reported as dead.  Returning None keeps the two states
+    # distinguishable at the call site instead of collapsing them to False.
+    executed = any(w in summary for w in ("passed", "failed", "error"))
+    if not executed:
+        if not quiet:
+            print(f"  plant -> NOT RUN   ({summary})")
+        return None
     if not quiet:
-        tail = [l for l in proc.stdout.splitlines() if l.strip()][-1:]
         print(f"  plant -> {'FIRED' if fired else 'DID NOT FIRE'}"
-              + (f"   ({tail[0].strip()})" if tail else ""))
+              + (f"   ({summary})" if summary else ""))
     return fired
 
 
@@ -211,6 +230,11 @@ def main() -> int:
           + (f" (mutating {args.plant_in})" if args.plant_in else "")
           + (f" [-k {args.selector}]" if args.selector else ""))
     fired = run(args.test_path, plants, args.plant_in, args.selector)
+    if fired is None:
+        print("\nRESULT: INCONCLUSIVE -- no test executed, so this run says "
+              "NOTHING about the guard. Check the -k selector, skip markers or "
+              "collection, then re-run. Do NOT record this as a dead guard.")
+        return 2
     print(f"\nRESULT: {'PASS -- the guard fires' if fired else
                        'FAIL -- the guard did NOT fire; it does not test its subject'}")
     return 0 if fired else 1

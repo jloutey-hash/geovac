@@ -136,6 +136,140 @@ MEASURED = {
         value=9.0, convention="percent inward shift of the M2 front, HeH+ FCI vs HF "
                               "(0.690 vs 0.758 bohr)", q=None,
         provenance="MEASURED 2026-09-06, same driver", aliases={}),
+    # ------------------------------------------------------------- Papers 59/61
+    "t2_collinear_period": dict(
+        value=0.395355765901713964,
+        convention="constant: the collinear three-center Bessel-moment period "
+                   "T2, certified to 66 digits (stored here as a double, so "
+                   "only the leading ~17 are representable -- the full digit "
+                   "string is in provenance)",
+        q=None,
+        provenance="MEASURED/certified (Paper 61 Sec. 3): six parameter-disjoint "
+                   "runs, two independent parallel configurations agreeing to "
+                   "1.7e-67, identity cross-validated against an independent 2D "
+                   "evaluation to 69-96 digits. Full value "
+                   "0.395355765901713964325229296804847564260563977867082108"
+                   "935234265469... Pinned by tests/test_paper59_t2_value.py "
+                   "(identity, K^-7 tail law, and the digit-19 correction of "
+                   "the earlier 18-digit anchor).",
+        # No alias: the paper's 18-digit display and its 66-digit certified
+        # display are the SAME double, so C21's display-rounding acceptance
+        # matches both against this one value.  (The 19th digit of the older
+        # 18-digit anchor was superseded by the certification -- a fact about
+        # the digits beyond double precision, not about this stored value.)
+        aliases={}),
+    "three_center_eri_truth": dict(
+        value=0.204941722,
+        convention="constant: ground-truth value of the genuine three-center "
+                   "ERI (XY|XZ) over 1s Slater orbitals, Paper 59 validation "
+                   "point",
+        q=None,
+        provenance="MEASURED (Paper 59 Sec. 4), the reference the closed-form "
+                   "route is checked against",
+        aliases={}),
+    # ---------------------------------------------------------------- Paper 60
+    # Isoenergetic secular matrix M = diag(Z R_nu) + T'.  The 1-norm exponent is
+    # a WINDOW fit and the window is load-bearing: /qa 2026-09-07 graded "grows
+    # sublinearly" a LARGE overclaim because the local slope rises steadily past
+    # the fitted range and the sublinear part is the nuclear diagonal, not the
+    # pure-number block the paper credited.  Both facts are pinned here so a
+    # future edit that moves the number is forced back through the prose.
+    "p60_onenorm_exponent": dict(
+        value=0.82, convention="exponent: log-log slope of the entrywise norm of M "
+                               "vs K, full s+p+d+f, helium (Z=2), over the window "
+                               "K = 74..164, on a CONVERGED radial box; NOT "
+                               "asymptotic and NOT a stable exponent",
+        q=None,
+        provenance="MEASURED 2026-09-07 by TWO independent routes agreeing to 4 dp: "
+                   "exact grid-free Slater algebra (dps 60-70) and converged "
+                   "quadrature under R_MAX >= 3*n_max^2. Both give 0.8193 on this "
+                   "window. The local slope FALLS monotonically -- 0.827, 0.818, "
+                   "0.810, 0.802, 0.794, 0.787, 0.781, 0.776, 0.771, 0.766 across "
+                   "K = 100..514 -- so no window fit is stable. RETIRED: 0.84 and "
+                   "0.854 and the 'rises to 0.906' sequence, all measured on a "
+                   "60-bohr box whose relative error GREW x1.011 -> x1.205 across "
+                   "the fit range; that growth, not the matrix, produced the rise.",
+        aliases={0.8058: "global fit extended to K = 340",
+                 0.7976: "global fit extended to K = 514",
+                 0.766: "local slope at K = 514"}),
+    "p60_onenorm_exponent_sonly": dict(
+        value=0.73, convention="exponent: same slope, s-sector configurations only, "
+                               "helium, converged box, K = 74..164-equivalent "
+                               "s-window", q=None,
+        provenance="MEASURED 2026-09-07, converged. RETIRED: 0.78, which was "
+                   "measured on a DIFFERENT window (K = 3..21, "
+                   "debug/sturmian_he_secular.py) and registered here as 'same "
+                   "window' -- that provenance was false. On the paper's own "
+                   "n_max = 7..10 window the s-only/spdf pair is 0.726 -> 0.819, "
+                   "not the printed 0.78 -> 0.84. The DIRECTION of the "
+                   "angular-dilution statement survives; both endpoints move.",
+        aliases={0.7154: "s-only, matched n_max 7..14 window"}),
+    "p60_T0_asymptotic_exponent": dict(
+        value=0.5, convention="exponent: ASYMPTOTIC log-log slope of the nuclear "
+                              "diagonal ||T0||_1 = Z*sum(R_nu). Not a fitted value "
+                              "-- ||T0||_1 is NOT a power law",
+        q=None,
+        provenance="SYMBOLIC 2026-09-07. ||T0||_1 = Z*sqrt(2K)*ln(K/2) for lmax=3, "
+                   "with K = 2N^2-4N+4 exactly. Needs no ERI and no grid -- pure "
+                   "configuration combinatorics, so it is box-independent and "
+                   "identical on every route. PM verified the slope to K = 498,004: "
+                   "0.709 (K=20) -> 0.705 (164) -> 0.699 (340) -> 0.662 (12484) -> "
+                   "0.603 (498004), still falling, consistent with 1/2 + O(1/log K). "
+                   "RETIRED as a claim: the fitted 'K^0.70', which is simply what a "
+                   "log-log fit returns inside K = 74..164.",
+        aliases={0.7050: "fitted slope inside the paper's K = 74..164 window",
+                 0.7026: "fitted slope over K = 74..340"}),
+    "p60_Tprime_exponent": dict(
+        value=0.94, convention="exponent: log-log slope of the OFF-diagonal "
+                               "entrywise norm of M (= offdiag of T') vs K, helium, "
+                               "converged box, K = 74..340",
+        q=None,
+        provenance="MEASURED 2026-09-07, two routes agreeing to 4 dp (0.9368). "
+                   "SUBLINEAR. RETIRED: 1.05, which carried +0.07 of pure box bias. "
+                   "NOTE the paper's own split is M = diag(Z R_nu) + T', so the "
+                   "block its prose names is the FULL T' -- see "
+                   "p60_Tprime_full_exponent -- not this off-diagonal part.",
+        aliases={0.9774: "same leg on the K = 74..164 window",
+                 0.9156: "extended to K = 514"}),
+    "p60_Tprime_full_exponent": dict(
+        value=0.88, convention="exponent: log-log slope of the FULL ||T'||_1 (the "
+                               "block the paper's prose names), helium, converged "
+                               "box, K = 74..340",
+        q=None,
+        provenance="MEASURED 2026-09-07, two routes agreeing (0.8750). SUBLINEAR "
+                   "over the entire range; its local slope crosses 1 at K ~ 37 and "
+                   "falls to 0.805 by K = 514. This is the object 'the pure-number "
+                   "block T' is superlinear' referred to, and that claim is FALSE. "
+                   "The exact additive identity is "
+                   "||M||_1 = ||T0||_1 - ||diag T'||_1 + ||T'||^off, and the paper's "
+                   "eq:sublinear_split printed the first and third terms while "
+                   "dropping the middle one.",
+        aliases={0.9033: "K = 74..164 window", 0.8597: "extended to K = 514"}),
+    "p60_energy_floor": dict(
+        value=6.44, convention="constant: mHa by which the fixed-l_max s+p+d+f "
+                               "Goscinskian family saturates ABOVE the exact "
+                               "helium ground state; a floor, not a rate",
+        q=None,
+        provenance="MEASURED 2026-09-07 on the converged ladder K = 74..514, fit "
+                   "gap(K) = floor + b*K^-q (floor 6.4404, b 49.0, q 0.796; max "
+                   "residual 0.0019 mHa). Extrapolates to 6.4455 at K = 1e5 and "
+                   "6.4412 at K = 1e6 -- genuinely saturating, not slow "
+                   "convergence. 7x the basis (K 74 -> 514) closed 16% of the "
+                   "deficit. This is 4.0x chemical accuracy (1.594 mHa), so the "
+                   "family cannot reach chemical accuracy at ANY K.",
+        aliases={6.78: "gap at K = 514, the largest computed"}),
+    "p60_cond_S_converged": dict(
+        value=16.0, convention="constant: condition number of the L2 overlap S at "
+                               "N=8 (K=100), helium, CONVERGED radial box",
+        q=None,
+        provenance="MEASURED 2026-09-07, PM-verified independently at R = 120/240/"
+                   "480 (16.01 at all three). RETIRED: 3673, which is a pure "
+                   "radial-box artifact -- it switches on exactly where n_max^2 "
+                   "first exceeds R_MAX = 60, and every box agrees to 4 digits "
+                   "below that point. Converged cond(S) grows mildly, ~0.12*K "
+                   "(4.07 at K=10 to 23.49 at K=164 to 56.3 at K=452): an ordinary "
+                   "Gram matrix, not an ill-conditioned one.",
+        aliases={23.49: "N=10, K=164, converged", 4.07: "N=3, K=10"}),
 
     # ---- trunk multi-document constants (registered FULL #7, 2026-09-06) ----
     # C21 had ZERO \gvq surface on all six trunk docs (the completeness-critic's

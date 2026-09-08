@@ -9,9 +9,14 @@ Pins:
      (explicit radial Laplacian vs hydrogenic eigen-trick) agree symbolically
      -- difference exactly 0 -- on homonuclear AND heteronuclear sets.
   2. H2 (1s/1s, zeta=1, R=1.4): the closed-form FCI total energy reproduces the
-     84-digit certified value; the homonuclear exchange tau-series TERMINATES
-     (tau_max=2 and tau_max=5 give bit-identical energies -- higher tau terms
-     are symbolic zeros).
+     60-digit certified value (agreement 4.4e-60; corrected 2026-09-07 -- the
+     docstring said 84 digits and the assert allowed only 1e-38); the
+     homonuclear exchange tau-series TERMINATES -- at EQUAL requested
+     precision tau_max=2 and tau_max=5 give bit-identical energies, higher
+     tau terms being symbolic zeros.  (The earlier form compared dps=30
+     against dps=40 and called the agreement bit-identical; those differ at
+     the 55th digit from the precision request alone, and matched only
+     because both were printed at a global dps=50.)
   3. LiH-type heteronuclear exchange (Li 1s / H 1s at R=3.015): the tau-series
      does NOT terminate; the tau_max=4 and tau_max=6 values are pinned and the
      step |v6-v4| is small and frozen (the full certified LiH energy, 30 digits
@@ -53,12 +58,16 @@ def test_h2_certified_energy_and_tau_termination():
     S, h = AS.build_S_h(orbs, 1, 1, R)
     g2, _ = AS.build_g(orbs, R, tau_max=2)
     tot, _e, _v = AS.total_energy(S, h, g2, orbs, 2, 1, 1, R, 40)
-    mp.mp.dps = 50
-    assert abs(mp.mpf(str(tot)) - mp.mpf(H2_CERT)) < mp.mpf("1e-38")
-    # homonuclear termination: tau > 2 contributes symbolic zeros
+    mp.mp.dps = 80
+    # 4.4e-60 measured; 1e-55 leaves margin without being vacuous.  The old
+    # 1e-38 was 22 orders looser than what holds and would pass a wrong form.
+    assert abs(mp.mpf(str(tot)) - mp.mpf(H2_CERT)) < mp.mpf("1e-55")
+    # homonuclear termination: tau > 2 contributes symbolic zeros.  Both legs
+    # at the SAME requested precision, so this is real bit identity and not an
+    # artifact of printing two different-precision values at a common dps.
     g5, _ = AS.build_g(orbs, R, tau_max=5)
-    tot5, _e5, _v5 = AS.total_energy(S, h, g5, orbs, 2, 1, 1, R, 30)
-    assert mp.mpf(str(tot5)) == mp.mpf(str(mp.mpf(str(tot))))  # bit-identical
+    tot5, _e5, _v5 = AS.total_energy(S, h, g5, orbs, 2, 1, 1, R, 40)
+    assert mp.mpf(str(tot5)) == mp.mpf(str(tot)), "tau series did not terminate"
 
 
 def test_heteronuclear_exchange_tau_series():

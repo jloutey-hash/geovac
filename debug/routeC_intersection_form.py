@@ -22,9 +22,11 @@ THEOREM (closed here):
  (S2) Omega is FORCED: among antisymmetric forms preserved by M0 (a 4-parameter family),
       the ones with the concomitant's vanishing cross-sector pairings are exactly Z*Omega;
       the primitive one is Omega.  det Omega = 1 (nondegenerate, UNIMODULAR).
- (S3) M0^T Omega M0 = Omega exactly over Z  =>  the differential Galois group of L4 lies in
-      the integral symplectic group Sp(Omega,Z) = Sp4(Z)  (the concrete integral form of the
-      self-adjoint => Sp4 statement).  The Y0-sector master completes the form: the period-cut
+ (S3) M0^T Omega M0 = Omega exactly over Z  =>  the MONODROMY group of L4 lies in the integral
+      symplectic group Sp(Omega,Z) = Sp4(Z).  (Corrected 2026-09-07: the DIFFERENTIAL GALOIS
+      group lies in Sp4(C), NOT Sp4(Z) -- Sp4(Z) is discrete, so a Zariski-closed subgroup of
+      it is finite, which would force every solution algebraic and contradict the irregular
+      singularity at infinity.  The integral statement is about monodromy.)  The Y0-sector master completes the form: the period-cut
       sub-block {K,I,J} is rank 2 (degenerate); the 4th thimble makes it nondegenerate rank 4.
  (M)  In the period-cut basis {[1,inf),[-1,1], i[-w,w]} the SAME form reads
       B[K,I]/pi=-1, B[K,J]=0, B[I,J]/pi=2  (the paper's 25-digit values), reproduced here.
@@ -212,7 +214,7 @@ def main():
     print("  + block-diagonal (concomitant cross-sector = 0)  =>  Z*Omega, primitive Omega =",
           Om.tolist())
     print("  det Omega =", Om.det(), "  (unimodular, nondegenerate)")
-    print("  M0^T Omega M0 == Omega:", (M0.T * Om * M0) == Om, "  => Galois in Sp(Omega,Z)=Sp4(Z)")
+    print("  M0^T Omega M0 == Omega:", (M0.T * Om * M0) == Om, "  => MONODROMY in Sp(Omega,Z)=Sp4(Z); Galois in Sp4(C)")
     PC = sp.Matrix([[0, -1, 0], [1, 0, 2], [0, -2, 0]])
     print("  period-cut {K,I,J} block rank =", PC.rank(), "(the 4th/Y0 thimble completes to rank 4)")
 

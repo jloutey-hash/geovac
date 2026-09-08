@@ -3,8 +3,9 @@ modular / Gamma-value (Chowla-Selberg) ring across the CM fibers the domain visi
 
 Rung 1 pinned the family as Legendre/Gamma(2) with lambda = 1 - rho.  The physical
 base rho = t(1-t)/[s(1-s)] sweeps ALL of (0, inf) as (s,t) -> boundary, so the (s,t)
-integration covers the whole modular curve X(2) and hits EVERY CM fiber (every singular
-modulus).  Rung 2 confirms the periods there are Gamma-values, at TWO distinct
+integration covers the REAL locus lambda = 1 - rho < 1 of X(2) and hits infinitely many CM
+fibers -- NOT every one (corrected 2026-09-07): non-real lambda (disc -3) and lambda=2
+are off the contour.  Rung 2 confirms the periods there are Gamma-values, at TWO distinct
 fundamental discriminants (so it is a systematic Galois/CM fact, not a lemniscatic
 coincidence):
   - disc -4  (tau = i,     rho = 1/2):        Gamma(1/4)   [done exactly in Rung 1]
@@ -61,7 +62,7 @@ def run(dps):
 
 def main():
     print("RUNG 2 -- periods at CM fibers are Gamma-values (Chowla-Selberg), across discriminants\n")
-    print("Physical base rho = t(1-t)/[s(1-s)] sweeps (0, inf) = ALL of X(2): every CM fiber is hit.\n")
+    print("Physical base rho = t(1-t)/[s(1-s)] sweeps (0, inf): lambda = 1-rho covers the\nREAL locus lambda < 1 of X(2), hitting infinitely many CM fibers -- not every one.\n")
 
     r50 = run(50)
     r70 = run(70)   # cross-precision stability (per the corpus: two-precision-stable required)

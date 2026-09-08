@@ -1,0 +1,10 @@
+nmax=7 lmax=2 K=64 rmax=147 N=24000 [10s] -> debug/data/p60_Tp_l2_n7_c3_N24000.npz
+nmax=8 lmax=2 K=85 rmax=192 N=24000 [19s] -> debug/data/p60_Tp_l2_n8_c3_N24000.npz
+nmax=9 lmax=2 K=109 rmax=243 N=24000 [33s] -> debug/data/p60_Tp_l2_n9_c3_N24000.npz
+nmax=10 lmax=2 K=136 rmax=300 N=24000 [49s] -> debug/data/p60_Tp_l2_n10_c3_N24000.npz
+nmax=11 lmax=2 K=166 rmax=363 N=24000 [82s] -> debug/data/p60_Tp_l2_n11_c3_N24000.npz
+nmax=12 lmax=2 K=199 rmax=432 N=24000 [116s] -> debug/data/p60_Tp_l2_n12_c3_N24000.npz
+nmax=13 lmax=2 K=235 rmax=507 N=24000 [157s] -> debug/data/p60_Tp_l2_n13_c3_N24000.npz
+nmax=14 lmax=2 K=274 rmax=588 N=24000 [181s] -> debug/data/p60_Tp_l2_n14_c3_N24000.npz
+nmax=15 lmax=2 K=316 rmax=675 N=24000 [246s] -> debug/data/p60_Tp_l2_n15_c3_N24000.npz
+nmax=16 lmax=2 K=361 rmax=768 N=24000 [358s] -> debug/data/p60_Tp_l2_n16_c3_N24000.npz

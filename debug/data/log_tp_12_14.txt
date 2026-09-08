@@ -1,0 +1,3 @@
+nmax=12 lmax=3 K=244 rmax=432 N=24000 [191s] -> debug/data/p60_Tp_l3_n12_c3_N24000.npz
+nmax=13 lmax=3 K=290 rmax=507 N=24000 [298s] -> debug/data/p60_Tp_l3_n13_c3_N24000.npz
+nmax=14 lmax=3 K=340 rmax=588 N=24000 [397s] -> debug/data/p60_Tp_l3_n14_c3_N24000.npz

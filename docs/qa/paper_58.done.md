@@ -13,7 +13,35 @@
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-58 scope + deltas + watch-notes.
 
-> **STATUS: CERTIFIED ✅ 2026-08-15 — FULL certifying run PASS.** First single-paper
+> **STATUS: RE-RUN 2026-09-07 — FAIL, remediated; NOT re-certified.**
+> `/qa` (PI-invoked) over the papers edited in the v5.10.x arc. Deterministic
+> layer green on scope `paper_58` (C5/C10/C11/C13/C14/C15/C16/C17/C18/C19/
+> C20/C21 PASS, C22 PASS corpus-wide; C21 grounded on 10 annotations, C17 on
+> 3 families — stated because a gate that examines nothing prints PASS too).
+> **Findings, all remediated:**
+> • *MATERIAL-1, blind decider.* `test_paper58_aabb_decided_census_is_195_of_195`
+>   asserts `(195, 0, 0)`, which is exactly what a decider that never fires
+>   produces. **Fire-tested:** hard-wiring `_decide_zero → False` left the test
+>   GREEN. Closed by `test_paper58_census_deciders_are_alive`, fire-tested in
+>   both directions. Measured while fixing it: **no quartet of `_ORBS` is
+>   Gaunt-forbidden at all (0 of 625)**, so the headline's `0` Gaunt-zeros is
+>   *forced by the basis, not discovered* — now its own recorded test.
+> • *MATERIAL-2, QFD guard precision.* Docstring said "84-digit certified
+>   value"; `H2_CERT` carries 60 digits; the assert allowed `1e-38` while the
+>   agreement is `4.4e-60`. And "bit-identical" compared a dps=30 result to a
+>   dps=40 one — they differ at the 55th digit from the precision request
+>   alone, and matched only because both were printed at a global `mp.mp.dps`.
+>   Tolerance tightened to `1e-55` (fire-tested against a 1e-50 perturbation);
+>   termination now asserted at equal precision, where it is exactly 0.0.
+> • *MATERIAL-3, C22 blindness.* Check D matched only `import debug.x`; this
+>   file's `sys.path.insert(REPO/"debug")` + bare import was invisible — and
+>   was the corpus's ONLY real instance. C22 widened (`DEBUG_SYSPATH`),
+>   discrimination-tested, baselined with the rationale that the same H₂ number
+>   has permanent backing in `test_paper58_qfd.py`.
+> Also fixed: the done-record ran its gates under `--gate group2`, which does
+> not contain this paper. Now `--gate paper_58`.
+>
+> *(superseded — historical)* **CERTIFIED ✅ 2026-08-15 — FULL certifying run PASS.** First single-paper
 > `/qa` target. Certified by a **full calibrated run over the final combined text**
 > (Paper 58 + the group2 synthesis's Paper-58 content): the panel was **fully calibrated**
 > (sensitivity **6/6** planted seeds caught — 2 code, 2 citation, 1 claims, 1 synthesis;
@@ -37,7 +65,8 @@
 - **Out of scope:** the other 9 group2 papers (unchanged since the 2026-06-28 cert).
   Trunk papers (0/1/7/14/18) canonical; in scope only where Paper 58 restates them (C7).
 
-**Deterministic `--gate`:** `group2` (Paper 58 lives under `group2_quantum_chemistry/`).
+**Deterministic `--gate`:** `paper_58`.
+  Note the scope is the SINGLE-PAPER one, not `group2`: `qa_scopes.py` deliberately excludes 58/59/60 from `group2` (they are their own cert targets), so the `--gate group2` this record carried until 2026-09-07 examined NOTHING for the paper it certifies.
 
 ## Dimensions exercised (ALL, one invocation — FULL run, first cert of a fresh target)
 
@@ -54,7 +83,7 @@
 - **Synthesis faithfulness (C9)** — `claims-reviewer` ×1 on the group2-synthesis
   Paper-58 promotions: do they faithfully reflect Paper 58's tiers, and introduce no
   claim Paper 58 does not support?
-- **Deterministic (C10–C18)** — the step-1 scripts, `--gate group2`.
+- **Deterministic (C10–C18)** — the step-1 scripts, `--gate paper_58`.
 - **Completeness-critic** ×1 (FULL run).
 
 ## Branch-defining criterion (inherited from `group2.done.md`): benchmarking + guardrail-negative honesty

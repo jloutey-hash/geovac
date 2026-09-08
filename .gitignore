@@ -126,3 +126,11 @@ tests/_durations.json
 # directory-level `git add` in 4381d06 and blocked the push to GitHub
 # (100 MB/file hard limit). Keep them local.
 debug/data/ints/
+
+# Paper 60 T' matrix caches: 49 files / 16 MB, regenerable by
+# debug/p60_save_tprime.py and p60_save_tprime_fixedbox.py (both
+# committed). Narrow on purpose -- three other debug/data/*.npz are
+# tracked, so a blanket *.npz rule would silently drop their successors.
+# The .json measurements beside these stay tracked: they are the evidence
+# for the corrected exponents, not intermediates.
+debug/data/p60_Tp_*.npz

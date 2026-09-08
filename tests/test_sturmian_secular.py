@@ -18,7 +18,8 @@ K~100 is ~15 s; the ladder/divergence sweeps aggregate several such builds).
 import numpy as np
 import pytest
 
-from geovac.sturmian_secular import (
+from geovac.sturmian_secular import (  # noqa: F401
+    build_S, build_configs,
     build_M,
     build_Tprime,
     build_configs,
@@ -104,19 +105,74 @@ def test_onenorm_sublinear() -> None:
 # standard eigenproblem is the well-conditioned resolution.
 # --------------------------------------------------------------------------------------
 @pytest.mark.slow
-def test_L2_metric_divergence() -> None:
-    """cond(S) grows monotonically from ~O(1) into the thousands as the basis grows."""
-    conds = []
-    for N in (3, 4, 6, 8):
-        lmax = min(3, N - 1)
-        nmp = {l: N for l in range(lmax + 1)}
-        _E_free, _E_S, cond_S, K = solve_with_metric(gen_configs(lmax, nmp))
-        conds.append(cond_S)
+def test_L2_metric_conditioning_is_box_dependent() -> None:
+    """cond(S) is a RADIAL-DOMAIN artifact above n_max^2 = R_MAX, not a property
+    of the L2 metric.
 
-    # Monotone growth across the whole sweep.
-    for a, b in zip(conds, conds[1:]):
-        assert b > a, f"cond(S) not monotone increasing: {conds}"
+    Replaces test_L2_metric_divergence (2026-09-07), which asserted
+    `2000 < cond(S)[N=8] < 6000` -- i.e. it PINNED the artifact and would have
+    failed if anyone repaired the engine. Paper 60's "cond(S) climbs 4 -> 3673"
+    was withdrawn on the strength of this measurement.
 
-    # The smallest basis is well-conditioned (~4); the largest blows up to ~3673 (paper's "4→3673").
-    assert conds[0] < 20.0, f"cond(S) at N=3 = {conds[0]:.1f} unexpectedly large"
-    assert 2000.0 < conds[-1] < 6000.0, f"cond(S) at N=8 = {conds[-1]:.1f} not ~3673 (paper 4→3673)"
+    What is actually true, verified at R_MAX = 60/120/240/480:
+
+        N=3  K=10   n_max^2=9    4.07  4.07  4.07  4.07   <- box-independent
+        N=4  K=20   n_max^2=16   5.69  5.69  5.69  5.69   <- box-independent
+        N=6  K=52   n_max^2=36   9.79  9.76  9.76  9.76   <- box-independent
+        N=8  K=100  n_max^2=64   3673  16.01 16.01 16.01  <- ARTIFACT
+
+    The switch-on is exactly where n_max^2 first exceeds R_MAX: orbitals that
+    outgrow the domain are truncated and then renormalised, which manufactures
+    near-degenerate rows in the Gram matrix. Converged, cond(S) grows mildly
+    (~0.12*K).
+
+    The wrong answers this rejects:
+      (a) cond(S) blowing up at a basis whose orbitals FIT the domain -- that
+          would mean the L2 metric really is ill-conditioned;
+      (b) cond(S) being box-INdependent where the orbitals overflow -- that
+          would mean the 3673 was real after all;
+    NOT claimed: this does not fire when the module's default R_MAX changes.
+    It sets the domain itself, so a repair of the engine default leaves it green
+    -- deliberately. The OLD assertion failed on repair, which is exactly the
+    defect being removed here; a guard that punishes the fix is worse than none.
+    (Fire-tested 2026-09-07: R_MAX 60 -> 400 correctly does NOT fire; removing
+    the grid renormalisation in hyd_radial DOES.)
+    """
+    import numpy as np
+
+    import geovac.sturmian_secular as _S
+
+    def _cond_at(N: int, rmax: float) -> float:
+        r_o, dr_o, r2_o, rm_o = _S.r, _S.dr, _S.r2, _S.R_MAX
+        try:
+            npts = int(_S.N_GRID * rmax / 60.0)
+            _S.R_MAX = rmax
+            _S.r = np.linspace(1e-7, rmax, npts)
+            _S.dr = _S.r[1] - _S.r[0]
+            _S.r2 = _S.r * _S.r
+            lmax = min(3, N - 1)
+            cfgs = build_configs(gen_configs(lmax, {l: N for l in range(lmax + 1)}))
+            return float(np.linalg.cond(build_S(cfgs)))
+        finally:
+            _S.r, _S.dr, _S.r2, _S.R_MAX = r_o, dr_o, r2_o, rm_o
+
+    # (1) Where the orbitals FIT the domain, cond(S) does not depend on it.
+    for N in (3, 4, 6):
+        c60, c240 = _cond_at(N, 60.0), _cond_at(N, 240.0)
+        assert N * N < 60, f"N={N} was supposed to fit inside the 60-bohr box"
+        assert abs(c60 - c240) / c240 < 5e-3, (
+            f"N={N}: cond(S) moved with the box ({c60:.3f} vs {c240:.3f}) "
+            f"even though n_max^2={N*N} fits inside it")
+        assert c60 < 20.0, f"N={N}: cond(S)={c60:.1f} unexpectedly large"
+
+    # (2) Where they do NOT fit, the small box inflates it by orders of magnitude.
+    c60_8, c240_8 = _cond_at(8, 60.0), _cond_at(8, 240.0)
+    assert 8 * 8 > 60, "N=8 was supposed to overflow the 60-bohr box"
+    assert c60_8 > 100.0 * c240_8, (
+        f"N=8: the 60-bohr box no longer inflates cond(S) "
+        f"({c60_8:.1f} vs {c240_8:.2f}) -- has the engine been repaired?")
+
+    # (3) Converged, it is an ordinary Gram matrix, not an ill-conditioned one.
+    assert c240_8 < 40.0, (
+        f"converged cond(S) at N=8 is {c240_8:.1f}; Paper 60's withdrawn "
+        f"'4 -> 3673' claim would need this to be in the thousands")

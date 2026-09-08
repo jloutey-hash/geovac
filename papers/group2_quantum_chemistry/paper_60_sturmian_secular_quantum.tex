@@ -23,11 +23,20 @@ Conditioning Frontier for Molecules}
 \begin{abstract}
 \emph{Central result.}  In Avery's isoenergetic (potential-weighted) posing,
 the \emph{atomic} Coulomb--Sturmian secular equation is a standard,
-metric-free eigenproblem whose block-encoding $1$-norm grows \emph{sublinearly}
-in the configuration count---an apparently novel quantum-encoding target, with
-both documented cost-risks of the genre (metric conditioning; an outer energy
-search) structurally absent---whereas the naive $L^2$ posing of the same basis
-inflates that cost instead.  The development follows.
+metric-free eigenproblem---an apparently novel quantum-encoding target, with
+both documented cost-risks of the genre (metric conditioning;\ an outer energy
+search) structurally absent---whereas the naive $L^{2}$ posing of the same
+basis inflates the cost instead.  Its block-encoding $1$-norm grows
+\emph{more slowly than the configuration count} over every basis we can
+compute, and \emph{more} slowly as the basis grows.  That advantage, however,
+belongs to the \emph{basis-growth rule} rather than to the construction:\ it
+holds when $l_{\max}$ is fixed and higher-$n$ configurations are added, and
+reverses to superlinear when the basis is grown as full hydrogenic shells.
+The cheap rule is also the one that stops converging---it saturates
+$4.0\times$ above chemical accuracy at any basis size---so the two facts are
+one fact.  The result is therefore a measured trade-off between cost growth
+and attainable accuracy, not an unconditional efficiency claim.  The
+development follows.
 
 A recurring intuition in quantum simulation is that a Coulomb--Sturmian /
 hyperspherical basis is well suited to a quantum computer, because its angular
@@ -53,9 +62,14 @@ Goscinskian configuration reproduces the textbook variational value
 $-2.847$~Ha; adding configurations lowers the energy monotonically through
 the $s$, $+p$ and $spdf$ sectors---past the $s$-sector limit $-2.873$~Ha to
 $-2.897$~Ha, toward the exact non-relativistic $-2.90372$~Ha), and measure the decisive quantity: the block-encoding $1$-norm of the
-secular matrix grows \emph{sublinearly}, $\|M\|_1\sim K^{0.84}$ (full $s\!+\!p\!+\!d\!+\!f$
-basis; $K^{0.78}$ $s$-only) in the number of
-configurations---the opposite of the naive inflation.  \textbf{[OBSERVATION]} A
+secular matrix grows \emph{more slowly than the matrix dimension},
+$\|M\|_1\sim K^{\gvq{p60_onenorm_exponent}{0.82}}$ over the computed range
+$K=74$--$164$ (full $s\!+\!p\!+\!d\!+\!f$, helium;
+$K^{\gvq{p60_onenorm_exponent_sonly}{0.73}}$ $s$-only)---the opposite of the
+naive inflation.  The exponent is a fit over a window and not an asymptotic
+regime:\ its local slope \emph{falls} monotonically with $K$
+(Sec.~\ref{sec:atomic}), it moves with the nuclear charge, and it belongs to
+the fixed-$l_{\max}$ growth rule rather than to the construction.  \textbf{[OBSERVATION]} A
 targeted prior-art search finds no existing quantum algorithm combining a
 Sturmian basis, a quantum eigenvalue routine, and the isoenergetic inversion;
 the two documented cost risks for such an algorithm---metric conditioning and an
@@ -175,14 +189,28 @@ overlap metric never disappears; moving it densifies operators, states, or
 coefficients~\cite{loutey_paper58}).  Encoded this way, the Sturmian basis is the
 \emph{worst}, not the best, choice.
 
-\textbf{[MEASURED]} The obstruction is intrinsic to the $L^2$ posing, not to a
-choice of orthogonalization: re-solving the converged $s\!+\!p\!+\!d\!+\!f$ helium
-problem of Sec.~\ref{sec:atomic} as the generalized eigenproblem $MB=pSB$ with the
-$L^2$ overlap $S$ restored \emph{diverges}, the metric condition number climbing
-$4\to3673$ over the basis while the energy runs to $-3\times10^6$~Ha---the
-metric-free standard eigenproblem of Sec.~\ref{sec:iso} is not merely convenient,
-it is the only well-conditioned posing we have found.  The rest of the paper shows this
-obstruction is an artifact of the $L^2$ framing, not of the Sturmians.
+\textbf{[MEASURED]} The obstruction is intrinsic to the $L^{2}$ posing rather
+than to a choice of orthogonalization:\ the $L^{2}$ L\"owdin encoding inflates
+the LCU $1$-norm as $\lambda\sim Q^{3.33}$ against $Q^{1.19}$ for an
+orthonormal hydrogenic basis (Eq.~\eqref{eq:blowup}), measured through a
+faithful Jordan--Wigner LCU.  That is the cost obstruction, and it stands.
+%
+\emph{Correction, 2026-09-07 --- a stronger claim is withdrawn here.}  Earlier
+versions added that re-solving the converged $s\!+\!p\!+\!d\!+\!f$ helium
+problem as the generalized eigenproblem $MB=pSB$ \emph{diverges}, with the
+metric condition number climbing $4\to3673$ and the energy running to
+$-3\times10^{6}$~Ha.  Both numbers are artifacts of the fixed $60$-bohr radial
+domain (Appendix~\ref{app:box}).  On a converged domain
+$\mathrm{cond}(S)=\gvq{p60_cond_S_converged}{16.0}$ at the same point, and the
+growth is mild and smooth, $\mathrm{cond}(S)\approx0.12\,K$ --- $4.07$ at
+$K=10$, $23.5$ at $K=164$, $56.3$ at $K=452$.  The blow-up switches on exactly
+where $n_{\max}^{2}$ first exceeds the domain size, and every domain agrees to
+four digits below that point.  The $L^{2}$ Gram matrix of this basis is
+therefore ordinary, not ill-conditioned, and we no longer claim the
+metric-free posing is the \emph{only} well-conditioned one.  What we do claim
+is the cost statement above:\ the $L^{2}$ posing is expensive to
+\emph{encode}, which is a different assertion from being numerically
+unstable, and is the one this paper's argument needs.
 
 \section{The isoenergetic reformulation is metric-free for atoms}
 \label{sec:iso}
@@ -265,37 +293,131 @@ coupling).
 
 The decisive quantity is the block-encoding cost.  \textbf{[MEASURED]} The
 entrywise $1$-norm of the secular matrix, $\|M\|_1=\sum_{\nu'\nu}|M_{\nu'\nu}|$
-(an upper bound on the achievable LCU $\lambda$), grows \emph{sublinearly} in the
-number of configurations $K$,
+(an upper bound on the achievable LCU $\lambda$), grows \emph{more slowly than
+the matrix dimension} $K$,
 \begin{equation}
-\|M\|_1\sim K^{0.84}\quad(\text{full }s\!+\!p\!+\!d\!+\!f\text{ basis}),
+\|M\|_1\sim K^{\gvq{p60_onenorm_exponent}{0.82}}\quad
+(\text{full }s\!+\!p\!+\!d\!+\!f,\ \text{helium},\ K=74\text{--}164),
 \label{eq:sublinear}
 \end{equation}
-the opposite of the naive inflation Eq.~\eqref{eq:blowup}.  (The
-``sublinear'' here is a property of the LCU $1$-norm $\|M\|_1$ of a
-\emph{fixed}-size atomic secular matrix as the configuration count $K$
-grows;\ it is a distinct quantity from the sublinear \emph{gate
-complexity in the number of plane-wave basis functions} of Babbush
-\emph{et al.}~\cite{babbush2019}.  Its exponent is in the configuration count
-$K$ at \emph{fixed} atomic size---a different axis from the system-size scaling
-of the electronic-structure $1$-norm literature, where the best documented
+the opposite of the naive inflation Eq.~\eqref{eq:blowup}.
+
+\emph{Three qualifiers travel with that number, and none is cosmetic.}
+
+\textbf{[MEASURED]} \emph{First, it is not a stable exponent.}  The fit is over a
+window, and the window's value is not the object's behaviour.  Continuing the
+same family, the \emph{local} slope falls monotonically:\ $0.827$, $0.818$,
+$0.810$, $0.802$, $0.794$, $0.787$, $0.781$, $0.776$, $0.771$, $0.766$ across
+$K=100$--$514$, with no plateau at the largest basis we can reach.  A two-parameter
+$c\,K^{p}\log K$ form fits the data an order of magnitude better than any pure
+power law, for every norm family we measured.  The honest statement is that
+$\|M\|_1$ grows sublinearly over every computable basis and moves \emph{away}
+from linear as the basis grows;\ any single exponent is a property of the window
+it was fitted in.
+
+\textbf{[MEASURED]} \emph{Second, it is a helium number.}  $T'$ is
+$Z$-independent by construction, so $\|M\|_1$'s exponent is a mixture whose
+weight moves with the nuclear charge:\ the same window gives $0.947$ at $Z=1/2$,
+$0.819$ at $Z=2$, and $0.717$ at $Z=30$.  Every exponent in this paper is quoted
+for helium.
+
+\textbf{[MEASURED]} \emph{Third --- and this is the substantive finding --- the
+sublinearity is a property of how the basis is grown, not of the isoenergetic
+construction.}  The family used here holds $l_{\max}$ fixed and adds
+higher-$n$ configurations, whose couplings decay as $n^{-2}$.  Grown the other
+way, as full hydrogenic shells with $l_{\max}=n_{\max}-1$, the same secular
+construction gives $\|T'\|_1\sim K^{1.07}$ and a total exponent that
+\emph{rises} with $K$ ($0.867\to0.911$ over $K=56$--$220$).  Superlinear
+behaviour and a rising exponent are therefore real --- for a different
+growth rule.  What Eq.~\eqref{eq:sublinear} measures is the fixed-$l_{\max}$
+rule, and the cost advantage belongs to that rule rather than to the method.
+
+\textbf{[MEASURED]} \emph{Which block carries it.}  Splitting
+$M=\mathrm{diag}(Z R_\nu)+T'$ and fitting each over $K=74$--$340$ on a converged
+radial domain:
+\begin{equation}
+\|T^0\|_1 = Z\!\sum_\nu R_\nu, \qquad
+\|T'\|_1 \sim K^{\gvq{p60_Tprime_full_exponent}{0.88}}, \qquad
+\|T'\|_1^{\rm off} \sim K^{\gvq{p60_Tprime_exponent}{0.94}} .
+\label{eq:sublinear_split}
+\end{equation}
+The three are related by the exact identity
+$\|M\|_1=\|T^0\|_1-\|\mathrm{diag}\,T'\|_1+\|T'\|_1^{\rm off}$.
+\textbf{Neither $T'$ grouping is superlinear}:\ the full block's local slope
+crosses $1$ near $K\approx37$ and falls to $0.805$ by $K=514$;\ the off-diagonal
+part crosses near $K\approx91$ and falls to $0.841$.  The nuclear diagonal is
+nonetheless the slowest-growing block, and its share of the norm falls
+monotonically ($64.9\%$ at $K=74$ to $57.0\%$ at $K=340$), so
+Eq.~\eqref{eq:sublinear}'s exponent sits between the two and drifts with their
+mixture.  This is the same structural fact Sec.~\ref{sec:molecular} reaches from
+the other side:\ the advantage rides on the clean single-center diagonal $T^0$,
+which is exactly what two centers destroy.  Angular structure dilutes but does
+not break the contrast --- the $s$-only exponent
+$\gvq{p60_onenorm_exponent_sonly}{0.73}$ rises to
+$\gvq{p60_onenorm_exponent}{0.82}$ with $p,d,f$ present, on matched windows.
+
+\textbf{[SYMBOLIC]} \emph{The nuclear diagonal is not a power law at all.}
+$\|T^0\|_1=Z\sum_\nu R_\nu$ requires no two-electron integral and no radial
+grid:\ it is a closed-form sum over the configuration list, with
+$K=2N^{2}-4N+4$ exactly for $l_{\max}=3$.  Its asymptotics are
+\begin{equation}
+\|T^0\|_1 \;\sim\; Z\,\sqrt{2K}\,\ln(K/2),
+\label{eq:T0_closed}
+\end{equation}
+so its log--log slope is
+$\tfrac12+O(1/\log K)$ --- asymptotic exponent
+$\gvq{p60_T0_asymptotic_exponent}{1/2}$, not a fitted power.  Evaluated on the
+exact sum the slope runs $0.709$ at $K=20$, $0.705$ at $164$, $0.662$ at
+$12484$ and $0.603$ at $498004$, still falling.  A fit inside $K=74$--$164$
+returns $0.705$;\ that is what the window yields, not what the object does.
+Eq.~\eqref{eq:T0_closed} is the one leg of this section that is derived rather
+than measured, and it is grid-independent by construction.
+
+\textbf{[MEASURED]} \emph{What the sublinearity costs.}  The fixed-$l_{\max}$
+family does not converge to the exact energy.  On the converged ladder its
+ground-state error is $8.04$~mHa at $K=74$ and $6.78$~mHa at $K=514$;\ fitting
+$\Delta E(K)=\Delta E_\infty + bK^{-q}$ gives
+$\Delta E_\infty=\gvq{p60_energy_floor}{6.44}$~mHa (residual $<0.002$~mHa), with
+$6.446$~mHa still predicted at $K=10^{5}$.  Seven times the basis closes $16\%$
+of the deficit.  \textbf{The floor is $4.0\times$ chemical accuracy
+($1.594$~mHa), so this family cannot reach chemical accuracy at any $K$.}  The
+angular detail that would close the gap is exactly what $l_{\max}$ is capped
+against --- which is to say the cheap growth and the saturation are the same
+fact seen twice.  \textbf{[OPEN]} Whether the floor can be lowered while the
+sublinear growth is preserved --- for instance by a \emph{fixed}, non-growing
+increment of high-$l$ functions --- is open, and is the natural next question
+this section raises.  As it stands the fixed-$l_{\max}$ family is best read as a
+\emph{fixed-accuracy tier}:\ sublinear cost at a known and unimprovable
+$\sim\!6.4$~mHa, rather than an approximation that converges.
+
+\emph{Scope and comparison.}  The ``sublinear'' here is a property of the LCU
+$1$-norm $\|M\|_1$ of a \emph{fixed}-size atomic secular matrix as the
+configuration count $K$ grows;\ it is a distinct quantity from the sublinear
+\emph{gate complexity in the number of plane-wave basis functions} of Babbush
+\emph{et al.}~\cite{babbush2019}.  Its exponent is in $K$ at \emph{fixed} atomic
+size --- a different axis from the system-size scaling of the
+electronic-structure $1$-norm literature, where the best documented
 basis-choice lever, localized orbitals~\cite{koridon2021}, reaches
-$\sim\!N^{1.34}$ in the orbital count and is still superlinear; the two are a
-regime contrast, not a like-for-like exponent comparison.)  The mechanism is the
-one Avery notes for Coulomb potentials: the pure-number matrix elements decrease
-with quantum number (higher configurations have small root $R_\nu$ and rapidly
-decaying couplings), so the sum grows more slowly than the matrix dimension.
-Crucially, angular correlation does \emph{not} break it: the $s$-only exponent
-$0.78$ rises only to $0.84$ with $p,d,f$ configurations present, so the contrast
-with the naive superlinear inflation holds for the full basis, not merely the
-$s$-sector.  Two caveats remain: the construction uses $L^2$-normalized
-configurations rather than the exact potential-weighted normalization (the
-single-configuration value is exact and the convergence is correct, so the
-constant may shift but not, we expect, the sublinear exponent); and $K$ is the
-matrix dimension, not the qubit count, so the robust statement is the
-\emph{qualitative} contrast, sublinear versus the $L^2$ superlinear blow-up.
-The quoted exponents are numerical fits at the computed basis sizes; the
-load-bearing claim is that regime and ordering, not the precise fitted value.
+$\sim\!N^{1.34}$ in the orbital count and is still superlinear;\ the two are a
+regime contrast, not a like-for-like exponent comparison.  Two further caveats:\
+the construction uses $L^{2}$-normalized configurations rather than the exact
+potential-weighted normalization, and $K$ is the matrix dimension, not the qubit
+count.  Given that the exponent has already moved once under a change of
+numerical domain, we no longer assert that the normalization would leave it
+fixed;\ that is an open check.
+
+\emph{Provenance of the numbers in this section.}  \textbf{[MEASURED]}  All
+values above are computed on a radial domain satisfying $R_{\max}\ge 3n_{\max}^{2}$,
+the convergence rule established in Appendix~\ref{app:box}, and were obtained
+by two independent routes --- exact grid-free evaluation of the Slater integrals
+in closed form, and converged quadrature on a graded mesh --- agreeing to four
+decimal places on every leg.  An earlier version of this section reported
+$K^{0.84}$, $\|T'\|^{\rm off}_1\sim K^{1.05}$ and an exponent ``trending toward
+$1$''.  Those were computed on a fixed $60$-bohr radial domain, which truncates
+configurations whose orbitals extend to $100$--$200$ bohr;\ because the
+truncation error grows with $K$ (by a factor $1.011\to1.205$ across the fitted
+range) it inflated the fitted slope and reversed its apparent drift.  The
+corrected values are reported here.
 
 \section{The quantum algorithm and its novelty}
 \label{sec:quantum}
@@ -321,7 +443,9 @@ generalized eigenproblems~\cite{liang2022,baek2023} does not apply, because
 Eq.~\eqref{eq:secular} carries no metric.  The outer energy search that would
 otherwise multiply the cost does not arise, because the eigenvalues are the
 energies.  What remains is a single figure of merit, the $1$-norm of $M$, which
-Eq.~\eqref{eq:sublinear} measures to be sublinear.  We stress that this is a
+Eq.~\eqref{eq:sublinear} measures to grow more slowly than the matrix dimension
+over every computed basis (with the caveats on window and mechanism recorded
+there).  We stress that this is a
 resource analysis, not a hardware demonstration.
 
 \section{The molecular frontier: Shibuya--Wulfman conditioning}
@@ -613,12 +737,18 @@ matrix.
 \label{sec:conclusion}
 
 The message is a sharp split.  \emph{For atoms}, the isoenergetic
-generalized-Sturmian reformulation converts electronic structure into a standard,
-metric-free eigenproblem with a bounded pure-number matrix whose block-encoding
-$1$-norm grows sublinearly---a clean, apparently novel quantum secular equation
-in which the two feared cost risks of the genre are structurally absent.  The
-$L^2$-encoding obstruction that makes the same basis the worst possible choice is
-revealed as an artifact of the wrong framing.  \emph{For molecules}, the
+generalized-Sturmian reformulation converts electronic structure into a
+standard, metric-free eigenproblem---a clean, apparently novel quantum secular
+equation in which the two feared cost risks of the genre are structurally
+absent.  Its block-encoding $1$-norm grows more slowly than the matrix
+dimension over every basis we can compute, and increasingly so.  But the
+sharper statement is a trade-off rather than an efficiency:\ that growth
+belongs to the fixed-$l_{\max}$ basis-growth rule, reverses under full-shell
+growth, and is paid for by a $6.4$~mHa accuracy floor that no basis size in
+that family crosses.  Read as a fixed-accuracy tier it is a real and cheap
+operating point;\ read as a route to chemical accuracy it is not one, and
+whether the floor can be lowered without losing the growth is the open
+question we leave.  \emph{For molecules}, the
 Shibuya--Wulfman metric returns; it is genuinely better-conditioned than the
 $L^2$ overlap---its intra-center block is the identity---and much better at large
 separation, but its inter-center coupling still costs conditioning that grows
@@ -647,6 +777,38 @@ the resource measurements.  Developed with an AI-augmented workflow under
 principal-investigator direction, with the headline numerical claims validated against
 analytical benchmarks and a regression test suite.
 \end{acknowledgments}
+
+\appendix
+
+\section{Radial-domain convergence rule}
+\label{app:box}
+
+\textbf{[MEASURED]} The Goscinskian configuration $\nu=(l,n_a,n_b)$ carries
+weighted charge $Q_\nu=p_\kappa/R_\nu$ with $R_\nu=\sqrt{n_a^{-2}+n_b^{-2}}$,
+and its orbital $n$ is hydrogenic at exponent $a=Q_\nu/n$.  Its radial density
+therefore peaks at $r_{\rm pk}=n/a=n^{2}R_\nu$, and the mismatched pairs
+$(l,1,n)$ at $Q_\nu\!\approx\!1$ reach furthest.  A radial domain must satisfy
+\begin{equation}
+R_{\max}\;\ge\;3\,\max_\nu\max_j\,n_j^{2}R_\nu\;\approx\;3\,n_{\max}^{2}
+\label{eq:boxrule}
+\end{equation}
+for the $1$-norm exponents to be converged.  Measured relative error of
+$\|T'\|_1^{\rm off}$ against a $R_{\max}=5n_{\max}^{2}$ reference:\ a fixed
+$60$-bohr domain gives $1.1\times10^{-2}$ at $K=74$ rising to $2.1\times10^{-1}$
+at $K=340$;\ $c=1$ gives $\sim\!10^{-2}$ \emph{falling} with $K$;\ $c=2$ gives
+$\sim\!10^{-4}$;\ $c=3$ gives $\sim\!10^{-7}$.  Exponents are converged to
+$\pm0.001$ at $c=2$ and $\pm10^{-4}$ at $c=3$.
+
+The distinction that matters is not the size of the error but its \emph{sign of
+drift}.  A domain that scales with the basis produces an error that shrinks with
+$K$ and biases a log--log slope negligibly;\ a fixed domain produces an error
+that \emph{grows} with $K$, i.e.\ with the fit variable, and biases the slope
+upward.  The mechanism is normalization:\ an orbital truncated at $60$ bohr
+retains as little as $2.7\%$ of its norm at $n=14$ and is then renormalized to
+unity, manufacturing a compact pseudo-orbital whose repulsion integral is $O(1)$
+where the true coupling decays as $n^{-2}$.  Equal-$n$ configurations and
+$1s^{2}$ are unaffected, so single-configuration checks --- including
+$E(1s^{2})=-729/256$ and the $(5/8)Q$ unit-charge integral --- are blind to it.
 
 \begin{thebibliography}{99}
 
@@ -720,7 +882,7 @@ precision,'' SIAM J.\ Comput.\ \textbf{46}, 1920 (2017); arXiv:1511.02306.
 
 \bibitem{loutey_paper58}
 J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property: The Abelian
-Residue'' (Paper 58, Geometric Vacuum series).
+Residue of Multi-Center Bonding'' (Paper 58, Geometric Vacuum series).
 
 \bibitem{loutey_paper59}
 J.~Loutey, ``The Three-Center Electron-Repulsion Integral Is an Elliptic Bessel

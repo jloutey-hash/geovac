@@ -241,8 +241,43 @@ ZENODO = re.compile(r"``\s*GeoVac\s+Paper~?\s*(?P<n>\d+):\s*(?P<title>(?:(?!'')[
 # quoted title before the next \bibitem. Closes the run-#6 C11 blind spot where
 # the "Technical Report" format left an entire paper's internal cites uncertified.
 KEYED = re.compile(
-    r"\\bibitem\{(?:geovac[_-]?)?paper[_-]?(?P<n>\d+)[a-z_]*\}"
+    # Key prefix widened 2026-09-07.  It previously allowed an optional
+    # `geovac_` and nothing else, so every `\bibitem{loutey_paperN}` -- 208 of
+    # them corpus-wide, the second most common internal citation shape -- fell
+    # out of the gate entirely.  Measured on the 58/59/60 FULL run: C11 skipped
+    # 137 of 497 internal bibitems (27.6%) and a planted bogus title on
+    # Paper 59's `loutey_paper18` returned PASS.  `(?:[a-z]+[_-])*` takes any
+    # run of author/project prefixes and cannot swallow `paper` itself, which
+    # carries no trailing separator.
+    r"\\bibitem\{(?:[a-z]+[_-])*paper[_-]?(?P<n>\d+)[a-z_]*\}"
     r"(?P<body>(?:(?!\\bibitem)[\s\S])*?)" + QUOTE,
+    re.DOTALL | re.IGNORECASE,
+)
+# EMPH: the second escape route found in the same audit.  All three patterns
+# above require the ``...'' quoted form, so a title set in italics --
+# `\emph{Paper 1: The Geometric Atom: ...}`, 92 occurrences, concentrated in
+# Paper 29 -- was invisible.  Anchored on `Paper N:` inside the \emph so it
+# cannot match the ordinary \emph{journal name} usage.
+EMPH = re.compile(
+    r"\\emph\{Papers?~?\s*(?P<n>\d+):\s*(?P<title>[^{}]*?)\.?\}",
+    re.DOTALL,
+)
+# KEYED_EMPH: the third form, and the residue after the first two fixes took
+# the blind spot from 27.6% to 10.5%.  Here the number is in the KEY and the
+# title is italicised with no "Paper N:" prefix inside the braces --
+#   \bibitem{paper42} J.~Loutey, \emph{Tomita--Takesaki ...} (Paper~42 ...).
+# Same shape as KEYED with \emph{} substituted for ``''.  One level of brace
+# nesting is allowed so titles containing macros are not truncated.
+KEYED_EMPH = re.compile(
+    r"\\bibitem\{(?:[a-z]+[_-])*paper[_-]?(?P<n>\d+)[a-z_]*\}"
+    r"(?P<body>(?:(?!\\bibitem)[\s\S])*?)"
+    # The optional `Paper N:` prefix is CONSUMED, not captured.  Without this
+    # the pattern double-reports every bibitem EMPH already handles correctly
+    # -- it returned "Paper 1: The Geometric Atom: ..." against the real
+    # "The Geometric Atom: ..." and called a correct citation a mismatch.
+    # Caught by triaging this pattern's own first run rather than trusting its
+    # hit count; a newly loud gate is not automatically a correct one.
+    r"\\emph\{(?:Papers?~?\s*\d+:\s*)?(?P<title>(?:[^{}]|\{[^{}]*\})*?)\.?\}",
     re.DOTALL | re.IGNORECASE,
 )
 
@@ -308,6 +343,10 @@ def main(argv=None) -> int:
         for m in NORMAL.finditer(txt):
             _check(int(m.group("n")), m.group("title"))
         for m in KEYED.finditer(txt):
+            _check(int(m.group("n")), m.group("title"))
+        for m in EMPH.finditer(txt):
+            _check(int(m.group("n")), m.group("title"))
+        for m in KEYED_EMPH.finditer(txt):
             _check(int(m.group("n")), m.group("title"))
 
     # Partition by --gate: a mismatch FAILs only if its CITING file's path matches

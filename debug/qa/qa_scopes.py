@@ -94,9 +94,12 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
             "synthesis/group2_quantum_chemistry_synthesis.tex",
         ],
     },
-    # docs/qa/group3.done.md: Papers 18, 22, 24, 31, 54-57 + synthesis.
+    # docs/qa/group3.done.md: Papers 18, 22, 24, 31, 54-57, 61 + synthesis.
+    # 61 added 2026-09-07: it is the periods/Tannakian arc (siblings 55, 56,
+    # 57 are all here) and lives in papers/group3_foundations/, but was in no
+    # group scope, so `/qa group3` walked past it.
     "group3": {
-        "papers": [18, 22, 24, 31, 54, 55, 56, 57],
+        "papers": [18, 22, 24, 31, 54, 55, 56, 57, 61],
         "extra": ["synthesis/group3_foundations_synthesis.tex"],
     },
     # docs/qa/group4.done.md: Papers 14, 16, 20, 23 + synthesis.
@@ -135,8 +138,29 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
         "papers": [58],
         "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"],
     },
-    "paper_59": {"papers": [59], "extra": []},
-    "paper_60": {"papers": [60], "extra": []},
+    # Papers 59 and 60 DO have a group2-synthesis footprint (added 2026-09-06,
+    # v5.10.6: the "transcendence frontier at the third center" and
+    # "isoenergetic secular equation as a quantum algorithm" subsections, plus
+    # their bibitems).  Both DoDs still say "no footprint", and that stale
+    # premise -- copied into this table -- is why the deterministic layer never
+    # looked at the synthesis for either paper and why C9 was declared N/A on
+    # them.  A scope exclusion inherited from a premise dies with the premise.
+    "paper_59": {"papers": [59],
+                 "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
+    "paper_60": {"papers": [60],
+                 "extra": ["synthesis/group2_quantum_chemistry_synthesis.tex"]},
+    # Paper 61 was split out of Paper 59 on 2026-09-06 and belonged to NO
+    # scope: invisible to every deterministic gate under every --gate, absent
+    # from every .done.md and from claim_test_matrix.md, while three in-scope
+    # Paper-59 claims rest on it.  The orphan-paper assertion in selftest()
+    # now makes this class impossible to reintroduce silently.
+    # C9 is GATING for Paper 61 and the seam is cross-GROUP: Paper 59 is in
+    # group2, Paper 61 in group3. A scope of {61} alone contains neither the
+    # companion nor either synthesis -- which is how nine test-suite loci kept
+    # crediting Paper 59 for Paper-61-owned labels for a day after the split.
+    "paper_61": {"papers": [59, 61],
+                 "extra": ["synthesis/group3_foundations_synthesis.tex",
+                           "synthesis/group2_quantum_chemistry_synthesis.tex"]},
 }
 
 # Convenience aliases matching how the PI types the target.
@@ -147,6 +171,22 @@ ALIASES = {
 }
 
 _NUM_RE = re.compile(r"(?:^|/)[Pp]aper_(\d+)_")
+
+# Papers that live in a groupN folder but are DELIBERATELY not in the groupN
+# scope.  Every entry needs a reason, because the default must be "in your
+# group": Paper 61 sat outside its group for a day precisely because nothing
+# forced the question.  Enforced by the group-membership assertion in
+# selftest().
+GROUP_SCOPE_EXEMPT: Dict[int, str] = {
+    0: "trunk root (docs/qa/trunk.done.md); group DoDs take trunk as given",
+    1: "trunk root",
+    7: "trunk root",
+    32: "trunk root",
+    38: "trunk root",
+    58: "own cert target (docs/qa/paper_58.done.md)",
+    59: "own cert target (docs/qa/paper_59.done.md)",
+    60: "own cert target (docs/qa/paper_60.done.md)",
+}
 
 
 def all_paper_files(root: str = REPO_ROOT) -> List[str]:
@@ -317,6 +357,58 @@ def selftest() -> int:
                   f"resolved {len(got)}")
         else:
             print(f"[ok]   {name:<10} {len(got):>2} file(s)")
+
+    # 1b. ORPHAN-PAPER ASSERTION (2026-09-07).  Checks 1-3 all verify that the
+    #     DECLARED members resolve; none of them asked the mirror question --
+    #     does every paper ON DISK belong to some scope?  It did not: Paper 61,
+    #     split out of Paper 59 on 2026-09-06, was in no scope at all and was
+    #     therefore invisible to every deterministic gate under every --gate,
+    #     while three in-scope Paper-59 claims rested on it.  Same failure shape
+    #     as the C19 bug one level up: the scope TABLE silently excluding a live
+    #     document.  A new paper now fails this until someone places it.
+    covered = set()
+    for name in SCOPES:
+        got, _ = resolve(name, files)
+        covered.update(got)
+    orphans = sorted(set(files) - covered)
+    if orphans:
+        ok = False
+        print(f"[FAIL] {len(orphans)} paper(s) belong to NO scope -- invisible "
+              f"to every gate under every --gate:")
+        for o in orphans:
+            print(f"         {os.path.relpath(o, REPO_ROOT)}")
+    else:
+        print(f"[ok]   orphan-paper check: all {len(files)} papers in a scope")
+
+    # 1c. GROUP-MEMBERSHIP ASSERTION (2026-09-07).  The narrower mirror of
+    #     1b, and the one that actually catches the live case: 1b asks "is
+    #     this paper in SOME scope?", which Paper 61 passed the moment it got
+    #     a single-paper scope -- while `/qa group3` still could not see it.
+    #     A paper in papers/groupN_*/ must be in the groupN scope unless it is
+    #     DECLARED exempt, so a standalone target costs a deliberate line.
+    misplaced = 0
+    for f in files:
+        rel = os.path.relpath(f, REPO_ROOT).replace("\\", "/")
+        m = re.search(r"papers/(group\d)_", rel)
+        if not m:
+            continue                       # synthesis/, archive/: no group
+        grp = m.group(1)
+        num = paper_number(f)
+        if num in GROUP_SCOPE_EXEMPT or grp not in SCOPES:
+            continue
+        got, _ = resolve(grp, files)
+        if f not in got:
+            ok = False
+            misplaced += 1
+            print(f"[FAIL] Paper {num} is in papers/{grp}_* but NOT in the "
+                  f"'{grp}' scope, and is not declared in "
+                  f"GROUP_SCOPE_EXEMPT -- `/qa {grp}` would walk past it")
+    # NOT a for/else: that runs whenever the loop is not break-ed, i.e.
+    # always, so the reassuring line printed next to its own [FAIL].
+    if not misplaced:
+        print(f"[ok]   group-membership check: every group paper is in its "
+              f"group scope or declared exempt ({len(GROUP_SCOPE_EXEMPT)} "
+              f"declared)")
 
     # 2. No scope resolves to nothing -- the C19 bug, made unrepresentable.
     for name in SCOPES:

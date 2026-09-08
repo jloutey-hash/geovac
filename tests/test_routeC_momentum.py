@@ -7,6 +7,13 @@ Self-contained (no debug/ import, per the transient-dir policy).  Pins the two
 load-bearing, VALIDATED facts -- the method is exact and the single-dispersion
 factor is a Bessel K0.  The transcendence WEIGHT of the coupled two-scale radial
 integral is deliberately NOT pinned: it is the genuinely open question.
+
+NOTE (2026-09-07): this file also backs **Paper 61** (sec:modular,
+sec:bessel_algebra, eq:lambda_rho), which was split out of Paper 59 on
+2026-09-06.  The split's sweep keyed on the `test_paper59_*` filename and so
+missed this file entirely -- eight loci still said "Paper 59" for labels
+Paper 61 owns.  If either paper moves a section again, grep for BOTH names
+here.
 """
 
 from __future__ import annotations
@@ -400,13 +407,14 @@ def test_modulus_source_is_in_module_not_period_plus_bessel():
 
 
 # ---------------------------------------------------------------------------
-# Cosmic-Galois pins (Paper 59 sec:modular): the elliptic family is the
+# Cosmic-Galois pins (Paper 61 sec:modular; split out of Paper 59
+# 2026-09-06): the elliptic family is the
 # Legendre / Gamma(2) universal family, its CM-fiber periods are Gamma-values,
 # and the integrated observable is a Gamma(2) multiple modular value.
 # ---------------------------------------------------------------------------
 
 def test_cosmic_galois_family_is_gamma2():
-    """lambda(tau(rho)) = 1 - rho exactly (Paper 59 eq:lambda_rho): the family is the
+    """lambda(tau(rho)) = 1 - rho exactly (Paper 61 eq:lambda_rho): the family is the
     Legendre / Gamma(2) universal family, tau(rho)=i K(rho)/K(1-rho)."""
     import mpmath as mp
     mp.mp.dps = 30
@@ -428,7 +436,7 @@ def test_cosmic_galois_family_is_gamma2():
 
 def test_cosmic_galois_cm_periods_are_gamma_values():
     """CM-fiber periods are Gamma-values (Chowla-Selberg), at two fundamental
-    discriminants (Paper 59 sec:modular): disc -4 (tau=i, rho=1/2, in the physical
+    discriminants (Paper 61 sec:modular): disc -4 (tau=i, rho=1/2, in the physical
     domain) and disc -8 (tau=i sqrt2)."""
     import mpmath as mp
     # dps=55 so the test witnesses the ~1e-51 precision quoted in the driver
@@ -447,7 +455,7 @@ def test_cosmic_galois_cm_periods_are_gamma_values():
 
 
 def test_cosmic_galois_integrated_value():
-    """The integrated collinear T2 = 0.39535576590171392... (Paper 59 sec:modular),
+    """The integrated collinear T2 = 0.39535576590171392... (Paper 61 sec:modular),
     via the fast evaluator (GL tensor + sin^2 substitution + s<->t symmetry).  A
     float64 low-order reproduction pins it to ~6 digits (the high-precision 17-digit
     value is in debug/routeC_fast_evaluator.py)."""
@@ -570,7 +578,7 @@ def test_L4_irregular_at_infinity():
 
 
 def test_T2_modular_pullback():
-    """Backs Paper 59 sec:modular: the fibre period is the Gamma(2) modular quantity
+    """Backs Paper 61 sec:modular: the fibre period is the Gamma(2) modular quantity
     K(m) = (pi/2) theta3(0,q)^2 at tau = i K(1-m)/K(m), with lambda(tau) = (theta2/theta3)^4 = m.
     Validated to 40 digits -- the tau<->m pullback the Lambert-series route rests on.
     Driver: (modular foundation for the T2 hand-off)."""
@@ -585,7 +593,7 @@ def test_T2_modular_pullback():
 
 
 def test_T2_fiber_spectral():
-    """Corrects Paper 59 sec:modular: the ~20-digit T2 ceiling was a FIXED fiber-grid artifact,
+    """Corrects Paper 61 sec:modular: the ~20-digit T2 ceiling was a FIXED fiber-grid artifact,
     NOT an intrinsic k-grid limit.  The fiber J(s,t)=int_0^inf j0(k(s+t)) P(s,k)P(t,k) dk, on the
     decay-scaled map k=L u/(1-u), L=1/(sqrt(c_s)+sqrt(c_t)), converges SPECTRALLY: a fixed
     Gauss-Legendre fiber reaches 30+ digits by Nk~120.  So the fiber is not the precision
@@ -875,7 +883,7 @@ def test_L4_monodromy_numerically():
 
 
 # ---------------------------------------------------------------------------
-# Intersection-form theorem (Paper 59 sec:bessel_algebra) -- closes the
+# Intersection-form theorem (Paper 61 sec:bessel_algebra) -- closes the
 # "one step short of a theorem": the concomitant B = pi x (integer intersection
 # form) is now the CANONICAL block symplectic Omega, forced by the monodromy +
 # the concomitant's sector-block structure.  Driver: debug/routeC_intersection_form.py.
@@ -889,14 +897,16 @@ def test_intersection_form_is_forced_canonical_symplectic():
     the ones with the concomitant's vanishing cross-sector pairings (real sector {0,1} vs
     imaginary {2,3}) are EXACTLY Z*Omega, Omega the canonical block symplectic form.  Omega
     is unimodular (det=1, nondegenerate) and monodromy-preserved (M0^T Omega M0 = Omega =>
-    differential Galois group in Sp(Omega,Z)=Sp4(Z)).  The period-cut {K,I,J} sub-block is
+    MONODROMY group in Sp(Omega,Z)=Sp4(Z) -- NOT the differential Galois
+    group, which is Zariski-closed and cannot lie in a discrete group; it is in
+    Sp4(C) by self-adjointness. Corrected 2026-09-07).  The period-cut {K,I,J} sub-block is
     rank 2; the fourth (Y0) thimble completes it to nondegenerate rank 4."""
     import sympy as sp
     M0 = sp.Matrix(_L4_MONODROMY)
     Om = sp.Matrix(_OMEGA)
     # (a) Omega is a nondegenerate integer symplectic form preserved by M0
     assert Om.T == -Om and Om.det() == 1
-    assert M0.T * Om * M0 == Om                                  # Galois in Sp(Omega,Z)
+    assert M0.T * Om * M0 == Om                       # MONODROMY in Sp(Omega,Z)
     # (b) it is FORCED: solve M0^T J M0 = J for antisymmetric J -> 4-parameter family,
     #     then impose the concomitant's block-diagonality -> exactly Z*Omega
     a, b, c, d, e, f = sp.symbols('a b c d e f')
@@ -1160,7 +1170,7 @@ def test_f12_multicenter_shares_eri_elliptic_genus():
 
 
 # ---------------------------------------------------------------------------
-# Paper 59 sec:modular -- the corrected PSLQ ring (quasiperiod + Eisenstein
+# Paper 61 sec:modular -- the corrected PSLQ ring (quasiperiod + Eisenstein
 # L-value G) and the oscillation-free tail-analytic fibre.  These back the
 # ring-correction and tail-fibre paragraphs added to sec:modular.
 # ---------------------------------------------------------------------------
