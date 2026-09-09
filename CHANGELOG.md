@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.10.14] - 2026-09-08
+
+**The metric-free/unlinked conflict resolved — against the relay, in favour of `eq:scale_lock`.** Plus three provenance corrections from the same round. Paper edits only; no new measurement.
+
+### An external test of `eq:scale_lock`, and it held
+
+The previous round's account described the `-2.90250` calculation as *both* unlinking `p_κ` from `E_out` *and* evaluating "the metric-free matrix at each step". Our projection says those are incompatible: a basis built at `E_basis` and projected against a target `E_out` leaves the L² overlap with coefficient `(E_basis − E_out)`, and unlinking the scale is exactly what makes that coefficient nonzero.
+
+Posed back to the source together with the derivation, **the derivation was accepted and the description withdrawn**. The calculation was an **ordinary variational CI, `HC = E·S·C`**; the metric-free cancellation belongs exclusively to the locked isoenergetic method. That is the closest thing to an external check `eq:scale_lock` has had — a claim that a real calculation was simultaneously unlinked and metric-free, posed against it and retracted. Recorded in the paper as exactly that, and the attribution sharpened from "scale-optimized posing" to the specific `HC = ESC`.
+
+### Three provenance corrections
+
+- **The variational bound is ours to claim.** The canon frames its variational discussion on Rayleigh–Ritz for the *scanned* k-determinant and never partitions locked vs scanned; a targeted consultation returned no statement that the fixed-scale metric-free problem bounds from above. Paper 60 now says so and claims it.
+- **"The SW matrix *is* the V₀-weighted overlap" is our formalization, not a citable sentence.** Avery defines the Shibuya–Wulfman integrals as momentum-space matrix elements of inter-center Coulomb potentials; they *evaluate* that overlap. Integrals cited to him, identification to us — stated explicitly in the paper rather than left ambiguous.
+- **Molecular `β_ν` has no closed form.** Because `V₀` is multi-center there is no counterpart to `β_ν Z = p_κ/R_ν`; the `β` are exact eigenvalues of the one-electron molecular Sturmian problem at fixed `E`, with a many-electron configuration's `β_ν` following from the isoenergetic condition on that spectrum. **This makes the paper's existing "`S_SW`-orthonormal by construction" a derived consequence rather than an asserted fact** — potential-weighted orthonormality is automatic for eigenvectors of a common Sturmian problem with distinct `β`. Two things the paper carried separately are one thing.
+
+Also flagged by the source as reconstruction and therefore recorded but not relied on: the basis in that run is *probably* genuine shared-scale Coulomb Sturmians rather than Goscinskian — consistent with our own reading that the shared-k set is complete where the Goscinskian hydrogenic set is not.
+
+Gates: C10 / C21 / C16 / C17 / C14 PASS. `memory/avery_method_and_prior_art_gaps.md` updated.
+
 ## [v5.10.13] - 2026-09-08
 
 **The general-`V₀` secular equation, the `-2.90250` attribution, and a named wall on the repair route.** Follow-up to v5.10.12, prompted by a second PI-relayed consultation of Avery's canon whose load-bearing leg was independently re-derived and numerically verified here rather than taken on report.

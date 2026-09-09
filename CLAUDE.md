@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.10.13 (September 8, 2026)
+**Version:** v5.10.14 (September 8, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **eq:scale_lock survived an external test (2026-09-08, v5.10.14):** the relayed 'unlinked AND metric-free' description was posed against it and WITHDRAWN; -2.90250 was an ordinary variational CI. See CHANGELOG v5.10.14.
 - **General-V0 secular equation + the -2.90250 attribution (2026-09-08, v5.10.13):** V C = V_0 B C, L2 cancels for ANY local V_0; the molecular metric IS V_0 (= Shibuya-Wulfman). Avery's cited number used the SCALE-OPTIMIZED posing. See CHANGELOG v5.10.13.
 - **P60 floor is the scale lock, not l_max (2026-09-08, v5.10.12):** metric-free iff lambda = p_kappa, so the span was never the limit; ground-state pathology (4.28x chem vs 1.08x for 2^1S). See CHANGELOG v5.10.12.
 - **/qa 58/59/60 FULL + group1 DELTA = FAIL, remediated (2026-09-07, v5.10.10):** P60's `K^0.84` is a WINDOW fit (K<=164; local slope 0.906 by K=340) and its mechanism was backwards -- the nuclear diagonal T0 is the sublinear block (K^0.70), T' is SUPERlinear (K^1.05). Five gates were examining nothing. See debug/sprint_qa_papers_58_59_60_memo.md.
