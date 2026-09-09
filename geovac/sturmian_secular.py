@@ -6,10 +6,20 @@ module backs three load-bearing Paper 60 claims, regression-protected by
 
   (i)   single-config 1s^2  ->  E = -2.847 Ha  (textbook variational He);
   (ii)  the entrywise 1-norm ``||M||_1`` grows SUBLINEARLY with the config count K,
-        approaching ``~K^0.84`` for the full s+p+d+f basis (Paper 60 ``eq:sublinear``);
-  (iii) restoring the L2 overlap metric S (generalized eigenproblem ``M B = p S B``)
-        is ill-conditioned -- ``cond(S)`` climbs from ~4 into the thousands (the
-        paper's "4 -> 3673");
+        approaching ``~K^0.82`` over the fitted window K = 74..164 for the full
+        s+p+d+f basis (Paper 60 ``eq:sublinear``) -- a WINDOW fit, not an
+        asymptote:  the local slope falls monotonically to 0.766 by K = 514.
+        (``K^0.84`` is RETIRED -- it was measured on an unconverged 60-bohr
+        radial box whose relative error grew across the fit range.)
+  (iii) restoring the L2 overlap metric S turns the problem into a generalized
+        eigenproblem ``M B = p S B``.  NOTE ``cond(S)`` is MILD, not explosive:
+        16.0 at K=100 on a converged radial box, growing ~0.12*K -- an ordinary
+        Gram matrix.  (``4 -> 3673`` is RETIRED:  a pure radial-box artifact that
+        switches on exactly where n_max^2 first exceeds R_MAX, every box agreeing
+        to 4 digits below that point.)  The reason to keep the metric-free form
+        is therefore NOT S's conditioning;  it is that the metric-free form
+        exists only at the locked scale lambda = p_kappa, which costs the
+        accuracy floor -- Paper 60 ``eq:scale_lock``;
   (iv)  ``[eq:secular]`` the interelectron matrix T' is a matrix of PURE NUMBERS,
         independent of the nuclear charge Z.
 

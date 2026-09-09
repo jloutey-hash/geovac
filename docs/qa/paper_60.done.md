@@ -43,9 +43,26 @@
 > **What the paper now says.** The sublinearity belongs to the *basis-growth
 > rule* (fixed `l_max`), not to the isoenergetic construction — grown as full
 > hydrogenic shells the same construction gives `K^1.07` and a *rising* exponent.
-> And the cheap rule is the one that stops converging:\ it saturates at
-> **6.44 mHa, 4.0× chemical accuracy**, at any basis size. Cost growth and
-> attainable accuracy are one fact. `‖T⁰‖₁` is now `[SYMBOLIC]` and is not a
+> And the cheap rule carries an accuracy floor of **6.44 mHa**.
+>
+> **Superseded 2026-09-08 — the floor's mechanism and universality.** This
+> record previously ratified "4.0× chemical accuracy, at any basis size. Cost
+> growth and attainable accuracy are one fact." The floor VALUE stands; its
+> attribution and its universality do not. (i) The mechanism is the **scale
+> lock**, not `l_max`: metric-free holds iff `E = -λ²/2`, hence
+> `λ = p_κ`, and that is not the variational optimum — freeing `λ`
+> over the *identical* span reaches 1.28 mHa at K=130 against 7.46 locked, and
+> 0.15 mHa of the independently known s-limit at K=136. The He `l≥4`
+> partial-wave tail is 0.37–0.53 mHa, an order below the floor, so angular
+> truncation cannot be it. (ii) The floor is **ground-state specific**: at
+> K=202, with `‖M‖₁` identical because it does not depend on which root
+> is extracted, the ground state sits 4.49× above chemical accuracy and
+> 2¹S sits 1.12×; the posing cost falls 3–4× per rung up the ¹S
+> ladder. (iii) The price of freeing the scale is the whole encoding advantage,
+> `‖·‖₁` from `K^0.72` to `K^2.75` (s-only ladder, K=21..136 — not the
+> headline window). Backing:
+> `tests/test_paper60_scale_lock.py`; drivers `debug/p60_{variational_probe,
+> scale_scan,freescale_resource,posing_cost_by_state,excited_ladder}.py`. `‖T⁰‖₁` is now `[SYMBOLIC]` and is not a
 > power law at all — `Z√(2K)·ln(K/2)`, asymptotic exponent 1/2.
 >
 > **Second LARGE, a different claim.** `cond(S)` “4 → 3673” is entirely a domain

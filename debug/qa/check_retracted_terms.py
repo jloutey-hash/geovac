@@ -245,6 +245,43 @@ CITED_BY_BASELINE = {
 
 REGISTRY = [
     {
+        "id": "p60-floor-is-angular",
+        "note": "Paper 60's accuracy floor was attributed to l_max truncation "
+                "and declared unreachable at any K.  Both halves are refuted "
+                "(2026-09-08).  The floor is the SCALE LOCK: metric-free holds "
+                "iff E = -lambda^2/2, hence lambda = p_kappa, and that is not "
+                "the variational optimum -- freeing lambda over the IDENTICAL "
+                "span reaches 1.28 mHa at K=130 against 7.46 locked.  And it is "
+                "GROUND-STATE specific: 4.49x chemical accuracy for the ground "
+                "state vs 1.12x for 2^1S at identical ||M||_1.  The genuine He "
+                "l>=4 partial-wave tail is 0.187 mHa (ground) and 0.008 mHa "
+                "(2^1S) -- 3% and 0.5% of the respective floors -- measured from "
+                "the l-increments themselves, so angular truncation cannot be "
+                "the mechanism.  "
+                "The floor VALUE (6.44 mHa) is unretired and still cited; what "
+                "is retired is its attribution and the 'at any K' universality.",
+        "pattern": r"cannot reach chemical accuracy at any"
+                   r"|angular detail that would close the gap"
+                   r"|known and unimprovable"
+                   r"|genuine basis incompleteness"
+                   r"|(?:cheap growth|Cost growth)[^.\n]{0,80}same fact seen twice"
+                   r"|saturat\w*[^.\n]{0,60}at any basis size",
+        "exempt_if_nearby": r"(?!)",
+        "severity": "fail",
+        "scope": "group2 synthesis",
+        # Documents whose ARGUMENT rests on this claim (distinct from `files`,
+        # which is only where its wording might appear).
+        "cited_by": {
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "reviewed 2026-09-08",
+            "docs/qa/paper_60.done.md": "reviewed 2026-09-08",
+        },
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/qa/paper_60.done.md",
+        ],
+    },
+    {
         "id": "sp-splitting-as-convergence-evidence",
         "note": "FULL run #4 + DELTA #5.  Distinct from the MECHANISM entry: "
                 "this one guards the EVIDENTIAL reading -- the s/p decay "

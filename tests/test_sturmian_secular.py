@@ -5,14 +5,19 @@ Backs four load-bearing Paper 60 (group2) claims, ported from the
 
   (i)   single-config 1s^2  ->  E = -2.847 Ha  (textbook variational He);
   (ii)  the entrywise 1-norm ``||M||_1`` grows SUBLINEARLY with the config count K,
-        approaching ``~K^0.84`` for the full s+p+d+f basis (Paper 60 ``eq:sublinear``);
+        approaching ``~K^0.82`` over the window K = 74..164 on a CONVERGED radial
+        box (Paper 60 ``eq:sublinear``).  ``K^0.84`` is RETIRED -- a 60-bohr-box
+        artifact.  This file measures 0.842 on the module default box;  that is
+        box-limited, which is why the assertion below is a BAND, not a value;
   (iii) restoring the L2 overlap metric S (generalized eigenproblem ``M B = p S B``)
-        is ill-conditioned -- ``cond(S)`` grows from ~4 into the thousands
-        (the paper's "4 -> 3673");
+        is NOT ill-conditioned -- the "~4 into the thousands" growth is a
+        radial-box artifact (converged cond(S) = 16.0, growing ~0.12*K).  The
+        paper's "4 -> 3673" is RETIRED;  the real reason to keep the
+        metric-free form is eq:scale_lock, not conditioning;
   (iv)  ``[eq:secular]`` the interelectron matrix T' is a matrix of PURE NUMBERS,
         independent of the nuclear charge Z.
 
-The K-ladder (ii) and metric-divergence (iii) tests are marked ``slow`` (build_M at
+The K-ladder (ii) and metric-conditioning (iii) tests are marked ``slow`` (build_M at
 K~100 is ~15 s; the ladder/divergence sweeps aggregate several such builds).
 """
 import numpy as np
@@ -69,9 +74,9 @@ def test_Tprime_Z_independence() -> None:
 #
 # MEASURED: at the largest tractable scale used here (nested s+p+d+f up to K=100,
 # build ~35 s aggregate) the fit gives p ~ 0.84.  The exponent is SCALE-DEPENDENT: it
-# rises with basis size from ~0.78-0.80 at small K toward the full-K asymptote ~0.84
-# (K~164, s8p8d8f8 + N=10 in the driver).  We assert a band bracketing the measured
-# value, not the asymptote itself.
+# is box-dependent.  There is NO asymptote: on a converged box the local slope FALLS
+# monotonically (0.827 -> 0.766 across K=100..514), so no window fit is stable.  We
+# assert a BAND bracketing the measured value, never an asymptote.
 # --------------------------------------------------------------------------------------
 @pytest.mark.slow
 def test_onenorm_sublinear() -> None:
@@ -95,14 +100,17 @@ def test_onenorm_sublinear() -> None:
 
     # Core claim: strictly sublinear.
     assert p < 1.0, f"||M||_1 exponent {p:.3f} is not sublinear"
-    # Defensible band bracketing the measured value (~0.84 at K=100; asymptote ~0.84).
+    # Defensible band bracketing the measured value (0.842 on this box; converged
+    # window fit 0.82).  Deliberately a band: there is no asymptote to pin.
     assert 0.6 < p < 0.95, f"||M||_1 exponent {p:.3f} outside expected sublinear band"
 
 
 # --------------------------------------------------------------------------------------
-# Claim (iii): the L2 overlap metric S is ill-conditioned -- cond(S) grows from ~4
-# into the thousands (paper "4 -> 3673") as the spdf basis grows.  The metric-free
-# standard eigenproblem is the well-conditioned resolution.
+# Claim (iii), AS CORRECTED 2026-09-07: the L2 overlap metric S is NOT
+# ill-conditioned.  The "4 -> 3673" growth is a radial-box artifact; converged,
+# cond(S) = 16.0 and grows ~0.12*K -- an ordinary Gram matrix.  This test pins the
+# artifact AS an artifact.  (The metric-free form is preferable for a different
+# reason entirely: it exists only at the locked scale, Paper 60 eq:scale_lock.)
 # --------------------------------------------------------------------------------------
 @pytest.mark.slow
 def test_L2_metric_conditioning_is_box_dependent() -> None:

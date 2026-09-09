@@ -250,7 +250,11 @@ MEASURED = {
                                "Goscinskian family saturates ABOVE the exact "
                                "helium ground state; a floor, not a rate",
         q=None,
-        provenance="MEASURED 2026-09-07 on the converged ladder K = 74..514, fit "
+        provenance="MECHANISM (2026-09-08): the floor is the SCALE LOCK, not angular "
+                   "truncation -- freeing lambda over the identical span "
+                   "reaches 1.28 mHa at K=130. And it is GROUND-STATE "
+                   "specific: 2^1S sits at 1.786 mHa at K=202. "
+                   "MEASURED 2026-09-07 on the converged ladder K = 74..514, fit "
                    "gap(K) = floor + b*K^-q (floor 6.4404, b 49.0, q 0.796; max "
                    "residual 0.0019 mHa). Extrapolates to 6.4455 at K = 1e5 and "
                    "6.4412 at K = 1e6 -- genuinely saturating, not slow "
@@ -258,6 +262,136 @@ MEASURED = {
                    "deficit. This is 4.0x chemical accuracy (1.594 mHa), so the "
                    "family cannot reach chemical accuracy at ANY K.",
         aliases={6.78: "gap at K = 514, the largest computed"}),
+    "p60_span_deficit_spdf": dict(
+        value=1.28, convention="constant: mHa above the exact He ground state "
+                               "reached by a VARIATIONAL CI over the identical "
+                               "Goscinskian span (l_max=3, K=130) with the global "
+                               "scale lambda optimized -- the span's own deficit, "
+                               "with the isoenergetic scale-lock removed",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_scale_scan.py. Companion "
+                   "locked-scale value at the same K is 7.46 mHa. s-sector "
+                   "counterpart (against the known exact s-limit -2.879029 Ha) is "
+                   "0.15 mHa at K=136 vs 4.43 locked. Pipeline unit-tested at K=1, "
+                   "where both postings coincide and return -2.8476562 = "
+                   "-(2-5/16)^2 exactly.",
+        aliases={1.640: "l_max=3, K=100", 2.232: "l_max=3, K=74"}),
+    "p60_posing_cost_ground": dict(
+        value=4.21, convention="constant: mHa, E_iso - min_lambda E_var over the "
+                               "SAME span, He ground state, s-only, K=105. "
+                               "Reference-free: needs no known limit",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_posing_cost_by_state.py, "
+                   "lambda by GRID scan (Brent found a local minimum at nmax=4 and "
+                   "reported a NEGATIVE cost, which the variational bound forbids). "
+                   "Grows with K: 3.52 (K=36), 4.13 (K=78), 4.21 (K=105).",
+        aliases={3.524: "K=36", 4.125: "K=78"}),
+    "p60_posing_cost_exc": dict(
+        value=0.98, convention="constant: mHa, same quantity as "
+                               "p60_posing_cost_ground but for He 2^1S (the second "
+                               "root of M), s-only, K=105",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_posing_cost_by_state.py. "
+                   "4.3x SMALLER than the ground state. The ratio NARROWS with K "
+                   "(5.17 at K=36, 5.11 at 55, 4.66 at 78, 4.29 at 105); "
+                   "what widens is the absolute separation, 2.84 -> 3.23 mHa, "
+                   "and that flattens by K=105. RETIRED: 'the ratio widens "
+                   "with K', written 2026-09-08 and refuted by the backing "
+                   "test the same day. "
+                   "(0.681/3.524 at K=36 -> 0.983/4.212 at K=105). This is the "
+                   "measured form of Avery's split-shell mechanism: a Goscinskian "
+                   "1s^2 configuration pins both electrons to one exponent, an "
+                   "excited configuration gets two free from n_a != n_b.",
+        aliases={0.681: "K=36", 0.885: "K=78"}),
+    "p60_exc_gap_k452": dict(
+        value=1.7163, convention="constant: mHa above the exact He 2^1S energy "
+                                 "(-2.145974046 Ha) reached by the METRIC-FREE "
+                                 "isoenergetic posing, full s+p+d+f, at the largest "
+                                 "computed basis K=452 (n_max=16). A MEASURED "
+                                 "ladder endpoint, deliberately NOT an extrapolated "
+                                 "floor -- see the caveat below",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_excited_ladder.py, extended to "
+                   "n_max=16. Companion ground-state value at the SAME K and the "
+                   "same ||M||_1 is p60_gnd_gap_k452 = 6.8196 mHa. Ladder: 1.972 "
+                   "(K=74), 1.813 (164), 1.786 (202), 1.7485 (290), 1.7163 (452). "
+                   "CAVEAT ON THE FLOOR: a free-floor fit is WINDOW-stable (0.4% "
+                   "drift over 21 windows, drifting UP, i.e. approaching from "
+                   "below) and Shanks brackets it from above at [1.647, 1.676], "
+                   "but it is MODEL-family sensitive -- a two-parameter c + b/lnK "
+                   "form, rejected at 340x worse RMS, puts the floor at 0.82x "
+                   "chemical accuracy, i.e. BELOW it. The paper therefore cites "
+                   "this measured endpoint and states that 'above chemical "
+                   "accuracy' is a model-selection conclusion.",
+        aliases={1.786: "K=202", 1.647: "Shanks lower bracket on the floor"}),
+    "chem_accuracy_mha": dict(
+        value=1.5936014616, convention="constant: chemical accuracy = 1 kcal/mol "
+                                       "expressed in mHa (4.184 kJ/mol divided by "
+                                       "2625.4996 kJ/mol per Hartree)",
+        q=None,
+        provenance="DEFINITION, CODATA-consistent unit conversion. Registered "
+                   "2026-09-08 because Paper 60 states three accuracies as "
+                   "MULTIPLES of it, and those multiples must be derived from the "
+                   "energies rather than typed independently.",
+        aliases={1.594: "3 dp, as printed in Sec.4"}),
+    "p60_gnd_gap_k452": dict(
+        value=6.8196, convention="constant: mHa above the exact He ground state "
+                                 "(-2.903724377 Ha) reached by the METRIC-FREE "
+                                 "isoenergetic posing, full s+p+d+f, at the largest "
+                                 "computed basis K=452 (n_max=16)",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_excited_ladder.py. Paired with "
+                   "p60_exc_gap_k452 at the SAME K and the same ||M||_1 -- the pair "
+                   "is the paper's state-dependence headline, so both are "
+                   "registered and both ratios are DERIVED from them rather than "
+                   "typed. Shanks brackets this floor from above at [6.47, 6.62].",
+        aliases={8.036: "K=74", 7.158: "K=202", 6.9143: "K=340"}),
+    "p60_stateprep_overlap_exc": dict(
+        value=0.798, convention="constant: L2-metric overlap between the normalized "
+                                "dominant single configuration and the true 2^1S "
+                                "root, K=164 -- the state-preparation cost driver "
+                                "for an interior root",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_stateprep_overlap.py. The four "
+                   "lowest roots give 0.992, 0.798, 0.864, 0.889 -- 2^1S is the "
+                   "HARDEST of the four, not the deepest, so the driver is mixing "
+                   "at the bottom of the Rydberg series and not spectral depth. "
+                   "Costs 1.25x the ground state in rotations, 1.54x in "
+                   "repetitions; two configurations reach 0.99.",
+        aliases={0.992: "ground state", 0.6371: "overlap squared, 2^1S"}),
+    "p60_best102_locked": dict(
+        value=7.25, convention="constant: mHa above the exact He ground state "
+                               "reached by the BEST 102 configurations (ranked by "
+                               "ground-state weight) drawn from the K=244 pool, "
+                               "locked-scale posing -- the sharpest selection test "
+                               "of Avery's '102 optimized configurations'",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_avery_102_probe.py. ABOVE the "
+                   "pool's own 7.057 mHa, as Cauchy interlacing requires: a "
+                   "principal submatrix cannot have a larger top eigenvalue. 200 "
+                   "random 102-subsets reach 13.9 mHa at best. The cited Avery figure "
+                   "is 1.224 mHa, unreachable in this posing at any K.",
+        aliases={7.057: "the full K=244 pool",
+                 13.862: "BEST of 200 random 102-subsets",
+                 903.4: "WORST of 200 random 102-subsets -- the driver's max() over\n                         energies selected the least-bound subset;  mislabelled as\n                         'best' until 2026-09-08"}),
+    "p60_freescale_set_sonly": dict(
+        value=0.72, convention="exponent: log-log slope of the LOCKED ||M||_1 vs K "
+                               "on the S-ONLY free-scale comparison ladder, "
+                               "K = 21..136 (n_max 6..16). NOT the headline "
+                               "eq:sublinear exponent -- that is 0.82, full "
+                               "s+p+d+f, window K=74..164. Different sector, "
+                               "different window, different ladder",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_freescale_resource.py. This is "
+                   "the FIRST member of a matched SET measured on one ladder, and "
+                   "the set must move together: locked ||M||_1 K^0.716, "
+                   "||H(lambda*)||_1 K^1.952, whitened ||S^-1/2 H S^-1/2||_1 "
+                   "K^2.749, cond(S) K^0.936. Quoting any one against a value from "
+                   "another ladder is the defect C17 blocked on 2026-09-08, when "
+                   "0.72 was written in the headline ||M||_1 ~ K^p form.",
+        aliases={1.95: "||H(lambda*)||_1 exponent, same ladder",
+                 2.75: "whitened exponent, same ladder",
+                 0.94: "cond(S) exponent, same ladder"}),
     "p60_cond_S_converged": dict(
         value=16.0, convention="constant: condition number of the L2 overlap S at "
                                "N=8 (K=100), helium, CONVERGED radial box",
@@ -681,6 +815,11 @@ CITED = {
 # ---------------------------------------------------------------------------
 
 DERIVED = {
+    "p60_exc_ratio_k452":   ("p60_exc_gap_k452 / chem_accuracy_mha", 0.005,
+                             "He 2^1S error at K=452, in units of chemical accuracy"),
+    "p60_gnd_ratio_k452":   ("p60_gnd_gap_k452 / chem_accuracy_mha", 0.005,
+                             "He ground-state error at K=452, same units, same K, same ||M||_1"),
+
     "he_n2_lambda_per_q":   ("he_n2_lambda / 10", 0.005, "lambda/Q at Q=10"),
     "he_n3_lambda_per_q":   ("he_n3_lambda / 28", 0.005, "lambda/Q at Q=28"),
     "he_n4_lambda_per_q":   ("he_n4_lambda / 60", 0.005, "lambda/Q at Q=60"),

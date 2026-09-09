@@ -59,7 +59,8 @@
 | Shibuya-Wulfman V_ne | `geovac/shibuya_wulfman.py` | `compute_cross_center_vne()`, `compute_cross_center_vne_element()` |
 | Sturmian 2-center integral engine (Paper 60) | `geovac/sturmian_integrals.py` | `GoscinskianIntegrals(R,...)` `.overlap/.nuclear/.kinetic/.eri`, `validate()` |
 | Sturmian atomic L² encoding λ (Paper 60 eq:blowup) | `geovac/sturmian_l2_encoding.py` | `atomic_l2_lambda(N, family)`, `fit_lambda_exponent()` (openfermion JW LCU 1-norm; Q^3.33/Q^1.19) |
-| Sturmian metric-free isoenergetic secular (Paper 60 eq:secular) | `geovac/sturmian_secular.py` | `build_M`, `build_Tprime`, `build_S`, `solve`, `solve_with_metric`, `gen_configs` (K^0.84, L²-divergence) |
+| Sturmian metric-free isoenergetic secular (Paper 60 eq:secular) | `geovac/sturmian_secular.py` | `build_M`, `build_Tprime`, `build_S`, `solve`, `solve_with_metric`, `gen_configs` (||M||_1 ~ K^0.82 on a window, L²-divergence; K^0.84 retired) |
+| Sturmian variational CI over the same span -- route B for Paper 60 eq:scale_lock | `geovac/sturmian_variational.py` | `set_grid` (uniform/graded radial mesh; MUTATES `sturmian_secular` globals), `family`, `norms`, `build` -> (S, T, W, G, K, asym), `var_energy`, `var_levels` |
 | Sturmian molecular block-encoding λ (Paper 60 sec:manyelectron) | `geovac/sturmian_molecular_lambda.py` | `h2_lambda(nmax)`, `lambda_scaling()` (n_orb^2.2; imports the integral engine) |
 | Sturmian SW sigma-spectrum law (Paper 60 eq:sigma_law) | `geovac/sturmian_sigma_law.py` | `sw_cross_block(s,nmax)`, `sigma_spectrum`, `cond_from_sigma`, `commutator_from_sigma/direct`, `gerade_constant()` (derived N^2 law; collapse pi^2/24) |
 | Balanced 4e matrix-free direct CI (Paper 19 n_max=4 decider) | `geovac/balanced_direct_ci.py` | `DirectCI4e(h1,eri,ecore).ground_state()` (string-sigma + Davidson; ~1600x vs assembled matrix; `faithful=` historical pre-fix phase) |

@@ -32,11 +32,26 @@ compute, and \emph{more} slowly as the basis grows.  That advantage, however,
 belongs to the \emph{basis-growth rule} rather than to the construction:\ it
 holds when $l_{\max}$ is fixed and higher-$n$ configurations are added, and
 reverses to superlinear when the basis is grown as full hydrogenic shells.
-The cheap rule is also the one that stops converging---it saturates
-$4.0\times$ above chemical accuracy at any basis size---so the two facts are
-one fact.  The result is therefore a measured trade-off between cost growth
-and attainable accuracy, not an unconditional efficiency claim.  The
-development follows.
+The cheap rule also carries an accuracy floor, whose mechanism we
+locate exactly:\ the metric-free form holds \emph{iff} the basis scale is locked
+to the eigenvalue, $\lambda=p_\kappa=\sqrt{-2E}$, and that lock is not the
+variational optimum.  Solving the \emph{same} span variationally with the scale
+freed reaches chemical accuracy, but hands back \emph{both} of the cost risks
+named above --- the $L^{2}$ metric returns, and the scale becomes an outer
+search --- along with the encoding advantage itself ($1$-norm growth from
+$K^{\gvq{p60_freescale_set_sonly}{0.72}}$ to $K^{2.75}$ on the $s$-only
+comparison ladder, $\mathrm{cond}(S)\sim K^{0.94}$).  The absence of
+those two risks and the presence of the floor are therefore not independent
+virtues and defects but one structural fact.  The floor is moreover a
+\emph{ground-state} pathology rather than a property of the method:\ because
+$\|M\|_1$ does not depend on which root is extracted, every $^{1}S$ state costs
+the same to encode, and at the largest computed basis $K=452$ the
+ground state sits $\gvq{p60_gnd_ratio_k452}{4.28}\times$ above chemical accuracy
+while $2\,^{1}S$ sits $\gvq{p60_exc_ratio_k452}{1.08}\times$ above it, the posing
+cost falling by $4.3\times$, $3.0\times$ and $2.6\times$ across the
+first three rungs of the $^{1}S$ ladder.  The result is therefore a measured trade-off between cost growth,
+attainable accuracy and \emph{which state is targeted}, not an unconditional
+efficiency claim.  The development follows.
 
 A recurring intuition in quantum simulation is that a Coulomb--Sturmian /
 hyperspherical basis is well suited to a quantum computer, because its angular
@@ -283,13 +298,70 @@ Adding configurations coupled to total $^1S$ lowers the energy monotonically,
 -2.847\ (1s^2)\;\to\;-2.873\ (s)\;\to\;-2.894\ (+p)\;\to\;-2.897\ (spdf,\,K{=}164),
 \]
 converging toward the exact non-relativistic $-2.90372$~Ha.  \textbf{[MEASURED]}
-The residual $\sim\!7$~mHa is genuine basis incompleteness, not a missing metric:
-the Goscinskian basis is deliberately poor for the helium ground state---Avery and
-Avery reach $-2.90250$ with $102$ optimized Coulomb--Sturmian
-configurations~\cite{avery2006}, still $1.2$~mHa short---and every point stays
-above the exact value (no variational overshoot).  The machinery is correct,
-including the higher-$\ell$ angular correlation (Gaunt / Wigner-$3j$ multipole
-coupling).
+The residual is \emph{not} a deficiency of the configuration span.  A
+variational CI over the \emph{identical} span, with the global scale optimized,
+reaches $\gvq{p60_span_deficit_spdf}{1.28}$~mHa of the exact energy at $K=130$,
+where the isoenergetic solution of that same span stalls at $7.46$~mHa;  in the
+$s$-sector, where the exact $s$-limit $-2.879029$~Ha is known independently, the
+same comparison is $0.15$~mHa against $4.43$~mHa at $K=136$.  The residual is
+therefore the price of the \emph{posing}, not of the basis:  the metric-free form
+requires the basis scale to be locked to the eigenvalue, $\lambda=p_\kappa$, and
+that lock is not the variational optimum.  \textbf{[INTERNAL THEOREM]} The same
+identity makes the bound automatic rather than fortunate---the isoenergetic root
+is the lowest root of the fixed-scale generalized problem $H(p_\kappa)C=E\,SC$,
+so every point lies above the exact value by construction, not by observation.
+
+\textbf{[ESTABLISHED, from Avery]} The mechanism is Avery's, not ours.  The
+helium ground state needs \emph{in-out} radial correlation, which variational
+treatments supply through split-shell ($1s\,1s'$) functions carrying two
+independent exponents;  a Goscinskian $1s^{2}$ configuration places both
+electrons at $n=1$ and therefore at the identical exponent $Q_\nu/n_j$---for
+\emph{any} weighting potential, since a separable $V_0$ still assigns one
+$\beta_\nu$ per configuration.  Excited configurations obtain two scales free
+from $n_a\neq n_b$, and the state-dependence this predicts is measurable:  the
+posing cost is $\gvq{p60_posing_cost_ground}{4.21}$~mHa for the ground state
+against $\gvq{p60_posing_cost_exc}{0.98}$~mHa for $2\,^{1}S$ at $K=105$, and the
+ratio in fact \emph{narrows} slowly with basis size --- $5.17$ at $K=36$,
+$4.66$ at $78$, $4.29$ at $105$ --- while the absolute separation widens
+($2.84\to3.23$~mHa) and then flattens.  The floor is a ground-state pathology
+rather than a
+property of the method.
+
+\textbf{[INTERNAL THEOREM]} \emph{Selection cannot rescue the locked
+posing.}  Because $T'$ is a matrix of pure numbers, its entries do not depend on
+which \emph{other} configurations are present, so the secular matrix of any
+sub-family $A$ is \emph{exactly} the corresponding principal submatrix of $M$
+(verified bit-identically).  Cauchy interlacing then gives
+$\lambda_{\max}(M_A)\le\lambda_{\max}(M)$, and since $E=-p_\kappa^{2}/2$ with
+$p_\kappa=\lambda_{\max}>0$,
+\begin{equation}
+  E(A)\;\ge\;E(M)\qquad\text{for every sub-family } A\subseteq M,
+  \label{eq:no_selection}
+\end{equation}
+the families being nested in $n_{\max}$ so that $E$ decreases monotonically along
+the ladder.  No choice of configurations, however optimized, beats the family it
+is drawn from.  \textbf{[MEASURED]} The best $102$ by ground-state weight out of
+a $K=244$ pool returns $\gvq{p60_best102_locked}{7.25}$~mHa against that pool's
+own $7.06$~mHa --- \emph{above} it, as Eq.~\eqref{eq:no_selection} requires ---
+while of $200$ random $102$-subsets the best reaches only
+$13.9$~mHa and the worst $903$~mHa --- $58\%$ of them omit the dominant $1s^{2}$
+configuration entirely.  Note what supplies the
+bound:\ it is the same pure-number property that makes the encoding attractive.
+Were $T'$ basis-dependent, sub-families would not be principal submatrices and
+interlacing would not apply.
+
+\textbf{[OBSERVATION]} A comparison to the $-2.90250$~Ha reached with $102$
+optimized Coulomb--Sturmian configurations~\cite{avery2006} is therefore
+\emph{withdrawn}, and on stronger grounds than a mismatch of numbers:\ by
+Eq.~\eqref{eq:no_selection} that figure ($1.2$~mHa short) \emph{cannot} have come
+from the locked-scale Goscinskian posing, at any $K$ or under any selection ---
+our largest computed family stands at $6.82$~mHa and the ladder is monotone.  It
+matches instead our scale-optimized ladder ($1.64$~mHa at $K=100$).  Which posing
+produced it --- or which basis, the genuine shared-scale Coulomb--Sturmians being
+the other candidate --- could not be confirmed against the primary source, and we
+flag it as the single result that would overturn this section were it to prove
+otherwise.  The machinery is correct, including the higher-$\ell$ angular
+correlation (Gaunt / Wigner-$3j$ multipole coupling).
 
 The decisive quantity is the block-encoding cost.  \textbf{[MEASURED]} The
 entrywise $1$-norm of the secular matrix, $\|M\|_1=\sum_{\nu'\nu}|M_{\nu'\nu}|$
@@ -379,16 +451,115 @@ ground-state error is $8.04$~mHa at $K=74$ and $6.78$~mHa at $K=514$;\ fitting
 $\Delta E(K)=\Delta E_\infty + bK^{-q}$ gives
 $\Delta E_\infty=\gvq{p60_energy_floor}{6.44}$~mHa (residual $<0.002$~mHa), with
 $6.446$~mHa still predicted at $K=10^{5}$.  Seven times the basis closes $16\%$
-of the deficit.  \textbf{The floor is $4.0\times$ chemical accuracy
-($1.594$~mHa), so this family cannot reach chemical accuracy at any $K$.}  The
-angular detail that would close the gap is exactly what $l_{\max}$ is capped
-against --- which is to say the cheap growth and the saturation are the same
-fact seen twice.  \textbf{[OPEN]} Whether the floor can be lowered while the
-sublinear growth is preserved --- for instance by a \emph{fixed}, non-growing
-increment of high-$l$ functions --- is open, and is the natural next question
-this section raises.  As it stands the fixed-$l_{\max}$ family is best read as a
-\emph{fixed-accuracy tier}:\ sublinear cost at a known and unimprovable
-$\sim\!6.4$~mHa, rather than an approximation that converges.
+of the deficit.  The floor is $4.0\times$ chemical accuracy
+($1.594$~mHa).
+
+\textbf{[INTERNAL THEOREM]} \emph{Where the floor comes from.}  It is neither
+angular truncation nor a deficiency of the span.  Write the configurations at a
+free global scale $\lambda$, which the Goscinskian construction fixes to
+$p_\kappa$.  Because each $\Phi_\nu$ is hydrogenic at $Q_\nu=\lambda/R_\nu$, the
+one-body Coulomb metric is exactly diagonal,
+\begin{equation}
+  W_{\mu\nu}\equiv\Big\langle\Phi_\mu\Big|\sum_j r_j^{-1}\Big|\Phi_\nu\Big\rangle
+    = R_\nu\,\delta_{\mu\nu},
+  \label{eq:W_diagonal}
+\end{equation}
+verified entrywise to $5\times10^{-11}$.  Hence the kinetic matrix at unit scale
+is $T=\mathbb{1}-S/2$, and the variational problem over the same span is
+$H(\lambda)C=E\,SC$ with
+$H(\lambda)=\lambda^{2}(\mathbb{1}-S/2)+\lambda(-Z\,\mathrm{diag}\,R_\nu+G)$ and
+$G_{\mu\nu}=\langle\Phi_\mu|r_{12}^{-1}|\Phi_\nu\rangle$.  Putting
+$E=-\lambda^{2}/2$ cancels every $S$ term \emph{identically} and leaves
+$(Z\,\mathrm{diag}\,R_\nu-G)C=\lambda C$, which is Eq.~\eqref{eq:secular}.  The
+metric-free posing is therefore the variational problem of the same span,
+evaluated at the one scale where the $L^{2}$ metric drops out:
+\begin{equation}
+  \text{metric-free}\iff E=-\lambda^{2}/2\iff\lambda=p_\kappa=\sqrt{-2E}.
+  \label{eq:scale_lock}
+\end{equation}
+\textbf{[MEASURED]} That lock is not the variational optimum.  Freeing $\lambda$
+over the identical span reaches $0.15$~mHa of the exact $s$-limit at $K=136$
+($s$-only, where $-2.879029$~Ha is known independently) against $4.43$~mHa
+locked, and $\gvq{p60_span_deficit_spdf}{1.28}$~mHa of the exact energy at
+$K=130$ ($spdf$) against $7.46$~mHa locked.  The span is not the limitation; the
+lock is.  Two corollaries.  The variational bound is automatic rather than
+fortunate --- $E_{\rm iso}$ is the lowest root of $H(p_\kappa)C=E\,SC$, so no
+point can fall below the exact value.  And freeing the scale forfeits the
+encoding advantage entirely.  On the $s$-only comparison ladder
+($K=21$--$136$;\ note this is a different sector and window from the headline
+exponent of Eq.~\eqref{eq:sublinear}, so the four numbers below are quoted as one
+matched set) the locked $1$-norm's
+$K^{\gvq{p60_freescale_set_sonly}{0.72}}$ becomes $K^{1.95}$ for
+$H(\lambda^{\ast})$ and $K^{2.75}$ for the whitened $S^{-1/2}HS^{-1/2}$, with
+$\mathrm{cond}(S)\sim K^{0.94}$ --- a factor $5\times10^{3}$ at $K=136$.  \emph{Metric-free posing, sublinear $1$-norm
+and accuracy floor are one fact, not three.}
+
+\textbf{[ESTABLISHED, from Avery]} \emph{Why the ground state in particular.}
+Helium's ground state needs \emph{in-out} radial correlation, supplied
+variationally by split-shell $1s\,1s'$ functions carrying two independent
+exponents.  A Goscinskian $1s^{2}$ configuration places both electrons at $n=1$
+and hence at one exponent $Q_\nu/n_j$ --- for \emph{any} weighting potential,
+since a separable $V_0$ still assigns a single $\beta_\nu$ per configuration.
+Excited configurations obtain two scales free from $n_a\neq n_b$.
+\textbf{[MEASURED]} The state-dependence this predicts is large, and it is free:
+$\|M\|_1$ is a property of $M$, not of which root is extracted, so every $^{1}S$
+state costs the same to block-encode and only the delivered accuracy differs.
+At the largest computed basis, $K=452$, the ground-state error is
+$\gvq{p60_gnd_gap_k452}{6.82}$~mHa ($4.28\times$ chemical accuracy) against
+$\gvq{p60_exc_gap_k452}{1.716}$~mHa ($1.08\times$) for $2\,^{1}S$.  Reference-free --- the posing cost
+$E_{\rm iso}-\min_\lambda E_{\rm var}$ requires no known limit --- the $^{1}S$
+ladder at $K=105$ reads $\gvq{p60_posing_cost_ground}{4.21}$,
+$\gvq{p60_posing_cost_exc}{0.98}$, $0.32$ and $0.13$~mHa across the first four
+roots --- reductions of $4.3\times$, $3.0\times$ and $2.6\times$
+per rung, themselves shrinking.
+\textbf{[OBSERVATION]} The shrinking Rydberg gaps do not spoil this at chemical
+accuracy:\ resolving the $k$-th root needs
+$\epsilon_p=\epsilon_E/p_\kappa\approx8\times10^{-4}$ against gaps of $0.336$,
+$0.041$, $0.014$ and $0.006$ --- margins of $254$, $27$, $8.6$ and $3.9$ --- so
+the query count $\|M\|_1/\epsilon_p\approx2\times10^{5}$ is state-independent
+through $4\,^{1}S$.  \textbf{[MEASURED]} The remaining cost of an interior root
+is state preparation, and it is modest.  In the $L^{2}$ metric the overlap of the
+dominant single configuration with the true root runs $0.992$, $
+\gvq{p60_stateprep_overlap_exc}{0.798}$, $0.864$ and $0.889$ across the first
+four roots, so $2\,^{1}S$ --- not the deeper ones --- is the hardest, at
+$1.25\times$ the ground state in rotations and $1.54\times$ in repetitions;  two
+configurations already reach $0.99$.  Interior roots become \emph{easier} again,
+so the driver is mixing at the bottom of the Rydberg series rather than spectral
+depth.  One practical caveat:\ the dominant configuration does not track the
+spectroscopic label --- the root at He $3\,^{1}S$ is dominated by
+$(l,n_a,n_b)=(0,1,4)$ --- so a preparation heuristic keyed to the physical
+principal quantum number selects the wrong configuration.
+
+\textbf{[OBSERVATION]} \emph{How well the floors themselves are known.}  They
+are bracketed rather than pinned, and the dominant uncertainty is not the one we
+first looked for.  Across $21$ fit windows the free-floor value drifts by only
+$1.3\%$ (ground) and $0.4\%$ ($2\,^{1}S$), and drifts \emph{upward}:\ the fit
+approaches from below.  A model-free Shanks extrapolation descends from above,
+so the two together bracket the floor at $[6.47,6.62]$ and
+$[1.647,1.676]$~mHa --- the lower endpoint from the fit, the upper from Shanks.
+Window drift is therefore not the exposure;\ \emph{model family} is.  A
+two-parameter $c+b/\ln K$ form would place the $2\,^{1}S$ floor \emph{below}
+chemical accuracy.  It is rejected on two grounds rather than one:\ it fits
+$96$--$342\times$ worse in RMS, and --- unlike the three-parameter form, whose
+limit is stable to three decimals across every window ($1.032$, $1.033$,
+$1.033\times$ chemical accuracy) --- \emph{its own limit is window-unstable},
+running $0.69\to0.79\to0.82\times$ as the window tightens.  A model whose
+asymptote moves with the window is not asserting an asymptote.  We nonetheless
+quote measured ladder endpoints rather than fitted values throughout, and record
+that ``$2\,^{1}S$ saturates above chemical accuracy'' remains a model-selection
+conclusion rather than a measurement.
+
+\textbf{[OPEN]} Two questions replace the one this section used to raise.
+Whether a weighting potential of different \emph{radial shape} can reposition
+the exponent distribution enough to lower the ground-state floor while
+preserving Eq.~\eqref{eq:W_diagonal} --- a constant rescaling cannot, since
+$\beta_\nu Z_w = p_\kappa/R_\nu$ eliminates $Z_w$ identically, so the lever must
+change the shape of $V_0$ and not merely its strength.  And whether the
+excited-state operating point survives the state-preparation cost that
+Eq.~\eqref{eq:scale_lock} says nothing about.  As it stands the family is best
+read as a \emph{fixed-accuracy tier whose accuracy depends on the target
+state}:\ sublinear cost at ${\sim}6.4$~mHa for the ground state and
+${\sim}1.8$~mHa for $2\,^{1}S$, bought at the same price.
 
 \emph{Scope and comparison.}  The ``sublinear'' here is a property of the LCU
 $1$-norm $\|M\|_1$ of a \emph{fixed}-size atomic secular matrix as the
@@ -744,11 +915,17 @@ absent.  Its block-encoding $1$-norm grows more slowly than the matrix
 dimension over every basis we can compute, and increasingly so.  But the
 sharper statement is a trade-off rather than an efficiency:\ that growth
 belongs to the fixed-$l_{\max}$ basis-growth rule, reverses under full-shell
-growth, and is paid for by a $6.4$~mHa accuracy floor that no basis size in
-that family crosses.  Read as a fixed-accuracy tier it is a real and cheap
-operating point;\ read as a route to chemical accuracy it is not one, and
-whether the floor can be lowered without losing the growth is the open
-question we leave.  \emph{For molecules}, the
+growth, and is paid for by an accuracy floor whose mechanism is
+Eq.~\eqref{eq:scale_lock}:\ the metric-free form exists only at the scale
+$\lambda=p_\kappa$, and that scale is not the variational optimum.  The floor is
+a \emph{ground-state} pathology --- $6.8$~mHa there at $K=452$, but
+$1.72$~mHa for $2\,^{1}S$ at identical encoding cost, and falling by $4.3\times$,
+$3.0\times$ and $2.6\times$ across the first three rungs of the $^{1}S$ ladder.  Read as a ground-state route to chemical accuracy it is not
+one;\ read as a cheap fixed-accuracy tier, and especially as an
+\emph{excited-state} method --- which is where the generalized-Sturmian
+literature has always been strongest --- it is a real operating point.  The open
+question we leave is whether a weighting potential of different radial shape can
+lower the ground-state floor without breaking Eq.~\eqref{eq:W_diagonal}.  \emph{For molecules}, the
 Shibuya--Wulfman metric returns; it is genuinely better-conditioned than the
 $L^2$ overlap---its intra-center block is the identity---and much better at large
 separation, but its inter-center coupling still costs conditioning that grows
