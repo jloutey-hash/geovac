@@ -66,19 +66,33 @@ def _angular_sep_const(
 
 def _radial_top_evals(
     m_abs: int, c: float, a: float,
-    n_grid: int = 1200, xi_max: float = 8.0, n_top: int = 5
+    n_grid: int = 1200, xi_max: float = 8.0, n_top: int = 5,
+    xi_min_offset: float = 1e-5
 ) -> np.ndarray:
     """Top eigenvalues of the radial operator L_xi.
 
     L_xi = d/dxi[(xi^2-1)d/dxi] - c^2*xi^2 + a*xi - m^2/(xi^2-1)
 
-    Uses self-adjoint FD with Neumann BC at xi=1 for m=0 (regular
-    solution is nonzero at xi=1). Dirichlet R=0 at xi_max.
+    Uses self-adjoint FD with Neumann BC applied at ``1 + xi_min_offset`` for
+    m=0 (the regular solution is nonzero at xi=1). Dirichlet R=0 at xi_max.
+
+    NUMERICAL PARAMETERS -- both were hard-coded and unreachable until
+    2026-09-08, so no caller could converge-test either.  Measured on the H2+
+    validation (beta must equal 1 at the exact electronic energy):
+
+      * ``xi_min_offset`` dominates.  The error in beta is FIRST ORDER in it,
+        coefficient ~1.3:  offset 5e-4 / 1e-4 / 1e-5 gives residual 6.3e-4 /
+        1.3e-4 / 1.5e-5 after Richardson extrapolation in n_grid.  The old
+        default was 5e-4.  Tighten it if you need better than ~1e-5.
+      * ``xi_max`` does NOT matter here:  8 -> 12 -> 20 moves the residual by
+        under 2%.  The Dirichlet wall is far outside the bound state.
+      * ``n_grid`` is first-order (difference ratios 1.96/1.98/1.99), so
+        Richardson extrapolation on two grids is worth more than one fine one.
 
     Returns n_top largest eigenvalues in descending order.
     """
     N = n_grid
-    xi_min = 1.0 + 0.0005
+    xi_min = 1.0 + xi_min_offset
     h = (xi_max - xi_min) / (N + 1)
     xi = xi_min + (np.arange(N) + 1) * h
 
@@ -103,7 +117,8 @@ def _radial_top_evals(
 def compute_molecular_sturmian_betas(
     Z_A: float, Z_B: float, R: float, p0: float, nmax: int,
     beta_min: float = 0.05, beta_max: float = 8.0, n_scan: int = 60,
-    n_grid_radial: int = 1200
+    n_grid_radial: int = 1200, xi_max: float = 8.0,
+    xi_min_offset: float = 1e-5
 ) -> List[Tuple[int, int, int, int, float]]:
     """Compute molecular Sturmian betas for all orbitals up to nmax.
 
@@ -125,7 +140,16 @@ def compute_molecular_sturmian_betas(
     n_scan : int
         Number of scan points for root finding.
     n_grid_radial : int
-        Grid points for radial FD solver.
+        Grid points for radial FD solver.  First-order convergent, so two
+        grids plus Richardson beats one fine grid.
+    xi_max : float
+        Outer Dirichlet wall.  Measured NOT to matter (8 -> 20 moves beta by
+        under 2% of its error);  exposed so that can be re-checked, not tuned.
+    xi_min_offset : float
+        Offset of the inner Neumann boundary from the singular point xi = 1.
+        THE dominant systematic:  the error in beta is first order in this,
+        coefficient ~1.3.  Default tightened 5e-4 -> 1e-5 on 2026-09-08, taking
+        the H2+ validation residual from 6.3e-4 to 1.5e-5.
 
     Returns
     -------
@@ -151,7 +175,8 @@ def compute_molecular_sturmian_betas(
                     b = beta * Z_diff * R
                     A_ang = _angular_sep_const(m, n_sph, c, b)
                     L_ev = _radial_top_evals(
-                        m, c, a, n_grid=n_grid_radial, n_top=n_rad + 3
+                        m, c, a, n_grid=n_grid_radial, n_top=n_rad + 3,
+                        xi_max=xi_max, xi_min_offset=xi_min_offset
                     )
                     if len(L_ev) <= n_rad:
                         return float('nan')
