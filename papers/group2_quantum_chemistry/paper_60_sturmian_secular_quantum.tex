@@ -356,11 +356,18 @@ optimized Coulomb--Sturmian configurations~\cite{avery2006} is therefore
 Eq.~\eqref{eq:no_selection} that figure ($1.2$~mHa short) \emph{cannot} have come
 from the locked-scale Goscinskian posing, at any $K$ or under any selection ---
 our largest computed family stands at $6.82$~mHa and the ladder is monotone.  It
-matches instead our scale-optimized ladder ($1.64$~mHa at $K=100$).  Which posing
-produced it --- or which basis, the genuine shared-scale Coulomb--Sturmians being
-the other candidate --- could not be confirmed against the primary source, and we
-flag it as the single result that would overturn this section were it to prove
-otherwise.  The machinery is correct, including the higher-$\ell$ angular
+matches instead our scale-optimized ladder ($1.64$~mHa at $K=100$).
+\textbf{[OBSERVATION]} A second consultation of the primary canon, relayed, both
+identifies the posing and agrees with the mechanism:\ in that calculation the
+scaling parameter was \emph{scanned as a free variational parameter and
+minimized}, unlinked from the output eigenvalue --- with the ground state's
+difficulty attributed there, as here, to $1s^{2}$ forcing both electrons to
+$Q_\nu=p_\kappa/\sqrt2$ and blocking in-out correlation.  That is our
+scale-optimized posing, it is what Eq.~\eqref{eq:no_selection} required, and it
+is what our ladder independently matches.  We record the attribution as
+secondary-source:\ it is consistent with three internal lines of evidence but is
+not a quotation, and a primary-source check remains the one thing that could
+overturn this section.  The machinery is correct, including the higher-$\ell$ angular
 correlation (Gaunt / Wigner-$3j$ multipole coupling).
 
 The decisive quantity is the block-encoding cost.  \textbf{[MEASURED]} The
@@ -554,7 +561,15 @@ Whether a weighting potential of different \emph{radial shape} can reposition
 the exponent distribution enough to lower the ground-state floor while
 preserving Eq.~\eqref{eq:W_diagonal} --- a constant rescaling cannot, since
 $\beta_\nu Z_w = p_\kappa/R_\nu$ eliminates $Z_w$ identically, so the lever must
-change the shape of $V_0$ and not merely its strength.  And whether the
+change the shape of $V_0$ and not merely its strength.  That lever has a named
+price, and it is not small:\ a screened or mean-field $V_0$ improves the physical
+quality of each configuration, but losing the $1/r$ form breaks the mapping to
+hyperspherical harmonics under the Fock projection, and with it the closed-form
+evaluation of the multi-center and inter-electron integrals --- the property this
+entire encoding rests on.  The open question is therefore sharper than ``does a
+better $V_0$ exist'':\ it is whether any $V_0$ of different radial shape
+\emph{preserves the Fock mapping}.  If none does, the trade is a wall with a
+mechanism rather than unexplored ground.  And whether the
 excited-state operating point survives the state-preparation cost that
 Eq.~\eqref{eq:scale_lock} says nothing about.  As it stands the family is best
 read as a \emph{fixed-accuracy tier whose accuracy depends on the target
@@ -621,6 +636,35 @@ resource analysis, not a hardware demonstration.
 
 \section{The molecular frontier: Shibuya--Wulfman conditioning}
 \label{sec:molecular}
+
+\textbf{[INTERNAL THEOREM]} \emph{The general-$V_0$ form, and what the metric
+is.}  Before specializing, the general statement costs two lines and is worth
+having, because it says what the molecular metric actually is.  Projecting
+$\langle\Phi_\mu|H-E|\Phi_\nu\rangle=0$ and substituting the Sturmian equation on
+the ket, $(-\tfrac12\sum_j\nabla_j^{2}-E)|\Phi_\nu\rangle=-\beta_\nu
+V_0|\Phi_\nu\rangle$, gives
+\begin{equation}
+  \sum_\nu\Big(\langle\Phi_\mu|V|\Phi_\nu\rangle-\beta_\nu
+    \langle\Phi_\mu|V_0|\Phi_\nu\rangle\Big)C_\nu=0,
+  \qquad\text{that is}\qquad
+  \mathbf{V}\,\mathbf{C}=\mathbf{V}_0\,\mathbf{B}\,\mathbf{C},
+  \label{eq:general_v0}
+\end{equation}
+$\mathbf{B}=\mathrm{diag}(\beta_\nu)$.  Every $L^{2}$ overlap cancels
+\emph{identically} --- for any local $V_0$, and whether or not the configurations
+are orthonormal.  \textbf{[MEASURED]} Atomically
+$\langle\Phi_\mu|V_0|\Phi_\nu\rangle=-Z R_\nu\delta_{\mu\nu}$ and
+$\beta_\nu Z=p_\kappa/R_\nu$, so $\mathbf{V}_0\mathbf{B}=-p_\kappa\mathbb{1}$ and
+Eq.~\eqref{eq:general_v0} collapses to Eq.~\eqref{eq:secular}:\ verified to
+$6\times10^{-10}$, with the reconstruction $Z\,\mathrm{diag}\,R_\nu-G$
+bit-identical to the assembled $M$.  \textbf{[OBSERVATION]} Molecularly
+$\mathbf{V}_0$ is \emph{not} diagonal, so the matrix on the right-hand side is
+the weighting potential itself --- not the identity, and not the $L^{2}$ overlap.
+That identifies the Shibuya--Wulfman matrix rather than merely naming it:\ for
+$V_0=-\sum_A Z_A/|\mathbf{r}-\mathbf{R}_A|$ its off-diagonal entries are exactly
+the cross-center nuclear-attraction integrals, which is what
+\texttt{geovac/shibuya\_wulfman.py} computes.  The molecular metric is not an
+extra structure the method acquires under generalization;\ it \emph{is} $V_0$.
 
 The clean atomic result does not fully transfer to molecules.  The multi-center
 one-electron isoenergetic problem is again \emph{generalized},

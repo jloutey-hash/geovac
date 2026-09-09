@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.10.13] - 2026-09-08
+
+**The general-`V₀` secular equation, the `-2.90250` attribution, and a named wall on the repair route.** Follow-up to v5.10.12, prompted by a second PI-relayed consultation of Avery's canon whose load-bearing leg was independently re-derived and numerically verified here rather than taken on report.
+
+### `eq:general_v0` — and what the molecular metric actually is
+
+Projecting `<Φ_μ|H−E|Φ_ν> = 0` and substituting the Sturmian equation on the ket gives
+
+    V C = V₀ B C ,    B = diag(β_ν)
+
+with **every L² overlap cancelling identically** — for any local `V₀`, orthonormal configurations or not. Derived two ways (relayed, and re-derived here) and verified by its atomic specialisation: `V₀B = −p_κ·I` to 6e-10, and the reconstruction `Z·diag(R_ν) − G` **bit-identical** to the assembled `M`.
+
+The consequence is structural. Molecularly `V₀` is not diagonal, so the matrix on the right-hand side is **the weighting potential itself — not the identity, and not the L² overlap**. That *identifies* the Shibuya–Wulfman matrix rather than merely naming it: for `V₀ = −Σ_A Z_A/|r−R_A|` its off-diagonal entries are the cross-center nuclear-attraction integrals, which is literally what `geovac/shibuya_wulfman.py` computes, per that module's own docstring. **The molecular metric is not extra structure the method acquires under generalization; it *is* `V₀`.** This closes a gap Paper 60 explicitly named as the piece it could not reconstruct.
+
+### The `-2.90250` withdrawal gains an attribution — and it confirms v5.10.12
+
+The relay states that in that calculation the scaling parameter was **scanned as a free variational parameter and minimized**, unlinked from the output eigenvalue — i.e. our *scale-optimized* posing, not the locked one. Three internal lines already required exactly that: `eq:no_selection` makes 1.2 mHa unreachable in the locked posing at any K or selection; our free-scale ladder independently sits at 1.64 mHa at comparable K; and the relay reproduces our mechanism (1s² forcing both electrons to `Q_ν = p_κ/√2`) unprompted. Recorded in the paper as **secondary-source**, not a quotation; a primary-source check remains the one thing that could overturn the section.
+
+**The irony is worth stating plainly:** Avery's own published practice is the *accurate* posing, and the metric-free one the quantum-computing case needs is the one that floors. They are different methods, and Paper 60 had been citing a number from the first to characterize the second.
+
+**One phrase in the relay is not usable and is not cited:** it describes the calculation as evaluating "the metric-free matrix at each step" *while* unlinking `p_κ` from `E`. By our own `eq:scale_lock` those cannot both hold — unlinking the scale is precisely what resurrects the L² metric. The operational claim is confirmed three ways; that phrase is loose paraphrase.
+
+### The `[OPEN]` V₀ question is now a wall with a mechanism
+
+No weighting potential of different radial shape is used for atoms anywhere in the book or theses; all practical work is bare Coulomb. The stated cost is concrete: **losing `1/r` breaks the mapping to hyperspherical harmonics under the Fock projection**, and with it the closed-form multi-center and inter-electron integrals — the property the whole encoding rests on. That converges with what we derived from the other side (parameter-freeness dies when `V₀` carries an intrinsic length scale). The open question is therefore sharper than "does a better `V₀` exist": it is whether **any** `V₀` of different radial shape *preserves the Fock mapping*. If none does, the trade is a wall rather than unexplored ground.
+
+Also relayed honestly and therefore **not** used: no convergence tables and no quantification of the excited-state advantage are accessible to that source, so our measured 4× state-dependence remains ours alone, uncorroborated either way.
+
+### Backing
+
+`eq:general_v0` backed by its own guard, written as a separate adversarial pass per §9 and fire-tested both ways, including the Z-independence leg that catches a coincidence at Z=2. Gates: C10 / C21 / C16 / C17 / C14 PASS. `memory/avery_method_and_prior_art_gaps.md` updated — the item recorded there since v5.10.12 as "the one that could falsify us" is resolved, and the molecular equation and the `V₀` obstruction are recorded as reference facts.
+
 ## [v5.10.12] - 2026-09-08
 
 **Paper 60's accuracy floor is the scale lock, and it is a ground-state pathology.** Both halves of the previous attribution -- angular truncation, and "cannot reach chemical accuracy at any `K`" -- are retired. PI-directed diagnostic; not a `/qa` run. Drivers `debug/p60_{variational_probe,scale_scan,freescale_resource,posing_cost_by_state,excited_ladder,floor_windows,floor_models,stateprep_overlap}.py`; backing `tests/test_paper60_scale_lock.py`.
