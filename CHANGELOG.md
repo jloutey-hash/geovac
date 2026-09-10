@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.10.15] - 2026-09-09
+
+**The molecular arc: a quadrature-free molecular Sturmian build, validated exactly, that closes l-truncation 540x and then walks into a wall the field already knows.** Drivers `debug/p60_{mol_beta_validation,mol_config_beta,mol_sturmian_atomcentred,sigma_onebody,mol_sturmian_sigma,sigma_cond_discriminate,sw_vs_l2_check}.py`.
+
+### The beta layer, and an undeclared parameter
+
+For one electron V_0 IS V, so `V C = V_0 B C` forces **B = 1** — a theory-forced check on `geovac/molecular_sturmian.py`. It returned 1.004228. Richardson on the radial grid (difference ratios 1.96/1.98/1.99, clean first order) extrapolated to 1 + 6.32e-4: a residual that is *not* grid error. Localized by sweeping the two hard-coded parameters — `xi_max` 8→20 is FLAT, the `xi_min` offset 5e-4→1e-5 takes it 6.32e-4→1.53e-5, first order with coefficient ~1.3. Neither was reachable from the public function, so no caller could converge-test either: **the same class of defect as the undeclared 60-bohr radial box that invalidated Paper 60's exponent**, in a different module. The guarding test asserts `|beta-1| < 0.1` — a 10% band on a quantity reachable to 1.5e-5, which is why it survived. Both exposed, default tightened, scaling laws documented. Honest size of the gain: at the default grid 4.23e-3 → 3.63e-3 (14%); what moved is the FLOOR, 6.3e-4 → 1.3e-5, so Richardson is now worth doing where before it converged to a wrong answer.
+
+**The many-electron configuration beta rule is forced, not chosen**: beta_nu is one scalar multiplying all of V_0, so every orbital in a configuration shares it and their orbital energies must sum to E. Atomically that reduces to `beta_nu Z R_nu = p_kappa`. Molecularly eps_i(beta) has no closed form and comes from root-finding the SAME matching condition in p0 rather than beta. Validated three ways, including `eps(beta=1) = -1.281333 Ha` reproducing H2+ at R=1.4 (total -0.56705 vs known -0.5669) at a geometry nothing was tuned to.
+
+### The atom-centred construction, and general l
+
+Built directly in the representation the exact engines speak. Shared-scale Coulomb Sturmians come out of a hydrogenic engine via `Z = n*k`; the Sturmian identity then collapses the problem to one primitive, `<chi_q|1/r_C|chi_p>`, closed-form from Mulliken auxiliaries. **Quadrature-free end to end.** Bra/ket asymmetry 3.5e-16, and a one-centre hydrogen control gives `beta = 1.000000000000` EXACTLY at every basis size.
+
+The s-only basis then stalled at `|beta-1| = 6.97e-3` = **11.7 mHa** of missing polarization. Extending to general l looked like a derivation sprint — there is no closed-form general-l cross-centre one-body engine in the corpus, and Paper 58's census gets l>0 from `noci_engine`, an *evaluator*. Two facts collapsed it: the floor is entirely SIGMA character, and for m=0 the solid harmonic `r_C^l P_l(cos theta_C)` is a POLYNOMIAL in the prolate coordinates, hence in `(r_A, r_B)` — exactly what `I2c` already integrates. **l=0 reproduces `qfd_core._inv_r` with symbolic difference exactly 0.** l then closes the gap **540x**, to 1.33e-5.
+
+### A claim of mine, retracted
+
+`cond(M)` rises 15 → 1.2e6 across that sweep and I reported it as a statement about the SW metric, landing in the conditioning gap the canon leaves open. **It is not.** Running the L2 overlap through the same machinery with the 1/r kernel removed, S degrades in lockstep and the ratio is flat at ~1.4 with no trend (at one point V_0 is *better*). This is two-centre high-l Sturmian **overcompleteness** — classical, and we re-measured it. `cond ~ (1/error)^1.8` prices the overcomplete basis, not the method.
+
+### What Paper 60 claims, checked against the right object
+
+Paper 60 says the SW metric is "uniformly better-conditioned than the L2 overlap". Our first comparison used `M = -<V_0>`, which is NOT the paper's `S_SW = (2k^2)^-1<grad|grad> + 1/2<.|.>` — by the Sturmian equation that is `(1/k^2)K`, i.e. `V_0 B`, the right-hand side of `eq:general_v0`. Compared correctly, **the claim holds at every row and the margin GROWS with l**: 1.75x at l_max=0, 3.3-6.0x at l_max=2. The paper measured it s-only; it is better where accuracy needs it. The SW matrix and the general-V_0 metric are one object, not two.
+
+### Where the road goes
+
+Ledger line 124 named the destination before we set out: *"rebuild all integrals consistently = standard molecular Coulomb-Sturmian QC (Avery/Herbst-Avery-Dreuw), shedding GeoVac's sparsity. A replacement of GeoVac, not a modification."* That is a fair description of this build — exact, validated, and running into the wall the field knows. Its standard remedy is a documented STOP here: the dual-basis theorem (Artacho-del Bosch PRA 43/1991) says the metric never disappears, and Loewdin destroys within-m l-selection intrinsically — precisely the structure the 540x gain depends on. A relayed survey confirms three independent communities hit the same overcompleteness and each remedy collides with a different GeoVac constraint: scale-optimization breaks `eq:scale_lock`, Loewdin breaks l-selection, and exploiting single-centre bandedness does not transfer (measured: same-centre overlap exactly tridiagonal, cross-centre dense).
+
 ## [v5.10.14] - 2026-09-08
 
 **The metric-free/unlinked conflict resolved — against the relay, in favour of `eq:scale_lock`.** Plus three provenance corrections from the same round. Paper edits only; no new measurement.
