@@ -272,10 +272,36 @@ MEASURED = {
         provenance="MEASURED 2026-09-08, debug/p60_scale_scan.py. Companion "
                    "locked-scale value at the same K is 7.46 mHa. s-sector "
                    "counterpart (against the known exact s-limit -2.879029 Ha) is "
-                   "0.15 mHa at K=136 vs 4.43 locked. Pipeline unit-tested at K=1, "
+                   "p60_span_deficit_sonly_free vs p60_span_deficit_sonly_locked, "
+                   "both at K=136 (this prose said '4.43 locked' until 2026-09-11, "
+                   "which is the K=105 row -- a mismatched pair). Pipeline unit-tested at K=1, "
                    "where both postings coincide and return -2.8476562 = "
                    "-(2-5/16)^2 exactly.",
         aliases={1.640: "l_max=3, K=100", 2.232: "l_max=3, K=74"}),
+    "p60_span_deficit_sonly_locked": dict(
+        value=4.4038, convention="constant: mHa above the exact He s-limit "
+                                 "(-2.879029 Ha) reached by the LOCKED metric-free "
+                                 "isoenergetic posing, s-only, K=136 -- the partner "
+                                 "of p60_span_deficit_sonly_free at the SAME K",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_freescale_resource.py; read back "
+                   "from debug/data/p60_freescale_l0.json 2026-09-11. Registered "
+                   "because the paper carried 4.43 here -- the K=105 row -- for "
+                   "three days as an unregistered literal C21 could not see. The "
+                   "two halves of this comparison are a MATCHED PAIR and must move "
+                   "together: quoting one at K=136 and the other at K=105 is the "
+                   "defect this key exists to prevent.",
+        aliases={4.4341: "K=105", 4.4805: "K=78", 4.5565: "K=55"}),
+    "p60_span_deficit_sonly_free": dict(
+        value=0.1466, convention="constant: mHa above the exact He s-limit "
+                                 "(-2.879029 Ha) reached by a VARIATIONAL CI over "
+                                 "the identical s-only Goscinskian span with the "
+                                 "global scale lambda optimized, K=136",
+        q=None,
+        provenance="MEASURED 2026-09-08, debug/p60_freescale_resource.py; read back "
+                   "from debug/data/p60_freescale_l0.json 2026-09-11. Partner of "
+                   "p60_span_deficit_sonly_locked at the same K.",
+        aliases={0.2219: "K=105", 0.3555: "K=78", 0.6135: "K=55"}),
     "p60_posing_cost_ground": dict(
         value=4.21, convention="constant: mHa, E_iso - min_lambda E_var over the "
                                "SAME span, He ground state, s-only, K=105. "

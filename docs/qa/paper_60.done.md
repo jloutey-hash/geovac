@@ -10,6 +10,58 @@
 
 # Paper 60 (Generalized-Sturmian Secular Equation) — `/qa` profile
 
+> **RUN 2026-09-11 — DELTA verification, unseeded: DEFECTS, remediated. NOT certified.**
+> Five dimensions. Deterministic layer 12/12. Citations CLEAN. **2 LARGE + 25
+> MATERIAL-SMALL + 5 upgrade candidates, and zero mathematical defects** — every
+> finding was prose, attribution, staleness or coverage. Five adversarial passes,
+> one of which re-derived every keystone independently and fire-tested the guards
+> it was handed, found nothing wrong with the arithmetic.
+>
+> **LARGE 1 (corpus surface).** `CLAUDE.md:119` asserted four retired values
+> (`K^0.84`, "local slope 0.906", "T⁰ is the sublinear block at K^0.70", "T′ is
+> SUPERlinear at K^1.05") with no supersession marker, in the file loaded by every
+> session and every subagent dispatch — two lines below the bullet that supersedes
+> it. §13.11 rule 9 was not applied: four newer bullets were appended and this one
+> left standing. Replaced; superseded text relocated to the frontier archive.
+>
+> **LARGE 2 (coverage).** Six abstract-level `[MEASURED]` families have
+> driver-only backing in prunable `debug/`. Independently reproduced by the
+> reviewer, so the exposure is regression protection rather than correctness.
+> **OWED as its own pass** (§9: guard-writing is separate, separately-reviewed work).
+>
+> **The one wrong number in the paper:** the s-only span deficit read `4.43` at
+> K=136; the driver's own output gives `4.40376` there and `4.43413` at K=105 — a
+> mismatched pair, in the sentence carrying the floor's re-attribution. It was an
+> *unregistered* literal, so C21 was blind to it, and it was absent from the
+> declared-debt table that asserted its list was all correct. Now registered as a
+> matched pair (`p60_span_deficit_sonly_locked` / `_free`).
+>
+> **Instrument findings (three), all fixed before any content edit:** no C16 entry
+> could reach `CLAUDE.md`, `claims_register.md`, `code_architecture.md` or
+> `geovac/sturmian_variational.py`; `p60-sublinear-as-regime` stated its own
+> CORRECTION in values retired the next day; and its `exempt_if_nearby` contained
+> `nuclear diagonal|T^0` — **the vocabulary of the retired mechanism**, so a locus
+> asserting "the nuclear diagonal T⁰ is the sublinear block" exempted itself. Two
+> new entries (`p60-tprime-superlinear`, `p60-l2-metric-diverges`) use the
+> standardized per-entry marker and `exempt_if_nearby = (?!)`, because CLAUDE.md:119
+> sits two lines from a bullet containing both "WITHDRAWN" and "2026-09-08" — any
+> plausible nearby vocabulary would have exempted the LARGE. Both proven to
+> discriminate two ways: 6/6 fire on retired wording, 8/8 silent on corrected
+> wording, including two loci where an early draft of my own pattern fired on the
+> *denial* ("Neither T′ grouping is superlinear") and would have made the right
+> answer unwritable.
+>
+> **Two upgrades** (C8.15/C8.16 below) — the backing proved more than the prose on
+> both results this week rests on.
+>
+> Full sweep: 4 live zombies fixed, 16 chronicle loci marked, 6-locus
+> "ill-conditioned" cluster swept claim-wide, `reverses to superlinear` corrected at
+> owner + citer + register, the floor/bracket contradiction resolved, the
+> Acknowledgments' four surrendered theorems reclaimed, and the `cor:dual_p0`
+> overstatement fixed in the auto-loaded memory and in `paper_fci_molecules`.
+
+
+
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only the Paper-60 scope + deltas + watch-notes.
 
@@ -226,7 +278,9 @@ row family, He −2.847/−2.897/−2.90372).
   default-skipped tests carry the sublinear-1-norm, gerade-conditioning, water-probe, and
   H2-CI headlines).** Map each headline to its test and audit whether the test *proves* the
   claim (not tautological / weaker than prose): potential-weighted orthonormality (diag);
-  L2 ill-conditioning growth; F0=5/8; single-config He variational −2.847/−2.84766;
+  L2 overlap NON-ORTHOGONALITY growth (cond is modest — do NOT audit this as
+  ill-conditioning, that reading is withdrawn); F0=5/8; single-config He
+  variational −2.847/−2.84766;
   multiconfig lowering + **sublinear 1-norm** (`multiconfig_lowers_and_sublinear_onenorm`,
   `lgt0_angular_correlation_and_sublinear`); SW intra-center = identity; SW better-
   conditioned than L2; **gerade flat conditioning** kappa≈2; SW beats Gaussian metric; H2+
@@ -264,14 +318,16 @@ row family, He −2.847/−2.897/−2.90372).
 Paper 60's single highest risk is overselling a quantum-resource advantage it does not have.
 The reviewers must verify ALL of:
 1. **The atomic sublinearity is a CONFIGURATION-count (K) statement, not a qubit-count (Q)
-   one.** ‖M‖1∼K^0.84 is sublinear in CI configuration count for a single atom; the paper
-   itself flags it as not-yet-mapped to Q. No prose may imply a qubit-count sublinearity or
-   a many-electron win. **exact ≠ accurate (inherited Paper 58 W1):** metric-free / pi-free /
-   pure-number structure buys *encoding cost*, not accuracy.
+   one.** The exponent of `eq:sublinear` is sublinear in CI *configuration* count for a
+   single atom — value owned by C21 key `p60_onenorm_exponent`, and it is a WINDOW fit, not
+   a regime. No prose may imply a qubit-count sublinearity or a many-electron win.
+   **exact ≠ accurate (inherited Paper 58 W1):** metric-free / pi-free / pure-number
+   structure buys *encoding cost*, not accuracy.
 2. **Molecules are polynomial, and the paper must say so.** The N-electron interacting
-   molecular block-encoding 1-norm is ∼n_orb^2.2 (standard second-quantization ballpark, no
-   advantage over DF/THC); the paper concedes "not a sublinear matrix." Any prose implying a
-   molecular many-electron 1-norm advantage = MATERIAL.
+   molecular block-encoding 1-norm is polynomial (standard second-quantization ballpark, no
+   advantage over DF/THC) — value owned by C17 family `paper60-molecular-lambda-exponent`;
+   the paper concedes "not a sublinear matrix." Any prose implying a molecular many-electron
+   1-norm advantage = MATERIAL.
 3. **Benchmarking rule (strongest baseline).** DF / THC / sparse-qubitization / plane-wave
    first-quantization are the mature FT baselines; Paper 60 does NOT beat them at molecular
    scale and must not imply it does. Honest ceiling = "novel metric-free ATOMIC secular
@@ -284,20 +340,72 @@ The reviewers must verify ALL of:
    algorithm combining (i) Sturmian basis, (ii) quantum eigenvalue routine, (iii) isoenergetic
    inversion" — not "first quantum-chemistry algorithm" or any broader claim.
 
+## C8.15 / C8.16 — the two results upgraded from MEASURED to proved (2026-09-11)
+
+**C8.15 — `eq:W_diagonal` is [SYMBOLIC], not measured.** The one-body Coulomb
+metric is exactly diagonal, by three cases: angular orthogonality when
+`l_μ ≠ l_ν`; hermiticity of `(T − E)` on the two Sturmian equations giving
+`(Q_μ − Q_ν)·W_μν = 0` when the `l` agree and the roots differ; and disjoint
+n-multisets in the degenerate branch, which first occurs at `n_max = 35` (the
+largest basis computed is 17). The `5×10⁻¹¹` entrywise agreement is a check on
+the implementation, **not the evidence for the claim** — stating it as the
+evidence is now an UNDERCLAIM and MATERIAL. The equation is stated at unit scale;
+at general λ the diagonal is `λ R_ν`, and dropping that qualifier is MATERIAL
+(it makes the labelled equation false by a factor λ).
+
+**C8.16 — the variational bound is proved by inertia, and proves more.** Because
+W is diagonal, `H(λ) + ½λ²S = λ(λ𝟙 − M)` **exactly** (verified to 1.4e-17 —
+machine precision, i.e. an algebraic identity, not a fit). S ≻ 0, so by
+Sylvester's law of inertia the number of pencil roots below `−½λ²` equals
+`#{k : λ_k(M) > λ}`: zero at `λ_max` (the bound), exactly k at `λ_k` (the
+**root-by-root correspondence**, on which every excited-state number in §4
+depends). Verified against a direct pencil solve at k=0,1,2,3. The paper must
+NOT revert to asserting "E_iso is the lowest root" as an unproved intermediate —
+it is a consequence, not a premise.
+
+## Un-delegated literals — DECLARED DEBT (2026-09-11)
+
+The criteria sections below still write these numbers as literals, because **no
+C21 registry key and no C17 family owns them yet** (this paper has exactly two
+C17 families: `paper60-atomic-sublinear-exponent`, `paper60-molecular-lambda-exponent`).
+Delegating to a key that does not exist would leave the DoD pointing at nothing —
+worse than the literal. They are recorded here so the exposure is **visible and
+dated** rather than silent:
+
+| locus | literal | status |
+|---|---|---|
+| branch criterion 4 | Gaussian ratio-dependence (`N^6` / `N^1.4`) | correct; unregistered |
+| W5 | water A1 `cond∼N^1.97` | correct; unregistered |
+| W8 | H2+ / H2 toy-validation figures | correct; unregistered |
+| C8.1 | naive L2 inflation `Q^3.33` vs `Q^1.19` | correct; unregistered |
+| C8.6 | SW `cond(S)∼N^1.85` (vs L2 `N^1.70`) | correct; unregistered |
+| C8.7 | the `tab:resource` row | correct; unregistered |
+| C8.9 | water gerade-lever-fails numbers | correct; unregistered |
+
+**Every one listed above was verified correct on 2026-09-11** — none is a retired value.  *But the table was not exhaustive, and that is the lesson:* the DELTA run found an eighth un-delegated literal, the s-only locked span deficit, written as `4.43` when the measured K=136 value is `4.40` (the 4.43 is the K=105 row).  It was not in this table, so the table's own reassurance did not cover it.  An enumeration offered as complete is a stronger claim than the literals it lists;  it is now registered (`p60_span_deficit_sonly_locked` / `_free`) and this table asserts only what it enumerates. The risk is
+structural, not present: each is a literal that will rot the next time its
+measurement moves, exactly as `K^0.84` did in W1. **Owed before the next FULL
+certifying run:** register each under C21 or a C17 family (Sec.15 rule 3 applies —
+measure or cite, never guess), then delegate. Until then a reviewer treats them
+as literals and checks them against the body.
+
 ## Paper-60-specific watch-notes (the risk surface — ranked)
 
-- **W1 — abstract K-exponent drift [HIGHEST, headline-number].** Abstract (line 46)
-  ‖M‖1∼K^0.78; body `eq:sublinear` (labelled, line 247) ‖M‖1∼K^0.84; CLAUDE §2 + the
-  lit-comparison memo both use 0.84. **Canonical = the labelled body equation, 0.84.** The
-  abstract figure must match. Mismatch = MATERIAL (C8/C17).
+- **W1 — K-exponent agreement [HIGHEST, headline-number].** The abstract's K-exponent,
+  the labelled body equation `eq:sublinear`, and C21 key `p60_onenorm_exponent` must **all
+  three agree**. Any disagreement = MATERIAL (C8/C17/C21). *No value is written here by
+  design* — see "DoD criteria name the OWNING GATE" in `criteria.md`. This note previously
+  froze `0.84` as canonical and was still asserting it after that value was retired
+  (2026-09-07), which is what stopped the 2026-09-11 run at protocol step 1.
 - **W2 — gerade-vs-Gaussian ratio drift [HIGH, headline-number].** Abstract (line 62)
   attributes "10^2–10^3× smaller than Gaussian" to the *gerade*; body (line 409) gives
   full-metric = 10^2–3×10^2 and **gerade = 10^3–10^4×** — consistent with `tab:resource`
   (3.3×10^5/18 ≈ 1.8×10^4 gerade; 3.3×10^5/1050 ≈ 3×10^2 full). The abstract appears to have
   mis-attributed the full-metric range to the gerade. **Canonical = the table.** Mismatch =
   MATERIAL.
-- **W3 — sublinear-axis conflation [framing-zombie].** The atomic K^0.84 (config-count
-  LCU-λ) and the plane-wave "sublinear in basis size N" (Babbush 2019, Toffoli-in-N) are
+- **W3 — sublinear-axis conflation [framing-zombie].** The atomic exponent of
+  `eq:sublinear` (config-count LCU-λ, C21 `p60_onenorm_exponent`) and the plane-wave
+  "sublinear in basis size N" (Babbush 2019, Toffoli-in-N) are
   DIFFERENT sublinearities on different axes/mechanisms; the lit-memo flags reader-conflation
   risk. The paper must not blur them.
 - **W4 — "metric-free"/"no metric" is ATOMS-ONLY.** Molecules re-introduce the SW metric
@@ -305,10 +413,13 @@ The reviewers must verify ALL of:
 - **W5 — the gerade lever is EQUIVALENT-CENTER-only.** [MEASURED] water probe: cond(A1)∼N^1.97,
   the lever fails for a symmetry-unique heavy center (O↔H coupling is the sole driver). Must
   not be presented as a general polyatomic property.
-- **W6 — He is DELIBERATELY low-accuracy.** −2.897 (spdf, K=164) vs exact −2.90372 (~7 mHa)
-  is worse than STO-3G-class; the Goscinskian basis is deliberately poor for the He GS. The
-  validation proves the *machinery is correct*, NOT that it is accurate. "Accurate helium"
-  reading = MATERIAL.
+- **W6 — He is DELIBERATELY low-accuracy, and the RESIDUAL IS THE SCALE LOCK.** The
+  helium ladder is worse than STO-3G-class; the validation proves the *machinery is correct*,
+  NOT that it is accurate. "Accurate helium" reading = MATERIAL. **Superseded 2026-09-08:**
+  this note used to attribute the residual to *basis incompleteness*. It is not — a
+  variational CI over the identical span reaches far closer (C21 key
+  `p60_span_deficit_spdf`), so the residual is the scale lock, `eq:scale_lock`. Any prose
+  still calling it basis incompleteness = MATERIAL.
 - **W7 — `rajchel2025` citation drift [C4].** Lit-memo: bibitem title ("…via a singularity
   test") ≠ real arXiv title ("Quantum algorithm for solving generalized eigenvalue problems
   with application to the Schrödinger equation"); initials "K. Plis"/"A. Zak" ≠ real (Szymon
@@ -322,22 +433,42 @@ The reviewers must verify ALL of:
   independent of p_kappa/E/Z; F0=5/8; sqrt2 in the He scale) is the paper's pi-free content; verify
   it is exact-rational/algebraic as stated, no anonymous transcendental.
 
-## C8 headlines (enumerated, with tiers — the frozen goalposts; canonical = BODY values)
+## C8 headlines (enumerated, with tiers — the frozen goalposts)
+
+> **Values are NOT written here.** Each headline names the claim, its tier, and the
+> **gate that owns its number** (C21 registry key / C17 family / equation label). See
+> "DoD criteria name the OWNING GATE" in `criteria.md`. The pre-2026-09-11 version of this
+> block froze three claims that were later retired or withdrawn — `K^0.84` as canonical,
+> "residual = basis incompleteness", and the Avery 102-configuration comparison — and would
+> have failed a corrected paper.
 
 1. **Naive L2 inflation [MEASURED].** Shared-scale Coulomb-Sturmian is L2-non-orthogonal;
-   JW/Löwdin LCU 1-norm inflates λ∼Q^3.33 vs Q^1.19 hydrogenic; driven by overlap
-   ill-conditioning.
+   JW/Löwdin LCU 1-norm inflates λ∼Q^3.33 vs Q^1.19 hydrogenic. **Mechanism corrected
+   2026-09-11:** this line read "driven by overlap ill-conditioning" — the
+   characterization §2 of the owner WITHDREW on 2026-09-07 (converged cond(S) is
+   ordinary, ~0.12·K). The inflation is driven by the *density* of Löwdin's
+   S^{-1/2} and the resulting spread of the coefficient distribution, not by
+   numerical instability. Asserting ill-conditioning here = MATERIAL; C16
+   `p60-l2-metric-diverges` guards it.
 2. **Isoenergetic metric-free ATOMIC secular equation [ESTABLISHED, from Avery].**
    [diag(Z R_nu)+T′−p_kappa·1]B=0; eigenvalues p_kappa=sqrt(−2E) = the energies directly (no outer
    loop); T′ = a matrix of pure numbers, independent of p_kappa, E, and Z.
-3. **Helium validation [MEASURED].** Single Goscinskian config −2.847 Ha = textbook
-   variational (−2.84766; the pure number 5/8·sqrt2^−1); bare (no V′) matrix −4.0 (two He+ 1s,
-   exact non-interacting); multiconfig −2.847(1s^2)→−2.873(s)→−2.894(+p)→−2.897(spdf,K=164) →
-   exact −2.90372; ~7 mHa residual = basis incompleteness (deliberately poor basis; Avery &
-   Avery reach −2.90250 with 102 configs), every point above exact (no overshoot).
-4. **Atomic sublinear 1-norm [MEASURED].** ‖M‖1∼**K^0.84** (`eq:sublinear`, full s+p+d+f) in
-   configuration count K — sublinear, opposite of the naive inflation. (CANONICAL 0.84;
-   abstract 0.78 = the W1 drift.)
+3. **Helium validation [MEASURED].** Single Goscinskian config reproduces the textbook
+   single-exponent variational value from the pure number `5/8·sqrt2^-1`; the bare (no V′)
+   matrix returns two non-interacting He+ 1s exactly; the multiconfiguration ladder descends
+   monotonically toward the exact non-relativistic energy with **every point above it**.
+   **The residual is the SCALE LOCK, not basis incompleteness** (`eq:scale_lock`; span
+   deficit owned by C21 `p60_span_deficit_spdf`). **The Avery 102-configuration comparison is
+   WITHDRAWN** — `eq:no_selection` proves that figure unreachable in the locked posing at any
+   K or selection, and a relayed consultation attributes it to a scale-optimized
+   (ordinary variational CI) calculation. Any prose reinstating either = MATERIAL.
+4. **Atomic sublinear 1-norm [MEASURED].** `eq:sublinear` — ‖M‖₁ grows more slowly than
+   the configuration count K on a **converged radial domain**, opposite of the naive
+   inflation. Exponent owned by C21 `p60_onenorm_exponent` (s-only companion
+   `p60_onenorm_exponent_sonly`); split owned by `p60_T0_asymptotic_exponent` /
+   `p60_Tprime_full_exponent`. **It is a WINDOW fit, not an asymptotic regime** — the local
+   slope falls monotonically and no window value is stable; prose asserting a regime, or any
+   value measured on a truncated domain, = MATERIAL.
 5. **Novelty [OBSERVATION].** No prior quantum algorithm combines (i) Sturmian/hyperspherical
    basis, (ii) a quantum eigenvalue routine, (iii) the isoenergetic inversion; the two
    documented cost risks (metric conditioning, outer energy search) are both ABSENT in the
@@ -361,9 +492,39 @@ The reviewers must verify ALL of:
    equivalent-center-only, not symmetry-as-such.
 10. **N-electron 1-norm NOT sublinear [MEASURED; the OPEN question answered negative].**
     Two-center CI (H2 dissociates correctly, E→−1.0 at R=6; underbinds −1.09 vs exact −1.174
-    at R_eq) has standard block-encoding λ∼n_orb^2.2 — polynomial, no sublinear behaviour;
+    at R_eq) has a standard POLYNOMIAL block-encoding λ — exponent owned by C17 family
+    `paper60-molecular-lambda-exponent` — with no sublinear behaviour;
     the atomic sublinearity rides on the single-center diagonal T0=Z R_nu. Real molecular
     savings = the metric levers (gerade / large-R / one-electron), not a sublinear matrix.
+
+
+11. **Metric-free ⟺ the scale is locked to the eigenvalue [INTERNAL THEOREM].**
+    `eq:W_diagonal` (the one-body Coulomb metric is exactly diagonal) and `eq:scale_lock`
+    (metric-free ⟺ E = −λ²/2 ⟺ λ = p_κ). The posing IS the variational problem of its own
+    span at the one scale where the L² metric cancels. Backing
+    `tests/test_paper60_scale_lock.py`. **Consequences that must travel with it:** the
+    variational bound is automatic, not fortunate; freeing the scale reaches chemical
+    accuracy but hands back BOTH advertised cost risks and the encoding advantage
+    (`p60_freescale_set_sonly`, a MATCHED SET on one ladder — quoting one member against a
+    value from another ladder = MATERIAL); and the floor is a **ground-state pathology**
+    (`p60_posing_cost_ground` vs `p60_posing_cost_exc`, `p60_gnd_ratio_k452` vs
+    `p60_exc_ratio_k452`), not a property of the method.
+12. **No selection rescues the locked posing [INTERNAL THEOREM].** `eq:no_selection` — T′
+    being pure numbers makes any sub-family's secular matrix exactly a principal submatrix,
+    so Cauchy interlacing gives E(A) ≥ E(M). Measured corollary owned by C21
+    `p60_best102_locked`. Backing `tests/test_paper60_no_selection.py`. The property that
+    makes the encoding attractive is what supplies the bound.
+13. **The general-V₀ form, and what the molecular metric IS [INTERNAL THEOREM].**
+    `eq:general_v0` — V·C = V₀·B·C, every L² overlap cancelling for ANY local V₀, orthonormal
+    configurations or not; atomic specialisation reproduces `eq:secular`. Backing
+    `tests/test_paper60_general_v0.py`. **Provenance split that must stay intact:** the
+    Shibuya–Wulfman integrals are Avery's; the identification of that matrix *as* the
+    V₀-weighted overlap is ours, and the variational bound for the fixed-scale metric-free
+    problem is not in his canon. Crediting either to Avery = MATERIAL.
+14. **The accuracy mechanism is AVERY'S, the price in qubits is OURS [ESTABLISHED, from
+    Avery].** In-out radial correlation; split-shell 1s1s′ carries two independent exponents;
+    a Goscinskian 1s² pins both electrons to one exponent for *any* weighting potential.
+    Presenting this mechanism as a GeoVac discovery = MATERIAL.
 
 ## Seeding plan (worktree only; never touches the real corpus)
 

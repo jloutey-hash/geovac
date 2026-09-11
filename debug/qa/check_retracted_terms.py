@@ -252,8 +252,15 @@ REGISTRY = [
                 "iff E = -lambda^2/2, hence lambda = p_kappa, and that is not "
                 "the variational optimum -- freeing lambda over the IDENTICAL "
                 "span reaches 1.28 mHa at K=130 against 7.46 locked.  And it is "
-                "GROUND-STATE specific: 4.49x chemical accuracy for the ground "
-                "state vs 1.12x for 2^1S at identical ||M||_1.  The genuine He "
+                "GROUND-STATE specific: at K=452, 4.28x chemical accuracy for the "
+                "ground state vs 1.08x for 2^1S at identical ||M||_1 (at K=202 the "
+                "same pair reads 4.49x / 1.12x).  This note named NO K until "
+                "2026-09-11, which is a violation of this paper's own branch "
+                "criterion -- every quantity names its evaluation domain -- and it "
+                "made two correct values look like a contradiction of two others. "
+                "Both K=452 figures are DERIVED in the numeric registry "
+                "(p60_gnd_ratio_k452 / p60_exc_ratio_k452) so they cannot drift "
+                "from their energies.  The genuine He "
                 "l>=4 partial-wave tail is 0.187 mHa (ground) and 0.008 mHa "
                 "(2^1S) -- 3% and 0.5% of the respective floors -- measured from "
                 "the l-increments themselves, so angular truncation cannot be "
@@ -1763,6 +1770,122 @@ REGISTRY = [
         ],
     },
     {
+        "id": "p60-tprime-superlinear",
+        "scope": "paper_60 group2 synthesis trunk",
+        "severity": "fail",
+        "retired": "2026-09-08 (v5.10.12, converged-domain re-measure).  The "
+                   "2026-09-07 remediation of `p60-sublinear-as-regime` replaced one "
+                   "wrong mechanism with another.  It asserted:  the nuclear diagonal "
+                   "T^0 is the sublinear block at K^0.70; the pure-number block T' is "
+                   "SUPERlinear at K^1.05; and the total local slope RISES with K "
+                   "(0.850, 0.868, 0.882, 0.906 at K = 202..340).  All three are "
+                   "retired.  Measured on a converged domain:  T^0 is NOT a power law "
+                   "-- its exact closed form gives slope 1/2 + O(1/log K), running "
+                   "0.709 at K=20 down to 0.603 at K=498004, still falling;  T' full "
+                   "is K^0.88, SUBlinear;  and the TOTAL local slope FALLS, reaching "
+                   "0.766 by K=514 against the 0.82 window fit.  The 0.906 figure was "
+                   "the last point of a rising WINDOW artifact on the unconverged box. "
+                   "WHAT SURVIVES: the 1-norm still grows more slowly than the matrix "
+                   "dimension over every computable basis -- the encoding claim is "
+                   "untouched;  only the block attribution and the direction of the "
+                   "slope were wrong, twice.",
+        # `is\s+SUPERlinear` REMOVED 2026-09-11 after fire-testing:  it fired on
+        # the CORRECTED text ("Neither $T'$ grouping is superlinear") at two
+        # loci.  An assertion and its denial share the verb, so the verb cannot
+        # discriminate;  the retired VALUES can, and do.
+        "pattern": r"is the sublinear block"
+                   r"|K\^\{?0\.70\}?"
+                   r"|K\^\{?1\.05\}?"
+                   r"|local slope 0\.906"
+                   r"|slope rises monotonically"
+                   r"|exponent trends toward 1",
+        # NEVER-MATCH by design.  See the module docstring of the applying
+        # script:  CLAUDE.md:119 sits two lines from a bullet containing both
+        # "WITHDRAWN" and "2026-09-08", so ANY retirement vocabulary in a
+        # +-5-line window would have exempted the LARGE this entry exists to
+        # catch.  A locus that legitimately names these values must carry the
+        # standardized per-entry marker on its own line.
+        "exempt_if_nearby": r"(?!)",
+        "cited_by": {
+            "CLAUDE.md":
+                "reviewed 2026-09-11 -- Sec.2 v5.10.10 bullet asserted all four "
+                "retired values with no supersession marker; replaced per Sec.13.11 "
+                "rule 9 (status updates replace, never append)",
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex":
+                "reviewed 2026-09-11 -- Sec.4 carries the converged closed form "
+                "(eq:T0_closed) and the falling-slope table",
+            "docs/claims_register.md":
+                "reviewed 2026-09-11 -- row 27 marks the 2026-09-07 values retired",
+            "docs/claim_test_matrix.md":
+                "reviewed 2026-09-11 -- rows carry the converged exponents",
+        },
+        "files": [
+            "CLAUDE.md",
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/claim_test_matrix.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            "tests/test_sturmian_secular.py",
+        ],
+    },
+    {
+        "id": "p60-l2-metric-diverges",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-07/09-08.  Paper 60 Sec.2 claimed the L^2 Gram matrix of "
+                   "the shared-scale Coulomb-Sturmian basis DIVERGES -- cond(S) 4 -> "
+                   "3673 -- and that the metric-free posing is therefore the only "
+                   "well-conditioned one.  Both are withdrawn.  The blow-up was a pure "
+                   "radial-box artifact, switching on exactly where n_max^2 first "
+                   "exceeds the domain size;  on a converged domain cond(S) = 16.0 at "
+                   "K=100 and grows mildly and smoothly, approx 0.12*K (4.07 at K=10, "
+                   "56.3 at K=452) -- an ORDINARY Gram matrix.  The paper's surviving "
+                   "claim is a COST statement (the L^2 posing is expensive to encode), "
+                   "which is a different assertion from numerical instability.  This "
+                   "entry exists because the withdrawal reached the papers but not the "
+                   "tracked code:  `solve_with_metric`'s docstring still said cond(S) "
+                   "'grows into the thousands', and `_whiten` in the module promoted "
+                   "the same week said the metric is 'ill-conditioned by construction, "
+                   "so this truncation is required, not cosmetic' -- while the "
+                   "truncation provably never fires (0 directions dropped at every "
+                   "measured case).",
+        "pattern": r"grows into the thousands"
+                   r"|ill-conditioned by construction"
+                   r"|4\s*(?:->|-->|\\to)\s*367[23]"
+                   r"|cond\(S\)[^.\n]{0,30}367[23]"
+                   r"|L[\u00b22]-divergence"
+                   r"|only well-conditioned posing",
+        "exempt_if_nearby": r"(?!)",
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex":
+                "reviewed 2026-09-11 -- Sec.2 carries the withdrawal and the "
+                "converged cond(S) numbers",
+            "docs/claim_test_matrix.md":
+                "reviewed 2026-09-11 -- row 60/Sec.obstruction marked WITHDRAWN",
+            "docs/claims_register.md":
+                "reviewed 2026-09-11 -- row 26 carries the withdrawal",
+            "tests/test_sturmian_secular.py":
+                "reviewed 2026-09-11 -- test_L2_metric_conditioning_is_box_dependent "
+                "pins the artifact AS an artifact",
+        },
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_sturmian_secular.py",
+            "tests/test_paper60_*.py",
+        ],
+    },
+    {
         "id": "p60-sublinear-as-regime",
         "scope": "paper_60 group2 synthesis",
         "severity": "fail",
@@ -1772,11 +1895,14 @@ REGISTRY = [
                    "elements decrease with quantum number'.  Re-measured with the "
                    "paper's own gen_configs/solve past its largest fitted point: "
                    "0.84 is a fit over the WINDOW K = 74..164 (0.8399), the local "
-                   "slope rises monotonically outside it (0.850, 0.868, 0.882, "
-                   "0.906 at K = 202, 244, 290, 340), and the split is the "
-                   "opposite of the printed mechanism -- nuclear diagonal T^0 = "
-                   "Z R_nu at K^0.70 (stable), pure-number block T' at K^1.05 "
-                   "(SUPERlinear).  The paper's own Sec. 7 already said the "
+                   "slope was then thought to rise outside it.  CORRECTED AGAIN "
+                   "2026-09-08 on a converged domain -- see entry "
+                   "p60-tprime-superlinear:  the local slope FALLS (to 0.766 by "
+                   "K = 514), the window exponent is 0.82, the nuclear diagonal "
+                   "T^0 is not a power law at all (asymptotic 1/2 + O(1/log K)), "
+                   "and T' is 0.88 -- SUBlinear, not superlinear.  The 2026-09-07 "
+                   "values K^0.70 / K^1.05 / rising-slope are THEMSELVES RETIRED "
+                   "and are guarded by that entry.  The paper's own Sec. 7 already said the "
                    "advantage 'rides on the clean diagonal T^0', so Sec. 4 "
                    "contradicted Sec. 7 inside one document.  WHAT SURVIVES: the "
                    "1-norm does grow more slowly than the matrix dimension over "
@@ -1792,9 +1918,14 @@ REGISTRY = [
                    r"|pure-number matrix elements decrease\s*\n?with quantum number"
                    r"|large-K~?164 asymptote",
         # The corrected text carries the window or the diagonal attribution.
+        # `nuclear diagonal` and `T^0` REMOVED 2026-09-11 (DELTA I3):  they are
+        # the vocabulary of the RETIRED mechanism, so a locus asserting "the
+        # nuclear diagonal T^0 is the sublinear block" exempted itself.  The
+        # surviving vocabulary names only the WINDOW scoping, which is the
+        # thing a corrected locus actually has to carry.
         "exempt_if_nearby": r"K\s*=\s*74|window|over the computed|more slowly than "
-                            r"the (?:matrix dimension|configuration count)|nuclear "
-                            r"diagonal|T\^0|NOT an asymptote|corrected 2026-09-07",
+                            r"the (?:matrix dimension|configuration count)"
+                            r"|NOT an asymptote|corrected 2026-09-0[78]",
         # Documents whose ARGUMENT rests on the sublinearity claim.
         "cited_by": {
             "papers/synthesis/group2_quantum_chemistry_synthesis.tex":
@@ -1806,14 +1937,20 @@ REGISTRY = [
             "docs/claim_test_matrix.md":
                 "reviewed 2026-09-07 -- row re-tiered to the windowed claim",
         },
+        # Widened 2026-09-11 (DELTA I1).  The prior list was papers+docs only,
+        # so the two highest-traffic surfaces in the corpus -- CLAUDE.md, read
+        # by every session and every subagent dispatch, and the tracked geovac/
+        # docstrings -- were unreachable by this gate.
         "files": [
             "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
             "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
             "papers/INDEX.md",
             "docs/claim_test_matrix.md",
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "CLAUDE.md",
             "tests/test_paper60_sturmian.py",
-            "geovac/sturmian_secular.py",
-            "geovac/sturmian_molecular_lambda.py",
+            "geovac/sturmian_*.py",
         ],
     },
     {

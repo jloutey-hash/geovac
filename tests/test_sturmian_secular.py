@@ -12,7 +12,7 @@ Backs four load-bearing Paper 60 (group2) claims, ported from the
   (iii) restoring the L2 overlap metric S (generalized eigenproblem ``M B = p S B``)
         is NOT ill-conditioned -- the "~4 into the thousands" growth is a
         radial-box artifact (converged cond(S) = 16.0, growing ~0.12*K).  The
-        paper's "4 -> 3673" is RETIRED;  the real reason to keep the
+        paper's "4 -> 3673" is RETIRED [retracted 2026-09-07: p60-l2-metric-diverges];  the real reason to keep the
         metric-free form is eq:scale_lock, not conditioning;
   (iv)  ``[eq:secular]`` the interelectron matrix T' is a matrix of PURE NUMBERS,
         independent of the nuclear charge Z.
@@ -107,7 +107,7 @@ def test_onenorm_sublinear() -> None:
 
 # --------------------------------------------------------------------------------------
 # Claim (iii), AS CORRECTED 2026-09-07: the L2 overlap metric S is NOT
-# ill-conditioned.  The "4 -> 3673" growth is a radial-box artifact; converged,
+# ill-conditioned.  The "4 -> 3673" growth is a radial-box artifact [retracted 2026-09-07: p60-l2-metric-diverges]; converged,
 # cond(S) = 16.0 and grows ~0.12*K -- an ordinary Gram matrix.  This test pins the
 # artifact AS an artifact.  (The metric-free form is preferable for a different
 # reason entirely: it exists only at the locked scale, Paper 60 eq:scale_lock.)
@@ -119,7 +119,7 @@ def test_L2_metric_conditioning_is_box_dependent() -> None:
 
     Replaces test_L2_metric_divergence (2026-09-07), which asserted
     `2000 < cond(S)[N=8] < 6000` -- i.e. it PINNED the artifact and would have
-    failed if anyone repaired the engine. Paper 60's "cond(S) climbs 4 -> 3673"
+    failed if anyone repaired the engine. Paper 60's "cond(S) climbs 4 -> 3673" [retracted 2026-09-07: p60-l2-metric-diverges]
     was withdrawn on the strength of this measurement.
 
     What is actually true, verified at R_MAX = 60/120/240/480:
@@ -183,4 +183,4 @@ def test_L2_metric_conditioning_is_box_dependent() -> None:
     # (3) Converged, it is an ordinary Gram matrix, not an ill-conditioned one.
     assert c240_8 < 40.0, (
         f"converged cond(S) at N=8 is {c240_8:.1f}; Paper 60's withdrawn "
-        f"'4 -> 3673' claim would need this to be in the thousands")
+        f"'4 -> 3673' claim would need this to be in the thousands")  # [retracted 2026-09-07: p60-l2-metric-diverges]

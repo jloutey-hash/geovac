@@ -231,9 +231,17 @@ def build(nmax: int, lmax: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray,
 def _whiten(Smat: np.ndarray, tol: float = 1e-10) -> np.ndarray:
     """Whitening transform ``X`` with ``X^T S X = I``, dropping the null space.
 
-    Eigenvalues of ``S`` at or below ``tol * max(w)`` are discarded; the
-    mixed-scale Goscinskian metric is ill-conditioned by construction (Paper 60
-    claim iii), so this truncation is required, not cosmetic.
+    Eigenvalues of ``S`` at or below ``tol * max(w)`` are discarded. This is a
+    numerical safety net, NOT a physical truncation, and on this family it
+    provably never fires: 0 of 78 / 105 / 290 directions were dropped at every
+    measured case (cond(S) = 33 / 43 / 56). The whitened problem therefore spans
+    the IDENTICAL space, which is what lets `var_energy` be compared with the
+    locked posing over 'the same span'.
+
+    An earlier version of this docstring said the metric is 'ill-conditioned by
+    construction ... so this truncation is required, not cosmetic'. That rested
+    on the retired cond(S) 4 -> 3673 divergence [retracted 2026-09-07: p60-l2-metric-diverges] (a radial-box artifact) and was
+    wrong twice over -- the metric is ordinary, and the truncation never fires.
     """
     w, V = np.linalg.eigh(Smat)
     keep = w > tol * w.max()

@@ -289,7 +289,13 @@ def test_l2a_interlacing_on_the_pool_is_tight_and_never_violated():
     p = pool(10, 0)
     K = p.K
     assert K == 55
-    assert abs(p.lam - 2.397695680) < 1e-8
+    # IDENTITY pin (tolerance 5e-7, widened 2026-09-11).  1e-8 was TIGHTER than
+    # this quantity's spread across legitimate domains (3.6e-8 for R_MAX
+    # 500->900, 7.6e-7 for a uniform mesh), so raising the box rule -- an
+    # improvement -- would have failed it.  That is the anti-pattern that
+    # retired this paper's `2000 < cond(S) < 6000` guard.  Still discriminating:
+    # the nearest other root is 0.33 away.
+    assert abs(p.lam - 2.397695680) < 5e-7
 
     # --- deterministic: every leave-one-out sub-family (the tightest there is)
     all_idx = np.arange(K)

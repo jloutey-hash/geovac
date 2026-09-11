@@ -14,7 +14,7 @@ module backs three load-bearing Paper 60 claims, regression-protected by
   (iii) restoring the L2 overlap metric S turns the problem into a generalized
         eigenproblem ``M B = p S B``.  NOTE ``cond(S)`` is MILD, not explosive:
         16.0 at K=100 on a converged radial box, growing ~0.12*K -- an ordinary
-        Gram matrix.  (``4 -> 3673`` is RETIRED:  a pure radial-box artifact that
+        Gram matrix.  (``4 -> 3673`` is RETIRED [retracted 2026-09-07: p60-l2-metric-diverges]:  a pure radial-box artifact that
         switches on exactly where n_max^2 first exceeds R_MAX, every box agreeing
         to 4 digits below that point.)  The reason to keep the metric-free form
         is therefore NOT S's conditioning;  it is that the metric-free form
@@ -433,8 +433,12 @@ def solve_with_metric(config_tuples: List[Tuple[int, int, int]],
     ``M B = p S B``.
 
     Returns ``(E_metricfree, E_with_S, cond_S, K)``. The L2 framing (Paper 60 Sec.2)
-    is ill-conditioned: ``cond(S)`` grows into the thousands as the basis grows,
-    whereas the metric-free standard eigenproblem stays well-behaved.
+    is EXPENSIVE TO ENCODE -- which is a different assertion from being
+    numerically unstable. On a converged domain ``cond(S)`` is an ordinary Gram
+    matrix growing mildly, about ``0.12*K``: 4.07 at K=10, 16.0 at K=100, 56.3 at
+    K=452. The ``4 -> 3673`` divergence this docstring used to assert is RETIRED [retracted 2026-09-07: p60-l2-metric-diverges]
+    (radial-box artifact; see the module header). The reason to prefer the
+    metric-free form is eq:scale_lock, not conditioning.
     """
     cfgs = build_configs(config_tuples)
     M = build_M(cfgs, Z)

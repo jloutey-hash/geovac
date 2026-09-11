@@ -511,8 +511,11 @@ def test_l3_the_collapse_is_z_independent():
             "beta_nu is not p_kappa/(Z R_nu)")
 
     # --- p_kappa really moves with Z
-    assert abs(pk[2.0] - 2.397695680) < 1e-8
-    assert abs(pk[3.0] - 3.807331160) < 1e-8
+    # IDENTITY pins (5e-7, widened 2026-09-11 -- see the note in
+    # test_paper60_no_selection.py).  The substantive assertion is the NEXT one:
+    # that p_kappa genuinely moves with Z, which no tolerance change affects.
+    assert abs(pk[2.0] - 2.397695680) < 5e-7
+    assert abs(pk[3.0] - 3.807331160) < 5e-7
     assert pk[3.0] - pk[2.0] > 1.0, (
         f"p_kappa barely moves between Z=2 and Z=3 ({pk[2.0]:.6f} vs "
         f"{pk[3.0]:.6f}); the two charges are not independent evidence")

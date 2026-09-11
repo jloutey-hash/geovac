@@ -573,3 +573,18 @@ the below.
 > Older sprint index (v2.x–v4.37.0 one-liners: trunk QA, group3 cert run-by-run, group1 cert per-run detail, the S^(3)/S^(4) period sprints, Hodge-SL₂, the B3 Phase-3 arc, v4.0.0), the long-form arc chronicles, and the RH sprint records moved verbatim to `docs/development_frontier_archive.md` (2026-06-10, 2026-06-16, 2026-06-22 compaction rounds 2–4). CHANGELOG.md remains the canonical chronicle going forward.
 
 - **SecV.C convention-error sweep (2026-08-28, v5.1.9):** The D fix was 1 of 3 -- one formula, buggy = correct x 2(m_p/m_N), also live in Li-7 (3.48x) and the alkali table; H Lamb FNS was n=1 in an n=2 table. See ...
+
+
+### Superseded CLAUDE.md Sec.2 text (2026-09-11, /qa paper_60 DELTA)
+
+Replaced under Sec.13.11 rule 9 (status updates replace, never append). The
+v5.10.10 bullet stated the 2026-09-07 mechanism, which the 2026-09-08
+converged-domain re-measure retired in full -- while four newer bullets were
+appended above it, leaving the superseded reading live in the file loaded by
+every session and every subagent dispatch. Verbatim:
+
+> - **/qa 58/59/60 FULL + group1 DELTA = FAIL, remediated (2026-09-07, v5.10.10):** P60's `K^0.84` is a WINDOW fit (K<=164; local slope 0.906 by K=340) and its mechanism was backwards -- the nuclear diagonal T0 is the sublinear block (K^0.70), T' is SUPERlinear (K^1.05). Five gates were examining nothing. See debug/sprint_qa_papers_58_59_60_memo.md.
+
+Current values: window exponent 0.82; total local slope FALLS to 0.766 by
+K=514; T^0 is not a power law (asymptotic 1/2 + O(1/log K)); T' is K^0.88,
+SUBlinear. Guarded by C16 `p60-tprime-superlinear`.

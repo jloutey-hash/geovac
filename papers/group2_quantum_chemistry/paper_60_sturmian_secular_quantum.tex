@@ -31,7 +31,9 @@ basis inflates the cost instead.  Its block-encoding $1$-norm grows
 compute, and \emph{more} slowly as the basis grows.  That advantage, however,
 belongs to the \emph{basis-growth rule} rather than to the construction:\ it
 holds when $l_{\max}$ is fixed and higher-$n$ configurations are added, and
-reverses to superlinear when the basis is grown as full hydrogenic shells.
+weakens when the basis is grown as full hydrogenic shells --- there the total
+exponent rises toward $1$ ($0.867\to0.911$) while remaining below it, and only
+the pure-number block $T'$ itself goes superlinear.
 The cheap rule also carries an accuracy floor, whose mechanism we
 locate exactly:\ the metric-free form holds \emph{iff} the basis scale is locked
 to the eigenvalue, $\lambda=p_\kappa=\sqrt{-2E}$, and that lock is not the
@@ -47,9 +49,9 @@ virtues and defects but one structural fact.  The floor is moreover a
 $\|M\|_1$ does not depend on which root is extracted, every $^{1}S$ state costs
 the same to encode, and at the largest computed basis $K=452$ the
 ground state sits $\gvq{p60_gnd_ratio_k452}{4.28}\times$ above chemical accuracy
-while $2\,^{1}S$ sits $\gvq{p60_exc_ratio_k452}{1.08}\times$ above it, the posing
-cost falling by $4.3\times$, $3.0\times$ and $2.6\times$ across the
-first three rungs of the $^{1}S$ ladder.  The result is therefore a measured trade-off between cost growth,
+while $2\,^{1}S$ sits $\gvq{p60_exc_ratio_k452}{1.08}\times$ above it;\ at
+$K=105$ the posing cost falls by $4.3\times$, $3.0\times$ and $2.6\times$
+across the first three rungs of the $^{1}S$ ladder.  The result is therefore a measured trade-off between cost growth,
 attainable accuracy and \emph{which state is targeted}, not an unconditional
 efficiency claim.  The development follows.
 
@@ -64,7 +66,9 @@ in the ordinary $L^2$ Schr\"odinger framework, the genuine shared-scale
 Coulomb--Sturmian basis is $L^2$-non-orthogonal; a second-quantized (Jordan--Wigner)
 encoding must L\"owdin-orthogonalize it, and the LCU $1$-norm $\lambda$ then
 \emph{inflates} as $\lambda\sim Q^{3.3}$ (versus $Q^{1.2}$ for an orthonormal
-hydrogenic basis), driven by the growing ill-conditioning of the overlap.
+hydrogenic basis), driven by the dense $S^{-1/2}$ that L\"owdin
+orthogonalization introduces as the basis members grow progressively linearly
+dependent.
 \textbf{[ESTABLISHED, from Avery's formulation]} The generalized-Sturmian
 \emph{isoenergetic} reformulation removes this obstruction for atoms: posed in
 the potential-weighted metric in which the Coulomb--Sturmians are orthonormal,
@@ -75,7 +79,7 @@ $T'$ is a matrix of pure numbers, independent of $p_\kappa$, of energy, and of
 $Z$.  \textbf{[MEASURED]} We implement it, validate it against helium (a single
 Goscinskian configuration reproduces the textbook variational value
 $-2.847$~Ha; adding configurations lowers the energy monotonically through
-the $s$, $+p$ and $spdf$ sectors---past the $s$-sector limit $-2.873$~Ha to
+the $s$, $+p$ and $spdf$ sectors---past the locked $s$-sector value $-2.873$~Ha to
 $-2.897$~Ha, toward the exact non-relativistic $-2.90372$~Ha), and measure the decisive quantity: the block-encoding $1$-norm of the
 secular matrix grows \emph{more slowly than the matrix dimension},
 $\|M\|_1\sim K^{\gvq{p60_onenorm_exponent}{0.82}}$ over the computed range
@@ -197,8 +201,11 @@ $\lambda(Q)$ data; like Eq.~\eqref{eq:sublinear} these exponents are numerical
 fits, and the tracked claim is the sublinear-vs-superlinear contrast, not the
 precise value).  The mechanism is the
 $L^2$ overlap $S$: with helium Coulomb--Sturmians its condition number climbs
-($3.0,5.8,13.9,32.2$ for $N=2,3,5,8$), and the dense $S^{-1/2}$ built from an
-ill-conditioned Gram inflates $\lambda$.  This is a currency-change of the
+($3.0,5.8,13.9,32.2$ for $N=2,3,5,8$ --- growing, but modest), and the dense
+$S^{-1/2}$ built from that increasingly non-orthogonal Gram inflates
+$\lambda$.  The inflation is driven by the \emph{density} of $S^{-1/2}$ and the
+spread it induces in the coefficient distribution, not by numerical
+instability:\ a condition number of $32$ is not ill-conditioned.  This is a currency-change of the
 familiar cost-conservation phenomenon in non-orthogonal quantum chemistry (the
 overlap metric never disappears; moving it densifies operators, states, or
 coefficients~\cite{loutey_paper58}).  Encoded this way, the Sturmian basis is the
@@ -215,7 +222,7 @@ versions added that re-solving the converged $s\!+\!p\!+\!d\!+\!f$ helium
 problem as the generalized eigenproblem $MB=pSB$ \emph{diverges}, with the
 metric condition number climbing $4\to3673$ and the energy running to
 $-3\times10^{6}$~Ha.  Both numbers are artifacts of the fixed $60$-bohr radial
-domain (Appendix~\ref{app:box}).  On a converged domain
+domain [retracted 2026-09-07: p60-l2-metric-diverges] (Appendix~\ref{app:box}).  On a converged domain
 $\mathrm{cond}(S)=\gvq{p60_cond_S_converged}{16.0}$ at the same point, and the
 growth is mild and smooth, $\mathrm{cond}(S)\approx0.12\,K$ --- $4.07$ at
 $K=10$, $23.5$ at $K=164$, $56.3$ at $K=452$.  The blow-up switches on exactly
@@ -240,7 +247,7 @@ relation~\cite{averyphd,calderini2012,herbst2019},
 orthonormal in the $1/r$ weight, \emph{not} in $L^2$.  \textbf{[MEASURED]} We
 confirm Eq.~\eqref{eq:pw} numerically: the potential-weighted overlap is diagonal
 to $\sim\!10^{-6}$ off-diagonal, whereas the $L^2$ overlap of the same basis is
-the ill-conditioned matrix of Sec.~\ref{sec:obstruction}.
+the non-orthogonal matrix of Sec.~\ref{sec:obstruction}.
 
 Building the electronic-structure problem in this native metric is the
 generalized-Sturmian method.  With the basis potential taken to be the bare
@@ -262,7 +269,7 @@ algorithm, and all are consequences of the potential-weighting:
 \item It is a \emph{standard} eigenproblem, $M B=p_\kappa B$ with
 $M=\mathrm{diag}(Z R_\nu)+T'$.  There is \emph{no overlap metric} $S$: the
 potential-weighting has absorbed it into the diagonal nuclear term.  The
-ill-conditioning of Sec.~\ref{sec:obstruction} is not repaired, it is
+non-orthogonality of Sec.~\ref{sec:obstruction} is not repaired, it is
 \emph{never present}.
 \item Its eigenvalues are the scaling parameters $p_\kappa$ \emph{directly};
 one diagonalization yields the whole spectrum via $E=-\tfrac12 p_\kappa^2$.
@@ -303,7 +310,7 @@ variational CI over the \emph{identical} span, with the global scale optimized,
 reaches $\gvq{p60_span_deficit_spdf}{1.28}$~mHa of the exact energy at $K=130$,
 where the isoenergetic solution of that same span stalls at $7.46$~mHa;  in the
 $s$-sector, where the exact $s$-limit $-2.879029$~Ha is known independently, the
-same comparison is $0.15$~mHa against $4.43$~mHa at $K=136$.  The residual is
+same comparison is $\gvq{p60_span_deficit_sonly_free}{0.15}$~mHa against $\gvq{p60_span_deficit_sonly_locked}{4.40}$~mHa at $K=136$.  The residual is
 therefore the price of the \emph{posing}, not of the basis:  the metric-free form
 requires the basis scale to be locked to the eigenvalue, $\lambda=p_\kappa$, and
 that lock is not the variational optimum.  \textbf{[INTERNAL THEOREM]} The same
@@ -418,10 +425,11 @@ sublinearity is a property of how the basis is grown, not of the isoenergetic
 construction.}  The family used here holds $l_{\max}$ fixed and adds
 higher-$n$ configurations, whose couplings decay as $n^{-2}$.  Grown the other
 way, as full hydrogenic shells with $l_{\max}=n_{\max}-1$, the same secular
-construction gives $\|T'\|_1\sim K^{1.07}$ and a total exponent that
-\emph{rises} with $K$ ($0.867\to0.911$ over $K=56$--$220$).  Superlinear
-behaviour and a rising exponent are therefore real --- for a different
-growth rule.  What Eq.~\eqref{eq:sublinear} measures is the fixed-$l_{\max}$
+construction gives $\|T'\|_1\sim K^{1.07}$ --- superlinear --- while the
+\emph{total} exponent rises but stays below $1$ ($0.867\to0.911$ over
+$K=56$--$220$).  A superlinear block and a rising total are therefore both
+real for a different growth rule;\ but no measured full-shell point makes the
+total itself superlinear, and we do not claim one.  What Eq.~\eqref{eq:sublinear} measures is the fixed-$l_{\max}$
 rule, and the cost advantage belongs to that rule rather than to the method.
 
 \textbf{[MEASURED]} \emph{Which block carries it.}  Splitting
@@ -471,20 +479,43 @@ ground-state error is $8.04$~mHa at $K=74$ and $6.78$~mHa at $K=514$;\ fitting
 $\Delta E(K)=\Delta E_\infty + bK^{-q}$ gives
 $\Delta E_\infty=\gvq{p60_energy_floor}{6.44}$~mHa (residual $<0.002$~mHa), with
 $6.446$~mHa still predicted at $K=10^{5}$.  Seven times the basis closes $16\%$
-of the deficit.  The floor is $4.0\times$ chemical accuracy
-($1.594$~mHa).
+of the deficit.  That single full-range fit is dominated by its small-$K$ end,
+however, and because this fit family approaches the floor \emph{from below} it
+is a lower estimate rather than a central one;\ resolving it window by window
+and pairing it with a model-free extrapolation brackets the floor at
+$[6.47,6.62]$~mHa (below), and it is the bracket we quote.  Either way the
+floor is $\approx\!4\times$ chemical accuracy ($1.594$~mHa).
 
 \textbf{[INTERNAL THEOREM]} \emph{Where the floor comes from.}  It is neither
 angular truncation nor a deficiency of the span.  Write the configurations at a
 free global scale $\lambda$, which the Goscinskian construction fixes to
 $p_\kappa$.  Because each $\Phi_\nu$ is hydrogenic at $Q_\nu=\lambda/R_\nu$, the
-one-body Coulomb metric is exactly diagonal,
+one-body Coulomb metric is exactly diagonal;\ written at unit scale
+($\lambda=1$, the convention used for $T$ below, so that at general $\lambda$
+the diagonal reads $\lambda R_\nu$),
 \begin{equation}
   W_{\mu\nu}\equiv\Big\langle\Phi_\mu\Big|\sum_j r_j^{-1}\Big|\Phi_\nu\Big\rangle
-    = R_\nu\,\delta_{\mu\nu},
+    = R_\nu\,\delta_{\mu\nu}.
   \label{eq:W_diagonal}
 \end{equation}
-verified entrywise to $5\times10^{-11}$.  Hence the kinetic matrix at unit scale
+\textbf{[SYMBOLIC]} This is exact, not numerical.  The diagonal is
+$W_{\nu\nu}=Q_\nu\sum_j n_j^{-2}=Q_\nu R_\nu^{2}=R_\nu$ from
+$\langle 1/r\rangle_{n}=Q/n^{2}$.  Off the diagonal there are three cases.  If
+$l_\mu\neq l_\nu$ the integral vanishes by angular orthogonality.  If the
+$l$ agree and $R_\mu\neq R_\nu$, apply $(T-E)$ to the two Sturmian equations
+and use its hermiticity:\ the cross terms give
+$(Q_\mu-Q_\nu)\,W_{\mu\nu}=0$, so $W_{\mu\nu}=0$ whenever the weighted
+charges differ.  The remaining case, $R_\mu=R_\nu$ at equal $l$, does not
+occur below $n_{\max}=35$ (the largest basis computed here is
+$n_{\max}=17$), and when it does occur $W$ still vanishes:\ equal $R$ forces
+equal charge, and two distinct configurations sharing a charge have disjoint
+$n$-multisets, so the radial factors are orthogonal.  The identity is
+therefore unconditional on this family, and the entrywise agreement to
+$5\times10^{-11}$ is a check on the implementation rather than the evidence
+for the claim.  \emph{This is the same potential-weighted orthogonality that
+Sec.~\ref{sec:molecular} invokes for the molecular problem --- automatic for
+eigenvectors of a common Sturmian problem with distinct $\beta$ --- read back
+in its atomic special case.}  Hence the kinetic matrix at unit scale
 is $T=\mathbb{1}-S/2$, and the variational problem over the same span is
 $H(\lambda)C=E\,SC$ with
 $H(\lambda)=\lambda^{2}(\mathbb{1}-S/2)+\lambda(-Z\,\mathrm{diag}\,R_\nu+G)$ and
@@ -499,20 +530,29 @@ evaluated at the one scale where the $L^{2}$ metric drops out:
 \end{equation}
 \textbf{[MEASURED]} That lock is not the variational optimum.  Freeing $\lambda$
 over the identical span reaches $0.15$~mHa of the exact $s$-limit at $K=136$
-($s$-only, where $-2.879029$~Ha is known independently) against $4.43$~mHa
+($s$-only, where $-2.879029$~Ha is known independently) against $\gvq{p60_span_deficit_sonly_locked}{4.40}$~mHa
 locked, and $\gvq{p60_span_deficit_spdf}{1.28}$~mHa of the exact energy at
 $K=130$ ($spdf$) against $7.46$~mHa locked.  The span is not the limitation; the
 lock is.  Two corollaries.  The variational bound is automatic rather than
-fortunate --- $E_{\rm iso}$ is the lowest root of $H(p_\kappa)C=E\,SC$, so no
-point can fall below the exact value.  And freeing the scale forfeits the
+fortunate, and the argument gives more than the bound.  Because $W$ is
+diagonal, $H(\lambda)+\tfrac12\lambda^{2}S=\lambda\,(\lambda\mathbb{1}-M)$
+\emph{exactly};\ $S$ is positive definite, so by Sylvester's law of inertia
+the number of roots of the pencil lying strictly below $-\tfrac12\lambda^{2}$
+equals $\#\{k:\lambda_k(M)>\lambda\}$.  Taking
+$\lambda=\lambda_{\max}(M)$ that count is zero, which is the bound;\ taking
+$\lambda=\lambda_k$ it is exactly $k$, which is the root-by-root
+correspondence the excited-state results of this section rely on.  Neither
+step needs $E_{\rm iso}$ to be identified as the lowest root in advance.  And freeing the scale forfeits the
 encoding advantage entirely.  On the $s$-only comparison ladder
 ($K=21$--$136$;\ note this is a different sector and window from the headline
 exponent of Eq.~\eqref{eq:sublinear}, so the four numbers below are quoted as one
 matched set) the locked $1$-norm's
 $K^{\gvq{p60_freescale_set_sonly}{0.72}}$ becomes $K^{1.95}$ for
 $H(\lambda^{\ast})$ and $K^{2.75}$ for the whitened $S^{-1/2}HS^{-1/2}$, with
-$\mathrm{cond}(S)\sim K^{0.94}$ --- a factor $5\times10^{3}$ at $K=136$.  \emph{Metric-free posing, sublinear $1$-norm
-and accuracy floor are one fact, not three.}
+$\mathrm{cond}(S)\sim K^{0.94}$ --- a factor $5\times10^{3}$ at $K=136$.  \emph{Metric-free posing and accuracy floor are
+one fact, not two --- both are the scale lock, and the $1$-norm advantage
+\emph{over the free-scale alternative} is its third consequence.  The
+sublinearity itself is not:\ that belongs to the growth rule.}
 
 \textbf{[ESTABLISHED, from Avery]} \emph{Why the ground state in particular.}
 Helium's ground state needs \emph{in-out} radial correlation, supplied
@@ -529,13 +569,16 @@ $\gvq{p60_gnd_gap_k452}{6.82}$~mHa ($4.28\times$ chemical accuracy) against
 $\gvq{p60_exc_gap_k452}{1.716}$~mHa ($1.08\times$) for $2\,^{1}S$.  Reference-free --- the posing cost
 $E_{\rm iso}-\min_\lambda E_{\rm var}$ requires no known limit --- the $^{1}S$
 ladder at $K=105$ reads $\gvq{p60_posing_cost_ground}{4.21}$,
-$\gvq{p60_posing_cost_exc}{0.98}$, $0.32$ and $0.13$~mHa across the first four
-roots --- reductions of $4.3\times$, $3.0\times$ and $2.6\times$
-per rung, themselves shrinking.
+$\gvq{p60_posing_cost_exc}{0.98}$, $0.3235$ and $0.1251$~mHa across the first
+four roots --- reductions of $4.3\times$, $3.0\times$ and $2.6\times$ per rung,
+themselves shrinking.  (The last two are printed to four figures because at two
+the quoted ratio no longer reproduces.)
 \textbf{[OBSERVATION]} The shrinking Rydberg gaps do not spoil this at chemical
 accuracy:\ resolving the $k$-th root needs
-$\epsilon_p=\epsilon_E/p_\kappa\approx8\times10^{-4}$ against gaps of $0.336$,
-$0.041$, $0.014$ and $0.006$ --- margins of $254$, $27$, $8.6$ and $3.9$ --- so
+$\epsilon_p=\epsilon_E/p_\kappa(k)$, which runs $6.6$--$7.9\times10^{-4}$ across
+the first four roots, against $p_\kappa$ gaps of $0.336$, $0.041$, $0.014$ and
+$0.006$;\ requiring half a gap of separation gives margins of $254$, $27$,
+$8.6$ and $3.9$ --- so
 the query count $\|M\|_1/\epsilon_p\approx2\times10^{5}$ is state-independent
 through $4\,^{1}S$.  \textbf{[MEASURED]} The remaining cost of an interior root
 is state preparation, and it is modest.  In the $L^{2}$ metric the overlap of the
@@ -564,8 +607,10 @@ $96$--$342\times$ worse in RMS, and --- unlike the three-parameter form, whose
 limit is stable to three decimals across every window ($1.032$, $1.033$,
 $1.033\times$ chemical accuracy) --- \emph{its own limit is window-unstable},
 running $0.69\to0.79\to0.82\times$ as the window tightens.  A model whose
-asymptote moves with the window is not asserting an asymptote.  We nonetheless
-quote measured ladder endpoints rather than fitted values throughout, and record
+asymptote moves with the window is not asserting an asymptote.  In the state-dependence
+comparisons below we therefore quote measured ladder endpoints rather than
+fitted values, and where a fitted floor is quoted we give its bracket rather
+than a single value.  We record
 that ``$2\,^{1}S$ saturates above chemical accuracy'' remains a model-selection
 conclusion rather than a measurement.
 
@@ -586,8 +631,9 @@ mechanism rather than unexplored ground.  And whether the
 excited-state operating point survives the state-preparation cost that
 Eq.~\eqref{eq:scale_lock} says nothing about.  As it stands the family is best
 read as a \emph{fixed-accuracy tier whose accuracy depends on the target
-state}:\ sublinear cost at ${\sim}6.4$~mHa for the ground state and
-${\sim}1.8$~mHa for $2\,^{1}S$, bought at the same price.
+state}:\ sublinear cost at $\gvq{p60_gnd_gap_k452}{6.82}$~mHa for the ground
+state and $\gvq{p60_exc_gap_k452}{1.72}$~mHa for $2\,^{1}S$ --- both measured at
+$K=452$ --- bought at the same price.
 
 \emph{Scope and comparison.}  The ``sublinear'' here is a property of the LCU
 $1$-norm $\|M\|_1$ of a \emph{fixed}-size atomic secular matrix as the
@@ -612,7 +658,7 @@ by two independent routes --- exact grid-free evaluation of the Slater integrals
 in closed form, and converged quadrature on a graded mesh --- agreeing to four
 decimal places on every leg.  An earlier version of this section reported
 $K^{0.84}$, $\|T'\|^{\rm off}_1\sim K^{1.05}$ and an exponent ``trending toward
-$1$''.  Those were computed on a fixed $60$-bohr radial domain, which truncates
+$1$'' [retracted 2026-09-08: p60-tprime-superlinear].  Those were computed on a fixed $60$-bohr radial domain, which truncates
 configurations whose orbitals extend to $100$--$200$ bohr;\ because the
 truncation error grows with $K$ (by a factor $1.011\to1.205$ across the fitted
 range) it inflated the fitted slope and reversed its apparent drift.  The
@@ -712,8 +758,8 @@ $S_{\mu'\mu}=(2k^2)^{-1}\langle\nabla\varphi_{\mu'}|\nabla\varphi_\mu\rangle
 (i) the intra-center block of $S$ is \emph{exactly} the identity---in the
 momentum-space evaluation, diagonal $\{1,1,1\}$ with off-diagonal
 $\sim\!10^{-16}$ (the $2$D-grid values $\{1,0.999,0.998\}$ are discretization
-error)---where the $L^2$ overlap's intra-center block is ill-conditioned (cond
-$5.8$, itself growing with basis), so the within-center disaster of
+error)---where the $L^2$ overlap's intra-center block is merely non-orthogonal
+(cond $5.8$, growing with basis), so the within-center disaster of
 Sec.~\ref{sec:obstruction} is genuinely absent from $S$; (ii) across two centers
 $S$ is uniformly better-conditioned than the $L^2$ overlap and markedly better at
 larger separation:
@@ -1022,8 +1068,15 @@ into a characterized boundary, clean on one side and open on the other.
 
 \begin{acknowledgments}
 The generalized-Sturmian formulation used here is that of J.~E.~Avery and
-J.~S.~Avery; this paper adds only its reading as a quantum-encoding target and
-the resource measurements.  Developed with an AI-augmented workflow under
+J.~S.~Avery, as are the Shibuya--Wulfman integrals and the split-shell account
+of why the helium ground state in particular resists the method.  To these this
+paper adds its reading as a quantum-encoding target, the resource measurements,
+and four results we claim as our own:\ the scale-lock identity
+Eq.~\eqref{eq:scale_lock} together with the one-body Coulomb metric
+Eq.~\eqref{eq:W_diagonal} it rests on;\ the interlacing bound
+Eq.~\eqref{eq:no_selection};\ the identification of the Shibuya--Wulfman matrix
+\emph{as} the $V_0$-weighted overlap in Eq.~\eqref{eq:general_v0};\ and the
+variational bound for the fixed-scale metric-free problem.  Developed with an AI-augmented workflow under
 principal-investigator direction, with the headline numerical claims validated against
 analytical benchmarks and a regression test suite.
 \end{acknowledgments}

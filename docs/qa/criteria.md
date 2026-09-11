@@ -364,6 +364,60 @@ verdict is the **AND across all review dimensions** (below).
   run caught. The C18 provenance sentence above was displaced by that splice
   and is flagged for re-homing.)*
 
+## DoD criteria name the OWNING GATE, never the value (added 2026-09-11, PI direction)
+
+**In a `.done.md`, criteria sections state relations and delegate every
+load-bearing number to the gate that owns it. They never write the literal.**
+
+- a C21 registry key (`p60_onenorm_exponent`), or
+- a C17 headline family id (`paper60-molecular-lambda-exponent`), or
+- the paper's own equation label (`eq:sublinear`) when the criterion is
+  "these two loci agree".
+
+So instead of *"Canonical = the labelled body equation, 0.84; the abstract must
+match"*, write *"the abstract's K-exponent, `eq:sublinear`, and registry key
+`p60_onenorm_exponent` must all agree; any disagreement = MATERIAL."*
+
+**Why, measured.** `/qa paper_60` (2026-09-11) stopped at protocol step 1: the
+frozen goalposts asserted a RETIRED value as canonical. W1 -- the watch-note
+ranked HIGHEST -- required the abstract to match `K^0.84`, an exponent retired on
+2026-09-07 as a truncated-radial-domain artifact and replaced by `K^0.82`. The
+paper had been corrected; the criteria had not. **Reviewing against them would
+have graded the correct paper MATERIAL and passed a wrong one** -- the gate
+returning the wrong answer at full confidence. Its C8 block additionally froze
+two claims retired or withdrawn since: "residual = basis incompleteness" (it is
+the scale lock, `eq:scale_lock`) and a comparison to Avery's 102-configuration
+figure (withdrawn -- different posing, `eq:no_selection`).
+
+This is the second instance of the class the 2026-09-08 `paper_61` run named --
+a `.done.md` ratifying a retired claim, a re-infection vector because a criteria
+file is the goalpost the next certifying run measures against. **No deterministic
+gate covers it:** C16 scans papers and their contained code/test modules, not
+`docs/qa/*.done.md`.
+
+**Two objections, answered.**
+
+*Doesn't delegation reopen goalpost-moving, since the registry can change?* No.
+A registry change is **disciplined and gated** -- C21 blocks retired values and
+names the key replacing them, Sec.15 rule 3 forbids registering anything
+unmeasured, Sec.15 rule 2 forces a prose re-read at every locus the gate names.
+A DoD literal is **undisciplined and frozen**. Delegation moves the number to the
+only place equipped to keep it honest. The freeze that matters -- criteria do not
+move *during* a run -- is untouched; pin the registry commit at run start if you
+want belt-and-braces.
+
+*Doesn't this weaken pre-registration?* It strengthens it. The criterion becomes
+a relation over three loci instead of a literal over two, and a relation cannot
+go stale.
+
+**Scope.** This governs *criteria* sections only -- branch-defining criteria,
+watch-notes, the C8 headline enumeration. **Historical and narrative sections
+keep their dated numbers**: a run's FAIL account and its measurement tables are
+chronicle, correct as records of what was true when written, and rewriting them
+would destroy the audit trail. The distinction is whether a number is asserted as
+*canonical for the next run* (delegate) or *reported as what was measured then*
+(leave).
+
 ## Branch-specific criteria (C14+)
 
 A branch may add criteria numbered **C14+** *in its profile* when it carries a
