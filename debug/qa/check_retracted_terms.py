@@ -1859,7 +1859,16 @@ REGISTRY = [
                    r"|4\s*(?:->|-->|\\to)\s*367[23]"
                    r"|cond\(S\)[^.\n]{0,30}367[23]"
                    r"|L[\u00b22]-divergence"
-                   r"|only well-conditioned posing",
+                   r"|only well-conditioned posing"
+                   # added 2026-09-11: the bare adjective applied to the
+                   # overlap, and the verb form.  Deliberately anchored on
+                   # "overlap"/"metric" so the paper's own DENIAL ("ordinary,
+                   # not ill-conditioned") stays silent -- the denial does not
+                   # put the noun within reach of the adjective.
+                   r"|overlap[^.\n]{0,60}is ill-conditioned"
+                   r"|ill-conditioned[^.\n]{0,30}overlap"
+                   r"|ill-conditions with basis"
+                   r"|illconditioned",
         "exempt_if_nearby": r"(?!)",
         "cited_by": {
             "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex":

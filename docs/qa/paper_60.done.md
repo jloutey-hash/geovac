@@ -24,10 +24,30 @@
 > it. §13.11 rule 9 was not applied: four newer bullets were appended and this one
 > left standing. Replaced; superseded text relocated to the frontier archive.
 >
-> **LARGE 2 (coverage).** Six abstract-level `[MEASURED]` families have
-> driver-only backing in prunable `debug/`. Independently reproduced by the
-> reviewer, so the exposure is regression protection rather than correctness.
-> **OWED as its own pass** (§9: guard-writing is separate, separately-reviewed work).
+> **LARGE 2 (coverage) — CLOSED 2026-09-11**, as its own pass per §9. Six
+> abstract-level `[MEASURED]` families had driver-only backing in prunable
+> `debug/`; all six are now recomputed from tracked `geovac/` code in
+> `tests/test_paper60_resource_ladder.py` (7 tests, all `@pytest.mark.slow`,
+> 14 min). Four were fire-tested against the specific wrong answer each excludes
+> — including the K=105/K=136 substitution that was this run's one wrong number,
+> which FIRES. The seventh family, the floor **bracket**, is **PARTIAL and
+> declared**: the claim form (fit-from-below vs Shanks-from-above) is backed on
+> the spdf ladder K=74–244; the endpoint values [6.47, 6.62] / [1.647, 1.676]
+> need the full ladder to K=452 (~20 min) and remain driver-backed, recorded as
+> PARTIAL in `docs/claim_test_matrix.md`.
+>
+> Two things the writing found that the review had not. **(i)** The
+> bracket-direction claim is SECTOR-SPECIFIC: written first on the cheap s-only
+> ladder, it failed, because there the windowed fit *falls* (4.3098 → 4.3059 →
+> 4.3035) where on the spdf ladder it *rises*. A cheap proxy in the wrong sector
+> would have reported the claim backed while measuring something that behaves
+> oppositely. **(ii)** A seventh locus of the "ill-conditioned" cluster, in
+> `docs/claim_test_matrix.md` and in a backing test **named**
+> `test_paper60_l2_overlap_illconditioned_grows` — the test-asserts-the-zombie
+> sub-flavour catalogued in v4.43.5. Its assertions were sound and are unchanged;
+> the name and framing were not. C16's pattern was widened twice to reach the
+> bare adjective (post- and pre-nominal), and re-proved silent on the paper's own
+> denial.
 >
 > **The one wrong number in the paper:** the s-only span deficit read `4.43` at
 > K=136; the driver's own output gives `4.40376` there and `4.43413` at K=105 — a

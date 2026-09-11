@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.10.17] - 2026-09-11
+
+**The coverage LARGE from the v5.10.16 DELTA, discharged as its own pass.** Six abstract-level `[MEASURED]` families move from prunable-driver backing to tracked `geovac/` recomputation. New file `tests/test_paper60_resource_ladder.py` (7 tests, all `@pytest.mark.slow`, 14 min).
+
+Six abstract-level `[MEASURED]` families — the span-deficit pairs, the free-scale matched set, the K=452 state pair, the posing-cost ladder, the state-preparation overlaps — had their only backing in `debug/p60_*.py`, a tree §9 prunes by design. All six now recompute from tracked `geovac/` code in **`tests/test_paper60_resource_ladder.py`** (7 tests, all `@pytest.mark.slow`, 14 min total). Every number was reproduced independently *before* the test was written, including the K=452 pair at 431 s.
+
+Four guards were fire-tested against the specific wrong answer each excludes: planting the K=105 value where K=136 belongs — **this run's one wrong number** — FIRES; so do "whitening is free" (`Hh = H`), a state-independent posing cost (all roots → root 0), and the naive L²-amplitude substituted for the S-metric overlap.
+
+**The floor bracket is PARTIAL, and declared as such.** Its claim form (windowed fit from below, Shanks from above) is backed on the spdf ladder K=74–244; the endpoint values [6.47, 6.62] and [1.647, 1.676] need the full ladder to K=452 (~20 min) and stay driver-backed. `docs/claim_test_matrix.md` carries that as a PARTIAL row rather than a silent omission.
+
+**Two findings the writing produced that the review had not.** *The bracket direction is sector-specific.* Written first on the cheap s-only ladder, the test failed — there the windowed fit FALLS (4.3098 → 4.3059 → 4.3035) where on the spdf ladder it RISES (6.3887 → 6.4192 → 6.4388, reproducing the driver exactly). The approach direction belongs to the sector, not the extrapolator, so a cheap proxy would have certified the claim while measuring something that behaves oppositely. *And a seventh "ill-conditioned" locus* — in the claim matrix, and in a backing test **named** `test_paper60_l2_overlap_illconditioned_grows`, the test-asserts-the-zombie sub-flavour catalogued in v4.43.5. Its assertions were always sound (cond(S) 3.0→32.2, shared-scale λ inflating faster than hydrogenic) and are untouched; the name and framing asserted the withdrawn reading. Renamed, reframed, and C16 widened twice — post- and pre-nominal — then re-proved silent on the paper's own denial.
+
+
 ## [v5.10.16] - 2026-09-11
 
 **`/qa paper_60` DELTA verification = DEFECTS, remediated. NOT certified.** Five dimensions, unseeded, against criteria frozen with PI approval. Deterministic layer 12/12 green. **2 LARGE + 25 MATERIAL-SMALL + 5 upgrade candidates — and zero mathematical defects.** Five adversarial passes, one of which independently re-derived every keystone and fire-tested the guards it was handed on an 8-plant sample of its own construction, found nothing wrong with the arithmetic. Every finding was prose, attribution, staleness, or coverage. That is the same distribution as the v5.4.4 arc and the same lesson: *the arithmetic was never wrong; the misses are all in what got said about what was measured.*

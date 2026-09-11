@@ -61,7 +61,8 @@ def test_paper60_potential_weighted_orthonormality_diagonal():
     off = np.abs(SV - np.diag(np.diag(SV)))
     # potential-weighted overlap is diagonal (Avery eq 6.7 / Paper 60 eq:pw): off-diagonal ~ 0
     assert off.max() < 2e-3, f"potential-weighted overlap not diagonal: {off.max()}"
-    # the L2 overlap of the SAME (shared-scale) basis is ill-conditioned
+    # the L2 overlap of the SAME (shared-scale) basis is NON-ORTHOGONAL;
+    # cond > 10 here is an ordinary Gram matrix, not ill-conditioning
     assert np.linalg.cond(SL) > 10.0
 
 
@@ -80,8 +81,8 @@ def _atomic_lowdin_lambda(N, mode, Z=2.0, rmax=80.0, npts=20000):
     """Standard L2-Loewdin block-encoding 1-norm lambda = sum|h| + sum|(pq|rs)| for an
     N-function s-only He model, in the shared-scale Sturmian ('sturmian', decay k=1) or
     hydrogenic ('hydrogenic', scale Z/n) basis.  Reproduces the MECHANISM behind eq:blowup:
-    the ill-conditioned shared-scale overlap makes Loewdin inflate lambda faster than the
-    well-conditioned hydrogenic one.  (The exact Q^3.33/Q^1.19 exponents are a property of
+    the progressively NON-ORTHOGONAL shared-scale overlap makes Loewdin's DENSE
+    S^-1/2 inflate lambda faster than for the orthonormal hydrogenic basis.  (The exact Q^3.33/Q^1.19 exponents are a property of
     the full Goscinskian construction; this pins the mechanism + shared>hydrogenic ordering.)"""
     from scipy.integrate import cumulative_trapezoid as _ct
     r = np.linspace(1e-6, rmax, npts)
@@ -113,10 +114,19 @@ def _atomic_lowdin_lambda(N, mode, Z=2.0, rmax=80.0, npts=20000):
 
 
 @pytest.mark.slow
-def test_paper60_l2_overlap_illconditioned_grows():
-    """eq:blowup MECHANISM: the shared-scale Sturmian overlap ill-conditions with basis size,
-    so Loewdin inflates the block-encoding 1-norm FASTER for the shared-scale basis than for a
-    well-conditioned hydrogenic one.  Pins (i) monotone cond(S) growth over >=4 points matching
+def test_paper60_l2_overlap_condition_number_grows():
+    """eq:blowup MECHANISM: the shared-scale Sturmian overlap becomes progressively
+    LESS ORTHOGONAL with basis size, so Loewdin's dense S^-1/2 inflates the block-encoding
+    1-norm FASTER for the shared-scale basis than for an orthonormal hydrogenic one.
+
+    NOT an ill-conditioning claim -- renamed and reframed 2026-09-11.  cond(S) here
+    reaches 32 at N=8, which is an ordinary Gram matrix;  Paper 60 Sec.2 withdrew the
+    reading that the L2 metric is ill-conditioned [retracted 2026-09-07: p60-l2-metric-diverges] (the 4 -> 3673 divergence was a
+    radial-box artifact) and the inflation is driven by the DENSITY of S^-1/2, not by
+    numerical instability.  The assertions below are unchanged and were always about
+    the growth of cond(S) and the lambda-growth ORDERING, both of which survive.
+
+    Pins (i) monotone cond(S) growth over >=4 points matching
     the paper's reported 3.0/5.8/13.9/32.2 sequence, and (ii) the shared>hydrogenic lambda-growth
     ordering.  (The exact Q^3.33/Q^1.19 exponents belong to the full Goscinskian construction.)"""
     r, _ = _grid()

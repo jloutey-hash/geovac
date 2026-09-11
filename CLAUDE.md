@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.10.16 (September 11, 2026)
+**Version:** v5.10.17 (September 11, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,7 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
-- **/qa paper_60 DELTA = DEFECTS, remediated (2026-09-11, v5.10.16):** 2 LARGE + 25 SMALL, ZERO mathematical. The LARGE was this file's own Sec.2, and C16 could not reach it. See CHANGELOG v5.10.16.
+- **/qa paper_60 DELTA = DEFECTS, remediated (2026-09-11, v5.10.17):** 2 LARGE + 25 SMALL, ZERO mathematical. The LARGE was this file's own Sec.2, and C16 could not reach it. Coverage LARGE closed: 6 abstract families now tracked-backed. See CHANGELOG v5.10.17.
 - **Molecular Sturmian build: exact, and it ends at a known wall (2026-09-09, v5.10.15):** general-l sigma closed forms close l-truncation 540x; the conditioning cost is BASIS overcompleteness, not the metric. See CHANGELOG v5.10.15.
 - **eq:scale_lock survived an external test (2026-09-08, v5.10.14):** the relayed 'unlinked AND metric-free' description was posed against it and WITHDRAWN; -2.90250 was an ordinary variational CI. See CHANGELOG v5.10.14.
 - **General-V0 secular equation + the -2.90250 attribution (2026-09-08, v5.10.13):** V C = V_0 B C, L2 cancels for ANY local V_0; the molecular metric IS V_0 (= Shibuya-Wulfman). Avery's cited number used the SCALE-OPTIMIZED posing. See CHANGELOG v5.10.13.
