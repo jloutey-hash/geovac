@@ -1386,6 +1386,8 @@ The fixed constants the rest of the table is stated against, at a uniform 50 dig
 * **transcendence class:** {pi^2} -- pure-Tate, weight 2
 * **backing test:** `tests/test_paper60_sigma_law.py`
 
+**Provenance (added 2026-09-11).** The law is the Kac-Murdock-Szego extreme-eigenvalue asymptotic, not an independent derivation: for a symbol in the normal form |1-t|^{2a} b(t), lam_min ~ (c_a/n^{2a}) b(1) with c_1 = pi^2 (Kac, Murdock & Szego, J. Rational Mech. Anal. 2, 767 (1953); see Boettcher & Widom, arXiv:math/0412269).  Our symbol is the a = 1 case with curvature b(1) = (kR)^2/24, so pi^2/24 is c_1 b(1) with kR factored out.  What is ours is the IDENTIFICATION of the SW metric as such a finite section.  The value below is unchanged.
+
 **Method.** In the Shibuya-Wulfman two-centre metric the largest cross-centre singular value obeys the band-limited concentration law 1 - sigma_max = (kR)^2 pi^2 / (24 n^2), so the rescaled quantity (1 - sigma_max)(n/kR)^2 tends to pi^2/24 as the per-centre basis size n grows.  This fixes the conditioning exponent at exactly 2, and reveals the previously fitted exponents 1.85 and 1.97 as pre-asymptotic windows of the same law.
 
 **Evidence.** Elementary closed form, evaluated at working precision 70; claiming 50 digits.  The float64 constant exported by geovac.sturmian_sigma_law.COLLAPSE_CONSTANT agrees to 7.6e-18.  The physics claim -- that the measured quantity actually converges to this constant (0.9913 of the limit at n = 160) -- is backed by tests/test_paper60_sigma_law.py.

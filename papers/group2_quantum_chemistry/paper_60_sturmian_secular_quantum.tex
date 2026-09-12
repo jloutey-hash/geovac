@@ -789,7 +789,7 @@ and the fitted exponent is a window reading.  Because the intra-center block is
 exactly the identity, $S=\bigl[\begin{smallmatrix}I&C\\C^{\mathsf T}&I
 \end{smallmatrix}\bigr]$ has spectrum $\{1\pm\sigma_k\}$ with $\sigma_k$ the
 singular values of the cross block (the cosines of the principal
-angles~\cite{amos_hall1961,king1967,west_ruedenberg2013} between
+angles~\cite{amos_hall1961,king1967} between
 the two center subspaces), so
 $\mathrm{cond}(S)=(1+\sigma_{\max})/(1-\sigma_{\max})$ \emph{exactly}.  In the
 sine basis the cross block is the finite section of a multiplication operator
@@ -806,14 +806,71 @@ $(1-\sigma_{\max})\,(n/kR)^2\to\pi^2/24$ (confirmed to $\sim\!1\%$ at $n=160$;\
 the leading-order derivation is asymptotic, the remainder is measured, not
 bounded).  The fitted $N^{1.85}$ above---and the $N^{1.81}$ of the same
 quantity at $R=2$ in the sprint record---are pre-asymptotic slopes of this one
-law read on different windows.  The same singular spectrum carries the
+law read on different windows.
+
+\textbf{[PRIOR ART]} Eq.~\eqref{eq:sigma_law} is not new \emph{as an
+asymptotic law}, and we claim only the identification.  It is the
+Kac--Murdock--Szeg\H{o} extreme-eigenvalue
+asymptotic~\cite{kac_murdock_szego1953}:\ writing the relevant symbol in the
+normal form $|1-t|^{2\alpha}b(t)$ used by B\"ottcher and
+Widom~\cite{bottcher_widom2005}, one has
+$\lambda_{\min}\sim(c_\alpha/n^{2\alpha})\,b(1)$, with $c_1=\pi^2$ due to Kac,
+Murdock and Szeg\H{o}.  Our symbol is the case $\alpha=1$:\ with
+$\theta=\pi-\chi$, $1-j_0(kR\cot(\chi/2))=(kR)^2\theta^2/24+O(\theta^4)$, so
+$b(1)=(kR)^2/24$ and $c_1b(1)/n^2$ reproduces Eq.~\eqref{eq:sigma_law}
+constant and all;\ the conditioning exponent $2$ is the order of the symbol's
+maximum and nothing else.  What is ours is the \emph{identification} --- that
+the two-center Shibuya--Wulfman metric in the sine basis is such a finite
+section, Toeplitz minus Hankel since $\langle n|a|m\rangle=c_{n-m}-c_{n+m}$,
+with symbol $j_0(kR\cot(\chi/2))$;\ equivalently that the Shibuya--Wulfman
+operator is multiplication by the translation phase
+$e^{i\mathbf{p}\cdot\mathbf{R}}$ on the Fock sphere, whose angular average
+$j_0(pR)$ becomes trivial at $p=0$.  The physical reading follows:\ a basis
+complete enough to carry wavelengths longer than $R$ cannot tell the two
+centers apart.  Equivalently, $1-\sigma_{\max}=\tfrac16(R/L_{\max})^2$ with
+$L_{\max}=2n/(\pi k)$ the longest wavelength the truncated basis carries, so
+the degeneracy switches on exactly when $L_{\max}$ exceeds the bond length ---
+which a complete basis must eventually do.
+
+\textbf{[MEASURED]} One residue is worth stating rather than hiding.  Our
+symbol does \emph{not} satisfy the smoothness hypothesis under
+which~\cite{bottcher_widom2005} proves the constant:\ at the opposite end
+$\chi\to0$ the symbol is a chirp (amplitude $\sim\chi$, phase $\sim2kR/\chi$)
+whose Fourier coefficients decay only as $|c_j|\sim j^{-5/4}$, so
+$\sum_jj|c_j|$ diverges.  The constant nevertheless holds.  Relatedly, the
+$\sim\!1\%$ figure quoted above is the asymptotic's own $O(1/n)$ term rather
+than scatter --- the relative residue halves under each doubling of $n$,
+falling $0.134\to0.010$ across $n=10\to160$ at $kR=2$.  Whether a weaker
+hypothesis covers this symbol class is left open.
+
+The same singular spectrum carries the
 composition wall of the balanced-basis arc:\ the center-projection commutator
-is $\|[P_A,P_B]\|=\max_k\sigma_k\sqrt{1-\sigma_k^{2}}$~\cite{halmos1969,bottcher_spitkovsky2010}, which \emph{saturates}
+is $\|[P_A,P_B]\|=\max_k\sigma_k\sqrt{1-\sigma_k^{2}}$ --- a one-line
+consequence of the two-subspaces canonical
+form~\cite{halmos1969,bottcher_spitkovsky2010}, which resolves the pair into
+$2\times2$ blocks at the principal angles $\theta_k$, in which the commutator
+has norm $\sin\theta_k\cos\theta_k$ --- which \emph{saturates}
 at its algebraic ceiling $\tfrac12$ (some $\sigma_k$ lands near $1/\sqrt2$) as
 the spectrum densifies---the previously reported $0.50$ is the saturation
 value---so the two walls are functionals of one object, with all of the
 severity information in $1-\sigma_{\max}$
 (\texttt{tests/test\_paper60\_sigma\_law.py}).
+
+\textbf{[SYMBOLIC]} A third cost does \emph{not} live in this spectrum, and
+separating it strengthens rather than weakens the obstruction.  If $X$ is
+invertible and block diagonal with respect to
+$\mathcal{H}=\bigoplus_\ell\mathcal{H}_\ell$, and $X^\dagger SX$ is block
+diagonal, then $S=X^{-\dagger}(X^\dagger SX)X^{-1}$ is block diagonal too,
+being a product of block-diagonal factors.  Contrapositively:\ if $S$ is not
+$\ell$-block diagonal, \emph{no} block-diagonal congruence --- L\"owdin,
+canonical, or Cholesky --- orthogonalizes it.  The two-center metric couples
+$\ell$ while preserving $m$ (axial symmetry), so $m$-selection survives
+orthogonalization and within-$m$ $\ell$-selection cannot, at every condition
+number $>1$:\ the loss is already present for arbitrarily weak inter-center
+coupling and does not relax as $\mathrm{cond}(S)\to1^{+}$.  It is therefore
+independent of Eq.~\eqref{eq:sigma_law}, and the sparsity-destroying
+orthogonalization excluded below is excluded \emph{structurally}, not on
+conditioning grounds.
 
 The molecular metric cost is therefore \emph{mitigated, not dissolved}:
 Eq.~\eqref{eq:sw} retains a polynomial conditioning multiplier that is worst where
@@ -908,6 +965,98 @@ N^{1.85}$ on this window;\ derived asymptote $N^2$, Eq.~\eqref{eq:sigma_law}) wi
 prefactor.  Production Gaussian simulation of course absorbs the overlap
 classically in a prior mean-field step; the metric penalty priced here is precisely the cost of
 the on-device angular generation that motivated the Sturmian encoding in the first place.
+
+\textbf{[MEASURED]} A third conditioning lever exists, it is stronger than
+either of the two above, and---unlike the gerade lever---it does not require
+equivalent centers.  Because the ill-conditioning is a symbol \emph{zero} of
+known order and location, it is removable by preconditioning in the sense of
+Serra~\cite{serra1997}:\ a trigonometric polynomial sharing the zero bounds the
+preconditioned spectrum in a fixed interval for every $n$.  The matching
+polynomial here is $g(\chi)=2+2\cos\chi$, whose quadratic zero sits at
+$\chi=\pi$ exactly where $1-\sigma$'s does;\ in this basis its Hankel part
+vanishes identically ($n+m\ge2$ while $g_j=0$ for $j\ge2$), so the
+preconditioner is \emph{exactly} the tridiagonal $\mathrm{tri}(1,2,1)$, which
+the discrete sine transform diagonalizes in closed form (verified against the
+closed-form eigenpairs to $9\times10^{-15}$).  Writing
+$G=P^{-1/2}(I-C)P^{-1/2}$, the ungerade conditioning collapses and
+\emph{stops growing}:
+\begin{center}
+\begin{tabular}{crrr}
+\toprule
+$n$ & $\mathrm{cond}(I+C)$ & $\mathrm{cond}(I-C)$ & $\mathrm{cond}(G)$\\
+\midrule
+$10$  & $2.383$ & $81.9$    & $2.096$\\
+$40$  & $2.537$ & $1225.7$  & $2.219$\\
+$160$ & $2.554$ & $19126.5$ & $\mathbf{2.229}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The whitening is unaffected in substance:\ any $X$ with $X^\dagger SX=I$ leaves
+the generalized spectrum invariant, and $X=P^{-1/2}G^{-1/2}$ is such an $X$, so
+the QSVT degree is set by $\mathrm{cond}(G)\to2.23$ rather than by
+$\mathrm{cond}(S)$.  On the resource model of Table~\ref{tab:resource} that is
+$d_{\rm inv}\approx16$, \emph{flat in basis size}, against $3\times10^{5}$ at
+$n=160$ untreated.  This escapes the Bernstein $\Theta(\kappa)$ floor quoted
+above rather than contradicting it:\ that floor constrains polynomial
+approximation of $x^{-1/2}$ on $[\kappa^{-1},1]$, and preconditioning changes
+the operator rather than the polynomial, so $x^{-1/2}$ is never approximated on
+the bad interval.  The statement that the metric cost is ``mitigated, not
+dissolved'' is therefore \emph{too pessimistic on the conditioning axis}, and
+should be read as applying to the two axes below.
+
+\textbf{[MEASURED]} What preconditioning does \emph{not} buy is locality, and
+the reason is the second pole.  The symbol is pathological at both ends and
+only one end is a zero:\ $P^{-1/2}$ cures $\chi=\pi$, while at $\chi\to0$ the
+chirp survives untouched.  Measured as the bandwidth needed for a fixed
+relative Frobenius accuracy, $S^{-1/2}$ requires a \emph{fixed fraction} of the
+matrix ($b/n=0.72$ at $10^{-2}$, flat over $n=32$--$256$) whereas $G^{-1/2}$
+requires $b=11\to17$ over the same range;\ but at $10^{-3}$ the advantage
+erodes ($b=27\to141$), exactly as algebraic decay predicts.  The two are
+distinguished cleanly by the profile exponent, which for $G^{-1/2}$ sits at
+$-1.19$---the chirp's own $-5/4$, \emph{independent of $n$}---while for
+$S^{-1/2}$ it drifts with $n$ ($-0.90\to-0.78$) as the $\chi=\pi$ singularity
+sharpens.  So preconditioning removes one of the two pathologies exactly and
+leaves the other exactly where it was.  Together with the block-structure
+result above, the honest summary is that the metric's \emph{conditioning} cost
+is removable, its \emph{locality} cost is capped by the chirp, and its
+\emph{$\ell$-block} cost is not a conditioning effect at all.
+
+\textbf{[MEASURED]} \textbf{The lever reaches the polyatomic case the gerade
+lever cannot}, and the structural reason is that the degeneracy's \emph{direction}
+is geometry-independent.  At $\chi=\pi$ every block symbol tends to $j_0(0)=1$
+whatever the separation, so for $M$ centers the matrix symbol degenerates to the
+rank-one all-ones matrix and its null space has dimension $M-1$, spanned by a
+fixed vector set that does not move with geometry or with basis size.  For
+water's $A_1$ block, $A(\chi)=\bigl[\begin{smallmatrix}1&\sqrt2 a_{\rm OH}\\
+\sqrt2 a_{\rm OH}&1+a_{\rm HH}\end{smallmatrix}\bigr]$ degenerates to
+$\bigl[\begin{smallmatrix}1&\sqrt2\\\sqrt2&2\end{smallmatrix}\bigr]$, singular
+with null direction $v\propto(\sqrt2,-1)$ and trace $3$.  Rotating the
+two-dimensional block space by $v$ and applying $\mathrm{tri}(1,2,1)$ to that
+component alone:
+\begin{center}
+\begin{tabular}{crr}
+\toprule
+$N$ & $\mathrm{cond}(A_1)$ & preconditioned\\
+\midrule
+$12$  & $183.0$    & $38.45$\\
+$48$  & $2696.1$   & $43.62$\\
+$192$ & $41699.7$  & $\mathbf{44.06}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The raw column reproduces the $N^{1.97}$ of the probe above independently
+($N^{1.96}$ here);\ the preconditioned column is bounded, with increments
+collapsing geometrically ($3.94,1.24,0.35,0.09$).  The constant is larger than
+the diatomic $2.23$, but the growth---which is what makes the metric penalty
+basis-dependent---is gone.  A control confirms the rotation is doing the work
+rather than the preconditioning as such:\ the naive $\mathrm{blockdiag}(P,P)$
+without it leaves the growth untouched ($2766\to42008$ over the same range).
+
+\emph{Scope.} What is established is the \emph{conditioning} statement, on
+$s$-sector shared-scale bases at $M=2$ and $M=3$.  The end-to-end resource claim
+additionally requires pricing the sine-transform circuit and a block-encoding of
+$G$, neither of which is attempted here;\ and by the block-structure result
+above, none of this recovers $\ell$-selection, which no congruence can.
 
 \textbf{[MEASURED]} The large-$R$ lever is quantified alongside: $\mathrm{cond}(S)$ falls to
 $2.2$ at $R=10$~bohr (at the sweep's $N=12$, $d_{\rm inv}$: $862\to17$ over
@@ -1200,12 +1349,6 @@ H.~F.~King, R.~E.~Stanton, H.~Kim, R.~E.~Wyatt, and R.~G.~Parr,
 ``Corresponding orbitals and the nonorthogonality problem in molecular
 quantum mechanics,'' \textit{J.\ Chem.\ Phys.}\ \textbf{47}, 1936 (1967).
 
-\bibitem{west_ruedenberg2013}
-A.~C.~West, M.~W.~Schmidt, M.~S.~Gordon, and K.~Ruedenberg, ``A
-comprehensive analysis of molecule-intrinsic quasi-atomic, bonding, and
-correlating orbitals.\ I.\ Hartree--Fock wave functions,''
-\textit{J.\ Chem.\ Phys.}\ \textbf{139}, 234107 (2013).
-
 \bibitem{lowdin1955}
 P.-O.~L\"owdin, ``Quantum theory of many-particle systems.\ I.\ Physical
 interpretations by means of density matrices, natural spin-orbitals, and
@@ -1231,6 +1374,20 @@ electronic structure Hamiltonian for quantum computing applications,''
 R.~Babbush, D.~W.~Berry, J.~R.~McClean, and H.~Neven, ``Quantum
 simulation of chemistry with sublinear scaling in basis size,''
 \textit{npj Quantum Inf.}\ \textbf{5}, 92 (2019).
+
+\bibitem{serra1997}
+S.~Serra, ``Optimal, quasi-optimal and superlinear band-Toeplitz
+preconditioners for asymptotically ill-conditioned positive definite Toeplitz
+systems,'' \textit{Math.\ Comp.}\ \textbf{66}, 651 (1997).
+
+\bibitem{kac_murdock_szego1953}
+M.~Kac, W.~L.~Murdock, and G.~Szeg\H{o}, ``On the eigen-values of certain
+Hermitian forms,'' \textit{J.\ Rational Mech.\ Anal.}\ \textbf{2}, 767 (1953).
+
+\bibitem{bottcher_widom2005}
+A.~B\"ottcher and H.~Widom, ``From Toeplitz eigenvalues through Green's
+kernels to higher-order Wirtinger--Sobolev inequalities,''
+arXiv:math/0412269 (2004).
 
 \bibitem{halmos1969}
 P.~R.~Halmos, ``Two subspaces,''

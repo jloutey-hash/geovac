@@ -7,6 +7,126 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.11.0] - 2026-09-12
+
+**The owed items, and the conditioning half of the composition wall turns out to be breachable.** Follow-up to v5.10.18. Probes `debug/p60_{preconditioner,locality}_probe.py`; backing `tests/test_paper60_preconditioner.py`.
+
+### The third conditioning lever, verified independently
+
+The Toeplitz scan reported that Serra's theorem (*Math. Comp.* **66**, 651 (1997)) applies here. It does, and the construction is cleaner than expected. Because the ill-conditioning is a symbol **zero of known order and location**, the matching trigonometric polynomial is `g = 2 + 2cos(chi)` — quadratic zero at `chi = pi`, exactly where `1 - sigma`'s is — and in this basis its Hankel part vanishes identically (`a+b >= 2` while `g_j = 0` for `j >= 2`), so the preconditioner is **exactly** `tri(1,2,1)`, which the DST-I diagonalizes in closed form (verified against closed-form eigenpairs to `9e-15`).
+
+Measured on the tracked `geovac.sturmian_sigma_law.sw_cross_block`, cross-checked against an independent Gauss-Legendre panel route to every printed digit:
+
+| `n` | `cond(I+C)` | `cond(I-C)` | `cond(G)` |
+|--:|--:|--:|--:|
+| 10 | 2.383 | 81.9 | 2.096 |
+| 40 | 2.537 | 1225.7 | 2.219 |
+| 160 | 2.554 | 19126.5 | **2.229** |
+
+The lever is legitimate rather than a change of problem: any `X` with `X^T S X = I` preserves the generalized spectrum, and `X = P^-1/2 G^-1/2` is such an `X`. On Paper 60's own resource model that is `d_inv ~ 16`, **flat in basis size**, against `3e5` untreated. It escapes the Bernstein `Theta(kappa)` floor the paper quotes rather than contradicting it — that floor constrains polynomial approximation of `x^-1/2` on `[1/kappa, 1]`, and preconditioning changes the *operator*, so `x^-1/2` is never approximated on the bad interval. **Paper 60's "mitigated, not dissolved" is therefore too pessimistic on the conditioning axis**, and now says so.
+
+### And it stops exactly at the other pole
+
+Preconditioning cures `chi = pi` and cannot touch the `chi -> 0` chirp. The first locality measurement here was **wrong and was discarded**: it fitted `exp(-d/L)` to a profile the symbol analysis already says is algebraic, so the returned `L` tracked the fit window and appeared to grow like `0.14n` for everything. Measured operationally instead —
+
+- bandwidth for fixed relative accuracy at `1e-2`: `S^-1/2` needs a fixed **fraction** (`b/n = 0.72`, flat over `n = 32..256`); `G^-1/2` needs `b = 11 -> 17`.
+- at `1e-3` the advantage **erodes**: `G^-1/2` needs `b = 27 -> 141`.
+- clean discriminator, the profile exponent: **n-stable** at `-1.19` for `G^-1/2` (the chirp's own `-5/4`), **drifting** `-0.90 -> -0.78` for `S^-1/2` as the `chi = pi` singularity sharpens.
+
+So the scan's "G has n-independent decay" is right about the exponent and wrong about the bandwidth; the backing test asserts the erosion explicitly so the paper cannot drift into the overclaim.
+
+### `west_ruedenberg2013` removed
+
+Cited alongside Amos–Hall (1961) and King *et al.* (1967) for "the cosines of the principal angles". Its full text is unreachable (HTTP 403 from two directions); its abstract describes a web of localizing orbital transformations and fast localization methods for quasi-atomic and split-localized orbitals — **no principal angles, no SVD, no corresponding orbitals**. It cannot be verified to support the attribution, so it is dropped from the citation and the bibliography. Amos–Hall and King are the verified lineage and remain. Not a claim that the paper is wrong; a claim that we could not check it, which is sufficient reason not to lean on it.
+
+### A near-miss worth recording
+
+Drafting the Serra bibitem, the applier carried a **fabricated** reference (a *BIT* 1994 entry assembled from memory) while the scan's actual source was *Math. Comp.* 66, 651 (1997). The correction was routed through a bash heredoc, which halves backslashes (`memory/feedback_no_heredoc_backslashes.md`); the guard assertion failed, the correction did not apply, **and the applier then ran with the unverified reference anyway**. Caught, verified against AMS (vol 66, no 218, April 1997, pp 651–665 — and the abstract matches the measurement: circulant preconditioners fail when the generating function has zeros, band-Toeplitz from trigonometric polynomials gives a condition number bounded independent of `n`), and replaced via a script file. Two lessons, both already written down: the heredoc rule is not optional, and *a citation found by a search summary is not a verified citation*. Now C23's second hard rule.
+
+### Walls register: the composition wall is three axes, not one
+
+The register carried `||[P_A,P_B]|| = 0.50` as a measurement; it is the saturation value of an exact formula over the same singular spectrum as `cond(S)`. Splitting what was one row: **conditioning = BREACHED** (above), **locality = STANDING but capped** (the chirp, `j^-5/4`), **`l`-block structure = STANDING, HARD and strengthened** (Proposition D — no block-diagonal congruence orthogonalizes a non-block-diagonal metric, at every `cond > 1`). Dispatch consequence: a conditioning-only proposal should no longer be rejected on Wall-B grounds, and conversely a conditioning gain is no longer evidence of progress toward sparsity. Scope: the breach is measured on the homonuclear two-center `s`-sector; whether it reaches water's `A_1` block — the case the gerade lever already fails — is **untested and is the next probe**.
+
+### C23: the inverse-citation criterion
+
+`/qa` could not have caught the KMS rediscovery, and no reviewer was at fault: C11 and the citation dimension ask whether a *cited* source says what we claim, and an uncited claim is invisible to them by construction. **C23** asks the inverse over the `[SYMBOLIC]`-tier claims a paper presents as its own, prioritised by the signatures that predict prior art (a clean closed-form constant; a well-developed external field entered sideways; a derivation under a page). Verdicts `PRIOR ART` / `ABSENT` / `UNVERIFIABLE`, with the hard rules that the identification must be re-verified locally before editing, that no unverified citation may be added while fixing a citation defect, and that prior art re-tiers attribution rather than retracting truth. Runs on FULL runs only. **Adding a QA criterion is a gate change, so this ships as a minor (v5.11.0) rather than a patch — PI-confirmed 2026-09-12.** Under the Sec. 9 rule a moved second number should tell a reader that something corpus-significant happened without their having to read the entry; a new QA criterion and a breached wall both qualify.
+
+### The breach reaches the polyatomic case — and the reason is structural
+
+The scope caveat this entry was about to ship with is now measured, and it went the good way. Water's `A_1` block is the case Paper 60 records as defeating the gerade lever: `O` sits on the `C_2` axis so the only symmetry action is the `H <-> H` swap, leaving the `O <-> H` coupling between symmetry-**inequivalent** centers inside the totally-symmetric block where the ground state lives.
+
+It works, because **the degeneracy's direction is geometry-independent**. At `chi = pi` every block symbol tends to `j0(0) = 1` whatever the separation, so for `M` centers the matrix symbol degenerates to the rank-one all-ones matrix and its null space has dimension `M-1` — a fixed subspace, not one that moves with the geometry or the basis. For `A_1` that limit is `[[1, sqrt2], [sqrt2, 2]]`: singular, trace 3, null direction `v ~ (sqrt2, -1)`. Rotating the block space by `v` and applying `tri(1,2,1)` to that component alone:
+
+| `N` | `cond(A_1)` raw | preconditioned |
+|--:|--:|--:|
+| 12 | 183.0 | 38.45 |
+| 48 | 2696.1 | 43.62 |
+| 192 | 41699.7 | **44.06** |
+
+The raw column independently reproduces the paper's `N^1.97` (`N^1.96` here). The preconditioned column is bounded with increments collapsing `3.94, 1.24, 0.35, 0.09`. The constant is larger than the diatomic `2.23`, but the *growth* — the thing that makes the metric penalty basis-dependent — is gone.
+
+**The control is the load-bearing half.** Naive `blockdiag(P, P)` without the rotation leaves the growth intact (`2766 -> 42008` over the same range), so it is the alignment onto the symbol's null direction doing the work, not preconditioning as such. Both are asserted in the backing test, and the control's fire test is worth recording: the first plant tried (swapping one block for the identity) **did not fire**, correctly — it left the frame unrotated, so it never tested the guard's subject. `fire_test.py` reported exactly that, and the real plant (making the control secretly the aligned construction) fires. A fire test that fails is the tool working.
+
+### Gates
+
+C10 / C21 / C16 / C22 / C14 / latex-escapes / internal-titles / inline-arxiv PASS in scope `paper_60`. New tests 6 passed + 1 slow-skipped in 2.1 s; all six guards fire-tested against the wrong answer each names (including "remove the preconditioner" and "use the `P^-1/2` shortcut").
+
+## [v5.10.18] - 2026-09-11
+
+**`eq:sigma_law` is Kac-Murdock-Szego (1953): the corpus had rediscovered a known asymptotic, exponent *and* constant, and claimed it.** Also: the `l`-selection loss is separated from conditioning and comes out *stronger*; two citation defects fixed. PI-directed conversational thread, not a `/qa` run; three parallel literature scans. Memos `debug/lit_scan/{toeplitz_finite_section,frames_riesz_overcompleteness,sturmian_conditioning_prior_art}_memo.md`, probe `debug/p60_symbol_pole_decay_note.md`.
+
+### The attribution
+
+Paper 60 derives `1 - sigma_max = (kR)^2 pi^2 / (24 n^2)` for the two-centre Shibuya-Wulfman metric and presents it as its own. It is the **Kac-Murdock-Szego extreme-eigenvalue asymptotic**: in the normal form `|1-t|^{2a} b(t)` used by Boettcher & Widom (arXiv:math/0412269), `lam_min ~ (c_a / n^{2a}) b(1)` with `c_1 = pi^2` due to Kac, Murdock & Szego (*J. Rational Mech. Anal.* **2**, 767 (1953)). Our symbol is the `a = 1` case with curvature `b(1) = (kR)^2/24`; the product reproduces the printed constant exactly. **The paper carried 26 bibitems and zero Toeplitz-family references.**
+
+Both legs were re-verified here rather than taken on the scan's report: `c_1 = pi^2` from the standard `(2,-1)` tridiagonal, whose spectrum `4 sin^2(k pi / 2(n+1))` is exact (`lam_min (n+1)^2 = 9.869604` at `n = 10^4`), and `b(1)` as an exact sympy series coefficient. **What survives as ours is the identification**, and it is worth having: that the SW metric in the sine basis *is* such a finite section -- Toeplitz minus Hankel, `<n|a|m> = c_{n-m} - c_{n+m}` -- with symbol `j_0(kR cot(chi/2))`; equivalently that the SW operator is multiplication by the translation phase `e^{ip.R}` on the Fock sphere, whose angular average goes trivial at `p = 0`. The conditioning exponent 2 is then just the order of the symbol's maximum.
+
+Added with it, because the mechanism is now legible: `1 - sigma_max = (1/6)(R/L_max)^2` with `L_max = 2n/(pi k)` the longest wavelength the truncated basis carries. **The degeneracy switches on exactly when the basis starts carrying wavelengths longer than the bond -- which a complete basis must eventually do.** Overcompleteness is the price of completeness, not a defect of the basis.
+
+### An honest residue, and a second pole
+
+Our symbol does **not** satisfy the smoothness hypothesis under which Boettcher-Widom prove the constant, and the constant holds anyway. At the opposite end `chi -> 0` the symbol is a chirp (amplitude `~chi`, phase `~2kR/chi`) whose Fourier coefficients decay only as `|c_j| ~ j^{-5/4}`, so `sum_j j|c_j|` diverges. That exponent is new here, parameter-free from stationary phase:
+
+    |c_j| = (2pi)^{-1/2} 2^{-3/4} (kR)^{-1/4} j^{-5/4} |sin(2 sqrt(2 kR j) + pi/4)|
+
+verified over `j = 64..65536` and `kR` in {1,2,5}, including the **sign pattern** -- a phase prediction, not a fit. Two adaptive-quadrature routes fail intermittently past `j ~ 512` (they disagree and return values that *grow* with `j`, impossible for a continuous symbol); a deterministic Gauss-Legendre route on phase-resolved panels is stable to `1e-11` and is the one to trust. The Toeplitz scan independently measured `k^{-1.25}` for the same object.
+
+Consequence: **the banded-Loewdin lever is closed, negative.** The gerade symbol `(1+a)^{-1/2}` is bounded and smooth at the IR pole -- `cond(I+C) -> 2.555041`, flat -- but inherits the chirp linearly, coefficient ratio measured `-0.4988/-0.5018/-0.5002` at `j = 4096/16384/65536` against the predicted `-1/2`. `l1` band-truncation error therefore falls only as `b^{-1/4}`: bandwidth `~4e5` for `1e-2`, `~4e9` for `1e-3`. The ungerade symbol `(1-a)^{-1/2} ~ 1/(pi-chi)` is not even in `L^1`. **The gerade sector is perfectly conditioned and still not local** -- conditioning fails at the IR pole, locality at the UV pole, and no single operation reaches both. That is a mechanism for the cost-conservation pattern the walls register carries as an observation.
+
+### Proposition D: the `l`-selection loss is not a conditioning effect
+
+If `X` is invertible and block diagonal w.r.t. `H = ⊕_l H_l` and `X†SX` is block diagonal, then `S = X^{-†}(X†SX)X^{-1}` is block diagonal too. Contrapositively, if `S` is not `l`-block diagonal then **no** block-diagonal congruence -- Loewdin, canonical, Cholesky -- orthogonalizes it. The two-centre metric couples `l` while preserving `m`, so `m`-selection survives and within-`m` `l`-selection cannot, **at every `cond(S) > 1`**, and does not relax as `cond(S) -> 1+`.
+
+So the sparsity cost is *independent* of `eq:sigma_law`, not a functional of the sigma spectrum. Paper 60's "the two walls are functionals of one object" is correct for `cond(S)` and `||[P_A,P_B]||`; the `l`-block loss was riding along with them and is a third thing. The wall is **stronger** than the paper stated, not weaker. (One correction to the scan that surfaced this: it phrased the claim as failing "at any condition number, even 1". At `cond = 1` exactly the coupling vanishes, `S = I`, and selection is perfect -- the accurate statement is *every* `cond > 1`, a discontinuity at zero coupling rather than a large-`kappa` effect.)
+
+### Citation defects
+
+- **Halmos (1969) does not state the commutator norm.** "Two subspaces" gives the canonical form; `||[P_A,P_B]|| = max_k sigma_k sqrt(1-sigma_k^2)` is a one-line consequence of it (in the `2x2` block at principal angle `theta_k` the commutator has norm `sin theta_k cos theta_k`). Reworded to cite the canonical form and derive the norm inline. The identity itself is correct.
+- `bottcher_spitkovsky2010` rescoped with it; `west_ruedenberg2013` remains over-characterised and **unread from both directions** (HTTP 403 on the full text), logged as owed.
+- The paper's "`~1%` at `n=160`" is the asymptotic's own `O(1/n)` term, not scatter: the relative residue halves under each doubling, `0.134 -> 0.010` across `n = 10..160` at `kR = 2`.
+
+### What the scans settled, and what they did not
+
+- **Prior art for the conditioning analysis: ABSENT**, and the repo's two standing claims survive. Aquilanti/Cavalli/Coletti/Calderini, the Avery canon, Shibuya-Wulfman and successors are about completeness, closed-form integral evaluation and *energy*-convergence -- never the metric's spectrum. Herbst-Avery-Dreuw (PRA **99**, 012512) was fetched and searched directly: zero hits. **Weakest link, flagged:** the two Avery books could not be read in full, so that leg is search-index absence rather than a verified read.
+- **The overcompleteness wall is a theorem, and an elementary one.** If `g != 0` lies in the closed span of `{f_i}`, then `lam_min(G_N) <= dist(g, V_N)^2 -> 0`. Completeness of the one-centre set alone forces it; "translate" is incidental. Ron-Shen fiberization gives the operator form: Riesz sequence iff `ess inf (1 - |sigma|) > 0` iff `||sigma||_inf < 1`, and ours is exactly 1, attained.
+- **Balian-Low does NOT transfer** and must not be cited: `ab = 1` is essential (at redundancy > 1 the obstruction disappears) and the mechanism is topological, needing a lattice we do not have. Beurling density / Ramanathan-Steger likewise. BCHL is technically available but buys a weaker conclusion at the cost of an `l1`-localization hypothesis.
+- **Not claimed, left open:** whether a weaker hypothesis (Serra-Capizzano, *LAA* **270** (1998) is the likely home) covers our symbol class. The citation was found by search but not verified to primary-source standard, so it is *not* in the paper.
+- **A lattice correction worth keeping.** `(n,l,m)` *is* a lattice -- the SO(4)/SU(2) weight lattice, with the S^3 harmonics as Peter-Weyl matrix elements. What is missing is a lattice in the *translation* direction (`{0,R}` is two points, not a subgroup; make it one and you have a crystal). And the fibration Ron-Shen wants already exists here with `n` dual to `chi`, so the right analogy is band theory with the Fock angle as quasi-momentum: `sigma(chi)` is the band function, `1 +/- sigma` the two branches, and the lower band touches **zero** at `chi = pi`. Localized Wannier/Loewdin functions need that band bounded off zero. The *topological* Wannier no-gos still do not apply -- no Bloch bundle.
+
+### Backing and gates
+
+New `tests/test_paper60_kms_attribution.py` (9 tests, 13 s), written as a **separate pass** from the edits it protects per Sec. 9 and fire-tested against the specific wrong answer each guard names: `c_1 -> pi^2/2`, `b(1) -> (kR)^2/6`, the KMS product halved, envelope `-5/4 -> -3/2`, `L_max` prefactor `1/6 -> 1/24`, the chirp replaced by a smooth symbol, and -- for Proposition D -- the block-diagonal `X` swapped for the eigenvector matrix. **All seven fire.** Proposition D's contrapositive is deliberately run at `eps = 1e-6` (`cond = 1 + 2e-6`) as well as at `0.3`, because a guard testing only an ill-conditioned `S` would accept exactly the wrong reading it exists to exclude.
+
+**C22 caught the author.** The new matrix row said "closed-form ... eigenvalues", which trips the Paper 34 zombie guard (that paper's *negative* result about eigenvector closed forms). Unrelated claim, genuinely ambiguous phrase -- reworded to "exact tridiagonal spectrum" rather than weakening the guard.
+
+Claim-impact sweep: four live dependents restated the law as derived (`certified_reference_values.md` `anchor.collapse_pi2_24`, `topic_to_paper_lookup.md`, the original `claim_test_matrix` row, and `docs/qa/paper_60.done.md`, which was ratifying the attribution -- the ".done.md as re-infection vector" class, given a supersession note). `development_frontier_archive.md` deliberately **not** edited: it is a verbatim historical record (Sec. 13.11 rule 10).
+
+Gates: C10 / C21 / C16 / C14 / C22 / latex-escapes / headline-numbers / inline-attributions / inline-arxiv / internal-titles / duration-language all PASS in scope `paper_60`.
+
+### Process note for the PI
+
+**`/qa` could not have caught this.** C11 verifies that a *cited* source says what the paper claims; nothing asks the inverse -- *is this uncited derived result already a named theorem?* Three DELTA runs and a FULL run walked past `eq:sigma_law`. That looks like a genuine criteria gap rather than an execution miss, and whether it becomes a criterion is a PI call.
+
 ## [v5.10.17] - 2026-09-11
 
 **The coverage LARGE from the v5.10.16 DELTA, discharged as its own pass.** Six abstract-level `[MEASURED]` families move from prunable-driver backing to tracked `geovac/` recomputation. New file `tests/test_paper60_resource_ladder.py` (7 tests, all `@pytest.mark.slow`, 14 min).

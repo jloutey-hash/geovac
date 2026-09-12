@@ -1,5 +1,8 @@
 <!-- CERT-STALENESS-BANNER -->
 > ### ⚠ RE-CERTIFICATION OWED
+
+> **SUPERSESSION NOTE (2026-09-11, v5.10.18).** This record verified `cond(S)~N^1.85` as a C8 headline and treated `eq:sigma_law` as a result derived in this corpus. The *values* stand; the *attribution* does not. The law is the Kac-Murdock-Szego extreme-eigenvalue asymptotic (c_1 = pi^2, 1953), identified by a literature scan on 2026-09-11; Paper 60 now cites it and claims only the identification of the Shibuya-Wulfman metric as such a finite section. Do not read this record as ratifying the originality of `eq:sigma_law`. Backing: `tests/test_paper60_kms_attribution.py`.
+
 > This record certifies the state as of **2026-08-18**. Since then **1 `.tex` changed**: paper_60_sturmian_secular_quantum.tex.
 >
 > **The CERTIFIED verdict below is therefore historical, not current.** Do not cite it as present-tense status.
