@@ -7,6 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.11.3] - 2026-09-12
+
+**The open item closed the same day: `G` has a direct block-encoding, so the metric penalty goes `n^3 -> n`.** Probe `debug/p60_direct_encoding_probe.py`; backing `tests/test_paper60_direct_encoding.py`.
+
+### The construction
+
+v5.11.1 priced the preconditioner lever at one power of `n` and named the obstacle precisely: composing `P^-1/2` with `(I-C)` makes the subnormalization inherit `||P^-1/2||^2 ~ n^2`, wasting a factor `8.6e3` at `n = 160` on operation order alone, against `||G|| = 0.372`.
+
+The waste is recoverable because **`G`'s symbol is a ratio of two symbols that vanish to the same order.** Both `1 - sigma` and `g = 2 + 2cos(chi)` have quadratic zeros at `chi = pi`, so the quotient is finite there (`(kR)^2/24`) and tends to `1/4` at `chi -> 0`. In `s = kR cot(chi/2)`:
+
+    ratio(s) = (1 - j0(s)) (s^2 + (kR)^2) / (4 s^2),     ||ratio||_inf = 0.3716 = ||G||
+
+The sup **coincides with `||G||`**, so the Toeplitz-minus-Hankel matrix `B` built from this symbol's own cosine coefficients is directly constructible and a circulant-embedded encoding of it carries `alpha = 0.372` — exactly the factor the composition threw away. New `eq:ratio_symbol`.
+
+### Why `B != G` does not matter
+
+`B` differs from `G` by the finite-section commutator: **11.5–11.8% in operator norm, and not growing with `n`.** That is real and is asserted as such. It is also harmless, because `B` enters only as a whitening, and by `eq:amplitude_floor` any `X` with `X^T S X = I` preserves the spectrum. Taking `X = P^-1/2 B^-1/2`:
+
+| `n` | `cond(B)` | `\|G-B\|/\|G\|` | `cond(B^-1/2 G B^-1/2)` | `\|X\|`/floor |
+|--:|--:|--:|--:|--:|
+| 20 | 2.198 | 0.115 | 1.222 | 1.0097 |
+| 80 | 2.228 | 0.118 | 1.232 | 1.0025 |
+| 160 | 2.229 | 0.118 | **1.234** | **1.0013** |
+
+The residual conditioning settles near `1.23`, so one further `O(1)`-degree transformation absorbs it; and `||X||` lands on the amplitude floor, tightening toward it rather than sitting at a fixed offset.
+
+### What the metric factor now is
+
+Three explicitly-known pieces, none growing with basis size: a **DST-I** (`O(log^2 N)` circuit, Klappenecker–Rötteler), a **diagonal** computed from the index, and a **degree-≈24 QSVT** on a directly-encoded Toeplitz-minus-Hankel matrix with `O(1)` subnormalization. On Table `tab:resource`'s model at `n = 160`: `alpha = 125.5`, `d_inv = 24.3`, product `3.1e3` against the untreated `3.9e7` — and the *scaling* is now `n` against `n^3`, so the ratio grows as `n^2`.
+
+### Honest limits, restated
+
+- **The circuit is cited, not compiled.** The sine transform is referenced and the circulant embedding is standard but not laid out, so these remain a resource model rather than a gate count. Said so in the paper's scope paragraph.
+- **`s`-sector shared-scale bases**, `M = 2` and `M = 3`.
+- **None of this recovers `l`-selection.** Proposition D is untouched: the metric is now cheap to *apply*, and the sparsity it destroys stays destroyed. The two open programs identified in v5.11.2 are unchanged in status — run cost moved, sparsity competitiveness is still closed by theorem.
+
+### Dependents swept
+
+The v5.11.1 verdict sentence is amended in place (Sec. 13.11 rule 9) and the `claim_test_matrix` pricing row marked SUPERSEDED, both pointing here; CLAUDE.md Sec. 2's "one power of n" corrected. Gates: C10 / C21 / C16 / C22 / C14 / escapes / titles / arxiv / duration PASS in scope `paper_60`. New guards fire-tested three ways.
+
 ## [v5.11.2] - 2026-09-12
 
 **The overcompleteness mechanism was wrong, and the corrected version is more useful: the near-dependence is ONE DIRECTION, not a property of the basis.** Plus the C23 owed-citation table closed against primaries. Probe `debug/p60_completeness_hypothesis_probe.py`; backing `tests/test_paper60_one_direction.py`.
@@ -73,7 +113,7 @@ At `n = 160`, `kR = 2`, chemical accuracy:
 | preconditioned, `G` composed | 3196 | 16.1 | 5.1e4 |
 | preconditioned, `G` direct | 125.4 | 16.1 | 2.0e3 |
 
-In exponents: untreated `alpha ~ n`, `d_inv ~ n^2`, product `n^3`; preconditioned with `G` obtained by *composing*, the degree goes flat but `alpha` inherits `||P^{-1/2}||^2 ~ n^2`, giving `n^2`; with a direct encoding of `G` at the floor it would be `n`. **So the lever is worth one power of `n` as priced, two if a direct block-encoding of `G` is found.** The v5.11.0 entry's `19000x` was depth-only; the honest end-to-end figure is `758x` at `n=160`, growing like `n`. The prize is now sized rather than named: `||G|| = 0.372` against a composed `alpha = 3196`, a factor `8.6e3` paid for nothing but the order of operations. `P^{-1/2}` itself costs no block-encoding calls — DST-I has an `O(log^2 N)` circuit (Klappenecker–Rötteler, verified).
+In exponents: untreated `alpha ~ n`, `d_inv ~ n^2`, product `n^3`; preconditioned with `G` obtained by *composing*, the degree goes flat but `alpha` inherits `||P^{-1/2}||^2 ~ n^2`, giving `n^2`; with a direct encoding of `G` at the floor it would be `n`. ~~**So the lever is worth one power of `n` as priced, two if a direct block-encoding of `G` is found.**~~ **[SUPERSEDED 2026-09-12, v5.11.3: the direct encoding was constructed the same day — `G`'s symbol is a bounded ratio whose sup is exactly `||G||`, so the lever is worth TWO powers of `n` and the metric penalty goes `n^3 -> n`.]** The v5.11.0 entry's `19000x` was depth-only; the honest end-to-end figure is `758x` at `n=160`, growing like `n`. The prize is now sized rather than named: `||G|| = 0.372` against a composed `alpha = 3196`, a factor `8.6e3` paid for nothing but the order of operations. `P^{-1/2}` itself costs no block-encoding calls — DST-I has an `O(log^2 N)` circuit (Klappenecker–Rötteler, verified).
 
 ### C23 run #1: six of eight audited claims were already known
 

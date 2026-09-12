@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.11.2 (September 12, 2026)
+**Version:** v5.11.3 (September 12, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,8 +112,9 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **Metric penalty n^3 -> n (2026-09-12, v5.11.3):** G's symbol is a bounded ratio, sup = ||G|| exactly, so a DIRECT encoding reaches the amplitude floor. See CHANGELOG v5.11.3.
 - **Overcompleteness is ONE DIRECTION (2026-09-12, v5.11.2):** Bessel deficit plateaus 0.38-0.91; one-centre set NOT complete in the molecular metric. C23 citations closed. See CHANGELOG v5.11.2.
-- **C23 run #1: 6 of 8 claims already known (2026-09-12, v5.11.1):** Prop D = Slater-Koster 1954; chirp law = DLMF Bessel. Lever = one power of n. See CHANGELOG v5.11.1.
+- **C23 run #1: 6 of 8 claims already known (2026-09-12, v5.11.1):** Prop D = Slater-Koster 1954; chirp law = DLMF Bessel. Lever priced. See CHANGELOG v5.11.1.
 - **Composition wall is 3 axes; conditioning BREACHED (2026-09-12, v5.11.0):** band-Toeplitz preconditioner bounds cond, diatomic AND water A_1. Locality capped by the chirp. New C23 gate. See CHANGELOG v5.11.0.
 - **eq:sigma_law is Kac-Murdock-Szego (2026-09-11, v5.10.18):** a 1953 theorem, claimed as ours; the identification survives. l-selection loss separated from conditioning. See CHANGELOG v5.10.18.
 - **/qa paper_60 DELTA = DEFECTS, remediated (2026-09-11, v5.10.17):** 2 LARGE + 25 SMALL, ZERO mathematical. The LARGE was this file's own Sec.2, and C16 could not reach it. Coverage LARGE closed: 6 abstract families now tracked-backed. See CHANGELOG v5.10.17.
