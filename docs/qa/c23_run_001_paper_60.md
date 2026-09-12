@@ -51,7 +51,7 @@ The session's WebSearch budget (200) was exhausted partway through; `WebFetch` r
 | Björck–Golub (1973) | principal-angle computation (A1) — AMS PDF returned 403 |
 | Böttcher–Spitkovsky (2010) | **already cited by Paper 60 for content nobody here has read** — paywalled, no preprint. Its title matches its use (two-projections theory), so it is retained rather than dropped; flagged as unverified. |
 
-**To close this record:** raise the WebSearch budget, verify the table above, convert the prose names to bibitems, and re-run C23's verdict on A1/A3/A4/B3.
+**CLOSED 2026-09-12 (v5.11.2).** The WebSearch budget was raised (project `env`, 200 -> 500) and took effect immediately. Ten of the eleven owed primaries were verified at source and are now cited: Jordan 1875, Björck–Golub 1973, Eijkhout–Vassilevski 1991, Hartman–Wintner 1954, Löwdin 1950, Slater–Koster 1954 (**primary read** — Sec. II, p. 1500), Rokob–Szabados–Surján (existence + abstract; PDF cert-blocked), Jaffard 1990, Gröchenig–Leinert 2006, Driscoll–Fornberg 2002. **Two items were deliberately not closed:** the "Jordan–Wielandt" label stays prose-only (Stewart–Sun and Horn–Johnson are books, unopened), and the scan's claim that Slater–Koster's *Appendix* states the symmetry theorem is **dropped, not cited** — what was read is their Sec. II use of Löwdin, which is what the citation carries. Böttcher–Spitkovsky remains cited-but-unread and flagged. A1/A3/A4/B3 verdicts stand as PRIOR ART, now with primaries.
 
 ## Process findings
 

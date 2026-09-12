@@ -838,5 +838,12 @@ An uncited claim is invisible to a citation gate by construction. That is a crit
 - **Never add an unverified citation while fixing a citation defect.** Two references were dropped from that remediation for exactly this reason, and one fabricated reference was caught mid-edit and replaced with the verified one. A citation found by a search summary is not verified.
 - **Finding prior art is not a retraction.** It re-tiers attribution, not truth. The measured content stands; what changes is who is credited, and the corpus's own contribution usually survives in sharper form. Record it as a re-attribution and sweep the dependents (this is the owner-corrected/citer-stale shape of Sec. 9).
 
-**Scope.** Runs on FULL certification runs, not on every DELTA — the cost is a literature scan per keystone claim. A DELTA run inherits the last FULL run's C23 verdicts unless the claim itself changed.
+**Scope (revised 2026-09-12 after run #1, PI direction).** C23 has two triggers, and the second is the important one.
+
+1. **At FULL certification**, over the target's `[SYMBOLIC]`-tier claims. A DELTA run inherits the last FULL run's verdicts unless the claim itself changed.
+2. **At authorship**, on any *new* claim matching a priority signature above — a clean closed-form constant, an external field entered sideways, or a derivation under a page. One scan, at the moment the claim is written.
+
+*Why trigger 2 exists, measured.* Run #1 audited eight claims and returned six PRIOR ART. Its two most valuable catches were its two **newest** claims — a "Proposition" written the day before the run, which was the Löwdin symmetry-preservation property known since Slater–Koster (1954), and a degeneracy structure written the same morning, which was the *flat limit* of the radial-basis-function literature. Both were caught within 48 hours of being written. The other four had survived three DELTA runs and a FULL run, which is the cost of certification-only scoping: a rediscovery sits in a paper, gets cited by its own corpus, accretes dependents, and the eventual re-attribution becomes a sweep rather than an edit. Catching it at authorship costs one scan and no dependents.
+
+*Cost control.* Trigger 2 is per-claim, not per-paper, and only for claims matching a priority signature — not every measured number. If a sprint produces no `[SYMBOLIC]`-tier claim, it fires not at all.
 

@@ -7,6 +7,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.11.2] - 2026-09-12
+
+**The overcompleteness mechanism was wrong, and the corrected version is more useful: the near-dependence is ONE DIRECTION, not a property of the basis.** Plus the C23 owed-citation table closed against primaries. Probe `debug/p60_completeness_hypothesis_probe.py`; backing `tests/test_paper60_one_direction.py`.
+
+### The measurement that inverts the reading
+
+The v5.11.0 entry adopted a frames-theoretic mechanism: completeness of the ONE-CENTRE set forces `lam_min -> 0`, with the second centre incidental. That hypothesis is directly measurable here — the SW intra-centre block is exactly the identity, so the `A`-set is orthonormal in that metric and Bessel's inequality gives the deficit of a displaced Sturmian against the one-centre span as `eps_N^2 = 1 - sum_{i<=N} <chi^A_i, chi^B_1>^2`.
+
+**It does not go to zero.** It plateaus at `0.380 / 0.696 / 0.907` for `kR = 1/2/4`, flat from `N = 16` to `N = 256`. Between 38% and 91% of a displaced basis function lies outside the one-centre span. So the hypothesis fails, the bound holds only vacuously (`1e-4 <= 0.70` says nothing), and **"overcompleteness is the price of one-centre completeness" is withdrawn**. It never reached the paper — only the v5.11.0 entry, now amended in place.
+
+**Ron-Shen was always the better route and it survives**: `||sigma||_inf = 1` because `j0(0) = 1`. And it says something narrower and more useful. `sigma_max -> 1` asserts that *some combination* in the `B`-span is captured by the `A`-span — not that individual functions are, and measurably they are not. **The near-dependence is one direction, not a diffuse property of the basis.** That reconciles every structural fact the arc turned up: the rank-one (rank `M-1`) degeneracy, the fixed geometry-independent null direction, the small participation ratio, and why one rotation plus a tridiagonal preconditioner fixes it so cleanly. Captured as a new `[MEASURED]` paragraph in `sec:molecular`; the paired guard asserts that `1 - sigma_max` collapses as `N^-2` **while** `eps_N^2` does not, which no single-sided bug satisfies.
+
+### Two escapes checked and closed
+
+Asked whether the degeneracy is eliminable by angular surgery:
+
+- **Adding `l>0` cannot help.** The original cross block is a submatrix of the enlarged one and `sigma_max` is non-decreasing under submatrix extension, so the `s`-sector degeneracy survives inside the larger problem. (A 2026-09-10 guess that higher `l` would be better-conditioned was backwards.)
+- **Excluding `l=0` does not help either.** `l>=1` functions vanish *at* `p=0`, but a normalized combination can still concentrate *near* it, which is all `sigma_max -> 1` requires. Reasoning, not measurement — flagged as such.
+
+### A caveat on the basis's motivation
+
+The plateau has a second consequence worth stating. Paper 60 motivates Coulomb Sturmians as evading the Gaussian coverage-versus-linear-dependence trade-off "because they are a complete set at one scale". That completeness is in the **atomic** metric; the molecular problem is posed in `V_0`, where the one-centre set is measurably *not* complete (70% deficit at `kR = 2`). The property that sells the basis is not the property the molecular problem uses. Nothing measured contradicts anything, but the motivating sentence is now qualified in place rather than left to be discovered later.
+
+### C23 run #1: the owed table is closed
+
+The WebSearch budget was raised (project `env`, 200 -> 500), which took effect immediately. Ten primaries verified this session and cited; each was checked at source, not taken from the scan:
+
+| now cited | verified how |
+|:--|:--|
+| Jordan, *Bull. Soc. Math. France* **3**, 103 (1875) | NUMDAM record; principal-angle priority confirmed |
+| Björck & Golub, *Math. Comp.* **27**, 579 (1973) | DOI 10.1090/S0025-5718-1973-0348991-3 |
+| Eijkhout & Vassilevski, *SIAM Rev.* **33**, 405 (1991) | title/volume/pages |
+| Hartman & Wintner, *Amer. J. Math.* **76**, 867 (1954) | title + the content used (self-adjoint Toeplitz spectrum = convex hull of the essential range) |
+| Löwdin, *J. Chem. Phys.* **18**, 365 (1950) | read in Slater–Koster's own footnote 12 |
+| Slater & Koster, *Phys. Rev.* **94**, 1498 (1954) | **PRIMARY READ** — Sec. II, p. 1500 introduces Löwdin orthogonalization for exactly this multi-centre non-orthogonality problem |
+| Rokob, Szabados & Surján | existence + abstract (the symmetry operator's transformation matrix must be unitary; fails for Cartesian `d`/`f`); the ELTE PDF threw a certificate error, so the primary is unread |
+| Jaffard, *Ann. IHP C* **7**, 461 (1990) | title/volume/pages |
+| Gröchenig & Leinert, *TAMS* **358**, 2695 (2006) | title/journal/volume |
+| Driscoll & Fornberg, *Comput. Math. Appl.* **43**, 413 (2002) | title/volume/pages; coined "flat limit" |
+
+**One scan claim was dropped rather than cited**: that Slater–Koster's *Appendix* states the symmetry theorem. What was read is their Sec. II use of Löwdin, which is what the citation now carries — the Appendix-specific assertion is unverified and not relied on. **Still named in prose with no bibitem**: the "Jordan–Wielandt" label (Stewart–Sun and Horn–Johnson are books, unopened).
+
+### C23 scope revised
+
+Run #1's two best catches were its two *newest* claims — both within 48 hours of authorship — while four older ones had survived three DELTA runs and a FULL run. C23 now has **two triggers**: at FULL certification, and **at authorship** for any new claim matching a priority signature (a clean closed-form constant; an external field entered sideways; a derivation under a page). Per-claim, not per-paper. PI-approved.
+
+### Gates
+
+C10 / C21 / C16 / C22 / C14 / escapes / titles / arxiv / duration PASS in scope `paper_60`. New guards fire-tested three ways, including both halves of the paired claim (make the gap not collapse; make the deficit collapse too).
+
 ## [v5.11.1] - 2026-09-12
 
 **The two owed items: the resource lever priced honestly (it shrinks), and C23's first run (six prior-art catches, two of them on claims written this week).** Probes `debug/p60_resource_pricing_probe.py`; scans `debug/lit_scan/c23_paper60_{linalg,analysis}_memo.md`; record `docs/qa/c23_run_001_paper_60.md`.
@@ -153,7 +203,7 @@ So the sparsity cost is *independent* of `eq:sigma_law`, not a functional of the
 ### What the scans settled, and what they did not
 
 - **Prior art for the conditioning analysis: ABSENT**, and the repo's two standing claims survive. Aquilanti/Cavalli/Coletti/Calderini, the Avery canon, Shibuya-Wulfman and successors are about completeness, closed-form integral evaluation and *energy*-convergence -- never the metric's spectrum. Herbst-Avery-Dreuw (PRA **99**, 012512) was fetched and searched directly: zero hits. **Weakest link, flagged:** the two Avery books could not be read in full, so that leg is search-index absence rather than a verified read.
-- **The overcompleteness wall is a theorem, and an elementary one.** If `g != 0` lies in the closed span of `{f_i}`, then `lam_min(G_N) <= dist(g, V_N)^2 -> 0`. Completeness of the one-centre set alone forces it; "translate" is incidental. Ron-Shen fiberization gives the operator form: Riesz sequence iff `ess inf (1 - |sigma|) > 0` iff `||sigma||_inf < 1`, and ours is exactly 1, attained.
+- **The overcompleteness wall is a theorem** — via Ron-Shen fiberization: Riesz sequence iff `ess inf (1 - |sigma|) > 0` iff `||sigma||_inf < 1`, and ours is exactly 1, attained. ~~The elementary route — if `g != 0` lies in the closed span of `{f_i}` then `lam_min(G_N) <= dist(g, V_N)^2 -> 0`, so completeness of the one-centre set alone forces it~~ **[CORRECTED 2026-09-12, v5.11.2: that hypothesis is FALSE for this basis.** The Bessel deficit `eps_N^2 = 1 - sum_i <chi^A_i, chi^B_1>^2` plateaus at 0.380 / 0.696 / 0.907 for `kR = 1/2/4`, flat over `N = 16..256` — the one-centre set is far from complete in the MOLECULAR metric, so the bound holds only vacuously and the degeneracy is not "one span already contains the other". Ron-Shen is the mechanism; it says something narrower and more useful, namely that the near-dependence is ONE DIRECTION. See v5.11.2.]
 - **Balian-Low does NOT transfer** and must not be cited: `ab = 1` is essential (at redundancy > 1 the obstruction disappears) and the mechanism is topological, needing a lattice we do not have. Beurling density / Ramanathan-Steger likewise. BCHL is technically available but buys a weaker conclusion at the cost of an `l1`-localization hypothesis.
 - **Not claimed, left open:** whether a weaker hypothesis (Serra-Capizzano, *LAA* **270** (1998) is the likely home) covers our symbol class. The citation was found by search but not verified to primary-source standard, so it is *not* in the paper.
 - **A lattice correction worth keeping.** `(n,l,m)` *is* a lattice -- the SO(4)/SU(2) weight lattice, with the S^3 harmonics as Peter-Weyl matrix elements. What is missing is a lattice in the *translation* direction (`{0,R}` is two points, not a subgroup; make it one and you have a crystal). And the fibration Ron-Shen wants already exists here with `n` dual to `chi`, so the right analogy is band theory with the Fock angle as quasi-momentum: `sigma(chi)` is the band function, `1 +/- sigma` the two branches, and the lower band touches **zero** at `chi = pi`. Localized Wannier/Loewdin functions need that band bounded off zero. The *topological* Wannier no-gos still do not apply -- no Bloch bundle.
