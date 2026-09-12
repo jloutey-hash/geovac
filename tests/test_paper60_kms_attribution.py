@@ -24,6 +24,11 @@ import sympy as sp
 
 KR_VALUES = (1.0, 2.0, 5.0)
 
+# eq:chirp_decay's leading constant, (2 pi)^-1/2 * 2^-3/4, from the DLMF 10.40.2
+# prefactor (pi/2z)^{1/2}.  Written as an expression, never as a decimal literal,
+# so that a guard keyed to it cannot be satisfied by a transcribed number.
+PRE = (2.0 * np.pi) ** -0.5 * 2.0 ** -0.75
+
 
 # ---------------------------------------------------------------- KMS constant
 def test_kms_constant_c1_is_pi_squared():
@@ -128,6 +133,44 @@ def test_chirp_envelope_exponent_is_five_fourths(kR):
             jj.append(js[m][np.argmax(c[m])])
     slope = np.polyfit(np.log(jj), np.log(env), 1)[0]
     assert abs(slope + 1.25) < 0.08, f"envelope exponent {slope:.3f}, expected -1.25"
+
+
+@pytest.mark.parametrize("kR", KR_VALUES)
+def test_chirp_closed_form_constant_and_phase(kR):
+    """eq:chirp_decay in full, not just the exponent.
+
+    The C23 run (2026-09-12) found the asymptotic needs no stationary-phase
+    argument: the model integral is DLMF 10.32.10 at nu=2, and DLMF 10.40.2
+    delivers constant and phase together.  The paper now states
+
+        |c_j| = (2pi)^-1/2 2^-3/4 (kR)^-1/4 j^-5/4 |sin(2 sqrt(2 kR j) + pi/4)|
+
+    so the constant and the phase need backing, not only the envelope.
+
+    WRONG ANSWER REJECTED, and this is the point of the test: a wrong PHASE.
+    The signed comparison below pins it without any tolerance -- if the pi/4
+    were absent, or were pi/2, the predicted sign would disagree with the
+    computed one at a large fraction of the sampled j.  (The pi/4 is the branch
+    phase of the (pi/2z)^{1/2} prefactor; an earlier reading here attributed it
+    to a stationary-phase signature, which would have been the same number for
+    the wrong reason.)  Magnitude is checked separately and loosely, since the
+    o(j^-5/4) remainder is not bounded.
+    """
+    js = [64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384]
+    sel = []
+    for j in js:
+        mod = np.sin(2 * np.sqrt(2 * kR * j) + np.pi / 4)
+        if abs(mod) > 0.5:                      # away from the modulation's zeros
+            pred = PRE * kR ** -0.25 * j ** -1.25 * mod
+            sel.append((j, _symbol_cosine_coeff(j, kR), pred))
+
+    assert len(sel) >= 4, f"too few usable points for kR={kR}: {len(sel)}"
+    signs = [np.sign(a) == np.sign(p) for _, a, p in sel]
+    assert all(signs), (
+        f"phase disagrees at {signs.count(False)}/{len(signs)} points for kR={kR}")
+    ratios = sorted(abs(a / p - 1.0) for _, a, p in sel)
+    assert ratios[len(ratios) // 2] < 0.12, f"median magnitude error {ratios[len(ratios)//2]:.3f}"
+    assert max(ratios) < 0.30, f"max magnitude error {max(ratios):.3f}"
 
 
 def test_bottcher_widom_smoothness_hypothesis_fails():

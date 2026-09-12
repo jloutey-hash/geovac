@@ -287,6 +287,73 @@ def test_water_needs_the_null_direction_rotation():
     assert naive[-1] > 1e3, f"unrotated control is unexpectedly small: {naive}"
 
 
+# ------------------------------------------------------- end-to-end resource pricing
+def test_amplitude_floor_is_factorization_invariant():
+    """eq:amplitude_floor. Any X with X^T A X = I has ||X|| = ||A^-1/2|| EXACTLY.
+
+    Reason: X^T A X = I forces X = A^-1/2 U for some unitary U.  So the
+    subnormalization floor of a block-encoding of the whitening cannot be lowered
+    by ANY factorization, and the untreated route already attains it.
+
+    WRONG ANSWER REJECTED: the hope that a cleverer factorization buys amplitude
+    as well as depth.  Tested constructively against THREE genuinely different
+    whitenings -- the symmetric inverse square root, the preconditioned
+    P^-1/2 G^-1/2, and an inverse Cholesky factor (which is triangular, not
+    symmetric, so it is not a disguised copy of the first) -- all of which must
+    agree to near machine precision.
+    """
+    for n in (20, 40, 80):
+        A = np.eye(n) - sw_cross_block(S_KR, n, M=M_QUAD)
+
+        X_sym = inv_sqrt(A)
+        P_is = inv_sqrt(tridiag(n))
+        X_pre = P_is @ inv_sqrt(P_is @ A @ P_is)
+        X_chol = np.linalg.inv(np.linalg.cholesky(A)).T
+
+        for X in (X_sym, X_pre, X_chol):
+            assert np.abs(X.T @ A @ X - np.eye(n)).max() < 1e-8, "not a whitening"
+
+        norms = [np.linalg.norm(X, 2) for X in (X_sym, X_pre, X_chol)]
+        assert max(norms) - min(norms) < 1e-8 * max(norms), (
+            f"amplitude floor is NOT invariant at n={n}: {norms}")
+
+
+def test_the_lever_buys_depth_and_costs_amplitude():
+    """The honest pricing: depth goes flat, composed amplitude gets WORSE.
+
+    Untreated: alpha ~ n, d_inv ~ n^2  (product ~ n^3).
+    Preconditioned with G obtained by COMPOSING P^-1/2 with (I-C): d_inv flat,
+    but alpha inherits ||P^-1/2||^2 ~ n^2  (product ~ n^2).
+
+    WRONG ANSWER REJECTED: that preconditioning is a pure win.  The test asserts
+    that the composed amplitude exponent is ~2, i.e. STRICTLY WORSE than the
+    untreated ~1 -- so a reading in which the lever costs nothing fails here.
+    It equally rejects the opposite overclaim by requiring the depth exponent to
+    collapse to ~0.
+    """
+    ns = np.array([20, 40, 80, 160])
+    a_naive, d_naive, a_comp, d_pre = [], [], [], []
+    for n in ns:
+        n = int(n)
+        A = np.eye(n) - sw_cross_block(S_KR, n, M=M_QUAD)
+        P_is = inv_sqrt(tridiag(n))
+        G = P_is @ A @ P_is
+        kA, kG = np.linalg.cond(A), np.linalg.cond(G)
+        eps = 1.6e-3
+        a_naive.append(np.linalg.norm(inv_sqrt(A), 2))
+        d_naive.append(kA * np.log(kA / eps))
+        a_comp.append(np.linalg.norm(P_is, 2) ** 2 * np.linalg.norm(A, 2))
+        d_pre.append(kG * np.log(kG / eps))
+
+    slope = lambda y: float(np.polyfit(np.log(ns), np.log(y), 1)[0])
+    assert 0.9 < slope(a_naive) < 1.1, f"untreated alpha exponent {slope(a_naive):.2f}"
+    assert 1.9 < slope(d_naive) < 2.3, f"untreated depth exponent {slope(d_naive):.2f}"
+    assert 1.9 < slope(a_comp) < 2.1, f"composed alpha exponent {slope(a_comp):.2f}"
+    assert abs(slope(d_pre)) < 0.05, f"preconditioned depth not flat: {slope(d_pre):.3f}"
+    # the paid-for-nothing factor the open item would recover
+    assert a_comp[-1] / a_naive[-1] > 20, "composition penalty vanished unexpectedly"
+
+
 @pytest.mark.slow
 def test_preconditioned_conditioning_stays_flat_at_large_basis():
     """One cutoff past the data the paper quotes -- the guard-asymptotics rule.

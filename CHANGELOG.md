@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.11.1] - 2026-09-12
+
+**The two owed items: the resource lever priced honestly (it shrinks), and C23's first run (six prior-art catches, two of them on claims written this week).** Probes `debug/p60_resource_pricing_probe.py`; scans `debug/lit_scan/c23_paper60_{linalg,analysis}_memo.md`; record `docs/qa/c23_run_001_paper_60.md`.
+
+### Pricing: the lever buys depth, and nothing else
+
+An invariance settles it. Any `X` with `X^T S X = I` satisfies `X = S^{-1/2} U`, so `||X|| = ||S^{-1/2}||` **exactly, independent of the factorization** — verified to `6e-13` across three genuinely different whitenings (symmetric, preconditioned, inverse-Cholesky). **No factorization can lower the block-encoding subnormalization**, and the untreated route already attains it. New `eq:amplitude_floor`.
+
+At `n = 160`, `kR = 2`, chemical accuracy:
+
+| route | `alpha` | `d_inv` | product |
+|:--|--:|--:|--:|
+| untreated | 125.4 | 3.1e5 | 3.9e7 |
+| preconditioned, `G` composed | 3196 | 16.1 | 5.1e4 |
+| preconditioned, `G` direct | 125.4 | 16.1 | 2.0e3 |
+
+In exponents: untreated `alpha ~ n`, `d_inv ~ n^2`, product `n^3`; preconditioned with `G` obtained by *composing*, the degree goes flat but `alpha` inherits `||P^{-1/2}||^2 ~ n^2`, giving `n^2`; with a direct encoding of `G` at the floor it would be `n`. **So the lever is worth one power of `n` as priced, two if a direct block-encoding of `G` is found.** The v5.11.0 entry's `19000x` was depth-only; the honest end-to-end figure is `758x` at `n=160`, growing like `n`. The prize is now sized rather than named: `||G|| = 0.372` against a composed `alpha = 3196`, a factor `8.6e3` paid for nothing but the order of operations. `P^{-1/2}` itself costs no block-encoding calls — DST-I has an `O(log^2 N)` circuit (Klappenecker–Rötteler, verified).
+
+### C23 run #1: six of eight audited claims were already known
+
+The criterion was written because `eq:sigma_law` turned out to be Kac–Murdock–Szegő. On its first run it caught five more, **including two claims written this week**. Nothing was false; C23 re-tiers attribution, not truth, and every identity was re-verified numerically here before any edit.
+
+- **A1** — the `spec{1±σ}` / `cond = (1+σ)/(1−σ)` / principal-angles chain is classical (Jordan; Jordan–Wielandt; the two-block CBS constant). Now used rather than derived.
+- **A2** — Halmos's primary re-read: Theorem 2 is the canonical form **only**, no norm anywhere. Loring 2014 added for the identity; the inline derivation stands.
+- **A3 — the catch.** "Proposition D", written 2026-09-11, is the Löwdin symmetry-preservation property specialized to the `l` grading — known in this paper's own field since Slater–Koster (1954), and in operator terms the statement that block-diagonal matrices are a commutant and therefore inverse-closed. **Demoted** from Proposition; the `l`-vs-`m` application is what the paper now claims.
+- **A4** — the constant `2.555041…` is unnamed, but its mechanism is textbook (a self-adjoint Toeplitz spectrum is the convex hull of the symbol's essential range). Now named.
+- **B1** — the `j^{-5/4}` law **needed no deriving**: the model integral is DLMF 10.32.10 at `nu = 2`, and 10.40.2 delivers constant *and* phase. The claim is therefore **upgraded**, from an exponent to `eq:chirp_decay` in full.
+- **B4** — the rank-`M-1` all-ones degeneracy, written *yesterday*, is the **flat limit** of the RBF/kernel literature (Barthelmé–Usevich 2021). What survives as ours is that the block symbols realize it at a *symbol point* rather than a shape-parameter limit — which is exactly why a fixed rotation removes it.
+- **B2** ABSENT (nobody composes `j0` with a cotangent). **B3** PRIOR ART *and our mechanism reading is correct*: with decay `5/4 > 1` the metric sits in Jaffard's class, where inversion preserves decay **given bounded invertibility** — so the escape is the spectrum touching zero, not the localization class.
+
+### Two corrections to our own reasoning
+
+1. **The `pi/4` is a branch phase**, from the `(pi/2z)^{1/2}` prefactor, *not* the stationary-phase `sign(phi'')·pi/4`. The same number for the wrong reason. The new guard pins it by **sign agreement**, tolerance-free, so the mechanism is tested rather than the value.
+2. **`sum |c_j|` CONVERGES** — `5/4 > 1`, so the symbol is in the Wiener algebra. What diverges is `sum j|c_j|`, Böttcher–Widom's hypothesis, a different condition. The paper said the right thing; the distinction was not drawn, and it is load-bearing for B3.
+
+### What was deliberately not done
+
+The WebSearch budget (200) ran out partway. `WebFetch` survived, so anything with a known URL was reachable and anything needing a *search* was not. Cited here: **only** DLMF 10.32.10/10.40.2 (quoted verbatim with phase conditions), Loring 2014, Barthelmé–Usevich 2021. Eleven further primaries — Jordan 1875, Slater–Koster, Hartman–Wintner, Jaffard 1990, Gröchenig–Leinert TAMS 358, Driscoll–Fornberg, Björck–Golub among them — are **named in prose and given no bibitem**, per C23's own second hard rule. The over-claims are gone now; the attributions are owed, and `docs/qa/c23_run_001_paper_60.md` lists every one with what it is for. Also recorded there: `bottcher_spitkovsky2010` is cited by this paper for content nobody here has read (paywalled, no preprint); its title matches its use, so it is retained and flagged rather than dropped.
+
+### Backing and gates
+
+`tests/test_paper60_kms_attribution.py` gains the closed-form constant-and-phase guard (fire-tested three ways: drop the `pi/4`, drop `2^{-3/4}`, flip the `kR` exponent — all fire). `tests/test_paper60_preconditioner.py` gains the amplitude-floor and pricing guards, both written against the *hopeful* reading: the floor is tested across three whitenings, and the pricing guard asserts the composed amplitude exponent is ~2, i.e. strictly worse than untreated, so "preconditioning is a pure win" cannot pass. All gates PASS in scope `paper_60`.
+
+**Process finding worth acting on:** C23's two best catches were its two newest claims. That argues for running it close to authorship rather than only at certification — a scope change to the criterion, and a PI call.
+
 ## [v5.11.0] - 2026-09-12
 
 **The owed items, and the conditioning half of the composition wall turns out to be breachable.** Follow-up to v5.10.18. Probes `debug/p60_{preconditioner,locality}_probe.py`; backing `tests/test_paper60_preconditioner.py`.
