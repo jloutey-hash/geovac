@@ -331,6 +331,17 @@ def update_baseline() -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
+    # --gate is accepted so a cert run can STATE the scope it passed for (the
+    # GATE SELF-AUDIT RULE: "when a gate reports PASS, say what scope it
+    # passed").  It is deliberately NOT used to narrow: checks A-D walk the
+    # claim matrix and the whole test tree, so the subject genuinely is the
+    # corpus.  Accepting the flag and silently narrowing nothing WITHOUT saying
+    # so is the failure that rule names, which is why the scope is echoed in
+    # the RESULT line instead.
+    ap.add_argument("--gate", default=None,
+                    help="record the target this run is reporting for; the "
+                         "checks remain corpus-wide and the RESULT line says so")
+    ap.add_argument("--scope", dest="gate", help=argparse.SUPPRESS)
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--update-baseline", action="store_true")
     a = ap.parse_args()
@@ -343,11 +354,18 @@ def main() -> int:
     base = load_baseline()
     n = check_a(base) + check_b() + check_c() + check_d(base)
     print()
+    # State the scope in the verdict.  GATE SELF-AUDIT RULE: "when a gate
+    # reports PASS, say what scope it passed."  Checks A-D are corpus-wide by
+    # construction, so --gate records the target being reported for and the
+    # line says plainly that the coverage is wider, rather than letting a
+    # reader infer the gate was narrowed to it.
+    scope = (f"reported for '{a.gate}'; checks are corpus-wide"
+             if a.gate else "corpus-wide")
     if n:
-        print(f"RESULT: FAIL ({n} new test->claim backing defect(s))")
+        print(f"RESULT: FAIL ({n} new test->claim backing defect(s); {scope})")
         return 1
     print("RESULT: PASS (every test-backed claim resolves and is not "
-          "retracted; no new debug/ dependency)")
+          f"retracted; no new debug/ dependency; {scope})")
     return 0
 
 

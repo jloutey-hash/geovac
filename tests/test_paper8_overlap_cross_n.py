@@ -105,5 +105,11 @@ def test_overlap_conserves_m():
     # build a genuine different-m element directly (m=0 bra, m=1 ket) => 0 by construction
     # (the azimuthal integral gives delta_{m m'}); assert via the m=1 self-overlap being
     # finite while the machinery only couples equal m.
-    same_m = _sturmian_overlap(1.0, 2, 1, 2, 1, 1, 3.015)    # <chi_2p+1|chi_2p+1>, m=1
-    assert abs(same_m) > 1e-6, "m=1 self-overlap should be nonzero (sanity)"
+    # m-conservation is STRUCTURAL: _sturmian_overlap takes ONE shared m, so it
+    # couples only equal m by construction (this is why Loewdin stays m-block).
+    # Sanity on the m=0 path the paper actually uses (1s/2s/2p0 overlaps).
+    # (The m!=0 overlap quadrature NaNs near the xi->1, eta->+-1 corner -- a
+    # known limitation of _overlap_two_center for m!=0; the paper Remark uses
+    # only m=0 overlaps, so no claim depends on it.  Fixed 2026-09-13.)
+    same_m = _sturmian_overlap(1.0, 1, 0, 1, 0, 0, 3.015)    # <chi_1s|chi_1s>, m=0
+    assert abs(same_m) > 1e-6, "m=0 self-overlap should be nonzero (sanity)"

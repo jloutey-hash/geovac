@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.11.3 (September 12, 2026)
+**Version:** v5.11.17 (September 13, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,15 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa group2 baseline FULL run COMPLETE (2026-09-13, v5.11.14-17):** 4 batches, 13 docs; every batch found+fixed defects (guardrail scope; pair-diagonal zombie; FCI-atoms stale energies re-measured; a locus-incomplete same-session fix caught by the completeness pass). Baseline re-measure, not a cert. See CHANGELOG v5.11.14-17.
+- **/qa paper_61 DELTA = DEFECTS, remediated (2026-09-13, v5.11.12):** claims + code CLEAN (75 tests --slow); 09-08 remediation held corpus-wide; 2 defects outside the prose (Chowla-Selberg bibitem added; retired K(1/2)=lemniscate swept + new C16 entry). Confirming delta owed before FULL. See CHANGELOG v5.11.12.
+- **/qa paper_60 FULL certifying run = FAIL (2026-09-13, v5.11.10, PI-invoked):** 5/6 dimensions PASS, 0 mathematical/content defects; completeness FAIL on declared preconditions (literal-registration debt + no clean delta). Inertia test + 3 NITs remediated. See CHANGELOG v5.11.10.
+- **/qa paper_60 DELTA #3 = DEFECTS, remediated (2026-09-13, v5.11.9):** cleanest of the lineage -- citations + code CLEAN, 0 LARGE, 3 SMALL all one claim on 2 summary surfaces. Tree frozen; no moving-target defect. See CHANGELOG v5.11.9.
+- **/qa paper_60 DELTA #2 = DEFECTS, remediated (2026-09-13, v5.11.8):** a v5.11.7 remediation never landed; the 'plateau' was not one; 2 new categories. See CHANGELOG v5.11.8.
+- **/qa paper_60 DELTA = DEFECTS, remediated (2026-09-13, v5.11.7):** 2 LARGE outside the nominated set by category (generated-artifact layer; the auto-loading recall layer). 0 mathematical defects. See CHANGELOG v5.11.7.
+- **Owed items cleared; a 2nd stale rung found (2026-09-12, v5.11.6):** the He chain mixed bases; full-shell family now tested; staleness gate measured 1 file of 2; new summary-surface reading rule. See CHANGELOG v5.11.6.
+- **/qa paper_60 FULL = FAIL, remediated (2026-09-12, v5.11.5):** 0 mathematical defects; every constant reproduced. A wrong abstract number, a blind control, an over-generous prior-art surrender. See CHANGELOG v5.11.5.
+- **Two pi's, opposite seam sides; geometry-independence scoped (2026-09-12, v5.11.4):** sigma_law's pi^2 is truncation-side (no Bessel), the chirp's is continuum-side; collinear M opens at 2,4,...,2(M-1). See CHANGELOG v5.11.4.
 - **Metric penalty n^3 -> n (2026-09-12, v5.11.3):** G's symbol is a bounded ratio, sup = ||G|| exactly, so a DIRECT encoding reaches the amplitude floor. See CHANGELOG v5.11.3.
 - **Overcompleteness is ONE DIRECTION (2026-09-12, v5.11.2):** Bessel deficit plateaus 0.38-0.91; one-centre set NOT complete in the molecular metric. C23 citations closed. See CHANGELOG v5.11.2.
 - **C23 run #1: 6 of 8 claims already known (2026-09-12, v5.11.1):** Prop D = Slater-Koster 1954; chirp law = DLMF Bessel. Lever priced. See CHANGELOG v5.11.1.
@@ -545,6 +554,44 @@ The corpus is QA'd branch by branch. Cycle, in order: **(1)** synthesis update; 
 **Disposition.** PM fixes small issues directly (status drift, cross-ref hygiene, precision, missing caveats); PM raises to the PI any load-bearing claim with no/weak/false-positive backing, a test that proves less than the prose, a suspected bug in a keystone, or anything touching a hard prohibition.
 
 Full protocol + the three QA principles (provenance visibility / fresh adversary / two-way verdict): `docs/branch_qa_protocol.md`. The gate is `/qa` (PI-invoked only) against `docs/qa/criteria.md`.
+### Summary-Surface Reading Rule (added 2026-09-12, PI direction)
+
+**When a claim changes, reread the places that summarize it — in the same edit.**
+Not a grep. A read.
+
+1. **Every claim change:** reread the paper's **abstract**, **conclusion**, any
+   paragraph labelled **Scope**, and the **Acknowledgments**. For a paper the
+   size of Paper 60 that is ~6k tokens.
+2. **Every session that touches claims:** read the **whole paper** once. ~30k
+   tokens for Paper 60.
+3. **A paper's synthesis moves with the paper.** If the claim is summarized in
+   `papers/synthesis/`, that file is part of the change, not a separate errand.
+
+*Why a reading rule and not another pattern.* The corpus has three mechanisms
+for stale claims — the C16 phrase registry, `cited_by` dependents, and the
+§13.8 `rests on:` edges — and **all three are document-granular**. The
+2026-09-12 `/qa paper_60` FULL run found every defect **inside one file**: the
+abstract claimed a 1953 theorem as derived here while the body carried
+`[PRIOR ART]`; the conclusion confined a lever to the case the body had
+breached; a retired energy survived as the abstract's validation endpoint under
+a paragraph certifying the section converged. `cited_by` correctly reported no
+dependent documents, because there were none. And no phrase registry can catch a
+paraphrase — which is what a summary is, by construction.
+
+*Why it is affordable.* Measured on Paper 60: abstract + conclusion ≈ 6.2k
+tokens, whole paper ≈ 29.5k, against ≈1.5M for the review pass that found these
+defects. **Reading the paper costs about 2% of reviewing it.** Cost is not a
+reason to skip it.
+
+*What it does not cover, stated so nobody over-trusts it.* Roughly half the
+findings of that run were in summary surfaces; the rest were in body text, and
+most of those were sentences contradicting themselves rather than stale copies.
+Self-contradiction is a different failure and is caught by the reviewers'
+internal-consistency mandate, not by this rule.
+
+*The phrase registries stay.* They cost nothing to run and occasionally catch
+something. They are a backstop, not the mechanism.
+
 ### Benchmarking Rule
 
 After any modification to production code in `geovac/`:

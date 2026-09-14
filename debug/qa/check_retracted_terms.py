@@ -1590,6 +1590,41 @@ REGISTRY = [
         ],
     },
     {
+        "id": "p61-k12-is-lemniscate",
+        "scope": "paper_61 group3 group2",
+        "severity": "fail",
+        "retired": "2026-09-07 (/qa paper_61, claims dimension); corpus-swept "
+                   "2026-09-13 (DELTA). K(1/2) = varpi = Gamma(1/4)^2/(4 sqrt pi) "
+                   "was labelled 'the lemniscate constant'. FALSE: the classical "
+                   "lemniscate constant is sqrt(2)*varpi = Gamma(1/4)^2/(2 sqrt(2 "
+                   "pi)), a DIFFERENT number (off by exactly sqrt 2). The SYMBOL "
+                   "K(1/2) is the corpus convention; the NAME was wrong. Retired "
+                   "claim #6 got no C16 entry (paper-prose-only fix), so it "
+                   "survived in the tracked driver debug/routeC_pslq_fit.py:6 "
+                   "through two passes -- the locus-by-locus-remediation class. "
+                   "This entry makes the conflation gateable.",
+        "pattern": r"K\(\s*1\s*/?\s*2\s*\)[,;]?\s*(?:the\s+)?lemniscate\s+const",
+        "exempt_if_nearby": r"differ|NOT\s+the\s+lemniscate|corpus\s+convention|name.{0,8}was\s+wrong",
+        "cited_by": {
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex":
+                "reviewed 2026-09-13 -- owner; L113-115 states varpi = K(1/2) is "
+                "the corpus symbol and the classical lemniscate constant is sqrt2 "
+                "varpi (carries the sqrt2 distinction)",
+            "debug/routeC_pslq_fit.py":
+                "reviewed 2026-09-13 -- the survivor; comment corrected to '= "
+                "K(1/2); this is NOT the lemniscate constant, which is "
+                "sqrt(2)*varpi'",
+        },
+        "files": [
+            "papers/group3_foundations/paper_61_bessel_moment_periods.tex",
+            "papers/group2_quantum_chemistry/paper_59_elliptic_bessel_moment.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "docs/qa/paper_61.done.md",
+            "debug/routeC_pslq_fit.py",
+            "debug/routeC_cosmic_galois_rung3c.py",
+        ],
+    },
+    {
         "id": "p61-every-cm-fibre-universal",
         "scope": "paper_61 group3 group2",
         "severity": "fail",
@@ -1832,6 +1867,254 @@ REGISTRY = [
             "tests/test_paper60_*.py",
             "tests/test_sturmian_secular.py",
         ],
+    },
+    {
+        "id": "p60-removability-corollary",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-12, /qa paper_60 FULL.  The transcendental tagging "
+                   "paragraph drew an operational corollary -- that a "
+                   "TRUNCATION-side price is 'a property of the matrix, which a "
+                   "preconditioner reaches' while a CONTINUUM-side price is 'a "
+                   "property of the symbol, which no congruence can touch'.  BOTH "
+                   "HALVES ARE FALSE.  The preconditioner is built FROM the symbol "
+                   "(its matching polynomial is chosen to share the symbol's zero, "
+                   "per Serra), and preconditioning IS a congruence of the finite "
+                   "section, one that replaces the symbol by f/g.  The surviving "
+                   "statement concerns the symbol on BOTH sides and turns on the "
+                   "KIND of feature: a banded congruence cancels a zero of finite "
+                   "order but cannot alter a decay class.  Provenance of a constant "
+                   "predicts nothing about removability.",
+        "pattern": r"truncation-side price"
+                   r"|continuum-side price"
+                   r"|property of the matrix, which a preconditioner reaches"
+                   r"|property of the symbol, which no congruence",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d\d-\d\d: p60-removability-corollary\]",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            # widened 2026-09-13 (DELTA #2): these six entries shipped with a
+            # narrower list than the OLDER p60 entries next to them, which is why
+            # the "Proposition D" loci in the walls register and the single-value
+            # floor in claims_register/INDEX were invisible to this gate.
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the paragraph carries the withdrawal inline",
+            "docs/claim_test_matrix.md": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the tagging row records the corollary as WITHDRAWN",
+        },
+    },
+    {
+        "id": "p60-frames-completeness",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-12 (adopted 2026-09-11, withdrawn 2026-09-12 v5.11.2).  "
+                   "The frames reading -- that overcompleteness is the PRICE of "
+                   "one-centre completeness, i.e. that completeness of the "
+                   "one-centre set alone forces lam_min -> 0 -- is FALSE for this "
+                   "basis.  Measured: the Bessel deficit of a displaced Sturmian "
+                   "against the one-centre span PLATEAUS at 0.380/0.696/0.907 for "
+                   "kR = 1/2/4, flat over N = 16..256, so the one-centre set is "
+                   "measurably far from complete IN THE MOLECULAR METRIC and the "
+                   "bound holds only vacuously.  Ron-Shen is the surviving "
+                   "mechanism, and it says something narrower and more useful: the "
+                   "near-dependence is ONE DIRECTION.",
+        "pattern": r"overcompleteness is the price"
+                   r"|price of one-cent(?:er|re) completeness"
+                   r"|completeness of the one-cent(?:er|re) set[^.\n]{0,40}forces",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d\d-\d\d: p60-frames-completeness\]",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            # widened 2026-09-13 (DELTA #2): these six entries shipped with a
+            # narrower list than the OLDER p60 entries next to them, which is why
+            # the "Proposition D" loci in the walls register and the single-value
+            # floor in claims_register/INDEX were invisible to this gate.
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- sec:molecular carries the plateau measurement",
+            "docs/claim_test_matrix.md": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the one-direction row records the withdrawal",
+        },
+    },
+    {
+        "id": "p60-sigma-law-derived",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-11, re-swept 2026-09-12.  eq:sigma_law is NOT derived "
+                   "in this corpus: it is the Kac-Murdock-Szego extreme-eigenvalue "
+                   "asymptotic (c_1 = pi^2, 1953).  What is ours is the "
+                   "IDENTIFICATION of the two-centre Shibuya-Wulfman metric as such "
+                   "a finite section.  The 2026-09-11 re-attribution reached the "
+                   "paper body and MISSED the abstract, the group2 synthesis, the "
+                   "sturmian_sigma_law module docstring and its backing test's "
+                   "docstring -- all four fixed 2026-09-12.",
+        "pattern": r"growth law is derived"
+                   r"|derived band-limited law"
+                   r"|[Bb]acks the derived conditioning law"
+                   r"|conditioning law[^.\n]{0,24}derived here",
+        "exempt_if_nearby": r"(?!)",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            # widened 2026-09-13 (DELTA #2): these six entries shipped with a
+            # narrower list than the OLDER p60 entries next to them, which is why
+            # the "Proposition D" loci in the walls register and the single-value
+            # floor in claims_register/INDEX were invisible to this gate.
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- abstract now carries [PRIOR ART]",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the molecular paragraph credits KMS",
+            "docs/claim_test_matrix.md": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the KMS row states identification-only",
+        },
+    },
+    {
+        "id": "p60-prop-d-as-new",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-12, C23 run #1.  'Proposition D' was demoted: the "
+                   "block-diagonal-congruence result is Loewdin symmetry "
+                   "preservation specialised to the l grading, known in this "
+                   "paper's own field since Slater-Koster (1954), and in operator "
+                   "terms the statement that block-diagonal matrices are a "
+                   "commutant and therefore inverse-closed.  What the paper claims "
+                   "is the l-vs-m APPLICATION, not a new proposition.",
+        "pattern": r"Proposition[~\s]?D\b"
+                   r"|our Proposition[^.\n]{0,30}block-diagonal congruence",
+        "exempt_if_nearby": r"(?!)",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            # widened 2026-09-13 (DELTA #2): these six entries shipped with a
+            # narrower list than the OLDER p60 entries next to them, which is why
+            # the "Proposition D" loci in the walls register and the single-value
+            # floor in claims_register/INDEX were invisible to this gate.
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- sec:molecular credits Loewdin/Slater-Koster",
+            "docs/claim_test_matrix.md": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the row records the re-attribution",
+        },
+    },
+    {
+        "id": "p60-translation-ours",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-12.  The reading of the Shibuya-Wulfman operator as a "
+                   "TRANSLATION is prior art on three counts -- Shibuya and "
+                   "Wulfman's own 1965 abstract builds the molecular p0 operator "
+                   "from 'a sum of unitary transformations, one for each nucleus in "
+                   "the molecule'; Wulfman and Takahata gave the explicit "
+                   "continuous-group formulation in 1967; Red and Weatherford "
+                   "derived the general formula for that matrix in a "
+                   "Coulomb-Sturmian basis in 2004.  What survives as ours is the "
+                   "SYMBOL -- that in the sine basis the operator is the finite "
+                   "section of multiplication by j0(kR cot(chi/2)).",
+        "pattern": r"equivalently that the Shibuya--Wulfman\s+operator is multiplication"
+                   r"|what is ours[^.\n]{0,60}translation phase"
+                   r"|the translation identification is ours",
+        "exempt_if_nearby": r"(?!)",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            # widened 2026-09-13 (DELTA #2): these six entries shipped with a
+            # narrower list than the OLDER p60 entries next to them, which is why
+            # the "Proposition D" loci in the walls register and the single-value
+            # floor in claims_register/INDEX were invisible to this gate.
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the concession names all three counts",
+            "docs/claim_test_matrix.md": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the symbol-not-translation split recorded",
+        },
+    },
+    {
+        "id": "p60-tau-membership",
+        "scope": "paper_60 group2 synthesis",
+        "severity": "fail",
+        "retired": "2026-09-12, /qa paper_60 FULL (code dimension).  The paper "
+                   "glossed the tau (DST-I) algebra as 'which is to say Toeplitz "
+                   "minus Hankel, the structure of this section', surrendering the "
+                   "weight-independence result to Ahmad et al.'s identity.  FORM IS "
+                   "NOT MEMBERSHIP: tau requires the coefficient sequence to "
+                   "TERMINATE, which the matching polynomial's does and the chirp "
+                   "symbol's does not.  Measured: the DST-I leaves 4.1/2.0/1.1 "
+                   "percent off-diagonal weight on the cross block at n = 16/64/160 "
+                   "against 2e-14 for a genuinely-tau matrix.  The identity covers "
+                   "the tau IDEALISATION; the departure is exactly the residue the "
+                   "paper reports.",
+        "pattern": r"tau \(DST-I\)\s*\n?\s*algebra --- which is to say Toeplitz minus Hankel"
+                   r"|\\tau\$? \(DST-I\)[^.\n]{0,40}structure of this\s*\n?section"
+                   r"|our matrices are in the \$?\\?tau",
+        "exempt_if_nearby": r"(?!)",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "docs/claim_test_matrix.md",
+            "CLAUDE.md",
+            "geovac/sturmian_*.py",
+            "tests/test_paper60_*.py",
+            # widened 2026-09-13 (DELTA #2): these six entries shipped with a
+            # narrower list than the OLDER p60 entries next to them, which is why
+            # the "Proposition D" loci in the walls register and the single-value
+            # floor in claims_register/INDEX were invisible to this gate.
+            "docs/claims_register.md",
+            "docs/code_architecture.md",
+            "docs/topic_to_paper_lookup.md",
+            "docs/walls/register.md",
+            "docs/qa/paper_60.done.md",
+            "papers/INDEX.md",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_60_sturmian_secular_quantum.tex": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the paragraph states the membership failure",
+            "docs/claim_test_matrix.md": "reviewed 2026-09-12 -- /qa paper_60 FULL remediation -- the hypothesis-gap clause records it",
+        },
     },
     {
         "id": "p60-l2-metric-diverges",
@@ -2450,6 +2733,30 @@ REGISTRY = [
         "files": [
             "papers/group4_quantum_computing/*.tex",
             "papers/synthesis/group4_quantum_computing_synthesis.tex",
+        ],
+    },
+    {
+        "id": "pairdiag-p19-balanced-prose-values",
+        "note": "group2 baseline Batch 3 (2026-09-13).  Paper 19's PROSE carried "
+                "the retired pair-diagonal balanced-coupled figures while its own "
+                "re-measured tables (2026-09-01, exact global-M_L) carried the "
+                "current ones -- a direct prose-vs-table contradiction the "
+                "trunk-level pairdiag entry did not reach.  Retired -> current: "
+                "n_max=3 balanced Pauli 19,959 -> 127,855 / 1-norm 448.9 -> 436.9 "
+                "/ QWC 2,298 dropped; Pauli exponent 3.03 -> 3.74; LiH "
+                "balanced/composed ratio 2.53x~2.63x -> 3.25x; polyatomic ratio "
+                "sequence 2.63/4.77/7.45x -> 3.25/6.35/10.10x; ERI census 130/195 "
+                "-> 214/321 (test_cross_block_eri_count).",
+        "pattern": r"19\{,\}959|19,959"
+                   r"|(?:4\.77|7\.45)\$?\\times\$?\s*\(\d-block"
+                   r"|2\.53\$?\\times\$?\)? is consistent",
+        "exempt_if_nearby": r"retired|RETIRED|pair-diagonal|withdrawn"
+                            r"|corrected|under the retired|superseded",
+        "severity": "fail",
+        "scope": "group2",
+        "cited_by": {},
+        "files": [
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
         ],
     },
 ]

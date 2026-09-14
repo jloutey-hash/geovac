@@ -36,7 +36,9 @@ GeoVac program discretizes this $S^3$ as a graph Laplacian, achieving
 $<0.1\%$ error for one-electron atoms with zero free parameters
 (Papers~0, 1, 7).  For molecules, however, $S^3$ is not the natural
 geometry: the single-$p_0$ momentum scale cannot encode the
-$R$-dependent bonding physics (Paper~8--9, negative theorem).
+$R$-dependent bonding physics in that single-$n$ shared-$p_0$ approximation
+(Paper~8--9, negative theorem;\ the genuine cross-$n$ Coulomb--Sturmian basis
+escapes it and binds).
 
 We resolve this by identifying the \emph{natural geometry principle}:
 every separable quantum system has a natural lattice---the lattice
@@ -49,8 +51,9 @@ solvers---a self-adjoint finite-difference (FD) scheme and a spectral
 Laguerre basis---with Brent root-finding in the separation
 parameter $c^2 = -R^2 E_{\mathrm{elec}}/2$ to enforce self-consistency.
 For $\sigma$ states ($m = 0$), the spectral Laguerre matrix elements
-are computed algebraically from three-term recurrence relations,
-eliminating numerical quadrature entirely.  For $\pi$ and $\delta$
+can be computed algebraically from three-term recurrence relations,
+eliminating numerical quadrature entirely (the default path uses
+Gauss--Laguerre quadrature, which agrees to machine precision).  For $\pi$ and $\delta$
 states ($m \neq 0$), an associated Laguerre basis absorbs the
 centrifugal $1/x$ singularity via partial-fraction decomposition and
 Stieltjes integral recurrence, reducing the non-algebraic content to
@@ -104,9 +107,11 @@ $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and share a single
 orthogonal $SO(4)$ Wigner-$D$ congruence (so $H$ is block-, not scalar-,
 proportional to $S$), rendering the generalized eigenvalues independent
 of $R$.  Binding in this
-framework requires the full $R$-dependent eigenvalue spectrum
-$\beta_k(R)$ from the continuous prolate spheroidal PDE---reintroducing
-the very continuous spatial geometry the graph was meant to replace.
+single-$n$ shared-$p_0$ framework would require the full $R$-dependent
+eigenvalue spectrum $\beta_k(R)$;\ the continuous prolate spheroidal PDE below is
+one route to it, while the genuine cross-$n$ Coulomb--Sturmian overlap supplies
+it algebraically (Paper~8, Remark), so the obstruction is to this approximation,
+not to Sturmian molecular binding.
 
 For heteronuclear systems, the situation is worse: no shared $p_0$
 exists that simultaneously represents both atomic length scales.
@@ -898,7 +903,7 @@ orbital exponents to optimize.
 
 Paper~8--9 proved that the molecular Sturmian basis on a single
 $S^3$ with shared momentum scale $p_0$ cannot produce
-$R$-dependent binding: the one-electron $(H,S)$ obey the two-term
+$R$-dependent binding \emph{in the single-$n$, block-diagonal approximation}: the one-electron $(H,S)$ obey the two-term
 identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and
 share a single $SO(4)$ Wigner-$D$ congruence, making the eigenvalues
 geometry-independent.  The
@@ -1028,7 +1033,8 @@ full PES scan and composed-geometry pipelines.
 
 The prolate spheroidal lattice also resolves the impasse identified
 in Paper~8--9: the single-$p_0$ Sturmian basis on $S^3$ cannot
-produce $R$-dependent binding, but the prolate spheroidal coordinate
+produce $R$-dependent binding \emph{in its single-$n$ form} (the genuine
+cross-$n$ basis escapes this;\ Paper~8, Remark), while the prolate spheroidal coordinate
 system encodes $R$ directly in its metric, producing the correct
 equilibrium geometry without any fitted parameters.
 

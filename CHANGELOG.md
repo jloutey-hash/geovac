@@ -7,6 +7,601 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.11.17] - 2026-09-13
+
+**`/qa group2` baseline FULL run - Batch 4 (Paper 58 + group2 synthesis C9 + completeness-critic) = FAIL, remediated. The group2 baseline (4 batches) is COMPLETE.** Five reviewers, tree frozen. The LARGE was a stale-echo the run's own completeness pass caught in *this session's Batch-3 work*.
+
+### Paper 58 - CLEAN on code and citations, one SMALL on claims
+
+- **Code (all backing tests RUN):** no LARGE, no false-positive, no tautology. 25 slow legs + the non-slow suite all pass; the certificate is mutation-guarded, the (AA|BB) decider fire-tested both directions, the decompactification front cross-checked by an independent prolate quadrature. The three DoD MATERIAL items (blind decider, QFD precision, C22 syspath) are verifiably remediated.
+- **Citations:** exceptionally strong - 25+ external citations individually source-verified (Curie/Bethe/von Neumann-Wigner mechanism, Shibuya-Wulfman, Ruedenberg exchange, Avery Sturmians, DLMF S30.3, Herring, two-projections theory), no WRONG-ID, no orphan bibitems, no fabricated IDs.
+- **Claims (F1, MATERIAL/SMALL, fixed):** the polyatomic *scope* paragraph (S I.A) labelled the FCI anchor figures (+10.0%/+14.9%, matched to composed FCI 11.7%/19.4%) as "RHF" and spliced them onto the RHF-ladder endpoints (+1.4%/+2.5%) as one basis-driven curve. Per the backing memo the RHF ladder is 7.38->1.40% (BeH2) and 8.77->2.46% (H2O), and minimal-basis FCI is *worse* than minimal-basis RHF. Reframed: the FCI-vs-FCI margin and the RHF basis ladder are now separate, correctly labelled, and the "basis-limited not method-limited" claim is softened (RHF is not at its correlation limit). The code reviewer independently corroborated the muddle (SMALL-4). Does not propagate to the synthesis.
+
+### The LARGE - a Batch-3 correction that was locus-incomplete (C9 synthesis + completeness-critic)
+
+Batch 3 (v5.11.16) re-measured the FCI-atoms energies but the correction reached only the **authoritative surfaces** (abstract, Table I, convergence-detail table) - **not** the conclusion or the several prose echoes. The C9 synthesis reviewer and the completeness-critic together caught the retired pre-ERI-fix errors (He 0.35% / Li 1.07% / Be 0.90%) still live at: the group2 **synthesis** graph-native-FCI paragraph; the FCI-atoms **conclusion**; the He and **Li convergence sequences** in the figure discussion (the Li sequence was in *no* reviewer's line list - caught by a systematic re-grep, the exact locus-incompleteness the Summary-Surface Reading Rule exists to prevent); the hybrid-vs-exact-h1 comparison; the "remaining basis error" paragraph; and the graph-native comparison. **This is the Summary-Surface Reading Rule failure inside my own prior batch.** Swept exhaustively this time (re-grep confirms zero retired FCI-atoms values remain):
+
+- He hybrid 0.56/0.45/0.38/0.35 -> **0.50/0.37/0.29/0.26%**; Li exact-h1 5.04/1.15/1.10 -> **5.00/1.12/1.06%**, n>=3 range 1.10-1.15 -> **1.06-1.12%**; He-vs-exact-h1 at n=4 0.35/2.08 -> **0.29/1.99%** (He n4 exact-h1 re-measured); conclusion + remaining-error He/Li/Be -> **0.26/1.03/0.71%**; synthesis line likewise.
+- **The graph-native comparison needed a REFRAME, not a number swap.** With the grid (hybrid) He now at 0.26% (Table I) and graph-native at 0.25%, they **agree to 0.01 percentage points** - the old "0.35% grid vs 0.25% analytical, analytical more accurate" 0.10-point gap was the wrong-sign-q **grid bug**, not a real accuracy difference. Post-fix the two routes confirm each other rather than one beating the other.
+
+### Completeness-critic - GAPS, all now closed
+
+- **GAP-3 (the LARGE above):** FCI-atoms propagation - closed by the exhaustive sweep.
+- **GAP-2:** the group2 DoD (`group2.done.md`) still ratified the superseded C8 literals "Be 0.90% / Li 1.07%" (the ".done.md ratifying a retired value" class) - updated to 0.71% / 1.03%.
+- **GAP-1** (Paper 58 Batch-4 coverage "not evidenced") was a **false gap**: it ran before this record existed; Paper 58 received three fresh Batch-4 reviewers (code + claims + citations).
+- **Deterministic layer 8/8 PASS** (C10 compile 13 papers, C13/C14/C16/C17/C19/C21/C22) - confirmed by the critic and re-confirmed post-remediation.
+
+### Also
+
+claim-matrix: FCI-A He-hybrid row 0.35%->0.26% (NO-TEST but reproduces this session); Paper-58 QFD row "84-digit"->60-digit (matching the paper + the row's own note); two stale test docstrings (`test_paper58_qfd` "84-digit"->60, `test_paper58_decompactification_front` header t_c 2.7456->2.664 - asserts were already correct).
+
+### Carried to cert (declared NITs / OWED, none silently dropped)
+
+Paper 58: the (AA|BB) "0 Gaunt-zeros is basis-forced" disclosure (code SMALL-1, not a false positive); the S/h census DECIDED-vs-MEASURED tier upgrade (earned but defensibly conservative, logged since 2026-08-17); LiH 30-digit + polyatomic scope numbers + many-electron front residuals are driver-level OWED; Clementi inline reference; smith1972 geometric-mean framing. Corpus-wide owed: the He 0.19%@n_max=7 and P15 96.0% in-paper extrapolation footnotes (Batch 2/3); herbst2018 orphan + uncited -8.071 (P19); the earlier per-batch NIT ledgers (all tracked in v5.11.14-16).
+
+### Verdict
+
+**Batch 4: FAIL, remediated** - Paper 58 clean (code + citations), 1 SMALL (F1); the LARGE was a locus-incomplete Batch-3 correction, now swept exhaustively; the completeness GAPs closed. **group2 baseline COMPLETE across four batches (v5.11.14-17): all 13 documents covered, every batch found and fixed defects (guardrail scope; KW literal; H2O reconcile; a P17 self-contradiction; the FCI-atoms LARGE + pair-diagonal zombie; and this run's incomplete-propagation catch), deterministic layer green, all papers compile.** It is a baseline re-measure, not a certification (58/59/60 in by reference; purpose per the DoD is to re-measure the whole group's surface). Clean deltas on 58/59/60 and the owed footnotes remain before any group2 cert.
+
+## [v5.11.16] - 2026-09-13
+
+**`/qa group2` baseline FULL run - Batch 3 (Paper 19 balanced coupled + FCI-atoms + FCI-molecules) = FAIL, remediated.** Five reviewers, tree frozen. One genuine LARGE (stale post-ERI-fix energies with three RED backing tests) and one MATERIAL (a pair-diagonal zombie in Paper 19's prose contradicting its own tables); the rest SMALL. Every corrected number was re-measured this session, not copied from a reviewer.
+
+### The LARGE - FCI-atoms energies stale since the 2026-08-29 ERI fix
+
+Table I, the convergence-detail table, the abstract and the summary sentence all carried PRE-fix (wrong-sign-q) energies; three backing tests (`test_direct_ci` Li n_max=4/5, Be n_max=4) were pinned to the old values and had been RED since the fix (only the He pin was updated at the time). **Re-measured every row** (He hybrid-h1 via direct CI at the paper's own 5995-determinant convention; Li/Be exact-h1). N_SD is unchanged (basis size); energies are lower (restored m-changing correlation, all still above the variational bound); NNZ is ~3x higher (the same census that moved cross-block ERIs 130->214):
+
+- He n_max=5: -2.8936 -> **-2.8963** Ha (0.35% -> **0.26%**)
+- Li n_max=4: -7.3959 -> **-7.3987** (1.10% -> **1.06%**); n_max=5: -7.3978 -> **-7.4007** (1.07% -> **1.03%**)
+- Be n_max=3: -14.531 -> **-14.558** (0.93% -> **0.75%**); n_max=4: -14.536 -> **-14.563** (0.90% -> **0.71%**)
+
+**Be n_max=4 shifted 0.027 Ha - 10x the others - so it was independently cross-checked before re-pinning** (independent-route rule): the production grid-quad R_k and the exact analytical hypergeometric R_k agree to **1.5e-4**, and the exact route reproduces F^0(1s,1s)=5Z/8=2.500000 for Be exactly. The Be convergence is monotone (n3 -> n4: -14.558 -> -14.563), both above exact -14.6674. **The shift is physical (restored correlation), not an evaluator artifact.** All three RED tests re-pinned to this session's measured values and verified green (the two slow ones pass by construction - pinned to the identical production path's output).
+
+### MATERIAL - Paper 19 pair-diagonal zombie (prose vs the paper's own tables)
+
+Paper 19's re-measured tables (2026-09-01, exact global-M_L) carried the current figures, but the PROSE was never updated and cited retired pair-diagonal values that directly contradicted those tables - the trunk-level pair-diagonal C16 entry never reached this paper-specific prose. Corrected against the (measured) tables: **n_max=3 balanced 19,959 -> 127,855 Pauli / 448.9 -> 436.9 Ha 1-norm**; Pauli scaling exponent **3.03 -> 3.74**, 1-norm exponent 1.75 -> 1.71 (recomputed from the table values); LiH balanced/composed ratio **2.53x~2.63x -> 3.25x**; the polyatomic ratio sequence **2.63/4.77/7.45x -> 3.25/6.35/10.10x** (= the census table's own ratio column, which the prose sat directly below); ERI census **130/195 -> 214/321** (the GREEN `test_cross_block_eri_count` pin). A focused C16 entry (`pairdiag-p19-balanced-prose-values`) was added and **fire-tested** (FIRE on all four retired wordings, SILENT on all four corrected).
+
+### Also remediated
+
+- **DirectCI4e live-validation re-enabled.** The quarantine premise - "DirectCI4e's closed-form same-spin block assumes 8-fold ERI symmetry and computes a wrong energy on the exact-rule 4-fold tensor" - was tested and is **FALSE**: DirectCI4e(faithful=False) == coupled_fci_energy at **0.0000 mHa**. The energy is a scalar Slater-Condon contraction needing only the two physical symmetries (particle-exchange + hermiticity); the broken single-swap symmetry is the wrong-sign-q artifact and never enters. Leg restored, test green.
+- **Citations - the NIST_ASD misattribution.** The exact non-relativistic total energies E_He/E_Li/E_Be were cited to the NIST Atomic Spectra Database, a spectroscopic (ionization-energy) compilation that does not tabulate total non-relativistic energies. Values correct; source wrong. Repointed to the verified primaries: **Pekeris (1958)** for He and **Chakravorty-Gwaltney-Davidson-Parpia-Fischer, Phys. Rev. A 47, 3649 (1993)** for Li and Be (covers 3-18 electrons). NIST_ASD was cited only here -> removed as an orphan. All three papers compile with zero undefined citations.
+- **R_eq-drift consistency (M2).** The n_max=2->3 balanced R_eq drift was stated as +0.057 (abstract, Step-4-adjacent) and +0.053 (Step-4, and L2019 which is authoritative: 3.227 -> 3.280); and Step-4 framed it "+0.053 per step" (constant) against the abstract's "decelerating." Reconciled everywhere to **+0.053 then +0.023 bohr, decelerating**.
+- **FCI-molecules (SMALL):** "the only sound discrete framework for heteronuclear FCI" scoped to "among the alternatives surveyed here" (M3); "the correct weighting" -> "a qualitatively correct weighting" (M4). The guardrail-negative is CLEAN (no summary drift; MolecularLatticeIndex archive-restored, 48 tests pass per the reviewer).
+- **Coupled (CB) 1-norm test re-pin:** 91.65 -> **89.80** Ha (measured; matches the table's 80.5 non-identity + identity). Claim-matrix balanced-Pauli 878 -> 2726 (exact-rule; 878 retired).
+
+### Carried to the group review (declared NITs)
+
+herbst2018 orphan bibitem (P19); the uncited exact-LiH denominator -8.071 Ha (P19); the owed He 0.19%@n_max=7 graph-native NO-TEST/extrapolation footnote (shared with Paper 13's owed 0.19% footnote from Batch 2); FCI-molecules virial-T caveat and unpinned Wigner-D^2 literals; the claim-matrix composed-Pauli-334/333 row (retired-rule; exact-rule composed is 838, tapering-variant ambiguous); FCI-atoms convergence-table timing column (hardware-dependent, left as-is).
+
+### Verdict
+
+**Batch 3: FAIL, remediated** - 1 LARGE (FCI-atoms stale energies + 3 RED tests, all re-measured and Be independently cross-checked), 1 MATERIAL (P19 pair-diagonal prose), the rest SMALL. Deterministic layer green on group2 (C10 compile 3/3, C13/C14/C16/C17/C19/C21/C22 PASS); the C16 guard fire-tested; the re-enabled and re-pinned tests verified green. **Batch 4 (Paper 58 + group2 synthesis C9 + completeness-critic) remains to finish the group2 baseline.**
+
+## [v5.11.15] - 2026-09-13
+
+**`/qa group2` baseline FULL run — Batch 2 (Papers 13, 15, 17, the natural-geometry hierarchy) = FAIL, remediated. Much cleaner than Batch 1: no LARGE.** Five reviewers, tree frozen. Every code dimension PASSED and all headline numbers reproduce from current code.
+
+### The three run-#1 regressions are all CLOSED
+
+- **Paper 15 spectral speedups** (16× radial / 20× / 269× angular) were "backed by v2.7.0-deleted code" in run #1; the radial solver was restored from the pre-deletion commit and the angular test un-archived — both now exist, run, and reproduce (128 tests, 0 failed).
+- **Paper 15 "exceeds Paper 12"** was a run-#1 FALSE-POSITIVE (passing via the disavowed adiabatic solver); now genuinely backed by the 2D variational solver, whose <100% band actively rejects the adiabatic 105% artifact.
+- **Paper 17 BeH₂ 11.7%** was flagged stale in run #1 (→19.7% under a PK-blind bug); the bug was fixed 2026-06-27 and 2.80 bohr / 11.7% now reproduces exactly. Every Paper-17 composed R_eq was re-run: no drift.
+
+### Remediated
+
+- **H₂O reconciled (paper right, docs stale).** The code reviewer confirmed H₂O 19.4% (R_eq 1.459) reproduces from a passing test. The claim-matrix, claims-register, and group2 DoD still said **26%**; all three corrected to 19.4%. The paper was already current.
+- **A self-contradiction in Paper 17 §VIII.B:** "molecular equilibrium exists without PK ... 5× overbinding" is the ADIABATIC reading, contradicting the paper's own authoritative 2D-variational result (UNBOUND, D_e<0). Reconciled: the minimum is a feature of the adiabatic PES, not a bound molecule.
+- **Citations (the FAIL driver, all SMALL):** a genuine **WRONG-ID** — `Mitnik2021` cited to Comput. Phys. Commun. 269/108145, which resolves to an unrelated QCD code; corrected to the verified Mol. Phys. 119(8), e1881179 (2021), Mitnik/López/Ancarani (arXiv:2006.06616), third author Gasaneo→López. A **MISATTRIBUTION** — a 3.29 doubly-excited ¹S autoionization-width ratio credited to Madden–Codling, who measured the dipole-allowed ¹Pᵒ series; reframed. And the same dropped-digit class as Batch 1 — Paper 15's exact-H₂ D_e printed 0.17447 (truncation of 0.174475); corrected.
+- **Prose:** Paper 15's abstract now states the 96.0% includes a ~1pp Schwartz cusp correction (the pure-variational value ~95% already exceeds 92.4%); Paper 17's "first realization of a category ... morphisms" (an unverified category-theory novelty claim) reduced to the fiber-bundle framing the paper already proves.
+- **Two claim-matrix tiers upgraded:** the l_max=2/structural-divergence keystone (was print-only NO-TEST → BACKED-SOUND, `TestLmaxDivergenceMonotone` reproduces the monotone drift) and H₂O (NO-TEST/26% → BACKED-SOUND/19.4%).
+
+### Coverage gaps — two CI-infeasible headlines, disclosed not fixed
+
+Papers 13 (graph-native 0.19% at n_max=7) and 15 (96.0% D_e at l_max=6) each carry a headline that is too expensive to test at its stated truncation (l_max=6 ≈ 754 s/point; n_max=7 CI-uncomputable). Both are on monotone converging sequences whose lower anchors ARE tested (l_max=4 = 94.3%; n_max=5 = 0.25%) and both are already disclosed NO-TEST in the matrix. The code Paper 15 reviewer flagged the 96.0% "LARGE by principle" but well-mitigated; recorded as a standing disclosed coverage gap, not a defect. **Owed for the eventual cert:** an in-paper NO-TEST/extrapolation footnote on each (Paper 13's 0.19% should read as an extrapolation from the 0.25%@n=5 anchor, which the 2026-08-29 ERI fix moved it to).
+
+### Carried to the group review (declared NITs)
+
+Seven orphaned bibitems (KlarKlar1980 P13; macek1968/james1933/morse1953 P15; paper12/paper16/fci_a P17-internal); citation metadata slips (Kereselidze2016 title/authors, Abdouraman2016 initials, bishop1977 citekey year, huber1979 "ab initio" vs experimental caption); Paper 13's S³-vs-hydrogenic integral provenance and its 0.05%-over-0.022% table billing; Paper 15's l_max=2-jump endpoint numbers; the speedup multipliers stated flat (want "measured, hardware-dependent"); Paper 17 tab:pk B-value drift (7.00→6.80) and loose-range regression guards; stale test docstrings.
+
+### Verdict
+
+**Batch 2: FAIL, remediated** — driven by SMALL citation defects (one wrong-ID, one misattribution) plus doc staleness and one prose contradiction; **zero LARGE, zero live deleted-code regressions, every headline number reproduces.** Deterministic layer green, all 13 group2 papers compile. **Batches 3 (Paper 19 + FCI-atoms + FCI-molecules) and 4 (Paper 58 + synthesis C9 + completeness-critic) remain.**
+
+## [v5.11.14] - 2026-09-13
+
+**`/qa group2` baseline FULL run — Batch 1 (guardrail Paper 8 + Papers 11, 12) = FAIL, remediated.** Five reviewers (3 code, 1 chunked claims, 1 chunked citations), tree frozen. The baseline's payoff is a real pre-existing LARGE that no delta would have reached.
+
+### The LARGE — a guardrail negative overstated at its summary surfaces (PI-approved fix)
+
+The **Sturmian Structural Theorem** (Papers 8-9 guardrail) was scoped down in v4.72.x (PI-reviewed): the no-go holds only for the single-n / shared-p0 / block-diagonal APPROXIMATION; the genuine cross-n Coulomb-Sturmian overlap couples n, escapes the theorem, and binds (supplying the R-dependence algebraically via Shibuya-Wulfman). That correction reached the paper bodies, CLAUDE.md §3.5, and `paper_fci_molecules` — but NOT the summary surfaces. **Two reviewers independently (claims chunk + code Paper 8) caught the pre-correction, over-strong reading still live at Paper 8's abstract, section-intro, and conclusion — the conclusion asserting "binding reintroduces continuous spatial geometry (Corollary cor:binding)" while that corollary says the opposite — and at four loci in Paper 11.** This is exactly the Summary-Surface Reading Rule class. **PI-confirmed 2026-09-13: propagate the approved scope.** Seven loci rewritten (3 in Paper 8, 4 in Paper 11) mirroring the wording already approved in `paper_fci_molecules`; the self-contradiction is resolved.
+
+### MATERIAL — Kolos-Wolniewicz reference value (Paper 12 citations)
+
+The exact-H2 benchmark was printed `-1.17475`/`0.17475` (dropped digit) at three loci; true KW 1968 value is `-1.174475`/`0.174475`. The D_e% column already used the correct denominator (the numerical column 79.6/80.1 matches 0.174475), so only the printed literal was corrected; the column and 92.4% headline are the paper's own computed values, untouched.
+
+### Verdicts and the run-#1 regression class
+
+Per-paper: **Paper 8 code FAIL** (the LARGE + one SMALL/BUG — a backing test NaN'd, see below); **Paper 11 code PASS** (216 tests, 0 failed); **Paper 12 code PASS** (32 tests); **claims chunk FAIL** (the LARGE + NITs); **citations chunk FAIL** (the KW MATERIAL + SMALLs). **Crucially, the 2026-06-26 run-#1 "headlines backed by DELETED code" regression is CLOSED for both at-risk papers:** Paper 11's spectral solver was deleted in v2.7.0 and restored 2026-06-27 (now live, 168 core tests); Paper 12's "no integrals" contradiction is remediated (the paper now names its one residual B_l quadrature in every load-bearing surface). No current deleted-code regression.
+
+### Also remediated
+
+- **A failing backing test:** `test_paper8_overlap_cross_n::test_overlap_conserves_m` NaN'd under `--slow` (m!=0 overlap quadrature broken near the coordinate corner; the test was also vacuous — it never built the cross-m element its docstring claimed). Non-load-bearing (the paper uses only m=0 overlaps). Rewritten onto the m=0 path with the m!=0 limitation documented; now 3 passed. **Caught only because the reviewer corrected its own earlier misread of `tail`'s exit code for pytest's** (the never-pipe-verification rule).
+- **Two stale claim-matrix rows:** Paper 8's Structural Theorem (still NO-TEST) and Paper 12's full-V_ee/92.4% (still NO-TEST/tautological-B_l) both moved to BACKED-SOUND — the backing was backfilled and is now genuine (independent anchors, two-route V_ee exactness).
+- **NITs:** Paper 12 abstract "92.4% with 27" -> 92.2% (92.4% is the N=72 plateau); Paper 11 abstract "computed algebraically, eliminating quadrature entirely" -> "can be computed" (the default path is Gauss-Laguerre quadrature); Paper 8 Fiedler "gives the same object" -> "a discrete analog"; Herbst-Avery-Dreuw scope softened (atomic CS-HF, not molecular binding).
+
+### Carried to the group review (declared NITs, not blocking)
+
+Three orphaned bibitems (`Boys1970` P8, `James1933`/`loutey_fci`/`loutey_paper10` P11); a bare uncited He `-2.9037` in Paper 8; Paper 11's `<0.1% one-electron atoms` is trunk-dependent (C7) and awaits the trunk re-cert; Paper 11 R_eq 2.005-vs-2.001 signposting and a headline inline-provenance tag; the "single 1D quadrature" wording (defensible as-is).
+
+### Deterministic + verdict
+
+Whole-group deterministic layer 14/14 (established v5.11.13). Batch-1 papers: post-remediation deterministic PASS, all 13 group2 papers compile. **Batch 1 verdict: FAIL, remediated** — 1 LARGE (guardrail, PI-approved fix applied), 1 MATERIAL (KW literal), the rest SMALL/NIT; zero fabricated results, zero live deleted-code regressions. **Batches 2 (Papers 13/15/17), 3 (Paper 19 + FCI), 4 (Paper 58 + synthesis C9 + completeness) remain for the baseline.**
+
+## [v5.11.13] - 2026-09-13
+
+**`/qa group2` baseline FULL run — scope expanded + whole-group deterministic layer green (PI-directed).** Establishing a new group2 baseline including Paper 60.
+
+**Gate scope change:** `debug/qa/qa_scopes.py` group2 expanded from 10 to **13 documents** — Papers 58, 59, 60 were physically in `papers/group2_quantum_chemistry/` but post-dated the original scope, so every prior group2 run silently excluded them (including Paper 60). Self-test PASS. `docs/qa/group2.done.md` extended to incorporate their per-paper DoDs (`docs/qa/paper_{58,59,60}.done.md`) by reference, and to record that this is a re-baseline fired ahead of clean deltas on 58/59/60 (PI direction), like the trunk FULL #1–#8 baselines.
+
+**Deterministic layer, all 13 papers:** 14/14 gates PASS — internal titles, K-label, paper/file refs, retracted-terms (C16), headline numbers (C17), duration, LaTeX escapes (C19), inline arXiv/attributions, numeric consistency (C21), prose continuity, test-claim backing (C22), and compile (zero undefined refs/citations). This is the mechanical floor of the baseline.
+
+**Judgment panels (claims / citations / code per paper + synthesis C9 + completeness) are dispatched in PI-approved batches** — a whole-group panel (~13 papers × ~1.2M tokens) exceeds a single session's budget, so the baseline is built incrementally in dependency order (guardrail Paper 8 first).
+
+## [v5.11.12] - 2026-09-13
+
+**`/qa paper_61` DELTA-verification = DEFECTS, remediated. The paper's own mathematics and prose are CLEAN; both defects sat outside it.** Four dimensions over the seam scope (Paper 59 + Paper 61 + both syntheses), unseeded, tree frozen at dispatch. Deterministic layer 14/14. This is the confirming clean-delta the PI-ratified DoD requires before Paper 61's FULL run; the paper is unchanged since its 2026-09-08 remediation, so the delta verified that remediation held corpus-wide.
+
+### Dimension results
+
+| dimension | verdict |
+|---|---|
+| deterministic (14 gates) | PASS |
+| claims / prose (C3/C5/C6/C8) | **CLEAN-DELTA** — 0 defects; all 4 fixes-of-fixes from the 09-08 same-day delta hold; every Sp4 statement is monodromy-in-Sp4(Z)/Galois-in-Sp4(C); W0=pi^2/rho^2 [SYMBOLIC] derivation stands alone; 20+ honest-scope sentences all point the limiting direction |
+| code / test-backing (C1-C2, --slow) | **CLEAN-DELTA** — 75 passed / 0 skipped / 0 failed, reproduced twice; all four DoD branch criteria hold; the W0 [OPEN]->[SYMBOLIC] upgrade fire-tested (excludes W0=1); no restricted-evaluation false positive |
+| claim-impact | **DEFECTS** (1 NIT) |
+| external citations (C4) | **DEFECTS** (1 MATERIAL) |
+
+### The 09-08 remediation held
+
+All three REGISTERED retractions verified corpus-wide with no survivor: `Gal in Sp4(Z)` (now monodromy/Galois-correct in every paper, doc, test, driver, synthesis, and the paper_59.done.md goalpost that had certified it), "transcendence cancels in the determinant" (W0 now [SYMBOLIC]), and "every CM fibre" (all four previously-live loci including the self-reseeding memory file). Both C7 cross-paper edges (Paper 35/WH7, Paper 56 seam T-2) are non-stale.
+
+### The two defects, both outside the paper's prose, both remediated
+
+1. **Citations MATERIAL — Chowla-Selberg had no bibitem.** The CM-period Gamma-value attribution is made by name at three load-bearing loci (the abstract [MEASURED] claim, L117, L182 [MEASURED]) with no `\bibitem` and no `\cite` anywhere — the bibitem-free layer the C20 gate cannot see. The attribution is CORRECT. Added `chowla_selberg1967` (A. Selberg and S. Chowla, J. Reine Angew. Math. 227, 86 (1967), author order and details verified at de Gruyter/EUDML) and cited it at the two body loci. All 17 other bibitems were verified GROUNDED at source; graph balanced; every DoD-flagged distinction (K(1/2)/lemniscate, Sp4(Z)/(C), Broadhurst-Mellit determinant vs Broadhurst-Roberts quadratic) correct in the paper.
+
+2. **Claim-impact NIT — the retired K(1/2)=lemniscate naming survived in a tracked driver.** `debug/routeC_pslq_fit.py:6` labelled K(1/2)=varpi "the lemniscate constant" (the classical lemniscate constant is sqrt(2)*varpi, a different number). The paper fixed this in its own prose, but retired claim #6 had been given NO `check_retracted_terms.py` entry (a paper-prose-only fix), so it was never swept corpus-wide -- the locus-by-locus-remediation class. Fixed the comment AND added the missing C16 entry `p61-k12-is-lemniscate`, fire-tested both directions: it FIRES on the planted conflation and stays SILENT on every correct usage (the paper's sqrt2 distinction, the drivers' true-lemniscate definition, the done.md record, the lit-memo negatives). The exemption was tightened after a first version wrongly exempted the conflation via the `sqrt(2)` in a neighbouring disc-8-period definition.
+
+### Verdict and what remains
+
+**DEFECTS**, remediated. A delta that found defects is not a clean delta, so per the ratified DoD the FULL certifying run stays locked. The remaining surface is now three mechanical fixes (a bibitem+2 cites, a driver comment, a fire-tested gate entry); a confirming clean delta over them -- foldable into the group3 review -- then the FULL. **The paper itself passed claims and code cleanly**, so the distance to certification is citation-completeness and gate-hygiene, not a mathematical question.
+
+Pre-existing declared items surfaced for the FULL run (not delta regressions): the 64-digit PSLQ negative has no pytest (test-backed part is the narrower disc-4 wt<=2 negative); `test_paper59_diagonal_A` PSLQ leg has a decoy but no positive control; T2 digits 22-66 are quoted from a permanent artifact, not recomputed; `docs/claims_register.md` has no row for Papers 54-61.
+
+## [v5.11.11] - 2026-09-13
+
+**Paper 60 literal-registration pass -- FULL-run cert-blocker 1 partly discharged, partly reclassified, and it surfaced a finding.** Five declared-debt literals were MEASURED from tracked code (`debug/fullrun_measure_literals.py`) and registered under C21 with `\gvq` annotations: `p60_l2_inflation_hydrogenic` (1.19), `p60_l2_inflation_sturmian` (3.33), `p60_sw_cond_exponent` (1.85, window N=12..16; full-range 1.80, asymptote N^2), `p60_l2_overlap_exponent` (**1.71** -- the paper printed 1.70, corrected to the measured value), `p60_water_a1_exponent` (1.96, the raw `_water_A1` "N^1.96 here" value). C21 green, compile clean, registry self-test 18/18.
+
+**The finding:** three of the debt literals do NOT reproduce from the tracked test suite, which the earlier "correct; unregistered" label had hidden -- the Gaussian ratio exponents (tracked `_gaussian_metric` gives ratio-1.6 -> N^6.30 with κ~1.5e6 at N=16, not the paper's ~1e5, and ratio-3 -> N^1.54 not 1.4; the paper's own caveat already calls these "illustrative rather than a fixed factor"), the water N^1.97 sec:molecular probe (a different three-center-SW construction from `_water_A1`), and the `tab:resource` row (`[RESOURCE MODEL]`, O(1) cancels in ratios). These need their drivers promoted to `tests/` or reclassification, deferred to the group2 review. **Sec.15 rule 3 honoured: every registered value was measured; the three that could not be measured from tracked code were NOT registered rather than guessed.** Paper 60 full cert deferred to the group2 review (PI direction).
+
+## [v5.11.10] - 2026-09-13
+
+**`/qa paper_60` FULL certifying run = FAIL, PI-invoked. Five of six dimensions PASS with ZERO mathematical or content defects; the FAIL is the completeness dimension's cert-blockers, two of which are remediated here.** Whole-paper, unseeded, tree frozen at dispatch (no edit until all five reviewers returned — DELTA #2's moving-target defect did not recur).
+
+### Dimension results
+
+| dimension | verdict |
+|---|---|
+| deterministic (14 gates) | PASS |
+| code / test-backing (C1-C2) | **PASS** — 136/136 Paper-60 tests pass with `--slow` (19+109+8), 0 fail/skip/error, C21 green; every load-bearing claim maps to a non-tautological test with anti-tautology / matched-set / restricted-evaluation legs; no keystone bug |
+| claims / prose (C3/C5/C6/C8) | **PASS** — every claim within its tier; all six QC-honesty branch criteria satisfied; ~17 honest-scope sentences all point the limiting direction; six withdrawn readings retracted in place. 1 SMALL |
+| external citations (C4) | **PASS** — all 49 bibitems resolve, graph balanced, 0 WRONG-ID/MISATTRIBUTED/OVERSTATED; rajchel2025 drift confirmed corrected |
+| synthesis faithfulness (C9, GATING) | **PASS** — all 8 checkpoints; no strengthened hedge, no stale value. 1 NIT |
+| completeness-critic | **FAIL** — zero undiscovered gaps, zero surviving authoritative stale echoes; FAIL on three self-declared cert-blockers |
+
+### Why FAIL, and what it is NOT
+
+The completeness dimension found **no hidden defect** — every abstract headline is test-backed, and no stale echo survives in any authoritative surface (paper, INDEX, synthesis, claims-register, code-architecture, the auto-loading memory, the walls register are all current). The FAIL is three unmet PRECONDITIONS for a clean certification:
+
+1. **The DoD's own literal-registration precondition is unmet.** Its declared-debt table lists ~7 load-bearing literals (Gaussian ratio N^6/N^1.4, water A_1 N^1.97, the tab:resource row, naive-L2 Q^3.33/Q^1.19, SW N^1.85 vs L2 N^1.70, H2+/H2 toy figures) marked "owed before the next FULL certifying run" -- and this is that run. They are all VERIFIED CORRECT (this run re-confirmed them) and the load-bearing ones carry TEST backing; they are C21-undelegated, not backing-less. That is the exact class that let a wrong `4.43` through on 2026-09-11. **Registered as its OWN careful pass (see below), not rushed at run-tail** -- this lineage's failures have come from batching number-edits.
+2. **The Sylvester-inertia variational bound (C8.16) had no standalone test.** REMEDIATED: `tests/test_paper60_scale_lock.py::test_c5_inertia_bound_and_root_by_root` now proves the algebraic identity `H(lam)+lam^2 S/2 = lam(lam I - M)` (1e-9), the inertia count `#{roots < -lam^2/2} == #{eig(M) > lam}` at five lam, and the k=0..3 root-by-root consequence. Fire-tested: a 0.7*I shift of M breaks the count. Matrix row 568 moved OPEN -> BACKED; the [INTERNAL THEOREM] tier is now test-backed, not just DoD-verified.
+3. **No clean delta preceded the run.** DELTA #1/#2/#3 all returned DEFECTS-remediated; the run was invoked ahead of the corpus's own gate (PI's call). A clean delta over the small remediation surface remains the last step to a PASS-able state.
+
+### Remediated this run (the reviewers' findings)
+
+- **F1 (claims SMALL):** the abstract tagged the third-lever sentence [MEASURED], but its closing clause "a direct block-encoding ... takes the penalty from n^3 to n" is a resource-model result (circuit cited, not compiled). Split: the clause is now [RESOURCE MODEL] with "circulant-embedded circuit is analysed, not compiled".
+- **C9 NIT (synthesis):** "eigenproblem whose eigenvalues are the energies" -> "whose eigenvalues are the scaling parameters p_kappa = sqrt(-2E), from which the energies follow directly".
+- **C4 NIT (citations):** the Monkhorst-Jeziorski bibitem title read "No linear dependence OR MANY-center..."; corrected to the published "...AND MULTI-center..." (verified verbatim at the author's own publication list; DOI resolved regardless).
+
+### The two citation residuals the reviewer routed to the PM -- both closed
+
+- `gslw2019` Theorem 73 / Corollary 67 numbers: verified at secondary source in DELTA #3 (Thm 73 = eigenvalue-transformation lower bound; Cor 67 = x^{-c} polynomial approximation).
+- Monkhorst-Jeziorski abstract quotes: the paywalled verbatim strings remain unread, but the paper's characterization is corroborated by the paper's OWN title ("No Linear Dependence and Multi-Center Integral Problems in Momentum Space Quantum Chemistry"). Substance grounded; the paper fences the strings as source-verified.
+
+### The remaining gating task, itemized (register before a re-run can PASS)
+
+Each value is VERIFIED CORRECT; the task is to give each a C21 key (or C17 family) with measured/cited provenance and a `\gvq` annotation, per Sec.15 rule 3. Sources identified so the pass is turnkey:
+
+| literal | locus | source to cite/measure |
+|---|---|---|
+| Q^1.19 / Q^3.33 (naive L2 inflation) | eq:blowup L204/206 | `tests/test_sturmian_l2_encoding.py` (regression-pinned exponents) |
+| SW N^1.85 / L2 N^1.70 | L829 | the SW-better-conditioned test in `test_paper60_sturmian.py` |
+| water A_1 N^1.97 | L1126 | the water-probe / `_water_A1` route in `test_paper60_preconditioner.py` |
+| H2+ 1.3% / H2 -1.09 vs exact -1.174 | L1151 / L1522 | `..._h2plus_isoenergetic_binds`, `..._h2_ci_dissociates_and_binds` |
+| Gaussian ratio N^6 / N^1.4 | L1190-1191 | **verify durable backing first** -- may be debug/-only; do not register a value whose only provenance is prunable |
+| tab:resource d_inv/kappa row | tab:resource | RESOURCE MODEL (O(1) cancels in ratios per caption); decide C17-family vs literal-with-caption |
+
+### Verdict
+
+**FAIL.** Content and mathematics are clean across five dimensions; the run fails on declared preconditions. Two cert-blockers closed this session (the inertia test; the three NITs). Two remain: the literal registration (itemized above, to be done as its own careful pass) and a clean delta over the remediation. Certification is one focused registration pass plus one clean delta away -- not a mathematical question.
+
+## [v5.11.9] - 2026-09-13
+
+**`/qa paper_60` DELTA-verification #3 = DEFECTS, remediated. The cleanest run of this lineage: two of four dimensions CLEAN, zero LARGE, zero mathematical, and all three defects were one claim not reaching two summary surfaces.** Four dimensions over the claim-impact set, unseeded. Deterministic layer 14/14.
+
+### Two dimensions came back CLEAN — a first for this paper
+
+- **External citations: CLEAN-DELTA.** All six v5.11.8 citation edits verified at primary source, none over-corrected: the withdrawn Shibuya-Wulfman quotation (1965 abstract still unreachable, verbatim string gone, paraphrase claims only what Wulfman-Takahata 1967 and Red-Weatherford 2004 independently establish -- both re-confirmed at source, the 1967 reference's abstract naming E4/R5/O(4,1) exactly); the added `grochenig_leinert2006` inverse-closedness cite; the completed `lowdin1950` title and `rokob2008` venue; the `gslw2019` arXiv-numbering note; the KMS smoothness-hypothesis pointer.
+- **Code/test-backing: CLEAN-DELTA** (narrow scope, no full-suite re-run). All three post-DELTA-#2 guards pass and fire on the specific retired value each names: the graded-mesh value guard rejects both 1.29e-7 and 1.5676e-7; its two-sided convergence leg rejects a 0.5x collapse and accepts a 1.010x plateau; the uniform-banding guard rejects the 0.98 exponent. The two c=3 docstrings tell one consistent story (converged value on the graded mesh; order-only on the still-climbing uniform ladder), and claim-matrix coverage is intact.
+
+### The three defects, all remediated, all the same claim
+
+The v5.11.8 water-control fix (the null-direction rotation is load-bearing; the preconditioner alone does not suffice) reached the paper body, abstract, conclusion and synthesis -- but not two summary surfaces, and left a stale number inside the corrected body sentence.
+
+1. **`papers/group2_quantum_chemistry/paper_60...tex` L1338 (claims dimension) -- a stale number inside the corrected sentence.** The rewrite fixed the exponent to N^1.94 but kept the displayed low value `2766`, which is the N=48 INTERIOR point, not the low endpoint; `2766 -> 42008` over the table's N=12..192 reproduces the discredited N^0.98. **The claims reviewer proposed 729.2 as the fix -- that was itself wrong**, the N=24 value from a different measurement grid. Measured at the paper's own N grid (N=12/48/192): uniform 194.0 / 2766.0 / 42007.7, so the low endpoint is 194 and the exponent N^1.94 (raw N^1.96 on this grid). Corrected to `194 -> 42008 ... N^1.94`, with the interior 2766 kept as a named aside. **Verifying the reviewer's number before printing it prevented the sixth wrong value on this one claim.**
+2. **`papers/INDEX.md` L88 (claim-impact) -- an omitted requirement.** The status map said the preconditioner reaches water's A_1 block with no mention of the rotation. C16 had been widened to this file and caught its token-matchable defects, but an OMITTED requirement is an absence, not a token. Caveat added.
+3. **`docs/walls/register.md` L111 (claim-impact) -- a stale control argument.** The operative dispatch register cited the BLIND uniform control (`blockdiag(P,P)`, "leaves the growth intact, so the rotation is doing the work") as the discriminating evidence -- the exact defect the paper carried before v5.11.8. That control commutes with the rotation (3e-13) and cannot discriminate it. Replaced with the valid selective-unrotated control (N^3.79, 106x worse than untreated).
+
+### The category nobody had nominated
+
+**Paraphrase-level requirement-omission surviving token gates in already-nominated files.** Both claim-impact defects sit in files C16 was widened to in v5.11.8. The token gate fixed their string-matchable staleness (the "Proposition D" label, the "6.44" literal) but by construction cannot see an omitted requirement or a stale argument stated in the file's own words. The lesson, now demonstrated twice: **when C16 is widened to a file for a token, the claim-impact reviewer must RE-READ that file's Paper-60 sentence for direction and omission, not trust the token gate.**
+
+### The process win, stated because last round's process was the finding
+
+DELTA #2's worst defect was the target moving under the reviewers five times. This round the tree was frozen at dispatch and **no edit was made until all four reviewers returned** -- so every verdict covers the state it was formed on. That defect did not recur.
+
+### The trajectory
+
+DELTA #1: 2 LARGE + many SMALL, two leaked categories. DELTA #2: 0 LARGE but a remediation that never landed, a false plateau, five corrections to one number. DELTA #3: 0 LARGE, 0 mathematical, 3 SMALL all on one claim, two dimensions fully clean, and the one reviewer-proposed number that was wrong was caught before it shipped. The defects are converging toward mop-up of a single fix. **This is still DEFECTS, not a clean delta** -- the three fixes are summary-surface edits whose own cleanliness a fourth delta would confirm -- so the certifying FULL run stays locked. But the distance to a clean delta is now three summary edits, not a mathematical question.
+
+### Verdict
+
+**DEFECTS.** Remediated. A delta cannot return PASS; a clean delta remains the precondition for the certifying FULL run.
+
+## [v5.11.8] - 2026-09-13
+
+**`/qa paper_60` DELTA-verification #2 = DEFECTS, remediated. Still not a clean delta, so the certifying FULL run stays locked.** Four dimensions over the claim-impact set, unseeded. Deterministic layer **14/14**. **Zero mathematical defects in any dimension**, and every external theorem re-derived to its source text. Three findings are the PM's own from the previous round.
+
+### The remediation that was recorded as done and was not in the corpus
+
+`debug/delta_fix_04_last_three.py` accumulates edits in memory and `return 2`s from inside its edit loop on a single stale anchor -- **before** its write loop. So one bad anchor discards every edit in the script, silently, while the run reports a failure nobody reads as total. Three fixes written 2026-09-13 (the walls register's "Proposition D" at three loci; the accuracy-floor bracket in the synthesis and the claims register) **were never in the corpus**, and `CHANGELOG.md` v5.11.7 recorded them as remediated. Its sibling `delta_fix_03c_remaining.py` documents the identical failure one step earlier, in its own docstring.
+
+Found by the claim-impact reviewer, which checked whether the fixes were *present* rather than whether they had been *written*. Rerun: all five landed. **Every applier written since writes first and reports misses**, so a miss can no longer discard a match.
+
+### The control that could not test what it was named after
+
+Paper 60 claimed *"a control confirms that it is the rotation that bounds the growth ... the naive `blockdiag(P,P)` without it leaves the growth unbounded (2766 -> 42008 ... an exponent of 0.98, halved from the raw column's 1.96)."* Both halves are wrong, and the repo already knew the first:
+
+* `blockdiag(P,P)` is `I2 (x) tri(1,2,1)` and the rotation is `V (x) I`. **They commute** -- measured to `3e-13` at `N=192` -- so that control returns the identical spectrum in either frame and is blind to the rotation by construction. The 2026-09-12 FULL run had recorded exactly this, and the fix reached the TEST DOCSTRING and not the paper.
+* The exponent is **not** halved. Measured:
+
+| column | N=24 | N=192 | exponent |
+|---|--:|--:|--:|
+| raw | 698.8 | 41 700 | N^1.967 |
+| uniform `blockdiag(P,P)` | 729.2 | 42 008 | N^1.950 |
+| selective `blockdiag(P,I)`, unrotated | 1 690 | 4 437 000 | N^3.791 |
+| selective `blockdiag(P,I)`, rotated | 42.4 | 44.1 | N^0.018 |
+
+Banding alone does essentially nothing. **The discriminating control is the selective preconditioner in the UNROTATED frame, and it ends 106x WORSE than leaving the metric untreated.** The conclusion the paragraph wanted is true and the real evidence is far stronger than what was printed. Rewritten from measurement, and the caveat now travels with the claim to the abstract, the conclusion and the synthesis -- where the gain had been stated three times with no control at all.
+
+### The plateau that was not one -- third grid trap of this arc, and mine
+
+v5.11.7 reverted a re-tiering of the box rule and restored "VINDICATED", on the strength of a `0.99x` step at `npts=250000`. **The code reviewer sampled `npts=400000` -- a point nobody had taken -- and the column climbs straight past it.** Independently re-measured here, digit for digit:
+
+| npts | c=3 relative | step |
+|--:|--:|--:|
+| 100 000 | 1.55917e-07 | -- |
+| 250 000 | 1.56764e-07 | 1.005x |
+| 400 000 | 1.93056e-07 | 1.232x |
+| 600 000 | 2.05980e-07 | 1.067x |
+
+**The v5.11.7 table already said so.** Its last row rises 31% over the row marked `0.99x`, printed as a "0.76x step" directly beneath the word PLATEAU, unreconciled. The flat step is a **crossing**: the quantity is relative to a `c=5` box whose own truncation (`7.69e-08` absolute, against `c=3`'s `1.29e-07`) is comparable and partially cancels there.
+
+**The conclusion survives and the value IS determined.** App. A's `~1e-7` is vindicated at **2.15e-07**. Both meshes converge and they AGREE: uniform reaches `2.14665e-07` at 1.5M points (step 1.010), graded `r=Rt^2` reaches `2.15582e-07` at 240k (step 1.010), the graded absolute route gives `2.16319e-07`, and the two meshes' c=5 ABSOLUTE values agree to `7.5e-10`. *(Corrected 2026-09-13, the fourth reading of this one number: an earlier version of this paragraph said the meshes "differ by ~1.7x, so no converged value should be quoted". That came from referencing c=3 against a c=12 box at the SAME point count -- 4x coarser spacing than the quantity being resolved -- and the resulting ratio is not even monotone in npts: `2.86e-07 / 1.29e-07 / 2.02e-07` at 250k / 600k / 1.5M. The ladder was stopped at 600k while still climbing at 1.067x, and "still moving" was read as "cannot be determined".)* The guard built on the plateau pinned `(100000, 250000)`, **the only adjacent pair in the ladder under a 10% window** (0.54%, 23.15%, 6.69%), and the reviewer fired it by planting MORE resolution -- a change with no physics in it, verbatim the defect `delta_fix_05` was written to remove from the guard before it. It is now replaced by an order-plus-non-collapse leg at the resolutions it can afford, plus a graded-mesh leg that reaches and pins 2.15e-07 at 240k -- converged, and ~6x cheaper than the uniform route. **Four mechanisms have now been offered for this number and only the paper's own claim survived all four.** **UPGRADE: App. A now states the value, not the order** -- `2.15`--`2.16e-07`, with each form's spread named (relative to the c=5 reference, 0.43%; absolute against a well-resolved c=12 reference, 0.08%). *A first attempt at that upgrade quoted the 0.08% figure against the RELATIVE form, claiming a third digit it does not support -- the fifth correction to this number in a day, and the second introduced by the correction of the one before it. The lesson is to state which quantity a number refers to, every time, rather than the number alone.*
+
+**The lesson is the PM's, and it is the mirror of the previous one:** v5.11.7 recorded accepting a reviewer's under-sampled finding; this round recorded publishing an under-sampled finding of its own, in the opposite direction, in the correction of that correction.
+
+### Two instrument defects, both of which were hiding live findings
+
+1. **The C16 entries added 2026-09-12 shipped with a NARROWER `files` list than the older Paper-60 entries beside them** -- missing `docs/claims_register.md`, `docs/code_architecture.md`, `docs/topic_to_paper_lookup.md`, `papers/INDEX.md` and `docs/qa/paper_60.done.md`. That is why the walls register's "Proposition D" and the single-value floor survived two runs. Widening the six took C16 from **PASS to FAIL with 7 live loci**, all now closed (two were legitimate withdrawal records missing the standardized token; one was genuinely stale). The widened entry is proven to discriminate: planting the retired wording FAILS, restoring PASSES. Correctly-flagged occurrences went 36 -> 40.
+2. **`generate_table --check` compared only the `value` field**, so the prior-art credit DELTA #1 found missing from the generator could be deleted again from `method`/`provenance` with the gate green. **A guard added after a defect that cannot see the field the defect lived in is not guarding it.** Widened to attribution fields and fire-tested by deleting that exact credit: 1 drift detected, 0 when restored. `render_markdown` also gained the `provenance` branch it never had.
+
+### Two affected CATEGORIES nobody has nominated
+
+DELTA #1's two LARGE findings sat outside the nominated set by category. So do these.
+
+1. **The public web-rendering layer** (`viz/public/papers/*.html`, `index.html`, `sitemap.xml`) -- the outward-facing sibling of DELTA #1's generated-artifact LARGE. The group2 synthesis renders an abstract saying *"the nine Group 2 papers"* where the source says twelve, and **Papers 58, 59, 60 and 61 have no public page at all**, so not one of the nine changed claims has any public rendering. Built from a stale `debug/data/zenodo_manifest.json`. **DECLARED GAP, not fixed:** rebuilding that manifest touches the Zenodo/DOI distribution surface, which is PI-gated.
+2. **`docs/walls/register.md` is unreachable by every gate** -- the string `docs/walls` appears nowhere in `debug/qa/` -- yet it carries an operative dispatch rule. Same "operative instructions outside the gate" shape as the recall layer that was DELTA #1's second LARGE, but inside the repo. Closed by the widening above.
+
+### Citations: 0 LARGE, and one quotation withdrawn
+
+Both nominated fixes verified correct at the primary source: **Theorem 73 of `gslw2019` IS "Lower bound for eigenvalue transformation"** and bounds applications of the block-encoding, and GSLW themselves pair it with Corollary 67 in their own proof paragraph -- so the chain is the source's, not ours. The Bernstein removal is complete. **`wulfman_takahata1967` is real** (JCP 47(2), 488-498) and its abstract names E4, R5, O(4,1) verbatim -- the FULL run's drop recommendation was wrong and overturning it was right, now confirmed a second time independently.
+
+Fixed: the Bernstein removal left the inverse-closedness mechanism **asserted with no cite**, while `grochenig_leinert2006` -- which is exactly that mechanism -- sat in the bibliography never cited; `lowdin1950` carried no title; `rokob2008`'s venue was unresolvable; the `gslw2019` bibitem leads with the STOC abridgement while the theorem numbers are the arXiv version's. **Withdrawn:** a verbatim quotation attributed to Shibuya-Wulfman's 1965 abstract. The bibliographic record is exact, but the abstract is paywalled and three independent retrievals failed to reach the quoted string -- so it is now paraphrased and marked unverified rather than asserted. The prior-art surrender is unaffected: it rests on three counts and the other two were verified at source.
+
+### The rest
+
+**Claims (7 further):** the He chain's *"every rung at the same `n_max=10` family"* is false for the leading `1s^2` single configuration; *"the largest computed basis `K=452`"* is contradicted by the paper's own `K=514` loci **and by the registry's own alias** (it is the largest basis where BOTH roots were computed); the previous round's completeness fix left a clause with no antecedent pointing the wrong way; the synthesis dropped the `s`-sector scope the paper carries at all three of its own loci; and "derived" -- the prohibited word for the conditioning law -- survived at two loci above the `[PRIOR ART]` paragraph.
+
+**Claim-impact (4 further):** `papers/INDEX.md` quoted the floor as `6.4` mHa, **below the bracket's own lower endpoint**, and still described molecular conditioning as *"grows with basis"*, the pre-breach reading; the `eq:W_diagonal` row stated a `5e-11` entrywise check as the claim's evidence where the DoD says flatly it is an implementation check and not the evidence (an UNDERCLAIM); and the **variational bound proved by Sylvester inertia has no claim-matrix row at all** though every excited-state number in Sec.4 rests on it -- flagged in DELTA #1 and now a declared coverage gap raised to the PI.
+
+**Code (4 further):** a debt this delta had PAID was still recorded as owed; the global-fit guard pinned a value and not the window it names (K=35-220 -> 0.8865, K=84-220 -> 0.8995, K=56-165 -> 0.8885 all passed a +-0.01 band, while grid and box variants move it by <1e-4 -- tightened to +-0.004); the box-rule row omitted the very test backing its own note; and App. A's exponent-convergence sentence has no test, now declared.
+
+### The PM's own process defect
+
+**The target moved under the reviewers.** The code reviewer finished its mandated run at 08:25; the PM then applied six appliers between 08:30 and 08:43, rewriting the paper, five documents, the synthesis and a test file that gained a 13th test the run had never collected. **A DELTA verdict formed on a moving tree certifies a state that no longer exists.** The `/qa` protocol already says to snapshot into a worktree when the PM will keep editing, and the PM did not. The reviewer caught it itself, re-ran, and independently reproduced every new number -- raw `N^1.9666`, uniform `N^1.9497`, selective `N^3.7913`, `106.4x` at `N=192` -- so the content is sound and the process is the finding. **Standing rule for the next run: snapshot before dispatch, or do not remediate until every reviewer has returned.**
+
+### What the delta found nothing wrong with
+
+Every closed form, table and exponent recomputed by an independent route matched. The generator is idempotent -- 66/66 entries, 0 field diffs, `render_markdown` byte-identical. The two thresholds tightened in the previous round were **correct and not overshot**: across four grid/box variants the `T'` fit reads 1.0727 every time (spread `1e-4` against an 0.08-wide bracket) and the global fit 0.8932 every time. The commutation-pin docstring's honesty rewrite is accurate, and the discrimination it points to genuinely lives in the selective control. 95 tests pass with `--slow`; the deterministic layer is 14/14.
+
+### Verdict
+
+**DEFECTS.** A delta cannot return PASS by construction, and this one was not clean. **The certifying FULL run remains locked** until a delta comes back clean.
+
+## [v5.11.7] - 2026-09-13
+
+**`/qa paper_60` DELTA-verification = DEFECTS, remediated. NOT a clean delta, so the certifying FULL run stays locked.** Four dimensions over the claim-impact set (not the byte diff), unseeded. Deterministic layer 14/14. **172 tests pass; zero mathematical defects in any dimension.**
+
+### Scope, and why two LARGE findings sat outside it
+
+Nominated from the three deterministic sources: the `\cite` graph (2 documents), a topical-vocabulary sweep (7 further papers), and the declared `rests on:` edges (8 matrix rows). **Both LARGE findings landed outside that set, and by CATEGORY rather than accident:**
+
+1. **The generated-artifact layer.** The 2026-09-11 Kac-Murdock-Szego credit was applied to `docs/certified_reference_values.md` and never to the generator. Measured: 1 mention in the generated doc, **0 in `entries_anchors.py`, 0 in the distributed JSON**. So the reference data this corpus offers outward already presented a 1953 theorem as an internal finding, and the next `generate_table` would have silently deleted the human-readable credit. Fixed in the generator and regenerated; the credit now survives in all three layers by construction. **Rule for future sweeps: nominate the GENERATOR whenever you nominate a generated doc.**
+2. **The recall layer.** `memory/avery_method_and_prior_art_gaps.md` auto-loads into every session and carried four pre-2026-09-12 readings -- one as an OPERATIVE INSTRUCTION ("do claim the identification") folding in the translation reading that is prior art on three counts; the WITHDRAWN frames reading asserted as live paper content; the demoted "Proposition D" label; and `west_ruedenberg2013` described as "the one named source that uses an SVD/principal-angle construction", which its own abstract contradicts. This layer sits outside the repo and outside C16/C21/C22, and the same file had been self-caught for this exact class one day earlier.
+
+### The over-correction, and then the over-correction of the correction
+
+**The 2026-09-12 chain fix added "values are truncated, not rounded". That is false**, provably without measuring anything: the 1s^2 rung is exactly `-(27/16)^2 = -2.84765625`, which truncates to `-2.8476` while the paper prints `-2.8477`. All four rungs round. The convention was read off the old THREE-decimal display and carried over to four. Corrected, registry convention text with it.
+
+**Then the reverse.** The code reviewer filed the c=3 box-rule column as a quadrature floor that never converges, making the appendix's `~1e-7` only a bound. Its three tabulated points showed 12-13x falls per resolution step; the PM verified those points, agreed, and re-tiered the claim matrix and the test docstring to "consistent but not confirmed". **The reviewer then extended its own ladder two points further, found a plateau, and withdrew the finding.** Independently re-measured here, full ladder at `n_max=8`:
+
+| npts | c=1 | c=2 | c=3 | step |
+|--:|--:|--:|--:|--:|
+| 12 000 | 3.6130e-02 | 6.5629e-04 | 2.5709e-05 | -- |
+| 40 000 | 3.6166e-02 | 6.8727e-04 | 2.1107e-06 | 12.18x |
+| 100 000 | 3.6169e-02 | 6.8984e-04 | 1.5592e-07 | 13.54x |
+| 250 000 | 3.6170e-02 | 6.9025e-04 | 1.5676e-07 | **0.99x** |
+| 600 000 | 3.6170e-02 | 6.9031e-04 | 2.0598e-07 | 0.76x |
+
+~~It PLATEAUS.~~ **CORRECTED 2026-09-13 (DELTA #2): IT DOES NOT PLATEAU.** A reviewer sampled `npts=400000`, a point nobody had taken, and the column climbs straight past the flat spot -- `1.55917e-07 / 1.56764e-07 / 1.93056e-07 / 2.05980e-07` at 100k/250k/400k/600k -- and an independent PM ladder reproduced that digit for digit. **The table above already said so and was not read:** its last row rises 31% over the row marked `0.99x`, printed as a "0.76x step" beneath the word PLATEAU. The `1.005x` step is a CROSSING, not a plateau -- this quantity is relative to a `c=5` box whose own truncation (7.69e-08 absolute, against `c=3`'s 1.29e-07) is comparable and partially cancels there. **What survives is the conclusion, and it is the part that mattered:** App. A's `~1e-7` is vindicated, at a converged **2.15e-07** -- uniform `2.14665e-07` at 1.5M, graded `2.15582e-07` at 240k, agreeing to 0.43% -- and the 2026-09-13 revert was right. *(Corrected 2026-09-13: an earlier version of this line said the two discretizations differ by ~1.7x so no converged value should be quoted. They do not differ; the 1.29e-07 was a c=12 reference at the same point count as the c=3 box it referenced, hence 4x coarser, and its ratio is not monotone in npts.)* The replacement guard asserted a plateau over the only adjacent pair in the ladder that satisfies it, and a reviewer fired it by planting MORE resolution; it is now replaced again by one asserting the order and the non-collapse. **Third grid-convergence trap of this arc, second to reach the record, and this one was read too SHORT in the opposite direction from the first.**
+
+**The lesson is the PM's:** a measurement-based finding was accepted on the reviewer's sample instead of extending the sample. Third grid-convergence trap of this arc, and the only one that reached the record.
+
+### The rest
+
+**Claims (7 SMALL):** the s-only sector label reached the conclusion and not the abstract or body -- the same silent-basis-mix defect the chain fix was written to close, one locus away; the third-lever scope omitted `s`-sector at two loci ("s-sector" occurs exactly ONCE in the paper); "perfectly-conditioned gerade sector" survived at its own locus; the water-control sentence contradicted itself (clause A says preconditioning is not doing the work, clause B measures it halving the exponent 1.96 -> 0.98 -- the rotation supplies BOUNDEDNESS); "complete set at one scale" unqualified inside a molecular comparison; the criteria file froze two RETIRED values as goalposts.
+
+**Citations (2 SMALL):** "Bernstein" survived uncited at one locus, naming a mechanism the cited source does not use; and Theorem 73 was described as constraining polynomial approximation when it lower-bounds the block-encoding QUERY COUNT. Both corrected conservatively. **All three new bibitems CONFIRMED at source, and the FULL run's recommendation to drop the Wulfman-Takahata prior-art count was wrong** -- the work exists and its abstract names E4, R5, O(4,1) verbatim. The three-count concession is fully supported.
+
+**Claim-impact (5 SMALL beyond the two LARGE):** the walls register stated the breach scope as "M = 2, 3", covering the collinear case the paper declines -- and BeH2 and CO2 are collinear and in this corpus's own library; the same register still named a 1954 result as our proposition; `code_architecture.md` used "derived", the word the owning module's docstring forbids; and the synthesis and claims register quoted the accuracy floor as a single value where the paper says the BRACKET is what it quotes -- with 6.4 sitting BELOW the bracket's own lower endpoint. Found independently by two reviewers.
+
+**Code (1 MATERIAL, 6 NITs):** `tests/test_paper60_full_shell_family.py` was cited by ZERO claim-matrix rows -- the 2026-09-12 remediation closed the test leg of "no test, no registry key, no C17 family" and left the registration leg open, so deleting the file would have left every gate green (C22 checks rows->tests, never tests->rows). Row added. NITs cleared: a residual `x == x` that had been supplemented rather than replaced; a commutation pin whose docstring claimed protection it cannot provide; a superlinear guard that `fit > 1.02` would let 1.5 through, now bracketed, plus the paper's 0.893 global fit asserted for the first time.
+
+### What the delta found nothing wrong with
+
+158 test executions across five orderings, 0 failures. 8 of 8 guards fired. Both replaced guards genuinely discriminate -- the null direction is specific, not "any rotation": sweeping the angle, only 1 of 200 random angles reaches the positive test's bound. Every closed form, table and exponent recomputed by an independent route matched, `theta2_band_matrix` by two routes neither of which is the in-repo anchor's trapezoid. The `1e-300` clamp in `generalized_sigma_max` never engages. The per-state threshold sits 3.5x below the true separation (1.764% against a 0.5% threshold) and infinitely above an exactly-zero noise floor. *(Corrected 2026-09-13: this said 4.6x, which is the margin at a different, K=100 configuration, not at the one the test runs -- 3.5x at the test's own configuration.)*
+
+### Verdict
+
+**DEFECTS.** A delta cannot return PASS by construction, and this one was not clean, so **the certifying FULL run remains locked** until a delta comes back clean.
+
+## [v5.11.6] - 2026-09-12
+
+**The owed items from the `/qa paper_60` FULL run, cleared -- and the recheck found one more wrong number.** PI-directed.
+
+### The recheck found a second stale rung, and a mixed-basis chain
+
+The FULL run confirmed only the K=164 endpoint of the He convergence chain was stale. The other two rungs were flagged as candidates. Recomputed on a converged grid (box 500, 40 000 points), all four at a common `n_max = 10`:
+
+| rung | l_max | K | E (Ha) | paper printed |
+|:--|--:|--:|--:|:--|
+| 1s^2 | - | 1 | -2.847651 | -2.847 OK |
+| s | 0 | 55 | **-2.874468** | **-2.873 WRONG** |
+| +p | 1 | 100 | -2.894672 | -2.894 OK |
+| spdf | 3 | 164 | -2.896432 | -2.896 OK (fixed earlier) |
+
+The printed `-2.873` is the **n_max = 4 (K=10)** value, so **the chain silently mixed basis sizes** -- against this paper's own branch criterion that every quantity name its basis-growth family. Corrected, all rungs now carry their `K`, the common `n_max` is stated, the truncation convention is declared, and the s value is **registered** (`p60_he_chain_s_k55`). *Grid note worth keeping:* an apparent box drift (-2.8744 -> -2.8739 over boxes 300..1200) is a GRID artifact -- at 40 000 points the value is stable to 2e-5 across the same boxes. Measuring box sensitivity at fixed, insufficient resolution would have produced a third wrong "correction".
+
+### The full-shell family: measured, corrected, and now tested
+
+The abstract's "substantive finding" had **no test, no registry key and no C17 family**. Re-measured (n = 3..10): `||T'||_1 ~ K^1.0745` confirmed superlinear (local slopes 1.057-1.076), total exponent rising 0.849 -> 0.911 and never reaching 1. **The window label was wrong**: `0.867` is the K = 35 -> 56 rung and lies OUTSIDE the stated K=56--220 window, whose first interior slope is `0.879` (global fit `0.893`). Prose corrected; new `tests/test_paper60_full_shell_family.py` (3 tests, slow) asserts the superlinear block, the rising-but-bounded total, and the endpoint windows. Both new guards fire-tested.
+
+### Attributions closed -- and the "missing" reference existed
+
+Three verified bibitems added (`wulfman_takahata1967`, `red_weatherford2004`, `goscinski2002`), each checked at source. Two notes:
+
+- The citation reviewer had reported Wulfman & Takahata as **unlocatable after three searches**, recommending the paper drop that prior-art count and re-price its novelty concession from three to two. **The work exists** (*J. Chem. Phys.* **47**(2), 488-498 (1967)) and its abstract names the Lie algebras of E4, R5 and O(4,1) exactly as attributed. The concession stands at three. The paper also had **Red and Weatherford's author order reversed**.
+- The **"Bernstein floor" reframes rather than resolves**: its published statement was already in this paper's bibliography as `gslw2019` Theorem 73 (their Corollary 67 covers `x^{-c}` for every `c > 0`, so `c = 1/2` is included, and states the `delta` dependence is optimal *by* Theorem 73). So the fix was a pinpoint cite, not a new reference. The dangling back-reference was separate and real: "quoted above" had no antecedent, the only other occurrence being below it.
+
+### Instrument fix: the staleness banner measured one file of two
+
+`check_cert_staleness.py` globbed only the paper for single-paper targets, while the trunk and group branches both add their synthesis. C9 is a GATING dimension, so **every single-paper certification on record under-reported drift**. Fixed; `paper_60` now reports 2 changed files where it reported 1.
+
+### The durable half: a reading rule, not another pattern
+
+New **Summary-Surface Reading Rule** in CLAUDE.md Sec. 9. When a claim changes, reread the abstract, conclusion, Scope paragraphs and Acknowledgments in the same edit; read the whole paper once per session that touches claims; a paper's synthesis moves with the paper.
+
+*Why a reading rule.* The corpus has three mechanisms for stale claims -- the C16 phrase registry, `cited_by` dependents, and the Sec. 13.8 `rests on:` edges -- and **all three are document-granular**. Every defect the FULL run found was **locus-granular, inside one file**, so `cited_by` correctly reported no dependents because there were none; and no phrase registry can catch a paraphrase, which is what a summary is by construction.
+
+*Why it is affordable, measured:* abstract + conclusion ~6.2k tokens, whole paper ~29.5k, against ~1.5M for the review pass that found these. **Reading the paper costs about 2% of reviewing it.** Honest limit recorded in the rule itself: roughly half that run's findings were in summary surfaces; the rest were body-text self-contradictions, which are a different failure caught by the reviewers' internal-consistency mandate. The phrase registries stay as a backstop.
+
+### A self-inflicted defect, caught in regression
+
+The new full-shell test called `SV.set_grid` with **no restoring fixture**, so it leaked a module global and broke `test_paper60_split_is_box_sensitive_and_ordering_is_not` -- a test that deliberately pins a box artifact and therefore reads the global it is handed. Passed alone, failed in suite. Fixed with the same fixture the resource-ladder file uses. Worth recording because it is the same class this whole arc is about: a change whose effect on its neighbours was not checked.
+
+### Gates
+
+Deterministic layer 14/14 in scope `paper_60`; group2 compiles; 141 tests pass with `--slow`.
+
+## [v5.11.5] - 2026-09-12
+
+**`/qa paper_60` FULL, PI-invoked = FAIL, remediated. NOT certified.** Six dimensions, unseeded, against criteria frozen with PI approval after extending the C8 headline list to cover v5.11.0-v5.11.4 (thirteen new headlines, 15-27; adding claims to be checked, no goalpost relaxed). Deterministic layer 14/14. **Zero mathematical defects in any dimension.**
+
+### The asymmetry, again, and sharper than usual
+
+Both code reviewers rebuilt the pipelines on independent routes. **Every published converged constant reproduced** -- the atomic exponents to 4-5 decimals including all seven falling local slopes, the two encoding exponents at three box sizes, the conditioning columns, the ratio-symbol sup, the water columns, the M-centre orders (by a symbolic Newton polygon, *stronger* than the test asserts), the chirp constant and phase by an independent mpmath route, the gerade constant to 12 digits. All 46 bibitems resolve at source. Twenty honest-scope sentences checked for direction; none inverted.
+
+**Every defect was staleness, scoping, or a guard that does not discriminate** -- and one root cause: each re-tiering of the last two days reached the body paragraph owning the claim and missed the abstract, the conclusion, the scope paragraph, the module docstring and the synthesis. The Sec. 9 dependents rule cannot fire on this, because the stale citers are *inside the same file* as the corrected owner.
+
+### The five that mattered
+
+1. **A wrong number in the abstract.** The He chain endpoint read `-2.897` at K=164; the registry's own alias gives `-2.8964`. Confirmed three ways -- the alias, and the paper's own `eq:no_selection` interlacing applied to its own K=244 value, which forces `E(164) >= -2.896667` and which `-2.897` violates. A retired 60-bohr value, unregistered and therefore invisible to C21, sitting under a paragraph certifying the section converged. Fixed at both loci and **registered** (`p60_he_chain_spdf_k164`). **OWED:** the two earlier rungs are unverified and are candidates for the same defect.
+2. **Abstract and conclusion contradicted the body** on the newest headline, still confining the molecular lever to the case v5.11.0 breached, and still calling the gerade sector "perfectly conditioned" against `tab:resource`'s own row. Rewritten; the closing verdict now reads removable-on-conditioning, capped-on-locality, structurally-closed-on-sparsity.
+3. **The pre-registered load-bearing control was blind.** `blockdiag(T,T)` is `I2 (x) T` and the rotation is `V (x) I`: they COMMUTE, so rotated and unrotated frames give identical spectra (`||PQ-QP|| = 0`, verified). Planting the rotation into it did not fire. Replaced by the genuinely discriminating counterfactual -- the SELECTIVE preconditioner in the unrotated frame, which is *worse than untreated* (4.4e6 vs 4.2e4 at n=96) -- plus a commutation pin so the blind version cannot be restored silently.
+4. **The tau prior-art surrender of v5.11.4 was too generous, and it was ours.** The paper glossed the DST-I algebra as "Toeplitz minus Hankel, the structure of this section". Form is not membership: tau needs the coefficient sequence to TERMINATE, and the chirp's does not. Measured: the DST-I leaves 4.1%/2.0%/1.1% off-diagonal on the cross block at n=16/64/160 against 2e-14 for a genuinely-tau matrix. The claim-matrix row written the same day records the gap flatly while the paper asserted the opposite. The corrected form is **stronger**: the identity covers the tau idealisation, and the departure is exactly the residue -- the grid-sampled prediction reproduces `pi^2/24` to 9e-6 while the true `sigma_max` departs by 0.26%.
+5. **A guard that was literally `x == x`**, backing an abstract headline: it computed a 1-norm then asserted that norm equalled itself on an unmodified matrix, with the loop body discarding its own result. Replaced by building the per-state alternative the docstring names -- via `pk_ref`, a parameter **no test had ever varied** -- and asserting it moves the 1-norm while the pipeline's matrix does not.
+
+### Two reviewer findings the PM overturned
+
+Verification is between the reviewer and the record, and it earned its place twice. A prior-art attribution was reported as a work that could not be located after three targeted searches, with a recommendation to drop the count and re-price the paper's novelty concession from three to two; **the work exists** (Wulfman & Takahata, *J. Chem. Phys.* **47**, 488 (1967)) and its abstract names the Lie algebras of E4, R5 and O(4,1) exactly as attributed -- found in two queries. The concession stands at three counts; the defect is a missing bibitem, not a phantom. Separately, a wrong-basis-point finding was reported against the abstract as well as the conclusion; the abstract states it correctly.
+
+### Instrument findings
+
+- **Three gates reported PASS on scope `trunk` rather than `paper_60`** on the first invocation, because they take a different flag. Caught and re-run. This is the gate-self-audit class: a gate that scopes its verdict away is indistinguishable from a working one.
+- **C16 reports clean on a file it scopes** while a retired reading lives in it, twice -- the rising-slope sequence inside `eq:sublinear`'s own backing test, and the withdrawn ill-conditioning mechanism in `sturmian_l2_encoding.py`'s docstring. Patterns match wording; the zombies are written in different words.
+- **A claim-matrix row cited a test deleted on 2026-09-07** and was marked BACKED-SOUND.
+- **The staleness banner measures one file of the two in scope** for single-paper certs: its glob takes the paper and not the synthesis, though the trunk and group branches both add theirs. C9 is GATING, and the group2 synthesis has five commits since the certified date.
+- **C21 examines nothing in the molecular half** (141 unannotated decimal literals past the last `\gvq`), and three registry keys added 2026-09-12 are cited from no `.tex` at all.
+
+### Remediated
+
+Six passes, content before guards per Sec. 9: the wrong number + registration; the abstract; the conclusion and Acknowledgments; eight body corrections; the two guards as their own reviewed pass; the stale-text sweep across the synthesis, two `geovac/` docstrings, a test comment and the claim matrix. **Four new guard assertions, all fire-tested** (restore the blind control; rotate the control's frame; break the commutation pin; make `pk_ref` inert). Deterministic layer 14/14 green in the correct scope; 141 + 64 tests pass.
+
+**NOT certified.** The verdict stands at FAIL until a delta-verification run over this remediation comes back clean.
+
+## [v5.11.4] - 2026-09-12
+
+**Two pi's, opposite sides of the compactness seam -- and the geometry-independence claim was an over-claim.** PI-directed conversational thread, not a `/qa` run. Probes `debug/p60_{contraction_seam,window_constant}_probe.py`; scan `debug/lit_scan/contraction_seam_e3_memo.md`; memo `debug/sprint_contraction_seam_memo.md`; backing `tests/test_paper60_{contraction_window,mcentre_orders}.py`.
+
+### The conditioning law is an identity in the contraction window
+
+    1 - sigma_max  =  <1 - j0>  =  (kR)^2/24 * <theta^2>  =  (kR)^2/24 * pi^2/n^2
+
+Every link measured. The near-null direction's spread in the Fock polar angle is exactly `pi/n` (Richardson 3.14158 vs pi = 3.14159, n = 20..640); the factorisation holds on that direction to 0.3% at n = 320 across kR = 0.5..4; and the minimum it attains is the band-limited one, `n^2 min<theta^2> -> pi^2` (Richardson 9.86949 vs 9.86960).
+
+### The tagging that was owed, and what it buys
+
+Paper 60 carried its transcendentals untagged against Paper 18 / Paper 34, which CLAUDE.md Sec. 4 forbids. Both are calibration-tier M2, and they come from **opposite sides of the compactness boundary**:
+
+- **`pi^2` of `eq:sigma_law` comes from the symbol's zero order plus the finite section, and carries no Bessel content.** It is the Kac-Murdock-Szego `c_1`. **Corrected same day by C23 run #3:** the reading of `c_1` as a Dirichlet eigenvalue, the extremal (Wirtinger-Sobolev) problem behind it, and the independence of `c_alpha` from `b` are ALL Boettcher-Widom's — in the source this paper already cites, whose title names the inequality. And the Bessel-free measurement is the `b == 1` case of that same theorem, so it is a change of REPRESENTATION, not an independent route. (`pi^2 . Q` half of M2.)
+- **`(2pi)^-1/2` and `pi/4` of `eq:chirp_decay` are CONTINUUM-side** -- normalisation and branch phase of a Bessel asymptotic at the `p -> infinity` pole. (`sqrt(pi) . Q` half.)
+
+**The operational corollary first written here was WITHDRAWN the same day** (C23 run #3). It read "a truncation-side price is a property of the matrix, which a preconditioner reaches; a continuum-side price is a property of the symbol, which no congruence of the finite section can touch", and both halves are wrong: the v5.11.0 preconditioner is built FROM the symbol (its matching polynomial is chosen to share the symbol's zero, per Serra), and preconditioning IS a congruence, one that replaces the symbol by `f/g`. The surviving statement concerns the symbol on both sides and turns on the KIND of feature: a banded congruence multiplies the symbol by a trigonometric polynomial, which cancels a zero of finite order but cannot alter a decay class. The conditioning pole is a second-order zero; the locality pole is the chirp's `j^-5/4` envelope. Provenance of the constant predicts nothing here.
+
+### The law is carried by the TRANSLATION, not the metric -- and it is a known theorem
+
+Deform the metric by any smooth positive radial weight `W` on the Fock sphere; the generalised symbol is the quotient `W j0 / W = j0`, which does not see `W`. At `kR = 2`, `n = 160`, collapse `(1-sigma_max)(n/kR)^2` against `pi^2/24 = 0.4112`:
+
+| `W` | collapse | exponent |
+|:--|--:|--:|
+| 1 (SW reference) | 0.4072 | -1.979 |
+| 1 + 0.8 cos(chi) | 0.4123 | -2.006 |
+| 2 + sin(chi) | 0.4107 | -1.989 |
+| e^-chi | 0.4164 | -2.011 |
+| **control: 1 + cos(chi)** (vanishes at chi=pi) | **0.828** | -1.967 |
+
+The control is the load-bearing half -- without it an insensitive pipeline passes. **Scope, stated in-paper because the overstatement is close by:** this is NOT `V_0`-independence, since a position-space-local `V_0` acts on momentum space by *convolution*, not multiplication, and leaves the class entirely. Consistent with the one measured out-of-class case (v5.10.15: L^2 overlap, same exponent, constant ~1.4x larger). Whether any position-space `V_0` preserves the constant is OPEN.
+
+### C23 run #2: the contraction reading is prior art, and the scan found a live defect
+
+Three verdicts. **C1 (SO(4) -> E(3) contraction, `j0` as the Euclidean zonal spherical function): PRIOR ART** -- Diaz Martin & Pacharoni (arXiv:1807.03904) state it in exactly the Gelfand-pair form; lineage Inonu-Wigner (PNAS 39, 1953, 510), Clerc (*Studia Math.* **57**, 27 (1976)), Dooley-Rice. **So it was NOT written into the paper**; it stays expository, and if ever used it needs two cautions -- the degeneracy sits at the *antipodal* end `chi = pi` while Mehler-Heine is stated at `chi -> 0`, and the antipodal limit carries a parity factor `(-1)^{n+1}`, so it converges along parities rather than outright. **C2 ("trivial character"): PRIOR ART and already cited** (flat limit). **C3 (the weight-independence above): ABSENT** -- which was the verdict *on the sources run #2 reached*, and **it did not survive the primaries pass the same day** (below).
+
+**The scan's best catch was not an attribution.** The paper read "spanned by a fixed vector set that does not move with geometry" and "a fixed rank-(M-1) rotation removes it", unqualified. The null *space* is geometry-independent; the *rates* are not. Re-derived and re-measured locally before editing: `j0(pd) = 1 - (pd)^2/6 + O(p^4)`, so the order-`p^2` form on `1-perp` is `P D2 P` with `(D2)_ij = d_ij^2`; for collinear centres `d_ij^2 = h^2(i^2 1^T + 1(j^2)^T - 2 x x^T)` and `P` annihilates the outer terms from both sides, leaving `-2h^2 P x x^T P`, **rank one**.
+
+| geometry | orders in p | rank(P D2 P) |
+|:--|:--|--:|
+| collinear M=3 | (2, 4) | 1 |
+| collinear M=4 | (2, 4, 6) | 1 |
+| equilateral M=3 | (2, 2) | 2 |
+| bent water-like M=3 | (2, 2) | 2 |
+| tetrahedral M=4 | (2, 2, 2) | 3 |
+
+**Water's `A_1` is bent, hence full-rank -- which is why its measured table holds.** A *linear* polyatomic is not, and one `tri(1,2,1)` reaches only its single order-2 direction. The lever is now scoped in-paper to `M = 2` and non-collinear `M = 3`; the collinear case is open and not claimed. External: Batenkov-Demanet-Goldman-Yomdin (arXiv:1809.00658), exponent controlled by maximal cluster size, our `M = 2` their `l = 2` -- abstract verified at source before the bibitem was added.
+
+### C23 run #3 (at-authorship): the tagging claim was audited the day it was written, and it needed correcting
+
+The at-authorship trigger adopted in v5.11.2 fired on the `[SYMBOLIC + MEASURED]` paragraph written earlier the same day. Memo `debug/lit_scan/c23_run_003_m2_tagging_memo.md`. Three verdicts, and the scan's value was not the attributions:
+
+- **T1 (`c_1 = pi^2` read as a Dirichlet eigenvalue): PRIOR ART**, in the source the paper ALREADY CITES. Boettcher-Widom present `c_alpha` as the least eigenvalue of `(-1)^a u^(2a) = lam u` on `[0,1]` with clamped ends; at `a = 1` that is the Dirichlet problem. Verified here: bibitem present, title reads "...to higher-order **Wirtinger-Sobolev** inequalities".
+- **T2 (the band-limited second-moment minimum): PRIOR ART**, and the priority risk resolved opposite to the one flagged — it is NOT Slepian/Landau/Pollak (their functional is energy concentration, eigenvalues transcendental in the time-bandwidth product, never `pi^2`) but the second-moment/**Wirtinger** branch. Which means the "no Bessel present" measurement is the `b == 1` case of the same theorem: a change of REPRESENTATION, not an independent route. The independent-route claim is withdrawn.
+- **T3 (the two-sided taxonomy itself): ABSENT** as a taxonomy — but two of its three legs are someone else's, and its corollary was wrong.
+
+**The finding that mattered was a defect in prose written hours earlier**, not an attribution. The paragraph's operational corollary — truncation-side prices are matrix-level and reachable, continuum-side prices are symbol-level and untouchable — is **false in both halves**, and the withdrawal is recorded above. Verified locally before editing (line 1084: the matching polynomial is chosen to *share the symbol's zero*, per Serra). Corrected at the owner and swept to all three dependents that restated it (claim matrix, this entry, the sprint memo).
+
+**One reported defect did NOT hold and was not "fixed".** The scan flagged the inline `c_1 = pi^2` attribution as a C20 bibitem-less case; checked, and the bibitem exists and the sentence cites it — the flagged phrase is a second mention inside the same sentence. C20 passes in scope. **One did hold:** `bottcher_widom2005` was cited arXiv-only; published coordinates added after Crossref verification (Birkhaeuser, 2007, pp. 73-87, doi:10.1007/978-3-7643-7980-3_4). The series volume number was NOT added — it is search-level only.
+
+**Flagged, not resolved:** `debug/lit_scan/toeplitz_finite_section_memo.md` records BOTH "the conditioning and the non-locality are one fact" and "they are two independent facts" at different points. The corrected paragraph adopts the second and now says so.
+
+### Primaries pass: two sources two earlier scans could not reach, and both moved a claim
+
+Memo `debug/lit_scan/primaries_sw1965_toeplitz_pencil_memo.md`. What unlocked it was route, not persistence alone: direct `curl` plus local `pdftotext` reached publisher abstracts and PDFs that the summarising fetch path 403s on.
+
+**1. The translation identification is NOT ours, on three counts.** Shibuya and Wulfman's own 1965 abstract builds the molecular `p0` operator from the united-atom one "by a sum of unitary transformations, one for each nucleus in the molecule" -- one unitary per centre, the structure in substance. Wulfman & Takahata gave the explicit continuous-group formulation two years later. Weatherford & Red titled 2002-2004 papers on representing that operator in a Coulomb-Sturmian basis, and even plot against "the translation distance multiplied by the screening parameter" -- our own `kR`. **What survives as ours is the SYMBOL**: that in the sine basis on the Fock polar angle the operator is the finite section of multiplication by `j0(kR cot(chi/2))`. Corrected in place. *Provenance, stated because it matters:* the Royal Society page is 403 from here as it was for two prior scans, so the abstract quotation is RELAYED from the scan's direct read; the paper BODY is still unread. The correction is conservative either way -- it gives a claim away.
+
+**2. The weight-independence result is prior art, in a stronger form.** Ahmad, Al-Aidarous, Alrehaili, Ekstroem, Furci & Serra-Capizzano, *Numer. Algorithms* **78**(3), 867-893 (2018) -- Crossref-verified here for title, six authors, volume, issue, pages and year -- give the preconditioned-pencil eigenvalues in almost closed form. Their Eq. (22) is an **identity** for the tau (DST-I) algebra, i.e. Toeplitz minus Hankel, which is exactly this paper's structure; the weight cancels identically. So GeoVac sits closer to the exactly-solvable core than to the asymptotic Toeplitz statement. Re-tiered from `[MEASURED]` to `[MEASURED + PRIOR ART]`. **Hypothesis gap stated flatly:** our chirp symbol is not a trigonometric polynomial and its ratio has infinitely many sign changes, so their Theorem 1 hypotheses fail for it; only the tau identity and the L^1 localization results apply unconditionally.
+
+**3. `eq:sigma_law`'s unexplained ~1% residue is mostly the grid convention.** The tau statement places eigenvalues at `j pi/(n+1)`; collapsing with `(n+1)^2` moves the residue at `n=160, kR=2` from **-0.99% to +0.26%**, a fourfold reduction with a sign flip. Re-measured here across `n = 40..320` before editing. A genuine `O(1/n)` term survives in both conventions, so the sentence says "dominated by", not "is".
+
+**Two reported defects did NOT hold** and were not "fixed": the `avery2004` bibitem is already correct at vol. **100**, 121 (2004), and the inline `c_1` attribution does carry its `\cite`. **One bibliographic correction recorded:** the Serra-Capizzano paper the corpus declined to cite as "LAA 270 (1998)" is the wrong reference entirely -- that is Tyrtyshnikov-Zamarashkin; the intended ones are LAA **267** (1997) 139-161 and LAA **282** (1998) 161-183.
+
+### A coverage gap this session opened, and the factor it turned up
+
+Withdrawing the independent-route claim left a new sentence in the paper -- "the minimiser is the Dirichlet ground state in the band index" -- with **no backing test**, a coverage gap created by the same session under the claim->artifact rule. Closing it made the claim sharper and caught an omission.
+
+The identification is true only **up to the antipodal parity**. The basis index is `chi` while the Dirichlet mode is natural in `theta`, and `sin(a chi) = (-1)^(a+1) sin(a theta)`, so the minimiser is `c_a ~ (-1)^(a+1) sin(pi a/(n+1))`:
+
+| compared against | corr at n=320 |
+|:--|--:|
+| `(-1)^(a+1) sin(pi a/(n+1))` | 0.9999998 |
+| `sin(pi a/(n+1))` (bare) | 0.0000001 |
+
+Without the alternation the two are **exactly orthogonal**, so the bare statement is not an approximation of the right one -- it is its complement. The SW near-null direction matches the alternating mode to 0.9999993. Paper sentence made parity-precise; two guards added, each asserting BOTH halves, fire-tested three ways.
+
+Worth noting: this is the **same antipodal parity factor** C23 run #2 flagged as the caution on the contraction reading (`n^-1 U_{n-1}(cos(pi - z/n)) -> (-1)^{n+1} j0(z)`, convergence along parities only). Two independent appearances of one factor, from two different directions.
+
+### Monkhorst-Jeziorski 1979: a standing corpus claim retracted, and the better answer underneath it
+
+PI-directed read of the source flagged earlier the same day. Memo `debug/lit_scan/monkhorst_jeziorski_1979_memo.md`. **Verdict SECONDARY-QUOTED** -- abstract and bibliographic record verified at source on two independent indexes and re-verified here via Crossref; the **two-page body is closed with zero repository copies anywhere and is UNREAD**, so the mechanism below is reconstructed from the lineage and is labelled as such in the paper. (The DOI the dispatch supplied was wrong; the correct one is `10.1063/1.438337`, vol. 71(12), 5268-5269.)
+
+**The abstract is more direct than the title.** For a many-center **one-electron** system, eigenvalues follow from "diagonalizations of simple overlap matrices", and "the problems of many-center integrals and instabilities due to overcompleteness of basis sets do not appear at all."
+
+**Verdict on the two suspended memory claims, which had been travelling together:**
+
+- **"No prior art for secular-matrix norm growth" SURVIVES**, narrowed. No condition number, spectrum, smallest eigenvalue or growth law is in evidence; the reference list carries no numerical-linear-algebra source; no citing paper cites it for a conditioning result. Rests on abstract + reference list + page count, not a read.
+- **"Conditioning is a blind spot in the whole Avery canon" DOES NOT SURVIVE and is RETRACTED as phrased.** An abstract naming "instabilities due to overcompleteness" is explicit published engagement. The defensible remainder is the first claim: nobody *priced* it.
+
+**The resolution is worth more than the attribution, and it inverts the expected answer.** The PM's predicted resolution -- that their claim lives in the `V_0` metric and ours in `L^2` -- was **wrong**. It is the *same pencil*: same translation-phase matrix, and `sigma_max -> 1` at `p = 0` is a property of the symbol, indifferent to who is looking. The difference is *extraction*. Letting the overlap enter only multiplicatively -- a determinantal root search in the scale, or direct diagonalization -- **inverts nothing**, so a near-null direction yields a harmless spurious branch instead of amplified error; and the basis is exactly orthonormal in the metric actually used, which is this corpus's own measured "the intra-center block is exactly the identity", so the `L^2` Gram never enters. **They do not remove the degeneracy; they keep it out of the denominator.** GeoVac inverts because a block-encoding wants a standard Hermitian eigenproblem -- so **the conditioning exposure is created by the ENCODING REQUIREMENT, not by the basis and not by the metric.** Captured in Paper 60 `sec:obstruction` with a verified bibitem.
+
+**The lever, priced honestly and left open.** A determinantal re-posing would remove the conditioning multiplier but reinstates the outer nonlinear search over the scale that `eq:secular` exists to eliminate. Which is cheaper at scale is an unasked, answerable resource question.
+
+**A self-catch inside the fix.** The retraction was first written as a new item at the foot of the memory file while the original claim stayed live at its own locus 170 lines above -- the corrected-in-the-owner-left-standing-in-the-citer class, committed inside the edit that was fixing it. Both loci now carry the marker, and the file's `description:` line, which drives recall, was itself asserting the retracted half and is corrected.
+
+**Two owed threads.** (i) The method is credited in the later literature to **Novosadov**, not to Monkhorst-Jeziorski -- unverified, and an untouched Russian-language thread on overcompleteness continuing to 1986. Deliberately NOT cited in the paper, since an inline attribution with no bibitem is a C20 defect. (ii) The lineage obtains three-centre **one-electron** integrals with no three-centre evaluation, via a completeness sum over Fock-sphere states. **Not a breach of the three-centre wall** -- this corpus's wall is the two-electron ERI, and the source concedes the advertisement weakens at three or more centres -- but a diagnostic probe candidate.
+
+### Owed (PI items)
+
+1. **New Paper 34 projection candidate, NOT added.** Sec. III covers Wigner-D *rotation* between centres; nothing covers *translation*, which is where `j0` enters. Flagged for Sec. VIII review per the tag-transcendentals STOP rule rather than written in.
+2. The M2 tagging is itself a new `[SYMBOLIC]` claim carrying its own C23 at-authorship obligation. Unscanned.
+3. Shibuya-Wulfman (1965) still **UNVERIFIABLE** (Royal Society 403, no 1965 preprint), so "do SW give a group-theoretic reading of their own integrals?" remains open. **Do not** add a Serra citation for the ratio-symbol result: verified numerically here, no primary opened.
+
+### Gates and guards
+
+C10 / C21 / C16 / C22 / C14 / escapes / titles / arxiv / duration PASS in scope `paper_60`. New registry keys `p60_window_richardson_pi2`, `p60_window_rms_richardson_pi`, `p60_weighted_collapse_control` (the last carrying its four smooth-weight partners as a matched set). Regression slice: 69 passed, 2 skipped, including the 18 symbolic S^3 proofs. Three new functions added to tracked `geovac/sturmian_sigma_law.py` so the claims recompute outside the prunable `debug/` tree. **Eleven fire tests, all FIRE** -- including planting the over-claim itself ((2,2,2) for collinear M=4), making the vanishing-weight control secretly smooth, and feeding the near-null guard the second singular vector.
+
+### A self-catch worth recording
+
+The applier's anchor ended mid-sentence, so the inserted paragraph stranded a dangling "For" and left the next sentence starting mid-clause. **LaTeX compiled cleanly and every gate passed** -- C10 checks references, not prose continuity. Caught by reading the rendered seam rather than trusting the exit code. Also: the sprint's own brief to the scan agent asserted that the constant would NOT survive a change of weight; the measurement contradicted it in the favourable direction, so a wrong statement reached a dispatched agent before it reached a test.
+
 ## [v5.11.3] - 2026-09-12
 
 **The open item closed the same day: `G` has a direct block-encoding, so the metric penalty goes `n^3 -> n`.** Probe `debug/p60_direct_encoding_probe.py`; backing `tests/test_paper60_direct_encoding.py`.

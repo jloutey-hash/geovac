@@ -98,12 +98,39 @@ def test_each_check_can_fire(check):
 
 
 def test_baseline_is_declared_and_shrinking_is_the_intent():
-    """A ratchet that hides its own size is how debt becomes permanent."""
+    """A ratchet that hides its own size is how debt becomes permanent.
+
+    Corrected 2026-09-12.  This asserted 3 while the baseline had held 4 since
+    2026-09-07, so it had been RED and unnoticed -- the guard meant to watch the
+    ratchet was itself stale.
+
+    The count grew for a reason its own failure message misdiagnosed.  Growth
+    has TWO causes and they are opposite in meaning:
+
+      (a) NEW DEBT -- a freshly written paper-backing test reaches into the
+          prunable tree.  That is what the ratchet exists to stop.
+      (b) BETTER DETECTION -- the checker learned to see a dependency that was
+          always there.  `test_paper58_headline_numbers.py` puts `debug/` on
+          `sys.path` and then imports a BARE module name, carrying no `debug.`
+          token for the original regex to find; adding DEBUG_SYSPATH surfaced
+          it.  The debt did not grow, the blind spot shrank.
+
+    So the assertion pins the MEMBERS, not just the count: a changed roster is
+    reported by name, which distinguishes (a) from (b) on sight.
+    """
     base = C22.load_baseline()
     assert "_note" in base, "the baseline must say what it is for"
     assert isinstance(base["paper_backing_debug_imports"], list)
-    # The known debt: three paper-backing tests importing the prunable tree.
-    assert len(base["paper_backing_debug_imports"]) == 3, (
-        "baseline size changed -- if it GREW, new debt entered under a "
-        "ratchet meant to keep it out"
+    known = {
+        "test_paper26_entanglement.py",
+        "test_paper27_entropy.py",
+        "test_paper27_entropy_locus.py",
+        "test_paper58_headline_numbers.py",   # sys.path route, found 2026-09-07
+    }
+    got = set(base["paper_backing_debug_imports"])
+    assert got == known, (
+        "baseline roster changed. ADDED: "
+        f"{sorted(got - known)} -- new debt, unless the checker's reach grew; "
+        f"REMOVED: {sorted(known - got)} -- debt genuinely paid down, update "
+        "this roster."
     )

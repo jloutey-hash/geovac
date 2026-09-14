@@ -43,8 +43,9 @@ $(l_1,m_1,l_2,m_2)$ with $l_1+l_2$ even (gerade symmetry) and
 $m_1+m_2=0$, solved with a variational two-dimensional
 $(R_e,\alpha)$ solver that avoids the adiabatic approximation,
 recovers 96.0\% of the exact dissociation energy $D_e$ at
-$l_{\max}=6$ with $\sigma$ and $\pi$ channels (61~channels,
-CBS extrapolation ${\sim}97\%$),
+$l_{\max}=6$ with $\sigma$ and $\pi$ channels and a Schwartz cusp correction
+(61~channels, CBS extrapolation ${\sim}97\%$;\ the pure-variational value is
+${\sim}95\%$, itself above 92.4\%),
 exceeding the 92.4\% achieved by prolate spheroidal CI with algebraic
 Neumann integrals (Paper~12).
 The framework extends to heteronuclear diatomics (HeH$^+$,
@@ -593,7 +594,7 @@ non-adiabatic kinetic energy cost ignored by the adiabatic solver.
   $\sigma$~channels have $m=0$ only; $\sigma{+}\pi$ includes
   $|m| \le 1$.  The 2D solver is variational; the adiabatic solver
   systematically overestimates $D_e$ by ${\sim}11\%$.
-  $D_e^{\rm exact} = 0.17447$~Ha~\cite{kolos1968}.}
+  $D_e^{\rm exact} = 0.174475$~Ha~\cite{kolos1968}.}
 \label{tab:convergence}
 \begin{ruledtabular}
 \begin{tabular}{ccdddd}

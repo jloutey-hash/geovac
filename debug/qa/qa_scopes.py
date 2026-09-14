@@ -87,7 +87,11 @@ SCOPES: Dict[str, Dict[str, Sequence]] = {
     # 59 and 60 live in this folder but are their OWN cert targets and are not
     # part of the group2 scope.
     "group2": {
-        "papers": [8, 11, 12, 13, 15, 17, 19],
+        # 58/59/60 added 2026-09-13 (PI direction): they are physically in
+        # group2_quantum_chemistry/ but post-dated the original group2 scope,
+        # so a group2 run had silently excluded them. Each has its own
+        # docs/qa/paper_{58,59,60}.done.md the group DoD references.
+        "papers": [8, 11, 12, 13, 15, 17, 19, 58, 59, 60],
         "extra": [
             "group2_quantum_chemistry/paper_fci_atoms.tex",
             "group2_quantum_chemistry/paper_fci_molecules.tex",

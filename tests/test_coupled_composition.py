@@ -180,11 +180,11 @@ class TestPauliRegression:
         assert abs(ratio - 3.23) < 0.1
 
     def test_coupled_one_norm(self, lih_data):
-        """Coupled 1-norm (all terms incl. identity) ~ 89.0 Ha
-        (exact-rule 2026-08-29; was ~85.69 under the retired rule A).
-        Non-identity part measured 81.77; identity adds ~9.9."""
+        """Coupled (CB) 1-norm, all terms incl. identity = 89.80 Ha
+        (exact-rule 2026-09-13 recompute; was pinned 91.65, and ~85.69
+        under the retired pair-diagonal rule; table 80.5 non-identity)."""
         one_norm = sum(abs(c) for c in lih_data['coupled']['qubit_op'].terms.values())
-        assert abs(one_norm - 91.65) < 1.0
+        assert abs(one_norm - 89.80) < 0.3
 
 
 class TestFCISolver:

@@ -264,15 +264,23 @@ def test_live_balanced_lih_nmax2_matches_library():
     )
 
     # ------------------------------------------------------------------
-    # QUARANTINED (named follow-on): DirectCI4e's closed-form same-spin
-    # block ASSUMES the 8-fold symmetry and therefore computes a wrong
-    # energy on the exact-rule tensor.  The solver needs the
-    # complex-orbital 4-fold treatment (or a real-spherical-harmonic
-    # transform of the integrals) before this leg can be restored.
-    # See debug/sprint_eri_evaluator_defects_memo.md.
+    # RE-ENABLED 2026-09-13 (group2 baseline, Batch 3).  The earlier
+    # quarantine premise -- "DirectCI4e's closed-form same-spin block
+    # assumes 8-fold ERI symmetry and computes a wrong energy on the
+    # exact-rule (4-fold) tensor" -- was FALSE.  The ground-state energy
+    # is a scalar Slater-Condon contraction needing only the two PHYSICAL
+    # symmetries the exact-rule tensor carries (particle-exchange
+    # <ab|cd>=<ba|dc> and hermiticity <ab|cd>=<cd|ab>); the broken
+    # single-swap symmetry is the wrong-sign-q artifact and never enters a
+    # correctly-antisymmetrized energy.  Verified directly (2026-09-13):
+    # DirectCI4e(faithful=False) == coupled_fci_energy at 0.0000 mHa.
     # ------------------------------------------------------------------
-    pytest.skip("DirectCI4e assumes 8-fold ERI symmetry; the exact-rule "
-                "tensor is 4-fold -- solver upgrade is a named follow-on")
+    E_ref = coupled_fci_energy(ham, n_e, verbose=False)['E_coupled']
+    E_dci = DirectCI4e(ham['h1'], ham['eri'], ham['nuclear_repulsion'],
+                       faithful=False).ground_state(tol=1e-10, verbose=False)['E']
+    assert abs(E_dci - E_ref) < 1e-5, (
+        f"DirectCI4e(faithful=False)={E_dci:.8f} != coupled_fci_energy="
+        f"{E_ref:.8f} ({abs(E_dci - E_ref) * 1e3:.4f} mHa)")
 
 
 def test_phase_bug_magnitude_nmax2():

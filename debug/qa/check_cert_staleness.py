@@ -73,7 +73,20 @@ def paths_for(target: str) -> list[str]:
     m = re.match(r"paper_(\d+)$", target)
     if m:
         hits = sorted(ROOT.glob(f"papers/*/paper_{m.group(1)}_*.tex"))
-        return [str(p.relative_to(ROOT)).replace("\\", "/") for p in hits]
+        out = [str(p.relative_to(ROOT)).replace("\\", "/") for p in hits]
+        # A single-paper target's SYNTHESIS is in its DoD scope and is a GATING
+        # dimension (C9), so it has to be measured for staleness too.  The trunk
+        # and GROUPS branches above both add theirs; this branch did not, so for
+        # every single-paper cert the banner reported drift in the paper alone.
+        # Measured 2026-09-12: paper_60's banner said "1 .tex changed" while its
+        # group2 synthesis had five commits since the certified date, and the
+        # /qa FULL run then found a LARGE defect in exactly that file.
+        for p in out:
+            grp = p.split("/")[1] if "/" in p else ""
+            syn = f"papers/synthesis/{grp}_synthesis.tex"
+            if grp and (ROOT / syn).exists() and syn not in out:
+                out.append(syn)
+        return sorted(out)
     return []
 
 

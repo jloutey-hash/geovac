@@ -34,12 +34,12 @@ atoms on a sparse graph Hamiltonian constructed from hydrogenic quantum
 numbers, using Slater--Condon rules with exact $R^k$ radial integrals
 and Gaunt angular coupling coefficients.
 For helium, the ground-state energy converges monotonically to
-$-2.8936\,\text{Ha}$ (0.35\% error versus exact) at $n_{\max}=5$;
-for lithium, to $-7.3978\,\text{Ha}$ (1.07\% error) at $n_{\max}=5$.
+$-2.8963\,\text{Ha}$ (0.26\% error versus exact) at $n_{\max}=5$;
+for lithium, to $-7.4007\,\text{Ha}$ (1.03\% error) at $n_{\max}=5$.
 Helium surpasses PySCF/STO-3G accuracy on the same system (the lithium
 STO-3G comparison is not computed).
-For beryllium (4 electrons), the solver achieves $E = -14.536\,\text{Ha}$
-(0.90\% error) at $n_{\max}=4$ with $487{,}635$ determinants---the
+For beryllium (4 electrons), the solver achieves $E = -14.563\,\text{Ha}$
+(0.71\% error) at $n_{\max}=4$ with $487{,}635$ determinants---the
 first four-electron calculation in this framework.
 For lithium hydride (4 electrons, first heteronuclear molecule), the
 CP-corrected \emph{vertical} binding energy at the fixed experimental
@@ -302,8 +302,8 @@ $\sim$10$^{11}$ pair comparisons under the explicit assembly.
 
 All calculations use atomic units (hartree for energy, bohr for
 length).
-Exact non-relativistic energies are $E_{\text{He}} = -2.9037\,\text{Ha}$
-and $E_{\text{Li}} = -7.4781\,\text{Ha}$~\cite{NIST_ASD}.
+Exact non-relativistic energies are $E_{\text{He}} = -2.9037\,\text{Ha}$~\cite{Pekeris1958}
+and $E_{\text{Li}} = -7.4781\,\text{Ha}$~\cite{ChakravortyDavidson1993}.
 Hartree--Fock limits are $E_{\text{He}}^{\text{HF}} = -2.8617\,\text{Ha}$
 and $E_{\text{Li}}^{\text{HF}} = -7.4327\,\text{Ha}$~\cite{Fischer1977}.
 
@@ -317,7 +317,7 @@ helium uses hybrid $h_1$, lithium and beryllium use exact $h_1$.
 The PySCF helium result is RHF, which equals FCI for STO-3G
 (one spatial basis function).
 Hydrogen results from Ref.~\cite{Loutey2026a}.
-Exact non-relativistic energies: $E_{\text{Be}} = -14.6674\,\text{Ha}$~\cite{NIST_ASD}.}
+Exact non-relativistic energies: $E_{\text{Be}} = -14.6674\,\text{Ha}$~\cite{ChakravortyDavidson1993}.}
 \begin{ruledtabular}
 \begin{tabular}{lcccc}
 System & Method & $E$ (Ha) & Error (\%) & $N_{\text{SD}}$ \\
@@ -325,23 +325,23 @@ System & Method & $E$ (Ha) & Error (\%) & $N_{\text{SD}}$ \\
 H ($Z\!=\!1$) & GeoVac $n_{\max}\!=\!30$ & $-0.4971$ & 0.57 & 9455 \\
               & PySCF/STO-3G & $-0.4666$ & 6.68 & 1 \\
 \colrule
-He ($Z\!=\!2$) & GeoVac $n_{\max}\!=\!5$ & $-2.8936$ & 0.35 & 5995 \\
+He ($Z\!=\!2$) & GeoVac $n_{\max}\!=\!5$ & $-2.8963$ & 0.26 & 5995 \\
                & PySCF/STO-3G & $-2.8078$ & 3.30 & 1 \\
 \colrule
-Li ($Z\!=\!3$) & GeoVac $n_{\max}\!=\!4$ & $-7.3959$ & 1.10 & 34\,220 \\
-               & GeoVac $n_{\max}\!=\!5$ & $-7.3978$ & 1.07 & 215\,820 \\
+Li ($Z\!=\!3$) & GeoVac $n_{\max}\!=\!4$ & $-7.3987$ & 1.06 & 34\,220 \\
+               & GeoVac $n_{\max}\!=\!5$ & $-7.4007$ & 1.03 & 215\,820 \\
                & PySCF/STO-3G & --- & --- & --- \\
 \colrule
-Be ($Z\!=\!4$) & GeoVac $n_{\max}\!=\!3$ & $-14.531$ & 0.93 & 20\,475 \\
-               & GeoVac $n_{\max}\!=\!4$ & $-14.536$ & 0.90 & 487\,635 \\
+Be ($Z\!=\!4$) & GeoVac $n_{\max}\!=\!3$ & $-14.558$ & 0.75 & 20\,475 \\
+               & GeoVac $n_{\max}\!=\!4$ & $-14.563$ & 0.71 & 487\,635 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
 Table~\ref{tab:comparison} summarizes the GeoVac FCI results
 alongside PySCF/STO-3G benchmarks.
-GeoVac achieves 0.35\% error for helium, 1.07\% for lithium
-(at $n_{\max}=5$), and 0.90\% for beryllium (at $n_{\max}=4$),
+GeoVac achieves 0.26\% error for helium, 1.03\% for lithium
+(at $n_{\max}=5$), and 0.71\% for beryllium (at $n_{\max}=4$),
 compared to 3.30\% and 6.68\% for PySCF/STO-3G on helium and
 hydrogen, respectively.
 The improvement is notable because the GeoVac basis requires no
@@ -375,15 +375,15 @@ Both primary series converge monotonically from above.}
 Figure~\ref{fig:convergence} shows the convergence of the
 ground-state energy error as the basis size $n_{\max}$ increases.
 For helium with hybrid $h_1$, the error decreases monotonically:
-0.56\% ($n_{\max}=2$) $\to$ 0.45\% ($n_{\max}=3$) $\to$ 0.38\%
-($n_{\max}=4$) $\to$ 0.35\% ($n_{\max}=5$).
+0.50\% ($n_{\max}=2$) $\to$ 0.37\% ($n_{\max}=3$) $\to$ 0.29\%
+($n_{\max}=4$) $\to$ 0.26\% ($n_{\max}=5$).
 At $n_{\max}=5$, the error is well below the Hartree--Fock limit of
 1.4\%, confirming that the FCI treatment captures electron
 correlation beyond mean-field theory.
 For lithium with exact $h_1$, the error decreases monotonically:
-5.04\% ($n_{\max}=2$) $\to$ 1.15\% ($n_{\max}=3$) $\to$ 1.10\%
+5.00\% ($n_{\max}=2$) $\to$ 1.12\% ($n_{\max}=3$) $\to$ 1.06\%
 ($n_{\max}=4$).
-The lithium error at $n_{\max} \geq 3$ (1.10--1.15\%) remains
+The lithium error at $n_{\max} \geq 3$ (1.06--1.12\%) remains
 \emph{above} the Hartree--Fock limit of $0.61\%$, so---unlike
 helium---the lithium FCI does not recover correlation energy beyond
 mean-field theory at the basis sizes reached here.
@@ -587,18 +587,18 @@ using direct CI (Sec.~\ref{sec:direct_ci}).}
 \begin{tabular}{clrrd{2.6}d{1.2}r}
 $Z$ & $n_{\max}$ & $N_{\text{SD}}$ & NNZ & \multicolumn{1}{c}{$E$ (Ha)} & \multicolumn{1}{c}{Err.\ (\%)} & \multicolumn{1}{c}{$t$ (s)} \\
 \colrule
-2 & 2 &        45 &        161 & -2.887550 & 0.56 & $<$1 \\
-2 & 3 &       378 &      3\,394 & -2.890601 & 0.45 & $<$1 \\
-2 & 4 &     1\,770 &    35\,422 & -2.892642 & 0.38 & $<$1 \\
-2 & 5 &     5\,995 &   244\,587 & -2.893582 & 0.35 & 1.6 \\
+2 & 2 &        45 &        203 & -2.889303 & 0.50 & $<$1 \\
+2 & 3 &       378 &      6\,066 & -2.892932 & 0.37 & $<$1 \\
+2 & 4 &     1\,770 &    87\,550 & -2.895227 & 0.29 & $<$1 \\
+2 & 5 &     5\,995 &   777\,019 & -2.896298 & 0.26 & 1.6 \\
 \colrule
-3 & 2 &       120 &        352 & -7.101226 & 5.04 & $<$1 \\
-3 & 3 &     3\,276 &    46\,200 & -7.392086 & 1.15 & $<$1 \\
-3 & 4 &   34\,220 & 1\,455\,648 & -7.395921 & 1.10 & 7.6 \\
-3 & 5 &  215\,820 & 21\,519\,736 & -7.397751 & 1.07 & 116 \\
+3 & 2 &       120 &        604 & -7.104490 & 5.00 & $<$1 \\
+3 & 3 &     3\,276 &    111\,192 & -7.394597 & 1.12 & $<$1 \\
+3 & 4 &   34\,220 & 4\,385\,956 & -7.398718 & 1.06 & 7.6 \\
+3 & 5 &  215\,820 & 78\,025\,400 & -7.400705 & 1.03 & 116 \\
 \colrule
-4 & 3 &   20\,475 &           --- & -14.531256 & 0.93 & 2.9 \\
-4 & 4 &  487\,635 & 37\,486\,171 & -14.535460 & 0.90 & 357 \\
+4 & 3 &   20\,475 &           1\,224\,507 & -14.558052 & 0.75 & 2.9 \\
+4 & 4 &  487\,635 & 118\,132\,111 & -14.562659 & 0.71 & 357 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -620,9 +620,9 @@ graph Laplacian off-diagonal terms introduce non-physical
 correlation for the three-electron system.
 The exact $h_1$ mode [Eq.~\eqref{eq:h1_exact}] eliminates this
 problem: the lithium energy remains above the exact value at all
-basis sizes, converging monotonically from 5.04\% to 1.10\%.
+basis sizes, converging monotonically from 5.00\% to 1.03\%.
 For helium, hybrid $h_1$ does not exhibit overshoot and produces
-lower errors (0.35\% versus 2.08\% at $n_{\max}=4$ with exact $h_1$),
+lower errors (0.29\% versus 1.99\% at $n_{\max}=4$ with exact $h_1$),
 so it remains the preferred mode for two-electron systems.
 
 \emph{Construction time scaling.}
@@ -640,8 +640,8 @@ require further algorithmic improvement (e.g., string-based
 factorization or selected CI).
 
 \emph{Remaining basis set error.}
-The helium error of 0.35\% at $n_{\max}=5$, lithium error of
-1.07\% at $n_{\max}=5$, and beryllium error of 0.90\% at
+The helium error of 0.26\% at $n_{\max}=5$, lithium error of
+1.03\% at $n_{\max}=5$, and beryllium error of 0.71\% at
 $n_{\max}=4$ remain above chemical accuracy
 ($\sim$1~kcal/mol $\approx$ 0.05\% for these systems).
 Reaching chemical accuracy would require either larger
@@ -838,7 +838,7 @@ estimated at $< 30$~s.
 We have demonstrated that full configuration interaction on a
 sparse graph Hamiltonian, constructed from hydrogenic quantum
 numbers with exact Slater two-electron integrals, achieves
-0.35\% accuracy for helium, 1.07\% for lithium, and 0.90\% for
+0.26\% accuracy for helium, 1.03\% for lithium, and 0.71\% for
 beryllium---all with monotonic basis set convergence and accuracy
 exceeding PySCF/STO-3G where comparable.
 The excitation-driven direct CI algorithm reduces assembly cost
@@ -918,10 +918,17 @@ E.~U. Condon and G.~H. Shortley,
 \textit{The Theory of Atomic Spectra}
 (Cambridge University Press, 1935).
 
-\bibitem{NIST_ASD}
-A.~Kramida, Yu.~Ralchenko, J.~Reader, and NIST ASD Team,
-\textit{NIST Atomic Spectra Database} (ver.~5.10),
-\url{https://physics.nist.gov/asd} (2023).
+\bibitem{Pekeris1958}
+C.~L. Pekeris,
+``Ground state of two-electron atoms,''
+Phys. Rev. \textbf{112}, 1649--1658 (1958).
+
+\bibitem{ChakravortyDavidson1993}
+S.~J. Chakravorty, S.~R. Gwaltney, E.~R. Davidson, F.~A. Parpia,
+and C.~Froese Fischer,
+``Ground-state correlation energies for atomic ions with 3 to 18
+electrons,''
+Phys. Rev. A \textbf{47}, 3649--3670 (1993).
 
 \bibitem{Fischer1977}
 C.~Froese Fischer,
@@ -966,10 +973,13 @@ replaced by exact rational values from the $S^3$ density overlap
 formula (Paper~7, Sec.~V).  Combined with the graph Laplacian as the
 one-body operator, this yields a ``graph-native'' FCI where the
 entire Hamiltonian matrix is rational.  For He at $n_{\max} = 5$:
-graph-native achieves 0.25\% error vs.\ the 0.35\% reported in
-the original paper, confirming that the analytical integrals are more
-accurate than the grid-based numerics (the error decreases to
-0.23\% at $n_{\max} = 6$).  At $n_{\max} = 7$: 0.19\%
+graph-native achieves 0.25\% error, essentially matching the
+grid-based hybrid-$h_1$ value (0.26\%, Table~\ref{tab:comparison}) to
+within 0.01 percentage points; the analytical integrals confirm the
+grid-based numerics rather than improving on them---the earlier
+apparent gap was a grid-integration artifact, since corrected by the
+exact-rule ERI evaluator.  The graph-native error decreases to
+0.23\% at $n_{\max} = 6$, and at $n_{\max} = 7$ reaches 0.19\%
 with 1,218 configurations.
 
 A variant using exact hydrogenic one-body matrix elements (diagonal,

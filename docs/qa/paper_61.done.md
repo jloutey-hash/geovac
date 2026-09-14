@@ -80,6 +80,16 @@
 
 ---
 
+> **DELTA-verification 2026-09-13 = DEFECTS, remediated (NOT a clean delta).** Four
+> dimensions, seam scope, tree frozen. **claims/prose and code both CLEAN-DELTA** (75
+> tests --slow, 0 skipped; all 4 branch criteria hold; W0 [SYMBOLIC] fire-tested). The
+> 09-08 remediation held corpus-wide (3 registered retractions + 4 fixes-of-fixes all
+> verified). Two defects, both OUTSIDE the paper prose: Chowla-Selberg had no bibitem
+> (added `chowla_selberg1967` + 2 cites) and the retired K(1/2)=lemniscate naming
+> survived in `debug/routeC_pslq_fit.py` (fixed + new fire-tested C16 entry
+> `p61-k12-is-lemniscate` — retired claim #6 had never been gate-backed). **Remaining:
+> a confirming clean delta (small surface, foldable into the group3 review) then FULL.**
+
 ## Scope
 
 **Paper:** `papers/group3_foundations/paper_61_bessel_moment_periods.tex` —

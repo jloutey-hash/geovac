@@ -24,7 +24,7 @@ drivers that first measured it.  Each test names the wrong answer it rejects.
 
   test_absolute_front_threshold_t_c
       The absolute |S| = 1/sqrt2 crossing exists iff the 1s exponent ratio
-      t < t_c = 2.7456, the root of (2 sqrt t/(1+t))^3 = 1/sqrt2.  Rejects
+      t < t_c = 2.664, the root of (2 sqrt t/(1+t))^3 = 1/sqrt2.  Rejects
       "every pair of shapes has a 45-degree front".
 
 Paper 58 cites this file; CHANGELOG v5.10.2 is the chronicle.

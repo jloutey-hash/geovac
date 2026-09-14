@@ -10,6 +10,24 @@
 
 # Group 2 (Quantum chemistry) — `/qa` profile
 
+> **SCOPE EXPANSION 2026-09-13 (PI direction) — Papers 58, 59, 60 added.** These
+> three papers are physically in `papers/group2_quantum_chemistry/` but post-dated
+> the original group2 scope, so every prior group2 run silently excluded them. The
+> scope in `debug/qa/qa_scopes.py` now resolves to **13 documents** (was 10). Their
+> criteria are their own pre-registered per-paper definition-of-done files, which
+> this group DoD incorporates by reference:
+> - **Paper 58** (Abelian residue): `docs/qa/paper_58.done.md`
+> - **Paper 59** (Elliptic Bessel moment): `docs/qa/paper_59.done.md` — note the
+>   59/61 seam (Paper 61 is group3; they describe one object).
+> - **Paper 60** (Sturmian secular / QC reading): `docs/qa/paper_60.done.md` —
+>   NOT certified; carries a declared literal-registration debt (partly discharged
+>   2026-09-13) and has never had a clean delta.
+>
+> **This is a baseline-establishing FULL run (PI direction), fired ahead of clean
+> deltas on 58/59/60 deliberately** — like the trunk FULL runs #1–#8, its value is
+> to re-measure the whole group's current surface, not to certify. The 2026-06-28
+> CERTIFIED verdict below is historical and covers only the original 9 papers.
+
 > **Inherits the shared criteria in [`docs/qa/criteria.md`](criteria.md).** This
 > file supplies only group2-specific scope + deltas + the branch watch-notes.
 
@@ -93,13 +111,13 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   - **Paper 15:** H$_2$ **96.0%** of $D_e$ ($l_{\max}=6$, 61 channels, ~97% CBS);
     the adiabatic over-estimate (~11%) is a flagged artifact.
   - **Paper 17:** LiH composed $R_{\rm eq}$ **5.3%** ($l$-dependent PK); BeH$_2$ **11.7%**;
-    H$_2$O **26%** (*uncoupled* five-block, $R_{\rm eq}=1.34$ bohr); LiH 4N $R_{\rm eq}
+    H$_2$O **19.4%** (*uncoupled* five-block, $R_{\rm eq}=1.459$ bohr); LiH 4N $R_{\rm eq}
     \approx 64\%$ (**unbound** $D_e$, no PK — the equilibrium-without-PK control); 144×
     angular compression ($l_{\max}^2$ vs $l_{\max}^{11}$, cost of PK).
   - **Paper 19:** balanced coupled LiH **0.20%** *energy* ($n_{\max}=3$) with **structural
     $R_{\rm eq}$ drift (~8.8%)** — energy converges, geometry drifts; the 29% unbalanced
     figure is the negative control.
-  - **FCI-atoms:** graph-native CI He 0.19% / Be 0.90% / Li 1.07% (zero-parameter, exact
+  - **FCI-atoms:** graph-native CI He 0.19% / Be 0.71% / Li 1.03% (zero-parameter, exact
     rational Slater integrals); H$^-$ bound but over-binds 21% ($Z_c\approx1.84$ boundary).
   - **FCI-molecules:** the graph-concatenation **negative** (no minimum) — the headline
     *is* the negative result.
@@ -140,6 +158,32 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   worktree only.
 
 ## Change log
+- 2026-09-13 — **BASELINE FULL run COMPLETE (v5.11.14–17), 4 batches, 13 docs.** A baseline
+  re-measure (PI direction), **NOT a certification** — 58/59/60 are in by reference; clean
+  deltas on them plus the owed in-paper extrapolation footnotes remain before any group2 cert.
+  Per-document dimension results (**PASS** = reviewer returned clean, no defect; **fixed** =
+  defect found → remediated this run):
+  - **Paper 58 — code PASS, citations PASS, claims fixed** (1 SMALL: polyatomic FCI-vs-RHF
+    label). The cleanest paper of the run: code (all 25 slow legs pass, mutation-guarded
+    certificate + fire-tested decider, no LARGE) and citations (25+ externally grounded, no
+    WRONG-ID/orphans) both **passed outright**.
+  - **Paper 11 — code PASS** (216 tests). **Paper 12 — code PASS** (32 tests; citations fixed: KW literal).
+  - **Paper 13 — code PASS** (citations fixed: Mitnik WRONG-ID, Madden misattribution).
+  - **Paper 15 — code PASS** (citation fixed: Kolos digit; the run-#1 deleted-code regression is CLOSED).
+  - **Paper 17 — code PASS** (claims fixed: §VIII.B adiabatic-vs-2D self-contradiction).
+  - **FCI-molecules — code PASS** (guardrail-negative clean, 48 tests; M3/M4 overclaim softenings fixed).
+  - **Paper 8 — code fixed** (LARGE: Sturmian-guardrail scope over-strong at summary surfaces
+    + a NaN'd backing test; PI-approved scope propagation) + citations fixed (KW literal).
+  - **Paper 19 — fixed** (MATERIAL: pair-diagonal zombie in prose vs its own re-measured tables).
+  - **FCI-atoms — code fixed** (LARGE: 3 RED Li/Be backing tests + stale Table I; the 0.027-Ha
+    Be shift independently cross-checked before re-pinning; propagation completed in Batch 4
+    after a locus-incomplete first pass).
+  - **group2 synthesis (C9) — fixed** (LARGE: carried the retired FCI-atoms energies; this is
+    what surfaced the incomplete Batch-3 propagation).
+  - **completeness-critic:** GAPS → all closed. Deterministic layer **8/8 PASS**
+    (C10 compile 13 papers, C13/C14/C16/C17/C19/C21/C22).
+  All findings remediated; every paper compiles and now passes its reviewed dimensions
+  post-remediation. Full chronicle: CHANGELOG v5.11.14–17.
 - 2026-06-26 — **DRAFTED** by PM for PI freeze (fourth pre-registered `/qa` target;
   first quantum-chemistry branch). Inherits criteria.md C1–C16. Branch-defining risk =
   benchmarking-rule + guardrail-negative honesty (encoded as a C8/C3/C5 sharpening, not

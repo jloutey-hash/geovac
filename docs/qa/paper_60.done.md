@@ -120,6 +120,12 @@
 > hydrogenic shells the same construction gives `K^1.07` and a *rising* exponent.
 > And the cheap rule carries an accuracy floor of **6.44 mHa**.
 >
+> **Corrected 2026-09-13:** the floor is quoted as a BRACKET, **[6.47, 6.62] mHa**,
+> not as a single fitted value — the paper says so in its own honest-scope sentence
+> ("it is the bracket we quote"), because the fit family approaches the floor from
+> below and a single number would be a lower estimate rather than a central one.
+> The 6.44 above sits BELOW the bracket's own lower endpoint. This record ratified it.
+>
 > **Superseded 2026-09-08 — the floor's mechanism and universality.** This
 > record previously ratified "4.0× chemical accuracy, at any basis size. Cost
 > growth and attainable accuracy are one fact." The floor VALUE stands; its
@@ -289,7 +295,14 @@
 
 **Deterministic `--gate`:** `paper_60`.
   Note the scope is the SINGLE-PAPER one, not `group2`: `qa_scopes.py` deliberately excludes 58/59/60 from `group2` (they are their own cert targets), so the `--gate group2` this record carried until 2026-09-07 examined NOTHING for the paper it certifies.
-**C17 note:** the headline-number registry currently has **NO Paper-60 families** — they
+**C17 note (CORRECTED 2026-09-12 — this note froze two RETIRED values as
+goalposts, the same class the file records as having stopped the 2026-09-11
+run at protocol step 1):** two Paper-60 families EXIST
+(`paper60-atomic-sublinear-exponent`, `paper60-molecular-lambda-exponent`,
+added 2026-08-18). Do NOT register `K^0.84` (retired 2026-09-07 →
+`p60_onenorm_exponent` = 0.82) or He `−2.897` (retired 2026-09-12 →
+`p60_he_chain_spdf_k164` = −2.8964). Original note, kept for the record: the
+registry has NO Paper-60 families — they
 must be ADDED on freeze (K^0.84 sublinear exponent, Q^3.33/Q^1.19 inflation, N^1.85/N^1.70
 SW/L² conditioning, N^1.97 water, n_orb^2.2 molecular 1-norm, the tab:resource d_inv/kappa
 row family, He −2.847/−2.897/−2.90372).
@@ -395,22 +408,36 @@ Delegating to a key that does not exist would leave the DoD pointing at nothing 
 worse than the literal. They are recorded here so the exposure is **visible and
 dated** rather than silent:
 
-| locus | literal | status |
+| locus | literal | status (updated 2026-09-13) |
 |---|---|---|
-| branch criterion 4 | Gaussian ratio-dependence (`N^6` / `N^1.4`) | correct; unregistered |
-| W5 | water A1 `cond∼N^1.97` | correct; unregistered |
-| W8 | H2+ / H2 toy-validation figures | correct; unregistered |
-| C8.1 | naive L2 inflation `Q^3.33` vs `Q^1.19` | correct; unregistered |
-| C8.6 | SW `cond(S)∼N^1.85` (vs L2 `N^1.70`) | correct; unregistered |
-| C8.7 | the `tab:resource` row | correct; unregistered |
-| C8.9 | water gerade-lever-fails numbers | correct; unregistered |
+| C8.1 | naive L2 inflation `Q^3.33` vs `Q^1.19` | **REGISTERED** `p60_l2_inflation_sturmian` (3.33, meas 3.3328) / `p60_l2_inflation_hydrogenic` (1.19, meas 1.1909); annotated eq:blowup |
+| C8.6 | SW `cond(S)∼N^1.85` (vs L2 `N^1.70`) | **REGISTERED** `p60_sw_cond_exponent` (1.85, meas 1.8518 on window N=12..16; full-range 1.80, asymptote N^2) / `p60_l2_overlap_exponent` (meas **1.71**, paper's 1.70 corrected); annotated sec:molecular |
+| W5 / C8.9 | water A1 `cond∼N^1.96` (raw, `_water_A1`) | **REGISTERED** `p60_water_a1_exponent` (1.96, meas 1.9580); annotated sec:resource. The **N^1.97 sec:molecular probe (19.9→698 over N=6..36) is a DIFFERENT construction, still unregistered** — see note |
+| branch criterion 4 | Gaussian ratio-dependence (`N^6` / `N^1.4`) | **NOT REGISTRABLE — finding.** The tracked `_gaussian_metric` gives ratio-1.6 → N^6.30 (κ~1.5e6 at N=16, not the paper's ~1e5) and ratio-3 → N^1.54 (not 1.4). The paper's own caveat calls these "illustrative rather than a fixed factor"; treat as illustrative, or promote the original driver |
+| W8 | H2+ / H2 toy-validation figures | unregistered (not measured this pass; toy validations) |
+| C8.7 | the `tab:resource` row | `[RESOURCE MODEL]` — O(1) cancels in ratios per the caption; modelled, not a measured canonical value |
+
+**Registration pass 2026-09-13 (FULL-run cert-blocker 1).** Five literals were
+measured from tracked code (`debug/fullrun_measure_literals.py`) and registered
+with `\gvq` annotations; C21 green. **The pass surfaced a finding the earlier
+"correct; unregistered" label hid:** three of the debt literals — the Gaussian
+ratio exponents, the water `N^1.97` sec:molecular probe, and the `tab:resource`
+row — do NOT reproduce from the tracked test suite (the first two trace to
+constructions that live only in `debug/` drivers or are modelled). They cannot
+be registered as *measured* values without promoting their drivers to `tests/`
+first, which is a group2-review task. So the literal-registration debt is now
+**partly discharged (5 keys) and partly reclassified** (2 need driver promotion,
+1 is modelled) — no longer a flat "register 7 before cert."
+
 
 **Every one listed above was verified correct on 2026-09-11** — none is a retired value.  *But the table was not exhaustive, and that is the lesson:* the DELTA run found an eighth un-delegated literal, the s-only locked span deficit, written as `4.43` when the measured K=136 value is `4.40` (the 4.43 is the K=105 row).  It was not in this table, so the table's own reassurance did not cover it.  An enumeration offered as complete is a stronger claim than the literals it lists;  it is now registered (`p60_span_deficit_sonly_locked` / `_free`) and this table asserts only what it enumerates. The risk is
 structural, not present: each is a literal that will rot the next time its
-measurement moves, exactly as `K^0.84` did in W1. **Owed before the next FULL
-certifying run:** register each under C21 or a C17 family (Sec.15 rule 3 applies —
-measure or cite, never guess), then delegate. Until then a reviewer treats them
-as literals and checks them against the body.
+measurement moves, exactly as `K^0.84` did in W1. **Status 2026-09-13:** the tracked-reproducible five are registered (above);
+the three that are not tracked-reproducible (Gaussian ratio, water N^1.97 probe,
+tab:resource) need their drivers promoted to `tests/` or reclassification, deferred
+to the group2 review. Sec.15 rule 3 was honoured — every registered value was
+MEASURED, and the three that could not be measured from tracked code were NOT
+registered rather than guessed.
 
 ## Paper-60-specific watch-notes (the risk surface — ranked)
 
@@ -549,10 +576,128 @@ as literals and checks them against the body.
     a Goscinskian 1s² pins both electrons to one exponent for *any* weighting potential.
     Presenting this mechanism as a GeoVac discovery = MATERIAL.
 
+15. **The conditioning lever: a symbol zero of known order and location [SYMBOLIC +
+    MEASURED].** The ill-conditioning is a zero of known order and location, so a
+    band-Toeplitz preconditioner in Serra's sense removes it; the matching polynomial is
+    EXACTLY tridiagonal (its Hankel part vanishes identically) and DST-I diagonalizable in
+    closed form; `cond(G)` is FLAT in `n` against the raw `n^2` growth. Backing
+    `tests/test_paper60_preconditioner.py`. **Legitimacy leg, which must stay attached:**
+    any `X` with `X^T S X = I` preserves the generalized spectrum, so this is not a change
+    of problem. **Scope that must stay attached:** `s`-sector shared-scale, `M = 2, 3`; and
+    it does NOT recover `l`-selection — the block-diagonal congruence result
+    (Löwdin / Slater-Koster 1954) is untouched. Prose implying the lever
+    restores sparsity = MATERIAL.
+16. **The lever reaches water's `A_1`, and the rotation is what does the work [MEASURED].**
+    The symmetry-inequivalent-centre case that defeats the gerade lever (C8#9); raw growth
+    reproduces `N^1.97` independently while the preconditioned column is bounded. **The
+    CONTROL is load-bearing, but the UNIFORM one does NOT isolate the rotation**
+    (corrected 2026-09-13): `blockdiag(P,P)` = `I2 (x) tri(1,2,1)` commutes with the
+    rotation `V (x) I`, so it returns the same spectrum in either frame, and its
+    exponent is `N^1.950` against the raw `N^1.967`. The discriminating control is the
+    SELECTIVE `blockdiag(P,I)` in the UNROTATED frame: `N^3.79`, ending 106x WORSE
+    than untreated. Reporting the gain without THAT control = MATERIAL. Backing `tests/test_paper60_preconditioner.py`.
+17. **The M-centre null space is geometry-independent; its RATES are not [MEASURED,
+    SCOPE].** At the symbol point every block symbol tends to `j0(0)`, so the null space is
+    the constants' orthogonal complement for every arrangement — but the order at which each
+    direction opens is governed by `rank(P D2 P)`, which is ONE for collinear centres, so a
+    linear polyatomic opens at orders 2, 4, ..., 2(M-1). The lever is established for `M = 2`
+    and NON-COLLINEAR `M = 3`; **claiming it for a linear polyatomic = MATERIAL.** Backing
+    `tests/test_paper60_mcentre_orders.py`. External: Batenkov-Demanet-Goldman-Yomdin.
+18. **The amplitude floor [SYMBOLIC].** `eq:amplitude_floor` — any `X` with `X^T S X = I`
+    satisfies `||X|| = ||S^{-1/2}||` EXACTLY, independent of the factorization, so no
+    whitening can lower the block-encoding subnormalization. Backing
+    `tests/test_paper60_preconditioner.py`. Prose implying a factorization buys amplitude =
+    MATERIAL.
+19. **The direct block-encoding of `G` [SYMBOLIC + MEASURED].** `eq:ratio_symbol` — `G`'s
+    symbol is a bounded ratio of two symbols with zeros of the same order, and its sup
+    COINCIDES with `||G||`, so a circulant-embedded Toeplitz-minus-Hankel encoding carries
+    `O(1)` subnormalization and the metric penalty scales as `n` rather than `n^3`. Backing
+    `tests/test_paper60_direct_encoding.py`. **Two honest limits that must stay attached:**
+    the circuit is CITED, not compiled (a resource model, not a gate count); and `B != G` by
+    a stated operator-norm fraction that does not grow with `n`, harmless only because `B`
+    enters as a whitening and the amplitude floor (C8#18) makes any such `X`
+    spectrum-preserving. Presenting this as a compiled circuit = MATERIAL.
+20. **Overcompleteness is ONE DIRECTION, not a property of the basis [MEASURED].** The
+    Bessel deficit of a displaced Sturmian against the one-centre span PLATEAUS and does not
+    tend to zero, so the one-centre set is measurably far from complete IN THE MOLECULAR
+    METRIC. **The 2026-09-11 frames reading — "overcompleteness is the price of one-centre
+    completeness" — is WITHDRAWN [retracted 2026-09-12: p60-frames-completeness];**
+    re-asserting it = MATERIAL. Ron-Shen is the surviving
+    mechanism. The paired claim form is load-bearing: the gap must collapse WHILE the deficit
+    does not, which no single-sided bug satisfies. Backing
+    `tests/test_paper60_one_direction.py`. **Consequent caveat that must stay attached:** the
+    basis's motivating completeness is in the ATOMIC metric, not the molecular one.
+21. **`eq:sigma_law` is Kac-Murdock-Szego [PRIOR ART].** Not derived here; the corpus claims
+    only the IDENTIFICATION of the metric as such a finite section, Toeplitz minus Hankel
+    with the stated symbol. Re-claiming the asymptotic = MATERIAL. Backing
+    `tests/test_paper60_kms_attribution.py`. **Residue leg (2026-09-12):** the ~1% figure is
+    DOMINATED by the `n -> n+1` grid convention, with a genuine `O(1/n)` term surviving both
+    conventions; calling it purely an asymptotic tail = MATERIAL-SMALL.
+22. **The `l`-selection loss is NOT a conditioning effect [SYMBOLIC].** The
+    block-diagonal congruence result — a
+    block-diagonal congruence cannot orthogonalize a metric that is not block diagonal, at
+    EVERY `cond(S) > 1`, and it does not relax as `cond(S) -> 1+`. **Re-attributed 2026-09-12
+    (C23 run #1): this is Löwdin symmetry-preservation specialized to the `l` grading, known
+    since Slater-Koster (1954); what the paper claims is the `l`-vs-`m` application.**
+    Presenting it as a new proposition of ours = MATERIAL
+    [retracted 2026-09-12: p60-prop-d-as-new — the LABEL is retired; the
+    `l`-vs-`m` application is what the paper claims]. Backing
+    `tests/test_paper60_kms_attribution.py`.
+23. **`eq:chirp_decay` is a Bessel asymptotic [SYMBOLIC + PRIOR ART].** Constant AND phase
+    from DLMF, no stationary-phase argument needed; the `pi/4` is the BRANCH phase of the
+    square-root prefactor, not a stationary-phase signature; `sum|c_j|` CONVERGES while
+    `sum j|c_j|` diverges, which is the Böttcher-Widom hypothesis and a different condition.
+    Backing `tests/test_paper60_kms_attribution.py`. Asserting a stationary-phase origin, or
+    conflating the two sums, = MATERIAL-SMALL.
+24. **Transcendental tagging of this section [SYMBOLIC + MEASURED].** Both constants are
+    calibration-tier M2 and the tagging is PROVENANCE ONLY. **Prior art that must be
+    credited (C23 run #3, 2026-09-12):** the Dirichlet-eigenvalue reading of the constant,
+    the extremal Wirtinger-Sobolev problem behind it, and the independence of the constant
+    from the rest of the symbol are ALL Böttcher-Widom's, in a source the paper already
+    cites. **The Bessel-free measurement is a change of REPRESENTATION, not an independent
+    route** — presenting it as independent corroboration = MATERIAL. **The removability
+    corollary is WITHDRAWN [retracted 2026-09-12: p60-removability-corollary]** ("truncation-side prices are matrix-level and reachable;
+    continuum-side prices are symbol-level and untouchable"): both halves are false, because
+    the preconditioner is built FROM the symbol and preconditioning IS a congruence.
+    Re-asserting it = MATERIAL. Backing `tests/test_paper60_contraction_window.py`.
+25. **The minimiser carries the antipodal parity [MEASURED].** The band minimiser is the
+    Dirichlet ground state in the band index ONLY with the alternating factor; without it
+    the two are EXACTLY ORTHOGONAL, so the bare statement is not an approximation of the
+    right one. Stating it bare = MATERIAL-SMALL. Backing
+    `tests/test_paper60_contraction_window.py`.
+26. **The law is carried by the TRANSLATION, not the metric [MEASURED + PRIOR ART].** The
+    generalized symbol is the quotient, so a smooth positive radial weight cancels; the
+    vanishing-weight CONTROL is the load-bearing half and reporting the agreement without it
+    = MATERIAL. **Prior art (2026-09-12): Ahmad et al. give this EXACTLY for the tau/DST-I
+    algebra — the structure this paper works in — so the measurement confirms a theorem
+    rather than establishing one;** claiming it as novel = MATERIAL. **Scope that must stay
+    attached:** this is NOT `V_0`-independence, since a position-space-local `V_0` acts by
+    convolution and leaves the class. Backing `tests/test_paper60_contraction_window.py`.
+27. **The translation identification is NOT ours [PRIOR ART].** Shibuya-Wulfman's own
+    abstract builds the molecular operator from one unitary per nucleus; the explicit
+    group formulation and the Coulomb-Sturmian translation-operator reading are both later
+    published work. **What survives as ours is the SYMBOL.** Re-claiming the translation
+    reading = MATERIAL. **Companion resolution that must stay intact:** Monkhorst-Jeziorski's
+    "no linear dependence" and this paper's measured conditioning are the SAME pencil and
+    both true — they never INVERT the overlap, and GeoVac inverts because a block-encoding
+    wants a standard Hermitian eigenproblem, so the exposure belongs to the ENCODING
+    REQUIREMENT. **Provenance cap:** that paper's two-page body is UNREAD (closed, no
+    repository copy); the mechanism is reconstructed from the lineage and the paper says so.
+    Dropping that cap = MATERIAL-SMALL.
+
+> **Pre-registration completed 2026-09-12 (PI-confirmed) for v5.11.0–v5.11.4.** Headlines
+> 15–27 cover the preconditioner lever, the water `A_1` transfer, the M-centre rate scoping,
+> the amplitude floor, the direct block-encoding, the one-direction correction, and the
+> five prior-art re-tierings of 2026-09-12. This ADDS claims to be checked; no existing
+> goalpost was relaxed. **Standing caution carried forward:** three of these (20, 24, 26)
+> record a WITHDRAWN reading, and a withdrawn reading re-surfacing is the corpus's most
+> frequent defect class — C16 entries are owed for 24's removability corollary and 20's
+> frames reading.
+
 ## Seeding plan (worktree only; never touches the real corpus)
 
 K ≈ 5–6 planted defects, ≥1 catchable by each EXERCISED dimension (code / prose / citation;
-C9 not exercised), spanning the watch-notes — e.g. an **accurate-helium** overclaim (W6), a
+C9 **is** exercised and GATING --- corrected 2026-09-07, and again 2026-09-12: this line still said "not exercised" after the file had corrected that premise twice, and the dimension then held a LARGE defect), spanning the watch-notes — e.g. an **accurate-helium** overclaim (W6), a
 **"molecular many-electron 1-norm is sublinear"** reversal (branch-crit #2 / C8#10), a
 **"metric-free in general"** over-generalization (W4), a **"gerade lever holds for water/
 polyatomics"** reversal (W5/C8#9), a **citation splice** on `rajchel2025` or `babbush2018`
@@ -562,6 +707,98 @@ n_orb^2.2) that must NOT be flagged. Tiered agents (code + citation = Sonnet) ge
 each. Answer key → `debug/qa/paper_60_seed_key.json`.
 
 ## Change log
+- 2026-09-13 — **FULL certifying run = FAIL (PI-invoked).** Whole-paper, unseeded, tree
+  frozen. **5 of 6 dimensions PASS with zero mathematical/content defects:** deterministic
+  14/14, code 136/136 `--slow` (C21 green), claims (1 SMALL), citations (49/49 resolve),
+  synthesis C9 gating (1 NIT). **Completeness = FAIL** on three self-declared
+  cert-blockers, not on any hidden defect (zero undiscovered gaps, zero surviving stale
+  echoes). Remediated this run: F1 (abstract n^3->n clause re-tiered [RESOURCE MODEL]),
+  the C9 eigenvalue-wording NIT, the Monkhorst-Jeziorski bibitem title, and — closing a
+  cert-blocker — the Sylvester-inertia bound C8.16 now has a standalone fire-tested test
+  (`test_c5_inertia_bound_and_root_by_root`), matrix row 568 OPEN->BACKED. **Remaining
+  gating work: register the ~7 declared-debt literals (itemized in CHANGELOG v5.11.10) as
+  their own careful pass, then a clean delta.** NOT certified.
+- 2026-09-13 — **DELTA-verification #3 = DEFECTS, remediated. Cleanest of the lineage.**
+  Four dimensions; **citations and code both CLEAN-DELTA**; 0 LARGE, 0 mathematical.
+  Three SMALL, all the v5.11.8 water-control fix (rotation is load-bearing) not reaching
+  two summary surfaces plus a stale number in the corrected body sentence: paper L1338
+  (`2766` was the N=48 interior point, not the low endpoint — measured 194 at the paper's
+  own grid; **the claims reviewer's proposed 729.2 was itself wrong and was caught before
+  printing**), `papers/INDEX.md` (omitted rotation caveat), `docs/walls/register.md` (cited
+  the blind uniform control as discriminating evidence). New category: paraphrase-level
+  requirement-omission survives token gates even in files C16 was widened to. **Process:
+  the tree was frozen and no edit made until all four reviewers returned — DELTA #2's
+  moving-target defect did not recur.** Public-web layer stale but a known PI-gated gap,
+  unchanged. **Next: a clean delta before any FULL certifying run.**
+- 2026-09-13 — **PROCESS DEFECT, the PM's: THE TARGET MOVED UNDER THE REVIEWERS.**
+  The code reviewer finished its mandated run at 08:25, then the PM applied
+  `debug/delta2_fix_01..06_*.py` between 08:30 and 08:43 — rewriting the paper's
+  resource-control paragraph, the claim matrix, the claims register, the walls
+  register, `papers/INDEX.md`, the group2 synthesis, and
+  `tests/test_paper60_preconditioner.py`, which gained a 13th test that did not
+  exist when that run collected its 52 items. **A DELTA verdict formed on a
+  moving tree certifies a state that no longer exists.** The `/qa` protocol
+  already says how to avoid this — *"snapshot it into a worktree first if the PM
+  will keep editing during the run"* — and the PM did not. The reviewer caught it
+  itself, re-ran against the new state (12 passed / 1 skipped) and independently
+  reproduced the new numbers (raw N^1.9666, uniform N^1.9497, selective N^3.7913;
+  106.4x at N=192), so the CONTENT is sound and the PROCESS is the finding.
+  **Standing rule for the next run: snapshot before dispatch, or do not remediate
+  until every reviewer has returned.**
+- 2026-09-13 — **DELTA #2 — two NEW affected categories, and a remediation that
+  never landed.** (1) **The applier class.** `delta_fix_04_last_three.py` returns
+  from inside its edit loop on a stale anchor, BEFORE its write loop, so one bad
+  anchor discards every edit in the script silently — while CHANGELOG v5.11.7
+  recorded the remediation as applied. Three fixes (the walls register's retired "Proposition D" label
+  [retracted 2026-09-12: p60-prop-d-as-new] at three loci, the
+  floor bracket in the synthesis and claims register) were written 2026-09-13 and
+  were not in the corpus. `delta_fix_03` had failed the same way one step earlier
+  and said so in its own docstring. Appliers now WRITE FIRST and report misses.
+  (2) **The public web-rendering layer** (`viz/public/papers/*.html`,
+  `index.html`, `sitemap.xml`) — the outward-facing sibling of DELTA #1's
+  generated-artifact LARGE. The group2 synthesis renders an abstract saying "the
+  nine Group 2 papers" where the source says twelve, and **Papers 58, 59, 60 and
+  61 have no public page at all**, so none of the nine changed claims has any
+  public rendering. Built by `debug/build_paper_pages.py` from a stale
+  `debug/data/zenodo_manifest.json`. **DECLARED GAP, not fixed here:** rebuilding
+  the manifest touches the Zenodo/DOI distribution surface, which is PI-gated.
+  (3) **`docs/walls/register.md` is unreachable by every gate** — the string
+  `docs/walls` appears nowhere in `debug/qa/`, yet the file carries an operative
+  dispatch rule. Same "operative instructions outside the gate" shape as the
+  recall layer that was DELTA #1's second LARGE, but inside the repo. Closed by
+  widening the six 2026-09-12 C16 entries, which had shipped with a NARROWER
+  `files` list than the older p60 entries beside them; widening took C16 from
+  PASS to FAIL with 7 live loci, all now closed, and the widened entry is proven
+  to discriminate both ways.
+- 2026-09-13 — **DELTA-verification = DEFECTS, remediated. NOT a clean delta.** Four
+  dimensions over the claim-impact set, unseeded; deterministic 14/14; 172 tests pass;
+  **zero mathematical defects**. 2 LARGE, both OUTSIDE the nominated set by category —
+  the generated-artifact layer (prior-art credit in the output but not the generator, so
+  the distributed JSON lacked it and regeneration would erase the markdown copy) and the
+  auto-loading recall layer (four stale readings, one an operative instruction to claim
+  what was given away). 14 SMALL across claims/citations/claim-impact, plus one MATERIAL
+  code finding (the new full-shell test cited by no row). **Two self-inflicted errors
+  recorded:** the 2026-09-12 chain fix added "values are truncated, not rounded", false
+  against the exact 1s² value; and the PM accepted a reviewer's under-sampled convergence
+  finding and re-tiered a CORRECT claim, which the reviewer then withdrew and an extended
+  ladder refuted (c=3 plateaus at ~1.6e-7 by 250k points). **Next: a clean delta before
+  any FULL certifying run.**
+- 2026-09-12 — **FULL run (PI-invoked) = FAIL, remediated. NOT certified.** Six dimensions,
+  unseeded. C8 extended to headlines 15–27 first (PI-confirmed) so v5.11.0–v5.11.4 were
+  pre-registered rather than unmeasured. **Zero mathematical defects**; every published
+  converged constant independently reproduced by both code reviewers; 46/46 bibitems resolve.
+  Five load-bearing findings: a retired `-2.897` He chain endpoint in the abstract (violating
+  the paper's own interlacing bound, now `-2.896` and registered); abstract + conclusion
+  pre-breach against `sec:resource`; the water control provably blind (it commutes with the
+  rotation it names); the τ prior-art surrender over-scoped (our matrices are not in that
+  algebra — measured 1.1% off-diagonal at n=160); and an `x == x` guard behind an abstract
+  headline. Two reviewer findings OVERTURNED by PM verification (a "missing" 1967 reference
+  exists; a wrong-basis-point finding did not apply to the abstract). Instrument findings:
+  three gates scoped to `trunk` on first invocation; C16 clean on files it scopes while
+  zombies live in them; a claim-matrix row citing a deleted test; the staleness banner
+  measuring the paper and not the synthesis on a GATING dimension; C21 blind to the molecular
+  half. Remediated in six passes, content before guards; four new guard assertions all
+  fire-tested. **Next: a delta-verification run over the remediation.**
 - 2026-08-18 — **FINAL FULL certifying run = PASS → CERTIFIED ✅** (PI: "run one final formal certifying
   pass"). Fresh git-worktree over the post-sprint text (full `geovac` package so the tracked suite runs),
   6 fresh seeds across all 3 dimensions. **Calibration 6/6, specificity clean, zero cert-blocking MATERIAL.**

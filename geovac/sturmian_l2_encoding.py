@@ -18,10 +18,16 @@ term) is measured as a function of shell count N (Q = 2N spin-orbitals).
 
 Paper 60 eq:blowup claims this naive encoding inflates lambda as:
     hydrogenic : lambda ~ Q^1.19
-    sturmian   : lambda ~ Q^3.33  (the shared-scale overlap ill-conditions,
-                 and Loewdin whitening spreads that ill-conditioning into the
-                 transformed integrals -- the motivation for the isoenergetic
+    sturmian   : lambda ~ Q^3.33  (the shared-scale overlap is strongly
+                 NON-ORTHOGONAL, so Loewdin's S^-1/2 is DENSE and spreads the
+                 coefficient distribution -- the motivation for the isoenergetic
                  reformulation, which removes the metric for atoms).
+
+    MECHANISM, corrected 2026-09-07 [retracted 2026-09-12: p60-l2-metric-diverges]:
+    this is NOT ill-conditioning.  The converged cond(S) is ordinary (~0.12*K,
+    4.07 at K=10, 56.3 at K=452); the earlier "ill-conditions" reading was an
+    artifact of a fixed 60-bohr radial domain.  The inflation is driven by the
+    DENSITY of S^-1/2, not by numerical instability.
 
 Anchoring k = Z for the Sturmian family makes the n=1 shell identical to the
 hydrogenic n=1 shell, so the two sweeps are on a fair, apples-to-apples footing.

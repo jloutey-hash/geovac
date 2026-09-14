@@ -432,12 +432,36 @@ def test_state_dependence_at_largest_computed_basis_k452():
     # (a) the states are NOT at the same multiple
     assert gnd / exc > 3.5, gnd / exc
 
-    # (b) one matrix serves both roots -- the 1-norm cannot be per-state
-    norm_all = float(np.abs(M).sum())
-    assert norm_all > 0
+    # (b) one matrix serves both roots -- the 1-norm cannot be per-state.
+    # The old form here asserted |M|.sum() == |M|.sum() on an unmodified M,
+    # i.e. x == x, and excluded nothing (/qa paper_60 FULL 2026-09-12).  The
+    # exclusion only means something if the per-state alternative is REACHABLE,
+    # so build it: the same family at a state-dependent reference scale, via
+    # Config's pk_ref -- a parameter no test had ever varied.
+    # (norm_all was computed here and never used -- the last residue of the
+    # tautology removed 2026-09-13.  Removed 2026-09-13.)
+    per_state = []
     for k in (0, 1):
-        _ = -p[k] ** 2 / 2.0
-        assert float(np.abs(M).sum()) == norm_all
+        cfgs_k = [SS.Config(c.l, c.na, c.nb, pk_ref=float(p[k]))
+                  for c in cfgs[:40]]
+        per_state.append(float(np.abs(SS.build_M(cfgs_k, Z=Z)).sum()))
+    # If pk_ref were ignored, the two rebuilds would be EXACTLY equal, so any
+    # threshold clear of float noise discriminates.  Measured separation at the
+    # true roots is 2.7% (K=100); 0.5% keeps a 5x margin below that while
+    # sitting ~1e13 above noise, so this is not an over-tight pin.
+    assert abs(per_state[0] - per_state[1]) / per_state[0] > 0.005, (
+        f"a per-state rebuild must MOVE the 1-norm, else this leg excludes "
+        f"nothing: {per_state}")
+    # ...and the pipeline is demonstrably NOT doing that: its own matrix on the
+    # same sub-family differs from either per-state rebuild.
+    sub = float(np.abs(SS.build_M(list(cfgs[:40]), Z=Z)).sum())
+    assert abs(sub - per_state[0]) / sub > 0.02, (
+        f"the pipeline's own matrix must differ from the per-state rebuild: "
+        f"{sub} vs {per_state[0]}")
+    # (The line that stood here asserted |M|.sum() == norm_all on an
+    # unmodified M -- the same x == x the 2026-09-12 remediation was written
+    # to remove, supplemented rather than replaced.  Removed 2026-09-13; the
+    # two assertions above carried the discrimination all along.)
 
 
 # ==========================================================================

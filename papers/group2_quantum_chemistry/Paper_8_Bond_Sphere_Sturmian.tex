@@ -43,11 +43,14 @@ one-electron Hamiltonian and overlap obey the two-term identity
 $H_{ij} = -\tfrac{1}{2}p_0^2 S_{ij} + (1-\beta_j)V_{ij}$, and their entire
 $R$-dependence is a single orthogonal $SO(4)$ congruence $D^{(n)}(\gamma(R))$
 that cancels in the generalized eigenvalue problem: the eigenvalues are
-independent of $R$.  Binding then requires the $R$-dependent prolate
-spheroidal spectrum $\beta_k(R)$, reintroducing continuous geometry.
-The resolution---discretizing the Laplace--Beltrami operator in prolate
-spheroidal coordinates---is developed in the companion
-Paper~11~\cite{loutey_paper11}.
+independent of $R$.  In this single-$n$, shared-$p_0$ form, binding would require the
+$R$-dependent prolate spheroidal spectrum $\beta_k(R)$;\ but the genuine
+cross-$n$ Coulomb--Sturmian overlap couples $n$, escapes the theorem, and
+supplies that $R$-dependence algebraically via Shibuya--Wulfman
+(Remark~\ref{rem:overlap_imposed}), so what is ruled out is this approximation,
+not Sturmian molecular binding.  The continuous-geometry route---discretizing
+the Laplace--Beltrami operator in prolate spheroidal coordinates---is developed
+in the companion Paper~11~\cite{loutey_paper11}.
 \end{abstract}
 
 \maketitle
@@ -539,7 +542,7 @@ The Fiedler vector zero-crossing is the discrete, combinatorial analog
 of Bader's bond critical point~\cite{Bader1990} in the Quantum Theory
 of Atoms in Molecules (QTAIM).  Bader's bond critical point is defined
 as the point where $\nabla\rho = 0$ along the bond path, where $\rho$
-is the electron density.  The GeoVac graph gives the same object
+is the electron density.  The GeoVac graph gives a discrete analog of this object
 without invoking the electron density: the membrane position is
 determined purely by the graph Laplacian spectrum.
 
@@ -907,8 +910,10 @@ The computational diagnostic arc v0.9.20--v0.9.34 (29~versions) exhaustively
 tested the Sturmian bond sphere for LiH.  Every variant failed.  This section
 distills the failure into a single structural theorem that explains why the
 Sturmian basis, despite its geometric elegance, cannot produce
-geometry-dependent binding in the shared-$p_0$ framework without solving a
-continuous PDE at every~$R$.
+geometry-dependent binding in this single-$n$ approximation without solving a
+continuous PDE at every~$R$---while the genuine cross-$n$ Coulomb--Sturmian
+overlap escapes the theorem and binds (Remark~\ref{rem:overlap_imposed}), so the
+obstruction is to the approximation, not to Sturmian molecular binding.
 
 \begin{theorem}[Sturmian structural theorem]
 \label{thm:structural}
@@ -996,9 +1001,9 @@ geometry-independence it verifies is a property of the bond-sphere
 $D$-matrix \emph{model}, not of the genuine cross-$n$ Coulomb--Sturmian
 basis.  Because a cross-$n$ overlap breaks the shared congruence
 ($S$ and $H$ no longer pull back to the same $R$-independent forms),
-binding is \emph{not} excluded for the genuine basis---consistent with the
-published binding of molecular Coulomb--Sturmian calculations at
-Hartree--Fock and beyond~\cite{HerbstAveryDreuw2019}.  The theorem thus
+binding is \emph{not} excluded for the genuine basis---consistent with published Coulomb--Sturmian Hartree--Fock
+calculations~\cite{HerbstAveryDreuw2019} (there for atoms; the molecular
+cross-$n$ binding is the escape this Remark establishes).  The theorem thus
 delimits a specific approximation; it is not a no-go for Sturmian molecular
 binding.  (Backing: \texttt{tests/test\_paper8\_overlap\_cross\_n.py}.)
 \end{remark}
@@ -1305,9 +1310,11 @@ that in the shared-$p_0$ Sturmian basis, the one-electron $(H,S)$ obey the
 two-term identity $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and
 carry their entire $R$-dependence in a single orthogonal $SO(4)$ congruence,
 making the generalized eigenvalues independent of the bond angle $\gamma$
-and hence of~$R$.  Binding requires the full
-$R$-dependent prolate spheroidal eigenvalue spectrum $\beta_k(R)$, which
-reintroduces continuous spatial geometry (Corollary~\ref{cor:binding}).
+and hence of~$R$.  In this single-$n$, shared-$p_0$ form, binding would require the full
+$R$-dependent prolate spheroidal eigenvalue spectrum $\beta_k(R)$;\ the genuine
+cross-$n$ Coulomb--Sturmian overlap escapes the theorem and supplies it
+algebraically (Corollary~\ref{cor:binding}), so what is ruled out is this
+approximation, not Sturmian molecular binding.
 For heteronuclear diatomics, no shared $p_0$ simultaneously represents
 both atomic length scales (Corollary~\ref{cor:dual_p0}).  This theorem
 was verified computationally across 29~diagnostic versions

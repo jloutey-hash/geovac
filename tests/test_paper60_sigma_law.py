@@ -1,6 +1,8 @@
 """Paper 60 -- the principal-angle (sigma-spectrum) law for the SW metric.
 
-Backs the derived conditioning law (CHANGELOG v4.103.0; Paper 60 sec:molecular):
+Backs the conditioning law (CHANGELOG v4.103.0; Paper 60 sec:molecular).
+The ASYMPTOTIC is Kac-Murdock-Szego prior art, not a GeoVac derivation; what is
+backed here is the identification and the measured spectrum:
 
   1. spec(S) = {1 +/- sigma_k} and cond(S) = (1+sigma_max)/(1-sigma_max) exactly
      (SW intra block = identity), and the v4.73.0 composition-wall commutator is

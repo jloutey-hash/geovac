@@ -64,7 +64,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import geovac.sturmian_secular as SS                                  # noqa: E402
 import geovac.sturmian_variational as SV                              # noqa: E402
 from geovac.sturmian_variational import (                             # noqa: E402
-    build, var_energy, var_levels)
+    build, var_energy, var_levels, _whiten)
 
 Z = 2.0
 NPTS = 24000
@@ -415,3 +415,80 @@ def test_c4_posing_cost_is_state_dependent():
     # (they imply it) and exist to catch drift rather than to state the result.
     assert abs(gnd - 4.212) < 0.02, f"ground posing cost {gnd:.4f} mHa"
     assert abs(s2 - 0.983) < 0.01, f"2^1S posing cost {s2:.4f} mHa"
+
+
+def test_c5_inertia_bound_and_root_by_root():
+    """C8.16 -- the variational bound and root-by-root correspondence are FORCED
+    by Sylvester inertia, not assumed. Standalone backing for matrix row 568.
+
+    Three legs. The identity and the inertia count are the content; the
+    root-by-root check is their consequence, pinned here so a future edit that
+    breaks the bridge cannot pass on the consequence alone.
+
+    WRONG ANSWER REJECTED (1): the pencil H(lam)C = E S C is claimed to reduce to
+    the standard eigenproblem lam(lam*I - M), but does not. Leg A fires if
+    T != I - S/2 (the kinetic identity) or if the standard-eigenproblem M does
+    not equal Z*W - G.
+    WRONG ANSWER REJECTED (2): the root-by-root correspondence E_iso(k) = -p_k^2/2
+    is assumed rather than forced. Leg B fires unless, for every lam tested, the
+    number of pencil roots below -lam^2/2 equals #{eig(M) > lam}. Fire-tested by
+    shifting M: the count then mismatches (asserted inline below).
+    """
+    c = case(6, 1)
+    n = c.M.shape[0]
+    I = np.eye(n)
+
+    # ---- Leg A: the algebraic identity, to machine precision ---------------
+    # T = I - S/2  (the kinetic identity), and M = Z*W - G  (W diagonal).
+    assert np.linalg.norm(c.T - (I - 0.5 * c.S)) < 1e-9, (
+        f"kinetic identity T = I - S/2 broken: "
+        f"||T - (I - S/2)|| = {np.linalg.norm(c.T - (I - 0.5 * c.S)):.2e}")
+    M_from_WG = Z * c.W - c.G
+    assert np.linalg.norm(M_from_WG - c.M) < 1e-6, (
+        f"standard-eigenproblem M != Z*W - G (route cross-check): "
+        f"||ZW - G - M|| = {np.linalg.norm(M_from_WG - c.M):.2e}")
+    # hence H(lam) + (1/2) lam^2 S == lam(lam*I - M), for arbitrary lam:
+    for lam in (1.0, 2.386, 5.0):
+        H = lam ** 2 * c.T + lam * (-Z * c.W + c.G)
+        lhs = H + 0.5 * lam ** 2 * c.S
+        rhs = lam * (lam * I - c.M)
+        assert np.linalg.norm(lhs - rhs) / (n * lam ** 2) < 1e-9, (
+            f"identity H(lam) + lam^2 S/2 = lam(lam I - M) broken at lam={lam}")
+
+    # ---- Leg B: the inertia count (the load-bearing bridge) ----------------
+    X = _whiten(c.S)                       # S = (X X^T)^{-1}; whitened pencil
+    pM = np.sort(np.linalg.eigvalsh(c.M))[::-1]   # descending eigenvalues of M
+
+    def pencil_roots(lam: float) -> np.ndarray:
+        H = lam ** 2 * c.T + lam * (-Z * c.W + c.G)
+        return np.linalg.eigvalsh(X.T @ H @ X)
+
+    def inertia_ok(Mmat: np.ndarray) -> list:
+        eM = np.sort(np.linalg.eigvalsh(Mmat))[::-1]
+        out = []
+        for lam in (0.8, 1.5, 2.386, 3.0, 4.5):
+            H = lam ** 2 * c.T + lam * (-Z * c.W + c.G)
+            roots = np.linalg.eigvalsh(X.T @ H @ X)
+            below = int(np.sum(roots < -0.5 * lam ** 2 - 1e-9))
+            above = int(np.sum(eM > lam + 1e-9))
+            out.append((lam, below, above))
+        return out
+
+    for lam, below, above in inertia_ok(c.M):
+        assert below == above, (
+            f"inertia count broken at lam={lam}: #{{roots < -lam^2/2}}={below} "
+            f"but #{{eig(M) > lam}}={above}")
+
+    # fire-test the inertia leg: a SHIFTED M must break the count (proves the
+    # count is tracking M, not passing vacuously)
+    mism = [(lam, b, a) for lam, b, a in inertia_ok(c.M + 0.5 * I) if b != a]
+    assert mism, ("inertia leg is vacuous: shifting M by 0.5*I did not change "
+                  "any count -- the test would pass for the wrong M")
+
+    # ---- Leg C: the consequence -- level k of H(p_k) equals E_iso(k) -------
+    for k in (0, 1, 2, 3):
+        lam_k = math.sqrt(-2 * c.E_iso_k(k))
+        root_k = float(c.levels(lam_k, k + 1)[k])
+        assert abs(root_k - c.E_iso_k(k)) < 1e-9, (
+            f"root-by-root broken at k={k}: pencil root {root_k:.9f} "
+            f"vs E_iso(k) {c.E_iso_k(k):.9f}")

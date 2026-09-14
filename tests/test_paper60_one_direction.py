@@ -4,6 +4,7 @@
 Why this test exists.  A frames-theoretic reading of the two-center degeneracy
 was adopted on 2026-09-11 and is WRONG for this basis: it held that
 completeness of the ONE-CENTRE set forces lam_min -> 0 (if g lies in the closed
+[retracted 2026-09-12: p60-frames-completeness]
 span of {f_i} then lam_min(G_N) <= dist(g, V_N)^2 -> 0).  That hypothesis is
 measurable here, because the intra-centre block of the SW metric is exactly the
 identity, so the A-set is orthonormal in that metric and Bessel's inequality

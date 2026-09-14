@@ -14,9 +14,12 @@ Claims backed:
   4. The chi -> 0 chirp gives |c_j| ~ j^{-5/4}, hence sum_j j |c_j| DIVERGES,
      so the Boettcher-Widom smoothness hypothesis fails on our symbol.
   5. The restatement 1 - sigma_max = (1/6) (R / L_max)^2, L_max = 2n/(pi k).
-  6. Proposition D: a block-diagonal congruence cannot orthogonalize a metric
-     that is not itself block diagonal -- the l-selection loss is independent
-     of conditioning.
+  6. The block-diagonal congruence result: a block-diagonal congruence cannot
+     orthogonalize a metric that is not itself block diagonal -- the
+     l-selection loss is independent of conditioning.  PRIOR ART (C23 run #1,
+     2026-09-12): this is Loewdin symmetry preservation specialised to the l
+     grading, known since Slater-Koster (1954).  What is claimed here is the
+     l-versus-m application, not a proposition of ours.
 """
 import numpy as np
 import pytest
@@ -208,7 +211,7 @@ def test_Lmax_restatement_matches_sigma_law():
     assert sp.simplify(restated - law) == 0
 
 
-# ------------------------------------------------------------- Proposition D
+# ------------------------- block-diagonal congruence (Loewdin/Slater-Koster)
 def test_prop_d_block_diagonal_congruence_preserves_block_structure():
     """If X is block diagonal and X^dag S X is block diagonal, so is S.
 

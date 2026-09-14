@@ -137,7 +137,7 @@ weight one -- no dilogarithm appears anywhere.
 | 7. Anchor constants | 5 |
 | **total** | **66** |
 
-Generated 2026-08-22 from commit-time corpus state; generator mode `full`, Python 3.14.0, mpmath 1.3.0, sympy 1.14.0.
+Generated 2026-09-13 from commit-time corpus state; generator mode `full`, Python 3.14.0, mpmath 1.3.0, sympy 1.14.0.
 
 
 ---
@@ -1385,10 +1385,9 @@ The fixed constants the rest of the table is stated against, at a uniform 50 dig
 * **defining relation:** `lim_{n->inf} (1 - sigma_max) (n / kR)^2 = pi^2 / 24`
 * **transcendence class:** {pi^2} -- pure-Tate, weight 2
 * **backing test:** `tests/test_paper60_sigma_law.py`
+* **provenance:** PRIOR ART: Kac, Murdock and Szego, J. Rational Mech. Anal. 2, 767 (1953); c_1 = pi^2.  Ours is the identification of the SW metric as such a finite section, not the asymptotic.
 
-**Provenance (added 2026-09-11).** The law is the Kac-Murdock-Szego extreme-eigenvalue asymptotic, not an independent derivation: for a symbol in the normal form |1-t|^{2a} b(t), lam_min ~ (c_a/n^{2a}) b(1) with c_1 = pi^2 (Kac, Murdock & Szego, J. Rational Mech. Anal. 2, 767 (1953); see Boettcher & Widom, arXiv:math/0412269).  Our symbol is the a = 1 case with curvature b(1) = (kR)^2/24, so pi^2/24 is c_1 b(1) with kR factored out.  What is ours is the IDENTIFICATION of the SW metric as such a finite section.  The value below is unchanged.
-
-**Method.** In the Shibuya-Wulfman two-centre metric the largest cross-centre singular value obeys the band-limited concentration law 1 - sigma_max = (kR)^2 pi^2 / (24 n^2), so the rescaled quantity (1 - sigma_max)(n/kR)^2 tends to pi^2/24 as the per-centre basis size n grows.  This fixes the conditioning exponent at exactly 2, and reveals the previously fitted exponents 1.85 and 1.97 as pre-asymptotic windows of the same law.
+**Method.** In the Shibuya-Wulfman two-centre metric the largest cross-centre singular value obeys the band-limited concentration law 1 - sigma_max = (kR)^2 pi^2 / (24 n^2), so the rescaled quantity (1 - sigma_max)(n/kR)^2 tends to pi^2/24 as the per-centre basis size n grows.  This fixes the conditioning exponent at exactly 2, and reveals the previously fitted exponents 1.85 and 1.97 as pre-asymptotic windows of the same law.  PRIOR ART (recorded 2026-09-11): the asymptotic is NOT derived in this corpus -- it is the Kac-Murdock-Szego extreme-eigenvalue law (c_1 = pi^2, J. Rational Mech. Anal. 2, 767 (1953); normal form in Boettcher-Widom arXiv:math/0412269), and pi^2/24 is c_1 times the symbol curvature b(1) = (kR)^2/24.  What is ours is the IDENTIFICATION of the two-centre Shibuya-Wulfman metric in the sine basis as such a finite section, Toeplitz minus Hankel with symbol j0(kR cot(chi/2)).  Do not describe the law as derived here.
 
 **Evidence.** Elementary closed form, evaluated at working precision 70; claiming 50 digits.  The float64 constant exported by geovac.sturmian_sigma_law.COLLAPSE_CONSTANT agrees to 7.6e-18.  The physics claim -- that the measured quantity actually converges to this constant (0.9913 of the limit at n = 160) -- is backed by tests/test_paper60_sigma_law.py.
 

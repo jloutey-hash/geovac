@@ -76,7 +76,15 @@ def build(mode: str = "full") -> List[Dict[str, Any]]:
             "(1 - sigma_max)(n/kR)^2 tends to pi^2/24 as the per-centre basis "
             "size n grows.  This fixes the conditioning exponent at exactly 2, "
             "and reveals the previously fitted exponents 1.85 and 1.97 as "
-            "pre-asymptotic windows of the same law.",
+            "pre-asymptotic windows of the same law.  PRIOR ART (recorded "
+            "2026-09-11): the asymptotic is NOT derived in this corpus -- it is "
+            "the Kac-Murdock-Szego extreme-eigenvalue law (c_1 = pi^2, J. "
+            "Rational Mech. Anal. 2, 767 (1953); normal form in Boettcher-Widom "
+            "arXiv:math/0412269), and pi^2/24 is c_1 times the symbol curvature "
+            "b(1) = (kR)^2/24.  What is ours is the IDENTIFICATION of the "
+            "two-centre Shibuya-Wulfman metric in the sine basis as such a "
+            "finite section, Toeplitz minus Hankel with symbol "
+            "j0(kR cot(chi/2)).  Do not describe the law as derived here.",
             f"Elementary closed form, evaluated at working precision {DPS}; "
             f"claiming {CLAIM} digits.  The float64 constant exported by "
             f"geovac.sturmian_sigma_law.COLLAPSE_CONSTANT agrees to "
@@ -88,6 +96,10 @@ def build(mode: str = "full") -> List[Dict[str, Any]]:
             defining_relation="lim_{n->inf} (1 - sigma_max) (n / kR)^2 = pi^2 / 24",
             transcendence_class="{pi^2} -- pure-Tate, weight 2",
             backing_test="tests/test_paper60_sigma_law.py",
+            provenance=("PRIOR ART: Kac, Murdock and Szego, J. Rational Mech. "
+                        "Anal. 2, 767 (1953); c_1 = pi^2.  Ours is the "
+                        "identification of the SW metric as such a finite "
+                        "section, not the asymptotic."),
         ))
 
         # ---- the sinc minimum and the gerade constant ----------------------

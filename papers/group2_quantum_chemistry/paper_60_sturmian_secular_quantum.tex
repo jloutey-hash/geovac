@@ -47,10 +47,10 @@ those two risks and the presence of the floor are therefore not independent
 virtues and defects but one structural fact.  The floor is moreover a
 \emph{ground-state} pathology rather than a property of the method:\ because
 $\|M\|_1$ does not depend on which root is extracted, every $^{1}S$ state costs
-the same to encode, and at the largest computed basis $K=452$ the
+the same to encode, and at the largest basis where both roots were computed, $K=452$, the
 ground state sits $\gvq{p60_gnd_ratio_k452}{4.28}\times$ above chemical accuracy
-while $2\,^{1}S$ sits $\gvq{p60_exc_ratio_k452}{1.08}\times$ above it;\ at
-$K=105$ the posing cost falls by $4.3\times$, $3.0\times$ and $2.6\times$
+while $2\,^{1}S$ sits $\gvq{p60_exc_ratio_k452}{1.08}\times$ above it;\ and on
+the $s$-only ladder at $K=105$ the posing cost falls by $4.3\times$, $3.0\times$ and $2.6\times$
 across the first three rungs of the $^{1}S$ ladder.  The result is therefore a measured trade-off between cost growth,
 attainable accuracy and \emph{which state is targeted}, not an unconditional
 efficiency claim.  The development follows.
@@ -79,8 +79,8 @@ $T'$ is a matrix of pure numbers, independent of $p_\kappa$, of energy, and of
 $Z$.  \textbf{[MEASURED]} We implement it, validate it against helium (a single
 Goscinskian configuration reproduces the textbook variational value
 $-2.847$~Ha; adding configurations lowers the energy monotonically through
-the $s$, $+p$ and $spdf$ sectors---past the locked $s$-sector value $-2.873$~Ha to
-$-2.897$~Ha, toward the exact non-relativistic $-2.90372$~Ha), and measure the decisive quantity: the block-encoding $1$-norm of the
+the $s$, $+p$ and $spdf$ sectors---past the locked $s$-sector value $\gvq{p60_he_chain_s_k55}{-2.8745}$~Ha to
+$\gvq{p60_he_chain_spdf_k164}{-2.8964}$~Ha, toward the exact non-relativistic $-2.90372$~Ha), and measure the decisive quantity: the block-encoding $1$-norm of the
 secular matrix grows \emph{more slowly than the matrix dimension},
 $\|M\|_1\sim K^{\gvq{p60_onenorm_exponent}{0.82}}$ over the computed range
 $K=74$--$164$ (full $s\!+\!p\!+\!d\!+\!f$, helium;
@@ -98,11 +98,11 @@ Shibuya--Wulfman metric returns and the problem is again generalized; we measure
 its conditioning and find it uniformly better than the $L^2$ overlap---its
 intra-center block is exactly the identity---and markedly better at larger
 internuclear separation, but still growing with basis size through the
-inter-center coupling.  \textbf{[SYMBOLIC + MEASURED]} The growth law is
-derived (a band-limited concentration rate,
-$1-\sigma_{\max}\propto(kR)^2/n^2$, giving asymptotic exponent $2$---the
-leading order is derived, the remainder measured rather than bounded;\ the
-fitted window exponents $1.85$/$1.97$ are pre-asymptotic readings).
+inter-center coupling.  \textbf{[PRIOR ART]} The growth law is not new:\ the band-limited
+concentration rate $1-\sigma_{\max}\propto(kR)^2/n^2$, asymptotic exponent
+$2$, is the Kac--Murdock--Szeg\H{o} asymptotic, and what is ours is the
+\emph{identification} of the Shibuya--Wulfman metric as such a finite section
+(the fitted window exponents $1.85$/$1.97$ are pre-asymptotic readings).
 \textbf{[MEASURED]} The same
 cross-center singular spectrum carries the composition-wall commutator, whose
 norm saturates at $\tfrac12$.  \textbf{[RESOURCE MODEL]} Turning this into a
@@ -116,16 +116,26 @@ metric and $10^3$--$10^4\times$ smaller than a standard Gaussian metric for the 
 at ${\sim}30$ qubits.  \textbf{[MEASURED]} The penalty also does not compound with electron
 number: the metric is discharged once at the one-electron molecular-orbital construction, after
 which the many-electron secular equation carries an identity metric---the metric cost is
-one-electron, not $N$-electron.  \textbf{[OPEN]} The atomic case is a clean, apparently novel,
-metric-free quantum secular equation; the molecular case is a genuine
-frontier in which the metric cost is mitigated for excited/ungerade states, essentially removed
-for the ground state of \emph{equivalent-center} systems (a water probe shows a symmetry-inequivalent heavy center reinstates it), and confined to one electron.  \textbf{[MEASURED]} Its remaining
+one-electron, not $N$-electron.  \textbf{[MEASURED]} A third lever removes the conditioning cost outright
+where it applies:\ the ill-conditioning is a symbol zero of known order and
+location, so a band-Toeplitz preconditioner bounds $\mathrm{cond}$ flat in basis
+size, and---unlike the gerade lever---it does not require equivalent centers,
+reaching water's $A_1$ block (bounded at $44$ out to $N=192$, against a raw
+$N^{1.97}$), provided the band is aligned to the symbol's null direction:\ in the
+unrotated frame the same band is $106\times$ \emph{worse} than no treatment at all.  \textbf{[RESOURCE MODEL]} A direct block-encoding of the preconditioned metric then takes the
+penalty from $n^3$ to $n$ (the circulant-embedded circuit is analysed, not compiled).  \textbf{[OPEN]} The atomic case is a clean,
+apparently novel, metric-free quantum secular equation;\ the molecular case is a
+frontier on which the \emph{conditioning} axis is removable on $s$-sector
+shared-scale bases at $M=2$ and non-collinear $M=3$, the \emph{locality} cost is capped by the symbol's other
+pole, and the $\ell$-block sparsity loss is structural and not a conditioning
+effect at all.  \textbf{[MEASURED]} Its remaining
 question---whether the $N$-electron $1$-norm stays sublinear as it does for atoms---we answer in the
 negative: the atomic sublinearity rides on a diagonal nuclear matrix $T^0=Z R_\nu$ that is
 single-center-specific, and a validated two-center CI (dissociating $\mathrm{H}_2$ correctly) has a
 \emph{standard} block-encoding $1$-norm growing polynomially ($\sim n_{\rm orb}^{2.2}$), with no
-sublinear behavior.  The real molecular savings are the metric levers (gerade sector, large
-separation, one-electron-only metric), not a sublinear matrix.  We do not
+sublinear behavior.  The real molecular savings are the metric levers (the band-Toeplitz
+preconditioner, the gerade sector, large separation, one-electron-only metric),
+not a sublinear matrix.  We do not
 demonstrate the algorithm on hardware; this is a structural and resource
 analysis.
 \end{abstract}
@@ -135,7 +145,7 @@ analysis.
 \section{Introduction}
 
 The generalized-Sturmian method of Avery and
-Avery~\cite{avery1989,avery2006,averyphd,averymsc}, built on Goscinski's
+Avery~\cite{avery1989,avery2006,averyphd,averymsc}, built on Goscinski's~\cite{goscinski2002}
 weighted wave equation and the momentum-space Fock projection, is one of the most
 elegant classical frameworks for atomic and molecular electronic structure.  Its
 angular content is closed-form---Gaunt integrals, Wigner $3j$/$6j$ symbols,
@@ -191,9 +201,9 @@ $\lambda=\sum_i|c_i|$---spreads.
 the radial convention is changed and the ground shell is anchored so the two
 families coincide at $Q=2$ qubits, the LCU $1$-norm scales as
 \begin{equation}
-\lambda_{\text{hydrogenic}}\sim Q^{1.19},
+\lambda_{\text{hydrogenic}}\sim Q^{\gvq{p60_l2_inflation_hydrogenic}{1.19}},
 \qquad
-\lambda_{\text{Sturmian}}\sim Q^{3.33},
+\lambda_{\text{Sturmian}}\sim Q^{\gvq{p60_l2_inflation_sturmian}{3.33}},
 \label{eq:blowup}
 \end{equation}
 a factor of $\sim\!18$ larger by ten qubits (a measured ratio from the
@@ -233,6 +243,43 @@ metric-free posing is the \emph{only} well-conditioned one.  What we do claim
 is the cost statement above:\ the $L^{2}$ posing is expensive to
 \emph{encode}, which is a different assertion from being numerically
 unstable, and is the one this paper's argument needs.
+
+\textbf{[PRIOR ART]} The classical momentum-space literature met this and
+stepped around it, and \emph{how} it did so prices exactly what the quantum
+encoding costs.  Monkhorst and Jeziorski~\cite{monkhorst_jeziorski1979} titled a
+1979 note ``No linear dependence or many-center integral problems in momentum
+space quantum chemistry'', and its abstract states that for a many-center
+\emph{one-electron} system the eigenvalues follow from ``diagonalizations of
+simple overlap matrices'' and that ``the problems of many-center integrals and
+instabilities due to overcompleteness of basis sets do not appear at all''.
+Taken at face value that contradicts Eq.~\eqref{eq:sigma_law}.  It does not,
+and the reconciliation is worth stating because it locates our own cost.
+
+The degeneracy is not absent from their construction:\ it is the same pencil,
+the same matrix of translation phases, and $\sigma_{\max}\to1$ at $p=0$ is a
+property of the symbol, indifferent to who is looking.  What differs is the
+extraction.  Letting the overlap enter \emph{only multiplicatively} --- solving
+a determinantal condition in the scale as a scalar root search, or
+diagonalising the overlap directly --- inverts nothing, so a near-null
+direction produces a harmless spurious branch instead of amplified error;\ and
+the basis is exactly orthonormal \emph{within each center} in the metric
+actually used --- the statement this paper measures independently as the
+intra-center block being the identity, and not a statement about the two-center
+set, whose smallest generalized eigenvalue does collapse --- so
+the $L^2$ Gram matrix that carries the classical linear-dependence problem never
+enters at all.  \textbf{They do not remove the degeneracy;\ they keep it out of
+the denominator.}  We invert because a block-encoding wants a standard Hermitian
+eigenproblem, and that requirement --- not the basis, and not the metric --- is
+what converts a benign spectral feature into a resource multiplier.
+
+The trade runs both ways and we do not claim the better side of it:\ a
+determinantal re-posing removes the conditioning multiplier but reinstates the
+outer nonlinear search over the scale that Eq.~\eqref{eq:secular} exists to
+eliminate, and which of the two is cheaper at scale is an open resource question
+this paper does not answer.  \emph{Provenance, because it bounds the paragraph:}\
+the bibliographic record and the abstract are verified at source;\ the two-page
+body is closed with no repository copy and is unread, so the mechanism above is
+reconstructed from the surrounding lineage rather than read.
 
 \section{The isoenergetic reformulation is metric-free for atoms}
 \label{sec:iso}
@@ -302,9 +349,9 @@ precision), and the ``bare'' matrix (no $V'$) returns $-4.0$~Ha, i.e.\ two
 $\mathrm{He}^+$ $1s$ orbitals---the exact non-interacting limit.  \textbf{[MEASURED]}
 Adding configurations coupled to total $^1S$ lowers the energy monotonically,
 \[
--2.847\ (1s^2)\;\to\;-2.873\ (s)\;\to\;-2.894\ (+p)\;\to\;-2.897\ (spdf,\,K{=}164),
+-2.8477\ (1s^2)\;\to\;\gvq{p60_he_chain_s_k55}{-2.8745}\ (s,\,K{=}55)\;\to\;-2.8947\ (+p,\,K{=}100)\;\to\;\gvq{p60_he_chain_spdf_k164}{-2.8964}\ (spdf,\,K{=}164),
 \]
-converging toward the exact non-relativistic $-2.90372$~Ha.  \textbf{[MEASURED]}
+converging toward the exact non-relativistic $-2.90372$~Ha.  Every rung beyond the leading $1s^2$ single configuration (a $1\times1$ matrix) is taken at the same $n_{\max}=10$ family, so that part of the sequence is a pure $\ell_{\max}$ ladder;\ values are rounded to four decimals.  \textbf{[MEASURED]}
 The residual is \emph{not} a deficiency of the configuration span.  A
 variational CI over the \emph{identical} span, with the global scale optimized,
 reaches $\gvq{p60_span_deficit_spdf}{1.28}$~mHa of the exact energy at $K=130$,
@@ -426,8 +473,10 @@ construction.}  The family used here holds $l_{\max}$ fixed and adds
 higher-$n$ configurations, whose couplings decay as $n^{-2}$.  Grown the other
 way, as full hydrogenic shells with $l_{\max}=n_{\max}-1$, the same secular
 construction gives $\|T'\|_1\sim K^{1.07}$ --- superlinear --- while the
-\emph{total} exponent rises but stays below $1$ ($0.867\to0.911$ over
-$K=56$--$220$).  A superlinear block and a rising total are therefore both
+\emph{total} exponent rises but stays below $1$ (local slopes
+$0.867\to0.911$ across the rungs from $K=35$ to $K=220$;\ the first
+slope lying wholly inside $K=56$--$220$ is $0.879$, and a global fit
+over that window is $0.893$).  A superlinear block and a rising total are therefore both
 real for a different growth rule;\ but no measured full-shell point makes the
 total itself superlinear, and we do not claim one.  What Eq.~\eqref{eq:sublinear} measures is the fixed-$l_{\max}$
 rule, and the cost advantage belongs to that rule rather than to the method.
@@ -470,7 +519,8 @@ $\gvq{p60_T0_asymptotic_exponent}{1/2}$, not a fitted power.  Evaluated on the
 exact sum the slope runs $0.709$ at $K=20$, $0.705$ at $164$, $0.662$ at
 $12484$ and $0.603$ at $498004$, still falling.  A fit inside $K=74$--$164$
 returns $0.705$;\ that is what the window yields, not what the object does.
-Eq.~\eqref{eq:T0_closed} is the one leg of this section that is derived rather
+Eq.~\eqref{eq:T0_closed} is the one leg of this section's \emph{scaling}
+measurements that is derived rather
 than measured, and it is grid-independent by construction.
 
 \textbf{[MEASURED]} \emph{What the sublinearity costs.}  The fixed-$l_{\max}$
@@ -564,11 +614,12 @@ Excited configurations obtain two scales free from $n_a\neq n_b$.
 \textbf{[MEASURED]} The state-dependence this predicts is large, and it is free:
 $\|M\|_1$ is a property of $M$, not of which root is extracted, so every $^{1}S$
 state costs the same to block-encode and only the delivered accuracy differs.
-At the largest computed basis, $K=452$, the ground-state error is
+At the largest basis where both roots were computed, $K=452$, the ground-state error is
 $\gvq{p60_gnd_gap_k452}{6.82}$~mHa ($4.28\times$ chemical accuracy) against
 $\gvq{p60_exc_gap_k452}{1.716}$~mHa ($1.08\times$) for $2\,^{1}S$.  Reference-free --- the posing cost
 $E_{\rm iso}-\min_\lambda E_{\rm var}$ requires no known limit --- the $^{1}S$
-ladder at $K=105$ reads $\gvq{p60_posing_cost_ground}{4.21}$,
+ladder --- $s$-only at this rung, where the $K=452$ pair above is full
+$s\!+\!p\!+\!d\!+\!f$ --- at $K=105$ reads $\gvq{p60_posing_cost_ground}{4.21}$,
 $\gvq{p60_posing_cost_exc}{0.98}$, $0.3235$ and $0.1251$~mHa across the first
 four roots --- reductions of $4.3\times$, $3.0\times$ and $2.6\times$ per rung,
 themselves shrinking.  (The last two are printed to four figures because at two
@@ -775,8 +826,8 @@ $4.0$ & $6$ & $11.1$ & $\mathbf{4.4}$ \\
 \end{tabular}
 \end{center}
 but (iii) $\mathrm{cond}(S)$ still grows with basis size---\emph{polynomially},
-$\mathrm{cond}(S)\sim N^{1.85}$, essentially the same rate as the $L^2$ overlap's
-$N^{1.70}$ (decisively power-law, not exponential), with the largest eigenvalue
+$\mathrm{cond}(S)\sim N^{\gvq{p60_sw_cond_exponent}{1.85}}$, essentially the same rate as the $L^2$ overlap's
+$N^{\gvq{p60_l2_overlap_exponent}{1.71}}$ (decisively power-law, not exponential), with the largest eigenvalue
 bounded, $\lambda_{\max}<2$, and all the growth in $\lambda_{\min}\to0$ as the
 basis approaches linear dependence---driven by the inter-center coupling
 (off-block magnitude $\sim0.4$--$0.6$), so the improvement over $L^2$ is only
@@ -784,8 +835,10 @@ modest at bonding distance.  All three cross-check across a $2$D position-space
 grid, the closed-form momentum-space quadrature, and a direct three-dimensional
 momentum integral (agreement to $\sim\!10^{-10}$).
 
-\textbf{[SYMBOLIC + MEASURED]} The conditioning law is in fact \emph{derived},
-and the fitted exponent is a window reading.  Because the intra-center block is
+\textbf{[SYMBOLIC + MEASURED]} The conditioning law has an exact derivation rather than being a fit
+(the derivation is prior art --- see the \textbf{[PRIOR ART]} paragraph below ---
+and what we claim is the identification), and the fitted exponent is a window
+reading.  Because the intra-center block is
 exactly the identity, $S=\bigl[\begin{smallmatrix}I&C\\C^{\mathsf T}&I
 \end{smallmatrix}\bigr]$ has spectrum $\{1\pm\sigma_k\}$ with $\sigma_k$ the
 singular values of the cross block (the cosines of the principal
@@ -815,7 +868,9 @@ quantity at $R=2$ in the sprint record---are pre-asymptotic slopes of this one
 law read on different windows.
 
 \textbf{[PRIOR ART]} Eq.~\eqref{eq:sigma_law} is not new \emph{as an
-asymptotic law}, and we claim only the identification.  It is the
+asymptotic law}, and we claim only the identification (whose smoothness
+hypothesis our symbol does not meet --- see below;\ that is a caveat on the
+proof we can cite, not a claim on our side of the line).  It is the
 Kac--Murdock--Szeg\H{o} extreme-eigenvalue
 asymptotic~\cite{kac_murdock_szego1953}:\ writing the relevant symbol in the
 normal form $|1-t|^{2\alpha}b(t)$ used by B\"ottcher and
@@ -828,10 +883,21 @@ constant and all;\ the conditioning exponent $2$ is the order of the symbol's
 maximum and nothing else.  What is ours is the \emph{identification} --- that
 the two-center Shibuya--Wulfman metric in the sine basis is such a finite
 section, Toeplitz minus Hankel since $\langle n|a|m\rangle=c_{n-m}-c_{n+m}$,
-with symbol $j_0(kR\cot(\chi/2))$;\ equivalently that the Shibuya--Wulfman
-operator is multiplication by the translation phase
-$e^{i\mathbf{p}\cdot\mathbf{R}}$ on the Fock sphere, whose angular average
-$j_0(pR)$ becomes trivial at $p=0$.  The physical reading follows:\ a basis
+with symbol $j_0(kR\cot(\chi/2))$.  It is \emph{not} the reading of the
+Shibuya--Wulfman operator as a translation:\ that is prior art on three
+counts, and earlier versions of this paper claimed it.  Shibuya and Wulfman already
+build the molecular $p_0$ operator from the united-atom one as a sum over the
+nuclei, one unitary transformation per center~\cite{shibuya1965}, which is the
+structure in substance.  (We paraphrase rather than quote:\ the bibliographic
+record is verified at source, but the 1965 abstract is behind a paywall and
+three independent attempts failed to reach its text, so an earlier verbatim
+quotation here is withdrawn as unverified rather than asserted.)\ Wulfman and Takahata gave the explicit
+continuous-group formulation two years later, in terms of the Lie algebras of
+$E_4$, $R_5$ and $O(4,1)$~\cite{wulfman_takahata1967};\ and Red and
+Weatherford derived the general formula for that matrix in a Coulomb--Sturmian
+basis~\cite{red_weatherford2004}.  That the
+angular average $j_0(pR)$ becomes trivial at $p=0$ is then a property of the
+symbol, which is the part we are entitled to.  The physical reading follows:\ a basis
 complete enough to carry wavelengths longer than $R$ cannot tell the two
 centers apart.  Equivalently, $1-\sigma_{\max}=\tfrac16(R/L_{\max})^2$ with
 $L_{\max}=2n/(\pi k)$ the longest wavelength the truncated basis carries, so
@@ -854,8 +920,8 @@ more useful:\ there exists a \emph{combination} in the $B$-span that the
 $A$-span captures, concentrated where the symbol attains its supremum.  The
 near-dependence is \emph{one direction}, not a diffuse property of the basis
 --- which is why the fixed, geometry-independent rank-$(M-1)$ rotation of
-Sec.~\ref{sec:resource} removes it, and why the coupling's participation ratio
-stays small.  It also qualifies the motivation offered below for this basis:\
+Sec.~\ref{sec:resource} removes it at $M=2$ and for non-collinear $M=3$, and why
+the coupling's participation ratio stays small.  It also qualifies the motivation offered below for this basis:\
 the Coulomb--Sturmians' completeness at a single scale is completeness in the
 \emph{atomic} metric, and the molecular problem is posed in $V_0$, where the
 one-center set is not complete.
@@ -884,10 +950,115 @@ $\sum_j|c_j|$ \emph{converges} --- $5/4>1$, so the symbol is in the Wiener
 algebra; what diverges is $\sum_jj|c_j|$, which is the hypothesis
 B\"ottcher--Widom needs and a different condition entirely.  The constant
 nevertheless holds.  Relatedly, the
-$\sim\!1\%$ figure quoted above is the asymptotic's own $O(1/n)$ term rather
-than scatter --- the relative residue halves under each doubling of $n$,
-falling $0.134\to0.010$ across $n=10\to160$ at $kR=2$.  Whether a weaker
+$\sim\!1\%$ figure quoted above is structure rather than scatter --- the
+relative residue halves under each doubling of $n$, falling
+$0.134\to0.010$ across $n=10\to160$ at $kR=2$ --- and it is \emph{dominated by
+the grid convention}:\ the $\tau$-algebra statement places the eigenvalues at
+$j\pi/(n+1)$, and collapsing with $(n+1)^2$ in place of $n^2$ moves the residue
+at $n=160$, $kR=2$ from $-0.99\%$ to $+0.26\%$, a fourfold reduction with a
+change of sign.  A genuine $O(1/n)$ term survives in both conventions.  Whether a weaker
 hypothesis covers this symbol class is left open.
+
+\textbf{[SYMBOLIC + MEASURED]} The two transcendentals of this section are
+tagged here against Paper~18, and the tagging is a statement of
+\emph{provenance} --- where each constant comes from --- nothing more.  The
+$\pi^2$ of Eq.~\eqref{eq:sigma_law} is the Kac--Murdock--Szeg\H{o} constant
+$c_1$, and its reading as an eigenvalue is already in the source cited above:\
+B\"ottcher and Widom~\cite{bottcher_widom2005} present $c_\alpha$ as the least
+eigenvalue of the boundary-value problem $(-1)^\alpha u^{(2\alpha)}=\lambda u$
+on $[0,1]$ with $u^{(j)}(0)=u^{(j)}(1)=0$, which at $\alpha=1$ is the Dirichlet
+problem for $-d^2/dx^2$ and gives $\pi^2$;\ their title names the extremal
+(Wirtinger--Sobolev) inequality that carries it, and the independence of
+$c_\alpha$ from $b$ is likewise their observation, not ours.  The constant is
+therefore fixed by the order of the symbol's zero together with the finite
+section, and carries no Bessel content:\ nothing about $j_0$ beyond
+$b(1)=(kR)^2/24$ enters it.  We record the same statement in the basis's own
+variable, where it is directly visible --- minimising
+$\langle\theta^2\rangle$ over $\mathrm{span}\{\sin a\chi\}_{a\le n}$ in the
+Fock polar angle $\theta=\pi-\chi$ gives $n^2\min\langle\theta^2\rangle\to\pi^2$
+(Richardson $\gvq{p60_window_richardson_pi2}{9.86949}$ against $\pi^2=9.86960$), the near-null direction attains
+that minimum with r.m.s.\ spread $\pi/n$ (Richardson $\gvq{p60_window_rms_richardson_pi}{3.14158}$), and
+$1-\sigma_{\max}=(kR)^2\langle\theta^2\rangle/24$ holds on it to $0.3\%$ at
+$n=320$ across $kR=0.5$--$4$.  \emph{This is a change of representation and not
+an independent route:\ it is the $b\equiv1$ case of the same theorem, and the
+minimiser is the Dirichlet ground state in the band index.}  It is worth
+writing that identification out, because it carries the \emph{antipodal
+parity} and is false without it:\ the basis index is $\chi$ while the
+Dirichlet mode is natural in $\theta$, and
+$\sin(a\chi)=(-1)^{a+1}\sin(a\theta)$, so the minimiser is
+$c_a\propto(-1)^{a+1}\sin\bigl(\pi a/(n+1)\bigr)$.  Measured at $n=320$, that
+mode correlates with the band minimiser to $1-2\times10^{-7}$ and with the
+near-null direction of the cross block to $1-7\times10^{-7}$, while the
+unalternated $\sin(\pi a/(n+1))$ is \emph{exactly orthogonal} to both.  The
+same factor is the caution attached to the contraction reading of $j_0$, where
+the antipodal Mehler--Heine limit converges along parities rather than
+outright.  The
+$(2\pi)^{-1/2}$ and the $\pi/4$ of Eq.~\eqref{eq:chirp_decay} have a different
+provenance --- the normalisation and the branch phase of a Bessel asymptotic at
+the $p\to\infty$ pole.  Under Paper~18's taxonomy both constants are
+calibration-tier, sub-mechanism M2:\ the $\pi^2\!\cdot\mathbb{Q}$ half of that
+ring for the first, the $\sqrt\pi\cdot\mathbb{Q}$ half for the second.
+
+\emph{What this does not license.}  An earlier version of this paragraph read
+the provenance as \emph{predicting} removability --- the first price being ``a
+property of the matrix, which a preconditioner reaches'' and the second ``a
+property of the symbol, which no congruence can touch''
+[retracted 2026-09-12: p60-removability-corollary].  Both halves are
+wrong.  The preconditioner of Sec.~\ref{sec:resource} is built \emph{from the
+symbol}:\ its matching polynomial is chosen precisely to share the symbol's
+zero~\cite{serra1997}.  And preconditioning \emph{is} a congruence of the
+finite section, one that replaces the symbol by $f/g$.  The defensible
+statement concerns the symbol on both sides and turns on the \emph{kind} of
+feature rather than on the origin of its constant:\ a banded congruence
+multiplies the symbol by a trigonometric polynomial, which can cancel a zero of
+finite order but cannot alter a decay or smoothness class.  The conditioning
+pole is a zero of order two;\ the locality pole is the chirp's $j^{-5/4}$
+envelope.  That asymmetry, and not the provenance of $\pi^2$, is why the first
+yields and the second does not.  \emph{Open, and load-bearing for the split
+adopted here:}\ whether the two poles are genuinely independent features or two
+faces of one object is not settled --- our own reading has gone both ways ---
+and this paragraph takes the weaker, measured position.
+
+\textbf{[MEASURED + PRIOR ART]} Reading the symbol as a quotient yields a
+prediction, it survives its own control, and it is \emph{known} --- in a
+stronger form than the one measured here.  Ahmad, Al-Aidarous, Alrehaili,
+Ekstr\"om, Furci and Serra-Capizzano~\cite{ahmad2018} give the eigenvalues of
+exactly this preconditioned pencil, and for matrices in the $\tau$ (DST-I)
+algebra their result is an identity rather than an asymptotic:\ the
+eigenvalues are the ratio symbol sampled on the grid, with the weight
+cancelling identically.  \emph{Our Toeplitz-minus-Hankel form does not put our
+matrices inside it}:\ $\tau$ membership requires the coefficient sequence to
+terminate, which the matching polynomial's does and the chirp symbol's does not,
+and the DST-I correspondingly leaves $4.1\%$/$2.0\%$/$1.1\%$ off-diagonal
+weight on the cross block at $n=16$/$64$/$160$ against $10^{-14}$ for a
+genuinely-$\tau$ matrix.  The identity therefore covers the $\tau$
+\emph{idealisation} of this problem rather than the problem, and the gap is
+exactly the residue reported above:\ the grid-sampled $\tau$ prediction
+reproduces $\pi^2/24$ to $9\times10^{-6}$ while the true $\sigma_{\max}$
+departs by $0.26\%$.  So the measurement below confirms a theorem instead of
+establishing one, and the paper claims it as such.  Let the metric be deformed
+by any smooth positive
+radial weight $W$ on the Fock sphere --- the intra-center block becoming the
+finite section of $W$ and the cross-center block that of $W\,j_0$.  The
+generalised symbol is then $W j_0/W=j_0$, which does not see $W$ at all, so
+both the exponent and the constant should survive unchanged.  They do:\ at
+$kR=2$ and $n=160$ the collapse $(1-\sigma_{\max})(n/kR)^2$ reads $0.4072$,
+$0.4123$, $0.4107$ and $0.4164$ for $W=1$, $1+\tfrac45\cos\chi$,
+$2+\sin\chi$ and $e^{-\chi}$ against $\pi^2/24=0.4112$, with fitted exponents
+between $-1.98$ and $-2.01$ throughout.  The control carries the claim:\ a
+weight that \emph{vanishes} at the degeneracy, $W=1+\cos\chi$, moves the
+constant to $\gvq{p60_weighted_collapse_control}{0.828}$ while leaving the exponent at $-1.97$, so the agreement
+above is a measurement and not an insensitivity.  \emph{Scope, because the
+natural overstatement is close by.}  This is not independence of the weighting
+potential $V_0$:\ a position-space-local $V_0$ acts on momentum space by
+convolution rather than multiplication and therefore leaves this class
+entirely.  What is shown is narrower and still worth having --- the law is
+carried by the translation phase, not by any momentum-space weight multiplying
+it.  It also predicts what a metric \emph{outside} the class should do, and the
+one measured case agrees:\ the $L^2$ overlap degrades with the same exponent
+but a constant larger by $\approx\!1.4$, which is what a non-multiplication
+metric is expected to look like.  Whether any position-space $V_0$ preserves
+the constant is open.
 
 The same singular spectrum carries the
 composition wall of the balanced-basis arc:\ the center-projection commutator
@@ -938,7 +1109,7 @@ an exact, grid-free \emph{evaluation} win, not a conditioning improvement.  Two
 genuine conditioning levers do exist: at larger separation $\mathrm{cond}(S)\to1$
 rapidly while the $L^2$ overlap cannot follow (its intra-center conditioning grows
 with basis regardless); and gerade/ungerade symmetry adaptation exactly
-block-diagonalizes $S$, isolating a perfectly-conditioned gerade sector
+block-diagonalizes $S$, isolating a gerade sector whose conditioning is flat
 ($\mathrm{cond}\approx2$, flat in basis and $R$) and confining all
 ill-conditioning to the ungerade sector---a free ${\sim}2\times$ effective-cost
 reduction in the homonuclear case.  The gerade flatness is itself derived:\ for
@@ -953,7 +1124,7 @@ $\mathrm{cond}(I+T(a))=(1+\max a)/(1+\min a)$
 below are this constant read at small $n$.
 
 \textbf{[MEASURED]} This lever is a property of \emph{equivalent} centers, not of symmetry as such, and a probe on water ($\mathrm{H}_2\mathrm{O}$, $C_{2v}$: O${}+{}$2H) makes the distinction sharp. For an $s$-only shared-scale basis the only symmetry action is the H${}\leftrightarrow{}$H swap (O sits on the $C_2$ axis, fixed), so the totally-symmetric $A_1$ block---which holds the ground state---contains \emph{both} the O functions and the symmetric H combinations, and with them the O${}\leftrightarrow{}$H coupling between symmetry-\emph{inequivalent} centers that the group cannot remove. Building water's three-center SW metric exactly (every $s$--$s$ block depends only on inter-center distance) and adapting to $C_{2v}$, the $A_1$ ground-state block's conditioning \emph{grows}, $\mathrm{cond}(A_1)\sim N^{1.97}$ ($R^2=1.000$), essentially the raw metric ($19.9\to698$ over $N=6\to36$)---\emph{not} flat like the $\mathrm{H}_2^+$ gerade sector ($\mathrm{cond}\approx2$ throughout). Zeroing only the O${}\leftrightarrow{}$H block collapses it back to $\mathrm{cond}\approx2$, pinning that inequivalent-center coupling as the sole driver. The lever therefore does not transfer to a polyatomic with a symmetry-unique heavy center; it is confined to homonuclear-diatomic (equivalent-center) systems and their close analogs.
-The water block obeys the same derived law:\ the O${}\leftrightarrow{}$(H${}+{}$H) canonical correlations follow Eq.~\eqref{eq:sigma_law} with symbol curvature $c_{\rm sym}=R_{\rm OH}^2/24-R_{\rm HH}^2/96$ (exponent again exactly $2$;\ the fitted $1.97$ is the same pre-asymptotic reading), and $\mathrm{cond}(A_1)\approx1.12\times(1+\sigma_{\max})/(1-\sigma_{\max})$ with a constant prefactor---the canonical correlation is the whole story.  The structural reason the symmetry cannot help is now exact:\ O and H are not exchanged by any group element, so both $1\pm\sigma$ eigenvector families remain inside $A_1$ and no block absorbs the divergent factor.  A low-rank escape is also closed \emph{structurally}:\ the coupling's singular spectrum discretizes the range of the symbol (its effective rank grows linearly with basis size, participation ratio $\approx7$ at $N=36$), and since $1-\sigma_k\approx c_{\rm sym}(k\pi)^2/n^2$, an exact rank-$r$ (Woodbury) treatment of the top correlations divides the residual $\kappa$ by $(r+1)^2$ only---a useful constant factor ($\approx40$--$75\times$ in $d_{\rm inv}$ terms at $N=12$--$36$) but never a change of exponent;\ flattening would need $r\propto n$, i.e.\ classically diagonalizing the whole coupling, the sparsity-destroying orthogonalization already excluded.
+The water block obeys the same exact law:\ the O${}\leftrightarrow{}$(H${}+{}$H) canonical correlations follow Eq.~\eqref{eq:sigma_law} with symbol curvature $c_{\rm sym}=R_{\rm OH}^2/24-R_{\rm HH}^2/96$ (exponent again exactly $2$;\ the fitted $1.97$ is the same pre-asymptotic reading), and $\mathrm{cond}(A_1)\approx1.12\times(1+\sigma_{\max})/(1-\sigma_{\max})$ with a constant prefactor---the canonical correlation is the whole story.  The structural reason the symmetry cannot help is now exact:\ O and H are not exchanged by any group element, so both $1\pm\sigma$ eigenvector families remain inside $A_1$ and no block absorbs the divergent factor.  A low-rank escape is also closed \emph{structurally}:\ the coupling's singular spectrum discretizes the range of the symbol (its effective rank grows linearly with basis size, participation ratio $\approx7$ at $N=36$), and since $1-\sigma_k\approx c_{\rm sym}(k\pi)^2/n^2$, an exact rank-$r$ (Woodbury) treatment of the top correlations divides the residual $\kappa$ by $(r+1)^2$ only---a useful constant factor ($\approx40$--$75\times$ in $d_{\rm inv}$ terms at $N=12$--$36$) but never a change of exponent;\ flattening would need $r\propto n$, i.e.\ classically diagonalizing the whole coupling, the sparsity-destroying orthogonalization already excluded.
 
 \subsection{Resource estimate: the gerade lever is the equivalent-center payoff}
 \label{sec:resource}
@@ -1019,16 +1190,21 @@ comparison and carries an honest caveat: the Gaussian conditioning is ratio-depe
 ratio-$1.6$ set (approaching completeness) blows up as $\mathrm{cond}\sim N^{6}$
 ($\kappa\!\sim\!10^5$ at $N=16$), a sparser ratio-$3$ set grows only as $N^{1.4}$ but leaves
 coverage gaps and still carries ${\sim}10\times$ the SW prefactor.  This is the classic Gaussian
-coverage-versus-linear-dependence trade-off; the Coulomb--Sturmians evade it because they are a
-\emph{complete} set at one scale whose metric is polynomially conditioned ($\mathrm{cond}(S)\sim
+coverage-versus-linear-dependence trade-off; the Coulomb--Sturmians soften it rather than escaping it, because they are a
+set complete at one scale \emph{in the atomic metric} --- a property the
+molecular problem does not inherit:\ the molecular metric is itself polynomially conditioned ($\mathrm{cond}(S)\sim
 N^{1.85}$ on this window;\ derived asymptote $N^2$, Eq.~\eqref{eq:sigma_law}) with a small
 prefactor.  Production Gaussian simulation of course absorbs the overlap
 classically in a prior mean-field step; the metric penalty priced here is precisely the cost of
 the on-device angular generation that motivated the Sturmian encoding in the first place.
 
-\textbf{[MEASURED]} A third conditioning lever exists, it is stronger than
-either of the two above, and---unlike the gerade lever---it does not require
-equivalent centers.  Because the ill-conditioning is a symbol \emph{zero} of
+\textbf{[MEASURED]} A third conditioning lever exists;\ it is stronger than
+either of the two above \emph{in coverage and on the conditioning axis}, and
+---unlike the gerade lever---it does not require equivalent centers.  It is not
+uniformly cheaper end to end:\ where the gerade lever applies its
+subnormalization is $O(1)$ (the block's least eigenvalue is bounded below by the
+same $2.555041\ldots$ constant) against this lever's $O(n)$, so on
+$\mathrm{H}_2^+$ the gerade route remains the cheaper one.  Because the ill-conditioning is a symbol \emph{zero} of
 known order and location, it is removable by preconditioning in the sense of
 Serra~\cite{serra1997}:\ a trigonometric polynomial sharing the zero bounds the
 preconditioned spectrum in a fixed interval for every $n$.  The matching
@@ -1056,11 +1232,14 @@ the generalized spectrum invariant, and $X=P^{-1/2}G^{-1/2}$ is such an $X$, so
 the QSVT degree is set by $\mathrm{cond}(G)\to2.23$ rather than by
 $\mathrm{cond}(S)$.  On the resource model of Table~\ref{tab:resource} that is
 $d_{\rm inv}\approx16$, \emph{flat in basis size}, against $3\times10^{5}$ at
-$n=160$ untreated.  This escapes the Bernstein $\Theta(\kappa)$ floor quoted
-above rather than contradicting it:\ that floor constrains polynomial
-approximation of $x^{-1/2}$ on $[\kappa^{-1},1]$, and preconditioning changes
-the operator rather than the polynomial, so $x^{-1/2}$ is never approximated on
-the bad interval.  The statement that the metric cost is ``mitigated, not
+$n=160$ untreated.  This escapes the $\Theta(\kappa)$ degree floor for QSVT matrix inversion
+---\ optimal in $\delta=\kappa^{-1}$ by Theorem~73
+of~\cite{gslw2019}, whose Corollary~67 covers $x^{-c}$ for every $c>0$ and so
+includes $c=\tfrac12$ ---\ rather than contradicting it:\ that floor
+lower-bounds the number of block-encoding queries for an eigenvalue
+transformation on the \emph{promised spectral interval}, and preconditioning
+changes that interval --- from $[\kappa^{-1},1]$ to $[1/2.23,1]$ --- rather
+than the polynomial approximated on it.  The statement that the metric cost is ``mitigated, not
 dissolved'' is therefore \emph{too pessimistic on the conditioning axis}, and
 should be read as applying to the two axes below.
 
@@ -1080,7 +1259,8 @@ leaves the other exactly where it was.  The localization class is
 \emph{not} what blocks a local inverse:\ with $|c_j|\sim j^{-5/4}$ the metric
 has polynomial off-diagonal decay of order $>1$ in one dimension, which is
 Jaffard's class~\cite{jaffard1990}, and inversion there preserves the decay \emph{provided the
-operator is boundedly invertible};\ inverse-closedness then makes the
+operator is boundedly invertible};\ inverse-closedness~\cite{grochenig_leinert2006}
+then makes the
 holomorphic and Riesz calculi agree, so $z^{-1/2}$ is available exactly when
 $0\notin\mathrm{spec}$.  The escape is the spectrum touching zero, not the
 decay.  Together with the block-structure
@@ -1099,8 +1279,36 @@ i.e.\ $p=0$ --- rather than in a shape-parameter limit, which is exactly why a
 fixed rank-$(M-1)$ rotation removes it.  At $\chi=\pi$ every block symbol tends to $j_0(0)=1$
 whatever the separation, so for $M$ centers the matrix symbol degenerates to the
 rank-one all-ones matrix and its null space has dimension $M-1$, spanned by a
-fixed vector set that does not move with geometry or with basis size.  For
-water's $A_1$ block, $A(\chi)=\bigl[\begin{smallmatrix}1&\sqrt2 a_{\rm OH}\\
+fixed vector set that does not move with geometry or with basis size.
+
+\textbf{[MEASURED]} \emph{The null space is geometry-independent;\ the rates at
+which its directions open are not, and that scopes the lever.}  Expanding
+$j_0(pd)=1-(pd)^2/6+O(p^4)$, the order-$p^2$ behaviour on $\mathbf{1}^\perp$ is
+carried by $PD_2P$ with $(D_2)_{ij}=d_{ij}^2$ and $P$ the projector off the
+constants.  For \emph{collinear} centers
+$d_{ij}^2=(i-j)^2h^2=h^2\bigl(i^2\mathbf{1}^{\!\top}+\mathbf{1}(j^2)^{\!\top}-2xx^{\!\top}\bigr)$,
+and $P$ annihilates the two outer terms from both sides, leaving
+$PD_2P=-2h^2Pxx^{\!\top}P$ --- \emph{rank one}.  Exactly one of the $M-1$
+directions then opens at order $2$ and the rest at $4,6,\dots,2(M-1)$;\ a
+non-collinear geometry generically gives $PD_2P$ full rank $M-1$ and every
+direction opens at order $2$.  Measured at $\mathrm{dps}=60$ over two
+independent $p$-ratios:\ collinear $M=3$ gives orders $(2,4)$ and $M=4$ gives
+$(2,4,6)$, against $(2,2)$ for the equilateral triangle, $(2,2,2)$ for the
+tetrahedron and $(2,2)$ for a bent water-like triangle, with
+$\mathrm{rank}(PD_2P)=1,1,2,3,2$ respectively.  This is the cluster-size
+phenomenon of Batenkov, Demanet, Goldman and
+Yomdin~\cite{batenkov_demanet_goldman_yomdin2019}, whose exponent is controlled
+by the largest cluster and whose $\ell=2$ case is the two-center problem here.
+Two consequences, and the second is a limit on what is claimed below.  Water's
+$A_1$ block is \emph{bent}, hence in the full-rank class --- which is why one
+$\mathrm{tri}(1,2,1)$ on the rotated component suffices and the table below
+works.  A \emph{linear} polyatomic is not:\ matching a zero of order $2k$
+requires a polynomial with a zero of the same order, so the single
+$\mathrm{tri}(1,2,1)$ cures only the one order-$2$ direction there.  The lever
+is therefore established for $M=2$ and for non-collinear $M=3$;\ the collinear
+case is open and is not claimed.
+
+For water's $A_1$ block, $A(\chi)=\bigl[\begin{smallmatrix}1&\sqrt2 a_{\rm OH}\\
 \sqrt2 a_{\rm OH}&1+a_{\rm HH}\end{smallmatrix}\bigr]$ degenerates to
 $\bigl[\begin{smallmatrix}1&\sqrt2\\\sqrt2&2\end{smallmatrix}\bigr]$, singular
 with null direction $v\propto(\sqrt2,-1)$ and trace $3$.  Rotating the
@@ -1118,12 +1326,26 @@ $192$ & $41699.7$  & $\mathbf{44.06}$\\
 \end{tabular}
 \end{center}
 The raw column reproduces the $N^{1.97}$ of the probe above independently
-($N^{1.96}$ here);\ the preconditioned column is bounded, with increments
+($N^{\gvq{p60_water_a1_exponent}{1.96}}$ here);\ the preconditioned column is bounded, with increments
 collapsing geometrically ($3.94,1.24,0.35,0.09$).  The constant is larger than
 the diatomic $2.23$, but the growth---which is what makes the metric penalty
-basis-dependent---is gone.  A control confirms the rotation is doing the work
-rather than the preconditioning as such:\ the naive $\mathrm{blockdiag}(P,P)$
-without it leaves the growth untouched ($2766\to42008$ over the same range).
+basis-dependent---is gone.  Two controls separate what is doing the work, and the first cannot do the
+job an earlier version of this paragraph gave it.  Uniform banding,
+$\mathrm{blockdiag}(P,P)$, is $I_2\otimes\mathrm{tri}(1,2,1)$ while the
+rotation is $V\otimes I$:\ the two \emph{commute} (to $3\times10^{-13}$ at
+$N=192$), so that control returns the identical spectrum in the rotated and
+unrotated frames and is blind to the rotation by construction.  What it does
+establish is that banding \emph{alone} is not the lever --- $194\to42008$
+over the same range (the raw table's $N=12$--$192$), an exponent of $N^{1.94}$,
+indistinguishable from the raw column's $N^{1.96}$ on this grid, i.e.\ no
+material change.  (The interior $N=48$ uniform value is $2766$;\ an earlier
+draft printed it as the low endpoint, which reproduced a spurious $N^{0.98}$.)  The discriminating control is the
+\emph{selective} preconditioner $\mathrm{blockdiag}(P,I)$ applied in the
+\emph{unrotated} frame, and it fails in the strong direction:\ conditioning
+grows as $N^{3.79}$ and reaches $4.4\times10^{6}$ at $N=192$, $106\times$
+\emph{worse} than leaving the metric untreated.  Alignment to the null
+direction is therefore load-bearing rather than incidental:\ the same band is
+worse than nothing in the wrong frame and flat at $44$ in the right one.
 
 \textbf{[RESOURCE MODEL]} Priced end to end the lever is smaller than the
 conditioning table suggests, and saying so precisely is more useful than the
@@ -1208,7 +1430,8 @@ $O(1)$---none of it growing with basis size
 (\texttt{tests/test\_paper60\_direct\_encoding.py}).
 
 \emph{Scope.} What is established is the \emph{conditioning} statement, on
-$s$-sector shared-scale bases at $M=2$ and $M=3$, together with the pricing
+$s$-sector shared-scale bases at $M=2$ and \emph{non-collinear} $M=3$ (the
+collinear case is open and is not claimed), together with the pricing
 above under Table~\ref{tab:resource}'s cost model, and the direct construction
 of Eq.~\eqref{eq:ratio_symbol}.  What is \emph{not} established is the circuit:\
 the $O(\log^2N)$ sine transform is cited rather than compiled, and the
@@ -1230,7 +1453,8 @@ approximation for $S^{-1/2}$ by constrained interpolation on the \emph{known} sp
 $\{1\pm\sigma_k\}$ (classically computable by an $O(N^3)$ values-only SVD that touches no
 integral sparsity;\ the asymptotic law alone is $11$--$21\%$ off at $\lambda_{\min}$ and does
 not suffice)---buys a constant factor $\approx8$--$10\times$ at the \emph{same} $\kappa$
-exponent, and the Bernstein $\Theta(\kappa)$ floor for \emph{both} problems
+exponent, and the $\Theta(\kappa)$ floor of Theorem~73 of~\cite{gslw2019} for
+\emph{both} problems
 bounds it there (an argument, not a measurement:\ the floors hold for the
 interpolation and interval families alike,
 because the small eigenvalues are spaced at exactly the scale on which $x^{-1/2}$ varies).  At
@@ -1347,8 +1571,9 @@ growth, and is paid for by an accuracy floor whose mechanism is
 Eq.~\eqref{eq:scale_lock}:\ the metric-free form exists only at the scale
 $\lambda=p_\kappa$, and that scale is not the variational optimum.  The floor is
 a \emph{ground-state} pathology --- $6.8$~mHa there at $K=452$, but
-$1.72$~mHa for $2\,^{1}S$ at identical encoding cost, and falling by $4.3\times$,
-$3.0\times$ and $2.6\times$ across the first three rungs of the $^{1}S$ ladder.  Read as a ground-state route to chemical accuracy it is not
+$1.72$~mHa for $2\,^{1}S$ at identical encoding cost, and---on the $s$-only
+ladder at $K=105$---falling by $4.3\times$, $3.0\times$ and $2.6\times$ across
+the first three rungs of the $^{1}S$ ladder.  Read as a ground-state route to chemical accuracy it is not
 one;\ read as a cheap fixed-accuracy tier, and especially as an
 \emph{excited-state} method --- which is where the generalized-Sturmian
 literature has always been strongest --- it is a real operating point.  The open
@@ -1357,15 +1582,27 @@ lower the ground-state floor without breaking Eq.~\eqref{eq:W_diagonal}.  \emph{
 Shibuya--Wulfman metric returns; it is genuinely better-conditioned than the
 $L^2$ overlap---its intra-center block is the identity---and much better at large
 separation, but its inter-center coupling still costs conditioning that grows
-with basis size.  The one qualification that lifts this from a caveat to a payoff
-is symmetry: because the $\mathrm{H}_2^+$ ground state is gerade and the gerade sector
-is perfectly conditioned and flat in basis size, the ground-state block-encoding pays a
-metric penalty that does not grow (Table~\ref{tab:resource})---the growth is confined to
-the excited/ungerade states---though this is an \emph{equivalent}-center property: a probe on water ($C_{2v}$) shows a symmetry-unique heavy center reinstates the growth in the ground-state ($A_1$) block (Sec.~\ref{sec:molecular}), confining the lever to homonuclear-diatomic-like systems.  And the penalty does not compound with electron number: the
+with basis size.  Two qualifications lift this from a caveat to a payoff.  The first is
+symmetry:\ because the $\mathrm{H}_2^+$ ground state is gerade and the gerade
+sector's conditioning is \emph{flat} in basis size (at the constant
+$2.555041\ldots$, so flat rather than absent---Table~\ref{tab:resource} still
+charges it), the ground-state block-encoding pays a metric penalty that does not
+grow, and the growth is confined to the excited/ungerade states.  That first
+lever is an \emph{equivalent}-center property, and a probe on water ($C_{2v}$)
+shows a symmetry-unique heavy center reinstates the raw growth in the
+ground-state ($A_1$) block (Sec.~\ref{sec:molecular}).  The second qualification
+is what removes that limit:\ because the ill-conditioning is a symbol zero of
+known order and location, a band-Toeplitz preconditioner bounds it flat in basis
+size without requiring equivalent centers, and it reaches water's $A_1$ block
+(Sec.~\ref{sec:resource}), provided the band is aligned to the symbol's null
+direction --- the same band applied in the unrotated frame is worse than leaving
+the metric untreated.  Established on $s$-sector shared-scale bases at $M=2$ and non-collinear
+$M=3$;\ the collinear case is open and is not claimed.  And the penalty does not compound with electron number: the
 Shibuya--Wulfman metric is discharged once, at the one-electron molecular-orbital construction,
 after which the many-electron secular equation carries an identity metric
-(Sec.~\ref{sec:manyelectron})---the metric cost is one-electron, not $N$-electron.  The atomic
-case is a result; the molecular case is a frontier with a well-conditioned ground-state corner.
+(Sec.~\ref{sec:manyelectron})---the metric cost is one-electron, not $N$-electron.  The atomic case is a result;\ the molecular case is a frontier that is
+\emph{removable on the conditioning axis} within that scope, capped on locality
+by the symbol's other pole, and structurally closed on $\ell$-sparsity.
 
 We have not run the algorithm on hardware, and we do not claim a resource
 advantage over production quantum chemistry: the systems where the encoding is
@@ -1380,7 +1617,8 @@ The generalized-Sturmian formulation used here is that of J.~E.~Avery and
 J.~S.~Avery, as are the Shibuya--Wulfman integrals and the split-shell account
 of why the helium ground state in particular resists the method.  To these this
 paper adds its reading as a quantum-encoding target, the resource measurements,
-and four results we claim as our own:\ the scale-lock identity
+and the results we claim as our own, which are (the list is enumerated,
+not exhaustive of the paper's smaller observations):\ the scale-lock identity
 Eq.~\eqref{eq:scale_lock} together with the one-body Coulomb metric
 Eq.~\eqref{eq:W_diagonal} it rests on;\ the interlacing bound
 Eq.~\eqref{eq:no_selection};\ the identification of the Shibuya--Wulfman matrix
@@ -1408,7 +1646,13 @@ for the $1$-norm exponents to be converged.  Measured relative error of
 $\|T'\|_1^{\rm off}$ against a $R_{\max}=5n_{\max}^{2}$ reference:\ a fixed
 $60$-bohr domain gives $1.1\times10^{-2}$ at $K=74$ rising to $2.1\times10^{-1}$
 at $K=340$;\ $c=1$ gives $\sim\!10^{-2}$ \emph{falling} with $K$;\ $c=2$ gives
-$\sim\!10^{-4}$;\ $c=3$ gives $\sim\!10^{-7}$.  Exponents are converged to
+$\sim\!10^{-4}$;\ $c=3$ gives $2.15$--$2.16\times10^{-7}$, converged.  Two independent quadrature
+rules were run to convergence:\ a uniform mesh at $1.5\times10^{6}$ points and a
+graded $r=Rt^{2}$ mesh at $2.4\times10^{5}$.  On the relative form quoted here
+they read $2.147$ and $2.156\times10^{-7}$ (a spread of $0.43\%$);\ on the
+\emph{absolute} box truncation, measured against a well-resolved
+$c=12$ reference, they read $2.161$ and $2.163\times10^{-7}$ ($0.08\%$).  An
+earlier version of this sentence gave only the order of magnitude.  Exponents are converged to
 $\pm0.001$ at $c=2$ and $\pm10^{-4}$ at $c=3$.
 
 The distinction that matters is not the size of the error but its \emph{sign of
@@ -1486,6 +1730,8 @@ PRX Quantum \textbf{4}, 030307 (2023); arXiv:2205.09039.
 A.~Gily\'en, Y.~Su, G.~H.~Low, and N.~Wiebe,
 ``Quantum singular value transformation and beyond: exponential improvements for quantum matrix
 arithmetics,'' in \textit{Proc.\ 51st ACM STOC} (2019), p.~193; arXiv:1806.01838.
+(Theorem and corollary numbering here follows the arXiv version;\ the STOC
+proceedings text is the 12-page abridgement.)
 
 \bibitem{cks2017}
 A.~M.~Childs, R.~Kothari, and R.~D.~Somma,
@@ -1553,7 +1799,9 @@ P.~Hartman and A.~Wintner, ``The spectra of Toeplitz's matrices,''
 \textit{Amer.\ J.\ Math.}\ \textbf{76}, 867 (1954).
 
 \bibitem{lowdin1950}
-P.-O.~L\"owdin, \textit{J.\ Chem.\ Phys.}\ \textbf{18}, 365 (1950).
+P.-O.~L\"owdin, ``On the non-orthogonality problem connected with the use of
+atomic wave functions in the theory of molecules and crystals,''
+\textit{J.\ Chem.\ Phys.}\ \textbf{18}, 365 (1950).
 
 \bibitem{slater_koster1954}
 J.~C.~Slater and G.~F.~Koster, ``Simplified LCAO method for the periodic
@@ -1561,8 +1809,9 @@ potential problem,'' \textit{Phys.\ Rev.}\ \textbf{94}, 1498 (1954).
 
 \bibitem{rokob2008}
 T.~A.~Rokob, \'A.~Szabados, and P.~R.~Surj\'an, ``A note on the symmetry
-properties of L\"owdin's orthogonalization schemes,'' in
-\textit{Zahradn\'ik Festschrift} (2008).
+properties of L\"owdin's orthogonalization schemes,''
+\textit{Collect.\ Czech.\ Chem.\ Commun.}\ \textbf{73}, 937 (2008)
+(Zahradn\'ik Festschrift issue).
 
 \bibitem{jaffard1990}
 S.~Jaffard, ``Propri\'et\'es des matrices bien localis\'ees pr\`es de leur
@@ -1588,6 +1837,44 @@ T.~A.~Loring, ``Principal angles and approximation for quaternionic
 projections,'' \textit{Ann.\ Funct.\ Anal.}\ \textbf{5}(2), 176 (2014);
 arXiv:1306.1923.
 
+\bibitem{monkhorst_jeziorski1979}
+H.~J.~Monkhorst and B.~Jeziorski, ``No linear dependence and multi-center integral
+problems in momentum space quantum chemistry,'' \textit{J.\ Chem.\ Phys.}\
+\textbf{71}(12), 5268--5269 (1979);\ doi:10.1063/1.438337.
+
+\bibitem{wulfman_takahata1967}
+C.~E.~Wulfman and Y.~Takahata, ``Noninvariance groups in molecular quantum
+mechanics.\ I,'' \textit{J.\ Chem.\ Phys.}\ \textbf{47}(2), 488--498 (1967);\
+doi:10.1063/1.1711921.
+
+\bibitem{red_weatherford2004}
+E.~Red and C.~A.~Weatherford, ``Derivation of a general formula for the
+Shibuya--Wulfman matrix,'' \textit{Int.\ J.\ Quantum Chem.}\ \textbf{100},
+208--213 (2004);\ doi:10.1002/qua.20122.
+
+\bibitem{goscinski2002}
+O.~Goscinski, ``Conjugate eigenvalue problems and generalized Sturmians,''
+\textit{Adv.\ Quantum Chem.}\ \textbf{41}, 51--56 (2002);\
+doi:10.1016/S0065-3276(02)41046-5.  A presentation of the previously
+unpublished \textit{Conjugate Eigenvalue Problems and the Theory of Upper and
+Lower Bounds}, Preliminary Research Report No.~217, Quantum Chemistry Group,
+Uppsala University (1968).
+
+\bibitem{shibuya1965}
+T.~I.~Shibuya and C.~E.~Wulfman, ``Molecular orbitals in momentum space,''
+\textit{Proc.\ Roy.\ Soc.\ A} \textbf{286}, 376 (1965).
+
+\bibitem{ahmad2018}
+F.~Ahmad, E.~S.~Al-Aidarous, D.~A.~Alrehaili, S.-E.~Ekstr\"om, I.~Furci and
+S.~Serra-Capizzano, ``Are the eigenvalues of preconditioned banded symmetric
+Toeplitz matrices known in almost closed form?,'' \textit{Numer.\ Algorithms}
+\textbf{78}(3), 867--893 (2018);\ doi:10.1007/s11075-017-0404-z.
+
+\bibitem{batenkov_demanet_goldman_yomdin2019}
+D.~Batenkov, L.~Demanet, G.~Goldman and Y.~Yomdin, ``Conditioning of partial
+nonuniform Fourier matrices with clustered nodes,'' arXiv:1809.00658 (2018;
+rev.\ 2019).
+
 \bibitem{barthelme_usevich2021}
 S.~Barthelm\'e and K.~Usevich, ``Spectral properties of kernel matrices in the
 flat limit,'' \textit{SIAM J.\ Matrix Anal.\ Appl.}\ \textbf{42}(1), 17 (2021);
@@ -1610,8 +1897,10 @@ Hermitian forms,'' \textit{J.\ Rational Mech.\ Anal.}\ \textbf{2}, 767 (1953).
 
 \bibitem{bottcher_widom2005}
 A.~B\"ottcher and H.~Widom, ``From Toeplitz eigenvalues through Green's
-kernels to higher-order Wirtinger--Sobolev inequalities,''
-arXiv:math/0412269 (2004).
+kernels to higher-order Wirtinger--Sobolev inequalities,'' in
+\textit{The Extended Field of Operator Theory}, Operator Theory: Advances and
+Applications, Birkh\"auser, Basel (2007), pp.~73--87;\
+doi:10.1007/978-3-7643-7980-3\_4;\ arXiv:math/0412269 (2004).
 
 \bibitem{halmos1969}
 P.~R.~Halmos, ``Two subspaces,''

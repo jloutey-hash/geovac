@@ -471,6 +471,12 @@ def render_markdown(rows: List[Dict[str, Any]], meta: Dict[str, Any]) -> str:
                            f"{r.get('supersedes_note', '')}")
             if r.get("pslq_status"):
                 out.append(f"* **period-recognition status:** {r['pslq_status']}")
+            # Added 2026-09-13 (/qa paper_60 DELTA #2). The prior-art credit
+            # reached the JSON through this field and the markdown only because
+            # it is ALSO duplicated in `method`; a field-only provenance was
+            # being dropped silently by the renderer.
+            if r.get("provenance"):
+                out.append(f"* **provenance:** {r['provenance']}")
             out.append("")
             out.append(f"**Method.** {r['method']}")
             out.append("")
@@ -510,11 +516,27 @@ def main(argv: List[str] | None = None) -> int:
         new = {e["id"]: e["value"] for e in rows}
         bad = [k for k in new if k in old and old[k] != new[k]]
         missing = sorted(set(old) - set(new))
+        # Added 2026-09-13 (/qa paper_60 DELTA #2).  This check compared ONLY
+        # `value`, so the prior-art credit DELTA #1 found missing from the
+        # generator could be deleted again from `method`/`provenance` with the
+        # gate still green.  A check that cannot see the field the last defect
+        # lived in is not guarding that defect.
+        attr_fields = ("method", "provenance")
+        old_attr = {(e["id"], f): e.get(f, "") for e in stored["entries"]
+                    for f in attr_fields}
+        new_attr = {(r["id"], f): r.get(f, "") for r in rows
+                    for f in attr_fields}
+        drift = [k for k in new_attr
+                 if k in old_attr and old_attr[k] != new_attr[k]]
         print(f"{len(new)} entries; {len(bad)} value mismatches; "
-              f"{len(missing)} missing")
+              f"{len(missing)} missing; {len(drift)} attribution drift(s)")
         for k in bad:
             print(f"  MISMATCH {k}\n    stored {old[k]}\n    fresh  {new[k]}")
-        return 1 if (bad or missing) else 0
+        for eid, f in drift:
+            print(f"  ATTRIBUTION DRIFT {eid}.{f}\n"
+                  f"    stored {old_attr[(eid, f)][:160]}\n"
+                  f"    fresh  {new_attr[(eid, f)][:160]}")
+        return 1 if (bad or missing or drift) else 0
 
     JSON_PATH.write_text(json.dumps(payload, indent=2, sort_keys=False) + "\n",
                          encoding="utf-8")

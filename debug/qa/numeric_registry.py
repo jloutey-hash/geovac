@@ -174,6 +174,59 @@ MEASURED = {
     # the fitted range and the sublinear part is the nuclear diagonal, not the
     # pure-number block the paper credited.  Both facts are pinned here so a
     # future edit that moves the number is forced back through the prose.
+    "p60_l2_inflation_hydrogenic": dict(
+        value=1.19, convention="exponent: log-log fit of the naive-Loewdin "
+                               "block-encoding 1-norm lambda vs Q=2N for the "
+                               "HYDROGENIC (a=Z/n) atomic basis, N=1..5 (Q=2..10), "
+                               "N=1 excluded (eq:blowup)",
+        q=None,
+        provenance="MEASURED 2026-09-13 via "
+                   "geovac.sturmian_l2_encoding.fit_lambda_exponent(hydrogenic): "
+                   "1.1909. Test-banded (1.0,1.4) in "
+                   "tests/test_sturmian_l2_encoding.py::"
+                   "test_paper60_l2_encoding_blowup_exponents."),
+    "p60_l2_inflation_sturmian": dict(
+        value=3.33, convention="exponent: same fit as p60_l2_inflation_hydrogenic "
+                               "but the shared-scale STURMIAN basis; eq:blowup",
+        q=None,
+        provenance="MEASURED 2026-09-13 via fit_lambda_exponent(sturmian): 3.3328. "
+                   "Test-banded (3.0,3.6), same test. The shared-scale set inflates "
+                   "faster than hydrogenic by >1 in exponent -- the eq:blowup "
+                   "mechanism (density of S^-1/2)."),
+    "p60_sw_cond_exponent": dict(
+        value=1.85, convention="exponent: log-log fit of cond of the momentum-space "
+                               "Shibuya-Wulfman two-center metric vs N=2n, WINDOW "
+                               "N=12..16 at R=2 bohr. A PRE-ASYMPTOTIC window reading, "
+                               "NOT canonical: the full N=4..16 slope is 1.80 and the "
+                               "DERIVED asymptote is N^2 (eq:sigma_law)",
+        q=None,
+        provenance="MEASURED 2026-09-13 via tests/test_paper60_sturmian.py::"
+                   "_sw_metric_mom: 1.8518 on N=12..16 (full-range 1.8003). The SW "
+                   "exponent is test-banded (1.5,2.2) as ~N^1.8 in "
+                   "test_paper60_sw_better_conditioned_than_l2."),
+    "p60_l2_overlap_exponent": dict(
+        value=1.71, convention="exponent: log-log fit of cond of the shared-scale "
+                               "Coulomb-Sturmian L2 overlap vs N=2,3,5,8 (the "
+                               "3.0/5.83/13.93/32.16 sequence). Comparator to "
+                               "p60_sw_cond_exponent",
+        q=None,
+        provenance="MEASURED 2026-09-13: 1.7114 on N=2,3,5,8. REGISTERED BECAUSE THE "
+                   "PAPER PRINTED 1.70 (an approximate comparator); corrected to the "
+                   "measured 1.71 at its one locus. Sequence pinned in "
+                   "tests/test_paper60_sturmian.py::"
+                   "test_paper60_l2_overlap_condition_number_grows."),
+    "p60_water_a1_exponent": dict(
+        value=1.96, convention="exponent: log-log fit of cond of the RAW water A_1 "
+                               "block vs N=2n over N=12..192, via _water_A1. This is "
+                               "the 'N^1.96 here' value of the sec:resource "
+                               "preconditioner table; DISTINCT from the sec:molecular "
+                               "three-center-SW probe (N^1.97, 19.9->698 over N=6..36, "
+                               "a different construction)",
+        q=None,
+        provenance="MEASURED 2026-09-13 via tests/test_paper60_preconditioner.py::"
+                   "_water_A1: 1.9580 over N=12..192 (cond 183/2696/41700). The raw "
+                   "exponent is banded (1.85,2.05) in "
+                   "test_uniform_banding_alone_is_not_the_lever."),
     "p60_onenorm_exponent": dict(
         value=0.82, convention="exponent: log-log slope of the entrywise norm of M "
                                "vs K, full s+p+d+f, helium (Z=2), over the window "
@@ -332,8 +385,8 @@ MEASURED = {
     "p60_exc_gap_k452": dict(
         value=1.7163, convention="constant: mHa above the exact He 2^1S energy "
                                  "(-2.145974046 Ha) reached by the METRIC-FREE "
-                                 "isoenergetic posing, full s+p+d+f, at the largest "
-                                 "computed basis K=452 (n_max=16). A MEASURED "
+                                 "isoenergetic posing, full s+p+d+f, at the largest basis "
+                                 "where BOTH roots were computed, K=452 (n_max=16; the ground-state-only ladder reaches K=514). A MEASURED "
                                  "ladder endpoint, deliberately NOT an extrapolated "
                                  "floor -- see the caveat below",
         q=None,
@@ -363,8 +416,8 @@ MEASURED = {
     "p60_gnd_gap_k452": dict(
         value=6.8196, convention="constant: mHa above the exact He ground state "
                                  "(-2.903724377 Ha) reached by the METRIC-FREE "
-                                 "isoenergetic posing, full s+p+d+f, at the largest "
-                                 "computed basis K=452 (n_max=16)",
+                                 "isoenergetic posing, full s+p+d+f, at the largest basis "
+                                 "where BOTH roots were computed, K=452 (n_max=16; the ground-state-only ladder reaches K=514)",
         q=None,
         provenance="MEASURED 2026-09-08, debug/p60_excited_ladder.py. Paired with "
                    "p60_exc_gap_k452 at the SAME K and the same ||M||_1 -- the pair "
@@ -372,6 +425,109 @@ MEASURED = {
                    "registered and both ratios are DERIVED from them rather than "
                    "typed. Shanks brackets this floor from above at [6.47, 6.62].",
         aliases={8.036: "K=74", 7.158: "K=202", 6.9143: "K=340"}),
+    "p60_he_chain_s_k55": dict(
+        value=-2.8745, convention="constant: Ha, the He ground-state energy from "
+                                  "the LOCKED metric-free isoenergetic posing on "
+                                  "the s-only (l_max=0) Goscinskian family at "
+                                  "n_max=10, K=55 -- the second rung of the "
+                                  "convergence chain. Printed rounded to four "
+                                  "decimals",
+        q=None,
+        provenance="MEASURED 2026-09-12 on a converged grid (box 500, 40000 pts): "
+                   "-2.874468, i.e. 29.256 mHa above the exact -2.903724377. "
+                   "REGISTERED BECAUSE THE PAPER CARRIED -2.873, which is the "
+                   "n_max=4 (K=10) value (-2.873219) -- so the chain silently "
+                   "MIXED basis sizes, against this paper's own requirement that "
+                   "every quantity name its basis-growth family. Found by the "
+                   "owed-items recheck after /qa paper_60 FULL 2026-09-12, which "
+                   "had confirmed only the K=164 endpoint. Grid note: an apparent "
+                   "box drift (-2.8744 -> -2.8739 over boxes 300..1200) is a GRID "
+                   "artifact; at 40000 points the value is stable to 2e-5 across "
+                   "the same boxes.",
+        aliases={-2.873219: "n_max=4, K=10 -- the value the paper had printed",
+                 -2.894672: "the +p rung, n_max=10, K=100",
+                 -2.847651: "the 1s^2 single-configuration rung"}),
+    "p60_he_chain_spdf_k164": dict(
+        value=-2.8964, convention="constant: Ha, the He ground-state energy "
+                                  "reached by the LOCKED metric-free isoenergetic "
+                                  "posing on the full s+p+d+f Goscinskian family "
+                                  "at K=164 -- the endpoint of the convergence "
+                                  "chain quoted in the abstract and in sec:atomic. "
+                                  "Printed ROUNDED to four decimals as -2.8964 "
+                                  "(corrected 2026-09-13: this line said THREE "
+                                  "decimals, and a 2026-09-12 edit asserted the "
+                                  "chain was truncated -- it is rounded, as the "
+                                  "exact 1s^2 value -(27/16)^2 = -2.84765625 "
+                                  "shows, truncating to -2.8476 where the paper "
+                                  "prints -2.8477)",
+        q=None,
+        provenance="DERIVED 2026-09-12 from the registered gap at the same K: "
+                   "the extended-ladder alias gives 7.289 mHa above the exact "
+                   "-2.903724377 Ha, so E = -2.896435. REGISTERED BECAUSE THE "
+                   "PAPER CARRIED -2.897 -- a retired 60-bohr-domain value -- at "
+                   "TWO loci (abstract and sec:atomic) as an unregistered literal "
+                   "C21 could not see. It was also self-refuting: K=164 is a "
+                   "nested sub-family of the K=244 pool whose own error is 7.06 "
+                   "mHa, so eq:no_selection's interlacing forces E(164) >= "
+                   "-2.896667, which -2.897 violates. Found by /qa paper_60 FULL "
+                   "2026-09-12. The direct grid measurement gives -2.896432 "
+                   "against the -2.896435 derived from the gap alias, a 3e-6 "
+                   "spread well inside the printed precision. OWED DISCHARGED "
+                   "2026-09-12/13: both earlier rungs were remeasured -- the s "
+                   "rung WAS stale (-2.873 was the n_max=4 value; it is now "
+                   "registered as p60_he_chain_s_k55 = -2.8745) and the +p rung "
+                   "was confirmed at -2.894672.",
+        aliases={-2.895688: "K=74, from the 8.036 mHa alias"}),
+    "p60_window_richardson_pi2": dict(
+        value=9.86949, convention="constant: first-order Richardson limit in 1/n "
+                                  "of n^2 * min<theta^2>, the minimal mean-square "
+                                  "spread in the Fock polar angle theta = pi - chi "
+                                  "over span{sin(a chi)}_{a<=n}; target pi^2 = "
+                                  "9.8696044",
+        q=None,
+        provenance="MEASURED 2026-09-12, debug/p60_window_constant_probe.py test F2, "
+                   "from n = 20..640. This is the Kac-Murdock-Szego constant c_1 "
+                   "recomputed in a SECOND representation -- a band-limited "
+                   "concentration problem with NO Bessel function anywhere in it -- "
+                   "which is the whole evidential point: it shows the pi^2 of "
+                   "eq:sigma_law is a truncation constant, not Bessel content. "
+                   "First route was the exact tridiagonal spectrum (v5.10.18, "
+                   "tests/test_paper60_kms_attribution.py). Two routes, one "
+                   "constant, per the independent-route rule.",
+        aliases={9.84287: "raw n=640, unextrapolated",
+                 9.81624: "raw n=320", 9.76331: "raw n=160"}),
+    "p60_window_rms_richardson_pi": dict(
+        value=3.14158, convention="constant: first-order Richardson limit in 1/n of "
+                                  "n * rms(theta) for the near-null (top singular) "
+                                  "direction of the SW cross block at kR = 2; "
+                                  "target pi = 3.1415927",
+        q=None,
+        provenance="MEASURED 2026-09-12, debug/p60_window_constant_probe.py test F1, "
+                   "from n = 20..640. Says the degeneracy direction ACHIEVES the "
+                   "band-limited minimum of p60_window_richardson_pi2 (same "
+                   "constant, squared), i.e. the near-null direction is the optimal "
+                   "concentrator at the p = 0 pole. Paired with F3, which checks "
+                   "1 - sigma_max = (kR)^2 <theta^2>/24 on that direction to 0.3% "
+                   "at n = 320 across kR = 0.5..4.",
+        aliases={3.13733: "raw n=640, unextrapolated", 3.13309: "raw n=320"}),
+    "p60_weighted_collapse_control": dict(
+        value=0.828, convention="constant: the collapse (1-sigma_max)(n/kR)^2 at "
+                                "kR=2, n=160 under the CONTROL weight W = 1+cos(chi), "
+                                "which VANISHES at the degeneracy chi = pi -- the "
+                                "value that must differ from pi^2/24 = 0.4112 for "
+                                "the weight-independence measurement to mean "
+                                "anything",
+        q=None,
+        provenance="MEASURED 2026-09-12, debug/p60_contraction_seam_probe.py test E. "
+                   "MATCHED SET -- this control and the four smooth-weight values in "
+                   "aliases must move together; quoting the agreement without the "
+                   "control would report an insensitivity as a measurement. Fitted "
+                   "exponent stays -1.97 here, so the control moves the CONSTANT "
+                   "only, not the exponent.",
+        aliases={0.40718: "smooth W = 1 (SW reference), n=160",
+                 0.41229: "smooth W = 1 + 0.8 cos(chi), n=160",
+                 0.41065: "smooth W = 2 + sin(chi), n=160",
+                 0.41635: "smooth W = exp(-chi), n=160"}),
     "p60_stateprep_overlap_exc": dict(
         value=0.798, convention="constant: L2-metric overlap between the normalized "
                                 "dominant single configuration and the true 2^1S "

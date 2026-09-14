@@ -265,26 +265,103 @@ def test_lever_transfers_to_water_A1_block():
         assert b < a / 2, f"increments not collapsing: {incs}"
 
 
-def test_water_needs_the_null_direction_rotation():
-    """The control, and the load-bearing half: it is the ROTATION, not the
-    preconditioning as such, that removes the growth.
+def test_uniform_band_preconditioner_commutes_with_the_rotation():
+    """Why the OLD control could not work, pinned so it cannot come back.
 
-    WRONG ANSWER REJECTED: "any band preconditioner fixes it."  Applying
-    blockdiag(P, P) in the unrotated frame must leave the growth intact -- if it
-    did not, the aligned result would prove nothing about the mechanism.
+    The uniform control blockdiag(T, T) is I2 (x) T and the rotation is
+    V (x) I, so they COMMUTE: rotated and unrotated frames give identical
+    spectra, and a control built that way is blind to the variable it is named
+    after.  /qa paper_60 FULL 2026-09-12 found the old guard asserting exactly
+    that comparison; planting the rotation into it did not fire.
+
+    HONEST SCOPE (2026-09-13): this does NOT guard against the old blind
+    control being restored elsewhere in the file.  It cannot -- `P = I2 (x) T`
+    and `Q = V (x) I` commute identically, so the assertion is true by
+    construction of its own operands and fires only against edits to itself.
+    It documents the reason the old control failed, in executable form, which
+    is worth keeping; the actual discrimination is carried by
+    `test_water_needs_the_null_direction_rotation` below.
     """
-    naive = []
-    for n in (12, 24, 48):
+    n = 24
+    A = _water_A1(n)
+    P = np.zeros_like(A)
+    P[:n, :n] = tridiag(n)
+    P[n:, n:] = tridiag(n)
+    Q = np.kron(_null_direction_rotation(), np.eye(n))
+    P_is = inv_sqrt(P)
+    assert np.linalg.norm(P @ Q - Q @ P) < 1e-10, "uniform P must commute with Q"
+    assert np.linalg.norm(Q.T @ P_is @ Q - P_is) < 1e-10
+    c_un = np.linalg.cond(P_is @ A @ P_is)
+    c_rot = np.linalg.cond(P_is @ (Q.T @ A @ Q) @ P_is)
+    assert abs(c_un - c_rot) / c_un < 1e-9, (
+        f"uniform control IS frame-sensitive ({c_un} vs {c_rot}) -- the old "
+        f"control would then have had discriminating power after all")
+
+
+def test_uniform_banding_alone_is_not_the_lever():
+    """The exponent the paper got wrong, pinned.
+
+    WRONG ANSWER REJECTED: "uniform banding halves the growth exponent
+    (1.96 -> 0.98), so it is most of the lever."  Paper 60 printed exactly that
+    until 2026-09-13; /qa paper_60 DELTA #2 measured it.  The uniform column
+    runs N^1.950 against the raw N^1.967 -- the two are within 1% of each other
+    and banding alone buys essentially nothing.  The 0.98 was arithmetic on a
+    two-point range read per-doubling instead of per-decade.
+
+    This is the number, not the mechanism: the mechanism (that the uniform
+    control commutes with the rotation and is therefore blind to it) is pinned
+    by `test_uniform_band_preconditioner_commutes_with_the_rotation` above, and
+    the discrimination is carried by
+    `test_water_needs_the_null_direction_rotation` below.
+    """
+    ns = (12, 24, 48, 96)
+    raw, uni = [], []
+    for n in ns:
         A = _water_A1(n)
         P = np.zeros_like(A)
         P[:n, :n] = tridiag(n)
         P[n:, n:] = tridiag(n)
         P_is = inv_sqrt(P)
-        naive.append(np.linalg.cond(P_is @ A @ P_is))
+        raw.append(np.linalg.cond(A))
+        uni.append(np.linalg.cond(P_is @ A @ P_is))
 
-    for a, b in zip(naive, naive[1:]):
-        assert b / a > 3.0, f"unrotated control did NOT keep growing: {naive}"
-    assert naive[-1] > 1e3, f"unrotated control is unexpectedly small: {naive}"
+    ln = np.log(np.array(ns, float))
+    e_raw = float(np.polyfit(ln, np.log(np.array(raw)), 1)[0])
+    e_uni = float(np.polyfit(ln, np.log(np.array(uni)), 1)[0])
+
+    assert 1.85 < e_raw < 2.05, f"raw exponent should be ~1.97, got {e_raw:.3f}"
+    assert 1.85 < e_uni < 2.05, (
+        f"uniform-banding exponent should be ~1.95 -- NOT halved to ~0.98, which "
+        f"is what the paper claimed before 2026-09-13 -- got {e_uni:.3f}")
+    assert abs(e_uni - e_raw) < 0.10, (
+        f"uniform banding must NOT materially change the exponent: raw "
+        f"{e_raw:.3f} vs uniform {e_uni:.3f}")
+
+
+def test_water_needs_the_null_direction_rotation():
+    """The load-bearing half, with a control that can actually fail.
+
+    WRONG ANSWER REJECTED: "the frame does not matter -- any selective
+    preconditioner fixes it."  Applying the SELECTIVE preconditioner
+    blockdiag(T, I) in the UNROTATED frame must not merely fail to help: it must
+    be worse than doing nothing, because it sharpens the wrong direction.  That
+    is what makes the alignment, rather than the preconditioning, load-bearing.
+    """
+    raw, naive_sel = [], []
+    for n in (12, 24, 48, 96):
+        A = _water_A1(n)
+        P = np.zeros_like(A)
+        P[:n, :n] = tridiag(n)
+        P[n:, n:] = np.eye(n)
+        P_is = inv_sqrt(P)
+        raw.append(np.linalg.cond(A))
+        naive_sel.append(np.linalg.cond(P_is @ A @ P_is))
+
+    for a, b in zip(naive_sel, naive_sel[1:]):
+        assert b / a > 4.5, f"unrotated selective control did not blow up: {naive_sel}"
+    assert naive_sel[-1] > 20.0 * raw[-1], (
+        f"unrotated selective preconditioning must be WORSE than untreated: "
+        f"{naive_sel[-1]:.3e} vs raw {raw[-1]:.3e}")
 
 
 # ------------------------------------------------------- end-to-end resource pricing

@@ -697,8 +697,9 @@ not forbid.  Naively encoding shared-scale Coulomb--Sturmians in $L^2$
 inflates the block-encoding $1$-norm (the non-orthogonal overlap must be
 L\"owdin-inverted, and $S^{-1/2}$ is dense);\ Avery's \emph{isoenergetic} (potential-weighted)
 reformulation removes the metric \emph{for atoms} entirely---a metric-free
-standard eigenproblem whose eigenvalues are the
-energies~\cite{loutey_paper60}.  Its $1$-norm grows more slowly than the
+standard eigenproblem whose eigenvalues are the scaling parameters
+$p_\kappa=\sqrt{-2E}$, from which the energies follow
+directly~\cite{loutey_paper60}.  Its $1$-norm grows more slowly than the
 matrix dimension over every basis the paper can compute ($\|M\|_1\sim
 K^{0.82}$ fitted on $K=74$--$164$, helium), and \emph{increasingly} so:\ the
 local slope falls monotonically to $0.766$ by $K=514$, so no window fit is
@@ -712,7 +713,7 @@ not to the construction}:\ it holds at fixed $l_{\max}$ and weakens under
 full-shell growth, where the pure-number block reaches $K^{1.07}$ while the
 total exponent rises only to $0.911$ --- still sublinear.  The cheap rule
 carries an accuracy
-floor of $6.4$~mHa.  \emph{The mechanism of that floor is now pinned, and it is
+floor bracketed at $[6.47,6.62]$~mHa --- the bracket the paper quotes, since its fit family approaches the floor from below and a single value would be a lower estimate rather than a central one.  \emph{The mechanism of that floor is now pinned, and it is
 neither angular truncation nor the span}:\ the metric-free form exists only when
 the basis scale is locked to the eigenvalue, $\lambda=p_\kappa=\sqrt{-2E}$ ---
 an algebraic identity, since $E=-\lambda^{2}/2$ is exactly what cancels the
@@ -728,19 +729,30 @@ of that identity, since it belongs to the basis-growth rule.  The floor is moreo
 Goscinskian $1s^{2}$ configuration pins both electrons to one exponent, where an
 excited configuration gets two free from $n_a\neq n_b$.  Since $\|M\|_1$ does
 not depend on which root is extracted, every $^{1}S$ state costs the same to
-encode --- and at $K=452$ the ground state sits $4.28\times$ above chemical
-accuracy while $2\,^{1}S$ sits $1.08\times$, the posing cost falling by
-$4.3\times$, $3.0\times$ and $2.6\times$ across the first three rungs.  (Superseded 2026-09-07:\ the earlier $K^{0.84}$,
+encode --- and at $K=452$ --- the largest basis where both roots were computed, full
+$s\!+\!p\!+\!d\!+\!f$ --- the ground state sits $4.28\times$ above chemical
+accuracy while $2\,^{1}S$ sits $1.08\times$;\ and on the \emph{$s$-only} ladder at
+$K=105$ the posing cost falls by $4.3\times$, $3.0\times$ and $2.6\times$ across
+the first three rungs.  (The two are different ladders and the paper says so;\
+quoting one against the other is the defect this sentence was rewritten to
+remove.)  (Superseded 2026-09-07:\ the earlier $K^{0.84}$,
 ``drifts upward'', $T^0$-at-$K^{0.70}$ and $T'$-superlinear-at-$K^{1.05}$ [retracted 2026-09-08: p60-tprime-superlinear]
 readings were measured on a truncated radial domain whose error grew with
 the fit variable.)  That split is what decides the molecular case.  For molecules the Shibuya--Wulfman metric returns, and the paper
 measures rather than assumes its cost:\ the conditioning grows
-polynomially, with a derived band-limited law, and of its three levers
-(the gerade sector, large separation, a metric confined to one electron)
-the sharpest---the gerade sector's basis-independent conditioning---is an
-\emph{equivalent-center} property, and a symmetry-unique heavy atom
-reinstates the \emph{growth}, confining that lever to
-homonuclear-diatomic-like systems.  The $N$-electron $1$-norm question is answered in the
+polynomially, at a band-limited concentration rate that is the
+Kac--Murdock--Szeg\H{o} asymptotic (what is the paper's own is the
+\emph{identification} of the metric as such a finite section, not the law).
+Of its four levers, the gerade sector's basis-independent conditioning is an
+\emph{equivalent-center} property, and a symmetry-unique heavy atom reinstates
+the raw \emph{growth} there;\ but a band-Toeplitz preconditioner removes the
+conditioning cost without requiring equivalent centers, reaching water's $A_1$
+block when the band is aligned to the symbol's null direction (in the unrotated
+frame the same band is worse than no treatment at all), and a direct block-encoding of the preconditioned metric takes the
+penalty from $n^3$ to $n$.  Established on $s$-sector shared-scale bases at
+$M=2$ and non-collinear $M=3$;\ the collinear case is open.  What remains standing is the \emph{locality} cost,
+capped by the symbol's other pole, and the $\ell$-block sparsity loss, which is
+structural rather than a conditioning effect.  The $N$-electron $1$-norm question is answered in the
 negative:\ the atomic sublinearity is a property of the isoenergetic
 secular matrix's single-center diagonal, not of the basis, and it does not
 survive two centers.
@@ -760,9 +772,9 @@ atoms directly on the sparse $S^3$ graph Hamiltonian using
 Slater--Condon rules~\cite{Slater1960, CondonShortley1935} with exact $R^k$ radial integrals and Gaunt
 coefficients, with Slater determinants indexed as sorted tuples of
 spin-orbital labels (relational lattice indexing).  Helium reaches
-$0.35\%$ at $n_{\max}=5$ (grid-based) and $0.19\%$ at $n_{\max}=7$ with
-exact rational Slater integrals; lithium $1.07\%$ (at $n_{\max}=5$)
-and beryllium $0.90\%$ (at $n_{\max}=4$, with $487{,}635$
+$0.26\%$ at $n_{\max}=5$ (grid-based) and $0.19\%$ at $n_{\max}=7$ with
+exact rational Slater integrals; lithium $1.03\%$ (at $n_{\max}=5$)
+and beryllium $0.71\%$ (at $n_{\max}=4$, with $487{,}635$
 determinants)~\cite{loutey_fci_atoms}.  The Hamiltonian is sparse
 (fill fraction $0.68\%$ for He at $n_{\max}=5$, $0.12\%$ for Li at
 $n_{\max}=4$) with a sub-quadratic nonzero-count growth exponent

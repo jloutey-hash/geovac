@@ -3,7 +3,7 @@ with a decoy control (same-magnitude meaningless constant that must NOT also
 fit for a closure to be trustworthy).
 
 Weight-1 basis:
-    1, pi, varpi = Gamma(1/4)^2/(4 sqrt(pi))  [K(1/2), lemniscate constant]
+    1, pi, varpi = Gamma(1/4)^2/(4 sqrt(pi))  [= K(1/2); this is NOT the lemniscate constant, which is sqrt(2)*varpi -- a DIFFERENT number]
     E12 = E(1/2)   [complete elliptic E at parameter 1/2]
     K2  = (1+sqrt(2))^(1/2) Gamma(1/8) Gamma(3/8) / (2^(13/4) sqrt(pi))  [disc-8 period]
 

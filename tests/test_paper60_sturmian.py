@@ -412,12 +412,14 @@ def test_paper60_lgt0_angular_correlation_and_sublinear():
     # the block-encoding 1-norm grows more slowly than K through the full s+p+d+f
     # basis (eq:sublinear).  >=5 points; the fitted exponent sits in the paper's
     # 0.78 (s-only) .. 0.84 (full basis) band and is robustly below 1.
-    # NOT an asymptote (corrected 2026-09-07, /qa): 0.84 is a fit over the WINDOW
-    # K = 74..164, and the local slope keeps rising past it -- 0.850 at K=202,
-    # 0.868 at 244, 0.882 at 290, 0.906 at 340.  This self-contained sweep reaches
-    # ~0.77 at K<=24; the pinned claim is the sublinear band over the computed
-    # range, and NOT any asymptotic value.  The mechanism is pinned separately by
-    # test_paper60_sublinearity_is_carried_by_the_nuclear_diagonal.
+    # NOT an asymptote (corrected 2026-09-07; direction re-measured 2026-09-08
+    # [retracted 2026-09-12: p60-tprime-superlinear]): the exponent is a WINDOW
+    # fit, and on a CONVERGED box the local slope FALLS monotonically -- 0.827 at
+    # K=74 down to 0.766 by K=514 -- so no window fit is stable.  The earlier
+    # "keeps rising to 0.906" reading was measured on a truncated radial domain
+    # and is retired.  This self-contained sweep reaches ~0.77 at K<=24; the
+    # pinned claim is the sublinear band over the computed range, and NOT any
+    # asymptotic value.
     sizes, norms = [], []
     for (lmax, span) in [(0, 2), (0, 3), (1, 3), (2, 3), (3, 3)]:
         cfg = _cfgs_upto(lmax, span)

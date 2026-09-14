@@ -76,7 +76,7 @@ analytical integrals (incomplete gamma functions, machine precision),
 confirming convergence through $n_{\max}=3$;\ at $n_{\max}=4$ the
 model crosses \emph{past} exact (over-binding), so the fixed-geometry
 error is not monotonically improvable either.  The $R_{\rm eq}$ drift is structural to the
-block decomposition ($+0.057$ then $+0.023$~bohr at the two available steps---
+block decomposition ($+0.053$ then $+0.023$~bohr at the two available steps---
 decelerating, not a constant rate; $3\times$
 smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$), not numerical.
 \end{abstract}
@@ -141,7 +141,7 @@ Key census results for LiH at $n_{\max} = 2$, $Q = 30$:
 \begin{tabular}{lrr}
 Metric & Within-block & Cross-block \\
 \hline
-Nonzero ERIs & 195 & 130 \\
+Nonzero ERIs & 321 & 214 \\
 Max $|\langle pq|rs\rangle|$ (Ha) & --- & 0.891 \\
 Mean $|\langle pq|rs\rangle|$ (Ha) & --- & 0.142 \\
 \end{tabular}
@@ -396,7 +396,7 @@ Compared to the current composed Hamiltonian:
   quantization, not by a pseudopotential.
 \item Cross-block ERIs are included, subject to Gaunt selection rules.
   Track~CB established that these add ${\sim}2/3$ of the within-block
-  ERI count (130 vs.~195 for LiH at $n_{\max} = 2$).
+  ERI count (214 vs.~321 for LiH at $n_{\max} = 2$).
 \item Cross-center nuclear attraction is included via two-center
   integrals.  The number of one-body terms is bounded by the number
   of orbital pairs times the number of off-center nuclei.
@@ -592,12 +592,11 @@ primary finding of this phase.
 \subsection{Basis convergence: $n_{\max} = 3$}
 
 At $n_{\max} = 3$ ($Q = 84$, $l_{\max} = 2$), the balanced coupled
-Hamiltonian has 19{,}959 Pauli terms, 448.9~Ha 1-norm, and 2{,}298 QWC
-groups.  The Pauli scaling exponent (2-point fit from $Q = 30$ to
-$Q = 84$) is 3.03; the 1-norm exponent is 1.75.  The
-Pauli-to-composed ratio (2.53$\times$) is consistent with
-$n_{\max} = 2$ (2.63$\times$), indicating that the cross-block
-overhead is a constant factor, not a growing penalty.
+Hamiltonian has 127{,}855 Pauli terms and a 436.9~Ha 1-norm
+(Table~\ref{tab:convergence}).  The two-point Pauli scaling exponent
+(from $Q = 30$ to $Q = 84$) is 3.74 and the 1-norm exponent is 1.71;
+at $n_{\max} = 2$ the balanced Hamiltonian carries 2{,}726 Pauli terms,
+$3.25\times$ the composed count of 838.
 
 The cross-center $V_{ne}$ multipole expansion terminates exactly at
 $L_{\max} = 4$ for $l_{\max} = 2$ ($d$--$d$ pairs), confirmed by
@@ -790,7 +789,7 @@ Conjecture~\ref{conj:accuracy} (accuracy): \textbf{MIXED}.  Analytical
 integrals (machine precision via incomplete gamma functions) confirm that
 the $R_{\rm eq}$ drift is structural to the block decomposition, not
 numerical: grid error contributed only 0.007~bohr to $R_{\rm eq}$ at
-$n_{\max} = 3$.  The drift is $+0.057$~bohr from $n_{\max}=2$ to 3 and $+0.023$~bohr
+$n_{\max} = 3$.  The drift is $+0.053$~bohr from $n_{\max}=2$ to 3 and $+0.023$~bohr
 from 3 to 4---decelerating, consistent with the extrapolated limit below
 ($3\times$ smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$) but in
 the same outward direction.  Energy converges excellently through
@@ -847,9 +846,9 @@ Sec.~\ref{sec:architecture}:
   FCI with analytical integrals (incomplete gamma functions, machine
   precision): $E(3.015) = -8.055$~Ha (0.20\% error, down from 1.8\%
   at $n_{\max} = 2$; see Table~\ref{tab:convergence}).
-  Pauli scaling exponent 3.03, 1-norm exponent 1.75.
+  Pauli scaling exponent 3.74, 1-norm exponent 1.71.
   $R_{\rm eq} = 3.280$~bohr (8.8\% error), confirming structural drift
-  of $+0.053$~bohr per $n_{\max}$ step ($3\times$ smaller than PK's
+  of $+0.053$ then $+0.023$~bohr per step (decelerating, not a constant rate; $3\times$ smaller than PK's
   $+0.15$--$0.22$~bohr/$l_{\max}$).  Grid error contributes only
   0.007~bohr to $R_{\rm eq}$ (negligible).  Classification: MIXED---energy
   converges excellently through $n_{\max}=3$ (then crosses past exact;\ the
@@ -915,12 +914,12 @@ nucleus, confirming that the multipole expansion does not produce
 unphysical couplings for lone pair blocks.
 
 The Pauli ratio (balanced/composed) grows with block count:
-$2.63\times$ (2-block LiH) $\to$ $4.77\times$ (3-block BeH$_2$)
-$\to$ $7.45\times$ (5-block H$_2$O), because each block pair adds
+$3.25\times$ (2-block LiH) $\to$ $6.35\times$ (3-block BeH$_2$)
+$\to$ $10.10\times$ (5-block H$_2$O), because each block pair adds
 cross-block ERIs and cross-center $V_{ne}$ terms.  The growth is
 sub-\emph{quadratic} in the block count over these three systems
-($\sim B^{1.14}$---slightly super-linear;\ the per-block increment
-\emph{decelerates}, $2.14$ then $1.34$ per block), so an $O(B^2)$ envelope
+($\sim B^{1.24}$---slightly super-linear;\ the per-block increment
+\emph{decelerates}, $3.10$ then $1.88$ per block), so an $O(B^2)$ envelope
 is an upper bound rather than the measured trend.
 
 The 1-norm advantage is regime-dependent.  For VQE/NISQ applications

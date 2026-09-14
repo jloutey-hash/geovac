@@ -89,7 +89,7 @@ def test_heteronuclear_exchange_tau_series():
 @pytest.mark.slow
 def test_closed_form_pes_formula_matches_fci():
     """The single-expression E(R) (2x2 singlet CI in closed form) equals the
-    assembled FCI -- at R=1.4 it reproduces the 84-digit certified value."""
+    assembled FCI -- at R=1.4 it reproduces the 60-digit certified value."""
     R = sp.Symbol("R", positive=True)
     E = AS.h2_closed_form_E(R)
     assert {a.func.__name__ for a in E.atoms(sp.Function)} <= {"exp", "expint", "log"}
