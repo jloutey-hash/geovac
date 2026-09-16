@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.12.7] - 2026-09-16
+
+**Paper 12's algebraic V_ee extended from sigma-only (m=0) to general m by a moment-recurrence radial engine that is STABLE at the delta channel (mu=2), where the differentiation route diverges.** Paper 12's quadrature-free A_l/B_l/X_l tables were an m=0 statement; the |m|>=1 azimuthal channels (v5.11.18) were evaluated by a graded-panel spectral quadrature that differentiates P_l, Q_l m times and loses precision near xi=1 as m grows — the |m|=2 (delta) sector drove the H2 energy to a non-variational ~-21 Ha and was left to the Gaussian route. New module `geovac/neumann_vee_general_m.py` generalises the three auxiliary tables to associated Legendre functions.
+
+- **P side (regular):** A_l^{m,s}(p) = ∫ ξ^p (ξ²−1)^s e^{−cξ} [d^m P_l] dξ — a closed-form polynomial contraction against the monomial moments A_n. No quadrature, no recurrence.
+- **Q side (singular ~(ξ−1)^{−m}):** B_l^{m,s} built by the associated-Legendre FORWARD l-recurrence (l−m+1)B_{l+1}=(2l+1)B_l(p+1)−(l+m)B_{l−1}, seeded at l=m,m+1 by 1D mpmath quadrature, weight (ξ²−1)^s carried INTACT (the bare ξ^p d^m Q_l moment diverges for m≥1; only the intact weight regularises the ξ=1 endpoint).
+- **X_l^{m,s}** from A/B at c and 2c via the same IBP monomial split as `neumann_vee.compute_Xl`, weight intact. Moment tables built in mpmath (dps=30), X assembly in float64 (the Neumann prefactor suppresses the large-l blocks where float64 cancellation would bite).
+
+Validation: reduces to `geovac.neumann_vee` at m=0 to 1.06e-9 elementwise; matches a semi-independent high-precision reference for X_l^{m,s} to ~1e-11..1e-17 through l=10, m≤4 (the differentiation grid, by contrast, is already wrong by rel ~4 at l=10 — that route degrades at large l even at mu≤1); reproduces the sound grid engine at (2,2) mu≤1 to **0.0 uHa**. STABLE at mu=2: the recurrence build is variational (E=-1.172897, 99.10% of D_e, 72/81 kept at (2,2)) vs the grid's -14.5..-21 Ha (non-variational); the delta channel is supplied from the native prolate route, +0.248 mHa gain (98.95%→99.10%), consistent with the ~0.5 mHa Gaussian estimate (the (2,2) delta subspace being the smaller). The recurrence engine is also stable at (3,3) mu≤1 (98.78% at alpha=1.0, conditioning-limited) where the grid V_ee blows up to -64 Ha — the differentiation route degrades at large l even at mu≤1. mu=2 (2,2) table build ~4 min (one-time; mpmath seeds).
+
+Scope: "recurrence-stable, quadrature-seeded" — the low-l seeds use 1D mpmath quadrature (as `neumann_vee` already seeds B_l by scipy.quad) and the moment tables are built in extended precision (one-time cost, minutes/basis), so not fully quadrature-free. Angular eta moments, selection rule, and Neumann prefactor reused unchanged from `geovac.prolate_general_m`.
+
+Paper 12 Sec. "Restoring the Azimuthal Channels" [SCOPE]→[MEASURED], abstract, and conclusion updated; group2 synthesis moved with the claim; `docs/claim_test_matrix.md` row added. Backing: `tests/test_paper12_general_m_neumann.py` (5 tests, 2 slow), fire-tested by `debug/firetest_p12_general_m.py` (4/4 guards fire). Diagnostics: `debug/general_m_engine.py`, `debug/val_arbitrate.py` (the semi-independent X reference), `debug/val_*.py`.
+
 ## [v5.12.6] - 2026-09-16
 
 **Verify/harden of Paper 61's remaining targets — B=πΩ→Sp₄(ℤ) and the θ₃² conductor-4 mechanism — both CLEAN.** Continuation of the v5.12.5 pass; unlike the Stokes amplitude, these two turned up no defect and needed no caveat.

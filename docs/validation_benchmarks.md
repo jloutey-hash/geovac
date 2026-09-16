@@ -11,6 +11,7 @@
 | H2 Full CI | < 1.0% | Accuracy control |
 | H2 Neumann V_ee (sigma only) | 92.4% D_e | Algebraic integral accuracy |
 | H2 Neumann V_ee, \|m\| <= 1 | 99.1% D_e | Azimuthal channels restored (Paper 12, 2026-09-14) |
+| H2 Neumann V_ee, \|m\| <= 2 (delta) | 99.10% D_e @ (2,2) | Moment-recurrence engine, variational and STABLE at mu=2 where the differentiation grid diverges (Paper 12, v5.12.7); `geovac/neumann_vee_general_m.py` |
 | H2 Level 4 (2D solver + Schwartz cusp correction) | 96.0% D_e | Molecule-frame hyperspherical; ~95% pure-variational |
 | HeH+ Level 4 | 93.1% D_e | Heteronuclear extension |
 | LiH Composed (ab initio PK) | R_eq 6.4% | Composed geometry |

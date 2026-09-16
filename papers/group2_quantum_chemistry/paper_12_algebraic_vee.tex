@@ -49,11 +49,14 @@ integrals are exact within the Neumann truncation order $L$, with
 no six-dimensional quadrature and no fitted parameters; in the
 $\sigma$ sector the sole residual numerical integration is a single
 one-dimensional adaptive quadrature for the log-singular second-kind
-Legendre moment $B_l$.  (The $|m| \le 1$ extension reported below
-keeps the same kernel but evaluates its ordered-$\xi$ integral by a
-two-dimensional spectral quadrature rather than by those recurrences,
-so the quadrature-free property is a $\sigma$-sector statement
-throughout this paper.)
+Legendre moment $B_l$.  (The $|m| \ge 1$ channels keep the same kernel;
+their ordered-$\xi$ integral is available both from a two-dimensional
+spectral quadrature and---generalising the same $A_l$, $B_l$, $X_l$
+recurrences to associated Legendre functions
+(Sec.~\ref{sec:azimuthal})---from a moment-recurrence engine that is
+\emph{stable} in the $\delta$ ($|m| = 2$) sector where the
+differentiation route diverges.  That engine is recurrence-stable and
+quadrature-seeded rather than fully quadrature-free.)
 
 A systematic convergence study on H$_2$ at $R = 1.4011$~bohr
 demonstrates that the Neumann algebraic $V_{ee}$ yields 92.2\% of
@@ -1006,18 +1009,39 @@ exclude (a killed azimuthal coupling, the superseded kernel prefactor,
 a disabled canonical orthogonalization, and a truncation cap that would
 hide the selection rule).
 
-\textbf{[SCOPE]} Two limits are worth stating plainly.  The
-$|m| = 2$ sector was not obtained here:\ the fourth derivatives of
-$Q_l$ near $\xi = 1$ lose precision in the present radial
-quadrature, so the $\delta$ contribution ($\approx 0.5$~mHa) is
-known only from the Gaussian route.  And the $\mu > 0$ radial
-integrals are evaluated by a graded-panel spectral quadrature rather
-than by the $A_l$, $B_l$, $X_l$ recurrences of
-Sec.~\ref{sec:auxiliary};\ the quadrature-free property established
-in this paper for $\sigma$ states is therefore \emph{not} yet
-extended to $\mu > 0$.  Doing so requires generalising those three
-auxiliary tables to associated Legendre functions, which is
-well-defined but not attempted here.
+\textbf{[MEASURED]} Both limits stated in earlier versions of this
+section have since been removed.  The $\mu > 0$ radial integrals are
+now available from the $A_l$, $B_l$, $X_l$ recurrences of
+Sec.~\ref{sec:auxiliary} generalised to the associated Legendre
+functions (module \texttt{geovac/neumann\_vee\_general\_m.py}).  The
+first-kind moment $A_l^{m,s}(p) = \int_1^\infty \xi^p
+(\xi^2-1)^s e^{-c\xi}\,[\,\mathrm{d}^m P_l/\mathrm{d}\xi^m\,]\,
+\mathrm{d}\xi$ is a closed-form polynomial contraction against the
+$A_n$; the second-kind moment $B_l^{m,s}$---whose integrand is
+singular as $(\xi-1)^{-m}$ at $\xi = 1$, regularised by the weight
+$(\xi^2-1)^s$ kept \emph{intact} rather than expanded into
+$\xi$-powers (the bare $\xi^p\,\mathrm{d}^m Q_l$ moment diverges for
+$m \ge 1$)---is built by the associated-Legendre forward $l$-recurrence
+$(l-m+1)B_{l+1}(p) = (2l+1)B_l(p+1) - (l+m)B_{l-1}(p)$, seeded at
+$l = m, m+1$; the ordered-$\xi$ integral $X_l^{m,s}$ then follows from
+the same integration-by-parts split as the $\sigma$ case.  The engine
+reduces to \texttt{geovac.neumann\_vee} at $m = 0$ to $\sim\!10^{-9}$
+elementwise, matches a high-precision reference for $X_l^{m,s}$ to
+better than $10^{-10}$ through $l = 10$, $m \le 4$, and reproduces the
+grid result at $(2,2)$, $|m| \le 1$ to the last printed digit.  Its
+decisive property is \emph{stability} in the $\delta$ ($|m| = 2$)
+sector:\ the fourth-derivative $Q_l$ cancellation near $\xi = 1$ drives
+the differentiation route to a non-variational $\approx -14.5$~Ha,
+whereas the recurrence build is variational and supplies the $\delta$
+channels from the native prolate route---a $+0.25$~mHa gain at
+$(2,2)$, consistent with the $\approx 0.5$~mHa Gaussian estimate (the
+$(2,2)$ $\delta$ subspace being the smaller).  One honest limit
+remains:\
+the low-$l$ $B_l^{m,s}$ seeds still use a single one-dimensional
+quadrature---as the $\sigma$-sector $B_l$ does---and the moment tables
+are built in extended precision, so the engine is recurrence-stable and
+quadrature-seeded rather than fully quadrature-free.  Backing:\
+\texttt{tests/test\_paper12\_general\_m\_neumann.py}.
 
 \textbf{[MEASURED]} Finally, a caution about the $\sigma$ column
 itself.  The overlap matrix of this basis family is strongly
@@ -1245,11 +1269,14 @@ The result demonstrates a form of quantum chemistry where
 recurrence relations on quantum number labels replace the
 six-dimensional quadrature for electron-electron repulsion, leaving
 only a single one-dimensional quadrature for the log-singular $B_l$
-moment in the $\sigma$ sector.  Just as
+moment---one such seed per kernel order $m$ once the same recurrences
+are carried to the associated Legendre functions of the $|m| \ge 1$
+channels (Sec.~\ref{sec:azimuthal}).  Just as
 Paper~7 showed that atomic energies are encoded in the
 topology of $S^3$, this paper shows that molecular
 electron-electron repulsion is encoded in the algebraic
-structure of the Legendre functions $P_l$ and $Q_l$ on the
+structure of the Legendre functions $P_l$, $Q_l$ and their
+associated forms $P_l^m$, $Q_l^m$ on the
 prolate spheroid.  The physics is in the algebra, not in the
 grid.
 
