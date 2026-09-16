@@ -136,12 +136,20 @@ def test_general_G_dirac_triangle_full_panel(_rank2):
     bounds the original driver validated ALL-PASS; G2 irreps grow fast, so its
     panel is the smallest).  fail_count = 0, sup ratio < 1 on each.
 
-    HONEST SCOPE: the all-sigma triangle is PANEL-BOUNDED.  Beyond these Casimir
-    bounds it fails for extreme weight pairs (e.g. G2 (1,0) vs (0,4): a
-    small-Casimir sigma gives ratio ~2.4 > 1) while the PRV / max-Casimir sigma
-    still dominates.  Paper 40's C_3 = 1 claim is the *asymptotic* PRV-summand
-    bound (the existence of a dominating sigma), of which these panels are
-    empirical corroboration -- NOT a uniform all-weights all-sigma theorem.
+    HONEST SCOPE (corrected 2026-09-15): the all-sigma triangle is
+    PANEL-BOUNDED by the decomposition driver's validated range.  The panels
+    below (dimension-clean) show fail_count == 0.  An EARLIER version of this
+    note cited G2 (1,0) vs (0,4) "ratio ~2.4 > 1" as a real DT counterexample
+    beyond the panel;  that is WITHDRAWN -- the 2.4 is an artifact of
+    dirac_triangle_extended_verify.py's tensor_product, which is not
+    dimension-conserving outside its validated panel (it reports a
+    Schur-impossible trivial summand for that pair).  The dimension-correct DT
+    value there is < 1 (holds).  What the code establishes is therefore:
+    all-sigma DT holds on every dimension-clean panel, plus the asymptotic
+    PRV-summand bound (a dominating sigma).  The paper's Cor L3_closure claims
+    the interior closure at all ranks via an ANALYTICAL Steinberg argument that
+    the code does not verify;  that tier is a primary-math question, not settled
+    here.
     """
     panels = [("SU(3) p+q<=5", _rank2["build_A"](2), 2, 5),
               ("Sp(2) a+b<=3", _rank2["build_C2"](), 2, 3),

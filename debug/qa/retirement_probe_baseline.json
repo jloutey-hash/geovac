@@ -1,0 +1,40 @@
+{
+  "Paper_4_Universality.tex|holographic central charge": [
+    "paper_50_cft3_partition_function.tex"
+  ],
+  "paper_3_holography.tex|AdS/CFT": [
+    "paper_25_hopf_gauge_structure.tex",
+    "paper_50_cft3_partition_function.tex",
+    "paper_51_gravity_arc.tex",
+    "paper_52_category_iii_correspondence.tex"
+  ],
+  "paper_3_holography.tex|paraboloid lattice": [
+    "Paper_7_Dimensionless_Vacuum.tex",
+    "Paper_8_Bond_Sphere_Sturmian.tex",
+    "paper_13_hyperspherical.tex",
+    "paper_1_spectrum.tex",
+    "paper_2_alpha.tex"
+  ],
+  "paper_46_strong_form_lorentzian_propinquity.tex|strong-form Lorentzian propinquity": [
+    "geovac_field_guide.tex",
+    "group1_operator_algebras_synthesis.tex",
+    "paper_43_lorentzian_extension.tex",
+    "paper_45_lorentzian_propinquity.tex",
+    "paper_50_cft3_partition_function.tex",
+    "paper_53_disk_propinquity.tex",
+    "paper_56_tannakian_substrate.tex"
+  ],
+  "paper_47_two_rate_hybrid_convergence.tex|two-rate hybrid convergence": [
+    "paper_43_lorentzian_extension.tex"
+  ],
+  "paper_49_oslpls_strong_form_bridge.tex|OSLPLS": [
+    "geovac_field_guide.tex",
+    "group1_operator_algebras_synthesis.tex",
+    "paper_50_cft3_partition_function.tex"
+  ],
+  "paper_49_oslpls_strong_form_bridge.tex|operator-system Lorentzian pre-length space": [
+    "paper_50_cft3_partition_function.tex",
+    "paper_52_category_iii_correspondence.tex",
+    "paper_56_tannakian_substrate.tex"
+  ]
+}

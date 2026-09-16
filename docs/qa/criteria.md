@@ -847,3 +847,42 @@ An uncited claim is invisible to a citation gate by construction. That is a crit
 
 *Cost control.* Trigger 2 is per-claim, not per-paper, and only for claims matching a priority signature — not every measured number. If a sprint produces no `[SYMBOLIC]`-tier claim, it fires not at all.
 
+---
+
+## C24 -- paper retirement: register integrity + dependency profile (added 2026-09-14, PI direction)
+
+`debug/qa/check_paper_retirement.py`. Three checks, one of which gates.
+
+- **A. Register integrity (FAILS).** Every `.tex` in `papers/archive/` has a row
+  in `docs/retired_papers.md` declaring a class and a reason, and every row
+  whose class has no live successor declares trigger terms. A file in the
+  archive with no row fails; a row naming a file that is not there fails.
+- **B. Dependency profile (advisory).** For every paper whose `INDEX.md` status
+  is DESCOPED / PARTIAL / DRAFT, print how many of its citers are themselves
+  in that set. Ranking, not verdict.
+- **C. Re-derivation probe (advisory).** Grep each retired paper's trigger terms
+  across the live corpus and report hits, so an approach attempted in an
+  archived paper surfaces when it is attempted again. Over-broad terms are
+  visible by their hit count.
+
+**Why it exists, measured.** Four papers (46-49) sat in the live, DOI-stamped
+set, never reviewed as a set, after the model they rest on was withdrawn. They were honestly
+labelled -- each states its descope in its own abstract -- and no step in the
+process was ever responsible for asking whether they should still be there.
+That is a **decision** gap, not an honesty gap, and no existing gate covered it.
+
+**Two metrics were tried and failed** before B settled, recorded so nobody
+rebuilds them: plain citation count (misses a self-citing cluster: Papers 46-49
+carry 6, 8, 3 and 2 citers while nothing outside the group depends on them), and
+citations from outside the paper's own strongly connected component (collapses:
+49 of 54 papers form one component, so the check reported 28 papers including
+three keystones).
+
+**B stops short of a verdict on purpose.** Whether a citation is a real
+dependency or a see-also is the Sec. 13.8 test -- *if the cited claim were
+withdrawn tomorrow, would this sentence have to change?* -- and that is not
+automatable. Retirement is a PI decision.
+
+Self-test: `--selftest` proves all five probes fire against synthetic defects,
+not against real debt, so it keeps working once the debt is cleared.
+

@@ -332,9 +332,14 @@ period closure pointwise at every cutoff $(\nmax, \Nt)$. The
 identification persists through the Krein-space lift and the
 BBB Connes axiom audit at $(4, 6)$ — the four-witness theorem, which
 is a Lorentzian statement in the Wightman axiomatic framework, has its
-operator-system analog literally satisfied at signature $(3, 1)$ at
-finite cutoff, not merely as a structural correspondence via the
-Wick-rotation chain.
+operator-system analog satisfied on a signature-$(3, 1)$-labeled Krein
+substrate at finite cutoff.  \emph{This is signature-blind:}\ as
+Paper~42~\S 10 records for the same construction, the finite-cutoff
+closure carries no metric statement that distinguishes the signature,
+and the identification is a Krein-substrate carrier choice rather than
+distinguishing Lorentzian content.  The construction is genuine;\ what
+it does not yet supply is a Lorentzian metric statement (open, see
+Paper~45).
 
 \paragraph{The headline structural finding (Section~\ref{sec:H_local_signature_independence}).}
 Paper~42~\S~7.2 records a derived structural finding:\ the framework's
@@ -931,7 +936,13 @@ the level of the symbolic construction. In floating-point computation,
 the matrix exponential $e^{i \cdot 2\pi \cdot \KL^{\alpha, W}}$ is
 computed by diagonalisation and then exponentiation of the
 eigenvalues, with residual scaling as $O(\sqrt{\dim W_L}\,
-\varepsilon_{\mathrm{machine}})$. We have computed the maximum
+\varepsilon_{\mathrm{machine}})$ for the non-degenerate wedge
+($n_{\max}\ge 2$).  At $n_{\max}=1$ the wedge generator has a single
+degenerate eigenvalue, so the modular unitary $e^{i2\pi K_\alpha}$ is a
+scalar phase and its conjugation cancels the $O(\varepsilon)$ term,
+leaving an $O(\varepsilon^{2})\sim10^{-32}$ residual;\ this is why the
+$n_{\max}=1$ rows below sit far below the $10^{-16}$ floor.  We have
+computed the maximum
 residual
 \begin{equation}\label{eq:r_L_alpha}
    r_{W_L}^\alpha(O)
@@ -2267,7 +2278,7 @@ applications},
 \newblock Lecture Notes in Mathematics 128, Springer, 1970.
 
 \bibitem[Toyota(2023)]{toyota2023}
-M.~Toyota,
+R.~Toyota,
 \newblock \emph{Quantum Gromov--Hausdorff convergence of spectral
 truncations for groups with polynomial growth},
 \newblock arXiv:2309.13469, 2023.

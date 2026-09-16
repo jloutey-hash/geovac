@@ -9,6 +9,11 @@
 
 \newtheorem{theorem}{Theorem}
 
+% Numeric-registry citation form (CLAUDE.md Sec. 15).  Renders the literal
+% only, so the PDF stays self-contained; the key is a foreign key into
+% debug/qa/numeric_registry.py, which C21 recomputes and cross-checks.
+\newcommand{\gvq}[2]{#2}
+
 \begin{document}
 
 \title{Algebraic Two-Electron Integrals on the\\
@@ -41,9 +46,14 @@ coordinates, which decomposes each six-dimensional integral into a
 finite sum of products of one-dimensional auxiliary integrals
 computable by recurrence relations.  The resulting two-electron
 integrals are exact within the Neumann truncation order $L$, with
-no six-dimensional quadrature and no fitted parameters; the sole
-residual numerical integration is a single one-dimensional adaptive
-quadrature for the log-singular second-kind Legendre moment $B_l$.
+no six-dimensional quadrature and no fitted parameters; in the
+$\sigma$ sector the sole residual numerical integration is a single
+one-dimensional adaptive quadrature for the log-singular second-kind
+Legendre moment $B_l$.  (The $|m| \le 1$ extension reported below
+keeps the same kernel but evaluates its ordered-$\xi$ integral by a
+two-dimensional spectral quadrature rather than by those recurrences,
+so the quadrature-free property is a $\sigma$-sector statement
+throughout this paper.)
 
 A systematic convergence study on H$_2$ at $R = 1.4011$~bohr
 demonstrates that the Neumann algebraic $V_{ee}$ yields 92.2\% of
@@ -51,13 +61,24 @@ the exact $D_e$ with 27 basis functions, compared to 79.6\% for
 numerical $V_{ee}$ at the same basis size---a uniform 12--20
 percentage point improvement across all basis sizes from 1 to 72
 functions.  The Neumann result plateaus at 92.4\%, confirming that
-$V_{ee}$ integration error has been eliminated.  The remaining
-7.6\% gap is diagnosed as a one-electron basis completeness limit:
-the electron-electron cusp requires non-analytic terms
-($r_{12}^{1/2}$, $r_{12}\ln r_{12}$) that no polynomial prolate
-spheroidal basis can represent.  This diagnosis identifies the next
-natural geometry in the GeoVac program: hyperspherical coordinates
-for the three-body coalescence.
+$V_{ee}$ integration error has been eliminated.  \textbf{[MEASURED]}
+The remaining 7.6\% gap is a basis-space limit, and we identify which
+one.  The basis used here is $\varphi$-independent, so it spans only
+$m_1 = m_2 = 0$ configurations; but a $^1\Sigma_g^+$ state constrains
+the \emph{total} $M = m_1 + m_2$ to zero, not each $m_i$
+separately, so the $\pi^2$, $\delta^2$, \ldots\ configurations---every
+one of them $^1\Sigma_g^+$---are absent by construction.  Restoring
+them in the same basis with the same Neumann kernel gives
+$99.1\%$ of $D_e$ at $|m| \le 1$ (stability envelope
+$99.0$--$99.1\%$;\ Sec.~\ref{sec:azimuthal}), a gain of $11.6$~mHa that
+no growth along the $\sigma$ axis reproduces (near-tripling the
+$\sigma$ basis is worth $0.34$~mHa).  \textbf{[WITHDRAWN]} This paper
+previously attributed the gap to the electron-electron cusp requiring
+non-analytic $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read
+that as motivation for hyperspherical coordinates.  Neither holds:
+no such term appears in the calculation above, nor in the grid-based
+prolate spheroidal treatment of Tao, McCurdy and Rescigno, which
+reaches $0.05$~mHa in these same coordinates.
 \end{abstract}
 
 \maketitle
@@ -94,8 +115,11 @@ integral
 which couples the coordinates of both electrons and cannot be
 evaluated by separation of variables.  In the prolate spheroidal
 Hylleraas-type CI framework, these integrals are six-dimensional
-(three coordinates per electron, with azimuthal symmetry reducing
-the effective dimensionality).
+(three coordinates per electron).  The $\sigma$-only basis adopted
+below reduces the effective dimensionality to four;
+Sec.~\ref{sec:gap} shows that this is a \emph{restriction} on the
+configuration space, not a symmetry of the $^1\Sigma_g^+$ state, and
+measures what it costs.
 
 The standard approach computes Eq.~\eqref{eq:vee_element}
 numerically, using the complete elliptic integral $K(k)$ to perform
@@ -127,9 +151,10 @@ $A_l(p,\alpha)$ and $B_l(p,\alpha)$---are computed by recurrence
 relations and closed forms, with the sole exception of the
 log-singular second-kind moment $B_l$, which uses a single
 one-dimensional adaptive quadrature (Sec.~III.D).  The
-six-dimensional repulsion integral is thereby reduced to a finite
-sum of algebraic operations on quantum number labels plus this one
-1D quadrature.
+six-dimensional repulsion integral is thereby reduced, \emph{in the
+$\sigma$ sector}, to a finite sum of algebraic operations on quantum
+number labels plus this one 1D quadrature;\
+Sec.~\ref{sec:azimuthal} states what the $|m| \ge 1$ extension costs.
 
 The structure of this paper is as follows.
 Section~\ref{sec:neumann} derives the Neumann expansion and
@@ -140,7 +165,7 @@ Section~\ref{sec:implementation} describes the computational
 pipeline.  Section~\ref{sec:convergence} presents the
 convergence study comparing numerical and algebraic $V_{ee}$.
 Section~\ref{sec:gap} diagnoses the origin of the remaining
-7.6\% gap.  Section~\ref{sec:implications} discusses
+7.6\% gap and measures its removal.  Section~\ref{sec:implications} discusses
 implications for the GeoVac program.
 Section~\ref{sec:conclusion} concludes.
 
@@ -159,7 +184,8 @@ in prolate spheroidal coordinates $(\xi, \eta, \varphi)$ using the
 Neumann expansion~\cite{Neumann1878, Morse1953}:
 \begin{equation}
   \frac{1}{r_{12}} = \frac{2}{R}\sum_{l=0}^{\infty}\sum_{m=0}^{l}
-    (2-\delta_{m0})\frac{(l-m)!}{(l+m)!}\,
+    (2-\delta_{m0})\,(-1)^m\,(2l+1)
+    \left[\frac{(l-m)!}{(l+m)!}\right]^{2}
     P_l^m(\xi_<)\,Q_l^m(\xi_>)\,
     P_l^m(\eta_1)\,P_l^m(\eta_2)\,
     \cos m(\varphi_1 - \varphi_2),
@@ -168,11 +194,26 @@ Neumann expansion~\cite{Neumann1878, Morse1953}:
 where $\xi_< = \min(\xi_1, \xi_2)$, $\xi_> = \max(\xi_1, \xi_2)$,
 $P_l^m$ and $Q_l^m$ are associated Legendre functions of the first
 and second kind, and $R$ is the internuclear distance.
+\textbf{[MEASURED]} Earlier versions of this paper printed
+Eq.~\eqref{eq:neumann_full} without the $(-1)^m$ and $(2l+1)$
+factors and with the factorial ratio unsquared.  That form does not
+reproduce $1/r_{12}$---checked pointwise, it diverges---whereas the
+expression above agrees with $1/|\mathbf{r}_1-\mathbf{r}_2|$ to
+$2\times10^{-6}$ by $l = 10$ at well-separated $\xi$.  The error went
+undetected because every calculation in \emph{earlier versions} of
+this paper used only the $m = 0$ specialisation
+Eq.~\eqref{eq:neumann_sigma}, which was derived independently---from
+the Legendre completeness relation, as stated below---rather than
+specialised from the printed general form.  Two of the three
+discrepancies do vanish at $m = 0$;\ the $(2l+1)$ does not, and
+Eq.~\eqref{eq:neumann_sigma} carries it because that independent
+derivation supplies it.  Sec.~\ref{sec:azimuthal} is the first use of the
+general form, which is why the error surfaced only now.
 
-For $^1\Sigma_g^+$ states of homonuclear diatomics, the
-wavefunction has $m = 0$ symmetry.  The azimuthal integration
-$\int_0^{2\pi} d\varphi_1 \int_0^{2\pi} d\varphi_2$ projects
-onto the $m = 0$ component:
+The basis of Eq.~\eqref{eq:basis_function} below carries no
+$\varphi$ dependence, so for \emph{that basis} the azimuthal
+integration $\int_0^{2\pi} d\varphi_1 \int_0^{2\pi} d\varphi_2$
+retains only the $m = 0$ component:
 \begin{equation}
   \left\langle\frac{1}{r_{12}}\right\rangle_\varphi
   = \frac{8\pi^2}{R}\sum_{l=0}^{\infty}(2l+1)\,
@@ -189,9 +230,18 @@ The $(2l+1)$ factor arises from the Legendre polynomial
 normalization in the angular completeness relation
 $\int_{-1}^{1}P_l(\eta)\,P_{l'}(\eta)\,d\eta = 2\delta_{ll'}/(2l+1)$.
 
-Equation~\eqref{eq:neumann_sigma} is the key identity: it
-separates the two-electron Coulomb kernel into a sum of products
-of functions of individual coordinates.  Each term in the sum
+Equation~\eqref{eq:neumann_sigma} is the key identity for the
+$\sigma$-only sector: it separates the two-electron Coulomb kernel
+into a sum of products of functions of individual coordinates.
+\textbf{[SCOPE]} It is \emph{not} the whole kernel for a
+$^1\Sigma_g^+$ state.  Retaining only $m = 0$ is a restriction to
+$\sigma$ configurations, not a consequence of $\Sigma$ symmetry: the
+$\Sigma$ label fixes $M = m_1 + m_2 = 0$, which $\pi^2$ and
+$\delta^2$ configurations satisfy with $m_2 = -m_1 \ne 0$.  The
+terms with $m \ne 0$ in Eq.~\eqref{eq:neumann_full} are precisely
+what couples those configurations to the $\sigma$ sector.
+Sections~\ref{sec:gap} and~\ref{sec:azimuthal} measure the cost of
+dropping them.  Each term in the sum
 involves $P_l(\xi_<) Q_l(\xi_>)$, which couples the two radial
 coordinates, and $P_l(\eta_1) P_l(\eta_2)$, which factorizes
 completely.
@@ -642,8 +692,9 @@ in 705~s, whereas tripling the basis to $N = 72$ gains only
 0.2~percentage points at 7.5$\times$ the computational cost.
 The diminishing returns beyond $N = 27$ reflect the fact that
 additional $\sigma$-type basis functions with higher $\xi$
-and $\eta$ powers cannot access the missing physics
-(Section~\ref{sec:gap}).
+and $\eta$ powers cannot access the missing physics---which is
+not in the $\sigma$ sector at all
+(Sections~\ref{sec:gap} and~\ref{sec:azimuthal}).
 
 \subsection{Grid dependence of numerical \texorpdfstring{$V_{ee}$}{Vee}}
 
@@ -698,11 +749,20 @@ integral evaluation.
 The basis functions~\eqref{eq:basis_function} are products
 of integer powers of $\xi$ and $\eta$ times a common
 exponential $e^{-\alpha\xi}$.  These are smooth, analytic
-functions of the single-electron coordinates.  No matter
-how many such functions we include, they span only the
-polynomial$\times$exponential subspace of $L^2$.
+functions of the single-electron coordinates, and---the point that
+matters here---they carry no $\varphi$ dependence at all.
 
-\subsection{The electron-electron cusp}
+\textbf{[MEASURED]} The convergence study itself shows that the gap
+is not reachable along the directions the basis does span.  Going
+from $N = 27$ to $N = 46$ to $N = 72$ moves the energy
+$92.2\% \to 92.4\% \to 92.4\%$:\ $\gvq{p12_sigma_growth_mha}{0.34}$~mHa for $2.7\times$ the
+functions.  Whatever is missing, more $\sigma$ functions do not
+supply it.  Sections~\ref{sec:azimuthal_diagnosis}
+and~\ref{sec:azimuthal} identify it and remove it.
+
+\subsection{The electron-electron cusp is real, but it is not this
+gap}
+\label{sec:azimuthal_diagnosis}
 
 The exact two-electron wavefunction $\Psi(\mathbf{r}_1,
 \mathbf{r}_2)$ satisfies the Kato cusp condition~\cite{Kato1957}
@@ -728,7 +788,31 @@ where $R = (r_1^2 + r_2^2)^{1/2}$ is the hyperradius and
 $\hat{\Omega}$ represents the hyperangular coordinates.  The
 $R^{1/2}$ and $R\ln R$ terms are fundamentally non-analytic:
 no finite sum of polynomial$\times$exponential functions in
-prolate spheroidal coordinates can represent them.
+prolate spheroidal coordinates can represent them \emph{exactly}.
+
+\textbf{[WITHDRAWN]} Earlier versions of this paper concluded from
+this that the cusp is what caps the calculation at 92.4\%.  It is
+not, and the argument was never sound:\ non-analyticity implies slow
+convergence of a partial-wave expansion, not a floor at 7.6\%.  Two
+calculations settle it.  Tao, McCurdy and
+Rescigno~\cite{tao_mccurdy_rescigno2010}, working in these same
+prolate spheroidal coordinates with a polynomial angular basis and no
+$r_{12}$ dependence anywhere in it, reach
+$-1.17442$~Ha---$0.05$~mHa from exact---at angular truncation
+$l_{\max} = 6$.  (Their odd-$m$ radial functions do carry an explicit
+$(\xi^2-1)^{1/2}$, which they introduce for the non-analytic behaviour
+at $\xi = 1$;\ that is a one-electron boundary condition on the focal
+axis, the analogue of the $\sin\theta$ behaviour of ordinary spherical
+harmonics at odd $m$, and is unrelated to $r_{12}$.  The point stands
+as stated:\ nothing in their basis represents the \emph{interelectronic}
+non-analyticity.)  And the calculation reported in
+Sec.~\ref{sec:azimuthal} below, run in the basis of
+Eq.~\eqref{eq:basis_function} with the same Neumann kernel and
+likewise no $r_{12}$ dependence, reaches $99.1\%$.  Neither could
+exist if representing the cusp were the binding constraint at this
+accuracy.  What the cusp does cost is the slow tail of the
+partial-wave series;\ at $|m| \le 1$ and $l \le 3$ that residue is
+under one percent of $D_e$.
 
 \subsection{Why \texorpdfstring{$r_{12}$}{r12} basis functions
 help only partially}
@@ -749,49 +833,254 @@ with an additional radial singularity).
 
 The Neumann algebraic approach at 92.2\% with $p = 0$ basis
 functions outperforms the $r_{12}$ + numerical approach at
-86.8\% with $p \leq 2$ basis functions.  This confirms
-the central thesis: \emph{the cusp does not need $r_{12}^p$
-basis functions---it needs exact $V_{ee}$ computed from
-quantum number algebra.}  The $r_{12}$ basis functions are
+86.8\% with $p \leq 2$ basis functions.  What that comparison
+establishes is narrower than it looks:\ \emph{an exact $V_{ee}$ beats
+$r_{12}$ basis functions carrying grid error}.  It says nothing about
+the cusp in either direction.  (Earlier versions drew the stronger
+conclusion that ``the cusp does not need $r_{12}^p$ basis
+functions---it needs exact $V_{ee}$'';\ that goes with the rest of the
+withdrawn cusp reading, and
+Sec.~\ref{sec:azimuthal_diagnosis} gives the cusp's actual cost here.)  The $r_{12}$ basis functions are
 a workaround for poor $V_{ee}$ integration, not a solution
 to the underlying representation problem.
 
-\subsection{The missing geometry}
+\subsection{The missing channels}
 
-The 7.6\% gap identifies a \emph{geometric} limitation.  The
-prolate spheroidal coordinates $(\xi_1, \eta_1, \xi_2, \eta_2)$
-are natural for the \emph{one-electron} nuclear attraction
-problem (they separate the two-center Coulomb potential), but
-they are not natural for the \emph{two-electron} coalescence
-(they do not separate $1/r_{12}$).  The cusp is a property
-of the \emph{interelectron} coordinate $r_{12}$, which in
-prolate spheroidals is a complicated function of all four
-variables:
+\textbf{[MEASURED]} The 7.6\% gap is a \emph{configuration-space}
+limitation, and an elementary one.  A $^1\Sigma_g^+$ state requires
+the \emph{total} azimuthal quantum number $M = m_1 + m_2$ to vanish.
+It does not require $m_1 = m_2 = 0$.  The configurations
+$\pi^2$ ($m_1 = +1$, $m_2 = -1$), $\delta^2$ ($m_1 = +2$,
+$m_2 = -2$), and so on all have $M = 0$ and are all
+$^1\Sigma_g^+$;\ they carry the \emph{angular} part of the electron
+correlation, the left--right and in--out parts being what a
+$\sigma$-only space already describes.  The basis
+Eq.~\eqref{eq:basis_function} is $\varphi$-independent and therefore
+excludes every one of them, and Eq.~\eqref{eq:neumann_sigma} drops
+exactly the kernel terms that would couple them in.  The two
+restrictions are consistent with each other, which is why the
+calculation converges cleanly to a wrong answer.
+
+Section~\ref{sec:azimuthal} restores the channels and measures the
+result:\ $92.4\% \to 99.1\%$ of $D_e$.  What remains after that is
+ordinary basis incompleteness---higher $l$, higher $n$, and the
+$\delta$ channels.  That remainder is ${\approx}1.6$~mHa in total, of
+which the $\delta$ channels account for ${\approx}0.5$~mHa on an
+independent Gaussian-basis estimate;\ the balance is not itemised
+here.
+
+For completeness, the interelectron coordinate in prolate
+spheroidals is a function of all five relative variables:
 \begin{equation}
   r_{12}^2 = \frac{R^2}{4}\bigl[
     (\xi_1^2-1)(1-\eta_1^2) + (\xi_2^2-1)(1-\eta_2^2)
     - 2\sqrt{(\xi_1^2-1)(1-\eta_1^2)(\xi_2^2-1)(1-\eta_2^2)}
+      \,\cos(\varphi_1-\varphi_2)
     + (\xi_1\eta_1 - \xi_2\eta_2)^2
   \bigr].
   \label{eq:r12_prolate}
 \end{equation}
+(The $\cos(\varphi_1-\varphi_2)$ factor was omitted in earlier
+versions of this equation, which therefore held only at
+$\varphi_1 = \varphi_2$.)
 
-The cusp $\partial\Psi/\partial r_{12} \neq 0$ at $r_{12} = 0$
-cannot be represented by smooth functions of $\xi_1, \eta_1,
-\xi_2, \eta_2$ individually.  It requires either explicit
-$r_{12}$ dependence (the traditional approach, but hard to
-integrate) or a coordinate system where the coalescence point
-has a simple representation.
+Note the $\cos(\varphi_1-\varphi_2)$ dependence:\ the
+interelectron distance is not a function of
+$\xi_1, \eta_1, \xi_2, \eta_2$ alone.  A $\varphi$-independent basis
+cannot resolve it, which is the same restriction stated in
+coordinates.
 
-The natural geometry for the three-body coalescence problem
-is the \emph{hyperspherical} coordinate system
-$(\rho, \theta, \hat{\Omega})$, where $\rho = (r_1^2 + r_2^2)^{1/2}$
-is the hyperradius and the cusp condition becomes a boundary
-condition in $\theta$ at $\theta = \pi/4$ (the $r_1 = r_2$
-manifold).  In this coordinate system, the Fock
-expansion~\eqref{eq:fock_expansion} in $\rho^{1/2}$ and
-$\rho\ln\rho$ becomes a local expansion in the natural
-variable, amenable to lattice discretization.
+\textbf{[WITHDRAWN]} Earlier versions of this paper closed this
+section by identifying hyperspherical coordinates
+$(\rho, \theta, \hat{\Omega})$ as the natural geometry the gap
+called for, on the grounds that the coalescence cusp has a simple
+representation there.  That inference rested on the cusp diagnosis
+withdrawn above and does not survive it.  Hyperspherical coordinates
+remain the right setting for genuine three-body coalescence
+problems, and Paper~13~\cite{loutey_paper13} uses them for helium
+on independent grounds;\ what is withdrawn is the claim that
+\emph{this} calculation's residual motivates them.
+
+%% ========================================================================
+%% VI-B. RESTORING THE AZIMUTHAL CHANNELS
+%% ========================================================================
+
+\section{Restoring the Azimuthal Channels}
+\label{sec:azimuthal}
+
+\textbf{[MEASURED]} We extend the basis of
+Eq.~\eqref{eq:basis_function} with an azimuthal quantum number,
+
+\begin{equation}
+  u_{j l \mu}(\xi,\eta) =
+    \xi^{\,j}\,\eta^{\,l}\,
+    (\xi^2-1)^{\mu/2}(1-\eta^2)^{\mu/2}\,e^{-\alpha\xi},
+  \qquad
+  \Phi_\mu = u\,u'\,\cos\mu(\varphi_1-\varphi_2),
+  \label{eq:basis_mu}
+\end{equation}
+pairing $m_1 = +\mu$ with $m_2 = -\mu$ through
+$\cos\mu(\varphi_1-\varphi_2)$---the $M = 0$, $^1\Sigma_g^+$
+combination, which for $\mu = 1$ is the familiar
+$\pi_x\pi_x + \pi_y\pi_y$.  At $\mu = 0$ the factor $u$ reduces to the one-electron factor of
+Eq.~\eqref{eq:basis_function} and $\Phi_0$ to its symmetrised
+product, so the $\mu = 0$ sector is exactly the original basis.  The overlap, kinetic and
+nuclear-attraction matrices remain \emph{exact}---every integrand is
+a polynomial in $\xi$ and $\eta$ times $e^{-2\alpha\xi}$, evaluated
+against the moments $A_n$ of Sec.~\ref{sec:auxiliary} and
+elementary $\eta$ moments---and all three are diagonal in $\mu$.
+$V_{ee}$ uses the full kernel Eq.~\eqref{eq:neumann_full};\ its
+$m \neq 0$ terms are what couple different $\mu$.
+
+The $\eta$ integrals remain exact polynomial moments, because the
+kernel's $(1-\eta^2)^{m/2}$ and the basis's $(1-\eta^2)^{\mu/2}$
+always combine to an integer power.  The sum over $l$ terminates
+exactly:\ integrating by parts $m$ times (the boundary terms vanish
+since $(1-\eta^2)^{s}$ has a zero of order $s \ge m$ at
+$\eta = \pm1$) shows the moment is identically zero for
+$l > Q + 2s - m$, with $Q$ the combined $\eta$ power and
+$s = (\mu_i + \mu_j + m)/2$.  That rule must be imposed
+explicitly rather than left to cancellation:\ the Legendre
+derivative coefficients reach $\sim\!10^{10}$, and their
+floating-point residue multiplied by the radial integral produced a
+$-3\times10^{8}$~Ha artifact before the cutoff was enforced.
+
+\begin{table}[t]
+\caption{H$_2$ at $R = 1.4011$~bohr with the azimuthal channels
+  restored.  Same basis family, same Neumann kernel, $\alpha$
+  scanned, canonical orthogonalization throughout --- eigenvectors of
+  $S$ with eigenvalue below $10^{-11}\lambda_{\max}$ are discarded, and
+  the surviving dimension is given in parentheses where it differs
+  from $N$.  $D_e^{\rm exact} = 0.174475$~Ha.}
+\label{tab:azimuthal}
+\begin{ruledtabular}
+\begin{tabular}{crdrd}
+  \multicolumn{1}{c}{$(j_{\max}, l_{\max})$}
+  & \multicolumn{1}{c}{$N_{\sigma}$}
+  & \multicolumn{1}{c}{$D_e\%$ ($\mu = 0$)}
+  & \multicolumn{1}{c}{$N_{|m|\le1}$}
+  & \multicolumn{1}{c}{$D_e\%$ ($|m| \le 1$)} \\
+\hline
+$(1,1)$ &   6 & 74.19 &  12 & 81.63 \\
+$(2,1)$ &  12 & 75.87 &  24 & 83.47 \\
+$(2,2)$ &  27 & 92.25 &  54 & 98.96 \\
+$(3,2)$ &  46 & 92.37 &  92 (76) & 99.00 \\
+$(3,3)$ &  72 (65) & \gvq{p12_sigma_only_de_pct}{92.42} & 144 (115) & \gvq{p12_azimuthal_de_pct}{99.09} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+Table~\ref{tab:azimuthal} gives the result.  At the largest basis
+the azimuthal channels are worth $+11.64$~mHa, taking
+$\gvq{p12_sigma_only_de_pct}{92.42}\% \to \gvq{p12_azimuthal_de_pct}{99.1}\%$ of $D_e$.  The $\mu = 0$ column reproduces the
+Neumann column of Table~\ref{tab:convergence} to
+$161$, $1.6$, $1.0$, $6.7$ and $58$~$\mu$Ha.
+
+Three controls make the reading unambiguous.  \emph{First}, the
+gain is not a basis-count effect:\ tripling the basis along the
+$\sigma$ axis is worth $\gvq{p12_sigma_growth_mha}{0.34}$~mHa
+(Sec.~\ref{sec:gap}), while
+opening the azimuthal axis at fixed $(j_{\max}, l_{\max})$ is worth
+$\gvq{p12_azimuthal_gain_mha}{11.6}$~mHa.  \emph{Second}, an independent
+route agrees.  A full CI
+in a Cartesian Gaussian basis---different functions, different
+integrals, different code---restricted to $m = 0$ orbitals converges
+to $92.34\%$, within $0.2$~mHa of this paper's $\sigma$-only value
+in a completely unrelated basis;\ releasing $|m| \le 1$ takes it to
+$99.10\%$, against $99.1\%$ here---agreement well inside the
+stability envelope quoted below, and not to be read as a
+two-decimal coincidence.  \emph{Third}, the general-$m$
+kernel of Eq.~\eqref{eq:neumann_full} was checked pointwise against
+$1/|\mathbf{r}_1-\mathbf{r}_2|$, agreeing to better than $10^{-6}$ at
+well-separated $\xi$ by $l = 10$.  That figure is a point evaluation, not
+a uniform bound:\ the Neumann series converges slowly when the two $\xi$
+are close, and the second-kind recursion used here degrades at larger
+$l$, so nearby geometries and higher truncations are worse.  What the
+check establishes is the \emph{form} of the prefactor---the superseded
+one errs by nine orders of magnitude at the same point---not an accuracy
+claim for the kernel.
+
+Backing:\ \texttt{tests/test\_paper12\_azimuthal\_channels.py},
+whose guards are fire-tested against the specific wrong answers they
+exclude (a killed azimuthal coupling, the superseded kernel prefactor,
+a disabled canonical orthogonalization, and a truncation cap that would
+hide the selection rule).
+
+\textbf{[SCOPE]} Two limits are worth stating plainly.  The
+$|m| = 2$ sector was not obtained here:\ the fourth derivatives of
+$Q_l$ near $\xi = 1$ lose precision in the present radial
+quadrature, so the $\delta$ contribution ($\approx 0.5$~mHa) is
+known only from the Gaussian route.  And the $\mu > 0$ radial
+integrals are evaluated by a graded-panel spectral quadrature rather
+than by the $A_l$, $B_l$, $X_l$ recurrences of
+Sec.~\ref{sec:auxiliary};\ the quadrature-free property established
+in this paper for $\sigma$ states is therefore \emph{not} yet
+extended to $\mu > 0$.  Doing so requires generalising those three
+auxiliary tables to associated Legendre functions, which is
+well-defined but not attempted here.
+
+\textbf{[MEASURED]} Finally, a caution about the $\sigma$ column
+itself.  The overlap matrix of this basis family is strongly
+linearly dependent at high powers and a single $\alpha$:\ measured
+$\mathrm{cond}(S) = 2.6\times10^{14}$ at $(j,l) = (3,3)$, $\mu = 0$
+(the $N = 72$ basis of Table~\ref{tab:convergence}), rising to
+$2.0\times10^{16}$ once $\mu = 1$ doubles the basis.  Beyond
+$\sim\!10^{16}$ a direct generalised eigensolve is not
+trustworthy---at $N = 144$ it returned $-79$~Ha---so
+Table~\ref{tab:azimuthal} uses canonical orthogonalization
+throughout.
+
+\textbf{[MEASURED]} Canonical orthogonalization \emph{bounds} that
+pathology;\ it does not remove it, and we state the envelope rather
+than leave the reader to assume a converged four-figure number.  At
+the $|m| \le 1$, $N = 144$ basis the solver still returns
+non-variational values at a \emph{majority} of $\alpha$.  Measured at
+the stated threshold over $\alpha \in [0.90, 1.30]$, six of nine grid
+points fail.  The failures are not marginal:\ $\alpha = 1.15$ and $1.20$
+return $-4.1$ and $-8.1$~Ha, $\alpha = 0.95$ returns $-277$~Ha, and
+$\alpha = 1.00$---the natural default, and the value a reader is most
+likely to try first---returns $-64.3$~Ha.  The three that survive give $99.03$, $99.09$ and $99.05\%$ at
+$\alpha = 1.10$, $1.25$, $1.30$.  So the reported value is the best
+\emph{variational} point of an $\alpha$ scan, and points failing the
+variational test are discarded---a selection the reader should see, not
+infer.  The value also moves with the discard threshold:\ at
+$\alpha = 1.25$ it reads $99.14\%$ at $10^{-12}$, $99.09\%$ at
+$10^{-11}$, $98.99\%$ at $10^{-10}$ and $98.41\%$ at $10^{-8}$,
+and is non-variational below $\sim\!10^{-12}$.  The honest
+statement is therefore $99.0$--$99.1\%$, with
+$\gvq{p12_azimuthal_de_pct}{99.09}\%$ the best
+variational value at the stated parameters.
+
+\textbf{[SCOPE 2026-09-14, corrected twice]}
+Two earlier versions of this passage overstated how stable that number is.
+The first called the conclusion ``insensitive to the choice''
+[retracted 2026-09-14: p12-envelope-insensitive] and then quoted the figure
+that refutes it.  The second replaced it with a range, ``$95.5$--$99.1\%$
+across the grid'', and called the qualitative conclusion ``robust across the
+grid'' [retracted 2026-09-14: p12-grid-floor-955].  Both are wrong, and the
+second is wrong in the direction that flatters the result.
+
+$95.5\%$ is the cell at $\alpha = 1.10$, threshold $10^{-8}$.  It is the
+weakest variational value only if $\alpha$ is restricted to $\ge 1.10$---which
+excludes precisely the low-$\alpha$ half this paragraph has just identified as
+pathological.  Over the full declared range $\alpha \in [0.90, 1.30]$ the
+weakest variational value is $76.11\%$, at $\alpha = 0.90$ and threshold
+$10^{-8}$;\ and at that same cell the $\sigma$-only solve returns $91.06\%$,
+so opening the azimuthal channels there makes the answer \emph{worse} by
+fifteen points.  The qualitative conclusion is therefore \emph{not} robust
+pointwise across the grid, and this paper does not claim that it is.
+
+What the result rests on instead, stated exactly:\ at the tight discard
+thresholds, where the generalized eigenproblem is actually being solved rather
+than regularized, every surviving variational point lies between $99.03$ and
+$99.14\%$;\ and the independent Gaussian-basis route, which is well
+conditioned and needs no discard threshold at all, gives $99.10\%$.  The claim
+is the agreement of those two.  It is not a property of the whole
+$(\alpha, \mathrm{threshold})$ grid, most of which is conditioning noise.  The $-1.161304$~Ha quoted in
+Table~\ref{tab:convergence} sits $58\,\mu$Ha below the conditioned
+value, i.e.\ the last two of its six decimals reflect linear
+dependence rather than physics.  No conclusion in this paper turns
+on them.
 
 %% ========================================================================
 %% VII. IMPLICATIONS FOR THE GEOVAC PROGRAM
@@ -821,29 +1110,50 @@ of natural geometries:
   \item \textbf{Two-center, two-electron} (H$_2$):
     Prolate spheroidal $\times$ prolate spheroidal with
     Neumann-algebraic $V_{ee}$.  One-electron physics is
-    exact; electron correlation is resolved to 92.4\%.
-    \emph{This paper.}
-  \item \textbf{Three-body coalescence}: Hyperspherical
-    coordinates $(\rho, \theta, \hat{\Omega})$ for the
-    interelectron cusp.  \emph{Identified but not yet
-    implemented.}
+    exact; electron correlation is resolved to 92.4\% in the
+    $\sigma$ sector and 99.1\% once the azimuthal channels are
+    restored (Sec.~\ref{sec:azimuthal}).  \emph{This paper.}
 \end{enumerate}
 
 Each level in this hierarchy addresses a qualitatively different
 physical singularity: the nuclear Coulomb singularity ($1/r$),
-the two-center potential ($1/r_A + 1/r_B$), the electron-electron
-Coulomb singularity ($1/r_{12}$), and the coalescence cusp
-(non-analytic $r_{12}$ dependence).  The GeoVac program
-identifies each singularity's natural coordinate system and
+the two-center potential ($1/r_A + 1/r_B$), and the
+electron-electron Coulomb singularity ($1/r_{12}$).  The GeoVac
+program identifies each singularity's natural coordinate system and
 discretizes the Laplace--Beltrami operator in that system.
+
+\textbf{[WITHDRAWN]} A fourth entry appeared here in earlier
+versions---``three-body coalescence: hyperspherical coordinates for
+the interelectron cusp, identified but not yet implemented''---
+presented as a consequence of this paper's residual.  It is removed,
+because the residual was misdiagnosed (Sec.~\ref{sec:gap}).  This
+is a statement about what \emph{this paper} licenses, not about
+hyperspherical coordinates, whose use for two-electron atoms rests
+on separate grounds in Paper~13~\cite{loutey_paper13}.  What the
+present result removes is the \emph{evidence} that fourth entry
+rested on, not a verdict in its favour.  Comparisons between the two
+geometries are meaningful only at matched $m_{\max}$, and at matched
+$m_{\max}$ neither this paper nor Paper~15~\cite{loutey_paper15}
+claims an advantage over the other.  The two published figures are
+not a matched pair:\ the $99.1\%$ here is
+$(j_{\max},l_{\max}) = (3,3)$ at $|m| \le 1$, while the $96.0\%$
+there is $l_{\max} = 6$ with a Schwartz cusp correction and a
+different solver class, and the $99.97\%$ of
+Ref.~\cite{tao_mccurdy_rescigno2010} is a grid method again
+different from both.  The defensible statement is the negative one:\
+prolate spheroidal coordinates are not disqualified for H$_2$ by an
+inability to represent the cusp, because no such inability is in
+evidence.
 
 \subsection{Quantum chemistry without six-dimensional quadrature}
 
 The Neumann algebraic $V_{ee}$ realizes a form of quantum
 chemistry in which the two-electron integrals are reduced to
 recurrence relations on quantum number labels, the sole residual
-numerical step being a single one-dimensional adaptive quadrature
-for the log-singular second-kind moment $B_l$.  Combined with the
+numerical step in the $\sigma$ sector being a single one-dimensional
+adaptive quadrature for the log-singular second-kind moment $B_l$
+(Sec.~\ref{sec:azimuthal} states what the $|m| \ge 1$ extension
+costs).  Combined with the
 analytical kinetic energy (integration by parts) and nuclear
 attraction (simple polynomial moments), the \emph{entire}
 Hamiltonian matrix is constructed without any six-dimensional
@@ -904,20 +1214,38 @@ for H$_2$.  The key results are:
     as the dominant error source.
   \item \textbf{27 basis functions is the sweet spot}: 92.2\%
     in 705~s versus 92.4\% in 5271~s at 72 functions.
-  \item \textbf{The 7.6\% gap} is precisely diagnosed: it is
-    a basis completeness limit, not an integration error.  The
-    electron-electron cusp requires non-analytic terms
-    ($r_{12}^{1/2}$, $r_{12}\ln r_{12}$) that no polynomial
-    prolate spheroidal basis can represent.  This identifies
-    hyperspherical coordinates as the next natural geometry
-    in the GeoVac hierarchy.
+  \item \textbf{The 7.6\% gap} is a basis-space limit, not an
+    integration error---and specifically a \emph{configuration}
+    limit:\ the $\varphi$-independent basis spans only
+    $m_1 = m_2 = 0$, while a $^1\Sigma_g^+$ state constrains only
+    $M = m_1 + m_2$.  The $\pi^2$ and $\delta^2$ configurations it
+    excludes carry the angular correlation.
+  \item \textbf{99.1\% of exact $D_e$} (stability envelope
+    $99.0$--$99.1\%$) on restoring the azimuthal
+    channels at $|m| \le 1$ in the same basis with the same
+    Neumann kernel (Sec.~\ref{sec:azimuthal}), a gain of
+    $\gvq{p12_azimuthal_gain_mha}{11.6}$~mHa, against
+    $\gvq{p12_sigma_growth_mha}{0.34}$~mHa from near-tripling the $\sigma$
+    basis.
+    The $\sigma$-only value reproduces independently in a Gaussian
+    basis to $0.2$~mHa, and the extended value to within the stated
+    stability envelope.
 \end{enumerate}
+
+\textbf{[WITHDRAWN]} Earlier versions of this paper concluded that
+the residual was the electron-electron cusp demanding non-analytic
+$r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read that as
+identifying hyperspherical coordinates as the next natural geometry.
+Both are withdrawn:\ the calculations above contain no such term and
+reach 99\%, and the grid-based prolate spheroidal treatment of
+Ref.~\cite{tao_mccurdy_rescigno2010} reaches $0.05$~mHa in these
+coordinates with a polynomial angular basis.
 
 The result demonstrates a form of quantum chemistry where
 recurrence relations on quantum number labels replace the
 six-dimensional quadrature for electron-electron repulsion, leaving
 only a single one-dimensional quadrature for the log-singular $B_l$
-moment.  Just as
+moment in the $\sigma$ sector.  Just as
 Paper~7 showed that atomic energies are encoded in the
 topology of $S^3$, this paper shows that molecular
 electron-electron repulsion is encoded in the algebraic
@@ -1040,6 +1368,25 @@ J.~Loutey,
 ``The Molecular Fock Projection: Diatomic Molecules as Prolate
 Spheroidal Lattices,''
 GeoVac Paper~11 (2026).
+
+\bibitem{loutey_paper13}
+J.~Loutey,
+``The Hyperspherical Lattice: Two-Electron Atoms as Coupled
+Channel Graphs,''
+GeoVac Paper~13 (2026).
+
+\bibitem{loutey_paper15}
+J.~Loutey,
+``The Level~4 Natural Geometry: Two-Center Two-Electron Molecules in
+Molecule-Frame Hyperspherical Coordinates,''
+GeoVac Paper~15 (2026).
+
+\bibitem{tao_mccurdy_rescigno2010}
+L.~Tao, C.~W. McCurdy, and T.~N. Rescigno,
+``Grid-based methods for diatomic quantum scattering problems.
+III. Double photoionization of molecular hydrogen in prolate
+spheroidal coordinates,''
+\emph{Phys. Rev. A} \textbf{82}, 023423 (2010).
 
 \bibitem{Fock1935}
 V.~Fock,

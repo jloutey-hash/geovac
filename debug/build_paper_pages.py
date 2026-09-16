@@ -136,6 +136,20 @@ def index_page(entries: List[Dict[str, Any]]) -> str:
                 body)
 
 
+def orphan_stems(entries, existing_stems):
+    """Page stems to prune: those with no manifest entry, never index, never a
+    live page.  Pure and total so the wipe-guard is testable (DELTA #2 D3).
+
+    THE LOAD-BEARING INVARIANT: an empty `entries` returns an EMPTY set, never
+    "every stem is an orphan".  A real manifest always has entries; an empty one
+    is an upstream build error, not a signal to wipe the crawlable pages.
+    """
+    if not entries:
+        return set()
+    live_ids = {e["id"] for e in entries}
+    return {s for s in existing_stems if s != "index" and s not in live_ids}
+
+
 def main() -> None:
     entries: List[Dict[str, Any]] = json.loads(
         MANIFEST.read_text(encoding="utf-8"))
@@ -149,6 +163,23 @@ def main() -> None:
         (OUT_DIR / f"{e['id']}.html").write_text(
             paper_page(e, dois.get(e["id"])), encoding="utf-8")
     (OUT_DIR / "index.html").write_text(index_page(entries), encoding="utf-8")
+
+    # Prune pages whose paper is no longer in the manifest (added 2026-09-14,
+    # after archiving Papers 46-49 left four orphan pages behind).  The builder
+    # only ever wrote, so an archived paper kept a live, crawlable page
+    # advertising it as current -- the generated-artifact staleness class.
+    # Guard: an empty-but-valid manifest ([]) must NOT be read as "every page
+    # is an orphan" -- that would delete the whole directory (D3, 2026-09-14).
+    # A real manifest always has entries; an empty one is a build error
+    # upstream, not a signal to wipe.
+    if not entries:
+        print("WARNING: manifest is empty; skipping prune to avoid wiping pages")
+    existing = {p.stem for p in OUT_DIR.glob("*.html")}
+    pruned = sorted(orphan_stems(entries, existing))
+    for stem in pruned:
+        (OUT_DIR / f"{stem}.html").unlink()
+    if pruned:
+        print(f"pruned {len(pruned)} orphan page(s): {', '.join(pruned)}")
 
     urls = [f"{SITE_BASE}/", f"{SITE_BASE}/papers/index.html"] + [
         f"{SITE_BASE}/papers/{e['id']}.html" for e in entries]
@@ -167,5 +198,41 @@ def main() -> None:
     print(f"DOI links: {len(dois)} (re-run after zenodo_upload.py --publish)")
 
 
+def _selftest() -> int:
+    """Pin the wipe-guard and the prune decision (DELTA #2 D3)."""
+    bad = 0
+
+    # THE guard: empty manifest must prune NOTHING, even with pages present.
+    got = orphan_stems([], {"paper_1", "paper_2", "index"})
+    ok = got == set()
+    bad += 0 if ok else 1
+    print("  [%s] empty manifest -> prune nothing (no wipe)"
+          % ("OK" if ok else "DEAD"))
+
+    # A normal manifest prunes only true orphans, never index, never live.
+    entries = [{"id": "paper_1"}, {"id": "paper_2"}]
+    got = orphan_stems(entries, {"paper_1", "paper_2", "index", "paper_old"})
+    ok = got == {"paper_old"}
+    bad += 0 if ok else 1
+    print("  [%s] normal manifest -> only true orphans pruned, index+live kept"
+          % ("OK" if ok else "DEAD"))
+
+    # A single-entry manifest does not wipe the rest to zero (reviewer's case).
+    got = orphan_stems([{"id": "paper_1"}], {"paper_1", "index"})
+    ok = got == set()
+    bad += 0 if ok else 1
+    print("  [%s] single-entry manifest -> no spurious prune" % ("OK" if ok else "DEAD"))
+
+    print()
+    if bad:
+        print("RESULT: SELFTEST FAIL -- %d probe(s) could not fire" % bad)
+        return 1
+    print("RESULT: SELFTEST PASS -- the wipe-guard holds")
+    return 0
+
+
 if __name__ == "__main__":
+    import sys as _sys
+    if "--selftest" in _sys.argv:
+        _sys.exit(_selftest())
     main()

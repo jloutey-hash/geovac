@@ -584,9 +584,26 @@ axis and repeating the identical check gives $1.3 \times 10^{-1}$---fifteen
 orders of magnitude larger.  The symmetry is axial, and only axial.  At $n_{\max} = 3$ ($M = 28$) the comparison is
 $114{,}280$ \emph{permitted} entries ($18.6\%$) against $7{,}600$
 ($1.2\%$): the inflation factor is $13.8\times$ at $n_{\max} = 2$ and
-$15.0\times$ at $n_{\max} = 3$, i.e.\ \emph{increasing} with basis size.
-Both are counted; only the $n_{\max} = 2$ figure is numerically
-corroborated below.
+$15.0\times$ at $n_{\max} = 3$.  This sequence increases with basis size but
+is \emph{bounded}, and the three counts close in $n_{\max}$.  Writing
+$c(\mu) = (n_{\max}-\mu)(n_{\max}-\mu+1)/2$ for the number of orbitals per
+center at azimuthal number $\mu$, the $m$-permitted single-center count is
+$\mathrm{oc}(n_{\max}) = 2\sum_{t}\big(\sum_{\mu} c(\mu)\,c(t-\mu)\big)^{2}$,
+a degree-$11$ polynomial;\ the full $m$-rule total is exactly
+$8\,\mathrm{oc}$;\ and the genuine two-body count is $7\,\mathrm{oc}
++ \mathrm{bld}$, where the builder count $\mathrm{bld}$---the single-center
+quartets whose two multipole $L$-ranges overlap---is a period-$2$
+degree-$11$ quasi-polynomial in $n_{\max}$ (the $\pm 1$ is the $L$-range
+parity).  The per-side Gaunt $L$-range is in fact \emph{never} empty
+($|M| \le \ell_1 + \ell_2$ always), so the only removal is that
+$L$-overlap.  Hence the inflation $R = 1 + 7\,\mathrm{oc}/\mathrm{bld}$
+converges to the finite limit $R_\infty = 289777/18471 \approx 15.69$
+(both parity branches share the leading coefficient, so the limit is
+single-valued):\ the two-center angular-sparsity penalty \emph{saturates}
+rather than diverging with basis size, the measured $13.8\times$ and
+$15.0\times$ being the steep early rise of a curve that reaches $15.66\times$
+by $n_{\max} = 10$.  Both tabulated figures are counted; only the
+$n_{\max} = 2$ figure is numerically corroborated below.
 
 Two further measurements matter for interpretation.  First, per-side
 Gaunt feasibility removes $5.6\%$ of entries at $n_{\max} = 2$ and
@@ -606,6 +623,17 @@ scale, the entire NaH bond is under $2$~eV, so individual entries in the
 dense part of the tensor exceed the binding energy being computed.  They
 are not droppable as small corrections---an independent quantification of
 the W1d/W1e diagnosis.
+
+\emph{A complementary contemporaneous metric.}  A perspective on
+angular-momentum--structured Coulomb tensors~\cite{peng2026} independently
+treats the one-center total-$M_L$ block structure as a resource and proposes
+a Frobenius-norm diagnostic $\eta_{\rm off}$ for its departure in molecular
+environments.  That diagnostic measures leakage \emph{out} of the abelian
+$M_L$ blocks;\ the inflation counted here is fill-in \emph{within} them from
+the loss of the non-abelian $l$-rule, so the two quantify complementary---not
+the same---departures.  That work reports no census and does not resolve the
+departure into its surviving abelian and dying non-abelian parts, which is
+the content of this paper.
 
 %% ========================================================================
 \section{Mechanism: the abelian residue}
@@ -1075,7 +1103,13 @@ representation it reappears as an $S^{-1}$ contraction, and the dual
 creation/annihilation operators cease to be Hermitian
 conjugates~\cite{artacho1991}---but whether that $S^{-1}$ is
 \emph{dense} is a property of the two-center Slater basis, measured here
-rather than imported;
+rather than imported.  A contemporaneous nonorthogonal Jordan--Wigner
+encoding for valence-bond quantum computing~\cite{marruzzo2025} exhibits
+exactly this relocation:\ the direct map produces up to $M^{3}$ (one-body)
+and $M^{6}$ (two-body) Pauli strings against the orthogonal
+$M^{2}$/$M^{4}$, and a biorthogonal reformulation recovers $M^{2}$/$M^{4}$
+only by proliferating non-Hermitian, asymmetric integrals to compute and
+store---the cost moved, not removed;
 \item into a \textbf{high-symmetry embedding} (hyperspherical Level~4N):
 angular basis requirement explodes---LiH at $63.5\%$ $R_{\rm eq}$ error
 with $l_{\max} = 2$ genuinely insufficient;
@@ -1530,6 +1564,17 @@ quasidiabatic basis for nonorthogonal configuration interaction,''
 E.~J.~Sundstrom and M.~Head-Gordon, ``Non-orthogonal configuration
 interaction for the calculation of multielectron excited states,''
 \textit{J.\ Chem.\ Phys.}\ \textbf{140}, 114103 (2014).
+
+\bibitem{marruzzo2025}
+A.~Marruzzo, M.~Casalegno, P.~Macchi, F.~Mascherpa, B.~Tirri, G.~Raos, and
+A.~Genoni, ``Extension of the Jordan--Wigner mapping to nonorthogonal spin
+orbitals for quantum computing application to valence bond approaches,''
+\textit{Adv.\ Quantum Chem.}\ \textbf{92}, 245--266 (2025).
+
+\bibitem{peng2026}
+B.~Peng, ``Structured high-angular-momentum Coulomb tensors from real and
+complex solid-harmonic integral engines:\ A perspective,''
+arXiv:2607.25245 (2026).
 
 \bibitem{barnett_coulson1951}
 M.~P.~Barnett and C.~A.~Coulson, ``The evaluation of integrals occurring

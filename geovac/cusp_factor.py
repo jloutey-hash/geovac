@@ -39,7 +39,7 @@ maintains manifest Hermiticity.
 
 References:
   - Paper 15, Section III (cusp structure in Level 4 coordinates)
-  - Paper 12, Section VII (cusp diagnosis: 7.6% D_e gap)
+  - Paper 12, Section VII (the 7.6% D_e gap; its cusp diagnosis was withdrawn 2026-09-14 -- the gap is the absent m != 0 channels)
   - Kato, Commun. Pure Appl. Math. 10, 151 (1957)
 """
 

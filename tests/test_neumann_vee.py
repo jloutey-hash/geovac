@@ -605,7 +605,7 @@ class TestNeumannHamiltonian:
             basis, R, grids, verbose=False,
             vee_method='neumann', l_max_neumann=15,
         )
-        E_exact = -1.17475
+        E_exact = -1.174475  # Kolos & Wolniewicz
         assert result['E_total'] > E_exact, \
             f"Variational violation: E={result['E_total']:.6f} < {E_exact}"
 
@@ -668,9 +668,13 @@ class TestNeumannHamiltonian:
             vee_method='neumann', l_max_neumann=15,
         )
 
-        E_exact = -1.17475   # Kolos-Wolniewicz, Paper 12 eq via Kolos1968
+        # Kolos-Wolniewicz.  NOTE the fourth decimal: -1.174475, not
+        # -1.17475.  The dropped digit made D_e_exact 0.17475 instead of
+        # 0.174475 -- a 0.16% error in the DENOMINATOR of every percentage
+        # below.  The [90, 94] band was wide enough to hide it.
+        E_exact = -1.174475  # Kolos & Wolniewicz, via Kolos1968
         E_atoms = -1.0       # two H atoms, 2 x (-0.5) Ha
-        D_e_exact = E_atoms - E_exact   # = 0.17475 Ha
+        D_e_exact = E_atoms - E_exact   # = 0.174475 Ha
         D_e = E_atoms - result['E_total']
         pct = D_e / D_e_exact * 100.0
         print(f"\n  H2 N=27 Neumann: E_total={result['E_total']:.6f} Ha, "
@@ -680,8 +684,14 @@ class TestNeumannHamiltonian:
         # numerical-V_ee ~80% plateau and not an over-binding artifact.
         assert result['E_total'] > E_exact, \
             f"variational violation: {result['E_total']:.6f} < {E_exact}"
-        assert 90.0 < pct < 94.0, \
-            f"H2 D_e fraction {pct:.2f}% outside headline band [90,94]"
+        # Band tightened twice.  [90, 94] was wide enough to hide a 0.16%
+        # error in D_e_exact's denominator for as long as it stood.  The first
+        # narrowing, to [92.0, 92.6], did NOT fix that: under the wrong
+        # denominator the value reads 92.1087, which is still inside it -- a
+        # plant reverting the literal alone passed.  The correct value is
+        # 92.2539, so the lower edge has to sit above 92.11 to exclude it.
+        assert 92.15 < pct < 92.35, \
+            f"H2 D_e fraction {pct:.2f}% outside headline band [92.15, 92.35]"
 
 
 class TestIncludeVee:

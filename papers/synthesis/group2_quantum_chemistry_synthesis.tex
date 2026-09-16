@@ -86,7 +86,10 @@ point group~\cite{loutey_paper58}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
 $0.0002\%$ for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
 $l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
-for He, $96.0\%$ of $D_e$ for $\mathrm{H}_2$, and---in the
+for He, ${\sim}99.1\%$ of $D_e$ for $\mathrm{H}_2$ in prolate
+spheroidal coordinates at $|m| \le 1$ and $96.0\%$ (cusp-corrected) in
+the molecule-frame hyperspherical treatment---two routes to the same
+system, not a matched pair---and---in the
 composed architecture, whose accuracy bottleneck is the
 Phillips--Kleinman pseudopotential---$5.3\%$, $11.7\%$, and $19.4\%$
 equilibrium-bond-length error for LiH, $\mathrm{BeH}_2$, and
@@ -165,7 +168,8 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 1 & atom (1, 1) & $S^3$ (Fock projection) & $<0.1\%$ (one-electron) & \cite{loutey_paper7} \\
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & $0.0002\%$ energy (spectral Laguerre) & \cite{loutey_paper11} \\
 3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $0.19\%$ (graph-native CI) & \cite{loutey_paper13} \\
-4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels) & \cite{loutey_paper15} \\
+4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, cusp-corrected) & \cite{loutey_paper15} \\
+4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal, $|m|\le1$ & ${\sim}99.1\%$ of $D_e$ (envelope $99.0$--$99.1$) & \cite{loutey_paper12} \\
 4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 63.5\%$ ($l_{\max}=2$, 2D variational; unbound $D_e$, no PK) & \cite{loutey_paper17} \\
 5 & LiH (core+valence) & composed (L3 $\oplus$ L4) & $R_{\mathrm{eq}}$ $5.3\%$ ($l$-dependent PK) & \cite{loutey_paper17} \\
 5 & $\mathrm{BeH}_2$ (polyatomic) & composed $+$ 1-RDM exchange & $R_{\mathrm{eq}}$ $11.7\%$ & \cite{loutey_paper17} \\
@@ -320,9 +324,14 @@ spheroidal coordinates, which decomposes each six-dimensional integral
 into a finite sum of products of one-dimensional auxiliary integrals
 computable by recurrence relations:\ the angular moments $C_l(q)$, the
 exponential moments $A_n(\alpha)$, and the first- and second-kind
-Legendre moments all satisfy exact three-term recurrences, so the
+Legendre moments satisfy exact three-term recurrences, so the
 $V_{ee}$ matrix is exact within the Neumann truncation order with no
-quadrature grids and no fitted parameters~\cite{loutey_paper12}.  A
+six-dimensional quadrature and no fitted parameters~\cite{loutey_paper12}.
+That property is established in the $\sigma$ sector;\ the azimuthal
+extension described below does not inherit it.
+One seed resists:\ the log-singular second-kind moment $B_l$ is evaluated
+by a single one-dimensional adaptive quadrature, its recurrence being
+numerically unstable at the base case.  A
 selection rule $C_l(q) = 0$ for $q < l$ or $(q-l)$ odd truncates the
 effective sum automatically.
 
@@ -332,22 +341,46 @@ $80.1\%$ for numerical $V_{ee}$ at the same basis size---a uniform
 $12$--$20$ percentage-point improvement at every basis size from $1$ to
 $72$ functions, and the Neumann result plateaus, confirming that the
 $V_{ee}$ \emph{integration} error has been
-eliminated~\cite{loutey_paper12}.  The paper then diagnoses the
-remaining $7.6\%$ gap honestly:\ it is a one-electron basis
-completeness limit, not an integration error.  The electron--electron
-cusp requires the non-analytic terms $r_{12}^{1/2}$ and
-$r_{12}\ln r_{12}$ (the Kato/Fock structure~\cite{kato1957}) that no polynomial prolate
-spheroidal basis can represent.  This is the framework's embedding-tier
-transcendental:\ the cusp is two-dimensional in the angular pair
-coordinate and is the canonical example of an exchange constant that no
-single algebraic insertion reproduces~\cite{loutey_paper18}.  The
-diagnosis identifies the next natural geometry---hyperspherical
-coordinates, where the coalescence is a boundary condition rather than
-a coordinate singularity.
+eliminated~\cite{loutey_paper12}.  The remaining $7.6\%$ gap is a
+basis-space limit rather than an integration error---and, as Paper~12
+now establishes, a \emph{configuration}-space one.  That basis is
+$\varphi$-independent, so it spans only $m_1 = m_2 = 0$;\ but a
+$^1\Sigma_g^+$ state constrains only the total $M = m_1 + m_2$, so the
+$\pi^2$ and $\delta^2$ configurations---which carry the angular
+correlation---are absent by construction.  Restoring them at
+$|m| \le 1$ in the same basis, with the same Neumann kernel, reaches
+${\sim}99.1\%$ of $D_e$---a gain of $11.6$~mHa against the $0.34$~mHa
+available from near-tripling the $\sigma$ basis~\cite{loutey_paper12}.  The
+$|m| = 2$ sector was not obtained there, so the $\delta$ contribution
+(${\approx}0.5$~mHa) rests on an independent Gaussian-basis route;\ the
+quoted figure carries a stability envelope, the basis being strongly
+linearly dependent at that size;\ and the quadrature-free property does
+not extend to it---the $\mu > 0$ radial integrals are evaluated by
+spectral quadrature rather than by the closed-form recurrences, so the
+headline figure is not itself a quadrature-free result.
+
+\emph{Withdrawn.}  Earlier versions of this synthesis reported
+Paper~12's original diagnosis---that the gap was the electron--electron
+cusp demanding non-analytic $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$
+terms, and that this identified hyperspherical coordinates as the next
+natural geometry.  Paper~12 has withdrawn both, and the correction reached
+further than this section:\ Paper~18's Level-4
+subsection~\cite{loutey_paper18} had built an \emph{irreducibility}
+argument on the same saturation---that the product basis is
+``structurally blind to three-body coalescence''---and that argument has
+been withdrawn with it, taking the qualitative Level-3/Level-4
+distinction with it.  What survives is narrower and genuinely
+independent:\ the cusp keeps its place as the framework's embedding-tier
+transcendental in Paper~18's taxonomy, which is a statement about the
+cusp in any product basis and never rested on the H$_2$ residual.  It is
+simply not what capped this calculation.
 
 \subsection{The hyperspherical lattice for helium}
 
-Paper~13~\cite{loutey_paper13} introduces that geometry.  In
+Paper~13~\cite{loutey_paper13} introduces hyperspherical coordinates
+for helium---on their own grounds, the atomic coalescence being
+genuinely three-body, rather than as a consequence of the H$_2$
+residual above.  In
 hyperspherical coordinates~\cite{aquilanti1986, avery1989} the He problem becomes a coupled-channel
 expansion in which the angular eigenvalue problem depends parametrically
 on the hyperradius~$R$, so the channel functions vary with~$R$; this
@@ -406,22 +439,34 @@ hyperspherical coordinates $(R_e, \alpha, \theta_1, \theta_2, \Phi)$
 parameterized by the dimensionless ratio $\rho = R/(2R_e)$, where $R$
 is the internuclear distance and $R_e$ the electronic hyperradius.  The
 electron--electron cusp appears at $\alpha = \pi/4$, $\theta_{12} = 0$
-\emph{independent of molecular geometry}---a structural advantage over
-prolate spheroidal coordinates, where the cusp is a coordinate
-singularity---and the angular eigenvalue problem depends on $(R, R_e)$
+\emph{independent of molecular geometry}---a structural difference from
+prolate spheroidal coordinates, where the same locus is not a coordinate
+surface---a difference in where the cusp sits, which does not translate
+into an accuracy advantage---and the angular eigenvalue problem depends on $(R, R_e)$
 only through $\rho$, collapsing a two-dimensional parameter sweep to one
 dimension~\cite{loutey_paper15}.
 
 A coupled-channel expansion in body-frame partial waves $(l_1, m_1,
 l_2, m_2)$ with the gerade constraint $l_1 + l_2$ even and $m_1 + m_2 =
 0$, solved with the same two-dimensional $(R_e, \alpha)$ variational
-solver that avoids the adiabatic approximation, recovers $96.0\%$ of
+solver that avoids the adiabatic approximation, recovers $96.0\%$ (cusp-corrected;\ ${\sim}95\%$ pure-variational) of
 the exact $D_e$~\cite{kolos1968} at $l_{\max}=6$ with $\sigma$ and $\pi$ channels ($61$
 channels; a complete-basis extrapolation reaches
-$\sim\!97\%$)~\cite{loutey_paper15}.  This exceeds the $92.4\%$ that
-prolate spheroidal CI with algebraic Neumann integrals achieved
-(Paper~12), confirming the cusp-resolution advantage of the
-hyperspherical geometry.  The framework extends to heteronuclear
+$\sim\!97\%$)~\cite{loutey_paper15}.
+
+\emph{Withdrawn.}  Earlier versions read this as exceeding the
+$92.4\%$ of prolate spheroidal CI (Paper~12) and confirming a
+cusp-resolution advantage for the hyperspherical geometry.  The
+comparison was not like-for-like:\ the $96.0\%$ includes $\pi$
+channels and the $92.4\%$ does not.  At matched $m_{\max}$ no comparison is
+available:\ Paper~12's own basis with $|m| \le 1$ reaches ${\sim}99.1\%$,
+but that figure and the $96.0\%$ differ in truncation, cusp treatment and
+solver class alike.  Neither paper claims a coordinate-system advantage
+over the other, and the two published figures are not a matched pair in
+any case:\ the $96.0\%$ is $l_{\max} = 6$ with a Schwartz cusp
+correction and a different solver class.  What both papers do agree on
+is the physics that matters here:\ the $m \ne 0$ channels carry the
+angular correlation, and neither geometry gets it without them.  The framework extends to heteronuclear
 diatomics:\ for $\mathrm{HeH}^+$ a charge-center origin shift and
 removal of the gerade constraint recover $93.1\%$ of the exact $D_e$ at
 $l_{\max}=4$ with $\sigma+\pi$ channels in the \emph{adiabatic}
@@ -858,7 +903,8 @@ Level / object & Status & Mechanism (paper) \\
 Angular coupling (all levels) & algebraic & Gaunt $/$ Wigner $3j$; selection rules \cite{loutey_paper13, loutey_paper15, biedenharn1981} \\
 $\mathrm{H}_2^+$ radial, $\sigma$ ($m=0$) & algebraic & three-term Laguerre recurrence \cite{loutey_paper11} \\
 $\mathrm{H}_2^+$ radial, $\pi/\delta$ ($m\neq0$) & algebraic (one seed) & assoc.\ Laguerre $+$ seed $e^a E_1(a)$ \cite{loutey_paper11} \\
-Prolate spheroidal $V_{ee}$ & algebraic & Neumann expansion, recurrence moments \cite{loutey_paper12} \\
+Prolate spheroidal $V_{ee}$ ($\sigma$) & algebraic (one seed) & Neumann recurrences $+$ 1-D quadrature for $B_l$ \cite{loutey_paper12} \\
+Prolate spheroidal $V_{ee}$ ($|m|\ge1$) & quadrature & same kernel, ordered-$\xi$ integral by spectral panels \cite{loutey_paper12} \\
 He hyperradial $S$, $K$ matrices & algebraic & three-term Laguerre recurrence \cite{loutey_paper13} \\
 Nuclear coupling (Level 4) & algebraic & split-region Legendre, $3j$-triangle termination \cite{loutey_paper15} \\
 Cross-center $V_{ne}$ (balanced) & algebraic & multipole, exact Gaunt termination $L_{\max}=2l_{\max}$ \cite{loutey_paper19} \\
@@ -1016,7 +1062,9 @@ separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
 for $\mathrm{H}_2^+$ ($0.0002\%$)~\cite{loutey_paper11}, hyperspherical
 coordinates for He ($0.022\%$ variational raw / $0.004\%$ non-variational
 cusp, $0.19\%$ graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
-coordinates for $\mathrm{H}_2$ ($96.0\%$ of
+coordinates for $\mathrm{H}_2$ ($96.0\%$, cusp-corrected;\ prolate
+spheroidal at $|m| \le 1$ separately reaches
+${\sim}99.1\%$~\cite{loutey_paper12})  ($96.0\%$ of
 $D_e$)~\cite{loutey_paper15}, and composed fiber bundles for
 core--valence and polyatomic systems ($5.3\%$, $11.7\%$, $19.4\%$
 bond-length error for LiH, $\mathrm{BeH}_2$,

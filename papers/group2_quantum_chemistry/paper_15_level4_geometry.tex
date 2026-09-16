@@ -34,8 +34,10 @@ $(R_e,\alpha,\theta_1,\theta_2,\Phi)$ parameterized by the
 dimensionless ratio $\rho = R/(2R_e)$, where $R$ is the internuclear
 distance and $R_e$ the electronic hyperradius.
 The electron--electron cusp appears at $\alpha=\pi/4$, $\theta_{12}=0$,
-independent of molecular geometry---a structural advantage over
-prolate spheroidal coordinates, where it is a coordinate singularity.
+independent of molecular geometry, where in prolate spheroidal
+coordinates the same locus is not a coordinate surface.  That is a
+structural difference in where the cusp sits, and---see the scope
+note below---it does not translate into an accuracy advantage.
 The angular eigenvalue problem depends on $(R,R_e)$ only through $\rho$,
 collapsing a two-dimensional parameter sweep to one dimension.
 A coupled-channel expansion in body-frame partial waves
@@ -44,10 +46,19 @@ $m_1+m_2=0$, solved with a variational two-dimensional
 $(R_e,\alpha)$ solver that avoids the adiabatic approximation,
 recovers 96.0\% of the exact dissociation energy $D_e$ at
 $l_{\max}=6$ with $\sigma$ and $\pi$ channels and a Schwartz cusp correction
-(61~channels, CBS extrapolation ${\sim}97\%$;\ the pure-variational value is
-${\sim}95\%$, itself above 92.4\%),
-exceeding the 92.4\% achieved by prolate spheroidal CI with algebraic
-Neumann integrals (Paper~12).
+(61~channels, CBS extrapolation ${\sim}97\%$;\ the pure-variational
+value is ${\sim}95$--$96\%$, this paper's two estimates of the cusp
+contribution being unreconciled).
+\textbf{[SCOPE]} This figure was previously compared against the
+92.4\% of the prolate spheroidal CI with algebraic Neumann integrals
+(Paper~12) and the difference read as an advantage of hyperspherical
+coordinates.  That comparison was not like-for-like:\ Paper~12's
+92.4\% is a $\sigma$-only result, its basis carrying no azimuthal
+dependence, whereas the Level~4 figure includes $\pi$ channels.  Nor
+is a corrected comparison available in the other direction:\ Paper~12's
+own basis with $|m| \le 1$ reaches $99.1\%$, but that figure and the
+ones here differ in truncation, cusp treatment and solver class alike,
+so no coordinate-system advantage is claimed in either direction.
 The framework extends to heteronuclear diatomics (HeH$^+$,
 $Z_A=2$, $Z_B=1$) via a charge-center origin shift and removal of the
 gerade constraint; the adiabatic solver recovers 93.1\% of the exact
@@ -103,18 +114,24 @@ system requiring \emph{simultaneous} resolution of nuclear ($1/r_{iA}$,
 $1/r_{iB}$) and electron--electron ($1/r_{12}$) singularities.
 Paper~12~\cite{paper12} demonstrated that prolate spheroidal CI with
 algebraic Neumann $V_{ee}$ integrals saturates at 92.4\% of the exact
-dissociation energy $D_e$.  The remaining 7.6\% gap was attributed to the
-electron--electron cusp, which is a coordinate singularity in
-$(\xi_1,\eta_1,\xi_2,\eta_2)$ space and cannot be captured by any
-polynomial basis in those coordinates.
+dissociation energy $D_e$ \emph{in a $\sigma$-only basis}.  That
+paper originally attributed the remaining 7.6\% gap to the
+electron--electron cusp;\ it has since withdrawn that attribution and
+identified the gap as the absent $m \ne 0$ configurations, which,
+restored in the same basis, take it to 99.1\%.
 
 The present paper introduces the Level~4 natural geometry: molecule-frame
 hyperspherical coordinates that resolve the $e$--$e$ cusp while retaining
 the anisotropic nuclear field through a coupled partial-wave expansion.
 We demonstrate that this approach recovers 96.0\% of $D_e$ at
 $l_{\max}=6$ with $\sigma{+}\pi$ channels (61~channels) using a
-variational 2D solver with Schwartz cusp correction, exceeding
-Paper~12 and confirming the cusp-resolution advantage.
+variational 2D solver with Schwartz cusp correction.  \textbf{[SCOPE]}
+Earlier versions read this as exceeding Paper~12 and confirming a
+cusp-resolution advantage for hyperspherical coordinates;\ since the
+Paper~12 figure it was compared against is $\sigma$-only, that
+inference is withdrawn.  The Level~4 result stands on its own terms
+as a coupled-channel treatment of the two-center, two-electron
+problem.
 
 %% ========================================================================
 %% II. COORDINATE SYSTEM
@@ -193,9 +210,11 @@ $(\partial\Psi/\partial r_{12})_{r_{12}=0} = \tfrac{1}{2}\Psi|_{r_{12}=0}$
 is therefore a fixed boundary condition on the angular eigenfunction,
 unaffected by the molecular geometry.
 
-This is the structural advantage of Level~4 coordinates: the cusp is
-always a boundary condition, never a coordinate singularity, for
-\emph{any} internuclear separation.
+This is the structural difference of Level~4 coordinates: the cusp is
+always a boundary condition rather than a coordinate surface, for
+\emph{any} internuclear separation.  (It is a difference in where the
+cusp sits;\ as the scope note accompanying the comparison with Paper~12
+records, it does not translate into an accuracy advantage.)
 
 \begin{figure}
 \includegraphics[width=\columnwidth]{paper_15_figures/level4_coordinates.png}
@@ -616,7 +635,8 @@ is the correct variational bound.}
 \end{table}
 
 \paragraph{Extended $l_{\max}$ convergence study.}
-Table~\ref{tab:extended_convergence} extends the convergence analysis
+Table~\ref{tab:extended_convergence} (plotted in
+Fig.~\ref{fig:convergence}) extends the convergence analysis
 through $l_{\max} = 6$ using the 2D solver with Schwartz cusp correction
 (Sec.~\ref{sec:cusp_correction}).  Two features are immediately apparent:
 (i)~a pronounced even-odd staircase in the $\sigma$-only column, and
@@ -627,7 +647,14 @@ $\pi$~channels, independent of $l_{\max}$.
 \caption{Extended convergence through $l_{\max} = 6$ (2D+cusp solver).
   $\sigma$-only uses $m_{\max} = 0$;
   $\sigma{+}\pi$ uses $m_{\max} = 1$ with $\pi$ channels frozen at
-  their $l_{\max} = 2$ values.
+  their $l_{\max} = 2$ values.  This column's $l_{\max} = 4$ entry
+  ($93.6\%$) and the $94.1\%$ of Table~\ref{tab:comparison} differ in
+  \emph{two} respects, not one:\ the $\pi$ channels are frozen here and
+  solved at full $l_{\max}$ there, and this table is the 2D+cusp solver
+  while that one is the plain variational 2D solver.  The two effects
+  partly cancel, so the difference between the entries measures
+  neither alone;\ the two are different calculations, not a
+  discrepancy.
   $\delta$~channels ($m_{\max} = 2$) are shown at $l_{\max} = 4$ only.
   $\Delta_{\rm step}$ is the gain from each $l_{\max}$ increment.
   CBS extrapolation via $(l+1/2)^{-2}$ fit to $l_{\max} = 4$--$6$.}
@@ -670,7 +697,8 @@ Method
   & \multicolumn{1}{c}{$D_e$ (Ha)}
   & \multicolumn{1}{c}{$D_e/D_e^{\rm exact}$ (\%)} \\
 \hline
-Paper~12 (Neumann $V_{ee}$)                  & 0.1612 & 92.4 \\
+Paper~12 (Neumann $V_{ee}$, $\sigma$-only)   & 0.1612 & 92.4 \\
+Paper~12 (Neumann $V_{ee}$, $|m|\le1$)       & 0.1729 & 99.1 \\
 Level~4 ($l_{\max}=4$, $\sigma$ only, 13~ch) & 0.1518 & 87.0 \\
 Level~4 ($l_{\max}=4$, $\sigma{+}\pi$, 29~ch)& 0.1642 & 94.1 \\
 Exact~\cite{kolos1968}                       & 0.1745 & 100.0 \\
@@ -678,12 +706,29 @@ Exact~\cite{kolos1968}                       & 0.1745 & 100.0 \\
 \end{ruledtabular}
 \end{table}
 
-The $\sigma$-only result (87.0\%) falls below Paper~12, but adding
-$\pi$~channels pushes the Level~4 result to 94.1\%---a
-1.7~percentage-point improvement over Paper~12.  This confirms that
-the hyperspherical coordinates' cusp resolution provides a genuine
-advantage, but only when the angular basis includes both $\sigma$ and
-$\pi$ partial waves.
+The $\sigma$-only result (87.0\%) falls below Paper~12's
+$\sigma$-only $92.4\%$---at a different truncation and in a different
+solver class---and adding $\pi$~channels pushes the Level~4 result to
+94.1\%.
+
+\textbf{[SCOPE]} Earlier versions read that 1.7-percentage-point
+difference as evidence that hyperspherical coordinates resolve the
+cusp better than prolate spheroidal ones.  The comparison does not
+support it, because the two entries do not contain the same physics:
+the 94.1\% includes $\pi$ channels and the 92.4\% does not---Paper~12's
+basis is $\varphi$-independent and spans only $m_1 = m_2 = 0$.  Nor
+does a corrected comparison run the other way, because no matched pair
+exists:\ Paper~12's own basis with $|m| \le 1$ reaches $99.1\%$ at
+$(j_{\max},l_{\max}) = (3,3)$, against $94.1\%$ here at $l_{\max}=4$ and
+$96.0\%$ at $l_{\max}=6$ with a Schwartz cusp correction and a different
+solver class.  A grid-based prolate spheroidal
+calculation~\cite{tao_mccurdy_rescigno2010} reaches $99.97\%$, which
+settles the narrower point that those coordinates are not cusp-limited
+without ordering the two solvers here.  What the table below
+establishes is that $\pi$ channels are worth ${\sim}7$ percentage
+points \emph{in this geometry}---which is true, and is the same
+lesson Paper~12 learned in its own.  No claim of a coordinate-system
+advantage survives.
 
 \subsection{Grid convergence}
 
@@ -696,9 +741,18 @@ factor.
 \begin{figure}
 \includegraphics[width=\columnwidth]{paper_15_figures/convergence_lmax.png}
 \caption{Percentage of exact dissociation energy recovered as a function
-  of $l_{\max}$.  The dashed line marks Paper~12's 92.4\%.  The dramatic
-  jump at $l_{\max}=2$ reflects the onset of quadrupolar nuclear
-  coupling (Sec.~\ref{sec:multichannel}).}
+  of $l_{\max}$, for both azimuthal sectors.  Bars are the $\sigma$ and
+  $\sigma{+}\pi$ columns of Table~\ref{tab:extended_convergence}
+  (2D solver with Schwartz cusp correction);\ the figure is drawn from
+  that table and adds no data of its own.  Both Paper~12 reference
+  values are shown and each is labelled with the sector it belongs to:\
+  its $\sigma$-only $92.4\%$ and its $|m|\le1$ $99.1\%$.  Neither is a
+  like-for-like reference for these curves---the truncation and the
+  solver class differ---and no ordering between the two coordinate
+  systems is asserted here or anywhere in this paper.  The jump at
+  $l_{\max}=2$ ($+42.3$ points, the largest step in the table) reflects
+  the onset of quadrupolar nuclear coupling
+  (Sec.~\ref{sec:multichannel}).}
 \label{fig:convergence}
 \end{figure}
 
@@ -855,9 +909,11 @@ and has no $\Phi$-dependence.  Adding $\pi$~channels
 ($m_1 = \pm 1$, $m_2 = \mp 1$) introduces azimuthal flexibility
 and consistently improves $D_e$ by ${\sim}7$~percentage points
 at each $l_{\max}$ (Table~\ref{tab:convergence}).
-This improvement is essential: at $l_{\max}=4$, the $\sigma$-only
-result (87.0\%) falls below Paper~12's 92.4\%, while the
-$\sigma{+}\pi$ result (94.1\%) exceeds it.
+This improvement is essential.  It is also, as Paper~12 has since
+established in prolate spheroidal coordinates, the dominant missing
+piece there too:\ the same $\pi$ configurations are worth 11.6~mHa
+in that geometry.  Comparisons between the two papers are therefore
+meaningful only at matched $m_{\max}$.
 
 The $\pi$-channel coupling to $\sigma$ channels arises exclusively
 through the $e$--$e$ multipole expansion (the nuclear potential is
@@ -865,25 +921,50 @@ diagonal in $m$ by axial symmetry).  The selection rule is
 $q = m_1' - m_1 = -(m_2' - m_2)$, enforced by Wigner 3-$j$ symbols
 in the coupling integrals.
 
-\paragraph{$\sigma$--$\pi$ decoupling.}
-Because the nuclear coupling is diagonal in $m$, and the electron-electron
-coupling also conserves the total $M = m_1 + m_2$, the $\sigma$ ($m = 0$)
-and $\pi$ ($|m| = 1$) sectors are completely decoupled in the angular
-eigenvalue problem.  $\pi$ channels contribute a constant
-${\sim}6.6$~percentage-point additive offset to $D_e$ regardless of
-$\sigma$ $l_{\max}$ (Table~\ref{tab:extended_convergence}):
+\paragraph{The $\pi$ offset.}
+\textbf{[WITHDRAWN 2026-09-14]}
+[retracted 2026-09-14: p15-sigma-pi-decoupled]  Earlier versions of this
+paragraph stated that the $\sigma$ ($m = 0$) and $\pi$ ($|m| = 1$) sectors are
+``completely decoupled in the angular eigenvalue problem'', on the
+grounds that the nuclear coupling is diagonal in $m$ and the $e$--$e$
+coupling conserves $M = m_1 + m_2$.  That does not follow, and the
+paragraph immediately above says as much:\ $(m_1, m_2) = (0,0)$ and
+$(+1,-1)$ both carry $M = 0$, so conserving $M$ is precisely what places
+them in the \emph{same} block, and the $e$--$e$ multipole expansion
+couples them.  The measurement points the same way---decoupled blocks
+would make the ground state a minimum over blocks, so adding $\pi$
+channels could not lower it by a roughly constant amount, which is what
+is observed.  What survives is the empirical regularity, stated as one:\
+$\pi$ channels contribute a near-constant additive offset to $D_e$
+across $\sigma$ $l_{\max}$ (Table~\ref{tab:extended_convergence}):
 the offset is 6.7~pp at $l_{\max} = 2$, 6.6~pp at $l_{\max} = 3$,
 6.6~pp at $l_{\max} = 4$, 6.6~pp at $l_{\max} = 5$, and
 7.2~pp at $l_{\max} = 6$.
-This constant offset means $\pi$ convergence is independent of $\sigma$
-convergence; the $\pi$ contribution is set by the frozen $l_{\max} = 2$
-$\pi$ channels throughout the extended study.
+The offset is near-constant over $l_{\max} = 2$--$5$ and rises to
+$7.2$~pp at $l_{\max} = 6$, the truncation that generates this paper's
+headline figure, so ``constant'' is an approximation rather than an
+exact regularity.  The $\pi$ contribution is in any case set by the
+frozen $l_{\max} = 2$ $\pi$ channels throughout the extended study,
+which is a property of the methodology and not a demonstrated
+independence of $\pi$ convergence from $\sigma$ convergence.
 
 \paragraph{$\delta$-channel cost.}
-At $l_{\max} = 4$, adding $\delta$ channels ($m_{\max} = 2$,
-8~additional channels beyond the 29 $\sigma{+}\pi$ channels)
-yields a modest $+0.65$~percentage-point gain (from 93.0\% to
-93.6\% for $\sigma$-only; from 87.0\% to 87.6\% without $\pi$).
+At $l_{\max} = 4$, adding $\delta$ channels ($m_{\max} = 2$) yields a
+modest $+0.65$~percentage-point gain, from $87.0\%$ to $87.6\%$
+\emph{relative to $\sigma$-only} at the same $l_{\max}$ (the figure
+quoted in Table~\ref{tab:extended_convergence}'s footnote).
+
+\textbf{[UNRECONCILED 2026-09-14]} The channel count attached to this
+row does not fit that baseline.  Table~\ref{tab:extended_convergence}
+lists $N_{\rm ch} = 37$, and an earlier version of this sentence read
+that as ``8 additional channels beyond the 29 $\sigma{+}\pi$
+channels''---but a $\sigma{+}\pi{+}\delta$ calculation at
+$l_{\max} = 4$ cannot return $87.6\%$ when its own $\sigma{+}\pi$
+subset returns $93.6\%$.  Either the row is $\sigma{+}\delta$, which
+would be $13 + 8 = 21$ channels rather than 37, or the $87.6\%$ belongs
+to a different calculation.  The two readings are not resolved here,
+and the row should not be relied on until they are.
+
 The cost increase is $8.7\times$ due to the larger matrix dimension.
 $\delta$ channels are therefore not cost-effective for production
 calculations.
@@ -905,11 +986,22 @@ The remaining ${\sim}3\%$ gap has two identified sources:
     $D_e$ by this amount.
   \item \textbf{Higher $m$ channels.}  $\delta$ channels ($m_{\max} = 2$)
     add $+0.65$~pp at $l_{\max} = 4$ but at $8.7\times$ cost.
-    CBS extrapolation including $\delta$ would push the limit above 97\%.
+    \textbf{[WITHDRAWN 2026-09-14]}
+    [retracted 2026-09-14: p15-delta-cbs-above-97]  Earlier versions carried
+    that gain into this budget and concluded that CBS extrapolation including
+    $\delta$ ``would push the limit above 97\%''.  The $+0.65$~pp was
+    measured against $\sigma$-only, not against the $\sigma{+}\pi$
+    baseline this budget uses, so the transfer is invalid;\ and the row
+    it comes from is itself unreconciled (see the $\delta$-channel cost
+    paragraph above).  No $\delta$ contribution to the $\sigma{+}\pi$
+    gap is claimed here.
 \end{enumerate}
 
-Reaching $> 99\%$ would require higher $m$ channels ($m_{\max} \ge 2$)
-at extended $l_{\max}$, where the cost scaling becomes impractical.
+Reaching $> 99\%$ along this route would need higher $m$ channels
+($m_{\max} \ge 2$) at extended $l_{\max}$, where the cost scaling
+becomes impractical.  That is an extrapolation from the CBS estimate
+rather than a proven necessity, and it is not a necessity in general:\
+Paper~12 reaches $99.1\%$ at $|m| \le 1$ in a different geometry.
 
 \paragraph{Dissociation limit.}
 The hyperradial solver does not converge at large $R$
@@ -1209,6 +1301,17 @@ At $l_{\max} = 4$, the correction differential (between $R_{\rm eq}$ and
 dissociation) is 0.39~mHa.  The cusp correction is a property of the
 partial-wave basis truncation, not of the hyperradial solution method.
 
+\textbf{[UNRECONCILED 2026-09-14]} That measurement and the
+${\sim}1.7$~mHa / ${\sim}1.0$~percentage-point figure quoted above do
+not sit together under this paper's own $1/(l_{\max} + 1/2)^4$
+scaling:\ propagating $0.39$~mHa from $l_{\max} = 4$ gives
+${\approx}0.09$~mHa, or ${\approx}0.05$~pp, at $l_{\max} = 6$---not
+$1.0$~pp.  The abstract's pure-variational ``${\sim}95\%$'' is obtained
+by subtracting the $1.0$~pp figure from $96.0\%$;\ under the scaling
+law it would instead be ${\approx}96.0\%$.  One of the two figures is
+wrong.  Which one is not settled here, and the pure-variational value
+should be read as uncertain over ${\sim}95$--$96\%$ until it is.
+
 \paragraph{Transcorrelated alternative (explored; dead end).}
 A complementary approach attempts to remove the cusp algebraically rather than
 correcting it post hoc.  The transcorrelated (TC) transformation
@@ -1287,8 +1390,11 @@ The main results are:
     the $(0,0)$ channel requires $\Delta l = 2$.
   \item $\pi$-orbital channels ($m \ne 0$) are essential, providing
     ${\sim}7$~percentage points of improvement at each $l_{\max}$.
-    Without $\pi$ channels, Level~4 ($\sigma$-only, 87.0\%) falls
-    below Paper~12 (92.4\%); with them, it exceeds it (94.1\%).
+    The same holds in prolate spheroidal coordinates, where the
+    corresponding configurations are worth 11.6~mHa (Paper~12);\
+    comparisons between the two geometries are meaningful only at
+    matched $m_{\max}$, and at matched $m_{\max}$ this paper claims
+    no advantage over Paper~12.
   \item A variational 2D solver avoids the ${\sim}11\%$ systematic
     overestimate of the adiabatic approximation, giving rigorous
     bounds.
@@ -1322,9 +1428,14 @@ $\sigma{+}\pi$ channels and Schwartz cusp correction achieves 96.0\%
 $D_e$ (61~channels), with CBS extrapolation to ${\sim}97\%$.
 The even-odd staircase (Sec.~\ref{sec:staircase}) reflects the
 gerade--quadrupole constraint on nuclear coupling.
-$\pi$ channels contribute a constant ${\sim}6.6$~pp offset
-independent of $\sigma$ $l_{\max}$, consistent with complete
-$\sigma$--$\pi$ decoupling in the angular eigenvalue problem.
+$\pi$ channels contribute a near-constant ${\sim}6.6$~pp offset
+across $\sigma$ $l_{\max}$, rising to $7.2$~pp at $l_{\max} = 6$.
+\textbf{[WITHDRAWN 2026-09-14]}
+[retracted 2026-09-14: p15-sigma-pi-decoupled]  Earlier versions read this
+as consistent with complete $\sigma$--$\pi$ decoupling;\ the two sectors
+are coupled through the $e$--$e$ multipole expansion, and the
+regularity is reported here as an observation without that
+explanation.
 
 \paragraph{The locked-core boundary.}
 Extension to systems with core electrons (e.g., LiH) presents a
@@ -1419,6 +1530,13 @@ from Scale-Invariant Graph Topology'' (Paper~7 in the Geometric Vacuum series).
 J.~Loutey,
 ``The Molecular Fock Projection: Diatomic Molecules as Prolate
 Spheroidal Lattices'' (Paper~11 in the Geometric Vacuum series).
+
+\bibitem{tao_mccurdy_rescigno2010}
+L.~Tao, C.~W. McCurdy, and T.~N. Rescigno,
+``Grid-based methods for diatomic quantum scattering problems.
+III. Double photoionization of molecular hydrogen in prolate
+spheroidal coordinates,''
+\emph{Phys. Rev. A} \textbf{82}, 023423 (2010).
 
 \bibitem{paper12}
 J.~Loutey,

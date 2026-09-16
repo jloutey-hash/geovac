@@ -524,6 +524,23 @@ def verify_dirac_triangle(la: SimpleLieAlgebra, lam: Tuple[int, ...],
 
     decomp = tensor_product(la, lam, lam_prime_dual)
 
+    # Dimension-conservation guard (added 2026-09-15, group1 FULL cert).
+    # tensor_product is NOT dimension-conserving outside its validated panel:
+    # for G2 (1,0)x(0,4) it summed to 5012 != 4662 and reported a
+    # Schur-impossible trivial summand, yielding a spurious "ratio 2.4" that a
+    # doc note misread as a real Dirac-triangle counterexample. A
+    # mis-decomposition must never silently produce a pass/fail verdict -- raise
+    # so a panel-widening is caught rather than trusted.
+    _lhs = int(la.dim_weyl(lam)) * int(la.dim_weyl(lam_prime_dual))
+    _rhs = sum(int(mult) * int(la.dim_weyl(sig))
+               for sig, mult in decomp.items() if mult > 0)
+    if _lhs != _rhs:
+        raise ValueError(
+            "tensor_product not dimension-conserving for %s x %s: "
+            "dim*dim=%d but sum(mult*dim)=%d; the decomposition is invalid "
+            "outside its validated panel and its DT ratios cannot be trusted"
+            % (lam, lam_prime_dual, _lhs, _rhs))
+
     violations = []
     all_ratios = []
     all_pass = True

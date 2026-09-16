@@ -29,10 +29,13 @@ The natural geometry principle states that every separable quantum
 system has a natural lattice---a discrete graph whose nodes carry
 quantum number labels and whose edges encode transition amplitudes.
 For atoms, this is Fock's three-sphere $S^3$ (Papers~0, 1, 7); for
-diatomic molecules, the prolate spheroid (Paper~11).  Paper~12
-identified the electron-electron cusp as the limiting factor in
-prolate spheroidal CI for H$_2$ and pointed to hyperspherical
-coordinates as the next natural geometry for multi-electron systems.
+diatomic molecules, the prolate spheroid (Paper~11).  Hyperspherical
+coordinates are the natural setting for a genuine three-body
+coalescence, where the nuclear and interelectronic singularities
+meet at a point.  (Earlier versions took this motivation from
+Paper~12's reading of its H$_2$ residual as an electron-electron
+cusp limit;\ Paper~12 has since withdrawn that reading, and nothing
+below depends on it.)
 
 This paper introduces the hyperspherical lattice for helium.
 The original adiabatic solver obtains $E = -2.9052$~Ha with a single
@@ -83,9 +86,14 @@ The hierarchy of natural geometries discovered so far is:
     Fock's stereographic projection maps the Coulomb problem to the
     Laplace--Beltrami operator on $S^3$, where the $1/r$ potential
     disappears into the conformal metric~\cite{Fock1935,
-    loutey_paper7}.  The discrete graph Laplacian reproduces
-    hydrogenic energies to $< 0.1\%$~\cite{loutey_paper0,
-    loutey_paper1}.
+    loutey_paper7}.  \textbf{[SCOPE 2026-09-14]}
+    [retracted 2026-09-14: p13-graph-reproduces-hydrogenic]  Earlier versions
+    said here that the discrete graph Laplacian ``reproduces hydrogenic
+    energies to $<0.1\%$''.  That states as a measured accuracy what is
+    a property of the construction:\ $E_0 = \kappa \lambda_{\max}$
+    holds by construction, so any such figure is a bound on the
+    truncation deficit of the spectrum, not an accuracy against
+    experiment~\cite{loutey_paper0, loutey_paper1}.
 
   \item \textbf{Two-center, one-electron} (H$_2^+$, diatomics):
     Prolate spheroidal coordinates $(\xi, \eta, \phi)$ separate the
@@ -95,18 +103,29 @@ The hierarchy of natural geometries discovered so far is:
 
   \item \textbf{One-center, two-electron} (He, two-electron atoms):
     \emph{This paper.}  Hyperspherical coordinates $(R, \alpha,
-    \theta_{12})$ place the electron-electron cusp at a boundary
-    condition rather than a coordinate singularity.
+    \theta_{12})$ place the electron-electron cusp on a coalescence
+    manifold, where it becomes a boundary condition on the angular
+    problem at fixed $R$.
 \end{enumerate}
 
-The motivation for this step comes from Paper~12's
-diagnosis~\cite{loutey_paper12}: the prolate spheroidal CI for H$_2$
-saturates at 92.4\% of the exact dissociation energy $D_e$, with the
-remaining 7.6\% gap attributed to the electron-electron cusp.  The
-exact two-electron wavefunction contains non-analytic terms
-$r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ near the three-body
-coalescence~\cite{Fock1954}, which no polynomial basis in
-single-electron coordinates can represent.  In hyperspherical
+The motivation for this step is the structure of the two-electron
+wavefunction itself.  Near the three-body coalescence the exact
+wavefunction contains non-analytic terms $r_{12}^{1/2}$ and
+$r_{12}\ln r_{12}$~\cite{Fock1954}, which no polynomial basis in
+single-electron coordinates represents exactly, and for an atom the
+coalescence is genuinely three-body---nuclear and interelectronic
+singularities meet at a single point.
+
+\emph{Scope note.}  Earlier versions of this paragraph took the
+motivation from Paper~12~\cite{loutey_paper12}, whose prolate
+spheroidal CI for H$_2$ saturates at 92.4\% of $D_e$, and read that
+residual as the cusp demanding a coordinate change.  Paper~12 has
+since withdrawn that diagnosis:\ its gap was the absent $m \ne 0$
+configurations, and restoring them in the same prolate spheroidal
+basis reaches 99.1\%.  Nothing in the present paper depends on the
+withdrawn reading---helium's coalescence is three-body whether or
+not H$_2$'s residual was misattributed---but the motivation is
+restated here so it no longer rests on it.  In hyperspherical
 coordinates, the cusp at $r_{12} = 0$ becomes a boundary condition
 on the angular problem at $(\alpha = \pi/4, \theta_{12} = 0)$, not a
 singularity in the hyperradial coordinate $R$.
@@ -114,8 +133,10 @@ singularity in the hyperradial coordinate $R$.
 We implement the adiabatic hyperspherical method introduced by
 Macek~\cite{Macek1968} and systematized by
 Lin~\cite{Lin1995}.  The single-channel adiabatic approximation
-yields $E = -2.9052$~Ha for helium (0.05\% error), substantially
-improving on all previous GeoVac results for this system.  The
+yields $E = -2.9052$~Ha for helium, nominally $0.05\%$ from the
+exact value.  That figure is \emph{non-variational}---the energy lies
+below the exact one---and is superseded as an accuracy by the properly
+variational two-dimensional treatment at $0.022\%$.  The
 solver requires only a $600 \times 600$ sparse matrix---six orders
 of magnitude smaller than the Full CI determinant space at comparable
 accuracy---and runs in $\sim$3~seconds.
@@ -151,7 +172,14 @@ The interelectron distance takes the compact form
 \end{equation}
 which vanishes when $\alpha = \pi/4$ and $\theta_{12} = 0$.  This is
 a manifold in the five-dimensional hyperangular space, not a point
-singularity---the crucial structural advantage of these coordinates.
+singularity---a structural feature of these coordinates.
+
+\textbf{[SCOPE 2026-09-14]}
+[retracted 2026-09-14: p13-hyperspherical-cusp-advantage]  Earlier versions
+called this a ``crucial structural advantage''.  It is a structural \emph{difference}:\ Paper~15
+records that it does not translate into an accuracy advantage, and
+Paper~12 reaches $99.1\%$ of H$_2$'s $D_e$ in coordinates where the same
+locus is not a coordinate surface at all.
 
 \subsection{The full Hamiltonian}
 
@@ -208,10 +236,10 @@ condition~\cite{Kato1957}
 \end{equation}
 constrains the angular channel functions $\Phi_\mu$ at the
 coalescence manifold, rather than imposing conditions on the
-hyperradial equation.  This is the key advantage over single-electron
-coordinate systems: the cusp becomes a \emph{boundary condition on
+hyperradial equation:\ the cusp becomes a \emph{boundary condition on
 the angular problem} at fixed $R$, not a singularity in the radial
-coordinate.
+coordinate.  This is a difference from single-electron coordinate
+systems, not a demonstrated advantage over them.
 
 Fock~\cite{Fock1954} showed that the exact two-electron wavefunction
 near the triple coalescence ($R \to 0$) contains non-analytic terms
@@ -345,7 +373,9 @@ $N_\alpha = 200$, the dimension is $800 \times 800$.
 
 Table~\ref{tab:lmax} shows the effect of increasing $l_{\max}$ on
 the ground-state energy.  The $l_{\max} = 0$ result (pure $s$-wave)
-is surprisingly the most accurate at 0.05\% error.  Higher
+is surprisingly the closest to exact, at a nominal $0.05\%$---a
+non-variational figure, so ``closest'' here is not ``best
+converged''.  Higher
 $l_{\max}$ values introduce additional finite-difference error from
 the $l(l+1)/\cos^2\!\alpha$ and $l(l+1)/\sin^2\!\alpha$ boundary
 singularities, which are not fully resolved on the uniform grid.
@@ -353,8 +383,9 @@ singularities, which are not fully resolved on the uniform grid.
 \begin{table}[b]
 \caption{Effect of partial-wave truncation on He ground-state
 energy ($N_\alpha = 200$, $N_R = 3000$).  The $l_{\max} = 0$
-result is optimal because higher-$l$ channels amplify
-finite-difference errors near the boundaries.}
+result is numerically closest to exact because higher-$l$ channels
+amplify finite-difference errors near the boundaries;\ it is
+non-variational, so it is not the best-converged entry.}
 \label{tab:lmax}
 \begin{ruledtabular}
 \begin{tabular}{cdd}
@@ -526,9 +557,10 @@ compared to the exact nonrelativistic value $E_{\mathrm{exact}} =
 -2.903724$~Ha~\cite{Pekeris1958}.  The relative error is 0.05\%.
 
 Table~\ref{tab:comparison} compares this result with other GeoVac
-methods for helium.  The hyperspherical solver is both more accurate
-and faster than every previous approach, while using a dramatically
-smaller matrix.
+methods for helium.  The hyperspherical solver is faster than every
+previous approach and uses a dramatically smaller matrix;\ its nominal
+$0.05\%$ is non-variational and so is not comparable as an accuracy to
+the variational entries beside it.
 
 \begin{table}[t]
 \caption{Comparison of GeoVac methods for the He ground-state
@@ -936,8 +968,8 @@ and the integrated phase is the holonomy.)
 \label{sec:algebraic}
 
 The numerical results of Sections~\ref{sec:angular}--\ref{sec:results}
-demonstrate that the adiabatic hyperspherical method achieves 0.05\%
-accuracy for helium.  In this section we investigate the algebraic
+demonstrate that the adiabatic hyperspherical method reaches a
+nominal, non-variational $0.05\%$ for helium.  In this section we investigate the algebraic
 structure underlying this accuracy: what is analytically computable,
 what is not, and what this reveals about the topology of multi-electron
 atoms.
@@ -1051,9 +1083,19 @@ The electron-electron potential $V_{ee}$ is nearly diagonal in the
 $\mathrm{SO}(6)$ basis.  The leading off-diagonal coupling decays
 as $|V_{n',n}| \sim |n' - n|^{-1}$ for the nuclear term, while
 $V_{ee}$ off-diagonal elements are an order of magnitude smaller.
-This sparsity is ultimately responsible for the 0.05\% accuracy
-of the single-channel ($l = 0$) adiabatic approximation: the
-ground channel is only weakly coupled to excited channels.
+This sparsity is why the single-channel ($l = 0$) adiabatic
+approximation works as well as it does:\ the ground channel is only
+weakly coupled to excited channels.
+
+\textbf{[WITHDRAWN 2026-09-14]}
+[retracted 2026-09-14: p13-sparsity-causes-005]  Earlier versions made the
+sparsity responsible for the $0.05\%$ figure specifically.  This paper's own
+closing section attributes that number instead to fortuitous
+cancellation between the adiabatic approximation error and the
+finite-difference discretization error.  The two readings are not
+compatible---one makes the number a structural property of the
+framework, the other an artifact---and the sparsity attribution is
+withdrawn.
 
 \subsection{The algebraic curve and its branch points}
 \label{sec:algebraic_boundary}
@@ -1880,9 +1922,15 @@ couplings ($T_\pm$ transitions from the $S^3$ paraboloid lattice)
 provide one-body correlation that accounts for $\sim$86\% of the
 CI correlation energy.  FCI basis invariance was verified (Sprint~3D):
 transforming $V_{ee}$ to the graph eigenbasis gives identical energies
-(to $< 3 \times 10^{-15}$~Ha), confirming the convergence floor
-is from the cusp (embedding exchange constant, Paper~18), not basis
-mismatch.
+(to $< 3 \times 10^{-15}$~Ha), confirming the convergence floor is not
+basis mismatch.
+
+\textbf{[WITHDRAWN]} Earlier versions went on to attribute that floor to
+the cusp.  The project's own record contradicts it:\ the Schwartz-tail
+diagnostic (CUSP-2) found the tail correction \emph{worsens} accuracy and
+re-diagnosed the floor as a small-$Z$ graph-validity-boundary artifact
+near $Z_c \approx 1.84$---rather than as cusp content.  Basis invariance shows what the floor is
+\emph{not};\ it does not identify what it is.
 
 \begin{acknowledgments}
 This work was conducted independently with computational tools from

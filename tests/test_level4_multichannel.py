@@ -197,7 +197,7 @@ class TestFullSolver:
     @pytest.mark.slow
     def test_2d_sigma_only_below_paper12(self) -> None:
         """Paper 15 Table III: 2D-variational sigma-only (l_max=4, 13 ch) gives
-        87.0% of D_e -- BELOW Paper 12's 92.4%.
+        87.0% of D_e -- BELOW the 92.4% of Paper 12's sigma-only CI.
 
         This asserts the paper's ACTUAL claim.  Previously this test
         (test_exceeds_paper12) ran the DEFAULT adiabatic solver
@@ -391,15 +391,23 @@ class TestPhase3Solver:
     @pytest.mark.slow
     def test_mmax1_exceeds_paper12(self, solve_2d_lmax4_sigma_pi) -> None:
         """Paper 15 Table III headline: 2D-variational sigma+pi (l_max=4, 29 ch)
-        recovers 94.1% of D_e -- EXCEEDING Paper 12's 92.4%.
+        recovers 94.1% of D_e, above the 92.4% of Paper 12's sigma-only CI.
 
         Uses the 2D variational solver (n_coupled=-1), the paper's headline
         solver.  Previously this test ran the DEFAULT adiabatic solver
         (n_coupled=1), which returns 105.2% here (Table II) -- a
         variational-bound violation the paper disavows.  The band
-        92.4 < pct < 100 therefore does double duty: it (a) confirms the
-        paper's "exceeds Paper 12" claim and (b) rejects the adiabatic
-        false-positive by enforcing the variational bound D_e <= D_e_exact.
+        92.4 < pct < 100 therefore does double duty: it (a) pins the headline
+        value and (b) rejects the adiabatic false-positive by enforcing the
+        variational bound D_e <= D_e_exact.
+
+        SCOPE (2026-09-14).  The name of this test is historical.  Clearing
+        92.4% is NOT evidence of a coordinate-system advantage over prolate
+        spheroidal coordinates, and Paper 15 no longer claims one: the 94.1%
+        here includes pi channels and Paper 12's 92.4% does not -- its basis
+        is phi-independent.  At matched angular content the ordering reverses
+        (Paper 12's own basis with |m| <= 1 reaches 99.09%).  The assertion
+        below is unaffected; only the reading is.
 
         Recompute: D_e = 0.1642 Ha (94.1%), matching the paper exactly.
         """
@@ -685,12 +693,23 @@ class TestHeadline2DCusp:
         (n_coupled=-1) followed by the R-dependent Schwartz cusp correction
         (geovac.cusp_correction).  The correction is a small NEGATIVE energy
         shift (~ -0.39 mHa at R_eq for l_max=4), so it raises D_e from 94.1%
-        to 94.3%, above Paper 12's 92.4%.
+        to 94.3%, above the 92.4% of Paper 12's sigma-only CI (not a
+        like-for-like comparison -- see test_mmax1_exceeds_paper12).
 
         NO-TEST (documented, not faked): the converged 96.0% / l_max=6 / 61-ch
-        2D+cusp value is intentionally NOT asserted -- a single l_max=6 2D
-        solve is ~754 s (Paper 15 Sec. VII.E), beyond a tractable CI budget.
-        This l_max=4 case validates the identical machinery at a feasible cost.
+        2D+cusp value is NOT asserted anywhere.  This l_max=4 case validates
+        the identical machinery at a lower cost, but it does not back the
+        headline.
+
+        The earlier justification -- that a single l_max=6 2D solve is ~754 s
+        (Paper 15 Sec. VII.E) and therefore "beyond a tractable CI budget" --
+        is withdrawn (2026-09-14).  The 2026-09-14 delta run promoted an
+        ~850 s @slow Gaussian control into tests/ and judged that cost
+        justified for a claim of the same standing, so 754 s cannot be the
+        reason.  The real reason is that the test has not been written.  The
+        gap is raised to the PI: 96.0% is a headline at eight loci (this
+        paper's abstract, its summary table, and CLAUDE.md's best-results
+        table) with no backing test and no inline tier tag.
         """
         from geovac.cusp_correction import cusp_correction_h2_point
 

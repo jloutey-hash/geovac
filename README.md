@@ -186,7 +186,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **16** | **Chemical Periodicity** | **S_N representation theory, atomic classifier** |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
 | 11 | Molecular Fock Projection | Prolate spheroidal lattice, H₂⁺ 0.0002% |
-| **12** | Algebraic V_ee | Neumann expansion, H₂ 92.4% D_e |
+| **12** | Algebraic V_ee | Neumann expansion; H₂ 99.09% D_e (\|m\|≤1), 92.4% σ-only |
 | **13** | Hyperspherical Lattice | He 0.004%, fiber bundle, algebraic structure |
 | **15** | Level 4 Geometry | H₂ 96.0% D_e, HeH⁺ 93.1% |
 | **17** | Composed Geometries | LiH 5.3%, BeH₂ 11.7%, ab initio PK |

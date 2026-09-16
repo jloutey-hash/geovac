@@ -18,7 +18,7 @@
 | Prolate spheroidal lattice | 11 | All | Core |
 | Neumann V_ee expansion | 12 | Sec III-V | Core |
 | Prolate spheroidal CI (H2) | 12 | Sec VI | Core |
-| Cusp diagnosis (7.6% gap) | 12 | Sec VII | Core |
+| Azimuthal-channel diagnosis of the 7.6% gap (the cusp reading is withdrawn) | 12 | Sec VII | Core |
 | Hyperspherical coordinates | 13 | Sec II | Core |
 | Angular eigenvalue (Gaunt) | 13 | Sec III | Core |
 | Adiabatic potential curves | 13 | Sec IV | Core |
@@ -69,7 +69,7 @@
 | Observable classification by transcendental content | 18 | Sec VI | Core |
 | Cusp dimensionality obstruction | 7, 15 | — | Core |
 | Cusp correction (Schwartz) | 15 | — | Core |
-| Cusp diagnosis (7.6% gap) | 12 | Sec VII | Core |
+| Azimuthal-channel diagnosis of the 7.6% gap (the cusp reading is withdrawn) | 12 | Sec VII | Core |
 | Composed natural geometries | 17 | All | Core |
 | Core-valence fiber bundle | 17 | Sec II | Core |
 | Ab initio Phillips-Kleinman | 17 | Sec IV | Core |

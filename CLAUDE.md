@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.11.17 (September 13, 2026)
+**Version:** v5.12.4 (September 15, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,14 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **P58 inflation is bounded (2026-09-15, v5.12.4):** the g-row permitted-density inflation has a closed form and converges to R∞=289777/18471≈15.69 (degree-11 one_center; period-2 degree-11 builder) — it saturates, not divergent. Counting closed form, not an open integral. See CHANGELOG v5.12.4.
+- **P58 prior-art cites; /qa DELTA CLEAN (2026-09-15, v5.12.3):** full-text check flipped the scan — Peng 2026 adjacent-metric not prior art, Marruzzo 2025 corroboration not tension; Serra already in P60. See CHANGELOG v5.12.3.
+- **/qa group1 FULL certifying run = FAIL, remediated (2026-09-15, v5.12.2):** the one LARGE dissolved into a decomposition-driver bug (the '2.4' DT counterexample was a Schur-impossible mis-decomposition); all real defects SMALL. Headlines re-derived sound; C4 clean. Critic caught a P39/P44 coverage hole. 2 PI items. NOT certified. See CHANGELOG v5.12.2.
+- **/qa DELTA on the group1 archive = DEFECTS, remediated (2026-09-14, v5.12.1):** two summary surfaces still credited a descoped Lorentzian claim as achieved (the C16 paraphrase blind spot); the C24 gate's own guard coverage had gaps. Archive-note edits verified faithful. See CHANGELOG v5.12.1.
+- **Paper-retirement policy + C24; Lorentzian tail archived (2026-09-14, v5.12.0):** nothing owned the retire decision, so four supplanted papers stayed live. Policy + gate + register; 46-49 archived. See CHANGELOG v5.12.0.
+- **/qa DELTA #3 = DEFECTS, remediated (2026-09-14, v5.11.20):** the largest defect again sat in the prior round's remediation, this time the same session's. Withdraw-don't-replace adopted. 4 PI items. See CHANGELOG v5.11.20.
+- **Two /qa DELTA rounds = DEFECTS, remediated (2026-09-14, v5.11.19):** almost every finding was in the remediation, not the corpus. Headline re-priced to 99.1% with a measured stability envelope; P18 Level-4 re-priced then corrected again. See CHANGELOG v5.11.19.
+- **Paper 12's H2 gap is the sigma-only restriction, not the cusp (2026-09-14, v5.11.18):** azimuthal channels restored in its own basis give 99.1% of D_e (+11.64 mHa vs 0.34 from tripling the sigma basis); 2 more printed-equation defects; P13/P15/synthesis swept. See CHANGELOG v5.11.18.
 - **/qa group2 baseline FULL run COMPLETE (2026-09-13, v5.11.14-17):** 4 batches, 13 docs; every batch found+fixed defects (guardrail scope; pair-diagonal zombie; FCI-atoms stale energies re-measured; a locus-incomplete same-session fix caught by the completeness pass). Baseline re-measure, not a cert. See CHANGELOG v5.11.14-17.
 - **/qa paper_61 DELTA = DEFECTS, remediated (2026-09-13, v5.11.12):** claims + code CLEAN (75 tests --slow); 09-08 remediation held corpus-wide; 2 defects outside the prose (Chowla-Selberg bibitem added; retired K(1/2)=lemniscate swept + new C16 entry). Confirming delta owed before FULL. See CHANGELOG v5.11.12.
 - **/qa paper_60 FULL certifying run = FAIL (2026-09-13, v5.11.10, PI-invoked):** 5/6 dimensions PASS, 0 mathematical/content defects; completeness FAIL on declared preconditions (literal-registration debt + no clean delta). Inertia test + 3 NITs remediated. See CHANGELOG v5.11.10.
@@ -370,7 +378,7 @@ This protocol exists because Track DF (6 sprints, April 2026) re-derived at sign
 
 | Paper | Domain | Theorem/Result | Scope |
 |:------|:-------|:---------------|:------|
-| Paper 8-9 | Single-center molecular encoding | Sturmian Structural Theorem: in a shared-p₀ basis (H,S) share one SO(4) congruence → eigenvalues R-independent (no binding without R-dependent β_k(R)). **Scoped (v4.72.x, PI-reviewed):** the R-independence holds for the single-n D-matrix *approximation* (cross-block *imposed* = orthogonal D^(n); the backing test hard-codes it). The genuine cross-n Coulomb-Sturmian *overlap* couples n (computed: ⟨χ_1s\|χ_2s⟩=−0.47) and escapes the theorem — it binds (Avery SW closed forms; Herbst-Avery-Dreuw) — but hits the qubit-encoding l-mixing wall (see §3 non-orthogonal-encoding row). Paper 8 §Remark + `test_paper8_overlap_cross_n.py`. | ANY investigation proposing to encode a heteronuclear molecule in a single-center (single-Z, single-k, single-p₀) basis, including nested hyperspherical, bond sphere, Sturmian CI, or unified orbital approaches |
+| Paper 8-9 | Single-center molecular encoding | Sturmian Structural Theorem: in a shared-p₀ basis (H,S) share one SO(4) congruence → eigenvalues R-independent (no binding without R-dependent β_k(R)). **Scoped (v4.72.x, PI-reviewed):** the R-independence holds for the single-n D-matrix *approximation* (cross-block *imposed* = orthogonal D^(n); the backing test hard-codes it). The genuine cross-n Coulomb-Sturmian *overlap* couples n (computed: ⟨χ_1s\|χ_2s⟩=−0.47) and escapes the theorem — it binds (Paper 60's validated two-centre Sturmian H₂ CI; Avery SW closed forms; Herbst-Avery-Dreuw 2019 is atoms-only HF, cited for the cross-n overlap structure, not for molecular binding — corrected 2026-09-13) — but hits the qubit-encoding l-mixing wall (see §3 non-orthogonal-encoding row). Paper 8 §Remark + `test_paper8_overlap_cross_n.py`. | ANY investigation proposing to encode a heteronuclear molecule in a single-center (single-Z, single-k, single-p₀) basis, including nested hyperspherical, bond sphere, Sturmian CI, or unified orbital approaches |
 | FCI-M | Graph-concatenation molecular encoding | Graph Laplacian kinetic energy is R-independent in LCAO basis → monotonically attractive PES, no equilibrium | ANY investigation proposing to concatenate atom-centered graphs into a molecular graph without natural geometry coordinates |
 | Track DF record | Nested hyperspherical molecular encoding | Three molecular variants tested (single-center, charge-center, heterogeneous Löwdin) — all NEGATIVE | ANY investigation proposing to place all molecular electrons in a single S^(3N-1) Hilbert space. Extends Paper 8-9's theorem to the hyperspherical setting with additional finding: Löwdin orthogonalization of mixed-exponent bases destroys Gaunt sparsity |
 
@@ -426,6 +434,9 @@ The core organizational principle of the project. Each electron configuration ha
 
 *Level 3 note:* The previous 0.05% result used the FD adiabatic solver (lucky error cancellation, non-variational). The adiabatic coupled-channel solver converges to a structural floor of 0.19-0.20% (v2.0.8). The 2D variational solver (Track DI, v2.6.0) breaks this floor: raw 0.022% at l_max=7 (tensor-product Laguerre × Gegenbauer basis, 8000 dim), cusp-corrected 0.004% at l_max=4. The 2D solver treats R and α simultaneously, capturing non-adiabatic R-α correlation that the adiabatic approximation misses. l_max convergence is monotonic; the per-channel angular basis (n_basis=40 Gegenbauer functions) is the convergence bottleneck, not partial-wave truncation.
 | 4 | H2 (2-center, 2e) | Mol-frame hyperspherical | 96.0% D_e | 15 |
+
+*Level 4 note (added 2026-09-14, PI-directed):* **Level 4's placement for H2 was motivated in part by a claim that is now withdrawn, and on accuracy it is no longer the leading geometry for this system.** Paper 12 read its 92.4% prolate-spheroidal residual as the electron-electron cusp being a coordinate singularity in (xi, eta) that demands a coordinate change; Papers 13 and 15 inherited that motivation. The residual was instead the sigma-only restriction — a phi-independent basis spans only m1 = m2 = 0, while a 1Sigma_g+ state constrains only the total M. Restoring the azimuthal channels in the *same* prolate-spheroidal basis reaches **99.1% of D_e**, against Level 4's 96.0% at l_max = 6 with a Schwartz cusp correction; an independent Gaussian route gives 99.10%, and a published grid-based prolate-spheroidal calculation reaches 99.97% (Tao-McCurdy-Rescigno, *Phys. Rev. A* **82**, 023423 (2010)). What Level 4 retains, independently of the withdrawn claim, is *structural*: it is the exact N-electron generalization (SO(3N), S_N antisymmetry) that Level 4N and the composed Level 5 build on, and its cusp sits at a geometry-independent location. Those are architecture properties, not an accuracy advantage, and the hierarchy should not be read as asserting one here. **Open, and deliberately not decided by the PM: whether H2 belongs at Level 2 rather than Level 4.** See CHANGELOG v5.11.18, Paper 12 Sec. "Restoring the Azimuthal Channels".
+
 | 4N | LiH (2-center, 4e) | Full mol-frame hypersp. (SO(12)) | R_eq 63.5% (l_max=2, 2D variational; unbound D_e) | 17 |
 | 5 | LiH (core+valence) | Composed (Level 3 + 4) | R_eq 5.3% | 17 |
 | 5 | BeH₂ (polyatomic) | Composed (Level 3 + 4) + exchange | R_eq 11.7% | 17 |
@@ -592,6 +603,50 @@ internal-consistency mandate, not by this rule.
 *The phrase registries stay.* They cost nothing to run and occasionally catch
 something. They are a backstop, not the mechanism.
 
+### Paper Retirement (added 2026-09-14, PI-directed)
+
+**Retire claims, not papers.** The corpus's most-tested case is Paper 2: its
+combination rule was demoted Conjectures -> Core -> Observations and then
+relabelled conjecture -> observation, and the paper is still live and cited by
+16 others. Tier demotion is the default move; retirement is the exception.
+
+**Neither trigger is sufficient alone.**
+- A withdrawn foundation is not grounds. Paper 45's main theorem was withdrawn
+  and it remains load-bearing, with five healthy dependents.
+- Zero dependents is not grounds. Papers 52 and 53 have none because they are
+  DRAFT, which is unfinished, not supplanted, and needs finishing or dropping
+  rather than archiving.
+
+**The signal is the health of the dependents.** A paper propped up mainly by
+other descoped papers is in a dying subtree. Two cheaper metrics were tried and
+both failed, recorded so they are not rebuilt: plain citation count misses a
+supplanted cluster entirely, because its members cite each other; and
+"citations from outside the paper's own strongly connected component" collapses,
+because 49 of 54 papers form one component. **C24** computes the surviving
+metric and prints the profile.
+
+**Archive, never delete.** Preservation is not the reason -- the Zenodo deposit
+holds the PDF bytes, so the archival copy already exists independently of the
+repo. The reason is that the repo copy is what future work greps, and pruning
+has already cost this project real time
+(`memory/feedback_resurrect_pruned_artifacts.md`). Deleting is not catastrophic;
+archiving is simply free.
+
+**Every retirement declares itself.** Move the `.tex` to `papers/archive/`, add
+a row to `docs/retired_papers.md` (class, reason, and -- for anything with no
+live successor -- trigger terms), keep the `papers/INDEX.md` row as a tombstone,
+and stamp the documents that cited it, exactly as a retracted *claim* stamps its
+dependents.
+
+**Trigger terms are how the archive stays discoverable.** An archived paper's
+approaches would otherwise be invisible to anyone starting new work, which is
+the Sec. 3 re-derivation problem one level up. The answer is the same: record
+the attempt with the phrase a future sprint would actually use, and let C24's
+probe report it. No new habit, and no reminder to forget.
+
+**The decision is the PI's.** C24 informs; it never nominates a verdict and
+never blocks.
+
 ### Benchmarking Rule
 
 After any modification to production code in `geovac/`:
@@ -619,7 +674,9 @@ The previous narrow 3-file allowlist (`tests/test_fock_projection.py`, `tests/te
 
 **Version numbering (revised 2026-08-22, PI direction).** **Default: bump the LAST number only (x.y.Z → x.y.Z+1).** The PM does not choose minor or major bumps; those are PI calls, made explicitly. The point of the change is to make version jumps *mean* something: when the second or first number moves, a reader should be able to infer that a significant corpus change happened, without having to read the CHANGELOG to find out. Under the old rule the PM bumped the minor version for every completed arc, which made minor bumps routine and therefore uninformative (v4.77 → v4.109 = 32 minor bumps).
 
-So: patch (x.y.Z) is the standing default for everything — bug fixes, documentation, completed diagnostic arcs, paper updates, benchmark results, sprint closes. Minor (x.Y.0) and major (X.0.0) are reserved for the PI to call, and mark corpus-significant events: a retraction that moves published numbers, a change to the QA gate or the agent protocol, an architectural change, a reorganization of the paper series. If a sprint feels like it warrants more than a patch, say so in the session summary and let the PI decide — do not bump it unilaterally. Granularity is unchanged: a diagnostic arc that tests 10 hypotheses and finds 9 negative results is ONE version entry, not 10.
+So: patch (x.y.Z) is the standing default for everything — bug fixes, documentation, completed diagnostic arcs, paper updates, benchmark results, sprint closes. Minor (x.Y.0) and major (X.0.0) are reserved for the PI to call, and mark corpus-significant events: a retraction that moves published numbers, a change to the QA gate or the agent protocol, an architectural change, a reorganization of the paper series. If a sprint feels like it warrants more than a patch, say so in the session summary and let the PI decide — do not bump it unilaterally.
+
+**Standing exception (added 2026-09-14, PI direction): any change to the `/qa` skill is a MINOR bump, automatically.** This one does not wait for a per-event PI call. `.claude/commands/qa.md` defines what the certification gate does, so a change there changes the meaning of every subsequent PASS — a reader seeing the second number move should be able to infer that the instrument itself moved, without reading the entry. Adding, removing or rescoping a deterministic check (C-criterion) counts; fixing a typo in the file does not. Granularity is unchanged: a diagnostic arc that tests 10 hypotheses and finds 9 negative results is ONE version entry, not 10.
 
 ---
 

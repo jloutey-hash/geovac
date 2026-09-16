@@ -7,6 +7,321 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.12.4] - 2026-09-15
+
+**Paper 58's permitted-density inflation has a closed form: it is BOUNDED, converging to $R_\infty = 289777/18471 \approx 15.69$ — it does not diverge with basis size.** The g-row inflation factor (13.8× at n_max=2, 15.0× at n_max=3) had been recorded as "increasing with basis size," an open reading on whether it saturates or grows. It saturates. Scoped and executed at PI direction, following the v5.12.3 closed-form candidate flag.
+
+- **Structure.** With c(μ)=(n_max−μ)(n_max−μ+1)/2, the m-permitted single-center count is one_center = 2·Σ_t (c∗c)(t)², a **degree-11 polynomial**; the m-rule total is exactly **8·one_center**; genuine = **7·one_center + builder**; and the per-side Gaunt L-range is *never* empty (|M|≤ℓ₁+ℓ₂ always), so the only removal is the single-center L-overlap in builder — a **period-2 degree-11 quasi-polynomial**. Both parity branches of builder share the leading coefficient (6157/831600), so R = 1 + 7·one_center/builder has a single-valued limit.
+- **Limit.** R climbs 13.76 → 15.04 → 15.40 → … → 15.66 (n=10) → R∞ = 289777/18471 ≈ 15.688. The measured 13.8×/15.0× are the steep early rise of a saturating curve. The two-center angular-sparsity penalty is **bounded, not divergent** — a strengthening of Paper 58's thesis (the sparsity cost is real but ceilinged at ~15.7×).
+- **Not an integral.** A *counting* closed form (Gaunt/3j combinatorial lane, §4 algebraic-first), not the evaluation of an open integral — GeoVac's two-center ERIs are already closed-form (the T2 engine). Contacts Peng 2026's one-center ~1/(3ℓ) allowed-fraction asymptotic.
+- **Backing:** `tests/test_paper58_inflation_limit.py` — fast (reproduces the published anchors 2944/214 and 114280/7600 via the census predicate of `test_paper58_census.py`; structural identities m_rule=8·one_center and genuine=7·one_center+builder; monotone-and-bounded; limit arithmetic) + slow (independently fits the degree-11 quasi-polynomials from the enumerator, verifies held-out points, confirms leading coeffs 19379/1247400 and 6157/831600 ⇒ R∞). C19 PASS. Derivation of record: `debug/p58_inflation_closed_form.py` + `debug/p58_inflation_fit.py`. Paper 58 g-row prose + claim-matrix row updated.
+
+## [v5.12.3] - 2026-09-15
+
+**Two prior-art citations added to Paper 58 (the water / l-selection pillar); /qa DELTA = CLEAN-DELTA.** A prior-art scan had flagged two 2025/2026 papers as bearing on Paper 58's cross-center angular-sparsity results. Full-text verification (arXiv HTML, confirmed by the PM and an independent citation-reviewer) **corrected the scan's framing on both** and added each at the framing the primary source actually supports.
+
+### Reconciliation first: the preconditioner pillar needs no new citation
+
+The scan's Pillar-1 recommendation ("cite Serra-Capizzano, not just Strang/Chan") was already discharged: Paper 60 cites `serra1997` (Serra, *Math. Comp.* **66**, 651 (1997)) at line 1209 for exactly the aligned-band-Toeplitz "trigonometric polynomial sharing the zero bounds the condition number" theorem, and `ahmad2018` (Ekström–Furci–Serra-Capizzano) at line 1025. KMS/`eq:sigma_law` was closed in v5.10.18. **No citation was added to Paper 60.**
+
+### Pillar 2 (l-selection), both scan framings corrected
+
+- **Peng 2026 (arXiv:2607.25245)** — scan called it "closest/most dangerous prior art." It is **not**: it treats molecular total-$M_L$ block departure as one undifferentiated environmental effect via a *proposed, uncomputed* Frobenius-norm diagnostic $\eta_{\rm off} = \lVert V - V_{\rm block}\rVert_F/\lVert V\rVert_F$, reports **no census**, and does **not** resolve the departure into surviving-abelian ($m$) / dying-non-abelian ($l$) parts. Added as an **adjacent, complementary metric**: $\eta_{\rm off}$ measures leakage *out* of the $M_L$ blocks, while P58's 13.8×/15.0× inflation is fill-in *within* them — orthogonal quantities that P58's own numbers (2.2e-16 collinear off-block, 15× within-block) show diverge maximally. Explicitly framed as not prior art for P58's mechanism or census.
+- **Marruzzo et al. 2025 (Adv. Quantum Chem. **92**, 245–266; arXiv:2509.12680)** — scan called it a "polarity tension." It is the **opposite** (corroboration): its nonorthogonal Jordan–Wigner encoding costs up to $M^3$ (one-body) / $M^6$ (two-body) Pauli strings vs the orthogonal $M^2$/$M^4$, and its biorthogonal reformulation recovers $M^2$/$M^4$ **only** by proliferating non-Hermitian, asymmetric integrals — a concrete external instance of Paper 58's own "relocating the metric does not reduce it" observation (item 2, the dual-basis/biorthogonal relocation, `artacho1991`). Added as corroboration; "the cost moved, not removed."
+
+### DELTA (additive-only; no existing claim status changed)
+
+Deterministic: **C19** (eaten-escape) PASS whole-corpus, **C15** (inline arXiv) PASS (Peng ID real), **C16** (retracted-terms) PASS group2; both keys resolve 1 `\cite` + 1 `\bibitem`; C21/C20 N/A. LLM: **citation-reviewer** CLEAN (both grounded, author/title/venue/ID exact, characterizations faithful) and **claims-reviewer** CLEAN (no overstatement, no internal contradiction, novelty = census + resolution not mechanism, no hard-prohibition/honest-scope inversion). The two dimensions cross-checked (the claims-reviewer's two "verify vs source" punts were the exact items the citation-reviewer independently confirmed). A DELTA never PASSes; this is a targeted citation addition, **not a cert**.
+
+*Open candidate, not launched (PI call):* a closed-form for the permitted-density inflation factor as a function of $n_{\max}$ (currently *counted* 13.8×/15.0×) — a combinatorial-count closed form in the Gaunt/3j lane, contacting Peng's one-center $\sim 1/(3l)$ asymptotic. Not an open integral (GeoVac's two-center ERIs are already closed-form, the T2 engine).
+
+## [v5.12.2] - 2026-09-15
+
+**`/qa group1 full` (PI-invoked certifying run) = FAIL, remediated. NOT a PASS.** The first whole-group FULL run of group1 since the 2026-06-24 bite-wise cert; live scope was the 10 papers left after the 46-49 archival (29, 39, 40, 42, 43, 44, 45, 50, 52, 53) + synthesis. 14 deterministic gates + a 10-agent LLM panel + a completeness-critic + 3 critic-driven gap re-dispatches. Verdict FAIL on verified material defects, all SMALL; the one LARGE dissolved under verification.
+
+### The LARGE dissolved into a decomposition bug
+
+The claims panel flagged a LARGE: Paper 40's Cor L3_closure / Lem L3_interior claim the Dirac-triangle inequality "rigorous at all ranks, every summand", contradicted by a documented counterexample in the backing (matrix row 214: "G2 (1,0)v(0,4) ratio ~2.4"). The P40 **code** reviewer, re-deriving independently, found the 2.4 is an artifact of `dirac_triangle_extended_verify.py`'s `tensor_product`, which is **not dimension-conserving outside its validated panel** -- it reports a Schur-impossible trivial summand for that pair. **The PM reproduced it**: (1,0)x(0,4) sums to 5236 != 4662; the dimension-correct DT value is < 1 (holds). No counterexample exists. Two reviewers converged on one locus with opposite readings and the code re-derivation settled it -- the exact discrimination the panel exists for.
+
+### Verified material defects (all SMALL), remediated
+
+- **A false counterexample in the backing.** Matrix row 214 AND the slow-test docstring cited the bug's "ratio 2.4" as real evidence justifying the panel restriction. Withdrawn; corrected to "panel-bounded by the driver's validated range", and a dimension-conservation guard added to `run_panel` (fire-tested: raises on the buggy pair, silent on clean panels) so a panel-widening can never again pass a mis-decomposition off as a result.
+- **Retired "propinquity" labels** for GeoVac's own Paper 38/39/40 results, which are state-space GH: P42 section heading (contradicted its own body), P44 literature bucket, two synthesis loci.
+- **Un-caveated pre-descope framing.** P43's intro "the Lorentzian content ... literally satisfied at (3,1), not merely a structural correspondence" -- signature-blind caveat added to match the abstract and Paper 42 Sec.10. P53's Theorem 5.6 asserted the strictly stronger Latremoliere propinquity via max(reach, height)->0 while its own remark says the height leg (Lebesgue constant 2.01, Lambda-independent) does not vanish; scoped to state-space GH with the Latremoliere form marked conditional.
+- **Two synthesis clauses** in the archived-Paper-47 subsection describing descoped/degenerate content in present-tense "established" language -- both caveated to the surviving spatial-rate-formula reading.
+- **P40 group corollaries** now carry the inline tier (rate rigorous rank-1, numerically pinned rank>=2; convergence conditional for general G); the P39 bib annotation of P40 gets the same rate caveat.
+- **Toyota M. -> R.** (P42, P43 bibitems; the only citation defect on ~290 bibitems enumerated). **P53 stale bib titles** for the archived 45/46 corrected. **P43 sub-epsilon residual** given its one-line provenance caveat (degenerate scalar wedge unitary -> eps^2).
+
+### The headlines all held, by independent re-derivation
+
+Every load-bearing result was re-derived by a reviewer's own route: P50's F-theorem (PSLQ-recovered from the framework spectrum; both KPS sides fire-tested), P45's K+ annihilation (a genuine Krein-forced identity, the 15.87-norm spatial Dirac projected out; not a restriction artifact), P53's height 2.01 (sharp L1 norm, re-derived by a second route), P40's rank-1 4/pi (to 1e-8), P44's prop=2 (SVD-rank, guards reject k=1/k=3/hardcode), P29's 84->80 arithmetic (bit-for-bit). The C4 citation surface -- the branch's known fabrication history -- is clean end to end, both load-bearing inline theorem numbers (van den Dungen Prop 4.1, Nieuviarts Def 2.2) confirmed against primary sources, and the highest-risk 2026-dated arXiv ID resolves exactly.
+
+### The completeness-critic earned the run
+
+It caught a PM scoping error: Paper 39 fell out of all three claims chunks and both citation chunks, and Paper 44's code went unaudited because its test is not named `test_paper44_*`. Three focused re-dispatches (P39 claims, P39 citations, P44 code) all returned CLEAN, closing the gaps -- without them three gating dimensions were unexercised (INCONCLUSIVE, not clean).
+
+### Owed to the PI (two items)
+
+1. **Paper 40's "rigorous at all ranks" prose is not edited.** No counterexample exists, but the interior-summand closure (Lem L3_interior) is an analytical Steinberg/Brauer-Klimyk argument the code cannot verify; the honest computational tier is panel-verified + the Kumar-PRV asymptotic bound. Whether the analytical lemma certifies the all-ranks claim is a primary-math call. If it holds, only the (now-corrected) backing note was wrong; if it has a gap, the paper prose should be scoped to panel-verified.
+2. **Paper 50's S7 "DONE" catalogue row has no backing test** and no external check is possible (framework-generated, and an S7 erratum history is on record). A regression test is the only pin; logged as a coverage gap.
+
+Group1 is **not certified** by this run -- a FULL run that FAILs and is remediated needs a clean DELTA before a certifying FULL can PASS. Re-cert owed.
+
+## [v5.12.1] - 2026-09-14
+
+**`/qa` DELTA on the group1 archive (v5.12.0) = DEFECTS, remediated.** First verification of the Lorentzian-tail archiving. Claim-impact scope: the four archived papers plus the new C24 gate. Two reviewers (both Opus), unseeded, against the standing calibration record (trunk DELTA #1/#2, 17/18 seeds, 0/8 false positives). All deterministic gates green whole-group at close.
+
+### Per-dimension scorecard
+
+| Dimension | Exercised | Result |
+|---|---|---|
+| Deterministic (C10-C24, group1) | yes, whole-group | CLEAN |
+| Claims / status (C14) | yes, 7 live citers of the archived papers | 2 material, remediated |
+| Code (the C24 gate + follow-ons) | yes | 2 material-small + 3 nit, remediated |
+
+### Claims: two summary surfaces credited a descoped claim as achieved
+
+Both are pre-existing staleness the archiving pass did not sweep, and both are the paraphrase class C16 is structurally blind to — a citer restating a descoped claim in its own words, which is exactly why the claim-impact reviewer and not the phrase gate found them.
+
+- **Field guide** said "Paper 49 closes the strong-form Krein-MS bridge (Q1')" with no decomposition, while the group1 synthesis makes the identical claim correctly by leading with "the Lambda-inheritance ... claims ... are descoped ... the cocycle-deficit algebra and the OSLPLS category design survive." Rewritten to the decomposed form: a construction at the categorical/algebra level, metric-level Lambda-inheritance descoped.
+- **Paper 50's** "Place in the series" retrospective listed the arc as having "established ... convergence theory at ... strong-form Lorentzian ... via OSLPLS", contradicting the same paper's own descope-aware introduction. The descoped levels are now flagged as descoped and not convergence results.
+
+No C16 entry was added for either: "strong-form Lorentzian" appears in dozens of correct descope-aware sentences ("... is descoped"), so any pattern broad enough to catch the crediting form fires on the correct form too, which the discrimination rule forbids. This defect class is owned by the claim-impact reviewer by design.
+
+**The clean half, reported with equal weight.** The reviewer enumerated every citation of the four archived papers across all seven live documents. Papers 43, 45, 52, 53 and the group1 synthesis body are descope-accurate throughout — Paper 45 in particular carries "the Paper 49 cocycle machinery, which survives the descope" correctly. Both archive-note edits from v5.12.0 were verified **faithful**: the four surviving pieces map one-to-one to the register. No live document describes 46-49 as current or forthcoming.
+
+### Code: the gate's own regression net had the holes it was built to close, one level up
+
+The gating check (A, register integrity) was independently confirmed sound — it anchors on the filesystem glob, not the register's self-report, so no archived paper can escape it, the exact opposite of the C11-could-not-fail failure. The gaps were in the guards around it:
+
+- **The ratchet's known/fresh partition lived only in `main()`**, untested; a future edit inverting the set-difference would silently stop surfacing NEW re-derivation loci. Extracted to a pure `partition_probe_hits` helper with three unit tests, one fire-tested by inverting the diff.
+- **The selftest advertised "all five probes fire" while exercising 3 of 5 check-A branches.** The nonexistent-file and empty-reason branches fired but were unguarded. Added both as selftest probes and mirror-test assertions, both fire-tested.
+- The page builder would wipe every page on an empty-but-valid manifest; guarded on a non-empty manifest. A loop variable shadowing the `page()` helper was renamed.
+
+Every new guard was fire-tested against the specific wrong answer it excludes, in a pass separate from the fix, per the guard-writing rule. Mirror test 10 -> 15 assertions.
+
+### Verdict — DELTA #1 DEFECTS remediated, DELTA #2 CLEAN
+
+DELTA #1 = DEFECTS, remediated (above). The archiving itself is faithfully reflected across the corpus; the two claims defects were pre-existing summary-surface staleness the archive pass surfaced rather than caused.
+
+**DELTA #2 re-reviewed the remediation itself** — this session's recurring lesson is that a fix introduces the next round's defect, so both dimensions were re-dispatched to fresh Opus reviewers pointed only at the changed loci. **Both returned CLEAN-DELTA.** The two claims rewrites verified accurate against Paper 49's abstract, the register, and Paper 50's own introduction — the functor/category construction credited only at the level that survives, the metric-convergence reading explicitly denied, the withdrawn K⁺-weak-form level correctly dropped without creating a zombie. The code remediation verified sound under mutation: the partition extraction is behavior-preserving, and every new test was breakable by mutating its subject (none is a can't-fail guard).
+
+DELTA #2 left one advisory: the empty-manifest wipe-guard in `build_paper_pages.py` — the one guard added in DELTA #1 that received no test. Closed the same way as the D1/D2 gaps: the prune decision extracted to a pure `orphan_stems` helper with a `--selftest` pinning the load-bearing invariant (empty manifest prunes nothing, never "every page is an orphan"), fire-tested by breaking the guard and confirming the selftest fails with exit 1.
+
+A clean delta is now on record; it is the precondition for a group1 FULL certifying pass, which is separately owed (the group1 cert record is stale to 2026-06-24).
+
+## [v5.12.0] - 2026-09-14
+
+**Paper retirement now has a policy and a gate. It did not have either, and that is why four supplanted papers sat in the live set indefinitely.** CLAUDE.md Sec. 9, `docs/retired_papers.md`, C24, and its mirror test.
+
+### The gap, stated precisely
+
+Papers 46 through 49 rest on a model the Paper 45 annihilation theorem withdrew. They are **honestly labelled** -- each states its own descope in its own abstract, which I checked before claiming otherwise -- and every claim-level mechanism worked correctly on them. What never happened is anyone deciding whether they should still be in the live set, because no step in the process was responsible for asking. **A decision gap, not an honesty gap.** The distinction matters: nothing here needs fixing in the papers.
+
+### What the policy says
+
+- **Retire claims, not papers.** The precedent is Paper 2, which was demoted Conjectures to Core to Observations, had its label downgraded, and is still live and cited by 16 others. Tier demotion is the default; retirement is the exception.
+- **Neither trigger is sufficient alone.** A withdrawn foundation is not grounds (Paper 45 is descoped and load-bearing, with five healthy dependents). Zero dependents is not grounds (Papers 52 and 53 have none because they are DRAFT, which is unfinished rather than supplanted).
+- **Archive, never delete** -- but not for the reason first given. Preservation is already handled: the Zenodo deposit holds the PDF bytes, so the archival copy exists independently of the repo. The actual reason is that the repo copy is what future work greps, and pruning has already cost this project real time. Deleting is not catastrophic; archiving is simply free.
+- **The decision is the PI's.** C24 informs and never nominates a verdict.
+
+### The metric took three attempts, and the first two are recorded so nobody rebuilds them
+
+| Metric | Result |
+|---|---|
+| Plain citation count | Misses the cluster entirely. Papers 46-49 carry 6, 8, 3 and 2 citers while nothing outside the group depends on any of them. |
+| Citations from outside the paper's own strongly connected component | Collapses. 49 of 54 papers form ONE component, so "external" is empty for almost everything and the check reported 28 papers including three keystones. |
+| **Health of the dependents** | Separates with no false positives. |
+
+A paper propped up mainly by other descoped papers is in a dying subtree. On this corpus the four Lorentzian papers take the top four slots by unhealthy-dependent count and **no other paper has a single one**. Paper 45 reads five healthy dependents, so the metric visibly distinguishes the one that stays from the ones worth examining.
+
+Check B stops short of a verdict deliberately. Whether a citation is a real dependency or a see-also is the Sec. 13.8 test, and that is not automatable.
+
+### Keeping the archive discoverable
+
+An archived paper's approaches would otherwise be invisible to anyone starting new work, which is the Sec. 3 re-derivation problem one level up. The answer is the same one Sec. 3 uses: record the attempt with the phrase a future sprint would actually use, and let the gate report it. **No reminder**, because reminders rot -- this corpus has measured that repeatedly. `docs/retired_papers.md` carries trigger terms for every archived paper with no live successor, and C24 probes them. Reading the seven archived papers to write those terms surfaced a distinction worth keeping: two are covered by a live successor and carry no re-derivation risk at all, while Paper 6 is **valid and merely orphaned**, so the right response to a hit on it is reuse rather than rebuilding.
+
+### Guards
+
+C24's `--selftest` proves all five probes fire against synthetic defects rather than real debt. `tests/test_paper_retirement_check.py` adds ten assertions in the FIRE direction, including the discrimination that matters: a descoped-but-well-supported paper must not read as a dying subtree. That is the Paper 45 case, and a metric that could not tell it from Paper 46 would nominate the wrong paper.
+
+**Version.** Minor, per PI direction, and the rule is now standing: **any change to the `/qa` skill is automatically a minor bump** (Sec. 9). C24 is wired into `.claude/commands/qa.md` so it actually runs -- a gate that never runs is the failure mode this corpus has hit four times.
+
+### The Lorentzian tail is archived (same release, PI direction)
+
+Papers 46, 47, 48 and 49 moved to `papers/archive/` with `git mv`, so history is preserved. This is the first use of the policy above, and it went in the order the policy prescribes: measure, decide, move, record, stamp.
+
+**Scope, and the boundary.** The four archived are the supplanted tail: descoped or partial, with dependents that are mostly other descoped papers. Three Lorentzian-arc papers were deliberately **not** archived, and the reasons are recorded so the boundary is not guesswork:
+
+| Paper | Disposition | Why |
+|---|---|---|
+| 43, 50 | kept | ACTIVE, with seven and three external citers |
+| 45 | kept | DESCOPED but load-bearing: five healthy dependents, including Paper 38, the WH1 keystone |
+| 52, 53 | kept | DRAFT with no dependents, which is *unfinished* rather than supplanted — §9 says zero dependents is not grounds |
+
+**All four are CLOSED-VALID, not CLOSED.** Each retains content that is not refuted, and the register names it so a future sprint reuses rather than rebuilds: Lemma 3.2's degeneracy diagnosis (46), the norm-resolvent arrow and three-carrier identification (47), the bridge's categorical design (48), the cocycle-deficit / TICI algebra (49).
+
+**What moved with them.** Four `INDEX.md` tombstones, four register rows with trigger terms, and archive notes in the group1 synthesis and the field guide — both of which narrate the arc at length and were already honest about the descope, so only the *location* changed and no claim was touched. C24 re-run: 11 archived papers, all registered, register intact.
+
+**Nothing was deleted, and nothing was retracted.** The four remain in the repo, keep their Zenodo DOIs, and keep their own abstracts' descope statements.
+
+**Two follow-ons the archive exposed.** The site builder only ever wrote pages, so archiving left four live, crawlable pages advertising the papers as current -- the generated-artifact staleness class again. It now prunes any page with no manifest entry, and did (63 pages -> 59, matching the manifest). And the re-derivation probe reported the same seven hits every run, all legitimate because the live papers that narrate the arc genuinely discuss those topics; a report that never changes is one nobody reads. It is now ratcheted against a recorded baseline, printing the baseline size every run per the C22 rule, and surfaces only NEW loci. Verified both directions: quiet at baseline, and fires when a topic is planted in a fresh paper.
+
+
+
+## [v5.11.20] - 2026-09-14
+
+**`/qa` DELTA #3 on the azimuthal-channel correction = DEFECTS, remediated. Third consecutive round in which the largest findings were in the previous round's remediation rather than in the original corpus.** Papers 12, 13, 15, 18, the group2 synthesis, the field guide, the claim-test matrix, one figure and the 63 generated site pages. Four reviewers; all deterministic gates green at close.
+
+### The recurring shape, now named and acted on
+
+Rounds 1 and 2 each withdrew a claim and then wrote a *replacement reading* that became the next round's defect. Round 3 was run on a **withdraw-do-not-replace** rule: where two figures conflict and the corpus cannot settle them, the note says `[UNRECONCILED]` and names both readings instead of picking one. Two such notes are now in Paper 15, and both are PI items.
+
+The rule was needed. Two of this round's confirmed defects were round 2's own prose:
+
+- **A false universal.** The stability-envelope paragraph said alpha = 1.00 is "the value every smaller basis in this paper uses". The paper states 200 lines earlier that alpha is optimised variationally at each basis size. Removed; the substance (6 of 9 alpha fail, alpha = 1.00 among them) stands.
+- **A self-refuting sentence.** The same paragraph called the conclusion "insensitive to the choice" and then quoted a number that refutes it. Corrected mid-round to say the value "ranges over 95.5-99.1% across the grid" — **and that correction was itself refuted a few hours later by the code reviewer**, because the 95.5% was never re-measured, only re-framed. See the code-review section below; the paragraph now reads 76.1-99.1%.
+
+### What else the round found
+
+- **Paper 13 never received the round-2 cusp correction.** Papers 12 and 15 were corrected; Paper 13 was in the same review set and kept "the crucial structural advantage of these coordinates" and "the key advantage over single-electron coordinate systems" at three loci. It also carried six uncaveated `0.05%` loci -- two of them unscoped universals ("the most accurate", "more accurate than every previous approach") -- against its own abstract, which calls that figure non-variational. And it gave the same number two incompatible causes: SO(6) sparsity in one section, fortuitous error cancellation in another.
+- **Paper 15 asserted a decoupling its own adjacent paragraph denies.** "The sigma and pi sectors are completely decoupled in the angular eigenvalue problem, because the e-e coupling conserves M = m1 + m2" -- but (0,0) and (+1,-1) both carry M = 0, so conserving M is exactly what puts them in the same block, and the preceding sentence says the e-e multipole expansion is what couples them. The measurement agrees: decoupled blocks would make the ground state a minimum over blocks, so adding pi channels could not lower it by a near-constant amount. The offset survives as an observation; the explanation is withdrawn.
+- **A figure was asserting the withdrawn ordering.** `convergence_lmax.png` plotted 30.8/37.3/87.8/88.5/95.5, and **four of those five numbers appear nowhere in Paper 15** -- its own table gives 37.2/79.5/80.2/87.0 for the same sector. The figure also drew one unlabelled red line at "Paper 12 (92.4%)" that the bars cross, so the image made the coordinate-system comparison the prose had spent three rounds withdrawing. Redrawn from `tab:extended_convergence` with both sectors plotted and both Paper 12 values labelled by sector. The old generator wrote to `papers/core/paper_15_figures`, a path that stopped existing at the 2026-05-22 reorganisation -- the figure had been unregenerable in place, which is why it went stale silently and why no one noticed.
+- **A "regenerated" stamp that was true and useless.** The site pages were rebuilt, but from a manifest that had not been. Rebuilding the manifest first cleared the last withdrawn-ordering sentence out of two pages.
+- **Paper 18's conclusion still certified Claim 4** as having "held across all tested cases" while the body recorded it as under strain, and its Class-C definition still defined the class by requirement seven lines above the paragraph denying it. Both corrected, along with a cusp-floor attribution Paper 13 had already withdrawn, an algebraic-functions bullet that contradicted its own section, and a necessity claim (`mu(R)` "needed to achieve sub-0.1%") that is false in both directions.
+
+### One reviewer finding was wrong, and checking it mattered
+
+A reviewer reported that no PI-directed note leaves open whether H2 belongs at Level 2 or Level 4. The note is at `CLAUDE.md:432` and says so in those words. Recorded because the finding would have licensed an edit to a PM-NO-EDIT section on a false premise.
+
+### The code/test-backing reviewer found two more, and one of them was mine from the same day
+
+- **The independent Gaussian control was certifying the wrong number.** `test_independent_gaussian_route_agrees` computed the *all-m* value, 99.42%, not the 99.10% the paper quotes. With the old 8s3p basis every function had |m| <= 1, so taking every orbital WAS the |m| <= 1 calculation; round 2 added the d shell to fix a different defect and thereby turned that same line into the |m| = 2 calculation. Neither assertion could tell 99.10 from 99.42, and the gain assertion cited "the paper quotes 12.36" -- a number in no paper and no registry, whose only home was a `debug/` memo. **The paper's numbers are right**: 92.34 and 99.10 both reproduce exactly once the true m = 0 (dim 30) and |m| <= 1 (dim 50) spaces are built. The test was wrong, and it is the third repetition of the wrong-evaluation-object class in this one test. Those spaces are contractions, not index masks -- xx+yy is m = 0 while xx-yy is |m| = 2 -- so the control now builds them explicitly, bounds both sides, and asserts that the full space sits measurably *above* the |m| <= 1 space, which is the discriminator the old test lacked.
+- **"The weakest variational value anywhere on the full grid is 95.5%" is refuted, and it is a sentence written earlier the same day.** Re-measured independently: 95.5% is the cell at alpha = 1.10, threshold 1e-8, and is the grid minimum **only if alpha is restricted to >= 1.10** -- excluding exactly the low-alpha half the same paragraph had just called pathological. Over the declared range alpha in [0.90, 1.30] the weakest variational value is **76.11%**, and at that cell the sigma-only solve returns **91.06%**, so opening the azimuthal channels there makes the answer *worse by fifteen points*. "Robust across the grid" is false at a grid point. A restricted-evaluation artifact: a clean floor produced by deleting the part of the object that breaks it.
+
+  The paragraph now says what was measured -- the value ranges 76.1-99.1% over the declared grid -- and states what the result actually rests on: the tight-threshold points, which all lie in 99.03-99.14%, and the well-conditioned Gaussian route at 99.10%, which needs no discard threshold at all. Not a property of the grid, most of which is conditioning noise.
+
+**This is the fourth consecutive round whose largest defect sat in the previous round's remediation, and the first in which the previous round was the same session.** The withdraw-do-not-replace rule stopped the narrative defects; it did not stop an unverified *number* being carried forward into a correction. The number was never re-measured, only re-framed.
+
+### Also from the code review
+
+- The `[92.0, 92.6]` band written this round to stop hiding the dropped-digit denominator **still admitted it** -- under the wrong denominator the value reads 92.1087, inside the band, and a plant reverting the literal alone passed. Narrowed to `[92.15, 92.35]`.
+- The sigma band `(92.2, 92.5)` did not reject the d-less basis it claimed to: 8s3p gives 92.22, which is inside it. Only the other leg was doing the work.
+- The `cond(S)` test ran at alpha = 1.0 while the registry declares its two literals at alpha = 1.05, so it could not pin the numbers it was credited with, and its one-sided floors sat about 1.5 decades low. Moved to the declared convention and bounded both sides.
+- Two tests in the file were in no claim-matrix row -- and the unregistered one was the false positive. Both now registered.
+- Two new fire cases. **K** loosens the discard *behaviour* by two decades while leaving the signature literal untouched: the `inspect.signature` pin is blind to it and only the envelope bound catches it, which is what makes the envelope load-bearing rather than decorative. **L** folds |m| = 2 back into the Gaussian control and must be rejected.
+- **C21 was examining nothing on this paper.** Four `p12_*` keys were registered and cited at zero annotated loci; Paper 12 contained no `\gvq` at all, so the gate reported PASS for a surface it never read — the gate-examines-nothing class, not ordinary debt. Eight annotations added, and the no-op property verified rather than assumed: the applier strips every `\gvq` it wrote and refuses to save unless the rendered text is identical character for character. C21 check B now reads 62 annotations in group2 scope.
+
+### On the test budget
+
+`test_level4_multichannel.py` justified leaving Paper 15's 96.0% headline untested as "beyond a tractable CI budget" at ~754 s. This same round promoted an ~850 s test into `tests/` and called that cost justified. The justification is withdrawn; the real reason is that nobody has written it. Raised as PI item 4 below.
+
+### Guards
+
+Nine retired claims registered in C16 with declared dependents, and each proved to discriminate in **both** directions before being trusted -- 13 cases, every one firing on the retired wording and silent on the corrected (`debug/firetest_round3_c16.py`). New entries use the standardized `[retracted DATE: id]` token rather than hand-authored exemption vocabulary, which is the class that produced three false-clean entries on 2026-09-03.
+
+### Owed to the PI
+
+1. **Paper 15's delta row is arithmetically impossible as labelled.** `N_ch = 37` implies sigma+pi+delta, which cannot return 87.6% when its own sigma+pi subset returns 93.6%. Either the row is sigma+delta (21 channels) or the 87.6% belongs to a different calculation. Flagged in-paper; needs the solver.
+2. **Paper 15 gives the cusp correction two magnitudes.** 1.7 mHa / 1.0 pp at unstated l_max, and 0.39 mHa measured at l_max = 4. Under the paper's own 1/(l+1/2)^4 scaling the second implies 0.05 pp at l_max = 6, not 1.0. The abstract's pure-variational figure follows from neither and is now stated as ~95-96%.
+3. **CLAUDE.md Sec. 4 claims the algebraic V_ee achievement without the sigma-sector scope**, at three loci (L405, L409, and the surviving-quadrature list). Section 4 is PM-NO-EDIT.
+4. **Paper 15's 96.0% headline still has no backing test** and no inline tier tag; it is the one load-bearing claim across these three papers whose tier is invisible to a reader.
+
+### Owed, not done
+
+Two upgrades are available and were deliberately not taken in this pass, because §9 forbids writing a guard in the same pass as the work it would protect — a guard written alongside the fix inherits the fix's reasoning:
+
+- **Exact termination is verifiable at the headline basis.** The claim that the Neumann sum terminates by selection rule is currently backed only at (2,2). The reviewer measured (3,3), |m| <= 1: the energy moves through l = 10 and is then bit-identical at l = 11, 12 and 14 — exactly what `l > Q + 2s - m` predicts, at about 60 s. That closes the only gap in the claim's scope.
+- **A test for Paper 15's 96.0%**, now that the budget objection to it has been withdrawn.
+
+**PI note:** patch. The corpus-significant events were recorded in v5.11.18; this is the third remediation of them.
+
+## [v5.11.19] - 2026-09-14
+
+**Two `/qa` DELTA rounds on the azimuthal-channel correction. Both returned DEFECTS; almost every finding was in the remediation rather than in the original corpus.** Papers 12, 13, 15, 18 and the group2 synthesis. Nine reviewers across two rounds; all deterministic gates green at close.
+
+### The physics is unchanged and better supported
+
+The 7.6% H2 residual is the sigma-only restriction. Two independent routes agree, the corrected general-m kernel was re-derived from scratch by a reviewer (each of the three corrections individually necessary; the superseded form errs by 1e9 relative), and the eta selection rule, the one-body exactness in both code branches, and the azimuthal integrals all re-derived in agreement. A reviewer's own control -- **342 sigma functions still reach only 92.40%** against 98.95% from 54 with the channels open -- supports the causal claim more strongly than the paper's own.
+
+### What the two rounds found in the remediation
+
+- **The headline carried a digit it had not earned.** At (3,3), |m|<=1, cond(S) = 2e16: six of nine alpha in [0.90, 1.30] return NON-VARIATIONAL energies at the declared threshold -- including alpha = 1.00, the natural default -- and the value moves 99.15/99.09/98.99/98.41 across thresholds. Swept 22 loci to **99.1%**, kept the precise value only where alpha and the threshold are stated, added the measured envelope, and corrected "canonical orthogonalisation makes N=144 trustworthy" to "bounds, does not remove".
+- **Paper 18's Level-4 subsection was an undeclared dependent** carrying the withdrawn claim in its strongest form and using it to classify an exchange constant as *irreducible* and the Level-3/4 distinction as *qualitative*. Track M, the study it cited, imports the sigma-only basis -- its l_max extrapolation ran along the wrong axis. Re-priced. **Then the re-pricing itself had to be corrected**: it asserted both constants are "genuinely transcendental ... (the project's algebraic registry)" when that registry and Paper 18's own section both say mu(R) is *algebraic*, a root of P(R,mu)=0. It also flattened a structural distinction (pencil with a global characteristic polynomial vs piecewise with none) that is independent of the withdrawn one and survives it.
+- **The sign-flipped comparison.** Round 1 fixed "prolate spheroidal is the more accurate" in Paper 12 and then wrote the same defect into Paper 15 and the synthesis as "at matched angular content the ordering reverses" -- asserting a comparison while denying one, contradicting Paper 12 two documents away. Removed at all three.
+- **The promoted control measured a different calculation.** The Gaussian cross-check moved out of `debug/` used 8s3p (no d shell), computing 92.22/98.49 while the paper quotes 92.34/99.10. The d shell is now in the test and the bands are tight enough that removing it fires.
+- **The headline guard had no upper bound**, so loosening the discard threshold a decade either way left it green while the certified value left the paper's own envelope. Now bounded both sides with the threshold pinned; both directions fire.
+- Also: "all three discrepancies vanish at m = 0" was false -- the (2l+1) does not, and the sigma equation carries it from an independent derivation; a `[90, 94]` assertion band still hid the dropped-digit denominator error it was written for; the "2e-6" kernel figure was a point evaluation stated as a bound; "every variational point exceeds 98.4%" is false on the full grid (95.5%); and the cusp-advantage zombie survived in the synthesis body and its Paper-15 source.
+
+### Fire tests: ten cases, all as documented
+
+A/B (killed coupling, superseded prefactor), C/D (each exactness mechanism alone -- correctly does NOT fire, the two are redundant), E (both), F/G/H/I (headline guard vs killed coupling, disabled orthogonalisation, tightened and loosened threshold), J (control vs removed d shell). `debug/firetest_p12_azimuthal.py`.
+
+### Swept
+
+Paper 18 (+ its Claim 4 necessity wording), the group2 synthesis, the field guide, `docs/{validation_benchmarks,claim_test_matrix,topic_to_paper_lookup,paper_notes_archive}.md`, `docs/qa/group2.done.md`, README, CLAUDE.md Sec. 2 and the PI-directed Sec. 5 note, and the 63 generated site pages (regenerated from the corrected sources; DOI links intact, deploy is still PI-only). All `cited_by` dependents stamped; the retraction gate passes and still fires on planted text.
+
+### A pattern worth recording
+
+Four invented references this round -- a fabricated bibliography title and three LaTeX labels written from memory instead of grepped. The compile and internal-title gates caught every one, so none reached a reader. The cheaper fix is to look the label up before writing it.
+
+**PI note:** still a patch. The corpus-significant events (the retraction, the taxonomy re-pricing) were recorded in v5.11.18; this is its remediation.
+
+## [v5.11.18] - 2026-09-14
+
+**Paper 12's 7.6% H2 residual is the sigma-only restriction, not the electron-electron cusp -- and restoring the azimuthal channels in its own basis reaches 99.09% of D_e.** Follow-up to the 2026-09-13 accuracy-path scan, which surfaced Tao-McCurdy-Rescigno as the one published chemical-accuracy result in GeoVac's own Level-2 coordinate system. Canonical memo `debug/sprint_tmr_method_memo.md`; new module `geovac/prolate_general_m.py`; backing `tests/test_paper12_azimuthal_channels.py`; fire tests `debug/firetest_p12_azimuthal.py`, `debug/firetest_p12_retracted.py`.
+
+### The defect
+
+Paper 12's basis carries no azimuthal dependence, so it spans only `m1 = m2 = 0`, and its kernel is projected onto the `m = 0` Neumann component. The paper justified that as "`1Sigma_g+` states have m = 0 symmetry". A `1Sigma_g+` state constrains the **total** `M = m1 + m2`, not each `m_i`: every `pi^2` and `delta^2` configuration has `M = 0` and is `1Sigma_g+`, and those carry the **angular** part of the correlation. The two restrictions are mutually consistent, which is why the calculation converged cleanly to a wrong answer and no test caught it for a decade.
+
+### The measurement
+
+| (j,l) | N | sigma only | N | \|m\| <= 1 |
+|:--|--:|--:|--:|--:|
+| (2,2) | 27 | 92.25% | 54 | 98.96% |
+| (3,2) | 46 | 92.37% | 92 | 99.00% |
+| (3,3) | 72 | 92.42% | 144 | **99.09%** |
+
+`+11.64 mHa` at the largest basis. The sigma column reproduces Paper 12's published values to 161 / 1.6 / 1.0 / 6.7 / 58 uHa.
+
+**Not a basis-count effect** -- the control is Paper 12's own convergence table: `N = 27 -> 46 -> 72` buys **0.34 mHa**, while opening the azimuthal axis at fixed `(j,l)` buys **11.6 mHa**. Asserted as the discriminating test.
+
+### Three independent validations
+
+- mu = 0 V_ee reproduces `geovac.neumann_vee` (the recurrence-based, quadrature-free path) **elementwise to 1.1e-9**.
+- An independent Cartesian-Gaussian full CI -- different functions, different integrals, different code -- gives a sigma-only ceiling of **92.34%** (within **0.2 mHa** of Paper 12's value in an unrelated basis) and **99.10%** at `|m| <= 1`, against 99.09% here. Controls: H atom -0.499888, H2 at R=20 -0.999265, RHF -1.133270 vs the -1.13363 limit.
+- The general-m kernel reproduces `1/|r1-r2|` **pointwise to 2e-6**.
+
+### Two further defects in Paper 12, found by making m != 0 load-bearing
+
+- **Eq. `neumann_full` as printed was wrong**: missing `(-1)^m` and `(2l+1)`, factorial ratio unsquared. It diverges pointwise. Invisible for a decade because every calculation used only the `m = 0` specialisation, where all three discrepancies vanish. Corrected; the test asserts the old form FAILS, so it discriminates.
+- **Eq. `r12_prolate` omitted `cos(phi1 - phi2)`**, holding only at `phi1 = phi2`. Corrected.
+
+### Two numerical traps, both recorded in the module docstring
+
+- The Neumann sum terminates exactly only if the termination is **imposed**: the eta moment is identically zero for `l > Q + 2s - m`, but left to floating point the ~1e10 Legendre-derivative coefficients leave a residue the radial integral amplifies -- **E = -3.2e8 Ha** at `l_neumann = 18`. Now enforced twice (selection rule + l cap). The fire test showed the two are *redundant*: removing either alone does not break exactness, removing both does; the guard's docstring was corrected to claim only the conjunction.
+- **Paper 12's headline basis is linearly dependent**: `cond(S) = 2.6e14` at N = 72, `2.0e16` at N = 144. A direct `eigh(H,S)` returned **-79 Ha**. Canonical orthogonalisation throughout. Paper 12's published `-1.161304` sits **58 uHa below** the conditioned value, so the last two of its six decimals are linear dependence, not physics. No conclusion turns on them.
+
+### Dependents swept (Sec. 9 retraction -> dependents)
+
+- **Paper 12**: abstract, intro, Sec. `neumann`, Sec. `gap` (retitled, cusp reading withdrawn), the hierarchy list (its fourth level -- "hyperspherical for the coalescence cusp" -- removed, since it was presented as a consequence of this residual), conclusion, plus a new Sec. "Restoring the Azimuthal Channels".
+- **Paper 15**: its comparison of Level-4 `sigma+pi` (94.1%) against Paper 12 `sigma`-only (92.4%) was read as a cusp-resolution advantage for hyperspherical coordinates. Not like-for-like, and **the matched comparison reverses it**: 99.09% prolate vs 96.0% hyperspherical at l_max=6 with a cusp correction, and 99.97% for TMR. Withdrawn at 6 loci incl. abstract and conclusion.
+- **Paper 13**: its motivation cited Paper 12's diagnosis. Restated on independent grounds (helium's coalescence is genuinely three-body).
+- **group2 synthesis** (2 loci), `docs/validation_benchmarks.md`, `docs/claim_test_matrix.md` (3 new rows), the Paper-15 figure README, and `tests/test_level4_multichannel.py` (docstrings only -- **no assertion changed**, the 92.4 < pct < 100 band remains valid).
+- New `check_retracted_terms.py` entry `p12-cusp-as-the-h2-gap` with 6 declared `cited_by`, **fire-tested on three withdrawn formulations**.
+- 5 numeric-registry entries; the registry's own `test_every_convention_string_parses` caught their convention strings, so a new `accuracy` kind was added.
+
+### Scope, stated plainly
+
+`|m| = 2` was **not** obtained (the `d^4 Q_l` cancellations near `xi = 1` defeat this quadrature), so the delta contribution (~0.5 mHa) is known only from the Gaussian route. And the `mu > 0` radial integrals use a graded-panel spectral quadrature, **not** the `A_l/B_l/X_l` recurrences -- so the quadrature-free property does **not** yet extend to `mu > 0`. Generalising those three tables to associated Legendre functions is the open piece, now with a validated numerical reference to check against.
+
+### Gates
+
+C10 (compile, group2, 13 papers) / C14 / C21 / latex-escapes / retracted-terms (72/72 entries) all PASS. Regression: topo baseline + consumers + bearing-on set, 82 passed / 4 skipped. `tests/_durations.json` is still the known 2-byte stub, so the random tail-risk sample was skipped per the skill's documented fallback rather than silently widening scope.
+
+**PI note:** shipped as a patch per the Sec. 9 default, but this is a retraction that moves published claims across four documents and adds a QA registry entry -- arguably a minor. PI call.
+
 ## [v5.11.17] - 2026-09-13
 
 **`/qa group2` baseline FULL run - Batch 4 (Paper 58 + group2 synthesis C9 + completeness-critic) = FAIL, remediated. The group2 baseline (4 batches) is COMPLETE.** Five reviewers, tree frozen. The LARGE was a stale-echo the run's own completeness pass caught in *this session's Batch-3 work*.

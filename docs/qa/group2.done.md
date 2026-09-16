@@ -99,9 +99,13 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
 - **C8 (headline honesty), per-paper — the enumerated headlines + tiers.**
   - **Paper 11:** H$_2^+$ **0.0002%** energy (spectral Laguerre, $n_{\rm basis}=20$);
     the FD 1.01% is an *artifact* (must be flagged, not a competing result).
-  - **Paper 12:** H$_2$ Neumann $V_{ee}$ recovers **92.4%** of $D_e$ vs 80.1% numerical;
-    the **7.6%** gap is the cusp (a diagnosed limitation, stated as such). Algebraic
-    recurrence = *exact*; the surviving transcendental seed is named.
+  - **Paper 12:** H$_2$ Neumann $V_{ee}$ recovers **92.4%** of $D_e$ vs 80.1% numerical.
+    **AMENDED 2026-09-14:** the 92.4% is the **σ-only** ceiling, and the 7.6% gap is
+    the absent $m \neq 0$ configurations, **not** the cusp — restoring them in the same
+    basis reaches **99.1%**. The old watch-note ("the 7.6% gap is the cusp") is
+    retired; grading a corrected paper against it would mark the correction as a
+    defect. Algebraic recurrence = *exact* **for σ**; μ>0 uses spectral quadrature.
+    The surviving transcendental seed is named.
   - **Paper 13:** He **0.022% raw** ($l_{\max}=7$) / **0.004% cusp-corrected**
     ($l_{\max}=4$), 2D variational, *properly variational upper bounds*; the 0.05%
     single-channel adiabatic is **non-variational** (lucky cancellation — must be

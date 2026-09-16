@@ -920,6 +920,60 @@ MEASURED = {
     "composed_coeff_d": dict(
         value=30.03, convention="non-identity Pauli per qubit, d-block",
         provenance="MEASURED 2026-08-29; DENSER than main-group"),
+    # ---- Paper 12 azimuthal channels (2026-09-14) ------------------------
+    # The sigma-only restriction, not the cusp, is Paper 12's 7.6% residual.
+    # Memo: debug/sprint_tmr_method_memo.md.  Backing:
+    # tests/test_paper12_azimuthal_channels.py.
+    "p12_sigma_only_de_pct": dict(
+        value=92.42, convention="% of D_e at (j,l)=(3,3), H2 R=1.4011, sigma only, "
+                                "canonical orthogonalisation",
+        provenance="MEASURED 2026-09-14; Paper 12's own published 92.45 "
+                   "(E=-1.161304) is 58 uHa lower and reflects cond(S)=2.6e14 "
+                   "linear dependence rather than physics",
+        aliases={92.45: "Paper 12's unconditioned N=72 value",
+                 92.25: "(j,l)=(2,2), N=27"}),
+    "p12_azimuthal_de_pct": dict(
+        value=99.09, convention="% of D_e at (j,l)=(3,3), H2 R=1.4011, |m|<=1, "
+                                "alpha=1.25, canonical-orthogonalisation "
+                                "threshold 1e-11",
+        provenance="MEASURED 2026-09-14 in Paper 12's own basis; reproduced "
+                   "to 99.10 by an independent Cartesian-Gaussian full CI. "
+                   "NOT a stable fourth digit: at this basis cond(S)=2e16, the "
+                   "solver returns NON-VARIATIONAL values at a MAJORITY of "
+                   "alpha -- six of nine grid points over [0.90, 1.30] at the "
+                   "declared threshold, including alpha=1.00, the natural "
+                   "default (0.95 -> -277 Ha, 1.15 -> -4.1, 1.20 -> -8.1) -- "
+                   "and the value moves 99.14/99.09/98.99/98.41 across "
+                   "thresholds 1e-12/1e-11/1e-10/1e-8. Over the full "
+                   "(alpha, threshold) grid the weakest VARIATIONAL value is "
+                   "76.11% at (0.90, 1e-8), where the sigma-only solve gives "
+                   "91.06% -- i.e. the channels lose ground there; 95.5% is "
+                   "the floor only for alpha >= 1.10 and must not be quoted "
+                   "as a grid floor (C16: p12-grid-floor-955). Quote 99.1% at "
+                   "summary surfaces; the precise value only where alpha and "
+                   "threshold are stated. Envelope: 99.0-99.1%.",
+        aliases={98.96: "(j,l)=(2,2)", 99.00: "(j,l)=(3,2)",
+                 99.10: "independent Gaussian-basis route",
+                 99.14: "same point at threshold 1e-12 (measured 99.1446)",
+                 99.1: "the 3-s.f. value quoted at summary surfaces"}),
+    "p12_azimuthal_gain_mha": dict(
+        value=11.64, convention="mHa gained by opening |m|<=1 at (j,l)=(3,3)",
+        provenance="MEASURED 2026-09-14; the sigma-axis control over the same "
+                   "enlargement is 0.34 mHa"),
+    "p12_sigma_growth_mha": dict(
+        value=0.34, convention="mHa gained by N=27 -> 72 along the sigma axis",
+        provenance="MEASURED; read from Paper 12's own Table tab:convergence "
+                   "(92.2 -> 92.4 -> 92.4 % of D_e)"),
+    "p12_cond_s_33": dict(
+        value=2.6e14, convention="cond(S), (j,l)=(3,3) sigma only, N=72, "
+                                 "alpha=1.05 -- the value at which this "
+                                 "literal, the 2.0e16 for |m|<=1 and the "
+                                 "-79 Ha direct-eigensolve figure all land "
+                                 "together; at alpha=1.0 cond is 3.04e14. "
+                                 "It varies ~3x over alpha in [0.9,1.4], "
+                                 "~15x for |m|<=1",
+        provenance="MEASURED 2026-09-14; rises to 2.0e16 at |m|<=1, N=144"),
+
     "lih_composed_pauli": dict(
         value=837, convention="non-identity Pauli, LiH composed Q=30",
         provenance="MEASURED 2026-08-30",
@@ -1201,6 +1255,15 @@ _KINDS = (
     # pair-diagonal 2.76% as "the" density; family() leaves identity None
     # here, so check E compares rules instead of identity terms.
     ("density", ("density",)),
+    # Accuracy-side quantities (Paper 12 azimuthal channels, 2026-09-14):
+    # a percentage of D_e, an energy gain in mHa, a condition number.  No
+    # identity-in/out convention applies -- these count no Pauli terms -- so
+    # family() leaves identity None, as for `density` and `constant`.  What
+    # the convention string must still carry is the BASIS and truncation the
+    # number was measured at, because 92.25 and 92.42 are the same quantity
+    # at different (j_max, l_max) and pairing them would be the twin defect
+    # this registry exists to catch.
+    ("accuracy", ("% of d_e", "mha gained", "cond(s)")),
 )
 
 

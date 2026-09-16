@@ -421,7 +421,7 @@ def solve_level4_h2(
         print(f"  D_e        = {D_e:.6f} Ha  (exact: {D_e_exact:.6f})")
         print(f"  D_e / D_e_exact = {D_e_pct:.1f}%")
         if D_e_pct > 92.4:
-            print(f"  ** IMPROVES on Paper 12 Neumann V_ee (92.4%) **")
+            print(f"  ** above Paper 12 Neumann V_ee sigma-only (92.4%) -- NOT like-for-like: P12 |m|<=1 reaches 99.09% **")
         else:
             print(f"  Paper 12 Neumann V_ee achieved 92.4%")
         print(f"  Total time: {t2 - t0:.2f}s")

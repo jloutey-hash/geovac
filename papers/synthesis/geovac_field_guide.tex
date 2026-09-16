@@ -222,8 +222,8 @@ Level & System & Natural geometry & Best accuracy & Paper \\
 \midrule
 1 & H (1-center, 1e) & $\sthree$ (Fock) & $< 0.1\%$ & 7 \\
 2 & H$_2^+$ (2-center, 1e) & Prolate spheroid & $0.0002\%$ & 11 \\
-3 & He (1-center, 2e) & Hyperspherical & $0.004\%$ (cusp) & 13 \\
-4 & H$_2$ (2-center, 2e) & Mol-frame hyperspherical & $96.0\%$ $D_e$ & 15 \\
+3 & He (1-center, 2e) & Hyperspherical & $0.004\%$ (cusp-corrected;\ raw variational $0.022\%$) & 13 \\
+4 & H$_2$ (2-center, 2e) & Mol-frame hyperspherical & $96.0\%$ $D_e$ (cusp-corrected;\ prolate spheroidal at $|m|\le1$ reaches ${\sim}99.1\%$, Paper 12) & 15 \\
 5 & LiH (composed) & Composed (Level 3 $\otimes$ Level 4) & $5.3\%$ $R_{\mathrm{eq}}$ & 17 \\
 \bottomrule
 \end{tabular}
@@ -331,7 +331,10 @@ vanishes identically (Paper~45's degeneracy
 theorem~\cite{loutey_paper45}, with a bit-exact frozen falsifier).
 An earlier convergence claim through that device, together with the
 \emph{metric-level} strong-form and bridge convergence claims built on
-it (Papers~46, 48, 49), is withdrawn;\ the papers of record carry
+it (Papers~46, 48, 49), is withdrawn;\ those three and Paper~47 were
+archived on 2026-09-14 (\texttt{papers/archive/}, with their surviving
+content named in \texttt{docs/retired\_papers.md}), while Paper~45 remains
+live and load-bearing.  The papers of record carry
 Status notes.  What
 survives:\ the operator-system substrate (Paper~44), the four-witness
 modular-Hamiltonian results (Papers~42/43), the norm-resolvent
@@ -664,9 +667,14 @@ would require:
     finite cutoff, suggesting the pro-finite assembly may prove
     similarly tractable once the right transition-map machinery
     is in place.
-  \item \textbf{Non-commutative Mondino--S\"amann (Q2')}.  Paper~49 closes
-    the strong-form Krein--MS bridge (Q1$'$) on the enlarged-substrate
-    chirality-flipping generators.  The non-commutative analog of
+  \item \textbf{Non-commutative Mondino--S\"amann (Q2')}.  Paper~49
+    constructs the OSLPLS category and the strong-form bridge functor
+    (Q1$'$) on the enlarged-substrate chirality-flipping generators at the
+    categorical and cocycle-algebra level;\ its metric-level
+    $\Lambda$-inheritance is descoped by Paper~45's degeneracy theorem, so
+    this is a construction rather than a metric convergence (Paper~49 is
+    archived; see \texttt{docs/retired\_papers.md}).  The non-commutative
+    analog of
     Mondino--S\"amann pre-length-spaces (a non-commutative Lorentzian
     GH program built from spectral-triple data rather than causal
     diamonds) is the remaining substantial NCG-research target.

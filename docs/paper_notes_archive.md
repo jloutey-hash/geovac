@@ -106,7 +106,7 @@ Audience: quantum chemists, atomic/molecular structure community. Venues: J. Che
 |:------|:----:|:-----|:-----------|
 | 8–9 | GUARDRAIL | `Paper_8_Bond_Sphere_Sturmian.tex` | Bond sphere (positive), Sturmian structural theorem (H ∝ S, eigenvalues R-independent — **GUARDRAIL** for single-center molecular), SO(4) selection rules, multi-electron Sturmian CI negative result (v2.0.33) |
 | 11 | On-topic | `paper_11_prolate_spheroidal.tex` | Prolate spheroidal lattice: H2+ 0.0002% via spectral Laguerre |
-| 12 | On-topic | `paper_12_algebraic_vee.tex` | Neumann V_ee: H2 92.4% D_e, cusp diagnosis (7.6% gap) |
+| 12 | On-topic | `paper_12_algebraic_vee.tex` | Neumann V_ee: H2 92.4% D_e σ-only / 99.1% at |m|<=1; the 7.6% gap is the absent m != 0 channels (the cusp diagnosis is withdrawn, 2026-09-14) |
 | 13 | On-topic | `paper_13_hyperspherical.tex` | Hyperspherical lattice: He 0.019%, fiber bundle, ab initio spectroscopy |
 | 15 | On-topic | `paper_15_level4_geometry.tex` | Level 4: H2 96.0% D_e, HeH+ 93.1% D_e |
 | 17 | On-topic | `paper_17_composed_geometries.tex` | Composed geometry: LiH R_eq 5.3% with l-dependent PK; BeH₂ 11.7%; H₂O 26% |

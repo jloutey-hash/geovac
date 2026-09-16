@@ -463,10 +463,18 @@ content inherited from the angular coupling integrals.
 \label{sec:mu_level4}
 
 At Level~4 the compact product basis (prolate spheroidal CI) is fully
-algebraic but structurally incomplete; the non-compact mol-frame
+algebraic in its $\sigma$ sector, and the non-compact mol-frame
 hyperspherical reparameterization introduces $\mu(\rho,R)$ as the
-irreducible cost of accessing three-body coalescence physics that the
-compact description cannot represent.
+transcendental cost of that reparameterization.
+
+\textbf{[WITHDRAWN 2026-09-14]} Earlier versions of this subsection said
+more:\ that the product basis is \emph{structurally incomplete}, that
+$\mu(\rho,R)$ is \emph{irreducible} because that basis is ``structurally
+blind to three-body coalescence,'' and that the reparameterization
+``accesses physics the algebraic product space cannot represent at any
+practical basis size.''  All of that rested on a saturation which has since
+been re-diagnosed, and none of it survives;\ the paragraphs below give the
+corrected reading and what it costs this taxonomy.
 
 Level~4 combines the two-center complication of Level~2 with the
 two-electron complication of Level~3.  Two approaches exist, with
@@ -476,52 +484,134 @@ The product-space approach (prolate spheroidal CI, Paper~12) is
 fully algebraic: all electron-electron matrix elements are computed
 from Neumann expansion recurrence relations with zero spatial
 quadrature.  The Laguerre radial and Legendre angular matrix
-elements are likewise algebraic.  No transcendental constant
-appears anywhere in the computation.
+elements are likewise algebraic.  In the $\sigma$ sector no
+transcendental constant appears beyond the single one-dimensional
+quadrature Paper~12 records for its log-singular $B_l$ moment;\ the
+$|m| \ge 1$ extension leaves that sector, as the scope note below states.
 
-However, a systematic convergence study (Track~M) demonstrates
-that this algebraic approach saturates at $\sim$92.5\% of the
-exact dissociation energy $D_e$~\cite{loutey_track_m}.  The
-angular basis convergence is rapid---92.3\% at $l_{\max} = 2$
-(46 basis functions), 92.5\% at $l_{\max} = 4$ (114 basis
-functions)---but successive improvements decay by a factor of
-200 from $l = 1 \to 2$ to $l = 2 \to 3$, with the $l = 3 \to 4$
-increment contributing only 0.04\%.  Extrapolation in the slow
-regime predicts that 5\% error would require $l_{\max} \sim 45$
-and 1\% error $l_{\max} \sim 113$, both impractical.  The
-effective ceiling is 92.5\% $D_e$.
+Paper~12's convergence study finds that this approach saturates at
+$92.4\%$ of the exact dissociation energy $D_e$~\cite{loutey_paper12}:\
+$92.37\%$ at 46 basis functions and $92.42\%$ at 72, the last near-tripling
+of the basis buying $0.34$~mHa.
 
-The smoking gun is explicit correlation: 9~basis functions with
-$r_{12}^2$ factors (Hylleraas $p = 2$) achieve 94.7\% $D_e$,
-exceeding the 114-function prolate CI plateau.  The residual
-7.5\% matches Paper~12's cusp diagnosis (7.6\%): the
-electron-electron cusp ($1/r_{12}$ singularity) is a completeness
-deficiency of the product basis, not a convergence issue.
+\textbf{[WITHDRAWN 2026-09-14]} Earlier versions quoted a finer ladder here
+(``92.5\% at $l_{\max}=4$, 114 basis functions'', a decay ``by a factor of
+200'', and an extrapolation predicting $l_{\max}\sim45$ for $5\%$ error)
+from an unpublished track note.  That note has no permanent home, none of
+those figures is reproduced in Paper~12, and the extrapolation is in any
+case an extrapolation along the wrong axis---see below.  They are withdrawn
+rather than re-sourced.
+
+\textbf{[MEASURED 2026-09-14]} That saturation is real but it is a
+$\sigma$-\emph{sector} saturation, and the extrapolation ran along the
+wrong axis.  Track~M scanned $l_{\max}$ in a $\varphi$-independent basis,
+which spans only $m_1 = m_2 = 0$;\ a $^1\Sigma_g^+$ state constrains only
+the \emph{total} $M = m_1 + m_2$, so every $\pi^2$ and $\delta^2$
+configuration---which carry the angular correlation---was absent by
+construction.  Opening that axis in the same basis, with the same
+Neumann kernel, reaches ${\sim}99.1\%$ of $D_e$
+(Paper~12~\cite{loutey_paper12}, Sec.~``Restoring the Azimuthal
+Channels'').  The $\sigma$ axis does saturate---Paper~12's own
+convergence table buys $0.34$~mHa for $2.7\times$ the functions---but it
+saturates because it is the wrong axis, not because the product space is
+incomplete.
+
+\textbf{[SCOPE]} That $99.1\%$ is \emph{not} obtained with the same
+\emph{algebraic} $V_{ee}$:\ Paper~12's own scope note records that the
+$\mu > 0$ radial integrals leave the $A_l$, $B_l$, $X_l$ recurrences for a
+two-dimensional spectral quadrature, so the quadrature-free property holds
+in the $\sigma$ sector only.
+
+\textbf{[OPEN]} Whether that departure carries \emph{transcendental} content
+in this paper's sense is not settled here, and the question matters for the
+taxonomy.  Paper~12 describes the quadrature as an implementation state
+rather than a structural obstruction---generalising the three auxiliary
+tables to associated Legendre functions is ``well-defined but not attempted
+there''---which would make the $|m|\le1$ route carry no new exchange
+constant.  The Level-2 analogue points the other way:\ opening $m \neq 0$
+there is exactly how the embedding constant $e^aE_1(a)$ arises
+(Sec.~\ref{sec:stieltjes}), and the tier table's ``(none)'' entry for the
+prolate product space is a $\sigma$-sector entry with no counterpart row
+for $|m| \ge 1$.  An earlier version of this paragraph asserted the first
+reading as though it were established;\ it is not, and the taxonomy owes
+this row a price or a proof that there is none.
+
+The observation that looked like a smoking gun is explicit correlation:\
+adding $r_{12}$ factors to a small $\sigma$-only basis buys accuracy that
+many more $\sigma$ functions do not.  (Earlier versions quoted
+``$94.7\%$ with 9 functions'' from an unpublished track note;\ that note
+has no permanent home and the figure is not reproduced in Paper~12, whose
+nearest comparison reports $86.8\%$ with 18 $r_{12}$-bearing functions
+against $92.2\%$ for the algebraic $\sigma$-only route.  The qualitative
+point below does not depend on which run is quoted, so the specific
+number is withdrawn rather than repaired.)
+\textbf{[MEASURED 2026-09-14]} It is a real measurement and it points
+somewhere else than was read.  An $r_{12}$ factor supplies angular
+correlation, which is precisely what the absent $m \neq 0$ configurations
+were carrying;\ so does opening the azimuthal axis, and more cheaply
+still---$54$ functions at $|m| \le 1$ reach $98.95\%$.  Two different
+devices supplying the same missing ingredient is evidence about
+\emph{what was missing}, not evidence that a basis without either is
+structurally deficient.  The numerical coincidence between the residual
+$7.5\%$ here and Paper~12's $7.6\%$ is genuine, and both are now
+attributed to the same cause:\ the $\sigma$-only restriction.
 The transcorrelated approach (Paper~14, Sec.~IV; Paper~15,
-Sec.~VI.J) removes this singularity via a Jastrow similarity
+Sec.~VI.J) removes the $1/r_{12}$ singularity via a Jastrow similarity
 transformation, converting $1/r_{12}$ from a hard embedding
 constant to a smooth gradient operator at the cost of
 non-Hermiticity (Sec.~\ref{sec:taxonomy}).
 
-The mol-frame hyperspherical reparameterization (Paper~15)
-resolves this by introducing coordinates $(\rho, R, \alpha)$
-where $\rho$ is the electron hyperradius and $\alpha$ the
-hyperangle.  The angular eigenvalues $\mu(\rho, R)$ are now a
-transcendental function of \textit{two} continuous parameters,
-reflecting the simultaneous three-body coalescence in coordinate
-and configuration space.  This solver achieves 94.1\% $D_e$,
-surpassing the prolate CI ceiling.
+The mol-frame hyperspherical reparameterization (Paper~15) introduces
+coordinates $(\rho, R, \alpha)$ where $\rho$ is the electron hyperradius
+and $\alpha$ the hyperangle.  The angular eigenvalues $\mu(\rho, R)$ are
+a transcendental function of \emph{two} continuous parameters.  That
+solver achieves $94.1\%$ $D_e$ at $l_{\max} = 4$ with $\sigma$ and $\pi$
+channels.  \textbf{[SCOPE]} Earlier versions read this as ``surpassing the
+prolate CI ceiling.''  It is not a matched comparison---the $94.1\%$
+includes $\pi$ channels and the $92.5\%$ does not---and Paper~15 has
+withdrawn the coordinate-system reading it supported.
 
-The distinction between Levels~3 and 4 is qualitative.  At
-Level~3, the $S^3 \times S^3$ FCI converges (albeit slowly)---the
-exchange constant $\mu(R)$ is a computational convenience that
-accelerates convergence but is not fundamentally necessary.  At
-Level~4, the prolate product-space CI \textit{saturates}: the
-exchange constant $\mu(\rho, R)$ is irreducible because the
-product basis is structurally blind to three-body coalescence.
-The reparameterization does not merely accelerate convergence;
-it accesses physics that the algebraic product space cannot
-represent at any practical basis size.
+\textbf{[WITHDRAWN 2026-09-14]} Earlier versions closed here with a
+\emph{qualitative} distinction between Levels~3 and 4:\ that at Level~3
+$\mu(R)$ is a computational convenience while at Level~4 $\mu(\rho,R)$ is
+\emph{irreducible}, because the product basis ``saturates'' and is
+``structurally blind to three-body coalescence.''  The saturation was the
+$\sigma$-only restriction, so that distinction has lost its evidence and
+is withdrawn.
+
+\textbf{[OBSERVATION]} What stands in its place is a \emph{structural}
+distinction, which is independent of the withdrawn one and survives it
+intact.  At Level~3 the angular Hamiltonian is a linear matrix pencil, so
+$\mu(R)$ satisfies a global characteristic polynomial $P(R,\mu) = 0$ and
+is an \emph{algebraic} function over $\mathbb{Q}(\pi,\sqrt2)$---pointwise
+diagonalisation there is computational convenience, not necessity
+(Sec.~\ref{sec:mu} and Sec.~\ref{sec:algebraic_curve};\ Track~P1).  At Level~4 the split-region
+Legendre expansion breaks the pencil, and $\mu(\rho,R)$ is
+piecewise-algebraic with \emph{no} global characteristic polynomial
+(Track~S).  That is what separates the two levels in this taxonomy, and it
+is why the table below tiers them differently---``alg.\ (implicit)''
+against ``piecewise.''
+
+\textbf{[WITHDRAWN]} An earlier version of this paragraph said instead that
+both constants are ``genuinely transcendental \ldots\ with no known
+algebraic replacement,'' citing the project's algebraic registry.  That is
+the \emph{negation} of what the registry and Sec.~\ref{sec:mu} both
+state for $\mu(R)$, and it is withdrawn.  What is true of both is narrower:\
+neither has been shown \emph{necessary} for the energy, so neither earns
+the label irreducible on completeness grounds.
+
+\textbf{[OPEN]} What fell is the \emph{completeness} sense of
+irreducibility---that the product space cannot represent the physics.  Two
+other irreducibility results for Level~4 are untouched and should not be
+read as withdrawn with it:\ the geometric-elevation obstruction recorded
+under ``Irreducibility of the Level~4 piecewise structure'' below (three
+routes ruled out), and the structural one just stated (no global
+$P(\rho,\mu)$, Track~S).  What is now open is
+narrower:\ whether any Level-4 exchange constant is necessary for the
+\emph{energy}.  Answering it would require a product-space calculation
+that converges, or provably fails to converge, with the azimuthal axis
+open---which the $|m| \le 1$ result begins but does not finish, since
+$|m| = 2$ was not obtained there.
 
 
 %% ========================================================================
@@ -1503,7 +1593,7 @@ propose the following taxonomy:
   3 (FCI) & $S^3 {\times} S^3$ & (none) & (none) & algebraic \\
   3 (hyper.) & $\mathrm{SO}(6)$ reps & $S^5(R)$ param.
     & $\mu(R)$ & alg.\ (implicit) \\
-  4 (prolate CI) & prolate product & (none) & (none) & algebraic \\
+  4 (prolate CI) & prolate product & (none) & (none) & algebraic ($\sigma$) \\
   4 (hyper.) & $\mathrm{SO}(6)$ reps & $(\rho,R)$ param.
     & $\mu(\rho,R)$ & piecewise \\
   5 (composed) & Level 3+4 fibers & full $N$-electron
@@ -1577,8 +1667,14 @@ The taxonomy reveals a hierarchy of exchange types:
     off-diagonal residual concentrated on the $(1s,1s)$ coalescence
     pair-state.  The graph nearly diagonalizes $V_{ee}$ without
     containing $1/r_{12}$---direct evidence that the cusp is embedding
-    content the graph cannot absorb, explaining the graph-native CI
-    convergence floor (Paper~13, Track~DI).
+    content the graph cannot absorb.
+
+    \textbf{[WITHDRAWN 2026-09-14]} Earlier versions added that this
+    explains the graph-native CI convergence floor (Paper~13, Track~DI).
+    Paper~13 has since withdrawn that attribution, re-diagnosing the
+    floor as a small-$Z$ graph-validity-boundary artifact.  The
+    Frobenius-mass measurement above is unaffected;\ only the inference
+    from it to Paper~13's floor is withdrawn.
 
   \item \textbf{Algebraic (implicit) functions}: Functions of
     continuous parameters defined implicitly by $P(R,\mu) = 0$,
@@ -1600,8 +1696,11 @@ The taxonomy reveals a hierarchy of exchange types:
     $\rho$-dependence at the region boundary $\rho = 1/2$, breaking
     the linear pencil structure. The angular eigenvalues $\mu(\rho)$
     are piecewise-algebraic within each region but do not satisfy a
-    single global characteristic polynomial. The product-space CI
-    saturation at 92.5\% $D_e$ remains the key irreducibility result.
+    single global characteristic polynomial. (Earlier versions added
+    that ``the product-space CI saturation at 92.5\% $D_e$ remains the
+    key irreducibility result'';\ that saturation is now understood as a
+    $\sigma$-sector artifact and the irreducibility reading is withdrawn
+    --- Sec.~\ref{sec:mu_level4}.)
 
   \item \textbf{Composition constants}: The accuracy cost of
     factorizing a full $N$-electron wavefunction into composed
@@ -2871,8 +2970,8 @@ determined by what type of projection is needed to evaluate them.
   \item \textbf{Class~C (multi-particle correlated observables):}
     Correlation energies, adiabatic potential energy surfaces,
     multi-electron expectation values, and any quantity requiring
-    the inter-particle coordinate.  These require the higher exchange
-    constants: $e^a E_1(a)$ at Level~2 for $m \neq 0$ states
+    the inter-particle coordinate.  The higher exchange constants appear
+    here: $e^a E_1(a)$ at Level~2 for $m \neq 0$ states
     (Sec.~\ref{sec:stieltjes}), $\mu(R)$ at Level~3
     (Sec.~\ref{sec:mu}), $\mu(\rho,R)$ at Level~4
     (Sec.~\ref{sec:mu_level4}), and the PK composition constant
@@ -2889,8 +2988,24 @@ linking the graph description to the coordinate system in which the
 observable is defined.  Spectral observables (Class~S) require no
 transcendental content.  Single-particle spatial observables (Class~P)
 require the Weyl constants ($\pi^{d/2}$).  Multi-particle correlated
-observables (Class~C) require the embedding, flow, or composition
-exchange constants of Sec.~\ref{sec:taxonomy}.}
+observables (Class~C) are where the embedding, flow, or composition
+exchange constants of Sec.~\ref{sec:taxonomy} appear.}
+
+\medskip
+
+\noindent\textbf{[SCOPE 2026-09-14]} An earlier wording said Class-C
+observables \emph{require} those constants, and the abstract still states
+the claim in the stronger, observable-indexed form (``the transcendental
+content of any GeoVac observable is determined entirely by the type of
+projection'').  Sec.~\ref{sec:mu_level4} puts that under strain:\ the
+H$_2$ dissociation energy is a multi-particle correlated observable, and a
+prolate product space reaches ${\sim}99\%$ of it by a route whose exchange
+constant this paper has not yet priced.  Whether that is a counterexample
+to the strong form or a route that carries an unpriced constant is the open
+question recorded there.  Pending it, the body states the weaker claim---the
+classification tracks which constants \emph{appear} in a given evaluation
+route---and the two forms are not reconciled.  \textbf{This is a live
+tension in the paper's headline claim, not a settled scoping.}
 
 \medskip
 
@@ -2970,8 +3085,16 @@ Hamiltonian matrix has entries given by Gaunt integrals (rational)
 and the Slater $F^0$ direct Coulomb integrals (algebraic on $S^3$,
 Paper~7 Sec.~VI).  The FCI result (0.35\% error) demonstrates that
 the correlated energy \emph{can} be approximated within the
-algebraic framework, but the $\mu(R)$ parameterization is needed
-to achieve sub-0.1\% accuracy.  The transition from Class~S to
+algebraic framework, but the $\mu(R)$ parameterization was once
+thought necessary for sub-$0.1\%$ accuracy.
+
+\textbf{[WITHDRAWN 2026-09-14]} It is not, and the claim fails in both
+directions:\ the adiabatic route that \emph{carries} $\mu(R)$ floors at
+$0.19$--$0.20\%$ and never reaches sub-$0.1\%$, while sub-$0.1\%$ is
+reached \emph{without} it by the 2D variational solver, which treats $R$
+and $\alpha$ simultaneously ($0.022\%$ raw at $l_{\max} = 7$).  The
+Class-S to Class-C reading in the next sentence does not depend on the
+withdrawn necessity claim and is left standing.  The transition from Class~S to
 Class~C reflects the physical content: electron-electron
 correlation couples the two $S^3$ factors, and the coupling
 strength varies with the hyperradial coordinate $R$---a spatial
@@ -3020,12 +3143,16 @@ Two boundary cases clarify the classification:
 
   \item \textbf{Two-electron energies} computed via FCI on
     $S^3 \times S^3$ are formally Class~S (graph eigenvalues
-    of the product-space Hamiltonian), but achieve limited
-    accuracy due to the product-basis completeness deficiency
-    (Sec.~\ref{sec:mu_level4}).  High-accuracy two-electron
-    energies require the Class~C exchange constants.
-    The classification thus tracks both the type of observable
-    and the accuracy target.
+    of the product-space Hamiltonian).  \textbf{[SCOPE 2026-09-14]}
+    Earlier versions added that they ``achieve limited accuracy due to
+    the product-basis completeness deficiency'' and that ``high-accuracy
+    two-electron energies require the Class~C exchange constants.''  The
+    completeness deficiency was a $\sigma$-sector restriction
+    (Sec.~\ref{sec:mu_level4}), so the \emph{require} does not follow:\ a
+    product-space basis with the azimuthal axis open reaches ${\sim}99\%$
+    of $D_e$ without any Class~C constant.  What the classification tracks
+    is the type of observable;\ whether it also tracks an accuracy target
+    is no longer established.
 \end{itemize}
 
 The classification does not assert that one class is more
@@ -3115,14 +3242,22 @@ continuous parameters:
     any algebraic manipulation.  These are the genuine ``exchange
     constants'' in the Weyl--Selberg sense.
   \item \textbf{Algebraic functions of transcendental data:}
-    The adiabatic eigenvalues $\mu(R)$ and $\mu(\rho,R)$ are
+    The Level-3 adiabatic eigenvalues $\mu(R)$ are
     algebraic functions whose coefficients inherit transcendentals
-    from the coupling matrix.  The $R$-dependence (or $(\rho,R)$-dependence)
+    from the coupling matrix.  The $R$-dependence
     is algebraic at every truncation: $\mu$ satisfies a polynomial
     equation $P(R,\mu) = 0$ of degree $d$ equal to the matrix dimension.
     At $l_{\max} = 0$, $P$ is linear and $\mu(R)$ is an explicit
     rational function of $R$ (with transcendental coefficients).
     At $l_{\max} = L$, $P$ has degree $L+1$ in both $R$ and $\mu$.
+
+    \textbf{[SCOPE 2026-09-14]} An earlier version of this bullet extended
+    the same statement to the Level-4 angular eigenvalues $\mu(\rho,R)$.
+    It does not carry over as written:\ the construction above is a linear
+    matrix pencil $H_0 + R \cdot V_C$, which is what supplies the single
+    global $P(R,\mu) = 0$, and the Level-4 sweep is not of that form.
+    What the Level-4 eigenvalues are instead is not settled here---see
+    Sec.~\ref{sec:mu_level4}.
   \item \textbf{Calibration constant:} $\kappa = -1/16$ is rational
     (Sec.~\ref{sec:kappa_derivation}).
 \end{itemize}
@@ -3420,7 +3555,12 @@ instances; no further unification is currently visible.
 \paragraph{Verified and open.}
 The taxonomy has been validated across the full GeoVac hierarchy
 through Level~5; Claim~4 (transcendental content determined by
-projection type) has held across all tested cases.  What remains
+projection type) has held across all tested cases \emph{in its
+route-relative form}.  Its stronger, observable-indexed form---the one
+this paper's abstract states---is under strain from the Level-4
+azimuthal result of Sec.~\ref{sec:mu_level4}, and the two forms are not
+currently reconciled;\ see the open question recorded in
+Sec.~\ref{sec:observable_classification}.  What remains
 open: (i)~whether the three-axis classification of
 Theorem~\ref{thm:three_axis} predicts the physical two-loop
 coefficient (not just the transcendental class); (ii)~the
@@ -3447,7 +3587,10 @@ with zero free parameters.  Three-layer structure: (1)~rational
 (graph $h_1$ + Slater $V_{ee}$, 98.6\%); (2)~topological (graph
 off-diagonal $T_\pm$, calibration $\kappa$, dominant); (3)~transcendental
 (e-e cusp, embedding, ${\sim}0.14\%$ floor).  FCI basis invariance
-confirmed: the floor is embedding content (cusp), not basis mismatch.
+confirms only what the floor is \emph{not} (basis mismatch).
+\textbf{[WITHDRAWN 2026-09-14]} The cusp attribution stated here is
+withdrawn;\ Paper~13 now reads the floor as a small-$Z$
+graph-validity-boundary artifact.
 
 \paragraph{Note added v2.26.1 (Seeley--DeWitt cancellation).}
 On unit $S^{3}$, the Seeley--DeWitt coefficient ratio
@@ -3507,6 +3650,11 @@ J.~Loutey,
 ``The Molecular Fock Projection: Diatomic Molecules as Prolate
 Spheroidal Lattices,''
 GeoVac Paper~11 (2026).
+
+\bibitem{loutey_paper12}
+J.~Loutey,
+``Algebraic Two-Electron Integrals on the Prolate Spheroidal Lattice,''
+GeoVac Paper~12 (2026).
 
 \bibitem{loutey_paper13}
 J.~Loutey,
@@ -3602,11 +3750,6 @@ GeoVac supplementary material (2026).
 \bibitem{loutey_track_g}
 J.~Loutey,
 ``Track G: Perturbation Series for $\mu(R)$,''
-GeoVac supplementary material (2026).
-
-\bibitem{loutey_track_m}
-J.~Loutey,
-``Track M: Prolate CI $l_{\max}$ Convergence Study,''
 GeoVac supplementary material (2026).
 
 \bibitem{loutey_track_p1}

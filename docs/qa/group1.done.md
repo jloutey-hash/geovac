@@ -78,6 +78,22 @@ group1 paper restates them (C7).
   head-on while the descope is fresh.*
 
 ## Change log
+- 2026-09-15 — **WHOLE-GROUP FULL certifying run = FAIL -> REMEDIATED**
+  (v5.12.2), the first whole-group FULL since the 2026-06-24 bite-wise cert.
+  Live scope = 10 papers after the 46-49 archival + synthesis. 10-agent panel +
+  completeness-critic + 3 gap re-dispatches (all CLEAN). One LARGE dissolved
+  under verification into a `dirac_triangle_extended_verify.py` decomposition
+  bug (the "G2 (1,0)v(0,4) ratio 2.4" is a Schur-impossible mis-decomposition;
+  dimension-correct DT < 1). All real defects SMALL, remediated: false-2.4
+  backing note withdrawn + dimension-conservation guard (fire-tested); retired
+  "propinquity" labels -> state-space GH; P43 signature-blind caveat; P53
+  Thm 5.6 scoped to state-space GH (Latremoliere form conditional); 2 synthesis
+  present-tense-descoped clauses; P40 corollary tiers; Toyota M.->R.; P53 stale
+  bib titles. Headlines all re-derived SOUND; C4 clean. **NOT certified** -- a
+  FAILed+remediated FULL needs a clean DELTA before a certifying FULL can PASS.
+  PI items: (1) P40 Lem L3_interior "rigorous at all ranks" analytical tier
+  (no counterexample, but code can't verify -- primary-math call); (2) P50 S7
+  "DONE" untested (no external check possible). Memo: CHANGELOG v5.12.2.
 - 2026-06-16 — **DRAFTED** by PM for PI review (third pre-registered `/qa`
   target). Adds C14 (descope/partial status); flags C4 high-priority. Scope
   excludes trunk-certified 32/38. **Awaiting PI freeze** (sequenced after group3

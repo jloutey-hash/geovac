@@ -62,10 +62,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 43 `paper_43_lorentzian_extension.tex` | ACTIVE | Krein (3,1) extension at finite cutoff; Pythagorean orthogonality with 1/π² M1 signature |
 | 44 `paper_44_lorentzian_operator_system.tex` | ACTIVE | Lorentzian operator-system substrate; prop = 2 |
 | 45 `paper_45_lorentzian_propinquity.tex` | **DESCOPED** | Main theorem withdrawn (K⁺ seminorm ≡ 0, annihilation theorem); spatial statement unconditional; product-carrier S³×S¹ convergence rebuilt in the action-seminorm framework (2026-06-10, signature-agnostic) |
-| 46 `paper_46_strong_form_lorentzian_propinquity.tex` | **DESCOPED** | Strong-form claims pending product repair; Lemma 3.2 = the degeneracy diagnosis |
-| 47 `paper_47_two_rate_hybrid_convergence.tex` | PARTIAL | Norm-resolvent arrow + three-carrier identification stand; propinquity arrow descoped |
-| 48 `paper_48_krein_ms_bridge.tex` | PARTIAL | Bridge design conditional on repair; T3/T6 descoped |
-| 49 `paper_49_oslpls_strong_form_bridge.tex` | PARTIAL | Λ inheritance descoped; cocycle-deficit / TICI algebra survives |
+| 46--49 | **ARCHIVED 2026-09-14** | The strong-form Lorentzian tail. Moved to `archive/`; see the Archive table below and `docs/retired_papers.md`. Paper 45 stays: it is descoped but load-bearing (five healthy dependents, including Paper 38). |
 | 50 `paper_50_cft3_partition_function.tex` | ACTIVE | Bit-exact F-theorem match on S³ and S⁵ (Klebanov–Pufu–Safdi) |
 | 52 `paper_52_category_iii_correspondence.tex` | DRAFT | Positioning: spectral-triple discretization as Category III (non-holographic) |
 | 53 `paper_53_disk_propinquity.tex` | DRAFT | First manifold-with-boundary carrier; plane Bochner–Riesz reconstruction |
@@ -129,3 +126,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 10 `paper_10_nuclear_lattice.tex` | Early nuclear draft |
 | `paper_18_exchange_constants_v1.tex` | Superseded by current Paper 18 |
 | 21 `paper_21_geometric_vacuum_synthesis.tex` | Superseded by the two group syntheses |
+| 46 `paper_46_strong_form_lorentzian_propinquity.tex` | **Archived 2026-09-14.** Strong-form construction descoped (degenerate seminorm). *Survives:* Lemma 3.2, the degeneracy diagnosis. |
+| 47 `paper_47_two_rate_hybrid_convergence.tex` | **Archived 2026-09-14.** Propinquity arrow descoped. *Survives:* the norm-resolvent arrow and the three-carrier identification. |
+| 48 `paper_48_krein_ms_bridge.tex` | **Archived 2026-09-14.** Metric-level theorems open pending a repair the register records as closed. *Survives:* the bridge's categorical design. |
+| 49 `paper_49_oslpls_strong_form_bridge.tex` | **Archived 2026-09-14.** Λ inheritance descoped. *Survives:* the cocycle-deficit / TICI algebra. |
