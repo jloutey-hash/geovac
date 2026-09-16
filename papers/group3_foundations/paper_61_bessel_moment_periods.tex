@@ -455,19 +455,33 @@ individually but pinned by all of them jointly.
 
 \textbf{[MEASURED]} The second-cusp resurgence itself is now characterized in closed form.  The
 scale-integrated twist's one-mass expansion ($c_{2}\!\to\!0$, one scale collapsing) is Gevrey $(2n)!$-type, and
-its dominant Borel singularity---the Stokes-data \emph{location}---is
+its source-and-scale Borel singularity---the Stokes-data \emph{location}---is
 $z^{*}=-(\sqrt{c_{1}}\mp ib)^{2}=(b^{2}-c_{1})\pm 2i\sqrt{c_{1}}\,b$, with $|z^{*}|=c_{1}+b^{2}$ and
 trans-series action $\sqrt{z^{*}}=b+i\sqrt{c_{1}}$ (the source separation $b$ and the scale
 $\sqrt{c_{1}}$ fused into one complex action).  It is a $(z^{*}-w)^{3/2}$ branch
 (exponent $p=-\tfrac52$, measured cleanly) with amplitude in \emph{closed form},
 $2|A|=(c_{1}+b^{2})^{3/2}/(4\sqrt{\pi}\,\sqrt{c_{1}}\,b)$ (algebraic $\times\,1/\sqrt\pi$, the
 $1/\sqrt\pi$ from the $(1+\varepsilon)^{-5/2}$ boundary branch)---derived from the moment tail rate
-$\sqrt{c_{1}}-ib$ and validated at three parameter points (fit-to-closed-form ratio
-$0.988$--$0.989$, a uniform finite-order deficit converging to $1$).  This is the two-scale analog of the algebraic-Stokes closure of $N(D)$ in
-Paper~59, and the median-Borel resummation across the (complex, off-contour)
-singularity pair is unambiguous.  \textbf{[OPEN]} The residual step to the finite value is the
+$\sqrt{c_{1}}-ib$.  The extracted amplitude approaches this closed form
+\emph{monotonically from below} as the fitting window advances---a $1/n^{2}$
+finite-order deficit whose Richardson limit is $1$ to $\sim\!4\times10^{-4}$---and
+an integer-relation search excludes any algebraic factor but $1$
+\textbf{[SYMBOLIC + MEASURED at $(c_{1},b)=(0.2,0.5),\,(0.1,0.5),\,(0.3,0.5),\,(0.2,0.7)$;
+\texttt{tests/test\_paper61\_stokes\_amplitude.py}]}.  This is the two-scale analog
+of the algebraic-Stokes closure of $N(D)$ in Paper~59, \emph{on the small-$b$ side
+of a Stokes horizon}:\ $z^{*}$ is the dominant Borel singularity only while
+$|z^{*}|=c_{1}+b^{2}$ stays below the source-independent pure-scale action, and for
+$b\gtrsim\sqrt{3c_{1}}$---bracketed by the convergent $b=0.7$ ($|z^{*}|=0.69$) and the
+factorially divergent $b=1.0$ ($|z^{*}|=1.2$) extractions at $c_{1}=0.2$;\ the competing
+distance reads naturally as the pure-scale $|z|\approx4c_{1}$ but is not cleanly
+separated here---a nearer singularity dominates and the single-$z^{*}$ amplitude no
+longer controls the leading large-order growth.  The median-Borel resummation across
+the $z^{*}$ pair is therefore unambiguous only below that horizon.  \textbf{[OPEN]} The residual step to the finite value is the
 integration of this algebraic-Stokes trans-series over the Feynman family (the inner scale) and the
-modulus---the concrete form the two-scale Broadhurst--Dorigoni resummation takes here.  Brute
+modulus---the concrete form the two-scale Broadhurst--Dorigoni resummation takes here.  That
+integration sweeps $b$ across the $\sqrt{3c_{1}}$ horizon above, so it is a \emph{two-singularity}
+resummation---the source-and-scale $z^{*}$ pair together with the pure-scale action---not the
+single-$z^{*}$ closure the small-$b$ regime alone would suggest.  Brute
 high-precision quadrature is not a route \emph{in the $(s,t)$ or co-area frames}
 (complex-singularity- and fibre-cost-limited there);\ the $(k,w)$ refactorization
 Eq.~\eqref{eq:kw} removes exactly that obstruction and supplies the \emph{digits}, while the

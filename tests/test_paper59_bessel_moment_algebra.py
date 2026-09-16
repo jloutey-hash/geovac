@@ -229,3 +229,30 @@ def test_paper61_wronskian_constant_W0_is_pi_squared_over_rho_squared():
     half = sp.Rational(1, 2)
     assert sp.simplify(sym[half] / sp.pi ** 2 - 4) == 0
     assert sp.simplify(sym[half] / sp.pi ** 2).is_rational is True
+
+
+def test_paper61_monodromy_lies_in_sp4_Z():
+    """[SYMBOLIC] Paper 61 sec:bessel_algebra: B = pi*J with J an integer intersection
+    form, so the *monodromy* group lies in Sp_4(Z).  The B-values are pinned by
+    test_paper59_period_pairing_minus_pi_0_2pi; this pins the GROUP membership: the
+    exact-integer monodromy M0 around D=0 (Paper 59, Lefschetz-thimble basis)
+    preserves a NONDEGENERATE INTEGER symplectic form, i.e. there is an antisymmetric
+    integer Omega with det != 0 and M0^T Omega M0 = Omega.  Added v5.12.6."""
+    import itertools
+    import sympy as sp
+    M0 = sp.Matrix([[-1, 2, 2, 2], [-2, 3, 2, 2], [-2, 2, 3, 2], [2, -2, -2, -1]])
+    o = sp.symbols('o0:6')
+    Om = sp.Matrix([[0, o[0], o[1], o[2]], [-o[0], 0, o[3], o[4]],
+                    [-o[1], -o[3], 0, o[5]], [-o[2], -o[4], -o[5], 0]])
+    sol = sp.solve([(M0.T * Om * M0 - Om)[i, j] for i in range(4) for j in range(4)],
+                   list(o), dict=True)
+    assert sol, "M0 preserves no bilinear form"
+    Om = Om.subs(sol[0])
+    free = list(Om.free_symbols)
+    for vals in itertools.product([1, -1, 2, 0, 3], repeat=len(free)):
+        cand = Om.subs(dict(zip(free, vals)))
+        if all(e == int(e) for e in cand) and cand.det() != 0:
+            assert (M0.T * cand * M0 - cand) == sp.zeros(4, 4)   # invariant
+            assert cand.det() != 0                                # nondegenerate => Sp_4(Z)
+            return
+    assert False, "no nondegenerate integer invariant symplectic form for M0"

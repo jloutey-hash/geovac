@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.12.6] - 2026-09-16
+
+**Verify/harden of Paper 61's remaining targets — B=πΩ→Sp₄(ℤ) and the θ₃² conductor-4 mechanism — both CLEAN.** Continuation of the v5.12.5 pass; unlike the Stokes amplitude, these two turned up no defect and needed no caveat.
+
+- **B=πΩ → Sp₄(ℤ) confirmed.** Backing `test_paper59_bessel_moment_algebra.py` passes (incl. slow), and independent cross-checks reproduce it: Abel's identity gives Wronskian ∝ D⁻²; the branch-point data give W₀=π²/ρ² (all four ingredients: Σx_c=0, ∏Q'=−16w², Vandermonde=4iw/ρ²); and — the one gap in the backing — the exact-integer monodromy M₀ around D=0 **preserves a nondegenerate integer symplectic form** (M₀ᵀΩM₀=Ω, det Ω=9≠0), directly pinning "monodromy in Sp₄(ℤ)" rather than only inferring it from the 25-digit B=(−π,0,2π) concomitant. New test `test_paper61_monodromy_lies_in_sp4_Z` closes that gap.
+- **θ₃² conductor-4 mechanism confirmed.** Backing `test_paper59_theta_chi4.py` passes; independent checks reproduce r₂(n)=4Σ_{d|n}χ₋₄(d) against the true count of a²+b²=n (n≤60) and — the identity the test only asserts — **L(θ₃²,2)=Σr₂(n)/n²=4ζ(2)G** to the tail bound. All classical (Jacobi two-squares / theta constants), correctly used.
+
+No paper changes (both claims correct as stated). Diagnostic: `debug/p61_algebra_verify.py`.
+
+## [v5.12.5] - 2026-09-16
+
+**Verify/harden of Paper 61's second-cusp Stokes amplitude: confirmed where it applies, a coverage gap closed, and a two-singularity scope finding.** The [MEASURED] amplitude $2|A|=(c_1+b^2)^{3/2}/(4\sqrt\pi\sqrt{c_1}b)$ had no permanent backing test (only transient `debug/` drivers) and was validated only to ~1% ("fit-to-closed-form ratio 0.988–0.989"). PI-directed verify/harden pass, Stokes amplitude prioritized.
+
+- **Confirmed.** Where the source-and-scale singularity $z^*=-(\sqrt{c_1}-ib)^2$ dominates, the closed form is correct: the $z^*$-normalized large-order fit rises **monotonically from below** (0.982→0.986→0.989 at $c_1$=0.2,$b$=0.5), the $1/n^2$ residual Richardson-extrapolates to **1.0000 ± 0.0004**, and an integer-relation search uniquely selects the factor 1 (algebraic alternatives at 1.78–2.23×). Reproduced at (0.1,0.5),(0.3,0.5) [ratio 0.9885] and (0.2,0.7) [→0.991].
+- **Coverage gap closed.** New self-contained `tests/test_paper61_stokes_amplitude.py` (slow, passing) pins the amplitude with the hardened evidence (monotone + Richardson→1 + factor-exclusion; fire-testable). A test-authoring Richardson sign bug was caught and fixed before it landed.
+- **Two-singularity scope finding (the substantive one).** $z^*$ is the dominant Borel singularity only for $b<\sqrt{3c_1}$. At $b$=1.0 ($|z^*|$=1.2) the $z^*$-normalized extraction **diverges factorially and worsens at higher precision** (not a precision artifact) — a nearer, source-independent singularity dominates (naturally the pure-scale action $|z|\approx4c_1$, though the naive Borel-ratio estimator was too noisy to separate it cleanly for the complex-conjugate pair). So the single-$z^*$ amplitude does **not** control the leading resummation across the whole $(c_1,b)$ family: the paper's second-cusp resummation is a **two-singularity** problem, and the family integration crosses the $b=\sqrt{3c_1}$ Stokes horizon. Paper 61 §sec:modular caveated (evidence line strengthened, $b$-range bounded, resummation re-tagged two-singularity); the finite closed form stays [OPEN], sharpened. Diagnostics: `debug/_stokes_amp*.py`, `debug/_stokes_b_diag.py`, `debug/_stokes_borel_radius.py`.
+
 ## [v5.12.4] - 2026-09-15
 
 **Paper 58's permitted-density inflation has a closed form: it is BOUNDED, converging to $R_\infty = 289777/18471 \approx 15.69$ — it does not diverge with basis size.** The g-row inflation factor (13.8× at n_max=2, 15.0× at n_max=3) had been recorded as "increasing with basis size," an open reading on whether it saturates or grows. It saturates. Scoped and executed at PI direction, following the v5.12.3 closed-form candidate flag.
