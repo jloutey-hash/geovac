@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.3] - 2026-09-17
+
+**The V_ee IBP `corr` term as a 2D l-recurrence: DERIVED and PROVEN CORRECT — plus the diagnostic that reframes "float64-fast V_ee" onto the B-table seeds.** The remaining research piece of the #3 direct-build arc (the memo called it "the real remaining research"). Validation/diagnostic work on `debug/` drivers; no corpus claims moved (patch). Canonical memo `debug/sprint_direct_build_memo.md`.
+
+### The corr 2D l-recurrence (proven)
+
+The IBP `corr` — the ordered (ξ1>ξ2) Neumann integral, the one part of the X-table that does NOT factor into 1D moments — satisfies a clean 2D l-recurrence in the product-Laguerre index. Introduce independent P/Q orders (lp on ξ1 carrying d^mP_lp, lq on ξ2 carrying d^mQ_lq), G[lp,lq], with Ξ = I + Z/c = multiply-by-ξ (Z = symmetric tridiagonal multiply-by-z on the Laguerre basis) acting on ONE sub-index of each electron pair:
+- axis-P: (lp−m+1) G[lp+1,lq] = (2lp+1)(Ξ₁ G[lp,lq]) − (lp+m) G[lp−1,lq]
+- axis-Q: (lq−m+1) G[lp,lq+1] = (2lq+1)(Ξ₂ G[lp,lq]) − (lq+m) G[lp,lq−1]
+- corr = C_l = G[l,l]; and X_orth_l = outer(a_l,b_l) + outer(b_l,a_l) − C_l − C_lᵀ (a_l=A^{prod}, b_l=B^{prod}).
+
+Multiply-by-ξ does not move the region boundary ξ1=ξ2, so the recurrence commutes with the ordering — the load-bearing claim. Validated TWO independent ways (`debug/direct_vee_corr.py`): (A) selected C_l vs a direct 2D mpmath quadrature of the ordered integral — **~1e-28** (σ, l=0/2/4); (B) full X_orth_l vs `prolate_recondition._build_Xtab_mp` re-based, seeds ONLY at lp,lq∈{m,m+1} — **σ 2.0e-27, π 2.5e-28, δ 3.5e-30** (worst over l=0..6). The recurrence propagates exactly; the residual is dps-40 rounding. Float64 recipe: **mpf Q-rows (recessive Q_l → forward ×~15/step instability) + float64 P-axis (dominant P_l, stable) → machine-precision X_orth (~1e-16 all l)**; qaxis-f64 degrades (8e-17→2.7e-9 by l=8); pad must be ≥ l_hi−m (pad=4 breaks to relerr 2e3 at l=6). This is the "genuine 2D l-recurrence for the ordered integral" the v5.13.2 memo flagged as the hard core.
+
+### The diagnostic that reframes the goal (the substantive finding)
+
+The corr recurrence removes the dense mpf re-basing, but cProfile shows it is NOT yet a speed win — and pins why: the **mpmath-quadrature B-table seeds (`neumann_vee_general_m._seed_B`) are the universal V_ee bottleneck**. At (3,3,1): **95% of the *current* `vee_mp`** (139 s total; 540 `_seed_B` quads × 0.55 s) and **92% of the recurrence build** are B-seed quadrature. Padding amplifies it for the recurrence (higher p-range). So float64-fast V_ee is gated on the **B-seeds**, not the corr structure — and killing the B-seed quadrature speeds BOTH the existing mpf pipeline and the recurrence. σ (m=0) has a clean E_1/γ/ln closed form; m>0 hits the term-divergence obstruction (d^mQ_0 ~ (ξ−1)^{−m}; only the assembled d^mQ_l with intact (ξ²−1)^s is integrable) that sent `_seed_B` to quadrature in the first place — a regularized closed form or a p-recurrence is the clearly-scoped next-sprint target. RESUME block in the memo updated to that target.
+
+Structurally (§4 algebraic-first): the recurrence turns the corr into a π-free rational recurrence with the integer/rational Ξ operator, leaving the B-seed (E_1/γ) as the only transcendental input — i.e. the minimal Paper-34 content is now isolated in one place.
+
+Added: `debug/direct_vee_corr.py`. Changed: `debug/sprint_direct_build_memo.md` (RESUME block + new corr-recurrence section), `CLAUDE.md` (version + §2), `CHANGELOG.md`.
+
 ## [v5.13.2] - 2026-09-17
 
 **#3 V_ee corr-folding characterized as the hard core, and the arc consolidated for a context reset.** Documentation/analysis (patch; no code, no corpus claims moved).

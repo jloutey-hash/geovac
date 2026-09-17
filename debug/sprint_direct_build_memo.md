@@ -15,31 +15,91 @@ correlation (ledger 2026-08-23, elliptic-basis row).
 
 ## ►► RESUME HERE (next session) ◄◄
 
-**State (all validated, committed through v5.13.1):**
+**State (all validated, committed through v5.13.3):**
 - **One-body direct engine: DONE.** `debug/direct_onebody_engine.py` `build_direct_full`
   builds S + T + V_ne for all μ, float64, machine-exact vs mpf (7e-16), ~135× faster.
-- **V_ee: recurrence + assembly mechanism proven; NOT yet fast.** First-kind `A_l[a]`
-  z-Laguerre recurrence float64-exact (`debug/direct_vee_recurrence.py`); σ-sector V_ee
-  X+V assembly machine-exact (`debug/direct_vee_assembly.py`) but ≈mpf speed (mpf
-  product-poly re-basing bottleneck).
+- **V_ee corr 2D l-recurrence: DERIVED and PROVEN CORRECT (v5.13.3).** The IBP `corr`
+  (ordered ξ1>ξ2 Neumann integral) satisfies a clean 2D l-recurrence in the Laguerre
+  index with the small-coeff `Ξ = I + Z/c` multiply-by-ξ operator (see the "corr 2D
+  recurrence" section below). Reproduces the full mpf X-table (`_build_Xtab_mp` re-based)
+  to **mpf precision (1e-37..1e-27)** for σ/π/δ, seeds only at lp,lq∈{m,m+1}; independent
+  2D quadrature agrees to **~1e-28**. Float64 recipe established: **mpf Q-rows (recessive
+  Q_l, ×15/step instability) + float64 P-axis (dominant P_l, stable) → machine-precision
+  X_orth**; pad ≥ l_hi−m. Driver `debug/direct_vee_corr.py`.
+- **BUT the corr recurrence is NOT yet a speed win, and the reason is now pinned (v5.13.3
+  diagnostic):** the **mpmath-quadrature B-table seeds are the universal V_ee bottleneck**
+  — profiled at **95% of the *current* `vee_mp`** (139 s at (3,3,1): 540 `_seed_B`
+  quads × 0.55 s) and **92% of the recurrence build**. The corr recurrence removes the
+  dense re-basing but *shares* (and, via padding, *amplifies*) the B-seed cost. So
+  float64-fast V_ee is gated on the **B-seeds**, not the corr structure.
 
-**THE next task — the V_ee IBP `corr` term as a 2D `l`-recurrence** (the only thing
-between here and a fully float64-fast V_ee):
-1. Build `A^{prod}_l[a,a′]` and `B^{prod}_l[c,c′]` in float64 via the proven l-recurrence
-   with `Xi` on one axis (extends `direct_vee_recurrence.py`; B via mpf seed + downcast
-   or backward). → the A·B part of X, float64.
-2. **The hard piece:** `corr_orth = ⟨L_cL_c′|Ĝ_{a,a′}(ξ²−1)^s d^mQ_l⟩_{2c}` is a 2D
-   ordered integral coupling `d^mP_l`(ξ₁) and `d^mQ_l`(ξ₂) — needs a 2D `l`-recurrence
-   keeping both implicit (does NOT factor into 1D moments; float64 re-basing degrades).
-   Validate every step vs the mpf X-table (`prolate_recondition._build_Xtab_mp`).
-3. Then μ>0 (m≠0 couples different-μ products; Gegenbauer angular) + sparse assembly.
-4. Final validation: full V_ee (all μ) vs `prolate_recondition.vee_mp` + `_factored_cob`,
-   and the composed one-body + V_ee float64 pipeline vs the 99.767% headline.
+**THE next task — kill the B-table quadrature seeds (`_seed_B` in `neumann_vee_general_m`).**
+This is the single highest-leverage V_ee optimization; it speeds **both** the existing
+mpf pipeline AND the corr recurrence.
+1. **σ (m=0): clean closed form exists.** `B_0(p,c)=∫ξ^p Q_0 e^{-cξ}dξ` reduces to
+   `E_1`/γ/ln (the ln(ξ−1) branch: `J_-(p)=e^{-c}Σ_j C(p,j) j!(H_j−γ−ln c)/c^{j+1}`;
+   the ln(ξ+1) branch via incomplete gamma from lower limit 2). `B_1` from `B_0` via
+   Q_1=ξQ_0−1. mpmath has `mp.e1`, `mp.euler`, `mp.gammainc`. Implement + validate vs the
+   quad seeds, then the σ recurrence goes fully fast.
+2. **m>0 (π/δ): term-divergence obstruction.** The E_1 decomposition of `d^mQ_l` diverges
+   term-by-term (d^mQ_0 ~ (ξ−1)^{−m}; only the assembled d^mQ_l with the intact (ξ²−1)^s
+   is integrable) — this is exactly why `ngm._seed_B` uses quadrature. Options: a
+   *regularized* closed form (group the pole terms so the (ξ²−1)^s cancels before
+   integrating), OR a p-recurrence for B_l(p,c) seeded from a few low-p quads (the clean
+   IBP p-recurrence couples m,s and has a ξ=1 boundary term for s<m — needs care).
+3. Once B-seeds are fast: finish the corr recurrence assembly (μ>0 couples different-μ
+   products; jacobian ξ² shifts = `Ξ²` ops; eta Y from `direct_vee_assembly`) and validate
+   full V_ee vs `vee_mp` + the 99.767% headline.
+
+**Design note (settled v5.13.3):** X_orth_l = outer(a,b)+outer(b,a) − C_l − C_lᵀ with
+a=A^{prod}, b=B^{prod} (1D moments, A float64 / B mpf-seed+downcast) and C_l = the corr
+(2D recurrence). Jacobian (dP1,dP2)∈{0,2}² shifts are `Ξ₁^{dP1} · Ξ₂^{dP2}` on the base
+X_orth (like the one-body r2=Z²). Both electron-pair FIRST sub-indices need padding
+(Ξ leaks a→a±1). Q-axis and the seed re-basing must stay mpf (recessive-Q instability;
+large product-Laguerre monomial coeffs); P-axis and the O(N²) assembly are float64.
 
 **Resumption protocol (§9 current-state check):** this memo is dated; read CHANGELOG
-v5.13.0/.1 + Paper 12 Sec. "The monomial cap is conditioning" before continuing.
+v5.13.0..3 + Paper 12 Sec. "The monomial cap is conditioning" before continuing.
 Ground truth for everything: `prolate_recondition.vee_mp`/`one_body_mp` + `_factored_cob`.
-Drivers: `debug/direct_{orthobuild_probe,onebody_engine,vee_feasibility,vee_recurrence,vee_assembly}.py`.
+Drivers: `debug/direct_{orthobuild_probe,onebody_engine,vee_feasibility,vee_recurrence,vee_assembly,vee_corr}.py`.
+
+---
+
+## corr 2D l-recurrence — DERIVED and PROVEN (v5.13.3, `debug/direct_vee_corr.py`)
+
+**Object.** The IBP `corr` term of the Neumann X-table, re-based to the product-Laguerre
+index, is the ordered (ξ1>ξ2) integral
+  C_l[(a,a′),(c,c′)] = ∫∫_{ξ1>ξ2} R_{aa′}(ξ1) d^mP_l(ξ1) · R_{cc′}(ξ2) d^mQ_l(ξ2) e^{−c(ξ1+ξ2)},
+  R_{aa′}(ξ)=L_a(z)L_{a′}(z)(ξ²−1)^s, z=c(ξ−1), c=2α,
+and the full X entry is X_orth_l = outer(a_l,b_l)+outer(b_l,a_l) − C_l − C_lᵀ (verified
+against `I1 = A(P1)B(P2) − corr(W[P1],P2)` in `_build_Xtab_mp`).
+
+**Recurrence.** Introduce independent orders lp (P-side, ξ1) and lq (Q-side, ξ2),
+G[lp,lq], with Ξ = I + Z/c = multiply-by-ξ acting on ONE sub-index of each electron pair
+(Z = symmetric tridiagonal multiply-by-z on the Laguerre basis, Z[n,n]=2n+1,
+Z[n,n±1]=−(n+1 or n)):
+  axis-P: (lp−m+1) G[lp+1,lq] = (2lp+1) (Ξ₁ G[lp,lq]) − (lp+m) G[lp−1,lq]
+  axis-Q: (lq−m+1) G[lp,lq+1] = (2lq+1) (Ξ₂ G[lp,lq]) − (lq+m) G[lp,lq−1]
+  C_l = G[l,l].
+Multiply-by-ξ does not move the region boundary ξ1=ξ2, so the recurrence commutes with the
+ordering — the load-bearing claim, and it holds (validation below). Seeds G[{m,m+1}²]
+re-based from the monomial ordered integral (`ngm._corr` generalized to lp≠lq).
+
+**Validation (`debug/direct_vee_corr.py`).**
+- (A) selected C_l vs independent 2D mpmath quadrature: **~1e-28** (σ, l=0/2/4).
+- (B) full X_orth_l vs `_build_Xtab_mp` re-based, seeds only at lp,lq∈{m,m+1}:
+  **σ 5e-37..2e-27, π 8e-36..2e-28, δ 2e-37..4e-30** over l=0..6. The recurrence
+  propagates exactly; the mild growth is dps-40 rounding.
+- Float64: qaxis='mpf' (Q-rows mpf, P-axis f64) is **~1e-16 for all l**; qaxis='f64'
+  degrades ×~15/step (recessive-Q instability, 8e-17→2.7e-9 by l=8); pad<l_hi−m breaks
+  catastrophically (relerr 2e3 at l=6, pad=4). → mpf Q-rows required.
+
+**Why not yet fast — the B-seed bottleneck (the v5.13.3 diagnostic).** cProfile: the
+padded seeds' `_B_table` mpmath quadrature is 92% of the build; the *current* `vee_mp`
+is 95% the same `_seed_B` quads. So the recurrence is the right *structure* (banded,
+π-free Ξ operator; §4 algebraic-first — the corr becomes a rational recurrence, and the
+only transcendental input is the B-seed, i.e. the minimal Paper-34 content), but the
+binding constraint is the B-table quadrature. Next sprint targets that (RESUME block).
 
 ---
 
