@@ -88,11 +88,64 @@ whether the WHOLE pipeline goes float64-fast. Feasibility diagnostic run 2026-09
   the small-coeff Z/D operators.
 - **Real path:** derive the Neumann A_l/B_l/X_l recurrences in the **z-argument
   Laguerre basis** (the 2D-ordered-ξ analog of the one-body Z-operator), so the X-table
-  is built and contracted float64-clean. This is the genuine research core of #3 — a
-  focused multi-step sprint, NOT a quick prototype. Until then the mpf V_ee
-  (`prolate_recondition.vee_mp` + `_factored_cob`) is the working (slower) path, and it
-  composes with the now-float64-fast one-body engine.
+  is built and contracted float64-clean.
 
 Diagnostic: `debug/direct_vee_feasibility.py`.
+
+### V_ee z-recurrence — STARTED (`debug/direct_vee_recurrence.py`)
+
+Laguerre-indexed Neumann moments A_l[a] = ⟨L_a|(ξ²−1)^s d^mP_l⟩, B_l[a] with d^mQ_l.
+The associated-Legendre l-recurrence, re-based to the Laguerre index, makes
+multiply-by-ξ the **small-coeff Xi = I + Z/2α operator**:
+  (l−m+1) A_{l+1} = (2l+1) Xi·A_l − (l+m) A_{l−1},  seeded at l = m, m+1.
+
+- **First kind A_l[a]: float64-clean, PROVEN.** relerr vs mpf = 5–8e-16 through l=20
+  (m=0/1/2, n_r=11). Same padding lesson as the one-body: Xi couples a↔a±1, so build
+  padded (pad ≥ l_max−m) and truncate — else the boundary leak accumulates over the
+  l-steps (degrades at l≈n_r+1 without padding).
+- **Second kind B_l[a]: forward float64 UNSTABLE** (minimal-solution instability — Q_l
+  is recessive, forward amplifies the dominant P_l; error ×~50/step, 3.6e-15@l=2 →
+  2.6e9@l=16). Fix (contained): compute B in mpf (ngm-style small one-time table) and
+  **downcast** — accurate because B values are small (instability is in *computing*
+  them in float64, not representing them); or a backward/Miller recurrence for a pure
+  float64 build. This is the ngm "quadrature-seeded" cost, which is small.
+
+**Why this gives a float64-fast V_ee:** A and B are already Laguerre-indexed, so the
+ordered-ξ X-table and the O(N²) V assembly contract in the Laguerre index — NO monomial
+dynamic-range issue, unlike re-basing V_mono. The main l-loop (A) is float64; only the
+small B seed-table touches mpf.
+
+### V_ee X+V assembly — sigma sector VALIDATED (`debug/direct_vee_assembly.py`)
+
+The full σ-sector (μ=0, m=0) V_ee is assembled in the orthogonal basis and validated
+**machine-exact vs the mpf pipeline: relV = 2.6e-15 at (2,2), 5.3e-14 at (3,3)**. The
+X+V mechanism is proven correct:
+- re-base ngm's validated X-table (incl. the IBP `corr`) and eta moments Y per (l,m,s)
+  to the PRODUCT-orthogonal index — X_orth[(a_i,a_j),(c_i,c_j)] = PP·X·PPᵀ with
+  PP[(a,a′),P] the product-poly L_a·L_a′ coeffs; Y_orth[(b_i,b_j)] likewise;
+- vectorized float64 assembly: V = pref Σ_l npre Σ_jac sgn·X_orth[dP1,dP2]·Y_orth[dQ1]·Y_orth[dQ2],
+  gathering the radial/angular PAIR indices per (i,j).
+
+**But it is NOT yet faster** (8s/12s ≈ same as mpf): the X_orth build uses the mpf
+product-poly re-basing (PP has large ξ-monomial coeffs → must stay mpf), which costs
+~as much as the dense change of basis. The correctness is banked; the speed is not.
+
+### Remaining for a FAST V_ee (the speed layer)
+
+1. **Replace the mpf X_orth re-basing with the float64 `A^{prod}`/`B^{prod}` recurrence.**
+   The A·B part of X factors: X = A_l(P1)B_l(P2)+A_l(P2)B_l(P1) − corr, and
+   Σ PP[P]A_l(P) = A^{prod}_l[a,a′] = ⟨L_a L_a′|(ξ²−1)^s d^mP_l⟩, which obeys the SAME
+   proven l-recurrence with Xi on one axis:
+     (l−m+1)A^{prod}_{l+1} = (2l+1)(Xi @ A^{prod}_l) − (l+m)A^{prod}_{l−1}, float64-clean.
+   B^{prod} likewise (mpf-seed + downcast, or backward, since forward is unstable).
+2. **Fold the IBP `corr` term** into the product-orthogonal basis — the one intricate
+   piece: Σ_{P1} PP[P1]·corr(Wf[P1],P2) = corr applied to (L_aL_a′)(ξ²−1)^s d^mP_l vs
+   B at 2c. Needs a clean re-expression (or compute the corr contribution separately).
+3. **μ>0 extension:** the m≠0 Neumann terms couple μ_i≠μ_j (different-μ product
+   Laguerre L_a^{(μ_i)}·L_a′^{(μ_j)}, weight (ξ²−1)^{(μ_i+μ_j+m)/2}); Gegenbauer angular.
+4. Vectorized float64 assembly (already validated for σ), sparse for very large N.
+
+Drivers: `debug/direct_vee_recurrence.py` (A_l/B_l recurrence), `debug/direct_vee_assembly.py`
+(σ X+V assembly, validated). Ground truth: `prolate_recondition.vee_mp` + `_factored_cob`.
 
 Drivers: `debug/direct_orthobuild_probe.py`, `debug/direct_onebody_engine.py`.

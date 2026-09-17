@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.1] - 2026-09-17
+
+**#3 V_ee follow-on: the z-argument recurrence and the X+V assembly are both validated — the float64-fast V_ee path is proven correct (the speed layer, IBP-corr folding, is the remaining piece).** Diagnostic/validation work; no corpus claims moved (patch). Memo `debug/sprint_direct_build_memo.md`.
+
+- **First-kind Neumann moment A_l[a] in the z-Laguerre basis, float64-clean** (`debug/direct_vee_recurrence.py`). The associated-Legendre l-recurrence re-based to the Laguerre index makes multiply-by-ξ the small-coeff Xi = I + Z/2α operator: (l−m+1)A_{l+1} = (2l+1)·Xi·A_l − (l+m)A_{l−1}. Validated float64-exact vs mpf (5–8e-16 through l=20, m=0/1/2). Same padding lesson as the one-body (pad ≥ l_max−m, truncate at end). Second-kind B_l forward is unstable (Q_l minimal solution, ×~50/step) → mpf small seed-table + downcast (accurate, values small) or a backward recurrence.
+- **σ-sector V_ee X+V assembly, machine-exact** (`debug/direct_vee_assembly.py`). Re-base ngm's validated X-table (incl. IBP corr) + eta moments to the product-orthogonal index, vectorized float64 assembly: relV = 2.6e-15 at (2,2), 5.3e-14 at (3,3) vs `vee_mp` re-based. The X+V mechanism is proven correct.
+- **Speed bottleneck pinned:** the X-block build uses mpf product-poly re-basing (large ξ-monomial coeffs → must stay mpf), so direct ≈ mpf timing. Correctness banked, speed not. The fast layer needs: (1) the float64 A^{prod}/B^{prod} recurrence (extends the proven A_l, Xi on one axis) for the A·B part; (2) folding the IBP corr term (its WP = (L_aL_a′)(ξ²−1)^s d^mP_l carries large Legendre coeffs → needs its own recurrence treatment) — the one intricate piece, starting next; (3) μ>0 (m≠0 couples different-μ products).
+
+- Added: `debug/direct_vee_recurrence.py`, `debug/direct_vee_assembly.py`. Changed: `debug/sprint_direct_build_memo.md`, `CLAUDE.md` (version + §2), `CHANGELOG.md`.
+
 ## [v5.13.0] - 2026-09-17
 
 **H₂ moves to Level 2 in the natural-geometry hierarchy (PI-directed), and the #3 follow-on delivers a complete float64 one-body direct engine (validated, ~135× faster than the mpf pipeline) plus a diagnostic that scopes the float64-fast V_ee.** Minor bump: a change to the natural-geometry hierarchy (§5) is a corpus-significant event per §9. Canonical memo `debug/sprint_direct_build_memo.md`.
