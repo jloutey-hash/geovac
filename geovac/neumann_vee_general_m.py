@@ -21,10 +21,16 @@ differentiating Q_l at high order:
     e^{-c xi} [d^m Q_l](xi) dxi is built by the associated-Legendre FORWARD
     l-recurrence
         (l-m+1) B_{l+1}(p) = (2l+1) B_l(p+1) - (l+m) B_{l-1}(p),
-    seeded at l = m, m+1 by 1D mpmath quadrature.  The weight (xi^2-1)^s is
-    carried INTACT (never expanded into xi-powers: the bare xi^p d^m Q_l moment
-    diverges for m >= 1, and only the intact (xi^2-1)^s with s >= m/2 regularises
-    the xi = 1 endpoint).
+    seeded at l = m, m+1 in CLOSED FORM (:func:`_seed_B_closed`; no quadrature).
+    s >= m always holds physically (s=(mu_i+mu_j+m)/2, m in {mu_i+mu_j,|mu_i-mu_j|}),
+    so multiplying d^mQ_l = sum_a C(m,a) d^aP_l d^{m-a}Q_0 - d^mW_{l-1} by the
+    INTACT (xi^2-1)^s = (xi-1)^s (xi+1)^s fully polynomializes every pole term
+    d^kQ_0 ~ (xi-1)^{-k} (k=m-a<=m<=s):  (xi^2-1)^s d^kQ_0 =
+    coeff_k[(xi-1)^{s-k}(xi+1)^s - (xi-1)^s(xi+1)^{s-k}], both polynomials.  The
+    ONLY transcendental piece is the a=m log-moment against Q_0, whose primitive
+    L_n(c) = int xi^n Q_0 e^{-c xi} is closed-form in E_1, Euler gamma and ln
+    (:func:`_L_moments`).  (This retires the earlier quadrature seeding, which was
+    95% of vee_mp; the seed values are identical and the energy is bit-unchanged.)
 
   * The 2D ordered X_l^{m,s}(P1,P2) is assembled from A/B at c and 2c by the same
     integration-by-parts monomial split as :func:`geovac.neumann_vee.compute_Xl`,
@@ -35,11 +41,12 @@ cancel cleanly; the X assembly runs in float64 (the Neumann prefactor
 (-1)^m (2l+1) [(l-m)!/(l+m)!]^2 suppresses the large-l blocks where float64
 monomial cancellation would bite, so the physical energy is unaffected).
 
-Scope: this is a "recurrence-stable, quadrature-seeded" engine, not a fully
-quadrature-free one -- the low-l seeds use 1D mpmath quadrature, exactly as
-:mod:`geovac.neumann_vee` seeds its B_l tables by ``scipy.integrate.quad``.  The
-angular (eta) moments, the selection rule, and the Neumann prefactor are the
-algebraic objects of :mod:`geovac.prolate_general_m` and are reused unchanged.
+Scope: with the closed-form B seeds this engine is now fully QUADRATURE-FREE --
+the only transcendental inputs are E_1(2c), Euler gamma and ln c (the minimal
+Paper-34 content, isolated in :func:`_L_moments`).  The quadrature reference
+:func:`_seed_B` is retained for the backing test only.  The angular (eta)
+moments, the selection rule, and the Neumann prefactor are the algebraic objects
+of :mod:`geovac.prolate_general_m` and are reused unchanged.
 
 Validated: reduces to :mod:`geovac.neumann_vee` at m = 0 (~1e-9 elementwise);
 matches a high-precision reference for X_l^{m,s} to ~5e-12 through l = 8, m <= 4
@@ -229,14 +236,121 @@ def _seed_B(l: int, m: int, s: int, p: int, c) -> mp.mpf:
     return mp.quad(f, pts)
 
 
+# ------------------------------------------------------------------
+# Closed-form B seeds (no quadrature).  The B integrand
+#   xi^p (xi^2-1)^s d^mQ_l  with  d^mQ_l = sum_a C(m,a) d^aP_l d^{m-a}Q_0 - d^mW_{l-1}
+# splits so that -- because s >= m always holds physically (s=(mu_i+mu_j+m)/2,
+# m in {mu_i+mu_j,|mu_i-mu_j|}) -- every pole term d^kQ_0 ~ (xi-1)^{-k}, k=m-a<=m<=s,
+# is FULLY POLYNOMIALIZED by the intact (xi^2-1)^s weight:
+#   (xi^2-1)^s d^kQ_0 = coeff_k [ (xi-1)^{s-k}(xi+1)^s - (xi-1)^s(xi+1)^{s-k} ],
+# both polynomials.  The ONLY transcendental piece is the a=m log-moment against Q_0.
+# So  B_l^{m,s}(p,c) = <xi^p(xi^2-1)^s d^mP_l | Q_0>_c + sum_n poly_rest[n] A_n(c),
+# with the log-moment primitive L_n(c) closed-form in E_1, Euler gamma and ln.
+
+def _L_moments(n_max: int, c) -> List:
+    r"""L_n(c) = int_1^inf xi^n Q_0(xi) e^{-c xi} dxi, n=0..n_max (closed form).
+
+    L_n = 0.5 (Lp_n - Lm_n),
+      Lm_n = e^{-c} sum_{j<=n} C(n,j) j! (H_j - g - ln c)/c^{j+1},
+      Lp_0 = (ln2 e^{-c})/c + (e^c/c) E_1(2c),
+      Lp_n = (e^{-c} ln2)/c + (n/c) Lp_{n-1} + R_n/c,
+      R_n  = sum_{i<n} (-1)^i A_{n-1-i}(c) + (-1)^n e^c E_1(2c).
+    """
+    c = mp.mpf(c)
+    ec = mp.e ** (-c)
+    ecp = mp.e ** c
+    ln2 = mp.log(2)
+    lnc = mp.log(c)
+    g = mp.euler
+    E1_2c = mp.e1(2 * c)
+    A = _mono_moments(c, n_max + 1)
+
+    Lm = []
+    for n in range(n_max + 1):
+        tot = mp.mpf(0)
+        H = mp.mpf(0)
+        for j in range(n + 1):
+            if j >= 1:
+                H += mp.mpf(1) / j
+            tot += mp.binomial(n, j) * mp.factorial(j) * (H - g - lnc) / c ** (j + 1)
+        Lm.append(ec * tot)
+
+    Lp = [(ln2 * ec) / c + (ecp * E1_2c) / c]
+    for n in range(1, n_max + 1):
+        R = mp.mpf(0)
+        for i in range(n):
+            R += (-1) ** i * A[n - 1 - i]
+        R += (-1) ** n * ecp * E1_2c
+        Lp.append((ec * ln2) / c + (n * Lp[n - 1]) / c + R / c)
+
+    return [mp.mpf('0.5') * (Lp[n] - Lm[n]) for n in range(n_max + 1)]
+
+
+@lru_cache(maxsize=None)
+def _xm1_pow(j: int) -> Tuple:
+    """(xi-1)^j coeffs (low->high)."""
+    out = [mp.mpf(1)]
+    base = [mp.mpf(-1), mp.mpf(1)]
+    for _ in range(j):
+        out = _polymul(out, base)
+    return tuple(out)
+
+
+@lru_cache(maxsize=None)
+def _xp1_pow(j: int) -> Tuple:
+    """(xi+1)^j coeffs (low->high)."""
+    out = [mp.mpf(1)]
+    base = [mp.mpf(1), mp.mpf(1)]
+    for _ in range(j):
+        out = _polymul(out, base)
+    return tuple(out)
+
+
+def _seed_B_closed(l: int, m: int, s: int, p: int, Lmom: List, A: List) -> mp.mpf:
+    """Closed-form B_l^{m,s}(p,c) seed (requires s >= m).  Lmom = _L_moments(.,c),
+    A = _mono_moments(c,.); both large enough for degree p + 2s + l."""
+    # log-moment of poly_A = xi^p (xi^2-1)^s d^mP_l  ( = _W_poly )
+    poly_A = _W_poly(l, m, s, p)
+    log_mom = sum((poly_A[n] * Lmom[n] for n in range(len(poly_A)) if poly_A[n] != 0),
+                  mp.mpf(0))
+    # polynomial remainder
+    xi2m1s = list(_xi2m1_poly(s))
+    if l >= 1:
+        rest = _polymul(xi2m1s, [-cc for cc in _polyder(list(_W_lm1_poly(l)), m)])
+    else:
+        rest = [mp.mpf(0)]
+    Pl = list(_leg_coeffs(l))
+    for a in range(m):
+        k = m - a
+        daP = _polyder(Pl, a) if a > 0 else Pl
+        coeff_k = -((-1) ** (k - 1)) * mp.factorial(k - 1) * mp.mpf('0.5')
+        t1 = _polymul(list(_xm1_pow(s - k)), list(_xp1_pow(s)))
+        t2 = _polymul(list(_xm1_pow(s)), list(_xp1_pow(s - k)))
+        polyQ = [coeff_k * (t1[i] - (t2[i] if i < len(t2) else 0)) for i in range(len(t1))]
+        if len(t2) > len(t1):
+            polyQ += [coeff_k * (-t2[i]) for i in range(len(t1), len(t2))]
+        contrib = [mp.binomial(m, a) * cc for cc in _polymul(daP, polyQ)]
+        rest = _polyadd(rest, contrib)
+    rest = _shift(rest, p)
+    mono_mom = sum((rest[n] * A[n] for n in range(len(rest)) if rest[n] != 0), mp.mpf(0))
+    return log_mom + mono_mom
+
+
 def _B_table(m: int, s: int, l_max: int, p_max: int, c) -> Dict[Tuple[int, int], mp.mpf]:
-    """B_l^{m,s}(p,c), l = m..l_max, p = 0..p_max, by forward l-recurrence."""
+    """B_l^{m,s}(p,c), l = m..l_max, p = 0..p_max, by forward l-recurrence.
+
+    Seeds (l = m, m+1) are closed-form (:func:`_seed_B_closed`); no quadrature.
+    """
+    c = mp.mpf(c)
     need = p_max + (l_max - m) + 1
+    n_tab = need + 2 * s + (m + 1) + 2               # degree reach of poly_A / rest
+    Lmom = _L_moments(n_tab, c)
+    A = _mono_moments(c, n_tab)
     B: Dict[Tuple[int, int], mp.mpf] = {}
     for p in range(need + 1):
-        B[(m, p)] = _seed_B(m, m, s, p, c)
+        B[(m, p)] = _seed_B_closed(m, m, s, p, Lmom, A)
         if m + 1 <= l_max:
-            B[(m + 1, p)] = _seed_B(m + 1, m, s, p, c)
+            B[(m + 1, p)] = _seed_B_closed(m + 1, m, s, p, Lmom, A)
     for l in range(m + 1, l_max):
         for p in range(need - (l - m) + 1):
             B[(l + 1, p)] = ((2 * l + 1) * B[(l, p + 1)]

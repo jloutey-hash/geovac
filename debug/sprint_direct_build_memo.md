@@ -15,7 +15,7 @@ correlation (ledger 2026-08-23, elliptic-basis row).
 
 ## ►► RESUME HERE (next session) ◄◄
 
-**State (all validated, committed through v5.13.3):**
+**State (all validated, committed through v5.13.4):**
 - **One-body direct engine: DONE.** `debug/direct_onebody_engine.py` `build_direct_full`
   builds S + T + V_ne for all μ, float64, machine-exact vs mpf (7e-16), ~135× faster.
 - **V_ee corr 2D l-recurrence: DERIVED and PROVEN CORRECT (v5.13.3).** The IBP `corr`
@@ -26,30 +26,30 @@ correlation (ledger 2026-08-23, elliptic-basis row).
   2D quadrature agrees to **~1e-28**. Float64 recipe established: **mpf Q-rows (recessive
   Q_l, ×15/step instability) + float64 P-axis (dominant P_l, stable) → machine-precision
   X_orth**; pad ≥ l_hi−m. Driver `debug/direct_vee_corr.py`.
-- **BUT the corr recurrence is NOT yet a speed win, and the reason is now pinned (v5.13.3
-  diagnostic):** the **mpmath-quadrature B-table seeds are the universal V_ee bottleneck**
-  — profiled at **95% of the *current* `vee_mp`** (139 s at (3,3,1): 540 `_seed_B`
-  quads × 0.55 s) and **92% of the recurrence build**. The corr recurrence removes the
-  dense re-basing but *shares* (and, via padding, *amplifies*) the B-seed cost. So
-  float64-fast V_ee is gated on the **B-seeds**, not the corr structure.
+- **B-table quadrature seeds: KILLED with a closed form (v5.13.4).** `_seed_B` (95% of
+  `vee_mp`) → `_seed_B_closed` in `neumann_vee_general_m`. The obstruction I had feared
+  (m>0 term-divergence) **dissolved**: s≥m always holds physically, so the intact (ξ²−1)^s
+  polynomializes every (ξ−1)^{−k} pole of d^mQ_l, leaving ONE log-moment against Q₀ with a
+  closed-form primitive `L_n(c)` in {E₁(2c), γ, ln}. **`vee_mp` 139 s → 3.7 s (38×), H2
+  energy bit-identical; `_B_table` 176–268× faster.** General-m V_ee now quadrature-free
+  (§12 registry → algebraic). Driver `debug/direct_vee_bseed_closedform.py`; backing tests
+  in `tests/test_paper12_general_m_neumann.py`.
 
-**THE next task — kill the B-table quadrature seeds (`_seed_B` in `neumann_vee_general_m`).**
-This is the single highest-leverage V_ee optimization; it speeds **both** the existing
-mpf pipeline AND the corr recurrence.
-1. **σ (m=0): clean closed form exists.** `B_0(p,c)=∫ξ^p Q_0 e^{-cξ}dξ` reduces to
-   `E_1`/γ/ln (the ln(ξ−1) branch: `J_-(p)=e^{-c}Σ_j C(p,j) j!(H_j−γ−ln c)/c^{j+1}`;
-   the ln(ξ+1) branch via incomplete gamma from lower limit 2). `B_1` from `B_0` via
-   Q_1=ξQ_0−1. mpmath has `mp.e1`, `mp.euler`, `mp.gammainc`. Implement + validate vs the
-   quad seeds, then the σ recurrence goes fully fast.
-2. **m>0 (π/δ): term-divergence obstruction.** The E_1 decomposition of `d^mQ_l` diverges
-   term-by-term (d^mQ_0 ~ (ξ−1)^{−m}; only the assembled d^mQ_l with the intact (ξ²−1)^s
-   is integrable) — this is exactly why `ngm._seed_B` uses quadrature. Options: a
-   *regularized* closed form (group the pole terms so the (ξ²−1)^s cancels before
-   integrating), OR a p-recurrence for B_l(p,c) seeded from a few low-p quads (the clean
-   IBP p-recurrence couples m,s and has a ξ=1 boundary term for s<m — needs care).
-3. Once B-seeds are fast: finish the corr recurrence assembly (μ>0 couples different-μ
-   products; jacobian ξ² shifts = `Ξ²` ops; eta Y from `direct_vee_assembly`) and validate
-   full V_ee vs `vee_mp` + the 99.767% headline.
+**Where the speed now sits (v5.13.4).** With V_ee fast, the recondition (~21 s at (3,3,1))
+is bounded by the **mpf `one_body_mp` (9.6 s) and `_factored_cob` (7.4 s)**, not V_ee.
+
+**THE next tasks (pick per PI):**
+1. **Finish the corr recurrence → fully float64 V_ee.** The corr build is now fast too
+   (σ (5,16) 25.7 s), the mpf parts being the padded seed re-basing + Q-rows. Complete the
+   assembly (μ>0 couples different-μ products; jacobian ξ² shifts = `Ξ²` ops; eta Y from
+   `direct_vee_assembly`) and validate full V_ee vs `vee_mp` + the 99.767% headline. NOTE:
+   with the closed-form B-seeds the *existing* mpf `vee_mp` may already be fast enough that
+   the corr recurrence's speed benefit is secondary (its remaining value = algebraic purity
+   + a pure-float64 path); confirm before investing.
+2. **Drop the mpf `one_body_mp`/`cob` into float64** — the one-body direct engine
+   (`debug/direct_onebody_engine.build_direct_full`, DONE last sprint, 135×) already builds
+   S+T+V_ne in float64; wiring it (and a float64 re-basing) into `recondition_energy` would
+   take the whole recondition to seconds. This is now the larger recondition win.
 
 **Design note (settled v5.13.3):** X_orth_l = outer(a,b)+outer(b,a) − C_l − C_lᵀ with
 a=A^{prod}, b=B^{prod} (1D moments, A float64 / B mpf-seed+downcast) and C_l = the corr

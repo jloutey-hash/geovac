@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.4] - 2026-09-17
+
+**The V_ee B-table quadrature seeds are replaced by a CLOSED FORM — the general-m Neumann engine is now fully quadrature-free, `vee_mp` is ~38× faster, and the H2 energy is bit-identical.** This kills the universal V_ee bottleneck the v5.13.3 diagnostic pinned (95% of `vee_mp`, 92% of the corr recurrence). Production change to `geovac/neumann_vee_general_m.py`; energy bit-unchanged, so no corpus numbers move (patch — but it promotes the general-m V_ee to **algebraic** in the §12 registry, an algebraic-first status change; **flagged to the PI as possibly warranting a minor**). Canonical memo `debug/sprint_direct_build_memo.md`; derivation/driver `debug/direct_vee_bseed_closedform.py`.
+
+### The closed form — and why the obstruction dissolves
+
+`B_l^{m,s}(p,c) = ∫₁^∞ ξ^p (ξ²−1)^s d^mQ_l e^{−cξ}dξ` was seeded by mpmath quadrature (`_seed_B`). The obstruction that had sent it to quadrature — in `d^mQ_l = Σ_a C(m,a) d^aP_l d^{m−a}Q_0 − d^mW_{l−1}` the pole terms `d^kQ_0 ~ (ξ−1)^{−k}` have individually divergent moments — **dissolves because s ≥ m always holds physically** (`s = (μ_i+μ_j+m)/2`, `m ∈ {μ_i+μ_j, |μ_i−μ_j|}` ⇒ `μ_i+μ_j ≥ m` ⇒ `s ≥ m`). The intact weight `(ξ²−1)^s = (ξ−1)^s(ξ+1)^s` then **fully polynomializes every pole** (k = m−a ≤ m ≤ s): `(ξ²−1)^s d^kQ_0 = coeff_k[(ξ−1)^{s−k}(ξ+1)^s − (ξ−1)^s(ξ+1)^{s−k}]`, both polynomials → monomial moments `A_n(c)`. The ONLY transcendental piece is the a=m log-moment against `Q_0`, whose primitive
+`L_n(c) = ∫₁^∞ ξ^n Q_0 e^{−cξ}dξ = ½(Lp_n − Lm_n)` is closed-form: `Lm_n` via Euler-γ and `ln c` (the `ln(ξ−1)` branch), `Lp_n` via `E_1(2c)` (the `ln(ξ+1)` tail, recurrence in n). So the B-moment's minimal transcendental content is exactly **{E₁(2c), γ, ln}** — the Coulomb/Q₀-projection content (Paper 34/18), now isolated in one primitive (`_L_moments`).
+
+### Validation + speed
+- `L_n(c)` closed form vs mpmath quadrature: **1e-41..1e-35**.
+- Closed-form B seed vs `_seed_B` quadrature — σ/π/δ + mixed (m,s)=(1,2),(2,3), l=m/m+1, p=0..8: **1e-40..1e-35**.
+- New closed-form `_B_table` vs quadrature-seeded (l≤10, p≤8): matches to **1e-14..1e-11** (the unchanged forward l-recurrence amplifies the ~1e-36 seed difference), **176–268× faster** (0.01–0.03 s vs 3–5.6 s).
+- **H2 energy bit-identical:** (3,3,1) E=−1.1731064 (99.216%). `vee_mp` **139.3 s → 3.7 s (38×)** at (3,3,1); recondition total ~161 s → ~21 s (now bounded by the mpf `one_body`/`cob`, not V_ee). Corr recurrence build (uses `ngm._B_table`): σ (3,12) 53→3.9 s, (5,16) 112→25.7 s.
+
+### Backing
+`tests/test_paper12_general_m_neumann.py`: +`test_L_moment_primitive_closed_form`, +`test_closed_form_B_seeds_match_quadrature`, +`test_B_table_uses_closed_form_not_quadrature` (patches `_seed_B` to raise, proving `_B_table` no longer calls quadrature). The existing X-table-vs-independent-high-precision-reference (1e-9, covers m=4/δ) and μ=2 δ-stability slow tests still pass through the closed-form seeds; header Scope note updated to "quadrature-free". §12 algebraic-registry row promoted algebraic-pending → **algebraic**.
+
+Changed: `geovac/neumann_vee_general_m.py` (`_L_moments`/`_xm1_pow`/`_xp1_pow`/`_seed_B_closed`; `_B_table` rewired; docstrings), `tests/test_paper12_general_m_neumann.py`, `docs/algebraic_registry.md`, `debug/sprint_direct_build_memo.md`, `CLAUDE.md` (version + §2), `CHANGELOG.md`. Added: `debug/direct_vee_bseed_closedform.py`.
+
 ## [v5.13.3] - 2026-09-17
 
 **The V_ee IBP `corr` term as a 2D l-recurrence: DERIVED and PROVEN CORRECT — plus the diagnostic that reframes "float64-fast V_ee" onto the B-table seeds.** The remaining research piece of the #3 direct-build arc (the memo called it "the real remaining research"). Validation/diagnostic work on `debug/` drivers; no corpus claims moved (patch). Canonical memo `debug/sprint_direct_build_memo.md`.

@@ -9,11 +9,12 @@ endpoint cancellation and the H2 energy diverges.
 Each test names the wrong answer it rejects (Sec. 9 guard rule).  Fire-tested by
 `debug/firetest_p12_general_m.py`.
 
-Scope this engine claims (and this file pins): "recurrence-stable,
-quadrature-seeded" -- the low-l B_l seeds use 1D mpmath quadrature exactly as
-geovac.neumann_vee seeds its B_l by scipy.quad; the recurrence, not
-differentiation, is what removes the mu = 2 instability.  It is NOT fully
-quadrature-free.
+Scope this engine claims (and this file pins): the engine is now fully
+QUADRATURE-FREE -- the low-l B_l seeds are CLOSED FORM (_seed_B_closed), the
+only transcendental inputs being E_1(2c), Euler gamma and ln c (isolated in the
+log-moment primitive _L_moments); the forward recurrence, not differentiation,
+removes the mu = 2 instability.  The quadrature reference _seed_B is kept for the
+seed-validation test only.
 """
 
 from __future__ import annotations
@@ -191,7 +192,8 @@ def test_engine_carries_intact_weight_not_expanded():
     The bare xi^p d^m Q_l moment diverges for m >= 1; only the intact (xi^2-1)^s
     weight (s >= m/2) regularises the xi = 1 endpoint.  The seed B_l^{m=4,s=4}(0)
     must therefore be finite and positive -- a naive monomial expansion would
-    return inf/nan.
+    return inf/nan.  (Both the quadrature reference _seed_B and the production
+    closed form must give the same finite value.)
     """
     import mpmath as mp
     with mp.workdps(30):
@@ -200,3 +202,83 @@ def test_engine_carries_intact_weight_not_expanded():
             f"regularised delta-channel seed B_4^(4,4)(0) = {b}; the intact "
             f"weight is not being carried (finding 2)"
         )
+
+
+# ======================================================================
+# 6. The closed-form B seeds (quadrature-free) must match the quadrature ref
+# ======================================================================
+
+def test_L_moment_primitive_closed_form():
+    """REJECTS: a wrong closed form for the one transcendental primitive
+    L_n(c) = int_1^inf xi^n Q_0(xi) e^{-c xi} dxi.
+
+    A sign error, a dropped E_1(2c) (the ln(xi+1) tail) or a missing Euler-gamma
+    (the ln(xi-1) branch) would fail against direct mpmath quadrature.
+    """
+    import mpmath as mp
+    with mp.workdps(30):
+        for c in (mp.mpf(2), mp.mpf('3.7')):
+            L = gm._L_moments(6, c)
+            for n in range(7):
+                q = mp.quad(lambda u, n=n, c=c:
+                            (1 + u) ** n * mp.mpf('0.5') * mp.log((2 + u) / u)
+                            * mp.e ** (-c * (1 + u)),
+                            [0, mp.mpf('0.1'), mp.mpf(1), mp.mpf(4), mp.inf])
+                rel = abs(L[n] - q) / abs(q)
+                assert rel < 1e-25, (
+                    f"L_{n}({float(c)}) closed form {L[n]} differs from quadrature "
+                    f"{q} by {float(rel):.1e}; the E_1/gamma/ln primitive is wrong"
+                )
+
+
+def test_closed_form_B_seeds_match_quadrature():
+    """REJECTS: a closed-form B seed that disagrees with the mpmath-quadrature
+    reference _seed_B.
+
+    This closed form REPLACED the quadrature that was 95% of vee_mp.  It rests on
+    s >= m fully polynomializing every (xi-1)^{-k} pole term of d^mQ_l; a bug in
+    that polynomialization (wrong coeff_k, a (xi+1) vs (xi-1) swap, an off-by-one
+    in s-k) would show here.  Covers sigma/pi/delta and mixed (m,s) at the two
+    seed orders l = m, m+1.
+    """
+    import mpmath as mp
+    with mp.workdps(30):
+        c = mp.mpf(2.0)
+        Lmom = gm._L_moments(40, c)
+        A = gm._mono_moments(c, 60)
+        worst = mp.mpf(0)
+        for (m, s) in [(0, 0), (1, 1), (2, 2), (1, 2), (2, 3)]:
+            for l in (m, m + 1):
+                for p in range(7):
+                    bc = gm._seed_B_closed(l, m, s, p, Lmom, A)
+                    bq = gm._seed_B(l, m, s, p, c)
+                    if abs(bq) > mp.mpf('1e-30'):
+                        worst = max(worst, abs(bc - bq) / abs(bq))
+        assert worst < 1e-20, (
+            f"closed-form B seed disagrees with quadrature by {float(worst):.1e} "
+            f"relative; the polynomialization (s>=m) has a bug"
+        )
+
+
+def test_B_table_uses_closed_form_not_quadrature():
+    """REJECTS: a silent regression to quadrature seeding.
+
+    The production _B_table must not call the quadrature _seed_B (its cost was the
+    V_ee bottleneck).  Patch _seed_B to raise; _B_table must still succeed and its
+    l = m, m+1 rows must match the closed-form seeds.
+    """
+    import mpmath as mp
+    with mp.workdps(30):
+        c = mp.mpf(2.0)
+        orig = gm._seed_B
+        gm._seed_B = lambda *a, **k: (_ for _ in ()).throw(
+            AssertionError("_B_table must not use quadrature _seed_B"))
+        try:
+            B = gm._B_table(1, 1, 6, 5, c)
+        finally:
+            gm._seed_B = orig
+        Lmom = gm._L_moments(30, c)
+        A = gm._mono_moments(c, 40)
+        for p in range(4):
+            ref = gm._seed_B_closed(1, 1, 1, p, Lmom, A)
+            assert abs(B[(1, p)] - ref) < 1e-25
