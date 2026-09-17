@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.0] - 2026-09-17
+
+**H₂ moves to Level 2 in the natural-geometry hierarchy (PI-directed), and the #3 follow-on delivers a complete float64 one-body direct engine (validated, ~135× faster than the mpf pipeline) plus a diagnostic that scopes the float64-fast V_ee.** Minor bump: a change to the natural-geometry hierarchy (§5) is a corpus-significant event per §9. Canonical memo `debug/sprint_direct_build_memo.md`.
+
+### Natural-geometry hierarchy: H₂ → Level 2 (§5, PI-directed 2026-09-17)
+
+The open "Level 2 vs Level 4 for H₂" question (raised in the v5.11.18 Level-4 note) is decided: H₂'s natural geometry is **Level 2 (prolate spheroidal)**, alongside H₂⁺, where its best result (99.77% of D_e, re-based CI, Paper 12) is obtained. H₂ is now listed primarily at Level 2. Level 4 is retained as the structural N-electron (SO(3N), S_N) generalization that Level 4N and Level 5 build on; its 96.0% hyperspherical H₂ result is documented as that structural treatment, not H₂'s leading geometry. (§5 is normally a §13.5 hard-prohibition section for the PM; this edit was explicitly PI-directed.) The §2 best-results H₂ row updated accordingly.
+
+### #3 follow-on: complete float64 one-body direct engine
+
+`debug/direct_onebody_engine.py` `build_direct_full(j_max, l_max, mu_max, alpha)` builds the prolate two-electron one-body matrices S and H1 = T + V_ne for **all μ** (σ+π+δ, including the azimuthal μ² term) DIRECTLY in the orthogonal (associated-Laguerre × Gegenbauer) basis — no monomials, no re-basing.
+
+- **Validated float64-exact vs the mpf pipeline:** relS = 7e-16, relH ≤ 9e-13 at (2,2,1)/(2,2,2)/(3,3,2).
+- **Fast:** vectorized build 0.17 s at (5,5,2) N=1944, 1.26 s at (7,7,2) N=6144 — vs the mpf pipeline's minutes (135× at (3,3,2): 0.24 s vs 32 s).
+- **How:** every one-electron block factors radial × angular (overlap r2·a0−r0·a2, V_ne r1·a0, kinetic K_rad·a0 + r0·K_ang with a **diagonal** angular kinetic via the associated-Legendre eigenvalue (l+μ)(l+μ+1), azimuthal μ²(r2′·a0′−r0′·a2′) on the shifted weight). Only the tiny 1D blocks are computed — exactly, in mpf (small ⇒ fast, no dynamic-range issue), reusing the validated `_ov/_vne/_kin` logic — and the O(N²) two-electron assembly is vectorized float64.
+- **Feasibility proven separately** (`debug/direct_orthobuild_probe.py`): the radial recurrence build is float64-exact (2e-16) where the naive monomial build blows up (1e-5 by n_r=11). A padding/truncation bug in the ξ²/η² operators was caught by validation and fixed.
+- **Known limit:** the assembly is dense N×N (memory-bound ≥(9,9,2)); a sparse assembly is a separate step for very large truncation.
+
+### V_ee float64 path: diagnosed, shortcuts ruled out
+
+`debug/direct_vee_feasibility.py`. The V_ee half is the piece that would make the WHOLE pipeline float64-fast. Diagnostic findings:
+- **float64 re-basing of V** is marginal at (3,3,1) (1.6e-6, cond(monomial) ~1e16) and fails at the (5,5)+δ regime (cond ~1e26) that chemical accuracy needs — reconciles the memo's "-46 Ha".
+- **The Laguerre-linearization shortcut FAILS:** its coeffs grow (3.9e3 → 1.8e6 → 9.9e8 for n_r=5/8/11) while the monomial product coeffs stay small (53 → 1823). The dynamic-range blowup is from the `2α(ξ−1)` argument shift, not the polynomial product — which is exactly why the one-body engine works in the `z` argument.
+- **Real path:** the Neumann `A_l`/`B_l`/`X_l` recurrences re-expressed in the `z`-argument Laguerre basis (the 2D-ordered-ξ analog of the one-body `Z`-operator). A focused derivation sprint (starting next). Until then the mpf V_ee composes with the float64 one-body engine.
+
+### Files
+
+- Added: `debug/direct_orthobuild_probe.py`, `debug/direct_onebody_engine.py`, `debug/direct_vee_feasibility.py`, `debug/sprint_direct_build_memo.md`.
+- Changed: `CLAUDE.md` (§5 hierarchy: H₂→Level 2; §2 best-results row + one-liner; version).
+
 ## [v5.12.9] - 2026-09-17
 
 **The H2 re-conditioning (v5.12.8) is productionized, and Paper 12's "99.1% cap" is corrected in place to a conditioning wall.** The scratchpad PoC is now `geovac/prolate_recondition.py` + `tests/test_paper12_recondition.py` (fire-tested `debug/firetest_p12_recondition.py`); the module reproduces the PoC headline bit-for-bit, so the Sec. 9 claim→artifact gate is cleared and the paper edit is backed. The associated-Laguerre / Gegenbauer basis (owed item 2) is measured — with a correction to its premise. Canonical memo `debug/sprint_h2_recondition_memo.md`.
