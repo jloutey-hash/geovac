@@ -1,4 +1,4 @@
-r"""Backing tests for Paper 12, Sec. "Restoring the Azimuthal Channels" [SCOPE]:
+r"""Backing tests for Paper 12, Sec. "Restoring the Azimuthal Channels" [MEASURED]:
 the general-m (mu > 0) Neumann V_ee via the MOMENT-RECURRENCE radial engine
 (geovac.neumann_vee_general_m), which extends Paper 12's algebraic sigma-only
 A_l/B_l/X_l tables to associated Legendre functions and -- the load-bearing win --
@@ -124,7 +124,7 @@ def test_X_blocks_match_high_precision_reference():
 def test_mu2_delta_channel_is_stable():
     """REJECTS: the d^4 Q_l differentiation blow-up.
 
-    The grid engine (differentiation) gives a NON-variational E ~ -21 Ha at this
+    The grid engine (differentiation) gives a NON-variational E ~ -14.5 Ha at this
     basis -- the delta contribution is unusable.  The moment-recurrence engine
     must instead give a variational energy (above the exact -1.174475) that adds
     a small delta gain on top of the |m| <= 1 value.

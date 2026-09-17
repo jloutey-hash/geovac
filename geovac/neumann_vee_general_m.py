@@ -8,7 +8,7 @@ correlation -- require the ASSOCIATED functions P_l^m, Q_l^m.  The grid engine i
 :mod:`geovac.prolate_general_m` obtains those by numerical differentiation
 (d^m P_l, d^m Q_l), which loses precision near xi = 1 as m grows: the m = 4
 (delta-channel, mu = 2) blocks suffer the d^4 Q_l endpoint cancellation and the
-H2 energy diverges (E ~ -21 Ha).
+H2 energy diverges (E ~ -14.5 Ha at (2,2), mu = 2).
 
 This module removes that instability by moving to a MOMENT-LEVEL engine, never
 differentiating Q_l at high order:
@@ -42,7 +42,8 @@ angular (eta) moments, the selection rule, and the Neumann prefactor are the
 algebraic objects of :mod:`geovac.prolate_general_m` and are reused unchanged.
 
 Validated: reduces to :mod:`geovac.neumann_vee` at m = 0 (~1e-9 elementwise);
-matches a high-precision reference for X_l^{m,s} to ~1e-17 through l = 10, m <= 4;
+matches a high-precision reference for X_l^{m,s} to ~5e-12 through l = 8, m <= 4
+(float64 assembly; the l=10 block degrades to ~4e-9, prefactor-suppressed in energy);
 STABLE at mu = 2 where the differentiation engine diverges.  Backing:
 ``tests/test_paper12_general_m_neumann.py``.
 """
