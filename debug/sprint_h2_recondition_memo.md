@@ -1,7 +1,10 @@
 # Sprint memo — H2 prolate CI: 99.1% is a conditioning artifact, not a wall (2026-09-16)
 
-**Status:** scratchpad-validated proof-of-concept. NOT yet a corpus test (nothing in
-`geovac/` or `tests/`). Paper 12 is NOT edited — see "Owed" below.
+**Status:** PRODUCTIONIZED 2026-09-17 (v5.12.9). Module `geovac/prolate_recondition.py`
++ backing test `tests/test_paper12_recondition.py` (fire-tested `debug/firetest_p12_recondition.py`);
+the module reproduces the PoC headline bit-for-bit ((3,3,1)=99.216%, (4,4,2)=99.711%,
+(5,5,2)=99.767%). Paper 12's "99.1% cap" corrected to a conditioning wall. Item-2
+(Gegenbauer) measured with a correction to its premise — see "Owed / done" below.
 
 ## Question
 
@@ -93,15 +96,32 @@ which converges as the slow L^-3 partial-wave crawl. Reaching a literal 99.9% ne
 ~(8,8)+ (N>~5000, impractical here) OR explicit correlation (geminals put r12 in directly;
 the He R12-CI PoC hit 0.8 mHa at ~6 functions).
 
-## Owed (before any Paper 12 edit)
+## Owed / done (2026-09-17, v5.12.9)
 
-1. Productionize the pipeline into `geovac/` + a `tests/test_paper12_*` backing test.
-   Only then may Paper 12's "conditioning-capped at 99.1%" be corrected to "climbs to
-   chemical accuracy once re-based (99.767% at (5,5)+delta)". Per Sec.9 claim->artifact,
-   a scratchpad number does not enter the paper.
-2. The associated-Laguerre / Gegenbauer basis (mu-weight-adapted polynomials) is the
-   principled route to a literal 99.9% / spectroscopic — reaches the same accuracy with
-   far fewer functions, so it fits the N the pipeline already handles.
+1. **DONE.** Productionized into `geovac/prolate_recondition.py` (`recondition_energy(...)`,
+   `basis='laguerre_legendre'|'gegenbauer'`) + `tests/test_paper12_recondition.py`
+   (3 fast algebra-guards + 5 slow physics tests) + fire test `debug/firetest_p12_recondition.py`
+   (4/4 guards fire; one vacuous congruence-guard was caught by the fire test and replaced
+   with a norm-spread discriminator). The module reproduces the PoC bit-for-bit. Gate
+   cleared; Paper 12 corrected in place (abstract, new Sec. "The monomial cap is
+   conditioning, not a ceiling", conclusion; registry keys p12_rebased_*).
+
+2. **MEASURED, with a correction to the premise.** The associated-Laguerre L_n^{(mu)} x
+   Gegenbauer C_n^{(mu+1/2)} family gives the **IDENTICAL energy** as Laguerre x Legendre
+   at equal (j,l) — same span (7 digits at every truncation), so it does **NOT** reach a
+   given accuracy with *fewer functions* (the memo's owed-item-2 phrasing was wrong: a
+   change of polynomial basis at equal degree spans the same space). Its real payoff is
+   **conditioning**: cond(norm) 326x better at (3,3,1) (1.07e3 vs 3.49e5), ~1025x at
+   (5,5)+delta (9.14e4 vs 9.37e10) — which keeps the downcast solve trustworthy at large
+   truncation (Laguerre's 9.4e10 at (5,5)+delta is where the earlier per-block solve
+   produced a spurious non-variational 99.465). It does **NOT** enable a fast float64
+   pipeline: a float64 change of basis breaks for BOTH families at (3,3)/(4,4)/(5,5)
+   (float64_relift probe), because the build-precision ceiling is the *monomial* matrices'
+   dynamic range (cond 1.8e16 -> 4.1e26), not the target basis. Reaching a literal 99.9%
+   still needs a much larger basis or explicit correlation; a radial re-basing cannot
+   reach the e-e cusp (ledger 2026-08-23, elliptic-basis row). The genuine fast route =
+   a DIRECT recurrence build in the orthogonal basis (never forming the monomial matrices)
+   — identified, not built; a separate diagnostic->implementation sprint.
 
 ## Scope / caveats
 

@@ -973,6 +973,32 @@ MEASURED = {
                                  "It varies ~3x over alpha in [0.9,1.4], "
                                  "~15x for |m|<=1",
         provenance="MEASURED 2026-09-14; rises to 2.0e16 at |m|<=1, N=144"),
+    # ---- Paper 12 re-conditioning (2026-09-16) ---------------------------
+    # The 99.1% monomial cap is a CONDITIONING artifact of the xi^j radial set
+    # (a Hankel moment problem), not a structural ceiling.  Re-basing the SAME
+    # span to an orthogonal-polynomial family (mpf build) is an exact change of
+    # basis and the energy climbs monotonically/variationally to chemical
+    # accuracy.  Memo: debug/sprint_h2_recondition_memo.md.  Backing:
+    # tests/test_paper12_recondition.py; module geovac/prolate_recondition.py.
+    "p12_rebased_de_pct": dict(
+        value=99.77, convention="% of D_e, H2 R=1.4011, re-based (5,5)+delta "
+                                "(|m|<=2), alpha=1.0; best variational point",
+        provenance="MEASURED 2026-09-16 via geovac/prolate_recondition.py "
+                   "(E=-1.1740693, 0.41 mHa, inside chemical accuracy). "
+                   "Laguerre x Legendre and mu-adapted Gegenbauer give the "
+                   "IDENTICAL energy (same span); Gegenbauer conditions the "
+                   "downcast solve ~1000x tighter (9.1e4 vs 9.4e10).",
+        aliases={99.7674: "full precision",
+                 99.71: "(4,4)+delta, CI-tested anchor (E=-1.1739704, 0.50 mHa)",
+                 99.216: "(3,3) pi re-based, monomial-capped at 99.09"}),
+    "p12_rebased_err_mha": dict(
+        value=0.41, convention="mHa above exact D_e, re-based (5,5)+delta",
+        provenance="MEASURED 2026-09-16; monomial ceiling was 1.58 mHa (99.09)"),
+    "p12_recond_cond_gain": dict(
+        value=326, convention="normalized cond(S) ratio Laguerre/Gegenbauer at "
+                              "(3,3), |m|<=1 (3.49e5 / 1.07e3); grows to ~1025x "
+                              "at (5,5)+delta (9.37e10 / 9.14e4)",
+        provenance="MEASURED 2026-09-16; same span, same energy to <1 uHa"),
 
     "lih_composed_pauli": dict(
         value=837, convention="non-identity Pauli, LiH composed Q=30",

@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.12.8 (September 16, 2026)
+**Version:** v5.12.9 (September 17, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,7 +112,8 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
-- **H₂ 99.1% is a conditioning artifact, not a wall (2026-09-16, v5.12.8):** re-based Laguerre×Legendre + high-precision climbs to 99.767% of D_e (0.41 mHa, chemical accuracy); angular channels saturate, residual is the cusp. Scratchpad PoC — productionization owed before any Paper 12 edit. `/qa delta paper_12` = 2 SMALL, remediated. See debug/sprint_h2_recondition_memo.md.
+- **H₂ re-conditioning productionized; Paper 12 corrected (2026-09-17, v5.12.9):** `geovac/prolate_recondition.py` + `tests/test_paper12_recondition.py` reproduce 99.767% of D_e at (5,5)+δ (0.41 mHa); Paper 12's "99.1% cap" corrected to a conditioning wall. Gegenbauer basis = same span, ~1000× better-conditioned (NOT fewer functions; float64 build breaks for both families). See debug/sprint_h2_recondition_memo.md.
+- **H₂ 99.1% is a conditioning artifact, not a wall (2026-09-16, v5.12.8):** re-based Laguerre×Legendre + high-precision climbs to 99.767% of D_e (0.41 mHa, chemical accuracy); angular channels saturate, residual is the cusp. Scratchpad PoC (productionized v5.12.9). `/qa delta paper_12` = 2 SMALL, remediated. See debug/sprint_h2_recondition_memo.md.
 - **General-m Neumann V_ee, μ=2-stable (2026-09-16, v5.12.7):** Paper 12's algebraic V_ee extended σ-only→general-m (associated-Legendre moment recurrence); δ-channel now stable/variational (the differentiation grid diverged), H₂ 99.10% of D_e. Recurrence-stable, quadrature-seeded (not fully quadrature-free). See CHANGELOG v5.12.7.
 - **P61 verify/harden, targets 2-3 clean (2026-09-16, v5.12.6):** B=πΩ→Sp₄(ℤ) (M₀ preserves an integer symplectic form, det 9; new test) and the θ₃² conductor-4 mechanism (r₂=4Σχ₋₄, L(θ₃²,2)=4ζ(2)G) both confirmed, no defect. See CHANGELOG v5.12.6.
 - **P61 Stokes-amplitude verify/harden (2026-09-16, v5.12.5):** amplitude confirmed where z* dominates (monotone-from-below, 1/n² Richardson→1, PSLQ factor 1); coverage gap closed (new self-contained test); z* dominant only for b<√(3c₁) — a competing pure-scale singularity makes the second-cusp resummation two-singularity, sharpening the [OPEN] step. See CHANGELOG v5.12.5.
@@ -204,7 +205,7 @@ it is a PI call.
 | H⁻ | Bound, over-binds 21% | Graph-native CI, Z_c≈1.84 boundary | 13 |
 | PsH | 4.1% | Level 3, sign-flipped charge | 13 |
 | H₂⁺ | 0.0002% | Spectral Laguerre | 11 |
-| H₂ | 96.0% D_e | Level 4, l_max=6, 61 channels | 15 |
+| H₂ | 99.77% D_e (0.41 mHa) | Paper 12 re-based prolate CI, (5,5)+δ; 96.0% via Level 4 (Paper 15) | 12/15 |
 | LiH | R_eq 5.3% | Composed, l-dependent PK, l_max=2 | 17 |
 | BeH₂ | R_eq 11.7% | Composed, full 1-RDM exchange | 17 |
 | H₂O | R_eq 19.4% | Composed, 5-block, zero parameters | 17 |

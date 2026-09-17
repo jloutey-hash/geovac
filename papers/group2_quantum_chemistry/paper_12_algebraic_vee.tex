@@ -75,7 +75,15 @@ them in the same basis with the same Neumann kernel gives
 $99.1\%$ of $D_e$ at $|m| \le 1$ (stability envelope
 $99.0$--$99.1\%$;\ Sec.~\ref{sec:azimuthal}), a gain of $11.6$~mHa that
 no growth along the $\sigma$ axis reproduces (near-tripling the
-$\sigma$ basis is worth $0.34$~mHa).  \textbf{[WITHDRAWN]} This paper
+$\sigma$ basis is worth $0.34$~mHa).  \textbf{[MEASURED]} That $99.1\%$
+is where the \emph{monomial} radial basis $\xi^j$ stalls---a Hankel
+moment problem whose overlap matrix is past double precision, not a
+structural ceiling.  Re-basing the same span onto an
+orthogonal-polynomial family is an exact change of basis that removes
+the linear dependence, and the energy then climbs monotonically and
+variationally to $\gvq{p12_rebased_de_pct}{99.77}\%$ of $D_e$
+($\gvq{p12_rebased_err_mha}{0.41}$~mHa, inside chemical accuracy) at a
+larger truncation (Sec.~\ref{sec:recondition}).  \textbf{[WITHDRAWN]} This paper
 previously attributed the gap to the electron-electron cusp requiring
 non-analytic $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read
 that as motivation for hyperspherical coordinates.  Neither holds:
@@ -1104,7 +1112,90 @@ $(\alpha, \mathrm{threshold})$ grid, most of which is conditioning noise.  The $
 Table~\ref{tab:convergence} sits $58\,\mu$Ha below the conditioned
 value, i.e.\ the last two of its six decimals reflect linear
 dependence rather than physics.  No conclusion in this paper turns
-on them.
+on them.  That the number is conditioning-\emph{limited} rather than
+physics-limited is shown directly in Sec.~\ref{sec:recondition}:\
+re-basing this same span removes the linear dependence and the energy
+climbs to chemical accuracy.
+
+\subsection{The monomial cap is conditioning, not a ceiling}
+\label{sec:recondition}
+
+\textbf{[MEASURED]} The $99.1\%$ above is the ceiling of the
+\emph{monomial} radial factor $\xi^j$, not of the prolate geometry or
+the electron-electron cusp.  The set $\{\xi^j e^{-\alpha\xi}\}$ is a
+Hankel moment problem, exponentially ill-conditioned in the degree:\
+the overlap reaches $\mathrm{cond} = 1.8\times10^{16}$ already at
+$(3,3)$, $|m|\le1$ and $4.1\times10^{26}$ at $(5,5)$, so the basis
+cannot be pushed further in double precision.  But the monomials
+$\{\xi^j\}_{j\le J}$ and, e.g., the Laguerre polynomials
+$\{L_j(2\alpha(\xi-1))\}_{j\le J}$ span the \emph{same} degree-$J$
+space, so re-basing onto an orthogonal-polynomial family is an
+\emph{exact} change of basis:\ it leaves the span---and hence the
+exact-arithmetic energy---unchanged, and only the conditioning changes.
+
+\textbf{[MEASURED]} Because the congruence $C S C^{\!\top}$ amplifies
+the $10^{-16}$ entry error by $\|C\|^2$ and the high-degree monomial
+matrices carry $\mathrm{cond}\sim10^{26}$, a float64 change of basis is
+corrupted---it breaks for \emph{both} families at every truncation
+tested.  Every matrix entry is therefore built in extended precision,
+the well-conditioned orthogonal matrices are downcast to float64, and
+the generalized eigenproblem is solved on the unit-normalized
+(correlation) matrices---a diagonal congruence that leaves the
+eigenvalues unchanged but removes the norm-spread inflation of
+$\mathrm{cond}$.  With that pipeline the energy climbs monotonically and
+variationally past the monomial wall (Table~\ref{tab:recondition}):\
+opening the $\delta$ channels on the re-based basis reaches $99.71\%$ of
+$D_e$ at $(4,4)+\delta$ and $\gvq{p12_rebased_de_pct}{99.77}\%$
+($\gvq{p12_rebased_err_mha}{0.41}$~mHa) at $(5,5)+\delta$---inside
+chemical accuracy, a four-fold reduction of the residual from the
+monomial $99.09\%$, every point containing its predecessor and lying
+below it.
+
+\begin{table}[t]
+\caption{H$_2$ at $R = 1.4011$~bohr, re-based to orthogonal polynomials
+  (Laguerre$\times$Legendre and the $\mu$-adapted Gegenbauer give the
+  identical energy).  Same span as the monomial basis of
+  Table~\ref{tab:azimuthal}, re-conditioned;\ $\alpha = 1.0$, the
+  extended-precision build and unit-normalized solve of the text.
+  $D_e^{\rm exact} = 0.174475$~Ha.}
+\label{tab:recondition}
+\begin{ruledtabular}
+\begin{tabular}{lrr}
+  \multicolumn{1}{c}{basis / channels} & \multicolumn{1}{c}{$N$}
+  & \multicolumn{1}{c}{$D_e\%$} \\
+\hline
+  monomial ceiling ($|m|\le1$) &  144 & 99.09 \\
+  re-based $(3,3)$, $|m|\le1$  &  256 & 99.22 \\
+  re-based $(4,4)+\delta$      &  975 & 99.71 \\
+  re-based $(5,5)+\delta$      & 1944 & \gvq{p12_rebased_de_pct}{99.77} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textbf{[MEASURED]} The residual $\sim\!0.4$~mHa is radial completeness
+and the true electron-electron cusp, which converge as the slow
+$L^{-3}$ partial-wave crawl---\emph{not} more azimuthal channels:\
+$\varphi$ buys under $+0.06$~pp on top of $\delta$.  A literal $99.9\%$
+therefore needs a much larger basis or explicit correlation
+(geminals);\ a \emph{radial} re-basing cannot substitute for the
+$e$--$e$ cusp.
+
+\textbf{[MEASURED]} The $\mu$-weight-adapted family---the generalized
+Laguerre $L_n^{(\mu)}$ for the $(\xi^2-1)^{\mu/2}$ weight and the
+Gegenbauer $C_n^{(\mu+1/2)}$ for $(1-\eta^2)^{\mu/2}$, reducing to plain
+Laguerre$\times$Legendre at $\mu = 0$---spans the identical space (the
+energy agrees to $<1$~$\mu$Ha at every truncation) at a normalized
+condition number two to three orders of magnitude smaller
+($9.1\times10^4$ vs $9.4\times10^{10}$ at $(5,5)+\delta$), which is what
+keeps the downcast solve trustworthy at large truncation.  It does
+\emph{not} reach a given accuracy with fewer functions:\ at equal degree
+the span, and hence the energy, is the same---the gain is conditioning
+alone.  A per-\emph{function} exponent instead (making the set
+$L^2$-orthonormal) would break completeness and plateau the accuracy,
+and is not used.
+
+Backing:\ module \texttt{geovac/prolate\_recondition.py}, tests
+\texttt{tests/test\_paper12\_recondition.py}.
 
 %% ========================================================================
 %% VII. IMPLICATIONS FOR THE GEOVAC PROGRAM
@@ -1254,6 +1345,15 @@ for H$_2$.  The key results are:
     The $\sigma$-only value reproduces independently in a Gaussian
     basis to $0.2$~mHa, and the extended value to within the stated
     stability envelope.
+  \item \textbf{$\gvq{p12_rebased_de_pct}{99.77}\%$ of exact $D_e$}
+    ($\gvq{p12_rebased_err_mha}{0.41}$~mHa, chemical accuracy) once that
+    $99.1\%$ monomial basis is re-conditioned:\ its $\xi^j$ radial factor
+    is a Hankel moment problem (the $99.1\%$ is a conditioning wall, not
+    a ceiling), and re-basing the same span onto orthogonal polynomials
+    is an exact change of basis that lets the energy climb monotonically
+    and variationally to chemical accuracy at $(5,5)+\delta$
+    (Sec.~\ref{sec:recondition}).  The residual is radial completeness
+    and the $e$--$e$ cusp, not more azimuthal channels.
 \end{enumerate}
 
 \textbf{[WITHDRAWN]} Earlier versions of this paper concluded that
