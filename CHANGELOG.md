@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.2] - 2026-09-17
+
+**#3 V_ee corr-folding characterized as the hard core, and the arc consolidated for a context reset.** Documentation/analysis (patch; no code, no corpus claims moved).
+
+- **The IBP `corr` term is pinned as the genuine remaining research.** corr_orth[(a,a′),(c,c′)] = ⟨L_cL_c′|Ĝ_{a,a′}(ξ²−1)^s d^mQ_l⟩_{2c} is a 2D ordered integral coupling `d^mP_l`(ξ₁) and `d^mQ_l`(ξ₂) in the region ξ₁>ξ₂ — both large-coeff Legendre objects. It does NOT factor into 1D moments (unlike the A·B part), and float64 X re-basing degrades (2e-9 @ j_max=3 → 1.5e-5 @ j_max=5), so a clean float64 corr needs a **2D l-recurrence for the ordered integral** (keeping P_l, Q_l implicit), or the corr stays mpf (caps the speedup). This is a self-contained derivation sprint.
+- **`debug/sprint_direct_build_memo.md` gains a top-of-file "RESUME HERE" block** with the validated state, the single next task (the corr 2D-recurrence), precise entry points, and the §9 resumption protocol — so a fresh session picks the thread up cleanly.
+
+Changed: `debug/sprint_direct_build_memo.md` (RESUME block + corr characterization), `CLAUDE.md` (version + §2), `CHANGELOG.md`.
+
 ## [v5.13.1] - 2026-09-17
 
 **#3 V_ee follow-on: the z-argument recurrence and the X+V assembly are both validated — the float64-fast V_ee path is proven correct (the speed layer, IBP-corr folding, is the remaining piece).** Diagnostic/validation work; no corpus claims moved (patch). Memo `debug/sprint_direct_build_memo.md`.

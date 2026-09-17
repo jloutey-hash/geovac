@@ -13,6 +13,36 @@ algebraic pipeline (fast R-scans/PES, other systems, a platform for geminals). I
 does NOT move the ~0.4 mHa e-e cusp ceiling; a literal 99.9% still needs explicit
 correlation (ledger 2026-08-23, elliptic-basis row).
 
+## ►► RESUME HERE (next session) ◄◄
+
+**State (all validated, committed through v5.13.1):**
+- **One-body direct engine: DONE.** `debug/direct_onebody_engine.py` `build_direct_full`
+  builds S + T + V_ne for all μ, float64, machine-exact vs mpf (7e-16), ~135× faster.
+- **V_ee: recurrence + assembly mechanism proven; NOT yet fast.** First-kind `A_l[a]`
+  z-Laguerre recurrence float64-exact (`debug/direct_vee_recurrence.py`); σ-sector V_ee
+  X+V assembly machine-exact (`debug/direct_vee_assembly.py`) but ≈mpf speed (mpf
+  product-poly re-basing bottleneck).
+
+**THE next task — the V_ee IBP `corr` term as a 2D `l`-recurrence** (the only thing
+between here and a fully float64-fast V_ee):
+1. Build `A^{prod}_l[a,a′]` and `B^{prod}_l[c,c′]` in float64 via the proven l-recurrence
+   with `Xi` on one axis (extends `direct_vee_recurrence.py`; B via mpf seed + downcast
+   or backward). → the A·B part of X, float64.
+2. **The hard piece:** `corr_orth = ⟨L_cL_c′|Ĝ_{a,a′}(ξ²−1)^s d^mQ_l⟩_{2c}` is a 2D
+   ordered integral coupling `d^mP_l`(ξ₁) and `d^mQ_l`(ξ₂) — needs a 2D `l`-recurrence
+   keeping both implicit (does NOT factor into 1D moments; float64 re-basing degrades).
+   Validate every step vs the mpf X-table (`prolate_recondition._build_Xtab_mp`).
+3. Then μ>0 (m≠0 couples different-μ products; Gegenbauer angular) + sparse assembly.
+4. Final validation: full V_ee (all μ) vs `prolate_recondition.vee_mp` + `_factored_cob`,
+   and the composed one-body + V_ee float64 pipeline vs the 99.767% headline.
+
+**Resumption protocol (§9 current-state check):** this memo is dated; read CHANGELOG
+v5.13.0/.1 + Paper 12 Sec. "The monomial cap is conditioning" before continuing.
+Ground truth for everything: `prolate_recondition.vee_mp`/`one_body_mp` + `_factored_cob`.
+Drivers: `debug/direct_{orthobuild_probe,onebody_engine,vee_feasibility,vee_recurrence,vee_assembly}.py`.
+
+---
+
 ## Increment 1 — feasibility of the radial building block (`debug/direct_orthobuild_probe.py`)
 
 The radial one-body matrix built via the Laguerre "multiply-by-z" recurrence +
@@ -138,9 +168,19 @@ product-poly re-basing (PP has large ξ-monomial coeffs → must stay mpf), whic
    proven l-recurrence with Xi on one axis:
      (l−m+1)A^{prod}_{l+1} = (2l+1)(Xi @ A^{prod}_l) − (l+m)A^{prod}_{l−1}, float64-clean.
    B^{prod} likewise (mpf-seed + downcast, or backward, since forward is unstable).
-2. **Fold the IBP `corr` term** into the product-orthogonal basis — the one intricate
-   piece: Σ_{P1} PP[P1]·corr(Wf[P1],P2) = corr applied to (L_aL_a′)(ξ²−1)^s d^mP_l vs
-   B at 2c. Needs a clean re-expression (or compute the corr contribution separately).
+2. **Fold the IBP `corr` term** — THE hard core, characterized 2026-09-17. In the
+   product basis corr_orth[(a,a′),(c,c′)] = ⟨L_cL_c′| Ĝ_{a,a′}·(ξ²−1)^s d^mQ_l⟩_{2c},
+   with Ĝ_{a,a′} the tail-antiderivative of WP = (L_aL_a′)(ξ²−1)^s d^mP_l. This is a
+   **2D ordered integral coupling d^mP_l (ξ₁) and d^mQ_l (ξ₂)** in the region ξ₁>ξ₂ —
+   BOTH large-coeff Legendre objects. Unlike the A·B part (independent 1D moments →
+   clean recurrences), the corr does NOT factor, so:
+   - float64 X re-basing PP·X·PPᵀ degrades (2e-9 @ j_max=3 → 1.5e-5 @ j_max=5) — not a
+     clean shortcut;
+   - the clean float64 corr needs a genuine **2D l-recurrence for the ordered integral**
+     (keeping both P_l and Q_l implicit), OR accept the corr in mpf (which caps the
+     speedup, since the corr is a comparable share of the X build).
+   This is a substantial, self-contained derivation — the real remaining research of the
+   V_ee float64-fast program.
 3. **μ>0 extension:** the m≠0 Neumann terms couple μ_i≠μ_j (different-μ product
    Laguerre L_a^{(μ_i)}·L_a′^{(μ_j)}, weight (ξ²−1)^{(μ_i+μ_j+m)/2}); Gegenbauer angular.
 4. Vectorized float64 assembly (already validated for σ), sparse for very large N.
