@@ -530,7 +530,35 @@ def compute_vee_matrix_neumann(
     -------
     Vee : ndarray, shape (n_basis, n_basis)
         V_ee matrix in the basis.
+
+    Raises
+    ------
+    NotImplementedError
+        If any basis function carries a nonzero r_12 power.  See the guard below.
     """
+    # GUARD (2026-09-18).  This expansion is derived for p = 0, and it depends on
+    # the basis ONLY through the index tuples (j, k, l, m) that _get_unsym_terms
+    # builds -- so a Hylleraas function's r_12^p factor is invisible to it.
+    # Measured, not assumed: the returned matrix is BIT-IDENTICAL for p = 0, 1, 2
+    # and 7 (max|dV_ee| = 0.000e+00), i.e. the same V_ee is handed back for
+    # physically different functions; and solve_hylleraas(..., p_max=1,
+    # vee_method='neumann') returned E_total = -0.9035 Ha = -55.3% of D_e --
+    # unbound, absurd, and silent.  The docstring above said "p = 0 only for
+    # now" and nothing enforced it, which is how a documented restriction
+    # becomes a wrong number.  Fail loudly instead: no energy beats a wrong
+    # energy with no diagnostic.
+    bad_powers = sorted({bf.p for bf in basis if getattr(bf, "p", 0) != 0})
+    if bad_powers:
+        raise NotImplementedError(
+            "compute_vee_matrix_neumann is derived for r_12 power p = 0 only, "
+            f"but the basis carries powers {bad_powers}.  The Neumann expansion "
+            "sees the basis only through (j, k, l, m), so the r_12^p factor "
+            "would be dropped from V_ee and the energy returned would be wrong "
+            "with no error (measured: -55.3% of D_e at p = 1).  Use "
+            "vee_method='numerical' for p > 0, or extend the A_n / B_l / X_l "
+            "moments to carry the r_12 factor."
+        )
+
     n_bf = len(basis)
 
     # Determine maximum quantum numbers

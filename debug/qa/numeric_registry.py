@@ -982,7 +982,22 @@ MEASURED = {
     # since v5.13.8 S and H1 are built directly in the orthogonal basis instead
     # (no congruence applied to them), leaving only V_ee on the mpf path.  The
     # values below are unchanged by that -- both routes agree to the float64
-    # downcast floor.  Memo: debug/sprint_h2_recondition_memo.md.  Backing:
+    # downcast floor.
+    #
+    # TWO DISTINCT QUANTITIES, deliberately kept as separate keys (2026-09-18,
+    # v5.13.9, PI-approved).  The `p12_rebased_*` keys are the endpoint of the
+    # monotone alpha = 1.0 ladder printed in tab:recondition; the
+    # `p12_rebased_*_aopt` keys are the same basis at its VARIATIONAL OPTIMUM
+    # alpha = 1.40.  They are not competing values and neither supersedes the
+    # other: the ladder's own claim ("every point containing its predecessor and
+    # lying below it") holds only at a consistent alpha, so moving one row of it
+    # to the optimum would break the monotonicity it asserts.  The abstract and
+    # conclusion quote the optimum; the table remains the alpha = 1.0 ladder.
+    # "alpha=1.0; best variational point" in the conventions below is therefore
+    # true of the DISCARD-THRESHOLD sweep, not of alpha.  See
+    # debug/sprint_explicit_correlation_scoping_memo.md Sec. 4b.
+    #
+    # Memo: debug/sprint_h2_recondition_memo.md.  Backing:
     # tests/test_paper12_recondition.py; module geovac/prolate_recondition.py.
     "p12_rebased_de_pct": dict(
         value=99.77, convention="% of D_e, H2 R=1.4011, re-based (5,5)+delta "
@@ -996,13 +1011,50 @@ MEASURED = {
                  99.71: "(4,4)+delta, CI-tested anchor (E=-1.1739704, 0.50 mHa)",
                  99.216: "(3,3) pi re-based, monomial-capped at 99.09"}),
     "p12_rebased_err_mha": dict(
-        value=0.41, convention="mHa above exact D_e, re-based (5,5)+delta",
+        value=0.41, convention="mHa above exact D_e, re-based (5,5)+delta, "
+                               "alpha=1.0 (the ladder endpoint; the optimum is "
+                               "p12_rebased_err_mha_aopt)",
         provenance="MEASURED 2026-09-16; monomial ceiling was 1.58 mHa (99.09)"),
+    "p12_rebased_de_pct_aopt": dict(
+        value=99.81, convention="% of D_e, H2 R=1.4011, re-based (5,5)+delta "
+                                "(|m|<=2), laguerre_legendre, at the VARIATIONAL "
+                                "OPTIMUM of the shared radial exponent "
+                                "alpha=1.40. Distinct from p12_rebased_de_pct, "
+                                "which is the same basis at alpha=1.0",
+        provenance="MEASURED 2026-09-18 (v5.13.9) via prolate_recondition: "
+                   "E=-1.1741513, 0.324 mHa, variational, all 1944 functions "
+                   "kept, cond 4.90e10 (BETTER conditioned than alpha=1.0's "
+                   "9.37e10). Bracketed scan alpha=1.00/1.20/1.40/1.50 -> "
+                   "0.406/0.346/0.324/0.334 mHa",
+        aliases={99.8144: "full precision", 99.814: "3 s.f."}),
+    "p12_rebased_err_mha_aopt": dict(
+        value=0.32, convention="mHa above exact D_e, re-based (5,5)+delta at the "
+                               "variational optimum alpha=1.40",
+        provenance="MEASURED 2026-09-18; 0.3237 at full precision. The alpha=1.0 "
+                   "value is p12_rebased_err_mha (0.41); the gain is 0.082 mHa, "
+                   "20% of that residual",
+        aliases={0.324: "3 s.f."}),
+    "p12_rebased_alpha_opt": dict(
+        value=1.40, convention="variational optimum of the single shared radial "
+                               "exponent alpha at (5,5)+delta, bracketed (1.50 "
+                               "is worse). Drifts UP with basis size (~1.20-1.25 "
+                               "at (4,4) mu<=1 vs 1.40 at (5,5)) -- the signature "
+                               "of single-exponent strain",
+        provenance="MEASURED 2026-09-18 (v5.13.9)"),
     "p12_recond_cond_gain": dict(
         value=326, convention="normalized cond(S) ratio Laguerre/Gegenbauer at "
-                              "(3,3), |m|<=1 (3.49e5 / 1.07e3); grows to ~1025x "
-                              "at (5,5)+delta (9.37e10 / 9.14e4)",
-        provenance="MEASURED 2026-09-16; same span, same energy to <1 uHa"),
+                              "(3,3), |m|<=1 (3.49e5 / 1.07e3 = 326, correct); "
+                              "grows to ~1.03e6x at (5,5)+delta (9.37e10 / "
+                              "9.14e4), i.e. SIX orders of magnitude",
+        provenance="MEASURED 2026-09-16; same span, same energy to <1 uHa. "
+                   "CORRECTED 2026-09-18 (v5.13.9): this convention read "
+                   "'~1025x at (5,5)+delta' -- that is 1.025e6 with the e3 "
+                   "dropped, a 1000x UNDERSTATEMENT of the corpus's own result, "
+                   "and Paper 12 inherited it as 'two to three orders of "
+                   "magnitude' (true of the 326x (3,3) case, wrong for the "
+                   "(5,5)+delta figures it was paired with). Recomputed: "
+                   "9.37e10/9.14e4 = 1.025e6. At the new alpha=1.40 optimum the "
+                   "ratio is 4.90e10/3.72e4 = 1.32e6 (6.1 orders)"),
 
     "lih_composed_pauli": dict(
         value=837, convention="non-identity Pauli, LiH composed Q=30",

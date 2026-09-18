@@ -82,9 +82,10 @@ moment problem whose overlap matrix is past double precision, not a
 structural ceiling.  Re-basing the same span onto an
 orthogonal-polynomial family is an exact change of basis that removes
 the linear dependence, and the energy then climbs monotonically and
-variationally to $\gvq{p12_rebased_de_pct}{99.77}\%$ of $D_e$
-($\gvq{p12_rebased_err_mha}{0.41}$~mHa, inside chemical accuracy) at a
-larger truncation (Sec.~\ref{sec:recondition}).  \textbf{[WITHDRAWN]} This paper
+variationally to $\gvq{p12_rebased_de_pct_aopt}{99.81}\%$ of $D_e$
+($\gvq{p12_rebased_err_mha_aopt}{0.32}$~mHa, inside chemical accuracy) at a
+larger truncation and the variationally optimal exponent
+(Sec.~\ref{sec:recondition}).  \textbf{[WITHDRAWN]} This paper
 previously attributed the gap to the electron-electron cusp requiring
 non-analytic $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read
 that as motivation for hyperspherical coordinates.  Neither holds:
@@ -1197,6 +1198,24 @@ chemical accuracy, a four-fold reduction of the residual from the
 monomial $99.09\%$, every point containing its predecessor and lying
 below it.
 
+\textbf{[MEASURED]} That ladder is computed at a \emph{fixed} $\alpha = 1.0$,
+which is what makes it a ladder:\ the statement that each point contains its
+predecessor and lies below it holds only at a consistent exponent, so
+Table~\ref{tab:recondition} keeps $\alpha$ fixed throughout.  But $\alpha$ is a
+variational parameter, and $1.0$ is not its optimum.  Scanning it at the largest
+truncation gives $0.406$, $0.346$, $\gvq{p12_rebased_err_mha_aopt}{0.32}$ and
+$0.334$~mHa at $\alpha = 1.00$, $1.20$,
+$\gvq{p12_rebased_alpha_opt}{1.40}$ and $1.50$, so the minimum is bracketed at
+$\alpha = \gvq{p12_rebased_alpha_opt}{1.40}$ and the best variational result this
+basis supports is $\gvq{p12_rebased_de_pct_aopt}{99.81}\%$ of $D_e$
+($\gvq{p12_rebased_err_mha_aopt}{0.32}$~mHa)---better than the $\alpha = 1.0$
+endpoint by $0.082$~mHa, a fifth of that residual.  The improvement is not a
+trade:\ the optimal point is variational, retains all $1944$ functions, and is
+\emph{more} tightly conditioned than $\alpha = 1.0$ ($4.9\times10^{10}$ against
+$9.4\times10^{10}$).  Both numbers are therefore reported, and they are not
+competing:\ $99.77\%$ is the endpoint of the fixed-$\alpha$ ladder, $99.81\%$ is
+the basis's best variational point.
+
 \begin{table}[t]
 \caption{H$_2$ at $R = 1.4011$~bohr, re-based to orthogonal polynomials
   (Laguerre$\times$Legendre and the $\mu$-adapted Gegenbauer give the
@@ -1247,10 +1266,17 @@ $e$--$e$ cusp.
 Laguerre $L_n^{(\mu)}$ for the $(\xi^2-1)^{\mu/2}$ weight and the
 Gegenbauer $C_n^{(\mu+1/2)}$ for $(1-\eta^2)^{\mu/2}$, reducing to plain
 Laguerre$\times$Legendre at $\mu = 0$---spans the identical space (the
-energy agrees to $<1$~$\mu$Ha at every truncation) at a normalized
-condition number two to three orders of magnitude smaller
-($9.1\times10^4$ vs $9.4\times10^{10}$ at $(5,5)+\delta$), which is what
-keeps the downcast solve trustworthy at large truncation.  It does
+energy agrees to $<1$~$\mu$Ha at every truncation;\ at $(5,5)+\delta$ and the
+optimal $\alpha = \gvq{p12_rebased_alpha_opt}{1.40}$ the two families agree to
+all seven printed digits, $E = -1.1741513$~Ha) at a normalized
+condition number \emph{six} orders of magnitude smaller
+($3.7\times10^4$ vs $4.9\times10^{10}$ at $(5,5)+\delta$, $\alpha = 1.40$;\
+$9.1\times10^4$ vs $9.4\times10^{10}$ at $\alpha = 1.0$), which is what
+keeps the downcast solve trustworthy at large truncation.
+\textbf{[MEASURED]} Earlier versions of this sentence read ``two to three orders
+of magnitude'' while quoting the $(5,5)+\delta$ pair, whose ratio is
+$1.0\times10^{6}$;\ the ``two to three'' is the $326\times$ of the $(3,3)$,
+$|m|\le1$ case and does not describe the figures it was attached to.  It does
 \emph{not} reach a given accuracy with fewer functions:\ at equal degree
 the span, and hence the energy, is the same---the gain is conditioning
 alone.  A per-\emph{function} exponent instead (making the set
@@ -1406,9 +1432,12 @@ for H$_2$.  The key results are:
     The $\sigma$-only value reproduces independently in a Gaussian
     basis to $0.2$~mHa, and the extended value to within the stated
     stability envelope.
-  \item \textbf{$\gvq{p12_rebased_de_pct}{99.77}\%$ of exact $D_e$}
-    ($\gvq{p12_rebased_err_mha}{0.41}$~mHa, chemical accuracy) once that
-    $99.1\%$ monomial basis is re-conditioned:\ its $\xi^j$ radial factor
+  \item \textbf{$\gvq{p12_rebased_de_pct_aopt}{99.81}\%$ of exact $D_e$}
+    ($\gvq{p12_rebased_err_mha_aopt}{0.32}$~mHa, chemical accuracy) once that
+    $99.1\%$ monomial basis is re-conditioned and the shared exponent is taken to
+    its variational optimum $\alpha = \gvq{p12_rebased_alpha_opt}{1.40}$
+    ($\gvq{p12_rebased_de_pct}{99.77}\%$ at the fixed $\alpha = 1.0$ of
+    Table~\ref{tab:recondition}):\ its $\xi^j$ radial factor
     is a Hankel moment problem (the $99.1\%$ is a conditioning wall, not
     a ceiling), and re-basing the same span onto orthogonal polynomials
     is an exact change of basis that lets the energy climb monotonically

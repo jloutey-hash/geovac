@@ -12,7 +12,7 @@
 | H2 Neumann V_ee (sigma only) | 92.4% D_e | Algebraic integral accuracy |
 | H2 Neumann V_ee, \|m\| <= 1 | 99.1% D_e | Azimuthal channels restored (Paper 12, 2026-09-14) |
 | H2 Neumann V_ee, \|m\| <= 2 (delta) | 99.10% D_e @ (2,2) | Moment-recurrence engine, variational and STABLE at mu=2 where the differentiation grid diverges (Paper 12, v5.12.7); `geovac/neumann_vee_general_m.py` |
-| H2 Neumann V_ee, re-conditioned (5,5)+δ | 99.767% D_e (0.41 mHa) | Monomial 99.1% cap is a Hankel conditioning wall; re-basing the same span to orthogonal polynomials climbs monotonically/variationally to chemical accuracy (extended precision is needed where the MONOMIAL matrices are re-based — since v5.13.8 S and H1 are built directly in the orthogonal basis instead, leaving only V_ee on the mpf path) (Paper 12, v5.12.9); `geovac/prolate_recondition.py`, `test_paper12_recondition.py` |
+| H2 Neumann V_ee, re-conditioned (5,5)+δ | **99.81% D_e (0.32 mHa)** at the variational optimum α=1.40; 99.767% (0.41 mHa) at the fixed-α=1.0 ladder endpoint | Monomial 99.1% cap is a Hankel conditioning wall; re-basing the same span to orthogonal polynomials climbs monotonically/variationally to chemical accuracy (extended precision is needed where the MONOMIAL matrices are re-based — since v5.13.8 S and H1 are built directly in the orthogonal basis instead, leaving only V_ee on the mpf path) (Paper 12, v5.12.9); `geovac/prolate_recondition.py`, `test_paper12_recondition.py` |
 | H2 Level 4 (2D solver + Schwartz cusp correction) | 96.0% D_e | Molecule-frame hyperspherical; ~95% pure-variational |
 | HeH+ Level 4 | 93.1% D_e | Heteronuclear extension |
 | LiH Composed (ab initio PK) | R_eq 6.4% | Composed geometry |

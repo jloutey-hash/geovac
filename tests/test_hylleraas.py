@@ -96,6 +96,55 @@ class TestBasisInfrastructure:
 # Category 2: r₁₂ computation
 # ============================================================
 
+class TestNeumannVeeRejectsExplicitR12:
+    """REJECTS: the Neumann V_ee silently returning a number for a p>0 basis.
+
+    The Neumann expansion in ``geovac/neumann_vee.py`` is derived for p = 0 and
+    depends on the basis ONLY through the index tuples (j, k, l, m), so a
+    Hylleraas function's r12^p factor is invisible to it.  Its docstring said
+    "p = 0 only for now" and nothing enforced that, which is how a documented
+    restriction becomes a wrong number: measured before the guard, it returned a
+    BIT-IDENTICAL V_ee for p = 0, 1, 2 and 7 (max|dV_ee| = 0.0), and
+    ``solve_hylleraas(..., vee_method='neumann')`` on a p=1 basis returned
+    E_total = -0.9035 Ha, i.e. -55.3% of D_e -- unbound, absurd, and silent.
+
+    The guard must also NOT reject p = 0, or it would "pass" by refusing
+    everything while removing the working path that Paper 12 depends on.
+    """
+
+    def test_raises_on_pure_p1_basis(self):
+        from geovac.neumann_vee import compute_vee_matrix_neumann
+        basis = [HylleraasBasisFunction(b.j, b.k, b.l, b.m, 1, b.alpha)
+                 for b in generate_basis(j_max=1, l_max=0, p_max=0, alpha=1.0)]
+        with pytest.raises(NotImplementedError, match="p = 0 only"):
+            compute_vee_matrix_neumann(basis, 1.4011)
+
+    def test_raises_on_mixed_p_basis(self):
+        """The realistic call: generate_basis(p_max=1) mixes p=0 and p=1."""
+        from geovac.neumann_vee import compute_vee_matrix_neumann
+        basis = generate_basis(j_max=1, l_max=0, p_max=1, alpha=1.0)
+        assert sorted({b.p for b in basis}) == [0, 1], "fixture lost its p>0 half"
+        with pytest.raises(NotImplementedError):
+            compute_vee_matrix_neumann(basis, 1.4011)
+
+    def test_does_not_reject_the_working_p0_path(self):
+        """A guard that rejected p=0 too would break Paper 12's Neumann V_ee."""
+        from geovac.neumann_vee import compute_vee_matrix_neumann
+        basis = generate_basis(j_max=1, l_max=0, p_max=0, alpha=1.0)
+        V = compute_vee_matrix_neumann(basis, 1.4011)
+        assert V.shape == (len(basis), len(basis))
+        assert np.isfinite(V).all()
+        assert np.abs(V).max() > 0.0, "V_ee came back identically zero"
+
+    def test_solver_surfaces_the_error_rather_than_an_energy(self):
+        """solve_hylleraas must propagate it, not swallow it into a number."""
+        grids = build_quadrature_grids(N_xi=8, N_eta=6, N_phi=6)
+        basis = generate_basis(j_max=1, l_max=0, p_max=1, alpha=1.0)
+        with pytest.raises(NotImplementedError):
+            solve_hylleraas(basis, 1.4011, grids, vee_method='neumann',
+                            verbose=False)
+
+
 class TestR12Computation:
     """Tests for inter-electron distance in prolate spheroidals."""
 

@@ -20,7 +20,17 @@ exact-arithmetic energy unchanged -- only the conditioning changes.  Re-based to
 Laguerre(xi) x Legendre(eta) the normalized condition number stays ~1e2 where the
 monomial is ~1e10, and grows linearly rather than exponentially, so the basis can
 be pushed to (5,5)+delta and the energy climbs monotonically and variationally to
-99.767% of D_e (0.41 mHa, inside chemical accuracy).
+99.767% of D_e (0.41 mHa, inside chemical accuracy) at a FIXED alpha = 1.0 --
+which is what makes that a ladder, since "each point contains its predecessor and
+lies below it" only holds at a consistent exponent.
+
+At the variational OPTIMUM of that same basis, alpha = 1.40 (this module's default
+since 2026-09-18), the result is 99.81% of D_e (0.32 mHa) -- better by 0.082 mHa,
+a fifth of the residual, and better conditioned (4.90e10 vs 9.37e10) with all
+1944 functions retained.  Both numbers are real and neither supersedes the other:
+99.767% is the fixed-alpha ladder endpoint, 99.81% is the basis's best variational
+point.  They are registered separately as ``p12_rebased_de_pct`` and
+``p12_rebased_de_pct_aopt``; see :func:`recondition_energy` on the alpha default.
 
 WHY EXTENDED PRECISION -- AND WHERE IT IS ACTUALLY NEEDED.  A float64 change of
 basis C S C^T amplifies the 1e-16 entry error by ||C||^2, and at high degree the
@@ -918,7 +928,7 @@ class ReconditionResult(NamedTuple):
     engine: str
 
 
-def recondition_energy(j_max: int, l_max: int, mu_max: int, alpha: float = 1.0,
+def recondition_energy(j_max: int, l_max: int, mu_max: int, alpha: float = 1.40,
                        basis: str = "laguerre_legendre", R: float = R_DEFAULT,
                        l_neumann: int = 0, dps: int = DEFAULT_DPS,
                        verbose: bool = False, engine: str = "direct"
@@ -954,7 +964,25 @@ def recondition_energy(j_max: int, l_max: int, mu_max: int, alpha: float = 1.0,
 
     Note on ``ReconditionResult.err_mha``: it is SIGNED, ``(E_exact - E)*1000``,
     so a variational result is NEGATIVE.  Papers and the numeric registry quote
-    the magnitude (0.41 mHa); take ``abs()`` before comparing against a bound.
+    the magnitude; take ``abs()`` before comparing against a bound.
+
+    ON THE ``alpha`` DEFAULT (changed 1.0 -> 1.40 on 2026-09-18, PI-approved).
+    ``alpha`` is a genuine variational parameter here, not the Fock energy shell
+    (that is Paper 11 / Papers 8-9's shared p_0; nothing in this module ties
+    alpha to it).  The default is the measured optimum **at the (5,5)+delta
+    headline truncation**: scanning that basis gives 0.406 / 0.346 / 0.324 /
+    0.334 mHa at alpha = 1.00 / 1.20 / 1.40 / 1.50, so alpha = 1.40 is the
+    bracketed minimum and beats the previously-default 1.0 by 0.082 mHa -- 20%
+    of that residual -- while being MORE tightly conditioned (4.90e10 vs
+    9.37e10) and keeping all 1944 functions.
+
+    It is NOT universally optimal, and the reason matters: alpha_opt **drifts
+    upward with basis size** (~1.20-1.25 at (4,4) mu<=1, 1.40 at (5,5) mu<=1),
+    which is the signature of ONE exponent straining to serve functions of
+    different effective range.  So re-optimize alpha for any other truncation
+    rather than trusting this default, and read the drift as the standing
+    argument for a multi-exponent radial set (memo
+    ``debug/sprint_explicit_correlation_scoping_memo.md`` Sec. 4b).
     """
     if engine not in ("mpf", "direct"):
         raise ValueError(f"unknown engine {engine!r}; expected 'mpf' or 'direct'")

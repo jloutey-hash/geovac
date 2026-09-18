@@ -339,6 +339,75 @@ def test_direct_and_mpf_engines_agree_end_to_end():
     )
 
 
+def test_alpha_default_is_the_measured_optimum():
+    """REJECTS: the module default drifting away from the exponent the paper's
+    headline is quoted at.
+
+    Paper 12's headline (99.81% of D_e, 0.32 mHa) is the (5,5)+delta result at the
+    variational optimum alpha = 1.40, registered as `p12_rebased_alpha_opt`.  If
+    this default moved, the module would compute one number while the paper
+    printed another -- which is exactly the state this test was written to end:
+    the re-conditioned table was published at alpha = 1.0 while the paper's own
+    text said alpha is "optimized variationally".
+
+    Fast by construction (reads a signature; runs no physics).
+    """
+    import inspect
+    default = inspect.signature(pr.recondition_energy).parameters['alpha'].default
+    assert abs(default - 1.40) < 1e-12, (
+        f"recondition_energy's alpha default is {default}, not the measured "
+        f"optimum 1.40 that Paper 12's headline is quoted at"
+    )
+
+
+@pytest.mark.slow
+def test_alpha_optimum_beats_the_fixed_alpha_ladder():
+    """REJECTS: the claim that alpha = 1.0 is this basis's best variational point.
+
+    Paper 12 prints a monotone ladder at a FIXED alpha = 1.0 -- correctly, since
+    "each point contains its predecessor and lies below it" only holds at a
+    consistent exponent -- and its headline was long quoted from that ladder's
+    endpoint.  But alpha is a variational parameter, so the endpoint is not the
+    basis's best point.  Measured at (5,5)+delta: 0.406 / 0.346 / 0.324 / 0.334
+    mHa at alpha = 1.00 / 1.20 / 1.40 / 1.50, a bracketed minimum at 1.40 worth
+    0.082 mHa -- a fifth of the residual.
+
+    Checked here at (4,4)+delta instead, which is ~365 s rather than ~25 min.
+    That choice is deliberate: the (5,5)+delta headline previously had no
+    regression guard because it was "confirmed once, too slow for CI", and that
+    gap is what let the v5.13.6 seed regression through.  A cheaper basis that
+    exercises the same mechanism is worth more than an un-run exact one.
+
+    Asserts the improvement is REAL and not a trade: lower energy, still
+    variational, no functions lost, and conditioning no worse -- because a "gain"
+    bought by degrading the metric would not support the headline.
+    """
+    lo = pr.recondition_energy(4, 4, 2, alpha=1.00, basis="laguerre_legendre")
+    hi = pr.recondition_energy(4, 4, 2, alpha=1.40, basis="laguerre_legendre")
+
+    assert lo.variational and hi.variational, "both points must be variational"
+    assert hi.energy < lo.energy, (
+        f"alpha=1.40 gave {hi.energy:.7f} vs alpha=1.0's {lo.energy:.7f}; the "
+        f"optimum does not beat the ladder endpoint, so the headline's alpha is "
+        f"not justified"
+    )
+    gain_mha = abs(lo.err_mha) - abs(hi.err_mha)
+    assert gain_mha > 0.03, (
+        f"alpha optimization bought only {gain_mha:.4f} mHa (measured 0.057); "
+        f"below this the improvement is not distinguishable from noise and the "
+        f"headline should stay at the ladder endpoint"
+    )
+    assert hi.n_kept == hi.n_basis, (
+        f"alpha=1.40 kept {hi.n_kept}/{hi.n_basis} functions; a gain that "
+        f"discards basis functions is not the same calculation"
+    )
+    assert hi.cond_norm <= lo.cond_norm, (
+        f"conditioning got WORSE at the optimum ({hi.cond_norm:.2e} vs "
+        f"{lo.cond_norm:.2e}); then the gain is bought from the metric and the "
+        f"downcast solve is less trustworthy, not more"
+    )
+
+
 @pytest.mark.slow
 def test_climb_reaches_chemical_accuracy_past_the_cap():
     """REJECTS: a climb that plateaus at the monomial cap, or a non-variational
