@@ -22,13 +22,27 @@ monomial is ~1e10, and grows linearly rather than exponentially, so the basis ca
 be pushed to (5,5)+delta and the energy climbs monotonically and variationally to
 99.767% of D_e (0.41 mHa, inside chemical accuracy).
 
-WHY EXTENDED PRECISION.  A float64 change of basis C S C^T amplifies the 1e-16
-entry error by ||C||^2, and at high degree the monomial matrices carry cond ~1e26,
-so the re-based matrices are corrupted (the naive relift breaks at (4,4)/(5,5)).
-Every matrix ENTRY is therefore built in mpmath so the change of basis stays
-clean; the well-conditioned orthogonal matrices are then downcast to float64 for
-a fast, robust eigensolve.  The V_ee assembly in particular MUST stay mpf -- it
-carries the same dynamic range as S, and a float64 V returns -46 Ha.
+WHY EXTENDED PRECISION -- AND WHERE IT IS ACTUALLY NEEDED.  A float64 change of
+basis C S C^T amplifies the 1e-16 entry error by ||C||^2, and at high degree the
+MONOMIAL matrices carry cond ~1e26, so re-basing them in float64 is corrupted
+(the naive relift breaks at (4,4)/(5,5)).  Anything that passes through the
+monomial basis is therefore built in mpmath, and the well-conditioned orthogonal
+matrices are downcast to float64 for a fast, robust eigensolve.  The V_ee
+assembly in particular MUST stay mpf -- it carries the same dynamic range as S,
+and a float64 V returns -46 Ha.
+
+Note what that argument is about: the CHANGE OF BASIS, not the orthogonal
+matrices themselves.  It therefore says nothing about a matrix that is never
+built in the monomial basis at all.  Hence TWO ENGINES
+(``recondition_energy(..., engine=...)``), which agree to the downcast floor:
+
+* ``"mpf"`` -- build S, H1 and V_ee in the monomial basis and re-base all three.
+  The original route and the definition of correctness.
+* ``"direct"`` -- build S and H1 straight in the orthogonal basis
+  (:func:`build_one_body_direct`: exact mpf 1D blocks, then a float64 O(N^2)
+  assembly), so no congruence is applied to them and no ||C||^2 amplification
+  arises.  Only V_ee keeps the mpf build plus one re-basing, because the change
+  of basis is linear:  H_o = H1_o + cob(V) + S_o / R.
 
 TWO BASIS FAMILIES (the ``basis`` argument):
 
@@ -595,6 +609,244 @@ def _factored_cob(M: np.ndarray, Nmu: int, Nr: int, Na: int,
 
 
 # ==========================================================================
+# DIRECT build of the one-body matrices in the ORTHOGONAL basis
+#
+# The pipeline above forms S and H1 in the MONOMIAL basis (mpf, O(N^2) entries)
+# and then re-bases them.  For the one-body operator both halves are avoidable:
+# every one-electron block FACTORS as radial x angular, so the orthogonal-basis
+# matrices can be built from tiny 1D blocks -- computed exactly in mpf, where
+# their small size makes them cheap and their dynamic range harmless -- after
+# which the O(N^2) two-electron assembly runs in float64.  No monomial matrix is
+# ever formed, so no change of basis is applied to S or H1 and none of the
+# ||C||^2 error amplification that forces extended precision arises for them.
+# V_ee is NOT covered here: it still needs the mpf build plus one re-basing.
+#
+# Ground truth / definition of correctness: one_body_mp + _factored_cob above.
+# Derivation and the validation increments: debug/sprint_direct_build_memo.md.
+#
+# Kept in this module rather than a separate one so the shared mpf polynomial
+# helpers keep a single owner and recondition_energy needs no cross-module
+# import (a separate module would import these helpers while this module
+# imports the engine -- a cycle).  Splitting it out later is free.
+# ==========================================================================
+_BASIS_KINDS: Tuple[str, ...] = ("laguerre_legendre", "gegenbauer")
+
+
+def _radial_rows(n: int, mu: int, alpha: float, basis: str) -> List[List[mp.mpf]]:
+    """Monomial coefficient rows of the radial orthogonal functions for this mu.
+
+    Mirrors :func:`_transforms_per_mu` exactly: the plain Laguerre family is the
+    same for every mu, the mu-adapted family uses L_n^{(mu)}.
+    """
+    if basis == "laguerre_legendre":
+        return [laguerre_coeffs(a, alpha, n) for a in range(n)]
+    if basis == "gegenbauer":
+        return [assoc_laguerre_coeffs(a, mu, alpha, n) for a in range(n)]
+    raise ValueError(f"unknown basis {basis!r}; expected one of {_BASIS_KINDS}")
+
+
+def _angular_rows(n: int, mu: int, basis: str) -> List[List[mp.mpf]]:
+    """Monomial coefficient rows of the angular orthogonal functions for this mu."""
+    if basis == "laguerre_legendre":
+        return [legendre_coeffs(b, n) for b in range(n)]
+    if basis == "gegenbauer":
+        return [gegenbauer_coeffs(b, mp.mpf(mu) + mp.mpf('0.5'), n)
+                for b in range(n)]
+    raise ValueError(f"unknown basis {basis!r}; expected one of {_BASIS_KINDS}")
+
+
+def _mx_poly(jx: int, alpha: float) -> List:
+    """mu = 0 radial derivative: d/dxi[xi^jx e^{-alpha xi}] / e^{-alpha xi}."""
+    a = mp.mpf(alpha)
+    t = _shift([-a], jx)
+    if jx > 0:
+        t = _pa(t, _shift([mp.mpf(jx)], jx - 1))
+    return t
+
+
+def _nx_poly(jx: int, mu: int, alpha: float) -> List:
+    """mu > 0 radial derivative polynomial (mirrors :func:`_kin`'s ``nx``)."""
+    a, m = mp.mpf(alpha), mp.mpf(mu)
+    t = _shift([m], jx + 1)
+    t = _ps(t, _pm(_shift([a], jx), _xi2m1(1)))
+    if jx > 0:
+        t = _pa(t, _pm(_shift([mp.mpf(jx)], jx - 1), _xi2m1(1)))
+    return t
+
+
+def _my_poly(lx: int) -> List:
+    """mu = 0 angular derivative: d/deta[eta^lx]."""
+    return _shift([mp.mpf(lx)], lx - 1) if lx > 0 else [mp.mpf(0)]
+
+
+def _ny_poly(lx: int, mu: int) -> List:
+    """mu > 0 angular derivative polynomial (mirrors :func:`_kin`'s ``ny``)."""
+    m = mp.mpf(mu)
+    t = _shift([-m], lx + 1)
+    if lx > 0:
+        t = _pa(t, _pm(_shift([mp.mpf(lx)], lx - 1), _meta2(1)))
+    return t
+
+
+def _combine(coeffs: Sequence, poly_fn: Callable[[int], List]) -> List:
+    """sum_p coeffs[p] * poly_fn(p) -- linearity of d/dx over the basis."""
+    out = [mp.mpf(0)]
+    for p, cp in enumerate(coeffs):
+        if cp == 0:
+            continue
+        out = _pa(out, [cp * t for t in poly_fn(p)])
+    return out
+
+
+def _radial_blocks(j_max: int, mu: int, alpha: float, A: Sequence, basis: str
+                   ) -> Tuple[np.ndarray, ...]:
+    """1D radial blocks r0, r1, r2, K_rad on weight (xi^2-1)^mu, plus the
+    azimuthal pair r0', r2' on the shifted weight (xi^2-1)^{mu-1} (None at mu=0).
+    """
+    n = j_max + 1
+    Lc = _radial_rows(n, mu, alpha, basis)
+    xw = _xi2m1(mu)
+    xw1 = _xi2m1(mu - 1) if mu >= 1 else _xi2m1(1)
+    wk = 1 if mu == 0 else mu - 1          # (xi^2-1) power inside K_rad
+
+    def blk(xi_pow: int, weight: List) -> np.ndarray:
+        M = np.empty((n, n), object)
+        for a in range(n):
+            for c in range(a, n):
+                prod = _pm(_pm(Lc[a], Lc[c]), weight)
+                M[a, c] = M[c, a] = _mom_xi(_shift(prod, xi_pow), A)
+        return M
+
+    r0, r1, r2 = blk(0, xw), blk(1, xw), blk(2, xw)
+    if mu == 0:
+        deriv: Callable[[int], List] = lambda p: _mx_poly(p, alpha)
+    else:
+        deriv = lambda p: _nx_poly(p, mu, alpha)
+    NX = [_combine(Lc[a], deriv) for a in range(n)]
+    xwk = _xi2m1(wk)
+    K_rad = np.empty((n, n), object)
+    for a in range(n):
+        for c in range(a, n):
+            prod = _pm(_pm(NX[a], NX[c]), xwk)
+            K_rad[a, c] = K_rad[c, a] = _mom_xi(prod, A)
+    r0p = blk(0, xw1) if mu >= 1 else None
+    r2p = blk(2, xw1) if mu >= 1 else None
+    return r0, r1, r2, K_rad, r0p, r2p
+
+
+def _angular_blocks(l_max: int, mu: int, basis: str) -> Tuple[np.ndarray, ...]:
+    """1D angular blocks a0, a2, K_ang on weight (1-eta^2)^mu, plus a0', a2' on
+    the shifted weight (1-eta^2)^{mu-1} (None at mu = 0)."""
+    n = l_max + 1
+    Gc = _angular_rows(n, mu, basis)
+    yw = _meta2(mu)
+    yw1 = _meta2(mu - 1) if mu >= 1 else _meta2(1)
+    wk = 1 if mu == 0 else mu - 1
+
+    def blk(eta_pow: int, weight: List) -> np.ndarray:
+        M = np.empty((n, n), object)
+        for b in range(n):
+            for d in range(b, n):
+                prod = _pm(_pm(Gc[b], Gc[d]), weight)
+                M[b, d] = M[d, b] = _mom_eta(_shift(prod, eta_pow))
+        return M
+
+    a0, a2 = blk(0, yw), blk(2, yw)
+    if mu == 0:
+        deriv: Callable[[int], List] = _my_poly
+    else:
+        deriv = lambda r: _ny_poly(r, mu)
+    NY = [_combine(Gc[b], deriv) for b in range(n)]
+    ywk = _meta2(wk)
+    K_ang = np.empty((n, n), object)
+    for b in range(n):
+        for d in range(b, n):
+            prod = _pm(_pm(NY[b], NY[d]), ywk)
+            K_ang[b, d] = K_ang[d, b] = _mom_eta(prod)
+    a0p = blk(0, yw1) if mu >= 1 else None
+    a2p = blk(2, yw1) if mu >= 1 else None
+    return a0, a2, K_ang, a0p, a2p
+
+
+def _to_f64(M: np.ndarray) -> np.ndarray:
+    """Downcast an mpf object matrix to float64."""
+    return np.array([[float(M[i, j]) for j in range(M.shape[1])]
+                     for i in range(M.shape[0])], dtype=float)
+
+
+def build_one_body_direct(j_max: int, l_max: int, mu_max: int,
+                          alpha: float = 1.0, R: float = R_DEFAULT,
+                          basis: str = "laguerre_legendre",
+                          dps: int = DEFAULT_DPS
+                          ) -> Tuple[np.ndarray, np.ndarray]:
+    """Overlap S and one-body H1 = T + V_ne directly in the orthogonal basis.
+
+    Returns float64 matrices in the SAME ordering and normalization as
+    ``_factored_cob(one_body_mp(...))`` -- i.e. the re-based one-body matrices,
+    built without ever forming the monomial ones.  Every one-electron block
+    factors radial x angular:
+
+    * overlap        ov = r2.a0 - r0.a2          (the xi^2 - eta^2 Jacobian)
+    * nuclear attr.  vne = r1.a0
+    * kinetic (grad) K_rad.a0 + r0.K_ang
+    * azimuthal      mu^2 (r2'.a0' - r0'.a2')    on the shifted weights
+
+    so only the tiny 1D blocks need exact (mpf) evaluation, and the O(N^2)
+    two-electron assembly is vectorized float64.
+    """
+    if basis not in _BASIS_KINDS:
+        raise ValueError(f"unknown basis {basis!r}; expected one of {_BASIS_KINDS}")
+    with mp.workdps(dps):
+        n_mom = 6 * max(j_max, l_max) + 6 * (mu_max + 2) + 20
+        A = ngm._mono_moments(2.0 * alpha, n_mom)
+        h6 = float((mp.mpf(R) / 2) ** 6)
+        pref_T = 0.5 * (4.0 / R ** 2) * h6
+        pref_V = -(4.0 / R) * h6
+        RB: Dict[int, Tuple] = {}
+        AB: Dict[int, Tuple] = {}
+        ccv: Dict[int, float] = {}
+        ssv: Dict[int, float] = {}
+        for mu in range(mu_max + 1):
+            r0, r1, r2, Kr, r0p, r2p = _radial_blocks(j_max, mu, alpha, A, basis)
+            a0, a2, Ka, a0p, a2p = _angular_blocks(l_max, mu, basis)
+            RB[mu] = tuple(None if M is None else _to_f64(M)
+                           for M in (r0, r1, r2, Kr, r0p, r2p))
+            AB[mu] = tuple(None if M is None else _to_f64(M)
+                           for M in (a0, a2, Ka, a0p, a2p))
+            ccv[mu] = float(_phi_cc(mu))
+            ssv[mu] = float(_phi_ss(mu))
+
+    idx = _product_index(j_max, l_max, mu_max)
+    N = len(idx)
+    S = np.zeros((N, N))
+    H = np.zeros((N, N))
+    L1 = l_max + 1
+    idx_arr = np.array(idx)
+    for mu in range(mu_max + 1):
+        r0, r1, r2, Kr, r0p, r2p = RB[mu]
+        a0, a2, Ka, a0p, a2p = AB[mu]
+        cc, ss = ccv[mu], ssv[mu]
+        # single-electron blocks over se = radial * (l_max+1) + angular
+        OV = np.kron(r2, a0) - np.kron(r0, a2)
+        GR = np.kron(Kr, a0) + np.kron(r0, Ka)
+        VN = np.kron(r1, a0)
+        AZ = ((mu * mu) * (np.kron(r2p, a0p) - np.kron(r0p, a2p))
+              if r0p is not None else np.zeros_like(OV))
+        rows = np.where(idx_arr[:, 4] == mu)[0]
+        se1 = idx_arr[rows, 0] * L1 + idx_arr[rows, 1]       # (j, l)
+        se2 = idx_arr[rows, 2] * L1 + idx_arr[rows, 3]       # (k, m)
+        OV1, OV2 = OV[np.ix_(se1, se1)], OV[np.ix_(se2, se2)]
+        GR1, GR2 = GR[np.ix_(se1, se1)], GR[np.ix_(se2, se2)]
+        VN1, VN2 = VN[np.ix_(se1, se1)], VN[np.ix_(se2, se2)]
+        AZ1, AZ2 = AZ[np.ix_(se1, se1)], AZ[np.ix_(se2, se2)]
+        S[np.ix_(rows, rows)] = h6 * cc * OV1 * OV2
+        H[np.ix_(rows, rows)] = (
+            pref_T * (cc * (GR1 * OV2 + OV1 * GR2) + ss * (AZ1 * OV2 + OV1 * AZ2))
+            + pref_V * cc * (VN1 * OV2 + OV1 * VN2))
+    return S, H
+
+
+# ==========================================================================
 # normalized float64 solve
 # ==========================================================================
 def _normalized_solve(S_o: np.ndarray, H_o: np.ndarray
@@ -608,13 +860,25 @@ def _normalized_solve(S_o: np.ndarray, H_o: np.ndarray
     canonical orthogonalization is then correct and robust.  Returns the lowest
     variational energy across the discard-threshold sweep, its condition number,
     the surviving dimension, and the full sweep.
+
+    Accepts mpf object matrices (the ``mpf`` engine) or float64 ones (the
+    ``direct`` engine); the rescaling is the same diagonal congruence either way.
     """
     n = S_o.shape[0]
-    D = [mp.sqrt(S_o[i, i]) for i in range(n)]
-    Shat = np.array([[float(S_o[i, j] / (D[i] * D[j])) for j in range(n)]
-                     for i in range(n)])
-    Hhat = np.array([[float(H_o[i, j] / (D[i] * D[j])) for j in range(n)]
-                     for i in range(n)])
+    if S_o.dtype == object:
+        D = [mp.sqrt(S_o[i, i]) for i in range(n)]
+        Shat = np.array([[float(S_o[i, j] / (D[i] * D[j])) for j in range(n)]
+                         for i in range(n)])
+        Hhat = np.array([[float(H_o[i, j] / (D[i] * D[j])) for j in range(n)]
+                         for i in range(n)])
+    else:
+        # Same congruence, vectorized.  Dividing by d_i d_j is a per-entry
+        # rescale, so it preserves each entry's RELATIVE error exactly -- which
+        # is why a float64 S_o/H_o may be normalized after downcasting rather
+        # than before.  (At N = 1944 the mpf branch is 7.6M mpf divisions.)
+        d = np.sqrt(np.diag(S_o).astype(float))
+        Shat = (np.asarray(S_o, dtype=float) / d[:, None]) / d[None, :]
+        Hhat = (np.asarray(H_o, dtype=float) / d[:, None]) / d[None, :]
     Shat = 0.5 * (Shat + Shat.T)
     Hhat = 0.5 * (Hhat + Hhat.T)
     w, U = np.linalg.eigh(Shat)
@@ -648,20 +912,52 @@ class ReconditionResult(NamedTuple):
     basis: str
     truncation: Tuple[int, int, int]
     sweep: List[Tuple[float, float, int]]
+    # Required, deliberately undefaulted: either default would be wrong for a
+    # result produced by the other route, and a result must not be able to
+    # misreport which engine computed it.
+    engine: str
 
 
 def recondition_energy(j_max: int, l_max: int, mu_max: int, alpha: float = 1.0,
                        basis: str = "laguerre_legendre", R: float = R_DEFAULT,
                        l_neumann: int = 0, dps: int = DEFAULT_DPS,
-                       verbose: bool = False) -> ReconditionResult:
+                       verbose: bool = False, engine: str = "direct"
+                       ) -> ReconditionResult:
     """Re-conditioned prolate H2 ground-state energy at truncation (j_max, l_max)
     and azimuthal cutoff mu_max.
 
-    Builds S, H1, V_ee in mpmath (``dps`` digits), re-bases the monomial span to
-    the chosen orthogonal-polynomial ``basis`` by an exact factored change of
-    basis, and solves in float64 on the unit-normalized matrices.  The energy is
-    the lowest variational point of the discard-threshold sweep.
+    Solves in float64 on the unit-normalized matrices; the energy is the lowest
+    variational point of the discard-threshold sweep.  Two routes to the same
+    re-based matrices:
+
+    * ``engine="direct"`` (DEFAULT) -- build S and H1 straight in the orthogonal
+      basis (:func:`build_one_body_direct`), so no monomial one-body matrix is
+      formed and no congruence is applied to them.  Only V_ee still needs the
+      mpf build plus one re-basing, because the change of basis is linear:
+      ``H_o = H1_o + cob(V) + S_o / R``.
+    * ``engine="mpf"`` -- build S, H1 and V_ee in mpmath (``dps`` digits) in the
+      MONOMIAL basis, then re-base all three.  The original route, retained as
+      the definition of correctness and as what the guards cross-check against.
+
+    Agreement, measured rather than assumed (the mpf route is the reference):
+    energies identical to 1e-15 Ha at (2,2,1)/(3,3,1) in BOTH basis families;
+    the direct one-body matrices match ``one_body_mp`` + ``_factored_cob`` to a
+    scale-relative 6.3e-16 at the (5,5)+delta headline truncation; and ``direct``
+    reproduces the recorded headline points to every printed digit ((4,4,2)
+    99.711%, (5,5,2) 99.767% / 0.406 mHa, both variational, all functions kept).
+
+    Cost: whole-pipeline 2.7x at (3,3,1) and 3.2x at (4,4,2) (the removed phases
+    scale worse than the retained ones, so the gain grows with N; (5,5)+delta
+    runs in 734 s).  What remains is essentially all V_ee -- its mpf build plus
+    its one surviving re-basing -- so a further large gain needs V_ee built
+    directly in the orthogonal basis, not more work on the one-body half.
+
+    Note on ``ReconditionResult.err_mha``: it is SIGNED, ``(E_exact - E)*1000``,
+    so a variational result is NEGATIVE.  Papers and the numeric registry quote
+    the magnitude (0.41 mHa); take ``abs()`` before comparing against a bound.
     """
+    if engine not in ("mpf", "direct"):
+        raise ValueError(f"unknown engine {engine!r}; expected 'mpf' or 'direct'")
     with mp.workdps(dps):
         idx = _product_index(j_max, l_max, mu_max)
         fns = [ProductFn(j, l, k, m, mu, alpha) for (j, l, k, m, mu) in idx]
@@ -673,21 +969,28 @@ def recondition_energy(j_max: int, l_max: int, mu_max: int, alpha: float = 1.0,
 
         if l_neumann <= 0:
             l_neumann = 2 * l_max + 4 * mu_max + 10
-        n_mom = 4 * j_max + 4 * (mu_max + 1) + 4 * l_max + 16
-        A = ngm._mono_moments(2.0 * alpha, n_mom)
 
         t0 = time.time()
-        S, H1 = one_body_mp(fns, alpha, R, A)
-        V = vee_mp(fns, alpha, R, l_neumann, verbose)
-        Sf = 1.0 / mp.mpf(R)
-        H = np.empty((N, N), object)
-        for i in range(N):
-            for j in range(N):
-                H[i, j] = H1[i, j] + V[i, j] + Sf * S[i, j]
-
         Tr_list, Ta_list = _transforms_per_mu(basis, j_max, l_max, mu_max, alpha)
-        S_o = _factored_cob(S, Nmu, Nr, Na, Tr_list, Ta_list)
-        H_o = _factored_cob(H, Nmu, Nr, Na, Tr_list, Ta_list)
+
+        if engine == "direct":
+            S_o, H1_o = build_one_body_direct(j_max, l_max, mu_max, alpha, R,
+                                              basis, dps)
+            V = vee_mp(fns, alpha, R, l_neumann, verbose)
+            V_o = _to_f64(_factored_cob(V, Nmu, Nr, Na, Tr_list, Ta_list))
+            H_o = H1_o + V_o + (1.0 / R) * S_o
+        else:
+            n_mom = 4 * j_max + 4 * (mu_max + 1) + 4 * l_max + 16
+            A = ngm._mono_moments(2.0 * alpha, n_mom)
+            S, H1 = one_body_mp(fns, alpha, R, A)
+            V = vee_mp(fns, alpha, R, l_neumann, verbose)
+            Sf = 1.0 / mp.mpf(R)
+            H = np.empty((N, N), object)
+            for i in range(N):
+                for j in range(N):
+                    H[i, j] = H1[i, j] + V[i, j] + Sf * S[i, j]
+            S_o = _factored_cob(S, Nmu, Nr, Na, Tr_list, Ta_list)
+            H_o = _factored_cob(H, Nmu, Nr, Na, Tr_list, Ta_list)
 
         E, cond_norm, nk, sweep = _normalized_solve(S_o, H_o)
 
@@ -696,13 +999,14 @@ def recondition_energy(j_max: int, l_max: int, mu_max: int, alpha: float = 1.0,
     variational = E > E_EXACT - 5e-6
     if verbose:
         sw = " ".join(f"{t:.0e}:{100 * (-1 - e) / DE_EXACT:.3f}" for (t, e, _) in sweep)
-        print(f"  {basis} ({j_max},{l_max}) mu<={mu_max}  N={N} keep={nk}  "
+        print(f"  {basis} [{engine}] ({j_max},{l_max}) mu<={mu_max}  "
+              f"N={N} keep={nk}  "
               f"E={E:.7f}  D_e%={de:.3f}  err={err:+.3f}mHa  "
               f"cond(norm)={cond_norm:.1e}  [{time.time() - t0:.0f}s]"
               f"{'' if variational else '  <-NON-VARIATIONAL'}", flush=True)
         print(f"       tol-sweep D_e%: {sw}", flush=True)
     return ReconditionResult(E, de, err, N, nk, cond_norm, variational,
-                             basis, (j_max, l_max, mu_max), sweep)
+                             basis, (j_max, l_max, mu_max), sweep, engine)
 
 
 if __name__ == "__main__":

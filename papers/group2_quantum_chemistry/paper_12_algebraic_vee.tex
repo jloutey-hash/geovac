@@ -1182,7 +1182,8 @@ exact-arithmetic energy---unchanged, and only the conditioning changes.
 the $10^{-16}$ entry error by $\|C\|^2$ and the high-degree monomial
 matrices carry $\mathrm{cond}\sim10^{26}$, a float64 change of basis is
 corrupted---it breaks for \emph{both} families at every truncation
-tested.  Every matrix entry is therefore built in extended precision,
+tested.  Every matrix entry that passes through the monomial basis is
+therefore built in extended precision,
 the well-conditioned orthogonal matrices are downcast to float64, and
 the generalized eigenproblem is solved on the unit-normalized
 (correlation) matrices---a diagonal congruence that leaves the
@@ -1201,7 +1202,7 @@ below it.
   (Laguerre$\times$Legendre and the $\mu$-adapted Gegenbauer give the
   identical energy).  Same span as the monomial basis of
   Table~\ref{tab:azimuthal}, re-conditioned;\ $\alpha = 1.0$, the
-  extended-precision build and unit-normalized solve of the text.
+  extended-precision $V_{ee}$ build and unit-normalized solve of the text.
   $D_e^{\rm exact} = 0.174475$~Ha.}
 \label{tab:recondition}
 \begin{ruledtabular}
@@ -1216,6 +1217,23 @@ below it.
 \end{tabular}
 \end{ruledtabular}
 \end{table}
+
+\textbf{[MEASURED]} The extended-precision requirement above constrains
+the \emph{change of basis}, not the orthogonal matrices themselves, and so
+does not apply to a matrix that is never built in the monomial basis at
+all.  The one-body operators admit such a construction:\ every
+one-electron block factorises as radial $\times$ angular, so $S$ and
+$H_1$ can be assembled directly in the orthogonal basis from
+one-dimensional blocks small enough to evaluate exactly, after which the
+$O(N^2)$ two-electron assembly is ordinary double precision.  Built that
+way they agree with the extended-precision route re-based to
+$6\times10^{-16}$ of the matrix scale at $(5,5)+\delta$ in both families,
+and every energy in Table~\ref{tab:recondition} is unchanged.  Extended
+precision is therefore not a requirement of the one-body half at all:\ its
+one-dimensional blocks are evaluated exactly because they are small enough
+for that to cost nothing, not because a congruence forces it.  What does
+still force it is the $V_{ee}$ re-basing, which accordingly accounts for
+essentially the whole cost of the calculation.
 
 \textbf{[MEASURED]} The residual $\sim\!0.4$~mHa is radial completeness
 and the true electron-electron cusp, which converge as the slow

@@ -117,12 +117,74 @@ def fire_wall_exists() -> None:
           f"monomial E = {e_mono:.3f} Ha (< exact {pg.E_EXACT}); the wall is real")
 
 
+# --- Guard: test_climb_reaches_chemical_accuracy_past_the_cap, the abs() half.
+#     Wrong answer: E = -1.00, i.e. NO binding at all (0% of D_e).  `err_mha` is
+#     SIGNED -- (E_exact - E)*1000 -- so every variational result is negative and
+#     the original `err_mha < 1.6` accepted this; the repaired `abs(...) < 1.6`
+#     must reject it.  Asserts BOTH halves, so it also records that the guard was
+#     genuinely dead rather than merely loose.
+def fire_abs_err_mha() -> None:
+    E_bad = -1.00
+    err_bad = (pr.E_EXACT - E_bad) * 1000.0
+    old_accepts = err_bad < 1.6
+    new_rejects = not (abs(err_bad) < 1.6)
+    check("abs(err_mha) enforces chemical accuracy", old_accepts and new_rejects,
+          f"E=-1.00 (0% of D_e, err={err_bad:+.3f} mHa): unsigned guard accepted "
+          f"it ({old_accepts}), abs() guard rejects it ({new_rejects})")
+
+
+# --- Guard: test_direct_engine_matches_the_mpf_reference_one_body.
+#     Wrong answer: a one-body engine hardcoded to ONE basis family (which the
+#     debug predecessor was -- gegenbauer only), compared against the other
+#     family's mpf reference.  recondition_energy's DEFAULT family is the other
+#     one, so this is the mismatch that would ship silently.
+def fire_one_body_family() -> None:
+    alpha = 1.0
+    _Sd, Hd = pr.build_one_body_direct(2, 2, 1, alpha, basis="laguerre_legendre")
+    with mp.workdps(pr.DEFAULT_DPS):
+        idx = pr._product_index(2, 2, 1)
+        fns = [pr.ProductFn(j, l, k, m, mu, alpha) for (j, l, k, m, mu) in idx]
+        A = pr.ngm._mono_moments(2.0 * alpha, 6 * 2 + 6 * 3 + 20)
+        _S, H1 = pr.one_body_mp(fns, alpha, pr.R_DEFAULT, A)
+        Na = len([1 for l in range(3) for m in range(3) if (l + m) % 2 == 0])
+        Tr, Ta = pr._transforms_per_mu("gegenbauer", 2, 2, 1, alpha)
+        Hg_wrong = pr._to_f64(pr._factored_cob(H1, 2, 9, Na, Tr, Ta))
+    scale = float(np.abs(Hd - Hg_wrong).max() / np.abs(Hg_wrong).max())
+    check("one-body basis family", scale > 1e-13,
+          f"wrong-family reference deviates {scale:.2e} scale-relative "
+          f"(guard bar 1e-13)")
+
+
+# --- Guard: test_direct_and_mpf_engines_agree_end_to_end.
+#     Wrong answer: drop the nuclear-repulsion shift S_o/R from the direct
+#     assembly H_o = H1_o + cob(V) + S_o/R.  The direct path adds the three
+#     pieces separately (relying on linearity of the change of basis) where the
+#     mpf path re-bases their sum, so a dropped term is the characteristic error.
+def fire_missing_nuclear_shift() -> None:
+    alpha = 1.0
+    S_o, H1_o = pr.build_one_body_direct(2, 2, 1, alpha, basis="laguerre_legendre")
+    Tr, Ta = pr._transforms_per_mu("laguerre_legendre", 2, 2, 1, alpha)
+    idx = pr._product_index(2, 2, 1)
+    fns = [pr.ProductFn(j, l, k, m, mu, alpha) for (j, l, k, m, mu) in idx]
+    with mp.workdps(pr.DEFAULT_DPS):
+        V = pr.vee_mp(fns, alpha, pr.R_DEFAULT, 2 * 2 + 4 * 1 + 10)
+        V_o = pr._to_f64(pr._factored_cob(V, 2, 9, 5, Tr, Ta))
+    E_good = pr._normalized_solve(S_o, H1_o + V_o + (1.0 / pr.R_DEFAULT) * S_o)[0]
+    E_bad = pr._normalized_solve(S_o, H1_o + V_o)[0]
+    check("Sf*S_o nuclear shift", abs(E_good - E_bad) > 1e-9,
+          f"dropping S_o/R moves E by {abs(E_good - E_bad):.4f} Ha "
+          f"({E_good:.7f} -> {E_bad:.7f}); guard bar 1e-9")
+
+
 if __name__ == "__main__":
     print("=== fire test: tests/test_paper12_recondition.py guards ===")
     fire_factored_cob()
     fire_norm_spread()
     fire_reduction()
     fire_wall_exists()
+    fire_abs_err_mha()
+    fire_one_body_family()
+    fire_missing_nuclear_shift()
     n_fire = sum(1 for _, c, _ in fired if c)
     print(f"\n{n_fire}/{len(fired)} guards FIRE on their planted wrong answer.")
     if n_fire != len(fired):

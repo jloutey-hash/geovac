@@ -123,6 +123,17 @@ the He R12-CI PoC hit 0.8 mHa at ~6 functions).
    a DIRECT recurrence build in the orthogonal basis (never forming the monomial matrices)
    — identified, not built; a separate diagnostic->implementation sprint.
 
+   > **FORWARD POINTER (2026-09-18, v5.13.8).** That route is now BUILT and is the
+   > default: `geovac/prolate_recondition.build_one_body_direct` + `engine="direct"`.
+   > Read the paragraph above as of its own date — its diagnosis is right (the
+   > build-precision ceiling is the *monomial* matrices' dynamic range) but the
+   > conclusion drawn from it, that "the mpf build is required regardless", does not
+   > hold for a matrix never built in the monomial basis. S and H1 are now built
+   > straight in the orthogonal basis; only V_ee keeps the mpf build plus one
+   > re-basing. It is NOT "seconds" (2.7x at (3,3,1), 3.2x at (4,4,2), 734 s at
+   > (5,5)+δ) and V_ee is now the whole remaining cost.
+   > Chronicle: CHANGELOG v5.13.8; memo `debug/sprint_direct_build_memo.md`.
+
 ## Scope / caveats
 
 Single alpha=1.0, single geometry R=1.4011, homonuclear H2. The heteronuclear and

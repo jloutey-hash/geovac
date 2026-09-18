@@ -1,5 +1,13 @@
 """#3 follow-on: DIRECT float64 one-body build in the orthogonal basis, no monomials.
 
+SUPERSEDED (2026-09-18, v5.13.8) -- this driver's engine is now PRODUCTION code:
+``geovac.prolate_recondition.build_one_body_direct`` (with the ``basis`` and ``R``
+parameters this version lacks -- it is hardcoded to the mu-adapted gegenbauer
+family), wired into ``recondition_energy(..., engine="direct")`` as the default.
+Kept as the development record of the three validation increments below, and as a
+second independent implementation to diff against.  For new work call the
+production entry point; validation lives in ``debug/direct_onebody_validate.py``.
+
 Builds the prolate two-electron one-body matrices S and H1 = T + V_ne DIRECTLY in
 the Laguerre(xi) x Legendre(eta) basis via banded recurrence operators, and validates
 against the mpf re-basing pipeline (geovac.prolate_recondition).

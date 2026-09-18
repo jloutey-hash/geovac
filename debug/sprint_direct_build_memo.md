@@ -15,7 +15,7 @@ correlation (ledger 2026-08-23, elliptic-basis row).
 
 ## ►► RESUME HERE (next session) ◄◄
 
-**State (all validated, committed through v5.13.4):**
+**State (all validated; one-body wiring landed v5.13.8 — see task 2 below):**
 - **One-body direct engine: DONE.** `debug/direct_onebody_engine.py` `build_direct_full`
   builds S + T + V_ne for all μ, float64, machine-exact vs mpf (7e-16), ~135× faster.
 - **V_ee corr 2D l-recurrence: DERIVED and PROVEN CORRECT (v5.13.3).** The IBP `corr`
@@ -35,8 +35,13 @@ correlation (ledger 2026-08-23, elliptic-basis row).
   (§12 registry → algebraic). Driver `debug/direct_vee_bseed_closedform.py`; backing tests
   in `tests/test_paper12_general_m_neumann.py`.
 
-**Where the speed now sits (v5.13.4).** With V_ee fast, the recondition (~21 s at (3,3,1))
-is bounded by the **mpf `one_body_mp` (9.6 s) and `_factored_cob` (7.4 s)**, not V_ee.
+**Where the speed sits — SUPERSEDED (v5.13.8), kept because the next task turns on it.**
+At v5.13.4, with V_ee fast, the recondition (~21 s at (3,3,1)) was bounded by the **mpf
+`one_body_mp` (9.6 s) and `_factored_cob` (7.4 s)**, not V_ee. Both are now gone from the
+default path (task 2 below, DONE). Measured after the wiring: whole pipeline 2.7× at
+(3,3,1), 3.2× at (4,4,2), (5,5)+δ at 734 s. **V_ee is now essentially the entire remaining
+cost** — its mpf build plus its one surviving re-basing — so the bound has moved to task 1.
+Clean phase decomposition: `debug/data/direct_wire_baseline.log`.
 
 **THE next tasks (pick per PI):**
 1. **Finish the corr recurrence → fully float64 V_ee.** The corr build is now fast too
@@ -46,10 +51,20 @@ is bounded by the **mpf `one_body_mp` (9.6 s) and `_factored_cob` (7.4 s)**, not
    with the closed-form B-seeds the *existing* mpf `vee_mp` may already be fast enough that
    the corr recurrence's speed benefit is secondary (its remaining value = algebraic purity
    + a pure-float64 path); confirm before investing.
-2. **Drop the mpf `one_body_mp`/`cob` into float64** — the one-body direct engine
-   (`debug/direct_onebody_engine.build_direct_full`, DONE last sprint, 135×) already builds
-   S+T+V_ne in float64; wiring it (and a float64 re-basing) into `recondition_energy` would
-   take the whole recondition to seconds. This is now the larger recondition win.
+2. ~~**Drop the mpf `one_body_mp`/`cob` into float64**~~ — **DONE (v5.13.8).** The engine is
+   promoted into `geovac/prolate_recondition.py` as `build_one_body_direct` (with `basis` and
+   `R` parameterized) and wired in as `engine="direct"`, now the DEFAULT. By linearity of the
+   change of basis, `H_o = H1_o + cob(V) + S_o/R`, so the mpf one-body build, the mpf H
+   assembly and ONE of the two re-basings all disappear, and the normalized solve runs in
+   float64. Validated: scale-relative 6.3e-16 vs `one_body_mp`+`_factored_cob` at (5,5)+δ in
+   BOTH families, and the recorded headline points reproduced to every printed digit
+   ((4,4,2) 99.711%, (5,5,2) 99.767%/0.406 mHa, variational, all functions kept).
+   **Correction to this item's own premise:** it said the wiring "would take the whole
+   recondition to seconds." It does not — measured 2.7× at (3,3,1), 3.2× at (4,4,2), with
+   (5,5)+δ at 734 s. The phases removed scale worse than those retained, so the gain grows
+   with N, but what remains is essentially ALL V_ee (its mpf build plus its one surviving
+   re-basing). "Seconds" therefore requires task 1 (V_ee built directly in the orthogonal
+   basis), not more work on the one-body half.
 
 **Design note (settled v5.13.3):** X_orth_l = outer(a,b)+outer(b,a) − C_l − C_lᵀ with
 a=A^{prod}, b=B^{prod} (1D moments, A float64 / B mpf-seed+downcast) and C_l = the corr

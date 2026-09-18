@@ -9,11 +9,18 @@ exact-arithmetic energy unchanged but conditions the generalized eigenproblem, s
 the energy climbs monotonically and variationally past the monomial wall to
 chemical accuracy.
 
-Each test names the wrong answer it rejects, per the Sec. 9 guard rule.  The
-mpf V_ee build is inherently slow (~2-10 min), so every test that computes a
-re-based *energy* is @slow; the fast tests guard the cheap algebraic invariants
-(the exact change of basis, the congruence-invariant solve, the polynomial
-reductions) that do not need the physics matrices.
+Each test names the wrong answer it rejects, per the Sec. 9 guard rule.
+
+WHICH TESTS ARE @slow, AND WHY THAT CHANGED.  The @slow set is the one that
+computes a re-based energy at a LARGE truncation.  It used to be every
+energy-computing test, on the grounds that "the mpf V_ee build is inherently slow
+(~2-10 min)" -- no longer true twice over: v5.13.4 replaced the V_ee B-seed
+quadrature with a closed form (vee_mp 139 s -> 3.7 s at (3,3,1)), and v5.13.8
+made `engine="direct"` the default, which drops the mpf one-body build and one of
+the two changes of basis (whole pipeline 2.7x at (3,3,1), 3.2x at (4,4,2)).  So
+two energy-computing tests now run unmarked at (2,2,1), and the phase that
+actually costs is V_ee -- its mpf build plus its one surviving re-basing -- not
+the one-body half.
 
 Fire-tested by ``debug/firetest_p12_recondition.py``.
 """
@@ -261,6 +268,77 @@ def test_gegenbauer_is_the_same_span_and_better_conditioned():
     )
 
 
+def test_direct_engine_matches_the_mpf_reference_one_body():
+    """REJECTS: a direct orthogonal-basis one-body build that is not the same
+    operator as the mpf monomial build re-based.
+
+    `engine="direct"` never forms the monomial one-body matrices, so it bypasses
+    the change of basis entirely rather than doing it more cheaply.  That is only
+    legitimate if it lands on the SAME matrices the mpf route produces, which is
+    the definition of correctness here.  Checked at (2,2) mu<=1 in BOTH families,
+    since the mu-adapted family is a separate code path (different radial AND
+    angular polynomials) and `recondition_energy`'s default family is the other
+    one.
+
+    The bar is SCALE-relative (max|dX| / max|X|), not entry-relative.  Entry-
+    relative is not a soundness criterion for H1: its entries span many orders
+    and some pass near zero by T/V_ne cancellation, so a negligible absolute
+    deviation over a near-zero denominator yields a large relative number with
+    nothing wrong (measured: 9.2e-13 entry-relative at (5,5)+delta comes from a
+    single element 10 orders below the matrix scale, whose absolute deviation is
+    ~1e-22 of that scale, while scale-relative sits at 3.7e-16).
+    """
+    alpha = 1.0
+    for basis in ("laguerre_legendre", "gegenbauer"):
+        Sd, Hd = pr.build_one_body_direct(2, 2, 1, alpha, basis=basis)
+        with mp.workdps(pr.DEFAULT_DPS):
+            idx = pr._product_index(2, 2, 1)
+            fns = [pr.ProductFn(j, l, k, m, mu, alpha) for (j, l, k, m, mu) in idx]
+            A = pr.ngm._mono_moments(2.0 * alpha, 6 * 2 + 6 * 3 + 20)
+            S, H1 = pr.one_body_mp(fns, alpha, pr.R_DEFAULT, A)
+            Nr = (2 + 1) ** 2
+            Na = len([1 for l in range(3) for m in range(3) if (l + m) % 2 == 0])
+            Tr, Ta = pr._transforms_per_mu(basis, 2, 2, 1, alpha)
+            Sg = pr._to_f64(pr._factored_cob(S, 2, Nr, Na, Tr, Ta))
+            Hg = pr._to_f64(pr._factored_cob(H1, 2, Nr, Na, Tr, Ta))
+        for name, D, G in (("S", Sd, Sg), ("H1", Hd, Hg)):
+            scale = float(np.abs(D - G).max() / np.abs(G).max())
+            assert scale < 1e-13, (
+                f"{basis} {name}: direct build differs from the mpf re-based "
+                f"reference by {scale:.2e} scale-relative; the direct engine is "
+                f"not computing the same operator"
+            )
+
+
+def test_direct_and_mpf_engines_agree_end_to_end():
+    """REJECTS: an assembly error that cancels in the matrices but moves the
+    energy -- a wrong nuclear-repulsion shift, or a V_ee re-basing applied to the
+    wrong engine's matrices.
+
+    The direct path assembles H_o = H1_o + cob(V) + S_o/R in float64, relying on
+    linearity of the change of basis; the mpf path re-bases H = H1 + V + S/R as
+    one object. Those are different orderings of the same sum, so they must give
+    the same eigenvalue. Asserted on the ENERGY (and on the surviving dimension,
+    so a silently-truncated solve cannot pass) at a truncation small enough to
+    run unmarked.
+    """
+    a = pr.recondition_energy(2, 2, 1, alpha=1.0, engine="mpf")
+    b = pr.recondition_energy(2, 2, 1, alpha=1.0, engine="direct")
+    assert a.engine == "mpf" and b.engine == "direct", (
+        "the result does not report the engine it used, so this test cannot "
+        "tell the two paths apart"
+    )
+    assert abs(a.energy - b.energy) < 1e-9, (
+        f"engines disagree by {1e6 * abs(a.energy - b.energy):.4f} uHa "
+        f"(mpf {a.energy:.10f} vs direct {b.energy:.10f}); the float64 "
+        f"H_o = H1_o + cob(V) + S_o/R assembly is not the mpf H re-based"
+    )
+    assert a.n_kept == b.n_kept, (
+        f"engines keep different dimensions ({a.n_kept} vs {b.n_kept}); the "
+        f"energies could agree while one path silently discards content"
+    )
+
+
 @pytest.mark.slow
 def test_climb_reaches_chemical_accuracy_past_the_cap():
     """REJECTS: a climb that plateaus at the monomial cap, or a non-variational
@@ -280,9 +358,16 @@ def test_climb_reaches_chemical_accuracy_past_the_cap():
         f"adding delta at a larger basis did not lower the energy "
         f"({e_delta.energy:.7f} vs {e_pi.energy:.7f}); the climb is not monotone"
     )
-    assert e_delta.err_mha < 1.6, (
-        f"(4,4)+delta error is {e_delta.err_mha:.3f} mHa, not inside chemical "
-        f"accuracy (1.6 mHa); the re-based climb did not reach it"
+    # abs() is load-bearing, and its absence made this assertion DEAD.
+    # `err_mha` is SIGNED -- (E_exact - E)*1000 -- so every variational result is
+    # NEGATIVE and `err_mha < 1.6` passed unconditionally: measured, it passes at
+    # E = -1.00, i.e. no binding at all (0.00% of D_e, err = -174.475 mHa).  The
+    # only case it rejected was E BELOW exact, which the `variational` assertion
+    # above already covers.  So the "inside chemical accuracy" claim had zero
+    # enforcement until this line took the magnitude.
+    assert abs(e_delta.err_mha) < 1.6, (
+        f"(4,4)+delta error is {abs(e_delta.err_mha):.3f} mHa, not inside "
+        f"chemical accuracy (1.6 mHa); the re-based climb did not reach it"
     )
     assert e_delta.de_pct > 99.5, (
         f"(4,4)+delta reaches only {e_delta.de_pct:.3f}% of D_e; expected "

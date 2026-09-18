@@ -976,9 +976,13 @@ MEASURED = {
     # ---- Paper 12 re-conditioning (2026-09-16) ---------------------------
     # The 99.1% monomial cap is a CONDITIONING artifact of the xi^j radial set
     # (a Hankel moment problem), not a structural ceiling.  Re-basing the SAME
-    # span to an orthogonal-polynomial family (mpf build) is an exact change of
-    # basis and the energy climbs monotonically/variationally to chemical
-    # accuracy.  Memo: debug/sprint_h2_recondition_memo.md.  Backing:
+    # span to an orthogonal-polynomial family is an exact change of basis and
+    # the energy climbs monotonically/variationally to chemical accuracy.
+    # Extended precision is required where the MONOMIAL matrices are re-based;
+    # since v5.13.8 S and H1 are built directly in the orthogonal basis instead
+    # (no congruence applied to them), leaving only V_ee on the mpf path.  The
+    # values below are unchanged by that -- both routes agree to the float64
+    # downcast floor.  Memo: debug/sprint_h2_recondition_memo.md.  Backing:
     # tests/test_paper12_recondition.py; module geovac/prolate_recondition.py.
     "p12_rebased_de_pct": dict(
         value=99.77, convention="% of D_e, H2 R=1.4011, re-based (5,5)+delta "
