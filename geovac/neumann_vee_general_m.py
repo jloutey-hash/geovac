@@ -336,21 +336,38 @@ def _seed_B_closed(l: int, m: int, s: int, p: int, Lmom: List, A: List) -> mp.mp
     return log_mom + mono_mom
 
 
+# Guard digits for the closed-form seeds.  _seed_B_closed and _L_moments lose
+# ~4s digits to internal cancellation at high (m,s) (the (xi-1)^{s-k}(xi+1)^s -
+# (xi-1)^s(xi+1)^{s-k} pole differences and the alternating L^- sum): measured at
+# ~17 digits for (m,s)=(4,4).  Seeded at the caller's dps this leaves only ~dps-17
+# accurate digits, which the UNSTABLE forward Q_l recurrence then amplifies to
+# garbage at large l_neumann (H2 (5,5)+delta at dps=40 flipped 99.767% -> -220).
+# Computing the seeds with guard digits restores full caller-dps accuracy (the
+# recurrence then behaves as it does off the quadrature reference, which has no
+# cancellation).  Guard = 8*s + 24 covers the census scope with wide margin.
+def _seed_guard(s: int) -> int:
+    return 8 * s + 24
+
+
 def _B_table(m: int, s: int, l_max: int, p_max: int, c) -> Dict[Tuple[int, int], mp.mpf]:
     """B_l^{m,s}(p,c), l = m..l_max, p = 0..p_max, by forward l-recurrence.
 
-    Seeds (l = m, m+1) are closed-form (:func:`_seed_B_closed`); no quadrature.
+    Seeds (l = m, m+1) are closed-form (:func:`_seed_B_closed`), computed with
+    guard digits (:func:`_seed_guard`) to absorb the high-(m,s) cancellation; no
+    quadrature.
     """
     c = mp.mpf(c)
     need = p_max + (l_max - m) + 1
     n_tab = need + 2 * s + (m + 1) + 2               # degree reach of poly_A / rest
-    Lmom = _L_moments(n_tab, c)
-    A = _mono_moments(c, n_tab)
     B: Dict[Tuple[int, int], mp.mpf] = {}
-    for p in range(need + 1):
-        B[(m, p)] = _seed_B_closed(m, m, s, p, Lmom, A)
-        if m + 1 <= l_max:
-            B[(m + 1, p)] = _seed_B_closed(m + 1, m, s, p, Lmom, A)
+    with mp.workdps(mp.mp.dps + _seed_guard(s)):     # guard digits for the seeds
+        cg = mp.mpf(c)
+        Lmom = _L_moments(n_tab, cg)
+        A = _mono_moments(cg, n_tab)
+        for p in range(need + 1):
+            B[(m, p)] = +_seed_B_closed(m, m, s, p, Lmom, A)
+            if m + 1 <= l_max:
+                B[(m + 1, p)] = +_seed_B_closed(m + 1, m, s, p, Lmom, A)
     for l in range(m + 1, l_max):
         for p in range(need - (l - m) + 1):
             B[(l + 1, p)] = ((2 * l + 1) * B[(l, p + 1)]

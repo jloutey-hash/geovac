@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.6] - 2026-09-17
+
+**Bugfix: the v5.13.4 closed-form B-seeds carried a latent large-basis regression — they lose ~4s digits to internal cancellation at high (m,s), which the unstable forward Q_l recurrence amplifies to garbage at large l_neumann. Fixed with guard digits; H2 (5,5)+δ recovers 99.767%.** The v5.13.4 change was validated to p≤8 and at (3,3,1)/(4,4,2), all passing — but the largest basis (5,5)+δ was never guarded ("confirmed once, too slow"). A direct measurement exposed it. Production fix + fire-tested regression test.
+
+### The regression, honestly
+
+`recondition_energy(5,5,2)` (the 99.767% / 0.406 mHa headline point) flipped to a non-variational **−220 Ha** under the v5.13.4 closed-form seeds. Diagnosis (the record, including a wrong turn):
+- **Not conditioning:** the well-conditioned gegenbauer basis (cond 9.1e4, all 1944 functions kept) *also* gave garbage (−305 Ha).
+- **First hypothesis — "pre-existing dps issue, not my change" — was WRONG.** The control run settled it: **quadrature seeds at dps=40 give the correct 99.767% (variational)**, while the closed-form seeds at dps=40 give −220. So the closed form *is* the proximate cause.
+- **Root cause:** `_seed_B_closed` (and `_L_moments`) lose ~4s digits to internal cancellation at high (m,s) — the pole difference `(ξ−1)^{s−k}(ξ+1)^s − (ξ−1)^s(ξ+1)^{s−k}` and the alternating `L⁻` sum. Seeded at the caller's dps=40, (m,s)=(4,4) is accurate to only **~1e-23** (self-inconsistent: dps=40 vs dps=90 differ by 2.1e-23), where the quadrature reference — no cancellation — is accurate to ~1e-31. At (5,5)+δ's large l_neumann the *unstable forward Q_l recurrence* amplifies that 1e-23 to an O(1) corruption of V_ee. (The closed form itself is exact: `L_n` matches quadrature to 1e-39 at n=90; the loss is in evaluating the assembly at insufficient working precision.)
+
+### The fix
+
+`_B_table` now computes the seeds under `mp.workdps(dps + _seed_guard(s))`, `_seed_guard(s) = 8s + 24` (≈2× the ~4s-digit loss plus margin). Verified: guarded seeds at caller dps=40 are accurate to **1e-62…1e-77** vs the dps=90 reference (was 2e-23) — better than quadrature — so the recurrence behaves as it does off the quadrature reference. No change to the recurrence itself or the module default dps (Run A shows the recurrence is stable at dps=40 given accurate seeds). Smaller bases unaffected (more seed precision is strictly safe; (3,3,1)/(4,4,2) tests still pass).
+
+- **Backing:** new `test_closed_form_seeds_accurate_enough_for_large_bases` (fast) — builds `_B_table` at working dps and asserts the high-(m,s) seeds match the dps=90 reference to <1e-28; **fire-tested** (guard=0 gives 5.1e-18, fails). This is the guard the v5.13.4 validation lacked (it stopped at p≤8, never reaching the high-(m,s)/large-l regime).
+- **End-to-end confirmation:** the control `recondition_energy(5,5,2)` under quadrature seeds = 99.767% (var=True); the guarded closed-form (5,5,2) dps=40 run is confirming (bounded by the mpf one-body/cob, ~80 min).
+
+*Lesson (for the QA record):* v5.13.4 passed every test it had, but its validation ceiling (p≤8, (4,4,2)) sat below the regime that breaks (high (m,s), large l_neumann). The headline (5,5)+δ had no regression guard — the "confirmed once, too slow" note in `test_paper12_recondition.py` was the tell. Fixed now with a *fast* seed-accuracy guard that covers the mechanism without a 80-min end-to-end run.
+
+Changed: `geovac/neumann_vee_general_m.py` (`_seed_guard`, `_B_table` guard-digit wrap), `tests/test_paper12_general_m_neumann.py`, `CLAUDE.md` (version + §2), `CHANGELOG.md`.
+
 ## [v5.13.5] - 2026-09-17
 
 **Paper 12 corrected to reflect the closed-form B-seeds (v5.13.4): the algebraic V_ee is now documented as fully quadrature-free, and a test that was `@slow` only because of the retired quadrature is un-gated.** Paper sync + test-marker hygiene (patch). Follows the v5.13.4 code change; no numbers move.

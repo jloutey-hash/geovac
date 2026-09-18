@@ -266,6 +266,44 @@ def test_closed_form_B_seeds_match_quadrature():
         )
 
 
+def test_closed_form_seeds_accurate_enough_for_large_bases():
+    """REJECTS: the guard-digit regression that flipped H2 (5,5)+delta to -220 Ha.
+
+    _seed_B_closed loses ~4s digits to internal cancellation at high (m,s) (the
+    pole-difference (xi-1)^{s-k}(xi+1)^s - (xi-1)^s(xi+1)^{s-k} and the alternating
+    L^- sum).  Seeded at the caller's dps without guard digits, (m,s)=(4,4) is
+    accurate to only ~1e-23; the UNSTABLE forward Q_l recurrence then amplifies
+    that to garbage at the large l_neumann of a big basis (the (5,5)+delta blow-up,
+    v5.13.4->5.13.6).  _B_table must seed with enough guard digits that the seeds
+    stay accurate to << the quadrature reference's ~1e-31 at working precision.
+
+    Reference: the closed form at dps=90 (its own accurate value); the quadrature
+    _seed_B agrees with THAT to ~1e-31, so 1e-30 is the bar the seeds must clear.
+    """
+    import mpmath as mp
+
+    def acc(l, m, s, p):
+        with mp.workdps(90):
+            c = mp.mpf(2.0)
+            return gm._seed_B_closed(l, m, s, p, gm._L_moments(120, c),
+                                     gm._mono_moments(c, 140))
+
+    with mp.workdps(30):                          # a typical working precision
+        worst = mp.mpf(0)
+        for (m, s) in [(2, 2), (4, 4)]:
+            B = gm._B_table(m, s, 10, 20, mp.mpf(2.0))
+            for l in (m, m + 1):
+                for p in range(0, 21, 5):
+                    a = acc(l, m, s, p)
+                    if abs(a) > mp.mpf('1e-50'):
+                        worst = max(worst, abs(B[(l, p)] - a) / abs(a))
+    assert worst < 1e-28, (
+        f"closed-form B seeds accurate to only {float(worst):.1e} at high (m,s) "
+        f"and working dps -- the cancellation is not guarded, so large bases "
+        f"(high l_neumann) will blow up under the unstable recurrence"
+    )
+
+
 def test_B_table_uses_closed_form_not_quadrature():
     """REJECTS: a silent regression to quadrature seeding.
 
