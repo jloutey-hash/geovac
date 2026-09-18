@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.10] - 2026-09-18
+
+**The "FD kinetic energy is the bottleneck to 99%" finding is retracted: the analytical fix was already built and is the only reachable path, and the 94.7% it was supposed to restore is an FD coarse-grid artifact.** A correction to v5.13.9's own ledger row, written one commit later because measuring it took longer than writing it. **My error, and a specific one:** this morning I verified March's *numbers* against the primary source and built a ledger row from them, but inherited that document's *status* ("fix not built") without reading the code — the stale-primary-source failure I had spent the preceding hours flagging in other people's records.
+
+### What the code actually does
+`compute_hamiltonian_matrix` takes `kinetic_method: str = 'analytical'` (5D integration by parts; Numba kernel `hamiltonian_analytical_kernel` and the pure-Python `_hamiltonian_general_analytical` agree to **3.1e-12** relative), with `'fd'` retained only "for comparison". `solve_hylleraas` has **no** such parameter and calls the builder positionally — so **analytical is the only path any solver caller reaches**, and has been.
+
+### What the measurements say
+Grid ladder at C1 (j=1,l=0,p=2, N=9, α=1.18), converging the kinetic *and* V_ee quadratures together:
+
+| grid | 12×8×8 | 20×14×16 | 30×20×24 | 40×26×24 | 50×32×32 | 60×40×32 |
+|:--|--:|--:|--:|--:|--:|--:|
+| FD | 98.11 | 87.23 | 85.54 | 86.29 | 85.87 | — |
+| analytical | 72.73 | 77.44 | 81.04 | 82.95 | 84.02 | 84.73 |
+
+**They meet at ~85.9–86%.** FD *falls* with refinement, analytical *rises*; March's 94.7% and its 101.6% variational violation are the **same FD error at two severities**, one flattering and one openly impossible. So FD was never the bottleneck to 99% — it was the source of the number that made 99% look reachable, and the "~50 terms → 99%" target was extrapolated from an artifact. At N=9 the real limit is **basis size**, not integrals (the ladder converges V_ee too, so V_ee is not separately capping below ~86%).
+
+Also measured and **not** retracted: α = 1.18 was optimised for FD, but the analytical optimum is α ≈ 1.00 and worth only **+0.87 pp** — so unlike Paper 12's headline, the exponent is not what holds this back.
+
+### What survives, and it is the useful half
+Explicit r₁₂ *does* work on this substrate. At matched grid, 9 → 18 functions gives **89.24 → 90.63% and still climbing** (C2, analytical, 30×20×24 → 40×26×24) against N=9's ~86% ceiling. So the ansatz is productive; it simply does not start from where March claimed. **And the analytical p>0 path has no test at all** despite being the only reachable one — it disagreed with FD by ~10 pp at coarse grids with nothing to catch it.
+
+Changed: `docs/failed_approaches_ledger.md` (row diagnosis corrected), `CLAUDE.md` (§3 index line + version), `CHANGELOG.md`. v5.13.9's "Institutional memory" text stands as committed history; this entry supersedes it.
+
 ## [v5.13.9] - 2026-09-18
 
 **The Neumann algebraic V_ee silently ignored explicit r₁₂ basis functions and returned an unbound energy; guarded, backed by tests, and the two prior prolate r₁₂ attempts are finally recorded in the ledger.** Found while scoping the explicit-correlation direction (#1), not by looking for it. Patch bump — **no accuracy claim moves**, and the p=0 path every existing caller uses is unaffected.
@@ -27,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Institutional memory: two ledger rows that were missing entirely
 `docs/failed_approaches_ledger.md` had **no row for either prior explicit-r₁₂ attempt on the prolate basis**, so a new sprint could have re-derived 2026-03 work. Both added (with §3 index lines):
-- **James–Coolidge r₁₂^p on the prolate 2e basis with FD kinetic energy (2026-03-13/14).** Verified at primary source (`PROLATE_STRESS_TESTS.md:752-753`, `hylleraas_convergence.txt`): explicit correlation *is* transformative here — p=1 at **6** functions equals p=0 at **27** (both 79.0% of D_e), p=2 reaches **94.7% at 9 functions**. It did not reach 99%, and the obstruction is **numerics, not physics**: FD kinetic energy decouples the p=0/p>0 blocks, breaking the variational bound (18 fns → **101.6% of D_e**) and collapsing bases above ~20 functions. Named-but-unbuilt fix: analytical kinetic energy for r₁₂^p.
+- **James–Coolidge r₁₂^p on the prolate 2e basis with FD kinetic energy (2026-03-13/14).** Verified at primary source (`PROLATE_STRESS_TESTS.md:752-753`, `hylleraas_convergence.txt`): explicit correlation *is* transformative here — p=1 at **6** functions equals p=0 at **27** (both 79.0% of D_e), p=2 reaches **94.7% at 9 functions**. It did not reach 99%, and the obstruction is **numerics, not physics**: FD kinetic energy decouples the p=0/p>0 blocks, breaking the variational bound (18 fns → **101.6% of D_e**) and collapsing bases above ~20 functions. Named-but-unbuilt fix: analytical kinetic energy for r₁₂^p. **[RETRACTED same day — see v5.13.10 above. Both halves of this sentence are wrong: the analytical fix was already built and is the only path `solve_hylleraas` can reach, and the 94.7% it was supposed to restore is an FD coarse-grid artifact (FD falls and analytical rises under refinement, meeting at ~86% at N=9). Left in place as committed history; do not cite it.]**
 - **Pairing explicit r₁₂ with the Neumann V_ee by calling the existing path (2026-09-18)** — this defect, with the consequence for any future attempt: the untested combination (prolate + Neumann + r₁₂) needs the moments *extended*, not the existing path called.
 
 *Also recorded:* `geovac/hylleraas_r12.py` is a **separate one-centre He** Hylleraas-r₁₂ module (its own tests, a variational bound, a Kato-cusp diagnostic) — distinct from the prolate `geovac/hylleraas.py`. So the corpus holds three explicit-correlation implementations, not two.
@@ -280,7 +304,7 @@ The open "Level 2 vs Level 4 for H₂" question (raised in the v5.11.18 Level-4 
 
 ### Gegenbauer basis (item 2) — measured, premise corrected
 
-- The mu-weight-adapted family (generalized Laguerre L_n^{(μ)} for the (ξ²−1)^{μ/2} weight, Gegenbauer C_n^{(μ+1/2)} for (1−η²)^{μ/2}) gives the **IDENTICAL energy** as Laguerre×Legendre at equal (j,l) — same span to 7 digits. **So it does NOT reach a given accuracy with *fewer functions*** (the owed-item-2 phrasing was wrong: a change of polynomial basis at equal degree spans the same space). Its real payoff is **conditioning**: cond(norm) 326× better at (3,3,1) (1.07e3 vs 3.49e5), **~1025× at (5,5)+δ** (9.14e4 vs 9.37e10) — which keeps the downcast solve trustworthy where Laguerre's 9.4e10 approaches the float64 limit (the regime where the earlier per-block solve produced a spurious non-variational (5,5)+δ). Kept the single shared exponent throughout — a per-*function* exponent would break completeness and plateau the accuracy (failed-approaches ledger 2026-08-26, k_n=Z/n row).
+- The mu-weight-adapted family (generalized Laguerre L_n^{(μ)} for the (ξ²−1)^{μ/2} weight, Gegenbauer C_n^{(μ+1/2)} for (1−η²)^{μ/2}) gives the **IDENTICAL energy** as Laguerre×Legendre at equal (j,l) — same span to 7 digits. **So it does NOT reach a given accuracy with *fewer functions*** (the owed-item-2 phrasing was wrong: a change of polynomial basis at equal degree spans the same space). Its real payoff is **conditioning**: cond(norm) 326× better at (3,3,1) (1.07e3 vs 3.49e5), **~1.03e6× at (5,5)+δ** (9.14e4 vs 9.37e10 — six orders of magnitude; this line read "~1025×", which is that ratio with the e3 dropped, **corrected in place 2026-09-18** since it is an arithmetic slip rather than a claim anyone held) — which keeps the downcast solve trustworthy where Laguerre's 9.4e10 approaches the float64 limit (the regime where the earlier per-block solve produced a spurious non-variational (5,5)+δ). Kept the single shared exponent throughout — a per-*function* exponent would break completeness and plateau the accuracy (failed-approaches ledger 2026-08-26, k_n=Z/n row).
 - **Gegenbauer does NOT enable a fast float64 pipeline.** A float64 change of basis breaks for BOTH families at (3,3)/(4,4)/(5,5) (`debug/…/float64_relift_probe.py`), because the build-precision ceiling is the *monomial* matrices' dynamic range (cond 1.8e16 → 4.1e26), not the target basis conditioning — so the mpf build is required regardless. Reaching a literal 99.9% still needs a much larger basis or explicit correlation; a *radial* re-basing cannot reach the e-e cusp (ledger 2026-08-23, elliptic-basis row). The genuine fast route is a DIRECT recurrence build in the orthogonal basis (never forming the monomial matrices) — identified, not built; a separate sprint.
 
 ### Flagged for PI

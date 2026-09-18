@@ -237,13 +237,47 @@ the corpus's own data does not support that framing:
    quantum-number label or selection rule, which by Sec. 4's own practical test
    makes it a legitimate numerical improvement and ordinary PM work.
 
-   **A prior step, cheaper than either:** this ladder and Paper 12's
-   re-conditioned table both FIX alpha = 1.0, and Paper 12's monomial scans found
-   their best variational points at alpha ~ 1.10-1.30. So the single alpha may
-   not be optimized for these bases at all, and part of the residual attributed
-   to saturation above could be an unoptimized exponent. Measure that before
-   building any two-exponent machinery (cross-exponent moments at 2a1, a1+a2,
-   2a2, plus a per-block Neumann c, is a real sprint).
+   **A prior step, cheaper than either: DONE (2026-09-18).** The single alpha was
+   never optimized — both this ladder and Paper 12's re-conditioned table fixed
+   alpha = 1.0. Measured: alpha_opt = 1.40 at (5,5)+delta, worth 0.082 mHa (20% of
+   the residual), variational and better-conditioned; applied to the paper, the
+   registry and the module default at v5.13.9. It does NOT close the gap (Sec. 4b),
+   so the exponent-SET step stands.
+
+   **SCOPE OF THE EXPONENT-SET SPRINT, sized against the code (2026-09-18).**
+   An earlier version of this line estimated "cross-exponent moments at 2a1,
+   a1+a2, 2a2, plus a per-block Neumann c". That is right as far as it goes and
+   **understates the work**, because it misses the largest piece:
+
+   1. **One-body: nearly free.** `_mono_moments(c, n_max)` is a pure upward
+      recurrence in an ARBITRARY rate — no hard-coded 2*alpha — so the one-body
+      half needs only per-rate moment tables and routing, at four call sites
+      (`prolate_recondition.py:334/811/1012`, `neumann_vee_general_m.py:412/576`).
+   2. **V_ee seeds: a 3x multiplier on the DOMINANT cost.** `_B_table(m,s,l,p,c)`
+      also takes an arbitrary `c`, so again no new mathematics — but
+      `_build_Xtab_mp` calls it TWICE per (m,s) block (at `c` and `two_c`, the
+      latter because the ordered-xi IBP produces e^{-2 alpha xi_2}), and each call
+      computes its closed-form seeds under `workdps(dps + 8s + 24)`. With two
+      block exponents the per-electron rate is one of {2a1, a1+a2, 2a2}, so the
+      X-table becomes rate-pair-indexed: **6 `_B_table` builds per block instead
+      of 2**. The B-seeds were measured this session as the dominant V_ee cost
+      even after the v5.13.4 closed form, so the 3x lands on exactly that.
+   3. **THE PIECE THE EARLIER SCOPE MISSED — the F-tensor collapse breaks.**
+      `vee_mp`'s F tensor is keyed on `(mu_i, mu_j)` and the COMBINED powers
+      (p1,q1,p2,q2) only; that is the "~50x faster than the O(N^2) loop"
+      optimisation, and it works *because* one shared exponent makes V depend on
+      the basis solely through quantum-number sums. With per-block exponents two
+      functions sharing those sums but sitting in different blocks no longer share
+      an F entry, so the tensor needs block-pair indices. This is an
+      architectural change to the assembly, not more tables, and it is the
+      likeliest source of schedule surprise.
+
+   **Hard design constraint (the ledger settles it): per-BLOCK, not
+   per-FUNCTION.** A per-function exponent (`k_n = Z/n`) is a ledgered failure --
+   conditioning became perfect (kappa = 1.0000) and accuracy **plateaued near
+   60 mHa**, because the bound hydrogenic set loses completeness; "non-orthogonality
+   is the price of completeness". The variant that WORKED is free per-SHELL lambda
+   (Li 81.7 -> 33.2 mHa). So: two blocks, each with a shared exponent.
 2. **Only if step 1 stalls**, the right sprint is **analytical kinetic energy for
    r12^p** — not a new ansatz. The 2026-03 attempt already showed the ansatz
    works on this substrate (94.7% at 9 functions) and died on a named, bounded

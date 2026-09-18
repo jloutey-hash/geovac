@@ -96,6 +96,86 @@ class TestBasisInfrastructure:
 # Category 2: r₁₂ computation
 # ============================================================
 
+class TestAnalyticalKineticIsTheReachablePath:
+    """REJECTS: the two documented wrong beliefs about the p>0 kinetic energy.
+
+    Both were live in the corpus until 2026-09-18, and this path had NO test at
+    all despite being the only one a solver caller can reach.
+
+    (1) "The analytical kinetic energy for r12^p is a named-but-unbuilt fix."  It
+        is built, it is the default, and `solve_hylleraas` cannot select anything
+        else -- it has no `kinetic_method` parameter and calls the builder
+        positionally.  So a claim that the fix is pending is false by inspection.
+
+    (2) "FD kinetic energy is the bottleneck to 99% of D_e."  Backwards.  On a
+        grid ladder at (j=1,l=0,p=2, N=9, alpha=1.18) the FD result FALLS with
+        refinement (98.11 -> 87.23 -> 85.54 %) while the analytical result RISES
+        (72.73 -> 77.44 -> 81.04 %), and the two meet near 86%.  FD's high coarse
+        value -- and the 101.6% variational violation at N=18, the same error
+        worse -- is an artifact, not a target.  Asserting the DIRECTIONS rather
+        than absolute energies is deliberate: the absolutes are grid-dependent,
+        the directions are the diagnosis.
+    """
+
+    def test_solver_cannot_select_the_fd_path(self):
+        import inspect
+        params = inspect.signature(solve_hylleraas).parameters
+        assert 'kinetic_method' not in params, (
+            "solve_hylleraas grew a kinetic_method parameter; the claim that "
+            "analytical is the only reachable path needs re-checking"
+        )
+        builder = inspect.signature(compute_hamiltonian_matrix).parameters
+        assert builder['kinetic_method'].default == 'analytical', (
+            f"the builder default is {builder['kinetic_method'].default!r}, not "
+            f"'analytical'; every solver caller would silently change method"
+        )
+
+    @pytest.mark.slow
+    def test_fd_energy_rises_and_analytical_energy_falls_under_refinement(self):
+        """The measurement that retracts 'FD is the bottleneck'.
+
+        NAMED IN ENERGIES, deliberately.  In D_e% the FD result *falls* (98.11 ->
+        87.23) and the analytical one *rises* (72.73 -> 77.44) -- the opposite
+        words -- because a lower energy is a higher D_e%.  The assertions below
+        are on ENERGY, so the name matches the body; a name in D_e% next to
+        assertions in energy is how a passing test gets "fixed" into a broken one.
+        """
+        from scipy.linalg import eigh
+        R = 1.4011
+        basis = generate_basis(j_max=1, l_max=0, p_max=2, alpha=1.18)
+
+        def energy(grids, method):
+            S = compute_overlap_matrix(basis, R, grids)
+            H = compute_hamiltonian_matrix(basis, R, grids,
+                                           kinetic_method=method)
+            return float(eigh(H + (1.0 / R) * S, S, eigvals_only=True)[0])
+
+        coarse = build_quadrature_grids(N_xi=12, N_eta=8, N_phi=8)
+        finer = build_quadrature_grids(N_xi=20, N_eta=14, N_phi=16)
+
+        fd_c, fd_f = energy(coarse, 'fd'), energy(finer, 'fd')
+        an_c, an_f = energy(coarse, 'analytical'), energy(finer, 'analytical')
+
+        # FD's coarse energy is spuriously LOW (too much binding) and rises
+        # toward the true value as the grid refines.
+        assert fd_f > fd_c, (
+            f"FD did not rise under refinement ({fd_c:.6f} -> {fd_f:.6f}); the "
+            f"coarse-grid FD over-binding that produced March's 94.7% and its "
+            f"101.6% variational violation is not reproducing"
+        )
+        # The analytical energy approaches from above, i.e. falls.
+        assert an_f < an_c, (
+            f"analytical did not fall under refinement ({an_c:.6f} -> "
+            f"{an_f:.6f}); it is supposed to converge from above"
+        )
+        # And they close on each other rather than diverging.
+        assert abs(an_f - fd_f) < abs(an_c - fd_c), (
+            f"the two methods did not converge toward each other "
+            f"(gap {abs(an_c - fd_c):.4f} -> {abs(an_f - fd_f):.4f}); the "
+            f"finding that they meet near 86% rests on this"
+        )
+
+
 class TestNeumannVeeRejectsExplicitR12:
     """REJECTS: the Neumann V_ee silently returning a number for a p>0 basis.
 
