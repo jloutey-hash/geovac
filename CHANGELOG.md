@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.7] - 2026-09-17
+
+**`/checkpoint` allows pushing the current branch — including `main` — under explicit PI direction.** PI-directed tooling change (patch). The command hard-prohibited `git push origin main`, assuming a PR-staging workflow this repo does not use: it commits **directly to `main`** (all version commits are on main), and its only remote is `old` — a *local* mirror at `c:/Users/jlout/OneDrive/…/.git`, not a GitHub `origin`. Under those preconditions `/checkpoint push` could never push at all.
+
+- **Step 4 rewritten:** resolve the remote as the branch's upstream, else the sole `git remote`; push the current branch (main included) and every tag cut in the invocation. Force-push remains forbidden; the GitHub-Release prohibition (Releases mint Zenodo DOIs and are PI-only) is unchanged.
+- **Hard-prohibition list:** "NEVER push to `main`" removed (it is this repo's working branch); "NEVER `git push --force`" kept.
+
+Changed: `.claude/commands/checkpoint.md`, `CLAUDE.md` (version + §2), `CHANGELOG.md`.
+
 ## [v5.13.6] - 2026-09-17
 
 **Bugfix: the v5.13.4 closed-form B-seeds carried a latent large-basis regression — they lose ~4s digits to internal cancellation at high (m,s), which the unstable forward Q_l recurrence amplifies to garbage at large l_neumann. Fixed with guard digits; H2 (5,5)+δ recovers 99.767%.** The v5.13.4 change was validated to p≤8 and at (3,3,1)/(4,4,2), all passing — but the largest basis (5,5)+δ was never guarded ("confirmed once, too slow"). A direct measurement exposed it. Production fix + fire-tested regression test.
