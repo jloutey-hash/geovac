@@ -79,11 +79,13 @@ def test_mu0_reduces_to_neumann_vee():
 # 2. The radial X table must match a high-precision reference
 # ======================================================================
 
-@pytest.mark.slow
 def test_X_blocks_match_high_precision_reference():
     """REJECTS: a silently-wrong recurrence (forward-B instability, a dropped
     weight, a sign error in the IBP correction) -- the failure mode a
     differentiation route would show as garbage at large l or m.
+
+    (No longer @slow: the X-table's B_l seeds are closed-form as of v5.13.4, so
+    this build is ~0.2s where the quadrature-seeded version was tens of seconds.)
 
     The references are computed independently of the engine's own B recurrence:
     the inner P integral in CLOSED FORM (monomial partial integrals) and the
@@ -231,9 +233,13 @@ def test_L_moment_primitive_closed_form():
                 )
 
 
+@pytest.mark.slow
 def test_closed_form_B_seeds_match_quadrature():
     """REJECTS: a closed-form B seed that disagrees with the mpmath-quadrature
     reference _seed_B.
+
+    (@slow: exercises the quadrature reference _seed_B ~70 times, ~10s -- the
+    closed form it validates is itself sub-millisecond.)
 
     This closed form REPLACED the quadrature that was 95% of vee_mp.  It rests on
     s >= m fully polynomializing every (xi-1)^{-k} pole term of d^mQ_l; a bug in

@@ -46,17 +46,18 @@ coordinates, which decomposes each six-dimensional integral into a
 finite sum of products of one-dimensional auxiliary integrals
 computable by recurrence relations.  The resulting two-electron
 integrals are exact within the Neumann truncation order $L$, with
-no six-dimensional quadrature and no fitted parameters; in the
-$\sigma$ sector the sole residual numerical integration is a single
-one-dimensional adaptive quadrature for the log-singular second-kind
-Legendre moment $B_l$.  (The $|m| \ge 1$ channels keep the same kernel;
-their ordered-$\xi$ integral is available both from a two-dimensional
-spectral quadrature and---generalising the same $A_l$, $B_l$, $X_l$
-recurrences to associated Legendre functions
-(Sec.~\ref{sec:azimuthal})---from a moment-recurrence engine that is
-\emph{stable} in the $\delta$ ($|m| = 2$) sector where the
-differentiation route diverges.  That engine is recurrence-stable and
-quadrature-seeded rather than fully quadrature-free.)
+no six-dimensional quadrature and no fitted parameters.  The one step
+historically left to numerical integration---the log-singular
+second-kind Legendre moment $B_l$---also has a closed form
+(Sec.~\ref{sec:Bl_closed}): the only transcendental content is the
+exponential integral $E_1$, the Euler--Mascheroni constant $\gamma$
+and $\ln$, so \emph{in the $\sigma$ sector the reduction is fully
+quadrature-free}.  (The $|m| \ge 1$ channels keep the same kernel;
+generalising the same $A_l$, $B_l$, $X_l$ recurrences to associated
+Legendre functions (Sec.~\ref{sec:azimuthal}) gives a moment-recurrence
+engine that is \emph{stable} in the $\delta$ ($|m| = 2$) sector where
+the differentiation route diverges, and---with the same closed-form
+seeds---is likewise fully quadrature-free.)
 
 A systematic convergence study on H$_2$ at $R = 1.4011$~bohr
 demonstrates that the Neumann algebraic $V_{ee}$ yields 92.2\% of
@@ -159,12 +160,13 @@ sum of products of one-dimensional integrals.  These auxiliary
 integrals---angular moments $C_l(p)$, exponential moments
 $A_n(\alpha)$, and first- and second-kind Legendre moments
 $A_l(p,\alpha)$ and $B_l(p,\alpha)$---are computed by recurrence
-relations and closed forms, with the sole exception of the
-log-singular second-kind moment $B_l$, which uses a single
-one-dimensional adaptive quadrature (Sec.~III.D).  The
+relations and closed forms.  The log-singular second-kind moment
+$B_l$, once the sole step left to adaptive quadrature, is now itself
+closed-form (Sec.~\ref{sec:Bl_closed}): a single log-moment against
+$Q_0$ whose primitive reduces to $E_1$, $\gamma$ and $\ln$.  The
 six-dimensional repulsion integral is thereby reduced, \emph{in the
 $\sigma$ sector}, to a finite sum of algebraic operations on quantum
-number labels plus this one 1D quadrature;\
+number labels with no numerical integration of any dimension;\
 Sec.~\ref{sec:azimuthal} states what the $|m| \ge 1$ extension costs.
 
 The structure of this paper is as follows.
@@ -366,8 +368,9 @@ $V_{ee}$ matrix element to products of three families of
 one-dimensional integrals: $C_l(q)$, $A_n(\alpha)$ and
 its Legendre generalizations, and $B_l(p, \alpha)$.  The
 $C_l$ and $A_n$ families are computed by pure recurrence
-relations; the log-singular second-kind moment $B_l$ requires
-a single one-dimensional adaptive quadrature (below).
+relations; the log-singular second-kind moment $B_l$ has a
+closed form (Sec.~\ref{sec:Bl_closed}), with adaptive quadrature
+retained only as an independent numerical check.
 
 \subsection{Angular moments \texorpdfstring{$C_l(q)$}{Cl(q)}}
 
@@ -427,6 +430,7 @@ and $P_1(\xi) = \xi$.  The Legendre recurrence gives
 
 \subsection{Second-kind Legendre moments
 \texorpdfstring{$B_l(p, \alpha)$}{Bl(p, alpha)}}
+\label{sec:Bl_closed}
 
 \begin{equation}
   B_l(p, \alpha) = \int_1^\infty\xi^p\,e^{-\alpha\xi}\,
@@ -447,23 +451,51 @@ $\ln(\xi-1)\,e^{-\alpha\xi} \to \ln(\xi-1)\,e^{-\alpha}$
 near $\xi = 1$), but it defeats polynomial quadrature rules
 such as Gauss--Laguerre, which assume smooth integrands.
 
-We compute $B_l(p,\alpha)$ by adaptive numerical
-quadrature~\cite{QUADPACK} with subdivision near $\xi = 1$
-to resolve the log singularity.  The cost is modest: each
-$B_l$ evaluation takes $\sim$1~ms, and the full table
-$B_l(p,\alpha)$ for $l \leq 20$, $p \leq 12$, fixed $\alpha$
-is computed in $\sim$0.2~s.  Caching eliminates redundant
-computation across matrix elements at the same $\alpha$.
-
-In principle, the Legendre recurrence
+Rather than integrate~\eqref{eq:Bl_def} numerically, we reduce it to
+closed form.  Write $Q_l = P_l\,Q_0 - W_{l-1}$, where
+$W_{l-1}(\xi) = \sum_{k=1}^{l} P_{k-1}(\xi)P_{l-k}(\xi)/k$ is a
+polynomial and $Q_0(\xi) = \tfrac12\ln\frac{\xi+1}{\xi-1}$.  The
+polynomial part contributes ordinary exponential moments $A_n(\alpha)$;
+the entire transcendental content is carried by one family of
+\emph{log-moments} against $Q_0$,
 \begin{equation}
-  (l+1)\,B_{l+1}(p,\alpha) = (2l+1)\,B_l(p+1,\alpha) - l\,B_{l-1}(p,\alpha)
+  B_l(p,\alpha) = \sum_n \big(\xi^p P_l\big)_n\,L_n(\alpha)
+  \;-\; \sum_n \big(\xi^p W_{l-1}\big)_n\,A_n(\alpha),
+  \qquad
+  L_n(\alpha) = \int_1^\infty \xi^n\,Q_0(\xi)\,e^{-\alpha\xi}\,d\xi,
+  \label{eq:Bl_closed}
+\end{equation}
+where $(\,\cdot\,)_n$ denotes the coefficient of $\xi^n$.  The
+primitive $L_n$ is itself closed-form.  Splitting
+$Q_0 = \tfrac12[\ln(\xi+1)-\ln(\xi-1)]$ and substituting $u=\xi\mp1$,
+\begin{align}
+  L_n(\alpha) &= \tfrac12\big(L^{+}_n - L^{-}_n\big), \notag\\
+  L^{-}_n &= e^{-\alpha}\sum_{j=0}^{n}\binom{n}{j}\,
+             \frac{j!\,(H_j-\gamma-\ln\alpha)}{\alpha^{\,j+1}},
+  \label{eq:Lminus}\\
+  L^{+}_0 &= \frac{e^{-\alpha}\ln 2}{\alpha} + \frac{e^{\alpha}}{\alpha}\,E_1(2\alpha),
+  \qquad
+  L^{+}_n = \frac{e^{-\alpha}\ln 2}{\alpha} + \frac{n}{\alpha}L^{+}_{n-1}
+            + \frac{1}{\alpha}\Big[\textstyle\sum_{i=0}^{n-1}(-1)^i A_{n-1-i}(\alpha)
+            + (-1)^n e^{\alpha}E_1(2\alpha)\Big],
+  \label{eq:Lplus}
+\end{align}
+with $H_j$ the harmonic number, $\gamma$ the Euler--Mascheroni constant,
+and $E_1$ the exponential integral.  The whole $B_l$ table then follows
+from the $l = 0, 1$ seeds by the Legendre recurrence
+\begin{equation}
+  (l+1)\,B_{l+1}(p,\alpha) = (2l+1)\,B_l(p+1,\alpha) - l\,B_{l-1}(p,\alpha).
   \label{eq:Bl_recurrence}
 \end{equation}
-could be used to generate $B_l$ from $B_0$, but the
-log singularity affects \emph{all} $l$ values (not just
-$l = 0$), so the base case $B_0$ itself requires careful
-treatment.  Adaptive quadrature is the most robust approach.
+Thus the log-singular moment introduces \emph{no} numerical
+integration: its minimal transcendental content is exactly
+$\{E_1(2\alpha),\,\gamma,\,\ln\}$, the exponential-integral signature of
+the Coulomb / $Q_0$ projection.  Adaptive
+quadrature~\cite{QUADPACK} with subdivision near $\xi = 1$ is retained
+only as an independent numerical check, agreeing with
+Eqs.~\eqref{eq:Bl_closed}--\eqref{eq:Lplus} to
+$\lesssim\!10^{-20}$ (backing:\
+\texttt{tests/test\_paper12\_general\_m\_neumann.py}).
 
 \subsection{Two-dimensional radial integral
 \texorpdfstring{$X_l(p_1, p_2, \alpha)$}{Xl(p1, p2, alpha)}}
@@ -529,8 +561,12 @@ The computation of the $V_{ee}$ matrix proceeds in four stages:
       \item The first-kind Legendre moments $A_l(p, 2\alpha)$ via
         the recurrence~\eqref{eq:Al_recurrence}.  Cost: $O(l_{\max} \cdot p_{\max})$.
       \item The second-kind Legendre moments $B_l(p, 2\alpha)$ and
-        $B_l(p, 4\alpha)$ via adaptive quadrature with caching.
-        Cost: $O(l_{\max} \cdot p_{\max})$ quadrature calls, $\sim$0.2~s total.
+        $B_l(p, 4\alpha)$ in closed form
+        (Eqs.~\eqref{eq:Bl_closed}--\eqref{eq:Bl_recurrence}).
+        Cost: $O(l_{\max} \cdot p_{\max})$ arithmetic, no quadrature;
+        this replaced the former adaptive-quadrature seeding, which had
+        dominated the $V_{ee}$ build ($\sim$40$\times$ faster, identical
+        values).
     \end{itemize}
   \item \textbf{$X_l$ table.}  Compute
     $X_l(p_1, p_2, 2\alpha)$ for all
@@ -591,15 +627,16 @@ For the $V_{ee}$ matrix alone:
     per element.
   \item \textbf{Algebraic} (Neumann expansion):
     $O(N_{\mathrm{bf}}^2 \cdot l_{\max} + l_{\max}^2
-    \cdot p_{\max}^2)$.  The $B_l$ quadrature is a one-time
-    cost ($\sim$0.2~s), after which the matrix assembly
-    is pure arithmetic.
+    \cdot p_{\max}^2)$, pure arithmetic throughout---the
+    closed-form $B_l$ tables (Sec.~\ref{sec:Bl_closed}) removed the
+    former quadrature entirely.
 \end{itemize}
 
-The algebraic approach is not always faster in wall time
-(the $B_l$ adaptive quadrature has non-trivial overhead), but
-it is \emph{exact within the Neumann truncation}, whereas
-the numerical approach always carries grid truncation error.
+The algebraic approach is both faster (the closed-form $B_l$ made the
+$V_{ee}$ build $\sim$40$\times$ faster than the earlier
+quadrature-seeded path) and \emph{exact within the Neumann
+truncation}, whereas the numerical approach always carries grid
+truncation error.
 
 %% ========================================================================
 %% V. CONVERGENCE STUDY
@@ -738,8 +775,8 @@ The convergence is slow ($\sim$1.3~percentage points per grid
 doubling) and the cost grows quadratically.  In contrast, the
 Neumann result for this basis is grid-independent at
 61.8\% $D_e$ (the basis itself limits accuracy at 6 functions; the
-$V_{ee}$ angular series terminates exactly, with only the single
-$B_l$ moment carried by a 1D quadrature).
+$V_{ee}$ angular series terminates exactly, and the $B_l$ moment is
+closed-form, so no quadrature enters).
 
 %% ========================================================================
 %% VI. DIAGNOSIS OF THE 7.6% GAP
@@ -1043,12 +1080,20 @@ the differentiation route to a non-variational $\approx -14.5$~Ha,
 whereas the recurrence build is variational and supplies the $\delta$
 channels from the native prolate route---a $+0.25$~mHa gain at
 $(2,2)$, consistent with the $\approx 0.5$~mHa Gaussian estimate (the
-$(2,2)$ $\delta$ subspace being the smaller).  One honest limit
-remains:\
-the low-$l$ $B_l^{m,s}$ seeds still use a single one-dimensional
-quadrature---as the $\sigma$-sector $B_l$ does---and the moment tables
-are built in extended precision, so the engine is recurrence-stable and
-quadrature-seeded rather than fully quadrature-free.  Backing:\
+$(2,2)$ $\delta$ subspace being the smaller).  The engine is
+\emph{fully quadrature-free}:\ the low-$l$ $B_l^{m,s}$ seeds are
+closed-form by the same construction as the $\sigma$ sector
+(Sec.~\ref{sec:Bl_closed}).  The obstruction that had kept these seeds
+numerical---the individual pole terms $d^{k}Q_0 \sim (\xi-1)^{-k}$ of
+$d^m Q_l$ have divergent moments---dissolves because $s \ge m$ always
+holds ($s = (\mu_i+\mu_j+m)/2$ with $m \in \{\mu_i+\mu_j,
+|\mu_i-\mu_j|\}$): the intact weight
+$(\xi^2-1)^s = (\xi-1)^s(\xi+1)^s$ then \emph{fully polynomialises}
+every pole ($k = m-a \le m \le s$), leaving a single log-moment against
+$Q_0$ whose primitive is Eqs.~\eqref{eq:Bl_closed}--\eqref{eq:Lplus}.
+The moment tables are still built in extended precision (the associated
+Legendre coefficients cancel over several orders), but no numerical
+integration remains.  Backing:\
 \texttt{tests/test\_paper12\_general\_m\_neumann.py}.
 
 \textbf{[MEASURED]} Finally, a caution about the $\sigma$ column
@@ -1263,16 +1308,14 @@ evidence.
 \subsection{Quantum chemistry without six-dimensional quadrature}
 
 The Neumann algebraic $V_{ee}$ realizes a form of quantum
-chemistry in which the two-electron integrals are reduced to
-recurrence relations on quantum number labels, the sole residual
-numerical step in the $\sigma$ sector being a single one-dimensional
-adaptive quadrature for the log-singular second-kind moment $B_l$
-(Sec.~\ref{sec:azimuthal} states what the $|m| \ge 1$ extension
-costs).  Combined with the
+chemistry in which the two-electron integrals are reduced entirely to
+recurrence relations and closed forms on quantum number labels---with
+the log-singular second-kind moment $B_l$ now closed-form
+(Sec.~\ref{sec:Bl_closed}), \emph{no} numerical integration remains in
+either the $\sigma$ or the $|m| \ge 1$ sector.  Combined with the
 analytical kinetic energy (integration by parts) and nuclear
 attraction (simple polynomial moments), the \emph{entire}
-Hamiltonian matrix is constructed without any six-dimensional
-quadrature.
+Hamiltonian matrix is constructed without any quadrature at all.
 
 This has conceptual significance beyond computational
 efficiency: it demonstrates that the physics of
@@ -1319,9 +1362,9 @@ integration bottleneck in the two-electron prolate spheroidal CI
 for H$_2$.  The key results are:
 
 \begin{enumerate}
-  \item \textbf{92.4\% of exact $D_e$} with algebraic $V_{ee}$ (a single 1D
-    quadrature for the log-singular $B_l$ moment) and zero fitted
-    parameters.
+  \item \textbf{92.4\% of exact $D_e$} with fully quadrature-free
+    algebraic $V_{ee}$ (the log-singular $B_l$ moment closed-form,
+    Sec.~\ref{sec:Bl_closed}) and zero fitted parameters.
   \item \textbf{12--20 percentage point improvement} over numerical
     $V_{ee}$ at every basis size from 1 to 72 functions.
   \item \textbf{Numerical $V_{ee}$ saturates at $\sim$80\%}
@@ -1366,12 +1409,13 @@ Ref.~\cite{tao_mccurdy_rescigno2010} reaches $0.05$~mHa in these
 coordinates with a polynomial angular basis.
 
 The result demonstrates a form of quantum chemistry where
-recurrence relations on quantum number labels replace the
-six-dimensional quadrature for electron-electron repulsion, leaving
-only a single one-dimensional quadrature for the log-singular $B_l$
-moment---one such seed per kernel order $m$ once the same recurrences
-are carried to the associated Legendre functions of the $|m| \ge 1$
-channels (Sec.~\ref{sec:azimuthal}).  Just as
+recurrence relations and closed forms on quantum number labels replace
+the six-dimensional quadrature for electron-electron repulsion
+entirely---including the log-singular $B_l$ moment, whose closed form
+(Sec.~\ref{sec:Bl_closed}) carries the same construction to the
+associated Legendre functions of the $|m| \ge 1$ channels
+(Sec.~\ref{sec:azimuthal}), so no numerical integration remains.
+Just as
 Paper~7 showed that atomic energies are encoded in the
 topology of $S^3$, this paper shows that molecular
 electron-electron repulsion is encoded in the algebraic

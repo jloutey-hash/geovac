@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.13.5] - 2026-09-17
+
+**Paper 12 corrected to reflect the closed-form B-seeds (v5.13.4): the algebraic V_ee is now documented as fully quadrature-free, and a test that was `@slow` only because of the retired quadrature is un-gated.** Paper sync + test-marker hygiene (patch). Follows the v5.13.4 code change; no numbers move.
+
+### Paper 12 (`paper_12_algebraic_vee.tex`)
+
+Paper 12 still claimed the second-kind moment `B_l` required "a single one-dimensional adaptive quadrature" and that the general-m engine was "recurrence-stable and quadrature-seeded rather than fully quadrature-free" — both false as of v5.13.4. Corrected in place at all nine loci (abstract, intro summary, §III auxiliary-integrals summary, §III.D, implementation pipeline, complexity discussion, convergence caption, §sec:azimuthal, conclusion ×2):
+
+- New subsection label `sec:Bl_closed` in §III.D presents the closed form: `Q_l = P_l Q_0 − W_{l−1}` splits `B_l` into monomial moments `A_n` plus one log-moment against `Q_0`, whose primitive `L_n(α) = ∫₁^∞ ξ^n Q_0 e^{−αξ}dξ = ½(L⁺_n − L⁻_n)` is closed-form: `L⁻_n` via `{γ, ln}` (the `ln(ξ−1)` branch), `L⁺_n` via `E_1(2α)` (the `ln(ξ+1)` tail, recurrence in n) — Eqs. eq:Bl_closed / eq:Lminus / eq:Lplus, then the l-recurrence. The §sec:azimuthal note now states the `s ≥ m` polynomialization that dissolves the m>0 pole obstruction.
+- Minimal transcendental content of `B_l` pinned as `{E_1(2α), γ, ln}` (the Coulomb/Q₀-projection signature). Adaptive quadrature retained in the paper only as the independent validation cross-check (agreement ≤1e-20 / 1e-10). Backing: `tests/test_paper12_general_m_neumann.py`. Full LaTeX cycle clean (12 pp, 0 undefined refs/citations); PDF rebuilt.
+
+### Test markers
+- `test_X_blocks_match_high_precision_reference` **un-marked `@slow`** — it builds the general-m X-table, whose `B_l` seeds are now closed-form, so it runs in **0.20s** (was tens of seconds under the quadrature seeding). The fast (`pytest`, no `--slow`) set thus gains a real V_ee X-table correctness check.
+- `test_closed_form_B_seeds_match_quadrature` **marked `@slow`** — it exercises the quadrature reference `_seed_B` ~70× (~10s); the closed form it validates is itself sub-millisecond.
+
+Changed: `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex` (+`.pdf`), `tests/test_paper12_general_m_neumann.py`, `CLAUDE.md` (version + §2), `CHANGELOG.md`.
+
 ## [v5.13.4] - 2026-09-17
 
 **The V_ee B-table quadrature seeds are replaced by a CLOSED FORM — the general-m Neumann engine is now fully quadrature-free, `vee_mp` is ~38× faster, and the H2 energy is bit-identical.** This kills the universal V_ee bottleneck the v5.13.3 diagnostic pinned (95% of `vee_mp`, 92% of the corr recurrence). Production change to `geovac/neumann_vee_general_m.py`; energy bit-unchanged, so no corpus numbers move (patch — but it promotes the general-m V_ee to **algebraic** in the §12 registry, an algebraic-first status change; **flagged to the PI as possibly warranting a minor**). Canonical memo `debug/sprint_direct_build_memo.md`; derivation/driver `debug/direct_vee_bseed_closedform.py`.
