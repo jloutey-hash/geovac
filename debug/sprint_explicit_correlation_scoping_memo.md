@@ -130,9 +130,14 @@ evidence for a multi-exponent SET specifically, not merely for a better single
 alpha, and it is why Sec. 7 step 1 is the exponent *set* rather than an alpha
 re-optimization.
 
-**Owed to the PI (paper-adjacent, not applied):** Paper 12's re-conditioned
-headline and registry key `p12_rebased_de_pct` are at **alpha = 1.0, which is not
-the variational optimum of that basis** — the offset is 40%, not a tweak. The
+**Paper-adjacent finding — RAISED TO THE PI, APPROVED, AND APPLIED at v5.13.9**
+(this heading read "Owed to the PI ... not applied" when written; the list of
+consequences below was updated when it landed and this heading was not, so for a
+few hours the section contradicted itself two lines apart — the same
+summary-surface failure this sprint kept finding elsewhere, committed here):
+Paper 12's re-conditioned headline and registry key `p12_rebased_de_pct` were at
+**alpha = 1.0, which is not the variational optimum of that basis** — the offset
+is 40%, not a tweak. The
 registry convention string reads "alpha=1.0; best variational point", accurate
 about the discard-threshold sweep but easily read as though alpha were optimized.
 So 99.767% / 0.41 mHa is conservative. **Measured at the headline basis itself**
@@ -153,16 +158,26 @@ strictly cleaner:** variational, all 1944 functions kept, and conditioning
 same code path; the only difference is a parameter the paper's own text calls
 "optimized variationally" while the re-conditioned table fixes it at 1.0.
 
-Three consequences, all PI calls, none applied here:
-1. Paper 12's `sec:recondition` headline and `tab:recondition` would read
-   **99.814% / 0.324 mHa at alpha = 1.40** if updated to the basis's actual best
-   variational point.
-2. Registry `p12_rebased_de_pct` (99.77) and `p12_rebased_err_mha` (0.41) are the
-   alpha=1.0 values; the convention string "alpha=1.0; best variational point" is
-   true of the discard-threshold sweep but reads as though alpha were optimized.
-3. `recondition_energy` defaults to `alpha=1.0`, which this shows is a poor
-   default — but changing it silently alters how every future call reproduces the
-   published numbers, so it moves with the paper decision, not before it.
+Three consequences — **all three PI-APPROVED AND APPLIED at v5.13.9** (this list
+read "all PI calls, none applied here" when first written; superseded the same
+day, and corrected here because a stale owner-side list is exactly the defect this
+sprint kept finding in other documents):
+1. **APPLIED.** Paper 12's abstract, `sec:recondition` and conclusion quote
+   **99.81% / 0.32 mHa at alpha = 1.40**, with a new `[MEASURED]` paragraph
+   reconciling them against the fixed-alpha ladder. `tab:recondition` deliberately
+   stays the alpha = 1.0 ladder: its "every point contains its predecessor and
+   lies below it" claim holds only at a consistent alpha.
+2. **APPLIED, as SEPARATE keys rather than an overwrite.** `p12_rebased_de_pct`
+   (99.77) / `p12_rebased_err_mha` (0.41) remain the ladder endpoint; new
+   `p12_rebased_de_pct_aopt` (99.81), `p12_rebased_err_mha_aopt` (0.32) and
+   `p12_rebased_alpha_opt` (1.40) carry the optimum. Neither supersedes the other.
+   C21 PASS, 176 annotations.
+3. **APPLIED.** `recondition_energy`'s default is now **alpha = 1.40**, documented
+   with the caveat that it is the optimum at the headline truncation only —
+   alpha_opt drifts upward with basis size, so other truncations must re-optimize.
+   Backed by a fast default-pinning test plus a `@slow` (4,4)+delta check that the
+   optimum beats the ladder endpoint without trading away variationality,
+   function count or conditioning.
 
 **This does not change the #1 verdict.** With alpha optimized the mu<=2 residual
 is ~0.324 mHa, of which the degree axes reach ~0.04 and the phi channels ~0.098
@@ -253,24 +268,97 @@ the corpus's own data does not support that framing:
       recurrence in an ARBITRARY rate — no hard-coded 2*alpha — so the one-body
       half needs only per-rate moment tables and routing, at four call sites
       (`prolate_recondition.py:334/811/1012`, `neumann_vee_general_m.py:412/576`).
-   2. **V_ee seeds: a 3x multiplier on the DOMINANT cost.** `_B_table(m,s,l,p,c)`
-      also takes an arbitrary `c`, so again no new mathematics — but
-      `_build_Xtab_mp` calls it TWICE per (m,s) block (at `c` and `two_c`, the
-      latter because the ordered-xi IBP produces e^{-2 alpha xi_2}), and each call
-      computes its closed-form seeds under `workdps(dps + 8s + 24)`. With two
-      block exponents the per-electron rate is one of {2a1, a1+a2, 2a2}, so the
-      X-table becomes rate-pair-indexed: **6 `_B_table` builds per block instead
-      of 2**. The B-seeds were measured this session as the dominant V_ee cost
-      even after the v5.13.4 closed form, so the 3x lands on exactly that.
-   3. **THE PIECE THE EARLIER SCOPE MISSED — the F-tensor collapse breaks.**
+   2. **V_ee seeds: a 3x multiplier, but on a NEGLIGIBLE base — corrected
+      2026-09-18 after measuring.** `_B_table(m,s,l,p,c)` also takes an arbitrary
+      `c`, so again no new mathematics — but `_build_Xtab_mp` calls it TWICE per
+      (m,s) block (at `c` and `two_c`, the latter because the ordered-xi IBP
+      produces e^{-2 alpha xi_2}), and each call computes its closed-form seeds
+      under `workdps(dps + 8s + 24)`. With two block exponents the per-electron
+      rate is one of {2a1, a1+a2, 2a2}, so the X-table becomes rate-pair-indexed:
+      **6 builds per block instead of 2.** An earlier version of this item called
+      that "a 3x multiplier on the DOMINANT cost". **Wrong, and wrong because I
+      carried a pre-v5.13.4 fact forward without re-measuring:** the B-seeds
+      dominated V_ee only BEFORE the closed form landed. Measured now at dps=40
+      across six representative blocks — (0,0) 0.01 s, (0,1) 0.01, (1,1) 0.02,
+      (2,2) 0.03, (2,3) 0.03, (4,4) 0.05 — **0.16 s total, so 3x is ~0.5 s.**
+      The seeds are no longer the cost driver; the X-table assembly and the mpf
+      re-basing are. **And that was measured too (2026-09-18): the X-table build
+      is 1.8 s at (3,3,1) (38 blocks, p_max=12) and 17.8 s at (4,4,2) (96 blocks,
+      p_max=18), so three rate-pairs cost ~5 s and ~53 s.** Against a (5,5)+delta
+      whole-pipeline time of ~734 s that is noise. **So the V_ee half is cheap,
+      and NONE of the costs flagged in this section is a real obstacle.**
+   3. **F-tensor: real but LOCAL, not architectural — corrected 2026-09-18.**
       `vee_mp`'s F tensor is keyed on `(mu_i, mu_j)` and the COMBINED powers
       (p1,q1,p2,q2) only; that is the "~50x faster than the O(N^2) loop"
       optimisation, and it works *because* one shared exponent makes V depend on
-      the basis solely through quantum-number sums. With per-block exponents two
-      functions sharing those sums but sitting in different blocks no longer share
-      an F entry, so the tensor needs block-pair indices. This is an
-      architectural change to the assembly, not more tables, and it is the
-      likeliest source of schedule surprise.
+      the basis solely through quantum-number sums. Per-block exponents break that
+      keying. An earlier version called this "an architectural change ... the
+      likeliest source of schedule surprise". Measured blast radius: the pattern
+      lives in **one function** — `Fdict` built at `prolate_recondition.py:405/441`
+      and consumed at `:457/462` — and the only other occurrence is a comment in
+      the superseded `debug/h2_recondition_hp.py`. The change is `Fdict` keyed on
+      `(mui, muj, block_i, block_j)` plus a `br = np.array([b.block for b in
+      basis])` index array alongside the existing `jr/lr/kr/mr` in the gather.
+      Contained, not cross-module.
+   4. **Data model: a SMALL change is needed — corrected 2026-09-18 (my claim was
+      wrong).** An earlier version of this item said "NO change needed", because
+      `ProductFn.__slots__` already carries a per-function `alpha` and the only
+      code reading `.alpha` is the constructor (line 160) — every consumer takes
+      `alpha` as an explicit parameter. The first half is true and the conclusion
+      does not follow: a product function has **two** radial factors, degree `j`
+      on electron 1 and `k` on electron 2, so a per-degree exponent gives electron
+      1 the rate alpha(j_bra)+alpha(j_ket) and electron 2 alpha(k_bra)+alpha(k_ket)
+      — independently. One `alpha` field supports per-FUNCTION alpha (both
+      electrons identical), which is **not** what a two-block radial set needs.
+      Clean fix, no new fields: derive the exponent from the degree through a
+      shared `alpha_of(j)` map that every consumer calls, so the two engines
+      cannot disagree about which rate a factor carries.
+   5. **Transform + congruence: negligible, and the congruence gets MORE block
+      structure, not less.** Measured: `_transforms_per_mu` costs 0.00 s at
+      (3,3,1), 0.01 s at (4,4,2) and (5,5,2) — doubling to ~0.03 s. The factored
+      congruence costs 3.5 / 87.5 / 592.4 s at those truncations, and per-block
+      alpha does not change its SIZE: `C` becomes block-diagonal in (mu, block)
+      rather than mu alone, which is strictly more structure to exploit.
+
+   **Where the (5,5)+delta time actually goes, as a by-product:** that single
+   592 s congruence is **~81% of the 734 s whole-pipeline cost** on the `direct`
+   engine, which performs exactly one (on V). So further speed work belongs in
+   task 1 — building V_ee directly in the orthogonal basis so no V congruence is
+   needed — and not in the one-body half, which v5.13.8 already removed.
+
+   **REVISED VERDICT ON THE SPRINT'S SIZE (2026-09-18).** Every cost in items
+   1-4 above was measured rather than estimated, and the sprint is **plumbing plus
+   one contained keying change** — per-rate moment/X tables (~53 s at (4,4,2)),
+   `Fdict` keyed on `(mui, muj, block_i, block_j)` inside a single function, a `br`
+   index array in the gather, and no data-model change at all. It is **not** the
+   comparable-to-#3 arc this memo first described.
+
+   *Process finding, recorded because the shape repeated.* SIX scope estimates in
+   this section — seed dominance, F-tensor severity, data-model impact (wrong in
+   BOTH directions: first "architectural", then "no change needed", and the truth
+   is a small `alpha_of(j)` map), X-table cost, and the transform/congruence cost
+   — were each wrong, five of them in the PESSIMISTIC direction, and each
+   dissolved or inverted on the first measurement. Two identifiable causes, both avoidable: (i) carrying forward
+   a fact that was true at an earlier version (the B-seeds dominated V_ee only
+   BEFORE v5.13.4's closed form), and (ii) inferring severity from how central a
+   function *looked* rather than from its measured blast radius (the F-tensor is
+   one function, not an architecture). This is the same failure as the March
+   "fix not built" status error in a different costume: verifying the numbers
+   while inheriting the framing. **Rule for this sprint: no cost claim enters the
+   plan without a measurement behind it.**
+
+   **STEP ORDERING CORRECTED (2026-09-18, from building it): the V_ee half is a
+   PREREQUISITE, not a follow-on.** The one-body half is done and validated
+   (`debug/multiexp_overlap_poc.py`: overlap vs `one_body_mp` at the dps floor,
+   H1 vs `build_one_body_direct` at 2e-16 scale-relative across three
+   truncations, per-side kinetic exponents discriminated by mutation). But no
+   two-block ENERGY can be measured yet, because `pr.vee_mp(basis, alpha, R, l)`
+   takes a SINGLE alpha and builds its X-table at c = 2*alpha — at a split point
+   it is simply the wrong operator, one rate where three are needed. Any energy
+   quoted from a mixed one-body/single-rate-V_ee Hamiltonian is meaningless (I
+   printed one: -1.592 Ha, 0.42 Ha below exact, which is an artifact of that
+   mixture and not a variational failure). So the per-rate-pair X-table must land
+   BEFORE the conditioning and accuracy questions can be asked at all.
 
    **Hard design constraint (the ledger settles it): per-BLOCK, not
    per-FUNCTION.** A per-function exponent (`k_n = Z/n`) is a ledgered failure --

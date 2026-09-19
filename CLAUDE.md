@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.13.10 (September 18, 2026)
+**Version:** v5.14.0 (September 18, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **§13.5 narrowed: §5's numeric result cells are PM-editable (2026-09-18, v5.14.0, PI-directed):** measured driver — the §5 rule fired 3× in one day and every answer was "PI-directed, go ahead", while stale §5 numbers caused real drift. Levels/coordinates/framing stay prohibited. Multi-exponent one-body half banked (H1 vs direct engine 2e-16). See CHANGELOG v5.14.0.
 - **"FD kinetic is the bottleneck to 99%" RETRACTED (2026-09-18, v5.13.10):** the analytical fix was already built and is the only reachable path; FD *falls* and analytical *rises* with grid refinement, meeting at ~86% at N=9, so March's 94.7% was an FD artifact. Basis growth does work (18 fns → 90.6%, climbing). See CHANGELOG v5.13.10.
 - **Headline moved to its variational optimum; a 1000× understatement fixed (2026-09-18, v5.13.9, PI-approved):** Paper 12 now quotes 99.81%/0.32 mHa at α=1.40 (ladder endpoint 99.77% kept, separate registry keys); default α 1.0→1.40; the gegenbauer conditioning gain is 1.0e6× (six orders), not the "~1025×" the registry and paper carried. §5 row still unqualified — PI. See CHANGELOG v5.13.9.
 - **H₂'s residual is NOT more polynomial degree; the untested axis is the single shared α (2026-09-18, v5.13.9):** radial +1 buys 34 µHa, angular +1 buys 8 µHa — both saturated. No geminal build started. See debug/sprint_explicit_correlation_scoping_memo.md.
@@ -789,7 +790,7 @@ The following changes must NEVER be made by sub-agents or the PM agent:
 | 2 (Development Frontier) | Yes | Update best results, add/complete track summaries, update backlog |
 | 3 (Failed Approaches) | Yes (append only) | Add new failed approach rows; never delete or modify existing entries |
 | 4 (Dimensionless Vacuum) | **NO** | — |
-| 5 (Natural Geometry Hierarchy) | **NO** | — |
+| 5 (Natural Geometry Hierarchy) | Numeric result cells ONLY (narrowed 2026-09-18, PI-directed) | Update a MEASURED result in the table's result column, or the same number where a note restates it (e.g. 99.77% → 99.81% when the optimum is re-measured). NEVER add/remove/renumber levels, change a coordinate system, or edit the framing of §5's notes — those remain prohibited by the §13.5 preamble above and §13.8 below. |
 | 6 (Paper Series) | Yes | Update file paths, loading guide descriptions, inventory tables, key results |
 | 7-9 (Code/Coding/Workflow) | Yes | Add new entry points, update module paths |
 | 10 (Validation Benchmarks) | Yes | Add new benchmark rows for new tests |

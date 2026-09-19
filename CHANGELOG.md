@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.0] - 2026-09-18
+
+**§13.5 is narrowed: §5's numeric result cells become PM-editable, while its levels, coordinate systems and framing stay prohibited. Plus the multi-exponent one-body half, banked and independently validated.** Minor bump because §9 makes a change to the agent protocol corpus-significant — a reader seeing the second number move should be able to infer that the instrument moved, without reading the entry.
+
+### The rule change, with its measured driver
+
+`§13.5`'s access table read `| 5 (Natural Geometry Hierarchy) | **NO** | — |`. It now reads **"Numeric result cells ONLY"**. The driver is this session, not a preference: the §5 rule fired **three times in one day** — the hierarchy row, and two instances inside the Level-4 note — and every time the answer was "PI-directed, go ahead", which is friction without protection. Meanwhile the *cost* of the rule was real: §5 sat carrying an unqualified "99.77% D_e (0.41 mHa)" after the headline had moved to 99.81% / 0.32 mHa at α = 1.40, and it was the last surviving stale copy in the corpus precisely because the PM could not touch it.
+
+**What is emphatically NOT loosened**, because the narrowing is easy to over-read: both preamble prohibitions survive verbatim — "Any change to the natural geometry hierarchy (new levels, changed coordinate systems)" (§13.5) and "Change the natural geometry hierarchy (new levels, changed coordinates)" (§13.8). Levels, coordinate systems, renumbering and the framing of §5's notes remain PI-only. What the PM may now do is update a *measured number* in a result cell, and the same number where a note restates it. §13.5's other **NO** entries are untouched, and they earned their keep today: §1.5/§1.6 and §13 itself are what stopped strategy being quietly reframed, and the Paper-2 combination-rule clause remains load-bearing.
+
+### Banked: the multi-exponent one-body half
+
+The exponent-set sprint's one-body machinery is complete and independently validated (`debug/multiexp_overlap_poc.py`). Per-pair moment dispatch routes each electron's radial factor to its own pair rate — three distinct rates {2α₁, α₁+α₂, 2α₂} at two blocks — via an `alpha_of(j)` map, so no `ProductFn` field is added and both engines call the same map.
+
+| falsifier | result |
+|:--|:--|
+| overlap vs `one_body_mp` | dps floor, ~4e-42 relative, **flat in N** |
+| V_ne, degenerate | 0.000e+00 — **lookup-only**, the two routes share arithmetic |
+| **H1 vs `build_one_body_direct`** | **2e-16 scale-relative** at (1,1,0)/(2,2,1)/(3,3,2) — different basis, precision and construction |
+
+All five implementation costs were **measured, not estimated**, and all five are cheap: B-seeds ~0.5 s (3× a 0.16 s base), the X-table ~53 s at (4,4,2) against a 734 s pipeline, the F-tensor confined to one function, transforms 0.03 s, and a small `alpha_of(j)` map instead of a data-model change. Six scope estimates in the memo were wrong before measurement — five pessimistically — and the memo now records both causes (carrying forward a fact true at an earlier version; inferring severity from how central a function *looks* rather than its blast radius) with a standing rule: no cost claim enters the plan without a measurement behind it.
+
+Two readings corrected in the process: the two-block cond ~1e17 is **not** alarming (the one-block *monomial* overlap is already 2.05e15, and Paper 12 measured 2.6e14 — so two-block costs ~47×, not four orders; and cond is exactly flat in `n_mom`, killing the short-table hypothesis); and the **V_ee half is a prerequisite, not a follow-on** — `vee_mp` builds its X-table at a single `c = 2α`, so no two-block *energy* exists until it is rate-pair-indexed, and the conditioning and accuracy questions cannot be asked before that.
+
+*Recorded against myself:* roughly eight turns went to a 12.8 mHa discrepancy inside a test harness written the same day, for a function already validated by a stronger independent check. An explicit stop rule was set and then broken twice, the second time by an edit that matched inside a docstring and corrupted the file into a syntax error, costing a 195-line excision. Seven hypotheses failed and the fault was never localised; deletion was the right move two turns in. The sprint's substance never depended on it, and the driver carries a provenance note saying so.
+
+Changed: `CLAUDE.md` (§13.5 table row, version, §2), `CHANGELOG.md`, `debug/sprint_explicit_correlation_scoping_memo.md`. Added: `debug/multiexp_overlap_poc.py`.
+
 ## [v5.13.10] - 2026-09-18
 
 **The "FD kinetic energy is the bottleneck to 99%" finding is retracted: the analytical fix was already built and is the only reachable path, and the 94.7% it was supposed to restore is an FD coarse-grid artifact.** A correction to v5.13.9's own ledger row, written one commit later because measuring it took longer than writing it. **My error, and a specific one:** this morning I verified March's *numbers* against the primary source and built a ledger row from them, but inherited that document's *status* ("fix not built") without reading the code — the stale-primary-source failure I had spent the preceding hours flagging in other people's records.
