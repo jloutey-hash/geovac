@@ -138,7 +138,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   - **Paper 13:** He **0.022% raw** ($l_{\max}=7$) / **0.004% cusp-corrected**
     ($l_{\max}=4$), 2D variational, *properly variational upper bounds*; the 0.05%
     single-channel adiabatic is **non-variational** (lucky cancellation — must be
-    flagged); graph-native CI **0.19%** at $n_{\max}=7$, zero parameters. (Note:
+    flagged); graph-native CI **0.216%** at $n_{\max}=7$ (MEASURED 2026-09-19; the 0.19% this line carried was stale), zero parameters. (Note:
     CLAUDE.md §5 still drifts to "0.20% / $n_{\max}=9$" — papers win; the synthesis +
     §2 table use the paper numbers.)
   - **Paper 15:** H$_2$ **96.0%** of $D_e$ ($l_{\max}=6$, 61 channels, ~97% CBS);
@@ -150,7 +150,7 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   - **Paper 19:** balanced coupled LiH **0.20%** *energy* ($n_{\max}=3$) with **structural
     $R_{\rm eq}$ drift (~8.8%)** — energy converges, geometry drifts; the 29% unbalanced
     figure is the negative control.
-  - **FCI-atoms:** graph-native CI He 0.19% / Be 0.71% / Li 1.03% (zero-parameter, exact
+  - **FCI-atoms:** graph-native CI He 0.216% (2026-09-19; was 0.19%) / Be 0.71% / Li 1.03% (zero-parameter, exact
     rational Slater integrals); H$^-$ bound but over-binds 21% ($Z_c\approx1.84$ boundary).
   - **FCI-molecules:** the graph-concatenation **negative** (no minimum) — the headline
     *is* the negative result.

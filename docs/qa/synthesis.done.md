@@ -181,7 +181,7 @@ supplies" is load-bearing and the reviewer must quote the document, not the corp
   cyclotomic mixed-Tate periods. Tier = the corpus's certified structural claims.
 - **κ = −1/16** (Observation); **λ_n = −(n²−1)** = Fock-projected continuum spectrum
   (NOT a bare-graph property — C6).
-- **Natural-geometry hierarchy** table: He 0.004% cusp / 0.022% raw / 0.19% CI;
+- **Natural-geometry hierarchy** table: He 0.004% cusp / 0.022% raw / 0.216% CI;
   H₂⁺ **machine precision** (reference-limited; REWRITTEN 2026-09-19, PI
   direction — [retracted 2026-09-19: p11-h2plus-0002pct-retired] the 0.0002% this line carried
   understated the method by ~7.6 orders, measured 3.6e-14 Ha at

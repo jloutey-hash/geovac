@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.14.4 (September 19, 2026)
+**Version:** v5.14.5 (September 19, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -118,6 +118,7 @@ it is a PI call.
 - **H₂'s residual is NOT more polynomial degree; the untested axis is the single shared α (2026-09-18, v5.13.9):** radial +1 buys 34 µHa, angular +1 buys 8 µHa — both saturated. No geminal build started. See debug/sprint_explicit_correlation_scoping_memo.md.
 - **Neumann V_ee silently ignored explicit r₁₂ — guarded (2026-09-18, v5.13.9):** bit-identical V_ee for p=0..7; p>0 returned −55.3% of D_e unbound, no error. Two missing prolate-r₁₂ ledger rows added. See CHANGELOG v5.13.9.
 - **One-body direct build wired in; H2 recondition 3.2x, V_ee is now the bound (2026-09-18, v5.13.8):** `engine="direct"` default; headline points reproduced to every printed digit. NOT "seconds" — that needs V_ee. A dead chemical-accuracy guard found + repaired. See debug/sprint_direct_build_memo.md.
+- **Graph-native He 0.19% swept to 0.216% (2026-09-19, v5.14.5):** the 3rd wrong He headline; n_max=7 MEASURED 0.216%, validated non-circularly vs the paper's own n_max=6=0.23%. Gate-first C17 family, 17 loci. See CHANGELOG.
 - **Owed items worked (2026-09-19, v5.14.4):** 2 guards rebuilt+fire-tested; C19 scan widened to CHANGELOG/CLAUDE.md; graph-native He n_max=7 = 0.216% MEASURED, falsifies the 0.19% headline (corpus sweep owed). See CHANGELOG.
 - **H2+ 0.0002% headline RETIRED -- wrong by ~7.6 orders AGAINST us (2026-09-19, v5.14.3, /qa group2 CODE):** measured 3.6e-14 Ha at n_basis=20; now qualitative (reference-limited). 40 loci swept; He 0.019% matched no result. See CHANGELOG.
 - **Two-block radial exponent: accuracy ~ZERO, and its conditioning penalty was an artifact (2026-09-18, v5.14.2):** gain +0.198/-0.009/+0.005 mHa as N grows; optimum is a plateau. Raw-vs-normalized cond differ 6 orders. See CHANGELOG + ledger.
@@ -218,7 +219,7 @@ it is a PI call.
 | System | Result | Method | Paper |
 |:-------|:-------|:-------|:-----:|
 | He (atom) | 0.004% (cusp); 0.022% (raw) | 2D variational, cusp l_max=4 / raw l_max=7 | 13 |
-| He (graph-native CI) | 0.19% | Zero-parameter, exact algebraic integrals, n_max=7 | 13 |
+| He (graph-native CI) | 0.216% (n_max=7) | Zero-parameter, exact algebraic integrals | 13 |
 | H⁻ | Bound, over-binds 21% | Graph-native CI, Z_c≈1.84 boundary | 13 |
 | PsH | 4.1% | Level 3, sign-flipped charge | 13 |
 | H₂⁺ | machine precision (reference-limited) | Spectral Laguerre | 11 |
@@ -456,7 +457,7 @@ The core organizational principle of the project. Each electron configuration ha
 | 1 | H (1-center, 1e) | S3 (Fock) | lambda_max -> 2 d_max = 8; deficit 0.57% at n_max = 30 (a spectral *bound*, not an accuracy: E_0 = kappa*lambda_max by construction) | 7 |
 | 2 | H2+ (2-center, 1e) | Prolate spheroid | machine precision (spectral; reference-limited) | 11 |
 | 2 | H2 (2-center, 2e) | Prolate spheroid | 99.81% D_e (0.32 mHa) at the variational optimum α=1.40; 99.77% (0.41 mHa) at the fixed-α ladder endpoint — re-based CI (v5.13.9) | 12 |
-| 3 | He (1-center, 2e) | Hyperspherical | 0.004% (2D var, cusp l_max=4); 0.022% (raw l_max=7); 0.19% (graph-native CI n_max=7, 0 params, exact algebraic integrals) | 13 |
+| 3 | He (1-center, 2e) | Hyperspherical | 0.004% (2D var, cusp l_max=4); 0.022% (raw l_max=7); 0.216% (graph-native CI n_max=7, 0 params, exact algebraic integrals) | 13 |
 
 *Level 3 note:* The previous 0.05% result used the FD adiabatic solver (lucky error cancellation, non-variational). The adiabatic coupled-channel solver converges to a structural floor of 0.19-0.20% (v2.0.8). The 2D variational solver (Track DI, v2.6.0) breaks this floor: raw 0.022% at l_max=7 (tensor-product Laguerre × Gegenbauer basis, 8000 dim), cusp-corrected 0.004% at l_max=4. The 2D solver treats R and α simultaneously, capturing non-adiabatic R-α correlation that the adiabatic approximation misses. l_max convergence is monotonic; the per-channel angular basis (n_basis=40 Gegenbauer functions) is the convergence bottleneck, not partial-wave truncation.
 | 4 | H2 (2-center, 2e), hyperspherical treatment | Mol-frame hyperspherical | 96.0% D_e — structural N-electron precursor to 4N/5; H2's *natural* geometry is Level 2 (prolate), see note | 15 |

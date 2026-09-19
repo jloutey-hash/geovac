@@ -84,6 +84,48 @@ WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
 REGISTRY = [
     {
+        "id": "p13-he-graphnative-019-nmax7",
+        "scope": "paper_13 paper_18 paper_7 group2 group3 synthesis trunk",
+        "severity": "fail",
+        "canonical_note": "Registered 2026-09-19. The graph-native He CI "
+                          "'0.19% @ n_max=7' (E = -2.8983 Ha) is STALE. Measured "
+                          "on the production build_graph_native_fci (hybrid h1, "
+                          "exact rational Slater at k=Z): n_max=5/6/7 = "
+                          "0.2496/0.22864/0.21559 %. Non-circular anchor: "
+                          "paper_fci_atoms's own 'n_max=6 = 0.23%' matches the "
+                          "measured 0.22864%, so the pipeline is the right "
+                          "construction; the n_max=7 value 0.19% is a "
+                          "non-monotone outlier no current path reproduces "
+                          "(production E = -2.89746, dim 1218; NO-TEST). Correct "
+                          "value: 0.216% (E = -2.89746 Ha). The adiabatic "
+                          "'0.19-0.20%' FLOOR is a DIFFERENT solver and is NOT "
+                          "this claim (the pattern excludes the range form). "
+                          "Driver debug/qa/_graph_native_he_nmax67.py.",
+        "pattern": r"0\.19\s*\\?%",
+        "require_nearby": r"graph.native|graph.consistent|Graph-native",
+        # NOTE: the adiabatic-floor "0.19--0.20%" range is deliberately NOT in
+        # the exemption.  The pattern already cannot match it (the % is not
+        # adjacent to 0.19 in "0.19--0.20\%"), and including it here would
+        # FALSELY EXEMPT a genuine "0.19%" locus that merely sits within WINDOW
+        # of a floor mention -- which it did (CLAUDE.md's Level-3 note), the
+        # 2026-09-04 DELTA #5 over-exemption class.
+        "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}:\s*p13-he-graphnative-019-nmax7\]|"
+                            r"0\.216|falsifies|MEASURED 2026-09-19|retired|superseded|stale",
+        "files": [
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+            "papers/group2_quantum_chemistry/paper_fci_atoms.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/claim_test_matrix.md",
+            "docs/qa/group2.done.md",
+            "docs/qa/synthesis.done.md",
+            "CLAUDE.md",
+        ],
+    },
+    {
         "id": "p11-h2plus-0002pct-retired",
         "scope": "paper_11 paper_12 paper_13 paper_15 paper_17 group2 group4 synthesis trunk",
         "severity": "fail",

@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.5] - 2026-09-19
+
+**The third wrong He headline swept: graph-native He CI "0.19% @ n_max=7" -> the measured 0.216%. Gate-first, 17 loci, with a non-circular validation that made the correction safe rather than a mis-correction.**
+
+### The diagnostic that de-risked it -- the sweep's premise was NOT a given
+
+Reading context before editing revealed a genuine discrepancy, not a plain stale number. Paper 7 stated the graph-native He at n_max=7, 1,218 configs, as E = -2.8983 Ha (0.19%), while production `build_graph_native_fci` gives E = -2.89746 (0.216%) at the SAME dim=1218 -- same basis, different energy. Either the papers were stale, or my job measured a different construction (`paper_fci_atoms` explicitly distinguishes the graph-native CI from "a variant using exact hydrogenic diagonal"). Sweeping the wrong way would have corrupted a correct number.
+
+Resolved NON-circularly: `paper_fci_atoms`'s OWN stated "n_max=6 = 0.23%" matches the measured `build_graph_native_fci` n_max=6 = 0.22864% -- so the pipeline is confirmed the right construction against the paper's own value, not against the subagent's own ladder (which was the circular anchor the n_max job had actually used). The n_max=7 "0.19%" is then exposed as a non-monotone outlier: the paper's own 0.23% at n_max=6 continues to the measured 0.216% at n_max=7, not down to 0.19%. And 0.19% is reproduced by no current path and backed by no test. So it is stale (pre the 2026-08-29 exact-rule ERI correction that `paper_fci_atoms` itself cites); correct value 0.216% (E = -2.89746).
+
+### The sweep (gate-first, C17 family `p13-he-graphnative-019-nmax7`)
+
+Registered the family BEFORE editing; it enumerated 16 live loci -- including `group2_quantum_chemistry_synthesis.tex:415` ("reaches 0.19% at n_max=7") that a same-line grep had MISSED, vindicating gate-first -- and I added the 1 it structurally cannot see (`synthesis.done.md`'s "0.19% CI", no "graph-native" in window). 17 loci swept via an anchored, fail-loud, raw-string script (no heredoc): Papers 7/13/18, fci_atoms, the group2 synthesis (x3), INDEX, claims_register, claim_test_matrix (x2 -- the NO-TEST coverage-gap row updated to DEBUG-DRIVER-MEASURED with the ladder), the two frozen `.done.md` files (self-declaring), and CLAUDE.md best-results + the S5 numeric result cell. Paper 7 also carried the stale ENERGY, -2.8983 -> -2.89746. The adiabatic "0.19-0.20%" FLOOR (a different solver) and n_max=6 = 0.23% (correct) were left untouched.
+
+### An over-exemption I made and caught
+
+My first `exempt_if_nearby` included the floor-range "0.19-0.20%", which FALSELY EXEMPTED a genuine 0.19% locus (CLAUDE.md's Level-3 note) sitting within 3 lines of a floor mention -- the 2026-09-04 DELTA #5 class, again. Removed: the pattern already cannot match the range form (the % is not adjacent to 0.19 in "0.19--0.20\%"), so the clause only produced false exemptions. Re-enumeration then recovered CLAUDE.md:459.
+
+### Scope of the correction, stated honestly
+
+0.216% is the measured value at n_max=7 -- the n_max the headline used. The method's recorded BEST is n_max=9 = 0.201% (consistent with the measured trend but NOT re-measured this session, ~hours to build). The best-results table now shows the measured n_max=7 value; presenting the n_max=9 best would need that build first.
+
+This completes the three wrong He/H2+ headlines surfaced by the group2 CODE dimension: **H2+ 0.0002%** (v5.14.3, ~7.6 orders too optimistic), **He 0.019%** (v5.14.3, matched no result), and **He graph-native 0.19%** (here, optimistic; true 0.216%). All three were caught by code review + independent re-derivation, and all three were wrong in ways a percentage-registry with a Paper-11/13 family would have caught -- which is now the case.
+
+### Files
+
+Papers 7/13/18/fci_atoms (all compile clean, 0 errors / 0 undefined; Paper 18's "undefined" is a benign pre-existing `OMS/cmtt/m/n` font-shape warning), the group2 synthesis, `papers/INDEX.md`, `CLAUDE.md`, `docs/claims_register.md`, `docs/claim_test_matrix.md`, `docs/qa/{group2,synthesis}.done.md`. Gate + drivers: `debug/qa/check_headline_numbers.py` (new C17 family + the over-exemption fix), `_register_c17_graphnative019.py`, `_sweep_graphnative019.py`. Gates: C16 / C17 / C19 / C21 all PASS. No `geovac/` file modified.
+
 ## [v5.14.4] - 2026-09-19
 
 **Owed items from v5.14.3, worked: two replacement guards written and fire-tested, the C19 scope hole closed (and a false v5.14.3 claim corrected), and the graph-native He n_max=7 value measured -- which falsifies a third headline.**
