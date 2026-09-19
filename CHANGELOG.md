@@ -7,6 +7,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.3] - 2026-09-19
+
+**A DoD headline was wrong by ~7.6 orders of magnitude -- against us -- and no gate could see it.** `/qa group2 full` (PI-scoped to Papers 11/12/13) returned FAIL on the CODE dimension for Papers 11 and 13. Every number was independently re-derived before acceptance; the sweep took the retired headlines from 40 live loci to 2.
+
+### The finding
+
+Paper 11's **H2+ "0.0002% energy error"** -- a DoD SS C8 headline and a CLAUDE.md best-results row -- is not reproducible. Measured through production (`ProlateSpheroidalLattice(R=2.0, radial_method='spectral', n_basis=20)`):
+
+| n_basis | err (Ha) | err % |
+|--:|--:|--:|
+| 5 | 2.13e-08 | 3.5e-06 % |
+| 10 | 2.53e-12 | 4.2e-10 % |
+| **20** | **3.6e-14** | **6.0e-12 %** |
+
+0.0002% = 1.21e-6 Ha, so **even n_basis=5 is 57x better than the published claim**. The reviewer tried nine quantity-x-reference combinations; the nearest (coarse-grid PES fit vs exact@R=2.0) gives 4.64e-4 %, a factor 2.3 off, so no route reproduces it.
+
+**Canonical form (PI direction): qualitative.** The residual is *reference-limited* -- 3.6e-14 Ha sits below the precision at which E_ref is conventionally quoted -- so no percentage is meaningful and substituting one would reinvite the defect in smaller form. Paper 11's abstract now carries E = -0.602634214494936 Ha against -0.6026342144949 Ha with 13 digits, making the claim checkable for the first time: as printed ("-0.6026 Ha ... vs exact -0.6026 Ha") it was **unfalsifiable from the paper**.
+
+**Three derived figures died with it:** R_eq 2.005 bohr / 0.38% (a coarse-grid *fit* artifact -- fine-grid fit gives R_eq = 1.99726, +0.013%, so the paper printed its BETTER solver as worse than its own FD-8000 control); the "5000x accuracy improvement" (= 1.01%/0.0002%, both terms now gone, retired rather than recomputed); and "0.70% with the original FD lattice" in Papers 15/17, which contradicted Paper 11's own 1.01%.
+
+### Why no gate caught it
+
+C17 had **no family for any Paper-11 number** and the numeric registry had **zero Paper-11 keys**, so both instruments examined nothing here. Registered now: C17 families `p11-h2plus-0002pct-retired` and `p13-he-0019pct-nonexistent`, C16 prose entry `p11-h2plus-0002pct-prose` with 8 `cited_by` dependents (all stamped with per-locus outcomes), and registry keys `p11_h2plus_err_ha`, `p11_h2plus_req_bohr`.
+
+**A second nonexistent headline surfaced:** "He at 0.019%" matches **no** He result in the corpus (canonical: 0.022% raw, 0.004% cusp-extrapolated non-variational, 0.19% graph-native). Live at paper_34 x2, INDEX, README x3, two docs archives -- and `docs/project_closeout_plan.md:66` had **already flagged it on 2026-07-09 and it was never actioned**.
+
+### Instrument defects I introduced and fixed, recorded because the pattern repeated
+
+1. **Both C17 patterns shipped dead** -- written through a bash heredoc, so escapes doubled (`0\\.0002` -- two literal backslashes, matching nothing a corpus ever contains) and matched nothing while the gate printed `[ok] clean` over 27 live loci. Third instance of this class in the corpus. Rewritten via Write-tool scripts with both-direction discrimination checks asserted in code.
+2. **`require_nearby` under-reported by five loci** -- including `paper_11:492`, the one table printing the wrong energy error AND the wrong R_eq side by side. Its context token was the column header `Spectral ($N_b = 20$)`, which my alternation omitted. 27 -> 30 -> 32 after widening.
+3. **`exempt_if_nearby` falsely excused two live loci** on incidental neighbouring words ("withdrawn", "superseded") -- the 2026-09-04 DELTA #5 class exactly, one turn after reading the rule that forbids generic exemption vocabulary. Narrowed to the id-carrying marker.
+4. **Collateral defects while fixing defects:** `\text{}` in a `dcolumn` cell, a `\footnotemark` with no `\footnotetext`, and a `\cite{bates1953}` in Paper 11's abstract when its own bibitem is `Bates1953` (natbib: "Citation `bates1953' ... undefined"). All three caught by compiling; all fixed.
+
+### Paper 13: six LARGE, four verified by me
+
+- **`validation_benchmarks.md` is arithmetically impossible**: n_max=7 "< 0.20%", n_max=8 "0.207%", n_max=9 "0.201%" -- a monotone-decreasing ladder cannot do that. **Flagged, not resolved**: settling it needs one long `build_graph_native_fci(Z=2, n_max=7)` job (n_max=5 alone ~68 s, exact `Fraction` dispatch at n>=5), and the ladder extrapolates to ~0.22-0.23% at n_max=7 -- an extrapolation, so no value was substituted.
+- **A retracted claim live in `tab:hierarchy`'s Error column** two sections from its own retraction marker; fixed, with the Level-1 explanation moved into the caption.
+- **DBOC self-contradiction, and BOTH sections were wrong.** SS VI.B claimed +0.0015 Ha "consistent with" the -0.0015 Ha discrepancy; SS XIII.B claimed +0.035 Ha ~ 23x. Measured (`AlgebraicAngularSolver(Z=2, n_basis=15).solve_with_dboc`): **+0.0117 / +0.0208 / +0.0581 Ha** at R = 0.5/1.0/2.0, stable to <2% across l_max=0/1/2. So SS XIII.B is high by 1.7x and its ratio is ~14x, not 23x; and its unbacked "97% cancellation" would give ~0.0006 Ha net, not ~0.001. Both sections rewritten together; the cancellation is now reported as a *mechanism* known to within a factor of order two.
+- **The "non-variational" honesty flag has no sign-pinning test**: `test_energy_close_to_exact` asserts a *symmetric* window, and E = -2.901100 (ABOVE exact, i.e. variational) passes it at rel 0.000904. The DoD specifically requires that 0.05% be flagged non-variational -- the magnitude is backed, the direction is not.
+
+### Paper 12: PASS
+
+0 LARGE, 6 SMALL, 4 NIT. Every headline independently re-derived (99.8145% / 0.3237 mHa at alpha=1.40; the alpha scan digit-for-digit; the gegenbauer gain 1.025e6 = 6.01 orders, *under*-claimed at the headline where it is 1.315e6). 10/10 mutated guards discriminate. Two worries closed: the `min`-over-threshold-sweep selection is flat at the true (5,5)+delta headline (four thresholds identical, the fifth worse), and `one_body_mp`'s mu-diagonal zeroing is **exact**, proved by computing the double azimuthal integral independently. One item escalated: the **80.1% numerical comparator** is a DoD SS C8 headline with no backing whose only guard (`< ... + 0.01`) tolerates Neumann being 10 mHa *worse* while the paper claims ~21 mHa better -- a ~31 mHa wrong-direction swing passes.
+
+### Run status: INCONCLUSIVE
+
+CODE exercised on all three papers; **claims, citations, synthesis and the completeness-critic never ran** -- the first attempt died when I dispatched six Opus agents in one block despite the skill saying to use waves, and the retry died on the session limit. Four gating dimensions unexercised, so per the protocol this cannot be a PASS or a FAIL. C9 has no target in a three-paper slice at all.
+
+### Owed
+
+- `docs/qa/group2.done.md:100` and `docs/qa/synthesis.done.md:185` still carry 0.0002% -- **deliberately untouched**, the DoD is frozen for the run's duration (verified at `4bd5a36`) so goalposts cannot move in either direction.
+- The group2 DoD's Paper 12 watch-note is stale twice over (92.4%/99.1% vs the live 99.81%, and "mu>0 uses spectral quadrature" vs the v5.13.4 closed form).
+- A sign-pinning guard for the 0.05% non-variational flag, and a replacement for `test_dboc_magnitude` (window spans 1000x; docstring says ~0.001 against a measured 0.0208).
+- Paper 12 has no DoD of its own, which is what forced this run onto group2's criteria.
+- debug/ at 1735 top-level files (WARN, budget 600).
+
 ## [v5.14.2] - 2026-09-18
 
 **The two-block radial exponent axis is measured and it buys nothing -- but the conditioning penalty that made it look risky never existed.** Both of the parent session's predictions were refuted by measurement, in opposite directions. Record: `debug/sprint_explicit_correlation_scoping_memo.md` Sec. 8; ledger row appended; driver `debug/multiexp_twoblock_energy.py`.

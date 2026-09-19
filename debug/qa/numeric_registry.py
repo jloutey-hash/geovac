@@ -1015,6 +1015,43 @@ MEASURED = {
                                "alpha=1.0 (the ladder endpoint; the optimum is "
                                "p12_rebased_err_mha_aopt)",
         provenance="MEASURED 2026-09-16; monomial ceiling was 1.58 mHa (99.09)"),
+    # ---- Paper 11 H2+ spectral solver.  ADDED 2026-09-19 (/qa group2 CODE run).
+    # C21 had ZERO Paper-11 keys, so the numeric gate had nothing to check on
+    # this paper -- which is why a headline wrong by ~7.6 orders survived.
+    "p11_h2plus_err_ha": dict(
+        value=3.6e-14, convention="|E_total(spectral, n_basis=20, R=2.0) - E_ref| "
+                                  "in Ha, against E_ref = -0.6026342144949 Ha "
+                                  "(1s-sigma-g, Bates/Ledsham/Stewart lineage). "
+                                  "REFERENCE-LIMITED: the residual is at or below "
+                                  "the precision at which E_ref is conventionally "
+                                  "quoted, so the mantissa is NOT a stable "
+                                  "quantity -- quote 'machine precision', not a "
+                                  "percentage. Retired value: 0.0002% (= 1.21e-6 "
+                                  "Ha), which no route reproduces; see "
+                                  "p11_h2plus_de_pct_RETIRED",
+        provenance="MEASURED 2026-09-19 via ProlateSpheroidalLattice("
+                   "R=2.0, radial_method='spectral', n_basis=20).total_energy(): "
+                   "E=-0.602634214494936. Ladder: n_basis=5 -> 2.13e-8 Ha "
+                   "(3.5e-6 %), 10 -> 2.53e-12 (4.2e-10 %), 20 -> 3.64e-14 "
+                   "(6.0e-12 %). Even n_basis=5 is 57x better than the retired "
+                   "0.0002% headline. Cross-checked by an independent "
+                   "Slater-basis/closed-form-moment/det-root solver at dps=45 "
+                   "(-0.602634214494946), agreeing to 15 digits.",
+        aliases={0.0: "reported qualitatively as 'machine precision'"}),
+    "p11_h2plus_req_bohr": dict(
+        value=1.9973, convention="fitted R_eq (bohr) from a FINE PES grid "
+                                 "(0.005 spacing) + fit_spectroscopic_constants, "
+                                 "vs R_ref = 1.997. The retired 2.005 / 0.38% is "
+                                 "a COARSE-grid (0.05) FIT artifact, not a solver "
+                                 "property: the H2+ well is flat to 1e-6 Ha over "
+                                 "+-0.005 bohr, so a quadratic apex on a 0.05 grid "
+                                 "lands milli-bohr off",
+        provenance="MEASURED 2026-09-19: fine grid arange(1.95,2.05,0.005) -> "
+                   "R_eq=1.99726092 (+0.0131% vs 1.997), E_min=-0.60263464, "
+                   "D_e=0.10263464, k=0.10355766. The paper prints 2.005 / "
+                   "0.38%, ~29x worse, and thereby prints its BETTER solver as "
+                   "worse than its own FD-8000 control (2.001 / 0.21%).",
+        aliases={1.997: "reference value", 0.0131: "percent error vs 1.997"}),
     "p12_rebased_de_pct_aopt": dict(
         value=99.81, convention="% of D_e, H2 R=1.4011, re-based (5,5)+delta "
                                 "(|m|<=2), laguerre_legendre, at the VARIATIONAL "
@@ -1346,6 +1383,19 @@ _KINDS = (
     # at different (j_max, l_max) and pairing them would be the twin defect
     # this registry exists to catch.
     ("accuracy", ("% of d_e", "mha gained", "cond(s)")),
+    # Absolute energy RESIDUALS (Paper 11 H2+, Paper 12 re-based H2;
+    # registered 2026-09-19).  |E - E_ref| in Ha, or mHa above exact.  No
+    # identity-in/out convention applies.  What the convention string must
+    # carry instead is (a) the REFERENCE the residual is measured against and
+    # (b) the basis/truncation -- because a residual smaller than the
+    # reference's own quoted precision is not a measurement of the method.
+    # That is precisely the Paper-11 defect this kind was added for: a
+    # 3.6e-14 Ha residual reported as "0.0002%" against a reference given to
+    # 13 digits.  Added rather than reworded: the three keys it covers
+    # (p11_h2plus_err_ha, p12_rebased_err_mha, p12_rebased_err_mha_aopt) are
+    # genuinely residuals, and relabelling them "% of d_e" to satisfy the
+    # parser would register a false convention to quiet a gate.
+    ("residual", ("in ha, against", "mha above exact", "residual")),
 )
 
 

@@ -136,9 +136,27 @@
 | Casimir CI polynomial structure | residual < 1e-10 | H(k) = Bk + Ck² |
 | Casimir CI variational bound | E_var > exact at all n_max | Variational principle |
 | Casimir CI n_max=3 error | < 2% (variational) | Algebraic CI accuracy |
-| Graph-native CI n_max=7 error | < 0.20% | Graph-native CI accuracy |
-| Graph-native CI n_max=8 error | 0.207% (2,262 configs) | Exact algebraic float integrals |
-| Graph-native CI n_max=9 error | 0.201% (3,927 configs) | Exact algebraic float integrals |
+| Graph-native CI n_max=7 error | < 0.20% ⚠ | Graph-native CI accuracy — **see inconsistency note below** |
+| Graph-native CI n_max=8 error | 0.207% (2,262 configs) ⚠ | Exact algebraic float integrals |
+| Graph-native CI n_max=9 error | 0.201% (3,927 configs) ⚠ | Exact algebraic float integrals |
+
+> **⚠ INTERNAL INCONSISTENCY, flagged 2026-09-19 (/qa group2 CODE run; NOT resolved).**
+> These three rows cannot all be right. A variational ladder converging from above is
+> monotone decreasing, so the error cannot be `< 0.20%` at n_max=7 and then `0.207%` at
+> n_max=8. At least one row is wrong, and **which one is unmeasured**: a graph-native
+> build at n_max=6/7 is expensive (n_max=5 alone ~68 s; `hypergeometric_slater`
+> dispatches to exact `Fraction` at n≥5) and two attempts during the run produced no
+> output. The reproduced ladder n_max=1..5 is 5.294 / 0.4906 / 0.36555 / 0.28649 /
+> 0.24963 %, whose shrinking decrements extrapolate to ~0.22–0.23 % at n_max=7 —
+> suggesting the n_max=7 row is the wrong one, but an extrapolation is not a
+> measurement and no value is being substituted on its strength.
+>
+> Related, and already declared elsewhere: the **0.19% @ n_max=7** headline has **no
+> backing test** — `docs/claim_test_matrix.md:280` (NO-TEST, tests stop at n_max=3),
+> `tests/test_casimir_ci.py:1008` ("NO-TEST (deliberate)"), and
+> `benchmarks/certified_reference/entries_helium.py` (`N_MAX_LIST = (1,2,3,4,5)`, which
+> certifies assembly, not accuracy). **To settle both:** one long-running
+> `build_graph_native_fci(Z=2, n_max=7)` job outside a QA pass.
 | He 2D variational self-consistent cusp | < 0.020% | Self-consistent cusp correction (l_max=7, n_R=35) |
 | Hylleraas-Eckart He 1¹S (ω=4, 22 basis) | < 0.001% | Hylleraas-Eckart double-α, Track 1 closure |
 | Hylleraas-Eckart He 2¹S-2³S splitting | -1.4% | Eckart 1933, Track 3 closure |

@@ -63,11 +63,16 @@ charges, internuclear distance, and basis/grid resolution.
 
 Results for H$_2^+$ with the spectral Laguerre radial solver
 ($n_{\mathrm{basis}} = 20$): minimum energy
-$E_{\min} = -0.6026$~Ha (0.0002\% error vs.\ exact $-0.6026$~Ha),
-equilibrium bond length $R_{\mathrm{eq}} = 2.005$~bohr
-(0.38\% error), and correct dissociation to H~+~p at $R \to \infty$.
-The spectral solver achieves a $250\times$ dimension reduction,
-$270\times$ speedup, and $5000\times$ accuracy improvement over
+$E_{\min} = -0.602634214494936$~Ha, reproducing the two-center
+reference $-0.6026342144949$~Ha~\cite{Bates1953} to
+$3.6\times10^{-14}$~Ha---at or below the precision to which that
+reference is conventionally quoted, so the residual is
+reference-limited rather than a property of the method
+(\textbf{[MEASURED 2026-09-19]}).  Equilibrium bond length
+$R_{\mathrm{eq}} = 1.9973$~bohr ($0.013\%$ error), and correct
+dissociation to H~+~p at $R \to \infty$.
+The spectral solver achieves a $250\times$ dimension reduction and a
+$270\times$ speedup over
 the FD solver, whose 1.01\% error was a discretization artifact.
 This establishes the prolate spheroidal lattice as the molecular
 analog of Fock's atomic $S^3$ projection.
@@ -149,7 +154,7 @@ spheroidal coordinates.  Section~\ref{sec:separation} derives the
 separated equations.  Sections~\ref{sec:angular} and \ref{sec:radial}
 describe the angular (spectral) and radial (finite-difference) solvers.
 Section~\ref{sec:spectral_radial} introduces the spectral Laguerre
-radial solver that achieves $0.0002\%$ accuracy.
+radial solver that reaches machine precision.
 Section~\ref{sec:rootfinding} explains the self-consistency
 root-finding.  Section~\ref{sec:results} presents H$_2^+$ results:
 PES, spectroscopic constants, and grid convergence.
@@ -489,9 +494,9 @@ and spectral radial solvers for H$_2^+$ at $R = 2.0$~bohr.
   & \multicolumn{1}{c}{FD ($N_\xi = 5000$)}
   & \multicolumn{1}{c}{Spectral ($N_b = 20$)} \\
 \hline
-  $E_{\mathrm{total}}$ error & 1.01\% & 0.0002\% \\
-  $R_{\mathrm{eq}}$ (bohr)   & \sim 2.01 & 2.005 \\
-  $R_{\mathrm{eq}}$ error    & 0.65\% & 0.38\% \\
+  $E_{\mathrm{total}}$ error & 1.01\% & \multicolumn{1}{c}{machine precision} \\
+  $R_{\mathrm{eq}}$ (bohr)   & \sim 2.01 & 1.9973 \\
+  $R_{\mathrm{eq}}$ error    & 0.65\% & 0.013\% \\
   Wall time (s)               & 4.3 & 0.016 \\
   Matrix dimension            & 5000 & 20 \\
 \end{tabular}
@@ -757,7 +762,7 @@ second-order finite-difference discretization of the radial equation.
 Sub-percent accuracy is achieved at $N_\xi = 5000$ (0.2~s wall
 time).  The spectral Laguerre radial solver
 (Sec.~\ref{sec:spectral_radial}) eliminates this discretization
-bottleneck, achieving $0.0002\%$ accuracy with $N_b = 20$.
+bottleneck, reaching machine precision with $N_b = 20$.
 
 \subsection{Potential energy surface}
 
@@ -989,9 +994,8 @@ of the angular and radial operators.
 \paragraph{Higher-order discretization.}
 The spectral Laguerre radial solver (Sec.~\ref{sec:spectral_radial})
 has replaced the $O(1/N_\xi)$ FD scheme as the high-accuracy option,
-achieving $0.0002\%$ error with $N_b = 20$ basis functions---a
-$5000\times$ accuracy improvement over the FD solver at $250\times$
-smaller matrix dimension.  For $\sigma$ states, all matrix elements
+reaching machine precision with $N_b = 20$ basis
+functions, at $250\times$ smaller matrix dimension than the FD solver.  For $\sigma$ states, all matrix elements
 are now algebraic (Sec.~\ref{sec:algebraic}), with no remaining
 numerical quadrature in the radial solver.
 
@@ -1007,8 +1011,8 @@ is the prolate spheroid, just as the natural geometry for atoms is
 the three-sphere $S^3$.  By discretizing the separated prolate
 spheroidal equations with a spectral angular solver and a spectral
 Laguerre radial solver, we obtain the H$_2^+$ ground-state
-energy to $0.0002\%$ accuracy and the equilibrium bond length to
-$0.38\%$ accuracy with zero free parameters.  The spectral solver
+energy to machine precision and the equilibrium bond length to
+$0.013\%$ accuracy with zero free parameters.  The spectral solver
 achieves a $250\times$ dimension reduction and $270\times$ speedup
 over the finite-difference radial solver, whose $1.01\%$ error was
 a discretization artifact.  For $\sigma$ states, the spectral matrix
@@ -1078,7 +1082,7 @@ The spectral Laguerre solver of Sec.~\ref{sec:spectral_radial}
 eliminates all three issues: the integration-by-parts
 identity~\eqref{eq:ibp} handles the $\xi = 1$ singularity
 analytically, and the exponential basis functions match the
-wavefunction's asymptotic decay, achieving $0.0002\%$ accuracy
+wavefunction's asymptotic decay, reaching machine precision
 with $N_b = 20$.
 
 %% ========================================================================

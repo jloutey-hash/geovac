@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.14.2 (September 18, 2026)
+**Version:** v5.14.3 (September 19, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -118,6 +118,7 @@ it is a PI call.
 - **H₂'s residual is NOT more polynomial degree; the untested axis is the single shared α (2026-09-18, v5.13.9):** radial +1 buys 34 µHa, angular +1 buys 8 µHa — both saturated. No geminal build started. See debug/sprint_explicit_correlation_scoping_memo.md.
 - **Neumann V_ee silently ignored explicit r₁₂ — guarded (2026-09-18, v5.13.9):** bit-identical V_ee for p=0..7; p>0 returned −55.3% of D_e unbound, no error. Two missing prolate-r₁₂ ledger rows added. See CHANGELOG v5.13.9.
 - **One-body direct build wired in; H2 recondition 3.2x, V_ee is now the bound (2026-09-18, v5.13.8):** `engine="direct"` default; headline points reproduced to every printed digit. NOT "seconds" — that needs V_ee. A dead chemical-accuracy guard found + repaired. See debug/sprint_direct_build_memo.md.
+- **H2+ 0.0002% headline RETIRED -- wrong by ~7.6 orders AGAINST us (2026-09-19, v5.14.3, /qa group2 CODE):** measured 3.6e-14 Ha at n_basis=20; now qualitative (reference-limited). 40 loci swept; He 0.019% matched no result. See CHANGELOG.
 - **Two-block radial exponent: accuracy ~ZERO, and its conditioning penalty was an artifact (2026-09-18, v5.14.2):** gain +0.198/-0.009/+0.005 mHa as N grows; optimum is a plateau. Raw-vs-normalized cond differ 6 orders. See CHANGELOG + ledger.
 - **Per-rate-pair V_ee X-table banked (2026-09-18, v5.14.1):** the two-block prerequisite; 5 falsifiers incl. end-to-end energy identical to 10 dp. Cost 8-11x, not 2x. See CHANGELOG + debug/multiexp_vee_xtable.py.
 - **/checkpoint un-blocks main push (2026-09-17, v5.13.7, PI-directed):** the command hard-prohibited `git push origin main`, assuming a PR workflow this repo doesn't use — it commits directly to `main`, and its only remote is `old` (a local mirror; no GitHub origin). Step 4 now pushes the current branch (main included) to the configured remote under explicit PI direction; force-push and GitHub-Release prohibitions unchanged. See CHANGELOG.
@@ -219,7 +220,7 @@ it is a PI call.
 | He (graph-native CI) | 0.19% | Zero-parameter, exact algebraic integrals, n_max=7 | 13 |
 | H⁻ | Bound, over-binds 21% | Graph-native CI, Z_c≈1.84 boundary | 13 |
 | PsH | 4.1% | Level 3, sign-flipped charge | 13 |
-| H₂⁺ | 0.0002% | Spectral Laguerre | 11 |
+| H₂⁺ | machine precision (reference-limited) | Spectral Laguerre | 11 |
 | H₂ | 99.81% D_e (0.32 mHa) at α_opt=1.40; 99.77% (0.41) at the fixed-α ladder endpoint | Paper 12 re-based prolate CI, (5,5)+δ; 96.0% via Level 4 (Paper 15) | 12/15 |
 | LiH | R_eq 5.3% | Composed, l-dependent PK, l_max=2 | 17 |
 | BeH₂ | R_eq 11.7% | Composed, full 1-RDM exchange | 17 |
@@ -452,7 +453,7 @@ The core organizational principle of the project. Each electron configuration ha
 | Level | System | Natural Geometry | Best Result | Paper |
 |:-----:|:-------|:-----------------|:------------|:-----:|
 | 1 | H (1-center, 1e) | S3 (Fock) | lambda_max -> 2 d_max = 8; deficit 0.57% at n_max = 30 (a spectral *bound*, not an accuracy: E_0 = kappa*lambda_max by construction) | 7 |
-| 2 | H2+ (2-center, 1e) | Prolate spheroid | 0.0002% (spectral) | 11 |
+| 2 | H2+ (2-center, 1e) | Prolate spheroid | machine precision (spectral; reference-limited) | 11 |
 | 2 | H2 (2-center, 2e) | Prolate spheroid | 99.81% D_e (0.32 mHa) at the variational optimum α=1.40; 99.77% (0.41 mHa) at the fixed-α ladder endpoint — re-based CI (v5.13.9) | 12 |
 | 3 | He (1-center, 2e) | Hyperspherical | 0.004% (2D var, cusp l_max=4); 0.022% (raw l_max=7); 0.19% (graph-native CI n_max=7, 0 params, exact algebraic integrals) | 13 |
 

@@ -99,8 +99,8 @@ Three levels of this hierarchy have been established and validated:
 \item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).  In prolate
   spheroidal coordinates $(\xi,\eta,\phi)$, the two nuclear Coulomb
   singularities $1/r_A + 1/r_B$ separate into independent equations.
-  Paper~11~\cite{paper11} achieves $0.0002\%$ energy error for H$_2^+$
-  with a spectral Laguerre radial solver (0.70\% with the original
+  Paper~11~\cite{paper11} reaches machine precision for H$_2^+$
+  with a spectral Laguerre radial solver ($1.01\%$ with the original
   finite-difference lattice).
 \item[Level~3] \emph{One-center, two-electron} (He).  Hyperspherical
   coordinates $(R_e,\alpha,\hat r_1,\hat r_2)$ resolve the
@@ -1415,7 +1415,7 @@ The natural geometry hierarchy is now:
 Level & System & Geometry & Best $D_e$ \\
 \midrule
 1 & H       & $S^3$ (Fock)        & $<0.1\%$ error \\
-2 & H$_2^+$ & Prolate spheroid    & 0.0002\% error (spectral) \\
+2 & H$_2^+$ & Prolate spheroid    & machine precision (spectral) \\
 3 & He      & Hyperspherical      & 0.05\% error \\
 4 & H$_2$   & Mol.-frame hypersp. & 96.0\% \\
 4 & HeH$^+$ & Mol.-frame hypersp. & 93.1\% (adiabatic; ${\sim}5\%$ variational) \\

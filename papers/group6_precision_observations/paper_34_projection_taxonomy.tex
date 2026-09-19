@@ -2029,7 +2029,9 @@ at operator level); production solver modules
 \texttt{geovac/hyperspherical\_adiabatic.py} (Level~3) and
 \texttt{geovac/level4\_multichannel.py} (Level~4).\\
 \textbf{Empirical anchor:} He hyperspherical at Level~3 reaches
-$0.019\%$ error (Track~DI v2.6.0, Sprint~1; 2D variational solver on
+$0.022\%$ raw error (properly variational; $0.004\%$ after a
+non-variational cusp extrapolation at $l_\text{max}=4$) (Track~DI
+v2.6.0, Sprint~1; 2D variational solver on
 $S^5$ with $l_\text{max}=7$, $n_R=35$, self-consistent cusp
 correction; the underlying coupled-channel pipeline supplies the
 adiabatic curves $\mu_\nu(R)$ that the variational ansatz interpolates
@@ -3907,7 +3909,7 @@ He ground state (graph-native CI, $Z=2$) & Fock + Sturmian &
 $0.20\%$ at $n_\text{max}=9$ & S & Small-$Z$ graph-validity-boundary
 artifact (Sec.~2 of CLAUDE.md, v2.9.2 CUSP-2). \\
 He ground state (2D variational + cusp) & Fock + spectral cusp &
-$0.019\%$ at $\ell_\text{max}=7$ & T & Track DI Sprint 1; cusp-corrected
+$0.022\%$ at $\ell_\text{max}=7$ & T & Track DI Sprint 1; cusp-corrected
 $0.004\%$ at $\ell_\text{max}=4$. \\
 He ground state (Hylleraas r$_{12}$, $\omega_{\max}=4$) & Fock $\circ$
 explicit r$_{12}$ correlation

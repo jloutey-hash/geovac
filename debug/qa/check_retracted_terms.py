@@ -245,6 +245,48 @@ CITED_BY_BASELINE = {
 
 REGISTRY = [
     {
+        "id": "p11-h2plus-0002pct-prose",
+        # The CLAIM in words, for when the numeral is gone but the magnitude
+        # survives as prose.  Deliberately narrow: only phrasings that assert a
+        # ~1e-6-relative accuracy for H2+, which is the retired magnitude.
+        "pattern": r"(two parts in a million|2 parts in 10\^6|"
+                   r"two[- ]in[- ]a[- ]million)",
+        "require_nearby": r"H\$?_2\^?\{?\+|H2\+|prolate|spectral|Laguerre",
+        "exempt_if_nearby": withdrawal_marker("p11-h2plus-0002pct-prose"),
+        "severity": "fail",
+        "scope": "paper_11 paper_12 paper_13 paper_15 paper_17 group2 synthesis trunk",
+        "note": "Registered 2026-09-19 (/qa group2 CODE run).  The NUMERIC half "
+                "is C17 family p11-h2plus-0002pct-retired (32 live loci).  "
+                "MEASURED: the spectral solver reproduces E_ref to 3.6e-14 Ha "
+                "at n_basis=20, R=2.0 -- i.e. to the precision at which E_ref "
+                "is conventionally quoted -- so 0.0002% (1.21e-6 Ha) understates "
+                "the method by ~7.6 orders.  Even n_basis=5 is 57x better than "
+                "the published claim.  Canonical form (PI direction): state it "
+                "QUALITATIVELY as machine precision; do NOT substitute another "
+                "percentage, because the mantissa is reference-limited.  "
+                "Registry keys: p11_h2plus_err_ha, p11_h2plus_req_bohr.",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+            "README.md",
+            "CLAUDE.md",
+        ],
+        # Documents whose ARGUMENT rests on H2+'s accuracy figure -- each cites
+        # it to motivate its own geometry/level choice.  Unstamped dependents
+        # fail the gate; stamping is a REVIEW outcome, not an edit.
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex": "reviewed 2026-09-19 -- abstract L34 + intro L120 + hierarchy L1349 -> machine precision",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": "reviewed 2026-09-19 -- L101 prose + tab:hierarchy Level-2 cell + caption (marker added)",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex": "reviewed 2026-09-19 -- L102 prose + L1418 table; FD figure 0.70% -> 1.01% per P11's own table",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex": "reviewed 2026-09-19 -- L72 prose + L1542 table; FD figure 0.70% -> 1.01%",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex": "reviewed 2026-09-19 -- L1349 -> machine precision; the R_eq 2.001/0.21% FD claim left intact",
+            "papers/group2_quantum_chemistry/paper_fci_molecules.tex": "reviewed 2026-09-19 -- L766 -> machine precision; guardrail negative untouched",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "reviewed 2026-09-19 -- L87, L169, L279 (the -0.6026 vs -0.6026 form), L1068",
+            "papers/synthesis/geovac_field_guide.tex": "reviewed 2026-09-19 -- L224 hierarchy table cell",
+        },
+    },
+    {
         "id": "p60-floor-is-angular",
         "note": "Paper 60's accuracy floor was attributed to l_max truncation "
                 "and declared unreachable at any K.  Both halves are refuted "

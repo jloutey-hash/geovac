@@ -27,7 +27,7 @@ Install the standalone Hamiltonian package (not on PyPI; installs from this repo
 | Pauli scaling | **O(Q^2.5)** composed, universal coefficient 11.10 × Q |
 | Advantage vs Gaussian | **51×–1,712×** fewer Pauli terms (LiH/BeH₂/H₂O) |
 | 1-norm (LiH) | **32.6 Ha** (0.95× vs STO-3G 34.3 Ha, 13× fewer QWC groups) |
-| He accuracy | **0.019%** (2D variational + self-consistent cusp, zero free parameters) |
+| He accuracy | **0.022%** raw (2D variational, properly variational); **0.004%** after a non-variational cusp extrapolation; zero free parameters |
 | H₂ accuracy | **96.0% D_e** (molecule-frame hyperspherical, l_max=6) |
 | Algebraic integrals | Exact hypergeometric R^k evaluator eliminates grid quadrature for Slater integrals |
 | Mathematical foundation | Fock 1935 S³ conformal equivalence, **18 symbolic proofs** |
@@ -112,7 +112,7 @@ Isostructural invariance: molecules with the same block topology produce identic
 
 | System | Method | Result | Paper |
 |:-------|:-------|:-------|:-----:|
-| He (2e) | 2D variational + self-consistent cusp | **0.019%** error | 13 |
+| He (2e) | 2D variational (raw) / + cusp extrapolation | **0.022%** / **0.004%** (non-var.) error | 13 |
 | He (2e) | Graph-native CI (n_max=9) | **0.20%** (zero parameters, exact algebraic integrals) | 7, 13 |
 | H₂ (2e) | Mol-frame hyperspherical | **96.0% D_e** | 15 |
 | HeH⁺ (2e) | Charge-center hyperspherical | **93.1% D_e** | 15 |
@@ -185,7 +185,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 | **14** | **Qubit Hamiltonians** | **O(Q^2.5) composed; 51×–1,712× vs Gaussian** |
 | **16** | **Chemical Periodicity** | **S_N representation theory, atomic classifier** |
 | 6 | Quantum Dynamics | Rabi, spectroscopy, AIMD at O(V) |
-| 11 | Molecular Fock Projection | Prolate spheroidal lattice, H₂⁺ 0.0002% |
+| 11 | Molecular Fock Projection | Prolate spheroidal lattice, H₂⁺ to machine precision |
 | **12** | Algebraic V_ee | Neumann expansion; H₂ 99.09% D_e (\|m\|≤1), 92.4% σ-only |
 | **13** | Hyperspherical Lattice | He 0.004%, fiber bundle, algebraic structure |
 | **15** | Level 4 Geometry | H₂ 96.0% D_e, HeH⁺ 93.1% |
@@ -224,7 +224,7 @@ print(f"He: {result['energies'][0]:.6f} Ha, error: {result['error_pct']:.4f}%")
 - **Structurally sparse qubit Hamiltonians:** O(Q^2.5) Pauli scaling, 51×–1,712× fewer terms vs Gaussian
 - **Block-diagonal ERIs:** Gaunt selection rules enforce basis-intrinsic sparsity
 - **d-Orbital sparsity:** d-blocks have 4.0% ERI density (vs 8.9% s/p) — transition metals are cheaper per qubit
-- **Classical benchmarks:** H₂ 96.0% D_e, LiH R_eq 5.3%, He 0.019% (self-consistent cusp)
+- **Classical benchmarks:** H₂ 96.0% D_e, LiH R_eq 5.3%, He 0.022% raw / 0.004% (non-variational cusp extrapolation)
 - **Algebraic Slater integrals:** Exact hypergeometric R^k evaluator eliminates grid quadrature (machine precision, 8x speedup)
 - **DUCC downfolding:** Identifies PK l_max divergence root cause (109x p-orbital underestimate); H₂O 1-norm 9% lower
 - **Zero molecular fitting parameters** — all from nuclear charges and geometry

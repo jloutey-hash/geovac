@@ -97,9 +97,38 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
 ### Per-criterion watch-notes
 
 - **C8 (headline honesty), per-paper — the enumerated headlines + tiers.**
-  - **Paper 11:** H$_2^+$ **0.0002%** energy (spectral Laguerre, $n_{\rm basis}=20$);
-    the FD 1.01% is an *artifact* (must be flagged, not a competing result).
-  - **Paper 12:** H$_2$ Neumann $V_{ee}$ recovers **92.4%** of $D_e$ vs 80.1% numerical.
+  - **Paper 11 — REWRITTEN 2026-09-19 (PI direction), mid-run:** H$_2^+$ energy is
+    reproduced to **machine precision** (spectral Laguerre, $n_{\rm basis}=20$):
+    measured $|E - E_{\rm ref}| = 3.6\times10^{-14}$~Ha against
+    $E_{\rm ref} = -0.6026342144949$~Ha, i.e. at or below the precision to which
+    that reference is conventionally quoted, so **no percentage is a valid
+    criterion here** and none is stated. The FD 1.01% is an *artifact* (must be
+    flagged, not a competing result).
+    [retracted 2026-09-19: p11-h2plus-0002pct-retired] The criterion this line carried until 2026-09-19 was
+    **0.0002%** ($=1.21\times10^{-6}$~Ha), which understates the method by ~7.6
+    orders: even $n_{\rm basis}=5$ (3.5e-6 %) is 57x better, and nine
+    quantity-x-reference combinations failed to reproduce it (nearest 4.64e-4 %,
+    a coarse-grid PES fit, off by 2.3x). Also retired with it: R_eq 2.005 bohr /
+    0.38% (a coarse-grid *fit* artifact; fine-grid fit gives 1.99726, +0.013%)
+    and the "5000x accuracy improvement" derived as 1.01%/0.0002%.
+    Registry: `p11_h2plus_err_ha`, `p11_h2plus_req_bohr`; C17 family
+    `p11-h2plus-0002pct-retired`.
+    **Grading note:** the CODE dimension of the 2026-09-19 run was graded against
+    the OLD criterion and reported its falsification; any later dimension is
+    graded against this one.
+  - **Paper 12 — watch-note refreshed 2026-09-19 (PI direction):** the live
+    headline is **99.81% of $D_e$ / 0.32 mHa** at the variational optimum
+    $\alpha=1.40$, with **99.767% / 0.41 mHa** the fixed-$\alpha=1.0$ ladder
+    endpoint (registry `p12_rebased_de_pct_aopt`, `p12_rebased_de_pct`; both real,
+    neither superseding the other). The 92.4% below is the $\sigma$-only monomial
+    ceiling and 99.1% the azimuthal-restored monomial value — both historical
+    rungs, not the current criterion. **$\mu>0$ is quadrature-FREE** since
+    v5.13.4 (closed-form $\{E_1,\gamma,\ln\}$ B-seeds, enforced by
+    `test_B_table_uses_closed_form_not_quadrature`); the "spectral quadrature"
+    clause below is superseded. **The 80.1% numerical comparator has NO backing
+    test** and its only guard tolerates a ~31 mHa wrong-direction swing — raised
+    to the PI 2026-09-19, unresolved.
+    H$_2$ Neumann $V_{ee}$ recovers **92.4%** of $D_e$ vs 80.1% numerical.
     **AMENDED 2026-09-14:** the 92.4% is the **σ-only** ceiling, and the 7.6% gap is
     the absent $m \neq 0$ configurations, **not** the cusp — restoring them in the same
     basis reaches **99.1%**. The old watch-note ("the 7.6% gap is the cusp") is
@@ -162,6 +191,17 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   worktree only.
 
 ## Change log
+- 2026-09-19 — **CRITERIA REWRITTEN MID-RUN (PI direction).** The `/qa group2 full`
+  run of 2026-09-19 (PI-scoped to Papers 11/12/13) verified this file frozen at
+  commit `4bd5a36`, ran the **CODE** dimension, and found the Paper-11 C8 headline
+  **0.0002%** wrong by ~7.6 orders (measured 3.6e-14 Ha at $n_{\rm basis}=20$).
+  The Paper-11 and Paper-12 watch-notes above were rewritten at PI direction
+  **after** that dimension and **before** claims / citations / synthesis /
+  completeness-critic, which had not run (session rate limit). **Consequence, stated
+  so a later verdict stays auditable:** the CODE dimension was graded against the
+  OLD criteria and reported their falsification; any subsequent dimension is graded
+  against the NEW ones. The 2026-09-19 run's status is **INCONCLUSIVE** (four gating
+  dimensions unexercised) and is not a certification under either set.
 - 2026-09-13 — **BASELINE FULL run COMPLETE (v5.11.14–17), 4 batches, 13 docs.** A baseline
   re-measure (PI direction), **NOT a certification** — 58/59/60 are in by reference; clean
   deltas on them plus the owed in-paper extrapolation footnotes remain before any group2 cert.

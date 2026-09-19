@@ -84,6 +84,93 @@ WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
 REGISTRY = [
     {
+        "id": "p11-h2plus-0002pct-retired",
+        "scope": "paper_11 paper_12 paper_13 paper_15 paper_17 group2 group4 synthesis trunk",
+        "severity": "fail",
+        "canonical_note": "Registered 2026-09-19 (/qa group2 CODE run). C17 had "
+                          "NO family for any Paper-11 number and the numeric "
+                          "registry had ZERO Paper-11 keys, so both gates "
+                          "examined nothing here -- which is how a headline "
+                          "wrong by ~7.6 ORDERS survived to 27 live loci across "
+                          "six papers. RETIRED: H2+ '0.0002% energy error'. "
+                          "MEASURED at the paper's own operating point "
+                          "(spectral, n_basis=20, R=2.0): 3.64e-14 Ha = "
+                          "6.0e-12 %, i.e. the reference value is reproduced to "
+                          "the precision at which it is conventionally quoted. "
+                          "0.0002% = 1.21e-6 Ha; even n_basis=5 (3.5e-6 %) is "
+                          "57x better than the published claim, so the number "
+                          "is wrong at every basis size the paper discusses, "
+                          "and wrong in the direction that UNDERSTATES the "
+                          "method. No route reproduces it: nine "
+                          "quantity-x-reference combinations were tried and the "
+                          "nearest (coarse-grid PES fit vs exact@R=2.0) gives "
+                          "4.64e-4 %, a factor 2.3 off. CANONICAL FORM (PI "
+                          "direction 2026-09-19): state it QUALITATIVELY as "
+                          "machine precision / reproduced to the reference's "
+                          "own precision -- do NOT substitute another "
+                          "percentage, because the mantissa is reference-limited "
+                          "and quoting one reintroduces the same defect in "
+                          "smaller form. Registry keys: p11_h2plus_err_ha, "
+                          "p11_h2plus_req_bohr.",
+        # 0.0002 appears innocently elsewhere (a 'within 0.0002 Ha' He
+        # comparison in paper_14, an ERI value beginning 0.00025 in the
+        # certified-reference tables, a cc-pVTZ tolerance in
+        # validation_benchmarks). require_nearby confines the family to the
+        # H2+ / prolate / spectral-Laguerre claim so those four stay silent.
+        "pattern": r"0\.0002\s*\\?%?",
+        "require_nearby": r"H\$?_2\^?\{?\+|H2\+|H₂⁺|H_2\^\+|prolate|Prolate|spectral|Spectral|Laguerre|N_b|n_\{?\\?rm basis|paper11|paper_11|loutey_paper11|Bates|0\.6026|spectral_convergence|Molecular Fock",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}:\s*p11-h2plus-0002pct-retired\]|reproduced to machine precision|reference-limited residual|wrong by ~?7\.6 orders|retired 0\.0002",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex",
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex",
+            "papers/group2_quantum_chemistry/paper_fci_molecules.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+            "papers/INDEX.md",
+            "docs/claim_test_matrix.md",
+            "docs/qa/group2.done.md",
+            "docs/qa/synthesis.done.md",
+            "docs/paper_notes_archive.md",
+            "docs/project_closeout_plan.md",
+            "CLAUDE.md",
+            "README.md",
+        ],
+    },
+    {
+        "id": "p13-he-0019pct-nonexistent",
+        "scope": "paper_13 paper_34 group2 group6 synthesis trunk",
+        "severity": "fail",
+        "canonical_note": "Registered 2026-09-19 (/qa group2 CODE run). "
+                          "'He at 0.019%' matches NO He result in the corpus. "
+                          "The canonical values are 0.022% raw (l_max=7, "
+                          "properly variational) and 0.004% cusp-corrected "
+                          "(l_max=4, an extrapolation, NON-variational), plus "
+                          "0.19% for the graph-native CI. 0.019% is neither, "
+                          "and sits between them where a reader will take it "
+                          "for the cusp figure. Live at paper_34 (twice, one "
+                          "inside a projection table carrying a tier), "
+                          "papers/INDEX.md, README (three loci), and two docs "
+                          "archives. docs/project_closeout_plan.md:66 ALREADY "
+                          "flagged this as an open CHECK item and it was never "
+                          "closed -- a flagged-but-unfixed number is exactly "
+                          "what a gate is for.",
+        "pattern": r"0\.019\s*\\?%",
+        "require_nearby": r"He|helium|2D variational|cusp|hyperspherical|paper13|loutey_paper13|Track DI",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}:\s*p13-he-0019pct-nonexistent\]|matches no He result|retired 0\.019",
+        "files": [
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+            "papers/INDEX.md",
+            "docs/paper_notes_archive.md",
+            "docs/project_closeout_plan.md",
+            "README.md",
+        ],
+    },
+    {
         "id": "p61-t2-superseded-19th-digit",
         "scope": "paper_61 paper_59 group3 group2",
         "severity": "fail",

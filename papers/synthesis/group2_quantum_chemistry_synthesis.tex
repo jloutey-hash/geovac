@@ -84,7 +84,7 @@ fails and only the axial $m$-rule survives, so the angular sparsity is an
 \emph{atomic-sector} property---the abelian residue of the molecular
 point group~\cite{loutey_paper58}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
-$0.0002\%$ for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
+machine precision for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
 $l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
 for He, ${\sim}99.1\%$ of $D_e$ for $\mathrm{H}_2$ in prolate
 spheroidal coordinates at $|m| \le 1$ and $96.0\%$ (cusp-corrected) in
@@ -166,7 +166,7 @@ ceiling of the composed architecture (Sec.~\ref{sec:composed}).}
 Level & System (centers, electrons) & Natural geometry & Headline result & Paper \\
 \midrule
 1 & atom (1, 1) & $S^3$ (Fock projection) & $<0.1\%$ (one-electron) & \cite{loutey_paper7} \\
-2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & $0.0002\%$ energy (spectral Laguerre) & \cite{loutey_paper11} \\
+2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & machine precision (spectral Laguerre) & \cite{loutey_paper11} \\
 3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $0.19\%$ (graph-native CI) & \cite{loutey_paper13} \\
 4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, cusp-corrected) & \cite{loutey_paper15} \\
 4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal, $|m|\le1$ & ${\sim}99.1\%$ of $D_e$ (envelope $99.0$--$99.1$) & \cite{loutey_paper12} \\
@@ -276,8 +276,10 @@ to enforce self-consistency.  The method has zero free parameters:\ all
 inputs are nuclear charges, the internuclear distance, and the basis
 resolution.  With the spectral Laguerre radial solver at
 $n_{\mathrm{basis}} = 20$, the $\mathrm{H}_2^+$ ground-state energy is
-$E_{\min} = -0.6026$~Ha against the exact $-0.6026$~Ha~\cite{bates1953}---a $0.0002\%$
-error, the most accurate single result in the chemistry
+$E_{\min} = -0.602634214494936$~Ha against the reference
+$-0.6026342144949$~Ha~\cite{bates1953}---agreement to
+$3.6\times10^{-14}$~Ha, i.e.\ to the precision at which that reference
+is quoted, making it the most accurate single result in the chemistry
 arc---with the correct dissociation to $\mathrm{H}+p$ as
 $R \to \infty$~\cite{loutey_paper11}.  The spectral solver achieves a
 $250\times$ dimension reduction, a $270\times$ speedup, and a
@@ -1065,7 +1067,7 @@ The Group~2 quantum-chemistry arc of GeoVac is the systematic
 construction of the natural-geometry hierarchy for electronic
 structure.  Each level is the coordinate system in which a given system
 separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
-for $\mathrm{H}_2^+$ ($0.0002\%$)~\cite{loutey_paper11}, hyperspherical
+for $\mathrm{H}_2^+$ (machine precision)~\cite{loutey_paper11}, hyperspherical
 coordinates for He ($0.022\%$ variational raw / $0.004\%$ non-variational
 cusp, $0.19\%$ graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
 coordinates for $\mathrm{H}_2$ ($96.0\%$, cusp-corrected;\ prolate

@@ -72,9 +72,9 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
 | 8–9 `Paper_8_Bond_Sphere_Sturmian.tex` | **GUARDRAIL** | Sturmian structural theorem: single-center molecular encodings are R-independent (proven dead end) |
-| 11 `paper_11_prolate_spheroidal.tex` | ACTIVE | H₂⁺ at 0.0002% via spectral Laguerre |
+| 11 `paper_11_prolate_spheroidal.tex` | ACTIVE | H₂⁺ to machine precision via spectral Laguerre |
 | 12 `paper_12_algebraic_vee.tex` | ACTIVE | Algebraic V_ee (Neumann expansion) |
-| 13 `paper_13_hyperspherical.tex` | ACTIVE | He at 0.019%; graph-native CI at 0.20% with zero parameters |
+| 13 `paper_13_hyperspherical.tex` | ACTIVE | He at 0.022% raw / 0.004% cusp-extrapolated; graph-native CI at 0.19% with zero parameters |
 | 15 `paper_15_level4_geometry.tex` | ACTIVE | H₂ at 96.0% D_e (molecule-frame hyperspherical) |
 | 17 `paper_17_composed_geometries.tex` | ACTIVE | Composed geometry: LiH R_eq 5.3%; the production molecular architecture |
 | 19 `paper_19_coupled_composition.tex` | ACTIVE | Balanced coupled builder; PK-free cross-center V_ne |

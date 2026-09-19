@@ -31,8 +31,8 @@ Prolate Spheroidal Lattice}
 
 \begin{abstract}
 Paper~11 established the prolate spheroidal lattice as the natural
-geometry for diatomic molecules, solving H$_2^+$ to $0.0002\%$ energy
-error (spectral Laguerre solver) with zero free parameters.  The extension to two electrons requires
+geometry for diatomic molecules, solving H$_2^+$ to machine precision
+(spectral Laguerre solver) with zero free parameters.  The extension to two electrons requires
 electron-electron repulsion integrals $\langle\phi_i|1/r_{12}|\phi_j\rangle$
 over the six-dimensional two-particle configuration space.  The
 standard approach---numerical quadrature on a grid in prolate
@@ -117,7 +117,7 @@ Coulomb problem separates into coupled ordinary differential
 equations~\cite{loutey_paper11}.
 
 Paper~11 implemented this principle for the one-electron
-molecule H$_2^+$, achieving $0.0002\%$ energy error (spectral Laguerre
+molecule H$_2^+$, reaching machine precision (spectral Laguerre
 solver) with zero free parameters.  The extension to two electrons introduces a
 qualitatively new challenge: the electron-electron repulsion
 integral
@@ -1346,7 +1346,7 @@ of natural geometries:
   \item \textbf{Two-center, one-electron} (H$_2^+$):
     Prolate spheroidal coordinates $(\xi, \eta, \varphi)$.
     The Schr\"odinger equation separates into two coupled ODEs.
-    Accuracy: 0.0002\% (spectral Laguerre)~\cite{loutey_paper11}.
+    Accuracy: machine precision (spectral Laguerre)~\cite{loutey_paper11}.
   \item \textbf{Two-center, two-electron} (H$_2$):
     Prolate spheroidal $\times$ prolate spheroidal with
     Neumann-algebraic $V_{ee}$.  One-electron physics is

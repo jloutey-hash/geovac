@@ -98,7 +98,7 @@ The hierarchy of natural geometries discovered so far is:
   \item \textbf{Two-center, one-electron} (H$_2^+$, diatomics):
     Prolate spheroidal coordinates $(\xi, \eta, \phi)$ separate the
     two-center Coulomb problem exactly~\cite{loutey_paper11}.  The
-    prolate spheroidal lattice achieves 0.0002\% error for H$_2^+$
+    prolate spheroidal lattice reaches machine precision for H$_2^+$
     with a spectral Laguerre radial solver and zero free parameters.
 
   \item \textbf{One-center, two-electron} (He, two-electron atoms):
@@ -605,9 +605,24 @@ error.  The single-channel adiabatic approximation omits the
   \label{eq:dboc}
 \end{equation}
 Including this positive correction would raise the energy toward the
-exact value.  The magnitude $\Delta E_{\mathrm{DBOC}} \approx
-+0.0015$~Ha is consistent with the observed discrepancy of
-$-0.0015$~Ha.
+exact value.  \textbf{[MEASURED 2026-09-19]} Its magnitude is
+\emph{larger} than the discrepancy it would repair, not equal to it:\
+evaluating Eq.~\eqref{eq:dboc} for the ground channel gives
+$\Delta E_{\mathrm{DBOC}} = +0.0117$, $+0.0208$ and $+0.0581$~Ha at
+$R = 0.5$, $1.0$ and $2.0$~bohr respectively (stable across
+$l_{\max} = 0, 1, 2$), against an observed discrepancy of
+$-0.0015$~Ha.  So the DBOC accounts for the \emph{sign} of the error
+and over-corrects its size by roughly $14\times$ at $R = 1$~bohr;\ the
+single-channel adiabatic energy is below exact because this positive
+term is omitted, but the omission alone does not quantitatively
+reproduce the gap---what closes it is the partial cancellation of the
+DBOC against off-diagonal $P$-matrix coupling, discussed in
+Sec.~\ref{sec:adiabatic_bottleneck}.  An earlier version of this
+paragraph gave $\Delta E_{\mathrm{DBOC}} \approx +0.0015$~Ha and
+called it ``consistent with'' the discrepancy.  That was the
+\emph{net} figure standing in for the gross one, and the coincidence
+does not survive measurement:\ the gross correction is
+$+0.0208$~Ha at this geometry.
 
 The DBOC arises because the angular channel function $\Phi_1(R;
 \hat{\Omega})$ changes shape as $R$ varies, requiring kinetic
@@ -752,7 +767,18 @@ operator discretizes cleanly on a sparse graph}.
 \begin{table*}[t]
 \caption{The natural geometry hierarchy.  Each level resolves a
 qualitatively different singularity.  The matrix dimension and
-accuracy refer to the current GeoVac implementation.  The Level-3 He
+accuracy refer to the current GeoVac implementation.  The Level-1 entry
+is \emph{not} an accuracy:\ $E_0 = \kappa\lambda_{\max}$ holds by
+construction, so any figure there is a bound on the truncation deficit
+of the spectrum rather than an error against experiment
+(Sec.~\ref{sec:hierarchy} item~1).  The Level-2 entry is qualitative
+because it is reference-limited:\ at $N_b = 20$, $R = 2.0$~bohr the
+spectral solver reproduces the two-center reference energy to
+$\sim\!10^{-13}$~Ha, at or below the precision to which that reference
+is conventionally quoted, so no percentage is meaningful
+(\textbf{[MEASURED 2026-09-19]}
+[retracted 2026-09-19: p11-h2plus-0002pct-retired]; the $0.0002\%$ this
+cell carried until then understated the method by roughly seven orders).  The Level-3 He
 figure is the single-channel adiabatic, \emph{non-variational} value;
 the proper variational two-dimensional treatment reaches 0.022\% (raw,
 $l_{\max}=7$).}
@@ -763,9 +789,9 @@ $l_{\max}=7$).}
   & Error (\%) & Paper \\
   \hline
   1 & H (one-center, 1$e^-$) & $S^3$ & $1/r$ &
-    $\sim\!50$ & $< 0.1$ & 0, 1, 7 \\
+    $\sim\!50$ & n/a & 0, 1, 7 \\
   2 & H$_2^+$ (two-center, 1$e^-$) & Prolate spheroid & Two-center
-    $1/r_A + 1/r_B$ & $\sim\!20$ & 0.0002 & 11 \\
+    $1/r_A + 1/r_B$ & $\sim\!20$ & mach.\ prec. & 11 \\
   3 & He (one-center, 2$e^-$) & Hyperspherical & $e$-$e$ cusp
     $1/r_{12}$ & $\sim\!600$ & 0.05 (non-var.) & \textbf{13} \\
   4 & H$_2$ (two-center, 2$e^-$) & ? & Combined &
@@ -1515,14 +1541,28 @@ increases monotonically with $l_{\max}$ in the single-channel
 approximation.
 
 The diagonal Born--Oppenheimer correction (DBOC) provides a
-quantitative diagnostic.  The DBOC for the ground channel is
-$+0.035$~Ha---approximately $23\times$ the total adiabatic error
-of $0.0015$~Ha.  In the complete-basis limit, $97\%$ of this
-correction is cancelled by off-diagonal $P$-matrix coupling
-(Sec.~\ref{sec:dboc}), leaving a net correction of only
-$\sim 0.001$~Ha.  This near-complete cancellation confirms that
-the coupled-channel formalism, not an improved angular basis,
-is the path to sub-0.1\% accuracy.
+quantitative diagnostic.  \textbf{[MEASURED 2026-09-19]} Evaluating
+Eq.~\eqref{eq:dboc} for the ground channel gives
+$\Delta E_{\mathrm{DBOC}} = +0.0117$, $+0.0208$ and $+0.0581$~Ha at
+$R = 0.5$, $1.0$ and $2.0$~bohr, stable to better than $2\%$ across
+$l_{\max} = 0, 1, 2$.  At $R = 1$~bohr that is approximately
+$14\times$ the total adiabatic error of $0.0015$~Ha.  Earlier versions
+of this paragraph gave $+0.035$~Ha and $23\times$;\ both are
+superseded---the measured gross correction is smaller by a factor
+$1.7$, and the ratio follows from it.  The \emph{net} correction is
+much smaller than the gross one:\ off-diagonal $P$-matrix coupling
+cancels most of it in the complete-basis limit
+(Sec.~\ref{sec:dboc}), which is what leaves an adiabatic error of
+order $10^{-3}$~Ha rather than $10^{-2}$.  We report that
+cancellation as a mechanism rather than a measurement:\ the $97\%$
+figure this paragraph previously quoted is not backed by any test,
+and applying it to the measured gross value would give
+$\sim\!0.0006$~Ha rather than the $\sim\!0.001$~Ha asserted, so the
+cancellation fraction is known only to within a factor of order two.
+What the diagnostic does establish, independently of that fraction,
+is that the coupled-channel formalism---not an improved angular
+basis---is the path to sub-0.1\% accuracy, since the gross DBOC is an
+order of magnitude larger than the residual it must reduce.
 
 A Sturmian variant---constructing the angular basis from
 eigenfunctions of the nuclear monopole potential rather than the

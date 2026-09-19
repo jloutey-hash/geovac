@@ -69,8 +69,8 @@ Four levels of this hierarchy have been established:
 
 \item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).
   Prolate spheroidal coordinates separate the two-center Coulomb problem
-  exactly.  Paper~11~\cite{paper11} achieves $0.0002\%$ energy error
-  (spectral Laguerre radial solver; 0.70\% with the original
+  exactly.  Paper~11~\cite{paper11} reaches machine precision
+  (spectral Laguerre radial solver; $1.01\%$ with the original
   finite-difference lattice) and zero free parameters.
 
 \item[Level~3] \emph{One-center, two-electron} (He).
@@ -1539,7 +1539,7 @@ The natural geometry hierarchy is now:
 Level & System & Geometry & Best result \\
 \midrule
 1 & H       & $S^3$ (Fock)           & $<0.1\%$ error \\
-2 & H$_2^+$ & Prolate spheroid       & 0.0002\% error (spectral) \\
+2 & H$_2^+$ & Prolate spheroid       & machine precision (spectral) \\
 3 & He      & Hyperspherical         & 0.05\% error \\
 4 & H$_2$   & Mol-frame hypersp.     & 96.0\% $D_e$ \\
 4N & LiH    & Full mol-frame hypersp. (SO(12)) & $R_{\rm eq}$: 63.5\% ($l_{\max}=2$, 2D variational; unbound $D_e$) \\

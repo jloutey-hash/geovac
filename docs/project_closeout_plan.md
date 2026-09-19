@@ -23,7 +23,7 @@ Disposition vocabulary: **CLOSE** (done/answered — record and stop) · **FREEZ
 | 9 | Public benchmarking reproduction script | STATUS.md backlog | Machinery exists (`benchmarks/gaussian_baseline_comparison.py`, `pauli_term_scaling.py`); outsider-runnable polish missing | **MERGE→B** (B4) |
 | 10 | H₂O accuracy improvement | STATUS.md backlog | Ceiling characterized; classical-solver investigation closed v2.0.24 | **CLOSE** — answered by the completed investigation (19.4% R_eq is the recorded ceiling) |
 | 11 | κ = −1/16 derivation route | STATUS.md backlog | Settled as Observation (v4.13.0 QA); standing rule: never re-promote | **CLOSE** — superseded by the Observation ruling |
-| 12 | Level 2 spectral radial solver | STATUS.md backlog | Implemented v2.0.9–v2.0.10 (H₂⁺ 0.0002%) | **CLOSE** — done |
+| 12 | Level 2 spectral radial solver | STATUS.md backlog | Implemented v2.0.9–v2.0.10 (H₂⁺ to machine precision; the 0.0002% recorded here was retired 2026-09-19 [retracted 2026-09-19: p11-h2plus-0002pct-retired]) | **CLOSE** — done |
 | 13 | Level 3 n_channels convergence to sub-0.1% | STATUS.md backlog | Overtaken by 2D variational solver (0.004% cusp / 0.022% raw) | **CLOSE** — overtaken |
 | 14 | WH register WH1–WH8 | CLAUDE.md §1.7 | Statuses current under §1.7 governance | **No action** — the frozen registered state (claims + falsifiers + status lines) is the intended end state of the register |
 
@@ -63,7 +63,7 @@ The crawlable surface is now built: `debug/build_paper_pages.py` (consumes the s
 
 - README version badge 4.0.0 → 4.75.0; stale LiH 1-norm line (33.3 Ha "matches") → live 32.6 Ha / 0.95× per the 2026-07-01 retirement.
 - CITATION.cff version → 4.75.0, date-released → 2026-07-09.
-- **CHECK item (not edited):** README "He accuracy 0.019%" vs CLAUDE.md best-results 0.004% (cusp) / 0.022% (raw) — verify which pipeline 0.019% cites before touching it.
+- **CHECK item — RESOLVED 2026-09-19** [retracted 2026-09-19: p13-he-0019pct-nonexistent]: README "He accuracy 0.019%" vs CLAUDE.md best-results 0.004% (cusp) / 0.022% (raw). ANSWER: 0.019% cites **no pipeline at all** — it matches no He result in the corpus. Canonical values are 0.022% raw (l_max=7, properly variational) and 0.004% cusp-corrected (l_max=4, an extrapolation, non-variational); 0.19% is the graph-native CI. This item correctly predicted the defect on 2026-07-09 and was never actioned — now gated by C17 family `p13-he-0019pct-nonexistent`.
 - Optional (PI, repo settings): GitHub About says "38 molecules"; the standard phrasing is the 37-system `hamiltonian()` library (35 composed + He + H₂).
 
 ### B4. Outsider-runnable reproduction
