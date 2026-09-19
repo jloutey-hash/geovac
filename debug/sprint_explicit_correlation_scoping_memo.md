@@ -275,7 +275,9 @@ the corpus's own data does not support that framing:
       produces e^{-2 alpha xi_2}), and each call computes its closed-form seeds
       under `workdps(dps + 8s + 24)`. With two block exponents the per-electron
       rate is one of {2a1, a1+a2, 2a2}, so the X-table becomes rate-pair-indexed:
-      **6 builds per block instead of 2.** An earlier version of this item called
+      **6 builds per block instead of 2** (9 ordered pairs, 3 of them free by the
+      transpose identity X^{(c1,c2)}[P1][P2] = X^{(c2,c1)}[P2][P1]).
+      An earlier version of this item called
       that "a 3x multiplier on the DOMINANT cost". **Wrong, and wrong because I
       carried a pre-v5.13.4 fact forward without re-measuring:** the B-seeds
       dominated V_ee only BEFORE the closed form landed. Measured now at dps=40
@@ -284,9 +286,35 @@ the corpus's own data does not support that framing:
       The seeds are no longer the cost driver; the X-table assembly and the mpf
       re-basing are. **And that was measured too (2026-09-18): the X-table build
       is 1.8 s at (3,3,1) (38 blocks, p_max=12) and 17.8 s at (4,4,2) (96 blocks,
-      p_max=18), so three rate-pairs cost ~5 s and ~53 s.** Against a (5,5)+delta
-      whole-pipeline time of ~734 s that is noise. **So the V_ee half is cheap,
-      and NONE of the costs flagged in this section is a real obstacle.**
+      p_max=18).**
+
+      **THE MULTIPLIER WAS WRONG AND IS NOW MEASURED FROM THE BUILT CODE
+      (2026-09-18, second correction).** The line above continued "so three
+      rate-pairs cost ~5 s and ~53 s ... the V_ee half is cheap". Two errors, and
+      the second is the one that matters. (i) It is not three rate-pairs but
+      **nine ordered / six built**. (ii) I then predicted ~2x the single-rate cost
+      from that count. Measured with `debug/multiexp_vee_xtable.py`: **11.4x at
+      (2,2) mu<=1 and 8.0x at (3,3) mu<=1** (0.9 s -> 10.4 s, 2.9 s -> 23.4 s;
+      the transpose identity does hold — 9 ordered keys populated from 6 builds).
+      **The build COUNT was never the cost driver.** An off-diagonal build needs a
+      SECOND `_mono_moments` and a SECOND full `_B_table` (`Amono2`/`Bc1`) and
+      loses the `P2 >= P1` triangle for a full square, so it costs ~2x a diagonal
+      build: 3*1 + 3*2 ~ **9 diagonal-equivalents** against today's 1, which is
+      what 8-11x is. Extrapolated, the two-block X-table is **~7 min at (4,4,2),
+      not ~53 s**, and at (5,5)+delta it DOMINATES rather than rounding off the
+      592 s congruence. So the V_ee half is **affordable but no longer noise** —
+      budget the two-block energy accordingly. *(Seventh wrong scope estimate in
+      this section; same cause as the recorded six — I counted the objects and not
+      the work inside them.)*
+
+      **A hazard checked and CLOSED rather than assumed.** The IBP tail lands at
+      the SUM rate c1+c2, which is larger than any rate today's code sees, and
+      v5.13.6 is the record of B seeds losing ~4s digits to cancellation at high
+      (m,s) — enough to flip the (5,5)+delta headline to -220. Measured: seed
+      accuracy *improves* monotonically with c at every (m,s) probed (m=2,s=3,
+      l=2, p=6: rel 1.48e-85 at c=2.0 -> 7.78e-88 at c=3.2 -> 6.52e-88 at c=5.2).
+      The cancellation is driven by (m,s) through `_seed_guard`, not by rate, and a
+      larger rate strictly helps. **No new seed risk in the sum-rate regime.**
    3. **F-tensor: real but LOCAL, not architectural — corrected 2026-09-18.**
       `vee_mp`'s F tensor is keyed on `(mu_i, mu_j)` and the COMBINED powers
       (p1,q1,p2,q2) only; that is the "~50x faster than the O(N^2) loop"
@@ -300,6 +328,22 @@ the corpus's own data does not support that framing:
       `(mui, muj, block_i, block_j)` plus a `br = np.array([b.block for b in
       basis])` index array alongside the existing `jr/lr/kr/mr` in the gather.
       Contained, not cross-module.
+
+      **THE KEYING ABOVE IS WRONG IN ITS DETAIL — corrected 2026-09-18 from
+      building it.** There is no `b.block`: `ProductFn.__slots__` is
+      `("j","l","k","m","mu","alpha")`, and a `block` field must NOT be added,
+      because three production sites read the exponent as `basis[0].alpha` — a
+      single scalar off the FIRST function (`neumann_vee_general_m.py:482`,
+      `prolate_general_m.py:259/370`) — so any per-function field is silently
+      ignored there. The correct keying is by **rate pair**, derived from the
+      degree through `alpha_of` exactly as item 4 prescribes:
+      `Fdict[(mui, muj, rate1, rate2)]` with rate1 = alpha_of(j_i)+alpha_of(j_j)
+      and rate2 = alpha_of(k_i)+alpha_of(k_j), and the gather carrying
+      `aj`/`ak` rate arrays beside `jr/lr/kr/mr`. Degenerate `alpha_of` collapses
+      to one key = today's code, which is what makes the falsifier exact. **A
+      standing hazard follows: a two-block basis must never reach those three
+      `basis[0].alpha` readers** — it would be evaluated at block 1's exponent
+      with no error raised.
    4. **Data model: a SMALL change is needed — corrected 2026-09-18 (my claim was
       wrong).** An earlier version of this item said "NO change needed", because
       `ProductFn.__slots__` already carries a per-function `alpha` and the only
@@ -359,6 +403,47 @@ the corpus's own data does not support that framing:
    printed one: -1.592 Ha, 0.42 Ha below exact, which is an artifact of that
    mixture and not a variational failure). So the per-rate-pair X-table must land
    BEFORE the conditioning and accuracy questions can be asked at all.
+
+   **PREREQUISITE DELIVERED (2026-09-18, `debug/multiexp_vee_xtable.py`).** The
+   per-rate-pair X-table and a rate-dispatching `vee_multi` are built and validated
+   at five independent levels. The rate assignment is forced by the production
+   code's own structure, not guessed: `_mono_moments`/`_B_table` are both
+   UNRESTRICTED 1D moments, so `Av[P1]*Bc[(l,P2)]` is the full product and
+   `_corr_mp` subtracts the wrongly-ordered region; per `_corr_gen`'s docstring
+   `w` is the P-side (xi1) polynomial and `p_outer` the Q-side (xi2) power; and
+   `_corr_mp`'s `wj*fac/c**(k+1)` is the IBP of int_{xi2}^inf xi1^j e^{-c1 xi1},
+   whose leftover e^{-c1 xi2} is WHY the tail table sits at c1+c2. Hence
+   **Av <- rate c1 (P side), Bc <- rate c2 (Q side), corr divisor = the P-side
+   rate, tail table at c1+c2**, with I2 the electron-swapped mirror.
+
+   | falsifier | result |
+   |:--|:--|
+   | F1 degenerate X-table vs `_build_Xtab_mp` | **0.0 exact**, 30 blocks / 3630 entries vs max|X|=7.06e6 |
+   | F3 two-rate entries vs direct 2D quadrature | **1.8e-41 to 6.1e-40**, 6 cases incl. asymmetric P and the m=1,s=1 sector |
+   | F2 degenerate V_ee vs `vee_mp` | **0.0 exact**, N=90 / 8100 entries |
+   | F2b multi-rate gather | **0 unfilled**; rates {2.0,2.6,3.2}; 1600/8100 shared (40^2, structural) |
+   | F4 **end-to-end energy** via `recondition_energy`'s direct branch | **identical to 10 dp**: E=-1.1726082231, 98.9301% D_e, keep=256 |
+
+   **F3 is the load-bearing one**, because `direct_vee_corr.py`'s 1e-27 validation
+   takes a SINGLE `c` in `_corr_gen` and therefore cannot reach c1 != c2; the
+   reference had to be built fresh from the definition (no monomial moments, no
+   B-table, no IBP). **F4 is not redundant with F1/F2**: in the v5.14.0 sprint four
+   matrix-level falsifiers passed while a fixture solved the wrong Hamiltonian, so
+   a matrix check proves the matrix and only the energy proves the wiring.
+
+   *A harness trap worth reusing.* F2 first reported rel = 0.155 (max|dV| = 2.64),
+   a physics-scale FAIL that was entirely mine: **`pr.vee_mp` does NOT substitute a
+   default at `l_neumann <= 0`** (it only does `min(l_neumann, q_max+2max(s))`, so
+   0 stays 0) while `recondition_energy` — and my shape helper — substitute
+   `2*l_max + 4*mu_max + 10`. The two sides ran at different Neumann truncations.
+   Confirmed independently: `max|vee_mp(0) - vee_mp(10)| = 2.64`, the same 2.64.
+   Pass a positive truncation explicitly to both sides.
+
+   **Now unblocked** (in order): does the orthogonal re-basing absorb two-block
+   conditioning — `_transforms_per_mu` block-aware, against the one-block
+   2.6e14 -> ~1e4 gegenbauer baseline and the two-block monomial's 47x handicap —
+   and then, does two-block beat the single-alpha optimum **at fixed function
+   count**? The `k_n = Z/n` caution below governs both.
 
    **Hard design constraint (the ledger settles it): per-BLOCK, not
    per-FUNCTION.** A per-function exponent (`k_n = Z/n`) is a ledgered failure --

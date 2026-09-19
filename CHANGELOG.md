@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.1] - 2026-09-18
+
+**The per-rate-pair V_ee X-table: the two-block prerequisite, built and validated at five levels.** No two-block H2 energy existed before this, because `pr.vee_mp` builds its X-table at one rate `c = 2*alpha` and at a split exponent that is simply the wrong operator. `debug/multiexp_vee_xtable.py` + `tests/test_paper12_multiexp_xtable.py`.
+
+### The rate assignment is forced by the production code, not guessed
+
+`ngm._mono_moments` and `ngm._B_table` are both UNRESTRICTED 1D moments on [1,inf), so `Av[P1]*Bc[(l,P2)]` is the full product integral and `_corr_mp` subtracts the wrongly-ordered region. `_corr_gen`'s docstring names the variables (`w` = P-side xi1 polynomial, `p_outer` = Q-side xi2 power), and `_corr_mp`'s `wj*fac/c**(k+1)` is the IBP of int_{xi2}^inf xi1^j e^{-c1 xi1}, whose leftover e^{-c1 xi2} is *why* the tail table sits at the sum rate (today's `two_c`). Hence: **A/P side <- c1, B/Q side <- c2, IBP divisor = the P-side rate, tail table at c1+c2**, with I2 the electron-swapped mirror.
+
+The P1<->P2 symmetry does not die, it **transfers**: X^{(c1,c2)}[P1][P2] = X^{(c2,c1)}[P2][P1], so 9 ordered rate pairs need **6 builds** (3 diagonal keep the triangle; 3 off-diagonal squares each donate their mirror).
+
+`Fdict` is keyed `(mui, muj, rate1, rate2)` with rates derived from the degree via `alpha_of`, **not** from a field on `ProductFn`. A planned `b.block` field was dropped on measurement: three production sites read the exponent as `basis[0].alpha` -- a single scalar off the FIRST function (`neumann_vee_general_m.py:482`, `prolate_general_m.py:259/370`) -- so any per-function field is silently ignored there. **Standing hazard: a two-block basis must never reach those three readers**; it would be evaluated at block 1's exponent with no error raised.
+
+### Five falsifiers
+
+| falsifier | result |
+|:--|:--|
+| F1 degenerate X-table vs `_build_Xtab_mp` | **0.0 exact** (30 blocks / 3630 entries, max\|X\|=7.06e6) |
+| F3 two-rate entries vs direct 2D quadrature | **1.8e-41 .. 6.1e-40**, 6 cases incl. asymmetric powers and the m=1,s=1 sector |
+| F2 degenerate V_ee vs `vee_mp` | **0.0 exact** (N=90 / 8100 entries) |
+| F2b multi-rate gather | **0 unfilled**; rates {2.0, 2.6, 3.2}; 1600/8100 shared (= 40^2, structural) |
+| F4 **end-to-end energy** via `recondition_energy`'s direct branch | **identical to 10 dp**: E = -1.1726082231, 98.9301% of D_e, keep=256 |
+
+**F3 is load-bearing** because `debug/direct_vee_corr.py`'s 1e-27 validation takes a single `c` in `_corr_gen` and therefore cannot reach c1 != c2; its reference had to be rebuilt from the definition (no monomial moments, no B-table, no IBP). **F4 is not redundant with F1/F2**: in the v5.14.0 sprint four matrix-level falsifiers passed while a fixture solved the wrong Hamiltonian -- a matrix check proves the matrix, only the energy proves the wiring.
+
+### Two measured corrections to the plan
+
+**Cost: the build COUNT was never the driver.** From "6 builds not 9" I predicted ~2x the single-rate cost. Measured: **11.4x at (2,2) mu<=1 and 8.0x at (3,3) mu<=1** (0.9 -> 10.4 s, 2.9 -> 23.4 s; the transpose identity does hold, 9 ordered keys from 6 builds). An off-diagonal build needs a *second* `_mono_moments` and a *second* full `_B_table` and loses the `P2 >= P1` triangle for a full square, so it costs ~2x a diagonal build: 3*1 + 3*2 ~ 9 diagonal-equivalents. So the two-block X-table is **~7 min at (4,4,2), not ~53 s**, and at (5,5)+delta it DOMINATES rather than rounding off the 592 s congruence. Affordable, but no longer noise. *(Seventh wrong scope estimate in this memo section; same cause as the six recorded -- counting the objects, not the work inside them.)*
+
+**A seed hazard checked and CLOSED rather than assumed.** The tail table sits at c1+c2, larger than any rate today's code sees, and v5.13.6 is the record of B seeds losing ~4s digits to cancellation at high (m,s) -- enough to flip the (5,5)+delta headline to -220. Measured: seed accuracy *improves* monotonically with c at every (m,s) probed (m=2, s=3, l=2, p=6: rel 1.48e-85 at c=2.0 -> 7.78e-88 at c=3.2 -> 6.52e-88 at c=5.2). The cancellation is driven by (m,s) through `_seed_guard`, not by rate.
+
+### A harness trap worth reusing
+
+F2 first reported rel = 0.155 (max\|dV\| = 2.64) -- a physics-scale FAIL that was entirely harness error. **`pr.vee_mp` does NOT substitute a default at `l_neumann <= 0`** (it only does `min(l_neumann, q_max + 2*max(s))`, so 0 stays 0), while `recondition_energy` substitutes `2*l_max + 4*mu_max + 10`. The two sides ran at different Neumann truncations; confirmed independently by `max|vee_mp(0) - vee_mp(10)| = 2.64`, the same 2.64. Pass a positive truncation explicitly to both sides.
+
+### Added
+
+- `debug/multiexp_vee_xtable.py` -- `build_Xtab_rated`, `vee_multi`, `pair_rates`, and F1/F2/F2b/F3 drivers.
+- `tests/test_paper12_multiexp_xtable.py` -- permanent guard (the `debug/` driver is prunable by the §9 clean-room policy, so it was logged as a COVERAGE GAP in `docs/claim_test_matrix.md` and this closes it). Written as separate work from the implementation per §9 and fire-tested against a collapsed-rate mutation.
+
+### Now unblocked
+
+Does the orthogonal re-basing absorb two-block conditioning (`_transforms_per_mu` block-aware; one-block baseline 2.6e14 -> ~1e4 with gegenbauer, two-block monomial starts 47x worse), and then: does two-block beat the single-alpha optimum **at fixed function count**? The ledger's `k_n = Z/n` row governs both -- a per-function exponent fixed conditioning to 1.0000 and destroyed completeness, plateauing near 60 mHa.
+
 ## [v5.14.0] - 2026-09-18
 
 **§13.5 is narrowed: §5's numeric result cells become PM-editable, while its levels, coordinate systems and framing stay prohibited. Plus the multi-exponent one-body half, banked and independently validated.** Minor bump because §9 makes a change to the agent protocol corpus-significant — a reader seeing the second number move should be able to infer that the instrument moved, without reading the entry.
