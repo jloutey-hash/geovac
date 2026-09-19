@@ -62,10 +62,14 @@ the PI decide; do not bump it unilaterally. A diagnostic arc testing 10 hypothes
    - **Never tag without a commit in this invocation.** The tag applies to the HEAD the commit
      just produced. This ordering is what guarantees "a commit every time we tag."
 4. **Push — ONLY if the invocation said `push`.** This repo works **directly on `main`**
-   (it is the working branch, not a PR staging branch), and its only remote is `old`, a
-   local mirror — there is no GitHub `origin`. So push the current branch, `main` included,
-   to the configured remote. Resolve the remote as the branch's upstream if one is set,
-   else the sole remote (`git remote`); if there are several and none is upstream, stop and ask.
+   (it is the working branch, not a PR staging branch). `main` tracks a **GitHub `origin`**
+   (`github.com/jloutey-hash/geovac`) as its upstream, and there is also a local mirror
+   `old`. So push the current branch, `main` included, to its upstream. Resolve the remote
+   as the branch's upstream (`origin` for `main`); if a branch has no upstream, fall back to
+   the sole remote, and if there are several and none is upstream, stop and ask.
+   **Pushing `main` to `origin` publishes to the public GitHub repo** — a real publish, done
+   only under the explicit `push` invocation. It does NOT create a GitHub Release (that mints
+   a Zenodo DOI and stays a manual PI action; see prohibitions).
    - `git push <remote> "$(git rev-parse --abbrev-ref HEAD)"` — the **current branch**.
    - `git push <remote> "vX.Y.Z"` (and any other tags cut in this invocation).
    - Pushing `main` is permitted here under explicit PI direction (PI-authorized 2026-09-17).

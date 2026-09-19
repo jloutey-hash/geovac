@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.7] - 2026-09-19
+
+**Fixed `/checkpoint`'s stale remote model, and clarified version-bump scope (PI direction).**
+
+The `/checkpoint` skill (`.claude/commands/checkpoint.md`, step 4) and a CLAUDE.md §2 chronicle bullet both asserted the repo has "no GitHub `origin`" and pushes only to the local mirror `old`. Stale: `main` tracks a GitHub `origin` (`github.com/jloutey-hash/geovac`) as its upstream (currently ahead 11), so a `/checkpoint push` publishes to the **public GitHub repo**. Both loci corrected + a publish caution added; the skill's upstream-resolution logic already selected `origin` correctly (main has an upstream), so only the false prose needed fixing. Force-push and GitHub-Release (manual PI action, mints the Zenodo DOI) prohibitions unchanged.
+
+**Version-bump scope (PI direction 2026-09-19):** a version bump is warranted when a change touches CLAUDE.md or a high-profile behavioral md file (a skill such as `qa` or `checkpoint`); ordinary paper/code/doc/diagnostic work needn't agonize over the number. Recorded in `memory/feedback_version_bump_scope.md`. §9's Version-numbering policy is owed a matching edit by the PI (I can edit §9 but held it for their exact phrasing — bump-at-all vs escalate-to-minor for a behavioral change). This entry is the first application: touching the skill + CLAUDE.md → a bump.
+
+### Files
+`.claude/commands/checkpoint.md`, `CLAUDE.md` (§1 version + two §2 bullets), `CHANGELOG.md`. (The memory rule lives outside the repo, so it is not in this commit.)
+
 ## [v5.14.6] - 2026-09-19
 
 **The summary layer was carrying retired numbers that no gate could see. Two independent blind spots, both structural: C21 cannot read a `.md` file in any scope, and C17's CF-1 family had the right patterns but not the right files. 23 prose loci in 7 documents, 6 gate/registry fixes, every new criterion fire-tested.**
