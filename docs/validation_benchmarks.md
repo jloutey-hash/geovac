@@ -140,16 +140,22 @@
 | Graph-native CI n_max=8 error | 0.207% (2,262 configs) ⚠ | Exact algebraic float integrals |
 | Graph-native CI n_max=9 error | 0.201% (3,927 configs) ⚠ | Exact algebraic float integrals |
 
-> **⚠ INTERNAL INCONSISTENCY, flagged 2026-09-19 (/qa group2 CODE run; NOT resolved).**
-> These three rows cannot all be right. A variational ladder converging from above is
+> **⚠ INTERNAL INCONSISTENCY, flagged then MEASURED 2026-09-19 (/qa group2 CODE run). The recorded n_max=7 row is the wrong one (measured 0.216%); the row-value edit and the corpus-wide 0.19% headline correction are owed as one coherent sweep, not done here.**
+> These three rows could not all be right: a variational ladder converging from above is
 > monotone decreasing, so the error cannot be `< 0.20%` at n_max=7 and then `0.207%` at
-> n_max=8. At least one row is wrong, and **which one is unmeasured**: a graph-native
-> build at n_max=6/7 is expensive (n_max=5 alone ~68 s; `hypergeometric_slater`
-> dispatches to exact `Fraction` at n≥5) and two attempts during the run produced no
-> output. The reproduced ladder n_max=1..5 is 5.294 / 0.4906 / 0.36555 / 0.28649 /
-> 0.24963 %, whose shrinking decrements extrapolate to ~0.22–0.23 % at n_max=7 —
-> suggesting the n_max=7 row is the wrong one, but an extrapolation is not a
-> measurement and no value is being substituted on its strength.
+> n_max=8. **MEASURED 2026-09-19 on the fixed-k=Z graph-native route
+> (`build_graph_native_fci`), self-validated (the n_max=5 anchor reproduced 0.24963%
+> exactly):** n_max=6 = **0.22864%** and n_max=7 = **0.21559%**. So the full ladder
+> 0.24963 / 0.22864 / 0.21559 / 0.207 / 0.201 % at n_max = 5..9 IS monotone and
+> consistent, with ONE exception — the recorded n_max=7 row `< 0.20%` is wrong; the
+> true value is **0.216%**. The n_max=8/9 rows (0.207/0.201) fit the measured trend.
+> **Consequence:** the **0.19% @ n_max=7** best-results headline is also wrong in the
+> optimistic direction — the method's true n_max=7 error is 0.216%, and even n_max=9
+> only reaches 0.201%, so 0.19% is not attained anywhere in the recorded ladder. The
+> row here and that headline are the same quantity in two places; correcting one without
+> the other would be the corrected-in-owner/left-in-citer defect, so both move together
+> in the owed sweep. Driver: `debug/qa/_graph_native_he_nmax67.py`
+> (data `debug/data/graph_native_he_nmax67.txt`).
 >
 > Related, and already declared elsewhere: the **0.19% @ n_max=7** headline has **no
 > backing test** — `docs/claim_test_matrix.md:280` (NO-TEST, tests stop at n_max=3),

@@ -664,18 +664,39 @@ def test_dboc_positivity():
 
 
 def test_dboc_magnitude():
-    """Verify DBOC has the right order of magnitude near the He well.
+    """Pin the DBOC at the MEASURED values (2026-09-19), not the retired estimate.
 
-    Paper 13 estimates the total DBOC contribution as ~0.0015 Ha for He.
-    At R ~ 1 bohr (near the well minimum), DBOC should be O(0.001-0.01).
+    The old form asserted ``1e-4 < dboc < 0.1`` -- a window spanning three orders
+    of magnitude, with a docstring that said "expect ~0.001".  It admitted BOTH
+    the retired 0.0015 Ha estimate AND the true 0.0208 Ha, so it could not tell a
+    correct DBOC from a regression to the wrong published value; it was 20x off
+    its own docstring.  Paper 13 (sec:adiabatic_bottleneck, sec:dboc) now quotes
+    the measured values, and this guard protects them.
+
+    WRONG ANSWER THIS REJECTS: the retired ~0.0015 Ha (and any order-of-magnitude
+    drift).  Fire-tested by planting ``dboc *= 0.5`` -> ``dboc *= 0.036`` in
+    solve_with_dboc (scales 0.0208 -> 0.0015): the R=1 assertion fires.
+
+    Measured, AlgebraicAngularSolver(Z=2, n_basis=15, l_max=0):
+        R=0.5 -> 0.011701,  R=1.0 -> 0.020774,  R=2.0 -> 0.058092 Ha
+    (stable to <2% across l_max = 0, 1, 2).
     """
     from geovac.algebraic_angular import AlgebraicAngularSolver
 
     solver = AlgebraicAngularSolver(Z=2.0, n_basis=15, l_max=0)
-    _, _, dboc = solver.solve_with_dboc(R=1.0, n_channels=1)
+    d05 = solver.solve_with_dboc(R=0.5, n_channels=1)[2]
+    d10 = solver.solve_with_dboc(R=1.0, n_channels=1)[2]
+    d20 = solver.solve_with_dboc(R=2.0, n_channels=1)[2]
 
-    assert dboc > 1e-4, f"DBOC(R=1) = {dboc:.6e} too small (expect ~0.001)"
-    assert dboc < 0.1, f"DBOC(R=1) = {dboc:.6e} too large (expect ~0.001)"
+    # Windows tight enough to reject the retired 0.0015 Ha (by ~14x at R=1) and
+    # any order-of-magnitude-high drift, loose enough for basis/version wobble.
+    assert 0.018 < d10 < 0.024, f"DBOC(R=1) = {d10:.6e}, expected ~0.0208 Ha"
+    assert 0.009 < d05 < 0.015, f"DBOC(R=0.5) = {d05:.6e}, expected ~0.0117 Ha"
+    assert 0.050 < d20 < 0.066, f"DBOC(R=2) = {d20:.6e}, expected ~0.0581 Ha"
+    # A wrong R-dependence is a distinct failure from a wrong magnitude.
+    assert d05 < d10 < d20, f"DBOC not monotone in R: {d05}, {d10}, {d20}"
+    # Name the retired value explicitly so the rejection is unmistakable.
+    assert d10 > 10 * 0.0015, "DBOC(R=1) regressed toward the retired 0.0015 Ha"
 
 
 def test_dboc_small_R_perturbative():

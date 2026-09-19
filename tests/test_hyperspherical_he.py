@@ -125,6 +125,28 @@ class TestHeliumSolver:
         err = abs(E - E_EXACT) / abs(E_EXACT)
         assert err < 0.001, f"Error {err:.4f} > 0.1%"
 
+    def test_adiabatic_is_non_variational(self, he_result: dict) -> None:
+        """The single-channel adiabatic energy lies BELOW exact.
+
+        The 0.05% adiabatic He result is NON-variational, and the DoD (Paper 13
+        C8) requires that be flagged, not presented as a variational bound.  Its
+        companion ``test_energy_close_to_exact`` pins only the MAGNITUDE, via a
+        SYMMETRIC window ``abs(E - E_EXACT)/|E_EXACT| < 0.001`` -- which an
+        ABOVE-exact energy passes just as well, so the direction (the whole
+        honesty content) was unpinned.  This is the sign-pin, modelled on
+        ``test_cusp_correction_sub_01pct`` which pins both directions explicitly.
+
+        WRONG ANSWER THIS REJECTS: any E >= E_EXACT presented as this adiabatic
+        result.  Discrimination check: E = -2.901100 (above exact) passes the
+        symmetric window (rel 0.000904 < 0.001) but fails this test; the measured
+        E = -2.905165 (0.00144 Ha below exact) passes both.
+        """
+        E = he_result['energy']
+        assert E < E_EXACT, (
+            f"adiabatic E = {E:.6f} is not below exact ({E_EXACT:.6f}); "
+            f"the non-variational flag is unbacked if an above-exact energy passes"
+        )
+
     def test_beats_s3_lattice(self, he_result: dict) -> None:
         E = he_result['energy']
         err = abs(E - E_EXACT) / abs(E_EXACT)

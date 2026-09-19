@@ -205,6 +205,21 @@ def main() -> int:
                              recursive=True))
     files = [f for f in files
              if "/archive/" not in f.replace("\\", "/")]
+    # SCOPE WIDENING 2026-09-19.  The same heredoc-escape corruption this gate
+    # exists for also reaches the two trunk markdown documents that carry
+    # LaTeX-bearing prose about the papers and are edited by the same route
+    # (CHANGELOG.md, CLAUDE.md).  On 2026-09-19 C19 reported PASS "whole corpus"
+    # while CHANGELOG.md held two form feeds -- not because it cannot detect them
+    # (BARE_CONTROL catches \x0c/\x0b, and \frac/\vspace are in ESCAPE_ARTIFACTS)
+    # but because it globbed papers/**/*.tex only and never looked.  That is the
+    # exact scope-away failure the GATE SELF-AUDIT rule names.  The detection is
+    # file-type-agnostic, so these two files are added to the WHOLE-CORPUS scan
+    # only; named and substring scopes (which key on paper number/path) are
+    # unaffected.
+    for _extra in ("CHANGELOG.md", "CLAUDE.md"):
+        _p = os.path.join(root, _extra)
+        if os.path.exists(_p):
+            files.append(_p)
     # Named scopes resolve to an explicit file list (docs/qa/<target>.done.md);
     # anything else keeps the historical substring behaviour, with a warning.
     # `trunk` NEEDED a named scope: no trunk paper's path contains "trunk", so

@@ -1,0 +1,9 @@
+=== graph-native He CI: settle the n_max=6/7 monotone question ===
+E_exact = -2.903724377034 Ha; anchor: n_max=5 must reproduce 0.24963% (+-0.01)
+n_max=5: dim=266  E0=-2.89647579  err=0.24963%  [44s]
+anchor PASSED -- pipeline validated, computing 6 and 7
+n_max=6: dim=602  E0=-2.89708543  err=0.22864%  [325s]
+n_max=7: dim=1218  E0=-2.89746428  err=0.21559%  [1883s]
+
+READING (compare to validation_benchmarks.md rows n_max=7 '<0.20%', n_max=8 '0.207%', n_max=9 '0.201%'):
+  a monotone-decreasing ladder is expected; the measured n_max=7 above says which of the three recorded rows is inconsistent. Do NOT edit the benchmark values from this alone -- report to the PM for adjudication.

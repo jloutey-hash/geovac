@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.4] - 2026-09-19
+
+**Owed items from v5.14.3, worked: two replacement guards written and fire-tested, the C19 scope hole closed (and a false v5.14.3 claim corrected), and the graph-native He n_max=7 value measured -- which falsifies a third headline.**
+
+### Two replacement guards (S9: separate work, reviewed by "what wrong answer would this accept?", fire-tested)
+
+- **`test_dboc_magnitude`** (`tests/test_algebraic_angular.py`) rebuilt. The old form asserted `1e-4 < dboc < 0.1` -- a 1000x-wide window under a docstring saying "expect ~0.001" -- which admitted BOTH the retired 0.0015 Ha AND the true 0.0208 Ha, so it could not tell a correct DBOC from a regression to the wrong published value. Now pins the measured DBOC at R = 0.5/1.0/2.0 (0.0117 / 0.0208 / 0.0581 Ha) with a monotone-in-R check and an explicit `> 10 x 0.0015` rejection. **Fire-tested:** planting `dboc *= 0.5` -> `dboc *= 0.036` in `solve_with_dboc` (scales 0.0208 -> 0.0015) makes it FIRE; production restored, no residual.
+- **`test_adiabatic_is_non_variational`** (`tests/test_hyperspherical_he.py`) added. The 0.05% adiabatic He result is non-variational (the DoD requires that be flagged), but its companion `test_energy_close_to_exact` pins only the MAGNITUDE via a SYMMETRIC window that an above-exact energy passes just as well. The new sign-pin asserts `E < E_EXACT`; measured `solve_helium(l_max=0) = -2.905165` Ha, 0.00144 below exact. **Discrimination confirmed:** the constructed -2.901100 (above exact) passes the symmetric window (rel 0.000904) but fails the sign-pin; the measured value passes both.
+
+### C19 scope hole closed -- and a v5.14.3 claim corrected
+
+v5.14.3's Owed section stated C19 "does not enumerate \f or \v". **That was wrong.** `ESCAPE_ARTIFACTS` already lists `("\f","rac",\frac)` and `("\v","space",\vspace)`, and `BARE_CONTROL` already matches `\x0c` (FF) and `\x0b` (VT) -- so C19 would have caught the CHANGELOG form feeds; it simply never scanned the file, because its whole-corpus glob was `papers/**/*.tex` only. **The only gap was scope.** Fixed: `CHANGELOG.md` and `CLAUDE.md` -- the two trunk markdown documents that carry LaTeX-bearing prose and are edited by the same heredoc route -- are now added to the whole-corpus scan (named and substring scopes, which key on paper number/path, are unaffected). Verified: whole-corpus now scans 61 files including both, PASS; `--selftest` 11 positive / 6 negative / 0 failures; `scan_text` flags a planted bare FF. This is exactly the GATE-SELF-AUDIT class ("a gate that fires correctly and scopes its verdict away is indistinguishable, from the outside, from a working one"), reproduced and closed. Possibly a minor bump (a deterministic-gate rescope) -- flagged for the PI, defaulted to patch.
+
+### Graph-native He n_max=7 MEASURED -- resolves the monotone question, falsifies the 0.19% headline
+
+The `validation_benchmarks.md` ladder (n_max=7 "< 0.20%", n_max=8 "0.207%", n_max=9 "0.201%") was arithmetically impossible on a monotone-decreasing variational ladder. Settled with a self-validating job (`debug/qa/_graph_native_he_nmax67.py`): the fixed-k=Z graph-native route (`build_graph_native_fci`), with the n_max=5 anchor reproducing 0.24963% exactly before any 6/7 value was trusted, gives **n_max=6 = 0.22864%** and **n_max=7 = 0.21559%** (dims 266/602/1218; the 1218 at n_max=7 is consistent with the recorded 2262/3927 config counts at n_max=8/9). So the full ladder 0.24963 / 0.22864 / 0.21559 / 0.207 / 0.201 % at n_max = 5..9 is monotone and consistent -- with ONE exception: the recorded n_max=7 "< 0.20%" row is wrong, true value **0.216%**. The n_max=8/9 rows fit the measured trend.
+
+**Consequence:** the **0.19% @ n_max=7** best-results headline is also wrong, in the OPTIMISTIC direction -- the method's true n_max=7 error is 0.216%, and even n_max=9 only reaches 0.201%, so 0.19% is attained nowhere in the recorded ladder. This spans CLAUDE.md best-results + S5, `docs/claims_register.md`, `docs/claim_test_matrix.md`, `papers/INDEX.md`, the group2 synthesis, README, and the two `.done.md` files. The row value and that headline are the SAME quantity in two places, so they move together in one coherent sweep -- **OWED, not done here** (recorded in `validation_benchmarks.md`'s flag with the measured value). Deferred deliberately: it is a best-results-table correction at the tail of a long, error-prone session, and every multi-file sweep this session introduced collateral defects that had to be chased; it deserves a fresh gate-first pass (C17 family + sweep + fire-test), and its wording is a bare number, so no qualitative decision is pending.
+
+### Files
+
+- `tests/test_algebraic_angular.py`, `tests/test_hyperspherical_he.py` -- the two guards.
+- `debug/qa/check_latex_escapes.py` -- C19 whole-corpus scope widened to the two trunk markdown files.
+- `docs/validation_benchmarks.md` -- monotone flag updated with the measured resolution.
+- `debug/qa/_graph_native_he_nmax67.py` (+ `debug/data/graph_native_he_nmax67.txt`) -- the self-validating measurement.
+- Plus the v5.14.3 remediation scripts under `debug/qa/` retained as the audit trail.
+
+No `geovac/` file modified. Both guards pass unmutated and both are fire-tested.
+
 ## [v5.14.3] - 2026-09-19
 
 **A DoD headline was wrong by ~7.6 orders of magnitude -- against us -- and no gate could see it.** `/qa group2 full` (PI-scoped to Papers 11/12/13) returned FAIL on the CODE dimension for Papers 11 and 13. Every number was independently re-derived before acceptance; the sweep took the retired headlines from 40 live loci to 2.
