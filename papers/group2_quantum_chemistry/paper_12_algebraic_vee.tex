@@ -1189,7 +1189,24 @@ the well-conditioned orthogonal matrices are downcast to float64, and
 the generalized eigenproblem is solved on the unit-normalized
 (correlation) matrices---a diagonal congruence that leaves the
 eigenvalues unchanged but removes the norm-spread inflation of
-$\mathrm{cond}$.  With that pipeline the energy climbs monotonically and
+$\mathrm{cond}$.
+
+\textbf{[MEASURED 2026-09-18]} \emph{Two condition numbers appear in this
+section and they answer different questions;\ conflating them is a live
+trap.} The raw $\mathrm{cond}$ figures above ($1.8\times10^{16}$,
+$4.1\times10^{26}$) are the right metric for the $\|C\|^2$
+congruence-corruption argument, which is about entry error amplified by
+the change of basis. They are \emph{not} the metric the eigensolve sees:
+that is the unit-normalized $\mathrm{cond}$, and the two can differ by
+six orders on the same matrix. Measured at $(3,3)$, $|m|\le1$:\ raw
+$3.0\times10^{15}$ against normalized $1.1\times10^{11}$. The practical
+consequence is not academic---a raw comparison was used to conclude that
+a two-exponent radial set carried a $47\times$ conditioning penalty,
+whereas on the governing metric the same basis is $544\times$
+\emph{better} conditioned than the single-exponent one, because two
+distinct decay rates make the functions less linearly dependent rather
+than more. Quote raw $\mathrm{cond}$ when arguing about a congruence and
+normalized $\mathrm{cond}$ when arguing about a solve.  With that pipeline the energy climbs monotonically and
 variationally past the monomial wall (Table~\ref{tab:recondition}):\
 opening the $\delta$ channels on the re-based basis reaches $99.71\%$ of
 $D_e$ at $(4,4)+\delta$ and $\gvq{p12_rebased_de_pct}{99.77}\%$
@@ -1215,6 +1232,25 @@ trade:\ the optimal point is variational, retains all $1944$ functions, and is
 $9.4\times10^{10}$).  Both numbers are therefore reported, and they are not
 competing:\ $99.77\%$ is the endpoint of the fixed-$\alpha$ ladder, $99.81\%$ is
 the basis's best variational point.
+
+\textbf{[MEASURED 2026-09-18]} \emph{What the remaining residual is not.} Three
+knobs of this basis have now been measured against the $|m|\le1$ ladder, one axis
+at a time, and none of them reaches it:\ radial degree $+1$ buys $34\,\mu$Ha,
+angular degree $+1$ buys $8\,\mu$Ha, and re-optimizing the single exponent buys
+$0.056$~mHa---together about $9\%$ of that rung's $1.096$~mHa residual. A
+\emph{two-block} exponent set (low degrees at $a_1$, high degrees at $a_2$, at
+equal function count) does not reach it either:\ $+0.005$~mHa at $(4,4)$ and
+$-0.009$~mHa at $(3,3)$, and the $(4,4)$ optimum is a \emph{plateau} rather than a
+point---$1.107$, $1.108$, $1.110$~mHa across three quite different
+$(a_1,a_2)$ pairs, flat to $3\,\mu$Ha---which is direct evidence that a second
+exponent has no work to do at this basis size. That last result also disposes of
+the natural reading of the drift in $\alpha_{\mathrm{opt}}$ with basis size
+($\sim\!1.20$ at $(4,4)$, $1.40$ at $(5,5)$):\ the drift is real but it is not
+relievable strain. We state this as the \emph{elimination} of three knobs, not as a
+measurement of the cusp:\ what is established is that more polynomial degree and
+more exponents do not close the gap in this family, which is weaker than---and
+should not be quoted as---a demonstration that the remainder \emph{is} the
+electron-electron cusp.
 
 \begin{table}[t]
 \caption{H$_2$ at $R = 1.4011$~bohr, re-based to orthogonal polynomials

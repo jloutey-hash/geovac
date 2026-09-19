@@ -1,0 +1,13 @@
+=== PHASE 1: does block-diagonal re-basing absorb the two-block penalty? ===
+cond(norm) is `_normalized_solve`'s metric (headline (5,5)+delta = 4.90e10).
+
+(3,3) mu<=1:
+  A single a=1.4 prod-transform      N=256   cond(mono,norm)=1.065e+11  cond(mono,raw)=3.028e+15  cond(rebased,norm)=2.237e+05  SPD=True/True  [5s]
+  B single a=1.4 block-transform     N=256   cond(mono,norm)=1.065e+11  cond(mono,raw)=3.028e+15  cond(rebased,norm)=1.258e+09  SPD=True/True  [5s]
+  C two-block 1.6/1.0 j<=1           N=256   cond(mono,norm)=1.957e+08  cond(mono,raw)=9.610e+16  cond(rebased,norm)=7.392e+05  SPD=True/True  [5s]
+
+(4,4) mu<=1:
+  A single a=1.4 prod-transform      N=650   cond(mono,norm)=3.669e+13  cond(mono,raw)=inf  cond(rebased,norm)=5.445e+06  SPD=True/True  [46s]
+  B single a=1.4 block-transform     N=650   cond(mono,norm)=3.669e+13  cond(mono,raw)=inf  cond(rebased,norm)=3.342e+11  SPD=True/True  [60s]
+  C two-block 1.6/1.0 j<=2           N=650   cond(mono,norm)=4.716e+11  cond(mono,raw)=inf  cond(rebased,norm)=1.101e+07  SPD=True/True  [76s]
+

@@ -468,3 +468,219 @@ matter. That is a question about what the framework is for.
 Drivers: `debug/cusp_vs_basis_decomposition.py` (ladder),
 `debug/data/cusp_vs_basis_mu1.log` (the data above). Guard + ledger rows:
 CHANGELOG v5.13.9.
+
+## 8. Two-block radial exponent: conditioning GO, accuracy ~ZERO beyond the smallest basis (2026-09-18)
+
+Driver: `debug/multiexp_twoblock_energy.py`. Both prerequisites were already
+banked and validated (one-body `debug/multiexp_overlap_poc.py`, V_ee
+`debug/multiexp_vee_xtable.py`); this section measures the two questions they
+unblocked. Every number below is measured. Where a point was not reached it says
+so; nothing here is extrapolated or rounded toward a cleaner story.
+
+### 8.1 The transform, and the structural question
+
+A transform row is a polynomial against ONE exponential, so mixing degree blocks
+means mixing e^{-a1 xi} with e^{-a2 xi} and leaving the orthogonal family. The
+re-basing transform is therefore forced to be BLOCK-DIAGONAL in the degree. Three
+families were built for block 2, whose monomials are xi^{d0}..xi^{j_max}:
+"shift" (xi^{d0} L_n(2 a2 (xi-1))), "trunc" (L_o with columns below d0 deleted),
+and "assoc" (xi^{d0} L_n^{(2 d0)}, the family orthogonal against block 2's own
+measure xi^{2 d0} (xi^2-1)^mu e^{-2 a2 xi}).
+
+The prediction under test was: block-diagonal re-basing fixes the WITHIN-block
+Hankel conditioning but leaves CROSS-block near-degeneracy untouched, and the
+measured 47x two-block monomial handicap lives there. **Both halves are refuted.**
+
+### 8.2 Phase 1 -- conditioning, equal function count
+
+cond is `_normalized_solve`'s cond(norm), the metric that governs the float64
+solve (the published (5,5)+delta headline runs at 4.90e10). All rows SPD.
+
+| rung | row | cond(mono,norm) | cond(mono,raw) | cond(re-based,norm) |
+|:--|:--|--:|--:|--:|
+| (3,3) mu<=1, N=256 | A single a=1.40, production family | 1.065e11 | 3.028e15 | **2.237e5** |
+| | B single a=1.40, block[shift] | 1.065e11 | 3.028e15 | 1.258e9 |
+| | B single a=1.40, block[trunc] | 1.065e11 | 3.028e15 | 3.215e8 |
+| | B single a=1.40, block[assoc] | 1.065e11 | 3.028e15 | 4.863e8 |
+| | C two-block 1.60/1.00 j<=1, block[shift] | 1.957e8 | 9.610e16 | 7.392e5 |
+| | C two-block 1.60/1.00 j<=1, block[trunc] | 1.957e8 | 9.610e16 | 1.909e5 |
+| | C two-block 1.60/1.00 j<=1, block[assoc] | 1.957e8 | 9.610e16 | **1.098e5** |
+| (4,4) mu<=1, N=650 | A single a=1.40, production family | 3.669e13 | inf | **5.445e6** |
+| | B single a=1.40, block[shift] | 3.669e13 | inf | 3.342e11 |
+| | B single a=1.40, block[trunc] | 3.669e13 | inf | 8.088e10 |
+| | B single a=1.40, block[assoc] | 3.669e13 | inf | 1.267e11 |
+| | C two-block 1.60/1.00 j<=2, block[shift] | 4.716e11 | inf | 1.101e7 |
+| | C two-block 1.60/1.00 j<=2, block[trunc] | 4.716e11 | inf | 1.573e7 |
+| | C two-block 1.60/1.00 j<=2, block[assoc] | 4.716e11 | inf | **1.323e6** |
+| (5,5) mu<=1 | all rows | NOT REACHED | NOT REACHED | NOT REACHED |
+
+`inf` is literal: at (4,4) the raw monomial overlap is numerically indefinite in
+float64 (min eig <= 0). That is itself a reason the raw metric cannot carry this
+comparison. The (5,5) rung was launched and abandoned (see 8.5, cost).
+
+**VERDICT: GO.** With the correct block-2 family the two-block re-based overlap is
+BETTER conditioned than the single-block production basis at both rungs --
+1.098e5 vs 2.237e5 (2.04x) at (3,3), 1.323e6 vs 5.445e6 (4.12x) at (4,4). The
+STOP threshold was 1e13; nothing came within seven orders of it. Every solve kept
+all N functions and stayed variational.
+
+**The prediction failed in both halves, and here is where the 47x went.**
+
+1. *There is no two-block handicap on the solver's metric.* The 47x is a RAW-cond
+   artifact. `_normalized_solve` applies a diagonal congruence precisely to strip
+   norm-spread, and on that metric the two-block MONOMIAL overlap is
+   **544x better** than single-block at (3,3) (1.957e8 vs 1.065e11) and **78x
+   better** at (4,4) (4.716e11 vs 3.669e13). Two distinct decay rates make the
+   functions less linearly dependent -- the raw number was reading the diagonal
+   scale spread, not the near-degeneracy.
+2. *The second exponent does not add a cross-block penalty; it removes the
+   restriction penalty.* Holding the transform construction fixed and turning the
+   second exponent on (B -> C): shift 1.258e9 -> 7.392e5, assoc 4.863e8 ->
+   1.098e5 at (3,3); at (4,4) assoc 1.267e11 -> 1.323e6, a factor of 95,767.
+
+What block-diagonality actually costs is measured separately, and it is large but
+only when GRATUITOUS -- i.e. at a1 = a2, where the restriction buys nothing. B/A,
+same span, same operator, energies identical to 2.2e-14: (3,3) 5624x (shift),
+1437x (trunc), 2174x (assoc); (4,4) 61,376x, 14,854x, 23,271x. So the honest
+statement is that the restriction is expensive when idle and nearly free when it
+is the correct structure for the basis it describes.
+
+*A detail not to over-read:* conditioning depends on the exponent PAIR, not just
+on there being two blocks. At the phase-1 pair (1.60/1.00) two-block is better
+conditioned than single-alpha; at the energy-optimal pairs of 8.4 it is 5-70x
+WORSE (3.27e7 at 1.50/1.15, 4.26e7 at 1.55/1.20, 5.09e7 at 1.40/1.10 and
+4.80e8 at 1.40/1.20, against single-alpha's 6.87e6 at (4,4)). Both regimes are
+harmless -- all are far inside float64 -- but
+"two-block conditions better" is a statement about a pair, not a law.
+
+### 8.3 Falsifiers
+
+| # | check | result |
+|:--|:--|:--|
+| FB | T1 block-diagonal and invertible | 0 cross-block non-zeros; det 65.5 (shift) / -3.88 (trunc); cond(T1) 80.6 / 2465 |
+| FC | one-body pencil invariant at a1 = a2 (same span, different rows) | E_1body = -2.5677131760 for production and all three block schemes; abs(dE) <= 4.3e-14 |
+| FA | FULL energy invariant at a1 = a2 | E = -1.1726082231 (production, (3,3) mu<=1, keep 256, variational); abs(dE) = 2.2e-14 (shift), 1.5e-14 (trunc), 1.4e-14 (assoc) |
+| FD | MIXED-RATE overlap entries vs 2D quadrature from the definition | 14 substantive non-zero entries (of 34 picks; rest structurally zero by angular parity), rel 1.1e-31 to 5.9e-29, incl. asymmetric pairs (2.60,3.20) and (2.60,2.00) |
+
+**FD was the one genuine gap and it had to be built.** Every pre-existing check on
+the two-block machinery is either DEGENERATE (a1 = a2, where the mixed rate
+a1+a2 never arises) or merely structural (SPD, flat in n_mom). The conditioning
+result rests on entries whose electron-1 factor decays at a1+a2, a rate no
+single-exponent path ever constructs, and a dispatch that silently used 2*a1 --
+the `basis[0].alpha` failure mode -- would agree on every same-block entry and
+differ only there. Mirrors F3's role on the V_ee side.
+
+### 8.4 Phase 2 -- accuracy at FIXED function count
+
+Single alpha is re-optimised at EACH rung (this matters; see 8.5 item 6).
+Two-block is best-of-grid with j_split swept, family `assoc`. All points
+variational, all functions kept.
+
+| rung | N | single alpha, own optimum | best two-block | gain (mHa) |
+|:--|--:|:--|:--|--:|
+| (2,2) mu<=1 | 90 | a=1.05, 1.8077 mHa, 98.9639% | 1.50/1.10 j<=1, **1.610 mHa**, 99.077% | **+0.198** |
+| (3,3) mu<=1 | 256 | a=1.15, 1.3015 mHa, 99.2541% | 1.45/1.12 j<=1, 1.310 mHa, 99.249% | **-0.009** |
+| (4,4) mu<=1 | 650 | a=1.20, 1.1118 mHa, 99.3628% | 1.55/1.20 j<=2, **1.107 mHa**, 99.365% | **+0.005** |
+| (5,5) mu<=1 | 1296 | NOT REACHED | NOT REACHED | -- |
+
+All three single-alpha baselines bracketed:
+(2,2) 1.00/1.05/1.10 -> 1.8260/1.8077/1.8972;
+(3,3) 1.10/1.15/1.20 -> 1.3090/1.3015/1.3171;
+(4,4) 1.10/1.20/1.30/1.40/1.50 -> 1.1344/1.1118/1.1120/1.1558/1.2829
+(and 1.60/2.00 -> 1.553/5.744 on a coarser scan).
+
+Two-block grids: (2,2) 16 points, optimum bracketed on all sides (1.45/1.10
+1.611, 1.55/1.15 1.698, 1.50/1.05 1.848, 1.60/1.20 2.046, 1.80/1.30 3.514).
+(3,3) 15 points, **none wins**. (4,4) six points measured -- 1.55/1.20 1.107,
+1.40/1.20 1.108, 1.50/1.15 1.110, 1.40/1.10 1.119, 1.60/1.00 1.198, 1.80/1.10
+1.242.
+
+*Recorded because it is the kind of thing that otherwise rots:* the last two
+(4,4) points (1.55/1.20, 1.40/1.20) completed MINUTES AFTER this section was
+first written and after the result was reported upstream, where they stood as
+"in flight, not measured" with the (4,4) gain given as +0.002. They are now
+measured, the row above is corrected to +0.005, and the correction was sent
+upstream rather than left to be discovered. Nothing else in the verdict moves.
+
+The (4,4) two-block optimum is a **plateau, not a point**: 1.107 / 1.108 / 1.110
+mHa across three different pairs (1.55/1.20, 1.40/1.20, 1.50/1.15), i.e. flat to
+3 uHa over a wide region of (a1, a2). That flatness is itself evidence that the
+second exponent has no real work to do at this basis size.
+
+**Reading, and it is not the one expected.** The +0.198 mHa at N=90 does not
+survive: at N >= 256 the two schemes are **equivalent to within 0.01 mHa**
+(-0.009 at (3,3), +0.005 at (4,4)), i.e. 0.7% and 0.43% of the respective
+residuals. The second exponent buys essentially nothing once the polynomial basis
+is large enough to span what it was providing. Note this is **not** the monotone
+collapse anticipated -- the sign flips back positive at (4,4). With a grid
+spacing of 0.05 in each exponent the honest statement is "indistinguishable from
+zero at N >= 256", not "monotonically dying".
+
+At (2,2) with j_split=1 block 2 holds a SINGLE radial degree, so that rung's win
+is obtained where "two-block" is really 2+1 -- a further reason not to read
++0.198 mHa as a trend.
+
+Read against the ledger's `k_n = Z/n` row, this is a milder version of the same
+shape one level up: per-BLOCK exponents do not destroy completeness the way
+per-FUNCTION ones did (no 60 mHa plateau; every point here is within 0.01 mHa of
+the single-alpha optimum at N >= 256), but neither do they buy accuracy.
+
+Cost, measured: one two-block energy point is 29-37 s at (2,2) mu<=1, 116-147 s
+at (3,3) mu<=1, and **606-621 s** at (4,4) mu<=1.
+
+### 8.5 Eight estimates of mine that measurement contradicted
+
+Continuing this section's own tally; the causes are the same two as the recorded
+six.
+
+1. **The 47x premise itself** (carried into the sprint): a raw-cond artifact;
+   two-block is 544x/78x BETTER on the metric that governs the solve.
+2. **The cross-block prediction**: refuted twice over (8.2).
+3. **"Block-diagonal re-basing will be roughly as good as production"**: wrong in
+   both directions -- 5624x-61,376x WORSE when the restriction is idle, and
+   BETTER than production once two exponents are present.
+4. **The `assoc` family would fix the restriction cost.** It was introduced for
+   that purpose. At a1 = a2 it does not (4.863e8 vs shift's 1.258e9, same order);
+   it is decisively better only WITH two exponents.
+5. **"(2,2)'s single-alpha optimum is below 1.0"**: wrong, and the cause was a
+   harness error of exactly the kind `memory/feedback_never_pipe_verification.md`
+   describes -- `tail -20` dropped the first two alpha values and shifted the
+   label-to-value mapping by two. The optimum is 1.05. Every later scan prints
+   its own alpha and is redirected, not piped.
+6. **"Two-block beats single-alpha by 0.331 mHa at (3,3)"**: wrong, and this was
+   the load-bearing error. It compared against a = 1.40, which is **(5,5)'s**
+   optimum, not (3,3)'s. Against (3,3)'s own optimum (1.15) two-block loses. An
+   unfair baseline manufactured the entire apparent gain; the fix was to
+   re-optimise the baseline at every rung, and then to re-optimise the two-block
+   grid at every rung too, since the first correction had made the comparison
+   unfair in the opposite direction.
+7. **"Straddle" framing**: wrong. The (2,2) optimum has BOTH exponents above
+   alpha_opt (1.50/1.10 vs 1.05); what matters is only that the blocks differ and
+   that the pair moves together (1.40/1.00 gives 1.958 mHa, 1.40/1.05 gives
+   1.653).
+8. **"The gain collapses monotonically with basis size"**: not supported. The
+   measured sequence is +0.198 / -0.009 / +0.005 mHa -- one large win at the
+   smallest rung and then two values straddling zero. This was drafted as a
+   monotone collapse before the on-ridge (4,4) points landed and is corrected
+   here rather than shipped.
+
+*Cause, both instances the same as the recorded six:* (i) carrying a number
+forward without re-measuring it in the current metric (the 47x was raw cond), and
+(ii) comparing against a baseline inherited from a different truncation. Item 6
+is the March "fix not built" failure again -- verifying the numbers while
+inheriting the framing.
+
+### 8.6 Where this leaves the exponent axis
+
+Conditioning is not the obstruction and never was: a two-block basis re-based in
+a family matched to block 2's own measure sits comfortably inside float64, and at
+the phase-1 pair it is better conditioned than the production single-block basis.
+The accuracy axis is where the idea fails to pay -- at fixed function count the
+two-block optimum and the single-alpha optimum agree to within 0.01 mHa at both
+(3,3) and (4,4), against residuals of 1.30 and 1.11 mHa. So the two-block
+exponent set is **not** a route to Paper 12's residual.
+
+What would close the axis outright: one (5,5) mu<=1 point if ever affordable (a two-block energy point
+there was launched and abandoned; extrapolating the 606-621 s measured at (4,4)
+is not attempted here). What is untouched by this result: Sec. 7's alternative,
+analytical kinetic energy for r12^p.

@@ -1,0 +1,74 @@
+--- (2,2) mu<=1 ---
+    Xtab(mpf) 30 blocks in 1s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1553347  D_e%=89.030  err=-19.140mHa  cond(norm)=3.8e+04  [2s]
+       tol-sweep D_e%: 1e-14:89.030 1e-13:89.030 1e-12:89.030 1e-11:89.030 1e-10:89.030
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1666866  D_e%=95.536  err=-7.788mHa  cond(norm)=3.3e+04  [4s]
+       tol-sweep D_e%: 1e-14:95.536 1e-13:95.536 1e-12:95.536 1e-11:95.536 1e-10:95.536
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1704341  D_e%=97.684  err=-4.041mHa  cond(norm)=2.8e+04  [4s]
+       tol-sweep D_e%: 1e-14:97.684 1e-13:97.684 1e-12:97.684 1e-11:97.684 1e-10:97.684
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1717988  D_e%=98.466  err=-2.676mHa  cond(norm)=2.5e+04  [4s]
+       tol-sweep D_e%: 1e-14:98.466 1e-13:98.466 1e-12:98.466 1e-11:98.466 1e-10:98.466
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1723849  D_e%=98.802  err=-2.090mHa  cond(norm)=2.2e+04  [4s]
+       tol-sweep D_e%: 1e-14:98.802 1e-13:98.802 1e-12:98.802 1e-11:98.802 1e-10:98.802
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1726490  D_e%=98.953  err=-1.826mHa  cond(norm)=2.0e+04  [4s]
+       tol-sweep D_e%: 1e-14:98.953 1e-13:98.953 1e-12:98.953 1e-11:98.953 1e-10:98.953
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1725778  D_e%=98.913  err=-1.897mHa  cond(norm)=1.8e+04  [4s]
+       tol-sweep D_e%: 1e-14:98.913 1e-13:98.913 1e-12:98.913 1e-11:98.913 1e-10:98.913
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1719162  D_e%=98.533  err=-2.559mHa  cond(norm)=1.7e+04  [4s]
+       tol-sweep D_e%: 1e-14:98.533 1e-13:98.533 1e-12:98.533 1e-11:98.533 1e-10:98.533
+    Xtab(mpf) 30 blocks in 2s
+    F tensors in 1s
+  laguerre_legendre [direct] (2,2) mu<=1  N=90 keep=90  E=-1.1702928  D_e%=97.603  err=-4.182mHa  cond(norm)=1.6e+04  [4s]
+       tol-sweep D_e%: 1e-14:97.603 1e-13:97.603 1e-12:97.603 1e-11:97.603 1e-10:97.603
+--- (3,3) mu<=1 ---
+    Xtab(mpf) 38 blocks in 4s
+    F tensors in 5s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1674525  D_e%=95.975  err=-7.023mHa  cond(norm)=8.2e+05  [17s]
+       tol-sweep D_e%: 1e-14:95.975 1e-13:95.975 1e-12:95.975 1e-11:95.975 1e-10:95.975
+    Xtab(mpf) 38 blocks in 4s
+    F tensors in 5s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1712283  D_e%=98.139  err=-3.247mHa  cond(norm)=6.6e+05  [19s]
+       tol-sweep D_e%: 1e-14:98.139 1e-13:98.139 1e-12:98.139 1e-11:98.139 1e-10:98.139
+    Xtab(mpf) 38 blocks in 5s
+    F tensors in 5s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1723771  D_e%=98.798  err=-2.098mHa  cond(norm)=5.5e+05  [20s]
+       tol-sweep D_e%: 1e-14:98.798 1e-13:98.798 1e-12:98.798 1e-11:98.798 1e-10:98.798
+    Xtab(mpf) 38 blocks in 5s
+    F tensors in 5s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1728000  D_e%=99.040  err=-1.675mHa  cond(norm)=4.7e+05  [20s]
+       tol-sweep D_e%: 1e-14:99.040 1e-13:99.040 1e-12:99.040 1e-11:99.040 1e-10:99.040
+    Xtab(mpf) 38 blocks in 4s
+    F tensors in 4s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1729966  D_e%=99.153  err=-1.478mHa  cond(norm)=4.0e+05  [18s]
+       tol-sweep D_e%: 1e-14:99.153 1e-13:99.153 1e-12:99.153 1e-11:99.153 1e-10:99.153
+    Xtab(mpf) 38 blocks in 4s
+    F tensors in 5s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1731064  D_e%=99.216  err=-1.369mHa  cond(norm)=3.5e+05  [19s]
+       tol-sweep D_e%: 1e-14:99.216 1e-13:99.216 1e-12:99.216 1e-11:99.216 1e-10:99.216
+    Xtab(mpf) 38 blocks in 5s
+    F tensors in 5s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1731660  D_e%=99.250  err=-1.309mHa  cond(norm)=3.1e+05  [20s]
+       tol-sweep D_e%: 1e-14:99.250 1e-13:99.250 1e-12:99.250 1e-11:99.250 1e-10:99.250
+    Xtab(mpf) 38 blocks in 5s
+    F tensors in 5s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1731579  D_e%=99.245  err=-1.317mHa  cond(norm)=2.7e+05  [21s]
+       tol-sweep D_e%: 1e-14:99.245 1e-13:99.245 1e-12:99.245 1e-11:99.245 1e-10:99.245
+    Xtab(mpf) 38 blocks in 6s
+    F tensors in 6s
+  laguerre_legendre [direct] (3,3) mu<=1  N=256 keep=256  E=-1.1730120  D_e%=99.161  err=-1.463mHa  cond(norm)=2.5e+05  [23s]
+       tol-sweep D_e%: 1e-14:99.161 1e-13:99.161 1e-12:99.161 1e-11:99.161 1e-10:99.161

@@ -1,0 +1,7 @@
+=== (4,4) mu<=1 single-alpha ===
+  alpha=1.000  E=-1.1733007  de=99.3270  err=1.1743 mHa  cond=9.05e+06  keep=650  var=True
+  alpha=1.100  E=-1.1733406  de=99.3498  err=1.1344 mHa  cond=7.84e+06  keep=650  var=True
+  alpha=1.200  E=-1.1733632  de=99.3628  err=1.1118 mHa  cond=6.87e+06  keep=650  var=True
+  alpha=1.300  E=-1.1733630  de=99.3627  err=1.1120 mHa  cond=6.09e+06  keep=650  var=True
+  alpha=1.400  E=-1.1733192  de=99.3375  err=1.1558 mHa  cond=5.45e+06  keep=650  var=True
+  alpha=1.500  E=-1.1731921  de=99.2647  err=1.2829 mHa  cond=4.91e+06  keep=650  var=True

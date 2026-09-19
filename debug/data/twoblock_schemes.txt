@@ -1,0 +1,22 @@
+=== scheme comparison: what does BLOCK-DIAGONALISING cost, and what does the SECOND EXPONENT cost? ===
+A = production family (no restriction).  B = block transform at a1 == a2 (restriction only).
+C = block transform, two exponents (restriction + cross-block).  cond is cond(norm).
+
+(3,3) mu<=1  j_split=1
+  A single a=1.4 prod-family         N=256   cond(mono,norm)=1.065e+11  cond(mono,raw)=3.028e+15  cond(rebased,norm)=2.237e+05  SPD=True/True  [5s]
+  B single a=1.4 block[shift]        N=256   cond(mono,norm)=1.065e+11  cond(mono,raw)=3.028e+15  cond(rebased,norm)=1.258e+09  SPD=True/True  [5s]
+  B single a=1.4 block[trunc]        N=256   cond(mono,norm)=1.065e+11  cond(mono,raw)=3.028e+15  cond(rebased,norm)=3.215e+08  SPD=True/True  [5s]
+  B single a=1.4 block[assoc]        N=256   cond(mono,norm)=1.065e+11  cond(mono,raw)=3.028e+15  cond(rebased,norm)=4.863e+08  SPD=True/True  [5s]
+  C two-block 1.6/1.0 block[shift]   N=256   cond(mono,norm)=1.957e+08  cond(mono,raw)=9.610e+16  cond(rebased,norm)=7.392e+05  SPD=True/True  [5s]
+  C two-block 1.6/1.0 block[trunc]   N=256   cond(mono,norm)=1.957e+08  cond(mono,raw)=9.610e+16  cond(rebased,norm)=1.909e+05  SPD=True/True  [5s]
+  C two-block 1.6/1.0 block[assoc]   N=256   cond(mono,norm)=1.957e+08  cond(mono,raw)=9.610e+16  cond(rebased,norm)=1.098e+05  SPD=True/True  [5s]
+
+(4,4) mu<=1  j_split=2
+  A single a=1.4 prod-family         N=650   cond(mono,norm)=3.669e+13  cond(mono,raw)=inf  cond(rebased,norm)=5.445e+06  SPD=True/True  [46s]
+  B single a=1.4 block[shift]        N=650   cond(mono,norm)=3.669e+13  cond(mono,raw)=inf  cond(rebased,norm)=3.342e+11  SPD=True/True  [100s]
+  B single a=1.4 block[trunc]        N=650   cond(mono,norm)=3.669e+13  cond(mono,raw)=inf  cond(rebased,norm)=8.088e+10  SPD=True/True  [92s]
+  B single a=1.4 block[assoc]        N=650   cond(mono,norm)=3.669e+13  cond(mono,raw)=inf  cond(rebased,norm)=1.267e+11  SPD=True/True  [108s]
+  C two-block 1.6/1.0 block[shift]   N=650   cond(mono,norm)=4.716e+11  cond(mono,raw)=inf  cond(rebased,norm)=1.101e+07  SPD=True/True  [120s]
+  C two-block 1.6/1.0 block[trunc]   N=650   cond(mono,norm)=4.716e+11  cond(mono,raw)=inf  cond(rebased,norm)=1.573e+07  SPD=True/True  [124s]
+  C two-block 1.6/1.0 block[assoc]   N=650   cond(mono,norm)=4.716e+11  cond(mono,raw)=inf  cond(rebased,norm)=1.323e+06  SPD=True/True  [126s]
+

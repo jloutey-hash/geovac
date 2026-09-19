@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.2] - 2026-09-18
+
+**The two-block radial exponent axis is measured and it buys nothing -- but the conditioning penalty that made it look risky never existed.** Both of the parent session's predictions were refuted by measurement, in opposite directions. Record: `debug/sprint_explicit_correlation_scoping_memo.md` Sec. 8; ledger row appended; driver `debug/multiexp_twoblock_energy.py`.
+
+### Accuracy: NEGATIVE, and the mechanism is a flat optimum
+
+Each side at its OWN optimum, equal function count, every point variational with all functions kept:
+
+| rung | N | single alpha | best two-block | gain |
+|:--|--:|:--|:--|--:|
+| (2,2) mu<=1 | 90 | a=1.05, 1.8077 mHa | 1.50/1.10, 1.610 | +0.198 mHa |
+| (3,3) mu<=1 | 256 | a=1.15, 1.3015 mHa | 1.45/1.12, 1.310 | **-0.009 mHa** |
+| (4,4) mu<=1 | 650 | a=1.20, 1.1118 mHa | 1.55/1.20, 1.107 | **+0.005 mHa** |
+
+15 points at (3,3), **none wins**; six at (4,4). The (2,2) win is discounted -- block 2 holds a single radial degree there, so it is 2+1, not two blocks. The decisive evidence is that the (4,4) optimum is a **plateau, not a point**: 1.107 / 1.108 / 1.110 mHa across three quite different pairs, flat to 3 uHa. An optimum that flat means the second exponent has no work to do, so the alpha_opt drift that motivated the axis is not relievable strain.
+
+Unlike the ledger's `k_n = Z/n` row (per-FUNCTION exponents: conditioning perfect at kappa=1.0000, completeness destroyed, ~60 mHa plateau), per-BLOCK exponents cost no completeness. They simply buy nothing.
+
+### The by-product that matters more: a retired conditioning artifact
+
+**The "47x two-block conditioning penalty" was measured on the wrong metric.** Raw cond is dominated by diagonal norm-spread, which `_normalized_solve` strips by construction -- Paper 12 sec:recondition already says the solve runs "on the unit-normalized (correlation) matrices ... removes the norm-spread inflation of cond". On the governing metric the two-block **monomial** overlap is **544x BETTER** than single-block at (3,3) (1.957e8 vs 1.065e11), 78x better at (4,4); re-based, 1.098e5 vs 2.237e5 and 1.323e6 vs 5.445e6. Two distinct decay rates make the functions *less* linearly dependent.
+
+Verified independently in the parent session: cond(norm) reproduces exactly (1.065e11 / 1.957e8, ratio 544.1x) while raw differs 1-17% between runs -- itself evidence that raw cond is unstable to compute on a near-indefinite matrix. The (4,4) single-alpha baseline was re-measured through production `recondition_energy` (1.112 mHa, cond 6.9e6, 650/650 kept) against the driver's 1.1118 / 6.87e6.
+
+**Generalizable lesson:** before concluding a basis is too ill-conditioned to use, check which cond the solver actually sees. The two can differ by six orders.
+
+### Two refuted predictions, recorded
+
+1. "Block-diagonal re-basing fixes within-block conditioning but leaves a cross-block penalty" -- refuted in both halves. The second exponent *removes* the block-diagonal restriction penalty (1.267e11 -> 1.323e6 at (4,4), a factor of 95,767) rather than adding a cross-block one.
+2. "The accuracy prize is ~0.1 mHa" -- measured ~0.005 mHa. Wrong by ~20x in the OPTIMISTIC direction, breaking a run of six pessimistic misses. The PI declined to accept the estimate and directed measurement instead; the measurement settled it.
+
+### A gap in the parent session's own falsifiers, closed
+
+The subagent added **FD**: mixed-rate (a1+a2) one-body overlap entries against 2D quadrature from the definition -- 14 substantive non-zero entries, rel 1.1e-31 to 5.9e-29. Every pre-existing *one-body* two-block check was degenerate (a1=a2, where the mixed rate never arises) or merely structural, so the rate a dispatch bug would hit had no independent check. (The V_ee half did have one: v5.14.1's F3 checked mixed pairs (2.80, 2.00) against 2D quadrature at 1.8e-41.)
+
+### Caveats and scope
+
+Conditioning depends on the exponent PAIR, not on two-block-ness: at the energy-optimal pairs two-block is 5-70x *worse* than single-alpha (4.80e8 vs 6.87e6) -- harmless, far inside float64, but a statement about a pair, not a law. Measured at **mu<=1 only**, (2,2)/(3,3)/(4,4); (5,5) NOT reached (477-621 s per (4,4) two-block point); mu<=2 untested.
+
+### Added / Changed
+
+- `debug/multiexp_twoblock_energy.py` -- block-diagonal transform (three schemes: shift / trunc / assoc), cond decomposition, energy, 4 falsifiers.
+- `debug/sprint_explicit_correlation_scoping_memo.md` -- new Sec. 8 (8.1 transform / 8.2 conditioning / 8.3 falsifiers / 8.4 accuracy / 8.5 eight contradicted estimates / 8.6 where the axis stands).
+- `docs/failed_approaches_ledger.md` -- the two-block row.
+- No `geovac/` file modified. Topological baseline 18/18 green.
+
 ## [v5.14.1] - 2026-09-18
 
 **The per-rate-pair V_ee X-table: the two-block prerequisite, built and validated at five levels.** No two-block H2 energy existed before this, because `pr.vee_mp` builds its X-table at one rate `c = 2*alpha` and at a split exponent that is simply the wrong operator. `debug/multiexp_vee_xtable.py` + `tests/test_paper12_multiexp_xtable.py`.

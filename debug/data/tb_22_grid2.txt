@@ -1,0 +1,3 @@
+  (2,2)mu<=1 js=1 1.15/0.95 [assoc]  N=90    E=-1.1726331  D_e%=98.944  err=1.842mHa  cond=3.22e+04  keep=90  var  [33s]
+  (2,2)mu<=1 js=1 1.3/1.0 [assoc]    N=90    E=-1.1727291  D_e%=98.999  err=1.746mHa  cond=1.67e+04  keep=90  var  [35s]
+  (2,2)mu<=1 js=1 1.4/1.05 [assoc]   N=90    E=-1.1728219  D_e%=99.053  err=1.653mHa  cond=1.38e+04  keep=90  var  [37s]

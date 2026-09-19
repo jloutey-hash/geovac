@@ -1,0 +1,5 @@
+  (2,2)mu<=1 js=1 1.45/1.1 [assoc]   N=90    E=-1.1728636  D_e%=99.076  err=1.611mHa  cond=1.54e+04  keep=90  var  [36s]
+  (2,2)mu<=1 js=1 1.5/1.05 [assoc]   N=90    E=-1.1726270  D_e%=98.941  err=1.848mHa  cond=8.38e+03  keep=90  var  [36s]
+  (2,2)mu<=1 js=1 1.5/1.1 [assoc]    N=90    E=-1.1728652  D_e%=99.077  err=1.610mHa  cond=1.18e+04  keep=90  var  [35s]
+  (2,2)mu<=1 js=1 1.55/1.15 [assoc]  N=90    E=-1.1727772  D_e%=99.027  err=1.698mHa  cond=1.31e+04  keep=90  var  [36s]
+  (2,2)mu<=1 js=1 1.45/1.05 [assoc]  N=90    E=-1.1727568  D_e%=99.015  err=1.718mHa  cond=1.06e+04  keep=90  var  [33s]

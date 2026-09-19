@@ -1,0 +1,37 @@
+
+=== FD: mixed-rate (1.6+1.0) overlap entries vs direct quadrature ===
+  (  0, 64) mu=0 rates=(2.60,3.20)  table=0.05571182494  quad=0.05571182494  rel=2.21e-31  ok
+  (  3,112) mu=0 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  (  7, 96) mu=0 rates=(2.60,3.20)  table=0.0  quad=0.0  rel=0.0  ok
+  ( 11, 80) mu=0 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  ( 15, 64) mu=0 rates=(2.60,3.20)  table=0.0  quad=0.0  rel=0.0  ok
+  ( 18,112) mu=0 rates=(2.60,2.00)  table=0.0  quad=0.0  rel=0.0  ok
+  ( 22, 96) mu=0 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  ( 26, 80) mu=0 rates=(2.60,2.00)  table=0.0  quad=0.0  rel=0.0  ok
+  ( 30, 64) mu=0 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  ( 33,112) mu=0 rates=(2.60,2.60)  table=0.7254179159  quad=0.7254179159  rel=2.72e-31  ok
+  ( 37, 96) mu=0 rates=(2.60,3.20)  table=0.0249761351  quad=0.0249761351  rel=4.94e-31  ok
+  ( 41, 80) mu=0 rates=(2.60,2.60)  table=0.6533834999  quad=0.6533834999  rel=6.04e-31  ok
+  ( 45, 64) mu=0 rates=(2.60,3.20)  table=0.01578913697  quad=0.01578913697  rel=5.87e-29  ok
+  ( 48,112) mu=0 rates=(2.60,2.00)  table=82.27881847  quad=82.27881847  rel=4.6e-31  ok
+  ( 52, 96) mu=0 rates=(2.60,2.60)  table=0.759535398  quad=0.759535398  rel=3.89e-31  ok
+  ( 56, 80) mu=0 rates=(2.60,2.00)  table=119.9110386  quad=119.9110386  rel=3.16e-31  ok
+  ( 60, 64) mu=0 rates=(2.60,2.60)  table=0.6533834999  quad=0.6533834999  rel=6.04e-31  ok
+  ( 63,112) mu=0 rates=(2.60,2.00)  table=0.0  quad=0.0  rel=0.0  ok
+  (131,224) mu=1 rates=(2.60,3.20)  table=0.0  quad=0.0  rel=0.0  ok
+  (135,208) mu=1 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  (139,192) mu=1 rates=(2.60,3.20)  table=0.0  quad=0.0  rel=0.0  ok
+  (142,240) mu=1 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  (146,224) mu=1 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  (150,208) mu=1 rates=(2.60,2.00)  table=0.0  quad=0.0  rel=0.0  ok
+  (154,192) mu=1 rates=(2.60,2.60)  table=0.0  quad=0.0  rel=0.0  ok
+  (157,240) mu=1 rates=(2.60,2.00)  table=103.8800259  quad=103.8800259  rel=0.0  ok
+  (161,224) mu=1 rates=(2.60,3.20)  table=0.1493996276  quad=0.1493996276  rel=1.65e-31  ok
+  (165,208) mu=1 rates=(2.60,2.60)  table=0.2074493248  quad=0.2074493248  rel=3.57e-31  ok
+  (169,192) mu=1 rates=(2.60,3.20)  table=0.09493284414  quad=0.09493284414  rel=1.06e-29  ok
+  (172,240) mu=1 rates=(2.60,2.60)  table=10.22008858  quad=10.22008858  rel=0.0  ok
+  (176,224) mu=1 rates=(2.60,2.60)  table=18.03737525  quad=18.03737525  rel=0.0  ok
+  (180,208) mu=1 rates=(2.60,2.00)  table=114.5888084  quad=114.5888084  rel=1.1e-31  ok
+  (184,192) mu=1 rates=(2.60,2.60)  table=16.20690314  quad=16.20690314  rel=3.89e-31  ok
+  (187,240) mu=1 rates=(2.60,2.00)  table=0.0  quad=0.0  rel=0.0  ok
+  34 mixed-rate entries checked of many; PASS

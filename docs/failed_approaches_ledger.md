@@ -146,3 +146,79 @@
 | Hydrogenic per-n scaling (k_n = Z/n) as an L²-orthonormal Sturmian replacement (2026-08-26) | 1 | It fixes conditioning perfectly (κ = 1.0000 exactly, vs 34→375 for shared-k) and the accuracy collapses AND **plateaus** near 60 mHa instead of converging — the bound hydrogenic set is incomplete (no continuum), while the shared-k Sturmian set is complete. **Non-orthogonality is the price of completeness**; the shared-k κ wall cannot be bought out by this route. (Distinct from free per-shell λ, which is complete and DOES work — same memo §9.) See debug/sprint_r12ci_gamma_transfer_memo.md §2. |
 | Explicit r₁₂ (James–Coolidge) on the PROLATE two-electron basis with FD kinetic energy (2026-03-13/14) | 2 | **Recorded 2026-09-18: this was missing from the ledger entirely**, so a new sprint could have re-derived it. r₁₂^p added to Paper 12's (ξ,η) basis, α-optimized, Numba 5D kernels. Explicit correlation IS transformative on this substrate: p=1 at **6** functions equals p=0 at **27** (both 79.0% of D_e), and p=2 reaches **94.7% at 9 functions** (C1, j=1,l=0,p=2, α=1.18). It did NOT reach 99%. **CORRECTED 2026-09-18 — this row's original diagnosis was wrong in two ways, both inherited from the March doc without checking the code.** (i) The fix is **not unbuilt**: `compute_hamiltonian_matrix(kinetic_method=...)` defaults to `'analytical'` (5D IBP, Numba kernel + Python fallback agreeing to 3e-12), `'fd'` is retained only "for comparison", and `solve_hylleraas` has no such parameter and calls the builder positionally — so **analytical is the only path any solver caller can reach.** (ii) The 94.7% the fix was supposed to restore is itself an **FD coarse-grid artifact**. Measured on a grid ladder at C1 (j=1,l=0,p=2, N=9, α=1.18): FD *falls* 98.11 → 87.23 → 85.54 → 86.29 → 85.87% (12/20/30/40/50) while analytical *rises* 72.73 → 77.44 → 81.04 → 82.95 → 84.02 → 84.73%; the two meet at **~85.9–86%**. So 9 functions support ~86%, and March's 94.7% and its 101.6% variational violation are the **same FD error at two severities** — one flattering, one impossible. FD was never the bottleneck to 99%; it was the source of the number that made 99% look close. The real limit at N=9 is **basis size**, since the same ladder converges the V_ee quadrature too. **What survives, and is encouraging:** explicit r₁₂ does work on this substrate — at matched grid, 9 → 18 functions gives 89.24 → 90.63% and still climbing (C2, analytical), against N=9's ~86% ceiling. Also recorded: the analytical p>0 path had **no test whatsoever** despite being the only reachable one. Do NOT import the hyperspherical/graph cusp negatives as bounds on this substrate — they name α, θ₁₂, S⁵ 1/d³ or adiabatic multiplicativity, none of which exist here. See debug/archive/chemistry_qc_arc/PROLATE_STRESS_TESTS.md §Phase 9–10; debug/data/hylleraas_convergence.txt. |
 | Pairing explicit r₁₂ with the Neumann algebraic V_ee by calling the existing path (2026-09-18) | 1 | The Neumann V_ee **cannot see the r₁₂ factor**: `compute_vee_matrix_neumann` depends on the basis only through the index tuples (j,k,l,m), and returns a **bit-identical matrix for p = 0, 1, 2 and 7** (max\|dV_ee\| = 0.000e+00) — the same V_ee for physically different functions. Its docstring said "p = 0 only for now" and nothing enforced it, so `solve_hylleraas(..., vee_method='neumann')` on a p>0 basis silently returned **E = −0.9035 Ha = −55.3% of D_e** (unbound) with no exception. Guarded 2026-09-18 (raises `NotImplementedError`; fire-tested 4/4, p=0 path unaffected, 89 tests green). Consequence for any future attempt: prolate + Neumann V_ee + explicit r₁₂ requires **extending the A_n/B_l/X_l moments to carry r₁₂**, not calling the existing path. The separate numerical-V_ee attempt is in Paper 12 §"Why r₁₂ basis functions help only partially" (86.8% at 18 fns, saturating under grid refinement; 7D integrals with an added radial singularity) — and that section explicitly says the comparison "says nothing about the cusp in either direction". |
+
+### Two-block (per-BLOCK) radial exponent set for Paper 12's H2 prolate CI (2026-09-18)
+
+**Count: 1. Verdict: NEGATIVE on accuracy, POSITIVE-and-free on conditioning.**
+
+**What was tried.** A two-block radial exponent -- degree `j <= j_split` gets a1,
+above it a2, via an `alpha_of(j)` map -- for the re-based prolate two-electron CI,
+at FIXED function count. Motivated by a real measured signal: alpha_opt drifts
+upward with basis size (~1.20-1.25 at (4,4) mu<=1, 1.40 at (5,5) mu<=1), which is
+the signature of one exponent straining to serve functions of different effective
+range, the same mechanism as Li's per-shell-lambda result (48.47 mHa there).
+
+**The accuracy result: the gain vanishes as the basis grows.** Each side at its
+OWN optimum, equal function count, all points variational with every function kept:
+
+| rung | N | single alpha (own optimum) | best two-block | gain |
+|:--|--:|:--|:--|--:|
+| (2,2) mu<=1 | 90 | a=1.05, 1.8077 mHa | 1.50/1.10 j<=1, 1.610 | +0.198 mHa |
+| (3,3) mu<=1 | 256 | a=1.15, 1.3015 mHa | 1.45/1.12 j<=1, 1.310 | **-0.009 mHa** |
+| (4,4) mu<=1 | 650 | a=1.20, 1.1118 mHa | 1.55/1.20 j<=2, 1.107 | **+0.005 mHa** |
+
+15 points scanned at (3,3) (**none wins**), six at (4,4). The (2,2) win is
+discounted: at j_max=2 with j_split=1, block 2 holds a SINGLE radial degree, so
+that row is 2+1, not two blocks. **Beyond the smallest rung the two schemes are
+equivalent to within 0.01 mHa** (0.7% and 0.43% of the respective residuals).
+
+**The mechanism, and it is the decisive evidence.** The (4,4) two-block optimum is
+a **PLATEAU, not a point** -- 1.107 / 1.108 / 1.110 mHa across three quite
+different pairs (1.55/1.20, 1.40/1.20, 1.50/1.15), flat to 3 uHa over a wide
+region of (a1,a2). An optimum that flat is direct evidence the second exponent has
+no work to do at this basis size. So the alpha_opt drift that motivated the axis is
+NOT relievable strain.
+
+**How this differs from the `k_n = Z/n` row (per-FUNCTION exponents).** That one
+fixed conditioning perfectly (kappa = 1.0000) and DESTROYED completeness,
+plateauing accuracy near 60 mHa. Per-BLOCK exponents do **not**: no completeness
+loss, no plateau, variational everywhere with all functions kept. They simply buy
+nothing. The two failure modes are distinct and should not be conflated.
+
+**THE USEFUL BY-PRODUCT, worth more than the negative: the "47x two-block
+conditioning penalty" NEVER EXISTED.** It was measured on RAW cond, which is
+dominated by diagonal norm-spread -- exactly what `_normalized_solve`'s diagonal
+congruence strips by construction (Paper 12 sec:recondition states this: the solve
+runs "on the unit-normalized (correlation) matrices ... removes the norm-spread
+inflation of cond"). On the metric that GOVERNS THE SOLVE the two-block **monomial**
+overlap is **544x better** than single-block at (3,3) (1.957e8 vs 1.065e11) and 78x
+better at (4,4). Re-based, two-block is also better: 1.098e5 vs 2.237e5 at (3,3),
+1.323e6 vs 5.445e6 at (4,4). Two distinct decay rates make the functions LESS
+linearly dependent, not more. Independently reproduced by the parent session:
+cond(norm) 1.065e11 / 1.957e8, ratio 544.1x (raw differs 1-17% run to run, which is
+itself evidence the raw metric is unstable to compute on a near-indefinite matrix).
+
+**Two predictions of the parent session's, both REFUTED by measurement:**
+(i) "block-diagonal re-basing fixes within-block conditioning but leaves a
+cross-block penalty" -- refuted in both halves; the second exponent *removes* the
+block-diagonal restriction penalty (4.863e8 -> 1.098e5 at (3,3); 1.267e11 ->
+1.323e6 at (4,4), a factor of 95,767) rather than adding a cross-block one.
+(ii) "the accuracy prize is ~0.1 mHa" -- measured ~0.005; wrong by ~20x, and in the
+OPTIMISTIC direction, breaking a run of six pessimistic misses.
+
+**Caveat, so "two-block conditions better" is not over-read:** conditioning depends
+on the exponent PAIR, not on two-block-ness. At the energy-optimal pairs two-block
+is 5-70x *worse* than single-alpha (4.80e8 at 1.40/1.20 vs 6.87e6). All harmless,
+all far inside float64 -- but it is a statement about a pair, not a law.
+
+**Scope, honestly.** mu<=1 only, at (2,2)/(3,3)/(4,4). (5,5) NOT reached (a two-block
+(4,4) point costs 477-621 s; the X-table alone is 8-11x the single-rate build).
+mu<=2 untested -- no reason an azimuthal channel should change a radial-exponent
+answer, but it is not measured.
+
+**Lesson.** Before concluding a basis is too ill-conditioned to use, check WHICH
+cond the solver actually sees. A raw condition number can be six orders worse than
+the one governing the eigenproblem, and this corpus nearly spent a sprint on that
+gap. Record: `debug/sprint_explicit_correlation_scoping_memo.md` Sec. 8;
+driver `debug/multiexp_twoblock_energy.py`; machinery `debug/multiexp_overlap_poc.py`
++ `debug/multiexp_vee_xtable.py`; CHANGELOG v5.14.2.

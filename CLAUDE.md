@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.14.1 (September 18, 2026)
+**Version:** v5.14.2 (September 18, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -118,6 +118,7 @@ it is a PI call.
 - **H₂'s residual is NOT more polynomial degree; the untested axis is the single shared α (2026-09-18, v5.13.9):** radial +1 buys 34 µHa, angular +1 buys 8 µHa — both saturated. No geminal build started. See debug/sprint_explicit_correlation_scoping_memo.md.
 - **Neumann V_ee silently ignored explicit r₁₂ — guarded (2026-09-18, v5.13.9):** bit-identical V_ee for p=0..7; p>0 returned −55.3% of D_e unbound, no error. Two missing prolate-r₁₂ ledger rows added. See CHANGELOG v5.13.9.
 - **One-body direct build wired in; H2 recondition 3.2x, V_ee is now the bound (2026-09-18, v5.13.8):** `engine="direct"` default; headline points reproduced to every printed digit. NOT "seconds" — that needs V_ee. A dead chemical-accuracy guard found + repaired. See debug/sprint_direct_build_memo.md.
+- **Two-block radial exponent: accuracy ~ZERO, and its conditioning penalty was an artifact (2026-09-18, v5.14.2):** gain +0.198/-0.009/+0.005 mHa as N grows; optimum is a plateau. Raw-vs-normalized cond differ 6 orders. See CHANGELOG + ledger.
 - **Per-rate-pair V_ee X-table banked (2026-09-18, v5.14.1):** the two-block prerequisite; 5 falsifiers incl. end-to-end energy identical to 10 dp. Cost 8-11x, not 2x. See CHANGELOG + debug/multiexp_vee_xtable.py.
 - **/checkpoint un-blocks main push (2026-09-17, v5.13.7, PI-directed):** the command hard-prohibited `git push origin main`, assuming a PR workflow this repo doesn't use — it commits directly to `main`, and its only remote is `old` (a local mirror; no GitHub origin). Step 4 now pushes the current branch (main included) to the configured remote under explicit PI direction; force-push and GitHub-Release prohibitions unchanged. See CHANGELOG.
 - **Closed-form B-seed large-basis regression FIXED (2026-09-17, v5.13.6):** the v5.13.4 seeds lose ~4s digits to cancellation at high (m,s); at the caller dps the unstable Q_l recurrence amplified that to garbage at large l_neumann — H2 (5,5)+δ flipped 99.767%→−220. Guard digits (8s+24) restore 1e-62 seed accuracy; fire-tested fast guard added (the (5,5)+δ headline had no regression test — "confirmed once, too slow"). Control: quadrature dps=40 = 99.767%. See CHANGELOG.
@@ -381,6 +382,7 @@ Critical institutional memory. **Do not re-derive these dead ends.** Category ta
 | Explicit r₁₂ (James–Coolidge) on the PROLATE 2e basis with FD kinetic energy (2026-03-13/14; diagnosis CORRECTED 2026-09-18 — the analytical fix was already built and default, and the 94.7% it was to restore is an FD coarse-grid artifact; FD and analytical meet at ~86% at N=9) | 2 |
 | Pairing explicit r₁₂ with the Neumann algebraic V_ee by calling the existing path (2026-09-18) | 1 |
 | Hydrogenic per-n scaling (k_n = Z/n) as an L²-orthonormal Sturmian replacement (2026-08-26) | 1 |
+| Two-block per-BLOCK radial exponent set for Paper 12's H₂ prolate CI (2026-09-18) — accuracy ~zero beyond the smallest basis (optimum is a plateau flat to 3 µHa); distinct from k_n=Z/n in costing no completeness; by-product = the "47× two-block conditioning penalty" was a RAW-cond artifact, two-block is 544× BETTER on the governing metric | 1 |
 
 ---
 

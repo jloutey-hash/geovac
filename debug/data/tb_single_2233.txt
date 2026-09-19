@@ -1,0 +1,16 @@
+=== (2,2) mu<=1 single-alpha ===
+  alpha=1.000  E=-1.1726490  de=98.9534  err=1.8260 mHa  cond=2.03e+04  keep=90  var=True
+  alpha=1.050  E=-1.1726673  de=98.9639  err=1.8077 mHa  cond=1.93e+04  keep=90  var=True
+  alpha=1.100  E=-1.1725778  de=98.9126  err=1.8972 mHa  cond=1.85e+04  keep=90  var=True
+  alpha=1.150  E=-1.1723424  de=98.7777  err=2.1326 mHa  cond=1.77e+04  keep=90  var=True
+  alpha=1.200  E=-1.1719162  de=98.5334  err=2.5588 mHa  cond=1.70e+04  keep=90  var=True
+  alpha=1.300  E=-1.1702928  de=97.6030  err=4.1822 mHa  cond=1.58e+04  keep=90  var=True
+  alpha=1.400  E=-1.1673019  de=95.8888  err=7.1731 mHa  cond=1.47e+04  keep=90  var=True
+=== (3,3) mu<=1 single-alpha ===
+  alpha=1.000  E=-1.1731064  de=99.2156  err=1.3686 mHa  cond=3.49e+05  keep=256  var=True
+  alpha=1.050  E=-1.1731423  de=99.2362  err=1.3327 mHa  cond=3.27e+05  keep=256  var=True
+  alpha=1.100  E=-1.1731660  de=99.2497  err=1.3090 mHa  cond=3.08e+05  keep=256  var=True
+  alpha=1.150  E=-1.1731735  de=99.2541  err=1.3015 mHa  cond=2.90e+05  keep=256  var=True
+  alpha=1.200  E=-1.1731579  de=99.2451  err=1.3171 mHa  cond=2.74e+05  keep=256  var=True
+  alpha=1.300  E=-1.1730120  de=99.1615  err=1.4630 mHa  cond=2.47e+05  keep=256  var=True
+  alpha=1.400  E=-1.1726082  de=98.9301  err=1.8668 mHa  cond=2.24e+05  keep=256  var=True
