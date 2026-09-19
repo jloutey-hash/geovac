@@ -58,11 +58,13 @@ The Pauli term count in the composed qubit Hamiltonian depends only on block top
 
 | Block topology | Molecules | Pauli terms |
 |:---------------|:----------|:-----------:|
-| 1 core + 1 bond pair (Q=30) | LiH, HF | 334 |
-| 1 core + 2 bond pairs (Q=50) | BeH₂, NH₃ | 556 |
-| 1 core + 2 bond pairs + 2 lone pairs (Q=70) | H₂O, CH₄ | 778 |
+| 1 core + 1 bond pair (Q=30) | LiH, HF | 838 |
+| 1 core + 2 bond pairs (Q=50) | BeH₂, NH₃ | 1,396 |
+| 1 core + 2 bond pairs + 2 lone pairs (Q=70) | H₂O, CH₄ | 1,954 |
 
-This means the O(Q^2.5) Pauli scaling is a property of the composed architecture itself, independent of chemistry. The scaling exponent and sparsity advantage are structural invariants of the block decomposition.
+This means the exactly-linear Pauli scaling (N_Pauli = 27.90 × Q) is a property of the composed architecture itself, independent of chemistry. The scaling law and the sparsity advantage are structural invariants of the block decomposition.
+
+*Counts corrected 2026-08-29 to the exact global-M_L ERI rule; the earlier pair-diagonal counts and the quadratic-ish scaling reading they supported are retired (CF-1 dissolved — a wrong-sign-q bug, not a convention).*
 
 ---
 
@@ -176,7 +178,7 @@ The hyperspherical framework (Level 3) extends to exotic two-particle systems vi
 
 | System | Particles | Charge function | Status | Error |
 |:-------|:----------|:----------------|:-------|:------|
-| He | e⁻e⁻ + Z=2 nucleus | -Z/sinα - Z/cosα + 1/r₁₂ | Production | 0.019% |
+| He | e⁻e⁻ + Z=2 nucleus | -Z/sinα - Z/cosα + 1/r₁₂ | Production | 0.022% raw (variational); 0.004% cusp-extrapolated (non-variational) |
 | H⁻ | e⁻e⁻ + Z=1 nucleus | Same as He at Z=1 | Tested (graph-native CI over-binds, standard CI works) | 2.1% (std FCI) |
 | PsH | e⁻e⁺ + Z=1 proton | -1/sinα + 1/cosα - 1/r₁₂ | Prototype | 4.1% |
 | Ps (positronium) | e⁻e⁺ (no nucleus) | Reduces to 1-body; graph identical to H | Trivial | exact |

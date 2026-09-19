@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.14.6] - 2026-09-19
+
+**The summary layer was carrying retired numbers that no gate could see. Two independent blind spots, both structural: C21 cannot read a `.md` file in any scope, and C17's CF-1 family had the right patterns but not the right files. 23 prose loci in 7 documents, 6 gate/registry fixes, every new criterion fire-tested.**
+
+### How it surfaced
+
+Not from a QA run — from a PI question about where the chemistry stands. Answering it required reading `claims_register.md`, `validation_benchmarks.md`, `papers/INDEX.md` and `SCOPE_BOUNDARY.md`, and three of the four led with figures retired on 2026-08-29. Every relevant gate reported PASS, before and after.
+
+### Blind spot 1 -- C21 cannot examine a `.md` file, in any scope
+
+`check_numeric_consistency.py` builds its file list through `qa_scopes.resolve()`, which calls `all_paper_files()` -- a glob over `papers/**/*.tex`. The retired literals were all correctly registered (`11.10`, `9.23`, `334`, `778`, `190`); they were simply in files the gate cannot open. `papers/INDEX.md` is invisible for the same reason despite living under `papers/`. **NOT fixed here:** widening `all_paper_files()` would change scope for ~12 gates at once, which is an instrument change and a PI call. Flagged, not done.
+
+### Blind spot 2 -- right patterns, wrong files
+
+`composed-rule-a-retired-figures` (in `check_headline_numbers.py`) matches `O(Q^2.5)`, `11.10 x Q`, `1712x`, `9.23` and `190x` -- and declared four files, all group4. Its own note records the class as "live at ~20 loci across 7 documents", all papers. The summary layer was never in scope. Two further gaps found while fixing it: every alternative is LaTeX-shaped (`\times`, `1{,}712`, braced exponents) so the Markdown documents would still have escaped after a files-only widening; and `validation_benchmarks.md` carried `11.11`, not `11.10`, so no exact-value check could have caught it either.
+
+### A semantic reversal, not a stale digit
+
+`validation_benchmarks.md` read `d-block Pauli/Q | 9.23 (< main-group 11.11) | d-orbital sparsity advantage`. Under the exact rule that is 30.03 vs 27.90 -- the inequality **reverses**, and the registry's own provenance for `composed_coeff_d` reads "DENSER than main-group". The row's claim was inverted, not merely out of date: exactly the Sec. 15 rule-2 case ("the d-block is the sparsest" reversed outright). Corrected as a claim, not a number.
+
+### Chemistry sweep completed
+
+- **The v5.14.5 `0.19%` sweep missed the group2 synthesis at L828**, in a file that sweep's family already declared. Cause measured: `WINDOW = 3` governs the `require_nearby` context test, the hit is at L828, and the only `Graph-native` context is the subsection heading at L821 -- four lines outside. The pattern fired and the context test discarded it. Fixed with a precise in-window term (`loutey_fci_atoms`), **not** a global window widening, which would have weakened every family's exemption test.
+- **`5000x accuracy improvement`** (paper_11 L427/L507, synthesis L286) is not stale but **underivable**: its denominator (H2+ `0.0002%`) was retired in v5.14.3 and only the numerator (FD 1.01%) survives. The paper's own convergence table already read "machine precision" in that cell. It is also suspect on its face -- 5000 is the FD grid size `N_xi` in the same sentence, so the ratio was plausibly never computed. No family could match it (the p11 family keys on `0.0002`).
+- **`SCOPE_BOUNDARY.md`** carried three retired values in the project's most newcomer-facing document: the nonexistent He `0.019%`, the `O(Q^2.5)` reading, and the `334/556/778` block-topology counts. It was in no family's files list.
+- **Paper 17 provenance:** Huber & Herzberg is an experimental spectroscopic-constants compilation; the BeH+ caption described it as "high-level ab initio calculations". Also reconciled the LiH headline -- the abstract led with 6.4% (ab initio PK) while Sec. outlook calls 5.3% (l-dependent PK) "the headline". Both are real, different PK variants; the paper now says which is which.
+
+### Guards (separate pass, per Sec. 9; every one fire-tested)
+
+Fire-tested through `scan_entry`'s `text_override` hook rather than by planting into real files -- this session's work was uncommitted, so a git-checkout revert would have destroyed it. 27 checks, all passing: each criterion fires on the wrong answer it names, stays silent on the right one (negative controls: canonical `27.90 x Q`, `838`, `0.022%`, and `N_xi = 5000` as a grid size), and resolves the file that carried the zombie. The L828 fix carries a **before/after control**: the old `require_nearby` returns 0 hits on the identical text, the new one fires.
+
+1. `composed-rule-a-retired-figures` -- plain-text/Unicode pattern variants + the four summary documents.
+2. `composed-lih-market-test-retired` -- Markdown table-cell form (`| 334 |`, with "Pauli" only in the column header) + `556`/`778`, which had no pattern at all + `SCOPE_BOUNDARY.md`.
+3. `p13-he-graphnative-019-nmax7` -- `require_nearby` widened by one in-window term.
+4. `p13-he-0019pct-nonexistent` -- `SCOPE_BOUNDARY.md` added; its own `canonical_note` was quoting the `0.19%` that v5.14.5 retired.
+5. **New:** `p11-spectral-5000x-underivable`.
+6. Registry: `beh2_composed_pauli` added (test-backed; the middle row of the block-topology table was the only one unregistered, which is why `556` was unguarded), plus retired literals `11.11` and `556`.
+
+### Known-incomplete, deliberately
+
+- C21's `.md` blindness (above) -- PI call.
+- The Hoggan citation for the "Slater orbitals have no product theorem" negative is still unattached (`paper_59` L108-111, `paper_58` L515-517 assert it without a source). Deferred rather than scope-crept: it needs a new bibitem in two papers.
+- `papers/archive/paper_21` and the two frozen `.done.md` files still carry `0.0002%`. The DoDs are deliberately frozen; the archive tombstone is a disposition call.
+- `/qa group2` remains **INCONCLUSIVE**, not passed -- only the CODE dimension ever ran. Claims, citations, synthesis and completeness never executed on Papers 11/12/13. This entry does not change that.
+
+### Verification
+
+C17 headline gate PASS (36 families, was 35), C17 retracted-terms PASS, C21 PASS (salience 721 -> 718 as the registry additions absorbed numerals), 24 mirror tests pass, all 13 group2 papers compile with zero undefined references or citations, C19 PASS, prose-continuity PASS. No `geovac/` file modified, so no `/regression` trigger.
+
+### Follow-on, same version: the TMR pivot and the walls architecture-swap audit
+
+Two further pieces landed after the cleanup above, in the same uncommitted batch.
+
+**Paper 12 cusp-contradiction fix (TMR pivot).** A strategy pass on Tao–McCurdy–Rescigno (PRA 82, 023423) — the one method that beats GeoVac in its own prolate coordinates (0.05 mHa vs 0.32) — surfaced a live internal contradiction in Paper 12: the newest `[MEASURED 2026-09-18]` paragraph (§sec:recondition, L1249) states the knob-elimination "should not be quoted as … a demonstration that the remainder *is* the electron-electron cusp," while a sibling body paragraph (L1293) and conclusion bullet 7 (L1481) both still asserted "the residual **is** … the e–e cusp." The two older loci were not swept when the newer paragraph landed — the §9 summary-surface class, paraphrase-form, uncatchable by any phrase registry. Both corrected to the owner paragraph's discipline (radial completeness and the cusp are unseparated candidates; the residual must not be attributed to the cusp). TMR's 0.05 mHa is not like-for-like — its own l_max=2 point is 1.22 mHa (worse than GeoVac's headline) and its basis is ~2 orders larger. PI-directed 2026-09-19: the qualifier is now applied at Paper 12's comparison locus (§ "not a matched pair", L1385); the other three TMR citations use it for the narrower "no non-analytic r_{12} term needed" point and are unaffected. Memory `polyatomic_state_of_play.md` + `geovac_axis_map.md` updated with the measured facts.
+
+**Walls architecture-swap audit (composed → prolate-native diatomic).** First run of a new *kind* of `/walls` pass — an audit of the §3 ledger against an architecture change rather than a shared-mechanism cluster, filling the `rests-on:` edge the negative-side record has never had. PI-adjudicated. Durable record: `docs/walls/register.md` § "Architecture-swap audit". Of ~50 in-scope atom/diatomic rows: **MIS-SCOPED 25 · SUPERSEDED 1 · STANDING 23 · STANDS-BUT-ORTHOGONAL 12 · OPEN-LEANING 1 · HELD 2.** Primary gate (PI caution): triatomic+ excluded — composed is their sole architecture, so those walls STAND, not stale. Integrity rule: every MIS-SCOPED gates behind one unbuilt artifact (a prolate ≥4e two-center CI); MIS-SCOPED ≠ "works now." The anti-laundering check caught real geometry-independent negatives (R12 conditioning, basis completeness, selection rules, e-e cusp) and kept them STANDING rather than clearing them. The filled `rests-on:` column is the seed of a general negative-side dependency mechanism (the wall-staleness gap identified 2026-09-19). Spec: `debug/sprint_walls_composed_prolate_scope_memo.md`. Guardrail rows (Papers 8-9 / FCI-M / Track DF) recorded as "does not constrain prolate-native" — NOT retired; each still governs its own domain. Gates re-run after the register write: C17 headline + retracted-terms + C21 all PASS.
+
+### Files
+
+`docs/claims_register.md`, `docs/validation_benchmarks.md`, `papers/INDEX.md`, `SCOPE_BOUNDARY.md`, `papers/synthesis/group2_quantum_chemistry_synthesis.tex`, `papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex`, `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex`, `papers/group2_quantum_chemistry/paper_17_composed_geometries.tex`, `docs/walls/register.md`, `debug/qa/check_headline_numbers.py`, `debug/qa/numeric_registry.py`, `debug/sprint_walls_composed_prolate_scope_memo.md` (new), `CLAUDE.md` (version + Sec. 2). PDFs rebuilt only for the papers whose source changed (11, 12, 17 + group2 synthesis). NOTE: this version's cleanup added a C17 headline family and rescoped another — a deterministic-check change; kept as a patch per the precedent of prior gate-implementation tweaks (v5.10.5 C21 instrumentation), but flagged for the PI in case the §13.11 standing exception's spirit warrants re-designating v5.14.6 as a minor.
+
 ## [v5.14.5] - 2026-09-19
 
 **The third wrong He headline swept: graph-native He CI "0.19% @ n_max=7" -> the measured 0.216%. Gate-first, 17 loci, with a non-circular validation that made the correction safe rather than a mis-correction.**

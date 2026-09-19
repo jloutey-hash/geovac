@@ -4,7 +4,7 @@
 >
 > **Vocabulary.** Status: STANDING / SOFTENED / BREACHED / MIS-SCOPED / SUPERSEDED. Kind: HARD (proven structural impossibility) / SOFT (engineering·convention·precision·basis-limited, revisit-candidate) / OPEN-LEANING (tested-negative, a named better attempt exists). Cluster maturity: CRYSTALLIZED / FORMING / SINGLETON.
 
-**Last run:** 2026-08-25 (+ `/aha` v5.1.2 kill-banking; bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked).
+**Last run:** 2026-08-25 (+ `/aha` v5.1.2 kill-banking; bootstrap + accuracy-axis + composition-wall 3-body refinement — CHEM-ACCURACY worked fully, incl. the γ-determination arc and the polyatomic irreducible-three-body result; other clusters named, not yet worked). · **2026-09-19 (v5.14.6):** architecture-swap audit **composed → prolate-native diatomic**, PI-adjudicated — a new *kind* of pass (audit against an architecture change, not a shared-mechanism cluster); see the dedicated section below.
 
 ---
 
@@ -109,6 +109,115 @@ The register carried `||[P_A,P_B]|| = 0.50` as a measurement. It is the *saturat
 **Falsifier for the split.** A congruence that is simultaneously (i) `l`-block diagonal and (ii) orthogonalizing, on a metric with nonzero inter-center coupling -- which that result forbids outright; or a locality repair that reaches the `chi -> 0` chirp, which would have to change the *symbol*, not the matrix.
 
 **Scope, now measured.** The breach reaches **water's `A_1` block** -- the symmetry-inequivalent-center case where the gerade lever fails: raw `cond ~ N^1.96` (independently reproducing the paper's `N^1.97`) against a bounded `38.45 -> 44.06` over `N = 12..192`. It works because the degeneracy's DIRECTION is geometry-independent: at `chi = pi` every block symbol tends to `j0(0) = 1`, so for `M` centers the matrix symbol is the rank-one all-ones matrix and its null space has dimension `M-1`, fixed. Control: the *discriminating* test is the SELECTIVE `blockdiag(P,I)` applied in the UNROTATED frame -- it grows as `N^3.79` and reaches `4.4e6` at `N=192`, **106x WORSE than untreated**, while the same band aligned to the null direction is flat at 44; so the ALIGNMENT, not the banding, is doing the work. (The uniform `blockdiag(P,P)` is NOT a valid control here: it commutes with the rotation to `3e-13` and so cannot discriminate it -- it runs `N^1.94`, essentially the raw `N^1.96`. Corrected 2026-09-13, DELTA #3.) Remaining scope: `s`-sector shared-scale bases at `M = 2` and **non-collinear** `M = 3`; the **collinear case is open and is NOT claimed** (corrected 2026-09-12: the unqualified "M = 2, 3" authorised dispatch into exactly the regime Paper 60 declines, and BeH2 and CO2 are collinear and in this corpus's own library). Mechanism: for collinear centres `P D2 P` is rank ONE, so only one of the `M-1` null directions opens at order `p^2` and the rest at 4, 6, ..., 2(M-1). **Resource claim closed 2026-09-12 (v5.11.3):** `G` has a DIRECT block-encoding — its symbol is a bounded ratio, `||ratio||_inf = 0.3716 = ||G||`, so a circulant-embedded Toeplitz-minus-Hankel encoding carries `alpha = O(1)` instead of the composed `O(n^2)`; the resulting whitening reaches the amplitude floor to 0.13% with residual conditioning 1.234. The metric penalty scales as `n` against the untreated `n^3`. What remains uncompiled is the circuit, not the construction.
+
+---
+
+## Architecture-swap audit: composed → prolate-native diatomic (2026-09-19, v5.14.6; PI-adjudicated)
+
+**What this is.** Not a shared-mechanism cluster — an audit of the §3 ledger against a
+specific architecture change (the corpus's move away from composed toward prolate-native
+diatomics, Paper 12 v5.13+). It fills, retroactively, the `rests-on:` edge the
+negative-side record has never had: which architectural component each wall's *proof*
+used. Fuller spec: `debug/sprint_walls_composed_prolate_scope_memo.md` (transient; the
+load-bearing rules are restated here so this record stands alone).
+
+**Primary gate (PI caution).** The audit bites only where an architecture *choice*
+exists. Atom/diatomic → prolate-native / NOCI / exact-integral are real alternatives →
+in scope. **Triatomic+ (3+ centers): composed is the SOLE architecture (prolate has two
+foci); its walls there are permanent constraints, not stale artifacts → OUT OF SCOPE,
+STAND by default.** Verdicts are per (wall × system-class): the same PK wall is
+MIS-SCOPED for diatomics and STANDING for triatomics.
+
+**Integrity rule (non-negotiable).** MIS-SCOPED = "proven on machinery the prolate-native
+target drops, so it no longer *informs* the new program." NOT "the approach works."
+The entire MIS-SCOPED set gates behind ONE unbuilt artifact — a prolate-native
+≥4-electron two-center CI (LiH 4e, NaH ~12e); only the 2-electron case (H₂) exists, and
+nothing shows a ≥4e one binds or reaches accuracy. Reactivating any MIS-SCOPED approach
+needs a fresh positive test, never the removal of the old wall
+([[feedback_validate_before_reducing]]).
+
+**`rests-on:` vocabulary:** COMPOSED / PK / NESTED / CONCAT / LÖWDIN / HYDROGENIC-PER-N /
+ADIABATIC-HYPERSPHERICAL / GEOMETRY-2FOCI / TWO-BODY-CUSP / SYMMETRY-SPARSITY /
+PROLATE-NATIVE.
+
+### MIS-SCOPED — proven on dropped machinery; do NOT read as "now works" (25 rows)
+
+| Row(s) | rests-on | guardrail | anti-laundering: fresh test to reactivate |
+|:--|:--|:--|:--|
+| W1e / second-row cluster: P1–P16, P21 (PK barrier, screened-Schrödinger, multi-zeta, 3-bucket, kernel-shape, rank-1 PK, mean-field J–K, Schmidt, [Ne] correlation, max_n=4, DMRG-FCIDUMP, LiH-qubit-binds, kwargs, explicit-core HF, off-diag cross-block h1, spectral-action, NaH Z_orb) | COMPOSED / PK / LÖWDIN | P15 adj. (Track DF) | Root (§3 lines 103/125): heteronuclear binding needs cross-center coupling → Löwdin across incompatible per-center coords → destroys Gaunt sparsity. Prolate has one shared coord + native orthogonality, so the dropped component is exactly what these rest on. **Does NOT mean NaH/LiH bind.** Test: build a prolate explicit-/all-electron LiH/NaH CI with Neumann V_ee and *measure* binding + R_eq. Unbuilt. |
+| C2 — PK modifications (×6) | PK | — | Prolate 4e LiH is still a hard 4e two-center CI; PK negatives don't make it easy, only don't bear on the PK-free route. Test: prolate explicit-core LiH CI. |
+| C4 — inter-group antisymmetry (×3) | COMPOSED | — | Prolate 2e has one coordinate system → antisymmetry native (shown for H₂). ≥3e needs a shared-coordinate antisymmetrized prolate CI; unbuilt. |
+| C8 — l_max via 2D solver | COMPOSED / PK | — | Prolate angular convergence is structured (split-region Legendre, 3j-terminating; Paper 12 azimuthal 92.4→99.1%), not divergent. |
+| C10 — TC Jastrow in adiabatic solver (disagreement #2: OPEN-LEANING → MIS-SCOPED) | ADIABATIC-HYPERSPHERICAL + TWO-BODY-CUSP | — | Row's own lesson: "needs a direct variational/FCI framework, not adiabatic." Prolate Neumann-CI *is* direct-CI. Test = P37/P38 (partially run; caps at basis size, needs the Neumann A_n/B_l/X_l moments extended for r₁₂). |
+| C15 — coupled composition (cross-block ERIs) | COMPOSED / PK | — | Its Pauli/1-norm/29%-error came from a composed basis lacking two-center h1; prolate builds two-center integrals natively. Test: prolate ≥4e CI. |
+| C16, C17 — single-center / charge-center nested LiH | NESTED | **8-9 + Track DF** | Single-center-basis limitations; prolate uses the two-foci coordinate natively. Papers 8-9's scoped theorem UNAFFECTED (still governs single-center Sturmian). Test: prolate 4e LiH CI. |
+| C23 — balanced+frozen-core **NaH only** (MgH₂ excluded, triatomic; disagreement #4: row split) | COMPOSED / frozen-core | — | "Frozen [Ne] hides core screening" is a composed frozen-core artifact. Test: prolate explicit-core NaH CI (~12e — enormous, unbuilt). Strong caveat: nothing suggests tractable. |
+
+### SUPERSEDED (1)
+**C1 — LCAO / single-S³ / graph concatenation** (disagreement #3). MIS-SCOPED w.r.t.
+prolate *and* architecture-locked corpus-wide (CLAUDE.md §2, v0.9.x). Guardrail
+**FCI-M** — recorded superseded, **not retired**; FCI-M still governs any future
+graph-concatenation proposal. (Prolate H₂/H₂⁺ already bind at machine precision /
+99.8%, so the "R-independent kinetic energy → monotone PES" wall describes a dropped
+architecture.)
+
+### STANDING — bind the new program, or hold geometry-independently (23)
+
+| Row(s) | rests-on | why it travels |
+|:--|:--|:--|
+| **Tier 1 — the real constraints:** P35 (exact-up-to-one-seed two-center ERI), P37 (r₁₂/FD on prolate 2e), P38 (r₁₂+Neumann), P39 (two-block radial exponent) | PROLATE-NATIVE | Native to the target; directly constrain it. P38: extending r₁₂ needs the Neumann moments extended, not the existing path. |
+| **Two-foci ceiling / three-center genus jump** | GEOMETRY-2FOCI | The hard architectural cap — the prolate program stops at diatomics. |
+| Cusp: C3, C11, C12, C14 + Group-C P26–P33 | TWO-BODY-CUSP | The e-e cusp is a two-body wavefunction feature, basis/geometry-independent (Paper 18 embedding tier). Re-scope only the hyperspherical (α,θ₁₂) parametrization; keep the substance. |
+| Graph-native He: C20, C21; off-axis atom: C19, C22 | graph-native-S³ / atomic | Never touched composed; the swap has no purchase. |
+| P22 (SO(4)-Wigner-D probe, falsified), P23 (overlap-slope tilt, curve-fit artifact) | diagnostic | Geometry-independent falsified diagnostics. |
+| **P34 — k_n = Z/n completeness** (disagreement #1: OPEN-LEANING → STANDING) | HYDROGENIC-PER-N / completeness | A basis-completeness theorem ("non-orthogonality is the price of completeness"; bound per-function-scaled sets plateau ~60 mHa) that travels to *any* per-function-scaled orthonormal set incl. prolate; STANDING is the conservative call. Its per-BLOCK sibling (P39) already settled that per-block does not cost completeness. |
+
+### STANDS-BUT-ORTHOGONAL — still true, but bind qubit-resource, not bond length (12)
+C9 (Sturmian-CI 1-norm; guardrail **8-9**), C13, C18 (guardrail **Track DF**), P17–P20
+(relativistic tapering — also selection-rule facts true in any basis), P24, P25 (Löwdin /
+non-orthogonal encoding; guardrail-adjacent Track DF), P32, P36, P40.
+
+### OPEN-LEANING — premise changed, untested (1)
+**C5 — full N-electron radial solvers** (adiabatic / coupled-channel / 2D). Hyperspherical-
+solver walls; prolate uses Neumann-CI. The "angular basis is the bottleneck" lesson may
+or may not travel; needs a prolate re-test.
+
+### HELD — STANDS-by-default, PI-directed not-classified (2)
+**C6** (geometric elevation) and **C7** (diagnostic arcs — ledger says only "see
+CHANGELOG"). Ledger text too thin to classify faithfully; not guessed. Revisit needs the
+CHANGELOG detail.
+
+### Guardrail adjudication (PI-confirmed 2026-09-19)
+The 5 core + 3 adjacent guardrail rows (C1 FCI-M; C9, C16, C17 Papers 8-9 / Track DF;
+C18 Track DF; adjacent P15, P24, P25) are recorded as **"does not constrain
+prolate-native diatomics" — NOT retired.** Each guardrail still governs its own domain:
+Papers 8-9's scoped Sturmian theorem still owns single-center encodings; FCI-M still owns
+graph concatenation; Track DF still owns nested single-Hilbert-space. Re-scoping-for-
+prolate ≠ weakening the guardrail.
+
+### Tally
+MIS-SCOPED 25 · SUPERSEDED 1 (C1) · STANDING 23 · STANDS-BUT-ORTHOGONAL 12 ·
+OPEN-LEANING 1 (C5) · HELD 2 (C6, C7). Category rows bundle multiple sub-instances, so
+these are *row* counts, not approach counts. **Excluded as triatomic+ (STAND by
+default):** polyatomic coupling ×3, Poly-0/Poly-2 three-center, gerade lever, Woodbury
+SW-penalty, MgH₂. **Excluded as non-chemistry:** the QED / gravity / periods / α /
+nuclear / Lorentzian / MZV rows.
+
+### Falsifier / what would move these
+Any MIS-SCOPED row flips back to STANDING the moment a prolate-native ≥4e two-center CI
+is built and *fails* for the same reason the composed row failed — i.e. if the
+obstruction proves geometry-independent after all. The audit's integrity rests on that CI
+being built before any MIS-SCOPED approach is treated as live. The `rests-on:` column
+above is the first instance of the negative-side dependency edge; if it earns its keep,
+promoting it to a standing field is the general fix for wall-staleness under future
+component swaps.
+
+### The load-bearing takeaway
+The audit did not clear a path; it showed the composed/PK/nested ledger is about
+machinery the prolate direction leaves behind, so it neither obstructs nor endorses that
+direction. The walls that actually bind are the recent PROLATE-NATIVE ones (Tier 1) and
+the two-foci ceiling. **Unobstructed by old evidence, entirely untested — gated on one
+unbuilt prolate ≥4e CI.**
 
 ---
 

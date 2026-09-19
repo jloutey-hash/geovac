@@ -1101,6 +1101,19 @@ MEASURED = {
         value=1953, convention="non-identity Pauli, H2O composed Q=70",
         provenance="MEASURED 2026-08-30",
         aliases={1954: "including identity"}),
+    # Added 2026-09-19 (v5.14.6).  The LiH and H2O composed counts were
+    # registered; BeH2 -- the middle row of the same block-topology table --
+    # was not, so the retired 556 had no canonical value to be checked
+    # against and SCOPE_BOUNDARY.md carried it unguarded.
+    "beh2_composed_pauli": dict(
+        value=1395, convention="non-identity Pauli, BeH2 composed Q=50",
+        provenance="CITED, test-backed: tests/test_general_builder.py:112 "
+                   "asserts N_pauli in (1395, 1396) and "
+                   "tests/test_spin_ful_composed.py:35 pins 1396 for "
+                   "beh2_spec; consistent with 27.90 x 50 = 1395 and with the "
+                   "exact-rule regression row in docs/validation_benchmarks.md "
+                   "(838 / 1,396 / 1,954). Retired pair-diagonal value: 556.",
+        aliases={1396: "including identity"}),
     "exp_composed_3pt": dict(
         value=3.1685, convention="within-molecule exponent, 3 pts n_max=1..3",
         provenance="MEASURED 2026-08-30; the paper's small-basis 3.17"),
@@ -1325,7 +1338,14 @@ RETIRED = {
     190:     ("ratio_ccpvdz_lih",   r"cc-pVDZ|cc-pVTZ|Gaussian",
                                     r"page|Rev\.|Q = 190|qubits"),
     11.10:   ("composed_coeff",     r"coefficient|per qubit|\\times Q|Pauli/", None),
+    # 11.11 added 2026-09-19 (v5.14.6): docs/validation_benchmarks.md carried
+    # the ratio as "11.11 +- 0.1", not 11.10, so an exact-value check on the
+    # registered retired literal could not have caught it even in scope.
+    11.11:   ("composed_coeff",     r"coefficient|per qubit|\\times Q|Pauli/", None),
     9.23:    ("composed_coeff_d",   r"coefficient|per qubit|Pauli/", None),
+    # 556 added 2026-09-19 (v5.14.6): the BeH2 block-topology count, retired
+    # with 334/778 but never registered alongside them.
+    556:     ("beh2_composed_pauli", r"Pauli",                  None),
     333:     ("lih_composed_pauli", r"Pauli",                   None),
     # (334 is defined once, above, with its forbidden context: a second
     #  334 entry here used to overwrite it and drop that guard.)

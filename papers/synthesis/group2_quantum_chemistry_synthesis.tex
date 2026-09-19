@@ -86,10 +86,13 @@ point group~\cite{loutey_paper58}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
 machine precision for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
 $l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
-for He, ${\sim}99.1\%$ of $D_e$ for $\mathrm{H}_2$ in prolate
-spheroidal coordinates at $|m| \le 1$ and $96.0\%$ (cusp-corrected) in
+for He, $99.81\%$ of $D_e$ ($0.32$~mHa, inside chemical accuracy) for
+$\mathrm{H}_2$ in prolate spheroidal coordinates at the variational
+optimum $\alpha = 1.40$---the fixed-$\alpha$ ladder endpoint is
+$99.77\%$ ($0.41$~mHa)---and $96.0\%$ (cusp-corrected) in
 the molecule-frame hyperspherical treatment---two routes to the same
-system, not a matched pair---and---in the
+system, not a matched pair, and $\mathrm{H}_2$'s natural geometry is the
+prolate spheroid---and---in the
 composed architecture, whose accuracy bottleneck is the
 Phillips--Kleinman pseudopotential---$5.3\%$, $11.7\%$, and $19.4\%$
 equilibrium-bond-length error for LiH, $\mathrm{BeH}_2$, and
@@ -169,7 +172,7 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & machine precision (spectral Laguerre) & \cite{loutey_paper11} \\
 3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $0.216\%$ (graph-native CI) & \cite{loutey_paper13} \\
 4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, cusp-corrected) & \cite{loutey_paper15} \\
-4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal, $|m|\le1$ & ${\sim}99.1\%$ of $D_e$ (envelope $99.0$--$99.1$) & \cite{loutey_paper12} \\
+4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal, $|m|\le1$ & $99.81\%$ of $D_e$ ($0.32$~mHa) at $\alpha_{\rm opt}=1.40$;\ $99.77\%$ at the fixed-$\alpha$ ladder endpoint & \cite{loutey_paper12} \\
 4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 63.5\%$ ($l_{\max}=2$, 2D variational; unbound $D_e$, no PK) & \cite{loutey_paper17} \\
 5 & LiH (core+valence) & composed (L3 $\oplus$ L4) & $R_{\mathrm{eq}}$ $5.3\%$ ($l$-dependent PK) & \cite{loutey_paper17} \\
 5 & $\mathrm{BeH}_2$ (polyatomic) & composed $+$ 1-RDM exchange & $R_{\mathrm{eq}}$ $11.7\%$ & \cite{loutey_paper17} \\
@@ -282,8 +285,8 @@ $3.6\times10^{-14}$~Ha, i.e.\ to the precision at which that reference
 is quoted, making it the most accurate single result in the chemistry
 arc---with the correct dissociation to $\mathrm{H}+p$ as
 $R \to \infty$~\cite{loutey_paper11}.  The spectral solver achieves a
-$250\times$ dimension reduction, a $270\times$ speedup, and a
-$5000\times$ accuracy improvement over a finite-difference baseline
+$250\times$ dimension reduction and a $270\times$ speedup, and reaches
+machine precision, against a finite-difference baseline
 whose $1.01\%$ error is shown to be a discretization artifact, not an
 intrinsic limit of the basis~\cite{loutey_paper11}.
 
@@ -351,8 +354,12 @@ $^1\Sigma_g^+$ state constrains only the total $M = m_1 + m_2$, so the
 $\pi^2$ and $\delta^2$ configurations---which carry the angular
 correlation---are absent by construction.  Restoring them at
 $|m| \le 1$ in the same basis, with the same Neumann kernel, reaches
-${\sim}99.1\%$ of $D_e$---a gain of $11.6$~mHa against the $0.34$~mHa
-available from near-tripling the $\sigma$ basis~\cite{loutey_paper12}.  The
+$99.1\%$ of $D_e$ in the original monomial basis---a gain of
+$11.6$~mHa against the $0.34$~mHa
+available from near-tripling the $\sigma$ basis.  Re-conditioning that
+same span (Laguerre $\times$ Legendre, high-precision assembly) then
+climbs to $99.81\%$ ($0.32$~mHa, inside chemical accuracy) at the
+variational optimum $\alpha = 1.40$~\cite{loutey_paper12}.  The
 $|m| = 2$ sector was numerically unstable in the differentiation-based
 radial engine, so the $\delta$ contribution (${\approx}0.5$~mHa) was
 first fixed by an independent Gaussian-basis route;\ the quoted figure
@@ -364,8 +371,8 @@ sector---where the differentiation route drove the energy far below
 the variational floor---and reproduces the sound $\sigma$ and
 $|m| \le 1$ results;\ the $\mu > 0$ channels are therefore now
 recurrence-based
-(recurrence-stable and quadrature-seeded rather than fully
-quadrature-free).
+(recurrence-stable and---since the $B$-seeds were closed in
+$\{E_1, \gamma, \ln\}$---fully quadrature-free).
 
 \emph{Withdrawn.}  Earlier versions of this synthesis reported
 Paper~12's original diagnosis---that the gap was the electron--electron
@@ -467,8 +474,9 @@ $92.4\%$ of prolate spheroidal CI (Paper~12) and confirming a
 cusp-resolution advantage for the hyperspherical geometry.  The
 comparison was not like-for-like:\ the $96.0\%$ includes $\pi$
 channels and the $92.4\%$ does not.  At matched $m_{\max}$ no comparison is
-available:\ Paper~12's own basis with $|m| \le 1$ reaches ${\sim}99.1\%$,
-but that figure and the $96.0\%$ differ in truncation, cusp treatment and
+available:\ Paper~12's own basis with $|m| \le 1$ reaches $99.1\%$ in its
+original monomial basis and $99.81\%$ re-conditioned,
+but those figures and the $96.0\%$ differ in truncation, cusp treatment and
 solver class alike.  Neither paper claims a coordinate-system advantage
 over the other, and the two published figures are not a matched pair in
 any case:\ the $96.0\%$ is $l_{\max} = 6$ with a Schwartz cusp
@@ -825,7 +833,7 @@ atoms directly on the sparse $S^3$ graph Hamiltonian using
 Slater--Condon rules~\cite{Slater1960, CondonShortley1935} with exact $R^k$ radial integrals and Gaunt
 coefficients, with Slater determinants indexed as sorted tuples of
 spin-orbital labels (relational lattice indexing).  Helium reaches
-$0.26\%$ at $n_{\max}=5$ (grid-based) and $0.19\%$ at $n_{\max}=7$ with
+$0.26\%$ at $n_{\max}=5$ (grid-based) and $0.216\%$ at $n_{\max}=7$ with
 exact rational Slater integrals; lithium $1.03\%$ (at $n_{\max}=5$)
 and beryllium $0.71\%$ (at $n_{\max}=4$, with $487{,}635$
 determinants)~\cite{loutey_fci_atoms}.  The Hamiltonian is sparse
@@ -1070,10 +1078,10 @@ separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
 for $\mathrm{H}_2^+$ (machine precision)~\cite{loutey_paper11}, hyperspherical
 coordinates for He ($0.022\%$ variational raw / $0.004\%$ non-variational
 cusp, $0.216\%$ graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
-coordinates for $\mathrm{H}_2$ ($96.0\%$, cusp-corrected;\ prolate
-spheroidal at $|m| \le 1$ separately reaches
-${\sim}99.1\%$~\cite{loutey_paper12})  ($96.0\%$ of
-$D_e$)~\cite{loutey_paper15}, and composed fiber bundles for
+coordinates for $\mathrm{H}_2$ ($96.0\%$ of $D_e$,
+cusp-corrected)~\cite{loutey_paper15}---though $\mathrm{H}_2$'s natural
+geometry is the prolate spheroid, where the re-conditioned CI reaches
+$99.81\%$ ($0.32$~mHa)~\cite{loutey_paper12}---and composed fiber bundles for
 core--valence and polyatomic systems ($5.3\%$, $11.7\%$, $19.4\%$
 bond-length error for LiH, $\mathrm{BeH}_2$,
 $\mathrm{H}_2\mathrm{O}$)~\cite{loutey_paper17}.  The arc is held

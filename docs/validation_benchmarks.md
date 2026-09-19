@@ -96,7 +96,7 @@
 | Balanced coupled non-collinear V_ne | direction=(0,0,-1) matches nuc_parity to 1e-14 | Wigner D rotation validation |
 | FrozenCore Z_eff asymptotic | Z_eff(0)≈Z, Z_eff(∞)≈Z-10 | Ne-like screening validation |
 | FrozenCore density normalization | integral = 10 ± 1% | Core electron count |
-| Second-row Pauli scaling | Q^2.50 | O(Q^2.5) universality |
+| Second-row Pauli scaling | exactly linear in Q (27.90 × Q) | Exact-rule universality (corrected 2026-08-29) |
 | NaH balanced Pauli (Q=20) | exactly 239 | Second-row qubit validation |
 | Atomic classifier Z=11-18 | 97 tests pass | Second-row classification |
 | Wigner D l=2 orthogonality | R^T R = I to 1e-12 | l=2 rotation validation |
@@ -114,14 +114,14 @@
 | CH₂O composed Pauli terms (Q=120) | exactly 1333 | Multi-center polyatomic validation |
 | C₂H₂ composed Pauli terms (Q=120) | exactly 1333 | Multi-center polyatomic validation |
 | C₂H₆ composed Pauli terms (Q=160) | exactly 1777 | Multi-center polyatomic validation |
-| Composed Pauli/Q ratio | 11.11 ± 0.1 | Universal linear scaling law |
+| Composed Pauli/Q ratio | 27.90 exactly (= 279/10) | Universal linear scaling law (exact rule, corrected 2026-08-29) |
 | All TM hydrides composed Pauli terms (Q=30) | exactly 277 (non-identity) | Transition metal qubit validation (isostructural: all 10 identical). Note: Track CZ/DA reported 278 including the identity term; v2.8.0 standardized on excluding identity from N_pauli across all builders. |
 | SrH / BaH composed Pauli terms (Q=20) | exactly 222 (non-identity) | Heavy-atom alkaline-earth monohydride validation ([Kr], [Xe] frozen cores); isostructural with KH, NaH, CaH (Sprint 3 HA-C, v2.12.0). |
 | SrH_rel / BaH_rel composed Pauli terms (Q=20) | exactly 942 (non-identity) | Relativistic heavy-atom monohydride validation; isostructural with CaH_rel (post-TR, Sprint 4 v2.15.0; pre-TR was 534). |
 | SrH_rel / BaH_rel / CaH_rel λ_ni | bit-identical 13.87 Ha | Cross-species relativistic 1-norm invariance (frozen core screens Z, spin-orbit sees Z_eff=2 uniformly). |
 | SrH_rel / BaH_rel / CaH_rel QWC | bit-identical 52 groups | Cross-species QWC structural invariance. |
 | d-only block ERI density | 4.0% | d-orbital Gaunt sparsity |
-| d-block Pauli/Q (composed) | 9.23 (< main-group 11.11) | d-orbital sparsity advantage |
+| d-block Pauli/Q (composed) | 30.03 (> main-group 27.90) | d-block is DENSER per qubit — the pair-diagonal "d-orbital sparsity advantage" was INVERTED and is retired (corrected 2026-08-29) |
 | Nested Be Pauli terms (Q=10) | exactly 112 | Nested encoding qubit validation |
 | Nested Be 1-norm < composed | 18.95 < 121.35 Ha | PK elimination 1-norm advantage |
 | H-set ERI density < uncoupled | 9.2% < 12.5% (l_max=1) | 6j recoupling sparsity |
@@ -136,11 +136,11 @@
 | Casimir CI polynomial structure | residual < 1e-10 | H(k) = Bk + Ck² |
 | Casimir CI variational bound | E_var > exact at all n_max | Variational principle |
 | Casimir CI n_max=3 error | < 2% (variational) | Algebraic CI accuracy |
-| Graph-native CI n_max=7 error | < 0.20% ⚠ | Graph-native CI accuracy — **see inconsistency note below** |
+| Graph-native CI n_max=7 error | 0.216% (E = −2.89746 Ha, dim 1218) | Graph-native CI accuracy (MEASURED 2026-09-19; the recorded `< 0.20%` was wrong — see note below) |
 | Graph-native CI n_max=8 error | 0.207% (2,262 configs) ⚠ | Exact algebraic float integrals |
 | Graph-native CI n_max=9 error | 0.201% (3,927 configs) ⚠ | Exact algebraic float integrals |
 
-> **⚠ INTERNAL INCONSISTENCY, flagged then MEASURED 2026-09-19 (/qa group2 CODE run). The recorded n_max=7 row is the wrong one (measured 0.216%); the row-value edit and the corpus-wide 0.19% headline correction are owed as one coherent sweep, not done here.**
+> **RESOLVED 2026-09-19 (v5.14.6). The recorded n_max=7 row was wrong; the measured value is 0.216% and the row above now carries it. The corpus-wide 0.19% headline sweep ran in v5.14.5 and was completed here (the group2 synthesis L828 locus that sweep's gate could not reach — its `require_nearby` context sat 4 lines outside the ±3 window). Retained below as the measurement record.**
 > These three rows could not all be right: a variational ladder converging from above is
 > monotone decreasing, so the error cannot be `< 0.20%` at n_max=7 and then `0.207%` at
 > n_max=8. **MEASURED 2026-09-19 on the fixed-k=Z graph-native route
@@ -153,8 +153,8 @@
 > optimistic direction — the method's true n_max=7 error is 0.216%, and even n_max=9
 > only reaches 0.201%, so 0.19% is not attained anywhere in the recorded ladder. The
 > row here and that headline are the same quantity in two places; correcting one without
-> the other would be the corrected-in-owner/left-in-citer defect, so both move together
-> in the owed sweep. Driver: `debug/qa/_graph_native_he_nmax67.py`
+> the other would be the corrected-in-owner/left-in-citer defect, so both moved together
+> (v5.14.5 + v5.14.6). Driver: `debug/qa/_graph_native_he_nmax67.py`
 > (data `debug/data/graph_native_he_nmax67.txt`).
 >
 > Related, and already declared elsewhere: the **0.19% @ n_max=7** headline has **no

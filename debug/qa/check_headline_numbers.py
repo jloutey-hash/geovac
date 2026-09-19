@@ -84,6 +84,48 @@ WITHDRAWAL_MARKER = "see withdrawal_marker()"  # sentinel, per-entry now
 
 REGISTRY = [
     {
+        "id": "p11-spectral-5000x-underivable",
+        "scope": "paper_11 group2 synthesis trunk",
+        "severity": "fail",
+        "canonical_note": "Registered 2026-09-19 (v5.14.6). Paper 11 claimed "
+                          "the spectral Laguerre solver delivers a '5000x "
+                          "accuracy improvement' over the FD baseline, at "
+                          "paper_11 L427 + L507 and the group2 synthesis L286. "
+                          "The claim is now UNDERIVABLE, not merely stale: its "
+                          "denominator (H2+ '0.0002%') was retired in v5.14.3 "
+                          "and only the numerator (FD 1.01%) survives, so no "
+                          "ratio can be formed at all -- and the paper's own "
+                          "convergence table already reads 'machine precision' "
+                          "in that cell. It is also suspect on its face: 5000 "
+                          "is the FD grid size N_xi appearing in the SAME "
+                          "sentence, so the 'ratio' was plausibly never "
+                          "computed. No existing family could match it -- the "
+                          "p11 numeric family keys on `0.0002`, which cannot "
+                          "match '5000'. CANONICAL: state the spectral result "
+                          "QUALITATIVELY as machine precision against the FD "
+                          "solver's 1.01%; the 250x dimension reduction and "
+                          "270x speedup are separately measured and stand.",
+        # require_nearby is what keeps the many legitimate "N_xi = 5000"
+        # grid-size mentions (paper_11 L425, L494, L723, L754, L762, L1125)
+        # silent: only an accuracy/improvement claim is the retired one.
+        "pattern": r"5000\s*\\?times|\$5000\\times\$|5000x",
+        "require_nearby": r"accuracy improvement|better accuracy|"
+                          r"improvement over|accuracy\s+improvement",
+        "exempt_if_nearby": r"\[retracted \d{4}-\d{2}-\d{2}:\s*"
+                            r"p11-spectral-5000x-underivable\]|"
+                            r"underivable|retired 5000",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
+            "docs/validation_benchmarks.md",
+            "README.md",
+            "CLAUDE.md",
+        ],
+    },
+    {
         "id": "p13-he-graphnative-019-nmax7",
         "scope": "paper_13 paper_18 paper_7 group2 group3 synthesis trunk",
         "severity": "fail",
@@ -102,7 +144,16 @@ REGISTRY = [
                           "this claim (the pattern excludes the range form). "
                           "Driver debug/qa/_graph_native_he_nmax67.py.",
         "pattern": r"0\.19\s*\\?%",
-        "require_nearby": r"graph.native|graph.consistent|Graph-native",
+        # `loutey_fci_atoms` added 2026-09-19 (v5.14.6).  WINDOW is 3, and the
+        # group2 synthesis carries this claim at L828 while its only
+        # "Graph-native" context is the \subsection heading at L821 -- four
+        # lines outside the window -- so the pattern fired and the context test
+        # silently discarded it, in a file this family already declared.  The
+        # cite key sits INSIDE the window; widening WINDOW globally would
+        # instead weaken every family's exemption test, which is the failure
+        # the +-5 -> +-2 marker narrowing was introduced to stop.
+        "require_nearby": r"graph.native|graph.consistent|Graph-native|"
+                          r"loutey_fci_atoms",
         # NOTE: the adiabatic-floor "0.19--0.20%" range is deliberately NOT in
         # the exemption.  The pattern already cannot match it (the % is not
         # adjacent to 0.19 in "0.19--0.20\%"), and including it here would
@@ -191,7 +242,10 @@ REGISTRY = [
                           "The canonical values are 0.022% raw (l_max=7, "
                           "properly variational) and 0.004% cusp-corrected "
                           "(l_max=4, an extrapolation, NON-variational), plus "
-                          "0.19% for the graph-native CI. 0.019% is neither, "
+                          "0.216% for the graph-native CI (n_max=7; the 0.19% "
+                          "this note originally quoted was itself retired in "
+                          "v5.14.5 -- see p13-he-graphnative-019-nmax7). "
+                          "0.019% is neither, "
                           "and sits between them where a reader will take it "
                           "for the cusp figure. Live at paper_34 (twice, one "
                           "inside a projection table carrying a tier), "
@@ -210,6 +264,10 @@ REGISTRY = [
             "docs/paper_notes_archive.md",
             "docs/project_closeout_plan.md",
             "README.md",
+            # Added 2026-09-19 (v5.14.6): SCOPE_BOUNDARY.md's exotic-atoms
+            # table carried the nonexistent 0.019% as He's "Production" error
+            # and was in no family's files list.
+            "SCOPE_BOUNDARY.md",
         ],
     },
     {
@@ -455,8 +513,16 @@ REGISTRY = [
         "pattern": r"33[34]\s*~?\\?(Pauli|terms)|"
                    r"(constant|factor of)\s*\$?2\.51|"
                    r"2\.51\s*\\?times[^.]{0,40}(scaling robust|3\.25)|"
-                   r"13\s*\\?times\s*fewer\s*QWC",
-        "require_nearby": r"Pauli|LiH|composed|market|re-pric|scaling|QWC",
+                   r"13\s*\\?times\s*fewer\s*QWC|"
+                   # Markdown TABLE-CELL form, added 2026-09-19 (v5.14.6).
+                   # SCOPE_BOUNDARY.md tabulated the retired block-topology
+                   # counts as bare cells ("| 334 |"), with the word "Pauli"
+                   # only in the column header -- so the `33[34]\s*(Pauli|terms)`
+                   # alternative above could never match them.  556 and 778 had
+                   # no alternative at all.
+                   r"\|\s*(?:334|556|778)\s*\|",
+        "require_nearby": r"Pauli|LiH|composed|market|re-pric|scaling|QWC|"
+                          r"block topology|bond pair",
         "exempt_if_nearby": r"retired|corrected|Corrected 20|vintage|artifact|"
                             r"rule gave|previously|earlier|withdrawn|"
                             r"superseded|dissolve|DISSOLVED|former",
@@ -465,6 +531,7 @@ REGISTRY = [
             "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
             "papers/synthesis/group4_quantum_computing_synthesis.tex",
             "docs/qa/group4.done.md",
+            "SCOPE_BOUNDARY.md",
         ],
     },
     {
@@ -524,7 +591,19 @@ REGISTRY = [
                           "tests/test_paper20_balanced_lambda.py.",
         "pattern": r"11\.10\s*\\?times\s*Q|N_\{?\\?mathrm\{Pauli\}\}?\s*=\s*11\.10|"
                    r"O\(Q\^\{?2\.5\}?\)|Q\^\{2\.50\}|1\{,\}712\\?\$?\\times|"
-                   r"190\$?\\times|coefficient\s+(of\s+)?11\.10|Pauli/\$?Q\$?\s*=\s*9\.23",
+                   r"190\$?\\times|coefficient\s+(of\s+)?11\.10|Pauli/\$?Q\$?\s*=\s*9\.23|"
+                   # Plain-text / Markdown forms, added 2026-09-19 (v5.14.6).
+                   # Every alternative above is LaTeX-shaped (\times, 1{,}712,
+                   # braced exponents), so all four SUMMARY documents -- which
+                   # use Unicode x, plain comma-thousands and unbraced
+                   # exponents -- were invisible to this family even once they
+                   # were added to `files`.  The 11.11 variant is included
+                   # because validation_benchmarks.md carried 11.11, not 11.10,
+                   # and so escaped even an exact-form match.
+                   r"11\.1[01]\s*[×x]\s*Q|Q\^2\.5[02]?(?![0-9])|"
+                   r"1,712\s*[×x]|51\s*[×x]?\s*[–—-]\s*1,?712|"
+                   r"(?:Pauli/Q|per qubit|Pauli per qubit)[^\n]{0,40}"
+                   r"(?:11\.1[01]|9\.23)",
         "require_nearby": r"Pauli|scaling|coefficient|linear|composed|exponent",
         "exempt_if_nearby": r"retired|corrected|was measured|vintage|inverted|"
                             r"artifact|dissolve|earlier|Corrected 2026-08-29|"
@@ -535,6 +614,15 @@ REGISTRY = [
             "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
             "papers/synthesis/group4_quantum_computing_synthesis.tex",
             "docs/qa/group4.done.md",
+            # The SUMMARY layer, added 2026-09-19 (v5.14.6).  These four
+            # documents carried 11.10 x Q / O(Q^2.5) / 51x-1712x / 9.23 live
+            # while this family reported clean, because none of them was in
+            # scope.  claims_register.md is the register whose stated job is
+            # "one line of verification truth per headline claim".
+            "docs/claims_register.md",
+            "docs/validation_benchmarks.md",
+            "papers/INDEX.md",
+            "SCOPE_BOUNDARY.md",
         ],
     },
     {

@@ -423,8 +423,8 @@ first grid point close enough to capture the near-nuclear wavefunction.
 
 The finite-difference radial solver of Sec.~\ref{sec:radial} converges
 as $O(1/N_\xi)$, requiring $N_\xi = 5000$ grid points for sub-percent
-accuracy.  This section describes a spectral alternative that achieves
-$5000\times$ better accuracy with $250\times$ fewer degrees of freedom.
+accuracy.  This section describes a spectral alternative that reaches
+machine precision with $250\times$ fewer degrees of freedom.
 
 \subsection{Laguerre basis}
 
@@ -503,9 +503,9 @@ and spectral radial solvers for H$_2^+$ at $R = 2.0$~bohr.
 \end{ruledtabular}
 \end{table}
 
-The spectral solver achieves a $250\times$ dimension reduction,
-$270\times$ speedup, and $5000\times$ accuracy improvement over
-the FD solver.  The FD solver's 1.01\% error was a discretization
+The spectral solver achieves a $250\times$ dimension reduction and a
+$270\times$ speedup over the FD solver, and reaches machine
+precision.  The FD solver's 1.01\% error was a discretization
 artifact---the $O(1/N_\xi)$ convergence from the singular point
 at $\xi = 1$ and the first-order Neumann boundary condition
 (Appendix~\ref{app:convergence}) masked the intrinsic accuracy of
