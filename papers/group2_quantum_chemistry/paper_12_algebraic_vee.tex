@@ -90,8 +90,15 @@ previously attributed the gap to the electron-electron cusp requiring
 non-analytic $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read
 that as motivation for hyperspherical coordinates.  Neither holds:
 no such term appears in the calculation above, nor in the grid-based
-prolate spheroidal treatment of Tao, McCurdy and Rescigno, which
-reaches $0.05$~mHa in these same coordinates.
+prolate spheroidal FE-DVR treatment of Tao, McCurdy and Rescigno, an
+accurate two-electron H$_2$ calculation in these same coordinates.  \textbf{[MEASURED]}
+An explicit-$r_{12}$ (James--Coolidge) extension of the algebraic engine,
+in which every $r_{12}$ matrix element reduces to the same
+$A\,K_0 - B\,K_1$ Neumann kernels as $V_{ee}$ (no quadrature), reaches
+$\gvq{p12_r12_err_mha}{0.053}$~mHa above the exact value---a sixfold
+reduction of the CI residual---confirming constructively that ordinary
+integer powers of $r_{12}$, not non-analytic terms, close the gap
+(Sec.~\ref{sec:r12}).
 \end{abstract}
 
 \maketitle
@@ -1324,6 +1331,92 @@ and is not used.
 
 Backing:\ module \texttt{geovac/prolate\_recondition.py}, tests
 \texttt{tests/test\_paper12\_recondition.py}.
+
+\subsection{Explicit correlation, evaluated algebraically}
+\label{sec:r12}
+
+The knob-elimination above closes with an explicit alternative:\ a literal
+$99.9\%$ ``needs a much larger basis or explicit correlation (geminals).''
+The second route is available inside this paper's own machinery, and it
+does not leave the algebraic (quadrature-free) discipline of
+Sec.~\ref{sec:neumann}.  Multiply each product function by a power of the
+interelectronic distance, $\Phi = g(\xi_1,\eta_1;\xi_2,\eta_2)\,r_{12}^{\,p}$
+with $p\in\{0,1\}$ (a James--Coolidge basis in prolate coordinates), and
+every resulting matrix element---overlap, $V_{ne}$, $V_{ee}$, and
+kinetic---reduces to the \emph{same} algebraic objects already built for
+$V_{ee}$.
+
+\textbf{[MEASURED 2026-09-20]} The reduction is exact.  Writing
+$r_{12}^2 = (R/2)^2(A - B\cos\Delta\varphi)$ with $A,B$ the standard
+prolate combinations, every \emph{even} power of $r_{12}$ is a polynomial
+in the separated coordinates (its azimuthal average is a finite sum of the
+one-electron moments of Sec.~\ref{sec:neumann}), and every \emph{odd} power is
+$r_{12}^{2s+1} = (R/2)^{2s+2}(A - B\cos\Delta\varphi)^{s+1}/r_{12}$, whose
+azimuthal average is the same $A\,K_0 - B\,K_1$ combination of Neumann
+kernels---the $m=0$ and $m=1$ channels of the general-$m$ $V_{ee}$ table
+of Sec.~\ref{sec:neumann}---that the Coulomb term itself uses.  The one
+element that looks harder, the kinetic coupling between a $p=0$ and a
+$p=1$ function, collapses:\ integrating
+$\tfrac12\langle\nabla g_u\!\cdot\!\nabla(g_v r_{12})\rangle$ by parts
+cancels the gradient-of-$r_{12}$ term against half of itself and leaves
+\begin{equation}
+  T_{p_0\times p_1} \;=\; -\tfrac12\!\int r_{12}\,g_v\,(\nabla^2 g_u)\,dV,
+  \label{eq:r12_kinetic_collapse}
+\end{equation}
+a pure odd-$r_{12}^{1}$ element (no $\nabla r_{12}$, no non-analytic term)
+with $\nabla^2 g_u$ a polynomial numerator, routed through the same
+kernels.  Each block was validated against direct quadrature to
+$\sim\!10^{-4}$ (grid-limited).
+
+\textbf{[MEASURED 2026-09-20]} On the $\sigma$ ($\mu=0$) gerade basis this
+reaches $\gvq{p12_r12_de_pct}{99.97}\%$ of $D_e$
+($\gvq{p12_r12_err_mha}{0.053}$~mHa) at $(j_{\max},l_{\max})=(3,4)$,
+$n=416$, $\alpha = 1.0$---a sixfold reduction of the residual from the
+re-based CI's $\gvq{p12_rebased_err_mha_aopt}{0.32}$~mHa, obtained with
+exact algebraic integrals (no quadrature at any stage).  The energy
+descends monotonically from above along nested truncations
+($-20.7,\,-0.167,\,-0.079$~mHa at $n = 18,\,90,\,160$), and the extended
+precision of Sec.~\ref{sec:recondition} is again load-bearing:\ by
+$n\simeq 400$ the overlap conditioning reaches $\sim\!10^{19}$ and the
+double-precision solve discards genuine directions
+($16\,\mu$Ha above the extended-precision energy), while the
+mpf-orthogonalized solve retains them.
+
+\textbf{[MEASURED 2026-09-20]} This constructively settles what the
+Sec.~\ref{sec:recondition} residual \emph{is}.  It is
+electron--electron correlation, captured by ordinary integer powers of
+$r_{12}$---not the non-analytic $r_{12}^{1/2}$, $r_{12}\ln r_{12}$ terms
+this paper once invoked (Abstract, \textbf{[WITHDRAWN]}).  The
+explicit-$r_{12}$ energy then \emph{plateaus} near $0.05$~mHa:\ at $p\le 1$
+and a single $\alpha$ the overlap becomes linearly dependent
+($\mathrm{cond}\sim\!10^{19}$ with essentially all directions retained),
+i.e.\ that space is nearly spanned;\ a variational $\alpha$ scan gains only
+$\sim\!2\,\mu$Ha (its optimum is $\alpha\approx 1.0\text{--}1.2$, and the
+CI optimum $\alpha = \gvq{p12_rebased_alpha_opt}{1.40}$ is \emph{worse}
+here, because explicit $r_{12}$ already supplies the correlation a
+contracted exponent was compensating for).  The microhartree regime is
+therefore not an $\alpha$ or radial-degree question but a higher-$r_{12}$-power
+($p\ge 2$) one, which the same $A\,K_0 - B\,K_1$ reduction extends to
+(with additional $m\ge 2$ channels).  We report the $p\le 1$ result and its
+measured ceiling, not a microhartree claim.
+
+\textbf{[MEASURED]} The construction is not specific to H$_2$.  Because the
+$r_{12}$ kernels touch only the electron coordinates, the whole reduction is
+charge-independent:\ the sole term that changes for a \emph{heteronuclear}
+two-electron diatomic is $V_{ne}$, whose per-electron form
+$(2/R)[(Z_A+Z_B)\xi + (Z_B-Z_A)\eta]/(\xi^2-\eta^2)$ stays polynomial after the
+Jacobian (the $(Z_B-Z_A)\,\eta$ term breaks the $\eta\!\to\!-\eta$ symmetry, so
+both angular parities enter and $V_{ne}$ couples them).  Applied to HeH$^+$
+($R = 1.4632$) the same engine converges variationally to
+$\gvq{p12_r12_heh_err_mha}{0.9}$~mHa of the reference at a modest basis,
+and---consistently with the H$_2$ plateau
+above---the lever there is the \emph{angular} basis, not the exponent (a
+two-block exponent gains $\sim\!0.3$~mHa, one more angular shell $\sim\!11$~mHa).
+
+Backing:\ test \texttt{tests/test\_paper12\_r12.py} and the reduction of
+Eq.~\eqref{eq:r12_kinetic_collapse} above;\ chronicle in \texttt{CHANGELOG.md}.
+(The prototype engine migrates from the sprint tree into \texttt{geovac/} when
+the higher-power extension closes.)
 
 %% ========================================================================
 %% VII. IMPLICATIONS FOR THE GEOVAC PROGRAM

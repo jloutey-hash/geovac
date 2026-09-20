@@ -1078,6 +1078,54 @@ MEASURED = {
                                "at (4,4) mu<=1 vs 1.40 at (5,5)) -- the signature "
                                "of single-exponent strain",
         provenance="MEASURED 2026-09-18 (v5.13.9)"),
+    # ---- Explicit-r12 (James-Coolidge-type) extension of the algebraic engine.
+    # ADDED 2026-09-20.  DISTINCT method from the re-based CI above: the basis is
+    # multiplied by r12^p (p in {0,1}), and every r12 matrix element is evaluated
+    # EXACTLY by the same algebraic Neumann machinery as V_ee (odd r12 powers ->
+    # A K0 - B K1 via the general-m X-tables; the p0xp1 kinetic collapses by IBP
+    # to -1/2 <r12 g_v Lap g_u>, no grad_r12).  No quadrature.  Memo:
+    # debug/sprint_neumann_r12_build_memo.md.  Backing: tests/test_paper12_r12.py;
+    # engine debug/prolate_r12_mpf.py (migrates to geovac/ when the p>=2 arc ends).
+    "p12_r12_err_mha": dict(
+        value=0.053, convention="mHa above exact D_e, H2 R=1.4011, explicit-r12 "
+                                "prolate CI, p in {0,1}, sigma (mu=0), (j_max=3, "
+                                "l_max=4) n=416, alpha=1.0, mpf-orthogonalized "
+                                "solve. The re-based-CI residual for comparison is "
+                                "p12_rebased_err_mha_aopt (0.32 mHa) -> 6x smaller",
+        provenance="MEASURED 2026-09-20 via debug/prolate_r12_mpf.assemble_mixed "
+                   "+ solve_canonical_mpf: E_tot=-1.1744215 (n=416, cond 5.0e18, "
+                   "all 416 vectors kept; mpf==float64 to 0.65 uHa). n=400 (4,3) "
+                   "gives 0.0528 (cond 2.7e19, mpf keeps 399/400, 16 uHa below "
+                   "float64). Matches the Tao-McCurdy-Rescigno grid-prolate 0.05 "
+                   "mHa in the same coordinates, with EXACT algebraic integrals. "
+                   "Verified: monotone from ABOVE over (2,0)->(2,2)->(3,2), "
+                   "-20.66 -> -0.167 -> -0.079 mHa; block engine validated vs "
+                   "quadrature to 1.4e-4. PLATEAUS here: p<=1 single-alpha space "
+                   "near-spanned (cond 1e19); alpha not the lever (scan optimum "
+                   "~1.0-1.2, a=1.40 HURTS); microhartree needs r12 powers p>=2",
+        aliases={0.0528: "best point, (4,3) n=400 mpf",
+                 0.0535: "(3,4) n=416, all vectors kept"}),
+    "p12_r12_heh_err_mha": dict(
+        value=0.88, convention="mHa above reference for HeH+ (2e heteronuclear, "
+                               "R=1.4632), explicit-r12 engine, (j=2,l=3) n=288, "
+                               "a=1.6, p in {0,1}. Probe result (B arc): the "
+                               "exact-algebraic r12 GENERALIZES to a 2nd center",
+        provenance="MEASURED 2026-09-20 via debug/heh_converge.py "
+                   "(E_tot=-2.977808 vs E_ref=-2.97869). Converges -133 (2,1) -> "
+                   "-11.7 (2,2) -> -0.88 (2,3); lever is ANGULAR basis (l_max+1 = "
+                   "-10.8 mHa) not exponent (two-block +0.3) or radial (+0.25). "
+                   "New heteronuclear V_ne validated vs quad 6.1e-5. Reference "
+                   "-2.97869 is LOAD-BEARING (HeH+ X1Sigma+ BO near R_e; verify)",
+        aliases={0.882: "full precision", 0.9: "1 s.f. (paper display)"}),
+    "p12_r12_de_pct": dict(
+        value=99.97, convention="% of D_e, H2 R=1.4011, explicit-r12 prolate CI "
+                                "p in {0,1}, (3,4) n=416; = 1 - p12_r12_err_mha/"
+                                "(1000*0.174475). Beats the re-based CI's "
+                                "p12_rebased_de_pct_aopt (99.81%)",
+        provenance="MEASURED 2026-09-20; 99.9693 at full precision (n=416), "
+                   "99.9697 at n=400. p=0 control at the SAME (2,2) basis is "
+                   "92.25% -> r12 cuts the error ~80x at matched radial/angular",
+        aliases={99.9693: "full precision n=416", 99.9697: "n=400"}),
     "p12_recond_cond_gain": dict(
         value=326, convention="normalized cond(S) ratio Laguerre/Gegenbauer at "
                               "(3,3), |m|<=1 (3.49e5 / 1.07e3 = 326, correct); "

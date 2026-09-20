@@ -569,26 +569,27 @@ comparable chemical accuracy, Table~\ref{tab:accuracy} reports ground
 state energies.
 
 \begin{table}[t]
-\caption{Ground state energies (Hartree) for He.  Exact:
-$E_{\mathrm{He}} = -2.9034$~Ha~\cite{nist_he}.  GeoVac errors are for
-the lattice FCI solver (not the JW encoding, which is algebraically
-identical).}
+\caption{Ground state energies (Hartree) for He.  Exact
+(non-relativistic): $E_{\mathrm{He}} = -2.903724$~Ha~\cite{Pekeris1958}
+(the correct baseline for the non-relativistic lattice solver;\ Paper~13
+uses the same value).  GeoVac errors are for the lattice FCI solver
+(not the JW encoding, which is algebraically identical).}
 \label{tab:accuracy}
 \begin{ruledtabular}
 \begin{tabular}{lrd{4.4}d{2.2}}
 Method   & $Q$ & \multicolumn{1}{c}{$E_0$ (Ha)} & \multicolumn{1}{c}{Error (\%)} \\
 \hline
-GeoVac $n_{\max}{=}2$ &  10 & -2.8876 & 0.55 \\
-GeoVac $n_{\max}{=}3$ &  28 & -2.8920 & 0.39 \\
-GeoVac $n_{\max}{=}4$ &  60 & -2.8961 & 0.25 \\
-GeoVac $n_{\max}{=}5$ & 110 & -2.8982 & 0.18 \\
+GeoVac $n_{\max}{=}2$ &  10 & -2.8876 & 0.56 \\
+GeoVac $n_{\max}{=}3$ &  28 & -2.8920 & 0.40 \\
+GeoVac $n_{\max}{=}4$ &  60 & -2.8961 & 0.26 \\
+GeoVac $n_{\max}{=}5$ & 110 & -2.8982 & 0.19 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
 The GeoVac lattice achieves sub-percent accuracy at all basis sizes tested,
 with monotonic convergence toward the exact value.  At $n_{\max} = 5$
-($Q = 110$), the error is 0.18\%, comparable to or better than
+($Q = 110$), the error is 0.19\%, comparable to or better than
 cc-pVDZ Gaussian calculations for helium.  The accuracy is therefore
 competitive, but the term count is not:\ at matched qubits the lattice
 carries \emph{more} Pauli terms than cc-pVDZ at $Q=10$, so no favorable
@@ -3683,6 +3684,11 @@ Philos.\ Trans.\ R.\ Soc.\ A \textbf{228}, 151--196 (1929).
 A.~Kramida, Yu.~Ralchenko, J.~Reader, and NIST ASD Team,
 \textit{NIST Atomic Spectra Database} (ver.~5.11),
 \url{https://physics.nist.gov/asd} (2024).
+
+\bibitem{Pekeris1958}
+C.~L. Pekeris,
+``Ground state of two-electron atoms,''
+Phys. Rev. \textbf{112}, 1649--1658 (1958).
 
 %% --- GeoVac internal references ---
 

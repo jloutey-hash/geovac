@@ -221,8 +221,8 @@
 | `spinor_certificate` module tests | 25 tests pass | Ring R_sp = ℚ(α²)[γ]/(γ²+(Zα)²−1) enforcement |
 | Contamination rejection (π, π², ζ(3), log, E₁, unregistered) | raises SpinorTaxonomyError | Six negative controls |
 | T3 H_SO block R_sp membership | passes n_max ≤ 4 | Every κ-branch coefficient in ring |
-| Sunaga RaH-18q baseline | 47,099 Pauli (published) | Single calibrated cell from PRA 111, 022817 |
-| GeoVac rel/Sunaga RaH-18q ratio | 0.011×–0.017× native-Q | Resource advantage verified |
+| Chawla RaH-18q baseline | 12,556 Pauli (rel), 2,740 (non-rel); 47,099 / 4,249 two-electron INTEGRALS, Q=18 | Chawla et al., PRA 111, 022817 (2025) (arXiv:2406.04992). Re-keyed from "Sunaga" — the RaH-18q cell was mis-attributed; corrected corpus-wide, this doc last (2026-09-20). 47,099 is the INTEGRAL count, not Pauli (the stale row said "47,099 Pauli"). |
+| GeoVac rel/Chawla RaH-18q ratio | 0.079×–0.120× (matched-Q) | Per `paper_20_resource_benchmarks.tex` Table (authoritative); e.g. CaH 998 Pauli / 12,556 = 0.079× at Q=20 |
 | Fine-structure Li 2²P splitting | sign + OoM correct | Breit-Pauli + Z_eff sanity |
 | Fine-structure He 2³P span | sign + OoM correct | 66% relative error (accepted) |
 | Fine-structure Be 2s2p ³P span | sign + OoM correct | 78% relative error (accepted) |

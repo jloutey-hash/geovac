@@ -7,6 +7,134 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.0] - 2026-09-20
+
+**Minor bump (PI-directed): the explicit-r₁₂ arc — an exact-algebraic explicit-correlation engine, its cross-system generalization boundary, and the QA-prep cleanup.**
+
+This is a roll-up checkpoint marking a corpus-significant new capability. The detailed releasable units are the patch entries below (v5.14.8–v5.14.11); this heading names the minor milestone and matches the `v5.15.0` tag.
+
+- **New capability:** an exact, quadrature-free explicit-r₁₂ (James–Coolidge) engine in the prolate basis — H₂ to **0.053 mHa (99.97% D_e), 6× past Paper 12's re-based-CI headline**, with every r₁₂ matrix element reduced to the same A·K0 − B·K1 Neumann kernels as V_ee (v5.14.10).
+- **Charted boundary (an atlas segment):** the engine **generalizes** to a second center (HeH⁺, new heteronuclear V_ne, converges to sub-mHa) and a third electron (Li, existing engine) — exact, no resolution-of-identity **up to N=3**; the **wall is N=4** (first genuine 4-body operators). The multi-exponent lever is multi-shell, not heteronuclear (a retracted diagnosis) (v5.14.11).
+- **QA-prep:** Trenev cc-pVDZ counts verified vs primary source; RaH-18q Sunaga→Chawla corrected; TMR softened (unverifiable); He reference −2.9034→−2.903724 (non-rel, Pekeris) with recomputed errors. N=4 frontier anchored in `memory/r12_generalization_boundary_n3_n4.md` for the next session.
+
+Also includes the pre-session uncommitted diagnostics: LiH R_eq drift = one term (v5.14.8) and Li's residual = 88% angular (v5.14.9).
+
+## [v5.14.11] - 2026-09-20
+
+**Does exact-algebraic explicit-r₁₂ generalize? Boundary charted: YES across a second center (HeH⁺) and a third electron (Li), exact with no RI up to N=3; the wall is N=4 (4-body operators). Plus: a self-corrected diagnosis and a verified load-bearing citation.**
+
+PI-directed probe (B) following the v5.14.10 H₂ r₁₂ engine: is the exact-algebraic explicit-r₁₂ an H₂ special case, or a general tool?
+
+**(a) Second center — HeH⁺ (2e heteronuclear). Machinery generalizes; my earlier "single-α" diagnosis is RETRACTED.** The entire r₁₂ engine (overlap, V_ee, kinetic) is charge-independent and transfers unchanged; the only new block is the heteronuclear V_ne, whose per-electron form (2/R)[(Z_A+Z_B)ξ + (Z_B−Z_A)η]/(ξ²−η²) stays polynomial after the Jacobian (the (Z_B−Z_A) η-term breaks gerade/ungerade, so the basis needs both angular parities and V_ne couples them). Validated vs quadrature to 6.1e-5 (`vne_hetero_mpf`, `assemble_hetero`, `debug/heh_probe.py`). HeH⁺ energies are variational and converge to sub-mHa: −133 mHa (2,1) → −11.7 mHa (2,2) → **−0.88 mHa (2,3) n=288** (`debug/heh_converge.py`). The lever is unambiguously the ANGULAR basis: l_max 2→3 buys −10.8 mHa, while radial j 2→3 buys only −0.25 mHa and a two-block exponent ~0.3 mHa.
+
+I had reported the 11.7 mHa gap (vs H₂'s 0.05 mHa) as "the single-α scale mismatch." **A two-block (two-exponent) test refutes that** (`_kin2_grad`, `assemble_hetero_2block`, `debug/heh_2block.py`; sanity: two-block(1.5,1.5)==single(1.5) to 0.00 µHa): a second exponent gains only 0.365 mHa at (2,1) and 0.326 mHa at (2,2), while basis size drove −246→−39.5 mHa over the same step (p=0). The exponent is not the bottleneck — basis size is. This matches Paper 12's H₂ two-block plateau and the physics: HeH⁺'s two electrons share one σ bond = one length scale. The multi-exponent lever is a MULTI-SHELL phenomenon (Li's tight 1s²/diffuse 2s, v5.14.9: 81.7→33.2 mHa), not a heteronuclear-charge one; I had conflated the two.
+
+**(b) Third electron — already answered in the corpus; the wall is N=4.** Per the current-state rule, checked existing work first: a 3e (and Ne) R12-CI infrastructure exists (`debug/r12ci_3e_triangle_kernel.py`, `r12ci_3e_vertex_rules.py`, `r12ci_per_shell_lambda.py`, promoted `geovac/transcorrelated_sturmian.py`). For N=3 the operator product ⟨Φ|F H F|Φ⟩ stays at most 3-body, so exact-algebraic explicit-r₁₂ closes with NO resolution-of-identity: all six term-shapes have closed-form angular rules — RULE A (⟨P_a P_b⟩=δ_a0δ_b0, shared vertex → L=0), RULE B (vec-vec kA factorization), and the TRIANGLE rule ⟨P_a(12)P_b(13)P_c(23)⟩=δ_abc/(2a+1)² (only all-equal multipoles survive; a matrix contraction, not a 6D quadrature). Re-verified 2026-09-20; "remaining work is assembly, not new angular derivation." A working Li engine exists (s-only); multi-λ keeps the integrals closed-form (`shibuya_wulfman._hydrogenic_poly_coeffs_lam`). **N=4 (Be) is the first case that genuinely needs 4-body operators** (a disjoint-pair term f_ij·(1/r_kl) with four distinct indices, no ≤3-body reduction) — the wall, documented in the triangle-kernel derivation and the TC/Be arc (§3: TC 3-body collapse; TC second-quantization plateau ~3.4%).
+
+**Unified boundary (an atlas segment):** exact-algebraic explicit-r₁₂ is forced/available up to N=3 (second center + third electron, no RI); the wall is N=4 (4-body). The heteronuclear accuracy gap is basis-size; multi-exponent is multi-shell, not heteronuclear.
+
+**Also (literature comparison, PI-requested):** verified the single most load-bearing external baseline in the whole quantum-advantage case — Trenev et al. (arXiv:2311.03719, Quantum 9, 1630) — against the primary source (ar5iv render, Table 5, Appendix B): the electronic cc-pVDZ Pauli counts (LiH 63519 @ Q=36, H₂O 107382 @ Q=46, LiH STO-3G 276, H₂O STO-3G 551, LiH 6-31G 5851) are all present verbatim under "electronic structure," 2-qubit-reduced. The "vibrational-paper" concern is resolved; the 55×/76× cc-pVDZ headlines rest on correctly-cited published counts. Stamped in `paper_20_refs.bib`.
+
+**Documentation cleanup (QA-prep, same session):**
+- **RaH-18q Sunaga-vs-Chawla: RESOLVED.** PRA 111, 022817 is Chawla et al. (2025), not Sunaga (verified). Papers 14/20 already re-keyed to Chawla; the lone stale doc was `docs/validation_benchmarks.md` (said "Sunaga, 47,099 Pauli, 0.011–0.017×") — corrected to Chawla, 12,556 Pauli / 47,099 two-electron *integrals*, ratios per the paper_20 table.
+- **TMR 2010: SOFTENED** (could not verify). Three fetch attempts could not confirm it reports a ground-state H₂ D_e (it is a double-photoionization paper; PDF unreadable). Paper 12's abstract "reaches 0.05 mHa" → "an accurate two-electron H₂ calculation" (the valid qualitative point — no non-analytic cusp terms — kept; the unverifiable specific number dropped). Paper 12's r₁₂ additions already stood on the exact Kołos value, so unaffected.
+- **HeH⁺ generalization CAPTURED** in Paper 12's r₁₂ section (my paper call): a [MEASURED] paragraph noting the method is charge-independent and generalizes to heteronuclear (sub-mHa HeH⁺, angular-limited). Registry key `p12_r12_heh_err_mha`. C21 PASS; paper compiles.
+
+**Both remaining flags FIXED (PI-directed):**
+- **He reference value: FIXED.** Paper 14's He table used −2.9034 (`nist_he`, NIST Atomic Spectra Database = experimental) as the exact value for *non-relativistic* GeoVac % errors; the correct non-rel baseline is −2.903724 (Pekeris 1958, as Paper 13 and the numeric registry both use). Changed to −2.903724 \cite{Pekeris1958} (bibitem added); the four He % errors recomputed 0.55/0.39/0.25/0.18 → 0.56/0.40/0.26/0.19 (energies unchanged; only the reference shifted 0.324 mHa), and the "0.18% at n_max=5" prose → 0.19%.
+- **CLAUDE.md §5 Level-4 note: FIXED (PI-authorized).** The "reaches 99.97% (TMR)" figure dropped to match the softened Paper 12 abstract — accurate grid-based prolate two-electron methods exist (TMR cited as an example), without the unverifiable specific number.
+- **The N=3/N=4 boundary** is NOT written to a paper (my call — premature before the N=4 push; better developed with it); preserved in `memory/r12_generalization_boundary_n3_n4.md` for the next session.
+
+**One minor tangent noted for /qa (not the flagged pair):** Paper 14 line ~907 cites `nist_he` (atomic spectra DB) for "published [cc-pVDZ FCI] values" of the He cc-pVDZ FCI (−2.8877) — a mild mis-cite (nist_he is not a cc-pVDZ FCI source); needs a proper cc-pVDZ He FCI reference, left for /qa.
+
+### Added
+- `debug/heh_probe.py`, `debug/heh_2block.py`, `debug/heh_converge.py` — HeH⁺ heteronuclear drivers.
+- `vne_hetero_mpf`, `assemble_hetero`, `_kin2_grad`, `assemble_hetero_2block`, `_pvne_hetero_terms` in `debug/prolate_r12_mpf.py`.
+
+### Changed
+- `debug/sprint_neumann_r12_build_memo.md` §9a/§9b — B-probe findings.
+- `papers/group4_quantum_computing/paper_20_refs.bib` — Trenev entry stamped VERIFIED vs primary source.
+- `docs/validation_benchmarks.md` — RaH-18q Sunaga→Chawla correction (source, Pauli-vs-integrals, ratio).
+- `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex` — TMR softened; HeH⁺-generalizes [MEASURED] paragraph.
+- `debug/qa/numeric_registry.py` — `p12_r12_heh_err_mha` key (C21 PASS).
+- `memory/r12_generalization_boundary_n3_n4.md` (+ MEMORY.md index) — N=3/N=4 boundary for the next session.
+
+## [v5.14.10] - 2026-09-20
+
+**Explicit-r₁₂ (James–Coolidge) extension of Paper 12's algebraic prolate engine reaches 0.053 mHa (99.97% of D_e) with EXACT integrals — 6× past the re-based CI's 0.32 mHa — and the odd routing is optimized 65× (PI-approved capture).**
+
+Paper 12 ended its knob-elimination with the note that "a literal 99.9% needs a much larger basis or explicit correlation (geminals)." This sprint built the second route inside the paper's own machinery. Each product function is multiplied by r₁₂^p, p∈{0,1}; every resulting matrix element reduces to the SAME algebraic Neumann objects already built for V_ee — no quadrature.
+
+**The reduction (all five blocks validated vs quadrature to ~1e-4, grid-limited).** Even r₁₂ powers are polynomials in the separated coordinates (finite sums of one-electron moments). Odd powers use r₁₂^(2s+1) = (R/2)^(2s+2)(A−B·cosΔφ)^(s+1)/r₁₂, whose azimuthal average is the same A·K0 − B·K1 combination of m=0/m=1 Neumann kernels the Coulomb term uses. The p0×p1 kinetic — the one that looked hard (the ∇r₁₂ √-cancellation) — **collapses by IBP**: ½⟨∇g_u·∇(g_v r₁₂)⟩ integrated by parts cancels the ∇r₁₂ term against half of itself, leaving `T = −½∫ r₁₂ g_v (∇²g_u) dV`, a pure odd-r₁₂¹ element (no ∇r₁₂, no non-analytic term) with a polynomial Laplacian numerator, routed through the same kernels.
+
+**Result (σ, μ=0 gerade basis, R=1.4011):** 99.97% of D_e (0.053 mHa) at (j_max,l_max)=(3,4), n=416, α=1.0 — the same 0.05 mHa regime as the grid-based prolate treatment of Tao–McCurdy–Rescigno, obtained here with exact algebraic integrals. This **constructively settles what Paper 12's residual is**: electron–electron correlation captured by ordinary integer r₁₂ powers, NOT the non-analytic r₁₂^{1/2}/r₁₂ln r₁₂ terms the paper once invoked and withdrew.
+
+**Verified (independent-route + suspicious-exactness memory rules):**
+- Monotone descent from ABOVE along nested truncations: −20.66 → −0.167 → −0.079 mHa at n=18/90/160; all variational (E_tot > exact −1.174475).
+- mpf-orthogonalized solve == float64 to 0.00 µHa where conditioning is mild (n=18, n=90); at n=400 cond(S)=2.7e19 and the mpf solve pulls 16 µHa ahead of float64 (which drops 97/400 vectors) — the mpf solve is decisively load-bearing past the float64 wall.
+- Full-grid block validation (N_ξ=24,η=18,φ=28): p0×p1 kinetic 1.955e-5, full mixed matrix 9.35e-5.
+
+**Plateau diagnosed.** The energy plateaus near 0.05 mHa: at p≤1, single α, the overlap becomes linearly dependent (cond ~1e19 with ~all directions retained) — that space is nearly SPANNED. An α scan gains only ~2 µHa (optimum α≈1.0–1.2; the CI optimum α=1.40 is WORSE here — explicit r₁₂ already supplies the correlation a contracted exponent was compensating for). The microhartree regime is therefore a higher-r₁₂-power (p≥2) question, which the same A·K0 − B·K1 reduction extends to (with m≥2 channels) — flagged as the next sub-project, not claimed here.
+
+**Odd routing optimized 65×.** The odd-r₁₂¹ value of a unit monomial (P1,Q1,P2,Q2) is a fixed scalar G_odd = (A·K0)+(B·K1); memoized once, so every element is O(base) lookups, and the X-table is built ONCE per assembly (was 3× — once each in the odd-overlap, V_ne, and kinetic paths). n=90 assembly 653s → 10s; energies reproduce the quad-validated pre-optimization values to <0.02 µHa.
+
+### Added
+- `tests/test_paper12_r12.py` — backing test (fast: (2,2) beats p=0 control + variational; @slow: (3,2) sub-0.1 mHa; mpf==float64 anchor).
+- `debug/prolate_r12_mpf.py` — the exact mpf r₁₂ engine (assemble_mixed, kinetic_mixed_mpf, vne_mpf, _kern_even/_kern_odd1, G_odd machinery, solve_canonical_mpf). Prototype home; migrates to `geovac/` when the p≥2 arc closes.
+- `debug/r12ci_first_energy.py`, `debug/r12ci_convergence_ladder.py`, `debug/r12ci_alpha_scan.py` — drivers.
+- Registry keys `p12_r12_err_mha` (0.053), `p12_r12_de_pct` (99.97).
+
+### Changed
+- `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex` — new Sec. "Explicit correlation, evaluated algebraically" (method, the Eq. r12_kinetic_collapse IBP identity, result, plateau); abstract sentence.
+- CLAUDE.md §5 H2 Level-2 result cell + §2 best-results table + Level-4 note number → 99.97%/0.053 mHa.
+
+### Note
+This is a NEW method (explicit r₁₂) beating the corpus's own prior CI headline; it is NOT a new accuracy record against the literature (Kołos–Wolniewicz reached nanohartree decades ago with more r₁₂ powers). The contribution is doing explicit correlation with exact, quadrature-free integrals inside the GeoVac algebraic framework. May warrant a minor bump (PI call).
+
+## [v5.14.9] - 2026-09-19
+
+**Li's 33.2 mHa residual decomposed: 88% angular, not cusp — and the naive cusp gain is a 4.5× basis-redundancy artifact (diagnostic, PI-approved capture).**
+
+The per-shell-λ Li result (81.7 → 33.2 mHa, CHANGELOG v5.1.3) left its 33.2 mHa residual undecomposed. Decomposed now, one axis at a time from the per-shell-λ baseline on the existing s-only 3e R12-CI engine (no new method): **radial degree** (ns 4→7, free λ re-optimized each step) buys **3.06 mHa (9.2%)**; the **explicit-r12 geminal, measured at the radial-converged ns=7 basis**, buys **1.00 mHa (3.0%)**; the **residual surviving both is 29.13 mHa (87.7%)** — angular. Bookkeeping closes (33.18 − 3.06 − 1.00 = 29.12).
+
+**The cusp number is inflated 4.5× by basis redundancy.** Measured naively at the coarse ns=4 baseline the single geminal looks like 4.53 mHa (13.6%, the second-biggest lever); re-measured at ns=7 it collapses to 1.00 mHa. Most of what r12 buys at a coarse basis substitutes for missing radial flexibility, not cusp physics — the two axes are non-additive at a coarse basis, near-additive once cusp is read at the converged basis. A 2nd geminal adds only +0.355 mHa (single-γ is not the limitation, confirming the prior per-shell finding survives this basis).
+
+**Consequence:** for Li the accuracy lever is **l>0 orbitals (angular), NOT explicit correlation** — the opposite of H2 (cusp-limited). Explicit correlation is system-specific, not universal. The s-only engine structurally cannot reach the dominant 88%; an l>0 atomic build is the (separate, guardrail-adjacent) next lever, not launched here.
+
+**Caveats (in the memo, not hidden):** "29.1 mHa is angular" is operational (what survives both reachable axes), not a direct proof — no l>0 orbital built; angular inferred by subtraction. The geminal carries Legendre content to Lmax=20 so it is not a pure cusp probe. ns=8+ not measured (3-point geometric extrapolation → ~30.0 mHa asymptote). Cross-checks: HF correlation partition gives 66% angular (independent zero-point, matches the radial-ladder residual); EXACT["Li"] = −7.4780603236 verified vs literature (Yan–Drake/King lineage) to all quoted digits.
+
+### Diagnostic
+Sub-agent (sonnet) decomposition, verified here against `debug/data/r12ci_li_residual_decomposition.json` (verdict block: baseline 33.185, radial 3.060, cusp@ns7 0.998, residual 29.126 = 87.73%). Baseline reproduced from `debug/r12ci_per_shell_lambda.py` (unmodified).
+
+### Files
+- `debug/r12ci_li_residual_decomposition.py` — driver
+- `debug/data/r12ci_li_residual_decomposition.json`, `debug/data/li_residual_decomp_run.log` — data
+- `debug/sprint_li_residual_decomposition_memo.md` — canonical memo
+
+### Note
+No paper edited: the per-shell-λ Li work is not yet in a paper and touches the Papers 8–9 guardrail scope (a paper home is a PI call). Patch bump for the CHANGELOG capture the PI requested; CLAUDE.md §1/§2 synced. Not committed.
+
+## [v5.14.8] - 2026-09-19
+
+**LiH R_eq drift localized to a single term: the cross-center V_ne R-slope (Paper 19 sharpened, PI-approved).**
+
+The balanced-coupled LiH bond-length drift (0.20% energy but 8.8% R_eq at n_max=3) was already localized in Paper 19 to "the one-particle orbital basis" via an 8.8%-too-weak electronic gradient, but never decomposed by term. A Hellmann--Feynman term-freezing force decomposition (`F_T = tilt_full − tilt_frozenT = <ψ|dT/dR|ψ>`, exact at the minimum) now pins it: of the entire balanced Hamiltonian **only two operators carry any R-dependence** — the nuclear repulsion `V_NN = Z_A Z_B/R` and the cross-center `V_ne`. Within-block h1, within-block ERI, and cross-block ERI are **bit-exactly R-independent** (each F_T ≤ 1e-13 Ha/bohr). The LiH well is a strict two-term balance: V_NN outward (F = −0.331 Ha/bohr) vs cross-V_ne inward (F = +0.302), summing to the residual tilt −0.029 Ha/bohr — so the 8.8% deficit **is** the cross-center V_ne R-slope.
+
+**Mechanism (why energy-accurate but geometry-wrong):** cross-V_ne is evaluated in fixed, unpolarized hydrogenic orbitals (Z_orb=1 bond, Z=3 core) that never contract toward the bond as R changes. Its *magnitude* at any fixed geometry is basis-accurate (so the energy converges to 0.20%), but its *R-slope* — which encodes bonding-density relaxation — is under-delivered.
+
+**Closes to a documented wall, not a fix.** Healing it needs an R-adaptive polarizing bond orbital, which breaks the zero-parameter construction and re-enters the PK / Löwdin / non-orthogonal-encoding walls (§3). More shells make it worse (n_max=4 tilt worsens). No new fix warranted; the deliverable is the sharpened localization.
+
+### Diagnostic
+Sub-agent (opus) term-freezing decomposition, **verified here against the raw force budget** (`debug/data/balanced_reqdrift_termdecomp.json`: tilt_full −0.02904 = F[V_NN] −0.3308 + F[cross_vne] +0.3018; all other F_T ≤ 2e-13). LiH n_max=2 reproduced live (R_eq 3.218/6.7%, E 1.77%); n_max=3 (8.8% R_eq) from Paper 19 (not re-run, ~2.3 h/pt, documented CI-coverage gap). BeH₂/H₂O balanced PES infeasible (~600k-det FCI); their composed/PK R_eq drift (11.7% / 19.4%, Paper 17) is a different mechanism (PK (0,0)-channel dilution ∝ l_max), not the cross-V_ne slope.
+
+### Files
+- `papers/group2_quantum_chemistry/paper_19_coupled_composition.tex` — sharpened statement (Sec. "Fixed-geometry energy versus well shape"): the 8.8% deficit named as the cross-center V_ne R-slope; the two-term V_NN↔cross-V_ne balance stated with every other term exactly R-independent.
+- `tests/test_paper19_reqdrift_force_budget.py` — backing test (the R-independence partition: within/cross-block terms bit-identical across R, V_ne and V_NN move; V_NN change = analytic 3(1/R1−1/R2)). Fire-tested against a mutated (R-dependent) within-block term; `@slow`, 11 s.
+- `debug/sprint_balanced_coupled_reqdrift_memo.md`, `debug/sprint_balanced_reqdrift_termdecomp.py`, `debug/data/balanced_reqdrift_termdecomp.json` — diagnostic record.
+
+### Note
+Ordinary paper/diagnostic work; patch bump so the CHANGELOG entry the PI requested carries a version, CLAUDE.md §1/§2 synced. Not committed (commit/tag is PI-invoked via `/checkpoint`).
+
 ## [v5.14.7] - 2026-09-19
 
 **Fixed `/checkpoint`'s stale remote model, and clarified version-bump scope (PI direction).**
