@@ -76,7 +76,7 @@ the \emph{system-size} axis: at fixed basis the count is exactly
 linear in~$Q$, against Gaussian baselines that scale as
 $Q^{3.9}$--$Q^{4.3}$ (published counts of
 Trenev~\textit{et al.}~\cite{trenev2025}, span fitted by us); at equal
-qubit counts this yields $54\times$--$317\times$ fewer Pauli terms for
+qubit counts this yields $51\times$--$317\times$ fewer Pauli terms for
 H$_2$O across $n_{\max} = 1$--$3$.  These comparisons are at matched
 qubit counts, not matched accuracy; the composed basis carries
 classical equilibrium-geometry errors of 5--26\% (LiH/BeH$_2$/H$_2$O;
@@ -904,8 +904,9 @@ Specifically:
   1~QWC group, $\lambda = 3.38$.
 \item \textbf{He cc-pVDZ} ($M = 5$, $Q = 10$): contracted $[2s1p]$
   basis with computed integrals from uncontracted Gaussians.  FCI
-  energy $-2.8877$~Ha (within 0.001~Ha of published
-  values~\cite{nist_he}).  Produces 156~Pauli terms,
+  energy $-2.8877$~Ha (full CI in the contracted cc-pVDZ basis;
+  basis-set-limited, well above the exact non-relativistic
+  $-2.903724$~Ha of Ref.~\cite{Pekeris1958}).  Produces 156~Pauli terms,
   $\lambda = 42.95$.  This provides the first equal-qubit comparison
   with GeoVac $n_{\max} = 2$ (also $Q = 10$): GeoVac has
   $1.8\times$ \emph{more} Pauli terms (\gvq{he_n2_pauli}{288} vs.\ 156) and $3.8\times$
@@ -914,7 +915,8 @@ Specifically:
   the direction of this comparison.  See Sec.~\ref{sec:eri_rule}.)
 \item \textbf{He cc-pVTZ} ($M = 14$, $Q = 28$): contracted
   $[3s2p1d]$ basis with cached computed integrals.  FCI energy
-  $-2.9003$~Ha (within 0.0002~Ha of published values).  Produces
+  $-2.9003$~Ha (full CI in the contracted cc-pVTZ basis;
+  basis-set-limited, above the exact $-2.903724$~Ha).  Produces
   21{,}607~Pauli terms at 100\% ERI density, $\lambda = 530.47$.
   At the same qubit count, GeoVac $n_{\max} = 3$ produces
   \gvq{he_n3_pauli}{14{,}078}~terms ($1.5\times$ fewer) with $\lambda = \gvq{he_n3_lambda}{74.21}$
@@ -3522,12 +3524,14 @@ The molecule library now spans 37 systems (35 composed molecules plus
 the He and H$_2$ reference atoms), including
 the full first transition series of hydrides (ScH--ZnH; $Z = 21$--30,
 [Ar] frozen cores).  All ten use isolated $d$-orbital
-valence blocks ($l_{\min} = l_{\max} = 2$) with ERI density of 4.0\%,
-half that of $s$+$p$ blocks (8.9\%).  The resulting Pauli/$Q$
-ratio of~9.23 falls below the universal coefficient of~11.10 \emph{under
-the retired pair-diagonal ERI rule} (Sec.~\ref{sec:eri_rule})---an artifact
-of dropping more $m$-swap integrals at higher angular momentum, not a
-genuine saving (under the exact global-$M_L$ rule the $d$-block is denser).
+valence blocks ($l_{\min} = l_{\max} = 2$).  Under the exact
+global-$M_L$ rule their ERI density is $13.6\%$, close to the $s$+$p$
+blocks' $15.7\%$, and the $d$-block Pauli/$Q$ ratio is $30.03$---\emph{above}
+the main-group $27.90$, so the $d$-block is denser, not sparser.  (The
+retired pair-diagonal ERI rule instead gave $4.0\%$ vs $8.9\%$ densities
+and a $9.23$ ratio below $11.10$, misreading the $d$-block as sparser---an
+artifact of dropping more $m$-swap integrals at higher angular momentum,
+Sec.~\ref{sec:eri_rule}.)
 Transition metals
 are reclassified from ``out of scope'' to ``scoping demonstrated.''
 

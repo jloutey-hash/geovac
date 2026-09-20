@@ -8,9 +8,13 @@ Claims backed (numeric_registry: p12_r12_err_mha=0.053, p12_r12_de_pct=99.97):
   * r12 lifts D_e far above the p=0 (plain CI) control at matched basis;
   * the energy is variational (above the exact -1.174475 Ha);
   * the mpf-orthogonalized solve == float64 where conditioning is mild;
-  * the deeper truncation reaches the sub-0.1 mHa regime (the headline 0.053
-    mHa at n=416 is @slow-verified in the ladder; here the n=160 rung, err in
-    (-0.10, 0) mHa, anchors it affordably).
+  * the deeper truncation reaches the sub-0.1 mHa regime.  NB (corrected
+    2026-09-20, /qa DELTA): the headline 0.053 mHa / 99.97% at (j,l)=(3,4),
+    n=416 is NOT directly tested here -- the deepest @slow rung is (3,2) n=160
+    (>99.94%, err in (-0.10, 0) mHa).  Strict basis nesting (3,2) subset (3,4)
+    plus Rayleigh-Ritz variationally brackets the headline to [99.94%, 100%);
+    the exact 0.053 mHa value is registry-recorded (numeric_registry
+    provenance), not regression-pinned at n=416.
 
 The prototype engine lives in the sprint tree (debug/); this paper test imports
 it there per the C22 debug-import baseline, and migrates with the engine into

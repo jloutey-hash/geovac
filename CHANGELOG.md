@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.1] - 2026-09-20
+
+**`/qa` DELTA (PI-invoked) on Papers 12/14 + related 13/20 + synthesis currency = DEFECTS, remediated. The record numbers are SOUND; the defects were honesty/currency AROUND them: an unverifiable external (Tao–McCurdy–Rescigno) attribution that survived in three body loci, a live pair-diagonal zombie in Paper 20, synthesis staleness on the H₂ record, and a stale DoD.**
+
+Unseeded claim-impact DELTA (trust rests on the standing calibration record + PM verification of every finding against primary text/code). Deterministic layer (C13–C22) CLEAN on group2/group4/synthesis throughout. Five Opus reviewers: code, claims-12/13, claims-14/20, citations, synthesis-currency. The record-breaking numbers themselves verified sound — H₂ explicit-r₁₂ 99.97%/0.053 mHa (variational, quadrature-free, tests pass), He 0.216%, He reference −2.903724 (Pekeris confirmed), N_Pauli = 27.90 Q, Chawla (12,556 Pauli / 47,099 integrals) and Trenev cc-pVDZ counts all confirmed against primary sources.
+
+### Remediated
+- **TMR ground-state figures (LARGE).** Paper 12's abstract (v5.14.11) and CLAUDE.md had dropped the Tao–McCurdy–Rescigno "99.97% / 0.05 mHa / −1.17442 / −1.1732 Ha" figures as unverifiable — the cited paper computes double-photoionization, not a bound H₂ D_e (citation reviewer fetched the APS abstract; three prior attempts also failed). The body retained them at §gap, §implications, §conclusion, plus Paper 15 L725, and the surviving "99.97% of TMR" collided with the paper's OWN new explicit-r₁₂ 99.97% (whose energy −1.1744215 is nearly identical to the TMR "−1.17442"). Bodies brought in line with the softened abstract (TMR now qualitative only); the §implications understatement (stopped at 99.1%) fixed to carry the paper's own 99.81%/99.97%. New C16 entry `tmr-h2-groundstate-figures` uses in-pattern joined-text proximity (the numbers fire only within ~220 chars of a TMR marker — `require_nearby` is a no-op field in `scan_entry`, discovered this pass), so the paper's own result is untouched; discrimination proven both ways.
+- **Paper 20 pair-diagonal zombie (LARGE).** §Basis-completeness carried retired pair-diagonal LiH n_max=3 counts (balanced 19,959 / composed 7,879) as live → exact global-M_L values 127,855 / 42,535 (Paper 14 tab:composed_pauli; 7,879 = 42,535/5.40). The existing C16 `pairdiag-p19-balanced-prose-values` already held 19,959→127,855 but was scoped group2-only, so it never reached Paper 20/group4 — scope widened to group2+group4, composed 7,879 added, Paper 20 declared a dependent.
+- **nist_he mis-cite (SMALL).** Paper 14 cited the NIST Atomic Spectra Database (experimental) for the He cc-pVDZ FCI −2.8877 value; reworded to a computed cc-pVDZ full-CI value vs the exact −2.903724 (Pekeris). Same fix for the uncited cc-pVTZ −2.9003.
+- **d-block density zombie (SMALL).** Paper 14 v2.4.0 note read "ERI density 4.0%, half that of s+p (8.9%)" (retired pair-diagonal, d-sparser) with the retired marker on the wrong clause → exact 13.6% vs 15.7%, d-block ratio 30.03 > 27.90 (denser), retired values clearly marked.
+- **Abstract 54× → 51× (SMALL).** Paper 14 abstract's H₂O equal-qubit low end 54× (a conflation with the cc-pVDZ 54.98× advantage) → 51×, matching its own tab:equal_qubit (1126/22).
+- **Synthesis currency (5 loci).** The group2 synthesis (abstract, tab:hierarchy, narrative, conclusion) and the field-guide table led with the prior CI rung (99.81%/0.32 mHa; field guide ~99.1%) → the 99.97%/0.053 mHa explicit-r₁₂ record.
+- **DoD currency.** group4.done.md called λ O(Q^1.69) / QWC O(Q^3.36) "UNVERIFIED / not re-derived" — but the paper and `test_paper14_scaling.py` carry the re-derived 1.774/4.013 (retired 1.69/3.36 explicitly excluded from the test bands); superseded (papers win, §1 Authoritative Source Rule). group2.done.md Paper-12 watch-note updated with the r₁₂ record + a coverage note.
+- **NITs.** `test_paper12_r12.py` docstring overstated the backing (claimed the n=416 headline was "@slow-verified"; deepest rung is (3,2) n=160, and strict basis nesting variationally brackets the headline) → corrected; Mitnik2021 duplicated title line removed; field-guide He row gained the 0.216% graph-native route.
+
+All deterministic gates PASS post-remediation (C16/C17/C19/C21 × group2/group4/synthesis); all edited papers compile clean (zero undefined refs/cites).
+
+### Coverage gap logged (not a defect)
+The 99.97%/0.053 mHa headline at (j,l)=(3,4), n=416 is variationally bracketed by the backing test's (3,2) n=160 rung (>99.94%, monotone-nested, above exact) but not directly regression-pinned at n=416; the exact value is registry-recorded. An @slow n=416 rung is optional follow-up.
+
+### PI items (surfaced, not auto-fixed)
+- CLAUDE.md §1.5 carries the H₂O equal-qubit low end as "54×-317×"; the paper is now 51×-317× (§1.5 is not PM-editable — §13.5).
+- The group4 DoD's balanced-LiH resource line ("878 Pauli @ 30q, 0.20%") reads as n₂ resource + n₃ accuracy conflated; Paper 20 puts 0.20% at n₃/84q/127,855 Pauli. Worth a PI reconciliation.
+
+**Verdict: DELTA = DEFECTS, remediated.** A DELTA never PASSes; a clean re-delta (or a FULL run) is the precondition for certification.
+
+### Changed
+- `papers/group2_quantum_chemistry/`: paper_12_algebraic_vee.tex, paper_13_hyperspherical.tex, paper_15_level4_geometry.tex
+- `papers/group4_quantum_computing/`: paper_14_qubit_encoding.tex, paper_20_resource_benchmarks.tex
+- `papers/synthesis/`: group2_quantum_chemistry_synthesis.tex, geovac_field_guide.tex
+- `docs/qa/`: group2.done.md, group4.done.md
+- `debug/qa/check_retracted_terms.py` — new `tmr-h2-groundstate-figures` entry; widened `pairdiag-p19-balanced-prose-values` to group2+group4
+- `tests/test_paper12_r12.py` — docstring correction
+
 ## [v5.15.0] - 2026-09-20
 
 **Minor bump (PI-directed): the explicit-r₁₂ arc — an exact-algebraic explicit-correlation engine, its cross-system generalization boundary, and the QA-prep cleanup.**

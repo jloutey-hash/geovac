@@ -116,9 +116,16 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     **Grading note:** the CODE dimension of the 2026-09-19 run was graded against
     the OLD criterion and reported its falsification; any later dimension is
     graded against this one.
-  - **Paper 12 — watch-note refreshed 2026-09-19 (PI direction):** the live
-    headline is **99.81% of $D_e$ / 0.32 mHa** at the variational optimum
-    $\alpha=1.40$, with **99.767% / 0.41 mHa** the fixed-$\alpha=1.0$ ladder
+  - **Paper 12 — watch-note refreshed 2026-09-20 (/qa DELTA):** the live
+    headline is **99.97% of $D_e$ / 0.053 mHa via the explicit-$r_{12}$ CI**
+    (James--Coolidge, exact algebraic integrals, no quadrature; v5.14.10;
+    registry `p12_r12_de_pct` / `p12_r12_err_mha`; backing
+    `tests/test_paper12_r12.py`). *Coverage note:* the $(j_{\max},l_{\max})=(3,4)$,
+    $n=416$ headline point is variationally **bracketed** by the backing test's
+    $(3,2)$, $n=160$ rung ($>99.94\%$, monotone-nested, above exact) but is not
+    directly regression-pinned at $n=416$ (the test docstring, which claimed it was
+    "@slow-verified", was corrected 2026-09-20). The re-based CI **99.81% / 0.32 mHa**
+    at the variational optimum $\alpha=1.40$, and **99.767% / 0.41 mHa** the fixed-$\alpha=1.0$ ladder
     endpoint (registry `p12_rebased_de_pct_aopt`, `p12_rebased_de_pct`; both real,
     neither superseding the other). The 92.4% below is the $\sigma$-only monomial
     ceiling and 99.1% the azimuthal-restored monomial value — both historical

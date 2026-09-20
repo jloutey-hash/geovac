@@ -853,9 +853,8 @@ convergence of a partial-wave expansion, not a floor at 7.6\%.  Two
 calculations settle it.  Tao, McCurdy and
 Rescigno~\cite{tao_mccurdy_rescigno2010}, working in these same
 prolate spheroidal coordinates with a polynomial angular basis and no
-$r_{12}$ dependence anywhere in it, reach
-$-1.17442$~Ha---$0.05$~mHa from exact---at angular truncation
-$l_{\max} = 6$.  (Their odd-$m$ radial functions do carry an explicit
+$r_{12}$ dependence anywhere in it, carry out an accurate
+two-electron H$_2$ calculation in these same coordinates.  (Their odd-$m$ radial functions do carry an explicit
 $(\xi^2-1)^{1/2}$, which they introduce for the non-analytic behaviour
 at $\xi = 1$;\ that is a one-electron boundary condition on the focal
 axis, the analogue of the $\sin\theta$ behaviour of ordinary spherical
@@ -1447,8 +1446,10 @@ of natural geometries:
     Prolate spheroidal $\times$ prolate spheroidal with
     Neumann-algebraic $V_{ee}$.  One-electron physics is
     exact; electron correlation is resolved to 92.4\% in the
-    $\sigma$ sector and 99.1\% once the azimuthal channels are
-    restored (Sec.~\ref{sec:azimuthal}).  \emph{This paper.}
+    $\sigma$ sector, 99.1\% once the azimuthal channels are
+    restored (Sec.~\ref{sec:azimuthal}), and $99.81$--$99.97\%$ after
+    re-conditioning and the explicit-$r_{12}$ extension
+    (Secs.~\ref{sec:recondition},~\ref{sec:r12}).  \emph{This paper.}
 \end{enumerate}
 
 Each level in this hierarchy addresses a qualitatively different
@@ -1474,15 +1475,14 @@ claims an advantage over the other.  The two published figures are
 not a matched pair:\ the $99.1\%$ here is
 $(j_{\max},l_{\max}) = (3,3)$ at $|m| \le 1$, while the $96.0\%$
 there is $l_{\max} = 6$ with a Schwartz cusp correction and a
-different solver class, and the $99.97\%$ of
-Ref.~\cite{tao_mccurdy_rescigno2010} is a grid method again
-different from both---and not a like-for-like comparison:\ that
-$99.97\%$ is $l_{\max}=6$ with a full $m$-sum on a radial space roughly
-two orders larger than the basis here, while
-Ref.~\cite{tao_mccurdy_rescigno2010}'s own $l_{\max}=2$ point is
-$-1.1732$~Ha ($1.22$~mHa, a larger error than is reached here), so the
-gap is the angular order and basis size their radial representation
-affords, not the coordinate system.  The defensible statement is the negative one:\
+different solver class, so at matched $m_{\max}$ neither claims an
+advantage over the other.  Beyond that matched comparison, re-basing the
+$|m|\le1$ span onto an orthogonal-polynomial family
+(Sec.~\ref{sec:recondition}) takes this paper's H$_2$ to $99.81\%$ of
+$D_e$, and the explicit-$r_{12}$ extension (Sec.~\ref{sec:r12}) to
+$99.97\%$ ($0.053$~mHa)---which settles constructively that the residual
+is electron correlation captured by ordinary integer powers of
+$r_{12}$, not an inability of these coordinates to represent the cusp.  The defensible statement is the negative one:\
 prolate spheroidal coordinates are not disqualified for H$_2$ by an
 inability to represent the cusp, because no such inability is in
 evidence.
@@ -1590,9 +1590,10 @@ the residual was the electron-electron cusp demanding non-analytic
 $r_{12}^{1/2}$ and $r_{12}\ln r_{12}$ terms, and read that as
 identifying hyperspherical coordinates as the next natural geometry.
 Both are withdrawn:\ the calculations above contain no such term and
-reach 99\%, and the grid-based prolate spheroidal treatment of
-Ref.~\cite{tao_mccurdy_rescigno2010} reaches $0.05$~mHa in these
-coordinates with a polynomial angular basis.
+reach chemical accuracy---$0.053$~mHa with the explicit-$r_{12}$
+extension---and an accurate grid-based prolate spheroidal treatment in
+the literature~\cite{tao_mccurdy_rescigno2010} independently shows these
+coordinates are not cusp-limited.
 
 The result demonstrates a form of quantum chemistry where
 recurrence relations and closed forms on quantum number labels replace

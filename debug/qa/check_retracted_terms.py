@@ -3101,17 +3101,78 @@ REGISTRY = [
                 "/ QWC 2,298 dropped; Pauli exponent 3.03 -> 3.74; LiH "
                 "balanced/composed ratio 2.53x~2.63x -> 3.25x; polyatomic ratio "
                 "sequence 2.63/4.77/7.45x -> 3.25/6.35/10.10x; ERI census 130/195 "
-                "-> 214/321 (test_cross_block_eri_count).",
-        "pattern": r"19\{,\}959|19,959"
+                "-> 214/321 (test_cross_block_eri_count).  Also (2026-09-20, "
+                "/qa DELTA): Paper 20 sec:basis-completeness prose carried the "
+                "same 19,959 (balanced) PLUS the retired composed 7,879 at "
+                "n_max=3 (Q84) -> exact-rule 127,855 / 42,535 (Paper 14 "
+                "tab:composed_pauli LiH n3 = 42,535; 7,879 = 42,535/5.40, the "
+                "paper's own n3 re-pricing factor).  Scope widened group2 -> "
+                "group2 group4 so the Paper 20 locus is gated.",
+        "pattern": r"19\{,\}959|19,959|7\{,\}879|7,879"
                    r"|(?:4\.77|7\.45)\$?\\times\$?\s*\(\d-block"
                    r"|2\.53\$?\\times\$?\)? is consistent",
         "exempt_if_nearby": r"retired|RETIRED|pair-diagonal|withdrawn"
                             r"|corrected|under the retired|superseded",
         "severity": "fail",
-        "scope": "group2",
-        "cited_by": {},
+        "scope": "group2 group4",
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex":
+                "reviewed 2026-09-20 -- owner; its tables already exact-rule",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex":
+                "reviewed 2026-09-20 (/qa DELTA) -- L1158 prose 19,959/7,879 -> 127,855/42,535",
+        },
         "files": [
             "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+            "papers/group4_quantum_computing/paper_20_resource_benchmarks.tex",
+        ],
+    },
+    {
+        "id": "tmr-h2-groundstate-figures",
+        "note": "2026-09-20 (/qa DELTA, claims + citations).  Paper 12's abstract "
+                "(softened v5.14.11) and CLAUDE.md dropped the Tao-McCurdy-Rescigno "
+                "'ground-state H2' figures -- -1.17442 Ha at l_max=6, 0.05 mHa, "
+                "99.97% of D_e, and an l_max=2 point -1.1732 Ha -- as UNVERIFIABLE: "
+                "the cited paper (PhysRevA.82.023423) computes DOUBLE-PHOTOIONIZATION "
+                "cross-sections, NOT a bound H2 ground-state energy / D_e (citation "
+                "reviewer fetched the APS abstract this pass; three prior "
+                "verification attempts also failed).  The body retained them at "
+                "three loci (sec:gap, sec:implications, sec:conclusion) and Paper 15 "
+                "L725, and the surviving '99.97% of TMR' collided with Paper 12's "
+                "OWN new explicit-r12 99.97% / 0.053 mHa (whose energy -1.1744215 is "
+                "nearly identical to the TMR '-1.17442').  Corrected: bodies brought "
+                "in line with the already-softened abstract -- TMR cited only as "
+                "'an accurate two-electron H2 calculation in these coordinates', no "
+                "specific number.  The paper's OWN 99.97% / 0.053 mHa (explicit r12, "
+                "registry p12_r12_de_pct / p12_r12_err_mha) is legitimate and "
+                "untouched; the pattern keys the retired numerals to the TMR cite so "
+                "it never fires on the paper's own result.",
+        # Discrimination is IN-PATTERN via joined-text proximity (scan_entry
+        # matches the newline-joined document, so `.{0,220}` spans lines).
+        # Bare 99.97 / 0.05 mHa ALSO describe the paper's OWN explicit-r12
+        # result (L1372/L1390), so they fire ONLY within ~220 chars of a TMR
+        # marker.  The TMR-unique energies -1.17442 / -1.1732 fire on their own
+        # (the paper's own r12 energy is -1.1744215, guarded by the negative
+        # lookahead).  NB: `require_nearby` is NOT read by scan_entry -- proximity
+        # must live in the pattern itself.
+        "pattern": r"-?1\.17442(?![0-9])"
+                   r"|-?1\.1732(?![0-9])"
+                   r"|(?:tao_mccurdy_rescigno|McCurdy|Rescigno).{0,220}99\.97"
+                   r"|99\.97.{0,220}(?:tao_mccurdy_rescigno|McCurdy|Rescigno)"
+                   r"|(?:tao_mccurdy_rescigno|McCurdy|Rescigno).{0,220}0\.05(?![0-9])~?mHa"
+                   r"|0\.05(?![0-9])~?mHa.{0,220}(?:tao_mccurdy_rescigno|McCurdy|Rescigno)",
+        "exempt_if_nearby": withdrawal_marker("tmr-h2-groundstate-figures"),
+        "severity": "fail",
+        "scope": "paper_12 paper_15 group2",
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex":
+                "reviewed 2026-09-20 -- sec:gap/sec:implications/sec:conclusion TMR "
+                "numbers removed; own 99.97% kept; sec:implications understatement fixed",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex":
+                "reviewed 2026-09-20 -- L725 TMR '99.97%' -> qualitative",
+        },
+        "files": [
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex",
         ],
     },
 ]

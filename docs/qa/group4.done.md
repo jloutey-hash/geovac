@@ -73,9 +73,11 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
      composed within-molecule $3.17$ small-basis fit, local slope $\sim\!3.8$ by $n_{\max}=4$
      (retired: $O(Q^{2.5})$); Paper 20 two-point ($n_{\max}=1,2$) $\alpha = 2.816$ **identically across
      all six molecules** (retired: $2.21 \pm 0.02$), forced by $1 + \log_5 18.6$; $N_{\rm Pauli} =
-     27.90\,Q$ main-group / $30.03\,Q$ $d$-block (retired: $11.10$ / $9.23$). The 1-norm $O(Q^{1.69})$
-     and QWC $O(Q^{3.36})$ exponents are the two that were **not** re-derived in the correction —
-     treat them as UNVERIFIED under the exact rule, not as robust.
+     27.90\,Q$ main-group / $30.03\,Q$ $d$-block (retired: $11.10$ / $9.23$). The 1-norm and QWC exponents WERE re-derived under the exact
+     rule (2026-08-30): $\lambda \sim O(Q^{1.77})$ ($1.774$, $R^2=0.9997$) and $N_{QWC} \sim O(Q^{4.01})$
+     ($4.013$), pinned by `test_paper14_scaling.py` with the retired pair-diagonal $1.69$/$3.36$
+     **explicitly excluded** from the asserted bands. (Updated 2026-09-20, /qa DELTA — the earlier
+     "UNVERIFIED" note is superseded; the paper + test win per §1 Authoritative Source Rule.)
    - **Absolute multipliers / market-test lines** — sensitive as before. LiH re-prices 333→837;
      equal-qubit H$_2$O $54\times$–$317\times$ (retired: $51\times$–$1712\times$); cc-pVDZ $76\times$
      (retired: $190\times$); the $d$-block coefficient $9.23 \to 30.03$, becoming **denser** than
@@ -139,8 +141,9 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     **identically**, spread $0.000$); $N_{\rm Pauli}=27.90\,Q$ exact, $30.03\,Q$ $d$-block
     (retired: $11.10$ / $9.23$); per-block $279$ non-identity Pauli from $107$ ERIs
     (retired: $111$ / $65$); ERI density $\sim 1/M$ (corrected v4.54.0).
-    **QWC groups $O(Q^{3.36})$ and 1-norm $\lambda\ O(Q^{1.69})$, $R^2=0.997$ were NOT re-derived
-    under the exact rule — treat as UNVERIFIED, not as canonical.** ⚑ equal-qubit advantage
+    **QWC groups $O(Q^{4.01})$ ($4.013$) and 1-norm $\lambda\ O(Q^{1.77})$ ($1.774$), $R^2=0.9997$ —
+    re-derived under the exact rule 2026-08-30, pinned by `test_paper14_scaling.py` (retired
+    pair-diagonal $3.36$/$1.69$ excluded from the bands; updated 2026-09-20, /qa DELTA).** ⚑ equal-qubit advantage
     $54\times$–$317\times$ (retired: "two-or-more orders of magnitude / 51×–1712×"); the
     "$d$-block sparser" claim **REVERSES** ($30.03 > 27.90$); matched-qubit-not-accuracy caveat
     MANDATORY.

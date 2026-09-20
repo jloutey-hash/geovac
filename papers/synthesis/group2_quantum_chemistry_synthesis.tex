@@ -86,10 +86,10 @@ point group~\cite{loutey_paper58}.
 \emph{Third}, honest accuracy ceilings:\ the framework reaches
 machine precision for $\mathrm{H}_2^+$, $0.022\%$ (properly variational, raw
 $l_{\max}=7$) down to $0.004\%$ (a non-variational cusp extrapolation)
-for He, $99.81\%$ of $D_e$ ($0.32$~mHa, inside chemical accuracy) for
-$\mathrm{H}_2$ in prolate spheroidal coordinates at the variational
-optimum $\alpha = 1.40$---the fixed-$\alpha$ ladder endpoint is
-$99.77\%$ ($0.41$~mHa)---and $96.0\%$ (cusp-corrected) in
+for He, $99.97\%$ of $D_e$ ($0.053$~mHa) for $\mathrm{H}_2$ via an
+explicit-$r_{12}$ extension of the prolate spheroidal engine with exact
+algebraic integrals ($99.81\%$ / $0.32$~mHa via re-conditioned CI at the
+variational optimum $\alpha = 1.40$)---and $96.0\%$ (cusp-corrected) in
 the molecule-frame hyperspherical treatment---two routes to the same
 system, not a matched pair, and $\mathrm{H}_2$'s natural geometry is the
 prolate spheroid---and---in the
@@ -172,7 +172,7 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & machine precision (spectral Laguerre) & \cite{loutey_paper11} \\
 3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $0.216\%$ (graph-native CI) & \cite{loutey_paper13} \\
 4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, cusp-corrected) & \cite{loutey_paper15} \\
-4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal, $|m|\le1$ & $99.81\%$ of $D_e$ ($0.32$~mHa) at $\alpha_{\rm opt}=1.40$;\ $99.77\%$ at the fixed-$\alpha$ ladder endpoint & \cite{loutey_paper12} \\
+4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal & $99.97\%$ of $D_e$ ($0.053$~mHa) via explicit-$r_{12}$ CI (exact integrals);\ $99.81\%$ ($0.32$~mHa) via re-based CI at $\alpha_{\rm opt}=1.40$ & \cite{loutey_paper12} \\
 4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 63.5\%$ ($l_{\max}=2$, 2D variational; unbound $D_e$, no PK) & \cite{loutey_paper17} \\
 5 & LiH (core+valence) & composed (L3 $\oplus$ L4) & $R_{\mathrm{eq}}$ $5.3\%$ ($l$-dependent PK) & \cite{loutey_paper17} \\
 5 & $\mathrm{BeH}_2$ (polyatomic) & composed $+$ 1-RDM exchange & $R_{\mathrm{eq}}$ $11.7\%$ & \cite{loutey_paper17} \\
@@ -359,7 +359,10 @@ $11.6$~mHa against the $0.34$~mHa
 available from near-tripling the $\sigma$ basis.  Re-conditioning that
 same span (Laguerre $\times$ Legendre, high-precision assembly) then
 climbs to $99.81\%$ ($0.32$~mHa, inside chemical accuracy) at the
-variational optimum $\alpha = 1.40$~\cite{loutey_paper12}.  The
+variational optimum $\alpha = 1.40$, and an explicit-$r_{12}$ extension of
+the same engine---every $r_{12}$ matrix element reduced to the same
+algebraic Neumann kernels, no quadrature---reaches $99.97\%$
+($0.053$~mHa)~\cite{loutey_paper12}.  The
 $|m| = 2$ sector was numerically unstable in the differentiation-based
 radial engine, so the $\delta$ contribution (${\approx}0.5$~mHa) was
 first fixed by an independent Gaussian-basis route;\ the quoted figure
@@ -1080,8 +1083,8 @@ coordinates for He ($0.022\%$ variational raw / $0.004\%$ non-variational
 cusp, $0.216\%$ graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
 coordinates for $\mathrm{H}_2$ ($96.0\%$ of $D_e$,
 cusp-corrected)~\cite{loutey_paper15}---though $\mathrm{H}_2$'s natural
-geometry is the prolate spheroid, where the re-conditioned CI reaches
-$99.81\%$ ($0.32$~mHa)~\cite{loutey_paper12}---and composed fiber bundles for
+geometry is the prolate spheroid, where an explicit-$r_{12}$ CI reaches
+$99.97\%$ ($0.053$~mHa)~\cite{loutey_paper12}---and composed fiber bundles for
 core--valence and polyatomic systems ($5.3\%$, $11.7\%$, $19.4\%$
 bond-length error for LiH, $\mathrm{BeH}_2$,
 $\mathrm{H}_2\mathrm{O}$)~\cite{loutey_paper17}.  The arc is held
