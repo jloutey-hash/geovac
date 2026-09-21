@@ -1420,6 +1420,40 @@ polarization (an angular effect).  This is the two-center, two-different-charge
 analogue of the H$_2$ convergence, and the precedent for the frozen-core LiH
 extension.
 
+\textbf{[MEASURED 2026-09-21]} The reduction is also not specific to two
+electrons, and this places the natural boundary of the quadrature-free,
+\emph{resolution-of-identity--free} discipline.  For a James--Coolidge ansatz
+$\Psi = F\,\Phi$ with $F=\sum_{p<q}f_{pq}$ multiplicative, the variational
+kernel $\langle\Phi|F H F|\Phi\rangle$ stays at most three-body through
+$N=3$:\ every term of the operator product closes with closed-form angular
+rules (a shared-vertex rule fixing scalar legs to $L=0$, and the triangle rule
+$\langle P_a(12)P_b(13)P_c(23)\rangle = \delta_{abc}/(2a+1)^2$), so the
+three- and four-electron integrals that force a resolution of identity in
+Gaussian $R_{12}/F_{12}$ theory are here evaluated \emph{exactly}, with no such
+approximation.  At $N=4$ a genuinely four-body term first appears---the
+disjoint-pair Coulomb chain $f_{12}\,f_{34}\,r_{13}^{-1}$, with the two
+correlation edges bridged by one Coulomb, four distinct electrons (only the
+two-body Coulomb can bridge disjoint pairs; the kinetic gradients are
+pair-local and $V_{ne}$ is one-body).  This term is nonetheless still
+\emph{exact}, still RI-free, and still \emph{reducible}:\ the bridging-Coulomb
+multipole sum terminates at $L\le 2\,l_{\rm bridge}$ (measured
+$s\!\to\!0,\,p\!\to\!2,\,d\!\to\!4$, bounded by the finite orbital angular
+content, not by the Coulomb), and the Legendre addition theorem factorizes the
+chain across the bridge into a finite $(L,M)$ contraction of vertex kernels---the
+chain analogue of the triangle contraction.  A native evaluation was validated
+against brute-force $12$-dimensional Monte-Carlo integration to $2\times10^{-4}$
+on the Be-relevant four-electron integral, including with the antisymmetric
+determinant (exchange).  As a proof of concept it was exercised inside a
+minimal-basis Be $R_{12}$-CI, where a single short-range geminal captures
+$\sim\!19\%$ of the correlation energy variationally with the four-body term
+evaluated by this reduction.  The residual hard walls are on separate
+axes---an explicit four-body correlation operator is a four-body Pauli string
+in a qubit encoding, and the non-Hermitian transcorrelated route carries
+vector legs that do not reduce this way---but the classical exactness axis, on
+which Gaussian $F_{12}$ resorts to a resolution of identity, extends past $N=3$
+rather than stopping there.  This is a diagnostic result at proof-of-concept
+resolution, not a spectroscopic $N=4$ claim.
+
 Backing:\ test \texttt{tests/test\_paper12\_r12.py} and the reduction of
 Eq.~\eqref{eq:r12_kinetic_collapse} above;\ chronicle in \texttt{CHANGELOG.md}.
 (The prototype engine migrates from the sprint tree into \texttt{geovac/} when

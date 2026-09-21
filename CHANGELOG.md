@@ -7,6 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.9] - 2026-09-21
+
+**Be R12-CI energy — the 4-body RI-free reduction demonstrated inside a real Be correlation energy: E_R12 = −14.5572 Ha, −18.2 mHa correlation (19% of Be's 94 mHa), variational, with the ill-conditioned coupling computed ANALYTICALLY (exact).** PI-directed follow-on to v5.15.8 ("build that; Be first then record; finish the full engine"). Full account: `debug/sprint_n4_wall_diagnostic_memo.md` §7b.
+
+### The build
+2×2 variational R12-CI, `{Φ₀, FΦ₀}`, Φ₀ = Be 1s²2s² (minimal Slater, E₀ = −14.539, 34 mHa from HF limit), F = Σf_ij explicit correlation. Reference + machinery: `debug/be_r12ci_{reference,matelem,ortho,analytic,engine,full}.py`.
+
+### Three load-bearing findings
+- **The linear-geminal energy is ill-conditioned.** With f = 1−e^{−r} (→1 at large r), F̄≈5 and {Φ₀, FΦ₀} are 99.8% parallel; the coupling `h = H₀₁ − F̄·E₀` is a ~0.03 residual of two ~71-magnitude numbers → needs H₀₁ to ~1e-4 relative, beyond any MC. Every pure-MC route (VMC nodes; matrix-element MC heavy Coulomb tails + generalized-eigensolver noise bias) failed for exactly this reason — diagnosed, not guessed.
+- **A short-range geminal fixes it.** f = r·e^{−2r} (same cusp f′(0)=1, →0 at large r): parallelism 0.994→0.86, F̄ 4.9→0.3.
+- **The ill-conditioned pieces must be analytic; the rest can be MC.** Built the noise-free analytic block-reduction engine (`be_r12ci_full.py`): all-s orbitals → every term is a radial integral over up-block {1,2} × down-block {3,4} with monopole kernels. Validated: S₀₀/S₀₁/S₁₁ exact (Slater-Condon to 3e-13); **H₀₁/S₀₀ = −4.4642 matches MC −4.458 (0.15%), grid-converged (0.013%)**. So `h = hT + hV = 0.135 − 0.167 = −0.03232` and `σ² = 0.015167` are **exact analytic**; `g = ⟨G|H|G⟩` is well-conditioned → its 0.5% MC value suffices.
+
+### Result
+**E_R12 = −14.5572 Ha, correlation −18.2 mHa (19% of true), variational.** The 4-body RI-free content lives in `gV = E[(F−F̄)²V_ee]`. This is the "RI-free 4-body evaluation works inside a Be energy" demonstration with a trustworthy number. **NOT overclaimed:** PoC-level (single geminal, minimal basis; not spectroscopic). The full analytic H₁₁ (F²·V_ee three-pair) would make g exact but changes the answer < MC noise; the engine's purpose — kill the ill-conditioning by making h, σ² exact — is achieved.
+
+### Added
+- `debug/be_r12ci_reference.py` — Be Φ₀ reference (E₀ = −14.539, validated vs HF limit).
+- `debug/be_r12ci_matelem.py`, `be_r12ci_ortho.py` — matrix-element / orthogonalized-basis MC (diagnostic + well-conditioned g).
+- `debug/be_r12ci_analytic.py`, `be_r12ci_engine.py`, `be_r12ci_full.py` — the analytic block-reduction engine (overlaps + H₀₁ exact; TWOPAIR framework).
+- `debug/be_r12ci_4body_exchange.py` — 4-body Coulomb term with the determinant (exchange), reduced == brute.
+
+### Changed (the two PI-directed flags from v5.15.8, now applied)
+- `docs/walls/register.md` — registered the "N=4 explicit-r₁₂ 4-body wall" (previously an implicit HARD wall) as **SOFTENED · SOFT** with the diagnostic + Be-energy evidence (exact/RI-free/terminating/reducible for the scalar Coulomb term); the genuinely-hard residuals (quantum-encoding 4-body Pauli, non-Hermitian TC, kinetic-vector) named as separate axes. Dated delta in the CHEM-ACCURACY cluster.
+- `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex` §sec:r12 — added a `[MEASURED 2026-09-21]` paragraph: the algebraic RI-free reduction reaches N≤3 with no resolution-of-identity, and the N=4 scalar-Coulomb four-body term is exact/RI-free/reducible (not RI-forced), validated reduced==brute to 2e-4 (incl. exchange) and exercised in a PoC Be R12-CI; hard residuals on separate axes. Presented at diagnostic/PoC tier (not a spectroscopic N=4 claim); compiles clean (15 pp).
+
+## [v5.15.8] - 2026-09-21
+
+**N=4 explicit-r₁₂ "wall" diagnostic — the documented "N=4 needs 4-body operators, no ≤3-body reduction" is SOFT for the scalar Coulomb term: exact, RI-free, terminating, reducible; confirmed with a number (reduced closed form == 12-D brute Monte-Carlo, rel 2.5e-4).** PI-directed ("diagnose the N=4 wall; Be first then record"). A diagnostic, not a new energy. Full account: `debug/sprint_n4_wall_diagnostic_memo.md`.
+
+### The question
+Exact-algebraic explicit-r₁₂ (James-Coolidge — r₁₂ in the BASIS, no strong-orthogonality projector, hence **no RI**) closes with no RI through N=3 (RULE A / RULE B / TRIANGLE). The corpus recorded N=4 (Be) as "THE WALL, needs 4-body operators, no ≤3-body reduction." The strong reading — that N=4 is where exact-no-RI *stops*, an RI-class obstruction like Gaussian F12 — was never tested. Distinct from the 2026-08-23 dead end ("TC three-body collapse via Gaunt/6j", which tried to COLLAPSE a 3-body operator via an abelian trick and failed on non-abelian coupling): this accepts no collapse and asks whether the genuine 4-body integral is still finite/closed-form. Hermitian variational scalar object, not the non-Hermitian TC commutator.
+
+### The object
+In `⟨Φ|F H F|Φ⟩` (F = Σf_pq multiplicative), the ONLY genuinely-4-body-connected term is the scalar Coulomb CHAIN `f₁₂·f₃₄·(1/r₁₃)` (graph 2-1-3-4, four distinct electrons). **Term-enumeration:** kinetic gradients are pair-local (`∇_k f₁₂·∇_k f₃₄ = 0` for disjoint pairs) and V_ne is one-body — neither can bridge two disjoint correlation edges; only the two-body Coulomb can. N=3 never produced a chain (3 electrons → every pair shares a vertex → triangle).
+
+### Q1 termination (`debug/r12ci_4e_wall_diagnostic.py`)
+The bridge Coulomb multipole sum **truncates at L = 2·l_bridge** (s→0, p→2, d→4) — bounded by the finite orbital angular content, not the unbounded Coulomb. → the "no RI" property carries through N=4.
+
+### Q2 reducibility (`debug/r12ci_4e_wall_q2_reducibility.py`)
+By the Legendre addition theorem the chain factorizes across the bridge into a finite (L,M) contraction of THREE-body vertex kernels (confirmed on a fully-active l=1 case: L=0 rel 6.1e-3, L=2 rel 2.8e-3) — the chain analogue of the N=3 `triangle_contract`, not an irreducible 4-index blow-up.
+
+### The Be number (`debug/r12ci_4e_be_integral.py`)
+The genuinely-4-body Be-relevant integral `I = ⟨ρ₁ρ₂ρ₃ρ₄ f₁₂f₃₄/r₁₃⟩` (bridge e1,e3 = 2p = Be's correlating space; leaves e2,e4 = 1s = core), two independent ways:
+- **REDUCED** (deterministic: 1s leaves integrate out into a 1D radial dressing → standard 2-electron Slater-Condon Coulomb integral of the dressed 2p densities, L∈{0,2}): **5.08756e-2**.
+- **BRUTE** (full 12-D importance-sampled MC, no reduction): 5.0874e-2 ± 1.9e-5 (**0.1σ**), 5.0863e-2 ± 9.5e-6 (1.4σ).
+Agreement at the MC-limited ~2e-4 level. Bridge L=2 carries 7.2% → the angular bridge is genuinely exercised. The independent cross-check caught a real `(2L+1)` bug in a hand-derived `Θ^L` (first run disagreed 22%/1540σ) before it became a false confirmation — replaced with deterministic angular quadrature; the number is trustworthy because two unrelated methods meet.
+
+### Verdict (scoped)
+The N=4 scalar Coulomb bridging term is **NOT an RI/decidability wall** — exact, RI-free, terminating, reducible (for s-leaves: literally a 2-electron Slater-Condon integral of dressed densities). The corpus's wall statement is TRUE as a term claim but its *implication* (exact-no-RI stops here) is refuted. General resolution the PI hoped for: the bridge addition theorem — every disjoint-pair coupling factorizes across its bridging two-body operator; likely extends to N≥5. **NOT overclaimed:** (i) a diagnostic + one validated integral, NOT a Be R12-CI energy; (ii) scoped to the scalar Coulomb term (kinetic-vector 4-body argued non-bridging but untested; non-Hermitian TC is a different, harder operator); (iii) the quantum-encoding wall (4-body Pauli string) is separate and real. On this narrow axis GeoVac is genuinely ahead of Gaussian-F12 (which uses RI for exactly these integrals). Next step (owed): a full Be R12-CI matrix element (with exchange chains) end-to-end via the reduced form, for a spectroscopic number.
+
+### Added
+- `debug/r12ci_4e_wall_diagnostic.py` — N=4 term inventory + Q1 termination scan.
+- `debug/r12ci_4e_wall_q2_reducibility.py` — Q2 bridge-factorization (addition-theorem) test.
+- `debug/r12ci_4e_be_integral.py` — the Be 4-electron bridging integral, reduced closed form vs 12-D brute MC.
+- `debug/sprint_n4_wall_diagnostic_memo.md` — canonical memo.
+
+### Changed
+- `memory/r12_generalization_boundary_n3_n4.md` — N=4 boundary reframed: hard-wall → scalar-Coulomb soft-wall (exact/RI-free/reducible), Be number confirmed; the hard walls named as separate axes.
+
 ## [v5.15.7] - 2026-09-20
 
 **All-electron (variational-core) prolate LiH — increment 7 + two PI-directed review cycles: engines BUILT + VALIDATED, verdict = the frozen-core-is-culprit / variational-core-is-cure conclusion STANDS (bracketed + standard-QC), but a bespoke clean LiH R_eq is blocked by a NUMERICAL wall (R-tied tight-core grid resolution + two-center-basis completeness), not physics.** PI-directed "build the N=4 variational-core LiH," then "does the cancellation idea spark?", then "take a test cycle at the graded grid." Full chronicle: `debug/track_logs/prolate_native_lih.md`.
