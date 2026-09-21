@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.10] - 2026-09-21
+
+**LiH (two-center) N=4 explicit-r₁₂ 4-body integral gate (σ + π/δ) — the Be atomic soft-wall reduction (v5.15.8/9) CARRIES TO TWO CENTERS, FOR ALL AZIMUTHAL CHANNELS: the genuinely-4-body bridging integral of a two-center (LiH-geometry) explicit-r₁₂ CI reduces EXACTLY, RI-free, to a 1-D leaf dressing + a two-center prolate Neumann Coulomb between the dressed densities — validated first for σ (m=0) and then for the π (m=1) / δ (m=2) azimuthal-transfer channels.** PI-directed: the "prolate 4-body integral gate," chosen as the load-bearing first step of the accurate-LiH build (`debug/lih_r12_build_plan.md`) — the plan's own "validate reduced==brute on one 4-electron LiH integral BEFORE any energy," reordered to Step 1 — then extended to m≠0 ("push straight on to the π channel"). A diagnostic / integral validation, **not a LiH energy**. Full account: `debug/sprint_lih_r12_4body_integral_memo.md`.
+
+### The object and the reduction
+The only genuinely-4-body-connected term in `⟨Φ|F H F|Φ⟩` is the scalar Coulomb chain `I = ⟨ρ₁ρ₂ρ₃ρ₄ f₁₂f₃₄/r₁₃⟩` (graph 2-1-3-4). Be was atomic (isotropic → monopole kernels, single-center Slater-Condon bridge); LiH is two-center, so the bridging Coulomb acts between two-center densities and needs the **prolate two-center Neumann** expansion. Model orbitals (pure integral validation, as in the Be file): bridge e₁,e₃ = 1s on focus B (diffuse, Z=1.0); leaves e₂,e₄ = 1s on focus A (tight, Z=2.7); f=exp(−0.5 r); R=3.015.
+- **Leaf dressing** (Be-style radial monopole, EXACT for an isotropic leaf): each 1s leaf integrates out into `Ψ_A(r_{1A}) = ∫ρ_A(r₂)f(r₁₂)d³r₂` (spherical average of f).
+- **Two-center prolate Neumann bridge** (the NEW piece vs Be): the residual is a Coulomb between the dressed two-center densities `D=ρ_B(r_B)·Ψ_A(r_A)`, expanded as `1/r₁₃ = (2/R)Σ_l Σ_m (−1)^m(2l+1)[(l−|m|)!/(l+|m|)!]² P_l^{|m|}(ξ_<)Q_l^{|m|}(ξ_>)P_l^{|m|}(η₁)P_l^{|m|}(η₃)e^{im(φ₁−φ₃)}` (σ → m=0 only). The l-sum converges/terminates → RI-free.
+
+### Controls (validate the machinery before the 4-body number)
+- **C0** ∫ρ_B dτ (prolate) = 1.000000 (exact normalization).
+- **C1** prolate Neumann self-Coulomb of 1s_B = 0.625085 vs the **closed form 5α/8 = 0.625000** (rel 1.4e-4 at the default grid → 2.9e-5 at 560×260, halving each refinement). This is the rigorous anchor for the new bridge machinery + its prefactor `(2/R)(2π)²a⁶` + the Q_l tables — **exact-in-the-limit against a closed form**, an anchor the Be gate (MC-only for its bridge) did not have.
+- **C2** leaf dressing `⟨ρ_A ρ_B f⟩`: reduced 0.206596 vs independent 2e MC 0.206613 ± 1.6e-5 (rel 8.1e-5).
+
+### The 4-body number
+REDUCED descends monotonically to its grid limit as the (ξ,η) grid refines (residual = quadrature bias, not structural): 2.85693 → 2.85651 → 2.85639 → 2.85633e-2, extrapolating (selfCoul→0) to **2.85625e-2**; L-sum tail (l≥20) = 3.6e-24 (RI-free). BRUTE (full 12-D MC, no reduction) is **heavy-tailed** in 1/r₁₃ — four independent 120–200M runs scatter across 2.85567 / 2.85576 / 2.85591 / 2.85679e-2 (~1e-4), so both naive √(var/N) and batch-means underestimate the true uncertainty; 3×120M batch-means mean = 2.85582e-2. **Meet:** reduced(grid limit) 2.85625e-2 and brute 2.85582e-2 agree to rel 1.5e-4, within the MC heavy-tail scatter.
+
+### The π (m=1) / δ (m=2) extension (`debug/lih_r12_4body_pi_channel.py`)
+A diagonal density `|φ|²` of a pure-m orbital is φ-independent → the m≠0 bridge channels never activate from diagonal densities (the m-transfer lives in the exchange/transition-density terms of a real CI). To exercise the general-m prolate Neumann bridge with a positive, MC-samplable density, the σ bridge density is azimuthally modulated: `ρ_bridge = ρ_{1s_B}·(1 + β₁cosφ + β₂cos2φ)` (β₁=0.6, β₂=0.4), carrying m=0, ±1 (π), ±2 (δ) explicitly and sampling exactly like the σ case (1s_B proposal + a φ-weight). Only the bridge changes: the general-m expansion uses associated Legendre `P_l^m`, `Q_l^m(ξ>1)` (scipy `lpmn`/`lqmn` — Condon–Shortley phases cancel in the `P·Q` and `P(η)·P(η)` pairs, leaving the explicit `(−1)^m`), the prefactor `(−1)^m(2l+1)[(l−m)!/(l+m)!]²`, and azimuthal weights `W_0=(2π)²`, `W_{m≥1}=2π²`. Results: **C1′** the m=0 path (β=0) reproduces 5α/8 (rel 1.4e-4); **C2′** the modulated self-Coulomb reduced 0.649863 vs 6-D MC 0.649860 ± 8.7e-5 → **rel 3.9e-6** (m=1 = 3.3%, m=2 = 0.6%), pinning the m≠0 convention essentially exactly; the 4-body m=0 part = 2.856650e-2 reproduces the σ gate bit-for-bit; the full π/δ 4-body reduced(grid limit) 2.96791e-2 vs brute(3×120M) 2.96797e-2, **rel 2.2e-5** (replicas straddling at +0.6/+0.1/−0.3σ). **The π and δ azimuthal-transfer channels are exact and RI-free — the σ gate holds for every m**, including the physically dominant valence-correlation channel (π).
+
+### Verdict (scoped honestly)
+The two-center 4-electron scalar-Coulomb bridging integral is **EXACT and RI-FREE for all azimuthal channels (σ, π, δ)** — the reduction is exact **by construction** (the prolate Neumann expansion is an exact identity; the isotropic-leaf monopole dressing is exact), so the integral is re-expressed, not approximated; implementation validated by the closed-form C1 (σ) + C2′ (m≠0, rel 3.9e-6), the independent-MC controls, and the full 12-D MC at MC precision. **The Be atomic N=4 soft-wall result carries to two centers (LiH geometry), for every m.** On this narrow axis GeoVac is genuinely ahead of Gaussian-F12 (which uses RI for exactly these integrals), now at two centers and all m. **NOT overclaimed:** a diagnostic + validated integrals, not a LiH R12-CI energy; scoped to the scalar Coulomb chain with model orbitals — the kinetic-vector 4-body pieces, the non-Hermitian TC operator, and the quantum-encoding 4-body-Pauli wall are separate, untested axes.
+
+### Added
+- `debug/lih_r12_4body_integral.py` — the σ (m=0) deliverable: two-center 4-body integral, reduced (leaf dressing + prolate Neumann bridge) vs 12-D MC, with C0/C1/C2 controls, grid-limit extrapolation, batch-means MC replicas.
+- `debug/lih_r12_4body_pi_channel.py` — the π/δ (m≠0) extension: general-m prolate Neumann bridge (`lpmn`/`lqmn`), azimuthally-modulated bridge density, C1′/C2′ controls (incl. the 6-D-MC convention pin), reduced-vs-12-D-MC; reuses the σ module's leaf + sampler.
+- `debug/sprint_lih_r12_4body_integral_memo.md` — canonical memo (σ §2–4 + π/δ §4b).
+- `debug/lih_r12ci_energy.py` — the LiH R12-CI **energy assembly, Stage 1** (WIP, PI-directed follow-on): the Be `{Φ₀, FΦ₀}` 2×2 carried to the prolate two-center geometry, minimal reference `Φ₀=|1s_A² 1s_B²|`. Stage 1 = the AO 2-body f-integral primitives (quadrature == MC on the isotropic integrals; `(aa|f|bb)=0.206596` reproduces the σ-gate C2 leaf bit-for-bit) + `F̄=1.8807`. The ill-conditioned `σ²`/`h` and the 4-body-carrying `g` are the next stages (build plan §STATUS). No `E_R12` yet.
+
+### Changed
+- `memory/r12_generalization_boundary_n3_n4.md` — N≥4 frontier note: the two-center prolate 4-body gate CLEARED.
+- `debug/lih_r12_build_plan.md` — Step-1 integral-validation gate marked done (the prolate Neumann bridge validated), with the result.
+- CLAUDE.md §2 one-liner + version cursor → v5.15.10.
+
+### Note
+Patch bump. Debug/PoC diagnostic (integral validation) + memory/build-plan updates; no production `geovac/` change (the engine lives in `debug/`). The uncommitted `debug/lih_r12_build_plan.md` (the fresh-session handoff written at the v5.15.9 close) is folded into this checkpoint.
+
 ## [v5.15.9] - 2026-09-21
 
 **Be R12-CI energy — the 4-body RI-free reduction demonstrated inside a real Be correlation energy: E_R12 = −14.5572 Ha, −18.2 mHa correlation (19% of Be's 94 mHa), variational, with the ill-conditioned coupling computed ANALYTICALLY (exact).** PI-directed follow-on to v5.15.8 ("build that; Be first then record; finish the full engine"). Full account: `debug/sprint_n4_wall_diagnostic_memo.md` §7b.
