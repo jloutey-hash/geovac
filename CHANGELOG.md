@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.11] - 2026-09-21
+
+**LiH R12-CI energy — PoC gate PASSED, and the RI-free analytic reduction demonstrated on TWO many-body correlation quantities (σ² and h_Vne).** PI-directed follow-on to the v5.15.10 integral gate: carry the two-center explicit-r₁₂ machinery into an actual LiH correlation energy. Two complementary results — (1) a well-conditioned VMC linear-method PoC energy confirming the physics (explicit r₁₂ lowers the LiH total energy, correctly-signed, variationally, above exact); (2) the analytic RI-free assembly (no Monte-Carlo, no resolution-of-identity) validated against the VMC for σ² and h_Vne. A PoC on a crude single-ζ ionic reference Φ₀=|1s_A² 1s_B²|, not spectroscopic. Build handoff: `debug/lih_r12_build_plan.md`.
+
+### Stage 2 — E₀ (analytic determinant energy)
+E₀ = ⟨Φ₀|H|Φ₀⟩ = **−7.8878 Ha** (`stage2_E0` in `debug/lih_r12ci_energy.py`), the two-center closed-shell RHF energy of the ionic reference (Li⁺ core + H⁻). One-electron h via the exact `−½∇²·1s(ζ)=(−ζ²/2+ζ/r)·1s` identity (kinetic → overlap + attraction, Hermiticity cross-check on T_AB); two-electron Coulomb = 5 dressable integrals by exact Hartree-dressing + `(ab|ab)` by the validated prolate Neumann machinery. Every control passes (closed forms to 1e-11..1e-13; `(ab|ab)` Neumann vs MC ~1.3σ). **E₀ > exact −8.070 (variational);** the +182 mHa gap = basis + correlation.
+
+### Stage 3 part 1 — σ² ground truth + conditioning verdict (VMC, `debug/lih_r12ci_sigma2_mc.py`)
+σ² = S₁₁ is exactly `Var_{|Φ₀|²}[F]`, positive → a well-conditioned VMC (Metropolis on the block-factorized `|Φ₀|²=D_p(1,2)D_p(3,4)`) gives it with NO cancellation. **σ² = 0.13699 ± 2.3e-4.** **Conditioning ratio σ²/F̄² = 0.039 → HEALTHY, NOT the Be trap** (Be's `f→1` gave `<<1e-3`) → `⟨F²⟩−F̄²` safe in float64, no geminal switch forced. **Bonus — Stages 1&2 independently cross-validated** by whole-determinant VMC: `⟨F⟩_MC=1.8812` vs analytic 1.8807 (1.1σ), `⟨V_ee⟩_MC=3.6169` vs analytic E2=3.6144 (1.2σ).
+
+### PoC energy — VMC linear method (`debug/lih_r12ci_vmc.py`)
+Healthy conditioning justifies getting the energy by the standard VMC linear method (one Jastrow parameter `c` on χ=F−F̄), all 2×2 elements well-conditioned `|Φ₀|²` averages, kinetic via the BOUNDED gradient form `½Σ⟨|∇(χΦ₀)|²⟩` (integration by parts — no Laplacian cusp spikes). **E₀_VMC = −7.902 ± 0.014 reproduces the Stage-2 analytic −7.888 (1.0σ).** Geminal scan (f=r·e^{−γr}, correct cusp): **best γ=0.5 → E_R12 = −7.9316 ± 0.014 Ha, correlation captured dE = −29.5 ± 3.1 mHa** (~36% of LiH's ~83 mHa, ahead of Be's 19% PoC). **Variational both ways** (E₀ ≥ E_R12; E_R12 > exact −8.070). Two traps found + fixed: (1) a forgotten V_NN nuclear-repulsion constant (a constant → shifts all eigenvalues equally, cancels in dE — so the correlation numbers were already right); (2) initial single-step Metropolis under-mixed the A↔B basins (acc 0.21, biasing the drift-form kinetic) → mixture proposal (small steps resolve the tight Li core + occasional ~R hops) → acc 0.50, E₀ correct.
+
+### Stage 3 part 2 — analytic RI-free σ² (`debug/lih_r12ci_sigma2_analytic.py`)
+**σ²_analytic = 0.13723 vs VMC 0.13699 (rel 1.7e-3, within the VMC's ±2e-4) — NO Monte-Carlo, NO resolution-of-identity.** Key reduction: the block density is SEPARABLE, `D_p² = P00⊗P11 + P11⊗P00 − 2 P01⊗P01` (`P_pq=m_p m_q`), so `⟨F²⟩` collapses to grid integrals of one-electron densities and their f-DRESSINGS `Ψ^f_h = ∫h(r')f(|r−r'|)dr'`. With orthonormal MOs: marginal `ρ=m0²+m1²`, block norm N=2 exact. `σ² = 2α₂+4β₂+8γ_sh+4γ_dj+16δ − 2α₁²−16α₁β₁−16β₁²` (verified: f=const→0). α/β/γ_dj are scalar f-interactions `I_f[P_pq,P_rs]=c·W·c` (W = 3×3 AO-pair f-tensor = Stage 1); only 3-body δ, γ_sh need the dressing FIELDS. **The one new machinery piece — the two-center f-dressing `Ψ^f_{ab}`** (2D axially-symmetric convolution with the angle-averaged exp kernel; exp has no singularity, unlike 1/r) — VALIDATED against Stage 1: W matches the f-tensor to 1e-6..1e-8 (incl. `I_f[ab,ab]`), and F̄=2α₁+4β₁ reproduces 1.8807 to 2.5e-5. The RI-free machinery the "ahead-of-F12" claim rests on, now demonstrated inside a σ² number.
+
+### Stage 4a part 1 — analytic h_Vne
+`h_Vne = ⟨V_ne(F−F̄)⟩ = −0.9302` (analytic, RI-free) vs **VMC −0.9299 ± 0.012 (0.03σ) ✓**. Reduction: `⟨V_ne F⟩=4⟨v₁F⟩`, `⟨v₁F⟩=⟨v₁f₁₂⟩+⟨v₁⟩⟨f₃₄⟩+2⟨v₁f₁₃⟩+2⟨v₁f₂₃⟩`, all grid integrals of v-weighted densities × the existing f-dressings (V_ne is a known grid multiplier → no new dressing). Gates: `⟨V_ne⟩=−20.86474` matches Stage 2 exactly; constant-f gate h_Vne→0 verified analytically.
+
+### Owed (next session)
+Analytic h_T (kinetic×f, VMC target **+0.7485**; needs gradient densities `G_pq=∇m_p·∇m_q` + a vector ∇f-dressing for the `∇F·∇Φ₀` term), then analytic h_Vee (Coulomb×f, target **+0.3082**) + g (target **−0.9303**) — both need the two-center Coulomb dressing field (shared piece; g carries the 4-body bridge already validated in v5.15.10). Then the analytic 2×2 → E_R12, to compare against the VMC −7.932. Separate axis: the LiH R_eq drift is a frozen-core/grid wall, NOT r₁₂-fixable.
+
+### Added
+- `debug/lih_r12ci_sigma2_mc.py` — σ² VMC ground truth (Metropolis on the block-factorized determinant; mixture-proposal sampler) + conditioning diagnostic + Stage-1/2 cross-validation.
+- `debug/lih_r12ci_vmc.py` — VMC linear-method PoC energy (geminal scan) + the h/g decomposition validation targets for the analytic port.
+- `debug/lih_r12ci_sigma2_analytic.py` — analytic RI-free σ² (separable-density reduction + two-center f-dressing) + analytic h_Vne.
+
+### Changed
+- `debug/lih_r12ci_energy.py` — added Stage 2 (`stage2_E0`, the analytic determinant energy) + the analytic ⟨T⟩/⟨V_ne⟩ targets.
+- `debug/lih_r12_build_plan.md` — Stage 2 / 3pt1 / PoC / 3pt2 / 4a status, with VMC targets for the remaining pieces.
+
 ## [v5.15.10] - 2026-09-21
 
 **LiH (two-center) N=4 explicit-r₁₂ 4-body integral gate (σ + π/δ) — the Be atomic soft-wall reduction (v5.15.8/9) CARRIES TO TWO CENTERS, FOR ALL AZIMUTHAL CHANNELS: the genuinely-4-body bridging integral of a two-center (LiH-geometry) explicit-r₁₂ CI reduces EXACTLY, RI-free, to a 1-D leaf dressing + a two-center prolate Neumann Coulomb between the dressed densities — validated first for σ (m=0) and then for the π (m=1) / δ (m=2) azimuthal-transfer channels.** PI-directed: the "prolate 4-body integral gate," chosen as the load-bearing first step of the accurate-LiH build (`debug/lih_r12_build_plan.md`) — the plan's own "validate reduced==brute on one 4-electron LiH integral BEFORE any energy," reordered to Step 1 — then extended to m≠0 ("push straight on to the π channel"). A diagnostic / integral validation, **not a LiH energy**. Full account: `debug/sprint_lih_r12_4body_integral_memo.md`.
