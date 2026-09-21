@@ -83,7 +83,7 @@ A molecular (≥2-center) method that reaches sub-mHa **and** keeps native integ
 | accurate per-atom accuracy (xTC recovery) | §2 v5.0.12 | **STANDING** | — | xTC at the *oracle* γ recovers 94–98% of the correlation gap incl. Be (4e) — the cusp recovery scales; only the *cheap self-selection* fails (above row). The determined γ(r)∝n^{1/3} exists (Giner μ(r) / Wagner–Gori-Giorgi avoidance radius) but lives on the variational side. |
 | skeleton-native γ(r) from equal-area cells | §2 v5.0.12 (deferred) | **OPEN** | — | Does Paper 0's equal-area packing *give* γ(r)∝n^{1/3}? Not a scaling calc — Paper 0's "shells" are l-subshells (not real space), so it needs the full Fock momentum→position map. Genuine open skeleton-program derivation, not faked. |
 | Elliptic/CM basis for chemical accuracy | §3 (2026-08-23 ×3) | **STANDING** | **HARD** | The bond's genus-1 elliptic period is *radial + inert*; the accuracy gap is the *e-e* cusp, which a radial basis principle can't reach. |
-| LiH R_eq drift = cross-V_ne R-slope = bond-orbital finite extent | §2 v5.14.8, v5.15.2; `test_paper19_reqdrift_mechanism.py` | **STANDING** | **HARD** (parameter-free)¹ | Two-term V_NN↔cross-V_ne balance; the 8.8% drift is the *finite-extent screening* of the fixed Z_orb=1 bond orbital. Mechanism PINNED (v5.15.2): cross-attraction R-slope → +Z/R² (point-charge limit) as the orbital contracts, and that limit *is* the required force Z_A Z_B/R²; the fixed orbital delivers 93.9%. ¹Contraction is **inexpressible** in the parameter-free construction — h1 = −Z_orb²/2n² ties Z_orb to Z_nuc, so forcing Z_orb>1 drives E below exact (−9.6 vs −8.07). Breachable only by a variational, contraction-capable basis = the prolate-native route (Paper 12); the drift is absent in H2/He precisely because those use such a basis. |
+| LiH R_eq drift = cross-V_ne R-slope = bond-orbital finite extent = **frozen-core rigidity** | §2 v5.14.8, v5.15.2, v5.15.6; `test_paper19_reqdrift_mechanism.py`, `test_prolate_lih_r12_coupled.py` | **STANDING** | **HARD** (parameter-free)¹ | Two-term V_NN↔cross-V_ne balance; the 8.8% drift is the *finite-extent screening* of the fixed Z_orb=1 bond orbital. Mechanism PINNED (v5.15.2): cross-attraction R-slope → +Z/R² (point-charge limit) as the orbital contracts, and that limit *is* the required force Z_A Z_B/R²; the fixed orbital delivers 93.9%. ¹Contraction is **inexpressible** in the parameter-free construction — h1 = −Z_orb²/2n² ties Z_orb to Z_nuc, so forcing Z_orb>1 drives E below exact (−9.6 vs −8.07). **LOCALIZED to the core (v5.15.6):** the prolate-native route with a *frozen* core (variational valence + r₁₂) was built and tested and STILL drifts outward, growing with angular basis (+3.4%→+5.5%, l=2→3), vs HeH⁺'s convergence (−4.5%→−0.5%) at the identical basis — so a variational *valence* is insufficient; the rigidity is the frozen core's static screening. Breach now requires a variational *core* = all-electron (N=4) prolate CI. The drift is absent in H2/He/HeH⁺ precisely because those have no frozen core. |
 
 ### This run's delta
 Bootstrap. Net-new refinements over the raw §3 ledger:
@@ -139,8 +139,64 @@ mission's WALL deliverable, §1.7). Memo `debug/sprint_balanced_reqdrift_mechani
   artifact, not fundamental.
 - **Falsifier.** A parameter-free (zero-knob) balanced/composed diatomic that
   reaches sub-% R_eq without a variational, contraction-capable orbital would break
-  the "finite-extent, inexpressible" reading. The named breach path (prolate-native
-  ≥4e, frozen-core route) is UNBUILT — this wall stands until it is built and tested.
+  the "finite-extent, inexpressible" reading.
+
+### Delta 2026-09-20 (v5.15.6) — the prolate frozen-core route BUILT + TESTED: rigidity localizes to the core
+
+The v5.15.2 falsifier flagged the "prolate-native ≥4e, frozen-core route" as UNBUILT.
+The **frozen-core** half is now built and tested (`debug/lih_r12_coupled.py`,
+`lih_r12_req_scan.py`; CHANGELOG v5.15.6), and it SHARPENS the wall rather than
+breaching it:
+
+- **The prolate route with a frozen core still drifts.** A variational, r₁₂-correlated
+  prolate valence CI (frozen Li 1s² via closed-form Hartree V_H + a λ-plateau-verified
+  Huzinaga projector, both now r₁₂-coupled) gives R_eq **+3.4% (l=2) → +5.5% (l=3)** —
+  still outward, still growing with the angular basis. r₁₂ absorbs part of the angular
+  over-polarization (+7.1%→+5.5% at l=3) but cannot reach a core d.o.f.
+- **Controlled comparison (decisive).** The identical r₁₂-CI on HeH⁺ (two active
+  electrons, NO frozen core) *converges*, −4.5%→−0.5%, across the same l=2→3. The one
+  variable differing between drift and convergence is the frozen core.
+- **Verdict:** the finite-extent rigidity lives in the **frozen core's static
+  screening**, not only the valence bond orbital → a variational *valence* is
+  insufficient. The breach path narrows: **prolate-native → prolate-native
+  variational-CORE (all-electron N=4)**, which meets the N=4 explicit-r₁₂ wall.
+- **Falsifier (updated).** An all-electron (variational-core) prolate ≥4e two-center CI
+  that reaches sub-% R_eq would breach; if it *still* drifts for the same reason, the
+  obstruction is deeper than the frozen core. This is the remaining unbuilt artifact.
+- Honest baseline: prolate frozen-core (+5.5% @ l=3) improves on the *balanced*
+  recipe (+8.8%, Paper 19) but does NOT beat *composed* l-dep-PK (5.3% @ l_max=2,
+  Paper 17) — a mechanism diagnostic, not a new best LiH R_eq.
+
+### Delta 2026-09-20 (v5.15.7) — all-electron variational-core prolate LiH: cure CONFIRMED (bracketed); clean R_eq is a NUMERICAL wall, NOT physics
+
+The v5.15.6 falsifier called for an all-electron (variational-core) prolate ≥4e CI.
+BUILT + validated (`debug/prolate_allelectron_fci.py`: multi-exponent prolate FCI +
+generalized-m π ERIs; V_ee pairwise → avoids the N=4 explicit-r₁₂ 4-body wall; HF==eckart,
+μ-kernels==numerical, H₂ converges). Two PI-directed review cycles then characterized the
+outcome:
+- **Cure CONFIRMED by bracketing.** The all-electron variational core removes the
+  frozen-core rigidity — and R_eq changes SIGN, collapsing INWARD (mirror of the +5.5%
+  outward frozen-core drift). The two errors bracket the truth (inward ← 3.015 → +5.5%
+  frozen → +22% over-corrected), and standard all-electron QC gives good LiH R_eq. So
+  "variational core = cure" STANDS. **HARD → the physics obstruction is retired**; what
+  remains is numerical.
+- **NEW numerical wall, mechanism pinned (two halves):** (i) the isolated Li²⁺ 1s² core
+  (physically R-independent) swings **0.36 Ha** with R because the prolate grid's
+  real-space resolution near the tight core is tied to R via r_A=(R/2)(ξ+η) — a GRID
+  artifact (NOT BSSE: ghost-H basis makes zero difference; confirmed by refinement
+  shrinking the spread), swamping the 0.088 Ha bond → inward collapse; (ii) a co-dominant
+  **two-center-basis-completeness** half (Coulomb-Sturmian-like orbitals at fixed ζ span
+  the true 1s² with R-dependent fidelity — no grid fixes it). Kind: SOFT (numerical,
+  solvable) — a graded grid helped only ~15% (0.081→0.069 Ha over [2.6,3.75]); the real
+  fix is a dedicated atom-centered/analytic core, a scoped future build.
+- **Engine hardening (keeper):** fixed `_attraction_matrix` to the analytic
+  (Z_A/r_A+Z_B/r_B)·J = (R/2)²[Z_A(ξ−η)+Z_B(ξ+η)] (the 1/r focus singularity cancels the
+  Jacobian) — grid-robust; identical on the stock grid, so all prior results stand.
+- **Falsifier for the numerical wall:** a dedicated atom-centered (or exact-integral)
+  tight-core treatment in the prolate valence CI that reaches sub-% R_eq would breach it;
+  a proof that the two-center basis cannot represent a tight core R-consistently at any
+  cost would harden it. Guards `tests/test_prolate_allelectron_fci.py`; full chronicle
+  `debug/track_logs/prolate_native_lih.md`; CHANGELOG v5.15.7.
 
 ## Architecture-swap audit: composed → prolate-native diatomic (2026-09-19, v5.14.6; PI-adjudicated)
 

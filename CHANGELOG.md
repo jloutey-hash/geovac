@@ -7,6 +7,90 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.7] - 2026-09-20
+
+**All-electron (variational-core) prolate LiH — increment 7 + two PI-directed review cycles: engines BUILT + VALIDATED, verdict = the frozen-core-is-culprit / variational-core-is-cure conclusion STANDS (bracketed + standard-QC), but a bespoke clean LiH R_eq is blocked by a NUMERICAL wall (R-tied tight-core grid resolution + two-center-basis completeness), not physics.** PI-directed "build the N=4 variational-core LiH," then "does the cancellation idea spark?", then "take a test cycle at the graded grid." Full chronicle: `debug/track_logs/prolate_native_lih.md`.
+
+### The all-electron engine (`debug/prolate_allelectron_fci.py`)
+Increment 6 concluded the cure is a variational CORE (all 4 electrons active, R-adaptive). Built as a multi-exponent prolate FCI reusing the validated `geovac/prolate_scf.py` grid machinery:
+- **1-particle basis:** one-electron eigen-MOs from `get_orbital_on_grid` at several (Z_eff_A, Z_eff_B) scales (tight Li core Z≈2.9 → diffuse valence Z≈0.7), Löwdin-orthogonalized. Cross-exponent h1 via `Tφ_q = ε_q φ_q + A(gen_q)φ_q` (kinetic → computable multiplicative attraction matrices).
+- **FCI:** spin-orbital Slater-Condon, Sz=0 block, V_ee PAIRWISE → **sidesteps the N=4 explicit-r₁₂ 4-body wall** (that wall is Hylleraas-specific, not CI).
+- **Generalized-m (π) ERIs:** added the Fourier-resolved azimuthal Coulomb kernel `K_μ = 2π·F_|μ|` (Cohl–Tohline toroidal expansion; `F_0=4K/√(a+b)`, `F_1=(4/b)[aK/√(a+b)−√(a+b)E]`, `F_2` by recurrence) + M_L selection `m_p+m_r=m_q+m_s`.
+- **VALIDATED:** HF single determinant == `eckart_scf_energy` EXACTLY (−1.05264, H₂); μ=0 kernel == `compute_vee_integral` (1e-10); μ=0,1,2 == numerical Δφ (1e-13); multi-exp H₂ converges (−1.067→−1.134 proper HF→−1.144 with π, toward exact −1.1745); LiH FCI variational. Guards `tests/test_prolate_allelectron_fci.py` (3 pass, fire-tested).
+
+### The finding — an inward collapse, mirror of the frozen-core drift
+LiH all-electron σ(+π) PES has NO minimum in [2.60,3.45]; E monotone-decreasing inward (electronic R-slope +0.41 vs +0.33 needed). Opposite sign to the frozen-core outward drift. π does NOT fix it (+0.017→+0.019). Absolute E is ~0.4 Ha above the −8.07 reference at achievable basis.
+
+### Review cycle 1 (PI hunch: "H₂/HeH⁺ may have had similar cancellations")
+- **Engine SOUND:** H₂ R_eq in the SAME grid engine gives a clean minimum EXACTLY at 1.40. So no universal bias.
+- **Mechanism PINNED (not BSSE):** an isolated Li²⁺ 1s² (physically R-independent) swings **0.36 Ha** across R, and a ghost-H basis makes ZERO difference → not basis borrowing. It is r_A=(R/2)(ξ+η): the uniform grid resolves the tight core better at small R. Confirmed a grid artifact (spread shrinks under refinement 0.098→0.062→0.049 at N_grid 40→60→80). The 0.36 Ha core artifact swamps the 0.088 Ha bond → inward collapse. H₂ has no tight core → immune.
+- **Fragment/cancellation correction (the PI's idea) OVER-corrects:** E_LiH(4e) − E_core(Li²⁺ 2e; identical basis specs → identical orbitals/grid/ERIs) flips inward collapse → +22% OUTWARD (R_eq 3.69). The isolated core over-estimates the in-molecule (screened) core → not cleanly separable. Tighter bracket: inward ← 3.015 → +5.5% (frozen) → +22% (over-corrected).
+
+### Review cycle 2 (PI-directed: graded grid)
+- **Real bug found + fixed (engine hardening):** `_attraction_matrix` evaluated Z/r numerically near the focus (r→0) → −30 Ha on any focus-sampling grid. The 1/r singularity cancels the Jacobian analytically: `(Z_A/r_A+Z_B/r_B)·J = (R/2)²[Z_A(ξ−η)+Z_B(ξ+η)]`. Rewritten → grid-robust; identical on the stock grid, so all prior results stand; guards pass.
+- **Graded grid (`debug/prolate_graded_grid.py`) is MARGINAL:** an R-adaptive composite core panel [1,1+C/(ζR)] cut the core spread over [2.6,3.75] only 0.081→0.069 Ha (~15%), still ≈ the bond; brute uniform N=80 (0.049) does better. **Why:** the core R-dependence is ~half grid-integration (partly fixable) and ~half **two-center-basis completeness for a tight atomic core** (Coulomb-Sturmian-like orbitals at fixed ζ span the true 1s² with R-dependent fidelity — a BASIS issue no grid touches). Neither half alone is << the bond.
+
+### Verdict
+Physics conclusion STANDS: frozen core = the rigidity culprit (increment 6, demonstrated); variational core = cure (bracketed both sides + standard all-electron QC gives good LiH R_eq). The bespoke clean number in this prolate-FCI engine is a well-characterized **numerical wall** with two named halves (R-tied core grid resolution + tight-core two-center-basis completeness) — a solvable-but-substantial target (dedicated atom-centered core), not a physics obstruction. Closed out; the dedicated-core-basis build is a scoped future option.
+
+### Added
+- `debug/prolate_allelectron_fci.py` — multi-exponent all-electron prolate FCI + generalized-m (π) ERI machinery.
+- `debug/prolate_graded_grid.py` — graded (composite R-adaptive) prolate quadrature grid.
+- `debug/lih_allelectron_req_scan.py` — all-electron LiH R_eq scan; data logs in `debug/data/`.
+- `tests/test_prolate_allelectron_fci.py` — guards (HF==eckart, μ=0==compute_vee_integral, μ=0,1,2==numerical), 3 pass.
+
+### Changed
+- `debug/prolate_allelectron_fci.py::_attraction_matrix` — analytic (singularity-free) `(Z/r)·J` form (bug fix, engine hardening).
+- `papers/group2_quantum_chemistry/paper_19_coupled_composition.tex` — brief note: the all-electron test brackets the R_eq from the other side (inward), and the clean prolate demonstration is blocked by a numerical wall; the variational-core cure stands via bracketing + standard QC.
+- `docs/walls/register.md` — new numerical-wall entry (all-electron prolate LiH R_eq).
+- `debug/track_logs/prolate_native_lih.md` — increments 7 + both review cycles recorded.
+
+### Note
+Patch bump. Debug/PoC + one paper note + a numerical-wall register entry; no production `geovac/` change (all-electron engine lives in `debug/`). Rolls up with the uncommitted v5.15.6 (increment 6) work into one checkpoint.
+
+## [v5.15.6] - 2026-09-20
+
+**Frozen-core prolate LiH, increment 6 — the discriminating test, built and run: the FROZEN CORE is the culprit, not the missing r₁₂ (PI's bet RIGHT). The v5.15.5 confound is resolved.** WITH r₁₂ the LiH R_eq drift STILL points outward and STILL grows with angular basis (+3.4% l=2 → +5.5% l=3), the OPPOSITE of HeH⁺'s convergence (−4.5%→−0.5%) at the identical (2,3) basis. r₁₂ was not the lever. PI-directed.
+
+### The build — r₁₂-coupled V_H + Huzinaga projector (`debug/lih_r12_coupled.py`)
+The v5.15.5 confound was that the LiH scans ran `p_set=(0,)` (no r₁₂) because the core-shield V_H and the projector were p=0-factorized `(1e)⊗S`, which fails once an `r₁₂^p` factor correlates the two electrons. This increment rebuilds BOTH as r₁₂-coupled 2e prolate-quadrature matrices, vectorized over COMBINED powers (the element depends only on jᵢ+jⱼ etc., not the pair) so it is fast at l=3 / p={0,1}:
+- **φ-integrated kernels** `Φ_P[a,b] = ∫∫dφ₁dφ₂ r₁₂^P` — P=0→(2π)²; **P=1→2π·(R/2)·4√(A+B)·E(m)** (complete elliptic E, m=2B/(A+B)); P=2→(2π)²(R/2)²·A — and the single-φ `J_p` for the projector's partial overlap.
+- **V_H (local, summed over electrons):** `VH_ij = Q1_P + Q2_P`, `Q_P = (w·V_H·ξ^Jη^L·e^{−2αξ})·Φ_P·(w·ξ^Kη^M·e^{−2αξ})`.
+- **Huzinaga projector (NON-local, |1s⟩⟨1s|):** `P1_ij = (2π/N₁ₛ)·Σ_b w_b f2ᵢf2ⱼ B̃ᵢB̃ⱼ`, `B̃ᵢ[b] = Σ_a w_a f1ᵢ[a]·1s[a]·J_{pᵢ}[a,b]` (a `W·diag(w)·Wᵀ` product), + P2 (electron 2).
+
+### Validation (the load-bearing gate)
+On a p=0-only basis BOTH reduce to the existing p=0 references — V_H vs `_twoelec_VH` **5.6e-4**, projector vs `lih_projector_test.build` **1.2e-4** (diagonals match to 6 digits; residual = grid-limited near-zero odd-parity off-diagonals). Single point (l=2, R=3.015): p=0 E_tot **−8.01208** (reproduces the v5.15.4 baseline exactly), r₁₂-on **−8.04149**; r₁₂ lowers E_val **−29.4 mHa** (correlation binds, correct sign), variational, 162/162 kept. Quad-vs-mpf overlap consistency confirmed. Backed by `tests/test_prolate_lih_r12_coupled.py` (fast p=0-reduction guard).
+
+### The verdict (`debug/lih_r12_req_scan.py`; logs `debug/data/lih_r12_req_l{2,3}.log`)
+p_set=(0,1), λ=1000, l_neu=20, α∈{1.0,1.4}, R∈{2.70,2.85,3.015,3.20,3.45}:
+
+| | l=2 | l=3 | trend |
+|---|---|---|---|
+| LiH r₁₂ OFF (p=0) | +2.2% | +7.1% | diverges outward |
+| **LiH r₁₂ ON** | **+3.4%** (3.118 bohr) | **+5.5%** (3.180 bohr) | **still diverges outward** |
+| HeH⁺ r₁₂ ON | −4.5% | −0.5% | converges |
+
+WITH r₁₂ the drift still grows with angular basis and stays outward — the opposite of HeH⁺'s convergence at the identical basis. r₁₂ absorbs part of the angular over-polarization (+7.1%→+5.5% at l=3, energy −8.041→−8.055, ~14 mHa correlation) but does NOT restore the HeH⁺ pattern. Energies variational throughout.
+
+**λ-plateau check** (l=2, R=3.015, r₁₂-on): E_val flat −1.0965→−1.0953 across λ=30..10⁴; λ=0 collapses to −1.888 (E_tot −8.836 ≪ exact). So λ=1000 is deep in the plateau and the outward drift is **not** a projector artifact.
+
+### Reading — the mechanism, localized to the core
+The ONE structural difference between converging HeH⁺ (two active electrons, no frozen core) and drifting LiH at the identical (2,3) r₁₂-CI is the **frozen core**. So the finite-extent-screening rigidity pinned in v5.15.2 lives in the core's static screening, not only in the valence bond orbital: a variational **valence** contraction (which the prolate CI supplies) and the valence–valence lever r₁₂ are both insufficient — r₁₂ cannot reach a core degree of freedom. **Full closure requires a variational core = an all-electron (N=4) two-centre CI**, which meets the four-body explicit-r₁₂ wall for full correlation. **Honest baseline (benchmarking rule):** the prolate frozen-core route (+5.5% at l=3) improves on the *balanced* recipe (+8.8%, Paper 19) but does NOT beat the *composed* l-dependent-PK recipe (5.3% at l_max=2, Paper 17); this was a mechanism diagnostic, not an attempt at a new best LiH R_eq. The distinguishing feature of the prolate route is HeH⁺'s demonstrated *convergence* (no frozen core), not the LiH number. The v5.15.2 wall stands, now further localized; the named breach path narrows from "prolate-native" to "prolate-native **variational-core**."
+
+### Added
+- `debug/lih_r12_coupled.py` — r₁₂-coupled V_H + Huzinaga projector (combined-power vectorized 2e quadrature) + p=0-reduction validation.
+- `debug/lih_r12_req_scan.py` — LiH R_eq scan with r₁₂ (l=2, l=3); data logs in `debug/data/`.
+- `tests/test_prolate_lih_r12_coupled.py` — fast guard: both coupled terms must reduce to the p=0 factorized references.
+
+### Changed
+- `papers/group2_quantum_chemistry/paper_19_coupled_composition.tex` — new measured paragraph in the well-shape/mechanism section: the prolate fix was tested and the drift localizes to the frozen core; full closure needs a variational core (rests on the Paper 12 HeH⁺ prolate convergence as control).
+- `debug/track_logs/prolate_native_lih.md` — increment-6 build, validation, and verdict recorded.
+- `docs/walls/register.md` — v5.15.2 LiH-drift wall delta: the frozen-core prolate route built + tested; breach path localized to the core.
+- CLAUDE.md §2 — the v5.15.4-5 "INCONCLUSIVE pending r₁₂" bullet REPLACED with the verdict (§13.11 rule 9).
+
+### Note
+Patch bump (diagnostic-arc completion; touches CLAUDE.md §2, Paper 19, one new test). Debug/PoC — not a paper accuracy claim; the R_eq numbers are frozen-core-model results, not converged LiH.
+
 ## [v5.15.5] - 2026-09-20
 
 **Frozen-core prolate LiH, increments 4–5: core-valence exchange (small, −0.9 mHa), and the angular-basis test that QUALIFIES the v5.15.4 +2%. Adding angular basis (l=3) at p=0 moves R_eq the WRONG way (+2.2% → +7.1%), approaching the composed recipe — but the LiH scans ran WITHOUT r₁₂ while the converging HeH⁺ PoC had it, so the result is INCONCLUSIVE, likely a missing-r₁₂ artifact. The honest correction to v5.15.4. PI-directed ("keep going into the next increment").**

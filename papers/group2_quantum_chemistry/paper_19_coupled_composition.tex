@@ -761,6 +761,52 @@ quoted here is the $n_{\max}=2$ fine-grid value for LiH).  For single-geometry a
 the balanced construction remains well matched to that use despite its
 well-shape errors.
 
+\emph{The prolate-spheroidal fix, tested---and further localized to the core.}
+Building that variational two-centre treatment for LiH---a frozen Li~$1s^2$ core
+(closed-form Hartree screening plus a Huzinaga core-orthogonality level-shift,
+$\lambda$-plateau-verified) with an explicitly-correlated ($r_{12}$)
+prolate-spheroidal valence CI, the same engine that reproduces the HeH$^+$
+geometry---narrows the drift but does \emph{not} close it:\ $R_{\rm eq}$ is
+$+3.4\%$ at $l_{\max}=2$ and $+5.5\%$ at $l_{\max}=3$ (still outward, still
+\emph{growing} with the angular basis), against this balanced construction's
+$+8.8\%$ (the composed $l$-dependent-PK recipe of Paper~17 reaches $5.3\%$ at
+$l_{\max}=2$;\ the frozen-core prolate PoC is a mechanism diagnostic, not a bid
+to better that number).
+The control is decisive:\ the identical $r_{12}$-CI applied to HeH$^+$---two
+active electrons, \emph{no} frozen core---instead \emph{converges} its geometry,
+$-4.5\%\to-0.5\%$ across the same $l_{\max}=2\to3$.  The one structural
+difference between the drifting and converging cases is the frozen core, so the
+finite-extent rigidity of the mechanism above lives in the \emph{core}'s static
+screening, not only in the valence bond orbital;\ a variational \emph{valence}
+contraction (which the prolate CI supplies) and the valence--valence correlation
+lever $r_{12}$ are both insufficient---$r_{12}$ absorbs part of the angular
+over-polarization (the $l_{\max}=3$ drift falls $+7.1\%\to+5.5\%$ when it is
+switched on) but cannot reach a core degree of freedom.  Full closure therefore
+requires a variational \emph{core}---an all-electron ($N=4$) two-centre
+CI---which meets the four-body explicit-$r_{12}$ wall for full correlation
+(a measured result;\ frozen-core prolate LiH at $\lambda=1000$, $l_{\rm neu}=20$,
+$R$-grid minimum;\ rests on the Paper~12 HeH$^+$ prolate convergence as control).
+
+\emph{The all-electron variational-core test brackets $R_{\rm eq}$ from the
+opposite side.}  A determinant CI with \emph{all four} electrons active and
+R-adaptive (a multi-exponent prolate FCI; $V_{ee}$ pairwise, so it avoids the
+four-body $r_{12}$ wall) removes the frozen-core rigidity---and its $R_{\rm eq}$
+error changes \emph{sign}, collapsing \emph{inward} rather than drifting outward.
+The two errors thus bracket the true value ($\text{inward}\leftarrow 3.015\to
++5.5\%$ frozen $\to +22\%$ over-corrected), and a variational-core all-electron
+treatment is the mechanism that removes the outward drift---consistent with the
+fact that standard all-electron quantum chemistry reproduces LiH's bond length.
+The inward collapse is itself a \emph{numerical} artifact, not physics:\ an
+\emph{isolated} Li$^{2+}$ $1s^2$ core (whose energy must be $R$-independent)
+acquires a spurious $0.36$~Ha $R$-dependence in the two-center prolate grid,
+because the real-space resolution near the tight core is tied to $R$ through
+$r_A=(R/2)(\xi+\eta)$;\ confirmed a grid artifact (the spread shrinks under
+refinement), with a co-dominant contribution from the $R$-dependent completeness
+of the two-center basis for a tight atomic core.  A clean prolate all-electron
+$R_{\rm eq}$ is thus a well-characterized \emph{numerical} target (a dedicated
+atom-centered core), not a physics obstruction (a measured result;\ rests on the
+Paper~12 prolate-CI engine).
+
 \textbf{[MEASURED]} The banked $n_{\max}=4$ decider has now been run---a
 matrix-free (Davidson) direct-CI engine
 (\texttt{geovac/balanced\_direct\_ci.py};\ ${\sim}1600\times$ faster than the
