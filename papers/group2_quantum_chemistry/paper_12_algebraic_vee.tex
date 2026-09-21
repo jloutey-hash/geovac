@@ -1406,11 +1406,19 @@ two-electron diatomic is $V_{ne}$, whose per-electron form
 $(2/R)[(Z_A+Z_B)\xi + (Z_B-Z_A)\eta]/(\xi^2-\eta^2)$ stays polynomial after the
 Jacobian (the $(Z_B-Z_A)\,\eta$ term breaks the $\eta\!\to\!-\eta$ symmetry, so
 both angular parities enter and $V_{ne}$ couples them).  Applied to HeH$^+$
-($R = 1.4632$) the same engine converges variationally to
-$\gvq{p12_r12_heh_err_mha}{0.9}$~mHa of the reference at a modest basis,
-and---consistently with the H$_2$ plateau
+at the reference geometry $R_e = 1.463\,a_0$ the same engine converges
+variationally to $\gvq{p12_r12_heh_err_mha}{0.9}$~mHa of the Kolos--Peek
+reference~\cite{KolosPeek1976} (well depth $16456$~cm$^{-1}$, $E_{\rm BO}(R_e)
+= -2.9787$~Ha) at a modest basis, and---consistently with the H$_2$ plateau
 above---the lever there is the \emph{angular} basis, not the exponent (a
 two-block exponent gains $\sim\!0.3$~mHa, one more angular shell $\sim\!11$~mHa).
+Scanning $R$ locates the bond length as well:\ $R_{\rm eq}$ converges from
+$-4.5\%$ at $l_{\max}=2$ to $-0.5\%$ at $l_{\max}=3$ ($1.456$ vs $1.463\,a_0$),
+by the \emph{same} angular lever---so the engine reproduces the heteronuclear
+\emph{geometry}, not only the energy, and the residual is heteronuclear
+polarization (an angular effect).  This is the two-center, two-different-charge
+analogue of the H$_2$ convergence, and the precedent for the frozen-core LiH
+extension.
 
 Backing:\ test \texttt{tests/test\_paper12\_r12.py} and the reduction of
 Eq.~\eqref{eq:r12_kinetic_collapse} above;\ chronicle in \texttt{CHANGELOG.md}.
@@ -1784,6 +1792,11 @@ W.~Ko\l{}os and L.~Wolniewicz,
 ``Improved theoretical ground-state energy of the hydrogen
 molecule,''
 J. Chem. Phys. \textbf{49}, 404--410 (1968).
+
+\bibitem{KolosPeek1976}
+W.~Ko\l{}os and J.~M. Peek,
+``New \textit{ab initio} potential curve and quasibound states of HeH$^+$,''
+Chem. Phys. \textbf{12}, 381--386 (1976).
 
 \bibitem{Kato1957}
 T.~Kato,

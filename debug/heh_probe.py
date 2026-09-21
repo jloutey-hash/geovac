@@ -14,8 +14,11 @@ import prolate_r12_mpf as m
 from r12ci_first_energy import solve_canonical
 
 ZA, ZB = 2, 1        # He at focus A=(xi+eta), H at focus B=(xi-eta)
-R = 1.4632           # HeH+ equilibrium bond length (bohr)
-E_REF = -2.97869     # HeH+ X^1Sigma+ BO total energy near R_e (LOAD-BEARING: verify)
+R = 1.4632           # HeH+ X^1Sigma+ equilibrium bond length; Kolos-Peek 1976 R_e=1.463 a0
+# VERIFIED 2026-09-20 vs Kolos-Peek, Chem.Phys. 12, 381 (1976) + Bishop-Cheung 1979:
+# well depth D_e = 16455.64 cm^-1 = 0.074977 Ha; E_BO(R_e) = E(He) - D_e
+# = -2.903724 (Pekeris) - 0.074977 = -2.978701 Ha.
+E_REF = -2.978701    # HeH+ X^1Sigma+ BO total energy at R_e (verified, Kolos-Peek 1976)
 
 
 def build_basis_full(j_max, l_max, alpha, p_set=(0, 1)):

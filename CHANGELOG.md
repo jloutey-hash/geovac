@@ -7,6 +7,121 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.5] - 2026-09-20
+
+**Frozen-core prolate LiH, increments 4–5: core-valence exchange (small, −0.9 mHa), and the angular-basis test that QUALIFIES the v5.15.4 +2%. Adding angular basis (l=3) at p=0 moves R_eq the WRONG way (+2.2% → +7.1%), approaching the composed recipe — but the LiH scans ran WITHOUT r₁₂ while the converging HeH⁺ PoC had it, so the result is INCONCLUSIVE, likely a missing-r₁₂ artifact. The honest correction to v5.15.4. PI-directed ("keep going into the next increment").**
+
+### Increment 4 — core-valence exchange (`debug/lih_exchange.py`)
+For the closed-shell 1s² core the valence sees the core Fock 2J−K; V_H = 2J was already in, this adds −K. K_ij = ⟨g_i 1s_A|1/r₁₂|1s_A g_j⟩ by prolate quadrature with the φ-integral done analytically (complete elliptic K, which captures the integrable 1/r₁₂ singularity), K2e = K1e⊗S + S⊗K1e. At R=3.015, (2,2): **exchange = −0.9 mHa** (K1e symmetric, diag>0, correct sign — binds; still variational −8.013). **Small, as scoped** (valence ⊥ tight core → modest overlap). So the ~57 mHa remaining energy gap is CORRELATION (r₁₂) + BASIS, NOT exchange.
+
+### Increment 5 — angular l=3, and the qualification of the +2%
+The (2,3) R_eq scan (p=0, projector, λ=1000) gives **R_eq = +7.1% (3.228 bohr)**, WORSE than l=2's +2.2% (energy improves to −8.041). Adding angular basis moved R_eq OUTWARD — the *opposite* of HeH⁺ (where l=3 pulled −4.5%→−0.5%). **So the v5.15.4 +2% is a small-basis (l=2)/p=0 snapshot, NOT converged; "strategy validated end-to-end" holds for HeH⁺ but is OPEN for LiH.**
+
+**The confound (confirmed by `grep p_set`):** the LiH scans ran `p_set=(0,)` (no r₁₂) while the HeH⁺ PoC that converged ran `p_set=(0,1)` (r₁₂ on). LiH was forced to p=0 because the core-shield V_H and the Huzinaga projector are p=0-factorized. So the l=3 divergence is very likely the **missing r₁₂** — a high angular basis over-polarizing with no correlation to absorb it — not a genuine prolate-LiH failure. The **frozen core** (fixed/unpolarized → the v5.15.2 outward-drift mechanism, now on the core) is an alternative suspect not yet ruled out.
+
+### Status / next
+INCONCLUSIVE. The load-bearing next step is the **r₁₂-coupled V_H + projector** (extend both from p=0-factorized to the p={0,1} matrix elements), giving the apples-to-apples test against the HeH⁺ convergence: does prolate LiH converge (r₁₂ was the lever) or drift (frozen core is the culprit)? If it still drifts, force-decompose (v5.14.8-style) to attribute it to fixed-core vs valence, pointing to an all-electron (variational-core) LiH. Real work, multi-session; teed up in `debug/track_logs/prolate_native_lih.md`.
+
+### Added
+- `debug/lih_exchange.py` (increment 4). Track log updated with increments 4–5 + the qualification + reordered next steps.
+
+### Note
+Patch bump (touches CLAUDE.md §2). Debug/PoC only. Not committed. **This entry corrects the optimistic framing of v5.15.4 below.**
+
+## [v5.15.4] - 2026-09-20
+
+**Frozen-core prolate LiH: FIRST bond length. R_eq ≈ +2% at (2,2)/p=0 vs the composed recipe's +8.8% — but see v5.15.5 above: this +2% does NOT survive angular refinement (a missing-r₁₂ confound), so it is a small-basis snapshot, NOT a converged result. PI-directed build. PoC, NOT a paper claim.**
+
+Closes the loop opened by v5.15.2 (the balanced-LiH R_eq drift is a structural wall) and v5.15.3 (the prolate route converges to correct heteronuclear geometry, HeH⁺): builds LiH the H2 way — frozen Li 1s² core + 2 valence electrons in the prolate two-center basis — and measures the bond length. Full plan/chronicle: `debug/track_logs/prolate_native_lih.md`.
+
+### Build (increments 1–3, Hartree level)
+- **Increment 1 — core-shield V_H** (`debug/prolate_core_hartree.py`): the frozen 1s² core's Hartree screening of the valence is the closed form V_H(r_A)=(2/r_A)[1−(1+ζ_c r_A)e^{−2ζ_c r_A}] (ζ_c=Z−5/16=2.6875). Validated <5e-3 vs a direct 3D integral; exact two-electron-charge limit.
+- **Assembly + bookkeeping validated** (`debug/lih_frozen_core_first.py`): E_tot(R) = E_val + E_core(−7.2799) + Z_Li Z_H/R − V_Hdens(R) [core–H attraction]. Plugging the *expected* valence energy (−1.122) reproduces **exactly −8.070** (LiH ref) → the R-dependent assembly (V_ne −3/r_A−1/r_B, core-shield, V_NN, core–H) is correct. Without a keep-out constraint the valence COLLAPSES into the core (E_val −1.73, E_tot −8.68 below exact) — the orthogonality wrinkle, confirmed empirically.
+- **Increment 2b — Huzinaga orthogonality projector** (`debug/lih_projector_test.py`): H→H+λ(P_1s(1)+P_1s(2)), P_1s=|1s_Li⟩⟨1s_Li| (prolate σ overlaps by quadrature, factorized like V_H). E_val rises −1.730 (λ=0) → **plateau −1.064 by λ≥100**, E_tot −8.012 — VARIATIONAL (above exact), collapse removed. This is EXACT orthogonality, not the crude PK pseudopotential that was the composed bottleneck; sparsity is irrelevant for an accuracy CI, which is why the prolate route can afford it and the composed route could not.
+
+### Result (`debug/lih_req_scan.py`, (2,2), λ=1000, Hartree-only)
+**R_eq ≈ +2% of experiment** (3.065 bohr at α-grid [0.8,1.0,1.3]; 3.083 / +2.2% at wider α [1.0..2.0], E flat in α → robust to α, α is not the lever — same as HeH⁺), E_min −8.0146. Against composed/balanced **+8.8% (3.28 bohr) & worsening with basis** (v5.15.2), this is a **~4-5× improvement at the crudest level** (no correlation, no core-valence exchange, minimal basis). Per the HeH⁺ convergence (−4.5%→−0.5% via angular basis), the ~+2% residual has clear headroom.
+
+### Honest scope
+Hartree-only PoC: no core-valence exchange (increment 4), no valence r₁₂ (increment 5), no angular (l=3) convergence or fine R-grid (increment 6). The exact +2% is coarse-grid-limited. **NOT a paper claim** — it validates the strategy and the build architecture; a paper claim needs the correlated, converged result. Remaining increments are multi-session, teed up in the track log.
+
+### Added
+- `debug/prolate_core_hartree.py`, `debug/lih_frozen_core_first.py`, `debug/lih_projector_test.py`, `debug/lih_req_scan.py` — the build drivers.
+- `debug/track_logs/prolate_native_lih.md` — updated with increments 1–3 results + remaining increments 4–6.
+
+### Note
+Patch bump (touches CLAUDE.md §2). Debug/PoC code only (no `geovac/` change; the engine migrates from `debug/` when the arc closes). Not committed (`/checkpoint` is PI-invoked).
+
+## [v5.15.3] - 2026-09-20
+
+**HeH⁺ prolate PoC captured, and its reference verified against primary sources. The prolate explicit-r₁₂ engine reproduces heteronuclear GEOMETRY (not just energy): HeH⁺ R_eq converges −4.5%→−0.5% with the angular basis, 0.9 mHa off the verified Born-Oppenheimer reference. This is the validated precedent for the frozen-core prolate LiH build. PI-directed ("do the HeH⁺ thing first").**
+
+Ran while scoping the prolate-native LiH build (`debug/track_logs/prolate_native_lih.md`) as the go/no-go PoC: does the H2-style variational-prolate recipe fix *geometry* for a heteronuclear 2-electron system, unlike the composed/balanced recipe (which drifts +8.8% and worsens with basis)?
+
+### Reference verified (was flagged "LOAD-BEARING: verify")
+`heh_probe.E_REF` is now checked against primary sources: **Kołos–Peek, Chem. Phys. 12, 381 (1976)** (+ Bishop–Cheung 1979) — R_e = 1.463 a₀ (matches the code's 1.4632), well depth D_e = 16455.64 cm⁻¹ = 0.074977 Ha, so E_BO(R_e) = E(He, −2.903724 Pekeris) − D_e = **−2.978701 Ha** (the code's −2.97869 confirmed to 0.01 mHa). R_e independently confirmed on Wikipedia (0.772 Å). E_REF updated to the verified −2.978701 with provenance.
+
+### The result (PoC, `debug/heh_req_scan.py` + `debug/data/heh_req_scan.json`)
+R-scan of E_tot(R), optimizing the basis exponent per R, then quartic R_eq:
+
+| basis | R_eq | drift | E off ref |
+|:--|:--|:--|:--|
+| (2,2) l=2 | 1.398 | −4.5% | 11.6 mHa |
+| (3,2) l=2 (more radial) | 1.399 | −4.4% | 10.5 mHa |
+| **(2,3) l=3 (more angular)** | **1.456** | **−0.5%** | **0.9 mHa** |
+
+- **Angular is the lever** (confirmed by elimination): radial (j 2→3) does NOT move R_eq; exponent α does NOT (verified: wider α grid picks a *low* optimum 1.4–1.9, R_eq unchanged — a hypothesis I raised and then killed); only angular (l 2→3) collapses the residual. Physically right: the residual is heteronuclear polarization.
+- **Contrast with composed/balanced**: prolate −0.5% INWARD & converging (basis rate) vs composed +8.8% OUTWARD & worsening (structural wall, v5.15.2). Decisive — the prolate route is GO.
+- **Engine note**: the mpf *eigensolve* was the n³ bottleneck; the float64 canonical solve is bit-identical (−2.967037 at (2,2), verified) and ~4× faster — use it for scans.
+
+### Captured
+- Paper 12 (Sec. "Explicit correlation", HeH⁺ [MEASURED] paragraph): added the *geometry* result (R_eq −4.5%→−0.5% by the angular lever; the engine reproduces heteronuclear geometry, not only energy; residual = heteronuclear polarization) and the framing as the frozen-core-LiH precedent. Cited the verified reference `\cite{KolosPeek1976}` (new bibitem). Paper compiles clean.
+- `tests/test_paper12_heh.py` — first `tests/` backing for the HeH⁺ claim (was debug-only): (2,3) within ~1 mHa of the BO reference AND variational; angular lever (l 2→3 lowers E ~10 mHa). @slow.
+- `docs/claim_test_matrix.md` — Paper 12 HeH⁺ row.
+
+### Added / Changed
+- `debug/heh_req_scan.py`, `debug/data/heh_req_scan.json`, `debug/prolate_core_hartree.py` (build increment 1: the Li core-Hartree screening term, closed form validated <5e-3 vs a direct 3D integral — the "one new piece" of the LiH build, de-risked).
+- `debug/track_logs/prolate_native_lih.md` — the full frozen-core prolate LiH build plan (5 increments, machinery map, the core-valence orthogonality wrinkle + Huzinaga fix).
+- `debug/heh_probe.py` — E_REF verified + provenance.
+- `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex` — HeH⁺ paragraph + `KolosPeek1976` bibitem.
+- CLAUDE.md §1 (v5.15.2→v5.15.3), §2 one-liner.
+
+### Note
+Patch bump (touches CLAUDE.md). Not committed (`/checkpoint` is PI-invoked). Next: build the p=0 frozen-core prolate LiH energy + R-scan (increments 2–3).
+
+## [v5.15.2] - 2026-09-20
+
+**LiH R_eq-drift mechanism DEMONSTRATED (was named) → proven WALL, registered. The 8.8% balanced-LiH bond-length drift is the finite-extent screening of the fixed Z_orb=1 bond orbital; full contraction recovers the exact classical force balance, but contraction is structurally inexpressible in the parameter-free construction. PI-directed closure of the v5.14.8 localization.**
+
+v5.14.8 localized the drift to one term (cross-center V_ne R-slope, 8.8% too weak) and *named* the mechanism ("the fixed, unpolarized hydrogenic bond orbital carries no R-adaptive relaxation"). This sprint *demonstrates* it and registers the wall with the mechanism pinned (the §1.7 WALL deliverable). Diagnostic-only (documented wall area); no production fix. Memo `debug/sprint_balanced_reqdrift_mechanism_memo.md`.
+
+### The mechanism, demonstrated (analytic, artifact-free)
+For a 1s orbital of exponent z attracted to a partner nucleus of charge Z at separation R, ⟨φ_z|−Z/r|φ_z⟩ = −(Z/R)[1−(1+zR)e^{−2zR}]. Its R-slope rises **monotonically with contraction toward the point-charge limit +Z/R²** — and +Z/R² **is exactly the required force** Z_A Z_B/R² that cancels dV_NN/dR (the Hellmann–Feynman force-balance identity: a fully-localized density exerts the classical Coulomb force). At R=3.015, Z=Z_Li=3: slope +0.31001 at z=1 (93.9% of the limit +0.33002) rising to the limit by z≈2–3. So the fixed Z_orb=1 orbital under-delivers by 6.1% (one 1s term) — same sign/direction as the measured 8.8% (the remainder = the more diffuse 2s/2p admixture + the weaker Li→H cross term). The deficit is the bond orbital's finite extent; contraction removes the screening factor and recovers the force balance.
+
+### Why direct relaxation is inexpressible here (honest negative + structural finding)
+The obvious repair — relax the bond exponent R-adaptively — was run first and **failed by construction**: setting the bond exponent z and re-solving the balanced FCI gave a variational catastrophe (E(R_true) = −9.565 Ha, below the exact −8.071; z* pegged at the grid ceiling). **Verified cause:** the balanced construction's one-body term is the hydrogenic baseline −Z_orb²/(2n²) (`balanced_coupled.py:503`), so Z_orb is locked to the assumed nuclear charge — the h1_no_pk trace deepens −11.00→−19.58 Ha as z:1→2.3 (Li-core diagonal −4.50 untouched; the deepening is entirely the bond orbitals following −z²/2n²), while cross-V_ne only moves −6.38→−8.08. **Structural consequence:** orbital contraction is not a free variational parameter in the parameter-free construction — freeing it requires h1 from physical kinetic+nuclear integrals, a different (non-parameter-free, variational) Hamiltonian class. This is the concrete mechanism behind v5.14.8's "healing breaks the zero-parameter construction."
+
+### Corpus cross-check (H2/He are the control group)
+He (atom, no bond) and H2 (prolate natural geometry, variationally-optimized exponent + explicit-r₁₂) show no such drift *because* their orbitals contract freely. Where the orbital can contract → energy and geometry both right; where it is frozen and Z-locked (balanced/composed LiH) → geometry drifts. The drift is a recipe artifact, not fundamental — the "exact ≠ accurate" / two-kinds-of-sparsity picture (CHEM-ACCURACY cluster); it worsens with reach (LiH 5.3–8.8% → BeH₂ 11.7% → H₂O 19.4%).
+
+### Path forward (PI-directed)
+The accuracy route is the prolate-native (H2-style) LiH — the "unbuilt prolate ≥4e two-center CI" the walls audit names. Trick to stay in the proven regime: freeze the Li 1s² core (as balanced already does) → a 2-valence-electron two-center problem = the N=2 sweet spot where explicit-r₁₂ works (H2; today's HeH⁺, v5.14.11). The one new piece is representing the frozen-core screening *exactly* (frozen-density Hartree–exchange in prolate coordinates), not via the crude PK shortcut. Next step: scope that, then build from the `assemble_hetero`/`vne_hetero_mpf` HeH⁺ engine.
+
+### Added
+- `tests/test_paper19_reqdrift_mechanism.py` — backing test: (fast) the analytic point-charge-limit identity (slope→+Z/R² monotone with contraction; z=1 = 93.9%, rejects a decreasing/saturated-at-1 law); (@slow) the h1-baseline artifact (E(z=2.3) below exact ⇒ Z_orb not a free variational parameter; negative control = a true-integral construction would keep E above exact). Both pass.
+- `debug/balanced_reqdrift_relaxation_probe.py`, `debug/data/balanced_reqdrift_relaxation.json` — the (failed) relaxation scan + the analytic model.
+- `debug/sprint_balanced_reqdrift_mechanism_memo.md` — canonical memo.
+
+### Changed
+- `papers/group2_quantum_chemistry/paper_19_coupled_composition.tex` — Sec. "Fixed-geometry energy versus well shape": new paragraph "The mechanism, demonstrated" (point-charge-limit identity, the 93.9% screening deficit, and the structural reason contraction is inexpressible in the parameter-free construction).
+- `docs/walls/register.md` — CHEM-ACCURACY cluster: new member-wall row + dated delta (2026-09-20) pinning the mechanism and the falsifier.
+- `docs/claim_test_matrix.md` — new Paper 19 row for the mechanism claim + backing test.
+- `docs/failed_approaches_ledger.md`, CLAUDE.md §3 — new row: R-adaptive Z_orb(R) relaxation is non-variational in the parameter-free construction.
+- CLAUDE.md §1 (v5.15.1→v5.15.2), §2 one-liner.
+
+### Note
+Ordinary diagnostic + paper/doc work; patch bump (touches CLAUDE.md). Not committed (commit/tag is PI-invoked via `/checkpoint`).
+
 ## [v5.15.1] - 2026-09-20
 
 **`/qa` DELTA (PI-invoked) on Papers 12/14 + related 13/20 + synthesis currency = DEFECTS, remediated. The record numbers are SOUND; the defects were honesty/currency AROUND them: an unverifiable external (Tao–McCurdy–Rescigno) attribution that survived in three body loci, a live pair-diagonal zombie in Paper 20, synthesis staleness on the H₂ record, and a stale DoD.**

@@ -83,6 +83,7 @@ A molecular (≥2-center) method that reaches sub-mHa **and** keeps native integ
 | accurate per-atom accuracy (xTC recovery) | §2 v5.0.12 | **STANDING** | — | xTC at the *oracle* γ recovers 94–98% of the correlation gap incl. Be (4e) — the cusp recovery scales; only the *cheap self-selection* fails (above row). The determined γ(r)∝n^{1/3} exists (Giner μ(r) / Wagner–Gori-Giorgi avoidance radius) but lives on the variational side. |
 | skeleton-native γ(r) from equal-area cells | §2 v5.0.12 (deferred) | **OPEN** | — | Does Paper 0's equal-area packing *give* γ(r)∝n^{1/3}? Not a scaling calc — Paper 0's "shells" are l-subshells (not real space), so it needs the full Fock momentum→position map. Genuine open skeleton-program derivation, not faked. |
 | Elliptic/CM basis for chemical accuracy | §3 (2026-08-23 ×3) | **STANDING** | **HARD** | The bond's genus-1 elliptic period is *radial + inert*; the accuracy gap is the *e-e* cusp, which a radial basis principle can't reach. |
+| LiH R_eq drift = cross-V_ne R-slope = bond-orbital finite extent | §2 v5.14.8, v5.15.2; `test_paper19_reqdrift_mechanism.py` | **STANDING** | **HARD** (parameter-free)¹ | Two-term V_NN↔cross-V_ne balance; the 8.8% drift is the *finite-extent screening* of the fixed Z_orb=1 bond orbital. Mechanism PINNED (v5.15.2): cross-attraction R-slope → +Z/R² (point-charge limit) as the orbital contracts, and that limit *is* the required force Z_A Z_B/R²; the fixed orbital delivers 93.9%. ¹Contraction is **inexpressible** in the parameter-free construction — h1 = −Z_orb²/2n² ties Z_orb to Z_nuc, so forcing Z_orb>1 drives E below exact (−9.6 vs −8.07). Breachable only by a variational, contraction-capable basis = the prolate-native route (Paper 12); the drift is absent in H2/He precisely because those use such a basis. |
 
 ### This run's delta
 Bootstrap. Net-new refinements over the raw §3 ledger:
@@ -111,6 +112,35 @@ The register carried `||[P_A,P_B]|| = 0.50` as a measurement. It is the *saturat
 **Scope, now measured.** The breach reaches **water's `A_1` block** -- the symmetry-inequivalent-center case where the gerade lever fails: raw `cond ~ N^1.96` (independently reproducing the paper's `N^1.97`) against a bounded `38.45 -> 44.06` over `N = 12..192`. It works because the degeneracy's DIRECTION is geometry-independent: at `chi = pi` every block symbol tends to `j0(0) = 1`, so for `M` centers the matrix symbol is the rank-one all-ones matrix and its null space has dimension `M-1`, fixed. Control: the *discriminating* test is the SELECTIVE `blockdiag(P,I)` applied in the UNROTATED frame -- it grows as `N^3.79` and reaches `4.4e6` at `N=192`, **106x WORSE than untreated**, while the same band aligned to the null direction is flat at 44; so the ALIGNMENT, not the banding, is doing the work. (The uniform `blockdiag(P,P)` is NOT a valid control here: it commutes with the rotation to `3e-13` and so cannot discriminate it -- it runs `N^1.94`, essentially the raw `N^1.96`. Corrected 2026-09-13, DELTA #3.) Remaining scope: `s`-sector shared-scale bases at `M = 2` and **non-collinear** `M = 3`; the **collinear case is open and is NOT claimed** (corrected 2026-09-12: the unqualified "M = 2, 3" authorised dispatch into exactly the regime Paper 60 declines, and BeH2 and CO2 are collinear and in this corpus's own library). Mechanism: for collinear centres `P D2 P` is rank ONE, so only one of the `M-1` null directions opens at order `p^2` and the rest at 4, 6, ..., 2(M-1). **Resource claim closed 2026-09-12 (v5.11.3):** `G` has a DIRECT block-encoding — its symbol is a bounded ratio, `||ratio||_inf = 0.3716 = ||G||`, so a circulant-embedded Toeplitz-minus-Hankel encoding carries `alpha = O(1)` instead of the composed `O(n^2)`; the resulting whitening reaches the amplitude floor to 0.13% with residual conditioning 1.234. The metric penalty scales as `n` against the untreated `n^3`. What remains uncompiled is the circuit, not the construction.
 
 ---
+
+### Delta 2026-09-20 (v5.15.2) — LiH R_eq-drift mechanism PINNED
+
+v5.14.8 localized the balanced-LiH bond-length drift to one term (the cross-center
+V_ne R-slope, 8.8% too weak) and *named* the mechanism. This delta *demonstrates*
+it, upgrading a named mechanism to a proven WALL with the mechanism pinned (the
+mission's WALL deliverable, §1.7). Memo `debug/sprint_balanced_reqdrift_mechanism_memo.md`.
+
+- **The deficit is finite-extent screening, and its limit is the required force
+  exactly.** Closed-form: the cross-attraction R-slope of a 1s orbital of exponent
+  z is $dV/dR = d/dR\{-(Z/R)[1-(1+zR)e^{-2zR}]\}$, which rises monotonically to the
+  point-charge limit $+Z/R^2$ as $z\to\infty$ — and $+Z/R^2$ **is** the required
+  force $Z_A Z_B/R^2$ that cancels $dV_{NN}/dR$. The fixed Z_orb=1 orbital gives
+  93.9% (6.1 pp of the measured 8.8 pp from one 1s term; the rest is 2s/2p
+  admixture + the weaker Li→H cross term). Backing `test_paper19_reqdrift_mechanism.py`.
+- **The wall is STRENGTHENED, not softened.** The obvious repair — relax the bond
+  exponent — is *structurally inexpressible* in the parameter-free construction:
+  h1 = −Z_orb²/2n² locks Z_orb to Z_nuc, so forcing Z_orb=2.3 on the Z=1 H centre
+  deepens h1 (trace −11.0→−19.6 Ha) and drives E below the exact floor (−9.6 vs
+  −8.07) — a variational catastrophe, not physics. Freeing the orbital needs h1
+  from true kinetic+nuclear integrals = a non-parameter-free (variational) basis.
+- **Corpus cross-check (the control group).** H2/He show no such drift *because*
+  they use variational natural-geometry bases (prolate α_opt for H2; hyperspherical
+  for He) where the orbital contracts freely. Confirms the drift is a recipe
+  artifact, not fundamental.
+- **Falsifier.** A parameter-free (zero-knob) balanced/composed diatomic that
+  reaches sub-% R_eq without a variational, contraction-capable orbital would break
+  the "finite-extent, inexpressible" reading. The named breach path (prolate-native
+  ≥4e, frozen-core route) is UNBUILT — this wall stands until it is built and tested.
 
 ## Architecture-swap audit: composed → prolate-native diatomic (2026-09-19, v5.14.6; PI-adjudicated)
 

@@ -222,3 +222,33 @@ the one governing the eigenproblem, and this corpus nearly spent a sprint on tha
 gap. Record: `debug/sprint_explicit_correlation_scoping_memo.md` Sec. 8;
 driver `debug/multiexp_twoblock_energy.py`; machinery `debug/multiexp_overlap_poc.py`
 + `debug/multiexp_vee_xtable.py`; CHANGELOG v5.14.2.
+
+### R-adaptive shared bond exponent Z_orb(R) to heal the balanced-LiH R_eq drift (2026-09-20)
+
+**Count:** 1. **Verdict:** non-variational by construction — an honest negative
+that *strengthens* the wall.
+
+**What was tried.** The balanced-LiH bond-length drift (8.8% at n_max=3) was
+localized (v5.14.8) to the cross-center V_ne R-slope, mechanism named as the fixed
+Z_orb=1 bond orbital not contracting toward the bond as R changes. The obvious
+test: let the bond exponent relax R-adaptively (set the bond block's shared Z_orb,
+re-optimize per R) and check whether the drift collapses.
+
+**Why it failed.** Setting Z_orb>1 and re-solving the balanced FCI produces
+energies *below* the exact floor (E(R_true) = −9.565 vs exact −8.071 at Z_orb=2.3;
+z* pegs at the grid ceiling at every R). Cause: the balanced construction's
+one-body term is the hydrogenic baseline −Z_orb²/(2n²)
+(`balanced_coupled.py:503`), which ties Z_orb to the *assumed nuclear charge*.
+Cranking Z_orb on the physical Z=1 H centre deepens h1 unphysically (trace
+−11.0→−19.6 Ha) — the code believes the nucleus got stronger. So Z_orb is not a
+free variational parameter here.
+
+**Lesson.** Do not heal the composed/balanced R_eq drift with an orbital-exponent
+knob: the parameter-free construction cannot express orbital contraction without
+replacing its one-body term with true kinetic+nuclear integrals — i.e. becoming a
+variational (non-parameter-free) method. The genuine cure is the prolate-native
+(variational, contraction-capable) route, not a knob on the composed recipe.
+Distinct from the 2026-06-01 NaH Z_orb scan (fixed Z_orb per curve, binding
+question). The mechanism is analytically pinned (cross-attraction slope →
+point-charge limit = required force). Record:
+`debug/sprint_balanced_reqdrift_mechanism_memo.md`; CHANGELOG v5.15.2.
