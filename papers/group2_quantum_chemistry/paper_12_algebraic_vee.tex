@@ -98,7 +98,12 @@ $A\,K_0 - B\,K_1$ Neumann kernels as $V_{ee}$ (no quadrature), reaches
 $\gvq{p12_r12_err_mha}{0.053}$~mHa above the exact value---a sixfold
 reduction of the CI residual---confirming constructively that ordinary
 integer powers of $r_{12}$, not non-analytic terms, close the gap
-(Sec.~\ref{sec:r12}).
+(Sec.~\ref{sec:r12}).  The same reduction extends without a resolution of
+identity to a heteronuclear diatomic (HeH$^+$) and to the many-body matrix
+elements of a two-center four-electron explicit-$r_{12}$ CI, where the
+genuinely four-body Coulomb-bridge term is evaluated exactly \emph{inside} a
+real correlation quantity---placing the classical exactness boundary at a
+two-center three-body integral (Sec.~\ref{sec:r12}).
 \end{abstract}
 
 \maketitle
@@ -1454,10 +1459,60 @@ which Gaussian $F_{12}$ resorts to a resolution of identity, extends past $N=3$
 rather than stopping there.  This is a diagnostic result at proof-of-concept
 resolution, not a spectroscopic $N=4$ claim.
 
+\textbf{[MEASURED 2026-09-21]} Two extensions sharpen this boundary and carry
+the RI-free discipline from a standalone integral into a genuine many-electron
+correlation calculation.  \emph{First}, the four-body bridge is not tied to the
+single-center atom:\ evaluated between two-center prolate densities it reduces
+by the \emph{same} construction---an isotropic one-dimensional leaf dressing
+followed by a two-center prolate Neumann Coulomb between the dressed
+densities---and reproduces an independent twelve-dimensional Monte-Carlo
+evaluation to $\sim\!2\times10^{-5}$ for \emph{every} azimuthal channel
+($\sigma$, $\pi$, $\delta$; the $\pi$ channel, which dominates valence
+correlation, included), with the self-Coulomb step anchored to the closed form
+$5\alpha/8$.  \emph{Second}, the same machinery evaluates the many-body matrix
+elements of an explicit-$r_{12}$ CI on a two-center four-electron reference
+($\Phi_0=|1s_A^2\,1s_B^2|$, a proof-of-concept ionic reference, not a
+spectroscopic LiH) with no resolution of identity, each element checked against
+an independent variational Monte-Carlo ground truth.  The entire off-diagonal
+coupling $h=h_T+h_{V_{ne}}+h_{V_{ee}}$ reduces to grid integrals of dressed
+one-electron densities and matches the Monte-Carlo values to within their
+statistical error:\ the kinetic part via an integration-by-parts identity that
+collapses the gradient coupling $\nabla F\!\cdot\!\nabla\Phi_0$ to a
+\emph{scalar} screened-Coulomb (Yukawa) expectation
+($\nabla^2 f=\gamma^2 f-2\gamma\,e^{-\gamma r}/r$), the Coulomb part via the
+two-center Neumann \emph{potential} of the transition density;\ the diagonal
+one-body moment $\langle\chi^2 V_{ne}\rangle$ ($\chi=F-\bar F$) reduces by a
+block decomposition $F=S+I$ (intra/inter) of the reference density with all
+three ($\langle S^2\rangle$, $\langle SI\rangle$, $\langle I^2\rangle$) parts
+Monte-Carlo--validated.  Crucially, the four-body bridge appears \emph{inside}
+the diagonal $V_{ee}$ moment as
+$\langle f_{12}f_{34}\,r_{13}^{-1}\rangle=\tfrac14\,I_{\rm coul}[S^f,S^f]$---the
+Coulomb self-interaction of the $f$-dressed one-electron slice, via the same
+Neumann potential---and again matches Monte-Carlo to within statistical error,
+so the RI-free treatment of the genuinely four-body content is demonstrated not
+merely as an isolated integral but inside a real correlation quantity.  (A
+technical enabler:\ the screened-Coulomb dressing fields needed here are
+obtained without a Yukawa-specific Green's function, as
+$\Psi^Y=\Psi^{\rm coul}-\Psi^{\rm s}$ with the non-singular kernel
+$s(d)=(1-e^{-\gamma d})/d$.)  The remaining boundary is now sharper than
+``$N=4$'':\ completing the diagonal $\langle\chi^2 V_{ee}\rangle$ requires a
+two-center \emph{three-body triangle}
+$\langle f_{13}f_{23}\,r_{12}^{-1}\rangle$ (two correlation edges sharing a
+vertex, closed by a Coulomb), whose down-integration yields a \emph{non-separable}
+two-point kernel $H_2(1,2)=\int\rho(3)f(r_{13})f(r_{23})\,d^3r_3$;\ a low-rank
+expansion of $H_2$ followed by a per-mode Neumann Coulomb is the identified next
+reduction, and the full analytic assembly of the CI energy awaits it.  Until
+then the assembled energy is available from the variational Monte-Carlo route
+alone, which places the explicit-$r_{12}$ correction correctly signed and above
+the exact value.
+
 Backing:\ test \texttt{tests/test\_paper12\_r12.py} and the reduction of
-Eq.~\eqref{eq:r12_kinetic_collapse} above;\ chronicle in \texttt{CHANGELOG.md}.
-(The prototype engine migrates from the sprint tree into \texttt{geovac/} when
-the higher-power extension closes.)
+Eq.~\eqref{eq:r12_kinetic_collapse} above;\ the two-center bridge and the
+many-body matrix-element reductions are validated against variational
+Monte-Carlo in the sprint tree and chronicled in \texttt{CHANGELOG.md}
+(v5.15.10--v5.15.12).  (The prototype engine migrates from the sprint tree into
+\texttt{geovac/}, with dedicated regression tests, when the triangle reduction
+closes the analytic energy.)
 
 %% ========================================================================
 %% VII. IMPLICATIONS FOR THE GEOVAC PROGRAM

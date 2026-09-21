@@ -8,6 +8,20 @@ starting. Current-state rule applies: verify against CHANGELOG since 2026-09-21 
 
 ---
 
+## STATUS UPDATE (2026-09-21, v5.15.12) — full off-diagonal h ANALYTIC; g_Vne done; 4-body bridge inside the energy validated
+
+**Off-diagonal h fully analytic/RI-free** (this session, on the v5.15.11 σ²/h_Vne): h_T = +0.7495
+(VMC +0.7485), h_Vee = +0.3098 (VMC +0.3082), h_Vne = −0.9302 ⟹ h = +0.129 (VMC +0.1268 ✓).
+Files `debug/lih_r12ci_hT_analytic.py`, `debug/lih_r12ci_hVee_analytic.py` (reusable `cov_FA_FB`
+bilinear engine + two-center Coulomb `neumann_potential`).
+**Diagonal g — progress:** `g_Vne = −2.8516` (MC −2.8490, target −2.8454) VALIDATED via a block
+decomposition F=S+I (`debug/lih_r12ci_gVne_analytic.py`). The **RI-free 4-body bridge inside the
+energy** `⟨f₁₂f₃₄·coul₁₃⟩ = ¼ I_coul[S^f,S^f]` = 0.03281 vs MC 0.03281 (0.0σ) — the showpiece —
+plus the **Yukawa-field machinery** `Ψ^Y = Ψ^coul − Ψ^smooth` (both in
+`debug/lih_r12ci_gVee_groundwork.py`, which also banks the 6-product MC breakdown of ⟨F²V_ee⟩).
+**Owed:** the rest of g_Vee (a two-center **3-body triangle** reduction — see STAGE 4b part 2
+below) + g_T + the 2×2 → E_R12.
+
 ## STATUS UPDATE (2026-09-21, v5.15.10) — Step-1 integral gate CLEARED
 
 The load-bearing first gate (Step 3's "validate reduced==brute on one 4-electron LiH integral
@@ -93,17 +107,65 @@ Be's `1s²2s²`; Z_A=3/Z_B=1, exponents 2.7/1.0). Order set by conditioning: wel
   analytically. VMC validation targets for the analytic port (geminal exp(−0.5r), from
   `lih_r12ci_vmc.py`): **h_T = +0.7485 ± 0.004, h_Vee = +0.3082 ± 0.002, g = −0.9303 ± 0.004**,
   σ² = 0.13696, h_total = +0.1268.
-- **STAGE 4a (part 2) owed — analytic h_T (kinetic×f), target +0.7485.** `h_T = ½∫χ|∇Φ₀|²/S₀₀ +
-  ½∫Φ₀∇F·∇Φ₀/S₀₀`. The kinetic block density `KD=|∇_aD|²+|∇_bD|²` is separable into the SAME
-  structure as `σ²` but with **gradient one-electron densities** `G_pq=∇m_p·∇m_q` alongside `P_pq`.
-  New machinery: (i) dressings of the gradient densities `G_pq` (same convolution engine); (ii) a
-  **vector ∇f-dressing** for the `∇F·∇Φ₀` coupling term. Substantial but structurally mapped.
-- **STAGE 4b owed — analytic h_Vee (Coulomb×f, target +0.3082) + g (target −0.9303).** Both need
-  the two-center **Coulomb dressing field** (isotropic aa/bb = closed-form Hartree; two-center ab
-  via a Neumann-style potential) — the shared hard piece, so build together. `g` also carries the
-  ONE genuine 4-body bridge `f₁₂(1/r₁₃)f₃₄`, whose integral is already validated RI-free (v5.15.10).
-  Then the analytic 2×2 → E_R12, to compare against the VMC −7.932 (closing the loop two ways).
-The integral machinery (σ + π/δ) the 4-body term needs is built and validated.
+- **STAGE 4a (part 2) DONE — analytic h_T (kinetic×f) (2026-09-21, `debug/lih_r12ci_hT_analytic.py`).**
+  `h_T = +0.749453` (analytic, RI-free) vs **VMC target +0.7485 (dev 0.0010) ✓.** Two parts:
+  **Part A** = `½⟨χΣ|∇Φ₀|²⟩` reduces exactly like `σ²` but with **gradient one-electron densities**
+  `G_pq=∇m_p·∇m_q` (grad-orb dot products via `cosAB=(ξ²+η²−2)/(ξ²−η²)`) alongside `P_pq`, reusing
+  the existing `Ψ^f` dressings — `PartA = KI + ∫κ·Ψ^f_ρ + (α₁−F̄)(T₀₀+T₁₁)`, no new field. Gate:
+  `T₀₀+T₁₁=8.36746=⟨T⟩_Φ₀` to rel 9e-14. **Part B** = the `∇F·∇Φ₀` coupling — the anticipated
+  vector ∇f-dressing is UNNECESSARY: an IBP/Hermiticity identity collapses it to a SCALAR,
+  `PartB = −½⟨Σ_{i<j}∇²f(r_ij)⟩ = −½γ²F̄ + γ·Ȳ`, where `Ȳ=⟨Σ e^{−γr}/r⟩` is a **Yukawa**
+  (screened-Coulomb) two-electron expectation (`∇²f=γ²f−2γ·e^{−γr}/r`). Ȳ via a 3×3 Yukawa
+  AO-pair matrix — isotropic aa/bb use the closed radial Yukawa potential (no grid singularity),
+  ab,ab one importance-MC. Trap fixed: the Yukawa W-matrix MUST be in AO-pair order **[aa,ab,bb]**
+  (matching `cvec`/`W^f`), not [aa,bb,ab] — the ordering bug flipped α₁^Y negative (MC caught it).
+- **STAGE 4b (part 1) DONE — analytic h_Vee (Coulomb×f) (2026-09-21, `debug/lih_r12ci_hVee_analytic.py`).**
+  `h_Vee = +0.309790` (analytic, RI-free) vs **VMC target +0.3082 (dev 0.0016) ✓** (MC cross-check
+  +0.30863). `h_Vee = Cov[F,V_ee]` = the SAME separable bilinear as `σ²` but with the second kernel
+  = Coulomb: a reusable **`cov_FA_FB(A,B,C)` engine** (SAME-pair uses the product kernel C=A·B;
+  SHARE/DISJOINT use A- and B-dressings), self-checked to reproduce `σ²=0.13723` for `cov[f,f]`
+  (GATE 2). Same-pair f·(1/r)=**Yukawa** (reuses h_T's W^Y); cross-pairs need the **two-center
+  Coulomb dressing field** `Ψ^coul` — aa/bb = closed Hartree (`_hartree_1s`), transition-density ab
+  = **prolate-Neumann POTENTIAL** `neumann_potential()` (extracted from the v5.15.10 energy
+  expansion as `∫∫D·D'/r12=∫D·V_{D'}`). Gate 1: Neumann pot of ρaa vs closed Hartree rel 2.4e-3;
+  `W^coul[aa,aa]=5ZA/8`, `[bb,bb]=5ZB/8` exact. **⟹ the full off-diagonal h = h_T+h_Vne+h_Vee =
+  +0.749−0.930+0.310 = +0.129 is now analytic/RI-free** (VMC h_total +0.1268 ✓).
+- **STAGE 4b (part 2a) DONE — analytic g_Vne (2026-09-21, `debug/lih_r12ci_gVne_analytic.py`).**
+  `g_Vne = ⟨χ²V_ne⟩ = −2.8516` vs **MC −2.8490 (0.24σ), target −2.8454 ✓.** Method: block
+  decomposition **F = S + I** (S=f₁₂+f₃₄ intra, I=inter f), `⟨F²V_ne⟩ = ⟨S²V⟩+2⟨SIV⟩+⟨I²V⟩ = A+B+C`,
+  each a grid integral of **v-weighted dressed densities** (V_ne one-body → a `v`-weight on one
+  electron; block-independence factorizes the rest). All three MC-validated (A=−3.942/MC−3.939,
+  B=−26.96/MC−26.94, C=−49.24/MC−49.18). The −80.15→−2.85 cancellation is benign in float64.
+  Reduction primitives: v-weighted dressings `Ψ^f_{vP}`, slices `S^f`,`S^{f,v}`, `ρ_vpartner`,
+  down-field `G2`. This validates the block-decomposition trilinear machinery.
+- **STAGE 4b (part 2b) DONE — the 4-body bridge INSIDE the energy + Yukawa-field machinery
+  (2026-09-21, `debug/lih_r12ci_gVee_groundwork.py`).** (1) `⟨f₁₂f₃₄·coul₁₃⟩ = ¼ I_coul[S^f,S^f]`
+  (S^f the f-dressed intra slice; two-center Coulomb between the dressed densities via
+  `neumann_potential`) = **0.032814 vs block-sampler MC 0.032805 (0.0σ)** — the RI-free 4-body
+  bridge, now demonstrated inside a real LiH correlation quantity (the showpiece). (2) the
+  **Yukawa dressing field** `Ψ^Y_h = Ψ^coul_h − Ψ^{smooth}_h` (kernel `(1−e^{−γd})/d` non-singular,
+  no Yukawa-Neumann needed), validated vs closed `yukawa_pot_iso` (rel 4.4e-3) — the enabler for
+  the same-pair-Yukawa dressing slices `S^Y`. 6-product MC breakdown of ⟨F²V_ee⟩ banked in-file.
+- **STAGE 4b (part 2c) OWED — the rest of g_Vee (the 3-body TRIANGLE), g_T, and the 2×2 → E_R12.**
+  **The obstacle (genuine, not bookkeeping):** the full g_Vee's `⟨I²C⟩` products contain two-center
+  **3-body triangle** terms, e.g. `⟨f₁₃·f₂₃·coul₁₂⟩` (two inter geminals sharing down-vertex 3,
+  closed by intra `coul₁₂`). Down-integration gives a **non-separable 2-point kernel**
+  `H₂(1,2)=∫ρ(3)f(r₁₃)f(r₂₃)d³r₃` (= `Kf · diag(geo·ρ) · Kf` as a matrix), and the residual
+  `⟨…⟩ = ¼∫coul(r₁₂)·D_u(1,2)·H₂(1,2) d1 d2` is a 2-electron Coulomb of a NON-separable density —
+  beyond the disjoint-pair bridge. **Identified path:** low-rank (SVD/eigen) expansion
+  `H₂ ≈ Σ_l λ_l φ_l(1)φ_l(2)`, so `D_u·H₂` becomes rank-(3×modes) separable → the Coulomb reduces
+  to `Σ I_coul[u_k φ_l, w_k φ_l]` via `neumann_potential` per mode (validate the truncation).
+  The 6-product analytic build (P1=⟨S²C_S⟩, P2=⟨S²C_I⟩ both derived: P2 = 2∫Ψ^c_ρ S^{f²} +
+  2∫S^f Ψ^c_{S^f} [the bridge]; P3=2⟨SIC_S⟩ = 4[∫Ψ^f_ρ S^Y + ∫Ψ^f_{S^coul} S^f]; P4,P5,P6 have the
+  triangles) validates per-product against the banked 6-product MC targets. **g_T** = kinetic of
+  `χΦ₀`, three sub-moments: `½⟨χ²Σ|∇Φ₀|²⟩` (=`⟨χ²·KD-density⟩`, reuses `KD`/`G_pq` from h_T Part A;
+  target drift²=+1.168), `⟨χΣ∇F·v⟩` (cross, −0.048), `½⟨Σ|∇F|²⟩` (pair part `γ²(2α1^{f²}+4β1^{f²})`
+  + a vector `Σ_j f'(r_ij)r̂_ij`-field 3-body part; target +0.266). Then the analytic 2×2
+  [[E0,h],[h,g]] / [[1,S01],[S01,σ²]] → E_R12, compare to the VMC −7.932 (closing the loop two ways).
+  **Conditioning:** `g_Vne = ⟨F²V⟩−2F̄⟨FV⟩+F̄²⟨V⟩ ≈ −80.15+151.10−73.80` — ~3–4% residual, benign
+  in float64 (confirmed this session). `⟨F²V⟩` wants ~1e-3 relative accuracy; the current 72×44
+  grid delivered g_Vne to 0.24σ.
+The integral machinery (σ + π/δ, + the Yukawa field + the 4-body bridge inside the energy) is built and validated.
 
 ---
 
