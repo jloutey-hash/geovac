@@ -370,3 +370,267 @@ correlated) basis, NOT an orbital-product CI. Consequences for frozen-core LiH:
 - Guardrail note: two-center prolate is NOT single-center (Papers 8-9) nor
   concatenation (FCI-M) nor nested (Track DF) — none block this; the walls audit
   already scoped the composed/PK negatives as MIS-SCOPED for the prolate route.
+
+## RELAXABLE-CORE ROUTE — Phase 0 (core BREATHING) = NO-GO, decisive (2026-09-21, PI-chosen)
+PI chose the relaxable-analytic-core route: keep the clean frozen-core ANALYTIC
+representation (no grid wall — the increment-7 blocker) but let the core RELAX.
+Phase 0 = the cheapest relaxation: let the 1s² core BREATHE (one variational knob,
+the exponent ζ_c), staying spherical. `debug/lih_r12_breathing.py` (l=2, λ=1000,
+l_neu=20; assembles the zc-independent mpf S,H once per (R,α) and sweeps ζ_c cheaply).
+- **Wiring validated:** fixed-ζ_c reproduces the increment-6 baseline BIT-FOR-BIT
+  (E_tot=−8.04149 @ R=3.015; R_eq(frozen)=3.118=+3.42%, matches the +3.4% l=2 verdict
+  log). So the R_eq *shift* is the breathing effect, not a code artifact — the grid/
+  basis offset cancels in the fixed-vs-free comparison (identical assembly).
+- **VERDICT: NO-GO — breathing is INERT.** ζ_c*(R) is flat ≈2.70 across R∈[2.70,3.45]
+  (2.700→2.696, a whisker off the isolated 2.6875), worth 0.07–0.16 mHa; R_eq moves
+  3.1181→3.1163 bohr = **−0.06 pp** (+3.42%→+3.36%). ζ_c* trends the *right* way
+  (more contracted at small R) but the magnitude is ~2% of the drift. Radial core
+  SIZE is decoupled from the bond (tight, stiff core: E_core curvature 2; valence
+  lives far from it). Data: `debug/data/lih_breathing_l2.log`.
+- **Reading — confirms the v5.15.2 mechanism's own prediction:** the core must change
+  SHAPE (a bond-directed dipole = screening that FOLLOWS the bond), not SIZE.
+  → **Phase 1 = core POLARIZATION** (anisotropic dipole screening + harmonic core-
+  response cost, one dipole knob d, minimized at each R like ζ_c). New machinery:
+  the anisotropic V_H^{dip}(r_A)·cos θ_A term is a NEW integral class (cos θ_A =
+  z_A/r_A; z_A=(R/2)ξη, r_A=(R/2)(ξ+η)), NOT the existing (ξ+η) one-body class.
+
+## RELAXABLE-CORE ROUTE — Phase 1 (core POLARIZATION) = WEAK/NO, decisive (2026-09-21)
+Built the polarizable analytic core: φ_core = 1s(ζc) + λ·2p_z(ζc), the dipolar
+1s·2p_z cross density and its closed-form l=1 Hartree potential
+V_H^dip(r_A)=(4π/3)[r_A⁻²∫₀^{r_A}u r'³ + r_A∫_{r_A}^∞ u], u=4λ(ζc⁴/π)r e^{−2ζc r}.
+`debug/prolate_core_dipole.py` — VALIDATED (exact dipole tail d=4/ζc to 6 digits;
+large-r vs direct 1e-3; singular small-r reference CONVERGES to closed as n grows).
+Model polarizability α_c=9/ζc⁴=0.1725 (parameter-free; true Li⁺=0.1925). Driver
+`debug/lih_r12_polarization.py`: anisotropic screening built by REUSING the validated
+`vh_coupled` with its pointwise potential swapped monopole→V_H^dip(r_A)·cosθ_A,
+cosθ_A=(ξη+1)/(ξ+η); E_tot(R,d)=e_val[H+VH_mono+d·VHDIP+proj]+ZZ/R−V_H_mono(R)+E_core
++d²/(2α_c)−Z_H·d·V_H^dip(R); minimized over d at each R (d=0 ≡ frozen baseline, bit-
+for-bit −8.04149). l=2, λ=1000, l_neu=20. Data `debug/data/lih_polarization_l2.log`.
+- **VERDICT: WEAK/NO.** R_eq: frozen 3.1181(+3.42%) → pol@model-α 3.1162(+3.36%, −0.06pp)
+  → pol@true-α 3.1160(+3.35%, −0.07pp). d*(R) FLAT ≈−0.013 across R∈[2.70,3.45] (so no
+  PES tilt → no R_eq shift), gain ~0.5 mHa. **true-α ≈ model-α → NOT a model-fidelity
+  limit.** To close +3.4% by polarization alone would need ~50× the physical core α
+  (~9 a.u., a valence-scale value) — unphysical by a wide margin.
+- **Physical reason (clean, worth keeping):** LiH is IONIC (Li⁺H⁻). The valence sits
+  on H; its repulsion pushes the core *away* from H (∂e_val/∂d≈+0.18) *harder* than the
+  bare H nucleus pulls it toward H (drive≈0.11) → net d*<0 (core polarizes AWAY from H⁻)
+  and small. The ionicity that DEFINES LiH starves the core of a polarizing field, and
+  the Li⁺ core is intrinsically stiff (α=0.19). Core dipole polarization cannot be the
+  lever for ionic LiH.
+- **JOINT PHASE-0+1 CONCLUSION — the relaxable-analytic-core route is CLOSED.** Neither
+  natural analytic core-relaxation multipole (breathing −0.06pp; dipole polarization
+  −0.06/−0.07pp) closes the drift; both are ~R-independent (offset, not tilt). The
+  increment-6 "frozen core is the culprit" (by elimination) stands as an OBSERVATION,
+  but the *cure hypothesis* — "let the analytic core relax" — is REFUTED: the residual
+  is NOT core-multipole rigidity (off by ~50×). It lives in the frozen-core APPROXIMATION
+  STRUCTURE (Huzinaga projector hardness / fixed spherical screening shape / absent
+  core-valence correlation), which only a full all-electron treatment removes — = the
+  increment-7 route, blocked by the tight-core numerical/basis wall. **§3 dead-end
+  candidate; PI fork: bank the soft verdict (Paper 19 + this insight) vs. commit to the
+  all-electron + atom-centered-tight-core build.** Deliverables kept: `prolate_core_dipole.py`
+  (validated dipole-Hartree, reusable), `lih_r12_polarization.py`, `lih_r12_breathing.py`.
+
+## ROUTE C (all-electron, atom-centered ANALYTIC tight core) — PI-chosen 2026-09-21
+Goal: the clean all-electron LiH R_eq that increment 7 (all-electron on the grid)
+could not reach — its tight Li core swung 0.36 Ha across R (R-tied grid resolution,
+r_A=(R/2)(ξ+η)). Cure: compute every core-involving integral ANALYTICALLY (R-accurate
+by construction) with the tight core atom-centered, all 4 e⁻ active (no frozen core,
+no projector) so core-valence correlation + full core relaxation are IN. Stays in the
+prolate natural geometry (NOT LCAO — guardrailed). Reuses the analytic engine
+(`prolate_recondition.py` S/T/V_ne, `neumann_vee_general_m.py` general-m V_ee) and
+increment-7's integral-source-AGNOSTIC FCI solver `fci_energy(h1,eri,M,nelec)`
+(consumes spatial/orthonormal h1[M,M] + chemist eri[M,M,M,M]; add V_NN yourself).
+Machinery survey: subagent 2026-09-21 (reusability map + the η-exponential obstacle).
+
+**The obstacle (named by the survey): the η-EXPONENTIAL.** A Li-centered 1s STO
+e^{−ζr_A}=e^{−ζ(R/2)ξ}·e^{−ζ(R/2)η} carries an η-exponential the analytic engine's
+basis (ξ^j η^l e^{−αξ}, polynomial-η) lacks. Every core-involving integral reduces to
+ONE new primitive M_η(q,β)=∫_{−1}^1 η^q e^{−βη}dη (β→0 recovers the existing polynomial
+`_mom_eta`), because the tight-core Jacobian (ξ²−η²)/(ξ+η)=(ξ−η) removes the 1/r_A
+denominator — no new integral *machinery*, one elementary moment (a by-parts recurrence).
+
+### C1 (the GATE) — PASS, decisive (2026-09-21). `debug/prolate_atomcentered_core.py`.
+Primitives: M_xi(n,c)=c^{−(n+1)}Γ(n+1,c) (upper-incomplete-gamma, arbitrary c) +
+M_eta(q,β) (recurrence, self-checked vs quad to 6e-51). Isolated Li core (ζ=2.6875)
+through the prolate moments at c=β=ζR:
+- ⟨χ|χ⟩ = π/ζ³ = 0.1618469255 to **rel 1e-50**, R-SPREAD **2e-51** across R∈[2.70,3.45];
+- ⟨χ|1/r_A|χ⟩/N = ζ = 2.68750000 to 1e-50; E_1s = −ζ²/2 = −3.61133 exactly, R-flat.
+**The 0.36 Ha wall becomes ~1e-50 → the core-representation problem that sank increment
+7 is SOLVED. C1 = GO.** Next: C2 (mixed core-valence ERIs, analytic Neumann) — the
+harder piece: extend the V_ee η-side (Ytab) with M_η(q,β) AND the X-table to per-index
+radial exponents (survey's secondary obstacle; currently single-α / two-block stitch).
+
+### C2 diagnostic — grid ERIs are R-INACCURATE for the core; the analytic path IS required (2026-09-21). `debug/eri_core_grid_diagnostic.py`, data `debug/data/eri_core_grid_diagnostic.log`.
+Tested the easy-hybrid hope (reuse grid ERIs for core classes). It fails. At the FCI's own
+grid resolution (N_grid=44, ξ_max=15), with analytic-exact normalization (norm=1 to 1e-15,
+so NOT a density/norm issue — purely the 1/r₁₂ kernel on a sharp density; the elliptic-K
+singularity makes the sharp core HARDER to integrate than the one-body 1/r, whose focus
+singularity cancelled the Jacobian → C1's 1e-50):
+- (cc|cc): R-spread **26 mHa**, abs **+132 mHa** (exact 5ζc/8=1.6797) — ~30% of D_e, 16× chem-acc.
+- (cc|vv),(cv|cv): R-spread ~4.2 mHa each, abs +21.5 mHa (one core density).
+- (vv|vv) control: 2.86 mHa spread, +15 mHa (fastest-converging; may stay on grid).
+R-inaccuracy scales with tight-core density content. Grid refinement is a slow wall (cc|cc:
+26→21→5.3→1.8 mHa spread at N=44→48→96→160; 13× the FCI points still leaves 1.8/+9.3 mHa) —
+same signature as increment-7's one-body core. **VERDICT: C2 must build the analytic
+mixed core-involving ERIs. Lean: Legendre-η expansion of the core (e^{−αc η}=Σ(2l+1)(−1)^l
+i_l(αc)P_l(η)) turns cores into η-polynomial ProductFns at exponent αc → dissolves the
+η-exponential (reuses the validated V_ee η-side), leaving only the mixed-ξ-exponent extension
+(the two-block combined-rate stitch, generalized to the full (pq|rs) tensor). (cc|cc) special-
+cased to its closed form 5ζc/8. Deep Neumann-code map dispatched to a subagent.**
+
+### C2 build plan (from the Neumann-code map, 2026-09-21). Route A confirmed.
+The analytic V_ee (mpf ref `prolate_recondition.vee_mp`/`_build_Xtab_mp`; float
+`neumann_vee_general_m.build_Xtab`) = Neumann sum over l of a SEPARABLE
+X_l(ξ)·Y1(η)·Y2(η)·pref with the (ξ²−η²) Jacobian.
+- **η-side is already GENERAL** (`_mom_eta` takes any η-polynomial) → the Legendre-η
+  core (L≈24, de-risked to 1e-15) feeds it UNCHANGED. σ-only ⇒ pure Legendre moments
+  ∫η^Q P_l(η) = `_cl_m0` (`debug/prolate_r12_mpf.py:67`). NO η surgery.
+- **Single-exponent hard-wire is localized**: `_build_Xtab_mp:334` (c=2α, two_c=2c) +
+  the P1↔P2 symmetrization (build_Xtab:442). All blocks (`_mono_moments`,`_B_table`,
+  `_seed_B_closed`,`_L_moments`,`_corr`) already take arbitrary rate.
+- **The ONE new primitive: `build_Xtab_pair(...,α1,α2)`** — X_l with per-electron rates
+  c1=2α1, c2=2α2 (correction B-table at c1+c2, NO P1↔P2 symmetrization). Unavoidable
+  either route: (cc|vv) is c1=2αc≠c2=2αv, which the two-block stitch CANNOT synthesize
+  (it is single-c called at three values). Route B (η-exponential Y-table) would need
+  this SAME extension PLUS new η code → Route A strictly less.
+- Assembly (STEP 3): (pq|rs) drives build_Xtab_pair at α1=(αp+αq)/2, α2=(αr+αs)/2;
+  only 3 rate-pairs for a 2-exp set {2αc,αc+αv,2αv}². (cc|cc)→closed form 5ζc/8. h1 +
+  Löwdin reuse `assemble_hetero_2block` one-body; feed `fci_energy(h1,eri,M,4)`.
+- **Validation gates (airtight)**: G1 reduction falsifier α1=α2 → bit-for-bit vs
+  `_build_Xtab_mp` (<1e-25); G2 (cc|cc)=5ζc/8=1.67969; G3 (vv|vv)=5ζv/8; G4 (cc|vv)/
+  (cv|cv) vs the closed-form 1s Hartree-potential integral; G5 R-independence (grid
+  swung (cc|cc) 26 mHa → analytic target ~1e-30). build_Xtab_pair + σ-only assembler
+  dispatched to a subagent (`debug/prolate_mixed_eri.py`), gates as hard acceptance.
+
+### C2 CRUX DONE + PM-VERIFIED (2026-09-21). `debug/prolate_mixed_eri.py` (mp.dps=60, ~11s).
+`build_Xtab_pair(...,α1,α2)` (mixed-ξ X-table, c1≠c2, correction B-table at c1+c2, no
+P1↔P2 symmetry) + σ-only assembler `eri_sigma`. Route A (Legendre-η core, L=24). ALL 5
+gates PASS, re-run by the PM (not just the subagent's word):
+- G1 reduction falsifier: build_Xtab_pair|_{c1=c2} vs `_build_Xtab_mp` **0.00e+00** over
+  825 entries (incl. s>0,m>0) — bit-for-bit.
+- G2 (cc|cc)=5ζc/8=1.679687500 (Neumann path 8e-26); G3 (vv|vv)=5ζv/8 to 1e-46.
+- G4 (cc|vv),(cv|cv) vs an INDEPENDENT radial-quad reference (no shared code) to ~3e-30;
+  (cc|vv) genuinely exercises c1≠c2 (8.1 vs 2.4).
+- G5 R-independence: R-SPREAD **0.00e+00** (relerr 5e-32→6e-28 growing with R as the
+  forward Q_l recurrence sheds digits — fine at dps=60). **The 26 mHa (cc|cc) / ~4.2 mHa
+  cross grid wall is annihilated to ~1e-28 — the two-body analog of C1's 1e-50.**
+Convention: unit-normalized orbitals (correct for FCI; the (2/r) 2e-core sibling of
+(cc|vv) would be 2×, printed for visibility). **C2 = GO.** Remaining to the R_eq answer:
+C3 (wire C1 one-body + C2 σ ERIs → σ-only all-electron FCI = decisive intermediate vs
+increment-7's σ-only inward collapse, now with R-accurate integrals) and then the general-m
+π/δ core-valence ERIs (build_Xtab_pair's general path is G1-validated at c1=c2; needs the
+c1≠c2 exercise for π) + full FCI = C4. σ-only won't be the final geometry (π is the lever,
+per HeH⁺ −4.5%→−0.5% at l=2→3) but isolates "did beating the wall fix the collapse?".
+
+### C3 DONE — the σ-only all-electron LiH BINDS; the integral wall WAS increment-7's collapse (2026-09-21). `debug/prolate_allelectron_analytic_fci.py`, data `debug/data/lih_analytic_sigma_req.log`.
+Wired C1 one-body + C2 σ ERIs → increment-7's integral-agnostic `fci_energy(h1,eri,M,4)`.
+The ONE new piece = a UNIFIED analytic σ one-body engine `one_body_sigma` over the SAME
+Route-A `Orbital` objects the ERIs use (core = Legendre-η STO, valence = prolate ProductFn
+/ centre-B STO `sto_orbital_B`), so one-body + ERI + FCI share the identical basis. S, V_ne
+(heteronuclear −Z_A⟨1/r_A⟩−Z_B⟨1/r_B⟩), T all closed-form in the C1 ξ-moments A_k(c) + the
+elementary η-moments. V_NN=3/R, nelec=4, Löwdin S^{−1/2}.
+- **CONTROLS ALL PASS.** One-body vs `prolate_recondition` single-e `_ov/_kin/_vne`: S
+  bit-exact, H 1.9e-16 (C-A wiring foundation). C-B isolated core (Route-A): norm=1,
+  T=ζc²/2=3.6113, ⟨1/r_A⟩=ζc=2.6875, E(Z_A=ζc,0)=−3.6113, **R-spread 0.00e+00** — the
+  increment-7 0.36-Ha core wall is gone. C-A H2 (2 valence e, no core, Z=1,1, R=1.40):
+  variational, converges 64.9%→**91.9% D_e** (M=2→6), grid-FCI cross-check −1.067 (the
+  documented single-exp plateau). C-C variational (all E_tot>−8.070) TRUE. C-D dissociation
+  E(8.0)=−7.899 finite, above R_eq region.
+- **VERDICT: BINDS, and R_eq IMPROVES with basis** (log `lih_analytic_sigma_req.log`):
+
+  | basis | R_eq | drift vs 3.015 | E_min |
+  |---|---|---|---|
+  | minimal (M=5) | 3.141 | **+4.2%** | −7.9873 |
+  | extended (M=8) | 3.071 | **+1.9%** | −8.0044 (@R=3.015) |
+
+  A clear INTERIOR minimum (E decreases 2.40→~R_eq then rises to E(8.0)=−7.899, D_e(basis)
+  ≈88 mHa vs exp ~92 mHa); NOT increment-7's monotone inward collapse.
+- **THE KEY READOUT (plainly): beating the integral wall CHANGED the behaviour.** The
+  R-accurate analytic core (C1/C2) removes increment-7's grid core artifact (the 0.36-Ha
+  R-swing), and the σ-only all-electron LiH then BINDS instead of collapsing inward — so
+  increment-7's inward collapse was the GRID CORE ARTIFACT, not the σ-only truncation.
+  This is the clean confirmation of the increment-6/7 "variational core is the cure"
+  hypothesis that the grid engine could not demonstrate.
+- **Trend beats the frozen core AND composed.** R_eq +4.2%→+1.9% IMPROVES with basis — the
+  OPPOSITE of frozen-core (+5.5% and WORSENING with l) and composed's structural wall.
+  Extended σ-only (+1.9%) already beats composed l-dep-PK (5.3%, Paper 17) and balanced
+  (8.8%, Paper 19), and this is BEFORE the π angular lever (HeH⁺: −4.5%→−0.5% at l=2→3),
+  which should tighten it further. Energy also basis-converging (−7.987→−8.004 at R=3.015,
+  toward −8.070).
+- **Scope / honesty.** σ-only PoC (M≤8, single ProductFn/STO exponents; not spectroscopic —
+  ~66 mHa above exact at M=8). Cost ~50s/pt (M=5), ~320s/pt (M=8) at dps=60; the many
+  distinct orbital exponents make per-(c1,c2) X-table memoization ineffective here. Next =
+  C4 (general-m π/δ core-valence ERIs via `build_Xtab_pair`'s c1≠c2 general path + full FCI)
+  → the converged prolate all-electron LiH R_eq for a paper claim.
+- **PM-VERIFIED (2026-09-22):** re-ran `validate` + `h2` + `lih` independently; every number
+  above reproduced bit-for-bit (deterministic mpf). Controls: one-body S=0/H=1.9e-16, core
+  R-spread 0.00e+00, H2 wiring 91.9% D_e variational. LiH raw minima: minimal at R=3.20
+  (−7.98733), extended at R=3.015 (−8.00435) → fits +4.2%/+1.9% confirmed; BINDS, variational,
+  dissociates (E(8.0)=−7.899). Result accepted as established.
+
+### C4 DONE — general-m (π) ERIs built + validated; the CONVERGED prolate LiH R_eq = 3.02 bohr (+0.2%), π-converged (2026-09-22). `debug/prolate_allelectron_c4.py`, data `debug/data/lih_analytic_c4.log`.
+The σ-only C2 assembler is generalized to μ≠0. **THE ONE NEW ANALYTIC PRIMITIVE:
+`build_Xtab_s(m, s1, s2, ...)`** — generalizes C2's `build_Xtab_pair` from a single
+(m,s) shared by both electrons to INDEPENDENT weights s1 (electron 1) / s2 (electron 2),
+which is unavoidable for ERIs (e.g. the Coulomb (σσ|ππ) has s1=0, s2=1). At s1=s2 it
+reduces to `build_Xtab_pair`→`_build_Xtab_mp` (hence G-REDUCE is bit-for-bit).
+`eri_general` uses definite signed-m orbitals (like the grid `vee_m`): selection
+m_p−m_q=m_s−m_r, Neumann order m=m_p−m_q, d^|m|P_l on both η-sides (weights s1,s2),
+ξ-side from `build_Xtab_s` at the pair rates. NO cos-basis mult=2 (a definite-m orbital
+gives a single Neumann term with the (2π)² φ factor = `eri_sigma`'s prefactor).
+`one_body_general` adds the μ>0 gradient + μ² azimuthal kinetic (block-diagonal in
+(μ, signed m)). Cores stay μ=0 Route-A Legendre STOs; π valence = bond-centred μ=1
+ProductFns at m=±1. FCI reuses increment-7's `fci_energy(h1,eri,M,4)` unchanged.
+- **ALL GATES PASS (`debug/data/lih_analytic_c4.log`).**
+  - **one-body**: μ=1 monomial vs `pr._ov/_vne/_kin` max rel S=0/H=1.1e-15; μ=0 reduces
+    to `one_body_sigma` bit-for-bit (0.0e+00).
+  - **G-REDUCE**: `eri_general|_{μ=0}` == `eri_sigma` **0.0e+00** over 7 integral types
+    incl. the s1≠s2 (cc|vv) and mixed bond/core/valence.
+  - **G-PI-REF (independent)**: the grid Cohl–Tohline toroidal kernel
+    (`prolate_allelectron_fci._azimuthal_kernels`/`vee_m`) CONVERGES to the analytic
+    values as N_grid→∞ for μ=0,1,2 (μ=0 8.300→8.232→8.206→[Rich 8.190] vs analytic
+    8.179; μ=1 3.820→3.676→3.622→[3.589] vs 3.566; μ=2 8.44→7.79→7.55→[7.40] vs 7.295,
+    grid-limited δ). Same convergence rate across μ ⇒ the analytic values are correct
+    and the gap is pure grid discretization.
+  - **G-RIND**: atom-centred core–π ERIs (cc|π_A π_A), (π_A c|c π_A) R-spread **0.00e+00**
+    (analytic core R-exact even through the μ=1 machinery). NB the FCI's own π are
+    BOND-centred and correctly R-dependent, like the σ bond functions.
+  - **G-H2PI (make-or-break)**: H2 σ-only 91.91% → σ+1π 97.10% → σ+2π 97.95% D_e (→98.5%
+    at 3–4 π shells). π climbs decisively past the σ-only wall toward the known ~99% —
+    the π assembly is validated end-to-end through the full FCI.
+  - **G-VAR**: all LiH E_tot > −8.070 (variational throughout).
+- **VERDICT — π (the angular lever) TIGHTENS LiH R_eq to experiment, and it CONVERGES:**
+
+  | basis (extended σ + π) | R_eq | drift vs 3.015 | E_min |
+  |---|---|---|---|
+  | C3 σ-only | 3.071 | **+1.9%** | −8.0044 |
+  | +1 π shell (m=±1) | 3.020 | **+0.2%** | −8.00794 |
+  | +2 π shells | 3.021 | **+0.2%** | −8.01071 |
+
+  Clean interior minimum at R≈3.015 (E rises both sides, dissociates: E(4.0)=−7.990,
+  E(6.0)=−7.946). **R_eq is CONVERGED w.r.t. the π basis (1π=2π=+0.2%)** — the +1.9%→+0.2%
+  jump is the π polarization, exactly the HeH⁺ precedent (−4.5%→−0.5% at l=2→3). This is
+  the increment-6/7 "variational core is the cure" hypothesis DEMONSTRATED CLEANLY: the
+  R-accurate analytic core (C1/C2) removes the grid artifact, and the angular (π) lever
+  then converges the geometry to experiment.
+- **Beats every prior LiH R_eq DECISIVELY:** composed l-dep-PK 5.3% (Paper 17), balanced
+  8.8% (Paper 19), frozen-core prolate +5.5% (incr 6), C3 σ-only +1.9% — and even HeH⁺'s
+  own −0.5%. The +5.5%-OUTWARD-and-worsening frozen-core wall is gone.
+- **HONEST SCOPE — the GEOMETRY is paper-grade; the ENERGY is not (yet).** R_eq=+0.2%
+  (π-converged) is a genuine near-spectroscopic geometry and is the deliverable Route C set
+  out to get. But E_min is still ~60 mHa above exact (−8.011 vs −8.070) because each orbital
+  carries a SINGLE exponent (no multi-exponent radial ladder / completeness) — so the energy
+  and D_e remain basis-limited (D_e unreliable at large R; the separated-atom limit is poorly
+  spanned by bond-centred functions). Geometry is the meaningful readout (as throughout this
+  track); the energy needs a multi-exponent radial ladder (the prolate_recondition route) to
+  reach chemical accuracy — a scoped future build, orthogonal to the now-solved angular lever.
+- Cost ~340s/pt (M=10, dps=60) / ~375s/pt (M=12); X-tables memoized by (m,s1,s2,c1,c2).
+  Deliverables: `debug/prolate_allelectron_c4.py` (validated, reusable), the log, this note.
+- **PM-VERIFIED (2026-09-22):** ran the make-or-break **G-H2PI** myself (σ 91.91% → σ+1π
+  97.10% → σ+2π 97.95% — bit-for-bit) AND independently re-ran the LiH σ+1π bond-range
+  points (`debug/data/c4_pm_verify.log`): R=2.850 −8.00695, 3.015 **−8.00794**, 3.200
+  −8.00683 → interior minimum at 3.015 confirmed (matches the agent log exactly,
+  deterministic). **C4 result accepted as established: LiH R_eq = +0.2% (π-converged),
+  geometry paper-grade; energy ~60 mHa above exact (single-exponent radial PoC).**
+
+## ROUTE C — COMPLETE (2026-09-22). The from-scratch prolate all-electron LiH GEOMETRY is at experiment (+0.2%, π-converged); best in the corpus. Chain closed: breathing NO → polarization NO → the frozen-core APPROXIMATION is the culprit → R-accurate analytic core (C1 1e-50 / C2 1e-28) → binds (C3, +1.9%) → π converges to experiment (C4, +0.2%). Energy-to-chemical-accuracy (multi-exponent radial ladder) is the scoped orthogonal follow-on. Owed at sprint-close: CHANGELOG entry; Paper 19 sharpen (with tests/ backing, cite permanent record not debug/); MEMORY index.

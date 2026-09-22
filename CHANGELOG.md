@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.16] - 2026-09-22
+
+**Prolate all-electron LiH — the from-scratch bond length reaches experiment: R_eq = +0.2% (angular-converged), the best LiH geometry in the corpus.** PI-directed accuracy arc off the v5.15.2 LiH R_eq-drift wall. The frozen-core prolate LiH drifted +5.5% and worsened with basis; this arc pins *why* and cures it. The whole chain: **breathing NO → polarization NO → the frozen-core APPROXIMATION itself is the culprit → all-electron with an R-accurate analytic core → binds → π converges to experiment.** All-debug PoC; geometry paper-grade, energy not yet spectroscopic. Track log: `debug/track_logs/prolate_native_lih.md`.
+
+### The two negatives — the relaxable-analytic-core route is CLOSED
+- **Phase 0 (core breathing, `debug/lih_r12_breathing.py`):** letting the 1s² core relax its radial exponent ζ_c moves R_eq by **−0.06 pp** (3.118→3.116); ζ_c*(R) flat ≈2.70. Inert — the tight core is radially stiff and decoupled from the bond.
+- **Phase 1 (core dipole polarization, `debug/lih_r12_polarization.py` + `prolate_core_dipole.py`):** a variational bond-directed core dipole moves R_eq by **−0.07 pp**; true-α ≈ model-α (NOT a model-fidelity limit); would need ~50× the physical core polarizability to close +3.4%. Clean reason: ionic LiH (Li⁺H⁻) starves the core of a net polarizing field (valence repulsion ≈ H-nucleus drive). So the drift is **not** core-multipole rigidity — it lives in the frozen-core *approximation* (projector/screening standing in for a correlated core).
+
+### The build — Route C (all-electron, atom-centered ANALYTIC tight core)
+The increment-7 all-electron grid engine collapsed inward: its tight core swung 0.36 Ha across R (r_A=(R/2)(ξ+η) → R-dependent grid resolution). Cure: every core-involving integral analytic (R-accurate by construction), all 4 e⁻ active, prolate natural geometry (not LCAO). Reuses the analytic V_ee (`neumann_vee_general_m`) + increment-7's integral-agnostic `fci_energy`.
+- **C1 (`debug/prolate_atomcentered_core.py`):** tight-core one-body integrals analytic via one new elementary η-exponential moment M_η(q,β) (the tight-core Jacobian (ξ²−η²)/(ξ+η)=(ξ−η) removes the 1/r_A denominator). Isolated core R-accurate to **~1e-50** (0.36 Ha grid wall → gone).
+- **C2 (`debug/prolate_mixed_eri.py`):** mixed-exponent core-valence ERIs — the one hard primitive `build_Xtab_pair(...,α1,α2)` (Neumann X-table at c1≠c2; Route-A Legendre-η core, L=24). Core self-repulsion and cross ERIs R-accurate to **~1e-28** (grid swung (cc|cc) 26 mHa). 5 gates, PM-re-run: G-REDUCE bit-for-bit vs the single-α table over 825 entries; (cc|cc)=⅝ζ, (cc|vv) vs independent radial-quad to 3e-30; R-spread 0.
+- **C3 (`debug/prolate_allelectron_analytic_fci.py`):** σ-only all-electron FCI **BINDS** — clean interior minimum, R_eq +1.9% (M=8), *improving* with basis (+4.2%→+1.9%). Increment-7's inward collapse was the **grid artifact, not the σ-only truncation** — the clean confirmation of the increment-6/7 "variational core is the cure" hypothesis.
+- **C4 (`debug/prolate_allelectron_c4.py`):** general-m (π) ERIs — second new primitive `build_Xtab_s(m,s1,s2,...)` (independent per-electron weights, unavoidable for e.g. (σσ|ππ)). Adding π valence: **R_eq +1.9% → +0.2%, converged (1π = 2π = +0.2%)**, clean interior minimum at 3.015. The π polarization lever, exactly the HeH⁺ precedent (−4.5%→−0.5%). Make-or-break gate G-H2PI: H2 σ-only 91.9% → σ+π **98%** D_e (validates the angular pipeline end-to-end). Beats composed l-dep-PK 5.3% (Paper 17), balanced 8.8% (Paper 19), frozen-core +5.5%.
+
+### Scope (honest)
+- **Geometry is paper-grade**: R_eq +0.2%, converged in the angular lever — the deliverable Route C set out to get, and it *converges* (unlike composed/balanced/frozen-core, which drift and worsen).
+- **Energy is not spectroscopic**: E_min ~60 mHa above exact (−8.011 vs −8.070), because each orbital is single-exponent (no multi-exponent radial completeness). Reaching chemical-accuracy energy = a multi-exponent radial ladder — the scoped, orthogonal follow-on (started next).
+
+### Added (all `debug/`, PoC)
+- `prolate_core_dipole.py`, `prolate_atomcentered_core.py` (C1), `prolate_mixed_eri.py` (C2), `prolate_allelectron_analytic_fci.py` (C3), `prolate_allelectron_c4.py` (C4), `lih_r12_breathing.py` (Phase 0), `lih_r12_polarization.py` (Phase 1), `eri_core_grid_diagnostic.py` (C2 sizing diagnostic).
+
+### Verified (PM, not sub-agent word)
+- Re-ran C2's 5 gates, C3's controls + LiH scan, C4's H2+π gate + LiH bond-range minimum — all reproduce bit-for-bit (deterministic mpf). Data: `debug/data/{lih_breathing_l2,lih_polarization_l2,eri_core_grid_diagnostic,c3_*,lih_analytic_c4,c4_pm_verify}.log`.
+
+### Owed (post-follow-on consolidation)
+- `tests/` regression backing the LiH +0.2% / H2+π gate (a fast reduced-basis proxy; the full run is ~340 s/pt at dps=60).
+- Paper 19 sharpen: the mechanism (frozen-core *approximation*, not core rigidity) + this first converged all-electron prolate LiH geometry, with the tests/ backing and citing the permanent record (not `debug/`). Deferred until the energy follow-on lands so one edit covers the complete geometry+energy picture.
+
+### Note
+Patch bump (a new result; not a retraction/architecture/gate change). All work is `debug/` PoC — nothing in `geovac/` or papers yet, so existing modules + the topological-integrity baseline are unaffected. Repo-health WARN (pre-existing, surfaced not blocking): CLAUDE.md 156 KB (>150), debug/ 1807 top-level files (>600 — archive sweep owed). PI may deem Route C corpus-significant → minor.
+
 ## [v5.15.15] - 2026-09-21
 
 **LiH R12-CI — engine migrated from the sprint tree into `geovac/lih_r12ci/` (production package + regression tests).** Item (2) of the r12 handoff. The `debug/lih_r12ci_*` proof-of-concept engine (a clean 10-module acyclic deterministic-energy closure) is now a self-contained `geovac` subpackage with a deterministic `energy(geminal)` API reproducing both validated energies, backed by `tests/test_lih_r12ci.py` (6 tests, all passing, --slow).
