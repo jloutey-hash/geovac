@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.17] - 2026-09-22
+
+**Route C energy follow-on — the radial ladder reaches chemical accuracy on H2; the LiH energy is capped by the 4e determinant wall + core-core correlation (not radial incompleteness, as previously framed).** Follow-on to v5.15.16 (geometry solved, R_eq +0.2%): the energy was ~60 mHa above exact. Goal — close it with a radial ladder on the C4 engine. Outcome: the ladder is the right tool and hits chemical accuracy on H2, but LiH is structurally determinant-walled; the cure is correlation-frugal (explicit r₁₂), not more radial functions. All `debug/` PoC. File: `debug/prolate_energy_ladder.py`; data: `debug/data/prolate_energy_ladder.log`.
+
+### Added
+- `debug/prolate_energy_ladder.py` — radial-ladder builders on the C4 engine + the conditioning fix + gates (`reduce`/`h2`/`lih`/`all` CLI).
+
+### The conditioning fix (the load-bearing new piece)
+- A monomial ξ^j radial ladder at fixed α is ill-conditioned (Hankel) — C4's plain float64 solve drops functions and REGRESSES once a channel's ladder is long (δ-radial J=4 → 98.93%, 66/75 kept, cond 6.9e9). **Fix: a float64 Laguerre(ξ)×Legendre(η) re-basing** (per-channel, same span): reproduces the monomial energy bit-for-bit while collapsing cond(S) 2.9e9→1.4e5, turning the regression into a monotone 99.611% (75/75). This is float64 + cheap — a concrete step toward the eventual float64 productionization (the mpf runtime cost).
+
+### Results (PM-verified: G-REDUCE re-run, |dE|=2.2e-15)
+- **H2 (make-or-break control): 99.664% D_e (0.59 mHa) — CHEMICAL ACCURACY.** Monotone climb σ 92.4 → +π 99.22 → +δ 99.60 → +φ 99.63 → deep 99.664%; every function kept. The azimuthal (μ) ladder is the lever; radial and η-angular saturate fast. The last ~0.13 pp to prolate_recondition's 99.8% is the slow partial-wave cusp (compact 2e product-CI / explicit r₁₂ territory), not a ladder failure.
+- **LiH at R=3.015: energy plateaus ~58 mHa above exact** (−8.01193 best, M=16), capped by the **4-electron determinant wall** (ndet=C(M,2)² → ~14400 at M≈16), NOT conditioning (cond ≤ 3.6e6, all kept).
+- **Diagnosis corrected:** the LiH energy gap is dominated by **core-core correlation** (the analytic Li 1s core is a single orbital → dense FCI captures ~zero core correlation, ≈40 mHa) + valence completeness — both needing more orbitals than dense 4e FCI ndet permits. The earlier "single-exponent radial incompleteness" framing (v5.15.16) is superseded: radial functions help but structurally cannot close the LiH gap in dense FCI.
+
+### Verdict / path
+- The GEOMETRY (R_eq +0.2%, v5.15.16) stands untouched. The ENERGY needs a **correlation-frugal** route — explicit r₁₂ core-valence correlation (the R12-CI arc, `geovac/lih_r12ci`) or a determinant-frugal solver (CASCI/selected-CI/DMRG) — NOT more radial functions in dense FCI. PI direction (2026-09-22): lean on the r₁₂ arc; handoff written to the track log for a fresh context.
+
+### Note
+Patch bump. All `debug/` PoC — nothing in `geovac/` or papers. G-REDUCE PM-verified. Repo-health WARN (pre-existing): CLAUDE.md 157 KB (>150), debug/ 1808 files (>600).
+
 ## [v5.15.16] - 2026-09-22
 
 **Prolate all-electron LiH — the from-scratch bond length reaches experiment: R_eq = +0.2% (angular-converged), the best LiH geometry in the corpus.** PI-directed accuracy arc off the v5.15.2 LiH R_eq-drift wall. The frozen-core prolate LiH drifted +5.5% and worsened with basis; this arc pins *why* and cures it. The whole chain: **breathing NO → polarization NO → the frozen-core APPROXIMATION itself is the culprit → all-electron with an R-accurate analytic core → binds → π converges to experiment.** All-debug PoC; geometry paper-grade, energy not yet spectroscopic. Track log: `debug/track_logs/prolate_native_lih.md`.

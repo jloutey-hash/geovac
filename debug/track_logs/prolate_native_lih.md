@@ -2,6 +2,59 @@
 
 **Opened:** 2026-09-20 (PI-directed). **PM holds this thread.**
 
+## ===== RESUME HERE — HANDOFF for a fresh context (2026-09-22, v5.15.17) =====
+
+**WHERE WE ARE.** Route C is COMPLETE on geometry. The from-scratch prolate all-electron
+LiH **bond length is at experiment: R_eq = +0.2%, π-converged** (v5.15.16, tagged; best in
+the corpus — beats composed 5.3%, balanced 8.8%, frozen-core +5.5%). The **energy** is
+characterized but NOT closed: the radial-ladder follow-on (v5.15.17) reaches **chemical
+accuracy on H2 (99.66%)** but LiH plateaus **~58 mHa above exact** (−8.012 vs −8.070),
+capped by the **4-electron determinant wall + core-core correlation** (the single-orbital
+analytic core → dense FCI captures ~zero core correlation). NOT radial incompleteness.
+
+**THE NEXT TASK (PI-directed 2026-09-22): lean on the r₁₂ arc for the LiH ENERGY.**
+Current-state probe (this session): `geovac/lih_r12ci.energy()` is a **2×2 PoC** —
+reference Φ0 = |1s_A²1s_B²| (ionic single-ζ, **E0 = −7.888**, 182 mHa above exact) + ONE
+James-Coolidge geminal, → E_R12 = −7.917 (linexp) / −7.942 (exp). **The ceiling is the
+REFERENCE, not the geminal** — the geminal pulls a healthy −29 to −53 mHa of short-range
+correlation RI-free (incl. the core pair), but sits on a terrible base, so its energy is
+actually WORSE than Route C's −8.012. **The path:** F12 synthesis — the r₁₂ geminal
+correction on a GOOD base (Route C's −8.012 reference, `debug/prolate_allelectron_c4.py`).
+
+**HONEST SCOPING (so the fresh context doesn't underestimate it).**
+- Substantial rebuild: the r₁₂ integrals (Fbar, h_*, g_* in `geovac/lih_r12ci/`) are hard-
+  wired to the ionic 2×2 reference; applying the geminal on Route C's multi-orbital reference
+  means re-deriving them there + handling F12 double-counting (the geminal must add only the
+  correlation the orbital basis MISSES). Slow-mpf (dps=60; minutes–hours/point).
+- Realistic ceiling: the geminal adds ~30–50 mHa of the missing (short-range/core-core)
+  correlation → LiH plausibly ~−8.04/−8.06 (near-chemical); full <2 mHa on 4e is uncertain.
+- **DIAGNOSTIC-BEFORE-ENGINEERING first** (§ memory rule): a design pass to pin the achievable
+  ceiling before the full build. Do NOT launch the big mpf build blind.
+
+**DO NOT RE-DERIVE (closed this session):** the geometry (Route C solved it, +0.2%);
+core BREATHING (Phase 0, inert −0.06pp) and core dipole POLARIZATION (Phase 1, −0.07pp,
+off by ~50×) — the drift is the frozen-core *approximation*, not core multipole rigidity;
+the r₁₂ N=4 wall (already solved — the full 2-center 4e RI-free integrals are assembled;
+the limit is the base, not a wall).
+
+**KEY FILES.** Route C engines: `debug/prolate_atomcentered_core.py` (C1), `prolate_mixed_eri.py`
+(C2, `build_Xtab_pair`), `prolate_allelectron_c4.py` (C4, `build_Xtab_s`, the −8.012 base +
+the +0.2% geometry), `prolate_energy_ladder.py` (v5.15.17, the ladder + the float64
+Laguerre×Legendre conditioning fix). r₁₂ arc: `geovac/lih_r12ci/` (the 2×2 PoC). This track
+log = the full chronicle; CHANGELOG v5.15.9–17.
+
+**STILL OWED (do at the r₁₂-synthesis close):** (1) `tests/` regression backing the +0.2%
+geometry / H2+π gate (a fast reduced-basis proxy — the full runs are ~340 s/pt at dps=60);
+(2) Paper 19 sharpen — geometry paper-grade + the mechanism (frozen-core *approximation*, not
+rigidity) + energy determinant-walled with the r₁₂-frugal path named; cite the permanent record
+(CHANGELOG/tests), NOT `debug/`.
+
+**SPEED.** Everything is dps=60 mpf → slow. The float64 productionization (the re-basing in
+`prolate_energy_ladder.py` is a start) turns minutes→seconds and is the enabler for any real
+sweeping; scope it if the r₁₂-synthesis needs many points.
+
+## ===== END HANDOFF =====
+
 ## Goal
 Build LiH the way H2 is built — in the prolate-spheroidal natural geometry with a
 **variational, contraction-capable basis** — so the bond orbital can tighten and
@@ -634,3 +687,11 @@ ProductFns at m=±1. FCI reuses increment-7's `fci_energy(h1,eri,M,4)` unchanged
   geometry paper-grade; energy ~60 mHa above exact (single-exponent radial PoC).**
 
 ## ROUTE C — COMPLETE (2026-09-22). The from-scratch prolate all-electron LiH GEOMETRY is at experiment (+0.2%, π-converged); best in the corpus. Chain closed: breathing NO → polarization NO → the frozen-core APPROXIMATION is the culprit → R-accurate analytic core (C1 1e-50 / C2 1e-28) → binds (C3, +1.9%) → π converges to experiment (C4, +0.2%). Energy-to-chemical-accuracy (multi-exponent radial ladder) is the scoped orthogonal follow-on. Owed at sprint-close: CHANGELOG entry; Paper 19 sharpen (with tests/ backing, cite permanent record not debug/); MEMORY index.
+
+## ROUTE C — ENERGY follow-on (RADIAL LADDER) — done, det-wall-bounded (2026-09-22). `debug/prolate_energy_ladder.py`, data `debug/data/prolate_energy_ladder.log`.
+The C4 geometry is solved but E was ~60 mHa high (single-exponent radial incompleteness). Added a radial+azimuthal ladder ON TOP of the C4 engine (no new integral code — C4's `build_Xtab_s` already takes mixed exponents/weights; a ladder is just more OrbitalM's). **The one new enabling piece: a float64 Laguerre(ξ)×Legendre(η) RE-BASING** (block-diagonal per channel, from `prolate_recondition.laguerre_coeffs/legendre_coeffs`) — the same conditioning fix Paper 12/prolate_recondition use. Validated: reproduces the monomial energy bit-for-bit while cutting cond(S) 2.9e9→1.4e5.
+- **G-REDUCE PASS** (size-1 ladder == C4 assemble_energy_m, 2.2e-15).
+- **The conditioning wall is REAL and the re-basing BREAKS it (measured):** monomial float64 δ-radial J=4 REGRESSES to 98.93% (66/75 kept); re-based → 99.611% (75/75, monotone).
+- **H2 (make-or-break control):** ladder climbs σ 92.41 → +π 99.22 → +δ 99.60 → +φ 99.63 → deep 99.664% (M=93, 0.59 mHa, all kept, monotone, variational, α≈1.2 optimal). **Reaches CHEMICAL ACCURACY**, ~3× better than C4's σ+π (97.1%). Saturation map: radial saturates fast, σ-only caps ~92.5%, η-angular (l) saturates ~L=2, the **azimuthal μ ladder is the lever** (diminishing returns). Did NOT hit the literal 99.8% gate: the last ~0.13pp is the partial-wave e-e cusp — prolate_recondition reaches 99.77–99.81% only via the far-more-compact **2-electron product CI** at (5,5,2) (identical span, but orbital-FCI's ndet=M² blows up if l→5 on all channels), and the cusp is fully closed only by explicit r₁₂ (the R12-CI arc, H2 99.97%). So the radial-ladder APPROACH/WIRING is confirmed sound; 99.8% is a representation-compactness/cusp limit, not a ladder failure.
+- **LiH energy @ R=3.015 (the actual target):** radial ladder + π lowers E MONOTONICALLY & variationally −7.995 → −8.003 → −8.009 → **−8.012** (M=6→16), then **PLATEAUS ~58 mHa above exact (−8.070) at the 4-electron FCI determinant wall** (ndet=C(M,2)², caps M~16). Conditioning is NOT the LiH limit (cond ≤3.6e6, all kept) — the determinant count is. Residual is dominated by core-core correlation (the analytic Li 1s core is a SINGLE orbital → FCI captures zero core correlation, ~40 mHa) + valence completeness, both needing more orbitals than dense FCI ndet allows.
+- **VERDICT:** the radial ladder is the right cure for the ENERGY and is validated to chemical accuracy on H2; for LiH the binding constraint is the 4e **determinant wall**, not the ladder or conditioning. Closing the full LiH gap needs a determinant-frugal solver (CASCI/DMRG/selected-CI over the ladder) OR explicit r₁₂ core-valence correlation (the R12-CI arc) — NOT more radial functions in dense FCI. C4 geometry (+0.2%) stands; G-GEOM re-fit is gated on first reaching the converged energy, which the det wall prevents here. Deliverables: `debug/prolate_energy_ladder.py` (reusable: builders + the re-basing solve + gates), the log.
