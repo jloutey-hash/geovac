@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.19] - 2026-09-22
+
+**Route C engine productionization (step 2 of the 3→2→1 plan): a sparse FCI (~14×, bit-exact) that UNBLOCKS M>16, plus a float64 ERI assembly (~2×) — combined ~3× at M=16, energy preserved to 5 µHa.** PI-directed (after v5.15.18 banked the core-enriched −8.029). Goal: turn the minutes/point mpf engine into a sweep so core enrichment can push past the dense M=16 wall toward ~−8.04. All `debug/` PoC (validated tooling, not yet promoted to `geovac/`). Memo: `debug/sprint_float64_productionization_memo.md`.
+
+### dps-lowering is a DEAD END (measured, ruled out first)
+- `debug/data/dps_timing.log`: the LiH energy is **bit-identical from dps=60 down to dps=20** (dE=0.00 µHa) while the time barely moves (234→221s). The engine downcasts mpf→float64 at the end (dps never load-bearing for accuracy), and the cost is the COUNT of mpf ops (Python/mpmath overhead, flat in dps), not the precision. So the speedup must be the float64 ASSEMBLY, not lower dps.
+
+### float64 ERI assembly (`debug/prolate_float_eri.py`) — energy-exact, ~2×
+- `build_Xtab_s_f` + `eri_general_f` + `build_eri_tensor_m_f`: the mixed-exponent Neumann X-tables and the ERI assembly ported to the `neumann_vee_general_m` design — mpf seed tables at a small guarded dps → downcast → **float64 assembly** (reusing `ngm._corr` for the two-rate IBP tail, which works unchanged with the inner rate + the c1+c2 B-table).
+- Validated to the banked mpf energies to **dE +0.004…+0.005 mHa (~5 µHa)** at M=6/10/16 — the documented high-l float64 X-table degradation IS prefactor-suppressed at the energy level. Only ~2× because the mpf SEED tables (intrinsically mpf — guard digits tame the Q_l recurrence) dominate, not the assembly.
+
+### sparse FCI (`debug/fci_fast.py`) — the load-bearing win
+- The dense `fci_energy` builds all nd² determinant pairs (measured 3.3/72/280s at M=10/14/16); the CI Hamiltonian is SPARSE (dets connect only if they differ by ≤2 spin-orbitals). `fci_energy_fast`: bitmask each det → vectorized SWAR popcount of the XOR to find connected pairs → Slater-Condon (reused `_matel`) only for those → ground state via `eigsh` (Lanczos), no dense nd×nd.
+- **Bit-exact vs dense (dE 1e-13)**; speedup grows with size (2×→3×→4×→7× at M=14; ~14× at M=16, 280s→~10s). **Strategically:** the FCI scaling goes dense nd² → sparse (nd × connections), so **M>16 is now reachable** — the regime holding the last radial/valence mHa toward ~−8.04 that the dense wall blocked.
+
+### Combined (float64 ERI + sparse FCI), `debug/data/float_fci_validate.log`
+- M=6 −7.99468 (61 vs 147s); M=10 −8.00329 (99 vs 237s); **M=16 −8.02905 (366 vs 1079s = 3×)** — all preserving the banked mpf energy to ~5 µHa. FCI 280s→~10s; the remaining 366s is now almost entirely the ERI.
+
+### Remaining walls (scoped)
+- The ERI (~350s at M=16) is now the sole bottleneck: (1) mpf SEED tables (intrinsically mpf); (2) mpf ETA moments in the per-integral loop (`_sum_Y_m`) — these are polynomial integrals with no bad cancellation, SAFE to float64, the next tractable lever (~1.5–2×). Literal minutes→seconds needs a float64-stable seed recurrence (research).
+
+### Note
+Patch bump. All `debug/` PoC — nothing in `geovac/` or papers; the banked −8.029 (v5.15.18) is unchanged. Next (PI-directed): use the now-unblocked M>16 to push the core-enriched LiH energy toward −8.04. Repo-health WARN (pre-existing): CLAUDE.md >150 KB, debug/ >600 files.
+
 ## [v5.15.18] - 2026-09-22
 
 **Diagnostic-before-engineering: the LiH energy gap is two halves, and core-orbital enrichment banks the cheaper one — pure-orbital LiH −8.012 → −8.029 within the SAME determinant budget.** PI-directed design pass before the r₁₂ geminal build (v5.15.17's flagged path). A ceiling diagnostic + a Step-1 experiment reframe the F12 synthesis and demonstrate the cheap half. All `debug/` PoC. Memo: `debug/sprint_lih_r12_ceiling_diagnostic_memo.md`; track log `debug/track_logs/prolate_native_lih.md` updated.
