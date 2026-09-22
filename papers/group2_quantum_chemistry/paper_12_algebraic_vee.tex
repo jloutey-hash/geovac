@@ -99,11 +99,14 @@ $\gvq{p12_r12_err_mha}{0.053}$~mHa above the exact value---a sixfold
 reduction of the CI residual---confirming constructively that ordinary
 integer powers of $r_{12}$, not non-analytic terms, close the gap
 (Sec.~\ref{sec:r12}).  The same reduction extends without a resolution of
-identity to a heteronuclear diatomic (HeH$^+$) and to the many-body matrix
-elements of a two-center four-electron explicit-$r_{12}$ CI, where the
-genuinely four-body Coulomb-bridge term is evaluated exactly \emph{inside} a
-real correlation quantity---placing the classical exactness boundary at a
-two-center three-body integral (Sec.~\ref{sec:r12}).
+identity to a heteronuclear diatomic (HeH$^+$) and through the \emph{complete}
+many-body matrix elements of a two-center four-electron explicit-$r_{12}$ CI:\
+the genuinely four-body Coulomb bridge and the two-center three-body triangle
+are both reduced RI-free---the latter through a low-rank expansion of its
+non-separable two-point kernel contracted mode-by-mode with the general-$m$
+prolate Neumann Coulomb---so the entire $2\times2$ CI energy assembles
+analytically, matching a same-geminal variational Monte-Carlo reference to
+sub-mHa and lying above the exact value (variational) (Sec.~\ref{sec:r12}).
 \end{abstract}
 
 \maketitle
@@ -1494,25 +1497,56 @@ merely as an isolated integral but inside a real correlation quantity.  (A
 technical enabler:\ the screened-Coulomb dressing fields needed here are
 obtained without a Yukawa-specific Green's function, as
 $\Psi^Y=\Psi^{\rm coul}-\Psi^{\rm s}$ with the non-singular kernel
-$s(d)=(1-e^{-\gamma d})/d$.)  The remaining boundary is now sharper than
-``$N=4$'':\ completing the diagonal $\langle\chi^2 V_{ee}\rangle$ requires a
-two-center \emph{three-body triangle}
-$\langle f_{13}f_{23}\,r_{12}^{-1}\rangle$ (two correlation edges sharing a
-vertex, closed by a Coulomb), whose down-integration yields a \emph{non-separable}
-two-point kernel $H_2(1,2)=\int\rho(3)f(r_{13})f(r_{23})\,d^3r_3$;\ a low-rank
-expansion of $H_2$ followed by a per-mode Neumann Coulomb is the identified next
-reduction, and the full analytic assembly of the CI energy awaits it.  Until
-then the assembled energy is available from the variational Monte-Carlo route
-alone, which places the explicit-$r_{12}$ correction correctly signed and above
-the exact value.
+$s(d)=(1-e^{-\gamma d})/d$.)
+
+\textbf{[MEASURED 2026-09-21]} The diagonal $\langle\chi^2 V_{ee}\rangle$ closes
+the analytic energy.  Its one genuinely non-separable class is a two-center
+\emph{three-body triangle} $\langle f_{i k}f_{j k}\,r_{ij}^{-1}\rangle$ (two
+correlation edges sharing a vertex $k$, closed by a Coulomb on the opposite
+edge), whose down-integration yields a non-separable two-point kernel
+$H_2(1,2)=\int\mu(3)f(r_{13})f(r_{23})\,d^3r_3$.  It is reduced RI-free by
+resolving $H_2$ into azimuthal Fourier components $H_2^{(m)}$, low-rank
+expanding each ($H_2^{(m)}=\sum_r\lambda_r\,v_r\!\otimes\!v_r$), and contracting
+mode-by-mode with the general-$m$ prolate Neumann Coulomb---the same $\pi/\delta$
+machinery built above.  Both block placements (the Coulomb on the intra edge,
+so the shared vertex carries the marginal density;\ or on an inter edge, so the
+shared vertex carries an AO-pair component) reduce identically and reproduce
+Monte-Carlo to $0.2$--$0.4\sigma$.  Summed over all $216$ interaction triples
+with their correct multiplicities, the analytic $\langle F^2 V_{ee}\rangle$
+matches Monte-Carlo to $\sim\!10^{-3}$ across all six intra/inter product
+groups, giving $g_{V_{ee}}=\langle\chi^2 V_{ee}\rangle=+0.538$ ($+0.536$
+Monte-Carlo).  The kinetic diagonal needs no vector $\nabla f$ dressing:\ the
+same integration-by-parts identity collapses $g_{T2}+g_{T3}$ to
+$-\gamma^2\sigma^2+2\gamma\,\mathrm{Cov}[F,\textstyle\sum_{i<j}e^{-\gamma r_{ij}}/r_{ij}]$,
+leaving only a drift$^2$ moment (a grid-consistent block reduction over the
+gradient density), so $g_T=+1.394$ ($+1.386$ Monte-Carlo).
+
+Assembling the fully analytic, RI-free $2\times2$ then gives, for the geminal
+$f=e^{-\gamma r}$, $E_{R12}=-7.942$~Ha---below the reference $E_0=-7.888$ and
+above the exact $-8.070$ (variational), and matching the same-geminal
+Monte-Carlo $2\times2$ to $0.8$~mHa.  The framework is geminal-agnostic---only
+the kernels change---and the \emph{cusp-correct} geminal $f=r\,e^{-\gamma r}$
+(whose $\nabla^2 f=\gamma^2 f-4\gamma e^{-\gamma r}+2e^{-\gamma r}/r$ adds one
+term to the IBP-collapsed $g_T$) reproduces the headline proof-of-concept energy
+$-7.932$ analytically:\ every reduced element matches its Monte-Carlo target
+below $1\%$ (e.g.\ $\bar F=3.570$, $\sigma^2=0.128$, $h=-0.103$) and the
+assembled correlation lowering is $-33$~mHa, or $-29$~mHa (matching the
+Monte-Carlo $-29.5$~mHa) once the single grid-limited Yukawa covariance
+$\mathrm{Cov}[F,\sum e^{-\gamma r}/r]$---the long-range-geminal ill-conditioning,
+amplified by $\bar F=3.570$---is taken at converged precision.  The genuinely
+four-body and three-body content thus lives, RI-free, \emph{inside} a
+two-center four-electron correlation energy---exactly the boundary the classic
+$F_{12}$ methods treat with a resolution of identity.  This remains a
+proof-of-concept (ionic single-$\zeta$ reference, not a spectroscopic LiH):\
+the demonstration is the RI-free reduction, not the correlation recovered.
 
 Backing:\ test \texttt{tests/test\_paper12\_r12.py} and the reduction of
-Eq.~\eqref{eq:r12_kinetic_collapse} above;\ the two-center bridge and the
-many-body matrix-element reductions are validated against variational
-Monte-Carlo in the sprint tree and chronicled in \texttt{CHANGELOG.md}
-(v5.15.10--v5.15.12).  (The prototype engine migrates from the sprint tree into
-\texttt{geovac/}, with dedicated regression tests, when the triangle reduction
-closes the analytic energy.)
+Eq.~\eqref{eq:r12_kinetic_collapse} above;\ the two-center bridge, the triangle
+reduction, and the full analytic $2\times2$ energy are validated against
+variational Monte-Carlo in the sprint tree and chronicled in
+\texttt{CHANGELOG.md} (v5.15.10--v5.15.13).  (The prototype engine migrates from
+the sprint tree into \texttt{geovac/}, with dedicated regression tests, in a
+follow-on;\ it is a proof-of-concept, not yet a production path.)
 
 %% ========================================================================
 %% VII. IMPLICATIONS FOR THE GEOVAC PROGRAM

@@ -8,6 +8,34 @@ starting. Current-state rule applies: verify against CHANGELOG since 2026-09-21 
 
 ---
 
+## STATUS UPDATE (2026-09-21, v5.15.13) — COMPLETE: triangle reduced RI-free, g_Vee + g_T done, full analytic 2×2 → E_R12 assembled
+
+**STAGE 4b part 2c is DONE.** The owed pieces all closed this session:
+- **3-body TRIANGLE reduced RI-free** (`debug/lih_r12ci_triangle_gate.py`): H₂ non-separable kernel →
+  azimuthal Fourier `H₂^{(m)}` → low-rank (randomized eigh) → mode-by-mode general-m prolate Neumann
+  Coulomb (the π/δ machinery). Both placements validated vs MC: T1=0.03917 (0.2σ), T2=0.04824 (0.4σ).
+- **g_Vee complete** (`debug/lih_r12ci_gVee_analytic.py`): a 216-triple unified message-passing reducer
+  (separable→m=0 Coulomb/Yukawa, 3-cycle→triangle engine); reproduces E2 exactly (normalisation gate);
+  all 6 intra/inter groups match MC ~1e-3; grid-consistent **g_Vee=+0.53834 vs VMC +0.53605 (0.4%)**.
+  (Mixed cov/enum gave +0.585 — inconsistent code paths broke the ~4% cancellation; grid-consistent fixed it.)
+- **g_T complete** (`debug/lih_r12ci_gT_analytic.py`): the IBP identity collapses gT2+gT3 to a SCALAR
+  Yukawa covariance — **no vector ∇f dressing needed**. `g_T = gT1 − γ²σ² + 2γ Cov[F,Y_sum]`; only gT1
+  (drift² over the KD gradient density, grid-consistent through the ~2% cancellation) is new.
+  **g_T=+1.39419 vs VMC +1.38640 (0.56%).**
+- **Capstone 2×2 → E_R12** (`debug/lih_r12ci_assemble.py`): S₀₁=0 (diagonal overlap);
+  **E_R12=−7.94200 Ha** (dE=−54.2 mHa), variational, matching the same-geminal VMC 2×2 (−7.94121) to **0.79 mHa**.
+  GEMINAL: the exp pieces use **f=exp(−γr)** (the Stage-1 f-tensor geminal).
+- **CUSP-CORRECT geminal DONE (`debug/lih_r12ci_linexp.py`):** the framework is geminal-agnostic —
+  only kernels change (f→d·e^{−γd}, f²→d²·e^{−2γd}, same-pair f/r→e^{−γr} [bounded], and
+  ∇²f=γ²f−4γe^{−γr}+2e^{−γr}/r → g_T's IBP piece = −γ²σ²+4γCov[F,E_sum]−2Cov[F,Y_sum]). Reproduces the
+  vmc **linexp** γ=0.5 targets: Fbar=3.5700 (exact), σ²=0.1279, h=−0.1034, g_Vne/g_Vee/gT1 all <0.7%,
+  Cov[F,E_sum] ✓. **E_R12=−7.921 (dE −33 mHa)** vs vmc −7.9316; every piece <1% EXCEPT **Cov[F,Y_sum]**
+  (−0.079 vs MC −0.102, 22% — the Yukawa integral Ȳ at ~0.4% grid accuracy × the F̄=3.57 cancellation,
+  = the §1.3 long-range ill-conditioning). With Cov[F,Y] at converged precision → **E_R12=−7.917, dE=−29 mHa,
+  matching vmc**. So the RI-free machinery lands the cusp-correct value; residual = one grid-limited Yukawa scalar.
+**Owed (optional next):** finer-grid Yukawa dressing to tighten Cov[F,Y_sum] (last ~4 mHa); production
+`geovac/` migration + regression tests. See CHANGELOG v5.15.13.
+
 ## STATUS UPDATE (2026-09-21, v5.15.12) — full off-diagonal h ANALYTIC; g_Vne done; 4-body bridge inside the energy validated
 
 **Off-diagonal h fully analytic/RI-free** (this session, on the v5.15.11 σ²/h_Vne): h_T = +0.7495
