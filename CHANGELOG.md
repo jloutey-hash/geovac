@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.18] - 2026-09-22
+
+**Diagnostic-before-engineering: the LiH energy gap is two halves, and core-orbital enrichment banks the cheaper one — pure-orbital LiH −8.012 → −8.029 within the SAME determinant budget.** PI-directed design pass before the r₁₂ geminal build (v5.15.17's flagged path). A ceiling diagnostic + a Step-1 experiment reframe the F12 synthesis and demonstrate the cheap half. All `debug/` PoC. Memo: `debug/sprint_lih_r12_ceiling_diagnostic_memo.md`; track log `debug/track_logs/prolate_native_lih.md` updated.
+
+### The ceiling diagnostic (why a geminal alone is not enough)
+- Isolated Li⁺ (He-like Z=3) core, `{Φ0, b_k Φ0}` in Hylleraas coordinates (`debug/lih_r12_ceiling_probe.py`, float64, gradient-form kinetic energy; validated vs known He Hylleraas — {u,t²}=−2.892 reproduces the classic 3-term −2.9024). The core-core correlation splits ~50/50 into a **cusp half** (r₁₂-reachable — PLATEAUS at ~52% no matter how many r₁₂ terms) and a **radial in-out half** (a 2nd core ORBITAL, NOT a geminal d.o.f.): {u,u²}→52%, {t²,s}→~48%, {u,t²}→74–79%, rich→95–98%. So the r₁₂ geminal on Route C's single-orbital core caps at ~half the core deficit — the mechanism behind H2 99.97% (radial ladder AND r₁₂) vs Be R12-CI 19% (crude single geminal, neither).
+
+### Step-1 experiment: core enrichment banks the radial half
+- `debug/lih_core2exp_probe.py` — add a 2nd/3rd core STO at a different exponent to Route C's ladder (no engine change; the (cc|cc)=⅝ζ shortcut correctly ignores cross-exponent core pairs). A tight partner (ζ≈4–5.5) recovers the radial half: **ΔE −17 mHa (1 partner), −23.5 mHa (2)**, robust across valence.
+- **Banked** (M=16 dense ceiling, full-π valence bond(2,1)+1π(1,0)): 3 cores [+4.5,+1.6] → **E = −8.02905** (41 mHa from exact), **beating Route C's −8.012 by 17 mHa at the SAME budget** (ΔE −20.1 mHa at matched valence, M=14→16). Data: `debug/data/lih_core2exp_bank.log`.
+- **Determinant wall resolved (favorably):** core orbitals beat valence per unit budget (minimal-valence + 2 cores M=8 = −8.018 already beats full Route C M=16 = −8.012), so the first ~20 mHa radial is budget-cheap; the FULL radial half (~30) is dense-M=16-limited (needs M>16). The geminal (cusp half) is a low-rank `{Φ0,FΦ0}` add-on that does not consume the budget.
+
+### Roadmap (the marriage, quantitative)
+- Route C (1 core, M=16) −8.012 → + core enrichment (dense M=16, existing code) **−8.029** → + r₁₂ geminal (cusp half ~30 mHa) → **~−8.06 near-chemical** → break M=16 (float64 productionization / determinant-frugal solver) for the last radial+valence → chemical.
+- PI-directed order: **(3) this checkpoint → (2) float64 productionization → (1) the r₁₂ geminal build on the −8.029 base.**
+
+### Added (all `debug/`, PoC)
+- `lih_r12_ceiling_probe.py` (the cusp/radial split diagnostic), `lih_core2exp_probe.py` (the core-enrichment experiment), `sprint_lih_r12_ceiling_diagnostic_memo.md`, `data/lih_core2exp{,_pairs,_confirm,_bank}.log`.
+
+### Note
+Patch bump. All `debug/` PoC — nothing in `geovac/` or papers. Geometry (R_eq +0.2%, v5.15.16) untouched; this is the energy path. Repo-health WARN (pre-existing): CLAUDE.md >150 KB, debug/ >600 files.
+
 ## [v5.15.17] - 2026-09-22
 
 **Route C energy follow-on — the radial ladder reaches chemical accuracy on H2; the LiH energy is capped by the 4e determinant wall + core-core correlation (not radial incompleteness, as previously framed).** Follow-on to v5.15.16 (geometry solved, R_eq +0.2%): the energy was ~60 mHa above exact. Goal — close it with a radial ladder on the C4 engine. Outcome: the ladder is the right tool and hits chemical accuracy on H2, but LiH is structurally determinant-walled; the cure is correlation-frugal (explicit r₁₂), not more radial functions. All `debug/` PoC. File: `debug/prolate_energy_ladder.py`; data: `debug/data/prolate_energy_ladder.log`.

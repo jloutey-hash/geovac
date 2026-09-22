@@ -30,6 +30,31 @@ correction on a GOOD base (Route C's −8.012 reference, `debug/prolate_allelect
   correlation → LiH plausibly ~−8.04/−8.06 (near-chemical); full <2 mHa on 4e is uncertain.
 - **DIAGNOSTIC-BEFORE-ENGINEERING first** (§ memory rule): a design pass to pin the achievable
   ceiling before the full build. Do NOT launch the big mpf build blind.
+  **DONE 2026-09-22** (`debug/lih_r12_ceiling_probe.py`, memo `debug/sprint_lih_r12_ceiling_diagnostic_memo.md`):
+  the core-core deficit splits ~50/50 into a **cusp half** (geminal-reachable, PLATEAUS at
+  ~50% no matter how many r₁₂ terms) and a **radial in-out half** (a 2nd core ORBITAL, NOT a
+  geminal d.o.f.). So the LITERAL synthesis (geminal on the single-core-orbital −8.012 base)
+  tops out at **~−8.042** (≈25 mHa above exact, ~2×, NOT chemical). **RE-SCOPED: do the cheap
+  2nd-core-exponent experiment FIRST** (existing C4 `build_Xtab_s` mixed-exponent code, no new
+  integrals) — it banks the radial half (~30 mHa → ~−8.042) AND resolves whether the determinant
+  wall admits a 2nd core orbital, the question the whole strategy hinges on. Commit to the
+  multi-session two-center 4e mpf geminal build ONLY for the cusp remainder, after step 1.
+  **STEP-1 EXPERIMENT DONE 2026-09-22** (`debug/lih_core2exp_probe.py`, data
+  `debug/data/lih_core2exp*.log`): adding a 2nd/3rd core STO exponent (tight, ζ≈4.5) to
+  Route C's ladder recovers the radial half — **ΔE = −17 mHa (1 partner), −23.5 mHa (2
+  partners)**, trending to ~30; robust across valence (moderate-valence confirm −20.1 mHa).
+  **Determinant wall RESOLVED favorably:** core orbitals beat valence per unit budget
+  (minimal-valence + 2 cores M=8 = −8.018 already BEATS full Route C M=16 = −8.012), so the
+  radial half fits within M≤16, and the geminal (cusp half) is a low-rank {Φ0,FΦ0}
+  correction that doesn't consume the budget. **BANKED (`bank` mode, M=16, full-π valence):
+  3 cores [+4.5,+1.6] → E=−8.02905 (41 mHa from exact), beating Route C's −8.012 by 17 mHa
+  at the SAME budget (ΔE −20.1 mHa at matched valence).** Roadmap: Route C −8.012 → core
+  enrichment **−8.029** (dense M=16, existing code) → +geminal cusp half (~30 mHa) →
+  **~−8.06 near-chemical** → break M=16 (float64/frugal solver) for the last radial+valence
+  → chemical. Honest: the FIRST ~20 mHa radial is budget-cheap (done); the FULL radial half
+  (~30) is dense-M=16-limited (needs M>16). Next (PI call): (2) F12 geminal build on the
+  −8.029 base for the cusp remainder; and/or (1b) float64 productionization to break M=16 +
+  make it a sweep. See `debug/sprint_lih_r12_ceiling_diagnostic_memo.md`.
 
 **DO NOT RE-DERIVE (closed this session):** the geometry (Route C solved it, +0.2%);
 core BREATHING (Phase 0, inert −0.06pp) and core dipole POLARIZATION (Phase 1, −0.07pp,
