@@ -184,8 +184,12 @@ if __name__ == "__main__":
     We, _ = Wmat(Kexp_g); a1e = c00 @ We @ c11 - c01 @ We @ c01; b1e = 0.25 * crho @ We @ crho
     Ebar = 2 * a1e + 4 * b1e
     VYA = yukawa_pot_iso(rA_f, ZA, g); VYB = yukawa_pot_iso(rB_f, ZB, g)
-    from lih_r12ci_hT_analytic import mc_yukawa_abab
-    IYab, _ = mc_yukawa_abab(g)
+    # ab,ab (two-center transition-density Yukawa self-energy): DETERMINISTIC via the
+    # Neumann-minus-smooth psi_yuk grid integral (was a 12M-sample MC). The element is tiny
+    # (~4.6e-3, MC vs psi_yuk differ 1.2%), so it is bit-negligible on Ybar/h_T but removes
+    # the MC noise and makes the driver fast + reproducible.
+    from lih_r12ci_gVee_analytic import psi_yuk as _psi_yuk
+    IYab = grid_int(d_ab * _psi_yuk(d_ab, g))
     WY = np.array([[grid_int(d_aa * VYA), grid_int(d_ab * VYA), grid_int(d_bb * VYA)],
                    [grid_int(d_ab * VYA), IYab, grid_int(d_ab * VYB)],
                    [grid_int(d_bb * VYA), grid_int(d_ab * VYB), grid_int(d_bb * VYB)]])
@@ -215,9 +219,14 @@ if __name__ == "__main__":
     # Cov[F, E_sum]: A=linexp-f, B=exp(g), product = d e^{-2g d} = linexp(2g)
     B_e = kern_obj(Kexp_g); C_e = dict(W=Wmat(Klin_2g)[0])
     CovFE, _ = cov_FA_FB(A_L, B_e, C_e)
-    # Cov[F, Y_sum]: A=linexp-f, B=Yukawa(g), product f*Y = e^{-2g r} = exp(2g)
-    from lih_r12ci_gVee_analytic import psi_yuk as _psi_yuk
-    B_y = dict(W=WY, Psi={'aa': _psi_yuk(d_aa, g), 'ab': _psi_yuk(d_ab, g), 'bb': _psi_yuk(d_bb, g)})
+    # Cov[F, Y_sum]: A=linexp-f, B=Yukawa(g), product f*Y = e^{-2g r} = exp(2g).
+    # Isotropic aa/bb dressings: EXACT closed-radial Yukawa potential (VYA,VYB, built above
+    # for WY); only the two-center ab uses the Neumann-minus-smooth psi_yuk. This mirrors
+    # make_kernel_coul (exact _hartree_1s isotropic + Neumann ab). Using psi_yuk for the
+    # isotropic dressings (its ~0.5% grid error vs the exact potential, amplified by the
+    # Fbar=3.57 cancellation) was the SOLE >1% miss; the exact dressings close it:
+    # Cov[F,Y_sum] -0.0793 -> -0.1025 (MC -0.1018), landing E_R12 = -7.917.
+    B_y = dict(W=WY, Psi={'aa': VYA, 'ab': _psi_yuk(d_ab, g), 'bb': VYB})
     C_y = dict(W=Wmat(Kexp_2g)[0])
     CovFY, _ = cov_FA_FB(A_L, B_y, C_y)
     gT23 = -g ** 2 * sig2 + 4 * g * CovFE - 2 * CovFY

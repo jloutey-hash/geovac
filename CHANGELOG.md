@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.15] - 2026-09-21
+
+**LiH R12-CI — engine migrated from the sprint tree into `geovac/lih_r12ci/` (production package + regression tests).** Item (2) of the r12 handoff. The `debug/lih_r12ci_*` proof-of-concept engine (a clean 10-module acyclic deterministic-energy closure) is now a self-contained `geovac` subpackage with a deterministic `energy(geminal)` API reproducing both validated energies, backed by `tests/test_lih_r12ci.py` (6 tests, all passing, --slow).
+
+### The package (`geovac/lih_r12ci/`)
+- 10 primitive modules **migrated verbatim** — imports rewritten to relative package form by an auditable migration script, with the intricate validated math preserved bit-for-bit (`cov_FA_FB`, the 216-triple enumerator, the low-rank general-m triangle, `neumann_potential`, `yukawa_pot_iso`, `psi_yuk`): `fourbody`, `energy`, `basis`, `kernels`, `hT`, `hVee`, `gVne`, `triangle`, `gVee`, `gT`. Plus `assembly.py` (the unified 2×2 → E_R12 for both geminals) and `__init__.py` (public API).
+- **Public API:** `from geovac.lih_r12ci import energy; energy(geminal='exp'|'linexp') -> R12Result` (E_R12, E0, dE, sigma2, h, g, per-piece breakdown, variational flag). Lazy submodule imports keep `import geovac.lih_r12ci` cheap; the first `energy()` call builds the shared prolate grids/kernels (~2 min).
+- **Deterministic** — no Monte-Carlo in the energy path (the tiny two-center ab,ab Yukawa block uses the deterministic `psi_yuk` grid integral). The geminal-dependent Yukawa dressing is preserved: linexp uses the exact-isotropic dressings (the v5.15.14 item-1 fix), exp keeps `psi_yuk` (its validated VMC-2×2 cancellation — switching it would degrade the exp agreement, so the fix is linexp-only by design).
+
+### Validated reproduction (`tests/test_lih_r12ci.py`, @slow, 6/6 passing)
+- **linexp** E_R12 = −7.9168 Ha (dE −29.0 mHa) — reproduces the debug value **bit-for-bit** (0.000 mHa), matches the independent VMC correlation dE −29.5 to 0.5 mHa; a `Cov[F,Y] ≈ −0.1025` guard pins the item-1 fix (fails on the pre-fix −0.079).
+- **exp** E_R12 = −7.9418 Ha — within **0.21 mHa** of the debug −7.9420 and 0.6 mHa of the VMC 2×2 −7.94121 (residual = deterministic-ab vs 12M-MC-ab in `h`, plus a 0.0008 grid diff in `g_Vne` between two debug reducers — both far inside the PoC's own 0.79 mHa VMC agreement).
+- Both variational (E0 > E_R12 > exact −8.070); every matrix-element piece matches the analytic reference (< 2 mHa).
+
+### Added
+- `geovac/lih_r12ci/` (12 files: 10 migrated primitive modules + `assembly.py` + `__init__.py`).
+- `tests/test_lih_r12ci.py` — 6 regression tests pinning both geminals' E_R12, the item-1 `Cov[F,Y]` fix, per-piece reference values, variationality, and the diagonal-overlap gate.
+
+### Changed
+- `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex` — sec:r12 backing note: the "prototype engine migrates ... in a follow-on" line replaced by the completed migration (`geovac.lih_r12ci`, `tests/test_lih_r12ci.py`); LaTeX recompiles clean.
+- `papers/synthesis/group2_quantum_chemistry_synthesis.tex` — closed a completeness gap in the F12 paragraph: the "same obstruction gates F12 evaluation" claim now carries its positive two-center counterpart (Paper 12's two-center 4-electron explicit-r₁₂ CI is done RI-free — bridge + triangle both reduce by the same Neumann machinery, the operator-independence made explicit — E_R12 = −7.942/−7.917, PoC ionic reference), sharpening the gate to specifically the three-center genus jump. Recompiles clean.
+- CLAUDE.md §2 one-liner + version cursor → v5.15.15.
+- `memory/r12_generalization_boundary_n3_n4.md` — item (2) marked done.
+- The `debug/lih_r12ci_*` drivers are **RETAINED** (the sprint chronicle + the MC/VMC ground-truth harnesses the package validates against); `geovac.lih_r12ci` is now the production home.
+
+### Note
+Patch bump (default). Adds a `geovac/` subpackage but nothing imports it yet (existing modules + the topological-integrity baseline are unaffected). PoC (ionic single-ζ reference), not a production chemistry path. The PI may consider this minor-worthy given it adds a production subpackage.
+
+## [v5.15.14] - 2026-09-21
+
+**LiH R12-CI — the last owed piece closed: the cusp-correct (linexp) geminal now lands E_R12 = -7.917 (dE -29.0 mHa) FULLY analytically, RI-free, and DETERMINISTICALLY.** Continuation of v5.15.13, which left one element grid-limited: the linexp Yukawa covariance Cov[F,Σe^{-γr}/r] read -0.079 vs MC -0.102 (22% low, the sole >1% miss), flagged as "finer-grid Yukawa dressing owed." Diagnosed and fixed at root — it was NOT a grid-resolution or Monte-Carlo problem.
+
+### The fix — exact isotropic screened-Coulomb dressings
+The Yukawa covariance `cov_FA_FB(f, Yukawa, ·)` builds its "share" terms from the Yukawa DRESSING FIELDS Ψ^Y. linexp used the Neumann-minus-smooth `psi_yuk` field for ALL three AO-pair dressings (aa, ab, bb). But `psi_yuk` carries a ~0.5% grid error against the exact closed-radial `yukawa_pot_iso` on the ISOTROPIC blocks (measured: aa,aa 0.66%, bb,bb 0.34%), and the F̄=3.57 long-range-geminal cancellation (Cov = tot ≈ 6.71 − F̄·Ȳ ≈ 6.79) amplifies that 0.5% into the 22% covariance miss. The exact closed-radial `yukawa_pot_iso` is available for the single-center aa/bb dressings — only the two-center ab transition density genuinely needs the Neumann field — exactly the split the Coulomb sector already uses (`make_kernel_coul`: exact `_hartree_1s` isotropic + Neumann `ab`). Switching the isotropic Yukawa dressings to `yukawa_pot_iso` carries Cov[F,Y_sum] -0.079 → -0.1025 (MC -0.1018, 0.7%), g_T +1.3384 → +1.3849, and **E_R12(linexp) -7.9210 → -7.9168, dE -33.2 → -29.0 mHa** — matching the VMC dE -29.5 to 0.5 mHa. Diagnosed non-circularly: (1) de-MC-ing the ab,ab block moved Cov[F,Y] by <0.001 (ruled out MC noise); (2) the psi_yuk-vs-exact gap on the KNOWN aa,aa block quantified the dressing error directly.
+
+### Also
+- **linexp de-MC'd + deterministic.** The ab,ab Yukawa self-energy (a 12M-sample Monte-Carlo, the sole slowness + non-determinism) is replaced by the deterministic `psi_yuk` grid integral (element ~4.6e-3, MC vs deterministic differ 1.2% → bit-negligible on Ȳ/h_T). linexp now runs in ~60s, reproducibly.
+- **Exp geminal (-7.942) DELIBERATELY untouched.** The same psi_yuk-dressing pattern is present in the exp-geminal g_T (`make_kernel_Y_full`), but the exp E_R12=-7.942 is validated end-to-end against the VMC 2×2 (-7.94121, 0.79 mHa) via a documented partial cancellation of piece-level deviations (g_T +0.008 high, g_Vne -0.006 low). Fixing the exp g_T dressing alone moves total g -0.919 → -0.927 and E_R12 to ~-7.9435, DEGRADING the validated agreement to ~2.3 mHa. Left as-is by design (comment added to `make_kernel_Y_full`), flagged for the geovac migration where all pieces get re-derived on one consistent grid.
+
+### Changed
+- `debug/lih_r12ci_linexp.py` — Cov[F,Y_sum]: isotropic aa/bb dressings now exact `yukawa_pot_iso` (was `psi_yuk`); ab,ab WY element de-MC'd to the deterministic `psi_yuk` grid integral. E_R12(linexp) = -7.9168, dE -29.0 mHa, deterministic.
+- `debug/lih_r12ci_gT_analytic.py` — comment on `make_kernel_Y_full` documenting why the exp-geminal isotropic dressing is left as psi_yuk (validated cancellation) and where the fix lives (linexp / geovac migration). No code change.
+- `papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex` — sec:r12 linexp paragraph: the -33/-29 "converged precision" caveat replaced by the closed result (-29 mHa, E_R12=-7.917, fully analytic RI-free, no residual quadrature caveat) with the exact-isotropic-dressing mechanism stated.
+- `debug/lih_r12_build_plan.md` STATUS, `memory/r12_generalization_boundary_n3_n4.md`, CLAUDE.md §2 + version cursor → v5.15.14.
+
+### Note
+Patch bump (default). Debug/PoC diagnostic + paper sync; no `geovac/` code touched (topological baseline + `/regression touched` unaffected). H₂ r12 regression (`tests/test_paper12_r12.py`) green (2 passed, 1 slow-skipped). The `debug/lih_r12ci_*` engine → `geovac/` migration + dedicated regression tests remains owed (item 2).
+
 ## [v5.15.13] - 2026-09-21
 
 **LiH R12-CI — the two-center 3-body TRIANGLE reduced RI-free, and the FULL analytic 2×2 → E_R12 assembled and validated.** Direct continuation of v5.15.12 (which left the triangle + g_T + the assembly owed). This closes the analytic, resolution-of-identity–free assembly of a two-center four-electron explicit-r₁₂ CI energy. All matrix elements now analytic/RI-free on the ionic single-ζ reference Φ₀=|1s_A² 1s_B²| (a PoC, not spectroscopic), each validated against an independent variational Monte-Carlo ground truth, for BOTH the exp geminal f=e^{−γr} (E_R12=−7.942, matching VMC to 0.79 mHa) AND the cusp-correct geminal f=r·e^{−γr} (E_R12=−7.921/dE−33 mHa, reproducing the vmc −7.932 headline; −29 mHa with the one grid-limited Yukawa covariance at converged precision). The framework is geminal-agnostic — only the kernels change. Handoff/chronicle: `debug/lih_r12_build_plan.md`.

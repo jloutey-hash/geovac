@@ -23,11 +23,11 @@ Run from debug/:  python lih_r12ci_gT_analytic.py
 """
 import numpy as np
 
-from lih_r12ci_sigma2_analytic import a, GAM, grid_int, dens, build_kernel, geo_f
-from lih_r12ci_hVee_analytic import (
+from .kernels import a, GAM, grid_int, dens, build_kernel, geo_f
+from .hVee import (
     P00, P11, P01, rho_g, cov_FA_FB, make_kernel_f, make_kernel_Y, SIG2_REF)
-from lih_r12ci_hT_analytic import Gpq, cvec, yukawa_pot_iso, rA_f, rB_f, d_aa, d_ab, d_bb, ZA, ZB
-from lih_r12ci_gVee_analytic import psi_yuk, dress, Kf, Kf2, PAIRS, COMPS
+from .hT import Gpq, cvec, yukawa_pot_iso, rA_f, rB_f, d_aa, d_ab, d_bb, ZA, ZB
+from .gVee import psi_yuk, dress, Kf, Kf2, PAIRS, COMPS
 
 GT_REF = 1.38640            # VMC g_T (=_g_targets.py)
 GT1_REF = 1.16826           # drift^2 target
@@ -113,7 +113,7 @@ if __name__ == "__main__":
 
     # ---- Fbar (grid) ----
     Af = make_kernel_f(GAM)
-    from lih_r12ci_hVee_analytic import _a1b1, crho, c00, c11, c01
+    from .hVee import _a1b1, crho, c00, c11, c01
     a1, b1 = _a1b1(Af['W']); Fbar = 2 * a1 + 4 * b1
     print(f"\n  Fbar = {Fbar:.6f}   T00={T00:.5f} T11={T11:.5f}  <T>=T00+T11={T00+T11:.5f}")
 

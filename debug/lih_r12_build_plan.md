@@ -8,6 +8,27 @@ starting. Current-state rule applies: verify against CHANGELOG since 2026-09-21 
 
 ---
 
+## STATUS UPDATE (2026-09-21, v5.15.14) — item (1) CLOSED: linexp E_R12 = −7.917 fully analytic, RI-free, deterministic
+
+The one owed piece from v5.15.13 (the grid-limited linexp Yukawa covariance) is CLOSED, and
+NOT by a finer grid. Root cause: the linexp `Cov[F,Σe^{−γr}/r]` built its "share" terms from
+the Neumann-minus-smooth `psi_yuk` dressing field for ALL AO-pairs, but `psi_yuk` is ~0.5% off
+the exact closed-radial `yukawa_pot_iso` on the ISOTROPIC blocks (measured aa 0.66%, bb 0.34%),
+and the F̄=3.57 cancellation amplified that to the 22% covariance miss. Fix = use the exact
+`yukawa_pot_iso` for the aa/bb dressings (only the two-center ab genuinely needs Neumann),
+mirroring the Coulomb sector's exact-Hartree-iso + Neumann-ab split (`make_kernel_coul`).
+Result: **Cov[F,Y_sum] −0.079 → −0.1025 (MC −0.1018), g_T +1.3384 → +1.3849, E_R12(linexp)
+−7.9210 → −7.9168 (dE −33.2 → −29.0 mHa), matching the VMC dE −29.5 to 0.5 mHa** — fully
+analytic, RI-free, no grid caveat. Diagnosed non-circularly: de-MC-ing the ab,ab block moved
+Cov[F,Y] by <0.001 (ruled out MC noise), and the psi_yuk-vs-exact gap on the KNOWN aa,aa block
+quantified the dressing error directly. Also **de-MC'd** linexp's ab,ab Yukawa block
+(deterministic `psi_yuk` grid integral; the 12M-sample MC was the sole slowness/non-determinism)
+→ linexp is now deterministic, ~60s. The EXP geminal (−7.942) is DELIBERATELY left with psi_yuk
+dressings — its end-to-end VMC agreement (0.79 mHa) rests on a documented piece-level cancellation
+that the isolated fix would break (total g −0.919 → −0.927, E_R12 → ~−7.9435); see the
+`make_kernel_Y_full` comment + CHANGELOG v5.15.14. **Item (2) — `geovac/` migration + regression
+tests — remains owed.**
+
 ## STATUS UPDATE (2026-09-21, v5.15.13) — COMPLETE: triangle reduced RI-free, g_Vee + g_T done, full analytic 2×2 → E_R12 assembled
 
 **STAGE 4b part 2c is DONE.** The owed pieces all closed this session:

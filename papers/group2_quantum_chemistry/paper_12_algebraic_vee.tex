@@ -1528,25 +1528,34 @@ Monte-Carlo $2\times2$ to $0.8$~mHa.  The framework is geminal-agnostic---only
 the kernels change---and the \emph{cusp-correct} geminal $f=r\,e^{-\gamma r}$
 (whose $\nabla^2 f=\gamma^2 f-4\gamma e^{-\gamma r}+2e^{-\gamma r}/r$ adds one
 term to the IBP-collapsed $g_T$) reproduces the headline proof-of-concept energy
-$-7.932$ analytically:\ every reduced element matches its Monte-Carlo target
-below $1\%$ (e.g.\ $\bar F=3.570$, $\sigma^2=0.128$, $h=-0.103$) and the
-assembled correlation lowering is $-33$~mHa, or $-29$~mHa (matching the
-Monte-Carlo $-29.5$~mHa) once the single grid-limited Yukawa covariance
-$\mathrm{Cov}[F,\sum e^{-\gamma r}/r]$---the long-range-geminal ill-conditioning,
-amplified by $\bar F=3.570$---is taken at converged precision.  The genuinely
+analytically:\ every reduced element matches its Monte-Carlo target below $1\%$
+(e.g.\ $\bar F=3.570$, $\sigma^2=0.128$, $h=-0.103$), giving an assembled
+correlation lowering of $-29$~mHa (Monte-Carlo $-29.5$~mHa) and
+$E_{R12}=-7.917$~Ha.  The one element that initially missed---the Yukawa
+covariance $\mathrm{Cov}[F,\sum e^{-\gamma r}/r]$, a small difference amplified
+by the long-range-geminal cancellation $\bar F=3.570$---is closed by evaluating
+the isotropic screened-Coulomb dressings from the exact closed-radial Yukawa
+potential rather than the Neumann-minus-smooth field, exactly the distinction
+the Coulomb sector already draws between its closed Hartree potential and the
+two-center Neumann potential;\ this carries the covariance from $-0.079$ to
+$-0.103$ (Monte-Carlo $-0.102$), so the cusp-correct energy is reached fully
+analytically and RI-free with no residual quadrature caveat.  The genuinely
 four-body and three-body content thus lives, RI-free, \emph{inside} a
 two-center four-electron correlation energy---exactly the boundary the classic
 $F_{12}$ methods treat with a resolution of identity.  This remains a
 proof-of-concept (ionic single-$\zeta$ reference, not a spectroscopic LiH):\
 the demonstration is the RI-free reduction, not the correlation recovered.
 
-Backing:\ test \texttt{tests/test\_paper12\_r12.py} and the reduction of
-Eq.~\eqref{eq:r12_kinetic_collapse} above;\ the two-center bridge, the triangle
+Backing:\ tests \texttt{tests/test\_paper12\_r12.py} (the H$_2$ engine) and
+\texttt{tests/test\_lih\_r12ci.py} (the two-center LiH engine), and the reduction
+of Eq.~\eqref{eq:r12_kinetic_collapse} above;\ the two-center bridge, the triangle
 reduction, and the full analytic $2\times2$ energy are validated against
-variational Monte-Carlo in the sprint tree and chronicled in
-\texttt{CHANGELOG.md} (v5.15.10--v5.15.13).  (The prototype engine migrates from
-the sprint tree into \texttt{geovac/}, with dedicated regression tests, in a
-follow-on;\ it is a proof-of-concept, not yet a production path.)
+variational Monte-Carlo and chronicled in \texttt{CHANGELOG.md}
+(v5.15.10--v5.15.15).  The proof-of-concept engine has been migrated from the
+sprint tree into the deterministic, resolution-of-identity--free
+\texttt{geovac.lih\_r12ci} package (an \texttt{energy(geminal)} API reproducing
+both the $-7.942$ and $-7.917$ energies);\ it remains a proof-of-concept (ionic
+single-$\zeta$ reference), not a production chemistry path.
 
 %% ========================================================================
 %% VII. IMPLICATIONS FOR THE GEOVAC PROGRAM
