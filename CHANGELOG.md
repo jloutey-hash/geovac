@@ -7,6 +7,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.23] - 2026-09-22
+
+**Two read-only audits re-tier the N=4 bridge factorization and REVERSE the "marriage is blocked" verdict; the anti-rediscovery record and a subagent-phased marriage plan are written.** PI-directed, after the PI observed that ~5 context resets had each re-derived the same picture (the exact-multibody analytic r12 engine vs the rich-reference VMC as complementary halves) and then lost it. Root cause: the multibody work lived in debug memos/CHANGELOG/memory, thinly in the papers. No new physics computed; two audits, one synthesis, and the capture.
+
+### Audit A — the "bridge addition theorem" is a VALIDATED REDUCTION, not a theorem
+- Exact re-expression of the one 4-body-connected term ⟨f₁₂f₃₄/r₁₃⟩ via three textbook identities (addition theorem / prolate Neumann expansion / radial leaf convolution), stated in prose, checked numerically — **never written as a derivation** (the one hand-derived coefficient was wrong by (2L+1) and was replaced by quadrature); the name carries no hypotheses, statement or proof; N≥5 is a one-sentence conjecture.
+- **Known hole:** the stated termination bound L ≤ 2·l_bridge is the s-leaf special case; the general bound is 2(l_bridge + l_leaf) — an L=4 channel the code labels zero (`r12ci_4e_wall_q2_reducibility.py:99`) is **nonzero at 24σ** for p-leaves (audit probe). Still finite ⇒ RI-free intact; a build copying the hard-coded bound would silently drop channels.
+- Scope as validated: σ two-centre gate 1.5e-4 (MC-scatter-limited); π/δ 2e-5 but on an artificial modulated density, never m≠0 orbitals (assembled energies are σ-only); Be exchange at L=0 all-s only (rel 8.6e-5 on re-run; the register's 0.25% was never reproduced); all deterministic validations under the block-factorized closed-shell reference.
+- Sharp point: at the linear-in-F ansatz nothing is ever >4-body-connected for ANY N; what N≥5 or a multi-det reference changes is the DENSITY, and that path was checked only by a 5%-tolerance MC-vs-MC test.
+- Stale records found and corrected at source: register/memos said "kinetic-vector 4-body UNTESTED" after v5.15.13–14 had settled it (IBP identity exact; g_T validated 0.56%). `test_lih_r12ci.py` is entirely @slow (a fast run collects nothing); no tests/ guard exists for the Be integral, Q1/Q2, the σ/π gates or exchange; the claim–test matrix had **zero** rows for the bridge; `fourbody.py` is a CRLF copy of the σ-gate script whose `reduced()/brute()` no path executes.
+
+### Audit B — the marriage is NOT a wall: "UNDONE (formula work, tractable)"
+- The 2026-09-22 feasibility memo's "path (A) BLOCKED at the formula level" was an assessment **never tested, not even at the 2-better-orbitals level** (attempts table: every prior touch deferred or sidestepped; none wrote code against the reference).
+- Decisive reason: every reduction (`_reduce`, `contract_raw`, `triangle_raw`, `neumann_potential`, the IBP identities) acts on ONE separable product of one-electron pair densities supplied as an argument; any 4e CI density is a finite sum of such products; the reference lives ONLY in coefficient lists, 2/4 pair-equivalence shortcuts, closed-form 1s dressings and a hardcoded E0 (full welding map, file:line, in the audit). The "non-generalizing" ⟨f_ij f_kl⟩ is a K⁴ contraction of precomputable Coulomb matrices — a cost statement, not a missing formula. **No term forces an RDM (F12-on-MRCI) formalism.**
+- K=4 singlet σ CI: 10 pair densities, ≤10⁴-entry coefficient tensor, spectators integrate to δ; reachable by rewriting the enumerators as tensor contractions. Full M=16+π: large (136 pair densities, m-resolved kernels), not blocked.
+- Honest cap: the ansatz stays pairwise, so a marriage energy is expected ≈ −8.045..−8.055 — a deterministic cross-check of the VMC −8.047, not the −8.062 target (which needs an r₁₂t²-type e-e-n term; the marriage is that term's platform).
+
+### The synthesis (A × B)
+The marriage is the first thing that would run the reductions on real non-isotropic leaves under a non-block-factorized reference — exactly the path audit A rates weakest. **The marriage IS the test of the factorization's generality.** Consequence: a new gate **G-leaf** (reduced-vs-brute ≤1e-3 on one real non-1s pair density, general bound) precedes any energy; a GO upgrades the reduction's tier; a FAIL is the more important (paper-grade negative) result.
+
+### Captured
+- **Paper 12** `sec:r12`: termination bound qualified (s-leaf vs general 2(l_bridge+l_leaf), the 24σ L=4 channel); exchange scope (L=0 all-s) and "deterministic quadrature, not closed form"; π/δ validated on a modulated model density, σ gate MC-limited; new **[AUDITED 2026-09-22]** paragraph fixing the tier (validated reduction, not theorem; N≥5 conjectural; the block-factorized reference as enabling assumption) and stating **reference generality** for the first time. Abstract/conclusion re-read: no theorem claim there, unchanged.
+- **Paper 19** energy section: the route to −8.062 now names both the Monte-Carlo (3-body Jastrow) and the analytic (r₁₂t² geminal on the RI-free reductions) paths; a 2-body analytic marriage is expected to cross-check −8.047, not undercut it.
+- `docs/walls/register.md` N=4 entry: bound qualified, exchange figure reconciled (0.25% → rel 8.6e-5, L=0 all-s), kinetic-vector SETTLED, "theorem" re-tiered. `docs/claim_test_matrix.md`: 3 new Paper-12 rows (bridge = COVERAGE GAP; reference generality = ASSESSED/UNBUILT with the marriage plan as its test; kinetic-vector = BACKED-SOUND).
+- Stamped SUPERSEDED-in-part at the top of `debug/sprint_n4_wall_diagnostic_memo.md`, `debug/sprint_lih_r12_4body_integral_memo.md`, `debug/sprint_lih_rigorous_f12_memo.md`, `debug/lih_rigorous_vmc_build_plan.md` (the latter also records the gradient-form estimator correction).
+- **`memory/lih_marriage_state_of_play.md`** (READ FIRST, indexed): the two halves, the numbers and what each IS, the −8.062/−8.047 consistency, both audit verdicts with file:line, the synthesis, the DO-NOT list, the process rule.
+- **`debug/lih_marriage_build_plan.md`**: self-contained, subagent-phased (Phase 0 reference+tensor with G0; Phase 1 G-leaf; Phase 2 the 7 enumerator generalisations with G1 regression to −7.917; Phase 3 energy with the G2 VMC cross-check via a linear 1+cF factor in `lih_vmc.py`), GO/BORDERLINE/STOP, traps, and the r₁₂t² follow-on as the elegant path to −8.062.
+
+### Process (PI direction, recorded)
+Heavy reads/derivations go to subagents returning structured reports; one phase = one agent = one gate = one paper/memo capture; READ-FIRST state-of-play files per effort. Patch bump (CLAUDE.md §2 + version). No `geovac/` code changed. Owed: a fast tests/ guard on the p-leaf termination channel (registered in the matrix as the coverage gap).
+
+## [v5.15.22] - 2026-09-22
+
+**Rigorous variational LiH energy delivered by a from-scratch VMC-over-FCI build: E = −8.047 ± 0.001 Ha (beats the −8.032 orbital ceiling by 18 mHa, variational).** Executes the v5.15.21 build plan (`debug/lih_rigorous_vmc_build_plan.md`, the RECOMMENDED path B). The VMC-over-FCI stack is built and fully validated; the rigorous 2-body-Jastrow number is **−8.047**, which *sharpens (and partially tempers) the v5.15.21 "−8.062 CONFIRMED defensible" line*: a two-body Jastrow reaches −8.047, and reaching −8.062 needs three-body (e-e-n) correlation.
+
+### The build (`debug/lih_vmc.py`, new; 6 steps, each gated)
+- **Step 1 — FCI eigenvector:** `fci_ground_vector` (sparse eigsh, same `_dets`/`_matel` ordering as `fci_fast`) + `build_lih_wavefunction` recomputes the `assemble_rebased` pipeline (rebasing C, canonical-orthogonalization X, primitive→MO map **T = C.T @ X**) and extracts the CI vector. Reproduces the engine energy bit-for-bit: small config −7.99468, M=16 −8.02905 (both match `prolate_float_eri.validate`), Σc²=1.
+- **Step 2 — arbitrary-point orbital evaluator + gradient (analytic):** via the identity `(ξ²−1)^{μ/2}(1−η²)^{μ/2}e^{isφ} = (2/R)^μ (x+i·sign(s)·y)^μ` (holomorphic → smooth Cartesian polynomial, no on-axis singularity). Analytic **Laplacian** too (uses ∇²W=0 and ∇ξ·∇η=0). Gates: grad vs FD ~1e-10, lap vs FD ~1e-5, and **value == engine `_orb_on_grid` to ~1e-15** (the VMC orbital IS the function the ERIs were built from).
+- **Step 3 — multi-determinant Ψ_CI + grad + Laplacian:** vectorized over walkers via the outer-product minor structure (na=nb=2 → C(Mk,2)² determinants as a 120×120 contraction). Determinant sign σ_I = (−1)^{inv(grouped spin-orbital order)}.
+- **Steps 4–5 — Jastrow + VMC:** Metropolis on |Ψ_CI·J|², single-electron moves. **Estimator corrected from the plan's gradient form to the standard local energy** E_L = V − ½∇²Ψ/Ψ: the gradient form ½|∇lnΨ|² has *infinite variance at the nodes* of a fermionic Ψ_CI (measured: it gave −7.807, useless), while the standard form has finite node variance (−7.99100 ± 0.0044 vs FCI −7.99468). The e-e cusp is kept bounded by treating the Jastrow Laplacian analytically (its 2A/r cancels V's 1/r).
+- **Step 6 — MANDATORY gate-6 (PASS on both configs):** VMC(Ψ_CI, J=1) reproduces FCI — small M=6 −7.99100 ± 0.0044 (+0.8σ); **M=16 (complex π) −8.02853 ± 0.0047 (+0.1σ)**.
+
+### Jastrow findings
+- **Linexp u=b·r·e^{−γr} (the plan's geminal) is too weak:** cusp-pinned amplitude → shallow hole → ~0 net gain on M=16.
+- **Padé u = A·r/(1+γr) is the correct 2-body form:** exact cusp (finite variance) + deeper tunable hole. Small-config validation: recovers −32.5 mHa (matching the additive-F12 core cusp). **M=16 optimum γ=1.4–1.8, E ≈ −8.048.**
+- **Two-scale Padé** (core γ / valence γ) and an ad-hoc **3-body Gaussian e-e-n term** gave no improvement (the latter only distorts); a properly-optimized e-e-n Jastrow is genuine multi-session QMC.
+
+### Result and verdict
+- **Final (M=16, Padé γ=1.5, 4 seeds): E = −8.04731 ± 0.00073 Ha.** −18.3 mHa vs the −8.029 basis; +23.2 mHa vs exact −8.0705; variational. m17 (4th core) orbital ceiling −8.03010.
+- **Decision gate: BORDERLINE** (−8.047 ∈ [−8.05,−8.04]; GO needs ≤−8.05; NOT a STOP — gate-6 passed). A 2-body Jastrow recovers ~19 mHa of the 41 mHa gap (46%); VMC being a variational *upper bound*, −8.047 neither confirms nor refutes the −8.062 estimate — it establishes a rigorous wavefunction beating the ceiling, and −8.062 remains a target a 3-body Jastrow would approach.
+
+### Files / backing
+- `debug/lih_vmc.py` (the stack), `debug/sprint_lih_vmc_progress.md` (canonical memo), `debug/data/lih_vmc_*.log` (run logs). `tests/test_lih_vmc.py` (5 fast deterministic gates: orbital grad/lap vs FD, value == engine grid, sign convention, Padé-cusp finite E_L — all pass, 3.5s). Paper 19 abstract + energy section updated (VMC result, honestly characterized; pdflatex clean, 20pp).
+- Patch bump. New `debug/` engine + one `tests/` file + Paper 19 edit; no `geovac/` production change. **PI FLAG:** the rigorous 2-body number −8.047 is above the −8.062 additive estimate (v5.15.21) — see the verdict above; the paper now states both honestly.
+
 ## [v5.15.21] - 2026-09-22
 
 **LiH arc lock-down: Paper 19 sharpened with the Route C resolution, tests/ backing added, and the rigorous-variational-energy question answered (STOP — multi-session — with the −8.062 estimate confirmed sound).** The final lock-down of the v5.15.16–20 LiH arc (PI-directed). No new physics; documentation + test backing + a feasibility verdict.

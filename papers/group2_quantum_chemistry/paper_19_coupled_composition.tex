@@ -81,10 +81,13 @@ decelerating, not a constant rate; $3\times$
 smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$), not numerical.  It is,
 however, not a physics wall:\ a companion all-electron prolate-spheroidal
 treatment with an $R$-accurate analytic atom-centered core resolves it to
-$R_{\rm eq} = +0.2\%$ (the corpus's best LiH geometry) and reaches a
-near-chemical energy ($\approx -8.062$~Ha, an additive-F12 estimate), locating the
-balanced drift specifically in the frozen/parameter-free core rather than in the
-coupled architecture itself.
+$R_{\rm eq} = +0.2\%$ (the corpus's best LiH geometry) and, with a rigorous
+VMC-over-FCI treatment (a two-body Jastrow on the analytic-orbital FCI state),
+reaches a \emph{variational} energy of $-8.047$~Ha---$18$~mHa below the $-8.032$
+orbital ceiling and safely above the exact $-8.0705$ (an additive-F12 estimate
+places the near-chemical target at $\approx-8.062$~Ha, which a fuller three-body
+Jastrow would approach)---locating the balanced drift specifically in the
+frozen/parameter-free core rather than in the coupled architecture itself.
 \end{abstract}
 
 \maketitle
@@ -838,17 +841,37 @@ additive-F12 correction (the $r_{12}$ energy an isolated He-like pair gains beyo
 a radial-converged orbital pair:\ $30.1$~mHa for the Li core, validated against
 exact He to $1.4$~mHa) brings the total to $\approx-8.062$~Ha ($\approx9$~mHa above
 exact, near-chemical), the smaller valence cusp being budget-consistent with the
-residual gap.  This last figure is an \emph{additive estimate, not a variational
-bound}:\ the explicit-$r_{12}$ machinery is welded to a two-orbital reference, so
-the fully rigorous variational number requires either an
-F12-on-correlated-reference re-derivation or a VMC-over-FCI build (scoped,
-deferred);\ a feasibility study confirms the estimate is defensible to a few mHa
-and that the rigorous value lands near it, not overturning it
-(\texttt{tests/test\_prolate\_route\_c\_lih.py};\ chronicled in
-\texttt{CHANGELOG.md} v5.15.18--20).  The two enabling pieces---a sparse
-connected-pair FCI and a float64 two-center ERI assembly, each validated
-energy-exact against the high-precision reference---made the $M>16$ orbital ceiling
-and the cusp study reachable.
+residual gap.  This $-8.062$ figure is an \emph{additive estimate, not a
+variational bound}.  The fully rigorous number has now been obtained by a
+\emph{VMC-over-FCI} build (\texttt{debug/lih\_vmc.py}):\ the analytic-orbital FCI
+ground state $\Psi_{\rm CI}$ (the orbital-ceiling wavefunction, evaluated in real
+space from the analytic prolate orbitals and the CI eigenvector) multiplied by a
+two-body Pad\'e Jastrow $J=\exp\sum_{i<j}u(r_{ij})$, $u=A_{\rm spin}\,
+r/(1+\gamma r)$ (exact electron--electron cusp, hence a finite-variance local
+energy), sampled by Metropolis with the standard $E_L=V-\tfrac12\nabla^2\Psi/\Psi$
+estimator.  The build is validated by the mandatory gate---VMC of $\Psi_{\rm CI}$
+at $J=1$ reproduces the FCI energy to within statistics ($-8.0285\pm0.005$ vs
+$-8.0290$ for the $M=16$ basis).  The resulting rigorous variational energy is
+$\mathbf{-8.047\pm0.001}$~Ha ($\gamma\simeq1.5$, four independent seeds):\ $18$~mHa
+below the orbital ceiling and safely variational ($>-8.0705$).  A two-body Jastrow
+recovers $\approx19$~mHa of the $41$~mHa ceiling-to-exact gap; the remaining
+correlation---including the electron--electron--nucleus (three-body) content that
+the additive-F12 rich Hylleraas basis ($\{u,u^2,ut^2,t^2,s\}$) captured but a pure
+$u(r_{12})$ cannot---requires a nucleus-coupled three-body correlation term:\
+either a three-body Jastrow in the Monte-Carlo route, or, on the analytic side,
+an $r_{12}\,t^2$-type geminal evaluated by the same
+resolution-of-identity--free reductions of Paper~12, whose reference generality
+(they act on arbitrary pair-density products, so a many-determinant reference
+enters only through a coefficient tensor) was established by audit on
+2026-09-22.  The additive $-8.062$ estimate is thus a target a fuller trial
+function would approach, consistent with (not overturned by) the two-body
+variational upper bound $-8.047$;\ a two-body geminal on the analytic route is
+expected to land near the same value, supplying a deterministic cross-check of
+it rather than a lower number.  Two enabling
+pieces---a sparse connected-pair FCI and a float64 two-center ERI assembly, each
+validated energy-exact against the high-precision reference---made the $M>16$
+orbital ceiling, the cusp study, and the real-space VMC reachable (chronicled in
+\texttt{CHANGELOG.md} v5.15.18--22).
 
 \textbf{[MEASURED]} The banked $n_{\max}=4$ decider has now been run---a
 matrix-free (Davidson) direct-CI engine

@@ -1,5 +1,7 @@
 # Rigorous variational LiH F12 energy — feasibility + a rigorous re-characterization (2026-09-22)
 
+> **SUPERSEDED (audit B, later on 2026-09-22; CHANGELOG v5.15.23):** the path-(A) verdict "BLOCKED at the formula level" below was an ASSESSMENT, never tested. Line-by-line audit of `geovac/lih_r12ci`: every reduction takes a separable pair-density product as an argument; the reference lives only in coefficient lists (`DP_COMPS`, `KD_COMPS`, `COMPS`, the 2/4 pair-equivalence shortcuts, the closed-form 1s dressings, `E0_tot`); the "non-generalizing" 4-body ⟨f_ij f_kl⟩ is a K⁴ contraction of precomputable Coulomb matrices. **Verdict: UNDONE (tractable) for a small σ multi-det reference; UNDONE (large) for the full M=16+π FCI. Not a wall.** Path (B) VMC was executed (v5.15.22, −8.047). Plan: `debug/lih_marriage_build_plan.md`; state: `memory/lih_marriage_state_of_play.md`.
+
 **Task:** turn the additive-F12 LiH estimate (−8.062) into a RIGOROUS VARIATIONAL number,
 controlling double-counting. (Dispatched as a context-inheriting fork; verdict integrated by PM.)
 

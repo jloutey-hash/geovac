@@ -1,5 +1,7 @@
 # Sprint memo — the N=4 explicit-r12 "wall" diagnostic (is it RI-forced, or soft?)
 
+> **SUPERSEDED IN PART (audit 2026-09-22; CHANGELOG v5.15.23, `memory/lih_marriage_state_of_play.md`):** (1) the "kinetic-vector 4-body: UNTESTED" line below is STALE — settled in v5.15.13–14 (IBP identity exact, g_T validated 0.56%); (2) the termination bound `L ≤ 2·l_bridge` is the s-leaf special case — general bound `2(l_bridge + l_leaf)`, L=4 nonzero at 24σ for p-leaves; (3) "bridge addition theorem" is a VALIDATED REDUCTION (no derivation, no stated hypotheses), N≥5 conjectural. Read the memory file before building on this memo.
+
 **Date:** 2026-09-20/21. **Type:** diagnostic (no new energy). **Verdict:** the documented
 "N=4 = THE WALL, needs 4-body operators, no <=3-body reduction" is **SOFT for the scalar
 Coulomb bridging term** — that term is exact, RI-free, terminating, and reducible;

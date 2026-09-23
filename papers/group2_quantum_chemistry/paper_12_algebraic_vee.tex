@@ -1444,14 +1444,22 @@ correlation edges bridged by one Coulomb, four distinct electrons (only the
 two-body Coulomb can bridge disjoint pairs; the kinetic gradients are
 pair-local and $V_{ne}$ is one-body).  This term is nonetheless still
 \emph{exact}, still RI-free, and still \emph{reducible}:\ the bridging-Coulomb
-multipole sum terminates at $L\le 2\,l_{\rm bridge}$ (measured
-$s\!\to\!0,\,p\!\to\!2,\,d\!\to\!4$, bounded by the finite orbital angular
-content, not by the Coulomb), and the Legendre addition theorem factorizes the
+multipole sum terminates, bounded by the finite orbital angular content and not
+by the Coulomb:\ at $L\le 2\,l_{\rm bridge}$ for $s$-type leaves (measured
+$s\!\to\!0,\,p\!\to\!2,\,d\!\to\!4$), and in general at
+$L\le 2\,(l_{\rm bridge}+l_{\rm leaf})$---for $p$-type leaves the $L=4$ channel
+that the $s$-leaf bound would discard is measurably nonzero (a $24\sigma$
+Monte-Carlo detection, 2026-09-22), so the general bound must be used whenever
+the leaves are not isotropic;\ the sum remains finite, so the RI-free property
+is untouched---and the Legendre addition theorem factorizes the
 chain across the bridge into a finite $(L,M)$ contraction of vertex kernels---the
-chain analogue of the triangle contraction.  A native evaluation was validated
-against brute-force $12$-dimensional Monte-Carlo integration to $2\times10^{-4}$
-on the Be-relevant four-electron integral, including with the antisymmetric
-determinant (exchange).  As a proof of concept it was exercised inside a
+chain analogue of the triangle contraction.  A native evaluation (deterministic
+quadrature on the reduced form, not a closed formula) was validated against
+brute-force $12$-dimensional Monte-Carlo integration to $2\times10^{-4}$ on the
+Be-relevant four-electron integral ($2p$ bridge, $1s$ leaves), and, with the
+antisymmetric determinant (exchange chains), at $L=0$ with all-$s$ leaves
+(relative $9\times10^{-5}$ on a 2026-09-22 re-run;\ higher-$L$ exchange chains
+have not been run).  As a proof of concept it was exercised inside a
 minimal-basis Be $R_{12}$-CI, where a single short-range geminal captures
 $\sim\!19\%$ of the correlation energy variationally with the four-body term
 evaluated by this reduction.  The residual hard walls are on separate
@@ -1466,13 +1474,17 @@ resolution, not a spectroscopic $N=4$ claim.
 the RI-free discipline from a standalone integral into a genuine many-electron
 correlation calculation.  \emph{First}, the four-body bridge is not tied to the
 single-center atom:\ evaluated between two-center prolate densities it reduces
-by the \emph{same} construction---an isotropic one-dimensional leaf dressing
-followed by a two-center prolate Neumann Coulomb between the dressed
-densities---and reproduces an independent twelve-dimensional Monte-Carlo
-evaluation to $\sim\!2\times10^{-5}$ for \emph{every} azimuthal channel
-($\sigma$, $\pi$, $\delta$; the $\pi$ channel, which dominates valence
-correlation, included), with the self-Coulomb step anchored to the closed form
-$5\alpha/8$.  \emph{Second}, the same machinery evaluates the many-body matrix
+by the \emph{same} construction---for isotropic ($1s$-type) leaves a
+one-dimensional radial leaf dressing, in general the two-center Neumann
+potential of the leaf density, followed by a two-center prolate Neumann Coulomb
+between the dressed densities---with the self-Coulomb step anchored to the
+closed form $5\alpha/8$.  The $\sigma$ channel reproduces an independent
+twelve-dimensional Monte-Carlo evaluation to $1.5\times10^{-4}$ (the Monte-Carlo
+scatter, not the reduction, sets this figure);\ the $\pi$ and $\delta$ channels
+were validated to $\sim\!2\times10^{-5}$ on an azimuthally modulated model
+density $\rho_{1s}(1+b_1\cos\phi+b_2\cos2\phi)$, which exercises the general-$m$
+Neumann bridge but is not an $m\neq0$ orbital density;\ the assembled energies
+below are $\sigma$-only.  \emph{Second}, the same machinery evaluates the many-body matrix
 elements of an explicit-$r_{12}$ CI on a two-center four-electron reference
 ($\Phi_0=|1s_A^2\,1s_B^2|$, a proof-of-concept ionic reference, not a
 spectroscopic LiH) with no resolution of identity, each element checked against
@@ -1545,6 +1557,35 @@ two-center four-electron correlation energy---exactly the boundary the classic
 $F_{12}$ methods treat with a resolution of identity.  This remains a
 proof-of-concept (ionic single-$\zeta$ reference, not a spectroscopic LiH):\
 the demonstration is the RI-free reduction, not the correlation recovered.
+
+\textbf{[AUDITED 2026-09-22]} Two clarifications fix the standing of these
+reductions.  \emph{Tier.}  The bridge factorization is a \emph{validated
+reduction}, not a theorem:\ an exact re-expression of one operator term through
+three standard identities (the addition theorem or the Neumann expansion across
+the bridge, and the radial convolution of each leaf), stated here and checked
+numerically at the levels quoted, but never written out as a derivation, and
+carrying no stated hypotheses under the name ``bridge addition theorem'' that
+earlier sprint records attached to it.  Its extension beyond four electrons is
+conjectural.  Note that at the linear-in-$F$ ansatz every term of
+$\langle\Phi|FHF|\Phi\rangle$ carries at most three correlation edges, so no
+term is ever more than four-body-connected for \emph{any} $N$;\ what a larger
+system or a many-determinant reference changes is the \emph{density}---leaves
+that are no longer isotropic, a reference that no longer factorizes into
+closed-shell blocks---and that general path has so far been checked only as a
+Monte-Carlo--versus--Monte-Carlo factorization test at the $5\%$ level.  Every
+deterministic validation above uses the block-factorized closed-shell reference
+$|\Phi_0|^2=D(1,2)\,D(3,4)$, which is the enabling assumption of the
+spectator-integration bookkeeping.  \emph{Reference generality.}  Read at the
+level of the code rather than the proof-of-concept, the reductions are not tied
+to the two-orbital reference:\ the bridge, the triangle kernel, the two-center
+Neumann potential, and the integration-by-parts identities each act on a single
+separable product of one-electron pair densities supplied as an argument, and
+the density of any four-electron CI is a finite sum of such products, so the
+reference enters only through a coefficient tensor over pair indices.  The
+many-determinant extension is therefore unbuilt bookkeeping and a $K^4$
+contraction cost, not an obstruction---and running it on a multi-orbital
+reference is precisely the test that the general, non-isotropic-leaf path still
+lacks.
 
 Backing:\ tests \texttt{tests/test\_paper12\_r12.py} (the H$_2$ engine) and
 \texttt{tests/test\_lih\_r12ci.py} (the two-center LiH engine), and the reduction

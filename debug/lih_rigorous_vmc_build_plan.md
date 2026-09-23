@@ -1,5 +1,7 @@
 # Next-session build plan — the rigorous variational LiH energy (VMC-over-FCI)
 
+> **EXECUTED 2026-09-22 (v5.15.22): E = −8.04731 ± 0.00073 (BORDERLINE).** Two corrections from the follow-up audits (CHANGELOG v5.15.23): (1) the "(A) analytic F12-on-correlated-reference — DO NOT ATTEMPT" verdict below is WITHDRAWN — audit B found it untested and tractable (see `debug/lih_marriage_build_plan.md`); (2) step 5's "gradient-form kinetic local energy" is WRONG for a nodal fermionic Ψ_CI (infinite node variance, measured −7.807) — the standard local energy E_L = V − ½∇²Ψ/Ψ with the Jastrow Laplacian analytic is the correct estimator. Current state: `memory/lih_marriage_state_of_play.md`.
+
 **Written 2026-09-22 (v5.15.21), for the next session. PI-directed.** Self-contained so a fresh
 context can execute without relearning. Current-state rule applies: before starting, read the
 owning paper section (Paper 19 "Fixed-geometry energy versus well shape") + CHANGELOG since

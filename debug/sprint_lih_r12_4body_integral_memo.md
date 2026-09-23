@@ -1,5 +1,7 @@
 # Sprint memo — the LiH (two-center) N=4 explicit-r₁₂ 4-body integral gate (σ + π/δ)
 
+> **SUPERSEDED IN PART (audit 2026-09-22; CHANGELOG v5.15.23, `memory/lih_marriage_state_of_play.md`):** the "kinetic-vector UNTESTED" flag is STALE (settled v5.15.13–14); the π/δ validation here is on an azimuthally MODULATED MODEL density, not m≠0 orbitals (the assembled energies are σ-only); the σ figure 1.5e-4 is MC-scatter-limited; the 1-D leaf dressing is the isotropic-leaf special case (general leaves need the Neumann potential); the "bridge addition theorem" is a validated reduction, not a theorem. Read the memory file before building on this memo.
+
 **Date:** 2026-09-21. **Type:** diagnostic / integral validation (no energy). **Verdict:**
 the Be atomic N=4 **soft-wall** result (v5.15.8/9) **carries to two centers, for all azimuthal
 channels (σ, π, δ)**. The genuinely-4-body bridging integral of a two-center (LiH-geometry)
