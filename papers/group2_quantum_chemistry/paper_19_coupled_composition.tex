@@ -78,7 +78,13 @@ model crosses \emph{past} exact (over-binding), so the fixed-geometry
 error is not monotonically improvable either.  The $R_{\rm eq}$ drift is structural to the
 block decomposition ($+0.053$ then $+0.023$~bohr at the two available steps---
 decelerating, not a constant rate; $3\times$
-smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$), not numerical.
+smaller than PK's $+0.15$--$0.22$~bohr/$l_{\max}$), not numerical.  It is,
+however, not a physics wall:\ a companion all-electron prolate-spheroidal
+treatment with an $R$-accurate analytic atom-centered core resolves it to
+$R_{\rm eq} = +0.2\%$ (the corpus's best LiH geometry) and reaches a
+near-chemical energy ($\approx -8.062$~Ha, an additive-F12 estimate), locating the
+balanced drift specifically in the frozen/parameter-free core rather than in the
+coupled architecture itself.
 \end{abstract}
 
 \maketitle
@@ -806,6 +812,43 @@ of the two-center basis for a tight atomic core.  A clean prolate all-electron
 $R_{\rm eq}$ is thus a well-characterized \emph{numerical} target (a dedicated
 atom-centered core), not a physics obstruction (a measured result;\ rests on the
 Paper~12 prolate-CI engine).
+
+\emph{That dedicated atom-centered core has now been built---and it closes the
+geometry.}  The cure (``Route~C'') replaces the $R$-tied grid core with an
+\emph{analytic} atom-centered tight core---every core-involving integral in closed
+form, $R$-accurate to ${\sim}10^{-50}$ on the isolated Li$^{2+}$ $1s^2$ core, so
+the $0.36$~Ha grid artifact vanishes---with all four electrons active in the
+prolate natural geometry.  With the angular ($\pi$) polarization lever (the same
+lever decisive for HeH$^+$), the equilibrium bond length converges to experiment:\
+$R_{\rm eq} = +0.2\%$ ($\pi$-converged, $1\pi \equiv 2\pi$ shells), the best LiH
+geometry in the GeoVac corpus and a decisive improvement over both this balanced
+construction's $+8.8\%$ and the composed $l$-dependent-PK $5.3\%$ (Paper~17).  The
+outward drift of the mechanism above is thus \emph{not} a physics wall:\ once the
+core is variational \emph{and} numerically clean, the geometry is recovered
+(\texttt{tests/test\_prolate\_allelectron\_fci.py};\ chronicled in
+\texttt{CHANGELOG.md} v5.15.16;\ rests on the Paper~12 prolate-CI engine and its
+HeH$^+$ convergence control).
+
+\emph{The energy is near-chemical, by estimate.}  The pure-orbital prolate
+all-electron energy plateaus at $-8.032$~Ha ($38$~mHa above the exact $-8.0705$)
+once the angular and radial ladders saturate---a determinant-limited orbital
+ceiling, already the corpus's best LiH energy---because a finite orbital basis
+cannot represent the electron--electron cusp.  Adding that cusp through an
+additive-F12 correction (the $r_{12}$ energy an isolated He-like pair gains beyond
+a radial-converged orbital pair:\ $30.1$~mHa for the Li core, validated against
+exact He to $1.4$~mHa) brings the total to $\approx-8.062$~Ha ($\approx9$~mHa above
+exact, near-chemical), the smaller valence cusp being budget-consistent with the
+residual gap.  This last figure is an \emph{additive estimate, not a variational
+bound}:\ the explicit-$r_{12}$ machinery is welded to a two-orbital reference, so
+the fully rigorous variational number requires either an
+F12-on-correlated-reference re-derivation or a VMC-over-FCI build (scoped,
+deferred);\ a feasibility study confirms the estimate is defensible to a few mHa
+and that the rigorous value lands near it, not overturning it
+(\texttt{tests/test\_prolate\_route\_c\_lih.py};\ chronicled in
+\texttt{CHANGELOG.md} v5.15.18--20).  The two enabling pieces---a sparse
+connected-pair FCI and a float64 two-center ERI assembly, each validated
+energy-exact against the high-precision reference---made the $M>16$ orbital ceiling
+and the cusp study reachable.
 
 \textbf{[MEASURED]} The banked $n_{\max}=4$ decider has now been run---a
 matrix-free (Davidson) direct-CI engine

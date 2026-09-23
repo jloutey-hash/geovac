@@ -72,6 +72,19 @@ correction on a GOOD base (Route C's −8.012 reference, `debug/prolate_allelect
   (free-H⁻ 15.7 overshoots → bonded valence ~2× smaller) → ~−8.070. **Additive ESTIMATE, not
   variational** — the rigorous number needs the reference-generalization rewrite (deferred).
   **The marriage lands near-chemical.** See `debug/sprint_lih_additive_f12_memo.md`.
+  **RIGOROUS-ENERGY FEASIBILITY (2026-09-22, fork) = STOP (multi-session), −8.062 CONFIRMED
+  sound.** Both rigorous paths are multi-session: (A) analytic F12-on-correlated-reference is
+  BLOCKED at the formula level (lih_r12ci welded to the 2-MO |1s_A²1s_B²| reference — P/c pair-
+  densities as module constants, E0 hardcoded; generalizing = F12-on-MRCI over the FCI's 1–4-
+  particle RDMs; the ⟨f_ij f_kl⟩ 4-body over an arbitrary MO basis is the non-generalizing
+  piece); (B) VMC-over-FCI is tractable but from-scratch (needs arbitrary-point orbital
+  evaluator+gradients, FCI eigenvector, multi-det Slater, Jastrow, Metropolis+opt) — the
+  RECOMMENDED path for the rigorous number. **BUT the fork CONFIRMED −8.062 is defensible** (a
+  pair approximation with rigorous per-pair variational cusp components; core 30.1 mHa converged
+  ±3, He control validated to 1.4 mHa; cusp⊥radial → small double-counting on the dominant core
+  pair). The true variational number lands NEAR −8.062, won't overturn it. **So −8.062 stands as
+  a well-founded near-chemical estimate; the fully-rigorous VMC-over-FCI number is a scoped
+  future build.** See `debug/sprint_lih_rigorous_f12_memo.md`.
 
 **DO NOT RE-DERIVE (closed this session):** the geometry (Route C solved it, +0.2%);
 core BREATHING (Phase 0, inert −0.06pp) and core dipole POLARIZATION (Phase 1, −0.07pp,

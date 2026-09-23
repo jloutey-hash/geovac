@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.21] - 2026-09-22
+
+**LiH arc lock-down: Paper 19 sharpened with the Route C resolution, tests/ backing added, and the rigorous-variational-energy question answered (STOP — multi-session — with the −8.062 estimate confirmed sound).** The final lock-down of the v5.15.16–20 LiH arc (PI-directed). No new physics; documentation + test backing + a feasibility verdict.
+
+### Paper 19 sharpened (`papers/group2_quantum_chemistry/paper_19_coupled_composition.tex`)
+- Added the **Route C resolution** to the R_eq-drift discussion (right where the paper concluded "a clean prolate all-electron R_eq is a well-characterized *numerical* target ... not a physics obstruction"): the analytic atom-centered core cures the grid wall → **R_eq +0.2%** (π-converged, corpus-best LiH geometry, beats balanced 8.8% / composed 5.3%); energy **−8.032 orbital ceiling + additive-F12 core cusp (30.1 mHa) → −8.062 near-chemical**, explicitly labeled an ESTIMATE (not variational; rigorous route scoped). Abstract's drift sentence updated (summary-surface rule). Cites `tests/` + CHANGELOG, not `debug/` (§9). pdflatex clean (0 errors).
+
+### tests/ backing (`tests/test_prolate_route_c_lih.py`, 4 guards, fire-tested)
+- (1) sparse FCI == dense FCI bit-exact (dE 1e-13); (2) He-like cusp machinery reproduces known He exact to <2 mHa; (3) Li core cusp ∈ [25,35] mHa (the load-bearing 30.1); (4) @slow: float64 ERI + sparse FCI reproduces the banked mpf LiH energy to <50 µHa. All pass (the @slow gate in 62s). Backs the Paper 19 energy claims.
+
+### Rigorous variational energy — feasibility verdict = STOP (dispatched as a context-inheriting fork)
+- Both rigorous paths are multi-session: (A) analytic F12-on-correlated-reference is BLOCKED at the formula level (`geovac/lih_r12ci` welded to the 2-MO reference; generalizing = F12-on-MRCI); (B) VMC-over-FCI is tractable but from-scratch (the RECOMMENDED path). **BUT the −8.062 estimate is CONFIRMED defensible** — a pair approximation with rigorous per-pair variational cusp components (core 30.1 mHa converged ±3; He control validated to 1.4 mHa; cusp⊥radial → small double-counting). The true variational number lands NEAR −8.062, won't overturn it. Memo: `debug/sprint_lih_rigorous_f12_memo.md`.
+
+### Note
+Patch bump. Paper + tests + docs; no `geovac/` production code, no new physics. Dependency recorded in `docs/claim_test_matrix.md` (Route C rests on Paper 12's prolate engine + HeH⁺ control). Paper 19 PDF not rebuilt (deferred to release/Zenodo, per de-versioning convention). Repo-health WARN (pre-existing): CLAUDE.md >150 KB, debug/ >600 files.
+
 ## [v5.15.20] - 2026-09-22
 
 **LiH energy lands near-chemical: the orbital lever exhausts at −8.032, and an additive-F12 core cusp brings it to −8.062 (estimate).** Applying v5.15.19's fast engine to the science (step 3): push core+valence enrichment past the (now-unblocked) dense M=16 wall, then add the r₁₂ cusp the orbital basis structurally cannot reach. All `debug/` PoC/estimate. Memos: `debug/sprint_lih_additive_f12_memo.md`, `debug/sprint_float64_productionization_memo.md`.

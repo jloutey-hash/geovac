@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.15.20 (September 22, 2026)
+**Version:** v5.15.21 (September 22, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The discrete graph Laplacian is a dimensionless, scale-invariant topology (unit S3) that is mathematically equivalent to the Schrodinger equation via Fock's 1935 conformal projection. This equivalence is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **LiH arc lock-down — Paper 19 sharpened + tests + rigorous-energy verdict (2026-09-22, v5.15.21):** Paper 19 gains the Route C resolution (R_eq +0.2% cures the balanced 8.8% drift; energy −8.062 near-chemical additive-F12 estimate); `tests/test_prolate_route_c_lih.py` (4 fire-tested guards) backs the energy claims; rigorous variational energy = **STOP** (multi-session by both paths — F12-on-MRCI re-derivation or VMC-over-FCI) but **−8.062 CONFIRMED defensible** (context-inheriting fork feasibility study; the true variational value lands near it). See `debug/sprint_lih_rigorous_f12_memo.md`.
 - **LiH energy near-chemical: orbital ceiling −8.032 + additive-F12 core cusp → −8.062 (2026-09-22, v5.15.20):** M>16 push (fast engine) exhausts the orbital lever at **−8.032** (new corpus-best LiH energy; +4th core/bond/π each 1–3 mHa); the geminal engine (`geovac/lih_r12ci`) is welded to a crude 2-MO reference so instead the additive-F12 core cusp (30.1 mHa, He-like 2e, `debug/lih_additive_f12.py`) → **−8.0618 (−8.2 mHa, near-chemical)**, valence budget-pinned ~8 mHa → ~−8.070. ESTIMATE not variational; rigorous marriage (reference generalization) dispatched. See `debug/sprint_lih_additive_f12_memo.md`.
 - **Route C engine productionization — sparse FCI + float64 ERI (2026-09-22, v5.15.19):** the dense nd² FCI → sparse connected-pair + Lanczos (`debug/fci_fast.py`, bit-exact, 280s→~10s at M=16) **UNBLOCKS M>16**; float64 ERI assembly ~2× (`debug/prolate_float_eri.py`; mpf seeds cap it). Combined M=16 1079s→366s (3×), −8.029 preserved to 5 µHa. dps-lowering is a dead end (energy bit-identical 60→20). Remaining ERI walls: mpf seeds (research) + eta moments (float64-able, next lever). See `debug/sprint_float64_productionization_memo.md`.
 - **LiH energy: core-orbital enrichment banks the cheap half (2026-09-22, v5.15.18):** ceiling diagnostic — the r₁₂ geminal caps at ~50% of the core-core deficit (cusp half); the radial half needs a 2nd core ORBITAL, not a geminal. Adding tight core exponents banks the pure-orbital LiH energy **−8.012 → −8.029** (41 mHa from exact), beating Route C by 17 mHa at the SAME M=16 budget. Roadmap: −8.029 + geminal cusp (~30 mHa) → ~−8.06 near-chemical → break M=16 (float64/frugal solver) → chemical. See `debug/sprint_lih_r12_ceiling_diagnostic_memo.md`.
@@ -250,7 +251,7 @@ it is a PI call.
 | PsH | 4.1% | Level 3, sign-flipped charge | 13 |
 | H₂⁺ | machine precision (reference-limited) | Spectral Laguerre | 11 |
 | H₂ | 99.97% D_e (0.053 mHa) explicit-r₁₂ CI (exact integrals); 99.81% (0.32 mHa) re-based CI α=1.40 | Paper 12 explicit-r₁₂ / re-based prolate CI; 96.0% via Level 4 (Paper 15) | 12/15 |
-| LiH | R_eq 5.3% | Composed, l-dependent PK, l_max=2 | 17 |
+| LiH | R_eq +0.2% (best); energy −8.062 near-chem (est.) | Route C prolate all-electron, analytic core (geom); +additive-F12 cusp (energy). Composed l-dep-PK = 5.3% | 19/17 |
 | BeH₂ | R_eq 11.7% | Composed, full 1-RDM exchange | 17 |
 | H₂O | R_eq 19.4% | Composed, 5-block, zero parameters | 17 |
 | LiH (4N) | R_eq 63.5% | Full 4e mol-frame, PK-free | 17 |
