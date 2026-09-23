@@ -55,6 +55,23 @@ correction on a GOOD base (Route C's −8.012 reference, `debug/prolate_allelect
   (~30) is dense-M=16-limited (needs M>16). Next (PI call): (2) F12 geminal build on the
   −8.029 base for the cusp remainder; and/or (1b) float64 productionization to break M=16 +
   make it a sweep. See `debug/sprint_lih_r12_ceiling_diagnostic_memo.md`.
+  **PRODUCTIONIZATION DONE (v5.15.19, `debug/{prolate_float_eri,fci_fast}.py`):** sparse FCI
+  (bit-exact, 280s→~10s at M=16, UNBLOCKS M>16) + float64 ERI (energy-exact ~5 µHa, ~2×) →
+  combined 3× at M=16. **M>16 PUSH (`push` mode, `debug/data/lih_push_m16plus.log`):** the
+  orbital lever is NEAR-EXHAUSTED — M=16 −8.029 → M=20 **−8.03170** (+4th core/bond-J3/π-J2 each
+  only 1–3 mHa, diminishing). **Pure-orbital LiH ceiling ≈ −8.032 (38 mHa from exact) = new
+  corpus best LiH energy** (vs Route C −8.012). The remaining ~38 mHa is the CUSP (orbitals
+  can't reach it — ceiling-diagnostic prediction confirmed). **→ the r₁₂ geminal (item 1) is
+  the ONLY path to chemical accuracy, target ~30 mHa cusp on the −8.032 base.**
+  **ADDITIVE-F12 CAPSTONE (2026-09-22, `debug/lih_additive_f12.py`):** the geminal engine
+  (`geovac/lih_r12ci`) is welded to a crude 2-MO ionic reference (E0=−7.888 hardcoded) → can't
+  sit on −8.032 without a reference rewrite. So the STANDARD F12 move: add the r₁₂ CUSP
+  correction (He-like 2e machinery) to the orbital ceiling. Core-core cusp = **30.1 mHa** (Li²⁺
+  Z=3, solid/transferable; He control 26.5 matches known Hylleraas). **−8.032 + core cusp =
+  −8.0618 (−8.2 mHa from exact = NEAR-CHEMICAL);** budget pins the valence cusp at ~8 mHa
+  (free-H⁻ 15.7 overshoots → bonded valence ~2× smaller) → ~−8.070. **Additive ESTIMATE, not
+  variational** — the rigorous number needs the reference-generalization rewrite (deferred).
+  **The marriage lands near-chemical.** See `debug/sprint_lih_additive_f12_memo.md`.
 
 **DO NOT RE-DERIVE (closed this session):** the geometry (Route C solved it, +0.2%);
 core BREATHING (Phase 0, inert −0.06pp) and core dipole POLARIZATION (Phase 1, −0.07pp,

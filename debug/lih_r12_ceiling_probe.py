@@ -104,14 +104,15 @@ SETS = [
     ("BOTH  {u,t2}",                 ['u', 't2']),
     ("BOTH  {u,t2,s,u2,ut2}",        ['u', 't2', 's', 'u2', 'ut2']),
 ]
-_validate()
-for name, (Z, zeta, exact) in CASES.items():
-    E0, _, _ = energy(Z, zeta, ['u'])
-    corr = E0 - exact
-    print("=" * 76)
-    print(f"{name}: ref E0={E0:.5f} exact={exact} corr={corr*1e3:.1f} mHa")
-    print("=" * 76)
-    for label, ks in SETS:
-        _, ER, cond = energy(Z, zeta, ks)
-        print(f"  {label:26s} E={ER:.5f}  rec={ (E0-ER)*1e3:6.1f} mHa  {100*(E0-ER)/corr:5.0f}%  cond={cond:.0e}")
-    print()
+if __name__ == "__main__":
+    _validate()
+    for name, (Z, zeta, exact) in CASES.items():
+        E0, _, _ = energy(Z, zeta, ['u'])
+        corr = E0 - exact
+        print("=" * 76)
+        print(f"{name}: ref E0={E0:.5f} exact={exact} corr={corr*1e3:.1f} mHa")
+        print("=" * 76)
+        for label, ks in SETS:
+            _, ER, cond = energy(Z, zeta, ks)
+            print(f"  {label:26s} E={ER:.5f}  rec={ (E0-ER)*1e3:6.1f} mHa  {100*(E0-ER)/corr:5.0f}%  cond={cond:.0e}")
+        print()

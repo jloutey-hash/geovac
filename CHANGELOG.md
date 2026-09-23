@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.20] - 2026-09-22
+
+**LiH energy lands near-chemical: the orbital lever exhausts at −8.032, and an additive-F12 core cusp brings it to −8.062 (estimate).** Applying v5.15.19's fast engine to the science (step 3): push core+valence enrichment past the (now-unblocked) dense M=16 wall, then add the r₁₂ cusp the orbital basis structurally cannot reach. All `debug/` PoC/estimate. Memos: `debug/sprint_lih_additive_f12_memo.md`, `debug/sprint_float64_productionization_memo.md`.
+
+### M>16 push — the orbital lever is exhausted (`debug/prolate_float_eri.py push`, `debug/data/lih_push_m16plus.log`)
+- With the sparse FCI unblocking M>16, adding a 4th core / more bond-radial / more π out to M=20 buys only ~3 mHa: **M=16 −8.02905 → M=20 −8.03170** (each lever 1–3 mHa, diminishing; cond healthy, all vectors kept). **Pure-orbital LiH ceiling ≈ −8.032 (38 mHa from exact) = new corpus best LiH energy** (vs Route C −8.012). The remaining ~38 mHa is the CUSP — orbitals can't reach it (ceiling-diagnostic prediction confirmed).
+
+### Additive F12 — near-chemical (`debug/lih_additive_f12.py`)
+- The geminal engine (`geovac/lih_r12ci`) is welded to a crude 2-MO ionic reference (E0=−7.888 hardcoded) → can't sit on −8.032 without a reference rewrite. So the standard F12 move: add the r₁₂ cusp correction (He-like 2e machinery, `debug/lih_r12_ceiling_probe.py`). Per-pair cusp = E(radial {t²,s}) − E(radial+r₁₂ {u,t²,s,u²,ut²}): **Li core (Z=3) 30.1 mHa** (solid/transferable), H⁻ valence (Z=1) 15.7 mHa (upper bound), He (Z=2) 26.5 mHa (matches known Hylleraas ✓).
+- **−8.032 + core cusp = −8.0618 (−8.2 mHa from exact = NEAR-CHEMICAL).** Budget: exact−orbital gap = 38.3 mHa; core cusp 30.1 → valence/core-valence cusp = ~8 mHa (the free-H⁻ 15.7 overshoots below exact → bonded valence ~2× smaller). Full additive → ~−8.070.
+
+### The arc, closed near-chemical
+Geometry R_eq +0.2% (corpus best) · orbital energy −8.012 → −8.029 (core enrichment) → −8.032 (M>16 ceiling) · **+ r₁₂ core cusp (additive F12) → −8.062 (near-chemical) → ~−8.070 with valence.** The marriage works.
+
+### Honest scope / next
+- **Additive-F12 ESTIMATE, not variational**: −8.062 solid (core cusp measured/transferable); the last ~8 mHa budget-pinned. The rigorous variational number needs the geminal engine's reference generalized from the 2-MO ionic determinant to the −8.032 correlated base (F12-on-correlated-reference) — dispatched next as a focused build.
+
+### Note
+Patch bump. All `debug/` PoC/estimate — nothing in `geovac/` or papers. Owed before any paper edit (per §9 claim→artifact / cite-permanent-record rules): `tests/` regression for the +0.2% geometry / near-chemical energy, then Paper 19 sharpen (geometry + mechanism supersede the 8.8% balanced drift). Repo-health WARN (pre-existing): CLAUDE.md >150 KB, debug/ >600 files.
+
 ## [v5.15.19] - 2026-09-22
 
 **Route C engine productionization (step 2 of the 3→2→1 plan): a sparse FCI (~14×, bit-exact) that UNBLOCKS M>16, plus a float64 ERI assembly (~2×) — combined ~3× at M=16, energy preserved to 5 µHa.** PI-directed (after v5.15.18 banked the core-enriched −8.029). Goal: turn the minutes/point mpf engine into a sweep so core enrichment can push past the dense M=16 wall toward ~−8.04. All `debug/` PoC (validated tooling, not yet promoted to `geovac/`). Memo: `debug/sprint_float64_productionization_memo.md`.

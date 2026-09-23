@@ -231,9 +231,44 @@ def validate():
               f"[{dt:.0f}s float vs {t_mpf}s mpf = {t_mpf/max(dt,0.1):.0f}x]", flush=True)
 
 
+def push():
+    """#3: with M>16 unblocked by the sparse FCI, push core+valence enrichment past the
+    M=16 −8.029 toward the orbital ceiling (~−8.04; the remaining ~30 mHa cusp is the
+    geminal's job).  Fast engine (float64 ERI + sparse FCI)."""
+    import prolate_energy_ladder as L
+    import lih_core2exp_probe as P
+    import fci_fast
+    L.build_eri_tensor_m = build_eri_tensor_m_f
+    L.fci_energy = fci_fast.fci_energy_fast
+    print("=" * 82)
+    print("PUSH M>16: core+valence enrichment past -8.029 (fast engine; exact -8.070, orbital ceiling ~-8.04)")
+    print("=" * 82, flush=True)
+    # (label, Jb, Lb, npi, Jpi, Lpi, core2)
+    configs = [
+        ("M16 ref  3core bond(2,1)+1pi(1,0)", 2, 1, 1, 1, 0, [4.5, 1.6]),
+        ("+4th core (8.0)                   ", 2, 1, 1, 1, 0, [4.5, 1.6, 8.0]),
+        ("+bond radial J=3                  ", 3, 1, 1, 1, 0, [4.5, 1.6]),
+        ("+pi radial Jpi=2                  ", 2, 1, 1, 2, 0, [4.5, 1.6]),
+        ("+both (bondJ3 + piJ2)             ", 3, 1, 1, 2, 0, [4.5, 1.6]),
+    ]
+    best = 0.0
+    for (lab, Jb, Lb, npi, Jpi, Lpi, core2) in configs:
+        Et, M, Mk, nd, cond, dt = P.run(Jb=Jb, Lb=Lb, npi=npi, Jpi=Jpi, Lpi=Lpi,
+                                        alpha=1.0, core2=core2)
+        best = min(best, Et)
+        print(f"  {lab}: M={M:2d} kept={Mk:2d} nd={nd:5d} cond={cond:.1e}  E={Et:.5f}  "
+              f"err={(-8.070-Et)*1e3:+.1f}mHa  d(-8.029)={(Et+8.02905)*1e3:+.1f}mHa  [{dt:.0f}s]",
+              flush=True)
+    print(f"\n  best pure-orbital LiH E = {best:.5f}  ({(-8.070-best)*1e3:+.1f} mHa from exact; "
+          f"remaining ~cusp for the geminal)", flush=True)
+
+
 if __name__ == "__main__":
     import sys
-    if len(sys.argv) > 1 and sys.argv[1] == "validate":
+    arg = sys.argv[1] if len(sys.argv) > 1 else "gate"
+    if arg == "validate":
         validate()
+    elif arg == "push":
+        push()
     else:
         gate()
