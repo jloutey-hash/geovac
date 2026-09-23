@@ -4,6 +4,13 @@
 
 ## ===== RESUME HERE — HANDOFF for a fresh context (2026-09-22, v5.15.17) =====
 
+> **UPDATE 2026-09-22 (v5.15.21): the r₁₂-arc handoff below is DONE.** The LiH energy arc is
+> complete through v5.15.21 — geometry +0.2% (solved), energy −8.032 orbital ceiling + −8.062
+> near-chemical (additive-F12 estimate, fork-confirmed defensible), Paper 19 sharpened,
+> tests/ backing added, all checkpointed (v5.15.18–21, not pushed). **CURRENT next task = the
+> rigorous VMC-over-FCI variational energy: see `debug/lih_rigorous_vmc_build_plan.md`.**
+
+
 **WHERE WE ARE.** Route C is COMPLETE on geometry. The from-scratch prolate all-electron
 LiH **bond length is at experiment: R_eq = +0.2%, π-converged** (v5.15.16, tagged; best in
 the corpus — beats composed 5.3%, balanced 8.8%, frozen-core +5.5%). The **energy** is
