@@ -91,16 +91,33 @@ def f_dress_iso(s_vals, zeta):
     return f0 @ (radial * _wrr)
 
 
-Psi_aa = f_dress_iso(RA.ravel(), ZA).reshape(RA.shape)   # f-dressing of |1s_A|^2 (fn of r_A)
-Psi_bb = f_dress_iso(RB.ravel(), ZB).reshape(RB.shape)   # f-dressing of |1s_B|^2 (fn of r_B)
+# Psi_aa, Psi_bb and the AO 2-body f-integrals are built LAZILY on first attribute access
+# (PEP 562 module __getattr__; 2026-09-22): the eager build cost ~60 s at every package import
+# and is consumed only by this file's __main__ and kernels.py's __main__.  Numerics unchanged.
+_STAGE1_NAMES = ('Psi_aa', 'Psi_bb', 'V_aaaa', 'V_bbbb', 'V_aabb', 'V_aaab', 'V_bbab')
+_STAGE1 = {}
 
-# ---- AO 2-body f-integrals ------------------------------------------------- #
-# <p q|f|r s> = INT rho_{pr}(1) rho_{qs}(2) f ; pair densities aa,bb,ab. Dress the isotropic one.
-V_aaaa = _grid_int(rho_A * Psi_aa)                        # (aa|f|aa)
-V_bbbb = _grid_int(rho_B * Psi_bb)                        # (bb|f|bb)
-V_aabb = _grid_int(rho_A * Psi_bb)                        # (aa|f|bb) = INT rho_A Psi_bb
-V_aaab = _grid_int(rho_ab * Psi_aa)                       # (aa|f|ab) = INT rho_ab Psi_aa
-V_bbab = _grid_int(rho_ab * Psi_bb)                       # (bb|f|ab) = INT rho_ab Psi_bb
+
+def _stage1() -> dict:
+    """Stage-1 f-dressings + AO 2-body f-integrals (cached on first call).
+    <p q|f|r s> = INT rho_{pr}(1) rho_{qs}(2) f ; pair densities aa,bb,ab. Dress the isotropic one."""
+    if not _STAGE1:
+        Psi_aa = f_dress_iso(RA.ravel(), ZA).reshape(RA.shape)   # f-dressing of |1s_A|^2 (fn of r_A)
+        Psi_bb = f_dress_iso(RB.ravel(), ZB).reshape(RB.shape)   # f-dressing of |1s_B|^2 (fn of r_B)
+        _STAGE1.update(
+            Psi_aa=Psi_aa, Psi_bb=Psi_bb,
+            V_aaaa=_grid_int(rho_A * Psi_aa),                    # (aa|f|aa)
+            V_bbbb=_grid_int(rho_B * Psi_bb),                    # (bb|f|bb)
+            V_aabb=_grid_int(rho_A * Psi_bb),                    # (aa|f|bb) = INT rho_A Psi_bb
+            V_aaab=_grid_int(rho_ab * Psi_aa),                   # (aa|f|ab) = INT rho_ab Psi_aa
+            V_bbab=_grid_int(rho_ab * Psi_bb))                   # (bb|f|ab) = INT rho_ab Psi_bb
+    return _STAGE1
+
+
+def __getattr__(name: str):
+    if name in _STAGE1_NAMES:
+        return _stage1()[name]
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 def mc_ff(sample1, sample2, n=24_000_000, batch=3_000_000):
@@ -273,6 +290,7 @@ def stage2_E0(NXI=400, NETA=160, LMAX=44, mc_check=True):
 
 
 if __name__ == "__main__":
+    globals().update(_stage1())        # Psi_aa, Psi_bb, V_aaaa..V_bbab (lazy Stage-1 build)
     print(f"[model] Z_A={Z_A} Z_B={Z_B} R={R}  za={ZA} zb={ZB}  <a|b>={S_AB:.6f}")
     print(f"[grid ] norm(rho_A)={_grid_int(rho_A):.6f}  norm(rho_B)={_grid_int(rho_B):.6f} (exact 1)")
 

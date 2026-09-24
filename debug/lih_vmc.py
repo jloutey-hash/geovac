@@ -924,6 +924,136 @@ class JastrowMulti:
 
 
 # ===========================================================================
+# Step 4b (Phase 3, marriage G2): LINEAR geminal "Jastrow"  Psi_T = (1 + c(F - Fbar)) Psi_CI
+#   F = sum_{i<j} f(r_ij), SAME geminal f as the analytic explicit-r12 2x2 (spin-independent).
+#   This is the real-space form of the analytic trial function; c and Fbar come from the
+#   analytic 2x2 (debug/lih_marriage_phase2.py).  NOT an exp-Jastrow: g = 1 + c(F - Fbar) is a
+#   plain multiplicative factor, so the local energy uses its OWN standard-form estimator
+#   (local_energy_linear), never the exp-Jastrow path (local_energy_analytic).
+# ===========================================================================
+class LinearGeminalJastrow:
+    """g(r) = 1 + c (F(r) - Fbar),  F = sum_{i<j} f(r_ij),  f = exp(-gamma r) ('exp') or
+    r exp(-gamma r) ('linexp').  Provides the multiplier g, grad_i g = c grad_i F, and
+    sum_i lap_i g = c sum_i lap_i F (all real; F is spin-independent, all 6 pairs)."""
+
+    def __init__(self, geminal: str, gamma: float, c: float, Fbar: float, na: int, nb: int):
+        self.geminal = geminal; self.gamma = float(gamma); self.c = float(c)
+        self.Fbar = float(Fbar); self.na = na; self.nb = nb; self.Ne = na + nb
+
+    def _f_fp_flap(self, d: np.ndarray):
+        """f(d), f'(d), and the radial Laplacian lap f = f'' + 2 f'/d (per pair distance d)."""
+        g = self.gamma; e = np.exp(-g * d)
+        if self.geminal == "exp":
+            f = e; fp = -g * e; fpp = g * g * e
+        elif self.geminal == "linexp":
+            f = d * e; fp = (1.0 - g * d) * e; fpp = (-2.0 * g + g * g * d) * e
+        else:
+            raise ValueError(self.geminal)
+        d_safe = np.where(d < 1e-12, 1e-12, d)
+        return f, fp, fpp + 2.0 * fp / d_safe
+
+    def F(self, r: np.ndarray) -> np.ndarray:
+        """F = sum_{i<j} f(r_ij).  r:(Nw,Ne,3) -> (Nw,)."""
+        Nw, Ne, _ = r.shape
+        tot = np.zeros(Nw)
+        for i in range(Ne):
+            for j in range(i + 1, Ne):
+                d = np.linalg.norm(r[:, i] - r[:, j], axis=-1)
+                f, _, _ = self._f_fp_flap(d)
+                tot += f
+        return tot
+
+    def mult(self, r: np.ndarray) -> np.ndarray:
+        """g = 1 + c (F - Fbar).  -> (Nw,) real."""
+        return 1.0 + self.c * (self.F(r) - self.Fbar)
+
+    def grad_mult(self, r: np.ndarray) -> np.ndarray:
+        """grad_i g = c grad_i F = c sum_{j!=i} f'(r_ij) (r_i - r_j)/r_ij.  -> (Nw,Ne,3) real."""
+        Nw, Ne, _ = r.shape
+        G = np.zeros((Nw, Ne, 3))
+        for i in range(Ne):
+            for j in range(Ne):
+                if i == j:
+                    continue
+                dvec = r[:, i] - r[:, j]
+                d = np.linalg.norm(dvec, axis=-1)
+                d = np.where(d < 1e-12, 1e-12, d)
+                _, fp, _ = self._f_fp_flap(d)
+                G[:, i] += (fp / d)[:, None] * dvec
+        return self.c * G
+
+    def lap_mult(self, r: np.ndarray) -> np.ndarray:
+        """sum_i lap_i g = c sum_i lap_i F = c sum_{i<j} 2 (f'' + 2 f'/r_ij).  -> (Nw,) real."""
+        Nw, Ne, _ = r.shape
+        tot = np.zeros(Nw)
+        for i in range(Ne):
+            for j in range(i + 1, Ne):
+                d = np.linalg.norm(r[:, i] - r[:, j], axis=-1)
+                _, _, flap = self._f_fp_flap(d)
+                tot += 2.0 * flap                    # both electrons of the pair
+        return self.c * tot
+
+
+def local_energy_linear(wf, r, linjas: "LinearGeminalJastrow"):
+    """STANDARD local energy for Psi_T = g Psi_CI, g = 1 + c(F - Fbar):
+        E_L = V - 1/2 [ lap(g)/g + 2 (grad g/g).(grad Psi_CI/Psi_CI) + lap(Psi_CI)/Psi_CI ].
+    Analytic Psi_CI Laplacian (psi_ci_full).  Returns (E_L real(Nw,), Psi_T(Nw,) complex)."""
+    psi, gpsi, lpsi = psi_ci_full(wf, r)
+    gmult = linjas.mult(r)                                  # (Nw,) real
+    grad_g = linjas.grad_mult(r)                            # (Nw,Ne,3) real
+    lap_g = linjas.lap_mult(r)                              # (Nw,) real
+    lap_ci_over_psi = np.sum(lpsi, axis=1) / psi            # (Nw,) complex
+    glnpsi = gpsi / psi[:, None, None]                      # (Nw,Ne,3) complex
+    term_g = lap_g / gmult                                  # lap(g)/g
+    cross = 2.0 * np.sum(grad_g * glnpsi, axis=(1, 2)) / gmult
+    lap_tot = term_g + cross + lap_ci_over_psi
+    V = potential(wf, r)
+    return (V - 0.5 * lap_tot).real, psi * gmult
+
+
+def vmc_linear(wf, linjas: "LinearGeminalJastrow", nwalk=2000, nsweep=4000, nburn=800,
+               step=0.45, seed=0, thin=5, adapt=True, verbose=True):
+    """Metropolis on |Psi_T|^2 = |g|^2 |Psi_CI|^2 with the standard local_energy_linear.
+    Mirrors vmc() but for the linear multiplier (not an exp Jastrow).  Returns (E,err,accept)."""
+    rng = np.random.default_rng(seed)
+    Ne = wf.na + wf.nb
+    r = _init_walkers(wf, nwalk, rng)
+
+    def logp(rr):
+        psi = psi_ci_val(wf, rr)
+        g = linjas.mult(rr)
+        return 2.0 * np.log(np.abs(psi) + 1e-300) + 2.0 * np.log(np.abs(g) + 1e-300)
+
+    lp = logp(r)
+    acc = 0; ntry = 0; est = []; sd = step
+    for sweep in range(nsweep):
+        for i in range(Ne):
+            rprop = r.copy()
+            rprop[:, i] += rng.normal(0, sd, size=(nwalk, 3))
+            lpp = logp(rprop)
+            a = np.log(rng.uniform(size=nwalk)) < (lpp - lp)
+            r[a] = rprop[a]; lp[a] = lpp[a]
+            acc += int(a.sum()); ntry += nwalk
+        if adapt and sweep < nburn and sweep % 50 == 49:
+            ar = acc / max(ntry, 1)
+            if ar > 0.6: sd *= 1.1
+            elif ar < 0.4: sd /= 1.1
+            acc = ntry = 0
+        if sweep >= nburn and (sweep - nburn) % thin == 0:
+            EL, _ = local_energy_linear(wf, r, linjas)
+            est.append(EL.copy())
+    est = np.array(est)
+    per_sweep = est.mean(axis=1)
+    E_mean = per_sweep.mean()
+    E_err = per_sweep.std(ddof=1) / np.sqrt(len(per_sweep))
+    accept = acc / max(ntry, 1) if ntry else 0.0
+    if verbose:
+        print(f"    VMC(linear): E={E_mean:.5f} +/- {E_err:.5f}  (c={linjas.c:+.4f} "
+              f"nsamp={len(per_sweep)} nwalk={nwalk} step={sd:.2f} acc={accept:.2f})")
+    return E_mean, E_err, accept
+
+
+# ===========================================================================
 # Step 5+6: Metropolis VMC with the gradient-form (bounded) kinetic local energy
 # ===========================================================================
 def psi_ci_val(wf, r):

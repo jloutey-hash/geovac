@@ -24,6 +24,7 @@ Run from debug/:  python lih_r12ci_gVee_analytic.py
 import numpy as np
 from numpy.polynomial.legendre import leggauss
 
+from . import kernels as _KG                                   # USE_EXACT_NEUMANN keys the cache
 from .kernels import (
     a, GAM, grid_int, dens, build_kernel, rho_cyl_f, zc_f, geo_f)
 from .hVee import (
@@ -58,7 +59,7 @@ _NEU_CACHE = {}
 
 
 def psi_coul(h):
-    key = h.tobytes()
+    key = (h.tobytes(), bool(_KG.USE_EXACT_NEUMANN))          # legacy / exact cached separately
     if key not in _NEU_CACHE:
         _NEU_CACHE[key] = neumann_potential(h.reshape(NXI, NETA)).reshape(-1)
     return _NEU_CACHE[key]

@@ -33,6 +33,7 @@ from numpy.polynomial.legendre import leggauss
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 from scipy.special import lpmn, lqmn  # noqa: E402
 
+from . import kernels as _KG  # noqa: E402                    # USE_EXACT_NEUMANN read at call time
 from .kernels import (   # noqa: E402
     Xg, Eg, geo_f, a, GAM, grid_int, rho_cyl_f, zc_f,
     XI as XI1D, ETA as ETA1D, WXI, WETA)
@@ -89,7 +90,13 @@ def build_kernel_m(gam, m, nphi=48):
 # and  E_m[A,B] = sum_{xi,eta} wxi weta JAC A * V^{(m)}_B  (grid2 contraction, no extra 2pi a^3).
 # GATE: E_0[A,B] == grid_int(A * neumann_potential(B)) = INT A B / r12  (the m=0 machinery).
 # --------------------------------------------------------------------------- #
-def coul_mode_potential(B2d, m):
+def coul_mode_potential(B2d, m, exact=None):
+    """exact=None reads kernels.USE_EXACT_NEUMANN at call time (legacy cumulative-GL radial step
+    across the P_l^m(xi<)Q_l^m(xi>) kink vs the Phase-0b neumann_exact operator; see hVee)."""
+    if exact is None:
+        exact = _KG.USE_EXACT_NEUMANN
+    if exact:
+        op = _KG.exact_neumann(LMAX, m)
     Wm = (2 * np.pi) ** 2 if m == 0 else 2 * np.pi ** 2
     pref = (2.0 - (1.0 if m == 0 else 0.0)) * (2.0 / R) * a ** 6 * Wm
     V = np.zeros((NXI, NETA))
@@ -97,8 +104,11 @@ def coul_mode_potential(B2d, m):
     for l in range(m, LMAX + 1):
         Plm_e = Peta[m, l]
         gB = (WB * Plm_e[None, :]) @ WETA                      # (NXI,)  sum over eta
-        Kl = Pxi[m, l][_minidx] * Qxi[m, l][_maxidx]           # (NXI,NXI) P_l^m(xi<)Q_l^m(xi>)
-        radial = Kl @ (WXI * gB)                               # (NXI,)
+        if exact:
+            radial = op.radial(gB, l, m)                       # exact ordered integral (NXI,)
+        else:
+            Kl = Pxi[m, l][_minidx] * Qxi[m, l][_maxidx]       # (NXI,NXI) P_l^m(xi<)Q_l^m(xi>)
+            radial = Kl @ (WXI * gB)                           # (NXI,)
         V += (-1) ** m * (2 * l + 1) * _NORM[(m, l)] * np.outer(radial, Plm_e)
     return pref * V
 

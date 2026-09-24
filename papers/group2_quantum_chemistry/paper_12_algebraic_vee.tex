@@ -1571,11 +1571,12 @@ $\langle\Phi|FHF|\Phi\rangle$ carries at most three correlation edges, so no
 term is ever more than four-body-connected for \emph{any} $N$;\ what a larger
 system or a many-determinant reference changes is the \emph{density}---leaves
 that are no longer isotropic, a reference that no longer factorizes into
-closed-shell blocks---and that general path has so far been checked only as a
-Monte-Carlo--versus--Monte-Carlo factorization test at the $5\%$ level.  Every
-deterministic validation above uses the block-factorized closed-shell reference
-$|\Phi_0|^2=D(1,2)\,D(3,4)$, which is the enabling assumption of the
-spectator-integration bookkeeping.  \emph{Reference generality.}  Read at the
+closed-shell blocks---and at the time of the audit that general path had been
+checked only as a Monte-Carlo--versus--Monte-Carlo factorization test at the
+$5\%$ level (it has since been checked directly;\ see the build note below).
+Every deterministic validation of the audit used the block-factorized
+closed-shell reference $|\Phi_0|^2=D(1,2)\,D(3,4)$, which was the enabling
+assumption of its spectator-integration bookkeeping.  \emph{Reference generality.}  Read at the
 level of the code rather than the proof-of-concept, the reductions are not tied
 to the two-orbital reference:\ the bridge, the triangle kernel, the two-center
 Neumann potential, and the integration-by-parts identities each act on a single
@@ -1584,8 +1585,89 @@ the density of any four-electron CI is a finite sum of such products, so the
 reference enters only through a coefficient tensor over pair indices.  The
 many-determinant extension is therefore unbuilt bookkeeping and a $K^4$
 contraction cost, not an obstruction---and running it on a multi-orbital
-reference is precisely the test that the general, non-isotropic-leaf path still
-lacks.
+reference is precisely the test of the general, non-isotropic-leaf path, which
+the build note below now reports.
+
+\textbf{[BUILD IN PROGRESS 2026-09-22]}  The coefficient-tensor bookkeeping of
+the preceding paragraph has since been constructed for a twelve-orbital,
+$\sigma$-only CI reference (the core-enriched prolate CI of Paper~19, bond
+$(J,L)=(2,1)$ plus three Li core exponents, $E=-8.02335$~Ha), rotated to its
+natural orbitals and truncated at $|c|>10^{-3}$ to 74 determinants
+($+0.44$~mHa above the full CI).  The pair-index tensor over the 78 unordered
+orbital pairs has 38{,}786 nonzero entries, and its spectator traces reproduce
+the one- and two-particle reduced density matrices of the truncated vector to
+$2\times10^{-16}$, so the spectator-integration step that the closed-shell
+validations took from $|\Phi_0|^2=D(1,2)\,D(3,4)$ is now exact for a general
+CI.  The same construction exposed a quadrature defect that the closed-shell
+reference had masked:\ the proof-of-concept engine's prolate--Neumann Coulomb
+potential integrates the ordered kernel $P_l(\xi_<)Q_l(\xi_>)$ across its
+diagonal kink with cumulative Gauss--Legendre sums, an $O(N_\xi^{-2})$ error
+that is $+5\times10^{-3}$ relative on the Li $1s$ self-Coulomb and $+8$~mHa on
+$\langle V_{ee}\rangle$ of the CI reference at the engine's 72 $\xi$-nodes
+(the kinetic and nuclear-attraction grid integrals agree with the integral
+engine to $10^{-7}$~Ha, and the $\zeta=4.5$ core density is resolved to
+$10^{-11}$, so the defect is the kernel's quadrature, not the grid's
+resolution of the density).  The closed-shell engine is only mildly exposed
+because its isotropic pieces use a closed-form Hartree potential;\ the
+general-density path is fully exposed.  The remedy is an exact
+ordered-integral operator on the same grid:\ the $\eta$-moments of every
+$\sigma$ density are entire in $\xi$ and are carried by the barycentric
+interpolant through the 72 Gauss--Legendre nodes, so the two partial
+integrals against $P_l^m(\xi')$ and $Q_l^m(\xi')$ can be taken exactly
+relative to that interpolant (one Gauss rule for the polynomial $P$ side,
+geometrically graded panels toward the logarithmic endpoint on the $Q$ side),
+and the result is a precomputed $72\times72$ operator per $(l,m)$.  It
+reproduces the $5\zeta/8$ self-Coulomb of an isotropic $1s$ density to
+$2\times10^{-13}$ at $\zeta=1.0$, $1.6$, $2.6875$ and $4.5$ (the legacy sum
+is $+1.7\times10^{-3}$ to $+8.5\times10^{-3}$ off), the two-center Hartree
+closed forms to $7\times10^{-14}$, and solid-harmonic closed forms for
+$m=0$--$4$ to $3\times10^{-13}$;\ with it, the grid kinetic, nuclear-attraction
+and electron-repulsion energies of the 74-determinant reference agree with the
+integral engine to $10^{-6}$~mHa, and the legacy path is bit-identical to the
+committed engine (fast guard \texttt{tests/test\_lih\_r12ci\_neumann\_exact.py}).
+On the corrected kernel the closed-shell proof-of-concept energies move by
+$-0.4$~mHa (cusp-correct geminal, to $-7.9172$~Ha, whose correlation energy
+$-29.4$~mHa now sits closer to the Monte-Carlo $-29.5$) and by $-1.6$~mHa
+(exponential geminal, to $-7.9436$~Ha, now $2.4$~mHa below the same-geminal
+Monte-Carlo $2\times2$ value of $-7.9412$):\ the $0.8$~mHa agreement quoted
+above for the exponential geminal was in part a cancellation between this
+Coulomb-kernel bias and the remaining coarse-grid errors of the $f$-kernel
+dressings, which the engine's own source recorded at the time and which the
+many-determinant build quantifies next.  The banked closed-shell numbers are
+left on the legacy path, where the regression tests pin them.
+
+\textbf{[VALIDATED 2026-09-23]}  The generality test of the audit paragraph
+has now been run.  On the exact operator, the four-body bridge integral
+$\langle\rho_1\rho_2\rho_3\rho_4\,f_{12}f_{34}/r_{13}\rangle$ was evaluated for
+two \emph{real, non-isotropic} pair densities of the 74-determinant reference
+against brute-force Monte-Carlo:\ a signed $p$-like core$\times$bond transition
+density on the leaves (bridge $=$ the bond density) and a strongly directional
+bond density on the leaves (bridge $=$ the core).  In both the reduction
+reproduces the Monte-Carlo value---for the signed leaf a six-dimensional
+route that isolates the Coulomb bridge reaches $\sigma_{\rm MC}/|I|=5\times
+10^{-4}$ and gives $|I_{\rm reduction}-I_{\rm MC}|=1.1\times10^{-8}$ against a
+tolerance $1.7\times10^{-8}$ (the twelve-dimensional estimator floors at
+$1.5\times10^{-3}$ on the signed density and agrees at $0.3\sigma$);\ for the
+directional leaf the unbiased twelve-dimensional integral confirms the
+reduction to $1.8\times10^{-4}$.  Both dressed leaves carry Neumann channels
+beyond the $2\,l_{\rm bridge}$ (isotropic-leaf) bound---an $l=4$ contribution
+at the level of $10^{-3}$ of the integral---so the general termination bound
+$2(l_{\rm bridge}+l_{\rm leaf})$ is the operative one, as the audit noted.  The
+production $f$-kernel dressing itself contributes only $\sim\!10^{-6}$ relative
+to these integrals, so it is adequate for sub-mHa energies without the
+exact-integration treatment the Coulomb kernel required.  This upgrades the
+four-body bridge reduction from validated-on-model-densities to
+validated-on-real, non-isotropic densities under a non-block-factorized
+reference:\ the reference-generality reading of the audit paragraph is
+confirmed at the integral level.  The assembled many-determinant \emph{energy}
+followed:\ all seven energy enumerators were generalized to contractions over
+the coefficient tensor and run on a $74$-determinant reference, giving a
+deterministic explicit-$r_{12}$ LiH energy of $-8.0372$~Ha that an independent
+variational Monte-Carlo of the same trial function confirms to
+$\lesssim0.3$~mHa (Paper~19, the 2026-09-23 marriage note).  Backing:\ fast guard
+\texttt{tests/test\_lih\_r12ci\_bridge.py} (the reduction versus its frozen
+Monte-Carlo value, with built-in fire tests that reject the isotropic-leaf
+shortcut and the $L\le2$ truncation on the $p$-like leaf).
 
 Backing:\ tests \texttt{tests/test\_paper12\_r12.py} (the H$_2$ engine) and
 \texttt{tests/test\_lih\_r12ci.py} (the two-center LiH engine), and the reduction

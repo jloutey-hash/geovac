@@ -25,6 +25,7 @@ import numpy as np
 from numpy.polynomial.legendre import leggauss
 from scipy.special import lqn, eval_legendre
 
+from . import kernels as _KG                                   # USE_EXACT_NEUMANN read at call time
 from .kernels import (
     Xg, Eg, rA, rB, geo_f, dens, build_kernel, dressings, Wmat, grid_int, X, a, ZA, ZB, GAM,
     XI as XI1D, ETA as ETA1D, WXI, WETA)
@@ -55,20 +56,33 @@ NXI, NETA = XI1D.size, ETA1D.size                             # coarse-grid axes
 JAC2 = Xg ** 2 - Eg ** 2                                       # (NXI,NETA)
 
 
-def neumann_potential(Dg2, LMAX=34):
-    """Coulomb potential field of density Dg2(xi,eta) [phi-indep] on the coarse grid."""
-    Qtab = np.array([lqn(LMAX, x)[0] for x in XI1D])          # (NXI, LMAX+1)
-    Pxi = np.array([eval_legendre(l, XI1D) for l in range(LMAX + 1)])   # (LMAX+1, NXI)
-    minidx = np.minimum.outer(np.arange(NXI), np.arange(NXI))
-    maxidx = np.maximum.outer(np.arange(NXI), np.arange(NXI))
+def neumann_potential(Dg2, LMAX=34, exact=None):
+    """Coulomb potential field of density Dg2(xi,eta) [phi-indep] on the coarse grid.
+
+    exact=None reads kernels.USE_EXACT_NEUMANN at call time.  False (legacy default): the radial
+    step K @ (WXI*g_l) is a cumulative GL sum across the kink of P_l(xi<)Q_l(xi>) -- O(NXI^-2),
+    +5e-3 relative on the Li-1s self-Coulomb.  True (Phase 0b): neumann_exact.ExactNeumann,
+    exact relative to the degree-(NXI-1) interpolant of g_l (5 zeta/8 to 1e-13)."""
+    if exact is None:
+        exact = _KG.USE_EXACT_NEUMANN
+    if exact:
+        op = _KG.exact_neumann(LMAX, 0)
+    else:
+        Qtab = np.array([lqn(LMAX, x)[0] for x in XI1D])          # (NXI, LMAX+1)
+        Pxi = np.array([eval_legendre(l, XI1D) for l in range(LMAX + 1)])   # (LMAX+1, NXI)
+        minidx = np.minimum.outer(np.arange(NXI), np.arange(NXI))
+        maxidx = np.maximum.outer(np.arange(NXI), np.arange(NXI))
     pref = (2.0 / R) * (2 * np.pi) * a ** 3
     W = JAC2 * Dg2
     V = np.zeros((NXI, NETA))
     for l in range(LMAX + 1):
         Pl_eta = eval_legendre(l, ETA1D)
         g_l = (W * Pl_eta[None, :]) @ WETA                     # (NXI,)
-        K = Pxi[l][minidx] * Qtab[:, l][maxidx]                # (NXI,NXI) P_l(xi<)Q_l(xi>)
-        radial = K @ (WXI * g_l)                               # (NXI,)
+        if exact:
+            radial = op.radial(g_l, l, 0)                      # exact ordered integral (NXI,)
+        else:
+            K = Pxi[l][minidx] * Qtab[:, l][maxidx]            # (NXI,NXI) P_l(xi<)Q_l(xi>)
+            radial = K @ (WXI * g_l)                           # (NXI,)
         V += (2 * l + 1) * np.outer(radial, Pl_eta)            # (NXI,NETA)
     return pref * V
 

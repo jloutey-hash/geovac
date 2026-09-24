@@ -863,7 +863,10 @@ an $r_{12}\,t^2$-type geminal evaluated by the same
 resolution-of-identity--free reductions of Paper~12, whose reference generality
 (they act on arbitrary pair-density products, so a many-determinant reference
 enters only through a coefficient tensor) was established by audit on
-2026-09-22.  The additive $-8.062$ estimate is thus a target a fuller trial
+2026-09-22 and demonstrated at the integral level on 2026-09-23:\ the
+four-body bridge reduction reproduces brute-force Monte-Carlo on the real,
+non-isotropic pair densities of a 74-determinant reference (Paper~12, the
+2026-09-23 build note).  The additive $-8.062$ estimate is thus a target a fuller trial
 function would approach, consistent with (not overturned by) the two-body
 variational upper bound $-8.047$;\ a two-body geminal on the analytic route is
 expected to land near the same value, supplying a deterministic cross-check of
@@ -872,6 +875,41 @@ pieces---a sparse connected-pair FCI and a float64 two-center ERI assembly, each
 validated energy-exact against the high-precision reference---made the $M>16$
 orbital ceiling, the cusp study, and the real-space VMC reachable (chronicled in
 \texttt{CHANGELOG.md} v5.15.18--22).
+
+\textbf{[MARRIAGE, 2026-09-23]}  The deterministic analytic route promised above
+has now been assembled and run.  The resolution-of-identity--free multibody
+reductions of Paper~12 were generalized from the two-orbital reference to a
+many-determinant one---every enumerator ($\bar F$, $\sigma^2$, $h$ and $g$ for
+kinetic, nuclear and electron--electron terms, and the reference energy itself)
+rewritten as a contraction over a coefficient tensor on the orbital-pair
+indices---and applied to a $74$-determinant, $\sigma$-only core-enriched CI
+reference (natural-orbital truncation of the $E=-8.02335$~Ha CI, reference
+energy $E_{\rm trunc}=-8.02292$~Ha).  A regression gate confirmed that feeding
+the two-orbital reference back through the general enumerators reproduces the
+banked $-7.917$/$-7.943$ per piece to $<0.1$~mHa.  On the many-determinant
+reference the analytic explicit-$r_{12}$ energy is
+$E_{R_{12}}=\mathbf{-8.0372}$~Ha for both geminals (linexp $-8.03724$,
+exponential $-8.03709$, agreeing to $0.15$~mHa), variational and $\sim\!5$~mHa
+below the $M=16$ orbital ceiling.  It is cross-validated by an independent
+variational Monte-Carlo of the \emph{same} trial function
+$(1+c\,(F-\bar F))\Psi_{\rm CI}$ (standard local energy, analytic Jastrow
+Laplacian):\ $E_{\rm VMC}=-8.03755\pm0.00041$ (linexp) and
+$-8.03704\pm0.00003$ (exponential), agreeing with the analytic values to
+$0.31$ and $0.05$~mHa.  This is the first deterministic, resolution-of-identity--free
+LiH energy from the many-determinant explicit-$r_{12}$ engine, and it confirms
+the reference-generality of the reductions at the level of a real,
+independently-checked energy.  It is \emph{not} the corpus-best LiH number:\ the
+$-8.037$ sits above the VMC-over-FCI $-8.047$ because the $\sigma$-only reference
+carries no $\pi$ orbitals and tops out $\sim\!9$~mHa above the $M=16$ ceiling---the
+two-body correlation the marriage recovers ($\approx14$~mHa) matches the
+two-body Pad\'e Jastrow ($\approx15$~mHa), so the shortfall is the reference, not
+the correlation treatment.  Reaching the $-8.047$ window is the same construction
+on a $\pi$-containing $M=16$ reference (a larger, azimuthally-resolved
+computation);\ reaching the $-8.062$ additive-F12 estimate additionally needs the
+nucleus-coupled $r_{12}t^2$ three-body geminal, which the same reductions are
+built to carry.  Backing:\ \texttt{tests/test\_lih\_r12ci\_bridge.py} (the
+four-body reduction on real densities) and \texttt{tests/test\_lih\_vmc.py} (the
+VMC stack);\ chronicle \texttt{debug/sprint\_lih\_marriage\_memo.md}.
 
 \textbf{[MEASURED]} The banked $n_{\max}=4$ decider has now been run---a
 matrix-free (Davidson) direct-CI engine

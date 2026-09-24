@@ -28,8 +28,9 @@ Run:  python debug/lih_r12ci_sigma2_analytic.py
 import numpy as np
 from numpy.polynomial.legendre import leggauss
 
-from .energy import (ZA, ZB, N_A, N_B, R, a, Z_A, Z_B,
-                              V_aaaa, V_bbbb, V_aabb, V_aaab, V_bbab)
+from .energy import ZA, ZB, N_A, N_B, R, a, Z_A, Z_B
+# (the Stage-1 f-integrals V_aaaa..V_bbab are imported lazily in __main__ only: energy.py now
+#  builds them on first access (~60 s) and nothing else in the package consumes them -- 2026-09-22)
 from .basis import X          # Loewdin AO->MO (computed from S_AB)
 
 SIG2_REF = 0.13699          # VMC ground truth (lih_r12ci_sigma2_mc.py)
@@ -97,7 +98,36 @@ def grid_int(field):
     return 2 * np.pi * a ** 3 * np.sum(geo_f * field)
 
 
+# --------------------------------------------------------------------------- #
+# Phase 0b (2026-09-22): EXACT ordered-integral prolate-Neumann operator on THIS grid, opt-in.
+#   The legacy radial step  K @ (WXI * g)  in hVee.neumann_potential / triangle.coul_mode_potential
+#   integrates the kinked kernel P_l^m(xi_<)Q_l^m(xi_>) by a cumulative GL sum over the 72 nodes:
+#   O(NXI^-2), +5e-3 relative on the Li-1s self-Coulomb, +8.09 mHa on the Phase-0 <V_ee>.  With
+#   USE_EXACT_NEUMANN = True the same consumers (and gVee.psi_coul / psi_yuk through them) use
+#   neumann_exact.ExactNeumann instead -- exact relative to the degree-71 interpolant through the
+#   GL nodes (5 zeta/8 to 1e-13 on this grid; see the module docstring).  Default False keeps the
+#   legacy path BIT-IDENTICAL (tests/test_lih_r12ci.py anchors -7.9168 / -7.9420 on it).
+#   Consumers read the flag AT CALL TIME as a module attribute (never by from-import).
+# --------------------------------------------------------------------------- #
+USE_EXACT_NEUMANN = False
+_EXACT_MMAX = 4                     # triangle.MMAX; one operator serves the m=0 and general-m callers
+_EXACT_CACHE = {}
+
+
+def exact_neumann(lmax: int, mmax: int = 0):
+    """Cached neumann_exact.ExactNeumann on the kernels.py xi grid, covering (lmax, mmax)."""
+    for (lm, mm), op in _EXACT_CACHE.items():
+        if lm >= lmax and mm >= mmax:
+            return op
+    from .neumann_exact import ExactNeumann
+    mm = max(mmax, _EXACT_MMAX)
+    op = ExactNeumann(XI, 1.0, xi_max, lmax, mm)
+    _EXACT_CACHE[(lmax, mm)] = op
+    return op
+
+
 if __name__ == "__main__":
+    from .energy import V_aaaa, V_bbbb, V_aabb, V_aaab, V_bbab    # lazy Stage-1 build (~60 s)
     print("=" * 78)
     print("LiH R12-CI Stage 3 (part 2): ANALYTIC sigma^2 (RI-free), target 0.137")
     print(f"  grid {NXI}x{NETA} (xi_max={xi_max:.1f}), NPHI={NPHI}; f=exp(-{GAM} r)")

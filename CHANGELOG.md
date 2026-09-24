@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.15.24] - 2026-09-23
+
+**The "marriage" delivered: the exact resolution-of-identity-free multibody r₁₂ engine runs on a multi-determinant reference and produces a deterministic, cross-validated LiH energy of −8.0372 Ha.** PI-directed; executes `debug/lih_marriage_build_plan.md` in five subagent-dispatched phases (each with its own gate and capture). The v5.15.23 audits had reversed the "marriage is blocked" verdict; this cuts the build. Canonical memo `debug/sprint_lih_marriage_memo.md`; READ-FIRST `memory/lih_marriage_state_of_play.md`.
+
+### Added
+- **`geovac/lih_r12ci/neumann_exact.py`** (`ExactNeumann`): an exact ordered-integral prolate-Neumann Coulomb operator on the existing 72×44 grid. The barycentric interpolant of the η-moments through the Gauss-Legendre nodes lets the two partial integrals against P_l^m and Q_l^m be taken exactly (one Gauss rule on the polynomial P side; geometrically graded panels on the log-steep Q side); a precomputed 72×72 operator per (l,m). Opt-in via `kernels.USE_EXACT_NEUMANN` or `exact=True` on `hVee.neumann_potential`, `triangle.coul_mode_potential`, `gVee.psi_coul/psi_yuk`; the legacy default is bit-identical to the committed engine. Fixes an O(N_ξ⁻²) kink-quadrature error (+8 mHa on ⟨V_ee⟩ of the CI reference) that the closed-shell 2-MO reference had masked. Anchors: 5ζ/8 self-Coulomb to 1e-13 (legacy 2e-3..8e-3), two-centre Hartree closed forms to 7e-14, solid-harmonic m=0..4 to 3e-13.
+- **`debug/lih_marriage_phase{0,0b,1,2,3}.py`** — the five phase drivers (reference+tensor; exact operator; G-leaf; enumerator generalisation; energy+VMC), and the g_Vee productionization (`get_tri_matrix` per-middle-vertex triangle cache + `coul_mode_stack` batched mode-m Neumann) that made the 55-active-pair g_Vee tractable.
+- **`tests/test_lih_r12ci_neumann_exact.py`** (7 fast) and **`tests/test_lih_r12ci_bridge.py`** (5 fast) — guards with built-in fire tests (the exact operator vs 5ζ/8 with the legacy asserted to fail; the bridge reduction vs its frozen MC value, rejecting the isotropic-leaf shortcut and the L≤2 truncation on the p-like leaf). Fire-tested 4/4 and 5/5. The bridge coverage gap registered 2026-09-22 is closed.
+- A linear Jastrow option in `debug/lih_vmc.py` (additive): trial (1+c(F−F̄))Ψ_CI with the standard local energy, for the G2 cross-check.
+
+### Results
+- **Phase 0/0b:** 74-det σ reference (E_trunc −8.022918); the pair-index coefficient tensor and its spectator traces reproduce the 1-/2-RDMs to 1.7e-16; with the exact operator, G0 closes to 1e-6 mHa on all three energy terms.
+- **Phase 1 (G-leaf, PASS):** the four-body bridge ⟨ρ₁ρ₂ρ₃ρ₄f₁₂f₃₄/r₁₃⟩ reproduces brute-force Monte Carlo on real non-isotropic pair densities — signed p-like core×bond leaf (6-D route, |reduced−MC| = 1.07e-8 vs tol 1.73e-8) and directional bond leaf (12-D, 1.8e-4). A nonzero l=4 Neumann channel confirms the general termination bound 2(l_bridge+l_leaf), not the s-leaf 2·l_bridge. The reduction is upgraded from validated-on-models to validated-on-real, non-isotropic densities under a non-block-factorized reference.
+- **Phase 2 (G1, PASS):** all seven energy enumerators (F̄/σ², h_Vne/g_Vne, h_T/g_T, g_Vee, Cov[F,Y]/Cov[F,E], E0) generalised to O(nnz) contractions over the coefficient tensor; the 2-MO reference reproduces the banked per-piece energies to <0.1 mHa on the exact path.
+- **Phase 3 (G2, GO):** marriage E_R12 = −8.0372 Ha (linexp −8.037236, exp −8.037088, agree 0.15 mHa; variational; ~5 mHa below the −8.032 orbital ceiling), cross-validated by VMC of the same trial function (linexp Δ 0.31 mHa, exp Δ 0.05 mHa; gate-6 c=0 passes). The first deterministic, RI-free, variational LiH energy from the many-determinant explicit-r₁₂ engine.
+
+### Changed
+- **`energy.py`** Stage-1 f-dressings/f-integrals built lazily (PEP 562 `__getattr__`); `import geovac.lih_r12ci.kernels` 60.5 s → 0.5 s, values bit-identical (verified: no star-import consumer; live pipeline tests pass).
+- **Paper 19** gains a `[MARRIAGE, 2026-09-23]` paragraph (the analytic RI-free route now produces a real, VMC-cross-checked energy); **Paper 12** `sec:r12` gains a `[VALIDATED 2026-09-23]` note and its stale audit clause is corrected. `docs/claim_test_matrix.md` (bridge row BACKED, reference-generality row VALIDATED end-to-end) and `docs/walls/register.md` (N=4 generality path validated on real densities) updated.
+
+### Honest scope
+- −8.0372 is **not** the corpus-best LiH energy and the §2/§5 best-results are unchanged (VMC-over-FCI −8.047 stays best; the additive-F12 −8.062 stays the target). The gap is the reference, not the machinery: the σ-only 74-det reference has no π orbitals and tops out ~9 mHa above the M=16 ceiling; the ~14 mHa two-body correlation the marriage recovers matches the two-body VMC-Padé. This is a methodological milestone.
+- Follow-ons (both genuine): the marriage on a π-containing M=16 reference (larger, azimuthally-resolved) to reach the −8.047 window; the nucleus-coupled r₁₂t² three-body geminal toward −8.062.
+- Owed: a re-measure of the slightly stale `assembly.ANALYTIC_REF` per-piece values (g_Vne/g_T/g_Vee; the live oracle is authoritative, and these feed only a self-check).
+
 ## [v5.15.23] - 2026-09-22
 
 **Two read-only audits re-tier the N=4 bridge factorization and REVERSE the "marriage is blocked" verdict; the anti-rediscovery record and a subagent-phased marriage plan are written.** PI-directed, after the PI observed that ~5 context resets had each re-derived the same picture (the exact-multibody analytic r12 engine vs the rich-reference VMC as complementary halves) and then lost it. Root cause: the multibody work lived in debug memos/CHANGELOG/memory, thinly in the papers. No new physics computed; two audits, one synthesis, and the capture.
