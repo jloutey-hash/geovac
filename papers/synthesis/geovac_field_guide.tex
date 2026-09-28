@@ -148,15 +148,18 @@ by quantum-number tuples $(n, l, m, s)$ and edges encoding spectral
 selection rules.
 
 This graph's nodes are exactly the labels of a continuous operator on
-the unit three-sphere (the Laplace--Beltrami operator, which acts on
-them as the diagonal $SO(4)$ Casimir;\ the graph's own edge Laplacian
-does not converge to it --- see \S\ref{sec:fock}), whose eigenvalues are
+the unit three-sphere (the Laplace--Beltrami operator, whose negative
+acts on them as the diagonal $SO(4)$ Casimir;\ the graph's own edge
+Laplacian does not converge to it --- see \S\ref{sec:fock}), whose
+eigenvalues are
 \begin{equation}
 \label{eq:graph_eigs}
 \lambda_n = -(n^2 - 1), \qquad n \in \N_{\ge 1},
 \end{equation}
-with multiplicity $n^2$ --- the spectrum of the hydrogen atom, to
-within an overall scale.  The shape of the periodic table fell out of
+with multiplicity $n^2$.  Through Fock's energy shell $p_0^2 = -2E$
+these become the hydrogen levels $E_n = -1/(2n^2)$ --- a map on the
+labels, not an overall rescaling of the graph's own spectrum, which is a
+grid band structure.  The shape of the periodic table fell out of
 the packing.
 
 This was the seed:\ a combinatorial object that, when interrogated,

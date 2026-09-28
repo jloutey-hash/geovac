@@ -107,7 +107,7 @@ def test_paper34_III1_kappa_rational_prefactor():
     # compared the symbol to a second literal copy of itself.
     from geovac.atomic_solver import AtomicSolver
     for Z in (1, 2, 3):
-        solver = AtomicSolver(3, Z)
+        solver = AtomicSolver(3, Z, hamiltonian="graph")
         assert math.isclose(solver.kinetic_scale, float(KAPPA_SCALAR) * Z ** 2,
                             rel_tol=0.0, abs_tol=0.0), (
             f"AtomicSolver(Z={Z}).kinetic_scale = {solver.kinetic_scale} "

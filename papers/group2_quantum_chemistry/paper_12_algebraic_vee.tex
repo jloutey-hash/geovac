@@ -118,7 +118,7 @@ sub-mHa and lying above the exact value (variational) (Sec.~\ref{sec:r12}).
 \section{Introduction}
 \label{sec:intro}
 
-The Geometric Vacuum program identifies and discretizes the
+The Geometric Vacuum program identifies and exploits the
 \emph{natural geometry} of each quantum system---the coordinate
 system where the Schr\"odinger equation separates---replacing
 continuous integration with algebraic operations on quantum number
@@ -1734,7 +1734,10 @@ physical singularity: the nuclear Coulomb singularity ($1/r$),
 the two-center potential ($1/r_A + 1/r_B$), and the
 electron-electron Coulomb singularity ($1/r_{12}$).  The GeoVac
 program identifies each singularity's natural coordinate system and
-discretizes the Laplace--Beltrami operator in that system.
+works in its label set and channel structure, solving the separated
+equations within each channel (Paper~11's natural geometry
+principle; not a discretization of the Laplace--Beltrami operator,
+which the $S^3$ edge Laplacian is shown not to be in Paper~7).
 
 \textbf{[WITHDRAWN]} A fourth entry appeared here in earlier
 versions---``three-body coalescence: hyperspherical coordinates for
@@ -1995,7 +1998,7 @@ GeoVac Paper~1 (2026).
 \bibitem{loutey_paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from Scale-Invariant Graph Topology,''
+from a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper11}

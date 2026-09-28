@@ -87,7 +87,7 @@ def build_rabi_system(max_n: int = 4):
     -------
     info : dict
     """
-    solver = AtomicSolver(max_n=max_n, Z=1)
+    solver = AtomicSolver(max_n=max_n, Z=1, hamiltonian="graph")
     N = solver.n_states
 
     # Full diagonalization — all N eigenstates
@@ -183,7 +183,7 @@ def run_norm_conservation() -> dict:
     print("TEST 1: NORM CONSERVATION (max_n=10, 385 states)")
     print("#" * 70)
 
-    solver = AtomicSolver(max_n=10, Z=1)
+    solver = AtomicSolver(max_n=10, Z=1, hamiltonian="graph")
     E, psi = solver.compute_ground_state(n_states=1)
     psi0 = psi[:, 0].astype(complex)
 

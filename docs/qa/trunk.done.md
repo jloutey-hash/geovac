@@ -98,6 +98,25 @@ re-prices everything above it.
 - **No branch-specific C14+.**
 
 ## Change log
+- 2026-09-27/28 (v5.17.0 → v5.17.1) — **claim-impact DELTA (unseeded) = DEFECTS;
+  RESEARCH-GRADE NOT earned** (about 19 LARGE, about 16 SMALL). Dimensions:
+  - deterministic: green, after a C20 fix;
+  - code (Opus): CLEAN;
+  - citations (Opus): CLEAN;
+  - claims: 7 LARGE;
+  - synthesis: 2 LARGE;
+  - claim-impact: 12 LARGE families.
+
+  Every LARGE was one family: the graph or κ credited with the hydrogen spectrum.
+  A v4.76.0 audit confirmed the refutation (the model has been unchanged since v4).
+  Remediated gate-first:
+  - two C16 entries (`kappa-maps-graph-spectrum`, `graph-hamiltonian-carries-spectrum`);
+  - about 45 papers edited;
+  - Paper 7 retitled;
+  - the AtomicSolver default changed to the physical H.
+  **A claim-impact re-check is owed** before RESEARCH-GRADE can be stamped. Its
+  recently-changed loci are those listed in CHANGELOG v5.17.1. Standing calibration
+  record cited.
 - 2026-09-27 (v5.17.0) — pre-registration for the post-v5.16.0 DELTA: the graph→S³
   re-pricing added to C6/C8 as a LARGE class (above). RESEARCH-GRADE status
   available (criteria.md); this target is OWED.

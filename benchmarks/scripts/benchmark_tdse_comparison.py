@@ -146,7 +146,8 @@ def run_geovac_benchmark(max_n: int, dt: float, n_steps: int) -> dict:
     tracemalloc.start()
     t0 = time.perf_counter()
 
-    solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
+    solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE,
+                           hamiltonian="graph")
     V = solver.n_states
 
     # Ground state

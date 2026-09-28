@@ -32,9 +32,9 @@ $S^3$:\\ A Synthesis of the GeoVac QED/Gauge Arc}
 %% ========================================================================
 
 \begin{abstract}
-The Geometric Vacuum (GeoVac) framework discretizes the hydrogen
-bound-state manifold as the unit three-sphere $S^3$ via Fock's conformal
-projection.  This synthesis assembles the eight Group~5
+The Geometric Vacuum (GeoVac) framework labels the hydrogen bound
+states by the harmonics of the unit three-sphere $S^3$ via Fock's
+conformal projection.  This synthesis assembles the eight Group~5
 papers---gauge structure, graph-native QED, precision bound-state QED,
 and a spectral-action gravity sketch---into one narrative around a single
 organizing distinction:\ \emph{the gauge group structure is largely
@@ -95,8 +95,9 @@ $S^1\!\to\!S^3\!\to\!S^2$, and $S^3$ \emph{is} the group manifold
 $\mathrm{SU}(2)$.  These two facts are not GeoVac inputs; they are
 geometry.  Reading the GeoVac graph through its incidence matrix turns
 them into an abelian and then a non-abelian Wilson lattice gauge theory
-on the same nodes and edges that carry the Coulomb spectrum
-(\S\ref{sec:gauge}).  The natural gauge reach saturates at
+on the same nodes and edges, whose labels carry the Coulomb spectrum
+(\S\ref{sec:gauge}; the spectrum sits on the labels as the diagonal
+$SO(4)$ Casimir, not in the edge Laplacian).  The natural gauge reach saturates at
 $U(1)\times\mathrm{SU}(2)\times\mathrm{SU}(3)$, and where it stops is
 itself structural:\ $\mathrm{SU}(3)$ admits only a pure-gauge Wilson
 theory, its natural matter coupling obstructed at the Clebsch--Gordan
@@ -134,8 +135,10 @@ gravity sector and---characteristically---records what did not work.
 
 \paragraph{The Hodge/Wilson dictionary on the graph (Paper~25).}
 With $B$ the node--edge incidence matrix of the GeoVac graph, the node
-Laplacian $L_0=BB^{\top}$ is the matter propagator (it converges to
-$-\Delta_{S^3}$~\cite{loutey_paper7}) and the edge Laplacian
+Laplacian $L_0=BB^{\top}$ is the matter propagator of the lattice
+gauge theory (it does \emph{not} converge to $-\Delta_{S^3}$:\ it splits
+into $n_{\max}$ disconnected $\ell$-blocks, and the Coulomb spectrum
+lives on the labels instead~\cite{loutey_paper7}) and the edge Laplacian
 $L_1=B^{\top}B$ is the discrete Hodge-1 Laplacian whose kernel counts
 cycles---the photon propagator in temporal gauge.  Assigning a $U(1)$
 connection $U_e=e^{i\theta_e}$ to each edge and collapsing the magnetic
@@ -519,7 +522,7 @@ Observation; see \S\ref{sec:alpha}.]
 \bibitem{loutey_paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum:\ Recovering the Schr\"odinger Equation from
-Scale-Invariant Graph Topology,''
+a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper18}

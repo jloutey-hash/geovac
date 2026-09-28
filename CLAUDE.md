@@ -3,7 +3,7 @@
 ## 1. Project Identity
 
 **Name:** GeoVac (The Geometric Vacuum)
-**Version:** v5.17.0 (September 27, 2026)
+**Version:** v5.17.1 (September 28, 2026)
 **Mission:** Spectral graph theory approach to computational quantum chemistry. The GeoVac lattice is the finite label set (n,l,m) of the S³ hyperspherical harmonics, on which the S³ Laplace–Beltrami operator acts exactly as the diagonal SO(4) Casimir n²−1 at every cutoff; Fock's 1935 conformal projection makes that operator equivalent to the Schrödinger equation. (The lattice's edge Laplacian D−A preserves l, splits into n_max disconnected blocks, and does NOT converge to Δ_{S³} — a documented wall, 2026-09-25, `tests/test_graph_s3_nonconvergence.py`.) This structure is exploited computationally to replace expensive continuous integration with O(N) sparse matrix eigenvalue problems.
 
 **Mission statement (adopted 2026-08-29, PI direction):** GeoVac charts the forced/free boundary of quantum physics. For every structure -- quantum number, selection rule, degeneracy, sparsity pattern, convergence rate, physical constant -- the program renders one of three verdicts: **FORCED** (derived from the packing construction, exactly, with a frozen falsifier), **FREE** (an exchange constant, with its projection chain named and its minimal transcendental content classified), or **WALL** (a proven obstruction with the mechanism pinned). The deliverable is the atlas of that boundary. Under this statement the corpus is one program: the chemistry/QC arc surveys how far the forced side reaches computationally; the 40+ documented negatives are the boundary itself, measured; the precision program (SS1.8) is the atlas's experimental interface; the periods/transcendence work (Papers 18/34/54-59) is the coordinate system for the free side; and the QA apparatus is what makes the atlas trustworthy. *Scope note:* this is the internal research mission (the register of SS1.7); papers remain under the SS1.5 rhetoric rule -- "forced" is atlas vocabulary, not ontology language for publication.
@@ -112,6 +112,7 @@ it is a PI call.
 
 > **Older entries (84 bullets, rounds 2–7) are in `docs/development_frontier_archive.md`.** §2 is the index; CHANGELOG.md is the chronicle.
 
+- **/qa trunk DELTA = DEFECTS, remediated (2026-09-28, v5.17.1, PI-directed):** ~19 LARGE, all one family (graph/κ credited with the hydrogen spectrum); v4.76.0 audit: refutation stands; 2 C16 classes, ~45 papers, Paper 7 retitled, AtomicSolver default → physical H. See CHANGELOG v5.17.1.
 - **/qa gains RESEARCH-GRADE = no open LARGE defects (2026-09-27, v5.17.0, PI-directed):** ends the fix-SMALLs loop; LARGE/SMALL grading; SMALLs fixed on sight (no re-run); stamped + expiring; unfixable SMALLs in `docs/qa/<target>.debt.md`. DoDs pre-registered for the post-v5.16.0 DELTAs. See CHANGELOG v5.17.0.
 - **LiH analytic energy −8.0490 = corpus-best (2026-09-27, v5.16.0):** π marriage + cusp-correct e^{−1.5r} geminal; gap was geminal shape (Kato cusp), not count; g_Vee triangle-weight bug fixed; VMC twin 0.16 mHa. Paper 19; CHANGELOG v5.16.0.
 - **Graph→S³ convergence REFUTED; re-anchored on Fock + SO(4) Casimir (2026-09-25, v5.16.0, PI-directed):** D−A has n_max disconnected l-blocks; labels/degeneracy survive exactly. ~27 papers re-worded. `tests/test_graph_s3_nonconvergence.py`. See CHANGELOG v5.16.0.
@@ -559,7 +560,7 @@ The composed geometry (Level 5) is a fiber bundle: G_total = G_nuc semi-direct G
 
 | Task | Module · Entry point |
 |:-----|:---------------------|
-| Atomic lattice / Hamiltonian | `geovac/lattice.py` `GeometricLattice(max_n, nuclear_charge=Z)` · `geovac/atomic_solver.py` `AtomicSolver(max_n, Z)` |
+| Atomic lattice / Hamiltonian | `geovac/lattice.py` `GeometricLattice(max_n, nuclear_charge=Z)` · `geovac/atomic_solver.py` `AtomicSolver(max_n, Z)` (default = physical −Z²/2n² diagonal; the legacy graph model κ(D−A), whose excited states are non-physical, is `hamiltonian='graph'`) |
 | Multi-electron FCI | `geovac/lattice_index.py` `LatticeIndex(Z, n_electrons, max_n)`; direct CI at N_SD ≥ 5000 |
 | Molecular spec + composed builder | `geovac/molecular_spec.py` `MolecularSpec` · `geovac/composed_qubit.py` `build_composed_hamiltonian(spec)` + `*_spec()` factories |
 | Balanced coupled builder | `geovac/balanced_coupled.py` `build_balanced_hamiltonian(spec, nuclei)` |

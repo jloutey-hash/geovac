@@ -31,10 +31,15 @@ Measured sequence (production objects only; kappa = -1/16, Z = 1):
     E_0 = k*lm : -0.41363 -0.46375 -0.47571 -0.48883 -0.49364 -0.49713
     |E_0+1/2|  :  17.27%    7.25%    4.86%    2.23%    1.27%    0.57%
 
-NO rate is asserted (Paper 7 proves none).  The operator convergence
-L -> Delta_{S^3} and the S^3 identification of the limit are NOT tested by
-anything in tests/ (coverage gap, carryforward I.0.1).  Tier: [MEASURED] for
-the bound; the convergence reading is [OBSERVATION].
+NO rate is asserted here (the closed-form rate is Paper 0 S VI, pinned in
+tests/test_paper1_block_spectrum.py).  The operator convergence
+L -> Delta_{S^3} is FALSE: it is a [WALL] (2026-09-25), backed by
+tests/test_graph_s3_nonconvergence.py (n_max disconnected l-blocks, an
+n_max-dimensional kernel against Delta_{S^3}'s single zero mode; the label
+set with the diagonal SO(4) Casimir L^2 + A^2 = n^2 - 1 is what is exact).
+Tier: [MEASURED] / [INTERNAL THEOREM] for the bound; the convergence reading
+is [WALL], not [OBSERVATION].  The Hamiltonian here is the labelled legacy
+graph model AtomicSolver(hamiltonian="graph"), not physical hydrogen.
 """
 from __future__ import annotations
 
@@ -89,7 +94,7 @@ def test_lambda_max_saturates_bipartite_bound_monotonically(lmax):
 def test_ground_energy_is_kappa_times_lambda_max_by_construction(lmax):
     """E_0 -> -1/2 carries no information beyond lambda_max -> 8."""
     for n in GRID:
-        E0 = float(eigsh(AtomicSolver(n, Z=1).H, k=1, which="SA")[0][0])
+        E0 = float(eigsh(AtomicSolver(n, Z=1, hamiltonian="graph").H, k=1, which="SA")[0][0])
         assert abs(E0 - KAPPA * lmax[n]) < 1e-9, (n, E0, KAPPA * lmax[n])
 
 
@@ -132,7 +137,7 @@ def test_extremal_mode_has_no_1s_weight():
 def test_spectrum_confined_and_bottom_dense_at_nmax_30():
     """H's spectrum lies in [-1/2, 0]; its six lowest eigenvalues sit within
     0.1% of each other -- not a Rydberg ladder."""
-    H = AtomicSolver(30, Z=1).H
+    H = AtomicSolver(30, Z=1, hamiltonian="graph").H
     lo = np.sort(eigsh(H, k=6, which="SA")[0])
     hi = float(eigsh(H, k=1, which="LA")[0][0])
     assert lo[0] > -0.5 and hi <= 1e-9
@@ -167,10 +172,10 @@ def test_energy_scales_as_z_squared():
     the graph itself does not depend on Z -- which is what this pins.  It cannot
     detect a spectral error; the H row does that."""
     from geovac.atomic_solver import AtomicSolver
-    base = AtomicSolver(max_n=10, Z=1)
+    base = AtomicSolver(max_n=10, Z=1, hamiltonian="graph")
     e0_base = float(base.compute_ground_state()[0][0])
     for Z in (2, 3, 7):
-        sol = AtomicSolver(max_n=10, Z=Z)
+        sol = AtomicSolver(max_n=10, Z=Z, hamiltonian="graph")
         e0 = float(sol.compute_ground_state()[0][0])
         assert abs(e0 - Z ** 2 * e0_base) < 1e-9
         # and the graph itself carries no Z: same adjacency, same degrees

@@ -11,7 +11,7 @@
 | Task | Module | Entry Point |
 |:-----|:-------|:------------|
 | Atomic lattice | `geovac/lattice.py` | `GeometricLattice(max_n, nuclear_charge=Z)` |
-| Atomic Hamiltonian | `geovac/atomic_solver.py` | `AtomicSolver(max_n, Z)` · `solve_atom(Z, max_n)` (drift fix 2026-07-06: previously listed `GraphHamiltonian(lattice)` never existed) |
+| Atomic Hamiltonian | `geovac/atomic_solver.py` | `AtomicSolver(max_n, Z)` · `solve_atom(Z, max_n)` — default `hamiltonian='exact'` = diag(−Z²/(2n²)), the physical hydrogenic spectrum; `hamiltonian='graph'` = legacy κZ²(D−A), excited states NOT physical (2026-09-28) (drift fix 2026-07-06: previously listed `GraphHamiltonian(lattice)` never existed) |
 | Legacy He / LCAO-molecule classes (ARCHIVED 2026-09-26) | `geovac/_archive/superseded/hamiltonian.py`, `geovac/_archive/superseded/aimd.py` | `HeliumHamiltonian`, `HeliumPackingSolver`, `MoleculeHamiltonian`, legacy `solve_helium`, `CALIBRATED_KINETIC_SCALE = -0.10298808` (FITTED to the experimental He energy -- an empirical parameter, retired from the live package). `geovac/hamiltonian.py`, `geovac/aimd.py`, and the top-level `geovac.HeliumHamiltonian` / `MoleculeHamiltonian` / `HeliumPackingSolver` / `CALIBRATED_KINETIC_SCALE` / `solve_helium` are DeprecationWarning shims (plain `import geovac` does not warn). For helium use `geovac.hyperspherical_radial.solve_helium` (Level 3). |
 | Multi-electron FCI | `geovac/lattice_index.py` | `LatticeIndex(Z, n_electrons, max_n)` |
 | Direct CI (large systems) | `geovac/direct_ci.py` | `DirectCISolver(lattice_index)` |

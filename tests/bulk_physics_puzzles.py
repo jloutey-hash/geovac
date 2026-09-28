@@ -245,7 +245,8 @@ def test_mond_dark_matter_limit(verbose=True):
     print(f"  Building lattice with max_n = {max_n}...")
 
     t_start = time.time()
-    solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
+    solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE,
+                           hamiltonian="graph")
     t_setup = (time.time() - t_start) * 1000
 
     lattice_dim = solver.n_states

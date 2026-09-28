@@ -140,7 +140,7 @@ def main() -> None:
     # hydrogen via the production solver
     from geovac.atomic_solver import AtomicSolver
     for nm in (5, 10, 30):
-        s = AtomicSolver(max_n=nm, Z=1)
+        s = AtomicSolver(max_n=nm, Z=1, hamiltonian="graph")
         E, _ = s.compute_ground_state(n_states=3)
         print(f"  AtomicSolver n_max={nm}: lowest 3 energies = "
               + ", ".join(f"{e:.6f}" for e in np.sort(E))

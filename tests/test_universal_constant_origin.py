@@ -215,7 +215,8 @@ class TestUniversalConstantOrigin:
         """
         from geovac import AtomicSolver
 
-        solver = AtomicSolver(max_n=20, Z=1, kinetic_scale=-1/16)
+        solver = AtomicSolver(max_n=20, Z=1, kinetic_scale=-1/16,
+                              hamiltonian="graph")
         energies, _ = solver.compute_ground_state(n_states=10)
         energies = np.sort(energies)
 
@@ -250,7 +251,8 @@ class TestUniversalConstantOrigin:
         exact_energies = {1: -0.5, 2: -2.0, 3: -4.5}
 
         for Z, E_exact in exact_energies.items():
-            solver = AtomicSolver(max_n=max_n, Z=Z, kinetic_scale=-1/16)
+            solver = AtomicSolver(max_n=max_n, Z=Z, kinetic_scale=-1/16,
+                              hamiltonian="graph")
             energies, _ = solver.compute_ground_state(n_states=1)
             E_computed = energies[0]
             error_pct = abs((E_computed - E_exact) / E_exact) * 100
@@ -327,7 +329,8 @@ def generate_full_report() -> str:
     from geovac import AtomicSolver
     exact_energies = {1: -0.5, 2: -2.0, 3: -4.5, 4: -8.0}
     for Z, E_exact in exact_energies.items():
-        solver = AtomicSolver(max_n=20, Z=Z, kinetic_scale=-1/16)
+        solver = AtomicSolver(max_n=20, Z=Z, kinetic_scale=-1/16,
+                              hamiltonian="graph")
         energies, _ = solver.compute_ground_state(n_states=1)
         E_computed = energies[0]
         error_pct = abs((E_computed - E_exact) / E_exact) * 100

@@ -130,7 +130,11 @@ def scan(path: pathlib.Path):
     seen_ok, seen_bad = set(), set()
     for m in ATTR.finditer(body):
         sur, yr = m.group(1), m.group(2)
-        if sur.split("--")[0] in NOT_AUTHORS:
+        first = sur.split("--")[0]
+        # case-insensitive: an all-caps tier tag ("[CORRECTED 2026-09-25.]") is
+        # the same correction-note verb as "Corrected"; it was read as a surname
+        # and FAILed the gate on 2026-09-27 (Papers 26/27).
+        if first in NOT_AUTHORS or first.capitalize() in NOT_AUTHORS:
             continue
         tag = f"{sur}~{yr}"
         if tag in seen_ok or tag in seen_bad:
@@ -155,6 +159,7 @@ def _gate_substr(argv):
 
 def selftest() -> int:
     doc = (r"Per Smith~1999 and Jones--Brown~2004 the value is 3." "\n"
+           r"\textbf{[CORRECTED 2026-09-25.]} Earlier versions." "\n"
            r"Smith~1999 again, and Smith~1999 once more." "\n"
            r"\begin{thebibliography}{9}" "\n"
            r"\bibitem{smith1999} A. Smith, Phys. Rev. A 1, 1 (1999)." "\n"
@@ -163,7 +168,8 @@ def selftest() -> int:
     tmp.write_text(doc, encoding="utf-8")
     try:
         u = scan(tmp)
-        ok = ("Jones--Brown~2004" in u) and ("Smith~1999" not in u)
+        ok = (("Jones--Brown~2004" in u) and ("Smith~1999" not in u)
+              and ("CORRECTED~2026" not in u))
         print("selftest:", "PASS" if ok else "FAIL", "->", sorted(u))
         return 0 if ok else 1
     finally:

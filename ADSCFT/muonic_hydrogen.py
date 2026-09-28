@@ -87,7 +87,8 @@ class MuonicHydrogenSolver(AtomicSolver):
         # Initialize with scaled kinetic energy
         # Note: Z=1 for hydrogen, but kinetic scale is mass-dependent
         # Graph topology is UNCHANGED (this is the key test!)
-        super().__init__(max_n=max_n, Z=1, kinetic_scale=kinetic_scale_muonic)
+        super().__init__(max_n=max_n, Z=1, kinetic_scale=kinetic_scale_muonic,
+                         hamiltonian="graph")
 
         # Override Z-scaling since we already applied mass scaling
         # (AtomicSolver applies Z² scaling, but we want mass scaling instead)
@@ -263,7 +264,8 @@ if __name__ == "__main__":
 
     # Electronic hydrogen reference
     from geovac import AtomicSolver
-    solver_e = AtomicSolver(max_n=30, Z=1, kinetic_scale=-1/16)
+    solver_e = AtomicSolver(max_n=30, Z=1, kinetic_scale=-1/16,
+                            hamiltonian="graph")
 
     # Muonic hydrogen
     solver_mu = MuonicHydrogenSolver(max_n=30)

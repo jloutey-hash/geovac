@@ -441,7 +441,8 @@ if __name__ == "__main__":
     from geovac import AtomicSolver
 
     print("\nComputing spectral dimension for hydrogen...")
-    solver = AtomicSolver(max_n=15, Z=1, kinetic_scale=-1/16)
+    solver = AtomicSolver(max_n=15, Z=1, kinetic_scale=-1/16,
+                          hamiltonian="graph")
 
     t, d_s, analysis = compute_spectral_dimension(solver)
 

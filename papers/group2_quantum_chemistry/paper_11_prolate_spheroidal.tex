@@ -33,8 +33,9 @@ Fock's 1935 stereographic projection maps the hydrogen atom onto the
 unit three-sphere $S^3$, where the Schr\"odinger equation becomes a
 pure Laplace--Beltrami eigenvalue problem with no potential term.  The
 GeoVac program builds a graph on the $S^3$ label set $(n,l,m)$, on which
-the exact one-electron operator is the diagonal $SO(4)$ Casimir
-$n^2-1$, i.e.\ the hydrogenic spectrum at every cutoff (Papers~0, 1, 7);\
+$-\Delta_{S^3}$ is the diagonal $SO(4)$ Casimir $n^2-1$ at every
+cutoff, from which the hydrogenic energies follow through Fock's energy
+shell $p_0^2 = -2E$ (Papers~0, 1, 7);\
 the graph Laplacian itself is not a discretization of the $S^3$
 operator and does not converge to it, and its extremal eigenvalue
 matches the hydrogen ground state only by construction through the
@@ -45,12 +46,12 @@ $R$-dependent bonding physics in that single-$n$ shared-$p_0$ approximation
 escapes it and binds).
 
 We resolve this by identifying the \emph{natural geometry principle}:
-every separable quantum system has a natural lattice---the lattice
-that discretizes the Laplace--Beltrami operator in the coordinate
-system where separation occurs.  For one-center systems that geometry
-is $S^3$ (where the GeoVac lattice is the label set rather than a
-convergent discretization, Paper~7); for two-center systems it is the
-prolate spheroid.  We
+every separable quantum system has a natural lattice---the label set
+and channel structure of the coordinates in which separation occurs,
+within which the separated equations are then solved.  For one-center
+systems that geometry is $S^3$ (where the GeoVac lattice is the label
+set, not a convergent discretization of the Laplace--Beltrami operator,
+Paper~7); for two-center systems it is the prolate spheroid.  We
 discretize the separated prolate spheroidal equations for H$_2^+$
 using a spectral angular solver (Legendre basis) and two radial
 solvers---a self-adjoint finite-difference (FD) scheme and a spectral
@@ -110,12 +111,13 @@ three-sphere $S^3$.  The Coulomb potential $-Z/r$ is not an input
 force law but a coordinate distortion produced by the stereographic
 projection from $S^3$ to flat $\mathbb{R}^3$.  This equivalence,
 established symbolically with 18 independent proofs~\cite{loutey_paper7},
-underlies the GeoVac computational framework: take the $S^3$ label set
-$(n,l,m)$ as the nodes of a graph, solve the sparse eigenvalue problem
-on it, and recover atomic energies to $<0.1\%$ error with no fitted
-parameters~\cite{loutey_paper0, loutey_paper1} (the graph Laplacian is
-not a discretization of $\Delta_{S^3}$ and does not converge to it,
-Paper~7).
+underlies the GeoVac computational framework:\ the $S^3$ label set
+$(n,l,m)$~\cite{loutey_paper0, loutey_paper1} carries the channel
+structure and selection rules, and the hydrogenic energies follow from
+the Casimir $n^2 - 1$ on those labels through the energy shell (the
+graph Laplacian built on the labels is not a discretization of
+$\Delta_{S^3}$, does not converge to it, and does not carry the
+Rydberg ladder, Paper~7).
 
 The extension to molecules has proven more subtle.  Paper~8--9
 established the \emph{bond sphere} picture---a diatomic molecule
@@ -157,13 +159,17 @@ exploits prolate spheroidal separation.
 We formalize this as the \textbf{natural geometry principle}:
 \begin{quote}
 \emph{Every separable quantum system has a natural lattice---the
-lattice that discretizes the Laplace--Beltrami operator in the
-coordinate system where separation occurs.}
+label set and channel structure of the coordinates in which separation
+occurs.}
 \end{quote}
-For atoms, the natural lattice is the $S^3$ graph.  For diatomics,
-it is the prolate spheroidal lattice.  The GeoVac program is not
-about $S^3$ specifically---it is about identifying and discretizing
-the natural conformal geometry for each class of quantum systems.
+For atoms, the natural lattice is the $S^3$ label set $(n,\ell,m)$
+(on which $-\Delta_{S^3}$ is the diagonal $SO(4)$ Casimir;\ the graph's
+edge Laplacian does not converge to $\Delta_{S^3}$, Paper~7).  For
+diatomics, it is the prolate spheroidal channel structure (labels $m$
+and the node counts of the separated $\xi$, $\eta$ equations).  The
+GeoVac program is not about $S^3$ specifically---it is about
+identifying the natural separating geometry for each class of quantum
+systems and solving within its channels.
 
 The remainder of this paper implements this principle for H$_2^+$,
 the simplest diatomic.  Section~\ref{sec:coords} reviews prolate
@@ -1121,9 +1127,9 @@ Papers~0, 1, and 7, establish a pattern:
 \end{itemize}
 
 In both cases, the strategy is identical: identify the coordinate
-system where the Schr\"odinger equation separates, discretize the
-resulting Laplace--Beltrami operator, and solve the resulting
-eigenvalue problem.  The physics---nuclear charges, distances,
+system where the Schr\"odinger equation separates, take its label set
+and channel structure, and solve the separated equations within each
+channel.  The physics---nuclear charges, distances,
 masses---enters only through the coordinate system and its metric.
 There are no basis set parameters, no fitted constants, and no
 orbital exponents to optimize.
@@ -1244,10 +1250,10 @@ This result establishes the \emph{natural geometry principle} as
 the organizing idea of the GeoVac program:
 \begin{quote}
 \emph{Every separable quantum system has a natural lattice---the
-lattice that discretizes the Laplace--Beltrami operator in the
-coordinate system where separation occurs.}
+label set and channel structure of the coordinates in which separation
+occurs.}
 \end{quote}
-The atomic $S^3$ lattice (Papers~0, 1, 7) and the molecular prolate
+The atomic $S^3$ label lattice (Papers~0, 1, 7) and the molecular prolate
 spheroidal lattice (this paper) are the first two instances of this
 principle.  The two-electron extension to H$_2$ in the same prolate
 spheroidal coordinates reaches $99.97\%$ of $D_e$ with zero empirical
@@ -1376,7 +1382,7 @@ GeoVac Paper~1 (2026).
 \bibitem{loutey_paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from Scale-Invariant Graph Topology,''
+from a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper8}

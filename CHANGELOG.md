@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.1] - 2026-09-28
+
+**Patch. /qa trunk DELTA (claim-impact) = DEFECTS, then remediated. RESEARCH-GRADE not earned; a claim-impact re-check is owed.**
+
+### The run (2026-09-27, unseeded; worktree frozen at v5.17.0)
+- **Deterministic layer:** all green after one C20 fix. The checker read the all-caps tag "[CORRECTED 2026-09-25.]" as an author attribution; the comparison is now case-insensitive, and the selftest carries a case for it. Fire-tested: reverting the fix fails the selftest.
+- **Code (Opus): CLEAN.** 156 tests pass. Every graph fact was re-derived independently (components, kernel, [0,8), λ_max, C = 42.7397, a CG-route SO(4) Casimir), and 6 plants were all rejected. 2 SMALL.
+- **Citations (Opus): CLEAN.**
+- **Findings:** claims 7 LARGE / 9 SMALL; synthesis 2 LARGE / 3 SMALL; claim-impact 12 LARGE families. About 19 LARGE in all, **every one the same family**: the graph, or κ, credited with the hydrogen spectrum. v5.16.0 had retired only the narrow wording "the Laplacian converges".
+- **Examples:**
+  - κ described as "mapping graph eigenvalues onto the Rydberg ladder" (P0/7/18/22/34, group3 synthesis).
+  - "graph topology encodes the relative spectral structure" (P7).
+  - "Laplacian generates physical corrections" (P1).
+  - "lattice that discretizes Δ_LB" (P11/12).
+  - "per-shell energies emerge from H = κL + W" (P18).
+  - Convergence restatements (P23, P55, group5 synthesis, and the group3 synthesis conclusion, which still read [OBSERVATION]).
+  - The Paper 0 abstract and conclusion.
+  - Paper 1's unqualified "exact Rydberg".
+
+### v4.76.0 audit (PI-requested before touching the foundations)
+- **The refutation stands.** `lattice.py` and `atomic_solver.py` are byte-identical to v4.76.0. The model has never had l-changing edges, and no construction yields −1/(2n²): the old AtomicSolver gives −0.49364, −0.49361, −0.49323, … at n_max=20.
+- **What v4.76.0 had.** Paper 7 claimed convergence at theorem-level wording, backed only by the later-withdrawn s/p argument. The "18 symbolic proofs" import no `geovac` at all; they check the continuum Fock chain.
+- **Kept, as true and backed:**
+  - Paper 1's SU(1,1)×SU(2) algebra (interior labels);
+  - the continuum checks;
+  - λ_max → 8 with κ as an Observation;
+  - algebraic graph eigenvalues;
+  - Paper 0's labels and degeneracy;
+  - Paper 38 (CH Dirac).
+
+### Remediation (gate-first)
+- **Gate.** Two new C16 entries, `kappa-maps-graph-spectrum` and `graph-hamiltonian-carries-spectrum`, fire on 16/16 old wordings and stay silent on 6 corrected ones (including a true Paper-38 statement). They enumerated 25 loci, now 0 live, with 21 dependents stamped.
+- **Papers.** About 45 touched, all compiling with 0 undefined references.
+  - Every non-pattern finding is fixed: P0 abstract and conclusion; P1 "exact" scoped to interior shells; P1 no longer credits the Laplacian with corrections; group3 synthesis conclusion → [WALL]; Wilson/U(1) reconciled in P24 and the synthesis; the −Δ sign slip in P0/1/7; P7's [CONJECTURE] retired and the label set re-tagged [PRIOR ART] (Bargmann 1936); ≈49 → 48.3 mHa (n_max=7) / 49.2 (n_max=4); the heat-kernel argument demoted below the kernel-dimension argument.
+  - The group3 synthesis's Rabi/unitarity results are rescoped as Crank–Nicolson checks on the graph model.
+  - **Paper 7 retitled (PI decision):** "…from a Scale-Invariant Label Lattice", with 43 citing files updated. C11 PASSES.
+- **AtomicSolver (PI decision).** The default is now H = diag(−Z²/(2n²)); the legacy κ(D−A) is `hamiltonian='graph'`.
+  - About 15 consumers mapped. The graph-measuring ones request 'graph' explicitly; no pins changed.
+  - `tests/test_atomic_solver_physical.py` (23 tests), fire-tested 3/3.
+  - The spectroscopy demo now shows a real Lyman series (0.09%).
+  - Not touched: the pre-existing broken `ADSCFT/boundary/graph_states.py` kwarg.
+- **All deterministic gates PASS corpus-wide:** C16, C11, C19, C21, C17, C22, C20, C13, C14.
+
 ## [v5.17.0] - 2026-09-27
 
 **Minor bump (automatic: a change to the `/qa` skill).** A new QA status, **RESEARCH-GRADE = no open LARGE defects**, plus DoD pre-registration for the post-v5.16.0 DELTA runs.

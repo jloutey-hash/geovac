@@ -67,7 +67,8 @@ def test_muonic_hydrogen(verbose=True):
     print("\n[1a] Electronic Hydrogen")
     print("-" * 70)
     t_start = time.time()
-    solver_e = AtomicSolver(max_n=15, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
+    solver_e = AtomicSolver(max_n=15, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE,
+                           hamiltonian="graph")
     E_e, psi_e = solver_e.compute_ground_state(n_states=1)
     t_e = (time.time() - t_start) * 1000
 
@@ -160,7 +161,8 @@ def test_holographic_entropy(verbose=True):
     # Test electronic hydrogen
     print("\n[3a] Electronic Hydrogen")
     print("-" * 70)
-    solver_e = AtomicSolver(max_n=15, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
+    solver_e = AtomicSolver(max_n=15, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE,
+                           hamiltonian="graph")
 
     print("  Computing holographic entropy...")
     t_start = time.time()

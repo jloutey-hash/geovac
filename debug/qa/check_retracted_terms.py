@@ -518,6 +518,82 @@ REGISTRY = [
         "cited_by": {},
     },
     {
+        "id": "kappa-maps-graph-spectrum",
+        # The CLAIM: kappa = -1/16 maps / converts the graph's eigenvalues onto the Rydberg
+        # (physical, hydrogen) spectrum.  FALSE (trunk DELTA 2026-09-27): the graph spectrum lies in
+        # [0,8] (n_max disconnected l-blocks); kappa matches only lambda_max -> 8 to -1/2 (an
+        # Observation).  E_n comes from n^2-1 on the labels through Fock's energy shell p0^2 = -2E.
+        "pattern": r"operational\s+role\s+is\s+to\s+map|maps\s+(the\s+)?(dimensionless\s+)?(GeoVac\s+)?graph\s+eigenvalues|Rydberg-to-graph-eigenvalue\s+conversion|converts\s+a\s+discrete\s+spectrum|mediating\s+between\s+graph\s+eigenvalues\s+and\s+physical|kinetic\s+scale[^.]{0,60}fixes\s+the\s+energy\s+unit|hydrogen\s+atom,\s+to\s+within\s+an\s+overall\s+scale",
+        "exempt_if_nearby": withdrawal_marker("kappa-maps-graph-spectrum"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-28 (PI-approved remediation of the 2026-09-27 /qa trunk DELTA). Sibling of graph-laplacian-converges-to-s3; that entry's 2026-09-25 cited_by stamps were premature for these paraphrases.",
+        "files": [
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+        ],
+        "cited_by": {
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L294/L279/L176 kappa role",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L440 kappa signature",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L147, L3063, L3326",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L669 band-edge only",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L113, L117, L741",
+            "papers/group3_foundations/paper_1_spectrum.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L54-59 kappa plays no role",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L660",
+            "papers/synthesis/geovac_field_guide.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L158 energy-shell map",
+        },
+    },
+    {
+        "id": "graph-hamiltonian-carries-spectrum",
+        # The CLAIM: the graph (edge Laplacian, graph Hamiltonian kappa*L + W, graph topology) carries,
+        # encodes, discretizes or converges to the hydrogen / S^3 / HO spectrum, or has integer
+        # eigenvalues.  FALSE: the v4.76.0 audit (2026-09-28) confirmed the model is unchanged since v4 and
+        # no construction of it yields -1/(2n^2) (AtomicSolver n_max=20: -0.4936, -0.4936, -0.4932, ...).
+        # TRUE and kept: the label set + diagonal SO(4) Casimir; Paper 1's SU(1,1) algebra on interior
+        # labels; lambda_max -> 8; algebraic (pi-free) graph eigenvalues; Paper 38 (CH Dirac, not D-A).
+        "pattern": r"emerge\s+from\s+the\s+full\s+graph\s+Hamiltonian|graph\s+topology\s+correctly\s+encodes|(topology|connections)[^.]{0,40}generates\s+physical\s+corrections|lattice\s+that\s+discretizes\s+the\s+Laplace|Laplacian\s+converges\s+to\s+the\s+HO\s+Hamiltonian|whose\s+spectrum\s+converges,\s+under\s+the\s+Fock\s+projection|is\s+the\s+matter\s+propagator\s+\(it\s+converges|admits\s+a\s+\S{0,8}-free\s+graph\s+Laplacian\s+interpretation|integer\s+eigenvalues,\s+rational",
+        "exempt_if_nearby": withdrawal_marker("graph-hamiltonian-carries-spectrum"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group4 group5 group6 synthesis",
+        "note": "Registered 2026-09-28 (PI-approved remediation of the 2026-09-27 /qa trunk DELTA; v4.76.0 audit: refutation stands).",
+        "files": [
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex",
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L174 + Class-S definition",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L743 deleted; L695 T+- vs Casimir",
+            "papers/group3_foundations/paper_1_spectrum.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L31, L379, L388, L464",
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L48, L113, L160, L1128, L1247",
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L121, L1737",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L135, L208",
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L303, L1216 -> Paper 24 (L0 inert)",
+            "papers/group3_foundations/paper_55_periods_of_geovac.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L146",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L97, L137",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L670 Fock rigidity",
+            "papers/synthesis/group6_precision_observations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L39",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L38",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "remediated + summary surfaces reread 2026-09-28 (trunk DELTA remediation agent; PM-verified gate 0 live) -- L108",
+        },
+    },
+    {
         "id": "p60-floor-is-angular",
         "note": "Paper 60's accuracy floor was attributed to l_max truncation "
                 "and declared unreachable at any K.  Both halves are refuted "

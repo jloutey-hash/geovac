@@ -302,7 +302,7 @@ def main() -> None:
               flush=True)
 
         # Build solver and eigenstates
-        solver = AtomicSolver(max_n=n_max, Z=1)
+        solver = AtomicSolver(max_n=n_max, Z=1, hamiltonian="graph")
         n_eigenstates = min(5, solver.n_states - 1)
         E, psi = solver.compute_ground_state(n_states=n_eigenstates)
         sparsity = solver.lattice.sparsity() * 100

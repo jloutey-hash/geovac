@@ -35,9 +35,9 @@ A Synthesis of the Spectral Graph Theory Arc}
 The Geometric Vacuum (GeoVac) framework is a discretization scheme for
 non-relativistic quantum mechanics on natural geometries, built on a
 packed lattice of quantum-number labels.  For hydrogen the lattice's
-nodes are exactly the labels of the unit-$S^3$ harmonics, on which the
-continuous Laplace--Beltrami operator acts as the diagonal $SO(4)$
-Casimir at every cutoff;\ the lattice's edge Laplacian does \emph{not}
+nodes are exactly the labels of the unit-$S^3$ harmonics, on which
+(minus) the continuous Laplace--Beltrami operator acts as the diagonal
+$SO(4)$ Casimir at every cutoff;\ the lattice's edge Laplacian does \emph{not}
 replace or converge to that operator (it splits into $n_{\max}$
 disconnected $l$-blocks;\ corrected 2026-09-25).  This synthesis paper assembles the framework's foundational
 arc---the packing construction, the discrete
@@ -88,8 +88,8 @@ continuum CFT-on-sphere observables bit-exactly (documented in the
 operator-algebra arc, outside the foundations scope of this
 synthesis).  We present
 GeoVac as a discretization framework that exploits natural geometry,
-not as a new foundation for quantum mechanics: the discrete graph and
-the continuous Laplace--Beltrami operator are dual descriptions
+not as a new foundation for quantum mechanics: the discrete label
+lattice and the continuous Laplace--Beltrami operator are dual descriptions
 connected by proven conformal maps, and the interpretive question of
 which description is more fundamental is left open.  The framework's
 concrete computational advantages---$O(V)$ sparsity, angular momentum
@@ -143,7 +143,7 @@ divisibility ($\lambda_{2s} = 3$ exactly iff $n_{\max} \equiv 0 \bmod 3$;\
 Paper~1 \S III).  What is exact is the label set:\ ``degeneracy recovery''
 legitimately means that the nodes, $n^2$ per shell, are the
 Gel'fand--Tsetlin labels of the Peter--Weyl truncation of $L^2(S^3)$,
-on which $\Delta_{S^3}$ is the diagonal $SO(4)$ Casimir $n^2 - 1$.  The
+on which $-\Delta_{S^3}$ is the diagonal $SO(4)$ Casimir $n^2 - 1$.  The
 discrete labels and the continuous operator are connected by Fock's
 proven conformal equivalence, and we present them throughout as dual descriptions of
 the same physics; the interpretive question of ontological priority is
@@ -173,8 +173,9 @@ a suite of 18 symbolic checks (ten of the eighteen limiting-case or definitional
 and extending to the
 multi-electron $S^{3N-1}$ setting.  \emph{The fan-out} (the framework's
 working machinery):\ Paper~1~\cite{loutey_paper1} sets up the spectral
-graph theory and reproduces the Rydberg quantum-number structure (the
-energies follow once the matched scale $\kappa$ is applied);
+graph theory and reproduces the Rydberg quantum numbers on interior
+shells (the energies being the imposed energy-shell map of $n$, not a
+graph output);
 Paper~18~\cite{loutey_paper18} classifies transcendental content via a
 six-tier exchange-constant taxonomy and the master Mellin engine;
 Paper~22~\cite{loutey_paper22} states the potential-independent angular
@@ -276,11 +277,14 @@ T_\pm |n, l, m\rangle &\propto |n \pm 1, l, m\rangle.
 The angular operators $L_\pm$ connect states within an $n$-shell along
 $m$; the radial operators $T_\pm$ connect states between adjacent
 $n$-shells at fixed $l$.  \textbf{[PANEL-VERIFIED]} Paper~1~\cite{loutey_paper1} demonstrates
-that the Casimir invariants built from the ladder operators reproduce
-the Rydberg quantum-number structure ($n$ and $l(l+1)$) exactly; the
-energies $E_n = -1/(2n^2)$ follow only once the matched kinetic scale
-$\kappa = -1/16$ is applied, which the corpus records as an Observation
-(Paper~7).  At the algebraic level the discrete and continuous
+that the operators built from the ladder generators reproduce the
+Rydberg quantum numbers exactly on interior shells:\ the $SU(1,1)$
+element $N = -2[T_+, T_-]$ returns $n$ for $n < n_{\max}$ (not on the
+truncated top shell), and the $SU(2)$ Casimir returns $l(l+1)$;\ on
+every shell the $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$
+is exact on the labels.  The energies $E_n = -1/(2n^2)$ are an imposed
+map from $n$ through Fock's energy shell $p_0^2 = -2E$, not an output of
+the operators or of the graph (Paper~7).  At the algebraic level the discrete and continuous
 descriptions therefore agree on the quantum-number skeleton, while the
 graph Laplacian's node-amplitude proxy for the $s/p$ gap is large at finite
 cutoff (up to $37\%$ at $n_{\max} = 5$ on the binary lattice;\ $0.39\%$ at
@@ -288,13 +292,16 @@ $n_{\max} = 30$, which sits on the $n_{\max} \equiv 0 \bmod 3$ branch, against
 $1.65\%$ and $2.58\%$ at $28$ and $29$; the $\ell$-blocks are disconnected,
 so this is a proxy and not a spectral gap --- Paper~1 \S III).
 
-\subsection*{The universal kinetic constant $\kappa = -1/16$}
+\subsection*{The kinetic constant $\kappa = -1/16$}
 
-\textbf{[OBSERVATION]} A second invariant of the packing geometry is the universal kinetic
-constant $\kappa = -1/16$.  Its operational role is to map the
-dimensionless $S^3$ eigenvalues $\lambda_n = -(n^2 - 1)$ to the
-physical Rydberg spectrum via the energy-shell focal length
-$p_0 = Z/n$.  Recent analysis~\cite{loutey_paper18, loutey_paper7} has
+\textbf{[OBSERVATION]} A second constant attached to the packing graph is the kinetic
+constant $\kappa = -1/16$.  Its role is narrow:\ it matches the graph's
+extremal eigenvalue (a band edge, $\lambda_{\max} \to 8$) to the
+hydrogen ground state $-\tfrac12$.  It is not the energy unit of the
+Rydberg ladder and does not map the graph spectrum onto it:\ the
+Rydberg levels follow from the dimensionless $S^3$ eigenvalues
+$n^2 - 1$ on the labels through the energy-shell focal length
+$p_0 = Z/n$, with no role for $\kappa$.  Recent analysis~\cite{loutey_paper18, loutey_paper7} has
 clarified its status:\ the value $\kappa = -1/16$ \emph{coincides} with
 a geometric quantity computed independently of any energy calibration.
 The squared coupling between adjacent $n$-shells in the Gegenbauer
@@ -314,7 +321,7 @@ tier of the exchange-constant taxonomy accordingly).
 \textbf{[OBSERVATION]} The discrete lattice exists \emph{a priori} from the packing
 construction, before any reference to the Coulomb potential or the
 Schr\"odinger equation.  Its persistent match to known atomic
-structure---the Rydberg quantum-number structure, the chemical
+structure---the Rydberg quantum-number labels, the chemical
 periodicity of multi-electron atoms (Paper~16~\cite{loutey_paper16}, outside the
 foundations group), nuclear magic numbers under a harmonic-oscillator
 basis (Paper~23~\cite{loutey_paper23}, applications group)---is therefore evidence that
@@ -333,8 +340,8 @@ framing of Paper~7 governs the discussion.
 The theoretical foundation of GeoVac is the conformal equivalence,
 established in Paper~7~\cite{loutey_paper7}, between the \emph{continuum}
 unit-$S^3$ Laplace--Beltrami operator and the Fock projection.  The
-discrete Fock graph's role is its label set, on which that operator is
-the diagonal $SO(4)$ Casimir exactly;\ that the graph's edge Laplacian
+discrete Fock graph's role is its label set, on which minus that
+operator is the diagonal $SO(4)$ Casimir exactly;\ that the graph's edge Laplacian
 has that operator as its continuum limit is \emph{false} (it splits
 into $n_{\max}$ disconnected $l$-blocks;\ corrected 2026-09-04 from
 ``established'' and 2026-09-25 from ``unestablished'').  This section
@@ -391,9 +398,12 @@ lies outside their scope (Paper~7 states this explicitly).
 converge, as $n_{\max} \to \infty$ under any rescaling, to the round
 $S^3$ Laplace--Beltrami operator:\ its edges never change $l$, so it is
 the direct sum of $n_{\max}$ disconnected grid graphs, with
-$\dim\ker = n_{\max}$ (the $S^3$ Laplacian has one zero mode) and a heat
-kernel that vanishes identically between blocks, for the binary
-production weights and the $1/(n_i n_j)$ option alike
+$\dim\ker = n_{\max}$ at every cutoff where the $S^3$ Laplacian has one
+zero mode --- the load-bearing obstruction --- for the binary
+production weights and the $1/(n_i n_j)$ option alike (the graph heat
+kernel also vanishes between blocks, but reading that as a continuum
+statement would need a node-to-point identification the papers do not
+make)
 (\texttt{tests/test\_graph\_s3\_nonconvergence.py}).  The closed-form
 saturation of the spectral bound, \textbf{[INTERNAL THEOREM]}
 (Paper~0~\S VI), is a grid band edge, and the $s/p$-lift decay
@@ -401,7 +411,7 @@ saturation of the spectral bound, \textbf{[INTERNAL THEOREM]}
 withdrawn as evidence on 2026-09-03 (the convergence reading itself,
 an Observation until 2026-09-25, is withdrawn).  What is exact, at every
 cutoff, is the label set:\ the nodes are the Gel'fand--Tsetlin labels of
-the Peter--Weyl truncation of $L^2(S^3)$, and on them $\Delta_{S^3}$ is
+the Peter--Weyl truncation of $L^2(S^3)$, and on them $-\Delta_{S^3}$ is
 the diagonal $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$
 (same test, built from the generators).  What is a theorem on the
 operator-algebra side is a statement about a different object:\ \textbf{[INTERNAL THEOREM]} for the spinor (Dirac)
@@ -548,7 +558,7 @@ withdrawn as evidence, 2026-09-03), once read as indicating that the
 discrete GeoVac graph converges to the continuous $S^3$
 Laplace--Beltrami operator --- a reading now withdrawn as a wall (the
 graph splits into $n_{\max}$ disconnected $l$-blocks;\ 2026-09-25), the
-exact content being the label set, on which that operator is the
+exact content being the label set, on which minus that operator is the
 diagonal $SO(4)$ Casimir; (b)
 the systematic symbolic verification of the conformal transformation
 chain; (c) the framing of physical scales as confined to the
@@ -682,7 +692,11 @@ was \texttt{tests/rabi\_oscillation.py}, named so that collection
 skipped it, with its cases wired as a script rather than as tests.
 Items (a), (c) and (d) below are Paper~6's archived measurements with
 no live regression test (a named coverage gap in the claim matrix).
-The graph Hamiltonian $H$ is
+\emph{Scope:}\ both live checks run on the labelled legacy graph model
+\texttt{AtomicSolver(hamiltonian='graph')}, $H = \kappa(D - A)$, whose
+excited spectrum is a grid band structure and not physical hydrogen
+(Paper~7);\ they are checks of the Crank--Nicolson integrator on that
+model, not hydrogen physics.  The graph Hamiltonian $H$ is
 sparse with $O(V)$
 nonzero entries, so the Crank--Nicolson propagator
 \begin{equation}
@@ -692,7 +706,7 @@ nonzero entries, so the Crank--Nicolson propagator
 admits implementation at $O(V)$ cost per step using sparse
 matrix-vector products plus iterative linear solves.  \textbf{[MEASURED]} Unitarity is
 preserved to $10^{-10}$ (measured $1.1 \times 10^{-13}$) over $10^3$
-time steps in the live hydrogen regression ($n_{\max} = 10$, 385 states);\ Paper~6's original
+time steps in the live graph-model regression ($n_{\max} = 10$, 385 states);\ Paper~6's original
 $\mathrm{H}_2$ benchmark reported machine precision over $10^4$ steps
 (archived measurement).
 
@@ -700,11 +714,15 @@ $\mathrm{H}_2$ benchmark reported machine precision over $10^4$ steps
 spectroscopy from a single delta-kick propagation, recovering 20
 dipole-active electronic transitions of H$_2$ with $0.16\%$ mean
 error in 33~seconds; (b) resonant Rabi oscillations matching the
-analytic Bloch--Siegert-corrected period to $0.41\%$ with $99.98\%$
-coherent population transfer (live hydrogen run, $n_{\max} = 4$,
-30 states); (c) ab initio molecular dynamics with
-nuclei coupled to graph forces via Velocity Verlet, conserving total
-energy to $0.0003\%$; (d) NVT-ensemble Langevin dynamics with stable
+analytic Bloch--Siegert-corrected two-level period to $0.41\%$ with
+$99.98\%$ coherent population transfer (live run on the graph model,
+$n_{\max} = 4$, 30 states;\ the period is matched against the analytic
+formula evaluated at the model's own level gap, not hydrogen's, so this
+tests the integrator, not hydrogen spectroscopy); (c) molecular
+dynamics with nuclei coupled to graph forces via Velocity Verlet,
+conserving total energy to $0.0003\%$ (archived Paper~6, on the
+superseded LCAO graph-concatenation construction whose potential
+surface has no equilibrium, FCI-M); (d) NVT-ensemble Langevin dynamics with stable
 thermal vibrations at 300~K.  Only (b) and the unitarity benchmark
 carry live regression backing (see the provenance note above).
 
@@ -712,10 +730,11 @@ Paper~6 is not a foundational claim in the same sense as Papers 7, 18,
 22, 24, or 31---it is an operational demonstration that the
 foundations support time evolution.  Its role in the synthesis is to
 close the gap between the spectral statement of Papers~1 and~7 (the
-ladder operators $T_\pm, L_\pm$ reproduce the Rydberg quantum-number
-structure, Paper~1) and the dynamical statement
-required for any quantum-chemistry application (the graph supports
-time evolution at the same $O(V)$ cost).  Without Paper~6's dynamics
+ladder operators $T_\pm, L_\pm$ reproduce the Rydberg quantum numbers on
+interior shells, Paper~1) and the dynamical statement
+required for any quantum-chemistry application (a sparse Hamiltonian on
+the labels supports time evolution at the same $O(V)$ cost;\ the live
+demonstration uses the graph model, not physical hydrogen).  Without Paper~6's dynamics
 engine, GeoVac would be limited to eigenvalue problems; with it, the
 framework extends to time-dependent quantum chemistry, spectroscopy,
 and molecular dynamics.
@@ -794,7 +813,7 @@ of which six stand:\ the first was withdrawn on 2026-09-25 (Paper~24).
 The asymmetry as currently catalogued reads:
 
 \begin{enumerate}
-\item \textbf{Spectral-bound role of $L_0$ [withdrawn 2026-09-25].}  On
+\item \textbf{Spectrum-computing role of $L_0$ [withdrawn 2026-09-25].}  On
 the Coulomb $S^3$ graph, the graph Laplacian $L_0$ carries the bipartite
 bound whose saturation $\lambda_{\max} \to 2 d_{\max} = 8$ ---
 \textbf{[INTERNAL THEOREM]} closed form, at rate
@@ -808,8 +827,10 @@ bounded in $[0, 8]$ and does \emph{not} approach the continuum
 $n^2 - 1$ [retracted 2026-09-04: graph-spectrum-attribution] (the sentence printed here until 2026-09-04
 said it did, ``numerically, Paper~7'';\ Paper~7 says the opposite:\ the
 spectrum of $\kappa L$ is confined to $[-1/2, 0]$ and no level-by-level
-Rydberg ladder is reproduced). The hydrogenic ground energy follows only
-under the matched kinetic scale $\kappa$, an Observation.  On
+Rydberg ladder is reproduced). The matched kinetic scale $\kappa$ only
+matches the band edge to the ground state $-\tfrac12$ (an Observation);
+the hydrogenic levels come from $n^2 - 1$ on the labels through the
+energy shell.  On
 the Bargmann--Segal lattice, $L_0$ is the matter-propagator operator,
 not the Hamiltonian: the spectrum comes from the diagonal Euler
 operator $\hbar \omega(\hat{N} + 3/2)$, and the graph adjacency
@@ -822,15 +843,17 @@ bit-exactly $\pi$-free at every finite $N_{\max}$.  This is one of
 the clearest concrete instances of an exchange constant being tied
 to a specific natural geometry.
 
-\item \textbf{Wilson-physical-content.}  The non-abelian Wilson gauge
-construction on $S^3 = SU(2)$ admits natural matter coupling (the
-gauge field acts on Pauli spinors carried by the graph nodes); the
-parallel SU(3) Wilson construction on the $(N, 0)$ Hardy tower fails
-the fixed-group-on-every-link requirement, because transitions
-between $(N, 0)$ and $(N + 1, 0)$ irreps are Clebsch--Gordan
-intertwiners rather than $SU(3)$ group elements.  The natural gauge
-group of the Bargmann graph at the pure-gauge level is $U(1)$, not
-$SU(3)$.
+\item \textbf{Wilson-physical-content.}  On $S^3 = SU(2)$, natural
+matter coupling for the non-abelian Wilson gauge construction (the
+gauge field acting on Pauli spinors carried by the graph nodes) is
+argued, not yet constructed.  On $S^5$, pure-gauge $SU(3)$ Wilson
+theory on the Bargmann graph is well defined;\ what fails is
+\emph{natural} matter coupling on the $(N, 0)$ Hardy tower, because
+transitions between $(N, 0)$ and $(N + 1, 0)$ irreps are
+Clebsch--Gordan intertwiners rather than $SU(3)$ group elements, so
+matter coupling needs a CG intertwiner on every link.  The layer is a
+statement about Wilson gauge with natural matter coupling, not about
+pure gauge.
 
 \item \textbf{Modular-Hamiltonian structure of the wedge KMS state.}
 The Coulomb $S^3$ side admits a hemispheric-wedge KMS state with
@@ -874,7 +897,7 @@ restriction discards.  Conductor-four \emph{period} content, by
 contrast, does transfer (Paper~24's companion non-layer).
 \end{enumerate}
 
-The first three layers were established in Paper~24 and Paper~25
+The first three layers were catalogued in Paper~24 and Paper~25
 (QED/gauge group, $S^5$ gauge-structure paper); the fourth (wedge KMS)
 was identified in a 2026 sprint and folded into Paper~24's \S{}V; the
 fifth (spectral-action gravity) comes from Paper~51; the sixth
@@ -1023,8 +1046,8 @@ record.
 
 \textbf{[OBSERVATION]} A particularly clean operational consequence of the taxonomy is the
 two-layer architecture made explicit by Paper~34 (catalogue paper,
-applications group): the bare combinatorial graph (Layer~1, $\pi$-free
-in $\mathbb{Q}[\sqrt{d}]$) versus a finite family of named projections
+applications group): the bare combinatorial graph (Layer~1:\ labels,
+rational entries, algebraic eigenvalues) versus a finite family of named projections
 (Layer~2) that add specific variables, dimensions, and transcendentals
 when the graph is mapped to a physical observable.  Paper~34
 documents 28~projections to date; each appears in the taxonomy of
@@ -1104,8 +1127,11 @@ $\pi$-free certificate live in the potential-specific sector and
 explicitly do \emph{not} transfer to the Coulomb side---the
 Bargmann-style first-order operator has no analog on $S^3$.  Paper~25
 (group~5, QED/gauge) on the SU(2) Wilson lattice gauge structure of the
-Hopf graph also lives in the potential-specific sector: it depends on
-the parallelizability of $S^3 = SU(2)$, which has no analog on $S^5$.
+Hopf graph also lives in the potential-specific sector as far as Wilson
+gauge \emph{with natural matter coupling} is concerned: that depends on
+the parallelizability of $S^3 = SU(2)$, which has no analog on $S^5$
+(pure-gauge $SU(3)$ is well defined on $S^5$;\ natural $(N,0)$ matter
+there needs a Clebsch--Gordan intertwiner).
 
 The operational utility of the partition is that anyone porting GeoVac
 to a new system can read off, from the universal sector, what
@@ -1426,9 +1452,11 @@ structural results that together provide a coherent discretization of
 non-relativistic quantum mechanics on natural geometries.
 \textbf{[SYMBOLIC PROOF]} The conformal chain from the unit-$S^3$
 Laplace--Beltrami operator onward is verified symbolically
-(Paper~7~\cite{loutey_paper7}); \textbf{[OBSERVATION]} the discrete Fock
-graph's convergence to that operator is a reading supported by the
-proved saturation of the spectral bound, not an established result, while
+(Paper~7~\cite{loutey_paper7}); \textbf{[WALL]} the discrete Fock
+graph's edge Laplacian does \emph{not} converge to that operator (it
+splits into $n_{\max}$ disconnected $l$-blocks with an
+$n_{\max}$-dimensional kernel), while the label set is exact, carrying
+$-\Delta_{S^3}$ as the diagonal $SO(4)$ Casimir $n^2 - 1$;\ and
 \textbf{[INTERNAL THEOREM]} the state-space GH convergence of the spinor
 spectral truncations is proved with explicit rate in
 Paper~38~\cite{loutey_paper38}; \textbf{[INTERNAL THEOREM]} the
@@ -1463,8 +1491,9 @@ is closed form, bounded in $[0, 8]$, and does not converge to it ---
 Paper~0~\S VI, Paper~7); their continuum counterparts are theorems about the
 Laplace--Beltrami operator or the Euler operator on the corresponding
 natural manifold; the conformal equivalence guarantees consistency.
-The discrete and continuous readings are dual descriptions connected
-by proven maps, and the interpretive question is left open.
+The discrete label lattice and the continuous operator are dual
+descriptions connected by proven maps, and the interpretive question is
+left open.
 
 The open questions catalogued in Section~\ref{sec:open} are
 substantive but do not destabilize the structural results of the
@@ -1598,7 +1627,7 @@ GeoVac Paper~6 (2026).
 
 \bibitem{loutey_paper7}
 J.~Loutey,
-``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation from Scale-Invariant Graph Topology,''
+``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation from a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper18}

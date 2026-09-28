@@ -36,16 +36,18 @@ orientability of the compactified packing manifold ($S^2$),
 corresponding to spin multiplicity.  When the packing is interpreted
 as a graph, its Laplacian splits into $\ell$-blocks (the edges change
 $n$ or $m$, never $\ell$) and so does not converge to the $S^3$
-Laplacian---the node set is the exact $S^3$ label set, on which that
-operator is the diagonal $SO(4)$ Casimir---and \textbf{[INTERNAL THEOREM]} its top
+Laplacian---the spinless node set is the exact $S^3$ label set, on which
+$-\Delta_{S^3} = L^2 + A^2$ is the diagonal $SO(4)$ Casimir
+$n^2-1$---and \textbf{[INTERNAL THEOREM]} its top
 eigenvalue saturates the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
 (attained in a mid-$\ell$ block, not in the $s$-wave block, whose own
 bound is 4; corrected 2026-09-03), so that under a single matched scale
 $K_{\mathrm{vac}} = -1/16$ the extremal eigenvalue reaches the hydrogen
 ground-state energy---matched, not derived: the content that could have
-failed is the spectral bound, not the target the scale is matched to; the full per-shell
-spectrum $E_n = -Z^2/(2n^2)$ requires an additional node-weight term
-(Paper~18~\cite{paper18}~\S\,\textsc{iii}).  \textbf{[OBSERVATION]} This angular cross-section recurs as a universal
+failed is the spectral bound, not the target the scale is matched to.
+The per-shell spectrum $E_n = -Z^2/(2n^2)$ is not a function of the
+graph Laplacian: it follows from the diagonal Casimir $n^2-1$ on the
+labels through Fock's energy shell $p_0^2 = -2E$.  \textbf{[OBSERVATION]} This angular cross-section recurs as a universal
 structural factor inside every natural geometry developed in the
 Geometric Vacuum series---from $S^3$ for atoms through composed fiber
 bundles for multi-electron molecules---making it a foundational
@@ -140,8 +142,8 @@ Section~\ref{sec:correspondences} discusses the structural
 correspondences for~$n$ and spin.
 Section~\ref{sec:cross-section} shows how the angular cross-section
 recurs across the GeoVac natural geometries.
-Section~\ref{sec:graph} constructs the graph topology and connects it
-to the spectral results of later papers.
+Section~\ref{sec:graph} constructs the graph topology and states what
+its spectrum does and does not carry.
 Sections~\ref{sec:scope} and~\ref{sec:discussion} address scope,
 limitations, and context.
 
@@ -333,10 +335,14 @@ To be precise about the scope of this result:
 \item It does \emph{not} produce the functional form of the spherical
   harmonics, the eigenvalue $\ell(\ell+1)$ of $\hat{L}^2$, or the
   commutation relations of angular momentum operators.  Those require
-  additional structure (the $SO(4)$ Casimir acting diagonally on the
-  labels, and Fock's continuum projection;\ not a continuum limit of the
-  graph Laplacian, which does not converge to $\Delta_{S^3}$,
-  Sec.~\ref{sec:graph}), developed in Papers~1 and~7.
+  additional structure: the operators themselves (the $SO(3)$ Casimir
+  $L^2$, whose eigenvalue is $\ell(\ell+1)$, and the $so(3)$ commutation
+  relations) and, for the functional forms, the continuum harmonics
+  reached through Fock's projection (Papers~1 and~7).  A diagonal
+  Casimir on the labels supplies eigenvalues, not functional forms or
+  commutation relations;\ nor does a continuum limit of the graph
+  Laplacian supply them, since it does not converge to $\Delta_{S^3}$
+  (Sec.~\ref{sec:graph}).
 
 \item The result is \emph{independent} of any specific physical
   system.  The angular labeling emerges from 2D isotropic geometry,
@@ -488,8 +494,9 @@ harmonics, which decompose as $Y_{n\ell m} = R_n(\chi) \,
 Y_{\ell m}(\theta, \phi)$.  The angular factor $Y_{\ell m}$ is
 precisely the per-shell structure of the packing, with $\ell = k - 1$.
 The packing's node set is exactly the label set of these harmonics
-(the Peter--Weyl truncation of $L^2(S^3)$), on which the $S^3$
-operator acts as the diagonal $SO(4)$ Casimir $n^2 - 1$;\ Paper~7~\cite{paper7}
+(the Peter--Weyl truncation of $L^2(S^3)$), on which
+$-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal $SO(4)$ Casimir
+$n^2 - 1$;\ Paper~7~\cite{paper7}
 verifies Fock's conformal chain from that continuum operator onward.
 The graph's edge Laplacian does \emph{not} converge to it
 (Sec.~\ref{sec:graph}).
@@ -575,16 +582,21 @@ invariant; the continuum geometries are projections.
 
 We state this as a mathematical observation, not a metaphysical claim.
 The conformal equivalences between each continuum operator and
-standard quantum mechanics, and the identification of the lattice's
-labels with that operator's eigenbasis labels, are established case by case:
-\textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic proofs of the Fock
-projection chain for the $S^3$ embedding (a graph-to-continuum
+standard quantum mechanics are not established uniformly across the
+hierarchy.  For the $S^3$ embedding the lattice's labels are the
+operator's eigenbasis labels, and
+\textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic checks of Fock's
+continuum projection chain (a graph-to-continuum
 \emph{operator} convergence is not part of it:\ the edge Laplacian does
-not converge to $\Delta_{S^3}$, Sec.~\ref{sec:graph}), and the
-subsequent papers verify the angular-sector recurrences and benchmark
-each geometry in the hierarchy numerically.
-The framework is demonstrably conformally equivalent to standard
-continuous quantum mechanics at every level where it has been tested.
+not converge to $\Delta_{S^3}$, Sec.~\ref{sec:graph}).  At the other
+levels only the angular channel structure carries the packing labels
+(at Level~2 the prolate separation constants are not labelled by
+$\ell$ at all, only by $m$ and a node count), and the subsequent
+papers benchmark each geometry in the hierarchy numerically.
+\textbf{[OBSERVATION]} The one-center levels (1 and 3) are the standard
+continuum problems in separated coordinates; the composed Level~5 adds
+a Phillips--Kleinman pseudopotential and is an approximation to, not
+an equivalent of, the all-electron problem.
 Whether one regards the discrete or continuum description as more
 fundamental is a choice of interpretation, not a consequence of the
 mathematics.
@@ -665,9 +677,12 @@ The graph Laplacian $L = D - A$ defines a discrete Hamiltonian
   H = K_{\mathrm{vac}} \, L \,,
   \label{eq:graph-hamiltonian}
 \end{equation}
-where $K_{\mathrm{vac}} = -1/16$ is the kinetic scale factor that
-maps dimensionless graph eigenvalues to physical energies in atomic
-units.  \textbf{[OBSERVATION]} This constant's value $1/16$ \emph{coincides} with a conformal-geometry
+where $K_{\mathrm{vac}} = -1/16$ is the kinetic scale factor.  It
+matches only the graph's extremal eigenvalue (a band edge,
+$\lambda_{\max} \to 8$) to the hydrogen ground-state energy $-1/2$;
+it does not carry the rest of the graph spectrum onto the Rydberg
+ladder, whose per-shell energies follow from $n^2-1$ on the labels
+through Fock's energy shell $p_0^2 = -2E$.  \textbf{[OBSERVATION]} This constant's value $1/16$ \emph{coincides} with a conformal-geometry
 quantity of the Fock projection (Paper~7~\cite{paper7}): the squared
 coupling between adjacent $n$-shells in the Gegenbauer eigenbasis of the
 $S^3$ Laplacian is $c^2(n,l) = \tfrac{1}{4}[1 - l(l+1)/(n(n+1))]$ (Paper~7,
@@ -719,27 +734,37 @@ ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
 convergence of the spectral bound is the content; the reproduction of
 the target is not.  \textbf{[WALL]} Nor is that bound an $S^3$ quantity:\
 $8 = 2 d_{\max}$ is the band edge of any large two-dimensional grid, and
-$C$ is a Dirichlet band edge.  Because the $\ell$-blocks are disconnected,
-$\dim\ker L = n_{\max}$ (the $S^3$ Laplacian has one zero mode) and the
-heat kernel $e^{-tL}$ vanishes identically between blocks, so $L$ does
-\emph{not} converge to $\Delta_{S^3}$, for the binary production weights
-and the $1/(n_i n_j)$ option alike
-(\texttt{tests/test\_graph\_s3\_nonconvergence.py}).  What is exact is the
-node set:\ it is the Gel'fand--Tsetlin label set of the Peter--Weyl
-truncation of $L^2(S^3)$, on which $\Delta_{S^3}$ acts as the diagonal
+$C$ is a Dirichlet band edge.  The load-bearing obstruction is the
+kernel dimension:\ because the $\ell$-blocks are disconnected, the
+Laplacian on the spinless $(n,\ell,m)$ node set has
+$\dim\ker L = n_{\max}$ at every cutoff, whereas $\Delta_{S^3}$ has a
+single zero mode, so $L$ does \emph{not} converge to $\Delta_{S^3}$,
+for the binary production weights and the $1/(n_i n_j)$ option alike
+(\texttt{tests/test\_graph\_s3\_nonconvergence.py}).  (Relatedly, the
+graph heat kernel $e^{-tL}$ vanishes identically between blocks;\ turning
+that into a statement about the continuum heat kernel would need a
+node-to-point identification this paper does not make, so it is
+corroboration, not the argument.)  The spin-doubled vertex set of
+Eq.~(\ref{eq:vertex-set}) is two copies of this node set;\ the kernel
+and label statements here are made on the spinless set.  What is exact is the
+spinless node set:\ it is the Gel'fand--Tsetlin label set of the
+Peter--Weyl truncation of $L^2(S^3)$, on which
+$-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal
 $SO(4)$ Casimir $n^2 - 1$ at every cutoff (a node weight, not an edge
 Laplacian).  The
 \textbf{[SYMBOLIC PROOF]} $(\ell, m)$ angular structure is exact at every finite $n_{\max}$---it
-is encoded in the graph topology, not approximated by mesh refinement.
+is carried by the node labels, not approximated by mesh refinement.
 
 The conformal equivalence between the hydrogen problem and the
 Laplace--Beltrami operator on the unit~$S^3$ (via
 Fock's stereographic projection) is developed in Paper~7~\cite{paper7},
 \textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (several limiting-case or definitional) validates the conformal geometry
 of that continuum chain (the graph Laplacian is not a discretization of
-it; see above).  The energy
-eigenvalues and dynamics built on this graph are developed in
-Paper~1~\cite{paper1} and the archived Paper~6~\cite{paper6}.
+it; see above).  Paper~1~\cite{paper1} develops the operator algebra
+on these labels (the $SU(1,1)\times SU(2)$ ladder operators, exact on
+interior shells, with the Rydberg energies imposed through the energy
+shell rather than output by the graph); dynamics were developed in the
+archived Paper~6~\cite{paper6}.
 
 
 %% ================================================================
@@ -845,8 +870,9 @@ Paper~7~\cite{paper7} verifies Fock's conformal equivalence between the
 hydrogen problem and the Laplace--Beltrami operator on~$S^3$, with the
 $1/r$ Coulomb potential emerging as the coordinate distortion from
 stereographic projection rather than an independent force law;\ the
-packing's node set is the label set of that operator's harmonics, on
-which it acts as the diagonal $SO(4)$ Casimir $n^2 - 1$.  The graph
+packing's (spinless) node set is the label set of that operator's
+harmonics, on which $-\Delta_{S^3} = L^2 + A^2$ acts as the diagonal
+$SO(4)$ Casimir $n^2 - 1$.  The graph
 Laplacian equipped with $K_{\mathrm{vac}} = -1/16$ does \emph{not}
 converge to that operator:\ it splits into $n_{\max}$ disconnected
 $\ell$-blocks (\S VI;\ corrected 2026-09-25 from ``indicated
@@ -893,16 +919,14 @@ The $(\ell, m)$ angular sector constructed here recurs as the
 universal angular cross-section inside every natural geometry developed
 in the GeoVac series, from $S^3$ for single-electron
 atoms~\cite{paper7} through composed fiber bundles for core--valence
-molecules~\cite{paper17}.  When equipped with a graph Laplacian and
-kinetic scale, this packing becomes the foundation for a computational
-framework that has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
-\textbf{[MEASURED]} LiH, and BeH$^+$, with a saturation deficit of $0.57\%$ for the hydrogen ground-state
-bound on the production graph at $n_{\max} = 30$ (a by-construction
-quantity, \S VI; $0.11\%$ at $n_{\max} = 70$,
-\texttt{tests/test\_paper7\_graph\_convergence.py}; a grid band edge,
-not an $S^3$ convergence---the graph Laplacian does not converge to
-$\Delta_{S^3}$, \S VI;\ the continuum chain itself is exact) and $5.3\%$ for the LiH equilibrium
-geometry (BeH$^+$ is markedly worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
+molecules~\cite{paper17}.  The computational framework of the series
+is built on this label set, on Fock's continuum projection, and on the
+natural geometries in which each problem separates---not on the graph
+Laplacian and its kinetic scale, whose spectrum is a two-dimensional
+grid band structure and does not carry the hydrogen ladder (\S VI).
+It has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
+\textbf{[MEASURED]} LiH, and BeH$^+$, with $5.3\%$ for the LiH equilibrium
+geometry in the composed Level~5 treatment (BeH$^+$ is markedly worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
 pseudopotential; HeH$^+$ is treated at a fixed bond length and recovers
 93\% of $D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent
 2D-variational solver; Paper~17), benchmarked against
@@ -948,7 +972,7 @@ N.~Bohr,
 \bibitem{paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from Scale-Invariant Graph Topology,''
+from a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{paper11}

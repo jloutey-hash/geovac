@@ -76,7 +76,7 @@ def test_lattice_node_weights_cross_check():
 def test_spectrum_ground_state_cross_check():
     Z, max_n = 1, 6
     d = export_spectrum(Z=Z, max_n=max_n)
-    solver = AtomicSolver(max_n=max_n, Z=Z)
+    solver = AtomicSolver(max_n=max_n, Z=Z, hamiltonian="graph")
     e0, _ = solver.compute_ground_state(n_states=1)
     assert min(d['graph_energies_ha']) == pytest.approx(e0[0], rel=1e-8)
     expected_states = max_n * (max_n + 1) * (2 * max_n + 1) // 6

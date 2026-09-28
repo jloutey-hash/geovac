@@ -96,7 +96,7 @@ def run_unitarity_test(
 
     # --- Build Li single-particle Hamiltonian ---
     print(f"\n  Building Li lattice: max_n={max_n}, Z=3")
-    solver = AtomicSolver(max_n=max_n, Z=3)
+    solver = AtomicSolver(max_n=max_n, Z=3, hamiltonian='graph')
     H = solver.H
     n_states = H.shape[0]
     print(f"  States: {n_states},  H.nnz: {H.nnz}")

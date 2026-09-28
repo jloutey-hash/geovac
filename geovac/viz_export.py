@@ -177,7 +177,7 @@ def export_spectrum(Z: int = 1, max_n: int = 6) -> Dict[str, Any]:
     - ``hydrogen_levels`` / ``series``: the physical Bohr spectrum and
       photon wavelengths (standard formulas, for M3 rendering).
     """
-    solver = AtomicSolver(max_n=max_n, Z=Z)
+    solver = AtomicSolver(max_n=max_n, Z=Z, hamiltonian="graph")
     h_dense = solver.H.toarray()
     graph_energies = np.linalg.eigvalsh(h_dense)
     # H = kinetic_scale * (D - A) with kinetic_scale = KINETIC_SCALE * Z^2,

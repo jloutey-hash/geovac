@@ -144,9 +144,12 @@ resulting transcendental content.
 \label{sec:kappa}
 
 The compactness of $S^3$ is what makes the Laplace--Beltrami
-eigenvalues discrete integers (on the graph's label set $(n,l,m)$ they
-act as the diagonal $SO(4)$ Casimir $n^2-1$);\ $\kappa$ converts a
-discrete spectrum to the non-compact $\mathbb{R}^3$ energy scale.
+eigenvalues discrete integers (on the graph's label set $(n,l,m)$,
+$-\Delta_{S^3}$ acts as the diagonal $SO(4)$ Casimir $n^2-1$).  The
+passage to the non-compact $\mathbb{R}^3$ energy scale is Fock's
+energy shell $p_0^2 = -2E$;\ $\kappa$ plays a narrower role, matching
+the graph's extremal eigenvalue (a band edge) to $-\tfrac12$
+(an Observation).
 
 The continuum $S^3$ Laplace--Beltrami operator --- which the graph's
 edge Laplacian does \emph{not} converge to (it preserves $l$ and splits
@@ -171,9 +174,14 @@ $\kappa \cdot \lambda_{\max} = E_H = -1/2$~Ha, where
 $\lambda_{\max} \to 8$ is the large-$n_{\max}$ maximum graph Laplacian
 eigenvalue~\cite{loutey_paper0} (twice the maximum degree, the band edge
 of two-dimensional grids;\ not an $S^3$ quantity).  Per-shell energies
-$E_n = -Z^2/(2n^2)$ emerge from the full graph Hamiltonian
-$H = \kappa \mathcal{L} + W$ (with node weights $W_{nn} = -Z/n^2$),
-not from $\kappa$ alone.
+$E_n = -Z^2/(2n^2)$ follow from $n^2 - 1$ on the labels through Fock's
+energy shell $p_0^2 = -2E$ (with $p_0 = Z/n$), not from $\kappa$ and not
+from the graph Laplacian:\ \textbf{[MEASURED]} the spectrum of
+$\kappa\mathcal{L}$ is a band structure confined to $[-\tfrac12, 0]$
+(at $n_{\max} = 20$ its lowest levels are $-0.4936$, $-0.4936$,
+$-0.4932$, \ldots, not a Rydberg ladder), and no node-weighted variant
+of the graph Hamiltonian built on these labels has been shown to yield
+$-1/(2n^2)$ (Paper~7).
 
 The geometric quantity that $\kappa$'s value \emph{coincides} with is
 well understood: it is the Jacobian of the stereographic projection
@@ -2974,16 +2982,17 @@ The exchange constant taxonomy (Sec.~\ref{sec:taxonomy}) classifies the
 classification addresses the \emph{observables}: given a physical quantity
 to be computed, what class of transcendental content does it require?
 
-The conformal equivalence between the graph and continuous descriptions
+The conformal equivalence between the label-set and continuous descriptions
 (Paper~7) implies a natural partition of observables into three classes,
 determined by what type of projection is needed to evaluate them.
 
 \begin{enumerate}
   \item \textbf{Class~S (spectral observables):} Energy eigenvalues,
     degeneracies, selection rules, and transition amplitudes between
-    eigenstates.  These require only the graph eigenvalue spectrum
-    and the calibration constant $\kappa$.  No transcendental content
-    beyond $\kappa = -1/16$ (rational) is needed.
+    eigenstates.  These require only the label set, its Casimir eigenvalues
+    $n^2 - 1$ and the energy shell $p_0^2 = -2E$ (all rational), not
+    the graph Laplacian's spectrum.  No transcendental content is
+    needed.
 
   \item \textbf{Class~P (single-particle spatial observables):}
     Electron density $\rho(\mathbf{r})$, expectation values
@@ -3046,9 +3055,9 @@ The following worked examples illustrate each class.
 
 The hydrogen energy spectrum $E_n = -Z^2/(2n^2)$ is a spectral
 observable.  The continuum $S^3$ Laplace--Beltrami operator (whose
-harmonics the graph's nodes label, and which acts on those labels as the
-diagonal $SO(4)$ Casimir;\ the graph's edge Laplacian does not converge
-to it) has eigenvalues
+harmonics the graph's nodes label, and whose negative acts on those
+labels as the diagonal $SO(4)$ Casimir;\ the graph's edge Laplacian
+does not converge to it) has eigenvalues
 $\lambda_n = -(n^2 - 1)$, which are integers for all $n$
 (Paper~7, Eq.~(12); Paper~0, Sec.~II).  The degeneracies
 $g_n = n^2$ are integers.  The Fock conformal mapping (Paper~7,
@@ -3060,8 +3069,10 @@ and the stereographic focal length:
   \label{eq:hydrogen_class_s}
 \end{equation}
 with the calibration constant $\kappa = -1/16$ (rational)
-mediating between graph eigenvalues and physical energies
-(Sec.~\ref{sec:kappa_derivation}).  Every quantity in this
+matching the graph's extremal eigenvalue, a band edge, to the ground
+state $-\tfrac12$ (an Observation, Sec.~\ref{sec:kappa_derivation});
+the Rydberg ladder itself comes from the labels and the energy shell,
+not from the graph spectrum.  Every quantity in this
 derivation---eigenvalues, degeneracies, $\kappa$---is an
 integer or rational number.  No transcendental content enters.
 
@@ -3174,8 +3185,8 @@ Two boundary cases clarify the classification:
     it evaluates the wavefunction at positions in $\mathbb{R}^3$.
 
   \item \textbf{Two-electron energies} computed via FCI on
-    $S^3 \times S^3$ are formally Class~S (graph eigenvalues
-    of the product-space Hamiltonian).  \textbf{[SCOPE 2026-09-14]}
+    $S^3 \times S^3$ are formally Class~S (eigenvalues of the
+    rational product-space Hamiltonian matrix).  \textbf{[SCOPE 2026-09-14]}
     Earlier versions added that they ``achieve limited accuracy due to
     the product-basis completeness deficiency'' and that ``high-accuracy
     two-electron energies require the Class~C exchange constants.''  The
@@ -3323,8 +3334,11 @@ polynomial.
 \label{sec:kappa_derivation}
 
 The original identification of $\kappa = -1/16$ (Paper~0) was
-empirical: the unique constant that maps GeoVac graph eigenvalues
-onto the Rydberg energy levels.  Below we give two independent routes
+empirical: the constant that matches the GeoVac graph's extremal
+eigenvalue (a band edge, $\lambda_{\max} \to 8$) to the hydrogen
+ground state $-\tfrac12$.  (It was once read as mapping the graph
+spectrum onto the Rydberg levels;\ it does not, since the rest of the
+graph spectrum is a grid band structure, Paper~7.)  Below we give two independent routes
 to its numerical value and classify their agreement.  As recorded in
 Paper~0 and Paper~7, that the calibration scale coincides with a
 conformal-geometry quantity is an \emph{Observation}---a numerical
@@ -3685,7 +3699,7 @@ GeoVac Paper~1 (2026).
 \bibitem{loutey_paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from Scale-Invariant Graph Topology,''
+from a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper11}
