@@ -75,8 +75,9 @@ equation via Fock's 1935 stereographic projection~\cite{paper7}.  (The
 lattice's edge Laplacian is not mathematically equivalent to that
 operator and does not converge to it;\ on the labels the $S^3$ operator
 is the diagonal $SO(4)$ Casimir, Paper~7, corrected 2026-09-25.) The electron's
-bound-state manifold \textit{is}~$S^3$---a result supported by 18
-independent symbolic proofs~\cite{paper7}.
+bound-state problem is conformally equivalent to free motion on~$S^3$
+(Fock's result), a chain Paper~7 verifies with 18 symbolic checks, several
+of them definitional or limiting-case~\cite{paper7}.
 
 This three-sphere carries a unique fiber bundle structure: the Hopf
 fibration~\cite{hopf1931,urbantke2003}
@@ -132,8 +133,8 @@ fiber $\pi^{-1}(p)$ is a great circle $S^1 \subset S^3$.
 
 We interpret the three components physically:
 \begin{itemize}
-\item \textbf{Total space $S^3$:} The electron bound-state manifold,
-  as established by the Fock projection.
+\item \textbf{Total space $S^3$:} The manifold onto which Fock's
+  projection maps the electron bound-state problem.
 \item \textbf{Base $S^2$:} The photon momentum sphere, parametrizing
   propagation directions of the electromagnetic field.
 \item \textbf{Fiber $S^1$:} The $U(1)$ gauge phase of the
@@ -525,9 +526,12 @@ which resolves the internal content of one of the three ingredients but
 does not unify them:
 \begin{enumerate}
   \item $\kappa \leftrightarrow B$ via the Fock momentum-space weight
-    (Phase 4B track~$\alpha$-C): the universal kinetic constant
-    $\kappa = -1/16$ of Paper~7 has an exact algebraic relationship to
-    the Casimir trace $B$ at the selection cutoff $m=3$.
+    (Phase 4B track~$\alpha$-C): the value $1/16$ of the matched
+    kinetic scale $\kappa$ of Paper~7 enters an exact rational identity
+    with the Casimir trace $B$ at the selection cutoff $m=3$ (an
+    arithmetic identity in the number $1/16$;\ $\kappa$ itself only
+    matches the graph's band edge, and its coincidence with the Fock
+    Jacobian $1/16$ is an Observation).
   \item $F$ as the scalar Fock-degeneracy Dirichlet series at the
     packing exponent (Phase 4F track~$\alpha$-J): with $g_n = n^2$ the
     degeneracy of the $n$-th $S^3$ shell,
@@ -1062,8 +1066,9 @@ proven (Sec.~III), and the Casimir identity
 $\langle C_3\rangle_n = C_4(n)$ connects $B$ to the $SO(4)$
 representation theory. The remaining gap: why the degeneracy-weighted
 Casimir trace specifically (rather than some other spectral quantity)
-for each bundle component. The second selection principle
-(Sec.~\ref{sec:second_selection}) provides independent support.}
+for each bundle component. The second pointer to $n_{\max} = 3$
+(Sec.~\ref{sec:second_selection}) is an Observation-tier numerical
+coincidence, not independent proof.}
 \footnotetext[2]{The Hermiticity of the circulant follows once all
 three cubic roots satisfy $s_i^2 < 4K/3$ --- verified numerically
 and pinned in \texttt{tests/test\_paper2\_corrections.py} --- making
@@ -1072,9 +1077,10 @@ consistent with $U(1)$ gauge structure but does not yet derive
 $bc = K/3$.}
 
 \textbf{Link~1} (established): The Hopf fibration is the unique
-principal $U(1)$-bundle over $S^2$ with $c_1 = 1$. That $S^3$ is the
-electron state manifold is proven in Ref.~\cite{paper7}. Using the
-Hopf bundle as a geometric framework is a natural choice.
+principal $U(1)$-bundle over $S^2$ with $c_1 = 1$. That the hydrogen
+bound-state problem is conformally equivalent to free motion on $S^3$
+is Fock's result, whose chain Ref.~\cite{paper7} verifies symbolically.
+Using the Hopf bundle as a geometric framework is a natural choice.
 
 \textbf{Link~2} (largely established): The selection principle
 $B/N = 3$ is proven algebraically to select $n_{\max} = 3$ uniquely
@@ -1170,8 +1176,9 @@ and achieves $\sim 10^{-5}$ precision. However, Wyler's derivation
 was criticized for lacking a physical mechanism connecting the
 symmetric space volumes to electromagnetic
 coupling~\cite{robertson1971}. The present work improves on this
-situation in two respects: (i)~$S^3$ is the \textit{proven} electron
-state manifold, providing a physical mechanism, and (ii)~the
+situation in two respects: (i)~$S^3$ is the manifold onto which Fock's
+projection provably maps the hydrogen bound-state problem, which
+supplies a geometric (not yet a coupling) mechanism, and (ii)~the
 $p$-value of $5.2 \times 10^{-9}$ quantitatively distinguishes the
 formula from numerology. However, both approaches share the weakness
 of an unjustified combination rule.
@@ -1377,7 +1384,8 @@ every other central potential.
 
 \subsection{Transition operators and the Hopf geometry}
 
-The discrete graph Laplacian for hydrogen has two types of lattice
+The discrete label lattice (whose edge Laplacian is not a hydrogen
+operator, Paper~7) has two types of lattice
 transitions~\cite{phase2_kappa}: $T_\pm$ (changing $n$ by $\pm 1$,
 preserving $l$ and $m$) and $L_\pm$ (changing $m$ by $\pm 1$, preserving
 $n$ and $l$). We observe that these correspond naturally to the Hopf
@@ -1394,41 +1402,54 @@ The angular momentum $l$ is conserved by both transitions---it labels
 the $SO(3)$ representation within each $SO(4)$ shell but does not
 contribute an independent transition type. The base $S^2$ constrains
 state labeling (which $l$, $m$ values exist) but does not generate
-lattice transitions. The Fock stereographic projection collapses the
-2-dimensional base directions into a single radial variable (the
-principal quantum number $n$), explaining why $d_{\max} = 2 \times 2 = 4$
-(two motion types $\times$ two directions) rather than~6.
+lattice transitions. The value $d_{\max} = 2 \times 2 = 4$ simply counts
+two motion types $\times$ two directions on each $\ell$-block, which is
+a two-dimensional grid (Paper~0~\S VI);\ it is a property of the chosen
+edge set, not a consequence of the Fock projection collapsing base
+directions (a reading printed here before 2026-09-28, withdrawn:\ the
+$2 d_{\max} = 8$ it feeds is a grid band edge, not an $S^3$ quantity).
 
 
-\subsection{Second selection principle}\label{sec:second_selection}
+\subsection{A second pointer to $n_{\max} = 3$ (Observation)}\label{sec:second_selection}
 
 The topological maximum degree $d_{\max} = 4$ gives an asymptotic
 bipartite spectral radius bound of $2 d_{\max} = 8$ for the graph
-Laplacian~\cite{phase1_kappa}. The $S^3$ Laplace--Beltrami eigenvalue
-$|\lambda_n| = n^2 - 1$ equals this bound uniquely at $n = 3$:
+Laplacian~\cite{phase1_kappa}.  This bound is the band edge of large
+two-dimensional grids (each $\ell$-block of the lattice is a grid,
+Paper~0~\S VI), not an $S^3$ quantity:\ the graph Laplacian does not
+converge to $\Delta_{S^3}$ (Paper~7).  The continuum $S^3$
+Laplace--Beltrami eigenvalue $|\lambda_n| = n^2 - 1$ numerically equals
+this grid band edge uniquely at $n = 3$:
 \begin{equation}\label{eq:second_selection}
   n^2 - 1 = 2\,d_{\max} \quad\Longrightarrow\quad n_{\max} = 3.
 \end{equation}
-This provides an independent selection of $n_{\max} = 3$, from the
-discrete--continuous compatibility condition rather than from the Casimir
-selection $B/N = \dim(S^3)$.
+\textbf{[OBSERVATION]} This numerical coincidence gives a second pointer
+to $n_{\max} = 3$, independent of the Casimir selection
+$B/N = \dim(S^3)$;\ it is not a discrete--continuous compatibility
+condition, since it equates a grid band edge with a continuum
+eigenvalue.
 
 We note a subtlety: $d_{\max} = 4$ is the topological maximum degree for
 interior nodes of the lattice class (first realized at $n_{\max} = 4$),
 not the realized maximum at $n_{\max} = 3$ (which is~$3$, since all 14
-nodes are boundary nodes)~\cite{phase2_kappa}. The selection principle
-should be read as: the $S^3$ eigenvalue at $n_{\max}$ matches the
-\textit{asymptotic} spectral radius bound of the lattice topology.
+nodes are boundary nodes)~\cite{phase2_kappa}. The pointer should be
+read as:\ the continuum $S^3$ eigenvalue at $n_{\max}$ numerically
+matches the \textit{asymptotic} spectral radius bound of the lattice
+topology (a grid band edge).
 
-The connection to $\kappa$ is immediate: if
-$\kappa = -E_1/|\lambda_{n_{\max}}| = -1/(2(n^2-1))$, then the Hopf
-selection $n_{\max} = 3$ gives $\kappa = -1/16$, the kinetic scale
-factor of the GeoVac program~\cite{paper7}.
+Relation to $\kappa$: the matched kinetic scale is
+$\kappa = E_1/\lambda_{\max}$ with $\lambda_{\max} \to 2 d_{\max} = 8$,
+and $8 = n^2 - 1$ at $n = 3$, so the coincidence can be restated as
+$\kappa = -1/(2(n^2-1))$ at $n_{\max} = 3$, giving
+$\kappa = -1/16$~\cite{paper7}.  This is the same Observation restated,
+not an independent route to $\kappa$.
 
-\textit{Status:} this is a structural observation, not a derivation. The
-two selection principles ($B/N = 3$ and $2d_{\max} = n^2 - 1$) are
-algebraically independent; whether they share a common origin in the
-Hopf fibration geometry is an open question.
+\textit{Status:} this is a numerical observation, not a derivation, and
+not a selection principle on a par with the proven $B/N = 3$ result.
+The proven selection ($B/N = 3$) and this second pointer
+($2d_{\max} = n^2 - 1$) are algebraically independent; whether they
+share a common origin in the Hopf fibration geometry is an open
+question.
 
 
 \subsection{Open questions}
@@ -1493,11 +1514,11 @@ Hopf fibration geometry is an open question.
   level. The other roots do not appear to encode additional coupling
   constants.
 
-\item \textit{Common origin of the two selection principles.} The
-  second selection principle ($2d_{\max} = n^2 - 1$ at $n = 3$) and
-  the Casimir selection ($B/N = 3$ at $n = 3$) are algebraically
-  independent. Whether they share a common origin in the Hopf
-  fibration geometry is open.
+\item \textit{Common origin of the selection and the second
+  pointer.} The second pointer ($2d_{\max} = n^2 - 1$ at $n = 3$, an
+  Observation) and the proven Casimir selection ($B/N = 3$ at $n = 3$)
+  are algebraically independent. Whether they share a common origin in
+  the Hopf fibration geometry is open.
 
 \item \textit{Circulant phase and the Hopf connection.} The
   Hermiticity of the circulant coupling and its $\theta \approx
@@ -1537,10 +1558,11 @@ self-consistency equation.
 The circulant coupling is necessarily Hermitian ($b$ and $c$ are
 complex conjugates), with the physical root at phase
 $\theta \approx 3\pi/2$, consistent with $U(1)$ gauge structure. A
-second selection principle---the bipartite spectral radius bound
-$2d_{\max} = 8$ matching $|\lambda_3| = n^2 - 1 = 8$---independently
-selects $n_{\max} = 3$ and connects to the kinetic scale factor
-$\kappa = -1/16$.
+second pointer---the numerical coincidence of the bipartite spectral
+radius bound $2d_{\max} = 8$ (a two-dimensional-grid band edge, not an
+$S^3$ quantity) with the continuum eigenvalue $|\lambda_3| = n^2 - 1 = 8$,
+an Observation---independently points to $n_{\max} = 3$ and relates to
+the matched kinetic scale $\kappa = -1/16$.
 
 The combination rule $K = \pi(B + F - \Delta)$ remains a numerical observation.
 A systematic investigation of spectral determinants, analytic torsion,
@@ -1550,8 +1572,9 @@ representation-theoretic data ($B = 42$) with continuous spectral
 invariants ($F = \zeta(2)$) in a way that has no known precedent.
 The formula has the character of a remarkable empirical observation
 with structural support---the spectral ingredients are natural, the
-cubic form is natural, the selection principle is proven, but their
-assembly into $K$ awaits a first-principles derivation.
+cubic form is natural, the selection principle is proven, but no
+first-principles derivation of their assembly into $K$ exists;\ the
+combination is a numerical Observation.
 
 
 \begin{acknowledgments}
@@ -1569,8 +1592,8 @@ in the project repository, established that the combination rule
 (Link~3) lies outside the scope of standard smooth spectral geometry.
 A subsequent three-phase investigation of the kinetic scale factor
 $\kappa = -1/16$ established the transition operator--Hopf
-correspondence, a second selection principle from the bipartite
-spectral radius bound, and the forced Hermiticity of the circulant
+correspondence, a second pointer to $n_{\max} = 3$ (an Observation)
+from the bipartite spectral radius bound, and the forced Hermiticity of the circulant
 coupling~\cite{phase1_kappa,phase2_kappa,phase3_audit}.
 A further investigation applied the formula's recipe to all four Hopf
 fibrations, discovered the universal algebraic identity

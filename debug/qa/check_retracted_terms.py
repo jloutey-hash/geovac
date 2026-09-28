@@ -594,6 +594,83 @@ REGISTRY = [
         },
     },
     {
+        "id": "graph-carries-physics-residue",
+        # Round-2 residue (trunk re-check 2026-09-28) of the graph/kappa-carries-the-spectrum
+        # family: paraphrases and table cells no round-1 pattern anticipated -- the retired
+        # "<0.1%" Level-1 accuracy cell, "graph-Laplacian limit", "Laplacian encodes the kinematic
+        # manifold", "D-A is SO(4)-covariant" (false: D-A preserves l), "bare combinatorial graph
+        # is right", the pre-remediation natural-lattice / discretization principle.
+        "pattern": r"graph-Laplacian\s+limit|encodes\s+the\s+\S{0,12}kinematic\S{0,2}\s+(structure|manifold)|D\s*[-−]\s*A\$?\s+is\s+covariant|bare\s+combinatorial\s+graph\s+(being|is)\s+right|bare\s+combinatorial\s+graph\s+plus\s+three|natural\s+lattice-{1,3}\s*a\s+discrete\s+graph|discretizing\s+it\s+as\s+a\s+sparse\s+graph|by\s+discretizing\s+the\s+Laplace|graph\s+Laplacian\s+FCI\s+approach|that\s+defines\s+GeoVac's\s+graph\s+Laplacian|quantum\s+mechanics\s+emerges\s+from\s+discrete\s+graph|\(Fock(\s+projection)?\)\s*&\s*\$?<\s?0\.1|Accuracy:\s*\$?<\s?0\.1",
+        "exempt_if_nearby": withdrawal_marker("graph-carries-physics-residue"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group5 synthesis",
+        "note": "Registered 2026-09-28 (PI-approved remediation round 2 after the /qa trunk re-check). Sibling of kappa-maps-graph-spectrum / graph-hamiltonian-carries-spectrum.",
+        "files": [
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex",
+            "papers/group5_qed_gauge/paper_36_bound_state_qed.tex",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group2_quantum_chemistry/paper_fci_atoms.tex",
+            "papers/group2_quantum_chemistry/paper_fci_molecules.tex",
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex",
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_1_spectrum.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live) -- guardrail theorem rests on the Sturmian identity + D^(n) blocks, not on the D-A sentence (rewritten: L,A generate SO(4) per shell; D-A not SO(4)-covariant)",
+            "papers/group5_qed_gauge/paper_36_bound_state_qed.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/paper_fci_atoms.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/paper_fci_molecules.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/paper_12_algebraic_vee.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (round-2 agent; PM-verified gate 0 live)",
+        },
+    },
+    {
+        "id": "graph-carries-physics-residue-r3",
+        # Round-3 residue (narrow re-check #2, 2026-09-28): P13 "LB discretizes cleanly on a sparse
+        # graph"; P18 "kappa absorbs the accumulated conformal rescaling"; group2 synthesis "discrete
+        # graph and the continuous LB operator are dual ... proven conformal maps"; and the Level-2
+        # knock-on in P0 -- "(l,m) skeleton with 2l+1 at every level" is FALSE at Level 2 (only m).
+        "pattern": r"discretizes\s+cleanly\s+on\s+a\s+sparse\s+graph|absorbs\s+the\s+accumulated\s+conformal\s+rescaling|discrete\s+graph\s+and\s+the\s+continuous\s+Laplace-{1,2}Beltrami\s+operator\s+are\s+dual|same\s+discrete\s+quantum\s+number\s+skeleton|recurs\s+as\s+a\s+universal\s+structural\s+factor\s+inside\s+every\s+natural\s+geometry|lattice\s+is\s+the\s+invariant;\s+the\s+continuum\s+geometries\s+are\s+projections",
+        "exempt_if_nearby": withdrawal_marker("graph-carries-physics-residue-r3"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group5 synthesis",
+        "note": "Registered 2026-09-28 (PI-approved round 3: fix + whole-paper fix-mode reads).",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group5_qed_gauge/paper_2_alpha.tex",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/group3_foundations/paper_1_spectrum.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated 2026-09-28, round 3: WHOLE-PAPER fix-mode read (not locus-only); PM-verified gate 0 live",
+        },
+    },
+    {
         "id": "p60-floor-is-angular",
         "note": "Paper 60's accuracy floor was attributed to l_max truncation "
                 "and declared unreachable at any K.  Both halves are refuted "

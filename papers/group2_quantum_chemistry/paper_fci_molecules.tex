@@ -69,9 +69,8 @@ $O(V)$ character of the underlying graph Hamiltonian.
 \label{sec:intro}
 %% ========================================================================
 
-The GeoVac program posits that continuous quantum mechanics emerges from
-discrete graph topologies: a scale-invariant graph on the label set
-$(n,l,m)$ of the unit three-sphere $S^3$ carries the single-particle
+The GeoVac program works on the discrete label set $(n,l,m)$ of the
+unit three-sphere $S^3$, which carries the single-particle
 quantum-number structure without any continuous spatial
 integration~\cite{paper0,paper1,paper7}.  Prior work established the
 exact correspondence at the level of labels for single-center atomic
@@ -137,10 +136,12 @@ The \texttt{MolecularLatticeIndex} instantiates two independent atomic
 subgraphs: a lithium lattice with nuclear charge $Z_A=3$ and a hydrogen
 lattice with $Z_B=1$.  Each subgraph is a scale-invariant hydrogenic
 lattice defined on its own $S^3$ conformal manifold~\cite{paper7},
-retaining its atom-centered conformal structure and recovering, under the
-Fock projection, the hydrogenic spectrum $\varepsilon_{n} = -Z^2/(2n^2)$
-(the bare graph Laplacian is positive-semidefinite; these negative
-energies are its continuum image, not graph-Laplacian eigenvalues).  At $n_{\max}=3$, the lithium
+retaining its atom-centered conformal structure; the hydrogenic energies
+$\varepsilon_{n} = -Z^2/(2n^2)$ are assigned to the labels $n$ through
+Fock's energy shell $p_0^2 = -2E$ (the bare graph Laplacian is
+positive-semidefinite and does not converge to $\Delta_{S^3}$, so these
+negative energies are neither its eigenvalues nor a continuum image of
+its spectrum).  At $n_{\max}=3$, the lithium
 subgraph contributes $\sum_{n=1}^{3}n^2 = 14$ spatial orbitals and the
 hydrogen subgraph contributes another 14, yielding a combined molecular
 basis of 28 spatial orbitals (56 spin-orbitals).
@@ -171,8 +172,8 @@ where $\mathbf{H}_A$ and $\mathbf{H}_B$ are the isolated atomic
 Hamiltonians and $\mathbf{V}_{AB}$ encodes the inter-atomic coupling.
 
 The diagonal blocks carry the hydrogenic eigenvalues
-$\varepsilon_n = -Z^2/(2n^2)$ (the continuum image of the graph spectrum
-under the Fock projection, not graph-Laplacian eigenvalues) supplemented
+$\varepsilon_n = -Z^2/(2n^2)$ (the energy-shell map of the labels $n$,
+not graph-Laplacian eigenvalues and not an image of the graph spectrum) supplemented
 by the Mulliken
 cross-nuclear attraction: each orbital $\phi_i^{(A)}$ centered on atom
 $A$ experiences the potential of nucleus $B$ via the diagonal matrix
@@ -760,8 +761,8 @@ adjacency matrices are fixed at construction time.  This limitation
 is resolved by recognizing that the natural geometry for two-center
 systems is the prolate spheroid, not the concatenated $S^3$.  In
 prolate spheroidal coordinates $(\xi, \eta, \varphi)$, the two-center
-Coulomb problem separates exactly, and discretizing the
-Laplace-Beltrami operator on this manifold yields a molecular lattice
+Coulomb problem separates exactly, and working in the label set and
+channel structure of these coordinates yields a molecular lattice
 with $R$-dependence built into the metric.  For H$_2^+$, this approach
 achieves $R_{\mathrm{eq}} = 2.001$~bohr (0.21\% error) at the
 finite-difference level, while the spectral Laguerre radial solver

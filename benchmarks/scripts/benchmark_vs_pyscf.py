@@ -62,11 +62,22 @@ REFERENCE = {
 # =============================================================================
 
 def run_geovac_hydrogen(max_n: int = 20) -> dict:
-    """Run hydrogen with GeoVac."""
+    """Run hydrogen with the LEGACY GeoVac graph model H = kappa*(D - A).
+
+    This is NOT a computed comparison of hydrogen physics.  The physical
+    default (``hamiltonian='exact'``) inserts E_n = -1/(2n^2) on the labels
+    by construction, so its "0% error" would be an inserted value, not a
+    result.  We therefore run the labelled legacy graph model, whose ground
+    energy kappa*lambda_max is matched to -1/2 by construction through
+    kappa = -1/16; the reported "error" is only the band-edge saturation
+    deficit (8 - lambda_max)/8 of the graph Laplacian (Paper 7), not an
+    accuracy figure for hydrogen.
+    """
     from geovac import AtomicSolver
 
     t0 = time.perf_counter()
-    solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=-1/16)
+    solver = AtomicSolver(max_n=max_n, Z=1, kinetic_scale=-1/16,
+                          hamiltonian='graph')
     energies, _ = solver.compute_ground_state(n_states=1)
     t1 = time.perf_counter()
 
@@ -74,7 +85,7 @@ def run_geovac_hydrogen(max_n: int = 20) -> dict:
         'energy': energies[0],
         'time_ms': (t1 - t0) * 1000,
         'n_basis': solver.n_states,
-        'method': f'GeoVac (max_n={max_n})',
+        'method': f'GeoVac legacy graph (max_n={max_n}; saturation, not physics)',
     }
 
 

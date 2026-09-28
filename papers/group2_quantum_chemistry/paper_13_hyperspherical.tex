@@ -26,9 +26,9 @@ Two-Electron Atoms as Coupled Channel Graphs}
 
 \begin{abstract}
 The natural geometry principle states that every separable quantum
-system has a natural lattice---a discrete graph whose nodes carry
-quantum number labels and whose edges encode transition amplitudes.
-For atoms, this is Fock's three-sphere $S^3$ (Papers~0, 1, 7); for
+system has a natural lattice---the label set and channel structure of
+the coordinates in which separation occurs.
+For atoms, this is the label set of Fock's three-sphere $S^3$ (Papers~0, 1, 7); for
 diatomic molecules, the prolate spheroid (Paper~11).  Hyperspherical
 coordinates are the natural setting for a genuine three-body
 coalescence, where the nuclear and interelectronic singularities
@@ -83,8 +83,9 @@ computed from first principles using only nuclear charges and masses.
 The Geometric Vacuum program constructs discrete lattice
 Hamiltonians by identifying the \emph{natural geometry} of each
 quantum system---the coordinate system where the Schr\"odinger
-equation separates or nearly separates---and discretizing it as a
-sparse graph~\cite{loutey_paper0, loutey_paper1, loutey_paper7}.
+equation separates or nearly separates---and working in the label set
+and channel structure of those coordinates, which yields sparse
+Hamiltonian matrices~\cite{loutey_paper0, loutey_paper1, loutey_paper7}.
 The hierarchy of natural geometries discovered so far is:
 \begin{enumerate}
   \item \textbf{One-center, one-electron} (hydrogen-like atoms):
@@ -766,8 +767,12 @@ addresses a qualitatively different singularity structure:
 \end{enumerate}
 
 The unifying principle is: \emph{in the natural coordinate system,
-singularities become boundary conditions and the Laplace--Beltrami
-operator discretizes cleanly on a sparse graph}.
+singularities become boundary conditions, and working in the label set
+and channel structure of those coordinates yields sparse Hamiltonian
+matrices}.  (An earlier wording said the Laplace--Beltrami operator
+``discretizes cleanly on a sparse graph'' [retracted 2026-09-28: graph-carries-physics-residue-r3];\ on $S^3$ the lattice's edge
+Laplacian does not converge to the Laplace--Beltrami operator, which acts
+on the labels as the diagonal $SO(4)$ Casimir, Paper~7.)
 
 \begin{table*}[t]
 \caption{The natural geometry hierarchy.  Each level resolves a
@@ -1375,10 +1380,13 @@ dramatic (relative to the total energy) as $N$ increases.
 Each natural geometry in the GeoVac hierarchy shares a common
 computational structure: a radial coordinate (or chain of radial
 coordinates) coupled to angular modes drawn from representations of
-the rotation group---the universal pattern identified in
-Paper~0~\cite{loutey_paper0}.  On $S^3$, the angular modes are SO(4)
-representations and are $R$-independent; on the prolate spheroid, the
-separated angular modes are likewise fixed; on the hypersphere, the
+the rotation group to the extent each geometry retains that symmetry---the
+pattern identified in Paper~0~\cite{loutey_paper0}.  On $S^3$, the angular
+modes are SO(4) representations and are $R$-independent; on the prolate
+spheroid, the separated angular modes are likewise fixed, but only their
+azimuthal label $m$ is a rotation-group label (the $\eta$-separation
+index reduces to $\ell$ only in the united-atom limit); on the
+hypersphere, the
 angular channel functions vary with $R$, producing a coupled-channel
 expansion.
 

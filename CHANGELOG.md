@@ -7,6 +7,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.2] - 2026-09-28
+
+**Patch. /qa trunk re-check (claim-impact DELTA #2) = DEFECTS; round-2 remediation done; narrow re-check owed.**
+
+### The re-check (worktree v5.17.1, unseeded)
+- **Dimensions:**
+  - Code (Opus): CLEAN on the trunk. 195 tests; AtomicSolver re-derived exactly as fractions; every guard fires, including over-suppression. 4 SMALL outside the trunk.
+  - Citations: CLEAN, 1 SMALL.
+  - Claims: almost everything FIXED; 1 LARGE (Paper 1's conclusion: the Laplacian "encodes the kinematic manifold").
+  - Synthesis: 0 LARGE, 5 SMALL, including a quotation attributed to Paper 7 that was not in Paper 7.
+  - Claim-impact: 13 of 14 families FIXED; 8 LARGE in text the remediation never touched. These were the retired "<0.1%" Level-1 cell in 4 hierarchy tables; P31 "graph-Laplacian limit"; P36 conclusion/intro "bare combinatorial graph is right"; the P13 abstract; Paper 8 "D−A is SO(4)-covariant" (false). Also out of family: P34/P35 still printed the retired 11.10·Q.
+- **Total:** about 10 LARGE, about 25 SMALL. RESEARCH-GRADE not earned.
+
+### Gates widened (gate-first; all fire-tested)
+- **C16 `graph-carries-physics-residue`:** 15/15 fire, 9/9 silent; 18 loci, now 0 live, 13 dependents stamped.
+- **C17 `composed-rule-a-retired-figures` repaired.** It never listed P34/P35 and matched only the ×/\times forms, not \cdot. It now catches both.
+- **C17 `h2o-equal-qubit-low-end-51x` (new).** A re-measurement gives composed H₂O n_max=1 = 21 non-identity / 22 with identity. Paper 14's 51× (1126/22) is identity-included on both sides; the 54× carried in CLAUDE.md and 7 corpus loci divided the identity-free 21 into the identity-included Gaussian count. All loci are now 51×, and C17's own canonical note is corrected. CLAUDE.md §1.5 still carries 54× pending PI authorization (§1.5 is not PM-editable).
+
+### Remediation round 2 (about 24 papers, all compile clean; every gate PASSES corpus-wide)
+- **Families:**
+  - Level-1 cell → "exact on the labels (diagonal Casimir n²−1); graph λ_max matched by construction".
+  - Kinematic structure → the label set and its ladder operators.
+  - Paper 8 rewritten: L, A generate SO(4) per shell; D−A is not SO(4)-covariant; T± are SU(1,1). The guardrail theorem rests on the Sturmian identity and the D^(n) blocks, NOT on this sentence (verified).
+  - The natural-geometry principle unified to "label set and channel structure" (P8, P13, P17, P18, FCI-A/M).
+  - P34/P35 → 27.90·Q and 6.06%.
+- **SMALLs:**
+  - group3 synthesis: §dynamics fully scoped to the LCAO model (20 of 35); the false Paper 7 quote replaced by a verbatim one; taxonomy realigned to Paper 18; HO rigidity marked conditional.
+  - P7: +avery1989, +pauli1926; "energy-normalized Runge–Lenz vector".
+  - P2 "awaits a first-principles derivation" → "no first-principles derivation exists; the combination is a numerical Observation" (PM decision; no prohibited tier word).
+  - P18 "nonzero edge coupling"; P28 "matched-scale coupling".
+- **Code:**
+  - `benchmark_vs_pyscf.py` no longer reports an inserted exact value as a 0%-error win: it runs `hamiltonian='graph'`, labelled legacy.
+  - The vacuous Paper 34 III5 numeric guard was removed. A planted transcendental had not fired it.
+  - Test docstrings corrected; the AtomicSolver repr no longer shows an unused κ in exact mode.
+- **Tests:** 87 core pass (AtomicSolver, the 18 symbolic checks, graph non-convergence, Paper 7).
+
+### Round 3 + final re-check (same version)
+- **Method change (PI-approved).** Rounds 1 and 2 fixed the loci they were handed plus grep hits, and each re-check then found LARGE findings in SIBLING sentences. Round 3 re-read every core document IN FULL in fix mode: P0, P1, P2, P7, P8, P13, P18 and both syntheses.
+  - About 100 sibling fixes.
+  - A new C16 entry, `graph-carries-physics-residue-r3` (6/6 fire, 4/4 silent; 9 loci now 0 live).
+  - The Level-2 knock-on was scoped: the (ℓ,m)/2ℓ+1 skeleton holds at Levels 1, 3, 4 and in each Level-5 fiber; only m at Level 2.
+  - P18: the tier count was reconciled ("six exchange-constant tiers plus the algebraic case"), κ was moved out of the exchange-constant tiers (p₀ carries; κ matched; the Fock-Jacobian coincidence is an Observation), and "κ absorbs the conformal rescaling" was deleted.
+  - P2: "second selection principle" became "second pointer (Observation)".
+  - CLAUDE.md §1.5 now reads 51× (PI-authorized).
+- **Final re-check, 4 Opus reviewers with whole-paper reads.** DEFECTS, about 13 LARGE. RESEARCH-GRADE not earned; the list was brought to the PI as agreed.
+  - **The graph/κ family is essentially retired.** P0, P1 and P7 have 0 live loci across about 130 family sentences, with no over-correction; P18's κ placement and tier counts are consistent; the P8 guardrail theorem is intact; the K wording is clean. Four residues remain: the P13 Table II "S³ lattice 1.82%" (the old κ(D−A)+W model, beside a Full-CI row carrying lithium's 215,820 dimension); the P8 kinetic membrane attributed to SO(4); the P24 "κ from the S³ Laplacian"; and the benchmark_vs_pyscf printed summary.
+  - **The remaining LARGEs are pre-existing debt surfaced by whole-paper reads (FULL-grade):**
+    - P1 intro, ontological priority (§1.5);
+    - P8 contribution #8, an unscoped Sturmian no-go, and "LCAO validated";
+    - P31 "realizes the pair-diagonal 1.44% / 98.56% sparse" (retired 2026-08-30; the realized figure is 6.06%);
+    - the group2 synthesis "Gaunt at every level";
+    - P34 §III.5, whose test is tautological and provably accepts ζ(3);
+    - P2 "α satisfies the cubic" (stated as a law; excluded as exact at about 600σ), the p-value "not accidental", and the Δ sign "is the (−1)^F grading".
+  - **PI rulings, 2026-09-28 (PM recommendations adopted):**
+    - α "approximately satisfies (an Observation)";
+    - the p-value restated without a non-accidentality claim;
+    - the Δ sign "consistent with (−1)^F (a reading, not a derivation)";
+    - Paper 0 title "Universal" → "Recurring";
+    - Paper 7 title "from a" → "on a".
+
 ## [v5.17.1] - 2026-09-28
 
 **Patch. /qa trunk DELTA (claim-impact) = DEFECTS, then remediated. RESEARCH-GRADE not earned; a claim-impact re-check is owed.**

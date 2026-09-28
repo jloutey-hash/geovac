@@ -580,7 +580,7 @@ REGISTRY = [
                           "d-block; within-molecule exponent 3.17 universal "
                           "(c(1)=3/2, c(2)=279/10, c(3)=7089/14; local slope "
                           "~3.8 at n_max=4); LiH composed 838 @ Q30, 1-norm "
-                          "34.5 Ha; equal-qubit H2O 54x/297x/317x; cc-pVDZ "
+                          "34.5 Ha; equal-qubit H2O 51x/297x/317x (identity-included on both sides: 1126/22; the 54x mixed the identity-free 21 -- corrected 2026-09-28); cc-pVDZ "
                           "76x.  RETIRED and now WRONG as live values: "
                           "11.10 x Q, 9.23 d-block, O(Q^2.5) / Q^2.50-2.52 "
                           "exponents, 334/333 LiH, 51x-1712x, 190x cc-pVDZ, "
@@ -590,6 +590,9 @@ REGISTRY = [
                           "by tests/test_paper14_eri_rule.py + "
                           "tests/test_paper20_balanced_lambda.py.",
         "pattern": r"11\.10\s*\\?times\s*Q|N_\{?\\?mathrm\{Pauli\}\}?\s*=\s*11\.10|"
+                   # \cdot forms, added 2026-09-28: P34/P35 printed
+                   # "11.10 \cdot Q" / "11.10{\cdot}Q", which every alternative missed.
+                   r"11\.10\s*\{?\\cdot\}?\s*Q|N_\\text\{Pauli\}\s*=\s*11\.10|"
                    r"O\(Q\^\{?2\.5\}?\)|Q\^\{2\.50\}|1\{,\}712\\?\$?\\times|"
                    r"190\$?\\times|coefficient\s+(of\s+)?11\.10|Pauli/\$?Q\$?\s*=\s*9\.23|"
                    # Plain-text / Markdown forms, added 2026-09-19 (v5.14.6).
@@ -623,6 +626,35 @@ REGISTRY = [
             "docs/validation_benchmarks.md",
             "papers/INDEX.md",
             "SCOPE_BOUNDARY.md",
+            # Added 2026-09-28: the trunk re-check found 11.10 x Q live in both,
+            # outside this family's scope.
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex",
+        ],
+    },
+    {
+        "id": "h2o-equal-qubit-low-end-51x",
+        "scope": "trunk group2 group3 group4 group6 synthesis",
+        "severity": "fail",
+        "canonical_note": "H2O equal-qubit Pauli advantage vs the Gaussian power-law interpolation, "
+                          "Paper 14 tab:equal_qubit: 51x / 297x / 317x at Q = 14 / 70 / 196, "
+                          "identity-included on BOTH sides (GeoVac 22 = 21 non-identity + 1; "
+                          "Gaussian 1126). The 54x low end divided the identity-FREE 21 into the "
+                          "identity-included Gaussian count (mixed convention) -- corrected "
+                          "2026-09-28 (re-measured: composed H2O n_max=1 -> 21 / 22).",
+        "pattern": r"54\s*\$?\s*(\\times|×|x)\s*\$?\s*(--|–|—|-|to)\s*\$?\s*317",
+        "require_nearby": r"Pauli|qubit|Gaussian|advantage|fewer",
+        "exempt_if_nearby": r"mixed convention|identity-free|corrected 2026-09-28",
+        "files": [
+            "papers/group4_quantum_computing/paper_14_qubit_encoding.tex",
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/group6_precision_observations/paper_26_entanglement.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "papers/INDEX.md",
+            "docs/claims_register.md",
         ],
     },
     {

@@ -28,7 +28,7 @@ molecular Hamiltonians by partitioning electrons into single-center
 blocks and coupling them via Phillips--Kleinman (PK) pseudopotentials.
 This produces structurally sparse qubit Hamiltonians---a Pauli count
 exactly linear in the qubit count across molecules at fixed basis,
-$N_{\mathrm{Pauli}} = 27.90 \times Q$, with $54\times$--$317\times$
+$N_{\mathrm{Pauli}} = 27.90 \times Q$, with $51\times$--$317\times$
 fewer terms than equal-qubit Gaussian baselines (Paper~14; the
 retired pair-diagonal rule gave $O(Q^{2.5})$ and
 51--1{,}712$\times$)---but PK limits accuracy to 5.3--19.4\%
@@ -456,9 +456,10 @@ The coupled composition program connects to multiple existing
 components:
 
 \emph{Paper~7 (Dimensionless Vacuum):} The $S^3$ conformal projection
-that defines GeoVac's graph Laplacian is identical to Fock's
-1935 momentum-space mapping~\cite{fock1935}, which is the foundation
-of Shibuya--Wulfman theory.  The 18 symbolic proofs of Paper~7
+underlying GeoVac's label set is Fock's 1935 momentum-space
+mapping~\cite{fock1935}, which is the foundation of Shibuya--Wulfman
+theory.  (The projection does not define the lattice's graph
+Laplacian $D-A$, which does not converge to $\Delta_{S^3}$;\ Paper~7.)  The 18 symbolic proofs of Paper~7
 validate the same mathematical structure that generates the
 Shibuya--Wulfman integrals.
 

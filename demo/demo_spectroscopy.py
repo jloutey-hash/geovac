@@ -3,8 +3,10 @@
 Delta-Kick Spectroscopy: Real-Time Excited State Spectrometer
 =============================================================
 
-Extracts the full absorption spectrum of the graph Hamiltonian from a single
-time propagation using the delta-kick method:
+Extracts the absorption spectrum of AtomicSolver's default Hamiltonian --
+the physical diagonal H with E_n = -1/(2n^2) inserted on the (n,l,m) labels
+(hamiltonian='exact'; NOT the legacy graph model kappa*(D - A)) -- from a
+single time propagation using the delta-kick method:
 
     1. Prepare ground state psi_0
     2. Apply weak momentum kick: psi(0) = psi_0 + i*k*(Z*psi_0)
@@ -18,8 +20,10 @@ oscillator strengths. No driving field needed -- one simulation gives
 the entire spectrum.
 
 Validation: FFT peaks are compared against exact eigenvalue gaps from
-full diagonalization of the Hamiltonian. Lyman series energies are
-shown as reference markers for the analytical (continuous) hydrogen.
+full diagonalization of the Hamiltonian. Because the default H carries
+-1/(2n^2) on the labels by construction, those gaps coincide with the
+analytical Lyman series; the demo therefore tests the propagator and the
+FFT peak extraction, not a derivation of the hydrogen spectrum.
 
 Usage:
     python demo/demo_spectroscopy.py
@@ -306,7 +310,8 @@ def run_spectroscopy(
     print("  Reference: Analytical Lyman series (continuous hydrogen):")
     for n, dE in zip(lyman_n, lyman_dE):
         print(f"    1s -> {n}p:  dE = {dE:.6f} Ha")
-    print("  (Graph Hamiltonian eigenvalues differ from the continuous limit)")
+    print("  (The default H inserts E_n = -1/(2n^2) on the labels, so these")
+    print("   gaps match by construction; this checks the integrator/FFT only)")
     print()
 
     # ------------------------------------------------------------------

@@ -204,9 +204,18 @@ def test_paper34_III5_sturmian_rationality_preserved():
     transcendentals enter at this step.'
 
     Tests by symbolic relabeling: the Sturmian focal length lam = Z/n
-    is rational in (Z, n), and the graph eigenvalues -(n^2 - 1) remain
-    integer under this relabeling. This is the categorical statement
-    Paper 34 §III.5 claims.
+    is rational in (Z, n), and the Casimir label values n^2 - 1 (the
+    diagonal SO(4) Casimir on the (n,l,m) labels -- a continuum S^3
+    quantity carried on the labels, NOT graph-Laplacian eigenvalues)
+    remain integer under this relabeling. This is the categorical
+    statement Paper 34 §III.5 claims.
+
+    2026-09-28 (trunk re-check): a former numeric leg asserted
+    spec(Z) = Z^2 * spec(1) on AtomicSolver.  It was vacuous in both
+    Hamiltonian modes -- H is Z^2 times a Z-independent matrix BY
+    CONSTRUCTION -- and a planted transcendental did not fire it, so it
+    was removed rather than kept as false backing.  The symbolic legs
+    below are the test.
     """
     Z, n = sp.symbols('Z n', positive=True, integer=True)
     lam_sturmian = Z / n
@@ -236,27 +245,6 @@ def test_paper34_III5_sturmian_rationality_preserved():
     assert (E_sturmian * 2 * sp.pi ** 2).has(sp.pi), (
         "non-tautology guard failed: .has(sp.pi) cannot detect an injected pi"
     )
-
-    # 2026-08-28 audit: and the operational statement, on PRODUCTION code
-    # rather than on a hand-built symbol.  Relabelling at lam = Z/n is an
-    # exact rational rescaling, so the solved spectrum must satisfy
-    # spec(Z) = Z^2 * spec(1) to machine precision at every Z.  Any
-    # transcendental injected by the relabelling would be Z-dependent and
-    # would break this.
-    from geovac.atomic_solver import AtomicSolver
-
-    ref = None
-    for Z_val in (1, 2, 3, 5):
-        solver = AtomicSolver(4, Z_val)
-        eigs, _ = solver.compute_ground_state(n_states=8)
-        scaled = np.sort(np.real(eigs)) / float(Z_val) ** 2
-        if ref is None:
-            ref = scaled
-        else:
-            dev = float(np.max(np.abs(scaled - ref)))
-            assert dev < 1e-13, (
-                f"Sturmian Z^2 relabelling not exact at Z={Z_val}: max dev = {dev}"
-            )
 
 
 def _velocity_form_closure(n: int, l: int):

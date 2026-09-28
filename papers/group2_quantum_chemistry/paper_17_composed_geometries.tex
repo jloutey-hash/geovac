@@ -60,7 +60,9 @@ tuning.
 
 The Geometric Vacuum program constructs discrete lattice
 Hamiltonians by identifying the \emph{natural geometry} of each
-quantum system and discretizing it as a sparse graph~\cite{paper0,paper1,paper7}.
+quantum system and working in the label set and channel structure of the
+coordinates in which separation occurs, which yields sparse Hamiltonian
+matrices~\cite{paper0,paper1,paper7}.
 Four levels of this hierarchy have been established:
 
 \begin{description}
@@ -1549,9 +1551,9 @@ The natural geometry hierarchy is now:
 \toprule
 Level & System & Geometry & Best result \\
 \midrule
-1 & H       & $S^3$ (Fock)           & $<0.1\%$ error \\
+1 & H       & $S^3$ (Fock)           & exact on the labels (diagonal Casimir $n^2-1$); graph $\lambda_{\max}$ matched by construction \\
 2 & H$_2^+$ & Prolate spheroid       & machine precision (spectral) \\
-3 & He      & Hyperspherical         & 0.05\% error \\
+3 & He      & Hyperspherical         & 0.05\% error (adiabatic FD; non-variational, error cancellation) \\
 4 & H$_2$   & Mol-frame hypersp.     & 96.0\% $D_e$ \\
 4N & LiH    & Full mol-frame hypersp. (SO(12)) & $R_{\rm eq}$: 63.5\% ($l_{\max}=2$, 2D variational; unbound $D_e$) \\
 5 & LiH     & Composed (Level 3+4)   & $R_{\rm eq}$: 5.3\% error \\

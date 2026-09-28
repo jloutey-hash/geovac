@@ -47,11 +47,16 @@ ground-state energy---matched, not derived: the content that could have
 failed is the spectral bound, not the target the scale is matched to.
 The per-shell spectrum $E_n = -Z^2/(2n^2)$ is not a function of the
 graph Laplacian: it follows from the diagonal Casimir $n^2-1$ on the
-labels through Fock's energy shell $p_0^2 = -2E$.  \textbf{[OBSERVATION]} This angular cross-section recurs as a universal
-structural factor inside every natural geometry developed in the
-Geometric Vacuum series---from $S^3$ for atoms through composed fiber
-bundles for multi-electron molecules---making it a foundational
-motif of the framework.  This is Paper~0 in the series.
+labels through Fock's energy shell $p_0^2 = -2E$.  \textbf{[OBSERVATION]} This angular cross-section recurs across the
+natural geometries of the Geometric Vacuum series to the extent each
+retains the corresponding symmetry:\ the full $(\ell, m)$ labeling with
+degeneracy $2\ell+1$ at the one-centre levels ($S^3$ for hydrogen,
+hyperspherical coordinates for helium), in the angular channels of the
+molecule-frame hyperspherical treatment, and in each fiber of the
+composed bundles;\ at the two-centre prolate-spheroidal level only $m$
+survives exactly, $\ell$ being replaced by a separation index that
+reduces to it only in the united-atom limit.  This is Paper~0 in the
+series.
 \end{abstract}
 
 \maketitle
@@ -109,18 +114,22 @@ from the axioms.
 \medskip
 
 \textbf{[OBSERVATION]} \noindent\textbf{Series significance.}  The $(\ell, m)$ angular
-sector constructed here recurs as a universal structural factor inside
-every natural geometry developed in the Geometric Vacuum (GeoVac)
-series: $S^3$ for hydrogen~\cite{paper7}, prolate spheroidal
-coordinates for H$_2^+$~\cite{paper11}, hyperspherical coordinates for
-He~\cite{paper13}, molecule-frame hyperspherical coordinates for
-H$_2$~\cite{paper15}, and composed fiber bundles for
-LiH~\cite{paper17}.  In each case, the full geometry separates into a
-system-specific radial or hyperradial part and a universal angular
-cross-section whose structure is precisely the packing derived here.
-This universality is the reason the packing construction is
-foundational to the series rather than merely a curiosity about
-hydrogen.
+sector constructed here recurs inside the natural geometries of the
+Geometric Vacuum (GeoVac) series wherever the corresponding symmetry
+survives.  The full $(\ell, m)$ labeling with degeneracy $2\ell+1$
+appears on $S^3$ for hydrogen~\cite{paper7}, in the per-electron
+angular factors of the hyperspherical coordinates for He~\cite{paper13},
+in the angular channels of the molecule-frame hyperspherical
+coordinates for H$_2$~\cite{paper15}, and in each fiber of the composed
+bundles for LiH~\cite{paper17}.  In the prolate spheroidal coordinates
+for H$_2^+$~\cite{paper11} only $m$ is exact:\ the two-centre potential
+breaks SO(3) to axial SO(2), and the $\eta$-equation's node count
+correlates with $\ell$ only in the united-atom limit.  Where it
+survives, the full geometry separates into a system-specific radial or
+hyperradial part and an angular cross-section whose labeling is the
+packing derived here.  This recurrence is the reason the packing
+construction is foundational to the series rather than merely a
+curiosity about hydrogen.
 
 \medskip
 
@@ -131,8 +140,11 @@ representation theory.  The relationship between hydrogen's
 Fock~\cite{fock1935} and Bargmann~\cite{bargmann1936}.  What is new
 here is the specific packing algorithm that produces the $(\ell, m)$
 labeling from geometric--combinatorial reasoning independent of the
-operator formalism, and the observation that this angular sector is
-the universal fiber across the GeoVac natural geometries.
+operator formalism, and the observation that this angular sector
+recurs as the angular fiber of the GeoVac natural geometries wherever
+their symmetry retains it (fully at the one-centre, molecule-frame
+hyperspherical and composed levels; only through $m$ at the two-centre
+prolate level).
 
 The paper is organized as follows.
 Section~\ref{sec:construction} presents the packing algorithm.
@@ -443,11 +455,14 @@ particular choices above.
 
 The packing construction of Sec.~\ref{sec:construction} produces a
 universal $(\ell, m)$ angular labeling.  In the subsequent papers of
-the GeoVac series, this same angular sector appears as a structural
-factor inside every natural geometry used for quantum chemistry
-calculations.  The full geometry of each system separates into a
-system-specific radial (or hyperradial) coordinate and the universal
-angular cross-section derived here.
+the GeoVac series, this angular sector appears as a structural factor
+inside the natural geometries used for quantum chemistry calculations,
+to the extent each geometry retains the corresponding symmetry:\ the
+full $(\ell, m)$ labeling with degeneracy $2\ell+1$ at Levels~1, 3 and~4
+and in each Level-5 fiber, but only $m$ at the two-centre Level~2.
+Where it survives, the full geometry of each system separates into a
+system-specific radial (or hyperradial) coordinate and the angular
+cross-section derived here.
 
 Table~\ref{tab:cross-section} summarizes the hierarchy.
 
@@ -480,9 +495,10 @@ Level & System & Full Geometry & Angular Cross-Section & Ref.\ \\
 \bottomrule
 \end{tabular}
 \caption{The $(\ell, m)$ angular cross-section inside each natural
-  \textbf{[OBSERVATION]} geometry of the GeoVac series.  In every case, the full coordinate
-  system separates into a system-specific radial part and the
-  universal angular labeling constructed in this paper.}
+  \textbf{[OBSERVATION]} geometry of the GeoVac series.  At Levels~1, 3, 4 and in each
+  Level-5 fiber the coordinate system separates into a system-specific
+  radial part and the full $(\ell, m)$ labeling constructed in this
+  paper;\ at the two-centre Level~2 only $m$ is exact.}
 \label{tab:cross-section}
 \end{table}
 
@@ -511,9 +527,10 @@ labeling.  The quantum number~$\ell$ is no longer exactly conserved in
 the two-center problem: it is replaced by a separation parameter from
 the $\eta$-equation that reduces to~$\ell$ in the united-atom limit.
 The angular structure is recognizably descended from the $(\ell, m)$
-packing---$m$ is exact, and the $\ell$-like index organizes the
-$\eta$-eigenstates into the same degeneracy pattern---even though the
-two-center potential breaks the full SO(3) symmetry to axial SO(2).
+packing---$m$ is exact---but it is not the same degeneracy pattern:\
+the two-center potential breaks the full SO(3) symmetry to axial SO(2),
+lifting the $(2\ell+1)$-fold degeneracy, and the $\eta$-node count
+correlates with $\ell$ only in the united-atom limit.
 Paper~11~\cite{paper11} constructs a discrete lattice in these
 coordinates.
 
@@ -544,8 +561,8 @@ LiH and BeH$^+$.
 
 \medskip
 
-\textbf{[OBSERVATION]} The invariance of the angular sector across all five levels is not
-imposed by hand: it tracks the symmetry each geometry retains
+\textbf{[OBSERVATION]} The recurrence of the angular sector across the five levels is not
+imposed by hand, and it is not uniform: it tracks the symmetry each geometry retains
 ($m$ exactly wherever axial symmetry survives; $\ell$ exactly
 wherever the full SO(3) does---the two-center problem breaks SO(3)
 to axial SO(2), replacing $\ell$ by a separation index, as \S V
@@ -556,29 +573,33 @@ substrate for this angular factor.
 \label{sec:combinatorial_invariant}
 
 The preceding survey reveals a structural feature that merits explicit
-\textbf{[OBSERVATION]} comment.  The same discrete quantum number skeleton
+\textbf{[OBSERVATION]} comment.  The discrete quantum-number set
 $\{(\ell, m) : 0 \leq \ell, \; -\ell \leq m \leq \ell\}$---with its
-degeneracy $2\ell + 1$ and selection rules---admits multiple conformally
-distinct continuum embeddings.  The five geometries catalogued in
+degeneracy $2\ell + 1$ and selection rules---appears inside several
+conformally distinct continuum geometries.  The five geometries catalogued in
 Table~\ref{tab:cross-section} are different Riemannian manifolds with
 different metrics, curvatures, and coordinate singularity structures.
 $S^3$ is compact with constant positive curvature; prolate spheroidal
 coordinates are non-compact with coordinate singularities at the foci;
 the hyperspherical manifold $S^5$ is compact but six-dimensional (for two electrons); the
 composed fiber bundle is a product of manifolds with different
-dimensionalities at each level.  Yet all of them share a common
-combinatorial core: the $(\ell, m)$ node structure with its labeling,
-degeneracies, and angular momentum coupling rules.
+dimensionalities at each level.  Levels~1, 3 and~4, and each fiber of
+Level~5, share the full $(\ell, m)$ node structure with its labeling,
+degeneracies, and angular momentum coupling rules;\ the two-centre
+Level~2 shares only the $m$ label, its $\eta$-separation index
+reducing to $\ell$ only in the united-atom limit.
 
-This inverts a standard universality argument familiar from statistical
-mechanics and lattice field theory, where many different lattice
-discretizations (square, triangular, hexagonal) flow under
-renormalization to the same continuum field theory.  The standard
-conclusion is that the continuum description is fundamental and the
-lattice is an approximation.  Here the relationship runs in the
-opposite direction: one discrete node structure admits many continuum
-realizations, none of which is privileged.  The lattice is the
-invariant; the continuum geometries are projections.
+This invites a comparison with a standard universality argument
+familiar from statistical mechanics and lattice field theory, where many
+different lattice discretizations (square, triangular, hexagonal) flow
+under renormalization to the same continuum field theory, and the
+continuum description is usually read as fundamental.  Here the shared
+object runs the other way:\ one discrete label structure (fully, or
+through $m$ alone at Level~2) is carried by several continuum
+geometries.  This does not make either side prior:\ the label set and
+the continuum operators are dual descriptions of the same
+quantum-number structure, and the observation is about what they share,
+not about which is fundamental.
 
 We state this as a mathematical observation, not a metaphysical claim.
 The conformal equivalences between each continuum operator and
@@ -593,8 +614,8 @@ levels only the angular channel structure carries the packing labels
 (at Level~2 the prolate separation constants are not labelled by
 $\ell$ at all, only by $m$ and a node count), and the subsequent
 papers benchmark each geometry in the hierarchy numerically.
-\textbf{[OBSERVATION]} The one-center levels (1 and 3) are the standard
-continuum problems in separated coordinates; the composed Level~5 adds
+\textbf{[OBSERVATION]} Levels~1--4 are the standard continuum problems
+in their separated coordinates; the composed Level~5 adds
 a Phillips--Kleinman pseudopotential and is an approximation to, not
 an equivalent of, the all-electron problem.
 Whether one regards the discrete or continuum description as more
@@ -605,7 +626,7 @@ An analogy to isospectral manifolds is apt.  Kac's celebrated
 question---``Can one hear the shape of a drum?''---established that
 different Riemannian geometries can share spectral data (the answer, as
 Gordon, Webb, and Wolpert showed, is no: non-isometric manifolds can be
-isospectral).  \textbf{[OBSERVATION]} The present result is stronger in a specific sense:
+isospectral).  \textbf{[OBSERVATION]} The present result differs in a specific sense:
 the geometries in Table~\ref{tab:cross-section} share a labeled node
 structure---quantum number assignments and per-shell degeneracies,
 with the $(\ell, m)$ selection rules shared exactly wherever the
@@ -617,9 +638,9 @@ and different in kind from isospectrality.
 
 
 %% ================================================================
-%%  VI.  GRAPH TOPOLOGY AND THE BRIDGE TO DYNAMICS
+%%  VI.  GRAPH TOPOLOGY AND WHAT ITS SPECTRUM CARRIES
 %% ================================================================
-\section{Graph Topology and the Bridge to Dynamics}
+\section{Graph Topology and What Its Spectrum Carries}
 \label{sec:graph}
 
 \subsection{Vertex set}
@@ -661,14 +682,15 @@ Edges encode geometrically adjacent transitions:
 
 The full graph topology may also include edges connecting states with
 different~$\ell$ (e.g., $\ell$-changing transitions driven by
-non-spherical perturbations).  However, for the spherically symmetric
-Coulomb problem, the Hamiltonian is block-diagonal in~$\ell$: the
-spherical symmetry decouples the $\ell$~sectors, so that the graph
-Laplacian decomposes into independent $\ell$-blocks ($m$ is mixed within a
-block by the azimuthal edges; the production graph has no $\ell$-changing
-edges --- corrected 2026-09-03 from ``$(\ell, m)$ blocks'').  This
-block-diagonality is a consequence of the potential's symmetry, not a
-topological constraint on the graph itself.
+non-spherical perturbations).  The production graph has no
+$\ell$-changing edges, so its Laplacian decomposes into independent
+$\ell$-blocks ($m$ is mixed within a block by the azimuthal edges ---
+corrected 2026-09-03 from ``$(\ell, m)$ blocks'').  This
+block-diagonality mirrors the $\ell$-conservation of the spherically
+symmetric Coulomb Hamiltonian, but it is a property of the chosen edge
+set, not a consequence of the graph encoding the Coulomb problem;\ it
+is also what prevents the graph Laplacian from converging to
+$\Delta_{S^3}$ (below).
 
 \subsection{Spectral bound}
 
@@ -916,10 +938,12 @@ observations that match hydrogen's quantum numbers---but they depend
 on identifications beyond what the two axioms alone determine.
 
 The $(\ell, m)$ angular sector constructed here recurs as the
-universal angular cross-section inside every natural geometry developed
-in the GeoVac series, from $S^3$ for single-electron
-atoms~\cite{paper7} through composed fiber bundles for core--valence
-molecules~\cite{paper17}.  The computational framework of the series
+angular cross-section inside the natural geometries of the GeoVac
+series wherever their symmetry retains it---in full on $S^3$ for
+single-electron atoms~\cite{paper7}, in the hyperspherical and
+molecule-frame hyperspherical treatments, and in each fiber of the
+composed bundles for core--valence molecules~\cite{paper17};\ only
+through $m$ in the two-centre prolate geometry.  The computational framework of the series
 is built on this label set, on Fock's continuum projection, and on the
 natural geometries in which each problem separates---not on the graph
 Laplacian and its kinetic scale, whose spectrum is a two-dimensional

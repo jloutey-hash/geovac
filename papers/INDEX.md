@@ -108,7 +108,7 @@ are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`.
 
 | Paper | Status | One-liner |
 |:------|:------:|:----------|
-| 14 `paper_14_qubit_encoding.tex` | **KEYSTONE** | The headline: N_Pauli = 27.90 × Q, exactly linear in qubits across 35 molecules; 54×–317× vs Gaussian baselines at equal qubits, 76× vs cc-pVDZ |
+| 14 `paper_14_qubit_encoding.tex` | **KEYSTONE** | The headline: N_Pauli = 27.90 × Q, exactly linear in qubits across 35 molecules; 51×–317× vs Gaussian baselines at equal qubits, 76× vs cc-pVDZ |
 | 16 `paper_16_periodicity.tex` | **KEYSTONE** | Chemical periodicity from S_N representation theory |
 | 20 `paper_20_resource_benchmarks.tex` | ACTIVE | Resource benchmarks, FCI PES, pip install |
 | 23 `paper_23_nuclear_shell.tex` | **KEYSTONE** | Nuclear qubit Hamiltonians; Fock rigidity theorem (cross-group hub) |

@@ -2,9 +2,11 @@
 Paper 1 §II — eq:rydberg dynamical-algebra backing test.
 
 Paper 1 §II claims the SU(2) (x) SU(1,1) dynamical-algebra operators and
-their Casimir invariants reproduce the exact hydrogen spectrum
-E_n = -1/(2 n^2), "from operator eigenvalues, not from solving differential
-equations." The 2026-06-14 trunk QA re-check flagged this as a load-bearing
+their Casimir invariants reproduce the hydrogen QUANTUM NUMBERS (n on
+interior shells, l(l+1) on every shell) from operator eigenvalues.  The
+energies E_n = -1/(2 n^2) are then an IMPOSED map from n through Fock's
+energy shell p0^2 = -2E -- not an eigenvalue output of the algebra, and
+not a reproduction of the spectrum by the operators. The 2026-06-14 trunk QA re-check flagged this as a load-bearing
 claim with no GeoVac artifact (the only backing was the continuum Fock chain;
 the production graph Laplacian L=D-A is positive-semidefinite).
 
@@ -26,9 +28,10 @@ The non-tautological content is that
       n=2 -> 2; the -1/2 commutator eigenvalue times -2 gives n), and
     * L^2 has spectrum exactly {l(l+1)},
 
-so feeding N through the energy-shell relation E = -1/(2 N^2) yields the
-exact Rydberg levels. n and l(l+1) emerge as eigenvalues of operators
-assembled from the generators, not inserted by hand.
+so feeding N through the (imposed) energy-shell map E = -1/(2 N^2) gives
+the Rydberg levels.  What is tested is that n and l(l+1) emerge as
+eigenvalues of operators assembled from the generators, not inserted by
+hand; the energy map itself is imposed, not derived.
 
 Truncation note: on the top shell n = max_n the raise partner is outside the
 finite window, so the commutator is truncated there; the N assertions are
@@ -97,8 +100,9 @@ def test_su2_casimir_spectrum_l_l_plus_1():
 
 
 def test_rydberg_levels_from_algebra():
-    """E = -1/(2 N^2) with N the algebra's number operator reproduces
-    E_n = -1/(2 n^2) exactly on interior states (the §II claim chain)."""
+    """The imposed energy-shell map E = -1/(2 N^2), applied to the algebra's
+    number operator N, gives E_n = -1/(2 n^2) exactly on interior states;
+    the load-bearing content is N's integer spectrum {n}, not the map."""
     max_n = 6
     states, idx, Lp, Tp, Lz = build_operators(max_n)
     Tm = Tp.T

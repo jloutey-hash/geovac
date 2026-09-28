@@ -103,9 +103,11 @@ and the framework is positioned as a zero-parameter, structurally
 sparse \emph{research instrument}---a computationally principled
 alternative whose primary downstream value (qubit-Hamiltonian sparsity
 for quantum simulation) lives in the quantum-computing arc---not as a
-replacement for production quantum chemistry.  The discrete graph and
-the continuous Laplace--Beltrami operator are dual descriptions
-connected by proven conformal maps; the interpretive question of which
+replacement for production quantum chemistry.  The discrete label lattice and the continuous Laplace--Beltrami
+operator are dual descriptions of the same quantum-number structure,
+connected through Fock's proven conformal projection (the lattice's
+graph Laplacian is not one of the two:\ it does not converge to
+$\Delta_{S^3}$, Paper~7); the interpretive question of which
 is more fundamental is left open.
 \end{abstract}
 
@@ -173,7 +175,7 @@ ceiling of the composed architecture (Sec.~\ref{sec:composed}).}
 \toprule
 Level & System (centers, electrons) & Natural geometry & Headline result & Paper \\
 \midrule
-1 & atom (1, 1) & $S^3$ (Fock projection) & $<0.1\%$ (one-electron) & \cite{loutey_paper7} \\
+1 & atom (1, 1) & $S^3$ (Fock projection) & exact on the labels (diagonal Casimir $n^2-1$); graph $\lambda_{\max}$ matched by construction & \cite{loutey_paper7} \\
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & machine precision (spectral Laguerre) & \cite{loutey_paper11} \\
 3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $1.88\%$ (fixed-$k$ hydrogenic CI, $n_{\max}=7$) & \cite{loutey_paper13} \\
 4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, cusp-corrected) & \cite{loutey_paper15} \\
@@ -188,10 +190,13 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 
 GeoVac is presented throughout as a discretization framework that
 exploits natural geometry, not as a new foundation for quantum
-mechanics.  The discrete graph and the continuous Laplace--Beltrami
-operator are dual descriptions connected by the proven conformal maps
-of the foundations arc, and the interpretive question of ontological
-priority is left to the reader.  The framework's concrete
+mechanics.  The discrete label lattice and the continuous
+Laplace--Beltrami operator are dual descriptions of the same
+quantum-number structure, connected through the proven conformal
+projection of the foundations arc (the lattice's graph Laplacian is not
+one of the two:\ it does not converge to $\Delta_{S^3}$, Paper~7), and
+the interpretive question of ontological priority is left to the
+reader.  The framework's concrete
 advantages---a zero-parameter construction from nuclear charges and
 geometry alone, angular-momentum selection rules baked into the basis,
 exact algebraic matrix elements, and structural
@@ -205,8 +210,8 @@ properties this synthesis foregrounds.
 
 \subsection{The atomic baseline and the bond sphere}
 
-The one-electron atomic baseline is the $S^3$ graph of the foundations
-arc:\ on the discrete $(n,l,m)$ label lattice $-\Delta_{S^3}$ is the
+The one-electron atomic baseline is the $S^3$ label lattice of the
+foundations arc:\ on the discrete $(n,l,m)$ label lattice $-\Delta_{S^3}$ is the
 diagonal $SO(4)$ Casimir $n^2-1$, so through Fock's energy shell the
 Rydberg spectrum holds at every cutoff; the graph Laplacian itself does not
 converge to the $S^3$ operator, and its extremal eigenvalue matches
@@ -314,7 +319,7 @@ value $e^a E_1(a)$; all higher moments follow from the rational
 recurrence $S_0^{(k)}(a) = \Gamma(k) - a\,S_0^{(k-1)}(a)$ for $k \ge
 1$~\cite{loutey_paper11}.  This is the exchange-constant taxonomy of the
 foundations arc made concrete:\ the irreducible transcendental content
-of the diatomic radial problem is one seed in the \emph{composition}
+of the diatomic radial problem is one seed in the \emph{embedding}
 tier, tagged to a specific integral, rather than diffuse numerical
 error~\cite{loutey_paper18}.
 
@@ -884,10 +889,12 @@ $R$-dependence the single-$n$ approximation lacked.  What it does not do
 is recover GeoVac's angular sparsity, which is the trade Paper~58 states
 as a conservation law.
 
-\subsection{Graph-native FCI for atoms}
+\subsection{Fixed-$k$ CI for atoms on the $S^3$ label set}
 
 The atomic FCI paper~\cite{loutey_fci_atoms} solves multi-electron
-atoms directly on the sparse $S^3$ graph Hamiltonian using
+atoms by fixed-$k$ ($k = Z$) hydrogenic CI on the physical Hamiltonian,
+indexed by the $S^3$ label set (a sparse Hamiltonian matrix, not the
+graph Laplacian), using
 Slater--Condon rules~\cite{Slater1960, CondonShortley1935} with exact $R^k$ radial integrals and Gaunt
 coefficients, with Slater determinants indexed as sorted tuples of
 spin-orbital labels (relational lattice indexing).  Helium with its
@@ -988,7 +995,7 @@ Prolate spheroidal $V_{ee}$ ($|m|\ge1$) & quadrature & same kernel, ordered-$\xi
 He hyperradial $S$, $K$ matrices & algebraic & three-term Laguerre recurrence \cite{loutey_paper13} \\
 Nuclear coupling (Level 4) & algebraic & split-region Legendre, $3j$-triangle termination \cite{loutey_paper15} \\
 Cross-center $V_{ne}$ (balanced) & algebraic & multipole, exact Gaunt termination $L_{\max}=2l_{\max}$ \cite{loutey_paper19} \\
-Slater $F^k$ integrals (graph-native) & algebraic & exact rational $S^3$ node overlap \cite{loutey_paper13, loutey_fci_atoms} \\
+Slater $F^k$ integrals (fixed-$k$ label-set CI) & algebraic & exact rational $S^3$ density overlap \cite{loutey_paper7, loutey_paper13, loutey_fci_atoms} \\
 $Z_{\mathrm{eff}}$ screening & numerical & Gauss--Legendre quadrature \cite{loutey_paper15, loutey_paper17} \\
 Adiabatic potential $U(R)$, $\mu(R)$ & numerical & point-by-point diagonalization \cite{loutey_paper13} \\
 Hyperradial coupling (Levels 3--4) & numerical & FD $/$ spectral radial solve \cite{loutey_paper13, loutey_paper15} \\
@@ -999,9 +1006,12 @@ Hyperradial coupling (Levels 3--4) & numerical & FD $/$ spectral radial solve \c
 The pattern is consistent with the foundations-arc taxonomy of
 Paper~18~\cite{loutey_paper18}.  The angular sector is intrinsic
 (rational, $\pi$-free).  The diatomic radial seed $e^a E_1(a)$ and the
-Slater-integral seeds are composition-tier transcendentals tied to a
-specific integral.  The electron--electron cusp is the embedding-tier
-exchange constant.  And the items still in the numerical column---the
+two-center electron-repulsion seeds $\{E_1, \ln, \gamma\}$ are
+embedding-tier transcendentals tied to specific integrals (the Slater
+$F^k$ integrals of the one-center label-set CI are rational and carry no
+seed).  The electron--electron cusp is likewise an embedding-tier
+exchange constant;\ the composition tier is the Phillips--Kleinman
+pseudopotential.  And the items still in the numerical column---the
 $Z_{\mathrm{eff}}$ screening, the adiabatic curves, the hyperradial
 coupling---are precisely the places where an algebraic structure has
 not yet been found, which the project records as an ongoing goal rather
@@ -1102,10 +1112,11 @@ numerical column of Table~\ref{tab:algebraic}---$Z_{\mathrm{eff}}$
 screening, the adiabatic potential curves, the hyperradial
 coupling---is the standing target of the algebraic-first program.  The
 existence proofs (Neumann $V_{ee}$, split-region Legendre termination)
-show such replacements are achievable in principle; whether the
-adiabatic curves $\mu(R)$, which Paper~13 records as genuinely
-transcendental in $R$, admit an algebraic-implicit form (defined by a
-polynomial equation over a known coefficient ring) is open.
+show such replacements are achievable in principle.  The adiabatic
+curves $\mu(R)$ are now known to be algebraic-implicit---roots of a
+characteristic polynomial $P(R,\mu) = 0$ over $\mathbb{Q}(\pi,\sqrt2)$
+(Papers~13 and~18)---so what is open is whether that structure can
+replace the pointwise diagonalization computationally.
 
 \paragraph{Second-row and polyatomic extension.}  The balanced coupled
 Hamiltonian hit an orthogonalization wall for second-row systems such as
@@ -1164,9 +1175,11 @@ first is a scoped guardrail rather than an unconditional no-go.
 The framework is a zero-parameter, structurally sparse research
 instrument whose accuracy ceilings are now characterized and whose
 strongest downstream payoff---qubit-Hamiltonian sparsity for quantum
-simulation---lives in the quantum-computing arc.  The discrete graph
-and the continuous Laplace--Beltrami operator are dual descriptions
-connected by proven conformal maps; the framework's concrete
+simulation---lives in the quantum-computing arc.  The discrete label lattice and the continuous Laplace--Beltrami
+operator are dual descriptions of the same quantum-number structure,
+connected through Fock's proven conformal projection (the lattice's
+graph Laplacian is not one of the two:\ it does not converge to
+$\Delta_{S^3}$, Paper~7); the framework's concrete
 advantages do not depend on which description one regards as
 fundamental, and that interpretive question is left open.
 

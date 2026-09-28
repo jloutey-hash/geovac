@@ -169,11 +169,15 @@ class TestUniversalConstantOrigin:
 
         The graph Laplacian eigenvalues are dimensionless numbers.
         Without knowing the target energy (-0.5 Ha), there is no way to
-        determine kappa from the graph alone. The graph gives the SPECTRUM
-        (ratios between eigenvalues); kappa sets the SCALE.
+        determine kappa from the graph alone.  kappa is a matched scale on
+        the graph's extremal eigenvalue (a 2D-grid band edge); the graph
+        spectrum is NOT the hydrogen spectrum (the edge Laplacian does not
+        converge to Delta_{S^3}, Paper 7).
 
-        This is the honest framing: -1/16 is the unique bridge between
-        the dimensionless graph topology and dimensionful physics.
+        Honest framing: kappa = -1/16 matches lambda_max to -1/2 by
+        construction; the bridge from the dimensionless labels to
+        dimensionful energies is Fock's energy shell p0^2 = -2E, not kappa.
+        kappa's coincidence with the Fock-Jacobian 1/16 is an Observation.
         """
         # Compute kappa at two different max_n values
         r1 = compute_required_scale_factor(max_n=10)
@@ -241,9 +245,10 @@ class TestUniversalConstantOrigin:
         """
         The same kappa = -1/16 works for all Z when scaled as kappa * Z².
 
-        This is consistent with the interpretation that kappa is the
-        unique bridge constant: it doesn't change with the physics,
-        only the Z² scaling does.
+        This checks only the legacy graph model's Z^2 scaling of its
+        matched ground-state scale (kappa * Z^2 * lambda_max); kappa is a
+        matched scale, not a unique bridge constant (the bridge to
+        dimensionful energies is Fock's energy shell).
         """
         from geovac import AtomicSolver
 

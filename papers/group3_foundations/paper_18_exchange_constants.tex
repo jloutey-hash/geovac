@@ -30,13 +30,14 @@ Projecting Discrete Spectra onto Continuous Manifolds}
 
 \begin{abstract}
 Compact Lie groups have discrete unitary representations
-(Peter--Weyl theorem); the GeoVac graph exploits this discreteness
+(Peter--Weyl theorem); the GeoVac label set exploits this discreteness
 directly.  Transcendental conversion factors appear when these
 discrete representations are projected onto non-compact coordinate
 systems used for measurement.  We classify these factors by the
-type of compactness mismatch they mediate---a six-tier taxonomy
+type of compactness mismatch they mediate---six exchange-constant tiers
 (intrinsic, conformal/calibration, embedding, algebraic-implicit,
-composition, inner-factor input data) spanning the GeoVac hierarchy
+composition, inner-factor input data) plus the algebraic (no-exchange)
+case, seven categories in all, spanning the GeoVac hierarchy
 through Level~5 plus the almost-commutative inner factor---and identify
 them with Weyl--Selberg exchange constants of spectral geometry.  The
 falsifiable claim: the transcendental content of any GeoVac
@@ -90,10 +91,12 @@ limit via Weyl's law.
 
 The Geometric Vacuum program constructs discrete lattice
 Hamiltonians by identifying the natural geometry of each quantum
-system and discretizing it as a sparse
-graph~\cite{loutey_paper0,loutey_paper1,loutey_paper7}.  A
+system and working in the label set and channel structure of the
+coordinates in which separation occurs, which yields sparse Hamiltonian
+matrices~\cite{loutey_paper0,loutey_paper1,loutey_paper7}.  A
 persistent observation across the hierarchy of natural geometries
-is that the discrete algebraic structures---integer eigenvalues,
+is that the discrete algebraic structures---integer quantum-number
+labels (with the diagonal $SO(4)$ Casimir $n^2-1$ on them),
 finite recurrence relations, Gaunt integrals built from Wigner
 $3j$ symbols---are entirely self-contained, but that their
 connection to physical observables in continuous coordinate
@@ -102,7 +105,7 @@ systems always introduces transcendental constants.
 The thesis of this paper is that these transcendental conversion
 factors are consequences of \emph{compactness}.  Compact Lie groups
 have discrete unitary representations (the Peter--Weyl
-theorem~\cite{peter_weyl1927}); the GeoVac graph exploits this
+theorem~\cite{peter_weyl1927}); the GeoVac label set exploits this
 discreteness directly.  Transcendental numbers enter when---and only
 when---those discrete representations are translated into non-compact
 coordinate systems used for measurement.  The taxonomy developed below
@@ -140,7 +143,7 @@ resulting transcendental content.
 \section{Catalog of Exchange Constants}
 \label{sec:catalog}
 
-\subsection{Level 1: $\kappa = -1/16$ ($S^3 \to \mathbb{R}^3$)}
+\subsection{Level 1: the energy shell $p_0$ and the matched $\kappa = -1/16$ ($S^3 \to \mathbb{R}^3$)}
 \label{sec:kappa}
 
 The compactness of $S^3$ is what makes the Laplace--Beltrami
@@ -148,8 +151,9 @@ eigenvalues discrete integers (on the graph's label set $(n,l,m)$,
 $-\Delta_{S^3}$ acts as the diagonal $SO(4)$ Casimir $n^2-1$).  The
 passage to the non-compact $\mathbb{R}^3$ energy scale is Fock's
 energy shell $p_0^2 = -2E$;\ $\kappa$ plays a narrower role, matching
-the graph's extremal eigenvalue (a band edge) to $-\tfrac12$
-(an Observation).
+the graph's extremal eigenvalue (a band edge) to $-\tfrac12$ by
+construction (its coincidence with the geometric $1/16$ of the Fock
+projection is an Observation).
 
 The continuum $S^3$ Laplace--Beltrami operator --- which the graph's
 edge Laplacian does \emph{not} converge to (it preserves $l$ and splits
@@ -179,32 +183,34 @@ energy shell $p_0^2 = -2E$ (with $p_0 = Z/n$), not from $\kappa$ and not
 from the graph Laplacian:\ \textbf{[MEASURED]} the spectrum of
 $\kappa\mathcal{L}$ is a band structure confined to $[-\tfrac12, 0]$
 (at $n_{\max} = 20$ its lowest levels are $-0.4936$, $-0.4936$,
-$-0.4932$, \ldots, not a Rydberg ladder), and no node-weighted variant
-of the graph Hamiltonian built on these labels has been shown to yield
-$-1/(2n^2)$ (Paper~7).
+$-0.4932$, \ldots, not a Rydberg ladder), and no variant of the graph
+Hamiltonian with nonzero edge coupling built on these labels has been
+shown to yield $-1/(2n^2)$ (Paper~7;\ the diagonal default, a node
+weight only, gives $-1/(2n^2)$ by construction).
 
 The geometric quantity that $\kappa$'s value \emph{coincides} with is
-well understood: it is the Jacobian of the stereographic projection
-composed with the conformal factor of the Fock map.  (That the
-calibration value $\kappa$ coincides with this geometric factor is an
-Observation, not a derivation --- no bridge derives the calibration
-role from the geometry; see \S\ref{sec:kappa_derivation}.)  Specifically, if $\Omega$
+the inverse Fock Jacobian at the projection centre.  If $\Omega$
 is the conformal factor $\Omega = 2p_0/(p^2 + p_0^2)$ (so that
 $\Omega(0) = 2$ at the ground-state shell $p_0 = 1$, matching
 \S\ref{sec:kappa_derivation} and Paper~7~\cite{loutey_paper7}), then
 the Laplace--Beltrami operator on $S^3$ and the flat-space
 kinetic operator are related by
 $\nabla^2_{S^3} = \Omega^{-2}[\nabla^2_{\mathrm{flat}} + \text{lower order}]$,
-and $\kappa$ absorbs the accumulated conformal rescaling and
-the $p_0$ energy-shell normalization~\cite{loutey_paper7}.
+and $1/\Omega^4(0) = 1/16$~\cite{loutey_paper7}.  That the matched
+$\kappa$ coincides with this geometric $1/16$ is an Observation, not a
+derivation:\ no bridge derives the matching role from the geometry, and
+$\kappa$ does not carry the conformal rescaling or the energy-shell
+normalization (\S\ref{sec:kappa_derivation}).
 
-The key property of $\kappa$ is that it is \textit{unnecessary
-on the graph}.  The graph Laplacian eigenvalue problem $L\psi =
-\lambda\psi$ is posed entirely in integers (integer matrix entries,
-algebraic eigenvalues).  The
-constant $\kappa$ appears only when the result is translated
-into atomic units (Hartrees, bohrs)---i.e., when the discrete
-spectrum is projected onto a continuous coordinate system.
+What $\kappa$ does is narrow.  The graph Laplacian eigenvalue problem
+$L\psi = \lambda\psi$ is posed entirely in integers (integer matrix
+entries, algebraic eigenvalues), and $\kappa$ only \emph{matches} its
+extremal eigenvalue, a grid band edge, to $-\tfrac12$~Ha by
+construction.  The energies themselves do not pass through $\kappa$ or
+the graph:\ they enter through the energy shell $p_0^2 = -2E$ acting on
+the Casimir $n^2 - 1$ of the labels, and it is that projection, not
+$\kappa$, that translates the dimensionless label data into atomic
+units.
 
 \subsection{Level 2: $e^a E_1(a)$ (Laguerre basis $\to$ prolate spheroid)}
 \label{sec:stieltjes}
@@ -290,7 +296,7 @@ rational function $1/(1+t)$ evaluated at $a$.  It encodes how
 the Laguerre inner product (defined on the flat half-line
 $[0, \infty)$ with exponential weight) ``sees'' a shifted pole
 at $x = -a$ arising from the curvature of the prolate spheroidal
-coordinate system.  On the graph, there is no pole; the
+coordinate system.  On the label set, there is no pole; the
 centrifugal barrier is a selection rule encoded in the quantum
 numbers.  The transcendental appears only when this selection
 rule is represented as a rational function in a continuous
@@ -328,7 +334,7 @@ side; $\gamma_E$ is not independent of $E_1$ at all, arriving with it
 through $E_1(z) = -\gamma_E - \ln z + \mathrm{Ein}(z)$.  All three
 therefore sit in the \emph{embedding} tier alongside $1/r_{12}$: they
 are the cost of the continuum two-centre geometry, not content of the
-graph.
+discrete label/basis description.
 
 Two absences matter more than the list.  First, \textbf{no $\pi$
 survives}: it enters through the spherical normalisations and cancels
@@ -820,7 +826,9 @@ integers: $\mathrm{SO}(4)$ is compact, so its irreps are labeled by
 discrete indices $(n, l, m)$ with finite multiplicities $g_n = n^2$.
 Exchange constants arise when these discrete representations are
 expressed in non-compact coordinate systems---the stereographic
-$S^3 \to \mathbb{R}^3$ introduces $\kappa$; embedding in prolate
+$S^3 \to \mathbb{R}^3$ introduces the energy-shell scale $p_0^2 = -2E$
+(the matched $\kappa$ fixes only the graph's band edge, and its
+coincidence with the Fock Jacobian is an Observation); embedding in prolate
 spheroidal coordinates introduces $e^a E_1(a)$; reparameterizing
 $S^3 \times S^3$ as hyperspherical introduces $\mu(R)$.  The
 transcendental content is the toll for crossing the compactness
@@ -875,7 +883,9 @@ measure is mediated by $\pi$.  More generally, the volume of the
 unit $d$-sphere involves $\pi^{d/2}$, and the Weyl constant
 $\omega_d / (2\pi)^d$ carries exactly this factor.  Every exchange
 constant in the GeoVac hierarchy is a descendant of this primordial
-example: $\kappa$ inherits from the $S^3$ Weyl constant, the
+example: the calibration $\pi$ of the $S^3$ projection inherits from
+the $S^3$ Weyl constant ($\kappa$ itself is rational and matched, so it
+inherits nothing), the
 Stieltjes seed involves the exponential integral (a function whose
 Taylor coefficients involve the Euler--Mascheroni constant, itself
 a limit of harmonic sums weighted by $\pi$-dependent terms), and
@@ -898,9 +908,11 @@ transcendental:
     of $\pi$ are algebraic, so no transcendental enters.
   \item The Laplace--Beltrami spectrum $\lambda_n = -(n^2 - 1)$ of the
     \emph{continuum} $S^3$ operator:\ integer for all $n$.  This is not
-    the graph's own spectrum (which is bounded in $[0,8]$);\ the
-    graph-to-continuum link runs through the Fock conformal projection
-    and is indicated numerically, not established (Paper~0).
+    the graph's own spectrum (which is bounded in $[0,8]$);\ it acts on
+    the graph's \emph{label set} as the diagonal $SO(4)$ Casimir, and the
+    graph's edge Laplacian does \emph{not} converge to it (it splits into
+    $n_{\max}$ disconnected $\ell$-blocks, Paper~0~\S VI;\ corrected
+    2026-09-28 from ``indicated numerically, not established'').
   \item Degeneracies: $g_n = n^2$, integer.
   \item Gaunt integrals (Legendre normalization,
     $\int P_{l_1} P_k P_{l_2}\,dx$): ratios of factorials via
@@ -944,7 +956,8 @@ data plus $\pi$-dependent conversion factors.  When the quotient
 is non-compact, a continuous spectrum appears and the exchange
 involves Eisenstein series~\cite{selberg1956}.  This parallels the
 GeoVac hierarchy: Level~1 (compact $S^3$) requires only a constant
-($\kappa$); Level~3 involves an algebraic function $\mu(R)$ with
+(the energy-shell scale $p_0$;\ the matched $\kappa$ is a rational
+band-edge scale, not a carrier of the spectrum); Level~3 involves an algebraic function $\mu(R)$ with
 transcendental coefficients (Sec.~\ref{sec:algebraic_curve}).
 
 \subsection{The Mellin transform as the taxonomic engine}
@@ -1037,7 +1050,8 @@ This maps directly onto the exchange constant taxonomy:
 \begin{itemize}
   \item \textbf{Intrinsic tier} (angular/Gaunt structure): no Mellin
     transform is needed; the result is purely rational.
-  \item \textbf{Calibration tier} ($\kappa$, $\pi$, $\zeta_R(2)$):
+  \item \textbf{Calibration tier} ($\pi$, $\zeta_R(2)$;\ the matched
+    $\kappa$ is rational and is not a Mellin output):
     Mellin transform of the \emph{free} heat kernel on the compact
     manifold $\to$ $\pi^{\text{even}}$ exclusively.
   \item \textbf{Embedding tier} (cusp, $1/r_{12}$, Sommerfeld $D_p$):
@@ -1615,7 +1629,7 @@ propose the following taxonomy:
   Level & Source & Target & Constant & Type \\
   \hline
   --- & $S^1$ lattice & $\mathbb{R}^1$ & $\pi$ & intrinsic \\
-  1 & $S^3$ graph & $\mathbb{R}^3$ & $\kappa = -1/16$ & conformal \\
+  1 & $S^3$ labels & $\mathbb{R}^3$ & $p_0^2{=}{-}2E$ ($\kappa$ matched) & conformal \\
   2 ($m{=}0$) & Laguerre rec. & prolate sph. & (none) & algebraic \\
   2 ($m{\neq}0$) & assoc. Laguerre & prolate sph. & $e^a E_1(a)$
     & embedding \\
@@ -1636,8 +1650,8 @@ propose the following taxonomy:
 The taxonomy reveals a hierarchy of exchange types:
 \begin{enumerate}
   \item \textbf{Algebraic} (no exchange constant): When the
-    computation stays on the graph or uses a basis whose inner
-    product matches the graph structure, no transcendental
+    computation stays on the label set or uses a basis whose inner
+    product matches the label structure, no transcendental
     appears.  Examples: Level~1 on $S^3$, Level~2 $\sigma$
     states, Level~3 FCI.
 
@@ -1648,15 +1662,16 @@ The taxonomy reveals a hierarchy of exchange types:
     Example: $\pi$ itself, for $S^1 \to \mathbb{R}$.
 
   \item \textbf{Conformal constants}: Determined by the conformal
-    geometry of the projection from the compact graph manifold to
-    flat space.  Example:
-    $\kappa = -1/16 = -1/\Omega^4(0)$, where $\Omega(0) = 2$ is
+    geometry of the projection from the compact manifold $S^3$ to
+    flat space.  Example:\ the energy-shell scale $p_0^2 = -2E$, and
+    the Fock Jacobian $1/\Omega^4(0) = 1/16$, where $\Omega(0) = 2$ is
     the stereographic conformal factor at $p = 0$
-    (Sec.~\ref{sec:kappa_derivation}).  The energy-matching value
-    is fixed by the graph vertex degree $d_{\max} = 4$ instead;\ that
-    both routes yield $1/16$ is an Observation, not a consequence of
-    the graph discretizing $S^3$ (it does not:\ $2 d_{\max} = 8$ is a
-    grid band edge, Paper~0~\S VI).
+    (Sec.~\ref{sec:kappa_derivation}), with which the matched
+    $\kappa$ coincides (Observation).  The energy-matching value of
+    $\kappa$ is fixed by the graph vertex degree $d_{\max} = 4$
+    instead;\ that both routes yield $1/16$ is an Observation, not a
+    consequence of the graph discretizing $S^3$ (it does not:\
+    $2 d_{\max} = 8$ is a grid band edge, Paper~0~\S VI).
 
   \item \textbf{Embedding constants}: Single transcendental
     numbers seeding algebraic recurrences.  Determined by the
@@ -1756,7 +1771,7 @@ The taxonomy reveals a hierarchy of exchange types:
     rings generated by the eigenvalues of a finite Dirac operator
     $D_F$ on a Connes--Chamseddine-compatible inner factor (the
     Standard-Model Yukawa/Higgs sector).  Unlike the preceding types,
-    which a projection \emph{generates} from the discrete graph,
+    which a projection \emph{generates} from the discrete label data,
     inner-factor data are empirical input from outside the framework:
     GeoVac admits a Higgs sector structurally but does not
     autonomously select the Yukawa couplings (Sprint~H1; Paper~32
@@ -1768,7 +1783,7 @@ The taxonomy reveals a hierarchy of exchange types:
 
 The dependency hierarchy is explicit: intrinsic constants depend
 only on dimension; conformal/calibration constants depend on the
-graph; embedding constants depend on the basis; algebraic-implicit
+projection chart (the energy shell); embedding constants depend on the basis; algebraic-implicit
 functions depend on the full parameterized geometry; composition
 constants depend on the factorization topology (which groups share
 coordinates); and inner-factor input data depend on the choice of
@@ -1882,12 +1897,12 @@ having been invoked at some step in the chain.
   Tier & Example transcendentals & Operator order & Bundle \\
   \hline
   Intrinsic         & $\pi^{d/2}$ Weyl prefactors & --- & scalar \\
-  Calibration       & $\kappa = -1/16$, $F = \pi^2/6$
+  Calibration       & $p_0$ ($\kappa$ matched), $F = \pi^2/6$
                     & 2nd ($\Delta_{\text{LB}}$)
                     & scalar \\
   Embedding         & $e^a E_1(a)$, $1/r_{12}$
                     & ---
-                    & graph $\to$ $\mathbb{R}^3$ \\
+                    & basis $\to$ $\mathbb{R}^3$ \\
   Flow / composition & $\mu(\rho,R)$, PK
                     & ---
                     & multi-geometry \\
@@ -2017,7 +2032,7 @@ partition:
   \hline
   2nd ($\Delta_{\text{LB}},\; D^2$)
     & even ($2k$) & $\zeta_R(2k) = \text{rat} \cdot \pi^{2k}$
-    & $\kappa$, $\mathrm{Vol}(S^3)$, $a_2$ \\
+    & $F = \zeta_R(2)$, $\mathrm{Vol}(S^3)$, $a_2$ \\
   1st ($D$)
     & odd ($2k{+}1$) & $\zeta_R(2k{+}1) \perp \mathbb{Q}(\pi)$
     & D3: $\zeta_R(3)$ in Dirac Dirichlet \\
@@ -2356,7 +2371,8 @@ coordinate-space exclusion.  The master obstruction is that
 antisymmetry requires a shared coordinate system; composition
 factorizes $\Psi_{\rm total}$ into incompatible coordinates.
 
-PK therefore defines a sixth exchange type in the taxonomy:
+PK therefore defines the fifth exchange-constant tier of the taxonomy
+(the sixth category, counting the algebraic no-exchange case):
 \textbf{composition constants} convert between a single-geometry
 (full $N$-electron) and a composed-geometry (factorized) description.
 Unlike the other exchange constants, which convert between discrete
@@ -2375,11 +2391,12 @@ exclusion.  The composition exchange constant is the cost of
 replacing exact inter-group antisymmetry with a pseudopotential
 in the factorized coordinate system.
 
-\paragraph{Inner-factor input data: a fourth tier disjoint from
+\paragraph{Inner-factor input data: a sixth tier, disjoint from
 the outer-factor taxonomy.}
 The exchange constants cataloged above all live on the GeoVac
-\emph{outer} factor: the Fock-projected $S^3$ graph, its spinor
-lift, and their continuum limits.  When the outer triple is
+\emph{outer} factor: the $S^3$ label set, its spinor lift, and the
+continuum operators they label (the graph's edge Laplacian has no
+continuum limit on $S^3$, Paper~0~\S VI).  When the outer triple is
 combined with a Connes--Chamseddine \emph{inner} finite spectral
 triple $T_F = (A_F, H_F, D_F, J_F, \gamma_F)$ to form an
 almost-commutative product $T = T_{\mathrm{GV}} \otimes T_F$
@@ -2451,7 +2468,8 @@ $\mathbb{Q}\bigl[y_1^{-2s}, y_2^{-2s}, \ldots, y_n^{-2s}\bigr]$
 free inputs to the framework, not transcendentals derived from any
 outer-factor mechanism.
 
-We propose a sixth named tier in the taxonomy:
+We propose a sixth named exchange-constant tier in the taxonomy
+(the seventh category, counting the algebraic no-exchange case):
 
 \begin{quote}
 \textbf{Inner-factor input data}: parameter-tied Dirichlet rings
@@ -2711,7 +2729,7 @@ $\mathbb{R}^3$).
 If this identification is correct, then the combination rule
 $K = \pi(B + F - \Delta)$ is not arbitrary numerology but an
 instance of the same spectral-geometric exchange that produces
-$\kappa = -1/16$ at Level~1 and $e^a E_1(a)$ at Level~2.
+the energy-shell scale $p_0$ at Level~1 and $e^a E_1(a)$ at Level~2.
 The exchange constant for the Hopf bundle is $K$ itself---the
 ``cost'' of projecting the $S^3$ electron state space through
 the $S^1$ gauge fiber onto the $S^2$ photon base, measured
@@ -2799,15 +2817,18 @@ by the Hopf base factor $(2l+1)\,l(l+1)$ and summed,
 with $B = 42$ the Casimir trace of Paper~2 and $\kappa = -1/16$
 the calibration constant of Sec.~\ref{sec:kappa_derivation}.
 Equivalently, averaging over the six $(n,l)$ cells gives
-$B\,|\kappa| = 21/8$.  This is the first exact rational algebraic
-link in the GeoVac framework between the calibration constant and
-the Hopf base invariant: $|\kappa| = 1/d_{\max}^2$ appears as the
-universal denominator factor of the Fock-weight matrix elements,
-while $B$ appears in the Hopf-weighted sum.  The identity
+$B\,|\kappa| = 21/8$.  This is an exact rational identity between
+the number $1/16 = 1/d_{\max}^2$ and the Hopf base invariant:\ $1/16$
+appears as the universal denominator factor of the Fock-weight matrix
+elements, while $B$ appears in the Hopf-weighted sum.  It is an
+arithmetic identity involving the value $1/16$, not a derivation of
+$\kappa$'s matching role (which fixes only the graph's band edge) and
+not a strengthening of the Observation that the matched $\kappa$
+coincides with the Fock Jacobian $1/16$.  The identity
 (\ref{eq:kappa_B_identity}) is exact-rational with no fitted parameters
 (the arithmetic closes:\ $9/4 + 51/16 + 165/16 = 63/4 = 6\,B\,|\kappa|$);
 the six Fock-weight values of Eq.~(\ref{eq:fock_weight_values}) are
-stated here, and a regression test deriving them from the graph and
+stated here, and a regression test deriving them from the Fock weight and
 checking the identity is a logged coverage gap
 (\texttt{docs/claim\_test\_matrix.md}).
 
@@ -2832,7 +2853,7 @@ projected in Paper~7; and $s = 2 N_{\mathrm{init}}$ from the same
 packing axiom.  The weight $n^2$ is the degeneracy of the $n$-th
 $S^3$ shell in Fock's projection.  To our knowledge
 (\ref{eq:F_dirichlet}) is the first identification of $F$ from a
-graph-intrinsic quantity in the GeoVac framework---that is, $F$ is
+label-intrinsic quantity (the shell degeneracy) in the GeoVac framework---that is, $F$ is
 produced here without invoking an embedding metric or a
 sphere-spectral construction.  No other natural Dirichlet series
 on the shell lattice (per-shell Casimir, state count, Laplacian
@@ -2852,7 +2873,7 @@ itself remains an Observation.
 Let $K = \pi(B + F - \Delta)$ be the combination of
 Paper~2~\cite{loutey_paper2} with $B = 42$, $F = \pi^2/6$,
 $\Delta = 1/40$.  The three components have structurally independent
-spectral origins on the Fock-projected $S^3$ graph:
+spectral origins on the Fock-projected $S^3$ label set:
 \begin{enumerate}
 \item[(B)] $B = \sum_{n=1}^{3} \sum_{l=0}^{n-1} (2l{+}1)\,l(l{+}1)
 = 42$ is a \emph{finite} Casimir trace of the scalar
@@ -3021,8 +3042,8 @@ determined by what type of projection is needed to evaluate them.
 \noindent\textbf{Claim~4.}
 \textit{The class of transcendental content required to evaluate a
 quantum-mechanical observable is determined by the type of projection
-linking the graph description to the coordinate system in which the
-observable is defined.  Spectral observables (Class~S) require no
+linking the discrete label-set description to the coordinate system in
+which the observable is defined.  Spectral observables (Class~S) require no
 transcendental content.  Single-particle spatial observables (Class~P)
 require the Weyl constants ($\pi^{d/2}$).  Multi-particle correlated
 observables (Class~C) are where the embedding, flow, or composition
@@ -3157,7 +3178,7 @@ structure:
 \hline
 Layer & Content & Exchange type \\
 \hline
-Rational & Slater integrals, Gaunt coefficients & None (graph-intrinsic) \\
+Rational & Slater integrals, Gaunt coefficients & None (label-intrinsic) \\
 Algebraic & Optimal exponents at finite $n_{\max}$ & Calibration \\
 Transcendental & e-e cusp ($\alpha = \pi/4$ on $S^5$) & Embedding \\
 \hline
@@ -3178,7 +3199,9 @@ Two boundary cases clarify the classification:
 \begin{itemize}
   \item \textbf{Ionization energies} are spectral (Class~S) when
     computed as eigenvalue differences $\Delta E = E_n - E_m$,
-    which involve only $\kappa$ and integer quantum numbers.
+    which involve only integer quantum numbers and the rational
+    energy-shell map (not $\kappa$, which matches only the graph's
+    band edge).
     However, photoionization \emph{cross sections} require the
     dipole matrix element $\langle \psi_f | \mathbf{r} | \psi_i
     \rangle$, which is a spatial observable (Class~P) because
@@ -3200,9 +3223,9 @@ Two boundary cases clarify the classification:
 
 The classification does not assert that one class is more
 fundamental than another.  The conformal equivalence
-(Paper~7) ensures that all three descriptions---graph, projected
-single-particle, correlated multi-particle---are mathematically
-equivalent.  The classification identifies which exchange
+(Paper~7) ensures that all three descriptions---discrete label set,
+projected single-particle, correlated multi-particle---are
+mathematically equivalent.  The classification identifies which exchange
 constants mediate between them.
 
 
@@ -3213,7 +3236,7 @@ constants mediate between them.
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Transcendence and the graph design principle}
+\subsection{Transcendence and the label-set design principle}
 
 Exchange constants are transcendental because they convert between
 incommensurable descriptions: a discrete count (eigenvalues,
@@ -3227,16 +3250,16 @@ coefficients~\cite{berger2003}.  The irreducible transcendentals are
 the \emph{constants} that enter the coupling matrix, not the
 parameterized functions built from them.
 
-When the computation stays on the graph, exchange constants are
-unnecessary.  This suggests a design principle: \textit{minimize
-coordinate projections} to minimize transcendental content.  The
-ideal solver stays on the graph; every departure incurs a
-transcendental toll.
+When the computation stays on the discrete label set (its rational
+and algebraic matrix elements), exchange constants are unnecessary.
+This suggests a design principle: \textit{minimize coordinate
+projections} to minimize transcendental content.  The ideal solver
+stays on the label set; every departure incurs a transcendental toll.
 
 \subsection{Exchange constants are computationally cheap}
 
 Conceptual complexity does not correlate with computational cost:
-$\kappa$ is one multiplication; $e^a E_1(a)$ is one function
+the Level-1 energy-shell map is one multiplication; $e^a E_1(a)$ is one function
 evaluation seeding an $O(N^2)$ recurrence; $\mu(R)$ is a
 $10$--$30$ dimensional matrix diagonalization per $R$-point.
 The hierarchy tracks curvature mismatch severity, not computational
@@ -3247,7 +3270,8 @@ improving convergence (Sec.~\ref{sec:stieltjes}).
 \subsection{The hierarchy of transcendence}
 
 Exchange constants increase in complexity with curvature mismatch:
-constant ($\kappa = -1/16$, Level~1) $\to$ single transcendental
+constant (the energy-shell scale $p_0$, Level~1;\ the matched
+$\kappa = -1/16$ is rational) $\to$ single transcendental
 seed ($e^a E_1(a)$, Level~2) $\to$ algebraic function of one
 parameter ($\mu(R)$ satisfying $P(R,\mu) = 0$ over
 $\mathbb{Q}(\pi,\sqrt{2})$, Level~3) $\to$ piecewise-algebraic
@@ -3391,9 +3415,11 @@ coupling $c_3 = 1/8$ for $d=3$ numerically equals $1/\lambda_{\max}$,
 but this is coincidental: $c_3$ is a Yamabe invariant while
 $1/\lambda_{\max}$ depends on graph vertex degree.
 
-\textit{Fock weight derivation (Note added v2.26.1).}  The same value
-is derivable independently from the Fock projection itself, without
-reference to graph vertex degree.  The $l = 0$ eigenfunctions on $S^3$
+\textit{Fock weight coincidence (Note added v2.26.1).}
+\textbf{[OBSERVATION]} The same value $1/16$ also appears in the Fock
+projection itself, without reference to graph vertex degree;\ that it
+coincides with the matched $\kappa$ is an Observation, not an
+independent derivation of $\kappa$.  The $l = 0$ eigenfunctions on $S^3$
 are Gegenbauer polynomials $C^1_{n-1}(\cos\chi)$ (equivalently,
 Chebyshev polynomials of the second kind $U_{n-1}(\cos\chi)$).  Their
 three-term recurrence gives transition amplitudes of $1/2$ between
@@ -3405,7 +3431,7 @@ adjacent shells, so the squared inter-shell coupling is
 with $c^2(n,0) = 1/4$ for all $n$ (Paper~7, corrected 2026-09-03 from a
 printed $1/16$ prefactor).  The quantity that coincides with $1/16$ is
 the inverse Fock Jacobian $1/\Omega^4(0)$, where $\Omega(0) = 2$ is the
-stereographic conformal factor at $p = 0$ (equivalently $c^2(n,0)/4$).  The graph-degree derivation
+stereographic conformal factor at $p = 0$ (equivalently $c^2(n,0)/4$).  The graph-degree matching
 (Eq.~\ref{eq:kappa_derived}) and the Fock weight route yield the same
 value, but from unrelated inputs:\ the graph's maximum vertex degree
 $d_{\max} = 4$ is fixed by the lattice's two-dimensional grid structure
@@ -3424,18 +3450,21 @@ about a composite of two geometric quantities (the coupling itself is
 $c^2(4,3) = 1/10$), linking the Paper~2 cutoff to the Dirac degeneracy
 $g_3^{\mathrm{Dirac}} = 40$.
 
-\textit{Classification.}  In Table~\ref{tab:taxonomy} $\kappa$ sits in
-the ``conformal'' tier:\ its numerical value $1/16$ \emph{coincides}
-with the conformal-geometry quantity $1/\Omega^4(0)$ of the Fock
-projection.  The two routes (graph degree and conformal factor)
+\textit{Classification.}  In Table~\ref{tab:taxonomy} $\kappa$ is
+listed beside the ``conformal'' tier's energy shell only as a matched
+scale:\ its numerical value $1/16$ \emph{coincides} with the
+conformal-geometry quantity $1/\Omega^4(0)$ of the Fock projection, but
+it is the energy shell, not $\kappa$, that carries the spectrum into
+atomic units.  The two routes (graph degree and conformal factor)
 return the same number from unrelated inputs---the graph degree is a
 grid property, not an $S^3$ one;\ that the
 calibration scale $\kappa$ equals it is an \emph{Observation} (a
 numerical coincidence, no known derivation bridge), consistent with the
 Observation-tier status of $\kappa$ recorded in Paper~0 and Paper~7.  The Z-universality noted in
-Paper~0 ($\kappa \to \kappa Z^2$ for any nuclear charge)
-reflects the Z-independence of the graph structure, with only
-the energy-shell scaling $E \propto Z^2$.
+Paper~0 ($\kappa \to \kappa Z^2$ for any nuclear charge) is a
+property of the energy shell ($p_0 = Z/n$, $E \propto Z^2$), not
+evidence about the graph's spectrum, which does not carry the Rydberg
+ladder at any $Z$ (Paper~7).
 
 
 %% ========================================================================
@@ -3525,10 +3554,14 @@ abelian U(1) Wilson--Hodge structure transfers verbatim from $S^3$
 to the Bargmann--Segal $S^5$ graph, but non-abelian SU(3) on $(N,0)$
 SU(3) irreps fails (Clebsch--Gordan intertwiners are not group
 elements), making non-abelian gauge content Coulomb-specific.  The
-universal/Coulomb partition is therefore three-layered, not two:
-(i)~spectrum-computing role of $L_0$ (yes $S^3$, no $S^5$);
-(ii)~calibration $\pi$ (yes $S^3$, no $S^5$);
-(iii)~Wilson physical content (full $S^3$, reduced $S^5$).
+universal/Coulomb partition therefore has two layers here:
+(i)~calibration $\pi$ (yes $S^3$, no $S^5$);
+(ii)~Wilson physical content (full $S^3$, reduced $S^5$).
+A third layer printed here earlier---a spectrum-computing role of the
+graph Laplacian $L_0$ on $S^3$ but not $S^5$---is withdrawn
+(2026-09-25):\ the $S^3$ edge Laplacian does not compute the hydrogen
+spectrum either, since it does not converge to $\Delta_{S^3}$
+(Paper~0~\S VI).
 
 \paragraph{Operational consequence.}  For taxonomy construction
 (Sec.~\ref{sec:taxonomy}), the consequence is that multi-component
@@ -3622,8 +3655,8 @@ of Observation~\ref{obs:incommensurability} sharpens to a theorem
 when further composite observables are decomposed.
 
 \paragraph{Design principle.}
-Staying on the graph eliminates exchange constants by eliminating
-projections.  The program's effort to algebraicize solvers (Paper~12's
+Staying on the discrete label set eliminates exchange constants by
+eliminating projections.  The program's effort to algebraicize solvers (Paper~12's
 Neumann expansion, Laguerre recurrences, Gaunt replacements,
 Paper~19's cross-center $V_{ne}$ via incomplete gamma functions) is,
 in retrospect, an effort to eliminate exchange constants.  The algebraic

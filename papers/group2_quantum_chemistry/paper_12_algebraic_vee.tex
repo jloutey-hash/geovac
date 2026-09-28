@@ -1714,7 +1714,9 @@ of natural geometries:
   \item \textbf{One-center, one-electron} (H, He$^+$):
     Three-sphere $S^3$ via Fock projection.  The Schr\"odinger
     equation becomes a Laplace--Beltrami eigenvalue problem.
-    Accuracy: $< 0.1\%$~\cite{loutey_paper0, loutey_paper1}.
+    Exact on the labels (diagonal $SO(4)$ Casimir $n^2-1$);\ the graph
+    Laplacian's $\lambda_{\max}$ is matched to the ground state by
+    construction~\cite{loutey_paper0, loutey_paper1}.
   \item \textbf{Two-center, one-electron} (H$_2^+$):
     Prolate spheroidal coordinates $(\xi, \eta, \varphi)$.
     The Schr\"odinger equation separates into two coupled ODEs.
@@ -1793,12 +1795,16 @@ itself.
 \subsection{Comparison with the \texorpdfstring{$S^3$}{S3}
 approach}
 
-The graph Laplacian FCI approach (Papers~0, 1, 7, and the
+The $S^3$ label-set CI approach (Papers~0, 1, 7, and the
 FCI papers) constructs $V_{ee}$ from Slater $F^0$ integrals
 on the $S^3$ density overlap~\cite{loutey_paper7}, which are
 computed analytically from hydrogen radial wavefunctions.
-That approach also avoids numerical integration of $V_{ee}$
-and achieves comparable accuracy for atoms.
+That approach also avoids numerical integration of $V_{ee}$.
+On the physical Hamiltonian its He fixed-$k$ ($k=Z$) hydrogenic CI
+reaches $1.88\%$ at $n_{\max}=7$ (Paper~13);\ the smaller atomic
+error formerly quoted for it came from a non-physical graph-hop
+one-body model (retired 2026-09-25), not from the physical
+Hamiltonian.
 
 The prolate spheroidal approach with Neumann $V_{ee}$ extends
 this philosophy to molecules: the natural coordinate system

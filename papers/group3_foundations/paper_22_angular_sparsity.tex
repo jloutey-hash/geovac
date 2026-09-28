@@ -478,13 +478,13 @@ number of terms and the linear coefficient match.  \hfill$\square$
 
 This corollary means that the angular selection-rule sparsity
 \emph{pattern} of the GeoVac composed architecture---the density that
-yields the $54\times$--$317\times$ fewer Pauli terms measured at
+yields the $51\times$--$317\times$ fewer Pauli terms measured at
 equal qubit counts against published Gaussian baselines for
 electronic structure (H$_2$O, $n_{\max} = 1$--$3$; the retired
 pair-diagonal rule gave $51\times$--$1{,}712\times$)---is
 present for nuclear shell model Hamiltonians, quantum dot
 Hamiltonians, and any other composed block architecture built from
-spherical harmonic bases.  The specific $54\times$--$317\times$
+spherical harmonic bases.  The specific $51\times$--$317\times$
 ratios are measured Coulomb-vs-Gaussian numbers, expected but
 not here proven to carry over quantitatively.  The angular selection
 rule structure is a computational resource that belongs to the
@@ -653,17 +653,20 @@ potentials:
 \item The Fock stereographic projection from momentum space to $S^3$
   that maps the hydrogen Schr\"odinger equation to an integer
   eigenvalue problem on the three-sphere~\cite{GeoVac_Paper7}.
-\item The $\pi$-free graph structure in which all one-body
-  matrix entries, degeneracies, and coupling coefficients are
-  integers or rationals (so the graph's eigenvalues are algebraic
-  numbers) before projection to continuous manifolds.
-\item The constant $K = -1/16$ that matches the graph's extremal
-  eigenvalue (a band edge) to the hydrogen ground state $-\tfrac12$
-  (an Observation;\ the Rydberg ladder itself comes from $n^2 - 1$ on
-  the labels through Fock's energy shell $p_0^2 = -2E$).
+\item The constant $\kappa = -1/16$ that matches the graph's extremal
+  eigenvalue (a band edge) to the hydrogen ground state $-\tfrac12$ by
+  construction (its coincidence with the geometric $1/16$ of the Fock
+  projection is an Observation;\ the Rydberg ladder itself comes from
+  $n^2 - 1$ on the labels through Fock's energy shell $p_0^2 = -2E$).
 \item The hydrogen shell degeneracy sequence $n^2$ as
   $O(n^2)$-dimensional $SO(4)$ irreducible representations.
 \end{itemize}
+(The $\pi$-free graph structure---rational one-body matrix entries,
+degeneracies, and coupling coefficients, so algebraic graph
+eigenvalues---is deliberately absent from this list:\ it is not
+Coulomb-specific, since the edge Laplacian is potential-independent
+(below) and the harmonic-oscillator lattice of Paper~24 is equally
+$\pi$-free.)
 A companion paper~\cite{GeoVac_Paper23} establishes that the $S^3$
 Fock projection is rigid in the following sense: modifying the
 Coulomb potential $-Z/r$ to any other central form breaks the

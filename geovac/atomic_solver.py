@@ -184,10 +184,13 @@ class AtomicSolver:
         return np.real(expectation)
 
     def __repr__(self) -> str:
-        return (f"AtomicSolver(max_n={self.max_n}, Z={self.Z}, "
+        base = (f"AtomicSolver(max_n={self.max_n}, Z={self.Z}, "
                 f"n_states={self.n_states}, "
-                f"hamiltonian={self.hamiltonian!r}, "
-                f"kinetic_scale={self.kinetic_scale:.6f})")
+                f"hamiltonian={self.hamiltonian!r}")
+        if self.hamiltonian == 'graph':
+            # kinetic_scale is meaningful only for the legacy graph model
+            return base + f", kinetic_scale={self.kinetic_scale:.6f})"
+        return base + ")"
 
 
 def solve_hydrogen(max_n: int = 30, kinetic_scale: float = KAPPA_GRAPH,
