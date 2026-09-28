@@ -143,9 +143,12 @@ yields $E = -2.9052$~Ha for helium, nominally $0.05\%$ from the
 exact value.  That figure is \emph{non-variational}---the energy lies
 below the exact one---and is superseded as an accuracy by the properly
 variational two-dimensional treatment at $0.022\%$.  The
-solver requires only a $600 \times 600$ sparse matrix---six orders
-of magnitude smaller than the Full CI determinant space at comparable
-accuracy---and runs in $\sim$3~seconds.
+solver requires only a $600 \times 600$ sparse matrix and runs in
+$\sim$3~seconds.  (An earlier version compared this to a
+``$215{,}820$-dimensional Full CI'' at comparable accuracy; that
+dimension was lithium's three-electron count, not a helium
+calculation, and the comparison is withdrawn
+[retracted 2026-09-28: p13-graph-lattice-he-row].)
 
 %% ========================================================================
 %% II. HYPERSPHERICAL COORDINATES
@@ -562,11 +565,12 @@ single-channel adiabatic solver yields
 compared to the exact nonrelativistic value $E_{\mathrm{exact}} =
 -2.903724$~Ha~\cite{Pekeris1958}.  The relative error is 0.05\%.
 
-Table~\ref{tab:comparison} compares this result with other GeoVac
-methods for helium.  The hyperspherical solver is faster than every
-previous approach and uses a dramatically smaller matrix;\ its nominal
-$0.05\%$ is non-variational and so is not comparable as an accuracy to
-the variational entries beside it.
+Table~\ref{tab:comparison} compares this result with another GeoVac
+method for helium, the zero-parameter fixed-$k$ hydrogenic CI with
+helium's physical Hamiltonian (Sec.~\ref{sec:conclusion}).  The two
+matrices are of comparable size ($600$ versus $266$);\ the
+hyperspherical solver's nominal $0.05\%$ is non-variational and so is
+not comparable as an accuracy to the variational CI entry beside it.
 
 \begin{table}[t]
 \caption{Comparison of GeoVac methods for the He ground-state
@@ -584,16 +588,24 @@ extrapolation that lies below the exact value.}
   \multicolumn{1}{c}{Error (\%)} &
   Matrix dim. \\
   \hline
-  $S^3$ lattice ($n_{\max}=5$, $Z_{\mathrm{eff}}$)
-    & -2.851 & 1.82 & $50$ \\
-  Full CI ($n_{\max}=5$, Slater)
-    & -2.854 & 1.71 & $215{,}820$ \\
+  Fixed-$k$ CI ($n_{\max}=5$, $k=Z$)\footnotemark[1]
+    & -2.848 & 1.93 & $266$ \\
   \textbf{Hyperspherical (1 ch., non-var.)}
     & \textbf{-2.905} & \textbf{0.05} & $\mathbf{600}$ \\
   Exact~\cite{Pekeris1958}
     & -2.9037 & 0 & --- \\
 \end{tabular}
 \end{ruledtabular}
+\footnotetext[1]{Variational, zero-parameter hydrogenic CI with exact
+rational Slater integrals and helium's physical one-body operator
+(Sec.~\ref{sec:conclusion});\ $E = -2.903724\,(1-0.01928)$.  The matrix
+dimension is the number of singlet $M_L = 0$ configurations built from
+the $55$ spatial orbitals at $n_{\max}=5$ (the same convention gives
+$1218$ at $n_{\max}=7$).  This row replaces two withdrawn rows:\ an
+``$S^3$ lattice'' entry computed with a non-physical graph-hop kinetic
+term, and a ``Full CI'' entry whose dimension ($215{,}820$) was
+lithium's three-electron count
+[retracted 2026-09-28: p13-graph-lattice-he-row].}
 \end{table}
 
 \subsection{The diagonal Born--Oppenheimer correction}
@@ -759,11 +771,16 @@ addresses a qualitatively different singularity structure:
     stereographic projection ($S^3$).
   \item The two-center nuclear singularity is resolved by prolate
     spheroidal coordinates.
-  \item The electron-electron cusp ($r_{12} = 0$) is resolved by
-    hyperspherical coordinates.
-  \item The combined two-center + two-electron singularity remains
-    open---likely requiring a product or fibered structure combining
-    prolate spheroidal and hyperspherical coordinates.
+  \item The electron-electron cusp ($r_{12} = 0$) is placed at a fixed,
+    geometry-independent location by hyperspherical coordinates; it is
+    treated there (by partial-wave convergence and a Schwartz
+    extrapolation), not removed.
+  \item The two-center, two-electron problem has since been treated in
+    molecule-frame hyperspherical coordinates (Paper~15~\cite{loutey_paper15},
+    $96.0\%$ of $D_e$), which is retained as the structural $N$-electron
+    generalization;\ H$_2$'s leading geometry is now prolate spheroidal
+    (Level~2, Paper~12~\cite{loutey_paper12}, $99.97\%$ of $D_e$ with
+    explicit $r_{12}$).
 \end{enumerate}
 
 The unifying principle is: \emph{in the natural coordinate system,
@@ -804,8 +821,8 @@ $l_{\max}=7$).}
     $1/r_A + 1/r_B$ & $\sim\!20$ & mach.\ prec. & 11 \\
   3 & He (one-center, 2$e^-$) & Hyperspherical & $e$-$e$ cusp
     $1/r_{12}$ & $\sim\!600$ & 0.05 (non-var.) & \textbf{13} \\
-  4 & H$_2$ (two-center, 2$e^-$) & ? & Combined &
-    --- & --- & Future \\
+  4 & H$_2$ (two-center, 2$e^-$) & Mol.-frame hypersph. & Combined &
+    --- & 4.0 ($D_e$) & 15 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
@@ -1432,10 +1449,11 @@ Several extensions are natural:
     hierarchical topology flow.  Implementation requires deriving
     the 3-particle angular Hamiltonian in Jacobi hyperspherical
     coordinates with $S_3$ symmetry projection.
-  \item \textbf{Level 4 geometry:} The two-center, two-electron
-    problem (H$_2$) likely requires a coupled-channel expansion
-    combining prolate spheroidal and hyperspherical coordinates, with
-    the bond length $R_{\mathrm{nuc}}$ as an additional slow variable.
+  \item \textbf{Level 4 geometry (since realized):} The two-center,
+    two-electron problem (H$_2$) has been treated in molecule-frame
+    hyperspherical coordinates (Paper~15, $96.0\%$ of $D_e$);\ its
+    leading accuracy is now obtained at Level~2 in prolate spheroidal
+    coordinates (Paper~12).
   \item \textbf{Non-adiabatic coupling as a physical observable:}
     The coupling matrix $P_{\nu\mu}(R)$ encodes the rate of angular
     rearrangement during autoionization.  Its integral along $R$
@@ -1935,8 +1953,9 @@ below the exact energy (non-variational).
 The hyperspherical lattice extends the natural geometry principle to
 multi-particle systems: it is structurally the same kind of object
 as the atomic $S^3$ lattice and the molecular prolate spheroidal
-lattice---a sparse graph with quantum number labels on nodes and
-transition amplitudes on edges---but with the key generalization
+lattice---a sparse matrix in a basis labelled by quantum numbers,
+with couplings fixed by selection rules---but with the key
+generalization
 that the angular channel functions vary with the hyperradius,
 producing a coupled-channel expansion where the angular and radial
 problems are linked by the non-adiabatic coupling $P_{\nu\mu}(R)$.
@@ -1947,8 +1966,9 @@ frequencies for H$_2$ from first principles: $\omega_e =
 4435$~cm$^{-1}$ ($+0.8\%$), $B_e = 59.5$~cm$^{-1}$ ($-2.2\%$),
 with no experimental spectroscopic input at any stage.  The path
 forward is clear: improve the electronic PES with larger CI spaces,
-add coupled channels for sub-0.1\% atomic accuracy, and construct
-the Level~4 geometry for full two-center, two-electron molecules.
+and add coupled channels for sub-0.1\% atomic accuracy (the Level~4
+geometry for two-center, two-electron molecules has since been
+constructed, Paper~15).
 
 \paragraph{Note added v2.6.0.}
 The adiabatic result $E = -2.9052$~Ha reported in the abstract is
@@ -2029,7 +2049,7 @@ the GeoVac open-source project.
 \bibitem{loutey_paper0}
 J.~Loutey,
 ``Angular Momentum as Information Geometry: Isotropic Packing and
-the Universal Angular Cross-Section,''
+the Recurring Angular Cross-Section,''
 GeoVac Paper~0 (2026).
 
 \bibitem{loutey_paper1}
@@ -2040,7 +2060,7 @@ GeoVac Paper~1 (2026).
 \bibitem{loutey_paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from a Scale-Invariant Label Lattice,''
+on a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper10}

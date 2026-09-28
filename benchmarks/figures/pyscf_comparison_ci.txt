@@ -1,3 +1,4 @@
+[edited 2026-09-28: retracted claims corrected; numeric rows unchanged]
 ==============================================================================
 GEOVAC vs PYSCF: EXTERNAL BENCHMARK COMPARISON
 ==============================================================================
@@ -6,7 +7,7 @@ SYSTEM 1: Hydrogen Atom (H)
 ------------------------------------------------------------------------------
   Exact energy: -0.500000 Ha
 
-  Method                           Energy(Ha)   Error%   Time(ms)  N_basis
+  Method                           Energy(Ha) Sat.def%   Time(ms)  N_basis
   ------------------------------ ------------ -------- ---------- --------
   GeoVac (max_n=10)                 -0.475715   4.8570       9.30      385
   GeoVac (max_n=20)                 -0.493636   1.2728      66.70     2870
@@ -45,55 +46,37 @@ SYSTEM 3: H2 Molecule (R = 1.4 bohr)
   PySCF FCI/cc-pVQZ                     -1.173796     0.0600    6445.47       60
 
 ==============================================================================
-SUMMARY: Where GeoVac Wins and Loses
+SUMMARY (corrected 2026-09-28: retracted claims removed)
 ==============================================================================
 
-STRENGTHS:
-  - Speed: GeoVac is extremely fast for single-electron systems
-    (sparse eigenvalue problem, no integral evaluation)
-  - Scaling: O(V) with >97% sparsity vs O(N^4) for HF integrals
-  - Simplicity: No basis set optimization, no integral libraries
-  - Single-electron accuracy: Converges to exact H, He+, Li2+ etc.
-  - Theoretical foundation: 18/18 symbolic proofs that graph
-    Laplacian is conformally equivalent to S3 Laplace-Beltrami
+WHAT THE TABLES SHOW:
+  - H (graph mode): the legacy graph model H = kappa*(D - A) has
+    E_0 = kappa*lambda_max matched to -1/2 by construction
+    (kappa = -1/16). Its 'Sat.def%' column is the band-edge
+    saturation deficit (8 - lambda_max)/8, NOT an accuracy.
+  - The 18 symbolic checks (tests/test_fock_*.py) verify the
+    CONTINUUM Fock projection. The lattice's edge Laplacian
+    D - A does NOT converge to the S3 Laplace-Beltrami operator
+    (n_max disconnected l-blocks; a documented wall, Paper 7).
+  - The GeoVac He rows used the legacy graph-kinetic model
+    (retired family, 2026-09-25); physical fixed-k CI at n_max=5
+    is 1.93% above exact (Paper 13).
+  - Speed/sparsity figures are for the graph eigenproblem only;
+    they are not an accuracy-matched comparison with PySCF.
 
-WEAKNESSES / CURRENT LIMITATIONS:
-  - H2 Full CI accuracy ~2%: Mulliken cross-nuclear is an
-    approximation. Exact orbital integrals would reduce error.
-  - Multi-electron: Mean-field He uses Z-scaled kinetic_scale;
-    no general DFT/HF multi-electron solver yet.
+LIMITATIONS:
+  - H2 'Full CI' here is the legacy LCAO graph-concatenation
+    model, superseded (FCI-M: no equilibrium geometry). Its
+    ~2% figure benefits from error cancellation between the
+    Mulliken V_cross and point-charge V_ee approximations.
   - No basis-set extrapolation procedure established.
-  - V_ee model (point-charge coordinates) needs improvement
-    for higher accuracy; current result benefits from error
-    cancellation between V_cross and V_ee approximations.
 
-PREVIOUSLY DIAGNOSED AND FIXED (Feb 2026):
-  1. Bridge architecture: _get_boundary_states_prioritized()
-     now returns ALL states sorted by (n,l,|m|), connecting
-     n=1 core states first. Bonding/antibonding splitting
-     restored: 0.088 Ha splitting at max_n=5.
-  2. Cross-nuclear V_en: Replaced point-charge model with
-     Mulliken approximation + <1/r> cap for large-n states.
-     V_cross(n=1) = -0.538 Ha (vs exact -0.61 Ha, 88%).
-  3. Double-counting: Full CI now uses pure-kinetic H1 = kL,
-     no node weights W. Old code double-counted nuclear
-     attraction, producing -1.97 Ha (68% error).
-  4. Variational collapse: Added <1/r> cap on V_cross so
-     diffuse high-n states do not accumulate full -Z/R.
-
-HONEST VERDICT:
-  GeoVac's core claim — O(V) sparse graph eigenvalue replacing
-  O(N^4) integral evaluation — is validated. Single-electron
-  systems converge to <0.1% with no basis-set fitting. H2 Full
-  CI now achieves ~2% error with monotonic basis convergence,
-  comparable to PySCF FCI/STO-3G (~3.2%) on accuracy while
-  using a fundamentally different (topology-based) approach.
-      V_n2 (cross-attraction, Mulliken): 0.0367 Ha (mean)
-  -> Building V_n2 x I (electron 1 -> nucleus 2)...
-  -> Building I x V_n1 (electron 2 -> nucleus 1)...
-  -> Building V_ee (electron-electron repulsion)...
-      Mean V_ee:  0.0397 Ha
-  -> Assembling H_total = H_1xI + IxH_1 + V_n2xI + IxV_n1 + V_ee...
+VERDICT:
+  This output supports no GeoVac accuracy claim. The graph-mode
+  hydrogen energies are band-edge saturation, the H2 model is
+  superseded, and the comparison is not at matched accuracy.
+  Current GeoVac results live in the papers (e.g. Papers 12,
+  13, 14), benchmarked against strong baselines there.
 
   [OK] Full CI Hamiltonian:
       Shape:      (166464, 166464)
@@ -112,7 +95,7 @@ SYSTEM 1: Hydrogen Atom (H)
 ------------------------------------------------------------------------------
   Exact energy: -0.500000 Ha
 
-  Method                           Energy(Ha)   Error%   Time(ms)  N_basis
+  Method                           Energy(Ha) Sat.def%   Time(ms)  N_basis
   ------------------------------ ------------ -------- ---------- --------
   GeoVac (max_n=10)                 -0.475715   4.8570       9.30      385
   GeoVac (max_n=20)                 -0.493636   1.2728      66.70     2870
@@ -151,49 +134,37 @@ SYSTEM 3: H2 Molecule (R = 1.4 bohr)
   PySCF FCI/cc-pVQZ                     -1.173796     0.0600    6445.47       60
 
 ==============================================================================
-SUMMARY: Where GeoVac Wins and Loses
+SUMMARY (corrected 2026-09-28: retracted claims removed)
 ==============================================================================
 
-STRENGTHS:
-  - Speed: GeoVac is extremely fast for single-electron systems
-    (sparse eigenvalue problem, no integral evaluation)
-  - Scaling: O(V) with >97% sparsity vs O(N^4) for HF integrals
-  - Simplicity: No basis set optimization, no integral libraries
-  - Single-electron accuracy: Converges to exact H, He+, Li2+ etc.
-  - Theoretical foundation: 18/18 symbolic proofs that graph
-    Laplacian is conformally equivalent to S3 Laplace-Beltrami
+WHAT THE TABLES SHOW:
+  - H (graph mode): the legacy graph model H = kappa*(D - A) has
+    E_0 = kappa*lambda_max matched to -1/2 by construction
+    (kappa = -1/16). Its 'Sat.def%' column is the band-edge
+    saturation deficit (8 - lambda_max)/8, NOT an accuracy.
+  - The 18 symbolic checks (tests/test_fock_*.py) verify the
+    CONTINUUM Fock projection. The lattice's edge Laplacian
+    D - A does NOT converge to the S3 Laplace-Beltrami operator
+    (n_max disconnected l-blocks; a documented wall, Paper 7).
+  - The GeoVac He rows used the legacy graph-kinetic model
+    (retired family, 2026-09-25); physical fixed-k CI at n_max=5
+    is 1.93% above exact (Paper 13).
+  - Speed/sparsity figures are for the graph eigenproblem only;
+    they are not an accuracy-matched comparison with PySCF.
 
-WEAKNESSES / CURRENT LIMITATIONS:
-  - H2 Full CI accuracy ~2%: Mulliken cross-nuclear is an
-    approximation. Exact orbital integrals would reduce error.
-  - Multi-electron: Mean-field He uses Z-scaled kinetic_scale;
-    no general DFT/HF multi-electron solver yet.
+LIMITATIONS:
+  - H2 'Full CI' here is the legacy LCAO graph-concatenation
+    model, superseded (FCI-M: no equilibrium geometry). Its
+    ~2% figure benefits from error cancellation between the
+    Mulliken V_cross and point-charge V_ee approximations.
   - No basis-set extrapolation procedure established.
-  - V_ee model (point-charge coordinates) needs improvement
-    for higher accuracy; current result benefits from error
-    cancellation between V_cross and V_ee approximations.
 
-PREVIOUSLY DIAGNOSED AND FIXED (Feb 2026):
-  1. Bridge architecture: _get_boundary_states_prioritized()
-     now returns ALL states sorted by (n,l,|m|), connecting
-     n=1 core states first. Bonding/antibonding splitting
-     restored: 0.088 Ha splitting at max_n=5.
-  2. Cross-nuclear V_en: Replaced point-charge model with
-     Mulliken approximation + <1/r> cap for large-n states.
-     V_cross(n=1) = -0.538 Ha (vs exact -0.61 Ha, 88%).
-  3. Double-counting: Full CI now uses pure-kinetic H1 = kL,
-     no node weights W. Old code double-counted nuclear
-     attraction, producing -1.97 Ha (68% error).
-  4. Variational collapse: Added <1/r> cap on V_cross so
-     diffuse high-n states do not accumulate full -Z/R.
-
-HONEST VERDICT:
-  GeoVac's core claim — O(V) sparse graph eigenvalue replacing
-  O(N^4) integral evaluation — is validated. Single-electron
-  systems converge to <0.1% with no basis-set fitting. H2 Full
-  CI now achieves ~2% error with monotonic basis convergence,
-  comparable to PySCF FCI/STO-3G (~3.2%) on accuracy while
-  using a fundamentally different (topology-based) approach.
+VERDICT:
+  This output supports no GeoVac accuracy claim. The graph-mode
+  hydrogen energies are band-edge saturation, the H2 model is
+  superseded, and the comparison is not at matched accuracy.
+  Current GeoVac results live in the papers (e.g. Papers 12,
+  13, 14), benchmarked against strong baselines there.
 
 
 Report saved to: /home/runner/work/geovac/geovac/benchmarks/scripts/../figures/pyscf_comparison.txt

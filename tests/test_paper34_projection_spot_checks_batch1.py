@@ -198,53 +198,80 @@ def test_paper34_III1_laplacian_spectrum_n2_minus_1(n, l):
 # §III.5  Sturmian relabeling at lambda = Z/n preserves rationality
 # ----------------------------------------------------------------------------
 
+def _sturmian_radial_unnormalized(n: int, l: int, lam, r):
+    """ACTUAL Coulomb-Sturmian radial function, unnormalized:
+    r^l e^{-lam r} L_{n-l-1}^{2l+1}(2 lam r).  Built from sympy's generalized
+    Laguerre polynomial, not from any quoted matrix-element formula."""
+    return r ** l * sp.exp(-lam * r) * sp.assoc_laguerre(n - l - 1, 2 * l + 1, 2 * lam * r)
+
+
+def _sturmian_radial_elements(n1: int, n2: int, l: int, lam):
+    """Overlap S, <1/r> V and kinetic T between two unnormalized Sturmians,
+    each an explicit sympy integral over r in [0, oo) of the actual functions."""
+    r = sp.Symbol('r', positive=True)
+    f1 = _sturmian_radial_unnormalized(n1, l, lam, r)
+    f2 = _sturmian_radial_unnormalized(n2, l, lam, r)
+    S = sp.integrate(sp.expand(f1 * f2 * r ** 2), (r, 0, sp.oo))
+    V = sp.integrate(sp.expand(f1 * f2 * r), (r, 0, sp.oo))
+    lap_f2 = sp.diff(r ** 2 * sp.diff(f2, r), r) / r ** 2 - l * (l + 1) * f2 / r ** 2
+    T = sp.integrate(sp.expand(-sp.Rational(1, 2) * f1 * lap_f2 * r ** 2), (r, 0, sp.oo))
+    return S, V, T
+
+
 def test_paper34_III5_sturmian_rationality_preserved():
-    """Paper 34 §III.5 (sec:proj_sturmian): transcendental signature
-    'preserves rationality of Layer 1. No new pi or other
-    transcendentals enter at this step.'
+    """Paper 34 §III.5 (sec:proj_sturmian): at lambda = Z/n the unnormalized
+    Coulomb-Sturmian radial matrix elements (overlap, 1/r, kinetic) are
+    RATIONAL and the squared normalizations are rational, so no pi or other
+    transcendental enters at the Sturmian step.
 
-    Tests by symbolic relabeling: the Sturmian focal length lam = Z/n
-    is rational in (Z, n), and the Casimir label values n^2 - 1 (the
-    diagonal SO(4) Casimir on the (n,l,m) labels -- a continuum S^3
-    quantity carried on the labels, NOT graph-Laplacian eigenvalues)
-    remain integer under this relabeling. This is the categorical
-    statement Paper 34 §III.5 claims.
+    Rewritten 2026-09-28 (trunk re-check).  The previous version checked only
+    that the symbol Z/n is a rational function and that -(Z/n)^2/2 equals
+    itself -- a tautology -- and its no-transcendental predicate was
+    `.has(sp.pi)`, which ACCEPTS zeta(3), Catalan's G, log 2, etc.
 
-    2026-09-28 (trunk re-check): a former numeric leg asserted
-    spec(Z) = Z^2 * spec(1) on AtomicSolver.  It was vacuous in both
-    Hamiltonian modes -- H is Z^2 times a Z-independent matrix BY
-    CONSTRUCTION -- and a planted transcendental did not fire it, so it
-    was removed rather than kept as false backing.  The symbolic legs
-    below are the test.
+    This version computes the matrix elements from the actual Sturmian
+    functions by exact symbolic integration and requires every entry to be a
+    sympy Rational (`is_Rational`), which rejects pi, zeta(3), E, log 2 and
+    square roots alike.  Two further legs make it discriminate the FUNCTIONS,
+    not just the arithmetic: the defining Sturmian equation
+        (-1/2 nabla^2 + lam^2/2 - n lam / r) S_nl = 0
+    must hold exactly in matrix form, and the Sturmians must be orthogonal
+    with respect to 1/r.
+
+    Wrong answers it rejects: (a) any transcendental entering the Sturmian
+    matrix elements (fire-tested by planting pi and zeta(3) into the radial
+    function); (b) a non-Sturmian radial function, e.g. the wrong Laguerre
+    order (fire-tested by planting 2l+2 for 2l+1).
     """
-    Z, n = sp.symbols('Z n', positive=True, integer=True)
-    lam_sturmian = Z / n
-    # lam should be a rational function of (Z, n)
-    assert lam_sturmian.is_rational_function(Z, n), (
-        f"Sturmian focal length lam = Z/n = {lam_sturmian} is not rational"
-    )
+    for Z in (1, 2, 3):
+        for nstar in (1, 2, 3):
+            lam = sp.Rational(Z, nstar)
+            for l in (0, 1):
+                ns = [n for n in (1, 2, 3) if n > l]
+                for n1 in ns:
+                    for n2 in ns:
+                        S, V, T = _sturmian_radial_elements(n1, n2, l, lam)
+                        for name, x in (("S", S), ("V", V), ("T", T)):
+                            assert x.is_Rational, (
+                                f"{name}[{n1},{n2}] (l={l}, lam={lam}) = {x} is not rational"
+                            )
+                        # defining Sturmian equation, applied to the ket (n2)
+                        resid = T + lam ** 2 / 2 * S - n2 * lam * V
+                        assert resid == 0, (
+                            f"Sturmian equation fails: n1={n1} n2={n2} l={l} lam={lam}: {resid}"
+                        )
+                        # 1/r-orthogonality of Coulomb Sturmians
+                        if n1 != n2:
+                            assert V == 0, (
+                                f"<S_{n1}|1/r|S_{n2}> = {V} != 0 (l={l}, lam={lam})"
+                            )
+                        else:
+                            # squared normalization 1/S_nn is rational and positive
+                            assert S.is_Rational and S > 0, (n1, l, lam, S)
 
-    # The energy formula E_n = -Z^2/(2 n^2) under Sturmian relabeling
-    # E -> -lam^2 / 2 = -(Z/n)^2 / 2 stays rational
-    E_sturmian = -lam_sturmian ** 2 / 2
-    E_direct = -Z ** 2 / (2 * n ** 2)
-    assert sp.simplify(E_sturmian - E_direct) == 0, (
-        f"Sturmian energy mismatch: {E_sturmian} != {E_direct}"
-    )
-
-    # No pi or other transcendental enters at this level (Layer 1 only)
-    # NOTE: `sp.pi in expr.free_symbols` is ALWAYS False (pi is a NumberSymbol,
-    # not a Symbol), so the old form of this guard never fired.  Use .has().
-    assert not E_sturmian.has(sp.pi), (
-        f"Unexpected pi in Sturmian Layer 1: {E_sturmian}"
-    )
-
-    # 2026-08-28 audit: the guard above is only informative if it CAN fire.
-    # A downstream projection that DOES inject pi (the Hopf/Fock measure
-    # factor Vol(S^3) = 2 pi^2) must be caught by exactly the same predicate.
-    assert (E_sturmian * 2 * sp.pi ** 2).has(sp.pi), (
-        "non-tautology guard failed: .has(sp.pi) cannot detect an injected pi"
-    )
+    # The predicate itself must reject what the old one accepted.
+    for bad in (sp.pi, sp.zeta(3), sp.E, sp.log(2), sp.sqrt(2), sp.Catalan):
+        assert not (sp.Rational(3, 7) * bad).is_Rational, bad
 
 
 def _velocity_form_closure(n: int, l: int):

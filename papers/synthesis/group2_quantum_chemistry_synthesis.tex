@@ -47,13 +47,17 @@ coherent narrative organized by the
 \emph{natural geometry hierarchy}.  The hierarchy is a grid indexed by
 the number of nuclear centers and the number of electrons:\ $S^3$
 (Fock) for atoms~\cite{loutey_paper7}, the prolate spheroid for
-$\mathrm{H}_2^+$~\cite{loutey_paper11}, hyperspherical coordinates for
-He~\cite{loutey_paper13}, molecule-frame hyperspherical coordinates for
-$\mathrm{H}_2$~\cite{loutey_paper15}, and composed fiber bundles for
+$\mathrm{H}_2^+$ and $\mathrm{H}_2$~\cite{loutey_paper11,loutey_paper12},
+hyperspherical coordinates for
+He~\cite{loutey_paper13}, molecule-frame hyperspherical coordinates as
+the structural $N$-electron generalization~\cite{loutey_paper15}, and
+composed fiber bundles for
 core--valence and polyatomic systems~\cite{loutey_paper17,
 loutey_paper19}.  Three threads run through the arc.  \emph{First}, an
 algebraic-first program:\ the angular content is computed exactly from
-Gaunt coefficients and Wigner $3j$ symbols at every level, the
+Gaunt coefficients and Wigner $3j$ symbols at every one-centre level
+and in each Level-5 fibre (at the two-centre prolate level only the
+axial $m$ label is exact, Paper~0), the
 prolate-spheroidal electron--electron repulsion is replaced by an
 algebraic Neumann expansion~\cite{loutey_paper12}, the radial solvers
 reduce to three-term Laguerre recurrences, and the split-region
@@ -105,7 +109,10 @@ alternative whose primary downstream value (qubit-Hamiltonian sparsity
 for quantum simulation) lives in the quantum-computing arc---not as a
 replacement for production quantum chemistry.  The discrete label lattice and the continuous Laplace--Beltrami
 operator are dual descriptions of the same quantum-number structure,
-connected through Fock's proven conformal projection (the lattice's
+linked by an exact Peter--Weyl label identification (the lattice's
+labels are those of the $S^3$ harmonics, on which the operator acts as
+the diagonal $SO(4)$ Casimir), with Fock's proven conformal projection
+linking the operator to the Schr\"odinger equation (the lattice's
 graph Laplacian is not one of the two:\ it does not converge to
 $\Delta_{S^3}$, Paper~7); the interpretive question of which
 is more fundamental is left open.
@@ -141,8 +148,10 @@ Laplace--Beltrami operator, whose graph Laplacian does not converge to
 it, Paper~7).  For a one-center one-electron system that coordinate system
 is $S^3$; for a two-center one-electron system it is the prolate
 spheroid; for a one-center two-electron system it is the hyperspherical
-coordinate system; for a two-center two-electron system it is the
-molecule-frame hyperspherical system; and for systems with electrons on
+coordinate system; for a two-center two-electron system it is again
+the prolate spheroid (Level~2, where H$_2$ reaches $99.97\%$ of $D_e$;
+the molecule-frame hyperspherical system of Paper~15 is retained as the
+structural $N$-electron generalization); and for systems with electrons on
 separated length scales (a tight core and a diffuse valence shell) the
 natural object is a \emph{composed} geometry---a fiber bundle in which
 each electron group inhabits its own natural coordinate system, coupled
@@ -192,8 +201,10 @@ GeoVac is presented throughout as a discretization framework that
 exploits natural geometry, not as a new foundation for quantum
 mechanics.  The discrete label lattice and the continuous
 Laplace--Beltrami operator are dual descriptions of the same
-quantum-number structure, connected through the proven conformal
-projection of the foundations arc (the lattice's graph Laplacian is not
+quantum-number structure, linked by an exact Peter--Weyl label identification (the lattice's
+labels are those of the $S^3$ harmonics, on which the operator acts as
+the diagonal $SO(4)$ Casimir), with Fock's proven conformal projection
+linking the operator to the Schr\"odinger equation (the lattice's graph Laplacian is not
 one of the two:\ it does not converge to $\Delta_{S^3}$, Paper~7), and
 the interpretive question of ontological priority is left to the
 reader.  The framework's concrete
@@ -363,11 +374,11 @@ exponential moments $A_n(\alpha)$, and the first- and second-kind
 Legendre moments satisfy exact three-term recurrences, so the
 $V_{ee}$ matrix is exact within the Neumann truncation order with no
 six-dimensional quadrature and no fitted parameters~\cite{loutey_paper12}.
-That property is established in the $\sigma$ sector;\ the azimuthal
-extension described below does not inherit it.
-One seed resists:\ the log-singular second-kind moment $B_l$ is evaluated
-by a single one-dimensional adaptive quadrature, its recurrence being
-numerically unstable at the base case.  A
+That property holds for all $m$:\ the log-singular second-kind moment
+$B_l$, once evaluated by a one-dimensional adaptive quadrature, now has a
+closed form in $\{E_1, \gamma, \ln\}$, and the azimuthal extension
+described below uses the same closed-form seeds, so the prolate
+$V_{ee}$ is fully quadrature-free for every $m$~\cite{loutey_paper12}.  A
 selection rule $C_l(q) = 0$ for $q < l$ or $(q-l)$ odd truncates the
 effective sum automatically.
 
@@ -969,7 +980,9 @@ A single discipline runs through every level of the hierarchy:\ replace
 continuous integration with algebraic evaluation wherever the structure
 allows, and name what remains.  This is the chemistry-arc instance of
 the framework's prime directive (the discrete angular/selection-rule
-structure is exact at all levels and must never be approximated; the
+structure is exact at every one-centre level and in each Level-5
+fibre---at the two-centre prolate level only the axial $m$ label is
+exact (Paper~0)---and must never be approximated; the
 radial/parametric content is level-dependent and a legitimate target
 for numerical improvement).  Table~\ref{tab:algebraic} catalogues the
 state of the algebraic registry across the arc.
@@ -987,11 +1000,11 @@ fundamental) feature.}
 \toprule
 Level / object & Status & Mechanism (paper) \\
 \midrule
-Angular coupling (all levels) & algebraic & Gaunt $/$ Wigner $3j$; selection rules \cite{loutey_paper13, loutey_paper15, biedenharn1981} \\
+Angular coupling (one-centre levels, Level-5 fibres;\ prolate: axial $m$ only) & algebraic & Gaunt $/$ Wigner $3j$; selection rules \cite{loutey_paper13, loutey_paper15, biedenharn1981} \\
 $\mathrm{H}_2^+$ radial, $\sigma$ ($m=0$) & algebraic & three-term Laguerre recurrence \cite{loutey_paper11} \\
 $\mathrm{H}_2^+$ radial, $\pi/\delta$ ($m\neq0$) & algebraic (one seed) & assoc.\ Laguerre $+$ seed $e^a E_1(a)$ \cite{loutey_paper11} \\
-Prolate spheroidal $V_{ee}$ ($\sigma$) & algebraic (one seed) & Neumann recurrences $+$ 1-D quadrature for $B_l$ \cite{loutey_paper12} \\
-Prolate spheroidal $V_{ee}$ ($|m|\ge1$) & quadrature & same kernel, ordered-$\xi$ integral by spectral panels \cite{loutey_paper12} \\
+Prolate spheroidal $V_{ee}$ ($\sigma$) & quadrature-free & Neumann recurrences $+$ closed-form $B_l$ seeds in $\{E_1,\gamma,\ln\}$ \cite{loutey_paper12} \\
+Prolate spheroidal $V_{ee}$ ($|m|\ge1$) & quadrature-free & associated-Legendre moment recurrences, same closed-form seeds \cite{loutey_paper12} \\
 He hyperradial $S$, $K$ matrices & algebraic & three-term Laguerre recurrence \cite{loutey_paper13} \\
 Nuclear coupling (Level 4) & algebraic & split-region Legendre, $3j$-triangle termination \cite{loutey_paper15} \\
 Cross-center $V_{ne}$ (balanced) & algebraic & multipole, exact Gaunt termination $L_{\max}=2l_{\max}$ \cite{loutey_paper19} \\
@@ -1177,7 +1190,10 @@ instrument whose accuracy ceilings are now characterized and whose
 strongest downstream payoff---qubit-Hamiltonian sparsity for quantum
 simulation---lives in the quantum-computing arc.  The discrete label lattice and the continuous Laplace--Beltrami
 operator are dual descriptions of the same quantum-number structure,
-connected through Fock's proven conformal projection (the lattice's
+linked by an exact Peter--Weyl label identification (the lattice's
+labels are those of the $S^3$ harmonics, on which the operator acts as
+the diagonal $SO(4)$ Casimir), with Fock's proven conformal projection
+linking the operator to the Schr\"odinger equation (the lattice's
 graph Laplacian is not one of the two:\ it does not converge to
 $\Delta_{S^3}$, Paper~7); the framework's concrete
 advantages do not depend on which description one regards as
@@ -1293,7 +1309,7 @@ L.~N.~Trefethen,
 
 \bibitem{loutey_paper0}
 J.~Loutey,
-``Angular Momentum as Information Geometry: Isotropic Packing and the Universal Angular Cross-Section,''
+``Angular Momentum as Information Geometry: Isotropic Packing and the Recurring Angular Cross-Section,''
 GeoVac Paper~0 (2026).
 
 \bibitem{loutey_paper1}
@@ -1303,7 +1319,7 @@ GeoVac Paper~1 (2026).
 
 \bibitem{loutey_paper7}
 J.~Loutey,
-``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation from a Scale-Invariant Label Lattice,''
+``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation on a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper8}

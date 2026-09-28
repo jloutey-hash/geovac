@@ -33,8 +33,11 @@ elements are $SO(4)$ Wigner $D$-matrix elements evaluated at the bond
 rotation $e^{i\gamma A_y}$.
 \emph{Positive results:}
 The bond sphere geometry is consistent, with the $\gamma(R)$ encoding,
-heteronuclear egg metric, Runge--Lenz alignment, and kinetic membrane all
-following from $SO(4)$ representation theory.
+heteronuclear egg metric, and Runge--Lenz alignment following from $SO(4)$
+representation theory.  (A graph-partition ``kinetic membrane'' is also
+described;\ it is built on the graph Laplacian, which is not
+$SO(4)$-covariant, and its Fiedler-shift and Bader-analog claims are
+unverified.)
 The $D$-matrix enforces selection rules for $\sigma$-bonds:
 $D^2_{10,10}(\gamma) = 1$ and $D^2_{00,10}(\gamma) = 0$ for all $\gamma$.
 \emph{Negative theorem:}
@@ -108,9 +111,11 @@ eigenvalue problem via prolate spheroidal separation.
 Section~\ref{sec:failure} proves why atom-centered approximations fail.
 Section~\ref{sec:uniform} states the Sturmian diagonal theorem.
 Section~\ref{sec:structural_theorem} proves the Sturmian structural
-theorem: the whole $R$-dependence of $(H,S)$ is a single $SO(4)$ congruence
-that cancels in the generalized eigenvalue problem, making the eigenvalues
-geometry-independent.
+theorem: in the single-$n$ $D$-matrix approximation, the whole
+$R$-dependence of $(H,S)$ is a single $SO(4)$ congruence that cancels in
+the generalized eigenvalue problem, making the eigenvalues
+geometry-independent (the genuine cross-$n$ overlap escapes it,
+Corollary~\ref{cor:binding}).
 Section~\ref{sec:multi_electron} extends the structural theorem to
 multi-electron systems via Coulomb and generalized Sturmian CI.
 Section~\ref{sec:selection_rules} derives the $SO(4)$ selection rules
@@ -180,9 +185,10 @@ other nucleus.
 (Sec.~\ref{sec:heteronuclear}).  For $Z_A \neq Z_B$, the bond sphere
 metric is a prolate spheroid with the heavier nucleus at the fat end.
 
-\item \textbf{Kinetic membrane} (Sec.~\ref{sec:membrane}).  The
-Fiedler vector zero-crossing identifies a discrete, combinatorial
-analog of Bader's bond critical point.
+\item \textbf{Kinetic membrane} (Sec.~\ref{sec:membrane};\
+\textbf{[UNVERIFIED]}, no backing test).  The Fiedler vector
+zero-crossing of the graph Laplacian (not an $SO(4)$-covariant operator)
+is proposed as a combinatorial analog of Bader's bond critical point.
 
 \item \textbf{Identification that the bond sphere requires the
 Sturmian basis} (Sec.~\ref{sec:sturmian}).  The single-$S^3$ geometry
@@ -199,11 +205,16 @@ eigenvalue $\beta_k$ alone, independent of $(l,m)$ and $\gamma$.
 
 \item \textbf{Sturmian structural theorem}
 (Sec.~\ref{sec:structural_theorem}).  In the molecular Sturmian basis
-with shared $p_0$, the one-electron $(H,S)$ obey the two-term identity
+with shared $p_0$, in the single-$n$ $D$-matrix approximation, the
+one-electron $(H,S)$ obey the two-term identity
 $H_{ij} = -\tfrac12 p_0^2 S_{ij} + (1-\beta_j)V_{ij}$ and share a single
 $SO(4)$ congruence $D^{(n)}(\gamma(R))$, so the eigenvalues are independent
-of the bond angle $\gamma$ and hence of $R$.  Binding requires $\beta_k(R)$
-from the full PDE.
+of the bond angle $\gamma$ and hence of $R$.  The genuine cross-$n$
+Coulomb--Sturmian overlap escapes the theorem and binds, supplying the
+$R$-dependence algebraically through the Shibuya--Wulfman overlap
+(Corollary~\ref{cor:binding}), but its non-orthogonality mixes $l$ across
+centres and hits an $l$-mixing qubit-encoding wall (orthogonalization
+destroys the Gaunt $l$-sparsity).
 
 \item \textbf{$SO(4)$ selection rules for $\sigma$-bonds}
 (Sec.~\ref{sec:selection_rules}).
@@ -549,9 +560,10 @@ and the membrane is where the Fiedler vector crosses zero.
 
 For a homonuclear diatomic, the Fiedler vector zero-crossing lies at
 the midpoint between the two poles, by symmetry.  For a heteronuclear
-molecule, the zero-crossing shifts toward the lighter nucleus.  In LiH,
-the heavier Li pole ($Z = 3$) dominates a larger volume of the bond
-sphere, pushing the membrane toward the H end.
+molecule, the zero-crossing is expected to shift toward the lighter
+nucleus:\ in LiH, the heavier Li pole ($Z = 3$) dominates a larger volume
+of the bond sphere, pushing the membrane toward the H end.
+\textbf{[UNVERIFIED]}:\ no test computes this shift.
 
 \subsection{Connection to Bader's Bond Critical Point}
 
@@ -567,8 +579,14 @@ carry the one-electron spectrum (it does not converge to $\Delta_{S^3}$,
 Paper~7), the membrane is a combinatorial feature of the chosen edge
 weights, not a computed property of the electron density.
 
-For heteronuclear molecules, both the Bader critical point and the
-Fiedler zero-crossing shift toward the electropositive (lighter) atom.
+For heteronuclear molecules the Bader critical point shifts toward the
+electropositive atom --- in LiH that is Li, the \emph{heavier} atom ---
+whereas the Fiedler zero-crossing described above shifts toward the
+lighter nucleus (H in LiH).  For LiH the two therefore move in
+\emph{opposite} directions, so the analogy does not extend to the
+direction of the shift (corrected 2026-09-28:\ this sentence previously
+said both shift toward ``the electropositive (lighter) atom'').  The
+statement below is likewise \textbf{[UNVERIFIED]}.
 The membrane is thinner (steeper Fiedler gradient) for strongly polar
 bonds and thicker (shallower gradient) for nonpolar bonds.
 
@@ -1057,11 +1075,12 @@ scale separation that was the motivation for the extension.
 \paragraph{Sturmian basis for heteronuclear systems.}
 The Sturmian basis resolves the geometric mismatch between $n$-shells by
 placing all orbitals on a single $S^3$ with shared momentum scale $p_0$.
-In this basis, different Sturmian $n$-shells genuinely do couple through
-the cross-nuclear operator $-Z_B/r_B$ (Eq.~\eqref{eq:sw_exact}), making
-the $D$-matrix formula exact rather than approximate---in contrast to the
-hydrogenic basis, where the block-diagonality constraint forbids cross-$n$
-coupling.
+In this basis the cross-nuclear potential $-Z_B/r_B$ reduces exactly to
+a single $D$-matrix element (Eq.~\eqref{eq:sw_exact}), while different
+Sturmian $n$-shells genuinely couple through the Shibuya--Wulfman
+cross-center \emph{overlap} (Remark~\ref{rem:overlap_imposed})---in
+contrast to the hydrogenic basis, where the block-diagonality constraint
+forbids cross-$n$ coupling.
 
 However, the Sturmian approach fails for heteronuclear molecules (e.g.,
 LiH) because no single $p_0$ simultaneously satisfies the
@@ -1077,10 +1096,11 @@ incompatibility.  The heteronuclear problem thus remains open.
 \label{sec:multi_electron}
 %% ========================================================================
 
-The structural theorem (Theorem~\ref{thm:structural}) proves that the
-one-electron $(H,S)$ share a single $SO(4)$ congruence---so the
-generalized eigenvalues are $R$-independent---for molecular Sturmians with
-shared momentum scale~$p_0$.  The natural question is whether multi-electron
+The structural theorem (Theorem~\ref{thm:structural}) proves that, in
+the single-$n$ $D$-matrix approximation, the one-electron $(H,S)$ share a
+single $SO(4)$ congruence---so the generalized eigenvalues are
+$R$-independent---for molecular Sturmians with shared momentum
+scale~$p_0$.  The natural question is whether multi-electron
 Sturmians---where the electron--electron repulsion $V_{ee}$ introduces
 coupling beyond one-body structure---can circumvent this limitation and
 produce basis sets that outperform standard hydrogenic FCI for atoms
@@ -1177,8 +1197,9 @@ of within-configuration orbital flexibility outweighs this gain.
 The generalized Sturmian's isoenergetic constraint removes
 $n$-dependent radial differentiation---a multi-electron analog of the
 single-electron structural theorem
-(Theorem~\ref{thm:structural}).  In the one-electron case, the shared
-$SO(4)$ congruence of $(H,S)$ makes the eigenvalues geometry-independent.
+(Theorem~\ref{thm:structural}).  In the one-electron case (single-$n$
+$D$-matrix approximation), the shared $SO(4)$ congruence of $(H,S)$ makes
+the eigenvalues geometry-independent.
 In the multi-electron case, the constraint
 $Z_{\mathrm{eff}} = \beta_\nu Z$ (uniform within each
 configuration) limits the radial flexibility that $V_{ee}$ can
@@ -1322,8 +1343,9 @@ $s$--$p$ hybridization is a dynamical consequence of the two-center
 potential.  For heteronuclear molecules, the bond sphere becomes an
 egg---a prolate spheroid whose asymmetry encodes bond polarity
 (Sec.~\ref{sec:heteronuclear}).  The kinetic membrane
-(Sec.~\ref{sec:membrane}) provides a discrete analog of Bader's bond
-critical point.  The $SO(4)$ selection rules
+(Sec.~\ref{sec:membrane}) is proposed as a combinatorial analog of Bader's
+bond critical point (unverified;\ and for LiH its shift runs opposite to
+Bader's).  The $SO(4)$ selection rules
 (Theorem~\ref{thm:selection}) show that $D^2_{10,10}(\gamma) = 1$ and
 $D^2_{00,10}(\gamma) = 0$ for all $\gamma$: the $2p_0$ orbital is a
 transparent mode of the bond channel, and $s$--$p$ mixing requires the
@@ -1359,8 +1381,9 @@ documented in the companion paper~\cite{loutey_fci})---or a non-Sturmian
 basis that
 avoids the $SO(4)$-congruence (geometry-blind) constraint of
 Theorem~\ref{thm:structural}.
-The LCAO path is validated; the bond sphere geometry provides the
-theoretical framework within which the LCAO results are understood.
+The LCAO path is superseded (FCI-M:\ no equilibrium geometry;\ the
+architecture moved to natural geometries);\ the bond sphere geometry
+remains a theoretical frame for reading those results.
 
 \paragraph{Resolution: the prolate spheroidal lattice.}
 The failure of the single-$p_0$ Bond Sphere approach points toward the
@@ -1388,7 +1411,7 @@ Computational resources were provided by personal hardware.
 \bibitem{loutey_paper0}
 J.~Loutey,
 ``Angular Momentum as Information Geometry: Isotropic Packing and
-the Universal Angular Cross-Section,''
+the Recurring Angular Cross-Section,''
 GeoVac Paper~0 (2026).
 
 \bibitem{loutey_paper1}
@@ -1399,7 +1422,7 @@ GeoVac Paper~1 (2026).
 \bibitem{loutey_paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from a Scale-Invariant Label Lattice,''
+on a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_fci}

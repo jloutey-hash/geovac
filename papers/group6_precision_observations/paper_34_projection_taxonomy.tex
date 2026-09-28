@@ -491,13 +491,22 @@ that quote results in physical bohr/Hartree.
 
 \subsection{Sturmian reparameterization at $\lambda = Z/n$}
 \label{sec:proj_sturmian}
-\textbf{Source:} bare Coulomb $S^3$ graph.\\
-\textbf{Target:} same graph relabelled as a Coulomb Sturmian basis
+\textbf{Source:} bare Coulomb $S^3$ label set $(n,l,m)$.\\
+\textbf{Target:} the same labels read as a Coulomb Sturmian basis
 spanning bound states plus a discretized continuum.\\
 \textbf{Variables introduced:} $Z$, $n$ (re-used; no new variables).\\
 \textbf{Dimension introduced:} preserves existing.\\
-\textbf{Transcendental signature:} preserves rationality of
-Layer~1.  No new $\pi$ or other transcendentals enter at this step;
+\textbf{Transcendental signature:} preserves the rationality of
+Layer~1 in the following precise sense.  At $\lambda = Z/n$ the
+unnormalized Coulomb-Sturmian radial matrix elements (overlap, $1/r$
+and kinetic) are rational numbers, and the squared normalizations are
+rational, so the normalized elements are algebraic (square roots of
+rationals);\ every radial integral reduces to
+$\int_0^\infty r^k e^{-2\lambda r}\,dr = k!/(2\lambda)^{k+1}$.  No $\pi$
+or other transcendental enters at this step (verified from the actual
+functions in exact arithmetic by
+\texttt{tests/test\_paper34\_projection\_spot\_checks\_batch1.py}::\allowbreak
+\texttt{test\_paper34\_III5\_sturmian\_rationality\_preserved});
 calibration-tier transcendentals (e.g.\ Bethe logarithm) enter
 through subsequent spectral mode sums.\\
 \textbf{Used in:} Papers 8--9, Paper~19, sprint LS-2 (Bethe logarithm
@@ -3091,8 +3100,8 @@ companion to Paper~18's transcendental classification.
 \toprule
 Projection & Variables added & Dimension & Transcendental signature \\
 \midrule
-Fock conformal & $Z$, $E$ & energy & $\kappa = -1/16$;
-$\pi$ via $\mathrm{Vol}(S^3)$ \\
+Fock conformal & $Z$, $E$ & energy & $p_0$ energy shell ($\pi$-laden,
+via $\mathrm{Vol}(S^3)$);\ $\kappa = -1/16$ matched, rational \\
 Hopf bundle & $\alpha$ & dimensionless & $\pi = \mathrm{Vol}(S^2)/4$ \\
 Bargmann--Segal & $\hbar\omega$ & energy & \textit{none} (graph
 $\pi$-free) \\
@@ -10490,13 +10499,13 @@ than silently tolerated.
 % ===================================================================
 
 \bibitem{paper0}
-GeoVac Project, ``Angular Momentum as Information Geometry: Isotropic Packing and the Universal Angular Cross-Section,'' Paper~0 (2026).
+GeoVac Project, ``Angular Momentum as Information Geometry: Isotropic Packing and the Recurring Angular Cross-Section,'' Paper~0 (2026).
 
 \bibitem{paper2}
 GeoVac Project, ``The Fine Structure Constant as a Spectral Coincidence on the Hopf Fibration,'' Paper~2 (2025; observation status, May~2026).
 
 \bibitem{paper7}
-GeoVac Project, ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation from a Scale-Invariant Label Lattice,'' Paper~7 (2025).
+GeoVac Project, ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation on a Scale-Invariant Label Lattice,'' Paper~7 (2025).
 
 \bibitem{paper14}
 GeoVac Project, ``Structurally Sparse Qubit Hamiltonians from Spectral Graph Theory,'' Paper~14 (2025).

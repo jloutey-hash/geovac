@@ -4,7 +4,7 @@ Benchmark: GeoVac vs PySCF External Comparison
 
 Paper 6's benchmarks are currently self-referential. This script provides
 an external comparison against PySCF (a standard quantum chemistry package)
-to validate GeoVac's claims for publishability.
+to compare GeoVac's legacy graph models with a standard package.
 
 Systems compared:
   - H atom (single electron)
@@ -16,7 +16,8 @@ For each system, we report:
   - Computation time (ms)
   - % error vs experiment/exact values
 
-Honest assessment of where GeoVac wins and loses.
+Corrected 2026-09-28: graph-mode hydrogen figures are band-edge
+saturation, not accuracy; no GeoVac win is claimed.
 
 Author: Precision Audit Suite
 Date: February 2026
@@ -164,7 +165,8 @@ def run_geovac_h2_full_ci(max_n: int = 5) -> dict:
     V_cross uses the Mulliken approximation with a ⟨1/r⟩ cap to prevent
     variational collapse of diffuse high-n states.
 
-    Accuracy: ~2% error at max_n=5, ~1.7% at max_n=8 (monotonically converging).
+    Legacy LCAO graph-concatenation model (superseded; FCI-M: no equilibrium
+    geometry). ~2% error at max_n=5, ~1.7% at max_n=8, aided by error cancellation.
     Note: max_n=8 takes ~2 min (166k×166k matrix); default is max_n=5 (~30s).
     """
     from geovac import MoleculeHamiltonian
@@ -438,12 +440,15 @@ def generate_comparison_report() -> str:
             except Exception as e:
                 lines.append(f"  PySCF error: {e}")
 
-    lines.append(f"  {'Method':<30s} {'Energy(Ha)':>12s} {'Error%':>8s} "
+    lines.append("  Sat.deficit% = |E - E_exact|/|E_exact|. For the GeoVac graph-mode")
+    lines.append("  row this is the band-edge saturation deficit (E_0 = kappa*lambda_max")
+    lines.append("  by construction), not an accuracy.")
+    lines.append(f"  {'Method':<30s} {'Energy(Ha)':>12s} {'Sat.deficit%':>12s} "
                  f"{'Time(ms)':>10s} {'N_basis':>8s}")
-    lines.append(f"  {'-'*30} {'-'*12} {'-'*8} {'-'*10} {'-'*8}")
+    lines.append(f"  {'-'*30} {'-'*12} {'-'*12} {'-'*10} {'-'*8}")
     for r in h_results:
         lines.append(f"  {r['method']:<30s} {r['energy']:>12.6f} "
-                     f"{r['error_pct']:>8.4f} {r['time_ms']:>10.2f} "
+                     f"{r['error_pct']:>12.4f} {r['time_ms']:>10.2f} "
                      f"{str(r['n_basis']):>8s}")
     lines.append("")
 
@@ -553,49 +558,36 @@ def generate_comparison_report() -> str:
     # Summary
     # -------------------------------------------------------------------------
     lines.append("=" * 78)
-    lines.append("SUMMARY: Where GeoVac Wins and Loses")
+    lines.append("SUMMARY (corrected 2026-09-28: retracted claims removed)")
     lines.append("=" * 78)
     lines.append("")
-    lines.append("STRENGTHS:")
-    lines.append("  - Speed: GeoVac is extremely fast for single-electron systems")
-    lines.append("    (sparse eigenvalue problem, no integral evaluation)")
-    lines.append("  - Scaling: O(V) with >97% sparsity vs O(N^4) for HF integrals")
-    lines.append("  - Simplicity: No basis set optimization, no integral libraries")
-    lines.append("  - Single-electron accuracy: Converges to exact H, He+, Li2+ etc.")
-    lines.append("  - Theoretical foundation: 18/18 symbolic proofs that graph")
-    lines.append("    Laplacian is conformally equivalent to S3 Laplace-Beltrami")
+    lines.append("WHAT THE TABLES SHOW:")
+    lines.append("  - H (graph mode): the legacy graph model H = kappa*(D - A) has")
+    lines.append("    E_0 = kappa*lambda_max matched to -1/2 by construction")
+    lines.append("    (kappa = -1/16). Its 'Sat.deficit%' column is the band-edge")
+    lines.append("    saturation deficit (8 - lambda_max)/8, NOT an accuracy.")
+    lines.append("  - The 18 symbolic checks (tests/test_fock_*.py) verify the")
+    lines.append("    CONTINUUM Fock projection. The lattice's edge Laplacian")
+    lines.append("    D - A does NOT converge to the S3 Laplace-Beltrami operator")
+    lines.append("    (n_max disconnected l-blocks; a documented wall, Paper 7).")
+    lines.append("  - Speed/sparsity figures are for the graph eigenproblem only;")
+    lines.append("    they are not an accuracy-matched comparison with PySCF.")
     lines.append("")
-    lines.append("WEAKNESSES / CURRENT LIMITATIONS:")
-    lines.append("  - H2 Full CI accuracy ~2%: Mulliken cross-nuclear is an")
-    lines.append("    approximation. Exact orbital integrals would reduce error.")
+    lines.append("LIMITATIONS:")
+    lines.append("  - H2 'Full CI' here is the legacy LCAO graph-concatenation")
+    lines.append("    model, superseded (FCI-M: no equilibrium geometry). Its")
+    lines.append("    ~2% figure benefits from error cancellation between the")
+    lines.append("    Mulliken V_cross and point-charge V_ee approximations.")
     lines.append("  - Multi-electron: Mean-field He uses Z-scaled kinetic_scale;")
-    lines.append("    no general DFT/HF multi-electron solver yet.")
+    lines.append("    no general DFT/HF multi-electron solver in this script.")
     lines.append("  - No basis-set extrapolation procedure established.")
-    lines.append("  - V_ee model (point-charge coordinates) needs improvement")
-    lines.append("    for higher accuracy; current result benefits from error")
-    lines.append("    cancellation between V_cross and V_ee approximations.")
     lines.append("")
-    lines.append("PREVIOUSLY DIAGNOSED AND FIXED (Feb 2026):")
-    lines.append("  1. Bridge architecture: _get_boundary_states_prioritized()")
-    lines.append("     now returns ALL states sorted by (n,l,|m|), connecting")
-    lines.append("     n=1 core states first. Bonding/antibonding splitting")
-    lines.append("     restored: 0.088 Ha splitting at max_n=5.")
-    lines.append("  2. Cross-nuclear V_en: Replaced point-charge model with")
-    lines.append("     Mulliken approximation + <1/r> cap for large-n states.")
-    lines.append("     V_cross(n=1) = -0.538 Ha (vs exact -0.61 Ha, 88%).")
-    lines.append("  3. Double-counting: Full CI now uses pure-kinetic H1 = kL,")
-    lines.append("     no node weights W. Old code double-counted nuclear")
-    lines.append("     attraction, producing -1.97 Ha (68% error).")
-    lines.append("  4. Variational collapse: Added <1/r> cap on V_cross so")
-    lines.append("     diffuse high-n states do not accumulate full -Z/R.")
-    lines.append("")
-    lines.append("HONEST VERDICT:")
-    lines.append("  GeoVac's core claim — O(V) sparse graph eigenvalue replacing")
-    lines.append("  O(N^4) integral evaluation — is validated. Single-electron")
-    lines.append("  systems converge to <0.1% with no basis-set fitting. H2 Full")
-    lines.append("  CI now achieves ~2% error with monotonic basis convergence,")
-    lines.append("  comparable to PySCF FCI/STO-3G (~3.2%) on accuracy while")
-    lines.append("  using a fundamentally different (topology-based) approach.")
+    lines.append("VERDICT:")
+    lines.append("  This script supports no GeoVac accuracy claim. The graph-mode")
+    lines.append("  hydrogen energies are band-edge saturation, the H2 model is")
+    lines.append("  superseded, and the comparison is not at matched accuracy.")
+    lines.append("  Current GeoVac results live in the papers (e.g. Papers 12,")
+    lines.append("  13, 14), benchmarked against strong baselines there.")
     lines.append("")
 
     return "\n".join(lines)

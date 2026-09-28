@@ -748,11 +748,14 @@ $\alpha^2$-content projection.
 
 The four Level-5 constants slot into the existing taxonomy as
 follows. The $\chi_{-4}$ identity (\ref{eq:rh_j_identity}) is a
-\emph{flow} exchange constant (infinite spectral sum), with the
+\emph{calibration}-tier exchange constant of the infinite-spectral-sum
+sub-case (earlier drafts called this sub-case ``flow''; it is not a
+separate tier of Sec.~\ref{sec:taxonomy}), with the
 novelty that its value is an integer-coefficient linear combination
 of classical Dirichlet $L$-values, so Paper~18's transcendental
 taxonomy gains a "Dirichlet-$L$-closed" cell at the intersection of
-flow and Dirac-spectrum projection. The GUE-vs-Poisson dichotomy is
+the infinite-spectral-sum calibration sub-case and Dirac-spectrum
+projection. The GUE-vs-Poisson dichotomy is
 a \emph{meta-level} discriminant, not itself a transcendental, but
 classifies spectral objects by zero statistics --- a new axis in
 Sec.~\ref{sec:taxonomy}. The algebraic-but-non-radical tier from
@@ -1897,13 +1900,13 @@ having been invoked at some step in the chain.
   Tier & Example transcendentals & Operator order & Bundle \\
   \hline
   Intrinsic         & $\pi^{d/2}$ Weyl prefactors & --- & scalar \\
-  Calibration       & $p_0$ ($\kappa$ matched), $F = \pi^2/6$
+  Calibration       & $F = \pi^2/6$
                     & 2nd ($\Delta_{\text{LB}}$)
                     & scalar \\
   Embedding         & $e^a E_1(a)$, $1/r_{12}$
                     & ---
                     & basis $\to$ $\mathbb{R}^3$ \\
-  Flow / composition & $\mu(\rho,R)$, PK
+  Alg.-implicit / composition & $\mu(\rho,R)$, PK
                     & ---
                     & multi-geometry \\
   Odd-zeta          & $\zeta_R(3), \zeta_R(5), \dots$
@@ -1998,8 +2001,9 @@ tiers:
     ($\alpha^2$, $\gamma$).
   \item \textbf{Second-order operators:} $\pi^{\text{even}}$ exclusively,
     on both scalar and spinor bundles.
-  \item \textbf{Basis and composition tiers:} embedding, flow,
-    composition constants (operator-independent).
+  \item \textbf{Basis and composition tiers:} embedding,
+    algebraic-implicit, and composition constants
+    (operator-independent).
 \end{enumerate}
 This is consistent with Paper~24's Coulomb/HO
 asymmetry~\cite{loutey_paper24}: second-order Riemannian operators
@@ -2684,7 +2688,8 @@ projection step.
 \label{sec:alpha}
 
 Paper~2~\cite{loutey_paper2} observes that the fine structure
-constant $\alpha$ satisfies the cubic $\alpha^3 - K\alpha + 1 = 0$,
+constant $\alpha$ approximately satisfies (to $8.8\times10^{-8}$
+relative; an Observation) the cubic $\alpha^3 - K\alpha + 1 = 0$,
 where the coefficient
 \begin{equation}
   K = \pi\!\left(42 + \frac{\pi^2}{6} - \frac{1}{40}\right)
@@ -3046,8 +3051,8 @@ linking the discrete label-set description to the coordinate system in
 which the observable is defined.  Spectral observables (Class~S) require no
 transcendental content.  Single-particle spatial observables (Class~P)
 require the Weyl constants ($\pi^{d/2}$).  Multi-particle correlated
-observables (Class~C) are where the embedding, flow, or composition
-exchange constants of Sec.~\ref{sec:taxonomy} appear.}
+observables (Class~C) are where the embedding, algebraic-implicit, or
+composition exchange constants of Sec.~\ref{sec:taxonomy} appear.}
 
 \medskip
 
@@ -3325,8 +3330,10 @@ continuous parameters:
     global $P(R,\mu) = 0$, and the Level-4 sweep is not of that form.
     What the Level-4 eigenvalues are instead is not settled here---see
     Sec.~\ref{sec:mu_level4}.
-  \item \textbf{Calibration constant:} $\kappa = -1/16$ is rational
-    (Sec.~\ref{sec:kappa_derivation}).
+  \item \textbf{Matched scale:} $\kappa = -1/16$ is rational
+    (Sec.~\ref{sec:kappa_derivation}); it is matched to the graph band
+    edge, not a calibration constant --- the calibration content of
+    Level~1 sits in the $p_0$ energy shell.
 \end{itemize}
 
 This refinement has a practical implication: the ``transcendental toll''
@@ -3514,7 +3521,7 @@ no single mechanism generates all three.
 Theorem~\ref{thm:k_decomposition}, the observed combination rule
 $K = \pi(B + F - \Delta)$ has three components with structurally
 distinct spectral homes: $B = 42$ is a finite Casimir trace on the
-scalar Laplacian at $m = 3$; $F = \pi^2/6$ is the infinite Dirichlet
+scalar Laplacian at $n_{\max} = 3$; $F = \pi^2/6$ is the infinite Dirichlet
 series of Fock degeneracies at the packing exponent
 $d_{\max} = 4$; and $\Delta^{-1} = 40$ is the degeneracy
 $g_3^{\mathrm{Dirac}} = 2 \cdot 4 \cdot 5$ of the third Dirac mode on
@@ -3699,10 +3706,12 @@ SD expansion: $B$ is a finite Casimir trace, $F$ is an arithmetic
 Dirichlet series, and $\Delta^{-1} = 40$ is the Euler--Maclaurin
 upper boundary term of the Dirac mode-count sum at $n_{\mathrm{CH}}
 = 3$.  The sign on $\Delta$ in the combination rule $K = \pi(B + F -
-\Delta)$ is the standard $(-1)^{F}$ grading: $B$ and $F$ are
+\Delta)$ is consistent with the $(-1)^{F}$ grading (a reading, not a
+derivation): $B$ and $F$ are
 scalar-sector (bosonic) quantities that enter with $(+)$, while
 $\Delta$ is a spinor-sector (fermionic) quantity that enters with
-$(-)$.  $K/\pi$ lives entirely in the non-perturbative sector of the
+$(-)$.  If it lives in any spectral-action sector at all, $K/\pi$ lives
+\emph{entirely} in the non-perturbative sector of the
 spectral-action supertrace on~$S^{3}$.
 
 \begin{acknowledgments}
@@ -3721,7 +3730,7 @@ were validated against analytical benchmarks.
 
 \bibitem{loutey_paper0}
 J.~Loutey,
-``Angular Momentum as Information Geometry: Isotropic Packing and the Universal Angular Cross-Section,''
+``Angular Momentum as Information Geometry: Isotropic Packing and the Recurring Angular Cross-Section,''
 GeoVac Paper~0 (2026).
 
 \bibitem{loutey_paper1}
@@ -3732,7 +3741,7 @@ GeoVac Paper~1 (2026).
 \bibitem{loutey_paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from a Scale-Invariant Label Lattice,''
+on a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{loutey_paper11}

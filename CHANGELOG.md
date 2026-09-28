@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.3] - 2026-09-28
+
+**Patch. The list-closing pass for the final /qa trunk re-check. All deterministic gates PASS corpus-wide. The next trunk run should be the FULL certifying run (PI-invoked).**
+
+### Gate-first
+- Four new C16 entries, each fire-tested: `pair-diagonal-density-realized`, `alpha-cubic-stated-as-law`, `p13-graph-lattice-he-row`, `benchmark-graph-equivalence-verdict`.
+- They enumerated 23 loci. All are fixed and all dependents stamped; Paper 24 was added as an alpha-cubic dependent.
+
+### PI rulings applied
+- **Paper 2:** α "approximately satisfies (to 8.8×10⁻⁸ relative; an Observation)".
+- **The p-value**, restated in 4 places: it ranks among the top ~10 of 1.92×10⁹ formulas (p = 5.2×10⁻⁹ per draw), does not account for the unregistered search, and does not establish non-accidentality.
+- **The Δ sign:** "consistent with the (−1)^F grading (a reading, not a derivation)", with the "if it lives in any spectral-action sector at all" conditional restored. Applied to Papers 2, 18 and 24, the G3/G5 syntheses, and the CLAUDE.md §2 key-results line.
+- **Titles:** Paper 0 "…Universal…" → "…Recurring Angular Cross-Section"; Paper 7 "…from a…" → "…on a Scale-Invariant Label Lattice". 67 bibitems in 41 files updated; C11 PASSES.
+
+### LARGE findings closed
+- **P31:** the pipeline realizes the global-M_L D = 6.06% (at least 93.94% sparse). eq:eri_density is rebuilt on global D; D_pd = 1.44% remains only as the stricter restriction.
+- **P13 Table II:** the old κ(D−A)+W "S³ lattice 1.82%" row is replaced by the physical fixed-k CI (n_max=5: −2.848, 1.93%, 266 singlet M_L=0 configurations). The Full-CI row carried LITHIUM's 215,820 determinant count and has been deleted.
+- **benchmark_vs_pyscf.py and its saved outputs:** no retracted graph-equivalence claim and no "validated <0.1%" verdict remain. The H column is now a saturation deficit.
+- **P1 intro:** rewritten to the dual-description register (§1.5).
+- **P8:**
+  - contribution #8 scoped to the single-n D-matrix approximation, with the cor:binding wording;
+  - the kinetic membrane moved out of the SO(4)-derived list; the Fiedler/Bader claims tagged [UNVERIFIED]; the LiH directions corrected (Bader → Li, Fiedler → H, opposite);
+  - "LCAO validated" → superseded (FCI-M).
+- **G2 synthesis:** "Gaunt/3j at every level" is now scoped to one-centre levels and fibres; only m at Level 2.
+- **P24:** κ is described as a matched scale.
+- **P34 §III.5:** a real test replaces the tautological one: exact sympy integrals of actual Coulomb-Sturmian functions, `is_Rational`, and the Sturmian equation checked exactly. It was fire-tested 3/3 against ζ(3) and π planted in the radial function and against a wrong Laguerre order. The prose now distinguishes unnormalized (rational) from normalized (square roots of rationals) matrix elements.
+
+### SMALL findings closed
+About 40, including:
+- S⁵ is five-dimensional;
+- the P38 rate is given as 4/π (dual-Coxeter) / 2/π (unit S³);
+- P18's dangling "flow" tier resolved, and p₀ dropped from the transcendental column;
+- the α 8.8×10⁻⁸ (self-consistent root) vs 4.8×10⁻⁷ (plain sum) attribution;
+- Paper 12 V_ee fully quadrature-free for all m (it had been understated);
+- H₂'s natural geometry is prolate;
+- Bargmann–Segal *squared* elements are rational;
+- Vol(S³) = ¼·Vol(S²)·Vol(S¹);
+- the P2 Hopf fiber (isoclinic J^L_z) vs L_z, now an analogy;
+- the n/(√3π) asymptotic kept, with only its precision claims retracted, plus an O(1/n) proof sketch (coverage gap logged).
+
+### Verification
+- 43 papers compile clean.
+- Tests: 127 pass (P34, P2, P31, the registry and C17 self-tests).
+- Claim matrix: +5 rows, including the P34 III.5 row rebuilt as BACKED-SOUND and the P1 and P8 coverage gaps.
+
 ## [v5.17.2] - 2026-09-28
 
 **Patch. /qa trunk re-check (claim-impact DELTA #2) = DEFECTS; round-2 remediation done; narrow re-check owed.**

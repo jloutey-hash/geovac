@@ -33,8 +33,9 @@ results into two disjoint sectors:
 \item A \emph{universal sector}, depending only on $\mathcal{A}$ and
   the angular structure of the basis.  The angular sparsity theorem
   of Paper~22~\cite{paper22} --- the angular ERI density is
-  potential-independent (global-$M_L$ Coulomb $D=6.06\%$ at $l_{\max}=3$;
-  pair-diagonal realized $D_{\mathrm{pd}}=1.44\%$), bit-identical across
+  potential-independent (global-$M_L$ Coulomb $D=6.06\%$ at $l_{\max}=3$,
+  the density the composed pipeline realizes; the stricter pair-diagonal
+  restriction gives $D_{\mathrm{pd}}=1.44\%$), bit-identical across
   Coulomb, harmonic oscillator, Woods--Saxon, square well, and Yukawa
   potentials --- is the canonical example.
 \item A \emph{potential-specific sector}, depending on the choice
@@ -109,7 +110,8 @@ Fock's energy shell $p_0^2 = -2E$, not $\kappa$), its value \emph{coinciding} wi
 $1/16$ of the Fock projection Jacobian as an Observation, not a
 derivation (Paper~7); the $\alpha$-combination $K = \pi(B + F -
 \Delta)$~\cite{paper2_alpha} carries an explicit factor of $\pi$ as
-the Hopf-bundle measure $\mathrm{Vol}(S^2)/4 = \pi$, and the spectral
+the volume-slot measure $\mathrm{Vol}(S^2)/4 = \pi$ (historically named
+the Hopf-bundle measure), and the spectral
 zeta values appear at even integer arguments via the Jacobi-theta
 inversion formula~\cite{paper18,paper28}.  The 3D harmonic oscillator
 discretized via Bargmann--Segal on $S^5$ is by contrast bit-exactly
@@ -333,27 +335,27 @@ Gaunt selection rules alone:
 None of these conditions reference $V$, $R^k$, or any radial quantum
 number.  Theorem~2 of Paper~22 then states that the ERI density is a function
 only of the angular momentum cutoff.  The composed pipeline realizes the
-\emph{pair-diagonal} density $D_{\mathrm{pd}}$ (per-pair $m_a=m_c$,
-$m_b=m_d$):
+physical global-$M_L$ Coulomb density $D$ (selection rule
+$m_a+m_b=m_c+m_d$; Paper~22 Table):
 \begin{equation}
-  D_{\mathrm{pd}}(l_{\max}) =
+  D(l_{\max}) =
   \begin{cases}
-    7.81\% & l_{\max} = 1 \\
-    2.76\% & l_{\max} = 2 \\
-    1.44\% & l_{\max} = 3 \\
-    0.90\% & l_{\max} = 4 \\
-    0.62\% & l_{\max} = 5
+    14.84\% & l_{\max} = 1 \\
+    8.52\% & l_{\max} = 2 \\
+    6.06\% & l_{\max} = 3 \\
+    4.83\% & l_{\max} = 4 \\
+    3.99\% & l_{\max} = 5
   \end{cases}
   \label{eq:eri_density}
 \end{equation}
-The physically-correct global-$M_L$ Coulomb density $D(l_{\max})$
-(selection rule $m_a+m_b=m_c+m_d$) is $\sim\!4\times$ larger
-($14.84/8.52/6.06/4.83/3.99\%$ at $l_{\max}=1\ldots5$; Paper~22 Table);
-$D_{\mathrm{pd}}$ is the figure the composed qubit pipeline realizes.
+The stricter \emph{pair-diagonal} ($m$-decoupled) restriction
+$D_{\mathrm{pd}}$ (per-pair $m_a=m_c$, $m_b=m_d$) is $\sim\!4\times$
+smaller ($7.81/2.76/1.44/0.90/0.62\%$ at $l_{\max}=1\ldots5$); it is a
+sub-pattern of the Gaunt zeros, not the density the pipeline realizes.
 Paper~22 verified the potential-independence numerically across five
 potentials (Coulomb, harmonic oscillator, Woods--Saxon, square well,
 Yukawa) at $l_{\max} = 2$, finding bit-identical zero patterns
-($D_{\mathrm{pd}} = 2.76\%$) in every case.
+($D = 8.52\%$ on the matched 18-orbital set) in every case.
 
 \subsection{Spectral-triple reading}
 
@@ -523,7 +525,7 @@ Symmetry & $\mathrm{SO}(4)$ & $\mathrm{SU}(3)$ \\
 Operator & 2nd-order Laplacian & 1st-order Euler \\
 Spectrum & $-1/n^2$ (quadratic) & $N + 3/2$ (linear) \\
 Projection & $p_0 = \sqrt{-2E}$ (nonlinear) & linear-affine \\
-Calibration & $\kappa = -1/16$, $\pi$-laden & $\pi$-free \\
+Calibration & $p_0$ energy shell ($\pi$-laden);\ $\kappa$ matched, rational & $\pi$-free \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -568,7 +570,9 @@ to the operator-order divide in Table~\ref{tab:rigidity_dual}.
 
 The Coulomb construction uses the second-order Laplace--Beltrami
 operator $\Delta_{S^3}$ on the unit three-sphere, with eigenvalues
-$\lambda_n = n(n+2)$ (quadratic in $n$).  The Fock projection
+$\lambda_n = -(n^2 - 1)$, $n \ge 1$ (quadratic in $n$;\ the same
+convention as Sec.~\ref{sec:intro}, equivalently $-k(k+2)$ with
+$k = n - 1$).  The Fock projection
 $p_0 = \sqrt{-2 E_n}$ extracts the physical energy $E_n = -1/(2n^2)$
 by matching $p_0$ to the radial scale of momentum-space wavefunctions
 on $S^3$.  This projection is \emph{nonlinear} in the eigenvalue:
@@ -581,8 +585,8 @@ on $S^3$.  This projection is \emph{nonlinear} in the eigenvalue:
 and the inverse relation $n \mapsto E_n$ involves an inverse square
 root.  The calibration step from continuum eigenvalue to physical energy
 introduces a factor that traces to the Riemannian volume of $S^3$
-(via the Lichnerowicz constant on $S^3$ and the Hopf-bundle measure
-$\mathrm{Vol}(S^2)/4 = \pi$); this calibration $\pi$ enters the
+(via the Lichnerowicz constant on $S^3$ and the volume-slot measure
+$\mathrm{Vol}(S^2)/4 = \pi$, historically named the Hopf-bundle measure); this calibration $\pi$ enters the
 energy mapping, not the kinetic constant: $\kappa = -1/16$ is itself
 $\pi$-free, coinciding with the geometric $1/16$ as an
 Observation~\cite{paper7,paper24}.
@@ -662,7 +666,7 @@ Wigner $3j$ algebra & no \\
 \multicolumn{2}{l}{\emph{Coulomb-specific (2nd-order, nonlinear proj.):}} \\
 $\kappa = -1/16$~\cite{paper7} & no ($-1/16$ rational; $\pi$ enters at the energy map) \\
 Spectral zeta $\zeta_{D^2}(s)$~\cite{paper28} & yes ($\pi^{2k}$) \\
-Hopf-bundle measure $\mathrm{Vol}(S^2)/4$~\cite{paper2_alpha} & yes \\
+Volume-slot measure $\mathrm{Vol}(S^2)/4$~\cite{paper2_alpha} & yes \\
 $\alpha$-combination Observation $K$~\cite{paper2_alpha} & yes \\
 \hline
 \multicolumn{2}{l}{\emph{HO-specific (1st-order, linear proj.):}} \\
@@ -824,8 +828,9 @@ sector without re-derivation:
 \begin{itemize}
 \item Angular sparsity bounds at every $l_{\max}$
   (Eq.~\eqref{eq:eri_density})~\cite{paper22}.  At $l_{\max} = 3$,
-  the new system's two-body Hamiltonian is at least $98.56\%$
-  sparse before any potential-specific feature is invoked.
+  the new system's two-body Hamiltonian is at least $93.94\%$
+  sparse (global-$M_L$ density $D = 6.06\%$) before any
+  potential-specific feature is invoked.
 \item Composed-block exactly $Q$-linear Pauli
   count~\cite{paper14} ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at
   fixed basis).  The structural sparsity pattern behind the composed
@@ -864,8 +869,8 @@ re-derived for the new system:
   Bargmann--Segal lattice lives in $\mathbb{Q}$).
 \item The fine-structure-constant Observation
   $K = \pi(B + F - \Delta)$~\cite{paper2_alpha}.  This is a
-  Coulomb-specific observation tied to the Hopf-bundle measure
-  factor $\pi$ on $S^3$ and has no analog on $S^5$ or other
+  Coulomb-specific observation tied to the volume-slot measure
+  factor $\pi$ on $S^3$ (historically named the Hopf-bundle measure) and has no analog on $S^5$ or other
   sphere-quotients.  Specifically, the Sprint~5 investigation of
   $S^5$ analogs found that no $S^5$ candidate combination matches
   $\alpha^{-1}$ at comparable precision, and the structural mechanism
@@ -1581,7 +1586,7 @@ Phys.\ Rep.\ \textbf{251}, 267 (1995).
 \bibitem{paper0}
 J.~Loutey,
 ``Angular Momentum as Information Geometry: Isotropic Packing and the
-Universal Angular Cross-Section,''
+Recurring Angular Cross-Section,''
 GeoVac Paper~0 (2026).
 
 \bibitem{paper1}
@@ -1598,7 +1603,7 @@ GeoVac Paper~2 (2026). [Observation.]
 \bibitem{paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from a Scale-Invariant Label Lattice,''
+on a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{paper8_9}

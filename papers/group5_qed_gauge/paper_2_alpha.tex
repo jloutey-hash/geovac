@@ -13,7 +13,8 @@
 \date{February 25, 2026}
 
 \begin{abstract}
-We observe that the fine structure constant $\alpha$ satisfies the cubic
+We observe that the fine structure constant $\alpha$ approximately
+satisfies (to $8.8\times10^{-8}$ relative; an Observation) the cubic
 equation $\alpha^3 - K\alpha + 1 = 0$, where the coefficient
 $K = \pi(42 + \pi^2/6 - 1/40) = 137.036064$ is constructed from
 spectral invariants of the Hopf fibration $S^1 \to S^3 \to S^2$: the
@@ -23,11 +24,12 @@ and a boundary correction from the $S^3$ total space
 ($\Delta = 1/40$). The selection principle $B/N = \dim(S^3) = 3$ is
 proven algebraically to select $n_{\max} = 3$ uniquely. The resulting
 $\alpha^{-1} = 137.036011$ agrees with experiment to
-$8.8 \times 10^{-8}$ relative error with zero free parameters. A
+$8.8 \times 10^{-8}$ relative error with zero free parameters. In a
 combinatorial search over $1.92 \times 10^9$ formulas built from the
-same spectral ingredients yields a $p$-value of
-$5.2 \times 10^{-9}$, establishing that this precision is very
-unlikely to be accidental. The cubic is shown to be the characteristic
+same spectral ingredients, the formula ranks among the top $\sim\!10$
+($p = 5.2 \times 10^{-9}$ per draw); this statistic does not account
+for the unregistered search that produced the formula and does not
+establish non-accidentality. The cubic is shown to be the characteristic
 polynomial of a traceless $\mathbb{Z}_3$-symmetric circulant matrix,
 suggesting democratic coupling among the three bundle components.
 However, the combination rule $K = \pi(B + F - \Delta)$ is a
@@ -369,12 +371,13 @@ this interpretation is speculative.
 \emph{Fock coupling connection.}  The inter-shell coupling of $\cos\chi$
 in the Gegenbauer eigenbasis (Paper~7, corrected 2026-09-03) is
 $c^2(n,l) = \tfrac{1}{4}[1 - l(l+1)/(n(n+1))]$, and the inverse Fock
-Jacobian is $1/\Omega^4(0) = 1/16$.  At the highest angular momentum of
-the $n_{\max} = 3$ cutoff ($n = 4$, $l = 3$) the Casimir factor is
+Jacobian is $1/\Omega^4(0) = 1/16$.  At the first shell \emph{outside}
+the $n_{\max} = 3$ cutoff ($n = 4$, $l = 3$; the truncation itself keeps
+$l \le 2$) the Casimir factor is
 $1 - 12/20 = 2/5$, and $(2/5)/\Omega^4(0) = 1/40 = \Delta$.  The
-boundary term thus equals a composite of two geometric quantities at the
-angular-momentum edge of the Paper~2 truncation (an Observation; the
-coupling itself is $c^2(4,3) = 1/10$).
+boundary term thus equals a composite of two geometric quantities just
+beyond the angular-momentum edge of the Paper~2 truncation (an
+Observation; the coupling itself is $c^2(4,3) = 1/10$).
 
 \emph{APS-shape observation.} The minus sign on $\Delta$ in
 $K = \pi(B + F - \Delta)$ is the only sign-flipped boundary-type
@@ -405,8 +408,8 @@ fermionic (Dirac) contributions via the standard $(-1)^{F}$ grading.
 $B$ and $F$ are both scalar-sector objects (finite Casimir trace and
 Fock-degeneracy Dirichlet series, respectively) and enter with~$(+)$.
 $\Delta$ is a spinor-sector object (Dirac mode-count boundary term)
-and enters with~$(-)$.  The $(+,+,-)$ sign pattern is thus the
-$(-1)^{F}$ grading, not an ad~hoc sign choice.
+and enters with~$(-)$.  The $(+,+,-)$ sign pattern is thus
+consistent with the $(-1)^{F}$ grading (a reading, not a derivation).
 
 \emph{Euler--Maclaurin boundary reading.}  The identification
 $\Delta^{-1} = g_{3}^{\mathrm{Dirac}} = 40$ (Phase~4H, SM-D) gains a
@@ -451,7 +454,8 @@ identification~\cite{alpha_sprint_a_memo}:
 where $a_0 = \sqrt{\pi}$ is the zeroth Seeley--DeWitt coefficient on
 unit $S^3$. The three forms are algebraically equivalent via the
 Hopf submersion identity
-$\mathrm{Vol}(S^3) = \tfrac{1}{2}\,\mathrm{Vol}(S^2) \cdot \mathrm{Vol}(S^1)$.
+$\mathrm{Vol}(S^3) = \tfrac{1}{4}\,\mathrm{Vol}(S^2) \cdot \mathrm{Vol}(S^1)$
+($2\pi^2 = \tfrac14 \cdot 4\pi \cdot 2\pi$).
 The reading is ``Hopf-base solid-angle per chiral charge'': the
 integration measure of a finite-cutoff trace restricted to Hopf-base
 data, normalized by the Dirac chirality count. This identification
@@ -463,7 +467,8 @@ may therefore gain a new entry corresponding to the Hopf-bundle
 topological measure, sitting outside the existing operator-order
 $\times$ bundle $\times$ vertex-topology grid.
 
-The physical $\alpha$ satisfies a self-consistency condition
+The physical $\alpha$ approximately satisfies (to $8.8\times10^{-8}$
+relative; an Observation) the self-consistency condition
 \begin{equation}\label{eq:selfconsistent}
   \frac{1}{\alpha} + \alpha^2 = K,
 \end{equation}
@@ -779,7 +784,8 @@ framework:
 \end{itemize}
 
 This suggests — and we flag for future work — that the Paper~18
-exchange-constant taxonomy (intrinsic / calibration / embedding / flow)
+exchange-constant taxonomy (intrinsic / calibration / embedding /
+algebraic-implicit / composition / inner-factor input)
 may benefit from a distinction between \emph{even-zeta content} (arising
 from second-order Laplace--Beltrami operators through Jacobi-$\theta$
 inversion, which systematically lowers the power of $\pi$ by $1/2$ at
@@ -823,7 +829,8 @@ natural stopping point. The program has achieved:
     $K/\pi = B + F - \Delta$ are invisible to the perturbative spectral
     action: $B$ is a finite Casimir trace, $F$ is an arithmetic
     Dirichlet series, and $\Delta$ is an Euler--Maclaurin boundary term.
-    $K/\pi$ lives \emph{entirely} in the non-perturbative sector of the
+    If it lives in any spectral-action sector at all, $K/\pi$ lives
+    \emph{entirely} in the non-perturbative sector of the
     spectral-action supertrace.
 \end{enumerate}
 
@@ -914,9 +921,11 @@ such as $4\pi(5/49 + 14/15 + \pi^2)$ that lack physical
 interpretation in the Hopf bundle context. The paper's formula is the
 only one among the top matches with a coherent geometric narrative.
 
-The $p$-value establishes that the precision is very unlikely to be
-accidental. It does not, by itself, constitute a derivation---but it
-does distinguish this formula from generic numerology.
+The formula thus ranks among the top $\sim\!10$ of a
+$1.92\times10^{9}$-formula search ($p = 5.2\times10^{-9}$ per draw).
+This statistic does not account for the unregistered search that
+produced the formula in the first place, and it does not establish
+non-accidentality; it is not a derivation.
 
 
 %======================================================================
@@ -1179,8 +1188,10 @@ coupling~\cite{robertson1971}. The present work improves on this
 situation in two respects: (i)~$S^3$ is the manifold onto which Fock's
 projection provably maps the hydrogen bound-state problem, which
 supplies a geometric (not yet a coupling) mechanism, and (ii)~the
-$p$-value of $5.2 \times 10^{-9}$ quantitatively distinguishes the
-formula from numerology. However, both approaches share the weakness
+formula's rank among a $1.92\times10^{9}$-formula search
+($p = 5.2 \times 10^{-9}$ per draw) is quantified, although that
+statistic does not account for the unregistered search that produced
+the formula and does not establish non-accidentality. However, both approaches share the weakness
 of an unjustified combination rule.
 
 \subsection{Comparison with previous approach}
@@ -1246,9 +1257,11 @@ the spectral determinant---is the correct object for the base invariant.
 The formula implies that $\alpha$ is algebraic over the field
 $\mathbb{Q}(\pi)$, since $\zeta(2) = \pi^2/6$. That is,
 $\alpha$ is a root of a polynomial whose coefficients are rational
-functions of $\pi$ alone. If confirmed, this would constrain $\alpha$
-far more tightly than the Standard Model currently does, and would
-imply that $\alpha$ is transcendental (since $\pi$ is).
+functions of $\pi$ alone. If the relation held exactly, this would
+suggest a constraint on $\alpha$ far tighter than the Standard Model
+currently imposes, and that $\alpha$ is transcendental (since $\pi$
+is); the $8.8\times10^{-8}$ residual, however, is far larger than the
+experimental uncertainty, so the relation is not an exact law.
 
 
 \subsection{$S^3$ specificity}\label{sec:s3_specificity}
@@ -1388,12 +1401,16 @@ The discrete label lattice (whose edge Laplacian is not a hydrogen
 operator, Paper~7) has two types of lattice
 transitions~\cite{phase2_kappa}: $T_\pm$ (changing $n$ by $\pm 1$,
 preserving $l$ and $m$) and $L_\pm$ (changing $m$ by $\pm 1$, preserving
-$n$ and $l$). We observe that these correspond naturally to the Hopf
+$n$ and $l$). We observe that these are suggestive of (by analogy) the Hopf
 fibration:
 \begin{itemize}
-\item $L_\pm$ is motion along the Hopf fiber $S^1$. The magnetic quantum
-  number $m$ is the $U(1)$ charge (eigenvalue of $J_z$); incrementing
-  $m$ rotates around the fiber circle.
+\item $L_\pm$ shifts the magnetic quantum number $m$, the eigenvalue of
+  $L_z$. This is an analogy with the Hopf fiber, not an identification:
+  $L_z$ generates a rotation of a single coordinate plane of
+  $\mathbb{R}^4 \supset S^3$, whereas the Hopf-fiber $U(1)$ is an
+  isoclinic rotation of two orthogonal planes, generated by one chiral
+  factor $J^{L}_z$ (or $J^{R}_z$) of $SO(4) = SU(2)_L\times SU(2)_R$,
+  with $L_z = J^{L}_z + J^{R}_z$.
 \item $T_\pm$ is radial motion on $S^3$, perpendicular to the fiber.
   Changing $n$ moves between eigenspaces of $\Delta_{S^3}$; in the Fock
   stereographic picture, this changes the ``latitude'' on~$S^3$.
@@ -1479,10 +1496,10 @@ question.
 
   An internal structural check~\cite{alpha_sprint_a_memo} finds that the
   post-cubic residual
-  $R_{\mathrm{predict}} = K - \alpha^{-1} - \alpha^{2}$ (where the
+  $R_{\mathrm{res}} = K - \alpha^{-1} - \alpha^{2}$ (where the
   $\alpha^{2}$ term is the trivial offset from the cubic) matches
   $\pi^{3} \alpha^{3}$ to within $0.25\%$ at 80-digit precision:
-  $R_{\mathrm{predict}} = 1.2079 \times 10^{-5}$,
+  $R_{\mathrm{res}} = 1.2079 \times 10^{-5}$,
   $\pi^{3}\alpha^{3} = 1.2049 \times 10^{-5}$,
   $R_{\mathrm{predict}}/(\pi^{3}\alpha^{3}) = 1.0025$. The $\pi^{3}$
   prefactor is uniquely picked out among $\{\pi^{2}, \pi^{3}, \pi^{4}\}$
@@ -1533,7 +1550,8 @@ question.
 \section{Conclusion}
 %======================================================================
 
-The fine structure constant satisfies the cubic equation
+The fine structure constant approximately satisfies (to
+$8.8\times10^{-8}$ relative; an Observation) the cubic equation
 $\alpha^3 - K\alpha + 1 = 0$, where
 $K = \pi(42 + \pi^2/6 - 1/40)$ is constructed from three spectral
 invariants of the Hopf fibration. The selection principle
@@ -1547,13 +1565,14 @@ $B_{\mathrm{formal}}$ only for $d = 3$, due to the unit embedding
 index of $SO(3) \subset SO(4)$. The quaternionic and octonionic Hopf
 fibrations yield $1/\alpha \approx 970$ and $7164$ respectively,
 matching no known coupling constants. The formula contains no fitted parameters and achieves
-$8.8 \times 10^{-8}$ relative agreement with experiment. A
-combinatorial search over $1.92 \times 10^9$ formulas yields a
-$p$-value of $5.2 \times 10^{-9}$, establishing that this precision
-is very unlikely to be accidental. The cubic form is the
+$8.8 \times 10^{-8}$ relative agreement with experiment. In a
+combinatorial search over $1.92 \times 10^9$ formulas the formula ranks
+among the top $\sim\!10$ ($p = 5.2 \times 10^{-9}$ per draw); this
+statistic does not account for the unregistered search that produced it
+and does not establish non-accidentality. The cubic form is the
 characteristic polynomial of a traceless $\mathbb{Z}_3$-symmetric
-circulant matrix, providing structural justification for the
-self-consistency equation.
+circulant matrix, a circulant realization of the self-consistency
+equation (not a derivation of it).
 
 The circulant coupling is necessarily Hermitian ($b$ and $c$ are
 complex conjugates), with the physical root at phase
@@ -1583,16 +1602,17 @@ approach~\cite{paper2_old} by the same author. The evolution from
 fitted to parameter-free is documented for intellectual transparency.
 The four-phase computational audit (arithmetic verification,
 combinatorial $p$-value analysis, cubic structure investigation, and
-derivation chain assessment) that validated the formula and identified
-the circulant structure is available as supplementary
+derivation chain assessment) that checked the formula's arithmetic and
+identified the circulant structure is available as supplementary
 material~\cite{phase2_audit}. A systematic investigation of spectral
 determinants, analytic torsion, heat kernel expansions, and
 index-theoretic invariants of the Hopf bundle components, documented
-in the project repository, established that the combination rule
-(Link~3) lies outside the scope of standard smooth spectral geometry.
+in the project repository, found no derivation of the combination
+rule (Link~3) within standard smooth spectral geometry (a negative
+search, not a proof of impossibility).
 A subsequent three-phase investigation of the kinetic scale factor
-$\kappa = -1/16$ established the transition operator--Hopf
-correspondence, a second pointer to $n_{\max} = 3$ (an Observation)
+$\kappa = -1/16$ proposed an analogy between the transition operators
+and the Hopf fibration (not an identification), a second pointer to $n_{\max} = 3$ (an Observation)
 from the bipartite spectral radius bound, and the forced Hermiticity of the circulant
 coupling~\cite{phase1_kappa,phase2_kappa,phase3_audit}.
 A further investigation applied the formula's recipe to all four Hopf
@@ -1622,7 +1642,7 @@ J.~D. Barrow, \textit{The Constants of Nature}
 
 \bibitem{paper7}
 J.~Loutey, ``The Dimensionless Vacuum: Recovering the Schr\"odinger
-Equation from a Scale-Invariant Label Lattice,'' GeoVac Paper~7 (2026).
+Equation on a Scale-Invariant Label Lattice,'' GeoVac Paper~7 (2026).
 
 \bibitem{paper22_sparsity}
 J.~Loutey, ``Potential-Independent Angular Sparsity for Qubit

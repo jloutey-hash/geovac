@@ -13,7 +13,7 @@
 
 \begin{document}
 
-\title{Angular Momentum as Information Geometry:\\Isotropic Packing and the Universal Angular Cross-Section}
+\title{Angular Momentum as Information Geometry:\\Isotropic Packing and the Recurring Angular Cross-Section}
 
 \author{J.~Loutey}
 \affiliation{Independent Researcher, Kent, Washington}
@@ -442,19 +442,21 @@ fix every detail of it.
 
 This distinction matters for the epistemic status of the results.  The
 angular quantum numbers $(\ell, m)$ follow from any isotropic,
-uniform-density, concentric construction---a robust class.  The
+uniform-density, concentric construction with linearly spaced radii---a
+robust class (the linear spacing is needed for the $2k-1$ per-shell
+capacity; other spacings change it).  The
 specific identification of~$n$ and the factor of~2 depend on the
 particular choices above.
 
 
 %% ================================================================
-%%  V.  UNIVERSAL ANGULAR CROSS-SECTION
+%%  V.  RECURRING ANGULAR CROSS-SECTION
 %% ================================================================
-\section{The Packing as Universal Angular Cross-Section}
+\section{The Packing as Recurring Angular Cross-Section}
 \label{sec:cross-section}
 
 The packing construction of Sec.~\ref{sec:construction} produces a
-universal $(\ell, m)$ angular labeling.  In the subsequent papers of
+recurring $(\ell, m)$ angular labeling.  In the subsequent papers of
 the GeoVac series, this angular sector appears as a structural factor
 inside the natural geometries used for quantum chemistry calculations,
 to the extent each geometry retains the corresponding symmetry:\ the
@@ -581,7 +583,7 @@ Table~\ref{tab:cross-section} are different Riemannian manifolds with
 different metrics, curvatures, and coordinate singularity structures.
 $S^3$ is compact with constant positive curvature; prolate spheroidal
 coordinates are non-compact with coordinate singularities at the foci;
-the hyperspherical manifold $S^5$ is compact but six-dimensional (for two electrons); the
+the hyperspherical manifold $S^5$ is compact but five-dimensional (for two electrons); the
 composed fiber bundle is a product of manifolds with different
 dimensionalities at each level.  Levels~1, 3 and~4, and each fiber of
 Level~5, share the full $(\ell, m)$ node structure with its labeling,
@@ -671,13 +673,13 @@ Edges encode geometrically adjacent transitions:
 \begin{itemize}
 \item \textbf{Radial edges} ($\hat{T}_{\pm}$): connect
   $(n, \ell, m, s)$ to $(n \pm 1, \ell, m, s)$ at fixed angular
-  quantum numbers $(\ell, m)$.  These correspond to radial excitation
-  and de-excitation.
+  quantum numbers $(\ell, m)$.  They connect labels related by the
+  ladder operators $\hat{T}_{\pm}$;\ they are not physical transitions.
 
 \item \textbf{Angular edges} ($\hat{L}_{\pm}$): connect
   $(n, \ell, m, s)$ to $(n, \ell, m \pm 1, s)$ at fixed $n$ and
-  $\ell$.  These correspond to magnetic sublevel transitions within a
-  shell.
+  $\ell$.  They connect labels related by the ladder operators
+  $\hat{L}_{\pm}$ within a shell;\ they are not physical transitions.
 \end{itemize}
 
 The full graph topology may also include edges connecting states with
@@ -694,7 +696,8 @@ $\Delta_{S^3}$ (below).
 
 \subsection{Spectral bound}
 
-The graph Laplacian $L = D - A$ defines a discrete Hamiltonian
+The graph Laplacian $L = D - A$ defines the legacy graph Hamiltonian
+(not the physical hydrogen Hamiltonian)
 \begin{equation}
   H = K_{\mathrm{vac}} \, L \,,
   \label{eq:graph-hamiltonian}
@@ -785,8 +788,8 @@ of that continuum chain (the graph Laplacian is not a discretization of
 it; see above).  Paper~1~\cite{paper1} develops the operator algebra
 on these labels (the $SU(1,1)\times SU(2)$ ladder operators, exact on
 interior shells, with the Rydberg energies imposed through the energy
-shell rather than output by the graph); dynamics were developed in the
-archived Paper~6~\cite{paper6}.
+shell rather than output by the graph); dynamics were attempted via
+the graph Laplacian in the archived Paper~6~\cite{paper6} (superseded).
 
 
 %% ================================================================
@@ -803,7 +806,8 @@ archived Paper~6~\cite{paper6}.
   uniform-density isotropic packing.
 
 \item[$\checkmark$] A graph topology $(V, E)$ whose vertices carry
-  quantum number labels and whose edges encode allowed transitions.
+  quantum number labels and whose edges connect labels related by
+  ladder operators (not physical transitions).
 
 \item[$\checkmark$] The structural correspondences $n \leftrightarrow$
   cumulative grouping and spin multiplicity $\leftrightarrow$
@@ -826,7 +830,8 @@ archived Paper~6~\cite{paper6}.
   produces the labels, not the functions.
 
 \item[$\times$] Time evolution and dynamics.  These require the
-  Hamiltonian as an operator, developed in the archived Paper~6~\cite{paper6}.
+  Hamiltonian as an operator;\ they were attempted via the graph
+  Laplacian in the archived Paper~6~\cite{paper6} (superseded).
 
 \item[$\times$] The fine structure constant or any coupling constants.
   The construction is purely kinematic.
@@ -840,9 +845,11 @@ structural choices---concentric shells, linearly spaced radii
 $\sigma_0 = \pi d_0^2 / 2$---that are natural and mutually consistent
 but not uniquely determined by the two axioms.  \textbf{[OBSERVATION]} The robustness of the
 $(\ell, m)$ result rests on the observation that any isotropic,
-uniform-density, concentric packing produces the same angular capacity
-$2k - 1$ per shell; the specific radial spacing affects only how
-shells are ordered, not their angular content.
+uniform-density, concentric packing with linearly spaced radii
+($r_k = k d_0$, so the $k$-th annulus has area proportional to
+$k^2 - (k-1)^2 = 2k - 1$) produces the angular capacity $2k - 1$ per
+shell;\ the linear spacing is required --- other radial spacings change
+the per-shell capacity.
 
 
 %% ================================================================
@@ -878,9 +885,9 @@ route.
 
 \subsection{The kinematic--dynamic distinction}
 
-The packing construction produces the \emph{kinematic} structure of
-quantum mechanics: the state space, its labeling, and its
-combinatorial organization.  It does not produce the \emph{dynamics}:
+The packing construction produces the angular labelling and
+degeneracy counting of the \emph{kinematic} structure of quantum
+mechanics.  It does not produce the \emph{dynamics}:
 the Hamiltonian, the energy spectrum, or time evolution.  This
 separation is a feature of the construction, not a limitation.  It
 shows that the angular quantum numbers are determined by geometry
@@ -996,7 +1003,7 @@ N.~Bohr,
 \bibitem{paper7}
 J.~Loutey,
 ``The Dimensionless Vacuum: Recovering the Schr\"odinger Equation
-from a Scale-Invariant Label Lattice,''
+on a Scale-Invariant Label Lattice,''
 GeoVac Paper~7 (2026).
 
 \bibitem{paper11}

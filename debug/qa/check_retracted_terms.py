@@ -671,6 +671,91 @@ REGISTRY = [
         },
     },
     {
+        "id": "pair-diagonal-density-realized",
+        # Paper 31 says the composed pipeline REALIZES the pair-diagonal density D_pd = 1.44% and
+        # 'at least 98.56% sparse'. Retired 2026-08-30: the realized figure is the global-M_L density
+        # D = 6.06% at l_max=3 (93.94% sparse); D_pd survives only as the stricter restriction.
+        "pattern": r"realizes\s+the\s+\S{0,12}pair-diagonal|is\s+the\s+figure\s+the\s+composed\s+qubit\s+pipeline\s+realizes|pair-diagonal\s+realized|at\s+least\s+\$?98\.56",
+        "exempt_if_nearby": withdrawal_marker("pair-diagonal-density-realized"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group5 synthesis",
+        "note": "Registered 2026-09-28 (final trunk re-check; PI-approved list-closing pass).",
+        "files": [
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L37, eq:eri_density rebuilt on global-M_L D, L827 93.94%",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- reviewed: tab:eri_density already global D; no change",
+        },
+    },
+    {
+        "id": "alpha-cubic-stated-as-law",
+        # Paper 2 states the K combination rule as a LAW ('the physical alpha satisfies',
+        # 'the fine structure constant satisfies the cubic'), the p-value as 'establishing ... not
+        # accidental', and the Delta sign as 'the (-1)^F grading, not an ad hoc sign choice'.
+        # PI 2026-09-28: approximately satisfies (Observation); p-value restated; sign 'consistent with'.
+        # Residual 8.8e-8 vs CODATA ~1.5e-10: excluded as an exact law at ~600 sigma. S13.5-adjacent.
+        "pattern": r"physical\s+\$?\\?alpha\$?\s+satisfies|fine\s+structure\s+constant\s+satisfies\s+the\s+cubic|unlikely\s+to\s+be\s+accidental|distinguishes\s+the\s+formula\s+from\s+numerology|not\s+an\s+ad\s+hoc\s+sign\s+choice|sign\s+on\s+\$?\\?Delta\$?[^.]{0,60}is\s+the\s+standard",
+        "exempt_if_nearby": withdrawal_marker("alpha-cubic-stated-as-law"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group5 synthesis",
+        "note": "Registered 2026-09-28 (final trunk re-check; PI-approved list-closing pass).",
+        "files": [
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/group5_qed_gauge/paper_2_alpha.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+        "cited_by": {
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- abstract, eq:selfconsistent, L409 sign reading, ~L826 conditional, L917/L1182 p-value, conclusion",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L2690 approximately; L3701 sign reading + conditional",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L57, L320, L338",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L1411 plain sum 4.8e-7 vs root 8.8e-8",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- L1258 approximately / Observation",
+        },
+    },
+    {
+        "id": "p13-graph-lattice-he-row",
+        # Paper 13 Table II carried 'S^3 lattice (n_max=5, Z_eff) -2.851, 1.82%, dim 50' -- the v0.4.x
+        # H = k(D-A) + W graph-kinetic model (the retired (1/16)-hop family) -- beside a Full-CI row
+        # '-2.854, 1.71%, 215,820' whose dimension is LITHIUM's n_max=5 3e count. Physical fixed-k
+        # CI at n_max=5 is 1.93% (dim 55 orbitals).
+        "pattern": r"-2\.851\s*&\s*1\.82|-2\.854\s*&\s*1\.71\s*&\s*\$?215",
+        "exempt_if_nearby": withdrawal_marker("p13-graph-lattice-he-row"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group5 synthesis",
+        "note": "Registered 2026-09-28 (final trunk re-check; PI-approved list-closing pass).",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- Table II -> physical fixed-k CI 1.93% (dim 266); Li-dimension row deleted; L146-148, L566-567",
+        },
+    },
+    {
+        "id": "benchmark-graph-equivalence-verdict",
+        # benchmark_vs_pyscf.py (and its saved outputs) printed '18/18 symbolic proofs that graph
+        # Laplacian is conformally equivalent' and 'Single-electron systems converge to <0.1%' as an
+        # HONEST VERDICT -- the retracted graph->S^3 claim and a false win (own table: 0.574%).
+        "pattern": r"graph\s+Laplacian\s+is\s+conformally\s+equivalent|Single-electron\s+systems\s+converge\s+to\s+<\s?0\.1|Converges\s+to\s+exact\s+H,\s+He\+",
+        "exempt_if_nearby": withdrawal_marker("benchmark-graph-equivalence-verdict"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group5 synthesis",
+        "note": "Registered 2026-09-28 (final trunk re-check; PI-approved list-closing pass).",
+        "files": [
+            "benchmarks/scripts/benchmark_vs_pyscf.py",
+            "benchmarks/figures/pyscf_comparison.txt",
+            "benchmarks/figures/pyscf_comparison_ci.txt",
+        ],
+        "cited_by": {
+            "benchmarks/scripts/benchmark_vs_pyscf.py": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- SUMMARY block rewritten; Sat.deficit% column",
+            "benchmarks/figures/pyscf_comparison.txt": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- text corrected in place, numeric rows unchanged",
+            "benchmarks/figures/pyscf_comparison_ci.txt": "remediated + summary surfaces reread 2026-09-28 (list-closing agent; PM-verified gate 0 live) -- text corrected in place, numeric rows unchanged",
+        },
+    },
+    {
         "id": "p60-floor-is-angular",
         "note": "Paper 60's accuracy floor was attributed to l_max truncation "
                 "and declared unreachable at any K.  Both halves are refuted "
