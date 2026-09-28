@@ -55,25 +55,33 @@ The connection Laplacian eigenvalues on 1-forms satisfy
   μₙ^{conn} = μₙ − 2   (Ricci shift = 2 on S³ with Ric = 2g)
 
 The nonzero eigenvalues of L₁ = BᵀB on the discrete graph equal the
-nonzero eigenvalues of L₀ = BBᵀ, which in turn match the *scalar*
-Laplacian spectrum  λₙ = n²−1  (not the Hodge-1 spectrum n(n+2)).
-The Ricci shift +2 is a CONTINUUM curvature effect absent from the
-combinatorial graph.
+nonzero eigenvalues of L₀ = BBᵀ (SVD theorem).  They do NOT match the
+continuum scalar spectrum λₙ = n²−1, nor the Hodge-1 spectrum n(n+2).
+(Corrected 2026-09-25: an earlier version of this docstring claimed
+μ^{graph-edge} = λ^{scalar} = n²−1.)  Because no edge changes l, L₀ is
+the direct sum of n_max grid graphs P_{n_max−l} × P_{2l+1} (free-end
+paths), so its spectrum is the closed-form set of sums
+  (2 − 2cos(jπ/(n_max−l))) + (2 − 2cos(kπ/(2l+1))),
+bounded in [0, 8] (8 = 2·max degree, the grid band edge), with an
+n_max-dimensional kernel.  Measured at n_max = 6: 91 eigenvalues, only
+19 of them integers, largest 7.032, six zero modes.  L₀ does not
+converge to the S³ Laplace–Beltrami operator (Paper 7;
+tests/test_graph_s3_nonconvergence.py); the exact S³ operator on the
+(n, l, m) labels is the diagonal SO(4) Casimir n²−1, a node weight, not
+an edge Laplacian.
 
 Paper 25 identifies L₁ = BᵀB as the "gauge propagator" — the
-discrete Hodge-1 (photon kinetic) operator.  Its eigenvalues equal
-the scalar Laplacian eigenvalues, offset from the continuum Hodge-1
-eigenvalues by the Ricci shift:
-
-  μₙ^{graph-edge} = λₙ^{scalar} = n²−1
-  μₙ^{continuum-Hodge1} = n(n+2) = n²+2n
-  Gap = 2n+1   (grows linearly with level n)
+discrete Hodge-1 (photon kinetic) operator.  Its nonzero eigenvalues
+are those of L₀ above; there is no level-by-level comparison with the
+continuum Hodge-1 eigenvalues μₙ = n(n+2) (the Ricci shift +2 is a
+continuum curvature effect absent from the combinatorial graph).
 
 π-free certificate
 ------------------
-All eigenvalues of L₀ and L₁ are non-negative integers.  No
-transcendentals enter.  This is analogous to the scalar graph and
-the Bargmann-Segal graph (Papers 24, 29).
+L₀ and L₁ have integer matrix entries, so all their eigenvalues are
+non-negative algebraic integers (generally irrational, e.g. 2 − √2 —
+cosines of rational multiples of π are algebraic).  No transcendentals
+enter.  This is analogous to the Bargmann-Segal graph (Papers 24, 29).
 
 References
 ----------
@@ -444,11 +452,11 @@ class FockGraphHodge:
              substituting any RootOf expressions numerically).
 
         For the Fock scalar graph:
-          - l=0 and l=1 sectors produce rational/integer eigenvalues.
-          - l≥2 sectors (pure path graphs Pₙ for a single n-shell, or
-            grids for multi-shell l≥2) may produce eigenvalues containing
-            √(integers), which are algebraic but not rational.  These are
-            manifestly π-free.
+          - Each l-sector is a grid graph P_{n_max−l} × P_{2l+1}, whose
+            eigenvalues (2 − 2cos(jπ/(n_max−l))) + (2 − 2cos(kπ/(2l+1)))
+            are algebraic and generally irrational (only small sectors,
+            e.g. at n_max ≤ 3, are all-rational).  These are manifestly
+            π-free.
           - No sector can produce π because all edge weights are ±1 ∈ ℤ
             and the characteristic polynomial of any integer adjacency
             matrix has integer coefficients — its roots are algebraic

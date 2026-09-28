@@ -32,7 +32,7 @@ from geovac.ecosystem_export import hamiltonian
 # 11.10 x Q / 9.23 x Q).  See debug/sprint_eri_evaluator_defects_memo.md.
 EXPECTED_PAULI = {
     # Atomic / diatomic
-    'He':   287,
+    'He':   279,  # physical h1 (2026-09-25); 287 was the retired +1/16-hop model
     'H2':   279,
     # First-row main-group
     'LiH':  837,
@@ -83,7 +83,7 @@ EXPECTED_PAULI = {
 # Full 40-system sweep is the @pytest.mark.slow tests below; run with --slow.
 # Corrected 2026-08-29 (exact global-M_L rule; see EXPECTED_PAULI note).
 REPRESENTATIVE_PAULI = {
-    'He':   287,
+    'He':   279,  # physical h1 (2026-09-25); 287 was the retired +1/16-hop model
     'H2':   279,
     'LiH':  837,
     'BeH2': 1395,

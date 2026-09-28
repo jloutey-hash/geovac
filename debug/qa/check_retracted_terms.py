@@ -287,6 +287,237 @@ REGISTRY = [
         },
     },
     {
+        "id": "graph-eigenvalues-integer-or-rational",
+        # The CLAIM: the S^3 graph's OWN eigenvalues are integers/rationals, or the
+        # graph spectrum converges to the integer ladder n^2-1.  Both false: the
+        # graph (block diagonal in l, each block a product of two paths) has the
+        # closed-form spectrum {2-2cos(j pi/(n_max-l)) + 2-2cos(k pi/(2l+1))}
+        # (Paper 0 Sec. VI) -- algebraic, generally irrational (e.g. 2-sqrt 2),
+        # bounded in [0,8].  The integer ladder -(n^2-1) is the CONTINUUM S^3
+        # Laplace-Beltrami spectrum.  pi-free survives: integer matrix entries
+        # give algebraic eigenvalues, never transcendental.
+        "pattern": r"(eigenvalues,\s+degeneracies,\s+and\s+coupling\s+coefficients\s+are\s+integers\s+or\s+rationals"
+                   r"|graph\s+and\s+its\s+integer\s+eigenvalue\s+spectrum"
+                   r"|graph:\s+rational\s+eigenvalues"
+                   r"|graph\s+Laplacian\s+spectrum\s+to\s+the\s+pure\s+integers"
+                   r"|that\s+the\s+graph\s+Laplacian\s+converges\s+to:\s+integer)",
+        "exempt_if_nearby": withdrawal_marker("graph-eigenvalues-integer-or-rational"),
+        "severity": "fail",
+        "scope": "trunk group3 synthesis",
+        "note": "Registered 2026-09-25 (PI-directed correction, marriage/MC session). "
+                "Paper 0 Sec. VI [INTERNAL THEOREM] gives the graph spectrum in closed "
+                "form; group3 synthesis L1419 already stated it correctly.  Corrected "
+                "at: CLAUDE.md S1.5 (PI-authorized edit of a PI-owned section), Paper 18 "
+                "obs:pi-free + Sec. origin-P24 sentence, Paper 22 L95 (was: graph "
+                "spectrum CONVERGES to the pure integers -- it cannot, it is bounded) "
+                "and L571 bullet, field guide L367, group3 synthesis L887.  Canonical "
+                "form: matrix entries integer/rational => eigenvalues algebraic.",
+        "files": [
+            "CLAUDE.md",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+        ],
+        # Documents reviewed 2026-09-25 whose nearby wording was checked; each
+        # speaks of the CONTINUUM integer spectrum or of rational invariants
+        # and was found correct as written.
+        "cited_by": {
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "reviewed 2026-09-25 -- L674 '(ii) Integer spectrum' is the continuum LB ladder; correct as written",
+            "papers/group6_precision_observations/paper_35_time_as_projection.tex": "reviewed 2026-09-25 -- L181 bare continuum LB n(n+2); correct as written",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "reviewed 2026-09-25 -- L3029 graph-derived integer invariants (Z, n); correct as written",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex": "reviewed 2026-09-25 -- L298 'pi-free rationals or algebraic numbers'; correct as written",
+            "papers/synthesis/group6_precision_observations_synthesis.tex": "reviewed 2026-09-25 -- L97 Bargmann-Segal S^5 rational entries; L332 V_ee irrational; correct as written",
+        },
+    },
+    {
+        "id": "graph-laplacian-converges-to-s3",
+        # The CLAIM: the GeoVac edge Laplacian D-A converges to / is equivalent to the S^3
+        # Laplace-Beltrami operator, or has spectrum n^2-1.  REFUTED 2026-09-25: no edge changes l,
+        # so D-A splits into n_max disconnected l-blocks (n_max zero modes, zero cross-block heat
+        # kernel).  What survives exactly: the (n,l,m) label set + the diagonal SO(4) Casimir.
+        "pattern": r"graph Laplacian converges to (the )?(continuous|continuum)?\s*\$?S\^3|converges to the (unit )?\$?S\^3\$? Laplace|whose continuum limit is (the unit three-sphere|\$?-?\\Delta_\{S\^3\})|continuum limit of the (positive-semidefinite )?graph Laplacian|discrete graph Laplacian (for hydrogen|on \$?S\^3\$?) is mathematically equivalent|graph (that )?converges to the unit three-sphere|graph discretizes \$?S\^3|has spectrum \$?n\^2 ?- ?1\$? exactly|identified with the continuum \$?S\^3\$?\s*Laplace|carries the Coulomb spectrum",
+        "exempt_if_nearby": withdrawal_marker("graph-laplacian-converges-to-s3"),
+        "severity": "fail",
+        "scope": "trunk group1 group2 group3 group4 group5 synthesis",
+        "note": "Registered 2026-09-25 (PI-directed re-pricing; independently re-derived twice + adversarial pass).  Evidence: tests/test_graph_s3_nonconvergence.py (fire-tested 4/4).  The S^3 equivalence is Fock's CONTINUUM projection; Paper 38/WH1 (spectral truncations) untouched; Paper 24 Coulomb/HO asymmetry Layer 1 withdrawn as a consequence (7 catalogued, 6 standing).",
+        "files": [
+            "CLAUDE.md",
+            "docs/claims_register.md",
+            "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex",
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex",
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+            "papers/group2_quantum_chemistry/paper_fci_atoms.tex",
+            "papers/group2_quantum_chemistry/paper_fci_molecules.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex",
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+            "papers/group5_qed_gauge/paper_28_qed_s3.tex",
+            "papers/group5_qed_gauge/paper_2_alpha.tex",
+            "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
+            "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex",
+            "papers/group5_qed_gauge/paper_51_gravity_arc.tex",
+            "papers/group6_precision_observations/paper_26_entanglement.tex",
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+        "cited_by": {
+            "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": "reviewed 2026-09-25 (S3 sweep) -- L96 already scoped; no convergence claim",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group2_quantum_chemistry/paper_fci_atoms.tex": "remediated + reviewed 2026-09-25 (residual sweep) -- L90-93 matched-by-construction wording; L182 'matched scale'",
+            "papers/group2_quantum_chemistry/paper_fci_molecules.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group3_foundations/paper_1_spectrum.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex": "remediated + reviewed 2026-09-25 (PM) -- L102, L675, L709: graph Laplacian no longer called Coulomb-specific",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group5_qed_gauge/paper_28_qed_s3.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group5_qed_gauge/paper_2_alpha.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group5_qed_gauge/paper_30_su2_wilson.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/group5_qed_gauge/paper_51_gravity_arc.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/synthesis/geovac_field_guide.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex": "remediated + reviewed 2026-09-25 (S3 re-pricing sweep)",
+        },
+    },
+    {
+        "id": "he-graph-native-hop-headline",
+        # The CLAIM: He graph-native CI 0.216% (and 0.19%), H^- over-binding by 21%, a Z_c~1.84
+        # graph-validity boundary, and graph off-diagonals carrying 10-39% of the correlation.  All
+        # are energies/features of a HOP-AUGMENTED model: casimir_ci._build_graph_h1 adds a
+        # non-physical (1/16)A one-body hop.  Physical fixed-k CI: 1.881% at n_max=7.
+        "pattern": r"graph-native[^.]{0,80}(0\.216|0\.19)\s?\\?%|Z_c\s*\\?(approx|\u2248|~)\s*1\.84|over-binds?\s+by\s+21|graph[- ]validity[- ]boundary|10\s*(--|\u2013|-)\s*39\s*\\?%",
+        "require_nearby": r"\bHe\b|helium|H\$?\^-|H\u207b|\bCI\b|correlation",
+        "exempt_if_nearby": withdrawal_marker("he-graph-native-hop-headline"),
+        "severity": "fail",
+        "scope": "trunk group2 group3 group6 synthesis",
+        "note": "Registered 2026-09-25 (PI-approved retraction).  In the k=Z hydrogenic basis T+V_ne is exactly diagonal, so the (1/16)A hop is not part of the atom's Hamiltonian (-48 mHa, more than He's correlation energy).  Registry keys he_gn_phys_n{2..7}_pct, he_gn_hop_shift_mha, hminus_phys_pct.  Guards tests/test_he_physical_hamiltonian.py + tests/test_he_hop_guard.py.  CLAUDE.md is deliberately NOT scanned: its S3 CUSP-2 row is an append-only historical record (corrected by the appended RE-INTERPRETATION row) and must not be modified, even by a token; the PM is the single writer of the corrected CLAUDE.md He rows.",
+        "files": [
+            "docs/claims_register.md",
+            "docs/validation_benchmarks.md",
+            "papers/INDEX.md",
+            "papers/group1_operator_algebras/paper_29_ramanujan_hopf.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/group2_quantum_chemistry/Paper_8_Bond_Sphere_Sturmian.tex",
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex",
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex",
+            "papers/group2_quantum_chemistry/paper_15_level4_geometry.tex",
+            "papers/group2_quantum_chemistry/paper_17_composed_geometries.tex",
+            "papers/group2_quantum_chemistry/paper_19_coupled_composition.tex",
+            "papers/group2_quantum_chemistry/paper_fci_atoms.tex",
+            "papers/group2_quantum_chemistry/paper_fci_molecules.tex",
+            "papers/group3_foundations/Paper_0_Geometric_Packing.tex",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex",
+            "papers/group3_foundations/paper_18_exchange_constants.tex",
+            "papers/group3_foundations/paper_1_spectrum.tex",
+            "papers/group3_foundations/paper_22_angular_sparsity.tex",
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/group3_foundations/paper_57_forced_free_seam.tex",
+            "papers/group4_quantum_computing/paper_23_nuclear_shell.tex",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+            "papers/group5_qed_gauge/paper_28_qed_s3.tex",
+            "papers/group5_qed_gauge/paper_2_alpha.tex",
+            "papers/group5_qed_gauge/paper_30_su2_wilson.tex",
+            "papers/group5_qed_gauge/paper_41_rule_b_wilson_u1.tex",
+            "papers/group5_qed_gauge/paper_51_gravity_arc.tex",
+            "papers/group6_precision_observations/paper_26_entanglement.tex",
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex",
+            "papers/synthesis/geovac_field_guide.tex",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "papers/synthesis/group4_quantum_computing_synthesis.tex",
+            "papers/synthesis/group5_qed_gauge_synthesis.tex",
+            "papers/synthesis/group6_precision_observations_synthesis.tex",
+        ],
+        "cited_by": {
+            "papers/group2_quantum_chemistry/paper_13_hyperspherical.tex": "remediated + reviewed 2026-09-25 (He regression)",
+            "papers/group2_quantum_chemistry/paper_fci_atoms.tex": "remediated + reviewed 2026-09-25 (He regression)",
+            "papers/group3_foundations/Paper_7_Dimensionless_Vacuum.tex": "remediated + reviewed 2026-09-25 (residual sweep)",
+            "papers/group3_foundations/paper_18_exchange_constants.tex": "remediated + reviewed 2026-09-25 (residual sweep)",
+            "papers/group6_precision_observations/paper_26_entanglement.tex": "remediated + reviewed 2026-09-25 (He regression)",
+            "papers/group6_precision_observations/paper_27_entropy_projection.tex": "remediated + reviewed 2026-09-25 (He regression)",
+            "papers/group6_precision_observations/paper_34_projection_taxonomy.tex": "remediated + reviewed 2026-09-25 (residual sweep) -- incl. He spectrum re-measured on the physical H",
+            "papers/synthesis/geovac_field_guide.tex": "remediated + reviewed 2026-09-25 (residual sweep)",
+            "papers/synthesis/group2_quantum_chemistry_synthesis.tex": "remediated + reviewed 2026-09-25 (residual sweep)",
+            "papers/synthesis/group6_precision_observations_synthesis.tex": "remediated + reviewed 2026-09-25 (residual sweep)",
+        },
+    },
+    {
+        "id": "coulomb-ho-layer1-and-three-discriminators",
+        # The CLAIM: the Coulomb/HO asymmetry has seven STANDING layers incl. a "spectrum-computing
+        # role of L_0" on S^3, and Paper 31 has three independent discriminators.  Withdrawn
+        # 2026-09-25/26 with the graph->S^3 re-pricing: L_0 is spectrally inert on both spheres.
+        # The Wilson layer survives, re-scoped to representation theory (claims review, verdict B).
+        "pattern": r"three independent discriminators|matter-propagator role for the node Laplacian|spectrum-computing role of \$?L_0\$?(?![^.]{0,80}withdrawn)|seven asymmetry layers|current count is seven layers|seven layers in the current count|Yes \(eigenvalues = spectrum\)|nontrivial on the gauge side|along the same\s+operator-order divide|U\(1\) only \(Sprint~?5 negative\)",
+        "exempt_if_nearby": withdrawal_marker("coulomb-ho-layer1-and-three-discriminators"),
+        "severity": "fail",
+        "scope": "trunk group1 group3 group5 synthesis",
+        "note": "Registered 2026-09-26 (PI-approved).  Seven catalogued, six standing; Paper 31: two standing discriminators.  Consequence of graph-laplacian-converges-to-s3.",
+        "files": [
+            "papers/group3_foundations/paper_24_bargmann_segal.tex",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex",
+            "papers/synthesis/group3_foundations_synthesis.tex",
+            "CLAUDE.md",
+        ],
+        "cited_by": {
+            "papers/group3_foundations/paper_24_bargmann_segal.tex": "remediated + reviewed 2026-09-26 (layer-count agent) -- L454 count; L1199-1207 Wilson layer re-scoped to representation theory",
+            "papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex": "remediated + reviewed 2026-09-26 (layer-count agent) -- ~L457, ~L921-926, ~L1009",
+            "papers/group3_foundations/paper_31_universal_coulomb_partition.tex": "remediated + reviewed 2026-09-26 (layer-count agent) -- abstract, intro, five-layers, table, checklist, conclusion; MATERIAL zombie L728-730 fixed",
+            "papers/group1_operator_algebras/paper_32_spectral_triple.tex": "remediated + reviewed 2026-09-26 (layer-count agent) -- L1803, L1924, L3719, L3943, L4074, L4946, tab:coulomb_ho (live zombie row fixed)",
+            "papers/synthesis/group3_foundations_synthesis.tex": "reviewed 2026-09-26 (PM) -- L182 already reads 'seven layers catalogued, six standing'",
+            "CLAUDE.md": "reviewed 2026-09-26 (PM) -- S2 L273 already reads '7 layers catalogued, 6 standing'",
+        },
+    },
+    {
+        "id": "p11-pi-orbital-selection-rule",
+        # The CLAIM (Paper 11 Limitations, H2 paragraph): <sigma_g sigma_g|pi_+ pi_-> = 0 by azimuthal
+        # symmetry, so pi orbitals cannot improve the 1Sigma_g+ ground state.  FALSE: the state
+        # constrains only total M; restoring azimuthal channels is worth +11.6 mHa (Paper 12, v5.11.18).
+        "pattern": r"orbital selection rule|\\pi\$? orbitals cannot improve|pi orbitals cannot improve",
+        "exempt_if_nearby": withdrawal_marker("p11-pi-orbital-selection-rule"),
+        "severity": "fail",
+        "scope": "group2 synthesis",
+        "note": "Withdrawn 2026-09-26 (PI-approved Paper 11 cleanup).  Found live in Paper 11 L1188 two weeks after Paper 12 disproved it (sigma-only restriction, v5.11.18).",
+        "files": [
+            "papers/group2_quantum_chemistry/paper_11_prolate_spheroidal.tex",
+        ],
+        "cited_by": {},
+    },
+    {
         "id": "p60-floor-is-angular",
         "note": "Paper 60's accuracy floor was attributed to l_max truncation "
                 "and declared unreachable at any K.  Both halves are refuted "

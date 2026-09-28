@@ -23,9 +23,10 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
-from geovac import GeometricLattice, MoleculeHamiltonian
+from geovac import GeometricLattice
+from geovac._archive.superseded.hamiltonian import MoleculeHamiltonian
 
 
 # -- Parameters --

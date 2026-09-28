@@ -149,10 +149,14 @@ graph-theory program in which the Fock-projection of the
 unit three-sphere $\sthree$ replaces the continuous Hilbert space
 of one-electron quantum mechanics with a discrete substrate
 $\mathcal{G}_{\sthree}$ whose vertices carry the standard
-$(n, l, m, s)$ quantum numbers. The discrete graph Laplacian on this
-substrate has spectrum $n^2 - 1$ exactly, matching the hydrogenic
-spectrum up to a calibration constant
-$\kappa = -1/16$~\cite{paper0, paper24}. The framework's spectral
+$(n, l, m, s)$ quantum numbers. On these labels the continuum $\sthree$
+Laplacian acts exactly as the diagonal $SO(4)$ Casimir, with spectrum
+$n^2 - 1$ and multiplicity $n^2$, which Fock's energy shell maps to the
+hydrogenic spectrum;\ the discrete graph Laplacian $D - A$ on this
+substrate is a different operator, with spectrum in $[0, 8]$, that does
+not converge to it~\cite{paper0, paper7, paper24} (corrected 2026-09-25
+from ``the discrete graph Laplacian \ldots\ has spectrum $n^2-1$ [retracted 2026-09-25: graph-laplacian-converges-to-s3]
+exactly''). The framework's spectral
 triple $(\mathcal{A}_{GV}, \mathcal{H}_{GV}, D_{GV})$ has been shown
 in~\cite{paper32, paper38} to admit a Connes axiom audit at finite
 cutoff ($J^2 = -I$, $JD = +DJ$, KO-dim 3) and to converge in the
@@ -314,10 +318,14 @@ The GeoVac substrate on unit $\sthree$ is the Fock-projected discrete
 graph with vertex set indexed by $(n, l, m)$ for $n \geq 1$,
 $0 \leq l < n$, $|m| \leq l$, and edges given by the standard ladder
 operators of the $\sthree$ hyperspherical
-harmonics~\cite{paper7, paper24}. The graph Laplacian has integer
-spectrum $\lambda_n = n^2 - 1$ exactly; up to the calibration
-constant $\kappa = -1/16$ (a Fock-projection conformal weight,
-not a fit), this reproduces the hydrogen spectrum.
+harmonics~\cite{paper7, paper24}. The integer spectrum
+$\lambda_n = n^2 - 1$ is the continuum $\sthree$ Laplacian's, carried
+exactly on the vertex labels by the diagonal $SO(4)$ Casimir;\ the
+graph Laplacian's own spectrum lies in $[0, 8]$ and does not converge
+to it (Paper~7).  The hydrogen spectrum follows from $n^2-1$ through
+Fock's energy shell;\ the matched constant $\kappa = -1/16$ (its
+coincidence with a Fock-projection conformal weight is an Observation,
+not a fit) fixes only the graph's extremal eigenvalue.
 
 The Camporesi--Higuchi spinor bundle on $\sthree$ has Dirac operator
 $D_{CH}$ with spectrum

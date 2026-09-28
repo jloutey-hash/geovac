@@ -67,8 +67,14 @@ Four levels of this hierarchy have been established:
 \item[Level~1] \emph{One-center, one-electron} (H).
   Fock's stereographic projection~\cite{fock1935} maps the hydrogen atom
   to the unit $S^3$, where the $1/r$ potential becomes the conformal
-  factor.  The discrete graph Laplacian reproduces hydrogenic energies
-  to $< 0.1\%$ (Paper~7~\cite{paper7}).
+  factor.  On the discrete lattice of $S^3$ labels $(n,l,m)$ the exact
+  one-electron operator is the diagonal $SO(4)$ Casimir $n^2-1$, so the
+  hydrogenic spectrum holds exactly at every cutoff (the graph
+  Laplacian's extremal eigenvalue matches the ground state only by
+  construction through $\kappa$; Paper~7~\cite{paper7});\ the $S^3$
+  content enters through the exact label set and Fock's continuum
+  chain, not through a continuum limit of the graph Laplacian, which [retracted 2026-09-25: graph-laplacian-converges-to-s3]
+  does not converge to $\Delta_{S^3}$ (Paper~7).
 
 \item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).
   Prolate spheroidal coordinates separate the two-center Coulomb problem

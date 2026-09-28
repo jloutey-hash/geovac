@@ -1653,9 +1653,14 @@ matrix elements under spatial antisymmetrization vs symmetrization.
 Sprint Calc-He-2S-2S-splitting and Sprint Hylleraas-$r_{12}$
 (2026-05-09) returned this entry at $+11.86\%$ (graph-native CI,
 $n_{\max} \leq 11$) and $+209\%$ (single-$\alpha$ Hylleraas-3p,
-$\omega = 5$) respectively, with the diagnosis that the residuals
+$\omega = 5$) respectively.  \emph{Corrected 2026-09-25:} the
+$+11.86\%$ was computed on a hop-augmented model (a non-physical
+$+\tfrac{1}{16}$ one-body graph hop, withdrawn as a helium result;
+Paper~13); with helium's physical Hamiltonian in the same fixed
+$k = Z$ basis the splitting plateaus at $+17.1\%$ ($n_{\max} = 8$,
+all states variational).  The diagnosis that the residuals
 trace to single-exponent basis limitations for the excited
-$\lambda$-irrep state rather than to the projection itself
+$\lambda$-irrep state rather than to the projection itself stands
 (\S~\ref{sec:offprecision} He singlet-triplet row).  At the
 projection level, the splitting is structurally clean: the projector
 $P_{[1,1]}$ vs $P_{[2]}$ acts identically on either side; only the
@@ -2037,17 +2042,18 @@ correction; the underlying coupled-channel pipeline supplies the
 adiabatic curves $\mu_\nu(R)$ that the variational ansatz interpolates
 across).  H$_2$ at Level~4 reaches $96.0\%$ $D_e$ at $l_\text{max}=6$
 $\sigma+\pi$ with $61$ coupled channels and Schwartz cusp correction
-(Paper~15, Track~X v2.0.14).  Graph-native CI on the He pair-state
-lattice at $n_\text{max}=9$ ($3{,}927$ configurations, exact algebraic
-float integrals) reaches $0.20\%$ (Paper~13, Track~DI Sprint~3C) ---
-this is the SAME observable computed by a different projection chain
-(direct full-CI on the discrete graph, bypassing
-\S~\ref{sec:proj_coupled_channel} entirely) and serves as an
-independent transcendental-content cross-check: the residual matches
-the small-$Z$ graph-validity-boundary artifact, not the Schwartz
-cusp tail, demonstrating that the algebraic-implicit transcendental
-content of $\mu_\nu(R)$ is captured cleanly by both the coupled-channel
-and the graph-CI projection chains.\\
+(Paper~15, Track~X v2.0.14).  Full CI on the He pair-state lattice
+in the fixed $k=Z$ hydrogenic basis with helium's physical Hamiltonian
+(exact algebraic integrals) computes the SAME observable by a
+different projection chain (bypassing
+\S~\ref{sec:proj_coupled_channel} entirely) and lands
+$1.88\%$ above exact at $n_\text{max}=7$ (Paper~13):\ its floor is the
+missing continuum of the bound-state basis, so it is not a precision
+cross-check of the coupled-channel chain.  \emph{Withdrawn
+2026-09-25:} an earlier ``graph-native'' $0.20\%$ at $n_\text{max}=9$
+cited here as that cross-check, with its residual read as a
+``small-$Z$ graph-validity-boundary artifact'', was the energy of a [retracted 2026-09-25: he-graph-native-hop-headline]
+model with a non-physical $+\tfrac{1}{16}$ one-body graph hop.\\
 \textbf{Honest scope.}  This is non-adiabatic correction territory.
 The bare adiabatic curve set $\{\mu_\nu(R)\}$ ignores the
 $\partial_R$ acting on the parameterized angular wavefunctions
@@ -3905,9 +3911,12 @@ to Layer~2.
 \toprule
 Match & Projection(s) & Residual & Source & Notes \\
 \midrule
-He ground state (graph-native CI, $Z=2$) & Fock + Sturmian &
-$0.20\%$ at $n_\text{max}=9$ & S & Small-$Z$ graph-validity-boundary
-artifact (Sec.~2 of CLAUDE.md, v2.9.2 CUSP-2). \\
+He ground state (fixed-$k=Z$ hydrogenic CI, physical Hamiltonian) & Fock + Sturmian &
+$1.88\%$ at $n_\text{max}=7$ & S & Floor = missing continuum of the
+fixed-$k$ bound-state basis (above the HF limit).  The earlier
+``graph-native'' $0.20\%$ at $n_\text{max}=9$ and its ``small-$Z$
+graph-validity-boundary'' reading used a non-physical $+\tfrac{1}{16}$ [retracted 2026-09-25: he-graph-native-hop-headline]
+one-body graph hop and are withdrawn (2026-09-25; Paper~13). \\
 He ground state (2D variational + cusp) & Fock + spectral cusp &
 $0.022\%$ at $\ell_\text{max}=7$ & T & Track DI Sprint 1; cusp-corrected
 $0.004\%$ at $\ell_\text{max}=4$. \\
@@ -3917,9 +3926,9 @@ explicit r$_{12}$ correlation
 Track 1 sprint 2026-05-09 (\texttt{geovac/hylleraas\_r12.py}); cusp ratio
 $0.49$ vs Kato $0.5$ at $u=0$ (variationally captured); 3p reproduces
 Hylleraas 1929 $-2.90324$~Ha to $+0.79$~mHa.  Ground-state architecture
-\emph{categorically distinct} from graph-native CI (no $\kappa = -1/16$
-inter-shell coupling artifact, no small-$Z$ graph-validity-boundary
-limitation).  Excited states (2$^1$S, 2$^3$S, 2$^1$P) deferred --- single-$\alpha$
+\emph{categorically distinct} from the fixed-$k$ hydrogenic CI (explicit
+$r_{12}$ and a variational exponent; no reliance on a bound-state-only
+basis).  Excited states (2$^1$S, 2$^3$S, 2$^1$P) deferred --- single-$\alpha$
 trial inadequate, named structural extension is Hylleraas-Eckart
 double-zeta. \\
 LiH $R_{\text{eq}}$ (composed, PK) & Fock $\circ$ molecule-frame
@@ -4312,23 +4321,26 @@ of \S~\ref{sec:proj_breit_retardation}, not at the kernel level itself
 (closed-form $\mathbb{Q}[\log p]$ matrix elements verified;
 state-specific Bethe--Salpeter evaluation is the named structural
 extension). \\
-He $2{}^1S_0$--$2{}^3S_1$ exchange splitting $7183.3$~cm$^{-1}$ vs NIST
-$6421.47$~cm$^{-1}$ (sprint precision-catalogue 2026-05-08, ss-only
-sub-block at $n_\text{max}=11$; refreshed 2026-05-08 with fixed
-\texttt{compute\_rk\_float} evaluator, trajectory bit-identical to
-displayed 0.1~cm$^{-1}$ precision, largest shift 0.05~cm$^{-1}$) &
-graph-native CI $\circ$ Fock &
-$+11.86\%$ & B & \textbf{First multi-electron correlation-driven catalogue
+He $2{}^1S_0$--$2{}^3S_1$ exchange splitting $7520.5$~cm$^{-1}$ vs NIST
+$6421.47$~cm$^{-1}$ (fixed $k = Z$ hydrogenic CI with helium's physical
+Hamiltonian, ss-only sub-block at $n_\text{max}=8$; plateau
+$+17.18/+17.18/+17.15/+17.12\%$ at $n_\text{max}=5$--$8$; re-measured
+2026-09-25) &
+fixed-$k$ hydrogenic CI $\circ$ Fock &
+$+17.1\%$ & B & \textbf{First multi-electron correlation-driven catalogue
 entry.}  No relativistic, no QED, no cross-register content; pure $V_{ee}$
-exchange in the angular momentum eigenbasis.  Splitting is \emph{less}
-accurate than absolute energies ($4.4\times$ ratio: $\sim 12\%$ on splitting
-vs $\sim 2.7$--$2.8\%$ on individual states) -- common-mode errors on
-$2^3S$ and $2^1S$ have \emph{opposite} phase impact, no cancellation.
-\textbf{Variational bound violated for both excited states} (not for
-$1^1S$): graph $\kappa = -1/16$ adjacency adds constant inter-shell
-coupling regardless of orbital extent, overbinding loosely-bound
-Rydberg-like states.  Same mechanism as the small-$Z$
-graph-validity-boundary artifact ($Z_c \approx 1.84$, He at $Z=2$).
+exchange in the angular momentum eigenbasis.  All three states
+($1^1S$, $2^3S$, $2^1S$) lie above Drake's values (variational), and
+the splitting plateaus because the fixed-$k$ bound-state basis cannot
+relax the $2s$ orbital.  \emph{Corrected 2026-09-25:} the entry
+previously read $7183.3$~cm$^{-1}$, $+11.86\%$, at $n_\text{max}=11$,
+with both excited states ``variationally violated'' by a $\kappa$
+inter-shell over-binding tied to a small-$Z$ ``graph-validity [retracted 2026-09-25: he-graph-native-hop-headline]
+boundary'' ($Z_c \approx 1.84$).  Those numbers were the energies of a
+model with a non-physical $+\tfrac{1}{16}$ one-body graph hop (Paper~13);
+the variational violation and the boundary were properties of that hop,
+and the smaller residual was the hop partly offsetting basis
+incompleteness, not a better description of helium.
 Single-exponent hydrogenic basis at $k = Z = 2$ cannot represent
 $Z_\text{eff} \approx 1$ screening of 2s; multi-focal composition
 (Phase~C-W1c, May~2026) is the structural extension.  Sprint
@@ -4337,14 +4349,15 @@ precision-catalogue, 2026-05-08.
 Hylleraas explicit-correlation trial in
 \texttt{geovac/hylleraas\_r12.py} does NOT close this residual --- the
 trial gives splitting $\sim 19{,}900$~cm$^{-1}$ at $\omega_{\max}=5$
-($+209\%$ vs NIST), worse than the graph-native CI baseline.  The
+($+209\%$ vs NIST), worse than the fixed-$k$ hydrogenic CI baseline.  The
 2$^3$S excited state goes BELOW Drake by $\sim 50$~mHa due to incomplete
 representation of the asymmetric Z$_\text{eff}$ structure
 ($1s$ at $Z_a\!\approx\!2$, $2s$ at $Z_b\!\approx\!1$); a single-$\alpha$
 trial $e^{-\alpha s}$ cannot represent two distinct exponential decay
 scales without a $\beta t$-dependent factor.  The structural fix is
 the standard \textbf{Hylleraas--Eckart double-zeta} extension (1933);
-catalogue residual stays at $+11.86\%$ pending that extension.
+catalogue residual stays at $+17.1\%$ (physical Hamiltonian; the
+earlier $+11.86\%$ was the withdrawn hop model) pending that extension.
 Source: \texttt{debug/hylleraas\_r12\_track1\_memo.md} \S3. \\
 Self-consistent $r_Z$ global extraction (Sprint Calc-rZG, 2026-05-09;
 Layer-2 corrected 2026-05-09; extended-fit diagnostic 2026-05-09)
@@ -6204,7 +6217,13 @@ $n_{\max}$ & configs & $\omega$ (Ha) & $|\langle z\rangle|^2$ & $f_\text{length}
 exact & --- & 0.7799 & 0.177 & 0.27616 & 0 \\
 \bottomrule
 \end{tabular}
-\caption{Coulomb Sturmian convergence for He $2{}^1P \to 1{}^1S$
+\caption{\emph{Hop-augmented model, not helium} (corrected
+2026-09-25):\ these values were computed with a non-physical
+$+\tfrac{1}{16}$ one-body graph hop added to the Hamiltonian
+(Paper~13).  With helium's physical Hamiltonian in the same basis,
+$f = 0.214, 0.247, 0.252$ ($-22.5\%, -10.6\%, -8.6\%$) at
+$n_{\max} = 3, 4, 5$, with $E(2{}^1\!P) = -2.1206$~Ha above Drake
+(variational); see text.  Original caption:\ Coulomb Sturmian convergence for He $2{}^1P \to 1{}^1S$
 oscillator strength at single exponent $k_\text{orb} = Z = 2$.  Both
 $\omega$ and $|\langle z\rangle|^2$ plateau by $n_{\max} = 6$ at
 \emph{wrong limits} ($\omega$ low by $-12\%$, $|\langle z\rangle|^2$
@@ -6213,16 +6232,28 @@ high by $+82\%$).  Source memo:
 \label{tab:autopsy_he_oscillator}
 \end{table}
 
-Both $\omega$ and $|\langle z\rangle|^2$ \emph{plateau} by $n_{\max} = 6$ at
-\emph{wrong limits}: $\omega$ converges $-12\%$ low and $|\langle z\rangle|^2$
-converges $+82\%$ high.  The $2{}^1\!P$ state is variationally violated by
-$\sim 0.08$ Ha ($E(2{}^1\!P)_\text{GeoVac} = -2.204$ vs Drake $-2.124$ Ha) ---
-the same $\kappa$-induced over-binding mechanism documented for
-the He $2{}^1\!S - 2{}^3\!S$ splitting (small-$Z$
-graph-validity-boundary artifact, $Z_c \approx 1.84$; He at $Z = 2$
-is just above; cf.\ \S\ref{sec:offprecision} He singlet-triplet row).
+\textbf{Corrected 2026-09-25 (physical Hamiltonian).}  The table is the
+hop-augmented model.  Re-measured with helium's physical Hamiltonian
+(diagonal one-body operator, same basis, same driver; the driver
+reproduces the table's $f = 0.445$ at $n_{\max}=5$ with the hop
+switched on), the oscillator strength is
+$f = 1.553, 0.214, 0.247, 0.252$ at $n_{\max} = 2$--$5$
+($\omega = 0.851, 0.719, 0.722, 0.723$~Ha;
+$|\langle z\rangle|^2 = 0.913, 0.149, 0.171, 0.175$), i.e.\
+$-8.6\%$ at $n_{\max} = 5$ and approaching Drake from below, with
+$E(2{}^1\!P) = -2.1206$~Ha \emph{above} Drake's $-2.1238$ (variational).
+$n_{\max} \ge 6$ was not re-run (cost);\ the physical residual at the
+table's $n_{\max} = 7$ is owed.  The hop-model reading that follows is
+retained as the record and is withdrawn as a helium statement:\ in the
+model, both $\omega$ and $|\langle z\rangle|^2$ \emph{plateau} by
+$n_{\max} = 6$ at wrong limits ($\omega$ $-12\%$ low,
+$|\langle z\rangle|^2$ $+82\%$ high), and the $2{}^1\!P$ state is
+variationally violated by $\sim 0.08$ Ha ($-2.204$ vs Drake
+$-2.124$ Ha); that violation, and the ``small-$Z$
+graph-validity-boundary'' ($Z_c \approx 1.84$) it was attributed to, [retracted 2026-09-25: he-graph-native-hop-headline]
+are properties of the hop, not of helium.
 The angular (Wigner $3j$) and vector-photon
-(\S\ref{sec:proj_vector_photon}) projections are exact; the failure
+(\S\ref{sec:proj_vector_photon}) projections are exact; the residual
 is in the CI sector.
 
 \textbf{Structural reading.}  Sturmian's continuum-closing is a
@@ -6235,23 +6266,27 @@ overlap incorrectly even at large $n_{\max}$.  The natural extension is the
 chemistry; internal split-$Z$ for atomic excited states is a named
 follow-on track per Sprint Calc-He recommendation).
 
-The $+61\%$ residual at $n_{\max} = 7$ does not improve at higher $n_{\max}$
-within the single-exponent architecture and is therefore tagged error code
-\texttt{B} (basis architecture) in
-Table~\ref{tab:offprecision}.  This entry is a \emph{structural} negative
-result that complements the He $2{}^1\!S - 2{}^3\!S$ off-precision row:
-both expose the small-$Z$ graph-validity-boundary at He as the dominant
-limitation for excited-state precision, separable from the framework's
-clean closures on hydrogenic and ground-state observables.
+\emph{Corrected 2026-09-25.}  This paragraph read the model's $+61\%$
+plateau at $n_{\max} = 7$ as a structural negative exposing a ``small-$Z$
+graph-validity boundary at He''; both belong to the withdrawn hop [retracted 2026-09-25: he-graph-native-hop-headline]
+model.  With helium's physical Hamiltonian the residual is $-8.6\%$ at
+$n_{\max} = 5$ and still shrinking, so the single-focal-length reading
+above is at most a statement about the rate of convergence, not a wrong
+limit; the entry keeps error code \texttt{B} (basis architecture) in
+Table~\ref{tab:offprecision} pending the owed $n_{\max} \ge 6$
+physical re-measurement.
 
 \textbf{Internal multi-focal Phase D production result (May 9 follow-on).}
 The extended-angular-CI architecture in
 \texttt{geovac/internal\_multifocal.py} (~1521 lines, 28 fast tests $+$ 2
 slow, 191/191 zero regression) lands at $f = 0.286$ ($+3.4\%$ vs Drake
 $0.276$) on physically-motivated multi-exponent panels at well-conditioned
-$\mathrm{cond}(S) = 400$.  The $E(2{}^1\!P)$ state is variationally
-violated by $\sim 0.08$~Ha (3.8\%) due to $\kappa$-induced inter-shell
-over-binding, and the variational floor sits at $+14\%$.  An exponent
+$\mathrm{cond}(S) = 400$.  (An earlier sentence here attributed a
+$\sim 0.08$~Ha variational violation of $E(2{}^1\!P)$ to
+``$\kappa$-induced inter-shell over-binding''; that $0.08$~Ha is the
+hop-model figure of the table above, and \texttt{internal\_multifocal}
+does not apply the $\kappa$ hop, so the attribution is withdrawn,
+2026-09-25.)  The variational floor sits at $+14\%$.  An exponent
 sweet spot ($E1$ panel) gives $-0.88\%$ but is NOT robust ($f$ varies
 $0.06$--$0.44$ across plausible exponent panels).  Sub-1\% accuracy
 requires explicit $r_{12}$ correlation (Hylleraas) on a P-state basis.
@@ -6304,8 +6339,10 @@ The closure validates two structural claims:
 distinct effective $Z$'s) is verified operationally at the $2^1P$
 transition level, not just at the angular-content level (\S\ref{sec:proj_bipolar_drake});
 (ii) the \textbf{2-electron contact-density cliff} identified in the
-2026-05-09 multi-track sprint (this autopsy at $+61\%$ with graph-native
-CI; the He $2^1S$--$2^3S$ splitting at $+11.9\%$) is closed at Drake-class
+2026-05-09 multi-track sprint (this autopsy, $-8.6\%$ at $n_{\max}=5$
+with the physical fixed-$k$ CI; the He $2^1S$--$2^3S$ splitting at
+$+17.1\%$; the earlier $+61\%$ and $+11.9\%$ were the withdrawn hop
+model) is closed at Drake-class
 accuracy by Hylleraas--Eckart full Schwartz on the 2-electron problem.
 
 \textbf{Wigner--Eckart $f$-formula normalization.}  For $L=0 \to L'=1$
@@ -7298,32 +7335,33 @@ substrate value $+$ Layer-2 correction.''
 \centering\small
 \caption{Three-architecture framework reduction on the He
 $2\,^{1}S - 2\,^{3}S$ splitting.  Single-$\alpha$ architectures
-(A, B) fail by factors $1.1$ and $3.1$ respectively; double-$\alpha$
+(A, B) fail by factors $1.17$ and $3.1$ respectively; double-$\alpha$
 (C) closes to $1.4\%$ at sprint-scale basis truncation.}
 \label{tab:autopsy_he_singlet_triplet}
 \begin{tabular}{clllr}
 \toprule
 \# & Architecture & Basis & $\Delta E$ (cm$^{-1}$) & Error vs NIST \\
 \midrule
-A & Graph-native CI, single-$\alpha$ ($k = Z = 2$, $\kappa = -1/16$) at $n_{\max} = 8$ & $1{,}218$ configs & $7{,}183$ & $+11.86\%$ \\
+A & Fixed-$k$ hydrogenic CI, single-$\alpha$ ($k = Z = 2$, physical Hamiltonian), ss sub-block at $n_{\max} = 8$ & $36$ configs & $7{,}521$ & $+17.1\%$ \\
 B & Hylleraas $r_{12}$ single-$\alpha$ ($\zeta = Z = 2$ for both 1s and 2s) & $\omega = 5$ & $\sim 19{,}900$ & $+209\%$ \\
 C & Hylleraas--Eckart double-$\alpha$ ($\zeta_1 = 2$, $\zeta_2 \approx 1$; Eckart 1933) & Variational & $\sim 6{,}331$ & $-1.4\%$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Walking the architectures.}  Architecture A (graph-native CI
-with $\kappa = -1/16$ inter-shell, exact Slater integrals from
-\texttt{hypergeometric\_slater}, single exponent $k = Z = 2$):\
-$\kappa$ inter-shell coupling adds constant amplitude between 1s
-and 2s regardless of orbital extent.  For excited He
-($1s, 2s$), $\kappa$ overbinds the diffuse 2s, breaking the
-$K(1s,2s)$ computation.  The $2^{3}S$ state is variationally
-violated at this architecture (CI eigenvalue below exact).
-Same mechanism as the small-$Z$ graph-validity-boundary artifact
-($Z_c \approx 1.84$, He at $Z = 2$ just above), specifically for
-excited states where the radial extent matters.  Net effect on the
-splitting:\ $+11.86\%$ overestimate.
+\textbf{Walking the architectures.}  Architecture A (fixed-$k$
+hydrogenic CI with helium's physical one-body operator, exact Slater
+integrals from \texttt{hypergeometric\_slater}, single exponent
+$k = Z = 2$):\ all three states stay above exact (variational), but a
+bound-state set at one exponent cannot relax the $2s$ toward
+$Z_{\mathrm{eff}} \approx 1$, so the splitting plateaus at $+17.1\%$
+($n_{\max} = 5$--$8$).  \emph{Corrected 2026-09-25:} row~A previously
+read $7{,}183$~cm$^{-1}$, $+11.86\%$, for a ``graph-native'' CI whose
+one-body operator added a non-physical $+\tfrac{1}{16}$ hop between
+shells; the $2^3S$ variational violation and the ``small-$Z$
+graph-validity boundary'' ($Z_c \approx 1.84$) invoked here were [retracted 2026-09-25: he-graph-native-hop-headline]
+properties of that hop, which is withdrawn as a helium Hamiltonian
+(Paper~13).
 
 Architecture B (Hylleraas $r_{12}$ single-$\alpha$, $\zeta = Z = 2$
 for both 1s and 2s, no $\kappa$, explicit $r_{12}$):\ the 2s orbital
@@ -10263,8 +10301,9 @@ Born exactly on, and only on, the \emph{flat locus} (states of
 uniform amplitude over their support; for amplitudes
 $\propto(1,2,3,4)$ on a 4-fold multiplet the deviation is the exact
 rational $1/3$), (ii)~it diverges at total-variation distance $0.86$
-from the He graph-native CI ground state ($n_{\max}=3$,
-zero-parameter, exact Slater integrals; $90.8\%$ of the Born weight
+from the He fixed-$k$ hydrogenic CI ground state ($n_{\max}=3$,
+zero-parameter, physical diagonal one-body operator, exact Slater
+integrals; $90.8\%$ of the Born weight
 sits on the $1s^2$ configuration, against $1/N_{\rm supp}$ uniform),
 and (iii)~the flat locus is dynamically unstable under the graph's
 own Hamiltonian (TV grows as $t^2$; measured small-$t$ exponent

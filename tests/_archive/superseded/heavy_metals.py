@@ -40,10 +40,9 @@ if sys.stdout.encoding != 'utf-8':
 
 from geovac import (
     AtomicSolver,
-    MoleculeHamiltonian,
     UNIVERSAL_KINETIC_SCALE,
-    CALIBRATED_KINETIC_SCALE,
 )
+from geovac._archive.superseded.hamiltonian import MoleculeHamiltonian, CALIBRATED_KINETIC_SCALE
 
 # Physical constants
 ALPHA = 1.0 / 137.035999084

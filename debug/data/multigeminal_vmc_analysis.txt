@@ -1,0 +1,49 @@
+files: 8  total blocks 200  labels [np.str_('Psi0'), np.str_('linexp0.25'), np.str_('linexp0.5'), np.str_('linexp1.0'), np.str_('linexp2.0'), np.str_('exp0.25'), np.str_('exp0.5'), np.str_('exp1.0'), np.str_('exp2.0'), np.str_('F2(linexp0.5)')]
+
+V0: E(Psi0) = -8.025127 +/- 0.000503  (E_trunc -8.025184)
+V0: E_k1(linexp0.5) = -8.042439 +/- 0.000301  analytic -8.042181  d = -0.258 mHa = -0.86 sigma
+V0: c = +0.22327 +/- 0.00044  analytic +0.22159
+per-seed k1:
+   mg_lm_s1.npz: -8.041520 +/- 0.000678  (nsamp 1000)
+   mg_lm_s2.npz: -8.042140 +/- 0.000808  (nsamp 1000)
+   mg_lm_s3.npz: -8.042543 +/- 0.000883  (nsamp 1000)
+   mg_lm_s4.npz: -8.043296 +/- 0.000945  (nsamp 1000)
+   mg_lm_s5.npz: -8.042106 +/- 0.000663  (nsamp 1000)
+   mg_lm_s6.npz: -8.042682 +/- 0.000896  (nsamp 1000)
+   mg_lm_s7.npz: -8.042831 +/- 0.000918  (nsamp 1000)
+   mg_lm_s8.npz: -8.042426 +/- 0.001031  (nsamp 1000)
+   inv-var -8.042323 +/- 0.000292  chi2/dof = 3.16/7
+
+Best subsets per k (geminal pool, 8 functions):
+  k=1: [np.str_('exp2.0')]  E = -8.047812 +/- 0.000295  dE vs k1(lx0.5) = -5.373 +/- 0.217 mHa
+  k=2: [np.str_('linexp0.25'), np.str_('linexp1.0')]  E = -8.049007 +/- 0.000277  dE vs k1(lx0.5) = -6.568 +/- 0.140 mHa
+  k=3: [np.str_('linexp0.5'), np.str_('linexp2.0'), np.str_('exp0.5')]  E = -8.049125 +/- 0.000280  dE vs k1(lx0.5) = -6.686 +/- 0.174 mHa
+  k=4: [np.str_('linexp2.0'), np.str_('exp0.25'), np.str_('exp1.0'), np.str_('exp2.0')]  E = -8.049177 +/- 0.000281  dE vs k1(lx0.5) = -6.738 +/- 0.184 mHa
+
+Nested sequences:
+  linexp ladder k=1 [np.str_('linexp0.5')]: E = -8.042439 +/- 0.000301  dE = +0.000 +/- 0.000 mHa
+  linexp ladder k=2 [np.str_('linexp0.5'), np.str_('linexp2.0')]: E = -8.042670 +/- 0.000327  dE = -0.231 +/- 0.064 mHa
+  linexp ladder k=3 [np.str_('linexp0.5'), np.str_('linexp2.0'), np.str_('linexp0.25')]: E = -8.049032 +/- 0.000277  dE = -6.593 +/- 0.173 mHa
+  linexp ladder k=4 [np.str_('linexp0.5'), np.str_('linexp2.0'), np.str_('linexp0.25'), np.str_('linexp1.0')]: E = -8.049121 +/- 0.000277  dE = -6.682 +/- 0.165 mHa
+  mixed k=1 [np.str_('linexp0.5')]: E = -8.042439 +/- 0.000301  dE = +0.000 +/- 0.000 mHa
+  mixed k=2 [np.str_('linexp0.5'), np.str_('exp2.0')]: E = -8.048133 +/- 0.000288  dE = -5.694 +/- 0.195 mHa
+  mixed k=3 [np.str_('linexp0.5'), np.str_('exp2.0'), np.str_('linexp0.25')]: E = -8.049061 +/- 0.000278  dE = -6.622 +/- 0.153 mHa
+  mixed k=4 [np.str_('linexp0.5'), np.str_('exp2.0'), np.str_('linexp0.25'), np.str_('exp1.0')]: E = -8.049113 +/- 0.000277  dE = -6.674 +/- 0.161 mHa
+  all 8 geminals: E = -8.049323 +/- 0.000277  dE = -6.884 +/- 0.176 mHa
+
+Quadratic probe {Psi0, F, F^2} (linexp0.5): E = -8.042452 +/- 0.000301  dE = -0.013 +/- 0.008 mHa
+All 8 + F^2: E = -8.049354 +/- 0.000276  dE = -6.916 +/- 0.178 mHa
+
+Pade (same trunc-1e-2 reference):
+  gamma=1.0: -8.042104 +/- 0.000490  (n=1, chi2/dof 0.00/0)
+  gamma=1.5: -8.047286 +/- 0.000249  (n=4, chi2/dof 2.63/3)
+  gamma=2.0: -8.046795 +/- 0.000515  (n=1, chi2/dof 0.00/0)
+
+Gap k1 -> Pade(gamma=1.5): 4.848 +/- 0.391 mHa
+  k=1: closed 110.8 +/- 10.0 %
+  k=2: closed 135.5 +/- 11.3 %
+  k=3: closed 137.9 +/- 11.7 %
+  k=4: closed 139.0 +/- 11.8 %
+  F,F^2: closed 0.3 %
+  all8: closed 142.0 %
+  all8+F^2: closed 142.7 %

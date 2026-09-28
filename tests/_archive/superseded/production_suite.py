@@ -29,15 +29,14 @@ if sys.platform == 'win32':
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # Add parent directory to path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
 from geovac import (
-    MoleculeHamiltonian,
     GeometricLattice,
     UNIVERSAL_KINETIC_SCALE,
-    CALIBRATED_KINETIC_SCALE,
     EXPERIMENTAL_HELIUM_ENERGY
 )
+from geovac._archive.superseded.hamiltonian import MoleculeHamiltonian, CALIBRATED_KINETIC_SCALE
 
 
 # ==============================================================================

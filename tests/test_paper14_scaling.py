@@ -9,23 +9,25 @@ These tests recompute each exponent from the live He JW encoding over n_max=2,3,
 (Q=10,28,60) and assert it matches Paper 14's published value within a band that
 (a) brackets the published full-range (n_max=2..5) figure and the tractable 3-point
 subset, and (b) is tight enough to catch a broken encoder (which would push N_Pauli
-toward the Gaussian ~Q^4 or the naive ~Q^2). Paper 14 published values, CORRECTED 2026-08-30 under the exact
-global-M_L ERI rule (fit over n_max=2..5, Q=10..110):
-    N_Pauli ~ Q^3.773 (R^2 1.0000, 4 pts)
-    lambda  ~ Q^1.774 (R^2 0.9997, 4 pts)
-    QWC     ~ Q^4.013 (R^2 0.9976, 3 pts -- the Q=110 point carries 2.4M
+toward the Gaussian ~Q^4 or the naive ~Q^2). Paper 14 published values, exact
+global-M_L ERI rule AND helium's physical (diagonal) one-body operator,
+re-measured 2026-09-25 (fit over n_max=2..5, Q=10..110):
+    N_Pauli ~ Q^3.785 (R^2 1.0000, 4 pts)
+    lambda  ~ Q^1.784 (R^2 0.9997, 4 pts)
+    QWC     ~ Q^4.049 (R^2 0.9972, 3 pts -- the Q=110 point carries 2.4M
               Pauli terms against an O(N^2) grouping and is infeasible)
-Retired pair-diagonal values were 3.15 / 1.69 / 3.36.  Note the QWC exponent
-now sits ABOVE the Pauli exponent and inside the Gaussian O(Q^4-5) band, so
-no measurement-group scaling advantage is claimed.
+Retired: 3.773 / 1.774 / 4.013 (the +1/16 graph-hop 'hybrid' h1,
+2026-08-30..09-25); 3.15 / 1.69 / 3.36 (pair-diagonal sign error).  The QWC
+exponent sits ABOVE the Pauli exponent and inside the Gaussian O(Q^4-5)
+band, so no measurement-group scaling advantage is claimed.
 Recomputed 3-point (n_max=2..4) subset, which is what these tests run:
-N_Pauli ~ Q^3.779, 1-norm ~ Q^1.792, QWC ~ Q^4.013
-(see debug/data/exact_rule_lambda_qwc.json).  The n_max=5 point (Q=110) is
-omitted here: its build alone is ~28 min.
+N_Pauli ~ Q^3.795, 1-norm ~ Q^1.802, QWC ~ Q^4.049
+(see debug/data/library_he_fix.jsonl, debug/library_he_fits.py).  The
+n_max=5 point (Q=110) is omitted here: its build alone is ~28-65 min.
 
 All marked slow.  MEASURED runtime of the four slow tests: ~69 min
 (4175 s and 4144 s on two independent runs), dominated by the
-O(N^2) QWC grouping at n_max=4 (250,403 terms, 86,224 groups).  The
+O(N^2) QWC grouping at n_max=4 (250,323 terms, 86,249 groups).  The
 earlier '~20 s' estimate predated the exact-rule correction, which
 multiplied the term counts several-fold.  A fast default-run pin on
 the two cheapest points is provided separately below.
@@ -50,7 +52,7 @@ def _he_encoders(nmax_values=NMAX):
     out = []
     for nmax in nmax_values:
         li = LatticeIndex(n_electrons=2, max_n=nmax, nuclear_charge=2,
-                          vee_method='slater_full', h1_method='hybrid')
+                          vee_method='slater_full', h1_method='exact')
         out.append(JordanWignerEncoder(li))
     return out
 
@@ -76,17 +78,20 @@ def test_small_basis_points_are_pinned():
     executes.  These two points are the inputs the fit is built from: if
     the encoder regresses, they move and this fires in seconds.
 
-    MEASURED 2026-08-30 under the exact ERI rule.  Retired pair-diagonal
-    values were N=120 / lambda=11.29 at Q=10 and N=2,659 / lambda=78.36 at
-    Q=28, so the pins also lock out a silent revert to the retired rule.
+    MEASURED 2026-09-25 with helium's PHYSICAL one-body operator
+    (h1_method='exact'; debug/library_he_fix.py, cross-checked by the
+    composed builder on the same He spec).  Retired values the pins lock
+    out: 287 / 11.175 and 14,078 / 74.207 (the +1/16 graph-hop 'hybrid'
+    h1, 2026-08-30..09-25); 120 / 11.29 and 2,659 / 78.36 (pair-diagonal
+    ERI sign error).
     """
     import warnings
-    expected = {2: (10, 287, 11.175), 3: (28, 14078, 74.207)}
+    expected = {2: (10, 279, 10.8005), 3: (28, 14046, 72.5824)}
     for nmax, (q, n_ref, lam_ref) in expected.items():
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             li = LatticeIndex(n_electrons=2, max_n=nmax, nuclear_charge=2,
-                              vee_method='slater_full', h1_method='hybrid')
+                              vee_method='slater_full', h1_method='exact')
         enc = JordanWignerEncoder(li)
         n_pauli = sum(1 for k in enc.build_qubit_operator().terms if k)
         lam = _l1_nonid(enc.build_qubit_operator())

@@ -1006,12 +1006,23 @@ def extended_convergence_table(
 # (the ~0.075% floor is NOT from basis mismatch).
 # ============================================================================
 
-def _build_graph_h1(Z: int, n_max: int) -> Tuple[np.ndarray, List[Tuple[int, int, int]]]:
-    """Build the hybrid one-body matrix: exact diagonal + graph off-diagonal.
+def _build_graph_h1(
+    Z: int, n_max: int, include_hop: bool = True,
+) -> Tuple[np.ndarray, List[Tuple[int, int, int]]]:
+    """Build the one-body matrix in the k=Z hydrogenic (n,l,m) basis.
 
     Diagonal: -Z^2/(2n^2) for each orbital (exact hydrogenic eigenvalue).
-    Off-diagonal: kappa * (-A[i,j]) where A is the graph adjacency matrix
-    and kappa = -1/16 (universal topological constant).
+    Off-diagonal (only if ``include_hop``): kappa * (-A[i,j]) = +1/16 on
+    every edge of the GeometricLattice adjacency A.
+
+    WARNING (2026-09-25): the off-diagonal "hop" is NOT part of the atom's
+    Hamiltonian.  In the k=Z hydrogenic basis T + V_ne is exactly diagonal,
+    so ``include_hop=False`` gives the PHYSICAL one-body operator; the
+    default ``include_hop=True`` (kept bit-identical for reproducibility of
+    the published "graph-native" numbers) defines a hop-augmented MODEL
+    whose energy is not a variational bound on the atom (it lowers He by
+    ~49 mHa, more than He's correlation energy).  See Paper 13 Sec.
+    Conclusion and debug/he_graph_regression.py.
 
     Parameters
     ----------
@@ -1019,6 +1030,8 @@ def _build_graph_h1(Z: int, n_max: int) -> Tuple[np.ndarray, List[Tuple[int, int
         Nuclear charge.
     n_max : int
         Maximum principal quantum number.
+    include_hop : bool
+        Add the (1/16)*A off-diagonal hop (default True = legacy model).
 
     Returns
     -------
@@ -1037,6 +1050,9 @@ def _build_graph_h1(Z: int, n_max: int) -> Tuple[np.ndarray, List[Tuple[int, int
     h1 = np.zeros((n_spatial, n_spatial))
     for i, (n, l, m) in enumerate(orbitals):
         h1[i, i] = -Z * Z / (2.0 * n * n)
+
+    if not include_hop:
+        return h1, orbitals
 
     # Graph off-diagonal: kappa * (-A)
     # kappa = -1/16, so kappa * (-A[i,j]) = (1/16) * A[i,j]
@@ -1061,11 +1077,19 @@ def build_graph_native_fci(
     m_total: int = 0,
     spin: str = 'singlet',
     subblock: Optional[Tuple[int, int]] = None,
+    h1_method: str = 'hybrid',
 ) -> np.ndarray:
     """Build the graph-native two-electron FCI matrix.
 
-    Uses hybrid h1 (exact diagonal + graph Laplacian off-diagonal)
-    with analytical Slater V_ee integrals at k=Z. No free parameters.
+    Uses h1 in the k=Z hydrogenic basis with analytical Slater V_ee
+    integrals at k=Z. No free parameters.
+
+    ``h1_method='hybrid'`` (default, legacy, bit-identical): exact diagonal
+    PLUS a (1/16)*adjacency hop that is NOT part of the atom's Hamiltonian
+    -- a hop-augmented model, not a variational bound on the atom.
+    ``h1_method='exact'``: the physical one-body operator (diagonal
+    -Z^2/2n^2 only); this is the atom's Hamiltonian in this basis.
+    (Naming matches LatticeIndex h1_method.)  See _build_graph_h1.
 
     Parameters
     ----------
@@ -1104,8 +1128,13 @@ def build_graph_native_fci(
     """
     if spin not in ('singlet', 'triplet'):
         raise ValueError(f"spin must be 'singlet' or 'triplet', got '{spin}'")
+    if h1_method not in ('hybrid', 'exact'):
+        raise ValueError(f"h1_method must be 'hybrid' or 'exact', got '{h1_method}'")
 
-    h1_mat, orbitals = _build_graph_h1(Z, n_max)
+    if h1_method == 'hybrid':
+        h1_mat, orbitals = _build_graph_h1(Z, n_max)
+    else:
+        h1_mat, orbitals = _build_graph_h1(Z, n_max, include_hop=False)
     n_spatial = len(orbitals)
 
     # Optional sub-block restriction: only pairs whose l-multiset matches.
@@ -1214,8 +1243,19 @@ def build_graph_consistent_fci(
     and two-body operators are expressed consistently.  This verifies
     that FCI is invariant under unitary orbital rotations: the
     eigenvalues should be IDENTICAL to build_graph_native_fci (to
-    machine precision), proving the ~0.075% floor is NOT from basis
-    mismatch but from cusp/truncation.
+    machine precision).  This is an orbital-rotation invariance check
+    only: it holds for any one-body operator and says nothing about
+    which one-body operator is physical or where the convergence floor
+    comes from.
+
+    NOTE (2026-09-25): this builder uses the legacy hop-augmented h1
+    (``_build_graph_h1`` default, include_hop=True), so its energies are
+    those of the hop model, not of the atom.  An earlier version of this
+    docstring read the invariance as "proving the ~0.075% floor is NOT
+    from basis mismatch but from cusp/truncation"; that reading is
+    withdrawn -- the ~0.2% "graph-native" He figures were the hop model,
+    and with the physical (diagonal) h1 the fixed-k=Z basis sits 1.88%
+    above exact at n_max=7, a continuum-incompleteness floor (Paper 13).
 
     The h1 matrix is block-diagonalized by (l,m) sector to avoid
     mixing degenerate eigenstates across sectors (which numpy's eigh

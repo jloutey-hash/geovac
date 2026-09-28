@@ -36,13 +36,18 @@ in the angular momentum eigenbasis---the basis whose orbitals are
 products of hydrogenic radial functions and spherical harmonics,
 labeled by quantum numbers $(n, l, m)$.  Four computational results
 are presented.
-First, energy-entanglement decoupling: the off-diagonal one-body
-Hamiltonian (graph Laplacian topology, coupling constant
-$\kappa = -1/16$) contributes $10$--$39\%$ of the correlation
-energy but less than $0.2\%$ of the entanglement entropy; the
-off-diagonal electron repulsion contributes effectively $100\%$ of the
-entanglement.  Entanglement entropy scales as $S \sim Z^{-2.56}$
-across He-like ions.
+First, the location of correlation: at the fixed exponent $k=Z$ the
+one-body Hamiltonian of a He-like ion is exactly diagonal in this basis,
+so the off-diagonal electron repulsion carries all of the correlation
+energy and all of the entanglement, and the entanglement entropy scales
+as $S \sim Z^{-2.52}$ across He-like ions.  (An earlier version assigned
+$10$--$39\%$ of the correlation energy to a ``graph Laplacian'' [retracted 2026-09-25: he-graph-native-hop-headline]
+off-diagonal one-body term; that term is not part of the ion's
+Hamiltonian and the attribution is withdrawn, Sec.~\ref{sec:threelayer}.
+Added to the Hamiltonian as a model perturbation it does illustrate the
+one-body entanglement-inertness theorem of Paper~27: it moves the model
+energy by $10$--$39\%$ of the correlation energy while generating [retracted 2026-09-25: he-graph-native-hop-headline]
+$<0.2\%$ of the entanglement.)
 Second, basis-intrinsic sparsity: among orbital bases for systems
 with spherical symmetry, the angular momentum eigenbasis is the
 essentially unique basis producing sparse electron repulsion integrals (ERIs) (up to $(l,m)$-label-preserving rotations; generic angular-mixing rotations fill them).
@@ -67,7 +72,7 @@ In the composed molecular architecture, per-block entanglement is
 $R$-independent, with core/bond entropy ratios of $40\times$ at
 matched qubit count.
 These results establish that the angular momentum eigenbasis
-decouples one-body energy transport from two-body entanglement,
+isolates correlation and entanglement in the two-body $V_{ee}$,
 and that the Gaunt sparsity of the GeoVac qubit Hamiltonians ---
 whose Pauli count is exactly linear in the qubit count at fixed basis
 --- is a direct consequence of this basis choice.
@@ -113,10 +118,9 @@ Two questions about this basis remain open.  First, is the sparsity
 fragile or robust?  Does an infinitesimal change of basis destroy
 it, or does it degrade smoothly?  Second, what is the entanglement
 structure of the ground state in this basis?  The angular momentum
-eigenbasis diagonalizes the one-body Hamiltonian (up to a known
-off-diagonal coupling $\kappa = -1/16$ from the graph
-Laplacian~\cite{GeoVac_Paper7}); does this one-body near-diagonality
-translate into a simple entanglement pattern?
+eigenbasis at $k = Z$ diagonalizes the one-body Hamiltonian
+exactly; does this one-body diagonality translate into a simple
+entanglement pattern?
 
 This paper answers both questions through systematic computation
 across He-like ions ($Z = 2$--$10$) and first-row atoms
@@ -125,12 +129,13 @@ The results establish four structural properties of the angular
 momentum eigenbasis that are relevant to quantum simulation
 resource estimation.
 
-\emph{Provenance (register tiers).}  The energy--entanglement
-decoupling, the $S\sim Z^{-2.56}$ scaling, the
+\emph{Provenance (register tiers).}  The model-Hamiltonian
+energy--entanglement decoupling, the $S\sim Z^{-2.52}$ scaling, the
 $17.1\%\!\to\!100\%$ basis-intrinsic sparsity transition (with a
 $Z$-independent nonzero ERI count), the hub-migration pattern, the
 core--valence factorization thresholds, the $Z^{-0.85}$ decay of the
-off-diagonal energy fraction (\S\ref{sec:threelayer}), and the
+model hop's energy fraction (\S\ref{sec:threelayer}; a property of the
+model Hamiltonian, not of the ion), and the
 composed per-block $R$-independence with its $\approx 40\times$
 core/bond ratio are MEASURED (computed) results; the $Z \geq 7$
 core--valence vanishing at $n_{\max} = 2$ is stronger --- a derivation
@@ -139,161 +144,146 @@ entropy is the von Neumann entropy of the normalized one-body reduced
 density matrix throughout.
 
 %=================================================================
-\section{The Three-Layer Decomposition}
+\section{The Layer Decomposition}
 \label{sec:threelayer}
 %=================================================================
 
-\subsection{Hamiltonian structure in the graph basis}
+\subsection{Hamiltonian structure in the angular momentum basis}
 
-The full Hamiltonian for an $N$-electron atom in the angular
-momentum eigenbasis decomposes as
+The Hamiltonian of a He-like ion in the hydrogenic angular momentum
+eigenbasis at orbital exponent $k = Z$ decomposes as
 \begin{equation}
-  H = H_{\text{diag}} + H_{\text{h1,off}} + H_{\text{Vee,off}},
+  H = H_{\text{diag}} + H_{\text{Vee,off}},
   \label{eq:decomposition}
 \end{equation}
-where $H_{\text{diag}}$ contains the diagonal one-body energies
-$\varepsilon_{nlm}$ and the diagonal (Hartree) electron repulsion,
-$H_{\text{h1,off}}$ contains the off-diagonal one-body matrix
-elements from the graph Laplacian (with coupling constant
-$\kappa = -1/16$), and $H_{\text{Vee,off}}$ contains the
-off-diagonal electron repulsion integrals (exchange and
-correlation).
+where $H_{\text{diag}}$ contains the one-body energies
+$\varepsilon_{nlm} = -Z^2/2n^2$ and the diagonal (Hartree) electron
+repulsion, and $H_{\text{Vee,off}}$ contains the off-diagonal electron
+repulsion integrals.  There is no off-diagonal one-body term:\ the
+orbitals are eigenfunctions of $-\tfrac12\nabla^2 - Z/r$, so
+$T + V_{ne}$ is exactly diagonal.
 
-These three layers correspond to three physically distinct
-contributions:
+\textbf{[CORRECTED 2026-09-25.]}  Earlier versions of this paper used
+a three-layer decomposition
+$H = H_{\text{diag}} + H_{\text{h1,off}} + H_{\text{Vee,off}}$ in which
+$H_{\text{h1,off}}$ was a constant hop $+\tfrac{1}{16}$ along every
+edge of the GeoVac lattice graph (``graph Laplacian topology,
+$\kappa = -1/16$''), and reported that this ``topological layer''
+carries $10$--$39\%$ of the correlation energy.  That term is not part [retracted 2026-09-25: he-graph-native-hop-headline]
+of the ion's Hamiltonian---it has no derivation in this basis, where the
+physical one-body matrix has no off-diagonal elements---so the
+attribution is withdrawn.  The three-layer calculation remains a
+correct statement about the \emph{hop-augmented model}
+$H_{\text{diag}} + H_{\text{hop}} + H_{\text{Vee,off}}$, and it is kept
+below in that role:\ a one-body perturbation that visibly moves the
+model energy while generating essentially no entanglement, which is the
+free-fermion theorem of Paper~27~\cite{GeoVac_Paper27} made concrete.
+
+The physically meaningful layers are:
 \begin{enumerate}
 \item \textbf{Rational layer} ($H_{\text{diag}}$): diagonal
   energies and mean-field repulsion.  Produces no orbital
   entanglement---the ground state is a single Slater determinant
   with zero entanglement entropy.
-\item \textbf{Topological layer} ($H_{\text{diag}} +
-  H_{\text{h1,off}}$): adds the graph Laplacian inter-shell
-  couplings.  These are one-body operators that redistribute
-  amplitude among orbitals but, being separable, generate
-  negligible entanglement.
 \item \textbf{Correlation layer} ($H_{\text{diag}} +
-  H_{\text{h1,off}} + H_{\text{Vee,off}}$): adds the off-diagonal
+  H_{\text{Vee,off}}$): adds the off-diagonal
   electron repulsion.  This is the irreducible two-body interaction
-  that generates all entanglement in the ground state.
+  that generates all correlation energy and all entanglement in the
+  ground state.
 \end{enumerate}
 
 The decomposition is specific to the angular momentum eigenbasis.
 In a generic orbital basis, the one-body Hamiltonian has dense
-off-diagonal elements, and the three layers are not separable.
+off-diagonal elements, and the layers are not separable.
 
-\subsection{Energy-entanglement decoupling}
+\subsection{Correlation energy and entanglement}
 
 We compute the ground-state energy and the entanglement entropy
 $S = -\sum_i (n_i/N)\log(n_i/N)$ --- the von Neumann entropy of the
 normalized one-body reduced density matrix (equivalently the
 natural-orbital occupation entropy, with $n_i$ the 1-RDM eigenvalues
-and $N$ the electron number) --- for each layer by exact
-diagonalization (full configuration interaction) of He-like ions at
-$n_{\max} = 4$.  This entropy is a genuine correlation measure:\ it
-vanishes exactly when the ground state is a single Slater determinant
-and is nonzero only through the two-body interaction, which is the
-property used throughout this paper.
+and $N$ the electron number) --- by exact diagonalization (full
+configuration interaction) of He-like ions at $n_{\max} = 4$.  This
+entropy is a genuine correlation measure:\ it vanishes exactly when the
+ground state is a single Slater determinant and is nonzero only
+through the two-body interaction, which is the property used
+throughout this paper.
 
-Table~\ref{tab:decoupling} presents the fractional contribution
-of each off-diagonal layer to the total correlation energy
-$E_{\text{corr}} = E_{\text{FCI}} - E_{\text{diag}}$ and to the
-total entanglement entropy.
+Table~\ref{tab:decoupling} gives, for the physical Hamiltonian, the
+fraction $f_E^{\text{Vee}}$ of the correlation energy
+$E_{\text{corr}} = E_{\text{FCI}} - E_{1s^2}$ carried by
+$\langle H_{\text{Vee,off}}\rangle$ and the entropy $S$; for comparison
+it also gives the hop-augmented model's one-body fractions.
 
 \begin{table}
-\caption{Energy-entanglement decoupling in He-like ions at
-$n_{\max} = 4$.  $f_E^{\text{h1}}$ and $f_E^{\text{Vee}}$:
-fractional contribution of each off-diagonal layer to the
-correlation energy (note: fractions sum to values exceeding 1.0
-because the layers are not orthogonal projections of the
-correlation energy; cross-terms between the layers contribute
-positively).  $f_S^{\text{h1}}$ and $f_S^{\text{Vee}}$:
-fractional contribution to the entanglement entropy.
-$S_{\text{total}}$: total entanglement entropy (von Neumann entropy of
-the normalized 1-RDM) in nats.
+\caption{Correlation and entanglement in He-like ions at
+$n_{\max} = 4$ (corrected 2026-09-25).  Physical Hamiltonian:\
+$f_E^{\text{h1}} \equiv 0$ and $f_S^{\text{Vee}} \equiv 1$ identically;
+$f_E^{\text{Vee}} = \langle H_{\text{Vee,off}}\rangle / E_{\text{corr}}$
+exceeds 1 because the diagonal repulsion rises as the ground state
+leaves $1s^2$; $S$ is the von Neumann entropy of the normalized 1-RDM
+in nats.  Hop-augmented model (not the ion):\ the fractions of the
+model's correlation energy and entropy carried by the added one-body
+hop, $f_E^{\text{hop}}$ and $f_S^{\text{hop}}$.
 \label{tab:decoupling}}
 \begin{ruledtabular}
-\begin{tabular}{cddddd}
-$Z$ & \multicolumn{1}{c}{$f_E^{\text{h1}}$}
-    & \multicolumn{1}{c}{$f_E^{\text{Vee}}$}
-    & \multicolumn{1}{c}{$f_S^{\text{h1}}$}
-    & \multicolumn{1}{c}{$f_S^{\text{Vee}}$}
-    & \multicolumn{1}{c}{$S$ (nats)} \\
+\begin{tabular}{cdddd}
+ & \multicolumn{2}{c}{physical Hamiltonian}
+ & \multicolumn{2}{c}{hop-augmented model} \\
+$Z$ & \multicolumn{1}{c}{$f_E^{\text{Vee}}$}
+    & \multicolumn{1}{c}{$S$ (nats)}
+    & \multicolumn{1}{c}{$f_E^{\text{hop}}$}
+    & \multicolumn{1}{c}{$f_S^{\text{hop}}$} \\
 \hline
- 2 & 0.387 & 1.290 & 0.002 & 0.998 & 0.0419 \\
- 3 & 0.289 & 1.570 & 0.000 & 1.000 & 0.0120 \\
- 4 & 0.228 & 1.690 & 0.000 & 1.000 & 0.0054 \\
- 5 & 0.194 & 1.770 & 0.000 & 1.000 & 0.0031 \\
-10 & 0.099 & 1.881 & 0.000 & 1.000 & 0.0007 \\
+ 2 & 1.723 & 0.0392 & 0.387 & 0.002 \\
+ 3 & 1.880 & 0.0113 & 0.289 & 0.000 \\
+ 4 & 1.928 & 0.0053 & 0.227 & 0.000 \\
+ 5 & 1.950 & 0.0030 & 0.187 & 0.000 \\
+10 & 1.981 & 0.0007 & 0.098 & 0.000 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
-The central result is stark: the graph Laplacian topology
-($H_{\text{h1,off}}$) contributes $10$--$39\%$ of the correlation
-energy but less than $0.2\%$ of the entanglement entropy.  The
-off-diagonal electron repulsion contributes effectively $100\%$
-of the entanglement.
-
-The entanglement entropy scales as a power law across the
-isoelectronic series:
+The entanglement entropy of the physical ground state scales as a
+power law across the isoelectronic series:
 \begin{equation}
-  S(Z) \sim Z^{-2.56},
+  S(Z) \sim Z^{-2.52},
   \label{eq:scaling}
 \end{equation}
-obtained from a log-log fit across $Z = 2$--$10$.  This is
-consistent with the known result that electron correlation becomes
-perturbatively small at large $Z$, where the nuclear attraction
-dominates the electron repulsion and the ground state approaches
-a single Slater determinant.
+from a log-log fit over $Z \in \{2,3,4,5,6,8,10\}$ ($R^2 = 0.994$).
+(The earlier $Z^{-2.56}$ was measured on the hop-augmented model;
+the hop changes the exponent by $0.04$ and $S$ at $Z=2$ by $7\%$.)
+This is consistent with the known result that electron correlation
+becomes perturbatively small at large $Z$, where the nuclear
+attraction dominates the electron repulsion and the ground state
+approaches a single Slater determinant.
 
-The operator-theoretic origin of both the $f_S^{\text{h1}}\to 0$
-decoupling and the $Z^{-2.56}$ scaling is established in
-Paper~27~\cite{GeoVac_Paper27}.  The decoupling follows from a
-free-fermion identity: any non-degenerate one-body ground state on
-a finite lattice has identically zero single-orbital entropy in
-its natural-orbital basis, so $f_S^{\text{h1}} \equiv 0$ up to the
-(exponentially small) projection defect that maps the natural-
-orbital basis to the angular-momentum eigenbasis.  The
-$Z$-scaling follows from the Paper~27 universal curve
-$S_B = A(\tilde{w}_B/\delta_B)^{\gamma}$: across He-like ions,
+The operator-theoretic origin of the $Z$-scaling is established in
+Paper~27~\cite{GeoVac_Paper27}, via the universal curve
+$S_B = A(\tilde{w}_B/\delta_B)^{\gamma}$:\ across He-like ions,
 $\tilde{w}_B = \lVert V_{ee}^{\mathrm{off}(H_1)}\rVert_F /
-\lVert H_1\rVert_F \sim 1/Z$ (because $V_{ee}\sim Z$ while
-$H_1\sim Z^{2}$) while $\delta_B$ is nearly $Z$-independent, so
-$S(Z) \sim Z^{-\gamma}$ with $\gamma \approx 2.5$ in the
-$n_{\max}=4, Z\in[2,10]$ window.  The measured exponent
-$-2.546$ at $n_{\max}=4$ agrees with Eq.~\eqref{eq:scaling} to
-within $0.6\%$.
+\lVert H_1\rVert_F \propto 1/Z$ (because $V_{ee}\propto Z$ while
+$H_1\propto Z^{2}$, exactly so for the physical $H_1$) while $\delta_B$
+is $Z$-independent, so $S(Z) \sim Z^{-\gamma}$ with
+$\gamma \approx 2.5$ in the $n_{\max}=4$, $Z\in[2,10]$ window.  The
+same paper's free-fermion identity explains the model's
+$f_S^{\text{hop}} \approx 0$:\ any one-body term, physical or not,
+leaves a non-degenerate one-body ground state with zero single-orbital
+entropy in its natural-orbital basis.
 
-\subsection{Connection to graph validity}
+\subsection{The withdrawn ``graph validity'' reading}
 
-The graph off-diagonal coupling $\kappa = -1/16$ is
-$Z$-independent, while the diagonal energies scale as $Z^2$, so a
-naive estimate of the relative importance of the graph topology is
-\begin{equation}
-  \frac{|\kappa|}{Z^2/n^2} = \frac{1}{16 Z^2/n^2},
-\end{equation}
-which predicts a $Z^{-2}$ decay ($3.1\%$ at $Z = 2$ for $n = 1$).
-The measured $f_E^{\text{h1}}$ column of
-Table~\ref{tab:decoupling} decays only as $\sim Z^{-0.85}$
-(log--log fit over $Z = 2$--$10$) and sits $12\times$--$79\times$
-\emph{above} the naive estimate across the table.
-
-\emph{Corrected 2026-08-29:}\ an earlier version of this subsection
-asserted that the naive scaling ``matches'' the $f_E^{\text{h1}}$
-column; it does not, in either magnitude or exponent.  The
-discrepancy is structural:\ $f_E^{\text{h1}}$ aggregates
-off-diagonal coupling over the full spectrum, not a single gap, and
-no quantitative bridge from $\kappa$ to this column is currently
-established.
-
-Below the graph validity boundary at $Z_c \approx 1.84$
-(Paper~7), the graph off-diagonal coupling is no longer
-perturbative: $|\kappa|$ exceeds the diagonal energy gap, and
-the graph-native CI over-binds (violating the variational bound).
-Whether the slow $Z^{-0.85}$ decay measured here connects
-quantitatively to that boundary is open:\
-Table~\ref{tab:decoupling} starts at $Z = 2$ and does not probe the
-sub-$Z_c$ regime.
+Earlier versions compared the model's $f_E^{\text{hop}}$ column to a
+naive $|\kappa|/(Z^2/n^2)$ estimate (it decays as $Z^{-0.85}$, not
+$Z^{-2}$) and invoked a ``graph validity boundary'' at [retracted 2026-09-25: he-graph-native-hop-headline]
+$Z_c \approx 1.84$ below which ``the graph-native CI over-binds''.
+Both concern only the hop-augmented model.  The measured $Z_c$ is the
+nuclear charge below which the hop drives the model energy under the
+exact He-like energy ($Z_c = 1.81$, $1.84$, $1.87$, $1.89$ at
+$n_{\max}=2$--$5$, drifting upward with the basis); without the hop the
+calculation is variational at every $Z$, and H$^-$ ($Z=1$) is bound
+$2.2\%$ above its exact energy rather than over-bound by $21\%$.  There
+is no graph-validity boundary in the ion's Hamiltonian. [retracted 2026-09-25: he-graph-native-hop-headline]
 
 %=================================================================
 \section{Basis-Intrinsic Sparsity}
@@ -537,8 +527,7 @@ entanglement network.
 
 This mechanism is basis-independent in principle, but the angular
 momentum eigenbasis makes it maximally transparent: the one-body
-Hamiltonian is nearly diagonal (the graph Laplacian couples only
-adjacent $n$-shells with strength $\kappa = -1/16$), so the
+Hamiltonian is diagonal (the orbitals are its eigenfunctions), so the
 natural orbital occupations closely track the Aufbau filling
 order.  In a Gaussian basis, where the one-body Hamiltonian has
 dense off-diagonal elements, the hub structure would be obscured
@@ -651,8 +640,8 @@ $S_{\text{bond}} = 0.330$ nats.  The ratio is
   \frac{S_{\text{bond}}}{S_{\text{core}}} \approx 40,
   \label{eq:ratio}
 \end{equation}
-consistent with the $S \sim Z^{-2.56}$ scaling law: the core
-electrons at $Z_{\text{eff}} = 3$ are $3^{2.56} \approx 18$ times
+consistent with the $S \sim Z^{-2.52}$ scaling law: the core
+electrons at $Z_{\text{eff}} = 3$ are $3^{2.52} \approx 16$ times
 less entangled than the bond electrons at $Z_{\text{eff}} = 1$
 (the discrepancy from the scaling prediction reflects the
 different electron counts in core vs.\ bond blocks).
@@ -667,18 +656,18 @@ background with minimal loss of quantum information.
 \label{sec:discussion}
 %=================================================================
 
-\subsection{Why the angular momentum eigenbasis decouples energy
-from entanglement}
+\subsection{Why the angular momentum eigenbasis isolates
+entanglement in $V_{ee}$}
 
-The energy-entanglement decoupling (Table~\ref{tab:decoupling})
-has a simple structural origin.  The one-body Hamiltonian $h_1$
-is a separable operator: it acts independently on each electron.
-A separable operator cannot generate entanglement between orbitals.
-In the angular momentum eigenbasis, $h_1$ is nearly diagonal (the
-off-diagonal elements are the graph Laplacian couplings with
-$\kappa = -1/16$), so $H_{\text{h1,off}}$ is a small perturbation
-that mixes single-particle states without introducing two-body
-correlations.
+The structure of Table~\ref{tab:decoupling} has a simple origin.
+The one-body Hamiltonian $h_1$ is a separable operator: it acts
+independently on each electron, and a separable operator cannot
+generate entanglement between orbitals.  In the angular momentum
+eigenbasis at $k = Z$, $h_1$ is exactly diagonal, so it contributes
+neither correlation energy nor entanglement.  The hop-augmented model
+columns show the same theorem from the other side:\ a one-body term
+that does mix single-particle states (there, a non-physical hop) moves
+the energy but still introduces no two-body correlation.
 
 The electron repulsion $V_{ee}$ is the irreducible two-body
 interaction.  It generates entanglement by correlating the
@@ -693,12 +682,12 @@ the kinetic energy and nuclear attraction integrals in the
 non-orthogonal basis).  These dense one-body couplings mix orbital
 occupations in ways that blur the distinction between one-body
 redistribution and two-body correlation.  The angular momentum
-eigenbasis, by nearly diagonalizing the one-body physics, isolates
+eigenbasis, by diagonalizing the one-body physics, isolates
 the two-body entanglement in $V_{ee}$ alone.
 
 \subsection{Connection to quantum simulation resources}
 
-The energy-entanglement decoupling has a direct implication for
+This isolation has a direct implication for
 quantum simulation.  The off-diagonal $V_{ee}$ elements that
 generate all the entanglement are precisely the elements constrained
 by the Gaunt selection rules.  Fewer nonzero $V_{ee}$ elements
@@ -737,8 +726,8 @@ within each block accurately but does not describe inter-block
 entanglement or bond breaking.
 
 \medskip\noindent\textbf{$d$-orbital systems.}  All results are
-for $s$- and $p$-orbital systems.  Whether the energy-entanglement
-decoupling and the hub migration pattern extend to $d$-orbital
+for $s$- and $p$-orbital systems.  Whether the isolation of
+entanglement in $V_{ee}$ and the hub migration pattern extend to $d$-orbital
 systems (transition metals) is an open question.  The Gaunt
 selection rules apply at all $l_{\max}$~\cite{GeoVac_Paper22},
 so the basis-intrinsic sparsity is guaranteed, but the
@@ -752,11 +741,14 @@ entanglement structure may differ.
 Four structural properties of the angular momentum eigenbasis
 have been established.
 
-First, the one-body Hamiltonian (graph Laplacian topology)
-contributes significant correlation energy ($10$--$39\%$) but
-negligible entanglement ($< 0.2\%$).  All entanglement in the
-ground state originates from the off-diagonal electron repulsion.
-The entanglement entropy scales as $S \sim Z^{-2.56}$.
+First, in this basis the one-body Hamiltonian of a He-like ion is
+exactly diagonal, so all correlation energy and all entanglement in the
+ground state originate from the off-diagonal electron repulsion; the
+entanglement entropy scales as $S \sim Z^{-2.52}$.  The earlier
+headline---a ``graph Laplacian'' one-body term carrying $10$--$39\%$ of [retracted 2026-09-25: he-graph-native-hop-headline]
+the correlation energy but $< 0.2\%$ of the entanglement---holds only
+for a hop-augmented model Hamiltonian that is not the ion's, and is
+retained only as an illustration of one-body entanglement-inertness.
 
 Second, among orbital bases for spherically symmetric systems,
 the angular momentum eigenbasis is an essentially isolated point of
@@ -779,8 +771,8 @@ factorization.
 
 These results establish that the Gaunt sparsity of
 the GeoVac qubit Hamiltonians is a direct consequence of the
-angular momentum eigenbasis choice: the basis that decouples
-one-body energy from two-body entanglement is the same basis
+angular momentum eigenbasis choice: the basis that diagonalizes
+the one-body physics, isolating entanglement in $V_{ee}$, is the same basis
 that produces sparse ERIs, and both properties arise from the
 underlying angular momentum conservation symmetry.
 

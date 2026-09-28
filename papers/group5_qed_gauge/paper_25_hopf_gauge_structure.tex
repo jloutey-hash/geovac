@@ -29,8 +29,10 @@ A Framework Observation}
 
 \begin{abstract}
 The GeoVac framework places Coulomb bound-state quantum numbers on a
-discrete graph that converges to the unit three-sphere $S^3$ in the
-continuum limit.  This paper documents a framework observation: the
+discrete graph whose nodes are exactly the labels $(n,l,m)$ of the
+unit-three-sphere harmonics (its node Laplacian does not converge to
+the $S^3$ Laplacian;\ it splits into $n_{\max}$ disconnected
+$l$-blocks).  This paper documents a framework observation: the
 same graph, viewed through its incidence structure, instantiates the
 combinatorial ingredients of a lattice gauge theory.  Nodes carry
 scalar matter (0-forms), edges carry a $U(1)$ connection (1-forms),
@@ -74,13 +76,18 @@ the $U(1)$ 1-form picture to a higher-form gauge theory.
 
 The computational framework documented in Papers~0, 7, 14, 16, 18,
 22, and 24 reformulates non-relativistic Coulomb bound-state physics
-as spectral graph theory on a discretization of the unit
+as spectral graph theory on the label set of the unit
 $S^3$~\cite{Paper0,Paper7,Paper14,Paper16,Paper18,Paper22,Paper24}.
-The graph's nodes are quantum-number triples $(n, l, m_l)$, its edges
-are the $L_\pm$ and $T_\pm$ ladder-operator transitions between
-neighboring states, and its graph Laplacian converges to the
-Laplace--Beltrami operator on the unit $S^3$ in the
-continuum limit (Paper~7, eighteen symbolic proofs).
+The graph's nodes are quantum-number triples $(n, l, m_l)$---exactly
+the Gel'fand--Tsetlin labels of the $S^3$ harmonics, on which the
+Laplace--Beltrami operator acts as the diagonal $SO(4)$ Casimir
+$n^2-1$---and its edges are the $L_\pm$ and $T_\pm$ ladder-operator
+transitions between neighboring states.  Its graph Laplacian does
+\emph{not} converge to the Laplace--Beltrami operator on the unit
+$S^3$:\ no edge changes $l$, so it splits into $n_{\max}$
+disconnected blocks (Paper~0~\S VI, Paper~7;\ the eighteen symbolic
+proofs of Paper~7 check Fock's continuum chain, not a graph limit;\
+corrected 2026-09-25).
 
 Separately, Paper~2 proposes that the Hopf fibration
 $S^1 \to S^3 \to S^2$---the same $S^3$ that hosts the electron's
@@ -104,7 +111,7 @@ but the additive combination rule itself remains unexplained.
 This paper makes one observation.  The GeoVac Hopf graph is
 simultaneously:
 \begin{enumerate}
-\item \emph{A discretization of $S^3$} (Fock projection; Paper~7).
+\item \emph{A graph on the label set of the $S^3$ harmonics} (Fock projection; Paper~7;\ a label lattice, not an operator discretization of $\Delta_{S^3}$).
 \item \emph{A simplicial complex carrying a discrete Hodge
   decomposition} (Lim~\cite{Lim2020}; Schaub \emph{et
   al.}~\cite{Schaub2020}).
@@ -406,8 +413,9 @@ p-block) carry nontrivial holonomy.
 \subsection{Node and edge Laplacians of the GeoVac graph}
 
 With the incidence matrix $B$ as in Eq.~(\ref{eq:incidence}), the
-node Laplacian $L_0 = B B^{\top}$ is the one whose continuum limit
-is $-\Delta_{S^3}$ (Paper~7).  The edge Laplacian
+node Laplacian $L_0 = B B^{\top}$ is the production graph Laplacian
+$D - A$ (it does not converge to $-\Delta_{S^3}$;\ it splits into
+$n_{\max}$ components, Paper~0~\S VI).  The edge Laplacian
 $L_1 = B^{\top} B$ has explicit spectrum at $n_{\max} = 3$
 computed in Track Q1--B~\cite{Q1B}:
 \begin{equation}
@@ -446,9 +454,15 @@ Hopf-fiber trace~\cite{Paper2}.
 
 Under the Paper~2 interpretation:
 \begin{itemize}
-\item $L_0 = B B^{\top}$ is the matter propagator's inverse: bound
-  electron states propagate by the $S^3$ Laplace--Beltrami operator
-  in the continuum.
+\item $L_0 = B B^{\top}$ is read as the matter propagator's inverse.
+  \emph{Withdrawn 2026-09-25:} an earlier version added that bound
+  electron states therefore propagate by the $S^3$ Laplace--Beltrami
+  operator in the continuum.  They do not do so through $L_0$:\ $L_0$
+  does not converge to $-\Delta_{S^3}$ (Proposition~\ref{prop:gauge_structure},
+  item~2;\ Paper~7~\cite{Paper7}), and the Coulomb spectrum is the
+  diagonal $SO(4)$ Casimir on the labels, so $L_0$ is spectrally inert
+  on $S^3$ as on $S^5$.  The matter reading of $L_0$ is a combinatorial
+  label, not a spectral one.
 \item $L_1 = B^{\top} B$ is the gauge-sector propagator's inverse:
   the $U(1)$ photon-like edge modes, in temporal gauge, propagate by
   the discrete Hodge--1 Laplacian.  The kernel dimension
@@ -472,9 +486,10 @@ transitions, and signed incidence matrix $B$.  Then:
 \item $G$ is a triangle-free simplicial 1-complex, so its
   combinatorial Hodge Laplacians are $L_0 = B B^{\top}$ and
   $L_1 = B^{\top} B$.
-\item The node Laplacian $L_0$ converges to the Laplace--Beltrami
-  operator $-\Delta_{S^3}$ in the continuum limit
-  (Paper~7~\cite{Paper7}).
+\item The node Laplacian $L_0$ splits into $n_{\max}$ components, one
+  per $l$ (Paper~0~\S VI), and does \emph{not} converge to the
+  Laplace--Beltrami operator $-\Delta_{S^3}$ (Paper~7~\cite{Paper7};\
+  this item stated the opposite until 2026-09-25).
 \item The edge Laplacian $L_1$ has kernel dimension
   $\beta_1(G) = N_1 - N_0 + c$; these harmonic 1-forms are the
   discrete analog of topologically nontrivial $U(1)$ connections.
@@ -624,8 +639,9 @@ This paper does \emph{not}:
   10^{-9}$~\cite{Paper2}.
 \item Produce a continuum limit in which the edge Laplacian
   $L_1$ of the GeoVac graph converges to the Hodge--1 Laplacian on
-  the unit $S^3$.  Such a convergence is a mathematically
-  well-posed but computationally nontrivial question; at present, we
+  the unit $S^3$.  Since the node Laplacian $L_0$ itself does not
+  converge to $-\Delta_{S^3}$ (the graph has $n_{\max}$ disconnected
+  components), no such limit is expected for $L_1$ on this graph;\ we
   have only the finite-$n_{\max}$ edge-Laplacian spectrum
   (Section~III.D).
 \item Give the photon dynamical content.  The edge Laplacian is a
@@ -639,9 +655,12 @@ What the observation does provide is a set of \emph{natural next
 computations} that become well posed in the lattice-gauge frame but
 would have been ad hoc before:
 
-\paragraph*{Continuum-limit edge-Laplacian convergence.} If the
-GeoVac graph node Laplacian $L_0$ converges to $-\Delta_{S^3}$ in
-the continuum (Paper~7), does $L_1$ converge to the
+\paragraph*{Continuum-limit edge-Laplacian convergence.} This question
+was posed on the premise that the GeoVac graph node Laplacian $L_0$
+converges to $-\Delta_{S^3}$ (Paper~7);\ that premise is false ($L_0$
+splits into $n_{\max}$ disconnected $l$-blocks, corrected 2026-09-25),
+so the question as posed has no base.  It would become well posed only
+on a graph with $l$-changing edges:\ does its $L_1$ converge to the
 Hodge--1 Laplacian on $S^3$?  The continuous Hodge--1 spectrum on
 $S^3$ is known exactly: eigenvalues $n(n+2)$ with degeneracy
 $2n(n+2)$, $n \geq 1$, and zero $\beta_1$
@@ -649,8 +668,9 @@ $2n(n+2)$, $n \geq 1$, and zero $\beta_1$
 graph has $\beta_1 = 2$ at $n_{\max} = 3$, $\beta_1 = ?$ at higher
 $n_{\max}$ (monotone or asymptotic behavior computable).  If
 $\beta_1 / N_1 \to 0$ and the nonzero spectrum converges to
-$n(n+2)$, we have a discretization of the Hodge--1 structure on
-$S^3$ compatible with the Hodge--0 convergence of Paper~7.
+$n(n+2)$, we would have a discretization of the Hodge--1 structure on
+$S^3$ (there is no Hodge--0 convergence on the production graph to be
+compatible with).
 
 \paragraph*{Higher Hopf bundles.} The $S^5$ Bargmann--Segal lattice
 of Paper~24~\cite{Paper24} is built on the Hardy space
@@ -897,18 +917,26 @@ of the Kähler $\mathbb{CP}^2$.
 \paragraph*{Structural interpretation: two-layer Coulomb/HO
 asymmetry becomes three-layer.} Paper~24 established the
 Coulomb/HO asymmetry at the level of the \emph{spectrum} (on
-$S^3$, $L_0 = D - A$ yields the Coulomb spectrum in the continuum
-limit via the $\kappa = -1/16$ projection; on $S^5$, $L_0$ is spectrally inert and the HO
-spectrum is in the diagonal).  The present sprint adds a third
-layer at the level of \emph{gauge-structure content}: the abelian
-$U(1)$ Wilson vocabulary is universal, but its physical content is
-not.  On $S^3$, the dictionary (matter propagator, photon
-propagator) $= (L_0, L_1)$ is nontrivial---both sides carry
-physical spectrum and physical gauge content.  On $S^5$, the
-dictionary is trivial on the matter side (the HO spectrum is not
-in $L_0$) and only combinatorial on the gauge side ($L_1$
-generates cycle classes, but there is no ``photon propagator on
-$S^5$'' interpretation tied to the HO physics).
+$S^3$, $L_0 = D - A$ was read as yielding the Coulomb spectrum in the
+continuum limit via the $\kappa = -1/16$ projection; on $S^5$, $L_0$ is
+spectrally inert and the HO spectrum is in the diagonal).  \emph{That
+spectrum layer is withdrawn (2026-09-25):} $L_0$ on $S^3$ does not
+converge to $\Delta_{S^3}$ and is spectrally inert there too, the $S^3$
+spectrum being the diagonal Casimir on the labels (Papers~7, 24).  The
+present sprint's layer at the level of \emph{gauge-structure content}
+stands on the matter-gauge double rather than on $L_0$'s spectrum, and
+rests on representation theory: the abelian $U(1)$ Wilson vocabulary
+is universal, and on the gauge side it is combinatorial on \emph{both}
+spheres ($L_1$ generates cycle classes; there is no Hodge--1 continuum
+limit and no photon dynamics on $S^3$ either,
+\S~\ref{sec:predictions}).  The discriminator is matter coupling.  On $S^3 =
+\mathrm{SU}(2)$ the spin-$1/2$ matter lives in the same representation
+as the Wilson links, so the coupling is natural --- an argument, not yet
+a coupled construction (Paper~30~\S\,open).  (An earlier version said
+the gauge side is nontrivial on $S^3$ and that $L_0$ carries physical
+spectrum;\ neither holds.)  On $S^5$, natural $(N,0)$ matter needs a
+Clebsch--Gordan intertwiner to couple to the links (Sprint~ST-SU3,
+below), and the HO spectrum is not in $L_0$ either.
 
 An immediate consequence is that the Paper~2 combination rule
 $K = \pi(B + F - \Delta)$ has no natural $S^5$ analog.  A candidate
@@ -987,8 +1015,14 @@ The structural reading that emerges from combining Sprint~5,
 Paper~30, and Sprint~ST-SU3 is that Paper~24's Coulomb/HO asymmetry
 sharpens from three layers to \emph{four}: the Wilson--Hodge
 combinatorial vocabulary is universal (transfers to $S^5$); the
-spectrum-computing role of $L_0$, the calibration~$\pi$, and Wilson
-gauge \emph{with natural matter coupling} are all Coulomb-specific.
+calibration~$\pi$ and Wilson gauge \emph{with natural matter coupling}
+are Coulomb-specific.  (This list also named the spectrum-computing
+role of $L_0$ as Coulomb-specific;\ that layer is \emph{withdrawn}
+2026-09-25 --- $L_0$ does not converge to $\Delta_{S^3}$ and is
+spectrally inert on both spheres --- so of the layers Paper~24 now
+catalogues, seven, six stand.)  The Wilson-with-matter layer rests on
+representation theory, not on $L_0$, and is independent of the
+calibration-$\pi$ layer.
 The previous version of \S~\ref{sec:s5_bargmann_open} (Paper~24
 Corollary~4 \& the three-layer reading) has Wilson gauge and matter
 coupling bundled together; the present update splits them: Wilson
@@ -1060,9 +1094,10 @@ not to execute them.
 \section{Conclusion}
 \label{sec:conclusion}
 
-The GeoVac framework builds a discrete graph on the unit $S^3$
-whose node Laplacian converges to the Laplace--Beltrami operator on
-$S^3$ in the continuum limit.  Section~III of this paper made the
+The GeoVac framework builds a discrete graph on the label set of the
+unit-$S^3$ harmonics, on which the Laplace--Beltrami operator acts as
+the diagonal $SO(4)$ Casimir (the graph's node Laplacian does not
+converge to it).  Section~III of this paper made the
 observation---previously implicit in Paper~2 but never
 stated as its own claim---that the same graph, together with its
 signed incidence matrix $B$, carries all the combinatorial
@@ -1128,8 +1163,8 @@ This paper was developed using an AI-augmented agentic workflow, with
 implementation and documentation drafting performed collaboratively
 with Anthropic's Claude.  The framework observation benefited from
 the Phase~4B--4I alpha-sprint series, which systematically identified
-the three spectral homes of the $(B, F, \Delta)$ ingredients over
-approximately nine months of sustained computational decomposition.
+the three spectral homes of the $(B, F, \Delta)$ ingredients through
+sustained computational decomposition.
 \end{acknowledgments}
 
 %% ========================================================================
@@ -1210,6 +1245,10 @@ Equation from Scale-Invariant Graph Topology,'' GeoVac Paper~7 (2025).
 \bibitem{Paper14}
 J.~Loutey, ``Structurally Sparse Qubit Hamiltonians from Spectral
 Graph Theory,'' GeoVac Paper~14 (2026).
+
+\bibitem{Paper16}
+J.~Loutey, ``The Periodic Table Recast as $S_N$ Representation Theory
+on $S^{3N-1}$,'' GeoVac Paper~16 (2026).
 
 \bibitem{Paper18}
 J.~Loutey, ``Spectral-Geometric Exchange Constants: Projecting

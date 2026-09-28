@@ -49,7 +49,8 @@ validates the multi-block architecture and quantifies the
 $\sim 10^{13}$ coefficient ratio between nuclear, electronic, and
 hyperfine scales. We state and apply the Fock projection rigidity
 theorem: the $S^3$ conformal projection that makes electronic Hamiltonians
-equivalent to a graph Laplacian is unique to the Coulomb potential and
+equivalent to the $S^3$ Laplace--Beltrami operator (whose harmonics the
+GeoVac lattice's nodes label) is unique to the Coulomb potential and
 does \emph{not} extend to HO or Woods--Saxon systems. For nuclear
 Hamiltonians, the GeoVac contribution is therefore the angular machinery
 and qubit encoding, not the conformal projection. All nuclear physics
@@ -251,9 +252,13 @@ and it works because the hydrogen spectrum is $\ell$-degenerate within
 each principal quantum number $n$: all orbitals $(n,\ell,m)$ with the
 same $n$ have the same energy. The conformal projection then identifies
 the radial Schr\"odinger equation on $\mathbb{R}^3$ with the Laplace
-equation on $S^3$, and the graph Laplacian on the $(n,\ell,m)$ lattice
-converges to the continuous $S^3$ Laplacian in the asymptotic limit
-(Paper~7~\cite{Paper7}).
+equation on $S^3$, whose harmonics are labelled exactly by the
+$(n,\ell,m)$ lattice and on which the $S^3$ Laplacian acts as the
+diagonal SO(4) Casimir $n^2-1$ (Paper~7~\cite{Paper7}).  The lattice's
+edge Laplacian is not that operator and does not converge to it:\ it
+preserves $\ell$ and splits into disconnected $\ell$-blocks (Paper~7,
+corrected 2026-09-25 from ``converges to the continuous $S^3$ Laplacian
+in the asymptotic limit'').
 
 For nuclear shell model Hamiltonians the projection fails, for reasons
 that are elementary but worth stating precisely. We summarize the
@@ -268,17 +273,20 @@ this accidental degeneracy, as a consequence of its hidden SO(4)
 symmetry (the Runge--Lenz vector). Any deformation
 $V(r) = -Z/r + \delta V(r)$ with $\delta V \not\equiv 0$ lifts the
 $\ell$-degeneracy, breaking the conformal equivalence between the
-radial Schr\"odinger problem and the $S^3$ graph Laplacian.}
+radial Schr\"odinger problem and the $S^3$ Laplace--Beltrami operator.}
 
 The proof is standard and amounts to observing that Fock's
 stereographic construction in momentum space requires the hydrogenic
 relation $E_n \propto -1/n^2$ with no $\ell$-dependence; this fails for
 any potential that does not have the SO(4) symmetry of the pure Coulomb
 problem~\cite{Bander1966}. The consequence for the GeoVac lattice is
-that the graph node weights, which depend only on $n$ in the Coulomb
-case, cannot absorb an $\ell$-dependent correction without reducing the
-graph Laplacian to the trivial diagonal of the corrected spectrum. In
-that regime the off-diagonal adjacency structure contributes nothing.
+that the diagonal node weights, which depend only on $n$ in the Coulomb
+case (as the exact $S^3$ operator on the labels, the SO(4) Casimir
+$n^2-1$, does), would have to carry an $\ell$-dependent correction;\ the
+labels then index a spectrum with no $S^3$ counterpart.  (An earlier
+version framed this through the off-diagonal adjacency, which never
+carried the $S^3$ spectrum:\ the edge Laplacian does not converge to
+$\Delta_{S^3}$, Paper~7.)
 
 The relevant central potentials for nuclear physics --- the 3D
 harmonic oscillator, the Woods--Saxon well, the square well, and the
@@ -286,8 +294,9 @@ Yukawa potential --- all have $\ell$-dependent spectra. The 3D harmonic
 oscillator has its own accidental degeneracy (the SU(3) group of the
 isotropic oscillator groups states with common $N = 2n_r + \ell$),
 but the degeneracy pattern is different from Coulomb's SO(4), and no
-stereographic projection onto a compact manifold produces the graph
-Laplacian form that underlies the GeoVac electronic framework. The
+stereographic projection onto a compact manifold produces the $S^3$
+Laplace--Beltrami structure that underlies the GeoVac electronic
+framework. The
 Bargmann--Segal transform~\cite{Bargmann1961} is the natural analogue
 for the HO, mapping the $L^2$ Hilbert space to a holomorphic
 reproducing-kernel space on $\mathbb{C}^3$; whether this can be
@@ -296,9 +305,12 @@ Hamiltonian is an open question.
 
 \emph{Negative result, positive implication.} The rigidity theorem
 tells us what \emph{cannot} be carried over from Papers~7 and 11--15
-to the nuclear setting: the conformal projection, the claim that
-the $S^3$ graph Laplacian \emph{is} the quantum kinetic operator in
-some dual description, and the $-1/16$ kinetic constant. What
+to the nuclear setting: the conformal projection, the identification
+of the $(n,\ell,m)$ labels with $S^3$ harmonics on which the $S^3$
+Laplacian is the quantum kinetic operator in a dual description (a
+statement about the labels and the Casimir, not about the graph's edge
+Laplacian, which does not converge to $\Delta_{S^3}$), and the $-1/16$
+kinetic constant. What
 \emph{can} be carried over is the angular machinery: the Wigner $3j$
 coupling coefficients, the Gaunt integral selection rules, the block
 structure of the two-body interaction tensor, and the exactly
@@ -1160,7 +1172,7 @@ Coulomb-specific component:
   \item \textbf{Universal (applies to HO, Woods--Saxon, NN potentials).}
     The angular selection rules from Wigner $3j$ symbols and the Gaunt
     integral; the angular-sparsity reduction of single-center Pauli
-    scaling below the naive $O(Q^4)$ (measured $O(Q^{3.77})$ for
+    scaling below the naive $O(Q^4)$ (measured $O(Q^{3.79})$ for
     Coulomb atoms --- a narrow margin under the exact global-$M_L$
     rule) and the exactly linear composed Pauli scaling in $Q$ at
     fixed basis; the

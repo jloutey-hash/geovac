@@ -44,7 +44,8 @@ class TestGeoVacHeHamiltonian:
     def test_geovac_he_nmax2_ground_state(self) -> None:
         """GeoVac He nmax=2 exact diag should give ~-2.888 Ha (within basis)."""
         spo, _, n_qubits, exact_e = build_geovac_he(max_n=2)
-        # GeoVac He nmax=2 hybrid: ~-2.888 Ha (from LatticeIndex)
+        # GeoVac He nmax=2, physical h1: -2.8332 Ha (2.43% above exact;
+        # the retired +1/16-hop 'hybrid' model gave ~-2.888)
         assert exact_e < -2.8, f"GeoVac He nmax=2 energy too high: {exact_e}"
         assert exact_e > -3.1, f"GeoVac He nmax=2 energy too low: {exact_e}"
         assert n_qubits == 10  # 5 spatial * 2 spin

@@ -84,9 +84,12 @@ treatment with an $R$-accurate analytic atom-centered core resolves it to
 $R_{\rm eq} = +0.2\%$ (the corpus's best LiH geometry) and, with a rigorous
 VMC-over-FCI treatment (a two-body Jastrow on the analytic-orbital FCI state),
 reaches a \emph{variational} energy of $-8.047$~Ha---$18$~mHa below the $-8.032$
-orbital ceiling and safely above the exact $-8.0705$ (an additive-F12 estimate
-places the near-chemical target at $\approx-8.062$~Ha, which a fuller three-body
-Jastrow would approach)---locating the balanced drift specifically in the
+orbital ceiling and safely above the exact $-8.0705$.  A deterministic,
+resolution-of-identity--free explicit-$r_{12}$ treatment on the same
+$\pi$-containing reference, with a cusp-correct Slater geminal, improves this to
+$-8.0490$~Ha (variational, cross-checked by VMC of the same trial function to
+$0.16$~mHa).  An additive-F12 estimate places the near-chemical target at
+$\approx-8.062$~Ha, which needs three-body correlation.  Together these results locate the balanced drift specifically in the
 frozen/parameter-free core rather than in the coupled architecture itself.
 \end{abstract}
 
@@ -239,7 +242,7 @@ which has until now been strictly single-center at each level.
 GeoVac's hydrogenic orbitals are Coulomb Sturmians with the
 identification $k = Z/n$, where $k$ is the Sturmian exponent.
 This is not merely a notational correspondence: the entire GeoVac
-framework---the graph Laplacian on $S^3$ (Paper~7), the Fock
+framework---the $S^3$ label lattice (Paper~7), the Fock
 projection, the angular momentum selection rules---is built on the
 same mathematical structure that the Avery group has developed for
 molecular Coulomb Sturmian calculations since the
@@ -909,7 +912,47 @@ computation);\ reaching the $-8.062$ additive-F12 estimate additionally needs th
 nucleus-coupled $r_{12}t^2$ three-body geminal, which the same reductions are
 built to carry.  Backing:\ \texttt{tests/test\_lih\_r12ci\_bridge.py} (the
 four-body reduction on real densities) and \texttt{tests/test\_lih\_vmc.py} (the
-VMC stack);\ chronicle \texttt{debug/sprint\_lih\_marriage\_memo.md}.
+VMC stack);\ chronicle \texttt{CHANGELOG.md} v5.15.24.
+
+\textbf{[MARRIAGE ON THE $\pi$ REFERENCE, 2026-09-27]}  Both steps named above
+have now been taken, and together they make the analytic route the corpus's best
+LiH energy.  \emph{(i) The $\pi$ reference.}  The enumerators were extended to
+azimuthal channels (an $L_z$ circulation mask at each integrated vertex), and the
+dense kept-pair Coulomb field of $g_{V_{ee}}$ was replaced by a sparse
+contraction over the coefficient tensor's nonzero index triples.  That made the
+full $M=16$ $\pi$-containing CI reachable ($196$ active pairs, reference energy
+$E_{\rm trunc}=-8.02863$~Ha, $0.41$~mHa above the full CI).  With the original
+geminal $f=r\,e^{-r/2}$ it gives $E_{R_{12}}=-8.04349$~Ha, and VMC of the same
+trial function agrees to $0.14$~mHa.  \emph{(ii) The geminal shape.}  The
+remaining gap to the Pad\'e--Jastrow VMC is not a missing geminal: a VMC
+linear-method scan shows extra geminals saturate at $\sim1.4$~mHa and a
+quadratic $F^2$ term is worth $0.01$~mHa.  It is the Kato cusp.  For a
+multiplier $1+c\,(F-\bar F)$ the delivered electron--electron cusp is
+$c\,f'(0)/[1+c\,(f(0)+\langle F_{\rm rest}\rangle-\bar F)]$.  The long-range
+$r\,e^{-\gamma r}$ has $f(0)=0$, and at its variational $c$ it delivers only
+$\approx0.2$ of Kato's $\tfrac12$.  The short-range Slater geminal $e^{-\gamma r}$
+reaches $\tfrac12$ near $\gamma\approx1.5$, which is also where the energy is
+minimal (the standard F12 choice).  On the full $\pi$ reference,
+$f=e^{-1.5\,r}$ gives
+\[
+E_{R_{12}} = \mathbf{-8.04905}~\mathrm{Ha},
+\]
+analytic, resolution-of-identity--free and variational.  That is $20.4$~mHa of
+correlation over the reference, $1.7$~mHa below the VMC-over-FCI $-8.047$, and
+$21.5$~mHa above the exact $-8.0705$.  An independent high-statistics VMC of the
+same trial function gives $-8.04921\pm0.00014$~Ha, agreeing to $0.16$~mHa
+($1.1\sigma$).  A short-seed batch at first showed a $0.9$~mHa offset; the
+long run traced it to under-burned-in sampling, which also biased the bare
+reference.  Along the way a real defect in the general-$m$ triangle weight of
+$g_{V_{ee}}$ was found and fixed (it only affects references with circulation,
+so the $\sigma$ results above are untouched).  Its effect here is $0.003$~mHa.
+The residual $21.5$~mHa is correlation a pairwise geminal cannot carry
+(electron--electron--nucleus), the $r_{12}t^2$ step named above.
+\textbf{[MEASURED 2026-09-27; the energy has no regression test, being a
+multi-hour run.  The engine's pieces are guarded by
+\texttt{tests/test\_lih\_gvee\_sparse.py} and
+\texttt{tests/test\_lih\_gvee\_triangle\_symmetry.py}.]}  Chronicle:\
+\texttt{CHANGELOG.md} v5.16.0.
 
 \textbf{[MEASURED]} The banked $n_{\max}=4$ decider has now been run---a
 matrix-free (Davidson) direct-CI engine

@@ -146,8 +146,9 @@ def test_annotation_check_accepts_rounding_but_not_drift():
     """A paper may quote fewer digits than the value was measured to.
 
     The check compares at the precision of the LITERAL, so correct display
-    rounding passes while a retired value fails -- 11.18 is a rounding of
-    11.175; 11.29 (the retired 1-norm) is not, at any precision.
+    rounding passes while a retired value fails -- 10.80 is a rounding of
+    10.800; 11.18 (the retired +1/16-hop 1-norm, 2026-09-25) and 11.29 (the
+    retired pair-diagonal 1-norm) are not, at any precision.
     """
     canon = REG.resolve("he_n2_lambda")
 
@@ -155,9 +156,10 @@ def test_annotation_check_accepts_rounding_but_not_drift():
         dec = len(lit.split(".")[1]) if "." in lit else 0
         return abs(float(lit) - round(canon, dec)) <= 10 ** (-dec) / 2 + 1e-9
 
-    assert renders("11.175")
-    assert renders("11.18"), "correct rounding must be accepted"
-    assert renders("11.2")
+    assert renders("10.800")
+    assert renders("10.80"), "correct rounding must be accepted"
+    assert renders("10.8")
+    assert not renders("11.18"), "the retired hop-model value must be rejected"
     assert not renders("11.29"), "the retired value must still be rejected"
 
 

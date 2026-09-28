@@ -34,8 +34,9 @@ The Geometric Vacuum (GeoVac) framework discretizes non-relativistic
 electronic structure on \emph{natural geometries}:\ for each separable
 quantum system there is a coordinate system in which the Coulomb
 singularities become boundary conditions and the Laplace--Beltrami
-operator discretizes on a sparse graph with quantum-number labels for
-nodes.  This synthesis assembles the framework's quantum-chemistry
+operator's quantum-number structure (labels, degeneracies, selection
+rules) is carried exactly by a sparse lattice whose nodes are those
+labels.  This synthesis assembles the framework's quantum-chemistry
 arc---the twelve Group~2 papers spanning one-electron atoms, the
 two-center one-electron ion, the two-electron atom, the two-center
 two-electron molecule, the core--valence and polyatomic
@@ -118,10 +119,12 @@ is more fundamental is left open.
 The Group~3 foundations arc of GeoVac establishes that the hydrogen
 atom's momentum-space Schr\"odinger equation maps, by Fock's 1935
 stereographic projection~\cite{fock1935}, onto the free Laplacian on
-the unit three-sphere $S^3$, and that a discrete graph on
-quantum-number labels converges to the $S^3$ Laplace--Beltrami operator
-in the continuum limit~\cite{loutey_paper0, loutey_paper1,
-loutey_paper7}.  That arc answers a question about a single
+the unit three-sphere $S^3$, and that the quantum-number labels
+$(n,l,m)$ of a discrete graph are exactly the labels of the $S^3$
+harmonics, on which the $S^3$ Laplace--Beltrami operator acts as the
+diagonal $SO(4)$ Casimir at every cutoff~\cite{loutey_paper0, loutey_paper1,
+loutey_paper7} (the graph's edge Laplacian does not converge to that
+operator;\ corrected 2026-09-25).  That arc answers a question about a single
 one-electron atom.  The present synthesis takes up the question the
 foundations arc opens but does not close:\ what is the right
 discretization for a \emph{molecule}, or for an atom with \emph{more
@@ -170,7 +173,7 @@ Level & System (centers, electrons) & Natural geometry & Headline result & Paper
 \midrule
 1 & atom (1, 1) & $S^3$ (Fock projection) & $<0.1\%$ (one-electron) & \cite{loutey_paper7} \\
 2 & $\mathrm{H}_2^+$ (2, 1) & prolate spheroid & machine precision (spectral Laguerre) & \cite{loutey_paper11} \\
-3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $0.216\%$ (graph-native CI) & \cite{loutey_paper13} \\
+3 & He (1, 2) & hyperspherical & $0.022\%$ (2D var.\ raw) to $0.004\%$ (cusp-extrapolated, non-variational); $1.88\%$ (fixed-$k$ hydrogenic CI, $n_{\max}=7$) & \cite{loutey_paper13} \\
 4 & $\mathrm{H}_2$ (2, 2) & molecule-frame hyperspherical & $96.0\%$ of $D_e$ ($l_{\max}=6$, 61 channels, cusp-corrected) & \cite{loutey_paper15} \\
 4$^{\ast}$ & $\mathrm{H}_2$ (2, 2) & prolate spheroidal & $99.97\%$ of $D_e$ ($0.053$~mHa) via explicit-$r_{12}$ CI (exact integrals);\ $99.81\%$ ($0.32$~mHa) via re-based CI at $\alpha_{\rm opt}=1.40$ & \cite{loutey_paper12} \\
 4N & LiH (2, 4) & full mol-frame ($SO(12)$) & $R_{\mathrm{eq}}\approx 63.5\%$ ($l_{\max}=2$, 2D variational; unbound $D_e$, no PK) & \cite{loutey_paper17} \\
@@ -201,9 +204,12 @@ properties this synthesis foregrounds.
 \subsection{The atomic baseline and the bond sphere}
 
 The one-electron atomic baseline is the $S^3$ graph of the foundations
-arc:\ the discrete Fock lattice reproduces the Rydberg spectrum and
-solves one-electron atoms to better than $0.1\%$ with no free
-parameters~\cite{loutey_paper1, loutey_paper7}.  The natural first
+arc:\ on the discrete $(n,l,m)$ label lattice the exact one-electron
+operator is the diagonal $SO(4)$ Casimir $n^2-1$, so the Rydberg
+spectrum holds at every cutoff; the graph Laplacian itself does not
+converge to the $S^3$ operator, and its extremal eigenvalue matches
+the ground state only by construction through
+$\kappa$~\cite{loutey_paper1, loutey_paper7}.  The natural first
 question for chemistry is whether the same $S^3$ object handles a
 \emph{molecule}.  Paper~8~\cite{loutey_paper8} pursues this directly:\
 it shows that a diatomic molecule is geometrically a single $S^3$ with
@@ -309,6 +315,22 @@ foundations arc made concrete:\ the irreducible transcendental content
 of the diatomic radial problem is one seed in the \emph{composition}
 tier, tagged to a specific integral, rather than diffuse numerical
 error~\cite{loutey_paper18}.
+
+The separation constant itself is an exact label. Paper~11 shows that in
+any product (Laguerre $\times$ Legendre) basis the matrices of $H$ and of
+the Erikson--Hill separation-constant operator $\Lambda$ are Atkinson
+operator determinants. They therefore commute at every truncation,
+measured to $10^{-14}$. This is the two-centre counterpart of the
+$SO(4)$ Casimir being exact on the $S^3$ labels. The commutation and the
+determinant theorem are prior art; the finite-truncation reading was not
+found in the literature. $\Lambda$ interpolates from $L^2$ at the united
+atom to the Runge--Lenz (parabolic) label at the separated atoms, as
+checked quantitatively. Two limits are stated with it. As a two-electron
+configuration selector, $\Lambda$ beats orbital-energy ordering
+8--10$\times$ for H$_2$, but only in one basis at one geometry, and
+natural orbitals beat it by about $10\times$. On the Route C LiH orbital set
+(product orbitals, but not tensor-closed) the exactness is lost and the selector
+fails~\cite{loutey_paper11}.
 
 %% ========================================================================
 \section{Level 3: The Two-Electron Atom and the Cusp}
@@ -420,10 +442,15 @@ $0.022\%$ raw at $l_{\max}=7$ (a genuine variational upper bound) and
 $0.004\%$ with a Schwartz cusp correction at $l_{\max}=4$ (a
 non-variational extrapolation that lies marginally below the exact
 energy)~\cite{loutey_paper13}.  A separate, fully zero-parameter route
-is the graph-native configuration interaction, which uses the graph
-Laplacian as the one-body operator with exact rational Slater
-integrals and reaches $0.216\%$ at $n_{\max}=7$ with no free
-parameters~\cite{loutey_paper13}.  Each route exercises a different
+is configuration interaction in the fixed $k=Z$ hydrogenic basis on
+the $S^3$ labels, with the exact diagonal one-body operator and exact
+rational Slater integrals:\ it reaches $1.88\%$ above exact at
+$n_{\max}=7$, a floor set by the missing continuum of the bound-state
+basis rather than by the cusp~\cite{loutey_paper13}.  (An earlier
+``graph-native'' $0.216\%$ added a non-physical $+\tfrac{1}{16}$ [retracted 2026-09-25: he-graph-native-hop-headline]
+one-body graph hop to helium's Hamiltonian and is withdrawn as a helium
+result, as are the readings built on it---an ``over-binding'' H$^-$
+and a ``graph-validity boundary'' $Z_c \approx 1.84$.)  Each route exercises a different [retracted 2026-09-25: he-graph-native-hop-headline]
 part of the algebraic registry:\ the angular sector is exact throughout
 (Gaunt integrals $G(l,k,l') = 2\,(l\,k\,l'\,|\,0\,0\,0)^2$, $SO(6)$
 Casimir eigenvalues $\nu(\nu+4)/2$, closed-form perturbation
@@ -852,17 +879,23 @@ The atomic FCI paper~\cite{loutey_fci_atoms} solves multi-electron
 atoms directly on the sparse $S^3$ graph Hamiltonian using
 Slater--Condon rules~\cite{Slater1960, CondonShortley1935} with exact $R^k$ radial integrals and Gaunt
 coefficients, with Slater determinants indexed as sorted tuples of
-spin-orbital labels (relational lattice indexing).  Helium reaches
-$0.26\%$ at $n_{\max}=5$ (grid-based) and $0.216\%$ at $n_{\max}=7$ with
-exact rational Slater integrals; lithium $1.03\%$ (at $n_{\max}=5$)
+spin-orbital labels (relational lattice indexing).  Helium with its
+physical Hamiltonian reaches $1.93\%$ at $n_{\max}=5$ and $1.88\%$ at
+$n_{\max}=7$ with exact rational Slater integrals, above the
+Hartree--Fock limit because the fixed-exponent bound-state basis omits
+the continuum (the earlier $0.26\%$ and $0.216\%$ headlines used a
+hybrid one-body operator with a non-physical graph hop and are
+withdrawn as helium results); lithium $1.03\%$ (at $n_{\max}=5$)
 and beryllium $0.71\%$ (at $n_{\max}=4$, with $487{,}635$
 determinants)~\cite{loutey_fci_atoms}.  The Hamiltonian is sparse
 (fill fraction $0.68\%$ for He at $n_{\max}=5$, $0.12\%$ for Li at
 $n_{\max}=4$) with a sub-quadratic nonzero-count growth exponent
 $\alpha \approx 1.4$--$1.5$.  The paper documents an instructive
 variational subtlety:\ a hybrid one-body operator that mixes graph
-Laplacian off-diagonals (carrying $\kappa = -1/16$) improves He but
-violates the variational principle for three-electron lithium, so the
+Laplacian off-diagonals (carrying $\kappa = -1/16$) lowers the He
+energy only because those off-diagonals are a hop absent from the
+atom's Hamiltonian, and violates the variational principle for
+three-electron lithium, so the
 exact hydrogenic one-body operator is required for monotonic
 convergence~\cite{loutey_fci_atoms}.  The dominant remaining error for
 heteronuclear LiH at $n_{\max}=3$ is basis truncation, not integral
@@ -1097,7 +1130,7 @@ structure.  Each level is the coordinate system in which a given system
 separates:\ $S^3$ for atoms~\cite{loutey_paper7}, the prolate spheroid
 for $\mathrm{H}_2^+$ (machine precision)~\cite{loutey_paper11}, hyperspherical
 coordinates for He ($0.022\%$ variational raw / $0.004\%$ non-variational
-cusp, $0.216\%$ graph-native)~\cite{loutey_paper13}, molecule-frame hyperspherical
+cusp; $1.88\%$ fixed-$k$ hydrogenic CI)~\cite{loutey_paper13}, molecule-frame hyperspherical
 coordinates for $\mathrm{H}_2$ ($96.0\%$ of $D_e$,
 cusp-corrected)~\cite{loutey_paper15}---though $\mathrm{H}_2$'s natural
 geometry is the prolate spheroid, where an explicit-$r_{12}$ CI reaches

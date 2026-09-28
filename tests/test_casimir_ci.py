@@ -490,21 +490,26 @@ class TestGraphNativeCI:
         assert abs(h1[0, 1] - expected) < 1e-12, \
             f"h1[0,1] = {h1[0,1]}, expected {expected}"
 
+    # 2026-09-25: the default (h1_method='hybrid') adds a (1/16)*A hop that is
+    # NOT part of He's Hamiltonian; its energies are a MODEL, not He.  The two
+    # tests below used to assert "<1% / <0.5% error vs He" -- i.e. they
+    # certified the retired headline.  They now pin the legacy model energies
+    # (regression of the bit-identical default) and say what they are.
+    # He's physical numbers: tests/test_he_physical_hamiltonian.py.
+
     def test_graph_native_fci_nmax2(self):
-        """Graph-native FCI at n_max=2 should give better than 1% error."""
+        """Legacy hop-augmented MODEL energy at n_max=2 (not He; pinned)."""
         H = build_graph_native_fci(Z=2, n_max=2)
         assert H.shape == (7, 7)
         E0 = np.linalg.eigvalsh(H)[0]
-        error_pct = abs((E0 - (-2.903724)) / (-2.903724)) * 100
-        assert error_pct < 1.0, f"Error {error_pct:.2f}% > 1% at n_max=2"
+        assert abs(E0 - (-2.889479)) < 2e-6, f"model E0={E0}"
 
     def test_graph_native_fci_nmax3(self):
-        """Graph-native FCI at n_max=3 should give better than 0.5% error."""
+        """Legacy hop-augmented MODEL energy at n_max=3 (not He; pinned)."""
         H = build_graph_native_fci(Z=2, n_max=3)
         assert H.shape == (31, 31)
         E0 = np.linalg.eigvalsh(H)[0]
-        error_pct = abs((E0 - (-2.903724)) / (-2.903724)) * 100
-        assert error_pct < 0.5, f"Error {error_pct:.2f}% > 0.5% at n_max=3"
+        assert abs(E0 - (-2.893110)) < 2e-6, f"model E0={E0}"
 
     def test_graph_native_hermitian(self):
         """Graph-native FCI matrix should be Hermitian."""
@@ -512,8 +517,11 @@ class TestGraphNativeCI:
         assert np.allclose(H, H.T, atol=1e-10)
 
     def test_graph_native_variational_bound(self):
-        """Graph-native energy must be above exact He energy."""
-        H = build_graph_native_fci(Z=2, n_max=3)
+        """The PHYSICAL (h1_method='exact') energy is a variational bound on He.
+
+        (The hybrid model's energy happens to lie above exact at Z=2 but is
+        not a bound -- it falls below exact for Z < ~1.85.)"""
+        H = build_graph_native_fci(Z=2, n_max=3, h1_method='exact')
         E0 = np.linalg.eigvalsh(H)[0]
         assert E0 > -2.903724, f"E0={E0} violates variational bound"
 
@@ -525,17 +533,16 @@ class TestGraphNativeCI:
         E3 = np.linalg.eigvalsh(H3)[0]
         assert E3 < E2, f"E3={E3} should be < E2={E2}"
 
-    def test_graph_native_beats_diagonal(self):
-        """Graph-native should beat fixed k=2 diagonal at n_max=3."""
-        H_graph = build_graph_native_fci(Z=2, n_max=3)
-        E_graph = np.linalg.eigvalsh(H_graph)[0]
-        H_diag = build_fci_matrix(Z=2, n_max=3, k_orb=2.0)
-        E_diag = np.linalg.eigvalsh(H_diag)[0]
-        # Graph-native error should be smaller
-        err_graph = abs(E_graph - (-2.903724))
-        err_diag = abs(E_diag - (-2.903724))
-        assert err_graph < err_diag, \
-            f"Graph error {err_graph:.6f} should be < diagonal error {err_diag:.6f}"
+    def test_graph_native_exact_is_the_k_equals_Z_hamiltonian(self):
+        """h1_method='exact' == build_fci_matrix(k=Z): He's own Hamiltonian.
+
+        Replaces test_graph_native_beats_diagonal (retired 2026-09-25), which
+        asserted the hop model's lower error as a virtue -- the lower error
+        came from a one-body term that is not part of He's Hamiltonian."""
+        E_exact_h1 = np.linalg.eigvalsh(
+            build_graph_native_fci(Z=2, n_max=3, h1_method='exact'))[0]
+        E_kZ = np.linalg.eigvalsh(build_fci_matrix(Z=2, n_max=3, k_orb=2.0))[0]
+        assert abs(E_exact_h1 - E_kZ) < 1e-10
 
 
 # ========================================================================

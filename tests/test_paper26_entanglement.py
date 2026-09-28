@@ -59,7 +59,11 @@ def decoupling():
 # ---------------------------------------------------------------------------
 
 def test_paper26_energy_entanglement_decoupling(decoupling):
-    """h1_offdiag: 10-39% of E_corr but <0.2% of S; V_ee_offdiag: ~100% of S."""
+    """HOP-AUGMENTED MODEL (not the ion; 2026-09-25): the added (1/16)*A hop
+    moves 10-39% of the model's E_corr but <0.2% of S; V_ee_offdiag ~100% of S.
+    Paper 26 now keeps this only as a model illustration of one-body
+    entanglement-inertness.  The ion's physical numbers (f_E^h1 == 0,
+    S ~ Z^-2.52) are pinned in tests/test_he_physical_hamiltonian.py."""
     frac_E_h1 = [decoupling[str(z)]['frac_E_h1_offdiag'] for z in _Z_VALUES]
     frac_S_h1 = [decoupling[str(z)]['frac_S_h1_offdiag'] for z in _Z_VALUES]
     frac_S_vee = [decoupling[str(z)]['frac_S_vee_offdiag'] for z in _Z_VALUES]
@@ -94,7 +98,9 @@ def test_paper26_energy_entanglement_decoupling(decoupling):
 # ---------------------------------------------------------------------------
 
 def test_paper26_entanglement_entropy_z_scaling(decoupling):
-    """von Neumann entropy of the normalized 1-RDM scales as S ~ Z^{-2.56}."""
+    """HOP-AUGMENTED MODEL value S ~ Z^{-2.56} (the retired Paper 26 figure,
+    now quoted there as 'the earlier ... model' value).  The ion's physical
+    exponent -2.52 is pinned in tests/test_he_physical_hamiltonian.py."""
     S = np.array([decoupling[str(z)]['S_full'] for z in _Z_VALUES])
     logZ = np.log(np.array(_Z_VALUES, dtype=float))
     slope = np.polyfit(logZ, np.log(S), 1)[0]

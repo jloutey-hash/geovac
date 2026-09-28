@@ -25,7 +25,7 @@
   "Z_eff_val": 1,
   "gaussian_lih_sto3g_pauli": 631,
   "gaussian_lih_sto3g_qubits": 12,
-  "wall_time_s": 0.19935539999278262,
+  "wall_time_s": 0.6338473999639973,
   "include_pk": true,
   "A_pk": 6.93,
   "B_pk": 7.0,

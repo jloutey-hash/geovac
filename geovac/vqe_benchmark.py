@@ -303,9 +303,18 @@ def run_vqe(
 # System builders
 # ---------------------------------------------------------------------------
 
-def build_geovac_he(max_n: int = 2) -> Tuple[SparsePauliOp, QubitOperator, int, float]:
+def build_geovac_he(
+    max_n: int = 2,
+    include_graph_hop: bool = False,
+) -> Tuple[SparsePauliOp, QubitOperator, int, float]:
     """
     Build GeoVac He qubit Hamiltonian.
+
+    Uses helium's PHYSICAL one-body operator (diagonal -Z^2/(2n^2) in the
+    k = Z hydrogenic basis; ``h1_method='exact'``), the same Hamiltonian as
+    ``ecosystem_export.hamiltonian('He')``.  ``include_graph_hop=True`` is a
+    LEGACY opt-in restoring the pre-2026-09-25 ``h1_method='hybrid'`` model
+    (adds a non-physical +1/16 hop on every lattice edge).
 
     Returns (SparsePauliOp, QubitOperator, n_qubits, exact_energy).
     """
@@ -315,7 +324,8 @@ def build_geovac_he(max_n: int = 2) -> Tuple[SparsePauliOp, QubitOperator, int, 
         warnings.simplefilter("ignore", UserWarning)
         li = LatticeIndex(
             n_electrons=2, max_n=max_n, nuclear_charge=2,
-            vee_method='slater_full', h1_method='hybrid',
+            vee_method='slater_full',
+            h1_method='hybrid' if include_graph_hop else 'exact',
         )
 
     enc = JordanWignerEncoder(li)

@@ -1,0 +1,11 @@
+   sweep 0/9000 step=0.450 t=1s
+   sweep 1000/9000 step=0.450 t=720s
+   sweep 2000/9000 step=0.450 t=1442s
+   sweep 3000/9000 step=0.450 t=2157s
+   sweep 4000/9000 step=0.450 t=2874s
+   sweep 5000/9000 step=0.450 t=3679s
+   sweep 6000/9000 step=0.450 t=4490s
+   sweep 7000/9000 step=0.450 t=5298s
+   sweep 8000/9000 step=0.450 t=6106s
+[cvmc] seed 210 done 6910s acc=0.53 nsamp=1000
+exit=0

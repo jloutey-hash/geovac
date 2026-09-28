@@ -58,7 +58,7 @@ E_n = -\frac{1}{2n^2} \quad (\text{Hartree atomic units}),
 \end{equation}
 in exact agreement with the hydrogen spectrum once the matched kinetic scale $\kappa = -1/16$ fixes the energy unit (matched, not fitted; its coincidence with the Fock Jacobian factor is an Observation, Paper~7). No fitting parameters are required; the algebra determines the quantum-number structure uniquely.
 
-This result validates the lattice as a faithful discrete representation of the hydrogen Hilbert space. The nodes are not a coarse-graining---they \textit{are} the quantum states. The edges encode physically allowed transitions. The quantum-number structure emerges from operator eigenvalues, not from solving differential equations; the energies follow only once the matched scale $\kappa$ is applied (an Observation, Paper~7). (Verified in \texttt{tests/test\_paper1\_rydberg.py}: the $SU(1,1)$ number operator $N = -2[T_+, T_-]$, assembled purely from the ladder generators, has integer spectrum $\{n\}$ and the $SU(2)$ Casimir $L^2$ gives $l(l+1)$, both bit-exact, so $E_n = -1/(2n^2)$ follows from the algebra. This is the dynamical-symmetry construction; the discrete graph Laplacian $L = D - A$ is separately positive-semidefinite and reproduces the spectrum only in the continuum limit, Paper~7~\cite{loutey_paper7}.)
+This result validates the lattice as a faithful discrete representation of the hydrogen Hilbert space. The nodes are not a coarse-graining---they \textit{are} the quantum states. The edges encode physically allowed transitions. The quantum-number structure emerges from operator eigenvalues, not from solving differential equations; the energies follow only once the matched scale $\kappa$ is applied (an Observation, Paper~7). (Verified in \texttt{tests/test\_paper1\_rydberg.py}: the $SU(1,1)$ number operator $N = -2[T_+, T_-]$, assembled purely from the ladder generators, has integer spectrum $\{n\}$ on the \emph{interior} shells $n < n_{\max}$ and the $SU(2)$ Casimir $L^2$ gives $l(l+1)$, both bit-exact, so $E_n = -1/(2n^2)$ follows from the algebra. This is the dynamical-symmetry construction, and it has three limits stated here so that it is not over-read: its $n$-dependence enters through the off-diagonal $T_\pm$ weights rather than through a diagonal operator;\ it is not exact on the top shell, where the truncated commutator makes $N$ $l$-dependent and negative (the test checks interior states only);\ and $SU(1,1)$ is noncompact, so its truncation is not a sub-representation. The exact \emph{compact} discrete operator on these labels is the $SO(4)$ Casimir $\mathbf{L}^2 + \mathbf{A}^2 = n^2 - 1$ ($\mathbf{A}$ the Runge--Lenz vector), diagonal with multiplicity $n^2$ on every shell including the top one, since each shell is a complete irreducible representation (\texttt{tests/test\_graph\_s3\_nonconvergence.py});\ it is the $S^3$ Laplace--Beltrami operator acting on the label set. The discrete graph Laplacian $L = D - A$ is a separate object and does \emph{not} reproduce this spectrum in any limit:\ it preserves $l$, splits into $n_{\max}$ disconnected blocks, and does not converge to $\Delta_{S^3}$ (Paper~7~\cite{loutey_paper7};\ corrected 2026-09-25 from ``reproduces the spectrum only in the continuum limit'').)
 
 
 \section{The Geometric Flesh: Topological Artifacts of Finite Truncation}
@@ -73,7 +73,7 @@ In graph theory, the kinetic energy of a particle on a lattice is described by t
 L = D - A,
 \label{eq:laplacian}
 \end{equation}
-where $A_{ij}$ is the adjacency matrix (edge weights) and $D$ is the weighted degree matrix\footnote{The weighted degree $D_{ii} = \sum_j |A_{ij}|$ represents the total connectivity strength of node $i$. For transition matrices with complex coefficients, we use absolute values to obtain undirected edge weights, explaining the non-integer values in Table~\ref{tab:degrees}.}. This Laplacian is the discrete analog of $-\nabla^2$.
+where $A_{ij}$ is the adjacency matrix (edge weights) and $D$ is the weighted degree matrix\footnote{The weighted degree $D_{ii} = \sum_j |A_{ij}|$ represents the total connectivity strength of node $i$. For transition matrices with complex coefficients, we use absolute values to obtain undirected edge weights, explaining the non-integer values in Table~\ref{tab:degrees}.}. This Laplacian is a discrete analog of $-\nabla^2$ on each $l$-block (a two-dimensional grid in $n$ and $m$);\ it is not a discretization of the $S^3$ Laplacian, to which it does not converge (Paper~7).
 
 For the paraboloid lattice, we construct $A$ from the transition operators:
 \begin{equation}
@@ -246,8 +246,10 @@ extent of the graph, not from any force encoded in the topology.
 The graph Laplacian does not spontaneously generate the Lamb shift
 or replace electromagnetic interactions, and its finite-lattice $s/p$ proxy
 does \emph{not} reproduce the continuum $SO(4)$ Coulomb degeneracy (the
-$\ell$-blocks are disconnected components;\ the continuum limit that would
-carry that degeneracy is a reading, not established by any repository test).  \textbf{[INTERNAL THEOREM]} The $s/p$
+$\ell$-blocks are disconnected components, so the graph Laplacian has no
+continuum limit carrying that degeneracy---it does not converge to
+$\Delta_{S^3}$, Paper~7;\ the degeneracy is carried exactly by the $SO(4)$
+Casimir on the labels, \S II).  \textbf{[INTERNAL THEOREM]} The $s/p$
 node-amplitude proxy is a characterisable discretization artifact with a
 closed-form value on $n_{\max} \equiv 0 \ (\mathrm{mod}\ 3)$ and a proved
 rate --- $O(n_{\max}^{-2})$ there, $O(n_{\max}^{-1})$ generically
@@ -430,8 +432,12 @@ By contrast, the spectral bound $\lambda_{\max} \to 2 d_{\max} = 8$
 spectrum is \emph{not} a level-by-level Rydberg ladder,
 \texttt{tests/test\_paper7\_graph\_convergence.py}) and the edge-weight log-holonomy
 ($\Theta \propto n^{-1}$, Section~\ref{sec:relativity}) are
-\emph{convergent} properties that survive the continuum limit.
-These represent genuine structural content encoded in the topology.
+\emph{convergent} properties of the graph as $n_{\max} \to \infty$.
+They are structural content of the graph itself, not of $S^3$:\ the
+bound $8 = 2 d_{\max}$ is the band edge of any large two-dimensional grid,
+and the graph Laplacian does not converge to $\Delta_{S^3}$ (Paper~7;\
+the ``survive the continuum limit'' reading printed here until
+2026-09-25 is withdrawn).
 
 This distinction is essential: the graph Laplacian does not generate
 electromagnetic forces or the Lamb shift. It encodes the

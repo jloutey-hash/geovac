@@ -32,9 +32,13 @@ Prolate Spheroidal Lattices}
 Fock's 1935 stereographic projection maps the hydrogen atom onto the
 unit three-sphere $S^3$, where the Schr\"odinger equation becomes a
 pure Laplace--Beltrami eigenvalue problem with no potential term.  The
-GeoVac program discretizes this $S^3$ as a graph Laplacian, achieving
-$<0.1\%$ error for one-electron atoms with zero free parameters
-(Papers~0, 1, 7).  For molecules, however, $S^3$ is not the natural
+GeoVac program builds a graph on the $S^3$ label set $(n,l,m)$, on which
+the exact one-electron operator is the diagonal $SO(4)$ Casimir
+$n^2-1$, i.e.\ the hydrogenic spectrum at every cutoff (Papers~0, 1, 7);\
+the graph Laplacian itself is not a discretization of the $S^3$
+operator and does not converge to it, and its extremal eigenvalue
+matches the hydrogen ground state only by construction through the
+scale $\kappa = -1/16$ (Paper~7).  For molecules, however, $S^3$ is not the natural
 geometry: the single-$p_0$ momentum scale cannot encode the
 $R$-dependent bonding physics in that single-$n$ shared-$p_0$ approximation
 (Paper~8--9, negative theorem;\ the genuine cross-$n$ Coulomb--Sturmian basis
@@ -44,7 +48,9 @@ We resolve this by identifying the \emph{natural geometry principle}:
 every separable quantum system has a natural lattice---the lattice
 that discretizes the Laplace--Beltrami operator in the coordinate
 system where separation occurs.  For one-center systems that geometry
-is $S^3$; for two-center systems it is the prolate spheroid.  We
+is $S^3$ (where the GeoVac lattice is the label set rather than a
+convergent discretization, Paper~7); for two-center systems it is the
+prolate spheroid.  We
 discretize the separated prolate spheroidal equations for H$_2^+$
 using a spectral angular solver (Legendre basis) and two radial
 solvers---a self-adjoint finite-difference (FD) scheme and a spectral
@@ -60,6 +66,15 @@ Stieltjes integral recurrence, reducing the non-algebraic content to
 a single transcendental seed value $e^a E_1(a)$.
 The method has \emph{zero} free parameters: all inputs are nuclear
 charges, internuclear distance, and basis/grid resolution.
+The separation constant is also an exact label. In any product
+(Laguerre $\times$ Legendre) basis, the matrices of $H$ and of the
+Erikson--Hill operator $\Lambda$ are Atkinson operator determinants, so
+$[H,\Lambda]=0$ holds at every truncation (measured to $10^{-14}$).
+$\Lambda$ runs from $L^2$ in the united atom to the Runge--Lenz $A_z$
+(parabolic) label in the separated atoms. For the Paper~12 H$_2$ CI at
+one basis and geometry it ranks configurations 8--10$\times$ better than
+orbital energy, though natural orbitals beat it by about $10\times$. It
+does not transfer to a LiH orbital set that is not tensor-closed.
 
 Results for H$_2^+$ with the spectral Laguerre radial solver
 ($n_{\mathrm{basis}} = 20$): minimum energy
@@ -95,10 +110,12 @@ three-sphere $S^3$.  The Coulomb potential $-Z/r$ is not an input
 force law but a coordinate distortion produced by the stereographic
 projection from $S^3$ to flat $\mathbb{R}^3$.  This equivalence,
 established symbolically with 18 independent proofs~\cite{loutey_paper7},
-underlies the entire GeoVac computational framework: discretize $S^3$
-as a graph, solve the graph Laplacian eigenvalue problem, and recover
-atomic energies to $<0.1\%$ error with no fitted
-parameters~\cite{loutey_paper0, loutey_paper1}.
+underlies the GeoVac computational framework: take the $S^3$ label set
+$(n,l,m)$ as the nodes of a graph, solve the sparse eigenvalue problem
+on it, and recover atomic energies to $<0.1\%$ error with no fitted
+parameters~\cite{loutey_paper0, loutey_paper1} (the graph Laplacian is
+not a discretization of $\Delta_{S^3}$ and does not converge to it,
+Paper~7).
 
 The extension to molecules has proven more subtle.  Paper~8--9
 established the \emph{bond sphere} picture---a diatomic molecule
@@ -851,8 +868,8 @@ equation, breaking the $\eta \to -\eta$ parity symmetry, but the
 algorithm handles this without modification.
 
 \paragraph{How the $\eta$-label drifts with $R$.}
-\textbf{[MEASURED]} The separation parameter $A$ reduces to $l(l+1)$ in
-the united-atom limit, so the ground $\eta$-eigenvector's participation
+\textbf{[MEASURED]} The separation parameter $-A$ reduces to $l(l+1)$ in
+the united-atom limit (with the sign of Eq.~\eqref{eq:eta_equation}), so the ground $\eta$-eigenvector's participation
 deficit $D = 1 - \max_l |v_l|^2$ in the Legendre basis measures how far
 the state has drifted from a pure united-atom $l$-label.  The two cases
 turn on at different orders.  For H$_2^+$ ($b = 0$) the $c^2\eta^2$ term
@@ -871,6 +888,213 @@ a parameter that deforms rather than switches.  Backing:\
 \texttt{tests/test\_paper11\_eta\_mixing\_onset.py} (the two onset
 exponents, solver-free);\ the large-$R$ values are the solver's, chronicled
 in CHANGELOG v5.10.2.
+
+\subsection{The separation constant as an exact label}
+\label{sec:separation_label}
+
+The solvers above treat $A$ as a number to be matched between two
+ordinary differential equations. It is also an operator, and in a
+product basis it commutes with $H$ \emph{exactly}, at every truncation.
+
+\paragraph{The operator.}
+\textbf{[PRIOR ART]} Write $Z_\pm = Z_A \pm Z_B$, with $Z_A$ at
+$\eta = -1$, and
+\begin{align}
+  \tilde F &= -\partial_\xi(\xi^2-1)\partial_\xi + \frac{m^2}{\xi^2-1}
+              - R Z_+ \xi, \nonumber\\
+  \tilde G &= -\partial_\eta(1-\eta^2)\partial_\eta + \frac{m^2}{1-\eta^2}
+              + R Z_- \eta. \label{eq:FG_tilde}
+\end{align}
+Then $H = (2/R^2)(\tilde F + \tilde G)/(\xi^2-\eta^2)$, and
+\begin{equation}
+  \Lambda = \frac{\xi^2 \tilde G + \eta^2 \tilde F}{\xi^2 - \eta^2}
+  \label{eq:Lambda_op}
+\end{equation}
+is dimensionless. On an eigenstate its eigenvalue $\lambda$ is the
+$\eta$-equation eigenvalue, $\lambda = -A$ in the sign convention of
+Eq.~\eqref{eq:eta_equation}. $H$, $L_z$ and $\Lambda$ form the complete
+commuting set of Erikson and Hill~\cite{EriksonHill1949}. Coulson and
+Joseph derived $\Lambda$ from the Runge--Lenz vector of the one-centre
+problem~\cite{CoulsonJoseph1967}. The same operator, in the form
+$L^2 + \ldots$, appears in Komarov, Ponomarev and
+Slavyanov~\cite{KPS1976}. Miller and Turbiner construct the symmetry
+operator explicitly for the whole class of two-centre problems that
+separate in these coordinates~\cite{MillerTurbiner2014}.
+
+\paragraph{Exactness at every truncation.}
+Take a product basis $f_a(\xi)\,g_b(\eta)\,e^{im\varphi}$. Let $r_k$ and
+$a_k$ be the matrices of $\xi^k$ and $\eta^k$, and $F_x$, $G_y$ the
+matrices of $\tilde F$, $\tilde G$. Every operator is then a Kronecker
+combination of one-dimensional blocks:
+\begin{align}
+  W   &= r_2\otimes 1 - r_0\otimes a_2, \nonumber\\
+  H_m &= \tfrac{2}{R^2}\,(F_x\otimes 1 + r_0\otimes G_y), \nonumber\\
+  N   &= r_2\otimes G_y + F_x\otimes a_2, \label{eq:atkinson_dets}
+\end{align}
+with $H_m c = E\,W c$ and $N c = \lambda\,W c$. Here $W$ is the Gram
+matrix of the Jacobian $\xi^2-\eta^2$. These three matrices are exactly
+the operator determinants $\Delta_0$, $\Delta_1$, $\Delta_2$ of the
+algebraic two-parameter eigenproblem
+$(F_x - \varepsilon r_2 + \lambda r_0)x = 0$,
+$(G_y + \varepsilon a_2 - \lambda)y = 0$, with
+$\varepsilon = E R^2/2$. $W$ is positive definite, so the problem is
+right-definite. Atkinson's theory~\cite{Atkinson1972} then gives two
+facts at every finite size, not only in the limit:
+$W^{-1}H_m$ and $W^{-1}N$ commute, and their joint eigenvectors
+decompose as $x\otimes y$.
+
+\textbf{[MEASURED]} We use a basis of normalized $P_l^m(\eta)$ and
+$(\xi^2-1)^{m/2}e^{-\alpha(\xi-1)}L_a^{(m)}(2\alpha(\xi-1))$. The
+$\xi$-integrands are polynomial $\times\,e^{-t}$, so a Gauss--Laguerre
+rule is exact. The relative commutator
+$\|[\hat H,\hat\Lambda]\|/(\|\hat H\|\|\hat\Lambda\|)$ is then
+$10^{-16}$--$2\times10^{-14}$ for $R \gtrsim 1$, for both H$_2^+$ and
+$(Z_A,Z_B) = (3,1)$. At $R = 0.01$ it rises to $\le 9\times10^{-10}$,
+which is $\mathrm{cond}(W)\sim10^6$ times rounding, not truncation. The
+control is informative: flipping the sign of the $R Z_-\eta$ term raises
+the $(3,1)$ commutator to $3.7\times10^{-4}$--$3.9\times10^{-2}$.
+Backing: \texttt{tests/test\_paper11\_separation\_constant.py}
+(commutation to $<10^{-11}$ at $R = 0.5, 2, 8$, $m = 0, 1$, both
+charge pairs).
+
+The commuting-determinant theorem is Atkinson's. Discretizing separable
+boundary-value problems, spheroidal wave functions among them, into
+algebraic multiparameter eigenproblems is also established numerical
+practice~\cite{Plestenjak2015}. \textbf{[NOT FOUND by our search]} is
+the observation that the product-basis Galerkin matrices of the
+two-centre Coulomb $H$ and $\Lambda$ \emph{are} those determinants, so
+that the Erikson--Hill commutation holds exactly at every cutoff rather
+than only in the complete basis. This is a short observation, not a new
+theorem.
+
+\paragraph{The two limits.}
+The states carry R-invariant labels $(n_\xi, n_\eta)$, the node counts
+of the two separated problems.
+
+\emph{United atom.} \textbf{[MEASURED]} As $R\to0$ the labels satisfy
+$l = n_\eta + m$ and $n = n_\xi + n_\eta + m + 1$. We find
+$\lambda \to l(l+1)$ and $E \to -Z_+^2/2n^2$ for all 75 tracked states
+(49 for H$_2^+$, 26 for the $(3,1)$ system). The correction is $O(R^2)$
+for homonuclear charges and $O(R)$ for heteronuclear ones, the onset
+orders of the $\eta$-drift paragraph above. Backing: the test's
+united-atom check, which reads $(n,l)$ from the node counts and never
+from $\lambda$.
+
+\emph{Separated atoms.} Asymptotic analysis of the $\eta$ equation near
+the focus of the charge $Z_{\rm self}$ that binds the electron gives
+\begin{equation}
+  \lambda + c^2 = R\left(Z_{\rm other} + \frac{Z_{\rm self}}{n}\,k\right)
+                 + O(1),
+  \label{eq:lambda_SA}
+\end{equation}
+with $c^2 = -R^2E/2$ as in Eq.~\eqref{eq:params}. Here $k$ is an
+eigenvalue of the energy-scaled Runge--Lenz component $A_z$ on shell $n$
+at fixed $m$, which is the parabolic (Stark) label. \textbf{[MEASURED]}
+We fit $\lambda + c^2 = sR + c_0 + c_1/R$ on $R = 65$--$80$. With $k$
+taken from the $SO(4)$ generators built from Pauli's reduced matrix
+elements (no integer entered by hand), all 26 $(3,1)$ states sit on the
+$A_z$ spectrum to $|\Delta k|\le 0.008$ for $n\le6$. The sign of $k$
+agrees in every case with the first-order Stark shift in the partner's
+field. For H$_2^+$, every state that correlates to $n\le3$ lands within
+$0.012$. States correlating to $n = 4$--$5$ have not reached the
+asymptotic regime at $R = 80$ ($|\Delta k|$ up to $0.2$), which is the
+slow approach expected at high $n$ (quoted, not a failure of the label).
+Backing: the test's separated-atom check covers the lowest four $m = 0$
+$(3,1)$ states at $R = 20, 40, 80$ with tolerance $0.02$, including at
+least two with $n > 1$. The H$_2^+$ numbers and the $n$ up to 6 sweep
+are measured but not regression-tested.
+
+The operator statement behind Eq.~\eqref{eq:lambda_SA} is
+\textbf{[PRIOR ART]}: $\Lambda$ is built from $L^2$ and the Runge--Lenz
+vector~\cite{CoulsonJoseph1967,KPS1976}. For the one-centre hydrogen
+atom, the spheroidal basis tends to the spherical basis at small focal
+distance and to the parabolic basis at large focal
+distance~\cite{Mardoyan1985}. That is the same interpolation, and we
+classify it as \textbf{[PARTIAL]} prior art for the two-centre case. What
+this section adds is only the quantitative check of the two-centre limit
+against an independently built $A_z$ spectrum, including a heteronuclear
+system.
+
+\paragraph{Crossings.} \textbf{[PRIOR ART]} Same-symmetry curves of the
+two-centre problem cross because of this extra constant of motion. Each
+state correlates united-atom $(n,l)$ with separated-atom $(n,k)$ through
+its conserved node counts. The non-crossing violation and the analytic
+correlation rule are due to Gershtein and Krivchenkov~\cite{GK1961}.
+Coulson and Joseph attribute the violation to $\Lambda$
+itself~\cite{CoulsonJoseph1967}. The H$_2^+$ curves go back to Morse and
+Stueckelberg~\cite{MorseStueckelberg1929} and Bates, Ledsham and
+Stewart~\cite{Bates1953}. \textbf{[MEASURED, not regression-tested]}
+Among the eight lowest states per $(m,\text{parity})$ block on
+$R\in[0.1,80]$ there are 46 crossings for H$_2^+$ and 7 for $(3,1)$.
+Every one is between states whose $\lambda$ differs by $O(1)$--$O(40)$.
+An example is H$_2^+$ $2s\sigma_g\times3d\sigma_g$ at $R\approx4.06$,
+where $\lambda = -0.88$ against $4.82$.
+
+\paragraph{Reading.}
+On $S^3$ the one-electron operator is the $SO(4)$ Casimir, diagonal and
+exact on the $(n,l,m)$ labels at every $n_{\max}$ (Paper~7). The
+two-centre analogue is the pair $(H,\Lambda)$: in a product prolate
+basis both are exact on the joint labels at every cutoff. $\Lambda$
+interpolates between the two $SO(4)$ subgroup labels of hydrogen, $L^2$
+at $R\to0$ and $A_z$ at $R\to\infty$. We offer this as a reading of the
+same label structure in two coordinate systems. It is not a claim that
+either description is the more fundamental one.
+
+\paragraph{Two electrons: a selection label, not a quantum number.}
+\textbf{[MEASURED 2026-09-26; not regression-tested]} We took the
+production H$_2$ CI of Paper~12~\cite{loutey_paper12}: basis
+$(j,l,\mu) = (4,4,2)$, $\alpha = 1.2$, 975 functions, one geometry
+$R = 1.4011$~bohr, $E_0 = -1.17405771$~Ha. The one-body
+$\Lambda_1 = \Lambda(1)+\Lambda(2)$ is not conserved. Relative to the
+full $H$, $\|[H,\Lambda_1]\|$ is $9.1\times10^{-3}$, of which the
+one-body part contributes $4.5\times10^{-11}$, so all of it comes from
+$V_{ee}$. In the ground state $\langle\Lambda_1\rangle = -0.795$ with
+spread $0.651$.
+
+As an \emph{a priori} ranking of MO-pair configurations, however,
+$\Lambda$ works well:
+\begin{itemize}
+  \item The leading configuration $1\sigma_g^2$ carries $92.3\%$ of the
+    weight. This is the ordinary fact that H$_2^+$ orbitals are good
+    H$_2$ orbitals, and is not specific to $\Lambda$.
+  \item Keeping the 20\% of configurations with the smallest
+    $\Lambda$-sum loses $0.87$~mHa. Ordering by orbital-energy sum loses
+    $6.7$~mHa, and random selection $69$~mHa. At 20--50\% retention the
+    $\Lambda$ order is 8--10$\times$ better than energy order.
+  \item At the orbital level, the 10 lowest-$\Lambda$ orbitals lose
+    $8.4$~mHa, against $28.7$~mHa for energy order.
+  \item Natural orbitals lose $0.98$~mHa. They need the correlated
+    answer first, but they beat $\Lambda$ by about $10\times$.
+\end{itemize}
+So $\Lambda$ is a good \emph{a priori} selector, not the best selector.
+The scope is one molecule, one basis, one exponent and one geometry.
+\textbf{[NOT FOUND by our search]}: prior use of the one-electron
+separation constant as a configuration-selection label for two-electron
+CI.
+
+\paragraph{The limit: LiH (Route C).}
+\textbf{[MEASURED 2026-09-26; not regression-tested; negative]}
+Exactness needs a tensor-closed product space $V_\xi\otimes V_\eta$,
+not merely product orbitals. The Route C LiH orbital set of
+Paper~19~\cite{loutey_paper19} consists of 10 orbitals, with STO cores
+carrying $\eta$-exponential factors and mixed exponents. Each orbital
+is itself a $\xi$-function times an $\eta$-function (e.g.\
+$e^{-\zeta r_A} = e^{-(\zeta R/2)(\xi-1)}\,e^{-(\zeta R/2)(1+\eta)}$
+exactly), but the set does not span the tensor product of its factors;
+a triangular truncation of a product basis would break exactness the
+same way. There the bare-nucleus $(3,1)$ $\Lambda$ no longer
+commutes with the one-body operator, $\|[h_1,\Lambda]\|_{\rm rel} =
+2.2\times10^{-2}$. The FCI in this set (2025 determinants,
+$R = 3.015$~bohr) reproduces the Route C energy $-8.00794$~Ha. On the
+bare-nucleus MOs the leading configuration carries only 59\% of the
+weight. A 20\%-retained $\Lambda$-ordered CI loses $7.5$~mHa, against
+$10.9$~mHa for energy order, and at 10\% retention $\Lambda$ order is
+worse. The gate (dominant weight $>90\%$, loss $<1$~mHa at 20\%) fails.
+There are two causes: the orbital set is not tensor-closed, and
+the bare-nucleus $\Lambda$ ignores core screening; a follow-up one-body
+probe suggests the second (core penetration) is the larger one for the
+$\sigma$ virtuals a selector must rank. A tensor-closed valence set or a
+screened $\Lambda$ was not attempted.
 
 %% ========================================================================
 %% VIII. DISCUSSION
@@ -953,30 +1177,21 @@ systems, it is clearly superior.
 The most important limitations and implemented extensions are:
 
 \paragraph{Two-electron systems (H$_2$).}
-We have implemented a prolate spheroidal CI using
-single-particle orbitals ($\sigma_g$, $\sigma_u$) from the separated
-H$_2^+$ solver and a 2$\times$2 CI in the $^1\Sigma_g^+$ sector.
-The $V_{ee}$ matrix elements are computed via azimuthal averaging
-of $1/r_{12}$ using the complete elliptic integral $K(k)$ on a
-two-dimensional $(\xi, \eta)$ quadrature grid.
-
-With frozen H$_2^+$ orbitals ($Z_{\mathrm{eff}} = 1$), the CI yields
-$D_e = 0.077$~Ha (44\% of exact 0.175~Ha) at $R_{\mathrm{eq}} = 1.77$~bohr.
-Optimizing the orbital exponent via the Eckart variational method
-($Z_{\mathrm{eff}}^* \approx 0.765$ at $R = 1.4$~bohr) reduces
-the Coulomb self-repulsion $J_{gg}$ from 0.80 to 0.68~Ha and improves the
-result to $D_e = 0.101$~Ha (58\% of exact) with $R_{\mathrm{eq}}$
-matching the exact value of 1.401~bohr within fitting precision.
-
-An important structural result is the \emph{pi orbital selection rule}:
-$\langle \sigma_g \sigma_g | \pi_+ \pi_- \rangle = 0$ by azimuthal
-symmetry, so $\pi$ orbitals cannot improve the $^1\Sigma_g^+$ ground
-state via CI mixing.  The 4$\sigma$ CI (6$\times$6 matrix) confirms
-this, adding only 0.1~mHa over the 2$\times$2 result.
-
-The remaining 42\% $D_e$ error arises from the minimal two-orbital
-CI basis and missing dynamic correlation.  The $V_{ee}$ integrals
-converge as $O(1/N_{\mathrm{grid}}^2)$ in grid size.
+The two-electron problem is treated in Paper~12~\cite{loutey_paper12},
+which supersedes the minimal CI first reported here. With a full
+prolate-spheroidal CI whose $V_{ee}$ is evaluated algebraically by the
+Neumann expansion, Paper~12 reaches $99.81\%$ of $D_e$; with explicit
+$r_{12}$ correlation and exact integrals it reaches $99.97\%$ (0.053~mHa).
+Historically, this paper's original $2\times2$ $\sigma$-only CI,
+built from separated H$_2^+$ orbitals with a single Eckart-optimized
+exponent, gave $58\%$ of $D_e$. That figure measured the size of that
+minimal CI, not a limit of the geometry. It was once paired with a claimed
+``$\pi$-orbital selection rule'' ($\langle\sigma_g\sigma_g|\pi_+\pi_-\rangle=0$),
+which is \emph{withdrawn} [retracted 2026-09-26: p11-pi-orbital-selection-rule]:
+a $^1\Sigma_g^+$ state constrains only the total $M$, so $\pi_+\pi_-$ pairs do
+couple. Restoring the azimuthal channels in the same basis is worth
+$+11.6$~mHa, and it is what separates the $\sigma$-only ceiling from the
+$99\%$ regime (Paper~12, ``Restoring the Azimuthal Channels'').
 
 \paragraph{Heteronuclear systems (HeH$^+$).}
 For heteronuclear diatomics, we have implemented independent
@@ -1018,6 +1233,12 @@ over the finite-difference radial solver, whose $1.01\%$ error was
 a discretization artifact.  For $\sigma$ states, the spectral matrix
 elements are computed algebraically from Laguerre moment recurrences,
 eliminating numerical quadrature from the radial solver entirely.
+The separation constant is an exact label of the product basis at
+every cutoff (Sec.~\ref{sec:separation_label}). The commutation is
+Erikson and Hill's and the operator determinants are Atkinson's; the
+finite-truncation statement was not found in our literature search. It is useful as an \emph{a priori}
+configuration selector for H$_2$ in one tested setting, and it fails on
+a LiH orbital set that is not tensor-closed.
 
 This result establishes the \emph{natural geometry principle} as
 the organizing idea of the GeoVac program:
@@ -1028,10 +1249,9 @@ coordinate system where separation occurs.}
 \end{quote}
 The atomic $S^3$ lattice (Papers~0, 1, 7) and the molecular prolate
 spheroidal lattice (this paper) are the first two instances of this
-principle.  The two-electron extension to H$_2$ via prolate
-spheroidal CI achieves 58\% of the exact binding energy with a single
-variationally optimized orbital exponent and no empirical parameters.  Future work will pursue larger
-CI expansions, polyatomic systems with other natural coordinate
+principle.  The two-electron extension to H$_2$ in the same prolate
+spheroidal coordinates reaches $99.97\%$ of $D_e$ with zero empirical
+parameters (Paper~12~\cite{loutey_paper12}).  Future work will pursue polyatomic systems with other natural coordinate
 systems, and integration of the spectral radial solver into the
 full PES scan and composed-geometry pipelines.
 
@@ -1217,6 +1437,62 @@ R.~P. Brent,
 L.~N. Trefethen,
 \textit{Spectral Methods in MATLAB}
 (SIAM, Philadelphia, 2000).
+
+\bibitem{EriksonHill1949}
+H.~A. Erikson and E.~L. Hill,
+``A note on the one-electron states of diatomic molecules,''
+Phys. Rev. \textbf{75}, 29--31 (1949).
+
+\bibitem{CoulsonJoseph1967}
+C.~A. Coulson and A.~Joseph,
+``A constant of the motion for the two-centre Kepler problem,''
+Int. J. Quantum Chem. \textbf{1}, 337--347 (1967).
+
+\bibitem{KPS1976}
+I.~V. Komarov, L.~I. Ponomarev, and S.~Yu. Slavyanov,
+\textit{Spheroidal and Coulomb Spheroidal Functions}
+(Nauka, Moscow, 1976) [in Russian].
+
+\bibitem{MillerTurbiner2014}
+W.~Miller, Jr.\ and A.~V. Turbiner,
+``Particle in a field of two centers in prolate spheroidal coordinates:
+integrability and solvability,''
+J. Phys. A \textbf{47}, 192002 (2014).
+
+\bibitem{Atkinson1972}
+F.~V. Atkinson,
+\textit{Multiparameter Eigenvalue Problems, Vol.~I: Matrices and Compact
+Operators} (Academic Press, New York, 1972).
+
+\bibitem{Plestenjak2015}
+B.~Plestenjak, C.~I. Gheorghiu, and M.~E. Hochstenbach,
+``Spectral collocation for multiparameter eigenvalue problems arising
+from separable boundary value problems,''
+J. Comput. Phys. \textbf{298}, 585--601 (2015).
+
+\bibitem{Mardoyan1985}
+L.~G. Mardoyan, G.~S. Pogosyan, A.~N. Sissakian, and V.~M. Ter-Antonyan,
+``Spheroidal corrections to the spherical and parabolic bases of the
+hydrogen atom,''
+Theor. Math. Phys. \textbf{64}, 171--175 (1985).
+
+\bibitem{GK1961}
+S.~S. Gershtein and V.~D. Krivchenkov,
+Sov. Phys. JETP \textbf{13}, 1044 (1961).
+
+\bibitem{MorseStueckelberg1929}
+P.~M. Morse and E.~C.~G. Stueckelberg,
+``Diatomic molecules according to the wave mechanics I: Electronic
+levels of the hydrogen molecular ion,''
+Phys. Rev. \textbf{33}, 932--947 (1929).
+
+\bibitem{loutey_paper12}
+J.~Loutey, ``Algebraic Two-Electron Integrals on the Prolate Spheroidal
+Lattice,'' GeoVac Paper~12 (2026).
+
+\bibitem{loutey_paper19}
+J.~Loutey, ``Toward PK-Free Molecular Hamiltonians: Two-Center Sturmian
+Integrals and Coupled Composition,'' GeoVac Paper~19 (2026).
 
 \bibitem{loutey_paper58}
 J.~Loutey, ``Angular Sparsity Is an Atomic-Sector Property: The Abelian

@@ -11,7 +11,8 @@
 | Task | Module | Entry Point |
 |:-----|:-------|:------------|
 | Atomic lattice | `geovac/lattice.py` | `GeometricLattice(max_n, nuclear_charge=Z)` |
-| Atomic Hamiltonian | `geovac/atomic_solver.py` | `AtomicSolver(max_n, Z)` · `solve_atom(Z, max_n)` (drift fix 2026-07-06: previously listed `GraphHamiltonian(lattice)` never existed; `geovac/hamiltonian.py` is He-specific) |
+| Atomic Hamiltonian | `geovac/atomic_solver.py` | `AtomicSolver(max_n, Z)` · `solve_atom(Z, max_n)` (drift fix 2026-07-06: previously listed `GraphHamiltonian(lattice)` never existed) |
+| Legacy He / LCAO-molecule classes (ARCHIVED 2026-09-26) | `geovac/_archive/superseded/hamiltonian.py`, `geovac/_archive/superseded/aimd.py` | `HeliumHamiltonian`, `HeliumPackingSolver`, `MoleculeHamiltonian`, legacy `solve_helium`, `CALIBRATED_KINETIC_SCALE = -0.10298808` (FITTED to the experimental He energy -- an empirical parameter, retired from the live package). `geovac/hamiltonian.py`, `geovac/aimd.py`, and the top-level `geovac.HeliumHamiltonian` / `MoleculeHamiltonian` / `HeliumPackingSolver` / `CALIBRATED_KINETIC_SCALE` / `solve_helium` are DeprecationWarning shims (plain `import geovac` does not warn). For helium use `geovac.hyperspherical_radial.solve_helium` (Level 3). |
 | Multi-electron FCI | `geovac/lattice_index.py` | `LatticeIndex(Z, n_electrons, max_n)` |
 | Direct CI (large systems) | `geovac/direct_ci.py` | `DirectCISolver(lattice_index)` |
 | Molecular FCI (LCAO) | `geovac/lattice_index.py` | `MolecularLatticeIndex(atoms, R)` |
@@ -31,7 +32,7 @@
 | Composed qubit | `geovac/composed_qubit.py` | `build_composed_lih()`, `build_composed_beh2()`, `build_composed_h2o()`, `build_h2_bond_pair()` |
 | Algebraic angular solver | `geovac/algebraic_angular.py` | `AlgebraicAngularSolver(Z, l_max)` |
 | Algebraic coupled-channel | `geovac/algebraic_coupled_channel.py` | `solve_hyperspherical_algebraic_coupled()` |
-| Hyperradial solver | `geovac/hyperspherical_radial.py` | `solve_radial()`, `solve_radial_spectral()` |
+| Hyperradial solver | `geovac/hyperspherical_radial.py` | `solve_radial()`, `solve_radial_spectral()`, `solve_helium()` (the Level-3 He solver; distinct from the archived top-level legacy wrapper) |
 | Spectral angular (Level 4) | `geovac/level4_spectral_angular.py` | `SpectralAngularSolver`, `angular_method='spectral'` |
 | Perturbation series (Level 3) | `geovac/algebraic_angular.py` | `perturbation_series_mu()`, `pade_approximant()` |
 | Algebraic curve (Level 3) | `geovac/algebraic_curve.py` | `characteristic_polynomial()`, `algebraic_veff_matrix_lmax0()` |

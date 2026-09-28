@@ -74,7 +74,7 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | 8–9 `Paper_8_Bond_Sphere_Sturmian.tex` | **GUARDRAIL** | Sturmian structural theorem: single-center molecular encodings are R-independent (proven dead end) |
 | 11 `paper_11_prolate_spheroidal.tex` | ACTIVE | H₂⁺ to machine precision via spectral Laguerre |
 | 12 `paper_12_algebraic_vee.tex` | ACTIVE | Algebraic V_ee (Neumann expansion) |
-| 13 `paper_13_hyperspherical.tex` | ACTIVE | He at 0.022% raw / 0.004% cusp-extrapolated; graph-native CI at 0.216% (n_max=7) with zero parameters |
+| 13 `paper_13_hyperspherical.tex` | ACTIVE | He at 0.022% raw / 0.004% cusp-extrapolated; fixed-k hydrogenic CI with He's physical Hamiltonian at 1.88% (n_max=7, zero parameters; continuum-incompleteness floor). The earlier "graph-native 0.216%" added a non-physical one-body graph hop and is withdrawn [retracted 2026-09-25: he-graph-native-hop-headline] |
 | 15 `paper_15_level4_geometry.tex` | ACTIVE | H₂ at 96.0% D_e (molecule-frame hyperspherical) |
 | 17 `paper_17_composed_geometries.tex` | ACTIVE | Composed geometry: LiH R_eq 5.3%; the production molecular architecture |
 | 19 `paper_19_coupled_composition.tex` | ACTIVE | Balanced coupled builder; PK-free cross-center V_ne |

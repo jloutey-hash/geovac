@@ -24,8 +24,10 @@ in Molecule-Frame Hyperspherical Coordinates}
 \begin{abstract}
 The natural geometry hierarchy assigns each separable quantum system
 a coordinate system in which Coulomb singularities become boundary
-conditions and the Laplace--Beltrami operator discretizes on a sparse graph:
-$S^3$ for hydrogen (Paper~7), prolate spheroidal for H$_2^+$ (Paper~11),
+conditions and the problem becomes sparse and discrete:
+$S^3$ for hydrogen (Paper~7;\ there the discrete object is the exact
+label set of the $S^3$ harmonics, not an edge-Laplacian discretization,
+which does not converge), prolate spheroidal for H$_2^+$ (Paper~11),
 and hyperspherical for helium (Paper~13).
 The two-center, two-electron molecule H$_2$ combines all five Coulomb
 singularities and has resisted a single natural coordinate system.
@@ -93,9 +95,11 @@ Three levels of this hierarchy have been established and validated:
 \item[Level~1] \emph{One-center, one-electron} (H).  Fock's 1935
   stereographic projection~\cite{fock1935} maps the hydrogen atom to the
   unit $S^3$, where the $1/r$ Coulomb singularity becomes the conformal
-  factor of the projection.  The discrete graph Laplacian on $S^3$ is
+  factor of the projection.  The $S^3$ Laplace--Beltrami operator is
   mathematically equivalent to the Schr\"odinger equation
-  (Paper~7~\cite{paper7}; 18/18 symbolic proofs).
+  (Paper~7~\cite{paper7}; 18/18 symbolic proofs), and the discrete
+  lattice's nodes are exactly its labels $(n,l,m)$;\ the lattice's
+  graph Laplacian does not converge to it (Paper~7).
 \item[Level~2] \emph{Two-center, one-electron} (H$_2^+$).  In prolate
   spheroidal coordinates $(\xi,\eta,\phi)$, the two nuclear Coulomb
   singularities $1/r_A + 1/r_B$ separate into independent equations.

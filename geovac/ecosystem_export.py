@@ -1267,17 +1267,33 @@ def _build_alkaline_earth_monohydride(
 def _build_he(
     max_n: int = 2,
     verbose: bool = False,
+    include_graph_hop: bool = False,
 ) -> GeoVacHamiltonian:
-    """Build He atomic Hamiltonian via JordanWigner encoding."""
+    """Build He atomic Hamiltonian via JordanWigner encoding.
+
+    The one-body operator is helium's PHYSICAL one: in the fixed k = Z
+    hydrogenic basis, T + V_ne is exactly diagonal, h1 = -Z^2/(2 n^2)
+    (``LatticeIndex(h1_method='exact')``).  The two-body part is the full
+    Slater-integral V_ee under the exact global-M_L rule.
+
+    ``include_graph_hop=True`` is a LEGACY opt-in that reproduces the
+    pre-2026-09-25 library model (``h1_method='hybrid'``): the same diagonal
+    PLUS a non-physical kappa*(-A) = +1/16 hop on every GeometricLattice edge.
+    That hop is not part of the atom's Hamiltonian (it lowers the He ground
+    state by ~48 mHa) and must never be the library default; it is kept only
+    so the retired Pauli / 1-norm figures stay reproducible.
+    ``hamiltonian('He')`` never passes it.
+    """
     import warnings
     from geovac.lattice_index import LatticeIndex
     from geovac.qubit_encoding import JordanWignerEncoder
 
+    h1_method = 'hybrid' if include_graph_hop else 'exact'
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", UserWarning)
         li = LatticeIndex(
             n_electrons=2, max_n=max_n, nuclear_charge=2,
-            vee_method='slater_full', h1_method='hybrid',
+            vee_method='slater_full', h1_method=h1_method,
         )
     enc = JordanWignerEncoder(li)
     qubit_op = enc.build_qubit_operator()
@@ -1286,6 +1302,7 @@ def _build_he(
         'system': 'He',
         'max_n': max_n,
         'Q': li.n_sp,
+        'h1_method': h1_method,
     }
     return GeoVacHamiltonian(qubit_op, metadata=meta)
 

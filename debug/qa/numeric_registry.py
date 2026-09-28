@@ -71,6 +71,8 @@ from __future__ import annotations
 # other convention" from "wrong".
 # ---------------------------------------------------------------------------
 
+PROV_HE = "MEASURED 2026-09-25 debug/library_he_fix.py, hamiltonian('He') = LatticeIndex(slater_full, h1_method='exact') -- helium's PHYSICAL h1; 2nd route composed builder on the He spec agrees"
+
 MEASURED = {
     # ---- two-center decompactification front (Papers 58 / 60, 2026-09-05/06) ----
     # The front R*(n) is the distance at which <ns_A|ns_B> = 1/sqrt2 (projector
@@ -826,63 +828,160 @@ MEASURED = {
         aliases={2.76: "pair-diagonal D_pd (axially-symmetric / m-decoupled "
                        "bases only)"}),
 
-    # ---- He atomic series, exact global-M_L ERI rule --------------------
+    # ---- He atomic series, exact global-M_L ERI rule, PHYSICAL h1 --------
+    # Re-measured 2026-09-25: until then the library He (and these keys)
+    # carried LatticeIndex(h1_method='hybrid'), which adds a non-physical
+    # +1/16 hop on every GeometricLattice edge to the one-body operator.
+    # In the k=Z hydrogenic basis T+V_ne is exactly diagonal, so the hop is
+    # not helium's.  Retired hop-model values are in RETIRED below.
     "he_n2_pauli": dict(
-        value=287, convention="non-identity Pauli terms", q=10,
-        provenance="MEASURED 2026-08-30, JordanWignerEncoder on "
-                   "LatticeIndex(He, max_n=2, slater_full)",
-        aliases={288: "including identity"}),
+        value=279, convention="non-identity Pauli terms", q=10,
+        provenance=PROV_HE + " exactly (279)",
+        aliases={280: "including identity"}),
     "he_n3_pauli": dict(
-        value=14078, convention="non-identity Pauli terms", q=28,
-        provenance="MEASURED 2026-08-30, same route",
-        aliases={14079: "including identity"}),
+        value=14046, convention="non-identity Pauli terms", q=28,
+        provenance=PROV_HE + " exactly (14046)",
+        aliases={14047: "including identity"}),
     "he_n4_pauli": dict(
-        value=250402, convention="non-identity Pauli terms", q=60,
-        provenance="MEASURED 2026-08-30, same route",
-        aliases={250403: "including identity"}),
+        value=250322, convention="non-identity Pauli terms", q=60,
+        provenance="MEASURED 2026-09-25 debug/library_he_fix.py (physical h1)",
+        aliases={250323: "including identity"}),
     "he_n5_pauli": dict(
-        value=2434441, convention="non-identity Pauli terms", q=110,
-        provenance="MEASURED 2026-08-30, ecosystem hamiltonian('He', max_n=5); "
-                   "28 min build",
-        aliases={2434442: "including identity"}),
+        value=2434281, convention="non-identity Pauli terms", q=110,
+        provenance="MEASURED 2026-09-25 debug/library_he_fix.py (physical h1; "
+                   "~65 min build under load)",
+        aliases={2434282: "including identity"}),
 
+    # lambda: each value = retired hop-model value - E/8 exactly (E = 3, 13,
+    # 34, 70 lattice edges), an analytic cross-check the build reproduces.
     "he_n2_lambda": dict(
-        value=11.175, convention="non-identity 1-norm (Ha)", q=10,
-        provenance="MEASURED 2026-08-30"),
+        value=10.800, convention="non-identity 1-norm (Ha)", q=10,
+        provenance=PROV_HE + " to 5e-5 rel (10.80048)"),
     "he_n3_lambda": dict(
-        value=74.207, convention="non-identity 1-norm (Ha)", q=28,
-        provenance="MEASURED 2026-08-30"),
+        value=72.582, convention="non-identity 1-norm (Ha)", q=28,
+        provenance=PROV_HE + " to 1.3e-5 rel (72.58242)"),
     "he_n4_lambda": dict(
-        value=275.718, convention="non-identity 1-norm (Ha)", q=60,
-        provenance="MEASURED 2026-08-30"),
+        value=271.468, convention="non-identity 1-norm (Ha)", q=60,
+        provenance="MEASURED 2026-09-25 debug/library_he_fix.py (271.46811)"),
     "he_n5_lambda": dict(
-        value=790.007, convention="non-identity 1-norm (Ha)", q=110,
-        provenance="MEASURED 2026-08-30"),
+        value=781.257, convention="non-identity 1-norm (Ha)", q=110,
+        provenance="MEASURED 2026-09-25 debug/library_he_fix.py (781.25697)"),
 
-    "he_n2_qwc": dict(value=67, convention="greedy QWC groups", q=10,
-                      provenance="MEASURED 2026-08-30"),
-    "he_n3_qwc": dict(value=5569, convention="greedy QWC groups", q=28,
-                      provenance="MEASURED 2026-08-30"),
-    "he_n4_qwc": dict(value=86224, convention="greedy QWC groups", q=60,
-                      provenance="MEASURED 2026-08-30, ~62 min"),
+    "he_n2_qwc": dict(value=63, convention="greedy QWC groups", q=10,
+                      provenance="MEASURED 2026-09-25 debug/library_he_fix.py "
+                                 "(physical h1; composed route 64 -- greedy is "
+                                 "order-sensitive)"),
+    "he_n3_qwc": dict(value=5574, convention="greedy QWC groups", q=28,
+                      provenance="MEASURED 2026-09-25 (physical h1)"),
+    "he_n4_qwc": dict(value=86249, convention="greedy QWC groups", q=60,
+                      provenance="MEASURED 2026-09-25 (physical h1), ~115 min"),
+
+    # ---- He fixed-k=Z hydrogenic CI with the PHYSICAL h1 (2026-09-25) ----
+    # Replaces the retired "graph-native CI 0.216% (n_max=7)" headline, which
+    # added a non-physical (1/16)*adjacency one-body hop to He's Hamiltonian
+    # (casimir_ci._build_graph_h1 default).  In the k=Z basis T+V_ne is
+    # exactly diagonal, so h1 = -Z^2/2n^2 only.  Singlet M_L=0 FCI.
+    "he_gn_phys_n2_pct": dict(
+        value=2.422, convention="residual: % above exact E(He)=-2.903724377, "
+                                "fixed k=Z hydrogenic CI, physical diagonal h1, n_max=2",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py "
+                   "(E=-2.833405); 2nd route LatticeIndex(slater_full, "
+                   "h1_method='exact') -2.833222 (2.428%)",
+        aliases={2.43: "determinant route / 2 dp"}),
+    "he_gn_phys_n3_pct": dict(
+        value=2.094, convention="residual: % above exact E(He), physical h1, n_max=3",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py "
+                   "(E=-2.842908); LatticeIndex exact -2.842724 (2.101%)",
+        aliases={2.09: "2 dp", 2.10: "determinant route, 2 dp"}),
+    "he_gn_phys_n4_pct": dict(
+        value=1.981, convention="residual: % above exact E(He), physical h1, n_max=4",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py "
+                   "(E=-2.846189); LatticeIndex exact -2.846005 (1.988%)",
+        aliases={1.98: "2 dp", 1.99: "determinant route, 2 dp"}),
+    "he_gn_phys_n5_pct": dict(
+        value=1.928, convention="residual: % above exact E(He), physical h1, n_max=5",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py "
+                   "(E=-2.847735); LatticeIndex exact -2.847551 (1.935%)",
+        aliases={1.93: "2 dp (both routes)"}),
+    "he_gn_phys_n6_pct": dict(
+        value=1.899, convention="residual: % above exact E(He), physical h1, n_max=6",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py (E=-2.848592)",
+        aliases={1.90: "2 dp"}),
+    "he_gn_phys_n7_pct": dict(
+        value=1.881, convention="residual: % above exact E(He), physical h1, "
+                                "n_max=7 (1218 singlet configs); replaces the "
+                                "retired graph-native 0.216% headline",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py "
+                   "(E=-2.849119; same run reproduces the retired hop-model "
+                   "value -2.897464 = 0.216% bit-for-bit to 1e-6)",
+        aliases={1.88: "2 dp"}),
+    "he_gn_hop_shift_mha": dict(
+        value=48.7, convention="residual: mHa by which the retired (1/16)*A hop "
+                               "lowers the He singlet energy at n_max=5 (56.1/50.2/"
+                               "49.2/48.7/48.5 at n_max=2..6); He correlation "
+                               "energy is 42.0 mHa",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py; "
+                   "independently debug/he_graph_hop_check.py",
+        aliases={49.0: "~49 (prose)", 49.2: "n_max=4", 56.1: "n_max=2"}),
+    "hminus_phys_pct": dict(
+        value=2.18, convention="residual: % above exact E(H-)=-0.527751, "
+                               "fixed k=1 hydrogenic CI, physical h1, n_max=5 "
+                               "(bound: E=-0.51622 < -0.5)",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py; with the "
+                   "retired hop the same CI over-binds by 21.0% (non-variational)",
+        aliases={2.2: "1 dp"}),
+    "p26_s_z_exponent_phys": dict(
+        value=-2.522, convention="exponent of S ~ Z^a, He-like n_max=4, "
+                                 "Z in {2,3,4,5,6,8,10}, physical h1",
+        provenance="MEASURED 2026-09-25 debug/he_graph_regression.py (R2=0.9945); "
+                   "the retired -2.56 (-2.563) was the hop-augmented model",
+        aliases={-2.52: "2 dp", 2.52: "magnitude"}),
+
+    # ---- He excited states, fixed k=Z hydrogenic CI, PHYSICAL h1 ----
+    # Replace the Paper 34 catalogue entries (+11.86% 2^1S-2^3S splitting;
+    # +61% 2^1P->1^1S f), which were computed on the retired hop model.
+    "he_st_split_phys_pct": dict(
+        value=17.12, convention="residual: % vs NIST 6421.4663 cm-1 of the "
+                                "2^1S-2^3S splitting, ss-only (l1=l2=0) "
+                                "sub-block, k=Z=2, physical h1, n_max=8 "
+                                "(plateau +17.18/+17.18/+17.15/+17.12 at n_max=5..8); "
+                                "all three states variational",
+        provenance="MEASURED 2026-09-25 debug/he_spectrum_phys_remeasure.py "
+                   "(same driver reproduces the hop-model trajectory "
+                   "bit-for-bit n=2..7); 2nd route build_graph_native_fci("
+                   "subblock=(0,0), h1_method='exact') agrees to 1e-6 Ha at n=3,5",
+        aliases={17.1: "1 dp", 17.2: "n_max=5-6, 1 dp", 17.18: "n_max=5-6"}),
+    "he_osc_f_phys_pct": dict(
+        value=-8.6, convention="residual: % vs Drake f=0.27616 of the He "
+                               "2^1P->1^1S length-form f, k=Z=2, physical h1, "
+                               "n_max=5 (f=0.2524; -22.5/-10.6/-8.6 at n_max=3..5)",
+        provenance="MEASURED 2026-09-25 debug/he_spectrum_phys_remeasure.py via "
+                   "debug/calc_track_he_oscillator_v1.py (resurrected from "
+                   "git f8f6884; hop control reproduced published f=0.445 at "
+                   "n_max=5); E(2^1P) cross-checked vs build_graph_native_fci("
+                   "subblock=(0,1)) to 1e-6 Ha",
+        aliases={-8.64: "2 dp", 8.6: "magnitude"}),
 
     # ---- fitted exponents.  The point range is part of the identity. ----
     "exp_pauli_4pt": dict(
-        value=3.773, convention="log-log exponent, 4 points Q=10..110",
-        provenance="MEASURED 2026-08-30; R^2 1.0000, max|log resid| 0.0064"),
+        value=3.7851, convention="log-log exponent, 4 points Q=10..110",
+        provenance="MEASURED 2026-09-25 debug/library_he_fits.py (physical h1); "
+                   "R^2 1.0000, max|log resid| 0.0125"),
     "exp_lambda_4pt": dict(
-        value=1.774, convention="log-log exponent, 4 points Q=10..110",
-        provenance="MEASURED 2026-08-30; R^2 0.9997, max|log resid| 0.0421"),
+        value=1.784, convention="log-log exponent, 4 points Q=10..110",
+        provenance="MEASURED 2026-09-25 (physical h1); R^2 0.9997, "
+                   "max|log resid| 0.0433"),
     "exp_qwc_3pt": dict(
-        value=4.013, convention="log-log exponent, 3 points Q=10..60",
-        provenance="MEASURED 2026-08-30; R^2 0.9976.  Q=110 infeasible: "
-                   "2.4M terms against O(N^2) greedy grouping"),
+        value=4.049, convention="log-log exponent, 3 points Q=10..60",
+        provenance="MEASURED 2026-09-25 (physical h1); R^2 0.9972.  Q=110 "
+                   "infeasible: 2.4M terms against O(N^2) greedy grouping"),
     "exp_pauli_3pt": dict(
-        value=3.779, convention="log-log exponent, 3 points Q=10..60",
-        provenance="MEASURED 2026-08-30; the subset the slow tests compute"),
+        value=3.7954, convention="log-log exponent, 3 points Q=10..60",
+        provenance="MEASURED 2026-09-25 (physical h1); the subset the slow "
+                   "tests compute"),
     "exp_lambda_3pt": dict(
-        value=1.792, convention="log-log exponent, 3 points Q=10..60",
-        provenance="MEASURED 2026-08-30"),
+        value=1.802, convention="log-log exponent, 3 points Q=10..60",
+        provenance="MEASURED 2026-09-25 (physical h1)"),
     "eri_decay_4pt": dict(
         value=-0.462, convention="ERI-density decay, 4 points M=5..55",
         provenance="MEASURED 2026-08-30 from the tab:eri_density column"),
@@ -1106,7 +1205,7 @@ MEASURED = {
         aliases={0.0528: "best point, (4,3) n=400 mpf",
                  0.0535: "(3,4) n=416, all vectors kept"}),
     "p12_r12_heh_err_mha": dict(
-        value=0.88, convention="mHa above reference for HeH+ (2e heteronuclear, "
+        value=0.88, convention="mHa above exact (Kolos-Peek BO reference) for HeH+ (2e heteronuclear, "
                                "R=1.4632), explicit-r12 engine, (j=2,l=3) n=288, "
                                "a=1.6, p in {0,1}. Probe result (B arc): the "
                                "exact-algebraic r12 GENERALIZES to a 2nd center",
@@ -1330,6 +1429,28 @@ RETIRED = {
     1.68:    ("tc_pauli_ratio",      r"TC|Pauli ratio",         None),
 
     11.29:   ("he_n2_lambda",       r"lambda|1-norm",          None),
+    # Retired 2026-09-25: the +1/16 graph-hop ('hybrid') h1 He model.
+    11.175:  ("he_n2_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    11.18:   ("he_n2_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    74.207:  ("he_n3_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    74.21:   ("he_n3_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    275.718: ("he_n4_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    275.72:  ("he_n4_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    790.007: ("he_n5_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    790.01:  ("he_n5_lambda",       r"lambda|1-norm",          r"retired|hop|hybrid"),
+    14078:   ("he_n3_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
+    14079:   ("he_n3_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
+    250402:  ("he_n4_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
+    250403:  ("he_n4_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
+    2434441: ("he_n5_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
+    2434442: ("he_n5_pauli",        r"Pauli|terms",            r"retired|hop|hybrid"),
+    86224:   ("he_n4_qwc",          r"QWC|measurement group",  r"retired|hop|hybrid"),
+    5569:    ("he_n3_qwc",          r"QWC|measurement group",  r"retired|hop|hybrid"),
+    3.773:   ("exp_pauli_4pt",      r"exponent|alpha|scaling", r"retired|hop|hybrid"),
+    1.774:   ("exp_lambda_4pt",     r"exponent|alpha|scaling", r"retired|hop|hybrid"),
+    4.013:   ("exp_qwc_3pt",        r"exponent|alpha|scaling|QWC", r"retired|hop|hybrid"),
+    3.779:   ("exp_pauli_3pt",      r"exponent|alpha|scaling", r"retired|hop|hybrid"),
+    1.792:   ("exp_lambda_3pt",     r"exponent|alpha|scaling", r"retired|hop|hybrid"),
     78.36:   ("he_n3_lambda",       r"lambda|1-norm",          None),
     261.57:  ("he_n4_lambda",       r"lambda|1-norm",          None),
     657.07:  ("he_n5_lambda",       r"lambda|1-norm",          None),
@@ -1404,6 +1525,16 @@ RETIRED = {
     40.59:   ("lih_rel_n2_lambda",  r"lambda|1-norm",           None),
     89226:   ("lih_rel_n3_pauli",   r"Pauli|rel",               None),
     878:     ("lih_balanced_pauli", r"Pauli|balanced",          None),
+
+    # He "graph-native CI" headline family, retired 2026-09-25: energies of a
+    # hop-augmented model (casimir_ci default h1 adds (1/16)*A), not of He.
+    # Disclosure markers (withdrawn/earlier/previously/corrected) exempt a
+    # locus via C21's EXEMPT window.
+    # (the first alternative must be a plain literal: the registry self-test
+    #  builds its probe text from need.split('|')[0])
+    0.216:   ("he_gn_phys_n7_pct",  r"graph-native|[Hh]elium|He\b|n_\{\\max\} *= *7", None),
+    0.2156:  ("he_gn_phys_n7_pct",  r"graph-native|[Hh]elium|He\b", None),
+    2.89746: ("he_gn_phys_n7_pct",  r"graph-native|[Hh]elium|He\b", None),
 }
 
 

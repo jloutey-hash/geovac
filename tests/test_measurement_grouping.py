@@ -56,7 +56,7 @@ def geovac_he_nmax2():
     """GeoVac He at nmax=2."""
     return LatticeIndex(
         n_electrons=2, max_n=2, nuclear_charge=2,
-        vee_method='slater_full', h1_method='hybrid',  # fci_method removed v2.7.0; default is matrix
+        vee_method='slater_full', h1_method='exact',  # physical h1 (was 'hybrid' hop model, retired 2026-09-25)
     )
 
 
@@ -65,7 +65,7 @@ def geovac_he_nmax3():
     """GeoVac He at nmax=3."""
     return LatticeIndex(
         n_electrons=2, max_n=3, nuclear_charge=2,
-        vee_method='slater_full', h1_method='hybrid',  # fci_method removed v2.7.0; default is matrix
+        vee_method='slater_full', h1_method='exact',  # physical h1 (was 'hybrid' hop model, retired 2026-09-25)
     )
 
 
@@ -279,11 +279,14 @@ class TestScaling:
         geovac_he_nmax3: LatticeIndex,
     ) -> None:
         """
-        Groups/terms ratio should not increase as basis grows.
+        Groups/terms ratio must not EXPLODE as the basis grows.
 
-        If ERI sparsity (selection rules) helps with measurement cost,
-        the ratio of QWC groups to Pauli terms should decrease or stay
-        flat as nmax increases.
+        Measured (2026-09-25, He physical h1): the ratio RISES, 0.2250 at
+        nmax=2 -> 0.3968 at nmax=3 (1.76x); it rose on the retired hop
+        model too (1.70x).  So this is NOT a "flat or decreasing" test (an
+        earlier docstring claimed that, and the data never supported it).
+        What it guards: growth <= 1.85x per nmax step and an absolute
+        ratio <= 0.50 -- a doubling, or a ratio above one-half, fails.
         """
         enc2 = JordanWignerEncoder(geovac_he_nmax2)
         enc3 = JordanWignerEncoder(geovac_he_nmax3)
@@ -313,9 +316,16 @@ class TestScaling:
         # growth factor moved 1.00x -> 1.58x and the old 1.50x guard no
         # longer bounds it.  Widened to 1.75x, and backed by an ABSOLUTE
         # anti-explosion bound so widening cannot hollow the test out.
-        assert ratio3 <= ratio2 * 1.75, (
+        #
+        # Re-measured 2026-09-25 with helium's PHYSICAL h1 (the fixtures
+        # used the retired +1/16-hop 'hybrid' h1): nmax=2 280 terms / 63
+        # groups (0.2250), nmax=3 14,047 / 5,574 (0.3968) -> growth 1.76x
+        # (hop model: 0.2326 -> 0.3956, 1.70x).  Dropping 8 hop strings at
+        # nmax=2 lowered the BASE ratio, not the nmax=3 one.  Bound moved
+        # 1.75x -> 1.85x; the absolute bound below is the load-bearing one.
+        assert ratio3 <= ratio2 * 1.85, (
             f"Groups/terms ratio increased too much: nmax=2 {ratio2:.4f} -> "
-            f"nmax=3 {ratio3:.4f} (>{ratio2 * 1.75:.4f} limit)"
+            f"nmax=3 {ratio3:.4f} (>{ratio2 * 1.85:.4f} limit)"
         )
         # The real claim: grouping still gives a substantial reduction, i.e.
         # groups are a small FRACTION of terms and do not approach O(N).

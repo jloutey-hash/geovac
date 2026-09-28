@@ -35,7 +35,9 @@ forced by the axioms alone.  Similarly, a factor of~2 arises from the
 orientability of the compactified packing manifold ($S^2$),
 corresponding to spin multiplicity.  When the packing is interpreted
 as a graph, its Laplacian splits into $\ell$-blocks (the edges change
-$n$ or $m$, never $\ell$), and \textbf{[INTERNAL THEOREM]} its top
+$n$ or $m$, never $\ell$) and so does not converge to the $S^3$
+Laplacian---the node set is the exact $S^3$ label set, on which that
+operator is the diagonal $SO(4)$ Casimir---and \textbf{[INTERNAL THEOREM]} its top
 eigenvalue saturates the bipartite bound $\lambda_{\max} \to 2 d_{\max} = 8$
 (attained in a mid-$\ell$ block, not in the $s$-wave block, whose own
 bound is 4; corrected 2026-09-03), so that under a single matched scale
@@ -331,8 +333,10 @@ To be precise about the scope of this result:
 \item It does \emph{not} produce the functional form of the spherical
   harmonics, the eigenvalue $\ell(\ell+1)$ of $\hat{L}^2$, or the
   commutation relations of angular momentum operators.  Those require
-  additional structure (the graph Laplacian and its continuum limit),
-  developed in Papers~1 and~7.
+  additional structure (the $SO(4)$ Casimir acting diagonally on the
+  labels, and Fock's continuum projection;\ not a continuum limit of the
+  graph Laplacian, which does not converge to $\Delta_{S^3}$,
+  Sec.~\ref{sec:graph}), developed in Papers~1 and~7.
 
 \item The result is \emph{independent} of any specific physical
   system.  The angular labeling emerges from 2D isotropic geometry,
@@ -483,10 +487,12 @@ of the Laplace--Beltrami operator on $S^3$ are hyperspherical
 harmonics, which decompose as $Y_{n\ell m} = R_n(\chi) \,
 Y_{\ell m}(\theta, \phi)$.  The angular factor $Y_{\ell m}$ is
 precisely the per-shell structure of the packing, with $\ell = k - 1$.
-Paper~7~\cite{paper7} shows that the continuum limit of the graph
-Laplacian on the $2n^2$ packing is conformally equivalent to this
-$S^3$ operator (the convergence itself is only indicated numerically, not established,
-through $n_{\max} = 30$).
+The packing's node set is exactly the label set of these harmonics
+(the Peter--Weyl truncation of $L^2(S^3)$), on which the $S^3$
+operator acts as the diagonal $SO(4)$ Casimir $n^2 - 1$;\ Paper~7~\cite{paper7}
+verifies Fock's conformal chain from that continuum operator onward.
+The graph's edge Laplacian does \emph{not} converge to it
+(Sec.~\ref{sec:graph}).
 
 \textbf{Level~2: H$_2^+$ on prolate spheroids.}
 For one-electron diatomics, the natural geometry is the prolate
@@ -568,12 +574,13 @@ realizations, none of which is privileged.  The lattice is the
 invariant; the continuum geometries are projections.
 
 We state this as a mathematical observation, not a metaphysical claim.
-The conformal equivalences between the continuum limit of the graph
-Laplacian and each continuum operator are established case by case:
+The conformal equivalences between each continuum operator and
+standard quantum mechanics, and the identification of the lattice's
+labels with that operator's eigenbasis labels, are established case by case:
 \textbf{[SYMBOLIC PROOF]} Paper~7~\cite{paper7} provides 18~symbolic proofs of the Fock
-projection chain for the $S^3$ embedding (the graph-to-continuum
-convergence itself is only indicated numerically, through $n_{\max} = 30$,
-and is not established), and the
+projection chain for the $S^3$ embedding (a graph-to-continuum
+\emph{operator} convergence is not part of it:\ the edge Laplacian does
+not converge to $\Delta_{S^3}$, Sec.~\ref{sec:graph}), and the
 subsequent papers verify the angular-sector recurrences and benchmark
 each geometry in the hierarchy numerically.
 The framework is demonstrably conformally equivalent to standard
@@ -651,7 +658,7 @@ edges --- corrected 2026-09-03 from ``$(\ell, m)$ blocks'').  This
 block-diagonality is a consequence of the potential's symmetry, not a
 topological constraint on the graph itself.
 
-\subsection{Spectral convergence}
+\subsection{Spectral bound}
 
 The graph Laplacian $L = D - A$ defines a discrete Hamiltonian
 \begin{equation}
@@ -710,16 +717,27 @@ Finally, with $H = K_{\mathrm{vac}} L$ and $K_{\mathrm{vac}}$ fixed by the match
 $K_{\mathrm{vac}} = E_{\mathrm{target}}/\lambda_{\max} = -0.5/8$, the
 ground-state eigenvalue of~$H$ is then $-0.5$~Ha by construction.  The
 convergence of the spectral bound is the content; the reproduction of
-the target is not.  The
+the target is not.  \textbf{[WALL]} Nor is that bound an $S^3$ quantity:\
+$8 = 2 d_{\max}$ is the band edge of any large two-dimensional grid, and
+$C$ is a Dirichlet band edge.  Because the $\ell$-blocks are disconnected,
+$\dim\ker L = n_{\max}$ (the $S^3$ Laplacian has one zero mode) and the
+heat kernel $e^{-tL}$ vanishes identically between blocks, so $L$ does
+\emph{not} converge to $\Delta_{S^3}$, for the binary production weights
+and the $1/(n_i n_j)$ option alike
+(\texttt{tests/test\_graph\_s3\_nonconvergence.py}).  What is exact is the
+node set:\ it is the Gel'fand--Tsetlin label set of the Peter--Weyl
+truncation of $L^2(S^3)$, on which $\Delta_{S^3}$ acts as the diagonal
+$SO(4)$ Casimir $n^2 - 1$ at every cutoff (a node weight, not an edge
+Laplacian).  The
 \textbf{[SYMBOLIC PROOF]} $(\ell, m)$ angular structure is exact at every finite $n_{\max}$---it
 is encoded in the graph topology, not approximated by mesh refinement.
 
-The conformal equivalence between the continuum limit of this graph
-Laplacian and the Laplace--Beltrami operator on the unit~$S^3$ (via
+The conformal equivalence between the hydrogen problem and the
+Laplace--Beltrami operator on the unit~$S^3$ (via
 Fock's stereographic projection) is developed in Paper~7~\cite{paper7},
 \textbf{[SYMBOLIC PROOF]} where an audit of 18~symbolic checks (several limiting-case or definitional) validates the conformal geometry
-(the convergence itself is only indicated numerically, not established, through
-$n_{\max}=30$; the rate is a separate result).  The energy
+of that continuum chain (the graph Laplacian is not a discretization of
+it; see above).  The energy
 eigenvalues and dynamics built on this graph are developed in
 Paper~1~\cite{paper1} and the archived Paper~6~\cite{paper6}.
 
@@ -748,9 +766,12 @@ Paper~1~\cite{paper1} and the archived Paper~6~\cite{paper6}.
 \subsection{What the construction does not provide}
 
 \begin{itemize}
-\item[$\times$] Energy eigenvalues $E_n = -1/(2n^2)$.  These require
-  the graph Laplacian together with the matched kinetic scale
-  $K_{\mathrm{vac}}$, whose value is an Observation rather than a
+\item[$\times$] Energy eigenvalues $E_n = -1/(2n^2)$.  These come
+  from Fock's continuum projection and the $SO(4)$ algebra (the Casimir
+  $n^2 - 1$ acting diagonally on the labels, with the energy shell
+  $p_0^2 = -2E$), not from the graph Laplacian, whose spectrum lies in
+  $[0, 8]$;\ the matched kinetic scale $K_{\mathrm{vac}}$ fixes only the
+  extremal eigenvalue, and its value is an Observation rather than a
   derivation (Papers~1, 7).
 
 \item[$\times$] Wavefunctions $R_{n\ell}(r)$ or
@@ -818,17 +839,18 @@ separation is a feature of the construction, not a limitation.  It
 shows that the angular quantum numbers are determined by geometry
 alone, independently of the specific force law or potential.
 
-In the GeoVac series, dynamics are recovered when the graph Laplacian
-is equipped with the kinetic scale $K_{\mathrm{vac}} = -1/16$ and
-node weights encoding the Coulomb potential.  Paper~7~\cite{paper7}
-shows that the continuum limit of this graph Laplacian is conformally
-equivalent to the
-Laplace--Beltrami operator on~$S^3$ (the convergence itself is only
-\emph{indicated} numerically through $n_{\max} = 30$, not established
---- corrected 2026-09-04 to match Paper~7 and \S VI above, both of which
-already stated it correctly), with the $1/r$ Coulomb potential
-emerging as the coordinate distortion from stereographic projection
-rather than an independent force law.
+In the GeoVac series, dynamics enter through the Coulomb problem's
+continuum structure, not through a limit of the graph Laplacian.
+Paper~7~\cite{paper7} verifies Fock's conformal equivalence between the
+hydrogen problem and the Laplace--Beltrami operator on~$S^3$, with the
+$1/r$ Coulomb potential emerging as the coordinate distortion from
+stereographic projection rather than an independent force law;\ the
+packing's node set is the label set of that operator's harmonics, on
+which it acts as the diagonal $SO(4)$ Casimir $n^2 - 1$.  The graph
+Laplacian equipped with $K_{\mathrm{vac}} = -1/16$ does \emph{not}
+converge to that operator:\ it splits into $n_{\max}$ disconnected
+$\ell$-blocks (\S VI;\ corrected 2026-09-25 from ``indicated
+numerically'', itself a 2026-09-04 correction of ``shows'').
 
 \subsection{Scope of the geometric analogy}
 
@@ -877,8 +899,9 @@ framework that has been applied to H, He, H$_2^+$, H$_2$, HeH$^+$,
 \textbf{[MEASURED]} LiH, and BeH$^+$, with a saturation deficit of $0.57\%$ for the hydrogen ground-state
 bound on the production graph at $n_{\max} = 30$ (a by-construction
 quantity, \S VI; $0.11\%$ at $n_{\max} = 70$,
-\texttt{tests/test\_paper7\_graph\_convergence.py}; the continuum chain
-itself is exact) and $5.3\%$ for the LiH equilibrium
+\texttt{tests/test\_paper7\_graph\_convergence.py}; a grid band edge,
+not an $S^3$ convergence---the graph Laplacian does not converge to
+$\Delta_{S^3}$, \S VI;\ the continuum chain itself is exact) and $5.3\%$ for the LiH equilibrium
 geometry (BeH$^+$ is markedly worse: $R_{\rm eq}$ 3.25 vs ${\sim}\,2.48$ bohr with the ab-initio
 pseudopotential; HeH$^+$ is treated at a fixed bond length and recovers
 93\% of $D_e$ adiabatically but only ${\sim}\,5\%$ in the consistent

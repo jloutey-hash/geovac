@@ -76,7 +76,7 @@ def test_atomic_table_carries_m_transfer_and_conserves_ml():
     from geovac.lattice_index import LatticeIndex
 
     li = LatticeIndex(n_electrons=2, max_n=2, nuclear_charge=2,
-                      vee_method='slater_full', h1_method='hybrid')
+                      vee_method='slater_full', h1_method='exact')
     states = li.lattice.states  # (n, l, m)
     n_mswap = sum(1 for (a, b, c, d) in li._eri if states[a][2] != states[c][2])
     assert n_mswap == 42, (

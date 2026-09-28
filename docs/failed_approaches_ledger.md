@@ -252,3 +252,55 @@ Distinct from the 2026-06-01 NaH Z_orb scan (fixed Z_orb per curve, binding
 question). The mechanism is analytically pinned (cross-attraction slope →
 point-charge limit = required force). Record:
 `debug/sprint_balanced_reqdrift_mechanism_memo.md`; CHANGELOG v5.15.2.
+
+---
+
+### g_Vee speedup by algebra instead of sparsity — cancellation/pair-space route and the γ-series one-kernel route (2026-09-25) | 2
+
+**Context.** In the LiH many-determinant explicit-r12 "marriage" engine, g_Vee
+(the (F−F̄)²V_ee 216-triple sum) is ~all the wall time and memory; on 31 GB RAM the
+π/M=16 reference was capped at truncation 1e-2 (dense kept-pair field
+~1.4·nact³·NG·8 B; trunc 5e-3 OS-killed). Following the project's algebraic-first
+history, two algebraic levers were tested BEFORE engineering an O(nnz) rewrite.
+
+**(1) Cancellation / cheap pair-space route — STOP (small lever).** |F2Vee|/|g_Vee|
+= 65 (heavy cancellation), but no topology class can be dropped (class nets −52..+29
+Ha summing to 0.646; the triangle class alone is ~241 mHa in E_R12). Graph-
+disconnected (PAIR) terms ARE reproduced exactly by a Σ T·W·W pair-space contraction
+(8e-9 Ha in E, 0.2 s vs 86 s) — but they are only 9.3% (π) / 0.3% (σ) of the wall
+time and hold none of the dense field. Below the 20% STOP line.
+
+**(2) γ-derivative / power-series one-kernel route — STOP (cost).** Every geminal
+kernel is a γ-derivative of the Yukawa kernel (identities verified on the grid to
+FD accuracy), and the series e^{−γr12}=Σ(−γ)^k r12^k/k! over EXACT per-power pieces
+(even powers via one-electron moments, odd via mode-m Neumann; ~1e-15) DOES
+converge and DOES sidestep the prolate spheroidal-wave-function obstacle: 18 terms
+(1s control) / 30–35 terms (real signed ρ01·ρ11) for 1e-6, float64-safe (max term
+≤59× |W|). But solve count grows ~n³ (130 at n=11), so 35 terms cost ~100× the
+single kernel matvec it replaces — and that matvec was never the bottleneck.
+
+**Lesson.** The g_Vee wall is SPARSITY, not missing algebra: the dense field is owned
+by TREE4 terms (star/chain into a kept vertex, e.g. f12·f13/r34), not the triangle;
+all non-triangle classes are message-passing contractions over T's nonzeros. Unique
+index triples: 1,156 at trunc 1e-2 (vs nact³ 262k), 56,644 at 1e-3 (vs 7.5M) —
+~4.3 GB vs 267 GB. The cure is the O(nnz) rewrite (sparse compound fields + T-
+restricted triangle Coulomb solves). Record: `debug/lih_gvee_diag.py`,
+`debug/data/lih_gvee_diag.log`, `debug/lih_pi_m16_build_plan.md`.
+
+---
+
+### RE-INTERPRETATION of "Schwartz-tail hot-node patch on He Z=2 graph-native CI (CUSP-2)" (2026-09-25) | 0 (correction, not a new dead end)
+
+The CUSP-2 row concluded "0.20% floor is small-Z graph-validity-boundary artifact (Z_c~1.84), not cusp".
+RE-INTERPRETED 2026-09-25 (PI-approved He retraction): the "small-Z graph-validity artifact (Z_c~1.84)" and the
+"Z=10 sign flip" were produced by the non-physical (1/16)A one-body hop that `geovac.casimir_ci._build_graph_h1`
+adds on top of the exact hydrogenic diagonal (in the k=Z basis T+V_ne is exactly diagonal, so the hop is not part
+of the atom's Hamiltonian). On He's PHYSICAL Hamiltonian (`h1_method='exact'`) there is no Z_c: the energy stays
+above exact for all Z in [1,3] (smallest excess +10.7 mHa), and the n_max-extrapolation intercept is c = +54.2 mHa
+(hop model: +6.0), set by the missing-continuum incompleteness of the fixed-k=Z hydrogenic basis. The physical
+fixed-k CI reaches 1.881% at n_max=7 (above the HF limit), not 0.216%. The NEGATIVE RESULT ITSELF STANDS: a
+Schwartz-tail correction does not help; only its stated mechanism is replaced. Record: `debug/he_graph_regression.py`,
+`debug/data/he_graph_regression.log`; Paper 13 + paper_fci_atoms (remediated 2026-09-25); CHANGELOG v5.16.0.
+
+### Multi-geminal linear expansion / quadratic F^2 term as the lever for the LiH marriage gap (2026-09-26)
+| Multi-geminal linear expansion and quadratic F^2 term for the LiH r12 marriage | 2 | Hypothesis (after the pi marriage reached -8.0435 vs VMC-Pade -8.047) that the gap was the single-geminal / linear-in-F ansatz. VMC linear-method test on the trunc-1e-2 pi reference: the gap is geminal SHAPE, not count -- r e^{-gamma r} delivers about half the Kato e-e cusp at its variational amplitude, a single e^{-2r} geminal closes the whole gap to Pade (-8.04781 vs -8.04244), extra geminals saturate at +1.4 mHa by k=2, and F^2 adds 0.013 mHa. Lesson: choose a cusp-correct short-range (Slater-type) geminal before adding geminals. Record: `debug/lih_multigeminal_*.py`, `debug/data/multigeminal_vmc.log`; CHANGELOG v5.16.0. |

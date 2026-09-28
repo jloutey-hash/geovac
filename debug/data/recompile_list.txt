@@ -1,0 +1,5 @@
+papers/group3_foundations/paper_24_bargmann_segal.tex
+papers/group5_qed_gauge/paper_25_hopf_gauge_structure.tex
+papers/group3_foundations/paper_31_universal_coulomb_partition.tex
+papers/group1_operator_algebras/paper_32_spectral_triple.tex
+papers/synthesis/group3_foundations_synthesis.tex

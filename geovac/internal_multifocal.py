@@ -10,11 +10,19 @@ the cross-register multi-focal architecture for chemistry observables).
 Background (Track 4 He oscillator strength autopsy, 2026-05-09)
 ---------------------------------------------------------------
 
-Single-exponent Sturmian-style basis at k = Z = 2 reproduces the Helium
-2^1P -> 1^1S oscillator strength at f ~ 0.444 vs Drake 0.276 (+61%
-residual, plateaued at n_max = 7). The 2^1P excited state is
-variationally violated by 0.08 Ha — same kappa-induced over-binding
-mechanism as the small-Z graph-validity-boundary at He. The Lyman alpha
+[CORRECTED 2026-09-25] The original autopsy below measured the HOP-AUGMENTED
+model (casimir_ci._build_graph_h1 default, which adds a non-physical
+(1/16)*A one-body hop; see Paper 13 / Paper 34, retraction
+he-graph-native-hop-headline). Its "+61%" f-value, the 0.08 Ha variational
+violation and the "kappa-induced over-binding / small-Z graph-validity
+boundary" reading were all artifacts of that hop. On He's PHYSICAL
+Hamiltonian (h1_method='exact') the 2^1P -> 1^1S f-value is 0.252 at
+n_max = 5 (-8.6% vs Drake 0.276, still converging), and every state is
+variational. This module does not itself apply the hop.
+
+Original text (hop model): single-exponent Sturmian-style basis at
+k = Z = 2 gave f ~ 0.444 vs Drake 0.276 (+61%, plateaued at n_max = 7),
+with the 2^1P state 0.08 Ha below its variational bound. The Lyman alpha
 sanity check passes to machine precision, so the angular machinery is
 exact; the failure is in the radial / CI sector (single common Sturmian
 exponent cannot represent both compact 1s and diffuse 2p simultaneously).

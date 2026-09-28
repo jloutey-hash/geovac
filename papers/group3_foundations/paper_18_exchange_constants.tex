@@ -11,6 +11,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{observation}{Observation}
 \newtheorem{conjecture}{Conjecture}
+\newcommand{\gvq}[2]{#2}% numeric-registry key (debug/qa/numeric_registry.py); renders the literal only
 
 \begin{document}
 
@@ -142,12 +143,15 @@ resulting transcendental content.
 \subsection{Level 1: $\kappa = -1/16$ ($S^3 \to \mathbb{R}^3$)}
 \label{sec:kappa}
 
-The compactness of $S^3$ is what makes the graph eigenvalues discrete
-integers; $\kappa$ converts this discrete spectrum to the non-compact
-$\mathbb{R}^3$ energy scale.
+The compactness of $S^3$ is what makes the Laplace--Beltrami
+eigenvalues discrete integers (on the graph's label set $(n,l,m)$ they
+act as the diagonal $SO(4)$ Casimir $n^2-1$);\ $\kappa$ converts a
+discrete spectrum to the non-compact $\mathbb{R}^3$ energy scale.
 
-The continuum $S^3$ Laplace--Beltrami operator --- which the
-(positive-semidefinite) graph Laplacian converges to --- has pure
+The continuum $S^3$ Laplace--Beltrami operator --- which the graph's
+edge Laplacian does \emph{not} converge to (it preserves $l$ and splits
+into $n_{\max}$ disconnected blocks, Paper~0~\S VI;\ corrected
+2026-09-25 from ``converges to'') --- has pure
 integer eigenvalues
 \begin{equation}
   \lambda_n = -(n^2 - 1), \qquad n = 1, 2, 3, \ldots
@@ -164,8 +168,9 @@ $\mathbb{R}^3$.  The universal kinetic scale factor
 \end{equation}
 calibrates the ground state energy:
 $\kappa \cdot \lambda_{\max} = E_H = -1/2$~Ha, where
-$\lambda_{\max} \to 8$ is the maximum graph Laplacian eigenvalue
-in the continuum limit~\cite{loutey_paper0}.  Per-shell energies
+$\lambda_{\max} \to 8$ is the large-$n_{\max}$ maximum graph Laplacian
+eigenvalue~\cite{loutey_paper0} (twice the maximum degree, the band edge
+of two-dimensional grids;\ not an $S^3$ quantity).  Per-shell energies
 $E_n = -Z^2/(2n^2)$ emerge from the full graph Hamiltonian
 $H = \kappa \mathcal{L} + W$ (with node weights $W_{nn} = -Z/n^2$),
 not from $\kappa$ alone.
@@ -187,7 +192,8 @@ the $p_0$ energy-shell normalization~\cite{loutey_paper7}.
 
 The key property of $\kappa$ is that it is \textit{unnecessary
 on the graph}.  The graph Laplacian eigenvalue problem $L\psi =
-\lambda\psi$ is solved entirely in terms of integers.  The
+\lambda\psi$ is posed entirely in integers (integer matrix entries,
+algebraic eigenvalues).  The
 constant $\kappa$ appears only when the result is translated
 into atomic units (Hartrees, bohrs)---i.e., when the discrete
 spectrum is projected onto a continuous coordinate system.
@@ -382,9 +388,12 @@ The two-electron problem on $S^3 \times S^3$ is fully algebraic:
 the Hamiltonian matrix has entries given by Gaunt integrals
 (finite sums of Wigner $3j$ symbols with rational coefficients),
 and the eigenvalues are roots of a polynomial with algebraic
-coefficients.  The Full CI solver exploits this, achieving
-0.35\% error for helium with no transcendentals
-anywhere~\cite{loutey_fci}.
+coefficients.  The Full CI solver exploits this, reaching
+$\gvq{he_gn_phys_n7_pct}{1.88}\%$ above exact for helium at $n_{\max}=7$
+(fixed $k=Z$ basis, physical Hamiltonian) with no transcendentals
+anywhere~\cite{loutey_fci}.  (An earlier sub-percent figure quoted here
+belonged to a model with a non-physical one-body graph hop, withdrawn
+2026-09-25.)
 
 The hyperspherical reparameterization introduces coordinates
 $(R, \alpha)$ where $R = \sqrt{r_1^2 + r_2^2}$ is the
@@ -868,10 +877,22 @@ asymptotics carry $\pi^{5/2}$.
 \begin{observation}[The graph is $\pi$-free]
 \label{obs:pi-free}
 Every algebraic operation in the GeoVac graph construction
-produces integers or rationals:
+produces integers, rationals, or algebraic numbers---never a
+transcendental:
 \begin{itemize}
-  \item The Laplace--Beltrami spectrum $\lambda_n = -(n^2 - 1)$ that the
-    graph Laplacian converges to: integer for all $n$.
+  \item The graph Laplacian itself has integer matrix entries, so its
+    eigenvalues are algebraic (roots of an integer characteristic
+    polynomial).  They are generally \emph{irrational}:\ the graph is
+    block diagonal in $\ell$ with each block a product of two paths,
+    so its spectrum is the set of sums
+    $\bigl(2-2\cos\frac{j\pi}{n_{\max}-\ell}\bigr)+\bigl(2-2\cos\frac{k\pi}{2\ell+1}\bigr)$
+    (Paper~0 \S VI), e.g.\ $2-\sqrt2$;\ cosines of rational multiples
+    of $\pi$ are algebraic, so no transcendental enters.
+  \item The Laplace--Beltrami spectrum $\lambda_n = -(n^2 - 1)$ of the
+    \emph{continuum} $S^3$ operator:\ integer for all $n$.  This is not
+    the graph's own spectrum (which is bounded in $[0,8]$);\ the
+    graph-to-continuum link runs through the Fock conformal projection
+    and is indicated numerically, not established (Paper~0).
   \item Degeneracies: $g_n = n^2$, integer.
   \item Gaunt integrals (Legendre normalization,
     $\int P_{l_1} P_k P_{l_2}\,dx$): ratios of factorials via
@@ -1623,9 +1644,11 @@ The taxonomy reveals a hierarchy of exchange types:
     flat space.  Example:
     $\kappa = -1/16 = -1/\Omega^4(0)$, where $\Omega(0) = 2$ is
     the stereographic conformal factor at $p = 0$
-    (Sec.~\ref{sec:kappa_derivation}).  Equivalently derivable
-    from graph vertex degree $d_{\max} = 4$; both routes yield
-    the same value because the graph discretizes $S^3$.
+    (Sec.~\ref{sec:kappa_derivation}).  The energy-matching value
+    is fixed by the graph vertex degree $d_{\max} = 4$ instead;\ that
+    both routes yield $1/16$ is an Observation, not a consequence of
+    the graph discretizing $S^3$ (it does not:\ $2 d_{\max} = 8$ is a
+    grid band edge, Paper~0~\S VI).
 
   \item \textbf{Embedding constants}: Single transcendental
     numbers seeding algebraic recurrences.  Determined by the
@@ -1671,10 +1694,15 @@ The taxonomy reveals a hierarchy of exchange types:
 
     \textbf{[WITHDRAWN 2026-09-14]} Earlier versions added that this
     explains the graph-native CI convergence floor (Paper~13, Track~DI).
-    Paper~13 has since withdrawn that attribution, re-diagnosing the
-    floor as a small-$Z$ graph-validity-boundary artifact.  The
-    Frobenius-mass measurement above is unaffected;\ only the inference
-    from it to Paper~13's floor is withdrawn.
+    Paper~13 has since withdrawn that attribution.  (Its interim
+    re-diagnosis as a small-$Z$ ``graph-validity-boundary artifact'' was [retracted 2026-09-25: he-graph-native-hop-headline]
+    itself withdrawn 2026-09-25:\ the ``graph-native'' energy included a
+    $+\tfrac{1}{16}$ one-body graph hop that is not part of helium's
+    Hamiltonian; with the physical Hamiltonian the same fixed-$k$ basis
+    sits $\gvq{he_gn_phys_n7_pct}{1.88}\%$ above exact at $n_{\max}=7$, a
+    continuum-incompleteness floor.)  The Frobenius-mass measurement
+    above is unaffected;\ only the inference from it to Paper~13's floor
+    is withdrawn.
 
   \item \textbf{Algebraic (implicit) functions}: Functions of
     continuous parameters defined implicitly by $P(R,\mu) = 0$,
@@ -3017,8 +3045,10 @@ The following worked examples illustrate each class.
 \subsection{Example 1: Hydrogen energy levels (Class~S)}
 
 The hydrogen energy spectrum $E_n = -Z^2/(2n^2)$ is a spectral
-observable.  The continuum $S^3$ Laplace--Beltrami operator that the
-graph Laplacian converges to has eigenvalues
+observable.  The continuum $S^3$ Laplace--Beltrami operator (whose
+harmonics the graph's nodes label, and which acts on those labels as the
+diagonal $SO(4)$ Casimir;\ the graph's edge Laplacian does not converge
+to it) has eigenvalues
 $\lambda_n = -(n^2 - 1)$, which are integers for all $n$
 (Paper~7, Eq.~(12); Paper~0, Sec.~II).  The degeneracies
 $g_n = n^2$ are integers.  The Fock conformal mapping (Paper~7,
@@ -3083,7 +3113,9 @@ On the $S^3 \times S^3$ product space (Level~3 FCI), the same
 energy can in principle be computed without $\mu(R)$: the
 Hamiltonian matrix has entries given by Gaunt integrals (rational)
 and the Slater $F^0$ direct Coulomb integrals (algebraic on $S^3$,
-Paper~7 Sec.~VI).  The FCI result (0.35\% error) demonstrates that
+Paper~7 Sec.~VI).  The FCI result ($\gvq{he_gn_phys_n7_pct}{1.88}\%$ at
+$n_{\max}=7$ with the physical Hamiltonian; an earlier sub-percent
+figure belonged to a withdrawn hop-augmented model) demonstrates that
 the correlated energy \emph{can} be approximated within the
 algebraic framework, but the $\mu(R)$ parameterization was once
 thought necessary for sub-$0.1\%$ accuracy.
@@ -3300,15 +3332,16 @@ coincidence with no known derivation bridging the two---not a
 derivation of $\kappa$'s calibration role from the geometry.
 
 \textit{Graph Laplacian spectrum.}  The GeoVac lattice
-(Paper~0) discretizes $S^3$ with states $|n,l,m\rangle$
-connected by angular transitions $m \leftrightarrow m \pm 1$
+(Paper~0) has the $S^3$ label set as nodes, states $|n,l,m\rangle$
+(it is not a discretization of $\Delta_{S^3}$:\ its edges preserve $l$,
+Paper~0~\S VI), connected by angular transitions $m \leftrightarrow m \pm 1$
 and radial transitions $n \leftrightarrow n \pm 1$.  Interior
 nodes have degree $d_{\max} = 4$ (two angular, two radial
 neighbors).  The graph Laplacian $\mathcal{L} = D - A$ is
 positive semidefinite; its maximum eigenvalue satisfies
 $\lambda_{\max} \leq 2 d_{\max} = 8$, with the bound saturated
-in the continuum limit ($n_{\max} \to \infty$).  Numerical
-verification confirms monotonic convergence:
+as $n_{\max} \to \infty$ (the band edge of two-dimensional grids, not
+an $S^3$ limit).  Numerically:
 $\lambda_{\max}(n_{\max}{=}5) = 6.62$,
 $\lambda_{\max}(10) = 7.61$,
 $\lambda_{\max}(20) = 7.90 \to 8$.
@@ -3333,7 +3366,7 @@ decomposes into:
     $E = -p_0^2/2$;
   \item $1/8 = 1/(2 d_{\max})$: the inverse of the maximum
     graph Laplacian eigenvalue, determined by the vertex degree
-    of the lattice discretization.
+    of the lattice (a grid band edge).
 \end{enumerate}
 
 \textit{Heat kernel test.}  The Seeley--DeWitt coefficients on unit
@@ -3360,11 +3393,14 @@ printed $1/16$ prefactor).  The quantity that coincides with $1/16$ is
 the inverse Fock Jacobian $1/\Omega^4(0)$, where $\Omega(0) = 2$ is the
 stereographic conformal factor at $p = 0$ (equivalently $c^2(n,0)/4$).  The graph-degree derivation
 (Eq.~\ref{eq:kappa_derived}) and the Fock weight route yield the same
-value:\ the graph's maximum vertex degree $d_{\max} = 4$ and the
-conformal factor $\Omega(0) = 2$ are both fixed by the unit-$S^3$
-geometry the graph discretizes ($2 d_{\max} = 8$, while $\Omega(0)^4 =
-16$ --- two different integers; an earlier version printed a false
-identity between them, corrected 2026-09-03).
+value, but from unrelated inputs:\ the graph's maximum vertex degree
+$d_{\max} = 4$ is fixed by the lattice's two-dimensional grid structure
+(each $l$-block is a grid, Paper~0~\S VI), not by $S^3$ geometry, while
+the conformal factor $\Omega(0) = 2$ is fixed by the Fock projection
+($2 d_{\max} = 8$, while $\Omega(0)^4 = 16$ --- two different integers;
+an earlier version printed a false identity between them, corrected
+2026-09-03;\ an earlier version also said both were fixed by ``the
+unit-$S^3$ geometry the graph discretizes'', corrected 2026-09-25).
 That the calibration scale $\kappa$ equals this geometric value is the
 Observation;\ no derivation links the two.
 
@@ -3377,9 +3413,9 @@ $g_3^{\mathrm{Dirac}} = 40$.
 \textit{Classification.}  In Table~\ref{tab:taxonomy} $\kappa$ sits in
 the ``conformal'' tier:\ its numerical value $1/16$ \emph{coincides}
 with the conformal-geometry quantity $1/\Omega^4(0)$ of the Fock
-projection, a value any discretization of $S^3$ would share.  The two
-routes (graph degree and conformal factor) return the same number
-because both are computed from the unit-$S^3$ geometry;\ that the
+projection.  The two routes (graph degree and conformal factor)
+return the same number from unrelated inputs---the graph degree is a
+grid property, not an $S^3$ one;\ that the
 calibration scale $\kappa$ equals it is an \emph{Observation} (a
 numerical coincidence, no known derivation bridge), consistent with the
 Observation-tier status of $\kappa$ recorded in Paper~0 and Paper~7.  The Z-universality noted in
@@ -3465,8 +3501,8 @@ in the bipartite-$\chi_{-4}$ sense.
 \paragraph{Origin: Paper~24's Coulomb/HO asymmetry.}
 The meta-pattern is consistent with---and arguably a consequence
 of---the Coulomb/HO asymmetry established in
-Paper~24~\cite{loutey_paper24}: the graph is rational/integer on
-both bundles, but the projection structures (second-order Riemannian
+Paper~24~\cite{loutey_paper24}: the graph's matrix entries are
+rational/integer on both bundles (its eigenvalues algebraic), but the projection structures (second-order Riemannian
 for the scalar, first-order complex-analytic for the HO holomorphic
 sector, Dirac for the spinor) are categorically different, and
 their transcendental projections onto physical coordinates do not
@@ -3581,16 +3617,23 @@ curve result (Sec.~\ref{sec:algebraic_curve}) shows this has been more
 successful than previously recognized.
 
 \paragraph{Note added v2.6.0.}
-The He exchange constant census (Track~DI) validates the taxonomy
-computationally.  Graph-native FCI achieves 0.216\% at $n_{\max} = 7$
-with zero free parameters.  Three-layer structure: (1)~rational
-(graph $h_1$ + Slater $V_{ee}$, 98.6\%); (2)~topological (graph
-off-diagonal $T_\pm$, calibration $\kappa$, dominant); (3)~transcendental
-(e-e cusp, embedding, ${\sim}0.14\%$ floor).  FCI basis invariance
-confirms only what the floor is \emph{not} (basis mismatch).
-\textbf{[WITHDRAWN 2026-09-14]} The cusp attribution stated here is
-withdrawn;\ Paper~13 now reads the floor as a small-$Z$
-graph-validity-boundary artifact.
+The He exchange constant census (Track~DI) was read as validating the
+taxonomy computationally.  \textbf{[WITHDRAWN 2026-09-25]} Its
+headline---a ``graph-native'' FCI at 0.216\% from exact at [retracted 2026-09-25: he-graph-native-hop-headline]
+$n_{\max} = 7$---and the three-layer split built on it (rational
+$h_1$ + Slater $V_{ee}$; a ``topological'' layer of graph off-diagonal
+$T_\pm$ entries scaled by $\kappa$, read as dominant; a transcendental
+cusp floor) are withdrawn.  The off-diagonal entries were a
+$+\tfrac{1}{16}$ per-edge hop that is not part of helium's Hamiltonian
+(in the $k = Z$ basis $T + V_{ne}$ is exactly diagonal); it lowers the
+energy by $\approx 49$~mHa, more than the correlation energy, so the
+withdrawn 0.216\% is a hop-augmented model, not a helium result.  With the
+physical Hamiltonian in the same basis the error at $n_{\max} = 7$ is
+$\gvq{he_gn_phys_n7_pct}{1.88}\%$ (above the Hartree--Fock limit):\ the
+floor is continuum incompleteness of the fixed-$k$ basis, neither the
+cusp (withdrawn 2026-09-14) nor a small-$Z$ graph-validity boundary [retracted 2026-09-25: he-graph-native-hop-headline]
+(withdrawn 2026-09-25).  FCI basis invariance holds for either one-body
+operator and bears on neither reading.  See Paper~13, Sec.\ ``Conclusion.''
 
 \paragraph{Note added v2.26.1 (Seeley--DeWitt cancellation).}
 On unit $S^{3}$, the Seeley--DeWitt coefficient ratio

@@ -1,0 +1,368 @@
+{
+ "AsH3": {
+  "M": 35,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1954,
+  "Q": 70,
+  "t_s": 3.9
+ },
+ "BaH": {
+  "M": 10,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 559,
+  "Q": 20,
+  "t_s": 0.5
+ },
+ "BeH2": {
+  "M": 25,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1396,
+  "Q": 50,
+  "t_s": 1.8
+ },
+ "CH4": {
+  "M": 45,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 2512,
+  "Q": 90,
+  "t_s": 7.0
+ },
+ "CO": {
+  "M": 50,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 2791,
+  "Q": 100,
+  "t_s": 8.9
+ },
+ "CaH2": {
+  "M": 20,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1117,
+  "Q": 40,
+  "t_s": 1.2
+ },
+ "CoH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.7
+ },
+ "CrH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.6
+ },
+ "CuH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.6
+ },
+ "F2": {
+  "M": 50,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 2791,
+  "Q": 100,
+  "t_s": 9.0
+ },
+ "FeH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.7
+ },
+ "GeH4": {
+  "M": 40,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 2233,
+  "Q": 80,
+  "t_s": 5.0
+ },
+ "H2": {
+  "M": 5,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 280,
+  "Q": 10,
+  "t_s": 0.1
+ },
+ "H2O": {
+  "M": 35,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1954,
+  "Q": 70,
+  "t_s": 3.6
+ },
+ "H2S": {
+  "M": 30,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1675,
+  "Q": 60,
+  "t_s": 2.5
+ },
+ "H2Se": {
+  "M": 30,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1675,
+  "Q": 60,
+  "t_s": 2.3
+ },
+ "HBr": {
+  "M": 25,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1396,
+  "Q": 50,
+  "t_s": 2.0
+ },
+ "HCl": {
+  "M": 25,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1396,
+  "Q": 50,
+  "t_s": 1.7
+ },
+ "HF": {
+  "M": 30,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1675,
+  "Q": 60,
+  "t_s": 2.3
+ },
+ "He": {
+  "route": "no h1 returned",
+  "N_pauli_incl_id": 288,
+  "Q": 10,
+  "t_s": 0.1
+ },
+ "KH": {
+  "M": 10,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 559,
+  "Q": 20,
+  "t_s": 0.3
+ },
+ "LiF": {
+  "M": 35,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1954,
+  "Q": 70,
+  "t_s": 3.9
+ },
+ "LiH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 838,
+  "Q": 30,
+  "t_s": 0.6
+ },
+ "MgH2": {
+  "M": 20,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1117,
+  "Q": 40,
+  "t_s": 1.1
+ },
+ "MnH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.6
+ },
+ "N2": {
+  "M": 50,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 2791,
+  "Q": 100,
+  "t_s": 8.6
+ },
+ "NH3": {
+  "M": 40,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 2233,
+  "Q": 80,
+  "t_s": 5.3
+ },
+ "NaCl": {
+  "M": 25,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1396,
+  "Q": 50,
+  "t_s": 1.6
+ },
+ "NaH": {
+  "M": 10,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 559,
+  "Q": 20,
+  "t_s": 0.3
+ },
+ "NiH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.6
+ },
+ "PH3": {
+  "M": 35,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 1954,
+  "Q": 70,
+  "t_s": 3.8
+ },
+ "ScH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.6
+ },
+ "SiH4": {
+  "M": 40,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 2233,
+  "Q": 80,
+  "t_s": 5.1
+ },
+ "SrH": {
+  "M": 10,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 559,
+  "Q": 20,
+  "t_s": 0.4
+ },
+ "TiH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.7
+ },
+ "VH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.6
+ },
+ "ZnH": {
+  "M": 15,
+  "offdiag_nnz": 0,
+  "offdiag_eq_1_16": 0,
+  "max_abs_offdiag": 0.0,
+  "route": "h1 returned by builder",
+  "N_pauli_incl_id": 902,
+  "Q": 30,
+  "t_s": 0.6
+ }
+}

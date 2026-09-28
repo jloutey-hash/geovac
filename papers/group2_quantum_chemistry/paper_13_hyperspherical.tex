@@ -46,9 +46,14 @@ hyperangle simultaneously (Note added v2.6.0) achieves a properly
 variational $0.022\%$ raw at $l_{\max} = 7$; a further Schwartz
 cusp \emph{extrapolation} at $l_{\max} = 4$ reaches $0.004\%$ but
 lies marginally below the exact energy (non-variational).
-A graph-native FCI using the graph Laplacian as the one-body operator
-with exact rational Slater integrals achieves 0.216\% at $n_{\max} = 7$
-with zero free parameters.  The hyperspherical lattice is structurally
+A separate fixed-exponent configuration interaction in the hydrogenic
+$(n,l,m)$ basis at $k = Z$, with exact rational Slater integrals and
+zero free parameters, reaches $1.88\%$ above the exact energy at
+$n_{\max} = 7$ with helium's physical Hamiltonian---a floor set by the
+missing continuum of the fixed-$k$ bound-state basis, not by the cusp.
+(An earlier ``graph-native'' figure of 0.216\% added a non-physical [retracted 2026-09-25: he-graph-native-hop-headline]
+one-body graph hop to that Hamiltonian and is withdrawn as a helium
+result; see Sec.~\ref{sec:conclusion}.)  The hyperspherical lattice is structurally
 the same kind of object as the atomic $S^3$ lattice and the molecular
 prolate spheroidal lattice, but with one key generalization: it is a
 \emph{coupled-channel expansion} in which the angular eigenvalue
@@ -1394,7 +1399,7 @@ has implications for quantum simulation.  In a companion study, we
 compared the number of Pauli string terms after Jordan--Wigner
 transformation for GeoVac lattice Hamiltonians versus conventional
 Gaussian-basis Hamiltonians.  The GeoVac encoding scales as
-$O(Q^{3.77})$ in the number of qubits $Q$, against a measured
+$O(Q^{3.79})$ in the number of qubits $Q$, against a measured
 Gaussian band of $Q^{3.9}$--$Q^{4.3}$~\cite{loutey_paper14}.  The
 structural sparsity of the two-electron integral tensor (ERI density
 $\sim 1/M^2$ for the lattice versus $\sim O(1)$ for Gaussians) is
@@ -1441,17 +1446,23 @@ Several extensions are natural:
     doubling the angular basis, while Gaunt selection rules are
     preserved.  A prototype solver finds PsH bound at 4.1\% error
     ($E = -0.756$~Ha vs exact $-0.789$~Ha at $l_{\max}=3$).
-    H$^-$ ($Z=1$) is found bound by the graph-native CI at $n_{\max}
-    \ge 2$, though the graph topology over-binds by 21\% (the graph
-    Laplacian is non-variational below $Z_c \approx 1.84$).
+    H$^-$ ($Z=1$) is bound by the fixed-$k$ hydrogenic CI with its
+    physical Hamiltonian at $n_{\max} \ge 2$ ($E = -0.5162$~Ha at
+    $n_{\max}=5$, $2.2\%$ above the exact $-0.52775$~Ha, variational).
+    \textbf{[CORRECTED 2026-09-25]} An earlier version reported H$^-$
+    ``over-bound by 21\%'' below a ``graph-validity boundary'' [retracted 2026-09-25: he-graph-native-hop-headline]
+    $Z_c \approx 1.84$.  Both belonged to the non-physical one-body
+    graph hop discussed in Sec.~\ref{sec:conclusion}, not to H$^-$:\
+    with the hop the energy falls below the exact value for
+    $Z \lesssim 1.8$--$1.9$ (the crossing drifts with $n_{\max}$), and
+    without it the calculation is variational at every $Z$.
   \item \textbf{Cusp as full-rank off-diagonal $V_{ee}$ (v2.9.0):}
-    Energy decomposition of the graph-native CI ground state shows that
-    $\langle h_1 \rangle$ converges by $n_{\max}=2$ and diagonal $V_{ee}$
-    (mean-field repulsion) by $n_{\max}=3$.  All remaining convergence
-    is off-diagonal $V_{ee}$ correlation.  The $V_{ee}$ supermatrix is
-    full rank in the graph eigenbasis at every $n_{\max}$ tested---the
-    cusp distributes broadly across all angular channels with no
-    low-rank shortcut.
+    The $V_{ee}$ supermatrix is full rank in the pair-state basis at
+    every $n_{\max}$ tested---the cusp distributes broadly across all
+    angular channels with no low-rank shortcut.  (The accompanying
+    energy decomposition, $\langle h_1 \rangle$ converging by
+    $n_{\max}=2$, was taken on the hop-augmented model Hamiltonian of
+    Sec.~\ref{sec:conclusion} and is not a statement about helium.)
 \end{enumerate}
 
 %% ========================================================================
@@ -1954,23 +1965,47 @@ at $n_{\max} = 1$ (1.93\%) and $-2.860$~Ha at $n_{\max} = 3$
 (1.50\%), with the FCI matrix $H(k) = Bk + Ck^2$ having rational
 entries at each orbital exponent~$k$.
 
-A graph-native FCI using the graph Laplacian as the one-body operator
-and exact rational Slater integrals as the two-body operator achieves
-0.216\% at $n_{\max} = 7$ with zero free parameters (no orbital
-exponent optimization).  The graph's off-diagonal inter-shell
-couplings ($T_\pm$ transitions from the $S^3$ paraboloid lattice)
-provide one-body correlation that accounts for $\sim$86\% of the
-CI correlation energy.  FCI basis invariance was verified (Sprint~3D):
-transforming $V_{ee}$ to the graph eigenbasis gives identical energies
-(to $< 3 \times 10^{-15}$~Ha), confirming the convergence floor is not
-basis mismatch.
+\textbf{Fixed-exponent hydrogenic CI [CORRECTED 2026-09-25].}
+A CI in the hydrogenic $(n,l,m)$ basis at fixed $k = Z$, with exact
+rational Slater integrals and zero free parameters, is variational
+with helium's physical Hamiltonian:\ in this basis $T + V_{ne}$ is
+exactly diagonal, $h_{pp} = -Z^2/2n_p^2$, and the singlet ground
+state lies $2.42$, $2.09$, $1.98$, $1.93$, $1.90$, $1.88\%$ above exact at $n_{\max} = 2,\dots,7$.  The ladder
+flattens onto a floor of $\approx\!54$~mHa ($\approx\!1.9\%$) that sits
+\emph{above} the Hartree--Fock limit ($-2.8617$~Ha):\ a fixed-$k$ set of
+hydrogenic \emph{bound} states omits the continuum and is not complete,
+so the floor is basis incompleteness, not the cusp.  The
+variational-$k$ Casimir CI above removes part of it ($1.50\%$ at
+$n_{\max}=3$ vs.\ $2.09\%$ at fixed $k$) by letting the
+exponent relax.
 
-\textbf{[WITHDRAWN]} Earlier versions went on to attribute that floor to
-the cusp.  The project's own record contradicts it:\ the Schwartz-tail
-diagnostic (CUSP-2) found the tail correction \emph{worsens} accuracy and
-re-diagnosed the floor as a small-$Z$ graph-validity-boundary artifact
-near $Z_c \approx 1.84$---rather than as cusp content.  Basis invariance shows what the floor is
-\emph{not};\ it does not identify what it is.
+Earlier versions reported $0.216\%$ at $n_{\max}=7$ for a
+``graph-native'' variant whose one-body operator was not helium's:\ it
+added a constant hop $+\tfrac{1}{16}$ along every edge of the $S^3$
+lattice graph to the exact diagonal (in the $M_L = 0$ sector only the
+radial $n \leftrightarrow n\pm1$ edges act).  That term has no
+derivation---in the $k=Z$ basis the physical one-body operator has no
+off-diagonal elements, and the diagonal is the hydrogenic spectrum,
+not $\kappa$ times a graph operator---and it lowers the energy by
+$\approx\!49$~mHa, more than helium's entire correlation energy
+($42.0$~mHa).  The $0.216\%$ is therefore neither a variational bound on
+helium nor a measure of correlation; it is the ground state of a
+different, hop-augmented model Hamiltonian.  The earlier statement that
+the hop ``accounts for $\sim$86\% of the correlation energy'' is
+consistent with the hop closing $\approx 86\%$ of the gap between the
+physical fixed-$k$ CI and the exact energy at $n_{\max}\approx4$--$5$,
+i.e.\ compensating basis incompleteness; it is withdrawn.  So are the
+two readings built on the hop:\ the ``graph-validity boundary'' [retracted 2026-09-25: he-graph-native-hop-headline]
+$Z_c \approx 1.84$ is the charge below which the hop drives the model
+energy under the exact one (no such boundary exists without it), and
+the ``small-$Z$ artifact'' to which the Schwartz-tail diagnostic
+(CUSP-2) had re-attributed the $\approx 0.2\%$ floor is the same
+hop.  CUSP-2's negative result itself stands:\ adding a Schwartz tail
+does not help, and on the physical Hamiltonian the reason is plain---the
+dominant error is the $\approx 54$~mHa continuum deficit, far above the $< 1$~mHa cusp tail CUSP-2 measured
+at $l_{\max} \ge 4$.  FCI basis invariance under orbital
+rotation (Sprint~3D, $< 3\times10^{-15}$~Ha) holds for either one-body
+operator and says nothing about which is physical.
 
 \begin{acknowledgments}
 This work was conducted independently with computational tools from

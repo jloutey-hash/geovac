@@ -91,13 +91,16 @@ This result was identified in the course of extending the GeoVac
 spectral graph theory framework~\cite{GeoVac_Paper7, GeoVac_Paper14}
 from electronic to nuclear structure applications.  In the
 companion paper~\cite{GeoVac_Paper23} we show that a separate
-feature of the GeoVac framework---namely the convergence of the
-one-body graph Laplacian spectrum to the pure integers of the
-continuum $S^3$ Laplace--Beltrami operator---is
+feature of the GeoVac framework---namely the Fock conformal
+projection of the one-body problem onto the continuum $S^3$
+Laplace--Beltrami operator, whose spectrum is the pure integers
+(the discrete graph's own spectrum is algebraic and bounded, not
+integer)---is
 special to the Coulomb potential, so that the universal--specific
 partition identified here is sharp: angular sparsity is universal
 across spherical fermion systems, while the $S^3$ Fock projection
-and the $\pi$-free graph structure are Coulomb-specific.
+and the diagonal $SO(4)$ Casimir on the $(n,l,m)$ labels are
+Coulomb-specific.
 
 %=================================================================
 \section{Two-Body Matrix Element Factorization}
@@ -531,6 +534,88 @@ with tensor and spin-orbit forces requires extending the angular
 classification to include spin-dependent Gaunt-type coefficients,
 which is beyond the scope of this paper.
 
+\subsection{Selection-rule sparsity and the Monte Carlo sign problem}
+\label{sec:sign_holonomy}
+
+The zero pattern of Theorem~2 also bears on a second resource, the
+sign problem of projector quantum Monte Carlo.  \textbf{[PRIOR ART]}
+Let $H$ be a real symmetric matrix and $G$ its off-diagonal graph
+(an edge $ij$ wherever $H_{ij}\neq 0$, carrying the sign of $H_{ij}$).
+A diagonal $\pm1$ gauge $S$ makes every off-diagonal of $SHS$
+non-positive (stoquastic~\cite{Bravyi2008}) if and only if every cycle
+of $G$ carries an even number of positive edges, i.e.\ the signed graph
+(with edge signs $-\mathrm{sgn}\,H_{ij}$) is balanced in Harary's
+sense~\cite{Harary1953}.  Balance is decided in linear time by fixing
+the gauge along a spanning tree and checking the $\beta=E-V+C$
+non-tree edges; each non-tree edge left positive closes a frustrated
+fundamental cycle.  Curing the sign problem in general is
+NP-hard~\cite{TroyerWiese2005}; deciding whether local basis changes
+cure it is itself hard~\cite{KlassenTerhal2019, MarvianLidarHen2019};
+and the gauge-invariant stoquastic gap
+$\Delta=E_0(H)-E_0(H_{\mathrm{st}})$, with
+$H_{\mathrm{st}}=\mathrm{diag}(H)-|\mathrm{offdiag}(H)|$, is one of the
+standard non-stoquasticity measures~\cite{Hangleiter2020}.  None of
+this framework is ours; we apply it to GeoVac Hamiltonians.  (The
+cycle language is the same one Paper~29 uses for Ihara zeta functions
+of the Fock graph~\cite{GeoVac_Paper29}; it is context here, not a
+dependency.)
+
+\textbf{[MEASURED]} \textit{One-body graph.}  The Fock-graph adjacency
+$A$ is bipartite under the parity of $n+m$ (every edge changes $n$ or
+$m$ by one), so the gauge $(-1)^{n+m}$ maps $A$ to $-A$ and $\Delta=0$.
+This is a statement about the graph operator; the physical one-body
+operator of the $k=Z$ hydrogenic basis is exactly diagonal,
+$-Z^2/2n^2$, and is sign-free trivially.  \textit{Helium.}  For the
+physical He Hamiltonian in that basis (diagonal $h_1$, exact Slater
+$V_{ee}$; singlet, $M_L=0$) the only off-diagonals are $V_{ee}$ matrix
+elements, and the ground-state connected sector is frustrated from
+$n_{\max}=2$ on (Table~\ref{tab:sign}), although the He singlet is
+nodeless in real space: the frustration is a property of the orbital
+representation of $V_{ee}$, not of fermionic antisymmetry.
+\begin{table}[h]
+\caption{\label{tab:sign}Physical He singlet ($M_L=0$), ground-state
+connected sector: dimension, edges, fraction of positive off-diagonals,
+cycle rank $\beta$, frustrated fundamental cycles after a spanning-tree
+gauge, stoquastic gap $\Delta$, and $\Delta$ with random signs on the
+same graph (mean of 5).  $\Delta$ in hartree.}
+\begin{ruledtabular}
+\begin{tabular}{cccccccc}
+$n_{\max}$ & dim & $E$ & pos. & $\beta$ & frustr. & $\Delta$ & $\Delta_{\mathrm{rand}}$ \\
+\hline
+2 & 5  & 10   & 0.60 & 6    & 4   & $9.1\times10^{-4}$ & $1.8\times10^{-3}$ \\
+3 & 19 & 153  & 0.56 & 135  & 82  & $2.29\times10^{-2}$ & $7.1\times10^{-3}$ \\
+4 & 57 & 1418 & 0.52 & 1362 & 760 & $3.42\times10^{-2}$ & $1.4\times10^{-2}$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\textit{What the selection rules do.}  In the full singlet space
+(all $M_L$), a random orthogonal rotation of the orbitals, which leaves
+$E_0$ unchanged but destroys the Gaunt zeros, raises the cycle rank
+from $6$, $404$, $7037$ to $91$, $5356$, $107{,}416$ at
+$n_{\max}=2,3,4$ (about $15\times$) and raises $\Delta$ by $43$--$48\times$
+at $n_{\max}=3,4$ (at $n_{\max}=4$: $0.034$ vs.\ $1.47$--$1.71$~Ha over five
+rotations).  The selection rules therefore \emph{contain} the sign
+problem, by cutting the graph into small sectors with few cycles; they
+do not cure it.  The native signs themselves are not favourable: at
+$n_{\max}=3,4$ the native $\Delta$ is $2.5$--$3.2\times$ \emph{larger} than
+that of random signs on the same graph.  Rotations inside the
+Gaunt-preserving class (mixing $n$ at fixed $l$, which keeps the
+graph) typically raise $\Delta$ (median $\approx 9\times$ at
+$n_{\max}=3,4$) but not uniformly (one of five lowers it to
+$0.56\times$ at $n_{\max}=3$), so we claim no optimality of the
+hydrogenic radial basis.  \textit{Composed LiH.}  For the composed
+LiH Hamiltonian ($Q=30$)~\cite{GeoVac_Paper14}, the four-electron
+sector ($27{,}405$ determinants) splits into $9{,}190$ connected
+pieces, and the ground state lies in a $14$-determinant piece
+($\beta=36$, $\Delta=4.3$~mHa), which is diagonalised exactly.
+
+\textit{Scope.}  This is known physics applied to GeoVac's
+Hamiltonians; no GeoVac-native quantum Monte Carlo advantage is
+claimed.  The effect is topological (fewer cycles), not a better sign
+structure, and the measurements cover three basis sizes of one atom
+and one composed molecule, with no scaling law claimed.
+
 %=================================================================
 \section{Universal vs.\ Coulomb-Specific Structure}
 \label{sec:universal}
@@ -569,8 +654,9 @@ potentials:
   that maps the hydrogen Schr\"odinger equation to an integer
   eigenvalue problem on the three-sphere~\cite{GeoVac_Paper7}.
 \item The $\pi$-free graph structure in which all one-body
-  eigenvalues, degeneracies, and coupling coefficients are
-  integers or rationals before projection to continuous manifolds.
+  matrix entries, degeneracies, and coupling coefficients are
+  integers or rationals (so the graph's eigenvalues are algebraic
+  numbers) before projection to continuous manifolds.
 \item The universal constant $K = -1/16$ that maps graph eigenvalues
   to the Rydberg spectrum.
 \item The hydrogen shell degeneracy sequence $n^2$ as
@@ -587,8 +673,8 @@ Laplacian interpretation.
 \medskip
 This partition clarifies the scope of each structural feature.  The
 angular sparsity results of this paper apply broadly across
-quantum-simulation domains; the $S^3$ graph Laplacian machinery
-applies only to Coulomb systems.  The two classes of result should
+quantum-simulation domains; the $S^3$ label-lattice / Fock-projection
+machinery applies only to Coulomb systems.  The two classes of result should
 be cited and deployed accordingly.
 
 %=================================================================
@@ -621,9 +707,11 @@ systems;\ the exactly $Q$-linear Pauli count of composed block
 architectures ($N_{\mathrm{Pauli}} = 27.90 \times Q$ at fixed basis)
 is expected, but not here proven, to carry over beyond
 the Coulomb composed library (Corollary~1).  The
-$S^3$ Fock projection, the $\pi$-free graph Laplacian,
+$S^3$ Fock projection, the diagonal $SO(4)$ Casimir on the labels,
 and the integer spectrum of the unperturbed hydrogen problem are
-Coulomb-specific and break under any modification of the radial
+Coulomb-specific (the edge Laplacian $D-A$ of the label lattice is
+potential-independent and does not converge to $\Delta_{S^3}$,
+Paper~0 \S VI) and break under any modification of the radial
 potential~\cite{GeoVac_Paper23}.  Sparsity-aware quantum simulation
 techniques developed for electronic structure (qubit tapering, Pauli
 grouping, tensor factorization) transfer directly to nuclear
@@ -946,6 +1034,44 @@ GeoVac Technical Report (2026).
 J.~Loutey,
 ``Nuclear Shell Model Hamiltonians on the Hyperspherical Lattice,''
 GeoVac Technical Report (2026).
+
+\bibitem{GeoVac_Paper29}
+J.~Loutey,
+``Finite-Size Graph-RH for the GeoVac Hopf Graphs: Ihara Zeta,
+Bound-Crossing, and a Scope Boundary on Selberg-on-Hydrogen,''
+GeoVac Technical Report (2026).
+
+\bibitem{Harary1953}
+F.~Harary,
+``On the notion of balance of a signed graph,''
+Michigan Math.\ J.\ \textbf{2}, 143 (1953).
+
+\bibitem{Bravyi2008}
+S.~Bravyi, D.~P.~DiVincenzo, R.~I.~Oliveira, and B.~M.~Terhal,
+``The complexity of stoquastic local Hamiltonian problems,''
+Quantum Inf.\ Comput.\ \textbf{8}, 361 (2008).
+
+\bibitem{TroyerWiese2005}
+M.~Troyer and U.-J.~Wiese,
+``Computational complexity and fundamental limitations to fermionic
+quantum Monte Carlo simulations,''
+Phys.\ Rev.\ Lett.\ \textbf{94}, 170201 (2005).
+
+\bibitem{KlassenTerhal2019}
+J.~Klassen and B.~M.~Terhal,
+``Two-local qubit Hamiltonians: when are they stoquastic?,''
+Quantum \textbf{3}, 139 (2019).
+
+\bibitem{MarvianLidarHen2019}
+M.~Marvian, D.~A.~Lidar, and I.~Hen,
+``On the computational complexity of curing non-stoquastic
+Hamiltonians,''
+Nat.\ Commun.\ \textbf{10}, 1571 (2019).
+
+\bibitem{Hangleiter2020}
+D.~Hangleiter, I.~Roth, D.~Nagaj, and J.~Eisert,
+``Easing the Monte Carlo sign problem,''
+Sci.\ Adv.\ \textbf{6}, eabb8341 (2020).
 
 \bibitem{Reimann2002}
 S.~M.~Reimann and M.~Manninen,

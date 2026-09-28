@@ -14,23 +14,33 @@ idx = LatticeIndex(
     max_n=5,              # max_n=4 sufficient for < 0.5%
     nuclear_charge=2,
     vee_method='slater_full',
-    h1_method='hybrid',   # exact diagonal + graph off-diagonal
+    h1_method='exact',    # diagonal -Z^2/(2n^2): helium's physical h1
 )
 H = idx.assemble_hamiltonian()
 ```
 
-**Performance (slater_full + hybrid h1):**
+**Performance (slater_full + exact h1), MEASURED 2026-09-25:**
 
-| max_n | n_sd  | Error vs exact | Assembly time |
-|-------|-------|---------------|---------------|
-| 2     | 45    | 0.56%         | 0.2s          |
-| 3     | 378   | 0.45%         | 0.2s          |
-| 4     | 1,770 | 0.38%         | 2.3s          |
-| 5     | 5,995 | 0.35%         | 22.5s         |
+| max_n | n_sd  | Error vs exact (-2.903724) |
+|-------|-------|----------------------------|
+| 2     | 45    | 2.43%                      |
+| 3     | 378   | 2.10%                      |
+| 4     | 1,770 | 1.99%                      |
+| 5     | 5,995 | 1.94%                      |
 
-Convergence is monotonic from above (variational). Hybrid h1 works
-well for He because the graph off-diagonal terms provide physical
-CI mixing without variational overshoot.
+Convergence is monotonic from above (variational) and slow: a fixed
+k = Z hydrogenic basis has no continuum, so the residual is basis
+incompleteness, not a solver defect.
+
+**Corrected 2026-09-25.** This section previously recommended
+`h1_method='hybrid'` for He and quoted 0.56% / 0.45% / 0.38% / 0.35%.
+Those figures were NOT helium: `hybrid` adds a non-physical kappa*(-A) =
++1/16 hop on every lattice edge to the one-body operator, and in the k = Z
+hydrogenic basis T + V_ne is exactly diagonal, so the hop is not part of the
+atom's Hamiltonian.  It lowers He by ~48 mHa -- more than helium's entire
+correlation energy -- which is what made the numbers look good.
+`ecosystem_export.hamiltonian('He')` and `vqe_benchmark.build_geovac_he`
+now use `exact`; `hybrid` survives only as an explicit legacy opt-in.
 
 ### Lithium (Z=3, 3 electrons)
 
@@ -72,8 +82,8 @@ overshoot (energy dips below exact at max_n >= 3).
 
 | Method   | Description                                     | Use case     |
 |----------|-------------------------------------------------|--------------|
-| `hybrid` | Exact diagonal (-Z^2/2n^2) + graph off-diagonal | He (2e)      |
-| `exact`  | Diagonal hydrogen eigenbasis only               | Li (3e)      |
+| `exact`  | Diagonal hydrogen eigenbasis only (physical)    | He, Li, ...  |
+| `hybrid` | Exact diagonal + non-physical +1/16 graph hop   | LEGACY model only; not an atomic Hamiltonian |
 | `graph`  | Full graph Laplacian (D-A) + node weights       | Single atoms |
 
 ## Reference Energies

@@ -32,11 +32,21 @@ Z_HE = 2
 
 
 def _system(n_max):
+    """Helium's PHYSICAL Hamiltonian in the singlet pair basis (2026-09-25).
+
+    build_vee_matrix evaluates V_ee at unit exponent k=1; He needs k=Z=2, and
+    V_ee is exactly linear in k.  build_h1_pair_matrix uses casimir_ci's
+    legacy h1, which adds a (1/16)*A hop that is not part of He's
+    Hamiltonian, so only its diagonal (-Z^2/2n^2, exact at k=Z) is kept.
+    The earlier version of this file solved h1(Z=2, +hop) + V(k=1) -- a
+    system that was not helium on two counts (42.5%/40.0% below were its
+    numbers; physical He gives 58.5%/54.1%)."""
     V, pairs, orbitals = build_vee_matrix(n_max, m_total=0)
     h1 = build_h1_pair_matrix(n_max, Z_HE, m_total=0)
     if isinstance(h1, tuple):
         h1 = h1[0]
-    return V, h1, pairs, orbitals
+    h1 = np.diag(np.diag(h1))
+    return Z_HE * V, h1, pairs, orbitals
 
 
 def _entropy(V, h1, pairs, n_orb):
@@ -84,6 +94,9 @@ def test_paper27_entropy_concentrates_on_the_cusp_edge():
     # and it is dominant by a clear margin, not a photo finish
     assert top_dS / S_full > 0.35, f"top edge carries only {top_dS/S_full:.1%}"
     assert top_dS > 1.3 * rows[1][0], "top edge not clearly ahead of the runner-up"
+    # Paper 27 sec:cusp values on He's physical Hamiltonian (2026-09-25)
+    assert S_full == pytest.approx(3.772e-2, rel=2e-3), f"S_full={S_full}"
+    assert top_dS / S_full == pytest.approx(0.585, abs=0.005)
 
 
 def test_paper27_entropy_locus_control_and_grading():

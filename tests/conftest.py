@@ -65,13 +65,7 @@ def hydrogen_solver():
     return AtomicSolver(max_n=10, Z=1, kinetic_scale=UNIVERSAL_KINETIC_SCALE)
 
 
-@pytest.fixture(scope="session")
-def helium_solver():
-    """Shared helium MoleculeHamiltonian (max_n=5) for reuse across tests."""
-    from geovac import MoleculeHamiltonian
-    mol = MoleculeHamiltonian(
-        nuclei=[(0.0, 0.0, 0.0)],
-        nuclear_charges=[2],
-        max_n=5,
-    )
-    return mol
+# (2026-09-26) The `helium_solver` fixture was removed: it had no consumers and
+# built the archived MoleculeHamiltonian, whose atomic default kinetic scale
+# -0.10298808 was FITTED to experiment. For helium use
+# geovac.hyperspherical_radial.solve_helium (see tests/test_hyperspherical_he.py).

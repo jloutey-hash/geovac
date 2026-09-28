@@ -93,9 +93,11 @@ the fourth universal).
 \label{sec:intro}
 % ===================================================================
 
-The GeoVac framework discretizes Coulomb bound-state quantum mechanics
-onto a finite graph that converges to the unit three-sphere $S^3$ in
-the continuum limit~\cite{paper7}.  Paper~25~\cite{paper25} observed
+The GeoVac framework places Coulomb bound-state quantum mechanics
+on a finite graph whose nodes are exactly the labels $(n,l,m)$ of the
+unit-three-sphere harmonics~\cite{paper7} (the graph Laplacian itself
+does not converge to the $S^3$ Laplacian:\ it preserves $l$ and splits
+into disconnected blocks, Paper~7).  Paper~25~\cite{paper25} observed
 that the same graph, read through its signed node--edge incidence
 matrix $B$, carries all the combinatorial ingredients of a lattice
 gauge theory: nodes as matter sites, edges as link variables in a
@@ -756,7 +758,8 @@ crossover at this size.  \emph{This is a structural feature of the
 small graph, not a statement about the field theory}.  To see
 confinement in the conventional sense, one needs a graph with a
 continuous family of Wilson-loop sizes---i.e., $n_{\max} \geq 5$ or
-finer discretizations of the continuum $S^3$.  Section~\ref{sec:open}
+a genuine discretization of the continuum $S^3$ (which this label graph
+is not).  Section~\ref{sec:open}
 lists this as an immediate follow-up.
 
 \paragraph*{Consistency with Paper 29's Ihara cycle counts.}  The

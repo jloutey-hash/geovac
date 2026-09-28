@@ -70,13 +70,15 @@ $O(V)$ character of the underlying graph Hamiltonian.
 %% ========================================================================
 
 The GeoVac program posits that continuous quantum mechanics emerges from
-discrete graph topologies: a scale-invariant graph Laplacian defined on
-the unit three-sphere $S^3$ encodes the full single-particle
-Schr\"odinger equation without any continuous spatial
-integration~\cite{paper0,paper1,paper7}.  Prior work established this
-correspondence rigorously for single-center atomic systems, recovering
-the hydrogenic spectrum as a combinatorial eigenvalue problem with $O(V)$
-scaling.  Extending this framework to multi-center molecules, however,
+discrete graph topologies: a scale-invariant graph on the label set
+$(n,l,m)$ of the unit three-sphere $S^3$ carries the single-particle
+quantum-number structure without any continuous spatial
+integration~\cite{paper0,paper1,paper7}.  Prior work established the
+exact correspondence at the level of labels for single-center atomic
+systems---on them the $S^3$ Laplacian is the diagonal $SO(4)$ Casimir,
+whose spectrum Fock's projection maps to the hydrogenic one---with $O(V)$
+scaling;\ the graph Laplacian itself does not converge to the $S^3$
+operator (Paper~7, corrected 2026-09-25).  Extending this framework to multi-center molecules, however,
 presents a fundamental geometric challenge: two or more atomic lattices,
 each living on its own $S^3$ conformal manifold, must be bridged into a
 single molecular graph without resorting to the continuous

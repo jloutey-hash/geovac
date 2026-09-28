@@ -78,7 +78,7 @@ class JordanWignerEncoder:
     --------
     >>> from geovac import LatticeIndex
     >>> idx = LatticeIndex(n_electrons=2, max_n=3, nuclear_charge=2,
-    ...                    vee_method='slater_full', h1_method='hybrid')
+    ...                    vee_method='slater_full', h1_method='exact')
     >>> enc = JordanWignerEncoder(idx)
     >>> analysis = enc.analyze()
     >>> print(analysis.n_pauli_terms)

@@ -38,12 +38,14 @@ GEOVAC_POINTS = [
     # (label, M, Q, Pauli, ERI_density_pct)
     # Corrected 2026-08-29 to the exact global-M_L rule (the retired
     # pair-diagonal values were 120/2659/31039/227338 and 10.4/3.9/2.1/1.3).
-    # n_max=5 Pauli is PENDING re-measurement (JW on the 519,585 corrected
-    # ERIs); None excludes it from the Pauli plot, the density is measured.
-    (r'$n_{\max}{=}2$',  5,  10,     288, 17.1),
-    (r'$n_{\max}{=}3$', 14,  28,   14211,  9.9),
-    (r'$n_{\max}{=}4$', 30,  60,  252095,  7.1),
-    (r'$n_{\max}{=}5$', 55, 110,    None,  5.7),
+    # Re-measured 2026-09-25 with helium's PHYSICAL one-body operator
+    # (hamiltonian('He'); debug/library_he_fix.py), identity INCLUDED to
+    # match Paper 14 Table I.  Retired graph-hop values were
+    # 288/14079/250403/2434442 (this list had carried 288/14211/252095/None).
+    (r'$n_{\max}{=}2$',  5,  10,     280, 17.1),
+    (r'$n_{\max}{=}3$', 14,  28,   14047,  9.9),
+    (r'$n_{\max}{=}4$', 30,  60,  250323,  7.1),
+    (r'$n_{\max}{=}5$', 55, 110, 2434282,  5.7),
 ]
 
 

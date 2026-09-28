@@ -57,14 +57,20 @@ harmonic oscillator's linear complex-analytic projection.
 
 Fock's 1935 stereographic projection~\cite{fock1935} maps the
 hydrogen Schr\"odinger equation onto the free Laplacian on the
-three-sphere $S^3$.  Paper~0~\cite{paper0} discretized this
-construction: nodes labeled by quantum numbers $(n, l, m)$, edges
-from angular-momentum selection rules, and a graph Laplacian whose
-eigenvalues converge to those of the continuous Laplace--Beltrami
-operator.  The kinetic constant $\kappa = -1/16$ then maps these
-continuum $S^3$ eigenvalues $n^2 - 1$ to physical Rydberg energies
-$E_n = -Z^2 / (2 n^2)$.  Paper~7~\cite{paper7} validated this
-$S^3$ reduction with eighteen independent symbolic proofs.
+three-sphere $S^3$.  Paper~0~\cite{paper0} built a lattice on this
+construction: nodes labeled by quantum numbers $(n, l, m)$---exactly
+the label set of the $S^3$ harmonics, on which the Laplace--Beltrami
+operator acts as the diagonal $SO(4)$ Casimir $n^2 - 1$---and edges
+from angular-momentum selection rules.  The lattice's graph Laplacian
+does \emph{not} converge to the continuous Laplace--Beltrami operator
+(it preserves $l$ and splits into $n_{\max}$ disconnected blocks,
+Paper~0~\S VI;\ corrected 2026-09-25).  The Rydberg energies
+$E_n = -Z^2/(2n^2)$ follow from the continuum eigenvalues $n^2 - 1$
+through Fock's energy shell $p_0^2 = -2E$, a nonlinear map;\ the matched
+kinetic constant $\kappa = -1/16$ does not map $n^2 - 1$ onto them (it
+maps the graph's extremal eigenvalue $\lambda_{\max} \to 8$ onto the
+ground state, an Observation, Paper~7).  Paper~7~\cite{paper7} validated
+the continuum $S^3$ chain with eighteen symbolic checks.
 Paper~18~\cite{paper18} identified a transcendental cost in the
 projection: $\pi$ enters through the spectral zeta values of $S^3$
 as a \emph{calibration} exchange constant.
@@ -419,18 +425,20 @@ It plays no role in the construction of the spectrum; its role is
 to describe the connectivity structure that determines selection
 rules for transition processes.
 
-This is qualitatively different from the Coulomb / $S^3$ case of
-Paper~0~\cite{paper0} and Paper~7~\cite{paper7}, where the graph
-Laplacian $D - A$ on the $(n, l, m)$ lattice converges to the continuum
-$S^3$ Laplace--Beltrami operator, whose eigenvalue $n^2 - 1$ on the
-$n$-th shell the universal kinetic constant $\kappa = -1/16$ converts to
-Rydberg energies.  There the
-off-diagonal structure of $A$ is essential to the spectrum.  In the
-Bargmann graph, by contrast, the off-diagonal structure is
-spectroscopically informative but spectrally inert.  This is the
-first key structural difference between the Coulomb and the
-harmonic oscillator discretizations, and it motivates the
-asymmetry analysis of Section~\ref{sec:asymmetry}.
+This is the \emph{same} situation as in the Coulomb / $S^3$ case of
+Paper~0~\cite{paper0} and Paper~7~\cite{paper7}, contrary to an earlier
+version of this section.  There too the exact spectrum is a diagonal:\
+on the $(n, l, m)$ labels the $S^3$ Laplace--Beltrami operator is the
+$SO(4)$ Casimir $\mathrm{diag}(n^2 - 1)$, and the graph Laplacian
+$D - A$ does \emph{not} converge to it (it preserves $l$ and splits into
+$n_{\max}$ disconnected blocks;\ Paper~7).  In both graphs, therefore,
+the off-diagonal structure is spectroscopically informative but
+spectrally inert.  (The version printed until 2026-09-25 called this
+``the first key structural difference'' between the two
+discretizations, on the premise that $D - A$ converges to
+$\Delta_{S^3}$;\ that premise is false, and the layer is withdrawn ---
+see the note at the head of Section~\ref{sec:asymmetry}.)  The
+asymmetries that survive are analysed in Section~\ref{sec:asymmetry}.
 
 %================================================================
 \section{The Coulomb / HO asymmetry}
@@ -444,12 +452,17 @@ momentum as a labeling system.  Table~\ref{tab:asymmetry}
 summarizes the comparison.
 
 \emph{Note on the layer count.}\ The Coulomb/HO asymmetry has been
-refined to seven layers (enumerated in \S\ref{sec:asymmetry_layer4}) across Sprint~5 Track~S5 (gauge-content),
+refined to seven layers catalogued, six standing (Layer~1 withdrawn
+2026-09-25) (enumerated in \S\ref{sec:asymmetry_layer4}) across Sprint~5 Track~S5 (gauge-content),
 Paper~30 (SU(2) Wilson on $S^3$), Sprint~ST-SU3 (SU(3) Wilson on
 $S^5$), Sprints~L2-E/L2-F.1 (modular wedge), Paper~51 (gravity termination),
 Sprint~Q5$'$-S5 (Mellin parity), and the Hodge-circle
-arithmetic computation (August~2026).  The first three Coulomb-specific
-layers are: (i)~spectrum-computing role of $L_0$;
+arithmetic computation (August~2026).  \emph{Layer (i) is withdrawn
+(2026-09-25):} it rested on $L_0 = D - A$ converging to $\Delta_{S^3}$,
+which is false (Paper~7);\ on both spheres the spectrum is diagonal on
+the labels and $L_0$ is spectrally inert, so six of the seven catalogued
+layers stand.  The first three layers as catalogued are:
+(i)~spectrum-computing role of $L_0$ [withdrawn];
 (ii)~calibration~$\pi$; (iii)~Wilson gauge with natural matter
 coupling --- with the universal Wilson--Hodge combinatorial vocabulary
 as the shared (\textbf{universal}) residue, not itself one of the seven.  Sprint~ST-SU3 split
@@ -485,7 +498,7 @@ Eigenvalue $\lambda_N$ & $n^2 - 1$ (quadratic in $n$) & $N$ (linear in $N$) \\
 Shell degeneracy & $n^2$ & $(N+1)(N+2)/2$ \\
 Projection $E(\lambda)$ & $E_n = -Z^2 / [2(\lambda + 1)]$ (nonlinear) & $E_N = \hbar\omega(\lambda + 3/2)$ (linear-affine) \\
 Projection constant & $p_0 = Z / n$ (state-dependent) & $\hbar\omega$ (universal) \\
-Graph Laplacian role & carries spectrum via conformal $D - A$ identification & encodes transitions only \\
+Graph Laplacian role & encodes transitions only (spectrum = diagonal Casimir; $D - A \not\to \Delta_{S^3}$) & encodes transitions only \\
 Transcendentals in projection & $\pi$ (calibration exchange constant) & none \\
 $\pi$-free graph & yes & yes \\
 $\pi$ in full pipeline & enters at projection & never enters \\
@@ -562,7 +575,9 @@ We summarize this causal chain as a structural observation:
 \begin{theorem}[Structural origin of calibration $\pi$]
 \label{thm:asymmetry}
 A quantum system whose spectrum is encoded by a self-adjoint
-graph Laplacian on a compact Riemannian manifold via a nonlinear
+second-order Laplacian on a compact Riemannian manifold (on the GeoVac
+labels, a diagonal Casimir;\ ``graph Laplacian'' here before 2026-09-25)
+via a nonlinear
 projection requires a calibration exchange constant arising from
 the spectral zeta values of the manifold.  A quantum system
 whose spectrum is encoded by a first-order equivariant operator
@@ -621,14 +636,15 @@ orthogonality}
 
 The note at the head of Section~\ref{sec:asymmetry} records
 the original three layers of the Coulomb/HO asymmetry: the spectrum-computing
-role of $L_0$ (Coulomb-specific), the calibration~$\pi$
+role of $L_0$ (Coulomb-specific as catalogued;\ withdrawn 2026-09-25), the calibration~$\pi$
 (Coulomb-specific), and Wilson gauge with natural matter coupling
 (Coulomb-specific).  Sprints L2-E + L2-F.1 (May~2026) identified a
 fourth layer at the modular-Hamiltonian / wedge level:
 
 \begin{itemize}\setlength{\itemsep}{2pt}
-\item Layer~1: spectrum-computing role of $L_0$
-  (Coulomb-specific).
+\item Layer~1: spectrum-computing role of $L_0$ [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
+  (\emph{withdrawn} 2026-09-25:\ $L_0$ is spectrally inert on $S^3$
+  too, since it does not converge to $\Delta_{S^3}$;\ Paper~7).
 \item Layer~2: calibration~$\pi$ (Coulomb-specific).
 \item Layer~3: Wilson lattice gauge with natural matter coupling
   (Coulomb-specific, via Papers~25, 30; $S^5$ is gauge-only per
@@ -774,11 +790,11 @@ Four named obstructions:
   Wick-rotation theorem at $\beta = 2\pi$ is half-integer-spectrum
   specific.
 \item \emph{Coulomb/HO category mismatch resurfaces.}  The
-  layer-1/2/3 asymmetry already documented above propagates to
+  layer-2/3 asymmetry already documented above propagates to
   the modular-Hamiltonian level: every structural ingredient
   Pythagorean orthogonality requires (spinor bundle + half-integer
   wedge + second-order $\Delta$ alongside first-order $D$) is the
-  Coulomb-side outcome of layers~1--3.
+  Coulomb-side outcome of layers~2--3 (layer~1 is withdrawn).
 \end{enumerate}
 
 These four obstructions are the same blocker that prevents the
@@ -786,8 +802,9 @@ cross-manifold tensor product $\mathcal{T}_{S^3} \otimes
 \mathcal{T}_{\mathrm{Hardy}(S^5)}$ at the AC-extension level
 (Paper~32~\S~VIII.C G4b), now showing up at the modular-Hamiltonian
 level as a sibling obstruction rather than a new one.  The
-seven-layer Coulomb/HO asymmetry is consistent across spectrum
-computation, calibration, gauge-matter coupling, modular structure,
+Coulomb/HO asymmetry (seven layers catalogued, six standing after the
+2026-09-25 withdrawal of the spectrum-computing layer) is consistent
+across calibration, gauge-matter coupling, modular structure,
 spectral-action gravity termination, master-Mellin chirality
 factorization, and Hodge-circle arithmetic.
 
@@ -1085,14 +1102,17 @@ At this level of abstraction, the Bargmann graph is a lattice
 gauge structure in exactly the Paper~25 sense.
 
 \paragraph{Reduced content (no spectrum-computing role for $L_0$).}
-On $S^3$, the node Laplacian $L_0 = D - A$ is conformally identified
-with the continuum $S^3$ Laplace--Beltrami operator, whose eigenvalues
-$n^2 - 1$ are mapped to the Coulomb spectrum by
-the kinetic constant $\kappa = -1/16$.  The Wilson dictionary in
-Paper~25 identifies $L_0$ with the matter propagator's inverse
-(covariant Laplacian $-\nabla^2 + m^2$), and this identification has
-spectral content: the matter spectrum is the spectrum of the continuum
-operator $L_0$ is conformally identified with, up to $\kappa$-scaling.  On $S^5$, by contrast, the Bargmann
+An earlier version of this paragraph stated that on $S^3$ the node
+Laplacian $L_0 = D - A$ is conformally identified with the continuum [retracted 2026-09-25: graph-laplacian-converges-to-s3]
+$S^3$ Laplace--Beltrami operator, so that the Paper~25 Wilson
+dictionary (which identifies $L_0$ with the matter propagator's
+inverse) carried spectral content there.  That premise is withdrawn
+(2026-09-25):\ $L_0$ on the $(n,l,m)$ lattice preserves $l$, splits
+into $n_{\max}$ disconnected blocks and does not converge to
+$\Delta_{S^3}$, whose exact action on the labels is the diagonal Casimir
+$n^2 - 1$ (Paper~7).  The contrast drawn here therefore does not hold:\
+on $S^3$ as on $S^5$, the node Laplacian is spectrally inert.  On $S^5$
+specifically, the Bargmann
 node Laplacian is spectrally inert for the physical HO spectrum: the
 HO energies $\hbar\omega(N + 3/2)$ live in the diagonal
 (Eq.~\eqref{eq:H-graph}), not in~$L_0 = D - A$.  The graph adjacency
@@ -1160,10 +1180,14 @@ the combinatorial level (incidence matrix, node/edge Laplacians,
 discrete Hodge decomposition, $\beta_1$ Wilson-loop classes), but
 the physical content of the structure is strictly reduced:
 \begin{enumerate}
-\item The node Laplacian $L_0 = D - A$ carries the Coulomb spectrum on
-  $S^3$ through its conformal identification with the continuum
-  Laplace--Beltrami operator ($\kappa = -1/16$) but is spectrally inert on $S^5$ (the
-  HO spectrum is in the diagonal).
+\item The node Laplacian $L_0 = D - A$ is spectrally inert on $S^5$ (the
+  HO spectrum is in the diagonal).  \emph{Withdrawn contrast
+  (2026-09-25):} this item formerly said $L_0$ carries the Coulomb
+  spectrum on $S^3$ through a conformal identification with the
+  continuum Laplace--Beltrami operator;\ it does not ($L_0$ does not
+  converge to $\Delta_{S^3}$, whose action on the labels is the diagonal
+  Casimir, Paper~7), so this item is no longer a reduction relative to
+  $S^3$.
 \item The natural gauge group of the graph is $U(1)$; no Wilson
   $\mathrm{SU}(3)$ lattice structure emerges from the $(N, 0)$
   symmetric irreps, because transitions between distinct irreps
@@ -1174,17 +1198,24 @@ the physical content of the structure is strictly reduced:
 \end{corollary}
 
 The corollary extends the Coulomb/HO asymmetry of
-Theorem~\ref{thm:asymmetry} from a two-layer statement
-(spectrum: yes $S^3$, no $S^5$; calibration~$\pi$: yes $S^3$,
-no $S^5$) to a three-layer statement adding gauge-structure
-content (Wilson interpretability: full on $S^3$, reduced on $S^5$); this
-is the third of the seven layers catalogued in \S\ref{sec:asymmetry_layer4}.
+Theorem~\ref{thm:asymmetry} by adding gauge-structure content to the
+third layer catalogued in \S\ref{sec:asymmetry_layer4} (Wilson gauge
+with natural matter coupling:\ on $S^3$ the links and the spin-$1/2$
+matter share a representation, an argument not yet realised as a
+coupled construction, Paper~30~\S\,open;\ on $S^5$ pure-gauge
+$\mathrm{SU}(3)$ is well-defined but natural $(N,0)$ matter needs a
+Clebsch--Gordan intertwiner).  This layer rests on representation
+theory, not on $L_0$, and is its own layer, independent of the
+calibration-$\pi$ layer;\ the ``spectrum'' layer (``spectrum: yes
+$S^3$, no $S^5$'') is withdrawn (2026-09-25).
 The universal content --- that the Wilson--Hodge vocabulary applies
 combinatorially to any simplicial 1-complex --- is preserved, but
-the Coulomb-specific content --- that the graph Laplacian
-simultaneously carries the physical spectrum (through its conformal
-identification with the continuum Laplacian) and supports a
-nontrivial matter-gauge double --- is not.
+the Coulomb-specific content --- a matter-gauge double in which matter
+and links share one representation (argued on $S^3$, not yet
+constructed) --- is not.  (An earlier version also listed, as Coulomb-specific, that the
+graph Laplacian carries the physical spectrum through a conformal
+identification with the continuum Laplacian;\ it does not, on either
+sphere.)
 
 A practical consequence for the Paper~2 fine-structure-constant
 Observation~\cite{paper2_alpha}: the $S^5$ analog of the Paper~2

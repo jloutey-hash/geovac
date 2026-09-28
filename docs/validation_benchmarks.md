@@ -136,10 +136,13 @@
 | Casimir CI polynomial structure | residual < 1e-10 | H(k) = Bk + Ck² |
 | Casimir CI variational bound | E_var > exact at all n_max | Variational principle |
 | Casimir CI n_max=3 error | < 2% (variational) | Algebraic CI accuracy |
-| Graph-native CI n_max=7 error | 0.216% (E = −2.89746 Ha, dim 1218) | Graph-native CI accuracy (MEASURED 2026-09-19; the recorded `< 0.20%` was wrong — see note below) |
-| Graph-native CI n_max=8 error | 0.207% (2,262 configs) ⚠ | Exact algebraic float integrals |
-| Graph-native CI n_max=9 error | 0.201% (3,927 configs) ⚠ | Exact algebraic float integrals |
+| He fixed-k=Z hydrogenic CI, PHYSICAL h1 (`build_graph_native_fci(..., h1_method='exact')`) | 2.422 / 2.094 / 1.981 / 1.928 / 1.899 / **1.881%** at n_max = 2..7 (E = −2.849119 Ha at 7, dim 1218) | Helium's Hamiltonian in this basis; above the HF limit (continuum-incompleteness floor). Registry `he_gn_phys_n{2..7}_pct`; driver `debug/he_graph_regression.py` (MEASURED 2026-09-25) |
+| ~~Graph-native CI n_max=7 error~~ HOP MODEL, not He | 0.216% (E = −2.89746 Ha, dim 1218) | **Withdrawn as a helium result 2026-09-25**: default `h1_method='hybrid'` adds a (1/16)·A one-body hop that is not part of the atom's Hamiltonian (lowers E by ~49 mHa > He correlation energy). Retained as the hop-model record [retracted 2026-09-25: he-graph-native-hop-headline] |
+| ~~Graph-native CI n_max=8 error~~ HOP MODEL | 0.207% (2,262 configs) ⚠ | Hop-augmented model; not He |
+| ~~Graph-native CI n_max=9 error~~ HOP MODEL | 0.201% (3,927 configs) ⚠ | Hop-augmented model; not He |
 
+> **SUPERSEDED 2026-09-25:** everything in the note below concerns the hop-augmented model's ladder; its arithmetic stands, but none of it is a helium accuracy. See the physical row above and Paper 13 Sec. Conclusion.
+>
 > **RESOLVED 2026-09-19 (v5.14.6). The recorded n_max=7 row was wrong; the measured value is 0.216% and the row above now carries it. The corpus-wide 0.19% headline sweep ran in v5.14.5 and was completed here (the group2 synthesis L828 locus that sweep's gate could not reach — its `require_nearby` context sat 4 lines outside the ±3 window). Retained below as the measurement record.**
 > These three rows could not all be right: a variational ladder converging from above is
 > monotone decreasing, so the error cannot be `< 0.20%` at n_max=7 and then `0.207%` at
@@ -174,11 +177,11 @@
 | P-state cross-sector kinetic at β=0 | 0.0 identically | Cross-sector vanishes (sinh→0) |
 | Algebraic Slater R^k machine precision | < 1.5e-12 | `compute_rk_float()` vs exact Fraction |
 | casimir_ci F²(2p,2p) corrected | 45/512 (was 43/512) | Typo fix validated by hypergeometric evaluator |
-| Graph-native CI beats diagonal | error_graph < error_diag | Graph topology dominance |
+| Graph-native CI beats diagonal | error_graph < error_diag | HOP MODEL (2026-09-25): true only because the hop lowers E non-variationally; not "graph topology dominance" — the diagonal is He's physical h1 |
 | Graph-consistent = graph-native | < 1e-10 Ha | FCI basis invariance |
 | Graph-consistent full spectrum | all evals match to 1e-8 | FCI orbital rotation invariance |
-| Graph-native CI Z_c crossover | Z_c ≈ 1.84 at n_max=7 | Graph validity boundary |
-| Graph-native H⁻ over-binding | E_CI < E_exact at n_max≥2 | Non-variational characterization |
+| Graph-native CI Z_c crossover | Z_c ≈ 1.84 at n_max=7 | HOP MODEL (withdrawn 2026-09-25): the charge below which the (1/16)·A hop drives the model under exact; no crossing on the physical Hamiltonian [retracted 2026-09-25: he-graph-native-hop-headline] |
+| Graph-native H⁻ over-binding | E_CI < E_exact at n_max≥2 | HOP MODEL (withdrawn 2026-09-25): physical h1 gives H⁻ bound, +2.15% above exact at n_max=7, variational (registry `hminus_phys_pct`) |
 | Standard FCI H⁻ variational | E_CI > E_exact at all n_max | Variational bound verification |
 | He energy decomposition verified | <h1>+<V_ee>=E to 1e-12 | Decomposition correctness |
 | V_ee full rank (graph eigenbasis) | rank = dim at all n_max | Cusp rank characterization |

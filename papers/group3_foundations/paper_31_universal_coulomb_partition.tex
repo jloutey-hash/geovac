@@ -54,10 +54,15 @@ the HO uses a first-order complex Euler operator and a linear-affine
 Bargmann projection that is bit-exactly $\pi$-free.  This asymmetry is
 not an accident of two examples; it is a structural feature of
 sphere-quotient discretizations.  The Sprint 5 result on $S^5$ gauge
-structure~\cite{paper25} sharpens the Coulomb/HO asymmetry from two
-layers to three (spectrum-computing role of $L_0$, calibration $\pi$,
-and Wilson physical content), all three stratifying along the same
-operator-order divide.  We frame the partition in spectral-triple
+structure~\cite{paper25} adds Wilson gauge with natural matter
+coupling to calibration $\pi$ as a second Coulomb/HO discriminator;
+unlike calibration $\pi$, it is decided by representation theory (on
+$S^3 = \mathrm{SU}(2)$ matter and links share a representation, on
+$S^5$ matter coupling needs a Clebsch--Gordan intertwiner), not by
+operator order.  (A third, the spectrum-computing role of $L_0$, [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
+was listed here until 2026-09-25;\ it is withdrawn, because the graph
+Laplacian on $S^3$ does not converge to the $S^3$ Laplacian and is
+spectrally inert there as on $S^5$.)  We frame the partition in spectral-triple
 language and identify which features of GeoVac transfer to non-Coulomb
 systems for free, which require system-specific rederivation, and what
 this implies for nuclear, oscillator, and gauge-theoretic
@@ -71,13 +76,16 @@ extensions of the framework.
 \label{sec:intro}
 %=================================================================
 
-The GeoVac framework~\cite{paper0,paper1,paper7} discretizes
-quantum-mechanical Hamiltonians on natural geometries by replacing
-the continuous Laplace--Beltrami operator with the graph Laplacian
-on a packed lattice of quantum-number labels.  For the hydrogen atom,
-the result is exact: the continuum $S^3$ Laplace--Beltrami spectrum
-$\lambda_n = -(n^2 - 1)$ --- to which the graph Laplacian converges ---
-recovers the hydrogenic Rydberg series under Fock's stereographic
+The GeoVac framework~\cite{paper0,paper1,paper7} builds
+quantum-mechanical Hamiltonians on natural geometries over a packed
+lattice of quantum-number labels.  For the hydrogen atom, the label
+set $(n,l,m)$ is exactly the index set of the $S^3$ harmonics, on
+which the continuum $S^3$ Laplace--Beltrami operator acts as the
+diagonal $SO(4)$ Casimir, with spectrum $\lambda_n = -(n^2 - 1)$
+(the lattice's edge Laplacian $D - A$ is \emph{not} a discretization
+of that operator and does not converge to it:\ it preserves $l$ and
+splits into $n_{\max}$ disconnected blocks, Paper~0~\S VI);\ this
+spectrum recovers the hydrogenic Rydberg series under Fock's stereographic
 projection $p_0 = \sqrt{-2E}$ from $S^3$ to momentum
 space~\cite{fock1935,bander_itzykson1966}.  The framework has been
 extended to multi-electron atoms~\cite{paper13},
@@ -154,8 +162,11 @@ Section~\ref{sec:transcendental} traces the calibration-$\pi$
 asymmetry to the operator-order distinction and the projection type
 (nonlinear vs.\ linear-affine).
 Section~\ref{sec:five-layers} reports the Sprint~5 result that the
-Coulomb/HO asymmetry has three independent discriminators, not two
-(within the seven-layer catalogue of Paper~24~\cite{paper24}), and gives
+Coulomb/HO asymmetry has two standing independent discriminators
+(within the catalogue of Paper~24~\cite{paper24}, seven layers
+catalogued, six standing;\ a third discriminator reported here
+originally, the spectrum-computing role of $L_0$, is withdrawn as of
+2026-09-25), and gives
 the predictive checklist that follows.
 Section~\ref{sec:implications} states what features of GeoVac
 transfer to non-Coulomb systems for free and what does not.
@@ -172,10 +183,14 @@ recomputation, and to place the GeoVac framework in the
 graph-spectral-triple lineage of Connes, Marcolli, and van
 Suijlekom~\cite{connes_book1994,marcolli_vs2014,perez_sanchez2024}.
 The dual-description rule of the framework --- in particular that the
-identification of the discrete graph with the continuum
-Laplace--Beltrami operator is a proven mathematical equivalence and
-not an ontological claim about which description is more
-fundamental --- is preserved throughout.
+Fock equivalence between hydrogen and the continuum Laplace--Beltrami
+operator on $S^3$, and the identification of the graph's nodes with
+that operator's labels (on which it is the diagonal $SO(4)$ Casimir),
+are mathematical equivalences and not ontological claims about which
+description is more fundamental --- is preserved throughout.  (An
+earlier version called the identification of the discrete graph
+\emph{with} the Laplace--Beltrami operator a proven equivalence;\ the
+edge Laplacian does not converge to it, corrected 2026-09-25.)
 
 %=================================================================
 \section{Setup: GeoVac as a Discrete Spectral Triple}
@@ -434,8 +449,9 @@ potential exhibiting this accidental degeneracy, as a consequence of
 its hidden $\mathrm{SO}(4)$ symmetry (the Runge--Lenz vector).  Any
 deformation $V(r) = -Z/r + \delta V(r)$ with $\delta V \not\equiv 0$
 lifts the $\ell$-degeneracy, breaking the conformal equivalence
-between the radial Schr\"odinger problem and the $S^3$ graph
-Laplacian.
+between the radial Schr\"odinger problem and the $S^3$
+Laplace--Beltrami operator (the operator whose harmonics the graph's
+nodes label).
 \end{theorem}
 
 The proof~\cite{paper23} amounts to observing that Fock's
@@ -676,53 +692,63 @@ coefficient appears.
 
 The Sprint~5 investigation~\cite{paper25} of $S^5$ gauge structure
 sharpened the Coulomb/HO asymmetry from two layers
-(spectrum-computing and calibration $\pi$) to three independent
-discriminators, the third being the Wilson physical content of the
-gauge sector.  We summarize the potential-specific layers here as the
-predictive checklist for extending the framework to any new central
-potential (the full asymmetry is catalogued as seven layers in
-Paper~24~\cite{paper24}).
+(spectrum-computing and calibration $\pi$) to three discriminators as
+originally reported, the third being Wilson gauge with natural matter
+coupling.  The spectrum-computing layer is withdrawn (2026-09-25, Layer~1
+below), so two standing discriminators remain.  We summarize the
+potential-specific layers here as the predictive checklist for
+extending the framework to any new central potential (the full
+asymmetry is catalogued in Paper~24~\cite{paper24}:\ seven layers
+catalogued, six standing).
 
 \subsection{The structural layers}
 
 \begin{description}
-\item[Layer 1: Spectrum-computing role of the node Laplacian $L_0$.]
-  In the Coulomb $S^3$ construction, the node Laplacian $L_0 = D - A$
-  on the Fock graph is conformally identified with the continuum $S^3$
-  Laplace--Beltrami operator, whose spectrum $\lambda_n = -(n^2 - 1)$
-  (energy normalization) maps to $E_n = -1/(2n^2)$ via the Fock projection.  The graph
-  Laplacian \emph{is} the kinetic operator (under the $\kappa$
-  calibration).  In the HO $S^5$ Bargmann--Segal construction, $L_0$
-  encodes \emph{dipole transition amplitudes}, not the spectrum: the
-  spectrum is read off from the holomorphic degree $N$ of each
-  node, not from any eigenvalue of $L_0$.  This is the first layer
-  of the asymmetry.
+\item[Layer 1: Spectrum-computing role of the node Laplacian $L_0$ (withdrawn 2026-09-25).]
+  This layer was catalogued on the premise that, in the Coulomb $S^3$
+  construction, the node Laplacian $L_0 = D - A$ on the Fock graph is
+  conformally identified with the continuum $S^3$ Laplace--Beltrami [retracted 2026-09-25: graph-laplacian-converges-to-s3]
+  operator and is the kinetic operator (under the $\kappa$
+  calibration).  The premise is false:\ $L_0$ preserves $l$, splits
+  into $n_{\max}$ disconnected blocks and does not converge to
+  $\Delta_{S^3}$, whose spectrum $\lambda_n = -(n^2 - 1)$ is carried
+  exactly on the labels by the diagonal $SO(4)$ Casimir (Paper~7).  On
+  $S^3$ as in the HO $S^5$ Bargmann--Segal construction --- where the
+  spectrum is read off from the holomorphic degree $N$ of each node,
+  and $L_0$ encodes \emph{dipole transition amplitudes} --- the
+  spectrum is diagonal on the labels and $L_0$ is spectrally inert.
+  This is therefore not an asymmetry (Paper~24).
 \item[Layer 2: Calibration $\pi$.]  Coulomb requires it (yes,
   Section~\ref{sec:transcendental}); HO does not (no, by Paper~24
   $\pi$-free certificate).  This is the transcendental layer.
-\item[Layer 3: Wilson physical content of the gauge sector.]  The
+\item[Layer 3: Wilson gauge with natural matter coupling.]  The
   Sprint~5 result~\cite{paper25} on $S^5$ gauge structure showed
   that the abelian U(1) Wilson--Hodge structure transfers verbatim
   to the Bargmann--Segal graph (signed incidence, edge Laplacian
-  $L_1 = B^T B$, Hodge decomposition, all hold), but the
-  non-abelian SU(3) extension is not natural: transitions between
-  $(N, 0)$ and $(N+1, 0)$ irreps are Clebsch--Gordan intertwiners,
-  not group elements, so the Wilson lattice gauge requirement of a
-  fixed group on every link fails.  By contrast, the Coulomb $S^3$
-  construction supports the full SU(2) Wilson lattice gauge of
-  Paper~30.  The combinatorial vocabulary of Wilson--Hodge transfers
-  to both spheres, but only Coulomb $S^3$ supports a non-trivial
-  matter-propagator role for the node Laplacian.
+  $L_1 = B^T B$, Hodge decomposition, all hold).  Pure-gauge SU(3)
+  Wilson on the Bargmann--Segal graph is also well-defined
+  (Sprint~ST-SU3, Paper~25~\cite{paper25}), but coupling it to the
+  natural $(N,0)$ matter is not:\ transitions between $(N, 0)$ and
+  $(N+1, 0)$ irreps are Clebsch--Gordan intertwiners, not group
+  elements.  On the Coulomb side, $S^3 = \mathrm{SU}(2)$ and the
+  spin-$1/2$ matter shares the representation of the SU(2) Wilson
+  links of Paper~30 --- an argument, not yet realised as a coupled
+  construction (Paper~30, open problems).  The combinatorial
+  vocabulary of Wilson--Hodge transfers to both spheres, but only on
+  $S^3$ does the matter representation match the link group;\ on
+  $S^5$ matter coupling needs a Clebsch--Gordan intertwiner.  This
+  layer rests on representation theory, not on $L_0$.
 \end{description}
 
 \subsection{The layer table}
 
 \begin{table}[h]
 \caption{Coulomb/HO partition by structural layer.  Rows~1--3 are the
-three independent discriminators established here (Sprint~5
-sharpening~\cite{paper25}); rows~4--5 are further potential-specific
-layers from Papers~24 and~51~\cite{paper24,paper51}, part of the
-seven-layer asymmetry catalogued in Paper~24~\cite{paper24}.
+discriminators reported here (Sprint~5 sharpening~\cite{paper25});
+row~1 is withdrawn (2026-09-25), so rows~2--3 are the two standing
+discriminators.  Rows~4--5 are further potential-specific layers from
+Papers~24 and~51~\cite{paper24,paper51}, part of the asymmetry
+catalogued in Paper~24~\cite{paper24} (seven catalogued, six standing).
 $\checkmark$~means the feature is present; ``--'' means it is absent or
 not natural.}
 \label{tab:five_layers}
@@ -730,9 +756,9 @@ not natural.}
 \begin{tabular}{lcc}
 Feature & Coulomb $S^3$ & HO $S^5$ \\
 \hline
-$L_0$ computes spectrum & $\checkmark$ & -- \\
+$L_0$ computes spectrum (withdrawn 2026-09-25) & -- & -- \\
 Calibration $\pi$ & $\checkmark$ & -- \\
-Non-abelian Wilson gauge & $\checkmark$ (SU(2)) & -- \\
+Wilson gauge with natural matter coupling & $\checkmark$ (SU(2), argued) & -- \\
 Modular-Hamiltonian Pythagorean (Paper~24~\S V) & $\checkmark$ & -- \\
 Gravity termination (Paper~51~\cite{paper51} G4-5a) & $\checkmark$ (pure Einstein) & -- \\
 \hline
@@ -744,35 +770,39 @@ Block-diagonal ERI & $\checkmark$ & $\checkmark$ \\
 \end{table}
 
 The features above the divide in Table~\ref{tab:five_layers} are the
-potential-specific layers --- the three independent discriminators
-established here (rows~1--3) together with two further layers
+potential-specific layers --- the two standing discriminators
+established here (rows~2--3; row~1 is withdrawn) together with two further layers
 catalogued in Papers~24 and~51; the features below are the
 universal-sector features that hold on either sphere.
 
-\subsection{Why three independent discriminators}
+\subsection{Why the discriminators are independent}
 
 The third layer is structurally distinct from the first two.  Layer~1
 (spectrum-computing) is a question about \emph{what $L_0$ does}; it
 is determined by the projection rule (Fock vs.\ Bargmann--Segal).
 Layer~2 (calibration $\pi$) is a question about \emph{which scalars
 appear}; it is determined by the operator order and projection type
-(Section~\ref{sec:transcendental}).  Layer~3 (Wilson physical content)
-is a question about \emph{whether the gauge connection on edges is
-group-valued}; it is determined by the representation theory of the
-ambient symmetry group (whether transitions between irreps are
-$\mathrm{SO}(4)$-equivariant or $\mathrm{SU}(3)$-CG-intertwined).
-Three independent structural questions, three independent
-discriminators.  None reduces to either of the others.
+(Section~\ref{sec:transcendental}).  Layer~3 (Wilson gauge with
+natural matter coupling) is a question about \emph{whether the matter
+shares the representation of the link group}; it is determined by the
+representation theory of the ambient symmetry group (whether
+transitions between irreps are $\mathrm{SO}(4)$-equivariant or
+$\mathrm{SU}(3)$-CG-intertwined), not by $L_0$ and not by operator
+order.  Three structural questions were catalogued;\ none reduces to
+either of the others.  (Layer~1 is withdrawn as of 2026-09-25:\ its
+answer is the same on both spheres, since $L_0$ on $S^3$ does not
+converge to the $S^3$ Laplacian and is spectrally inert there too;\
+two standing discriminators remain, Layers~2 and~3.)
 
 \medskip\noindent\textbf{Predictive consequence.}  For any candidate
 new central potential, the layer table provides a checklist
 for what features of the GeoVac framework can be expected to
 transfer.  A new potential matching the Coulomb pattern (e.g., a
 hidden $\mathrm{SO}(4)$-like symmetry, a stereographic-style
-projection, integer spectrum) inherits all three Coulomb-specific
-layers.  A potential matching the HO pattern (e.g., a hidden
+projection, integer spectrum) inherits both standing Coulomb-specific
+discriminators.  A potential matching the HO pattern (e.g., a hidden
 SU($n$)-like symmetry, a complex-analytic projection, linear
-spectrum) inherits all three HO-specific layers.  Any other potential
+spectrum) inherits both HO-side counterparts.  Any other potential
 inherits the universal sector but neither set of specific layers,
 and must be analyzed system by system.
 
@@ -819,9 +849,10 @@ Every result that depends on the explicit form of $D$ must be
 re-derived for the new system:
 
 \begin{itemize}
-\item The continuum $S^3$ spectrum $\lambda_n = -(n^2 - 1)$ that the
-  graph Laplacian converges to (no analog unless the system has
-  $\mathrm{SO}(4)$ symmetry).
+\item The continuum $S^3$ spectrum $\lambda_n = -(n^2 - 1)$, carried on
+  the labels by the diagonal $SO(4)$ Casimir (not a limit of the graph
+  Laplacian, which does not converge to it;\ no analog unless the
+  system has $\mathrm{SO}(4)$ symmetry).
 \item The kinetic calibration $\kappa$ (no analog of $-1/16$
   unless the projection is Fock-style).
 \item The transcendental content of spectral
@@ -927,10 +958,12 @@ Several extensions are not yet placed in the partition framework:
   interactions.
 \item Yang--Mills sectors with matter content (Paper~30~\cite{paper30}
   is purely gauge; matter-coupled extensions have not been
-  classified).  The non-abelian Wilson construction is a
-  Coulomb-specific Layer-3 feature; whether it admits a HO-side
-  analog (perhaps via the $\mathrm{SU}(3)$ symmetry of the
-  isotropic oscillator) is an open question.
+  classified).  The Coulomb-specific Layer-3 feature is Wilson gauge
+  with \emph{natural matter coupling} (argued on $S^3$, not yet
+  constructed);\ pure-gauge $\mathrm{SU}(3)$ Wilson is well-defined
+  on the HO side (Sprint~ST-SU3~\cite{paper25}), and whether natural
+  $(N,0)$ matter can be coupled to it without a Clebsch--Gordan
+  intertwiner is an open question.
 \item Signature extension to Lorentzian $(3, 1)$ via the
   Bizi--Brouder--Besnard~2018~\cite{bizi_brouder_besnard2018}
   classification of pseudo-Riemannian spectral triples.  This
@@ -1428,11 +1461,16 @@ operator-order divide.  Coulomb is a second-order Riemannian
 construction with a nonlinear projection that introduces calibration
 $\pi$; HO is a first-order complex construction with a linear-affine
 projection that is bit-exactly $\pi$-free.  The Sprint~5 sharpening
-isolates three independent discriminators, not two: spectrum-computing
-role of $L_0$, calibration $\pi$, and Wilson physical content of the
-non-abelian gauge sector, all stratifying along the same
-operator-order divide; Paper~24~\cite{paper24} catalogues the full
-asymmetry as seven structural layers.
+leaves two standing discriminators:\ calibration $\pi$, which
+stratifies along the operator-order divide, and Wilson gauge with
+natural matter coupling, which is decided by representation theory
+(on $S^3$ matter and links share a representation, argued but not yet
+constructed;\ on $S^5$ matter coupling needs a Clebsch--Gordan
+intertwiner).  A third, the spectrum-computing role of $L_0$, is [retracted 2026-09-26: coulomb-ho-layer1-and-three-discriminators]
+withdrawn (2026-09-25:\ the $S^3$ graph Laplacian does not converge to
+the $S^3$ Laplacian and is spectrally inert, as on $S^5$).
+Paper~24~\cite{paper24} catalogues the full asymmetry as seven
+structural layers, six standing.
 
 The framing offered by this paper has no new theoretical content; it
 is a structural reorganization of existing results in

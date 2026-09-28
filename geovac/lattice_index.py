@@ -32,7 +32,7 @@ KNOWN SYSTEMATIC ERRORS (logged at construction, not papered over):
      transitions between shells of very different n.
 
 Reference implementation: MoleculeHamiltonian._solve_full_ci() for 2-electron
-systems (geovac/hamiltonian.py). This module extends that architecture to
+systems (archived: geovac/_archive/superseded/hamiltonian.py). This module extends that architecture to
 arbitrary N.
 
 Author: GeoVac Development Team

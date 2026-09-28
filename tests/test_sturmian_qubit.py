@@ -106,9 +106,10 @@ class TestStandardEncodingPaper14:
     def test_pauli_count_maxn2(self):
         from geovac.vqe_benchmark import build_geovac_he
         _, of_op, n_q, _ = build_geovac_he(max_n=2)
-        # exact-rule 2026-08-29 (was 120 under the retired
-        # pair-diagonal rule; 288 = 287 non-identity + identity)
-        assert len(of_op.terms) == 288
+        # Physical h1, 2026-09-25: 280 = 279 non-identity + identity.
+        # Retired: 288 (the +1/16 graph-hop h1 model, 2026-08-29..09-25);
+        # 120 (the pair-diagonal ERI sign error).
+        assert len(of_op.terms) == 280
 
     def test_pauli_count_maxn3(self):
         # Un-marked slow 2026-09-01: the build is ~2 s, and while it sat
@@ -118,6 +119,6 @@ class TestStandardEncodingPaper14:
         # run cannot notice that it is stale.
         from geovac.vqe_benchmark import build_geovac_he
         _, of_op, n_q, _ = build_geovac_he(max_n=3)
-        # exact-rule 2026-08-29: 14079 = 14078 non-identity + identity
-        # (was 2659 under the retired pair-diagonal rule)
-        assert len(of_op.terms) == 14079
+        # Physical h1, 2026-09-25: 14047 = 14046 non-identity + identity.
+        # Retired: 14079 (+1/16 graph-hop h1 model); 2659 (pair-diagonal).
+        assert len(of_op.terms) == 14047

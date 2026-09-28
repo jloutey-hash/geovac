@@ -33,9 +33,14 @@ We implement full configuration interaction (FCI) for multi-electron
 atoms on a sparse graph Hamiltonian constructed from hydrogenic quantum
 numbers, using Slater--Condon rules with exact $R^k$ radial integrals
 and Gaunt angular coupling coefficients.
-For helium, the ground-state energy converges monotonically to
-$-2.8963\,\text{Ha}$ (0.26\% error versus exact) at $n_{\max}=5$;
-for lithium, to $-7.4007\,\text{Ha}$ (1.03\% error) at $n_{\max}=5$.
+For helium, the ground-state energy with the physical Hamiltonian
+converges monotonically to $-2.8476\,\text{Ha}$ (1.93\% error versus
+exact) at $n_{\max}=5$, above the Hartree--Fock limit:\ the fixed-exponent
+hydrogenic bound-state basis omits the continuum.  (An earlier headline
+of 0.26\% used a ``hybrid'' one-body operator that adds a non-physical
+graph hop; it is withdrawn as a helium result, Sec.~\ref{sec:limitations}.)
+For lithium, the energy converges to $-7.4007\,\text{Ha}$ (1.03\% error)
+at $n_{\max}=5$.
 Helium surpasses PySCF/STO-3G accuracy on the same system (the lithium
 STO-3G comparison is not computed).
 For beryllium (4 electrons), the solver achieves $E = -14.563\,\text{Ha}$
@@ -84,9 +89,16 @@ In a series of prior papers, we developed a spectral graph theory
 approach to quantum chemistry in which the one-electron Hamiltonian
 is constructed as a sparse graph Laplacian over hydrogenic quantum
 numbers~\cite{Loutey2026a,Loutey2026b,Loutey2026c}.
-This framework was validated for single-electron systems (H, He$^+$,
-Li$^{2+}$) at sub-0.1\% accuracy and for the H$_2$ molecule at
-1.7\% FCI accuracy.
+For single-electron systems (H, He$^+$, Li$^{2+}$) that graph
+Laplacian's extremal eigenvalue is matched to $-Z^2/2$ by construction
+through the scale $\kappa = -1/16$ (Paper~7); it is not a
+discretization converging to the $S^3$ Laplace--Beltrami operator (its
+edges never change $l$, so it splits into disconnected $l$-blocks), and
+the $S^3$ equivalence itself is Fock's continuum projection.  The
+exact one-electron operator on the $(n,l,m)$ labels is the diagonal
+hydrogenic spectrum $-Z^2/2n^2$ (equivalently, the $SO(4)$ Casimir
+$n^2-1$).  An H$_2$ FCI in the earlier graph construction reached
+1.7\%.
 The key architectural feature is that the Hamiltonian matrix has
 $O(V)$ nonzero entries, where $V$ is the number of basis states,
 because the graph Laplacian couples only states connected by
@@ -166,16 +178,26 @@ h_{pq}^{\text{(hybrid)}} =
 \label{eq:h1_hybrid}
 \end{equation}
 where $L = D - A$ is the graph Laplacian of the quantum number
-adjacency graph and $\kappa = -1/16$ is the kinetic scale
-factor validated in prior work~\cite{Loutey2026a}.
-The off-diagonal Laplacian entries provide configuration interaction
-mixing between orbitals connected by selection rules
-$\Delta l = \pm 1$, $\Delta m_l = 0, \pm 1$.
+adjacency graph and $\kappa = -1/16$ is the matched scale of prior
+work~\cite{Loutey2026a} (it fixes the one-electron extremal eigenvalue
+by construction; it is not a validated kinetic operator).
+The off-diagonal entries are a constant $+1/16$ along every lattice
+edge (radial $n \leftrightarrow n\pm1$ at fixed $l,m$, and angular
+$m \leftrightarrow m\pm1$ at fixed $n,l$).
 
-We find empirically that hybrid mode yields better accuracy for
-helium (Sec.~\ref{sec:results}), while exact mode is required for
-lithium to maintain variational monotonicity
-(Sec.~\ref{sec:limitations}).
+\textbf{[CORRECTED 2026-09-25]} Only exact mode is helium's (or
+lithium's) Hamiltonian.  The hydrogenic orbitals at $k = Z$ are
+eigenfunctions of $-\tfrac12\nabla^2 - Z/r$, so the physical one-body
+matrix is exactly Eq.~\eqref{eq:h1_exact}; the hybrid off-diagonal is
+an added operator with no derivation (and its $m \leftrightarrow m\pm1$
+part is not even rotationally invariant).  Hybrid mode therefore defines a
+different, hop-augmented model Hamiltonian whose energies are not
+variational bounds on the atom.  Earlier versions reported that hybrid
+mode ``yields better accuracy for helium'':\ it lowers the helium energy
+by $\approx 49$~mHa, more than helium's total correlation energy
+($42.0$~mHa), and drives lithium below its exact energy
+(Sec.~\ref{sec:limitations}).  All helium energies below are quoted
+with exact $h_1$; the hybrid values are kept only as a labeled record.
 
 % ----------------------------------------------------------------------
 \subsection{Two-electron integrals and Slater--Condon assembly}
@@ -313,7 +335,9 @@ and $E_{\text{Li}}^{\text{HF}} = -7.4327\,\text{Ha}$~\cite{Fischer1977}.
 Ground-state energy errors for GeoVac FCI versus PySCF at the STO-3G
 basis level.
 GeoVac results use \texttt{slater\_full} two-electron integrals;
-helium uses hybrid $h_1$, lithium and beryllium use exact $h_1$.
+all three atoms use exact (physical) $h_1$ (corrected 2026-09-25; helium
+was previously quoted with the hybrid $h_1$ at 0.26\%, see
+Sec.~\ref{sec:limitations}).
 The PySCF helium result is RHF, which equals FCI for STO-3G
 (one spatial basis function).
 Hydrogen results from Ref.~\cite{Loutey2026a}.
@@ -325,7 +349,7 @@ System & Method & $E$ (Ha) & Error (\%) & $N_{\text{SD}}$ \\
 H ($Z\!=\!1$) & GeoVac $n_{\max}\!=\!30$ & $-0.4971$ & 0.57 & 9455 \\
               & PySCF/STO-3G & $-0.4666$ & 6.68 & 1 \\
 \colrule
-He ($Z\!=\!2$) & GeoVac $n_{\max}\!=\!5$ & $-2.8963$ & 0.26 & 5995 \\
+He ($Z\!=\!2$) & GeoVac $n_{\max}\!=\!5$ & $-2.8476$ & 1.93 & 5995 \\
                & PySCF/STO-3G & $-2.8078$ & 3.30 & 1 \\
 \colrule
 Li ($Z\!=\!3$) & GeoVac $n_{\max}\!=\!4$ & $-7.3987$ & 1.06 & 34\,220 \\
@@ -340,7 +364,7 @@ Be ($Z\!=\!4$) & GeoVac $n_{\max}\!=\!3$ & $-14.558$ & 0.75 & 20\,475 \\
 
 Table~\ref{tab:comparison} summarizes the GeoVac FCI results
 alongside PySCF/STO-3G benchmarks.
-GeoVac achieves 0.26\% error for helium, 1.03\% for lithium
+GeoVac achieves 1.93\% error for helium, 1.03\% for lithium
 (at $n_{\max}=5$), and 0.71\% for beryllium (at $n_{\max}=4$),
 compared to 3.30\% and 6.68\% for PySCF/STO-3G on helium and
 hydrogen, respectively.
@@ -369,22 +393,29 @@ Helium uses hybrid $h_1$ (solid blue); lithium uses exact $h_1$
 (solid blue) with hybrid $h_1$ shown for comparison (dashed orange).
 Dotted red lines mark the Hartree--Fock limits (1.4\% for He,
 0.6\% for Li).
-Both primary series converge monotonically from above.}
+Both primary series converge monotonically from above.
+\textbf{[Figure predates the 2026-09-25 correction:]} the helium curve
+is the hop-augmented hybrid model, not helium; helium's physical
+series is 2.43, 2.10, 1.99, 1.93\% at $n_{\max}=2$--$5$ (text).}
 \end{figure}
 
 Figure~\ref{fig:convergence} shows the convergence of the
 ground-state energy error as the basis size $n_{\max}$ increases.
-For helium with hybrid $h_1$, the error decreases monotonically:
-0.50\% ($n_{\max}=2$) $\to$ 0.37\% ($n_{\max}=3$) $\to$ 0.29\%
-($n_{\max}=4$) $\to$ 0.26\% ($n_{\max}=5$).
-At $n_{\max}=5$, the error is well below the Hartree--Fock limit of
-1.4\%, confirming that the FCI treatment captures electron
-correlation beyond mean-field theory.
+For helium with the physical (exact) $h_1$, the error decreases
+monotonically: 2.43\% ($n_{\max}=2$) $\to$ 2.10\% ($n_{\max}=3$)
+$\to$ 1.99\% ($n_{\max}=4$) $\to$ 1.93\% ($n_{\max}=5$), and flattens
+\emph{above} the Hartree--Fock limit of 1.4\%.  A fixed-exponent
+($k = Z$) set of hydrogenic bound states omits the continuum and is not
+complete, so these calculations do not reach the Hartree--Fock limit,
+let alone recover correlation beyond it.  (The earlier text quoted the
+hybrid series 0.50\,$\to$\,0.26\% and read it as correlation beyond
+mean-field; the hybrid energies belong to the hop-augmented model of
+Sec.~\ref{sec:limitations}, not to helium.)
 For lithium with exact $h_1$, the error decreases monotonically:
 5.00\% ($n_{\max}=2$) $\to$ 1.12\% ($n_{\max}=3$) $\to$ 1.06\%
 ($n_{\max}=4$).
 The lithium error at $n_{\max} \geq 3$ (1.06--1.12\%) remains
-\emph{above} the Hartree--Fock limit of $0.61\%$, so---unlike
+\emph{above} the Hartree--Fock limit of $0.61\%$, so---like
 helium---the lithium FCI does not recover correlation energy beyond
 mean-field theory at the basis sizes reached here.
 
@@ -578,8 +609,10 @@ in all cases tested (Table~\ref{tab:convergence_detail}).
 
 \begin{table}
 \caption{\label{tab:convergence_detail}%
-Detailed convergence data for helium (hybrid $h_1$), lithium
-(exact $h_1$), and beryllium (exact $h_1$).
+Detailed convergence data for helium, lithium, and beryllium, all with
+exact (physical) $h_1$ (helium rows corrected 2026-09-25 from the hybrid
+values $-2.889303$, $-2.892932$, $-2.895227$, $-2.896298$; NNZ is that of
+the exact-$h_1$ matrix).
 $N_{\text{SD}}$ is the number of Slater determinants, NNZ the number
 of nonzero Hamiltonian entries, and $t$ the wall-clock assembly time
 using direct CI (Sec.~\ref{sec:direct_ci}).}
@@ -587,10 +620,10 @@ using direct CI (Sec.~\ref{sec:direct_ci}).}
 \begin{tabular}{clrrd{2.6}d{1.2}r}
 $Z$ & $n_{\max}$ & $N_{\text{SD}}$ & NNZ & \multicolumn{1}{c}{$E$ (Ha)} & \multicolumn{1}{c}{Err.\ (\%)} & \multicolumn{1}{c}{$t$ (s)} \\
 \colrule
-2 & 2 &        45 &        203 & -2.889303 & 0.50 & $<$1 \\
-2 & 3 &       378 &      6\,066 & -2.892932 & 0.37 & $<$1 \\
-2 & 4 &     1\,770 &    87\,550 & -2.895227 & 0.29 & $<$1 \\
-2 & 5 &     5\,995 &   777\,019 & -2.896298 & 0.26 & 1.6 \\
+2 & 2 &        45 &        139 & -2.833222 & 2.43 & $<$1 \\
+2 & 3 &       378 &      5\,234 & -2.842724 & 2.10 & $<$1 \\
+2 & 4 &     1\,770 &    82\,910 & -2.846005 & 1.99 & $<$1 \\
+2 & 5 &     5\,995 &   759\,739 & -2.847551 & 1.93 & 1.6 \\
 \colrule
 3 & 2 &       120 &        604 & -7.104490 & 5.00 & $<$1 \\
 3 & 3 &     3\,276 &    111\,192 & -7.394597 & 1.12 & $<$1 \\
@@ -615,15 +648,33 @@ $-7.4966\,\text{Ha}$, which is 0.25\% \emph{below} the exact
 non-relativistic value $-7.4781\,\text{Ha}$.
 At $n_{\max}=4$, the overshoot worsens to $-7.5318\,\text{Ha}$
 (0.72\% below exact).
-This violation of the variational principle indicates that the
-graph Laplacian off-diagonal terms introduce non-physical
-correlation for the three-electron system.
-The exact $h_1$ mode [Eq.~\eqref{eq:h1_exact}] eliminates this
-problem: the lithium energy remains above the exact value at all
+This violation of the variational principle is the visible symptom of
+a general fact:\ the hybrid off-diagonal terms are not part of the
+atom's Hamiltonian (Sec.~\ref{sec:one_electron}), so nothing bounds the
+hybrid energy from below by the exact one.
+The exact $h_1$ mode [Eq.~\eqref{eq:h1_exact}] is the physical
+Hamiltonian: the lithium energy remains above the exact value at all
 basis sizes, converging monotonically from 5.00\% to 1.03\%.
-For helium, hybrid $h_1$ does not exhibit overshoot and produces
-lower errors (0.29\% versus 1.99\% at $n_{\max}=4$ with exact $h_1$),
-so it remains the preferred mode for two-electron systems.
+
+\emph{Hybrid $h_1$ for helium [CORRECTED 2026-09-25].}
+Earlier versions concluded that helium, which does not overshoot at
+$Z=2$, should keep the hybrid mode because it ``produces lower errors''
+(0.29\% versus 1.99\% at $n_{\max}=4$).  That is the same non-physical
+term, merely not yet below the exact line:\ the hop lowers the helium
+energy by 49--56~mHa at $n_{\max}=2$--$5$, more than helium's total
+correlation energy (42.0~mHa), and the hybrid ground state evaluated on
+helium's physical Hamiltonian lies \emph{higher} (2.23\% at
+$n_{\max}=4$) than the exact-$h_1$ ground state (1.98\%).  Applied to
+the helium-like sequence, the hybrid energy falls below the exact energy
+for nuclear charge $Z \lesssim 1.8$--$1.9$ (H$^-$ at $Z=1$ is over-bound
+by 21\%); the exact-$h_1$ calculation is variational at every $Z$.  The
+hybrid results are therefore withdrawn as helium energies.
+
+\emph{Continuum incompleteness.}  With exact $h_1$ the helium error
+flattens at $\approx\!1.9\%$, above the Hartree--Fock limit.  The
+basis is the discrete hydrogenic spectrum at the fixed exponent $k=Z$,
+which omits the continuum and is not complete; a variational or
+Sturmian exponent is the standard remedy.
 
 \emph{Construction time scaling.}
 The excitation-driven direct CI assembly
@@ -640,13 +691,13 @@ require further algorithmic improvement (e.g., string-based
 factorization or selected CI).
 
 \emph{Remaining basis set error.}
-The helium error of 0.26\% at $n_{\max}=5$, lithium error of
+The helium error of 1.93\% at $n_{\max}=5$, lithium error of
 1.03\% at $n_{\max}=5$, and beryllium error of 0.71\% at
 $n_{\max}=4$ remain above chemical accuracy
 ($\sim$1~kcal/mol $\approx$ 0.05\% for these systems).
-Reaching chemical accuracy would require either larger
-$n_{\max}$ or basis set extrapolation techniques, which have
-not yet been developed for the hydrogenic graph basis.
+Larger $n_{\max}$ alone will not reach it:\ the helium series
+flattens near 1.9\% because the fixed-$k$ hydrogenic bound states omit
+the continuum.  A variational or Sturmian exponent is required.
 
 \emph{LiH: basis truncation at $n_{\max}=3$.}
 For the heteronuclear diatomic LiH, the 19\% error in
@@ -838,9 +889,14 @@ estimated at $< 30$~s.
 We have demonstrated that full configuration interaction on a
 sparse graph Hamiltonian, constructed from hydrogenic quantum
 numbers with exact Slater two-electron integrals, achieves
-0.26\% accuracy for helium, 1.03\% for lithium, and 0.71\% for
-beryllium---all with monotonic basis set convergence and accuracy
-exceeding PySCF/STO-3G where comparable.
+1.93\% accuracy for helium, 1.03\% for lithium, and 0.71\% for
+beryllium with each atom's physical Hamiltonian---all with monotonic
+basis set convergence and accuracy exceeding PySCF/STO-3G where
+comparable, and all limited by the incompleteness of a fixed-exponent
+hydrogenic bound-state basis (the helium and lithium errors sit above
+their Hartree--Fock limits).  The earlier helium figure of 0.26\% used a
+hybrid one-body operator that adds a non-physical graph hop and is
+withdrawn as a helium result.
 The excitation-driven direct CI algorithm reduces assembly cost
 from $O(N_{\text{SD}}^2)$ to $O(N_{\text{SD}} \times N_{\text{connected}})$,
 enabling calculations with nearly 500{,}000 determinants.
@@ -970,26 +1026,28 @@ J.~Chem.~Phys.\ \textbf{51}, 2657 (1969).
 \paragraph{Note added v2.6.0.}
 The numerical Slater integrals (Sec.~III, 2000-point grid) have been
 replaced by exact rational values from the $S^3$ density overlap
-formula (Paper~7, Sec.~V).  Combined with the graph Laplacian as the
-one-body operator, this yields a ``graph-native'' FCI where the
-entire Hamiltonian matrix is rational.  For He at $n_{\max} = 5$:
-graph-native achieves 0.25\% error, essentially matching the
-grid-based hybrid-$h_1$ value (0.26\%, Table~\ref{tab:comparison}) to
-within 0.01 percentage points; the analytical integrals confirm the
-grid-based numerics rather than improving on them---the earlier
-apparent gap was a grid-integration artifact, since corrected by the
-exact-rule ERI evaluator.  The graph-native error decreases to
-0.23\% at $n_{\max} = 6$, and at $n_{\max} = 7$ reaches 0.216\%
-with 1,218 configurations.
+formula (Paper~7, Sec.~V), so the entire Hamiltonian matrix is
+rational.  With the physical (exact) $h_1$, the singlet $M_L = 0$ CI
+for He lies $2.42$, $2.09$, $1.98$, $1.93$, $1.90$, $1.88\%$ above exact at $n_{\max} = 2,\dots,7$ (1,218
+configurations at $n_{\max}=7$), agreeing with the determinant route of
+Table~\ref{tab:convergence_detail} to $\le 0.2$~mHa.
 
-A variant using exact hydrogenic one-body matrix elements (diagonal,
-with variational orbital exponent $k$) achieves 1.41\% at
-$n_{\max} = 7$ --- 7$\times$ worse than graph-native, demonstrating
-that the graph Laplacian's off-diagonal inter-shell couplings are
-the dominant source of one-body correlation.  FCI basis invariance
-was verified (Sprint~3D): transforming $V_{ee}$ to the graph
-eigenbasis gives identical energies ($< 3 \times 10^{-15}$~Ha),
-confirming the convergence floor ($\sim$0.14\%) is from the
-electron-electron cusp, not basis mismatch.
+\textbf{[CORRECTED 2026-09-25]} This note previously reported a
+``graph-native'' FCI reaching 0.25\% ($n_{\max}=5$), 0.23\% ($6$) and
+0.216\% ($7$), obtained with the hybrid $h_1$ of
+Eq.~\eqref{eq:h1_hybrid}.  Those are energies of the hop-augmented model
+Hamiltonian (Sec.~\ref{sec:limitations}), not of helium, and are
+withdrawn as helium results.  The note went on to call a variational-$k$
+diagonal variant (1.41\% at $n_{\max}=7$) ``7$\times$ worse'',
+``demonstrating that the graph Laplacian's off-diagonal couplings are the
+dominant source of one-body correlation'', and to attribute a
+$\sim$0.14\% floor to the cusp.  In the $k=Z$ basis the physical
+one-body operator has no off-diagonal elements, so there is no
+one-body correlation for the hop to supply; what the hop does is
+compensate most ($\approx 86\%$ at $n_{\max}=4$--$5$) of the
+continuum-incompleteness error of the fixed-$k$ basis.  The cusp
+attribution is withdrawn with it.  FCI basis invariance under orbital
+rotation (Sprint~3D) holds for either one-body operator and does not
+discriminate between them.
 
 \end{document}
