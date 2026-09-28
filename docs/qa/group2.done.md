@@ -145,9 +145,11 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   - **Paper 13:** He **0.022% raw** ($l_{\max}=7$) / **0.004% cusp-corrected**
     ($l_{\max}=4$), 2D variational, *properly variational upper bounds*; the 0.05%
     single-channel adiabatic is **non-variational** (lucky cancellation — must be
-    flagged); graph-native CI **0.216%** at $n_{\max}=7$ (MEASURED 2026-09-19; the 0.19% this line carried was stale), zero parameters. (Note:
-    CLAUDE.md §5 still drifts to "0.20% / $n_{\max}=9$" — papers win; the synthesis +
-    §2 table use the paper numbers.)
+    flagged); the fixed-$k=Z$ hydrogenic CI on the **physical** Hamiltonian is **1.88%** at
+    $n_{\max}=7$ (above the HF limit; zero parameters). The "graph-native 0.216%" (and
+    0.19%/0.20% before it) is **RETIRED (2026-09-25)**: it added a non-physical (1/16)A
+    one-body hop. Any live 0.216%/0.19%/"86% of correlation" is LARGE (C16
+    `he-graph-native-hop-headline`).
   - **Paper 15:** H$_2$ **96.0%** of $D_e$ ($l_{\max}=6$, 61 channels, ~97% CBS);
     the adiabatic over-estimate (~11%) is a flagged artifact.
   - **Paper 17:** LiH composed $R_{\rm eq}$ **5.3%** ($l$-dependent PK); BeH$_2$ **11.7%**;
@@ -156,9 +158,24 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
     angular compression ($l_{\max}^2$ vs $l_{\max}^{11}$, cost of PK).
   - **Paper 19:** balanced coupled LiH **0.20%** *energy* ($n_{\max}=3$) with **structural
     $R_{\rm eq}$ drift (~8.8%)** — energy converges, geometry drifts; the 29% unbalanced
-    figure is the negative control.
-  - **FCI-atoms:** graph-native CI He 0.216% (2026-09-19; was 0.19%) / Be 0.71% / Li 1.03% (zero-parameter, exact
-    rational Slater integrals); H$^-$ bound but over-binds 21% ($Z_c\approx1.84$ boundary).
+    figure is the negative control. **Prolate all-electron LiH (Route C and the
+    explicit-$r_{12}$ marriage, added 2026-09-27):**
+    - $R_{\rm eq}$ **+0.2%**.
+    - Energy **$-8.04905$ Ha**: analytic, RI-free, variational explicit-$r_{12}$ on the
+      full $M=16$ $\pi$ CI reference with an $e^{-1.5r}$ Slater geminal. VMC of the same
+      trial function agrees to 0.16 mHa (long run; short seeds need long burn-in).
+    - VMC-over-FCI **$-8.047$**. The additive-F12 **$-8.062$** is an *estimate* needing
+      three-body correlation; it must never be presented as variational or computed.
+    - The gap mechanism is geminal **shape** (Kato cusp), not geminal count.
+    - The $g_{V_{ee}}$ triangle-weight defect is fixed (π references only; ≤0.18 mHa).
+    - Tiers: the pure-product-core, prolate-Pauli-count and product-basis findings are
+      MEASURED (debug-backed). Grade any tier inflation there as LARGE.
+  - **FCI-atoms:** He **1.88%** (physical fixed-$k$ CI, $n_{\max}=7$); H$^-$ bound, **+2.15%**
+    above exact (variational). The "over-binds 21%" and "$Z_c\approx1.84$ boundary" were hop
+    artifacts (retired 2026-09-25). **Pre-registered check:** Be **0.71%** / Li **1.03%**.
+    Were they computed on a Hamiltonian carrying the same (1/16)A graph hop (the
+    `lattice_index` / `casimir_ci` h1 path)? If yes, they are LARGE and must be
+    re-measured on the physical h1. If no, state the h1 used.
   - **FCI-molecules:** the graph-concatenation **negative** (no minimum) — the headline
     *is* the negative result.
 - **C4 (citations) — chemistry-method + reference-value surface.** Verify the reference
@@ -172,8 +189,19 @@ The reviewers (claims-reviewer, per paper, enumeration-forced) must verify ALL o
   precisely *why* the Sturmian and graph-concatenation encodings fail (no equilibrium).
   The paper must state R-independence as the mechanism, and must not claim the *discrete
   graph* "has/produces" a continuum ($-(n^2-1)$ / Rydberg) spectrum as a bare graph
-  property — it *converges* to it under the Fock projection (energy-shell constraint
-  $p_0^2=-2E$, $\kappa=-1/16$).
+  property. **Corrected 2026-09-27:** nor may it say the graph "converges" to that
+  spectrum. The edge Laplacian does not converge to $\Delta_{S^3}$ (trunk C6/C8). The
+  $-(n^2-1)$ ladder is the diagonal SO(4) Casimir on the labels, and Fock's continuum
+  projection ($p_0^2=-2E$) carries the equivalence. $\kappa=-1/16$ matches the
+  extremal eigenvalue, not the spectrum.
+- **C8 — Paper 11 separation-constant label (added 2026-09-27).** The claim is that
+  $\Lambda$ is exact at every truncation of a **tensor-closed** product basis (the
+  Atkinson determinants).
+  - Tiers: PRIOR ART for the textbook core; PARTIAL for finite truncation; the H₂
+    selector is NOT FOUND in the literature and applies to one setting only.
+  - "Non-product" for Route C is wrong; it is "not tensor-closed".
+  - The withdrawn "π-orbital selection rule" must stay withdrawn.
+  - A claim of novelty for the textbook core is LARGE.
 - **C3 (prose ≤ tier).** Algebraic results (Gaunt/3j angular couplings, Neumann $V_{ee}$,
   split-region Legendre 3j-termination) = *exact / algebraic*; accuracy results =
   *matched / converges*, never *derived*. The natural-geometry construction is

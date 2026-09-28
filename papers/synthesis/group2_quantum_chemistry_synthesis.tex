@@ -330,7 +330,9 @@ configuration selector, $\Lambda$ beats orbital-energy ordering
 8--10$\times$ for H$_2$, but only in one basis at one geometry, and
 natural orbitals beat it by about $10\times$. On the Route C LiH orbital set
 (product orbitals, but not tensor-closed) the exactness is lost and the selector
-fails~\cite{loutey_paper11}.
+fails~\cite{loutey_paper11}. Tensor closure alone would not rescue it: a
+one-body probe finds that the short-range penetration of the Li core is what
+breaks the label for the $\sigma$ virtuals~\cite{loutey_paper11,loutey_paper19}.
 
 %% ========================================================================
 \section{Level 3: The Two-Electron Atom and the Cusp}
@@ -665,7 +667,14 @@ crosses \emph{past} exact (over-binding), so the fixed-geometry error is not
 monotonically improvable either~\cite{loutey_paper19}.  The balanced coupled
 Hamiltonian is therefore suited to single-point quantum simulation at fixed
 geometries rather than to full potential-energy surfaces, with that
-non-monotonicity disclosed.  Paper~19 also records a clean
+non-monotonicity disclosed.  The drift is not a physics wall.  An all-electron
+prolate-spheroidal (Level~2) treatment gives $R_{\mathrm{eq}}=+0.2\%$, and its
+analytic, resolution-of-identity--free explicit-$r_{12}$ energy,
+$-8.04905$~Ha, is the corpus's best LiH energy.  It is variational and
+cross-checked by Monte-Carlo.  That route buys energy per qubit, not sparsity.
+Its qubit Hamiltonian is dense within $M_L$, with $8{,}370$ Pauli terms at
+$Q=20$, ten times the composed LiH count at $Q=30$~\cite{loutey_paper19}.  Paper~19 also
+records a clean
 negative:\ cross-block electron--electron integrals \emph{without} the
 matching cross-center $V_{ne}$ are energetically unbalanced ($29\%$
 error, worse than PK), and a harmonic-driven orthogonalization wall

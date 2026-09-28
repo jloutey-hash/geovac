@@ -1669,6 +1669,20 @@ $\lesssim0.3$~mHa (Paper~19, the 2026-09-23 marriage note).  Backing:\ fast guar
 Monte-Carlo value, with built-in fire tests that reject the isotropic-leaf
 shortcut and the $L\le2$ truncation on the $p$-like leaf).
 
+\textbf{[VALIDATED 2026-09-26]}  One caveat on the reference-generality reading
+concerns the triangle.  When the shared vertex's pair density carries azimuthal
+circulation, which happens on a $\pi$-containing reference, the triangle reduction
+sums over mixed mode pairs $(A,B)$ of its two correlation edges.  Each nonzero
+mode on either edge carries a factor $\tfrac12$, so the weight is
+$2\pi\cdot(\tfrac12)^{[A\ge1]}(\tfrac12)^{[B\ge1]}$.  The first $\pi$-capable
+implementation applied the factor on one edge only.  That gave $\pi/2$ instead of
+$\pi$ for $A\ge1$, $B=0$ and shifted LiH energies by at most $0.18$~mHa.  An
+independent Monte-Carlo and a symmetry-orbit test caught and fixed it
+(Paper~19, the 2026-09-27 $\pi$-reference note).  The two-orbital results of this
+section are unaffected, because their shared-vertex density is azimuthally
+uniform and the mixed pairs never occur.  Guard:\
+\texttt{tests/test\_lih\_gvee\_triangle\_symmetry.py}.
+
 Backing:\ tests \texttt{tests/test\_paper12\_r12.py} (the H$_2$ engine) and
 \texttt{tests/test\_lih\_r12ci.py} (the two-center LiH engine), and the reduction
 of Eq.~\eqref{eq:r12_kinetic_collapse} above;\ the two-center bridge, the triangle

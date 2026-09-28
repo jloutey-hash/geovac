@@ -103,6 +103,20 @@ claim restates them (C7).
     "decides forcedness" is a MATERIAL overstatement.)*
   - *(Bite-1: Paper 22 angular sparsity theorem; Paper 24 π-free Bargmann–Segal
     lattice + Coulomb/HO six-layer asymmetry; Paper 31 A/D partition — certified.)*
+- **C8 — post-v5.16.0 pre-registration (added 2026-09-27).**
+  - **Coulomb/HO asymmetry: 7 layers catalogued, 6 standing.** Layer 1 (the
+    spectrum-computing role of L₀) is withdrawn with the graph→S³ re-pricing (trunk
+    C6/C8). The Wilson layer survives, re-scoped to representation theory; on S³ it
+    is argued, not constructed. **Paper 31 has two standing discriminators, not
+    three.** A live "seven layers", "three independent discriminators" or "L₀ matter
+    propagator" is LARGE (C16 `coulomb-ho-layer1-and-three-discriminators`).
+  - **Paper 22 §sign_holonomy (new):** the sign problem as a frustrated ±1 holonomy.
+    The measured claims are stated at their measured tier. Nothing is claimed about
+    signs beyond "no better than random"; the Gaunt-zero cycle cut is about 15×, and
+    Δ is 43–48× relative to rotated bases. Backing:
+    `tests/test_paper22_sign_holonomy.py`.
+  - **Paper 18 / π-free principle:** graph eigenvalues are *algebraic*, not
+    "integers or rationals" (C16 `graph-eigenvalues-integer-or-rational`).
 - **No branch-specific C14+** (no DESCOPED/PARTIAL papers in group3 scope).
 
 ## Change log

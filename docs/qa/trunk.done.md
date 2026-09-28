@@ -73,9 +73,34 @@ re-prices everything above it.
   (numerics-pinned)**, not asserted as full symbolic proof; the **Forced-Count**
   moduli chain is stated at its **full-axiom** count, not the matter-sector
   subcount.
+- **C6/C8 — the graph→S³ re-pricing (added 2026-09-27, pre-registered for the
+  post-v5.16.0 DELTA).** The edge Laplacian D−A of the (n,l,m) lattice does
+  **NOT** converge to Δ_{S³}. It preserves l, so it splits into n_max disconnected
+  blocks with n_max zero modes, and its spectrum is algebraic and bounded in [0,8]
+  (`tests/test_graph_s3_nonconvergence.py`). The positive anchor is the exact
+  label set, with the S³ Laplace–Beltrami operator acting as the **diagonal SO(4)
+  Casimir** n²−1, and Fock's continuum projection carrying the equivalence.
+  **π-free** means the graph's entries are rational, so its eigenvalues are
+  *algebraic*, **not** "integers or rationals". The pure-integer ladder −(n²−1) is
+  the continuum spectrum. κ = −1/16 maps the extremal eigenvalue (a band edge),
+  not the spectrum.
+  - **LARGE:** any live locus asserting any of these —
+    - that the graph Laplacian converges to, reproduces, or equals Δ_{S³} or the
+      Rydberg ladder;
+    - an integer or rational graph spectrum;
+    - that `tests/test_paper7_graph_convergence.py` backs such a convergence (it
+      measures λ_max → 2 d_max only).
+    The C16 entries `graph-laplacian-converges-to-s3` and
+    `graph-eigenvalues-integer-or-rational` are the deterministic backstop; the
+    claim-impact reviewer covers paraphrases.
+  - **Also in claim-impact scope:** WH3's graph-limit leg, and Coulomb/HO Layer 1
+    (withdrawn: 7 catalogued, 6 standing), wherever trunk papers restate them.
 - **No branch-specific C14+.**
 
 ## Change log
+- 2026-09-27 (v5.17.0) — pre-registration for the post-v5.16.0 DELTA: the graph→S³
+  re-pricing added to C6/C8 as a LARGE class (above). RESEARCH-GRADE status
+  available (criteria.md); this target is OWED.
 - 2026-06-14 — created (co-authored PM + PI) as the first pre-registered `/qa`
   target.
 - 2026-06-14 — added the all-dimensions-mandatory rule after run #3 found

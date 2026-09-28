@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Note:** the CHANGELOG is currently behind the `CLAUDE.md` version cursor (intermediate version entries for the RH sprint series v2.20–v2.25, Lorentzian arc v2.50–v2.58, and the modular propinquity / α-arc / F1–F6 sprints v2.59 are in `git log` commit messages but have not been fully back-filled). A consolidation sprint is flagged for future work. With v3.0.0 the convention shifts: CHANGELOG.md is the canonical home for sprint chronicle per the new CLAUDE.md §13.11 content-discipline policy.
 
+## [v5.17.0] - 2026-09-27
+
+**Minor bump (automatic: a change to the `/qa` skill).** A new QA status, **RESEARCH-GRADE = no open LARGE defects**, plus DoD pre-registration for the post-v5.16.0 DELTA runs.
+
+### Changed — the QA gate
+- **Why (PI-observed, measured in the record).** Recent runs mostly found zero LARGE defects, and many SMALL findings were introduced by the previous round's own remediation. A binary PASS/FAIL made "fix SMALLs → re-run → find new SMALLs" an unbounded loop.
+- **What.** `docs/qa/criteria.md` gains the RESEARCH-GRADE section.
+  - **Grading.** MATERIAL findings are graded LARGE or SMALL. LARGE = changes a headline, changes a load-bearing claim's truth or tier, invalidates a load-bearing test, touches a hard prohibition, or is a live retracted claim. When in doubt, grade LARGE.
+  - **Earning it.** Only a FULL run or a claim-impact DELTA can earn it; a byte-diff DELTA never can.
+  - **Stamping.** The stamp reads `**RESEARCH-GRADE:** date @ sha` in the target's `.done.md` and in `papers/INDEX.md`.
+  - **SMALLs.** SMALL findings are **fixed on sight, like NITs** (PI correction), and a SMALL fix never triggers a re-verification run. Only SMALLs that cannot be fixed on sight go to `docs/qa/<target>.debt.md`, which must be empty for PASS.
+  - **Expiry.** The status expires on a claim-status change: a C16 entry naming a target document, dated after the stamp.
+  - **Scope.** It is not PASS and is never cited in papers.
+- **Where.** `.claude/commands/qa.md` step 7 and the Output section emit it alongside PASS/FAIL/INCONCLUSIVE. `debug/qa/check_cert_staleness.py` reports each stamp and whether it has lapsed: selftest 7/7, and the lapse rule fire-tested 3/3 (date check, scope check, `cited_by` check). `papers/INDEX.md` gains a "QA status by target" table (all OWED).
+
+### Added — prolate-LiH capture into the papers (ahead of the group2 DELTA)
+- **Paper 19:**
+  - **Abstract:** three sentences: the atom-centred core is a convenience; prolate buys energy per qubit, not sparsity; the Q20 count.
+  - **"The prolate route, counted"** in §Quantum resource comparison: Route C Q20 has 8,370 terms, λ 61.9 Ha and 2,810 QWC groups, against 6-31G lowest-10 at 8,550 / 32.3 Ha; composed is 837 terms, with λ 27.7 Ha PK-free or 38.3 Ha with PK. It adds the real-π caveat and notes the in-house Gaussian integral engine.
+  - **"Refinement: the atom-centered core is a convenience, not a necessity"** plus `tab:pure_product_core`: the full (cc|cc) − 15/8 grid, with its costs stated (contraction unsolved, diffuse valence at a single α untested, the ~8N-digit precision trap). It states that no pure-product LiH geometry has been run.
+  - **"The geminal-shape evidence"** plus `tab:geminal_gamma`, using the post-fix analytic values (γ=1.5 at trunc 1e-2 is −8.048141).
+  - **"A defect found and fixed"** (the g_Vee triangle weight).
+  - **A Discussion paragraph "The prolate route":** composed and balanced are sparse, prolate is accurate.
+  - **One `debug/lih_vmc.py` citation** replaced by `tests/test_lih_vmc.py` + CHANGELOG. About 35 older debug/ citations in Paper 19 remain as part of the standing C14 debt.
+- **Paper 12:** a [VALIDATED] triangle reference-generality caveat. Its two-orbital results are unaffected.
+- **group2 synthesis:** the separation label is broken by core penetration; LiH gets +0.2% / −8.04905; prolate is dense.
+- **New test `tests/test_paper19_pure_product_core.py`:** 4 fast tests plus 1 slow, 3.6 s. It reproduces the core routine inline, because C22 check D forbids a debug/ import.
+  - A pin guards the value at 6.2219770788e-3 mHa.
+  - Fire-tested against the 10×10 answer, and against a too-low dps that returns a plausible +5.75e-3 mHa. The bare <0.01 mHa gate accepts the second; the pin catches it.
+- **claim_test_matrix:** 6 rows (19 ×5, 12 ×1). Two He-hop rows (Paper 26's decoupling, now labelled a hop-model illustration; Paper 13's retired value) now carry withdrawal markers. C22 was failing on them and now PASSES.
+- **group6 DoD:** 10–39% is allowed only as a labelled model illustration.
+
+### Changed — DoD pre-registration for the post-v5.16.0 DELTAs
+- **trunk.** C6/C8: the graph→S³ re-pricing is registered as a LARGE class. The edge Laplacian does not converge; π-free means algebraic eigenvalues; the Casimir and Fock projection are the anchor; `test_paper7_graph_convergence.py` measures only λ_max → 2d_max.
+- **group2.**
+  - He retired to the physical 1.88% and H⁻ to +2.15%.
+  - A pre-registered check on Be 0.71% / Li 1.03%: were they computed with the same (1/16)A hop?
+  - The prolate LiH family: R_eq +0.2%; −8.04905 analytic; −8.047 VMC; −8.062 as an estimate only.
+  - Paper 11's separation-label tiers.
+  - The C6 "converges" wording corrected.
+- **group3.** Coulomb/HO: 7 catalogued, 6 standing; Paper 31 has two discriminators; the Paper 22 holonomy tiers; the π-free restatement.
+- **group6.** Paper 26 re-priced: the hop's 10–39% becomes 0; S ~ Z^−2.52; EP-2c γ 2.565.
+- **synthesis.** The hierarchy anchors are updated.
+
 ## [v5.16.0] - 2026-09-26
 
 **Minor bump (PI-approved): two retractions that move published claims and numbers, plus the π/M=16 marriage follow-on.** (1) The GeoVac edge Laplacian D−A does **not** converge to the S³ Laplace–Beltrami operator; the corpus is re-anchored on Fock's continuum projection plus the exact SO(4) Casimir on the labels. (2) The "He graph-native CI 0.216%" headline is retired: it was the energy of a model with a non-physical one-body hop; the pip library's `hamiltonian('He')` shipped the same hop and is fixed. Both surfaced from a PI daydream about Monte Carlo and heat kernels, pursued through deep-think agents, two independent verifications and an adversarial pass before any edit.

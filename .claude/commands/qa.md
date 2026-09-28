@@ -146,13 +146,29 @@ This is a deliberate, PI-timed certification gate, **not** a routine pass.
    - **FAIL** — ≥1 verified material defect in *any* dimension (every gating dimension exercised; in `seeded` mode, calibrated). *Target not done* — list each defect with its **dimension** and failing criterion.
    - **INCONCLUSIVE** — any gating dimension was **not exercised**, *or* (in `seeded` mode) was exercised but **not calibrated** (missed its plants, or flagged a known-good control). *The verdict is untrustworthy this run.* Name the dimension and what failed. **An unexercised gating dimension is INCONCLUSIVE — never silently downgraded to a "PASS on the exercised dimensions" with a ceiling note.** Fix and re-run.
 
+   **RESEARCH-GRADE (added 2026-09-27, PI-directed; definition in `docs/qa/criteria.md`).**
+   This is a second, weaker verdict emitted alongside the one above. Grade every
+   verified MATERIAL finding as **LARGE** or **SMALL** by the criteria-file test; when
+   in doubt, grade LARGE. A **FULL** run or a **claim-impact DELTA** that exercised
+   every gating dimension, had every deterministic gate green, and found **zero LARGE**
+   earns the target RESEARCH-GRADE. This holds even when the primary verdict is
+   FAIL / DEFECTS on SMALL findings.
+   - On earning it, the PM stamps the `.done.md` and the target's `papers/INDEX.md`
+     row. **SMALL findings are fixed on sight, like NITs, whenever possible.** Only
+     those that cannot be fixed on sight (blocked on a computation, a PI decision or
+     an external source) go into `docs/qa/<target>.debt.md`.
+   - **Research continues on a RESEARCH-GRADE target.** A SMALL fix never triggers
+     another DELTA cycle. The fixed loci are named as recently changed in the next
+     *scheduled* run.
+   - A byte-diff DELTA can never earn RESEARCH-GRADE.
+
    Report the verdict as a **per-dimension scorecard** (dimension → exercised / clean, plus calibrated in `seeded` mode) plus the roll-up, so the PI sees which axes actually carried the verdict and which (if any) forced INCONCLUSIVE.
 
 8. **Clean up.** `git worktree remove` any worktree. In `seeded` mode confirm no seed reached the real corpus.
 
 ## Output to the PI
 
-- **Verdict:** PASS / FAIL / INCONCLUSIVE.
+- **Verdict:** PASS / FAIL / INCONCLUSIVE, plus **RESEARCH-GRADE: earned / not earned**, with the LARGE count, the SMALL count, and the path to the SMALL-debt file.
 - **Calibration scorecard** (`seeded` mode): sensitivity (plants caught / planted, per defect-class) and specificity (false positives / controls). In default mode: cite the standing calibration record (date, seeds caught, false positives) the verdict rests on.
 - **Material findings** (if FAIL): each verified against primary text, with its failing criterion and counterfactual.
 - **Nit log:** non-material findings (logged, do not block).

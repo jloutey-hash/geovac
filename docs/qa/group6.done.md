@@ -179,9 +179,15 @@ Named trunk/WH dependencies this branch restates, with their current tier:
 
 ## C8 headline enumeration (per paper — the registry for C17 families as needed)
 
-- **P26:** one-body off-diag H (κ=−1/16) = **10–39%** correlation energy but
-  **<0.2%** entanglement entropy; V_ee off-diag = **100%** of entanglement;
-  **S ~ Z^{−2.56}** (measured −2.563) across He-like ions; angular-momentum
+- **P26 (re-priced 2026-09-25/27; the pre-registered values for the
+  post-v5.16.0 DELTA):** the "one-body off-diag H (κ=−1/16) = 10–39% of the
+  correlation energy" was the **non-physical (1/16)A graph hop**. In the physical
+  fixed-k=Z Hamiltonian the one-body part is exactly diagonal, so its
+  off-diagonal share is **0**. Paper 26 may keep 10–39% **only** as an explicitly labelled hop-augmented MODEL illustration; any 10–39% stated as a property of the ion is LARGE (C16
+  `he-graph-native-hop-headline`). Re-measured: **S ~ Z^{−2.52}** (was −2.563; the
+  old run also had V_ee at half strength); EP-2c **γ = 2.565, A = 16.5**. Confirm
+  every P26/P27/P34 locus against CHANGELOG v5.16.0 Retraction 2. V_ee
+  off-diagonal = **100%** of entanglement stands; angular-momentum
   eigenbasis = the **essentially unique** sparse-ERI basis (up to
   (l,m)-label-preserving rotations; any generic rotation fills **42%→100%**
   in a rapid but graded transition — intermediate densities are generator-

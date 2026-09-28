@@ -198,6 +198,51 @@ def changed_since(paths: list[str], since: str) -> tuple[list[str], list[str]]:
     return sorted(after), sorted(same - after)
 
 
+# RESEARCH-GRADE (added 2026-09-27, PI-directed; definition in docs/qa/criteria.md).
+# A weaker status than PASS: the last FULL / claim-impact DELTA run found zero LARGE
+# findings.  It lapses when a claim the target owns or rests on changes status, and
+# the operational trigger is a C16 registry entry naming a target document (in
+# `files` or `cited_by`) whose note is dated after the stamp.
+RG_STAMP = re.compile(r"\*\*RESEARCH-GRADE:\*\*\s*(20\d{2}-\d{2}-\d{2})\s*@\s*([0-9a-f]{6,40})", re.I)
+
+
+def research_grade(record: Path) -> "tuple[str, str] | None":
+    """(date, sha) of the record's RESEARCH-GRADE stamp, newest if several."""
+    hits = RG_STAMP.findall(record.read_text(encoding="utf-8", errors="replace"))
+    return max(hits) if hits else None
+
+
+def _registry() -> list:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "_c16", ROOT / "debug" / "qa" / "check_retracted_terms.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    return list(getattr(mod, "REGISTRY", []))
+
+
+def rg_lapsing_entries(paths: list[str], since: str, registry: list) -> list[str]:
+    """C16 entry ids that name a target document and are dated after `since`.
+
+    An entry's date is the newest date in its note (or id) -- every entry since
+    2026-09 carries one.  A target path may be a directory (a group), so match by
+    prefix, not equality.
+    """
+    def touches(doc: str) -> bool:
+        doc = doc.replace("\\", "/")
+        return any(doc == p or doc.startswith(p.rstrip("/") + "/") for p in paths)
+
+    out = []
+    for e in registry:
+        docs = list(e.get("files", [])) + list((e.get("cited_by") or {}).keys())
+        if not any(touches(d) for d in docs):
+            continue
+        dates = DATE.findall(str(e.get("note", "")) + " " + str(e.get("id", "")))
+        if dates and max(dates) > since:
+            out.append(str(e.get("id")))
+    return out
+
+
 def _selftest() -> int:
     """Pin the four ways this gate has actually been wrong (2026-09-07)."""
     import tempfile
@@ -250,6 +295,31 @@ def _selftest() -> int:
             print("[FAIL] fallback used but not recorded in _used_fallback")
         else:
             print("[ok]   fallback is recorded, not silent")
+
+    # RESEARCH-GRADE: the stamp parses, and the lapse rule fires only on an entry
+    # that both names a target document AND is dated after the stamp.
+    with tempfile.TemporaryDirectory() as d:
+        f = Path(d) / "rg.done.md"
+        f.write_text("**RESEARCH-GRADE:** 2026-09-27 @ c4bb299 (DELTA #1)\n", encoding="utf-8")
+        got = research_grade(f)
+        if got != ("2026-09-27", "c4bb299"):
+            ok = False
+            print(f"[FAIL] research_grade stamp parse: {got!r}")
+        else:
+            print("[ok]   research_grade stamp parses")
+    reg = [
+        {"id": "later-in-scope", "note": "Withdrawn 2026-09-30.", "files": ["papers/g/p1.tex"]},
+        {"id": "earlier-in-scope", "note": "Withdrawn 2026-09-01.", "files": ["papers/g/p1.tex"]},
+        {"id": "later-out-of-scope", "note": "Withdrawn 2026-09-30.", "files": ["papers/h/p2.tex"]},
+        {"id": "later-cited-by", "note": "2026-10-02", "files": [],
+         "cited_by": {"papers/g/p3.tex": None}},
+    ]
+    got = rg_lapsing_entries(["papers/g"], "2026-09-27", reg)
+    if got != ["later-in-scope", "later-cited-by"]:
+        ok = False
+        print(f"[FAIL] rg_lapsing_entries: {got!r}")
+    else:
+        print("[ok]   RESEARCH-GRADE lapses only on later, in-scope entries (files or cited_by)")
 
     print("\nSELFTEST:", "PASS" if ok else "FAIL")
     return 0 if ok else 1
@@ -305,6 +375,23 @@ def main() -> int:
                     print(f"    [after]    {Path(f).name}")
                 for f in same:
                     print(f"    [same-day] {Path(f).name}")
+
+    print("\nRESEARCH-GRADE (no open LARGE; docs/qa/criteria.md):")
+    reg = None
+    any_rg = False
+    for r in records:
+        t = r.stem.replace(".done", "")
+        stamp = research_grade(r)
+        if not stamp:
+            continue
+        any_rg = True
+        if reg is None:
+            reg = _registry()
+        lapse = rg_lapsing_entries(paths_for(t), stamp[0], reg)
+        state = (f"LAPSED ({', '.join(lapse)})" if lapse else "holds")
+        print(f"  {t:<12} {stamp[0]} @ {stamp[1]}  {state}")
+    if not any_rg:
+        print("  (no target stamped yet)")
 
     if _used_fallback:
         print(f"\nNOTE: no CERTIFIED-asserting dated line in "

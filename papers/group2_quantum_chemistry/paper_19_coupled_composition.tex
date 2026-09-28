@@ -89,7 +89,12 @@ resolution-of-identity--free explicit-$r_{12}$ treatment on the same
 $\pi$-containing reference, with a cusp-correct Slater geminal, improves this to
 $-8.0490$~Ha (variational, cross-checked by VMC of the same trial function to
 $0.16$~mHa).  An additive-F12 estimate places the near-chemical target at
-$\approx-8.062$~Ha, which needs three-body correlation.  Together these results locate the balanced drift specifically in the
+$\approx-8.062$~Ha, which needs three-body correlation.  The atom-centered core
+turns out to be a convenience rather than a necessity:\ a pure prolate product
+basis also represents it, at the cost of hundreds of primitives.  The prolate
+route buys energy per qubit, not sparsity.  Its first qubit Hamiltonian ($Q=20$)
+has $8{,}370$ Pauli terms, level with an equal-size Gaussian set and ten times
+the composed count at $Q=30$, at an energy $19$~mHa better than that Gaussian set.  Together these results locate the balanced drift specifically in the
 frozen/parameter-free core rather than in the coupled architecture itself.
 \end{abstract}
 
@@ -534,6 +539,38 @@ cancels the repulsive cross-block $V_{ee}$.  The QWC group count
 (629; 87 under the retired pair-diagonal rule) no longer sits below
 the Gaussian baseline (273).
 
+\emph{The prolate route, counted.}  The all-electron prolate treatment of the
+well-shape subsection (``Route~C'') is the most accurate LiH construction here,
+so we also measured its qubit cost.  This is the first Pauli count of a Level-2
+prolate Hamiltonian.  We Jordan--Wigner encode Route~C's 10-orbital set at
+$R=3.015$~bohr, which gives $Q=20$ qubits.  With complex $\pi_\pm$ orbitals (the
+convention of the composed library) it has $8{,}370$ non-identity Pauli terms,
+$\lambda=61.9$~Ha and $2{,}810$ QWC groups.  Its MO electron-repulsion tensor is
+$48.7\%$ nonzero.  RHF orbitals lower $\lambda$ to $53.9$~Ha and leave the
+term count unchanged.  The qubit-sector ground state reproduces the FCI energy
+$-8.00794$~Ha to $10^{-8}$~Ha.  The equal-size Gaussian comparison is the lowest
+10 RHF orbitals of 6-31G, in the same convention.  It has $8{,}550$ terms and
+$\lambda=32.3$~Ha, at an energy of $-7.98873$~Ha.  So at equal qubits the
+prolate Hamiltonian is level on term count, about $2\times$ worse on $\lambda$,
+and $19$~mHa better on energy.  It also beats full 6-31G at $Q=22$
+($-7.99828$~Ha) and the lowest 15 cc-pVDZ orbitals at $Q=30$ ($-7.99430$~Ha).
+Against the composed Hamiltonian of Table~\ref{tab:resources} it loses outright:\
+the composed operator has $837$ non-identity terms and $64$ QWC groups at $Q=30$,
+ten times fewer terms and $44$ times fewer groups.  Its $\lambda$ is $27.7$~Ha
+without the PK term ($38.3$~Ha with it), against $61.9$~Ha.  The prolate
+orbitals carry no electron-repulsion selection rule beyond $M_L$ and parity,
+which is what a same-size axially symmetric Gaussian set has too.  Two
+caveats.  First, the orbital convention matters about as much as the basis.
+Rotating $\pi_\pm$ to real $\cos\phi/\sin\phi$ gives $6{,}830$ prolate terms
+against $4{,}426$ Gaussian.  That $+54\%$ is set composition, not prolate
+structure:\ Route~C has one $\pi$ pair among its 10 orbitals, while the lowest
+10 Gaussian orbitals contain two.  Second, the Gaussian baselines come from our
+own McMurchie--Davidson integral code.  On PySCF-generated reference data for
+$s$ and $p$ functions it reproduces the term and QWC counts exactly, the
+energies to $10^{-8}$~Ha and $\lambda$ to $2\times10^{-6}$~Ha.  The prolate route buys energy per qubit, not sparsity.
+\textbf{[MEASURED 2026-09-26; no regression test.]}  Chronicle:\
+\texttt{CHANGELOG.md} v5.16.0.
+
 \subsection{Cross-center $V_{ne}$ census}
 
 The cross-center nuclear attraction integrals (Sec.~\ref{sec:multipole_resolution})
@@ -835,6 +872,82 @@ core is variational \emph{and} numerically clean, the geometry is recovered
 \texttt{CHANGELOG.md} v5.15.16;\ rests on the Paper~12 prolate-CI engine and its
 HeH$^+$ convergence control).
 
+\emph{Refinement:\ the atom-centered core is a convenience, not a necessity.}
+The paragraph above introduced the atom-centered core as the cure for a numerical
+wall.  A later test shows that the atom-centring is not what the cure needs.
+What it needs is an $R$-accurate, analytic representation of the core, and a
+pure product basis provides one too.  (We have not run a pure-product LiH
+geometry.)  Route~C's core function is itself a single prolate product:\
+since $r_A=(R/2)(\xi+\eta)$, $e^{-\zeta r_A}$ factorizes into a $\xi$ factor
+times an $\eta$ factor.  A \emph{pure} product basis carries the core too.  That
+basis is the $\xi$-Laguerre$\,\times\,\eta$-Legendre tensor of Papers~11 and~12,
+with one shared exponent $\alpha$ and no atom-centered function.  The one-body
+side was already clean.  The two-body side is the new part.  We evaluate the
+core self-repulsion $(cc|cc)$ through the Paper~12 Neumann series, which
+terminates exactly here because the densities are polynomial in $\eta$.  For
+$Z=3$ the exact value is $5Z/8=15/8$, and Table~\ref{tab:pure_product_core}
+gives the error.
+\begin{table*}[t]
+\caption{Pure product basis ($N\times N$, $m=0$, one shared $\alpha$):\ error
+of the Li-like $1s$ core self-repulsion $(cc|cc)$ against the exact $15/8$
+($Z=3$, H nucleus absent), in mHa, at three bond lengths $R$ (bohr).  ``Spread''
+is the $R$-dependence.  Working precision $40+8N$ decimal digits.  Measured
+2026-09-26.}
+\label{tab:pure_product_core}
+\begin{ruledtabular}
+\begin{tabular}{lcccccccc}
+ & \multicolumn{4}{c}{$\alpha=R/2$} & \multicolumn{4}{c}{$\alpha=1.2$ (fixed)} \\
+$N$ & $R{=}2.5$ & $3.015$ & $3.5$ & spread & $R{=}2.5$ & $3.015$ & $3.5$ & spread \\
+\hline
+10 & $+0.375$ & $+0.362$ & $+0.363$ & $0.014$ & $+0.451$ & $-0.596$ & $-7.69$ & $8.1$ \\
+15 & $+6.7\mathrm{e}{-3}$ & $+6.2\mathrm{e}{-3}$ & $+5.9\mathrm{e}{-3}$ & $8.5\mathrm{e}{-4}$ & $+1.25\mathrm{e}{-2}$ & $+0.117$ & $+0.351$ & $0.34$ \\
+20 & $+3.3\mathrm{e}{-5}$ & $+2.9\mathrm{e}{-5}$ & $+2.7\mathrm{e}{-5}$ & $5.5\mathrm{e}{-6}$ & $+9.2\mathrm{e}{-5}$ & $+3.5\mathrm{e}{-3}$ & $+2.9\mathrm{e}{-2}$ & $0.029$ \\
+25 & $-2.9\mathrm{e}{-7}$ & $-2.8\mathrm{e}{-7}$ & $-2.7\mathrm{e}{-7}$ & $2\mathrm{e}{-8}$ & $-4.0\mathrm{e}{-7}$ & $+5.1\mathrm{e}{-5}$ & $+1.1\mathrm{e}{-3}$ & $1.1\mathrm{e}{-3}$ \\
+30 & $-1.1\mathrm{e}{-8}$ & $-1.0\mathrm{e}{-8}$ & $-9.5\mathrm{e}{-9}$ & $1\mathrm{e}{-9}$ & $-2.9\mathrm{e}{-8}$ & $-4.2\mathrm{e}{-7}$ & $+2.6\mathrm{e}{-5}$ & $2.6\mathrm{e}{-5}$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table*}
+With $\alpha$ scaled to $R$, $15\times15=225$ $\sigma$ primitives put $(cc|cc)$
+and its $R$-spread well inside $0.1$~mHa.  With a fixed, valence-tuned $\alpha$
+it takes $20\times20=400$, because the core's $\xi$-rate $ZR/2$ moves away from
+$\alpha$ as $R$ grows.  So the ``$R$-dependent completeness of the two-center
+basis for a tight atomic core'' named above is real for a fixed $\alpha$ and
+absent for $\alpha\propto R$.  The cross integrals of Route~C's own core
+($\zeta=2.6875$) with its exact bond and H~$1s$ orbitals converge faster still:
+at $20\times20$ and $\alpha=R/2$ every one is below $10^{-7}$~mHa.  Three costs
+come with the pure basis.  \emph{(i)~Size.}  It needs $225$--$400$ $\sigma$
+primitives where Route~C uses $8$ $\sigma$ orbitals, and an $M\approx16$ orbital
+CI then needs a contraction, which is unsolved.  \emph{(ii)~The valence.}
+Route~C's diffuse valence functions have $\xi$-rates near $1$, which argues for
+$\alpha\lesssim1$ and pushes the core into the $\ge20\times20$ regime;\ valence
+resolution at a single $\alpha$ is untested.  \emph{(iii)~Precision.}  The
+working precision must grow as roughly $8N$ digits.  At $40+4N$ digits the
+$N=25$ values are \emph{silently} wrong:\ $(cc|cc)$ comes out $-9.2\times10^{-3}$~mHa
+off at $R=2.5$ against the true $-2.9\times10^{-7}$, while the one-body energy
+stays correct to $10^{-12}$.  Two cancellations compound:\ the monomial
+re-expansion of degree-$2N$ densities, and the unstable forward $Q_l$ recurrence
+out to $l=2N$.  Any production use therefore needs a precision-doubling
+self-check, and a float64 monomial assembly is not viable at this degree.  On
+transcendental content the pure basis is slightly leaner.  It keeps the
+Paper~12 Neumann seeds ($e^{c}E_1(2c)$, Euler $\gamma$, $\ln c$, $\ln2$ at the
+density rate $c$), which are the embedding content of $1/r_{12}$ in either
+route, and it drops the modified spherical Bessel seeds $i_l(\beta)$ that
+Route~C's Legendre series of $e^{-\beta\eta}$ carries.  The pure basis does not
+restore Paper~11's exact separation label for LiH either.  A one-body probe in a
+closed tensor space finds that the Li core's short-range penetration breaks it:\
+the Hartree screening of $1s^2$ raises the relative commutator
+$\|[h,\Lambda]\|$ from $3.7\times10^{-15}$ to $1.7\times10^{-3}$.  Tensor closure
+alone does not rescue the label (Paper~11~\cite{loutey_paper11}, the
+separation-label section).
+\textbf{[MEASURED 2026-09-26; rests on the Paper~12 general-$m$ Neumann engine,
+reused unchanged, and on the Paper~11 separation-label result.  The $15\times15$
+entry at $R=3.015$, its $R$-spread and the $10\times10$ contrast are
+regression-tested in \texttt{tests/test\_paper19\_pure\_product\_core.py}, which
+pins the high-precision value and so rejects a too-low working precision.  The
+other rows, the cross integrals and the $N=25$ precision trap are measured
+only.]}
+Chronicle:\ \texttt{CHANGELOG.md} v5.16.0.
+
 \emph{The energy is near-chemical, by estimate.}  The pure-orbital prolate
 all-electron energy plateaus at $-8.032$~Ha ($38$~mHa above the exact $-8.0705$)
 once the angular and radial ladders saturate---a determinant-limited orbital
@@ -846,7 +959,8 @@ exact He to $1.4$~mHa) brings the total to $\approx-8.062$~Ha ($\approx9$~mHa ab
 exact, near-chemical), the smaller valence cusp being budget-consistent with the
 residual gap.  This $-8.062$ figure is an \emph{additive estimate, not a
 variational bound}.  The fully rigorous number has now been obtained by a
-\emph{VMC-over-FCI} build (\texttt{debug/lih\_vmc.py}):\ the analytic-orbital FCI
+\emph{VMC-over-FCI} build (gated by \texttt{tests/test\_lih\_vmc.py};\ chronicle
+\texttt{CHANGELOG.md} v5.15.22):\ the analytic-orbital FCI
 ground state $\Psi_{\rm CI}$ (the orbital-ceiling wavefunction, evaluated in real
 space from the analytic prolate orbitals and the CI eigenvector) multiplied by a
 two-body Pad\'e Jastrow $J=\exp\sum_{i<j}u(r_{ij})$, $u=A_{\rm spin}\,
@@ -953,6 +1067,67 @@ multi-hour run.  The engine's pieces are guarded by
 \texttt{tests/test\_lih\_gvee\_sparse.py} and
 \texttt{tests/test\_lih\_gvee\_triangle\_symmetry.py}.]}  Chronicle:\
 \texttt{CHANGELOG.md} v5.16.0.
+
+\emph{The geminal-shape evidence.}  The shape claim in (ii) rests on two scans on
+a smaller reference:\ the same $\pi$ CI truncated at $|c|>10^{-2}$ (nine
+determinants, $E_{\rm trunc}=-8.025184$~Ha).  The first scan is VMC with the
+linear method, over a pool of $r\,e^{-\gamma r}$ and $e^{-\gamma r}$ geminals
+with $\gamma\in\{0.25,0.5,1,2\}$, keeping the best subset of each size $k$.  The
+marriage geminal $r\,e^{-0.5r}$ gives $-8.04244$~Ha.  A \emph{single}
+$e^{-2r}$ gives $-8.04781$~Ha, which matches the same-reference Pad\'e--Jastrow
+VMC ($-8.04729$).  Adding a second, third and fourth geminal gains only $1.2$,
+$1.3$ and $1.4$~mHa in total, so the count saturates.  The second scan is the
+analytic engine itself, run over $\gamma$ for the Slater geminal
+(Table~\ref{tab:geminal_gamma}).  The energy minimum and the point where the
+delivered cusp reaches Kato's $\tfrac12$ coincide, near $\gamma\approx1.5$.
+\begin{table}[h]
+\caption{Analytic explicit-$r_{12}$ energy on the nine-determinant $\pi$
+reference ($E_{\rm trunc}=-8.025184$~Ha), with the triangle-weight fix below
+applied.  ``Cusp'' is the delivered electron--electron cusp (Kato:\ $\tfrac12$),
+estimated with the five spectator pairs at their mean.  VMC is of the same trial
+function (no VMC at $\gamma=1.5$).  Measured 2026-09-26.}
+\label{tab:geminal_gamma}
+\begin{ruledtabular}
+\begin{tabular}{lccc}
+Geminal & $E_{R_{12}}$ (Ha) & cusp & VMC (Ha) \\
+\hline
+$r\,e^{-0.5r}$ & $-8.042304$ & $0.25$ & --- \\
+$e^{-0.5r}$ & $-8.039066$ & $0.13$ & $-8.039039\pm0.00039$ \\
+$e^{-1.0r}$ & $-8.046725$ & $0.31$ & $-8.046798\pm0.00030$ \\
+$e^{-1.5r}$ & $\mathbf{-8.048141}$ & $0.46$ & --- \\
+$e^{-2.0r}$ & $-8.047574$ & $0.58$ & $-8.047773\pm0.00020$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+At $\gamma=2$, where the short range is hardest on the grids, refining the grid,
+the azimuthal quadrature and the triangle rank moves the energy by at most
+$0.013$~mHa.  \textbf{[MEASURED 2026-09-26; the scans have no regression test.]}
+
+\emph{A defect found and fixed.}  The triangle class of $g_{V_{ee}}$,
+$\langle f_{ik}f_{jk}\,r_{ij}^{-1}\rangle$ (Paper~12), is reduced by expanding
+each correlation edge in azimuthal modes and integrating the shared vertex's
+angle.  A mode $\pm A$ of an edge carries weight $\tfrac12$ for $A\ge1$, so a
+mode pair $(A,B)$ has weight $2\pi\cdot(\tfrac12)^{[A\ge1]}(\tfrac12)^{[B\ge1]}$.
+The first $\pi$-capable implementation tested only the first edge, and so gave
+$\pi/2$ instead of $\pi$ to pairs with $A\ge1$, $B=0$.  Those pairs occur only
+when the shared vertex's pair density carries circulation, which means only on a
+$\pi$ reference.  The $\sigma$ marriage ($-8.0372$) and the two-orbital engine of
+Paper~12 are therefore untouched by construction.  The existing sparse-versus-dense
+guard could not see it, because both paths used the same weight.  It showed up
+instead as a $3.85\sigma$ mismatch between the analytic and VMC linear-method
+coefficient $c$, while the energies agreed.  The audit ran in three steps.  An
+exact Monte-Carlo on a $\sigma$ reference cleared the $m=0$ machinery.  Grouping
+the 216 interaction triples into orbits of the density's relabeling symmetry
+left exactly one orbit non-degenerate.  An independent $\pi$-reference
+Monte-Carlo then put the triangle group $154\sigma$ off, and $1.9\sigma$ after
+the fix.  The effect on energies is at most $0.18$~mHa (the $r\,e^{-0.25r}$
+geminal on the nine-determinant reference), at most $0.064$~mHa for any Slater
+geminal, and $0.003$~mHa for the headline $-8.04905$.  Two other groups sit at
+about $2\sigma$ with opposite signs, below $4\times10^{-4}$ each, and are left
+open.  \textbf{[VALIDATED 2026-09-26, against independent Monte-Carlo.  Guard:\
+\texttt{tests/test\_lih\_gvee\_triangle\_symmetry.py} checks the weight symmetry
+and the orbit degeneracy, and carries a built-in fire test that the old weight
+fails.]}
 
 \textbf{[MEASURED]} The banked $n_{\max}=4$ decider has now been run---a
 matrix-free (Davidson) direct-CI engine
@@ -2265,6 +2440,20 @@ incomplete gamma functions adds the cross-center nuclear attraction
 to the algebraic registry (Paper~18, Table~I), confirming that the
 balanced coupled framework introduces no new exchange constants
 relative to the composed architecture.
+
+\emph{The prolate route.}  The balanced drift is not a physics wall.  The
+all-electron prolate treatment of the well-shape subsection gives
+$R_{\rm eq}=+0.2\%$, and its analytic, resolution-of-identity--free
+explicit-$r_{12}$ energy is $-8.04905$~Ha, $21.5$~mHa above exact.  What that
+route does \emph{not} buy is the structural sparsity this paper set out to keep.
+Its qubit Hamiltonian is dense within $M_L$:\ $8{,}370$ terms at $Q=20$, ten
+times the composed count at $Q=30$.  The two routes therefore serve different
+ends.  The composed and balanced Hamiltonians are the sparse encodings, and the
+prolate one is the accurate one (the quantum-resource subsection).  The
+prolate route's atom-centered core is a compact choice, not a required one.  A
+pure product basis represents the core to the same standard with hundreds of
+primitives, although no pure-product LiH geometry has been run (the well-shape
+subsection).
 
 \emph{Relationship to the LCAO negative result.}  The coupled
 composition program reconstructs a multi-center molecular Hamiltonian

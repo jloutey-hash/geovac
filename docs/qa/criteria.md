@@ -17,6 +17,62 @@
 > redefine either mid-review. Editing this file is a deliberate PI act, dated in
 > the change log — never done mid-review to move goalposts.
 
+## RESEARCH-GRADE status: no open LARGE defects (added 2026-09-27, PI-directed)
+
+PASS is the publish bar. **RESEARCH-GRADE** is the keep-researching bar. A target
+holds it when its **most recent FULL run, or claim-impact DELTA run,** had:
+(a) every gating dimension exercised;
+(b) every deterministic gate green;
+(c) **zero verified LARGE findings** (SMALL findings allowed).
+
+**LARGE vs SMALL (grading of MATERIAL findings).** A MATERIAL finding is
+**LARGE** if any of the following holds; otherwise it is **SMALL**.
+- Fixing it would change a **headline result or number**. A headline is anything
+  in the DoD's C8 headline families, an abstract, a conclusion, or a CLAUDE.md
+  best-results row.
+- It would change a **load-bearing claim's truth value or tier**.
+- It would change the **validity of the test backing a load-bearing claim**.
+- It **touches a hard prohibition** (§13.5).
+- It is a **live retracted claim** that a reader would take as current. This
+  applies wherever the claim sits, including summary surfaces.
+
+SMALL covers material defects confined to secondary content: a
+non-headline number, citation metadata, a stale cross-reference, a caveat
+misplaced but present, or a secondary paraphrase that does not flip a tier.
+**When in doubt, grade LARGE.**
+
+**Why it exists (measured).** Most recent runs found zero LARGE defects, and many of
+the SMALL findings were introduced by the previous round's own remediation
+(qa.md, "Remediated text is not clean text"). A binary PASS/FAIL turns "fix SMALLs →
+re-run → find new SMALLs" into an unbounded loop. RESEARCH-GRADE ends that loop at
+the point where research can safely continue. **SMALL findings are fixed on sight,
+like NITs, whenever possible** (PI correction, 2026-09-27). What ends the loop is
+that a SMALL fix does **not** trigger another verification run. Only a SMALL that
+cannot be fixed on sight is recorded as debt, for example one needing a computation,
+a PI decision, or an external source.
+
+**Rules.**
+1. **Earned only by a FULL run or a claim-impact DELTA, never a byte-diff
+   DELTA.** FULL #6 found 2 LARGE zombies right after a clean byte-delta.
+2. **Stamped.** The target's `.done.md` carries one line,
+   `**RESEARCH-GRADE:** YYYY-MM-DD @ <commit-sha> (<run id>)`, and the target row in
+   `papers/INDEX.md` shows the same status.
+3. **SMALLs are fixed on sight; the residue stays visible.** Fix every SMALL finding
+   in the remediation pass, as with NITs, and do not schedule a re-run to verify
+   those fixes. (The deterministic gates still run, and the next *scheduled* run
+   covers the fixed text as recently changed.) A SMALL that cannot be fixed on
+   sight goes into `docs/qa/<target>.debt.md` with its locus, criterion, and what it
+   is blocked on. PASS requires the debt file to be empty.
+4. **It expires.** The status lapses when a claim inside the target, or a trunk
+   claim the target rests on, changes status (retraction, re-tier, correction).
+   The trigger is a new C16 registry entry whose `files` or `cited_by` names a
+   target document, or a claim-matrix tier change on a target row.
+   `python debug/qa/check_cert_staleness.py` reports each stamp and whether it has
+   lapsed. Ordinary edits do not lapse it; the next DELTA covers them.
+5. **It is not PASS.** Never cite RESEARCH-GRADE as certification, and never cite it
+   in a paper. It is an internal status for deciding whether to keep building on a
+   target.
+
 ## Material vs nit
 
 A finding is **MATERIAL** iff fixing it would change a result's truth value, a

@@ -24,6 +24,26 @@ guide lives in CLAUDE.md §6, and per-claim verification tiers live in
 | **DRAFT** | First draft, not yet hardened |
 | **HISTORICAL** | Archived — superseded or orphaned; content remains a valid record |
 
+## QA status by target
+
+This is internal quality status: what the `/qa` gate last established. It is separate from the paper
+status above. **PASS** is the publish bar. **RESEARCH-GRADE** means the last full or claim-impact QA
+run found no open LARGE defects: safe to keep building on, not yet publication-clean. SMALL defects
+are fixed on sight; any that cannot be are listed in `docs/qa/<target>.debt.md`. Definitions are in
+[`docs/qa/criteria.md`](../docs/qa/criteria.md). Compute the current state with
+`python debug/qa/check_cert_staleness.py`; do not trust this table over the tool.
+
+| Target | Papers | QA status |
+|:-------|:-------|:----------|
+| trunk | 0, 1, 7, 32, 38 + group3 synthesis | OWED — graph→S³ re-pricing (v5.16.0) |
+| group1 | 29, 39, 40, 42–50, 52, 53 + group1 synthesis | OWED |
+| group2 | 8, 11, 12, 13, 15, 17, 19, FCI-A, FCI-M, 58, 59, 60 | OWED — He retirement, Paper 11 label, LiH −8.049 (v5.16.0) |
+| group3 | 18, 22, 24, 31, 54, 55, 56, 57, 61 + group3 synthesis | OWED |
+| group4 | 14, 16, 20, 23 + group4 synthesis | OWED |
+| group5 | 2, 25, 28, 30, 33, 36, 41, 51 | OWED |
+| group6 | 26, 27, 34, 35 | OWED |
+| synthesis | field guide + group syntheses | OWED |
+
 ## Synthesis (`synthesis/`)
 
 | File | Status | One-liner |
